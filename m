@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 726C2CC6B03
-	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 05:33:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A56CCC6B03
+	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 05:33:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3CE7780C86;
-	Tue, 13 Oct 2026 05:33:23 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BEE2C6076B;
+	Tue, 13 Oct 2026 05:33:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id teer41QaNYtm; Tue, 13 Oct 2026 05:33:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 79B2080C8A
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791869602;
-	b=FtVfOVAm7mfbrz9dqWn6+H5Y95oIJjJpKxypOYQ5d/FSwsZpd6fFfatZ6+k/TPKPzf3E
-	 xRreQ9A1R2caIK0OOJa+EZSTg0NkLcxh6Egjxor26ke3tokaNGIK1TgsICoGxf2awl1JL
-	 ituLl1DgUAuusfaTvpmnya0bDYkSKBHvkOWsRgHy2M0i+qeipr23bmqoe0QuH8mq5y0nc
-	 CQslQgi8bsKvz9FVycKjWJxWvmxoZzJ12yUnbPMYQh/VT9K9kn6T+inE8Q3+CDUcT6vxf
-	 KCaqZIwcp/WyQXuTeqSSBfMXkH6dHC0uzHS5wP5Ig9ps/15L3o4eUfb7OSJXd0FE2cg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id seWrdyVC1sn7; Tue, 13 Oct 2026 05:33:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1C46360747
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791869604;
+	b=MJJ0yTvVWZRVki2iVSQ5qEq3dKDOnmvR1zc4U8h1hJHIsUd+qgtLbH9Jox8YEFjT7ATW
+	 gISNVtTHzdjXGHAMqkoyo/5oAiQmqUdzUzIFHt1WXmeOZ/uNMLq8jPMOvAUbWwodLsMb9
+	 twUKo6AoVqKQWU4RY4ZEW+VV21zn01XsCcHdGXteA9dTYxwcHRYSd0xaqRfNB5Z6XYTJ8
+	 OjoqhsgI4hC8iNgJDO/bDH19px/oZL6vu+I6kz/QaQ1OlrzUrdJZJRetZJtA0Z4ekjf3k
+	 2FpuBCALrqjq4r5lUZXR6MRKrIXsD1fdRswuXWZfkk+49C5i/CDZnzlCa9o/blY6cEA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791869602;
+	c=relaxed/relaxed; t=1791869604;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,160 +31,161 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Subject:Date:
 	 Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
 	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=+0lxLpCVJYJJhi0tn/ZKaHgAExPnkRUaPKR68E7J6GY=;
-	b=nacB2tQHHFbpepwS7wS7RNevVnDuaFAdVyGGVm5qiHn92nKxffFKADJr3sOa7vQCG9lc
-	 d0rEylN6P1itGEPmtLN1T15304adHtmII1zDZio5PUqmmu2leQaQo3FZSo7mhQUGIBW01
-	 5+NRjFgDZGOy7A3vBvX3MSTyHHs8w9CzpiC7YIt8EBNDgY/M+VjvB9kCDs7ELZ9g4RWNo
-	 W+XjE4fvj2KWnww1C0/EMYxiuADEtGSPYfEtVwcYO+TnM+IYvNd4S89V9QiZL1vhek2DM
-	 +tP8lxc2JEq7Ku8/pcRjaZZoPeJFmqWDV62BKFJYZw4vbfKNUNw80gYgc8J9xUfOh2A==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=Ru8XYGxifVLsFPw6hFZmmRlRLh41DU3hvz8TAftb4Uo=;
+	b=KCtx9Ep3ctrV3O0KXLISgwc08k/cZZVvdJOG5P68QOWJs2HxlrG4hrebces63YQxGduk
+	 J0LUnHMmWEKYWIbkHbNdqTiB/hyUT1C7SOXZbSF0am6fNVh7XDpqDxyq41y3gixTGt9wu
+	 6KYHWhcUFD8iRf7ELY4wg0tfRJ0VatCExZT6jmYRfpBjD0trxiU9jfZlFzcxZU8W4kwxa
+	 6Wx4gXhOKjavqwaF0YEnz1zZMjTKj8W84NpRbYHi/yPu8wLWKf2kBJksbdyd9CcMG5d/U
+	 VdEGy8mqV9M3t1jikYga/j5cgZBbrOveEQLlnmzCIGuTvU3ZnEaGFEcY4Yt7Ph0BqCA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791869602;
-	bh=+0lxLpCVJYJJhi0tn/ZKaHgAExPnkRUaPKR68E7J6GY=;
+	d=lists.u-boot-project.org; s=default; t=1791869604;
+	bh=Ru8XYGxifVLsFPw6hFZmmRlRLh41DU3hvz8TAftb4Uo=;
 	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jaW1y/wVfaBfteidHXkVMJtD77PWE79fD7XlnSrhHcKcJm4rE4ANAiC2jcOEy1Wim
-	 bp4aSSYF9tuab+umho480XZc8VFyRTS2ilOOfzYluk/aHZacu6o+AhAm/MT/6PDZlC
-	 w9VMebjhmUDOFB0XbfjPw7t6HizUvjX+Vn4+H0sxKYVnwagqIRfBnfyNP/+EOT1jMd
-	 MClwRQRnCPl45erTAhP9cpqceeDJx6qHWdAlBKltwnY9X2youEgoaY6qQH/4a8ANRQ
-	 Cb2KTowoAc/urwVTebe3fyyEfL11tmQq0MJTs8DkINdteGQw/t6x8/nWZwyuaP9xq2
-	 6kqme+8qR0NOw==
+	b=mu7q3kKECYH0HCEZSG1UiHX2z5U4p1VYGnalTZ6mvbPebP80P6kafn2arJ85LIV4w
+	 y3zykkvzofhGgZck/e0ZOOYcGCrkFaMnNAiw8lh8Jq3DYbqbl/vhZHR9Hv+J/r6kDz
+	 TTCmhKHhgqF0GYcxtbYfyHxrKFODAsXP5HfMdMdS0a1JnNRdBQ9hOBBvaEbX7aNmC2
+	 NugSweb+WMkcCu+zCooBcaGG98cAR+M7/RbKed3s0esv/+0KonTNDTPaqLUusXXuAL
+	 SYMgdPxxPE4bs3aWpJZFreYPd8FiG9f7v6PSMbe4Hco8KwYnjrkVuizFKwaA33Gczz
+	 jYKfuF0AKLoOw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 79B2080C8A;
-	Tue, 13 Oct 2026 05:33:22 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 6A2FE4DD
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 05:33:16 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1C46360747;
+	Tue, 13 Oct 2026 05:33:24 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1FAC2105
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 05:33:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 5AE3A6075F
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 05:33:16 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0549A80C45
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 05:33:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id D6GqLEwCGZXo for <u-boot@lists.u-boot-project.org>;
- Tue, 13 Oct 2026 05:33:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A419C60743
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791869595;
- b=W1Loyqg291M2UXhmRKtrK15GD4G+x3Wr+Do+Bp7uKtOhrNWYec3IesV8Cl8Axluez8yU
- ah5jqfJPD5fo9sWv+0lCKjvChUt+RL1t1MATeKu3OWq5CNeJb3oNq7XT9jmeL5qfEh4rD
- /FzfOLIRy+EtklZE7kSyphUO56GVU0R4VOUuFnHgQPRpR8BTU3Z5I+Dr47JgNC3H6HHmY
- kYfmkm6ArzOy9eYDtf1o99lS9Pgtp4Oil3jbJDWiYeO+ZIbANDCK6klLvEQj1INFn6jhz
- g/FyXJX2Pk3R+8UxfTrMqxPPHqkVSHGDcn83xnBH6jrmew5/XO2kkPJUYVq1YDJ527g==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QE0tBpcgP2tr for <u-boot@lists.u-boot-project.org>;
+ Tue, 13 Oct 2026 05:33:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org CF8A380C9F
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip=205.220.168.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791869596;
+ b=VjSFK/VGrR5qq0xI4mcaCIDM76uTLMB88ftq2F95kveylbbe2Uny9ltJama9n8nBKXNF
+ Ji0xsQW3jfJFe7c1LbgHSLWTyjWQX353NGNGqaF5qBnyrXYF8Of+JkAr/JuOF0COqOgts
+ E0p9mN1HdruA7THujEnIxuv1CLOBr/3Do+n/fpN6P9Tk5cZ3R7AhbfEhz2MBiifubCm+O
+ ua1urHf/P4ghVc0vZF5T2gAeZ00YrS6lMwoG6hnEXxrxtSkrkcV5aaFHqbvaSppSo9Kjn
+ 1SGyV4TXEdUpPq8BBoTI7ysHjurROcMz1/154gsxltqpU+0PSxgbuTbucvratx48zNA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791869595;
+ c=relaxed/relaxed; t=1791869596;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
  DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
  X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:
  Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
- X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+ X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
  X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
  X-Proofpoint-Spam-Details;
- bh=+0lxLpCVJYJJhi0tn/ZKaHgAExPnkRUaPKR68E7J6GY=;
- b=k7Lsz33JIvQgwed2iYEVBD0LFb0f4pPxNulAF360XKIdVBRUjJkbHUEdNftffbzrDpeD
- o4TEQ1p9BnyIdT/2Ns2eJBKSLb69vz2hCN0g965mT870tu8hR61qB6pfoaQ948L8iT9Hz
- Wq5s/e7doGLB2TCYi+WzFhKto8UeLe7xFoP92cSNl4sol1Rmb+YtxZ+7auuNBjXewjOSU
- tYiX0ixwFDIradRf1YI0p8JSLZlZdMeEu3OM4M5+auNJdtem69iULsTZ5N5Y1ENDJ4XBo
- FDREfQI5Yx5ck1CPGtTeJZQeEEcIBPT55dERnnoqWaOJJtvYW1BUUB5TnfDtC9rLUdA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=Ru8XYGxifVLsFPw6hFZmmRlRLh41DU3hvz8TAftb4Uo=;
+ b=r7Pq7i/8qb6Oe39TTHWmsrbaUE1nsInaxa0acwVARtuIKsKZDQJ0L2Hon/SOCh89uaPS
+ CTF37m3FgwXLTDsHfzh0BaTWQ/IaOG18Or5SHyxtzEQkMrMLQzYcMs/wGNqgHaH4OXoBD
+ doDm7s/sOVZL9J0gAFHvxkvNoDaEMUd/2ddFNqbzrQr02FeRx7owl/LsI72bWCEir3H+I
+ K71Iqx9xB8tEkfPVNnuv5DAAHhvK48IBNcihFp+D4i59APFdrPa7R23HlkD4XBjMEibVX
+ 27IQTdWt7zLCg+oObeZunk7zlI82AQ2InOfZFRfOKx1PT8o+RRu1d9m2p6b+NJRBbMA==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=oss.qualcomm.com;
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=juJHGWA9; 
+ header.s=qcppdkim1 header.b=hruy4QAB; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=d+vZVwhY; 
- arc=none smtp.remote-ip=205.220.180.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
- helo=mx0b-0031df01.pphosted.com; envelope-from=abhilash.v@oss.qualcomm.com;
+ header.a=rsa-sha256 header.s=google header.b=UVpamMEs; 
+ arc=none smtp.remote-ip=205.220.168.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
+ helo=mx0a-0031df01.pphosted.com; envelope-from=abhilash.v@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=juJHGWA9; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=hruy4QAB; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=d+vZVwhY
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A419C60743
+ header.a=rsa-sha256 header.s=google header.b=UVpamMEs
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id CF8A380C9F
  for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 05:33:15 +0000 (UTC)
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69D20w5f3907983
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 05:33:14 GMT
+ 69D20mdg988774
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 05:33:15 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=+0lxLpCVJYJ
- Jhi0tn/ZKaHgAExPnkRUaPKR68E7J6GY=; b=juJHGWA9U1c3iWXMeFeFBIwY8Dz
- fH7bDi9B0dCIb30sCLOQmUN5zYEgvinf9GbXYzAl+PBH7iw9fIl+AQCyAax+qiG+
- rV+QXsYhhj1LXA4Tj94cOm/Qi0oWrgvHkyhb2Yi4UwXSUVo+kZXsOGeV99SWjgJH
- 9XDI1M4nisWPY8jOL1sHDTIFB0+hOlNVHPoA4zzLXydg/je+tq7L2IMgfRroD3ha
- fF2QdHn0/4J8/HWGYEe2u3OWMLW06Y7uUVM+1mDHFUN69TGJnZ7OBTx2UpeVckv5
- ElcrJKgEuvHK5R713hRzIWFtLBuvgvJ4TqVB035H3jsVF495A4C56HEPUUQ==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
- [74.125.82.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h95xqstd5-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=Ru8XYGxifVL
+ sFPw6hFZmmRlRLh41DU3hvz8TAftb4Uo=; b=hruy4QABwKtTrCtNDz9ZtfmTuHB
+ aEBU7HJJ9slD/noW2Mf6NLS+XITBYPB2Lu5COj86Us0TPrNN75t7ZLSGWP7n+CqH
+ V7QXiKh5YdRY78pJOnZfBy2KK/F+BNIVLWz2MlF8ZutprqvPxvQzoYxX+TrixxiJ
+ mzPZ5JnoM6SkYsKAwjfA4598dt/XZvwz20am63vcOT9IPAgitnvxtJKnwsYSjihP
+ /5bBmjEBYujCpd6KaTOnPJuV/VG9xeBl79pAUKLEbASDcvEJwEWhjTbf0jjZwMKq
+ cudiGDK1A5Ndh3oOxBoVyXdJ/zGj7W39/9ywYwM27cwImOT8UPdQI2kqnnw==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com
+ [74.125.82.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h98hc980b-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 05:33:14 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id
- 5a478bee46e88-30bcb065bfdso5284204eec.0
- for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 22:33:13 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 05:33:15 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id
+ 5a478bee46e88-359b81ad4e8so3095498eec.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 12 Oct 2026 22:33:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1791869593; x=1792474393;
+ d=oss.qualcomm.com; s=google; t=1791869594; x=1792474394;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=+0lxLpCVJYJJhi0tn/ZKaHgAExPnkRUaPKR68E7J6GY=;
- b=d+vZVwhYVlNk6c8GV56+G8cAI4RN9WwYl+R3K1dof43jxEiI9Z5Sw3oS3hixF/857u
- 786GmFqIucF5dLaje5dcZeFOtoSyTBx7T8xIILd2DOV5IdO74PJAjzp77fIUF975N0Kh
- XBiqENGcBczqBIm2mazXvO55L8OhysUCBDUYNksNws/JtyetfJ7Gy1+lmckYWHLV8TI5
- yZi6A5fIWautS4BLhCSI5hJTBnhfP2hotJN55WLATpM0+j/KCYxjH+cqHaXWxQ8HrRmp
- 7jaKiq9HVID8bkHM0F2P7Tzp117CPXcX+ibXGHMSjDgp6x/DeO/gOHgFHZdNGYwx3d5Z
- Y/aw==
+ bh=Ru8XYGxifVLsFPw6hFZmmRlRLh41DU3hvz8TAftb4Uo=;
+ b=UVpamMEs05fzwgxta4R0L6MdVqLOQhNu4gWqLgcAOFkyJmhdzc1Eek2QZdNvoFjc8J
+ xKrPLLxrNDiOZD+zwMfv8kFhINb4vCXDUNIEhpRExlJJ8rMdYIk8Ipobyev0lIiDkSUp
+ 97ULTi9oGtarepIjlt5ntbywIYYzjnY+DV16nIyY6QYTvxyDWXv5kJpROUxBoEohkCgf
+ +IUHkwt4FOS1SCx8upUPPbhma19E2sBDvsEbKE1GHgidTgXpcZR2mflTZhbaQcno0Dvm
+ KM69NZF9LUZih3rjzST7jLlQnqScM5jkFhs6xUjA0nEb680Qmt9es+uEpkVi1+9dV7eg
+ PtYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791869593; x=1792474393;
+ d=1e100.net; s=20260707; t=1791869594; x=1792474394;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=+0lxLpCVJYJJhi0tn/ZKaHgAExPnkRUaPKR68E7J6GY=;
- b=HtNFB3sqZLMXMwRwADfF75/A/Mx15FsmOlbBEpg/j4shtYVu+ZjIc+LCsKFKBKFRqW
- JeGIVXuTCCeAi0qmTt/YjJit/AdUvNxmiP0CiQFJiwOmurYcRhPMuSYvcdUXsnGo2P7M
- cuWqGUPgd3rxpbgY8eKkGCV/kSMk6tMvoYZ+ergdeeA2o8ztE0BRXS35YDFC143FM/FJ
- uAWcf25m7ZaeeCbRB5oMtwX9rek8pUFGoIKR2Zdz9F9VSPl8zuxKN7/CkOT5XOllRKXI
- 6IHXqO/Dl7cJUpur5TmX7tI2Y1rNI6sefI48/W5Qx7gkcR94zipWQucquVtlktfBMBJR
- 4WfQ==
+ bh=Ru8XYGxifVLsFPw6hFZmmRlRLh41DU3hvz8TAftb4Uo=;
+ b=H4IDYyy0G2FPLVhkoN080N24gzNoLHwv/FwlGL4QcnilO+Fs07b6M/HXAuXOxd4FJz
+ 2j8aVcY7RKvnIIGc06bobAXbBtfQtsW9t5J9Nl9LUvSjfJPGA6fnBw+dpAIl2OiVs5ZB
+ viMJtYDIGxGZNFSqlqgqra+q9g0wGzsrN8pipwz43nhgqH/WDQbHoAd5i1DAacOglOj3
+ cbBh2rqryCzD9Nu+eyvvkJAUSz6Vc8VlQhJtJmRxK/aWU821T+KyYq66z20YeTKNX5wW
+ c0YyH/cFlKceAQiLtT7jIYsozQt3umRFxUIPrIbj1EN0TQFc3QLNDS/fzRTqR7bnBMi0
+ Appg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBz5hXbAyOMEz4SNGcUAiXTksLZPuNVxTNsHzlXMAlMsF2Uix6+l24H98jIIFyAIAUh31czOXqU=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJ+iQyZSYwMNNdd81F/K3Jd8ds3pPAGg59mCtOjVGd/hP1F3Chw
- sjCs2sToTqjztM7Uo3XQgP0gnw0d4CgzCtUhTqeAWuwH9cAnM4Oe6+5Uohd9uxAhXMNX9ouTkMb
- D+PeCbUkydn/+jn5CTXxUKgTQ0h4xVqaRJWpXc7YLjHFyBJA9cLOBweX+DJ+4HUSYTgEpM6A=
-X-Gm-Gg: AYBFou049cri3FjAI8XwmpYsX2p1/kYi2zJ+netY7NQdQpIlJ+KlpWUDKLuM2TBocAF
- BbulpdOqmSsk4N4qp6ouMxajNrxNeCHoS3r9QEha8UahScCOM8hb2I/6jnq1g/Qtteb+/L+cnjW
- 4X5+iSkUhg4vPpMDTv7NEbpmLG83LY4gAQXCMdrHsuuaHxDxvgxcmCU23KjU7/uxLMoDj73auaF
- qVp6bIHbIlQWuslauwg6qxjwhkRXZaR2G6KuL+eCg2yoKWXD+d4FkV8I42asCSe2MnPPIkov2I5
- e2mSV2OO1UskqqrTACyr5yufwhiZ1rwaXNCFeRKVM9Sh8K1vyRIK4tx48SQLSdRwH/5WUukz9tJ
- aGs4Terc0ysXpLoJrHxALEZJrrh5NMX4OnpyvJqU2h2DwuqE=
-X-Received: by 2002:a05:701b:21db:b0:149:ef22:2fa2 with SMTP id
- a92af1059eb24-16a5dcf5a62mr16318528c88.8.1791869592977; 
- Mon, 12 Oct 2026 22:33:12 -0700 (PDT)
-X-Received: by 2002:a05:701b:21db:b0:149:ef22:2fa2 with SMTP id
- a92af1059eb24-16a5dcf5a62mr16318498c88.8.1791869592195; 
- Mon, 12 Oct 2026 22:33:12 -0700 (PDT)
+ AKwUvByGtk+zrVY7nDZLlg4HL3oRnXdoJmKnSpRcMlMavf6mhnjgDiXwLvai+Eo12GvoQ8dVqilDKjU=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYI8T5EoCAIrumvcI+hfIzD8CfHJrgct612pDlkiCzoX40bqC0Af
+ YaEcasbzPI4QacMQWq9vqy7wCcSTv0uDTwmPB/ezmr/FMUNLOAhKfsfw5V44nG2jvRPFmdg4cO9
+ hKt9hfxi7jJiM9B48QtdkqIeXM5UgPJhdItemrow17uMTW9r90JQuKXAsJ5yTXQ0CdLEXR5b1Cc
+ h8QyIw2w==
+X-Gm-Gg: AYBFou0BJfL7Ad9RyRwbAmR77v6uWcGpQD7JTnvn29WUCq/kfm177yG5tsFyHlB4eWv
+ JeSW1LDB+yj4SyWMV+wDmC+17WDSYzcOakfUblxnrQeGh6BKyMrsIx3XquXd+S0wJyk15UZKUrI
+ MDcwAWxtTvAhuqAzy78yxv52k6D5n1Z26wP7o/R2O83WkWpolw87LlfO1eHb1A3VfzZnl+//UKQ
+ CI3kNORvZN0i6vVeVPDIAnxpM+q1P1WAZtQSQeJsCfICu6U/Xx7isvMbFXLk2MtbOSG8KG4uBJF
+ 8ZMXmPsmB5B9PqpqpoTyNiTVkc6eDjlvkzD+RmuepXx8/wDf4LISHkxYsiylrpC6YkhER3SlyhM
+ Y6u3QCOWq682UI9ijZGTXa/eN1S//S0A4vB1XY2xa6uW/3DM=
+X-Received: by 2002:a05:693c:87d5:10b0:351:433a:acfd with SMTP id
+ 5a478bee46e88-3537e0796acmr15986960eec.38.1791869594001; 
+ Mon, 12 Oct 2026 22:33:14 -0700 (PDT)
+X-Received: by 2002:a05:693c:87d5:10b0:351:433a:acfd with SMTP id
+ 5a478bee46e88-3537e0796acmr15986916eec.38.1791869593339; 
+ Mon, 12 Oct 2026 22:33:13 -0700 (PDT)
 Received: from hu-abhiv-lv.qualcomm.com (Global_NAT1.qualcomm.com.
  [129.46.96.20]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-353810403e9sm39727670eec.2.2026.10.12.22.33.11
+ 5a478bee46e88-353810403e9sm39727670eec.2.2026.10.12.22.33.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Oct 2026 22:33:11 -0700 (PDT)
+ Mon, 12 Oct 2026 22:33:12 -0700 (PDT)
 From: Abhilash V <abhilash.v@oss.qualcomm.com>
 To: trini@konsulko.com, ilias.apalodimas@linaro.org,
  aswin.murugan@oss.qualcomm.com, casey.connolly@linaro.org,
@@ -195,39 +196,38 @@ To: trini@konsulko.com, ilias.apalodimas@linaro.org,
  varadarajan.narayanan@oss.qualcomm.com, nikroks@mainlining.org,
  luca.weiss@fairphone.com, nathbappai@gmail.com, jbx6244@gmail.com,
  u-boot@lists.u-boot-project.org, u-boot-qcom@groups.io
-Subject: [PATCH v2 12/13] arm: dts: shikra: retain SPL dependencies in IQS
- overlay
-Date: Mon, 12 Oct 2026 22:32:43 -0700
-Message-Id: <20261013053244.2954876-13-abhilash.v@oss.qualcomm.com>
+Subject: [PATCH v2 13/13] clk: qcom: build only selected clock drivers in SPL
+Date: Mon, 12 Oct 2026 22:32:44 -0700
+Message-Id: <20261013053244.2954876-14-abhilash.v@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261013053244.2954876-1-abhilash.v@oss.qualcomm.com>
 References: <20261013053244.2954876-1-abhilash.v@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAyMSBTYWx0ZWRfXyWS1KubUepb7
- nqopuiHL3K6RQa4wAEnuxJppstiaaSSZPCdWZnLJnsmHUpvy84QrYx9SVCNwljjkcb3DK18Rrr8
- 4e5Iia9cqKzfVbI4N4N9yi5+gIEV9nTufpSzvp/xc6nlcvgNaz3qWIsJ+4bCPVPD+Za8Cy6jY7A
- UbkqUO9h3ca0RV5Pd5D0N+KgWnZoT0VAKrFm/gO4xzZSmWxdW9ooMeGidkNokUon3Z+TbsPYjDK
- HDCEMB46JYe4Lo24KZuJgMNrR4/RtTIfUQ2WggPLg5xlb4prX2lY161yvXC+o4mM3BdKzUCVX6w
- +vKNKF4ib8MRDSUIropc6sGx6FbIMb0GmeD6cd78glY+EyHmHf1VxDVzaygKT2ZZYIIHo+acigM
- uORBvAYdlAMlYRc2ztiNLoRzGqVcLcQR3wciTW87nL31sqYthP2xysYOFzb4iPcQPePr8Vtui4G
- qzAu+O4Bc8pSgkWtgnQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAyMSBTYWx0ZWRfXwEYmd1Njjtbg
- Rn0MIfYg1+IBasFdSSYTW874O632HsurRkTmirrLH0buHde/sS3iqw5VNZDRE3rGjEa3JD0Dac5
- ug3RXmM1xpsyQhR9yAP7W8gozU0D13w=
-X-Proofpoint-ORIG-GUID: VtOeXmZdZMD_IZlHiiqwEpwLd2_-E8v8
-X-Authority-Analysis: v=2.4 cv=EP+TQFZC c=1 sm=1 tr=0 ts=6acdc29a cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDEzMDAyMSBTYWx0ZWRfX2JFkagtHhHpv
+ kOHRrogVshctlxaEjiTek4EA0DeIdpJZok02iOO9NOokUzpzGw6HLCeDj+AAVlVwDqNdhrytlY/
+ FeYhy+FPUNNLoQdIgrhI++4DqrijLrAw84fIH+A+BLjNueGuez8qpt1xzRjvvTiqRXNcLRXU3jo
+ xtVXE3D+fppaICQyvu50u7ZQ0T+rXmGTR6cT44e/ydVCT2hqd7KCi5iUPceefq7fgWjT/YYAhj1
+ he+M8ZideO2vWv0JUROWCFUGcMsTOckgbwzlTCuybuTEWjNHf4sDL3fLKcOaw4dLAm8WGGnTRwf
+ MEpSbDn+Nt20Si9/1dy6a5EIWhiBKhS8Rqd7Lb846dvB2CrpdmNj0cg4SzgMAZRo1aj+63B7ceS
+ R+nYtiA3zULFkFRR1tco9f++iVvrXBnazkBcBFGrVXPkB+JLUqsEmcYJSc8O/KwWCFGQGjnJTrV
+ pRj7h+xLjbSGkTfrjkA==
+X-Authority-Analysis: v=2.4 cv=VPVIDNPX c=1 sm=1 tr=0 ts=6acdc29b cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
- a=qkSexMeQyOevtdx1QFIA:9 a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-GUID: VtOeXmZdZMD_IZlHiiqwEpwLd2_-E8v8
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
+ a=1OAO5j4Zegv94xHJGxAA:9 a=yafjnGloKYvRJXMp:21 a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-ORIG-GUID: SXmtnnzt5U4Hpxdr6POM1fPnDnJ3HQQ8
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDEzMDAyMSBTYWx0ZWRfX9n5adOjfspPL
+ w3xk2wAq+OzhVvQ7yrWuJNP+MPA/JMgYOU/CttSMa64HX5YcPDft/8USoSttHq/S9XCE6GUh1Fd
+ Gzd97UrYYtaRdbq8UksMcw83beqL0mA=
+X-Proofpoint-GUID: SXmtnnzt5U4Hpxdr6POM1fPnDnJ3HQQ8
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 phishscore=0 clxscore=1015 spamscore=0
- malwarescore=0 priorityscore=1501 bulkscore=0 adultscore=0 lowpriorityscore=0
+ bulkscore=0 priorityscore=1501 malwarescore=0 impostorscore=0 spamscore=0
+ suspectscore=0 lowpriorityscore=0 adultscore=0 phishscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610130021
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -245,66 +245,313 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 
-U-Boot proper uses the IQS device tree on Shikra. Retain the SPL console,
-QUP firmware storage, MMC, clock, pinctrl, and power dependencies in the
-same overlay.
+Make Qualcomm clock-driver selection phase-aware so SPL builds only the
+drivers it needs, reducing the SPL image size.
 
 Signed-off-by: Abhilash V <abhilash.v@oss.qualcomm.com>
 Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 ---
- arch/arm/dts/shikra-iqs-evk-u-boot.dtsi | 42 +++++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
+ drivers/clk/qcom/Kconfig  | 208 ++++++++++++++++++++++++++++++++++++++
+ drivers/clk/qcom/Makefile |  48 ++++-----
+ 2 files changed, 232 insertions(+), 24 deletions(-)
 
-diff --git a/arch/arm/dts/shikra-iqs-evk-u-boot.dtsi b/arch/arm/dts/shikra-iqs-evk-u-boot.dtsi
-index e807b91ef1f..a1e506f7dff 100644
---- a/arch/arm/dts/shikra-iqs-evk-u-boot.dtsi
-+++ b/arch/arm/dts/shikra-iqs-evk-u-boot.dtsi
-@@ -20,3 +20,45 @@
- &usb_qmpphy {
- 	status = "okay";
- };
+diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+index aff3f5418a0..899f44cb8dc 100644
+--- a/drivers/clk/qcom/Kconfig
++++ b/drivers/clk/qcom/Kconfig
+@@ -5,6 +5,11 @@ config CLK_QCOM
+ 	depends on CLK && DM_RESET && POWER_DOMAIN
+ 	def_bool n
+ 
++config SPL_CLK_QCOM
++	bool
++	depends on SPL_CLK && SPL_DM_RESET && SPL_POWER_DOMAIN
++	def_bool n
 +
-+/* Keep the console and QUPFW storage paths in the SPL device tree. */
-+&gcc {
-+	bootph-all;
-+};
+ menu "Qualcomm clock drivers"
+ 
+ config CLK_QCOM_APQ8016
+@@ -15,6 +20,14 @@ config CLK_QCOM_APQ8016
+ 	  on the Snapdragon APQ8016 SoC. This driver supports the clocks
+ 	  and resets exposed by the GCC hardware block.
+ 
++config SPL_CLK_QCOM_APQ8016
++	bool "Qualcomm APQ8016 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  SPL variant of CLK_QCOM_APQ8016.
++	  See the help of CLK_QCOM_APQ8016 for details.
 +
-+&tlmm {
-+	bootph-all;
-+};
+ config CLK_QCOM_APQ8096
+ 	bool "Qualcomm APQ8096 GCC"
+ 	select CLK_QCOM
+@@ -23,6 +36,14 @@ config CLK_QCOM_APQ8096
+ 	  on the Snapdragon APQ8096 SoC. This driver supports the clocks
+ 	  and resets exposed by the GCC hardware block.
+ 
++config SPL_CLK_QCOM_APQ8096
++	bool "Qualcomm APQ8096 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  SPL variant of CLK_QCOM_APQ8096.
++	  See the help of CLK_QCOM_APQ8096 for details.
 +
-+&qup_uart0_default {
-+	bootph-all;
-+};
+ config CLK_QCOM_IPQ4019
+ 	bool "Qualcomm IPQ4019 GCC"
+ 	select CLK_QCOM
+@@ -206,6 +227,193 @@ config CLK_QCOM_X1E80100
+ 	  on the Snapdragon X1E80100 SoC. This driver supports the clocks
+ 	  and resets exposed by the GCC hardware block.
+ 
++config SPL_CLK_QCOM_IPQ4019
++	bool "Qualcomm IPQ4019 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm IPQ4019 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
 +
-+&sdc1_state_on {
-+	bootph-all;
-+};
++config SPL_CLK_QCOM_IPQ5210
++	bool "Qualcomm IPQ5210 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm IPQ5210 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
 +
-+&sdc1_state_off {
-+	bootph-all;
-+};
++config SPL_CLK_QCOM_IPQ5424
++	bool "Qualcomm IPQ5424 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm IPQ5424 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
 +
-+&sdhc_1 {
-+	bootph-all;
-+};
++config SPL_CLK_QCOM_IPQ9574
++	bool "Qualcomm IPQ9574 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm IPQ9574 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
 +
-+&qupv3_0 {
-+	bootph-all;
-+};
++config SPL_CLK_QCOM_MILOS
++	bool "Qualcomm Milos GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm Milos Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
 +
-+&uart0 {
-+	bootph-all;
-+};
++config SPL_CLK_QCOM_QCM2290
++	bool "Qualcomm QCM2290 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm QCM2290 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
 +
-+/* Retain the RPM clock and power-domain providers for boot consumers. */
-+&rpmcc {
-+	bootph-all;
-+};
++config SPL_CLK_QCOM_QCS404
++	bool "Qualcomm QCS404 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm QCS404 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
 +
-+&rpmpd {
-+	bootph-all;
-+};
++config SPL_CLK_QCOM_QCS615
++	bool "Qualcomm QCS615 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm QCS615 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
++config SPL_CLK_QCOM_QCS8300
++	bool "Qualcomm QCS8300 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm QCS8300 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
++config SPL_CLK_QCOM_RPMH
++	bool "Qualcomm RPMh clock driver in SPL"
++	depends on SPL_CLK
++	help
++	  Enable the Qualcomm RPMh clock driver in SPL.
++	  This provides RPMh-managed clocks needed during early boot.
++
++config SPL_CLK_QCOM_SA8775P
++	bool "Qualcomm SA8775 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	select SPL_CLK_QCOM_RPMH
++	help
++	  Enable the Qualcomm SA8775P Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
++config SPL_CLK_QCOM_SDM845
++	bool "Qualcomm SDM845 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm SDM845 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
++config SPL_CLK_QCOM_SHIKRA
++	bool "Qualcomm Shikra GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm Shikra Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
++config SPL_CLK_QCOM_SM6115
++	bool "Qualcomm SM6115 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm SM6115 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
++config SPL_CLK_QCOM_SM6125
++	bool "Qualcomm SM6125 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm SM6125 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
++config SPL_CLK_QCOM_SM6350
++	bool "Qualcomm SM6350 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm SM6350 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
++config SPL_CLK_QCOM_SM7150
++	bool "Qualcomm SM7150 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm SM7150 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
++config SPL_CLK_QCOM_SM8150
++	bool "Qualcomm SM8150 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm SM8150 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
++config SPL_CLK_QCOM_SM8250
++	bool "Qualcomm SM8250 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm SM8250 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
++config SPL_CLK_QCOM_SM8550
++	bool "Qualcomm SM8550 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	select SPL_CLK_QCOM_RPMH
++	help
++	  Enable the Qualcomm SM8550 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
++config SPL_CLK_QCOM_SM8650
++	bool "Qualcomm SM8650 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	select SPL_CLK_QCOM_RPMH
++	help
++	  Enable the Qualcomm SM8650 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
++config SPL_CLK_QCOM_SC7280
++	bool "Qualcomm SC7280 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	select SPL_CLK_QCOM_RPMH
++	help
++	  Enable the Qualcomm SC7280 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
++config SPL_CLK_QCOM_X1E80100
++	bool "Qualcomm X1E80100 GCC in SPL"
++	depends on SPL_CLK
++	select SPL_CLK_QCOM
++	help
++	  Enable the Qualcomm X1E80100 Global Clock Controller in SPL.
++	  This includes only the clock driver needed during early boot.
++
+ endmenu
+ 
+ endif
+diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+index 8da2ff7e73e..7c4db9986d1 100644
+--- a/drivers/clk/qcom/Makefile
++++ b/drivers/clk/qcom/Makefile
+@@ -3,28 +3,28 @@
+ # (C) Copyright 2023 Linaro
+ 
+ obj-y += clock-qcom.o
+-obj-$(CONFIG_CLK_QCOM_SDM845) += clock-sdm845.o
+-obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
+-obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
+-obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
+-obj-$(CONFIG_CLK_QCOM_IPQ5210) += clock-ipq5210.o
+-obj-$(CONFIG_CLK_QCOM_IPQ5424) += clock-ipq5424.o
+-obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
+-obj-$(CONFIG_CLK_QCOM_MILOS) += clock-milos.o
+-obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
+-obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
+-obj-$(CONFIG_CLK_QCOM_QCS8300) += clock-qcs8300.o
+-obj-$(CONFIG_CLK_QCOM_QCS615) += clock-qcs615.o
+-obj-$(CONFIG_CLK_QCOM_SA8775P) += clock-sa8775p.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_SDM845) += clock-sdm845.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_APQ8016) += clock-apq8016.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_APQ8096) += clock-apq8096.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_IPQ4019) += clock-ipq4019.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_IPQ5210) += clock-ipq5210.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_IPQ5424) += clock-ipq5424.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_IPQ9574) += clock-ipq9574.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_MILOS) += clock-milos.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_QCM2290) += clock-qcm2290.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_QCS404) += clock-qcs404.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_QCS8300) += clock-qcs8300.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_QCS615) += clock-qcs615.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_SA8775P) += clock-sa8775p.o
+ obj-$(CONFIG_CLK_QCOM_SC7180) += clock-sc7180.o
+-obj-$(CONFIG_CLK_QCOM_SC7280) += clock-sc7280.o
+-obj-$(CONFIG_CLK_QCOM_SHIKRA) += clock-shikra.o
+-obj-$(CONFIG_CLK_QCOM_SM6115) += clock-sm6115.o
+-obj-$(CONFIG_CLK_QCOM_SM6125) += clock-sm6125.o
+-obj-$(CONFIG_CLK_QCOM_SM6350) += clock-sm6350.o
+-obj-$(CONFIG_CLK_QCOM_SM7150) += clock-sm7150.o
+-obj-$(CONFIG_CLK_QCOM_SM8150) += clock-sm8150.o
+-obj-$(CONFIG_CLK_QCOM_SM8250) += clock-sm8250.o
+-obj-$(CONFIG_CLK_QCOM_SM8550) += clock-sm8550.o
+-obj-$(CONFIG_CLK_QCOM_SM8650) += clock-sm8650.o
+-obj-$(CONFIG_CLK_QCOM_X1E80100) += clock-x1e80100.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_SC7280) += clock-sc7280.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_SHIKRA) += clock-shikra.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_SM6115) += clock-sm6115.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_SM6125) += clock-sm6125.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_SM6350) += clock-sm6350.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_SM7150) += clock-sm7150.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_SM8150) += clock-sm8150.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_SM8250) += clock-sm8250.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_SM8550) += clock-sm8550.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_SM8650) += clock-sm8650.o
++obj-$(CONFIG_$(PHASE_)CLK_QCOM_X1E80100) += clock-x1e80100.o
 -- 
 2.34.1
 
