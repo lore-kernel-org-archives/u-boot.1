@@ -1,247 +1,176 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0914ACC6B03
-	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 12:46:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A019CA9ED2
+	for <u-boot@archiver.kernel.org>; Tue, 13 Oct 2026 12:47:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B1F4F80AC6;
-	Tue, 13 Oct 2026 12:46:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D016C60643;
+	Tue, 13 Oct 2026 12:47:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HFNoi3sEKQ8O; Tue, 13 Oct 2026 12:46:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BB17880A87
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1791895611;
-	b=L5RVTSo+DDidHsGlyjMb/MpN/P5gBwkA3NIP8T1lK5GJT/WbphH0g0j7NGBaHhL2XFOS
-	 HG+tgJ7Ju4XDFYRaXaIkBOQzB7ryYbPeJ4yLw9t4bBsFSXpC6qebf9/I9lAnbuDgY1bft
-	 o7aObqGjHyEPxrw9g+6KwKE9zVfwVG96TheK2akv9cM+e7YxUO6B14AB2C8YqBTpQaULF
-	 jmpqIYTFxhHCRKqt9HD1JXW+PE8auqrijyDLF/0Dact2tIws8zs+pJVM0d06MsNubObfl
-	 HbgMwuPPVoJPx70lcMNODLphu1nDN7X4n8bZfvWP28G4wyGiI5uQ9saD/UXdLJSRImA==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791895611;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NfBdkLfIuCnL; Tue, 13 Oct 2026 12:47:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C3D51605F4
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791895648;
+	b=YSilmNCW6BAxfQQuNgiHp3rhObEF3HxR++x3wzNZ3q14j2gD2zuABiFZ7E84Ctg60WJW
+	 zP2wD4N82BPdtcFh4kaHZ9OeuUjQ9BhfQmmHCOmyWjq29HQwJh1g4JGScBH4f4gg5/PIn
+	 dmt/P7jHBUMxgMfySpsVkqFgdRWEQ81gduNB/tzRaGM2tH0OcqXMOUUlQ/bifnFpcuu/j
+	 raYm7y9zwhoy1iCZb5YPBTVAvu30a6dLR3qkVWS4JF1o6fOp+sBEIhdPk7fdWTjnUKe27
+	 9qmw3fXmBtfyo441hKwCKdeEBDFN/yNGEk7z7wj33if81wFfGWLdbUcBqywoNHgV3aw==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791895648;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
-	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-AtpMessageProperties:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=IzDpp7Ez/CvaP1RqjzGAN9l7vuDe+s6kjXvhFfVeXjY=;
-	b=kRpSdZyeM9qEAELci+nkzbVk8eJ90MF7lc5NdYHg/Y6hfAVEGXcW8zFz07Wr05X85mEU
-	 gs2OnjCVez+HM6IwiCzhTxy45ZEGoj1TnX6ZH5gdoXwL0cJ8OiDxHvrQcVW3IRG0aeafp
-	 JA7a6rqcYTW0dx6DB3UR/hWmvnmXHCiBdMovzpY8uGOcwVwM+6xvb7fHcw2AjIWGBcfET
-	 jidh6LL5jpe3AqMSSIuKXLb+ccSEnHMvnzMqqL/I6/f11lRZtL72PWGvxpLIrjsjyi6Fn
-	 I1IxEy07ucfzT7kj0EqerSA2evqQmTt7+6jcYMDo4tRWK3fHV8bcN2GQR6SsdBkWnig==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
-	arc=fail smtp.remote-ip=140.211.166.142
+	bh=KubDKtxgW/t34Q1OaVkkiHNnws9tQx7ZmqUy6LKgk1w=;
+	b=J4hwzAYVkYnz+o+iT8iO2JpkytXf9r4OsGIJQelXCKXTk3rQgzyhROvfAFlF7tGwdMkb
+	 v8OQH9LIGW4Q8Ywu/Edq5jNF2nN8clKTVHs75Rq0+K7xGNB3MvJAA0kxs4RQW0v9I1ErX
+	 Rya7ABURLTEh88fgLQA8UgvNTG4NsmbehF7oS4Ma24tbgVrcO5GclHhS+4m7R3aE6PVmo
+	 QFWhoLeN8Li3w3nCEaHs0LXD9hZ1UBWpP0gG/Do/ljgipI2Zg/ivM0Zu0bOJ82Xlu6sYb
+	 dfr5z0BWzYD8nVMuG5Z3EfGWKJWTh7KQ+iULKl7Z8y+PQmvu/LDYYBE5Elxm0Tx+MdA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791895611;
-	bh=IzDpp7Ez/CvaP1RqjzGAN9l7vuDe+s6kjXvhFfVeXjY=;
+	d=lists.u-boot-project.org; s=default; t=1791895648;
+	bh=KubDKtxgW/t34Q1OaVkkiHNnws9tQx7ZmqUy6LKgk1w=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=eaR8JPCHIeD9bmkfs71fuNNQOE+OPNDpDyGjjoG/paUne1DLIxR58yMDYhvlgzLae
-	 dZ5QmAtjfVdI6k6VQvxmRs/13WmHurqnRdGL9el/TSMZo8ucEoTkPyMsB+TRHz1F7h
-	 pfM7ulcIiiJTod+yKNAY/xj5vifrYeDI7HEo6u/RDa2mUd74tVE9Xfun5KkT0U8+6V
-	 3hK2aCkzc2cJVBjh93iPvUhhMWC/SX/724eYrqNrg+TTodQZ2b7hoKL8DB3tCifvkU
-	 egefNhtp3+V9Pfx2sz9imIcf0FQES3rTNNjLdmwzSQWukCWP8HcxRPW56kUIAUoW3Y
-	 dlduhWxLJlw4w==
+	b=gkFWJ2bkbuaE4FnEzhuA7dPf8X8y/EZ4rFs9l/IbT31i4rCL5q8dx7KPic6WPzl+A
+	 mxCkVwxyQX2lM0sN6TS5eVMls8a3Br5yqfA4aNO8ooAVDAACTGjB5H5ypWjJ9UXfc/
+	 Uv5yE7F5WmwChBrdZmXqJtwQ8s4zMzQCVZmqi8tvSHRmHQPIDyvS4MI4SlOQxXbwcX
+	 Bz/LeYhNCDX9oQUgFzQhQEpxeopQt9luc5odhIJx9GQmyCaeAxYVFWi0LdWzpr/ygN
+	 8asSBtUyze6WmMZeFUlacEXu6fdksk5nJSzF8GusqmMB85RrCsalpddolDlBBptUeS
+	 QsvbwB/xZ951Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BB17880A87;
-	Tue, 13 Oct 2026 12:46:51 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id A743DDE0
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 12:46:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C3D51605F4;
+	Tue, 13 Oct 2026 12:47:28 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 22BD175
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 12:47:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8CEF54050C
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 12:46:50 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 146FA4007C
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 12:47:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id M7GIwxdlu45R for <u-boot@lists.u-boot-project.org>;
- Tue, 13 Oct 2026 12:46:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C27734050A
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c007::2"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791895609;
- b=f/Z4OqyVSOV9hEZr4DMNSxD8GqAOoHyu1ZZxIbvqffNojgeKuiI5R3jDNRRLyV+7mktI
- caDDXvxwlmugTDtBN+v0JfNHfnxIbjV1awoK5Y33loEfVyVOksQfui8ZKJTC+XU5YIeSQ
- 1B2KBdpOWAJvCEAtFtcLx8uYtdauyW3N0/pzOLMpgVhtSxMa7nzq19eEfULsdZveuob1L
- cvYLPxqFe5V2KUr/weBDaWCpkTwNzKepjNzOUzFFKpD2YHCbChE4BVNk9zPdzHILsVdst
- fOmJF7POFlOXGOt19gHGvVZRddYxDd12m7Pjbxc4Z/F7rZipxyGLAi7x4vtrYZM/8PA==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791895609;
- h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
- User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
- X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
- X-MS-Office365-Filtering-Correlation-Id:
- X-MS-Exchange-AtpMessageProperties:X-MS-Exchange-SenderADCheck:
- X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
- X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
- X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
- X-MS-Exchange-CrossTenant-UserPrincipalName:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=IzDpp7Ez/CvaP1RqjzGAN9l7vuDe+s6kjXvhFfVeXjY=;
- b=VSLhWHV4bG68oO6m3oBRukix8Fp1gKNxg1QZZPQLctYDHE0vXHl2LT2KWc9aUbqW9Lyz
- hHmwy6zpqonFR1G0gPE7efFrY1V6C3mlVRHI7hqd/lwiiatWKlkgRE5uqX1jpbARP6Jnj
- okmZWwpXe5bHinuWpW4BYrxq1lliiUh11btiGgTB+RQfNFnn+N1fmUxT3QNV6GN5oeaXu
- LQUsFvJ/CcWEuhQW6A2t04u1c8UmECMMxdgFbxIs8oQfkN/WdbMFZxX0ZhviXew78VbnF
- UTs+Svb3dgfy22t7ySjJ6sodjBN+7psX1iDtW3kkwliXs08II2wTW0Pj6IiH9pT4BZQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
- dmarc=pass header.from=altera.com;
- dkim=pass header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=cGyUZPGi; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c007::2"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id o2__xkngHmNU for <u-boot@lists.u-boot-project.org>;
+ Tue, 13 Oct 2026 12:47:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org AB6F140070
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::429"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791895646;
+ b=h//1jg7CEeH1w9jNWozIFGe5DicQ25U7txp0U0+F/ysCokUItcG2sXvr4bBYi5JuQmt5
+ xgVgJonTr4Uph5vqlXlmXvhruP8/GpKjHZPr7Fuqnx7Sy7XObTnVhNgsoxLfXAdu8cikL
+ mbTOCxUHPy6nKlgIj2+xJte+u9bPFwXoIVV7vveCPR/W6BXhQps1AKTpDm455yGObybxl
+ 79izyMKz0FQpenHAoXav0Qij3C98wOcTANuCdG+cdgwX4tQ7vIuKfXt+utcFlcYOfwEZn
+ GnE/2bYlFT14JpwlNDHUsSAHWhyJEDUu6yf7dsdQ0sLnf/Ew0TXQIXACI6KzpC6mYaQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791895646;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+ Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding;
+ bh=KubDKtxgW/t34Q1OaVkkiHNnws9tQx7ZmqUy6LKgk1w=;
+ b=SEFAqjNKA6gi05MEh0tPTPOCrmO4bVcwpPZF02+7kKV/swXR0vWttxWBJsU6JffBf2GC
+ 4Ubjn4N34BLIrphuTOfTUBtgulNBxoq5X4Ap9KzJkXOF3IDBq75pImrYv9Y8McezpICg4
+ OxiNd/Qj7txHWmTXryI6x4PF0WsWSnQWnHx6Hl4MOeI3btYXOZI010Y6IGJlcsnufKPcF
+ opQBX0L2m5z86z1fUkPgwGgqh31n7Ce0s6BsoaILM0WRE0omrIOW6QkOkGlMKHfS74Nn9
+ bwNskdTcE9Fj3F+t2c/raYwWJ3T1Fxs6lgcS1A4Q7W/CoABOddzrpCZzPHd0jfPjSfA==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ dmarc=none header.from=baylibre.com;
+ dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b="mCyf6v/7"; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::429"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c007::2;
- helo=mw6pr02cu001.outbound.protection.outlook.com;
- envelope-from=tanmay.kathpalia@altera.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=cGyUZPGi
-Received: from MW6PR02CU001.outbound.protection.outlook.com
- (mail-westus2azlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c007::2])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C27734050A
- for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 12:46:48 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OfwwIPHqcZhK+9+5SH7Y5o3BFaNf7enz5Lmadd5BwBEj+Q1VQl2NCdOMkRbqjPg7LoVXQ4P3GqL3dw6l2f/1O+7MusEGK736S7WpYPwhk0Aic0u6rls/N1sKVdmNIx4iU7C5bzgGYKwXMELNXzxH5uOq+rIXnl9eSeninkYyt9DwvrtBAgzgrIqsb537Aqm61tSp8jYDxJugeE+H7pbsazfrZS4uTnEoMpPeKEfFjfdrwHZz8aePFjQ3hrux7lKjiEvXt4RhzsRbr5ggvHyW1zz97oIIUfT1G5LRRCQ0ZzdwwNjZUB3YD0zBlFO/yqbrRrlBQKImXWSTmU+JJxkWeQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IzDpp7Ez/CvaP1RqjzGAN9l7vuDe+s6kjXvhFfVeXjY=;
- b=Oa8U26vXSzd0yuPFW3M7USadk7MgcwMhqPCOuS+KcIS9hRV1xYfalghUeQhHeVty2QC4rnhEdEOjrn400+v252MzziPK77UCNU9UVu9H6CTdPGE3g+cvpdzW2wnc450cWRMPVkbY/QUfEA8jdxxVr0X0Sy8qiB4yJNcD91Yqsb8azs8FzHrp9n4AYVa0jdaR9AbU6ZOoqzFdE7u52t25BbAztss9pJzxaW7JspSa2UrP6lVYw2rtwcvtLDyEiHlj0FdhPXPzVhLDwSLTwwTcm4u0TC7chGhtR92jIaBdUqVkVy0iTVJZ/M85YZMtO8vuxjYcGzjYRdvNARY4FxgFHQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IzDpp7Ez/CvaP1RqjzGAN9l7vuDe+s6kjXvhFfVeXjY=;
- b=cGyUZPGiRrkTyy4rTjbaxxw4+ZHn7A/V6hwPMDwxSXxKF5iIq2or6IhrJI+/yyQoJWIhbdpWTCSJ5wi6UxM6Avp4WUnbdfZVTo4rrwM8Bx3+LEkHy3ADdRe0zjkgQuaaIopEZ9dDid65/0Kx8b5lbOTL0xG8MpcWTvQyeMoSMXpsTygdjkR39qMohwLUTI36RtUxBz1ZxcAY52mWd0NiGB5F+iVGgTjiy1R99ukADPf8XSzAGTKNSdCfjMzxizZ+Om5lIbhe9wRz88eXc3qLBsk0s/BeQ8NhFqaWAuHrqWCVLAyjLqFyCv/ZTWnLUCMBfAm86lD+ZYhGo8va/04Bgw==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
- by DM4PR03MB6143.namprd03.prod.outlook.com (2603:10b6:5:396::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.12; Tue, 13 Oct
- 2026 12:46:42 +0000
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::2216:93ef:67b:9e04]) by DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::2216:93ef:67b:9e04%3]) with mapi id 15.21.0496.021; Tue, 13 Oct 2026
- 12:46:42 +0000
-Message-ID: <9cbd3af0-1bb5-47fe-bdbb-e61c2f077276@altera.com>
-Date: Tue, 13 Oct 2026 18:16:28 +0530
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mmc: sdhci: do not time out a command that has
- completed
-To: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>,
- u-boot@lists.u-boot-project.org
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>
-References: <20261013-upstream-mmc_sdhci_timeout_b4-v2-1-7c6383b789a5@oss.qualcomm.com>
-Content-Language: en-US
-From: "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>
-In-Reply-To: <20261013-upstream-mmc_sdhci_timeout_b4-v2-1-7c6383b789a5@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PN4PR01CA0091.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:2af::9) To DM4PR03MB6208.namprd03.prod.outlook.com
- (2603:10b6:5:39c::19)
+ client-ip=2a00:1450:4864:20::429; helo=mail-wr1-x429.google.com;
+ envelope-from=glaroque@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=mCyf6v/7
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id AB6F140070
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 12:47:25 +0000 (UTC)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-48afbd2c386so1633971f8f.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 13 Oct 2026 05:47:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1791895643; x=1792500443;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=KubDKtxgW/t34Q1OaVkkiHNnws9tQx7ZmqUy6LKgk1w=;
+ b=mCyf6v/7e6nnEk0lhW3VECqyT6gxC3GOXkLrrGs4/B2uhAIH/2XDqZUDYXcb9R5r/p
+ ozgHon1zt7l+LOhBq8glq8ioO+x95r/cky1Y1VU0PQM5585NeVeJ1APth9JSj414NwTg
+ U97i/woLia33wwGztZ1PSBfdkxk819bbd79BFAlXdPBakK50dBY2/qgyYQE0b7+nqSab
+ gR5V/nqxASBUy6lSBKSecRsQzPnvbuLkDtbIOq2fmspHPDEGgg5t5nnZZFD6bsY8Go+W
+ 8n9JJoltbOp2mRnqsjRVZxATxlU+XL2I5Sc3D2d1LObqdK8gzkryVuKUzGMO9xXGo1WY
+ sUfQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1791895643; x=1792500443;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=KubDKtxgW/t34Q1OaVkkiHNnws9tQx7ZmqUy6LKgk1w=;
+ b=c6QQXmlhXIgKTqJbLJ+WRTSlU50UTtiadHAdKdxOGqSTv8VI5cdwNAbCZ7BjO/x2OY
+ xKiUxKoA+rYFP/S4yoly6pYjZsh7zjBaj1ytiXfdGraCGnh/peqhMvzQJ9nnZNSBlZGd
+ OkKFO5KsNA4rQDG8IHjESEKcyePr4YMAQajAAjSIX7LpSgPyuGOCrE5f6B6VnFI7U0H/
+ 0dEd8kW4lBm2KWGL5VeXyt+QFTjHSFytwFh2sIp0h8nh2fsSbd85J0oz9wBzQ+ZxOM7f
+ O17mHtUJaAJRoNuVqex1RLLOhUbwddUrVzzedlj5TxhWsnWKa8LAPYg3noyXD4DCFzBz
+ F39A==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBwxUpmGKkM/IHEqzak+xTgiPkUNRgmzIYGwKpQY2531i2FTNnI9pq4OggF1mmvGrRhYjrChEqw=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYIKokHJgGGPPc60zBjcnwUqI/j0P3tRYPjq6JZLXJ0hgEtIXL07
+ u5aduQgfCMUFXzqO4n5Um4B/XBC3OeNQv3LppzwuAfPYEu0F1kir6o06TdvkiVp1vSo=
+X-Gm-Gg: AYBFou2x9oufp8ksokqwWazEI77/5sLCIRyKVJCykEV2hZVrYwtfDSE50qarfCCafIC
+ N8mFy80ClnlMRlmGnr8vKlOUZy3XjqUTz+2kXbckoxnfnQu/Kz0GsVR8/mJXivbhNeGzztWhnYi
+ Ky1tIOvkKOp1qixYpgHWaHT3WZ7qzXVSIMnpo/gjDsuqE4lvbxNIjKPpFgxoUancrfPNVX7FF7R
+ 9ifMR+1IblAknsRjwi4KrNqEu2PtsiNfsZilluxOrRQBqY3AQ2Nnlcg4E+L5PDMEXhM7xlDdOP7
+ BcyWYjCTPoLaU5KLCuBE8AYRDWXYPgG1lCwrDXAHU9W/XGNjKMf1nHmp2TnE74yk7lz4e8mqNrz
+ fZJaWmYC6SFOesXeb3Rm85MtVW61uCP99kZrqVALxHq9eCXGvDualk4JManph/PmgWSNAQAetSQ
+ aJD/GM1rLw4m1aX0yMzBRFCOXUEewB26uBrIi44LORK5Wfc0pejPkVSVgY84URbnX4lrnXP8apF
+ /beBOBMqeaKyAhXvzXU2DL28XWgpYHCBLVQqzNgDmkuciwE/FROhwjBKbdrb3k=
+X-Received: by 2002:a05:6000:4814:b0:48d:db43:4ba7 with SMTP id
+ ffacd0b85a97d-48ddb434e4amr9045464f8f.9.1791895642900; 
+ Tue, 13 Oct 2026 05:47:22 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:e50:3860::642d:5bda?
+ ([2a01:e0a:e50:3860::642d:5bda]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48de0bc91e2sm4790752f8f.55.2026.10.13.05.47.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 13 Oct 2026 05:47:22 -0700 (PDT)
+Message-ID: <d99d0593-d0b1-4537-a848-0b3dd0a174b4@baylibre.com>
+Date: Tue, 13 Oct 2026 14:47:21 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|DM4PR03MB6143:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2a5fbaf6-ef3b-40cc-87e6-08df29280820
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|23010399003|376014|56012099006|11063799006|5023799004|261009223027099003|10067099003|18002099003|22082099003|55112099003;
-X-Microsoft-Antispam-Message-Info: LsO6qMxYqthWPrR73Eyw5uts3T9Lymic3WgUdI4zfzpDTMG0Edo3iAAn+N5J/LsaVMhNTxyjLx9/xUUuQeXWvd3SOhO0unbxBZWdrT5G3nQtbw+IvjllOnmUZ7WD8P/Ut5J58ArtR/TR56m3TuMtRjSRgTAPPVd0Dh4RSN8q6gjBf6O/7sGMYOve/w7TAFZZmItNypkzDT0zUwgWSX919bCBQHE5a+vsYMjgtLXMGNWbEF55ruZmZoLpNf7djXZbh0VPTSzYWSLVpFYVISqveNOy+kQlISukY3RVUI15N7js28q0r2RJ1P1oWTpz+ofmPzwV28W7u/UE0yeJMvMI30jsX7b2ON7Q+UJzIsRqZhaVaDIHVo4ZgSMcsDNFZrf8bpdR9RX6UjjvgnrJ62HeqVZnmT8c3H5CgRJzeRswH8eLx/EpNDiNbu1KUtk5U5HTuh4d3MmkskLmOuDmT2mchwD7dc6FKvIbEvPrVKYUKU8926JmoI6WBJwRe16No/raWIZlktrpySaL3Ju/QhT7S4VcvBT6dUSYTTXcmY91erNN8RAQPBPwRHPZIYz5tsNPDCxe0a9QooUYUsSrboRduiJ20v7yGW8mOC5B8GpqXadcvygLaJOVHuPo5wDArNYG
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(56012099006)(11063799006)(5023799004)(261009223027099003)(10067099003)(18002099003)(22082099003)(55112099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K3lQeTBoRmI0alNmOEN2Q3lsUlZqTVM5YUgxa29rOWkybXhWVlpEdWIwZlQ3?=
- =?utf-8?B?VzhQekxvN0Z3eFo1Ykx1RXNTNGdwTG4zMThRNFN6UHZibmJmaHlIZTR6eENx?=
- =?utf-8?B?K1ltL0Z3VkpxUlVnaHJoYkpqYUZyYlFhTVB5RmxUTGtQMkRQMjAvOFFFaWgv?=
- =?utf-8?B?RHUrREpHYkcwNEs4MGhVakpEWUE1M0tRNDZqK1JHYjhDRDQrNGtCemZkcE5w?=
- =?utf-8?B?SG9NUVNZZ1lJK2dzNUZiM0dpbVpBODJGVnNqeWFKNGU0a2JiZ0Q2OExKb3lD?=
- =?utf-8?B?bUFWazdsbm8xQkxJZmhncWF5L3YwY1NoQithZG5wQXBxbDFrSW5lYXdXTXNa?=
- =?utf-8?B?NkFyWjYvbEpSc3Q1RzJWKzcvcmExcG9CVWFJV21MWWJSSkRFOHYyRSs4ZDZZ?=
- =?utf-8?B?NXo4Nk9FTW9nTitJZElDYmd4bklQTmJEZjZzTGY5UWFtWFBCZ1hVbE81aTlI?=
- =?utf-8?B?TFg3bm1oZ1hjOS91SndON2g3OHA3b2EwSFdUSnJqUmt1M09XeHRZN1RvWEM2?=
- =?utf-8?B?ZEVnT0pYWXdGNC9Gd0p5Ry9ndTlQQkFBcnJJV1lHZ0ZETGFyTnZQNVdZSVNK?=
- =?utf-8?B?WmpzbWRCYTlaSTUwL1V5YUc5YzJYeWRSQzdUbXh1d01uVk96eGx0YWZrbkRO?=
- =?utf-8?B?TnVXTW03M21mTlA3dURrcXBndWdHMlZONGZHTFZjR01tZk1VeFExWUU4WmJm?=
- =?utf-8?B?cno2UVd5N3QvNnJuTk5mbFhlcjRuNDM0dVlRY1pobkZrYTlyRHdZYUh3Nmhx?=
- =?utf-8?B?S1pzUFFDSklBVG9nVkFBZGFiN0IwUERWeXpIQ3FHT3lINXFsbW9hSDE3VHU2?=
- =?utf-8?B?cEFBeTVnMDBwNGJqY3lyOC9HTEt1MHl0OUFEVW5lSkJrbGN1bWMzM1pkaWZW?=
- =?utf-8?B?T04xb2ZrYjlwcDhrMEdHRlNEanArMEtvdWNlcExxcVhWZGpIeHM0NHlFWkNr?=
- =?utf-8?B?bkhaQjkxRDFGNmVKQi9CZjZIZnNUVi9yV2ZQMjVOOG1NRzFxNUxsN2hSeXJo?=
- =?utf-8?B?K2srVnc5VjlnU01QUG9sRUFkRmxjM0dmeUROTTVKTFdqYlU3Ynh3SUF0Q0JE?=
- =?utf-8?B?UXFuZkRuVUpnakd0ZXkwR09ORW9JSEdXeWZUQ0k0M1JFSk45YVFqOUZFZUxk?=
- =?utf-8?B?TWczNFJDb20yVlpXRG5zMitGTy9rQ2xkMXVFVzBlRnhBbkVqK0x5cWhmWVZJ?=
- =?utf-8?B?aXVEWmJmTEprM3QyQzRrT3diTHJhQVMzUUJXTnN1emdJYjdUQ096bjVXMG03?=
- =?utf-8?B?cjdCdTIvY1djdldoSGpQUUg0djFoTjNZZ1FndzFsb2NzK054eWJkeEFxaTB3?=
- =?utf-8?B?OE1tdjA5Mjh5TFU4bExNeVNWbjRGNkZTSERGYnVHR3BTY2lXRWJCbk5JSW1Z?=
- =?utf-8?B?eFVxUmtHU1FoK0ZzYU5ROHpTUmMwOENlclFFVHBoK0ZkM1hOV3YvOW10Z1V3?=
- =?utf-8?B?Mzd2TngxejZMeFlQZDdCeHRzbGlUcTlKSGtLdkFUVlN5cnFhTVZsckVIanBR?=
- =?utf-8?B?ZXROcUFLbDYxdVJuRGJQU3JoV2duYlljY0NWNkFMdDhYV2d1VXRtWC80a0E3?=
- =?utf-8?B?ZmhMQUU1Yktjc1FsUTNhSGh5U2Y3K2IyNFpHcjJEZzhkLy93dlZ3L1FYT05W?=
- =?utf-8?B?aFVwVzZhazlIbXAxME9BckcwVThhNHRCT3V0VEsyZGltNmR4eXAyaFc0VHBj?=
- =?utf-8?B?T3lPaUR2aFVNTDQ5UktHZnlPTUdtKzkzb0RpbmVTeHc2Z0ROQ1I4TXFsSVdX?=
- =?utf-8?B?R09uZ09rQ1FtT0ltMElGeVMvOU02WFF0TGdlbHN2eVVha01YeTBRZkdKQUU3?=
- =?utf-8?B?WnF6NXhLSno0K0JjcmVzc3BMYkJuL0xxSXJKSjFuK2M5am5La2EyQXg4Qm15?=
- =?utf-8?B?R0RmdU1LbVFwWEJBcU4vQjVvYzNvYVl6ZFUybldYM0swaStPcktxdkNaT2lp?=
- =?utf-8?B?TnNnZ2d0N3A4NmFWQ2FtRGNuc3E0UmxEczRzYjh2Z0U5WmhCcllXN3hSNDls?=
- =?utf-8?B?NGhwcml5Y1FUVjNrNWxJRzJNdWo3UEUrc2JnS3kvakY4eFlRWGlTbHhtUElZ?=
- =?utf-8?B?ZXhPdGpOb0R1L3dSUzhNUXNVYmJQdTRNZkliVEhSVnB2L29lVGZsenVNSnN1?=
- =?utf-8?B?ZzlTbUl6OGdvZVo4RHhIZUkyYzF5QTlHcGt0cUQ0Qk4wNGprK1hDYlZ1M0dO?=
- =?utf-8?B?QXRZelRyeEpUVTdubUp2a0dvenJnNnErNDFuNGlXU1FhZnQ1VDVFNEFyQk5p?=
- =?utf-8?B?czYwUDZBSjlJNklBTUE3U01KbGo4c1hicVFUb21yQ202aWFFNnhxNWtsSDhl?=
- =?utf-8?B?M1RCcGtYTWhTQ2loeGZINFh4MkZOdlVpV2hxVVVwa1I5VU5OS0t3YXN4MU9q?=
- =?utf-8?Q?6zTZ+TJkQmtZJFzw=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2a5fbaf6-ef3b-40cc-87e6-08df29280820
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2026 12:46:42.4531 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BcOPaQqodZ+WaZwttsz5ZWbJW3fvv8QOhKVKChaJp1nGuLpCTU377s0Xtp7mBQaskz5aSQP7UDFOmTkUn/w2OgxEjAzVox65qhZ01LJ5z+Q=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR03MB6143
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] avb: Drop the mmc naming from the block IO helpers
+To: Jan Kehren <jan.kehren@emteria.com>, u-boot@lists.u-boot-project.org
+Cc: mkorpershoek@kernel.org, igor.opaniuk@gmail.com, sjg@chromium.org,
+ trini@konsulko.com
+References: <20260915145629.995499-1-jan.kehren@emteria.com>
+ <20261006092732.3577974-1-jan.kehren@emteria.com>
+ <20261006092732.3577974-2-jan.kehren@emteria.com>
+Content-Language: fr
+From: Guillaume La Roque <glaroque@baylibre.com>
+In-Reply-To: <20261006092732.3577974-2-jan.kehren@emteria.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -255,38 +184,316 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Opaniuk,
+Hi,
 
-On 13-10-2026 17:44, Igor Opaniuk wrote:
-> sdhci_send_command() polls the interrupt status and gives up after
-> SDHCI_READ_STATUS_TIMEOUT, but it evaluates the timeout before it looks at
-> the status it has just read. When a single status read takes longer than
-> the timeout, the command is reported as timed out although the response
-> and transfer-complete bits are already set, and the caller aborts an
-> otherwise successful transfer.
+thanks for your patch
+
+Le 06/10/2026 à 11:27, Jan Kehren a écrit :
+> The AVB IO helpers and struct mmc_part only ever touched struct blk_desc:
+> nothing in them is mmc-specific. The names say otherwise, which makes the
+> mmc assumption in AVB look wider than it is.
 >
-> This happens on QEMU's SDHCI/eMMC model under TCG: a large ADMA transfer
-> runs in a timer callback while holding the big QEMU lock, so U-Boot's next
-> MMIO read blocks for seconds and the subsequent command appears to have
-> timed out ("Timeout for status update: 00000003 00000001").
+> Rename them after what they do, in the AVB namespace rather than the block
+> layer's: avb_blk_read_and_flush(), avb_blk_write(), avb_blk_byte_io(),
+> struct avb_blk_part and enum avb_io_type with AVB_IO_READ/AVB_IO_WRITE.
+> The block descriptor field loses its mmc_ prefix for the same reason.
 >
-> Check for completion first and only then for the timeout. The check sits
-> after the SDHCI_QUIRK_BROKEN_R1B handling so that, for a busy command
-> without data on such a controller, the quirk keeps returning as soon as
-> the DAT line is idle without reading the response, exactly as before.
+> No functional change.
 >
-> Reviewed-by: Peng Fan <peng.fan@nxp.com>
-> Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+> Signed-off-by: Jan Kehren <jan.kehren@emteria.com>
 > ---
 > Changes in v2:
-> - move the completion check below the SDHCI_QUIRK_BROKEN_R1B block so
->    that the quirk keeps returning as soon as DAT is idle, without reading
->    the response, for a busy command without data (Tanmay Kathpalia)
-> - add Peng Fan's Reviewed-by from v1; only the position of the check
->    changed
-> - Link to v1: https://patch.msgid.link/20261011-upstream-mmc_sdhci_timeout_b4-v1-1-f33c02445924@oss.qualcomm.com
+> - New patch: split out of "avb: Take a storage interface in the AVB
+>    operations" so the rename lands on its own, with no functional change
+> - Keep the _and_flush suffix on avb_blk_read_and_flush(), it still flushes
+>    the cache after reading
+> - Re-align continuation lines that the longer helper names had broken
+>
+>   common/avb_verify.c  | 106 +++++++++++++++++++++----------------------
+>   include/avb_verify.h |  12 ++---
+>   2 files changed, 59 insertions(+), 59 deletions(-)
+>
+> diff --git a/common/avb_verify.c b/common/avb_verify.c
+> index b96cd1ebd7..fc29433c3c 100644
+> --- a/common/avb_verify.c
+> +++ b/common/avb_verify.c
+> @@ -304,13 +304,13 @@ char *avb_set_enforce_verity(const char *cmdline)
+>   
+>   /**
+>    * ============================================================================
+> - * IO(mmc) auxiliary functions
+> + * Block IO auxiliary functions
+>    * ============================================================================
+>    */
+> -static unsigned long mmc_read_and_flush(struct mmc_part *part,
+> -					lbaint_t start,
+> -					lbaint_t sectors,
+> -					void *buffer)
+> +static unsigned long avb_blk_read_and_flush(struct avb_blk_part *part,
+> +					    lbaint_t start,
+> +					    lbaint_t sectors,
+> +					    void *buffer)
+>   {
+>   	unsigned long blks;
+>   	void *tmp_buf;
+> @@ -342,7 +342,7 @@ static unsigned long mmc_read_and_flush(struct mmc_part *part,
+>   		tmp_buf = buffer;
+>   	}
+>   
+> -	blks = blk_dread(part->mmc_blk,
+> +	blks = blk_dread(part->blk,
+>   			 start, sectors, tmp_buf);
+>   	/* flush cache after read */
+>   	flush_cache((ulong)tmp_buf, sectors * part->info.blksz);
+> @@ -353,8 +353,8 @@ static unsigned long mmc_read_and_flush(struct mmc_part *part,
+>   	return blks;
+>   }
+>   
+> -static unsigned long mmc_write(struct mmc_part *part, lbaint_t start,
+> -			       lbaint_t sectors, void *buffer)
+> +static unsigned long avb_blk_write(struct avb_blk_part *part, lbaint_t start,
+> +				   lbaint_t sectors, void *buffer)
+>   {
+>   	void *tmp_buf;
+>   	size_t buf_size;
+> @@ -382,19 +382,19 @@ static unsigned long mmc_write(struct mmc_part *part, lbaint_t start,
+>   		tmp_buf = buffer;
+>   	}
+>   
+> -	return blk_dwrite(part->mmc_blk,
+> +	return blk_dwrite(part->blk,
+>   			  start, sectors, tmp_buf);
+>   }
+>   
+> -static struct mmc_part *get_partition(AvbOps *ops, const char *partition)
+> +static struct avb_blk_part *get_partition(AvbOps *ops, const char *partition)
+>   {
+>   	int ret;
+>   	u8 dev_num;
+>   	int part_num = 0;
+> -	struct mmc_part *part;
+> -	struct blk_desc *mmc_blk;
+> +	struct avb_blk_part *part;
+> +	struct blk_desc *blk;
+>   
+> -	part = malloc(sizeof(struct mmc_part));
+> +	part = malloc(sizeof(struct avb_blk_part));
+>   	if (!part)
+>   		return NULL;
+>   
+> @@ -421,20 +421,20 @@ static struct mmc_part *get_partition(AvbOps *ops, const char *partition)
+>   		}
+>   	}
+>   
+> -	mmc_blk = mmc_get_blk_desc(part->mmc);
+> -	if (!mmc_blk) {
+> +	blk = mmc_get_blk_desc(part->mmc);
+> +	if (!blk) {
+>   		printf("%s: failed to obtain block descriptor\n", __func__);
+>   		goto err;
+>   	}
+>   
+> -	ret = part_get_info_by_name(mmc_blk, partition, &part->info);
+> +	ret = part_get_info_by_name(blk, partition, &part->info);
+>   	if (ret < 0) {
+>   		printf("%s: can't find partition '%s'\n", __func__, partition);
+>   		goto err;
+>   	}
+>   
+>   	part->dev_num = dev_num;
+> -	part->mmc_blk = mmc_blk;
+> +	part->blk = blk;
+>   
+>   	return part;
+>   err:
+> @@ -442,22 +442,22 @@ err:
+>   	return NULL;
+>   }
+>   
+> -static AvbIOResult mmc_byte_io(AvbOps *ops,
+> -			       const char *partition,
+> -			       s64 offset,
+> -			       size_t num_bytes,
+> -			       void *buffer,
+> -			       size_t *out_num_read,
+> -			       enum mmc_io_type io_type)
+> +static AvbIOResult avb_blk_byte_io(AvbOps *ops,
+> +				   const char *partition,
+> +				   s64 offset,
+> +				   size_t num_bytes,
+> +				   void *buffer,
+> +				   size_t *out_num_read,
+> +				   enum avb_io_type io_type)
+>   {
+>   	ulong ret;
+> -	struct mmc_part *part;
+> +	struct avb_blk_part *part;
+>   	u64 start_offset, start_sector, sectors, residue;
+>   	u8 *tmp_buf;
+>   	size_t io_cnt = 0;
+>   	AvbIOResult io_ret = AVB_IO_RESULT_OK;
+>   
+> -	if (!partition || !buffer || io_type > IO_WRITE)
+> +	if (!partition || !buffer || io_type > AVB_IO_WRITE)
+>   		return AVB_IO_RESULT_ERROR_IO;
+>   
+>   	part = get_partition(ops, partition);
+> @@ -486,11 +486,11 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+>   				residue = num_bytes;
+>   			}
+>   
+> -			if (io_type == IO_READ) {
+> -				ret = mmc_read_and_flush(part,
+> -							 part->info.start +
+> -							 start_sector,
+> -							 1, tmp_buf);
+> +			if (io_type == AVB_IO_READ) {
+> +				ret = avb_blk_read_and_flush(part,
+> +							     part->info.start +
+> +							     start_sector,
+> +							     1, tmp_buf);
+>   
+>   				if (ret != 1) {
+>   					printf("%s: read error (%ld, %lld)\n",
+> @@ -505,10 +505,10 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+>   				tmp_buf += (start_offset % part->info.blksz);
+>   				memcpy(buffer, (void *)tmp_buf, residue);
+>   			} else {
+> -				ret = mmc_read_and_flush(part,
+> -							 part->info.start +
+> -							 start_sector,
+> -							 1, tmp_buf);
+> +				ret = avb_blk_read_and_flush(part,
+> +							     part->info.start +
+> +							     start_sector,
+> +							     1, tmp_buf);
+>   
+>   				if (ret != 1) {
+>   					printf("%s: read error (%ld, %lld)\n",
+> @@ -520,8 +520,8 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+>   					start_offset % part->info.blksz,
+>   					buffer, residue);
+>   
+> -				ret = mmc_write(part, part->info.start +
+> -						start_sector, 1, tmp_buf);
+> +				ret = avb_blk_write(part, part->info.start +
+> +						    start_sector, 1, tmp_buf);
+>   				if (ret != 1) {
+>   					printf("%s: write error (%ld, %lld)\n",
+>   					       __func__, ret, start_sector);
+> @@ -538,16 +538,16 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+>   		}
+>   
+>   		if (sectors) {
+> -			if (io_type == IO_READ) {
+> -				ret = mmc_read_and_flush(part,
+> -							 part->info.start +
+> -							 start_sector,
+> -							 sectors, buffer);
+> +			if (io_type == AVB_IO_READ) {
+> +				ret = avb_blk_read_and_flush(part,
+> +							     part->info.start +
+> +							     start_sector,
+> +							     sectors, buffer);
+>   			} else {
+> -				ret = mmc_write(part,
+> -						part->info.start +
+> -						start_sector,
+> -						sectors, buffer);
+> +				ret = avb_blk_write(part,
+> +						    part->info.start +
+> +						    start_sector,
+> +						    sectors, buffer);
+>   			}
+>   
+>   			if (!ret) {
+> @@ -564,7 +564,7 @@ static AvbIOResult mmc_byte_io(AvbOps *ops,
+>   	}
+>   
+>   	/* Set counter for read operation */
+> -	if (io_type == IO_READ && out_num_read)
+> +	if (io_type == AVB_IO_READ && out_num_read)
+>   		*out_num_read = io_cnt;
+>   
+>   out:
+> @@ -603,8 +603,8 @@ static AvbIOResult read_from_partition(AvbOps *ops,
+>   				       void *buffer,
+>   				       size_t *out_num_read)
+>   {
+> -	return mmc_byte_io(ops, partition_name, offset_from_partition,
+> -			   num_bytes, buffer, out_num_read, IO_READ);
+> +	return avb_blk_byte_io(ops, partition_name, offset_from_partition,
+> +			       num_bytes, buffer, out_num_read, AVB_IO_READ);
+>   }
+>   
+>   /**
+> @@ -630,8 +630,8 @@ static AvbIOResult write_to_partition(AvbOps *ops,
+>   				      size_t num_bytes,
+>   				      const void *buffer)
+>   {
+> -	return mmc_byte_io(ops, partition_name, offset_from_partition,
+> -			   num_bytes, (void *)buffer, NULL, IO_WRITE);
+> +	return avb_blk_byte_io(ops, partition_name, offset_from_partition,
+> +			       num_bytes, (void *)buffer, NULL, AVB_IO_WRITE);
+>   }
+>   
+>   /**
+> @@ -883,7 +883,7 @@ static AvbIOResult get_unique_guid_for_partition(AvbOps *ops,
+>   						 char *guid_buf,
+>   						 size_t guid_buf_size)
+>   {
+> -	struct mmc_part *part;
+> +	struct avb_blk_part *part;
+>   	size_t uuid_size;
+>   
+>   	part = get_partition(ops, partition);
+> @@ -920,7 +920,7 @@ static AvbIOResult get_size_of_partition(AvbOps *ops,
+>   					 const char *partition,
+>   					 u64 *out_size_num_bytes)
+>   {
+> -	struct mmc_part *part;
+> +	struct avb_blk_part *part;
+>   
+>   	if (!out_size_num_bytes)
+>   		return AVB_IO_RESULT_ERROR_INSUFFICIENT_SPACE;
+> diff --git a/include/avb_verify.h b/include/avb_verify.h
+> index 66655aab87..8c97adbfbf 100644
+> --- a/include/avb_verify.h
+> +++ b/include/avb_verify.h
+> @@ -32,16 +32,16 @@ struct AvbOpsData {
+>   #endif
+>   };
+>   
+> -struct mmc_part {
+> +struct avb_blk_part {
+>   	int dev_num;
+>   	struct mmc *mmc;
+> -	struct blk_desc *mmc_blk;
+> +	struct blk_desc *blk;
+>   	struct disk_partition info;
+>   };
+>   
+> -enum mmc_io_type {
+> -	IO_READ,
+> -	IO_WRITE
+> +enum avb_io_type {
+> +	AVB_IO_READ,
+> +	AVB_IO_WRITE
+>   };
+>   
+>   AvbOps *avb_ops_alloc(int boot_device);
+> @@ -78,7 +78,7 @@ const char *str_avb_slot_error(AvbSlotVerifyResult res);
+>    * I/O helper inline functions
+>    * ============================================================================
+>    */
+> -static inline uint64_t calc_offset(struct mmc_part *part, int64_t offset)
+> +static inline uint64_t calc_offset(struct avb_blk_part *part, int64_t offset)
+>   {
+>   	u64 part_size = part->info.size * part->info.blksz;
+>   
 
-Thanks for incorporating the feedback.
+Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
 
-Reviewed-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+Regards
+Guillaume
 
