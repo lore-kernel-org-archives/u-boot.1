@@ -1,145 +1,138 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D279CC6B29
-	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 08:48:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5743CC6B27
+	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 09:07:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0F62C406A3;
-	Wed, 14 Oct 2026 08:48:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7DB7480A49;
+	Wed, 14 Oct 2026 09:07:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dAV53UQIHv38; Wed, 14 Oct 2026 08:48:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9C8D0405B0
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791967684;
-	b=ZMepaVCxAO5Ftz0kZaFRby8ksF1BlcM9/rh7bDlzJ1b0oP4TSTj8z/uoQSgXFhZT5Ub3
-	 9+gErw7OSqm7T3sqnp6Aq1HcOhNtWNMrHjBSlp1+vgEn3McJIc+8PI3pSjZXgc3ceuVRE
-	 aFR5LY/5zmch4+PQ0Vt36pVe5wEEUSm7TybBxl02XlUFZUTPPVJ45GfZ8t5/kluMZxqZw
-	 rERKYbzr4Wa4GXvED/TgiGCeY2dHMwk0BVvY1R3UDYrf+juvZZG9Bl5yuK3pzY1Hf+cnq
-	 YOQ3g8ZPY2U0DZSM7M/iZsqPSlVZy0h1mfuJu3jSEUWnZmnZhca+cgWc3iEv5dZxf7A==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oB9vcW4Elhp5; Wed, 14 Oct 2026 09:07:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org CB83380BD1
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791968831;
+	b=S5YD9HPxB+QwdNl1FzOevqJKBFcveSFvvg81+bS0JIU8SSA9OE6q0n7IbS02Y9xMif4o
+	 5YYGCZSjZUMIkzYI9HsGik3coCk+fkr6lDhAic3mmpUlt7nmTYJB9jPLYzorFaBEBfCFO
+	 QVp+YeJw2cJwtQQMg6CMk0mOkrUGmRt44ZNGo7U3oFe4pOloaJ3lKXf2BkfzKgtRsO2xa
+	 kdCehkY8QZJcX6bOm/0yGkrWy1JaPET66MKhwbnnuqAJe2O2zjOarT17idf1tvaeRTy6Q
+	 QZSs2imu8sOueIxnbQeCP7c7zfZV0qDSsH2TePFaZYFXtCr4K/Y6AQQDqSQMVTGYE9Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791967684;
+	c=relaxed/relaxed; t=1791968831;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
+	 Received:DKIM-Signature:From:To:Cc:Subject:In-Reply-To:References:
+	 Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=9FTXtPIYYmSfgfdSnZ8evLeSo5wEIlHgi2+MmtN9nto=;
-	b=mFeMuq85ceVfj7rhR5Vobj47PWOBW1kU8USLqOkrzqmk+n69Yv59OuIT2MydRGUgaxqh
-	 wVd/VdCMfiSnXF0E570QNqxKnVN1sUWU8yOQhs/7zYVZNXPtu41dJmnQR3gFuLU+I10/g
-	 hARDnjUvA5mzoyLOOPjlTjFqv9fEeaZwtQXR+xnTOHpF6Rpcynr2LEBkJ+rgXJayLNO2z
-	 YC36xJ+jb8x5pDtk2NixdkGkxhQi67Lx2BpIs5iyrpMmugBdYsQf/xQUoNnD5eZKxYSUs
-	 +mLkVDDYJGVT+gditKJ6GZ3PYJBEqaaDeDgWjdT01vTCjdqPtJz7Gco3UeHWvR8K7mQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=B2Boo0YZ5qBedDweRvgQXwo9K2GgSBhYMW2yOMrODzI=;
+	b=V9Y3n2UnTWCWmgO2HnENz7QsEcDX+0m0C89JuqwbHBlwh8zrl+lpKiNHV39bixjti2+r
+	 DMF5F+Bj1NydAg0iIoz4r5yEwSCASEUarhKvDbyIExzCxxjNmlrl9nLEFRYiutyBTIk8D
+	 F6DrK7hF/4/9JxSk7Wpg2kKD16bLAOq2j2eq0zLqyI34o5zZYioVEZVBh3JT4HU64U0jJ
+	 Oov1rFiBDlLPis1f85Gt9xRweWv6TcKzFttms7mC9spFsgk909MUVuqsjVbzJJh3j27YR
+	 Yo6tS7xtt4M853XM1/q9Q6J4HCy9PjZSKEIk8NwPn4nnb7P48hCdfcap9jpyVBKpXJg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791967684;
-	bh=9FTXtPIYYmSfgfdSnZ8evLeSo5wEIlHgi2+MmtN9nto=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791968830;
+	bh=B2Boo0YZ5qBedDweRvgQXwo9K2GgSBhYMW2yOMrODzI=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=U0HgKI2RUxDVV+2V72ReujprhIyCdcibZpBQDviWSt1W6DjxKio7sdtejWSKsgjFJ
-	 6CZF+fP9UjPykyivxZjQ88loGBtPjG8X/A1sqHatVAeEZ7+KjlodvteeNgm67iDgTr
-	 Re4TpDMIgPcLd0ibITEUtHF7yM6qLpRtMukVF9gC8V33iNtkYvPGQv+TaeIi06Cz1f
-	 VSVWrC1X/P1gfq3ozHSDBFzlyHr6+IQVwUtWFM+R3+yjngaxdV6f+KKrCZvb2QfqT4
-	 c4BEAOqxXWPskLywZ7pfhlF5agsI4/o1CMF27/bb9cm8zWWwDbaBing7VDMucyYOnm
-	 WFjUNpHlGou1w==
+	b=WuuHI+Qr3tJbzg/zkPsYRbGm3L+447NZTgdQYF+/K4R5vmobZYtC/2RomEu5kiW2x
+	 AG/do26a3+hfNqHJ1OZwo8zRR7pDCKGMSAuBjfT5+PRtKxOalnODNRgy2ng7SU3Zkt
+	 iD6vaMNxkjZUIVkemOOAk+gXCDOeFwYi50CeW+iix25yR/o15nLI30kDIZTPAxjyfr
+	 EkBbuQyhfwKggOmDrtoH1q0lcgOZZ9odAJ/wTVd4FroSP+doOMXtLAA0ZWuh5KdKc7
+	 bUwdsueK7hVMR+Xcm1xLTPr+kopf4Sw4BMUb7aJ7vbag71NoooZSsdrw3UL04SqlN9
+	 DQ4CytdBFxHvA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9C8D0405B0;
-	Wed, 14 Oct 2026 08:48:04 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 65EAA255
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 08:48:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CB83380BD1;
+	Wed, 14 Oct 2026 09:07:10 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 097B91518
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 09:07:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 57A0C607EC
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 08:48:03 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 06C4B400E5
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 09:07:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uEEQhrvZVnlx for <u-boot@lists.u-boot-project.org>;
- Wed, 14 Oct 2026 08:48:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4ED086079F
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=84.16.66.173
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791967682;
- b=pBXWLZ/Ok+NEDSBzBq6CZw1b2v4ieZr7B6NdWG6CVrnWYBM6GpvZETVh9hmEztPQwoBE
- KmseYejzgEeGk92VupJSXUwMrcP+4ZLBTbPUZQEh6yV7J71Q3snrTuH6NYLGnHX5nF/+X
- h7/9Ky8TSKnwfwuhl2vfFzQyL6ox6L9PCkpxs7GDDRAlSjEgvv4IHrp9Qsm3P7mfvhWyj
- jcEWUN/zij7rrwKfGUmygHZzJjNv6afUXX2fTNNL31YhIWFyFAvf4nXoGkaBvRKw45zss
- AvG/WbPPfU2Z4hP74MyMhu5RILpPhvFdl1PLDQfsiKFXGymtRjwyiefo2VlzLDUZOIA==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id HtfI5FmDiOrc for <u-boot@lists.u-boot-project.org>;
+ Wed, 14 Oct 2026 09:07:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5F45040080
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=172.234.252.31
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791968828;
+ b=pqtd9rXhMvHdbLlaBgQhahoAj8cO7FGbTVHIXm1y6iUD3EWlP/O6mg3DKl9PVDS33mrZ
+ 3OfByaDhqpyp5KPMRCJidDzXXdwQRHCnO+4DcsEshzM4VFNkUwQrDePeMLJ4WIjPwqVTh
+ L1IL+/iWA4VxB6+65YcpFhpMZ5V4sU1qI1noxtOJo2BnQUF2gOrVrUUvMkfK3rC/UB+FJ
+ Kq28QdsfDT0zNNSwpzGiLjC/TpN3U8KFtZojC0ZZIGafRtLPBAWrwfhLHIZC3ctXBkecD
+ zDkho/0GT76gDHyXl+pZ5hG7C1Mdkdz9Jlj38YLmOaekLRApRnDUgFVWmlaYtrjXjiA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791967682;
- h=Received-SPF:Received:DKIM-Signature:Received:Message-ID:Date:
- MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
- From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- X-Infomaniak-Routing;
- bh=9FTXtPIYYmSfgfdSnZ8evLeSo5wEIlHgi2+MmtN9nto=;
- b=Z/uGVyGjpjr2RwmUWyKMiBvM4J0OJRPYY0JkqVAjfIvge1NnWopSoNj5eZUnY2ts7Ve6
- P343wRR9mAxQ2Fi7h3SqSE/zzXSKE+3j+bfJYZ9RyJjVjETG5tVl5nInKsXAtEwtYxKrG
- U16GHGFU/0S2DGwc8FR3L7M2vECwl5pn/ML3rhgM4/uVHz+nyuugjbgHbBvCamXxJmSBR
- BElgeivbAfMcQT9joYYp3+7hEhzjS8BU3qT/3F2ghE1YqavKctgQ3ZJNQHOs5zhr6Cdgc
- 4VqH+MByjfrqXkP8JtLtOyZJZ0gLL7yEa3r3dr6ZSi06LJ2+q+W03njPaOh7ROk9MVQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=0leil.net;
- dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=LM1dbCuJ; 
- arc=none smtp.remote-ip=84.16.66.173
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=84.16.66.173;
- helo=smtp-42ad.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
+ c=relaxed/relaxed; t=1791968828;
+ h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
+ In-Reply-To:References:Date:Message-ID:MIME-Version:Content-Type:
+ Content-Transfer-Encoding;
+ bh=B2Boo0YZ5qBedDweRvgQXwo9K2GgSBhYMW2yOMrODzI=;
+ b=ckvehcDBTATmPW6afuZ74MdzftJL66Z8yOFU/mwSlZ4/z/7qpaz2a5fhzJDeq44Uo6Fp
+ nwV5/aiyThrZQbw9X7i3B1K5mYfgw9Ph0Alk7FYgZLuJvh8iLLihaZ4+G+Y59ITL6wqL3
+ c7ozrazoE+hxlUJkRsl4bv8KYpF67Ki+zfobEh2C5n9mqyh2kJ7HB9fYX7g49lXcVC050
+ TRo4YWgB6WAYW3H5OUsBoOXa9lzpp+fVSV7gvlwcyHnLQ3nlXeeDm4nqNzO0N5IGsHSMy
+ uakfRHAFE9e0Ei9rcstK/YxksKGrNA3ucxcQPaK6NQQavg2SOo+uCwgMzQuPkmzr57w==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ dmarc=pass header.from=kernel.org;
+ dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=e7EUpnBI; 
+ arc=none smtp.remote-ip=172.234.252.31
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
+ helo=sea.source.kernel.org; envelope-from=mkorpershoek@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=LM1dbCuJ
-Received: from smtp-42ad.mail.infomaniak.ch (smtp-42ad.mail.infomaniak.ch
- [84.16.66.173])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4ED086079F
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 08:48:00 +0000 (UTC)
-Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
- [10.4.36.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4j4Pws2grDzBwV;
- Wed, 14 Oct 2026 10:47:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1791967677;
- bh=9FTXtPIYYmSfgfdSnZ8evLeSo5wEIlHgi2+MmtN9nto=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=LM1dbCuJrbhX3aZ+3v4q1cnySBZ6v+bvMXdy1D2gamb9rtycmlSvQ6PkAg/ZX5rcR
- wi1O9cYsZ0hOTqhMkibGDsebfTmhUel9eDFavYw+mp5/NTJLQpqbCb8gCLjxkLqZgG
- alOlj9q9ILRfnFraoQWaqayF2faqLrY2ZeLq785Emkmk3Ipv7TV8ZMYHv+Ezo0YuU1
- Gx735Bkab/pprWitAZJ8NZSM/D3u0r6aD/QtFLFcittwKMID5qE2+RTUTJ9PUpBZf4
- DxoehWhMDH0HVnZw8sAeiDHCl9wc8rTL/06vaKPElrmZ7A1epDQselMOP70CaDLpiF
- Ufji9EyRiE4RA==
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4j4Pwr0WFBzRw5; Wed, 14 Oct 2026 10:47:55 +0200 (CEST)
-Message-ID: <4b42f4e7-4555-4f6e-927f-92e2d93652e9@0leil.net>
-Date: Wed, 14 Oct 2026 10:47:55 +0200
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=e7EUpnBI
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5F45040080
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 09:07:07 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 326E243C38;
+ Wed, 14 Oct 2026 09:07:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 730941F00893;
+ Wed, 14 Oct 2026 09:07:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1791968827;
+ bh=B2Boo0YZ5qBedDweRvgQXwo9K2GgSBhYMW2yOMrODzI=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=e7EUpnBI7Av5viIMxd5X6FCT55ZK2iMgFrWw/mGDvhE99igYidyQ1Djo2IjH5Q4fx
+ hkoWMbO1hGp25iR3xSnojH6nGp3HI7P5NeclmGbT9rAyqry3lbBfv67AA/tGjDMirE
+ hCiXtaTfgIEwxBsPR1FFhLBsPVNktoxsWJk7gQi205I7A39zH/uIiXp120UvEpSonj
+ Lvj1f1chTmEUA8L0eZ4KRkzHaT+zHJ5pPRLMKaWITTQRn737yJtQVbUID6o/sAbRDQ
+ g/+rgZi9SG6H9zcDIR2dLhn4VSBeYGP1ZJ7nFH6sqTLZuw7TliPKN8ZmAZllC7BSTH
+ ffwX9zJfKgYaQ==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>, Jan Kehren
+ <jan.kehren@emteria.com>
+Cc: u-boot@lists.u-boot-project.org, igor.opaniuk@gmail.com,
+ sjg@chromium.org, trini@konsulko.com
+Subject: Re: [PATCH v2 2/2] avb: Take a storage interface in the AVB operations
+In-Reply-To: <xhkdbbj8w7mcn.fsf@mkorpers-koolstof.csb>
+References: <20260915145629.995499-1-jan.kehren@emteria.com>
+ <20261006092732.3577974-1-jan.kehren@emteria.com>
+ <20261006092732.3577974-3-jan.kehren@emteria.com>
+ <CAPzfCAah3xwR67hjz9Mi2E9CG-zcRj=Cdj8E55cH-0fiPA-XOw@mail.gmail.com>
+ <xhkdbbj8w7mcn.fsf@mkorpers-koolstof.csb>
+Date: Wed, 14 Oct 2026 11:07:04 +0200
+Message-ID: <xhkdb8q407irr.fsf@mkorpers-koolstof.csb>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/9] ram: rockchip: rk3568: Simplify get_info() ops
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, u-boot@lists.u-boot-project.org
-References: <20260804105721.2402406-1-jonas@kwiboo.se>
- <20260804105721.2402406-2-jonas@kwiboo.se>
- <f2a4bf52-8532-4f57-9354-1d2a3e33d875@0leil.net>
- <973f0112-e7f7-4cfa-bc01-2e0328592fad@kwiboo.se>
- <4ddd7d43-d5ab-45df-8823-1833d26a793c@0leil.net>
- <d6dd6077-dec9-404e-a48a-8231d483cbbb@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <u-boot@0leil.net>
-In-Reply-To: <d6dd6077-dec9-404e-a48a-8231d483cbbb@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -153,263 +146,534 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Jonas,
+On Wed, Oct 14, 2026 at 09:49, Mattijs Korpershoek <mkorpershoek@kernel.org=
+> wrote:
 
-On 10/13/26 10:46 PM, Jonas Karlman wrote:
-> Hi Quentin,
-> 
-> On 10/13/2026 1:04 PM, Quentin Schulz wrote:
->> Hi Jonas,
+> Hi Igor, Jan,
+>
+> On Tue, Oct 13, 2026 at 17:31, Igor Opaniuk <igor.opaniuk@oss.qualcomm.co=
+m> wrote:
+>
+>> Hi Jan,
 >>
->> On 10/9/26 5:47 PM, Jonas Karlman wrote:
->>> Hi Quentin,
+>> On Tue, Oct 6, 2026 at 3:00=E2=80=AFPM Jan Kehren <jan.kehren@emteria.co=
+m> wrote:
 >>>
->>> On 10/9/2026 12:29 AM, Quentin Schulz wrote:
->>>> Hi Jonas,
->>>>
->>>> On 8/4/26 12:57 PM, Jonas Karlman wrote:
->> [...]
->>>> 1) I would really like to avoid hardcoding stuff. Did you try using
->>>> syscon_regmap_lookup_by_phandle(dev, "rockchip,grf"); after adding a
->>>> rockchip,grf = <&pmugrf>; property to the dmc node? (maybe it'd make
->>>> sense to name the property rockchip,pmugrf but that's a detail). I also
->>>> see benefit in being consistent across all drivers using the GRF when DM
->>>> is enabled. One issue I could foresee is that this typically will be
->>>> part of the TPL once we have an open DRAM init, and then we don't have
->>>> DM in TPL so we won't be able to read the device tree to get GRF via
->>>> that property. Is this your current worry?
->>>
->>> I agree that we should avoid hardcoding stuff in general, with the CRU,
->>> RAM and arch_cpu_init()+board_debug_uart_init() in xPL as exceptions.
->>>
->>> Those are that core parts that typically may be needed in xPL, where
->>> size and speed is important and/or DM or OF_PLATDATA may or may not be
->>> involved.
->>>
->>> Resolving values from DT has been proven to be very very slow in xPL
->>> and pre-relocation phases, primarily due to slow API for navigating
->>> nodes.
->>>
->>> I also cannot understand why we should need to waste multiple CPU cycles,
->>> energy and code size on resolving a fixed known constant value that
->>> never is going to change. So no I have not nor do I plan to try and use
->>> any DT lookup here ;-)
->>>
+>>> AVB assumed its partitions were on mmc: avb_ops_alloc() took a bare dev=
+ice
+>>> number and get_partition() called find_mmc_device(). bootmeth_android
+>>> accepts any bootdev but passes only desc->devnum, so an Android bootflow
+>>> found on nvme 0 or usb 0 is verified against mmc 0.
 >>
->> OK so I'm going to push this even further. Why do we even need a driver
->> for this?
+>> I don't think this path can be reached today: android_check() rejects
+>> every non-mmc bootdev through bootflow_iter_check_mmc(), and
+>> android_read_bootflow() loads the BCB with
+>> bcb_find_partition_and_load("mmc", ...).
 >>
->> I've been bothered for a long time by this DMC node not being described
->> in the bindings and nobody bothering to upstream it. Now that I've
->> looked a bit into it, I think except rk3288 and rk3399 (due to
->> Chromebooks), they all serve no real purpose once we are out of the xPL
->> stage that actually initializes the DRAM, they just report whatever size
->> the DRAM controller reports, by directly reading some register.
-> 
-> Correct, and to be technical the register is also only used as a way to
-> pass DRAM info from TPL (or vendor blob) to the next phases, for open
-
-Ugh, I had completely missed that.
-
-> DRAM init we could use something else, e.g. a bloblist or similar to
-> pass this information along to SPL and/or U-Boot proper. However, for
-> vendor blob we have the register and for newer blobs we also have some
-> information passed as rk atags.
-> 
-
-Even if we have an open DRAM init, I believe we should still support the 
-blob because it's useful at the very least to compare behavior between 
-the two in case we need to debug something later on. Once detected, 
-can't we simply use the global pointer (aka gd) instead of having this 
-ram_get_info() abstraction?
-
->> I would essentially remove all DMC nodes whose driver do not actually do
->> anything with the Device Tree, then remove the compatible from the
->> driver since we don't need it to probe the RAM driver. I hope the DRAM
->> driver still probes without a compatible (there for sure is some
->> mechanism as DM-less TPL can probe the DRAM driver just fine for the
->> SoCs for which we have an open DRAM init). Then it's clear there is no
->> mix between DT and non-DT logic.
->> But maybe we could push even more, and delete the part of the DMC driver
->> that does nothing but report the size and base of the DRAM. We can move
->> this code to arch/arm/mach-rockchip/ for example with a weak function
->> that we need to implement for each SoC. Then we would be left with DMC
->> drivers that actually do DRAM initialization (if there's an open DRAM
->> init!), and not something completely different when it's in a different
->> stage. We likely would need to know when we can then call
->> uclass_get_device(UCLASS_RAM,...) and expect it to work (I guess
->> CONFIG_IS_ENABLED(RAM)?), e.g. in arch/arm/mach-rockchip/tpl.c and
->> arch/arm/mach-rockchip/sdram.c. ram_get_info() can then be replaced with
->> this new weak SoC-specific function.
+>> So the bootmeth hunk below is right, but it does not change behaviour ye=
+t.
+>> The user that does benefit is "avb init <interface> <dev>", e.g.
+>> board/armltd/total_compute/total_compute.env, which has been calling
+>> "avb init ${blk_dev} 0" since 2024 and gets a usage error on next. Could
+>> you reword the motivation along those lines and mention total_compute?
 >>
->> Does this make sense? What do you think?
-> 
-> For some parts it make sense, however not if we want to try and follow
-> driver model or want to be able to one day support multiple SoCs using
-> a single U-Boot proper build (using existing building blocks).
-> 
-> We could even fully change how xPL pass DRAM info to next phase, however
-> that would likely break mixing vendor DRAM init or SPL with mainline
-> U-Boot proper, so may not be ideal if we want to keep backward
-> compatibility with vendor blobs. One option could possible be to read
-> register in SPL and pass information to U-Boot proper using a bloblist.
-> 
-
-Considering dram_init() from arch/arm/mach-rockchip/sdram.c sets 
-gd->ram_base and gd->ram_size based on information from the DRAM (DMC) 
-driver, we could simply use the gd in U-Boot proper.
-
-I think we will need to support the blob forever, but that should be 
-easy to detect as ROCKCHIP_TPL needs to be set. I would prefer if we 
-used the same logic but I think we need to find a compromise at some 
-point between having nice and useful features and supporting a blob we 
-have no control over. Clearly documenting that one could use this or 
-that feature only when using open TPL could be fine. I don't have a 
-mental model right now on what would be acceptable or not.
-
-> For TPL only doing DRAM init I fully buy that we do not really need DM
-> and it is enough to call a sdram_init(), similar to what we do on PX30.
-> This is even the pattern I have done for bare minimal TPL testing on
-> RK35xx SoCs in my work-in-progress rk3562 branch. However, there the
-> sdram "driver" only export sdram_init() in TPL and works as the dummy
-> DM driver for SPL/proper.
-> 
-
-Yeah, I'm thinking we don't need the latter. I'm not sure a DM-able DMC 
-driver in TPL makes sense (I guess this would only be possible with 
-TPL_OF_PLATDATA though).
-
-> For reading DRAM info in SPL, it could easily be a weak SoC-specific
-> function. However, if we dream of a shared U-Boot proper binary for
-> multiple SoCs, any use weak SoC-specific functions could likely make
-
-I know Barebox has done this but I haven't had the time to look at how 
-they handle SoC/board-specific code. Likely 
-root-device-tree-compatible-based like you say a few lines under? I 
-think this would be nice, I just don't know how far away we are.
-
-> that harder. As long as we keep board or SoC specific functions out of
-> U-Boot proper this is something that theoretically should be possible.
-> If we need to do something board/SoC specific, we could possible use
-> something that is matched on board/soc compatible.
-> 
-
-How about making SPL write to gd->ram_size/ram_base and use that in 
-U-Boot only?
-
-> If we in future end up passing DRAM info to U-Boot proper using a SoC
-> agnostic way, use of current read register RAM drivers would really be
-> completely unnecessary.
-> 
-> When it comes to the DMC node, we could possible instead bind the driver
-> to root-node or something similar, however root-node is currently not
-> being matched to any driver using compatible, so not sure how feasible
-> that would be.
-> 
-
-Not *more* hacks please :D If I had to pick between a U-Boot-only DMC 
-node and reusing the root node, I pick the former 100% of the time.
-
-> Reducing complexity of the read register driver and keeping an awkward
-> DMC node is at least something that has been proven to work ;-)
-> >>
->>>>
->>>> 2) why rename to match the compatible? What really matters is that they
->>>> are unique across the whole U-Boot code base. I don't see really the
->>>> benefit, but if it scratches an itch, I could see one commit that
->>>> renames all Rockchip DRAM drivers to be consistently named
->>>> rockchip_<soc>_dmc. Not a blocker.
 >>>
->>> The rename is "for possible use with OF_PLATDATA". With OF_PLATDATA the
->>> driver is looked up using a DT compatible to driver name mapping.
+>>> Carry a uclass id alongside the device number and resolve the block dev=
+ice
+>>> with blk_get_devnum_by_uclass_id(), keeping mmc_init() and the hardware
+>>> partition switch on the mmc path only. "avb init <dev>" still means mmc,
+>>> "avb init <interface> <dev>" selects another bus, and both now look the
+>>> device up before allocating. get_boot_interface() returns UCLASS_INVALID
+>>> without ops, so a caller that skipped "avb init" fails rather than read=
+ing
+>>> mmc.
 >>>
+>>> Signed-off-by: Jan Kehren <jan.kehren@emteria.com>
+>>> ---
+>>> Changes in v2:
+>>> - Split: the renames moved to the preceding patch
+>>> - Put the "avb init <dev>" comment on the branch it describes, by testi=
+ng
+>>>   argc =3D=3D 2 rather than argc =3D=3D 3
+>>> - Drop the single-use part_num and move the user-area comment next to
+>>>   mmc_switch_part()
+>>>
+>>>  boot/bootmeth_android.c                |  2 +-
+>>>  cmd/avb.c                              | 24 ++++++---
+>>>  common/Kconfig                         |  7 ++-
+>>>  common/avb_verify.c                    | 71 +++++++++++++++++---------
+>>>  doc/android/avb2.rst                   |  7 ++-
+>>>  include/avb_verify.h                   | 26 +++++++---
+>>>  test/py/tests/test_android/test_avb.py | 28 ++++++++++
+>>>  7 files changed, 127 insertions(+), 38 deletions(-)
+>>>
+>>> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+>>> index 0db08d4f86..ae05c08488 100644
+>>> --- a/boot/bootmeth_android.c
+>>> +++ b/boot/bootmeth_android.c
+>>> @@ -443,7 +443,7 @@ static int run_avb_verification(struct bootflow *bf=
+low)
+>>>         bool unlocked =3D false;
+>>>         int ret;
+>>>
+>>> -       avb_ops =3D avb_ops_alloc(desc->devnum);
+>>> +       avb_ops =3D avb_ops_alloc(desc->uclass_id, desc->devnum);
+>>>         if (!avb_ops)
+>>>                 return log_msg_ret("avb ops", -ENOMEM);
+>>>
+>>> diff --git a/cmd/avb.c b/cmd/avb.c
+>>> index 8fbd48ee5a..4c1f56a33a 100644
+>>> --- a/cmd/avb.c
+>>> +++ b/cmd/avb.c
+>>> @@ -16,17 +16,28 @@ static struct AvbOps *avb_ops;
+>>>
+>>>  int do_avb_init(struct cmd_tbl *cmdtp, int flag, int argc, char *const=
+ argv[])
+>>>  {
+>>> -       unsigned long mmc_dev;
+>>> +       struct blk_desc *desc;
+>>>
+>>> -       if (argc !=3D 2)
+>>> +       if (argc < 2 || argc > 3)
+>>>                 return CMD_RET_USAGE;
+>>>
+>>> -       mmc_dev =3D hextoul(argv[1], NULL);
+>>> +       /* "avb init <dev>" keeps its old meaning of mmc <dev> */
+>>> +       if (argc =3D=3D 2)
+>>> +               desc =3D blk_get_devnum_by_uclass_id(UCLASS_MMC,
+>>> +                                                  hextoul(argv[1], NUL=
+L));
+>>> +       else
+>>> +               desc =3D blk_get_devnum_by_uclass_idname(argv[1],
+>>> +                                                      hextoul(argv[2],=
+ NULL));
+>>> +
 >>
->> I only see very old SoCs using that. SPL_OF_PLATDATA is only enabled for
->> the RK3288 Chromebooks, MK808 (rk3066) and Rock (RK3188).
->> TPL_OF_PLATDATA is enabled for PX5 (RK3368), RK3288, RK3328 and RV1126
->> (ok this one's not so old :) ). Do you have anything in mind related to
->> OF_PLATDATA? I just read doc/develop/driver-model/of-plat.rst and the
->> caveats section is scary.
-> 
-> I know OF_PLATDATA is scary and I would avoid it when possible. Mostly
-> just want to make it possible for use in case the open TPL for RK3568
-> may need it, and also the driver name not matching device name and/or
-> compatible is bugging me ;-)
-> 
-
-OK, that's fine with me, in a separate commit explaining that. Is this 
-something we should do for all drivers (at least the ones used by 
-Rockchip)? I guess for drivers that have multiple compatibles, we should 
-have a DM_DRIVER_ALIAS() for each entry in the list. Wondering if 
-there's any way to automate that (maybe Coccinelle?) to make sure we 
-don't miss new ones if and once the migration is done. Thinking aloud, 
-not a request from me to do this.
->>>>
->>>> 3) What is removing probe+priv_auto helping with? We now need to call
->>>> rockchip_sdram_size for each call to ram_get_info(), which we only have
->>>> one so it's not such a big deal but it's still a bit odd to me when the
->>>> DRAM isn't going to change between calls (so somewhat joining Simon on
->>>> the caching thing that's done here before your patch)
->>>
->>> Simons concern where mostly related to caching the base address from DT,
->>> not really related to caching the RAM size, if I understood correctly.
->>>
->>> As mentioned in commit message, to simplify the driver. There is really
->>> no need to do an extra malloc for priv data or pre-calculate DRAM size
->>> at probe() time. Also to align with the RAM drivers that was added later
->>> i.e. rk3576, rk3528 and rk3506. And that I have prepared for rk3562,
->>> rv1126b, rv1106, rv1103b, rk3538 and rk3572 in [2] ;-).
->>>
+>> This up-front lookup is what breaks the existing sandbox tests: with the
+>> series, test_avb_verify, test_avb_read_rb, test_avb_is_unlocked,
+>> test_avb_persistent_values and the new test_avb_init_interface fail with
 >>
->> Separate commit please, with its own justification, but fine with me on
->> the reasoning.
-> 
-> Spiting this into following seem reasonable to me:
-> - ram: rockchip: <soc>: Simplify get_info() ops
-> - ram: rockchip: <soc>: Use a constant for the PMUGRF base
-> - ram: rockchip: <soc>: Rename driver to support xPL_OF_PLATDATA
-> 
-
-Works for me.
-
+>>   Can't map file 'mmc1.img': Invalid argument
+>>      sandbox_mmc_probe() mmc1: Unable to map file 'mmc1.img'
+>>   Can't find the requested device
 >>
->>> On a technical side; to simplify and prepare for possible future DRAM
->>> init. We typically need two completely different parts from the RAM
->>> driver depending on what phase is running.
->>>
->>> During DRAM init (in TPL or possible SPL for older SoCs) we only need to
->>> initialize DRAM and write encoded DRAM info to OS_REGx, before returning
->>> to BROM.
->>>
->>> During next xPL phase and in proper we typically only need to read and
->>> decode the DRAM info from the same OS_REGx.
->>>
->>> To keep the driver as simple as possible we only need to implement
->>> following ops to help keep the complexity low:
->>>
->>> .probe = init DRAM in TPL and do nothing in remaining phases
->>> .get_info = return the decoded DRAM size
->>>
->>> And for size constrained targets the entire driver could be replaced
->>> with a size optimized sdram_init() function in TPL.
->>>
+>> while next gives 4 passed, 2 skipped for test_avb.py.
 >>
->> Circling back to what I suggested earlier in this mail, I'm not sure the
->> next xPL phase/proper part of the driver really makes sense to me. It's
->> like a massive overhead for what is essentially a call to one function
->> with one base register address.
-> 
-> I fully agree, and this is one of the reasons I really do not like
-> current DM lookup of a GRF/SYSCON udevice just to get the reg address to
-> do a simple readl(). A lot of plumbing for a very simple and
-> deterministic task.
-> 
-> With this I at least think we remove some of that unnecessary plumbing,
-> and we are just left with a bare minimum driver model wrapper that
-> likely can be stripped away in future.
-> 
+>> Sandbox mmc1 has no backing image when these tests run
+>> (test_android/ is collected before the tests that create mmc images),
+>> and most of them only talk to the sandbox TA, so they never needed
+>> the device before. Would you consider keeping
+>> "avb init" lazy: validate the interface name here, store uclass + number,
+>> and let get_partition() resolve the device on first access as before?
+>>
+>> That keeps the old semantics, and a missing device is still reported, by
+>> the first partition access. Alternatively the tests would need to create
+>> mmc1.img first.
+>
+> Indeed, the sandbox tests fail on u-boot-dfu here:
+> https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/jobs/113402
+>
+> Before applying this series:
+> https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/jobs/113085
+>
+> I will have a look. I do have a preference for the mmc1.img to be
+> created in the tests first but I don't know if that's feasible.
 
-Agreed.
+I've had a look. It's not impossible to do so, but the avb test as of
+today are buggy: some tests, such as test_avb_verify() use
+assert response.find(success_str) which is wrong.
 
-Cheers,
-Quentin
+We should use 'assert response.find(success_str) !=3D -1'.
+
+I will send a fix for this, but that also requires modifying the tests
+and actually providing a valid mmc.img that contains a vbmeta partition
+and a boot partition.
+
+Since the above is not trivial, I'd like this patch to be reworked as
+Igor suggested.
+
+Jan, can you please work on a v3 which keeps the old "lazy" init ?
+
+Please also address the other (valid) remarks from Igor and the same
+time.
+
+Thanks!
+Mattijs
+
+>
+> If I can't find a way for this, then we will have to rework this patch
+> as Igor suggested: (Keep the old behaviour: "lazy" init in "avb init")
+>
+>>
+>>
+>>> +       if (!desc) {
+>>> +               printf("Can't find the requested device\n");
+>>> +               return CMD_RET_FAILURE;
+>>> +       }
+>>>
+>>>         if (avb_ops)
+>>>                 avb_ops_free(avb_ops);
+>>>
+>>> -       avb_ops =3D avb_ops_alloc(mmc_dev);
+>>> +       avb_ops =3D avb_ops_alloc(desc->uclass_id, desc->devnum);
+>>>         if (avb_ops)
+>>>                 return CMD_RET_SUCCESS;
+>>>         else
+>>> @@ -428,7 +439,7 @@ int do_avb_write_pvalue(struct cmd_tbl *cmdtp, int =
+flag, int argc,
+>>>  }
+>>>
+>>>  static struct cmd_tbl cmd_avb[] =3D {
+>>> -       U_BOOT_CMD_MKENT(init, 2, 0, do_avb_init, "", ""),
+>>> +       U_BOOT_CMD_MKENT(init, 3, 0, do_avb_init, "", ""),
+>>>         U_BOOT_CMD_MKENT(read_rb, 2, 0, do_avb_read_rb, "", ""),
+>>>         U_BOOT_CMD_MKENT(write_rb, 3, 0, do_avb_write_rb, "", ""),
+>>>         U_BOOT_CMD_MKENT(is_unlocked, 1, 0, do_avb_is_unlocked, "", ""),
+>>> @@ -464,7 +475,8 @@ static int do_avb(struct cmd_tbl *cmdtp, int flag, =
+int argc, char *const argv[])
+>>>  U_BOOT_CMD(
+>>>         avb, 29, 0, do_avb,
+>>>         "Provides commands for testing Android Verified Boot 2.0 functi=
+onality",
+>>> -       "init <dev> - initialize avb2 for <dev>\n"
+>>> +       "init [<interface>] <dev> - initialize avb2 for hex <dev> on <i=
+nterface>\n"
+>>> +       "    (mmc, nvme, usb, ...; defaults to mmc)\n"
+>>>         "avb read_rb <num> - read rollback index at location <num>\n"
+>>>         "avb write_rb <num> <rb> - write rollback index <rb> to <num>\n"
+>>>         "avb is_unlocked - returns unlock status of the device\n"
+>>> diff --git a/common/Kconfig b/common/Kconfig
+>>> index c739225621..5590fbfdb2 100644
+>>> --- a/common/Kconfig
+>>> +++ b/common/Kconfig
+>>> @@ -885,9 +885,14 @@ config AVB_VERIFY
+>>>           This option enables compilation of bootloader-dependent opera=
+tions,
+>>>           used by Android Verified Boot 2.0 library (libavb). Includes:
+>>>           * Helpers to process strings in order to build OS bootargs.
+>>> -         * Helpers to access MMC, similar to drivers/fastboot/fb_mmc.c.
+>>> +         * Helpers to access block devices, similar to
+>>> +           drivers/fastboot/fb_mmc.c.
+>>>           * Helpers to alloc/init/free avb ops.
+>>>
+>>> +         Only mmc is initialised by AVB itself. Any other interface mu=
+st
+>>> +         already be enumerated when AVB runs, either by the board code=
+ or by
+>>> +         a command such as "usb start".
+>>> +
+>>>  if AVB_VERIFY
+>>>
+>>>  config AVB_BUF_ADDR
+>>> diff --git a/common/avb_verify.c b/common/avb_verify.c
+>>> index fc29433c3c..b898ebb78f 100644
+>>> --- a/common/avb_verify.c
+>>> +++ b/common/avb_verify.c
+>>> @@ -8,6 +8,7 @@
+>>>  #include <cpu_func.h>
+>>>  #include <image.h>
+>>>  #include <malloc.h>
+>>> +#include <mmc.h>
+>>>  #include <part.h>
+>>>  #include <tee.h>
+>>>  #include <tee/optee_ta_avb.h>
+>>> @@ -386,44 +387,68 @@ static unsigned long avb_blk_write(struct avb_blk=
+_part *part, lbaint_t start,
+>>>                           start, sectors, tmp_buf);
+>>>  }
+>>>
+>>> -static struct avb_blk_part *get_partition(AvbOps *ops, const char *par=
+tition)
+>>> +static int avb_init_mmc(int dev_num)
+>>>  {
+>>> +       struct mmc *mmc;
+>>>         int ret;
+>>> -       u8 dev_num;
+>>> -       int part_num =3D 0;
+>>> -       struct avb_blk_part *part;
+>>> -       struct blk_desc *blk;
+>>> -
+>>> -       part =3D malloc(sizeof(struct avb_blk_part));
+>>> -       if (!part)
+>>> -               return NULL;
+>>>
+>>> -       dev_num =3D get_boot_device(ops);
+>>> -       part->mmc =3D find_mmc_device(dev_num);
+>>> -       if (!part->mmc) {
+>>> +       mmc =3D find_mmc_device(dev_num);
+>>> +       if (!mmc) {
+>>>                 printf("%s: no MMC device at slot %x\n", __func__, dev_=
+num);
+>>> -               goto err;
+>>> +               return -ENODEV;
+>>>         }
+>>>
+>>> -       ret =3D mmc_init(part->mmc);
+>>> +       ret =3D mmc_init(mmc);
+>>>         if (ret) {
+>>>                 printf("%s: MMC initialization failed, err =3D %d\n",
+>>>                        __func__, ret);
+>>> -               goto err;
+>>> +               return ret;
+>>>         }
+>>>
+>>> -       if (IS_MMC(part->mmc)) {
+>>> -               ret =3D mmc_switch_part(part->mmc, part_num);
+>>> +       if (IS_MMC(mmc)) {
+>>> +               /* Select the user area, where the GPT and our images l=
+ive */
+>>> +               ret =3D mmc_switch_part(mmc, 0);
+>>>                 if (ret) {
+>>>                         printf("%s: MMC part switch failed, err =3D %d\=
+n",
+>>>                                __func__, ret);
+>>> -                       goto err;
+>>> +                       return ret;
+>>>                 }
+>>>         }
+>>>
+>>> -       blk =3D mmc_get_blk_desc(part->mmc);
+>>> +       return 0;
+>>> +}
+>>> +
+>>> +static struct avb_blk_part *get_partition(AvbOps *ops, const char *par=
+tition)
+>>> +{
+>>> +       enum uclass_id uclass_id;
+>>> +       struct avb_blk_part *part;
+>>> +       struct blk_desc *blk;
+>>> +       int dev_num;
+>>> +       int ret;
+>>> +
+>>> +       part =3D malloc(sizeof(struct avb_blk_part));
+>>> +       if (!part)
+>>> +               return NULL;
+>>> +
+>>> +       dev_num =3D get_boot_device(ops);
+>>> +       uclass_id =3D get_boot_interface(ops);
+>>> +       if (uclass_id =3D=3D UCLASS_INVALID || dev_num < 0) {
+>>> +               printf("%s: no storage interface, run 'avb init' first\=
+n",
+>>> +                      __func__);
+>>> +               goto err;
+>>> +       }
+>>> +
+>>> +       if (uclass_id =3D=3D UCLASS_MMC) {
+>>> +               ret =3D avb_init_mmc(dev_num);
+>>> +               if (ret)
+>>> +                       goto err;
+>>> +       }
+>>> +
+>>> +       blk =3D blk_get_devnum_by_uclass_id(uclass_id, dev_num);
+>>>         if (!blk) {
+>>> -               printf("%s: failed to obtain block descriptor\n", __fun=
+c__);
+>>> +               /* Every bus but mmc must already be started when AVB r=
+uns */
+>>> +               printf("%s: no %s device %d, is the bus started?\n", __=
+func__,
+>>> +                      blk_get_uclass_name(uclass_id), dev_num);
+>>
+>> A note for the doc/Kconfig text rather than the code: with the images on
+>> virtio/NVMe/USB and the AVB TA keeping its state in eMMC RPMB, the TA's
+>> first RPMB request becomes the first eMMC access and happens from inside
+>> the supplicant RPC.
+>>
+>> On next that hangs: "avb init virtio 0; avb read_rb 0"
+>> leaves OP-TEE spinning in do_notif, the nested RPMB announcement deadlock
+>> fixed by "optee: do not announce RPMB from within a supplicant RPC"
+>> (currently v2 on the list). Not a bug in this series, but that
+>> configuration only works with that fix, so it may be worth a line in
+>> avb2.rst.
+>>
+>>>                 goto err;
+>>>         }
+>>>
+>>> @@ -433,7 +458,6 @@ static struct avb_blk_part *get_partition(AvbOps *o=
+ps, const char *partition)
+>>>                 goto err;
+>>>         }
+>>>
+>>> -       part->dev_num =3D dev_num;
+>>>         part->blk =3D blk;
+>>>
+>>>         return part;
+>>> @@ -1111,7 +1135,7 @@ __weak AvbIOResult avb_read_root_key_digest(AvbOp=
+s *ops, uint8_t *digest)
+>>>   * AVB2.0 AvbOps alloc/initialisation/free
+>>>   * =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D
+>>>   */
+>>> -AvbOps *avb_ops_alloc(int boot_device)
+>>> +AvbOps *avb_ops_alloc(enum uclass_id uclass_id, int dev_num)
+>>>  {
+>>>         struct AvbOpsData *ops_data;
+>>>
+>>> @@ -1134,7 +1158,8 @@ AvbOps *avb_ops_alloc(int boot_device)
+>>>         ops_data->ops.read_persistent_value =3D read_persistent_value;
+>>>  #endif
+>>>         ops_data->ops.get_size_of_partition =3D get_size_of_partition;
+>>> -       ops_data->mmc_dev =3D boot_device;
+>>> +       ops_data->uclass_id =3D uclass_id;
+>>> +       ops_data->dev_num =3D dev_num;
+>>>
+>>>         return &ops_data->ops;
+>>>  }
+>>> diff --git a/doc/android/avb2.rst b/doc/android/avb2.rst
+>>> index a514701241..cef49d3e0d 100644
+>>> --- a/doc/android/avb2.rst
+>>> +++ b/doc/android/avb2.rst
+>>> @@ -29,6 +29,10 @@ integration in ``common/avb_verify.c`` and the platf=
+orm port under
+>>>
+>>>  For additional details check [1]_.
+>>>
+>>> +Only mmc is started by AVB itself. Any other interface must already be
+>>> +enumerated when AVB runs, either by the board code or by a command suc=
+h as
+>>> +``usb start``, or the partition lookup fails.
+>>> +
+>>>  AVB using OP-TEE (optional)
+>>>  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>>>
+>>> @@ -80,7 +84,8 @@ AVB 2.0 U-Boot shell commands
+>>>  Provides CLI interface to invoke AVB 2.0 verification + misc. commands=
+ for
+>>>  different testing purposes::
+>>>
+>>> -    avb init <dev> - initialize avb 2 for <dev>
+>>> +    avb init [<interface>] <dev> - initialize avb 2 for hex <dev> on
+>>> +        <interface> (mmc, nvme, usb, ...; defaults to mmc)
+>>
+>> This is the behaviour change that bites, see the test comment at the end:
+>> the lookup probes the device (blk_get_device() -> device_probe(), and for
+>> mmc the blk probe runs mmc_init()), whereas "avb init" used to only store
+>> the number. Please at least state that it probes now.
+>>
+>>>      avb read_rb <num> - read rollback index at location <num>
+>>>      avb write_rb <num> <rb> - write rollback index <rb> to <num>
+>>>      avb is_unlocked - returns unlock status of the device
+>>> diff --git a/include/avb_verify.h b/include/avb_verify.h
+>>> index 8c97adbfbf..6dbbb39a8a 100644
+>>> --- a/include/avb_verify.h
+>>> +++ b/include/avb_verify.h
+>>> @@ -7,8 +7,9 @@
+>>>  #define _AVB_VERIFY_H
+>>>
+>>>  #include <../lib/libavb/libavb.h>
+>>> +#include <blk.h>
+>>>  #include <mapmem.h>
+>>> -#include <mmc.h>
+>>> +#include <part.h>
+>>>
+>>>  #define AVB_MAX_ARGS                   1024
+>>>  #define VERITY_TABLE_OPT_RESTART       "restart_on_corruption"
+>>> @@ -24,7 +25,8 @@ enum avb_boot_state {
+>>>
+>>>  struct AvbOpsData {
+>>>         struct AvbOps ops;
+>>> -       int mmc_dev;
+>>> +       enum uclass_id uclass_id;
+>>> +       int dev_num;
+>>>         enum avb_boot_state boot_state;
+>>>  #ifdef CONFIG_OPTEE_TA_AVB
+>>>         struct udevice *tee;
+>>> @@ -33,8 +35,6 @@ struct AvbOpsData {
+>>>  };
+>>>
+>>>  struct avb_blk_part {
+>>> -       int dev_num;
+>>> -       struct mmc *mmc;
+>>>         struct blk_desc *blk;
+>>>         struct disk_partition info;
+>>>  };
+>>> @@ -44,7 +44,7 @@ enum avb_io_type {
+>>>         AVB_IO_WRITE
+>>>  };
+>>>
+>>> -AvbOps *avb_ops_alloc(int boot_device);
+>>> +AvbOps *avb_ops_alloc(enum uclass_id uclass_id, int dev_num);
+>>>  void avb_ops_free(AvbOps *ops);
+>>>
+>>>  /**
+>>> @@ -110,10 +110,24 @@ static inline int get_boot_device(AvbOps *ops)
+>>>         if (ops) {
+>>>                 data =3D ops->user_data;
+>>>                 if (data)
+>>> -                       return data->mmc_dev;
+>>> +                       return data->dev_num;
+>>>         }
+>>>
+>>>         return -1;
+>>>  }
+>>>
+>>> +/* Mirrors get_boot_device(): no ops means no interface, not a default=
+ one */
+>>> +static inline enum uclass_id get_boot_interface(AvbOps *ops)
+>>> +{
+>>> +       struct AvbOpsData *data;
+>>> +
+>>> +       if (ops) {
+>>> +               data =3D ops->user_data;
+>>> +               if (data)
+>>> +                       return data->uclass_id;
+>>> +       }
+>>> +
+>>> +       return UCLASS_INVALID;
+>>> +}
+>>> +
+>>>  #endif /* _AVB_VERIFY_H */
+>>> diff --git a/test/py/tests/test_android/test_avb.py b/test/py/tests/tes=
+t_android/test_avb.py
+>>> index 137d83e1de..4c5b3c6f59 100644
+>>> --- a/test/py/tests/test_android/test_avb.py
+>>> +++ b/test/py/tests/test_android/test_avb.py
+>>> @@ -135,3 +135,31 @@ def test_avb_persistent_values(ubman):
+>>>
+>>>      response =3D ubman.run_command('avb read_pvalue test 12')
+>>>      assert response =3D=3D 'Read 12 bytes, value =3D value_value'
+>>> +
+>>> +
+>>> +@pytest.mark.buildconfigspec('cmd_avb')
+>>> +@pytest.mark.buildconfigspec('cmd_mmc')
+>>> +def test_avb_init_interface(ubman):
+>>> +    """Check that 'avb init' accepts an explicit interface
+>>> +    """
+>>> +
+>>> +    response =3D ubman.run_command('avb init mmc %s' % str(mmc_dev))
+>>> +    assert response =3D=3D ''
+>>
+>> Fails on sandbox for the same mmc1.img reason, see above.
+>>
+>> With the "avb init" behaviour sorted out, the rest works for me:
+>> * "avb init 0" as the first eMMC access, read_rb, is_unlocked and
+>>   "avb verify _a" pass;
+>> * "avb init nvme 0", "avb init mmc 5" and "avb init bogus 0" fail cleanl=
+y;
+>> * with the Android images on virtio only (the eMMC holding just RPMB),
+>>   "avb init virtio 0; avb verify _a" passes, and "avb init 0" on the
+>>   empty eMMC correctly fails to find vbmeta_a;
+>>
+>>> +
+>>> +    response =3D ubman.run_command('avb init %s' % str(mmc_dev))
+>>> +    assert response =3D=3D ''
+>>> +
+>>> +
+>>> +@pytest.mark.buildconfigspec('cmd_avb')
+>>> +def test_avb_init_bad_device(ubman):
+>>> +    """Check that 'avb init' rejects a device that does not exist
+>>> +    """
+>>> +
+>>> +    response =3D ubman.run_command('avb init mmc ff')
+>>> +    assert response.find("Can't find the requested device") !=3D -1
+>>> +
+>>> +    response =3D ubman.run_command('avb init ff')
+>>> +    assert response.find("Can't find the requested device") !=3D -1
+>>> +
+>>> +    response =3D ubman.run_command('avb init nonsense 0')
+>>> +    assert response.find("Can't find the requested device") !=3D -1
+>>> --
+>>> 2.43.0
+>>>
