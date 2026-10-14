@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 070D3C3DA7A
-	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 20:00:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24550CC6B2C
+	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 20:00:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A56FA81022;
-	Wed, 14 Oct 2026 20:00:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E99E340817;
+	Wed, 14 Oct 2026 20:00:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rQqWDJa2oJeb; Wed, 14 Oct 2026 20:00:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9336C81000
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792008031;
-	b=Ireh8rrZ08zKlYMiBZ3dEBEZbByxF3XiFUnalKvDIPbI8dh9iBfBSksxGK5/Tg4zX/Wj
-	 kSBF9dyohQQ3ucHj7NO1V4QQs5ojY6jsm3Rn9qgjHDRcsAjKWMMWliiuMhq/cMS6BsEif
-	 gQBN6I96NovIAmEAIjJkby14aCptIImrNvDQybCcnXbSxc9Hn9KBsTDOLcvluAwNRxOwB
-	 Y6d8/JjEWejaVNlEpk6wiRx57gRyXUJCyMUnG5D3qTqZjoHZcYsGSW80p1a2vi6Atotor
-	 wRnWevtoIeUubeLzk6q4tv9lQsU+pIQ3UWYuyQm7INLFi1PygL14o5rwWz/n8V74mqA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id uhJnn2Hvhbsw; Wed, 14 Oct 2026 20:00:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 346A640806
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792008044;
+	b=qdf//rGJMSgeHPIV3lHAvWvIUhWOF2sVrbs2C9ilhXCieEL/AVj6VIqtKucvSKCrkNlb
+	 NiX5VzxK95JB9gp+HpvLoY4DXZNjhPRGN6291zg3XvajACEom54qkki3vdQSCl7KqJXhe
+	 QxM723aDWMCAdO/BrVXxPyD5hm0ec1m26Y6oJV69bDSap0TTGEadYLwEvnlVDEuWBpqzb
+	 PEVg0kAq2CC/31wmOVxCP2JcO3I9fP0OkQSEOGe/GTtGz/ZkGZmJ/HIUIHzx8wbB0/oRu
+	 OAquFKrkA9tO4Cxgfk2CwwAOklKY3ouKfD8MfOOAh1G3zcGBdJ06ohzHGKCWJ8UVeJg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792008031;
+	c=relaxed/relaxed; t=1792008044;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -31,104 +31,104 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=2Z2jSLWUeLXZHH1en87WfWTduCgBR58rHTjO686gYmM=;
-	b=YKPZGSPEFq7A6ff0eXUSqRGboOjWZ+p+ZPePl9HGp1d5LfNAy9bWQOXKXMEaMJUGJkhB
-	 CjFVD4kh7uP3PO00cWY8i4990WcifaeNn9LbhbTcPN6HDFCFNkxPRm/YOxkgX9n3Brwmj
-	 2mmQ9Qg1miLMJbkxbkeja6m0kyru4LJ/qIJQroXgEZM1NT9TD7bwyXJlVou8o+WVNUyEz
-	 yvK03sDHMEZN2UAwi3bjXe9SFrs4CPtUd2r/W+Ev3sjMBgMLLiw7N6goUYKtMdGiWACiB
-	 P8XuuharXelx53RSddkQOfKJ3nX7JiyKCFSYCK6T2T3KWNvkMc0DezJkbCZnG+66szQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=ROyJbGUfuFmIDqQjK5qqgQS4pQbqnoJXXjKH1h7PPNE=;
+	b=UMkMxJ+9QQCTgACJ5YasRdtqC3Suz8fCoPKZjkDV8dRrpK4RZ/OUmB7Yb9gRkGhK+kuM
+	 +/1y2puDhXWk9g62kzTgZeFJzNFJ+IMMM3ikjjMeG22ANVAWbDpKm6LLBOJhtWAJ3BHKK
+	 BbqFET+h3Q0eLozQGQwM83ZzUJ4g6U2OyAa8BwN9jRyCnAIlXtJNF8X+KcVEeaIIfOq47
+	 Ts1e2NXxUd+lJKtJHw7UBFFRWf/HK7hJZTRkcV9AkAJ7A6WdfVYAiVKLanXFs233HFGTJ
+	 8hp3FOj1jF7LXTljl8JerDzRFVQGPzCMfpG5PddtmEMU3/LqiU224d2HxSxmnkg9k8w==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792008031;
-	bh=2Z2jSLWUeLXZHH1en87WfWTduCgBR58rHTjO686gYmM=;
+	d=lists.u-boot-project.org; s=default; t=1792008044;
+	bh=ROyJbGUfuFmIDqQjK5qqgQS4pQbqnoJXXjKH1h7PPNE=;
 	h=Date:To:From:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=PnXwINMPj7ZpRHHvDcLBqsJQPo5cHrRubpzOaMHQxRX73K00SIuP6ZEElR5x1J1r7
-	 +xLZfQ168mG00txBBScYMPI4cJqt+5UGkh76FsIiviK/6dIX2CU31eMuqC2JDOJG/V
-	 VmB3MugUdN2EUDVlLwiYiJuqH9TeG/1E/0fnLIzGCT8NDud72Afsf5Tx/w42Cys8/w
-	 cV/uhbmwZZK9t4fZeuSoGmYNERHFfhMOZgp5JzuPn/23Pmx/XEtg8gQxmrEEIXNZmE
-	 QJRmr4WJmV6p8ax2YRlvw+VONwnLGk2syJSYReUOWsFZ12sw5TrWlLDeHAkpmOWpy8
-	 mM9n82VxpPirQ==
+	b=wsEWgA9jd2CONcv3bcPA2GZMTR1ttn8wfULbLdrUs+EoBRy0VKOEKe+a00/4xSbwF
+	 wwCxPrJz2Tc9omxztMLV+WH7vhnLyuqDKog3ZfeVbAXxJ3L0J5TLIObOEsFj9s7p4J
+	 /Fzbqy/pCKgJxFt1w9XNwb9yTfwnFfY646edG1Ytno7kyUquty7X1AbsTLjjSg61F1
+	 rmePDfY0wgHBkZL6mItQhAC/sQMrgf9y/rR1M/2wVHAeh3QbJNp7dTBaF9EcIHpJrH
+	 R/qVRV8/CQyXgy/1+fcINodDQxlHLLAf/Hp3Fi3h6NMqbo1bMN5SxqTGT/GLTFHDuq
+	 x7xCBfvTAXJUw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9336C81000;
-	Wed, 14 Oct 2026 20:00:31 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 1E1E02E0
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 20:00:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 346A640806;
+	Wed, 14 Oct 2026 20:00:44 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 916112E0
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 20:00:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 04B6340816
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 20:00:30 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8372360840
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 20:00:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id irWEzDCTv-9N for <u-boot@lists.u-boot-project.org>;
- Wed, 14 Oct 2026 20:00:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3A19040828
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=79.135.106.30
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792008029;
- b=cPFl38viPNHAg7R7pEiYjGCb0QxbbShbjVBl+lrvDRHUAk+acc+7A9D/3zqaXI4mZiE6
- Xue1IhJQFfiiPEItwhGPLpnw/j0sTxRoeGZErJQuKmvwSPyZt2S1imaGktQ64SG7MmElJ
- Aaz1bvZ+D05MPg23Qq+32Acee1KaMb2TlLActG7Wb+GLOgsvsaB94TFvaiNdFIiYLKf1h
- +NXCLuVQW69M3HLCnfrvCHu7hdWxBHdyRY32F3SMbTFwiw/j5q0JEnX8ugL2g6DJqaYBw
- H7FxDOXoqONpSssfRLFtb9yVbl75GgtWXjQAHyz96uIeWll7bIRuCOgMa7R6M618/Iw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id iVQdyV9QYPuy for <u-boot@lists.u-boot-project.org>;
+ Wed, 14 Oct 2026 20:00:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8E2F6606F3
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=185.70.43.103
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792008041;
+ b=Jzl8RM19ItnKvLodSfWOdIL0fprWIW1c7vIYa1PmTkuYk/RwSmjp1iCrQpnrf6/e0Pnl
+ 7Pnc2yN43wWnGwRWrKlFDiaIOsEBMLVuuAqjqY/eDR2tc64/DJNKwx9iTgwHeqaxBI8VY
+ KxERRk+l0QVWdkzAOf0WgrKk1ayS5AzyKndvItk5VX1BwDwlz/icmon4wzqYIxNwTbdJU
+ Dqjh0MVDiMR3DC2I87gO67wGoYO4/kzckCbATQ1rqbruHv5ZwqEA+rsMMw/mHefazknYD
+ TbgdC9uwM909BInH4BxqcTw6kMTd0L6im8WfenNmc8KvP7XofXl411AsMCLzo2OCMvQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792008029;
+ c=relaxed/relaxed; t=1792008041;
  h=Received-SPF:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
  In-Reply-To:References:Feedback-ID:X-Pm-Message-ID:MIME-Version:
  Content-Type:Content-Transfer-Encoding;
- bh=2Z2jSLWUeLXZHH1en87WfWTduCgBR58rHTjO686gYmM=;
- b=FKNmfGWkPriwjY2TS2KB9iPzJ2RHgBXksOIHJMSLNDWLME/otTt8A5baSkKBxID4U+kj
- zYQE0NwS+KHMsc8u2bsAvHlSw71eXhuWAcijWVm1Vp3LdOEtMGSMgMy+/fDiBb32JBsJ7
- BzF3sRG60yONyefpDw4JzhADi1J7ILW4uRy/jUpU4g1CSMdgMTevFvYbYwazVq349uhw6
- zBzBiSmH/SxFwNT8ltF7cDn61+uKJLmjQbGYbTYt24Ti0n0Y53juBTIsWAD30vzchu1EN
- Tph+nyL0fS4224YgPrUliISgl3TAkiKACzt+tms2TvlaweOSFVTTDeg8qElgb48fWGA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=ROyJbGUfuFmIDqQjK5qqgQS4pQbqnoJXXjKH1h7PPNE=;
+ b=L4Xz7maSrPDnHLL9Xc56/gTjYRMQ7jd89mh+UnoDtTt+ke5j0jccvPIMGLqZguyPOD5H
+ Q/AWIAQkywMxCplnM/iTA0Ba0mO2ltSxOa6qGU0ZwaCfPXWfrqt+vKiYH6oxjZIx8bXZ+
+ rm+EmMyBAwil6LjfeScYnFEus9c942WyZDj1lEZ5VlRUCdSxDMD3me/OykCLGryTNDh3H
+ roED4Zi1rS7MyVDzyM21jU/4tibvHvlVbrzd4nSolXqtRv0t4tMjFDAZQGRUdyOB5BzjF
+ XDQB5Z5f8qRVCM4eaUHq26BMOX+kI/qle3YwiKDoMhBqaVGnfxJm4f8eLana53Nn+mQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=protonmail.com;
  dkim=pass header.d=protonmail.com header.i=@protonmail.com header.a=rsa-sha256
- header.s=protonmail3 header.b=V0eO8j9X; 
- arc=none smtp.remote-ip=79.135.106.30
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=79.135.106.30;
- helo=mail-10630.protonmail.ch; envelope-from=davewk225@protonmail.com;
+ header.s=protonmail3 header.b=anm0s+FX; 
+ arc=none smtp.remote-ip=185.70.43.103
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.70.43.103;
+ helo=mail-43103.protonmail.ch; envelope-from=davewk225@protonmail.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=protonmail.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=protonmail.com header.i=@protonmail.com
- header.a=rsa-sha256 header.s=protonmail3 header.b=V0eO8j9X
-Received: from mail-10630.protonmail.ch (mail-10630.protonmail.ch
- [79.135.106.30])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 3A19040828
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 20:00:28 +0000 (UTC)
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=protonmail.com header.i=@protonmail.com
+ header.a=rsa-sha256 header.s=protonmail3 header.b=anm0s+FX
+Received: from mail-43103.protonmail.ch (mail-43103.protonmail.ch
+ [185.70.43.103])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8E2F6606F3
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 20:00:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1792008026; x=1792267226;
- bh=2Z2jSLWUeLXZHH1en87WfWTduCgBR58rHTjO686gYmM=;
+ s=protonmail3; t=1792008039; x=1792267239;
+ bh=ROyJbGUfuFmIDqQjK5qqgQS4pQbqnoJXXjKH1h7PPNE=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=V0eO8j9XgVC/WvwSJEqopp6R+zBtL9RsKUzsMNHxRkFGtV7sUODj2jC7wMXzikJP+
- TjzOt3+wQfngzRcTru2Cq1MxVeiqRa++LhxW9snC/XS09ZxZR8VWn3EXkHSfYrkMRE
- D9riBDyd5jq6VPh5kvy2xBsKgR8x37rw4IKEhc+J8UnrMykrBhJQJRV7qXJTuc7bYq
- bJB2mXp8xcs36QFU+GJHP2rvmd/OktbQZKGCIvWVDxjuKMjGfDa+Tv3ICQA4XLATp+
- 3Zf1FN2V70cOdUExVyDXVxWgTEeYRF+rkaNXnvfwmpxVBNJy4Lvh7JPQI5nS0T6doo
- seqCmepMMIytw==
-Date: Wed, 14 Oct 2026 20:00:18 +0000
+ b=anm0s+FXfvQAOwa/OLxeLpff1G7ZRcTuF50WhqHzo+pONRXvOqvy9WetNoxsJW0Ya
+ f2FUbxt2eJWbsH2w7LcOjLhGw9qhD+YnfA6BiM8bjWs23Wyni64BWhUjFsiledZ2ug
+ aDzMTYr7IUehOljCf96ODoli2LAfX72YAuesX4fFosBkgJbj/Gxg0++X7RgZKyb6TH
+ FsEeWe5Ge4mYKZb+c8sAu+8mZpY5Nie2ZhQL1qGe43LZBQj2TjUmp6rQwVB1ZQ4EKY
+ 8vVCd2dYs7NDNn4NbSNQn8Iq3a6K98atOHU36HoytcMuwdRnjaBjwINpEnkzRf+EAv
+ obV4IaxwiuqNQ==
+Date: Wed, 14 Oct 2026 20:00:34 +0000
 To: Yixun Lan <dlan@kernel.org>, Marek Vasut <marek.vasut+usb@mailbox.org>
 From: Dave Klotz <DaveWK225@protonmail.com>
 Cc: u-boot@lists.u-boot-project.org, Quentin Schulz <quentin.schulz@cherry.de>,
  Tom Rini <trini@konsulko.com>, u-boot-spacemit@groups.io,
  Eric Chung <eric.chung@riscstar.com>, Huan Zhou <pericycle.cc@gmail.com>,
  Guodong Xu <guodong@riscstar.com>, Raymond Mao <raymond.mao@riscstar.com>
-Subject: [PATCH v3 2/3] usb: dwc3: generic: add SpacemiT K1 and K3 support
-Message-ID: <d5d2da6ee498956285086970d1d1196f6751ea3d.1792007916.git.DaveWK225@protonmail.com>
+Subject: [PATCH v3 3/3] configs: spacemit_k1: enable USB host
+Message-ID: <ac057da137ba730f46251c57098da9308fb00928.1792007916.git.DaveWK225@protonmail.com>
 In-Reply-To: <cover.1792007916.git.DaveWK225@protonmail.com>
 References: <20261006T002406-0400.uboot-k1-usb-cover.DaveWK225@protonmail.com>
  <20261006T020608-0400.uboot-k1-usb-v2-cover.DaveWK225@protonmail.com>
  <cover.1792007916.git.DaveWK225@protonmail.com>
 Feedback-ID: 100562830:user:proton
-X-Pm-Message-ID: 63a61bf4fffeb49546339a7b37c47e99b646bf09
+X-Pm-Message-ID: b9f499c2161670845151722b9acf3cb5dd760f18
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -145,46 +145,60 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The K1 describes its DWC3 controller as one flat device-tree node with
-the controller registers, clocks, resets and PHYs. It has no separate
-wrapper registers or controller subnode.
+Enable the K1 USB 2.0 PHY, the DWC3 generic glue with xHCI, USB
+storage and the usb command, so the K1 boards can boot from or read
+USB devices with the default configuration.
 
-Use the existing flat-node callback through rk_ops so that the generic
-wrapper binds its host or peripheral child to the same node.
-
-The generic glue handles the K1 controller clocks, resets and USB 3 PHY,
-while the child uses the existing generic DWC3 host/peripheral path.
-
-The K3 uses the same flat-node layout, so match "spacemit,k3-dwc3"
-as well.
+Enable DM_REGULATOR_FIXED as well: on the OrangePi R2S, VBUS for the
+USB 3 port is a GPIO-switched fixed regulator, which dwc3-generic
+enables through vbus-supply before registering the xHCI controller.
 
 Signed-off-by: Dave Klotz <DaveWK225@protonmail.com>
-Reviewed-by: Marek Vasut <marek.vasut+usb@mailbox.org>
 ---
 
 Notes:
     Changes in v3:
-    - Add Marek Vasut's Reviewed-by.
-    - Also match "spacemit,k3-dwc3": the K3 uses the same flat-node
-      layout (dts/upstream k3.dtsi), and 1/3 now matches its USB 2.0 PHY.
-      Not tested on K3 hardware.
+    - New patch.
 
- drivers/usb/dwc3/dwc3-generic.c | 2 ++
- 1 file changed, 2 insertions(+)
+ configs/spacemit_k1_defconfig | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generi=
-c.c
-index 3f6e3d4085..2406f84461 100644
---- a/drivers/usb/dwc3/dwc3-generic.c
-+++ b/drivers/usb/dwc3/dwc3-generic.c
-@@ -753,6 +753,8 @@ static const struct udevice_id dwc3_glue_ids[] =3D {
- =09{ .compatible =3D "rockchip,rk3568-dwc3", .data =3D (ulong)&rk_ops },
- =09{ .compatible =3D "rockchip,rk3576-dwc3", .data =3D (ulong)&rk_ops },
- =09{ .compatible =3D "rockchip,rk3588-dwc3", .data =3D (ulong)&rk_ops },
-+=09{ .compatible =3D "spacemit,k1-dwc3", .data =3D (ulong)&rk_ops },
-+=09{ .compatible =3D "spacemit,k3-dwc3", .data =3D (ulong)&rk_ops },
- =09{ .compatible =3D "qcom,dwc3", .data =3D (ulong)&qcom_ops },
- =09{ .compatible =3D "qcom,snps-dwc3", .data =3D (ulong)&qcom_flat_dt_ops =
-},
- =09{ .compatible =3D "fsl,imx8mp-dwc3", .data =3D (ulong)&imx8mp_ops },
+diff --git a/configs/spacemit_k1_defconfig b/configs/spacemit_k1_defconfig
+index 39c490438d..8ee9baa13b 100644
+--- a/configs/spacemit_k1_defconfig
++++ b/configs/spacemit_k1_defconfig
+@@ -61,6 +61,7 @@ CONFIG_CMD_GPIO=3Dy
+ CONFIG_CMD_MMC=3Dy
+ CONFIG_CMD_PCI=3Dy
+ CONFIG_CMD_SPI=3Dy
++CONFIG_CMD_USB=3Dy
+ CONFIG_CMD_EXT4=3Dy
+ CONFIG_CMD_FAT=3Dy
+ CONFIG_EFI_PARTITION=3Dy
+@@ -92,6 +93,7 @@ CONFIG_NVME_PCI=3Dy
+ CONFIG_PCIE_DW_SPACEMIT=3Dy
+ CONFIG_PHY=3Dy
+ CONFIG_PHY_SPACEMIT_K1_PCIE=3Dy
++CONFIG_PHY_SPACEMIT_K1_USB2=3Dy
+ CONFIG_PINCTRL=3Dy
+ CONFIG_PINCONF=3Dy
+ CONFIG_PINCTRL_SPACEMIT_K1=3Dy
+@@ -99,6 +101,7 @@ CONFIG_DM_PMIC=3Dy
+ CONFIG_PMIC_SPACEMIT_P1=3Dy
+ CONFIG_DM_REGULATOR=3Dy
+ CONFIG_SPL_DM_REGULATOR=3Dy
++CONFIG_DM_REGULATOR_FIXED=3Dy
+ CONFIG_DM_REGULATOR_SPACEMIT_P1=3Dy
+ CONFIG_DEBUG_UART_NS16550=3Dy
+ CONFIG_DEBUG_UART_SHIFT=3D2
+@@ -108,4 +111,9 @@ CONFIG_SYS_NS16550_MEM32=3Dy
+ CONFIG_SPI=3Dy
+ CONFIG_FSL_QSPI=3Dy
+ CONFIG_TIMER_EARLY=3Dy
++CONFIG_USB=3Dy
++CONFIG_USB_XHCI_HCD=3Dy
++CONFIG_USB_DWC3=3Dy
++CONFIG_USB_DWC3_GENERIC=3Dy
++CONFIG_USB_STORAGE=3Dy
+ CONFIG_SPL_LIB_RATIONAL=3Dy
 
