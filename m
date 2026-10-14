@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61A7ECC6B2E
-	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 20:03:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B71BCC6B2C
+	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 20:03:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1EEBD40712;
-	Wed, 14 Oct 2026 20:03:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E13A68109E;
+	Wed, 14 Oct 2026 20:03:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wzAecqTGPMPy; Wed, 14 Oct 2026 20:03:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5430F406FB
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792008215;
-	b=Ra3qWCjndApls8qawoIORg+hNGd2bIQEvkMQZXszSS1xi3ihdmiwKH2iDzxbPq3MqK8A
-	 ykkBuExXdSA+FgStD/5tILp+aqLbIiKIRscsciJD30Z//LlCZI605tV9KcufCQ5HCUkCF
-	 CStnu3KhJunYQ9P+gpAy0RWS9AwsRZMvS3tl/F8HrhCr5Cc8WtcM/i+S/S8T/FMt8psRP
-	 +SwZfIX2Zw48mDjFost5dPdoAVLfU6jPNE2q/cm7jHssAoWXzB6qeRBTI0Q8XAgefjbg9
-	 K8Im1vSS1GSL0YPKYSBO0Wl2pzb/LbppsQlyNrF7YVDMKph53Sz0NcId2t8/I8AWzPg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JUwpD7i0382C; Wed, 14 Oct 2026 20:03:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0A06D810C3
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792008217;
+	b=gFheTsncsMKmK6nTK7V8oTcPf2//riYHzMidWkda2s7pnBEd6Xna7MRWGI9TX3PIO+9f
+	 cjYl8Zg4ulmyJTzbUbauMjXk3NpCip4tme0zhMN5NubPJjPHpPi3uTfXTbqfiDP1si+h0
+	 6MdPQcNO7aUHTISlSJu/nUqrdJCPL/EArh325dMmMJnbXiAZvFq4NArmEBUj6qO2TMgaY
+	 OeP+UiOr4uSjTkN0K2R+Ar5SwioxXHhnpjf/jE8pj5umCpVcZ2HxFGleR2IJ3XdYPGKhj
+	 SAWMieUX3UBpt2SnCbkyhDRI1fvGi30FKSQLFya8B7p/ZR+jH6FAlQ4S4kVmQG7Ks4g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792008215;
+	c=relaxed/relaxed; t=1792008217;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,91 +31,89 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=BmSXg9kGEftxrbOkxMynTVq+CmfXjeSihjKfMMJ4pmk=;
-	b=CMrH6sWPGC0EKidzPn0FGeaomSwQIlABAu4FJxHwTLWppy2t2qQY+E/CqWodV5zhmjBe
-	 CRB9LsXTmYqEebeSPrXOGxTrccO5z8lXeYxVbnzbKTobu7j8Q7BDoOI6hg8k8cHhQEzFk
-	 Uex13FYFiTgwfXat0gWaCcufY5OyeN/Y8xYfu+zr1oEkH6pnn42DpZYJnQdfLDmCZO6aL
-	 1ePTgoHDmVEot9dUvpmbkATCJ8/0Is/ERj4qGbZJ27RLdtcEP2MS9x8PErocE9g1wx5ed
-	 tI895bvkIf/VFQdn7mtxXnbkNpuEb9Zq3ZIAGBALGq4MWj1jwLWQvgj/Lfi8aWtcPhA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	dmarc=pass header.from=arm.com;
-	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=ndOyhKZT;
+	bh=Fc/PEl15kQ1MEMfTeAl4OqGSwtAqkftphUVyZSFedok=;
+	b=EY2eQW3Db5OsYD38RRZL6tWP9XLMqclk1qTH2Oepm7Oif4RaDaO/PcOHs5BkovBwbwlP
+	 mGW8euSPpIRYb3oWL2Vv79blSTmBLZI9eyMWdSdRo2oR9hu9nyaJfWVTSpva+uA/LF8oY
+	 mfKd76gMj8qpJnZzWYxbqjUmsTGjX/+9boLmTNHKSIlHwpWoewHUnYjc5f3ZkWu/ywQmy
+	 2oIlWA0hgOfC/WOnIqQHj4oyNA2Ycj3zxy8P8KwzQfl6H/mlQGLQwthS9y3AF3xfGWSfX
+	 6eloJVdI2QfHHvc4wH2OK9zz+jfHMkGxnmNjGC2mNiWOz0aofTH8aGE1wvrPYm37GnA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792008215;
-	bh=BmSXg9kGEftxrbOkxMynTVq+CmfXjeSihjKfMMJ4pmk=;
+	d=lists.u-boot-project.org; s=default; t=1792008217;
+	bh=Fc/PEl15kQ1MEMfTeAl4OqGSwtAqkftphUVyZSFedok=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=qBuul2PLUNlb5o3yryfesiycAJ5oc4cdwHc/MmN+Hw+yoRO9yQ+pC1br2oGbjv45J
-	 djLXOo9/3aUmMvF3ZHETXho8kHZO7VqiK+qNWez0hmny/Qo6YeefA2cOToDgxTu/FK
-	 3xm7TK2CgbSEs5Mt5KviAJV202T7TlC/NHLQfRC3uWYJVfjBK69IP28Hor2NNj+Zrp
-	 A9OnsZ9c/h2THI9FDXrRz1jIBWOlfk7Sdj1JDCH2ta5cYRBhtQeb2wcgg/2+wf5Biy
-	 JJX33bqzXPX5Igl7JhXusrq92T+dTY6suWd4IzBeb/rIyP5BmK1teU1/CUQFXEDAkz
-	 /vG+itWIudwwQ==
+	b=w6km1Efdta/6OsOfIYvArhbJ2bcFB7DXN7zeoRoHEVCAnUSjdemVEj++TY2G04XSb
+	 NmaoFQHJ3j4iUpX0DkmZaNmeVluMxJK/wAcb5isgl67Ccj6p3RK4XLI4kyOQ/2F+09
+	 xRCQOkhgzvzxdNA34u/TqH+UmpVDdNc+XQl6lcrDIz6s6gcXOjr5/412fUsDP5URUK
+	 zOfQ1yA23xnIeaTa5bhDzgZGHNFRL+AHogUX6ADynLWljfwmvdK0g6oYP2Jaf1CEdn
+	 p6Ve6Y/BYcIpRSNp28PchSSFOLj43K2auCwOwRJ34hEj64hhawTZva3uzHk7LzzbzD
+	 vg58csDFpB61w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5430F406FB;
-	Wed, 14 Oct 2026 20:03:35 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id C97C2A58
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 18:23:25 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0A06D810C3;
+	Wed, 14 Oct 2026 20:03:37 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id B61A61DE
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 18:23:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id BA620407A0
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 18:23:25 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9CFB640191
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 18:23:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RseO3JJgpQbp for <u-boot@lists.u-boot-project.org>;
- Wed, 14 Oct 2026 18:23:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D97E6407C0
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id A-KBoj-EZwQh for <u-boot@lists.u-boot-project.org>;
+ Wed, 14 Oct 2026 18:23:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 7D67A4009D
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip=217.140.110.172
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792002205;
- b=lXdC0dfm66Wz5hOfD9nHnZFzYKgk0JnXhRKJAFjFl8HXraFIlu2r1jA3zA/wwr6QJFW6
- fFixFyfvegnG6TCN8ZRLsLPQli9HA2gPW9HCYrsxRYjWOQBAoP5cZFgevtM1/uRRnqpvY
- ozUb9ybvTrSTBo5GLdTae3PsG4Qus4CQY2TNlp/qbCBI4YClWxIqEcv/6EdVGSlL2ULZH
- xEnsdAqdWfx6z4x2LlzlhOP2XK6XRPb3t1YsEr1m2G8SH5iD/rr846Hn9FGNRcAAyVS1u
- cNG7FGpRS37AW8yTJik1D4ppLwMURxKXDRPR24eJvicHmz8jtD+4En+KUGUZyKnpJgA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792002206;
+ b=W9x8hfk3PJ4RtFuGf0EOOswAh6hoKuJfkWR8HrNhj4E9owduf/U9AdySVMflEVY5Ll6S
+ H7ap6RXV0dC0aJ78iuMKtdiYucat++Ph+1HTUlRyf7Qzql/J2Z1iYwWxaypSUYXsmA8Jp
+ iaCXtDHfNVYGj1BvAicf2pFFulV+XTKqPwO+Vhd+MX9Y5NZz5tpZid1ZwkRhjaq76nbMZ
+ R+d6WpyLIa/Nl3zw9DW0st8mHMy7QjBg9nJCPm0CfuPSzIpHuHy3C6B3sdbZBWsZyOdsI
+ f6kTidQHwCUDNQ12hECpoayArxfc4lACxwBruZ249QzFil9tzFJdYC2xGj34qCqJRFA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792002205;
+ c=relaxed/relaxed; t=1792002206;
  h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=BmSXg9kGEftxrbOkxMynTVq+CmfXjeSihjKfMMJ4pmk=;
- b=MOecEUhytwTyWsKDwyq0xwuGNkn1ixqrz8F0aRNfjYoYO7aHz4nquYgjrCXupEb+x/Rs
- 95sn80DQtKEbUrymhXRL6TEZxV1FkUdeE2O5vtz7ygT43fdOwDBwcKmZom2AGEAcMEQlV
- B8xwzNxEDbFrjjnoKGbIPBDDiKu6dExSWZ3acCZhbazTHqshy8jyL40BXYTLE15dOPT0D
- mVV87OJTttqm8XjCX5o9Jan3rdQ43cNpYYbiZ7j8d25IpnWM7KuyKQjCfewMhaW3o5xBI
- NlfXZ8HpmlrwLZAcXLHzvh0dZM3QkC4mrP6AoxBcql402YlwbR4vEABhyP7TmvD9c9A==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=Fc/PEl15kQ1MEMfTeAl4OqGSwtAqkftphUVyZSFedok=;
+ b=L6aHa/kR7ar9L6k6ChmXfs0fd4k3w48W8b7D59QlvKGidrFWglzEj3IanTzo8cRPwFgJ
+ 0644ALqWOLg4NauJsCl55544gteZ1Rtx9293kao6nGiedZVwhN+VeUC4kzRKs3djOoC6n
+ wHdlSeY0TdzWJf/kPoyMbKEBNWk+32HoOenDfao9XVpGxPLRGLj8+hjJiMBupVg9fc+r8
+ XhGHbO2v0HHdwMkfXpYRxeUbP0JGmZKGMJ30+wsXQ0KeeNJQ/GXGwU87Fn3U0kZBWeHJd
+ 26Yda1QPCxfFCP0apH1GLcYF+SVYzlUg31bPOIovrZiDoPzQO+DoyoC0WXN31F4pOkA==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=arm.com;
  dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
- header.b=ndOyhKZT; 
+ header.b=mp5ZeTAl; 
  arc=none smtp.remote-ip=217.140.110.172
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
  helo=foss.arm.com; envelope-from=harsimransingh.tungal@arm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=ndOyhKZT
+ header.a=rsa-sha256 header.s=foss header.b=mp5ZeTAl
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp4.osuosl.org (Postfix) with ESMTP id D97E6407C0
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 18:23:24 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7D67A4009D
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 18:23:26 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F0EDD152B;
- Wed, 14 Oct 2026 11:23:20 -0700 (PDT)
-Received: from e142474.cambridge.arm.com (e142474.arm.com [10.2.203.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EC76E3F871;
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9AD1F152B;
  Wed, 14 Oct 2026 11:23:22 -0700 (PDT)
+Received: from e142474.cambridge.arm.com (e142474.arm.com [10.2.203.50])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 935B43F871;
+ Wed, 14 Oct 2026 11:23:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1792002204; bh=B/O4oaS9HQvghWs/wbIyqJSHPSgX9qZD4JBNRmG4cJQ=;
+ t=1792002205; bh=9OdRUQFRgsdorpFv2X0m6oS8cs3YCa4PDwTFoMVC2SI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ndOyhKZTs2lyccYIYSM97smDbCQ1kir6uuDM5N5oy9dXwdNG4DaSOjgT34og54LEs
- TBsB8kDfg9mjIuRTRPlGhCPHo3admWFl390H8o7TD+2OPaGPrGgUQzSeQbsx4OcFWj
- INwnfMi+XyFVgV9jg1s+oxMSJr17pEhXJ78LFgmQ=
+ b=mp5ZeTAlZFKu7lR68FnuXsG/SczBnkXIrqcRUNMX+4rXAPd/D6z7v+QqrlNHs+4FX
+ 6Eng/GxReJrTvEWl5sNM1YIUXKGqSZ9aifrkF2Jf5ZCwfrKC7SLWLE4ZhlOFP+wXes
+ bc2QbNMOjt2NAVoMjgfhT/Wf2tfxnc2HXNilW1KU=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -124,10 +122,9 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Devaraj Ranganna <Devaraj.Ranganna@arm.com>,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v6 08/22] efi_loader: add MM SP status mapping for FF-A
- variables
-Date: Wed, 14 Oct 2026 19:22:48 +0100
-Message-ID: <1d9eccd99b93a604113d2cb9eac38610582240c0.1792001844.git.harsimransingh.tungal@arm.com>
+Subject: [PATCH v6 09/22] efi_loader: make MM transport selection runtime-safe
+Date: Wed, 14 Oct 2026 19:22:49 +0100
+Message-ID: <7e7d1de2c67cbe9bb5d6b06c5f0316552c2e1bfc.1792001844.git.harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1792001844.git.harsimransingh.tungal@arm.com>
 References: <cover.1792001844.git.harsimransingh.tungal@arm.com>
@@ -147,11 +144,13 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Define the MM SP status values as an enum and add a runtime-safe helper
-for translating MM SP notification results to U-Boot errno values.
+Track when ExitBootServices() has been called and make the MM transport
+selection helper callable from EFI runtime code.
 
-The FF-A notification path uses the same mapping during boot and after
-ExitBootServices(), so keep the mapping table in EFI runtime rodata.
+At runtime, select the FF-A transport only when FF-A runtime mode is
+enabled. Otherwise keep using the OP-TEE MM communication path so builds
+without CONFIG_ARM_FFA_RT_MODE do not lose their existing runtime
+backend.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
@@ -161,114 +160,106 @@ Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 Changelog:
 ===============
 
-v5:
-
-Ilias:
-
-- Include MM_SUCCESS in the MM SP response map
-
 v4:
 
 Ilias:
 
-- Replace MM status macros with an enum
-
-v3:
-
-Simon:
-
-- Add a comment explaining the sparse MM SP error map indexing
+- Keep OP-TEE as the runtime fallback without FF-A RT mode
 
 v2:
 
 Ilias, Simon:
 
-- Reuse common MM SP error mapping
+- Rename runtime-phase tracking to efi_at_runtime()
 ---
- lib/efi_loader/efi_variable_tee.c | 50 ++++++++++++++++++++++++++-----
- 1 file changed, 43 insertions(+), 7 deletions(-)
+ lib/efi_loader/efi_variable_tee.c | 44 +++++++++++++++++++++++--------
+ 1 file changed, 33 insertions(+), 11 deletions(-)
 
 diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-index 6a1fa39bb6f..bc15795e94f 100644
+index bc15795e94f..50a98a1dd0a 100644
 --- a/lib/efi_loader/efi_variable_tee.c
 +++ b/lib/efi_loader/efi_variable_tee.c
-@@ -4,7 +4,7 @@
-  *
-  *  Copyright (C) 2019 Linaro Ltd. <sughosh.ganu@linaro.org>
-  *  Copyright (C) 2019 Linaro Ltd. <ilias.apalodimas@linaro.org>
-- *  Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ *  Copyright 2022-2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  *  Authors:
-  *    Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -21,18 +21,34 @@
- #include <efi_api.h>
- #include <efi_loader.h>
- #include <efi_variable.h>
-+#include <linux/kernel.h>
- #include <malloc.h>
- #include <mapmem.h>
- #include <mm_communication.h>
- #include <tee.h>
+@@ -58,12 +58,28 @@ extern struct efi_var_file __efi_runtime_data *efi_var_buf;
+ static efi_uintn_t max_buffer_size;	/* comm + var + func + data */
+ static efi_uintn_t max_payload_size;	/* func + data */
+ static const u16 __efi_runtime_rodata pk[] = u"PK";
++static bool __efi_runtime_data ebs_called;
  
- #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
--/* MM return codes */
--#define MM_SUCCESS (0)
--#define MM_NOT_SUPPORTED (-1)
--#define MM_INVALID_PARAMETER (-2)
--#define MM_DENIED (-3)
--#define MM_NO_MEMORY (-5)
-+enum mm_sp_status {
-+	MM_SUCCESS = 0,
-+	MM_NOT_SUPPORTED = -1,
-+	MM_INVALID_PARAMETER = -2,
-+	MM_DENIED = -3,
-+	MM_NO_MEMORY = -5,
-+};
-+
-+/*
-+ * MM_* failure codes are negative. Use -MM_* as sparse positive indices so
-+ * ffa_map_sp_event() can look up mm_sp_resp_map[-sp_event_ret]. The
-+ * unassigned gap between MM_DENIED and MM_NO_MEMORY maps to -EACCES.
-+ */
-+static const int __efi_runtime_rodata mm_sp_resp_map[] = {
-+	[MM_SUCCESS]		 = 0,
-+	[-MM_NOT_SUPPORTED]	 = -EINVAL,
-+	[-MM_INVALID_PARAMETER]	 = -EPERM,
-+	[-MM_DENIED]		 = -EACCES,
-+	[-MM_NO_MEMORY - 1]	 = -EACCES,
-+	[-MM_NO_MEMORY]		 = -EBUSY,
-+};
+ struct mm_connection {
+ 	struct udevice *tee;
+ 	u32 session;
+ };
  
- static const char *mm_sp_svc_uuid = MM_SP_UUID;
- static u16 mm_sp_id;
-@@ -169,6 +185,26 @@ static efi_status_t optee_mm_communicate(void *comm_buf, ulong dsize)
- }
- 
- #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
 +/**
-+ * ffa_map_sp_event() - Map MM SP response to errno
-+ * @sp_event_ret: MM SP return code from MM SP notification
++ * efi_at_runtime() - Indicate whether the system is in the UEFI runtime phase
 + *
-+ * Convert the MM SP return code into a standard U-Boot errno. This helper
-+ * is marked __efi_runtime so it can be shared by both the boot and runtime
-+ * FF-A notification paths.
++ * This helper returns whether the firmware has transitioned into the
++ * UEFI runtime phase, meaning that ExitBootServices() has been invoked.
 + *
-+ * Return: 0 on success, negative errno on failure
++ * Return:
++ *   true  - The system is operating in UEFI runtime mode.
++ *   false - The system is still in the boot services phase.
 + */
-+static int __efi_runtime ffa_map_sp_event(int sp_event_ret)
++static bool __efi_runtime efi_at_runtime(void)
 +{
-+	int idx = -sp_event_ret;
-+
-+	if (idx >= 0 && idx < (int)ARRAY_SIZE(mm_sp_resp_map))
-+		return mm_sp_resp_map[idx];
-+
-+	return -EACCES;
++	return ebs_called;
 +}
 +
  /**
-  * ffa_notify_mm_sp() - Announce there is data in the shared buffer
+  * get_connection() - Retrieve OP-TEE session for a specific UUID.
   *
+@@ -399,27 +415,30 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
+ /**
+  * get_mm_comms() - detect the available MM transport
+  *
+- * Make sure the FF-A bus is probed successfully
+- * which means FF-A communication with secure world works and ready
+- * for use.
++ * Make sure the FF-A bus is probed successfully during the boot phase,
++ * which means FF-A communication with secure world works and is ready for
++ * use. During the runtime phase, use FF-A only when FF-A runtime mode is
++ * enabled; otherwise keep using OP-TEE comms.
+  *
+- * If FF-A bus is not ready, use OPTEE comms.
++ * If FF-A bus is not ready at boot, use OP-TEE comms.
+  *
+- * Return:
+- *
+- * MM_COMMS_FFA or MM_COMMS_OPTEE
++ * Return: MM_COMMS_FFA or MM_COMMS_OPTEE
+  */
+-static enum mm_comms_select get_mm_comms(void)
++static enum mm_comms_select __efi_runtime get_mm_comms(void)
+ {
+ 	struct udevice *dev;
+ 	int ret;
+ 
+-	ret = uclass_first_device_err(UCLASS_FFA, &dev);
+-	if (ret) {
+-		log_debug("EFI: Cannot find FF-A bus device, trying Optee comms\n");
++	if (efi_at_runtime()) {
++		if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE))
++			return MM_COMMS_FFA;
+ 		return MM_COMMS_OPTEE;
+ 	}
+ 
++	ret = uclass_first_device_err(UCLASS_FFA, &dev);
++	if (ret)
++		return MM_COMMS_OPTEE;
++
+ 	return MM_COMMS_FFA;
+ }
+ #endif
+@@ -1018,6 +1037,9 @@ void efi_variables_boot_exit_notify(void)
+ 			efi_get_next_variable_name_runtime;
+ 	efi_runtime_services.set_variable = efi_set_variable_runtime;
+ 	efi_update_table_header_crc32(&efi_runtime_services.hdr);
++
++	/* Record that ExitBootServices() has been called */
++	ebs_called = true;
+ }
+ 
+ /**
 -- 
 2.43.0
 
