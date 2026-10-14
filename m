@@ -4,200 +4,198 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC6C6CC6B1A
-	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 16:53:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB992CC6B1A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 17:00:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A1EB8407C9;
-	Wed, 14 Oct 2026 16:53:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6ABD240790;
+	Wed, 14 Oct 2026 17:00:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IC1PZrTd9tK2; Wed, 14 Oct 2026 16:53:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3FA4B40776
+ id KhD89qmX5lb9; Wed, 14 Oct 2026 17:00:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org DA49E407B2
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791996813;
-	b=WeR+GDYaMkDPLSnPh3Ua1+k7yi19aK/Iz3aVliKxmsVZG1+BIr5e6rDSbWmUp4sMCYfr
-	 3Bb5cqzVs6QOltAXxKH2VhFP1POioEuuHicxrZDxtogM+lEJFsYboKuUgJyje6ZPXR2zO
-	 DdShYg4aOUBDQ8ceOYfoSPK5FrbJo/uh3nqECLZmzC2x/YUrfjwjkfx8KyrPrBRmHl4TX
-	 SZUO8rRBjmwZ71ZOczAynW/7b71YA/X9zHQNqLMKnwTll0iXDlbKZ+fgsKjpXCUI1a4fG
-	 TOjBQY/CSZxiwBv9xO+QQBla560ueSxst3cNVaXBUlw2YbI+8rATMnbolHsaf9gn9zg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791997255;
+	b=RrSYJQzLUvkmdvwPMeVzYO8D59/CTlgcHf/wmq5Fq8jjQ3DQOWsjMwtvEZ5E/B/nBquN
+	 gA+2XpzYqY+ctyF6FG6aTbCewkOYV3/D04eLGqPE1hIcdziUpMhvyMRR3ZXkiOK/p5POP
+	 HIfi1dA5z59dlmMSVo41mfH4TvGWT7bcypgj1w1Ny0IH2GKGuCj/hkgx2ZcWLKZda7vP1
+	 Es+GvQfKvEF3wCn1hu7ozAMHmpoZH89vFYp1UsJAWafJSLZpn3jtPVeA4tF+P3DJOoAWs
+	 xuwlGcnKdSJ7HWotgDw6SF57T5rfec7UCfES+v/UD3Pw5Bl96lSEgmdkIQ576xWeuYQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791996813;
+	c=relaxed/relaxed; t=1791997255;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:Received:Received:DKIM-Signature:
-	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 X-Received:Received:Message-ID:Date:MIME-Version:User-Agent:Subject:
+	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=FsKNSl2memNxmkPGDIVUpccH0yWmY5Dp9Spd1i+t9o0=;
-	b=JZLeF/kbDcge4pe73TBG+eZyTY311g3JO93xXWvYLh8wH9a8n6n9ozPGMVpGFQ25JGXa
-	 I9+Gt7inpinR441SZKHrjj+Hd3+iiQqRuvZWQekJkj+/7vTT6GOI8EWgwM+fXNlNDBxl7
-	 YIyTNpieyiOGk05xi9uBZdqBdd5R92InI4xgYe+ZvqUJC0748FQ8dK/DfIWxqP9TpG/yv
-	 2G9hgD7ERDhClVoAZIsIk1WDJKv7PUFQzH5hpjRTRcO0CgGUGW86yUqb+sZdvpb0TQFnn
-	 mkeJlxzKBpKCTvYbtzZTmVs14SVRpD5qvqwccgoAdl2u7MwgEY/EgFs+eBSkBH3hIyQ==
+	bh=GAA7djzA2JluB9M+fKUdPHkbfkBT9sjGNIMojgCNzFM=;
+	b=rqeZq+oipCkmOHH12G5kgdgESfj9Zejpr2JF6mIYDiZIRAEKZur3XNXQrSjfn8L9SM8D
+	 JjLP43bwa93L38r6AWXRdGGww7wdYvATIaBpEQkqqwtOUXEdlsM6MWYawxGsPD1GqMspD
+	 sGuxI63qKKahAQM8I/pSFtTjaicq0WdiJXQG5BWa69kFNW900d+pybhPgpu9S/LHPvPs2
+	 yKmO95QIHiDnj8vc4ZU2e9GBpEk0tl01P9F06lPMckW/KXqaUmPHpkok2ht73+sTY/+/0
+	 pAmA9paQ9ENFUvPW1D/KGKoaxzvyLFCb8PI3slYByDELDOxdUdWs27rK0TtGS4VQCkw==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791996813;
-	bh=FsKNSl2memNxmkPGDIVUpccH0yWmY5Dp9Spd1i+t9o0=;
+	d=lists.u-boot-project.org; s=default; t=1791997255;
+	bh=GAA7djzA2JluB9M+fKUdPHkbfkBT9sjGNIMojgCNzFM=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=X7iFB4/KG/Wre/yb3CuUgOtQaMN11VyJxtTxNYQDWR8XooqzL0O/ZSxmDMRxQMRtK
-	 4y5lZC0w2LTqcij8vNMW5urzEn/AOoJDE9RaMfvZSsDev/YuBRVJkxc2VfiMAGBXhH
-	 xYZgIiggFjovek4DEKaDMI+lAfsK4zJqZVkdorzSX3CpMNBvDUlML7XZq2pRfrz9X2
-	 1WW0HeuXzxMkSTCP1XyShKnioznI2+tzzdgyEg4w4zKTI5NwptZq4LR0bmxhYtiCkH
-	 Kls+tpNba9R7QJy14GE84Mo633YHWcJE281oPDbzzq1dZ/JISrNgS1+JwfwK0aNqAH
-	 EuqlKBUOawzzg==
+	b=IdpAamQnApEtr8ErpnCQefdwo3rIn9gat9/WrYRaxx4BwLc/mDvAF8gtwXND5CFxs
+	 OzJcHzPNBk62QdzAmhSJjmEZP5zHUj4ZoYMfz2ro90m7mWR+ze5SPg3A4+zDnEYTGe
+	 xYbcO7ICzpMnEM8XJdMYJ9D0T2seDXSqqlmvV74lRZqWwayqFsnlQoRT7sBHkSPG+V
+	 RWE96pBYiZRTbYP9T98nRDV0uojCcIRxMJpVoH9UEXfz4UIQh2rACSuLlkDw5wZK9l
+	 cP5Bzu1APQnzeosUony9e2FwCLSd/xH1q6SEG4NxshwvF2RBxI1aJCMkcFxEox0UrY
+	 mHhEPImhQbbLw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3FA4B40776;
-	Wed, 14 Oct 2026 16:53:33 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id C995A255
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:53:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DA49E407B2;
+	Wed, 14 Oct 2026 17:00:54 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id A23C62AC
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 17:00:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id AFCFC80E4F
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:53:31 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 88CC9607ED
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 17:00:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MpEnF-R4ZF7d for <u-boot@lists.u-boot-project.org>;
- Wed, 14 Oct 2026 16:53:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8188380E1D
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=205.220.168.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791996810;
- b=NeWBVRIc5yLwj0l8XJLBo7ZnYFgFwwPAToW0n4tL3IztAAbsvL8hLXemZvXQh/fd36Z1
- esBDbV1JPVDgyz+JxmipMJdp6wFpVoycGuN43dl4AGUaCiIf49BQPQxzce6IVh2d3C+fJ
- RTCc+UScFFGXjmCq1Rb4X/L2b2zkLfF5iGcUt+qro/N/sPkbgEiQOT62CyMHBwgAB88Pa
- kx1RpVihdMD3e2X0bQFqgwvnx2hZ/VvUtc27GeANi1D22KcUa8iv1FQNk0JwIcKriZis7
- xGXyc98MGQEIRqtOFANevtC6L0PZYoL2M0yaBp3H45isY6dKi+JBcI4u9CrU4khrsQw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZDuqSamlu27A for <u-boot@lists.u-boot-project.org>;
+ Wed, 14 Oct 2026 17:00:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3E327607CF
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791997251;
+ b=DEhfv1MAKxTHEIrsWGeIVLv0J91EuC79qF9qHf4drEWzcPbiViFQJwF0deM/IaR/Vtom
+ /SF1O3B2dOvkAX/v6wHipxFpWbeD6AjE5jtzS/QceBy6MxASrIco9VhUL5lhx5andQUFq
+ l/8QiABOOnSa1sCkYx3K02vBhFUt7MeHH/1Gu+SbwU6Cjo5W2Jm8ZARAe1OMe63zgsyjc
+ G5lieY2dyMaNwMNcEt0ae/zdX8AFyRE7X2cU3T7AHA5NvkAvoHZkUXoihTE+j7OYrLUJt
+ huoa+ngmaU8zR64NB0ctD2OhhITo6KK0bVGJErWDw58f4Xj4ANE7pHD4ngHSogfOxQA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791996810;
+ c=relaxed/relaxed; t=1791997251;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
- DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
- X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
- Date:MIME-Version:User-Agent:Subject:To:Cc:References:
- Content-Language:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
- X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
- X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+ DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+ X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
+ User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+ X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+ X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
  X-Proofpoint-Spam-Details;
- bh=FsKNSl2memNxmkPGDIVUpccH0yWmY5Dp9Spd1i+t9o0=;
- b=bBYz4FpCdU3AIrGVk8HsYeXFgBNsybrrZqRxbQ9JjN+73SANJXQzz+djEBWzpf8YMSxi
- eNXqV64UBWtnxYl5mGK/wO69O7Xx2wGPols03OqVN1f2NlZIEeRvzdnFZXgrDZpOtRMPj
- 7r+fAqPKxEFh/I9Imy//ZXuNgPe/Sy1pI7brvSB7NWeXi0oWczs3anVTecDLhOcNCbh/O
- 6lNES88JIVTAobfLSvnit7wGg3x2goxIP+vy8gd8eS0qvZ/N+jrBaNAntoj72DNJJRpdh
- Zg81MFb2ZdaOjMheFOrAQ1XHwlBA144QE76p8HuwciewGOJSxOgEdiLWk7tBsJjnrGQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=GAA7djzA2JluB9M+fKUdPHkbfkBT9sjGNIMojgCNzFM=;
+ b=DQODvwSPy6wSZrfMDEoxiEPAKxukyThpyU5P6vtoe+gCopFjvwkPX1T3Qo9Q8GPVCFks
+ QAsurtqDqZBjPBKKcg8HvK2tqmiQxAY73Q5RQmk5HSixiOQqZtbEYhUG4TQDKZjB5l7Vh
+ cHpGj5sB//LxqytH3V9l7HukUdfcs2QMi+7+BIX6fzlgX7drdnjPqvhUMFqgHbmPbmQIU
+ IxrGM5COthGykvaiTjvk9Zgv29ICJztYE0k9QHipghvX4D0ej2JoFf/Bnb9tdNjrKvIv3
+ 2OxaXiWCRm8ATRYnBJSj2HSTD6qUHtyV2pauxQBgSMX+4vmGDPbNkhmwif4YfQ7NQ/Q==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=oss.qualcomm.com;
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=o0NHWWr1; 
+ header.s=qcppdkim1 header.b=HVuiUC1S; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=DUE5tR4S; 
- arc=none smtp.remote-ip=205.220.168.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
- helo=mx0a-0031df01.pphosted.com;
+ header.a=rsa-sha256 header.s=google header.b=cqoLdDDQ; 
+ arc=none smtp.remote-ip=205.220.180.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com;
  envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=o0NHWWr1; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=HVuiUC1S; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=DUE5tR4S
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8188380E1D
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:53:29 +0000 (UTC)
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ header.a=rsa-sha256 header.s=google header.b=cqoLdDDQ
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3E327607CF
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 17:00:49 +0000 (UTC)
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69EEbUOA3813218
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:53:28 GMT
+ 69EEbJKa3642822
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 17:00:48 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- FsKNSl2memNxmkPGDIVUpccH0yWmY5Dp9Spd1i+t9o0=; b=o0NHWWr1x2Yb2CKo
- vzJb2Kj5najVM82rP0/ZCHeRYaL4oY6dpZfIL09EKUpghj/KOy71a62iKOwonr1X
- fzj+zfLIm534uTHaCKleA12rEv7kkDMR6bxj3X5u5UsLDXb0tnhPes6iW79uOUDY
- VBiF0kZWVkHlpZWNv95csuLbJc8Q/ZY6sstZ0s6arwZUA9EVjq0rcKlmOkrh+s+p
- AvcPwQEpD8ki7lt8cklRvdjjrK6DvDM8j3eG8pIIEy2Il6LMbSP3/Q4oSMKrSPAl
- t0xYNjDUz6V/QGwTLNCpbUgsJcuyv9NEsqLaGI1AaRabWNmvK+Zx9hnxxT5TMBOH
- utOwGw==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
- [74.125.82.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ha46u2md2-1
+ GAA7djzA2JluB9M+fKUdPHkbfkBT9sjGNIMojgCNzFM=; b=HVuiUC1SaHpn2fxS
+ koeNoLnlj0XpqMk3C9QGr8E7nwCa67VAH3LJhtbanbDWecg1fSqxtY2zde8To0vU
+ 7yG/WX2tiRciJemGr3jYzo0SaAVDPyZ+xS2FuQ+oimWENfgSx/6cEeZh+qTANCEw
+ KJZHyIhg03ceIxbwFKdLjfA7vIl1RGGYX0Dr3FLbrEkpXa20RaERrPS9clYj0wD4
+ 9PKM0yOBUsf3on+h//wwCe6x/JLaVnqWTlgI/R9t2vmOmnUf3h/Q6E8tb441Nyz1
+ b/ITh2vsbWQ3saUPTI6eTUcXZjAq1oPAbhVXXzG2G94KhoexzdDE03Rmno3ga7g+
+ 5lHHmQ==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com
+ [74.125.82.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ha470amcb-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:53:28 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id
- 5a478bee46e88-341eff9e381so12058849eec.1
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 09:53:28 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 17:00:48 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id
+ 5a478bee46e88-341eff9e381so12079233eec.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 10:00:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1791996808; x=1792601608;
+ d=oss.qualcomm.com; s=google; t=1791997248; x=1792602048;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=FsKNSl2memNxmkPGDIVUpccH0yWmY5Dp9Spd1i+t9o0=;
- b=DUE5tR4SYS0xDBKGUMMzUO/MSbebcdfsBfc5mGYNPfa4Y7YZ2L+Bm7XC2KWGiu8IsZ
- pRqRtFma/cROJUoyG6E1ygxtjOe4y3GcX/7Cd/+rH/52HNLGjJ/yoYLNivylG09NZt/D
- m0sOtJKgexVb5/2EHGPUR7SRJnMamnp/xrt8OmMn4wgDAdItKVYhbDnakKfs6tct8oPj
- lMlx7wk9o0rkg3DTwP1PzZat0/qANErJIjfeRCyqBeK0x3yOLjaVpa8gqbkKrRy1pa2y
- 9JaXBvvDN8qmzS32Tco2ETGA6wOtj4gGdb7VfupEja3XepktgiOC4UIlLjIJLnBVc+rv
- +PMA==
+ :content-type; bh=GAA7djzA2JluB9M+fKUdPHkbfkBT9sjGNIMojgCNzFM=;
+ b=cqoLdDDQ4AaHeF4asUck1kX5CBOkY6Nh8K5dJdj+61vzg7lYmu21PuBoaYhiTUCufr
+ f+7Vo6gmnbEozMAjuEAYQ/UI3Ubx6+dmY4TdKfEz1PtLezmcr6xtGoGgGAs664WMFOP8
+ hQrKEW3uPt+nJbuuWFyd7hahtwpol2Kbleoy4sVyEI/aQOBx1MkBXonQKcNhc0rN6shU
+ NCS8kOtirXr42zzGJPEL4otP7dfP7hNuM6lK8lKeP5foYQ8GO1tbGp7XmMy+HXv1OHYn
+ 9DbooGEJMAWIBBiOiwwCSaun3R1N3wVOL1UK3Xln/oB3T2Yp7S+CJb45hTGHv6mwF3CV
+ X5jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791996808; x=1792601608;
+ d=1e100.net; s=20260707; t=1791997248; x=1792602048;
  h=content-transfer-encoding:content-type:in-reply-to:from
  :content-language:references:cc:to:subject:user-agent:mime-version
  :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=FsKNSl2memNxmkPGDIVUpccH0yWmY5Dp9Spd1i+t9o0=;
- b=oky5iBy5rqb/9Jh4DxEvtw2VFhaIDfRyOS7MyIhazCvvLpu9cqgi6n++xy6QaPEupA
- SOLpSJPRkTL4zrhEJ0NRKG9CBs2mgfpCA/edfSDxCRm9ASFXBrWu0/DLWPeFw8Y+uUV/
- +s7+Pse+diI8L3RmUeWveh44rFOQ9IY5MlXVlB9EOf4iWWmAj7TCaxPjKSkX9QmK/FWE
- sju3sPwlZ7yy8PJWgAsjL02f3Db+1evRwmJGIOQSMPZYL5atgWDRv1IGk4U9UXLGPZOE
- FsaSUrr5eZvRHScwONB5a6M26N2CUXiVjAV6p8O4hd7tX4a3JvlYX+aCE4i8aOi3o8Fb
- I7oA==
-X-Forwarded-Encrypted: i=1;
- AKwUvByg5ZTzEgskPGZHd+AopygR3L28CBZdFf4jFOyfaoBrt8xxo9WVVJdbLu1YTQF+VHa8WjH1ej4=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYLpP8r7aoDiEcotNq4wtGRgkz0k+kECV7FfZ9LaIEZ/8FTaUvWm
- iBZH+m1EE2s2Xbet2+IY0IBx31KAP8wUpgE5XZbPjVOD3KDqn+oe3IfyBMebKmvOoTHcXuoVOAf
- zSBFQGNahdQFaatdWcSmyejSeIFWDhU1zRMVVMoAgVplAi35TqYvnmr6MVjWxn2yVkLNNaf4=
-X-Gm-Gg: AYBFou0vlxwGVNNCI+UaryZvpfCTkn7KWwmE/jEzBgvDuSr1bPhXLIWqxFOKxl59gO9
- 7dmz3Av9+Og8FwGbmpRWm3O3Po0d0CD39+YxklJjcLPnUGxDQt/6L/wW0j2n+lq7wNCiJAxIlvf
- zbXEIr1qvqoEB7DuNGecSJmJZsXveOgpQO88nROcStHmfROTYXyLUZ4VYyXQVLwdUbPPIfppwJv
- joNHb0okzXsy2ghguEAB8dUKE7tAwdz92DnjbRYiCTGu9tFA+UnWeLXDHUU/T6paCAzGlSTQlCx
- kcunlN51VQHN1p44rwMB5kFmCosjVCrQw/vuc2Y0/2dJzMD+piUcsIzkuzcps15AtT1ojOGxSTB
- Aox7xlAYx67ClIdat7auOtK3PdSj/e94+m7j6
-X-Received: by 2002:a05:7300:f0ce:b0:34b:b410:9352 with SMTP id
- 5a478bee46e88-3537de1ce96mr21649533eec.1.1791996807396; 
- Wed, 14 Oct 2026 09:53:27 -0700 (PDT)
-X-Received: by 2002:a05:7300:f0ce:b0:34b:b410:9352 with SMTP id
- 5a478bee46e88-3537de1ce96mr21649444eec.1.1791996805587; 
- Wed, 14 Oct 2026 09:53:25 -0700 (PDT)
+ bh=GAA7djzA2JluB9M+fKUdPHkbfkBT9sjGNIMojgCNzFM=;
+ b=teEixUB1fU3kwQYmtfhXPYpsjILUcrU3Qg5K1xM8uEU0men0pmdXgXhmguV40cA1mJ
+ Jh+NA+sNNXFXZPHOZj4PGBUzn2V1qY9eUpDiE/lrI8AhPY9rCSxDl5Wqm6P44YKdElge
+ jaEuBPQ7MgiiE0MHPGXhZkzspqMjVlsGwUR4hVzsdP97dPzEWIIwBDSggtq4IfkM4GFx
+ Ez62dlNeI5qGcccBv1mwp2a9BXpah4ffutjVaQ1kHYrzhyW3s+Hzr41PoECiSyweIHuS
+ nMFztkahLOhHGY+ovr7jkGsydB9NTf7KCDZsv4si/TcCd9yfs0AXd5fRs6IfxdJTSmjN
+ f6Mw==
+X-Gm-Message-State: AFq9FYL/IuD+OR9nuj4QTcGfHQaGsq0L5L361UcPLhbZPRBkXq8fG1Np
+ N8ykt8GjUXsgk/6r1fQBhP8OZ9iMm6yrbh7RvE3HSecEV3/VgasslYZS4f/4bvkXQNdFQeK3MVI
+ g43FhySG/1jUsojC6TYKNBHYaXpni4LXKuOHBHCR4wd0hm1yC//CZM5NH3mQnlmFB6guUxGI=
+X-Gm-Gg: AYBFou0Oow262LHG4t1iLOEjXEEozlAGRdm3QbEXYbfLlNQPFKaz/qsgG+qVfe+S0Sd
+ 9qM8ohcG4I1e2ZcIDkfm66cJVhzH+kyYDN8D6noAVfy6SpC0kFST1IH0/0X61UHgAb5cOCA8H9R
+ pxF1QIJQ+EBlzGql3ftmKQ6X1j6hh0uSG40kCbqjmfU33DEC5nCfJ8r2twGd17JVmscD08yzgUp
+ aFPzdFqR6nqTyPRhHjgWEc8rXQ/WYxkrWSkM81fYN1Jr+hHre2RxbVjMQPFPYYUCL+aDxyiK8Ji
+ oIdhL+UKCPdZYcnEDpkHeEZvGhp215SUb8LMMcsHYEIh+JLgNRq1ipafVYMS8PYCLpv30PGMC6F
+ xvNuurMdo05lmcnyfAbJ6VvF9daWclhHGyGhz
+X-Received: by 2002:a05:7022:3a86:b0:151:2e62:fe8a with SMTP id
+ a92af1059eb24-16a611bf1dbmr23242154c88.40.1791997246664; 
+ Wed, 14 Oct 2026 10:00:46 -0700 (PDT)
+X-Received: by 2002:a05:7022:3a86:b0:151:2e62:fe8a with SMTP id
+ a92af1059eb24-16a611bf1dbmr23241554c88.40.1791997237592; 
+ Wed, 14 Oct 2026 10:00:37 -0700 (PDT)
 Received: from [192.168.0.6] ([183.82.204.175])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-35b29c2f861sm37522473eec.11.2026.10.14.09.53.19
+ a92af1059eb24-1746482c978sm28274742c88.13.2026.10.14.10.00.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Oct 2026 09:53:25 -0700 (PDT)
-Message-ID: <fa1b28bb-68e8-4e8d-a5ca-1972ee74e4ed@oss.qualcomm.com>
-Date: Wed, 14 Oct 2026 22:23:17 +0530
+ Wed, 14 Oct 2026 10:00:25 -0700 (PDT)
+Message-ID: <53ef99dc-cfbd-4d76-9a3f-3dde5ac5d88a@oss.qualcomm.com>
+Date: Wed, 14 Oct 2026 22:30:12 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v7 8/8] doc: qualcomm: Add snagboot mode documentation
-To: Ferass El Hafidi <funderscore@postmarketos.org>, u-boot-qcom@groups.io,
- u-boot@lists.u-boot-project.org, sumit.garg@kernel.org
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Casey Connolly <casey.connolly@linaro.org>,
+To: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+Cc: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Rayagonda Kokatanur
+ <rayagonda.kokatanur@broadcom.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, Johan Jonker
  <jbx6244@gmail.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
  Michael Srba <Michael.Srba@seznam.cz>,
@@ -207,41 +205,40 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Hongyang Zhao <hongyang.zhao@thundersoft.com>
 References: <20261013-snagboot-v7-0-fc296a32836a@oss.qualcomm.com>
  <20261013-snagboot-v7-8-fc296a32836a@oss.qualcomm.com>
- <DM3NZDMWLXUO.3BY4A60QYUEW1@postmarketos.org>
+ <CAPzfCAb8nVn0XSufjg+zZqp3j6ueWMXJDXZu46KxJqNLzB_GmA@mail.gmail.com>
 Content-Language: en-US
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-In-Reply-To: <DM3NZDMWLXUO.3BY4A60QYUEW1@postmarketos.org>
+In-Reply-To: <CAPzfCAb8nVn0XSufjg+zZqp3j6ueWMXJDXZu46KxJqNLzB_GmA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA2NyBTYWx0ZWRfX89L13BFk9Ady
- xxhj5+MPHuIg8eI6OrNqMJitPlvTV1VgeAB7707SQYpbW/FMAiSRe/Qb0jSJa1yOPqr/FMf04PV
- fRf59c4fOI+fUQpBjtJqmR4e9ExKz/s=
-X-Proofpoint-GUID: uMdHqKI__cgojZO4W0QEEdwssKc1fgIB
-X-Authority-Analysis: v=2.4 cv=Y6ttIReN c=1 sm=1 tr=0 ts=6acfb388 cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=W16dESUZREjBzS9ijiA/Gw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA2NyBTYWx0ZWRfX9lkfLMf0ZAc2
+ 8VV9S856R4gUVUOPFILQb2z+ZxiRO5xAQ2Gazd/DO+HaHEtJ4LWOu2fcY0Pe1h2jLBur/myTcpv
+ flGTXqlQmyKBlsDkkHsnlMTdI3reO0tYXUg+gw5lY7RLV/RIx+Z/7ps0wNQ3KGR6DuzvfyYNVGZ
+ Kpb6npCnZNRMbfUxtG80offsIOeu4LcGA2jFzob5SmxtzZsSoQNm3yy+5Y/phZzYNPYJi+xyalk
+ 92zB1dpRZQoJBV7VT1M5xcXSHDxEmi/XLzUYpCvRL3/rrBGh9ow1tpoLwIAVv/paR2+DGMzecek
+ n7/Aug57rq8fFsC3w48sdAd7EOKLKCZEFPQuJk4nO1fwDJMuxbgTSRZo2M+rpW2xZRKFZudyL7s
+ hqHJPYu1hnS+2VGLg+ZJe03rl2kLJGbZTl6UBH7MD2sOSftwsqF0J4D/uKNXCwvap5dNGC9Kn3k
+ 4Cd5PDO+r7uH1BmQ7yA==
+X-Proofpoint-GUID: f7ZculgmOA9c2NR08GWfU8trhAT4RP3p
+X-Authority-Analysis: v=2.4 cv=P6avFSAu c=1 sm=1 tr=0 ts=6acfb540 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=W16dESUZREjBzS9ijiA/Gw==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=cSziVDP4AAAA:20 a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8 a=1N6bBq8Zmelz02OXVmYA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=6Ab_bkdmUrQuMsNx7PHu:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=NEAV23lmAAAA:8 a=cSziVDP4AAAA:20 a=EUspDBNiAAAA:8 a=1N6bBq8Zmelz02OXVmYA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=bBxd6f-gb0O0v-kibOvt:22
  a=bA3UWDv6hWIuX7UZL3qL:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA2NyBTYWx0ZWRfX9JjX4vqTNqEP
- y17+JG4Qk6ts0yhHra3LMCZpsE0fJv6L6BRTjyOd4mlx6n0/B4PuAGtDjtkrDm97s9qq+sxRpnc
- Vl3Uzx2nu1O+f1zUTyN2CSSSyQvLb9lxBXkF/2y7v0HAXWXAVwz4+4wB7IVe+E4ivUW8rzS9KzJ
- Db6leHdH1Buqkk5xJ7uJlXwudIL+fxBxyEsOirZtaJkEx9h8BZy8WVHi4onev1a1dvxhsjR/FZv
- KLp5E4wMr6Tzo4BpeNONxgR8TaZ+TGPZJg1+0jqtbJaDdJJwwXRP5xMJpHb1+O4MhpMJMogMKsy
- G/5Mh3xi7JtS8phZypvd2ywNLzjB+5TgQpcjZyuZ9cL4xODkxMKHpj88ft4EtFlhsPNQQivdx4Q
- h/CUPUVwTdwtYL1QmfBNrgE3CYXYwCeYV4FDhZ++PzoWjQQxeZtAUX850ihyk+SvS8CLS/oIx5j
- CZrIOnjQn7wX19JImgg==
-X-Proofpoint-ORIG-GUID: uMdHqKI__cgojZO4W0QEEdwssKc1fgIB
+X-Proofpoint-ORIG-GUID: f7ZculgmOA9c2NR08GWfU8trhAT4RP3p
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA2NyBTYWx0ZWRfX68h7FRx+Uk9m
+ uLJkpBnyUy5xgP4gVRwk80vMMfmBAqedA5S0i89KRz5zfw/LkQfuqh2hzE/nRp2T7OkkgOFt8q4
+ M1UoWTv8ti7byqggzw52AbLPTGKiyxs=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-13_01,2026-10-14_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 adultscore=0 phishscore=0
- lowpriorityscore=0 clxscore=1015 spamscore=0 suspectscore=0 bulkscore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610140067
+ phishscore=0 bulkscore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
+ suspectscore=0 clxscore=1015 impostorscore=0 malwarescore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610140067
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -255,18 +252,13 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Ferass,
+Hi Igor,
 
-Thanks for the feedback. Modified the doc to focus on only the usage steps.
-
-On 10/13/2026 4:42 PM, Ferass El Hafidi wrote:
+On 10/13/2026 6:37 PM, Igor Opaniuk wrote:
 > Hi Balaji,
 >
-> (sorry, I didn't mean to send this off-list)
->
-> Some drive-by feedback following:
->
-> On Tue Oct 13, 2026 at 1:53 AM UTC, Balaji Selvanathan via groups.io wrote:
+> On Tue, Oct 13, 2026 at 3:54 AM Balaji Selvanathan
+> <balaji.selvanathan@oss.qualcomm.com> wrote:
 >> Add documentation for snagboot mode support on Qualcomm platforms.
 >> This covers build steps to compile U-Boot for Snagboot mode for
 >> Lemans-EVK along with the architecture, execution flow, and Snagboot
@@ -312,6 +304,35 @@ On 10/13/2026 4:42 PM, Ferass El Hafidi wrote:
 >> +
 >> +Snagboot is an open-source, scriptable flashing framework that provides
 >> +an alternative to the proprietary Firehose protocol for device
+> a bit off-topic and just a note that this should change soon: there is
+> an ongoing effort
+> to make the Firehose spec open and community-driven, and eventually to upstream
+> support for the protocol in both U-Boot and EDK2.
+> On the host side, QDL [1] is already a completely open-source tool
+> that implements almost
+> all Firehose features. I currently work on and maintain it.
+Good to know about the Firehose efforts.
+>
+> Also my two cents here: I personally find fastboot a much weaker flashing
+> protocol than Firehose. For example, it lacks UFS provisioning,
+> device/LUN selection and
+> storage identity, whole-device erase, raw sector writes, on-device
+> digests, validated image
+> programming, and device control (e.g. rebooting back to EDL). That
+> said, I agree that it
+> does its job and is more widely adopted than other protocols.
+>
+> [1] https://github.com/linux-msm/qdl
+
+Yes, fastboot has its limitations. Snagboot mode is an extra option for 
+users who already use it in other SoCs and want the same flow in 
+Qualcomm boards.
+
+Regards,
+
+Balaji
+
+>
 >> +provisioning. Like the traditional EDL+Firehose flow, Snagboot uses the
 >> +Qualcomm boot ROM recovery mode (EDL) and Sahara protocol to download
 >> +and execute bootloaders. However, instead of using the proprietary
@@ -324,10 +345,6 @@ On 10/13/2026 4:42 PM, Ferass El Hafidi wrote:
 >> +* **snagflash**: Communicates with U-Boot over USB using fastboot to flash system images
 >> +* **snagfactory**: Orchestrates parallel factory flashing tasks
 >> +
-> It might be worth just linking to snagboot documentation. This overview
-> makes it seem like Snagboot was made specifically for Qualcomm which it
-> is not.
->
 >> +Why Snagboot?
 >> +-------------
 >> +
@@ -338,17 +355,9 @@ On 10/13/2026 4:42 PM, Ferass El Hafidi wrote:
 >> +  minimizing platform disruption
 >> +* Provides an open-source alternative to proprietary flashing tools
 >> +
-> I would drop this whole section, it's not useful.
->
 >> +Architecture
 >> +------------
 >> +
-> This IMO is better suited in a different doc? I would personally try to
-> keep this solely for usage instructions.
->
-> Or at least put usage instructions first, since that'd be what most
-> users are interested in.
->
 >> +Snagboot Execution Flow on Qualcomm SoCs
 >> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 >> +
@@ -409,9 +418,6 @@ On 10/13/2026 4:42 PM, Ferass El Hafidi wrote:
 >> +Instead of loading a proprietary Firehose programmer, Snagboot loads U-Boot into DDR
 >> +and uses the standard, open-source fastboot protocol for flashing operations.
 >> +
-> I as an end user don't find this whole comparaison section useful, I
-> suggest dropping it.
->
 >> +Supported Platforms
 >> +-------------------
 >> +
@@ -451,8 +457,6 @@ On 10/13/2026 4:42 PM, Ferass El Hafidi wrote:
 >> +    # Timer frequency for your platform
 >> +    CONFIG_COUNTER_FREQUENCY=19200000
 >> +
->  From here to
->
 >> +Enabling ``CONFIG_QCOM_SNAGBOOT_MODE`` (via the fragment) automatically selects:
 >> +
 >> +* ``CONFIG_QCOM_BOOT0_SNAGBOOT_MODE``: Early boot initialization
@@ -474,9 +478,6 @@ On 10/13/2026 4:42 PM, Ferass El Hafidi wrote:
 >> +``CONFIG_QCOM_SNAGBOOT_MODE`` also requires ``CONFIG_COUNTER_FREQUENCY`` and
 >> +``CONFIG_TEXT_BASE`` to be set to a non-zero value.
 >> +
-> to here, I would drop, it's not very useful. I'd expect developers to be able to
-> look at the source code for these kinds of details.
->
 >> +You still need to set the following platform-specific values in your defconfig:
 >> +
 >> +* ``CONFIG_COUNTER_FREQUENCY``: Set to your platform's timer frequency (e.g., 19200000 for Lemans)
@@ -488,8 +489,6 @@ On 10/13/2026 4:42 PM, Ferass El Hafidi wrote:
 >> +
 >> +See ``configs/qcom_lemans_snagboot_defconfig`` for a complete example of a
 >> +platform-specific snagboot defconfig.
-> I would drop this section.
->
 >> +
 >> +Building U-Boot for Snagboot
 >> +-----------------------------
@@ -506,8 +505,6 @@ On 10/13/2026 4:42 PM, Ferass El Hafidi wrote:
 >> +
 >> +Expected result: the build completes without errors and ``u-boot.elf`` is
 >> +available in the ``.output`` directory.
-> Drop this sentence.
->
 >> +
 >> +Signing Prerequisites
 >> +^^^^^^^^^^^^^^^^^^^^^
@@ -518,19 +515,6 @@ On 10/13/2026 4:42 PM, Ferass El Hafidi wrote:
 >> +* ``qtestsign`` — clone from ``msm8916-mainline/qtestsign``::
 >> +
 >> +    git clone https://github.com/msm8916-mainline/qtestsign
-> It's not useful, just tell people commands to fetch these two latter
->
-> Additional tooling
-> ^^^^^^^^^^^^^^^^^^
->
-> In order to generate a working image, we need ``qtestsign`` and
-> ``swiv_build_utility.py``::
->
->      git clone https://github.com/qualcomm-linux/boot-firmware-ci/
->      export SWIV_BUILD="$PWD/boot-firmware-ci/tools/swiv_build_utility.py"
->      git clone https://github.com/msm8916-mainline/qtestsign
->      < installation instructions for qtestsign >
->
 >> +
 >> +Step 1: Generate SWIV ELF
 >> +""""""""""""""""""""""""""
@@ -542,13 +526,9 @@ On 10/13/2026 4:42 PM, Ferass El Hafidi wrote:
 >> +     .output/u-boot.elf \
 >> +     lemans
 >> +
-> -----8<-----
 >> +Output::
 >> +
 >> +    .output/u-boot-swiv.elf
-> Drop
-> -----8<-----
->
 >> +
 >> +Step 2: Sign Image Using Qtestsign
 >> +""""""""""""""""""""""""""""""""""
@@ -558,15 +538,8 @@ On 10/13/2026 4:42 PM, Ferass El Hafidi wrote:
 >> +    <path_to_qtestsign>/qtestsign -v 6 -o .output/u-boot.mbn tz .output/u-boot-swiv.elf
 >> +
 >> +Output::
-> Drop this line
->
 >> +
 >> +    .output/u-boot.mbn -> Final Binary to be flashed
-> and this line. Instead I would say:
->
-> This generates the final ``.output/u-boot.mbn`` binary, that can then be
-> used for snagboot.
->
 >> +
 >> +References
 >> +----------
@@ -574,14 +547,7 @@ On 10/13/2026 4:42 PM, Ferass El Hafidi wrote:
 >> +* Snagboot project: https://github.com/bootlin/snagboot
 >> +* Snagboot documentation: https://github.com/bootlin/snagboot/tree/main/docs
 >> +* Qualcomm EDL mode: See your platform's technical documentation
-> May I also ask, if you got help from AI to write this?
-
-Yes.
-
-Thanks,
-
-Balaji
-
->
-> Best regards,
-> Ferass
+>>
+>> --
+>> 2.34.1
+>>
