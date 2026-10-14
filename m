@@ -4,146 +4,287 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52968CA9EBD
-	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 04:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0875CC6B20
+	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 04:13:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C2EE180A66;
-	Wed, 14 Oct 2026 04:10:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 55BFD80D74;
+	Wed, 14 Oct 2026 04:13:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5ytEnI9g-hkZ; Wed, 14 Oct 2026 04:10:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9BB0380BF3
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791951014;
-	b=Lr/kOuLBVbe8TRYUcC7L9joF7szN3SZzw3JXog4G1+Lvp5v5BKMrmd+LYIa4YkaZW2UV
-	 ZNreAWzZ5Yjm5gdN+gWDjAllXqGDAS5Z8UiK9dUhWPEFPY4LosBSxUnjwhpHwgkD7i8Hb
-	 Bb0H195kr62dCdqi9zu1fayibP7pD5ktTb+5aA0lzI/wHlve2Zr/w98Q9gwaSmTj6aMzz
-	 SMLI4xky5D+pnFgHCS4Gs4KD9BuAqw2AbpvrdeTShC43tfrsYUJPicY5RV5HWXuEZmcsc
-	 KYI4lMML2tthsQnrfWEp4ogTygvPH+Hrf+Ug9KTH88qbwjVwu3En+qjvMZCGKC9CObQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791951014;
+ id TE7tIVTSfCx9; Wed, 14 Oct 2026 04:13:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3419D80BD6
+Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1791951192;
+	b=PDvY9KnecDHHdGVt9g3Nh4iGNBUATUiaTSG3uCXDocNU09NUqONSAR1QaJC1+7xnJHSC
+	 HUZou+keO9Kl3Hnjb4UBpBiNu6zYc0p5t4l0enKDG4JAnBDa6mSBQ2YVF59iAMpq35cFy
+	 DG7LsZ17R2Vz0S1pHvXkcx+q2AN5NiPBP7PjWdqLD1cjtLhX1v0Ud9Lerj1TPF8OZNjzF
+	 Bcr/Ptm9Ze85OB57HszE5TMZa4vC35D6DfLrTq41C7dW7CkKY7DJNVkDGz33GdubZJySy
+	 JLDuuTvcFZlrfXxLop+i/Bbnh8RT4zbZAwQFalA91SwXqFFoLT2mcYbsNbvrbRYTw4A==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791951192;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Content-Language:To:Cc:References:From:Subject:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=BWferqoRHWvZhLic9ApWXKr8UBcrHBHZs3ho84DMv2Q=;
-	b=m+/CQTMqdcwOEHD0fQP5u1eMf+61G0WBCJL6PNURcQGHmmtsZWSkiEeBjVZnKlytI7Cn
-	 U6Ve9SU/j7F9tBGr0WI7LuTcqtBzAB/7eoHsCwR6x0eOryj8cwIGu423Mtml4TGSsGl6n
-	 B+A5vYKx/HgxiWdQug67wV7V3eMgi+p+DbkLylPF39nxFfkDgg4gBiTEfrETKrplPpQrk
-	 pPUjvFbsJPBDU7gu9xOxDrqjoVpVZiYXyuE5M3spGHLkIxmhLtl9SyuyTfARHql7/YTed
-	 3QmlAR+Ut5ANqQ5cxh90xyTsm1ZSgUD/oif1AnK9FkWnUjsDu9Fexi3AIytjffyr22g==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	dmarc=pass header.from=nabladev.com;
-	dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=JWbd7KFK;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received:Received:DKIM-Signature:
+	 Received:DKIM-Signature:Received:Received:
+	 X-MS-Exchange-Authentication-Results:Received-SPF:Received:Received:
+	 Received:Received:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:CC:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-EOPAttributedMessage:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
+	 X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-Id:
+	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=FJgKMNuGh8d3eh7ExWLuqQbRKRYzbxoi+cwfFZCnPIk=;
+	b=p2+RNS3U5eyCMtEbJb2/jAve5t2UHgCfRdotRf/9CMkHTXj4D5U9RKnIeEyhpVseDPtY
+	 lNu1QK4476e4IikONathBk199TDRIrUa9WF0s2Yz2fhJKU6y5wz4pWLdotpy5qElVKQVy
+	 0e9z2HIxzNEXo9yvEln7osTzF5FiZVWhgbmtbP72ASpMMtiCRvuaSjiyy6gxSKl6cVLD0
+	 Xn0ilCiVkWqS+412U2aqusD1SHIM5bFd3Zi/UjTuVhE12jNyQ1UidlLEY3KiBsIMiYTWT
+	 +x4kxAT7UX3ss+klsMYGH7aTUQtNnexFxfAKrePget1LhMhToiPokHgejFW8YMpHfzg==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
+	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791951014;
-	bh=BWferqoRHWvZhLic9ApWXKr8UBcrHBHZs3ho84DMv2Q=;
-	h=Date:To:Cc:References:From:Subject:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791951192;
+	bh=FJgKMNuGh8d3eh7ExWLuqQbRKRYzbxoi+cwfFZCnPIk=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=n2UWJo2s9VlyN5j/Oncl4RVboz6DOBfX2afGGJ4NzOPKlWT4P7LgIz9+UnjtrcgLV
-	 rlvAoqM+kscOx3cFfCGiBDjfPmJbFGdlpWmz7I0EyUjMOGC3ZXN+XxqXNgkf37qM6I
-	 te0AaAQomrOUv97/HjiendUkOvSvJP8oFJp2L9NdOK++LAdx56R3UDaKSMQSMSsCOq
-	 6GX5342NmzgZJT6n7GCQNEvlaSaSxTKWIaPqCd8JQXYVXJOBpIDOCwfXEPycIPfy3l
-	 Ury5suriEYa75qFVh4+pOstHl5puHZDVMm/19NNXBkFi4THHrm1cwtahQFHstjmycx
-	 jz2sYo3m801aA==
+	b=o40BI+w+iEZ4DivueFfW/z2TK1ieWDUdbTFIH2+qf193gKe/VpwW5GVYS6gOqKK1h
+	 4N9HFSA0C9i6zjhPRK3Eb8v8owwGgTcAVx034rprno5IsosqKDsSWan7zZ5rk6F68J
+	 H2C6wvDY8ph0QwSiDaDGt/wf6O/PLvFbOGkPvf6ul9uSjFKQugIqGpdkte4NuWf7ve
+	 arep/Bj6ERndW1Guy7FdTzPpVJBv0BkPWCMC02RSC/eBR/lu875G2czMlLkx1sY8W3
+	 /UAFhao2LrbySMUoVmb4+8SsYlyInub5xPQC/eju6CBpfUZm9AO0I2E83ZZZ5vHBzz
+	 VLh+NUHzs4YOQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9BB0380BF3;
-	Wed, 14 Oct 2026 04:10:14 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 9B5601518
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 04:10:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3419D80BD6;
+	Wed, 14 Oct 2026 04:13:12 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id C0821235
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 04:13:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 8B99780A84
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 04:10:07 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id A58F560894
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 04:13:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yMaRfcX--mul for <u-boot@lists.u-boot-project.org>;
- Wed, 14 Oct 2026 04:10:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 23A3480A66
-Authentication-Results: smtp1.osuosl.org; arc=none
- smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791951006;
- b=AOnaMCTOh+ZYYI9paMKKp74teTiPr+DE234zrN0mbbcSd/7t5YwqFKq4lm7X8dXyeHVt
- N/ESPyRXM2f3SANIfKJgW6DgvVgNuMUbQ8XBytE43r5NnlakaV+pnjMaY42LbnbyFPYdv
- XNSZme1zvV/mNFSyVtJel0rGF0gZQg6AfGfpqK8tFLZiJY5UYrfoK631DR+AimgGbFDIH
- gaWpXCqP2y9kxVRpfG3120aSkRhsN1YcWltjpVITVuYBafWGI/7EAxTaaM+wxd2K1aw0v
- 5c+8nctk9EmLkycO+xHQ22P3ZCtzgnUcKFR3SxKDf56YSG5qlt93tea3VtAOQIhX5eg==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791951006;
- h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
- User-Agent:Content-Language:To:Cc:References:From:Subject:In-Reply-To:
- Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version;
- bh=BWferqoRHWvZhLic9ApWXKr8UBcrHBHZs3ho84DMv2Q=;
- b=PgKdPDGCwbbl95iivGISAzhsyjoWgzdcj0g9L8gD8At8l8qS1OtUIU14Qaw3LjYhOujr
- 0Vie/ouFITKtURFIN2cAIxxjCOm2MtwdautT8qKt4I6i/SRdHG9kQKAdrJKha+JGUOdvW
- LgAg7TOH1z9HulbJOY/zlTxUR82+JRdEkKzWVlA1Pp4yvBZjILY6cyZD2LPwOY8TnacOe
- VEw29enYM+RxiXLQfIbYD6gVFI++ehF1KfiqLudCsJkTEEiflg9nFK5boIB0QwboElj9o
- rBQjVAmXY/h0hjoeSUF6eLkwzj4rYYJ366dWryihvAzbi087fbMOe7r6x4b1tzuCuFQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=pass header.from=nabladev.com;
- dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
- header.s=dkim header.b=JWbd7KFK; 
- arc=none smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
-Received-SPF: Temperror (mailfrom) identity=mailfrom;
- client-ip=2a00:f820:417:0:178:251:229:89; helo=mx.nabladev.com;
- envelope-from=hs@nabladev.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
- header.s=dkim header.b=JWbd7KFK
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 23A3480A66
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 04:09:00 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C9DB71093DF; Wed, 14 Oct 2026 06:08:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1791950930;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=BWferqoRHWvZhLic9ApWXKr8UBcrHBHZs3ho84DMv2Q=;
- b=JWbd7KFKzg2eV2ANO6s2ULZgyCercjEw7T0SrSeyaPmlPs9fQfgd+Mjrm/ETiRaewTeFpH
- gnOkjUvdDEjqWy/Cd1KgQP0YKpMereE5OQyWKZA90EvG0fwByLu0RSyBV+Vv/ZBnzqqFVn
- sDI/eXyREHDkAdYwXRZAmj/OAY2cU17Pae8HrSsXts9VNSLTqD1GJ8o4A4oeNd12JQzP9u
- Y2bwm1SeTk9bKxHQP8dBsYbLclv33OOpH7rCah9ApiCDrm+L2R8nDFyQWFGOYwSkXsGjSP
- nQmO/kZsgTiW8ugeROmigv48CYVoSrZ1f5xiDmv4J+edG+Rww7Dl4ytVQhRxOw==
-Message-ID: <9722ba30-e91a-30e7-28c0-b5ac6db43ea6@nabladev.com>
-Date: Wed, 14 Oct 2026 06:07:46 +0200
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3v4e4eesBNmH for <u-boot@lists.u-boot-project.org>;
+ Wed, 14 Oct 2026 04:13:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 144756072E
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=148.163.150.75
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791951179;
+ b=G8t0dfqQ+Ox3FA+aakgZAVre7hQAjHCX7TMnGGk7SDE4vudvSXoYsUDq5cabPHo1O5R3
+ OznF5syvI3da1mPhACpqfBMhIWq0WYl0JKR3chN7CBJXQAEsvFa9yeXup5G/NaZQNKKIG
+ J650U6T5p7fUN//jNmsz6KAuA1+njp6UQKyl4/Ka46ClvCoqzucpFO7LF/MRbc7pY/XlB
+ 6trpg0sT2k7vxG6p6Gm0MazW61kLjq5bWyWE7il7zvTQtYArX3MMgmzqtXFzpx/O9fM1N
+ SsxpjopkOvUkE8GFpjZhSZcaqTpxkovsK6K29i8MHp9Gf95lev2xGF5QaCqe1hGnsTA==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791951179;
+ h=Received:DKIM-Signature:Received:DKIM-Signature:Received:Received:
+ X-MS-Exchange-Authentication-Results:Received-SPF:Received:Received:
+ Received:Received:Received:Message-ID:Date:MIME-Version:User-Agent:
+ Subject:To:CC:References:Content-Language:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-EOPAttributedMessage:
+ X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+ X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+ X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+ X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+ X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
+ X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-Id:
+ X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+ X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-Proofpoint-GUID:
+ X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+ X-Authority-Analysis:X-Proofpoint-Spam-Info:
+ X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+ bh=FJgKMNuGh8d3eh7ExWLuqQbRKRYzbxoi+cwfFZCnPIk=;
+ b=mcD19qGOtplf9OsexPiZS7mZtR48b86NFLwhtD2FbMIYcOANXVeVXtoDUY/yzotHU09Y
+ CYfpQ7DbAKJz271MGFA8UsqkW1R9N5fnie6BV0tcBtqJ4EwDaz0QPrMEPOS6DIbpgiG4P
+ fm0oaAk8QNl8T8lNV4/Qx/rrCDYFdV1x2s4/Am2fE7zf7jMRK7gInWqxvmSeFquv04Z9D
+ wQMKED56GtoSUAyZitQ8rpkSU9scPrvwWyBdahBvXJHAFeDYZMopG/QVcJZVsTQTUNkTk
+ 5+OQWyqUSM22QGbuJg4PEzyH6mL7Sxt+I7yAKo9olEAoJnaQkXrYZzGtTQFJ5OzOxSg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ dmarc=pass header.from=ti.com;
+ dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256
+ header.s=proofpoint-05-2026 header.b=dWq1xueg; 
+ dkim=pass header.d=ticloud.onmicrosoft.com header.i=@ticloud.onmicrosoft.com
+ header.a=rsa-sha256 header.s=selector1-ticloud-onmicrosoft-com
+ header.b=dVBsyGIR; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=148.163.150.75
+Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
+ [148.163.150.75])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 144756072E
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 04:07:49 +0000 (UTC)
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
+ header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=dWq1xueg; 
+ dkim=pass (1024-bit key,
+ unprotected) header.d=ticloud.onmicrosoft.com
+ header.i=@ticloud.onmicrosoft.com header.a=rsa-sha256
+ header.s=selector1-ticloud-onmicrosoft-com header.b=dVBsyGIR
+Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
+ by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 69E1Q1lE2155410;
+ Tue, 13 Oct 2026 23:07:42 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=
+ proofpoint-05-2026; bh=FJgKMNuGh8d3eh7ExWLuqQbRKRYzbxoi+cwfFZCnP
+ Ik=; b=dWq1xuegHvaiulNLUfWcomFrjjJiAGnwAwvbF+oCxJ/i8QadSyLADlkAe
+ UBaWoKnADfMVnx5WVrceZPoucyjJpuXnjUFn7ECtgvIdlO8wjq8wrc74yAFyyWeC
+ Qubhkg4yyDQoC6SX25Qo1NARNOAWJNByCz31lxL/qnd5tBpxbcrA9U8ZmX5jzu2K
+ bq+foE6Ywe6JQko6DWaqCIlyW+TE17KtLnSCUFnQcsCC0c7leF82ECO3nuI0RSRm
+ C/fH2IzqAySK/yWdb4beszRz/qu+A/Q0HRW9JR1QeEw9MgXf1Wxk48+6kFzLbipo
+ +KrJTH4IJSz5mBmLlj7N1LwVBW7Xg==
+Received: from bl2pr02cu003.outbound.protection.outlook.com
+ (mail-eastusazon11011020.outbound.protection.outlook.com [52.101.52.20])
+ by m0380145.ppops.net (PPS) with ESMTPS id 4ha02r8s1f-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Tue, 13 Oct 2026 23:07:42 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=OV7bhUKZxp086FkhS+tArKydcfd1LmJI2kBs/6WGcod2cMKkKrcuTAmndVRu/l+1tFq8y//HdEGQL4KwTARTtO8rSD1jUVkhUZgLR1RN8Pfi7KCCGvCEJCYkl29298xZoMk485/rG6kjtbf22qaP2DfsXXBp26MOZP32Um7aUBCaRg8iqO0JqWYIfDTCDKGApC00jT2KoAs26ocVundLfDAJs1C6vZzWWDbhWEnMz4gxTQky7eL3fM2U/p17SbmlupLetyK7Ygk9iVtyc6Mg5jEjkX4U623xspyqIYcTHmqbzti8W7FB44QR/7nFZcRol5io/DF9AKx/RVQL1fXjqA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FJgKMNuGh8d3eh7ExWLuqQbRKRYzbxoi+cwfFZCnPIk=;
+ b=LLX+G4o1OnTW1Sr2Q7jSowCs8GcCeu4z3Y0wzJihyhWHUarntyWvrIpBWEuM01LDkXzylCwThyKsNhkt5BiOn/T9HI2Y25RfpGFUo3VYYlEEIwV3ZOAWdxd1+yWV9mJrkk3Lti5fE3AG5xTI1BkmggzVn+aTeA47UCEcjipn8pwlkHk2z8V7HGiSxVkPjpsu0tjq0kG2++sY/qmk7rnZrGvhpOOeUsInO/xw+G6KH+k4rOGlYfw88CCXJVlRk7lzA95X1g//Krm+41dAs6F8gmn5gsMCKA0ge9HlSFJ7v0sOusC37QGh/ubmiYaz/4FqoV8+KtGhG8IQOEEA3nMrXg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=bootlin.com smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ticloud.onmicrosoft.com; s=selector1-ticloud-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FJgKMNuGh8d3eh7ExWLuqQbRKRYzbxoi+cwfFZCnPIk=;
+ b=dVBsyGIRHeir5w0PNRNTT7oWE49E2aFNG/I4VGGmW3J/nt0qYajVkv2wgP66R4ONTCb60U+3EJA4gntpXEcwSMztiESq+3fpSHDPtq+QPrCthjbIRQOxeVnfKpBPUegmC14s/lkVX5f0+bRihizLs0LuKyqJZeqiysY1V2UttR4=
+Received: from CYZPR17CA0024.namprd17.prod.outlook.com (2603:10b6:930:8c::8)
+ by PH7PR10MB6201.namprd10.prod.outlook.com (2603:10b6:510:1f3::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.12; Wed, 14 Oct
+ 2026 04:07:38 +0000
+Received: from SN1PEPF000397B4.namprd05.prod.outlook.com
+ (2603:10b6:930:8c:cafe::3) by CYZPR17CA0024.outlook.office365.com
+ (2603:10b6:930:8c::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.20 via Frontend Transport; Wed,
+ 14 Oct 2026 04:07:38 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 198.47.23.194) smtp.mailfrom=ti.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SN1PEPF000397B4.mail.protection.outlook.com (10.167.248.58) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.522.6 via Frontend Transport; Wed, 14 Oct 2026 04:07:36 +0000
+Received: from DLEE206.ent.ti.com (157.170.170.90) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 13 Oct
+ 2026 23:07:07 -0500
+Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE206.ent.ti.com
+ (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Tue, 13 Oct
+ 2026 23:07:07 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
+ Transport; Tue, 13 Oct 2026 23:07:07 -0500
+Received: from [172.24.22.240] (lt5cg60819vj.dhcp.ti.com [172.24.22.240])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 69E474FC609216;
+ Tue, 13 Oct 2026 23:07:05 -0500
+Message-ID: <83313243-51cc-44a8-ad13-8c53d4343350@ti.com>
+Date: Wed, 14 Oct 2026 09:37:04 +0530
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: mach-k3: am625: Wait for TIFS initialization
+To: Markus Schneider-Pargmann <msp@baylibre.com>,
+ <u-boot@lists.u-boot-project.org>
+CC: Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Daniel Schultz <d.schultz@phytec.de>,
+ "Richard Genoud" <richard.genoud@bootlin.com>, <u-kumar1@ti.com>
+References: <20260923-v2026-10-next-topic-am62-hs-se-fix-unlock-race-v1-1-300ddb9f5be8@baylibre.com>
+ <82208a4f-b91b-4415-8173-1272189e372d@ti.com>
+ <DLO86T747FHQ.2NF28TVL3CFX2@baylibre.com>
 Content-Language: en-US
-To: Takahiro.Kuwano@infineon.com, sjg@chromium.org
-Cc: u-boot@lists.u-boot-project.org, marek.vasut+renesas@mailbox.org,
- vigneshr@ti.com, jbx6244@gmail.com, stefan.bigler@securiton.ch,
- quentin.schulz@cherry.de, trini@konsulko.com, vjardin@free.fr,
- kilicyasirahmet@gmail.com
-References: <20261004040657.3156402-1-hs@nabladev.com>
- <20261004040657.3156402-4-hs@nabladev.com>
- <CAFLszThGYtvGYmYi1iOjRiqBANzbNSOt00n1HHzOWX8GXw3P0A@mail.gmail.com>
- <e66df57a82424e6d9b1fe8e2e5b7041f@infineon.com>
- <d19b3b84-86fe-4f46-a9f3-95bb18b20d13@nabladev.com>
- <702923f8-7957-c8e1-0c02-1663240740b5@nabladev.com>
- <18b0ae1aac0f4539b94b0a5b914c3329@infineon.com>
- <e5436f07-cd26-ec6b-87d2-1b9a5f999a90@nabladev.com>
- <6b8e24a3c7774d48940411b43217f7ee@infineon.com>
-From: Heiko Schocher <hs@nabladev.com>
-Subject: Re: [PATCH v2 3/5] mtd: add driver for the Microchip 23LCV1024 SPI
- SRAM
-In-Reply-To: <6b8e24a3c7774d48940411b43217f7ee@infineon.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <DLO86T747FHQ.2NF28TVL3CFX2@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF000397B4:EE_|PH7PR10MB6201:EE_
+X-MS-Office365-Filtering-Correlation-Id: 98461e9c-79e5-4531-f6b6-08df29a8ae70
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|82310400026|1800799024|376014|36860700016|6133799003|18002099003|10067099003|22082099003|13003099007|4143699003|261009223027099003|56012099006;
+X-Microsoft-Antispam-Message-Info: 1z7+aEwCkNQ6klZK6cU+Y33LzQfPD4PEm5IOYHF7B66f22B5n5NPDKve9DFXfIs6cNxWUAobv5FzHRIwGR87FKsZHN5amgBqjF9Z962waOy12h6uNsvQ55wZS00g8BRyYf2vwLipZ9sewRU3PZjsjRgHA0H8FB3WhqqiDR6ZHTRxh+b8mWxbMkcaz3FmxUw43G6AxHoLKoUXo+puPwInAYaPA/o/6D19PG2+xwX+ZK918etir7PiYnWw0BmluWoJfVtAiyyh5iBheTZgxCHXgpEejGIrbklO4r051SgjVKP7B88I4N5bOVHjnkLgNIE5fVlV9URvcqKXxZCUIEHLPmR/VhvvfdiNwRV9V9k5MRiJ/nI3w/c8ZJeTEGLy9vwMRQE5eaf9seE0EZ/ygQt1HIrg0iiViYe2feHLGO8QFIRm2S8rfOA7lo95dcs0YgrfM1VDcHtYWwZYy7dvEid6FOUolHFT+1Eq3cmzersHoMVaItdg2X5PCk+XeGE8aS6SaeW30fzHBH/j4G1UxVCu18VJPwkCt7m3GgEYUU6ZgAbvDi4KNzLQcbk0cvQ0DKII22Qcr+qI+HvCOnBP30TlrNVEeLYvpthSYs5PFjLBu6L1n1T270B09bVASdEVUXqTd5S2qA3jVuPbBcB8irNh8+2rh95WIKyn7JFvQM4qf5k=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(23010399003)(82310400026)(1800799024)(376014)(36860700016)(6133799003)(18002099003)(10067099003)(22082099003)(13003099007)(4143699003)(261009223027099003)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: Jafa4xo4OwRXxjleqEEIzhrMsv5HNmA/v5tHqcClgZ5V1NS1TNiw7pcGDHC1cUXvejYuZG4WPTqyj5kDZugz/Y3EG8Ukk5OXxOa6tE3iNG3pPnWYnDowN3nzwoGOqsxO1/tlk44cU0oWsBpUeFRRZ79QTr3Q8YJax9KDSACVTWwjMqavFg+hPuwT+Ybq2jq5V7qLU6UvhR/6F/I6nnDDbwIzQjOYTYQ1YqlGzONpv/BJuMwdaE6/VbyDQ1cQ4nCBaJGm02W+fvSYR4sjGcPJjkei31yONaFk+v9m7JGhSl5xA9k4UvWjSEeUl2CQmPyxLQ2MowRY8LVshWKLi95h+ICYSZhnQQNd5516mLJsozcJ/4H5WGq33OMDUjvV1DqkJy/8vMrHp/g3SMgSiatF1oSDoR29VBzSmBgqsxX0qyngxw6QoOTy7aIRRZjGykBI
+X-Exchange-RoutingPolicyChecked: t3MU/YngocBd5yEv5SlAl9T4Xr3mDzItMLVWovf5xQE2i7F0Z9fuIG8sXPNe+45HeHu7a5hmt5Lm1fENnXaoG9GH+dtTXI58NUx+gdmMLdXD5gFM0QsNNLFhFWpka3Hkfi+76kyzCJWA9Br/snnebK3tXr+WP5jQURATEMBQ1oTk8Hr3NrguTtm4fdxU8ML7IXM+2mMGyEhJqmkttdtcZ6UDFkRlgzDaQkcNQhqZGSBPDnOHZmlzm+ZAmAIiyI+xBbgYfv9tcY+peNNxQFxVOBwhbzCmAlOzJAvGTKgaVc88myIRe8TqtTNbzezNekxI9rMrWYjhuYYOUdv43MGx9w==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2026 04:07:36.6965 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 98461e9c-79e5-4531-f6b6-08df29a8ae70
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000397B4.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB6201
+X-Proofpoint-GUID: VIWqNo4R7LtVLn_8L9VOfm_KJ359AKGx
+X-Proofpoint-ORIG-GUID: VIWqNo4R7LtVLn_8L9VOfm_KJ359AKGx
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDAxNiBTYWx0ZWRfX2VKiJ70kTh6v
+ n/4mVccQvIYE4rO6U3kr+sO8jhhIQWk0seIdFj2mYkZyLR1rbsJhSn1cqcEqaCPmXqt3Z91DKeB
+ 4WYBaMJK+diIM/vxXy99QH0cZTDEdUNM5+AbHJWFP/mPfr+I4PIFhX4KNfsxe4EBzBad0tLT+sD
+ 10wdFdlVnokYXV6AbBol1XhAGBDy468Qs6b3hT6BVAzibyambdwEMCcgWgTNqNPK2ZhlMYpkX7g
+ XGtQRQNDnntClfS3I/CiaMCWZflnG9SM4O38cJ7UrBbZmo2u1lnSLX+0T7ZrIqbuz/Amghlp3mE
+ EqaoaWrrWuouS5jdiGfGNpmRMhurO4doWo9FcVJ9kLkyyua48PKJptOLQ8F64hfm4xgInnHwEai
+ 1LpoWUHFNrJj0C8ThN4CL8Y3/d42oKevi8n3uCr/3lbZMag8YaRU4PWsKnqyJWq0GXjA3tFi1ks
+ ITikJA0ovceM+TIMSrA==
+X-Authority-Analysis: v=2.4 cv=Vcxir1p9 c=1 sm=1 tr=0 ts=6acf000e cx=c_pps
+ a=x0D8RYL8GqfJKF6oaN0fjw==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
+ a=s63m1ICgrNkA:10 a=AlMIdn_sM9wA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=Z8NIEmU8O1QQgoT56wFK:22 a=gO1vWkAQAl3rybz1DQOp:22 a=VwQbUJbxAAAA:8
+ a=sozttTNsAAAA:8 a=NEAV23lmAAAA:8 a=Gfcx16FAE3elvPEKfJoA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDAxNiBTYWx0ZWRfX2SUL9QChA5ON
+ iBy4Ag63xzLv5CWIDG9DXvTxXaIybWVow1fwKPllRcAa6Dl7oUeCwwVLiLoOoSXwqultGs1OD+T
+ 1UX7CGRyxzmqeQ9BD//AAnqUnfZ9Wec=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 bulkscore=0 malwarescore=0 clxscore=1015 phishscore=0
+ impostorscore=0 spamscore=0 suspectscore=0 priorityscore=1501 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610140016
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -157,173 +298,46 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hello Takahiro,
+Hi Markus
 
-On 14.10.26 04:54, Takahiro.Kuwano@infineon.com wrote:
-> Hi Heiko,
+On 9/25/2026 1:10 PM, Markus Schneider-Pargmann wrote:
+> Hi Udit,
 > 
->> Hi Takahiro.Kuwano,
+> On Thu Sep 24, 2026 at 3:00 AM CEST, Udit Kumar wrote:
+>> Thanks Markus,
 >>
->> On 13.10.26 03:20, Takahiro.Kuwano@infineon.com wrote:
->>> Hi Heiko,
+>> On 9/24/2026 12:40 AM, Markus Schneider-Pargmann wrote:
+>>> On HS-SE platforms TIFS takes longer to initialize. TIFS only removes
+>>> the firewall on the registers at the end of initialization. On HS-SE the
+>>> u-boot ctrl_mmr_unlock() can happen before TIFS removed the firewall
+>>> leading to a race condition. This leads to a broken watchdog since the
+>>> signal configuration doesn't succeed because the write doesn't take
+>>> effect.
 >>>
->>>> Hi Takahiro.Kuwano,
->>>>
->>>> On 09.10.26 11:28, Heiko Schocher wrote:
->>>>> Hello Takahiro.Kuwano,
->>>>>
->>>>> just answer here, before I looked into the comments from Simon...
->>>>>
->>>>> On 09.10.26 10:29, Takahiro.Kuwano@infineon.com wrote:
->>>>>> Hi Heiko and Simon,
->>>>>>
->>>>>>> Hi Heiko,
->>>>>>>
->>>>>>> On 2026-10-04T04:06:44, Heiko Schocher <hs@nabladev.com> wrote:
->>>>>>>> mtd: add driver for the Microchip 23LCV1024 SPI SRAM
->>>>>>>>
->>>>>>>> The 23LCV1024 is a 1 Mbit serial SRAM with battery backup, sitting on
->>>>>>>> an SPI bus and used as non volatile scratch storage. Register it as an
->>>>>>>> MTD device of type MTD_RAM, so the mtd command reaches it.
->>>>>>>>
->>>>>>>> The device powers up in byte operation, where every command carries
->>>>>>>> exactly one data byte. Select sequential operation once during probe,
->>>>>>>
->>>>>>> Just to check, is this right? My understanding is that the
->>>>>>> 23LC1024/23LCV1024 data sheet gives sequential mode (01) as the MODE
->>>>>>> register default; byte mode is the default only on the older 23K256.
->>>>>>> The Linux mchp23k256 driver never writes the MODE register. Setting it
->>>>>>> explicitly is still a fine defensive step, since something else could
->>>>>>> have changed the mode and the part keeps it while on battery. Please
->>>>>>> can you reword the commit message and the comment in spi_ram_probe()
->>>>>>> to match?
->>>>>>>
->>>>>>>> so that a read or a write of any length is served by a single command
->>>>>>>> and the bus is claimed once per transfer.
->>>>>>>>
->>>>>>>> Writing needs no erase. The driver therefore implements no erase
->>>>>>>> operation and says MTD_NO_ERASE in the MTD flags.
->>>>>>>>
->>>>>>>> Signed-off-by: Stefan Bigler <stefan.bigler@securiton.ch>
->>>>>>>> Signed-off-by: Heiko Schocher <hs@nabladev.com>
->>>>>>>>
->>>>>>>> MAINTAINERS               |   5 ++
->>>>>>>>     configs/sandbox_defconfig |   1 +
->>>>>>>>     drivers/mtd/Kconfig       |  14 +++
->>>>>>>>     drivers/mtd/Makefile      |   1 +
->>>>>>>>     drivers/mtd/spi_ram.c     | 222 ++++++++++++++++++++++++++++++++++++++++++++++
->>>>>>>>     5 files changed, 243 insertions(+)
->>>>>>>
->>>>>>>> diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
->>>>>>>> @@ -194,6 +194,20 @@ config ALTERA_QSPI
->>>>>>>> +config SPI_RAM
->>>>>>>> +     bool "Microchip 23LCV1024 SPI SRAM"
->>>>>>>> +     depends on DM_SPI && DM_MTD
->>>>>>>
->>>>>>> SPI_RAM, spi_ram.c and the spi_ram driver name are very generic for a
->>>>>>> driver that handles one Microchip part. Linux already supports this
->>>>>>> chip in drivers/mtd/devices/mchp23k256.c (CONFIG_MTD_MCHP23K256), and
->>>>>>> the binding in dts/upstream/Bindings/mtd/microchip,mchp23k256.yaml
->>>>>>> lists both microchip,mchp23k256 and microchip,mchp23lcv1024. How about
->>>>>>> using the Linux names, here and in MAINTAINERS?
->>>>>>>
->>>>>>
->>>>>> I would rather have a generic SPI-RAM driver that also supports MRAM [1]
->>>>>> and FRAM devices using the common opcode set without erase.
->>>>>>
->>>>>> Currently, some FRAM chips are handled by SPI-NOR, but new devices should
->>>>>> be added to the SPI-RAM driver if it exists.
->>>>>>
->>>>>> What are your thoughts on this?
->>>>>
->>>>> Seems like a valid argument to me. Simon? What do you think?
->>>>
->>>> After looking into patches from Yasir (added to cc). the FRAM
->>>> case is different. The FRAM (at least the one Yasir adds) has a JEDEC
->>>> interface, the 23LCV1024 has not! So 23LCV1024 is really special, and I
->>>> currently tend to say, that Simon is correct, that we should name
->>>> the 23LCV1024 driver drivers/mtd/devices/mchp23k256.c.
+>>> Add a get_ti_sci_handle() call before ctrl_mmr_unlock().
+>>> get_ti_sci_handle() leads to fetching the TIFS version which only comes
+>>> back after TIFS initialization is done. If a response is not received
+>>> get_ti_sci_handle() returns after a timeout and continues as it would
+>>> have done without this patch. get_ti_sci_handle() has to happen after
+>>> spl_early_init() as it requires DM to be setup.
 >>>
->>> The MRAM (not FRAM) part doesn't support Read ID (JEDEC ID) command. Yasir
->>> mentions that in the commit description and I checked datasheet [1].
->>> Why did you get it has a JEDEC interface?
+>>> Link: https://lore.kernel.org/u-boot/20250815160240.3575140-1-d.schultz@phytec.de/
+>>> Link: https://lore.kernel.org/u-boot/20260225051559.416445-1-u-kumar1@ti.com/
 >>
->> Seems I looked into the wrong datasheet! Maybe it is too early for me here...
->> I need a coffee now.
+>> Here tom advice to include all platforms
 >>
->> Thanks!
->>
->> In linux the MRAM Yasir adds, is also handled in spi nor driver.
->>
-> Yes, it was added quite some time ago. We no longer add new xRAM (non-erase)
-> devices to spi-nor.
-
-Ah!
-
-For the ones who "share" spi nor interface, we may should extract
-that part from spi nor to share the code... but as said, I am not
-to deep in the code...
-
->> the register 5/1 (read/write status register) and 3/2 (read/write data)
->> seems the same for both chips and for spi-nor subsystem.
->>
->> But, spi-nor and MRAM expect a "status register" and the 23LCV1024 [2]
->> has there a mode register, with different bit meanings!
->>
-> I still think we can handle this difference using compatibles and device
-> specific fixup hooks, but...
-
-It is not only the status register, 23LCV1024 has no WREN (write enable),
-nor polll a status register... It is much more simpler... but yes doable.
-
+>> https://lore.kernel.org/u-boot/20260226143756.GC1593142@bill-the-cat/
 > 
->> Seems to me, that is why the 23LCV1024 got his own driver in linux...
->> even if this is the only obvious difference (not checked deeper now).
->>
->> I tend to be in sync with linux here, and still add the MRAM Yasir adds to
->> the spi-nor driver, and have an own driver for the 23LCV1024 in drivers/mtd/devices.
->>
-> keeping in sync with Linux is generally right thing to do😊
-
-:-D
-
-> 
->> If not I see 2 options:
->>
->> a) Yasir adds the MR25H40 to the "spi-ram" driver in this thread
->>      in a follow up series. I tend to say, I first go with driver place
->>      and name Simon proposed.
->> b) add 23LCV1024 to spi-nor subsystem and find a way to work out mode/status
->>      register differences
->>
->> other options?
->>
->> b) seems ugly, a) doable... but all options differ to linux approach.
->>
-> At some point, I plan to propose generic spi-ram driver. I have a few Infineon
-> FRAM devices that would benefit from it.
-
-Good to hear... for linux and/or u-boot?
-
-so for the series... should I try a more common spi-ram
-approach, or go with linux like drivers/mtd/devices/mchp23k256.c ?
-
-> 
->> bye,
->> Heiko
->>
-> Anyway, thanks for taking the time to think about this!
-
-You are welcome! Thanks for your time to review my patch.
-
-bye,
-Heiko
-> Takahiro
+> Thank you. I am aware of that request. I can extend the series to cover
+> all, but I don't have any other HS-SE boards for testing. Also I changed
+> how the implementation works and wanted to gather some feedback on if
+> this looks good to you.
 > 
 
--- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+Sorry for delay, I am happy to test on HS-SE devices,
+same time I am thinking in below way [0]
+
+[0] https://gist.github.com/uditkumarti/3472e4f3975d1a404adb57635ddd04c2
+> Best
+> Markus
+
