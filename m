@@ -1,138 +1,251 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5743CC6B27
-	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 09:07:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7116CC6B1F
+	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 09:18:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7DB7480A49;
-	Wed, 14 Oct 2026 09:07:12 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 05EDB60818;
+	Wed, 14 Oct 2026 09:18:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oB9vcW4Elhp5; Wed, 14 Oct 2026 09:07:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org CB83380BD1
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791968831;
-	b=S5YD9HPxB+QwdNl1FzOevqJKBFcveSFvvg81+bS0JIU8SSA9OE6q0n7IbS02Y9xMif4o
-	 5YYGCZSjZUMIkzYI9HsGik3coCk+fkr6lDhAic3mmpUlt7nmTYJB9jPLYzorFaBEBfCFO
-	 QVp+YeJw2cJwtQQMg6CMk0mOkrUGmRt44ZNGo7U3oFe4pOloaJ3lKXf2BkfzKgtRsO2xa
-	 kdCehkY8QZJcX6bOm/0yGkrWy1JaPET66MKhwbnnuqAJe2O2zjOarT17idf1tvaeRTy6Q
-	 QZSs2imu8sOueIxnbQeCP7c7zfZV0qDSsH2TePFaZYFXtCr4K/Y6AQQDqSQMVTGYE9Q==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791968831;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Nl3JQUKfgrGS; Wed, 14 Oct 2026 09:18:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3CC5A607ED
+Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1791969519;
+	b=pNSQCs4ENL7CxBL30aHTVh1oMH40ZtKUolnKxizWPYsEgFPswZW5UDRMSayjpggpUsrM
+	 BXA6ZFWAdU0jjYAwmZHojKlv0SME0zkb0t3FukX8CBj1n7YP5HzFJQK9rrfTSjVEbxpDM
+	 yhIiLwiDkfcSht6XCdcE6O3iZ4c8EQYkdnGuUQlBMK+O4t9DGM3RohuR6fq++cZ4ydP2g
+	 pBGm3bGgpXDaFAWmMk7kwmTIGmuzniXrhTGNT0l6ScaTVAW1ybyuheHZvpDY9cZxGP828
+	 hziq2vv0OwJX9tJ/TTcYYJC+4plGYDxUY/kHLgjh8IY5iGuNzgK/ytQnRbdmQ+w1aMg==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791969519;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:To:Cc:Subject:In-Reply-To:References:
-	 Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=B2Boo0YZ5qBedDweRvgQXwo9K2GgSBhYMW2yOMrODzI=;
-	b=V9Y3n2UnTWCWmgO2HnENz7QsEcDX+0m0C89JuqwbHBlwh8zrl+lpKiNHV39bixjti2+r
-	 DMF5F+Bj1NydAg0iIoz4r5yEwSCASEUarhKvDbyIExzCxxjNmlrl9nLEFRYiutyBTIk8D
-	 F6DrK7hF/4/9JxSk7Wpg2kKD16bLAOq2j2eq0zLqyI34o5zZYioVEZVBh3JT4HU64U0jJ
-	 Oov1rFiBDlLPis1f85Gt9xRweWv6TcKzFttms7mC9spFsgk909MUVuqsjVbzJJh3j27YR
-	 Yo6tS7xtt4M853XM1/q9Q6J4HCy9PjZSKEIk8NwPn4nnb7P48hCdfcap9jpyVBKpXJg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:
+	 X-MS-Exchange-AntiSpam-MessageData-1:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=Ha7Ip7AxHRv2fEjq7aZMLUVgPzdbmkCK6AeBrh2VnVk=;
+	b=J/1ArSNRh+ajDTnzjvWyoPpHfKuBWpnD+BGZDFY4S0MBOyjHmWr4dumeXnqSwrVDPiB+
+	 GzTQ6VstkMoFoon0GiL8fi6W19NhFhLrX1FG7yS3Kait7STK5m4otgw13XKZGyu+2gIon
+	 GnX9hATgWXYha8DERzyrntGm6wQcHm4hWmYQGwp25j0p5fh74bQOdmaIzmzS+ht7SqhjS
+	 MIRQ7joCwXrOddWTPyIcS38VqQul7UHVUJ5dF+wNOzu4Q5bE/uhln2Wvn28e/Jff4ZK1x
+	 N+/49+J68tJ1FyyVyzReEAUGDOHARDO+Y4r3tJ5na+t+BX01IP6PziIeOgF2bT2ulPQ==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
+	dmarc=pass header.from=cherry.de;
+	dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b="MCI/zwtc";
+	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791968830;
-	bh=B2Boo0YZ5qBedDweRvgQXwo9K2GgSBhYMW2yOMrODzI=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791969519;
+	bh=Ha7Ip7AxHRv2fEjq7aZMLUVgPzdbmkCK6AeBrh2VnVk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=WuuHI+Qr3tJbzg/zkPsYRbGm3L+447NZTgdQYF+/K4R5vmobZYtC/2RomEu5kiW2x
-	 AG/do26a3+hfNqHJ1OZwo8zRR7pDCKGMSAuBjfT5+PRtKxOalnODNRgy2ng7SU3Zkt
-	 iD6vaMNxkjZUIVkemOOAk+gXCDOeFwYi50CeW+iix25yR/o15nLI30kDIZTPAxjyfr
-	 EkBbuQyhfwKggOmDrtoH1q0lcgOZZ9odAJ/wTVd4FroSP+doOMXtLAA0ZWuh5KdKc7
-	 bUwdsueK7hVMR+Xcm1xLTPr+kopf4Sw4BMUb7aJ7vbag71NoooZSsdrw3UL04SqlN9
-	 DQ4CytdBFxHvA==
+	b=bvWZ5+B52Tg5DV53EsNirDDvzLtMuUN7mDVg3IiVJw41ELphpzogTMaPzsfoehm5X
+	 8MExs5Ab+yPUT1VKplhqLbJOg57D0x7uccNOnISAS/ChBpNoMJCm86i4KqE28NCQV6
+	 WL1BnEwdTspwC8+kV0lHmGvVakexgZ4/PYDks/+yOnkO9ZqHsVk+ADeBwv9aoM8bVC
+	 1ghVRxqd6DgJdJekIkXAwQYkXGYe3gpJiaWYgdJHXm1G9bOWS995EAVnZ/ECk/BVxj
+	 vBJOvaTVvwCxqdvFhQc+dsfmCyix9UpKD3ajaLbwU9gSYOmn6IvDnRZNxnZjhe/6Gl
+	 tTgZXj47mS13w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CB83380BD1;
-	Wed, 14 Oct 2026 09:07:10 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 097B91518
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 09:07:10 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3CC5A607ED;
+	Wed, 14 Oct 2026 09:18:39 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id CF9B4255
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 09:18:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 06C4B400E5
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 09:07:10 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id C120C607ED
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 09:18:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HtfI5FmDiOrc for <u-boot@lists.u-boot-project.org>;
- Wed, 14 Oct 2026 09:07:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5F45040080
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=172.234.252.31
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791968828;
- b=pqtd9rXhMvHdbLlaBgQhahoAj8cO7FGbTVHIXm1y6iUD3EWlP/O6mg3DKl9PVDS33mrZ
- 3OfByaDhqpyp5KPMRCJidDzXXdwQRHCnO+4DcsEshzM4VFNkUwQrDePeMLJ4WIjPwqVTh
- L1IL+/iWA4VxB6+65YcpFhpMZ5V4sU1qI1noxtOJo2BnQUF2gOrVrUUvMkfK3rC/UB+FJ
- Kq28QdsfDT0zNNSwpzGiLjC/TpN3U8KFtZojC0ZZIGafRtLPBAWrwfhLHIZC3ctXBkecD
- zDkho/0GT76gDHyXl+pZ5hG7C1Mdkdz9Jlj38YLmOaekLRApRnDUgFVWmlaYtrjXjiA==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791968828;
- h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
- In-Reply-To:References:Date:Message-ID:MIME-Version:Content-Type:
- Content-Transfer-Encoding;
- bh=B2Boo0YZ5qBedDweRvgQXwo9K2GgSBhYMW2yOMrODzI=;
- b=ckvehcDBTATmPW6afuZ74MdzftJL66Z8yOFU/mwSlZ4/z/7qpaz2a5fhzJDeq44Uo6Fp
- nwV5/aiyThrZQbw9X7i3B1K5mYfgw9Ph0Alk7FYgZLuJvh8iLLihaZ4+G+Y59ITL6wqL3
- c7ozrazoE+hxlUJkRsl4bv8KYpF67Ki+zfobEh2C5n9mqyh2kJ7HB9fYX7g49lXcVC050
- TRo4YWgB6WAYW3H5OUsBoOXa9lzpp+fVSV7gvlwcyHnLQ3nlXeeDm4nqNzO0N5IGsHSMy
- uakfRHAFE9e0Ei9rcstK/YxksKGrNA3ucxcQPaK6NQQavg2SOo+uCwgMzQuPkmzr57w==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=kernel.org;
- dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=e7EUpnBI; 
- arc=none smtp.remote-ip=172.234.252.31
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
- helo=sea.source.kernel.org; envelope-from=mkorpershoek@kernel.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=e7EUpnBI
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5F45040080
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 09:07:07 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 326E243C38;
- Wed, 14 Oct 2026 09:07:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 730941F00893;
- Wed, 14 Oct 2026 09:07:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1791968827;
- bh=B2Boo0YZ5qBedDweRvgQXwo9K2GgSBhYMW2yOMrODzI=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=e7EUpnBI7Av5viIMxd5X6FCT55ZK2iMgFrWw/mGDvhE99igYidyQ1Djo2IjH5Q4fx
- hkoWMbO1hGp25iR3xSnojH6nGp3HI7P5NeclmGbT9rAyqry3lbBfv67AA/tGjDMirE
- hCiXtaTfgIEwxBsPR1FFhLBsPVNktoxsWJk7gQi205I7A39zH/uIiXp120UvEpSonj
- Lvj1f1chTmEUA8L0eZ4KRkzHaT+zHJ5pPRLMKaWITTQRn737yJtQVbUID6o/sAbRDQ
- g/+rgZi9SG6H9zcDIR2dLhn4VSBeYGP1ZJ7nFH6sqTLZuw7TliPKN8ZmAZllC7BSTH
- ffwX9zJfKgYaQ==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>, Jan Kehren
- <jan.kehren@emteria.com>
-Cc: u-boot@lists.u-boot-project.org, igor.opaniuk@gmail.com,
- sjg@chromium.org, trini@konsulko.com
-Subject: Re: [PATCH v2 2/2] avb: Take a storage interface in the AVB operations
-In-Reply-To: <xhkdbbj8w7mcn.fsf@mkorpers-koolstof.csb>
-References: <20260915145629.995499-1-jan.kehren@emteria.com>
- <20261006092732.3577974-1-jan.kehren@emteria.com>
- <20261006092732.3577974-3-jan.kehren@emteria.com>
- <CAPzfCAah3xwR67hjz9Mi2E9CG-zcRj=Cdj8E55cH-0fiPA-XOw@mail.gmail.com>
- <xhkdbbj8w7mcn.fsf@mkorpers-koolstof.csb>
-Date: Wed, 14 Oct 2026 11:07:04 +0200
-Message-ID: <xhkdb8q407irr.fsf@mkorpers-koolstof.csb>
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lz980u-MBL7Y for <u-boot@lists.u-boot-project.org>;
+ Wed, 14 Oct 2026 09:18:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 332786076B
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c200::1"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791969517;
+ b=k7w5Eh575vBEnJPTDalRZXk9x7/1K4FR2H85+CbqCyMyY58C4wJUWCEWimwUpGMZksvT
+ bKt+EzlijmrJveToj0TzRPWJoTShZH8Tj5Sk1K3bxkxa4Q+dY8fj7IjIfQD5CZ436VNf3
+ hc8Glq0futLI+d73BlyvlIOS9QOTjOGGVKEmcQ78XuVJwUX2lASf4aVcqmlTNFHqJkBsZ
+ colQMsiAnxPxyVdtvieMHeyWlaj6WlTEYk/MKqU7AYlqC9WpAPKrlN1P0LbizxLuJJxHq
+ MXKeGC2kiUqQ43OvMcoudnW1BJ5GmiVCOyDjHvztI0byu87bQ3zuFJ5UrjUKvnON5JA==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1791969517;
+ h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
+ User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+ X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+ X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+ X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+ X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+ X-MS-Exchange-AntiSpam-MessageData-0:
+ X-MS-Exchange-AntiSpam-MessageData-1:X-OriginatorOrg:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+ X-MS-Exchange-CrossTenant-UserPrincipalName:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+ bh=Ha7Ip7AxHRv2fEjq7aZMLUVgPzdbmkCK6AeBrh2VnVk=;
+ b=P7/WYjSIMZPKghYnH3HZvxq3hPWXMlavxwNysWJXJnTMJX6dHGBPXtnfLO6DwjPs5NF9
+ HH/YC2zrDhj12lQ20Y5A76hSzWkhIUm/GFDYTrXUhizNp4S81cfACAg3eDrz3Mq7AJslo
+ GHjUo6Frj1Z/y9x4+2Kf7eME9nQCI9/tqNuNmilbPLJoQPBFtEJTtX3+EQoK85zAafnqv
+ fF9/+X3TWxbKexI2eseNz2BpC2C7oAiW63iY9rmrgBLKUpXDdj14k3YL9XG5pMz7ulC40
+ UrRTj/QKClioGkiRImgQSVNGehxQAJtlNA0+mpbGX3dvjE/89P5tD2dHemvyf7UTkRg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ dmarc=pass header.from=cherry.de;
+ dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b="MCI/zwtc"; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c200::1"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c200::1;
+ helo=db3pr0202cu003.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=MCI/zwtc
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 332786076B
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 09:18:34 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=YbP22xRrC+tIQaRuZdlUpuikFKCco+pwYeLiqU/bRVWK+XDKu9aB7LsIrWTbLfhjvbOopsP47tGGJ3UQbPcxPuM9abGNZ7atQtVl9Uhnr0m1YsRPSfmYUn1izh301KB8sExGgg9aGx0/TfM43kC8ZUquPknlXsHFw6s6cyVtEoQKim0TrUicVdZ/cs/cJdmZMmX5t7vxsgsFKNQl8HRMgq22OPgo6IO4FxjA35JOElZUMqCwPlJend2mVq07Nsm8GaLRDiCazNi6t2nIQoswaPIRHR3K+c8OOXikTsqlXx6p9DWPvxjn2FN4JDFKfw2o0lk0YhGzEVQPE6SC1Zh2Vg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Ha7Ip7AxHRv2fEjq7aZMLUVgPzdbmkCK6AeBrh2VnVk=;
+ b=fyM7hpdWG577T6UUydWd5DexZOIJydZzFvk5SmEIUcicedGDsXbS97mEyLJdh8ObyQrfc8NXDUmnFIl8DsjgaEwXQ68zByRQY1HRuqIn4Erm4Tcgnm0j1834G0iyYC/m9NODZfyLpzoplqAlMdSdPX+OmdmYy1MVfXVCJ1ziP6SrO110qLlb3IWra9Md5sa4tJz1g2lqB6FhfGO5Xn2EhHYnsN3qbqm623z8o1LykfBWi8QmoFxRqDAQLNdguoq7v12b7QwxPbvC78F2Ae1dbw6x6EDYtnW2kKq3CiAYSsTp0TLrhYg6HGWBwIB8chPTNERCMWvFK3w6yOHXsW9Q3Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Ha7Ip7AxHRv2fEjq7aZMLUVgPzdbmkCK6AeBrh2VnVk=;
+ b=MCI/zwtc37N+j37VxttQuG/ovQwt4KUeqni+rmpPae6gI+9ZIHqGql6wjhbTtnj+SZ67SW+FJsKmLl8pPSZJy7ySz4wonsQN0p4cy4+5nhjPYe/nuN0N7aUlGUiHnQTAYeqRGGeXb7mVnV4eai23mDFwwz0Ms54qz2L+6aVSj8A=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by AS8PR04MB8088.eurprd04.prod.outlook.com (2603:10a6:20b:3f7::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.12; Wed, 14 Oct
+ 2026 09:18:29 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0522.011; Wed, 14 Oct 2026
+ 09:18:28 +0000
+Message-ID: <51336e3a-690f-447b-b045-61ae6ee5fd96@cherry.de>
+Date: Wed, 14 Oct 2026 11:18:26 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] arm: rockchip: rv1126: Remove useless TPL_LDSCRIPT
+ default
+To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Johan Jonker <jbx6244@gmail.com>
+References: <20261002-config-v1-0-11bb20983682@gmail.com>
+ <20261002-config-v1-1-11bb20983682@gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20261002-config-v1-1-11bb20983682@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0195.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ab::6) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|AS8PR04MB8088:EE_
+X-MS-Office365-Filtering-Correlation-Id: a82ecf46-b0b0-4bb9-4327-08df29d41bc5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|1800799024|10070799003|366016|376014|261009223027099003|10067099003|3023799007|4143699003|11063799006|5023799004|6133799003|56012099006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: /ICdFrbztSKoCTuJ/wKmF0S2S/K532g5veOGJH9f4cM7tsCnKcirK2lL31nyDODGeY5iJPwGS2OaotbLoh1aJdIGXL/LEA/iHFuGmMlLabRN50AJllrwtEdkE/ktv/K/fhA75gsJapsS6NeBPgRNwpq+T//LtL3UNf2aYd6GivH/pa1urf4uVGYCwnp0rMURw63w2UIIxyYDtTXn3TEQ1U5qsUwhIAhyRAcMCaXMwmlwL/F3As4FX7+R/YXLTWq9s+OWkz+lVVIuxP6x1DIU3gKJX8lFes6N6fwc9WCBJ42/ftUyHQjosEJp33tfw58DrnRa8TdGv/4946DaWSwtK3CudWIBpduSAUZBE6RaLNXbAe+o00VAPDM7zyB7AzOI2YVMI/bhovWOJwNs0Oe4x6D/LhWU4StvivVe0+1sUZG+dxH+6fCiqGFaMqD+p4l6VRG3NRYVVQRdWOzXnRs/myVUuCLnRLfIL5s/PLwTjdjBkGe4A4gwaQUvBTjYWR8Rz5Rg6b7KPwCWIUX9y0Zxez7CL7YkK6ZQSTs3SYpdumHEAXNT5AQ79vdZbBhRXES/Qp68+wVzZ1vn6U40QvhHa/M2yF8nWazfDWKQMhM13+g+GC7eoWiuNC5f+LiQXW5HnVF0u0fzCwoMaXaBEPqYheExoq0wJhhrju8TH+xCA44=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(1800799024)(10070799003)(366016)(376014)(261009223027099003)(10067099003)(3023799007)(4143699003)(11063799006)(5023799004)(6133799003)(56012099006)(18002099003)(22082099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?L0NtdVNsT2Fxa1ZEY2JqSU5HUzdFdDNLWUp6ekFTd3VaaXJVNDdtV3dsM2Yr?=
+ =?utf-8?B?cG9oamRxTzczK1h2dHV2N1Y3TzhJWnVzUG9VZG55aGRqdmdpQXd4UzQrYUls?=
+ =?utf-8?B?SW81TnJqK2RoU29JL1ZCRDF3Z1d5NjZhejJFYmJCRnlzZndGNmhCSGtqS01m?=
+ =?utf-8?B?TDlWbWppM2RDdzR3WVo1Y2dZRWJGVUdQdHBlbTk0ZDVDY1VIODhHd2hkdkdP?=
+ =?utf-8?B?d0srNXJJZk1ST004N2ZNMU9BN2hEd0NEYlo4V1UrOGZESWkxUGVTRzN3ZmtY?=
+ =?utf-8?B?bkxhOUdjUkFETXJxTDNxbExqb0lCaEVYOC9EZ1FQUFM3d3pvb3BoaHQ0elAy?=
+ =?utf-8?B?SnBiVUdZeVc2VDZrZzVYdzRoTW9CUDA0d3p2cThIdlZNQXpUUkFmYnpscURK?=
+ =?utf-8?B?S05lTzRURVRhRU1KdkNuUW1PTjJBeTVsR1ZOZ0YyNS9CMGVjdFJwWVRtQXdT?=
+ =?utf-8?B?Mlp1ZVNnQUk1YjU1RXVYenpSQVNzMjNrTkJZTTlkb2lrR09ET3RhRWtwL29x?=
+ =?utf-8?B?N2I0ZGVxYW5PK2ErM2ttcE5ESjZlNlh5cTVVUDB0Tmlnc0VGL1BkMzdFUmRX?=
+ =?utf-8?B?NmhIdHNVV2hnRTBvVWVYaUpKb1lYL1FNMVpCRUJwY3VLRVgxck1zQ29rdmlh?=
+ =?utf-8?B?Z3BFK3AvNlR3OTNMbWFTaGFpUlY5L1hyaVF6M2ZicTl3cG9rNDRFNWxBSVR6?=
+ =?utf-8?B?VUlST0R4c244Q2VQeUxYdDhEVGltOXF4aENIUUpKUDJxZ0EzYTVod2loQXRk?=
+ =?utf-8?B?MVNJeFRVNUM2UkQ1T0pIZ1FHdkJQclc3RUxGdm41ZU1hRDRBcjF5RVpzS09n?=
+ =?utf-8?B?dWNlckFtV2Nxa2ltdGRndG44ZElUaUQyVStweElueTloSXN1OXpZbUlWekQ5?=
+ =?utf-8?B?WGl0UTZ0OTRDZW05VFZvOFpTeG00T1V1N2NBMlBnT0xxZlJQZ2Z6TFlLV1E1?=
+ =?utf-8?B?bU85OFFBY2RCWkV6bytsNHJDcWpNWkFXc2JUT1V2QkkvaWZ1N2FDWkZqMDhj?=
+ =?utf-8?B?NGtoSzRnaVlpZlE4NkZkamtqeGFGdmhvVWY2aERKVGtaREZyK3FnVGhyY015?=
+ =?utf-8?B?NnBEYkppdGlrSXRVeTBGOStpU05vQkZ4VlNYQ0FYSHFPU2VEcnk5V1k5M0cw?=
+ =?utf-8?B?ak5nMG1qNFV3eTJzd2NSQUdtREFoY3dNZ2xiSzdsOUFYeEttWHFXR0MxNVpn?=
+ =?utf-8?B?cktEajJJSmUzR1RjMmhSUmdwNGM2b1packNtT3lOZTI5UVdMK3gxbEFIY0Zt?=
+ =?utf-8?B?WGR2aWxoTFdzZjY0T3J6RjQ3RjNhYlczQWhwYjAxOU1ocUg0YTg0YkZqalBW?=
+ =?utf-8?B?QnVQQUVLWGRPdmpuZExGeHdKbDhtNkVXbVBpRlZ6ZkFjZzNSbFg3WGJUMmRP?=
+ =?utf-8?B?Z0FrM1grWndFTGlmWk9Ja1RlYklkL1lpcjlvS2dMUW1wZXlBVjUydmx4RjFQ?=
+ =?utf-8?B?SDQ4K091d2tzS3IwVDZtUHFkb1JVbDNyekZBK2w5OFZyekhqbUlrWC9WZkdJ?=
+ =?utf-8?B?MEM1MjF0WmpDN0ZEcFQzWUZCVTQ3VjZ6d2syWVI4NGRnK2ZYT1NmSlg4K1M5?=
+ =?utf-8?B?UUxqRENxY3MrZ0xhYnFhUFAweVFEQUM4WDI5NWRkdU1RMHI5bFQ5TzlwT0pI?=
+ =?utf-8?B?OTAvdU1SeW85QnM1SkZMVXRBa1ZrQ29DMWF4RmM0ckRDTFB5T1kybnJPandn?=
+ =?utf-8?B?UFdKekM3Y0ExZmtBd1ZvelJDN0VsQnVPMHJqaU5VdFJFNk00M3c4bnZBUVFm?=
+ =?utf-8?B?MS9XSDhteXY2cjhLSnk2S2c1RnphcnFMQVRzcnVEdEVpWGY0alVURktVdWM5?=
+ =?utf-8?B?T3B1L1lRSmZVTDE0T1hWRlJtaTVrOStLaWhMNzVkRUNxVXdKd2lWaUJteVk5?=
+ =?utf-8?B?S2s4cW1lKzJ1NlZLNDIrcythV0RRZm9pWXl6ZDFva3BEK1VOZktHTE5VTTVJ?=
+ =?utf-8?B?UEVqK1BrM1NnRTU5QjN3c1loVyt0bnJ5Vk1SUG1Mc2N4UFVnMldzQmRhZzFJ?=
+ =?utf-8?B?UjlDdHhvWFZrOVh2M08xYlZhTG5aRW1PV3EyZm40N2haWnF4ekR3YmQvK3dP?=
+ =?utf-8?B?MlhjaXJ0M0J3V3c1YlRUV0JLTG4yNUVQcHhZOE92Zkl1T3VEQVN4c1JySDBk?=
+ =?utf-8?B?SDQ4VDhjY3loR0pSQ2tZRXIxOUIxMWlQZHRoZUoyMVBZK3RrR2FaZDV5cExr?=
+ =?utf-8?B?TW51RWZCemRLQmhtZlJxR2VFdHU3MkNpdVZFa0RhYmFQTjRlYzBMeU5tMXJS?=
+ =?utf-8?B?K1ZnSUgyQ1NsU0lPS3pEUjNKbTNnbEpoWXFUdWNITS9LU2xLUmJPR00rRnEz?=
+ =?utf-8?B?cGQ3Smw0VEVOTXl0NndLdkxrdmoyVW44bXlISGs0VHIweGJVQk9xaEhzdm1Y?=
+ =?utf-8?Q?JabobETOV20yqTrS/ZxeQs8VT8QxSw9wcSoKVhTnA00PG?=
+X-MS-Exchange-AntiSpam-MessageData-1: v3FFBnkJSnw2Pw==
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: a82ecf46-b0b0-4bb9-4327-08df29d41bc5
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2026 09:18:28.7371 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: fDXOdaW3VcVAmGklhn6yq402Wi4sbaBwSRAq678T9zlgCHShh77nWHqmNXG4Jo2vXet1HGEu9KYu38yEcSKomyB1NkL38GesriD1Yzk7GzI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8088
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,534 +259,33 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Wed, Oct 14, 2026 at 09:49, Mattijs Korpershoek <mkorpershoek@kernel.org=
-> wrote:
+Hi Massimo,
 
-> Hi Igor, Jan,
->
-> On Tue, Oct 13, 2026 at 17:31, Igor Opaniuk <igor.opaniuk@oss.qualcomm.co=
-m> wrote:
->
->> Hi Jan,
->>
->> On Tue, Oct 6, 2026 at 3:00=E2=80=AFPM Jan Kehren <jan.kehren@emteria.co=
-m> wrote:
->>>
->>> AVB assumed its partitions were on mmc: avb_ops_alloc() took a bare dev=
-ice
->>> number and get_partition() called find_mmc_device(). bootmeth_android
->>> accepts any bootdev but passes only desc->devnum, so an Android bootflow
->>> found on nvme 0 or usb 0 is verified against mmc 0.
->>
->> I don't think this path can be reached today: android_check() rejects
->> every non-mmc bootdev through bootflow_iter_check_mmc(), and
->> android_read_bootflow() loads the BCB with
->> bcb_find_partition_and_load("mmc", ...).
->>
->> So the bootmeth hunk below is right, but it does not change behaviour ye=
-t.
->> The user that does benefit is "avb init <interface> <dev>", e.g.
->> board/armltd/total_compute/total_compute.env, which has been calling
->> "avb init ${blk_dev} 0" since 2024 and gets a usage error on next. Could
->> you reword the motivation along those lines and mention total_compute?
->>
->>>
->>> Carry a uclass id alongside the device number and resolve the block dev=
-ice
->>> with blk_get_devnum_by_uclass_id(), keeping mmc_init() and the hardware
->>> partition switch on the mmc path only. "avb init <dev>" still means mmc,
->>> "avb init <interface> <dev>" selects another bus, and both now look the
->>> device up before allocating. get_boot_interface() returns UCLASS_INVALID
->>> without ops, so a caller that skipped "avb init" fails rather than read=
-ing
->>> mmc.
->>>
->>> Signed-off-by: Jan Kehren <jan.kehren@emteria.com>
->>> ---
->>> Changes in v2:
->>> - Split: the renames moved to the preceding patch
->>> - Put the "avb init <dev>" comment on the branch it describes, by testi=
-ng
->>>   argc =3D=3D 2 rather than argc =3D=3D 3
->>> - Drop the single-use part_num and move the user-area comment next to
->>>   mmc_switch_part()
->>>
->>>  boot/bootmeth_android.c                |  2 +-
->>>  cmd/avb.c                              | 24 ++++++---
->>>  common/Kconfig                         |  7 ++-
->>>  common/avb_verify.c                    | 71 +++++++++++++++++---------
->>>  doc/android/avb2.rst                   |  7 ++-
->>>  include/avb_verify.h                   | 26 +++++++---
->>>  test/py/tests/test_android/test_avb.py | 28 ++++++++++
->>>  7 files changed, 127 insertions(+), 38 deletions(-)
->>>
->>> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
->>> index 0db08d4f86..ae05c08488 100644
->>> --- a/boot/bootmeth_android.c
->>> +++ b/boot/bootmeth_android.c
->>> @@ -443,7 +443,7 @@ static int run_avb_verification(struct bootflow *bf=
-low)
->>>         bool unlocked =3D false;
->>>         int ret;
->>>
->>> -       avb_ops =3D avb_ops_alloc(desc->devnum);
->>> +       avb_ops =3D avb_ops_alloc(desc->uclass_id, desc->devnum);
->>>         if (!avb_ops)
->>>                 return log_msg_ret("avb ops", -ENOMEM);
->>>
->>> diff --git a/cmd/avb.c b/cmd/avb.c
->>> index 8fbd48ee5a..4c1f56a33a 100644
->>> --- a/cmd/avb.c
->>> +++ b/cmd/avb.c
->>> @@ -16,17 +16,28 @@ static struct AvbOps *avb_ops;
->>>
->>>  int do_avb_init(struct cmd_tbl *cmdtp, int flag, int argc, char *const=
- argv[])
->>>  {
->>> -       unsigned long mmc_dev;
->>> +       struct blk_desc *desc;
->>>
->>> -       if (argc !=3D 2)
->>> +       if (argc < 2 || argc > 3)
->>>                 return CMD_RET_USAGE;
->>>
->>> -       mmc_dev =3D hextoul(argv[1], NULL);
->>> +       /* "avb init <dev>" keeps its old meaning of mmc <dev> */
->>> +       if (argc =3D=3D 2)
->>> +               desc =3D blk_get_devnum_by_uclass_id(UCLASS_MMC,
->>> +                                                  hextoul(argv[1], NUL=
-L));
->>> +       else
->>> +               desc =3D blk_get_devnum_by_uclass_idname(argv[1],
->>> +                                                      hextoul(argv[2],=
- NULL));
->>> +
->>
->> This up-front lookup is what breaks the existing sandbox tests: with the
->> series, test_avb_verify, test_avb_read_rb, test_avb_is_unlocked,
->> test_avb_persistent_values and the new test_avb_init_interface fail with
->>
->>   Can't map file 'mmc1.img': Invalid argument
->>      sandbox_mmc_probe() mmc1: Unable to map file 'mmc1.img'
->>   Can't find the requested device
->>
->> while next gives 4 passed, 2 skipped for test_avb.py.
->>
->> Sandbox mmc1 has no backing image when these tests run
->> (test_android/ is collected before the tests that create mmc images),
->> and most of them only talk to the sandbox TA, so they never needed
->> the device before. Would you consider keeping
->> "avb init" lazy: validate the interface name here, store uclass + number,
->> and let get_partition() resolve the device on first access as before?
->>
->> That keeps the old semantics, and a missing device is still reported, by
->> the first partition access. Alternatively the tests would need to create
->> mmc1.img first.
->
-> Indeed, the sandbox tests fail on u-boot-dfu here:
-> https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/jobs/113402
->
-> Before applying this series:
-> https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/jobs/113085
->
-> I will have a look. I do have a preference for the mmc1.img to be
-> created in the tests first but I don't know if that's feasible.
+On 10/2/26 6:35 PM, Massimo Pegorer wrote:
+> The arch/arm/mach-rockchip/u-boot-tpl.lds linker script file does not
+> exist. Therefore, in the end, scripts/Makefile.xpl logic fallbacks on
+> using the arch common linker script: arch/$(ARCH)/cpu/u-boot-spl.lds.
+> This is also the default value of TPL_LDSCRIPT option common definition
+> in common/spl/Kconfig, thus dropping this RV1126 specific definition
+> simplifies the configuration and has no side effect on binary outputs.
+> 
+> The RV1126 Kconfig file with TPL_LDSCRIPT definition has been added by
+> ffb191e458c ("arm: rockchip: Add RV1126 arch core support") just a few
+> days after 957848882c8 ("rk32xx: Use standard TPL linker script") that
+> removed the arch/arm/mach-rockchip/u-boot-tpl.lds linker script file.
+> The commit date of the second follows the author date of the first: I
+> suppose this caused the inconsistency.
+> 
 
-I've had a look. It's not impossible to do so, but the avb test as of
-today are buggy: some tests, such as test_avb_verify() use
-assert response.find(success_str) which is wrong.
+The CONFIG_[ST]PL_TEXT_BASE symbol wasn't used in 
+arch/arm/cpu/u-boot-spl.lds so the undef was unnecessary. 
+CONFIG_[ST]PL_MAX_SIZE is handled by scripts/Makefile.xpl and set as 
+IMAGE_MAX_SIZE in the linker scripts. I also printed the value of 
+LDSCRIPT in scripts/Makefile.xpl, it is the same before and after this 
+patch, therefore:
 
-We should use 'assert response.find(success_str) !=3D -1'.
-
-I will send a fix for this, but that also requires modifying the tests
-and actually providing a valid mmc.img that contains a vbmeta partition
-and a boot partition.
-
-Since the above is not trivial, I'd like this patch to be reworked as
-Igor suggested.
-
-Jan, can you please work on a v3 which keeps the old "lazy" init ?
-
-Please also address the other (valid) remarks from Igor and the same
-time.
+Fixes: ffb191e458c ("arm: rockchip: Add RV1126 arch core support")
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
 Thanks!
-Mattijs
-
->
-> If I can't find a way for this, then we will have to rework this patch
-> as Igor suggested: (Keep the old behaviour: "lazy" init in "avb init")
->
->>
->>
->>> +       if (!desc) {
->>> +               printf("Can't find the requested device\n");
->>> +               return CMD_RET_FAILURE;
->>> +       }
->>>
->>>         if (avb_ops)
->>>                 avb_ops_free(avb_ops);
->>>
->>> -       avb_ops =3D avb_ops_alloc(mmc_dev);
->>> +       avb_ops =3D avb_ops_alloc(desc->uclass_id, desc->devnum);
->>>         if (avb_ops)
->>>                 return CMD_RET_SUCCESS;
->>>         else
->>> @@ -428,7 +439,7 @@ int do_avb_write_pvalue(struct cmd_tbl *cmdtp, int =
-flag, int argc,
->>>  }
->>>
->>>  static struct cmd_tbl cmd_avb[] =3D {
->>> -       U_BOOT_CMD_MKENT(init, 2, 0, do_avb_init, "", ""),
->>> +       U_BOOT_CMD_MKENT(init, 3, 0, do_avb_init, "", ""),
->>>         U_BOOT_CMD_MKENT(read_rb, 2, 0, do_avb_read_rb, "", ""),
->>>         U_BOOT_CMD_MKENT(write_rb, 3, 0, do_avb_write_rb, "", ""),
->>>         U_BOOT_CMD_MKENT(is_unlocked, 1, 0, do_avb_is_unlocked, "", ""),
->>> @@ -464,7 +475,8 @@ static int do_avb(struct cmd_tbl *cmdtp, int flag, =
-int argc, char *const argv[])
->>>  U_BOOT_CMD(
->>>         avb, 29, 0, do_avb,
->>>         "Provides commands for testing Android Verified Boot 2.0 functi=
-onality",
->>> -       "init <dev> - initialize avb2 for <dev>\n"
->>> +       "init [<interface>] <dev> - initialize avb2 for hex <dev> on <i=
-nterface>\n"
->>> +       "    (mmc, nvme, usb, ...; defaults to mmc)\n"
->>>         "avb read_rb <num> - read rollback index at location <num>\n"
->>>         "avb write_rb <num> <rb> - write rollback index <rb> to <num>\n"
->>>         "avb is_unlocked - returns unlock status of the device\n"
->>> diff --git a/common/Kconfig b/common/Kconfig
->>> index c739225621..5590fbfdb2 100644
->>> --- a/common/Kconfig
->>> +++ b/common/Kconfig
->>> @@ -885,9 +885,14 @@ config AVB_VERIFY
->>>           This option enables compilation of bootloader-dependent opera=
-tions,
->>>           used by Android Verified Boot 2.0 library (libavb). Includes:
->>>           * Helpers to process strings in order to build OS bootargs.
->>> -         * Helpers to access MMC, similar to drivers/fastboot/fb_mmc.c.
->>> +         * Helpers to access block devices, similar to
->>> +           drivers/fastboot/fb_mmc.c.
->>>           * Helpers to alloc/init/free avb ops.
->>>
->>> +         Only mmc is initialised by AVB itself. Any other interface mu=
-st
->>> +         already be enumerated when AVB runs, either by the board code=
- or by
->>> +         a command such as "usb start".
->>> +
->>>  if AVB_VERIFY
->>>
->>>  config AVB_BUF_ADDR
->>> diff --git a/common/avb_verify.c b/common/avb_verify.c
->>> index fc29433c3c..b898ebb78f 100644
->>> --- a/common/avb_verify.c
->>> +++ b/common/avb_verify.c
->>> @@ -8,6 +8,7 @@
->>>  #include <cpu_func.h>
->>>  #include <image.h>
->>>  #include <malloc.h>
->>> +#include <mmc.h>
->>>  #include <part.h>
->>>  #include <tee.h>
->>>  #include <tee/optee_ta_avb.h>
->>> @@ -386,44 +387,68 @@ static unsigned long avb_blk_write(struct avb_blk=
-_part *part, lbaint_t start,
->>>                           start, sectors, tmp_buf);
->>>  }
->>>
->>> -static struct avb_blk_part *get_partition(AvbOps *ops, const char *par=
-tition)
->>> +static int avb_init_mmc(int dev_num)
->>>  {
->>> +       struct mmc *mmc;
->>>         int ret;
->>> -       u8 dev_num;
->>> -       int part_num =3D 0;
->>> -       struct avb_blk_part *part;
->>> -       struct blk_desc *blk;
->>> -
->>> -       part =3D malloc(sizeof(struct avb_blk_part));
->>> -       if (!part)
->>> -               return NULL;
->>>
->>> -       dev_num =3D get_boot_device(ops);
->>> -       part->mmc =3D find_mmc_device(dev_num);
->>> -       if (!part->mmc) {
->>> +       mmc =3D find_mmc_device(dev_num);
->>> +       if (!mmc) {
->>>                 printf("%s: no MMC device at slot %x\n", __func__, dev_=
-num);
->>> -               goto err;
->>> +               return -ENODEV;
->>>         }
->>>
->>> -       ret =3D mmc_init(part->mmc);
->>> +       ret =3D mmc_init(mmc);
->>>         if (ret) {
->>>                 printf("%s: MMC initialization failed, err =3D %d\n",
->>>                        __func__, ret);
->>> -               goto err;
->>> +               return ret;
->>>         }
->>>
->>> -       if (IS_MMC(part->mmc)) {
->>> -               ret =3D mmc_switch_part(part->mmc, part_num);
->>> +       if (IS_MMC(mmc)) {
->>> +               /* Select the user area, where the GPT and our images l=
-ive */
->>> +               ret =3D mmc_switch_part(mmc, 0);
->>>                 if (ret) {
->>>                         printf("%s: MMC part switch failed, err =3D %d\=
-n",
->>>                                __func__, ret);
->>> -                       goto err;
->>> +                       return ret;
->>>                 }
->>>         }
->>>
->>> -       blk =3D mmc_get_blk_desc(part->mmc);
->>> +       return 0;
->>> +}
->>> +
->>> +static struct avb_blk_part *get_partition(AvbOps *ops, const char *par=
-tition)
->>> +{
->>> +       enum uclass_id uclass_id;
->>> +       struct avb_blk_part *part;
->>> +       struct blk_desc *blk;
->>> +       int dev_num;
->>> +       int ret;
->>> +
->>> +       part =3D malloc(sizeof(struct avb_blk_part));
->>> +       if (!part)
->>> +               return NULL;
->>> +
->>> +       dev_num =3D get_boot_device(ops);
->>> +       uclass_id =3D get_boot_interface(ops);
->>> +       if (uclass_id =3D=3D UCLASS_INVALID || dev_num < 0) {
->>> +               printf("%s: no storage interface, run 'avb init' first\=
-n",
->>> +                      __func__);
->>> +               goto err;
->>> +       }
->>> +
->>> +       if (uclass_id =3D=3D UCLASS_MMC) {
->>> +               ret =3D avb_init_mmc(dev_num);
->>> +               if (ret)
->>> +                       goto err;
->>> +       }
->>> +
->>> +       blk =3D blk_get_devnum_by_uclass_id(uclass_id, dev_num);
->>>         if (!blk) {
->>> -               printf("%s: failed to obtain block descriptor\n", __fun=
-c__);
->>> +               /* Every bus but mmc must already be started when AVB r=
-uns */
->>> +               printf("%s: no %s device %d, is the bus started?\n", __=
-func__,
->>> +                      blk_get_uclass_name(uclass_id), dev_num);
->>
->> A note for the doc/Kconfig text rather than the code: with the images on
->> virtio/NVMe/USB and the AVB TA keeping its state in eMMC RPMB, the TA's
->> first RPMB request becomes the first eMMC access and happens from inside
->> the supplicant RPC.
->>
->> On next that hangs: "avb init virtio 0; avb read_rb 0"
->> leaves OP-TEE spinning in do_notif, the nested RPMB announcement deadlock
->> fixed by "optee: do not announce RPMB from within a supplicant RPC"
->> (currently v2 on the list). Not a bug in this series, but that
->> configuration only works with that fix, so it may be worth a line in
->> avb2.rst.
->>
->>>                 goto err;
->>>         }
->>>
->>> @@ -433,7 +458,6 @@ static struct avb_blk_part *get_partition(AvbOps *o=
-ps, const char *partition)
->>>                 goto err;
->>>         }
->>>
->>> -       part->dev_num =3D dev_num;
->>>         part->blk =3D blk;
->>>
->>>         return part;
->>> @@ -1111,7 +1135,7 @@ __weak AvbIOResult avb_read_root_key_digest(AvbOp=
-s *ops, uint8_t *digest)
->>>   * AVB2.0 AvbOps alloc/initialisation/free
->>>   * =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
->>>   */
->>> -AvbOps *avb_ops_alloc(int boot_device)
->>> +AvbOps *avb_ops_alloc(enum uclass_id uclass_id, int dev_num)
->>>  {
->>>         struct AvbOpsData *ops_data;
->>>
->>> @@ -1134,7 +1158,8 @@ AvbOps *avb_ops_alloc(int boot_device)
->>>         ops_data->ops.read_persistent_value =3D read_persistent_value;
->>>  #endif
->>>         ops_data->ops.get_size_of_partition =3D get_size_of_partition;
->>> -       ops_data->mmc_dev =3D boot_device;
->>> +       ops_data->uclass_id =3D uclass_id;
->>> +       ops_data->dev_num =3D dev_num;
->>>
->>>         return &ops_data->ops;
->>>  }
->>> diff --git a/doc/android/avb2.rst b/doc/android/avb2.rst
->>> index a514701241..cef49d3e0d 100644
->>> --- a/doc/android/avb2.rst
->>> +++ b/doc/android/avb2.rst
->>> @@ -29,6 +29,10 @@ integration in ``common/avb_verify.c`` and the platf=
-orm port under
->>>
->>>  For additional details check [1]_.
->>>
->>> +Only mmc is started by AVB itself. Any other interface must already be
->>> +enumerated when AVB runs, either by the board code or by a command suc=
-h as
->>> +``usb start``, or the partition lookup fails.
->>> +
->>>  AVB using OP-TEE (optional)
->>>  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
->>>
->>> @@ -80,7 +84,8 @@ AVB 2.0 U-Boot shell commands
->>>  Provides CLI interface to invoke AVB 2.0 verification + misc. commands=
- for
->>>  different testing purposes::
->>>
->>> -    avb init <dev> - initialize avb 2 for <dev>
->>> +    avb init [<interface>] <dev> - initialize avb 2 for hex <dev> on
->>> +        <interface> (mmc, nvme, usb, ...; defaults to mmc)
->>
->> This is the behaviour change that bites, see the test comment at the end:
->> the lookup probes the device (blk_get_device() -> device_probe(), and for
->> mmc the blk probe runs mmc_init()), whereas "avb init" used to only store
->> the number. Please at least state that it probes now.
->>
->>>      avb read_rb <num> - read rollback index at location <num>
->>>      avb write_rb <num> <rb> - write rollback index <rb> to <num>
->>>      avb is_unlocked - returns unlock status of the device
->>> diff --git a/include/avb_verify.h b/include/avb_verify.h
->>> index 8c97adbfbf..6dbbb39a8a 100644
->>> --- a/include/avb_verify.h
->>> +++ b/include/avb_verify.h
->>> @@ -7,8 +7,9 @@
->>>  #define _AVB_VERIFY_H
->>>
->>>  #include <../lib/libavb/libavb.h>
->>> +#include <blk.h>
->>>  #include <mapmem.h>
->>> -#include <mmc.h>
->>> +#include <part.h>
->>>
->>>  #define AVB_MAX_ARGS                   1024
->>>  #define VERITY_TABLE_OPT_RESTART       "restart_on_corruption"
->>> @@ -24,7 +25,8 @@ enum avb_boot_state {
->>>
->>>  struct AvbOpsData {
->>>         struct AvbOps ops;
->>> -       int mmc_dev;
->>> +       enum uclass_id uclass_id;
->>> +       int dev_num;
->>>         enum avb_boot_state boot_state;
->>>  #ifdef CONFIG_OPTEE_TA_AVB
->>>         struct udevice *tee;
->>> @@ -33,8 +35,6 @@ struct AvbOpsData {
->>>  };
->>>
->>>  struct avb_blk_part {
->>> -       int dev_num;
->>> -       struct mmc *mmc;
->>>         struct blk_desc *blk;
->>>         struct disk_partition info;
->>>  };
->>> @@ -44,7 +44,7 @@ enum avb_io_type {
->>>         AVB_IO_WRITE
->>>  };
->>>
->>> -AvbOps *avb_ops_alloc(int boot_device);
->>> +AvbOps *avb_ops_alloc(enum uclass_id uclass_id, int dev_num);
->>>  void avb_ops_free(AvbOps *ops);
->>>
->>>  /**
->>> @@ -110,10 +110,24 @@ static inline int get_boot_device(AvbOps *ops)
->>>         if (ops) {
->>>                 data =3D ops->user_data;
->>>                 if (data)
->>> -                       return data->mmc_dev;
->>> +                       return data->dev_num;
->>>         }
->>>
->>>         return -1;
->>>  }
->>>
->>> +/* Mirrors get_boot_device(): no ops means no interface, not a default=
- one */
->>> +static inline enum uclass_id get_boot_interface(AvbOps *ops)
->>> +{
->>> +       struct AvbOpsData *data;
->>> +
->>> +       if (ops) {
->>> +               data =3D ops->user_data;
->>> +               if (data)
->>> +                       return data->uclass_id;
->>> +       }
->>> +
->>> +       return UCLASS_INVALID;
->>> +}
->>> +
->>>  #endif /* _AVB_VERIFY_H */
->>> diff --git a/test/py/tests/test_android/test_avb.py b/test/py/tests/tes=
-t_android/test_avb.py
->>> index 137d83e1de..4c5b3c6f59 100644
->>> --- a/test/py/tests/test_android/test_avb.py
->>> +++ b/test/py/tests/test_android/test_avb.py
->>> @@ -135,3 +135,31 @@ def test_avb_persistent_values(ubman):
->>>
->>>      response =3D ubman.run_command('avb read_pvalue test 12')
->>>      assert response =3D=3D 'Read 12 bytes, value =3D value_value'
->>> +
->>> +
->>> +@pytest.mark.buildconfigspec('cmd_avb')
->>> +@pytest.mark.buildconfigspec('cmd_mmc')
->>> +def test_avb_init_interface(ubman):
->>> +    """Check that 'avb init' accepts an explicit interface
->>> +    """
->>> +
->>> +    response =3D ubman.run_command('avb init mmc %s' % str(mmc_dev))
->>> +    assert response =3D=3D ''
->>
->> Fails on sandbox for the same mmc1.img reason, see above.
->>
->> With the "avb init" behaviour sorted out, the rest works for me:
->> * "avb init 0" as the first eMMC access, read_rb, is_unlocked and
->>   "avb verify _a" pass;
->> * "avb init nvme 0", "avb init mmc 5" and "avb init bogus 0" fail cleanl=
-y;
->> * with the Android images on virtio only (the eMMC holding just RPMB),
->>   "avb init virtio 0; avb verify _a" passes, and "avb init 0" on the
->>   empty eMMC correctly fails to find vbmeta_a;
->>
->>> +
->>> +    response =3D ubman.run_command('avb init %s' % str(mmc_dev))
->>> +    assert response =3D=3D ''
->>> +
->>> +
->>> +@pytest.mark.buildconfigspec('cmd_avb')
->>> +def test_avb_init_bad_device(ubman):
->>> +    """Check that 'avb init' rejects a device that does not exist
->>> +    """
->>> +
->>> +    response =3D ubman.run_command('avb init mmc ff')
->>> +    assert response.find("Can't find the requested device") !=3D -1
->>> +
->>> +    response =3D ubman.run_command('avb init ff')
->>> +    assert response.find("Can't find the requested device") !=3D -1
->>> +
->>> +    response =3D ubman.run_command('avb init nonsense 0')
->>> +    assert response.find("Can't find the requested device") !=3D -1
->>> --
->>> 2.43.0
->>>
+Quentin
