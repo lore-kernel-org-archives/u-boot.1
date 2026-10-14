@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EED9CC6B1D
-	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 16:19:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9000CC6B1A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 16:19:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0751280EC0;
-	Wed, 14 Oct 2026 16:19:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8F91340790;
+	Wed, 14 Oct 2026 16:19:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 13e95ZttbGiC; Wed, 14 Oct 2026 16:19:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4359080EB2
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1791994797;
-	b=XwmUq444DeeKCLbaetecWYX2yWY/9PSeHAS3cKhVZwcXvoVmEgB6La0NQOXc2Y1hlm1v
-	 8j7DDca/SBNhr+Rkk+It4a9EYfFIikYcKMfMzU8Htc9mXQ/rhP+I1Ne7fNpkmX4Tq6JeV
-	 SMK0PHvP0eI+UaP+t+jxCMaxLKNV6KmOQfpBHewaUDotHCkUt3OjW9OSKOECjWAktGBd7
-	 zrNt6t7n2Q3LZoWcHeTdrSgA8eFwZVbulCQbx1G77nrqaethwfn/KLQnrVzVQg3UrJJO/
-	 YnWK+GRXXcrwZerxMKt7p/UGTSLogUuJlGYti5XvA0KcKDBi1+adOxuNpYcOaDJvIdQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id R-aYgqwLIrqb; Wed, 14 Oct 2026 16:19:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E0AAF40787
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1791994799;
+	b=YG7cWJlXgBRpK0ZjOGw3TrApXGvEmHeYx6+TFLokkjM8QvLoRYC6yGXu0U+R4Py1HG8e
+	 gJC4wQCIpiMAulMflOk0Y5VvpGjZoNZd6PvKqVeGcTjstzDUd8xzvrq+kz1s9gdCTl/aB
+	 Kg7/C7OBlN8SjPsf3VNPkkRaWnwOKHtK/oJdQMQnd7ymGVlra+TgnVLyGpXRFSLnH+mng
+	 Pl9W6XcXxBeyZDoNJaF9G8BU6gIgOlHzYmCki1V3ZPL1V+gDrzTyfy4XwRhC3bU90W0Tu
+	 ExZqBBpJia9DaTGS5ZP3BZUwEJ3rCo9GTgj2zJspv1VaeUNB3cYhRdiyGASxal3/xcA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791994797;
+	c=relaxed/relaxed; t=1791994799;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,93 +32,93 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Rspamd-Action:X-Spamd-Bar:X-Rspamd-Server:X-Rspamd-Queue-Id:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=J3rbXSZGOatcdugvYaH7+QuseVx3VXHrmNw0rokDuK0=;
-	b=B5+nq2Sk8PuiA2U1iWwIAS7TAuDD5dWlv/m7ylD5RjQCXovAqXOV9IYdMh5ZsS/WBbYg
-	 rG3n2Xb6Wos9fhjfZteu4jnbVQsJxsTDMaRlqQEoCe7AqWuJE279aTxddi5c8GfITRYOf
-	 wt5fDUOu0CKmBYFOUXKZOiEaHcHSQn/d2gNNMemA7JeKoNX+NBDYqPaPz2gyio4JTRIuf
-	 dwuJ05YDmuRT3ub6grGiLCdKCHrFFVr61PsNu/KDNLGk6KH2rL3twcgFx9MlWao+KEZFx
-	 z7YmCyZCzcYjB3ukeCYVhDtPKRgCgEBfcHQ+fpq7DtPWej4wcLgIA1Mqg0t7OUPnmSA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	dmarc=pass header.from=nic.cz;
-	dkim=pass header.d=nic.cz header.i=@nic.cz header.a=rsa-sha256 header.s=default header.b=lkffcqSa;
+	bh=eL9InljLedUdP2Aj27OcZnAn6oWbDm4fmsVs0lnIkjo=;
+	b=C9gYjojC+OGKRqbD3IEPj0kqVpwPtdwGWcxAhx9yU6n/F9mv8tgI1wnmfVBL8U1ME2Ms
+	 Telk3qiTbAohQnpiPl/LHoX3rMKa3L3SwaqL84E3iQAs0mHfnjbplv+LpJoyN+CgVzWhE
+	 Nnj298MdlYvkXAjOAe0TX3PhadIIpGyNoHayCDFRANNHPMFNDP4PAcYoyQKOBpfG5Iwr4
+	 beGDDglQCkJiqgW5GYyFMQGWhLZkeb7SEK36x9PgrSDUuFVTyl026+d1KWoQWnWpJcwNb
+	 mvINUg9AtBeVkHl9KsoL0qyYEaDOvJuc6XC0eOrbgw0DTPl/gRchNkSRiSxgIH5INWg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791994797;
-	bh=J3rbXSZGOatcdugvYaH7+QuseVx3VXHrmNw0rokDuK0=;
+	d=lists.u-boot-project.org; s=default; t=1791994799;
+	bh=eL9InljLedUdP2Aj27OcZnAn6oWbDm4fmsVs0lnIkjo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ybOO3k3PntYQOVmk9khkHKgN9z+grliHBesWkwbaV5mx49S2i0SEOoeL30zHh9P7c
-	 F7PJXeSRUnwBb825OQycYFPZ0E58rcpbbBn+RkdnBs/tJBXcDGuUGF8zCnw2zwQHSB
-	 TM/Rp9RanFNoIOHCpXuYUA8kc7ggPXkwUzeR+W78B5fXis73vXv+cu2R+P0yFv578T
-	 cI3lhb6HiVhEx+pUvEOtwFnZMd0z0rMKnlvfFco0xO4NBFMBv3kP3q2J7PggxJyqwI
-	 TOrqQ7w31v6mvjS9mOPDZur7g9G6q4CCTSzdO7iuvK3caogQuc6tvb0Fp1MoQThceu
-	 TrFs/z4uiwznQ==
+	b=fv2Snpr7a9ohB5lnGdnvCKWLtiwp6VQ4WIME3SNuq/i8R7QWFZnIOayhfsFFjTNsJ
+	 Uwn0XO9XGLx8s3RFrM74D/Gp5KCvNcRsX+YILRfm5PBFvJ5aWVZD8E2siNG0qUH+oJ
+	 j94cVv42Ct12nnGz9duMV1R5kqs+aJ1rrZA5SXZ+l7K0UpAopctkCsKY1r3DZ+vJKP
+	 gM6D20fU4u81J2GM7UtDWJbnXLEIKUTmS9FLFGIc6EXUP0QXZGp/BYDARPk2H2u4y4
+	 fy1xx17uCEU6sVHjOCv/YJ5nWjZlFwzRzVVkA1046ixS1LI5RorDdzDbyAOH9SfMjq
+	 FtPfjxXiIzRIg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4359080EB2;
-	Wed, 14 Oct 2026 16:19:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E0AAF40787;
+	Wed, 14 Oct 2026 16:19:58 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 6FA48769
+ by lists1.osuosl.org (Postfix) with ESMTP id E3968769
  for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:19:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6124480EAB
+ by smtp1.osuosl.org (Postfix) with ESMTP id C9A3E80EAB
  for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:19:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id a8ysWmVa7UjP for <u-boot@lists.u-boot-project.org>;
- Wed, 14 Oct 2026 16:19:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6935780EB2
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=217.31.204.67
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791994794;
- b=Rd70RnTQAUw1lu5p2MV1VW5vKAg8M1zmPDMS4cF0G+5+evTlT9oyMR6yHMiE5rZMgMN/
- J3HmhIlt11K+ApxuGjc7l5lirLv7OPaoDRUkLsxCuQvH28mCvYf4FOnPuScY01yuKcfyN
- xwGwH9bjQDMG3DpoaM+NhAL5UsQ0kD/roJ/RpTpWxy1TmjU5q8iio/aFyMCvBIYBnFDYy
- BkBUY+YWcI35SIIuhiyN1+HEaUp5lBXljsNmcOnEgHJLcQsvmtw5SU8LCKnknMAlMr5dz
- gvPebCz9tNABAOpDGuEdr9CYj+Lc2prXwC4MWGO8Jm7mPeC96yi75t68VYYsH3YTfrg==
+ id V3_9DLCQP8Bg for <u-boot@lists.u-boot-project.org>;
+ Wed, 14 Oct 2026 16:19:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E8F9980EA8
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2001:1488:800:400::400"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791994795;
+ b=d7i1O9Uk1wYbW6xd9zv7Xk8c2Fm09Ln/GB6lR8CDW+weL3qMTSHD9XsNiro3bHA1wLj+
+ oVICM5G2H7mLqyQR5ZrsYtELxdhE5j7MQkugmO4PWllAxj0OzqK0uq/mHkoU5otd9nWOb
+ bjzLaocRqOmeEYoZigj+UA29NnPlj/FsWptpRm53LmjlQxJOZNMTL2T+I/Otph2Gtcao3
+ 6luRfZDwA6LUF24a/FptZAFLM1UGCgIU98S0//DTeZ5O4u+vrLWAhi4fx9Btim6WtCPly
+ mi0iV8gQL9GNtYl0TP/dXYqphMS0gv9sKCrQ0NzsUmzO7teqq1CNe2vFQQznqmVToNg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791994794;
+ c=relaxed/relaxed; t=1791994795;
  h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:Content-Type:MIME-Version:
  Content-Transfer-Encoding:X-Spamd-Result:X-Rspamd-Pre-Result:
  X-Spam-Status:X-Rspamd-Action:X-Spamd-Bar:X-Rspamd-Server:
  X-Rspamd-Queue-Id;
- bh=J3rbXSZGOatcdugvYaH7+QuseVx3VXHrmNw0rokDuK0=;
- b=NHGgJJ8nO+McQS5fIh95+YNoBHCFjIBVGh7/NLBbzv5SskXgmBCYwygsXugDRxdR7muN
- nXOtuYlYRY/Ou2h3pmY/uRPZd63uo59sfa18xpqvHg/r+ZRT0nZteOh6cEjbkCUgV4/iV
- qxkKJCuf0zPI3+Csfy5xbbC9CY3Fo7O8go/w75+QQKX6HduL2TyllgKgfGcByAFUcrGCK
- bfFgPc8UI9YheLZhgFkW7gQGH1wzTaFASQsiRRhu9P/pX7jYXucj+Bv/Y6umBL75vucax
- uRPVjU9ZNtLU/PqoYRlOvstc81DIT/88QeMIYLZf+X4w5vPOSnxO43oFMlUrftyikfQ==
+ bh=eL9InljLedUdP2Aj27OcZnAn6oWbDm4fmsVs0lnIkjo=;
+ b=jCKXMJ6thtXH8lFfalMd4RaA8fC8Dtw++0GovoGhhl94tb2nRZtsLqSs3XJ6k737W/87
+ 0/mwo5DDt6r+v9VEmh68jtS4OgJ3QjzmAdvWAafNAxsTdsOCEORbxFdCnpi9sVXLCyU93
+ HhsxP3WB+c7/vQeHJYAahEwi9l9298Z/fJ1dgpXcMJLD9cufWqwvxFqQezTIzxF1Pl6mN
+ pJsZljfsQd2f937CgWxbnWOuZWuS3Ax4I5FKmvEiMerdPchYU3HJJlYMcJXIBi5yYTgOL
+ gbgG85Rb4uBwi6YW7wQBYP+624DpGVS0suwKOui7KGu5rFsFgL8ev5rrRGmBIUUQTvw==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=nic.cz;
  dkim=pass header.d=nic.cz header.i=@nic.cz header.a=rsa-sha256
- header.s=default header.b=lkffcqSa; 
- arc=none smtp.remote-ip=217.31.204.67
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.31.204.67;
- helo=mail.nic.cz; envelope-from=marek.mojik@nic.cz; receiver=<UNKNOWN> 
+ header.s=default header.b=VWdNdS03; 
+ arc=none smtp.remote-ip="2001:1488:800:400::400"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:1488:800:400::400; helo=mail.nic.cz;
+ envelope-from=marek.mojik@nic.cz; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=nic.cz
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=nic.cz header.i=@nic.cz header.a=rsa-sha256
- header.s=default header.b=lkffcqSa
-Received: from mail.nic.cz (mail.nic.cz [217.31.204.67])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6935780EB2
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:19:52 +0000 (UTC)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=nic.cz header.i=@nic.cz header.a=rsa-sha256
+ header.s=default header.b=VWdNdS03
+Received: from mail.nic.cz (mail.nic.cz [IPv6:2001:1488:800:400::400])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E8F9980EA8
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:19:54 +0000 (UTC)
 Received: from marcharch.office.nic.cz (unknown
  [IPv6:2001:1488:fffe:8:8f8a:daa8:a10e:7064])
- by mail.nic.cz (Postfix) with ESMTPSA id ACDB01C063B;
- Wed, 14 Oct 2026 18:19:50 +0200 (CEST)
+ by mail.nic.cz (Postfix) with ESMTPSA id 8FA9E1C0607;
+ Wed, 14 Oct 2026 18:19:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nic.cz; s=default;
- t=1791994790;
+ t=1791994792;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=J3rbXSZGOatcdugvYaH7+QuseVx3VXHrmNw0rokDuK0=;
- b=lkffcqSayTfizxgpMrGcehBqggBI2dpDzYCyUcQ1NSPUTZt3/3xbHkI249xbY3A0RFEEo0
- QqRmjgc3J+tHUe1h9UjQtFd1MslvCp6ABtULbEsHVt6SBEn/e0brzmoCnYbmld3j9vIBwa
- zJ9uOyveC72OEoGV76Eig/4G7cny+cA=
+ bh=eL9InljLedUdP2Aj27OcZnAn6oWbDm4fmsVs0lnIkjo=;
+ b=VWdNdS030QoW3xy3z35hWZIDSk5T7AqZesGNXoqU1IYKlFAxcuLsyMpwHyV2jKd6hmQqy7
+ A2WXDiQLthP3CU+zFzOGdjEjkxpjifA5Ah8PyEQls4/p7MBb8y40/Rdjyg1vMZ1ZIgKCeh
+ XJ1iQnvuWZk8Di6LwPJ+598O0FnZu5I=
 Authentication-Results: mail.nic.cz;
  auth=pass smtp.auth=marek.mojik@nic.cz smtp.mailfrom=marek.mojik@nic.cz
 From: =?UTF-8?q?Marek=20Moj=C3=ADk?= <marek.mojik@nic.cz>
@@ -135,13 +135,14 @@ Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
  Holger Brunck <holger.brunck@hitachienergy.com>,
  Simon Glass <sjg@chromium.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: Re: [PATCH next 10/13] mtd: rawnand: fsl_elbc: Select NAND_ECC_BCH
-Date: Wed, 14 Oct 2026 18:18:20 +0200
-Message-ID: <20261014161829.28404-4-marek.mojik@nic.cz>
+Subject: Re: [PATCH next 11/13] board: CZ.NIC: turris_1x: Make NVMe and SCSI
+ boot targets conditional
+Date: Wed, 14 Oct 2026 18:18:21 +0200
+Message-ID: <20261014161829.28404-5-marek.mojik@nic.cz>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20260928110434.70686-11-pepe.schlehofer@gmail.com>
+In-Reply-To: <20260928110434.70686-12-pepe.schlehofer@gmail.com>
 References: <20260928110434.70686-1-pepe.schlehofer@gmail.com>
- <20260928110434.70686-11-pepe.schlehofer@gmail.com>
+ <20260928110434.70686-12-pepe.schlehofer@gmail.com>
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -158,7 +159,7 @@ X-Rspamd-Pre-Result: action=no action; module=multimap;
 X-Rspamd-Action: no action
 X-Spamd-Bar: /
 X-Rspamd-Server: mail
-X-Rspamd-Queue-Id: ACDB01C063B
+X-Rspamd-Queue-Id: 8FA9E1C0607
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -172,34 +173,22 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Mon, Sep 28, 2026 at 01:04:31PM +0200, Josef Schlehofer wrote:
+On Mon, Sep 28, 2026 at 01:04:32PM +0200, Josef Schlehofer wrote:
 
-> The CZ.NIC Turris 1.x device tree asks the eLBC FCM NAND driver for
-> software BCH. Without CONFIG_NAND_ECC_BCH, nand_scan_tail() reaches
-> BUG() while probing the NAND chip and the board resets:
+> A Turris 1.x configuration without CONFIG_NVME or CONFIG_SCSI does not
+> build. The NVMe and SCSI distroboot targets are listed unconditionally,
+> and config_distro_bootcmd.h turns a target whose support is disabled
+> into a build error such as:
 > 
->   BUG at drivers/mtd/nand/raw/nand_base.c:5074/nand_scan_tail()!
+>   error: expected '}' before
+>   'BOOT_TARGET_DEVICES_references_NVME_without_CONFIG_NVME'
 > 
-> This broke with commit b182816c1fb4 ("turris_1x: Normalize Kconfig
-> usage"), which moved the board Kconfig defaults to the defconfigs.
-> NAND_ECC_BCH has no prompt, so a defconfig cannot set it.
+> List the NVMe target only when CONFIG_NVME is enabled and the SCSI
+> target only when CONFIG_SCSI is enabled, so that the NOR build can drop
+> NVMe and SCSI to make room for the ubi command. Both defconfigs enable
+> NVMe and SCSI, so nothing changes yet.
 > 
-> Make NAND_FSL_ELBC_DT select NAND_ECC_BCH and NAND_ECC_BCH select BCH,
-> and drop the now redundant CONFIG_BCH=y from the turris_1x and
-> kmcoge5ne defconfigs. This comes after enabling LTO on the Turris 1.x:
-> without LTO, the turris_1x_sdcard u-boot.bin with the BCH code would
-> exceed the 1 MiB its SPL loads from the card.
-> 
-> Tested on CZ.NIC Turris 1.1.
-> 
-> Fixes: b182816c1fb4 ("turris_1x: Normalize Kconfig usage")
 > Signed-off-by: Josef Schlehofer <pepe.schlehofer@gmail.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Heiko Schocher <hs@nabladev.com>
-> Cc: Michael Trimarchi <michael@amarulasolutions.com>
-> Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> Cc: Holger Brunck <holger.brunck@hitachienergy.com>
-> Cc: Priyanka Jain <priyanka.jain@nxp.com>
 > Cc: Marek Mojík <marek.mojik@nic.cz>
 
 Reviewed-by: Marek Mojík <marek.mojik@nic.cz>
