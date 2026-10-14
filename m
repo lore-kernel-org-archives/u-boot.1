@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81634CC6B2C
-	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 20:03:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B23BCC6B30
+	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 20:03:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5020C406FA;
+	by smtp1.osuosl.org (Postfix) with ESMTP id AD3998105C;
 	Wed, 14 Oct 2026 20:03:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id a3D8Szrq1O57; Wed, 14 Oct 2026 20:03:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 360A9406CB
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792008201;
-	b=N6RQCS8q3xgbNfoVd40uQUajKiqH7KTYzGxSETFcm1/jIku7FfUyA4YOv71QbpiOYqk7
-	 e03VCI1c+NhOtzZIkAnNdk/jSIfjepMt/E6r/9SoMZVtNAMAzteMgqRXSZcTcHX/rhSoG
-	 jqykKdHLYw2fmLg3oJkTJNpQOX6nLwwr+tQqlZ/prGTZPhf/RMWScLuRH2sXEwrefXPdP
-	 K7t5pp0etZUQa6lVhnjgguFwUGJi7HRGOVlQqCuH3Ccm2H7ufK/Y/q3u236SgMcIV+XBs
-	 KgIU6cvfwDKlVIuNvLUg+xFMNIsCAtm5qunEzdo614B/5G2G7j8pVrfhmbpH/YG5wZg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lUZ8MwyCsxFg; Wed, 14 Oct 2026 20:03:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BC26981022
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792008202;
+	b=L4iDikosg67bEJeshxYZ0CCzgv1LNNIdJMT33e12E+m3raDC8bcoWMp94OUZFXiK1Vxf
+	 y1wk5hZdGzMoz0wFnTjOeHypqNAcOEnPv5u9esQCrMEUNEG5TEPO+5oDcs2PsnRhLYHZf
+	 0ky58KSNl7Z+Dsd1DUNpQPznbt70FWvhEoinjT/V4gQCdwClcTeN8TEzU2eLHeKMaLcxS
+	 pf0XdMHAO/Pm9m1AMztQVhXdfgLQPyrh9+DedeGAl3oqMyn/6x59FOSQiy6jUz4wdCBQ9
+	 HKqHUxlXe+Do5zAYT5b8bRGWVGCwVyWjhA+ReD2iSYmosAj1YGOo5EymZavoVH3fAKQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792008201;
+	c=relaxed/relaxed; t=1792008202;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,89 +31,89 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=Isghowl55yudAiPQtESe/5W0hmDDYf82g78DUA2DoQI=;
-	b=gcGv+wIqkvKS/alUw7hTwsZGrnwQ0dcW/tpD9a4B4It0OhavIlnsCDBGIjBPEK/ev7jy
-	 GdjZwQGf5SxiPcIXfVtjTCYpaXOtc5TOzIb/0vU8H2mfTHvbhHRxAsMJVriEOnMS0a8wX
-	 Ta9BG6DFz1+L74Rp66RAZgehNrNlJjM7LU0uCjIduezPuRjj1uA117k2qtlb/YTVL7eLa
-	 vmdIXUlkpHuKlAE4IhWO9hOcdV3pgy8nuLNXfEmwyrLZjl9I6bURZYFbdhzRzVUvs1lgz
-	 NM1bVCxMCXnv44oI5jBxgglVrrqs1F0RJ0SG6Oi6Wbj1lZgTVeR9REqrNW9LaSbBcjg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=rUkZgoS7Gm1Oqh1GneK/SW4fpXRzF/61thJg9hPN2pw=;
+	b=Wb95dyfQJBcPSC8fJD7Rydk8JvgWHDrEhyN2GJHZ5SJsqM8VAEeFMgJklpcPmGlJpHzl
+	 TuVbReR3gYMLXkXWW3Ds4Mo4lkUzKXsP8/Bf/w0BZwu6JIGPTb/1/OW2Jt747tiuPphSF
+	 mktEEDILrd49unTWvHPqr/fasRWM5hRK0FGaz9Iv/NXd875CZamE2VBqRPkeSBjOzKmhg
+	 AkAHISoQYDjQ+PrR6oheMAtlwoSZud+6Uq3nXR6DpsBH/8KnoTkHz13wO4vNJZgTu7FCf
+	 GbaxuXh1hFZhfjCAf6rYPTGYG//A8Tkf/ancQEEdUKanN/7NbbE7isTax4aLxV+yuYA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792008201;
-	bh=Isghowl55yudAiPQtESe/5W0hmDDYf82g78DUA2DoQI=;
+	d=lists.u-boot-project.org; s=default; t=1792008202;
+	bh=rUkZgoS7Gm1Oqh1GneK/SW4fpXRzF/61thJg9hPN2pw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=pRBMUbI26/XoiE6mqO1u1Zxm0Dz2pgRm3OW0cZ7FBtMn9Z3gUQ40Ui/kX/akxGGVW
-	 3eEJJesxOQ3Tcfrf8tDIM+sNSQ1mxT53Df8dKdgtJ9IJHstYIq3tknk7qVF2f6AIrO
-	 X7+bWZLJODSMdlH2ZKlQRo15AsjH1DdCHY21wPwCeOna0UxLPQNbkeREWm+AoQQHGs
-	 Y/HeODb4MbIzVq39YJmXsmFG05y3q0qqBw4UDax6w/JB3y1ohR7X1+Wuc3F/kFTD7B
-	 5PVz4CuUoP33szoukEt6kBrT2Odi8NZS8nViY21PzoQMFN68nrlD/8p6TBoULdhUkj
-	 Cu7Wl49a1rIiQ==
+	b=K/5B2MunlXbqnuz+H8xUOUkDKGUqwvtMkRhouasM46eOykjDkQltqODFD1pciyz0s
+	 0MKdlkMoBWc0htzFMLhhUUgIZEI7YxIbnolzCbUTBrODxwmXGIKwOqGESYAVubDfw8
+	 oSexNiXnKq/rUo8RLY+V9im9x3yEZqexXphApzpSKLWVjzAPT1Md08tDSEazU3mD+L
+	 eknxOKTiL1cVe/cja7lsKZ3Lwe8zhc93KlujjoIsl4VVWYck+5aAsq0szWbZZVJkLV
+	 kq1NwG8ZJoOnD8SGVOUlY/vIe5vhPVG9EeSoAANZo9Ryg9HxZh3PXgCMAi8s0UXTLJ
+	 SwaPxtHBsczfg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 360A9406CB;
-	Wed, 14 Oct 2026 20:03:21 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 457E52E0
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 18:23:16 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BC26981022;
+	Wed, 14 Oct 2026 20:03:22 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8449DA58
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 18:23:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2B8BD40191
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 18:23:16 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 7631D607CF
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 18:23:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mA_Z9-mhgIme for <u-boot@lists.u-boot-project.org>;
- Wed, 14 Oct 2026 18:23:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5AC5F4009D
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id I65iNOsr7uiI for <u-boot@lists.u-boot-project.org>;
+ Wed, 14 Oct 2026 18:23:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 64EF7607DE
+Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip=217.140.110.172
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792002195;
- b=EIw+J71BalCYSIRXSik5arhLm9G03DZYjhO/fWWdye3BQoX7pZ2WZZcVmP1W/b/7ewox
- S4lNLZkaA7FBvndtFxMi3HBmvJX37zgsd7Qn/a4noVMDL/6Fyi/jBq/3K0uVDvLbxVvOs
- 9F8aGtD7E4wby6JnCCO1RnRyBd0DR0fZXysltdZKla5lafksSYI+ks3HQihby6OTmXyjt
- 52L5zHsKrzjeg3Ejng9iJG5cmIyAkR8NFnJMoRvQg0fwkRxulPcGczHhxXVdX2g54+47R
- MzY03dH7MG5xq5KBnb3ezxFyUacmcKgE4NE/arhV1rRqSKKtlksASVOQ+m7/HgDJ/Wg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792002198;
+ b=pLw5ghkzGYEwZxl/OEV4X9GEL0Fe6zZq6yVFDY+whUMh0SwLInBY0uJw8UOCSMO3wmgj
+ 29fRZH60cMq1s7hMhyH/+NHlX9NgBGLc1kkxoYcQQ9R4xPKaUN9Rydow9bMwcmHc/VvE8
+ FlD/H2GOlUeaaAr5tUk0Zmw6UnnvfHk2RXCgSVzqnMogEx01XLj2t9EIfPts/4oRRuzsW
+ 4yoVlE13IloL19CyJWqVEiEPNGPRZZHxHXT8js7sOy0amL+U9J/n+cBrGuHMeD7eES+cc
+ qBIM2tgbEp8cwINz02sei1Smijvuk+8Qle4erunpN47elN10sS6Hz1baMdXsY1p0/fg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792002195;
+ c=relaxed/relaxed; t=1792002198;
  h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=Isghowl55yudAiPQtESe/5W0hmDDYf82g78DUA2DoQI=;
- b=FN8F3BexiRfHugiIS/C9siHNGptx01vnKF7IPo9Hp0tWx6XQakYAziyWby3YyxenbS8C
- 9X/qwL4ZbgNKGNWNeZ0VS3ysUu1TMHCOSeb/7REeqsTJUc1B03z8ISTaVHuaoCVxVEt35
- nT6fq1LLs7fJCPPu/Wfdbb5RpKjuhe2apx9wxgr4zNijrZNOLfMK76/vWiBG8u6hXbN8g
- AGVvyDKQHA1mMehfdIz38mp/DcJuzrZg5LLN8qHPFBtk243YHgIap3lD/BNLOpXI2pguD
- 8FvyDNgRA471RCl5ggv2zdRWGjuho3hwYVisgv/HX7SQUOxeLMB9Nn8uq3VKMgiSgTg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=rUkZgoS7Gm1Oqh1GneK/SW4fpXRzF/61thJg9hPN2pw=;
+ b=AsohHztLgsWvJjr3MqAcY8z74qIRCDwzjCa/4EkDdQxnS2Vz2eawaH1C57u/Nd1+beCj
+ XTy9JHVYNf457034phM0AkLR1RUgQ4eW3aDXXKHZWVbCGLfKSItpsOzuuI6iBMoGgSuyi
+ Z0GjN+DexAVUBJ/M+7Hu2HYBOJXI8crIxhfZni039Zhn126VzcGWdqaeoHPPGqojsVA9Z
+ aD3or+TArlbVbAuCCI5M4e5cjE8Vk/EoGgorl+zl/xc0ttyO17L9E3/UsXIBSDutadGYs
+ xQQtdAjRKWBmbEHiMOIwMb+wTaJm/qhb9QuNgEdwvfvlMnPGrSBXuChNTu4W0u1sL9A==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=arm.com;
  dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
- header.b=O++1M6ay; 
+ header.b="q69qKm9/"; 
  arc=none smtp.remote-ip=217.140.110.172
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
  helo=foss.arm.com; envelope-from=harsimransingh.tungal@arm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=O++1M6ay
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256
+ header.s=foss header.b=q69qKm9/
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp2.osuosl.org (Postfix) with ESMTP id 5AC5F4009D
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 18:23:14 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 64EF7607DE
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 18:23:17 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 02B55152B;
- Wed, 14 Oct 2026 11:23:11 -0700 (PDT)
-Received: from e142474.cambridge.arm.com (e142474.arm.com [10.2.203.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 001623F871;
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A316E153B;
  Wed, 14 Oct 2026 11:23:12 -0700 (PDT)
+Received: from e142474.cambridge.arm.com (e142474.arm.com [10.2.203.50])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9C4943F871;
+ Wed, 14 Oct 2026 11:23:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1792002194; bh=z9sBYcJREkTpc1ldZP94NoTpVh4PcHfBbdtHjYaosEM=;
+ t=1792002195; bh=R6279pSaBim71deY8VBpz+Ey5OnitD4qM8RaDjqvruA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=O++1M6ayqyhqYDh2MAHVmkqBiyLhlUzX2Qn/TsCZAw+MGapQgagq2aEsxD6ykOFor
- 1J4qL4vglPnt4pcyAgeOdSHNvmPFS9IKeB2b0mIw+KBFJzlnsVAqdGL6Y9kjueYPUz
- 8BRQZ9s1FuA+a7GRiKjtdeaYI/I6XVMA4jzywRUY=
+ b=q69qKm9/s+bVz82wgSR+54XACtW1QoKhWNB+GZQwndHHbz7LiOlg0v5Qrm8sogoFl
+ Ty2K7BykJj0egmeja+6kH+eXRMrMx12siARus/wTGXfi1wbPJiDhCCw0rXf07H44/H
+ pEjSUauQxzdDNH/pkeKxO6yZsJ9qigqb6uR9x8AU=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -122,10 +122,9 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Devaraj Ranganna <Devaraj.Ranganna@arm.com>,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v6 02/22] arm-ffa: store boot-discovered runtime data
- separately
-Date: Wed, 14 Oct 2026 19:22:42 +0100
-Message-ID: <4f7b7ff8f7bf1252767589950f35d01d77133b07.1792001844.git.harsimransingh.tungal@arm.com>
+Subject: [PATCH v6 03/22] arm-ffa: add runtime-safe FF-A SMC wrapper
+Date: Wed, 14 Oct 2026 19:22:43 +0100
+Message-ID: <bc9406e6c1193421dbabf253282b12410b1e11d6.1792001844.git.harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1792001844.git.harsimransingh.tungal@arm.com>
 References: <cover.1792001844.git.harsimransingh.tungal@arm.com>
@@ -145,27 +144,37 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The FF-A runtime transport needs the framework version and U-Boot
-endpoint ID after ExitBootServices(). Keep these fields in a dedicated
-runtime sub-structure inside struct ffa_priv so they can be copied into
-resident storage later.
+Add FF-A runtime annotations and expose invoke_ffa_fn_runtime() for code
+that must remain available after ExitBootServices().
 
-Update existing users to access the values through uc_priv->rt. This
-does not enable runtime behaviour yet.
+Provide implementations for the Arm FF-A driver and sandbox emulator so
+later runtime direct-message helpers can use the same SMC entry point in
+both environments.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Acked-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
----
- drivers/firmware/arm-ffa/arm-ffa-uclass.c | 12 ++++++------
- include/arm_ffa_priv.h                    | 22 +++++++++++++++++-----
- test/dm/ffa.c                             |  6 +++---
- 3 files changed, 26 insertions(+), 14 deletions(-)
 
-diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-index 76a8775e911..eb159dbfade 100644
---- a/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-+++ b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
+---
+Changelog:
+===============
+
+v2:
+
+Simon:
+
+- Fix style issues
+---
+ drivers/firmware/arm-ffa/arm-ffa.c         | 16 ++++++++-
+ drivers/firmware/arm-ffa/ffa-emul-uclass.c | 12 +++++++
+ include/arm_ffa_runtime.h                  | 41 ++++++++++++++++++++++
+ 3 files changed, 68 insertions(+), 1 deletion(-)
+ create mode 100644 include/arm_ffa_runtime.h
+
+diff --git a/drivers/firmware/arm-ffa/arm-ffa.c b/drivers/firmware/arm-ffa/arm-ffa.c
+index 9e6b5dcc542..241ef018817 100644
+--- a/drivers/firmware/arm-ffa/arm-ffa.c
++++ b/drivers/firmware/arm-ffa/arm-ffa.c
 @@ -1,6 +1,6 @@
  // SPDX-License-Identifier: GPL-2.0+
  /*
@@ -174,124 +183,104 @@ index 76a8775e911..eb159dbfade 100644
   *
   * Authors:
   *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -204,7 +204,7 @@ int ffa_get_version_hdlr(struct udevice *dev)
- 		if (dev) {
- 			uc_priv = dev_get_uclass_priv(dev);
- 			if (uc_priv)
--				uc_priv->fwk_version = res.a0;
-+				uc_priv->rt.fwk_version = res.a0;
- 		}
+@@ -8,6 +8,7 @@
  
- 		return 0;
-@@ -238,8 +238,8 @@ static int ffa_get_endpoint_id(struct udevice *dev)
- 			}, &res);
+ #include <arm_ffa.h>
+ #include <arm_ffa_priv.h>
++#include <arm_ffa_runtime.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <dm/device-internal.h>
+@@ -25,6 +26,19 @@ void invoke_ffa_fn(ffa_value_t args, ffa_value_t *res)
+ 	arm_smccc_1_2_smc(&args, res);
+ }
  
- 	if (res.a0 == FFA_SMC_32(FFA_SUCCESS)) {
--		uc_priv->id = GET_SELF_ENDPOINT_ID((u32)res.a2);
--		log_debug("FF-A endpoint ID is %u\n", uc_priv->id);
-+		uc_priv->rt.id = GET_SELF_ENDPOINT_ID((u32)res.a2);
-+		log_debug("FF-A endpoint ID is %u\n", uc_priv->rt.id);
- 
- 		return 0;
- 	}
-@@ -461,7 +461,7 @@ int ffa_unmap_rxtx_buffers_hdlr(struct udevice *dev)
- 
- 	invoke_ffa_fn((ffa_value_t){
- 			.a0 = FFA_SMC_32(FFA_RXTX_UNMAP),
--			.a1 = PREP_SELF_ENDPOINT_ID(uc_priv->id),
-+			.a1 = PREP_SELF_ENDPOINT_ID(uc_priv->rt.id),
- 			}, &res);
- 
- 	if (res.a0 == FFA_SMC_32(FFA_SUCCESS)) {
-@@ -890,7 +890,7 @@ int ffa_msg_send_direct_req_hdlr(struct udevice *dev, u16 dst_part_id,
- 
- 	invoke_ffa_fn((ffa_value_t){
- 			.a0 = req_mode,
--			.a1 = PREP_SELF_ENDPOINT_ID(uc_priv->id) |
-+			.a1 = PREP_SELF_ENDPOINT_ID(uc_priv->rt.id) |
- 				PREP_PART_ENDPOINT_ID(dst_part_id),
- 			.a2 = 0,
- 			.a3 = msg->data0,
-diff --git a/include/arm_ffa_priv.h b/include/arm_ffa_priv.h
-index d564c33c647..3c74c63dfa6 100644
---- a/include/arm_ffa_priv.h
-+++ b/include/arm_ffa_priv.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -200,11 +200,24 @@ struct ffa_partitions {
- };
- 
- /**
-- * struct ffa_priv - the driver private data structure
-+ * struct ffa_priv_runtime - the driver's private runtime data structure
-  *
-  * @fwk_version:	FF-A framework version
-- * @emul:	FF-A sandbox emulator
-  * @id:	u-boot endpoint ID
++/**
++ * invoke_ffa_fn_runtime() - Runtime-safe SMC wrapper
++ * @args: FF-A ABI arguments to be copied to Xn registers
++ * @res:  FF-A ABI return values copied from Xn registers
 + *
-+ * The device private runtime data structure containing all the
-+ * data read from secure world.
++ * Calls the SMCCC SMC 1.2 helper from EFI runtime context. This wrapper
++ * is marked __ffa_runtime so it remains available after ExitBootServices().
 + */
-+struct ffa_priv_runtime {
-+	u32 fwk_version;
-+	u16 id;
-+};
++void __ffa_runtime invoke_ffa_fn_runtime(ffa_value_t *args, ffa_value_t *res)
++{
++	arm_smccc_1_2_smc(args, res);
++}
++
+ /**
+  * arm_ffa_discover() - perform FF-A discovery
+  * @dev: The Arm FF-A bus device (arm_ffa)
+diff --git a/drivers/firmware/arm-ffa/ffa-emul-uclass.c b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
+index 6198d687354..d270f7b614e 100644
+--- a/drivers/firmware/arm-ffa/ffa-emul-uclass.c
++++ b/drivers/firmware/arm-ffa/ffa-emul-uclass.c
+@@ -671,6 +671,18 @@ void invoke_ffa_fn(ffa_value_t args, ffa_value_t *res)
+ 	sandbox_arm_ffa_smccc_smc(&args, res);
+ }
+ 
++/**
++ * invoke_ffa_fn_runtime() - Runtime-safe SMC wrapper
++ * @args: FF-A ABI arguments to be copied to Xn registers
++ * @res: FF-A ABI return data to be copied from Xn registers
++ *
++ * Calls the emulated SMC call.
++ */
++void invoke_ffa_fn_runtime(ffa_value_t *args, ffa_value_t *res)
++{
++	sandbox_arm_ffa_smccc_smc(args, res);
++}
++
+ /**
+  * ffa_emul_find() - Find the FF-A emulator
+  * @dev:	the sandbox FF-A device (sandbox-arm-ffa)
+diff --git a/include/arm_ffa_runtime.h b/include/arm_ffa_runtime.h
+new file mode 100644
+index 00000000000..66096db3d24
+--- /dev/null
++++ b/include/arm_ffa_runtime.h
+@@ -0,0 +1,41 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
++ *
++ * Authors:
++ *   Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
++ *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
++ */
++
++#ifndef __ARM_FFA_RUNTIME_H
++#define __ARM_FFA_RUNTIME_H
++
++#include <linux/types.h>
++#include <arm_ffa.h>
++#include <efi_loader.h>
 +
 +/**
-+ * struct ffa_priv - the driver private data structure
++ *  __ffa_runtime - controls whether functions are
++ * available after calling the EFI ExitBootServices service.
++ * Functions tagged with these keywords are resident (available at boot time and
++ * at runtime)
++ */
++#if IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)
++#define __ffa_runtime_data __efi_runtime_data
++#define __ffa_runtime __efi_runtime
++#else
++#define __ffa_runtime_data
++#define __ffa_runtime
++#endif
++
++/**
++ * invoke_ffa_fn_runtime() - Runtime-safe SMC wrapper
++ * @args: FF-A ABI arguments to be copied to Xn registers
++ * @res:  FF-A ABI return values copied from Xn registers
 + *
-+ * @rt:		Runtime data captured at boot time
-+ * @emul:	FF-A sandbox emulator
-  * @partitions:	The partitions descriptors structure
-  * @pair:	The RX/TX buffers pair
-  *
-@@ -212,9 +225,8 @@ struct ffa_partitions {
-  * data read from secure world.
-  */
- struct ffa_priv {
--	u32 fwk_version;
-+	struct ffa_priv_runtime rt;
- 	struct udevice *emul;
--	u16 id;
- 	struct ffa_partitions partitions;
- 	struct ffa_rxtxpair pair;
- };
-diff --git a/test/dm/ffa.c b/test/dm/ffa.c
-index 593b7177fce..a0c95e62607 100644
---- a/test/dm/ffa.c
-+++ b/test/dm/ffa.c
-@@ -2,7 +2,7 @@
- /*
-  * Functional tests for UCLASS_FFA  class
-  *
-- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -26,14 +26,14 @@ static int check_fwk_version(struct ffa_priv *uc_priv, struct unit_test_state *u
- 	func_data.data0 = &fwk_version;
- 	func_data.data0_size = sizeof(fwk_version);
- 	ut_assertok(sandbox_query_ffa_emul_state(FFA_VERSION, &func_data));
--	ut_asserteq(uc_priv->fwk_version, fwk_version);
-+	ut_asserteq(uc_priv->rt.fwk_version, fwk_version);
- 
- 	return 0;
- }
- 
- static int check_endpoint_id(struct ffa_priv *uc_priv, struct unit_test_state *uts)
- {
--	ut_asserteq(0, uc_priv->id);
-+	ut_asserteq(0, uc_priv->rt.id);
- 
- 	return 0;
- }
++ * Calls low level SMC implementation. This wrapper
++ * is marked __ffa_runtime so it remains available after ExitBootServices().
++ */
++void __ffa_runtime invoke_ffa_fn_runtime(ffa_value_t *args, ffa_value_t *res);
++
++#endif
 -- 
 2.43.0
 
