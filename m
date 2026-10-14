@@ -4,247 +4,242 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F319ACC6B1A
-	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 16:52:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC6C6CC6B1A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Oct 2026 16:53:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B6386407CA;
-	Wed, 14 Oct 2026 16:52:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A1EB8407C9;
+	Wed, 14 Oct 2026 16:53:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ox6OmxA9JjVF; Wed, 14 Oct 2026 16:52:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A4C0040755
+ id IC1PZrTd9tK2; Wed, 14 Oct 2026 16:53:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3FA4B40776
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791996730;
-	b=qPFcBjqLQw33YQGZDmEIPbFWCBIvMmD502I1g/afh1QKOogl6FqKtv4h7l6A9NmZ1PZP
-	 U5kcIQx09wuqgyNA04XLyIWuC5Kn9AmHMaHX4m+CTfmlWYH7pd+76JIKidu+L4sdhN+A5
-	 1Y47wihv/UE6A/xraZgF/+kZVBu7kWn0pyfr7W1x57FeJozLXOoyMkzQXCajKtZqtyse1
-	 6V5g3bsRVf26JZPyfGiyKtRP3Ks/8DSFqvMJMEFmF7dIYjk3yOyW2jte++Kwi8vdM095f
-	 +XhWlPyY3XIZ4ekG0ZkcRG/UApCaQftY0gvvsXIbWIkdmeRMnHkqN7g6lbPnQhax7mg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1791996813;
+	b=WeR+GDYaMkDPLSnPh3Ua1+k7yi19aK/Iz3aVliKxmsVZG1+BIr5e6rDSbWmUp4sMCYfr
+	 3Bb5cqzVs6QOltAXxKH2VhFP1POioEuuHicxrZDxtogM+lEJFsYboKuUgJyje6ZPXR2zO
+	 DdShYg4aOUBDQ8ceOYfoSPK5FrbJo/uh3nqECLZmzC2x/YUrfjwjkfx8KyrPrBRmHl4TX
+	 SZUO8rRBjmwZ71ZOczAynW/7b71YA/X9zHQNqLMKnwTll0iXDlbKZ+fgsKjpXCUI1a4fG
+	 TOjBQY/CSZxiwBv9xO+QQBla560ueSxst3cNVaXBUlw2YbI+8rATMnbolHsaf9gn9zg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791996730;
+	c=relaxed/relaxed; t=1791996813;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:Received:Received:DKIM-Signature:
-	 X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=cTfx7+kLekXMDgnlwiQ2nxLFk3tAKA59oj0N1yvcSIQ=;
-	b=LvVZkUkZckVXb2xFu2A10j/AKmt/Aq6GSVWA0ruH/06ZoFBdYUT8EXFfkZdDpBflX+0Y
-	 ORaYeg22Q/RzuV9bPPF8BuoyG4hLhQshexe5uowHqLqa/Zwg5+mb4e3cP2cFYQX2wg46p
-	 lVjVjladI8s8nnAtGvXLKp0WdzPbWNN7eAF5qMzuqa3Scfc6gPEff2eEQsEBG9zkpjymR
-	 LhAHhokcfsFUlta0XuUoIvIuz8NYK5NBUj4mwOAcoxFfVys4jT3S3eCB1HKhlTwt1d7Xk
-	 up4C5BpR3taIO9qh/wy9uTAJi59/a5CGP2LDgDit/I1KxBaohZx6T2r2PS/0LpdZjkg==
+	bh=FsKNSl2memNxmkPGDIVUpccH0yWmY5Dp9Spd1i+t9o0=;
+	b=JZLeF/kbDcge4pe73TBG+eZyTY311g3JO93xXWvYLh8wH9a8n6n9ozPGMVpGFQ25JGXa
+	 I9+Gt7inpinR441SZKHrjj+Hd3+iiQqRuvZWQekJkj+/7vTT6GOI8EWgwM+fXNlNDBxl7
+	 YIyTNpieyiOGk05xi9uBZdqBdd5R92InI4xgYe+ZvqUJC0748FQ8dK/DfIWxqP9TpG/yv
+	 2G9hgD7ERDhClVoAZIsIk1WDJKv7PUFQzH5hpjRTRcO0CgGUGW86yUqb+sZdvpb0TQFnn
+	 mkeJlxzKBpKCTvYbtzZTmVs14SVRpD5qvqwccgoAdl2u7MwgEY/EgFs+eBSkBH3hIyQ==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1791996730;
-	bh=cTfx7+kLekXMDgnlwiQ2nxLFk3tAKA59oj0N1yvcSIQ=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1791996813;
+	bh=FsKNSl2memNxmkPGDIVUpccH0yWmY5Dp9Spd1i+t9o0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=e+ei38bQuUO9MlapsmGeO6DdYfK7aCE5ovLZehnJpeBWNAPL9JfT5mp/a28JOI7XR
-	 KXLnXsS3t1ChMgs5RSY7oQbztopcTDWw0MRjPlju8lXchCQxjo2lzw2AA709GhEjJa
-	 E+Bn2jD8+jpw/0v6EpNNqWkKqDgxWqMNf9ROMoRc2bmGCmg3aOaQZPhvhhguiplDNg
-	 yNfI+RI+V+Ayzd7kF4eBVrT7F3i7u4wb15ley6bNtf4GG9Fr0u1sgM48uxRs78LfX4
-	 NMGJcMpsF6vGjQa5Go+/t0qLhRKZcqA3UK2t63wT9tG1D5ShMBxydN8B7nRkleragW
-	 dWp2kdBZ/xA4g==
+	b=X7iFB4/KG/Wre/yb3CuUgOtQaMN11VyJxtTxNYQDWR8XooqzL0O/ZSxmDMRxQMRtK
+	 4y5lZC0w2LTqcij8vNMW5urzEn/AOoJDE9RaMfvZSsDev/YuBRVJkxc2VfiMAGBXhH
+	 xYZgIiggFjovek4DEKaDMI+lAfsK4zJqZVkdorzSX3CpMNBvDUlML7XZq2pRfrz9X2
+	 1WW0HeuXzxMkSTCP1XyShKnioznI2+tzzdgyEg4w4zKTI5NwptZq4LR0bmxhYtiCkH
+	 Kls+tpNba9R7QJy14GE84Mo633YHWcJE281oPDbzzq1dZ/JISrNgS1+JwfwK0aNqAH
+	 EuqlKBUOawzzg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A4C0040755;
-	Wed, 14 Oct 2026 16:52:10 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id CE3D3A58
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:52:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3FA4B40776;
+	Wed, 14 Oct 2026 16:53:33 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id C995A255
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:53:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B4ECC40363
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:52:08 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id AFCFC80E4F
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:53:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4o3KneKiYcDp for <u-boot@lists.u-boot-project.org>;
- Wed, 14 Oct 2026 16:52:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org B2E8B401A3
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791996728;
- b=WJP5z3Q8C8sdoxwHoUWXc7WFlBxytHNXGJ7nKrZ74X+oZa97UTnxk41zo/RJNX99EeSh
- gj4e+kIjU33k47GBSLfQXnKm2QQfwMadrghB7XsUL4N8SjH64F+SxGqlMVuDSIGfzeuwf
- E3/tC+mTABq49OJyGNBykjDI4OZ2Fnn/TmbHV0SJKS1Uopo6mSz3aFGgMEIdXr4+rNFDS
- /VbzImgFQCmMWWe2J3JLnXgAXb9lcuEeftbY3T/wNovU0xo8EKl5nMfyVP8ZPKVj8dlRD
- /8jgj9teLWakcGFre+hwYMfAlQhwRoqVHuRB1USQ2WmeqnxMdgVldHQnko2WpsO/gFQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MpEnF-R4ZF7d for <u-boot@lists.u-boot-project.org>;
+ Wed, 14 Oct 2026 16:53:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8188380E1D
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip=205.220.168.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1791996810;
+ b=NeWBVRIc5yLwj0l8XJLBo7ZnYFgFwwPAToW0n4tL3IztAAbsvL8hLXemZvXQh/fd36Z1
+ esBDbV1JPVDgyz+JxmipMJdp6wFpVoycGuN43dl4AGUaCiIf49BQPQxzce6IVh2d3C+fJ
+ RTCc+UScFFGXjmCq1Rb4X/L2b2zkLfF5iGcUt+qro/N/sPkbgEiQOT62CyMHBwgAB88Pa
+ kx1RpVihdMD3e2X0bQFqgwvnx2hZ/VvUtc27GeANi1D22KcUa8iv1FQNk0JwIcKriZis7
+ xGXyc98MGQEIRqtOFANevtC6L0PZYoL2M0yaBp3H45isY6dKi+JBcI4u9CrU4khrsQw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1791996728;
+ c=relaxed/relaxed; t=1791996810;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
- DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
- X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Message-Id:References:
- In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
- X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+ DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+ Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+ Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
  X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
- X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
- bh=cTfx7+kLekXMDgnlwiQ2nxLFk3tAKA59oj0N1yvcSIQ=;
- b=jBLRKnL3jVrkvAjJoZQj9Wrd8Lfb8s/h+FVzz6wqcQpMBqUthc8unaktVpk2XO01gZNc
- xOZj6OzNoeXLH308aekAhqiuDb/WtN1EyKMTvEtVCUMrvLnGUyp6gLDqRQTJ+54zwN9i4
- u/Q5UFp7LeDzLS971lR2NFrPQiQ1qmW37ZCln2yP8TpeaZVNLVzhQ0/6xFVzfDeCM2slY
- rUHRIw2/2bqcocs6Aucu7yrOhUjCjLM0FOA8pvseXZhUE4GfG0QDd1pDzmbmxRBguHCZt
- 0GSYNSkY9BbPXppsXdU5CW/Gc4gT5hp/0kHIHYpRhQjRtRKy+5zwU3xT+0i1tGMT9fg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+ X-Proofpoint-Spam-Details;
+ bh=FsKNSl2memNxmkPGDIVUpccH0yWmY5Dp9Spd1i+t9o0=;
+ b=bBYz4FpCdU3AIrGVk8HsYeXFgBNsybrrZqRxbQ9JjN+73SANJXQzz+djEBWzpf8YMSxi
+ eNXqV64UBWtnxYl5mGK/wO69O7Xx2wGPols03OqVN1f2NlZIEeRvzdnFZXgrDZpOtRMPj
+ 7r+fAqPKxEFh/I9Imy//ZXuNgPe/Sy1pI7brvSB7NWeXi0oWczs3anVTecDLhOcNCbh/O
+ 6lNES88JIVTAobfLSvnit7wGg3x2goxIP+vy8gd8eS0qvZ/N+jrBaNAntoj72DNJJRpdh
+ Zg81MFb2ZdaOjMheFOrAQ1XHwlBA144QE76p8HuwciewGOJSxOgEdiLWk7tBsJjnrGQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=oss.qualcomm.com;
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=dp3g8v53; 
+ header.s=qcppdkim1 header.b=o0NHWWr1; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=TcZFBnKu; 
- arc=none smtp.remote-ip=205.220.180.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
- helo=mx0b-0031df01.pphosted.com;
+ header.a=rsa-sha256 header.s=google header.b=DUE5tR4S; 
+ arc=none smtp.remote-ip=205.220.168.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
+ helo=mx0a-0031df01.pphosted.com;
  envelope-from=balaji.selvanathan@oss.qualcomm.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=dp3g8v53; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=o0NHWWr1; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=TcZFBnKu
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B2E8B401A3
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:52:07 +0000 (UTC)
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ header.a=rsa-sha256 header.s=google header.b=DUE5tR4S
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8188380E1D
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:53:29 +0000 (UTC)
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69EEbNKF152729
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:52:06 GMT
+ 69EEbUOA3813218
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:53:28 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- cTfx7+kLekXMDgnlwiQ2nxLFk3tAKA59oj0N1yvcSIQ=; b=dp3g8v53cl6apCAI
- arGdnSmY5tpeCFoOik2m4IY32wlnPb90qbg9lb7AsbrCxvSJrzI8jtID20XylaBS
- HNojlYLxCzdxFPyT1hHp08+Zn1GD9tHOIkma2uRvbahUSuJnPu2SHJ63Yf9nNClk
- KlvgfThJHe5BUYRCVQLRWGxtyfRceYgi9pWDI50+okbCQeId7md4MBztgskU/bxX
- 5/4TPqxdZu70OtUsgzeHQrt3iN0vlhkbRpD+u7ACJPDOnwcUqLfwjzIzMImT+3pb
- LBwITGfTi3CiL4ccgjyzZkBD+PS13sKuXA6+hPP9JGV4L/5OCROkQh7n+/HuZpXb
- +NFoGg==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
- [74.125.82.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ha7aehqa9-1
+ FsKNSl2memNxmkPGDIVUpccH0yWmY5Dp9Spd1i+t9o0=; b=o0NHWWr1x2Yb2CKo
+ vzJb2Kj5najVM82rP0/ZCHeRYaL4oY6dpZfIL09EKUpghj/KOy71a62iKOwonr1X
+ fzj+zfLIm534uTHaCKleA12rEv7kkDMR6bxj3X5u5UsLDXb0tnhPes6iW79uOUDY
+ VBiF0kZWVkHlpZWNv95csuLbJc8Q/ZY6sstZ0s6arwZUA9EVjq0rcKlmOkrh+s+p
+ AvcPwQEpD8ki7lt8cklRvdjjrK6DvDM8j3eG8pIIEy2Il6LMbSP3/Q4oSMKrSPAl
+ t0xYNjDUz6V/QGwTLNCpbUgsJcuyv9NEsqLaGI1AaRabWNmvK+Zx9hnxxT5TMBOH
+ utOwGw==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
+ [74.125.82.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ha46u2md2-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:52:06 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id
- 5a478bee46e88-35c3c370b17so4087876eec.0
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 09:52:05 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 16:53:28 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id
+ 5a478bee46e88-341eff9e381so12058849eec.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 09:53:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1791996725; x=1792601525;
+ d=oss.qualcomm.com; s=google; t=1791996808; x=1792601608;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=cTfx7+kLekXMDgnlwiQ2nxLFk3tAKA59oj0N1yvcSIQ=;
- b=TcZFBnKuma/SwypBtC04pe+9KDe9RWIjSAlFBtpFg9oqhr7hB4tjGIAIUBKlhRyAUZ
- iFAYdHPy/FpbuG25Irg7TycWDIglXRsZGQ8PCBXjllzLXvRHmVoeNAcSh4rKSGO4llNs
- loc9QpRYQo51sgMWAEAyjdjecHc9cJ6bRwqorFw2TFJAgMTv3hOpB5gwGF0o7ptcucqn
- ryKNw86h2mfhP3DhlP+BXcHqlipse/v8OlhVSdKmM+raGYvAvWTuBX6gfrt6oMCD1Sgz
- 3N2IzZ78jH/ftGl2eyH4dBTLmyvwqy9ddsmwHYUDeIQpVFmnWRDhF6NYfQP9cUO965Rv
- Wumw==
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=FsKNSl2memNxmkPGDIVUpccH0yWmY5Dp9Spd1i+t9o0=;
+ b=DUE5tR4SYS0xDBKGUMMzUO/MSbebcdfsBfc5mGYNPfa4Y7YZ2L+Bm7XC2KWGiu8IsZ
+ pRqRtFma/cROJUoyG6E1ygxtjOe4y3GcX/7Cd/+rH/52HNLGjJ/yoYLNivylG09NZt/D
+ m0sOtJKgexVb5/2EHGPUR7SRJnMamnp/xrt8OmMn4wgDAdItKVYhbDnakKfs6tct8oPj
+ lMlx7wk9o0rkg3DTwP1PzZat0/qANErJIjfeRCyqBeK0x3yOLjaVpa8gqbkKrRy1pa2y
+ 9JaXBvvDN8qmzS32Tco2ETGA6wOtj4gGdb7VfupEja3XepktgiOC4UIlLjIJLnBVc+rv
+ +PMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1791996725; x=1792601525;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=cTfx7+kLekXMDgnlwiQ2nxLFk3tAKA59oj0N1yvcSIQ=;
- b=heWzSdvnLjDbqG6YNYAEK7izoVCbLiY/AyZmQIf66Rg/vpgfnCKvWlxjq7yugGbtYJ
- j+Fo4QCoHMozPw8ptE73mDDx1mZJ5TwJ/aM9x++TvH8mk+L8JNDVeoH69w7mMZnWi73c
- 7zgMVNR2EP5arE/0FOnreOwbA1qcglLnzXHtx4NA6qG+UUTAZ5Ena6BMrY2Ou1kOdoeW
- mCeXKWMqN64DyqOh85fzLo9jmC9KV/sjpo/+gUOhop/oZoTTtd/tZPPYUChYwMbeAS8o
- LvlfeLNQx4Kuiq/oCAr9wPRtyKo33DMcE3PDB1PIHPkiCgH8RsVUS+fsRkUwDIJHX1Pz
- fEBA==
-X-Gm-Message-State: AFq9FYKJF8BKcqyjPz8f/Tu1XMzFBsXL9T/ekIRJL9F/ghuK4574Oy8y
- Dc7wIgAmrvhSRcGTGPNKjI9iG0gAzpcOUPDEklM8XhAnSr9MGQ0aF8TlEuJAD7uRZ9B5L5c80Yt
- rxQRbSa/nzjIc7qwEtRZGXcz0pklV2TZhv8X+vVn1fkeVNe+jzopwgVNF/J4J9jZTCEb2h0Q=
-X-Gm-Gg: AYBFou3BL4GtKG5GCGcmsUhZjAbN1OcOyyK24ho2rE2pdh9XCRWPbOSPUbVikRj68Cl
- vtziwZYm2XMzU2hD39Z7xGXStdgWlE5INgvclKLCHEAQRAENunmAv3g+Qel3eIhdSRZzPlsTtLJ
- o+9bedhD1Tyg2VTHIPHmiIETbUX0oY54BGETemLFFHM/dhecn4BZ9BbYccdqdaXLI4ZTbyXSBMR
- urKMZGxUApxaByty3Db5mjvEKUcX3e3KTgNq6yyECfWTEyUzJVhpsjTJxn+vb2/hGIUMRNzSjUm
- wloMGLdx5icEbzbNtkKqhmrH4h2XfQu/AtC5AstOjVFcxoqqnXIi2R1ebMwnJcY6XSj7/drAinL
- UAGCSrbDmmHw0E+6TKvooFrp2eo2J0vxPbPeQoVqgiT4PDcJj9rv7Ugakgz2DQzCMCYUxOOS0JR
- D7/OMivcXRCcOOu/Eyr3sw8AAAWVE=
-X-Received: by 2002:a05:7023:882:b0:15a:4155:3d9d with SMTP id
- a92af1059eb24-16a6034685dmr27170520c88.31.1791996724725; 
- Wed, 14 Oct 2026 09:52:04 -0700 (PDT)
-X-Received: by 2002:a05:7023:882:b0:15a:4155:3d9d with SMTP id
- a92af1059eb24-16a6034685dmr27170430c88.31.1791996723740; 
- Wed, 14 Oct 2026 09:52:03 -0700 (PDT)
-Received: from hu-bselvana-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ d=1e100.net; s=20260707; t=1791996808; x=1792601608;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=FsKNSl2memNxmkPGDIVUpccH0yWmY5Dp9Spd1i+t9o0=;
+ b=oky5iBy5rqb/9Jh4DxEvtw2VFhaIDfRyOS7MyIhazCvvLpu9cqgi6n++xy6QaPEupA
+ SOLpSJPRkTL4zrhEJ0NRKG9CBs2mgfpCA/edfSDxCRm9ASFXBrWu0/DLWPeFw8Y+uUV/
+ +s7+Pse+diI8L3RmUeWveh44rFOQ9IY5MlXVlB9EOf4iWWmAj7TCaxPjKSkX9QmK/FWE
+ sju3sPwlZ7yy8PJWgAsjL02f3Db+1evRwmJGIOQSMPZYL5atgWDRv1IGk4U9UXLGPZOE
+ FsaSUrr5eZvRHScwONB5a6M26N2CUXiVjAV6p8O4hd7tX4a3JvlYX+aCE4i8aOi3o8Fb
+ I7oA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvByg5ZTzEgskPGZHd+AopygR3L28CBZdFf4jFOyfaoBrt8xxo9WVVJdbLu1YTQF+VHa8WjH1ej4=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYLpP8r7aoDiEcotNq4wtGRgkz0k+kECV7FfZ9LaIEZ/8FTaUvWm
+ iBZH+m1EE2s2Xbet2+IY0IBx31KAP8wUpgE5XZbPjVOD3KDqn+oe3IfyBMebKmvOoTHcXuoVOAf
+ zSBFQGNahdQFaatdWcSmyejSeIFWDhU1zRMVVMoAgVplAi35TqYvnmr6MVjWxn2yVkLNNaf4=
+X-Gm-Gg: AYBFou0vlxwGVNNCI+UaryZvpfCTkn7KWwmE/jEzBgvDuSr1bPhXLIWqxFOKxl59gO9
+ 7dmz3Av9+Og8FwGbmpRWm3O3Po0d0CD39+YxklJjcLPnUGxDQt/6L/wW0j2n+lq7wNCiJAxIlvf
+ zbXEIr1qvqoEB7DuNGecSJmJZsXveOgpQO88nROcStHmfROTYXyLUZ4VYyXQVLwdUbPPIfppwJv
+ joNHb0okzXsy2ghguEAB8dUKE7tAwdz92DnjbRYiCTGu9tFA+UnWeLXDHUU/T6paCAzGlSTQlCx
+ kcunlN51VQHN1p44rwMB5kFmCosjVCrQw/vuc2Y0/2dJzMD+piUcsIzkuzcps15AtT1ojOGxSTB
+ Aox7xlAYx67ClIdat7auOtK3PdSj/e94+m7j6
+X-Received: by 2002:a05:7300:f0ce:b0:34b:b410:9352 with SMTP id
+ 5a478bee46e88-3537de1ce96mr21649533eec.1.1791996807396; 
+ Wed, 14 Oct 2026 09:53:27 -0700 (PDT)
+X-Received: by 2002:a05:7300:f0ce:b0:34b:b410:9352 with SMTP id
+ 5a478bee46e88-3537de1ce96mr21649444eec.1.1791996805587; 
+ Wed, 14 Oct 2026 09:53:25 -0700 (PDT)
+Received: from [192.168.0.6] ([183.82.204.175])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-169a1dd57d0sm48975894c88.8.2026.10.14.09.51.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Oct 2026 09:52:03 -0700 (PDT)
-From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Wed, 14 Oct 2026 22:21:02 +0530
-Subject: [PATCH v8 8/8] doc: qualcomm: Add snagboot mode documentation
+ 5a478bee46e88-35b29c2f861sm37522473eec.11.2026.10.14.09.53.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 14 Oct 2026 09:53:25 -0700 (PDT)
+Message-ID: <fa1b28bb-68e8-4e8d-a5ca-1972ee74e4ed@oss.qualcomm.com>
+Date: Wed, 14 Oct 2026 22:23:17 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261014-snagboot-v8-8-7caef86562b7@oss.qualcomm.com>
-References: <20261014-snagboot-v8-0-7caef86562b7@oss.qualcomm.com>
-In-Reply-To: <20261014-snagboot-v8-0-7caef86562b7@oss.qualcomm.com>
-To: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 8/8] doc: qualcomm: Add snagboot mode documentation
+To: Ferass El Hafidi <funderscore@postmarketos.org>, u-boot-qcom@groups.io,
+ u-boot@lists.u-boot-project.org, sumit.garg@kernel.org
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Johan Jonker <jbx6244@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Johan Jonker
+ <jbx6244@gmail.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
  Michael Srba <Michael.Srba@seznam.cz>,
  Sumit Garg <sumit.garg@oss.qualcomm.com>,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
  Simon Glass <sjg@chromium.org>,
- Hongyang Zhao <hongyang.zhao@thundersoft.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791996669; l=4408;
- i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=NSFKMTa3RgbxoHyOYasPS7O1VEhmTRChjKRoMhsGyzk=;
- b=k4uYyyNdFn7i4vMfymxyex6xfhomnGbB+7S36N0kCYkaJjlP50eVDHghpY+oF9kU5P4XdWzd3
- qPG3mCLgljUCdL5yEmVFioUA5SMt+qKOdRfcKjHTpTDOvXeFBo0H0GS
-X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
- pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-ORIG-GUID: SQuwzOtrCLQlfIdL2EOTdbNoRfwBJnx3
-X-Proofpoint-GUID: SQuwzOtrCLQlfIdL2EOTdbNoRfwBJnx3
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA2NyBTYWx0ZWRfX+PWcgmLFE+gx
- SDjNT/kRphHqW/iP5jy/OucZSCXNsPfRF0Hief6CgKeO3ZI5lnaAl9QQVlZYtLtJ9ghg5cUxhcA
- Pq+RIY+XblT+azHddW8ngC/4Askz6ME=
-X-Authority-Analysis: v=2.4 cv=NctzRGD4 c=1 sm=1 tr=0 ts=6acfb336 cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ Hongyang Zhao <hongyang.zhao@thundersoft.com>
+References: <20261013-snagboot-v7-0-fc296a32836a@oss.qualcomm.com>
+ <20261013-snagboot-v7-8-fc296a32836a@oss.qualcomm.com>
+ <DM3NZDMWLXUO.3BY4A60QYUEW1@postmarketos.org>
+Content-Language: en-US
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+In-Reply-To: <DM3NZDMWLXUO.3BY4A60QYUEW1@postmarketos.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA2NyBTYWx0ZWRfX89L13BFk9Ady
+ xxhj5+MPHuIg8eI6OrNqMJitPlvTV1VgeAB7707SQYpbW/FMAiSRe/Qb0jSJa1yOPqr/FMf04PV
+ fRf59c4fOI+fUQpBjtJqmR4e9ExKz/s=
+X-Proofpoint-GUID: uMdHqKI__cgojZO4W0QEEdwssKc1fgIB
+X-Authority-Analysis: v=2.4 cv=Y6ttIReN c=1 sm=1 tr=0 ts=6acfb388 cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=W16dESUZREjBzS9ijiA/Gw==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8 a=-mjFUTYrJJ_n1noAqFUA:9 a=QEXdDO2ut3YA:10
- a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA2NyBTYWx0ZWRfXyuwQRCp+yy5+
- R0EvNjo9XdTG7bx2ELYeIQYvMYjlunZkkVx8OVyyRHDiT2MpjZq1al+sk+XJa8uP7zb5eNStFy7
- p+KsX6dRucIgnXHwKgHxK141xTS34VwvC5VTcF5CGmetz18I1IEad1UvxcL+Dgx3W1y/hR+gNWs
- TVBSajK5TNN8qrgva50IkP0Gf7EUzIGqX7LGUvoU5OGze84WPZa66xkq1gSK6oWt80KNh7YfDvu
- 4Z1MNRLgJPChJGcNo1bZol9syziAD+jmOc+xyQ01CLwDpBoL/iYQC/3W9cN+g1oE+3uCrIu2JA8
- c1hbsE+Th3vt5lJitTjP/gERrQSzjcduTKc1lEHWtu+gMyBAvRcSEuCDePOYLd/U615PWg3tKQP
- cFKudLzKPUv8xOBQ4Ra4CG1x1mCIUTWIhCTxcEX1HPRP56ZtXJO5EeY+vUguVMsFffXtYS7a34I
- gj+G4K8ACCXkZSgaqsg==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=cSziVDP4AAAA:20 a=NEAV23lmAAAA:8 a=EUspDBNiAAAA:8 a=1N6bBq8Zmelz02OXVmYA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=6Ab_bkdmUrQuMsNx7PHu:22
+ a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA2NyBTYWx0ZWRfX9JjX4vqTNqEP
+ y17+JG4Qk6ts0yhHra3LMCZpsE0fJv6L6BRTjyOd4mlx6n0/B4PuAGtDjtkrDm97s9qq+sxRpnc
+ Vl3Uzx2nu1O+f1zUTyN2CSSSyQvLb9lxBXkF/2y7v0HAXWXAVwz4+4wB7IVe+E4ivUW8rzS9KzJ
+ Db6leHdH1Buqkk5xJ7uJlXwudIL+fxBxyEsOirZtaJkEx9h8BZy8WVHi4onev1a1dvxhsjR/FZv
+ KLp5E4wMr6Tzo4BpeNONxgR8TaZ+TGPZJg1+0jqtbJaDdJJwwXRP5xMJpHb1+O4MhpMJMogMKsy
+ G/5Mh3xi7JtS8phZypvd2ywNLzjB+5TgQpcjZyuZ9cL4xODkxMKHpj88ft4EtFlhsPNQQivdx4Q
+ h/CUPUVwTdwtYL1QmfBNrgE3CYXYwCeYV4FDhZ++PzoWjQQxeZtAUX850ihyk+SvS8CLS/oIx5j
+ CZrIOnjQn7wX19JImgg==
+X-Proofpoint-ORIG-GUID: uMdHqKI__cgojZO4W0QEEdwssKc1fgIB
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-13_01,2026-10-14_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 clxscore=1015 suspectscore=0 lowpriorityscore=0
- spamscore=0 phishscore=0 impostorscore=0 bulkscore=0 malwarescore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ priorityscore=1501 malwarescore=0 adultscore=0 phishscore=0
+ lowpriorityscore=0 clxscore=1015 spamscore=0 suspectscore=0 bulkscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
  definitions=main-2610140067
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -260,132 +255,333 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Document how to build and sign U-Boot for snagboot mode on Qualcomm
-platforms, using Lemans-EVK as the example, and how to add a snagboot
-defconfig for another board using the qcom-snagboot.config fragment.
+Hi Ferass,
 
-Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
----
-Changes in v8:
-- Point to the upstream Snagboot docs instead of describing the tool
-- Drop the "Why Snagboot?", architecture and EDL+Firehose comparison
-  sections
-- Move the build and signing steps ahead of board enablement
-- Drop the list of Kconfig options selected/forbidden by
-  QCOM_SNAGBOOT_MODE and the Lemans-EVK example section
-- Replace the signing prerequisites list with commands to fetch
-  swiv_build_utility.py and qtestsign
-- Drop the "Expected result" and "Output" blocks
+Thanks for the feedback. Modified the doc to focus on only the usage steps.
 
-Changes in v7:
-- Rebased on top of latest file
+On 10/13/2026 4:42 PM, Ferass El Hafidi wrote:
+> Hi Balaji,
+>
+> (sorry, I didn't mean to send this off-list)
+>
+> Some drive-by feedback following:
+>
+> On Tue Oct 13, 2026 at 1:53 AM UTC, Balaji Selvanathan via groups.io wrote:
+>> Add documentation for snagboot mode support on Qualcomm platforms.
+>> This covers build steps to compile U-Boot for Snagboot mode for
+>> Lemans-EVK along with the architecture, execution flow, and Snagboot
+>> enablement requirements.
+>>
+>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+>> ---
+>> Changes in v7:
+>> - Rebased on top of latest file
+>>
+>> Changes in v5:
+>> - Added build steps for U-Boot in Snagboot mode
+>>
+>> Changes in v4:
+>> - Newly added in v4
+>> ---
+>>   doc/board/qualcomm/index.rst    |   1 +
+>>   doc/board/qualcomm/snagboot.rst | 224 ++++++++++++++++++++++++++++++++++++++++
+>>   2 files changed, 225 insertions(+)
+>>
+>> diff --git a/doc/board/qualcomm/index.rst b/doc/board/qualcomm/index.rst
+>> index 56b8d894c2a..b8bc37bb384 100644
+>> --- a/doc/board/qualcomm/index.rst
+>> +++ b/doc/board/qualcomm/index.rst
+>> @@ -17,3 +17,4 @@ Qualcomm
+>>      rdp
+>>      signing
+>>      spl
+>> +   snagboot
+>> diff --git a/doc/board/qualcomm/snagboot.rst b/doc/board/qualcomm/snagboot.rst
+>> new file mode 100644
+>> index 00000000000..0cbde61253d
+>> --- /dev/null
+>> +++ b/doc/board/qualcomm/snagboot.rst
+>> @@ -0,0 +1,224 @@
+>> +.. SPDX-License-Identifier: GPL-2.0+
+>> +
+>> +Snagboot Mode for Qualcomm Platforms
+>> +=====================================
+>> +
+>> +Overview
+>> +--------
+>> +
+>> +Snagboot is an open-source, scriptable flashing framework that provides
+>> +an alternative to the proprietary Firehose protocol for device
+>> +provisioning. Like the traditional EDL+Firehose flow, Snagboot uses the
+>> +Qualcomm boot ROM recovery mode (EDL) and Sahara protocol to download
+>> +and execute bootloaders. However, instead of using the proprietary
+>> +Firehose programmer, Snagboot loads U-Boot into DDR and uses the
+>> +standard fastboot protocol for device flashing.
+>> +
+>> +The framework consists of three modular components:
+>> +
+>> +* **snagrecover**: Downloads XBL/QCLib to initialize DDR and load U-Boot into RAM
+>> +* **snagflash**: Communicates with U-Boot over USB using fastboot to flash system images
+>> +* **snagfactory**: Orchestrates parallel factory flashing tasks
+>> +
+> It might be worth just linking to snagboot documentation. This overview
+> makes it seem like Snagboot was made specifically for Qualcomm which it
+> is not.
+>
+>> +Why Snagboot?
+>> +-------------
+>> +
+>> +* EDL + Firehose remains the default and supported factory provisioning flow
+>> +* Customers are requesting support for Snagboot, an open, scriptable flashing framework,
+>> +  as an alternative option
+>> +* Snagboot reuses Qualcomm recovery primitives and standard flashing protocols,
+>> +  minimizing platform disruption
+>> +* Provides an open-source alternative to proprietary flashing tools
+>> +
+> I would drop this whole section, it's not useful.
+>
+>> +Architecture
+>> +------------
+>> +
+> This IMO is better suited in a different doc? I would personally try to
+> keep this solely for usage instructions.
+>
+> Or at least put usage instructions first, since that'd be what most
+> users are interested in.
+>
+>> +Snagboot Execution Flow on Qualcomm SoCs
+>> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>> +
+>> +The snagboot execution flow consists of two main phases:
+>> +
+>> +**Phase 1 - snagrecover**:
+>> +
+>> +1. ROM code enters recovery mode (EDL)
+>> +2. Snagrecover uses Sahara protocol to download XBL/QCLib to internal memory
+>> +3. XBL executes and initializes DDR
+>> +4. Snagrecover downloads U-Boot into DDR
+>> +5. Control transfers to U-Boot
+>> +
+>> +**Phase 2 - snagflash**:
+>> +
+>> +1. U-Boot runs in DDR and enters fastboot mode
+>> +2. Snagflash communicates with U-Boot over USB using fastboot protocol
+>> +3. System images are flashed to non-volatile memory (UFS, eMMC)
+>> +
+>> +Boot Environment Considerations
+>> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>> +
+>> +In the snagboot execution flow, ROM code in recovery mode loads
+>> +snagrecover, which downloads XBL to internal memory. XBL executes
+>> +and initializes DDR, then snagrecover downloads U-Boot into DDR and
+>> +transfers control to it. At this point, XBL has left the MMU enabled
+>> +with its own page tables and has not initialized PSCI firmware or
+>> +populated the Command DB. U-Boot must handle this non-standard boot
+>> +environment to enter fastboot mode for device flashing.
+>> +
+>> +This is why several standard U-Boot features must be disabled in snagboot mode.
+>> +
+>> +Comparison with Traditional EDL+Firehose
+>> +-----------------------------------------
+>> +
+>> +**Standard Device Provisioning Path Using EDL and Firehose**:
+>> +
+>> +* **Emergency Download Mode (EDL)**:
+>> +
+>> +  * EDL is a special boot mode built into Qualcomm SoCs Primary Bootloader (PBL) in ROM
+>> +  * Triggered via hardware strap, software command, or recovery from boot failure
+>> +
+>> +* **Sahara Protocol (Stage 1)**:
+>> +
+>> +  * Host PC uses Sahara protocol to communicate with the SoC's PBL
+>> +  * Transfers Device programmer (Firehose) into RAM
+>> +
+>> +* **Firehose Protocol (Stage 2)**:
+>> +
+>> +  * Once the Firehose Programmer is running on the device, it establishes a Firehose
+>> +    protocol session with the host
+>> +  * Host sends XML-based commands to flash firmware images to specific partitions,
+>> +    erase or read flash memory and manage partition tables
+>> +  * Integrated into tools like QFIL and PCAT
+>> +
+>> +**Snagboot Alternative**:
+>> +
+>> +Instead of loading a proprietary Firehose programmer, Snagboot loads U-Boot into DDR
+>> +and uses the standard, open-source fastboot protocol for flashing operations.
+>> +
+> I as an end user don't find this whole comparaison section useful, I
+> suggest dropping it.
+>
+>> +Supported Platforms
+>> +-------------------
+>> +
+>> +Currently supported platforms:
+>> +
+>> +* **Lemans-EVK **: Initial platform with snagboot support
+>> +
+>> +Additional platforms can be enabled by following the board enablement guide below.
+>> +
+>> +Board Enablement
+>> +----------------
+>> +
+>> +To enable snagboot mode on a new platform, follow these steps:
+>> +
+>> +Using the Config Fragment
+>> +^^^^^^^^^^^^^^^^^^^^^^^^^^
+>> +
+>> +A reusable config fragment is provided at ``configs/qcom-snagboot.config`` that contains
+>> +all common snagboot settings. Include it in your platform-specific defconfig::
+>> +
+>> +    # Configuration for building U-Boot for snagboot/recovery mode
+>> +    # on <Your Platform> boards.
+>> +    #
+>> +    # For normal production boot, use <platform>_defconfig instead.
+>> +
+>> +    #include "qcom_defconfig"
+>> +    #include "qcom-snagboot.config"
+>> +
+>> +    # Platform-specific settings for <Your Platform>
+>> +
+>> +    # Address where U-Boot will be loaded
+>> +    CONFIG_TEXT_BASE=0x1c100000
+>> +    CONFIG_REMAKE_ELF=y
+>> +    CONFIG_FASTBOOT_BUF_ADDR=0xdb300000
+>> +    CONFIG_DEFAULT_DEVICE_TREE="qcom/<your-board>"
+>> +
+>> +    # Timer frequency for your platform
+>> +    CONFIG_COUNTER_FREQUENCY=19200000
+>> +
+>  From here to
+>
+>> +Enabling ``CONFIG_QCOM_SNAGBOOT_MODE`` (via the fragment) automatically selects:
+>> +
+>> +* ``CONFIG_QCOM_BOOT0_SNAGBOOT_MODE``: Early boot initialization
+>> +* ``CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK``: Enable boot0 hooks
+>> +* ``CONFIG_SKIP_RELOCATE``: Skip relocation (U-Boot runs from load address)
+>> +* ``CONFIG_ENV_IS_NOWHERE``: Ensure recovery works even with corrupted environment
+>> +  storage, since a recovery mechanism should not load a potentially broken or
+>> +  untrusted environment from the board
+>> +
+>> +It also enforces the following at the Kconfig level via ``depends on !X``, so these
+>> +configs cannot be enabled together with snagboot mode:
+>> +
+>> +* ``CONFIG_PSCI_RESET``: Not available in Snagboot mode (XBL doesn't initialize PSCI firmware)
+>> +* ``CONFIG_IOMMU``: Not initialized by XBL in Snagboot mode
+>> +* ``CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR``: Previous bootloader context is not preserved
+>> +  in snagboot mode
+>> +* ``CONFIG_ENV_IS_IN_SCSI``: Not available in Snagboot mode
+>> +
+>> +``CONFIG_QCOM_SNAGBOOT_MODE`` also requires ``CONFIG_COUNTER_FREQUENCY`` and
+>> +``CONFIG_TEXT_BASE`` to be set to a non-zero value.
+>> +
+> to here, I would drop, it's not very useful. I'd expect developers to be able to
+> look at the source code for these kinds of details.
+>
+>> +You still need to set the following platform-specific values in your defconfig:
+>> +
+>> +* ``CONFIG_COUNTER_FREQUENCY``: Set to your platform's timer frequency (e.g., 19200000 for Lemans)
+>> +* ``CONFIG_TEXT_BASE``: Set to the address where XBL will load U-Boot (e.g., 0x1c100000 for Lemans)
+>> +* ``CONFIG_FASTBOOT_BUF_ADDR``: Set fastboot buffer address for your platform
+>> +
+>> +Example: Lemans-EVK
+>> +^^^^^^^^^^^^^^^^^^^
+>> +
+>> +See ``configs/qcom_lemans_snagboot_defconfig`` for a complete example of a
+>> +platform-specific snagboot defconfig.
+> I would drop this section.
+>
+>> +
+>> +Building U-Boot for Snagboot
+>> +-----------------------------
+>> +
+>> +Build Steps
+>> +^^^^^^^^^^^
+>> +
+>> +First, setup ``CROSS_COMPILE`` for aarch64. Then, configure and build U-Boot for
+>> +the Lemans EVK platform::
+>> +
+>> +    $ export CROSS_COMPILE=<aarch64 toolchain prefix>
+>> +    $ make O=.output qcom_lemans_snagboot_defconfig
+>> +    $ make -j8 O=.output
+>> +
+>> +Expected result: the build completes without errors and ``u-boot.elf`` is
+>> +available in the ``.output`` directory.
+> Drop this sentence.
+>
+>> +
+>> +Signing Prerequisites
+>> +^^^^^^^^^^^^^^^^^^^^^
+>> +
+>> +* ``u-boot.elf`` (generated from build, located in ``.output/``)
+>> +* ``swiv_build_utility.py`` — download from:
+>> +  https://github.com/qualcomm-linux/boot-firmware-ci/blob/main/tools/swiv_build_utility.py
+>> +* ``qtestsign`` — clone from ``msm8916-mainline/qtestsign``::
+>> +
+>> +    git clone https://github.com/msm8916-mainline/qtestsign
+> It's not useful, just tell people commands to fetch these two latter
+>
+> Additional tooling
+> ^^^^^^^^^^^^^^^^^^
+>
+> In order to generate a working image, we need ``qtestsign`` and
+> ``swiv_build_utility.py``::
+>
+>      git clone https://github.com/qualcomm-linux/boot-firmware-ci/
+>      export SWIV_BUILD="$PWD/boot-firmware-ci/tools/swiv_build_utility.py"
+>      git clone https://github.com/msm8916-mainline/qtestsign
+>      < installation instructions for qtestsign >
+>
+>> +
+>> +Step 1: Generate SWIV ELF
+>> +""""""""""""""""""""""""""
+>> +
+>> +Add the SWIV segment required for TZ-based signing::
+>> +
+>> +    python3 swiv_build_utility.py \
+>> +     .output/u-boot-swiv.elf \
+>> +     .output/u-boot.elf \
+>> +     lemans
+>> +
+> -----8<-----
+>> +Output::
+>> +
+>> +    .output/u-boot-swiv.elf
+> Drop
+> -----8<-----
+>
+>> +
+>> +Step 2: Sign Image Using Qtestsign
+>> +""""""""""""""""""""""""""""""""""
+>> +
+>> +Sign the SWIV-enabled ELF using qtestsign (test-key signing)::
+>> +
+>> +    <path_to_qtestsign>/qtestsign -v 6 -o .output/u-boot.mbn tz .output/u-boot-swiv.elf
+>> +
+>> +Output::
+> Drop this line
+>
+>> +
+>> +    .output/u-boot.mbn -> Final Binary to be flashed
+> and this line. Instead I would say:
+>
+> This generates the final ``.output/u-boot.mbn`` binary, that can then be
+> used for snagboot.
+>
+>> +
+>> +References
+>> +----------
+>> +
+>> +* Snagboot project: https://github.com/bootlin/snagboot
+>> +* Snagboot documentation: https://github.com/bootlin/snagboot/tree/main/docs
+>> +* Qualcomm EDL mode: See your platform's technical documentation
+> May I also ask, if you got help from AI to write this?
 
-Changes in v5:
-- Added build steps for U-Boot in Snagboot mode
+Yes.
 
-Changes in v4:
-- Newly added in v4
----
- doc/board/qualcomm/index.rst    |  1 +
- doc/board/qualcomm/snagboot.rst | 80 +++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 81 insertions(+)
+Thanks,
 
-diff --git a/doc/board/qualcomm/index.rst b/doc/board/qualcomm/index.rst
-index 56b8d894c2a..b8bc37bb384 100644
---- a/doc/board/qualcomm/index.rst
-+++ b/doc/board/qualcomm/index.rst
-@@ -17,3 +17,4 @@ Qualcomm
-    rdp
-    signing
-    spl
-+   snagboot
-diff --git a/doc/board/qualcomm/snagboot.rst b/doc/board/qualcomm/snagboot.rst
-new file mode 100644
-index 00000000000..716d88b2ba2
---- /dev/null
-+++ b/doc/board/qualcomm/snagboot.rst
-@@ -0,0 +1,80 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Snagboot Mode for Qualcomm Platforms
-+=====================================
-+
-+`Snagboot`_ is a recovery and reflashing tool that can download a
-+bootloader to a device in its boot ROM recovery mode and then flash
-+images to it. On Qualcomm SoCs, snagrecover uses the Sahara protocol in
-+EDL mode to load XBL, which initializes DDR, and then loads U-Boot into
-+DDR. U-Boot enters fastboot mode and snagflash uses fastboot to flash
-+the system images. See the `Snagboot documentation`_ for how to use
-+the host tools.
-+
-+U-Boot built in snagboot mode runs directly from the address XBL loads
-+it to. It must cope with the MMU left enabled by XBL, and it cannot
-+rely on PSCI firmware or Command DB being set up.
-+
-+Currently supported platforms:
-+
-+* Lemans-EVK (``qcom_lemans_snagboot_defconfig``)
-+
-+.. _Snagboot: https://github.com/bootlin/snagboot
-+.. _Snagboot documentation: https://github.com/bootlin/snagboot/tree/main/docs
-+
-+Building
-+--------
-+
-+First, setup ``CROSS_COMPILE`` for aarch64. Then, configure and build U-Boot for
-+the Lemans EVK platform::
-+
-+    $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-+    $ make O=.output qcom_lemans_snagboot_defconfig
-+    $ make -j8 O=.output
-+
-+Additional tooling
-+^^^^^^^^^^^^^^^^^^
-+
-+In order to generate a working image, ``swiv_build_utility.py`` and
-+``qtestsign`` are needed::
-+
-+    $ git clone https://github.com/qualcomm-linux/boot-firmware-ci
-+    $ export SWIV_BUILD="$PWD/boot-firmware-ci/tools/swiv_build_utility.py"
-+    $ git clone https://github.com/msm8916-mainline/qtestsign
-+    $ export QTESTSIGN="$PWD/qtestsign/qtestsign.py"
-+
-+``qtestsign`` requires Python 3.7+ and the ``cryptography`` module, which
-+can be installed with ``pip install ./qtestsign``.
-+
-+Signing
-+^^^^^^^
-+
-+Add the SWIV segment required for TZ-based signing::
-+
-+    $ python3 "$SWIV_BUILD" .output/u-boot-swiv.elf .output/u-boot.elf lemans
-+
-+Then sign the resulting ELF with test keys::
-+
-+    $ python3 "$QTESTSIGN" -v 6 -o .output/u-boot.mbn tz .output/u-boot-swiv.elf
-+
-+This generates the final ``.output/u-boot.mbn`` binary, that can then be
-+used with snagboot.
-+
-+Board Enablement
-+----------------
-+
-+Common snagboot settings live in the ``configs/qcom-snagboot.config``
-+fragment. A platform-specific snagboot defconfig includes it on top of
-+``qcom_defconfig`` and sets the platform values::
-+
-+    #include "qcom_defconfig"
-+    #include "qcom-snagboot.config"
-+
-+    # Address where XBL loads U-Boot
-+    CONFIG_TEXT_BASE=0x1c100000
-+    CONFIG_REMAKE_ELF=y
-+    CONFIG_FASTBOOT_BUF_ADDR=0xdb300000
-+    CONFIG_DEFAULT_DEVICE_TREE="qcom/<your-board>"
-+
-+    # Timer frequency for your platform
-+    CONFIG_COUNTER_FREQUENCY=19200000
+Balaji
 
--- 
-2.34.1
-
+>
+> Best regards,
+> Ferass
