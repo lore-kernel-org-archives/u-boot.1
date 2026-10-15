@@ -1,184 +1,144 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66D94CC6B38
-	for <u-boot@archiver.kernel.org>; Thu, 15 Oct 2026 20:16:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84CE6CC6B38
+	for <u-boot@archiver.kernel.org>; Thu, 15 Oct 2026 22:42:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0752D4090D;
-	Thu, 15 Oct 2026 20:16:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3EC6260A97;
+	Thu, 15 Oct 2026 22:42:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uRF40o4nv2Fo; Thu, 15 Oct 2026 20:16:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6C8E040912
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792095379;
-	b=gxMb1VbVJj23gqYUOq+gSrduW0r7QQR5/dQNtfamIxn3wWd4rZgN4ANOJ4ce6iaZH1WP
-	 phsp047KhRL7RbqwwJHxesMXr6oH2wsQlsoCj3MQVKW2TKRR6aQB/a7rvSMNA12Tb488j
-	 JB7JrYrTzBJfGdg3YL3aEnYE999epUC44nwBfueMrLhSAKRbGnn+IWejkfV54N1jNqFJo
-	 hPrL+Q/q46Sf49eVCQoyMt4zB3jVQHWEHeAxFemA8nkI8azzBpIPSIZ5BjU/J+xj8PuEE
-	 9GgJEVIM56eku+Vf0R/g9XXnMPYisJq8up0K9qe4SC2BbXWZugU0BoNRH4a2DGst+0A==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id s-rgMQ-sHf3g; Thu, 15 Oct 2026 22:42:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 737B560AC5
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792104162;
+	b=XqkWxHm7FKHA12vHjblluFi4X5p7PjDVRe5cAUvhxzH1FUa62CBpBlr9b9EP6wqblwmy
+	 6U/2ufymq5PSyq8DG2/tKKZ4YBg3ro8tFUM58p2ZCyKJxZY+wYj66NbMVxgLLsjNEeO+M
+	 A+yUj3VEer/iO5WfvkaH6OV73Lm4V8DZWDXfXxL00nz8Ll73rW1oB65hnHFw+NOHwOhvX
+	 TV+NeC5v9dfNjEU9KFgD8xdACwua2fRxZolCuv86axdE6G9vitKCAR0AWrzvKcqF9r8ZZ
+	 oFBC5XnOqlB+3Z1pFnsDQQHVh1JGIsqJayakKtJ3m6uN0NJiA0S8bvs/HaEJCPz2YXg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792095379;
+	c=relaxed/relaxed; t=1792104162;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=Nz03De6K/VMB2Y6+BkZ/Wym7gNTt4+d5U0vRDsvhSSA=;
-	b=CwHiPRPUUNvqWSIq3blyLcKavjRc5bIyN9O/ufCkESzcpEp6C+5pXPOEebysiA2Wm/+K
-	 qfaXwrswKU5UJttrD2h8feg8ySW01HhXcAjekPXMIu6LK6ieUuWgsUmSjVgiyftjmlOLG
-	 fTSXfEqGQDJg3hgYRAZVofJ5ZQelTtk9v4JwjQ2TpQqEWiW6n7lIWWwO9oQXV3AGmPkUA
-	 fspC9jTf5ZRjohvN3eXJHouX/O+SBjoGYZvwjP3qEs7kkPf5H5jJ14z91DiVT48beSDHT
-	 BoFbxE9jrOlPuqbnGjoD/bpUJB2/MbCo8WBq3xLZmAd6iEv3cKdT7EjhM9y6uwcBYQA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
+	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
+	 X-Report-Abuse:X-Report-Abuse-To:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=mhIagEbrphIOVTgkv8IPFSjtzP+FutkGZZAn/aAJ4Mc=;
+	b=H5FOtnyLe+RGySPQ4nDo9aECOKnNi2w3AbiaUCRLuXJOMpBtFn/4+2x3bWeZg3IxVljL
+	 7YIEEJ++1uieHLAHjhN1YGGy2GMP/67d24tSYtvDIceeNKVpeWzeNGtj2r0CIOKoMOxPy
+	 alwaZpF31QSXmdUzP0JlsLVIhNaJ2EpN4NWwrZzMprdlA/Rg/3HJHOXsrTjw9YPxtiPRm
+	 1p2sI9bzhMxsE+Q6OufDjM71cLesSY4IcQjQLSRau0EPJ2V4GZ+kN6a4rzXOV+vBF2EGc
+	 cA2svvwnECuhYF+N0DODn7ouM5Wb2X4aCyw2OXGkUHmSmDmtSKJ5jgJ/TU5f9dCZQZg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	dmarc=pass header.from=kwiboo.se;
+	dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=lFPzEE6F;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792095379;
-	bh=Nz03De6K/VMB2Y6+BkZ/Wym7gNTt4+d5U0vRDsvhSSA=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=JLoTAqvCE2Y1IYZeiPSkh4trFkJ82/sWTbl5FGrsF2gEuFbE2UQX5NmsNuf1ZGvoO
-	 0B5sYZchOmxh0t24DxsmXjBHHbU4roNSySmgOHVWrnrI87WWDfu4fmRN2FKqyZIOIS
-	 F4kLqiokXSXcjE7nvSEmA68FTNRtfTbViEtKiiWMqP+6Kwl0tqHziJrE1ME9HjkOY7
-	 px/hPL7Of/f1Qd/9Bgvjnlokfl2Vz43FmP83K3L9n08INdHFq8aTGIPYGHQMp5Xv2r
-	 mYPcgIUZREeTrPz1T36R9PedpX0beZNeiQ4gEin0FVZaHycwJCpcBBqMOzRNHPqI/4
-	 Ixj4xeWYizfKQ==
+	d=lists.u-boot-project.org; s=default; t=1792104162;
+	bh=mhIagEbrphIOVTgkv8IPFSjtzP+FutkGZZAn/aAJ4Mc=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=1FDhbGJcMgKbc7ysutRJj+Wuijp+gLkOQ4Si8VtV6wSJ+pn3hs0rjfn6D43bx91XK
+	 VKMfz9xwXDzUHDKRxUY09+ylKA+yuaDRVdLwG0B0suThLhiXGzUbbbD5/oQgr9B3iO
+	 vrHaDDXfOTlNyFZWS5hKkNa0x2FdEuwoImq0wmPnJR6/xPf/dHB3r+cO+i6MHv95Uv
+	 GELnjjjesQ8O59+o0pEpovkcbq2Ga9bV/PG/TW+K9MdEABufmASVpXE2wD3aYweTOW
+	 WvKbcC3cexHNNVAnzdOrvT4BboZKPAGzgSTy6EQGGGivf/krddelJlCnRed2kDUTFq
+	 vJMvp8JGtvwwA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6C8E040912;
-	Thu, 15 Oct 2026 20:16:19 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 8080A1E9
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 19:59:35 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 737B560AC5;
+	Thu, 15 Oct 2026 22:42:42 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id EFA5B105
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 22:42:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7D8174043A
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 19:59:35 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id D660860AB7
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 22:42:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vAht-Vg_-PGn for <u-boot@lists.u-boot-project.org>;
- Thu, 15 Oct 2026 19:59:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 7E3D040433
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::433"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792094374;
- b=g/e1TuyaaxbRT1v+c5sIDOcVqBgS3eflicfF8Qn01jBsWtq9GySnmlInAEoD2+ZX7sG4
- elKCMonVsjGBfMA5Z4r27hM7y5XIY8OObbplet8ItgdsqWPOaPUwB5Wb1MzP43UPCl6Up
- PTvBV2I3WxUE4r+eYX326nvQ79ZjOHLjNTsLztPb9q773KkmPuNBwNkcZEmUp4sdNHhsF
- rWHAPChtITze7EdZqqJO5M43nWJsay3daoZp+4ofhffQH/yMlcDlbPWBGx0EU7BTVZbGR
- hqLTsqJQd8QIgtU3ZBZ2LzkVdN49rMoJ0V7WTyyww1NoDH9sJ5vPgQsc3JH5g6dutYA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id arnuZxXcmr9j for <u-boot@lists.u-boot-project.org>;
+ Thu, 15 Oct 2026 22:42:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2DD7B60A97
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=121.127.44.66
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792104160;
+ b=RP/KBmCpWsy2LnPAA+ot9lfpwYzSdMCBuaDF8zSD3z8qpn1t3hc5DvLh66w8xUVRIg3y
+ WaZ1d1YGFZlh78xzibsEAE8kGjFLyFXI8nuBS3Q2+HjsIc3juMAdWqi+QRPw8XYDj3rwh
+ JHQw9VbOGdu5rYn+rLaYjhgjCLwCr6NgtOnTaV6h+jaiklHkHWIvu9RgtwuOIJq05EYZQ
+ FIhI39ddlNFwo6IB0rHP2McYqyyaHe4hNZ6clJtnKNld8DiAnBn7gQJd8PLKWBjMUSY+F
+ 0u04rkaI+3QLS5D3kJS5xxE4uybG0f5jui+GLi9tbwGCDL65kFEWv7L0GDPqIhgSV+w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792094374;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
- X-Developer-Key;
- bh=Nz03De6K/VMB2Y6+BkZ/Wym7gNTt4+d5U0vRDsvhSSA=;
- b=HCBZjMv7yybGqRFw3de77a4UWa7MHDyjKsxSBznXRS+waLjEcXqvWerxvqMvxt0ivrCg
- JN2w4raMEOojbYkU95aj0L0mYFhFzZQ03dNTE9HDeh+dVwISK3kDVmUqCm2aD27abOEso
- TngO31yCe6NigMNitmcfRjg5lR4mH4lM/adcqxfkk2NXVKgIyob9dwE45jd0wQNB8ahvn
- N5cfnxAAJmzwcZHkA48XDM4tAungZ5Xwoi0ie4oLH0pITMdBLRJKI0zbuN5oe0YkrsoL3
- j8guyPF7UweFrP43U2/wu22uB1ZQWVnwE2cfHltm6EguoJ5M9IOPRFwXTuE458qlqMQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=9elements.com;
- dkim=pass header.d=9elements.com header.i=@9elements.com header.a=rsa-sha256
- header.s=google header.b=Uv04vrl1; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::433"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::433; helo=mail-wr1-x433.google.com;
- envelope-from=tan.siewert@9elements.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=9elements.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=9elements.com header.i=@9elements.com
- header.a=rsa-sha256 header.s=google header.b=Uv04vrl1
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7E3D040433
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 19:59:33 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-48c5358fc28so686275f8f.0
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 12:59:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1792094371; x=1792699171;
- darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=Nz03De6K/VMB2Y6+BkZ/Wym7gNTt4+d5U0vRDsvhSSA=;
- b=Uv04vrl1QQ3y3PM/MShdBxCteBxyvukiFHR8vnh6mEbqTZLzJMQGuZpqTaW8LL73zJ
- EdImUkQqtp4Z7+y3thUqRnWuNxXbsO5j1idM9SX2jsyNB7hw7+4pKqHTcXLGl5ieaNut
- LTi8qUzMLc1hFXqeFyfvSfmi6xHYRUmD1NV+C6DHyViJNeH7FzFZg8YCfkMdfByomHLj
- mfo7UWQkZYxZkz9chOdqokSMh/Zz2Vu/y52EAATkwRMzz7BMTZCAYZbAaomc2Lg4GdvL
- gXkX1eetFz/nhWEcnsOhgiCFSPrijGUpWp4TD3JdhPU2NV/buCsbCRxTucusMP9xwR+N
- IdCQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792094371; x=1792699171;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=Nz03De6K/VMB2Y6+BkZ/Wym7gNTt4+d5U0vRDsvhSSA=;
- b=2YMYfhXJHvPlEsZsl97S4pbKZuyWyXgtFWkawUbYt9s2SPV5gduITw5HNJ6tfsUUzL
- k2VMxV98WieyrOCCGbmvMb0DSc+ShxC94sNuQPUdSS449f4Dpe3nDUyvMm3Vh1jCWV+r
- z9KaZpAE2W6OqM5KyygThTFPv9GIjVSxJ1ffmoYeW1w2dajZH+zN9b0H6czEvmq82lxA
- ejNkHMEwfBJU9hQjiztowyeTngQG9OyYMsy37r7oHYBYC2+htv76UTm6r2HSSwuT/RsK
- XcyhV47dw6aDteRZcJXyaUwLaHSR4Z2SZncZuQNuCOgRmrfg5X7tRt3udtISfEmr1O44
- xqVg==
-X-Gm-Message-State: AFq9FYKlfsCHv2DUxa6LQZIKSm1vLp8xuCz1dqqwRsKQrGUiEndp1ym5
- 0ZI+XK0HMQEvg39IbzBNBaOqE4lVK8pmWKQ7IgIQpjrxBQbT5fggUhsk7aIuJ1pxWCQ=
-X-Gm-Gg: AYBFou3qFc5242dCxfb+1tdtYZj21X7aeNkAbJBr2f2+I/Z9do20BtIq+XyXl9knVmJ
- WNDQTUtIlUTwYKJerH8HgFy7T+4ukWKngAMf7eBjri4AImQfmGlcYjyv6QEWfEEZ1QtanrDtXiF
- rVmzyFxAH5ujJA3Y7PRu9zAuHo8htBe4D9DT69MLw0ObCj5CkhEASaRyQfLCJoA2le6juQbUxRW
- g1dXxkN2i2iI8+2pHCeEMiXq7tMp9jw69qR6h0VovzyQkgaMfrdCTtG6TFMvjFWNm+NDVf/zmmM
- nZf00NBro8CqYLUce9aAHsvEyZVSjKgx2a0N3WpBlzrzyUx1/k653JBFCUPT8m8ecCgBpqD+gze
- GM2N5e8GmUQW4hJKbOTNDi6cXeBim0iepYQ9GbIfvo5EJVSXt/5n8Eg3HGw9oRJG2Mmz+q1zSRX
- PuIKKZa+XYT/slINOfoBOROJPV9prRdaZ1GsFh3BhHMF5awVm1+DsMpcuZC2uIgIf2zkGq2J+9H
- fZAyHtoVhzm9EE=
-X-Received: by 2002:a05:6000:2002:b0:48d:f025:110d with SMTP id
- ffacd0b85a97d-48df02511dcmr9720077f8f.43.1792094371022; 
- Thu, 15 Oct 2026 12:59:31 -0700 (PDT)
-Received: from white-mocha.local ([2001:9e8:2f4:b401:e5a6:e075:4922:88e8])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48dfd4c5829sm258288f8f.11.2026.10.15.12.59.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Oct 2026 12:59:30 -0700 (PDT)
-From: Tan Siewert <tan.siewert@9elements.com>
-Date: Thu, 15 Oct 2026 21:59:18 +0200
-Subject: [PATCH] net: add HPE GXP UMAC ethernet driver
+ c=relaxed/relaxed; t=1792104160;
+ h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
+ X-Forward-Email-Sender:X-Forward-Email-Version:
+ X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
+ X-Report-Abuse-To:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+ In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
+ bh=mhIagEbrphIOVTgkv8IPFSjtzP+FutkGZZAn/aAJ4Mc=;
+ b=ouAeJM7Ov3GQfAxvPOLBoo12HPOQQcOYYyM7bdTJI2sMauk+n4yuTXE8ly0MaZuaUHXz
+ 6EwdTEqC38DNHFXU1nKwPkd1ght3OYxeeUF5ck5s02ySmC+u7GZXVW+0prQO2I4Hq8awM
+ 7TFlLScsHWfWbFsBT4xlb5U3/djXf/2OhzZwIvPWs6+ss+dvXhVALY+BYTBK4M94bgAc5
+ dOKsT8AG061P8uyZSXO1yb1+VOgu2PjGunFqWmckp/nSGKvAjmI5KIsVY14AkcvRYBxzx
+ 3ei2b+xWOpvI6hNpYFRqrX5GymNJ3nl1qCyrDlJehUz8fA0qJUoCjV/tgGwLW8kEpUg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=kwiboo.se;
+ dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=lFPzEE6F; 
+ arc=none smtp.remote-ip=121.127.44.66
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=cddb=ig=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=lFPzEE6F
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 2DD7B60A97
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 22:42:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
+ t=1792104157; bh=mhIagEbrphIOVTgkv8IPFSjtzP+FutkGZZAn/aAJ4Mc=;
+ b=lFPzEE6FLjkN30uQ7M9+88yMtQY93ANJ97ZDcah0ClDaYsrwN+IqaR4ZSfzIeUz5ac9UO+uyj
+ jLbfHKOh+A/K7z8OjGZJ3sjk+Dio1hrA4kxICD6qB7i3EnkN+CQp4kREBhFunTE7Lafuni90KUN
+ blm1lhjAQ09LN/BmaVxL03Ycwfm5Vj9XrTkddTr6kallcJUN3PXmC77e7CkEes3ZOrw1GYE/4A5
+ JbhUTD44+xOWKrF6Jm3NXms92Rsev2ddNZ2voJgKaADfCuDlqqjh5qsVKpf8ZY/iw8O88Mn1jDU
+ KShXgOZ+zB130dN7nXkzBeFlqas1n9lym2wXr6CGFJ5g==
+X-Forward-Email-ID: 6ad156db32553382725eab42
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.66
+X-Forward-Email-Version: 2.18.6
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>,
+ Lukasz Majewski <lukma@nabladev.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org,
+	Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v3 2/5] clk: rockchip: rk3568: Always initialize clocks in SPL
+Date: Thu, 15 Oct 2026 22:42:16 +0000
+Message-ID: <20261015224222.1582607-3-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261015224222.1582607-1-jonas@kwiboo.se>
+References: <20261015224222.1582607-1-jonas@kwiboo.se>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261015-gxp-net-v1-1-df7228020150@9elements.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqAIBCF4avErBNMQqyrRAvT0aaFhVYI0d2zW
- n7wv3dBwkiYoK8uiHhSojUUNHUFZtbBIyNbDIILyVWjmM8bC7izzmjdOuucFBZKvUV0lL+nYfy
- djmlBs79zuO8HPExWH2sAAAA=
-X-Change-ID: 20260818-gxp-net-9caa4fdff62d
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Jean-Marie Verdun <verdun@hpe.com>, 
- Nick Hawkins <nick.hawkins@hpe.com>, 
- Marcello Sylvester Bauer <marcello.bauer@9elements.com>, 
- Michal Gorlas <michal.gorlas@9elements.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Tan Siewert <tan.siewert@9elements.com>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792094359; l=24884;
- i=tan.siewert@9elements.com; s=20260527; h=from:subject:message-id;
- bh=mq/yIxKKCcTOB8c5MDBcpmAOm5jvJMOtOyEGZJRKdkg=;
- b=485zn57lUIoiyP1VztiiY2GJqQsr3gLqtNEpdSsukRYSN54j1CsPF59V0AgrlGq61INsLmWuU
- 3oIq5l8cy5NBWWM7YKAbLUpix/ARLN07hdYli4N20CA0tbvq0Vjo4XI
-X-Developer-Key: i=tan.siewert@9elements.com; a=ed25519;
- pk=ORQd/zQf+LsAvJGXP1CjQwVO6t6iEOGq/eGUsmRVTG4=
-X-Mailman-Approved-At: Thu, 15 Oct 2026 20:16:13 +0000
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -192,901 +152,73 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Marcello Sylvester Bauer <marcello.bauer@9elements.com>
+The RK3568 clock driver initializes ACLK_BUS to 150 MHz when probed in
+SPL. However, the driver is only probed on demand, so this
+initialization is skipped when no SPL consumer requests a clock, e.g.
+when booting from RAM/USB.
 
-Add ethernet driver for the UMAC controller found on HPE GXP SoCs.
-This controller is connected to an external Marvell 88E1415 PHY via an
-SGMII interface.
+Prior to the commit c6bba31dbdd4 ("rockchip: spl-boot-order: Defer probe
+of boot device") all boot devices where typically probed, with a side
+effect that clock driver likely also where probed, prior to the
+boot_from_devices() call.
 
-Co-developed-by: Jean-Marie Verdun <verdun@hpe.com>
-Signed-off-by: Jean-Marie Verdun <verdun@hpe.com>
-Signed-off-by: Marcello Sylvester Bauer <marcello.bauer@9elements.com>
-Signed-off-by: Tan Siewert <tan.siewert@9elements.com>
+Flag the clock drivers to be probed after bind in SPL to help ensure a
+deterministic probe and clock initialization behavior prior to booting
+from devices.
+
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- MAINTAINERS                      |   2 +
- arch/arm/dts/hpe-gxp-u-boot.dtsi |  24 ++
- arch/arm/dts/hpe-gxp.dtsi        |  42 +++
- configs/gxp_defconfig            |   7 +
- drivers/net/Kconfig              |   9 +
- drivers/net/Makefile             |   1 +
- drivers/net/gxp_umac.c           | 572 +++++++++++++++++++++++++++++++++++++++
- drivers/net/gxp_umac.h           | 136 ++++++++++
- 8 files changed, 793 insertions(+)
+Changes in v3:
+- Also add probe-after-bind to the pmucru driver for consistency. The
+  PPLL default rate is 24 MHz and is changed to 200 MHz in probe(), this
+  also happens in proper so probe() in SPL is strictly not needed.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 420a3bbf730..64354cf0c62 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -366,6 +366,8 @@ F:	arch/arm/mach-hpe/
- F:	board/hpe/
- F:	configs/gxp_defconfig
- F:	doc/device-tree-bindings/spi/hpe,gxp-spi.yaml
-+F:	drivers/net/gxp_umac.c
-+F:	drivers/net/gxp_umac.h
- F:	drivers/misc/gxp_eeprom.c
- F:	drivers/sysinfo/gxp.c
- F:	drivers/timer/gxp-timer.c
-diff --git a/arch/arm/dts/hpe-gxp-u-boot.dtsi b/arch/arm/dts/hpe-gxp-u-boot.dtsi
-index 63a1a11fed2..31f898f09f4 100644
---- a/arch/arm/dts/hpe-gxp-u-boot.dtsi
-+++ b/arch/arm/dts/hpe-gxp-u-boot.dtsi
-@@ -23,3 +23,27 @@
- 		};
- 	};
- };
-+
-+&umac0 {
-+	bootph-all;
-+};
-+
-+&mdio0 {
-+	bootph-all;
-+};
-+
-+&phy0 {
-+	bootph-all;
-+};
-+
-+&umac1 {
-+	bootph-all;
-+};
-+
-+&mdio1 {
-+	bootph-all;
-+};
-+
-+&phy1 {
-+	bootph-all;
-+};
-diff --git a/arch/arm/dts/hpe-gxp.dtsi b/arch/arm/dts/hpe-gxp.dtsi
-index 66ddbd924f7..9e13e941ff0 100644
---- a/arch/arm/dts/hpe-gxp.dtsi
-+++ b/arch/arm/dts/hpe-gxp.dtsi
-@@ -163,6 +163,48 @@
- 				interrupts = <6>;
- 				interrupt-parent = <&vic0>;
- 			};
-+
-+			umac0: ethernet@4000 {
-+				compatible = "hpe,gxp-umac";
-+				reg = <0x4000 0x100>;
-+				phy-mode = "sgmii";
-+				phy-handle = <&phy0>;
-+				nvmem-cells = <&mac_address0>;
-+				nvmem-cell-names = "mac-address";
-+				status = "okay";
-+
-+				mdio0: mdio {
-+					compatible = "hpe,gxp-umac-mdio";
-+					#address-cells = <1>;
-+					#size-cells = <0>;
-+
-+					phy0: ethernet-phy@0 {
-+						compatible = "ethernet-phy-ieee802.3-c22";
-+						reg = <0>;
-+					};
-+				};
-+			};
-+
-+			umac1: ethernet@5000 {
-+				compatible = "hpe,gxp-umac";
-+				reg = <0x5000 0x100>;
-+				phy-mode = "gmii";
-+				phy-handle = <&phy1>;
-+				nvmem-cells = <&mac_address1>;
-+				nvmem-cell-names = "mac-address";
-+				status = "okay";
-+
-+				mdio1: mdio {
-+					compatible = "hpe,gxp-umac-mdio";
-+					#address-cells = <1>;
-+					#size-cells = <0>;
-+
-+					phy1: ethernet-phy@0 {
-+						compatible = "ethernet-phy-ieee802.3-c22";
-+						reg = <0>;
-+					};
-+				};
-+			};
- 		};
- 	};
- };
-diff --git a/configs/gxp_defconfig b/configs/gxp_defconfig
-index d63c675d746..200ccc8d7a5 100644
---- a/configs/gxp_defconfig
-+++ b/configs/gxp_defconfig
-@@ -39,6 +39,13 @@ CONFIG_CMD_FAT=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_REDUNDANT=y
- CONFIG_NETCONSOLE=y
-+CONFIG_NETDEVICES=y
-+CONFIG_PHYLIB=y
-+CONFIG_PHY_MARVELL=y
-+CONFIG_MII=y
-+CONFIG_GXP_UMAC=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_CMD_MII=y
- CONFIG_MISC=y
- CONFIG_GXP_EEPROM=y
- # CONFIG_MMC is not set
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index c057504cf66..5bc504d00f1 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -861,6 +861,15 @@ config GMAC_ROCKCHIP
- 	  This driver provides Rockchip SoCs network support based on the
- 	  Synopsys Designware driver.
+Changes in v2:
+- Update commit message
+- Collect r-b tag
+---
+ drivers/clk/rockchip/clk_rk3568.c | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
+index ce17d42ea0f0..c3973215c37e 100644
+--- a/drivers/clk/rockchip/clk_rk3568.c
++++ b/drivers/clk/rockchip/clk_rk3568.c
+@@ -494,14 +494,19 @@ static int rk3568_pmuclk_ofdata_to_platdata(struct udevice *dev)
  
-+config GXP_UMAC
-+	bool "HPE GXP UMAC ethernet controller"
-+	depends on ARCH_GXP
-+	select PHYLIB
-+	select MII
-+	help
-+	  This driver supports the UMAC ethernet controller found on
-+	  HPE GXP BMC SoCs.
-+
- config RENESAS_ETHER_SWITCH
- 	bool "Renesas Ethernet Switch support"
- 	depends on DM_ETH && (R8A779F0 || R8A78000)
-diff --git a/drivers/net/Makefile b/drivers/net/Makefile
-index 96ec6fb187a..5330bfa00cd 100644
---- a/drivers/net/Makefile
-+++ b/drivers/net/Makefile
-@@ -55,6 +55,7 @@ obj-$(CONFIG_FSL_PFE) += pfe_eth/
- obj-$(CONFIG_FTGMAC100) += ftgmac100.o
- obj-$(CONFIG_FTMAC100) += ftmac100.o
- obj-$(CONFIG_GMAC_ROCKCHIP) += gmac_rockchip.o
-+obj-$(CONFIG_GXP_UMAC) += gxp_umac.o
- obj-$(CONFIG_HIFEMAC_ETH) += hifemac.o
- obj-$(CONFIG_HIFEMAC_MDIO) += hifemac_mdio.o
- obj-$(CONFIG_HIGMACV300_ETH) += higmacv300.o
-diff --git a/drivers/net/gxp_umac.c b/drivers/net/gxp_umac.c
-new file mode 100644
-index 00000000000..78f5d6b6669
---- /dev/null
-+++ b/drivers/net/gxp_umac.c
-@@ -0,0 +1,572 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * HPE GXP UMAC ethernet driver
-+ *
-+ * Copyright (C) 2020 Hewlett Packard Enterprise Development LP.
-+ * Copyright (C) 2026 9elements GmbH
-+ */
-+
-+#include <cpu_func.h>
-+#include <dm.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <miiphy.h>
-+#include <net.h>
-+#include <asm/cache.h>
-+#include <asm/io.h>
-+#include <dm/device_compat.h>
-+#include <linux/bitops.h>
-+#include <linux/delay.h>
-+#include <linux/iopoll.h>
-+
-+#include "gxp_umac.h"
-+
-+#define GXP_UMAC_TX_TIMEOUT_MS		1000
-+
-+static int gxp_umac_mdio_read(struct mii_dev *bus, int phy_addr, int dev_addr,
-+			      int reg_addr)
-+{
-+	struct gxp_umac_priv *priv = bus->priv;
-+	struct gxp_mdio_regs *mdio = priv->mdio_regs;
-+	u32 val;
+ static int rk3568_pmuclk_bind(struct udevice *dev)
+ {
+-#if CONFIG_IS_ENABLED(RESET_ROCKCHIP)
+-	int ret = 0;
 +	int ret;
 +
-+	val = readl(&mdio->mmi);
-+	val &= ~(UMAC_MMI_PHY_ADDR_MASK | UMAC_MMI_REG_ADDR);
-+	val |= (phy_addr << UMAC_MMI_PHY_ADDR_SHIFT) & UMAC_MMI_PHY_ADDR_MASK;
-+	val |= reg_addr & UMAC_MMI_REG_ADDR;
-+	val |= UMAC_MMI_MRNW;  /* Read operation */
-+	writel(val, &mdio->mmi);
++	/* Ensure clocks are initialized after bind in SPL build */
++	if (IS_ENABLED(CONFIG_SPL_BUILD))
++		dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
 +
-+	/* Activate transfer */
-+	val |= UMAC_MMI_MOWNER;
-+	writel(val, &mdio->mmi);
-+
-+	/* Wait for transfer to complete */
-+	ret = readl_poll_timeout(&mdio->mmi, val, !(val & UMAC_MMI_MOWNER),
-+				 GXP_MDIO_TIMEOUT_USEC);
-+	if (ret) {
-+		pr_err("%s: mdio read timeout (phy:%d reg:%x)\n",
-+		       bus->name, phy_addr, reg_addr);
-+		return ret;
-+	}
-+
-+	return readl(&mdio->mmi_data) & UMAC_MMI_DATA_MASK;
-+}
-+
-+static int gxp_umac_mdio_write(struct mii_dev *bus, int phy_addr, int dev_addr,
-+			       int reg_addr, u16 value)
-+{
-+	struct gxp_umac_priv *priv = bus->priv;
-+	struct gxp_mdio_regs *mdio = priv->mdio_regs;
-+	u32 val;
-+	int ret;
-+
-+	/* Write data first */
-+	writel(value & UMAC_MMI_DATA_MASK, &mdio->mmi_data);
-+
-+	val = readl(&mdio->mmi);
-+	val &= ~(UMAC_MMI_PHY_ADDR_MASK | UMAC_MMI_REG_ADDR | UMAC_MMI_MRNW);
-+	val |= (phy_addr << UMAC_MMI_PHY_ADDR_SHIFT) & UMAC_MMI_PHY_ADDR_MASK;
-+	val |= reg_addr & UMAC_MMI_REG_ADDR;
-+	/* MRNW cleared = write operation */
-+	writel(val, &mdio->mmi);
-+
-+	/* Activate transfer */
-+	val |= UMAC_MMI_MOWNER;
-+	writel(val, &mdio->mmi);
-+
-+	/* Wait for transfer to complete */
-+	ret = readl_poll_timeout(&mdio->mmi, val, !(val & UMAC_MMI_MOWNER),
-+				 GXP_MDIO_TIMEOUT_USEC);
-+	if (ret) {
-+		pr_err("%s: mdio write timeout (phy:%d reg:%x)\n",
-+		       bus->name, phy_addr, reg_addr);
-+	}
-+
-+	return ret;
-+}
-+
-+static int gxp_umac_mdio_init(struct udevice *dev)
-+{
-+	struct gxp_umac_priv *priv = dev_get_priv(dev);
-+	struct mii_dev *bus;
-+	int ret;
-+
-+	bus = mdio_alloc();
-+	if (!bus)
-+		return -ENOMEM;
-+
-+	bus->read = gxp_umac_mdio_read;
-+	bus->write = gxp_umac_mdio_write;
-+	bus->priv = priv;
-+
-+	ret = mdio_register_seq(bus, dev_seq(dev));
-+	if (ret) {
-+		free(bus);
-+		return ret;
-+	}
-+
-+	priv->bus = bus;
-+	return 0;
-+}
-+
-+static u32 gxp_umac_get_ring_size_val(u32 num_entries)
-+{
-+	switch (num_entries) {
-+	case 4:
++	if (!CONFIG_IS_ENABLED(RESET_ROCKCHIP))
 +		return 0;
-+	case 8:
-+		return 1;
-+	case 16:
-+		return 3;
-+	case 32:
-+		return 7;
-+	case 64:
-+		return 0xf;
-+	case 128:
-+		return 0x1f;
-+	case 256:
-+		return 0x3f;
-+	default:
-+		return 1;  /* Default to 8 entries */
-+	}
-+}
-+
-+static void gxp_umac_init_rings(struct gxp_umac_priv *priv)
-+{
-+	int i;
-+
-+	memset(priv->txdes, 0, UMAC_MAX_RING_ENTRIES * sizeof(*priv->txdes));
-+	memset(priv->rxdes, 0, UMAC_MAX_RING_ENTRIES * sizeof(*priv->rxdes));
-+
-+	priv->tx_index = 0;
-+	priv->rx_index = 0;
-+
-+	/* Initialize RX descriptors with buffer addresses */
-+	for (i = 0; i < UMAC_MAX_RING_ENTRIES; i++) {
-+		priv->rxdes[i].dma_address = (u32)&priv->rx_packets[i];
-+		priv->rxdes[i].count = UMAC_MAX_FRAME_SIZE;
-+		priv->rxdes[i].status = UMAC_RING_ENTRY_HW_OWN;
-+	}
-+
-+	/* Flush descriptors to memory */
-+	flush_dcache_range((ulong)priv->txdes,
-+			   (ulong)priv->txdes + UMAC_MAX_RING_ENTRIES * sizeof(*priv->txdes));
-+	flush_dcache_range((ulong)priv->rxdes,
-+			   (ulong)priv->rxdes + UMAC_MAX_RING_ENTRIES * sizeof(*priv->rxdes));
-+	flush_dcache_range((ulong)priv->rx_packets,
-+			   (ulong)priv->rx_packets +
-+			   UMAC_MAX_RING_ENTRIES * sizeof(*priv->rx_packets));
-+}
-+
-+static void gxp_umac_set_mac_addr(struct gxp_umac_priv *priv, const u8 *addr)
-+{
-+	struct gxp_umac_regs *regs = priv->regs;
-+
-+	writel((addr[0] << 8) | addr[1], &regs->mac_addr_hi);
-+	writel((addr[2] << 8) | addr[3], &regs->mac_addr_mid);
-+	writel((addr[4] << 8) | addr[5], &regs->mac_addr_lo);
-+}
-+
-+static void gxp_umac_set_channel_enable(struct gxp_umac_priv *priv, int enable)
-+{
-+	struct gxp_umac_regs *regs = priv->regs;
-+	u32 val;
-+
-+	if (enable) {
-+		val = readl(&regs->config_status);
-+		val |= UMAC_CFG_TXEN | UMAC_CFG_RXEN;
-+		writel(val, &regs->config_status);
-+		writel(0, &regs->ring_prompt);
-+	} else {
-+		writel(0, &regs->config_status);
-+	}
-+}
-+
-+static void gxp_umac_adjust_link(struct gxp_umac_priv *priv)
-+{
-+	struct gxp_umac_regs *regs = priv->regs;
-+	struct phy_device *phydev = priv->phydev;
-+	u32 val;
-+
-+	/* Disable MAC during configuration */
-+	gxp_umac_set_channel_enable(priv, 0);
-+
-+	/* Disable both clocks first */
-+	val = readl(&regs->config_status);
-+	val &= ~(UMAC_CFG_GIGE_EN | UMAC_CFG_100M_EN);
-+	writel(val, &regs->config_status);
-+	udelay(2);
-+
-+	/* Configure speed and duplex */
-+	val &= ~(UMAC_CFG_GIGE_EN | UMAC_CFG_100M_EN | UMAC_CFG_GIGE_MODE |
-+		 UMAC_CFG_FULL_DUPLEX);
-+
-+	if (phydev->speed == 1000)
-+		val |= UMAC_CFG_GIGE_EN | UMAC_CFG_GIGE_MODE;
-+	else
-+		val |= UMAC_CFG_100M_EN;
-+
-+	if (phydev->duplex)
-+		val |= UMAC_CFG_FULL_DUPLEX;
-+
-+	writel(val, &regs->config_status);
-+	udelay(2);
-+
-+	/* Re-enable MAC */
-+	gxp_umac_set_channel_enable(priv, 1);
-+}
-+
-+static void gxp_umac_init_hw(struct gxp_umac_priv *priv)
-+{
-+	struct gxp_umac_regs *regs = priv->regs;
-+	u32 ring_size;
-+
-+	/* Reset ring pointers */
-+	writel(0, &regs->ring_ptr);
-+
-+	/* Clear missed status */
-+	writel(0, &regs->clear_status);
-+
-+	/* Disable checksum generation */
-+	writel(0, &regs->cksum_config);
-+
-+	/* Set ring size */
-+	ring_size = gxp_umac_get_ring_size_val(UMAC_MAX_RING_ENTRIES);
-+	writel((ring_size << UMAC_RING_SIZE_TX_SHIFT) |
-+	       (ring_size << UMAC_RING_SIZE_RX_SHIFT), &regs->ring_size);
-+
-+	/* Set ring base addresses */
-+	writel((u32)priv->rxdes, &regs->rx_ring_addr);
-+	writel((u32)priv->txdes, &regs->tx_ring_addr);
-+
-+	/* Set DMA burst size */
-+	writel(0x22, &regs->dma_config);
-+
-+	/* Disable clocks initially */
-+	writel(0, &regs->config_status);
-+}
-+
-+static int gxp_umac_start(struct udevice *dev)
-+{
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct gxp_umac_priv *priv = dev_get_priv(dev);
-+	struct phy_device *phydev = priv->phydev;
-+	int ret;
-+
-+	/* Initialize ring buffers */
-+	gxp_umac_init_rings(priv);
-+
-+	/* Initialize hardware */
-+	gxp_umac_init_hw(priv);
-+
-+	/* Set MAC address */
-+	gxp_umac_set_mac_addr(priv, pdata->enetaddr);
-+
-+	/* Start PHY */
-+	ret = phy_startup(phydev);
-+	if (ret) {
-+		dev_err(dev, "Could not start PHY\n");
-+		return ret;
-+	}
-+
-+	if (!phydev->link) {
-+		dev_err(dev, "No link\n");
-+		return -ENOLINK;
-+	}
-+
-+	/* Configure MAC for link speed/duplex */
-+	gxp_umac_adjust_link(priv);
-+
-+	printf("%s: link up, %d Mbps %s-duplex\n", dev->name,
-+	       phydev->speed, phydev->duplex ? "full" : "half");
-+
-+	return 0;
-+}
-+
-+static void gxp_umac_stop(struct udevice *dev)
-+{
-+	struct gxp_umac_priv *priv = dev_get_priv(dev);
-+
-+	gxp_umac_set_channel_enable(priv, 0);
-+
-+	if (priv->phydev)
-+		phy_shutdown(priv->phydev);
-+}
-+
-+static int gxp_umac_send(struct udevice *dev, void *packet, int length)
-+{
-+	struct gxp_umac_priv *priv = dev_get_priv(dev);
-+	struct gxp_umac_regs *regs = priv->regs;
-+	struct gxp_umac_tx_desc *txdes = &priv->txdes[priv->tx_index];
-+	ulong des_start, des_end, data_start, data_end;
-+	u32 val;
-+	int timeout;
-+
-+	/* Wait for descriptor to be available */
-+	des_start = (ulong)txdes & ~(ARCH_DMA_MINALIGN - 1);
-+	des_end = des_start + roundup(sizeof(*txdes), ARCH_DMA_MINALIGN);
-+	invalidate_dcache_range(des_start, des_end);
-+
-+	if (txdes->status & UMAC_RING_ENTRY_HW_OWN) {
-+		dev_err(dev, "TX ring full\n");
-+		return -EBUSY;
-+	}
-+
-+	/* Pad short frames */
-+	if (length < UMAC_MIN_FRAME_SIZE)
-+		length = UMAC_MIN_FRAME_SIZE;
-+
-+	/* Set up descriptor */
-+	txdes->dma_address = (u32)packet;
-+	txdes->count = length;
-+	txdes->cksum_offset = 0;
-+	txdes->status = UMAC_RING_ENTRY_HW_OWN;
-+
-+	/* Flush packet data and descriptor */
-+	data_start = (ulong)packet & ~(ARCH_DMA_MINALIGN - 1);
-+	data_end = data_start + roundup(length, ARCH_DMA_MINALIGN);
-+	flush_dcache_range(data_start, data_end);
-+	flush_dcache_range(des_start, des_end);
-+
-+	/* Trigger transmission */
-+	writel(0, &regs->ring_prompt);
-+
-+	/* Wait for TX interrupt */
-+	timeout = GXP_UMAC_TX_TIMEOUT_MS * 1000;
-+	do {
-+		val = readl(&regs->interrupt);
-+		if (val & UMAC_INT_TX)
-+			break;
-+		udelay(1);
-+	} while (--timeout > 0);
-+
-+	/* Clear TX interrupt */
-+	writel(UMAC_INT_TX, &regs->interrupt);
-+
-+	/* Wait for descriptor to be released */
-+	timeout = GXP_UMAC_TX_TIMEOUT_MS * 1000;
-+	do {
-+		invalidate_dcache_range(des_start, des_end);
-+		if (!(txdes->status & UMAC_RING_ENTRY_HW_OWN))
-+			break;
-+		udelay(1);
-+	} while (--timeout > 0);
-+
-+	if (timeout <= 0) {
-+		dev_err(dev, "TX timeout\n");
-+		return -ETIMEDOUT;
-+	}
-+
-+	/* Move to next descriptor */
-+	priv->tx_index = (priv->tx_index + 1) % UMAC_MAX_RING_ENTRIES;
-+
-+	return 0;
-+}
-+
-+static int gxp_umac_recv(struct udevice *dev, int flags, uchar **packetp)
-+{
-+	struct gxp_umac_priv *priv = dev_get_priv(dev);
-+	struct gxp_umac_regs *regs = priv->regs;
-+	struct gxp_umac_rx_desc *rxdes = &priv->rxdes[priv->rx_index];
-+	ulong des_start, des_end, data_start, data_end;
-+	u32 val;
-+	int length;
-+
-+	/* Check and clear interrupts */
-+	val = readl(&regs->interrupt);
-+	if (val & UMAC_INT_OVERRUN)
-+		dev_warn(dev, "RX overrun\n");
-+	if (val)
-+		writel(val, &regs->interrupt);
-+
-+	/* Check for missed frames */
-+	val = readl(&regs->config_status);
-+	if (val & UMAC_CFG_MISSED) {
-+		dev_warn(dev, "RX missed frame\n");
-+		writel(0, &regs->clear_status);
-+	}
-+
-+	/* Invalidate descriptor */
-+	des_start = (ulong)rxdes & ~(ARCH_DMA_MINALIGN - 1);
-+	des_end = des_start + roundup(sizeof(*rxdes), ARCH_DMA_MINALIGN);
-+	invalidate_dcache_range(des_start, des_end);
-+
-+	/* Check if descriptor is owned by hardware */
-+	if (rxdes->status & UMAC_RING_ENTRY_HW_OWN) {
-+		/* Check for errors even if HW owned */
-+		if (rxdes->status & UMAC_RING_RX_ERR_MASK) {
-+			rxdes->status &= ~UMAC_RING_RX_ERR_MASK;
-+			flush_dcache_range(des_start, des_end);
-+		}
-+		return -EAGAIN;
-+	}
-+
-+	length = rxdes->count;
-+
-+	/* Invalidate received data */
-+	data_start = (ulong)rxdes->dma_address & ~(ARCH_DMA_MINALIGN - 1);
-+	data_end = data_start + roundup(length, ARCH_DMA_MINALIGN);
-+	invalidate_dcache_range(data_start, data_end);
-+
-+	*packetp = (uchar *)rxdes->dma_address;
-+
-+	return length;
-+}
-+
-+static int gxp_umac_free_pkt(struct udevice *dev, uchar *packet, int length)
-+{
-+	struct gxp_umac_priv *priv = dev_get_priv(dev);
-+	struct gxp_umac_regs *regs = priv->regs;
-+	struct gxp_umac_rx_desc *rxdes = &priv->rxdes[priv->rx_index];
-+	ulong des_start, des_end;
-+
-+	/* Return descriptor to hardware */
-+	rxdes->count = UMAC_MAX_FRAME_SIZE;
-+	rxdes->status = UMAC_RING_ENTRY_HW_OWN;
-+
-+	/* Flush descriptor */
-+	des_start = (ulong)rxdes & ~(ARCH_DMA_MINALIGN - 1);
-+	des_end = des_start + roundup(sizeof(*rxdes), ARCH_DMA_MINALIGN);
-+	flush_dcache_range(des_start, des_end);
-+
-+	/* Prompt hardware to check for new buffers */
-+	writel(0, &regs->ring_prompt);
-+
-+	/* Move to next descriptor */
-+	priv->rx_index = (priv->rx_index + 1) % UMAC_MAX_RING_ENTRIES;
-+
-+	return 0;
-+}
-+
-+static int gxp_umac_write_hwaddr(struct udevice *dev)
-+{
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct gxp_umac_priv *priv = dev_get_priv(dev);
-+
-+	gxp_umac_set_mac_addr(priv, pdata->enetaddr);
-+	return 0;
-+}
-+
-+static int gxp_umac_of_to_plat(struct udevice *dev)
-+{
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+
-+	pdata->iobase = dev_read_addr(dev);
-+	if (pdata->iobase == FDT_ADDR_T_NONE) {
-+		dev_err(dev, "Could not read register address\n");
-+		return -EINVAL;
-+	}
-+
-+	pdata->phy_interface = dev_read_phy_mode(dev);
-+	if (pdata->phy_interface == PHY_INTERFACE_MODE_NA)
-+		pdata->phy_interface = PHY_INTERFACE_MODE_SGMII;
-+
-+	return 0;
-+}
-+
-+static int gxp_umac_probe(struct udevice *dev)
-+{
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct gxp_umac_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	priv->regs = (struct gxp_umac_regs *)pdata->iobase;
-+	priv->mdio_regs = (struct gxp_mdio_regs *)(pdata->iobase + 0x80);
-+	priv->phy_mode = pdata->phy_interface;
-+	priv->phy_addr = 0;
-+
-+	/* Allocate DMA-aligned ring buffers */
-+	priv->txdes = memalign(ARCH_DMA_MINALIGN,
-+			       UMAC_MAX_RING_ENTRIES * sizeof(*priv->txdes));
-+	if (!priv->txdes)
-+		return -ENOMEM;
-+
-+	priv->rxdes = memalign(ARCH_DMA_MINALIGN,
-+			       UMAC_MAX_RING_ENTRIES * sizeof(*priv->rxdes));
-+	if (!priv->rxdes) {
-+		ret = -ENOMEM;
-+		goto err_free_txdes;
-+	}
-+
-+	priv->rx_packets = memalign(ARCH_DMA_MINALIGN,
-+				    UMAC_MAX_RING_ENTRIES * sizeof(*priv->rx_packets));
-+	if (!priv->rx_packets) {
-+		ret = -ENOMEM;
-+		goto err_free_rxdes;
-+	}
-+
-+	/* Initialize MDIO bus */
-+	ret = gxp_umac_mdio_init(dev);
-+	if (ret) {
-+		dev_err(dev, "Failed to initialize MDIO bus\n");
-+		goto err_free_rx_packets;
-+	}
-+
-+	priv->phydev = phy_connect(priv->bus, priv->phy_addr, dev, priv->phy_mode);
-+	if (!priv->phydev) {
-+		dev_err(dev, "Failed to connect to PHY\n");
-+		ret = -ENODEV;
-+		goto err_free_mdio;
-+	}
-+
-+	/* Configure PHY */
-+	priv->phydev->supported &= PHY_GBIT_FEATURES;
-+	priv->phydev->advertising = priv->phydev->supported;
-+	phy_config(priv->phydev);
-+
-+	return 0;
-+
-+err_free_mdio:
-+	mdio_unregister(priv->bus);
-+	mdio_free(priv->bus);
-+err_free_rx_packets:
-+	free(priv->rx_packets);
-+err_free_rxdes:
-+	free(priv->rxdes);
-+err_free_txdes:
-+	free(priv->txdes);
-+	return ret;
-+}
-+
-+static int gxp_umac_remove(struct udevice *dev)
-+{
-+	struct gxp_umac_priv *priv = dev_get_priv(dev);
-+
-+	free(priv->phydev);
-+	mdio_unregister(priv->bus);
-+	mdio_free(priv->bus);
-+	free(priv->rx_packets);
-+	free(priv->rxdes);
-+	free(priv->txdes);
-+
-+	return 0;
-+}
-+
-+static const struct eth_ops gxp_umac_ops = {
-+	.start		= gxp_umac_start,
-+	.send		= gxp_umac_send,
-+	.recv		= gxp_umac_recv,
-+	.stop		= gxp_umac_stop,
-+	.free_pkt	= gxp_umac_free_pkt,
-+	.write_hwaddr	= gxp_umac_write_hwaddr,
-+};
-+
-+static const struct udevice_id gxp_umac_ids[] = {
-+	{ .compatible = "hpe,gxp-umac" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(gxp_umac) = {
-+	.name		= "gxp_umac",
-+	.id		= UCLASS_ETH,
-+	.of_match	= gxp_umac_ids,
-+	.of_to_plat	= gxp_umac_of_to_plat,
-+	.probe		= gxp_umac_probe,
-+	.remove		= gxp_umac_remove,
-+	.ops		= &gxp_umac_ops,
-+	.priv_auto	= sizeof(struct gxp_umac_priv),
-+	.plat_auto	= sizeof(struct eth_pdata),
-+	.flags		= DM_FLAG_ALLOC_PRIV_DMA,
-+};
-diff --git a/drivers/net/gxp_umac.h b/drivers/net/gxp_umac.h
-new file mode 100644
-index 00000000000..42930e39864
---- /dev/null
-+++ b/drivers/net/gxp_umac.h
-@@ -0,0 +1,136 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * HPE GXP UMAC ethernet driver
-+ *
-+ * Copyright (C) 2020 Hewlett Packard Enterprise Development LP.
-+ * Copyright (C) 2026 9elements GmbH
-+ */
-+
-+#ifndef _GXP_UMAC_H_
-+#define _GXP_UMAC_H_
-+
-+struct gxp_umac_regs {
-+	u32 config_status;		/* 0x00: Configuration and Status Register I */
-+	u32 ring_ptr;			/* 0x04: Ring Pointer Register */
-+	u32 ring_prompt;		/* 0x08: Ring Prompt Register (W) */
-+	u32 clear_status;		/* 0x0c: Clear Status Register (W) */
-+	u32 cksum_config;		/* 0x10: Checksum Config Register */
-+	u32 ring_size;			/* 0x14: Ring Size Register */
-+	u32 mac_addr_hi;		/* 0x18: MAC Address[47:32] */
-+	u32 mac_addr_mid;		/* 0x1c: MAC Address[31:16] */
-+	u32 mac_addr_lo;		/* 0x20: MAC Address[15:0] */
-+	u32 mc_addr_filt_hi;		/* 0x24: LAF[63:32] */
-+	u32 mc_addr_filt_lo;		/* 0x28: LAF[31:0] */
-+	u32 config_status2;		/* 0x2c: Configuration and Status Register II */
-+	u32 interrupt;			/* 0x30: MAC Interrupt Config and Status */
-+	u32 overrun_count;		/* 0x34: Overrun Counter Register */
-+	u32 rx_int_config;		/* 0x38: Rx Interrupt Config Register */
-+	u32 tx_int_config;		/* 0x3c: Tx Interrupt Config Register */
-+	u32 packet_length;		/* 0x40: Packet Length Register */
-+	u32 bcast_filter;		/* 0x44: Broadcast Filter Config Register */
-+	u32 bcast_prompt;		/* 0x48: Broadcast Prompt Register (W) */
-+	u32 rx_ring_addr;		/* 0x4c: Rx Ring Base Address Register */
-+	u32 tx_ring_addr;		/* 0x50: Tx Ring Base Address Register */
-+	u32 dma_config;			/* 0x54: DMA Config Register */
-+	u32 burst_config;		/* 0x58: Bursting Config Register */
-+	u32 pause_config;		/* 0x5c: PAUSE Frame Config Register */
-+	u32 pause_control;		/* 0x60: PAUSE Frame Control and Status */
-+	u32 congestion_config;		/* 0x64: Channel Congestion Config */
-+	u32 frame_filter_config;	/* 0x68: Frame Type Filter Config */
-+	u32 rx_fifo_config_status;	/* 0x6c: RX FIFO Config and Status */
-+	u32 rx_ring1_base_addr;		/* 0x70: RX Ring 1 Base Address */
-+	u32 config_status3;		/* 0x74: Configuration and Status Register III */
-+	u32 reserved[2];		/* 0x78-0x7c: Reserved */
-+};
-+
-+/* MDIO registers (at offset 0x80 from UMAC base) */
-+struct gxp_mdio_regs {
-+	u32 mmi;			/* 0x00: MMI Register */
-+	u32 mmi_data;			/* 0x04: MMI Data Register */
-+};
-+
-+/* Config/Status Register I bits */
-+#define UMAC_CFG_TXEN			BIT(12)
-+#define UMAC_CFG_RXEN			BIT(11)
-+#define UMAC_CFG_GIGE_EN		BIT(10)
-+#define UMAC_CFG_100M_EN		BIT(9)
-+#define UMAC_CFG_GIGE_MODE		BIT(2)
-+#define UMAC_CFG_FULL_DUPLEX		BIT(0)
-+#define UMAC_CFG_MISSED			BIT(7)
-+
-+/* Interrupt register bits */
-+#define UMAC_INT_TX			BIT(0)
-+#define UMAC_INT_RX			BIT(2)
-+#define UMAC_INT_OVERRUN		BIT(4)
-+
-+/* MMI register bits */
-+#define UMAC_MMI_PHY_ADDR_MASK		0x001f0000
-+#define UMAC_MMI_PHY_ADDR_SHIFT		16
-+#define UMAC_MMI_MOWNER			BIT(9)
-+#define UMAC_MMI_MRNW			BIT(8)
-+#define UMAC_MMI_REG_ADDR		0x0000001f
-+#define UMAC_MMI_DATA_MASK		0x0000ffff
-+
-+/* Ring size register shifts */
-+#define UMAC_RING_SIZE_TX_SHIFT		24
-+#define UMAC_RING_SIZE_RX_SHIFT		16
-+
-+/* Ring entry status bits */
-+#define UMAC_RING_ENTRY_HW_OWN		BIT(15)
-+#define UMAC_RING_RX_ERR_MASK		0x38e0
-+
-+/* Frame sizes */
-+#define UMAC_MIN_FRAME_SIZE		60
-+#define UMAC_MAX_FRAME_SIZE		1518
-+#define UMAC_MAX_PACKET_ROUNDED		0x600	/* 1536, aligned */
-+
-+/* Ring configuration */
-+#define UMAC_MAX_RING_ENTRIES		8
-+#define UMAC_RING_ENTRY_SIZE		16
-+
-+/* Ring entry structures */
-+struct gxp_umac_rx_desc {
-+	u32 dma_address;
-+	u16 status;
-+	u16 count;
-+	u16 checksum;
-+	u16 control;
-+	u32 reserved;
-+} __packed;
-+
-+struct gxp_umac_tx_desc {
-+	u32 dma_address;
-+	u16 status;
-+	u16 count;
-+	u32 cksum_offset;
-+	u32 reserved;
-+} __packed;
-+
-+/* Packet buffer structure */
-+struct gxp_umac_packet {
-+	u8 data[UMAC_MAX_FRAME_SIZE];
-+	u8 pad[UMAC_MAX_PACKET_ROUNDED - UMAC_MAX_FRAME_SIZE];
-+};
-+
-+/* Private data structure */
-+struct gxp_umac_priv {
-+	struct gxp_umac_regs __iomem *regs;
-+	struct gxp_mdio_regs __iomem *mdio_regs;
-+
-+	struct gxp_umac_tx_desc *txdes;
-+	struct gxp_umac_rx_desc *rxdes;
-+	struct gxp_umac_packet *rx_packets;
-+
-+	int tx_index;
-+	int rx_index;
-+
-+	struct mii_dev *bus;
-+	struct phy_device *phydev;
-+	u32 phy_addr;
-+	u32 phy_mode;
-+};
-+
-+/* MDIO timeout */
-+#define GXP_MDIO_TIMEOUT_USEC		10000
-+
-+#endif /* _GXP_UMAC_H_ */
-
----
-base-commit: 8d7bc8add17bbc69a58dfe0002eea039dd2dc1bc
-change-id: 20260818-gxp-net-9caa4fdff62d
-
-Best regards,
---  
-Tan Siewert <tan.siewert@9elements.com>
+ 
+ 	ret = offsetof(struct rk3568_pmucru, pmu_softrst_con[0]);
+ 	ret = rockchip_reset_bind(dev, ret, 1);
+ 	if (ret)
+ 		debug("Warning: pmucru software reset driver bind failed\n");
+-#endif
+ 
+ 	return 0;
+ }
+@@ -2936,6 +2941,10 @@ static int rk3568_clk_bind(struct udevice *dev)
+ 	struct udevice *sys_child;
+ 	struct sysreset_reg *priv;
+ 
++	/* Ensure clocks are initialized after bind in SPL build */
++	if (IS_ENABLED(CONFIG_SPL_BUILD))
++		dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
++
+ 	/* The reset driver does not have a device node, so bind it here */
+ 	ret = device_bind_driver(dev, "rockchip_sysreset", "sysreset",
+ 				 &sys_child);
+-- 
+2.55.0
 
