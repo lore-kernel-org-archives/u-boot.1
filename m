@@ -1,141 +1,144 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A6DCCC6B34
-	for <u-boot@archiver.kernel.org>; Thu, 15 Oct 2026 08:27:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7F67CC6B34
+	for <u-boot@archiver.kernel.org>; Thu, 15 Oct 2026 08:27:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 08F1F80F56;
-	Thu, 15 Oct 2026 08:27:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 996BF406CC;
+	Thu, 15 Oct 2026 08:27:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 14_TneyEMnu8; Thu, 15 Oct 2026 08:27:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4943080F59
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792052820;
-	b=aT2N3p6RY2+VPnPVFAP+Z+4CO6JCofJrGl1h6YAmFlxeojMZ3Jb7azBbNVKUatcFJ74g
-	 OYqBntsL8hchxhvC+HakFnJKdC81ncS7Um+r9uj5jEOxDjXWQi2ozh3URbY7PuF51r/Cc
-	 JsRfh983iEIOT8PmyWE/gigNv9RV83XDxL+a+qpxFmYPT3lKDcIiafHCidveQL7Yh5vY/
-	 7Erwbo6QKdK/vRvbyEcjH6f6A9S168M0ctc+/YR1n3y8e1jcbwq3f2kvxG1xIClewXUBq
-	 SU24PtnFeWx+3Yj0WWJxhWIN6u2BlAWNrtVUvtRV3Td2GpMSob56+eAHcvNJ+1ueN2g==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SJUFz_-bGwpw; Thu, 15 Oct 2026 08:27:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org F1E5B406CE
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792052876;
+	b=CdnHdZTSoLqIAS4f8R6w64IUk30NwmxVMNUGbPLuVE8+AnZmnKJwJoDutxI4zCRPZ4gM
+	 wXzeshg1HZzTiM6oJp7XvlCSnWff88SgAD2CpPkIfuOdAYCn7j+zXbdi6mESxmjVkBKvT
+	 XFa/yNncV0dIMUAMftGChkJ/irsVsKwJ4sN5itugI4YchF8np0vz/WJmTjIwL9172pFfz
+	 RB1vWQn9VWq6/2f2Z+YrxIoKjPJHLbpKH9kyQJomYrKGFNRZ7ax92JuIuLt/PKgjPA9nP
+	 ITgf49vKzc3tO18LVsY79/wR9MtmGLz+S73RKQRSiVX5rSRLYu5PU7y6ScJ5Yb3mekg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792052820;
+	c=relaxed/relaxed; t=1792052876;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:
-	 Content-Language:To:References:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Last-TLS-Session-Version:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=3++aCZmWENjR6h+9ViCu9pPOkFRk3/x8wjIB6680z2M=;
-	b=TDQPkypNFrqylowGjAstVvtZbPoDOamG0lTzhZCaHYTCOm5/OsRdbT1PO4/dQLBHmAlb
-	 u/0Iwk+AK6tmar0Bl0CZwjAnvv0pnWy2X0fEMQhZBnEE+z8+PYaf6gn7l/HRkCcOfCnXt
-	 SCN3qXJehR8kMZfPSQLC0/xVniqDTvsUBfcFiA6EgWrC6ht2zyVy9tEYaLPJPZAY3H2n3
-	 XggTECRcVdSksnAFCHuVPvy2LHN4PpkiedtvFFpe1gksloL4A4+UZhpRz9qcrXfkisVxd
-	 XaNrT+4z6r3GsmK/SlddN2AbeyKKA54l9Yx/TdQn91PFBTqF7y8JuGeF8VLxWrZVhYw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	 Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Virus-Scanned:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=zUtWdCtvjfGN/m3IgSd3xIS1OFwAxbygtYDuSYkU9gA=;
+	b=ROEVq19NiwpNCZLySsUniFMUCzPwnMnPFtY9CZRwYtSbdgea0wUzpOkYlFQ6ZT7/ESpM
+	 +6XJfHQGofKBh50MrWGzuY7yZ8Ly4ux7Uv8/MN3qDKge9mHESRh3DAIOC0SuKkBxrKeNh
+	 chOiP7540WIuGVyjdX36WCdVqHGUyRXk01ANoCxnzMlAIemaE0o+00ED4VXRjnmgfrAk0
+	 BNb4Ck1YUyHL+NQvIXc0NKKhN/BzyIxyqAItfhJQrKyNqeVtQps/W4TE/OZpgYrmuo43q
+	 LLvqo6BkwFfVgXzglVpPGgO2Pm2gWvNuUM3/HOqZHU9Et2GYxA/gLSssaPp99jXIVGg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792052820;
-	bh=3++aCZmWENjR6h+9ViCu9pPOkFRk3/x8wjIB6680z2M=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1792052876;
+	bh=zUtWdCtvjfGN/m3IgSd3xIS1OFwAxbygtYDuSYkU9gA=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=VOrSogI4fkuXUZVhlk0eyrZ8LbK11FR6FolmOB64XQVx/Goh5Clz6i15xXaYypaGc
-	 MEjl7eSBgKOTpwE0ct6mQCOob3nqJZ7RhV3xNZr9qhFW25DBzUiCVGmCholaRgXWzJ
-	 bbmOTa2FdkhQRxOnmmmWfkz/Lx9jlwkd47kKNIb6+sJTceqijCpbCv0Coe+Y46CR5P
-	 itePMgNSI6p/2eanpSqRwRUe2rldltv3qpcKo+lO/0ZQHN4Xi0hjiAqMHj49vvCIIz
-	 7VCm9t9IpySSCMkPbZEdz8dadKpSbYBb0+oWLqFJxZAB9K8S+VOTsGiEQbrxofBv/B
-	 sp/EeW4A8Iy7A==
+	b=hZjSjaVHOZ+UJ6YqI0+WXloLTI/RxhOQIoa0JcagZuyf6hkXw0GBMFf8aMAf1xoSX
+	 gV2RUsf/x2pwch4Fqb+G4rfkw2lHfuLGhHI5Te3cDu76tLDMj4CdvmoOMpgy8KzBPk
+	 SoH/or4rSE25xabsvZM3aj4iUhaeCI2Dz7sd0zr8EYetygwFWk1TilFH4BiFWugoWy
+	 Hba3vyyusRVu1CEryOldmtCJd4JC2DP7GWrHmN9MMx07jqd5JZYnwgckZCbcLETsDA
+	 L1dqwNpZ0zSqSpfA4L5WYSUuUATV6DgwgpwL1B/swALv83LeJGTMd/hAtdXQz6Kn15
+	 2SMs1rP540ZSQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4943080F59;
-	Thu, 15 Oct 2026 08:27:00 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 86556769
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 08:26:59 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F1E5B406CE;
+	Thu, 15 Oct 2026 08:27:55 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 54F2F2E0
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 05:49:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 15A51403AF
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 08:26:27 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 3B69160904
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 05:49:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FPCFFTQKWMQm for <u-boot@lists.u-boot-project.org>;
- Thu, 15 Oct 2026 08:26:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 1AA3840053
-Authentication-Results: smtp2.osuosl.org; arc=none
- smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792052786;
- b=GFVblqFfKC03karXq94fwI3HhEZznBKrqZSOrseXzV6jvLNn5920tddwPGhFavR7KcGB
- ivfB/A0rc5/P+5/xpSEEMHJPpghBa7odnpvmdkpAJ0RRSk2Ke7N0zjeIwh1M5LUjPrg9B
- q4QPLKhPeBK5XKSCltWm/ut2me1csx71XTjCryV6nIEEMAVvy2suNr1iyXocGou4a4Elt
- uTiJYmLplr9UV9fTahhff1mEraKH1iVMAbZ9gYBqUtOYu+E/fu/778cVQQfkn0qw8Vt1H
- 7xMXkrxFgfpRjPQOLy4763/MMiD0HZFNN0TjeBWZzupo5dKPCQ9v6f6AjardWv7rppg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id waUR24jEzMuZ for <u-boot@lists.u-boot-project.org>;
+ Thu, 15 Oct 2026 05:49:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2562C608DA
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=92.121.34.21
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792043351;
+ b=TbAKCDZ84eiV1ULtpJwMUWTxkNFRel+btp5xVjyR8JpKEWooCZAtXb0L8BLPT7bNB2YS
+ lt+S21rcWK6ejyfzd99N4TjI5xnxnkBiKnWi/uWO/YKRmZJ1mvWhB9QqiDeRD0TZWuDWj
+ +yj6Jb7wwrqFOSdGUL2MqbkEcA5800ijDSbClhLLj1wE2y0zHtjIcc252gSKKL7j+lNt5
+ lnXtWbJEhkaL67Jr8Xjev5w4mjVPvt424oSJXMw0CNCM72pJTsvSfmFeCMpkbGxnws0Zo
+ 1WkmmIUvw6VHI4Zj2SHswMzGCt94VsSQLNd5sPGBHGfNMrc9TtnI0Ylf26TkagiTEig==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792052786;
- h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
- User-Agent:Subject:Content-Language:To:References:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version;
- bh=3++aCZmWENjR6h+9ViCu9pPOkFRk3/x8wjIB6680z2M=;
- b=fkdGA4Brvn7Y6s5VNtdxhHMFzJK45zYmv6T7DPOGXiUqJd6fuOi/mSNbe/1ZDfh2VOJx
- DpqW26CBM9UGbGn0f6CozYehXFxd314aK4o81hO171caNj8XD/L/vUfH9q/aqmGt2AgSp
- gttQP9zmeuPvA4rEABDIOsEU0IqI+9GxpakdwIQ6q9+JRzNeWDXDNvzbAkPtO2+gTlKqg
- jipUiglyxB9k0tlZp4ZknD4ESNEvSAAq70nXUx3VZdKymD+wJhjHQAdaXchXjIyCclV9+
- jlzQ9zwanI+2X563b/CGtrK+pYCHzDGpCiT7YJ/qd5bBt2ama4+zpZ5VM370O7NkLHw==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=nabladev.com;
- dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
- header.s=dkim header.b=VBJeAbXD; 
- arc=none smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:f820:417:0:178:251:229:89; helo=mx.nabladev.com;
- envelope-from=hs@nabladev.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
- header.s=dkim header.b=VBJeAbXD
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1AA3840053
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 08:26:25 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 269C7107766; Thu, 15 Oct 2026 10:26:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1792052779;
- h=from:subject:date:message-id:to:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=3++aCZmWENjR6h+9ViCu9pPOkFRk3/x8wjIB6680z2M=;
- b=VBJeAbXD3/OWxl0eWZTs4NM+3ipLblveCCv3ux7kwcAl2U5UY2+EsmBqRj2eQr65SpDpvw
- lBIKbttRr1S4worCkLZTuftBdaH2JjLlnf4h1TDOeqGRlUsHK6V3GmTXvbNfogNIDYRhEf
- ogAt4GG178+BCTaNaiPakIHeiuzIwIBekqpCxCT1mv/bLArXkMgtuI10Mgj/1xu5g5W4Tl
- dUfDlUfo5t5a10vpME1M1SQoOvy6nQGNKk4VguBU7tsGhgQB7lFX55zymkCqRFA2U1WFfj
- VAqtoOVdV0mhh0LH2tSzNMDboISaAAXzFiDl7zdNu/OWt/6NVS8ljMWZXjRDCA==
-Message-ID: <735b9683-7bea-3ccb-701d-0f827ac5c88c@nabladev.com>
-Date: Thu, 15 Oct 2026 10:25:06 +0200
+ c=relaxed/relaxed; t=1792043351;
+ h=Received-SPF:Received:Received:Received:From:Date:Subject:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+ References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
+ X-Developer-Key:X-Virus-Scanned;
+ bh=zUtWdCtvjfGN/m3IgSd3xIS1OFwAxbygtYDuSYkU9gA=;
+ b=EEcE6fHidGv30gTAixaL8v5riZavLS0AHh6G9vrGQ9bPlw5sOHsQxDqQU6Cqv6rVRgKq
+ +gpDq8oHLiUi04h/sf4f8Es5MYa+rOejS3IaJhPgZgWJSuhAl1yooH/Y2ZLK4qW1+V0Cl
+ MkRan7qk0fpLUiv2ughpFXvsVnxVM2Z+Z6hf9NgKOCxkmzJBRuWxlCIiM6R/O9RW+g9D3
+ QZqkCOXbYaZXGGQgor0IoaoRW/Cu2Xy8XFKui09YVRBgZncrZeyfRD0IShdYnKpyvw6FN
+ HgrcA2eQzNjaTN3B3yBNnIShgrWLy1q7rq3i64uUzuYPS6WukPUgxgQTkXpGEhVKtaw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=oss.nxp.com;
+ arc=none smtp.remote-ip=92.121.34.21
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=92.121.34.21;
+ helo=inva021.nxp.com; envelope-from=qijian.guo@oss.nxp.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=oss.nxp.com
+Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 2562C608DA
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 05:49:10 +0000 (UTC)
+Received: from inva021.nxp.com (localhost [127.0.0.1])
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 5FDCF200134;
+ Thu, 15 Oct 2026 07:39:53 +0200 (CEST)
+Received: from aprdc01srsp001v.ap-rdc01.nxp.com
+ (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 2A97E200053;
+ Thu, 15 Oct 2026 07:39:53 +0200 (CEST)
+Received: from lsvm11u0000395.swis.ap-northeast-2.aws.nxp.com
+ (lsvm11u0000395.swis.ap-northeast-2.aws.nxp.com [10.52.9.99])
+ by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id 257B418000B1;
+ Thu, 15 Oct 2026 13:39:51 +0800 (+08)
+From: "Joseph Guo (OSS)" <qijian.guo@oss.nxp.com>
+Date: Thu, 15 Oct 2026 14:39:48 +0900
+Subject: [PATCH 1/2] imx95_frdm: Kconfig: rename board prompt to
+ imx95_15x15_frdm
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v1 2/5] arm: dts: ipq5424-rdp466: Add GENI I2C nodes
-Content-Language: en-US
-To: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>,
- trini@konsulko.com, ilias.apalodimas@linaro.org, peng.fan@nxp.com,
- jh80.chung@samsung.com, tanmay.kathpalia@altera.com,
- casey.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@kernel.org,
- lukma@nabladev.com, Michael.Srba@seznam.cz,
- balaji.selvanathan@oss.qualcomm.com, aswin.murugan@oss.qualcomm.com,
- u-boot@lists.u-boot-project.org, u-boot-qcom@groups.io
-References: <20261007174151.2590649-1-gurumoorthy.santhakumar@oss.qualcomm.com>
- <20261007174151.2590649-3-gurumoorthy.santhakumar@oss.qualcomm.com>
-From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20261007174151.2590649-3-gurumoorthy.santhakumar@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261015-frdm-imx95-pro-v1-1-d354da03ca68@nxp.com>
+References: <20261015-frdm-imx95-pro-v1-0-d354da03ca68@nxp.com>
+In-Reply-To: <20261015-frdm-imx95-pro-v1-0-d354da03ca68@nxp.com>
+To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ Peng Fan <peng.fan@nxp.com>, Alice Guo <alice.guo@nxp.com>, 
+ Johan Jonker <jbx6244@gmail.com>, Primoz Fiser <primoz.fiser@norik.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, Lei Xu <lei.xu@nxp.com>, 
+ Ye Li <ye.li@nxp.com>, Simona Toaca <simona.toaca@nxp.com>, 
+ Joseph Guo <qijian.guo@nxp.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792042789; l=836;
+ i=qijian.guo@nxp.com; s=20250519; h=from:subject:message-id;
+ bh=yIjLz5oQAuSF11dbx2L1dqoQRzmlWFw7ktgVXdZ0omk=;
+ b=no+27w+K8kXqIHYD8+91B/soxl47oJO49fwp6bOnf3h0BpTQbj+6uQx7xDnI4Zk2ntyBed2lK
+ fPHO7hZP1UrDg30TKZLE+0of43mYGhH478+xECCeqiEtHy+WEIYK4HB
+X-Developer-Key: i=qijian.guo@nxp.com; a=ed25519;
+ pk=VRjOOFhVecTRwBzK4mt/k3JBnHoYfuXKCm9FM+hHQhs=
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-Mailman-Approved-At: Thu, 15 Oct 2026 08:27:54 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,108 +152,31 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hello Gurumoorthy Santhakumar,
+From: Joseph Guo <qijian.guo@nxp.com>
 
-On 07.10.26 19:41, Gurumoorthy Santhakumar wrote:
-> Add GENI I2C0 and I2C1 nodes with 400KHz bus speed.
-> 
-> Signed-off-by: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
-> ---
->   arch/arm/dts/ipq5424-rdp466-u-boot.dtsi | 65 +++++++++++++++++++++++++
->   1 file changed, 65 insertions(+)
-> 
-> diff --git a/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi b/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
-> index 56677cd6f6d..5c9a7384f04 100644
-> --- a/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
-> +++ b/arch/arm/dts/ipq5424-rdp466-u-boot.dtsi
-> @@ -38,3 +38,68 @@
->   		status = "okay";
->   	};
->   
-> +	&qupv3 {
-> +		i2c0: i2c@1a88000 {
-> +			compatible = "qcom,geni-i2c";
-> +			reg = <0x0 0x1a88000 0x0 0x4000>;
-> +			reg-names = "se_phys";
-> +			assigned-clocks = <&gcc GCC_QUPV3_I2C0_CLK>;
-> +			assigned-clock-rates = <64000000>;
-> +			clocks = <&gcc GCC_QUPV3_I2C0_CLK>;
-> +			clock-names = "se";
-> +			clock-frequency = <400000>;
-> +			qcom,geni-se-clk-32mhz;
+Rename the TARGET_IMX95_15X15_FRDM prompt string from imx95_frdm to
+imx95_15x15_frdm to match the specific board variant naming, and to
+distinguish it from other FRDM boards (e.g. imx95_19x19_frdm_pro).
 
-See my comments to v1
+Signed-off-by: Joseph Guo <qijian.guo@nxp.com>
+---
+ arch/arm/mach-imx/imx9/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> +			pinctrl-0 = <&i2c0_pinmux>;
-> +			pinctrl-names = "default";
-> +			status = "okay";
-> +		};
-> +
-> +		i2c1: i2c@1a8c000 {
-> +			compatible = "qcom,geni-i2c";
-> +			reg = <0x0 0x1a8c000 0x0 0x4000>;
-> +			reg-names = "se_phys";
-> +			assigned-clocks = <&gcc GCC_QUPV3_I2C1_CLK>;
-> +			assigned-clock-rates = <64000000>;
-> +			clocks = <&gcc GCC_QUPV3_I2C1_CLK>;
-> +			clock-names = "se";
-> +			clock-frequency = <400000>;
-> +			qcom,geni-se-clk-32mhz;
+diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
+index 5089f44c2473997f549709044b991800a284013c..d66d4193906f8bf4b84494f1e64428efda3acd75 100644
+--- a/arch/arm/mach-imx/imx9/Kconfig
++++ b/arch/arm/mach-imx/imx9/Kconfig
+@@ -185,7 +185,7 @@ config TARGET_IMX95_15X15_EVK
+ 	imply OF_UPSTREAM
+ 
+ config TARGET_IMX95_15X15_FRDM
+-	bool "imx95_frdm"
++	bool "imx95_15x15_frdm"
+ 	select OF_BOARD_FIXUP
+ 	select IMX95
+ 	imply BOOTSTD_FULL
 
-Here too, I really would like to prevent this U-Boot specific property.
-
-> +			pinctrl-0 = <&i2c1_pinmux>;
-> +			pinctrl-names = "default";
-> +			status = "okay";
-> +		};
-> +	};
-> +
-> +	&tlmm {
-> +		i2c0_pinmux: i2c0 {
-> +			i2c0_scl {
-> +				pins = "gpio14";
-> +				function = "i2c0_scl";
-> +				drive-strength = <2>;
-> +				bias-pull-up;
-> +			};
-> +
-> +			i2c0_sda {
-> +				pins = "gpio15";
-> +				function = "i2c0_sda";
-> +				drive-strength = <2>;
-> +				bias-disable;
-> +			};
-> +		};
-> +
-> +		i2c1_pinmux: i2c1 {
-> +			i2c1_scl {
-> +				pins = "gpio16";
-> +				function = "i2c1_scl";
-> +				drive-strength = <2>;
-> +				bias-pull-down;
-> +			};
-> +
-> +			i2c1_sda {
-> +				pins = "gpio17";
-> +				function = "i2c1_sda";
-> +				drive-strength = <2>;
-> +				bias-pull-down;
-> +			};
-> +		};
-> +	};
-> 
-
-Beside of that you can add my
-
-Reviewed-by: Heiko Schocher <hs@nabladev.com>
-
-Thanks!
-
-bye,
-Heiko
 -- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+2.34.1
+
