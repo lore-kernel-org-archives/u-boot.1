@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79E7DCC6B3D
-	for <u-boot@archiver.kernel.org>; Thu, 15 Oct 2026 13:55:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17323CC6B34
+	for <u-boot@archiver.kernel.org>; Thu, 15 Oct 2026 13:55:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 30DE040917;
-	Thu, 15 Oct 2026 13:55:33 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CD6738125E;
+	Thu, 15 Oct 2026 13:55:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ni1IGJ4W9F13; Thu, 15 Oct 2026 13:55:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 4727D40910
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792072532;
-	b=La5nQPj5jFD5cagrHk5lCoc+O04P6Q9PAvKo/iGJgOWwFXJMFjLhnEKQEJ09Cj2dZ655
-	 P/6ZicmS9BoFU+bOmRiGKF+0D+nSA4uDLOPU5nQkQYuCNlN3coODq5Skyhf+qdDqoMvP/
-	 J30CSA+Em148AmcKFvWpwZ5XxzIAIOw1bR6YMOhejIKCPPu3gYOfWVB/t1ngELfaw5VnZ
-	 8DJuhUJaBAP49bmefX58OoH0e8iOnNlmA/HGqc3UUuRGNTRigdPwE/QO7GCRtAP7uwskX
-	 VG5L9594Sh4VJ7ZmRYwd7R30vz7EkpS0mG6r+6yL3gdYC6C2a7r9OFmppkDvnHmf0kA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6KGnX0mSgoHF; Thu, 15 Oct 2026 13:55:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1FA568124F
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792072534;
+	b=hUIyaxE9R+9vsuVUJne6hEtoGvMMNb0u+OVGTj9lj5ukrdRt5nFwHaN5nHW4u/ZXxptC
+	 TY6Q2FgaJykyFfLmE23F3Qe8Nib4SZFUZ/U96Em3gbhVHrwp/5zn7349h2HK4b8T33b5l
+	 GWwl+OfzLPHv+r5fqE+CHpwIx1HipUOyMlOzEDC2Bc7+NJvulo8ZtxD+WOpdCkdJMahKL
+	 DRZivHiDnGexo/C8YPc86aziJkdC49WCvTT2ce8po+ngPQanxhQcmbmuXQsxrEp2X+UxK
+	 joxD+s0wUJmVAmBjse8r29szDMLIgUWrYciWSe5be8YY4yNRS/0Sy5CcIvVeYRu+5bg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792072532;
+	c=relaxed/relaxed; t=1792072534;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,102 +31,104 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=SKqnE6yvb30CCxHZZuDYtZy9HcwHnW/jEr9yMDv/elM=;
-	b=KVNFi/iLhJzpHnxcehcUtk26TT64lCAE99E+6RoM7r4m6TYqMKGHV8HX0kjfcMXixpjs
-	 3ZFifFa6I3J9MrWxE5JGc+vCz73DhYkp23BkRUowS7Og+jjMCeWh2KMTdqF2QbttZ2ztC
-	 5Y41/3a/xFBmbg1XiqxJmormPlCTqAL0Vr1Z3VUcuayxut/XvT/BipU0jQvvMd2Tp3HZr
-	 VgqfXkBTfcJUKaE2OsdsKG4WIGiZG01ZFVN4PKPLZjHi6BZYGmUsU71arwY/Vu+85IMO5
-	 1NMqjSHJsf71rc4b2Qk76jeNR3T2v9AyjEkLUSYFwdcx+4hba1vBPp0SXX7hnLbWQLQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=Te+E7vsWWh0fcPxtgGey2X2ybSJFmOvumTpPoaLZltQ=;
+	b=SQkHU/9miZ48ctbPKrNFEXJxw324wRmHWUpZ71F0A3pKMOqCSght2a1SUlvzY3F43zbi
+	 Sycbz5uJGN6H/jKc8im8zNUbhxXAyQ5sf3QAJcHGsZgihIQIv+e0RvH3sJLi3ToawsT0+
+	 TWgnREZ/BM6KKL/X9S4lQyb7oBVfpw9VA6oVolzV8Ez/JVvWuFyQbvdhWPOmUFJlv5678
+	 R/HZfCxO/IIVPAD5Mj9VDcvadPXEe+ucVpZL+MsdV8XiwRCfsQ4aVdx5/nucXZiNFDbP4
+	 y1vkUdFWiTlMDzFI0nRYIyuBGbDSg1xEwK366ZkX4ECocvmK6iuaXqTQC1pH78RcP1g==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=kernel.org;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="VqMsvlJ/";
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792072532;
-	bh=SKqnE6yvb30CCxHZZuDYtZy9HcwHnW/jEr9yMDv/elM=;
+	d=lists.u-boot-project.org; s=default; t=1792072534;
+	bh=Te+E7vsWWh0fcPxtgGey2X2ybSJFmOvumTpPoaLZltQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=kPeW1Y0T/Wy5uQNqWKBueCS+mDk9+PRsOC/lh4gtcg9UJLJzzOXB9YBHF+3X7Jomt
-	 dWqPW/unLqo6ZGeiM6JZSQ0AwzmFDui0fTAROURyRaM6iQI1Q/HiAyE3BY5CLs1Lmw
-	 cOGXPTIuTIaWpFe3LhOhD2gaMI3W74LUYkaMcp9oWRBY/ZnPoHmaxQUFZKwV5AooT1
-	 iHBoIHe3PGA/JVWF3tTD8XMfzD/nG1r1/V66apPhcrNf/MOyJXgKjTsEGOiSuMCdpI
-	 5sxpr121xGOlcsVYTVPf0amjEhTWebjeVsWHbtzaGoXCkD51zpWTl2kMXJ+eBGprWZ
-	 r8b89JC7R4guQ==
+	b=NXAE/f+HidH8DKVoIGKQ4XHc8qmn+IjwaayA/Hc2oHQjJQDzRhVOMXCbDdB/CR2tL
+	 VnnQWJvfFTq51sDS1QUSnD0DtJG4O0SdeXsUB7r90QtHBV8O30YDqVIO4O6eNncxnF
+	 DrIJFN0ewH//2Gc10mqrmswXjhNuEdkABKQEjg4rzxXqd5PTLlaOh11SiQLdOm3vwb
+	 ypKm76h1G3GoHdh/g8GlpTPMld4+mLSa0qBqBXxDeivZCmLNFjDQtmJomZlUwbdpGL
+	 sJbh6XGRBGEnSNEnMvoZH07zxyjHkdEamKJnnIV97B28hDM6MTzt2bRzqlekm26UmP
+	 k5IQLWz3t54Lg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4727D40910;
-	Thu, 15 Oct 2026 13:55:32 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E35542E0
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 13:55:27 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1FA568124F;
+	Thu, 15 Oct 2026 13:55:34 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 46A242AC
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 13:55:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id C4FB560A85
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 13:55:27 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 318C681258
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 13:55:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7VescDTKOsxJ for <u-boot@lists.u-boot-project.org>;
- Thu, 15 Oct 2026 13:55:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2034D608D6
-Authentication-Results: smtp3.osuosl.org; arc=none
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fEOOgNWHRf-0 for <u-boot@lists.u-boot-project.org>;
+ Thu, 15 Oct 2026 13:55:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1904F81232
+Authentication-Results: smtp1.osuosl.org; arc=none
  smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792072526;
- b=BfWrGLIAo8NmXKmzpk3+qIHy28g7mBADSakWkuvXxKtHpwS8DhwJxX0zYMYAdOVQZ4++
- O7Qa0DAAbnk5P5na6sql2u9o2ZlKRYMYeIImKMKlshZXlPWk6ISZB13Q3b2NEHo+CIWT8
- jwP4/x6fXOItPXlsrHeKVmrTh08lmD02Y7qOq8nTxWvGcpaBKF3H92yV01v8APUcjmRAS
- OZWuOvHUhgLZGjAs0URJALN7P/HPAaFyZ5cuwg9VHum/GMZFDf7RDHLfy7ZybvEG1yo/t
- tWzF6R/vxGj+z0ecATDoZuhR/v+AhOrHkmbOGqLPdm0OhRXUuwgvtB7vxmeC1nwHnxQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792072530;
+ b=FFmqKZ5y9HzveOyNJNrWJoA/PsXb2CMq+3DvCfleCd+Rzk/DmbFTGL8J9TpPmEkS+SPy
+ RqMisNth3PyS0440lYJvA1mlD4Zk4RcqmarTVV+LfxVP9VOgjE6A094vlQm3csWg5MtTY
+ H52Xli9sUoJSqyeKhFu4Qy6wIo5HdBG1335oSt+7tZb8p2nE+m5DLnGpbpyxI/7UkLPhI
+ SB4ft+9kUOFcUUQeMmBL4fdQjhLyjTfewOrgg3Vfhe9tCfuCHXnskg5zYk8zNsa04Ryo1
+ WhQ67hLuJkk2tOqM9oa5TM0ljwo4ApUxeG2qd6/vGHmFgCzULcdPPtc5eTCcf5lQE0g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792072526;
+ c=relaxed/relaxed; t=1792072530;
  h=Received-SPF:Received:Received:DKIM-Signature:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=SKqnE6yvb30CCxHZZuDYtZy9HcwHnW/jEr9yMDv/elM=;
- b=kOEFvP4wbG69pJjORkO/TdHaCyiEFpmR/a34FnB/SVm27XQ9zfUY6YWaRFCYl16a6001
- UwCBdTEpX7FMb3cUKOwcpy4nTHVo94jXdBhttA9Rc+ozDtYrvfHvONhUcVrdyhA3usNsI
- fGNY9ukmpB3cC9NFGt/9qsmcXwNhGxn1Qc+HMXpvSAEmfUnUZUHkQDTfpMn+++XhnFWF2
- YHut9awdCEYhm0b71I3IwhqGn0UkA42TRq7dM3e0PKvBLIokWpdzaeNvxhXJzpgKwkf9m
- 0g9lUkfsdpx66DzUr/cjRtcwoDzdBDy5z9nSmJm3nZq+/RlxFyV2c/xUwYwoLb+vcAA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=Te+E7vsWWh0fcPxtgGey2X2ybSJFmOvumTpPoaLZltQ=;
+ b=gZf7znRncHuEmXASs6mCTRE51TsCDl8l/Ktie8ifaprdkHAtpeNhlUiyrajSa3ZBSC+v
+ ppfe3cKTA5VlK0ol4s8UxUaYW6fGGE52SHPUlk817DyhVpRxLH/sBrwRVmqQt7FrpdSFq
+ TpopBDpNc7M6p0SNU8NRGUmrdiauJZmNA3rOyGxe1QsjSsJ45/NTHrfgQVcuMnBdnai6N
+ ubn5RyadPoQK87qtg3pYSMt3o/7uCOkPqIjC61mPGqc2GgMdoHJCuz5zdL6SOoZcmBnfY
+ M7BskOaVKrL1JIJUrFP7VrVXnb7EyX8/jJsTtQW//dYBb6hoCa3cG9QQZkHdSBSWg6Q==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b="lD4WUDU/"; 
+ header.s=k20260515 header.b="VqMsvlJ/"; 
  arc=none smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
  envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=lD4WUDU/
+ header.a=rsa-sha256 header.s=k20260515 header.b=VqMsvlJ/
 Received: from tor.source.kernel.org (tor.source.kernel.org
  [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2034D608D6
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 13:55:24 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 1904F81232
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 13:55:29 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 07BFA601EF;
- Thu, 15 Oct 2026 13:55:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41B6A1F000C4;
- Thu, 15 Oct 2026 13:55:23 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 94C346020C;
+ Thu, 15 Oct 2026 13:55:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF3BF1F000C4;
+ Thu, 15 Oct 2026 13:55:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1792072523;
- bh=SKqnE6yvb30CCxHZZuDYtZy9HcwHnW/jEr9yMDv/elM=;
+ s=k20260515; t=1792072528;
+ bh=Te+E7vsWWh0fcPxtgGey2X2ybSJFmOvumTpPoaLZltQ=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=lD4WUDU/6USw0Xpb3+7II/v8FyyRymSU57CH3DRLZq4QcrvamUsmc2RZAM7hkF8Pl
- 0Px5msKHA24RS0LLbULRC1WvXT6XdXvt4p9cprESuuLiZxB4tYxzh1fytuV3nmS2J9
- L46ypKOM6aJQ1c17apUYcdcEX71nbqL0YiLowjtC8eppuiNZMU87irQHFmYKoqC+Q3
- xqdN9miocdykMhCOLdQwzZPj+V3S8vau5AS6/dFKi5FSNsnbDf1Gb22Dr2tef/P5Hn
- D5xcwAzysKJLvkx0u+MFqtNbKGCO7u03Hs8QvtiFGnuJS9mTOc1+kLcsO+BV9fBGMO
- wmGSyXxIdLJ5Q==
+ b=VqMsvlJ/L5PSLzz355LAxEGSvmu5ERQlOfBy3vg6UC0NwNiDi6ZjAqh5z9uwRVDn0
+ iu1Ic28FRvHk1aK2VGHCzAa7cE3WRyr4gD5wIPYXEsV+ZFhMd3V7lGIgx2dS21PeG6
+ zdc0+fgyFzK5rKSk0XqDs5tKinvhQQcYy70m3ddHrCatUueRSy6Obz+h7QnYocXpVI
+ OPYSU9oDS1ixXSsrDA3k9qsDpRNkliA1hvrsSDitwDtx1v6EPF5xZ31P0RfcB6dJEZ
+ QHTtBnXRNhwJtxfh/ir8i1nlYpru3VZOSI5BI2wOEWauB+co7cBlL4u0I3sWAlWWxK
+ AJDOk+CjScwjA==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Date: Thu, 15 Oct 2026 15:54:54 +0200
-Subject: [PATCH 04/10] test/py: android: Use for loop to create the images
- / update disks
+Date: Thu, 15 Oct 2026 15:54:56 +0200
+Subject: [PATCH 06/10] test/py: android: Add setup_android_v{4,2}_image
+ subfunctions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261015-test-avb-fixes-v1-4-9e5b82644359@kernel.org>
+Message-Id: <20261015-test-avb-fixes-v1-6-9e5b82644359@kernel.org>
 References: <20261015-test-avb-fixes-v1-0-9e5b82644359@kernel.org>
 In-Reply-To: <20261015-test-avb-fixes-v1-0-9e5b82644359@kernel.org>
 To: Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.u-boot-project.org
@@ -135,16 +137,16 @@ Cc: Jan Kehren <jan.kehren@emteria.com>,
  Simon Glass <sjg@chromium.org>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3674;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2007;
  i=mkorpershoek@kernel.org; h=from:subject:message-id;
- bh=05LBZv2nsKui1P0vcz85dg3vuTAjTglT+BUjVKjDB2g=;
- b=owEBbQGS/pANAwAKARkNHbRmThk1AcsmYgBq0Ns/wf8zPCne5eulc7oeg3g3uxRFFscybijmc
- YJBPXBMNgWJATMEAAEKAB0WIQQu6UKnth9qvlMTrQAZDR20Zk4ZNQUCatDbPwAKCRAZDR20Zk4Z
- NfB/CADueMLSur6Qkt+4kcEYTnaN8mQHm75UnixomA4LyF1l6SELFhNbZGFs0C7tS+YO/ZDfwz+
- WoszW/84kH2cxzHGqaBFba6++7Yz5ds1rsznrYYLq3kBn/DZYwVVjzLO2Rnw5neLCZEzmMSuwXK
- 9B7OSEkTKmQvivGT8HaxNf39oBku9Q26CPdfL445N3rCvf/ImlI6l13OpWETs45ptWrhLFBxaE0
- UJ76MMKa8BU2Xh0ddJxnlDOJ0LwrgniqBMCDrYlQsUGH/RfgZmsSuiDvmBYTSjtzAnMeI4P/9UG
- 6YbZZBonYKAwZZ2UXFNsMg7zass/LhM0W3UKedmsZWwOSxRm
+ bh=PH7LW0SAq2D4VTXMr6wcbedcN9gLKea8E2MOvNL/jX4=;
+ b=owEBbQGS/pANAwAKARkNHbRmThk1AcsmYgBq0Ns/2ouKWf85rvt5VPpQIHJxo/fZSwTJaUyut
+ KWCrONzF3eJATMEAAEKAB0WIQQu6UKnth9qvlMTrQAZDR20Zk4ZNQUCatDbPwAKCRAZDR20Zk4Z
+ NTnHB/47ZIHRDcFyUyZvW5GslXO6uYTsEQD45jQTFQ8FzuVN2QMsdg60dYWow5Ao77VvWOyuUe7
+ vdUyN9+XZQNO2xfXLV8Z56jv2FxJ+qVTzSpewaBiaNEO3jzW2XtTJNC/Gp2uzT9a8EPh4k2BEO7
+ rj/KCIx6+cKeYO3hzDixhmIE6e0rfFEDk5VokkuW93XthGmhJqQCaZnTW9sKV+hvvetxreUEnDn
+ taBbrgL3KFjg7G+wkB1eZqjdoy2fhQ2mVh4kTA/1R4FubNzGAbDfRYiHZs9FxYhCoLltlb1169A
+ Yv3kwwqQstEOCKF0Y2Cj/6BZoQuXhA5usCHA99J44fM1hTPt
 X-Developer-Key: i=mkorpershoek@kernel.org; a=openpgp;
  fpr=8234A35B45C0D26B31C1A2DA570338B018144F28
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -160,95 +162,55 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-setup_android_image() creates 2 mmcX.img files:
+To split out the logic even further, do each image creation in a
+separate function.
 
-* mmc7.img: For boot image v4 support
-* mmc8.img: For boot image v2 support
-
-There is quite some code that's common for both images. Currently,
-most code is duplicated.
-
-To prepare a cleaner refactoring, move the image descriptions into an
-array and create each partition using a loop.
+This will make it cleaner to add future images as well.
 
 Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 ---
- test/py/tests/test_android/android_image.py | 48 +++++++++++++----------------
- 1 file changed, 21 insertions(+), 27 deletions(-)
+ test/py/tests/test_android/android_image.py | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
 
 diff --git a/test/py/tests/test_android/android_image.py b/test/py/tests/test_android/android_image.py
-index 8b536754656e..14dfd26fffd8 100644
+index b5fede8ebf0b..abdc6cd28744 100644
 --- a/test/py/tests/test_android/android_image.py
 +++ b/test/py/tests/test_android/android_image.py
-@@ -13,20 +13,6 @@ def setup_android_image(ubman):
-     parts = {}
-     disk_data = None
- 
--    def set_part_data(partnum, data):
--        """Set the contents of a disk partition
--
--        This updates disk_data by putting data in the right place
--
--        Args:
--            partnum (int): Partition number to set
--            data (bytes): Data for that partition
--        """
--        nonlocal disk_data
--
--        start = parts[partnum].start * sect_size
--        disk_data = disk_data[:start] + data + disk_data[start + len(data):]
--
-     mmc_dev = 7
-     fname = os.path.join(ubman.config.source_dir, f'mmc{mmc_dev}.img')
-     utils.run_and_log(ubman, f'qemu-img create {fname} 20M')
-@@ -68,15 +54,17 @@ def setup_android_image(ubman):
-     with open(fname, 'rb') as inf:
-         disk_data = inf.read()
- 
--    test_abootimg.AbootimgTestDiskImage(ubman, 'bootv4.img', test_abootimg.boot_img_hex)
--    boot_img = os.path.join(ubman.config.result_dir, 'bootv4.img')
--    with open(boot_img, 'rb') as inf:
--        set_part_data(2, inf.read())
--
--    test_abootimg.AbootimgTestDiskImage(ubman, 'vendor_boot.img', test_abootimg.vboot_img_hex)
--    vendor_boot_img = os.path.join(ubman.config.result_dir, 'vendor_boot.img')
--    with open(vendor_boot_img, 'rb') as inf:
--        set_part_data(4, inf.read())
-+    images = [
-+        (2, 'bootv4.img', test_abootimg.boot_img_hex),
-+        (4, 'vendor_boot.img', test_abootimg.vboot_img_hex),
-+    ]
-+    for partnum, img_name, hex_data in images:
-+        test_abootimg.AbootimgTestDiskImage(ubman, img_name, hex_data)
-+        img_path = os.path.join(ubman.config.result_dir, img_name)
-+        with open(img_path, 'rb') as inf:
-+            data = inf.read()
-+        start = parts[partnum].start * sect_size
-+        disk_data = disk_data[:start] + data + disk_data[start + len(data):]
- 
+@@ -56,8 +56,8 @@ def create_gpt_image(ubman, mmc_dev, required_parts, images):
      with open(fname, 'wb') as outf:
          outf.write(disk_data)
-@@ -120,10 +108,16 @@ def setup_android_image(ubman):
-     with open(fname, 'rb') as inf:
-         disk_data = inf.read()
  
--    test_abootimg.AbootimgTestDiskImage(ubman, 'boot.img', test_abootimg.img_hex)
--    boot_img = os.path.join(ubman.config.result_dir, 'boot.img')
--    with open(boot_img, 'rb') as inf:
--        set_part_data(2, inf.read())
-+    images = [
-+        (2, 'boot.img', test_abootimg.img_hex),
-+    ]
-+    for partnum, img_name, hex_data in images:
-+        test_abootimg.AbootimgTestDiskImage(ubman, img_name, hex_data)
-+        img_path = os.path.join(ubman.config.result_dir, img_name)
-+        with open(img_path, 'rb') as inf:
-+            data = inf.read()
-+        start = parts[partnum].start * sect_size
-+        disk_data = disk_data[:start] + data + disk_data[start + len(data):]
+-def setup_android_image(ubman):
+-    mmc_dev = 7
++def setup_android_v4_image(ubman):
++    """Create mmc7.img: boot image v4 with vendor_boot partitions."""
+     required_parts = [
+         {'num': 1, 'label':'misc', 'size': '1M'},
+         {'num': 2, 'label':'boot_a', 'size': '4M'},
+@@ -69,9 +69,10 @@ def setup_android_image(ubman):
+         (2, 'bootv4.img', test_abootimg.boot_img_hex),
+         (4, 'vendor_boot.img', test_abootimg.vboot_img_hex),
+     ]
+-    create_gpt_image(ubman, mmc_dev, required_parts, images)
++    create_gpt_image(ubman, 7, required_parts, images)
  
-     with open(fname, 'wb') as outf:
-         outf.write(disk_data)
+-    mmc_dev = 8
++def setup_android_v2_image(ubman):
++    """Create mmc8.img: boot image v2 without vendor_boot."""
+     required_parts = [
+         {'num': 1, 'label':'misc', 'size': '1M'},
+         {'num': 2, 'label':'boot_a', 'size': '4M'},
+@@ -80,4 +81,9 @@ def setup_android_image(ubman):
+     images = [
+         (2, 'boot.img', test_abootimg.img_hex),
+     ]
+-    create_gpt_image(ubman, mmc_dev, required_parts, images)
++    create_gpt_image(ubman, 8, required_parts, images)
++
++def setup_android_image(ubman):
++    """Create disk images with Android partitions."""
++    setup_android_v4_image(ubman)
++    setup_android_v2_image(ubman)
 
 -- 
 2.56.0
