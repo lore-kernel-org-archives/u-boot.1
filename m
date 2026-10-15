@@ -1,165 +1,143 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B44A8CC6B2F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Oct 2026 03:15:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A872CC6B2D
+	for <u-boot@archiver.kernel.org>; Thu, 15 Oct 2026 03:27:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 65AA6608FA;
-	Thu, 15 Oct 2026 03:15:28 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iypsg5Lx-gQT; Thu, 15 Oct 2026 03:15:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8002D60898
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792034127;
-	b=jkwNJ+aJisdlxgiHMKwEPUNLgZ61tMZ9y3KscDu1eYtzlOwUmhggcvKIXprw/MKMKoS7
-	 N2aji5OIqCpn3eEWd6mfb/R03L6Nj7iln5gO5B3dG5ThFfZA658iH2wXCC96VWC7UAZpw
-	 XEnN/GpTH+xtobGhWz/7o2qBRWza0d7bjYaPzQDImZKZmFPzlVxJmT1/rR0AKSYUGKAgH
-	 hY7daWjduQf1iizxJcLUXbv5SBIqpVKHnn9FLDS2A3mADsVMcG+D/SrV5QTB14Zqs8TTa
-	 rl/FJHJc8KkzmWKkFVT1AoPwvmQ4sgwIZGO7bR20uOciTjk+h/vs37Yt2idzVMgCFfQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792034127;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=6L+myM5jjftwKnR2hMHsLT4aU2bdeA4LH/vHToHL5xI=;
-	b=Bixx4gDRyLScG8kvpRZl+pDfqz1wlO5qVv2cFDnA2SbXS+1/WRb4X4sVXyWZnXdg5CQ5
-	 DvYKP6j2k44h/kyMA00UxSGUzDRhq+4IrP1kNPAI9hgizWo51dvyG4DeiPE+jBfjrzsoc
-	 loMbQ62FO4OjZ2tHSe4JIJ5vYLJywygaKABdAHTFBz3fkyqoEGywNWWJzZWV+CJiCYvPZ
-	 V1PJe8nq3Ea8T0hBFeUuoR9q+l/E7JbDZkLdyrbIORBBBZzJ4PSI2J6Ysp93Q5v5owyRF
-	 tdWTlMGjbZ76BZ82DSDqwZz/EX+lpZhvMGAv/RQHvBZaX9sT/BvnZykJ3cfZhW+GWMQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792034127;
-	bh=6L+myM5jjftwKnR2hMHsLT4aU2bdeA4LH/vHToHL5xI=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=UzfJEhjIr9oAPT+7ZITm6h7/wqLKJytAUW+cJX1dWR//3RzsMTGCIJMxd1zJBsaCb
-	 Ardu0w/GIBQMvBQHsQUUntUWj63ZODyvMZFBL6VLZssAtyxeVhGTPqPK9wJScKCGCl
-	 bP+vtbiEYLNsyXaZW3kR6H8OGLFwqm5f9gNpSGfy5QTwIQW77UWTj99c8Gu5CzDgQI
-	 Ck8OfgTn5nVdovDK0b2ola7RdF8qjy6WsW9V2Nqx7oR2SypXZ1ZcSL2jhHOV0qeL8C
-	 MVghqil+7sndnWxoYpVQwwbx+PY5JRhh931EJ3sciPKxt+68KJp1L1jShfHKwQ/ECQ
-	 d6LpE8CVWZrfg==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8002D60898;
-	Thu, 15 Oct 2026 03:15:27 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 1A109E4D
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 03:15:26 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0C49C407DA
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 03:15:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B88794040B;
+	Thu, 15 Oct 2026 03:27:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id y7zRD1EqEKPz for <u-boot@lists.u-boot-project.org>;
- Thu, 15 Oct 2026 03:15:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E9B83407D4
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::32e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792034125;
- b=eOXJshk8JFsgIstper9KS7bfljaNa4zQzhIAQ416t7g1CW0H2EaHBoytUd8KHRtrW5AZ
- jV8LPu/Nru6YctcFjnM7eR+TkILwNOq6AqiTvtMtYIFcFYXHqcLEWkI+HKe4YywhzsBz7
- DquG+MaTXqLu7H55aPM+IQg4SmXwydkXCTWJdt6mnQC1u5gUNATE20KWNoK/lf8Ifnp3j
- nz3BUK9Ma2IRSP7kiXZ1/2ud3JgG1q7dVAf/o9D2AdDP1BxsigsWp4DLTKhvYWY4Gc0cY
- PAs8MlWTXwun+4B9qWn4ZDGyZcwdAKFq1rRBVCZv86h5MLF3gMFQBcA2MbScDlniMRw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792034125;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
- Content-Transfer-Encoding;
- bh=6L+myM5jjftwKnR2hMHsLT4aU2bdeA4LH/vHToHL5xI=;
- b=px2r/CHgYPT48W2KdYeE/6sQ+DOs+7AprEomDaqTJA+as5iEvwgMu3i/jqOoxlAubQKz
- 1FxHz+d3HioipgsdLeh3x5L/UA5p+7Y9j2YSVxqrNGXEp/0BHirKHJMxF3AWMp0zzoinJ
- X8UqFXuPQX3h9euoS/3wa4nq+B5dKqFK0sWUDO+3CV+JYr2szX1iGnozrY1IlynZzZg1C
- EP4rHa+4Uiqn9uM5xor326f22ZG6kxB8GloMqLuI039GsTIlRui30BKnudmOUxt8WYITW
- L2nV4Xb3xa1QPDXi5EGPk2WZk9/RwZhw5aAK1UWMGWJkp+McUGkfs0Yjrc/KAPrtrGA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=linaro.org;
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b="W7ZfJ/cg"; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::32e"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32e; helo=mail-ot1-x32e.google.com;
- envelope-from=semen.protsenko@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=W7ZfJ/cg
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- by smtp4.osuosl.org (Postfix) with ESMTPS id E9B83407D4
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 03:15:24 +0000 (UTC)
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-8249c775215so2477679a34.3
- for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 20:15:24 -0700 (PDT)
+ id RI12GbYSdm5j; Thu, 15 Oct 2026 03:27:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D91AE40535
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792034847;
+	b=fWL7STtrDpShV59nTmeadUC32C3HG+znziRZS1pSW2r2JhJva6L1xeF1ck03duF2ocej
+	 QK+WwHe8GHLfxpTr+dSvKf4xLFI3yBBeypGebz8z7BflMUmku8G5jp2rWE6OzjcDoH2sf
+	 c0dO+NvKqt7ke3djj/e/5Nd31e6ksUY7Et3E/zIKHdvokuHASi5ZefkeJKpCgSyHqpZxs
+	 uLKaf0iuNng80cKSi2WAelHB8etfhxgi3SDFdF8spgjlVqD4/JwmBn6H+ekM3n63wLSoa
+	 YpRUgvZvoKs+YJNkNxPgybfa/YK0Cbsr3GB/c/8dasWmsYOLr5FKrakaUc8g7KSG2jw==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1792034847;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=TUVYViv+LoRnmMP0+NREr7A0GbE1xeqoc2a9xHdgKcQ=;
+	b=HEmNnSl+3CQo4gICp7XEnLuSLLZHqP5tkl5PrJGJnKFbKH3U2BIlGA4WAkVtx8q48HBK
+	 SsKcdMvdSVcSdSSwG26Ss+F20udObMztDjwGoBDYEnOp3oWTQelnEoTvb9Fpp1DV9O36U
+	 pypeHAKBJyN/K/rnqqSKneJcza5UbPw8OIGPCfdBjsUDDtJw7weXi5Yqa5zx7fUScSDdW
+	 71aaHdoh2mtb9U+JVteoeEwlm7e+8eymu6M6tFkYbvIy4+uyjl/g2qQxtiiEXC38DRt2Z
+	 SLii0EBCuMiYIroDEDH6nkDjv/1ERDHnfSJ/Pzt5u3WT15Ov2YfYpYXnMntSSRf8fCA==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792034123; x=1792638923;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=6L+myM5jjftwKnR2hMHsLT4aU2bdeA4LH/vHToHL5xI=;
- b=W7ZfJ/cgSc1Crh9laDWsIUwe4gR1wz+qn7yy6CUREitwoRcmuzt7r/k+ue4MDGKxbm
- DBq5DsVF8xObb4U/oKP8vVStcWsFgaqWfZhu60DFUQFaNxEatQ23kglnoy4heDxVUvDJ
- MEOHqrU2WmCbSgKVFhSx64ZmYT6SSXeh0AAp+nLx4//uCcr5eUShO7ASRmA6sJ+OHAYx
- GoJRAmU4pu2QCSY9nPUOkx8sfXdVk/vwPNlfkyWecoTfVyhp4tZ4YRZBrRMU7yea+mmi
- t0be27r27uMDcWSsiVuXpsgKuuuwS/ABRqfimqCfcNfB54AhjjF62qm2fwyLSdmZI4vj
- pWbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792034123; x=1792638923;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=6L+myM5jjftwKnR2hMHsLT4aU2bdeA4LH/vHToHL5xI=;
- b=jk0wO/g/qRHZg15QBOK9FnC4Ld/ZGP3th/IOlwDtcWcKUWVTdofGFmfTemLr2vJceD
- hSY5D6RQK/w+aZYqWHXBo4Q6I60Rmh7fAcB67+RzLjRca/sni7WM9VdJR3nSfyQDA7Gm
- PSvGqEUHnFjbt9g193tdU7fgcxUG9P9yovlGKPN1B7fP+5sv/rlDezXWuYXirCm6lDRY
- +1dPHmz1+Aba3ZRh/FLZh1IYvemcwsgWE4bdPdL7n/hNde7/obYzgzv8TZSKL6/zgBIE
- aKHw8AeMwYJdy1t5vHphaKv2LJtwuR1Lo/OSfjKVj+10y+ySTL+ny/lVfokS9M2X6SqF
- 4rXg==
-X-Forwarded-Encrypted: i=1;
- AKwUvByjTlbgMXwf150MKyifB/pUWGLkQAmmJohwZIm+Z6rFx0CcA+YnUevaZBMKC/1FgH/ZlE15NOI=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIU5sw0Bm9iKz+BP3NznTspcmPOw2LnAxyt1z0ya00fJ44c1NRc
- F1cgkpHLl4/vDMGR2/NpbqttylwK5IVxBytonLwCrc0c3MBoDWTh0b/XScRhEF+3PBGUHzTT7Su
- OaafZPsA=
-X-Gm-Gg: AYBFou2wZ4M7aFaa83RzeViOVl6V1E+lb75GE4wDmt606Re1sJdh0vEyAqFrvfkvGqu
- oJ62tFExRErwpJco3AveJmg9rDFDV32rESD0FDx2b1OHtwXEiawE0ZA7zSw/grreTq2EHDJdLAA
- Ts182KFEFvyeh5aLXj1KUKXA4Cd/ysG4O5nKaHWR2alVl2wZrbiRBJjRG6+I3JBEe+uBa/d/0/I
- oIdNVmKnm74E/gUO5hn0Mdlx2LNAYzZ302NcqRKwdIxdm1eNxDvt9pLI8OtlusXku2YbWH5pmK1
- u5xqMM47NCENo9GVf7wvSCTMeTLNAy0ynu+1+NgSN9P989/dfZuDDDaw53oPM7aFzV5UTQPzr/L
- Nr8/WNxw/98rQZ5vWUbbdcJx4bMs6nuMjvxl04XRxR5TzwjhS86Sp/wvL9U7I6PmEupr1i/Hfna
- eYANK9N9ATSwoGgxMh0GKxastHhQF7y7QyAk2KXVbpq7oO4yKFK0eone0gFlVI7eq49EDtahKiw
- ca5cCgtqEUZHNzFYw==
-X-Received: by 2002:a05:6830:4c16:b0:7f4:eaa0:1d14 with SMTP id
- 46e09a7af769-8309610ba27mr17255424a34.9.1792034123206; 
- Wed, 14 Oct 2026 20:15:23 -0700 (PDT)
-Received: from localhost ([2605:a601:1514:4f00:264b:feff:fe59:d7f7])
- by smtp.gmail.com with UTF8SMTPSA id
- 46e09a7af769-830383cd670sm15742641a34.6.2026.10.14.20.15.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Oct 2026 20:15:22 -0700 (PDT)
-From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Alexey Klimov <alexey.klimov@linaro.org>, u-boot@lists.u-boot-project.org
-Subject: [PATCH] configs: e850-96: Enable poweroff command
-Date: Wed, 14 Oct 2026 22:15:20 -0500
-Message-ID: <20261015031520.32254-1-semen.protsenko@linaro.org>
-X-Mailer: git-send-email 2.47.3
+	d=lists.u-boot-project.org; s=default; t=1792034847;
+	bh=TUVYViv+LoRnmMP0+NREr7A0GbE1xeqoc2a9xHdgKcQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=i22Geot2yHPEs0JR/9KA4qn3dF0agEC5MuTW9hxkY1m+B/A2tPkyQHywJ1/eadJQ3
+	 gMRSKWDtHoJTQM/c04AnOfiNRgFi9iBHhWkAZqOglR0amzyC8fa97v4fQJ0Dkk5dFm
+	 V7nZ3hXyhk6P6jsjD8WU610fbAvL5QqJJ7hQY1Uzt97+0CbAwhzYMZpsWJQgyS+S16
+	 DMwgNB86iPXziOHq53awPT+aYp0VzQOk2UHzcxms10rLmtdonVTvRCIIJOqpyOvUIj
+	 /Nm9zBIkoVh00Xi3IZUVOby8lEayUnielVq+ZSkMlWXkxg7LrZyhzOgvA7keI/HOqt
+	 UFMM/pBAF+8ZA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id D91AE40535;
+	Thu, 15 Oct 2026 03:27:26 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id ED4BDE4D
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 03:27:25 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id DEEB760898
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 03:27:25 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1TH41JmYLVUN for <u-boot@lists.u-boot-project.org>;
+ Thu, 15 Oct 2026 03:27:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 68C4B6077F
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=165.173.182.15
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792034845;
+ b=eGWJloYYcom/9hXi3u0RRWjZalL1QgV43Z8eeCyMz2/vf0tFhQbP9DGKQat5o324bjS5
+ xhGqFHxkRy2FjRkSRdXbttGTzHW2PsfqYiCEXbSVJgsI/dXblA3MEdZvI7nDaIshHYGnb
+ fMWwfmoppyWSY/8gkhAPKUZzLCxX1HWxGhFN8H9cn1jPRpcQS9qF5kmeLcj901uP74+r6
+ /Z7pZjrnoSU0e7STbq9h/6PKq96sSaGf9ODMTkUnHkEP4MNNKp0SBfu5Hoch8rLLMnq3h
+ ZAAgfLEvR4UvpNJ47STb3dVv5PsCO0ndgQxvMPdQSs8atvwxQikgTFZxyRwxxNjdoCg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1792034845;
+ h=Received-SPF:DKIM-Signature:Received:Date:From:To:Cc:Subject:
+ Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
+ In-Reply-To:X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient;
+ bh=TUVYViv+LoRnmMP0+NREr7A0GbE1xeqoc2a9xHdgKcQ=;
+ b=RGeNojYm9RZC7T25WvRYQdPUapDiaA/FXMO4aWElMG3iy4QGFQhCJfC33Dd08d1NMbrf
+ RKdzzFSRj9zyP73Tl2Bpr+HF0XHWqhOTMz/vYsenJbfx1PE1ipmGYG0YAa5V7utbFwuxK
+ GuI/M+EgM+FhShlOg/9wkPb2B2HQF1c9Oe5WC4yJAFMpyIlECJAEekvIV++5y6YZbUITA
+ OT1u04jL4zgypj7AbI0MysbLdvpEr8nA+qZhKORumXZjb5RjOhIiO+iovxEC+31h/QA36
+ yAeY9nswYO4CoEOnxkadLdR4ecGStW4Z1gQxiJMIUMY2ZMAZTBVZmkze90UXv9uTKhA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ dmarc=pass header.from=ziyao.cc;
+ dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
+ header.s=zmail header.b=AE+Y92LZ; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.182.15
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.15;
+ helo=sender5-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=ziyao.cc
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
+ header.s=zmail header.b=AE+Y92LZ
+Received: from sender5-op-o15.zoho.com (sender5-op-o15.zoho.com
+ [165.173.182.15])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 68C4B6077F
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 03:27:23 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1792034839; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=je2AZR9CJRfqlXsY/GJJvpMEEl892qAh7EblQ5e1pazLNgGY/g+QFglbaRQ2ltRfX8Ii+4TEMRyxUYmd1e8sDR+QHiFUuWJHT9qFuHQGHyAvpsL7QPu0L5Gfp0pVo06S1uW93iwvYsj+0qwfIbGJTt7L3muzrqUCflMHeFhCaw8=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1792034839;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=TUVYViv+LoRnmMP0+NREr7A0GbE1xeqoc2a9xHdgKcQ=; 
+ b=Ckau2dDzQ0Ul1s2h9CDEezBozuafAjiH7VNjcnTs/RVBRkLpJTclCm2sBY/Ezd8dnfd2lQnMoh4kygXb4OfCZlc/PEvdTCbzLme4w2aq8nE/aUnvU59Z8y2QdeNLj1qS71vZ8aLIfEZkaO5Thfrp6mlfk1gxQiwaMfIfEazWs7g=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1792034839; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=TUVYViv+LoRnmMP0+NREr7A0GbE1xeqoc2a9xHdgKcQ=;
+ b=AE+Y92LZoLN+tXp1UlLUzHfeh9X20rJOeNWxNgfXuNhM+TjBZQksMxwsKfcxSJh9
+ ECFuj8tkpLw01IEKO2g6WeLyMWuewgnkCLJEYhLjo8qUyAktXa/jjbuxWPRtcsNKN9m
+ /fbzx8grFT10gprXvHNja6xcnnAkEY7s+Y5ymJuo=
+Received: by smtp.zohomail.com with SMTPS id 179203483728757.89175044161129;
+ Wed, 14 Oct 2026 20:27:17 -0700 (PDT)
+Date: Thu, 15 Oct 2026 03:27:04 +0000
+From: Yao Zi <me@ziyao.cc>
+To: anon87111 <anon87111@gmail.com>, u-boot@lists.u-boot-project.org
+Cc: trini@konsulko.com, sjg@chromium.org, 0xiviel@gmail.com,
+ Yao Zi <me@ziyao.cc>
+Subject: Re: [PATCH] image-fit-sig: bind a required image key to its own
+ verification
+Message-ID: <atBICLs6No2HdGP5@pie>
+References: <e4f97d42-fb3a-4c5f-8f11-90a87b2172f0@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <e4f97d42-fb3a-4c5f-8f11-90a87b2172f0@gmail.com>
+X-Zoho-Virus-Status: 1
+X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/292.28.93
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -173,43 +151,78 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Now that 'poweroff' node is available in exynos850.dtsi, 'poweroff'
-command can be enabled. Although it only turns the SoC off, it still can
-be useful for testing purposes and experiments with power consumption.
-The corresponding Linux kernel commit [1] mentions that overall board
-current consumption goes from ~60 mA down to few mA after issuing
-poweroff command.
+On Tue, Oct 13, 2026 at 10:16:08PM +0200, anon87111 wrote:
+> fit_image_verify_required_sigs() walks the keys in the control FDT, picks
+> out those whose "required" property is "image", and passes each key's node
+> offset to fit_image_verify_sig(). That function takes the offset as
+> key_offset and never uses it: it calls fit_image_check_sig() with
+> required_keynode hardcoded to -1, which both boot/image-fit-sig.c and
+> include/image.h document as "-1 then any signature will do".
+> 
+> With required_keynode == -1, rsa_verify() skips the "See if we must use a
+> particular key" branch, tries the key named by the FIT's own key-name-hint
+> property, and then falls through to "try each of the keys in turn". So
+> every required-key iteration is satisfied by any signature in the FIT that
+> verifies under any key in the control FDT, not by the key the iteration is
+> supposed to be checking.
+> 
+> Where two or more keys are marked required = "image", a single signature
+> from any one of them therefore satisfies the whole policy. Possession of
+> one required image key is enough to boot an arbitrary image, and the other
+> required keys contribute nothing. doc/usage/fit/signature.rst says of
+> "required": "this indicates that the key must be verified for the image /
+> configuration to be considered valid."
+> 
+> The configuration path in the same file does this correctly:
+> fit_config_verify_key() passes key_offset straight through to
+> fit_config_check_sig(), and fit_config_verify_required_keys() additionally
+> honours the required-mode "any"/"all" policy, defaulting to "all". The two
+> functions were written as a pair; only one binds the key.
+> 
+> Reproduced on sandbox at b871f722 with two keys marked required = "image"
+> and a FIT carrying only a dev signature:
+> 
+>   keys marked required = "image": 2        (key-dev, key-prod)
+>   FIT signatures present        : sha256,rsa2048:dev only
+> 
+>      Verifying Hash Integrity ... sha256,rsa2048:dev+ sha256,rsa2048:dev+ OK
+>   ## Transferring control to Linux (at address 000001cc)...
+>   sandbox: continuing, as we cannot run Linux
+> 
+> The doubled "dev+ dev+" is the defect: one dev signature satisfied both
+> iterations, including the one for key-prod. The same scenario against the
+> configuration gate, same keys and same default policy, correctly refuses:
+> 
+>      Verifying Hash Integrity ... sha256,rsa2048:dev+ sha256,rsa2048:dev-  error!
+>   Verification failed for 'conf-1' config node
+>   Failed to verify required signature 'key-prod'
+> 
+> With this patch the image gate refuses the same way, and the configuration
+> gate is unchanged.
+> 
+> The hardcoded -1 dates to 56518e7104 ("image: Support signing of images",
+> v2013.07), where fit_image_verify_sig() already took sig_offset without
+> using it. 99f844ba3a ("tools: Pass the key blob around") added key_blob
+> and left the -1 in place, in the same commit that kept key_offset wired up
+> on the configuration side. It has survived because nothing exercises it:
+> there is no required = "image" anywhere in the tree, and
+> test_required_key() builds only sign-configs-* fixtures, so the image gate
+> has never been run with more than one required key.
 
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=47d4dc90181c8ffa9ebcbd058e312873a46aeaca
+Should this commit carry a fixes tag?
 
-Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
----
- configs/e850-96_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+> This is separate from, and complementary to, the fail-open gate reported
+> on the list on 2026-09-07 and patched in "[PATCH 0/2] image-fit-sig: close
+> the image-signature fail-open gate". That one is about a control FDT with
+> no /signature node at all; this one is about two keys being marked
+> required and one signature satisfying both. That fix leaves this behaviour
+> in place and this fix leaves that one in place, so both are needed. It is
+> also separate from "[PATCH v10 0/7] Improve FIT signature handling" [1],
+> which covers the configuration gate.
 
-diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
-index 8f9659ce050c..0c7e66f12bf0 100644
---- a/configs/e850-96_defconfig
-+++ b/configs/e850-96_defconfig
-@@ -29,6 +29,7 @@ CONFIG_CMD_CLK=y
- CONFIG_CMD_DFU=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_POWEROFF=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_EFIDEBUG=y
-@@ -62,6 +63,7 @@ CONFIG_SOC_SAMSUNG=y
- CONFIG_EXYNOS_PMU=y
- CONFIG_EXYNOS_USI=y
- CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_CMD_POWEROFF=y
- CONFIG_SYSRESET_SYSCON=y
- CONFIG_USB=y
- CONFIG_DM_USB_GADGET=y
+I only give it a brief glance, (at least) this paragraph sounds like
+background, too detailed and less relevant to put in the commit message.
+You might want to move it under the "---" line.
 
-base-commit: 65a7532545336e4b73e049a69436e255da7df961
-prerequisite-patch-id: 5647f11cf16e2b7c4f705be54a74aaf4b8a2b74e
--- 
-2.47.3
-
+Regards,
+Yao Zi
