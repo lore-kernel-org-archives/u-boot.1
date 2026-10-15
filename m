@@ -1,142 +1,203 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92872CC6B2F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Oct 2026 08:28:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F03FCC6B39
+	for <u-boot@archiver.kernel.org>; Thu, 15 Oct 2026 08:28:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 40E1E810ED;
-	Thu, 15 Oct 2026 08:28:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 48AE640847;
+	Thu, 15 Oct 2026 08:28:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id R0XmmFSCLy2m; Thu, 15 Oct 2026 08:27:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6C41C810C1
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792052879;
-	b=LvIdhg8wUe3PF+NXcBPbNn7OvpgKfxHVFi8gWiwUdB3sYXm/RBpm6J01VqTcbRZe/Ic9
-	 jXfUPxJ+rZ5KaOC4W7uZR1s8NwbdWtA6CGDsRk2V5MYku7pXnpebEbiMZO/M039COONEk
-	 ymQ+yL3QB+vwhul/x9H0qSlhX03lEJ1BZGxTxyWnWfVo/bB6SwZ8o3zSeoYfEXjQ/2ojR
-	 dWkLg4c/5jSGUOqK0Urs//EdtAuPz/E+g8sBHeljwmSueoe63AG0E5cYCG0g/HvkSjTnR
-	 thh+rnM4P7wGi9VCYYGMUm/OF5lADECmk9W2OHHVoeqzTmGlKgb2KT1F9nedmh2rpUA==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792052879;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id P6HLUJaLeaiO; Thu, 15 Oct 2026 08:28:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 62F6040840
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792052882;
+	b=FiKCirfxDG7N/puu0gw2l+23XWinX0Kanx2IxksggYnQDot2IuLYSR8yte0Pkr2bvzof
+	 3u0vE/onwrpaLYScx5rqHhddwdY1W8af6noCUGWR1aelL9biKjA6iPBNPC4R/hiGjKmfJ
+	 cPt1/GNsbcnZvFgd9wUYRU+EYqxswzUqZOvEI97xfLafXDcV8OgE/9/LAUoJ5976kOk1I
+	 YS0j4u3ruaQnsrjjUfoVoYCNZsq7wnKvp/0X95vwogXyWpNVNyf3cOFh+xjZQT6ga+zFK
+	 LvY+OgLG3hNpNwoRJ9nEfoC/AAQwRydtX3CEQWTUJRzMMNGdiiRunBz3PpeNAKrCPbw==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1792052882;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Virus-Scanned:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=89grcu2n6vLYWTEeYSx7kkUe18o1oaRu5cOWx2/LT78=;
-	b=IqK+hd7yh0j1wxQksHQ4wo7rRsSmT3/lRZbnsEW1rU5+MnaW1j68OPmnZ71UQvwpNbjt
-	 eCfHuozOhz+MyQHqEWwZlR4KPlx4zbI7av6E0wIQrtQ9cA71bxqdiYOy6buAZUe5ZtmCX
-	 IejzN3kEYIMwWOm0dfCk5vE3Hz6tqBf3iC9GUOcdIjqQrMDv1DusvExX5Yi22NQ0ERfQV
-	 Dh0Uhl8sItxgAQaOg/1wnM+MCE6mqWOe6enHWfVIFSvcM4B/ugxKf9yKo60QRLMhYmwWQ
-	 k92K++pMVec37ZcDxsRp7AR0KsKPuirIzN8vRXC2sKBzOVtn5wdyso+vLex2m6/HLbw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=UTwxiX1p4fd2h5OoPJ2Y2OWecUpcVG7/MOpaaRNyCWc=;
+	b=sHNPzTLRO2en66gmkRlO08rFVUMCo86B8olbkJYdqX4ZpNK66C9GWxFnmO0c4LAMEgWS
+	 syV2rb4732gN8qKbobTISSwl+oEl/GdMGSxl6Jf6Wmlh6GYolElNKDijzJkQVS8yK/uUp
+	 pxb2BK3p9vBRX0D9t2lhfOgaEwUNOYlpaWaJAokAhTzFYGRvPLp5B8c9863GF2Q3zzScZ
+	 lXaB4vgtdGsixDJYIRx6hMjSng/L6YANm/oXdc8RLkklFYPLltK9QBe0pMNJqflTTIFlB
+	 nBbTgfP9a/LQOlaNCiKzOvHBZf1nred7XtiD7bsu32zHz32j/tHlGc6bHwv92rqcuWw==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792052879;
-	bh=89grcu2n6vLYWTEeYSx7kkUe18o1oaRu5cOWx2/LT78=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1792052882;
+	bh=UTwxiX1p4fd2h5OoPJ2Y2OWecUpcVG7/MOpaaRNyCWc=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZrUmkyq67Ao2Y+uvmxvjeRNVmWHBPl2rrxoGMouRFOt20SjIbaWst0U2IaC0SmF96
-	 +YeGaAxkUxU1pz8x9ro5UqMJ6/lCDvAgJmjFxiGhgT1HNbohjqVt4awW5Whyz5Xucv
-	 4HoUVAL5cC4SCk6IL/r5qzEzusatVLCgdOwgVz6EyIx8B5U0m9p85gmOQ8q4g/wxXy
-	 Soojj5Y9xbRsI0lHtPWbqHUoLqwQWChB8ukuNGY6sdYW9u01RciexicSWfL2Pov0aW
-	 mZi9v7rriwrc1jZNjQEnt721YEEUjNlH7oM6XWfavZN9ewnTZsnzDWeQ5bLF3+pads
-	 eXAwv/Vb8VLcw==
+	b=BFuQk1EXrW/P2IyIgRI5twwmlYCcPNV4EU5CAyn+D+vJonB2pUBv5It+EGTsOO4B1
+	 KS4pOId8nT4fX4KC1vsYs5t50CK2EwDUV5XFamjzbgHGTiUQIznCLut7nUKxTRvdYk
+	 UEyM3N4/yI4phYXL/la+AIuHzzsbEGBY5ot9Qa6LMGX2Z8WvdWguv/fH2NNtXltJiv
+	 B6YPB0Q1V4xSvd3J2pG7xblOc6JRkWfXPAAvY1SV+NROgGGH+Bm5xPjX14dUvRgbJN
+	 ibP1/mTY1HS7+8+/DJ655aKiF1ZivlaTtratYHJyWJ0ruzir1RFiGLsf4xJk8j++5H
+	 IiGftbjAtZmxA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6C41C810C1;
-	Thu, 15 Oct 2026 08:27:59 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 48BD7769
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 05:49:13 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 62F6040840;
+	Thu, 15 Oct 2026 08:28:02 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8529AA58
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 06:37:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2BBA440376
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 05:49:13 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 76C5B607DB
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 06:37:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aovJVUk_N4i8 for <u-boot@lists.u-boot-project.org>;
- Thu, 15 Oct 2026 05:49:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 423C040053
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=92.121.34.21
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792043351;
- b=GArixXvgJsgQbEH06lIAikqSVhwtipaq2pHZc6WZOYeMk/1+6jzuxlt+X9oEZPFTfOvT
- IJLYWmw2JYLjk2JRiKdp77KSWU507nfZjV4Si/umxXJ21yxMsRQqEWQzMNzdiTR0bRLm3
- Qlcrp/vUh1p/+j+mAVoeG+YUo8MoY6Qrh/fdYZbOZd6umImeJDxsr5SFnD4jg2Exhcs2Q
- xwlcx8TcTaQQBfvDZ///hXFyu2JoPSVcv1mNza3HIgrVqHGhy2UA9vS41HWcSBSQINc5V
- gWIdkyc2WaQDDTlQDyqeUn42qBOdvAfSb64Kp9cRKaAGp+cC08H2NUTko/ECaYgFTOg==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792043351;
- h=Received-SPF:Received:Received:Received:From:Date:Subject:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
- References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
- X-Developer-Key:X-Virus-Scanned;
- bh=89grcu2n6vLYWTEeYSx7kkUe18o1oaRu5cOWx2/LT78=;
- b=JhjV7KqVB3qjvgXXfKFS6+woaTNVVzPGKQ6HlfspQGauUhsCbTHkEa8wBJOfq+vgduSs
- CACP1h/wUeoBs1VZ20PbjnGo0xyY5wzD52/mXCYksgMqFujmqsn8dz6uMVK+Avd6WD5fv
- H+clHjruRTKqDdDV+wvH6EG2jbaWdOot9N8zp+hq/vbUu3O8ObDPQ18fHvg2tDvytWYsC
- Im++tFmNajZI9ufNLjGw/mTqLZFfV39pSAAJa7mvhxP54PsolmZV6+0xdmWurXDWcmojb
- HP5dUoGK+f7VTXqeGlgereq/lnBUrsvcxM3dA91fY9hzAUMoDHbsw3G5aPTHUtvItTg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=oss.nxp.com;
- arc=none smtp.remote-ip=92.121.34.21
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=92.121.34.21;
- helo=inva021.nxp.com; envelope-from=qijian.guo@oss.nxp.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 423C040053
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 05:49:10 +0000 (UTC)
-Received: from inva021.nxp.com (localhost [127.0.0.1])
- by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 0212A20013B;
- Thu, 15 Oct 2026 07:39:55 +0200 (CEST)
-Received: from aprdc01srsp001v.ap-rdc01.nxp.com
- (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id C14E1200053;
- Thu, 15 Oct 2026 07:39:54 +0200 (CEST)
-Received: from lsvm11u0000395.swis.ap-northeast-2.aws.nxp.com
- (lsvm11u0000395.swis.ap-northeast-2.aws.nxp.com [10.52.9.99])
- by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id BC4F518000B5;
- Thu, 15 Oct 2026 13:39:52 +0800 (+08)
-From: "Joseph Guo (OSS)" <qijian.guo@oss.nxp.com>
-Date: Thu, 15 Oct 2026 14:39:49 +0900
-Subject: [PATCH 2/2] imx: Add FRDM-IMX95-PRO initial support
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id t5TZRvtSJoX5 for <u-boot@lists.u-boot-project.org>;
+ Thu, 15 Oct 2026 06:37:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org BBE24607CB
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=185.125.188.122
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792046259;
+ b=KIGLlfzkj7LrAEJ4I3CIm53D9tKNAUPJ5fksnrc9KQOjvlzDhbntKsf+RkDQlyBSDRM6
+ 28OTzJ/EsBl29FpOMOH/jNVdawj8Ux30M7Hn9FXyQVVNvRZpi/P89MjhLgXeswhNiJ4e9
+ dePLfPLX7V5SZKnlH/y66GBkyIkPLafovJzXXlIqFiWk+79yqNh1twprM4q3CMTvd9zuR
+ A7cegizRzHFxP8KnhFNfQm3rwFvutWo/iPrl4nJ4NFLAmYN0QMbaQ7MMGTwf4QuvY3IQQ
+ 0LwH9WeQCHRdkGqKzDGacixkZ7ZJf55l20A5ajurNXWFd1HvLrNt1YpPK5Q4wfRbSKQ==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1792046259;
+ h=Received-SPF:Received:DKIM-Signature:Received:
+ X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
+ X-Received:MIME-Version:References:In-Reply-To:From:Date:
+ X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+ Content-Transfer-Encoding;
+ bh=UTwxiX1p4fd2h5OoPJ2Y2OWecUpcVG7/MOpaaRNyCWc=;
+ b=DEYbqcTf5lpdKEKy+lAEERAZD6VpmP+KzU70i6J/i6mI7CYHDzKFvVSUzFkYRoY39PSb
+ JIvkVP2diD09am2Ue8xj1Q93gZsNN9nv+UuoC85pn1ytmv9iGI2LCSDC1kS1x4FRad8po
+ 626/M8RmYrW2oP6WMihklMj7KUp50vVrYmwit9nIhVjX/Mgq1UaS91obj20qEjPxVLW/q
+ SwnDJ8kXbbRjPsaL4wMhq6RpF3euDeKh4hHu/MafcKicGUXbJCSo5xep88YWMS0LZSfzs
+ J/EkZ59N7eMcUmyeryv1e4HxfMOea5LzXiLGatJSgXykC1UyDAaueonxo8jIdmddWfg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ dmarc=pass header.from=canonical.com;
+ dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
+ header.s=20251003 header.b=WhQw+kYr; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=185.125.188.122
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
+ helo=smtp-relay-internal-0.canonical.com;
+ envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=WhQw+kYr
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id BBE24607CB
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 06:37:37 +0000 (UTC)
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id DA0EE4025B
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 06:37:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1792046254;
+ bh=UTwxiX1p4fd2h5OoPJ2Y2OWecUpcVG7/MOpaaRNyCWc=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=WhQw+kYrNymyR2sebpnOQqqBVIL70wbK8euzm/EsSNiVPIrC5vJd0GtFJvEYOQ+xZ
+ IfmtCGb/Alb24+tSNtZ1X710FFOs8O2vXBMnlnZ7XnxknCH62R7PhKNg45tq4VEzIb
+ yLJDfOHL+99vUpPSh7KPCoS0bRYbdpPfwaYWwoYLs1Z/SMG64rCFS4ezmDj/lLKE49
+ 5TP77b0v4dfsujnrRdKhOXtpO3FscgFHCnI/77C2c2iecW1cM6jJ1MznREo4a0C1fx
+ 6oP0kt1UCUfgK2Xb0dMz5m3bRsjeO4o8OGl7QWBJcPUGq2aWcZgeJHmGFDMkoyurZC
+ L0RP4EB5MGvmKsFws6QzjUjvDl5ozKOvh+2SKGSPztWCDOBv3pvlcjZcaMqiJba/YE
+ Hlx/cH4dZwpInmTrUW8TPlODhnOZi4ps7kTwV1hVtiS71ULsWru5WhFUFdDLD4iPc9
+ 8KCU5WIIKLLKJZZBC8yWFHzy0kxV8TY+cJdyozr8IdMszmGrzZeabloJhcZfypZ2Ov
+ 6oH5Bi+b5flO++44AZYNCFvNUWAAYNDF6vNEJXAR0k6eFA2J62FN2PKtlhZeLK19IA
+ S2Vslhwxix8dWwzuyYrtNmw4D8Czae7lpcZ5WL2mSulgHpM7rhPHQHHWUGrUfjrqWB
+ XW9BEfjDA2q0P+x6SIQzdmKk=
+Received: by mail-ej1-f70.google.com with SMTP id
+ a640c23a62f3a-c3d9daffbc3so114684666b.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 14 Oct 2026 23:37:34 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792046254; cv=none;
+ d=google.com; s=arc-20260327;
+ b=dSWkZHoCyI/oUJIFlMtTW0lvpe6jufYgNQQQQ2gt29pKtPUUWk70z78lBv+cxXKvt3
+ vzoaa2d/ukrUuaIBzMDmkkyA6XpeY47PP39/UYV9Ow+zt/wdPO24XWCw9LDd1a/UGJjX
+ vfQ0Dc5aiMGfM9hFN49ZnybhhC4IZM35kNtZj/mBrq3ucId0zDoikHgPnkyPAMBDN6U6
+ u2OkL31qYFaIZelmQOHbojVeksaOs3NekFYkxztcoQe4BSE86aYcXnCR4VHqWv834rTd
+ SfxeTp7KMqIRn5L93dr6DAiy+NxzWIuKtzqTV9WFQzWkpv/Emed2jeJJXAstFqvp5uS7
+ pNSg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version;
+ bh=UTwxiX1p4fd2h5OoPJ2Y2OWecUpcVG7/MOpaaRNyCWc=;
+ fh=GCRJ8EwgW0JvUQ5SpthAq6W7J451bknUpNgdUDz5Y4I=;
+ b=dHqN15AVltYXRoOUnBepoYJqSt/QyCROs5MKyH7Qhf8yodNPRPakdKjd60Tywj5QNQ
+ zszCyXPXQSnF/l2o0DD8286w4S0S90vLI0dGvhts6hLSmoUpZb44IPS5um20TxBiNSQQ
+ C2/rSG9zf+YCyoWk6Fsc3OeCLWQvNHak1yopu1ZqaSvMns5mjXbcu7YooO81U8f8d9tE
+ 0U4z0P+J36wX446KkU1LnqZBRToZxs1kmnHPTfEOGHU67XYPR9GSICDXKsVXfVabr39A
+ hfViHvcfq6L1m6ZwtTnu+/rHx4ThxhjuUwxtXsE33ato0korK5BPLUGqnEdF4B37QqVc
+ D10Q==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792046254; x=1792651054;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=UTwxiX1p4fd2h5OoPJ2Y2OWecUpcVG7/MOpaaRNyCWc=;
+ b=opA5ZhuHBfD+2le1LhEDWWhR0a8sLVSEn5lU1T3+81McFRpGXZJ6hIFXjs36Rm8RG/
+ rhBcLosCegViPvgOb+IDRLZbZmEuD0hCZUWyvJIOzmVHbjhFv93shsl8ruyW76HhuzXI
+ rB5r6rlhaC6BD5HxJAJuBCdtyXT9c2nr2dFI++VqGJ9etWnHIUKl81YcuL7T+XV/5cn0
+ 14RB0GJzKATVdBZCsX3p8ZT2Y6rFEYBoSMOBGh9aKJ8+XqIdkjUd+7TRqPw0fzyj6dcX
+ XbzLctRsrkYG5kBuSO57EHSKccJaHC7pIZBplrFFg+gEH0wuNzQMxx4fmTMLAa9+JyAS
+ /xYA==
+X-Gm-Message-State: AFq9FYKsTbKmfFhjKuNSYKBmV735Ilvqs2WKqnJjKuSmyNEoWq/08hEh
+ 1WRI07Rr6ToGYJ0EUfEsHN4rMIY2QR+HcIzWI4iHJuMTFyBxRagDsTTEakHFddsAi/F1ErEzk3Q
+ KOCxWTOb8Uo0WV28+8UyENB8LB543GzwScraBVLzdEZYj+RGRtMQQYUZOSFBeNNJ+Y2pZ+iBTOH
+ nyGOBChBgF0Ijzt/oV2058A7gm1rleqRz2Hntrfbf2OWQw4GzmtY0WGpmIAjgG
+X-Gm-Gg: AYBFou1WFfL+DxMuOX4mqx1OkyCNcfuKImmSb3sBDw0VYJIGR4UDCtNaxIJLlGcZRm4
+ 70bbcU0/TwlO8Lwanbv0oKsUXpAG7XAZN9ymilF112gebsSQuVdaQtYKEZzNofjZGJXHy7hxP2l
+ jn9BHrC5AA5zIZxNFYsJFZFW9PJP007EOuYOfE0NTPL26cFZrQ/LJ6bzU+AA==
+X-Received: by 2002:a05:6402:510f:b0:6ac:8dba:e36e with SMTP id
+ 4fb4d7f45d1cf-6b17c296b7dmr14601745a12.40.1792046253911; 
+ Wed, 14 Oct 2026 23:37:33 -0700 (PDT)
+X-Received: by 2002:a05:6402:510f:b0:6ac:8dba:e36e with SMTP id
+ 4fb4d7f45d1cf-6b17c296b7dmr14601718a12.40.1792046253174; Wed, 14 Oct 2026
+ 23:37:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261015-frdm-imx95-pro-v1-2-d354da03ca68@nxp.com>
-References: <20261015-frdm-imx95-pro-v1-0-d354da03ca68@nxp.com>
-In-Reply-To: <20261015-frdm-imx95-pro-v1-0-d354da03ca68@nxp.com>
-To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- Peng Fan <peng.fan@nxp.com>, Alice Guo <alice.guo@nxp.com>, 
- Johan Jonker <jbx6244@gmail.com>, Primoz Fiser <primoz.fiser@norik.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, Lei Xu <lei.xu@nxp.com>, 
- Ye Li <ye.li@nxp.com>, Simona Toaca <simona.toaca@nxp.com>, 
- Joseph Guo <qijian.guo@nxp.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792042789; l=10403;
- i=qijian.guo@nxp.com; s=20250519; h=from:subject:message-id;
- bh=AfOdqFHG/iZydTy61gRTt6tULySwPLYKwWeZUIuUbO4=;
- b=vX7RxDt7ORUN/ospGUcxliLkbhE2GVUp7Zb8WCAfCGwCKZqF1D5AN0Lil7XEXVyQtpjLPONdV
- 4s3qW1V20WIBXknwPdMBVMH4TiGJgHglxs914Fxign15jv/MAToGX3f
-X-Developer-Key: i=qijian.guo@nxp.com; a=ed25519;
- pk=VRjOOFhVecTRwBzK4mt/k3JBnHoYfuXKCm9FM+hHQhs=
-X-Virus-Scanned: ClamAV using ClamSMTP
+References: <20261011152235.8842-1-aristo.chen@canonical.com>
+ <20261011152235.8842-3-aristo.chen@canonical.com>
+ <CAFLszTipcALnr0MWK94fYhHZAxr-Dha=J0MeK_OxyKoRBVuPsQ@mail.gmail.com>
+In-Reply-To: <CAFLszTipcALnr0MWK94fYhHZAxr-Dha=J0MeK_OxyKoRBVuPsQ@mail.gmail.com>
+From: Aristo Chen <aristo.chen@canonical.com>
+Date: Thu, 15 Oct 2026 14:37:21 +0800
+X-Gm-Features: AclHuK9_9AxrCkFsZ5MrhDb_U1IX4V3ekhqhYfo5mr9VS-hCd6S6RegAsn98Gf4
+Message-ID: <CAA=k7==1fNZea3EdmpSnntUjkR6+7jidPOw7ASrNGzBq2cTREg@mail.gmail.com>
+Subject: Re: [PATCH v1 2/5] image-fit: check the length of the external data
+ properties
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com, anton@binarly.io, 
+ pranavkasthuri@gmail.com, Daniel Golle <daniel@makrotopia.org>, 
+ Igor Grinberg <grinberg@compulab.co.il>, 
+ "tomas.melin@vaisala.com" <tomas.melin@vaisala.com>,
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Thu, 15 Oct 2026 08:27:54 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -151,377 +212,81 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Joseph Guo <qijian.guo@nxp.com>
+Hi Simon,
 
-Add boot support and peripherals like eMMC/SD, UART, I2C, GPIO, ENETC0/1
-and PCIE0/1 for iMX95 19x19 FRDM PRO board.
-Updated imx95_frdm doc to include build instruction for FRDM-IMX95-PRO.
+On Mon, Oct 12, 2026 at 10:10=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
+te:
+>
+> Hi Aristo,
+>
+> On 2026-10-11T15:21:13, Aristo Chen <aristo.chen@canonical.com> wrote:
+> > image-fit: check the length of the external data properties
+> >
+> > fit_image_get_data_offset(), fit_image_get_data_position() and
+> > fit_image_get_data_size() pass NULL as fdt_getprop()'s length argument,
+> > so they accept a property of any size and then dereference the first
+> > four bytes of it. A property shorter than that is read past its end, an=
+d
+> > the bytes that follow it in the FIT are returned to the caller. An empt=
+y
+> > data-size, for example, is read as the structure tag that follows it, a
+> > small number such as 2 or 3, and selects a few bytes of the external
+> > data instead of failing.
+> >
+> > Ask for the length and require it to be exactly one fdt32_t, as
+> > commit c2b8eefd4e10 ("image-fit: check the length of the
+> > data-size-unciphered property") does for data-size-unciphered. Every
+> > caller already checks the return value and handles a failure like a
+> > missing property.
+> >
+> > Fixes: db1b79b886f0 ("splash: add support for loading splash from a FIT=
+ image")
+> > Fixes: a1be94b65410 ("SPL: Add FIT data-position property support")
+> > Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+> >
+> > boot/image-fit.c | 21 ++++++++++++++++++---
+> >  1 file changed, 18 insertions(+), 3 deletions(-)
+>
+> > diff --git a/boot/image-fit.c b/boot/image-fit.c
+> > @@ -1012,15 +1022,20 @@ int fit_image_get_data_position(const void *fit=
+, int noffset,
+> >  int fit_image_get_data_size(const void *fit, int noffset, u32 *data_si=
+ze)
+> >  {
+> >       const fdt32_t *val;
+> > +     int len;
+> >
+> > -     val =3D fdt_getprop(fit, noffset, FIT_DATA_SIZE_PROP, NULL);
+> > +     val =3D fdt_getprop(fit, noffset, FIT_DATA_SIZE_PROP, &len);
+> >       if (!val)
+> >               return -ENOENT;
+> >
+> > +     if (len !=3D sizeof(*val))
+> > +             return -EINVAL;
+> > +
+>
+> Counting fit_image_get_data_size_unciphered(), this leaves four copies
+> of the same body. Please can you add a small static helper, e.g.
+> fit_get_u32_prop(fit, noffset, name, &val), and call it from each
+> accessor? That would also win back some of the 60 bytes this adds to
+> SPL. A follow-up patch is fine if you prefer to keep this one focused
+> on the fix.
 
-Signed-off-by: Joseph Guo <qijian.guo@nxp.com>
----
-Note: boot phase properties upstream have been sent [1]. These properties
-can be removed in imx95-19x19-frdm-pro-uboot.dtsi after upstream changed.
+I will send the helper as a follow-up.
 
-[1] https://lore.kernel.org/all/sashiko-outbox-167770@kernel.org/
----
- arch/arm/dts/imx95-19x19-frdm-pro-u-boot.dtsi |  65 +++++++++++
- arch/arm/mach-imx/imx9/Kconfig                |   8 ++
- board/nxp/imx95_frdm/Kconfig                  |   2 +-
- board/nxp/imx95_frdm/MAINTAINERS              |   1 +
- configs/imx95_19x19_frdm_pro_defconfig        | 153 ++++++++++++++++++++++++++
- doc/board/nxp/imx95_frdm.rst                  |  29 ++++-
- include/configs/imx95_frdm.h                  |   4 +
- 7 files changed, 260 insertions(+), 2 deletions(-)
+>
+> I checked the callers in image-fit.c, spl_fit.c, splash_source.c,
+> socfpga_arria10.c and (after patch 4) fit_image.c. All of them treat a
+> non-zero return as 'not present' or bail out, so -EINVAL is safe.
+> There is one change in behaviour: if data-offset is also present, a
+> malformed data-position now falls through to it rather than winning.
+> That seems fine, since having both is already invalid.
 
-diff --git a/arch/arm/dts/imx95-19x19-frdm-pro-u-boot.dtsi b/arch/arm/dts/imx95-19x19-frdm-pro-u-boot.dtsi
-new file mode 100644
-index 0000000000000000000000000000000000000000..f1fcd3630102e002a715af2d2798d75726041b96
---- /dev/null
-+++ b/arch/arm/dts/imx95-19x19-frdm-pro-u-boot.dtsi
-@@ -0,0 +1,65 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2026 NXP
-+ */
-+
-+#include "imx95-u-boot.dtsi"
-+
-+/ {
-+	aliases {
-+		pci0 = &netc_bus0;
-+		pci1 = &netc_bus1;
-+	};
-+};
-+
-+&lpuart1 {
-+	bootph-pre-ram;
-+};
-+
-+&reg_usdhc2_vmmc {
-+	bootph-pre-ram;
-+};
-+
-+&usdhc1 {
-+	bootph-pre-ram;
-+};
-+
-+&usdhc2 {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_uart1 {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_usdhc1 {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_usdhc1_100mhz {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_usdhc1_200mhz {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_usdhc2 {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_usdhc2_100mhz {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_usdhc2_200mhz {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_usdhc2_gpio {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_reg_usdhc2_vmmc {
-+	bootph-pre-ram;
-+};
-diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
-index d66d4193906f8bf4b84494f1e64428efda3acd75..1630695e1cd27293eac18a605dc736230e78e329 100644
---- a/arch/arm/mach-imx/imx9/Kconfig
-+++ b/arch/arm/mach-imx/imx9/Kconfig
-@@ -192,6 +192,14 @@ config TARGET_IMX95_15X15_FRDM
- 	imply BOOTSTD_BOOTCOMMAND
- 	imply OF_UPSTREAM
- 
-+config TARGET_IMX95_19X19_FRDM_PRO
-+	bool "imx95_19x19_frdm_pro"
-+	select OF_BOARD_FIXUP
-+	select IMX95
-+	imply BOOTSTD_FULL
-+	imply BOOTSTD_BOOTCOMMAND
-+	imply OF_UPSTREAM
-+
- config TARGET_IMX943_EVK
- 	bool "imx943_evk"
- 	select OF_BOARD_FIXUP
-diff --git a/board/nxp/imx95_frdm/Kconfig b/board/nxp/imx95_frdm/Kconfig
-index 0da9a56adadec661792c38b1258e4eb914af5aa5..c0d85f421fd83710826bafa0b249346ede821f80 100644
---- a/board/nxp/imx95_frdm/Kconfig
-+++ b/board/nxp/imx95_frdm/Kconfig
-@@ -1,4 +1,4 @@
--if TARGET_IMX95_15X15_FRDM
-+if TARGET_IMX95_15X15_FRDM || TARGET_IMX95_19X19_FRDM_PRO
- 
- config SYS_BOARD
- 	default "imx95_frdm"
-diff --git a/board/nxp/imx95_frdm/MAINTAINERS b/board/nxp/imx95_frdm/MAINTAINERS
-index 33870f054e7452ed3af36f19236163d451c93665..01a200169e9e4ff5e8f6296e0a0631c06868f3a1 100644
---- a/board/nxp/imx95_frdm/MAINTAINERS
-+++ b/board/nxp/imx95_frdm/MAINTAINERS
-@@ -4,3 +4,4 @@ S:	Maintained
- F:	board/nxp/imx95_frdm/
- F:	include/configs/imx95_frdm.h
- F:	configs/imx95_15x15_frdm_defconfig
-+F:      configs/imx95_19x19_frdm_pro_defconfig
-diff --git a/configs/imx95_19x19_frdm_pro_defconfig b/configs/imx95_19x19_frdm_pro_defconfig
-new file mode 100644
-index 0000000000000000000000000000000000000000..14ff08d5d34ae92e463345a39bb5d2831fb1824b
---- /dev/null
-+++ b/configs/imx95_19x19_frdm_pro_defconfig
-@@ -0,0 +1,153 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_IMX9=y
-+CONFIG_TEXT_BASE=0x90200000
-+CONFIG_SYS_MALLOC_LEN=0x2000000
-+CONFIG_SYS_MALLOC_F_LEN=0x10000
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=3
-+CONFIG_ENV_SOURCE_FILE="imx95_frdm"
-+CONFIG_SF_DEFAULT_SPEED=40000000
-+CONFIG_ENV_SIZE=0x4000
-+CONFIG_ENV_OFFSET=0x700000
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="freescale/imx95-19x19-frdm-pro"
-+CONFIG_TARGET_IMX95_19X19_FRDM_PRO=y
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_SYS_MONITOR_LEN=524288
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_TEXT_BASE=0x20480000
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0x204d6000
-+CONFIG_SPL_BSS_MAX_SIZE=0x2000
-+CONFIG_SYS_LOAD_ADDR=0x90400000
-+CONFIG_SPL=y
-+CONFIG_SPL_RECOVER_DATA_SECTION=y
-+CONFIG_PCI=y
-+CONFIG_SYS_MEMTEST_START=0x90000000
-+CONFIG_SYS_MEMTEST_END=0xA0000000
-+CONFIG_REMAKE_ELF=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_OF_SYSTEM_SETUP=y
-+CONFIG_BOOTCOMMAND="bootflow scan -l; run bsp_bootcmd"
-+CONFIG_DEFAULT_FDT_FILE="imx95-19x19-frdm-pro.dtb"
-+CONFIG_SYS_CBSIZE=2048
-+CONFIG_SYS_PBSIZE=2074
-+# CONFIG_BOARD_INIT is not set
-+CONFIG_BOARD_LATE_INIT=y
-+CONFIG_PCI_INIT_R=y
-+CONFIG_SPL_MAX_SIZE=0x20000
-+CONFIG_SPL_BOARD_INIT=y
-+CONFIG_SPL_LOAD_IMX_CONTAINER=y
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-+CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x93200000
-+CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1040
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_DM_MAILBOX=y
-+CONFIG_SPL_POWER=y
-+CONFIG_SPL_WATCHDOG=y
-+CONFIG_SYS_PROMPT="u-boot=> "
-+CONFIG_CMD_ERASEENV=y
-+CONFIG_CMD_NVEDIT_EFI=y
-+CONFIG_CRC32_VERIFY=y
-+CONFIG_CMD_MEMTEST=y
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_FUSE=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_POWEROFF=y
-+CONFIG_CMD_REMOTEPROC=y
-+CONFIG_CMD_SNTP=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_EFIDEBUG=y
-+CONFIG_CMD_RTC=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_GETTIME=y
-+CONFIG_CMD_TIMER=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_CMD_HASH=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_OF_CONTROL=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_NOWHERE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-+CONFIG_ENV_MMC_DEVICE_INDEX=1
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_USE_ETHPRIME=y
-+CONFIG_ETHPRIME="eth0"
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_SYS_RX_ETH_BUFFER=8
-+CONFIG_SPL_DM=y
-+CONFIG_SYSCON=y
-+CONFIG_SPL_OF_TRANSLATE=y
-+CONFIG_CLK=y
-+CONFIG_SPL_CLK=y
-+CONFIG_SPL_CLK_CCF=y
-+CONFIG_CLK_CCF=y
-+CONFIG_CLK_SCMI=y
-+CONFIG_SPL_CLK_SCMI=y
-+CONFIG_DFU_MMC=y
-+CONFIG_DFU_RAM=y
-+CONFIG_SPL_FIRMWARE=y
-+# CONFIG_SCMI_AGENT_SMCCC is not set
-+CONFIG_IMX_SM_CPU=y
-+CONFIG_IMX_SM_LMM=y
-+CONFIG_IMX_RGPIO2P=y
-+CONFIG_DM_PCA953X=y
-+CONFIG_ADP5585_GPIO=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_IMX_LPI2C=y
-+CONFIG_IMX_MU_MBOX=y
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_MMC_IO_VOLTAGE=y
-+CONFIG_MMC_UHS_SUPPORT=y
-+CONFIG_MMC_HS400_ES_SUPPORT=y
-+CONFIG_MMC_HS400_SUPPORT=y
-+CONFIG_FSL_USDHC=y
-+CONFIG_MTD=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_PHYLIB=y
-+CONFIG_PHY_AQUANTIA=y
-+CONFIG_PHY_MOTORCOMM=y
-+CONFIG_DM_MDIO=y
-+CONFIG_MII=y
-+CONFIG_FSL_ENETC=y
-+CONFIG_PCIE_ECAM_GENERIC=y
-+CONFIG_PHY=y
-+CONFIG_PINCTRL=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_PINCTRL_IMX_SCMI=y
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_SCMI_POWER_DOMAIN=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_SPL_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_REMOTEPROC_IMX=y
-+CONFIG_DM_RTC=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_FSL_LPUART=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_NXP_FSPI=y
-+CONFIG_ULP_WATCHDOG=y
-+CONFIG_LZO=y
-+CONFIG_BZIP2=y
-+CONFIG_WDT=y
-diff --git a/doc/board/nxp/imx95_frdm.rst b/doc/board/nxp/imx95_frdm.rst
-index 85ef9022e76fc0d8f2a5524128309939f22f4715..a0a5422bf8a7ba574f38dc19898f19f4dc4a6f8a 100644
---- a/doc/board/nxp/imx95_frdm.rst
-+++ b/doc/board/nxp/imx95_frdm.rst
-@@ -3,7 +3,7 @@
- imx95_frdm
- =======================
- 
--U-Boot for the NXP i.MX95 15x15 FRDM board
-+U-Boot for the NXP i.MX95 15x15 FRDM board & i.MX95 19x19 FRDM PRO board
- 
- Quick Start
- -----------
-@@ -73,6 +73,13 @@ i.MX95 B0 silicon version on 15x15 LPDDR4X FRDM Board
-    $ make board=mx95lp4x-15 oei=ddr DEBUG=1 r=B0 all
-    $ cp build/mx95lp4x-15/ddr/oei-m33-ddr.bin $(srctree)
- 
-+i.MX95 B0 silicon version on 19x19 LPDDR5 FRDM PRO Board
-+
-+.. code-block:: bash
-+
-+   $ make board=mx95lp5-19 oei=ddr DEBUG=1 r=B0 all
-+   $ cp build/mx95lp5-19/ddr/oei-m33-ddr.bin $(srctree)
-+
- Get and Build System Manager Image
- --------------------------------------
- 
-@@ -88,9 +95,21 @@ branch: master
-    $ export TOOLS=$PWD
-    $ git clone -b master https://github.com/nxp-imx/imx-sm.git
-    $ cd imx-sm
-+
-+i.MX95 B0 silicon version on 15x15 LPDDR4X FRDM Board
-+
-+.. code-block:: bash
-+
-    $ make config=mx95evk all
-    $ cp build/mx95evk/m33_image.bin $(srctree)
- 
-+i.MX95 B0 silicon version on 19x19 LPDDR5 FRDM PRO Board
-+
-+.. code-block:: bash
-+
-+   $ make config=other/mx95frdm-pro all
-+   $ cp build/other/mx95frdm-pro/m33_image.bin $(srctree)
-+
- Get and Build the ARM Trusted Firmware
- --------------------------------------
- 
-@@ -119,6 +138,14 @@ i.MX95 B0 silicon version on 15x15 LPDDR4X FRDM Board
-    $ make imx95_15x15_frdm_defconfig
-    $ make
- 
-+i.MX95 B0 silicon version on 19x19 LPDDR5 FRDM PRO Board
-+
-+.. code-block:: bash
-+
-+   $ export CROSS_COMPILE=aarch64-poky-linux-
-+   $ make imx95_19x19_frdm_pro_defconfig
-+   $ make
-+
- Copy imx-boot-imx95.bin to the MicroSD card:
- 
- .. code-block:: bash
-diff --git a/include/configs/imx95_frdm.h b/include/configs/imx95_frdm.h
-index e64294a2bb15a025351b9bc9f2c8a0ee0a7e9224..78a28d7a5a137070c29ac25a0b219599866f6923 100644
---- a/include/configs/imx95_frdm.h
-+++ b/include/configs/imx95_frdm.h
-@@ -18,7 +18,11 @@
- 
- #define PHYS_SDRAM_SIZE			0x70000000 /* 2GB - 256MB DDR */
- 
-+#ifdef CONFIG_TARGET_IMX95_19X19_FRDM_PRO
-+#define PHYS_SDRAM_2_SIZE		0x380000000UL /* 14GB (Totally 16GB) */
-+#else
- #define PHYS_SDRAM_2_SIZE		0x180000000 /* 6GB (Totally 8GB) */
-+#endif
- 
- #define CFG_SYS_SECURE_SDRAM_BASE   0x8A000000 /* Secure DDR region for A55 */
- #define CFG_SYS_SECURE_SDRAM_SIZE   0x04000000
+Thanks for checking all the callers, and agreed on the data-position
+case.
 
--- 
-2.34.1
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
+Best regards,
+Aristo
