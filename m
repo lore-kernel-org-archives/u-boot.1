@@ -1,96 +1,95 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D85ECC6B33
-	for <u-boot@archiver.kernel.org>; Thu, 15 Oct 2026 14:30:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CB2CCC6B3A
+	for <u-boot@archiver.kernel.org>; Thu, 15 Oct 2026 14:30:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 760B481231;
-	Thu, 15 Oct 2026 14:30:42 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4F1184091B;
+	Thu, 15 Oct 2026 14:30:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gwyNjfbnAihW; Thu, 15 Oct 2026 14:30:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A7063811DA
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792074641;
-	b=rR/eS20zKX6uejdpGkS3smLHnogla1vmlA+ZGNaOpnthS3wBtqsRfjOPSkr4FlJLYHvm
-	 Qn8g3UyNepJjehy80yj9n6jvOBlJEIth4WCyXKfYFsKhE/J3u4Q7zChMKuHvqzZ/o5j1G
-	 g5l+B8qUdyMwqrzsjyudrZsCQSmJXFvzGJ0Kk67DPC3mAQdH9lvGJYWF4XtB290MAF4kV
-	 8orDA+6ma9DS6MPOXN1H6t7iFCTTRMitAZfqq9QpADSKYosCvgj41xj2tLoPcGZd8iJWj
-	 RXzVuTiPqJOJkhZdF+KwB9W0Tsn9yi9y0oGwAjf57VU9H7HexOFXv1V0ixWwvJOC/Mg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SwWfrctrth9L; Thu, 15 Oct 2026 14:30:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 73E504091C
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792074646;
+	b=ScDDv6Zbh8+MQmo2QDi+oPvlsoDf8O2FsC7mRNOkJi4Q1eeNm+545DMvBJEvQa0COrFD
+	 OwopF25TcRebap1KxLspYKUoES3eDvdcrrh/EZLn1u2y+Z5jgSnEzuCsf6A6ASCYgNK6L
+	 lamGOMaQi3y/5VsozTuykmUjG1T3PWrJdjPwwfdVok0SqQyap4gcvJcsOAOLy/7HBSTvv
+	 wcMr/H3GM71PpRUY5Ypy/X6PHrcNffNpMmDo5WGxA0j0J0QjMKsbnuOQnIRYe7SBliunE
+	 lhJA5CsGLbzzsrtIM7zbsEZX3WYqNdaoF6ZmW+0IFpzxdnas2Ao9KsycYCkSw0CvaSQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792074641;
+	c=relaxed/relaxed; t=1792074646;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:From:
-	 DKIM-Signature:Subject:Date:Message-Id:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:
+	 DKIM-Signature:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
 	 X-Developer-Signature:X-Developer-Key:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=MNuicVuV8oBH+CASXSxeNape4RZrz0I0XpfVURWkhiI=;
-	b=ZniKrfQwMDCJ652Y7XByVBm+yHuNg2IxWIuUbEencMS6mOL86KMBKBVI5LLbGb2gsoAH
-	 lZkSq7almnRMWpFSq8QFjTFX+DcxR1xCPFOcqt4VmqzBkjGsC0XRKTlyeDQe0bfDh4JZE
-	 EWh7bfs2Lgp8Rs8D2e6BrXyEnDW5sHTpe7+pq7AHzjqzNVmH9feG1TElFzlD/FZPagAP9
-	 OFZl3W7xLvgVtYhDsRl1lRMp3zRuPe4aWxTPDWRlQa7OJICuxjQuOnQUT/AdgE50L0Sj5
-	 J8CRvVQrBlhfkKZlh1fwfsQpMnuQIaM3LY4PqmJRdG6JINn/i1d7KfhgRDUexNKORzQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	dmarc=pass header.from=fris.de;
-	dkim=pass header.d=fris.de header.i=@fris.de header.a=rsa-sha256 header.s=mail header.b=LPDFjccM;
+	bh=1rcfrYyvnTHMCBVMw9foKXynGAE82XJigcwAa+Kif3s=;
+	b=SELTVWDtxhIp8vlBTqr3tIPfmjPj7sC3nrE7gC4toNkVJMLtp8oASVr7YcDsXuww1xNu
+	 JwcE4PJnhJZwzzvhJ31MNs8KoAZMExd7S6OzpvhhgzgiJg0eVecyZHVU/pU49fOr6fm0J
+	 YijJRgAJ4OHUm6Q0a0q1V2M4drKJRPJcXNwrdija+X5wXW78eCra3x182NKvoaPtW5nJO
+	 ssX8hSd8hnS201BIQOwe7cQlrvrorG/3EoMfdE75VAxVPy0yFkn8ZLQmq3bZCAY0TK9yH
+	 V3YEiTUloU62U84y09u0YogXUNmtq2qAxfDt2UAy6hrJZPFQp//fyTDqHvKj1oyzU3A==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792074641;
-	bh=MNuicVuV8oBH+CASXSxeNape4RZrz0I0XpfVURWkhiI=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=pz98F4xDxSrEEMoN1yBD/3OBvpqxn3YppfLu01we5DHSW1/NyDYd2yJ9C3QaiW1zN
-	 P86cO4MZo+TI9njBpyM4is78Fn9cFdWtIgbD7lWxe/yTK+V2ULr8BR0L1xkOMaWQKT
-	 frMAKGW2f5mXSzp9+Ks6kI1cy57jhnlPfkVSGtct/51t85ZjLdzLKcHqOnSvsn5PVr
-	 6zdAW/Ks5pzO9HYF66tZlzb9H+kKB5WhTc9nMXfqzVCrCql1bqGuNf+dFh7+9C3+Co
-	 jtmPSJ48LqLy3SOZHvw80pUaGT9rTM++mILfwDy+MCiO6poKOHBjxuq7MoVWHaz6Zm
-	 o6AHx9wYd2big==
+	d=lists.u-boot-project.org; s=default; t=1792074646;
+	bh=1rcfrYyvnTHMCBVMw9foKXynGAE82XJigcwAa+Kif3s=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=jJGWN93rtiG6OM6ZJg0vK7ThyE6Jx6PipBLz8Gh6JJ3WEpY3eNvGmkatbYbLMEGXw
+	 2B3WfJ8Ne+2EwDdgkC9zbfa+R64ZzrgXFVbJGArZ4qTJk3t6MKnifzgftNo1qm1Ua9
+	 DFg+E4LSsoSkw+U87nU8kJb+tJ/RkAHaACnJpD9R3TIp+UQqGtxfkYjwFKnQVRGJSZ
+	 1Q26iRNqiQNwL4Ap9oXn0/ndUhBKcRey1axZR8wq9YX6AMCHfJtCpFm8enr4SqdGlS
+	 vG3NGizHnPND1cDeKwKHw+lPrlYVVXIDfeA+mLfTjjPwZ1bnJfUpkOGf8GVHEtJYJG
+	 ZLOdOoKYqpgUw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A7063811DA;
-	Thu, 15 Oct 2026 14:30:41 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 73E504091C;
+	Thu, 15 Oct 2026 14:30:46 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 18EBCE4D
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 14:30:39 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 81B72105
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 14:30:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 0B478810E2
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 14:30:39 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 684C3810E2
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 14:30:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tUm0K0H0odDO for <u-boot@lists.u-boot-project.org>;
- Thu, 15 Oct 2026 14:30:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 64723811D1
+ id t5pXweF4-fNN for <u-boot@lists.u-boot-project.org>;
+ Thu, 15 Oct 2026 14:30:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 78929811DA
 Authentication-Results: smtp1.osuosl.org;
  arc=none smtp.remote-ip=116.203.77.234
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792074638;
- b=f2r+g9Wb0rxlY4HBGiQuwMoxI/w5FYYiVDgmviisVPRJB5/CdW/OcWAotcueYdi1ya6l
- t9R6RdIATnU7iRjblU6tmDCMbx/v38Fp0xmeGv1O3/QGZyYVSAas9zC6vbeXqbIOD5v41
- RNghv9lmgnUSkmeSY71HCZ3MtVga2HGsk8z1LN6Ul2yegnofJk0KJCqung35xMFYcmFcB
- D4yFbapQGZnXlm1F4LX7viqy11bc+Z9/hvFXJ1I/QA+s3+teJsTkwtUw5uHB5frj4BAQc
- J7An5hBA5TqTGLekEJNOMVAL09DCYUKG39+AeTPeqg3k9MNRf3xarZGxlhqLu0zTCgg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792074639;
+ b=Lq3cZFC2H6AOeTeKtqzf25mjHG0cFv2e2SZ6rM1LBm4teAjy/mXYtl48IFIlGW3VrHSx
+ Ev5vG87P3eC1eRKKsadAK+r6yzRtb70c8o9EjAFmxKFtU99+jsaExktHemP3zMMyIbfr8
+ 59Z61EqK+/0ATTeSYU323uKaSEp9v0lzqQNLW/TnRbHbJ9kTJG0b5Te5Pea8Qg6BX0lFf
+ ElG0qAOBdzJVf7JHwUi/nBPqFWEus0SmlPRSM8HAA9tQifdFuG0aLHnvw3QMPSSPKEu5P
+ /x3pdfPYWb6JZUkXR0WFoUrw69uOS/lLgtQv5txUidkOfrUojKKZeeypXHPPrpxiNgA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792074638;
- h=Received-SPF:From:DKIM-Signature:Subject:Date:Message-Id:
- MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
- X-Change-ID:To:Cc:X-Developer-Signature:X-Developer-Key;
- bh=MNuicVuV8oBH+CASXSxeNape4RZrz0I0XpfVURWkhiI=;
- b=d3tBbp6dafybtHywq416i1H+nmbG4n3oIUYFIvhXY2xpcIds/F3d0YY9tBbV0+lM3stM
- fJrQSPFJIohTJpEgeVq8nMpOq5ZnHhqgg+Ojb0D7lgEBPxJsk324lj294pg2RAC7rtAnG
- aiNfn5WxhOifi0iQ0P1aH8j4Vqnx//UiaNCYcwrtwDpNh/gzIHKtusb/Ul8c1fyPg5qxy
- sha9BLCwcYfbZOyYi/DDZ21imkQLULxcXhYX/5JQdY61gS2ASY1Ba+OVj8/l9JzFuUgCc
- lIbrThhSZy+eQ3PPeImyq1YuJZjEXkUUCqr/KsvbW9Qq186bfSt0YIZ1qmIA1MpD1vg==
+ c=relaxed/relaxed; t=1792074639;
+ h=Received-SPF:From:DKIM-Signature:Date:Subject:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Message-Id:References:
+ In-Reply-To:To:Cc:X-Developer-Signature:X-Developer-Key;
+ bh=1rcfrYyvnTHMCBVMw9foKXynGAE82XJigcwAa+Kif3s=;
+ b=CZHfmNObZtVCNssPIIyyhJ9BkzdDIHjUYi++ljQKX1SV2Ka2NuIiC3LgPJjWHgL/YDLv
+ KQ+jaSxCBMU2v2Mjg5D+rcb4zKZafBn71xZfsXs2Jrrr+T2//O9pxweyyv6ekb0izVtFP
+ ih4aCV5IWlgM5nf/MrjvQpE4ljmReYYedPEwb9lGXP4/XMt+SOiZg+tb6bNRthdGCPx1m
+ r9PVUEWEuwdJE2wHjKutm2pODviSiLvuA0O78IbZJnEVgUes+6aEWJPlClzTi46Ck4vsM
+ L+pohr/y09SB+d7sCcYPfSJsuVVs/F9yTLxsja8V9b3dWRWnW49y71fg3lk/uPlGpuQ==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=fris.de;
  dkim=pass header.d=fris.de header.i=@fris.de header.a=rsa-sha256 header.s=mail
- header.b=LPDFjccM; 
+ header.b=BkIIBHki; 
  arc=none smtp.remote-ip=116.203.77.234
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.203.77.234;
  helo=mail.fris.de; envelope-from=frieder@fris.de; receiver=<UNKNOWN> 
@@ -98,45 +97,45 @@ Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=fris.de
 Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=fris.de header.i=@fris.de header.a=rsa-sha256
- header.s=mail header.b=LPDFjccM
+ header.s=mail header.b=BkIIBHki
 Received: from mail.fris.de (mail.fris.de [116.203.77.234])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 64723811D1
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 78929811DA
  for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 14:30:36 +0000 (UTC)
 From: Frieder Schrempf <frieder@fris.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=mail;
- t=1792074318;
+ t=1792074319;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=MNuicVuV8oBH+CASXSxeNape4RZrz0I0XpfVURWkhiI=;
- b=LPDFjccM08cA8HrXJLi5nJEUR+AP6w5PeUTYfoJuzTW7O3o+Tm8//VEfPabMLfF+MxU93C
- EBQnF7ev7iJzlB4Ub41xeNx7V1JyP0XMSbyfxUaeBMPdoeSIKf/hz2tz0UG9iDOCEPrr+6
- NJSpLZCpMqiWk5pAfYs4pKKi6wEzIvrNKXKEhRsjf18fIRuTAWQFljLXQZfQUZkV90ZWgl
- MFELy37fYdZ7IN8vAp9QdTDl8vMvj9WmR0WTWClnu+5uzpgVNK7Pu4uBZbsTYP+h9Znprh
- x0UX/lsJWH9LITjGaEGLEJRZ4tKv0WNXLW8jmhiS06Rlf/S2RDT0n7ScToPp6Q==
-Subject: [PATCH 0/3] ddr: imx: Fix repeating ddr_init() on i.MX8MM/MN/MP
-Date: Thu, 15 Oct 2026 16:24:46 +0200
-Message-Id: <20261015-feature-main-imx8m-ddr-reinit-v1-0-994706166ada@kontron.de>
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=1rcfrYyvnTHMCBVMw9foKXynGAE82XJigcwAa+Kif3s=;
+ b=BkIIBHkissKJnoSu0gkV+KJi2AU8yGFWhkspfguDug2s7HXxil44Y2H3YPcg3EO/pX6bX6
+ TSQDJv5atrZDfJt0uw8vjnQjTikyMVxeMYYG84z3rI5bK6mAKhXqMQrLT/Wx4Gx7c/ctVT
+ 0pAsQZEzMIe7CAaYqwIfUqxrAZlCRRG+be/id1+NXbz+SAidvEC7+W5ochrwFC9EZFvTUh
+ kOyVFT369W17E/kMRJ3LfMzHp7QLl/qfeMYt92MZUAmusppXmCTWyGussVDc6GprosuzcZ
+ num718Qo4F8CjxbZipUcoqA0vXb2GdNlYRG5303QOdnQp6SGMRluyXgMefU4GA==
+Date: Thu, 15 Oct 2026 16:24:47 +0200
+Subject: [PATCH 1/3] ddr: imx: Use the correct GPC registers for the
+ i.MX8MP DDRMIX
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQrCMBAF0KuUWTvQFCPBq4iLmPzoCIkySUuh9
- O5GXb7N26hCBZXOw0aKRaq8Soc5DBQevtzBErtpGqeTGY3lBN9mBWcvhSWvLnOMygop0thFc7Q
- JyQUbqR9vRZL191+uf9f59kRo35T2/QN2dm0xgQAAAA==
-X-Change-ID: 20261015-feature-main-imx8m-ddr-reinit-8d145fef8c5d
+Message-Id: <20261015-feature-main-imx8m-ddr-reinit-v1-1-994706166ada@kontron.de>
+References: <20261015-feature-main-imx8m-ddr-reinit-v1-0-994706166ada@kontron.de>
+In-Reply-To: <20261015-feature-main-imx8m-ddr-reinit-v1-0-994706166ada@kontron.de>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
  u-boot@lists.u-boot-project.org
 Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
  Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Frieder Schrempf <frieder.schrempf@kontron.de>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3028;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2460;
  i=frieder.schrempf@kontron.de; h=from:subject:message-id;
- bh=GssyV8cJwlII794vEja06Bb//u2uS8RnBUFtSAQRFDU=;
- b=owGbwMvMwCWWWSatKlDTJMZ4Wi2JIevCI5vG3CWaa9Objnrn+Ta8cf1uuPuoT4wuk8rZiwq3y
- 7jfbPnUUcrCIMbFICumyCLFb/Ha1izWR/5YdRTMHFYmkCEMXJwCMJHigwz/87Xbdyrrlp6pYuNO
- YfdfNDMmQc3BJGbmCtZEtYodgn9DGBl6fkjcPH4u9UZEdItq7dHl8+97vBf0OHNpSvDlS8v+X/D
- jAQA=
+ bh=EuHR31Ly7KRwKVcpT1dZhNY0ZiBGr3O7UspuhfWVrSc=;
+ b=owGbwMvMwCWWWSatKlDTJMZ4Wi2JIevCI98U3XcHX6j8Fz7lnf4i0CbcNOUWw+JbD472H2Zv3
+ D/5tOLZjlIWBjEuBlkxRRYpfovXtmaxPvLHqqNg5rAygQxh4OIUgInIPWJkWG+38nzvy0Sux10r
+ 8h4vTZdfL/TxyFnlonrXA9c2r/p2aAcjQ9Nbj00nxHMOMQceW8fo3hIRX8Z8WPJB2W7+pm2nlzn
+ 38AMA
 X-Developer-Key: i=frieder.schrempf@kontron.de; a=openpgp;
  fpr=1A0F38EB3D365D4C1FC67B5A69761B25107C8216
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -152,66 +151,68 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Some boards probe their DDR configuration by calling ddr_init() several
-times with different timings until one of them works, e.g. the Kontron
-SL i.MX8MM and OSM-S i.MX8MP. This only works reliably as long as the
-previous training run failed. If it succeeded, the DDRMIX is left in a
-state that the power up procedure in ddr_init() doesn't expect: the DDRC
-is in normal operating mode and the PHY keeps the results of the last
-training run. The next ddr_init() then reports success, but the DRAM is
-not functional. Depending on the SoC, accesses either fail or freeze the
-system.
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
-The OSM-S i.MX8MP board code contains a workaround for this that was
-found by trial and error: a short additional size check before the
-second ddr_init() call. It doesn't fix the root cause, and other boards
-run into the same problem as soon as their probing tries a configuration
-that trains successfully on the wrong DDR. This happens for example when
-adding a 4GB single rank configuration to the SL i.MX8MM probing, which
-also trains successfully on the 1GB variant.
+The power up procedure in ddr_init() makes sure the DDRMIX power domain
+is mapped to the A53 and powered by writing to the GPC registers at hard
+coded addresses. These match the GPC layout of i.MX8MQ, i.MX8MM and
+i.MX8MN, but not the one of i.MX8MP. There, the domain mapping is at
+offset 0x1cc and the power up request register at offset 0xd8 with the
+DDRMIX at bit 19. On i.MX8MP the procedure currently writes to registers
+that are not related to the DDRMIX at all, such as GPC_GPC_LPCR_CM4_AD
+at 0xec.
 
-This series fixes the issue by bringing the DDRMIX back to its power-on
-state before ddr_init() is repeated. The DRAM traffic is stopped, the
-DDRMIX resets are asserted and the DDRMIX power domain is power cycled
-through the GPC. Asserting the resets alone is not sufficient. The
-power down sequence follows dram_enter_retention() in TF-A.
+This goes unnoticed, as the DDRMIX is already powered on after reset,
+but it prevents powering the domain up again after it has been turned
+off.
 
-Patch 1 fixes the GPC registers used by the existing power up procedure
-on i.MX8MP, which uses a different GPC layout than the other i.MX8M
-SoCs. This is a prerequisite for powering up the DDRMIX again after it
-has been turned off.
+Add defines for the GPC registers and bits of the DDRMIX domain, with
+the i.MX8MP values taken from TF-A and the Linux gpcv2 driver and
+verified against the i.MX8MP reference manual, and use them instead of
+the hard coded addresses.
 
-Patch 2 adds the DDRMIX reset for i.MX8MM, i.MX8MN and i.MX8MP. The
-i.MX8MQ has a second DDR domain and is left unchanged.
-
-Patch 3 removes the now obsolete workaround from the OSM-S i.MX8MP board
-code.
-
-Tested on a Kontron OSM-S i.MX8MP with 4GB LPDDR4, which first trains
-the 8GB configuration successfully and then repeats ddr_init() with the
-4GB configuration. Without this series and without the workaround the
-board freezes, with this series the 4GB are detected and pass a memory
-test above the 4GB boundary.
-
-Also tested on a Kontron SL i.MX8MM with 1GB LPDDR4 to make sure the DDR
-probing there keeps working.
-
+Assisted-by: LLM
 Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 ---
-Frieder Schrempf (3):
-      ddr: imx: Use the correct GPC registers for the i.MX8MP DDRMIX
-      ddr: imx: Recreate the power-on state before repeating ddr_init()
-      imx: kontron-osm-s-mx8mp: Remove DDR reinit workaround
+ drivers/ddr/imx/imx8m/ddr_init.c | 17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
 
- arch/arm/include/asm/arch-imx8m/imx-regs.h |  10 ++
- board/kontron/osm-s-mx8mp/spl.c            |  14 ---
- drivers/ddr/imx/imx8m/ddr_init.c           | 189 ++++++++++++++++++++++++++++-
- 3 files changed, 197 insertions(+), 16 deletions(-)
----
-base-commit: 65a7532545336e4b73e049a69436e255da7df961
-change-id: 20261015-feature-main-imx8m-ddr-reinit-8d145fef8c5d
+diff --git a/drivers/ddr/imx/imx8m/ddr_init.c b/drivers/ddr/imx/imx8m/ddr_init.c
+index e9209ce8b61..0706face14a 100644
+--- a/drivers/ddr/imx/imx8m/ddr_init.c
++++ b/drivers/ddr/imx/imx8m/ddr_init.c
+@@ -10,6 +10,19 @@
+ #include <asm/arch/clock.h>
+ #include <asm/arch/sys_proto.h>
+ 
++/* GPC registers for the DDRMIX (DDR1) power domain */
++#ifdef CONFIG_IMX8MP
++#define GPC_PGC_CPU_MAPPING		0x1cc
++#define GPC_PGC_CPU_MAPPING_ALL		0x003fffff
++#define GPC_PU_PGC_SW_PUP_REQ		0x0d8
++#define GPC_DDR1_SW_Pxx_REQ		BIT(19)
++#else
++#define GPC_PGC_CPU_MAPPING		0x0ec
++#define GPC_PGC_CPU_MAPPING_ALL		0x0000ffff
++#define GPC_PU_PGC_SW_PUP_REQ		0x0f8
++#define GPC_DDR1_SW_Pxx_REQ		BIT(5)
++#endif
++
+ static unsigned int g_cdd_rr_max[4];
+ static unsigned int g_cdd_rw_max[4];
+ static unsigned int g_cdd_wr_max[4];
+@@ -333,8 +346,8 @@ int ddr_init(struct dram_timing_info *dram_timing)
+ 			     CLK_ROOT_PRE_DIV(CLK_ROOT_PRE_DIV4));
+ 
+ 	/* disable iso */
+-	reg32_write(0x303A00EC, 0x0000ffff); /* PGC_CPU_MAPPING */
+-	reg32setbit(0x303A00F8, 5); /* PU_PGC_SW_PUP_REQ */
++	reg32_write(GPC_BASE_ADDR + GPC_PGC_CPU_MAPPING, GPC_PGC_CPU_MAPPING_ALL);
++	setbits_le32(GPC_BASE_ADDR + GPC_PU_PGC_SW_PUP_REQ, GPC_DDR1_SW_Pxx_REQ);
+ 
+ 	initial_drate = dram_timing->fsp_msg[0].drate;
+ 	/* default to the frequency point 0 clock */
 
-Best regards,
---  
-Frieder Schrempf <frieder.schrempf@kontron.de>
+-- 
+2.55.0
 
