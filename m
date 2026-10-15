@@ -4,140 +4,201 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF2E0CC6B3D
-	for <u-boot@archiver.kernel.org>; Thu, 15 Oct 2026 14:30:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6F28CC6B34
+	for <u-boot@archiver.kernel.org>; Thu, 15 Oct 2026 14:47:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 82A0B8127E;
-	Thu, 15 Oct 2026 14:30:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 80CE88115C;
+	Thu, 15 Oct 2026 14:47:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xbBSC3G5-Wgl; Thu, 15 Oct 2026 14:30:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 37CD28127A
+ id BQy6t9oGjozv; Thu, 15 Oct 2026 14:47:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 931C38113D
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792074644;
-	b=gIFVAMn1NIkJ4vJZcOJlDCUlqei/vSHnSvTMwZa1ZnTcg8z65ryYeFtpwP020EP1BNYW
-	 /pOdWiprTxyYJNUOo0UU41dgXAYb+U5AnpxT6PyJlI+ulCkwOnbeJ/SdpF4eZk8lfxdGB
-	 jBqYJ6UsLNgt6PNeOBOU/o4nn+YJmm6HXpyqmHGIy+3vTQzv4w/BdSu/RJ5K2XAs6VPi5
-	 Ixm/kwIviT2xOF17p2AaI34HWMBq2XBxF0yN4MxWIUhNomjD8xcIwy7D+6QZK9fRIpUe3
-	 8JSCIDFcfjlcT9JieAny1MOFktfZKhdOEVT+rkT/iU37WQZ5m2xvtWTfz5BUdvB/3Jg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792075629;
+	b=G1m0UvXVonm2mcqSiSGFjr3CJ0cyWjayVMbJMN7LK9PU4c/XBTql82wvbkH+7GwXx6Ch
+	 I4ASdMUJtOjFCcCGftm7o26I4rWnIA79kNHqD2z4/O80kEPwcYsDfK6+vjeNruun47i4W
+	 j+/24Iw2jWjaWDcyLHwFfviHsWuSdkcQaedRPJfnGYhVbCAZXpnoutPdiNropIqluE60r
+	 U+a4rOeFPVKuv/MK4Ap2gq5xYlYRILystFXkFSiDYsaqHnGjWGmZREFBtl+96+eDIyfhF
+	 2SQ3TI/wKqE9m9VKI9UZ1giC0ZcKCUei9Ekw1YhUEokZPcAf7eCWNG7x1+8Y6KlzVYg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792074644;
+	c=relaxed/relaxed; t=1792075629;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:From:
-	 DKIM-Signature:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Developer-Signature:X-Developer-Key:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=U/qtmD00IMCpWdMehaob/yYfgEgpx1O6w1vIlwInu5I=;
-	b=IDaZD5VFX9eNK2a0Muo8Uhk4qOyy/P8R1vVS5NTBhUpRmkpf54023LWZkfqF+PDjWlzF
-	 l+rmNw3XA9fxhYOVlJGFNLZwt7FEZPsQiMQFm6oiEYwh+XI/P4BKrDzF+EPa6lP5ui5Ly
-	 0YUUElL5cW65wNlJytNDnp8I3GXdD9PTPMrfnsVnT5B5Z55xinL29zbQg2+aIj4FU3thH
-	 SFPJMjIrMtaoR8EPuvMOFYTQhnRDCE2Vzlpa5EvZhWl0r1ZoLSpHjuVFloUh5u4ok1xF4
-	 LThdVq+OXELN8zNzOs1E23jIrj4XUHjzxazi6COUuNJAh1QEo9QbM7x7NN5XDe7/vig==
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 Received:DKIM-Signature:Received:DKIM-Signature:Received:Received:
+	 X-SNPS-Relay:From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-Mailman-Approved-At:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=ZzxZKBNNogIviDC8gox4+sV9Kpmsp2my9tIkZ1KY8RQ=;
+	b=nCI6Amw05tQGLVqa9WZ9yovBJfVoC3irXKz5Vipm4OkNTb9FqqzyEeolD+KgLvm/xqCM
+	 rzTAYjrB316Ey3VTA1BKXdmow1FeuNrjpwQLqen0lyOwtblONcP1IXGhzLCAT7JZklV3D
+	 gZZWMUgcc7KjVg+aOCNJ3Fbfie6xoHNKAoJyyCe7xEmXQxnxJtcjulbf6SZE+GDuA7QT5
+	 LgPdb9981GbR7s2PA7t9a93tGvmWF3fPeHxnLTM4O0CKJKPLqtj8yzAg51tmCFGP+2R7L
+	 sWnAIxRt5JxETTc18QwG8FqKLYdTEhhptaPmGvjmDhig6aQWVHLPzSFPqwgvSTinVRg==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=synopsys.com;
+	dkim=pass header.d=synopsys.com header.i=@synopsys.com header.a=rsa-sha256 header.s=pfptdkimsnps header.b=rJF9lfto;
+	dkim=pass header.d=synopsys.com header.i=@synopsys.com header.a=rsa-sha256 header.s=mail header.b=QnUXhWIo;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792074644;
-	bh=U/qtmD00IMCpWdMehaob/yYfgEgpx1O6w1vIlwInu5I=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=HMaPd7baFDDPQX4Fbyd+vg/bE8qfHDGuVCjwe2KJSQ4gT6wamqQJ4kV1tYLZ3zkWX
-	 MzQDLMT6TOqRmumP/Z/yoef0iZ/KgfHeOB/5U+cph/HlsEoVDdFKlbtN+vlfIZX0L8
-	 SrJ0obrU82RY+ianef9UskiQiN09BrRVE9PMu7BuS2eQk9KSStciQZdwxORiml1RQ/
-	 wOv8i+UXuvEcbgEEZ0vPb0e+DqO+ora0lfvvyOOn3bm9PvOJEG8nshtVsEinrIa14J
-	 ck4EcAxhkSlniNfn8tINLBWDygPlVItUsXLV47Ib7RMWc0zpSTBs+K69MpQxfqsPNl
-	 gWvQG7Y9RyMLw==
+	d=lists.u-boot-project.org; s=default; t=1792075629;
+	bh=ZzxZKBNNogIviDC8gox4+sV9Kpmsp2my9tIkZ1KY8RQ=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=fB0IF4GDDpYcQiW3hi4eIZ9QNDz08LrHGECDLNjJCTIyzr4/Wvm/l4D6i5XfsAiqY
+	 IeAQrFQPqN404HRwRELBJ1OlzFHEpORwTBcFhoQELZXKEfO9p0HVo6KpBQ7pkw+o9W
+	 gc//nrrur9Ol3HrokEgfHmSKJqlUwJVTG9a2ox/iBRZ6+QppEzVq+3KHsJ2ZSUbdHf
+	 onAUpbScnMY5L7CofiSFm3YEI6/BL7A9fzsdl6n5n341FvwgAw1BmmEJ4cfqq7aPsa
+	 9LVtOLR2UEERWdZ/O0uVgOkPslcMbz6V9nqgRsxkBKpalrFCAw+vkxkkeea7n8Mj4L
+	 bw14CB3fFJmxw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 37CD28127A;
-	Thu, 15 Oct 2026 14:30:44 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 46345105
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 14:30:39 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 931C38113D;
+	Thu, 15 Oct 2026 14:47:09 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 76D54E4D
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 13:33:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 380EC60821
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 14:30:39 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6E132811E3
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 13:33:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ubS-kzwZEn_K for <u-boot@lists.u-boot-project.org>;
- Thu, 15 Oct 2026 14:30:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3EF1A605B0
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=116.203.77.234
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792074638;
- b=UzEv65AaRYODLngUbxqMBb9Qiv754z9i2fMTli90kBrAmoe9CsLp/i5S85+ilSR1TtkD
- zHfgVbpvxLXvEbvBuRg2oM/V8rA/Q+tWbeRXS3AZI6nM5vXbKY4oGzfrj9LJxwh+W4Ay/
- Ff6e01N3ZL4+kfgoGOhcsEjR7UvvlJps39reMX/KajtQ3KXKrxRNH5J4/6sGGo0wXWifP
- ofxcRAgQPuOgFt3GP+tTGBzsoBmx8dPDUltdxsNSznab73K/Mt/T+ZLTxz6VJ8M0tp1Hi
- CMY4Vk3ZmtVePWpRz2XvBCD3CKslYpjKqEhSydQx7oHNIKmQa3+E0xLcXz0bIEFJIPg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hAXyxZO_rZXR for <u-boot@lists.u-boot-project.org>;
+ Thu, 15 Oct 2026 13:33:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B0FC5810BA
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=148.163.158.9
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792071204;
+ b=emxQZ8uXXPazSdA13CO77r21UHA6P+Lf3WEy1bmtmcl+3FMl2Tw2a6ppoMzyySQg7bn3
+ EeD2jsuqOu2fTXuf6fnF/4gdj3uE3WM4DQHmpp+qmfpKE47PW8KxRJKjtuSLC0NcxT/oK
+ 2jMtX9KsqhrpB2UwdFbLNGhDjkWsjngKyxzAD/vN4vLB0q4ebl6frS8nxKor/pnxT4gkE
+ Tu8JzQvvkSdBtNtTyteJUzOXoP6SBogz/9Z6u/UGsO5zUK2pYp0SNfXgeofExZda8WCEP
+ ZYrV1/np+OYJldYa/PreXGKGXDa6+bBUWrWvwkA526puJa/GIzl5fD4wOqd2WJhHzww==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792074638;
- h=Received-SPF:From:DKIM-Signature:Date:Subject:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Message-Id:References:
- In-Reply-To:To:Cc:X-Developer-Signature:X-Developer-Key;
- bh=U/qtmD00IMCpWdMehaob/yYfgEgpx1O6w1vIlwInu5I=;
- b=kblj/hFVr75+CF3ox8jp8H+1bv9LeJpZjJdLfOEMnbtIBOUG+XemuboSf63gOdOTveEF
- GEB7k147bx9j1QzEvZYXyIvVeiMmBTbsOt35PEg1yhto9NQnrlKTXf+ANHKVwSRHizDQM
- 2f18GYPSf8Uqow9/bKrVOIzPzPIpyytonF/XBkhsQqtNCI87PGBak/WUvZcmlLc8PzrXZ
- 0xKUTFctPxrnW5RVocTUPFGzXEzrm9ZaT2NZRl3RcBoPgblRz7O7aDkAmHmkUWcUHaCo0
- t2uFeyBGXPvX7xcveUuqFxfvW1ZbS/KVtNEgXuK10RpS9RrvKW1ToOHANh3Ez7SJ6ug==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=fris.de;
- dkim=pass header.d=fris.de header.i=@fris.de header.a=rsa-sha256 header.s=mail
- header.b=iLRrlTuy; 
- arc=none smtp.remote-ip=116.203.77.234
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.203.77.234;
- helo=mail.fris.de; envelope-from=frieder@fris.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=fris.de
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=fris.de header.i=@fris.de header.a=rsa-sha256
- header.s=mail header.b=iLRrlTuy
-Received: from mail.fris.de (mail.fris.de [116.203.77.234])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 3EF1A605B0
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 14:30:36 +0000 (UTC)
-From: Frieder Schrempf <frieder@fris.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=mail;
- t=1792074319;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=U/qtmD00IMCpWdMehaob/yYfgEgpx1O6w1vIlwInu5I=;
- b=iLRrlTuyCySqAfx8/JPmrCsBECBFHOhH5Z2c0BOnjMZK11LceQHKgxw+GiUCIOLCuM28l7
- zk+plnbVRV6jSTRXnbHQITOcHVrJepaJvFS+65uLAgJouCqdrlOlWAh7KUBAzMbySDZj8g
- dzGqKOYHCTg35NXzOTJSJBriNs9z+xpI51Eq97Q/s/MIMmU8RUWhW8gDNS3gAda5oHP8qJ
- IFNOFwudGEZ0ktFRKJrqwATuh5KfrDxDGgTNpVWAMjVDV3LtXQmgRLfyPpNSLiEKFlDVxm
- b7wxOWw1aqcbPeh138yCon0QN/LtC+Fw3MdnXHD9pw+MYnkkLhKTCE34y+gmVg==
-Date: Thu, 15 Oct 2026 16:24:48 +0200
-Subject: [PATCH 2/3] ddr: imx: Recreate the power-on state before repeating
- ddr_init()
+ c=relaxed/relaxed; t=1792071204;
+ h=X-Greylist:Received-SPF:Received:DKIM-Signature:Received:
+ DKIM-Signature:Received:Received:X-SNPS-Relay:From:To:Cc:Subject:Date:
+ Message-Id:X-Mailer:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
+ X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Authority-Analysis:
+ X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+ X-Proofpoint-Spam-Details;
+ bh=ZzxZKBNNogIviDC8gox4+sV9Kpmsp2my9tIkZ1KY8RQ=;
+ b=CZnX7QgBXQxM3PEOKK/lpi1GCuIk3Mk7TNrvVanR3QwpWpvjU0qD/NIBLuNs8XeFhS7M
+ uOnnyhIqDbiY7WiobA8bBXwYFwY3WP4/hbbo/uhlbf8+WJI2h567QK/G0KAG3vKWhs35K
+ /LeNrmQc6ZagO8gSvi22aoEM4kVkkKTnAo8eMRG8Amt0EvdpYVlvzWtDjDUB2chf2iVVA
+ Mt1xNtArww0qkAx/D3UnOLLTEH5xL0qEc0h9oPl5KK+KiIzEow1P28SgfLpxzNUB+wPDD
+ 9q28i0aJOl6YQlQkcCAZZEQEGaiv2dcQDwiauOf5yHSMh6U8JFd44o6i3RubWJZzr/g==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=pass header.from=synopsys.com;
+ dkim=pass header.d=synopsys.com header.i=@synopsys.com header.a=rsa-sha256
+ header.s=pfptdkimsnps header.b=rJF9lfto; 
+ dkim=pass header.d=synopsys.com header.i=@synopsys.com header.a=rsa-sha256
+ header.s=mail header.b=QnUXhWIo; 
+ arc=none smtp.remote-ip=148.163.158.9
+X-Greylist: delayed 4957 seconds by postgrey-1.37 at util1.osuosl.org;
+ Thu, 15 Oct 2026 13:33:23 UTC
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=synopsys.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=synopsys.com
+ header.i=@synopsys.com header.a=rsa-sha256 header.s=pfptdkimsnps
+ header.b=rJF9lfto; dkim=pass (2048-bit key,
+ unprotected) header.d=synopsys.com header.i=@synopsys.com header.a=rsa-sha256
+ header.s=mail header.b=QnUXhWIo
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.158.9;
+ helo=mx0b-00230701.pphosted.com;
+ envelope-from=dineshkumar.parameswaran@synopsys.com; receiver=<UNKNOWN> 
+Received: from mx0b-00230701.pphosted.com (mx0b-00230701.pphosted.com
+ [148.163.158.9])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B0FC5810BA
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 13:33:22 +0000 (UTC)
+Received: from pps.filterd (m0297265.ppops.net [127.0.0.1])
+ by mx0a-00230701.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69F9lkB93934154; Thu, 15 Oct 2026 05:10:44 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=synopsys.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=pfptdkimsnps; bh=ZzxZKBNNogIviDC8gox
+ 4+sV9Kpmsp2my9tIkZ1KY8RQ=; b=rJF9lfto8kEq1U0qvjOajVjIXorDc4yi8cM
+ LclHWP08KhDtwNdqSy46HAmlcwVkoPNobzCv/vCPEAhOzoCRODZby3k49r35tIH+
+ h+x8KgYPKzQWkkcWXOOlz1d5L2bg4lIGBH9TvlXlE1CdMz0cL/wCXS0jaP3KA+cn
+ xemNabIn4oeVx1YR+/qzE/2OjBEWw/43dmLmXdjwjsKorFa9Immnd9xbz1brhXvf
+ 9nQFJ6kjJYJgQLrUvYBN3yM2ckR5ihuoHiXE6eJVxB6y03lucafvoBn10YyPBrvX
+ FejSO/RxH3zIbEr5UaGF5hBRf93njw+f7v37A74qMDVzN4HE0Jw==
+Received: from smtprelay-out1.synopsys.com (smtprelay-out1.synopsys.com
+ [149.117.73.133])
+ by mx0a-00230701.pphosted.com (PPS) with ESMTPS id 4haeut5d78-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Thu, 15 Oct 2026 05:10:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=synopsys.com; s=mail;
+ t=1792066242; bh=yzM4ila61NMk35iG9ciIMxlI9YW/NsiN+60/rNsY4Fw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=QnUXhWIoXevOjaTN7EK1FqD3HAU6w8e8jG+jjowLlbCQWI0SLiYczqOzbSWh4wR9j
+ 8W0fBRdMtEBO7LgCbmUuh3q2OYrqUOU+noUXBQ74AXX4Fnq5Y7vGeL+uGnhOwM+/Su
+ qH1TtuI/DQcGO2/4pSKlcG5TwWRqTCrBeaQrQ//OSO/g/SSIFV4gbRYd6aRfB/Q9uU
+ lO/dDQnrbctRq062XnkYPpLfzt1zwI78B2x8jc3zxf1MdVJQ6L0CcVy66N22nLWZX1
+ BhPXUXnOTB1aTmfe8EvADEomXPVioxeOnV68iIpPIVeuq6Cxy3N8NXZGlzQQrs5W6w
+ 8zARyJebmuT4A==
+Received: from mailhost.synopsys.com (eudc-mailhost2.synopsys.com
+ [10.213.161.17])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits)
+ client-signature RSA-PSS (2048 bits))
+ (Client CN "mailhost.synopsys.com", Issuer "SNPSica2" (verified OK))
+ by smtprelay-out1.synopsys.com (Postfix) with ESMTPS id 713DA401CD;
+ Thu, 15 Oct 2026 12:10:42 +0000 (UTC)
+Received: from Ubuntu.internal.synopsys.com
+ (snps-xodffzmzvk.internal.synopsys.com [10.155.156.76])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ by mailhost.synopsys.com (Postfix) with ESMTPSA id 77F37C1428;
+ Thu, 15 Oct 2026 12:10:40 +0000 (UTC)
+X-SNPS-Relay: synopsys.com
+From: Dineshkumar Parameswaran <Dineshkumar.Parameswaran@synopsys.com>
+To: u-boot@lists.u-boot-project.org
+Cc: dinesh.maniyam@altera.com,
+ Dineshkumar Parameswaran <Dineshkumar.Parameswaran@synopsys.com>
+Subject: [PATCH] drivers: i3c: master: Fix PID becomes zero after device init.
+Date: Thu, 15 Oct 2026 17:40:30 +0530
+Message-Id: <20261015121030.5504-1-parame@synopsys.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261015-feature-main-imx8m-ddr-reinit-v1-2-994706166ada@kontron.de>
-References: <20261015-feature-main-imx8m-ddr-reinit-v1-0-994706166ada@kontron.de>
-In-Reply-To: <20261015-feature-main-imx8m-ddr-reinit-v1-0-994706166ada@kontron.de>
-To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- u-boot@lists.u-boot-project.org
-Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Frieder Schrempf <frieder.schrempf@kontron.de>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=10361;
- i=frieder.schrempf@kontron.de; h=from:subject:message-id;
- bh=w107ajKcRFh9w3JWzrEDg/J1EZD1BlQd1WjJABxieyg=;
- b=owGbwMvMwCWWWSatKlDTJMZ4Wi2JIevCI79Dy6wCnTi2vPJXOCv0SvyoZNjO10ty/tyZ5rY5S
- 9vIptW4o5SFQYyLQVZMkUWK3+K1rVmsj/yx6iiYOaxMIEMYuDgFYCIPuRn+Ci9RaDJil3h3oWbv
- rUVcvmucA7UU0toXH+E4HSKX8eNxEiPDyjC/GTk3NNSlrQTTn+0qTFw0YzXn513xX/9N3v43NvM
- 2AwA=
-X-Developer-Key: i=frieder.schrempf@kontron.de; a=openpgp;
- fpr=1A0F38EB3D365D4C1FC67B5A69761B25107C8216
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: ZCOPlwCkAo8NN9HpAES354O5RiRptmeF
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDA0OCBTYWx0ZWRfX7YI+eKI3xetc
+ n54C0Fv6BkuHesNPrd+GwHg1pPfjzHBv1JY3uBsR3puBcrF727QWcEz5FDyRie1qUYLwARLexMs
+ TrvlGbUXT/KCMYPupQaoVQ2hIRt1dhE=
+X-Proofpoint-GUID: ZCOPlwCkAo8NN9HpAES354O5RiRptmeF
+X-Authority-Analysis: v=2.4 cv=FvaQbGrq c=1 sm=1 tr=0 ts=6ad0c2c3 cx=c_pps
+ a=8EbXvwLXkpGsT4ql/pYRAw==:117 a=8EbXvwLXkpGsT4ql/pYRAw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=qPHU084jO2kA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=tU_645BZ7FZt8VqRJtHG:22 a=-4-sGo8i1FcW4KD7_GeR:22
+ a=jIQo8A4GAAAA:8 a=eHR4zWfR7vMI2KmxvhgA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDA0OCBTYWx0ZWRfX0jWkNaksAXuZ
+ rkrN4boNLYScR2WnBEYiaPq1ukDXXDjTAE9qcVp3Hc0HOag3MxsF4qF9J8qQ1yrjUilZjmCWQHq
+ UbFWvIGBHtPPvrSViNpQEn1+I9xdXh5e2xtsEqVXuKnroFb6zIpRf0GTg2H04bKHrSSp1oz2wj2
+ uRz4DFvwIuNF38eblXwxS2yQfMJEbxUKg6ZI7bWalYb47kHHtwDgfe2Wg+mjDKu1M8YMHy8Eqee
+ +ln4/AA/iQvsoSOD3Hk83t/y0WgbDZM1LwIRxyRohXLQ+SiPZsYcfyAqJrfmeC4QVTh5MjLOic2
+ 6ESS/SC2UbIl7sYI2lf84UHFFwf7uHrWSTYUz9TfHQBuk0UiUkSr9FC+7cii6qYDomlvfJBXtgS
+ Ipf9Yyp2/h3tZqOdaO/Lq3kMKsAhshLLBSviNWqVXx0Ho8KFgYFcBPXxl3rOres/3c4YnojeYHu
+ xJdnt8aE/81TExdU29Q==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_active_cloned_notspam
+ policy=outbound_active_cloned score=0 spamscore=0 impostorscore=0
+ adultscore=0 priorityscore=1501 lowpriorityscore=0 suspectscore=0
+ clxscore=1011 malwarescore=0 phishscore=0 bulkscore=0 classifier=typeunknown
+ authscore=0 authtc= authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.22.0-2610080000 definitions=main-2610150048
+X-Mailman-Approved-At: Thu, 15 Oct 2026 14:47:08 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -151,281 +212,84 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
+During ENTDAA, a Transfer Error Status Interrupt may be raised while
+the Response Status Interrupt is being handled. It remains latched in
+the status register while waiting for GETPID, so clear the Transfer
+Error Status Interrupt after ENTDAA. Also, `polltimeout()` returns
+a negative value on timeout; update the comparison to account for this.
 
-Boards that support several DDR types probe them by calling ddr_init()
-with different configurations until one of them succeeds. The power up
-procedure at the beginning of ddr_init() assumes a DDRMIX that is still
-in its power-on state, which is only true for the first call.
-
-Repeating the initialization after a failed run happens to work, as such
-a run never gets to the point where it configures the DDR device and
-leaves a trained state behind. Repeating it after a successful run does
-not: the DDRC is in normal operating mode and the PHY holds the results
-of the previous training run in registers that neither ddrphy_cfg[] nor
-the SRC resets cover. The next ddr_init() still reports a successful
-training, but the DRAM is not functional afterwards.
-
-This is reproducible on a Kontron OSM-S i.MX8MP with 4GB DDR: the 8GB
-configuration is tried first and succeeds, the following init with the
-4GB configuration returns success and the first access to the DRAM
-freezes the SoC.
-
-Bring the DDRMIX back to a defined state before repeating the
-initialization. Stop the DRAM traffic and the periodic controller
-activity, park DfiClk on the bypass clock and power cycle the DDRMIX
-domain. Asserting the reset chain alone is not sufficient, only removing
-the power returns the PHY to its defaults. The power down sequence
-follows dram_enter_retention() in TF-A, which powers the domain down for
-retention suspend.
-
-This is implemented for i.MX8MM, i.MX8MN and i.MX8MP. The i.MX8MQ has a
-second DDR domain that would need its own handling, so it is skipped
-there and repeating ddr_init() behaves as before.
-
-Assisted-by: LLM
-Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+Signed-off-by: Dineshkumar Parameswaran <parame@synopsys.com>
 ---
- arch/arm/include/asm/arch-imx8m/imx-regs.h |  10 ++
- drivers/ddr/imx/imx8m/ddr_init.c           | 172 +++++++++++++++++++++++++++++
- 2 files changed, 182 insertions(+)
+ drivers/i3c/master/dw-i3c-master.c | 21 ++++++++++++++++-----
+ 1 file changed, 16 insertions(+), 5 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-imx8m/imx-regs.h b/arch/arm/include/asm/arch-imx8m/imx-regs.h
-index 95a8cc1c637..150cd0a0c92 100644
---- a/arch/arm/include/asm/arch-imx8m/imx-regs.h
-+++ b/arch/arm/include/asm/arch-imx8m/imx-regs.h
-@@ -130,10 +130,20 @@
- #define SRC_SCR_M4C_NON_SCLR_RST_MASK	BIT(0)
- #define SRC_DDR1_ENABLE_MASK		0x8F000000UL
- #define SRC_DDR2_ENABLE_MASK		0x8F000000UL
-+#define SRC_DDR1_RCR_SYS_RESET_MASK	BIT(4)
- #define SRC_DDR1_RCR_PHY_PWROKIN_N_MASK	BIT(3)
- #define SRC_DDR1_RCR_PHY_RESET_MASK	BIT(2)
- #define SRC_DDR1_RCR_CORE_RESET_N_MASK	BIT(1)
- #define SRC_DDR1_RCR_PRESET_N_MASK	BIT(0)
-+/*
-+ * All of the above, a set bit always means "reset asserted". Bit 5
-+ * (DDRC1_PHY_WRST) is left out, the power up procedure doesn't use it either.
-+ */
-+#define SRC_DDR1_RCR_ALL_RESET_MASK	(SRC_DDR1_RCR_SYS_RESET_MASK | \
-+					 SRC_DDR1_RCR_PHY_PWROKIN_N_MASK | \
-+					 SRC_DDR1_RCR_PHY_RESET_MASK | \
-+					 SRC_DDR1_RCR_CORE_RESET_N_MASK | \
-+					 SRC_DDR1_RCR_PRESET_N_MASK)
+diff --git a/drivers/i3c/master/dw-i3c-master.c b/drivers/i3c/master/dw-i3c-master.c
+index 25933adf010..4cdd908067e 100644
+--- a/drivers/i3c/master/dw-i3c-master.c
++++ b/drivers/i3c/master/dw-i3c-master.c
+@@ -539,7 +539,7 @@ static int dw_i3c_ccc_set(struct dw_i3c_master *master,
  
- #define SNVS_LPSR			0x4c
- #define SNVS_LPLVDR			0x64
-diff --git a/drivers/ddr/imx/imx8m/ddr_init.c b/drivers/ddr/imx/imx8m/ddr_init.c
-index 0706face14a..8e059249ef6 100644
---- a/drivers/ddr/imx/imx8m/ddr_init.c
-+++ b/drivers/ddr/imx/imx8m/ddr_init.c
-@@ -9,19 +9,39 @@
- #include <asm/arch/ddr.h>
- #include <asm/arch/clock.h>
- #include <asm/arch/sys_proto.h>
-+#include <linux/delay.h>
+ 	dw_i3c_master_enqueue_xfer(master, xfer);
  
- /* GPC registers for the DDRMIX (DDR1) power domain */
- #ifdef CONFIG_IMX8MP
- #define GPC_PGC_CPU_MAPPING		0x1cc
- #define GPC_PGC_CPU_MAPPING_ALL		0x003fffff
- #define GPC_PU_PGC_SW_PUP_REQ		0x0d8
-+#define GPC_PU_PGC_SW_PDN_REQ		0x0e4
-+#define GPC_PU_PWRHSK			0x190
- #define GPC_DDR1_SW_Pxx_REQ		BIT(19)
-+#define GPC_DDRMIX_ADB400_SYNC		BIT(11)
-+#define GPC_DDRMIX_ADB400_ACK		BIT(27)
-+/* DDRMIX is PGC 31 and occupies 0xfc0 - 0xfff */
-+#define GPC_PGC_DDR1_CTRL		0xfc0
- #else
-+/*
-+ * i.MX8MQ shares the registers used by the power up procedure, but has
-+ * different ADB400 handshake bits. It doesn't use the DDRMIX reset, though.
-+ */
- #define GPC_PGC_CPU_MAPPING		0x0ec
- #define GPC_PGC_CPU_MAPPING_ALL		0x0000ffff
- #define GPC_PU_PGC_SW_PUP_REQ		0x0f8
-+#define GPC_PU_PGC_SW_PDN_REQ		0x104
-+#define GPC_PU_PWRHSK			0x1fc
- #define GPC_DDR1_SW_Pxx_REQ		BIT(5)
-+#define GPC_DDRMIX_ADB400_SYNC		BIT(2)
-+#define GPC_DDRMIX_ADB400_ACK		BIT(20)
-+/* DDR1 is a PU type PGC and occupies 0xd40 - 0xd7f */
-+#define GPC_PGC_DDR1_CTRL		0xd40
- #endif
-+#define GPC_PGC_CTRL_PCR		BIT(0)
-+
-+static bool ddrmix_initialized;
+-	if (dw_i3c_status_poll_timeout(master) > POLL_SUCCESS)
++	if (dw_i3c_status_poll_timeout(master) < POLL_SUCCESS)
+ 		dw_i3c_master_dequeue_xfer(master, xfer);
+ 	else
+ 		dw_i3c_master_irq_handler(master);
+@@ -584,7 +584,7 @@ static int dw_i3c_ccc_get(struct dw_i3c_master *master, struct i3c_ccc_cmd *ccc)
  
- static unsigned int g_cdd_rr_max[4];
- static unsigned int g_cdd_rw_max[4];
-@@ -323,6 +343,146 @@ void update_umctl2_rank_space_setting(unsigned int pstat_num)
- 	}
- }
+ 	dw_i3c_master_enqueue_xfer(master, xfer);
  
-+/*
-+ * Stop all DRAM traffic and the periodic controller activity, so that the
-+ * DDRC and the PHY are idle when the resets below are asserted.
-+ */
-+static void ddrc_quiesce(void)
-+{
-+	unsigned int tmp;
-+
-+	/* There is nothing to do if the DDRC is still held in reset */
-+	if (reg32_read(SRC_DDRC_RCR_ADDR) & SRC_DDR1_RCR_PRESET_N_MASK)
-+		return;
-+
-+	/* Block the AXI port from accepting further transactions */
-+	reg32_write(DDRC_PCTRL_0(0), 0x0);
-+
-+	/* Disable auto-refresh, self-refresh, powerdown and dfi_dram_clk_disable */
-+	reg32_write(DDRC_RFSHCTL3(0), 0x1);
-+	clrbits_le32(DDRC_PWRCTL(0), 0xb);
-+
-+	/*
-+	 * Wait for the controller to fall back to normal operating mode, in
-+	 * case it was in self-refresh or powerdown. A previous init may have
-+	 * failed half way through, so this must not wait forever.
-+	 */
-+	tmp = 1000;
-+	while (tmp-- && (reg32_read(DDRC_STAT(0)) & 0x3) != 0x1)
-+		udelay(1);
-+}
-+
-+/*
-+ * Assert the whole reset chain, including PwrOkIn, and hold it. Unlike on the
-+ * initial power up, the PHY is running here, so it needs a PwrOkIn low phase of
-+ * a defined length to clear its internal state.
-+ */
-+static void ddrmix_assert_resets(void)
-+{
-+	reg32_write(SRC_DDRC_RCR_ADDR,
-+		    SRC_DDR1_ENABLE_MASK | SRC_DDR1_RCR_ALL_RESET_MASK);
-+	mdelay(1);
-+}
-+
-+static int poll_bits_clear(ulong reg, u32 mask, unsigned int timeout_us)
-+{
-+	do {
-+		if (!(reg32_read(reg) & mask))
-+			return 0;
-+		udelay(1);
-+	} while (timeout_us--);
-+
-+	return -ETIMEDOUT;
-+}
-+
-+/*
-+ * Power cycle the DDRMIX power domain. Asserting the resets alone leaves parts
-+ * of the PHY state intact, only removing the power actually returns it to the
-+ * power-on defaults.
-+ *
-+ * The order of the steps below follows dram_enter_retention() in TF-A
-+ * (plat/imx/imx8m/ddr/dram_retention.c), which powers the DDRMIX down for DRAM
-+ * retention suspend.
-+ */
-+static void ddrmix_reset(void)
-+{
-+	/*
-+	 * pwrdnreqn_async adbm/adbs of ddr: request the ADB400 bridge to drain,
-+	 * wait for it to acknowledge and release the request again, which is
-+	 * also the reset value of GPC_PU_PWRHSK.
-+	 */
-+	clrbits_le32(GPC_BASE_ADDR + GPC_PU_PWRHSK, GPC_DDRMIX_ADB400_SYNC);
-+	if (poll_bits_clear(GPC_BASE_ADDR + GPC_PU_PWRHSK,
-+			    GPC_DDRMIX_ADB400_ACK, 10000))
-+		printf("DDR: timeout on the DDRMIX ADB400 handshake\n");
-+	setbits_le32(GPC_BASE_ADDR + GPC_PU_PWRHSK, GPC_DDRMIX_ADB400_SYNC);
-+
-+	/* Remove PowerOk and hold the DDRMIX in reset */
-+	ddrmix_assert_resets();
-+
-+	/* Stop the DDRMIX clock while the domain is powered down */
-+	clock_enable(CCGR_DDR1, false);
-+
-+	/*
-+	 * The DDR1 domain must be mapped to the A53 domain, otherwise the
-+	 * requests below are ignored. Map all domains, just like the normal
-+	 * power up procedure further down does.
-+	 */
-+	reg32_write(GPC_BASE_ADDR + GPC_PGC_CPU_MAPPING, GPC_PGC_CPU_MAPPING_ALL);
-+
-+	/*
-+	 * Enable the PHY isolation. Without PCR set, the requests below only run
-+	 * the isolation handshake and leave the domain powered.
-+	 */
-+	setbits_le32(GPC_BASE_ADDR + GPC_PGC_DDR1_CTRL, GPC_PGC_CTRL_PCR);
-+
-+	setbits_le32(GPC_BASE_ADDR + GPC_PU_PGC_SW_PDN_REQ, GPC_DDR1_SW_Pxx_REQ);
-+	if (poll_bits_clear(GPC_BASE_ADDR + GPC_PU_PGC_SW_PDN_REQ,
-+			    GPC_DDR1_SW_Pxx_REQ, 10000))
-+		printf("DDR: timeout powering down the DDRMIX\n");
-+
-+	udelay(100);
-+
-+	setbits_le32(GPC_BASE_ADDR + GPC_PU_PGC_SW_PUP_REQ, GPC_DDR1_SW_Pxx_REQ);
-+	if (poll_bits_clear(GPC_BASE_ADDR + GPC_PU_PGC_SW_PUP_REQ,
-+			    GPC_DDR1_SW_Pxx_REQ, 10000))
-+		printf("DDR: timeout powering up the DDRMIX\n");
-+
-+	/* Leave the power gating cell as we found it */
-+	clrbits_le32(GPC_BASE_ADDR + GPC_PGC_DDR1_CTRL, GPC_PGC_CTRL_PCR);
-+
-+	clock_enable(CCGR_DDR1, true);
-+}
-+
-+/*
-+ * The power up procedure in ddr_init() assumes a DDRMIX that is still in its
-+ * power-on state. That is not the case if ddr_init() has already been run, for
-+ * example by a board that probes several DDR configurations: the DDRC is in
-+ * normal operating mode and the PHY holds the results of the last training run
-+ * in registers that are not covered by ddrphy_cfg[]. Starting a new training
-+ * run from there either fails outright or, worse, reports a successful training
-+ * while leaving the DRAM completely non-functional.
-+ *
-+ * Return the DDRMIX to a defined state, so that the regular power up procedure
-+ * can be applied again.
-+ */
-+static void ddrmix_cold_reset(void)
-+{
-+	debug("DDRINFO: cold reset the DDRMIX\n");
-+
-+	ddrc_quiesce();
-+
-+	/*
-+	 * Park DfiClk on the bypass clock. The PHY must not see the DRAM PLL
-+	 * being reprogrammed for the next run while it is still out of reset,
-+	 * and the DDRC APB clock has to keep running to be able to release the
-+	 * resets again.
-+	 */
-+	dram_enable_bypass(MHZ(100));
-+
-+	ddrmix_reset();
-+}
-+
- int ddr_init(struct dram_timing_info *dram_timing)
- {
- 	unsigned int tmp, initial_drate, target_freq;
-@@ -330,6 +490,18 @@ int ddr_init(struct dram_timing_info *dram_timing)
+-	if (dw_i3c_status_poll_timeout(master) > POLL_SUCCESS)
++	if (dw_i3c_status_poll_timeout(master) < POLL_SUCCESS)
+ 		dw_i3c_master_dequeue_xfer(master, xfer);
+ 	else
+ 		dw_i3c_master_irq_handler(master);
+@@ -661,7 +661,7 @@ static int dw_i3c_master_daa(struct i3c_master_controller *m)
  
- 	debug("DDRINFO: start DRAM init\n");
+ 	dw_i3c_master_enqueue_xfer(master, xfer);
  
-+	/*
-+	 * Return the DDRMIX to a defined state if it has been initialized
-+	 * before. This is also needed if the previous init failed half way
-+	 * through, so the flag is set unconditionally below.
-+	 *
-+	 * This is not implemented for i.MX8MQ, which has a second DDR domain
-+	 * that would need its own handling.
+-	if (dw_i3c_status_poll_timeout(master) > POLL_SUCCESS)
++	if (dw_i3c_status_poll_timeout(master) < POLL_SUCCESS)
+ 		dw_i3c_master_dequeue_xfer(master, xfer);
+ 	else
+ 		dw_i3c_master_irq_handler(master);
+@@ -669,6 +669,17 @@ static int dw_i3c_master_daa(struct i3c_master_controller *m)
+ 	newdevs = GENMASK(master->maxdevs - cmd->rx_len - 1, 0);
+ 	newdevs &= ~olddevs;
+ 
++	/* Sometimes, when the Response Queue is being processed,
++	 * the interrupt status register may get updated with a transfer error
++	 * (INTR_TRANSFER_ERR_STAT) and this error stays set. Because of
++	 * this, when the system keeps checking for the next interrupt, it
++	 * detects that an interrupt is already present—even before the
++	 * intended, actual interrupt occurs. So, clearing the Transfer
++	 * error here.
 +	 */
-+	if (!IS_ENABLED(CONFIG_IMX8MQ) && ddrmix_initialized)
-+		ddrmix_cold_reset();
-+	ddrmix_initialized = true;
++	if (readl(master->regs + INTR_STATUS) & INTR_TRANSFER_ERR_STAT)
++		writel(INTR_TRANSFER_ERR_STAT, master->regs + INTR_STATUS);
 +
- 	/* Step1: Follow the power up procedure */
- 	if (is_imx8mq()) {
- 		reg32_write(SRC_DDRC_RCR_ADDR + 0x04, 0x8F00000F);
-
+ 	for (pos = 0; pos < master->maxdevs; pos++) {
+ 		if (newdevs & BIT(pos)) {
+ 			if (i3c_master_add_i3c_dev_locked(m, master->addrs[pos]))
+@@ -743,7 +754,7 @@ static int dw_i3c_master_priv_xfers(struct i3c_dev_desc *dev,
+ 
+ 	dw_i3c_master_enqueue_xfer(master, xfer);
+ 
+-	if (dw_i3c_status_poll_timeout(master) > POLL_SUCCESS)
++	if (dw_i3c_status_poll_timeout(master) < POLL_SUCCESS)
+ 		dw_i3c_master_dequeue_xfer(master, xfer);
+ 	else
+ 		dw_i3c_master_irq_handler(master);
+@@ -888,7 +899,7 @@ static int dw_i3c_master_i2c_xfers(struct i2c_dev_desc *dev,
+ 
+ 	dw_i3c_master_enqueue_xfer(master, xfer);
+ 
+-	if (dw_i3c_status_poll_timeout(master) > POLL_SUCCESS)
++	if (dw_i3c_status_poll_timeout(master) < POLL_SUCCESS)
+ 		dw_i3c_master_dequeue_xfer(master, xfer);
+ 	else
+ 		dw_i3c_master_irq_handler(master);
 -- 
-2.55.0
+2.34.1
 
