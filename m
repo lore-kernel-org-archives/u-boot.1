@@ -1,181 +1,150 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D298ECCF2C8
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 21:01:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67C1FCCF2C4
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 21:04:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 913CB8165D;
-	Fri, 16 Oct 2026 21:01:47 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4UwcI1qbSUE4; Fri, 16 Oct 2026 21:01:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7CF57814EA
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792184506;
-	b=Jgjtoy+Eta7eprDuVci0S6bdiwN78wXnb/NenKCOXk3G6ZwDGRFp9wF37b1+grGxJ/el
-	 0HtyPinwayI7VHs9UewTXRKhm+wWOe72ws4ZVHVoLIWVfrU3w6BwDqo61nL9bIFGS0AK6
-	 x/C67dtjQW4nq2pi1ilHMlRoyr7xG+6sGqbFoxRhX5m3Uycmwbno3KxYEReG4tjSckmrL
-	 BBta4oY38+sWHTrkF9I/8l+mkizlhl7u86CY1zbz8WjzmLFlXPji9GUtbDv89/52N1Vl9
-	 p5/lrJJlc8a7NNgGEV2WW0t5dNWwD7lGwuzjpaXF9hD5OkYI/t5gSJc7HjxlBVtWtVQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792184506;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=A2KfXWJ5D3uTnpe8N1tzUpXUIJWwLjU856Hc3kgnZBk=;
-	b=HGIrkLo9qAt+fplFfTK1Zf54tkeMqgEuq0S+0WKTvgc9Ds8prvMtigA9ghn4Z84pyJUz
-	 2u9BDJVmWEPFgsN9bkG+OWSp5NJZvlQtcRNeMtj34/BZzTWbLlVa1oZvUO8AvVnrE4qtv
-	 ftfPZ3cdKbcCYqFbmcZU+bgcKYoHIRNv5levRXOaJWTFuN1pTeBJ7n65q526IJlydA1JL
-	 xWNy+WQ2TnWEpT1r2QckwGlzTrFqylRPaQ7P16pI4aljzLWupM9gBLXDZ3IAJ/mUfCn/f
-	 LQw5cJgLOhZabbnEGX+uv9H3fLy/aGZidSfOgtogVSunH7Y1B/yFYxMIhq+MixJrDIg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792184506;
-	bh=A2KfXWJ5D3uTnpe8N1tzUpXUIJWwLjU856Hc3kgnZBk=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=zIszSbyYDYBrc4X34Edj4PP0umHGh8id2ZUQVnMDvUvkeDlmYsZrPFfFGWJHOZ4K8
-	 ntjQlEhYPuuZp/rtyiE1HWDeI4K53JH6N0TECTylnqlk4jOQVnYzBubgGsd7FP9faO
-	 JkNcTt1I/r6JKXG7DRFaE2uqVNVT0X74O7HsCNtizDM1Q/GHJUtcTI9aGkBDRUz5Ya
-	 LIyigYzTsL8WrEtEJ+0EN8k89wpIw/tR1as6dfW3jwrGgF4pUlXg6jR+UELTapJ5k/
-	 QjZ5fVQW5Z2X2nKwL/cs6h7oArVvBps0dEv1OKXZIYbYzNMrX2cLUMtXmL5nFqyTA9
-	 nM8JjdFoDuhFA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7CF57814EA;
-	Fri, 16 Oct 2026 21:01:46 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 7008C7AD
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 19:53:01 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 5618840C18
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 19:53:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 33B9A40812;
+	Fri, 16 Oct 2026 21:04:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EG-18kRGLGag for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 19:53:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2FBD240B86
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::a2b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792180380;
- b=OkMRAwy+WIPe1uwVI5PkqUW5nLSQVe74H4ragoAn5/lXzn2OQ/M151s8RTSgrI2rBktN
- T69wVxf4wHoBnp3NLKO4NJ3XvbyiM0RJFzDLHmBsL3O0lg/gbupT189jseTK3V5HNLBS+
- KzSZGidZQEr4cmebKxuTtZnPsM++xMXpXjj9BrHXIMITGzpJ5u99KVw7KTJ9PY76tmiIM
- ZaZBfvN4E2sLl4LN7ForS++GIZy9b9bCGkcfw8hL+uc25NyAA6U4csmYWti6+3ZRY458i
- xt0pp8mTRZsvdi7G95HKOAEFQq0lyBTeS97sdj7vc7O1s3Ue4r9NWUTWiASBbSQd8JA==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792180380;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
- References:In-Reply-To:To:Cc:X-Mailer;
- bh=A2KfXWJ5D3uTnpe8N1tzUpXUIJWwLjU856Hc3kgnZBk=;
- b=jIfVhYC2eqyIFJL9MLD/mchJ+0WgXEKSEfP9ExCtznb1bTEoNWABEeiko+0n6JiSXX6o
- RmOTo6t2Sh84umTzNeXZ+IydbGEtEB7royvG3SZSmlksgzeshGRmuqUruN1kqG2FBGswy
- A6vve2WG1VyP+Ta5MMRmeF1PPTunzJ91JnIPpQhmkS5aAXavgoXBhBekeds7O1ExTR219
- 1Q23OGM8AwC9rIVwTjq7RGIH5iyZqp4uHWAr0bUCDC+XnYo09Es5/76nJdslK81riXTpR
- XCWciUEu2ytaq/OFJOPnAlVix9uchR+DXoyCEuHXpz10fWaCg7Lc1zPqcsblqF6aMHg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=Rxf08M0N; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::a2b"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::a2b; helo=mail-vk1-xa2b.google.com;
- envelope-from=jpaulo.silvagoncalves@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=Rxf08M0N
-Received: from mail-vk1-xa2b.google.com (mail-vk1-xa2b.google.com
- [IPv6:2607:f8b0:4864:20::a2b])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2FBD240B86
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 19:52:59 +0000 (UTC)
-Received: by mail-vk1-xa2b.google.com with SMTP id
- 71dfb90a1353d-5ea969fafeeso129939e0c.0
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 12:52:59 -0700 (PDT)
+ id LeNEIL-pumXa; Fri, 16 Oct 2026 21:04:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 47BF640705
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792184641;
+	b=F3e4ATTvtwg19rIHI3f+2kqreMRXUGwGR0zllJBw04bVa6kJn636e5H8Ik8UnZv+rpLc
+	 nqhw5Qagg0c6PNx94laSW/WtLTAdVt5EVyUA74o9KJQFcGBT232oGGg2gL8uDTCh/lcGi
+	 hx2Kr1tBePy8sUdAbJzMxVbCxGhB/umVslT4aE5rLg/9IgH+VuZyQBEeMVOYhZH7otpH1
+	 k795zNReTJFejst7a21yk1cM13PatZ167p5FYqZ0nwnSB1CBj1ZVgsgcuvtWbu99xUoJr
+	 kCEPPU4VREGbPZKEzt9knkyDyJ1M6Sp61/rUljoRXDaCBBPBii6r8aORDUSqQk6dv8Q==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1792184641;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
+	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
+	 X-Report-Abuse:X-Report-Abuse-To:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=USHLqgb4N1L/Umg3jkRur2VgaqTyzLLGxHRoYRfQasI=;
+	b=FPmM01OFKXZ1YD9U3OWc4b5ACGr/An7Aak+KyNX76s8w8Y5yCZ416j5F04/JRreCW5x1
+	 sfKJV+doC1ifXv2cwC545kwWesSuaH3BuuHdvrjXy6CobCrmKwrPJtdt0cJPVFaDf2KlA
+	 J8Fy/OKgV8DRkicCx1BM2EpbKcdsAGDxObt4MMlDPos1r+sq5ydyo6eWHg0iFqLYj1sz2
+	 3Ia7FvCWAD88qnjWl9xsU8zPGVAzfobkhp57B2XwaFaJEWUQmPA7D0ZC1XBKbffknI8yN
+	 7Ro8SbZaMgwmT1PRySnJ5VRIE4J8EigOADspM8uJDsKSSf7G2I/cnPXLK/SSH5MbXZA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792180379; x=1792785179;
- darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=A2KfXWJ5D3uTnpe8N1tzUpXUIJWwLjU856Hc3kgnZBk=;
- b=Rxf08M0NRRv7u3NWIcu9cBVn6YMklfsDGRNBWc7vNnxyZ+GQf9U/rwCgRMEhNzRBXo
- o9aFxcVqhGq0c/MfqTFmMWOpKy5w4janyVrSer2orm4JPdwqVAVijFmDeKyjojl9pWFL
- LGMPro42it8vuw2Wjx3MBLdGvothnzpG4h7mPRpE7zpLe6L5oMpTSDKTq/VYoFZPW4Xu
- OkorlIHuIib4mE5SejzxX8P4S6gLMhkvTCUdR6w7vcoDxjniFJtYn9M9sNRUitpF0mFP
- BOvAkntHxw6qy/N3d4rlrJPv7JjfgUzXclTZ2ad6rojR3BgZz78hHUamfv3cWQNzsIOt
- eyyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792180379; x=1792785179;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=A2KfXWJ5D3uTnpe8N1tzUpXUIJWwLjU856Hc3kgnZBk=;
- b=oLyCRRcsEtSMphXkdqs3fHIDW1vXx3h9ONes6ROmRnyZaveD0rOTgkW+9KpmaONyON
- iya1g77UN+lPZE+Ai+WSfQDddrvFlPPS0otLMc7OEaFyUb16Drx91cB4aaAhGlCxXVuU
- yrwY6NoNq8ZjzVbblaO3C6vlhZ3VU5WXXQGgsixQbHEUxdJPBDpH8k+CjqkiFJHwD+Qp
- cH7e+msTXbKdFEeM1Y3IGclanWPcbtPj/bNoFtONNIaCL8Q5xjt7XTCrLj9RSEA2BkvB
- xggkMVQxkGu9MAS4HTQMbd9751dyJFlLmzOqooPTdeVrVCK5CcCWXtRmo+YUdDkSQ5QD
- Jfog==
-X-Gm-Message-State: AFq9FYJmmWDT8r1SVCK9yKtFkEs0EuzJCzJ9tPSEISHpQbo1c+m2iS7O
- qa+N9wyKxe3wmy/vd3HD6JLB8VuGZPI1NCyc4hmT1Ix+yBnR7mjnuWLnMgys0Ei66Ks=
-X-Gm-Gg: AYBFou1ifa5iG/Cdz0Uyb8oiO338l2OAllfeAQ1R/Xh2KVdXM1TSeUENupFhiLFyYU/
- KAglBZcXkN/WBG0BGoC/isiEIelhpFKDKmyk2bbfKZ8N1Rq+3/WMZop6qHxl+rrpdMLqTH5bk9N
- Iz+2bOngQPe/M4zMmz9jHaQXD2YdKIG31aGcFYyzJIRXdU/2ewoPLi2VDYmUavkALkuEJV+yLyz
- EyLhTp6DbnJz7L1FLuwz098aXB4cW4XeLfW8p9I+VnKoFQzQrmAxQBcSO0xM2iLJSkeZiwqcEQi
- k0Jt7fxZXbkdVNFbr+08zuZ7h+vtKnYyYSHgc1BFdzCBHQfQIuEhsR4ABT1AFHzBQuNW8j7+ase
- jwRRAgNqKtF9MYSve57QnIng+JeJ5ddWDBwmdzIIf506E48GTc+OhE6IQH4KrX3XsRox6moYi/8
- PIYUGTumz5CRzSBgH39h52LjxU4MO5S0vVsUdK9vTn0TZJId3vAZQkQf+YQfUUt9unHe7SQloet
- EbRRvUp9lOdBfRW
-X-Received: by 2002:a05:6123:2eb:b0:5dc:d0cb:7d6b with SMTP id
- 71dfb90a1353d-5eaaa65aa82mr524960e0c.14.1792180378808; 
- Fri, 16 Oct 2026 12:52:58 -0700 (PDT)
-Received: from [127.0.1.1] ([2804:14c:490:135b:b225:aaff:fe93:9186])
- by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-5ea9b2fef79sm2340305e0c.1.2026.10.16.12.52.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Oct 2026 12:52:58 -0700 (PDT)
-From: =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
- <jpaulo.silvagoncalves@gmail.com>
-Date: Fri, 16 Oct 2026 16:52:32 -0300
-Subject: [PATCH 2/4] riscv64: dts: sophgo: add initial Milk-V Duo S board
- support
+	d=lists.u-boot-project.org; s=default; t=1792184641;
+	bh=USHLqgb4N1L/Umg3jkRur2VgaqTyzLLGxHRoYRfQasI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=vmlVbX4k/BTpJw1cp1WBOugvwg9H0eorSeEe0/WpVEqZ/FHDGHFFejYRY0IqTenUC
+	 NQVgu4rDyf6HA6ZPdZuxStrdmBk6+K5SuoDbxaBsBVZFDCiadg0dEHQVxJdYkMwvrM
+	 XzEWQMGk3MGPJnq7Seu8MeMW1IJxPKHI82dXrS4OicmG7OyQc3WoKnj7Zmv0LRD9gV
+	 fXswvvOvSHJqUwER4o7oedFIP1MdEuPmYOzsMp1KRQuHW7+k1Odt5vxwXmyeOL2WXp
+	 6TMUKh4REORSb3ROm7375OdKBDzeOb2PynzOe9FvyoCJQjsY6uNmzxSPCV4KIWT+bg
+	 EWWSuaJzVfKZg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 47BF640705;
+	Fri, 16 Oct 2026 21:04:01 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id D7BDE1DE
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 21:03:59 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id BD797810B7
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 21:03:59 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9N-UpHeotLD4 for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 21:03:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DC5BA810B3
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip=149.28.215.223
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792184638;
+ b=jFjWhpeolK7qVTX2qGkVLSwHmi/7Zipu2AXWwACohhbsBjS6VKvGW7hwCPwPTTFRoqA3
+ mGo3cnOQlmLx+y+HJMJL7zQ5013TZEtH+4JFC5IAiYxpwcEavx96YLRIhWLGJLuptyhG8
+ D6JhQPI8O5xoI5qOoHORH7gTN/pEnB3zML1bao/hoIbi8rI8gKY/n4Z+RyzSzUWvjCAcz
+ Y3BKWj3wEorxVVY6WcI/O5UVDwSE4uuI00CGmuLqSuz5dEaD3MtPN5huXVr2c8RFDI5v6
+ ZqTsjlHD90Eq8FETdA/7OfOZx9T+4Dn22EXBpbv13ta8hLX/ohfD5X4htuCNIuWGGcA==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1792184638;
+ h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
+ X-Forward-Email-Sender:X-Forward-Email-Version:
+ X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
+ X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
+ Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding;
+ bh=USHLqgb4N1L/Umg3jkRur2VgaqTyzLLGxHRoYRfQasI=;
+ b=kwQZqRP63rRCn1zqWKvo71O6lQhlmnlBQkOoSAPTz6fZcxQqxGpIpqkTqnDjtEZgiI6X
+ BXWZ6bJz1+SSh1ioiGMgAj2JrP3Cz2A/ztGPmCLaXTMQDAXgYWUtD9yCHYhhAV+Mt2cTt
+ gcpE5HSBGk606yfApsL6oe39U1SqHuMUb/xD+fSKMfWKGxJVO7dGHg5/6Ji4skW25Kp0m
+ 3B8FqnLMHzHE92OG2PH2CugzGjOQ8r6/w3nMFX8zDO4ZUKZLJxgkQ6syEnKA4Fl/ickIS
+ NLeqGGUePNZWU8MADJidu6ffFTVYm/gHMZmOpfZ8un39nu8m30WcNr9fVemXLVlBK9A==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=pass header.from=kwiboo.se;
+ dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=zKpxcBmA; 
+ arc=none smtp.remote-ip=149.28.215.223
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=149.28.215.223;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=a807=ih=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=zKpxcBmA
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id DC5BA810B3
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 21:03:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1792184636;
+ bh=USHLqgb4N1L/Umg3jkRur2VgaqTyzLLGxHRoYRfQasI=;
+ b=zKpxcBmAZyBi6OG0HIaXEnPuOszv6ponNxj9Q9dGBZrbGuTNTyOMo9hAVaWZZ1HspfLrhSafm
+ Ndk+RBNORQouXlDnfcaaAvdxC13riwxva7hVrobT3FUrXQ1aSKTuR9UA4tPr8LhDxaqNLPy+xLR
+ YmGnhURh3dQZdZiqtMegCvCLMq2Z/A1uCTY3G5W+DXaFyi7I8lJKw3EwtZnzg2Oz7uY6Vs/jjqx
+ uPlFKs3rac92DM/2FSDmowMTXpVenBoz8I2F5SL2vWPRc0wqjaZWLGDbmUqBiEDlemThdgpSq+O
+ h642LmZW03aJSCOQfVq9UKgbAtcJLPhwyrs2gCHXFyvg==
+X-Forward-Email-ID: 6ad29132d6a9c2496e41244a
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.18.6
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <1f744efc-0c74-4669-b02b-7619eed61402@kwiboo.se>
+Date: Fri, 16 Oct 2026 23:03:43 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] rng: rockchip_rng: Enable clocks when reading data
+To: Quentin Schulz <u-boot@0leil.net>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
+References: <20261004211349.62883-1-jonas@kwiboo.se>
+ <20261004211349.62883-3-jonas@kwiboo.se>
+ <71957510-7b09-4d52-a45a-76cba3d8675e@0leil.net>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <71957510-7b09-4d52-a45a-76cba3d8675e@0leil.net>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261016-upstream-v1-milk-duo-s-v1-2-e4bf386eea2d@gmail.com>
-References: <20261016-upstream-v1-milk-duo-s-v1-0-e4bf386eea2d@gmail.com>
-In-Reply-To: <20261016-upstream-v1-milk-duo-s-v1-0-e4bf386eea2d@gmail.com>
-To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>
-Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
- Gui-Dong Han <hanguidong02@gmail.com>, Joshua Milas <josh.milas@gmail.com>, 
- Chen Wang <chen.wang@linux.dev>, Inochi Amaoto <inochiama@gmail.com>, 
- Lukasz Majewski <lukma@nabladev.com>, Peng Fan <peng.fan@nxp.com>, 
- =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <jpaulo.silvagoncalves@gmail.com>, 
- Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>, 
- Hiago De Franco <hfranco@baylibre.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, Michal Simek <michal.simek@amd.com>, 
- Yixun Lan <dlan@kernel.org>, Andrei Lalaev <andrey.lalaev@gmail.com>, 
- E Shattow <e@freeshell.de>
-X-Mailer: b4 0.16.0
-X-Mailman-Approved-At: Fri, 16 Oct 2026 21:01:39 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -189,277 +158,106 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Joshua Milas <josh.milas@gmail.com>
+Hi Quentin,
 
-This adds initial riscv support for the Milk-V Duo S board
-[1] making it possible to boot Linux to the command line.
+On 10/16/2026 1:11 PM, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 10/4/26 11:13 PM, Jonas Karlman wrote:
+>> The vendor TF-A blobs for RK3562 leave the TRNG and RK RNG clocks gated
+>> when returning to U-Boot proper.
+>>
+>> Try to enable clocks while reading or otherwise accessing TRNG/RKRNG
+>> regs to ensure random data can successfully be read on affected SoCs.
+>>
+>> This is not expected to have any impact on SoCs using a clock driver
+>> with unimplemented enable/disable ops.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+> [...]
+>> @@ -306,6 +308,10 @@ static int rockchip_rng_read(struct udevice *dev, void *data, size_t len)
+>>   	if (!pdata->soc_data || !pdata->soc_data->rk_rng_read)
+>>   		return -EINVAL;
+>>   
+>> +	ret = clk_enable_bulk(&pdata->clks);
+>> +	if (ret && ret != -ENOENT)
+> 
+> Because I was confused that clk_enable_bulk() could return -ENOENT, 
+> maybe add a comment stating this is to catch clock drivers that 
+> implement a .enable() callback and return -ENOENT for unsupported 
+> clocks? RK3399 and PX30 seem to be the only one doing that on Rockchip. 
+> Same comment for rockchip_rng_probe().
 
-Link: https://milkv.io/duo-s [1]
+Correct, this is because existing .enable() ops may return -ENOENT for
+unsupported clocks, for pending SoC support in my rk3562 branch the
+clock drivers instead may return -ENOSYS for unsupported clocks.
 
-Signed-off-by: Joshua Milas <josh.milas@gmail.com>
-Link: https://milkv.io/duo-s [1]
-Link: https://patch.msgid.link/20260615120324.1527881-4-josh.milas@gmail.com
-Signed-off-by: Inochi Amaoto <inochiama@gmail.com> # Trim empty line
-Signed-off-by: Chen Wang <chen.wang@linux.dev>
+I could possible add a patch that changes existing clock drivers to
+instead return -ENOSYS, then this check would be unnecessary. I will
+otherwise add a small comment here for a v2.
 
-[ upstream commit: 66153532fb18474c83f9bcbb27b039c7788e664f ]
+> I'm also not entirely sure this is proper, shouldn't we rather implement 
+> support for the clocks instead of just saying "it's fine, don't worry"? 
+> I think only RK3399 would be impacted (as only RK3399 and PX30 clock 
+> drivers implement an .enable, and PX30 DTS doesn't have clocks 
+> specified), with missing support for HCLK_M_CRYPTO[01], 
+> HCLK_S_CRYPTO[01], and SCLK_CRYPTO[01].
 
-(cherry picked from commit 2b4cd02ed6873160a2c8be4cdaa0d63e92b52830)
----
- .../src/riscv/sophgo/sg2000-milkv-duo-s.dts        | 244 +++++++++++++++++++++
- 1 file changed, 244 insertions(+)
+We typically do not need to have enable/disable support in Rockchip
+clock drivers, only for clocks that is disabled out of system reset, or
+as in the mentioned case, because TF-A on RK3562 disables these clocks
+before returning to U-Boot proper. Also we first should/need to have
+proper clk enable_count handling before we try to add new enable/disable
+ops for Rockchip clock drivers or we can very easily disable clocks that
+are needed by multiple devices.
 
-diff --git a/dts/upstream/src/riscv/sophgo/sg2000-milkv-duo-s.dts b/dts/upstream/src/riscv/sophgo/sg2000-milkv-duo-s.dts
-new file mode 100644
-index 000000000000..78a257839f6f
---- /dev/null
-+++ b/dts/upstream/src/riscv/sophgo/sg2000-milkv-duo-s.dts
-@@ -0,0 +1,244 @@
-+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/pinctrl/pinctrl-sg2000.h>
-+#include "sg2000.dtsi"
-+
-+/ {
-+	model = "Milk-V Duo S";
-+	compatible = "milkv,duo-s", "sophgo,sg2000";
-+
-+	aliases {
-+		i2c4 = &i2c4;
-+		mmc0 = &sdhci0;
-+		mmc1 = &emmc;
-+		mmc2 = &sdhci1;
-+		serial0 = &uart0;
-+		serial4 = &uart4;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	wifi_pwrseq: wifi-pwrseq {
-+		compatible = "mmc-pwrseq-simple";
-+		reset-gpios = <&porta 15 GPIO_ACTIVE_LOW>;
-+		power-off-delay-us = <50000>;
-+		post-power-on-delay-ms = <200>;
-+	};
-+};
-+
-+&osc {
-+	clock-frequency = <25000000>;
-+};
-+
-+&pinctrl {
-+	emmc_cfg: emmc-cfg {
-+		emmc-rstn-pins {
-+			pinmux = <PINMUX(PIN_EMMC_RSTN, 0)>;
-+			bias-pull-up;
-+			drive-strength-microamp = <10800>;
-+			power-source = <1800>;
-+		};
-+
-+		emmc-clk-pins {
-+			pinmux = <PINMUX(PIN_EMMC_CLK, 0)>;
-+			bias-pull-up;
-+			drive-strength-microamp = <10800>;
-+			power-source = <1800>;
-+		};
-+
-+		emmc-cmd-pins {
-+			pinmux = <PINMUX(PIN_EMMC_CMD, 0)>;
-+			bias-pull-up;
-+			drive-strength-microamp = <10800>;
-+			power-source = <1800>;
-+		};
-+
-+		emmc-data-pins {
-+			pinmux = <PINMUX(PIN_EMMC_DAT0, 0)>,
-+				 <PINMUX(PIN_EMMC_DAT1, 0)>,
-+				 <PINMUX(PIN_EMMC_DAT2, 0)>,
-+				 <PINMUX(PIN_EMMC_DAT3, 0)>;
-+			bias-pull-up;
-+			drive-strength-microamp = <10800>;
-+			power-source = <1800>;
-+		};
-+	};
-+
-+	i2c4_cfg: i2c4-cfg {
-+		i2c4-pins {
-+			pinmux = <PINMUX(PIN_VIVO_D1, 7)>,
-+				 <PINMUX(PIN_VIVO_D0, 7)>;
-+			bias-pull-up;
-+			drive-strength-microamp = <4000>;
-+			power-source = <1800>;
-+		};
-+	};
-+
-+	sdhci0_cfg: sdhci0-cfg {
-+		sdhci0-cd-pins {
-+			pinmux = <PINMUX(PIN_SD0_CD, 0)>;
-+			bias-pull-up;
-+			drive-strength-microamp = <10800>;
-+			power-source = <3300>;
-+		};
-+
-+		sdhci0-clk-pins {
-+			pinmux = <PINMUX(PIN_SD0_CLK, 0)>;
-+			bias-pull-up;
-+			drive-strength-microamp = <16100>;
-+			power-source = <3300>;
-+		};
-+
-+		sdhci0-cmd-pins {
-+			pinmux = <PINMUX(PIN_SD0_CMD, 0)>;
-+			bias-pull-up;
-+			drive-strength-microamp = <10800>;
-+			power-source = <3300>;
-+		};
-+
-+		sdhci0-data-pins {
-+			pinmux = <PINMUX(PIN_SD0_D0, 0)>,
-+				 <PINMUX(PIN_SD0_D1, 0)>,
-+				 <PINMUX(PIN_SD0_D2, 0)>,
-+				 <PINMUX(PIN_SD0_D3, 0)>;
-+			bias-pull-up;
-+			drive-strength-microamp = <10800>;
-+			power-source = <3300>;
-+		};
-+	};
-+
-+	sdhci1_cfg: sdhci1-cfg {
-+		sdhci1-clk-pins {
-+			pinmux = <PINMUX(PIN_MIPI_TXM4, 1)>;
-+			bias-pull-up;
-+			drive-strength-microamp = <10800>;
-+			power-source = <1800>;
-+		};
-+
-+		sdhci1-cmd-pins {
-+			pinmux = <PINMUX(PIN_MIPI_TXP4, 1)>;
-+			bias-pull-up;
-+			drive-strength-microamp = <10800>;
-+			power-source = <1800>;
-+		};
-+
-+		sdhci1-data-pins {
-+			pinmux = <PINMUX(PIN_MIPI_TXM3, 1)>,
-+				 <PINMUX(PIN_MIPI_TXP3, 1)>,
-+				 <PINMUX(PIN_MIPI_TXM2, 7)>,
-+				 <PINMUX(PIN_MIPI_TXP2, 7)>;
-+			bias-pull-up;
-+			drive-strength-microamp = <10800>;
-+			power-source = <1800>;
-+		};
-+	};
-+
-+	uart0_cfg: uart0-cfg {
-+		uart0-pins {
-+			pinmux = <PINMUX(PIN_UART0_TX, 0)>,
-+				 <PINMUX(PIN_UART0_RX, 0)>;
-+			bias-pull-up;
-+			drive-strength-microamp = <10800>;
-+			power-source = <3300>;
-+		};
-+	};
-+
-+	uart4_cfg: uart4-cfg {
-+		uart4-data-pins {
-+			pinmux = <PINMUX(PIN_UART2_TX, 5)>,
-+				 <PINMUX(PIN_UART2_RX, 5)>;
-+			drive-strength-microamp = <10800>;
-+			power-source = <3300>;
-+		};
-+
-+		uart4-control-pins {
-+			pinmux = <PINMUX(PIN_UART2_CTS, 5)>,
-+				 <PINMUX(PIN_UART2_RTS, 5)>;
-+			bias-pull-up;
-+			drive-strength-microamp = <10800>;
-+			power-source = <3300>;
-+		};
-+	};
-+};
-+
-+&dmac {
-+	status = "okay";
-+};
-+
-+&emmc {
-+	bus-width = <4>;
-+	no-1-8-v;
-+	cap-mmc-hw-reset;
-+	no-sd;
-+	no-sdio;
-+	non-removable;
-+	pinctrl-0 = <&emmc_cfg>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+};
-+
-+&gmac0 {
-+	status = "okay";
-+};
-+
-+&i2c4 {
-+	pinctrl-0 = <&i2c4_cfg>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+};
-+
-+&mdio {
-+	status = "okay";
-+};
-+
-+&saradc {
-+	status = "okay";
-+};
-+
-+&sdhci0 {
-+	bus-width = <4>;
-+	disable-wp;
-+	no-1-8-v;
-+	pinctrl-0 = <&sdhci0_cfg>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+};
-+
-+&sdhci1 {
-+	bus-width = <4>;
-+	cap-sdio-irq;
-+	cap-sd-highspeed;
-+	keep-power-in-suspend;
-+	no-mmc;
-+	no-sd;
-+	non-removable;
-+	max-frequency = <150000000>;
-+	mmc-pwrseq = <&wifi_pwrseq>;
-+	pinctrl-0 = <&sdhci1_cfg>;
-+	pinctrl-names = "default";
-+	sd-uhs-sdr50;
-+	sd-uhs-sdr104;
-+	status = "okay";
-+};
-+
-+&uart0 {
-+	pinctrl-0 = <&uart0_cfg>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+};
-+
-+&uart4 {
-+	pinctrl-0 = <&uart4_cfg>;
-+	pinctrl-names = "default";
-+	uart-has-rtscts;
-+	status = "okay";
-+};
-+
-+&usb {
-+	dr_mode = "host";
-+	status = "okay";
-+};
+> While looking at it, I also saw that there are resets in the node, maybe 
+> something we'll need to control in the future too?
 
--- 
-2.53.0
+Out of all RK SoCs I have been testing 'rng' command on, only the RK3562
+is having any kind of issue, and only because vendor TF-A blob
+explicitly disable the clocks used for crypto/rng block.
+
+A different hack/workaround would be to ungate the affected clocks in
+RK3562 clock driver probe(), but that is something I rather avoid.
+
+> 
+>> +		return ret;
+>> +
+>>   	for (i = 0; i < len / RK_HW_RNG_MAX; i++, buf += RK_HW_RNG_MAX) {
+>>   		ret = pdata->soc_data->rk_rng_read(dev, buf, RK_HW_RNG_MAX);
+>>   		if (ret)
+>> @@ -317,6 +323,7 @@ static int rockchip_rng_read(struct udevice *dev, void *data, size_t len)
+>>   						   len % RK_HW_RNG_MAX);
+>>   
+>>   exit:
+>> +	clk_disable_bulk(&pdata->clks);
+>>   	return ret;
+>>   }
+>>   
+>> @@ -336,12 +343,22 @@ static int rockchip_rng_of_to_plat(struct udevice *dev)
+>>   static int rockchip_rng_probe(struct udevice *dev)
+>>   {
+>>   	struct rk_rng_plat *pdata = dev_get_priv(dev);
+>> -	int ret = 0;
+>> +	int ret;
+>> +
+>> +	ret = clk_get_bulk(dev, &pdata->clks);
+>> +	if (ret && ret != -ENOENT && ret != -ENOSYS)
+> 
+> I think what you want is clk_bulk_get_optional() from the Linux kernel, 
+> so please implement that in U-Boot. We have it for reset, clk (not for 
+> bulk yet) and gpio, so this is the right way to go.
+
+Hum, in U-Boot we have clk_get_bulk() and Linux have clk_bulk_get() with
+different set of parameters, so adding one more non-conformant clock
+function to U-Boot is not a can of worms I am willing to open ;-)
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
 
