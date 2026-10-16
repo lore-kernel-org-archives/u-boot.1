@@ -1,152 +1,152 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79F9FCCA463
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 02:15:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19EACCC6B38
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 02:15:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B743560ADA;
-	Fri, 16 Oct 2026 02:15:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E2C1840952;
+	Fri, 16 Oct 2026 02:15:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JUFf2GWvPlGK; Fri, 16 Oct 2026 02:15:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org AF90760AC5
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792116916;
-	b=i4/2mOrwbwK5lZa8CEKgUMCiHdskYFbj9K6RGnZTPKQe03/46Ctk+TskVPppxVrYbc81
-	 PqgFUxTq+ciPA/Qrh+y1JCD+WebxehNnzCtoq95Y9g6HLO1XLiIYjbo4oF8UG+p/ylyY0
-	 WKpxxOV3Q9bYfDVrEQIRLBlwReZtmQeXYbLGL3PvgnxCATxc05kqBTW5WhX4bhF6/24nH
-	 rGJ8SlSrRFNPx2OwcVGk6dusQakYC7orjQmQu3sywPnkfek+5Y4/hpAgoo73V/JFk6ZJB
-	 50uzz31wUQIRIRayDoHCRrMbga2Ufj3CsFoFoMDH0UGeaRybrgxSovtmLKc5ma9G/kw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ujYHlZjkD99c; Fri, 16 Oct 2026 02:15:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 763FF40953
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792116918;
+	b=stOEZoN1KXXawyAbynjcrZfDRwn2wustoCueleoObAO5fTm0aLCZUJ2HjRWTCUgzNt/p
+	 eNNz+a33UyR3j24xZIt+HIUmIuoxm6rNsMFHb7RvlV8kWoXqeAwbqeLTHhBUpw1kX2NK/
+	 arlHUM+sYj6AHzQjBSIB3oIq2/en8jopUijDgiD5dKtk4EZg5T82sYtflIEjBaHo/coRg
+	 rZZgq4VeoIpLFiWFvElEs3os4nkASkVUgrTEGcdjD4CpqeWZ7EDvZ6Fx6Rpviz+xQf8Ov
+	 Z37SYwgzWJmMFotwEoRC2jS5Lzg1B5RiPoLrp6L0LsanSSqYKRkr5Gn7jXnXwwijbVg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792116916;
+	c=relaxed/relaxed; t=1792116918;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
 	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=stpn8+kdVaYQLfFCcRbsh/w2mETmrhbg6oq7mrrDufo=;
-	b=TMWHNh6xLAqH2Nn6L/xyc8hvq/oDFHPoIk6d3AQOdJ18bGhKIqmewAOMPZ6bfLu2lXPG
-	 j85uh6EGGtsoJpZcAwiiRwc2DJ1CQfmO2jKCvj+OWrRlgxOY5UvqzXGwuSR2yIymREZv3
-	 GuAmPn4aUfiP7uAs/ceiJGoWJv9phRQ6/nvwH/bGcwEMUC6jOqhJdH4i9eMI/QO40eX46
-	 lkW1C10w8pCQmuH9Aj5MxWpbJolW9I2UHoPzpCRM2BKIRU2DgVLboTWzThK7+gQDOo5Nn
-	 Pw8tDSxgLX7cGzvzV9OOa9Yb9t47cxiaV11uoJivreZf+HaKGWLpHvgxCK3i58kzN4g==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=OQ9MIfhO1MBCiXlfmlgYuxG83pylTvLAu/D0mnHuzi0=;
+	b=KQWdjo2+CmvzmH63AAMOCwspFR+4vXurKyR1SM7JLECxE2zyVLFCle3AgjpjdxwGmvpc
+	 eKR3HF74dij2u2GvFyYKXFzx0HluLpzAFDAaAUGZgt+DjjAtBQyhh2dxbiZLIAixDXskP
+	 emAusYQFrfdT4upBV9SmUNJ2mbGB2CeEAH9+9yU6Y8+ux68lpcnRnvGruVavS1JG6NjcL
+	 Gxha4ArLecak3aKKb4FwlKpg8hSUjkWqaPjTA8NAH0+nVvgxbyJBQnHxrSwHbbePg0WpY
+	 9PedKEgYWHxBcucaVyD3LXx/g74tPm6lLNpVT7LJiOVG+ythuEermr75tb1we7/iZvw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792116916;
-	bh=stpn8+kdVaYQLfFCcRbsh/w2mETmrhbg6oq7mrrDufo=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=i9NJh/qSrnjuzMGcttv6HNSelThYzSkcVVCqS18qi4U3wOOhYuHM/JVEjEZ3Ncks6
-	 P6e725g6C98DoyriAM99pAtF9DLqYIqBbFA7FoiA6MM/+8PFmCjtSE7Jd3p4eFOwwu
-	 u3anT+vi35Ltbo2J0FSSwsficQkGcDncfjvw3jmOpsry2UFQHvpZARkvsAWTC+PSuJ
-	 No3CJVeC/X2x+C4drNGmyclLq2dr9vn7YY9E9ZUifYNPE+UR/KNK2vjY+nuDrChpNu
-	 WqfGJDA2hYcddKSyFjOyaihe5ZAS3jNEtvbp8eVy58sLmvY0bnrHQpYpY8JHmPqoGe
-	 ds9B/rZ2IzeJQ==
+	d=lists.u-boot-project.org; s=default; t=1792116918;
+	bh=OQ9MIfhO1MBCiXlfmlgYuxG83pylTvLAu/D0mnHuzi0=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=iJPTc5lCRRDn7UgYkyMa9KWEFWOu1t3kAZ7uRDChQQuu7c7wnxx/RJWFoiPIvN7Wc
+	 fa+bM1VmEFTk5wi6uFMP85snceYJNhZgILhOVNZCJD7qTu0T6mNigvEXBDKH7Yux9k
+	 KGkXdFQS+zjMab3+oQ2dtqNyQBawTM2m9fPtNDkXJU7tzJ/hE4oQIqT8wBiRTJghUM
+	 pUmxm73bvOR0QEC+LSdVCRXzAoK1618IUso5/YXG1i4albOQ4h0jClBmB5TakaVcMc
+	 w7bucMxom8CXmJLkuV+oi/1d35mEPqKWFFQaeelRJ+JAq4ZYoHTuKR9NrCz8igh7P8
+	 xYD4fQtC3qaHw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AF90760AC5;
-	Fri, 16 Oct 2026 02:15:16 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 91D8779D
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 01:43:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 763FF40953;
+	Fri, 16 Oct 2026 02:15:18 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0EC97105
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 01:43:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 7834480F8C
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 01:43:57 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0111660877
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 01:43:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IVnjdP_M_keE for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 01:43:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8A3D180F84
-Authentication-Results: smtp1.osuosl.org; arc=none
- smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792115036;
- b=ezyfPhE+O73IOg2J1BmZqzoS5sSL/YYZB6CIagTmfFEMTnNpY1GvERgd4OkG+7wePd0Q
- Q4MgeDgykOPKZqRqLFMfz/B2AuY0l4Pj8uhVH3PKHjFrGA08m3ZmEy9h70iwyt0+BsSxW
- /iHTmVBMerOxDlDGVOWSVXG091+wpXQg7WdErTRkMO+e06o9LioZraVgdXoXhhWw4JuWz
- 2oXKdlQxp0GBmtEI/RzN5/7VfB0a2fqjjGVsQ39CuQHkWx7AiFpk//nupqqgu8TUHpW4l
- OhP3wchke62RkuPpux8e4XgN4IQGOMotx++PeKzVSr4aPuivjjZSVKJ3f3c2elsXrZw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rl1CpNFMzNOO for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 01:43:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5C49460744
+Authentication-Results: smtp3.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792115035;
+ b=qGZvbQnMoLY5/ooErPqAVOoOKTb7k/+MRdddWNohP82vgz4iyJgbzNLOSjFzImsDw+U1
+ 4dWnfXvGyyzvB6jaSadgGHUQ9bfnkRXUDFH/43qf/afbMHxRtk1yvOEZ5QyCiDMZcFmIu
+ hMJbG027W0vqW15aM/ywwTnWekTxIGQyHZGCnA3/+3jB8yBmfOKkeIhN2RGdoWIX6wVxz
+ fBqplD1nV+Bv/8OPzMf1cwUxR2CrgvUFHeJdfZAcyxpAwdRxSjTemdr1gZOUzwnUtwzpE
+ qF0NCxuxr964cDe/VUvAqrtFhQZQjNXGZSEhU8vnDvO5yzhPCxVAsjJ89y9zvWGuJlg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792115036;
- h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Subject:
- Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
- X-Developer-Key:X-Endpoint-Received:X-Original-From:Reply-To;
- bh=stpn8+kdVaYQLfFCcRbsh/w2mETmrhbg6oq7mrrDufo=;
- b=Pjjc18hxkoMvlk2sKmtb4iquDvrVrsiOW2+819mr1cwmle/AqaLEFhu8RlSEqgeVf1ve
- /oOmfPIKKhjYBi/OV94iCUUMbvbhLmCiC+kow/FvOjq4GDmjAz1FrIZE8k+8WD+BqUpb9
- LNHMm7pUeBwQ7kdoeD91udypT885vTaiPEx/JS1B6+Q3A3G1Mr/skC8L3lWDW1BlYxNZI
- 6Zg2pLBrzKaHXEhZkGUyA4ZCTz7S4dcav34Z5yvXk7Ki1kg9mdSgY7hhQl6OzUYlujurT
- uxTQuqs5UhDFh8RpHc0hSo7ti1uw5iRj44X6s7c/iOS1YIdjU5FrWdp9MgS5Mq8mZqw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ c=relaxed/relaxed; t=1792115035;
+ h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+ X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+ X-Original-From:Reply-To;
+ bh=OQ9MIfhO1MBCiXlfmlgYuxG83pylTvLAu/D0mnHuzi0=;
+ b=KesyCvvNzVFFrN+TmFaKrZY1B4Vfhb+hv904UisBncap550hLmJYgvKD43Ss1tw1r0sY
+ cVGE4pYDXq9bnY8ZzlsVdWadNkX72sbpcFYuNn1sZsqb+TqULHWngfhxu9AN5HFioCaaz
+ V39lN5vr9QxWhS7kRSmEuDlV6wrWx3wiyeX717Tm312VUb5ZytL9vkEz9VkfMa7F908TH
+ W8/gS4jwE6U32Nfi/ckpXWfhWeohZk/J0ln3X3EAvf+cxFCvhw5BgGJhpTl9Tbxgpnv16
+ f5ueSc0K7Q5TE5c5MeRRrmCaKGIWkNds3nRI81P4FrmZSq559SCq6zM4aPzJ+AULdlQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=ITp9mJPC; 
- arc=none smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
+ header.s=k20201202 header.b=ounIh33f; 
+ arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
+ client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
  envelope-from=devnull+takahiro.kuwano.infineon.com@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20201202 header.b=ITp9mJPC
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8A3D180F84
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 01:43:56 +0000 (UTC)
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20201202 header.b=ounIh33f
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5C49460744
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 01:43:54 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 0C91660A74;
+ by sea.source.kernel.org (Postfix) with ESMTP id 2433543FB8;
  Fri, 16 Oct 2026 01:43:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id ACC41C2BCC7;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id E9ECFC2BD04;
  Fri, 16 Oct 2026 01:43:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1792115033;
- bh=Mc9K5sN8LF0Gr1yCEXpX7+PZDSAqlIBYhE3AMNF6W98=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=ITp9mJPCWTBg5uyX9cv+aRSr/63Ykk7/vmsMhkBGZbnaC10pPmeNlZk4lHwy+SOeY
- sBC8IAHvcWKDeY4eY9qmFQ1/fD8oGdrarMMEAsqjMoDZZ8+urhtxsiJ6RxZ3I3v4Qk
- bAcK97j7xFz/Asl1zm7HH+RDB7cko5w/4iQWAm7JzEwaBDcO2gr9L90K3r9KoxsCsh
- W9bRVL9vUZvWQVbf49LXb/Daqxd2yDg4vNoehZXyBF07SVW01bfbYFzJ0GjJ6K3Oet
- XTAkxsdUeyr2K8Igzuou5RrRo8eCWZGNdzl5dSt4sz55VuyRuCYFmv/TpVzitz0Y4F
- pL+hfjc0eO0dw==
+ s=k20201202; t=1792115034;
+ bh=GMOKrAzH+tStyQ/0soUtL5dacsCD6izl5J4IH30xU4g=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=ounIh33fXf6NsBBQC9zF+ehOLMyRv8BC26flAClxWzscP9/H8wQ5sugjcHKqSzTCk
+ ejaxWWxUCEqDZhCQqtMCfZaOQUH1sSCP3BArWNj9RZqXuuDPB+jIzJOB8jxdQAeoFU
+ 5c3YipOt9DqczAK1kBLskkIyvhy6uHg2QhOtrcT1SKwxmeTVi4jR+QC9ikBU/7RE96
+ s+B2AFNKtKCy5WtjV3aW56CPi8yRv6hEoNWWGnR24dthv0Oah/HDYP49pAMi5V1528
+ 66O5y+fM0q+C79OFt95yv8IH6B4Wv6OdiPRM5QY172IpuThAQZHPuak1u4BLih6jI9
+ d4FlbSOFPsrDA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 8A635CCA462;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id D74D0CCA46B;
  Fri, 16 Oct 2026 01:43:53 +0000 (UTC)
 From: Takahiro Kuwano via B4 Relay
  <devnull+takahiro.kuwano.infineon.com@kernel.org>
-Subject: [PATCH v3 0/4] mtd: spi-nor: split SFDP, ID database, and fixups
-Date: Fri, 16 Oct 2026 10:43:41 +0900
-Message-Id: <20261016-split-sfdp-id-v3-v3-0-4a47b8fc945a@infineon.com>
+Date: Fri, 16 Oct 2026 10:43:45 +0900
+Subject: [PATCH v3 4/4] mtd: spi-nor: move fixups to manufacturer drivers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2MQQqAIBAAvyJ7bsE0PfSV6BC51kKUuCGB9Pek4
- zDMVBDKTAKjqpCpsPB1NrCdgnVfzo2QQ2Mw2vhe9x4lHXyjxJCawWIxOq/NYN3iBg0tS5kiP/9
- ymt/3Axt59hliAAAA
-X-Change-ID: 20261016-split-sfdp-id-v3-f5602435a540
+Message-Id: <20261016-split-sfdp-id-v3-v3-4-4a47b8fc945a@infineon.com>
+References: <20261016-split-sfdp-id-v3-v3-0-4a47b8fc945a@infineon.com>
+In-Reply-To: <20261016-split-sfdp-id-v3-v3-0-4a47b8fc945a@infineon.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Vignesh R <vigneshr@ti.com>, 
  Raymond Mao <raymond.mao@riscstar.com>, Vincent Jardin <vjardin@free.fr>, 
  Fabio Estevam <festevam@nabladev.com>, Eugen Hristev <ehristev@kernel.org>, 
  Takahiro Kuwano <takahiro.kuwano@infineon.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792115031; l=3207;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792115031; l=61081;
  i=takahiro.kuwano@infineon.com; s=20261016-2; h=from:subject:message-id;
- bh=Mc9K5sN8LF0Gr1yCEXpX7+PZDSAqlIBYhE3AMNF6W98=;
- b=FQplaQowf4AIwyYIs9h3il1g3atVaQcbhPkZ9h5cygSyQweHA6T9FKi3hNqM0qw3CVfr1Lhrb
- 2esorlLR9CBBSa///w/GgWtG59jAIg5bhwmzDSODvg30u0vcQ0yoG7h
+ bh=f3grwftsx0Zl5qtM8GHcdl+5IVJw+DLL3zM2L+tzfaM=;
+ b=EshOEeg/iyC0nUwDtMxudkzICB3EBQHaBmc7jTMX09gXg3DISWou0qvMWfgAjwPXCtZFPTi5v
+ UC3M63tpDf9C7DjUAucgBp9KdWRlTv1e2fT159g1XX8DiXNMZEofFZP
 X-Developer-Key: i=takahiro.kuwano@infineon.com; a=ed25519;
  pk=pp4mpJAHIqhV2MvdSGbIzKRk3ujhk+tSlGjyTursr4E=
 X-Endpoint-Received: by B4 Relay for
@@ -167,80 +167,2070 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Reply-To: takahiro.kuwano@infineon.com
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The spi-nor-core.c contains optional logics like SFDP and manufcaturer
-specific fixups. The spi-nor-ids.c has single large ID database. There
-are many #ifdef directives in those files and that negatively affects
-readability and maintainability.
+From: Takahiro Kuwano <takahiro.kuwano@infineon.com>
 
-This series, as the first step of cleanup, move SFDP logic, IDs, and
-fixups to newly source files. Reworking, renaming, and reformating
-existing code is not a scope of this series and further cleanup will be
-taken place in follow-up patches.
+Move chip specific fixups from core to manufacturer drivers.
+As manufacturer drivers are used in tiny as well, all fixups migrated
+from core need to be excluded in CONFIG_SPI_FLASH_TINY.
 
-Here is the code size impact when applying this series.
-Measured by my AMD Zynq-7000 (ARM32) environment with SFDP and all
-manufcaturers are enabled.
-
-SPI-NOR:
-            text    data     bss     dec     hex filename
-BEFORE    720685   14084       0  734769   b3631 u-boot
-AFTER     721827   14156       0  735983   b3aef u-boot
-DELTA      +1142     +72
-
-TINY:
-            text    data     bss     dec     hex filename
-BEFORE     77399    3128     248   80775   13b87 spl/u-boot-spl
-AFTER      77589    3200     248   81037   13c8d spl/u-boot-spl
-DELTA       +190     +72
-
-Changes in v3:
-- Expose manufacturers table so that sandbox can look up
-- Update sandbox to handle manufacturers table
-- Link to v2: https://lore.kernel.org/u-boot/20260924-split-sfdp-id-v2-0-aafc70e0b657@infineon.com/
-Changes in v2:
-- Rebase on top of next
-- Link to v1: https://lore.kernel.org/u-boot/20260612-split-id-table-into-vendor-files-v1-0-dfaaa82cc6f0@infineon.com/
+Some helper functions used in fixups are exposed from core and some need
+to be guarded by CONFIG_SPI_FLASH_TINY to avoid name conflict with local
+functions in tiny.
 
 Signed-off-by: Takahiro Kuwano <takahiro.kuwano@infineon.com>
 ---
-Takahiro Kuwano (4):
-      mtd: spi-nor: move SFDP logic out of the core
-      mtd: spi-nor: import manufacturer driver concept from Linux
-      mtd: spi-nor: move flash info entries to manufacturer drivers
-      mtd: spi-nor: move fixups to manufacturer drivers
+ drivers/mtd/spi/macronix.c     |  89 ++++
+ drivers/mtd/spi/micron-st.c    |  99 +++++
+ drivers/mtd/spi/sf_internal.h  |  10 +
+ drivers/mtd/spi/spansion.c     | 627 +++++++++++++++++++++++++++
+ drivers/mtd/spi/spi-nor-core.c | 929 +----------------------------------------
+ drivers/mtd/spi/winbond.c      | 104 +++++
+ 6 files changed, 938 insertions(+), 920 deletions(-)
 
- drivers/mtd/spi/Makefile        |   18 +
- drivers/mtd/spi/atmel.c         |   28 +
- drivers/mtd/spi/dosilicon.c     |   25 +
- drivers/mtd/spi/eon.c           |   23 +
- drivers/mtd/spi/fujitsu.c       |   27 +
- drivers/mtd/spi/gigadevice.c    |  140 ++
- drivers/mtd/spi/issi.c          |   84 ++
- drivers/mtd/spi/macronix.c      |  154 +++
- drivers/mtd/spi/micron-st.c     |  169 +++
- drivers/mtd/spi/puya.c          |   56 +
- drivers/mtd/spi/sandbox.c       |   33 +-
- drivers/mtd/spi/sf_internal.h   |  136 +-
- drivers/mtd/spi/sfdp.c          |  720 ++++++++++
- drivers/mtd/spi/sfdp.h          |  152 +++
- drivers/mtd/spi/siliconkaiser.c |   18 +
- drivers/mtd/spi/spansion.c      |  700 ++++++++++
- drivers/mtd/spi/spi-nor-core.c  | 2751 +++++++--------------------------------
- drivers/mtd/spi/spi-nor-ids.c   |  753 +----------
- drivers/mtd/spi/spi-nor-tiny.c  |   11 +-
- drivers/mtd/spi/sst.c           |   34 +
- drivers/mtd/spi/winbond.c       |  250 ++++
- drivers/mtd/spi/xmc.c           |   27 +
- drivers/mtd/spi/xtx.c           |   54 +
- drivers/mtd/spi/zbit.c          |   19 +
- include/linux/mtd/spi-nor.h     |    2 +
- 25 files changed, 3404 insertions(+), 2980 deletions(-)
----
-base-commit: ed869863c7e2aca50d57a05d843830dd843138c4
-change-id: 20261016-split-sfdp-id-v3-f5602435a540
+diff --git a/drivers/mtd/spi/macronix.c b/drivers/mtd/spi/macronix.c
+index 87843978cad..9ca55fc4f99 100644
+--- a/drivers/mtd/spi/macronix.c
++++ b/drivers/mtd/spi/macronix.c
+@@ -5,6 +5,7 @@
+  * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
+  */
+ 
++#include <dm/device_compat.h>
+ #include <linux/mtd/spi-nor.h>
+ #include "sf_internal.h"
+ 
+@@ -59,7 +60,95 @@ static const struct flash_info macronix_nor_parts[] = {
+ 	{ INFO("mx25uw6345g",    0xc28437, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
+ };
+ 
++#if !CONFIG_IS_ENABLED(SPI_FLASH_TINY)
++/**
++ * spi_nor_macronix_octal_dtr_enable() - Enable octal DTR on Macronix flashes.
++ * @nor:	pointer to a 'struct spi_nor'
++ *
++ * Set Macronix max dummy cycles 20 to allow the flash to run at fastest frequency.
++ *
++ * Return: 0 on success, -errno otherwise.
++ */
++static int spi_nor_macronix_octal_dtr_enable(struct spi_nor *nor)
++{
++	struct spi_mem_op op;
++	int ret;
++	u8 buf;
++
++	ret = write_enable(nor);
++	if (ret)
++		return ret;
++
++	buf = SPINOR_REG_MXIC_DC_20;
++	op = (struct spi_mem_op)
++		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_WR_CR2, 1),
++			   SPI_MEM_OP_ADDR(4, SPINOR_REG_MXIC_CR2_DC, 1),
++			   SPI_MEM_OP_NO_DUMMY,
++			   SPI_MEM_OP_DATA_OUT(1, &buf, 1));
++
++	ret = spi_mem_exec_op(nor->spi, &op);
++	if (ret)
++		return ret;
++
++	ret = spi_nor_wait_till_ready(nor);
++	if (ret)
++		return ret;
++
++	nor->read_dummy = MXIC_MAX_DC;
++	ret = write_enable(nor);
++	if (ret)
++		return ret;
++
++	buf = SPINOR_REG_MXIC_OPI_DTR_EN;
++	op = (struct spi_mem_op)
++		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_WR_CR2, 1),
++			   SPI_MEM_OP_ADDR(4, SPINOR_REG_MXIC_CR2_MODE, 1),
++			   SPI_MEM_OP_NO_DUMMY,
++			   SPI_MEM_OP_DATA_OUT(1, &buf, 1));
++
++	ret = spi_mem_exec_op(nor->spi, &op);
++	if (ret) {
++		dev_err(nor->dev, "Failed to enable octal DTR mode\n");
++		return ret;
++	}
++	nor->reg_proto = SNOR_PROTO_8_8_8_DTR;
++
++	return 0;
++}
++
++static void macronix_octal_late_init(struct spi_nor *nor,
++				     struct spi_nor_flash_parameter *params)
++{
++	nor->octal_dtr_enable = spi_nor_macronix_octal_dtr_enable;
++}
++
++static void macronix_octal_post_sfdp_fixup(struct spi_nor *nor,
++					 struct spi_nor_flash_parameter *params)
++{
++	/*
++	 * Adding SNOR_HWCAPS_PP_8_8_8_DTR in hwcaps.mask when
++	 * SPI_NOR_OCTAL_DTR_READ flag exists.
++	 */
++	if (params->hwcaps.mask & SNOR_HWCAPS_READ_8_8_8_DTR)
++		params->hwcaps.mask |= SNOR_HWCAPS_PP_8_8_8_DTR;
++}
++
++static struct spi_nor_fixups macronix_octal_fixups = {
++	.post_sfdp = macronix_octal_post_sfdp_fixup,
++	.late_init = macronix_octal_late_init,
++};
++
++static void macronix_set_fixups(struct spi_nor *nor)
++{
++	if (nor->info->flags & SPI_NOR_OCTAL_DTR_READ)
++		nor->fixups = &macronix_octal_fixups;
++}
++#endif
++
+ const struct spi_nor_manufacturer spi_nor_macronix = {
+ 	.parts = macronix_nor_parts,
+ 	.nparts = ARRAY_SIZE(macronix_nor_parts),
++#if !CONFIG_IS_ENABLED(SPI_FLASH_TINY)
++	.set_fixups = macronix_set_fixups,
++#endif
+ };
+diff --git a/drivers/mtd/spi/micron-st.c b/drivers/mtd/spi/micron-st.c
+index 2d47f1c60c0..9982e9d660a 100644
+--- a/drivers/mtd/spi/micron-st.c
++++ b/drivers/mtd/spi/micron-st.c
+@@ -5,6 +5,7 @@
+  * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
+  */
+ 
++#include <dm/device_compat.h>
+ #include <linux/mtd/spi-nor.h>
+ #include "sf_internal.h"
+ 
+@@ -59,9 +60,107 @@ static const struct flash_info st_nor_parts[] = {
+ 	{ INFO("m25px64",    0x207117,  0, 64 * 1024, 128, 0) },
+ };
+ 
++#if !CONFIG_IS_ENABLED(SPI_FLASH_TINY) && CONFIG_IS_ENABLED(SPI_FLASH_MT35XU)
++static int spi_nor_micron_octal_dtr_enable(struct spi_nor *nor)
++{
++	struct spi_mem_op op;
++	u8 buf;
++	u8 addr_width = 3;
++	int ret;
++
++	/* Set dummy cycles for Fast Read to the default of 20. */
++	ret = write_enable(nor);
++	if (ret)
++		return ret;
++
++	buf = 20;
++	op = (struct spi_mem_op)
++		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_MT_WR_ANY_REG, 1),
++			   SPI_MEM_OP_ADDR(addr_width, SPINOR_REG_MT_CFR1V, 1),
++			   SPI_MEM_OP_NO_DUMMY,
++			   SPI_MEM_OP_DATA_OUT(1, &buf, 1));
++	ret = spi_mem_exec_op(nor->spi, &op);
++	if (ret)
++		return ret;
++
++	ret = spi_nor_wait_till_ready(nor);
++	if (ret)
++		return ret;
++
++	nor->read_dummy = 20;
++
++	ret = write_enable(nor);
++	if (ret)
++		return ret;
++
++	buf = SPINOR_MT_OCT_DTR;
++	op = (struct spi_mem_op)
++		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_MT_WR_ANY_REG, 1),
++			   SPI_MEM_OP_ADDR(addr_width, SPINOR_REG_MT_CFR0V, 1),
++			   SPI_MEM_OP_NO_DUMMY,
++			   SPI_MEM_OP_DATA_OUT(1, &buf, 1));
++	ret = spi_mem_exec_op(nor->spi, &op);
++	if (ret) {
++		dev_err(nor->dev, "Failed to enable octal DTR mode\n");
++		return ret;
++	}
++
++	return 0;
++}
++
++static void mt35xu512aba_late_init(struct spi_nor *nor,
++				   struct spi_nor_flash_parameter *params)
++{
++	nor->octal_dtr_enable = spi_nor_micron_octal_dtr_enable;
++}
++
++static void mt35xu512aba_post_sfdp_fixup(struct spi_nor *nor,
++					 struct spi_nor_flash_parameter *params)
++{
++	/* Set the Fast Read settings. */
++	params->hwcaps.mask |= SNOR_HWCAPS_READ_8_8_8_DTR;
++	spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_8_8_8_DTR],
++				  0, 20, SPINOR_OP_MT_DTR_RD,
++				  SNOR_PROTO_8_8_8_DTR);
++
++	params->hwcaps.mask |= SNOR_HWCAPS_PP_8_8_8_DTR;
++
++	nor->cmd_ext_type = SPI_NOR_EXT_REPEAT;
++	params->rdsr_dummy = 8;
++	params->rdsr_addr_nbytes = 0;
++
++	/*
++	 * SCCR Map 22nd DWORD does not indicate DTR Octal Mode Enable
++	 * for MT35XU512ABA but is actually supported by device.
++	 */
++	nor->flags |= SNOR_F_IO_MODE_EN_VOLATILE;
++
++	/*
++	 * The BFPT quad enable field is set to a reserved value so the quad
++	 * enable function is ignored by spi_nor_parse_bfpt(). Make sure we
++	 * disable it.
++	 */
++	params->quad_enable = NULL;
++}
++
++static struct spi_nor_fixups mt35xu512aba_fixups = {
++	.post_sfdp = mt35xu512aba_post_sfdp_fixup,
++	.late_init = mt35xu512aba_late_init,
++};
++
++static void micron_set_fixups(struct spi_nor *nor)
++{
++	if (!strcmp(nor->info->name, "mt35xu512aba"))
++		nor->fixups = &mt35xu512aba_fixups;
++}
++#endif
++
+ const struct spi_nor_manufacturer spi_nor_micron = {
+ 	.parts = micron_nor_parts,
+ 	.nparts = ARRAY_SIZE(micron_nor_parts),
++#if !CONFIG_IS_ENABLED(SPI_FLASH_TINY) && CONFIG_IS_ENABLED(SPI_FLASH_MT35XU)
++	.set_fixups = micron_set_fixups,
++#endif
+ };
+ 
+ const struct spi_nor_manufacturer spi_nor_st = {
+diff --git a/drivers/mtd/spi/sf_internal.h b/drivers/mtd/spi/sf_internal.h
+index f96895c7439..2be206b2651 100644
+--- a/drivers/mtd/spi/sf_internal.h
++++ b/drivers/mtd/spi/sf_internal.h
+@@ -203,6 +203,12 @@ static inline int spi_nor_parse_sfdp(struct spi_nor *nor,
+ #endif
+ 
+ #if !CONFIG_IS_ENABLED(SPI_FLASH_TINY)
++int write_enable(struct spi_nor *nor);
++int set_4byte(struct spi_nor *nor, const struct flash_info *info, int enable);
++int spi_nor_sr_ready(struct spi_nor *nor);
++int spi_nor_wait_till_ready(struct spi_nor *nor);
++int spi_nor_read_write_reg(struct spi_nor *nor, struct spi_mem_op *op,
++			   void *buf);
+ void spi_nor_set_read_settings(struct spi_nor_read_command *read,
+ 			       u8 num_mode_clocks,
+ 			       u8 num_wait_states,
+@@ -212,6 +218,10 @@ int spansion_read_cr_quad_enable(struct spi_nor *nor);
+ int macronix_quad_enable(struct spi_nor *nor);
+ #endif
+ 
++void spi_nor_set_pp_settings(struct spi_nor_pp_command *pp, u8 opcode,
++			     enum spi_nor_protocol proto);
++int spi_nor_default_setup(struct spi_nor *nor, const struct flash_info *info,
++			  const struct spi_nor_flash_parameter *params);
+ int spi_nor_hwcaps_read2cmd(u32 hwcaps);
+ int spansion_no_read_cr_quad_enable(struct spi_nor *nor);
+ 
+diff --git a/drivers/mtd/spi/spansion.c b/drivers/mtd/spi/spansion.c
+index 405f5bf5e79..1dd38667062 100644
+--- a/drivers/mtd/spi/spansion.c
++++ b/drivers/mtd/spi/spansion.c
+@@ -5,6 +5,8 @@
+  * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
+  */
+ 
++#include <dm/device_compat.h>
++#include <linux/sizes.h>
+ #include <linux/mtd/spi-nor.h>
+ #include "sf_internal.h"
+ 
+@@ -67,7 +69,632 @@ static const struct flash_info spansion_nor_parts[] = {
+ #endif
+ };
+ 
++#if !CONFIG_IS_ENABLED(SPI_FLASH_TINY)
++
++/* Use ID byte 4 to distinguish S25FS256T and S25Hx-T */
++#define S25FS256T_ID4	(0x08)
++
++/* Number of dummy cycle for Read Any Register (RDAR) op. */
++#define S25FS_S_RDAR_DUMMY	8
++
++static int spansion_read_any_reg(struct spi_nor *nor, u32 addr, u8 dummy,
++				 u8 *val)
++{
++	struct spi_mem_op op =
++		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_RD_ANY_REG, 0),
++			   SPI_MEM_OP_ADDR(nor->addr_mode_nbytes, addr, 0),
++			   SPI_MEM_OP_DUMMY(dummy, 0),
++			   SPI_MEM_OP_DATA_IN(1, NULL, 0));
++	u8 buf[2];
++	int ret;
++
++	spi_nor_setup_op(nor, &op, nor->reg_proto);
++
++	/*
++	 * In Octal DTR mode, the number of address bytes is always 4 regardless
++	 * of addressing mode setting.
++	 */
++	if (nor->reg_proto == SNOR_PROTO_8_8_8_DTR)
++		op.addr.nbytes = 4;
++
++	/*
++	 * We don't want to read only one byte in DTR mode. So, read 2 and then
++	 * discard the second byte.
++	 */
++	if (spi_nor_protocol_is_dtr(nor->reg_proto))
++		op.data.nbytes = 2;
++
++	ret = spi_nor_read_write_reg(nor, &op, buf);
++	if (ret)
++		return ret;
++
++	*val = buf[0];
++
++	return 0;
++}
++
++static int spansion_write_any_reg(struct spi_nor *nor, u32 addr, u8 val)
++{
++	struct spi_mem_op op =
++		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_WR_ANY_REG, 1),
++			   SPI_MEM_OP_ADDR(nor->addr_mode_nbytes, addr, 1),
++			   SPI_MEM_OP_NO_DUMMY,
++			   SPI_MEM_OP_DATA_OUT(1, NULL, 1));
++
++	return spi_nor_read_write_reg(nor, &op, &val);
++}
++
++/**
++ * spansion_quad_enable_volatile() - enable Quad I/O mode in volatile register.
++ * @nor:	pointer to a 'struct spi_nor'
++ * @addr_base:	base address of register (can be >0 in multi-die parts)
++ * @dummy:	number of dummy cycles for register read
++ *
++ * It is recommended to update volatile registers in the field application due
++ * to a risk of the non-volatile registers corruption by power interrupt. This
++ * function sets Quad Enable bit in CFR1 volatile.
++ *
++ * Return: 0 on success, -errno otherwise.
++ */
++static int spansion_quad_enable_volatile(struct spi_nor *nor, u32 addr_base,
++					 u8 dummy)
++{
++	u32 addr = addr_base + SPINOR_REG_CYPRESS_CFR1V;
++
++	u8 cr;
++	int ret;
++
++	/* Check current Quad Enable bit value. */
++	ret = spansion_read_any_reg(nor, addr, dummy, &cr);
++	if (ret < 0) {
++		dev_dbg(nor->dev,
++			"error while reading configuration register\n");
++		return -EINVAL;
++	}
++
++	if (cr & CR_QUAD_EN_SPAN)
++		return 0;
++
++	cr |= CR_QUAD_EN_SPAN;
++
++	write_enable(nor);
++
++	ret = spansion_write_any_reg(nor, addr, cr);
++
++	if (ret < 0) {
++		dev_dbg(nor->dev,
++			"error while writing configuration register\n");
++		return -EINVAL;
++	}
++
++	/* Read back and check it. */
++	ret = spansion_read_any_reg(nor, addr, dummy, &cr);
++	if (ret || !(cr & CR_QUAD_EN_SPAN)) {
++		dev_dbg(nor->dev, "Spansion Quad bit not set\n");
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++/*
++ * Read status register 1 by using Read Any Register command to support multi
++ * die package parts.
++ */
++static int spansion_sr_ready(struct spi_nor *nor, u32 addr_base, u8 dummy)
++{
++	u32 reg_addr = addr_base + SPINOR_REG_CYPRESS_STR1V;
++	u8 sr;
++	int ret;
++
++	ret = spansion_read_any_reg(nor, reg_addr, dummy, &sr);
++	if (ret < 0)
++		return ret;
++
++	if (sr & (SR_E_ERR | SR_P_ERR)) {
++		if (sr & SR_E_ERR)
++			dev_dbg(nor->dev, "Erase Error occurred\n");
++		else
++			dev_dbg(nor->dev, "Programming Error occurred\n");
++
++		nor->write_reg(nor, SPINOR_OP_CYPRESS_CLPEF, NULL, 0);
++		return -EIO;
++	}
++
++	return !(sr & SR_WIP);
++}
++
++/**
++ * spansion_erase_non_uniform() - erase non-uniform sectors for Spansion/Cypress
++ *                                chips
++ * @nor:	pointer to a 'struct spi_nor'
++ * @addr:	address of the sector to erase
++ * @opcode_4k:	opcode for 4K sector erase
++ * @ovlsz_top:	size of overlaid portion at the top address
++ * @ovlsz_btm:	size of overlaid portion at the bottom address
++ *
++ * Erase an address range on the nor chip that can contain 4KB sectors overlaid
++ * on top and/or bottom. The appropriate erase opcode and size are chosen by
++ * address to erase and size of overlaid portion.
++ *
++ * Return: number of bytes erased on success, -errno otherwise.
++ */
++static int spansion_erase_non_uniform(struct spi_nor *nor, u32 addr,
++				      u8 opcode_4k, u32 ovlsz_top,
++				      u32 ovlsz_btm)
++{
++	struct spi_mem_op op =
++		SPI_MEM_OP(SPI_MEM_OP_CMD(nor->erase_opcode, 0),
++			   SPI_MEM_OP_ADDR(nor->addr_width, addr, 0),
++			   SPI_MEM_OP_NO_DUMMY,
++			   SPI_MEM_OP_NO_DATA);
++	struct mtd_info *mtd = &nor->mtd;
++	u32 erasesize;
++	int ret;
++
++	/* 4KB sectors */
++	if (op.addr.val < ovlsz_btm ||
++	    op.addr.val >= mtd->size - ovlsz_top) {
++		op.cmd.opcode = opcode_4k;
++		erasesize = SZ_4K;
++
++	/* Non-overlaid portion in the normal sector at the bottom */
++	} else if (op.addr.val == ovlsz_btm) {
++		op.cmd.opcode = nor->erase_opcode;
++		erasesize = mtd->erasesize - ovlsz_btm;
++
++	/* Non-overlaid portion in the normal sector at the top */
++	} else if (op.addr.val == mtd->size - mtd->erasesize) {
++		op.cmd.opcode = nor->erase_opcode;
++		erasesize = mtd->erasesize - ovlsz_top;
++
++	/* Normal sectors */
++	} else {
++		op.cmd.opcode = nor->erase_opcode;
++		erasesize = mtd->erasesize;
++	}
++
++	spi_nor_setup_op(nor, &op, nor->write_proto);
++
++	ret = spi_mem_exec_op(nor->spi, &op);
++	if (ret)
++		return ret;
++
++	return erasesize;
++}
++
++static int s25fs_s_quad_enable(struct spi_nor *nor)
++{
++	return spansion_quad_enable_volatile(nor, 0, S25FS_S_RDAR_DUMMY);
++}
++
++static int s25fs_s_erase_non_uniform(struct spi_nor *nor, loff_t addr)
++{
++	u8 opcode = nor->addr_width == 4 ? SPINOR_OP_BE_4K_4B : SPINOR_OP_BE_4K;
++
++	/* Support 8 x 4KB sectors at bottom */
++	return spansion_erase_non_uniform(nor, addr, opcode, 0, SZ_32K);
++}
++
++static int s25fs_s_setup(struct spi_nor *nor, const struct flash_info *info,
++			 const struct spi_nor_flash_parameter *params)
++{
++	int ret;
++	u8 cfr3v;
++
++	/* Bank Address Register is not supported */
++	if (CONFIG_IS_ENABLED(SPI_FLASH_BAR))
++		return -EOPNOTSUPP;
++
++	/*
++	 * Read CR3V to check if uniform sector is selected. If not, assign an
++	 * erase hook that supports non-uniform erase.
++	 */
++	ret = spansion_read_any_reg(nor, SPINOR_REG_CYPRESS_CFR3V,
++				    S25FS_S_RDAR_DUMMY, &cfr3v);
++	if (ret)
++		return ret;
++	if (!(cfr3v & SPINOR_REG_CYPRESS_CFR3_UNISECT))
++		nor->erase = s25fs_s_erase_non_uniform;
++
++	return spi_nor_default_setup(nor, info, params);
++}
++
++static void s25fs_s_late_init(struct spi_nor *nor,
++			      struct spi_nor_flash_parameter *params)
++{
++	nor->setup = s25fs_s_setup;
++}
++
++static int s25fs_s_post_bfpt_fixup(struct spi_nor *nor,
++				   const struct sfdp_parameter_header *header,
++				   const struct sfdp_bfpt *bfpt,
++				   struct spi_nor_flash_parameter *params)
++{
++	/* The erase size is set to 4K from BFPT, but it's wrong. Fix it. */
++	nor->erase_opcode = SPINOR_OP_SE;
++	nor->mtd.erasesize = nor->info->sector_size;
++
++	/* The S25FS-S chip family reports 512-byte pages in BFPT but
++	 * in reality the write buffer still wraps at the safe default
++	 * of 256 bytes.  Overwrite the page size advertised by BFPT
++	 * to get the writes working.
++	 */
++	params->page_size = 256;
++
++	return 0;
++}
++
++static void s25fs_s_post_sfdp_fixup(struct spi_nor *nor,
++				    struct spi_nor_flash_parameter *params)
++{
++	/*
++	 * The S25FS064S(8MB) supports 1-1-2 and 1-1-4 commands, but params for
++	 * read ops in SFDP are wrong. The other density parts do not support
++	 * 1-1-2 and 1-1-4 commands.
++	 */
++	if (params->size == SZ_8M) {
++		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_2],
++					  0, 8, SPINOR_OP_READ_1_1_2,
++					  SNOR_PROTO_1_1_2);
++		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_4],
++					  0, 8, SPINOR_OP_READ_1_1_4,
++					  SNOR_PROTO_1_1_4);
++	} else {
++		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
++		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
++		params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
++	}
++
++	/* Use volatile register to enable quad */
++	params->quad_enable = s25fs_s_quad_enable;
++}
++
++static struct spi_nor_fixups s25fs_s_fixups = {
++	.post_bfpt = s25fs_s_post_bfpt_fixup,
++	.post_sfdp = s25fs_s_post_sfdp_fixup,
++	.late_init = s25fs_s_late_init,
++};
++
++static int s25_s28_mdp_ready(struct spi_nor *nor)
++{
++	u32 addr;
++	int ret;
++
++	for (addr = 0; addr < nor->mtd.size; addr += SZ_128M) {
++		ret = spansion_sr_ready(nor, addr, nor->rdsr_dummy);
++		if (ret < 0)
++			return ret;
++		else if (ret == 0)
++			return 0;
++	}
++
++	return 1;
++}
++
++static int s25_quad_enable(struct spi_nor *nor)
++{
++	u32 addr;
++	int ret;
++
++	for (addr = 0; addr < nor->mtd.size; addr += SZ_128M) {
++		ret = spansion_quad_enable_volatile(nor, addr, 0);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++static int s25_s28_erase_non_uniform(struct spi_nor *nor, loff_t addr)
++{
++	/* Support 32 x 4KB sectors at bottom */
++	return spansion_erase_non_uniform(nor, addr, SPINOR_OP_BE_4K_4B, 0,
++					  SZ_128K);
++}
++
++static int s25_s28_setup(struct spi_nor *nor, const struct flash_info *info,
++			 const struct spi_nor_flash_parameter *params)
++{
++	int ret;
++	u8 cr;
++
++#if CONFIG_IS_ENABLED(SPI_FLASH_BAR)
++	return -ENOTSUPP; /* Bank Address Register is not supported */
++#endif
++	/*
++	 * S25FS256T has multiple sector architecture options, with selection of
++	 * count and location of 128KB and 64KB sectors. This driver supports
++	 * uniform 128KB only due to complexity of non-uniform layout.
++	 */
++	if (nor->info->id[4] == S25FS256T_ID4) {
++		ret = spansion_read_any_reg(nor, SPINOR_REG_CYPRESS_ARCFN, 8,
++					    &cr);
++		if (ret)
++			return ret;
++
++		if (cr) /* Option 0 (ARCFN[7:0] == 0x00) is uniform */
++			return -EOPNOTSUPP;
++
++		return spi_nor_default_setup(nor, info, params);
++	}
++
++	/*
++	 * Read CFR3V to check if uniform sector is selected. If not, assign an
++	 * erase hook that supports non-uniform erase.
++	 */
++	ret = spansion_read_any_reg(nor, SPINOR_REG_CYPRESS_CFR3V, 0, &cr);
++	if (ret)
++		return ret;
++	if (!(cr & SPINOR_REG_CYPRESS_CFR3_UNISECT))
++		nor->erase = s25_s28_erase_non_uniform;
++
++	/*
++	 * For the multi-die package parts, the ready() hook is needed to check
++	 * all dies' status via read any register.
++	 */
++	if (nor->mtd.size > SZ_128M)
++		nor->ready = s25_s28_mdp_ready;
++
++	return spi_nor_default_setup(nor, info, params);
++}
++
++static void s25_late_init(struct spi_nor *nor,
++			  struct spi_nor_flash_parameter *params)
++{
++	nor->setup = s25_s28_setup;
++
++	/*
++	 * Programming is supported only in 16-byte ECC data unit granularity.
++	 * Byte-programming, bit-walking, or multiple program operations to the
++	 * same ECC data unit without an erase are not allowed.
++	 */
++	params->writesize = 16;
++}
++
++static int s25_s28_post_bfpt_fixup(struct spi_nor *nor,
++				   const struct sfdp_parameter_header *header,
++				   const struct sfdp_bfpt *bfpt,
++				   struct spi_nor_flash_parameter *params)
++{
++	int ret;
++	u32 addr;
++	u8 cfr3v;
++
++	/* erase size in case it is set to 4K from BFPT */
++	nor->erase_opcode = SPINOR_OP_SE_4B;
++	nor->mtd.erasesize = nor->info->sector_size;
++
++	/*
++	 * The default address mode in multi-die package parts (>1Gb) may be
++	 * 3- or 4-byte, depending on model number. BootROM code in some SoCs
++	 * use 3-byte mode for backward compatibility and should switch to
++	 * 4-byte mode after BootROM phase. Since registers in the 2nd die are
++	 * mapped within 32-bit address space, we need to make sure the flash is
++	 * in 4-byte address mode. The default address mode can be distinguished
++	 * by BFPT 16th DWORD. Power cycle exits 4-byte address mode if default
++	 * is 3-byte address mode.
++	 */
++	if (params->size > SZ_128M) {
++		if (bfpt->dwords[BFPT_DWORD(16)] & BFPT_DWORD16_EX4B_PWRCYC) {
++			ret = set_4byte(nor, nor->info, 1);
++			if (ret)
++				return ret;
++		}
++		nor->addr_mode_nbytes = 4;
++	}
++
++	/* The default address mode in S25FS256T is 4. */
++	if (nor->info->id[4] == S25FS256T_ID4)
++		nor->addr_mode_nbytes = 4;
++
++	/*
++	 * The page_size is set to 512B from BFPT, but it actually depends on
++	 * the configuration register. Look up the CFR3V and determine the
++	 * page_size. For multi-die package parts, use 512B only when the all
++	 * dies are configured to 512B buffer.
++	 */
++	for (addr = 0; addr < params->size; addr += SZ_128M) {
++		ret = spansion_read_any_reg(nor,
++					    addr + SPINOR_REG_CYPRESS_CFR3V, 0,
++					    &cfr3v);
++		if (ret)
++			return ret;
++
++		if (!(cfr3v & SPINOR_REG_CYPRESS_CFR3_PGSZ)) {
++			params->page_size = 256;
++			return 0;
++		}
++	}
++	params->page_size = 512;
++
++	return 0;
++}
++
++static void s25_post_sfdp_fixup(struct spi_nor *nor,
++				struct spi_nor_flash_parameter *params)
++{
++	if (nor->info->id[4] == S25FS256T_ID4) {
++		/* PP_1_1_4 is supported */
++		params->hwcaps.mask |= SNOR_HWCAPS_PP_1_1_4;
++	} else {
++		/* READ_FAST_4B (0Ch) requires mode cycles*/
++		params->reads[SNOR_CMD_READ_FAST].num_mode_clocks = 8;
++		/* PP_1_1_4 is not supported */
++		params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
++		/* Use volatile register to enable quad */
++		params->quad_enable = s25_quad_enable;
++	}
++}
++
++static struct spi_nor_fixups s25_fixups = {
++	.post_bfpt = s25_s28_post_bfpt_fixup,
++	.post_sfdp = s25_post_sfdp_fixup,
++	.late_init = s25_late_init,
++};
++
++static int s25fl256l_setup(struct spi_nor *nor, const struct flash_info *info,
++			   const struct spi_nor_flash_parameter *params)
++{
++	return -ENOTSUPP; /* Bank Address Register is not supported */
++}
++
++static void s25fl256l_late_init(struct spi_nor *nor,
++				struct spi_nor_flash_parameter *params)
++{
++	nor->setup = s25fl256l_setup;
++}
++
++static struct spi_nor_fixups s25fl256l_fixups = {
++	.late_init = s25fl256l_late_init,
++};
++
++#ifdef CONFIG_SPI_FLASH_S28HX_T
++/**
++ * spi_nor_cypress_octal_dtr_enable() - Enable octal DTR on Cypress flashes.
++ * @nor:		pointer to a 'struct spi_nor'
++ *
++ * This also sets the memory access latency cycles to 24 to allow the flash to
++ * run at up to 200MHz.
++ *
++ * Return: 0 on success, -errno otherwise.
++ */
++static int spi_nor_cypress_octal_dtr_enable(struct spi_nor *nor)
++{
++	u32 addr;
++	u8 buf;
++	int ret;
++
++	ret = write_enable(nor);
++	if (ret)
++		return ret;
++
++	/* Use 24 dummy cycles for memory array reads. */
++	for (addr = 0; addr < nor->mtd.size; addr += SZ_128M) {
++		ret = spansion_read_any_reg(nor,
++					    addr + SPINOR_REG_CYPRESS_CFR2V, 0,
++					    &buf);
++		if (ret)
++			return ret;
++
++		buf &= ~SPINOR_REG_CYPRESS_CFR2_MEMLAT_MASK;
++		buf |= SPINOR_REG_CYPRESS_CFR2_MEMLAT_11_24;
++		ret = spansion_write_any_reg(nor,
++					     addr + SPINOR_REG_CYPRESS_CFR2V,
++					     buf);
++		if (ret) {
++			dev_warn(nor->dev, "failed to set default memory latency value: %d\n", ret);
++			return ret;
++		}
++	}
++	nor->read_dummy = 24;
++
++	ret = write_enable(nor);
++	if (ret)
++		return ret;
++
++	/* Set the octal and DTR enable bits. */
++	buf = SPINOR_REG_CYPRESS_CFR5_OCT_DTR_EN;
++	for (addr = 0; addr < nor->mtd.size; addr += SZ_128M) {
++		ret = spansion_write_any_reg(nor,
++					     addr + SPINOR_REG_CYPRESS_CFR5V,
++					     buf);
++		if (ret) {
++			dev_warn(nor->dev, "Failed to enable octal DTR mode\n");
++			return ret;
++		}
++	}
++
++	return 0;
++}
++
++static void s28hx_t_late_init(struct spi_nor *nor,
++			      struct spi_nor_flash_parameter *params)
++{
++	nor->octal_dtr_enable = spi_nor_cypress_octal_dtr_enable;
++	nor->setup = s25_s28_setup;
++
++	/*
++	 * Programming is supported only in 16-byte ECC data unit granularity.
++	 * Byte-programming, bit-walking, or multiple program operations to the
++	 * same ECC data unit without an erase are not allowed.
++	 */
++	params->writesize = 16;
++}
++
++static void s28hx_t_post_sfdp_fixup(struct spi_nor *nor,
++				    struct spi_nor_flash_parameter *params)
++{
++	/*
++	 * On older versions of the flash the xSPI Profile 1.0 table has the
++	 * 8D-8D-8D Fast Read opcode as 0x00. But it actually should be 0xEE.
++	 */
++	if (params->reads[SNOR_CMD_READ_8_8_8_DTR].opcode == 0)
++		params->reads[SNOR_CMD_READ_8_8_8_DTR].opcode =
++			SPINOR_OP_CYPRESS_RD_FAST;
++
++	params->hwcaps.mask |= SNOR_HWCAPS_PP_8_8_8_DTR;
++
++	/* This flash is also missing the 4-byte Page Program opcode bit. */
++	spi_nor_set_pp_settings(&params->page_programs[SNOR_CMD_PP],
++				SPINOR_OP_PP_4B, SNOR_PROTO_1_1_1);
++	/*
++	 * Since xSPI Page Program opcode is backward compatible with
++	 * Legacy SPI, use Legacy SPI opcode there as well.
++	 */
++	spi_nor_set_pp_settings(&params->page_programs[SNOR_CMD_PP_8_8_8_DTR],
++				SPINOR_OP_PP_4B, SNOR_PROTO_8_8_8_DTR);
++
++	/*
++	 * The xSPI Profile 1.0 table advertises the number of additional
++	 * address bytes needed for Read Status Register command as 0 but the
++	 * actual value for that is 4.
++	 */
++	params->rdsr_addr_nbytes = 4;
++}
++
++static struct spi_nor_fixups s28hx_t_fixups = {
++	.post_sfdp = s28hx_t_post_sfdp_fixup,
++	.post_bfpt = s25_s28_post_bfpt_fixup,
++	.late_init = s28hx_t_late_init,
++};
++#endif /* CONFIG_SPI_FLASH_S28HX_T */
++
++static void spansion_set_fixups(struct spi_nor *nor)
++{
++	if (JEDEC_MFR(nor->info) == SNOR_MFR_CYPRESS) {
++		switch (nor->info->id[1]) {
++		case 0x2a: /* S25HL (QSPI, 3.3V) */
++		case 0x2b: /* S25HS (QSPI, 1.8V) */
++			nor->fixups = &s25_fixups;
++			break;
++
++#ifdef CONFIG_SPI_FLASH_S28HX_T
++		case 0x5a: /* S28HL (Octal, 3.3V) */
++		case 0x5b: /* S28HS (Octal, 1.8V) */
++			nor->fixups = &s28hx_t_fixups;
++			break;
++#endif
++
++		default:
++			break;
++		}
++	}
++
++	if (CONFIG_IS_ENABLED(SPI_FLASH_BAR) &&
++	    !strcmp(nor->info->name, "s25fl256l"))
++		nor->fixups = &s25fl256l_fixups;
++
++	/* For FS-S (family ID = 0x81)  */
++	if (JEDEC_MFR(nor->info) == SNOR_MFR_SPANSION && nor->info->id[5] == 0x81)
++		nor->fixups = &s25fs_s_fixups;
++}
++#endif /* !CONFIG_IS_ENABLED(SPI_FLASH_TINY) */
++
+ const struct spi_nor_manufacturer spi_nor_spansion = {
+ 	.parts = spansion_nor_parts,
+ 	.nparts = ARRAY_SIZE(spansion_nor_parts),
++#if !CONFIG_IS_ENABLED(SPI_FLASH_TINY)
++	.set_fixups = spansion_set_fixups,
++#endif
+ };
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+index d107828092c..6e61b5653bd 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -123,8 +123,8 @@ void spi_nor_setup_op(const struct spi_nor *nor,
+ 	}
+ }
+ 
+-static int spi_nor_read_write_reg(struct spi_nor *nor, struct spi_mem_op
+-		*op, void *buf)
++int spi_nor_read_write_reg(struct spi_nor *nor, struct spi_mem_op *op,
++			   void *buf)
+ {
+ 	if (op->data.dir == SPI_MEM_DATA_IN)
+ 		op->data.buf.in = buf;
+@@ -165,55 +165,6 @@ static int spi_nor_write_reg(struct spi_nor *nor, u8 opcode, u8 *buf, int len)
+ 	return spi_nor_read_write_reg(nor, &op, buf);
+ }
+ 
+-#ifdef CONFIG_SPI_FLASH_SPANSION
+-static int spansion_read_any_reg(struct spi_nor *nor, u32 addr, u8 dummy,
+-				 u8 *val)
+-{
+-	struct spi_mem_op op =
+-		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_RD_ANY_REG, 0),
+-			   SPI_MEM_OP_ADDR(nor->addr_mode_nbytes, addr, 0),
+-			   SPI_MEM_OP_DUMMY(dummy, 0),
+-			   SPI_MEM_OP_DATA_IN(1, NULL, 0));
+-	u8 buf[2];
+-	int ret;
+-
+-	spi_nor_setup_op(nor, &op, nor->reg_proto);
+-
+-	/*
+-	 * In Octal DTR mode, the number of address bytes is always 4 regardless
+-	 * of addressing mode setting.
+-	 */
+-	if (nor->reg_proto == SNOR_PROTO_8_8_8_DTR)
+-		op.addr.nbytes = 4;
+-
+-	/*
+-	 * We don't want to read only one byte in DTR mode. So, read 2 and then
+-	 * discard the second byte.
+-	 */
+-	if (spi_nor_protocol_is_dtr(nor->reg_proto))
+-		op.data.nbytes = 2;
+-
+-	ret = spi_nor_read_write_reg(nor, &op, buf);
+-	if (ret)
+-		return ret;
+-
+-	*val = buf[0];
+-
+-	return 0;
+-}
+-
+-static int spansion_write_any_reg(struct spi_nor *nor, u32 addr, u8 val)
+-{
+-	struct spi_mem_op op =
+-		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_WR_ANY_REG, 1),
+-			   SPI_MEM_OP_ADDR(nor->addr_mode_nbytes, addr, 1),
+-			   SPI_MEM_OP_NO_DUMMY,
+-			   SPI_MEM_OP_DATA_OUT(1, NULL, 1));
+-
+-	return spi_nor_read_write_reg(nor, &op, &val);
+-}
+-#endif
+-
+ static ssize_t spi_nor_read_data(struct spi_nor *nor, loff_t from, size_t len,
+ 				 u_char *buf)
+ {
+@@ -472,7 +423,7 @@ static int write_sr3(struct spi_nor *nor, u8 val)
+  * Set write enable latch with Write Enable command.
+  * Returns negative if error occurred.
+  */
+-static int write_enable(struct spi_nor *nor)
++int write_enable(struct spi_nor *nor)
+ {
+ 	return nor->write_reg(nor, SPINOR_OP_WREN, NULL, 0);
+ }
+@@ -577,8 +528,7 @@ static void spi_nor_set_4byte_opcodes(struct spi_nor *nor,
+ #endif /* !CONFIG_IS_ENABLED(SPI_FLASH_BAR) */
+ 
+ /* Enable/disable 4-byte addressing mode. */
+-static int set_4byte(struct spi_nor *nor, const struct flash_info *info,
+-		     int enable)
++int set_4byte(struct spi_nor *nor, const struct flash_info *info, int enable)
+ {
+ 	int status;
+ 	bool need_wren = false;
+@@ -626,36 +576,7 @@ static int set_4byte(struct spi_nor *nor, const struct flash_info *info,
+ 	}
+ }
+ 
+-#ifdef CONFIG_SPI_FLASH_SPANSION
+-/*
+- * Read status register 1 by using Read Any Register command to support multi
+- * die package parts.
+- */
+-static int spansion_sr_ready(struct spi_nor *nor, u32 addr_base, u8 dummy)
+-{
+-	u32 reg_addr = addr_base + SPINOR_REG_CYPRESS_STR1V;
+-	u8 sr;
+-	int ret;
+-
+-	ret = spansion_read_any_reg(nor, reg_addr, dummy, &sr);
+-	if (ret < 0)
+-		return ret;
+-
+-	if (sr & (SR_E_ERR | SR_P_ERR)) {
+-		if (sr & SR_E_ERR)
+-			dev_dbg(nor->dev, "Erase Error occurred\n");
+-		else
+-			dev_dbg(nor->dev, "Programming Error occurred\n");
+-
+-		nor->write_reg(nor, SPINOR_OP_CYPRESS_CLPEF, NULL, 0);
+-		return -EIO;
+-	}
+-
+-	return !(sr & SR_WIP);
+-}
+-#endif
+-
+-static int spi_nor_sr_ready(struct spi_nor *nor)
++int spi_nor_sr_ready(struct spi_nor *nor)
+ {
+ 	int sr = read_sr(nor);
+ 
+@@ -745,7 +666,7 @@ static int spi_nor_wait_till_ready_with_timeout(struct spi_nor *nor,
+ 	return -ETIMEDOUT;
+ }
+ 
+-static int spi_nor_wait_till_ready(struct spi_nor *nor)
++int spi_nor_wait_till_ready(struct spi_nor *nor)
+ {
+ 	return spi_nor_wait_till_ready_with_timeout(nor,
+ 						    DEFAULT_READY_WAIT_JIFFIES);
+@@ -1035,67 +956,6 @@ err:
+ 	return ret;
+ }
+ 
+-#ifdef CONFIG_SPI_FLASH_SPANSION
+-/**
+- * spansion_erase_non_uniform() - erase non-uniform sectors for Spansion/Cypress
+- *                                chips
+- * @nor:	pointer to a 'struct spi_nor'
+- * @addr:	address of the sector to erase
+- * @opcode_4k:	opcode for 4K sector erase
+- * @ovlsz_top:	size of overlaid portion at the top address
+- * @ovlsz_btm:	size of overlaid portion at the bottom address
+- *
+- * Erase an address range on the nor chip that can contain 4KB sectors overlaid
+- * on top and/or bottom. The appropriate erase opcode and size are chosen by
+- * address to erase and size of overlaid portion.
+- *
+- * Return: number of bytes erased on success, -errno otherwise.
+- */
+-static int spansion_erase_non_uniform(struct spi_nor *nor, u32 addr,
+-				      u8 opcode_4k, u32 ovlsz_top,
+-				      u32 ovlsz_btm)
+-{
+-	struct spi_mem_op op =
+-		SPI_MEM_OP(SPI_MEM_OP_CMD(nor->erase_opcode, 0),
+-			   SPI_MEM_OP_ADDR(nor->addr_width, addr, 0),
+-			   SPI_MEM_OP_NO_DUMMY,
+-			   SPI_MEM_OP_NO_DATA);
+-	struct mtd_info *mtd = &nor->mtd;
+-	u32 erasesize;
+-	int ret;
+-
+-	/* 4KB sectors */
+-	if (op.addr.val < ovlsz_btm ||
+-	    op.addr.val >= mtd->size - ovlsz_top) {
+-		op.cmd.opcode = opcode_4k;
+-		erasesize = SZ_4K;
+-
+-	/* Non-overlaid portion in the normal sector at the bottom */
+-	} else if (op.addr.val == ovlsz_btm) {
+-		op.cmd.opcode = nor->erase_opcode;
+-		erasesize = mtd->erasesize - ovlsz_btm;
+-
+-	/* Non-overlaid portion in the normal sector at the top */
+-	} else if (op.addr.val == mtd->size - mtd->erasesize) {
+-		op.cmd.opcode = nor->erase_opcode;
+-		erasesize = mtd->erasesize - ovlsz_top;
+-
+-	/* Normal sectors */
+-	} else {
+-		op.cmd.opcode = nor->erase_opcode;
+-		erasesize = mtd->erasesize;
+-	}
+-
+-	spi_nor_setup_op(nor, &op, nor->write_proto);
+-
+-	ret = spi_mem_exec_op(nor->spi, &op);
+-	if (ret)
+-		return ret;
+-
+-	return erasesize;
+-}
+-#endif
+-
+ #if defined(CONFIG_SPI_FLASH_LOCK)
+ #if defined(CONFIG_SPI_FLASH_STMICRO) || defined(CONFIG_SPI_FLASH_SST)
+ /* Write status register and ensure bits in mask match written values */
+@@ -1980,61 +1840,6 @@ int macronix_quad_enable(struct spi_nor *nor)
+ }
+ #endif
+ 
+-#ifdef CONFIG_SPI_FLASH_SPANSION
+-/**
+- * spansion_quad_enable_volatile() - enable Quad I/O mode in volatile register.
+- * @nor:	pointer to a 'struct spi_nor'
+- * @addr_base:	base address of register (can be >0 in multi-die parts)
+- * @dummy:	number of dummy cycles for register read
+- *
+- * It is recommended to update volatile registers in the field application due
+- * to a risk of the non-volatile registers corruption by power interrupt. This
+- * function sets Quad Enable bit in CFR1 volatile.
+- *
+- * Return: 0 on success, -errno otherwise.
+- */
+-static int spansion_quad_enable_volatile(struct spi_nor *nor, u32 addr_base,
+-					 u8 dummy)
+-{
+-	u32 addr = addr_base + SPINOR_REG_CYPRESS_CFR1V;
+-
+-	u8 cr;
+-	int ret;
+-
+-	/* Check current Quad Enable bit value. */
+-	ret = spansion_read_any_reg(nor, addr, dummy, &cr);
+-	if (ret < 0) {
+-		dev_dbg(nor->dev,
+-			"error while reading configuration register\n");
+-		return -EINVAL;
+-	}
+-
+-	if (cr & CR_QUAD_EN_SPAN)
+-		return 0;
+-
+-	cr |= CR_QUAD_EN_SPAN;
+-
+-	write_enable(nor);
+-
+-	ret = spansion_write_any_reg(nor, addr, cr);
+-
+-	if (ret < 0) {
+-		dev_dbg(nor->dev,
+-			"error while writing configuration register\n");
+-		return -EINVAL;
+-	}
+-
+-	/* Read back and check it. */
+-	ret = spansion_read_any_reg(nor, addr, dummy, &cr);
+-	if (ret || !(cr & CR_QUAD_EN_SPAN)) {
+-		dev_dbg(nor->dev, "Spansion Quad bit not set\n");
+-		return -EINVAL;
+-	}
+-
+-	return 0;
+-}
+-#endif
+-
+ #if defined(CONFIG_SPI_FLASH_SPANSION) || defined(CONFIG_SPI_FLASH_WINBOND)
+ /*
+  * Write status Register and configuration register with 2 bytes
+@@ -2165,7 +1970,7 @@ spi_nor_set_read_settings(struct spi_nor_read_command *read,
+ 	read->proto = proto;
+ }
+ 
+-static void
++void
+ spi_nor_set_pp_settings(struct spi_nor_pp_command *pp,
+ 			u8 opcode,
+ 			enum spi_nor_protocol proto)
+@@ -2755,9 +2560,8 @@ static int spi_nor_select_erase(struct spi_nor *nor,
+ 	return 0;
+ }
+ 
+-static int spi_nor_default_setup(struct spi_nor *nor,
+-				 const struct flash_info *info,
+-				 const struct spi_nor_flash_parameter *params)
++int spi_nor_default_setup(struct spi_nor *nor, const struct flash_info *info,
++			  const struct spi_nor_flash_parameter *params)
+ {
+ 	u32 shared_mask;
+ 	bool enable_quad_io;
+@@ -2809,664 +2613,6 @@ static int spi_nor_setup(struct spi_nor *nor, const struct flash_info *info,
+ 	return nor->setup(nor, info, params);
+ }
+ 
+-#ifdef CONFIG_SPI_FLASH_SPANSION
+-
+-/* Use ID byte 4 to distinguish S25FS256T and S25Hx-T */
+-#define S25FS256T_ID4	(0x08)
+-
+-/* Number of dummy cycle for Read Any Register (RDAR) op. */
+-#define S25FS_S_RDAR_DUMMY	8
+-
+-static int s25fs_s_quad_enable(struct spi_nor *nor)
+-{
+-	return spansion_quad_enable_volatile(nor, 0, S25FS_S_RDAR_DUMMY);
+-}
+-
+-static int s25fs_s_erase_non_uniform(struct spi_nor *nor, loff_t addr)
+-{
+-	u8 opcode = nor->addr_width == 4 ? SPINOR_OP_BE_4K_4B : SPINOR_OP_BE_4K;
+-
+-	/* Support 8 x 4KB sectors at bottom */
+-	return spansion_erase_non_uniform(nor, addr, opcode, 0, SZ_32K);
+-}
+-
+-static int s25fs_s_setup(struct spi_nor *nor, const struct flash_info *info,
+-			 const struct spi_nor_flash_parameter *params)
+-{
+-	int ret;
+-	u8 cfr3v;
+-
+-	/* Bank Address Register is not supported */
+-	if (CONFIG_IS_ENABLED(SPI_FLASH_BAR))
+-		return -EOPNOTSUPP;
+-
+-	/*
+-	 * Read CR3V to check if uniform sector is selected. If not, assign an
+-	 * erase hook that supports non-uniform erase.
+-	 */
+-	ret = spansion_read_any_reg(nor, SPINOR_REG_CYPRESS_CFR3V,
+-				    S25FS_S_RDAR_DUMMY, &cfr3v);
+-	if (ret)
+-		return ret;
+-	if (!(cfr3v & SPINOR_REG_CYPRESS_CFR3_UNISECT))
+-		nor->erase = s25fs_s_erase_non_uniform;
+-
+-	return spi_nor_default_setup(nor, info, params);
+-}
+-
+-static void s25fs_s_late_init(struct spi_nor *nor,
+-			      struct spi_nor_flash_parameter *params)
+-{
+-	nor->setup = s25fs_s_setup;
+-}
+-
+-static int s25fs_s_post_bfpt_fixup(struct spi_nor *nor,
+-				   const struct sfdp_parameter_header *header,
+-				   const struct sfdp_bfpt *bfpt,
+-				   struct spi_nor_flash_parameter *params)
+-{
+-	/* The erase size is set to 4K from BFPT, but it's wrong. Fix it. */
+-	nor->erase_opcode = SPINOR_OP_SE;
+-	nor->mtd.erasesize = nor->info->sector_size;
+-
+-	/* The S25FS-S chip family reports 512-byte pages in BFPT but
+-	 * in reality the write buffer still wraps at the safe default
+-	 * of 256 bytes.  Overwrite the page size advertised by BFPT
+-	 * to get the writes working.
+-	 */
+-	params->page_size = 256;
+-
+-	return 0;
+-}
+-
+-static void s25fs_s_post_sfdp_fixup(struct spi_nor *nor,
+-				    struct spi_nor_flash_parameter *params)
+-{
+-	/*
+-	 * The S25FS064S(8MB) supports 1-1-2 and 1-1-4 commands, but params for
+-	 * read ops in SFDP are wrong. The other density parts do not support
+-	 * 1-1-2 and 1-1-4 commands.
+-	 */
+-	if (params->size == SZ_8M) {
+-		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_2],
+-					  0, 8, SPINOR_OP_READ_1_1_2,
+-					  SNOR_PROTO_1_1_2);
+-		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_4],
+-					  0, 8, SPINOR_OP_READ_1_1_4,
+-					  SNOR_PROTO_1_1_4);
+-	} else {
+-		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
+-		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
+-		params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
+-	}
+-
+-	/* Use volatile register to enable quad */
+-	params->quad_enable = s25fs_s_quad_enable;
+-}
+-
+-static struct spi_nor_fixups s25fs_s_fixups = {
+-	.post_bfpt = s25fs_s_post_bfpt_fixup,
+-	.post_sfdp = s25fs_s_post_sfdp_fixup,
+-	.late_init = s25fs_s_late_init,
+-};
+-
+-static int s25_s28_mdp_ready(struct spi_nor *nor)
+-{
+-	u32 addr;
+-	int ret;
+-
+-	for (addr = 0; addr < nor->mtd.size; addr += SZ_128M) {
+-		ret = spansion_sr_ready(nor, addr, nor->rdsr_dummy);
+-		if (ret < 0)
+-			return ret;
+-		else if (ret == 0)
+-			return 0;
+-	}
+-
+-	return 1;
+-}
+-
+-static int s25_quad_enable(struct spi_nor *nor)
+-{
+-	u32 addr;
+-	int ret;
+-
+-	for (addr = 0; addr < nor->mtd.size; addr += SZ_128M) {
+-		ret = spansion_quad_enable_volatile(nor, addr, 0);
+-		if (ret)
+-			return ret;
+-	}
+-
+-	return 0;
+-}
+-
+-static int s25_s28_erase_non_uniform(struct spi_nor *nor, loff_t addr)
+-{
+-	/* Support 32 x 4KB sectors at bottom */
+-	return spansion_erase_non_uniform(nor, addr, SPINOR_OP_BE_4K_4B, 0,
+-					  SZ_128K);
+-}
+-
+-static int s25_s28_setup(struct spi_nor *nor, const struct flash_info *info,
+-			 const struct spi_nor_flash_parameter *params)
+-{
+-	int ret;
+-	u8 cr;
+-
+-#if CONFIG_IS_ENABLED(SPI_FLASH_BAR)
+-	return -ENOTSUPP; /* Bank Address Register is not supported */
+-#endif
+-	/*
+-	 * S25FS256T has multiple sector architecture options, with selection of
+-	 * count and location of 128KB and 64KB sectors. This driver supports
+-	 * uniform 128KB only due to complexity of non-uniform layout.
+-	 */
+-	if (nor->info->id[4] == S25FS256T_ID4) {
+-		ret = spansion_read_any_reg(nor, SPINOR_REG_CYPRESS_ARCFN, 8,
+-					    &cr);
+-		if (ret)
+-			return ret;
+-
+-		if (cr) /* Option 0 (ARCFN[7:0] == 0x00) is uniform */
+-			return -EOPNOTSUPP;
+-
+-		return spi_nor_default_setup(nor, info, params);
+-	}
+-
+-	/*
+-	 * Read CFR3V to check if uniform sector is selected. If not, assign an
+-	 * erase hook that supports non-uniform erase.
+-	 */
+-	ret = spansion_read_any_reg(nor, SPINOR_REG_CYPRESS_CFR3V, 0, &cr);
+-	if (ret)
+-		return ret;
+-	if (!(cr & SPINOR_REG_CYPRESS_CFR3_UNISECT))
+-		nor->erase = s25_s28_erase_non_uniform;
+-
+-	/*
+-	 * For the multi-die package parts, the ready() hook is needed to check
+-	 * all dies' status via read any register.
+-	 */
+-	if (nor->mtd.size > SZ_128M)
+-		nor->ready = s25_s28_mdp_ready;
+-
+-	return spi_nor_default_setup(nor, info, params);
+-}
+-
+-static void s25_late_init(struct spi_nor *nor,
+-			  struct spi_nor_flash_parameter *params)
+-{
+-	nor->setup = s25_s28_setup;
+-
+-	/*
+-	 * Programming is supported only in 16-byte ECC data unit granularity.
+-	 * Byte-programming, bit-walking, or multiple program operations to the
+-	 * same ECC data unit without an erase are not allowed.
+-	 */
+-	params->writesize = 16;
+-}
+-
+-static int s25_s28_post_bfpt_fixup(struct spi_nor *nor,
+-				   const struct sfdp_parameter_header *header,
+-				   const struct sfdp_bfpt *bfpt,
+-				   struct spi_nor_flash_parameter *params)
+-{
+-	int ret;
+-	u32 addr;
+-	u8 cfr3v;
+-
+-	/* erase size in case it is set to 4K from BFPT */
+-	nor->erase_opcode = SPINOR_OP_SE_4B;
+-	nor->mtd.erasesize = nor->info->sector_size;
+-
+-	/*
+-	 * The default address mode in multi-die package parts (>1Gb) may be
+-	 * 3- or 4-byte, depending on model number. BootROM code in some SoCs
+-	 * use 3-byte mode for backward compatibility and should switch to
+-	 * 4-byte mode after BootROM phase. Since registers in the 2nd die are
+-	 * mapped within 32-bit address space, we need to make sure the flash is
+-	 * in 4-byte address mode. The default address mode can be distinguished
+-	 * by BFPT 16th DWORD. Power cycle exits 4-byte address mode if default
+-	 * is 3-byte address mode.
+-	 */
+-	if (params->size > SZ_128M) {
+-		if (bfpt->dwords[BFPT_DWORD(16)] & BFPT_DWORD16_EX4B_PWRCYC) {
+-			ret = set_4byte(nor, nor->info, 1);
+-			if (ret)
+-				return ret;
+-		}
+-		nor->addr_mode_nbytes = 4;
+-	}
+-
+-	/* The default address mode in S25FS256T is 4. */
+-	if (nor->info->id[4] == S25FS256T_ID4)
+-		nor->addr_mode_nbytes = 4;
+-
+-	/*
+-	 * The page_size is set to 512B from BFPT, but it actually depends on
+-	 * the configuration register. Look up the CFR3V and determine the
+-	 * page_size. For multi-die package parts, use 512B only when the all
+-	 * dies are configured to 512B buffer.
+-	 */
+-	for (addr = 0; addr < params->size; addr += SZ_128M) {
+-		ret = spansion_read_any_reg(nor,
+-					    addr + SPINOR_REG_CYPRESS_CFR3V, 0,
+-					    &cfr3v);
+-		if (ret)
+-			return ret;
+-
+-		if (!(cfr3v & SPINOR_REG_CYPRESS_CFR3_PGSZ)) {
+-			params->page_size = 256;
+-			return 0;
+-		}
+-	}
+-	params->page_size = 512;
+-
+-	return 0;
+-}
+-
+-static void s25_post_sfdp_fixup(struct spi_nor *nor,
+-				struct spi_nor_flash_parameter *params)
+-{
+-	if (nor->info->id[4] == S25FS256T_ID4) {
+-		/* PP_1_1_4 is supported */
+-		params->hwcaps.mask |= SNOR_HWCAPS_PP_1_1_4;
+-	} else {
+-		/* READ_FAST_4B (0Ch) requires mode cycles*/
+-		params->reads[SNOR_CMD_READ_FAST].num_mode_clocks = 8;
+-		/* PP_1_1_4 is not supported */
+-		params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
+-		/* Use volatile register to enable quad */
+-		params->quad_enable = s25_quad_enable;
+-	}
+-}
+-
+-static struct spi_nor_fixups s25_fixups = {
+-	.post_bfpt = s25_s28_post_bfpt_fixup,
+-	.post_sfdp = s25_post_sfdp_fixup,
+-	.late_init = s25_late_init,
+-};
+-
+-static int s25fl256l_setup(struct spi_nor *nor, const struct flash_info *info,
+-			   const struct spi_nor_flash_parameter *params)
+-{
+-	return -ENOTSUPP; /* Bank Address Register is not supported */
+-}
+-
+-static void s25fl256l_late_init(struct spi_nor *nor,
+-				struct spi_nor_flash_parameter *params)
+-{
+-	nor->setup = s25fl256l_setup;
+-}
+-
+-static struct spi_nor_fixups s25fl256l_fixups = {
+-	.late_init = s25fl256l_late_init,
+-};
+-#endif
+-
+-#ifdef CONFIG_SPI_FLASH_S28HX_T
+-/**
+- * spi_nor_cypress_octal_dtr_enable() - Enable octal DTR on Cypress flashes.
+- * @nor:		pointer to a 'struct spi_nor'
+- *
+- * This also sets the memory access latency cycles to 24 to allow the flash to
+- * run at up to 200MHz.
+- *
+- * Return: 0 on success, -errno otherwise.
+- */
+-static int spi_nor_cypress_octal_dtr_enable(struct spi_nor *nor)
+-{
+-	u32 addr;
+-	u8 buf;
+-	int ret;
+-
+-	ret = write_enable(nor);
+-	if (ret)
+-		return ret;
+-
+-	/* Use 24 dummy cycles for memory array reads. */
+-	for (addr = 0; addr < nor->mtd.size; addr += SZ_128M) {
+-		ret = spansion_read_any_reg(nor,
+-					    addr + SPINOR_REG_CYPRESS_CFR2V, 0,
+-					    &buf);
+-		if (ret)
+-			return ret;
+-
+-		buf &= ~SPINOR_REG_CYPRESS_CFR2_MEMLAT_MASK;
+-		buf |= SPINOR_REG_CYPRESS_CFR2_MEMLAT_11_24;
+-		ret = spansion_write_any_reg(nor,
+-					     addr + SPINOR_REG_CYPRESS_CFR2V,
+-					     buf);
+-		if (ret) {
+-			dev_warn(nor->dev, "failed to set default memory latency value: %d\n", ret);
+-			return ret;
+-		}
+-	}
+-	nor->read_dummy = 24;
+-
+-	ret = write_enable(nor);
+-	if (ret)
+-		return ret;
+-
+-	/* Set the octal and DTR enable bits. */
+-	buf = SPINOR_REG_CYPRESS_CFR5_OCT_DTR_EN;
+-	for (addr = 0; addr < nor->mtd.size; addr += SZ_128M) {
+-		ret = spansion_write_any_reg(nor,
+-					     addr + SPINOR_REG_CYPRESS_CFR5V,
+-					     buf);
+-		if (ret) {
+-			dev_warn(nor->dev, "Failed to enable octal DTR mode\n");
+-			return ret;
+-		}
+-	}
+-
+-	return 0;
+-}
+-
+-static void s28hx_t_late_init(struct spi_nor *nor,
+-			      struct spi_nor_flash_parameter *params)
+-{
+-	nor->octal_dtr_enable = spi_nor_cypress_octal_dtr_enable;
+-	nor->setup = s25_s28_setup;
+-
+-	/*
+-	 * Programming is supported only in 16-byte ECC data unit granularity.
+-	 * Byte-programming, bit-walking, or multiple program operations to the
+-	 * same ECC data unit without an erase are not allowed.
+-	 */
+-	params->writesize = 16;
+-}
+-
+-static void s28hx_t_post_sfdp_fixup(struct spi_nor *nor,
+-				    struct spi_nor_flash_parameter *params)
+-{
+-	/*
+-	 * On older versions of the flash the xSPI Profile 1.0 table has the
+-	 * 8D-8D-8D Fast Read opcode as 0x00. But it actually should be 0xEE.
+-	 */
+-	if (params->reads[SNOR_CMD_READ_8_8_8_DTR].opcode == 0)
+-		params->reads[SNOR_CMD_READ_8_8_8_DTR].opcode =
+-			SPINOR_OP_CYPRESS_RD_FAST;
+-
+-	params->hwcaps.mask |= SNOR_HWCAPS_PP_8_8_8_DTR;
+-
+-	/* This flash is also missing the 4-byte Page Program opcode bit. */
+-	spi_nor_set_pp_settings(&params->page_programs[SNOR_CMD_PP],
+-				SPINOR_OP_PP_4B, SNOR_PROTO_1_1_1);
+-	/*
+-	 * Since xSPI Page Program opcode is backward compatible with
+-	 * Legacy SPI, use Legacy SPI opcode there as well.
+-	 */
+-	spi_nor_set_pp_settings(&params->page_programs[SNOR_CMD_PP_8_8_8_DTR],
+-				SPINOR_OP_PP_4B, SNOR_PROTO_8_8_8_DTR);
+-
+-	/*
+-	 * The xSPI Profile 1.0 table advertises the number of additional
+-	 * address bytes needed for Read Status Register command as 0 but the
+-	 * actual value for that is 4.
+-	 */
+-	params->rdsr_addr_nbytes = 4;
+-}
+-
+-static struct spi_nor_fixups s28hx_t_fixups = {
+-	.post_sfdp = s28hx_t_post_sfdp_fixup,
+-	.post_bfpt = s25_s28_post_bfpt_fixup,
+-	.late_init = s28hx_t_late_init,
+-};
+-#endif /* CONFIG_SPI_FLASH_S28HX_T */
+-
+-#ifdef CONFIG_SPI_FLASH_MT35XU
+-static int spi_nor_micron_octal_dtr_enable(struct spi_nor *nor)
+-{
+-	struct spi_mem_op op;
+-	u8 buf;
+-	u8 addr_width = 3;
+-	int ret;
+-
+-	/* Set dummy cycles for Fast Read to the default of 20. */
+-	ret = write_enable(nor);
+-	if (ret)
+-		return ret;
+-
+-	buf = 20;
+-	op = (struct spi_mem_op)
+-		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_MT_WR_ANY_REG, 1),
+-			   SPI_MEM_OP_ADDR(addr_width, SPINOR_REG_MT_CFR1V, 1),
+-			   SPI_MEM_OP_NO_DUMMY,
+-			   SPI_MEM_OP_DATA_OUT(1, &buf, 1));
+-	ret = spi_mem_exec_op(nor->spi, &op);
+-	if (ret)
+-		return ret;
+-
+-	ret = spi_nor_wait_till_ready(nor);
+-	if (ret)
+-		return ret;
+-
+-	nor->read_dummy = 20;
+-
+-	ret = write_enable(nor);
+-	if (ret)
+-		return ret;
+-
+-	buf = SPINOR_MT_OCT_DTR;
+-	op = (struct spi_mem_op)
+-		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_MT_WR_ANY_REG, 1),
+-			   SPI_MEM_OP_ADDR(addr_width, SPINOR_REG_MT_CFR0V, 1),
+-			   SPI_MEM_OP_NO_DUMMY,
+-			   SPI_MEM_OP_DATA_OUT(1, &buf, 1));
+-	ret = spi_mem_exec_op(nor->spi, &op);
+-	if (ret) {
+-		dev_err(nor->dev, "Failed to enable octal DTR mode\n");
+-		return ret;
+-	}
+-
+-	return 0;
+-}
+-
+-static void mt35xu512aba_late_init(struct spi_nor *nor,
+-				   struct spi_nor_flash_parameter *params)
+-{
+-	nor->octal_dtr_enable = spi_nor_micron_octal_dtr_enable;
+-}
+-
+-static void mt35xu512aba_post_sfdp_fixup(struct spi_nor *nor,
+-					 struct spi_nor_flash_parameter *params)
+-{
+-	/* Set the Fast Read settings. */
+-	params->hwcaps.mask |= SNOR_HWCAPS_READ_8_8_8_DTR;
+-	spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_8_8_8_DTR],
+-				  0, 20, SPINOR_OP_MT_DTR_RD,
+-				  SNOR_PROTO_8_8_8_DTR);
+-
+-	params->hwcaps.mask |= SNOR_HWCAPS_PP_8_8_8_DTR;
+-
+-	nor->cmd_ext_type = SPI_NOR_EXT_REPEAT;
+-	params->rdsr_dummy = 8;
+-	params->rdsr_addr_nbytes = 0;
+-
+-	/*
+-	 * SCCR Map 22nd DWORD does not indicate DTR Octal Mode Enable
+-	 * for MT35XU512ABA but is actually supported by device.
+-	 */
+-	nor->flags |= SNOR_F_IO_MODE_EN_VOLATILE;
+-
+-	/*
+-	 * The BFPT quad enable field is set to a reserved value so the quad
+-	 * enable function is ignored by spi_nor_parse_bfpt(). Make sure we
+-	 * disable it.
+-	 */
+-	params->quad_enable = NULL;
+-}
+-
+-static struct spi_nor_fixups mt35xu512aba_fixups = {
+-	.post_sfdp = mt35xu512aba_post_sfdp_fixup,
+-	.late_init = mt35xu512aba_late_init,
+-};
+-#endif /* CONFIG_SPI_FLASH_MT35XU */
+-
+-#if CONFIG_IS_ENABLED(SPI_FLASH_MACRONIX)
+-/**
+- * spi_nor_macronix_octal_dtr_enable() - Enable octal DTR on Macronix flashes.
+- * @nor:	pointer to a 'struct spi_nor'
+- *
+- * Set Macronix max dummy cycles 20 to allow the flash to run at fastest frequency.
+- *
+- * Return: 0 on success, -errno otherwise.
+- */
+-static int spi_nor_macronix_octal_dtr_enable(struct spi_nor *nor)
+-{
+-	struct spi_mem_op op;
+-	int ret;
+-	u8 buf;
+-
+-	ret = write_enable(nor);
+-	if (ret)
+-		return ret;
+-
+-	buf = SPINOR_REG_MXIC_DC_20;
+-	op = (struct spi_mem_op)
+-		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_WR_CR2, 1),
+-			   SPI_MEM_OP_ADDR(4, SPINOR_REG_MXIC_CR2_DC, 1),
+-			   SPI_MEM_OP_NO_DUMMY,
+-			   SPI_MEM_OP_DATA_OUT(1, &buf, 1));
+-
+-	ret = spi_mem_exec_op(nor->spi, &op);
+-	if (ret)
+-		return ret;
+-
+-	ret = spi_nor_wait_till_ready(nor);
+-	if (ret)
+-		return ret;
+-
+-	nor->read_dummy = MXIC_MAX_DC;
+-	ret = write_enable(nor);
+-	if (ret)
+-		return ret;
+-
+-	buf = SPINOR_REG_MXIC_OPI_DTR_EN;
+-	op = (struct spi_mem_op)
+-		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_WR_CR2, 1),
+-			   SPI_MEM_OP_ADDR(4, SPINOR_REG_MXIC_CR2_MODE, 1),
+-			   SPI_MEM_OP_NO_DUMMY,
+-			   SPI_MEM_OP_DATA_OUT(1, &buf, 1));
+-
+-	ret = spi_mem_exec_op(nor->spi, &op);
+-	if (ret) {
+-		dev_err(nor->dev, "Failed to enable octal DTR mode\n");
+-		return ret;
+-	}
+-	nor->reg_proto = SNOR_PROTO_8_8_8_DTR;
+-
+-	return 0;
+-}
+-
+-static void macronix_octal_late_init(struct spi_nor *nor,
+-				     struct spi_nor_flash_parameter *params)
+-{
+-	nor->octal_dtr_enable = spi_nor_macronix_octal_dtr_enable;
+-}
+-
+-static void macronix_octal_post_sfdp_fixup(struct spi_nor *nor,
+-					 struct spi_nor_flash_parameter *params)
+-{
+-	/*
+-	 * Adding SNOR_HWCAPS_PP_8_8_8_DTR in hwcaps.mask when
+-	 * SPI_NOR_OCTAL_DTR_READ flag exists.
+-	 */
+-	if (params->hwcaps.mask & SNOR_HWCAPS_READ_8_8_8_DTR)
+-		params->hwcaps.mask |= SNOR_HWCAPS_PP_8_8_8_DTR;
+-}
+-
+-static struct spi_nor_fixups macronix_octal_fixups = {
+-	.post_sfdp = macronix_octal_post_sfdp_fixup,
+-	.late_init = macronix_octal_late_init,
+-};
+-#endif /* CONFIG_SPI_FLASH_MACRONIX */
+-
+-#if CONFIG_IS_ENABLED(SPI_FLASH_WINBOND)
+-
+-#define WINBOND_NOR_OP_SELDIE  0xc2    /* Select active die */
+-
+-struct winbond_nor_priv {
+-	unsigned int n_dice;
+-};
+-
+-/**
+- * winbond_nor_select_die() - Set active die.
+- * @nor:       pointer to 'struct spi_nor'.
+- * @die:       die to set active.
+- *
+- * Certain Winbond chips feature more than a single die. This is mostly hidden
+- * to the user, except that some chips may experience time deviation when
+- * modifying the status bits between dies, which in some corner cases may
+- * produce problematic races. Being able to explicitly select a die to check its
+- * state in this case may be useful.
+- *
+- * Return: 0 on success, -errno otherwise.
+- */
+-static int winbond_nor_select_die(struct spi_nor *nor, u8 die)
+-{
+-	struct spi_mem_op op =
+-		SPI_MEM_OP(SPI_MEM_OP_CMD(WINBOND_NOR_OP_SELDIE, 1),
+-			   SPI_MEM_OP_NO_ADDR,
+-			   SPI_MEM_OP_NO_DUMMY,
+-			   SPI_MEM_OP_DATA_OUT(1, &die, 0));
+-
+-	int ret;
+-
+-	spi_nor_setup_op(nor, &op, SNOR_PROTO_1_1_1);
+-	ret = spi_mem_exec_op(nor->spi, &op);
+-	if (ret)
+-		debug("Error %d selecting die %d\n", ret, die);
+-
+-	return ret;
+-}
+-
+-static int winbond_nor_multi_die_ready(struct spi_nor *nor)
+-{
+-	struct winbond_nor_priv *winbond_priv = nor->priv;
+-	unsigned int n_dice = winbond_priv ? winbond_priv->n_dice : 1;
+-	int ret, i;
+-
+-	for (i = 0; i < n_dice; i++) {
+-		ret = winbond_nor_select_die(nor, i);
+-		if (ret)
+-			return ret;
+-
+-		ret = spi_nor_sr_ready(nor);
+-		if (ret <= 0)
+-			return ret;
+-	}
+-
+-	return 1;
+-}
+-
+-static void winbond_nor_multi_die_post_sfdp_fixups(struct spi_nor *nor,
+-						   struct spi_nor_flash_parameter *param)
+-{
+-	struct winbond_nor_priv *winbond_priv;
+-
+-	winbond_priv = kmalloc(sizeof(*winbond_priv), GFP_KERNEL);
+-	if (!winbond_priv)
+-		return;
+-
+-	winbond_priv->n_dice = param->size / SZ_64M;
+-
+-	/*
+-	 * SFDP supports dice numbers, but this information is only available in
+-	 * optional additional tables which are not provided by these chips.
+-	 * Dice number has an impact though, because these devices need extra
+-	 * care when reading the busy bit.
+-	 */
+-	nor->priv = winbond_priv;
+-	nor->ready = winbond_nor_multi_die_ready;
+-}
+-
+-static struct spi_nor_fixups winbond_nor_multi_die_fixups = {
+-	.post_sfdp = winbond_nor_multi_die_post_sfdp_fixups,
+-};
+-#endif /* CONFIG_SPI_FLASH_WINBOND */
+-
+ /** spi_nor_octal_dtr_enable() - enable Octal DTR I/O if needed
+  * @nor:                 pointer to a 'struct spi_nor'
+  *
+@@ -3644,63 +2790,6 @@ void spi_nor_set_fixups(struct spi_nor *nor)
+ {
+ 	if (nor->manufacturer->set_fixups)
+ 		nor->manufacturer->set_fixups(nor);
+-
+-#ifdef CONFIG_SPI_FLASH_SPANSION
+-	if (JEDEC_MFR(nor->info) == SNOR_MFR_CYPRESS) {
+-		switch (nor->info->id[1]) {
+-		case 0x2a: /* S25HL (QSPI, 3.3V) */
+-		case 0x2b: /* S25HS (QSPI, 1.8V) */
+-			nor->fixups = &s25_fixups;
+-			break;
+-
+-#ifdef CONFIG_SPI_FLASH_S28HX_T
+-		case 0x5a: /* S28HL (Octal, 3.3V) */
+-		case 0x5b: /* S28HS (Octal, 1.8V) */
+-			nor->fixups = &s28hx_t_fixups;
+-			break;
+-#endif
+-
+-		default:
+-			break;
+-		}
+-	}
+-
+-	if (CONFIG_IS_ENABLED(SPI_FLASH_BAR) &&
+-	    !strcmp(nor->info->name, "s25fl256l"))
+-		nor->fixups = &s25fl256l_fixups;
+-
+-	/* For FS-S (family ID = 0x81)  */
+-	if (JEDEC_MFR(nor->info) == SNOR_MFR_SPANSION && nor->info->id[5] == 0x81)
+-		nor->fixups = &s25fs_s_fixups;
+-#endif
+-
+-#ifdef CONFIG_SPI_FLASH_MT35XU
+-	if (!strcmp(nor->info->name, "mt35xu512aba"))
+-		nor->fixups = &mt35xu512aba_fixups;
+-#endif
+-
+-#if CONFIG_IS_ENABLED(SPI_FLASH_MACRONIX)
+-	if (JEDEC_MFR(nor->info) == SNOR_MFR_MACRONIX &&
+-	    nor->info->flags & SPI_NOR_OCTAL_DTR_READ)
+-		nor->fixups = &macronix_octal_fixups;
+-#endif /* SPI_FLASH_MACRONIX */
+-
+-#if CONFIG_IS_ENABLED(SPI_FLASH_WINBOND)
+-	if (JEDEC_MFR(nor->info) == SNOR_MFR_WINBOND) {
+-		u8 multi_die_models[][2] = {
+-			{ 0x40, 0x21 }, /* W25Q01JV */
+-			{ 0x70, 0x22 }, /* W25Q02JV */
+-		};
+-		int i;
+-
+-		for (i = 0; i < sizeof(multi_die_models) / 2; i++) {
+-			if (!memcmp(nor->info->id + 1, multi_die_models[i], 2)) {
+-				nor->fixups = &winbond_nor_multi_die_fixups;
+-				break;
+-			}
+-		}
+-	}
+-#endif /* SPI_FLASH_WINBOND */
+ }
+ 
+ int spi_nor_scan(struct spi_nor *nor)
+diff --git a/drivers/mtd/spi/winbond.c b/drivers/mtd/spi/winbond.c
+index 02c29ccf78c..d1030959b2c 100644
+--- a/drivers/mtd/spi/winbond.c
++++ b/drivers/mtd/spi/winbond.c
+@@ -5,6 +5,7 @@
+  * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
+  */
+ 
++#include <linux/sizes.h>
+ #include <linux/mtd/spi-nor.h>
+ #include "sf_internal.h"
+ 
+@@ -140,7 +141,110 @@ static const struct flash_info winbond_nor_parts[] = {
+ 	{ INFO("w77q51nw", 0xef8a1a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ };
+ 
++#if !CONFIG_IS_ENABLED(SPI_FLASH_TINY)
++
++#define WINBOND_NOR_OP_SELDIE  0xc2    /* Select active die */
++
++struct winbond_nor_priv {
++	unsigned int n_dice;
++};
++
++/**
++ * winbond_nor_select_die() - Set active die.
++ * @nor:       pointer to 'struct spi_nor'.
++ * @die:       die to set active.
++ *
++ * Certain Winbond chips feature more than a single die. This is mostly hidden
++ * to the user, except that some chips may experience time deviation when
++ * modifying the status bits between dies, which in some corner cases may
++ * produce problematic races. Being able to explicitly select a die to check its
++ * state in this case may be useful.
++ *
++ * Return: 0 on success, -errno otherwise.
++ */
++static int winbond_nor_select_die(struct spi_nor *nor, u8 die)
++{
++	struct spi_mem_op op =
++		SPI_MEM_OP(SPI_MEM_OP_CMD(WINBOND_NOR_OP_SELDIE, 1),
++			   SPI_MEM_OP_NO_ADDR,
++			   SPI_MEM_OP_NO_DUMMY,
++			   SPI_MEM_OP_DATA_OUT(1, &die, 0));
++
++	int ret;
++
++	spi_nor_setup_op(nor, &op, SNOR_PROTO_1_1_1);
++	ret = spi_mem_exec_op(nor->spi, &op);
++	if (ret)
++		debug("Error %d selecting die %d\n", ret, die);
++
++	return ret;
++}
++
++static int winbond_nor_multi_die_ready(struct spi_nor *nor)
++{
++	struct winbond_nor_priv *winbond_priv = nor->priv;
++	unsigned int n_dice = winbond_priv ? winbond_priv->n_dice : 1;
++	int ret, i;
++
++	for (i = 0; i < n_dice; i++) {
++		ret = winbond_nor_select_die(nor, i);
++		if (ret)
++			return ret;
++
++		ret = spi_nor_sr_ready(nor);
++		if (ret <= 0)
++			return ret;
++	}
++
++	return 1;
++}
++
++static void winbond_nor_multi_die_post_sfdp_fixups(struct spi_nor *nor,
++						   struct spi_nor_flash_parameter *param)
++{
++	struct winbond_nor_priv *winbond_priv;
++
++	winbond_priv = kmalloc(sizeof(*winbond_priv), GFP_KERNEL);
++	if (!winbond_priv)
++		return;
++
++	winbond_priv->n_dice = param->size / SZ_64M;
++
++	/*
++	 * SFDP supports dice numbers, but this information is only available in
++	 * optional additional tables which are not provided by these chips.
++	 * Dice number has an impact though, because these devices need extra
++	 * care when reading the busy bit.
++	 */
++	nor->priv = winbond_priv;
++	nor->ready = winbond_nor_multi_die_ready;
++}
++
++static struct spi_nor_fixups winbond_nor_multi_die_fixups = {
++	.post_sfdp = winbond_nor_multi_die_post_sfdp_fixups,
++};
++
++static void winbond_set_fixups(struct spi_nor *nor)
++{
++	u8 multi_die_models[][2] = {
++		{ 0x40, 0x21 }, /* W25Q01JV */
++		{ 0x70, 0x22 }, /* W25Q02JV */
++	};
++	int i;
++
++	for (i = 0; i < sizeof(multi_die_models) / 2; i++) {
++		if (!memcmp(nor->info->id + 1, multi_die_models[i], 2)) {
++			nor->fixups = &winbond_nor_multi_die_fixups;
++			break;
++		}
++	}
++}
++#endif /* !CONFIG_IS_ENABLED(SPI_FLASH_TINY) */
++
+ const struct spi_nor_manufacturer spi_nor_winbond = {
+ 	.parts = winbond_nor_parts,
+ 	.nparts = ARRAY_SIZE(winbond_nor_parts),
++#if !CONFIG_IS_ENABLED(SPI_FLASH_TINY)
++	.set_fixups = winbond_set_fixups,
++#endif
+ };
 
-Best regards,
 -- 
-Takahiro Kuwano <takahiro.kuwano@infineon.com>
+2.53.0
 
 
