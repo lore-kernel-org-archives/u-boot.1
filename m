@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 381FDCC6B38
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 13:24:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0B3BCC6B38
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 13:24:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0203361168;
-	Fri, 16 Oct 2026 13:24:10 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7B53261169;
+	Fri, 16 Oct 2026 13:24:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eJdFswhjKi0B; Fri, 16 Oct 2026 13:24:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 07A1461106
+ id O7cCDrlELTo4; Fri, 16 Oct 2026 13:24:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 49FDF61175
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792157049;
-	b=iBz3Ey+EQwCevDedSUt8txJaES4XaFxONvg7NhbL4Y/nMRFW7pE7EaX6oteqDOnBdkAw
-	 2c1UlN1Q7ADwvcFwVlHOqDwqj6u6LyRn7JYfwFwvq2qewfBImIzLpUlfxaxN3L0jonub8
-	 5fPebYEl62qEK64HT02up+oN+8cDg0lG8nGHDSS+CdWqVpds6/jjLEI0NWx4PGNi6QsHO
-	 t4JI5YSXHtvQq05tZpG1/WGlUaxhtO5QDaaV7LoSrqerd9wEvl61W7SSgom/Vbc+yhNmu
-	 7sIxFsrmTayWBx5qRizkwK5PUiG8Acj8Z2YdKixtjWdObhz36DUSewvLpzRAu8y7HCA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792157051;
+	b=rzJnJMujZDPSrDjKUgONJ39qCjaJw8/zAqj/1cPIz9vfS4ej4HwUeFwpMKQPaPZnY4ai
+	 H4qmJKSTMotXIGzEBugjkdOXdGWsblXzKSHkBfkTMDWPwPXhTjIS7eKxB6VtGc1vEr7Yu
+	 hdqleUnRUOqtpO4V5C3wI5NVtNZ8gLyZObV5n+x9LXKXKONEfC4aXtjfI7PEOutufdkrD
+	 36xIcATldfarsbRd5TbOArVMpJZulbHLyWGbccDHCTUdzp+QqKGx9RGsIIc16eZ/FaBVU
+	 lv3w3otSP6A0+MZ66cH9ps+mnrz9txXavfY/5vHZdawNRDkY2N06NrMouxCeVAEgB0Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792157049;
+	c=relaxed/relaxed; t=1792157051;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,148 +32,149 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=ClzbKaGmRGquw3jsXntfNglgB03NYLFGClP7Mq1kK3U=;
-	b=JAU+YR9M0ozWR9wv+3VIj6iZoh9ljX2x2jjIq7H7TyBjhAzIMCKHL8jpNQNYyFe4hFOJ
-	 nPpXA1SqpgBlHtaGPl5mXYHQyBOVURxp77j8mW1TIqmN3h7Q7w0gBq0Dt5JZznBHUtbw0
-	 GB4Q6Tw1pmP+k3Oe5Ep6SkyFmiA6NVE7ZOq1q75T5KQsTW6hCZ7PomnS2JEvlVl/F+4PA
-	 It8tQWLbAgWQlrPYoznatuochfSguUYyyACf2YZsbCveaZTd1LgD+/sYECBOcgj3VkEv4
-	 eOPPiD37CyLbaBlCf4/fbjiD1XP7cWJUmNLMKwKEaCrt1SSYuZjV8iB3eTIELyfzILg==
+	bh=pvIKtgapzI4POHaXrCs+z3de+y/y524prpOyqiXjsmQ=;
+	b=lAGnhiUvdGhHATjZ3WIyL9PvuW1gSY6QJhX4CqIyoSAwGcjkfpkBlqtrsYKL5WEIw3CW
+	 prjF+dM8p8pYmH+u7oV6CjNIocPKTvK9tuW49VPS08uigkLZGAM3ixdJwZMimBqDIcOH8
+	 Y8W+tJkVFZc8ViARVyWx0HF44iEI2Isu8UBTVCu3jp/33A+EN3TNXyPiP/RIMG2Q7uHIN
+	 TsUszPQTLvHM5a0/UjB3heIhm8ZqZxbzefCJjgV8AXmyJ1BedXnzXTnk+pO4H9I+UIk5y
+	 CNqJ4ACfDO/v0fApkZNvzKGOLFP1cZhqQSH1N0z0KchYBazbdKG1tPAYI24ZsUtDRcg==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	dmarc=pass header.from=canonical.com;
+	dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b="RHaagb/r";
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792157049;
-	bh=ClzbKaGmRGquw3jsXntfNglgB03NYLFGClP7Mq1kK3U=;
+	d=lists.u-boot-project.org; s=default; t=1792157051;
+	bh=pvIKtgapzI4POHaXrCs+z3de+y/y524prpOyqiXjsmQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=BYn0gv8+FUKGfkJfu5qIaNIalZronz7H9rqGqYYkvVAnYkf9/yviE43pbeJVN0OhL
-	 2cXYT2SS82XjRzUJfgACjIyh/uA3D6iHo63MXVmcwb8Cg8wwSCqfPhkV3sPgBBU62K
-	 I16GpEm9TNYNmKRiNwQN6p+Jkt/UkX3T3szrZ/iKk+472n4DXEMZRgt5JI4kUskMNe
-	 R77FNZv6G748O4iTYe85BHTF2onUEIXEAknr7Jk2Kd6mwNq0TB81DsUiYgss6vss9N
-	 GilZBUOfrGLww3AXOKwXJpXzRIuvATZe1g/Lgjq/zzm31I9a+UNQ5zzo8YwJ4eJNLo
-	 1qFbTucNV1Jrg==
+	b=J9TM3CfSiQDRX8+YGyfH5TdRt7l594COOKeYUsKdZ0Q5+b4UW+23YbGFqd1nETrje
+	 7kBJMofuB7FTCoyQrN2TYsBXpI7yRzQN9iuPyqk82kjPXtFEJIM9vbz304Fm627NEN
+	 rMJV7+MZVo2Jf/dkiGfFI5HHqnzI4qRTbCzkmiRUkBsGP2hNluzROVzKSeFpHy9IZF
+	 3+vaongR84kYmAxvRg+a1ynq2dgLGJFBAHbRbfVEF8AfEWbAuSSyESO38lOOLiYNHu
+	 qU7X+MMdxL2uGUVuTeWSEBqzEcVr0cROTisFPXgkbtlSl7lwDHn/z0jEhrTwsNGQf1
+	 FvWUlCI+q+Tgw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 07A1461106;
-	Fri, 16 Oct 2026 13:24:09 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 65617362
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 08:18:07 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 49FDF61175;
+	Fri, 16 Oct 2026 13:24:11 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id BBF93362
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 08:18:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 574A340974
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 08:18:07 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id B99ED60A72
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 08:18:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4TYh0cw9JE9h for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 08:18:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0A9EC4096F
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=185.125.188.122
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792138686;
- b=jhpxFNmpztAawXGjz1a3qy93jYfAR0suuDa4Fx4lT7CDKAo5wfYweo/bVvymO+cPRe8X
- xakQ+Y3JCPD3PTt/wPnxCJTxPFZZrr/EQKWUHtCTgMk9Qtsh5O+Ui2/b/L3xubbhuK4bs
- cIotPS0NB9kQlT1s2oEa0mo+5kW3od60AFCFdfjiFv0iecx6lhNIzKPa4AwBuNvtNlcsL
- oyphI3ldtQERnyxw4oC2Gu/f1KqWsaqGlNNMdE4j3GxRgZkfSAvT5GOFjMxKuD9SLFqn8
- RgzjmaYPB13taXMDfZ+aUu60JgXQgqnUmME1q00s6tag9Trz4Vsa7Oip/dBLrDFVMLw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id APG-Az47Jz-u for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 08:18:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org CC0526079B
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=185.125.188.123
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792138690;
+ b=K0nr4Cj+5ZfDH+AXUgtNpWstkNu0IcEFTZRlDjoOEG2CkTcnoQdbgwSlBR0B2CiW7GP3
+ oWH7SCRUK7QsQapvON/gJsxFvZLIOvJk+81T3fh45T5kJ3L/C2yYmhoFLOrP65pvu+p8Z
+ Zn0U95Q/QAjYhzgtSORE+gP4FiOtx4gjeJPO+wiHTmF3/c9A5cQDfjSytwTq78S1coHJ4
+ aH/kCCl4eNIlOMz3zP2xVK03mB3knkYIWPsDZJ+qfIcHQVf7YtQ/Fc+LEvgBBwAHi2OP9
+ 8ZuyIB3XIMcfb3udwsuld1mnonRmHtmG2SoqBskGCUyYZpBo9uca2ZSIuywSDtFoPEA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792138686;
+ c=relaxed/relaxed; t=1792138690;
  h=Received-SPF:Received:DKIM-Signature:Received:
  X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
  X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
  In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
- bh=ClzbKaGmRGquw3jsXntfNglgB03NYLFGClP7Mq1kK3U=;
- b=k55wyDWtlNh1Cj63CRptVD+GUcB0igPhAJUr8qCzuhEj9ycjw+iBavKS2SK9CziHkQEQ
- Fe+CTrmVI2SCCIfJ0lgIzEjqOI89rfzD9yNivLd8SXAOLR/BbzeyetwBIXK5R80CMMMyi
- UTmVqVpvLtM+23qr9pc8ct8NDsbpGVMqECiRUOmZpH5WkG+NbpenauXSe6aQvf07s8RhA
- oZtSdNdd1SwhFJWeJ7OeeG0zuSQ10MSU8l1Bn3Yz9MNfPGLuj6g7dYpc1mFyGtYyV4XsI
- gvXnHZEdL1ueIV1en9tVtR0ZzYNdKOD16WyhiQIXdsN/bjlVYmTfYzuhGcUH5EOb1Mw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=pvIKtgapzI4POHaXrCs+z3de+y/y524prpOyqiXjsmQ=;
+ b=XlAeqtExbwDc3CJ1BpfbXftJbyhx9qHyTVrQIbi1yuo5yGgflFNrlwGbuyjUtg/DewJY
+ hz5kBQ/HoWdzObtR61OvanmYaohqJeCVEa7ee8I4KDFmas9KSC5hJjsQhPh2Y2A0okIQs
+ 4sSo4TZUCKpiPirQRr7U0iVMP1mihlUJxq8ojyBhxJ76NezcURzb6Zqv0jjU/pLQ1LCs5
+ yXeqU+zeoA+Wsp2fOeZNyuySOuvn6TBEf9UeU7c15Uxxety2HsxGAUbvU/YDsMMkVmj3u
+ 9Bl4uf4gokT0CPcf4NhhzUompOiASWv0BJi7lqSAh/E3ARvZhW1mMgNWHOEDUZD0SyQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=canonical.com;
  dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
- header.s=20251003 header.b=TXjZ+olc; 
- arc=none smtp.remote-ip=185.125.188.122
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
- helo=smtp-relay-internal-0.canonical.com;
+ header.s=20251003 header.b="RHaagb/r"; 
+ arc=none smtp.remote-ip=185.125.188.123
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
  envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=TXjZ+olc
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 0A9EC4096F
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 08:18:05 +0000 (UTC)
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
+ header.a=rsa-sha256 header.s=20251003 header.b=RHaagb/r
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id CC0526079B
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 08:18:09 +0000 (UTC)
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id D3D3540315
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 08:18:03 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 0FBD54103B
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 08:18:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1792138683;
- bh=ClzbKaGmRGquw3jsXntfNglgB03NYLFGClP7Mq1kK3U=;
+ s=20251003; t=1792138688;
+ bh=pvIKtgapzI4POHaXrCs+z3de+y/y524prpOyqiXjsmQ=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=TXjZ+olc4kDbfo3noMDhCQE42mpwoOw5l7PMZ9wmxZSUqiI/pveOAwj6x9ToqyGli
- HFAW7ipfDB+MF/3S7KZ+MSWxXAvJrBlXXw57k6N+E4Gekw1AmdjqKU+99HIY3JJbya
- 0uYdCYgxB/QJAoJCtd2JyTWd0vUBQvVkxedA3+Sj4OkzRTmzZz2WZoJmEF/ZgR+nJD
- Sj6mhIqLKfiDfnGJSMey8gGtT/ueussCBE+kHP2+Qs06OpfkSdp3TDJDzF7GqDiMJq
- aE7ftfQrDzdqpOVWf6jLG8vf+jrEQbdFTxkhQO3ova/BgUYPnIYsoW2atNdtkdHKaF
- wgzPB+IixJ7wyXMpwaNDIolinMiFG8OAiuZ1COwl1fKw7dyunUl8aaKZxv6eb6RcRx
- KsoUmF1hEr8xQQEXWfnAfXwb2an/ctgs5tDHMemMOA1AbnSQCtGLHARgrBXg1oMiMc
- c2pZz2Aa9JNArSOpZhqeU+xwKG+gUO6hVF/vZJwpBpqziZ6hcsWxlULODZyz3TvnQT
- KZlD3mXywGfuD34xnciJDA6BUXEStjoYa/W19DMohob+m2l9V9UK4x67KfjjO6/w0A
- xBICJImUNFxM8+Egvzuq7upumS+4Y+u3KeJY20SmVSvHCiOgExIr2a+l3w/Q0QwDIZ
- 1QNVezLedn4ENGZn9KyhjmFM=
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-3ac450b74b0so4969781a91.0
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 01:18:03 -0700 (PDT)
+ b=RHaagb/rUZMq1l5WxyKl7slQBdRHcXvaSZYbX4KbdhHkdOnhU+iYRFXnAMvtGWmQJ
+ EIV1XzrYPI7ZnfZHS3wL+VY+QRhr0Z+A8pyNZF1UMRCj/d7JzSrtJr4II+iIK88+B2
+ mtAxAwr1sax8U6ZKqYlqgVLeO/muZDuQGySLwJQKZXy8ebQK0rsNX1NpYsNYkQ7HsR
+ qMm1A7t8cRF0fGJPQxFy8X644Q0nZEoYuJAA8O4mFcFNCm6ylB0bM2MW/K6vfVLqXB
+ kvfGm0VXQOqqAYhd6ub+FbWaKYyEyhQo5SUuWbEGno49Q/RMYWsBgy2OrTFvRKNl6h
+ uiXE8vj8kYeVXvjyJwbOn6QI5B6T5bRnqvHm41/yhTAcAzLZlm00zLTfP1c2H2rGHe
+ K5lycGJCqY28lgV76K5O2QqOg/WYFsyT27/WDX4YQQz9NwpfKqlrv23QlhA4nKKAuT
+ j11GEPhvwBYOiVFVcuII6EnvMrb3u9QjgPeuhJNTuphDfULrj3wcvnuEM8szmV5N3c
+ 6MYhC0bFK8uIywqekhn7Dpg8rxFrRGLwoawTQnRMl1DBwSEGKddHl5RX6umcI77Y3h
+ Oa8TYkegXSDef+ubTMMs73ui7IXm03sNMcrUWuSWbUmjF7l+bMCBwieukbCQDW7WWI
+ fi3yRjTFFvQeCZp3mtOoHAxQ=
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-3ab1e771632so828758a91.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 01:18:07 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792138682; x=1792743482;
+ d=1e100.net; s=20260707; t=1792138686; x=1792743486;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=ClzbKaGmRGquw3jsXntfNglgB03NYLFGClP7Mq1kK3U=;
- b=k7P8WIwfCrhQDwCqcP9xF2HP4BuZ8cg40uj15ERfp+vQ7QGqXwzDvIEaK9hJNg0ycF
- EogpfVepjgLtjgq9KBt+CaalzsDKQZsAybOP0DBb7Yeh4uhyeh4v3xcWWpOAZ2AlBk42
- 57+JrDCEMKe/t7PDkZb/fZLZeZ1I7EOfLrWiTLJANfYYW9yHBwHG3jXsr4Cxmi87/ClW
- xKVQzyBbaZ4aGpFx8R6v42z7/TsP/fYbnpd3wqAtceb7WDUx8vZMAWMUPQEoK7HmDDPP
- fzIE1VURcAoMUZVO876eWJ/C+eaI4VN1U5doIcT24peW6mL58H/EIc2rL9j5xS1+Grz1
- hKHg==
-X-Gm-Message-State: AFq9FYIt1iYqZUQv+uaQZ0k+tYWVeiSSBQP/6zeXQm0sDxVD3+b/cgTl
- xD66yDEMlCV5F6uw4KgnblbUFDZWxV+ktVQjjepbnKqdmkIsnqYe/hS/RWqHb9QPk65oVzKWwOa
- shen9ceYcZJrdT2JXlz3N4aek6pfkmlp82FSvMIogO5LzaD/tlmIRQxioy6RlmD6rkaFWyigxhE
- GXDqWgaRbxktG4rGdqZA==
-X-Gm-Gg: AYBFou3jlzzFgs2TCTwGsNGh+URqxGsnN3cYxxu4+Cgk7j6cYY9vBn/J6HFNkJNr3TQ
- RpbZlarHLHQWK/a6ZK+DTmkbmYl0tOrMKZjqc7y5dsezbzEPNQ4oXSBLXXrJoNrSmRzWg8y73UX
- iRQWIsyA7JikTfy0Ucf5tHkRZz5Fsul5fvkXINK+WYEQ7QHARwMKJdBYS7vA3kSSDONqQe7ZKom
- o1eXRh+Zl0FdWnVus7KGd1r0W0MXhHncmBW3J4fJLf/OYz1B2gixHoe9rYBbcesn/wmpoMr3MZY
- S6+MwXkITnGRpqS9/kdpGm7nph00jMT3y5CtnLaSP/wfEY1UStTkkQ5wBENtDmKJhAAx4XqVaTX
- oHyZcGNcI67Uohs2yYeGjze5WMEiE3cpT5uJ/cI61004X2svysy2oVbotWJlIN/fuHQ==
-X-Received: by 2002:a17:90b:3b4f:b0:3ac:7556:8ed9 with SMTP id
- 98e67ed59e1d1-3ac7556a40amr6909490a91.10.1792138682153; 
- Fri, 16 Oct 2026 01:18:02 -0700 (PDT)
-X-Received: by 2002:a17:90b:3b4f:b0:3ac:7556:8ed9 with SMTP id
- 98e67ed59e1d1-3ac7556a40amr6909468a91.10.1792138681655; 
- Fri, 16 Oct 2026 01:18:01 -0700 (PDT)
+ bh=pvIKtgapzI4POHaXrCs+z3de+y/y524prpOyqiXjsmQ=;
+ b=wCz9nMZE6YrufMH/6zTOMyis4gVCbPIaS9A9uLvV+oZKz0ts+vmJhlRwig0R86gx3B
+ i/2cbIBPWu240bAybXoDqj3uzZ2AoZLT3bUkEwYcspzDVm/IPDnK/hVv6NWpTRjsgNaD
+ 7hXyGTd/5t3dS1HT0Yc+HEWmd4jAcghjl+dH2ASX7vFJ0ymF659yXE8jGBL+Qs3fuUj0
+ ITQxkixNS/uy5Rk1kVx8XQPSypjApcMkVrkq8oxmNbvaHvAvS37xnFDy5pQjbqwac9l1
+ lABhdkOr/1WK0WhFkrTVAOervEcLuwy2+ICbNUt2LllA9ho0pKkk/ZAHXtnjDKn74F0n
+ 0l/Q==
+X-Gm-Message-State: AFq9FYLwJh5ymUthRDmS5TJfs7/2ea4zE0yFTYWYCPbvw0/j+Pn569na
+ js2Obopaoume3OmIsMDobQNdDpFfOeYgT15XjwEY1F1c+WpmQfUoBAEzYhd2jrwhEx2xeu05plp
+ cWX7gB2eXnpB33ElwmXCF+Cwk+vneVTHpBmrDWWEENP6bAhtHMG7SR5cmCVj7bt8EVadTyFGdLM
+ zMry88MFiW8KRp4fhtOQ==
+X-Gm-Gg: AYBFou349pBLIXYvRzaPMf2YjlD6vkbY0c0xYRCU4CvQHI0P9C1ybTW5SAkOv5Tm61k
+ Qhdiuh3rNmL3XidFZIRJWTuRsxsHEDfKXK2IhRqMmf9F4Q+lR5PhfhOvP+c/LBnVMIOWwMqy7ZO
+ dmsgP7aXsUObU2PwCPorndGG/12h6Y29munLOYmj1i7gLR4IXnHVdvvGE2uhrxxH+NvybCpgDxv
+ BiFCmkR9pQxV4QL5Xgv8qJ58q81y3X9IeQ9fB2x0oUs1YLCFknh2d4KSycW/g6CKysUfy2+On9z
+ pi9B6/63bgMou8Elk4vLxYCuh7QMrCsFtdzRhUecOE+fHKG83YpaBRYXKRDCBsz1NKzVrCTGytq
+ MSlQL1R4Yj+YioL4JuayscA3H/L+T7weUPVcdflZiwSNTMS1IpSntXh3uXf5gojCnFA==
+X-Received: by 2002:a17:90b:2c86:b0:3ab:330d:6e47 with SMTP id
+ 98e67ed59e1d1-3acbb7b6d77mr1688571a91.10.1792138686352; 
+ Fri, 16 Oct 2026 01:18:06 -0700 (PDT)
+X-Received: by 2002:a17:90b:2c86:b0:3ab:330d:6e47 with SMTP id
+ 98e67ed59e1d1-3acbb7b6d77mr1688555a91.10.1792138685857; 
+ Fri, 16 Oct 2026 01:18:05 -0700 (PDT)
 Received: from noble-uboot.tail872496.ts.net
  (211-75-139-218.hinet-ip.hinet.net. [211.75.139.218])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ac9474b52fsm9149405a91.9.2026.10.16.01.17.59
+ 98e67ed59e1d1-3ac9474b52fsm9149405a91.9.2026.10.16.01.18.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Oct 2026 01:18:00 -0700 (PDT)
+ Fri, 16 Oct 2026 01:18:04 -0700 (PDT)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.u-boot-project.org
 Cc: trini@konsulko.com, sjg@chromium.org, anton@binarly.io,
- pranavkasthuri@gmail.com, Aristo Chen <aristo.chen@canonical.com>,
- James Hilliard <james.hilliard1@gmail.com>
-Subject: [PATCH v2 4/5] tools: mkimage: bound external data reads in
+ pranavkasthuri@gmail.com, Aristo Chen <aristo.chen@canonical.com>
+Subject: [PATCH v2 5/5] test: py: cover invalid external data properties in
  fit_import_data()
-Date: Fri, 16 Oct 2026 08:16:26 +0000
-Message-ID: <20261016081719.814357-5-aristo.chen@canonical.com>
+Date: Fri, 16 Oct 2026 08:16:27 +0000
+Message-ID: <20261016081719.814357-6-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261016081719.814357-1-aristo.chen@canonical.com>
 References: <20261011152235.8842-1-aristo.chen@canonical.com>
@@ -194,102 +195,165 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-fit_import_data() reads each image's external data from the mapped FIT
-file at the offset and size the FIT itself declares, without checking
-that the region lies inside the file. A data-offset or data-position
-pointing past the end of the file, or a size reaching beyond it, makes
-mkimage read outside the mapping, crashing on re-process or silently
-importing unrelated memory as image data. An authored .its that
-declares external data properties hits the same path, since dtc
-produces no payload beyond the device tree.
+Build an external-data FIT, then point one image's data-offset far past
+the end of the file and, separately, make its data-size run a few bytes
+past the end, re-processing the result with mkimage -F each time. Both
+must be rejected with a diagnostic naming that image. Previously the
+first crashed mkimage and the second silently imported the bytes beyond
+the end of the file as image data.
 
-Read the properties through fit_image_get_data_position(),
-fit_image_get_data_offset() and fit_image_get_data_size(), which return
-u32 since commit c4d81d062790 ("image-fit: Use unsigned types for
-external data properties"), so a value of 0xffffffff is no longer
-mistaken for a missing property. They fail for a property that is not
-exactly one cell, and the import then skips the image as if the
-property were missing, as it already did for a shorter one. Compute the
-file offset in 64 bits and require the whole region to lie within the
-mapped file before importing it, with an error naming the image and the
-offending values. An empty region reads nothing, so it is not checked:
-mkimage -E -p places one past the end of the file when every image is
-empty, and such a FIT must still re-process.
+Also check that a FIT whose images are all empty, which mkimage -E -p
+writes with data-position past the end of the file, still re-processes,
+since an empty region has nothing to read.
+
+Finally, check that a data-offset or data-size that is not exactly one
+cell is skipped like a missing property, so that mkimage finds no data
+for the image and fails. fdtdec_get_int() already ignored an empty
+property, so that case covers the length check the import now relies on
+in the accessors. A property of two cells used to be imported from its
+first cell, so that <0 0> made the image use another image's data or
+left it empty.
+
+While at it, correct the comment in
+test_fit_import_data_missing_offset(), which said that the hashing stage
+reports the skipped image. mkimage stops before that stage, in the
+cipher pass, which runs first and fetches the data of every image.
 
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-v2: no code changes, collected Reviewed-by
+v2: also cover a data-offset and data-size of two cells, rename the
+test to test_fit_import_data_prop_len and reword its comment and the
+last paragraph of the commit message, as suggested by Simon. Neither
+names the hashing stage any more, since mkimage stops in the cipher
+pass before reaching it, and the comment of the existing
+test_fit_import_data_missing_offset() is corrected too.
 
- tools/fit_image.c | 41 +++++++++++++++++++++++++++++------------
- 1 file changed, 29 insertions(+), 12 deletions(-)
+ test/py/tests/test_fit_import_data.py | 96 ++++++++++++++++++++++++++-
+ 1 file changed, 94 insertions(+), 2 deletions(-)
 
-diff --git a/tools/fit_image.c b/tools/fit_image.c
-index b648e3e2514..f0f30e06bd9 100644
---- a/tools/fit_image.c
-+++ b/tools/fit_image.c
-@@ -1033,9 +1033,9 @@ static int fit_import_data(struct image_tool_params *params, const char *fname)
- 	     node >= 0;
- 	     node = fdt_next_subnode(fdt, node)) {
- 		const char *ext_data_prop = NULL;
--		void *data = NULL;
--		int buf_ptr;
--		int len;
-+		uint64_t offset = 0;
-+		u32 val;
-+		u32 len;
+diff --git a/test/py/tests/test_fit_import_data.py b/test/py/tests/test_fit_import_data.py
+index 95f7114243e..7ce59291953 100644
+--- a/test/py/tests/test_fit_import_data.py
++++ b/test/py/tests/test_fit_import_data.py
+@@ -3,7 +3,7 @@
+ #
+ # Test mkimage import of external data in fit_import_data()
  
- 		/*
- 		 * A source file must not combine image-data with external
-@@ -1059,22 +1059,39 @@ static int fit_import_data(struct image_tool_params *params, const char *fname)
- 		 * FIT_DATA_OFFSET_PROP and FIT_DATA_POSITION_PROP are never both present,
- 		 *  but if they are, prefer FIT_DATA_OFFSET_PROP as it was there first
- 		 */
--		buf_ptr = fdtdec_get_int(fdt, node, FIT_DATA_POSITION_PROP, -1);
--		if (buf_ptr != -1) {
-+		if (!fit_image_get_data_position(fdt, node, &val)) {
- 			ext_data_prop = FIT_DATA_POSITION_PROP;
--			data = old_fdt + buf_ptr;
-+			offset = val;
- 		}
--		buf_ptr = fdtdec_get_int(fdt, node, FIT_DATA_OFFSET_PROP, -1);
--		if (buf_ptr != -1) {
-+		if (!fit_image_get_data_offset(fdt, node, &val)) {
- 			ext_data_prop = FIT_DATA_OFFSET_PROP;
--			data = old_fdt + data_base + buf_ptr;
-+			offset = data_base + (uint64_t)val;
- 		}
--		len = fdtdec_get_int(fdt, node, FIT_DATA_SIZE_PROP, -1);
--		if (!data || len == -1)
-+		if (!ext_data_prop || fit_image_get_data_size(fdt, node, &len))
- 			continue;
-+
-+		/*
-+		 * The offset and size come from the FIT itself, so make
-+		 * sure the region lies within the mapped file before
-+		 * reading it. An empty region reads nothing and may lie
-+		 * past the end, as mkimage -E -p places it there when every
-+		 * image is empty.
-+		 */
-+		if (len && (offset > (uint64_t)sbuf.st_size ||
-+			    len > sbuf.st_size - offset)) {
-+			fprintf(stderr,
-+				"Error: image '%s': external data at file offset 0x%llx size 0x%x is outside the FIT file (size 0x%llx)\n",
-+				fdt_get_name(fdt, node, NULL),
-+				(unsigned long long)offset, len,
-+				(unsigned long long)sbuf.st_size);
-+			ret = -EINVAL;
-+			goto err_munmap;
-+		}
-+
- 		debug("Importing data size %x\n", len);
+-"""Regression test for stale per-image state in fit_import_data().
++"""Regression tests for fit_import_data().
  
--		ret = fdt_setprop(fdt, node, FIT_DATA_PROP, data, len);
-+		ret = fdt_setprop(fdt, node, FIT_DATA_PROP, old_fdt + offset,
-+				  len);
- 		if (ret) {
- 			debug("%s: Failed to write property: %s\n", __func__,
- 			      fdt_strerror(ret));
+ The import loop used to keep the data pointer and external property name
+ of the previous image, so an image node carrying data-size but neither
+@@ -11,6 +11,11 @@ data-offset nor data-position imported the previous image's data and
+ then made mkimage abort without printing any diagnostic. Such a node
+ must be skipped by the import and reported by the later processing
+ stages instead.
++
++The import also read each image's external data at the offset and size
++the FIT declares without checking them against the file, so a region
++reaching past the end of the file crashed mkimage or imported unrelated
++memory as image data. Such a region must be rejected before it is read.
+ """
+ 
+ import os
+@@ -107,9 +112,96 @@ def test_fit_import_data_missing_offset(ubman):
+     fdtput_keep_data(itb, '/images/kernel-2', 'data-offset', opts=['-d'])
+ 
+     # Re-processing must skip the malformed image in the import, so that
+-    # the hashing stage reports it; previously the stale pointer made the
++    # a later stage reports it; previously the stale pointer made the
+     # import write kernel-1's data into kernel-2 and abort silently
+     result = subprocess.run([mkimage, '-F', itb],
+                             capture_output=True, text=True)
+     assert result.returncode != 0
+     assert "Can't get image data/size" in result.stderr
++
++
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.requiredtool('dtc')
++@pytest.mark.requiredtool('fdtput')
++def test_fit_import_data_out_of_range(ubman):
++    """External data outside the file must be rejected, not read"""
++    mkimage = os.path.join(ubman.config.build_dir, 'tools/mkimage')
++    params = {
++        'kernel1': fit_util.make_kernel(ubman, 'oob-kernel1.bin', 'first'),
++        'kernel2': fit_util.make_kernel(ubman, 'oob-kernel2.bin', 'second'),
++    }
++    its = fit_util.make_its(ubman, BASE_ITS, params, 'oob.its')
++    itb = fit_util.make_fname(ubman, 'oob.itb')
++
++    result = subprocess.run([mkimage, '-E', '-f', its, itb],
++                            capture_output=True, text=True)
++    assert result.returncode == 0, result.stderr
++
++    # Point kernel-2's data far past the end of the file
++    fdtput_keep_data(itb, '/images/kernel-2', 'data-offset', '0x40000000',
++                     opts=['-t', 'i'])
++    result = subprocess.run([mkimage, '-F', itb],
++                            capture_output=True, text=True)
++    assert result.returncode != 0
++    assert "image 'kernel-2': external data" in result.stderr
++    assert 'outside the FIT file' in result.stderr
++
++    # A size running just past the end of the file must be rejected too.
++    # kernel-2's data comes last, padded to 4 bytes, so 4 bytes more than
++    # its real size always reach past the end.
++    result = subprocess.run([mkimage, '-E', '-f', its, itb],
++                            capture_output=True, text=True)
++    assert result.returncode == 0, result.stderr
++    size = os.path.getsize(params['kernel2']) + 4
++    fdtput_keep_data(itb, '/images/kernel-2', 'data-size', f'{size:#x}',
++                     opts=['-t', 'i'])
++    result = subprocess.run([mkimage, '-F', itb],
++                            capture_output=True, text=True)
++    assert result.returncode != 0
++    assert "image 'kernel-2': external data" in result.stderr
++
++    # An empty region has nothing to read, so it is accepted even past the
++    # end of the file, which is where mkimage -E -p places it when every
++    # image is empty
++    for name in ('kernel1', 'kernel2'):
++        params[name] = fit_util.make_fname(ubman, f'oob-empty-{name}.bin')
++        with open(params[name], 'wb'):
++            pass
++    its = fit_util.make_its(ubman, BASE_ITS, params, 'oob-empty.its')
++    result = subprocess.run([mkimage, '-E', '-p', '0x1000', '-f', its, itb],
++                            capture_output=True, text=True)
++    assert result.returncode == 0, result.stderr
++    assert os.path.getsize(itb) < 0x1000
++    result = subprocess.run([mkimage, '-F', itb],
++                            capture_output=True, text=True)
++    assert result.returncode == 0, result.stderr
++
++
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.requiredtool('dtc')
++@pytest.mark.requiredtool('fdtput')
++def test_fit_import_data_prop_len(ubman):
++    """An external data property that is not exactly one cell is not read"""
++    mkimage = os.path.join(ubman.config.build_dir, 'tools/mkimage')
++    params = {
++        'kernel1': fit_util.make_kernel(ubman, 'len-kernel1.bin', 'first'),
++        'kernel2': fit_util.make_kernel(ubman, 'len-kernel2.bin', 'second'),
++    }
++    its = fit_util.make_its(ubman, BASE_ITS, params, 'len.its')
++    itb = fit_util.make_fname(ubman, 'len.itb')
++
++    # A property that is not exactly one cell must be skipped like a
++    # missing one, so that mkimage finds no data for the image and fails.
++    # An empty one must not be read from the bytes that follow it, and one
++    # of two cells must not be taken from its first cell.
++    for prop in ('data-offset', 'data-size'):
++        for cells in ([], ['0', '0']):
++            result = subprocess.run([mkimage, '-E', '-f', its, itb],
++                                    capture_output=True, text=True)
++            assert result.returncode == 0, result.stderr
++            fdtput_keep_data(itb, '/images/kernel-2', prop, *cells,
++                             opts=['-t', 'i'])
++            result = subprocess.run([mkimage, '-F', itb],
++                                    capture_output=True, text=True)
++            assert result.returncode != 0
++            assert "Can't get image data/size" in result.stderr
 -- 
 2.43.0
 
