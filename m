@@ -4,151 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 186AACCF2C0
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 17:50:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15BFCCC6B38
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 18:27:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BE7F040AFC;
-	Fri, 16 Oct 2026 17:50:05 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9A23140B86;
+	Fri, 16 Oct 2026 18:27:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9IGBzs64WHiC; Fri, 16 Oct 2026 17:50:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 830B240ADB
+ id q5nlUjwYCbny; Fri, 16 Oct 2026 18:27:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E463E40BC0
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792173004;
-	b=rhrt2dPI9w9WgVaS6OvQjufwXCbcvYKBwfyRT2aYTIdDceNDnceSCWq8ZaIKaLdamXDt
-	 inQgGAvCCTAq3a4lEaVUHOuBuI07JmT4XcI4LmaBn9EbitOCTOUvtFLZ2WK4HarSgWgeE
-	 Y3cPW1MC+WT/zV/KjihxAfxvtKEdw7tLqr/CSQjWsehvDg56GSwe4j70EMtiPP8mRAR5O
-	 a841rb8Bu27vOCAu+bBxKM9EAVlCk5JkP1ksEcRKS8+LBkbOG6W8oV+pkf8VPaNIpUv5t
-	 R8f+40N4a14CgFqk9KhyFVfpeMfq7Gh8gaqToJfpuxfWgpmsdyV+JRTacnLf2oSqB1Q==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792175222;
+	b=KoduXTzO879Ds+IMPDYJIrSD+HdDU3sGTDaJPGQ6whPTnt20XDZA31PHpyqLczKSv1p0
+	 RI8/nGyCKhLcXeYWueFHcI0QTsJA3oUJtpKJP+RV3UuFavJI/b1fCHNPHsUOAjdFSow2r
+	 vnPRvNNgmOs9MH5MY0LRCS/U3iF4ytyxuLuverer9sE/cUZlzyBKr/p9KhkJ+9B4rohju
+	 Vbf+qnSHvWC++6TqWz/3GViWIVBrHaLAaNWVougMkdX6xa8jldxSczLCYQJwyrtVIsuW/
+	 SVyzuEYxsKZ+v1dDBDf6DVCSDNMO4qRMNE+AIfzfEDnETizAfjfeNLiregNY2CJtJMw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792173004;
+	c=relaxed/relaxed; t=1792175222;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:X-IronPort-AV:
-	 X-Amp-Result:Received:Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:
-	 X-B4-Tracking:X-Change-ID:To:CC:X-Mailer:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=gUoId1AKiMdr+x9Qym5ch10gmtrPTcq7NXWdK0JCq+E=;
-	b=UtrKdgQZLXxNBOlTDMMhZRgJ2cFdhHgickt+JMmoeqPuLOHxF5zxEmhtaBZnUsL9qE9A
-	 eCnCNxawzWKaj9im3KQBAbDVSncj+QWDvwQElKG03JM+dAtH4JgCIVU3PE7fRXqlz0Xzm
-	 UclWkPDRw6CsRbEEAjKHscY3QTew3eGMKq5k2/YOmD4/3S+JKHEr5LI2ccgWGASetwhld
-	 aOVOEBNJ3aqnNEPcH3LbY3nSkIYe7bmqp29Nhywd2mOgcQkvySn3tJWrB+WYYZQiCrUmo
-	 cVN5Q4zzLkvKz+sWYGSY5ehZ20+TfhZYOESwfBJXjbHdZUlX+NUuKSafsCOBrFwCMnQ==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Clacks-Overhead:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=H0hrqzbIfiIBMI2nhszhrkwrYztBLDGf5V3BRlrVN5E=;
+	b=oe1DIlAglSFtJIy64XP/NDM/EVY9acN1iyTw04u32Wcv6iifiVvgPM225l2S9vgJyPb2
+	 ZMEEmp3aToVBdTgYAhMajcPG4rlQDECAfah7QEV6Z6Ocq9pyQ2/Z7BnbOAC9vtsYXRerw
+	 Htb+Sme7qKfG22tJ7pbOdOIl7tsgNL9QfiLk4/z0FXILI/qqgbjVlwTLc7eMQnSF0jCSR
+	 fHDMKvW+L/1bRO2PVhVxshV0RbHNX7Ul2Y0bAiQ7+gSusBejmar3Eot3P+rcPb136kUSL
+	 VNbEzNyNFmuYLHlPsui9+nU5cvsmAH5rGgy41Mps3mfk9FDzsOFMdsINSTBpFT69stg==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792173004;
-	bh=gUoId1AKiMdr+x9Qym5ch10gmtrPTcq7NXWdK0JCq+E=;
-	h=From:Date:Subject:To:CC:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=PpG+LXQOMKWkH8mJP0z+vQ877warBej45nV81SV81htb6H7ogdh55dWn051sWUD1f
-	 D/3WhwnPW0D1TrbywTqyMuE8Lm9M4JOAvIKxrpnknBC5UolKKiR9UVcBR7joUCqXYQ
-	 M7JXRdbtZva81wqiEuzy8paDhyJ98YXmNk0/Nw/F901LDHatWDoSDEIyJObXFyT358
-	 939i28+w7PAh7OlHlrF3HVEie2AB0NqEhN0oMnrK+0G3Xi3ZkORX6uLgctwJ18srOq
-	 7dqC0efKnd1uA83mNrR3N0Tg1CqRs69cjd6gVXFMUfy7XM7Hb6VOmlvWwc33/cI5+x
-	 Dr6NzQZAaLkiA==
+	d=lists.u-boot-project.org; s=default; t=1792175222;
+	bh=H0hrqzbIfiIBMI2nhszhrkwrYztBLDGf5V3BRlrVN5E=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=jrK5uA4Xuh00j0Tciox0l7/MrUAT0VpAHx7GSWVSWVdv5htYm9EvW8uEPI/JU3pdZ
+	 9qFKjqJa3GIB8d9G/f4E4hG2LaVfFm/drAbNHbZnjyDISvXZKkYaqn5B5ZisFhbq1D
+	 uiqG5+Dlkf5e4DwIoi4B1wgRx0IL9zoY2O5d6g2pNrbQwInz+iXChY9TEMJCAOYo+X
+	 VPeML4+eal8zECrYkmjHE/9liRws99cCWiAusybLIpG8srUkYWUG2eAX7yWH2zinZm
+	 c6FLEOH3a3E7K7ZJVUq0sr27XAt8hu/Kx7kj/LydOpyZyc4KskmOG78pcVcm+B+e5Q
+	 J4S8Qz5p9m94Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 830B240ADB;
-	Fri, 16 Oct 2026 17:50:04 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id BBBB77AD
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 17:50:02 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E463E40BC0;
+	Fri, 16 Oct 2026 18:27:01 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3EA32255
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 18:27:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id A6833814A0
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 17:49:49 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 305CD60B8C
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 18:27:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MOdA78Xw2dPU for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 17:49:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6FADA81218
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=68.232.153.233
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792172988;
- b=h59zuvKn3V49TwN2SWNWy5lYAkZWe2inaUlRwvfPD7DNgyV6cP3TZ1Y2BvV/Gz9X4byL
- fns/BC44pgZJ7DW31dmiAqq1gsqS/ZadMuN6o02cMty1qKu6o+DeNnDKTR+CJXkVPECrk
- patWix0YDjV2euBvak4dwuo8p2MM5JoTn7e/C44cH5fZIAWfUhaldCwI4jqO59TbYls+p
- 9PSBz0AWeqBqrqCxojP4w2QCyOSbJy+3LV64X+8pEsUg+lvFp3ejnp/O+BYts6Im3GRbc
- 2OLbw4PVVrAwUpF1qcF0GIU5qSGr/NiYLKcrPjMMHfqfSvSoz1f8tXS89ViFV9+xhGA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VJOGWSVeO7e7 for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 18:26:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 59EA360AC3
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::235"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792175219;
+ b=F7HwiZ725YDodEoWcBBpIqd2WZoC/6/QOhKQkSlhoH8rHDL9FoISwQhJ6zTKGyBiTHL5
+ kY57NYCa4yzRNI3JoiDmnrgDgx4d5+l3CcWMZRAjfwppG5jx+zh5eFEYWjufJXjY/+LK4
+ AHmfymgpIRYZCHPQTcJXvXT2gUhYALn60mus+ggaxKqO8ig43H03fL63pnEZp/WP3epeh
+ I4N0MsXAfPaYn3++re051QdNHsRVwGei0b9r/+1xRamtKYi+shdIpOmHOkP3eBzHmhz9P
+ SWWkTGW+oVhpvqAmNk9mkfA20xNQRt9lWGJeyYg+IlXecv816lylTsPgCReiMLPcysQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792172988;
- h=Received-SPF:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
- X-IronPort-AV:X-Amp-Result:Received:Received:Received:From:Date:
- Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-ID:X-B4-Tracking:X-Change-ID:To:CC:X-Mailer;
- bh=gUoId1AKiMdr+x9Qym5ch10gmtrPTcq7NXWdK0JCq+E=;
- b=Io83r0MLZAnq51MMZUh2g+amTd7eQjCTvV1MUfAY/yhkUtGtYcCnlksdxTFmbDQ6O11M
- vEyW1vHgwnjOPnDIAQZr5+sAgsHIIKTUVTYo65yTx7zDz5NO6kadd0E7qFMSUQxZS2aQn
- osrpjfzY5Jr62unq9DrBLNTorYQN42+7ZSCnZBSmlfCnDs9tTKmLIHa1IXw4FqmMbGflF
- UI9BltZkttexghm3vKAdtzX45AB1jvNkcwamsrD6KDFZxbvU6J8bwoP69sOgZbvEYpoIq
- lAhMZ0NHre/ybYjGF5VCsfkBUvTFhUkvhxo45H/lYx/pJeJjdZvcDAgup1dbMDPlBCw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=pass header.from=microchip.com;
- dkim=pass header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256
- header.s=mchp header.b=B1Kdn1tT; 
- arc=none smtp.remote-ip=68.232.153.233
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=68.232.153.233;
- helo=esa.microchip.iphmx.com;
- envelope-from=prvs=742e5c17b=charles.perry@microchip.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=microchip.com header.i=@microchip.com
- header.a=rsa-sha256 header.s=mchp header.b=B1Kdn1tT
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6FADA81218
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 17:49:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1792172988; x=1823708988;
- h=from:date:subject:mime-version:content-transfer-encoding:
- message-id:to:cc;
- bh=A5T0nUVatHrbfuYD+Op80/wH2PQFrq7bkMUQE8XCzRM=;
- b=B1Kdn1tTc+4opdlDK0v9eOhdRs7k1ik2RKTAUGo8SsXhveW0zpUCYwlG
- c4TMTQ+PKOn3UqvsZ7OrIjyLs6E143irTqbk4HQPkCxSbXNzeEqgZ8zIm
- Aaf8pHteZW2IV+fAB7orehciwSwf83Nbtoa8Rq45Ht1qMQypOVCQHBZeF
- nlcLdW0jWn2IJDjo9L3523XwDviPSZuyw3IVKp7agpMjzjXzymhtfYvIx
- +PgepI+TYP7TRuF7dqi28kd9d82DyyhZ6BVnmqVbWZEew3g9In7OL++gp
- dHvfm+YtBrJV5zVcm1Nd9WHuJQS/lfa9Htzsqv+ZSHqWgyih5GSCgq+nT w==;
-X-CSE-ConnectionGUID: cnk9xSrkRFqZ+llq90NsCw==
-X-CSE-MsgGUID: a7978BUqSJy/5gdNwvU+5Q==
-X-IronPort-AV: E=Sophos;i="6.27,162,1787036400"; d="scan'208";a="75561802"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa1.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 16 Oct 2026 10:49:45 -0700
-Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Fri, 16 Oct 2026 10:49:45 -0700
-Received: from bby-cbu-swbuild03.eng.microchip.com (10.10.85.11) by
- chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Fri, 16 Oct 2026 10:49:44 -0700
-From: Charles Perry <charles.perry@microchip.com>
-Date: Fri, 16 Oct 2026 10:49:37 -0700
-Subject: [PATCH] net: mdio-pic64hpsc.c: add a driver for PIC64-HPSC/HX MDIO
- controller
+ c=relaxed/relaxed; t=1792175219;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+ Subject:Message-ID:References:MIME-Version:Content-Type:
+ Content-Disposition:In-Reply-To:X-Clacks-Overhead;
+ bh=H0hrqzbIfiIBMI2nhszhrkwrYztBLDGf5V3BRlrVN5E=;
+ b=RqwB4Oyy6Asm96wWbbmlURmHQvOrMxn0TMtHMZnO8kjzVEAR0AOSiraDG/lheXfvzl1v
+ BNvdZzD1R3xBuANxiED+ibub2OGzz+PhYGO4x1gLtrJLczacQR/wy+zjufxKTRyHdvSDs
+ S1g2GkDbsOLVVTMALptCI3IYxrWDyssyoJbgDkbKiTQnexMsLZfex21gdzmzdXlq0PE9X
+ EOCaG7kAuWotV6Jh2wZ0lnd83BXYKkqo7CF/kkKOSzsvQVbJVe3JDBbTW6mbSWfpUm5JS
+ fQeYz3VcT3bigkbYePyZbLYS8pkb08nNtOube1qoloAkQbJHmRUY+HauLqQCly1efOg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=konsulko.com;
+ dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=ZQjAuiRS; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::235"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::235; helo=mail-oi1-x235.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=ZQjAuiRS
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 59EA360AC3
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 18:26:58 +0000 (UTC)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-4c5d8c7f326so136962b6e.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 11:26:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1792175217; x=1792780017;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=H0hrqzbIfiIBMI2nhszhrkwrYztBLDGf5V3BRlrVN5E=;
+ b=ZQjAuiRSvEMVyUXTnHnIN6hsxUhJyBi01ECKvQNfPaRKUZNV4ur/7STtiZ6ZoSYlmL
+ unz89FuvSvkrRGo37sNnyb+JbjKgURGZO1BjSp6jMBEuTki23tUNokPtD+kYtbiosqgb
+ P7sjNejQ/S64s1tsKC6mRi/gyQ3lJnn72gBoI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792175217; x=1792780017;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=H0hrqzbIfiIBMI2nhszhrkwrYztBLDGf5V3BRlrVN5E=;
+ b=CFNLRi0pzUIpm+kBj66KE7ArpMjY5huLOB0fYgOnJ/WUbzAzeRl1WRK2CR4zd/I47S
+ V6/aaWm961U/Iix1OgTjI5DZQsTOFn7b2dHMyUMCJ4mutiUr3VMv1/tYyhPcoy7PTLOq
+ u9QRaNj4Y6VZcmRSgw+vF8PqlzBVCRsqpFGlg9rGtbsjsME5hxw/FUPlWgNq1hQ409eS
+ O5LQv4yNf/Kcuc9QjHxJkf/r/WcB1jGGkf9qapMiUtZkhzkOp5ndiRFtYKJBXIpT9Hi5
+ RnI7GRHJfyioeHdOSTewVBFb5+FlLb0VZV3WBYLGs3kmseKEQB2WoWL06doDfvqhf53u
+ iQLg==
+X-Gm-Message-State: AFq9FYLgsxfdBjur5K/C9OGDgWze3uwSaD+12MQFWK72MFA9Ctt0Qbr7
+ 3/x6OtiXvHqCVMAB3rSDdLmQZCQ1f4txkVGTvpjCuhtBYEO9YZaR0cQwwMSmGz5ZA7Q=
+X-Gm-Gg: AYBFou2346g1IQIiQYlo3H87N9jlNI02XUIgTrIK3PF3mMUI/FPNue2EHg6tX03Vrpw
+ e7YluNsiqjvM1Ny6Q+JVcriW8n9SeQQb7G4+9jicK2WQ5L0mJ/RhGKE7pkGSc5FZQXCz4lIdgVB
+ zgI3iwPRDGZA7FBBA+olQa8WFx/uVkUk8jhXG5l0lP3ddmQR1ftxuaCk/cBfByxt0SpKDCljn89
+ 5bI3mXuVQ7U8mXX4HpaSmtXTs898vRGNqIA0OvzTidKM30ihO3wFnLZIJj8Rnw4deNTaC3fR059
+ erhjBnZHKErAVZlf4NQPUrqGMTjDycUJOLbCKcaeLaSAWYQsER3FFw7N0ZkHk5UftoQUexK7ZGR
+ suJ1hv3GtEoEX6sNylv5a7VYMOiqwlkCsKLDwWSUBT8Ih/Djlt0JimBS7dsZ5R8DhosRDUpARUM
+ jFyhbrx0/SRYIWFXeJlmdf8vDPf8+EQ1hk03N4XLSEJxwHbx7/BPyGXuMTf+VESwH7N+s91FW9r
+ mLwDtJV/nD6V5iX7qm4o02IVGDn+r3cYqoMbmKBWiiJXuvfTucl4dxQgaWFJCp1TQ0yA3sjYhfi
+ QdktdeJ3UpRXJV+6EOnrmDB85Tw48A==
+X-Received: by 2002:a05:6808:1645:b0:4b2:8e1c:5920 with SMTP id
+ 5614622812f47-53cc3e3c727mr445759b6e.9.1792175217608; 
+ Fri, 16 Oct 2026 11:26:57 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4a73b6e425asm2333206fac.14.2026.10.16.11.26.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 Oct 2026 11:26:57 -0700 (PDT)
+Date: Fri, 16 Oct 2026 12:26:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Takahiro Kuwano <takahiro.kuwano@infineon.com>
+Cc: u-boot@lists.u-boot-project.org, Vignesh R <vigneshr@ti.com>,
+ Raymond Mao <raymond.mao@riscstar.com>, Vincent Jardin <vjardin@free.fr>,
+ Fabio Estevam <festevam@nabladev.com>, Eugen Hristev <ehristev@kernel.org>
+Subject: Re: [PATCH v3 0/4] mtd: spi-nor: split SFDP, ID database, and fixups
+Message-ID: <20261016182654.GA4035800@bill-the-cat>
+References: <20261016-split-sfdp-id-v3-v3-0-4a47b8fc945a@infineon.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20261016-mdio-pic64hpsc-v1-1-80210f255d18@microchip.com>
-X-B4-Tracking: v=1; b=H4sIALBj0moC/x3MQQqAIBBA0avIrBNURKKrRAvTMWeRikIE4t2Tl
- m/xf4eGlbDBxjpUfKhRThNyYeCiTRdy8tOghDJSSMNvT5kXckbH0hwPQSu0Ep1YT5hRqRjo/Yf
- 7McYH021eM2AAAAA=
-X-Change-ID: 20261016-mdio-pic64hpsc-ff42ea1ec08b
-To: <u-boot@lists.u-boot-project.org>
-CC: Tom Rini <trini@konsulko.com>, Jerome Forissier
- <jerome.forissier@arm.com>, Quentin Schulz <quentin.schulz@cherry.de>, "Peter
- Robinson" <pbrobinson@gmail.com>, Julien Stephan <jstephan@baylibre.com>,
- Johan Jonker <jbx6244@gmail.com>, James Hilliard <james.hilliard1@gmail.com>, 
- Charles Perry <charles.perry@microchip.com>
-X-Mailer: b4 0.14.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="m+rvQJu7YYUudmm4"
+Content-Disposition: inline
+In-Reply-To: <20261016-split-sfdp-id-v3-v3-0-4a47b8fc945a@infineon.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -162,255 +178,56 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-This adds an MDIO driver for PIC64-HPSC/HX. The hardware supports C22
-and C45 but only C22 is implemented in this commit.
 
-This MDIO hardware is based on a Microsemi design supported in U-Boot by
-mdio-mscc-miim.c. However, The register interface is completely
-different with pic64hpsc, hence the need for a separate driver.
+--m+rvQJu7YYUudmm4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The documentation recommends an input clock of 156.25MHz and a prescaler
-of 39, which yields an MDIO clock of 1.95MHz.
+On Fri, Oct 16, 2026 at 10:43:41AM +0900, Takahiro Kuwano wrote:
 
-The hardware supports an interrupt pin or a "TRIGGER" bit that can be
-polled to signal transaction completion. This commit uses polling.
+> The spi-nor-core.c contains optional logics like SFDP and manufcaturer
+> specific fixups. The spi-nor-ids.c has single large ID database. There
+> are many #ifdef directives in those files and that negatively affects
+> readability and maintainability.
+>=20
+> This series, as the first step of cleanup, move SFDP logic, IDs, and
+> fixups to newly source files. Reworking, renaming, and reformating
+> existing code is not a scope of this series and further cleanup will be
+> taken place in follow-up patches.
+>=20
+> Here is the code size impact when applying this series.
+> Measured by my AMD Zynq-7000 (ARM32) environment with SFDP and all
+> manufcaturers are enabled.
+>=20
+> SPI-NOR:
+>             text    data     bss     dec     hex filename
+> BEFORE    720685   14084       0  734769   b3631 u-boot
+> AFTER     721827   14156       0  735983   b3aef u-boot
+> DELTA      +1142     +72
+>=20
+> TINY:
+>             text    data     bss     dec     hex filename
+> BEFORE     77399    3128     248   80775   13b87 spl/u-boot-spl
+> AFTER      77589    3200     248   81037   13c8d spl/u-boot-spl
+> DELTA       +190     +72
 
-This was tested on Microchip HB1301 evalkit with a VSC8574 and a
-VSC8541.
+So this leads to imx28_btt3 and imx28_xea overflowing in CI on link.
+Maybe it needs the tiny flag set? I think the rest of the growth is
+reasonable enough, and boards can disable part vendors they don't need.
 
-A Linux driver is also available for this hardware. See these links:
-https://elixir.bootlin.com/linux/v7.2.10/source/drivers/net/mdio/mdio-pic64hpsc.c
-https://patch.msgid.link/20260408131821.1145334-3-charles.perry@microchip.com
+--=20
+Tom
 
-Signed-off-by: Charles Perry <charles.perry@microchip.com>
----
- drivers/net/Kconfig          |   8 ++
- drivers/net/Makefile         |   1 +
- drivers/net/mdio-pic64hpsc.c | 178 +++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 187 insertions(+)
+--m+rvQJu7YYUudmm4
+Content-Type: application/pgp-signature; name="signature.asc"
 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index 797c8c24d5d4..50d3834d2ba1 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -1108,6 +1108,14 @@ config MDIO_MSCC_MIIM
- 	  This driver supports MDIO interface found in Microsemi and Microchip
- 	  network switches.
- 
-+config MDIO_PIC64HPSC
-+	bool "PIC64-HPSC/HX MDIO interface support"
-+	depends on DM_MDIO
-+	select CLK
-+	help
-+	  This driver supports the MDIO interface found on the PIC64-HPSC/HX
-+	  SoCs.
-+
- config MDIO_MUX_MMIOREG
- 	bool "MDIO MUX accessed as a MMIO register access"
- 	depends on DM_MDIO_MUX
-diff --git a/drivers/net/Makefile b/drivers/net/Makefile
-index 6a351018a880..dd643b9c4c7b 100644
---- a/drivers/net/Makefile
-+++ b/drivers/net/Makefile
-@@ -67,6 +67,7 @@ obj-$(CONFIG_MCFFEC) += mcffec.o mcfmii.o
- obj-$(CONFIG_MDIO_GPIO_BITBANG) += mdio_gpio.o
- obj-$(CONFIG_MDIO_IPQ4019) += mdio-ipq4019.o
- obj-$(CONFIG_MDIO_MSCC_MIIM) += mdio-mscc-miim.o
-+obj-$(CONFIG_MDIO_PIC64HPSC) += mdio-pic64hpsc.o
- obj-$(CONFIG_MDIO_MT7531_MMIO) += mdio-mt7531-mmio.o
- obj-$(CONFIG_MDIO_MUX_I2CREG) += mdio_mux_i2creg.o
- obj-$(CONFIG_MDIO_MUX_MESON_G12A) += mdio_mux_meson_g12a.o
-diff --git a/drivers/net/mdio-pic64hpsc.c b/drivers/net/mdio-pic64hpsc.c
-new file mode 100644
-index 000000000000..4bb34bf96492
---- /dev/null
-+++ b/drivers/net/mdio-pic64hpsc.c
-@@ -0,0 +1,178 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2026 Microchip
-+ */
-+
-+#include <clk.h>
-+#include <dm/device_compat.h>
-+#include <linux/bitops.h>
-+#include <linux/bitfield.h>
-+#include <linux/kernel.h>
-+#include <miiphy.h>
-+#include <wait_bit.h>
-+
-+#define P64H_MDIO_REG_PRESCALER 0x20
-+#define P64H_MDIO_CFG_PRESCALE_MASK GENMASK(7, 0)
-+
-+#define P64H_MDIO_REG_FRAME_CFG_1 0x24
-+#define P64H_MDIO_WDATA_MASK GENMASK(15, 0)
-+
-+#define P64H_MDIO_REG_FRAME_CFG_2 0x28
-+#define P64H_MDIO_TRIGGER_BIT BIT(31)
-+#define P64H_MDIO_REG_DEV_ADDR_MASK GENMASK(20, 16)
-+#define P64H_MDIO_PHY_PRT_ADDR_MASK GENMASK(8, 4)
-+#define P64H_MDIO_OPERATION_MASK GENMASK(3, 2)
-+#define P64H_MDIO_START_OF_FRAME_MASK GENMASK(1, 0)
-+
-+#define P64H_MDIO_OPERATION_WRITE BIT(0)
-+#define P64H_MDIO_OPERATION_READ BIT(1)
-+
-+#define P64H_MDIO_REG_FRAME_STATUS 0x2C
-+#define P64H_MDIO_READOK_BIT BIT(24)
-+#define P64H_MDIO_RDATA_MASK GENMASK(15, 0)
-+
-+struct pic64hpsc_mdio_priv {
-+	void *regs_base;
-+};
-+
-+static int pic64hpsc_mdio_wait_trigger(struct udevice *dev)
-+{
-+	struct pic64hpsc_mdio_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = wait_for_bit_le32(priv->regs_base + P64H_MDIO_REG_FRAME_CFG_2,
-+				P64H_MDIO_TRIGGER_BIT, false, 250, false);
-+
-+	if (ret < 0) {
-+		dev_err(dev, "TRIGGER bit timeout: %x\n",
-+			in_le32(priv->regs_base + P64H_MDIO_REG_FRAME_CFG_2));
-+	}
-+
-+	return ret;
-+}
-+
-+static int pic64hpsc_mdio_read(struct udevice *dev, int addr, int devad,
-+			       int reg)
-+{
-+	struct pic64hpsc_mdio_priv *priv = dev_get_priv(dev);
-+	u32 val;
-+	int ret;
-+
-+	if (devad != MDIO_DEVAD_NONE)
-+		return -EOPNOTSUPP;
-+
-+	ret = pic64hpsc_mdio_wait_trigger(dev);
-+	if (ret)
-+		return ret;
-+
-+	out_le32(priv->regs_base + P64H_MDIO_REG_FRAME_CFG_2,
-+		 P64H_MDIO_TRIGGER_BIT |
-+			 FIELD_PREP(P64H_MDIO_REG_DEV_ADDR_MASK, reg) |
-+			 FIELD_PREP(P64H_MDIO_PHY_PRT_ADDR_MASK, addr) |
-+			 FIELD_PREP(P64H_MDIO_OPERATION_MASK,
-+				    P64H_MDIO_OPERATION_READ) |
-+			 FIELD_PREP(P64H_MDIO_START_OF_FRAME_MASK, 1));
-+
-+	ret = pic64hpsc_mdio_wait_trigger(dev);
-+	if (ret)
-+		return ret;
-+
-+	val = in_le32(priv->regs_base + P64H_MDIO_REG_FRAME_STATUS);
-+
-+	if (!FIELD_GET(P64H_MDIO_READOK_BIT, val))
-+		return -ENODEV;
-+
-+	return FIELD_GET(P64H_MDIO_RDATA_MASK, val);
-+}
-+
-+static int pic64hpsc_mdio_write(struct udevice *dev, int addr, int devad,
-+				int reg, u16 val)
-+{
-+	struct pic64hpsc_mdio_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	if (devad != MDIO_DEVAD_NONE)
-+		return -EOPNOTSUPP;
-+
-+	ret = pic64hpsc_mdio_wait_trigger(dev);
-+	if (ret < 0)
-+		return ret;
-+
-+	out_le32(priv->regs_base + P64H_MDIO_REG_FRAME_CFG_1,
-+		 FIELD_PREP(P64H_MDIO_WDATA_MASK, val));
-+
-+	out_le32(priv->regs_base + P64H_MDIO_REG_FRAME_CFG_2,
-+		 P64H_MDIO_TRIGGER_BIT |
-+			 FIELD_PREP(P64H_MDIO_REG_DEV_ADDR_MASK, reg) |
-+			 FIELD_PREP(P64H_MDIO_PHY_PRT_ADDR_MASK, addr) |
-+			 FIELD_PREP(P64H_MDIO_OPERATION_MASK,
-+				    P64H_MDIO_OPERATION_WRITE) |
-+			 FIELD_PREP(P64H_MDIO_START_OF_FRAME_MASK, 1));
-+
-+	return 0;
-+}
-+
-+static const struct mdio_ops pic64hpsc_mdio_ops = {
-+	.read = pic64hpsc_mdio_read,
-+	.write = pic64hpsc_mdio_write,
-+};
-+
-+static int pic64hpsc_mdio_probe(struct udevice *dev)
-+{
-+	struct pic64hpsc_mdio_priv *priv = dev_get_priv(dev);
-+	u32 div, bus_freq;
-+	ulong clk_rate;
-+	struct clk clk;
-+	int ret;
-+
-+	priv->regs_base = dev_read_addr_ptr(dev);
-+	if (!priv->regs_base)
-+		return -ENODEV;
-+
-+	ret = clk_get_by_index(dev, 0, &clk);
-+	if (ret) {
-+		dev_err(dev, "Missing clock\n");
-+		return ret;
-+	}
-+
-+	ret = clk_enable(&clk);
-+	if (ret) {
-+		dev_err(dev, "Cannot enable clock\n");
-+		return ret;
-+	}
-+
-+	clk_rate = clk_get_rate(&clk);
-+	if (!clk_rate) {
-+		dev_err(dev, "Cannot get clock rate\n");
-+		return -EINVAL;
-+	}
-+
-+	bus_freq = ofnode_read_u32_default(dev_ofnode(dev), "clock-frequency",
-+					   2500000);
-+
-+	div = DIV_ROUND_UP(clk_rate, 2 * bus_freq) - 1;
-+	if (div == 0 || div & ~P64H_MDIO_CFG_PRESCALE_MASK) {
-+		dev_err(dev, "MDIO clock-frequency out of range\n");
-+		return -EINVAL;
-+	}
-+
-+	dev_dbg(dev, "rate=%lu bus_freq=%u real_bus_freq=%lu div=%u\n",
-+		clk_rate, bus_freq, clk_rate / (2 * (1 + div)), div);
-+	out_le32(priv->regs_base + P64H_MDIO_REG_PRESCALER, div);
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id pic64hpsc_mdio_of_ids[] = {
-+	{ .compatible = "microchip,pic64hpsc-mdio" },
-+	{ /* sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(pic64hpsc_mdio) = {
-+	.name = "pic64hpsc_mdio",
-+	.id = UCLASS_MDIO,
-+	.of_match = pic64hpsc_mdio_of_ids,
-+	.probe = pic64hpsc_mdio_probe,
-+	.ops = &pic64hpsc_mdio_ops,
-+	.priv_auto = sizeof(struct pic64hpsc_mdio_priv),
-+};
+-----BEGIN PGP SIGNATURE-----
 
----
-base-commit: 65a7532545336e4b73e049a69436e255da7df961
-change-id: 20261016-mdio-pic64hpsc-ff42ea1ec08b
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCatJsYwAKCRAr4qD1Cr/k
+Cpv0AP42f50JtWRJOkHLWmDitXqKcIWopBknczq+vLIc4IwRbgEAyvUdzubchAQH
+ncmSAVrhvQeLLlB5WFxTeVBq5M0Cqwk=
+=1fM2
+-----END PGP SIGNATURE-----
 
-Best regards,
--- 
-Thanks,
-Charles
-
+--m+rvQJu7YYUudmm4--
