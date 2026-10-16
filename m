@@ -1,183 +1,247 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84F0ECC6B38
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 06:31:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF095CC6B38
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 06:33:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C7DE040952;
-	Fri, 16 Oct 2026 06:31:28 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4FBE380772;
+	Fri, 16 Oct 2026 06:33:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id o2sDhJ2aDOzH; Fri, 16 Oct 2026 06:31:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 4B7284092A
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792132287;
-	b=A7FMxVEobFDtzozaMBMyKitf6z+PXsZDAs2FEG9U61QpxLFJHr0R0/lP0ThFEXdS4zBX
-	 Rpx8Tg1PLbFlokBeBSWMfw1hm6ZahUfjmogiyYTJXN/FEiJYYbWNXLlTmfZ2tmllc7xtE
-	 9t9Poh9BzjGkR14k6K87KrK20CsONno9UZY59o0RDL75ZyVFCRExEk1hVjNAyGo5IeD0R
-	 1yz5HMquHWikGEBtCFCMJuzgkQ2+7dVyKhwCA6LcpYdYe57DfD5FvIeIpv0Rk/ptA7+HS
-	 G8t0EgGd2vXvMdIf2lhk9uv9/7nxkrClvHE74OsH5PPIAXaGUaEBUeBHXzNT2To7IIQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zereq1wshIZw; Fri, 16 Oct 2026 06:33:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3869C8055F
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792132418;
+	b=Kf1HLcRhaIajVjxbOiLQiV6Ij1QA8QtLdNX6sjmdesfEGhRee7OP3uN0eF0Z86f7KpV5
+	 D4Gav+fqZQVD3/RgbUA3NiGdi7BS/NwyuRjYD7hqqw9OgpqsGaZwjEXN6lcn/8JmPJYHH
+	 3GcbkTCRNOq9D8IoVnTLM5aJTa++YL24Ki/3jAp/At2xSQkPquuKWd098QjKyCNMVW9iw
+	 lViYpCbxlTjTkwxiQBgwvzD8mTWeifCRzoJ4DAKWJ/GwLkwRtgrb4ghm3yxCUd6WfOI6I
+	 vkxiHoibSm83MxrJSyNejgefifhp7nrOeI5q1R65ucD+NC5F+KMK8o80DUww1nGyp6Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792132287;
+	c=relaxed/relaxed; t=1792132418;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-BeenThere:
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=Rc+W73lTbahODgOogceftDxGGpq7Jo4OU0zm0qbwLJ8=;
-	b=XRqw3KCva1eQxq9ezK21pWuZvPNBN/tWGE4FNNjjREyD6QmVdTgzW1lAml3ZznEfNrXH
-	 mlPFMrHEyjUvQO5Kf65Cudi5AO6mHRwD4XAgyEwV/ooqnHkFhT2PwGTo600P5AMXYDOE4
-	 bomsj/zOrigexqJEFcxYg28GFHvFOl2X3LN3d48HRPRdISZJzR82yTTqUWmKwBPP0qgdu
-	 0iMJWkpk+JZp/qrS8Hj85s21VHeHhsP47YoncdLBeIsIYPpox3Is/ackXDgaX0z5VeNCy
-	 6UUvVpdvc7C/Ha+5LRPwQO5yu9fDFY6UWyOhnv+lyT652WXqlw/D+bE4wF9Z+KeryRw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Fa+Qrk1L;
+	bh=VaT9UnwHGzYvVhkAniXbKhwm6csIoemcAB0GZcJGDx0=;
+	b=PorJ+NWdjzOCanaz5cqpq7BduZyCtoBGlyXb2qSuD7tLv8yjAYrSUZrN6+6FvIP817P1
+	 /934iCrxsASOKVR/R2nbfp7Poxg1ORzrF0nHSox9FsRKOMG7QnVPNXsS/KEfyv/QJ6W8E
+	 07OfAI/J0qgj0AGsOLPXYcrkE05aZj/Q16PV/IjQpB1cF2Idc0Ggb5Jy22bnPbzzHLFnt
+	 d+UL4paFiZd07obHA0IY1Pq+KLyqoq2OfpvnqqqkngL+1dH8v/YiTCYkDA7Fw5v/zqeb4
+	 rRaJUppEyNBEkaI5K2tKgDFfCLawoOhLF9T2A/DuqL3ttYYOYSuTilXyQ2u8oiPaS5Q==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792132287;
-	bh=Rc+W73lTbahODgOogceftDxGGpq7Jo4OU0zm0qbwLJ8=;
+	d=lists.u-boot-project.org; s=default; t=1792132418;
+	bh=VaT9UnwHGzYvVhkAniXbKhwm6csIoemcAB0GZcJGDx0=;
 	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=FVYKEt6WIgnzpXhIxMKzIm/TkExAYBp32pST7/hXD007e4Ed4ZjqFP0CX1Fh6vilr
-	 64JA4RuTOiw7i8N6KYWjQsi8PWyKun4uW5CKjFi39GT9dyy/mlE4uxXIgRoi229ui9
-	 KE/2cLp52Pk8Ydza1sAILAl2J74bFlrdT5wIOJyowbfL1Re6y2PvXG0F/ib3QaATPh
-	 rJMsQ3NPy6M6n5KGltwPLotji8L7R9zttH5ALB+A4zBSRIloQBV1B4oYA2sc7oKruq
-	 4Iv4yhvMAA0ILfPrYFSWeId2FfjyahswtmcpclZ5+EqjQL6pbBtl2mSt6KslA/awEH
-	 KmttivXX+bivw==
+	b=R6bu8YrvpFy4X8HsquHxV0M4fNuC4zd6bpui9wG7oR1sfaWKLMoVcHf734xYRJH13
+	 wbjSHuZfPdXE8TWrQWkP5IEKv0VYVCyX/lb1x7C40hKXqfjMes3OM/Zv9O6mkvOr3f
+	 /RvvczTb046FMsLfvtAKob3hqHOnuQbpY4SjCvXXZepOPkN4a6YruyJ36hkBpUmHM+
+	 BZbag9eFcKvzYnfu/s3r+iL1YwyLSz4DL99HwS7T78ieLzYz8gFKdfn3Jh3ikCxzi0
+	 97LdFKu4pUqzqmJW8yQmrcdFArm8OEifEpRFQDqbypfbW5SWe98yxBmlhuZIMUwl0y
+	 VmkEwrdHDeOXg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4B7284092A;
-	Fri, 16 Oct 2026 06:31:27 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id B568B263
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 06:31:25 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3869C8055F;
+	Fri, 16 Oct 2026 06:33:38 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 86B6879D
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 06:33:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A680C4092A
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 06:31:25 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 7824B60AB7
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 06:33:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QvCWqFJcozwV for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 06:31:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 665374091F
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::42f"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792132284;
- b=nd9QjJhZPoPSjcwBvmR/6E0WsDKYRK+WRfQHAJWym/+/DLYUOEr1ka1MKb4hnfCXOBsp
- vDwdpxUaWm6khN439784fPmfnz7O/6P8/3mKwCwVA4M6mt2/+rVwmTEaetU8SvAyMuh2u
- uhZ532QqzSbOSHIBRoA2r6iCI2OubiLzOpL9EdlclAbn6GMqLODW2nPjvhui1htZTER1e
- 1w8kabHBhy1pV+n9FBTZ1yKKaJ2VRdDWKQNvNrDZar73h+RB6oySslcfqlAyqSms1pRTx
- 9UMgLpS0sTwIV6f4M0jcZDXccPVErEATTwBawntK+QTD7qF/Up7E3R0Nn6K5PDAOUoQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FYoGbUmP-nNd for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 06:33:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D0B3160A8D
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792132415;
+ b=N5P27TJxqL1qvv0k2plud4G5dNJ5lSXm7lIMu2Lc0A9btouaeoRm592W6elFQ/CW+DwZ
+ LHrStXKIcx/bX07OSQkwHi4lVOFYzTmFl4s4kGsyWMCL2ljt/3zuW3LbjD59pctN6DamQ
+ YtLVQjUpkXIEUIIvyqQnSRy0IaHjIcvTfl9Y1B8G0gzAkxMNCAIUwomlggy8VCUSaW2Cu
+ 1qbjyFUyPRCLTgC49uv+pTKBJ7b3fTnjwSZnNrckSJaT2NcNrR/s1khMz8PyuP8JqI/1t
+ jBifmy4Y9wJciqGMDKhdxrXve49erFZyuamEY1WokPa3kvQ2nAYcrrMPQyR7aDsennw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792132284;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer;
- bh=Rc+W73lTbahODgOogceftDxGGpq7Jo4OU0zm0qbwLJ8=;
- b=AJykTo1ltklOr4tHHYUYsq9zpd+M/JiW1MnIQzjQcJhU5FQnwiKx8IlnmWMUxhgntOkE
- zeimxrOD/MDTnk5FWcu81SoHvI4uQyGiigmwOGpKjXUI/M+Ovrq6JKK+8w3YplD7JgU49
- W27FMDOEqgbx8ZdJ28nOVGaAOwKQ6BIQgKTINiZQrJHEQCKBRI0f/am5NgiAAOyj0cKJF
- szbN29MKuDgklNyoVzEshV1iVW9JpGB8TFoxOZX2q9opogzNOvshERuCMqlsISa0J8ikv
- 3JBat5O7jtTQTYd8xf71/cx9M+EuMXEp+65PeGUyAbdvTM5y8HVv+QAG1HVWBuT6KDQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=Fa+Qrk1L; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::42f"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::42f; helo=mail-pf1-x42f.google.com;
- envelope-from=imkyufie@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=Fa+Qrk1L
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 665374091F
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 06:31:24 +0000 (UTC)
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-8819033dbadso4051857b3a.0
- for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 23:31:24 -0700 (PDT)
+ c=relaxed/relaxed; t=1792132415;
+ h=Received-SPF:Received:DKIM-Signature:Received:Received:
+ DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+ X-Developer-Signature:X-Developer-Key:X-Authority-Analysis:
+ X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+ X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+ X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+ bh=VaT9UnwHGzYvVhkAniXbKhwm6csIoemcAB0GZcJGDx0=;
+ b=SbaMcYE4nAEOJkEXtpYCYSYqNynVvahyGNXBJqcIrfgKcVA0DSlwIIZyqx3+dr2qLYT8
+ 52/dS5GrDmBmZ8TTXvUfqqbLpVOuI2POiC+zZARqS6XZoO6alK8TtPbUBUn9QG4ONc467
+ hUTjfXr3T3V40uZkWDM7gjebfvyoxk25Gh7nIv+30ZQRMRmXc/pIP+MLl2eEfDpTEhjtR
+ J1jVM/qr3ZZygPerOTDjCYr3x0sPNhjExLjplvUGYWmYEh6pk6HQBqcjFvJ3haNxz/mJo
+ WmIshbE9KvqpNGzZxNVvmqaL+C+zFnGkNRbyNKZh/8fiMlJQnLrdvkxRT+x0tGvfDIQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=oss.qualcomm.com;
+ dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
+ header.s=qcppdkim1 header.b=WG4iGZkl; 
+ dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=iIq1sp7u; 
+ arc=none smtp.remote-ip=205.220.180.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com;
+ envelope-from=vandhiadevan.karunamoorthy@oss.qualcomm.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=WG4iGZkl; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=iIq1sp7u
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D0B3160A8D
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 06:33:34 +0000 (UTC)
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69G6IG6l4126415
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 06:33:33 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=VaT9UnwHGzYvVhkAniXbKh
+ wm6csIoemcAB0GZcJGDx0=; b=WG4iGZklHZd4WKrbPZMxVgXmBj6+ckBtm3yDKq
+ LwOqqxWtjcJbV69FWZhrLPLjiHm1xtOPtfIvm2Lg6DcRgf/B6E4bMn8kvHPuR9Gg
+ yoOOBaSoOJvcFFeVPOrT+Ec/sSAit4sSX7OfyFfL/18vDIO5PO3/kYmnxYGJcUaA
+ bNy+rD2I4nmtSl0GyWVkhTGxEd/suqhUXzCl6ZuiuBZ5N9OOksl2MIPKdwXMTiM3
+ kw+jMsrMg4r/QS4zZbh4TSKwZwVivZ5tTft7K4SO7xShTxTlkHlmYu0qIm4J9zma
+ sUbKucw906PA57wS8qjF2sKa3cT4M5Wuf6LGWjrnhwfhu83A==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com
+ [74.125.82.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hb19m33ad-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 06:33:33 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id
+ 5a478bee46e88-3580c07911eso15893706eec.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 15 Oct 2026 23:33:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792132283; x=1792737083;
+ d=oss.qualcomm.com; s=google; t=1792132412; x=1792737212;
  darn=lists.u-boot-project.org; 
  h=cc:to:message-id:content-transfer-encoding:content-type
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=Rc+W73lTbahODgOogceftDxGGpq7Jo4OU0zm0qbwLJ8=;
- b=Fa+Qrk1LxXooD7C7hmybVQhFtohMPcrCdSWh817CQOFet7ktWSK+XhVC3xAhI/zBDv
- YKyXg1Qt1nwWkzSJ63UI7f64gIrqe+5A48fp8vV9ncKX0+3ItrxJEe1GH8q/nsP6vY9p
- nTL+F6YXZNjhZgb0W77Ndp+hG8Hzq3HVksTjleTVxyQcDfeZoVUbDlrqJ4tVlmULdURY
- Hd8rnrv7gZG7cDZc155VbDrRT+sxCFifRFsd0GdCUFxPnYGaCqz9+dFtWhQsmiUDuaCE
- 6gaZYj9oo5xJI27hrPoNvsLIVsDljj2JrXcOIY+uFO+lMbt3AC7zgKVW6fKUBEfEIaW1
- Jbng==
+ bh=VaT9UnwHGzYvVhkAniXbKhwm6csIoemcAB0GZcJGDx0=;
+ b=iIq1sp7utBJVwWwUx76vq5OUZXJ2DQxBbIyWhdAff2OuPj3xxc7TTSjsln3X7atMvK
+ AqgggnSIOWsvPKfNv80FPdDl1rogr6uFT3eOzgQmvF8UYlTt2rHz8BI3uvL7UeZOsBMw
+ kILVMEcWFx5Ji0c/4o1hlOSMD0WO9PIj6XIeEC75qDGnnQJPP2+V5zJpx/U9Jj+F2wD4
+ AhrJeCRYUBZBwqcmbL0d2KvPzPgrL2Icjv+0tNH2ZKGu+rRFoEn5Fq9V6UWy0nsmU8zQ
+ KNvzzn+RWxTQID8NITQe3+JCA06uj4GyhEVmci6ojg7yNWpPdQCom7lRksN727z3rIYa
+ kW3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792132283; x=1792737083;
+ d=1e100.net; s=20260707; t=1792132412; x=1792737212;
  h=cc:to:message-id:content-transfer-encoding:content-type
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=Rc+W73lTbahODgOogceftDxGGpq7Jo4OU0zm0qbwLJ8=;
- b=2Hm4FyyFhHTTTNWd8c+B19Bgo16MAtZoMIWBmDv70qSagHuTrwufTy6cUHeJrc7LmG
- 8RlO8rV+/nhs4BrweLtC114RpME3Fn2FFU5NVzsA8nS6a/yITOabr/pSQDL+JlXax7+D
- eHaaxJhASNB5T/v9qiGJc1s5GbZxAG0ioshYzk8cKAnB9+bzo3KvdudG/pq5t4fh5k2J
- MyivWrmPixEBcMm07LQ3nEIRSrYv89YHn9niV0KcUtP1mSNVn067CSpduLTiclLByKl+
- HV3aBMngIhH7fJR4tZSTatSK3y2i2pcCdBh73MNCO3l+lJmz0CftPGLVA+isztA+3lo6
- /xOQ==
+ bh=VaT9UnwHGzYvVhkAniXbKhwm6csIoemcAB0GZcJGDx0=;
+ b=qXHOgmSoUtJbWeyPAAC8rIa3Sj+uc6PXwDf06++1bn9w5bitIgeK4JodeQrpCIlrMM
+ +jQb22pO1otIP5zBjkJtQhigTugUNd8kTwrwuD3ygrbaVgCMKRr8MI+bjXfKVAhERjOP
+ s9bXHJQkrzxVXBNASDsUAb+rOzujdlyxCLB9LEgyn7qaMk7IRNpj6SrG2E2aBXOfPnvv
+ D5lpNBdnFxuNcIR3AqJ6jws56eSZzROgD41gyxj95+gjhyi3nP5HoFYK//ydxmdyd+ZE
+ 6TjxdqFZbdxZVjTB/8MDNFwQ6gswqnNSPFBYr5JWsTe422Xbrg5wU6zg/eK5z+B0Qp8t
+ 1l3g==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwPS14S0r4voK7R0VVskP/bKO+66On3iZgsmNb66VfYsVqAWKkQALItQrnZYmlNNv3e1Pt+FSY=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYKRO8Pa3gAzQsln4jJJKBejcCTFQ/hTtSIWGI1dE6Pr6bVJt+Sd
- bzCyMcqAYX4M7kQrZyGsZ86tmdIl9P3C26NWJzlxIh5grd+UDEeGlGkO
-X-Gm-Gg: AYBFou2/mmE1+ZqM5dD0Cw0Slsd1FyJn/iW4SEMZ8mUm1ZGETtE3b/TT9Cj+I7WHWlU
- RyctXIudo+OFy1lBiw84FN0qytzfVgBVTKCZCtqFTdOZY5fdDpx/RGegjkZGj23wAO4Oqtb0Fgq
- fxOucy6MaJzFkSgfVWYSV46QxbtlwDvucocRdKmhQYUBbHx1T3+MNbrNWoijW3HLzRu2VfTL75n
- lmOofJAToD6kfzJydrXy0C0iArUvu1t+aZ5S5tD9yOWrQ5E/IjWv+a9Ftmh6BT3sMdcefwabLUq
- zdBtWnx9uCzAdiFHewcYCgNuH+KbgNkXCAAZWNJk9OFHmBN+vCzn/kiOAmItbOEbJenYxzkB+57
- Z5xGXeY+l6zq2VGpz5QL805fu9WaxKuWIvr8Hm/zFD/+ZlUyy5hOezwk44qT1loncG8JOAlNGJE
- OcKTXB0nOs90JVUW0/HCfokj7zXMeVYrInqY5ZEbjU38yqHUykgCclN3h1cUHoB00=
-X-Received: by 2002:a05:6a00:c591:20b0:89d:eb23:4e83 with SMTP id
- d2e1a72fcca58-89deb234f8amr4195039b3a.30.1792132283254; 
- Thu, 15 Oct 2026 23:31:23 -0700 (PDT)
-Received: from [127.0.0.2] ([2404:c0:7618:4e1c:4ee1:1a8a:57cd:4423])
+ AKwUvBzyqEA+Zdt+PpVN1O1BP+7/3l5cSXfoqu5MyzDAcNIFqgHia5RaYEP8vgc5/creP6sxfS6Lt/8=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYK2GzQoNA0m6BpvBnHUOjgSdc26yOLULQjTy3BpxjRBwQEcp2qy
+ +zOMYyv+B4dc7LhUCAB+v6Npv/vM6luYVcNKHpXdMWf/Sw35YFXRu9N7du5iVoUhH1M0ek+YqoT
+ 8EisCoExgfbfAEBDSQ+0jckhec8w+yGRHSOubdC+7BmVB7qrQlyFciuSctjlJLcpsOT85X0Y=
+X-Gm-Gg: AYBFou3exG659F+ZJbQz+pxBmiCyRBCst2pz9HGS4oW7q6QRKGBG5vgyFAwpLL+oYjV
+ fBcpL1N1IJtRqzP5vo4P48vCuEa0o8oABALA2q/rJhDKHRRGPR4DbKm14kj5VCm3jr86ytI6phs
+ sG2UZ7VD15GaBVt4Ld7BoNIwq43RmiXXXB7ScVM5vqPkmekk9te/9lb2VM+a7lbxYrjp151C+N/
+ d+AivXYzIrOOZhvF8hYX0WXNoe7TQAKMB45fQy17MPO/OCLUcHNapGdO4xcPoyYiHt/pOwERs2O
+ YW/t5JUp9bfsKiRAdoKvM9T5ef7Oqo9RscyWV1ugX36LBF+03blx/Xx7ZxutqRLt4AEbQDWd1/7
+ b4yo0vdqAWG5Y+m9MnSfib9e1oJ06ydJgxTXqVNHDe0u9QiK7lxzdg1zs7yx9Uh4ZuAsxHi985T
+ l+SL5T1GbEFGSLPaKMCEG8EOmg6yqtS2S72SfWqjI=
+X-Received: by 2002:a05:7300:103:b0:35d:d9a9:e455 with SMTP id
+ 5a478bee46e88-35dd9a9e6eemr10937968eec.21.1792132411884; 
+ Thu, 15 Oct 2026 23:33:31 -0700 (PDT)
+X-Received: by 2002:a05:7300:103:b0:35d:d9a9:e455 with SMTP id
+ 5a478bee46e88-35dd9a9e6eemr10937924eec.21.1792132411143; 
+ Thu, 15 Oct 2026 23:33:31 -0700 (PDT)
+Received: from hu-vkarunam-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-89febdc2209sm84691b3a.33.2026.10.15.23.31.17
+ 5a478bee46e88-3607bc950f9sm4281457eec.0.2026.10.15.23.33.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Oct 2026 23:31:22 -0700 (PDT)
-From: Reza Kurniawan <imkyufie@gmail.com>
-Date: Fri, 16 Oct 2026 13:30:48 +0700
-Subject: [PATCH v2] video: use bpp conversion helpers consistently
+ Thu, 15 Oct 2026 23:33:30 -0700 (PDT)
+From: Vandhiadevan Karunamoorthy <vandhiadevan.karunamoorthy@oss.qualcomm.com>
+Date: Fri, 16 Oct 2026 12:03:26 +0530
+Subject: [PATCH v3] clk: qcom: sa8775p: Add QUPv3 wrapper 3 SPI clock support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261016-bpp-helpers-v2-1-ca1e6bba2820@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/1WNQQ6CMBBFr0JmbU2nCCIr72FY0HaEMUCbFomGc
- HcB48LlS95/f4ZIgSlCmcwQaOLIblhBHRIwbT00JNiuDEqqHKXMhfZetNR5ClHYwuapRiVtUcO
- 68IHu/Nprt+rL8akfZMYtsRktx9GF93434eb9ysVfeUKB4nTOLGqVYWou16avuTsa10O1LMsHY
- F4gyLgAAAA=
-X-Change-ID: 20261006-bpp-helpers-d8d63b120d8a
-To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org, 
- u-boot-amlogic@groups.io
-Cc: Tom Rini <trini@konsulko.com>, 
- Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Eugen Hristev <ehristev@kernel.org>, Stefano Babic <sbabic@nabladev.com>, 
- Fabio Estevam <festevam@gmail.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>, 
- Andre Przywara <andre.przywara@arm.com>, 
- Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Reza Kurniawan <imkyufie@gmail.com>
+Message-Id: <20261016-b4-sa8775p-qup3-spi-clk-v3-1-7b9867dbf65c@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIADXF0WoC/4XNzQ6CMBAE4FcxPbukP1LAk+9hPLRl1aoIdgvRE
+ N7dgok343GSmW9GRhg8EtuuRhZw8OTbewpqvWLubO4nBF+nzCSXmldyA3YDZMqiyDt49J0C6jy
+ 42xW046JWwiqFhqV1F/Don4u8P3wy9faCLs7c3Dh7im14LdeDmHv/XwYBAkqsnKwKI7nVu4gUM
+ 9c2bD4Z5JcRXKjfjEyMrbXSeV0KU9hdS5Q9enNLUvPhpml6A1P/VRQeAQAA
+X-Change-ID: 20260924-b4-sa8775p-qup3-spi-clk-6c01d31b33ea
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.u-boot-project.org
+Cc: Lukasz Majewski <lukma@nabladev.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Vandhiadevan Karunamoorthy <vandhiadevan.karunamoorthy@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792132407; l=4640;
+ i=vandhiadevan.karunamoorthy@oss.qualcomm.com; s=20260817;
+ h=from:subject:message-id; bh=9logGc5q22B16zXwUWmmTEo93v69/OK2WrRSqhL9+aA=;
+ b=tgt1l2UQzJlvfEWwQyBZnz5apLCAmVkGkGY4hikp/XU8zkTGeMyJVGuk79CvWPBC0udIyhq2j
+ wwKqc35ozI9DcYtHIm98NFPRnF3c4B7TuYKK3LRGIhoBBqAXsEq4TNY
+X-Developer-Key: i=vandhiadevan.karunamoorthy@oss.qualcomm.com; a=ed25519;
+ pk=2EVV7DmKqYX4wxSlXPB5QBt44JjomLlz/wTW2AL4H6I=
+X-Authority-Analysis: v=2.4 cv=aLdlOr9m c=1 sm=1 tr=0 ts=6ad1c53d cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=aBlBvB-F2evWav5k4gIA:9 a=QEXdDO2ut3YA:10
+ a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-ORIG-GUID: 0OgwEHSJj-LnbAk7F1mdO0j7Am5-zuXH
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDAyNSBTYWx0ZWRfX4QWAqxmdm1zx
+ S3DW7t0TznHsYKpEdQ23hFGctlI6CX7XBTRHRfcnPo3K7PZGGe5i1FP/8197OzEONbZWm7gbqTB
+ 3e3gGHqLR4U/q6PAZIMFr4pDvICgJiM=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDAyNSBTYWx0ZWRfXygZgJ9kBGUtd
+ +uiF0ONm+YW9pLL399saQxYSii7qRKsL+oOc2yHjDcedLOex98ctL+34p8aJvESVzXV4XYe+crO
+ wOeBn5fq1pQVg1CNh7VTEUEjgPdaZQ2Qpj9yAboxCsHWsRpCHWzRQOCq5Wx4n5WEiAyJX7aU4Ip
+ it5o2y58TBKAL2uziiT3ZGfo2GCTtPilA1i4KwnsU/7/3WRzuq62CQFubRzTktCcFdvNZ9PFNld
+ YLw61Bnwi66Manr4pTH1M/VZLNaP2dlr3EEgG2Q1TvElByWQkAeImwul6/6I1F2JxkfBxghzFbA
+ 8cEDkeJsFLzwdAf1m/C/pZpechQOLdvVo+tDnDa/2ASD7xMTHqiGBGy0szYL2JHCXQbqBuXYSiV
+ 7pryQjXylJdrUXoqNb7oRTaAJSwxBsKXEforASbUbYowHOrFNmK74zj1j2Ka5GNCfdeI6A659QQ
+ OpAGGNqL661/e5xfOSQ==
+X-Proofpoint-GUID: 0OgwEHSJj-LnbAk7F1mdO0j7Am5-zuXH
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 bulkscore=0 clxscore=1015 malwarescore=0 adultscore=0
+ suspectscore=0 spamscore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610160025
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -191,324 +255,112 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Many places open-code the conversion between log2 bits-per-pixel and
-the actual number of bits or bytes per pixel, using expressions such as
-"1 << bpix", "(1 << bpix) / 8" and "((1 << bpix) >> 3)". Meanwhile,
-<video.h> already provides VNBITS() and VNBYTES() helpers for exactly
-these conversions. Replace the open-coded expressions with the helpers.
+Add the clock RCG, gate bit definitions, and frequency table needed
+to enable and configure the SE0 (SPI) serial engine clock on QUPv3
+wrapper 3, GCC_QUPV3_WRAP3_S0_CLK. This is required to bring up the
+GENI SPI controller on QUPv3 wrapper 3, e.g. for SPI-NOR flash
+attached to that wrapper.
 
-Using the helpers makes the intent of the expression clear, removes
-duplicated bit manipulation, and reduces the reliance on the specially
-crafted VIDEO_BPP* enum values, since callers no longer need to know
-that those values are log2 quantities which is also important for
-future extensions.
+Also add the wrapper's M-AHB/S-AHB clock gates, and the QSPI/AGGRE-NOC
+gates that are auto-enabled alongside the SE0 clock.
 
-Note that VNBYTES() is only correct for 8bpp and above, since it returns
-a whole number of bytes per pixel and cannot represent sub-byte pixel
-sizes. Every site converted to VNBYTES() here uses 16bpp or 32bpp, so
-the result is identical to the original expression.
+The register offset, gate bits and frequency table are adapted from
+the Linux GCC driver added in commit 08c51ceb12f7 ("clk: qcom: add
+the GCC driver for sa8775p").
 
-No functional change is made.
-
-Signed-off-by: Reza Kurniawan <imkyufie@gmail.com>
+Reviewed-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Signed-off-by: Vandhiadevan Karunamoorthy <vandhiadevan.karunamoorthy@oss.qualcomm.com>
 ---
-Changes in v2:
-- Convert uncaught conversion cases in the following files:
-  - arch/sandbox/cpu/sdl.c
-  - boot/fdt_simplefb.c
-  - drivers/video/atmel_lcdfb.c
-  - drivers/video/rockchip/rk_vop.c
-  - drivers/video/sunxi/sunxi_de2.c
-  - drivers/video/tegra/tegra124/display.c
-- Updated commit message
-- Link to v1: https://patch.msgid.link/20261008-bpp-helpers-v1-1-475d1b2513c9@gmail.com
+Changes in v3:
+- Mention the Linux commit the clock data is taken from
+- Add Reviewed-by from Balaji
+- Link to v2: https://lore.kernel.org/u-boot/20261013-b4-sa8775p-qup3-spi-clk-v2-1-bd6365d81a7b@oss.qualcomm.com
 ---
- arch/sandbox/cpu/sdl.c                 | 4 ++--
- boot/fdt_simplefb.c                    | 2 +-
- cmd/bdinfo.c                           | 2 +-
- drivers/video/atmel_hlcdfb.c           | 2 +-
- drivers/video/atmel_lcdfb.c            | 4 ++--
- drivers/video/imx/mxc_ipuv3_fb.c       | 2 +-
- drivers/video/meson/meson_vpu.c        | 4 ++--
- drivers/video/mvebu_lcd.c              | 2 +-
- drivers/video/rockchip/rk_vop.c        | 4 ++--
- drivers/video/sunxi/sunxi_de2.c        | 8 ++++----
- drivers/video/tegra/dc.c               | 4 ++--
- drivers/video/tegra/tegra124/display.c | 4 ++--
- drivers/video/ti/tilcdc.c              | 4 ++--
- drivers/video/tidss/tidss_drv.c        | 4 ++--
- test/cmd/bdinfo.c                      | 2 +-
- 15 files changed, 26 insertions(+), 26 deletions(-)
+ drivers/clk/qcom/clock-sa8775p.c | 35 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
 
-diff --git a/arch/sandbox/cpu/sdl.c b/arch/sandbox/cpu/sdl.c
-index ed84646bd..ff823fb72 100644
---- a/arch/sandbox/cpu/sdl.c
-+++ b/arch/sandbox/cpu/sdl.c
-@@ -152,10 +152,10 @@ int sandbox_sdl_init_display(int width, int height, int log2_bpp,
- 	if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
- 		printf("Unable to init hinting: %s", SDL_GetError());
+diff --git a/drivers/clk/qcom/clock-sa8775p.c b/drivers/clk/qcom/clock-sa8775p.c
+index a7bd6c43004..9ac914802a3 100644
+--- a/drivers/clk/qcom/clock-sa8775p.c
++++ b/drivers/clk/qcom/clock-sa8775p.c
+@@ -18,6 +18,7 @@
+ #define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR	0x1b040
+ #define USB30_PRIM_MASTER_CLK_CMD_RCGR		0x1b028
+ #define USB3_PRIM_PHY_AUX_CMD_RCGR		0x1b06c
++#define QUPV3_WRAP3_S0_CLK_CMD_RCGR		0xc4154
  
--	sdl.src_depth = 1 << log2_bpp;
-+	sdl.src_depth = VNBITS(log2_bpp);
- 	if (log2_bpp != 4 && log2_bpp != 5)
- 		log2_bpp = 5;
--	sdl.depth = 1 << log2_bpp;
-+	sdl.depth = VNBITS(log2_bpp);
- 	sdl.pitch = sdl.width * sdl.depth / 8;
- 	sdl.screen = SDL_CreateWindow("U-Boot", SDL_WINDOWPOS_UNDEFINED,
- 				      SDL_WINDOWPOS_UNDEFINED, sdl.vis_width,
-diff --git a/boot/fdt_simplefb.c b/boot/fdt_simplefb.c
-index 69c7c2e24..9b7ffe9ff 100644
---- a/boot/fdt_simplefb.c
-+++ b/boot/fdt_simplefb.c
-@@ -59,7 +59,7 @@ static int fdt_simplefb_configure_node(void *blob, int off)
+ #define UFS_PHY_AXI_CLK_CMD_RCGR		0x8302c
+ #define UFS_PHY_ICE_CORE_CLK_CMD_RCGR		0x83074
+@@ -50,7 +51,27 @@
+ #define GCC_QUPV3_WRAP2_S5_CLK_ENA_BIT BIT(9)
+ #define GCC_QUPV3_WRAP2_S6_CLK_ENA_BIT BIT(29)
+ 
++#define GCC_QUPV3_WRAP_3_S_AHB_ENA_BIT BIT(20)
+ #define GCC_QUPV3_WRAP3_S0_CLK_ENA_BIT BIT(25)
++#define GCC_QUPV3_WRAP3_QSPI_ENA_BIT BIT(26)
++#define GCC_QUPV3_WRAP_3_M_AHB_ENA_BIT BIT(27)
++#define GCC_AGGRE_NOC_QUPV3_AXI_ENA_BIT BIT(28)
++
++/* QUP Wrapper 3 SE0 (SPI) clock frequency table */
++static const struct freq_tbl ftbl_gcc_qupv3_wrap3_s0_clk_src[] = {
++	F(7372800,   CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625),
++	F(14745600,  CFG_CLK_SRC_GPLL0_EVEN, 1, 768, 15625),
++	F(19200000,  CFG_CLK_SRC_CXO,        1,   0,     0),
++	F(29491200,  CFG_CLK_SRC_GPLL0_EVEN, 1, 1536, 15625),
++	F(32000000,  CFG_CLK_SRC_GPLL0_EVEN, 1,   8,    75),
++	F(48000000,  CFG_CLK_SRC_GPLL0,      2,   4,    25),
++	F(64000000,  CFG_CLK_SRC_GPLL0_EVEN, 1,  16,    75),
++	F(75000000,  CFG_CLK_SRC_GPLL0_EVEN, 4,   0,     0),
++	F(80000000,  CFG_CLK_SRC_GPLL0_EVEN, 1,   4,    15),
++	F(96000000,  CFG_CLK_SRC_GPLL0_EVEN, 1,   8,    25),
++	F(100000000, CFG_CLK_SRC_GPLL0,      6,   0,     0),
++	{ }
++};
+ 
+ /* UFS AXI clock frequency table */
+ static const struct freq_tbl ftbl_gcc_ufs_phy_axi_clk_src[] = {
+@@ -148,6 +169,12 @@ static ulong sa8775p_set_rate(struct clk *clk, ulong rate)
+ 		clk_rcg_set_rate_mnd(priv->base, SDCC1_APPS_CLK_CMD_RCGR,
+ 				     freq->pre_div, freq->m, freq->n, freq->src, 8);
+ 		return freq->freq;
++	case GCC_QUPV3_WRAP3_S0_CLK:
++		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap3_s0_clk_src, rate);
++		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP3_S0_CLK_CMD_RCGR,
++				     freq->pre_div, freq->m, freq->n,
++				     freq->src, 16);
++		return freq->freq;
+ 	default:
+ 		return 0;
+ 	}
+@@ -190,7 +217,11 @@ static const struct gate_clk sa8775p_clks[] = {
+ 	GATE_CLK(GCC_QUPV3_WRAP2_S6_CLK, 0x4b018, GCC_QUPV3_WRAP2_S6_CLK_ENA_BIT),
+ 
+ 	/* QUP Wrapper 3 clocks */
++	GATE_CLK(GCC_QUPV3_WRAP_3_S_AHB_CLK, 0x4b000, GCC_QUPV3_WRAP_3_S_AHB_ENA_BIT),
+ 	GATE_CLK(GCC_QUPV3_WRAP3_S0_CLK, 0x4b000, GCC_QUPV3_WRAP3_S0_CLK_ENA_BIT),
++	GATE_CLK(GCC_QUPV3_WRAP3_QSPI_CLK, 0x4b000, GCC_QUPV3_WRAP3_QSPI_ENA_BIT),
++	GATE_CLK(GCC_QUPV3_WRAP_3_M_AHB_CLK, 0x4b000, GCC_QUPV3_WRAP_3_M_AHB_ENA_BIT),
++	GATE_CLK(GCC_AGGRE_NOC_QUPV3_AXI_CLK, 0x4b000, GCC_AGGRE_NOC_QUPV3_AXI_ENA_BIT),
+ 
+ 	/* UFS PHY clocks */
+ 	GATE_CLK_POLLED(GCC_UFS_PHY_AXI_CLK, 0x83018, BIT(0), 0x83018),
+@@ -230,6 +261,10 @@ static int sa8775p_enable(struct clk *clk)
+ 		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_AUX_CLK);
+ 		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_COM_AUX_CLK);
+ 		break;
++	case GCC_QUPV3_WRAP3_S0_CLK:
++		qcom_gate_clk_en(priv, GCC_QUPV3_WRAP3_QSPI_CLK);
++		qcom_gate_clk_en(priv, GCC_AGGRE_NOC_QUPV3_AXI_CLK);
++		break;
  	}
  
- 	return fdt_setup_simplefb_node(blob, off, fb_base, xsize, ysize,
--				       xsize * (1 << bpix) / 8, name);
-+				       xsize * VNBYTES(bpix), name);
- }
- 
- int fdt_simplefb_add_node(void *blob)
-diff --git a/cmd/bdinfo.c b/cmd/bdinfo.c
-index bf1eca759..37981764b 100644
---- a/cmd/bdinfo.c
-+++ b/cmd/bdinfo.c
-@@ -114,7 +114,7 @@ static void show_video_info(void)
- 						   plat->copy_size);
- 			}
- 			printf("%-12s= %dx%dx%d\n", "FB size", upriv->xsize,
--			       upriv->ysize, 1 << upriv->bpix);
-+			       upriv->ysize, VNBITS(upriv->bpix));
- 		}
- 	}
- }
-diff --git a/drivers/video/atmel_hlcdfb.c b/drivers/video/atmel_hlcdfb.c
-index 89bc0eeb6..8a0096cec 100644
---- a/drivers/video/atmel_hlcdfb.c
-+++ b/drivers/video/atmel_hlcdfb.c
-@@ -315,7 +315,7 @@ static int atmel_hlcdc_bind(struct udevice *dev)
- 	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
- 
- 	uc_plat->size = LCD_MAX_WIDTH * LCD_MAX_HEIGHT *
--				(1 << LCD_MAX_LOG2_BPP) / 8;
-+				VNBYTES(LCD_MAX_LOG2_BPP);
- 
- 	debug("%s: Frame buffer size %x\n", __func__, uc_plat->size);
- 
-diff --git a/drivers/video/atmel_lcdfb.c b/drivers/video/atmel_lcdfb.c
-index 281c3a1d6..29a24b8cd 100644
---- a/drivers/video/atmel_lcdfb.c
-+++ b/drivers/video/atmel_lcdfb.c
-@@ -69,7 +69,7 @@ static void atmel_fb_init(ulong addr, struct display_timing *timing, int bpix,
- 
- 	/* ...set frame size and burst length = 8 words (?) */
- 	value = (timing->hactive.typ * timing->vactive.typ *
--		 (1 << bpix)) / 32;
-+		 VNBITS(bpix)) / 32;
- 	value |= ((ATMEL_LCDC_DMA_BURST_LEN - 1) << ATMEL_LCDC_BLENGTH_OFFSET);
- 	lcdc_writel(reg, ATMEL_LCDC_DMAFRMCFG, value);
- 
-@@ -187,7 +187,7 @@ static int atmel_fb_lcd_bind(struct udevice *dev)
- 	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
- 
- 	uc_plat->size = LCD_MAX_WIDTH * LCD_MAX_HEIGHT *
--			(1 << VIDEO_BPP16) / 8;
-+			VNBYTES(VIDEO_BPP16);
- 	debug("%s: Frame buffer size %x\n", __func__, uc_plat->size);
- 
- 	return 0;
-diff --git a/drivers/video/imx/mxc_ipuv3_fb.c b/drivers/video/imx/mxc_ipuv3_fb.c
-index 3a327b9e9..447644f5b 100644
---- a/drivers/video/imx/mxc_ipuv3_fb.c
-+++ b/drivers/video/imx/mxc_ipuv3_fb.c
-@@ -654,7 +654,7 @@ static int ipuv3_video_bind(struct udevice *dev)
- {
- 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
- 
--	plat->size = LCD_MAX_WIDTH * LCD_MAX_HEIGHT * (1 << VIDEO_BPP32) / 8;
-+	plat->size = LCD_MAX_WIDTH * LCD_MAX_HEIGHT * VNBYTES(VIDEO_BPP32);
- 
- 	return 0;
- }
-diff --git a/drivers/video/meson/meson_vpu.c b/drivers/video/meson/meson_vpu.c
-index a686faf9f..21ac60749 100644
---- a/drivers/video/meson/meson_vpu.c
-+++ b/drivers/video/meson/meson_vpu.c
-@@ -79,7 +79,7 @@ cvbs:
- 
- 	/* Move the framebuffer to the end of addressable ram */
- 	meson_fb.fb_size = ALIGN(meson_fb.xsize * meson_fb.ysize *
--				 ((1 << VPU_MAX_LOG2_BPP) / 8) +
-+				 VNBYTES(VPU_MAX_LOG2_BPP) +
- 				 MESON_VPU_OVERSCAN, EFI_PAGE_SIZE);
- 	meson_fb.base = gd->dram[0].start +
- 			gd->dram[0].size - meson_fb.fb_size;
-@@ -141,7 +141,7 @@ static int meson_vpu_bind(struct udevice *dev)
- 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
- 
- 	plat->size = VPU_MAX_WIDTH * VPU_MAX_HEIGHT *
--		(1 << VPU_MAX_LOG2_BPP) / 8;
-+		VNBYTES(VPU_MAX_LOG2_BPP);
- 
- 	return 0;
- }
-diff --git a/drivers/video/mvebu_lcd.c b/drivers/video/mvebu_lcd.c
-index 9f1ea9c35..234b27c90 100644
---- a/drivers/video/mvebu_lcd.c
-+++ b/drivers/video/mvebu_lcd.c
-@@ -576,7 +576,7 @@ static int mvebu_video_bind(struct udevice *dev)
- 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
- 
- 	plat->size = LCD_MAX_WIDTH * LCD_MAX_HEIGHT *
--		(1 << LCD_MAX_LOG2_BPP) / 8;
-+		VNBYTES(LCD_MAX_LOG2_BPP);
- 
- 	return 0;
- }
-diff --git a/drivers/video/rockchip/rk_vop.c b/drivers/video/rockchip/rk_vop.c
-index 17dfe62c9..b8f56d94e 100644
---- a/drivers/video/rockchip/rk_vop.c
-+++ b/drivers/video/rockchip/rk_vop.c
-@@ -381,9 +381,9 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode ep_node)
- 		return ret;
- 	}
- 
--	rkvop_enable(dev, fbbase, 1 << l2bpp, &timing, &dclk_rst);
-+	rkvop_enable(dev, fbbase, VNBITS(l2bpp), &timing, &dclk_rst);
- 
--	ret = display_enable(disp, 1 << l2bpp, &timing);
-+	ret = display_enable(disp, VNBITS(l2bpp), &timing);
- 	if (ret)
- 		return ret;
- 
-diff --git a/drivers/video/sunxi/sunxi_de2.c b/drivers/video/sunxi/sunxi_de2.c
-index ab36ee159..2fec6a8ab 100644
---- a/drivers/video/sunxi/sunxi_de2.c
-+++ b/drivers/video/sunxi/sunxi_de2.c
-@@ -202,9 +202,9 @@ static int sunxi_de2_init(struct udevice *dev, ulong fbbase,
- 	}
- 
- 	sunxi_de2_composer_init();
--	sunxi_de2_mode_set(mux, &timing, 1 << l2bpp, fbbase, is_composite);
-+	sunxi_de2_mode_set(mux, &timing, VNBITS(l2bpp), fbbase, is_composite);
- 
--	ret = display_enable(disp, 1 << l2bpp, &timing);
-+	ret = display_enable(disp, VNBITS(l2bpp), &timing);
- 	if (ret) {
- 		debug("%s: Failed to enable display\n", __func__);
- 		return ret;
-@@ -218,7 +218,7 @@ static int sunxi_de2_init(struct udevice *dev, ulong fbbase,
- #ifdef CONFIG_EFI_LOADER
- 	efi_add_memory_map(fbbase,
- 			   timing.hactive.typ * timing.vactive.typ *
--			   (1 << l2bpp) / 8,
-+			   VNBYTES(l2bpp),
- 			   EFI_RESERVED_MEMORY_TYPE);
- #endif
- 
-@@ -279,7 +279,7 @@ static int sunxi_de2_bind(struct udevice *dev)
- 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
- 
- 	plat->size = LCD_MAX_WIDTH * LCD_MAX_HEIGHT *
--		(1 << LCD_MAX_LOG2_BPP) / 8;
-+		VNBYTES(LCD_MAX_LOG2_BPP);
- 
- 	return 0;
- }
-diff --git a/drivers/video/tegra/dc.c b/drivers/video/tegra/dc.c
-index ced497188..6aca106f1 100644
---- a/drivers/video/tegra/dc.c
-+++ b/drivers/video/tegra/dc.c
-@@ -278,7 +278,7 @@ static int setup_window(struct tegra_lcd_priv *priv,
- 	win->out_w = priv->width;
- 	win->out_h = priv->height;
- 	win->phys_addr = priv->frame_buffer;
--	win->stride = priv->width * (1 << priv->log2_bpp) / 8;
-+	win->stride = priv->width * VNBYTES(priv->log2_bpp);
- 
- 	log_debug("%s: depth = %d\n", __func__, priv->log2_bpp);
- 
-@@ -646,7 +646,7 @@ static int tegra_lcd_bind(struct udevice *dev)
- 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
- 
- 	plat->size = LCD_MAX_WIDTH * LCD_MAX_HEIGHT *
--		(1 << LCD_MAX_LOG2_BPP) / 8;
-+		VNBYTES(LCD_MAX_LOG2_BPP);
- 
- 	return dm_scan_fdt_dev(dev);
- }
-diff --git a/drivers/video/tegra/tegra124/display.c b/drivers/video/tegra/tegra124/display.c
-index abe31e27d..6d485736e 100644
---- a/drivers/video/tegra/tegra124/display.c
-+++ b/drivers/video/tegra/tegra124/display.c
-@@ -448,7 +448,7 @@ static int tegra124_lcd_init(struct udevice *dev, void *lcdbase,
- 	reset_set_enable(PERIPH_ID_DPAUX, 0);
- 	reset_set_enable(PERIPH_ID_SOR0, 0);
- 
--	ret = display_init(dev, lcdbase, 1 << l2bpp, &timing);
-+	ret = display_init(dev, lcdbase, VNBITS(l2bpp), &timing);
- 	if (ret)
- 		return ret;
- 
-@@ -484,7 +484,7 @@ static int tegra124_lcd_bind(struct udevice *dev)
- 	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
- 
- 	uc_plat->size = LCD_MAX_WIDTH * LCD_MAX_HEIGHT *
--			(1 << VIDEO_BPP16) / 8;
-+			VNBYTES(VIDEO_BPP16);
- 	debug("%s: Frame buffer size %x\n", __func__, uc_plat->size);
- 
- 	return 0;
-diff --git a/drivers/video/ti/tilcdc.c b/drivers/video/ti/tilcdc.c
-index b498e8186..6b2e591ce 100644
---- a/drivers/video/ti/tilcdc.c
-+++ b/drivers/video/ti/tilcdc.c
-@@ -430,8 +430,8 @@ static int tilcdc_bind(struct udevice *dev)
- {
- 	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
- 
--	uc_plat->size = ((LCDC_MAX_WIDTH * LCDC_MAX_HEIGHT *
--			  (1 << LCDC_MAX_LOG2_BPP)) >> 3) + 0x20;
-+	uc_plat->size = LCDC_MAX_WIDTH * LCDC_MAX_HEIGHT *
-+			VNBYTES(LCDC_MAX_LOG2_BPP) + 0x20;
- 
- 	dev_dbg(dev, "frame buffer size 0x%x\n", uc_plat->size);
- 	return 0;
-diff --git a/drivers/video/tidss/tidss_drv.c b/drivers/video/tidss/tidss_drv.c
-index c231fd034..7c8bfe418 100644
---- a/drivers/video/tidss/tidss_drv.c
-+++ b/drivers/video/tidss/tidss_drv.c
-@@ -986,8 +986,8 @@ static int tidss_drv_bind(struct udevice *dev)
- {
- 	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
- 
--	uc_plat->size = ((LCD_MAX_WIDTH * LCD_MAX_HEIGHT *
--			  (1 << LCD_MAX_LOG2_BPP)) >> 3) + 0x20;
-+	uc_plat->size = LCD_MAX_WIDTH * LCD_MAX_HEIGHT *
-+			VNBYTES(LCD_MAX_LOG2_BPP) + 0x20;
- 	return 0;
- }
- 
-diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-index 7b7fb0894..f53665446 100644
---- a/test/cmd/bdinfo.c
-+++ b/test/cmd/bdinfo.c
-@@ -91,7 +91,7 @@ static int test_video_info(struct unit_test_state *uts)
- 			}
- 			ut_assert_nextline("%-12s= %dx%dx%d", "FB size",
- 					   upriv->xsize, upriv->ysize,
--					   1 << upriv->bpix);
-+					   VNBITS(upriv->bpix));
- 		}
- 	}
- 
+ 	return qcom_gate_clk_en(priv, clk->id);
 
 ---
-base-commit: ed869863c7e2aca50d57a05d843830dd843138c4
-change-id: 20261006-bpp-helpers-d8d63b120d8a
+base-commit: fed92546960a92177d67c0b8d7b22385f50fed29
+change-id: 20260924-b4-sa8775p-qup3-spi-clk-6c01d31b33ea
 
 Best regards,
 --  
-Reza Kurniawan <imkyufie@gmail.com>
+Vandhiadevan Karunamoorthy <vandhiadevan.karunamoorthy@oss.qualcomm.com>
 
