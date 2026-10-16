@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9B19CCA464
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 12:16:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05E42CCA464
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 12:23:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 41B25608DC;
-	Fri, 16 Oct 2026 12:16:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9127C81281;
+	Fri, 16 Oct 2026 12:23:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id M0DD9YJxi8su; Fri, 16 Oct 2026 12:16:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2B46360877
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792152968;
-	b=c/dxMPRgB035zzybYpr+9qEtBc8K39bm6bvT9AVHmcgDsI2aUhuslsNrkNGZgH2/JTDG
-	 DvtuYR9BOzDRpd0N5YIpEdLCdi5yCvjY/t3q0Em7j5FZbtMKb9fhGx6/UoHSJFRZmJXmF
-	 xt5GU7u0OVrYPJolaCVw4k2e9IZz8pDfS9fJt7XVTFh2zht06N3xlysgSBJ23oloGwO7d
-	 ukrFNwQc/xl6SZAXPgSZD9VugT6kW0MRWNDndQ4KtXcOAIoJ85yCbGvBBvQ00rNrHvTwH
-	 oRusilt9o7Ejd+EsQiuv/AdhU2i4zcdc8Q4paRYGKd4vD+SJxnBrQR52EJsjLMZ+uog==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5gmbKHGL7CjS; Fri, 16 Oct 2026 12:23:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A9CD7813F8
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792153413;
+	b=CQMFywVjYQal0iIFVGqdj19g0Z50W+shmjJ/98EZ0nbvwDQc2w5sDHW9rsoJneTbxrTY
+	 BqFfBVkcSYSdNg4Dhb2Ct7C07y/eqbVQ8IAG0uHvPkpjHLy2CVVYsthhM1Jbon2uGUVfw
+	 v4HvLoGJRkzGDlpo/Lf+ggLapMCDkiZR4cWqTGB6Y8j1MhI0El6DD+MfU0ALzYEm6KKJa
+	 QfHW7Rs28UTRzhiwoTYR+EqTJOXxOkHDNFbsfRzXLuH4K6qnxsVGcXcitawPqGsJehU6t
+	 HbLKY9+plrhbazbjSfzPvnV34qeb0KVeFYr/8gpfILv/J1rchqx2wrTUUrrR3nR+qlg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792152968;
+	c=relaxed/relaxed; t=1792153413;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -30,115 +30,107 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=fW3YM83apiPkrnhDW20cNFxeHIIzzTEXZq1PadZYkc4=;
-	b=gEbdd6iAjNvIi0BjB9u/nip7K6Y1M1OlWZr2PjEwsZyDIbgz0cwbGCUnQ86wY+iO6UCS
-	 CoPwO4ZcUr0gYlB/ZY/8xNlLpXLXzmSF/I/aVAe/9sypgxdCbCZFzKyhJ5HtQrlFlQ+5k
-	 wze1Asr4JyG/4fFRUk2xxbI6kD5iDvUHD96ube1y2mGbr0LIUxbpCIKjBMVhv9QL7ANU9
-	 7Wxxk/EcQzuxOvdjIpjrd7AsudZgy6+5YvyGt0IjKGlYccXjsy5NfzuM5D3A32We73oHx
-	 ddYqh61AYweMWPvSaCpYZlRXV8vYvd9+S5ZgOeyhOH6w8sDED5ndN1KDTOKfdGBXm4Q==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	dmarc=pass header.from=kernel.org;
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GrlYdLdb;
+	bh=qdjfIIZCym6bazSk4RbMEYGsuzY81NRzxM8jW5geif8=;
+	b=ajOHz9e9JMnZqwqpzEC7us5D9SikieOOcwOhhhzK6rtX61fUfy4A66EiuhWlCgzHQQ7J
+	 6GUOfpb8Kx+K5eqf+B9MWBfcTN3X47OFytD8FZldp9v8d2GXp9mRF1ph5HiK68ImO/l9o
+	 VILjq5k1UzrGMv9ATki/v6wfE3NELpg4yIEWC404AzQcpDAzPRtwQ7o8isfAIH4kT4Gv+
+	 aAwwmH3utLrtyFFOcXxoRLpUZX+JJFT68PvMPbaOOB5V5Q0zTSzFoTAhMrpdGiCRegSSI
+	 Tiab/6ae4cFikVsxVXVDIVMfYQYLcDjVPJQQaWreXk65s0Dgm9nao0OJ3Vo7H8oBhvQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792152968;
-	bh=fW3YM83apiPkrnhDW20cNFxeHIIzzTEXZq1PadZYkc4=;
+	d=lists.u-boot-project.org; s=default; t=1792153413;
+	bh=qdjfIIZCym6bazSk4RbMEYGsuzY81NRzxM8jW5geif8=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=mF6xlvdB1TUJ17CjkQ4Hl5X/NFq9Vy+SypXtGLUxBkA8emTluhd1Nnixc6oLqdMXa
-	 ET82fGMWKuCsYf141MgIufdxppOt8uomJ5+JIGO3/48mm8+/J4iLo1gcQK+FuGxWAG
-	 wAkAKdsUmF7D9JmqzATiffSw5Z0bNz6JOjmnXwnbMz5vNz/gosFbXqi0VMHU4cFs0/
-	 FLknncYaWo/NgrWGUdQaz73dJv/dnc1SqspzRU18InkKaiiPqo4bTYFd6JDAlS7Vhj
-	 /T30s09kxofvZcFqB7jAIcBaQt2Dko1K+5Zk354C9NH8X9StWLkg2DwyC6RCicBI2r
-	 lRW34FkYjdZjQ==
+	b=owTC0GFCmrlLVdKSYYlonEch30BILcXwrdtVxqO+BRy7blhFOc9nYO69OMOw082Ac
+	 zk0qDI+v9zLI21E5GOLHUBjAG/UA2BzYAUPfrVRZzfyJfsoCfmXw+jBujwoD6Ja435
+	 PNOtCIRZuyoqOxIMVw38bbJgVHtxwc74/FFgBnPf2yXqoqrpdys7Pap0vPgRHZXINn
+	 bzlDG8tKnI9IRWV+1ddfQh03JUvrVCS7B4U+Q3LWSARrFbOGUmKmKsNAF2pbS/BjZ+
+	 uuge4o/k3E81D7bIlmqjL8ugVeBi4Y3P4P+rpuwSwwbIGjr/H7KXYMnTv8j3quCj1E
+	 nQKO9ufZrYpZg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2B46360877;
-	Fri, 16 Oct 2026 12:16:08 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 4AA25255
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 12:16:07 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A9CD7813F8;
+	Fri, 16 Oct 2026 12:23:33 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0CD82109
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 12:23:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 3C46C60877
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 12:16:07 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id E650F40986
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 12:23:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id H5eG69QmlV0J for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 12:16:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 20D1960801
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=172.234.252.31
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792152966;
- b=LP2MhaLWd8ImyTlIf4s6HjHeipxJHp8RAT3zypfEQ80/rh6Et2fIpt3EPnTvb0weF5vd
- bZVG0rNQb8h3ukp2viS8/CsJREZyfGlDgYACQ96hxUykwcNirQ/ZHOFSf3K9oa7FueaOB
- x0Bj3ILJPVB1bjBGHKK0745xuG+xKHd+7od1aOTdKbqFd+evN5tBvsPy7L6HEPMdw3ZDK
- IkFxgm7dxEveOUMkTT3pD95ZwiZ53428T+qjiTkOGlDE+C2foYspyrDfh+CGWuXBG7d70
- DcqzHCpd8mCLztuZSIJtANP354ipdRwrKSsUNBUPJ48LjKDRwvAEIM0r/p0iu9XUrNw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id B5uJFvTOwyhS for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 12:23:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org F026040960
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792153411;
+ b=CfDoO+GaBFJJgIVx0QxCR18JCDriJrx5El8MA7OYTLpc1BDNLdXSeH9j1RYxPbtfY4OU
+ GCYXFdZKjViR+sNfbIe0LRlDH67TW8lsQiHz20BA9j9xFBc8tk/GkSM1qJr96bLKf5x73
+ EJSXZPSN/j6Mw8II2RU3jxyfFT4jY1UEFpW/zntdDXfiYvpHAuQUGtyak5Wo3ulVtAOUY
+ iRdVNaUOxolPcNnT2zpAHLYHdixawFynGihx+PjzESbQkvQzAlPX97C+MA/+ak/kjpwia
+ zr9m3u5Khh9JeZIm92DXxEPGbMz8JBZ2s2G/eC7PMN7ERJcV9LSFlbHEv7Oh40tz0bQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792152966;
+ c=relaxed/relaxed; t=1792153411;
  h=Received-SPF:Received:Received:DKIM-Signature:Date:From:To:Cc:
  Subject:Message-ID:References:MIME-Version:Content-Type:
  Content-Disposition:In-Reply-To;
- bh=fW3YM83apiPkrnhDW20cNFxeHIIzzTEXZq1PadZYkc4=;
- b=pWLkLy79PeVDyybsqlFXiGyn7Ro0Uz2NfZ7qC7+R0JWXmvS+AxiBlHJ3MjzyOJoSKt9Q
- pL5wMawNHUzvmRjndLQrf1WFhIkqcxyS4jf7tFlQo136gKMzYCB0eh9dcgP17Ij3BjJU3
- yQ4NHElOhqGULzKi7qDkasbT3cl4U9b9Ju//NAeXpjdQXTdfB6XMjfytMMXOunm9ksj5R
- 6efYuEzGk+OmJV7kDdXFJVHRx1NYr56/mb2GWm+tI52RVOwWocBSXyKOE+6bBc9YTrDGt
- S7tMb2rAjM6iwIK3SsTViMt7X9uFsvbalVy1jGhFv0y8gqb403oh8g0k75GnWgeasuQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=qdjfIIZCym6bazSk4RbMEYGsuzY81NRzxM8jW5geif8=;
+ b=BOIEyAc+bRoed2oHa6vw1w+Kd1EXjNf9ZRVSdT6UEJ0F0JG8PWM9UO42mAZ+EFR08dBB
+ +cWvhyb2YYagknDYrcDNRel5EJQ5S9SQgGu4+5rLUFd/UmtiUECg/XAfaOjbrByZylonx
+ 18RF8pGNVif0pMWGgOoiqx/Yjo3grA2fRUOpI29+4olPe3wJ5fgIvL6ynUs72Byzrkl9i
+ zpby8ZIKhp34PFiDbc2ta08pZFQ7qe4YOgK7Kds9FcnBYKm3G2gGEwvnqprCxPo5gP5eY
+ MsN8VVB/NbGxfDGsCtEB6bQ7A/UGr8DVMa0YpV9mP+lwP1QLCZtOOC0QfrvM/qGTYZg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=GrlYdLdb; 
- arc=none smtp.remote-ip=172.234.252.31
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
- helo=sea.source.kernel.org; envelope-from=sumit.garg@kernel.org;
+ header.s=k20260515 header.b="RuU/8QYY"; 
+ arc=none smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org; envelope-from=sumit.garg@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=GrlYdLdb
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 20D1960801
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 12:16:05 +0000 (UTC)
+ header.s=k20260515 header.b=RuU/8QYY
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id F026040960
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 12:23:30 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id B4B5041974;
- Fri, 16 Oct 2026 12:16:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61CA71F000C4;
- Fri, 16 Oct 2026 12:15:59 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 3E22A600D4;
+ Fri, 16 Oct 2026 12:23:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 21F421F000C4;
+ Fri, 16 Oct 2026 12:23:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1792152964;
- bh=fW3YM83apiPkrnhDW20cNFxeHIIzzTEXZq1PadZYkc4=;
+ s=k20260515; t=1792153409;
+ bh=qdjfIIZCym6bazSk4RbMEYGsuzY81NRzxM8jW5geif8=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=GrlYdLdbV7I2Gu4J9somoRwvLC6VYG3cf97bhyWEDprXDPVkfoxrr0YX9OFIjhaR1
- QEmg9nh/dARDHslW5sz4uiJKLkZEck7VH76SMRXBlVbNDJU9DbziJnZ+UhFyAjj8QD
- yPYCwvlyvjb3wBBAvsRXIdZDf91PoleQlFYJZsh08nLdnzu5AyT9bJP/3cMNaKiK8W
- jbbKY5VTEbhBHRHfLpLFdIfILFjySYcZEjeckqcJn+Pms34Mf75pwLI0ORP3NeWBpU
- 158EoYAGi7rhej5/MHzCsFZwSLfU+/QoTrGtqLFTF229ug7nZeP2+JR/m4+TC7H7iR
- vi7Dfcf5rn2Cw==
-Date: Fri, 16 Oct 2026 17:45:56 +0530
+ b=RuU/8QYYaWV5sBkOdrjb/M5Vm2keWMlmBm56JDyMjBIGjjCXZgS5td6at1VJHZurr
+ gvdCPT8e+sNk8fYRu3wdpWrd3+zwss1b5tyE/zDYINq8ljomtWxsV35OCjrJveoENI
+ a4+rHXrs1jK6l7nXGACCw4STwIfamPl8g5AyGRu/W8mtQafHP4I1UulIoAsmP+789K
+ f0yA84hz8+oZRX2ybrkkKObXjqzCMrwW8wRuhUdZRW7nTrSyrnj8V4WnyEJU/Zc0AQ
+ ceUli4bqDibDlrfOVMWFQZvplj+ZZ/JohFtyLVhcE7WeNioJdqX0p27DeSW8tp7kiX
+ /hWZfuK2UTC3Q==
+Date: Fri, 16 Oct 2026 17:53:23 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- ilias.apalodimas@linaro.org, casey.connolly@linaro.org,
- quic_varada@quicinc.com, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, u-boot@lists.u-boot-project.org,
- balaji.selvanathan@oss.qualcomm.com, Michael.Srba@seznam.cz,
- nathbappai@gmail.com, jbx6244@gmail.com, quentin.schulz@cherry.de,
- anshuld@ti.com, marcello.bauer@9elements.com,
- tan.siewert@9elements.com, u-boot-qcom@groups.io
-Subject: Re: [PATCH RESEND v5 0/5] Add FIT multi-DTB selection for Qualcomm
-Message-ID: <atIVfAF9YZ_Ocp7S@sumit-xelite>
-References: <20261012170754.1606314-1-aswin.murugan@oss.qualcomm.com>
- <20261012175042.GD3722450@bill-the-cat>
- <6bff4593-8182-4524-be00-6963ed9330d4@oss.qualcomm.com>
- <20261013150307.GB4042005@bill-the-cat>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.u-boot-project.org,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Subject: Re: [PATCH v2] phy: qcom: qmp-combo: honor USB-C orientation for
+ port select
+Message-ID: <atIXO9NJTpxWXmev@sumit-xelite>
+References: <20261013-ss-orientation-v2-1-8daddb44447e@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
-In-Reply-To: <20261013150307.GB4042005@bill-the-cat>
+In-Reply-To: <20261013-ss-orientation-v2-1-8daddb44447e@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -152,112 +144,105 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Tom,
-
-On Tue, 13 Oct 2026 at 09:03:07 -0600, Tom Rini wrote:
->On Tue, Oct 13, 2026 at 12:50:42PM +0530, Aswin Murugan wrote:
->>
->> On 10/12/2026 11:20 PM, Tom Rini wrote:
->> Hi Tom,
->> > On Mon, Oct 12, 2026 at 10:37:49PM +0530, Aswin Murugan wrote:
->> > > This series adds dynamic device tree selection from FIT images for
->> > > Qualcomm Snapdragon platforms, enabling U-Boot to select the
->> > > appropriate DTB based on hardware parameters detected at boot.
->> > >
->> > > Qualcomm FIT-based DTB format is documented in [1].
->> > >
->> > > The FIT image contains only DTBs, while the kernel is provided
->> > > separately as part of a UKI image.
->> > >
->> > > The implementation consists of:
->> > >
->> > > 1. Hardware detection infrastructure: Introduces the qcom,hwinfo
->> > >     driver and qcom_hwdetect helper to collect hardware identification
->> > >     data from SMEM, IMEM and TCSR into a single qcom_hw_params
->> > >     structure for consumers such as FIT multi-DTB selection.
->> > >
->> > > 2. FIT multi-DTB selection: Implements DTB selection based on the
->> > >     aggregated hardware information. The code parses metadata DTBs,
->> > >     matches FIT configurations against detected hardware attributes,
->> > >     applies overlays, and loads the selected DTB for EFI boot.
->> > >
->> > > [1] https://github.com/qualcomm-linux/qcom-dtb-metadata/blob/main/
->> > >      Documentation.md
->> > >
->> > > ---
->> > >
->> > > Changes in v4:
->> > ... which was sent as v5, and this is a re-send of?
->> Yes, this is a resend of v4, which was sent as v5
->> > > 1. Drop the SMEM cache infrastructure.
->> > >
->> > > 2. misc: qcom: add qcom,hwinfo driver to provide a common interface
->> > >     for reading IMEM boot cookie and TCSR SOC version information.
->> > >
->> > > 3. arm: snapdragon: add qcom_hwdetect helper to aggregate hardware
->> > >     information from SMEM, IMEM and TCSR into a single
->> > >     struct qcom_hw_params.
->> > >
->> > > 4. Refactor FIT multi-DTB selection to consume qcom_hw_params instead
->> > >     of accessing SMEM, IMEM and TCSR data directly.
->> > >
->> > > 5. Separate hardware discovery from FIT parsing and DTB matching
->> > >     logic, reducing complexity and improving code organization.
->> > >
->> > > 6. Load FIT images directly from a raw GPT partition and remove the
->> > >     FAT filesystem image based loading approach.
->> > >
->> > > 7. Drop IH_TYPE_FATFS, mkimage FAT image generation support and
->> > >     related documentation updates.
->> > >
->> > > 8. arm: dts: enable qcom,hwinfo on qcs9100-ride-r3, qcs615-ride and
->> > >     qcs6490-rb3gen2 by adding the required qcom,hwinfo DT nodes and
->> > >     board-specific offsets.
->> > >
->> > > Link to v3:
->> > > https://lore.kernel.org/u-boot/20260417120951.3454249-1-aswin.murugan@oss.qualcomm.com/
->> > The FAT comments in v3 were addressed. I'm not really sure the discussion about if
->> > this approach makes sense as really was addressed however?
->>
->> Yes, the FAT-related comments from v3 were addressed in this
->> revision by dropping the FAT filesystem image-based loading
->> approach and loading FIT image directly from a raw GPT
->> partition.
+On Tue, 13 Oct 2026 at 22:38:09 +0530, Balaji Selvanathan wrote:
+>The TypeC port-select mux was always programmed with SW_PORTSELECT_MUX
+>set and SW_PORTSELECT_VAL left clear, regardless of which way the
+>USB-C cable was inserted. On a board where the cable goes in reversed,
+>the SuperSpeed/DP lanes end up routed to the wrong side of the
+>connector, so USB3/DP never comes up correctly.
 >
->Right, thanks.
+>Cable orientation is reported by a GPIO on the qcom,pmic-glink node
+>("orientation-gpios"), and is now sampled each time the PHY is
+>enabled to check for the orientation.
 >
->> Regarding the broader design, the reasoning for using a
->> DTB-only FIT was discussed in the v3 thread [1]. The intention
->> is to support firmware-side DT selection while keeping DTB
->> management independent of kernel packaging, matching existing
->> Qualcomm deployment models. This is intended to coexist with,
->> rather than replace, approaches such as UKI DT bundling.
->>
->> [1]: https://lore.kernel.org/u-boot/afSXa7q7hJC_ZW07@sumit-xelite/
+>Taken from Linux commit 815891eee668 ("phy: qcom-qmp-combo: Introduce
+>orientation variable").
 >
->Yes, and I'd appreciate some of the people that were discussing things
->in that thread chiming in and saying they're happy enough, as it wasn't
->clear to me in re-reading the thread yesterday that the discussion ended
->with agreement and instead just stopped.
+>Tested on QCS6490 RB3 Gen2 board.
 >
+>Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+>---
+>Changes in v2:
+>- Instead of reading the orientation at probe, read it only during the PHY init
+>- Updated the commit message to better explain why this change is required
+>- Link to v1: https://lore.kernel.org/u-boot/20260724-kodiak_ss_orientation-v1-1-d9d8fd271e0c@oss.qualcomm.com/
+>---
+> drivers/phy/qcom/phy-qcom-qmp-combo.c | 26 ++++++++++++++++++++++++++
+> 1 file changed, 26 insertions(+)
 
-As of now the Qualcomm subsystem maintenence is in really inactive state
-as you can see from the list of patchsets even carrying review tags are
-missing custodian attention here [1]. If you remember it from our earlier
-private thread with Casey and Neil many months ago, the maintainence
-situation hasn't improved at all.
-
-Even as a reviewer for the Qcom subsystem, I have tried earlier with all
-the reviews but patches were still floating on the list, which just
-demotivated me from doing further reviews.
-
-I would really like to get this maintainence situation fixed. Would it
-be fine with you to accept me as a Qcom subsystem custodian with more
-people from Qualcomm contributing as reviewers?
-
-In the meantime why we decide on that, can you help with picking patches
-which have been reviewed directly for the Qualcomm subsystem?
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?delegate=151538&param=4&page=1
+Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
 -Sumit
+
+>
+>diff --git a/drivers/phy/qcom/phy-qcom-qmp-combo.c b/drivers/phy/qcom/phy-qcom-qmp-combo.c
+>index 0d63e482ee4..65141489d51 100644
+>--- a/drivers/phy/qcom/phy-qcom-qmp-combo.c
+>+++ b/drivers/phy/qcom/phy-qcom-qmp-combo.c
+>@@ -7,10 +7,12 @@
+> #include <dm.h>
+> #include <dm/device_compat.h>
+> #include <dm/devres.h>
+>+#include <dm/ofnode.h>
+> #include <generic-phy.h>
+> #include <reset.h>
+> #include <power/regulator.h>
+> #include <asm/io.h>
+>+#include <asm-generic/gpio.h>
+> #include <linux/bitops.h>
+> #include <linux/compat.h>
+> #include <linux/delay.h>
+>@@ -39,6 +41,7 @@
+> #define DP_MODE                                 BIT(1) /* enables DP mode */
+>
+> /* QPHY_V3_DP_COM_TYPEC_CTRL register bits */
+>+#define SW_PORTSELECT_VAL                       BIT(0)
+> #define SW_PORTSELECT_MUX                       BIT(1)
+>
+> /* PHY slot identifiers for device tree phandle arguments */
+>@@ -283,6 +286,27 @@ static int qmp_combo_com_exit(struct qmp_combo *qmp)
+> 	return 0;
+> }
+>
+>+static bool qmp_combo_read_orientation(void)
+>+{
+>+	ofnode node;
+>+	struct gpio_desc desc;
+>+	int ret, val;
+>+
+>+	node = ofnode_by_compatible(ofnode_null(), "qcom,pmic-glink");
+>+	if (!ofnode_valid(node))
+>+		return false;
+>+
+>+	ret = gpio_request_by_name_nodev(node, "orientation-gpios", 0,
+>+					 &desc, GPIOD_IS_IN);
+>+	if (ret)
+>+		return false;
+>+
+>+	val = dm_gpio_get_value(&desc);
+>+	dm_gpio_free(desc.dev, &desc);
+>+
+>+	return val > 0;
+>+}
+>+
+> static int qmp_combo_com_init(struct qmp_combo *qmp)
+> {
+> 	void __iomem *com = qmp->com;
+>@@ -333,6 +357,8 @@ static int qmp_combo_com_init(struct qmp_combo *qmp)
+> 		     SW_USB3PHY_RESET_MUX | SW_USB3PHY_RESET);
+>
+> 	val = SW_PORTSELECT_MUX;
+>+	if (qmp_combo_read_orientation())
+>+		val |= SW_PORTSELECT_VAL;
+> 	writel(val, com + QPHY_V3_DP_COM_TYPEC_CTRL);
+>
+> 	writel(USB3_MODE | DP_MODE, com + QPHY_V3_DP_COM_PHY_MODE_CTRL);
+>
+>---
+>base-commit: fed92546960a92177d67c0b8d7b22385f50fed29
+>change-id: 20261013-ss-orientation-d85a156e806a
+>
+>Best regards,
+>-- 
+>Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+>
