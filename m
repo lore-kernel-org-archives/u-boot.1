@@ -4,285 +4,181 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05CCFCCA490
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 22:13:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C707CCA490
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 22:25:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 06D8C80F1B;
-	Fri, 16 Oct 2026 22:13:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 18111815D3;
+	Fri, 16 Oct 2026 22:25:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id U1JD7_CvDfmf; Fri, 16 Oct 2026 22:13:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3E39080EA4
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1792188838;
-	b=AociYmLw6kHvXWRoSKFNwret5Ay3zCaQT8gBtEZmSdpt9mwBsKwqhoYBN4T999AFLXIP
-	 VkCo8dXanQhl2LqzGwtIjZa0/nvhAxCMvR5Dd483z49sZn+j/JbPJdGsANpjKkblrxOMq
-	 bETMb9zqpIuV08mn0x4dmp3yOq4qwTr9uBbSGxjtD5M8VFuZdvTZqb1E5EAmIc1bDxIHN
-	 uT+fMhn7w2AFDB0RSUOK1qAZTYeFZJlyCWXPPPtm5RneHpAiCZCb918a7PsKNQSpCBwTu
-	 090Sv+aMv4UApSSBlXR/WyPytGUlYHqoZLxX5hsNM7f0GS3Kti0JQ+BWF9p8TLwZfmQ==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792188838;
+ id l5dVbfgSl2XZ; Fri, 16 Oct 2026 22:25:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B55898162E
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792189500;
+	b=EOmeSXYE6WzDlza5GozjeIRPFZ8KhVg9MMl9r9bgy5LQsVeHWbjsA6le68qPgAjKZ5WJ
+	 xduki8US1t9VmZwWc6tzIG1sD2BYqZ9dGm3xPX0S9heTjF4TRTNJ7T++tpl/oCjHOK8QE
+	 A2U2X3T8f6H8gAXHhuOcwj1vWkVPVGkWFiLGkwfwNE9msHUEZn3QrX9D33FSyDFOuTxzq
+	 +92jWMFLypMiD+RNd5zSkqlENDw5x0EJzqGrqduDedaxAMrOC9g36HWrQt2SLjNWVVA77
+	 4bewrfi+a8vQwI8LtD+l0rZ/+Neu10X2qiTKY0PXgFTuho9M1GyR5/wP5O+Vhp6kt9g==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1792189500;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:DKIM-Signature:Received:Received:
-	 X-MS-Exchange-Authentication-Results:Received-SPF:Received:Received:
-	 Received:Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-ID:X-B4-Tracking:
-	 X-Change-ID:To:CC:X-Mailer:X-EOPAttributedMessage:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
-	 X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=nDM3ZHcPEP3a9thRknR/goZ0szOHFwOYeYTsFqSmqSM=;
-	b=pt3DUlxgyDQ25WadbvMXfyED5bo+X/KNGfLNo/b7HnfjD3AfLOcqnV+rZJA9ZhenCVkv
-	 zpRd8EMjFavGzxzNnh6+8yD2fndOmPXSUEI54HKP+qDGT4MHtZx8ebT5KyzMg6wvnY6bK
-	 lSpf+iX5E/tqLBFq4+zUnVg70+ywDFE1tK9Ykq3Mo/biVnN8xPtHRqVuLBBSicLYTLZfc
-	 oJqnjDaEIFJDC9YPYXjI3/ha1VSztO9nCR/6xYkXAYwcIKL2rwFU3SMmLuzSGbPy0FHxS
-	 6xIrphME7YvBHiWh94Dym3iABYXYqMYhUoKxLo7HoRUjsA3BID89YimLrcjZQNJZkCw==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
-	arc=fail smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+	 References:Content-Language:From:Autocrypt:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=1NinarKIiS2qhuLRezSZQkPi0sSWHA7cr0mu+oTWe4o=;
+	b=Cfrl5PnDWkEZ+MqLIW3r8iWvs2HWO34uMv7+pwIpr6/JBJw1NIbRe+CRdQXt+5ksvYhM
+	 OpPhQNMoqnS4a5PgEGCjVFnExQcivrOtmkVEgEnUHfcmVA54gu4HnzOh/ObwkFZvUYiK6
+	 Bdix7EsCKMLxECrJlv4t3GrNnlvzZzxFD9Vt6Nz4P18DglTcSlqugSovSqNrYIwkwThPn
+	 pw1wPBmXWzeFfT4uDrqcuIkKHH60hn6Lxzc0MrE9OZGY23w9oSn5RTqPaIeoZ7kiJdRJ8
+	 I6x+F/Q+zEW3LlgYjpoSgxhzpvxTa5WMDscC4CT5Ifwm4r4qyYRGta/kG0pP/YU2PWg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792188838;
-	bh=nDM3ZHcPEP3a9thRknR/goZ0szOHFwOYeYTsFqSmqSM=;
-	h=From:Date:Subject:To:CC:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=AROyciiMC841unk/dEO/cP7R3n/jZu86kndtQqC4PHw6prn/9vKvc6dW/x/zaC4PN
-	 p8WeSrdscbTiX/rmrWPHiuwMxB67iuS3feY8tpL4jrTiKH00/h1r63iNBd6LtUTUk2
-	 CM33hlQnnMwZTGMWrsKUOSwYNxZXkGolsEuehwsifDukNIkmWDpPk50oS/Xphg4AAd
-	 jRsM3DuoiBhUariPKGqQRyza93L5Ooii2CSYVBhlPkC4qyuQqQYUoTkyAIFchMYvUs
-	 qEsh/50+GNOBkAamE5XhkmrS3zY3GHY3h0xnYtNtUOBgYMT01hAg3Mrjqij2oCkr5Z
-	 zeuM9KZotmRZg==
+	d=lists.u-boot-project.org; s=default; t=1792189500;
+	bh=1NinarKIiS2qhuLRezSZQkPi0sSWHA7cr0mu+oTWe4o=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=HxyyaUGO7WByN8fb1zavotfKz+VxbZn0iMpuYDsH1hdL+a+7vWHWkSY3VQHS1MRr/
+	 WLaYaQidh/M47JfD5rjj6xUQm+23ANcSd4tb11io2yD5z43Hqzp7aFUMDiMRriIq6x
+	 AGzB6jrvPxaK1Pd/sda4guHaD45AOPjf8NANc3ofqWFJ1j3hMe4FzU4qPlsGe2S+nK
+	 xxsJyEvqWXMNwG9flhPRwREV35wLcSz925QtYpuLvrXZ8y0jAQijK4WN/uvTGWBFpY
+	 TdGfMbFf+ZDbt4sneTyJdhBC1wqekdQaH8N7sqMFXRZnvYtufCUog5yR1TVvN16VLA
+	 44irBR5TBBLXw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3E39080EA4;
-	Fri, 16 Oct 2026 22:13:58 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 228D575
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 22:13:57 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B55898162E;
+	Fri, 16 Oct 2026 22:25:00 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 75E03362
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 22:24:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 148C8409C7
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 22:13:57 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5BF4D409C8
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 22:24:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mXV4RbDADP1I for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 22:13:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org A3DBC408BD
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=148.163.150.75
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792188836;
- b=sjRvXb8F+PnxNsEHPr5Ql03+H364GdKGli64OHr1AjgKGrtr16ualRKJaV4HP3MBZMLz
- Cr8qYPNpjcGev6BlUWu3TlYAmJYlKYx9w8TmJztM2nWoQvJlScamvM/cavZ3YEHFST1B/
- aZJJn90Sec0dHfHx6Eb6UbW/R97Os79+fZ/Gh4U7s0YW/JLLYQOpvOjbZW+PNkmr/hzMe
- TDGqdO05sSq+iwCl4pUeYUHSXfPNSygzP5bl4tjDBu7UOsTEENeOloU5OEv3TyS5wxGhf
- cvexyQd0bfM+CXozNGeMlImWQqq9eyua8piYOXbztUxWODapiLiZs7n/bArHrYp5CyQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792188836;
- h=Received-SPF:Received:DKIM-Signature:Received:DKIM-Signature:
- Received:Received:X-MS-Exchange-Authentication-Results:Received-SPF:
- Received:Received:Received:Received:Received:From:Date:Subject:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:
- X-B4-Tracking:X-Change-ID:To:CC:X-Mailer:X-EOPAttributedMessage:
- X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
- X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
- X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
- X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
- X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
- X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
- X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-Id:
- X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
- X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
- X-MS-Exchange-CrossTenant-FromEntityHeader:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped:
- X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
- X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
- X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
- bh=nDM3ZHcPEP3a9thRknR/goZ0szOHFwOYeYTsFqSmqSM=;
- b=ZkjljYAfqBEpF20RveqBBmAWYaRhV0SQpLwHMXZRNVs85bRzU4XyqLVQVw9JA7wKzT1t
- 1axe4TegSH2RJ2pxm5+4NKMgoW68SSH0f+RES4yb1lWue1eXAuA00Cxs/ngPmjluDwWWt
- sK39JWkuXBYeZPGXI2hUQlZM/cVTm+BA7xF2rfqEMvALTwympAhQFqec5wiUtPq8jXMSe
- VvsH0ir1uDKDBoCHHthInGa33tj+mOx5MPaHr31nrHAk/80dkGDM9z1T6NNxncI3vsk5x
- bg9sK3FjuDva7qNFF2Al9xcl+JMrCfcSAWcOKgVzoAkipUd/56A4Riy0KGuYlxGEfLQ==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
- dmarc=pass header.from=ti.com;
- dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=proofpoint-05-2026 header.b="kBKv6aW/"; 
- dkim=pass header.d=ticloud.onmicrosoft.com header.i=@ticloud.onmicrosoft.com
- header.a=rsa-sha256 header.s=selector1-ticloud-onmicrosoft-com
- header.b=qyi4EvU7; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=148.163.150.75
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.150.75;
- helo=mx0a-0002e601.pphosted.com; envelope-from=bb@ti.com; receiver=<UNKNOWN> 
+ id IR8L77Gj1OOf for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 22:24:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org A1645408BD
 Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ arc=none smtp.remote-ip="2a02:830a:f787:8f00::2"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792189496;
+ b=GGZF27rN8ETx7A9cZtaPczRPxKLyJOSsdBzHMjMlYNnNd0f52V3/0ssSksT4yrx/sNX8
+ zlvO2RJbCO9D2CIqohAQxkkFDgLVMmTY3drRN4vjoZSJw6w+7imIVhBSgirxLrRFwG5DC
+ f4gJETzqb7ILu3AYedflcXR+oc9HX6vjt5u7UrYOhAJI3FGP2YG7yqCtaQkWOc+TNCyK/
+ uqU0ankg4lGCv2eGNoymihnCHunG7UVv6O+V5olHc2uKOGfzgmCNVGBu3BRvTi0w3igjn
+ 9DwO3/idW4ByD/7YVp/J65Ic2hxCy+63wv8RlPyGt9dV3yJ9Q8dy9H//ek92YDCnCjQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1792189496;
+ h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+ User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
+ In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ bh=1NinarKIiS2qhuLRezSZQkPi0sSWHA7cr0mu+oTWe4o=;
+ b=jBFBb9VxGTzcNEqEuNCF07AIw1t+cKpznJiYl3eRed/w1ym/cQcRZ1KS7P5nzaxFIOEX
+ KDj4LhszbGfBmAH0t36kTDpq7+uCUuzQ20bCc4LHKXZg8J+86/dX6Dbo4n4+talgP4VMy
+ VWe0jQGfWn3qQaYpjUw5eImsa8i1LQVQ6OBTtpo3Xe6S3P/TcP2MoogVvoeke4wmiesS3
+ fmm/J8vR3w261MXvyDcXH6x3mhJwAUMg4iXs/X/1SLCj62+4VQAtV/xcS7J1GqyAkdYpW
+ uKCppmMLmHzycdPy0YnhfxSCjjC+m6MpR3bxgLi5fyxs/0guTG91BZ5zLUT4POyQwWA==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ dmarc=pass header.from=ixit.cz;
+ dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim
+ header.b=pmfOh07i; 
+ arc=none smtp.remote-ip="2a02:830a:f787:8f00::2"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a02:830a:f787:8f00::2; helo=ixit.cz; envelope-from=david@ixit.cz;
+ receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
- header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=kBKv6aW/; 
- dkim=pass (1024-bit key,
- unprotected) header.d=ticloud.onmicrosoft.com
- header.i=@ticloud.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-ticloud-onmicrosoft-com header.b=qyi4EvU7
-Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
- [148.163.150.75])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A3DBC408BD
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 22:13:54 +0000 (UTC)
-Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
- by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 69GJh6KA1440123;
- Fri, 16 Oct 2026 17:13:53 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
- :content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=proofpoint-05-2026; bh=nDM3ZHcPEP3a9
- thRknR/goZ0szOHFwOYeYTsFqSmqSM=; b=kBKv6aW/LJwibABFyMAJAvxvQaAGr
- MdIkgL+rLl2B85Vcc3rx5GVJcKH1/MhbiMLAywi58BOGZKEroRLYSYUm5QtQISKV
- dw4B6Q1EZBjroqGyNc40L6lpO2J7LyU0yMZ6fXYy353nLAwP1GkyvllFDLOpCoHH
- 0yKeHceI49MppTT5blSqzLQwlrucrEa1kMyykgjMQ3po1mmTd8vAe/+VXEPf3uxP
- 6WiBx5jzFTI/EP4/OePGSzkMaDsTYmVbS5sbTk5bq9JV33who43g7JZmGrQgd6At
- PQ0RDWpskb7ZjMSCw3Cex5mqTdhNyZjbWqX1jaV+Tc9aVIv/+JMXJDASg==
-Received: from bn1pr04cu002.outbound.protection.outlook.com
- (mail-eastus2azon11010041.outbound.protection.outlook.com [52.101.56.41])
- by m0380145.ppops.net (PPS) with ESMTPS id 4hbk12k6qm-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Fri, 16 Oct 2026 17:13:53 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=icCC0Ue2h5lMNQHSqpaZsvB1sW/oio1+aDb199f0GlJWYy+4tTmsI13zRbmhe88YSLP0v56k28SGV5CRBS/6ShkWPrkC1k22Rwlz66Pnrap5uw2RcX/8cMAhUds0OmGxusStIKfyIJPZoHqdW4ef/eCawq6olpaXCgUEisjiVhEypLqVg1CxVNifKhpE456Iv6HaOSgyru+LqYbECRmYDpHGwdKmhM3RwJvtB9evPDm2HR00W1hxyihonBk27yDwPa8LekUZIrE5EOikphRm+BEQz4TuwS7cjhCyhAv77BjYcfvMZJcNEQBw9TRm3kYP+gvwXZkgC5SrAhDimdN+AA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nDM3ZHcPEP3a9thRknR/goZ0szOHFwOYeYTsFqSmqSM=;
- b=wW134gu/BGiDhZB4ush6CNcCnudAG3Y7nAXSsFhGkbMXaIpu+XPuDV0Dw9Evc+SUMEl/1p0LqETSopP2UXkkvZeQQU8V2LfU/GuYFhQW18aMGMzONz6Vfl2r6TSLWpqFdsI6tyS8dcSf586Cdy4iShC5Iq4HNXmcuYMyZ8o4Dw6KiNG6pZXFGBTvhixYDUBTVRKN64yWWKY0bK1H8il16WFqGqCE373B9JaI5/vDpU7wcjQEwP5/oAcfirD3py6UT1pAqk44OjT7l/7bObB9DDWunXH/9JULTnVHCo5A8bOh6dc7UYiLXjI2hXEi/i5oZJjdXhASSnNmh4PmE4nSvg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=nxp.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ticloud.onmicrosoft.com; s=selector1-ticloud-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nDM3ZHcPEP3a9thRknR/goZ0szOHFwOYeYTsFqSmqSM=;
- b=qyi4EvU7iVkVcPGMF2Y6XCZLIyPYR/JmKQFpxhpUcsO01mE/cHZ0nwsJsRRiRwU+tk1xFx1zMHqCTu4lV4sDqEBLl88zxaJrwcg5G/JNlI/ShHlkQPHpAzga7OnRyBoAEf8l3CxcLW+I3mUjc/0eluJ+u7rR+qii10jyNkhQaEU=
-Received: from BN9PR03CA0338.namprd03.prod.outlook.com (2603:10b6:408:f6::13)
- by DS7PR10MB4893.namprd10.prod.outlook.com (2603:10b6:5:3a2::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.11; Fri, 16 Oct
- 2026 22:13:49 +0000
-Received: from BN3PEPF00022BBA.namprd04.prod.outlook.com
- (2603:10b6:408:f6:cafe::98) by BN9PR03CA0338.outlook.office365.com
- (2603:10b6:408:f6::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.4 via Frontend Transport; Fri, 16
- Oct 2026 22:13:49 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 198.47.21.195) smtp.mailfrom=ti.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- BN3PEPF00022BBA.mail.protection.outlook.com (10.167.248.116) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.522.6 via Frontend Transport; Fri, 16 Oct 2026 22:13:47 +0000
-Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Fri, 16 Oct
- 2026 17:13:16 -0500
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Fri, 16 Oct
- 2026 17:13:16 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Fri, 16 Oct 2026 17:13:16 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.75.137])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 69GMDGKB2359564;
- Fri, 16 Oct 2026 17:13:16 -0500
-From: Bryan Brattlof <bb@ti.com>
-Date: Fri, 16 Oct 2026 17:13:16 -0500
-Subject: [PATCH] firmware: scmi: check if BASE_DISCOVER_AGENT is
- implemented
+ dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256
+ header.s=dkim header.b=pmfOh07i
+Received: from ixit.cz (ixit.cz [IPv6:2a02:830a:f787:8f00::2])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A1645408BD
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 22:24:54 +0000 (UTC)
+Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown
+ [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange x25519) (No client certificate requested)
+ by ixit.cz (Postfix) with ESMTPSA id E2D0B53401DE;
+ Sat, 17 Oct 2026 00:24:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+ t=1792189490;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=1NinarKIiS2qhuLRezSZQkPi0sSWHA7cr0mu+oTWe4o=;
+ b=pmfOh07i/0SXmfI0AUj0TVvlfcmX9RHzI90WKaZWw7LNHEDm8po7awXMPw5SP5wNFI8gZ9
+ Q+0io9/sCMjTQRpo38+M7kR8bIbpOIvsDnZ4OboJuovEl8GG31w/vi9d9R+Ml3vCNAacLo
+ TdRAPdb4u5mWzacfG+GphuOnEYPZc+o=
+Message-ID: <8255ef63-dc32-430a-8a82-646d896b6b80@ixit.cz>
+Date: Sat, 17 Oct 2026 00:24:49 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] video: simplefb: add an a8r8g8b8 format with an opaque
+ alpha
+To: petr.hodina@protonmail.com, u-boot@lists.u-boot-project.org
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini
+ <trini@konsulko.com>, Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Aelin Reidel <aelin@mainlining.org>, Luca Weiss <luca.weiss@fairphone.com>,
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Petr Pavlata <petr@acrux.cz>
+References: <20261017-b4-simplefb-a8r8g8b8-v1-1-ce7e80682a5c@protonmail.com>
+Content-Language: en-US, cs-CZ
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <20261017-b4-simplefb-a8r8g8b8-v1-1-ce7e80682a5c@protonmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-ID: <20261016-base-discover-agent-fix-v1-1-113519da193a@ti.com>
-X-B4-Tracking: v=1; b=H4sIAHuh0moC/yXMwQqDMBCE4VeRPbuQRMjBVyk9xGTU7SGWrBVBf
- HdTPX4D8x+kKAKlvjmoYBOVJVfYtqE4hzyBJVWTM85bYz0PQcFJNC4bCocJeeVRdk4eBi4G33W
- O6vtbUOe7/Ho/1t/wQVz/OTrPCz5QKsB7AAAA
-X-Change-ID: 20261016-base-discover-agent-fix-d6e0e2ca6332
-To: <u-boot@lists.u-boot-project.org>
-CC: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>, Bryan Brattlof
- <bb@ti.com>
-X-Mailer: b4 0.15.2
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF00022BBA:EE_|DS7PR10MB4893:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3b0c4504-54bf-4244-66d8-08df2bd2c061
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|23010399003|82310400026|36860700016|56012099006|261009223027099003|10067099003|18002099003|3023799007;
-X-Microsoft-Antispam-Message-Info: wul/Cwn2CuzBlUlREp1VXZB6OZ6Q0KmgB2LWykIZOq/DZ7CiT1KugQuEZi3KAVbseknIGxlNani68s2VKVsjU1P/hqAYd9XRsYa36Ucx6vYyCleGP/z8axH+kSe30aj1b3GHkf2WJKZY5iB2Ly6dj/axMI1Scb1HCN/LA8PzcR8KpaUZD8ZO16lq4OU8QhnBlDFu7y8mf+DViZrD6RQTHdGp4RNZjwFdhc3t3tD4kkDgM/ISdVppluj6zx0dA0ZBbrd9MFwpUYFU+KQtTVY2RiRDDhGG/ik8437b3x9ZbeTOe8GxuVv6opMHLf1K4UVhQTa8BY+FKrG4W6lwBT6Bwqd8iu+i2ffHkfQNdUaNsdX+JS6zWUpIRWajxz7v2QN0M3r2fiScOSYzwqzsr36sGWXI4sxF4dpOtmq2/hJ1SxwAQ9FLUHswBpmq79fQsMG86UVWlzaOjilZikwhDbdh3EHqriOycdRfe02wF1KS0wzyAV3EsoKaehfGr/ZYGROjOXO3W8d9+wvHQUOeCp5FNxdxlF8i0PMW050ZOpF9cX8bn5HZQDNyO95O96zPFW9+nq8b9Tj5C9YYyYR76Hb4tRrTdyixlJfhXW/C4CuDZNj4JcWQyYTUTg9Sojsaq8G4YvUjlynz7IcIe+QGLfX1EnTfqc4pNhAVwfoWyEp33JuPM7bdlhQzbG6pKgu5QMsxlFTzEAlc3ylo3L7Jz2ejEA==
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(23010399003)(82310400026)(36860700016)(56012099006)(261009223027099003)(10067099003)(18002099003)(3023799007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: XelYu7hlzi0H+rEvOz+BaOa2w1DM4ty0+SS5HjJS9HuCqkSdzEYvTRImCjfkrOCPN/wkfahSbvaqUF1uafKmaAKwxuxUFIpKjNSQv4FFAlGHY9NeOxzSVgcgKUopvLGgf3pd2d2FpY2jgpaWTIcoU0zQf4UI5EOXCr+Ic0V9hlMC8iLUx64UoOtsyR8iY0lor3lH4ucDwYXQAmC7DuEZ028t293kUEn33MDEYaOZR1XZS6wV5eDrGK77Ia3o7MlLsKVJIJJX5XlC3926nU4U/7mgvOz8gWBIGw+UH4pb6arfVIyOuavL/Iq6XG5TwLqOgW/35LYXj4PZc2Tg7x7jh9yow4TZvC+2W7SGmSgCsbampf5nF1hcMG3auFeIFnrdlFGIPEBqR6XcGSnCjgS9zOM8xUxlDnJsr+Zr+Cw8xzk8cFeqHaCnwTs0y8Lyr7Tq
-X-Exchange-RoutingPolicyChecked: PMK5wSEhklzukfdE/FSuCL3kvNAkF6RU+Bn9aNpAlagzEwdhYMKvpLVt3JqlFLBsTmYGE4E05tApNcGvrQZlI6iStwgTaOIiznmwuM9hR0+KrbqTRSlzRpq7By9+km7aesGSoKZeJJPhTpt9wmRZ+lRBqpEvnh7AyW4r+UaP7zslbj4mDAsyvU1OhMsHPl57W2z09mqyNtdCFV76iShGkT52HIKacNWPggYI/pqJmJn9YfyD6/N9qI7ITkom5ztY8B0WU9nmDAGvAHu0rNvHXFwIUpUfwpdyaba4/Ggf02Ih1PncfZnIYh/08LOOzHb1wkzOtMtq8bgpeYFyFHEXwQ==
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2026 22:13:47.9434 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3b0c4504-54bf-4244-66d8-08df2bd2c061
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF00022BBA.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB4893
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA4OCBTYWx0ZWRfX+6F0RyfgDY2u
- 3998vhWgxfTYLISY9l/ZNuZgsPub6dSI8cmjtwCQZQYsUbrku6yZ+qHrNU2YOt7gOk284xQPTON
- b7D3E1iQp7IH4yg62RHXnK4HdO51XVDPzdbkd7FU4j313gy56fICwBsDr7hdYZAykEDvzdkOJRM
- OIF3tvKXAvf2jnGKCwV6f83pzouQnOFG/fSU9o0gIjllqD5UOh717fhLbly6SjQmIaqpkXSd1Gi
- uujjgWp4W43hLwVsDxNbt5oNRHLRgOg9/rpWxnxD5taZIxiin9A/RGphjasC/fwvemQOxFnfm9q
- C1OAaBgIHmeW/tdpYW+q8tWFQrYtWynEjzewYZCvDaE8maFC0OJbrZ0apM89TDddcLxoyFMdJy8
- kvP/TbZX2GloiozmEgHA5+nyZqIJ7TRfD6TIF5070bT6eLgbsdjWM3AxFbO87TSBEEcoDutoS7z
- R4lKJeb7vyUSZ7/+wVw==
-X-Proofpoint-GUID: d7vgP7kIfyG2SosQNCFYuFiDKOhgbkvY
-X-Proofpoint-ORIG-GUID: d7vgP7kIfyG2SosQNCFYuFiDKOhgbkvY
-X-Authority-Analysis: v=2.4 cv=fspJ914f c=1 sm=1 tr=0 ts=6ad2a1a1 cx=c_pps
- a=XYu8HXWfxIrayFrXgJv6cg==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=AlMIdn_sM9wA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
- a=gO1vWkAQAl3rybz1DQOp:22 a=sozttTNsAAAA:8 a=ajVFTv8ujG2krU7aKnEA:9
- a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA4OCBTYWx0ZWRfX+9GbveW8N26M
- M2Yfs+6CyjSLfkyi/LzSbAUbBKE01vui55hzvjOF7Ffx2aVNZnW09rDjLvZKAequoM7DyIFnJa5
- /EzSwRisavfV2iS5U4zN97ocgWE6/wk=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-16_03,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 priorityscore=1501 malwarescore=0 suspectscore=0
- spamscore=0 phishscore=0 impostorscore=0 bulkscore=0 adultscore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610160088
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -296,43 +192,135 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The BASE_DISCOVER_AGENT command is an optional command which may not be
-defined on the server side. Calling it without first checking if it is
-implemented will at the very best print ERROR: messages from the server
-about the command not being implemented.
+On 17/10/2026 00:07, Petr Hodina via B4 Relay wrote:
+> From: Petr Hodina <petr.hodina@protonmail.com>
+> 
+> Map "a8r8g8b8" to a new VIDEO_A8R8G8B8 format that writes 0xff in the
+> alpha byte for the console colours and for the BMP/logo paths.
+> 
+> Adds support for the framebuffer on Xiaomi Redmi Note 8 Pro (begonia).
+> 
+> Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
+> ---
+> Doing bringup on the Xiaomi Xiaomi Redmi Note 8 Pro (begonia) and
+> encountered the following frambuffer format.
+> 
+> For a simple-framebuffer node with format "a8r8g8b8" U-Boot currently writes
+> the pixels as x8r8g8b8 leaving the alpha byte zero. Therefore the console
+> background and logo are fully transparent and the screen stays black.
+> ---
+>   drivers/video/simplefb.c     | 6 ++++--
+>   drivers/video/video-uclass.c | 5 +++++
+>   drivers/video/video_bmp.c    | 9 ++++++---
+>   include/video.h              | 1 +
+>   4 files changed, 16 insertions(+), 5 deletions(-)
+> 
+> diff --git a/drivers/video/simplefb.c b/drivers/video/simplefb.c
+> index 8d0772d4e51..3dc073bce9e 100644
+> --- a/drivers/video/simplefb.c
+> +++ b/drivers/video/simplefb.c
+> @@ -71,8 +71,10 @@ static int simple_video_probe(struct udevice *dev)
+>   		   strcmp(format, "x8b8g8r8") == 0) {
+>   		uc_priv->bpix = VIDEO_BPP32;
+>   		uc_priv->format = VIDEO_X8B8G8R8;
+> -	} else if (strcmp(format, "a8r8g8b8") == 0 ||
+> -		   strcmp(format, "x8r8g8b8") == 0) {
+> +	} else if (strcmp(format, "a8r8g8b8") == 0) {
+> +		uc_priv->bpix = VIDEO_BPP32;
+> +		uc_priv->format = VIDEO_A8R8G8B8;
+> +	} else if (strcmp(format, "x8r8g8b8") == 0) {
+>   		uc_priv->bpix = VIDEO_BPP32;
+>   		uc_priv->format = VIDEO_X8R8G8B8;
+>   	} else if (strcmp(format, "a2r10g10b10") == 0 ||
+> diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+> index 53641fc28b6..68fd9ef38c0 100644
+> --- a/drivers/video/video-uclass.c
+> +++ b/drivers/video/video-uclass.c
+> @@ -354,6 +354,11 @@ u32 video_index_to_colour(struct video_priv *priv, enum colour_idx idx)
+>   				return (colours[idx].r << 24) |
+>   				       (colours[idx].g << 16) |
+>   				       (colours[idx].b << 8) | 0xff;
+> +			case VIDEO_A8R8G8B8:
+> +				return 0xff000000 |
 
-Fix this by first using the PROTOCOL_MESSAGE_ATTRIBUTES command to
-discover if the command is defined before we use BASE_DISCOVER_AGENT.
+Hi Petr, few nits.
 
-Signed-off-by: Bryan Brattlof <bb@ti.com>
----
- drivers/firmware/scmi/base.c | 5 +++++
- 1 file changed, 5 insertions(+)
+keep the style :) (0xff << 24)
 
-diff --git a/drivers/firmware/scmi/base.c b/drivers/firmware/scmi/base.c
-index 78ee2ffd2dae..fd65eae3cb41 100644
---- a/drivers/firmware/scmi/base.c
-+++ b/drivers/firmware/scmi/base.c
-@@ -338,8 +338,13 @@ static int scmi_base_discover_agent_int(struct udevice *dev, u32 agent_id,
- 		.out_msg = (u8 *)&out,
- 		.out_msg_sz = sizeof(out),
- 	};
-+	u32 dummy;
- 	int ret;
- 
-+	ret = scmi_protocol_message_attrs_int(dev, SCMI_BASE_DISCOVER_AGENT, &dummy);
-+	if (ret)
-+		return -EOPNOTSUPP;
-+
- 	ret = devm_scmi_process_msg(dev, &msg);
- 	if (ret)
- 		return ret;
+> +				       (colours[idx].r << 16) |
+> +				       (colours[idx].g <<  8) |
+> +				       (colours[idx].b <<  0);
+>   			default:
+>   				return (colours[idx].r << 16) |
+>   				       (colours[idx].g <<  8) |
+> diff --git a/drivers/video/video_bmp.c b/drivers/video/video_bmp.c
+> index 1f267d45812..98ed59e275e 100644
+> --- a/drivers/video/video_bmp.c
+> +++ b/drivers/video/video_bmp.c
+> @@ -88,7 +88,7 @@ static void write_pix8(u8 *fb, uint bpix, enum video_format eformat,
+>   			*fb++ = cte->blue;
+>   			*fb++ = cte->green;
+>   			*fb++ = cte->red;
+> -			*fb++ = 0;
+> +			*fb++ = eformat == VIDEO_A8R8G8B8 ? 0xff : 0;
 
----
-base-commit: 8d534cec0cc0109a37c0ded8854da03f1526dc0e
-change-id: 20261016-base-discover-agent-fix-d6e0e2ca6332
+since X8 variants ignore the bits, I would say it's safe 0xff everywhere.
 
-Best regards,
---  
-Bryan Brattlof <bb@ti.com>
+>   		}
+>   	}
+>   }
+> @@ -409,7 +409,8 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
+>   						*fb++ = *bmap++;
+>   						*fb++ = *bmap++;
+>   						*fb++ = *bmap++;
+> -						*fb++ = 0;
+> +						*fb++ = eformat == VIDEO_A8R8G8B8 ?
+> +							0xff : 0;
+
+ditto
+
+>   					}
+>   				}
+>   				fb -= priv->line_length + width * (bpix / 8);
+> @@ -447,7 +448,9 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
+>   						*fb++ = *bmap++;
+>   						*fb++ = *bmap++;
+>   						*fb++ = *bmap++;
+> -						*fb++ = *bmap++;
+> +						/* blend on alpha */
+> +						*fb++ = eformat == VIDEO_A8R8G8B8 ?
+> +							(bmap++, 0xff) : *bmap++;
+
+ditto
+
+>   					}
+>   				}
+>   				fb -= priv->line_length + width * (bpix / 8);
+> diff --git a/include/video.h b/include/video.h
+> index 9ea6b676463..71e9558dba1 100644
+> --- a/include/video.h
+> +++ b/include/video.h
+> @@ -67,6 +67,7 @@ enum video_format {
+>   	VIDEO_X8B8G8R8,
+>   	VIDEO_X8R8G8B8,
+>   	VIDEO_X2R10G10B10,
+> +	VIDEO_A8R8G8B8,
+
+you can drop this one for already existing VIDEO_ARGB8888
+
+David
+
+>   };
+>   
+>   /**
+> 
+> ---
+> base-commit: 1bcb2fe324180d0a8cfbdb0511737eba1d5b8550
+> change-id: 20261016-b4-simplefb-a8r8g8b8-2dc70be64fcb
+> 
+> Best regards,
+> --
+> Petr Hodina <petr.hodina@protonmail.com>
+> 
+> 
 
