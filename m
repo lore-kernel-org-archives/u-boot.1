@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4DC3CC6B38
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 06:58:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CE66CC6B38
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 06:58:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 60D9440994;
-	Fri, 16 Oct 2026 06:58:39 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F2A3C405E2;
+	Fri, 16 Oct 2026 06:58:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WTUHqzYNH2eI; Fri, 16 Oct 2026 06:58:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 58A474097A
+ id kbXKUpwly4te; Fri, 16 Oct 2026 06:58:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org F237E4099A
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792133918;
-	b=shmP/JH+nEWhsMmBpSyS3V+rB8m1O12qL70jLwTK+3J1YKAyuSduhZoDMPtsWOk2SMoK
-	 3WiN//z81fwDVufj7q4qwJdc7/rTypLiA5aOzBy1N+2Fvv+M6tt9ZU2/l58AJ3nNmVdq6
-	 yelsZxE6b+hAQhT3ECn+qLy/GK8QnIxF2hAVO2FrWl4EKmIm8rojSClHVLd3JgDlDyrk0
-	 AcLKVPyiPgDC+qTv66DTHUcGc3CMKYfd52VtRfaBhKi68oHEgB0dW0EVWenIkeWUPwS+F
-	 Q0ebTMZtW5eS7cYRpiGyexdWyCzh5dcP+kq61GgD2DGAFyn6jCEv59oyUVC6oYJ8X6A==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792133920;
+	b=lJ/N9MFUQ+so6vfWAlAkiEAqJ2dSnNgVFKiAQbRM6sowiSX/YFUa3wnqi8HBAsPjErL0
+	 Bb81GixIy8kxq6onmpaNv03CdwjF46c5EbTpoc2q40ljh7/Q46pL9Gcr2aO6bu3twt+F3
+	 rTObqHZbdmTAo7o2SYZTmnWnOIlQfTPDxYVPY6ErUwuBOQ8kCCyj2i9XKMyPXY6hUq2zO
+	 BebPE4aFik9tfRHtHW1ehCAXZRMo8zZJVk8hoGVwHiyHflvxYoQur0qZU46xwk48W/Mek
+	 koRwJsUu/+q6gDyDFVmKYe29Xcodb8XaOCV/sBwmLd5eOfUpKTmK/IFxSB06kz2URYw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792133918;
+	c=relaxed/relaxed; t=1792133920;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -31,106 +31,106 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-ZohoMailClient:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=s5NkNzyilgBOeCXI8Zh3eZOLjtQPp57GBN7vIEhp4Pk=;
-	b=pCPIThai5HBHFJZajY6zFgfTxGLBaLoxFgEMaDxJMvq+4hZENMaWjgX6adB4Y2pTEyg/
-	 DCWQ+ciNHa59KB+GJgIXlRGE8zMCF957sAaaJWP9+a0qv+JMS8yWlvK7Bp8hvC9jmhwZY
-	 psP4MPGJSKxnm0Z0LuLXw4AnGcK+aoPuKnlGArunO/FI3yLGC4DP7qsH7bbAwNGoAoAwk
-	 MUox0USACbZ7vUrZ6ftsQZMr/q50RcFbd/SGwJ4/8lIhtVEc86JzwqneoWkvhM5xEZAUw
-	 brMsOxA/NdQyBIrlgm2Jrgygx1BwPkzgBwyzeZbOb9Jk4ZRlAY3IJjjQBSJMgwtoUFA==
+	bh=BUaXRmS2RMdnHBceXxzwlzV9rPujiCLye+xQiVnXxtQ=;
+	b=teXvSGt/jggvAm+zkWNr3kEhOKsCEUeAgjRHV/vF7qbpjWQNQMu1deRTaRKFGxI+cwr7
+	 X7Gw7JEvJ9Ar253uLtxZWy29p5casJbtOUOjl1DQYUgNsWeB7XUVRHJ/RF8b3/oouSORu
+	 hed/Mx1RKwwyGDw4gtgq3pGAp6gtH3Q5fL52kJwwRhjUypZ3MDEvdBXXxqq3yHlCfnMwT
+	 LmhMP+9hNO9VjMX41CjGrErAJGBT9xBvaWY/RSZUj6YFvC2sfFErTDobr82QTHpknQh70
+	 rP7OilBuAXo2fh+6cnaIGjMrINj/v4PGPX+UTD1vJ8b9Apb2ebkfe5bsJCduDSAUVAA==
 ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792133918;
-	bh=s5NkNzyilgBOeCXI8Zh3eZOLjtQPp57GBN7vIEhp4Pk=;
+	d=lists.u-boot-project.org; s=default; t=1792133920;
+	bh=BUaXRmS2RMdnHBceXxzwlzV9rPujiCLye+xQiVnXxtQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=drULu04iDRPDHq/LlcaOTgJB/afZ8OZ+ZUSzhK/L4dXOe4yhhYCBi2ebrv4J1UOBQ
-	 zHOmWWaoOJyQwD56S6jCrUrDGVBRHdakKhwu4KA4nDTLNblWNF4CLZ/8EaSadtaKFZ
-	 gmBlmWIFjr0LI9qFoMZouGY3y4xdhX3Gb1aq8V7nuYg88YCRPa59MGPEoYhj/W8CLW
-	 oc2FaQocCmVMqtsZR86iGZG1fPQmoleo2hAx7H4nA0CRA9ZjqiWmDDDGdHLilHielU
-	 Mhs1KDLsrA2+8k5av5/6YAo/JPEFHuAE/HRGi3bWbyr4PbT0qScVJSd8RVWcqVWUIF
-	 snbMmbyR8Oo9g==
+	b=M5hAWLRq8FnQRdUAnf3iKcUu5SawpKPcZ9CxijQmVn/tGqqtcNdJuHDCBZnsMg8LL
+	 8oq8jWZqcHxDsT3UW641E3S142N2mQFjziaS+yW3oIo3S6akitbtEv6dt33A/IDogn
+	 oRu7G33XNRkVPPumW+4q6lzICFAxHAgTN47HQQhvETYR0o+fOEDKMiGgfWf9+QiZ3P
+	 cmF0QaB70Nzpwg2rf26phEd4TpdMSKhOSjFRKaGvXVYB7PYgxHPydJ2WR/iR27r01l
+	 SgcOVqQdkDwJY2K4shFYpMoHos34rH0h+L6jvWkhdo65rOQreVDyMv/oM6oY55ZKHG
+	 iKSx6x+U8fQtg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 58A474097A;
-	Fri, 16 Oct 2026 06:58:38 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 7642F362
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 06:58:36 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F237E4099A;
+	Fri, 16 Oct 2026 06:58:39 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3A58F105
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 06:58:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 5C027812E4
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 06:58:36 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 212F360AAC
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 06:58:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ChUlPCM3wGb9 for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 06:58:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7A84B812AB
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2DZ6O4jU-Z6O for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 06:58:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5AE566087B
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip=165.173.180.15
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792133915;
- b=oelHy+oFcY9HOFIakLVXAJL+PHQ0PbdVaNzHGYMTCFx9MxDFfw/wSFvAo3ek7GyFH/OW
- LbIvkakspPnNKOqxDwrWhI/lfiNV/vto6vF2tOhoAAjithHu2Vyir5vSDbGJZRrBzbTtr
- d2Yz0Gk/v7ZraPUSIBPdSjCqHu8PTTCq1o9ytFpSP3PmwK6PUPfdxDGPK5YDTlrcQBmk8
- QSUv1UwlY/VxbFrU8LrFJtreptqWJ4xmHc9UPQsK/a4Fl3EkNoU4yvn4gEWSXSVY7F8la
- D9m+dBedOhr+ge5FFWVOZmS4IXOe+tzktt6sxdm8rXS0KOWXYr20qswS3yChbpER0nQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792133916;
+ b=XJ9KViFiKe+qIXX8Q4RGT7WL2TdDoz0ojFEL8Jq5NffVGq2Lh6jr8uxl4sBUQXF2LE94
+ AVI8rgL7ki+Xw9y+41IMHKtJpJijodGVMMDApUB5ePqn4u7u0wGL1JPJpopS3isC6l9ax
+ zWRHki7t0ydzjmmrZx/FdlRYlhOOPY8s5mDmb3F/Alhp96MuE5CZg+kjQFDTlelMeo6IW
+ Vfh1qXlssY/lsi0FzmQOGZ+I6UVSSae1UGCdNQp885j5oX0O/aVOtd2czVDfXz/a+ZUKS
+ DkUOujxfaavH6xJ44tQKfUMPDvP9xU6MHPKHFi8yRir4nYuFG+Jd9u6ybhHctnGnmvA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792133915;
+ c=relaxed/relaxed; t=1792133916;
  h=Received-SPF:DKIM-Signature:Received:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-ZohoMailClient;
- bh=s5NkNzyilgBOeCXI8Zh3eZOLjtQPp57GBN7vIEhp4Pk=;
- b=sAF7uhrtoIsDuEQVEfuo+6eBn4fS3mJ8w67L68LgAIDx1rSrX6qTSb4zE8UMAa2TTy/7
- 3mHMmm7jNSIfTdEgS+E0GH6e+e4UhLK+o1QCcJt6NYbhFaPiY147qLLnm4MmU78847CmN
- vJ8WwyU+AGNpVKePy3Srwn0fNzu4xsBJm8wjT/fV4pqilnI+aDMOfqdnK2ta+4CC664+5
- z1Ei+FMtbm/C9bp5DuGJUUr2W7I4vXOd7QHZ+UxLo/0CYGbDVY1hvKiqXqQ5CvwX7ARse
- DqieuuFNDBUGQUDcSe8y+YICrSvpWpd5E51f2914Dw7mEniBRtFs0Z4/myParENeXoA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+ bh=BUaXRmS2RMdnHBceXxzwlzV9rPujiCLye+xQiVnXxtQ=;
+ b=F4mpxkK0LPNACL0piVUr8esersd6aXBDHR8t9nGVysDoyqFT9a1XlWTqPxaxp0Ge+Dpy
+ uZtiHmdIBQ9nfN7bVgzsS2dTa9hCixB91QXSymYHLG7lLsDVXQ15WoEc8R2ZAoxMA9q9E
+ JQOT1RnAy0r643WdQCNy/jvqp2y47JGMDlX03MEOXdW60FxmE9tuZuygPQngKo1Uv3zd1
+ phYJxiiPjD+QM7jF3PVOuKqDx10H7W0DmjzkFgkblLd8RAWpaPP0/peMONk5jdFiR6ZeU
+ 8ICVjEtzKa652BtSd2Rgan0VFjF13arGMKGCyRIbLHKr2v6biwGQmEL+P0vGQ+2UNqQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
  dmarc=pass header.from=ziyao.cc;
  dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=mT9bKMCg; 
+ header.s=zmail header.b=aZd+Le44; 
  arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.15
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
  helo=sender6-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key) header.d=ziyao.cc header.i=me@ziyao.cc
- header.a=rsa-sha256 header.s=zmail header.b=mT9bKMCg
+ header.a=rsa-sha256 header.s=zmail header.b=aZd+Le44
 Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
  [165.173.180.15])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 7A84B812AB
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 06:58:34 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1792133907; cv=none; 
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5AE566087B
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 06:58:35 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1792133909; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=kVxYQ+HeMu/Gbn+jmELdjTT2EMBAIcZd4oWg+K93s0b4F2yQBKYjcet5eseVmOd5b8zyeEAGEgskLuUVM06NPJqafIzDvYC4e4TS7Rtc5ULjBQxf/32FJYLIby3vEMfpQOgovoeGRn0nKUde5gauvNbq79dyJ/QhDyS7tCZf2To=
+ b=OzI+nruWP4bVU1Bf0sFwF5TL9LAfvPD3Wbj4IVLbDr9pLkt8OH8JExG/G3yy1tsMdV0KnhRk3qfm7ncml5gg6QHb+t4GrQd3ZI64UZp3EQk2wOsfw2TRTEiGQKefi0yb5248Ungbmbxu0z/t8EjLd3fJJog0LIlmrUdWL0100ME=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1792133907;
+ s=zohoarc; t=1792133909;
  h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=s5NkNzyilgBOeCXI8Zh3eZOLjtQPp57GBN7vIEhp4Pk=; 
- b=IcLQ+cgOVCHHskpFLunXYXMAoGKYdCCCUUQytxml6OsmFflHRmNtRBi6Rz0rmqbek5aLOR+Wz/R8RREnDq/VOYUpxT0vN5IPYUwfq4yMfQopk6fRr1Q7S4wkoqWNImD6BqUKqoQKSnYZmXy5SfgXvnbjuHEVN1OWmNTVJsZE/84=
+ bh=BUaXRmS2RMdnHBceXxzwlzV9rPujiCLye+xQiVnXxtQ=; 
+ b=SE1AiLaoO8aLuYIDWu0MOhfSFN76xCJm8/C9nVj+QBswoExXvmsNNs95Z0Sj7IZtsqmGGZ4tkrs39qRay7nQqmVKEHpoetjsgUTLD3BSNrXFkv37+2EhPZil50R+t7Z/XXCFod3BqzIWDRwvhKs48wHHVg+D/xRB3JjIQor5vlk=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1792133907; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1792133909; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
  h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:In-Reply-To:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=s5NkNzyilgBOeCXI8Zh3eZOLjtQPp57GBN7vIEhp4Pk=;
- b=mT9bKMCgQpBsgt2LQKr9f324Fu1Nsb0u9PcT3pFnVy6mlg2tg/psg6qoGfW2AAZj
- Yv4NOESZe5iAY/5LalbmPZxXrKW7zc94Gjar6mBPaIn+zGUfZ/61z2kq+sG1gg8ifc3
- e9sZ1TDohVxDQJPuWXwOvyUv1wc5tY3zTAhaWUrk=
-Received: by smtp.zohomail.com with SMTPS id 1792133905528266.7936228286661;
- Thu, 15 Oct 2026 23:58:25 -0700 (PDT)
+ bh=BUaXRmS2RMdnHBceXxzwlzV9rPujiCLye+xQiVnXxtQ=;
+ b=aZd+Le44TI7jq3Gv+cBbdWAEzNfh8/m6QSjdeoc/eO8RsXynrYt0f5HFibzDdlJR
+ zDqV1eneZ/h1xDcnkw1N7CXsLDMgOUa7E6rntk97jBgjBZ5DjqoU7ovFz7uCEzDsO7H
+ otFYw+n8KbHSlP+MU9RY1LxkAHZVONRKZM/Wtm7Y=
+Received: by smtp.zohomail.com with SMTPS id 1792133907671932.8069422095834;
+ Thu, 15 Oct 2026 23:58:27 -0700 (PDT)
 From: Yao Zi <me@ziyao.cc>
 To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.u-boot-project.org,
 	Yao Zi <me@ziyao.cc>
-Subject: [PATCH v5 15/20] board: emulation: Add qemu-loongarch
-Date: Fri, 16 Oct 2026 06:54:55 +0000
-Message-ID: <20261016065500.137544-16-me@ziyao.cc>
+Subject: [PATCH v5 16/20] efi: LoongArch: Define LoongArch bits everywhere
+Date: Fri, 16 Oct 2026 06:54:56 +0000
+Message-ID: <20261016065500.137544-17-me@ziyao.cc>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261016065500.137544-1-me@ziyao.cc>
 References: <20261016065500.137544-1-me@ziyao.cc>
@@ -152,385 +152,157 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
 
-Yet another generic QEMU VIRT machine.
-
-LoongArch QEMU splits the main RAM into two parts: the first 512M is
-placed at 0x0, and the rest is placed at 0x8000000. FDT locates at
-0x100000. BIOS is mapped to the first flash mapped to 0x1c000000, where
-U-Boot starts execution.
+Add PE machine type, removable boot image name, vendor class identifier,
+client architecture identifier, relative ELF relocation, and undefined
+instruction for LoongArch. They are all coming from UEFI specification,
+PE-COFF specification, or IANA websites.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Signed-off-by: Yao Zi <me@ziyao.cc>
 ---
 
-No changes since v4
-
-Changed from v3
-- Remove the dummy empty devicetree
-- Fix the typo when limiting top usable RAM address top (0x1000_0000 ->
-  0x1_0000_0000)
+No changes since v3
 
 Changed from v2
-- Add board-level documentation for qemu-loongarch
-- Mention the memory layout and booting process in commit message
-- Move TARGET_QEMU_LOONGARCH_VIRT to
-  board/emulation/qemu-loongarch/Kconfig
-- Drop duplicated selection of BOARD_LATE_INIT in
-  TARGET_QEMU_LOONGARCH_VIRT
-- Explain why RAM is limited to the lowest 4GiB
-- Drop unused board_init()
-- Rework comment in board_fdt_blob_setup()
-- Define FDT address, 0x100000, as a meaningful constant
-- Clarify how CFG_SYS_INIT_RAM_[ADDR,SIZE] are chosen
-- Add myself to MAINTAINERS
+- Describe what has been added in commit message
+- Drop extra paretheses in elif condition in config_distro_bootcmd.h
+- Define IMAGE_REL_BASED_LOONGARCH32_MARK_LA as well in include/pe.h
 
 Changed from v1
-- Remove dynamic setup for environment variables
+- Reword commit message, replacing "PE spec" with "PE-COFF specification"
+- Replace obsolete __loongarch64 macro with __loongarch__ and
+  __loongarch_grlen
+- Use a true undefined instruction in efi_selftest_miniapp_exception.c
+- Define HOST_BOOTEFI_NAME and HOST_PXE_ARCH
+- Introduce definition for IMAGE_REL_BASEd_LOONGARCH64_MARK_LA
 ---
- arch/loongarch/Kconfig                        |  4 ++
- board/emulation/qemu-loongarch/Kconfig        | 68 +++++++++++++++++++
- board/emulation/qemu-loongarch/MAINTAINERS    |  9 +++
- board/emulation/qemu-loongarch/Makefile       |  6 ++
- .../emulation/qemu-loongarch/qemu-loongarch.c | 67 ++++++++++++++++++
- .../qemu-loongarch/qemu-loongarch.env         |  5 ++
- configs/qemu-loongarch64_defconfig            | 35 ++++++++++
- doc/board/emulation/index.rst                 |  1 +
- doc/board/emulation/qemu-loongarch.rst        | 39 +++++++++++
- include/configs/qemu-loongarch.h              | 17 +++++
- 10 files changed, 251 insertions(+)
- create mode 100644 board/emulation/qemu-loongarch/Kconfig
- create mode 100644 board/emulation/qemu-loongarch/MAINTAINERS
- create mode 100644 board/emulation/qemu-loongarch/Makefile
- create mode 100644 board/emulation/qemu-loongarch/qemu-loongarch.c
- create mode 100644 board/emulation/qemu-loongarch/qemu-loongarch.env
- create mode 100644 configs/qemu-loongarch64_defconfig
- create mode 100644 doc/board/emulation/qemu-loongarch.rst
- create mode 100644 include/configs/qemu-loongarch.h
+ include/asm-generic/pe.h                          | 2 ++
+ include/config_distro_bootcmd.h                   | 5 +++++
+ include/pe.h                                      | 2 ++
+ lib/efi_loader/efi_helper.c                       | 4 ++++
+ lib/efi_loader/efi_image_loader.c                 | 7 +++++++
+ lib/efi_loader/efi_runtime.c                      | 4 ++++
+ lib/efi_selftest/efi_selftest_miniapp_exception.c | 3 +++
+ 7 files changed, 27 insertions(+)
 
-diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
-index 1f376ca291c1..a53d26a59497 100644
---- a/arch/loongarch/Kconfig
-+++ b/arch/loongarch/Kconfig
-@@ -7,9 +7,13 @@ config SYS_ARCH
- choice
- 	prompt "Target select"
+diff --git a/include/asm-generic/pe.h b/include/asm-generic/pe.h
+index cd5b6ad62bf0..fb93f2621715 100644
+--- a/include/asm-generic/pe.h
++++ b/include/asm-generic/pe.h
+@@ -38,6 +38,8 @@
+ #define IMAGE_FILE_MACHINE_ARM64		0xaa64
+ #define IMAGE_FILE_MACHINE_RISCV32		0x5032
+ #define IMAGE_FILE_MACHINE_RISCV64		0x5064
++#define IMAGE_FILE_MACHINE_LOONGARCH32	0x6232
++#define IMAGE_FILE_MACHINE_LOONGARCH64	0x6264
  
-+config TARGET_QEMU_LOONGARCH_VIRT
-+	bool "Support QEMU Virt Board"
-+
- endchoice
+ /* Header magic constants */
+ #define IMAGE_NT_OPTIONAL_HDR32_MAGIC		0x010b
+diff --git a/include/config_distro_bootcmd.h b/include/config_distro_bootcmd.h
+index 8d6f80a0ce5c..0eb6bd742b9f 100644
+--- a/include/config_distro_bootcmd.h
++++ b/include/config_distro_bootcmd.h
+@@ -118,6 +118,8 @@
+ #define BOOTEFI_NAME "bootriscv32.efi"
+ #elif defined(CONFIG_ARCH_RV64I)
+ #define BOOTEFI_NAME "bootriscv64.efi"
++#elif defined(CONFIG_ARCH_LA64)
++#define BOOTEFI_NAME "bootloongarch64.efi"
+ #endif
+ #endif
  
- # board-specific options below
-+source "board/emulation/qemu-loongarch/Kconfig"
+@@ -371,6 +373,9 @@
+ #elif defined(CONFIG_ARCH_RV64I) || ((defined(__riscv) && __riscv_xlen == 64))
+ #define BOOTENV_EFI_PXE_ARCH "0x1b"
+ #define BOOTENV_EFI_PXE_VCI "PXEClient:Arch:00027:UNDI:003000"
++#elif defined(CONFIG_ARCH_LA64) || (defined(__loongarch__) && __loongarch_grlen == 64)
++#define BOOTENV_EFI_PXE_ARCH "0x27"
++#define BOOTENV_EFI_PXE_VCI "PXEClient:Arch:00039:UNDI:003000"
+ #elif defined(CONFIG_SANDBOX)
+ # error "sandbox EFI support is only supported on ARM and x86"
+ #else
+diff --git a/include/pe.h b/include/pe.h
+index 086f2b860e99..eac9eb25ce47 100644
+--- a/include/pe.h
++++ b/include/pe.h
+@@ -194,6 +194,8 @@ typedef struct _IMAGE_RELOCATION
+ #define IMAGE_REL_BASED_THUMB_MOV32             7 /* yes, 7 too */
+ #define IMAGE_REL_BASED_RISCV_LOW12I		7 /* yes, 7 too */
+ #define IMAGE_REL_BASED_RISCV_LOW12S		8
++#define IMAGE_REL_BASED_LOONGARCH32_MARK_LA	8 /* yes, 8 too */
++#define IMAGE_REL_BASED_LOONGARCH64_MARK_LA	8 /* yes, 8 too */
+ #define IMAGE_REL_BASED_MIPS_JMPADDR16          9
+ #define IMAGE_REL_BASED_IA64_IMM64              9 /* yes, 9 too */
+ #define IMAGE_REL_BASED_DIR64                   10
+diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+index 44b806aadc4f..bc48e265b901 100644
+--- a/lib/efi_loader/efi_helper.c
++++ b/lib/efi_loader/efi_helper.c
+@@ -62,6 +62,8 @@
+ #define BOOTEFI_NAME "BOOTRISCV32.EFI"
+ #elif defined(CONFIG_ARCH_RV64I)
+ #define BOOTEFI_NAME "BOOTRISCV64.EFI"
++#elif defined(CONFIG_ARCH_LA64)
++#define BOOTEFI_NAME "BOOTLOONGARCH64.EFI"
+ #else
+ #error Unsupported UEFI architecture
+ #endif
+@@ -94,6 +96,8 @@ int efi_get_pxe_arch(void)
+ 		return 0x19;
+ 	else if (IS_ENABLED(CONFIG_ARCH_RV64I))
+ 		return 0x1b;
++	else if (IS_ENABLED(CONFIG_ARCH_LA64))
++		return 0x27;
  
- # platform-specific options below
- source "arch/loongarch/cpu/generic/Kconfig"
-diff --git a/board/emulation/qemu-loongarch/Kconfig b/board/emulation/qemu-loongarch/Kconfig
-new file mode 100644
-index 000000000000..94f42091e0be
---- /dev/null
-+++ b/board/emulation/qemu-loongarch/Kconfig
-@@ -0,0 +1,68 @@
-+if TARGET_QEMU_LOONGARCH_VIRT
+ 	return -EINVAL;
+ }
+diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
+index f9a2d2df405d..bed5f1817266 100644
+--- a/lib/efi_loader/efi_image_loader.c
++++ b/lib/efi_loader/efi_image_loader.c
+@@ -51,6 +51,13 @@ static int machines[] = {
+ #if defined(__riscv) && (__riscv_xlen == 64)
+ 	IMAGE_FILE_MACHINE_RISCV64,
+ #endif
 +
-+config SYS_BOARD
-+	default "qemu-loongarch"
-+
-+config SYS_VENDOR
-+	default "emulation"
-+
-+config SYS_CPU
-+	default "generic"
-+
-+config SYS_CONFIG_NAME
-+	default "qemu-loongarch"
-+
-+config TEXT_BASE
-+	default 0x1c000000
-+
-+config BOARD_SPECIFIC_OPTIONS # dummy
-+	def_bool y
-+	select GENERIC_LOONGARCH
-+	imply AHCI
-+	imply PCI_INIT_R
-+	imply CMD_PCI
-+	imply CMD_POWEROFF
-+	imply CMD_SCSI
-+	imply CMD_PING
-+	imply CMD_EXT2
-+	imply CMD_EXT4
-+	imply CMD_FAT
-+	imply CMD_FS_GENERIC
-+	imply DOS_PARTITION
-+	imply ISO_PARTITION
-+	imply EFI_PARTITION
-+	imply SCSI_AHCI
-+	imply AHCI_PCI
-+	imply E1000
-+	imply PCI
-+	imply NVME_PCI
-+	imply PCIE_ECAM_GENERIC
-+	imply DM_RNG
-+	imply DM_RTC
-+	imply QFW
-+	imply QFW_MMIO
-+	imply SCSI
-+	imply SYS_NS16550
-+	imply SYSRESET
-+	imply SYSRESET_CMD_POWEROFF
-+	imply SYSRESET_SYSCON
-+	imply VIRTIO_MMIO
-+	imply VIRTIO_PCI
-+	imply VIRTIO_NET
-+	imply VIRTIO_BLK
-+	imply MTD_NOR_FLASH
-+	imply CFI_FLASH
-+	imply OF_HAS_PRIOR_STAGE
-+	imply VIDEO
-+	imply VIDEO_BOCHS
-+	imply SYS_WHITE_ON_BLACK
-+	imply USB
-+	imply USB_XHCI_HCD
-+	imply USB_XHCI_PCI
-+	imply USB_KEYBOARD
-+	imply CMD_USB
-+	imply UFS
-+	imply UFS_PCI
-+	imply BOARD_LATE_INIT
-+
-+endif
-diff --git a/board/emulation/qemu-loongarch/MAINTAINERS b/board/emulation/qemu-loongarch/MAINTAINERS
-new file mode 100644
-index 000000000000..cd9636d6dc9b
---- /dev/null
-+++ b/board/emulation/qemu-loongarch/MAINTAINERS
-@@ -0,0 +1,9 @@
-+QEMU LOONGARCH 'VIRT' BOARD
-+M:	Jiaxun Yang <jiaxun.yang@flygoat.com>
-+M:	Yao Zi <me@ziyao.cc>
-+S:	Maintained
-+F:	board/emulation/qemu-loongarch/
-+F:	board/emulation/common/
-+F:	include/configs/qemu-loongarch.h
-+F:	configs/qemu-loongarch64_defconfig
-+F:	doc/board/emulation/qemu-loongarch.rst
-diff --git a/board/emulation/qemu-loongarch/Makefile b/board/emulation/qemu-loongarch/Makefile
-new file mode 100644
-index 000000000000..a928b90780e9
---- /dev/null
-+++ b/board/emulation/qemu-loongarch/Makefile
-@@ -0,0 +1,6 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
-+#
-+
-+obj-y	+= qemu-loongarch.o
-diff --git a/board/emulation/qemu-loongarch/qemu-loongarch.c b/board/emulation/qemu-loongarch/qemu-loongarch.c
-new file mode 100644
-index 000000000000..9370e81bc276
---- /dev/null
-+++ b/board/emulation/qemu-loongarch/qemu-loongarch.c
-@@ -0,0 +1,67 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ */
-+
-+#include <dm.h>
-+#include <dm/ofnode.h>
-+#include <env.h>
-+#include <fdtdec.h>
-+#include <image.h>
-+#include <linux/sizes.h>
-+#include <lmb.h>
-+#include <log.h>
-+#include <spl.h>
-+#include <init.h>
-+#include <usb.h>
-+#include <virtio_types.h>
-+#include <virtio.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+#define VIRT_FDT_BASE 0x100000
-+
-+#if IS_ENABLED(CONFIG_MTD_NOR_FLASH)
-+int is_flash_available(void)
-+{
-+	if (!ofnode_equal(ofnode_by_compatible(ofnode_null(), "cfi-flash"),
-+			  ofnode_null()))
-+		return 1;
-+
-+	return 0;
-+}
++#if defined(__loongarch__) && __loongarch_grlen == 64
++	IMAGE_FILE_MACHINE_LOONGARCH64,
 +#endif
-+
-+phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
-+{
-+	/*
-+	 * Limit RAM used by U-Boot to 4GiB to keep compatible with 32-bit-only
-+	 * DMA peripherals, for example, emulated PCI cards.
-+	 */
-+	if (gd->ram_top > 0x100000000ULL)
-+		return 0x100000000ULL;
-+
-+	return gd->ram_top;
-+}
-+
-+int board_late_init(void)
-+{
-+	/* start usb so that usb keyboard can be used as input device */
-+	if (CONFIG_IS_ENABLED(USB_KEYBOARD))
-+		usb_init();
-+
-+	/*
-+	 * Make sure virtio bus is enumerated so that peripherals
-+	 * on the virtio bus can be discovered by their drivers
-+	 */
-+	virtio_init();
-+
-+	return 0;
-+}
-+
-+int board_fdt_blob_setup(void **fdtp)
-+{
-+	/* QEMU stores the DTB to 0x100000 */
-+	*fdtp = (void *)VIRT_FDT_BASE;
-+	return 0;
-+}
-diff --git a/board/emulation/qemu-loongarch/qemu-loongarch.env b/board/emulation/qemu-loongarch/qemu-loongarch.env
-new file mode 100644
-index 000000000000..7655f26d8d6b
---- /dev/null
-+++ b/board/emulation/qemu-loongarch/qemu-loongarch.env
-@@ -0,0 +1,5 @@
-+stdin=serial,usbkbd
-+stdout=serial,vidconsole
-+stderr=serial,vidconsole
-+
-+boot_targets=qfw usb scsi virtio nvme dhcp
-diff --git a/configs/qemu-loongarch64_defconfig b/configs/qemu-loongarch64_defconfig
-new file mode 100644
-index 000000000000..5d5ae44f8e56
---- /dev/null
-+++ b/configs/qemu-loongarch64_defconfig
-@@ -0,0 +1,35 @@
-+CONFIG_LOONGARCH=y
-+CONFIG_SYS_MALLOC_LEN=0x800000
-+CONFIG_SYS_MALLOC_F_LEN=0x4000
-+CONFIG_NR_DRAM_BANKS=8
-+CONFIG_ENV_SIZE=0x20000
-+CONFIG_DM_RESET=y
-+CONFIG_SYS_LOAD_ADDR=0x02000000
-+CONFIG_SHOW_REGS=y
-+# CONFIG_OF_BOARD_FIXUP is not set
-+CONFIG_SYS_PCI_64BIT=y
-+CONFIG_FIT=y
-+CONFIG_BOOTSTD_FULL=y
-+CONFIG_SYS_BOOTM_LEN=0x4000000
-+CONFIG_USE_BOOTARGS=y
-+CONFIG_BOOTARGS_SUBST=y
-+CONFIG_DISPLAY_CPUINFO=y
-+CONFIG_DISPLAY_BOARDINFO=y
-+# CONFIG_CMD_MII is not set
-+CONFIG_CMD_2048=y
-+CONFIG_CMD_RTC=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_SYSBOOT=y
-+CONFIG_CMD_QFW=y
-+CONFIG_PARTITION_TYPE_GUID=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_BLKMAP=y
-+CONFIG_EFI_MEDIA=y
-+CONFIG_DM_MMC=y
-+CONFIG_DM_MTD=y
-+CONFIG_FLASH_SHOW_PROGRESS=0
-+CONFIG_SYS_MAX_FLASH_BANKS=2
-+CONFIG_PCI_REGION_MULTI_ENTRY=y
-+CONFIG_DM_REBOOT_MODE=y
-+CONFIG_RESET_SYSCON=y
-+CONFIG_HEXDUMP=y
-diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
-index 5d0dd83d8aca..a142cd3360ac 100644
---- a/doc/board/emulation/index.rst
-+++ b/doc/board/emulation/index.rst
-@@ -11,6 +11,7 @@ Emulation
-    network
-    video
-    qemu-arm
-+   qemu-loongarch
-    qemu-mips
-    qemu-ppce500
-    qemu-riscv
-diff --git a/doc/board/emulation/qemu-loongarch.rst b/doc/board/emulation/qemu-loongarch.rst
-new file mode 100644
-index 000000000000..0d97dc7df797
---- /dev/null
-+++ b/doc/board/emulation/qemu-loongarch.rst
-@@ -0,0 +1,39 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+.. Copyright (C) 2026 Yao Zi <me@ziyao.cc>
-+
-+QEMU LoongArch
-+==============
-+
-+QEMU for LoongArch supports a special 'virt' machine designed for emulation
-+and virtualization purpose. This document describes how to run U-Boot under it.
-+Only 64-bit LoongArch is supported at this time.
-+
-+The 'virt' platform provides the following as the basic functionality:
-+
-+    - A freely configurable amount of CPU cores
-+    - U-Boot loaded and executing in the emulated flash, mapped to 0x1c000000.
-+    - A generated device tree blob placed at 0x100000.
-+    - A freely configurable amount of RAM, described by the DTB, starting at
-+      0x0. RAM above 512MiB is placed at 0x80000000.
-+    - A NS16550A serial port, discoverable via the DTB.
-+    - An in-core constant frequency timer.
-+    - syscon-reboot and syscon-poweroff for powering off and rebooting the
-+      system.
-+    - A generic ECAM-based PCI host controller, discoverable via the DTB.
-+
-+Additionally, a number of optional peripherals can be added to the PCI bus.
-+
-+See :doc:`../../develop/devicetree/dt_qemu` for information on how to see the
-+devicetree actually generated by QEMU.
-+
-+Building and Running
-+--------------------
-+
-+Set the CROSS_COMPILE environment variable as usual, and run::
-+
-+    make qemu-loongarch64_defconfig
-+    make
-+
-+The minimal QEMU command line to get U-Boot up and running is::
-+
-+    qemu-system-loongarch64 -M virt -nographic -bios u-boot.bin
-diff --git a/include/configs/qemu-loongarch.h b/include/configs/qemu-loongarch.h
-new file mode 100644
-index 000000000000..7103dc1b02ef
---- /dev/null
-+++ b/include/configs/qemu-loongarch.h
-@@ -0,0 +1,17 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ */
-+
-+#ifndef __CONFIG_H
-+#define __CONFIG_H
-+
-+/*
-+ * LoongArch QEMU always places a part of the RAM at 0x0. These options are only
-+ * intended to specify the initial stack pointer address, and can be replaced
-+ * with CUSTOM_SYS_INIT_SP_ADDR when it's supported in the future.
-+ */
-+#define CFG_SYS_INIT_RAM_ADDR	0x0
-+#define CFG_SYS_INIT_RAM_SIZE	0x80000
-+
++#if defined(__loongarch__) && __loongarch_grlen == 32
++	IMAGE_FILE_MACHINE_LOONGARCH32,
 +#endif
+ 	0 };
+ 
+ /**
+diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
+index 73d4097464c0..de50d72d634a 100644
+--- a/lib/efi_loader/efi_runtime.c
++++ b/lib/efi_loader/efi_runtime.c
+@@ -78,6 +78,10 @@ struct dyn_sym {
+ #else
+ #error unknown riscv target
+ #endif
++#elif defined(__loongarch__)
++#define R_RELATIVE	R_LARCH_RELATIVE
++#define R_MASK		0xffffffffULL
++#define IS_RELA		1
+ #else
+ #error Need to add relocation awareness
+ #endif
+diff --git a/lib/efi_selftest/efi_selftest_miniapp_exception.c b/lib/efi_selftest/efi_selftest_miniapp_exception.c
+index f668cdac4ab2..648206c17098 100644
+--- a/lib/efi_selftest/efi_selftest_miniapp_exception.c
++++ b/lib/efi_selftest/efi_selftest_miniapp_exception.c
+@@ -35,6 +35,9 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
+ 	asm volatile (".word 0xffffffff\n");
+ #elif defined(CONFIG_X86)
+ 	asm volatile (".word 0xffff\n");
++#elif defined(CONFIG_LOONGARCH)
++	/* ud 31 */
++	asm volatile (".word 0x386007ff\n");
+ #elif defined(CONFIG_SANDBOX)
+ #if (HOST_ARCH == HOST_ARCH_ARM || HOST_ARCH == HOST_ARCH_AARCH64)
+ 	asm volatile (".word 0xe7f7defb\n");
 -- 
 2.55.0
 
