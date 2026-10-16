@@ -4,141 +4,181 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E20CCCA462
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 08:02:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57588CCA464
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 08:37:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2E72D4084E;
-	Fri, 16 Oct 2026 08:02:19 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C4528409D8;
+	Fri, 16 Oct 2026 08:37:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1bs94ZbpdXeB; Fri, 16 Oct 2026 08:02:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6DC034090C
+ id Y80GmOe5V0Tx; Fri, 16 Oct 2026 08:37:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B0B6C409CE
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792137738;
-	b=R3dUuSoYAhsHXrDC/ainvfsMWr+dCfZGRTljqaO9//p92ZcC5YbzUi0XT4dpPbl+/YPf
-	 ILMCYYtRii4x4BwmVzDvsRU1+MIN28qwMYlCYdbNhmFWNqUxJ4Mq9/J6HNPvjGavnVad5
-	 IMulIj0FBQNGCyuKOKYuwRy5bY19zjyPCVOfcRnaeoMhjHv28lBHyBr7XfVuEoqpvDjik
-	 YSBuz3OxZW4+V9uWphXOHk/ULGszKnQOQpPdHWJ7fPNzWs6z7IFLTrjK3eMkeXnzzI8iR
-	 K6+M+zXuGTfXVeozWlOJ2UFUORRobN0mdIuDXS7DTwjkD3MX7tYS/tZM3Im5GzZRmWw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792139835;
+	b=IX3DXBE1y5PCtNKmbTqOPc4rhooOql47OAAsyIV/t9qN/I0nc9UDxJdFlhKuzQjxXvge
+	 59z/F2shuvoNm04R2C0z1zFFqk5yLwhSVuGqFp3lauXblJ4KtQCjWDGQGQe6O9EQeDeuk
+	 sya4Hdmnou1+1BVHFsHCKLJsk9B48jTOH3IO1OzIxpT+E8syyshnN5ApsX5dBSuiOVI+W
+	 q0BM8qnpLeg1pAczsMjSAzIkAqZeJ/ZJWEKzdpzgLajnttM9tvqYlv6IsXvGNw8fH0n1r
+	 RnLuOru5FZtd+O84um7MnMNcSMCqpwBcGTi8xtwDVTzZ6pSW5++e8O9/DI3DOB1eaVQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792137738;
+	c=relaxed/relaxed; t=1792139835;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
-	 DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Subject:In-Reply-To:
-	 References:Date:Message-ID:User-Agent:MIME-Version:Content-Type:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=85widLegvCKUrbhBeVjnRBFE5lvXh2BQ0wlAl0Sh13k=;
-	b=YdfEfQX8kgXvYzaAHRHz798uFeZb/qmSdWlEgoh4UwOfAxBsd2vhQYZG36Eft+JU0uAE
-	 JgsmFVAj9hHZrKRnwUVinq60M2I7Tfx+5HXhtDrVR9sn0X/5T3vjdSmlQYdT+AiJgoVIv
-	 bLWlvysg5y4PqCAqqKho4W5PoTWsUFyWpXsMJorZbywWhkNp5XvSf1WkTenZT26Eyhg3q
-	 IjwBy8l5CwkcsYoe/VORKEkr1WAh4zuKPS9PTYmatMCYJ98sKgc1KWe1N92VXtpl+Xq3I
-	 OnKkHRoAOaV15okFOTqjBEfnFiEqA8XSOBDghyppR2st2wBL4ALOSLuyoC9P3Ys5gyw==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=/UUOz9KQrAvT9Ms9ruUp+hLj77k9Yr4sRxHmF8cYVTo=;
+	b=VoZUxZOZYCFtFrQ4/LNszlGes14U2U5HrjnTk9//SGXRZEHhLJWZdv+pTZ8khCa3Bo56
+	 13iZxtQQeb/s2aUp3PcR3j0wdKQfie6rUceybvvkqGRZLuO1o51r/BI9Q9a1Oc2c1kLZ3
+	 vz9qludhif9P37YaYb9pscfTzWttjIm0I9ShsnNxoDbKlkoERzcXZO6XhL+Cc6/JJSkoo
+	 7scRnOk88MRytGmbtXXR0Wxlu3UYN6Eino6c/Ae7ff+IEqqLM3OgW+kI1see6u1k5ewh+
+	 8195+C5XaJF7G8c+F6yB4IdkYtLHmDvF8ETWZC3XgAgkpKqimTl9yMNgxSRpWNCAlHw==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	dmarc=pass header.from=rasmusvillemoes.dk;
-	dkim=pass header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk header.a=rsa-sha256 header.s=protonmail header.b=g02kq0b9;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792137738;
-	bh=85widLegvCKUrbhBeVjnRBFE5lvXh2BQ0wlAl0Sh13k=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1792139835;
+	bh=/UUOz9KQrAvT9Ms9ruUp+hLj77k9Yr4sRxHmF8cYVTo=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vNpACuqbM4swwjEt6Ndu+2AbR2lmo9jJI7PycwM4ES2fznZ/734NeLGmGKi+wzFgx
-	 P5hGZ77D7Uo2xiOBebz2rq9kZjOOgpa2cXfJZF54uM5mM72Bo+NlTaD0SkKsvAyaxg
-	 R8ttPJcvtKRu+qO/M0d8L9i5t8O3MdHC/fvx1cmnrL5qTD3Nwbmi/YusO8X55+n/Qz
-	 ukrWB1ORRudYHL7hz2dMY0GeY0jmTcXGZoUBeNItItZZ66aYTG78NGHJl2NwXLPwW0
-	 ODrW8zwcbLQuRwMdKQTyIFOAKeTMApCimbZtJE8wO39q8yNNDhbEbMaUSHFJ2JBtyV
-	 Q969MytDCZzTg==
+	b=Tus+O311Py1VSjBFJm438/W10TQRTKoe4hk5h0vPVYjGj6wooj5gi1nnj9PYn47cQ
+	 SD57bLffepmJp5YsH4scQhMSXziseg7rh+pb2XVTqOTBHzjVzsDmbPcr6lolczAOo4
+	 eSMfkklxLAF0nodC6Z1lYiCXuiHxQ05O1cYZafqiRfnx0hblODUAI5QrOhm1TvENXc
+	 zfX3Dab6JMqcjCShPB/DGsXmqm94TnIFvlCbVtOBZbBYle8KAZY3fk1Vn2Re9Xa67H
+	 j79lO/V9I+24aArzyq1MS3QjsFNqriNQ4Fg7f6Chjqo7F5GSGDYfz3wv+t8pQVAOkq
+	 mMNoHgSIaCylQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6DC034090C;
-	Fri, 16 Oct 2026 08:02:18 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id AB787362
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 08:02:16 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B0B6C409CE;
+	Fri, 16 Oct 2026 08:37:15 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1665279D
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 08:37:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9D1F64090C
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 08:02:16 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id EFFC5813F2
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 08:37:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AueRbOEe4T85 for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 08:02:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org EA7F54084E
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=79.135.106.113
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792137735;
- b=qPR/SVBcgJBZNUAVP4V4aC+oj52/XKd46rHIt7rVv4Xf6KCgVAeF9PkxCH2StFFRoTeO
- xEXZVzdCeCns+QWhYjfSfH2fd47dkIgCJ3+FmpaJiIC2QLUBZiVB+7hOPG7BkFF7KFgP0
- WcsMMunC+FdjmACcRN6bD6SLLuKnoMs5xj6ph56v1CGPQlffGZ7+IE0GV7JFOLdyH4mHT
- kPe90k5j3YqJ8ULDBgQJAd15eRbiuT3xwFRcNtNStS9rXeR6zkNTGSJi9niIV8cqzmiYw
- y1JQfM/TcNdqJeFZ+G9b4+MD9UmV7z7XxqVhjDKxsdqmTrbw5nPuny+dRYqd2B1nhaA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id L4jdkhpPKXXv for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 08:37:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6060B81287
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32d"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792139833;
+ b=YzXICK6kptXOaxke57+bzO17HFh5078lSi/WTarVdUFrVYuUsZhE7+xYxD0DpUpbNfy7
+ Cz0aLTlKky7kHG4vm6k0jMhsc2fTUE0kbbNiIBH5FzMOEtqQvb03tmgBsvFXBZWrou5vw
+ fGVfAXKhpP/HTAlvo6fi3O19jl3zYEKTTmKbpKhTWpboIQUImMm+/deobr9JXaxmKm+b9
+ 6lzGwN76Nh2BPWt8MCp+HUv6Lm+rlBcjE1YegdbQ7Ee/KXe4oo2J4LDjdfEfGgWXerJN7
+ ZWJ60kJCynFBOk8e3IM5FhfyVu+rtdJTbn7ZKtB5HwMrwsmrM8CuwJyNFFHWi0BRYhA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792137735;
- h=X-Greylist:Received-SPF:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:
- Subject:In-Reply-To:References:Date:Message-ID:User-Agent:
- MIME-Version:Content-Type;
- bh=85widLegvCKUrbhBeVjnRBFE5lvXh2BQ0wlAl0Sh13k=;
- b=jgOuh0XxWhSrCEq3zDH37vUE+v7zqPwI2aZu8PgqDEpd5oYRZ/MjI9x1LL1S11jwrYM5
- 7kASZus57ZRP/VCevFaTFZ1qlOd9SmgPancm5aVaonGnCPsYPr5rfeLh3jBjUA5LYbTzG
- jolMnIXFN9dcxKy4AGy3HvSCK9fhxprPXux0K+0WfIlVe/wcW1cG0TokpIuOPTHoAVfZF
- ky5sTQ36G1lQdk0W5lGBI7wIBz38TNXNyZwpMrQCoQ7ACrI0MF0wWy8Q9xbiPnuS1vk80
- imGp1PVbBq4nY6D854ylidkd8VbWZn9IlYiEUkKOEaD0jYu92qDUukAQZgQC80KSOHQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=rasmusvillemoes.dk;
- dkim=pass header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk
- header.a=rsa-sha256 header.s=protonmail header.b=g02kq0b9; 
- arc=none smtp.remote-ip=79.135.106.113
-X-Greylist: delayed 164695 seconds by postgrey-1.37 at util1.osuosl.org;
- Fri, 16 Oct 2026 08:02:13 UTC
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=rasmusvillemoes.dk
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=rasmusvillemoes.dk header.i=@rasmusvillemoes.dk
- header.a=rsa-sha256 header.s=protonmail header.b=g02kq0b9
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=79.135.106.113;
- helo=mail-106113.protonmail.ch; envelope-from=rv@rasmusvillemoes.dk;
- receiver=<UNKNOWN> 
-Received: from mail-106113.protonmail.ch (mail-106113.protonmail.ch
- [79.135.106.113])
- by smtp4.osuosl.org (Postfix) with ESMTPS id EA7F54084E
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 08:02:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rasmusvillemoes.dk;
- s=protonmail; t=1792137730; x=1792396930;
- bh=85widLegvCKUrbhBeVjnRBFE5lvXh2BQ0wlAl0Sh13k=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:From:To:
- Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=g02kq0b91bHfBZXr5XL/riuxQyMFoMDOCh9HAEaxXahl0WbXy63NDF0JQW3Icxncc
- FGqgwWDFK54dW1+27jV0nmUQyL8mp6wGszpn0RMP5BnJWQEcfKXvF472BdC8C/utPH
- uFze3DxZNBNkM0UuH+kslNej+HXfXhOfu7gnvG2ub9UHvFbBHnJW3DmQnoKukOlBWk
- VhWZ/PxymHKME5Xul8JohcDg1DiIAcJwZrPzIg2wkayhtaOP1mjOehw92omwgyXjBW
- KFicPkT4nBwpZF6X2kIuIBtU2spQFnDAOevRlWIzhmNEBm4gphWOn6ESzVurYlCAi5
- Zf4GEY1GAmW8Q==
-X-Pm-Submission-Id: 4j5cq52KLVz1DDXV
-From: Rasmus Villemoes <rv@rasmusvillemoes.dk>
-To: "Marcel Ziswiler" <marcel@ziswiler.com>
-Cc: <u-boot@lists.u-boot-project.org>,  "Tom Rini" <trini@konsulko.com>,
- "Simon Glass" <sjg@chromium.org>
-Subject: Re: [REGRESSION] Re: [PATCH v2 5/9] lib/string.c: implement
- strdup() and strndup() in terms of memdup_nul()
-In-Reply-To: <5eae035c16410c2ab0808e3897fb56ea47b23aee.camel@ziswiler.com>
-References: <20260421075439.16696-1-ravi@prevas.dk>
- <20260421075439.16696-6-ravi@prevas.dk>
- <AcudIuPdPJ5-kqSj6e-s_SQbe9Z8Q5HcjiZsubil4biPj9gti7a9LBnOeY9773esCblkiUJI8hX-N9MbZi_fjg==@protonmail.internalid>
- <eb6c3466ddd897979fc08742e721d911fafef190.camel@ziswiler.com>
- <dkoQtduO2VZZSg_twn6aEON3-1NIERFMb5inRq_5NFYBZoJupMdXDBX_2xw5aceIk258QYzLZqn1b6Fyfrr5KQ==@protonmail.internalid>
- <87wlrm2fcg.fsf@rasmusvillemoes.dk>
- <87h5iq2b5a.fsf@rasmusvillemoes.dk>
- <3LJVTgui0zyiZVaS8LXbBjfYdBiNyhkZtbw-OL2UG6IhaHZ7X136oWy2d1pyHVMeW3rwROI2mlWh_mRc6SIPUQ==@protonmail.internalid>
- <5eae035c16410c2ab0808e3897fb56ea47b23aee.camel@ziswiler.com>
-Date: Fri, 16 Oct 2026 10:02:08 +0200
-Message-ID: <87ld7y13b3.fsf@rasmusvillemoes.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ c=relaxed/relaxed; t=1792139833;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+ References:In-Reply-To:To:Cc:X-Mailer;
+ bh=/UUOz9KQrAvT9Ms9ruUp+hLj77k9Yr4sRxHmF8cYVTo=;
+ b=CioUnLr+t+HXQwOWlHDio0nC58/ysxQm5oI5yasfg7NXYCHQ4JSDqqZ+SVWaVZn7e2Py
+ gRIObV9ROOLTAV87JBO3O0oNOlmSqKayFeqM7zGRcTGARtEJmze+mChlLrFHMIbIOryNY
+ NDmMNSAOUsrWol+/ynFsvB+bpk3kYdrKy245jLAhk5F9BcXlr633tQTNAihFB3s3YdRfW
+ FLnaICcDNdp19cTgN3v6aTJw6sbnooieQlze3rv2ItOj4rAhGI8JXAab0mWjud5RV9aRD
+ km9CKUZPDlL59N2ln6pkqh4cBMRe+ZxdarVuv2jL36qyP32I8Kbz7XgiCcdaitutQpw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=none header.from=baylibre.com;
+ dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=IH7HzF8V; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32d"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::32d; helo=mail-wm1-x32d.google.com;
+ envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=IH7HzF8V
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6060B81287
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 08:37:11 +0000 (UTC)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4a17baef589so26043395e9.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 01:37:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1792139830; x=1792744630;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=/UUOz9KQrAvT9Ms9ruUp+hLj77k9Yr4sRxHmF8cYVTo=;
+ b=IH7HzF8VxLKkdhTmEsN6jdYXwFwXeg48kLTo67EvE8xeNr/2oLrCSlNUqCvfHD+G+u
+ m5VS60Enidet/rozOEZBDh76dhRFvS3XgYdVE72bnzYKDSxyMfQ8fF3Dk3Etc0WexoMH
+ FbjQq5F9230Rnr9NEtEbcBTs/X4B9rg7rLFlJht7HNGkyLF4YCsKtYwIAdbw0KmS/mTO
+ Avnm8X+A1Oms6/uOXjaJ9JIUBw47rEuxlJbT7tN2xEZkvxEeBefdMVGKYCsqTY3jd/tY
+ DekqWkq2fSQLaGlPxVJC0Ea/+mmiXDFWnSHDmdzgcaHSBMNyry7xIPJKuAibsMcmi4uj
+ xrdw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792139830; x=1792744630;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=/UUOz9KQrAvT9Ms9ruUp+hLj77k9Yr4sRxHmF8cYVTo=;
+ b=hQwSc35hl+nPz1W5L/o6YuGeytiF30FULJqe9YqdQpOopJJG2M34BlHgQkOzWHx948
+ iC1s5RF9iGYPLe5bOOP8DXg3nxHtBVZyjTIcXtDz9IrWfCzONF521PuwqruJlQDQq61m
+ CB8nU41NPLb2bBxS8nZ9RRWPkPJlRQkL93DW0bdhYwgwhJEg+YThtlh993k3/NdtjG+L
+ aypgy7BZWWhZYkDJSUYfcy1Th3kV3FSEHGqPDykGLBoEnQNTCmvSSFqZ2cxR1ZnN6V6T
+ vU48oMukvAFjxtXYghPRLFqCB0eN8gzbOlgZJZiYtvyK8suJyBhiE3zLirQjt1cENfRm
+ aisw==
+X-Gm-Message-State: AFq9FYLzhLVKYgnAQAwnLdyjTg3pVXN0NiREuaIrv6HB/LuYmvvW56hG
+ /NZ1IG/Y2jyWtM3qMhbLLJdUcbImcZPPQe4XySvgWdDaH/2AmnDmFBnbD5JqO/joqeE=
+X-Gm-Gg: AYBFou2wWH+6+bkNfhoV7vfXMaXPUqy5ZXg5RKYomRsZk60oP24jHfECSh21tJuAVwj
+ nJY9Q7su2BNnQiRCt6hV4ovcYAPKVtG6V/8438HNNWeBgl5TDNoVVOGqBKHcrA21jxWOkq6mZ2u
+ 20dpFwrsJHg8MVMHpZ9b5qg52nlE/VOxkTnrsS94C8j5LBamsR5FzJcnc0oB68KNYrd/hvXvz/9
+ BCHfx4FjpJTNJXbEEtnjO/3lpmLsiW4fR9SiAS8qAvKGf/XnUxQEW0MzsJY0Rpad/4xDHqvJ02f
+ Yep8IjVzUnKMhK5ea39nGisMeIqoWEb2jFQYmtQe9o8gLIEg/jQ1Boi5ouvaOoa0gwUW/9U4lf0
+ 2OkqgHxEgU4mEYIXWipOwHxGv5bbnfpR6PD5IIX48OHN/TRkqsB5hVDbLlI9tuQ3huD36zsgD7j
+ 4z8ccWOtwYaIVvPflY9iZNfN/slbpnAVpBnK1ADwKs6XPviB+5/olgo4vYrCI8vdpZFM7Ndok3P
+ ywSqQOY6jJ8GsGJyJBy1oReOS7/ZnoO4TqceK58x73Dged3bLJ2ModYvZPJ/odl8sRSGpe5I1nu
+ hCSnKHOD24KlisY=
+X-Received: by 2002:a05:600c:83c4:b0:4a1:7367:5395 with SMTP id
+ 5b1f17b1804b1-4a18e446f4amr430171545e9.2.1792139829587; 
+ Fri, 16 Oct 2026 01:37:09 -0700 (PDT)
+Received: from macbook.homenet.telecomitalia.it
+ (host-82-63-151-127.business.telecomitalia.it. [82.63.151.127])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48dfd471a1fsm3100727f8f.3.2026.10.16.01.37.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 Oct 2026 01:37:09 -0700 (PDT)
+From: Carlo Caione <ccaione@baylibre.com>
+Date: Fri, 16 Oct 2026 10:36:59 +0200
+Subject: [PATCH 1/5] boot: fit: tell callers when a devicetree buffer must
+ be freed
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261016-ccaione-upstream-fdt-fit-v1-1-f6286ef82364@baylibre.com>
+References: <20261016-ccaione-upstream-fdt-fit-v1-0-f6286ef82364@baylibre.com>
+In-Reply-To: <20261016-ccaione-upstream-fdt-fit-v1-0-f6286ef82364@baylibre.com>
+To: u-boot@lists.u-boot-project.org
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ E Shattow <e@freeshell.de>, David Lechner <dlechner@baylibre.com>, 
+ Ahmad Fatoum <a.fatoum@barebox.org>, Julien Masson <jmasson@baylibre.com>, 
+ Vitor Sato Eschholz <vsatoes@baylibre.com>, Randolph Sapp <rs@ti.com>, 
+ Anton Ivanov <anton@binarly.io>, Daniel Golle <daniel@makrotopia.org>, 
+ Aristo Chen <aristo.chen@canonical.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ Johan Jonker <jbx6244@gmail.com>, 
+ James Hilliard <james.hilliard1@gmail.com>, 
+ Vincent Jardin <vjardin@free.fr>, Peter Robinson <pbrobinson@gmail.com>, 
+ Carlo Caione <ccaione@baylibre.com>
+X-Mailer: b4 0.16.0
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -152,43 +192,236 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Fri, Oct 16 2026, "Marcel Ziswiler" <marcel@ziswiler.com> wrote:
+The FIT devicetree loader can return either data inside the FIT or a
+newly allocated buffer. Callers which only need a temporary result
+cannot tell whether it is safe to free.
 
-> Thanks Rasmus
->
-> On Tue, 2026-10-13 at 11:38 +0200, Rasmus Villemoes wrote:
->> On Tue, Oct 13 2026, "Rasmus Villemoes" <rv@rasmusvillemoes.dk> wrote:
->
-> Yeah, overflow check sounded too easy, but I did try that for a start. Still hangs.
->
-> Then, I tried which one actually fails and it is strdup.
->
-> If I just add size_t len = strlen(s); to the top of the old working strdup() function, it also hangs. Strange.
->
-> No, wait a minute, it just gets called with null strings, yes.
->
-> But the new implementation should catch that as well. Strange.
->
-> Somehow it does not like another level of indirection. But I haven't quite figured out what exactly it is that
-> goes wrong. Will keep prodding it...
+Report when the returned buffer must be freed. This lets the new
+fdt fit command copy the result to its chosen address without leaking
+memory or freeing part of the original FIT. Also release temporary
+allocations when they are no longer needed, including on error.
 
-Can you tell me the exact compiler/toolchain versions, and if using
-clang, can you try gcc (and vice versa of course). Is it a 32 bit or 64
-bit target?
+Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+---
+ boot/image-fdt.c |  3 ++-
+ boot/image-fit.c | 68 +++++++++++++++++++++++++++++++++++++++++++++-----------
+ include/image.h  |  5 ++++-
+ 3 files changed, 61 insertions(+), 15 deletions(-)
 
-Also, even if I can't read risc-v asm very well, can you paste the
-disassembly of the old and new strdup() functions. And the exact command line
-used to build lib/string.c, found in lib/.string.o.cmd . For both U-Boot
-proper and SPL (i.e. spl/lib/.string.o.cmd for the latter).
+diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+index 956a3d97c42..e65114ff835 100644
+--- a/boot/image-fdt.c
++++ b/boot/image-fdt.c
+@@ -468,7 +468,8 @@ static int select_fdt(struct bootm_headers *images, const char *select, u8 arch,
+ 				fdt_noffset = boot_get_fdt_fit(images, fdt_addr,
+ 							       &fit_uname_fdt,
+ 							       &fit_uname_config,
+-							       arch, &load, &len);
++							       arch, &load, &len,
++							       NULL);
+ 
+ 				if (fdt_noffset < 0)
+ 					return -ENOENT;
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 60e47db5fb0..4f4e7b4e06a 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -2242,10 +2242,13 @@ static inline int fit_image_load_storage(struct bootm_headers *images,
+ }
+ #endif
+ 
+-int fit_image_load(struct bootm_headers *images, ulong addr,
+-		   const char **fit_unamep, const char **fit_uname_configp,
+-		   int arch, int ph_type, int bootstage_id,
+-		   enum fit_load_op load_op, ulong *datap, ulong *lenp)
++/* Track load-time copies without changing the public fit_image_load() API. */
++static int fit_image_load_alloc(struct bootm_headers *images, ulong addr,
++				const char **fit_unamep,
++				const char **fit_uname_configp,
++				int arch, int ph_type, int bootstage_id,
++				enum fit_load_op load_op, ulong *datap,
++				ulong *lenp, bool *ownedp)
+ {
+ 	int image_type = image_ph_type(ph_type);
+ 	int cfg_noffset, noffset;
+@@ -2255,6 +2258,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 	const void *fit;
+ 	void *buf;
+ 	void *loadbuf;
++	bool load_owned = false;
+ 	size_t size;
+ 	int type_ok, os_ok;
+ 	ulong load, load_end, data, len;
+@@ -2262,6 +2266,8 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 	const char *prop_name;
+ 	int ret;
+ 
++	if (ownedp)
++		*ownedp = false;
+ 	fit = map_sysmem(addr, 0);
+ 	fit_uname = fit_unamep ? *fit_unamep : NULL;
+ 	fit_uname_config = fit_uname_configp ? *fit_uname_configp : NULL;
+@@ -2487,6 +2493,9 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 		log_debug("decompressing image\n");
+ 		if (load == data) {
+ 			loadbuf = aligned_alloc(8, max_decomp_len);
++			if (!loadbuf)
++				return -ENOMEM;
++			load_owned = true;
+ 			load = map_to_sysmem(loadbuf);
+ 		} else {
+ 			loadbuf = map_sysmem(load, max_decomp_len);
+@@ -2494,13 +2503,17 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 		if (image_decomp(comp, load, data, image_type,
+ 				loadbuf, buf, len, max_decomp_len, &load_end)) {
+ 			printf("Error decompressing %s\n", prop_name);
+-
++			if (load_owned)
++				free(loadbuf);
+ 			return -ENOEXEC;
+ 		}
+ 		len = load_end - load;
+ 	} else if (load_op != FIT_LOAD_IGNORED && image_type == IH_TYPE_FLATDT &&
+ 		   (load & 7)) {
+ 		loadbuf = aligned_alloc(8, len);
++		if (!loadbuf)
++			return -ENOMEM;
++		load_owned = true;
+ 		load = map_to_sysmem(loadbuf);
+ 		memcpy(loadbuf, buf, len);
+ 	} else if (load != data) {
+@@ -2517,6 +2530,8 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 	if (load_op != FIT_LOAD_IGNORED && image_type == IH_TYPE_FLATDT &&
+ 	    fdt_check_header(loadbuf)) {
+ 		puts("Subimage data is not a FDT\n");
++		if (load_owned)
++			free(loadbuf);
+ 		return -ENOEXEC;
+ 	}
+ 
+@@ -2526,6 +2541,8 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 
+ 	*datap = load;
+ 	*lenp = len;
++	if (ownedp)
++		*ownedp = load_owned;
+ 	if (fit_unamep)
+ 		*fit_unamep = (char *)fit_uname;
+ 	if (fit_uname_configp)
+@@ -2535,6 +2552,16 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 	return noffset;
+ }
+ 
++int fit_image_load(struct bootm_headers *images, ulong addr,
++		   const char **fit_unamep, const char **fit_uname_configp,
++		   int arch, int ph_type, int bootstage_id,
++		   enum fit_load_op load_op, ulong *datap, ulong *lenp)
++{
++	return fit_image_load_alloc(images, addr, fit_unamep, fit_uname_configp,
++				    arch, ph_type, bootstage_id, load_op, datap,
++				    lenp, NULL);
++}
++
+ int boot_get_setup_fit(struct bootm_headers *images, uint8_t arch,
+ 		       ulong *setup_start, ulong *setup_len)
+ {
+@@ -2631,7 +2658,7 @@ out:
+ 
+ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 		     const char **fit_unamep, const char **fit_uname_configp,
+-		     int arch, ulong *datap, ulong *lenp)
++		     int arch, ulong *datap, ulong *lenp, bool *ownedp)
+ {
+ 	int fdt_noffset, cfg_noffset, count;
+ 	const void *fit;
+@@ -2639,7 +2666,8 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 	const char *fit_uname_config = NULL;
+ 	char *fit_uname_config_copy = NULL;
+ 	char *next_config = NULL;
+-	ulong load, len;
++	ulong load = 0, len = 0;
++	bool load_owned = false;
+ #ifdef CONFIG_OF_LIBFDT_OVERLAY
+ 	ulong ovload, ovlen, ovcopylen, need;
+ 	const char *uconfig;
+@@ -2651,6 +2679,8 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ #endif
+ 
+ 	fit_uname = fit_unamep ? *fit_unamep : NULL;
++	if (ownedp)
++		*ownedp = false;
+ 
+ 	if (fit_uname_configp && *fit_uname_configp) {
+ 		fit_uname_config_copy = strdup(*fit_uname_configp);
+@@ -2664,11 +2694,11 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 			fit_uname_config = fit_uname_config_copy;
+ 	}
+ 
+-	fdt_noffset = fit_image_load(images,
+-		addr, &fit_uname, &fit_uname_config,
+-		arch, IH_TYPE_FLATDT,
+-		BOOTSTAGE_ID_FIT_FDT_START,
+-		FIT_LOAD_OPTIONAL, &load, &len);
++	fdt_noffset = fit_image_load_alloc(images, addr, &fit_uname,
++					   &fit_uname_config, arch, IH_TYPE_FLATDT,
++					   BOOTSTAGE_ID_FIT_FDT_START,
++					   FIT_LOAD_OPTIONAL, &load, &len,
++					   &load_owned);
+ 
+ 	if (fdt_noffset < 0)
+ 		goto out;
+@@ -2699,6 +2729,10 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 	err = boot_get_fdt_fit_into_buffer(map_sysmem(load, len), len,
+ 					   CONFIG_SYS_FDT_PAD, 0, &base_buf,
+ 					   &base_buf_size);
++	if (load_owned) {
++		free(map_sysmem(load, len));
++		load_owned = false;
++	}
+ 	if (err < 0) {
+ 		if (err != -ENOMEM)
+ 			printf("Required FDT copy for applying DTOs failed: %s\n",
+@@ -2809,9 +2843,17 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 
+ out:
+ #ifdef CONFIG_OF_LIBFDT_OVERLAY
+-	if (fdt_noffset >= 0 && base_buf)
++	if (fdt_noffset >= 0 && base_buf) {
+ 		load = map_to_sysmem(base_buf);
++		load_owned = true;
++	}
+ #endif
++	if (fdt_noffset < 0 && load_owned) {
++		free(map_sysmem(load, len));
++		load_owned = false;
++	}
++	if (ownedp)
++		*ownedp = load_owned;
+ 	if (datap)
+ 		*datap = load;
+ 	if (lenp)
+diff --git a/include/image.h b/include/image.h
+index d991b4c2bc3..4ef5344c718 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -721,12 +721,15 @@ int boot_get_setup_fit(struct bootm_headers *images, uint8_t arch,
+  * @param arch		Expected architecture (IH_ARCH_...)
+  * @param datap		Returns address of loaded image
+  * @param lenp		Returns length of loaded image
++ * @param ownedp	Returns true if the loaded image is separately allocated
++ *			and must be freed by the caller; may be NULL if the caller
++ *			does not need this information
+  *
+  * Return: node offset of base image, or -ve error code on error
+  */
+ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 		     const char **fit_unamep, const char **fit_uname_configp,
+-		     int arch, ulong *datap, ulong *lenp);
++		     int arch, ulong *datap, ulong *lenp, bool *ownedp);
+ 
+ /**
+  * fit_image_load() - load an image from a FIT
 
-Because playing around with this code in godbolt I can definitely see
-the compiler eliding the NULL checks in some cases, but that also
-applies to the old implementation, i.e. I see an unconditional call of
-strlen(). But I assume godbolt's toolchain always sees userspace
-<string.h> which has __attribute__((nonnull(1))) on strdup(), and we
-don't. But it can also be the compiler which "knows" that strdup() has a
-non-null contract, i.e. the compiler might have a built-in prototype for
-strdup(). Anyway, there are too many variables in play here, so I'd like
-to narrow it down a bit to your exact setup.
+-- 
+2.56.0
 
-Rasmus
