@@ -4,144 +4,186 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81A08CCF2C4
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 21:26:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56A91CCF2C1
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 21:47:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1C94840A21;
-	Fri, 16 Oct 2026 21:26:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 122D440AAE;
+	Fri, 16 Oct 2026 21:47:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iUSIfj2lxcUV; Fri, 16 Oct 2026 21:26:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5666E40A22
+ id Ft97zfMWePEm; Fri, 16 Oct 2026 21:47:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org EBFD740A7E
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792185999;
-	b=LEVIP7lRzMdR3aHLjG30Fo1PAWNJvH+6513pp6nC0o1IHiL5iEQs3KEdeuw5C9RTyFMa
-	 espdGVA4fTXz0zOlJkXLAF8gs28HTc5WG+4Kx6zxUvHfkHZOg3boBANOFe8g2YIqw/dfc
-	 CVIaUtE3gKI3lsxPuZKpo3t5P6kLBuHvmEUKEDjFWoO707NbxZ9Q3l7QNG6ScaRFP7HkG
-	 U38WuOBeNnODrGe4JveXHiAQ8oNlQ5OvkRu8eaEEnVxEFMfLXVeYC0cH1WaieiDIJH+Ae
-	 VC9RNDDt3ogUygbfTDHbK+38Hb7Y5mUN8SoAYFgJ1H3N/EHAGRqd6h4H/EaQyfZmr3A==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792185999;
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792187234;
+	b=YXD56dgl53J8VztL0j8ej0dnSYYUEwFKRKr4GOEXFlD/KEGzb0yfhlrMoQXh8vk+1Bqt
+	 ae25k+8G6Dii8safIw+x42uUbLqKxvzspxLhJ4mrpwJlMbo9cFeLXjZhA02hwSr8P9dr8
+	 wqwSWsJ1jjLTcxsXh7u8sawvWnywUlsGzHt+UlsPk/G3leIzlpqzKE3t/waTw+PxHQ61X
+	 TQ81+zWPPj3GP6Do/CPX5b1f0DOUMOrp4NQ2C2UxkzMOx/iW7uGUXGE7dVYGNTHM83jQH
+	 2tla7pVmZF3TawksV/Cm8aYCPTVydnbpxbW1bzZ8MYDiOM7BOAF7F/XN2h26cksxYcg==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1792187234;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
-	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
-	 X-Report-Abuse:X-Report-Abuse-To:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=AGXr1VrCHpT8UcKCCpwW16wPVCgkDshgTMXTJPUxjuo=;
-	b=sbLXLAmJVzV7K6jLh03dv9uwhdnJlQQNJ8dt6SjGQilZgGuGOQc75DGUpe8SNdyl2txL
-	 m7adpWJTO7ub6oAWPDPBt0SCudL6gWJ0ylmrLcCOXpcmsnkghEYUoQWK7YJippINXPL2z
-	 eghBWeV7mWZRE6n9pRQQzvxULO+J2Ao0fpMZ5BUfNlpg1kBQ0dgX4cbXFc7Cx1SKl4pCJ
-	 RNqeqW3FkDHsklP7WpRdJ2Hl/WC8HFsx5BA/OcKqVcaAzMy7JjpvFkNdw22cL+UfrS7Y7
-	 KVzWD+gQZdoL4JLZn04WiSnGsNBMQ8h4t5EoSiOvv8Jh68uVeWTQIp3I3b81MIKflIg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Received:MIME-Version:
+	 In-Reply-To:References:From:Date:X-Gm-Features:Message-ID:Subject:To:
+	 Cc:Content-Type:Content-Transfer-Encoding:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=bzjpyNu8TDsZHs3OelkLBVEV0pcZ39Ces7ch7uiV7SI=;
+	b=TyLlJPPxzeCr540eN/NbUWBvSYUCWT05tat+ODEoaQQZFD06KRDcqYw9xLJLgkfPVPda
+	 xrWbrt93IDyQm7ZeuizxwpwhdZe+WHPDuz6CWohJWTh60tzqIaEX0ZToJG2m2XWutQwvJ
+	 CT5m1riqDCUGGLtaa1aLQfG3AuHfKV2RifjddNz6R/J/RiqcQzcPs/GHY7FDiBNnq189g
+	 5PdMUIqlsOdmD+j/cD7DxSwv4SdH362v4D2QADNYh0delbT65HSGjd4RH5DjlK846EVz3
+	 RRGnuo7tSWq/mi7bIwewYBFteGzULygj5GF4pzHr02KLKlZA0dqnBYY71f1tfB7N84Q==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792185999;
-	bh=AGXr1VrCHpT8UcKCCpwW16wPVCgkDshgTMXTJPUxjuo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1792187234;
+	bh=bzjpyNu8TDsZHs3OelkLBVEV0pcZ39Ces7ch7uiV7SI=;
+	h=In-Reply-To:References:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=INn5riH+dlAellnbxeAjaMJ6uvZC3Noy9xrinl+fCK/Gdbu0AXeHXnrESthUQmd8t
-	 +uTWgaaDRYc8tiZJW0u41zTRUCAp+kIYXmwtqq7TOv6o5vaVM/roUqRjWkwn7rKT00
-	 qc6nflrN8MdrebE2BnX8sBv9kObBnb/IDyUTjFxn7CqdC3wEbo0aTZL96ghrn84n+6
-	 8VNFH+zuvVt1yPW+nFVCwe/JE8SuEzPJhI5pzVQdBmNuN0HaYWdV8yIr+wH4EhG/cZ
-	 9Vipae3P4621dIul9ciJjUwSEUaha4DfaCeanmhdgg7QA2fM0D8Ot7wsVdKWsCIThj
-	 FfDPmCAG1J4VA==
+	b=Y4ON/2nuaT+nqlOXz0QULU5uRmsF5DFCRLZvf7MMnIPJ7eOUrb5jVRVE8nnFfMyMX
+	 47VHOZvah3lpjyCdo7HrTgpQ9VJUQ7WgDP74tj0eYLzbkY7k2uQzuLYT2shtmw4ji8
+	 Gkyh6C3Yr0PMGidvq5N7D2x6wULYCIsri3PAxqzcZPqlo1ALtD8lxVfGTCBlsfi2ng
+	 htQ9R22zaVnNa3WGWHJIFw3f+tUO741+HlLoohmUpUzSIy4V+/BI3TpfZdlTOHvjEH
+	 PDR2rCvAyn6/akj/7s1i77NS6F+MJxt5ds27K3sBV19oV/GJVfPgzpF7S1JLFSdrko
+	 nj7tka2Hzs0yA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5666E40A22;
-	Fri, 16 Oct 2026 21:26:39 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 6D8F4105
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 21:26:38 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EBFD740A7E;
+	Fri, 16 Oct 2026 21:47:13 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id A5982105
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 21:47:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6B444814EA
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 21:26:38 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8BAE360A45
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 21:47:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xdqOZYnvY2dP for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 21:26:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 438E0814C4
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=121.127.44.66
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792185997;
- b=Y5M0l3lEOnd7QDxiPZFfvzoPH53sqjsM8rFHC0N22r5jnrlmK6CcT7++/L06aGZL3vmr
- X/PNEAC5s2Z3iHFntz3VeVczEOxOtDmG+eptO17mGrS4czoMwucqGLkc/bQJ4JB1HrD8S
- yr6hzqL9JznBT+ZNlxt4vlrf01ZPdhLTWcDMtsnyHsJQ/tpyycWU8pMO1NUjZAo9hKwju
- U3dZmPOzl19u/kK5Q/BqITAuhElEXUV8yz7c4AQ0Oay1w3Rv9CtoI90VfGNXLFbDtgEX8
- XWZD9Xfnytd3EfYUtw18L3G/z7b66zjvu5JoLGhsfLOLsWAIX/ekREnJ4o1w82u0qsw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792185997;
- h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
- X-Forward-Email-Sender:X-Forward-Email-Version:
- X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
- X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
- Cc:References:Content-Language:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding;
- bh=AGXr1VrCHpT8UcKCCpwW16wPVCgkDshgTMXTJPUxjuo=;
- b=iBzXKotdjqlr7+EMJb+js7OsXDvLxiOQtILjSBCoTNPU96gKyqQAjjVogViMWpehxH1J
- a4foBw5UaatAdY7dLefskjbP4GBOnz+JSJb9Is18wNb9xc2zpMke0NBrMfWaWxZHHtMNY
- 2PTW5pQxVOwdBaOgBHHMkfEgolqlcX6xgOrNZeFvaf5EwMYntvbC+HdTdoiys5eytVN6v
- 3QgOe982Ff+Mi4jICqeK7xBSJR0B4rFESykFED2u7RkS/fhPw9eym0dMradB1hTGjPZFp
- /qyV2gB90ykEHA+eW4iqFLaajiDW3T1RUXNhVDTXPUYJPEarLVuYwwmay9Deo8Zs9EA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=pass header.from=kwiboo.se;
- dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b="tjshiNN/"; 
- arc=none smtp.remote-ip=121.127.44.66
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
- helo=smtp.forwardemail.net;
- envelope-from=srs0=a807=ih=kwiboo.se=jonas@fe-bounces.kwiboo.se;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
- header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=tjshiNN/
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 438E0814C4
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 21:26:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1792185995;
- bh=AGXr1VrCHpT8UcKCCpwW16wPVCgkDshgTMXTJPUxjuo=;
- b=tjshiNN/M2l5htlHrwUaptIlWkU2HQ1wwJhKttn/JsPe/IEP36YW80NbrifnTb1PrZSXUWZVd
- IY97YcOIdnSpHrVS04BKrsNjGIr6LuMx+sk/g5aJWNEqn0dZFMmMn6aI28ddbTtgkzBEYupoRrN
- aKmP94ClCfXfbNmZV2ayALRCFPJHvyl90TE6bZQ1M2hBTaFw7WgnqTm0KS40qPO63lWUjace4uw
- 3oLFZ86xa1zFbDdY+XrJqEwCQUiB9Q3Fjb1bZDP5FE12/QDsACTcUDPIsFHetl/NZFmWmZzXyJ9
- uh6EzH1Sesvn7tkKRULXDcWjCsnE9xP5m8iA1kDAzvpw==
-X-Forward-Email-ID: 6ad296694db8ac7a00a17641
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.66
-X-Forward-Email-Version: 2.18.6
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <c59af0e7-a265-4521-8258-01296de5fcf1@kwiboo.se>
-Date: Fri, 16 Oct 2026 23:25:59 +0200
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Ale_hf080ru2 for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 21:47:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 536A8607C4
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::52d"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792187230;
+ b=bPAp6g3VA+nQTMfoaNRx3mQEUGF6SuvQFIdXgQaUDPCXFLlymcYbmirTUBYPDx1jSlfQ
+ HnTgi1fqeVt+dgHGOfbH12eKPwDLrd5KDRtFKPgTAVvMgZ082OHRi1VukguLUv8dCUjjk
+ nHUTxIJ+uZhXJ2tlOVi3HmCWpvhiDgcaUukr4GbMT1KsgwgYeaHFIuGZYUZpLd1gfrOeK
+ cAauj3HPp6D4/2a119MFSonAyzKGOAe8dNxnTLhkq6nITvg8LH5v9NXJTjcfC8OdLK7qN
+ TeDOzk8vApLpcpMRO0vQp3bbTV6cGPkMROo+l0zw0izoGX6cqwgSJGKdyfmEwoUxcPw==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1792187230;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ Received:MIME-Version:In-Reply-To:References:From:Date:X-Gm-Features:
+ Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+ bh=bzjpyNu8TDsZHs3OelkLBVEV0pcZ39Ces7ch7uiV7SI=;
+ b=QvHmNEGm0ECMC+pcokqAuqHvr55ND8VZQOoBq/vnQG+2ViQBCoo2pWp8ovElsKKBzRCx
+ YV80yTowsYVaQc5IUPt05kTFZEUFonLCjbMbwInb1yEwoTlEvCSsQuiBh6IQ2zh4eZZd0
+ QuPSHRA0X22p1C8hfHNmYS++aK4FZZQlSQ2ZjikSoD2WiiWn0xUN7YLHDW8uU1e6pzBs6
+ Qq6KvzaXwrfjYIUip7h6wxKlbRgPMKtAQqXHbFHq0axiCtA8AhTE3NRqK4/E5XXBpezgO
+ 4US6CAm9LY1ayBtiANdIvEE49kpxOkq0BQU9pDU+D9NJJWfPj7mgoSqcpWcN0fLbnLw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ dmarc=pass header.from=chromium.org;
+ dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=PKkZ3OnR; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::52d"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::52d; helo=mail-ed1-x52d.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=PKkZ3OnR
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 536A8607C4
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 21:47:09 +0000 (UTC)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-6aa9164072cso390763a12.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 14:47:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792187228; cv=none;
+ d=google.com; s=arc-20260327;
+ b=EwvBDVWBgoWLsbyMbO+6XoSC7C87QyzN57+PQKPlxLS0LL5wH6lIRPZleLUyvWd2fK
+ rFjX60y7L3hy/jbxGH7PNdYcpySMg1VBY1nid3D0RDuDvRoP4Fgs8+ZLwGQ3L9+iQFzc
+ eFGzPZTxM6lkePIkTOnfScnVw7VaUb0YhP6JxJR56Pi4yiDuTZFqRlBCzG4jX6mEL13V
+ swIitG/XcLS+ZX4kd6Ovu2qiE9y9ldaLt4ZxGBfcO2k2rZikH6UIj0JjQgiCIAHLkXS4
+ rEK7NjPzvn8D0pFBrCRPBf+gG+xscME6cIU4vueKMhqfpoJh1a73nhiVtCtZjwqMZD/o
+ +Sqg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :references:in-reply-to:mime-version:dkim-signature;
+ bh=bzjpyNu8TDsZHs3OelkLBVEV0pcZ39Ces7ch7uiV7SI=;
+ fh=hiiU+5DqFKrkw/V9ELZklqGihCW2+1rcF8RAbTGbsew=;
+ b=E8pNVbNAIVdxAi9zwtLwU5QjqSdWdIb3YpgCAMamtxZ4GULvIn46H7D2wdWGeLQXah
+ 307YiLgutTaBKEvpW9uIJuuM+KdkIBpKYKM082dFjVQ5C3ovUWxNd3UnUrv+W6n4MOo3
+ p842O3hnzIF/dS4V17A9jqhRHgh86gAhWzzx2CLZ+tKA3yx5R69HLhXj1PKM2K9KGM1s
+ D71rfdZaLqiqio358ZdzfirpVrqLRpqmwTqjGnsdRNXqAEDwiTbWekBVp0gn2RrcfZHK
+ GEx0QGutFaD4TkqwD4LXEm8eGmLBNcZIwsNlux7xeJL8zxV9DyRuTyrmQ2aWVsqsSdj7
+ HDmQ==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1792187228; x=1792792028;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:references:in-reply-to:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=bzjpyNu8TDsZHs3OelkLBVEV0pcZ39Ces7ch7uiV7SI=;
+ b=PKkZ3OnRaSHweUbNaccq5CQ9uX8+VoJHdLjvXhfjEzsiJb9nLM+EneRppYd2PldNFk
+ XutvxHQccdZwbfw4agaybQKWFGGgXlQGSSHIXK/PtQQYbM9ArcgPWOlVJ1Q4TgFGTLGD
+ fWpcuCcpLGrtLN6g59g4m07V9FTVekCNGOYn0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792187228; x=1792792028;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:references:in-reply-to:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=bzjpyNu8TDsZHs3OelkLBVEV0pcZ39Ces7ch7uiV7SI=;
+ b=GjWcwNVXXwvZzENMaVN2AU9fDSxg3XPmRCkotNgtuTPXt5qEYA7V6jAV602FIV/M3S
+ JZhlho0sLSdMGqMgTegwSHQZMqt7rswWoOq9QlGdklAxq8w/S4qb+yN6q6k6MQEfr+pL
+ 6/+BqIR78/wWTmk9n/sfYiyelzXdmQS77tVms1Nwnn/MJs9mqeu1uPw6vKhq+zVQmwc4
+ 6vvNkmRVMLHT5UM/5DhsWgprOnF6QhfDHNf0biZlMI9j7thUxo6VUp1idLDQcW1px5EB
+ RtqbXBjbcnn7JgtPbULxTdl7NvZoYNptf/c4v+hZUnzpT6dxCbFHmfNXrGFVkn52SKkI
+ Qm7Q==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxOTwYk1qIcqU/t9b4tPO91zxVs8X0qp0ZPn0TgZH0Rhx0qjWbbCDrVQ8Is30NCW7vrzdkZVoI=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYLgDY9YIz0M6ra8WKxC2w3bUgKCXUiWHIu7GlTzgo7W+mmwO0SH
+ 8udl6DUou8N1ogzWJlZsyH2t+rvMNIgiq20xAjCfMlBjQCdyTViaVQyqXiOquB8NgUWExZrNe3z
+ i67M08295UNytRqkX6EnXAiCHfq91XZYMagAtmDQK
+X-Gm-Gg: AYBFou0J41Yvk6QUBykIPNdkOC6E3NaCXk3vGj11Ed1yiHHEFUyAqAQIaUtpxMrw80V
+ WCMHe7g2O2xdvGxA4a4SeIiW0stwmzNT/C5IdHqHWM+IYgbRrz7brKJ+txKGFNkFcHbP9fxfh6Y
+ 7kzLxtAEISGj0FiOTFn3yqDm7hX3ViBl0l32R88ECte5l78pHGqnOxoS6Uf2CCB5PjBxziKA2gs
+ pN8xeiD9u/4IYoeSU3vaQlgkFnuhk186fo4qx97MPqSEATa/bDxOlqgvf5JylN9n461F2lAU1WS
+ Gvzcmr2XylQGMre7jLjINrHv7n1H/70fT9QBG/KNHsSc/YDImt6HBQ==
+X-Received: by 2002:a17:907:944a:b0:c32:1b0d:d774 with SMTP id
+ a640c23a62f3a-c41a0cd3224mr72626766b.49.1792187227890; Fri, 16 Oct 2026
+ 14:47:07 -0700 (PDT)
+Received: from 415065739583 named unknown by gmailapi.google.com with
+ HTTPREST; Fri, 16 Oct 2026 14:47:06 -0700
+Received: from 415065739583 named unknown by gmailapi.google.com with
+ HTTPREST; Fri, 16 Oct 2026 14:46:27 -0700
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] rockchip: mkimage: Update init code size limit for
- RK3328
-To: Quentin Schulz <u-boot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.u-boot-project.org
-References: <20261004195853.59863-1-jonas@kwiboo.se>
- <20261004195853.59863-3-jonas@kwiboo.se>
- <dc849a75-9166-41af-9ba5-abe8a63be884@0leil.net>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <dc849a75-9166-41af-9ba5-abe8a63be884@0leil.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <20261014190631.2232208-2-alan.tseng.cs@gmail.com>
+References: <20261014190631.2232208-1-alan.tseng.cs@gmail.com>
+ <20261014190631.2232208-2-alan.tseng.cs@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 16 Oct 2026 14:47:06 -0700
+X-Gm-Features: AclHuK8CRjh9UrJJ5Gn7u4uXFRa-akNMIGQOack5rra6OA9-BugJGFzb8q1797Y
+Message-ID: <CAFLszTjsr-UMEXUAM8JeB8qOPW4m1m-82x7niLHyeZ-TQTW9Eg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] virtio: rtc: Add virtio RTC driver
+To: alan.tseng.cs@gmail.com
+Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -155,67 +197,92 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Quentin,
+Hi Hung-Chun,
 
-On 10/16/2026 12:31 PM, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 10/4/26 9:58 PM, Jonas Karlman wrote:
->> The RK3328 has 36 KiB SRAM at [0xff090000, 0xff099000). With 4 KiB of
->> the initial SRAM typically reserved for BootROM during early boot.
->>
->> BootROM will load init code of up to 32 KiB (0x8000 bytes) to address
->> 0xff091000 in SRAM, before jumping to it.
->>
->> BootROM typically jumps to init code with following registers:
->>
->>    x0: 00000000 ff091004
->>    x1: 00000000 32334b52
->>    x2: 00000000 ff520000
->>    x3: 00000000 ff500000
->>
->>    sp: 00000000 ff090f50
->>
->> mkimage is enforcing a 30 KiB init code size limit for RK3328.
->> However, the BootRAM can load up to 32 KiB of init code.
+On 2026-10-14T19:06:28, Hung-Chun Tseng <alan.tseng.cs@gmail.com> wrote:
+> virtio: rtc: Add virtio RTC driver
+>
+> Add a driver for the virtio RTC device (virtio device ID 17), which
+> QEMU provides as virtio-rtc-pci and virtio-rtc-device since v11.1.0.
+>
+> The device exposes its clocks through a request virtqueue. As the
+> virtqueue must not be used before the virtio uclass sets DRIVER_OK,
+> which happens after probe(), the first read looks for the clock: it
+> asks for the number of clocks with VIRTIO_RTC_REQ_CFG and picks the
+> first one whose VIRTIO_RTC_REQ_CLOCK_CAP type is UTC, smeared UTC or
+> maybe-smeared UTC. Reading the time sends a VIRTIO_RTC_REQ_READ for
+> that clock and converts the nanoseconds since the epoch with
+> rtc_to_tm(). The clocks are read-only, so there is no set operation,
+> and the optional alarm feature is not negotiated.
+>
+> VIRTIO_RTC defaults to y when VIRTIO and DM_RTC are enabled, like
+> VIRTIO_RNG does for DM_RNG.
+>
+> Signed-off-by: Hung-Chun Tseng <alan.tseng.cs@gmail.com>
+>
+> drivers/virtio/Kconfig         |   9 ++
+>  drivers/virtio/Makefile        |   1 +
+>  drivers/virtio/virtio-uclass.c |   1 +
+>  drivers/virtio/virtio_rtc.c    | 213 +++++++++++++++++++++++++++++++++++=
+++++++
+>  include/virtio.h               |   4 +-
+>  5 files changed, 227 insertions(+), 1 deletion(-)
 
-s/BootRAM/BootROM/
+> On sandbox, where VIRTIO_RTC now defaults to y,
+> "ut dm rtc*" and "ut dm virtio*" pass.
 
->>
->> Change the init code size limit to 32 KiB using the <size> - <reserved>
->> pattern to closer match the actual limit of BootROM on RK3328.
->>
-> 
-> Downstream still uses 0x8000 - 0x800 so unless someone from Rockchip 
-> confirms this is safe, I would rather not modify what we have today.
+Just to clarify, the sandbox virtio transport only exposes a
+VIRTIO_ID_BLOCK device (see uc_priv->device in
+drivers/virtio/virtio_sandbox.c), so neither of those actually probes
+virtio_rtc =E2=80=94 they only confirm the driver builds. Please mention th=
+at
+in the commit message. A sandbox test along the lines of
+test/dm/virtio_rng.c would be good as a follow-up.
 
-Maybe my commit message was unclear, but I have runtime confirmed that
-BootROM is capable of loading binary code up to 32 KiB from SD-card and
-eMMC and the code was fully functional even when padded so _reset was
-placed at the very end of binary, in the last and lost 2 KiB.
+> diff --git a/drivers/virtio/Kconfig b/drivers/virtio/Kconfig
+> @@ -84,4 +84,13 @@ config VIRTIO_9P
+> +config VIRTIO_RTC
+> +	bool "virtio RTC driver"
+> +	depends on DM_RTC
+> +	depends on VIRTIO
+> +	default y
+> +	help
+> +	  This is the virtual RTC driver. It reads the UTC clock of a
+> +	  virtio RTC device. It can be used with QEMU based targets.
 
-Most likely the mkimage size limit was used to impose limitations for
-stack and malloc area, very similar to the issue with PX30/RK3326.
+Please can you expand the help text - something like "This enables the
+virtio RTC driver, which reads the UTC clock exposed by a virtio RTC
+device (QEMU v11.1.0 or later provides virtio-rtc-pci and
+virtio-rtc-device). The clocks are read-only, so the time cannot be
+set."
 
-Runtime test consisted of running a minimal <2 KiB TPL binary that only
-initialized DEBUG UART and dumped passed x0-x6/r0-r6 and stack pointer.
-The binary used no malloc area, its stack was pointed to PMU SRAM or at
-half of BootROM reserved stack area, and the binary was .space padded to
-push code to very end of the loaded binary.
+> diff --git a/drivers/virtio/virtio_rtc.c b/drivers/virtio/virtio_rtc.c
+> @@ -0,0 +1,213 @@
+> +static int virtio_rtc_get(struct udevice *dev, struct rtc_time *time)
+> +{
+> +	struct virtio_rtc_priv *priv =3D dev_get_priv(dev);
+> +	struct virtio_rtc_req_clock req =3D {
+> +		.head.msg_type =3D cpu_to_le16(VIRTIO_RTC_REQ_READ),
+> +	};
+> +	struct virtio_rtc_resp_read resp =3D {};
+> +	u64 now;
+> +	int ret;
+> +
+> +	/*
+> +	 * The virtqueue must not be used before DRIVER_OK, which the virtio
+> +	 * uclass sets only after probe(), so look for the clock on first use.
+> +	 */
+> +	if (!priv->clock_found) {
+> +		ret =3D virtio_rtc_find_utc_clock(dev);
+> +		if (ret)
+> +			return ret;
+> +	}
 
-I did similar runtime tests on all rk3288/rk33xx/rk35xx/rv11xx SoCs I
-have access to and all current limits in rkcommon.c beside PX30 and
-RK3328 matches the runtime limitations.
-
-On RK3288 (96 KiB SRAM) we can even load a binary up to full 96 KiB,
-however from SD-card, only current limit of 32 KiB worked.
-
-Please reconsider and/or hopefully Kever is able to confirm my findings.
+If the first find fails (e.g. a device with only TAI or MONOTONIC
+clocks), clock_found stays false and every subsequent 'date' re-walks
+every clock. Since the clock set is fixed for the life of the device,
+please cache the failure too - e.g. a state enum or a cached error
+code =E2=80=94 so the second call returns immediately.
 
 Regards,
-Jonas
-
-> 
-> Cheers,
-> Quentin
-
+Simon
