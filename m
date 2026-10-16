@@ -1,147 +1,193 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 710A5CCA464
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 09:19:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBBC5CCA462
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 09:59:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 26DCE40982;
-	Fri, 16 Oct 2026 09:19:07 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id v2CVY44rEgFd; Fri, 16 Oct 2026 09:19:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 610B240927
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792142346;
-	b=gDEKQrUu5gbs6A5BIlbGkirozN43yPTj2xPPH+2rn1RRPA5Hb0QOGzB7gZIwg0RrQNBw
-	 HfvLmeSsphew6/6v5e6SRaOAra8nAC1EkZYWa8xLHkHmxdRizEOBxc2m4UNT13/EDwDKI
-	 VwxJZMTol13ou8H7pxR3PVJIepcC6Er3Y037yD9kv0O1cyxbN3+ErPKsP+2sPoUWS7k1R
-	 ZQMLtnxWAhbx5gW5XIAo31mHoLYdvpUDTPnd+GZWIcFixM/5gOYABCHpf3BmYklgDCkrx
-	 n/gtfEfKWBFZwmhf+MwKUZ731MRifyMRBhH7M/vre0FrkkJo/frQDOatpu90Wqq5SoA==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792142346;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=YPhxbBjTK/cbCeUUFIKHxKy82yZ9NblP/Ykp7IiHWrU=;
-	b=BKPf1c6SgthO5M/7q0Q3C1KNlgGEymgj0PQMB5F/nX8/bm2MTGjAV67vvdgWFgua9G7k
-	 6gLb/b8OB8g3+LSuzEDHVwdNWQ75+R8hRYy/yHQ4cwxP+saduvaXRClyFXUvxBdBvXZ0Z
-	 JjKBdoULcYmOsYZEu5Fg6c5uXSK6CZIO2noQBSoW8tgz4llF1FI/7Z2RpkIE5IY+WB/4l
-	 guYDdt+rx6QlKBUaj3NFVgW/Zhoinqmz8IPH0YDNSBbAJDGJ8OygcZyubgsfZoFqnmf3w
-	 oDtticm+L3SReHKtbt06ALCF6z6Q3TbI0kj28IOoSFLKWafiVHwoeGibkNFhK7FlcnQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792142346;
-	bh=YPhxbBjTK/cbCeUUFIKHxKy82yZ9NblP/Ykp7IiHWrU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=LQODBuprFl8CSqnvzwipDMJRw8qbccg5uaK7QC4+I2wIp0WDmT1giT4aomh+YptK2
-	 Fpx9sCMMaZQ9h3TgEEnSE3WeiiPoNyRWGnfa6+vY2scVBVf0nCAcTdhKs5s3303ibZ
-	 8pOYf7ja9itRpvTQULamSCotWAGYJcA0/O6Lz+/9G4pxvWApkiFUEgSpq452AyBZeL
-	 6vD10USejnE8EpNVh5tGqWGLpQyxKCCsb2ppQ596NyunkMIWDXRlogMYXZIk54G5Gd
-	 8PVfE/+pq3KWoBrvJLsG15v1hYussjVciBvkRII0h2CTBmoysN8x7TvMI+Dn84j0wD
-	 iaxN1vNiV43hw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 610B240927;
-	Fri, 16 Oct 2026 09:19:06 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 109C9105
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:19:05 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 02728812B4
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:19:05 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D7973810BF;
+	Fri, 16 Oct 2026 09:59:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wSVj9XwrjwGR for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 09:19:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org AC0DE81115
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2001:1600:19:5550::bc0c"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792142344;
- b=hfPRsot5JH3P/CHwD0TkdU4yWlu8PxY9dfmyLUl8UrOolMVrAYNHWNDhjo4kG2KhXIsY
- fE5Exg+voYoOAXxUuBAZHXDxiVaABHHEeREn1xjCC7hwcq5Ta9JuaSjpuyGWFCH1XHFgF
- Fu/u3aSZomW/QzOf69QOo7ZVXwvLtu/7IlfsuO/pcHBVRavTUVRTY3rC2ThMfGLPVdEqf
- NL51MQS/gZvuX25fr+JbUIQNH7qN/ke3qu5vG9ivs3dQszZ66QnFOcKc9CQ9mOyhNVFrE
- fI0SlBUfaLZmvdmdIbLPmnaFEjbI44iqQE+/NYVw8zsYGfIcOajKn0NVq4yWBcIDjVg==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792142344;
- h=Received-SPF:Received:DKIM-Signature:Received:Message-ID:Date:
- MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
- From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- X-Infomaniak-Routing;
- bh=YPhxbBjTK/cbCeUUFIKHxKy82yZ9NblP/Ykp7IiHWrU=;
- b=qIncxzfRANaUT7kHcBmc9P2opufPB0d5nlede6xePTolvEkBqg0Q3IyBlJ27RWNTDpMm
- cwl6PBUowvYzSYdyP4XUlUykM9kK2Q9wdgEWjEb7QC0X7ZGtTIDzpL/GmDGrL6MnRZhel
- 1DqvaqIgULuSjz54YxmydmwE770xxkvEa6etsWjaQB0RqiBaq/EJ0O7MYwcRQEQPpuuuD
- td8PG06TClS159gxOA7HTkebpQM26nO0VeWFQNIX8qxSOh1g77XAr94t4cxrCLQ8I/Tvy
- VP/Wdli4wQ5/9U6erFuycLqPiVDjMkTgE3Qnbt1l/KiE1qpCX0ODVZ+AivLFnLiOcSg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=pass header.from=0leil.net;
- dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=YHHUtRqI; 
- arc=none smtp.remote-ip="2001:1600:19:5550::bc0c"
+ id 5nHRwbTuU3Kw; Fri, 16 Oct 2026 09:59:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DEFD280F74
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792144743;
+	b=OSuMjOidjneHFWyh3R5IO7J/rIijEdHgADSC2RdnQxbnHWuX81KM/X2iZ7qUZi2El4MC
+	 g8Dcl3fDSl3AYaobc6IEzHijNB1GOsrEJT9MfeZBUa09yCRVpxI4Ka1bVupJ1Hc9cSw+s
+	 p4/JNhrCZXj/AeztI/FBPZQ7KS9bePJnn8Ab79s0nnucs/PRMhUFK75eVqrOMaACUgubw
+	 o4j3nck/SqHdyiP+URhDP4j/r6rnBUQ9eg+z71PsUOAOzl8T42dO6mlMNhv6zOhDxeMj0
+	 n5K67XFGNRM8Yr6ZSYuDgfyRjEn1ehDaT1mcQ5H01bszv7bx2pueQmgECzW5qlRYYZw==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1792144743;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=fmAEPnbpRJHf8YS8IDGlwFmSGR6h+lcJglezsT5venI=;
+	b=bPq6cDlnH791b7kbTPge4CHveidYn/R6acUR9VMniwAmjrkY+5ds4iBbbcI7Di84HdH2
+	 mn2AAXTBV/udG4mO7gY3xk0MViTuocilsryvBxVgWVkMDGjdzLrXUr8RVYFPNlwPoydm/
+	 prz47ij8dloWRvfVMHCYkMrOk7+1WhtiWXGuvT5XFqI5DPiHT+IJUccsH9/CaR/Uh8aKp
+	 iOzdBwI3JRYaxdAylOXxFNzuzSsHYVJorOSF91H+QeAkHEoz98qqkHhDEdQHObG4dVN8H
+	 E86GeeKpGlYc6FfTBvAun0zSt6xMhuS3HEaBUa/LvP/ASK9uGlH3lB9rt3co93xb+Ug==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
+	dmarc=pass header.from=flipper.net;
+	dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=ja4yMTGw;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1792144743;
+	bh=fmAEPnbpRJHf8YS8IDGlwFmSGR6h+lcJglezsT5venI=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=1GBz5C1G+mYFaCLCc0zTvVLpuQa7/xq6aaHCNPs8l3EilRnJGkl6SK8Vel0UhQtQ3
+	 eD5hJppJ+ZEw/Ko89vqQpnQoLc+9jIysQvmhzY+WOplmfhKaApl6LY0TYdIPEZVEW0
+	 0T8ufTVUMUlz7KZT6Z6qyDSceR5q2pdkaHyYW/aPZhaw6zfaETlhXDfXIEQGgANdVm
+	 2egksXsqTU1aSgafzdAHiubvPbeIBglpdcutwS9OqqsrQDIpc1BeTgiCTFWNCDQuPB
+	 D5ZauNwt2j83eFGvwgG30je+WOhWm3WveWUAMkgEn5bmo3omeZpp1JyLM0OEaUJy/h
+	 Mpa4IPV2itDYQ==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp1.osuosl.org (Postfix) with ESMTP id DEFD280F74;
+	Fri, 16 Oct 2026 09:59:02 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 99935769
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:59:01 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 9716E80F74
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:59:01 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZrrGgx85Gs2b for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 09:59:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 55EF180F56
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::636"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792144740;
+ b=aP4U84jy5wlW5OH+x+Gx3UDWruJyULDPCcJ92H/GAjxQs7K4MNfgyCBjvsy78zzIwQep
+ 6g1s7jyf5F80FEY4W4zBGT7q1NzwlN9EAKOWMa5ljQCI2L5KBXFlN8H2Y/8naMfJDWObD
+ g+f5sEgQTCYjOn3t3wvDcaxVnViZnCZWMAyIvS1yAG6B2oLt5KrwgifBLDT7SQxgpT0Ou
+ 1zq/vxymF3rh3Mj2hYcUJLQ+Px5oYQdn0/PIscUUPiHr9yA5mQEyEI7h8Emlpj94pb75W
+ T6HC9mKp9v8fX7sEGKlnlOYPG51gE2BAVTKkUieWdZ0ibXZXMowTXqYgOoPnbBZaW2w==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1792144740;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+ In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+ Content-Type:Content-Transfer-Encoding;
+ bh=fmAEPnbpRJHf8YS8IDGlwFmSGR6h+lcJglezsT5venI=;
+ b=YdjLxZJgL3eqy0Tq/yG5eJHrl0bHchUOMkCG5grTM2FAeM1f9FFo+pcujBCrEf1EacTF
+ aosnUoYj8FJZHlJvoadIgYvzKKV9vQ6Z4YwkuQvdpBuZQrz8Y3+wuo74G8zMJ1Yo4BXip
+ LLzUCliHUTczYRRD1ds93FbAQpY/lUa28TqEZ1UKFcSyGlrin67ccLOS0tOAIWG9bzIb0
+ n1KOtaDS/wf5m/reSaOcDGZG3/gos3ftoPXADBtlUfWLy8K8o7uw2eD7RBJZwNQX68VJQ
+ 9BSckZdZQ6YHx+8prv9HWLoP03YVNQKeGKmj27cioqcvPqleK8we+y1y7uMQNqDgIkg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+ dmarc=pass header.from=flipper.net;
+ dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=ja4yMTGw; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::636"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:1600:19:5550::bc0c; helo=smtp-bc0c.mail.infomaniak.ch;
- envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
- header.a=rsa-sha256 header.s=20231125 header.b=YHHUtRqI
-Received: from smtp-bc0c.mail.infomaniak.ch (smtp-bc0c.mail.infomaniak.ch
- [IPv6:2001:1600:19:5550::bc0c])
- by smtp1.osuosl.org (Postfix) with ESMTPS id AC0DE81115
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:19:01 +0000 (UTC)
-Received: from smtp-4-0000.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:7:10::a6b])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4j5fWk6tyDzVsB;
- Fri, 16 Oct 2026 11:18:58 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1792142338;
- bh=YPhxbBjTK/cbCeUUFIKHxKy82yZ9NblP/Ykp7IiHWrU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=YHHUtRqIZ4gCk6SjDxkp2MH/XH5idZ7ahTfklVgAwyB5IiJgd1SeyOBixFmMo3ZrC
- yKsZg2uHowBWTg3UqWC55Hr+1NIHV3wwF1QmjAX0R5JrPLYeQd2dZIdkxqdNd8Xfby
- 8f9b9kNzq6sq4BYzZZtQeGsuxFvlWFTq1IS6U0ww0YzPmnCvGMTYpdbiidmfQfPtYg
- vWhO/O28hyHFoU7vWFGdwo3/typsw6Ga1AL6UsBHzVvhIG+eKRl1b/Lra72eE/6/m9
- mu//VpNJx5sX0gpwLHeD3rhd4/2sDDfbqXKtfxf+LSohXCDuE5rC5PpYDlDQNiNy7S
- 2grJGYAYd1U/Q==
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4j5fWj0fTRzfvc; Fri, 16 Oct 2026 11:18:57 +0200 (CEST)
-Message-ID: <efd080ea-60fd-4c15-858d-d63da9016be3@0leil.net>
-Date: Fri, 16 Oct 2026 11:18:56 +0200
+ client-ip=2a00:1450:4864:20::636; helo=mail-ej1-x636.google.com;
+ envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=ja4yMTGw
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 55EF180F56
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:58:59 +0000 (UTC)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-c3f8d72d7ceso238605166b.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 02:58:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792144738; cv=none;
+ d=google.com; s=arc-20260327;
+ b=okH8S8j/IZGayK5Ux9RgWGpcZ85Z+AI4R0ru/LwTVWmugKILAQGUQQUARk6zPxG3YB
+ fFA1fvnBvKVVblZa0xAW7pSrUaWvdZwKxizCDJQ8pxQAFnCf3XZryhSiPtKslu0BEP89
+ uFW8/YN5jqY/BP4FUV8jF+dyjP2ypNzZqHD12z31vNeO5Qmn1tCK36Qv/mam9yfyR5As
+ XTcYXuWLCbP4IpO83hHw+KRDmV8hwCyY7IcW0vkpxI4/wt82Bolpf3btIjcLhES0OW5j
+ O0heakWs5sbl2aWSMZkfaCcwaYKed/qgsi7YjTki+km72w8Tet9fpT4hEh7smXRaCgid
+ aUAw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=fmAEPnbpRJHf8YS8IDGlwFmSGR6h+lcJglezsT5venI=;
+ fh=Y0v1/WwJw6kxannqFo+mURjzi9HsTY9Fquub2Y4LgJw=;
+ b=gbwmA0gcf8mJHwm6geqsQCUyJ1h84R62k+pmvPmt/p4Fo2z9gFR6RWIKTlzGmcf4t0
+ l5Y/xBH1VJGFIk6ulOE8gXPq/lvM9hvH7G/z1D+AgsnbDjID3RDR6FVcGAKCxADV88Ih
+ 0zbw/e/mSZouUHh80rP3VOmBWNjdYPApEANPGvz2SgGfdUgSOfOzY8oOWdMo5MoxQ7uf
+ a9gtN4Nesxr2RwsDnYCrSp+4sJzP4vGg6+HC6fCdbeCdvZ4lcAR3+zfwIUD0yKnh1Hlc
+ lV5lvpRdxvKjZEa0nlQhzVsu+/UyGaZ4vLWnTPYBHe3XxlPzKkttFIq7MY+BA76g3r0q
+ r4Iw==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=flipper.net; s=google; t=1792144738; x=1792749538;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=fmAEPnbpRJHf8YS8IDGlwFmSGR6h+lcJglezsT5venI=;
+ b=ja4yMTGwQeihhUeyaNTrRBmzQRFTnlgI5kR04zFfCbLByeuql7mGNCY0QzmkQf0oUw
+ Rjb5j2XcfbZcy+wCa0JNzAOVd6ZIqYJ2fMPLMDCZp9K1T7i41rwUP64IsSAfJmMd/g8Y
+ ZdFglyXOctR8XgL3BtgsqwozYkW4NyBFH07CBkjhF9V8jbMnFOZkuJXj5xpPG7LyB54J
+ PUaPDPuVG2kH4w28599LJuhbA7MlbT1qjaRyT5UJrXR+qgpA16GbTvppi4g0Fv5Jksmj
+ ce7zNBNbHNZfzt+RPtA/1H3zdNe/ogB/NGJNe1z/iJZBP62PnW6MEkM/WKGpb5k/NEUp
+ nWow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792144738; x=1792749538;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=fmAEPnbpRJHf8YS8IDGlwFmSGR6h+lcJglezsT5venI=;
+ b=f1QqpkhM8YKSR3xygZSGXAMhxu470pCdgCxd7iEhZURZeq86VJRHcaJlHrgsUwjAiB
+ glNyTB4IT6XJpuYecWI0CrAuvz+8fRnbXGFTB3/xmgEmclsd8Uat0pDjqt0M79gowpGV
+ 0MWuXOcTLhHaUZYyZynwRpObBisTMR9JM//vaHwA2zWdpjxzepC4HgqLEUyUamro6Az0
+ 9BYghpdvhIjMt/jGqySdZeI6IoP6NBTN4SpKKlIfi4KDw51gRNGGT+iGx1DSi4h5YjsG
+ b4x7dGZvwaKSpKJYKJvburkBnVsZjZ7lSKSfnV9BEpZ2VOPdaVk33P8WN9xqlNz0m3OS
+ neiw==
+X-Gm-Message-State: AFq9FYLMI4rhK7gphhBfDW3N3KEq/CntHWAAd6kAKCAQbJ63Jq0wfypz
+ 0+OEWNoS+IiQHzwHwSgruqATYHQysuV+2Hdf8P15n07Pgo5JZ1v/yAm0WAUi5cLW0KPZSsFNZ5w
+ vowMBRHs+3S2Hd9vfcVH2R2rWXikB6wfFfRK+Ewi1Fg==
+X-Gm-Gg: AYBFou2ZQ2ix0C+9ODt1tH/+6Ef33E1u7WguIA3CxCP8oZxCl9+hBW6r7LoKLXy/ZWd
+ kfbwigyyM7uh08s4ERnQbMfqIWZXdXMYhVyt2nTe8k2l8awTK4eB9ifAR0wVNL+GZqD4perfQXn
+ xToBV500YDRIUOAxOwcYP9XlY9bVoXSRhQTRkib+BabCYr+jchBqi3sqvALZsk7MTe3SZQBphw2
+ NaGPVWSEYrrt6yUf997s4vKhYVjuXEJUfocAbFEEUz4zr79m+CqKZ4pL7KltixG1LQOanl9hohH
+ w+tkkFwmyF86NZ7qIpwvIKJkPIoUh7qN5DC8nm9XBdRg2sa71Xf2H4SoiCWzro9S2VyjoiScM6t
+ Di+VJ1iD4SVtaECuhfNBX8Y4=
+X-Received: by 2002:a17:907:869e:b0:c3f:61:fe5f with SMTP id
+ a640c23a62f3a-c3f00621ebemr427349966b.46.1792144737771; Fri, 16 Oct 2026
+ 02:58:57 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] rockchip: Declare unaligned access safe in the
- ARM64 SPL
-To: Alexey Charkov <alchark@flipper.net>, u-boot@lists.u-boot-project.org,
- Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Johan Jonker <jbx6244@gmail.com>, Casey Connolly
- <casey.connolly@linaro.org>, Vincent Jardin <vjardin@free.fr>,
- Michael Srba <Michael.Srba@seznam.cz>, Cole Munz <Munzzyy1@proton.me>,
- Kever Yang <kever.yang@rock-chips.com>
 References: <20261002-unaligned-decomp-v2-0-675466ced78a@flipper.net>
- <20261002-unaligned-decomp-v2-2-675466ced78a@flipper.net>
-Content-Language: en-US
-From: Quentin Schulz <u-boot@0leil.net>
-In-Reply-To: <20261002-unaligned-decomp-v2-2-675466ced78a@flipper.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
+ <20261002-unaligned-decomp-v2-1-675466ced78a@flipper.net>
+ <9e0762c4-57b1-4e61-adb5-32031da77c93@0leil.net>
+In-Reply-To: <9e0762c4-57b1-4e61-adb5-32031da77c93@0leil.net>
+From: Alexey Charkov <alchark@flipper.net>
+Date: Fri, 16 Oct 2026 13:58:49 +0400
+X-Gm-Features: AclHuK8g45cSSaKpUuf3AgE6lGlcgBS0uRbS7tqqd3U5bdjPINl_xxsnPvEMQJw
+Message-ID: <CAKTNdwFVRTjq14Sjn8MdAG4DCWTmDPs-81qfsJGcCNo_Ay+-tw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] lib: Let the decompressors use unaligned loads if
+ platform allows
+To: Quentin Schulz <u-boot@0leil.net>
+Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Johan Jonker <jbx6244@gmail.com>, Casey Connolly <casey.connolly@linaro.org>, 
+ Vincent Jardin <vjardin@free.fr>, Michael Srba <Michael.Srba@seznam.cz>,
+ Cole Munz <Munzzyy1@proton.me>, Kever Yang <kever.yang@rock-chips.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -155,48 +201,117 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Alexey,
+Hi Quentin,
 
-On 10/2/26 12:04 PM, Alexey Charkov wrote:
-> spl_board_init() enables the MMU from ARM64 SPL, and runs before
-> boot_from_devices() loads anything, so the decompressors can use
-> unaligned loads.
-> 
-> Select it under the same condition that code tests before enabling
-> caches, so the two cannot drift apart. SPL only: U-Boot proper is left
-> as it is.
-> 
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
-> ---
->   arch/arm/mach-rockchip/Kconfig | 5 +++++
->   1 file changed, 5 insertions(+)
-> 
-> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-> index 1a2e7847c9e7..cc108e9679d3 100644
-> --- a/arch/arm/mach-rockchip/Kconfig
-> +++ b/arch/arm/mach-rockchip/Kconfig
-> @@ -631,11 +631,16 @@ config ROCKCHIP_COMMON_BOARD
->   config SPL_ROCKCHIP_COMMON_BOARD
->   	bool "Rockchip SPL common board file"
->   	depends on SPL
-> +	select SPL_ASSUME_UNALIGNED_ACCESS_OK if ARM64 && !SPL_SYS_DCACHE_OFF
->   	help
->   	  Rockchip SoCs have similar boot process, SPL is mainly in charge of
->   	  load and boot Trust ATF/U-Boot firmware, and DRAM init if there is
->   	  no TPL for the board.
->   
-> +	  On ARM64 it enables the MMU from spl_board_init(), which runs before
+On Fri, Oct 16, 2026 at 1:06=E2=80=AFPM Quentin Schulz <u-boot@0leil.net> w=
+rote:
+>
+> Hi Alexey,
+>
+> On 10/2/26 12:04 PM, Alexey Charkov wrote:
+> > ARM passes -mstrict-align (-mno-unaligned-access on ARMv7) to everythin=
+g,
+> > because when the MMU is off any unaligned access there faults. The
+> > compiler then has to assemble every wide unaligned load out of single
+> > bytes: one ldr becomes eight ldrb and seven orr/lsl.
+> >
+> > This is especially painful for decompressors which refill their buffer
+> > in 64-bit words. On a Rockchip RK3576 SPL, zstd unpacks a 30MiB Falcon
+> > mode Linux kernel in 1947ms built this way and 596ms without the flag,
+> > and the SPL gets 2.3KiB smaller by cutting down on the byte-wise loads =
+and
+> > ORs. gzip, whose inflate walks its input a byte at a time anyway, gains
+> > 6%.
+> >
+> > Add ASSUME_UNALIGNED_ACCESS_OK for a platform to state that the MMU is =
+on
+> > by the time it unpacks an image, and let the decompression libraries dr=
+op
+> > the flag when it is set. The arch exports the flag it added rather than
+> > lib/ naming it, so this stays correct for anything else which adds one.
+> >
+> > No functional change anywhere until the symbol is selected.
+> >
+>
+>
+>
+> > Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> > ---
+> >   arch/Kconfig                 | 35 +++++++++++++++++++++++++++++++++++
+> >   arch/arm/cpu/armv7/config.mk |  3 +++
+> >   arch/arm/cpu/armv8/config.mk |  3 +++
+> >   lib/Makefile                 |  3 +++
+> >   lib/lzma/Makefile            |  8 ++++++++
+> >   lib/lzo/Makefile             |  8 ++++++++
+> >   lib/zlib/Makefile            |  8 ++++++++
+> >   lib/zstd/Makefile            |  8 ++++++++
+> >   8 files changed, 76 insertions(+)
+> >
+> > diff --git a/arch/Kconfig b/arch/Kconfig
+> > index 8d63afeb138e..606b9d79ecd8 100644
+> > --- a/arch/Kconfig
+> > +++ b/arch/Kconfig
+> > @@ -27,6 +27,41 @@ config SUPPORT_LITTLE_ENDIAN
+> >       bool
+> >       default y if !SUPPORT_BIG_ENDIAN
+> >
+> > +config ASSUME_UNALIGNED_ACCESS_OK
+>
+> I only see changes in ARM and ARM64 config.mk, should this (and SPL)
+> symbol depends on ARM/ARM64 maybe? I see in the second patch you're
+> adding another dependency on !SPL_SYS_DCACHE_OFF, any reason for it not
+> to be a dependency in the main symbol in this file here?
 
-No? Only RK3399, anbernic-rgxx3-rk3566, jaguar-rk3588, RK3066, 
-ringneck-px30 have CONFIG_SPL_BOARD_INIT() enabled AND it does not seem 
-to be doing anything related to the MMU. I think you meant 
-board_init_f() from SPL? But then the arch_reserve_mmu+enable_caches is 
-only called when TPL is disabled (note that it is NOT "not in the TPL 
-phase" check, it's whether U-Boot will have a TPL built at all), or 
-SPL_RAM is enabled, which doesn't match the dependencies listed above 
-too. Please add a comment next to the ifdef condition, the calls to 
-arch_reserve_mmu+enable_caches and as a Kconfig comment next to the 
-select that they need to be kept in sync.
+Given that it's strictly opt-in by each platform and not
+user-selectable, I don't think adding explicit dependencies in the
+main symbol helps much. As for !SPL_SYS_DCACHE_OFF, that's
+arch-specific. E.g. on ARM/ARM64 unaligned accesses fault by default.
+The exception is when both the MMU and D-cache are up and running - in
+which case they work just fine. For some other strict-alignment
+architecture the set of conditions would probably be different - and I
+have no idea about those, so I'd rather leave it to the respective
+architecture/platform code owners to assert, not add any direct hints
+which may or may not apply to their case.
 
-Cheers,
-Quentin
+> This is very compressor/decompressor-specific, should we rename the
+> symbol so it's clear only those would/should be impacted by this symbol
+> (hoping that its usage doesn't get extended in the future).
+
+Compressors and decompressors are the primary beneficiaries and the
+only current users enabled by this patch, but the mechanism itself
+isn't strictly limited to them. I also hate overly long Kconfig symbol
+names, and the current one is already stretching it a bit :)
+
+> > +     bool
+> > +     help
+> > +       Assume that an unaligned access cannot fault by the time U-Boot
+> > +       proper unpacks an image, and build the decompression libraries
+> > +       without the architecture's strict-alignment flag on that basis.
+> > +
+> > +       Architectures whose unaligned accesses fault while the MMU is o=
+ff
+> > +       pass such a flag to everything, which makes the compiler assemb=
+le
+> > +       each wide unaligned load out of single bytes. That is both slow=
+er
+> > +       and larger, and a decompressor refilling its bit buffer in mach=
+ine
+> > +       words can spend up to four times as long for it.
+> > +
+> > +       The assumption holds only once the MMU is on, which on most
+> > +       platforms has not happened by the time an image is unpacked, an=
+d
+> > +       nothing checks it. Select it from code which enables the MMU
+>
+> Crazy idea, but should we add a flag that specifies whether the MMU (and
+> dcache?) has been set up, and then read that flag in places where we
+> have this assumption? Then we could at least clearly hard fail on this
+> flag not being set and tell the user something went wrong before the
+> system does a HW fault by itself?
+
+Do you mean a runtime flag? I'm afraid that will add more global state
+affecting all platforms, and some platforms with tight SPL size
+requirements will not love it.
+
+Best regards,
+Alexey
