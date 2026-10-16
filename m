@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94369CC6B38
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 13:24:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5212CCF2C2
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 13:24:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 22B1861052;
-	Fri, 16 Oct 2026 13:24:25 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3FF6C61005;
+	Fri, 16 Oct 2026 13:24:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WLehsaMxyB0F; Fri, 16 Oct 2026 13:24:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org F317D61248
+ id vW7zlcUBdqvI; Fri, 16 Oct 2026 13:24:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3E71F61275
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792157062;
-	b=IVqO90TqoHMsoafWdVXQvxCPC3wrQ1snPZWc5VR7/rS7lZpcCFYyR0AvQ5XrvwbvPnv8
-	 aHa69jeyZ/Zwyfrb6eyoBldZ2N/auYYDLJxVt2hpOkcyabzRbCCxzLzt9n+r4csy8d1Ye
-	 mmJUf3HaAbvo+GHToTJncQIIVxHYt7ZluFijeBVVNcdPcPl312p1bS+aoXS0S1pTYeUy7
-	 EqNlB3KZ+CwnmyYdSrk/kDlL7Eq32OGnFgCAjcJfzKIsfZqIJ+lcfw4PsAh+CSvUQxLtl
-	 BLAMLcOrGy0VV7hPN+uTwnPC1FpxK3QLR0qwdm6L7MGhkLYV1twoWKIpctQB7biWeFg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792157064;
+	b=fTQPsDx0VGYBhjST+fmoufgPjc9ZxW+hkGC6ckKOsKXu5jthvqdnBnQEC0YhmrL2yTNV
+	 gOHoJUrkNQIbaaAvxXFTqhznkxOZehbLPz0rafiiWFYJccQAoiJ5UPHK0fRLgetP4wSFk
+	 a0I6SXcsAXSixWKnDznyDMOIDY3q2MzjISKIbyefsovsi4HW/AZbXMz3erlwPAy44LDFM
+	 gMJs3Sx2h+kdwhuUjxAFHy8jLBr/s47WLkDyrqkWu7WRkUalhBudPrET/z56ZsaJGUOg5
+	 MA8j0NKVK0qWNOcL/k4pctByH/lv/p1RDycI1HlfLkHpvmevJThNUzqBjDFu0Llhh3A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792157062;
+	c=relaxed/relaxed; t=1792157064;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,134 +32,134 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=yyWQF35hcWmRxlA01MHKEa5B34AI8NL/fene+IY7BiA=;
-	b=tdbv98Rud8ozwJFhdx6RMXgL7jWpdrqGkfgf7LL57TAu8dy1XnsCBuv7qfgH9pR6kSqe
-	 sQ1VPSRRJd7eKSy3R0Gk45G03AgkSrcB3HQmsJa6XeYu1sJQK/cbQy/c9Tf1Xtb1InEjz
-	 +xky+v5MCy4O8ZGWvdqeNWo/57JK2PgKtmrlIqMqiwVkc/6JDQvhs7yskJxu1RTfpSYwU
-	 HJVEkxtTDXR0SAmfHV0SqPyGRxgtzXD6WnK+zmfpqnLLQG/5SdcWO4JN42VAgjNgcRJD/
-	 s6acbTVsboZbUyvRmAT/2UKVt9CjCyQGs1rVtY8RSIYUxwvk1bqD47h5G6Xj8JI5DyQ==
+	bh=jpoCXXA+4Dxv7CGXvWoJAsrnicmQLNQevk6y5xHl3wI=;
+	b=qpUCx01t460arVXw+K4FZlj/6McwkeP94N51rRcxzw8+EHmFxfN9IQiGGujOWz9ZeXq8
+	 OHFb7iwAFaUR2mlBFJYa5tDtK+QN5/k1KtpkyNJQTDtK0N92iZFsjFHw3sarBKl24XqU0
+	 yI5Qvn1qjhp+xlXdQ+fWBzVkkaWBHa5nchbfNvsISsq39TH9pqGvZx3BnbQg07nE1STPf
+	 abvFVnbacK5w4yiAvqDRn+97fNMV5QgnbJfs2j477ksDfsUXqQP8zyQvLr+OxP0Bbk0ZS
+	 OSIKIQjXbYeoN4sjr+J+TSL0r0DsPYnYK/iqVV/Wgl/WvuhWr3AeLAs2MG5KokQ4MVw==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792157062;
-	bh=yyWQF35hcWmRxlA01MHKEa5B34AI8NL/fene+IY7BiA=;
+	d=lists.u-boot-project.org; s=default; t=1792157064;
+	bh=jpoCXXA+4Dxv7CGXvWoJAsrnicmQLNQevk6y5xHl3wI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZcMHHxdCdcJXFJhMxz0xDuUIb29SuOYNJx4Tjiqhvvy6wnnkRj9J1uWcmL0Chuly1
-	 oaQZXAIwdjaKi/Ic1n83O/ycNNMNPthtGggpAExXL2FqOVl20kmgu68ldoMp4odpNm
-	 8jBsnKUgf3ErqwHf+P1r1AbHPkW4HVEQXgcMTNqZnYVHQQZeKPomGByMjEgCYFxCPy
-	 xkkS9l7LXNDGJPhxpNqL5pHh8CzRAfE9fqzuGdxm/FWinOOgnGmH2re0UGqIVuRRL+
-	 23RmN/H71xO5vnRBTyI5eNZd2Rj7GBcTiUIZ04krkYeibrR9ha2f77Vj2KJqJbweev
-	 HU/euM13GauKg==
+	b=i+jult3e3N5eCQcxcn43F4ac2PRhlEZppOixaY/GuZh5GS85c5w3E4N0Sdfyy9G9x
+	 Jak3MjXERekBZuKwzL/k7eyPQgNx0qS0rbyUAMKngWZxkbQLf7wZNlE8mH6bH2C7nm
+	 4ELuc2T0nt6JIw3QOXbwZ6GzN4rkTjDdTaK6bNnI9u6IclRs+gUQ9Lq/yRnE3z1g00
+	 8m1RZSUP6t4JLL1vpiT0FIZF115OeHhc8qt9pa5H35WIpHXAs63iV8QOJB388zaBaX
+	 MrbSS1oIOwy8MSgKjrDkElOTp/RPDr/pCRq2vIgbmE5yYqOUs7hwf/2RivbVuJHjWD
+	 NMrplCM9U99Pg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F317D61248;
-	Fri, 16 Oct 2026 13:24:21 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id B4A81263
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:17:08 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3E71F61275;
+	Fri, 16 Oct 2026 13:24:24 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3B4982A8
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:17:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9B15C409DF
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:17:08 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 2D7A08146A
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:17:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MCqV7xIxaZIA for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 09:17:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7C98C409BC
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792142227;
- b=F4ixCPWlV6BrZpewrNwSRA9VPnn/SSi4jx9Al4N9YqiatN+U4ZZKtYcS8+UKEAOB/+SS
- sx65yy6fMGD1cL5Z3sYaxSyfz94YpyE9CIy0lmRxEuLqkpxgPPqUSqUGOpdx0/adq5fw1
- tg1/FTcgcl0VIt9OLROpGpRdGSfGcYQPh3fnm2jiE5jaGICJqAF0UkinZadOLuZqyHC7R
- cgaCKaMK827djp8jzu9A+H/2zpI166PZfX8tUNDHg8UBn+14BrFLkOHG0O5fx09M1v9R+
- 7VK4jAImfGo4QGQVwXtkCI6LwBLtGsskl+8xae3jZtdDT6MXjgffOmYeCZa9TIgDDJg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5JCrFzq7d4td for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 09:17:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3972681220
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::330"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792142230;
+ b=esJrvoGGYx1SIZPTmmUiZuDErSHoGqJ3x9vsyXpETm3bRc7yWEW4fgqTnNcOOvxK0U2Z
+ 9TzfbqhBdMOjihIC6fexTl329doO9Ey+P2ipb7c0N4/D/1ZihY9bLi1vMuaq4uPsim8aB
+ 6vDbrP7pLrGApg7bFyB0eAfO52IziImYoQW5UuYm5L9kPelERPDMTi/3lKmJvRajNadt9
+ fr0Obz5ykN4fNxWvPp66MaFX1PBS7lEvYk6x4roN6yhNOs4Mk8l+4Qj1YdgIvO1vkkUbD
+ QAllr/Q8iwzfvbK2gyNbqOa1gIdVJ0+0ArcOPbjEMJTFi4I5fYZEqiYBy5X2EmqoO6Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792142227;
+ c=relaxed/relaxed; t=1792142230;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
  MIME-Version:Content-Transfer-Encoding;
- bh=yyWQF35hcWmRxlA01MHKEa5B34AI8NL/fene+IY7BiA=;
- b=Jwoqn2XdUKmplcHEhJ21MB9queFggllZYgOexcPO4rDtVSoOMhNiD5JftqhsqSErfnx6
- 5WtsR/Dr4kVB8X1kK4dWwxH9i2J36to8McgcxexM06Mpx+lQVBgyoaamC3JyXUghYbBVL
- PMhtEJ5dPbqP4sKpypDZJwjO7k6udYLThsWAroalX3O16NVBBE9KFrilmWnA5WiB5kTqd
- +hJbRuoMb61rpf6ShvcRHhjD7NHAwImLpsnFiybLQa+oCCcCoZoYvtcoE6jhHCFdIyKAJ
- 7wG9H6wR8Pwf0OEAR3FvzqysXwDW4QCjrti6GT7r5RIS91G8m6rU/uc7y/y68+Ea4qg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=jpoCXXA+4Dxv7CGXvWoJAsrnicmQLNQevk6y5xHl3wI=;
+ b=Db10+h6HCGYNeKtLfxrPJglsBSQkOVAbunc0HgpfvJsAq9TPopMLCREXHAyzErsUYGhr
+ 1zzRAaTXabxahnELL9cx4w4RvfVc/vP8+mOQefR0Qzk6YzAP1T7vKMk0EX0oeaCMZvGzn
+ qJemMLdn8Nlxow3ZHcubX079K6GV80f6u1StnXdDzOWW3blIEdkrrLuch6qRTINty8ymB
+ c7Ekr3YKwEZNAG3bN8GTy7IeXpsxU66/KoiBlh1QWTtWIvY+9OfDdqBKXsR9hRHQ+Acu6
+ eapf8hcKtqcVdTX9dCKOceDSliGjzc2ZRohzmNjaoJifarY7REh7iuB58emg3OUOdmg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=pEtRjEvl; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
+ header.s=20251104 header.b=FSxbygTC; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::330"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32f; helo=mail-wm1-x32f.google.com;
+ client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
  envelope-from=pmazzini@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=pEtRjEvl
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7C98C409BC
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:17:07 +0000 (UTC)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-49e73611928so4843855e9.1
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 02:17:06 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=FSxbygTC
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3972681220
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:17:08 +0000 (UTC)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-49d05d51553so19800165e9.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 02:17:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792142225; x=1792747025;
+ d=gmail.com; s=20251104; t=1792142227; x=1792747027;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=yyWQF35hcWmRxlA01MHKEa5B34AI8NL/fene+IY7BiA=;
- b=pEtRjEvlbam/Ua9jJElKrP/XE0go/hN5KaEOn1UT+otO0seiNol2djcjqzcoiwDOyD
- TPr7MVSaC8y1kL3yEbpsipDaYJYLZSIidrXIAYeMxfGz2fYNTj6i8ackJQf25RtYb5mS
- TzfdDLwpUeiBs4Bnqqr2tURAKIo9+q6nHoqkM9D5CL6Cqe99vKRg8sNhSY4RYUY+tibT
- c+/9kVNwPDiQnrclJlfDcihZzjBh30lp7nItnnX31iWZfstnpjVGG2KfpQsT+dKH7JSP
- zw8N2235qrCesnAm1e+LoBG9kFMZWBw8pdkHcd51AUSVO71220qbVZhAp3CoNn00kgda
- LZUg==
+ bh=jpoCXXA+4Dxv7CGXvWoJAsrnicmQLNQevk6y5xHl3wI=;
+ b=FSxbygTCg4hkmS1G2qtlo8+SdUxpvR23xfiLzaXINBwXcBQ8EN6UCLOxePN5JchxUR
+ +VkyrIMU6bQ0Wb6Jj9tai0cG+wqSU6dMD6ApoWS0z2EY3lByu0R9guDqdtfEWDH//rC/
+ VGHiW3ABa++NCexbSVidIDbC0NiqfrX5QTXFhKH/QjMUdfkSlvCc3iJavxmCfViZwc9s
+ UmU8Yj1zFUrP3nauv4RgpPbXEk9oGfg/Aiqqoeqky9c1VsS6MU+U+bqIK7QKS39KJ9tC
+ samWZ80QmldmY6gkT2t1VSnROKRnqSr5/E7Skz1wsfmIOgOnoBqrVAuydJ1TcQlQNYea
+ pSpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792142225; x=1792747025;
+ d=1e100.net; s=20260707; t=1792142227; x=1792747027;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=yyWQF35hcWmRxlA01MHKEa5B34AI8NL/fene+IY7BiA=;
- b=jDNRMIr0NrhqnHNEfpQw4UP8gjoDoOIJFzlI8vQ7AltzoZlMIkq2QrZcEyPrKrmsrs
- h8N+wjcV9HHyMtgyIyX0SQJ2+YU1Qk89AuvmrUrR7yIz/rK6egHV1MAm0FfM97lUazIB
- ytTaFxpNDa5OG2XB93gBdxhKKMR6e/X8ukVEYnnkNcolK6YYPEOTWsSqTAM6gtpfXQl7
- CqTgpITq6H4YkUUvNyqPWDa2ussntGzcdOT7A0bfJ92rDBx/00Obvl4eyeWl8ikAuKJt
- 9Wtd7wiyH/fifS8FYp6KZCOosAWkWFl7N+pfgIVgaS+ZCPJoQn0HdEK5aU5hxT3TDGiT
- frZg==
+ bh=jpoCXXA+4Dxv7CGXvWoJAsrnicmQLNQevk6y5xHl3wI=;
+ b=1K+Lm77cjFygD7ipkIxxy4Fv7ol9zq+kXIhuxaqohvOJipla2D3YuFGibV78Z26Khx
+ l6gbwMjsBOI40t3kmlXhy+KN4I/8RP24ipijAPRjGJOLwbioUz+r6/aVawcoSXTiMaDL
+ 5hOoAuZZXqcFDgl5JI/VO1sBukRmez1+45M6X13n+4YkwN0mOLnfFKlZBzsia3uwKHYP
+ 23FJwP4KiBREW31Rswn4ovXmUakNUiuk1HAXS1yCaoo9TBKZr1+lJxMADqUnMxpj62xU
+ PQyut1lkNrnX5FcDXZscMBAIAA4EfYhlYat8Ode/GHxNUq7RxI9i6pDqQfOm40ggjgz4
+ NpSA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxJDkgrmDhZ1aV2RQuBfrVjXnKdJe4rku17Kzm7Dk77GDTGLpYk4aWWykPZBA2gLT/nmzo19sM=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIKlQYI9zc8+7AX8VUtKdKS00+9j0iAutTGbq0WhCShEDq0d6Uq
- 73+q3sVujPbv1mPedhIvqaoCRoLqMcxGgmPBUPlqsA+H+pY4r4GkSMFT
-X-Gm-Gg: AYBFou198F4/PXjfND4BdAIZ8k5CMcqcR3wzLRH+9S+7mQELsDFKryGaa/9K8+CdcL2
- VPRYbP1JPLyYHdOwsFqq5imgdD8sSa13j5dWaB4V46ApmRAU0raUTpkG88+ny4Hkk1u0lQVFqrx
- LprxsVvzGrLppmN3EXuJo4dIvswNR6cdbK4lf4MTUxCxALJYaLQgPMRTXZ+3HmKBZyJOyJ7bPTt
- a2os6tbQl1MVRz/wQi4d6NOw8zHh/pbI5Ll7lSYC3IwI705oSUYKcMbfd0dmX6x6DkO6J0BKkMQ
- r9zGckiAw66+8/V9jM9Gx9F9uymwweVaMOdXXKYs2ze3p2BxQWuqe7prAUikVACyGpZOQTJRXb1
- vwKVJLS4Zj+HoO7gYwF15CK+beIifl18nQyVe0WhOQHzC6grcyYiXBGp19YyS04eWPmcq66bf9v
- XVC21Lf3ry8vZTg033k0qWrzyKe6HjU7V99vc/o7zRtmjKmipizM1f0IkmvAo=
-X-Received: by 2002:a05:600c:484a:b0:4a1:bb4c:39c1 with SMTP id
- 5b1f17b1804b1-4a1c66cc388mr40791295e9.16.1792142224960; 
- Fri, 16 Oct 2026 02:17:04 -0700 (PDT)
+ AKwUvBwcMOpWOoyRvpOjYU4DA1x2oq+NylxPMUq8yM5tLI/TWpWd1dRTl36EbTUVhSYuwjgDOCOtUK4=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYILqvteGhDE4rcfogjD3HHiS6YYlwjo04XFlcW78QqMngZCwbiw
+ tsM9/Q5aOLor3EGiaSlfKFkWCZrvdpalNQj9aUeS+A6bVadpxTWKfFfg
+X-Gm-Gg: AYBFou3Ic4fnPKPnjupUs6w4htr0cwIvyvapYWCfUAkc9/dWPwzvrd8HJQ2gW0PBo1U
+ 8oVc5Weo3d7Z+dVAAGLWtFyljWPj01unu4jbXV0vvsXnGAb2syzgR3lvPD7agI+Fmj+m4GyofOV
+ LfbEWctPSPsHqC8dcqE2Zn0b3HHkCPITqdEYE8sPER5rfWePchzJC/tmX5vq/1A0zeCFq48RWBh
+ sp/6NTVbL5zZ8YZl+uIMEBknM/36cbKyR/o8T1hEjYSD3IWYcvtncDv1nGVzjweuJsMvDdgwaSj
+ ZQvCkIl8iS4NczrHuIC341juDLncYUHbHqfVAqiMQPvOYNnEeumRkSmfYK3qu1voyxvb9+rW5wp
+ CdfA/eZPSxP2bhqRNGf5yqO18oAWcD2v2VKnDodfUdiViGQtV41tIRYvfPDkulGV7Uk6xNEBVmN
+ P4zlo9XCCJ0j6EhWDerVPu9vTMSKpGs270ouc+HgSUuYDktR2gv32zFL0AGEg=
+X-Received: by 2002:a05:600c:3b8b:b0:4a1:811c:8078 with SMTP id
+ 5b1f17b1804b1-4a18e4a7cfcmr545274385e9.26.1792142226569; 
+ Fri, 16 Oct 2026 02:17:06 -0700 (PDT)
 Received: from debian.tfbnw.net ([2620:10d:c092:400::4:7d8a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48dfd4ee183sm3692331f8f.29.2026.10.16.02.16.59
+ ffacd0b85a97d-48dfd4ee183sm3692331f8f.29.2026.10.16.02.17.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Oct 2026 02:17:00 -0700 (PDT)
+ Fri, 16 Oct 2026 02:17:05 -0700 (PDT)
 From: Pablo Mazzini <pmazzini@gmail.com>
 To: Andre Przywara <andre.przywara@arm.com>,
 	u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, linux-sunxi@lists.linux.dev,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH 2/7] sunxi: dram: support the Allwinner B288
-Date: Fri, 16 Oct 2026 10:16:03 +0100
-Message-ID: <20261016091608.121842-3-pmazzini@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>,
+	linux-sunxi@lists.linux.dev
+Subject: [PATCH 3/7] dt-bindings: clock: add the Allwinner B288 CCU
+Date: Fri, 16 Oct 2026 10:16:04 +0100
+Message-ID: <20261016091608.121842-4-pmazzini@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261016091608.121842-1-pmazzini@gmail.com>
 References: <20261016091608.121842-1-pmazzini@gmail.com>
@@ -179,244 +179,155 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The B288 has the DW controller and PHY of the H3, set up as on the H5.
-Gate training finds its ranks and bus width, as in the vendor code.
+The clock and reset indices of the B288 CCU, as under review for Linux.
 
 Signed-off-by: Pablo Mazzini <pmazzini@gmail.com>
 ---
- arch/arm/mach-sunxi/Kconfig         |  1 +
- arch/arm/mach-sunxi/dram_sunxi_dw.c | 97 +++++++++++++++++++++++++----
- 2 files changed, 86 insertions(+), 12 deletions(-)
+ include/dt-bindings/clock/sun8i-b288-ccu.h | 82 ++++++++++++++++++++++
+ include/dt-bindings/reset/sun8i-b288-ccu.h | 45 ++++++++++++
+ 2 files changed, 127 insertions(+)
+ create mode 100644 include/dt-bindings/clock/sun8i-b288-ccu.h
+ create mode 100644 include/dt-bindings/reset/sun8i-b288-ccu.h
 
-diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index ed2402f71f2..0326c7a976b 100644
---- a/arch/arm/mach-sunxi/Kconfig
-+++ b/arch/arm/mach-sunxi/Kconfig
-@@ -788,6 +788,7 @@ config DRAM_ODT_EN
- 	depends on !MACH_SUN50I_H616
- 	depends on !MACH_SUN55I_A523
- 	default y if MACH_SUN8I_A23
-+	default y if MACH_SUN8I_B288
- 	default y if MACH_SUNXI_H3_H5
- 	default y if MACH_SUN8I_R40
- 	default y if MACH_SUN50I
-diff --git a/arch/arm/mach-sunxi/dram_sunxi_dw.c b/arch/arm/mach-sunxi/dram_sunxi_dw.c
-index 4ed295909ce..ee96186abc6 100644
---- a/arch/arm/mach-sunxi/dram_sunxi_dw.c
-+++ b/arch/arm/mach-sunxi/dram_sunxi_dw.c
-@@ -21,6 +21,10 @@ static void mctl_phy_init(u32 val)
- 	struct sunxi_mctl_ctl_reg * const mctl_ctl =
- 			(struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BASE;
- 
-+	/* the B288 latches the configuration before triggering */
-+	if (IS_ENABLED(CONFIG_MACH_SUN8I_B288))
-+		writel(val, &mctl_ctl->pir);
+diff --git a/include/dt-bindings/clock/sun8i-b288-ccu.h b/include/dt-bindings/clock/sun8i-b288-ccu.h
+new file mode 100644
+index 00000000000..c9b9eaf979a
+--- /dev/null
++++ b/include/dt-bindings/clock/sun8i-b288-ccu.h
+@@ -0,0 +1,82 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
++#ifndef _DT_BINDINGS_CLK_SUN8I_B288_H_
++#define _DT_BINDINGS_CLK_SUN8I_B288_H_
 +
- 	writel(val | PIR_INIT, &mctl_ctl->pir);
- 	mctl_await_completion(&mctl_ctl->pgsr[0], PGSR_INIT_DONE, 0x1);
- }
-@@ -48,6 +52,11 @@ static void mctl_set_bit_delays(struct dram_para *para)
- 	for (i = 0; i < 4; i++)
- 		writel(0x6 << 24, &mctl_ctl->dx[i].sdlr);
- #endif
-+	if (IS_ENABLED(CONFIG_MACH_SUN8I_B288)) {
-+		/* boot0 uses 8 on DX0/DX1 and 6 on DX2/DX3 */
-+		for (i = 0; i < 4; i++)
-+			writel((i < 2 ? 0x8 : 0x6) << 24, &mctl_ctl->dx[i].sdlr);
-+	}
- 
- 	setbits_le32(&mctl_ctl->pgcr[0], 1 << 26);
- }
-@@ -248,9 +257,24 @@ static void mctl_set_master_priority_r40(void)
- 	MBUS_CONF(UNKNOWN3, true,    HIGH, 0, 1280,  144,   64);
- }
- 
-+/*
-+ * The B288 boot0 only sets the MBUS window timer: it leaves the per-port
-+ * table, bwcr and mapr alone, so no master is bandwidth limited.
-+ */
-+static void mctl_set_master_priority_b288(void)
-+{
-+	struct sunxi_mctl_com_reg * const mctl_com =
-+			(struct sunxi_mctl_com_reg *)SUNXI_DRAM_COM_BASE;
++#define CLK_PLL_CPUX	0
++#define CLK_PLL_AUDIO_BASE	1
++#define CLK_PLL_VIDEO0	2
++#define CLK_PLL_DDR0	3
++#define CLK_PLL_PERIPH0	4
++#define CLK_PLL_VIDEO1	5
++#define CLK_PLL_24M	6
++#define CLK_PLL_PERIPH1	7
++#define CLK_PLL_DE	8
++#define CLK_PLL_DDR1	9
 +
-+	clrsetbits_le32(&mctl_com->tmr, 0xfff, 399);
-+}
++#define CLK_PLL_PERIPH0_2X	10
++#define CLK_PLL_PERIPH1_2X	11
++#define CLK_CPUX	12
++#define CLK_AXI	13
++#define CLK_CPUAPB	14
++#define CLK_AHB1	15
++#define CLK_APB1	16
++#define CLK_APB2	17
 +
- static void mctl_set_master_priority(uint16_t socid)
- {
- 	switch (socid) {
-+	case SOCID_B288:
-+		mctl_set_master_priority_b288();
-+		return;
- 	case SOCID_H3:
- 		mctl_set_master_priority_h3();
- 		return;
-@@ -430,14 +454,15 @@ static void mctl_sys_init(uint16_t socid, struct dram_para *para)
- 	clrbits_le32(&ccm->ahb_gate0, 1 << AHB_GATE_OFFSET_MCTL);
- 	clrbits_le32(&ccm->ahb_reset0_cfg, 1 << AHB_RESET_OFFSET_MCTL);
- 	clrbits_le32(&ccm->pll5_cfg, CCM_PLL5_CTRL_EN);
--	if (socid == SOCID_A64 || socid == SOCID_R40)
-+	if (socid == SOCID_A64 || socid == SOCID_R40 || socid == SOCID_B288)
- 		clrbits_le32(&ccm->pll11_cfg, CCM_PLL11_CTRL_EN);
- 	udelay(10);
- 
- 	clrbits_le32(&ccm->dram_clk_cfg, CCM_DRAMCLK_CFG_RST);
- 	udelay(1000);
- 
--	if (socid == SOCID_A64 || socid == SOCID_R40) {
-+	if (socid == SOCID_A64 || socid == SOCID_R40 || socid == SOCID_B288) {
-+		/* The B288 feeds the controller from PLL_DDR1 (pll11), too */
- 		clock_set_pll11(CONFIG_DRAM_CLK * 2 * 1000000, false);
- 		clrsetbits_le32(&ccm->dram_clk_cfg,
- 				CCM_DRAMCLK_CFG_DIV_MASK |
-@@ -464,7 +489,8 @@ static void mctl_sys_init(uint16_t socid, struct dram_para *para)
- 	setbits_le32(&ccm->dram_clk_cfg, CCM_DRAMCLK_CFG_RST);
- 	udelay(10);
- 
--	writel(socid == SOCID_H5 ? 0x8000 : 0xc00e, &mctl_ctl->clken);
-+	writel((socid == SOCID_H5 || socid == SOCID_B288) ? 0x8000 : 0xc00e,
-+	       &mctl_ctl->clken);
- 	udelay(500);
- }
- 
-@@ -473,6 +499,14 @@ static void mctl_sys_init(uint16_t socid, struct dram_para *para)
- #define DX_GCR_ODT_ALWAYS_ON	(0x1 << 4)
- #define DX_GCR_ODT_OFF		(0x2 << 4)
- 
-+static void mctl_set_odtmap(struct dram_para *para)
-+{
-+	struct sunxi_mctl_ctl_reg * const mctl_ctl =
-+			(struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BASE;
++#define CLK_NAND	18
++#define CLK_MMC0	19
++#define CLK_MMC1	20
++#define CLK_MMC2	21
++#define CLK_MMC3	22
++#define CLK_SPI0	23
++#define CLK_SPI1	24
++#define CLK_SPI2	25
++#define CLK_DRAM	26
++#define CLK_DE	27
++#define CLK_EE	28
++#define CLK_EDMA	29
++#define CLK_TCON0	30
++#define CLK_MBUS	31
 +
-+	writel(para->dual_rank ? 0x00000303 : 0x00000201, &mctl_ctl->odtmap);
-+}
++#define CLK_BUS_THS	32
++#define CLK_BUS_NAND	33
++#define CLK_BUS_SDMMC0_BUS	34
++#define CLK_BUS_SDMMC1_BUS	35
++#define CLK_BUS_SDMMC2_BUS	36
++#define CLK_BUS_SDMMC3_BUS	37
++#define CLK_BUS_SPI0	38
++#define CLK_BUS_SPI1	39
++#define CLK_BUS_SPI2	40
++#define CLK_BUS_I2S0	41
++#define CLK_BUS_I2S1	42
++#define CLK_BUS_SPDIF	43
++#define CLK_BUS_DSD	44
++#define CLK_BUS_DMIC	45
++#define CLK_BUS_USBOHCI0	46
++#define CLK_BUS_USBEHCI0	47
++#define CLK_BUS_USBOTG	48
++#define CLK_BUS_DE	49
++#define CLK_BUS_EE	50
++#define CLK_BUS_TCON0	51
++#define CLK_BUS_CSI	52
++#define CLK_BUS_ADDA	53
++#define CLK_BUS_SDRAM	54
++#define CLK_BUS_PSRAM	55
++#define CLK_BUS_DMA	56
++#define CLK_BUS_UART0	57
++#define CLK_BUS_UART1	58
++#define CLK_BUS_UART2	59
++#define CLK_BUS_UART3	60
++#define CLK_BUS_UART4	61
++#define CLK_BUS_UART5	62
++#define CLK_BUS_TWI0	63
++#define CLK_BUS_TWI1	64
++#define CLK_BUS_TWI2	65
++#define CLK_BUS_PIO	66
++#define CLK_BUS_GPADC	67
++#define CLK_BUS_KEYADC	68
++#define CLK_MMC0_SAMPLE	69
++#define CLK_MMC0_OUTPUT	70
++#define CLK_MMC1_SAMPLE	71
++#define CLK_MMC1_OUTPUT	72
 +
- static int mctl_channel_init(uint16_t socid, struct dram_para *para)
- {
- 	struct sunxi_mctl_com_reg * const mctl_com =
-@@ -488,7 +522,7 @@ static int mctl_channel_init(uint16_t socid, struct dram_para *para)
- 
- 	/* setting VTC, default disable all VT */
- 	clrbits_le32(&mctl_ctl->pgcr[0], (1 << 30) | 0x3f);
--	if (socid == SOCID_H5)
-+	if (socid == SOCID_H5 || socid == SOCID_B288)
- 		setbits_le32(&mctl_ctl->pgcr[1], (1 << 24) | (1 << 26));
- 	else
- 		clrsetbits_le32(&mctl_ctl->pgcr[1], 1 << 24, 1 << 26);
-@@ -515,8 +549,9 @@ static int mctl_channel_init(uint16_t socid, struct dram_para *para)
- 	}
- 
- 	/* AC PDR should always ON */
--	clrsetbits_le32(&mctl_ctl->aciocr, socid == SOCID_H5 ? (0x1 << 11) : 0,
--			0x1 << 1);
-+	clrsetbits_le32(&mctl_ctl->aciocr,
-+			(socid == SOCID_H5 || socid == SOCID_B288) ?
-+			(0x1 << 11) : 0, 0x1 << 1);
- 
- 	/* set DQS auto gating PD mode */
- 	setbits_le32(&mctl_ctl->pgcr[2], 0x3 << 6);
-@@ -535,7 +570,8 @@ static int mctl_channel_init(uint16_t socid, struct dram_para *para)
- 		/* dphy & aphy phase select 270 degree */
- 		clrsetbits_le32(&mctl_ctl->pgcr[2], (0x3 << 10) | (0x3 << 8),
- 				(0x1 << 10) | (0x1 << 8));
--	} else if (socid == SOCID_A64 || socid == SOCID_H5) {
-+	} else if (socid == SOCID_A64 || socid == SOCID_H5 ||
-+		   socid == SOCID_B288) {
- 		/* dphy & aphy phase select ? */
- 		clrsetbits_le32(&mctl_ctl->pgcr[2], (0x3 << 10) | (0x3 << 8),
- 				(0x0 << 10) | (0x3 << 8));
-@@ -572,6 +608,19 @@ static int mctl_channel_init(uint16_t socid, struct dram_para *para)
- 
- 		mctl_phy_init(PIR_PLLINIT | PIR_DCAL | PIR_PHYRST |
- 			      PIR_DRAMRST | PIR_DRAMINIT | PIR_QSGATE);
-+	} else if (socid == SOCID_B288) {
-+		/* A 24-bit zqcr value, as on the A64; the H3 quirk hangs */
-+		clrsetbits_le32(&mctl_ctl->zqcr, 0xffffff, CONFIG_DRAM_ZQ);
-+		mctl_set_odtmap(para);
++#endif
+diff --git a/include/dt-bindings/reset/sun8i-b288-ccu.h b/include/dt-bindings/reset/sun8i-b288-ccu.h
+new file mode 100644
+index 00000000000..67514565454
+--- /dev/null
++++ b/include/dt-bindings/reset/sun8i-b288-ccu.h
+@@ -0,0 +1,45 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
++#ifndef _DT_BINDINGS_RST_SUN8I_B288_H_
++#define _DT_BINDINGS_RST_SUN8I_B288_H_
 +
-+		/* DQS gating mode 1: gate training finds the ranks and lanes */
-+		clrbits_le32(&mctl_ctl->pgcr[2], 0x3 << 6);
-+		clrbits_le32(&mctl_ctl->dqsgmr, 0x107);
-+		/* the vendor's training configuration */
-+		clrsetbits_le32(&mctl_ctl->dtcr, 0xffffff, 0x3087);
-+		mctl_phy_init(PIR_ZCAL | PIR_PLLINIT | PIR_PHYRST);
-+		mctl_phy_init(PIR_DCAL | PIR_DRAMRST | PIR_DRAMINIT |
-+			      PIR_QSGATE);
- 	} else if (socid == SOCID_H3) {
- 		mctl_h3_zq_calibration_quirk(para);
- 
-@@ -636,7 +685,7 @@ static int mctl_channel_init(uint16_t socid, struct dram_para *para)
- 	udelay(10);
- 
- 	/* set PGCR3, CKE polarity */
--	if (socid == SOCID_H3 || socid == SOCID_V3S)
-+	if (socid == SOCID_H3 || socid == SOCID_V3S || socid == SOCID_B288)
- 		writel(0x00aa0060, &mctl_ctl->pgcr[3]);
- 	else if (socid == SOCID_A64 || socid == SOCID_H5 || socid == SOCID_R40)
- 		writel(0xc0aa0060, &mctl_ctl->pgcr[3]);
-@@ -822,6 +871,23 @@ static void mctl_auto_detect_dram_size(uint16_t socid, struct dram_para *para)
- 	   3,  3,  3,  3,  3,  3,  3,  3,			\
- 	   3,  3,  3,  3,  2,  0,  0      }
- 
-+/* As programmed by the B288 boot0 */
-+#define SUN8I_B288_DX_READ_DELAYS				\
-+	{{ 16, 17, 18, 19, 18, 19, 19, 19, 16,  0,  0 },	\
-+	 { 26, 26, 26, 25, 25, 25, 25, 25, 20,  0,  0 },	\
-+	 { 20, 22, 24, 22, 26, 25, 25, 25, 20,  0,  0 },	\
-+	 { 21, 21, 21, 20, 20, 19, 19, 19, 18,  0,  0 }}
-+#define SUN8I_B288_DX_WRITE_DELAYS				\
-+	{{  0,  1,  3,  3,  3,  3,  3,  4,  3, 11,  0 },	\
-+	 {  3,  3,  4,  4,  3,  3,  3,  3,  3, 11,  0 },	\
-+	 {  0,  3,  3,  1,  6,  6,  5,  6,  3,  9,  0 },	\
-+	 {  5,  5,  6,  6,  4,  5,  3,  3,  3,  9,  0 }}
-+#define SUN8I_B288_AC_DELAYS					\
-+	{  0,  0,  8,  3,  0,  0,  0,  0,			\
-+	   0,  0,  0,  0,  0,  0,  0,  0,			\
-+	   0,  0,  0,  0,  0,  0,  0,  0,			\
-+	   0,  0,  0,  0,  3,  0,  0      }
++#define RST_BUS_THS	0
++#define RST_BUS_NAND	1
++#define RST_BUS_MMC0	2
++#define RST_BUS_MMC1	3
++#define RST_BUS_MMC2	4
++#define RST_BUS_MMC3	5
++#define RST_BUS_SPI0	6
++#define RST_BUS_SPI1	7
++#define RST_BUS_SPI2	8
++#define RST_BUS_I2S0	9
++#define RST_BUS_I2S1	10
++#define RST_BUS_SPDIF	11
++#define RST_BUS_DSD	12
++#define RST_BUS_DMIC	13
++#define RST_USBPHY0	14
++#define RST_BUS_OHCI0	15
++#define RST_BUS_EHCI0	16
++#define RST_BUS_OTG	17
++#define RST_BUS_DE	18
++#define RST_BUS_EE	19
++#define RST_BUS_TCON0	20
++#define RST_BUS_CSI	21
++#define RST_BUS_ADDA	22
++#define RST_BUS_WLAN	23
++#define RST_MBUS	24
++#define RST_BUS_DRAM	25
++#define RST_BUS_PSRAM	26
++#define RST_BUS_DMA	27
++#define RST_BUS_UART0	28
++#define RST_BUS_UART1	29
++#define RST_BUS_UART2	30
++#define RST_BUS_UART3	31
++#define RST_BUS_UART4	32
++#define RST_BUS_UART5	33
++#define RST_BUS_I2C0	34
++#define RST_BUS_I2C1	35
++#define RST_BUS_I2C2	36
++#define RST_BUS_GPADC	37
++#define RST_BUS_KEYADC	38
 +
- unsigned long sunxi_dram_init(void)
- {
- 	struct sunxi_mctl_com_reg * const mctl_com =
-@@ -851,6 +917,10 @@ unsigned long sunxi_dram_init(void)
- 		.dx_read_delays  = SUN8I_H3_DX_READ_DELAYS,
- 		.dx_write_delays = SUN8I_H3_DX_WRITE_DELAYS,
- 		.ac_delays	 = SUN8I_H3_AC_DELAYS,
-+#elif defined(CONFIG_MACH_SUN8I_B288)
-+		.dx_read_delays  = SUN8I_B288_DX_READ_DELAYS,
-+		.dx_write_delays = SUN8I_B288_DX_WRITE_DELAYS,
-+		.ac_delays	 = SUN8I_B288_AC_DELAYS,
- #elif defined(CONFIG_MACH_SUN8I_V3S)
- 		.dx_read_delays  = SUN8I_V3S_DX_READ_DELAYS,
- 		.dx_write_delays = SUN8I_V3S_DX_WRITE_DELAYS,
-@@ -878,6 +948,8 @@ unsigned long sunxi_dram_init(void)
- 	uint16_t socid = SOCID_H3;
- #elif defined(CONFIG_MACH_SUN8I_R40)
- 	uint16_t socid = SOCID_R40;
-+#elif defined(CONFIG_MACH_SUN8I_B288)
-+	uint16_t socid = SOCID_B288;
- #elif defined(CONFIG_MACH_SUN8I_V3S)
- 	uint16_t socid = SOCID_V3S;
- #elif defined(CONFIG_MACH_SUN50I)
-@@ -890,12 +962,13 @@ unsigned long sunxi_dram_init(void)
- 	if (mctl_channel_init(socid, &para))
- 		return 0;
- 
--	if (para.dual_rank)
--		writel(0x00000303, &mctl_ctl->odtmap);
--	else
--		writel(0x00000201, &mctl_ctl->odtmap);
-+	mctl_set_odtmap(&para);
- 	udelay(1);
- 
-+	/* the B288 trains with static DX clocks; dynamic from now on */
-+	if (socid == SOCID_B288)
-+		clrbits_le32(&mctl_ctl->pgcr[0], (0x3 << 14) | (0x3 << 12));
-+
- 	/* odt delay */
- 	if (socid == SOCID_H3)
- 		writel(0x0c000400, &mctl_ctl->odtcfg);
++#endif
 -- 
 2.52.0
 
