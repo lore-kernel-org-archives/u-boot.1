@@ -4,144 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E50DFCCA462
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 13:14:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82DC6CC6B38
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 13:23:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AB001614BB;
-	Fri, 16 Oct 2026 13:14:41 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3685060B35;
+	Fri, 16 Oct 2026 13:23:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yu2S_4Ch0iWr; Fri, 16 Oct 2026 13:14:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 30EE5614B3
+ id B2sFH_9f9320; Fri, 16 Oct 2026 13:23:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 49BC160B27
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792156471;
-	b=BCDe8cpgRUKXyHGlD4XOeeCtgj+ivj8GL5eSIa6AYvVat14FIdkR5c0zCP62Yt7Qypd/
-	 E8ELt/UWgzlzZG1tMHQfIeufDlVQkftuQwbRpQFovveWUmNGR5PApNZ1YFFO4t8mD6hFU
-	 5ZLLrjtXuf/cpYTojhvkRXwJZ5ICSb1VnPnNhwjg1Lltje3OyaOjBA3R75z+xJ+fKprXa
-	 OB6uqj96kbVJDLeXa4MIccwkeA5zbduAKYWZgfcnq9BgRDZ0b5W0waLNnAjRX5r/bY19e
-	 WXSaIpS/gXHbFLXNffrJepeY8NDV31+aX4uv6vHLi20yaHsn2kq8LtbR90sToGk0kRg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792156997;
+	b=BNvWEEdR/SHkN7EqG11TLz2rbFOmotbYF/FVOl4FL/xXwFiF7t3g3UxXaVpUfIm+iVX+
+	 jALeApMefLrTBRlekvB78mjcdh2NW+fDWbVJpa+/iEGXtY2xyuKYOvXV0UWkfENEbolWz
+	 rIYb/Rd9sjgFXDhFtDjMBX7iQE+EBH5R3BVPTC7VAk/h/ick2xHx+NiNJQwsMloqhKNTV
+	 WFO4cTCfhSkXYprPtTxTaxganIo1urFcy+Me88lOe7y4lZ/0KzGTQl5Mtd7q3BdpNZ5jU
+	 KZyj71Lk5a8rpyQfGEL4P2x7Y6iJlMhNi0MFGt7NNQQ6+SVwSMLYv7XTwPLXW8bZ4Sg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792156471;
+	c=relaxed/relaxed; t=1792156997;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
-	 References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=vRzWUv3BPuXAqQlBbKXBjZNrmkBnb3SileYywN0pQ2A=;
-	b=GNvQ6jYVV4OZE3a0bqxgNx6/yCjlT2BOCuTmPM7BfCd3A2plS7T+warG/VBRUWdI5omP
-	 aj89aBmZKqqGyGrlJOpt3xxFgb6BquwxmlLjSCSFpjSs0+TQyZYsy73WRpbzYHXyx0VII
-	 AP/ebsHH60m99DbKAavyVdOAD9bcyUIB5rZptONSQrZbcmBNzyNJksPxSEyvjWy2lk4K0
-	 xLj6ThVcpsWlFH8QnRfGUHQLjckZWyRnY632w2EuIDQK28Jn9z4sW6Jzu6UEPO27drPOE
-	 afWzOUu83MxzFTs5FZYDw3Gf0v4P+MnGJw8oLxnqYPTZ9PtOfnzRescoVXjdlUCUzgQ==
+	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=3DAlPEsgdKXErbdrwAwNpRc/8JPpXzduXyRqU2zjPGA=;
+	b=q1/jxZMfhKftnyV8IHfrSCRpvxX2qgIaE48/5jyrTGJcMit2N/YpWjSC4VX90sXGv8Hu
+	 YBnDF4L0opICp/cPRcPOYsOQZ7VmyZUB8YluWVb0iiqjbA7BWDc37Lg1mj2AePwJ620k1
+	 MVurXMcfnbRpP42hIkaPtU2Ov7g0hcsDo9SHCix1jSIL1dHplsil1KhmVuImeVvnpdjKx
+	 Pi6YydZnWeTHUdZVSC68u1zNBu3qg1+ggy13BPwGlxVKhXwlkuLSs9VNuVIcFTUUId0Ds
+	 gMbjt01TIN1UOmH6wm4qpb3e+wDGyrODGPl1NeQ04LIquEqR6XCiH4T9PLpHzKwuK1A==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792156471;
-	bh=vRzWUv3BPuXAqQlBbKXBjZNrmkBnb3SileYywN0pQ2A=;
+	d=lists.u-boot-project.org; s=default; t=1792156997;
+	bh=3DAlPEsgdKXErbdrwAwNpRc/8JPpXzduXyRqU2zjPGA=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=yRD82/uk7UR7T4fSBFppargsBJA782t9iCVRtV/WCndJdEtJApgQcuqhXQidlhBRc
-	 eL32DKGbfVu+Qc9wHTc6y39UfTUWkCRUbilrZB+oroMV6YIE5vwM+GHg38DD6Hyxcl
-	 a8Jn7B+DiXTHVUTQVufHxWLkocAdd5XUPv+0tJPiKQpifGLFhaHZsjjol+x9iXI0wL
-	 dMfc7UnmIEF3lCQfdHZTErOw6RQsgl85fOlmhw38U2N48o0NDON24iwa8JCpxGIf0L
-	 pthx1L/F3jThcIkFmMlW52BWWRxwBYhbm6LEd58bbWgGGhrFAfHKXcwp+QUz4c4YOq
-	 zc3YuBRuQ9ciw==
+	b=lhYgHip7amEMTbtvsHnberBo0UIjA6Qsf0JhMugDUKNYdQpq3CUOblez3/lCZf1R5
+	 hWNFc94D4FIqWLs4e6PmA1N6H9sWpjEDh7P83JcFQqiglCrgsjpgeJyRXiH3pTIwhM
+	 q4ADOEk9ma4WXWg5Lbxscn2dMFWgC+h3exrc4bvjApHvB+8pZCha3jkAKVdU38+869
+	 taDiBSbRwjpm5ARzmclHti8oAEHdlQD0F69qM0MhPIUfGPr4CYc3dR9svQ0HABgkDz
+	 E5hHA4pL+JA+QfRUWjGiB10vsOrmTTrHGa03ZPfJgZOWzoXHgJH/OS0x54LkrQnQ8/
+	 bLIxzMCaKh5xg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 30EE5614B3;
-	Fri, 16 Oct 2026 13:14:31 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id D993D769
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 13:13:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 49BC160B27;
+	Fri, 16 Oct 2026 13:23:17 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 73F1D255
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 13:23:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D75E6409F3
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 13:13:05 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5A0DA4016B
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 13:23:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Fa-rqH55ohy4 for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 13:13:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A126A409F4
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2001:67c:2050:0:465::202"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792156385;
- b=Dmhfq3c3yP0dVysksQX6kPjrPjbgcu4ugPWnNnoSa81LUljQ6krhjR+2iaWOpJN7gT+f
- DPNn5VN2DVlh3EZJIKFoQpf+ZIQcdRLIOWQZOqjyj6hd+64QlKM5P6FUdxqB4pfnbfGlN
- lCmGpOPoCpG7JIyOG4SKlk6ITZymQOTZJ82VT/q3MddRa17pCLj3p8ucnV96jwk3kTzcD
- iB0ohVcNWGfa5KRNh2NsFcYgStf7+mjcZtDLgosGDXGxBaoiQ6TvnUNCE97vg5XlM8J6U
- tc7QHGs2ANTvnGc2tBl1UDhv/eD65V+fkOjW42tdCHpr4OCAvRGIqRhsCOt/ZhN4v6g==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wh4alO-LEWJ0 for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 13:23:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 563B640042
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2001:1600:19:d548::42ad"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792156993;
+ b=BKwblaAeC/r3ElTy0hxW3ktsay995PXn9h2Lbb726O3988KN8UKtjuhA8osC3BKalr60
+ RZfcsTw+fa9wnB1AEkyUfmFXSttP+OEeMMMkH5wjVVOqFIKnaE3Dcr5iNa/fUH5DemusN
+ EId2+A3Zhd9QVPRnMtFmG8liFcO+kSPsU192O7LXzKZG5GkBavqjILuNJdEdF0HRr79Bs
+ 7G3ljDd5HmYU7K4Z8//U2uylmQWMy/QMzOb9wdZYZCuxZSPbv0xbMAzmkHODjcLGUCwIR
+ 8U0Ev62H+7xzq1PvTmbqJa/dDtOL0qnN1biGC51o76lIR4TJfCXyBtxmQs7S6Ig/+BA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792156385;
- h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
- User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID;
- bh=vRzWUv3BPuXAqQlBbKXBjZNrmkBnb3SileYywN0pQ2A=;
- b=EcyfEAYlRtk4jWWHPKYUhG7J8aOoRg1ZVnRBUqubdaETyPdo947eU4qZ052HcUepBtEH
- 0VTVP6t7/QC3UaAzc8mXXSt88f4JSLfAc/8WteThO5RwpaHBsYdE5PKH29O3E+7T/ZyzP
- Ljm8lGnoDtMRvbgcQ8K3/+efSUpVxotbr8TkJLFVN5F/17Ayh6inokuqX9zep2w3+hkzs
- CvPU880uauSwwCxzZa1ssxhByQim87oRwKyxzYnBTG+TZdTXyBWsbLsEzLNy7kDhy0KAb
- +n1S4i4LZiUyXK3Kb+FxCunqHLHrAULVYPk8A5mXY8IQTRQJU9TfMs9p5U0knUaOvCQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=mailbox.org;
- dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=n4AB9kTe; 
- arc=none smtp.remote-ip="2001:67c:2050:0:465::202"
+ c=relaxed/relaxed; t=1792156993;
+ h=Received-SPF:Received:DKIM-Signature:Received:Message-ID:Date:
+ MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+ From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+ X-Infomaniak-Routing;
+ bh=3DAlPEsgdKXErbdrwAwNpRc/8JPpXzduXyRqU2zjPGA=;
+ b=PwRLnOPocjR+SjCNiMOzVFEkrq8JFUnufMsCFQuSiVCPYelTtaCv1YU9nsvDm23DTGKO
+ jJ1N7SFIxUoyr8cvjusFI1EKO+gseMYw1g7C/iFxf6YH3WNYRi/E6Bz1Aom/8eo4ti7mn
+ V00OBym0i+9v44Udj5amYCzALRFpNEwatjOwFGRgccKu78ZMLbmUvc+9iYgiGsPZkeBlc
+ 0Xuk22Y90bxGx/eoqN0/3xBZkm+53S6U3xZms0JQya2LsSYJSoQL/aPYUydb1Gvo0afzJ
+ PpwaABiV3kqkgZOTmNmoSiF4AFNmTYrw23rinfFlxSF9W74qpGs5Rwg9C4CbcelrOYg==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ dmarc=pass header.from=0leil.net;
+ dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
+ header.s=20231125 header.b=M4Afrvyh; 
+ arc=none smtp.remote-ip="2001:1600:19:d548::42ad"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::202; helo=mout-p-202.mailbox.org;
- envelope-from=marek.vasut@mailbox.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=n4AB9kTe
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- by smtp4.osuosl.org (Postfix) with ESMTPS id A126A409F4
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 13:13:04 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4j5ljl1VMVzMlTn;
- Fri, 16 Oct 2026 15:12:59 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1792156379;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vRzWUv3BPuXAqQlBbKXBjZNrmkBnb3SileYywN0pQ2A=;
- b=n4AB9kTersk9Jut/sBYvD8vI6BeDbiXy0aUEVYFGStpb7+WF6c3lqn2Oc2BUrBJM/i3NRO
- SoDX2+bPSfemw6LAD14isdadR9iJL1Qb4GA6Fma2BTzc11vl9JECNB5qrNvODty1Yzu9D7
- PVjPHNG4zD2Ts6gI746qunAZb7M/eZdaVC02EE7VaZJ6FtFaswgk9hNPGq4mC/QS3OehUJ
- TqH1YYLOpU66wuPZLmoNXRRzKja6g1M/4tll06mAcztAxIQaMT+0XrO0NE60B63X6yhhKJ
- ujTgV3QHw2hNOPq2j4zAQM6XIdxYQD3SP8uz567OJXo5XWmJSnIPUCfSm9O3Tg==
-Message-ID: <81cc02a0-d556-475e-bed9-e6906faa450d@mailbox.org>
-Date: Fri, 16 Oct 2026 15:12:56 +0200
+ client-ip=2001:1600:19:d548::42ad; helo=smtp-42ad.mail.infomaniak.ch;
+ envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=0leil.net
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
+ header.a=rsa-sha256 header.s=20231125 header.b=M4Afrvyh
+Received: from smtp-42ad.mail.infomaniak.ch (smtp-42ad.mail.infomaniak.ch
+ [IPv6:2001:1600:19:d548::42ad])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 563B640042
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 13:23:12 +0000 (UTC)
+Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
+ [10.4.36.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4j5lnQ56HszGqn;
+ Fri, 16 Oct 2026 15:16:10 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
+ s=20231125; t=1792156570;
+ bh=3DAlPEsgdKXErbdrwAwNpRc/8JPpXzduXyRqU2zjPGA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=M4AfrvyhMmSVLiJUZ5oK5K4lrr8ut81DQGpySz8NX/ZaCFS9gbRj1EvSC7bfwrn9Z
+ 7kOu11vRVmNkJzVu+OUmf2ShLsaC6+57jyvxS/m8GVhLPuJ0IV+ryd+L3u0Y8VGEwC
+ MfTHsyGRBogoqrZsSIHr1Z8Dixgf6y5a7gn5Im6Pm2qGguoYYAmzIFrjrUNVj4oEa1
+ JAK2KveAcoG0LRLay2uKQyKvC8indd9EGJeHrP3jQhwXsTO3MHz5DRbcu+tMLpEf7j
+ b3YGhVj7h3YpD6oWFTwrOEP2oXe9ZAozJ4Ynf77OhN6NfbIhxjiwdZHkn0B4TeO8ND
+ vWM7GHI/4cOGQ==
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4j5lnN2ZK9z9LB; Fri, 16 Oct 2026 15:16:07 +0200 (CEST)
+Message-ID: <69377c9e-b4a1-462a-b82d-66e13b465626@0leil.net>
+Date: Fri, 16 Oct 2026 15:16:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] lmb: enable LMB_LIMIT_DMA_BELOW_RAM_TOP for ARCH_IMX8M
-To: Fabio Estevam <festevam@gmail.com>, Andreas Henriksson <andreas@fatal.se>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Stefano Babic <sbabic@nabladev.com>, "NXP i.MX U-Boot Team"
- <uboot-imx@nxp.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <6hnbarafo7qy56l23qwzcbzfm7v5liabgpnd6t5i5sbinmxqhs@6aggwhpwx5cy>
- <CAOMZO5DVhvT_dNw8eYKMhwpUU855-P5YK9f+z8o=XwnDhmPzhg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] arm: dts: meson-g12b-odroid-go-ultra-u-boot: set
+ vddio_c to 3.3V
+To: Shigeaki Asai <y-asai.0816@docomonet.jp>, u-boot@lists.u-boot-project.org
+Cc: u-boot-amlogic@groups.io, neil.armstrong@linaro.org,
+ jh80.chung@samsung.com, peng.fan@nxp.com, kever.yang@rock-chips.com,
+ sjg@chromium.org, trini@konsulko.com, ilias.apalodimas@linaro.org
+References: <20261010013237.2269021-1-y-asai.0816@docomonet.jp>
+ <20261010013237.2269021-3-y-asai.0816@docomonet.jp>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAOMZO5DVhvT_dNw8eYKMhwpUU855-P5YK9f+z8o=XwnDhmPzhg@mail.gmail.com>
+From: Quentin Schulz <u-boot@0leil.net>
+In-Reply-To: <20261010013237.2269021-3-y-asai.0816@docomonet.jp>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: simkdcpnj4sa9ogiyt61qq8fuok9egu4
-X-MBO-RS-ID: ad44aefbb20570f001d
+Content-Transfer-Encoding: 7bit
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -155,57 +151,33 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On 10/16/26 2:49 PM, Fabio Estevam wrote:
-> Hi Andreas,
-> 
-> On Wed, Oct 14, 2026 at 4:46 AM Andreas Henriksson <andreas@fatal.se> wrote:
->>
->> On boards with >3GiB ram, we can end up with transfers above 4GiB
->> which is not allowed by SDHC driver.
->>
->> fsl_esdhc_imx.c: esdhc_setup_dma():
->>          if (upper_32_bits(priv->dma_addr))
->>                  printf("Cannot use 64 bit addresses with SDMA\n");
->>
->> Tested on Toradex Verdin i.MX8M Plus SoM, where bootefi would not work
->> (with systemd-boot as efi application) and print the above message.
->>
->> Signed-off-by: Andreas Henriksson <andreas@fatal.se>
->> ---
->>   lib/Kconfig | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/lib/Kconfig b/lib/Kconfig
->> index 021a82d4709..a5f2e3e1058 100644
->> --- a/lib/Kconfig
->> +++ b/lib/Kconfig
->> @@ -1371,7 +1371,7 @@ config SPL_LMB_ARCH_MEM_MAP
->>   config LMB_LIMIT_DMA_BELOW_RAM_TOP
->>          bool
->>          depends on LMB
->> -       default y if ARCH_BCM283X || ARCH_MVEBU || ARCH_ROCKCHIP || STARFIVE_JH7110
->> +       default y if ARCH_BCM283X || ARCH_IMX8M || ARCH_MVEBU || ARCH_ROCKCHIP || STARFIVE_JH7110
-> 
-> I noticed that MMC_MTK already implies LMB_LIMIT_DMA_BELOW_RAM_TOP in
-> its Kconfig entry.
-> 
-> Would it make sense to do the same for FSL_ESDHC_IMX and restrict it
-> to ARCH_IMX8M?
-> 
-> Something like:
-> 
-> diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-> --- a/drivers/mmc/Kconfig
-> +++ b/drivers/mmc/Kconfig
-> @@ -1,5 +1,6 @@
->   config FSL_ESDHC_IMX
->          bool "Freescale/NXP i.MX eSDHC controller support"
-> +       imply LMB_LIMIT_DMA_BELOW_RAM_TOP if ARCH_IMX8M
-> 
-> This keeps the DMA restriction tied to the affected driver rather than
-> adding another architecture-specific condition to lib/Kconfig.
-> 
-> What do you think?
-Use "select" instead of "imply" .
+Hi Shigeaki Asai,
 
-Is the MX8MM USDHC also limited ?
+On 10/10/26 3:32 AM, Shigeaki Asai wrote:
+> vddio_c (RK818 LDO9) is the vqmmc supply of the SD card. Linux picks
+> 3.0V for it, the lowest value in the allowed 3.0V-3.3V range, and the
+> value is kept across a warm reboot. U-Boot then finds the card at
+> 3.0V: it initializes, but data reads at 40 MHz fail on some cards (a
+> SanDisk Ultra A1 64GB here), so the kernel cannot be loaded and the
+> board drops to the U-Boot prompt. A cold boot works since the PMIC
+> starts from its 3.3V default.
+> 
+> Changing the kernel would not help the kernels already in use, so set
+> vddio_c to 3.3V when U-Boot probes the regulator, which happens on
+> every boot.
+> 
+
+I'll let Neil decide since he's the maintainer of that code, but I don't 
+think this is necessarily correct? The spec specifically allows 
+2.7-3.6V, c.f. https://www.sdcard.org/developers/sd-standard-overview/.
+
+Moreover, RK3399 Puma has 1.8-3.0V only, and it's been working fine for 
+years now (though I haven't checked with that SD card specifically).
+
+What happens if you do NOT use the SD in U-Boot at all and boot straight 
+to the Linux kernel, is it also broken in the Linux kernel then? If not, 
+then your issue is probably not what your tool output and we may have an 
+issue elsewhere (possibly in the MMC subsystem for example).
+
+Cheers,
+Quentin
