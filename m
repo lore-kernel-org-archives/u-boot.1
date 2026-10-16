@@ -4,154 +4,179 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F47FCCF2C3
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 21:01:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C9DACCF2C6
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 21:01:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 394F8409C8;
-	Fri, 16 Oct 2026 21:01:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1804B40A6B;
+	Fri, 16 Oct 2026 21:01:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uc85NFAMUa8v; Fri, 16 Oct 2026 21:01:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7FF6D409D0
+ id q7pVKQ6eCMvb; Fri, 16 Oct 2026 21:01:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 508BE40A31
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792184496;
-	b=nZi70YXYmYCESGix7ymEa6qO9O+GMcYiTXHF07O0F42TrMle37vjE7YgcqQtfkET21+v
-	 rclCFpT5Y43FfTVO/awj5YfV+vGCTHFRi0disNpUcsf3dAam03I1gcnOSeZzJsmaebP1+
-	 78iW7ermxhaV/Xy3FYmzjpLa72p9n0T9A278FXmihYaFKw7NdiudVhmAclCwmQ9pPe0Mt
-	 AD6uOQhq0uyHmVftVFh8t36rFb24wZ0J6fWxMoc0BMRjQ+NJXqYGUIIDFVF808l9d3szI
-	 L09E+mm3L9liow5yfwxkGmHzK5YNeOQmYrKHEbGBe4swH65MVNbi2sPXZWCjGYDEIUA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792184502;
+	b=R9Li4zz0HUUWHOvkm4I0EiJrLrclkKzuQarr4wmScDh1Ylq0tqwJlgreeLatCSMs5pfm
+	 LRtH2jWw/uITjjdqVAHJngv04fI4gcFXoFjYz8GRVUrJCMGPjHyIik1EAC4goXputAIii
+	 gvJxh12iqD3MiyCiiSbqMyAA+/to8p1CPV8uye35K//4SA81yq7WLaKGPw6LcXdlrjqY+
+	 OFB0E5S39mU7oziDWVRrxzBlvCMCEKOebBi8opLvrTHDjXMe0Ql9xWfjYNRpXXvwbW5n7
+	 DU8/uZMpVZfykvjS5lKfdBuQiyaCkSntBg4GXL0dZZQQnUMlswCFJKsIo949NTWiQfQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792184496;
+	c=relaxed/relaxed; t=1792184502;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=CrWpw2vXSMxL0u1orqB/1ivuxri56TOFUtzaR+aCPOE=;
-	b=qUi+v7ZckK+Pzd/C94Taea2etBzI2CRwl1W1maUvzzTf2k3Y56PxJNTAxUPorSS7Fwq8
-	 JAPjz4Jfdg9maqN22MZtXXH3n2/JgtrWckAWN4TWvNP3T0+6e/nDbzVncimIWTYuaFD1f
-	 u+kirnpGvY0HaHFeZlXWdky8RPSKx54DDmlxL1Ud7KBzLp27Hbd51HZSOB88eBi+Vgvih
-	 XXcdYdbJQFp4/gmOSA5M3GXSEQry6TNXXDtW0hC+I35A4BwsQt80mJO3GUK22/+IUrzt9
-	 EmzNyaU49qTL4gLkDW0QZX6CkJxBHoNLiiIf7JcvhypK8w7RyDBGM7BXY7dayASTeeA==
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=JHGxgxJEpfXmybs5bip0cskKfQ/0wQsYUEp9f8Mkfiw=;
+	b=nZVjXZMHNwajZip4rtIGzoUJixj76jEV6SK5k0CD+nHhUfmxzdMczOcDsqOv4r4GfoVS
+	 iJYwGKqOYHC8ywKnn3+4NpqfhBTonQRLgoMmS1SAsR2hvuVqK9gZH9XffleexKXlZPwhD
+	 dtpjFDAU++Ty3wx/sqpsOXZjrY93r+LgHkPkjWDhoMmGs+pm5ylzbNTUrHe5zdcCx62wh
+	 2nQIzZrAbNFOTI0fmq9V1fvcy9bRrKjl/XUOrDu9fYM9uHE9Prg6j3/iCO+TWI+9aXBkY
+	 kfMd1zKkA8q11kaXwZSJYkXXtruqO6uo57y5d8W8iK+rmM6NMervzMGf7TPqgtK5vCg==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=aCfszoTB;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792184496;
-	bh=CrWpw2vXSMxL0u1orqB/1ivuxri56TOFUtzaR+aCPOE=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=jmYVCNjSFc6go/pADHV6RN0NcjAbRVUaoE/ql8w3djlZdT5fU8Xp9dCzlC0AoCwXR
-	 /SQ1mi3wQQpw6pOgvZxXhIs9UAIhi0y5+K7cMnDqZrLJDwtVqPhh0Mx73rM0X4X7IB
-	 OwWQlQnP0M2+VCijVDEIkeqPfiumsyHuGXkjOlwy1v3gM1C6lOBFy5NZT5rMlCVWBw
-	 NPsInQSjfhilcWbzYvg45aZE/W7dW+qWoF72NC/1VxRjnQnfJCYcDq7mG05fmipI7m
-	 XTFXlfAip1wx8MotZJmCxmSfqhTVL4jdUfyowCkbKE3rS281rI5AXJU60Y354EOniO
-	 EPo7W8BSe359Q==
+	d=lists.u-boot-project.org; s=default; t=1792184502;
+	bh=JHGxgxJEpfXmybs5bip0cskKfQ/0wQsYUEp9f8Mkfiw=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=DTnuCucSpIXjKu7uP5zVA4qjlHJTGAfXFOL7pa4GRYujKPHup0Z8Y1X5BFW+UBreY
+	 5ikAQW00rEJJ2dy8xHukb1/uredwpN/QtM5kN3ekplPjuBwq7Xb91Iq6F4iHvHuj9W
+	 6F4cRV6u/sD+Gdx7vxZy3JdkfCX8bLef7YUUZVlz5oolw4kehNBqyGn+HkH+swg6wz
+	 3Z5F1srmAwO4Nq6Uuf0bWlAbu16Uix4F6EcyLBYXCtLdSinuW4+axlRaXIVt0W7OJ7
+	 bbTWGmwZpwbkLapZVCkD2PRSZuarlmuHmF21B0elLn6NSo1oN4vZbbeQLwHVXMQah2
+	 ubd3WpjgjSl9w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7FF6D409D0;
-	Fri, 16 Oct 2026 21:01:36 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 9597D1DE
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 20:14:05 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 508BE40A31;
+	Fri, 16 Oct 2026 21:01:42 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1E0A975
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 19:52:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 86F7960AB2
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 20:14:05 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0416C40C13
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 19:52:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sg_57ppJq-ix for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 20:14:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A603A60A4B
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792181644;
- b=DmZteNe8kmq11o6VTZ6+MBOW8jLN75QtC6i8w1Oht5GDrBENRTtEkmRGkhs9F6r65dep
- OQ/xS/cj+a4N+BfPXbyW/4bcge5F4aAdcn44BaD6BeeeKEn7GBLd4f3JiLQ1D7B/Ef8UP
- 9V/TJkk633NVwM6YTcGS7k77dc6UL8wv0Q4mlSzvRgsnK7Bx0ijr6KSoVbPbUrJ17MRJR
- jVaa0ABgIzURmjN8z5rkvEj5YEJkSHVvs7bDAoTkuxXq/Xokkx2Dci/AT3zisAmJJBipy
- immWdp8CRfqReln83gESLAqzCbd7kfXAFNsWcoTLTw4+65mYCG4MdB4wacZPeKG8kuQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SsV_9lxo1gMg for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 19:52:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2026A40B86
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::a33"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792180370;
+ b=ASGGXs+u2DSebbe+hTtxJqWmOXs294wrxzrkA0khHZwUUsBB3l8HmYsmukmQilw8bTas
+ OjFWukJYF/zhbOpgeWcx8DuiyqBbDUgBOLWzzHWVMofZGYRAnz4tmEsElKO37s21psATA
+ +pjlxiekIFQX3SQpXhOS06mm59xkrhamcx6WgOea4F7s9TNCfSCx4W4yK/ruNvufC+f6e
+ q/LY56Rzj50LXksugIM/eFJZUlSai/HnZeWcdoquPCWRR0JlJGYxdOHAs7QUbLalOKUnA
+ hXsMpgw2KMjbcXkfenfaH+f9znH2xL5vtUCynGqB51AY6JnqRrfB0vaOcKXEzDGJsgQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792181644;
- h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
- Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
- X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
- X-Original-From:Reply-To;
- bh=CrWpw2vXSMxL0u1orqB/1ivuxri56TOFUtzaR+aCPOE=;
- b=ggky4tGwE3TztEeZcFoIouoHRsBxXJo7kViqdXmBGDbQFRnyLqvss+uqm9xsyumZBVVB
- GeKahUA/Xs6oau02G3XECNL4a9jQzi0MEF8P3i5BzEP7OthPCr17YhU80TzQaXT3MWYsA
- KLbf9TnFobeFCi/YgO67VDBfbnNxseR3foeiADjmJi18/L4A/XGxFWPTWkfMMqPn8RbmJ
- dCkgE1k5wyQj3q3kWA8JG30pWWtcGFamCenijLaPsFh83Se9L/UndVK7KK1N/Mvbw9Xkv
- Z15do762gr7eU6NzwlJsyuSLYNdqzWhr/kcSSn8QVuJ/fgStSuxeYFRYrRTkqJrFH7g==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=kernel.org;
- dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=bH9l+b15; 
- arc=none smtp.remote-ip=172.105.4.254
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
- helo=tor.source.kernel.org;
- envelope-from=devnull+petr.hodina.protonmail.com@kernel.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20201202 header.b=bH9l+b15
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A603A60A4B
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 20:14:04 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 96AFA60230;
- Fri, 16 Oct 2026 20:14:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 4385EC2BCFB;
- Fri, 16 Oct 2026 20:14:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1792181642;
- bh=oNIQSUBAoo07PlP+FiTlwa1Qv2xbTZkec5rBbKcrJDk=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=bH9l+b15V+S52z21kGhAVWRd4nu3YBNu10BD7BEueWl1Nbh6KR2ssHVamT8tSSCpX
- gRIK4GOd9qqz/q731+KqrLLJyljHARVqZqBWncm5XTT+myZw6ishvql3wCk7uhmrrE
- v50Ud1SRZUNKf9imtpUOtnnjkiePpbWfcFuUUF3i06h2Iut+9w0tQGssddbJ+ChmX0
- 86IlFiUknFqF+lN4EF4pKfs7MpUKa9OTm+8btPcGUq2r69sR0oyTa6+ojWz6ACu2gP
- DWvcj24SMyskzXvBIA3rpMgVdUAmPoQxcB3WvwLhZ7A8KB+1/HnTYzjcAXexVapuvQ
- +SzDDeiutCKrA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 1619ECCF2C4;
- Fri, 16 Oct 2026 20:14:02 +0000 (UTC)
-From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
-Date: Fri, 16 Oct 2026 22:13:50 +0200
-Subject: [PATCH 1/2] pinctrl: qcom: sdm845: select the mux value per pin
+ c=relaxed/relaxed; t=1792180370;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
+ Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer;
+ bh=JHGxgxJEpfXmybs5bip0cskKfQ/0wQsYUEp9f8Mkfiw=;
+ b=TN10zzDpH/9LNOBCs1U169YioUWN9wew72hEdz+gLYcpV9JJTd248FaZVgRnl6OH5Bs9
+ KLNaxn+SAg5JkaVNea/RnWpIfDYFlFwib0qY06Gu+UasioJ41ov37U9CuxbhIAtj/hJRm
+ kR/7AfQPlAt3S2qXtaC9tM7fX0RoNGvTzdXhuzmprpW+aETiG3MytbfAHJXR9OdemZEBH
+ D1yQVEhQ/z4VdDaBtx3wRSQTOrvsKB38A+ZBektMxJi8CKwubvi5mflckFn5HrOIEwWUC
+ QceE+EFBcDWr6PRscMkV1/He7eZZbFTGdm339XhRqjbMb8OM46IRDi4k7jFyBQXHoPg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=gmail.com;
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=aCfszoTB; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::a33"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::a33; helo=mail-vk1-xa33.google.com;
+ envelope-from=jpaulo.silvagoncalves@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=aCfszoTB
+Received: from mail-vk1-xa33.google.com (mail-vk1-xa33.google.com
+ [IPv6:2607:f8b0:4864:20::a33])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2026A40B86
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 19:52:49 +0000 (UTC)
+Received: by mail-vk1-xa33.google.com with SMTP id
+ 71dfb90a1353d-5e941201909so79145e0c.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 12:52:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1792180368; x=1792785168;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=JHGxgxJEpfXmybs5bip0cskKfQ/0wQsYUEp9f8Mkfiw=;
+ b=aCfszoTB6rHYAd7cuHmAW53cRhqHxHguo8Zg8V32I400tRHKbtR0tobITTtvPSV16l
+ O1F6LR7sRKTMyG+7fcpVxzw9mcFHa6ex2/rkU51Hlvo3cilMU6CCBJ6O9nRxCiAoxl8X
+ mYnNij00RR5qBU5lpA/D/l8VGxgU3K0fnvvKu2fyLb7rP6eHbo6onaPFetAqLC7mmuL1
+ PdDNgJOONQntJNOY6C91Wq0RB3fI45aKR5WA2oomUj53qw7BCsoqgOaJYFGUgcCDXQNP
+ 33GK4S7BUXr5znVskXQonNwNhdc5ZGJ6euQSc1BcXnZ9hMcCsXf4PBazrThOmSH2E20O
+ HNOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792180368; x=1792785168;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=JHGxgxJEpfXmybs5bip0cskKfQ/0wQsYUEp9f8Mkfiw=;
+ b=gtxZhnfDTAma2lq+oqblYNkgPvQbL3wTBWeOaOSjKwy5ec5AXrYoW0GHYcjz2dSd/q
+ GARDIb7odFma7uXZnDQDOQ4+6EbkZS9BOPTf4w2Ykz/S8llWMDQUhy81GfefTp9fs3RJ
+ VGnAfA4fx+WnefqOknVCINOCzw8aZlYSqqaw28sIOqg1KSxJvwgtvWI/ifGYWsJZUwfZ
+ xr25MhjE0b9zd8/vzTfOCOVqr6btfbyH3bnkDlWIQ67pe1OKfa8/kDhSq7iqD1mR+Btn
+ +sxBG2Ptull+we/lXfKKKk9hq7a2Pp+5r4yFq37H/Wmgw9t/3evokJctoUmIfgFS94fl
+ Uxpg==
+X-Gm-Message-State: AFq9FYLmhjKou58uVdzzbq/DUFfOXV8s7X8iXZ75fkI4BBUQwMcIFkaM
+ x+4UicD8J0a7CnyaeI3BxFMJ/u0xCl+OKyfXmVPY4ey/rtWUcHOcY2LE
+X-Gm-Gg: AYBFou3NHACe8N4AfAH3Cp8KpGKi+cRrIlnukkTVIXA4/ThePhxi2251sOzWCEiCu6M
+ jBJ3NUTrFmFJQhBNUqYF4VE0a2ml5L6rIItR9KAwQ8hjmgE7KX0V9/qSfa6PhUnY/Whsb9PCs4G
+ YvhuXFFwdrRza6MvOGgVnv7oiB6MgZGp8VLufwy9yB0oj/fyZAOq6Hg/AOjfQVpTmnuIvO15Os2
+ Y86pYiarpwrz5L/6GnOfIF2Amb8vTU9Sryn2N8KYXZE7QdgJq8iGBNrLNefXgxjd9sOESa+j/EH
+ VIeC+ZTs2mwG51Fqpmgx+OK9U9KeL6UuJH025bbXalnnLekROy9eYcv1OXKE6gnLw/VjMULmgpg
+ FepJPYm9VugB+nSNy2fswxyHJnrD+WvFZYHP0suC0jUSyU0k10QUzaQl4pQ42Y4YqYfwkgcRKdX
+ 1+AxRRbOqw7jDrH/oN/qJ1DoLRaTdRit8OGFdS0gFaMz4AMu5viaJunTDR8mRQq6Px9Csy3vgpd
+ 8R789wS4QBJTtymlh171FkSow==
+X-Received: by 2002:ac5:c007:0:20b0:5c9:a60b:e5bd with SMTP id
+ 71dfb90a1353d-5eaaa61b5e1mr347229e0c.13.1792180368394; 
+ Fri, 16 Oct 2026 12:52:48 -0700 (PDT)
+Received: from [127.0.1.1] ([2804:14c:490:135b:b225:aaff:fe93:9186])
+ by smtp.gmail.com with ESMTPSA id
+ 71dfb90a1353d-5ea9b2fef79sm2340305e0c.1.2026.10.16.12.52.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 Oct 2026 12:52:47 -0700 (PDT)
+From: =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
+ <jpaulo.silvagoncalves@gmail.com>
+Subject: [PATCH 0/4] board: sophgo: Add support for Milk-V Duo S
+Date: Fri, 16 Oct 2026 16:52:30 -0300
+Message-Id: <20261016-upstream-v1-milk-duo-s-v1-0-e4bf386eea2d@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261016-b4-sdm845-qupv3-s4-v1-1-672e9be21fd2@protonmail.com>
-References: <20261016-b4-sdm845-qupv3-s4-v1-0-672e9be21fd2@protonmail.com>
-In-Reply-To: <20261016-b4-sdm845-qupv3-s4-v1-0-672e9be21fd2@protonmail.com>
-To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.u-boot-project.org, 
- u-boot-qcom@groups.io
-Cc: Casey Connolly <casey.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Lukasz Majewski <lukma@denx.de>, David Wronek <david.wronek@mainlining.org>, 
- David Heidelberg <david@ixit.cz>, Petr Pavlata <petr@acrux.cz>, 
- Petr Hodina <petr.hodina@protonmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792181640; l=2300;
- i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
- bh=znIksOWrudNsp9MkPQ32uJ1zn0y6AypLxS2RN7WHhMc=;
- b=CJkvxcQ/ibNPMHY2cM5RN+tECGn8eLSm6TtHncTSb15Wo+jcep6AhfCAB11F+6agBwpRqWUsq
- XNcj74tmonDCbgAclepDhETPZImxdk+pfiYI2boGHMO/IkB3oIX8kDp
-X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
- pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
-X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
- with auth_id=594
-X-Original-From: Petr Hodina <petr.hodina@protonmail.com>
-X-Mailman-Approved-At: Fri, 16 Oct 2026 21:01:33 +0000
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/y3MywqDMBCF4VeRWXfAxFiqr1JcSDJth9bbjBFBf
+ PcGdfkdOP8GSsKkUGcbCC2sPPQJ5paB/7T9m5BDMtjc3k1uHMZRZ6G2w8Vgx78vhjigonfBVkX
+ pna0ekM6j0IvXI/xsTgtNMfXna9z3P3q1Mwh9AAAA
+X-Change-ID: 20261014-upstream-v1-milk-duo-s-c4d2935c4298
+To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>
+Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
+ Gui-Dong Han <hanguidong02@gmail.com>, Joshua Milas <josh.milas@gmail.com>, 
+ Chen Wang <chen.wang@linux.dev>, Inochi Amaoto <inochiama@gmail.com>, 
+ Lukasz Majewski <lukma@nabladev.com>, Peng Fan <peng.fan@nxp.com>, 
+ =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <jpaulo.silvagoncalves@gmail.com>, 
+ Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>, 
+ Hiago De Franco <hfranco@baylibre.com>, 
+ Raymond Mao <raymond.mao@riscstar.com>, Michal Simek <michal.simek@amd.com>, 
+ Yixun Lan <dlan@kernel.org>, Andrei Lalaev <andrey.lalaev@gmail.com>, 
+ E Shattow <e@freeshell.de>
+X-Mailer: b4 0.16.0
+X-Mailman-Approved-At: Fri, 16 Oct 2026 21:01:39 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -163,92 +188,53 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-Reply-To: petr.hodina@protonmail.com
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Petr Hodina <petr.hodina@protonmail.com>
+This series adds support for the Milk-V Duo S, a development board based
+on the Sophgo SG2000 SoC with 512 MiB of RAM. The board uses the
+upstream Linux devicetree via OF_UPSTREAM.
 
-The raw TLMM function value of an alternate function is not the same on
-every pin.
+The first two patches cherry-pick the SG2000 dtsi and the Duo S
+devicetree from upstream v7.3-rc1.
 
-On GPIO 89 "qup4" sits behind tsif1_clk (value 2), on GPIO 90..92 behind
-two other functions (value 3).
+The Duo S gets its own board directory, based on the Milk-V Duo 256M
+one. Apart from the devicetree, the two boards share almost all of their
+configuration. However, they use different SoCs (SG2000 vs. SG2002), so
+the Duo S is not treated as a variant of the Duo 256M.
 
-Add a per-pin table for the functions in use and register the "qup4"
-function for the QUP0 SE4 SPI pins (GPIO 89..92) next to "qup9".
+Hiago and Andrei reviewed these patches internally before submission,
+hence their Acked-by tags. Since they already work with these boards,
+they have agreed to maintain the Duo S support.
 
-Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
+Tested on a Milk-V Duo S.
+
 ---
- drivers/pinctrl/qcom/pinctrl-sdm845.c | 45 +++++++++++++++++++++++++++++++----
- 1 file changed, 40 insertions(+), 5 deletions(-)
+Joshua Milas (2):
+      riscv64: dts: sophgo: add SG2000 dtsi
+      riscv64: dts: sophgo: add initial Milk-V Duo S board support
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-sdm845.c b/drivers/pinctrl/qcom/pinctrl-sdm845.c
-index 24b42e94c7a..bfd412d8e34 100644
---- a/drivers/pinctrl/qcom/pinctrl-sdm845.c
-+++ b/drivers/pinctrl/qcom/pinctrl-sdm845.c
-@@ -18,9 +18,31 @@
- #define MAX_PIN_NAME_LEN 32
- static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
- 
-+enum {
-+	FUNC_QUP9,
-+	FUNC_QUP4,
-+	FUNC_GPIO,
-+};
-+
- static const struct pinctrl_function msm_pinctrl_functions[] = {
--	{"qup9", 1},
--	{"gpio", 0},
-+	[FUNC_QUP9] = {"qup9", -1},
-+	[FUNC_QUP4] = {"qup4", -1},
-+	[FUNC_GPIO] = {"gpio", 0},
-+};
-+
-+static const struct {
-+	u8 pin;
-+	u8 function;
-+	u8 mux;
-+} sdm845_pin_muxes[] = {
-+	/* GPIO 4..5: UART9 debug console */
-+	{ 4, FUNC_QUP9, 1 },
-+	{ 5, FUNC_QUP9, 1 },
-+	/* GPIO 89..92: GENI QUP0 SE4 SPI */
-+	{ 89, FUNC_QUP4, 2 },
-+	{ 90, FUNC_QUP4, 3 },
-+	{ 91, FUNC_QUP4, 3 },
-+	{ 92, FUNC_QUP4, 3 },
- };
- 
- static const unsigned int sdm845_pin_offsets[] = {
-@@ -80,10 +102,23 @@ static const char *sdm845_get_pin_name(struct udevice *dev,
- 	return pin_name;
- }
- 
--static int sdm845_get_function_mux(__maybe_unused unsigned int pin,
--				   unsigned int selector)
-+static int sdm845_get_function_mux(unsigned int pin, unsigned int selector)
- {
--	return msm_pinctrl_functions[selector].val;
-+	int i;
-+
-+	if (selector >= ARRAY_SIZE(msm_pinctrl_functions))
-+		return -EINVAL;
-+
-+	if (selector == FUNC_GPIO)
-+		return msm_pinctrl_functions[selector].val;
-+
-+	for (i = 0; i < ARRAY_SIZE(sdm845_pin_muxes); i++) {
-+		if (sdm845_pin_muxes[i].pin == pin &&
-+		    sdm845_pin_muxes[i].function == selector)
-+			return sdm845_pin_muxes[i].mux;
-+	}
-+
-+	return -EINVAL;
- }
- 
- static const struct msm_pinctrl_data sdm845_data = {
+João Paulo Gonçalves (2):
+      clk: sophgo: cv1800b: Add SG2000 compatible string
+      board: sophgo: Add support for Milk-V Duo S
 
--- 
-2.55.0
+ arch/riscv/Kconfig                                 |   4 +
+ board/sophgo/milkv_duo_s/Kconfig                   |  30 +++
+ board/sophgo/milkv_duo_s/MAINTAINERS               |   8 +
+ board/sophgo/milkv_duo_s/Makefile                  |   6 +
+ board/sophgo/milkv_duo_s/milkv_duo_s.env           |   8 +
+ configs/milkv_duo_s_defconfig                      |  43 ++++
+ doc/board/sophgo/index.rst                         |   1 +
+ doc/board/sophgo/milkv_duo_s.rst                   |  86 ++++++++
+ drivers/clk/sophgo/clk-cv1800b.c                   |   1 +
+ .../src/riscv/sophgo/sg2000-milkv-duo-s.dts        | 244 +++++++++++++++++++++
+ dts/upstream/src/riscv/sophgo/sg2000.dtsi          |  53 +++++
+ include/configs/milkv_duo_s.h                      |  12 +
+ 12 files changed, 496 insertions(+)
+---
+base-commit: 8d534cec0cc0109a37c0ded8854da03f1526dc0e
+change-id: 20261014-upstream-v1-milk-duo-s-c4d2935c4298
 
+Best regards,
+--  
+João Paulo Gonçalves <jpaulo.silvagoncalves@gmail.com>
 
