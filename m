@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5212CCF2C2
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 13:24:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF624CC6B38
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 13:24:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3FF6C61005;
-	Fri, 16 Oct 2026 13:24:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4E88D6128C;
+	Fri, 16 Oct 2026 13:24:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vW7zlcUBdqvI; Fri, 16 Oct 2026 13:24:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3E71F61275
+ id n9WOyaPaQld9; Fri, 16 Oct 2026 13:24:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org BA5EF612A4
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792157064;
-	b=fTQPsDx0VGYBhjST+fmoufgPjc9ZxW+hkGC6ckKOsKXu5jthvqdnBnQEC0YhmrL2yTNV
-	 gOHoJUrkNQIbaaAvxXFTqhznkxOZehbLPz0rafiiWFYJccQAoiJ5UPHK0fRLgetP4wSFk
-	 a0I6SXcsAXSixWKnDznyDMOIDY3q2MzjISKIbyefsovsi4HW/AZbXMz3erlwPAy44LDFM
-	 gMJs3Sx2h+kdwhuUjxAFHy8jLBr/s47WLkDyrqkWu7WRkUalhBudPrET/z56ZsaJGUOg5
-	 MA8j0NKVK0qWNOcL/k4pctByH/lv/p1RDycI1HlfLkHpvmevJThNUzqBjDFu0Llhh3A==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792157068;
+	b=nevbMGDtHuAY2YCbHrULlpFrpN6fqZzgbUs2+XXR4CCkZ5QnL7q82cL5XlhJoazCycny
+	 jvwaclJY569Y0hQ2+xw2g9pE6ysDH1Z1NwcmjTJLj1Hquh7rE+GDJVz4sYv9D/grB1ZKd
+	 OKLvqWpkNs2iIE1RtMLUWFuVmeSsPB/72vEE9hlCq6SrWU8BywvWD13HhWTid5+239rsp
+	 5QXp4X6ezM70WkPlhv2Ez04DYtA+0AdheD9DFF+pQx8AhwrP1ebA8BSmFECeFkAdfjoiM
+	 elhuk0wyc+KlrFlPOl7PyEV1TviiiwlXDgI05LI1qZWlevNPNdoNO1w6/LAlaE1vw4w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792157064;
+	c=relaxed/relaxed; t=1792157068;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,134 +32,134 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=jpoCXXA+4Dxv7CGXvWoJAsrnicmQLNQevk6y5xHl3wI=;
-	b=qpUCx01t460arVXw+K4FZlj/6McwkeP94N51rRcxzw8+EHmFxfN9IQiGGujOWz9ZeXq8
-	 OHFb7iwAFaUR2mlBFJYa5tDtK+QN5/k1KtpkyNJQTDtK0N92iZFsjFHw3sarBKl24XqU0
-	 yI5Qvn1qjhp+xlXdQ+fWBzVkkaWBHa5nchbfNvsISsq39TH9pqGvZx3BnbQg07nE1STPf
-	 abvFVnbacK5w4yiAvqDRn+97fNMV5QgnbJfs2j477ksDfsUXqQP8zyQvLr+OxP0Bbk0ZS
-	 OSIKIQjXbYeoN4sjr+J+TSL0r0DsPYnYK/iqVV/Wgl/WvuhWr3AeLAs2MG5KokQ4MVw==
+	bh=Jzb1jPTx4Lu/VpK6gDrZCHItR5/gwrp2RWkpDE8o1GM=;
+	b=cIPLjoxfP1Zyi1i2p3D/0uIx9yfYlBPv0GW06lmtcczjLRSrq6lTIrk+4/43nWoAbbmn
+	 rLzOE8fsCGx6oILBvUm5WMngDuhpjApdMduJbphh4fittOrYJPgEWRb8R69jUCq9/RIjX
+	 tCChYlm1GI2VFl8jYXKiScEwoIgwuWfHJ9nYG1dnYxTb7layuNDomQ+D6ZNfekonkqYNE
+	 Gg4jmvx0M92bcWTYTSLXrtnfHlUzMENQqgsF1/L5LtoUFolfuMqO/rj0Wb3CqotFDsY0j
+	 mBq9VN0++0k92gGeHy3sefCKcQ51XGLSK1CNotm3Ko0n6ofrNS5Yaf2yQAzrisKLYqQ==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792157064;
-	bh=jpoCXXA+4Dxv7CGXvWoJAsrnicmQLNQevk6y5xHl3wI=;
+	d=lists.u-boot-project.org; s=default; t=1792157068;
+	bh=Jzb1jPTx4Lu/VpK6gDrZCHItR5/gwrp2RWkpDE8o1GM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=i+jult3e3N5eCQcxcn43F4ac2PRhlEZppOixaY/GuZh5GS85c5w3E4N0Sdfyy9G9x
-	 Jak3MjXERekBZuKwzL/k7eyPQgNx0qS0rbyUAMKngWZxkbQLf7wZNlE8mH6bH2C7nm
-	 4ELuc2T0nt6JIw3QOXbwZ6GzN4rkTjDdTaK6bNnI9u6IclRs+gUQ9Lq/yRnE3z1g00
-	 8m1RZSUP6t4JLL1vpiT0FIZF115OeHhc8qt9pa5H35WIpHXAs63iV8QOJB388zaBaX
-	 MrbSS1oIOwy8MSgKjrDkElOTp/RPDr/pCRq2vIgbmE5yYqOUs7hwf/2RivbVuJHjWD
-	 NMrplCM9U99Pg==
+	b=WuEftX0u4zqiRgkTlPm5imu+XpViSKA5wOKLz+IUtyvBkQNyjd5xz9CV2ca8ayiPf
+	 9o43OqPhKKjd+R8KKOLhh85V5hg5JPJ/YnTA1kAMEPsoyqWKBBpLhdlzpqBFF6UFYy
+	 1YO5TGIsAbVsxI+ebDRGAluAvXJPJRQ+nJJ9ZYZ1tZnbzO/2GETy/GohXJNkzAreaq
+	 IGkevFuCnz1tN0r+/xAyTH8+MM1+p2gB3+fm806BWZQa8e7VzW0DsNCkuGMoeEYz2R
+	 z1CjVUmkhBo7TPKe3BadE3rFFs/Ax6qoxgtxapEO/pwLo2wJR6TvBMIBimXzd+Z/gi
+	 Fmxi4uYvffAuw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3E71F61275;
-	Fri, 16 Oct 2026 13:24:24 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 3B4982A8
+	by smtp3.osuosl.org (Postfix) with ESMTP id BA5EF612A4;
+	Fri, 16 Oct 2026 13:24:27 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id C182D2A8
  for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:17:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 2D7A08146A
+ by smtp2.osuosl.org (Postfix) with ESMTP id B3C8940100
  for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:17:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5JCrFzq7d4td for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 09:17:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3972681220
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::330"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792142230;
- b=esJrvoGGYx1SIZPTmmUiZuDErSHoGqJ3x9vsyXpETm3bRc7yWEW4fgqTnNcOOvxK0U2Z
- 9TzfbqhBdMOjihIC6fexTl329doO9Ey+P2ipb7c0N4/D/1ZihY9bLi1vMuaq4uPsim8aB
- 6vDbrP7pLrGApg7bFyB0eAfO52IziImYoQW5UuYm5L9kPelERPDMTi/3lKmJvRajNadt9
- fr0Obz5ykN4fNxWvPp66MaFX1PBS7lEvYk6x4roN6yhNOs4Mk8l+4Qj1YdgIvO1vkkUbD
- QAllr/Q8iwzfvbK2gyNbqOa1gIdVJ0+0ArcOPbjEMJTFi4I5fYZEqiYBy5X2EmqoO6Q==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cy6_yhGnPOSn for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 09:17:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 977CD4046E
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792142231;
+ b=nBBS/Ejoj01hgb7O1Woq4fR6/k48T2vo9ppPCAfuT8VgatdoTebbK6+qWGQGRCysx70W
+ VGNhLldIdnlNpyagQJwZDCnKxcLaZ5SaaNQmh/TXEIGKa2CE1FMLEEKtnSeq1XFOkpAWh
+ FhWZPLZ0v8LFFgyupFA6TTZWkrlbNN4+e+ep28tBG43PTWfiVxigzNuBcq4rSIYJQKAPo
+ ZM0ciIT5sVKBTJuGQIP+8pG3w29kFT5c+nNKL9K0hQhBYvHhaoOOikTw3fJhckdNRXt7o
+ /+8PkmoJOmwtDvHyurnFfHcjTvHXocRIwI1E/XxkeXYFlZYHvmBGZd9+1H8f5ldApoA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792142230;
+ c=relaxed/relaxed; t=1792142231;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
  MIME-Version:Content-Transfer-Encoding;
- bh=jpoCXXA+4Dxv7CGXvWoJAsrnicmQLNQevk6y5xHl3wI=;
- b=Db10+h6HCGYNeKtLfxrPJglsBSQkOVAbunc0HgpfvJsAq9TPopMLCREXHAyzErsUYGhr
- 1zzRAaTXabxahnELL9cx4w4RvfVc/vP8+mOQefR0Qzk6YzAP1T7vKMk0EX0oeaCMZvGzn
- qJemMLdn8Nlxow3ZHcubX079K6GV80f6u1StnXdDzOWW3blIEdkrrLuch6qRTINty8ymB
- c7Ekr3YKwEZNAG3bN8GTy7IeXpsxU66/KoiBlh1QWTtWIvY+9OfDdqBKXsR9hRHQ+Acu6
- eapf8hcKtqcVdTX9dCKOceDSliGjzc2ZRohzmNjaoJifarY7REh7iuB58emg3OUOdmg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=Jzb1jPTx4Lu/VpK6gDrZCHItR5/gwrp2RWkpDE8o1GM=;
+ b=m85ZfAGw58puJ/fiTMsbItrmI8uGw/jtWmsOtOg9m2+TdsLu6XRa+h9IOXXH09UR/NPW
+ H77kzvAFC1cFCwErFrSSFpoN9BS1uTgNJly48f8rOXQIjJskrrLhIpGYFyar+pTyx1CzH
+ rhfjmxHQCVWzz0Qf74Btnptkqenq4KJ4mtDmoZb0T6f6OgfDST1rTOcCfbJrfJu5geALR
+ P11vfocga2ZT76ejGb0k93TabcTowm4gJMHCM/fUAT4EQP6uorm6BSX0f7/KUm0HZ0Evs
+ fxhKpRju2tt746oKcSeLhr3+mqYh1r+tv4rQoTg8fULD/SksuiXJf9SW56pwgxsmUtA==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=FSxbygTC; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::330"
+ header.s=20251104 header.b=iSpI4x93; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
+ client-ip=2a00:1450:4864:20::42b; helo=mail-wr1-x42b.google.com;
  envelope-from=pmazzini@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=FSxbygTC
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3972681220
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:17:08 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-49d05d51553so19800165e9.2
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 02:17:08 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=iSpI4x93
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 977CD4046E
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 09:17:10 +0000 (UTC)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-48c45111bebso3960142f8f.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 02:17:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792142227; x=1792747027;
+ d=gmail.com; s=20251104; t=1792142228; x=1792747028;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=jpoCXXA+4Dxv7CGXvWoJAsrnicmQLNQevk6y5xHl3wI=;
- b=FSxbygTCg4hkmS1G2qtlo8+SdUxpvR23xfiLzaXINBwXcBQ8EN6UCLOxePN5JchxUR
- +VkyrIMU6bQ0Wb6Jj9tai0cG+wqSU6dMD6ApoWS0z2EY3lByu0R9guDqdtfEWDH//rC/
- VGHiW3ABa++NCexbSVidIDbC0NiqfrX5QTXFhKH/QjMUdfkSlvCc3iJavxmCfViZwc9s
- UmU8Yj1zFUrP3nauv4RgpPbXEk9oGfg/Aiqqoeqky9c1VsS6MU+U+bqIK7QKS39KJ9tC
- samWZ80QmldmY6gkT2t1VSnROKRnqSr5/E7Skz1wsfmIOgOnoBqrVAuydJ1TcQlQNYea
- pSpg==
+ bh=Jzb1jPTx4Lu/VpK6gDrZCHItR5/gwrp2RWkpDE8o1GM=;
+ b=iSpI4x93fIbUV4Y+dAiEDAUUyYTC1rKx+rZGS3Y9U9BbbTjpNpLH8nPxfAnEmvWal5
+ pmOnFzx4qc23P3kYIRNcgDP0OJfe51HYVByI3kVLtdHei17VHR2U7WFw+uE2mROi1Q8A
+ jmnwoSlGOinD84Ny930EK+COqaGC4MxFJnpyF76FsWhqYkNmrf98XO5r/+FP9BmaCv1s
+ N2xkJ38Ioaccsz0+irqD0p+eJ3OL1fvp4OA8JMZyhsTyRbmg6nVCqVE4f9TkramLOnUb
+ Phf/ynUImjI5vleXio7PTFOoJCEUV9X3NmA+B1VjP5A4ZmqH4KeMlPm/O2/0kdKMEV/i
+ lPPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792142227; x=1792747027;
+ d=1e100.net; s=20260707; t=1792142228; x=1792747028;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=jpoCXXA+4Dxv7CGXvWoJAsrnicmQLNQevk6y5xHl3wI=;
- b=1K+Lm77cjFygD7ipkIxxy4Fv7ol9zq+kXIhuxaqohvOJipla2D3YuFGibV78Z26Khx
- l6gbwMjsBOI40t3kmlXhy+KN4I/8RP24ipijAPRjGJOLwbioUz+r6/aVawcoSXTiMaDL
- 5hOoAuZZXqcFDgl5JI/VO1sBukRmez1+45M6X13n+4YkwN0mOLnfFKlZBzsia3uwKHYP
- 23FJwP4KiBREW31Rswn4ovXmUakNUiuk1HAXS1yCaoo9TBKZr1+lJxMADqUnMxpj62xU
- PQyut1lkNrnX5FcDXZscMBAIAA4EfYhlYat8Ode/GHxNUq7RxI9i6pDqQfOm40ggjgz4
- NpSA==
+ bh=Jzb1jPTx4Lu/VpK6gDrZCHItR5/gwrp2RWkpDE8o1GM=;
+ b=LfD700nTHGNQ87am2fFq/E06osOP9J4ab2dkXk1Ps2B1nxiwPm27uxxsuF2htLT7k0
+ 52q/BPI3sIYveUFZoiXSAvH8/3lPWIJuz5xrTrbDXMaRiHSV8ItySz8jGQFBa8xH9GGE
+ Gj8uTBkRRtPHRv0vhMawemWERwZdt75GPNJhTU1gbbpjEqdoIYvX9HNzCYN4U1rZnhBf
+ oQrgHcsduIt6l3nqTZjebzPKsIC7BKwPUTBTfxIsM+0dOHXkI92fyQuA3T2ljrp7tAgA
+ GeaUDrNTdVQh+IJm+kYY5+k6BZNOMnhL8vX2umjdNpB9JTUUb5Z+f0I3FC1Ha9pyG2ZR
+ wF4A==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwcMOpWOoyRvpOjYU4DA1x2oq+NylxPMUq8yM5tLI/TWpWd1dRTl36EbTUVhSYuwjgDOCOtUK4=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYILqvteGhDE4rcfogjD3HHiS6YYlwjo04XFlcW78QqMngZCwbiw
- tsM9/Q5aOLor3EGiaSlfKFkWCZrvdpalNQj9aUeS+A6bVadpxTWKfFfg
-X-Gm-Gg: AYBFou3Ic4fnPKPnjupUs6w4htr0cwIvyvapYWCfUAkc9/dWPwzvrd8HJQ2gW0PBo1U
- 8oVc5Weo3d7Z+dVAAGLWtFyljWPj01unu4jbXV0vvsXnGAb2syzgR3lvPD7agI+Fmj+m4GyofOV
- LfbEWctPSPsHqC8dcqE2Zn0b3HHkCPITqdEYE8sPER5rfWePchzJC/tmX5vq/1A0zeCFq48RWBh
- sp/6NTVbL5zZ8YZl+uIMEBknM/36cbKyR/o8T1hEjYSD3IWYcvtncDv1nGVzjweuJsMvDdgwaSj
- ZQvCkIl8iS4NczrHuIC341juDLncYUHbHqfVAqiMQPvOYNnEeumRkSmfYK3qu1voyxvb9+rW5wp
- CdfA/eZPSxP2bhqRNGf5yqO18oAWcD2v2VKnDodfUdiViGQtV41tIRYvfPDkulGV7Uk6xNEBVmN
- P4zlo9XCCJ0j6EhWDerVPu9vTMSKpGs270ouc+HgSUuYDktR2gv32zFL0AGEg=
-X-Received: by 2002:a05:600c:3b8b:b0:4a1:811c:8078 with SMTP id
- 5b1f17b1804b1-4a18e4a7cfcmr545274385e9.26.1792142226569; 
- Fri, 16 Oct 2026 02:17:06 -0700 (PDT)
+ AKwUvBwX5dpC75z6rr7n+buMTnXYB+0LSEj4NVfPiumKoAcuwxsAT41HDwFVwr54z3oAL0DwEAWcAs4=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYIhuPPAFR0YkC4qT0iWz4B+XKWydxhGlKTmpOH7xvvT5To3zl0u
+ L0WRxt0+UjkuNBy7rqmxzrdp4PAToTdYVdZ/oP1VBWD+syvNPvIal9GA
+X-Gm-Gg: AYBFou3DYttqJbDt8Qrsqm3OgWCnkULOKGCM5+iOaCFOPDxxEw+JlM8h15iTAhecEgZ
+ L/HmSx/InXZ5wKppldcfQ5W/Pp73gsx1PJfENIWPV+7uRYspzNPojU0duY0MABRNlHXNuNqv8KM
+ IHVwEz2+i7xmV3lh27XbnggRQ0lZnvSK9jv6/Lw5j9PKLy43t+XpobzZIkO0tIi+4brQBCs5lAX
+ tfCsQ7ArW+NIjo6kK3bVKn4jwMx97o2rKqjPrIOBVTFzjqjhugPQCVA/S3Edn82HO046A5O4+nY
+ EZ0DewKwm4DUb3KSIJa1i45B6w0Wzy9Gigxghf/1NI5MWvLlWxgnXDN/2i9z1rz+fydt3lpdqJc
+ IHeU81ggO3VmBJpzB4dGBp/yHFUJh8aPyBS7Xuxp1w5j0lRBFyPC3KkkjqvRERFYWXVmT+jz5fT
+ 9KTHJPXMmXiDZuCby6VlpXpnRpfGhsIeR7qohZxfel4orsAq4Uvu+5bwUqV7g=
+X-Received: by 2002:a05:6000:2209:b0:487:1575:ebef with SMTP id
+ ffacd0b85a97d-48dbacf70c3mr41418713f8f.47.1792142228053; 
+ Fri, 16 Oct 2026 02:17:08 -0700 (PDT)
 Received: from debian.tfbnw.net ([2620:10d:c092:400::4:7d8a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48dfd4ee183sm3692331f8f.29.2026.10.16.02.17.05
+ ffacd0b85a97d-48dfd4ee183sm3692331f8f.29.2026.10.16.02.17.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Oct 2026 02:17:05 -0700 (PDT)
+ Fri, 16 Oct 2026 02:17:06 -0700 (PDT)
 From: Pablo Mazzini <pmazzini@gmail.com>
 To: Andre Przywara <andre.przywara@arm.com>,
 	u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>,
-	linux-sunxi@lists.linux.dev
-Subject: [PATCH 3/7] dt-bindings: clock: add the Allwinner B288 CCU
-Date: Fri, 16 Oct 2026 10:16:04 +0100
-Message-ID: <20261016091608.121842-4-pmazzini@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, linux-sunxi@lists.linux.dev,
+ Lukasz Majewski <lukma@nabladev.com>
+Subject: [PATCH 4/7] clk: sunxi: add the Allwinner B288 gates and resets
+Date: Fri, 16 Oct 2026 10:16:05 +0100
+Message-ID: <20261016091608.121842-5-pmazzini@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261016091608.121842-1-pmazzini@gmail.com>
 References: <20261016091608.121842-1-pmazzini@gmail.com>
@@ -179,155 +179,177 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The clock and reset indices of the B288 CCU, as under review for Linux.
+The bus clock gates and resets, as in the Linux CCU driver.
 
 Signed-off-by: Pablo Mazzini <pmazzini@gmail.com>
 ---
- include/dt-bindings/clock/sun8i-b288-ccu.h | 82 ++++++++++++++++++++++
- include/dt-bindings/reset/sun8i-b288-ccu.h | 45 ++++++++++++
- 2 files changed, 127 insertions(+)
- create mode 100644 include/dt-bindings/clock/sun8i-b288-ccu.h
- create mode 100644 include/dt-bindings/reset/sun8i-b288-ccu.h
+ drivers/clk/sunxi/Kconfig     |   7 +++
+ drivers/clk/sunxi/Makefile    |   1 +
+ drivers/clk/sunxi/clk_b288.c  | 101 ++++++++++++++++++++++++++++++++++
+ drivers/clk/sunxi/clk_sunxi.c |   5 ++
+ 4 files changed, 114 insertions(+)
+ create mode 100644 drivers/clk/sunxi/clk_b288.c
 
-diff --git a/include/dt-bindings/clock/sun8i-b288-ccu.h b/include/dt-bindings/clock/sun8i-b288-ccu.h
+diff --git a/drivers/clk/sunxi/Kconfig b/drivers/clk/sunxi/Kconfig
+index 1c1cc82719c..e4fe6f63626 100644
+--- a/drivers/clk/sunxi/Kconfig
++++ b/drivers/clk/sunxi/Kconfig
+@@ -52,6 +52,13 @@ config CLK_SUN8I_A23
+ 	  This enables common clock driver support for platforms based
+ 	  on Allwinner A23/A33 SoC.
+ 
++config CLK_SUN8I_B288
++	bool "Clock driver for Allwinner B288"
++	default MACH_SUN8I_B288
++	help
++	  This enables common clock driver support for platforms based
++	  on Allwinner B288 SoC.
++
+ config CLK_SUN8I_A83T
+ 	bool "Clock driver for Allwinner A83T"
+ 	default MACH_SUN8I_A83T
+diff --git a/drivers/clk/sunxi/Makefile b/drivers/clk/sunxi/Makefile
+index 93b542cebcd..4f278ff551a 100644
+--- a/drivers/clk/sunxi/Makefile
++++ b/drivers/clk/sunxi/Makefile
+@@ -15,6 +15,7 @@ obj-$(CONFIG_CLK_SUN6I_A31) += clk_a31.o
+ obj-$(CONFIG_CLK_SUN6I_A31_R) += clk_a31_r.o
+ obj-$(CONFIG_CLK_SUN8I_A23) += clk_a23.o
+ obj-$(CONFIG_CLK_SUN8I_A83T) += clk_a83t.o
++obj-$(CONFIG_CLK_SUN8I_B288) += clk_b288.o
+ obj-$(CONFIG_CLK_SUN8I_R40) += clk_r40.o
+ obj-$(CONFIG_CLK_SUN8I_V3S) += clk_v3s.o
+ obj-$(CONFIG_CLK_SUN9I_A80) += clk_a80.o
+diff --git a/drivers/clk/sunxi/clk_b288.c b/drivers/clk/sunxi/clk_b288.c
 new file mode 100644
-index 00000000000..c9b9eaf979a
+index 00000000000..505fa27f83a
 --- /dev/null
-+++ b/include/dt-bindings/clock/sun8i-b288-ccu.h
-@@ -0,0 +1,82 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
-+#ifndef _DT_BINDINGS_CLK_SUN8I_B288_H_
-+#define _DT_BINDINGS_CLK_SUN8I_B288_H_
++++ b/drivers/clk/sunxi/clk_b288.c
+@@ -0,0 +1,101 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Allwinner B288 (sun8iw10p1) CCU gates and resets
++ */
 +
-+#define CLK_PLL_CPUX	0
-+#define CLK_PLL_AUDIO_BASE	1
-+#define CLK_PLL_VIDEO0	2
-+#define CLK_PLL_DDR0	3
-+#define CLK_PLL_PERIPH0	4
-+#define CLK_PLL_VIDEO1	5
-+#define CLK_PLL_24M	6
-+#define CLK_PLL_PERIPH1	7
-+#define CLK_PLL_DE	8
-+#define CLK_PLL_DDR1	9
++#include <clk-uclass.h>
++#include <dm.h>
++#include <errno.h>
++#include <clk/sunxi.h>
++#include <dt-bindings/clock/sun8i-b288-ccu.h>
++#include <dt-bindings/reset/sun8i-b288-ccu.h>
++#include <linux/bitops.h>
 +
-+#define CLK_PLL_PERIPH0_2X	10
-+#define CLK_PLL_PERIPH1_2X	11
-+#define CLK_CPUX	12
-+#define CLK_AXI	13
-+#define CLK_CPUAPB	14
-+#define CLK_AHB1	15
-+#define CLK_APB1	16
-+#define CLK_APB2	17
++static const struct ccu_clk_gate b288_gates[] = {
++	[CLK_BUS_DMA]		= GATE(0x060, BIT(6)),
++	[CLK_BUS_SDMMC0_BUS]	= GATE(0x060, BIT(8)),
++	[CLK_BUS_SDMMC1_BUS]	= GATE(0x060, BIT(9)),
++	[CLK_BUS_SDMMC2_BUS]	= GATE(0x060, BIT(10)),
++	[CLK_BUS_SDMMC3_BUS]	= GATE(0x060, BIT(11)),
++	[CLK_BUS_NAND]		= GATE(0x060, BIT(13)),
++	[CLK_BUS_SDRAM]		= GATE(0x060, BIT(14)),
++	[CLK_BUS_PSRAM]		= GATE(0x060, BIT(15)),
++	[CLK_BUS_SPI0]		= GATE(0x060, BIT(20)),
++	[CLK_BUS_SPI1]		= GATE(0x060, BIT(21)),
++	[CLK_BUS_SPI2]		= GATE(0x060, BIT(22)),
++	[CLK_BUS_USBOTG]	= GATE(0x060, BIT(24)),
++	[CLK_BUS_USBEHCI0]	= GATE(0x060, BIT(26)),
++	[CLK_BUS_USBOHCI0]	= GATE(0x060, BIT(29)),
++	[CLK_BUS_TCON0]		= GATE(0x064, BIT(4)),
++	[CLK_BUS_CSI]		= GATE(0x064, BIT(8)),
++	[CLK_BUS_DE]		= GATE(0x064, BIT(12)),
++	[CLK_BUS_EE]		= GATE(0x064, BIT(13)),
++	[CLK_BUS_ADDA]		= GATE(0x068, BIT(0)),
++	[CLK_BUS_SPDIF]		= GATE(0x068, BIT(1)),
++	[CLK_BUS_DSD]		= GATE(0x068, BIT(2)),
++	[CLK_BUS_DMIC]		= GATE(0x068, BIT(3)),
++	[CLK_BUS_PIO]		= GATE(0x068, BIT(5)),
++	[CLK_BUS_THS]		= GATE(0x068, BIT(8)),
++	[CLK_BUS_KEYADC]	= GATE(0x068, BIT(9)),
++	[CLK_BUS_GPADC]		= GATE(0x068, BIT(10)),
++	[CLK_BUS_I2S0]		= GATE(0x068, BIT(12)),
++	[CLK_BUS_I2S1]		= GATE(0x068, BIT(13)),
++	[CLK_BUS_TWI0]		= GATE(0x06c, BIT(0)),
++	[CLK_BUS_TWI1]		= GATE(0x06c, BIT(1)),
++	[CLK_BUS_TWI2]		= GATE(0x06c, BIT(2)),
++	[CLK_BUS_UART0]		= GATE(0x06c, BIT(16)),
++	[CLK_BUS_UART1]		= GATE(0x06c, BIT(17)),
++	[CLK_BUS_UART2]		= GATE(0x06c, BIT(18)),
++	[CLK_BUS_UART3]		= GATE(0x06c, BIT(19)),
++	[CLK_BUS_UART4]		= GATE(0x06c, BIT(20)),
++	[CLK_BUS_UART5]		= GATE(0x06c, BIT(21)),
++};
 +
-+#define CLK_NAND	18
-+#define CLK_MMC0	19
-+#define CLK_MMC1	20
-+#define CLK_MMC2	21
-+#define CLK_MMC3	22
-+#define CLK_SPI0	23
-+#define CLK_SPI1	24
-+#define CLK_SPI2	25
-+#define CLK_DRAM	26
-+#define CLK_DE	27
-+#define CLK_EE	28
-+#define CLK_EDMA	29
-+#define CLK_TCON0	30
-+#define CLK_MBUS	31
++static const struct ccu_reset b288_resets[] = {
++	[RST_USBPHY0]		= RESET(0x0cc, BIT(0)),
++	[RST_MBUS]		= RESET(0x0fc, BIT(31)),
++	[RST_BUS_DMA]		= RESET(0x2c0, BIT(6)),
++	[RST_BUS_MMC0]		= RESET(0x2c0, BIT(8)),
++	[RST_BUS_MMC1]		= RESET(0x2c0, BIT(9)),
++	[RST_BUS_MMC2]		= RESET(0x2c0, BIT(10)),
++	[RST_BUS_MMC3]		= RESET(0x2c0, BIT(11)),
++	[RST_BUS_NAND]		= RESET(0x2c0, BIT(13)),
++	[RST_BUS_DRAM]		= RESET(0x2c0, BIT(14)),
++	[RST_BUS_PSRAM]		= RESET(0x2c0, BIT(15)),
++	[RST_BUS_SPI0]		= RESET(0x2c0, BIT(20)),
++	[RST_BUS_SPI1]		= RESET(0x2c0, BIT(21)),
++	[RST_BUS_SPI2]		= RESET(0x2c0, BIT(22)),
++	[RST_BUS_OTG]		= RESET(0x2c0, BIT(24)),
++	[RST_BUS_EHCI0]		= RESET(0x2c0, BIT(26)),
++	[RST_BUS_OHCI0]		= RESET(0x2c0, BIT(29)),
++	[RST_BUS_WLAN]		= RESET(0x2c4, BIT(1)),
++	[RST_BUS_TCON0]		= RESET(0x2c4, BIT(4)),
++	[RST_BUS_CSI]		= RESET(0x2c4, BIT(8)),
++	[RST_BUS_DE]		= RESET(0x2c4, BIT(12)),
++	[RST_BUS_EE]		= RESET(0x2c4, BIT(13)),
++	[RST_BUS_ADDA]		= RESET(0x2d0, BIT(0)),
++	[RST_BUS_SPDIF]		= RESET(0x2d0, BIT(1)),
++	[RST_BUS_DSD]		= RESET(0x2d0, BIT(2)),
++	[RST_BUS_DMIC]		= RESET(0x2d0, BIT(3)),
++	[RST_BUS_THS]		= RESET(0x2d0, BIT(8)),
++	[RST_BUS_KEYADC]	= RESET(0x2d0, BIT(9)),
++	[RST_BUS_GPADC]		= RESET(0x2d0, BIT(10)),
++	[RST_BUS_I2S0]		= RESET(0x2d0, BIT(12)),
++	[RST_BUS_I2S1]		= RESET(0x2d0, BIT(13)),
++	[RST_BUS_I2C0]		= RESET(0x2d8, BIT(0)),
++	[RST_BUS_I2C1]		= RESET(0x2d8, BIT(1)),
++	[RST_BUS_I2C2]		= RESET(0x2d8, BIT(2)),
++	[RST_BUS_UART0]		= RESET(0x2d8, BIT(16)),
++	[RST_BUS_UART1]		= RESET(0x2d8, BIT(17)),
++	[RST_BUS_UART2]		= RESET(0x2d8, BIT(18)),
++	[RST_BUS_UART3]		= RESET(0x2d8, BIT(19)),
++	[RST_BUS_UART4]		= RESET(0x2d8, BIT(20)),
++	[RST_BUS_UART5]		= RESET(0x2d8, BIT(21)),
++};
 +
-+#define CLK_BUS_THS	32
-+#define CLK_BUS_NAND	33
-+#define CLK_BUS_SDMMC0_BUS	34
-+#define CLK_BUS_SDMMC1_BUS	35
-+#define CLK_BUS_SDMMC2_BUS	36
-+#define CLK_BUS_SDMMC3_BUS	37
-+#define CLK_BUS_SPI0	38
-+#define CLK_BUS_SPI1	39
-+#define CLK_BUS_SPI2	40
-+#define CLK_BUS_I2S0	41
-+#define CLK_BUS_I2S1	42
-+#define CLK_BUS_SPDIF	43
-+#define CLK_BUS_DSD	44
-+#define CLK_BUS_DMIC	45
-+#define CLK_BUS_USBOHCI0	46
-+#define CLK_BUS_USBEHCI0	47
-+#define CLK_BUS_USBOTG	48
-+#define CLK_BUS_DE	49
-+#define CLK_BUS_EE	50
-+#define CLK_BUS_TCON0	51
-+#define CLK_BUS_CSI	52
-+#define CLK_BUS_ADDA	53
-+#define CLK_BUS_SDRAM	54
-+#define CLK_BUS_PSRAM	55
-+#define CLK_BUS_DMA	56
-+#define CLK_BUS_UART0	57
-+#define CLK_BUS_UART1	58
-+#define CLK_BUS_UART2	59
-+#define CLK_BUS_UART3	60
-+#define CLK_BUS_UART4	61
-+#define CLK_BUS_UART5	62
-+#define CLK_BUS_TWI0	63
-+#define CLK_BUS_TWI1	64
-+#define CLK_BUS_TWI2	65
-+#define CLK_BUS_PIO	66
-+#define CLK_BUS_GPADC	67
-+#define CLK_BUS_KEYADC	68
-+#define CLK_MMC0_SAMPLE	69
-+#define CLK_MMC0_OUTPUT	70
-+#define CLK_MMC1_SAMPLE	71
-+#define CLK_MMC1_OUTPUT	72
-+
++const struct ccu_desc b288_ccu_desc = {
++	.gates = b288_gates,
++	.resets = b288_resets,
++	.num_gates = ARRAY_SIZE(b288_gates),
++	.num_resets = ARRAY_SIZE(b288_resets),
++};
+diff --git a/drivers/clk/sunxi/clk_sunxi.c b/drivers/clk/sunxi/clk_sunxi.c
+index 046d5d1605a..5f40f30fe89 100644
+--- a/drivers/clk/sunxi/clk_sunxi.c
++++ b/drivers/clk/sunxi/clk_sunxi.c
+@@ -117,6 +117,7 @@ extern const struct ccu_desc a64_ccu_desc;
+ extern const struct ccu_desc a80_ccu_desc;
+ extern const struct ccu_desc a80_mmc_clk_desc;
+ extern const struct ccu_desc a83t_ccu_desc;
++extern const struct ccu_desc b288_ccu_desc;
+ extern const struct ccu_desc d1_ccu_desc;
+ extern const struct ccu_desc f1c100s_ccu_desc;
+ extern const struct ccu_desc h3_ccu_desc;
+@@ -154,6 +155,10 @@ static const struct udevice_id sunxi_clk_ids[] = {
+ 	{ .compatible = "allwinner,sun8i-a33-ccu",
+ 	  .data = (ulong)&a23_ccu_desc },
+ #endif
++#ifdef CONFIG_CLK_SUN8I_B288
++	{ .compatible = "allwinner,sun8i-b288-ccu",
++	  .data = (ulong)&b288_ccu_desc },
 +#endif
-diff --git a/include/dt-bindings/reset/sun8i-b288-ccu.h b/include/dt-bindings/reset/sun8i-b288-ccu.h
-new file mode 100644
-index 00000000000..67514565454
---- /dev/null
-+++ b/include/dt-bindings/reset/sun8i-b288-ccu.h
-@@ -0,0 +1,45 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
-+#ifndef _DT_BINDINGS_RST_SUN8I_B288_H_
-+#define _DT_BINDINGS_RST_SUN8I_B288_H_
-+
-+#define RST_BUS_THS	0
-+#define RST_BUS_NAND	1
-+#define RST_BUS_MMC0	2
-+#define RST_BUS_MMC1	3
-+#define RST_BUS_MMC2	4
-+#define RST_BUS_MMC3	5
-+#define RST_BUS_SPI0	6
-+#define RST_BUS_SPI1	7
-+#define RST_BUS_SPI2	8
-+#define RST_BUS_I2S0	9
-+#define RST_BUS_I2S1	10
-+#define RST_BUS_SPDIF	11
-+#define RST_BUS_DSD	12
-+#define RST_BUS_DMIC	13
-+#define RST_USBPHY0	14
-+#define RST_BUS_OHCI0	15
-+#define RST_BUS_EHCI0	16
-+#define RST_BUS_OTG	17
-+#define RST_BUS_DE	18
-+#define RST_BUS_EE	19
-+#define RST_BUS_TCON0	20
-+#define RST_BUS_CSI	21
-+#define RST_BUS_ADDA	22
-+#define RST_BUS_WLAN	23
-+#define RST_MBUS	24
-+#define RST_BUS_DRAM	25
-+#define RST_BUS_PSRAM	26
-+#define RST_BUS_DMA	27
-+#define RST_BUS_UART0	28
-+#define RST_BUS_UART1	29
-+#define RST_BUS_UART2	30
-+#define RST_BUS_UART3	31
-+#define RST_BUS_UART4	32
-+#define RST_BUS_UART5	33
-+#define RST_BUS_I2C0	34
-+#define RST_BUS_I2C1	35
-+#define RST_BUS_I2C2	36
-+#define RST_BUS_GPADC	37
-+#define RST_BUS_KEYADC	38
-+
-+#endif
+ #ifdef CONFIG_CLK_SUN8I_A83T
+ 	{ .compatible = "allwinner,sun8i-a83t-ccu",
+ 	  .data = (ulong)&a83t_ccu_desc },
 -- 
 2.52.0
 
