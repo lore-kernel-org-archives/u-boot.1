@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEF63CCF2CA
-	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 21:01:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D298ECCF2C8
+	for <u-boot@archiver.kernel.org>; Fri, 16 Oct 2026 21:01:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7EEF140B3A;
-	Fri, 16 Oct 2026 21:01:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 913CB8165D;
+	Fri, 16 Oct 2026 21:01:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ncy7Ffa9AeWQ; Fri, 16 Oct 2026 21:01:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3519F40A39
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792184510;
-	b=Vvuzbxgs9Ayfm1aK0ywo2Nd5x55kBQDRlfZBjCpnfmKW4KOqj25srlLxBIyWkEQKnG0w
-	 X2QE+pwSufeHQLThmceGaOJoIYmgBo1+vN9Ivge/jKEIH4TwtbZJ/LHQYlhPpcrv+q+t3
-	 GCCRHqT7C+YXnXc6IW0981GKLIzCISoQFsVzD1WU4rqnjU0sgpgvJu/sQg1/zypDGLIdp
-	 XHGK+n5jLjyEFIToEnrhf2DDH0aTnv0MA53JJasrxmjOscRtt37AX/hCXlaXAYhg5AGup
-	 AdZontcGHoLTzhNZ6aqoywBQHt6TODB22YJKBYcjY1TVpGxjf3J74FcCZGLkcvpsGSA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4UwcI1qbSUE4; Fri, 16 Oct 2026 21:01:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7CF57814EA
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792184506;
+	b=Jgjtoy+Eta7eprDuVci0S6bdiwN78wXnb/NenKCOXk3G6ZwDGRFp9wF37b1+grGxJ/el
+	 0HtyPinwayI7VHs9UewTXRKhm+wWOe72ws4ZVHVoLIWVfrU3w6BwDqo61nL9bIFGS0AK6
+	 x/C67dtjQW4nq2pi1ilHMlRoyr7xG+6sGqbFoxRhX5m3Uycmwbno3KxYEReG4tjSckmrL
+	 BBta4oY38+sWHTrkF9I/8l+mkizlhl7u86CY1zbz8WjzmLFlXPji9GUtbDv89/52N1Vl9
+	 p5/lrJJlc8a7NNgGEV2WW0t5dNWwD7lGwuzjpaXF9hD5OkYI/t5gSJc7HjxlBVtWtVQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792184510;
+	c=relaxed/relaxed; t=1792184506;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,136 +32,135 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=ou+dUVl3rwpEbYgGuT18TPMbfdh3cr0Eo5IeyCLwKLA=;
-	b=cvobydAKAbHfo08Fl3vDzZylUKbwsboh5u6WvllFRGt2UAxBKDXRlEpDLWeo+ux3YJbA
-	 ARV0pL0Blt3jsAMF2ZB90Jhf/VEuCPM4R5+mBGKJBdvbQatJ5/xKY24t62GnC/L3ww8bm
-	 hgLsufqfODEGQVrJXd1h7+HvAXNo8H8Gccuevg3pIJwL9BnfoNpp4VaVps3Ttyu9BUvix
-	 BhOSYh1HCXWTf6yMPfopiAFbKa2bJhhJV89ct3zqdarCnzzITHYugeJUifq8Hw9g1IUq+
-	 2SxKnXupz+7whQ1pIx+Np02BRpGgXLBtOoEkYX5QjhbR09ftFYFLvs63aDxi/HKmxtw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=RBZKWq8N;
+	bh=A2KfXWJ5D3uTnpe8N1tzUpXUIJWwLjU856Hc3kgnZBk=;
+	b=HGIrkLo9qAt+fplFfTK1Zf54tkeMqgEuq0S+0WKTvgc9Ds8prvMtigA9ghn4Z84pyJUz
+	 2u9BDJVmWEPFgsN9bkG+OWSp5NJZvlQtcRNeMtj34/BZzTWbLlVa1oZvUO8AvVnrE4qtv
+	 ftfPZ3cdKbcCYqFbmcZU+bgcKYoHIRNv5levRXOaJWTFuN1pTeBJ7n65q526IJlydA1JL
+	 xWNy+WQ2TnWEpT1r2QckwGlzTrFqylRPaQ7P16pI4aljzLWupM9gBLXDZ3IAJ/mUfCn/f
+	 LQw5cJgLOhZabbnEGX+uv9H3fLy/aGZidSfOgtogVSunH7Y1B/yFYxMIhq+MixJrDIg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792184510;
-	bh=ou+dUVl3rwpEbYgGuT18TPMbfdh3cr0Eo5IeyCLwKLA=;
+	d=lists.u-boot-project.org; s=default; t=1792184506;
+	bh=A2KfXWJ5D3uTnpe8N1tzUpXUIJWwLjU856Hc3kgnZBk=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=C6XdhsDo30cXQkaZJB6Nd3Bb7LneMxAyBVMtCOXJ4cBXlJALbCaMztRUUxx+71VTk
-	 2NqLg/6JkCq+yG2H9bQzH/Y5iG/bhh9sOr3VOPXbjZw42DtyQNA5bNi3oafRKZiAh3
-	 hntXTb57Ba8NV1g8UNE4cEqSRNSTdBkEo2vUNIdZkS9MPmFSrSFOlwwM/KLHRXAzhK
-	 ybWAn0EkWnJixWTGa/180yYc3wI8y8zJviLIp8iSuoNpcl4HGFVbOqEMb6YkMgZCUr
-	 Fdb51Cu151zUVrBFXwL8KCUmqR+XbY954nHo1tpsjxeuiU1ADe7vMUryf52asJFpkq
-	 gI3NznIz3/ALQ==
+	b=zIszSbyYDYBrc4X34Edj4PP0umHGh8id2ZUQVnMDvUvkeDlmYsZrPFfFGWJHOZ4K8
+	 ntjQlEhYPuuZp/rtyiE1HWDeI4K53JH6N0TECTylnqlk4jOQVnYzBubgGsd7FP9faO
+	 JkNcTt1I/r6JKXG7DRFaE2uqVNVT0X74O7HsCNtizDM1Q/GHJUtcTI9aGkBDRUz5Ya
+	 LIyigYzTsL8WrEtEJ+0EN8k89wpIw/tR1as6dfW3jwrGgF4pUlXg6jR+UELTapJ5k/
+	 QjZ5fVQW5Z2X2nKwL/cs6h7oArVvBps0dEv1OKXZIYbYzNMrX2cLUMtXmL5nFqyTA9
+	 nM8JjdFoDuhFA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3519F40A39;
-	Fri, 16 Oct 2026 21:01:50 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id D5916255
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 19:53:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7CF57814EA;
+	Fri, 16 Oct 2026 21:01:46 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7008C7AD
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 19:53:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C78DF40B86
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 19:53:11 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5618840C18
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 19:53:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MG1Sap7LpSCb for <u-boot@lists.u-boot-project.org>;
- Fri, 16 Oct 2026 19:53:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 85CEA40C13
+ id EG-18kRGLGag for <u-boot@lists.u-boot-project.org>;
+ Fri, 16 Oct 2026 19:53:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2FBD240B86
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::a2a"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792180390;
- b=m14LsiRJlDZzYXZ4CUWUrp0NpD1SHR5xs1QcfVKg7SGHM0ocPYMSKKvQZCPL+4rleL7r
- 8LnPa1ILyqDSMW/ezkn4GhlGrPQ59F54nrx+kJhNTAItXVbVgIBQkbWJvkq4qaAa+OQGb
- CUEE9y7n9ohcM6a372p6CJ7ggWzFB2huaesK7V8xq8D662zkEUz+qwUgdSERjv5Qa0XZK
- 7i0Enih67NlnnH1qK4A8n18uKFEKepu/6hVpix6AxBd4GLvNufmjLVxJ6RuDaq2c50lkd
- /hdOD2dxKBwIPNOA4rRRtK4+jwXJ1QxorNo05L4Kt7CyMAgwh50oO5wGybu169PqVLg==
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::a2b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792180380;
+ b=OkMRAwy+WIPe1uwVI5PkqUW5nLSQVe74H4ragoAn5/lXzn2OQ/M151s8RTSgrI2rBktN
+ T69wVxf4wHoBnp3NLKO4NJ3XvbyiM0RJFzDLHmBsL3O0lg/gbupT189jseTK3V5HNLBS+
+ KzSZGidZQEr4cmebKxuTtZnPsM++xMXpXjj9BrHXIMITGzpJ5u99KVw7KTJ9PY76tmiIM
+ ZaZBfvN4E2sLl4LN7ForS++GIZy9b9bCGkcfw8hL+uc25NyAA6U4csmYWti6+3ZRY458i
+ xt0pp8mTRZsvdi7G95HKOAEFQq0lyBTeS97sdj7vc7O1s3Ue4r9NWUTWiASBbSQd8JA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792180390;
+ c=relaxed/relaxed; t=1792180380;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=ou+dUVl3rwpEbYgGuT18TPMbfdh3cr0Eo5IeyCLwKLA=;
- b=QCFJgpPu/cQ5h/QdJKVH6pbaY1EliZ2et9CWC6n/Mk93CxqUpZjhKE16JgHxW8dXuOsV
- R+aC/PNH7h34m0VSzmSBXdn6GGERsMVEfpQ52g+a9EM6C6VEZkVEmdgeev/wm2u9Zxdhm
- TsFtAQ6dcnYfPRqA3zb3fGTv8NrjxFOSDxa6Wz+Kobcmn9hRZlRKIj6CmU8cpES3MOu+R
- 2CNwSSyvXOFWziW8L1Hwu1z7UTr8HxDO2BUe301+/fSm2AZQ4AEDlNjISThCSk+vdC5F2
- tAw3xQZsBZVz7qAr5kwe1kg6jlsK6HGVV5S1U/Vvsmm7/xpKrMy7p54TQfbODUR2FsQ==
+ bh=A2KfXWJ5D3uTnpe8N1tzUpXUIJWwLjU856Hc3kgnZBk=;
+ b=jIfVhYC2eqyIFJL9MLD/mchJ+0WgXEKSEfP9ExCtznb1bTEoNWABEeiko+0n6JiSXX6o
+ RmOTo6t2Sh84umTzNeXZ+IydbGEtEB7royvG3SZSmlksgzeshGRmuqUruN1kqG2FBGswy
+ A6vve2WG1VyP+Ta5MMRmeF1PPTunzJ91JnIPpQhmkS5aAXavgoXBhBekeds7O1ExTR219
+ 1Q23OGM8AwC9rIVwTjq7RGIH5iyZqp4uHWAr0bUCDC+XnYo09Es5/76nJdslK81riXTpR
+ XCWciUEu2ytaq/OFJOPnAlVix9uchR+DXoyCEuHXpz10fWaCg7Lc1zPqcsblqF6aMHg==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=RBZKWq8N; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::a2a"
+ header.s=20251104 header.b=Rxf08M0N; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::a2b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::a2a; helo=mail-vk1-xa2a.google.com;
+ client-ip=2607:f8b0:4864:20::a2b; helo=mail-vk1-xa2b.google.com;
  envelope-from=jpaulo.silvagoncalves@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=RBZKWq8N
-Received: from mail-vk1-xa2a.google.com (mail-vk1-xa2a.google.com
- [IPv6:2607:f8b0:4864:20::a2a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 85CEA40C13
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 19:53:10 +0000 (UTC)
-Received: by mail-vk1-xa2a.google.com with SMTP id
- 71dfb90a1353d-5e930a11148so205497e0c.2
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 12:53:10 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=Rxf08M0N
+Received: from mail-vk1-xa2b.google.com (mail-vk1-xa2b.google.com
+ [IPv6:2607:f8b0:4864:20::a2b])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2FBD240B86
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 19:52:59 +0000 (UTC)
+Received: by mail-vk1-xa2b.google.com with SMTP id
+ 71dfb90a1353d-5ea969fafeeso129939e0c.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 12:52:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792180389; x=1792785189;
+ d=gmail.com; s=20251104; t=1792180379; x=1792785179;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ou+dUVl3rwpEbYgGuT18TPMbfdh3cr0Eo5IeyCLwKLA=;
- b=RBZKWq8N5cRBOoyQg3tmWxF510090/dD/1iRprgkorr1m9fTB/tVmvSv/a11jiQepm
- 44sJbFX9gNthPpoeApbwfxDfcw1UJZla1tRFUFzrwFHdtPlIvhNIE+eAlgdsJYivb1bV
- +hDdscHdNb9o3J//518bnE7+y4IYgOSNXFsweq0KFE6vJ8BwwnV3c+lGtcBu4dhR/7bn
- bQcyKoO5PNDOquahCcGsiZYKw7s6sfcSzA27j+3kOtBsodG7T8S5Isjfwb6wZ1bcT49L
- FlJMntTaGli0t6eIAlziL1BkhW3uoLwtspCH5bs4mZSBhxYkqpqQey69CweubCtfUcl4
- 18gQ==
+ bh=A2KfXWJ5D3uTnpe8N1tzUpXUIJWwLjU856Hc3kgnZBk=;
+ b=Rxf08M0NRRv7u3NWIcu9cBVn6YMklfsDGRNBWc7vNnxyZ+GQf9U/rwCgRMEhNzRBXo
+ o9aFxcVqhGq0c/MfqTFmMWOpKy5w4janyVrSer2orm4JPdwqVAVijFmDeKyjojl9pWFL
+ LGMPro42it8vuw2Wjx3MBLdGvothnzpG4h7mPRpE7zpLe6L5oMpTSDKTq/VYoFZPW4Xu
+ OkorlIHuIib4mE5SejzxX8P4S6gLMhkvTCUdR6w7vcoDxjniFJtYn9M9sNRUitpF0mFP
+ BOvAkntHxw6qy/N3d4rlrJPv7JjfgUzXclTZ2ad6rojR3BgZz78hHUamfv3cWQNzsIOt
+ eyyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792180389; x=1792785189;
+ d=1e100.net; s=20260707; t=1792180379; x=1792785179;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=ou+dUVl3rwpEbYgGuT18TPMbfdh3cr0Eo5IeyCLwKLA=;
- b=QXNOYuClmucmIgz1tERTQ673eAYiU5TesXAcstfvUR/J899xFT+LVTLUF5XGw/2KAP
- X1c8P2I7EOzG9bZjeeTs0N292jAWQwHLJBYvL5DLhbkzMIEtADz8xsdQMRiaN461oyu3
- MO2hjK7nU0HR8IU0ljkQ8w312ZT4wqRdvRD9Y0MBQF9lGSeWkuA5hKg8BK3EoktPtwmV
- 1Ck0wc3W4uexHpxg/aFoc0jKf4xrZe+x/8GhPiQG3lCv3UIaWcfwGzQildEsKqmDne3B
- +Gp+wWgQtFWMZzIlKl7VORStSJnIsbZ2G7Q+KvNx/MXjRnWtuAm7/iY+siaJYgZHDpHi
- l/+w==
-X-Gm-Message-State: AFq9FYIPdyeyZp0fmi3hGMtHo9toSFNWN9uvVyYGPkE/qP8NYhH5lAbM
- Q6CQ9xCzzs+mH+gfW3rUJnJ2pj76mYXJnxr4tmVcI11GHajJJTWnAtVt
-X-Gm-Gg: AYBFou0rWiuKxumh75qVTsuIYMJSkZ7EnzoaF4Kt2zpeRANqjlqsI1R9VWcHifS2EHE
- 8LBHdl1DX8/yHKSoXFvO+EHuxDjC7k4i1ofZU9jDJ3tRPF9tenjpbKPSkxDpgbwGsa2HOCpHmSR
- HT37gF7mpVLpp8Nv9jqNHz2LthMHAeBL/8n5s1a8/MoMRL91VUi1BLI1fc79dvBnqOOdrUhFHlG
- Ny2JZ3eWq8h6sXlcIzVNykDfMu8fi39Q38Q/PpIl+AFHKdF7KzMbXxziQBnter2YPAxHBbxzrkl
- CNJsMgZsRMvTQ4lhMZdP3S2rxDpYugAdrXHylVKudzM1L+CQWYbCnndUNnmxvp6+TIiG7FA2mXF
- HdSDGPLnFa8OGPpu9V/Lup+KrqGdflfRXbwdlcNVTPlm16GB++YcZUr42f2OTYR2ccNxo4F9uLa
- KX/uF/UeVq1Zr9Yf7N722wsF4X/bed4X/kOfICB8h0OdgxQjZ3UVQHHEyGqtFuNVy8dA53flKRQ
- zgPFiNj9zZyg3UB0xrEj2TesQ==
-X-Received: by 2002:a05:6122:4217:b0:5ea:9f07:5134 with SMTP id
- 71dfb90a1353d-5eaaa37e98dmr481469e0c.5.1792180388967; 
- Fri, 16 Oct 2026 12:53:08 -0700 (PDT)
+ bh=A2KfXWJ5D3uTnpe8N1tzUpXUIJWwLjU856Hc3kgnZBk=;
+ b=oLyCRRcsEtSMphXkdqs3fHIDW1vXx3h9ONes6ROmRnyZaveD0rOTgkW+9KpmaONyON
+ iya1g77UN+lPZE+Ai+WSfQDddrvFlPPS0otLMc7OEaFyUb16Drx91cB4aaAhGlCxXVuU
+ yrwY6NoNq8ZjzVbblaO3C6vlhZ3VU5WXXQGgsixQbHEUxdJPBDpH8k+CjqkiFJHwD+Qp
+ cH7e+msTXbKdFEeM1Y3IGclanWPcbtPj/bNoFtONNIaCL8Q5xjt7XTCrLj9RSEA2BkvB
+ xggkMVQxkGu9MAS4HTQMbd9751dyJFlLmzOqooPTdeVrVCK5CcCWXtRmo+YUdDkSQ5QD
+ Jfog==
+X-Gm-Message-State: AFq9FYJmmWDT8r1SVCK9yKtFkEs0EuzJCzJ9tPSEISHpQbo1c+m2iS7O
+ qa+N9wyKxe3wmy/vd3HD6JLB8VuGZPI1NCyc4hmT1Ix+yBnR7mjnuWLnMgys0Ei66Ks=
+X-Gm-Gg: AYBFou1ifa5iG/Cdz0Uyb8oiO338l2OAllfeAQ1R/Xh2KVdXM1TSeUENupFhiLFyYU/
+ KAglBZcXkN/WBG0BGoC/isiEIelhpFKDKmyk2bbfKZ8N1Rq+3/WMZop6qHxl+rrpdMLqTH5bk9N
+ Iz+2bOngQPe/M4zMmz9jHaQXD2YdKIG31aGcFYyzJIRXdU/2ewoPLi2VDYmUavkALkuEJV+yLyz
+ EyLhTp6DbnJz7L1FLuwz098aXB4cW4XeLfW8p9I+VnKoFQzQrmAxQBcSO0xM2iLJSkeZiwqcEQi
+ k0Jt7fxZXbkdVNFbr+08zuZ7h+vtKnYyYSHgc1BFdzCBHQfQIuEhsR4ABT1AFHzBQuNW8j7+ase
+ jwRRAgNqKtF9MYSve57QnIng+JeJ5ddWDBwmdzIIf506E48GTc+OhE6IQH4KrX3XsRox6moYi/8
+ PIYUGTumz5CRzSBgH39h52LjxU4MO5S0vVsUdK9vTn0TZJId3vAZQkQf+YQfUUt9unHe7SQloet
+ EbRRvUp9lOdBfRW
+X-Received: by 2002:a05:6123:2eb:b0:5dc:d0cb:7d6b with SMTP id
+ 71dfb90a1353d-5eaaa65aa82mr524960e0c.14.1792180378808; 
+ Fri, 16 Oct 2026 12:52:58 -0700 (PDT)
 Received: from [127.0.1.1] ([2804:14c:490:135b:b225:aaff:fe93:9186])
  by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-5ea9b2fef79sm2340305e0c.1.2026.10.16.12.53.04
+ 71dfb90a1353d-5ea9b2fef79sm2340305e0c.1.2026.10.16.12.52.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Oct 2026 12:53:08 -0700 (PDT)
+ Fri, 16 Oct 2026 12:52:58 -0700 (PDT)
 From: =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
  <jpaulo.silvagoncalves@gmail.com>
-Date: Fri, 16 Oct 2026 16:52:34 -0300
-Subject: [PATCH 4/4] board: sophgo: Add support for Milk-V Duo S
+Date: Fri, 16 Oct 2026 16:52:32 -0300
+Subject: [PATCH 2/4] riscv64: dts: sophgo: add initial Milk-V Duo S board
+ support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20261016-upstream-v1-milk-duo-s-v1-4-e4bf386eea2d@gmail.com>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261016-upstream-v1-milk-duo-s-v1-2-e4bf386eea2d@gmail.com>
 References: <20261016-upstream-v1-milk-duo-s-v1-0-e4bf386eea2d@gmail.com>
 In-Reply-To: <20261016-upstream-v1-milk-duo-s-v1-0-e4bf386eea2d@gmail.com>
 To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>
@@ -190,302 +189,276 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add support for the Milk-V Duo S, a development board based on the
-Sophgo SG2000 SoC with 512 MiB of RAM.
+From: Joshua Milas <josh.milas@gmail.com>
 
-The SG2000 differs from the CV1800B used on the Milk-V Duo 64M and the
-SG2002 used on the Milk-V Duo 256M, but these SoCs share most of their
-IP blocks, including the CPU core, so the existing CV1800B support can
-be reused.
+This adds initial riscv support for the Milk-V Duo S board
+[1] making it possible to boot Linux to the command line.
 
-Add a separate board directory, target and defconfig for the Duo S,
-based on the Milk-V Duo 256M ones. Like the Duo 256M, it reuses the
-common Milk-V Duo board code. The defconfig uses the upstream devicetree
-via OF_UPSTREAM.
+Link: https://milkv.io/duo-s [1]
 
-Link: https://milkv.io/docs/duo/getting-started/duos
-Signed-off-by: João Paulo Gonçalves <jpaulo.silvagoncalves@gmail.com>
-Acked-by: Andrei Lalaev <andrey.lalaev@gmail.com>
-Acked-by: Hiago De Franco <hfranco@baylibre.com>
+Signed-off-by: Joshua Milas <josh.milas@gmail.com>
+Link: https://milkv.io/duo-s [1]
+Link: https://patch.msgid.link/20260615120324.1527881-4-josh.milas@gmail.com
+Signed-off-by: Inochi Amaoto <inochiama@gmail.com> # Trim empty line
+Signed-off-by: Chen Wang <chen.wang@linux.dev>
+
+[ upstream commit: 66153532fb18474c83f9bcbb27b039c7788e664f ]
+
+(cherry picked from commit 2b4cd02ed6873160a2c8be4cdaa0d63e92b52830)
 ---
- arch/riscv/Kconfig                       |  4 ++
- board/sophgo/milkv_duo_s/Kconfig         | 30 +++++++++++
- board/sophgo/milkv_duo_s/MAINTAINERS     |  8 +++
- board/sophgo/milkv_duo_s/Makefile        |  6 +++
- board/sophgo/milkv_duo_s/milkv_duo_s.env |  8 +++
- configs/milkv_duo_s_defconfig            | 43 ++++++++++++++++
- doc/board/sophgo/index.rst               |  1 +
- doc/board/sophgo/milkv_duo_s.rst         | 86 ++++++++++++++++++++++++++++++++
- include/configs/milkv_duo_s.h            | 12 +++++
- 9 files changed, 198 insertions(+)
+ .../src/riscv/sophgo/sg2000-milkv-duo-s.dts        | 244 +++++++++++++++++++++
+ 1 file changed, 244 insertions(+)
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index 386241efd4a0..df10354e9aef 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -32,6 +32,9 @@ config TARGET_MILKV_DUO
- config TARGET_MILKV_DUO_256M
- 	bool "Support Milk-V Duo 256M Board"
- 
-+config TARGET_MILKV_DUO_S
-+	bool "Support Milk-V Duo S Board"
-+
- config TARGET_OPENPITON_RISCV64
- 	bool "Support RISC-V cores on OpenPiton SoC"
- 
-@@ -125,6 +128,7 @@ source "board/sifive/unmatched/Kconfig"
- source "board/sipeed/maix/Kconfig"
- source "board/sophgo/milkv_duo/Kconfig"
- source "board/sophgo/milkv_duo_256m/Kconfig"
-+source "board/sophgo/milkv_duo_s/Kconfig"
- source "board/sophgo/licheerv_nano/Kconfig"
- source "board/spacemit/k1/Kconfig"
- source "board/spacemit/k3/Kconfig"
-diff --git a/board/sophgo/milkv_duo_s/Kconfig b/board/sophgo/milkv_duo_s/Kconfig
+diff --git a/dts/upstream/src/riscv/sophgo/sg2000-milkv-duo-s.dts b/dts/upstream/src/riscv/sophgo/sg2000-milkv-duo-s.dts
 new file mode 100644
-index 000000000000..6ec6bd65d938
+index 000000000000..78a257839f6f
 --- /dev/null
-+++ b/board/sophgo/milkv_duo_s/Kconfig
-@@ -0,0 +1,30 @@
-+if TARGET_MILKV_DUO_S
++++ b/dts/upstream/src/riscv/sophgo/sg2000-milkv-duo-s.dts
+@@ -0,0 +1,244 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
 +
-+config SYS_BOARD
-+	default "milkv_duo_s"
++/dts-v1/;
 +
-+config SYS_VENDOR
-+	default "sophgo"
++#include <dt-bindings/pinctrl/pinctrl-sg2000.h>
++#include "sg2000.dtsi"
 +
-+config SYS_CPU
-+	default "cv1800b"
++/ {
++	model = "Milk-V Duo S";
++	compatible = "milkv,duo-s", "sophgo,sg2000";
 +
-+config SYS_CONFIG_NAME
-+	default "milkv_duo_s"
++	aliases {
++		i2c4 = &i2c4;
++		mmc0 = &sdhci0;
++		mmc1 = &emmc;
++		mmc2 = &sdhci1;
++		serial0 = &uart0;
++		serial4 = &uart4;
++	};
 +
-+# The vendor FIP tool prepends a 32-byte loader header to u-boot.bin and loads
-+# the result at 0x80200000, so the U-Boot code runs 0x20 bytes above that.
-+config TEXT_BASE
-+	default 0x80200020
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
 +
-+config ENV_SIZE
-+	default 0x20000
++	wifi_pwrseq: wifi-pwrseq {
++		compatible = "mmc-pwrseq-simple";
++		reset-gpios = <&porta 15 GPIO_ACTIVE_LOW>;
++		power-off-delay-us = <50000>;
++		post-power-on-delay-ms = <200>;
++	};
++};
 +
-+config ENV_SECT_SIZE
-+	default 0x40000
++&osc {
++	clock-frequency = <25000000>;
++};
 +
-+config BOARD_SPECIFIC_OPTIONS
-+	def_bool y
-+	select SOPHGO_CV1800B
++&pinctrl {
++	emmc_cfg: emmc-cfg {
++		emmc-rstn-pins {
++			pinmux = <PINMUX(PIN_EMMC_RSTN, 0)>;
++			bias-pull-up;
++			drive-strength-microamp = <10800>;
++			power-source = <1800>;
++		};
 +
-+endif
-diff --git a/board/sophgo/milkv_duo_s/MAINTAINERS b/board/sophgo/milkv_duo_s/MAINTAINERS
-new file mode 100644
-index 000000000000..86533c03fd9a
---- /dev/null
-+++ b/board/sophgo/milkv_duo_s/MAINTAINERS
-@@ -0,0 +1,8 @@
-+Milk-V Duo S
-+M:	Andrei Lalaev <andrey.lalaev@gmail.com>
-+M:	Hiago De Franco <hfranco@baylibre.com>
-+S:	Maintained
-+F:	board/sophgo/milkv_duo_s/
-+F:	configs/milkv_duo_s_defconfig
-+F:	doc/board/sophgo/milkv_duo_s.rst
-+F:	include/configs/milkv_duo_s.h
-diff --git a/board/sophgo/milkv_duo_s/Makefile b/board/sophgo/milkv_duo_s/Makefile
-new file mode 100644
-index 000000000000..a1b6aaee1489
---- /dev/null
-+++ b/board/sophgo/milkv_duo_s/Makefile
-@@ -0,0 +1,6 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (c) 2026, João Paulo Gonçalves <jpaulo.silvagoncalves@gmail.com>
++		emmc-clk-pins {
++			pinmux = <PINMUX(PIN_EMMC_CLK, 0)>;
++			bias-pull-up;
++			drive-strength-microamp = <10800>;
++			power-source = <1800>;
++		};
 +
-+obj-y += ../milkv_duo/board.o
-+obj-$(CONFIG_NET_LEGACY) += ../common/ethernet.o
-diff --git a/board/sophgo/milkv_duo_s/milkv_duo_s.env b/board/sophgo/milkv_duo_s/milkv_duo_s.env
-new file mode 100644
-index 000000000000..4c9f53d08118
---- /dev/null
-+++ b/board/sophgo/milkv_duo_s/milkv_duo_s.env
-@@ -0,0 +1,8 @@
-+fdt_addr_r=0x84000000
-+fdtfile=DEFAULT_DEVICE_TREE.dtb
-+kernel_addr_r=0x80200000
-+kernel_comp_addr_r=0x88000000
-+kernel_comp_size=0x4000000
-+pxefile_addr_r=0x84300000
-+ramdisk_addr_r=0x84400000
-+scriptaddr=0x84200000
-diff --git a/configs/milkv_duo_s_defconfig b/configs/milkv_duo_s_defconfig
-new file mode 100644
-index 000000000000..41a31c4ad46c
---- /dev/null
-+++ b/configs/milkv_duo_s_defconfig
-@@ -0,0 +1,43 @@
-+CONFIG_RISCV=y
-+CONFIG_SYS_MALLOC_LEN=0x820000
-+CONFIG_SYS_MALLOC_F_LEN=0x8000
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x82300000
-+CONFIG_DEFAULT_DEVICE_TREE="sophgo/sg2000-milkv-duo-s"
-+CONFIG_SYS_LOAD_ADDR=0x80080000
-+CONFIG_IDENT_STRING=" milkv_duo_s"
-+CONFIG_TARGET_MILKV_DUO_S=y
-+CONFIG_ARCH_RV64I=y
-+CONFIG_RISCV_SMODE=y
-+CONFIG_FIT=y
-+CONFIG_BOOTSTD_FULL=y
-+# CONFIG_BOOTMETH_EFI_BOOTMGR is not set
-+CONFIG_SD_BOOT=y
-+CONFIG_SYS_CBSIZE=512
-+CONFIG_SYS_PBSIZE=544
-+CONFIG_SYS_PROMPT="milkv_duo_s# "
-+# CONFIG_CMD_BOOTDEV is not set
-+CONFIG_CMD_MBR=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_POWEROFF=y
-+# CONFIG_CMD_MII is not set
-+CONFIG_CMD_EXT4_WRITE=y
-+# CONFIG_ISO_PARTITION is not set
-+# CONFIG_EFI_PARTITION is not set
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_CLK_SOPHGO_CV1800B=y
-+CONFIG_MMC=y
-+CONFIG_MMC_IO_VOLTAGE=y
-+CONFIG_MMC_UHS_SUPPORT=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ADMA=y
-+CONFIG_MMC_SDHCI_CV1800B=y
-+CONFIG_ETH_DESIGNWARE=y
-+CONFIG_SYS_NS16550=y
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_CV1800B=y
-diff --git a/doc/board/sophgo/index.rst b/doc/board/sophgo/index.rst
-index 19c9a19b1d4b..61aceafceea3 100644
---- a/doc/board/sophgo/index.rst
-+++ b/doc/board/sophgo/index.rst
-@@ -7,4 +7,5 @@ Sophgo
- 
-    milkv_duo
-    milkv_duo_256m
-+   milkv_duo_s
-    licheerv_nano
-diff --git a/doc/board/sophgo/milkv_duo_s.rst b/doc/board/sophgo/milkv_duo_s.rst
-new file mode 100644
-index 000000000000..2ae749a08215
---- /dev/null
-+++ b/doc/board/sophgo/milkv_duo_s.rst
-@@ -0,0 +1,86 @@
-+.. SPDX-License-Identifier: GPL-2.0+
++		emmc-cmd-pins {
++			pinmux = <PINMUX(PIN_EMMC_CMD, 0)>;
++			bias-pull-up;
++			drive-strength-microamp = <10800>;
++			power-source = <1800>;
++		};
 +
-+Milk-V Duo S
-+============
++		emmc-data-pins {
++			pinmux = <PINMUX(PIN_EMMC_DAT0, 0)>,
++				 <PINMUX(PIN_EMMC_DAT1, 0)>,
++				 <PINMUX(PIN_EMMC_DAT2, 0)>,
++				 <PINMUX(PIN_EMMC_DAT3, 0)>;
++			bias-pull-up;
++			drive-strength-microamp = <10800>;
++			power-source = <1800>;
++		};
++	};
 +
-+SG2000 RISC-V SoC
-+-----------------
-+The SG2000 is a high-performance, low-power 64-bit RISC-V/ARM SoC from Sophgo.
++	i2c4_cfg: i2c4-cfg {
++		i2c4-pins {
++			pinmux = <PINMUX(PIN_VIVO_D1, 7)>,
++				 <PINMUX(PIN_VIVO_D0, 7)>;
++			bias-pull-up;
++			drive-strength-microamp = <4000>;
++			power-source = <1800>;
++		};
++	};
 +
-+Mainline support
-+----------------
-+Support for the following drivers is already enabled:
++	sdhci0_cfg: sdhci0-cfg {
++		sdhci0-cd-pins {
++			pinmux = <PINMUX(PIN_SD0_CD, 0)>;
++			bias-pull-up;
++			drive-strength-microamp = <10800>;
++			power-source = <3300>;
++		};
 +
-+1. ns16550 UART Driver.
-+2. Synopsys Designware MSHC Driver.
-+3. Synopsys Designware Ethernet Controller.
++		sdhci0-clk-pins {
++			pinmux = <PINMUX(PIN_SD0_CLK, 0)>;
++			bias-pull-up;
++			drive-strength-microamp = <16100>;
++			power-source = <3300>;
++		};
 +
-+Building
-+~~~~~~~~
-+1. Add the RISC-V toolchain to your PATH.
-+2. Setup ARCH & cross compilation environment variable:
++		sdhci0-cmd-pins {
++			pinmux = <PINMUX(PIN_SD0_CMD, 0)>;
++			bias-pull-up;
++			drive-strength-microamp = <10800>;
++			power-source = <3300>;
++		};
 +
-+.. code-block:: console
++		sdhci0-data-pins {
++			pinmux = <PINMUX(PIN_SD0_D0, 0)>,
++				 <PINMUX(PIN_SD0_D1, 0)>,
++				 <PINMUX(PIN_SD0_D2, 0)>,
++				 <PINMUX(PIN_SD0_D3, 0)>;
++			bias-pull-up;
++			drive-strength-microamp = <10800>;
++			power-source = <3300>;
++		};
++	};
 +
-+   export CROSS_COMPILE=<riscv64 toolchain prefix>
-+   cd <U-Boot-dir>
-+   make milkv_duo_s_defconfig
-+   make
++	sdhci1_cfg: sdhci1-cfg {
++		sdhci1-clk-pins {
++			pinmux = <PINMUX(PIN_MIPI_TXM4, 1)>;
++			bias-pull-up;
++			drive-strength-microamp = <10800>;
++			power-source = <1800>;
++		};
 +
-+This will generate u-boot.bin
++		sdhci1-cmd-pins {
++			pinmux = <PINMUX(PIN_MIPI_TXP4, 1)>;
++			bias-pull-up;
++			drive-strength-microamp = <10800>;
++			power-source = <1800>;
++		};
 +
-+Booting
-+~~~~~~~
-+Currently, we rely on vendor FSBL (First Stage Boot Loader) to initialize the
-+clock and load OpenSBI and the u-boot image, then bootup from it.
++		sdhci1-data-pins {
++			pinmux = <PINMUX(PIN_MIPI_TXM3, 1)>,
++				 <PINMUX(PIN_MIPI_TXP3, 1)>,
++				 <PINMUX(PIN_MIPI_TXM2, 7)>,
++				 <PINMUX(PIN_MIPI_TXP2, 7)>;
++			bias-pull-up;
++			drive-strength-microamp = <10800>;
++			power-source = <1800>;
++		};
++	};
 +
-+To run u-boot.bin on top of FSBL, follow these steps:
++	uart0_cfg: uart0-cfg {
++		uart0-pins {
++			pinmux = <PINMUX(PIN_UART0_TX, 0)>,
++				 <PINMUX(PIN_UART0_RX, 0)>;
++			bias-pull-up;
++			drive-strength-microamp = <10800>;
++			power-source = <3300>;
++		};
++	};
 +
-+1. Generate a compatible u-boot.bin using U-Boot with the Milk-V Duo S
-+   default configuration.
++	uart4_cfg: uart4-cfg {
++		uart4-data-pins {
++			pinmux = <PINMUX(PIN_UART2_TX, 5)>,
++				 <PINMUX(PIN_UART2_RX, 5)>;
++			drive-strength-microamp = <10800>;
++			power-source = <3300>;
++		};
 +
-+2. Use mainline OpenSBI with a newer version than 1.5 to generate fw_dynamic.
-+   Use FW_FDT_PATH to point to sg2000-milkv-duo-s.dtb device tree file while
-+   compiling fw_dynamic. Example:
++		uart4-control-pins {
++			pinmux = <PINMUX(PIN_UART2_CTS, 5)>,
++				 <PINMUX(PIN_UART2_RTS, 5)>;
++			bias-pull-up;
++			drive-strength-microamp = <10800>;
++			power-source = <3300>;
++		};
++	};
++};
 +
-+.. code-block:: console
++&dmac {
++	status = "okay";
++};
 +
-+   cd open-sbi
-+   PLATFORM=generic FW_FDT_PATH=../u-boot/dts/upstream/src/riscv/sophgo/sg2000-milkv-duo-s.dtb make
++&emmc {
++	bus-width = <4>;
++	no-1-8-v;
++	cap-mmc-hw-reset;
++	no-sd;
++	no-sdio;
++	non-removable;
++	pinctrl-0 = <&emmc_cfg>;
++	pinctrl-names = "default";
++	status = "okay";
++};
 +
-+This will generate build/platform/generic/firmware/fw_dynamic.bin.
++&gmac0 {
++	status = "okay";
++};
 +
-+3. Use the vendor-provided tool [1] to create a unified fip.bin file containing
-+   FSBL, OpenSBI, and U-Boot.
-+   Note that you will have to use the file cv181x.bin as the FSBL.
++&i2c4 {
++	pinctrl-0 = <&i2c4_cfg>;
++	pinctrl-names = "default";
++	status = "okay";
++};
 +
-+4. Place the generated fip.bin file into the FAT partition of the SD card.
++&mdio {
++	status = "okay";
++};
 +
-+5. Set the board's boot core selection switch to RISC-V.
++&saradc {
++	status = "okay";
++};
 +
-+6. Insert the SD card into the board and power it on.
++&sdhci0 {
++	bus-width = <4>;
++	disable-wp;
++	no-1-8-v;
++	pinctrl-0 = <&sdhci0_cfg>;
++	pinctrl-names = "default";
++	status = "okay";
++};
 +
-+The board will automatically execute the FSBL from the fip.bin file.
-+Subsequently, it will transition to OpenSBI, and finally, OpenSBI will invoke
-+U-Boot.
++&sdhci1 {
++	bus-width = <4>;
++	cap-sdio-irq;
++	cap-sd-highspeed;
++	keep-power-in-suspend;
++	no-mmc;
++	no-sd;
++	non-removable;
++	max-frequency = <150000000>;
++	mmc-pwrseq = <&wifi_pwrseq>;
++	pinctrl-0 = <&sdhci1_cfg>;
++	pinctrl-names = "default";
++	sd-uhs-sdr50;
++	sd-uhs-sdr104;
++	status = "okay";
++};
 +
-+[1]: https://github.com/sophgo/fiptool
++&uart0 {
++	pinctrl-0 = <&uart0_cfg>;
++	pinctrl-names = "default";
++	status = "okay";
++};
 +
-+Sample boot log from Milk-V Duo S board
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+.. code-block:: none
++&uart4 {
++	pinctrl-0 = <&uart4_cfg>;
++	pinctrl-names = "default";
++	uart-has-rtscts;
++	status = "okay";
++};
 +
-+  U-Boot 2026.10-g3c39950264fd (Oct 16 2026 - 19:45:23 +0000) milkv_duo_s
-+
-+  DRAM:  512 MiB
-+  Core:  28 devices, 13 uclasses, devicetree: separate
-+  MMC:   mmc@4310000: 0, mmc@4320000: 2, mmc@4300000: 1
-+  Loading Environment from nowhere... OK
-+  In:    serial@4140000
-+  Out:   serial@4140000
-+  Err:   serial@4140000
-+  Net:
-+  Warning: ethernet@4070000 (eth0) using random MAC address - de:19:4d:5d:74:41
-+  eth0: ethernet@4070000
-+  Hit any key to stop autoboot: 0
-+  milkv_duo_s#
-diff --git a/include/configs/milkv_duo_s.h b/include/configs/milkv_duo_s.h
-new file mode 100644
-index 000000000000..f60aa23fc181
---- /dev/null
-+++ b/include/configs/milkv_duo_s.h
-@@ -0,0 +1,12 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2026, João Paulo Gonçalves <jpaulo.silvagoncalves@gmail.com>
-+ *
-+ */
-+
-+#ifndef __CONFIG_H
-+#define __CONFIG_H
-+
-+#define CFG_SYS_SDRAM_BASE	0x80000000
-+
-+#endif /* __CONFIG_H */
++&usb {
++	dr_mode = "host";
++	status = "okay";
++};
 
 -- 
 2.53.0
