@@ -4,169 +4,186 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21E33CCF2C4
-	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 20:17:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BC33CCF2CC
+	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 22:04:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9CF6D4090C;
-	Sat, 17 Oct 2026 20:17:23 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B49AB4082D;
+	Sat, 17 Oct 2026 22:04:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XXz0Z1YWEa58; Sat, 17 Oct 2026 20:17:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A7E40408E4
+ id M1bGh6CKm840; Sat, 17 Oct 2026 22:04:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 033A74080E
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792268242;
-	b=n92222x9pzZOBsnwnJNkVPgadqfiv7P8jGb6KHIOFoGsFoLwolt6lEa9f09WBjVeU4p6
-	 5UdZHOJNsOg0wRrunmjmJBgQpqVSEsrCWb6neanvM+VlN5YuQC8T2DG/sI9cbeG5ug9A9
-	 17IAcA7Lssh0q/gcLkYJBAZbukD1eL5rNh6v6RX+R75GyoS3OphrFw4t3nW9/5OMJh33k
-	 ru4PlI3vwCprrPf0L7VTgBfrGt6164H4gdWILPTI7VwLQ1hiz/klyxmRsb7f0KrzaBWgN
-	 9Dgil/U//vEl4lBZJ38IEW8oEeZYMuAEbh6O2wmGbP/Nz4BkuefRFld/T1kKfDOKa2w==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792268242;
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792274641;
+	b=LyhsRevz9VWq/9hQiE0qMJNw6qd+1Uee+U+2XXFJp0Tar3I4N3m2lHA9UXOFkDZJtwj6
+	 dFL+MkxwRy2uTyoEvchXxnyf14yNL4wyGes4l66k0BjTqjH63qVtfxl2MXqXah6shar/z
+	 XUlYDE0sZT24tlBmnCAS3AcuFmGudwnYY/WSBpy1b2nbZhxz408CAwEnfTqwkrbwfPzbr
+	 H8P7mX8bmEOfqXnQ0Am5J1LjC1byBHIXgXGK+Kv+Ia5ltdmVhlAcJwRAxFPa6UErxsYHN
+	 IGcUiOeYcnZy3izjTlFe7fqiqPhx9GmjnjrX7nv8YiU+Hep5U6IQ4c0cmrEAIEfscsA==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1792274641;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=EJ7SBnmZN3ABF0cLR/6Fk0jv1yg9T6ckUzc3vIHGm+o=;
-	b=iFYA16Co0/L3tqbmsvXwXYmOfmr7weGTBzzimmWzx+C0m3cY3NVuO0+mttSK6BktQF9c
-	 SMzQETtRnxhdQGvrz24nAqMt9dr6a8KKnAtJJozHrkUWNZsgAbjh0la+Mxx36x1pB4FHL
-	 qKIzL6sxmUGZXX1LPu7IurLDLAxqXW4Hw9WRzJ0JrNqlvCJU/GECc09bXNLn2dHlV5as/
-	 cOqJz8Z9YqqGBxZ9YkxV9J3BBv9Swib5vi/06JewR5VONVVQvXPDfGI5tcka6LvkfvZ0V
-	 osxo9ObFj6L4Z8Hd8TqKaQawKLc2LdfSZ62UoP+rMuM9UAXnx3uvWH2x2rLElzNiLRg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	dmarc=none header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=Q3O7R04C;
+	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=bYBS6zK8HJusPZnMB69sfD/vSTZQKcXZAyEjQrK7mzo=;
+	b=UxmrXCshzfPMZXMIVQqgjNnbxe9IZgZHvLolVbWc60mJVSLWWsXYb1wlDi10YeBl8nNg
+	 q4H/AOArIYxqGxetA9VOvR1yIEadwZjJlF8Qei1uWXzwSNRP7oxC/FqWcD6LBQEQNvVuz
+	 3Y73RWafbByiKJWehtK5txKKS4YGJYXuz4ulGVRk669D2/UmDbRESLNrn5AJ9C21DO0Aa
+	 NbrEi/OzSoGFWa5KBTY81kszbwnxjZbhm4xXClziLbsUncNnTmfs2mS7I13Xkx6g8RGcr
+	 EqEVR0yfKkiJIL9Sw9Mcr4CpcvGgFDZ8/c2wFsbZVVNzT29L/RCOYsHTXiFCvXhs+nQ==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792268242;
-	bh=EJ7SBnmZN3ABF0cLR/6Fk0jv1yg9T6ckUzc3vIHGm+o=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1792274641;
+	bh=bYBS6zK8HJusPZnMB69sfD/vSTZQKcXZAyEjQrK7mzo=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=msJu8rA/eDzxjYjg4Uy3wgb8Y/5v8ZjkeyZzS5E/dcQgrKwGn434jIBv2zKR1Icyz
-	 Eeag9moKjfdOhr9DgpeSamvrBmJArmKFDXdIagqHaVqc5Aq5Kpk6aguruLHfyy+69P
-	 TSsBzK844lI4LOZNBZSDzusdhaOKtLj08t+B3qK5y3TwXhQGNBqtN8oXJHEZDN58bm
-	 eu0QDD9k7NgQ7cwqeB0e9SY+pwFQOeRxP6yJ8ZbE9+Hnh6g30GshhTC9W5OTlBE23f
-	 K071viRsayYkFDU2JAAvua9pz1TBzU5XrI5rnAnBr6tnPcFNWjbDez80l5s8XRYV/C
-	 w0mOyR+uBD/IQ==
+	b=m3TDroB514gwRjBhurriWB0Gc/iioGVwIWe7EHYAk/gkhzCaC9q9RZ1nroWNlEZpW
+	 bOTkxz/vR8p3dX0bqwcpBpm8rFaDofsHUknL+SOdSb/1jhT7GzVAYbDvYqxz7c4otQ
+	 nZKstFMNRDg5qtl7tgXwQdDpTQxPhxmySn7CjuZbctEF+DZ/tgvZqeWjcM+bNlYiEN
+	 J9U1RBuHfqSa1OHZkapC+OO5wV3K2nx5QZDdZShRcECeRdxbHjOWmpgsBfSJ+i1Xz/
+	 M5BPrsLWmpDgYgcwWQBkH/MVUBRynVUZ52XHij3GuJ4cJRr+mphwiqBQaqvswB8dgp
+	 xic2+pGlyvn/g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A7E40408E4;
-	Sat, 17 Oct 2026 20:17:22 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id B63721DE
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 20:17:21 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 033A74080E;
+	Sat, 17 Oct 2026 22:04:01 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4263C1AB
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 22:03:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A790B408E4
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 20:17:21 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 2837D80DD0
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 22:03:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Cmfx6sqYKzB6 for <u-boot@lists.u-boot-project.org>;
- Sat, 17 Oct 2026 20:17:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 17F9E40882
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::e2e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792268240;
- b=rYP6ICKVQV9qDJs73fZv49rOtrBEqImkwIJ/UZs4z0zvFsHpeGECdiaDDCJ+aRAnSBOi
- wD+iwVNFnM25rqmGUuS58BTv+/k7g9TBx29G6bttfpvoJHeF0kg2VmYtg/inq6TKMj5Z7
- V9otrDttEW/bcp7CbHt7SovK3JTJtcaDKULkEu+5NyNFHp33/hVSykQZLEFzLbnBFduPx
- E6H17LEVjw2yn2FvOjVgGDHvoYjy4su6QKfM0teT5DQJE5B+Mci0ImqS+7elWIefWGf8U
- MYJ0VUrVFIZLD9jVN3UPcnxq+bVf9hRiI571gr5W/k911NQTjPA3T+NceFAne3EVgGw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792268240;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id grT6w4NvMuqz for <u-boot@lists.u-boot-project.org>;
+ Sat, 17 Oct 2026 22:03:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A816E80D39
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::b134"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792274638;
+ b=aXxp3gua+t2snsDcFRt5o0kpIJV6WHn8xHamY9NumCH3uu+kEaZuXqGKQLTQBn9OEb+b
+ rzZbU55So4xCwrR+FfdVW6PA0IZgnaSM+qzKG1tbi5S5AHgj5wjjoSTOVAS67ndjPgmAv
+ D9E8x03DmqLyEu7jQlYyrWCRHpPaxXC9Gk0bQDaeMNDQfxQ80sX4NwjcYxBEa12qNV0ZE
+ 20TSGIJ3B92G6Mb/NQBDJWezMS17zf2WRNml2/PQsmy2vvKKZ/+HHYmYo63nCXk2Hf2fu
+ ttrnm6d6EfD+Wq8lVXKSVRktgXVaaEqJpT1JfSC2TPb51YLBWiKHDXt0TbOZHnMMdAg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1792274638;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
- Subject:Message-ID:References:MIME-Version:Content-Type:
- Content-Disposition:In-Reply-To;
- bh=EJ7SBnmZN3ABF0cLR/6Fk0jv1yg9T6ckUzc3vIHGm+o=;
- b=SlD7EuM/HAznVcb52QN1dL3l/9G4iqU7bEhJn4sd5azHQS9v4prsIdfP0rEcdCDQjWsu
- vQN+BYver0KOW/6rSfwQ4WiPrrrE0tDGSR4S2Z7iHdNOBEtpK0nhmor6ZafvwvRYqK6Ub
- VkhBmva9OEO4e7ELXCFpvvyYvvNbmnTFy9MVVZ8Y3xqygEyEJ991JcuHaixeielks/dke
- 2evgL7uqxIGprZU2VzGOsQIGi1Vs43f+nXjLmQEB/5wQIh2H2yAUT4PNJ2SjcQuyX25WY
- W6GZijLWlHr6jA8fv0J3NdvFoYVT0pH1XeV3n17o9JLIWpq4+naIqAeSWklAZfeOLcA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=none header.from=baylibre.com;
- dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=Q3O7R04C; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::e2e"
+ X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+ In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+ Content-Type:Content-Transfer-Encoding;
+ bh=bYBS6zK8HJusPZnMB69sfD/vSTZQKcXZAyEjQrK7mzo=;
+ b=kl7N44LD2GYxxoiNCbDfOVaA0NU6I3oGZECZBIbFxn19YwaqIhSCj7TJ6EkDsBze3Q30
+ Lkq0rp9HsK2ilKV1SCdHjuejfhf/jbO4VYnjFVLAJqIoJ5qOeE+DgjP/5xLLXQKlIVEcS
+ S/oU2JxYlkv4EgwrMudnMHGFtwjkF9mkTprNKNoWo1OUucsiaYn9DTOAjXZCfrZqKnfk1
+ YXrJS3yh2bpWPmZtI/L39uZ0hII3O/bZt42QK7oslstwtMu96bFwqNlUBG1KRnvVe2CGd
+ 7Rsew6pT2EJG9q4Afx8u6258mlcU+ybJyDXEbT7lcdSum5aA3zTJzmPuwU5o2HvlXuw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+ dmarc=pass header.from=oss.tenstorrent.com;
+ dkim=pass header.d=tenstorrent.com header.i=@tenstorrent.com
+ header.a=rsa-sha256 header.s=google header.b=TADTYuPb; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::b134"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::e2e; helo=mail-vs1-xe2e.google.com;
- envelope-from=hfranco@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=Q3O7R04C
-Received: from mail-vs1-xe2e.google.com (mail-vs1-xe2e.google.com
- [IPv6:2607:f8b0:4864:20::e2e])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 17F9E40882
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 20:17:19 +0000 (UTC)
-Received: by mail-vs1-xe2e.google.com with SMTP id
- ada2fe7eead31-7cc0e865dd1so335887137.1
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 13:17:19 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::b134; helo=mail-yx1-xb134.google.com;
+ envelope-from=asrinivasan@tenstorrent.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=oss.tenstorrent.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=tenstorrent.com header.i=@tenstorrent.com
+ header.a=rsa-sha256 header.s=google header.b=TADTYuPb
+Received: from mail-yx1-xb134.google.com (mail-yx1-xb134.google.com
+ [IPv6:2607:f8b0:4864:20::b134])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id A816E80D39
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 22:03:57 +0000 (UTC)
+Received: by mail-yx1-xb134.google.com with SMTP id
+ 956f58d0204a3-6756a01fa01so908839d50.0
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 15:03:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792274636; cv=none;
+ d=google.com; s=arc-20260327;
+ b=RtZVv2QNHkEgPMwpyW2auWEcT0Ze0SjZSKDxp8VF/y6WSW3YLIxZ9/LXgJaldBKY15
+ qdTSieEGqEea+Fv1fesHQU4Z44xt/68mqm9KWsR7P4Q12PdR61EPGrstvuOR00kHBsDY
+ rj4PjvieV1kQVUb+NhYr/usRd8i0SkptCG72WlTrgPc7ykCp/nb8mUo3BsJYq5NWBB7C
+ +fvB+nUeV82PNpdEGSDvcrZsarKyTHp2ewdI17OcF+yTNcAYEWl214DgCyvBy0wmF2yZ
+ G3bcXWiKG4ZVCxxhM0++zawlZLgnEslgPElD0OxJPK2CknsJ+FeywbKAuZSggCS47Jhg
+ JcbA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=bYBS6zK8HJusPZnMB69sfD/vSTZQKcXZAyEjQrK7mzo=;
+ fh=oIMmC8iu+RpL9QS0aPIrVHvb7dY/DmDKYgM4/PZle3M=;
+ b=TCVqKWWyQYhcEe9WeF9MwPBXW6gdJVj9WnQtTR0hVfgpW1spyGJLi/GLUWZ/V9JTgT
+ 5yOGAlBM5due5BVmfNafQ6jXzcIgSSAQ2+FHm4GXMOgJ//5KqT8VXUILxi3jivSWC09s
+ ZPic4KwlKbweJbPJjVXiWdwFtXn3Bn5btp+L1dMa0kVrm1cHoL3lGiOuCxxKIIN48KFX
+ g3U2ENZTN06Z379yy2A8PkETD4hMRZWfhdoSCpFkZ4vW6hAJgTDQzPgUAZG6sfhAaj6P
+ gB921kRrbeDOONznjbND+MI0OCpx/kYsHy4gZdEOW3ohFyBAA11fqG+ZsEATWsvdQ7xn
+ pNug==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1792268238; x=1792873038;
+ d=tenstorrent.com; s=google; t=1792274636; x=1792879436;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=EJ7SBnmZN3ABF0cLR/6Fk0jv1yg9T6ckUzc3vIHGm+o=;
- b=Q3O7R04CmGpBRQWZAI9xI6bXv8vsnOBMfkbKfNQ7lQmGxJk3SsJBIeren5JtIL49lo
- jg7yQ7wYvcwj8TmKYv98piADEpCG1skKrAeFCf/LXXgyHBe1GWR5ZdP+vJq6iMz4JEyZ
- Lom7U8B2MU9IeRahJWKkXbzc/SaFnMTVyzpFcIyFMV8+jqVEUl2uhoYw87j134QL5LaT
- 37fKIm3AaZLRbRhHn0qyYL189m0Vu86cnlI/Kg3YsUfDoYiP+Rk4znd/UtM8Wny0kjxV
- hAtw626n131530G9J9Gd8O7g+LoXdsLvt8GPi4KKBCsIBVjY2DKPyV2GpKOeYd95CFxt
- SRog==
+ bh=bYBS6zK8HJusPZnMB69sfD/vSTZQKcXZAyEjQrK7mzo=;
+ b=TADTYuPbre/Y4tSX6fM21jEeO4Sx8mQYdDtJxjAU+r+5n3RLoLRPivzfZDutPSwdPb
+ KWi2pEqS+CUuueKO8vyBroBFp2bS9Vin5XL4L9pogwG1ZWqkOVsGXtFNisUwTfUWQNwS
+ ceulpWDdhUOaErb2vMrLc9VY2PDdEszIJFDEhQogp4iFW+/AWsDpJ17P69BWr3/mLKmA
+ iYZjMklCjrtYLF2qUt2uN0xCZRtQZ0si87kFpEP20MdLHalIpCk5eBCq1A739TBO38nD
+ XmAi7FS02noO8so3oGLREkheKItEqOxqgz971aCEcWcVZ/lVG01NntOwOqalqHGvGWXG
+ Mu9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792268238; x=1792873038;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
+ d=1e100.net; s=20260707; t=1792274636; x=1792879436;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=EJ7SBnmZN3ABF0cLR/6Fk0jv1yg9T6ckUzc3vIHGm+o=;
- b=L3XogM9Qlc80zyWV9gFyoHsy7XOf+YM2I90TC0T4a6xq5pjo8VAlXGL6cYjwKueF92
- PPgCI/qsFGEIeD7DFRqEHHrQMZRiSdsAUzPo4Xo2sCuhpASeSZezLNPmDj+4qiCAZBTm
- TpsFMvSrmmXewE0I9RpPZ+PDFA1ZAlniXi9wFf94hJjBNjq3WWIDwZTU7wHjfvzW32Zo
- ska5fTe1J1arUjyMrg7rwSA8OXW9wFrQl78xMfkYsOd5Si3CVjPWS5DmdYB2Mq7yLWtp
- DzP1u+Ot3ZRXFPgAEAHZfWrFa26doCfwBS8U+DT3NHKqAfRwiuA68EiVBx8ubIreSufu
- 6LgQ==
-X-Gm-Message-State: AFq9FYLmClps5BLcio4u4fmoX/f0LaQVjgmLWMnKbRdRxSWhAQZ4usTo
- u1DZSajui7Ii/WfvoNNipOV+pev+UResfiwibyHh7y+A7fI225lsT4jznhEG1ASGCWct5lYyH7r
- D6wyppOE=
-X-Gm-Gg: AYBFou3ggKw2X7ClQiMg3ExkawAo2xlopme5GP4KzAbteNDx11epoAztWYjzFv0gjdp
- oQMQvpbcaWj8TS5+uuE1Ek3HP7G+1yhb2Ilalvkv15XcyIWYpZ4VDezH3Kh0vdpqhzqpgdo2AB/
- nsfkC0A5mUYRgOXvxzBq3JD5CWqhQxueBgVmP/pt8SbEIdobZ8gh/eJRLeBOndjl47jhse0Ez4I
- JT+dvmeJRi7EW8MX4dgJbv79JZoWKbx9iJLuXRgurtpi01GUyFYKI5aHiyq5OSJhiEEU17pqeaQ
- YGUbRRN0RAMIZdtntgAxNoHS5LLigDg+Apb/0PzEZPUKpiJnR/yXMY1JktBexdEDd0ctYuCpeAW
- V4AlRKjU4jegjJUMH5d7oOFWmk0uXTn03CyN31iGPv8c9JnJTJ6Xsakj5rRSgKLaBvxOBy7wJQN
- 4tASCouls9mtWBR/4Gu4wt/yUzNqdf1sEHblF2+rrRVTPfLWwg48KSiy8ep4/GS7R1zDlONeuPg
- Yis7brv9uyXLzQ1n70u32MqXCIKPC0zDafL1wJzwHta19a1wG6UFNbBkUhqgQ==
-X-Received: by 2002:a05:6102:162a:b0:7a7:1db6:c769 with SMTP id
- ada2fe7eead31-7cc369ac3efmr828905137.22.1792268238090; 
- Sat, 17 Oct 2026 13:17:18 -0700 (PDT)
-Received: from hiagonb ([2804:7f0:9541:c052:e6d1:375d:d62b:8560])
- by smtp.gmail.com with ESMTPSA id
- a1e0cc1a2514c-990835c2180sm4725880241.3.2026.10.17.13.17.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 17 Oct 2026 13:17:17 -0700 (PDT)
-Date: Sat, 17 Oct 2026 17:17:11 -0300
-From: Hiago De Franco <hfranco@baylibre.com>
-To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>
-Cc: Kongyang Liu <seashell11234455@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Zhuxu Ran <zhuxu_ran@zohomail.com>, 
- Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>
-Subject: Re: [PATCH v2 0/3] board: sophgo: milkv_duo: enable standard boot
-Message-ID: <atPXMIVNYWOKWJPm@hiagonb>
-References: <20261009-milkv-duo-bootstd-v2-0-c4679e726d10@baylibre.com>
+ bh=bYBS6zK8HJusPZnMB69sfD/vSTZQKcXZAyEjQrK7mzo=;
+ b=HGY8K6zZ/lFlJf+/cjWCW8z/sEmFK3/GS2EkpnuG+DL7fIDkHKTV1FD3AhGULecJ6E
+ VMklAaoI/2aWZYqWfAtAC2Hsi6XwuHV5AOxnIiJsAQu5gXcaHakKy2BWblVC94yhB7gK
+ m7+GuA7dqCtUKuiVwff9YFFLbPLEISCkzhC0BnOAZ2jKrEMnzb54SocXQ7fG/0KIFV33
+ FFFGxgHdtdXbQjr+KMwbYy74rKB0Zq0jgtXeNhjGJ3Jdh8ASTUvWLPk10LTv5kkEkK7e
+ gTcJeZQ+RNITkZ6sBWYiiZGI1rRCZZNDT6h7j6UOTGi0L8KjEO7rAR7YDXUTGOm1i6Cv
+ mcZg==
+X-Gm-Message-State: AFq9FYKZQnCjmGIrt2TzuGCUHdifRtyFT7Ce9rVdlRia0TARRoel3IX+
+ SPuOL4w0psORAf0KTp1ill8jmi0yREszvl86CV58BbzWAUkPTluvKwz399crRM02gr6mKe8kUh4
+ nR42BAdJfmHnvIMKFcJf+JBloMHuKitY6Xp5zy17acw==
+X-Gm-Gg: AYBFou3aHstlez3zWbW0gzBa7CzESKUP7YGBxypLuKdEmQfoZBEJOAEf3oiAwPZCagW
+ C0difHc7yJ9zkC7hsUVzPnD66waCrxjI//HU8yaBGimqxcQ4qXxYnsjPTr0mHZUfRUbl9Y8s+zB
+ jkdyO2lrClJ8fV8pptBNGFpjTU9WqzPZ1E2sXwkD4l/3ofVlMM5OGckgGa9svplCY6FREiaE//W
+ 5AHC3npjUfxZlTIO9YeLtUSrmFm1IjKT9HUqLQ9Ak0iWgd9ZtZtxyluGKvy6epS0w4yHyjzC1VE
+ UiDTGNXD/BRKJEXu2TL0NreShpKdRhiDFxG18UL5xniYp3UALjMpolh+c0OXnJj7ta8l1mB80nN
+ rFApbfLf66wiPF/A6NIR87FAsIFtgWQk0upz9PGFop26H
+X-Received: by 2002:a05:690e:b82:b0:66e:3d39:8f6d with SMTP id
+ 956f58d0204a3-679ca702592mr940798d50.34.1792274636048; Sat, 17 Oct 2026
+ 15:03:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261009-milkv-duo-bootstd-v2-0-c4679e726d10@baylibre.com>
+References: <20261003-aspeed_vbios_fixes-v2-0-f8e593f024ab@oss.tenstorrent.com>
+ <20261003-aspeed_vbios_fixes-v2-5-f8e593f024ab@oss.tenstorrent.com>
+ <CAFLszTg=sjS0hHdh9peMk-bzbHssVpMFPDyTu694-nf3W7p8HQ@mail.gmail.com>
+ <CAEev2e-CYqKF75DtQj6A9qXpTGxSyJJUbLRieyxaX6YDWOaf7A@mail.gmail.com>
+ <CAFLszThAHMM_RjT_mW+3cG0oHfyO88+KOGeynOoJJ+H=DRN5Ug@mail.gmail.com>
+In-Reply-To: <CAFLszThAHMM_RjT_mW+3cG0oHfyO88+KOGeynOoJJ+H=DRN5Ug@mail.gmail.com>
+From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+Date: Sat, 17 Oct 2026 17:03:45 -0500
+X-Gm-Features: AclHuK_Qu4Wk5ysfbD771EVCnDPvnC0DBrhkq5xuInZsGM1ZnM7P04Dw9xj1X-w
+Message-ID: <CAEev2e8gCAdRa6-EDE9HMBmue1fOxX6DiPRsQP=9vfVruQXisQ@mail.gmail.com>
+Subject: Re: [PATCH v2 5/5] bios_emulator: extend VGA I/O ports to include
+ ports 0x3B4-0x3DA
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -180,86 +197,40 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Yao Zi,
+Hi Simon,
 
-On Fri, Oct 09, 2026 at 11:58:21AM -0300, Hiago De Franco wrote:
-> The Milk-V Duo (CV1800B, 64MB) does not enable CONFIG_BOOTSTD_DEFAULTS
-> and has no environment file, so U-Boot has no bootcmd and none of the
-> kernel_addr_r, fdt_addr_r, ramdisk_addr_r, ... variables required by
-> the extlinux bootmeth.
-> 
-> Enable CONFIG_BOOTSTD_DEFAULTS and add a milkv_duo.env with a memory
-> layout that fits into the 64MB of DRAM:
-> 
->   0x80200000  kernel_addr_r       (16MB)
->   0x81200000  kernel_comp_addr_r  (16MB, Image.gz decompression)
->   0x82200000  fdt_addr_r
->   0x82300000  scriptaddr
->   0x82400000  pxefile_addr_r
->   0x82500000  ramdisk_addr_r
-> 
-> Also reduce CONFIG_STACK_SIZE to 1MB. LMB reserves CONFIG_STACK_SIZE
-> below the relocated stack pointer, and the default 16MB left only about
-> 1.4MB between ramdisk_addr_r and the reserved region. With 1MB, about
-> 16MB are available for an initrd.
-> 
-> This series depends on Zhuxu Ran's "riscv: sophgo: Use upstream
-> devicetrees for CV18xx boards" (v5), which sets CONFIG_DEFAULT_DEVICE_TREE
-> to sophgo/<board>, so that fdtfile matches the Linux devicetree install
-> path (sophgo/cv1800b-milkv-duo.dtb and sophgo/sg2002-milkv-duo256m.dtb).
-> 
-> Link: https://lore.kernel.org/all/20260927-milkv-duo-upstream-dts-v5-0-7f64983e59e1@zohomail.com/
-> 
-> Tested on Milk-V Duo, booting Linux through "bootflow scan" and an
-> extlinux.conf on the SD card.
-> 
-> Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
+On Fri, Oct 16, 2026 at 5:02=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Anirudh,
+>
+> On , Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com> wrote:
+>
+> > Let me propose a different solution here: What if I just drop this and
+> > the previous commit (support 16-bit reads on VGA port)?
+>
+> >
+> > If I implement custom ops in the Aspeed VGA driver for all
+> > BE_(in|out)(b|w|l) calls, then I don't need to touch this function at
+> > all. All the port/range checking needed can be handled in these ops
+> > that biosemu will call. The existing biosemu code will just look for
+> > the custom ops in the driver and fallback to the existing generic
+> > version.
+>
+> Either approach is fine with me. One thing to bear in mind: ports
+> 0x3B4/0x3B5/0x3BA and 16-bit CRTC accesses are not Aspeed-specific,
+> they are standard VGA behaviour that any VBIOS may rely on, so fixing
+> them in the generic emulator benefits every future user. If you prefer
+> the ops route, please add the hook mechanism itself as a generic
+> biosemu feature (not Aspeed-only) and keep only the truly
+> board-specific quirks in the driver. Otherwise the next VBIOS we meet
+> will hit the same gap.
 
-just a ping about this patch, I do not know if it was picked
-yet or If I should wait and rebase on v2027.01-rc1. Can you help please?
+I'll keep these changes in then.
 
-> ---
-> Changes in v2:
-> - Set CONFIG_BOOTMETH_EFI_BOOTMGR to y, as the default value.
-> - Updated the commit description of patch 2.
-> - Collected Yao Zi reviewed-by tags. 
-> - Link to v1: https://patch.msgid.link/20260929-milkv-duo-bootstd-v1-0-1b75c9ad6483@baylibre.com
-> 
-> To: u-boot@lists.u-boot-project.org
-> Cc: Kongyang Liu <seashell11234455@gmail.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Hiago De Franco <hfranco@baylibre.com>
-> Cc: Yao Zi <me@ziyao.cc>
-> 
-> ---
-> Hiago De Franco (3):
->       board: sophgo: milkv_duo: add environment for standard boot
->       configs: milkv_duo: enable BOOTSTD_DEFAULTS
->       configs: milkv_duo: reduce CONFIG_STACK_SIZE to 1MB
-> 
->  board/sophgo/milkv_duo/milkv_duo.env |  8 ++++++++
->  configs/milkv_duo_defconfig          | 12 +++++-------
->  2 files changed, 13 insertions(+), 7 deletions(-)
-> ---
-> base-commit: f8eb3469e1a17c79b047b3fd38ae820e8816a115
-> change-id: 20260929-milkv-duo-bootstd-14de5e4e03ef
-> prerequisite-change-id: 20260702-milkv-duo-upstream-dts-b54aed41fc61:v5
-> prerequisite-patch-id: b8e6815314b7881a02de0066232864d522c4a26c
-> prerequisite-patch-id: 0df1fa5db1b2bff402b429809796bad99a517483
-> prerequisite-patch-id: 49e1e8263cf0a5ba8d63c8b598b6382cde5284b2
-> prerequisite-patch-id: 86dd30e784f022f0a7bb6fbf125c9699467176d4
-> prerequisite-patch-id: 49070c05ecf58331ec519a57d1b82f8b2b835a89
-> prerequisite-patch-id: 6b6881e45cc6de6544aaa4509db21611158f4fa1
-> prerequisite-patch-id: 7198127d4602eeb14212087ce9bb694d84e71a4c
-> prerequisite-patch-id: 3a58bd8a061707ff27b8538d4897def3b595dc36
-> prerequisite-patch-id: 9055ea941b73e35d1e825787d7eca14ffceb8e8b
-> prerequisite-patch-id: 554c1487e8d596e0099677ca88eee0021b1ffbae
-> 
-> Best regards,
-> --  
-> Hiago
-> 
-
-Thanks!
--- 
-Hiago
+>
+> I'm ok with whichever you choose, as long as the generic path still
+> works for non-Aspeed callers.
+>
+> Regards,
+> Simon
