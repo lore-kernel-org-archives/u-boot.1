@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59DC0CCF2C9
-	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 13:01:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A5D9CCF2C4
+	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 13:01:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1F61881387;
-	Sat, 17 Oct 2026 13:01:49 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E6AC340976;
+	Sat, 17 Oct 2026 13:01:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oi_kvO1vdlLJ; Sat, 17 Oct 2026 13:01:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 66C77813FC
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792242108;
-	b=N/WGwZQcjLO3RaCRQjOlVCHOW3pfgrbNNO+1Edup/chxpkvzryK1Jwjem1IFUeeTZOjT
-	 2Iy4/ndeRJSmPS7F/8R7Jv9kynM/3pGpGHdK9fIObQqf5McfEWCi9GNT/NWWbaJVzXy1Y
-	 FCxASgQpXt3Cr1aG+0rF2NgtiqMaR14fUGyD9ZE5g7fdXvpdopjm93++CKVDrX1gH14Pv
-	 7HGqAJMJg7uMxfyMG/T+sQ0UkcswF7ls/0kNsV9qND893Eebbu9KXShbINbaQCq5jW6vf
-	 YYj/2T9mWdvd+dVQZ/RTpFXZyoQ3XVaFfjaHrD9PvrzsvKZZ42/Byyu6d5mgXTCLwfg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id INXPbcvMf1_z; Sat, 17 Oct 2026 13:01:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 35C4D4095D
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792242110;
+	b=cEqRcPtLFuX0K6L63c9PiYphUCJZbVDhWDPbBW9BS4Az7c8qieWw58UDFSgvbDP+eo7F
+	 e2oCOEk/G4qlPYusR8OBeb5R/eMwfM8WjN7xo7CVXjnwjOcC3+fPjKcqYu/+A+V8CiHpN
+	 9+1M0cLiAvCHuk8vqTTLPo4m0nB/1qRYPLHbytQcDAGeEKW/N/JZuHWdfwA+UO2bbxoSM
+	 hy3P20QXECR/h82B6iOraSwGRM2JaMYUxYFKiSUj0ur94/MbEq90EzLmaQWTT9ySRISFH
+	 sI89+PwRdB3KO7WkSkYgO9cjbg5CBrsGCdS5vBWs00qns4yRnXr5hURTjTXJq9xFqoQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792242108;
+	c=relaxed/relaxed; t=1792242110;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,50 +32,51 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=lybUT0N3joVAqqF7ORUJTj5DfvK7uupd0cV71jEs+0c=;
-	b=pOW0XVYzQ43Q7Ptz/CrxvjLU01XWscpcFRseGqxtqKnKCypyPkBA4a1tNHQO5MKfszT3
-	 l2ith27cUV8VR2gmxc+SuPUD6z5mWHFwBlxhGKIrPrRqCLFeexpwMqtmcBgXcw35FhXXB
-	 KfR82laL3jbZ2qkYg/4uXJI6iVXPJALkB9sIqkIte1YtsHEninwlA16PfUcAMB9QRTZOW
-	 7/2RXo9pgzzrKdq6J779W962Bikd5IDCplnpaO5Bu7Ooz6svJoC3G69xelojyi5hMep+w
-	 1TZvU/V/gnGPRdDEVMSpxXYqlEjPXtnQCpg9mYHXDewu1bXXNEzMT8ld0iO0zahbuTg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=jrAiSfzoHyGfdrkDjk0nPCuPkFcA8HOa7E26aZtiQ4Y=;
+	b=EJFsUPzuGbb6rZlicN3/pgwFZaiCUScJVP6yE44D1o1SFrtdIIBDyHPzlBLRAuO6hy7U
+	 guZztGWwIZUVJ5fY34yuwuRmZvVY4+l95HdpZb5QyS0eryJpoZ5d3A3Ca1aHyEfjmTQOz
+	 FRj3DpCkbws041ZykAmVoQ+E8oFBafm11yfXfOzPhXWlpBDCvgH2xPhPGtn55/zEG1Jwm
+	 owNbtPGoybmmghEF/4ajA1cVHmKc4K7RvWJhOvncgJ89EUdF+yaNIffoMaV4y98YRBCkb
+	 c+migvfXK85L/sSvWN2XJkE9AYy1zj3YH2wUeHH5IREV9+dOoD8g37iA7eotfMy/cbQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=kernel.org;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=AkM4l810;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792242108;
-	bh=lybUT0N3joVAqqF7ORUJTj5DfvK7uupd0cV71jEs+0c=;
+	d=lists.u-boot-project.org; s=default; t=1792242110;
+	bh=jrAiSfzoHyGfdrkDjk0nPCuPkFcA8HOa7E26aZtiQ4Y=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=Uemd4pfVB7r3OYzfwcwsLtMiIjwP2OAlZYNwP9DVSRVKKDqELUi4BqEc5baNeAMh/
-	 fQpGoFgyDkQEx4N8q/TcnUqQ794c+FopE6uAShMgtOQQKrQv3ofKBuA+KH8gnGz0DF
-	 CZ+3GFmcwjqW5v6USR8DTFVmj0ptiLJ98Ty76PWBKCKD8wOOerChAWJwI2ATRumyuk
-	 oiniwG6BxjhJosgsX396CQawpgdyICgudWsJEyuNLESjrc8s95wABuY+FRcfAW/dPq
-	 NDAPnTkK4LjuUTnrY1wtdxhcuIU9BbZXoLRBG7+KsvzrRLIQ5EXz9UMhExjgBIs58G
-	 vXe8XypQ865GA==
+	b=mBJh6ZFQsiHqaUiG9A3MuH2rJc+mqNh2mYFM2dmI8FHK8KERW0lgLue5WSfLOwFdK
+	 BgtQwLC88dHU3kIXfa6A7lhLTpGj8B1LFRLQGgnwIjpyAJNQloa5+HcnVv0J5wL/Sh
+	 j2y4Cyjoe/gZycIgUiaGU7f27+ZX8y7/CG6KwxLZxPL796VCf6r7QhRU27A37z2TmA
+	 rGiEsGVQiHPu1AMjoAmwmGBNRgY74NjCeDPlqR9sayZrY+ouBTOSNy54XUov6GQD4M
+	 Xu43hBtIR8e3q3u2hd1/H/j+W/Pysy16Bz7k5xx0PmIzrqZt7RpeVlBnBdhuQCaZ6B
+	 3uzW/rQX/bQaw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 66C77813FC;
-	Sat, 17 Oct 2026 13:01:48 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 69A42362
+	by smtp4.osuosl.org (Postfix) with ESMTP id 35C4D4095D;
+	Sat, 17 Oct 2026 13:01:50 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6F3551AB
  for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 09:10:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4DE6D4018D
+ by smtp4.osuosl.org (Postfix) with ESMTP id 6CC12409BD
  for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 09:10:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rErMNV1xHEBt for <u-boot@lists.u-boot-project.org>;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id t9zouhMtSkFt for <u-boot@lists.u-boot-project.org>;
  Sat, 17 Oct 2026 09:10:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 9E89D40176
-Authentication-Results: smtp2.osuosl.org; arc=none
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8F95E409D8
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792228229;
- b=WOuC0Np/czI/DWINqkr7jGaAGfminj/yqFPCNwQpZJkMoDZ7bkFut+7p+ZstDFi+h9jL
- zUaYL02yjXNZDyEZlXeDLy9F2++rD7ztX5sBCMtN6qHSjBaKRh113HL6xoUO0p7mN8JUS
- x6HDNGZz7IgKYCZ8MMIZ/LFRZFFUWt1cQRdSUN8PHhazdOzA4paU2PFTkWLYJjhWYEaJk
- fdrrtuQje69mw9fYCTOyQxHWONohPMxvm4kFgfdLnsqYP/+wqxNNFbSKmt7vKDxliK21b
- IhQwUSudFCTNr9aVAZiXsviDa0Y2oQ93BqvfNlg55ICJzoPLSJqIJxFtJjDIlYzLW2w==
+ b=S3+EnRI5LNpyZWhV7OQdvyNkQDG+h1rTvIJahiwJMvoXJ6QHHSi9qiOQWWoGsyMolKaw
+ 5T99oJq0374bKIU9EeQ2DGW9ZVJ9ewIYSlZca8EsfXWIbNa/igbqJvLr6n0eR39AvDxzI
+ kHbuTMloNGldMDHcXTs7u3gW/6nuYJfMI7lVZJeStifQUOCOFjcl2+mq7MXGz+GFIXIdo
+ bKTU3xENyvt4eKJWTwrvH2esvK5KtGRHkRz0SFVDptT1hGtLTjaGvjgdn+pecgUPJQITv
+ EICGZRYf6h4pFIjEF1OwGqw5zCldkPTsH0yGV3ajDgG5Lliuh/7YLNGeXEHx8gr8vNQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1792228229;
  h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
@@ -83,56 +84,55 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
  X-Original-From:Reply-To;
- bh=lybUT0N3joVAqqF7ORUJTj5DfvK7uupd0cV71jEs+0c=;
- b=TWyffpRsew2NJHgky1MfgNfDU2vnFiNgWcFSF0qC4Hsr8KXQynTtoNzppq9IWwmQCMfJ
- X/O+/ArYXnfQXDSbz5WOKDJUU3CG6XW7JaH0V2S4bcA1AEXGpaSWF0PWAh39uOOkpIilu
- oHV2yZJ0bWQRA89BUIdCXqFMqm+tB8v38rIiiVoBNhqdj9UFKbCDyawiiFSYhTU+8ZCqD
- qCh2DCMK5iRcD2UOJvrtBfZrCG8nBszvVO/o5iwCDgZk3U6ZsY1+vGD1DLGVl8BAD/m1G
- JuShDqnGLKctBg0NoIZ1pmuQ25nKVdF3d2nj8u5tXau8SS8eDZ15ftQmzPoniurdrhA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=jrAiSfzoHyGfdrkDjk0nPCuPkFcA8HOa7E26aZtiQ4Y=;
+ b=LsFGYoACmSPxIMhkhaVvtaxkX17vqPhtnkQLMpCsH5GkFuuyAX8bFCyhq9EVGC6YY4QM
+ MQjS2tAQY0jjnOrEkTqL++arggWK4MW5ggvB0gsWC3o5rQkYvFb8hcNS3BAIsDeppCtjl
+ AuVdB7F+W94NoRDIYAO1PKMOTuoreSD9EQND6MdTG2unLB9eGqtbi9uV70KuwXxepf74W
+ GlIRf4xH6oi4SJjJrYfAIA/85FTJ8YlkBrMSwXEo8RA9KZIzdOP32AqL1c+QFvBCB6w80
+ C/UE3DQGUzDzoFCX1n446ENhboRD7YKFCIjzwH+tU2K4nl9819V/8q2xQiIRx+UYcUQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=iFdry2dn; 
- arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ header.s=k20201202 header.b=AkM4l810; 
+ arc=none smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org;
  envelope-from=devnull+petr.hodina.protonmail.com@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20201202 header.b=iFdry2dn
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9E89D40176
+ header.a=rsa-sha256 header.s=k20201202 header.b=AkM4l810
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8F95E409D8
  for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 09:10:29 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D81EA4479D;
+ by tor.source.kernel.org (Postfix) with ESMTP id 7A34E6022E;
  Sat, 17 Oct 2026 09:10:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id BA550C2BCFA;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2AA6DC2BCFA;
  Sat, 17 Oct 2026 09:10:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1792228227;
- bh=ueJM+a7vXGNBCVF6teXYhGT/FZL4prLZ3HbtP8UlHR4=;
+ bh=mOL3XEtHAbOwTrxhLTeuxQa1ZmaorbfaK+kA7D/LLBE=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=iFdry2dn2RlSnqDQGJi1Pp3W3/Q8H9VywTZbK78VsukIPRuytvZ7U7cTdDUKQcN+E
- TgLB6wPJ/+NYK+ILYCMH9aBiXGCTTpVSKyHhtTJR8K5cJHiUgacFe7nugMeUov7t84
- 1vMwhSpIN+3g7TSlkFGkNgs4sEqn4Y8TVumGmkLmRv8kTKB9ID1HQminau1ONXfsl8
- l1olwq3DuMwmVRns7JzcTj8Y6aYMAL8cSx6D4V5xlwOZ0gGLB4aWQ39+PLjmTUDn7Y
- xxVmOxOpLgKDUfsdyK0j5PZ/jrK4zDGJMv0+n5tANt0j8HrXdX1AtbZa7oZddIZi9q
- ZoMYJjR7PFgOg==
+ b=AkM4l810faF3SJGPgcg4IW+Y9cyQ0XFzJ3RrQ1MkOCLKWGGu0b+x4HO/28Du797Lh
+ BDIxuzspRCYTpwtV+m9c00d/NFbFtKbdN8yUWpnJMSPTrmoUdj6KqjyfFcBgeaxN3h
+ 7UxfSlvk/Ckh2WBvWjqtvIgviMacI45f5jB0ofCX3YVVRjdXJnMzXGqxiJL78mpONL
+ YWxU506Nmo0g4CD09kj7JWNWiBRjY/2WdfiEf6koHwil1nJagg+rNLwGuQkQi5y65v
+ ojUIgypDMJuOMxrbJkCceRplRuND3nOm8Ne0iILd9O3lb9UMjugRQ99A317b3L1zao
+ wHtnlpYfWP58g==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id AA5E2CCF2C9;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 0E502CCF2CA;
  Sat, 17 Oct 2026 09:10:27 +0000 (UTC)
 From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
-Date: Sat, 17 Oct 2026 11:10:26 +0200
-Subject: [PATCH 10/14] test: expo: Test a box with its own colour
+Date: Sat, 17 Oct 2026 11:10:18 +0200
+Subject: [PATCH 02/14] test: expo: Add a test for menu section headers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261017-b4-expo-colours-v1-10-479ac06e7642@protonmail.com>
+Message-Id: <20261017-b4-expo-colours-v1-2-479ac06e7642@protonmail.com>
 References: <20261017-b4-expo-colours-v1-0-479ac06e7642@protonmail.com>
 In-Reply-To: <20261017-b4-expo-colours-v1-0-479ac06e7642@protonmail.com>
 To: u-boot@lists.u-boot-project.org
@@ -143,11 +143,11 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Petr Pavlata <petr@acrux.cz>, David Heidelberg <david@ixit.cz>, 
  Petr Hodina <petr.hodina@protonmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792228225; l=1800;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792228225; l=3257;
  i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
- bh=Vbjcl9pQZ3UyhdQBRck7uib88dk+EsLCEq41Sxopc3c=;
- b=EbFKQfR29znNZa+ELxsmI6B+bMMyo0q1+JJ2xWrsL4WmmPzTz9tNyrdglbzu2E0aMwsaFeMqu
- J2jjnLinN8VDFU1bykNXfeUIWe5D958yoE7/uDkEIxedlcSM5mWvUXu
+ bh=AnoiUr+7DbHmSJ/S8XWOSnV6gGNomi+vIaAAAe0n6Ko=;
+ b=yS1euP1foHp1UpqRFiF8sKQN0NfNOIxK9EQhznpyi+/P7C8FeplGKG5XDfeuRupqX7Kygtt3V
+ 4xqAGFhaypBAo/wFHfxu1QYUZhX57wrdd4JOXPH9HgD0ViX5OfDgFyf
 X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
  pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
 X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
@@ -170,61 +170,101 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Petr Hodina <petr.hodina@protonmail.com>
 
-Add expo_box_rgb() to check that scene_box_set_rgb() records the colour on
-a box.
-
-Returns -ENOENT for a non-box object or an unknown ID.
+Check that up/down and the initial selection skip a SCENEMIF_HEADER item
+and that scene_menu_select_item() refuses it.
 
 Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
 ---
- test/boot/expo.c | 37 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
+ test/boot/expo.c | 72 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 72 insertions(+)
 
 diff --git a/test/boot/expo.c b/test/boot/expo.c
-index b50c32c0860..2374e61f864 100644
+index ddfb739f9cf..5ea8c016706 100644
 --- a/test/boot/expo.c
 +++ b/test/boot/expo.c
-@@ -977,3 +977,40 @@ static int expo_bg_rgb(struct unit_test_state *uts)
+@@ -67,6 +67,13 @@ enum {
+ 
+ 	/* pointer to current item */
+ 	POINTER_TEXT,
++
++	STR_ITEM3_LABEL,
++	STR_ITEM4_LABEL,
++	ITEM3,
++	ITEM3_LABEL,
++	ITEM4,
++	ITEM4_LABEL,
+ };
+ 
+ #define BAD_POINTER	((void *)1)
+@@ -857,3 +864,68 @@ static int expo_test_build(struct unit_test_state *uts)
  	return 0;
  }
- BOOTSTD_TEST(expo_bg_rgb, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ BOOTSTD_TEST(expo_test_build, UTF_DM);
 +
-+/* Test drawing a box in its own colour, as used for a horizontal rule */
-+static int expo_box_rgb(struct unit_test_state *uts)
++/* Test that section-header menu items are skipped by selection and keys */
++static int expo_menu_header(struct unit_test_state *uts)
 +{
-+	struct scene_obj_box *box;
++	struct scene_obj_menu *menu;
++	struct expo_action act;
 +	struct scene *scn;
-+	struct udevice *dev;
 +	struct expo *exp;
++	ulong start_mem;
 +
-+	ut_assertok(uclass_first_device_err(UCLASS_VIDEO, &dev));
++	start_mem = ut_check_free();
 +
 +	ut_assertok(expo_new(EXPO_NAME, NULL, &exp));
 +	ut_assert(scene_new(exp, SCENE_NAME1, SCENE1, &scn) > 0);
-+	ut_assertok(expo_set_display(exp, dev));
++	ut_assert(scene_menu(scn, "main", OBJ_MENU, &menu) > 0);
 +
-+	ut_assert(scene_box(scn, "rule", OBJ_BOX, 2, &box) > 0);
-+	ut_assertok(scene_obj_set_bbox(scn, OBJ_BOX, 10, 20, 200, 22));
-+	ut_assert(!box->has_rgb);
-+	ut_assertok(scene_box_set_rgb(scn, OBJ_BOX, 0x30363d));
-+	ut_assert(box->has_rgb);
-+	ut_asserteq(0x30363d, box->rgb);
-+
-+	ut_assert(scene_txt_str(scn, "text", OBJ_TEXT, STR_TEXT, "my string",
++	/* header, item, header, item */
++	ut_assert(scene_txt_str(scn, "h1", ITEM1_LABEL, STR_ITEM1_LABEL, "A",
 +				NULL) > 0);
++	ut_assert(scene_menuitem(scn, OBJ_MENU, "hdr1", ITEM1, 0, ITEM1_LABEL,
++				 0, 0, SCENEMIF_HEADER, NULL) > 0);
++	ut_assert(scene_txt_str(scn, "l2", ITEM2_LABEL, STR_ITEM2_LABEL, "B",
++				NULL) > 0);
++	ut_assert(scene_menuitem(scn, OBJ_MENU, "item2", ITEM2, 0, ITEM2_LABEL,
++				 0, 0, 0, NULL) > 0);
++	ut_assert(scene_txt_str(scn, "h3", ITEM3_LABEL, STR_ITEM3_LABEL, "C",
++				NULL) > 0);
++	ut_assert(scene_menuitem(scn, OBJ_MENU, "hdr3", ITEM3, 0, ITEM3_LABEL,
++				 0, 0, SCENEMIF_HEADER, NULL) > 0);
++	ut_assert(scene_txt_str(scn, "l4", ITEM4_LABEL, STR_ITEM4_LABEL, "D",
++				NULL) > 0);
++	ut_assert(scene_menuitem(scn, OBJ_MENU, "item4", ITEM4, 0, ITEM4_LABEL,
++				 0, 0, 0, NULL) > 0);
 +
-+	/* only boxes have a colour */
-+	ut_asserteq(-ENOENT, scene_box_set_rgb(scn, OBJ_TEXT, 0));
-+	ut_asserteq(-ENOENT, scene_box_set_rgb(scn, 9999, 0));
++	/* the first selectable item is current, not the header before it */
++	ut_assertok(scene_arrange(scn));
++	ut_asserteq(ITEM2, menu->cur_item_id);
 +
++	/* a header cannot be selected directly */
++	ut_asserteq(-EINVAL, scene_menu_select_item(scn, OBJ_MENU, ITEM1));
++
++	/* down skips the second header */
 +	ut_assertok(expo_set_scene_id(exp, SCENE1));
-+	ut_assertok(expo_render(exp));
++	ut_assertok(expo_send_key(exp, BKEY_DOWN));
++	ut_assertok(expo_action_get(exp, &act));
++	ut_asserteq(EXPOACT_POINT_ITEM, act.type);
++	ut_asserteq(ITEM4, act.select.id);
++	ut_assertok(scene_menu_select_item(scn, OBJ_MENU, ITEM4));
++
++	/* up skips it again */
++	ut_assertok(expo_send_key(exp, BKEY_UP));
++	ut_assertok(expo_action_get(exp, &act));
++	ut_asserteq(ITEM2, act.select.id);
++	ut_assertok(scene_menu_select_item(scn, OBJ_MENU, ITEM2));
++
++	/* nothing selectable above: the leading header gives no action */
++	ut_assertok(expo_send_key(exp, BKEY_UP));
++	ut_asserteq(-EAGAIN, expo_action_get(exp, &act));
 +
 +	expo_destroy(exp);
++	ut_assertok(ut_check_delta(start_mem));
 +
 +	return 0;
 +}
-+BOOTSTD_TEST(expo_box_rgb, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
++BOOTSTD_TEST(expo_menu_header, UTF_DM | UTF_SCAN_FDT);
 
 -- 
 2.55.0
