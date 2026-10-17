@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2265CCF2CE
-	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 13:01:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F20FCCF2C9
+	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 13:01:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 695E66072E;
-	Sat, 17 Oct 2026 13:01:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 326FE813F9;
+	Sat, 17 Oct 2026 13:01:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NXyBxzvBMjmU; Sat, 17 Oct 2026 13:01:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org AEDF1606BD
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792242101;
-	b=fqrk5PVw4PMibb4zd+kU+TuoHp3XF/YiyE+B7hPenhijpN2VFvyUCVD35LkhNAr77W8X
-	 2OxT4Zz+Fi2qh8/PulyiGQEOsCFOY8a9CfJQueih0Fpytm9Bn3ZNpQpbmpHTreqAyAFi1
-	 GCLRYQWKUlvg+bBsF3yODhG0mKPiiABBhHRGedmWHK5aGQyuxLoalf1vc8Ly1xDpTM81e
-	 0R60PxSRlsk1wQoNgNkIs9L6UkNM3zqX4WS8dsgFlj7BCIWju4uR6hhSChs4Za/sZJAqj
-	 ubh4ZmbQcdUrvWmQzZUpSlWBiBGBR3NJXdTVqvi1oNHWciEvfHzb72v5R1et4oG458g==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 35QVU1IB2YJl; Sat, 17 Oct 2026 13:01:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 56293814D5
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792242103;
+	b=aQFjpkyVSQ6CAwww0DIlzV/Xle9Cg2ZdYENDaV3D9Wx5SlZxv/K4oToOTHMuNqKHk6W3
+	 cBvAheY1AgB6hquAlAkz5jC9pK5ep5lZf4Qax96R5II597CWqi4IfTKsqxq75Fug7WfVj
+	 pl+JNhwD9wNk20CXtiXekNCgBOT1lCqEQabiHaEJ5o0actIGqL3bUJi7gz5zgo29/GVWX
+	 p6DHB/lzOS+96Fj9wbqgsBmwyNHJdWb4RKDE0MEjiVT5rC4+GWL4pv0PQagbWz3/RjYzi
+	 9/IPW5d7tYztLKzzE0tqu1W4sg90CWd/AQc9KEnTIfjlf09eRPKfC4ndFX36tcVcitw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792242101;
+	c=relaxed/relaxed; t=1792242103;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,50 +32,50 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=AbyqrN2FDByxciyzlzZkAVt2khMNqUvt9N1x/6pCyBA=;
-	b=db98yPXhfDWsFn1NAzAsPrungUdB7r2nYg3n3uE19nCHvq5SbxT6UPW5OhTpmz5HAMzz
-	 ro30F/KN5rvDCJb1FIbL/bBJBdHjX7gNm02mT1mcEk7101Zn1wTuusit8qedpHNN3OZKC
-	 /ssbhgK+X34goDMv+0V2gjZKL5qLfRB+Ek3QzXb373fglskRqlRYU1copf27bZTLmL272
-	 +lG5yFiRvt1L1P22yvW42LV/o5enK0bsM+FtafSLxfekh5Tza55i+g6FB4OMORIlxMm0e
-	 LURyADTmgBComqVZ+NSE/rAOhocjoaJR5Ah4FpUV2SJftVca/dZWgIjUsLQGN3fn4+A==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=HSvtBAgGL17IHqekyqgGFDH+vazL+tpzZwUC5VozLNE=;
+	b=lkDwuis/4aWq5ginwrBbmL41bSJML+SUazTEG6I2xxQ+fRaS0GLnVPjEjOk8sgW+HsSn
+	 jrUF2qbsPqhfwhwyPsxCyKbJRzdT/F98jEaHTU+QKxepkV8yGNQHGfmemo9BSCKXxX4Nx
+	 uKy8kPtBxHlyrlEyxggYm/n+Ux2iafNrlpxu6+uBuwcUYUO05XVZxdBwiZgUEH3tNwrvt
+	 uYWoCB+Nhy6S40YzWGvHp/BBRhrLsKzzY7gvvL1z113wBJjuZn42RcCxmTbSt5tr1QcOF
+	 w8adsoFJqDY/qiNVZAzfFIKcuaNdqMYpoMEEC+xayKu2igyzy7ndpJbT18JXfYYXC1Q==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792242101;
-	bh=AbyqrN2FDByxciyzlzZkAVt2khMNqUvt9N1x/6pCyBA=;
+	d=lists.u-boot-project.org; s=default; t=1792242103;
+	bh=HSvtBAgGL17IHqekyqgGFDH+vazL+tpzZwUC5VozLNE=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=DGjX5hAzCkMkdZJwK/RfI2coMJgxPdorC3R3Am6gOntelVgHHX+5vUzg7Esu2OXMT
-	 PvbsXKR7HrQyLc6rCzlnImxj/gmX9MRBLWyQr11RGGe5Um/zrBA/uvmMzLySJ7UagO
-	 b1bMMfeC9rAnPd5nisOgkxtp0a6JtqEqhB9KSALoQK2c4ax5HJogFqXJaCPYODDb5+
-	 GtHq51eYlb9SUGPBrXQq+UcHINlpihVZGpyP4p6sSfh6XF2IIUIg2d3BAHfU27ZAYp
-	 jpKYULHAnewOd20CCmnDwd4Dc9ulOQSZrrRXE0OWTOjYlKmOr3NcR/8TGIpNxq1J7T
-	 cL2k6m4A8k6Ng==
+	b=aFyykagscaEO8w93CVbvto5CWn6ZKunDb4jr6R3mGjbvgCXV97Y7zfItyoH4WoZOt
+	 v4Pp6LJSv7NcOuESLnwC+MXfFimO7SdQ23nL9Wx9bq5Tnpi+rWouuG+xkkbFghCau1
+	 rSugH9D6NYKu5olyn0T3N1aOh+LuZONIvNP3D/hf0EdKX+MR9nvwc74caukei3gitV
+	 D+N5JsAZupdtEddjZqA5q166pSCuiYWc8SVQ5gQeCAxk3/QPXlBbOA1KIXZIs/2rLk
+	 qvI2PWwl4AAE22I8cGEGzySPat/PHcvgJz+R4fKnFc3iOnOxc1MA8eDy6biV6HPhsc
+	 x0tliO8d87wtQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AEDF1606BD;
-	Sat, 17 Oct 2026 13:01:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 56293814D5;
+	Sat, 17 Oct 2026 13:01:43 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 18F9F7AD
+ by lists1.osuosl.org (Postfix) with ESMTP id 1EB02F45
  for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 09:10:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0AD7B409DB
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0DDD3409D0
  for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 09:10:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id njdWgmHCNiBL for <u-boot@lists.u-boot-project.org>;
+ id P4A3NTpnleZ6 for <u-boot@lists.u-boot-project.org>;
  Sat, 17 Oct 2026 09:10:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 4D0EE409D0
-Authentication-Results: smtp4.osuosl.org; arc=none
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 4505F409BD
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip=172.234.252.31
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792228229;
- b=qAYBVpynApkXs0QTl8pTYQHDzvE1GqhvS7J2iBpBS6foFk7lJp6OxFlEIxttVUgPNvjM
- 8r4Y/yeJbGqgNwvMCwl9NDN3vfkKDr/uRbFauIDh9hqqQOLtVLHYflPZRtRkOECs3hqXl
- DrsEVSq/gI6kAIWfmhEr1/aYAc+6ZEj0ev60oDqJ7FsqLKoD2ptBQ1Mu6noxQrjAvr75W
- X6KJRgZ76lWUSVWdj5eRZc57GS1pfwSNvsTw+F3kPg4hL28WcyeUWmwtsfwg6EaDqTqm7
- vt2F3PBAONYQjO8KmrpU8sE2FUxhUCkvkDWfsPCnj7NXwAf8pzyrn8q8GvlPhswyNJw==
+ b=fjns+V7FPJbpybnrrPgfNmvkdV0kwanpWX7ClxjvWuNyQD2XGP++8/ccYYunJ065oPSE
+ f+WHCNLsFCNzpefH7mgItcF3WA7UvLaxoYfhZZQFm5dWc7lXo87swWI2klp1Cvx21Shk6
+ JPh8wbRrSBH5qQJMxdCpJd6Fmi9+kE+q1sZVWSdFSYM9e3h37cpGamTQMwHjjR6n9W7Lc
+ YAgzjCsEcaeht2jdn8B03Eo+7giwzPMJab0/f4iqjESvjbHNvAaxktCuBb0yD2bQtiRDH
+ PELPWJdMma3emkpAbCP8AMtea+rz5klcoxfbD3z9im8bT1MlxU/QFDQGKSXD/Ezn71Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1792228229;
  h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
@@ -83,56 +83,55 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
  X-Original-From:Reply-To;
- bh=AbyqrN2FDByxciyzlzZkAVt2khMNqUvt9N1x/6pCyBA=;
- b=Gqkg7xfaM5xb8Fn3IFt36oVgW+xOsy4/cvFwcebO0r+KO0EcIiMTDXnZX9bog45jDG0i
- urGFJ2CN0XrN/ikHicLhb+MzxIDYeyDsm0FoOQbAc16yvOD5SLyygKE+c333N2u/yx81n
- WHmD1HfDdc3vzO4B3JfQu25GavsIgOAEv+kwfVrs2G0Yv3KFQ2s8MyloPGsKBI9TGdCaQ
- LH4X4WN226cpXnqQ9XUQWgvVw2+7cXo6jKA7PEUlqpNamSrYpawygSl/FG7RfPr3ai/4L
- q4L/mYP3bRQH1yEsBCA/rj7cq8KwwNfceT3QeEhL0jRMjb3wiNbn+U1tEMI8PioZZog==
+ bh=HSvtBAgGL17IHqekyqgGFDH+vazL+tpzZwUC5VozLNE=;
+ b=D1uQLi8LPhygZBYeJTjMK7UyanfUTaWjJ6LQ2eftrDNkV/AxvIK2Vos7C1m74zVuQbYp
+ +W5PkgIMEFm/JX7zyjMEOjpTXL30kslgDsYKHahSaFSrv+QtOi5dMBq5mxXT2CdogohSU
+ g671NHc8SVoq/E67ytGN/TjLO/5kEgCUl9CqCechEOJLW1UzlmgccvWq43deWH+uGf1jO
+ 7zC8081TLC5UkjWqDACCCilRrEpkXSs9O6VL8VusTrzIXt7XY2WGqLxHRJ2dtobNYLbAU
+ YGyyXotnb6LpzN/vcMqOvmz5kde9T/ylXB+8qE3cAdJXhUgRsvNP69CA+qkykMFizlA==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=VxPG2SLF; 
- arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ header.s=k20201202 header.b=DVyfkQtD; 
+ arc=none smtp.remote-ip=172.234.252.31
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
+ helo=sea.source.kernel.org;
  envelope-from=devnull+petr.hodina.protonmail.com@kernel.org;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20201202 header.b=VxPG2SLF
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4D0EE409D0
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 09:10:27 +0000 (UTC)
+ header.a=rsa-sha256 header.s=k20201202 header.b=DVyfkQtD
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 4505F409BD
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 09:10:28 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 7952D43AF4;
+ by sea.source.kernel.org (Postfix) with ESMTP id 9D96743C56;
  Sat, 17 Oct 2026 09:10:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 5B5EDC2BD00;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 82FA4C2BCFF;
  Sat, 17 Oct 2026 09:10:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1792228227;
- bh=7BB97k3hzF7cQPbRXXuzOHcWGUCedSXFmnsgovk2+rc=;
+ bh=zdWKUVvs+IAr7cxzOc4dyX3J0Ao0Tb6Two2zQHP4vJA=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=VxPG2SLF+4PnnY4U8gMmWTa0yQHtNb4LYapX5qgfLS+j58heN7JcW6Bk3C6EuwjC3
- E0Pd62m8s3FUTezxG4BlNbKUP7KXRP6O2CeYh/sNkx237pOBkiZyQkg+vxPH9EjBdZ
- 9g19LHZ5cDQ5jXtrU+Cp/m6YGR85fsLcvo57HOKgvwBQs7GOXZzYpZXepq5cDt1kYj
- 7AJLBgrUxPZAfTISsx9O7RKle10LjqHQsRvvLHDbYEjyOiiBE9DmxwVzWcRnvUQvGf
- l55tXVSa8b1kSkJGkPZpF5v/eT2fcCUtqIG1Hrpu02Xm4+pRW+xPCLjbeWIBiFzWn1
- mW2FdRo1ZN3QA==
+ b=DVyfkQtDUa72Rw90ocIIuhKjgYHpylw8/W1+vfFo6QGOFrBnYIwqqYomVXJzW/myj
+ ++JnfBMQrVgvoBlPZwSsrfnL7UzKyZBTA+ktq1atfLlbdospJRnHDtekKWEH9T32FS
+ lXfFQXaALKWCFIDR5ML8FZuPuB9e0ycFK0au4o8UxxCexzHvm8LZsw9SAbORW4/sqL
+ MRzXvQY6tiTw1UHtSrfiq8RePlvJN238k8P1r36f95pdqY7vmndP4syiN+lOubLz7L
+ BJuDH+jeUebIe95FrPYLOen9qD545DuFcH62NEzVxRKay98mPW+/04xQ/dr7FASYuL
+ O42O7Tau7O2/Q==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 4AAE6CCF2C7;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 73F83CCF2C7;
  Sat, 17 Oct 2026 09:10:27 +0000 (UTC)
 From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
-Date: Sat, 17 Oct 2026 11:10:21 +0200
-Subject: [PATCH 05/14] test: expo: Test menu wrap-around
+Date: Sat, 17 Oct 2026 11:10:23 +0200
+Subject: [PATCH 07/14] expo: Allow the background colour to be set
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261017-b4-expo-colours-v1-5-479ac06e7642@protonmail.com>
+Message-Id: <20261017-b4-expo-colours-v1-7-479ac06e7642@protonmail.com>
 References: <20261017-b4-expo-colours-v1-0-479ac06e7642@protonmail.com>
 In-Reply-To: <20261017-b4-expo-colours-v1-0-479ac06e7642@protonmail.com>
 To: u-boot@lists.u-boot-project.org
@@ -143,11 +142,11 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Petr Pavlata <petr@acrux.cz>, David Heidelberg <david@ixit.cz>, 
  Petr Hodina <petr.hodina@protonmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792228225; l=1726;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792228225; l=3612;
  i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
- bh=tcuyYZ6bOFix6DB65XGo7ybP7hqjrHESxrvYuJQ+VIQ=;
- b=24XcAnNfohkIQBEQMP4jMF2QiwUWO0+/NZN6aME3g+1SIJqV2dKOcZh3wwLWL5DPtQUz0DwNp
- Cn0oGsSfcXpAn8KSXfMwk3tBVZZSgWaarpl6hIOJ/cG1Ewn0z8hXDu2
+ bh=/5HgJCOGqNFJiafhkd9vG8WjoIN4LkQs0IKPtMQSRlA=;
+ b=8NcSkgFAHMavsqe8g8whVn9asAQ6BI0L075nXfqQjDjfvkpIzM6FmL9lc5ZpWKLjyf8H+vEQg
+ d5g6HpWWupGAMu3dtWndwsialltS5k3qenljwE1UqBnJN3eGJVAZKOU
 X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
  pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
 X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
@@ -170,49 +169,126 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Petr Hodina <petr.hodina@protonmail.com>
 
-Extend expo_menu_header() to check that with wrapping enabled up from
-the first selectable item goes to the last item and down from the last
-goes back to the first.
+Expo clears the display to black or white depending on the video
+device's white_on_black setting.
 
-Check it's also skipping the section header and that scene_menu_set_wrap()
-returns -ENOENT for an object which is not a menu.
+Add expo_set_bg_rgb() to use another colour instead. The colour is also set
+as the background of text while the expo is rendered.
 
 Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
 ---
- test/boot/expo.c | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
+ boot/expo.c    | 42 +++++++++++++++++++++++++++++++++---------
+ include/expo.h | 15 +++++++++++++++
+ 2 files changed, 48 insertions(+), 9 deletions(-)
 
-diff --git a/test/boot/expo.c b/test/boot/expo.c
-index 19148a8892e..e52de029477 100644
---- a/test/boot/expo.c
-+++ b/test/boot/expo.c
-@@ -865,7 +865,7 @@ static int expo_test_build(struct unit_test_state *uts)
- }
- BOOTSTD_TEST(expo_test_build, UTF_DM);
- 
--/* Test that section-header menu items are skipped by selection and keys */
-+/* Test section headers and wrapping with up/down keys */
- static int expo_menu_header(struct unit_test_state *uts)
+diff --git a/boot/expo.c b/boot/expo.c
+index 94413acd381..fb67a80a29f 100644
+--- a/boot/expo.c
++++ b/boot/expo.c
+@@ -215,30 +215,54 @@ int expo_render(struct expo *exp)
  {
- 	struct scene_obj_menu *menu;
-@@ -927,6 +927,17 @@ static int expo_menu_header(struct unit_test_state *uts)
- 	ut_assertok(expo_send_key(exp, BKEY_UP));
- 	ut_asserteq(-EAGAIN, expo_action_get(exp, &act));
+ 	struct udevice *dev = exp->display;
+ 	struct video_priv *vid_priv = dev_get_uclass_priv(dev);
++	u32 old_bg = vid_priv->colour_bg;
+ 	struct scene *scn = NULL;
+ 	enum colour_idx back;
+ 	u32 colour;
+ 	int ret;
  
-+	/* with wrapping, it goes to the last item, then back to the first */
-+	ut_assertok(scene_menu_set_wrap(scn, OBJ_MENU, true));
-+	ut_asserteq(-ENOENT, scene_menu_set_wrap(scn, ITEM2, true));
-+	ut_assertok(expo_send_key(exp, BKEY_UP));
-+	ut_assertok(expo_action_get(exp, &act));
-+	ut_asserteq(ITEM4, act.select.id);
-+	ut_assertok(scene_menu_select_item(scn, OBJ_MENU, ITEM4));
-+	ut_assertok(expo_send_key(exp, BKEY_DOWN));
-+	ut_assertok(expo_action_get(exp, &act));
-+	ut_asserteq(ITEM2, act.select.id);
+-	back = vid_priv->white_on_black ? VID_BLACK : VID_WHITE;
+-	colour = video_index_to_colour(vid_priv, back);
++	if (exp->has_bg_rgb) {
++		colour = video_rgb_to_colour(vid_priv, exp->bg_rgb >> 16,
++					     exp->bg_rgb >> 8, exp->bg_rgb);
++		/* text is drawn on this colour too, not on black or white */
++		vid_priv->colour_bg = colour;
++	} else {
++		back = vid_priv->white_on_black ? VID_BLACK : VID_WHITE;
++		colour = video_index_to_colour(vid_priv, back);
++	}
+ 	ret = video_fill(dev, colour);
+-	if (ret)
+-		return log_msg_ret("fill", ret);
++	if (ret) {
++		ret = log_msg_ret("fill", ret);
++		goto done;
++	}
+ 
+ 	if (exp->scene_id) {
+ 		scn = expo_lookup_scene_id(exp, exp->scene_id);
+-		if (!scn)
+-			return log_msg_ret("scn", -ENOENT);
++		if (!scn) {
++			ret = log_msg_ret("scn", -ENOENT);
++			goto done;
++		}
+ 
+ 		ret = scene_render(scn);
+-		if (ret)
+-			return log_msg_ret("ren", ret);
++		if (ret) {
++			ret = log_msg_ret("ren", ret);
++			goto done;
++		}
+ 	}
+ 
+ 	video_sync(dev, true);
++	ret = scn ? 0 : -ECHILD;
+ 
+-	return scn ? 0 : -ECHILD;
++done:
++	vid_priv->colour_bg = old_bg;
 +
- 	expo_destroy(exp);
- 	ut_assertok(ut_check_delta(start_mem));
++	return ret;
++}
++
++void expo_set_bg_rgb(struct expo *exp, u32 rgb)
++{
++	exp->has_bg_rgb = true;
++	exp->bg_rgb = rgb;
+ }
  
+ int expo_send_key(struct expo *exp, int key)
+diff --git a/include/expo.h b/include/expo.h
+index fe20c68750e..61fec3d52c5 100644
+--- a/include/expo.h
++++ b/include/expo.h
+@@ -108,6 +108,8 @@ struct expo_theme {
+  * @text_mode: true to use text mode for the menu (no vidconsole)
+  * @popup: true to use popup menus, instead of showing all items
+  * @show_highlight: show a highlight bar on the selected menu item
++ * @has_bg_rgb: true to use @bg_rgb as the background instead of black or white
++ * @bg_rgb: Background colour as 0xRRGGBB used if @has_bg_rgb
+  * @priv: Private data for the controller
+  * @done: Indicates that a cedit session is complete and the user has quit
+  * @save: Indicates that cedit data should be saved, rather than discarded
+@@ -126,6 +128,8 @@ struct expo {
+ 	bool text_mode;
+ 	bool popup;
+ 	bool show_highlight;
++	bool has_bg_rgb;
++	u32 bg_rgb;
+ 	void *priv;
+ 	bool done;
+ 	bool save;
+@@ -636,6 +640,17 @@ int expo_render(struct expo *exp);
+  */
+ void expo_set_text_mode(struct expo *exp, bool text_mode);
+ 
++/**
++ * expo_set_bg_rgb() - Set the background colour of the expo
++ *
++ * By default the display is cleared to black or white depending on the video
++ * device's white_on_black setting. This selects another colour instead
++ *
++ * @exp: Expo to update
++ * @rgb: Background colour as 0xRRGGBB
++ */
++void expo_set_bg_rgb(struct expo *exp, u32 rgb);
++
+ /**
+  * scene_new() - create a new scene in a expo
+  *
 
 -- 
 2.55.0
