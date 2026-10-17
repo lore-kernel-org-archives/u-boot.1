@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D369CCC6B2A
-	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 04:36:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6A48CCA463
+	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 04:36:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 634C881694;
-	Sat, 17 Oct 2026 04:36:52 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4FFFE81499;
+	Sat, 17 Oct 2026 04:36:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vBWAKr3UYoGl; Sat, 17 Oct 2026 04:36:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2F0088162E
+ id 3yVp1SxvA93m; Sat, 17 Oct 2026 04:36:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org F3AA0814AB
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792211805;
-	b=T45a/fPUrfZ5gtfAyHT7EBZYpQlW8japrIE9Y0/0q1ogs7Qt3YJ/8ytOayAIlye1sJBR
-	 9eGK/6klZkc7j5KWkialWbLjeLOiEYSNYG1PwjeJ4VacNVr6RVLjZMeaG66/DWEmhYn8z
-	 uAiuvmhZstsdSU0eiMy3fx/n7zJ/Lf+RQD9Hy4Hvyi8YHlNIwf0ud2KmhBppQr+eih73P
-	 947d9f72HVCr+qjV7QgolPAWHozaf7DcThdbeyiACHNhM/5kygCOhHwgUyJRobzyx9RfO
-	 k06DRLyct3OkLK1oe1Hky+LXFLFE2wWlHswFv+XxHjKIrvPVcWMLjMp0w+/qd7qItJQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792211808;
+	b=MFvw28KeoWCmKdaSyLILqKcs4Am0hs2k8X+I2MF8IJMFOgu27h5i0ohkGcba2hb/W5Hs
+	 RIWfSFTEE5fipHXCWY78zjX5oMvHInbc898+O9lfmWDFXYvFPC6qFaXzHfMt6640v8/Xd
+	 VVhIYbF3vNvOtRvnjDew9gltpJD5iGf5H9n2qVA0tsel81ENnsArf+ZBU2izGOkCeEK9T
+	 b3PJ8X+Uv3ZGscmUtdHcjDaqTv7+x9Ecg/6N+AM1vpQe3jI4A63SC2ji5bzSY3dTQ1VWp
+	 LyBgahw6H1Z9Og4cruI+UBRtaUfUdOatJtP6umMKS7IQUXJSKQI9DDoVn1RaKC2vdEw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792211805;
+	c=relaxed/relaxed; t=1792211808;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,137 +32,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:In-Reply-To:To:Cc:X-Mailer:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=/ZNnjT8CDiFiM9AkEnmkXovOVO5tW/rJTcCnoVvQQWo=;
-	b=FgX8dcWatAyCGy9yVRBxxO6OC6isq4gtYXbAsFfKwfuQ9QgQN1YcyiXFQ4wr0mVwa8Nn
-	 b+XS34Hr7aOxtB8pzL9alUHKMkhs6WDfc9+wfjtyr71BYsq5BR/0IEv0rrb7AhB1/Ep7O
-	 hjxZQSQBgODV3ayamw6zU4K6aPon8N2ZJ4pkPqO2Y5uazq4XPdmtTSV0M8xgQj/b3lFfX
-	 3DE9PEXYgi9Vf54bFkKnGhu6CbbUvOqxBb2Bb9mrX//6uqNgQ8aGHfRfLjBGNWyR3ZhJ9
-	 O3FE//Psh8zloruP2ooXGuhKFJJTv4vrr84P0dxqKiKhvvQqjrLjSRjaxSxIVuKEfNQ==
+	bh=8liULU8LF611aQGQ+QXwElJws6/A3JJPVTxYKNASDHM=;
+	b=a75COUtBH5YAwoK88j9ENfQyOc0nwUn9u/CkwF7sZiiDBTp5mDQSF8fVayHk+YvlaEU9
+	 +nyxiJmFy8btkKLLR2cl+1DWTBPCPX83SxLfNPC1ZcYYv61a73iXr4bF9VzqX7VgzmvVx
+	 4jgY2MiTJ71lWypXCk2S7iaDcxZGkT7n/Af4pIw14eMi91UbnkM+V8jpmjqK/qmU95cRm
+	 1mzl4SiekAx86lblg6XmpMjKZW4OzGrt3fn84dxZu5zQbUpk63nAMySv9wNXSL/cehG19
+	 0P6V5mrko0hPZgpQNfBUtf1h1M8yfjIUJNJAtK/CbmMLQhhzTsL6FUyeZgjTbYr7FUg==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792211805;
-	bh=/ZNnjT8CDiFiM9AkEnmkXovOVO5tW/rJTcCnoVvQQWo=;
+	d=lists.u-boot-project.org; s=default; t=1792211808;
+	bh=8liULU8LF611aQGQ+QXwElJws6/A3JJPVTxYKNASDHM=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=N8kIGAfwAIUTxS6v9JXCKnBneajoGESnCjJmri2MAqfi08U/JzyEO/4YoeXLjsOuj
-	 WGzZ6u31JRMWZGRRjpkyzMoLNFtcMZnicbjRF2IXmELMHNd/JpsbKZpQWLzLhIwvbo
-	 QYJkhzRjyuQWI4yE4CAvkFcEzmlN4eSV6OwByxiPvEES0qqn0RKsPruR57q7yxCOy6
-	 htxAZR/++O5aqPmOhPUlkpK0Dc8UbgEaBzw6jvc4XPnAWqJXJA+q/bzaNlKZ1oGSHu
-	 M+h9iGJLKtV3C0CZdWxWwjO1vEC8ppzhW4XU3lDkjcrfz4EUz4IdY8HqPJzlAJjwTy
-	 jWQw7THJ0dP/Q==
+	b=njZCIMePTHs1bqopFtn1QOC4ajtUG04SyShWkqgZxIDfEuK8xtnAPwJbLToT3BquM
+	 xRpSHoByDTYLH9UhA+sg7eeaeqVsKt5HPaYZkgaaCEwEtE1dx7nOxCXflymdB3BW/A
+	 hjaqmm54KbJhls4H3AhtLx+dTAOytlQG5ZKP7XqLEKFoXoFHy9C0mmfQdTDy3+P5Cy
+	 zBJIVfp+Pon4tDFXLQJNVmpfJt2PFOYXdnXb7h2XvxQhsxsh/dZZyIju9pta+xVuOz
+	 YacUOgfxTPCS08chIqJquajLqFxBlpP62fjGMiVviIOHfJahOBcrGQYMARfIl2rF5H
+	 etQqpUf0HIHQg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2F0088162E;
-	Sat, 17 Oct 2026 04:36:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F3AA0814AB;
+	Sat, 17 Oct 2026 04:36:47 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 7E877255
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:15 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id DBF5179D
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 6FFED4081B
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:15 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id C1DDB4081B
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8MfCFaRJGAex for <u-boot@lists.u-boot-project.org>;
- Sat, 17 Oct 2026 00:36:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C87C3405E3
+ id FaryhdF8_Q_n for <u-boot@lists.u-boot-project.org>;
+ Sat, 17 Oct 2026 00:36:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C3F5E405E3
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c2f"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792197374;
- b=BZ2JLT9LbvzcHl1L3JKPwSkxB54gUOeB3NVBoNtFXqBMwKVunFP3JwmaOOU+W8HQKBvl
- TfCcTyll1fwNi2kGyjSSuti/Zady9ZAjBq/PrjTdFruKRknl4TWawuwl2E4aCDk8u+vLj
- mM+5AnwZB+sK8+FU0VQuJcoUacl5x0V+rSQMiocu23QrM2+/Sr2k4I4cilj3jG/b45BHv
- BksnLTyT2ngL1ts0S/EU62HsUbm3CzB7HJiICAF8Ab/zl53zTr07GhNJaIQEc6jk3vyl6
- p40ysPXnOQwyzAhVCyLIk0t8r7vxdSDmhyKIEaNs1t5PrZj2P5O0NA3tBX6st9uh60Q==
+ arc=none smtp.remote-ip="2001:4860:4864:20::36"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792197376;
+ b=AzmwB4p1PkowUoStwmO62qBLWDxqwybBF++7b5jp1ouh3mnhrPq+A1m39yb/DIarar/d
+ 6ck63aF3T2K9a/NtInY+BZCjzYllZ8mw5aiIp95/b+gq/btEDcONjtu+UOyDcpmIW2RSb
+ Ij1rq6ANUtN6Xg3dAgoiZqTegiMMTjCyb4THw5O4m54GQFwQf/UNwL/xVrZGcs0T2OC7i
+ ERY3it9Lb3VuqL3l3ty9oTTbxXmr7asFMetVZhzKl6BNRIPUpvte5lPq4Mit8mOhyZcd3
+ aTBucR6rPTWElIfypT7F2yVMPYljiS2VDL3paD4chKYkbHioA7uMmn8Mj0vAu6rvwYA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792197374;
+ c=relaxed/relaxed; t=1792197376;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
- bh=/ZNnjT8CDiFiM9AkEnmkXovOVO5tW/rJTcCnoVvQQWo=;
- b=Q22fBQe4c2E9Ew8yqb/vk/JeR4AFgWQvj7HztXSXYZtojP7cRGW72xrleqDl+Q4bMFPM
- mz8YkXymlCymQSB6FMF9IVEvsWKXGvmbDXT8V5i4SbhM8QG1zPfF1cKavvfnpX0FbaTVO
- 9iXUConqZnygQlFm9E669lu9zEOyscggQbFt/4TIm24BiLZQWtfNw9WU63hhw+oRfRY1f
- XMV0Uko/pqgy868vm+I7Hrx/cIbesOwAM3RewJ2J72j2Lq25xY3tMqheBZpyBgHXvyaDT
- 1DT/I8PFohc/XZUtG+WJV84P/lKyvG4plIGgNQwQH3PS4K1R4oy8gI84Dthewz3qvYw==
+ bh=8liULU8LF611aQGQ+QXwElJws6/A3JJPVTxYKNASDHM=;
+ b=m+g1yWsBcYI/A2yoQuZrjW6BcOZjyAGOInfd7CPEDfeWHgLZXCQvq7l4QZBcnTfkiyC9
+ VN1ZENtlfbLsARgI17mJQ8KtHCHA6wvkpT4RC6Jye6JdsTlEgMsQKIyAD/T5ycmX6YRWA
+ fKEpVX2vvuPy+1qo8PK9OekRNSMzD1L4tpdvpbsEVNL5r4wADvJ3ybf4A9I9YuwcTK0ah
+ kKiHcYKOLx1i0MuTJWY42s1YsmN7eHAJErdeSjZmr3CB0z/dnKgfEiVKgaMjayovlAFGT
+ iIKtFwCCSbTD6PAZqPYBsM71is/7wzBAiQUOq3q/X+0snu5lHMlwzB6RA5yObtBGM/w==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b="A/194pxG"; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c2f"
+ header.s=20251104 header.b=gefvVytz; 
+ arc=none smtp.remote-ip="2001:4860:4864:20::36"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2f; helo=mail-oo1-xc2f.google.com;
+ client-ip=2001:4860:4864:20::36; helo=mail-oa1-x36.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=A/194pxG
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C87C3405E3
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:10 +0000 (UTC)
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-6d00d120b28so384215eaf.1
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 17:36:10 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=gefvVytz
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C3F5E405E3
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:14 +0000 (UTC)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-4a75171af39so168313fac.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 17:36:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792197370; x=1792802170;
+ d=gmail.com; s=20251104; t=1792197374; x=1792802174;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=/ZNnjT8CDiFiM9AkEnmkXovOVO5tW/rJTcCnoVvQQWo=;
- b=A/194pxGTlJ4FLFVakeq75PS7/ti6VOzeblg+en/HYo2MTc/T7qPntw1oPo7mitg9U
- dHiTY84eaRT61KWWrcLsyJS192ToyqEVz5MzQZijDZ6U3BSErANwEo4DXcPqxFJqfsy4
- dtB2EwZzIDEdLoyHg3Pc7f7X4okj8/Ul0ZrCKcxNRMhNf7xlWMsZ3+5fgsQdrdeeAqna
- pzFjirK8ITTuDn6MULHeJOwHf/rnaZREDvtuBP2kTb637ORWiQrxv+W5P0gHyqqM25ly
- cIq8AQlilsdJqmp5zYO4JXQ3bWg5JbPj8MCRLU74nBXHuZno0xJA8PhrrYwvD33FiQv4
- 5CVA==
+ bh=8liULU8LF611aQGQ+QXwElJws6/A3JJPVTxYKNASDHM=;
+ b=gefvVytz9GWMzpXGwbdnde6sK44qouh1FbuImwP0ghDqdoYN7B5umhumnO1dS2c0i6
+ 25OWWV2L1Hj8JKmb382XI+Bbwads6KZYBPRgnZPS9KP1uMDxxzTwO/LYS6vB7BJxlPIN
+ ox0oiEiY2mEoGty+pUDti0PZ4GJ3iRvtQg1qcOIn7UXjntevs9rVoJUV/vVFK06+am7G
+ 2y7d5/VP8sV4olyxSiK/wW9Y2b3PYwmA2NFrVUVYmm9SGhUWEoFHNjH4hG6ilH7pFEpc
+ RmBJ6QA6Prs4k31Dgjbpau582gIFsjObljEBX1AJAhfYkz2tFhES4oke3L24HNMrse36
+ bfNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792197370; x=1792802170;
+ d=1e100.net; s=20260707; t=1792197374; x=1792802174;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=/ZNnjT8CDiFiM9AkEnmkXovOVO5tW/rJTcCnoVvQQWo=;
- b=X2IM8lECVjM6CKAnQb5LPStg1cOPhPQo26dZB8Kd3O0lC4vg1hsJ9QzWUnAvkkHgu5
- BQ2AcwOsO0lEBDS0W1yNE8imRGatCdLdzcLa9j65no1q27Skhq+gjHPTUXZp+fRv9YIY
- VD1BOpA1egZhQOXS7RXUDEJd4PYG1Q3RR+8Exb2rry/thdel7QLuo40oXKaphdyQ+i5b
- zb/147yhO6cNt0Dv//ZDa1YvuQOkiar6jvRZZQMPnbiKp9UU/bu9yyvcCH3I1nBMFnAd
- 5ahWhZFRmOFCLNIl2bHZOYfjnmeKjTchXjj9WekfcitZMgKBzNUDa9+pY6TBSrKYvFU0
- tOYw==
+ bh=8liULU8LF611aQGQ+QXwElJws6/A3JJPVTxYKNASDHM=;
+ b=YIPzMc5pyMufE1FrHuuZlP38AAy4zmvCrzi0uS9QdyRb7ZMB+YPGHS6rB7rVNgfqp2
+ EA8d9HNXHU8K4C+r1uShxV+znLlSih81NrQJYUnvizlIFUsiYqZ0q/yHBWIZdFn63Jf2
+ lHsy9It7wWa05sYaRXXMLAYiCZK+7se1PvLv7WBlRoo5KhIpJude+R1hdc9JBLgDcny9
+ gx9GM+vpzHi1fq6HGxgn/5qijE0XonZ6JTuQcS1tJMzDmEiU/b3l7IVFxaN6iP5KtwI/
+ 5SdB+rjq+0sgAR1sOjpfBmzrWgRzHp3g4GQVdoq2gAMZCIQD5KphxFxAXy+noW+F0m5j
+ uC0A==
 X-Forwarded-Encrypted: i=1;
- AKwUvBz1dasvznx6Wd74Uh+4sN9MD+UUXtS/4NhYwmXxiGgD9N89E6VtB9ZNPBhuoAJMX/E0Urk5an8=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYLVagxhT+ZGd4NbOFrcTW0MO9tQQQCuRw7zir1DfjiNIG8dCfy1
- KTGo6GlIcDWpjw1Rk3q8yw4AjEWVinJBskQqHO5sqSLBImIN0mXs4Lep
-X-Gm-Gg: AYBFou22azsomy1rLFNYTOA02L/4h9Fd8Jl4DrddFX2aloow5DIPdRb/VwBWqn8EGwo
- bDjPQWmPeQeWi9FdEfNK6l/GsZtsKDgOpmD/AXxRU/1/WoTZdK0pXbkVk84WUevLbL/j8y1toZt
- 2KvTNuNJiUKyoRb6ccR4UaQWk/eROKNRQSCC4hKbsmK45/l19L1uzGwa5kG35Q8xcDwhzcb8YhF
- jKuDDojUqDt7S52eYM8xr1vTPey/MyTVGrgoRZYaAiNbR1zQPGJN78gzN6W9j/Gg/5KEjtx4/sx
- XsArT2cJdhIycvxI+831HEK3UojYm1LvG9nSs1IUUMzVYZfydzpfH8x+5RhHjU+Uh6LaKC7JT9R
- ZMIsdpn8Y6MaAWh/Vg4A+D0I9veiJwYkLwN/rsz7LYLgx8UlVHapCAoyBQ/+N2yWHmekh/vnVTQ
- 3GakK8WtL/ioWkcWCqIpS7w1IN80IQdxSNMM5BQg36MQPZBaYUoG+QomRFuR2eOXymxssE5Q/i5
- km59mf+JPJWaxcVPF74b3z6nFfYsfZ33jZkDzNSNS5ykd1sf6DsUShsCiwaA0TEg2MAXh3fzvvK
- mEvSTOtSnWUajm5wVF9Htq5Ce5gGYzHRA2xlfBhbx23Unfe7c4iB482cpV6Gp6R6ddv0oIkwkV0
- EmNwYd8BrBIU2f9AXIxvpYA==
-X-Received: by 2002:a05:6820:4b84:b0:703:3ff5:ddbf with SMTP id
- 006d021491bc7-703528804fdmr883300eaf.1.1792197369507; 
- Fri, 16 Oct 2026 17:36:09 -0700 (PDT)
+ AKwUvBx/njFOCtQAz+Am7oIeM8IZrROjmDPypLKo5aIdnCBSEY/UjJRKSEZIW4blG6uyWR0WZRdcryY=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYK4N2IHlgpZI5MmuNpoUFU8xgguDzBTlTbgwXF4ZKJA4jsXHy7A
+ Uu9bljnNppndi1eiZALqHihhQhb4uq0rr0NaQL7VGPRvjAjtzJoF+ckD
+X-Gm-Gg: AYBFou0JlHbuLZC482R0cxSPZYs1DwA7vu8RUXcIuwhfgDD/KoP/n6TYab+zyMEBjGa
+ C2g8T4KzyPDPBEdKuoyAFwIdP/j1MIRMKnBuwpqZIbA2Vg7eGMymhF65o1fnVPjndV2D4jojrPo
+ oLX3FbmAQzpntBH0zcnQFOH/bUL0xmX4XmwX6w4NmwuAIuHWHpTVIC4gnkI4f1/ILt5alH08EfH
+ kYNLUi4w6kLRAx4Tbem6kyvsom5E3wec3svI4m73bITywZUPhmew+nf6JrPw8OwFaKmYti9d0KS
+ +IPaTASPFDV2RWUYK2/vnEVDg9JQGgJNFqeXw4X0frR13FU6Zkc314FwUo3tn7FKbGQTAmVTSKu
+ K3M9vFHBeAY9pbAI2UC0ddUY7x+gEtFJun8et1s+akS4SqDmrxcrg8AVmAKCAebfzmTMvT9PDVJ
+ 1hQGAmzZyzylz29IE3FAe717MkCA4UGORvB3R69ZO4OglolH7DynOReumknFXy9a3MxrC4FkITB
+ 6LJiAnipJTk+F4Ol8UNKosgEho7XSx6rtYssV4u4JrymR8ulEmNPxDg+OAvCK2d6mSENoJfbKAK
+ 7Xdfj5lRMMFyeU5ZB+pp2mO/GLpWICfCwndu06XMcgjYyRA7/huxMAeRIXPPUZT5L7b8ZH0IwAB
+ 2E/uy+LfEfZZwIX9E2Rg/ig==
+X-Received: by 2002:a05:6871:3688:b0:49c:8cd1:d293 with SMTP id
+ 586e51a60fabf-4a7575ad958mr1287184fac.1.1792197373656; 
+ Fri, 16 Oct 2026 17:36:13 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4a73b5b4291sm2745091fac.5.2026.10.16.17.36.06
+ 586e51a60fabf-4a73b5b4291sm2745091fac.5.2026.10.16.17.36.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Oct 2026 17:36:08 -0700 (PDT)
+ Fri, 16 Oct 2026 17:36:13 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Fri, 16 Oct 2026 18:35:25 -0600
-Subject: [PATCH v9 11/17] boot: image: add FIT decrypt-to-buffer helper
+Date: Fri, 16 Oct 2026 18:35:26 -0600
+Subject: [PATCH v9 12/17] spl: fit: support encrypted payloads
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261016-submit-ce-series-v2-v9-11-c24e64daafe9@gmail.com>
+Message-Id: <20261016-submit-ce-series-v2-v9-12-c24e64daafe9@gmail.com>
 References: <20261016-submit-ce-series-v2-v9-0-c24e64daafe9@gmail.com>
 In-Reply-To: <20261016-submit-ce-series-v2-v9-0-c24e64daafe9@gmail.com>
 To: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
@@ -230,820 +230,243 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-FIT cipher support currently allocates the output buffer inside the AES
-helper. SPL often needs to decrypt directly into a caller-selected
-buffer, for example a load buffer or a scratch buffer used before
-decompression.
+Add SPL_FIT_CIPHER and decrypt FIT image data before post-processing,
+decompression or moving it to the final load address.
 
-Add a decrypt_to callback to the FIT cipher algorithm and wire it up for
-AES. The existing allocating decrypt path becomes a wrapper around the
-new helper.
+SPL cannot always allocate a new output buffer while loading FIT images,
+so use the caller-provided decrypt-to-buffer helper. External encrypted
+images are read into scratch memory first, then decrypted in place before
+the existing copy or decompression path consumes them. Embedded encrypted
+images decrypt into the final load buffer, or into scratch memory when
+decompression is still required.
 
-Validate the FIT cipher key length, IV length and unciphered-size
-property while preparing decryption, and build lib/aes/ by phase when
-FIT_CIPHER is enabled so the target-side decrypt helper is available to
-SPL builds. Use the DM AES provider helper when enabled, retaining the
-software implementation only when no provider supports the operation.
+Defer mapping the final destination until the board post-processing hook
+has finalized the source and length. The direct embedded-decrypt path maps
+early because the hardware needs its destination, but tracks and extends
+that mapping if post-processing grows the payload. Map decompression output
+for CONFIG_SYS_BOOTM_LEN rather than the compressed input length.
 
-For U-Boot proper, use decrypt_to for in-place decryption when the FIT
-payload is already in writable RAM and has a non-ignored payload hash.
-The encrypted data is no longer needed after hash verification, and this
-avoids a full-size allocation for encrypted payloads loaded into DRAM.
-
-When normal image verification is disabled, verify the payload hash
-before overwriting the ciphertext. A repeated load then fails the hash
-check before AES sees the plaintext. Keep using the allocating path for
-payloads with absent or entirely ignored hashes so their ciphertext
-remains reusable, and leave signed FIT metadata unchanged.
-
-On host builds, make both decrypt helpers return -ENOSYS instead of
-reporting success without producing output.
-
-Add sandbox coverage for out-of-place and in-place AES-256 decrypt and
-malformed key, IV and size inputs. Exercise repeated FIT loads with
-absent, ignored, enabled and mixed payload hashes.
+Use IMAGE_ENABLE_DECRYPT in the common FIT image-load path so FIT cipher
+support is selected by phase. Keep that path disabled for host tools,
+since the target-side decrypt helper depends on the U-Boot control FDT
+and runtime crypto providers.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
 Changes v8 -> v9:
-  - Preserve upstream FIT property-length validation and disabled-cipher
-    declarations when rebasing
-  - Leave the existing FIT property-check formatting unchanged
-  - Share AES input validation between decrypt helpers and validate the
-    allocating wrapper before allocating its output buffer
-  - Require a non-ignored payload hash for in-place decryption and retain
-    the allocating fallback when hashes are absent or all ignored
-  - Cover repeated FIT loads with absent, ignored, enabled and mixed hashes,
-    with normal image verification both enabled and disabled
-
-Changes v5 -> v6:
-  - Keep signed FIT metadata unchanged after in-place decryption
-  - Require a payload hash for in-place decryption and verify it when
-    normal verification is disabled, so repeated loads fail before AES
-    processes plaintext  (suggested by Simon Glass)
-  - Return -ENOSYS from the allocating host decrypt stub
-    (suggested by Simon Glass)
-  - Preserve the existing fit_image_decrypt_data() declaration wrapping
+  - Adapt encrypted FIT loading to the current SPL loader while retaining
+    upstream external-data bounds and overflow checks
 
 Changes v3 -> v4:
-  - Validate cipher metadata before reading the key length
-  - Preserve hard provider failures and fall back only when unsupported
-  - Treat -EINVAL as a hard provider error
-  - Fix disabled-feature declarations and use the public test prototype
-  - Add in-place decrypt and malformed-input tests
-  - Simplify the legacy allocating decrypt wrapper
+  - Map the final destination after board post-processing determines size
+  - Size decompression mappings for the maximum output
+  - Require SPL_OF_CONTROL and clarify the SPL_FIT_CIPHER help text
 
 Changes v2 -> v3:
-  - Flip the image_aes_decrypt_to() host-tool guard
+  - Use a shared helper for SPL decompression buffer decisions
     (suggested by Simon Glass)
-  - Let image_aes_decrypt_to() be the single length-validation path
+  - Reject encrypted SPL FIT payloads when SPL_FIT_CIPHER is disabled
     (suggested by Simon Glass)
-  - Document that AES CBC decrypt providers must support in-place decrypt
+  - Flatten decrypt buffer selection  (suggested by Simon Glass)
+  - Comment the no-copy path after direct decrypt
     (suggested by Simon Glass)
 
 Changes v1 -> v2:
-  - Explain FIT cipher validation  (suggested by Simon Glass)
-  - Explain phase-keyed lib/aes builds  (suggested by Simon Glass)
-  - Return -ENOSYS without decrypt support  (suggested by Simon Glass)
-  - Use decrypt_to for U-Boot proper in-place decrypt
+  - Drop redundant SPL_FIT select  (suggested by Simon Glass)
+  - Explain the IMAGE_ENABLE_DECRYPT change  (suggested by Simon Glass)
+  - Explain the host tools decrypt behavior  (suggested by Simon Glass)
+  - Decrypt external encrypted payloads in place
+    (suggested by Simon Glass)
+  - Skip self-memmove after direct decrypt  (suggested by Simon Glass)
 ---
- boot/image-cipher.c              |  47 +++++++++++++---
- boot/image-fit.c                 |  67 ++++++++++++++++++++--
- include/image.h                  |  39 +++++++++++++
- include/u-boot/aes.h             |  10 ++++
- lib/Makefile                     |   2 +-
- lib/aes/aes-decrypt.c            | 110 ++++++++++++++++++++++++++----------
- test/lib/Makefile                |   3 +
- test/lib/test_aes_decrypt.c      |  89 +++++++++++++++++++++++++++++
- test/py/tests/test_fit_cipher.py | 118 +++++++++++++++++++++++++++++++++++++++
- 9 files changed, 440 insertions(+), 45 deletions(-)
+ boot/Kconfig         |  9 ++++++
+ boot/image-fit.c     |  2 +-
+ common/spl/spl_fit.c | 87 +++++++++++++++++++++++++++++++++++++++++++++++-----
+ 3 files changed, 90 insertions(+), 8 deletions(-)
 
-diff --git a/boot/image-cipher.c b/boot/image-cipher.c
-index 9d389f26cea..e7ef72987cc 100644
---- a/boot/image-cipher.c
-+++ b/boot/image-cipher.c
-@@ -25,6 +25,7 @@ struct cipher_algo cipher_algos[] = {
- #endif
- 		.encrypt = image_aes_encrypt,
- 		.decrypt = image_aes_decrypt,
-+		.decrypt_to = image_aes_decrypt_to,
- 		.add_cipher_data = image_aes_add_cipher_data
- 	},
- 	{
-@@ -36,6 +37,7 @@ struct cipher_algo cipher_algos[] = {
- #endif
- 		.encrypt = image_aes_encrypt,
- 		.decrypt = image_aes_decrypt,
-+		.decrypt_to = image_aes_decrypt_to,
- 		.add_cipher_data = image_aes_add_cipher_data
- 	},
- 	{
-@@ -47,6 +49,7 @@ struct cipher_algo cipher_algos[] = {
- #endif
- 		.encrypt = image_aes_encrypt,
- 		.decrypt = image_aes_decrypt,
-+		.decrypt_to = image_aes_decrypt_to,
- 		.add_cipher_data = image_aes_add_cipher_data
- 	}
- };
-@@ -70,6 +73,7 @@ static int fit_image_setup_decrypt(struct image_cipher_info *info,
- 				   int cipher_noffset)
- {
- 	const void *fdt = gd_fdt_blob();
-+	int key_len, iv_len;
- 	const char *node_name;
- 	char node_path[128];
- 	int noffset;
-@@ -94,7 +98,7 @@ static int fit_image_setup_decrypt(struct image_cipher_info *info,
- 		return -1;
- 	}
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 8fcdc36c931..9ad9b2f43ea 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -155,6 +155,15 @@ config FIT_CIPHER
+ 	  Enable the feature of data ciphering/unciphering in the tool mkimage
+ 	  and in the u-boot support of the FIT image.
  
--	info->iv = fdt_getprop(fit, cipher_noffset, "iv", NULL);
-+	info->iv = fdt_getprop(fit, cipher_noffset, "iv", &iv_len);
- 	info->ivname = fdt_getprop(fit, cipher_noffset, "iv-name-hint", NULL);
- 
- 	if (!info->iv && !info->ivname) {
-@@ -115,7 +119,7 @@ static int fit_image_setup_decrypt(struct image_cipher_info *info,
- 						 &info->size_unciphered);
- 	if (ret) {
- 		printf("Can't get size of unciphered data\n");
--		return -1;
-+		return ret;
- 	}
- 
- 	/*
-@@ -136,20 +140,28 @@ static int fit_image_setup_decrypt(struct image_cipher_info *info,
- 	}
- 
- 	/* read key */
--	info->key = fdt_getprop(fdt, noffset, "key", NULL);
-+	info->key = fdt_getprop(fdt, noffset, "key", &key_len);
- 	if (!info->key) {
- 		printf("Can't get key in cipher node '%s'\n", node_path);
- 		return -1;
- 	}
-+	if (key_len != info->cipher->key_len) {
-+		printf("Bad key length in cipher node '%s'\n", node_path);
-+		return -1;
-+	}
- 
- 	/* read iv */
- 	if (!info->iv) {
--		info->iv = fdt_getprop(fdt, noffset, "iv", NULL);
-+		info->iv = fdt_getprop(fdt, noffset, "iv", &iv_len);
- 		if (!info->iv) {
- 			printf("Can't get IV in cipher node '%s'\n", node_path);
- 			return -1;
- 		}
- 	}
-+	if (iv_len != info->cipher->iv_len) {
-+		printf("Bad IV length for cipher in image '%s'\n", node_name);
-+		return -1;
-+	}
- 
- 	return 0;
- }
-@@ -165,11 +177,28 @@ int fit_image_decrypt_data(const void *fit,
- 	ret = fit_image_setup_decrypt(&info, fit, image_noffset,
- 				      cipher_noffset);
- 	if (ret < 0)
--		goto out;
-+		return ret;
++config SPL_FIT_CIPHER
++	bool "Enable decrypting data in SPL FIT images"
++	depends on SPL_LOAD_FIT
++	depends on SPL_DM_AES
++	depends on SPL_OF_CONTROL
++	help
++	  Enable decrypting FIT image data in SPL. This allows SPL to
++	  decrypt an encrypted U-Boot proper FIT image through an AES driver.
 +
-+	return info.cipher->decrypt(&info, data_ciphered, size_ciphered,
-+				    data_unciphered, size_unciphered);
-+}
-+
-+int fit_image_decrypt_data_to(const void *fit,
-+			      int image_noffset, int cipher_noffset,
-+			      const void *data_ciphered, size_t size_ciphered,
-+			      void *data_unciphered, size_t *size_unciphered)
-+{
-+	struct image_cipher_info info;
-+	int ret;
-+
-+	ret = fit_image_setup_decrypt(&info, fit, image_noffset,
-+				      cipher_noffset);
-+	if (ret < 0)
-+		return ret;
- 
--	ret = info.cipher->decrypt(&info, data_ciphered, size_ciphered,
--				   data_unciphered, size_unciphered);
-+	if (!info.cipher->decrypt_to)
-+		return -ENOSYS;
- 
-- out:
--	return ret;
-+	return info.cipher->decrypt_to(&info, data_ciphered, size_ciphered,
-+				       data_unciphered, size_unciphered);
- }
+ config FIT_VERITY
+ 	bool "dm-verity boot parameter generation from FIT metadata"
+ 	depends on FIT && OF_LIBFDT
 diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 30da18f571f..6e89707788f 100644
+index 6e89707788f..163daac0993 100644
 --- a/boot/image-fit.c
 +++ b/boot/image-fit.c
-@@ -1029,7 +1029,7 @@ int fit_image_get_data_size(const void *fit, int noffset, u32 *data_size)
-  *
-  * @fit: pointer to the FIT image header
-  * @noffset: component image node offset
-- * @data_size: holds the data-size property
-+ * @data_size: holds the data-size-unciphered property
-  *
-  * returns:
-  *     0, on success
-@@ -1042,7 +1042,7 @@ int fit_image_get_data_size_unciphered(const void *fit, int noffset,
- 	const fdt32_t *val;
- 	int len;
+@@ -2471,7 +2471,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 	}
  
--	val = fdt_getprop(fit, noffset, "data-size-unciphered", &len);
-+	val = fdt_getprop(fit, noffset, FIT_DATA_SIZE_UNCIPHERED_PROP, &len);
- 	if (!val)
- 		return -ENOENT;
- 
-@@ -1557,8 +1557,37 @@ int fit_all_image_verify(const void *fit)
- 	return 1;
- }
- 
-+#ifndef USE_HOSTCC
-+static bool fit_image_has_enabled_hash(const void *fit, int image_noffset)
-+{
-+	int noffset;
-+
-+	fdt_for_each_subnode(noffset, fit, image_noffset) {
-+		const char *name = fit_get_name(fit, noffset, NULL);
-+		int ignore;
-+
-+		if (strncmp(name, FIT_HASH_NODENAME, strlen(FIT_HASH_NODENAME)))
-+			continue;
-+
-+		fit_image_hash_get_ignore(fit, noffset, &ignore);
-+		if (!ignore)
-+			return true;
-+	}
-+
-+	return false;
-+}
-+
-+static bool fit_range_in_writable_ram(const void *data, size_t size)
-+{
-+	ulong start = map_to_sysmem(data);
-+
-+	return start >= gd->ram_base && start <= gd->ram_top &&
-+	       size <= gd->ram_top - start;
-+}
-+#endif
-+
- static int fit_image_uncipher(const void *fit, int image_noffset,
--			      void **data, size_t *size)
-+			      bool verified, void **data, size_t *size)
- {
- 	int cipher_noffset, ret;
- 	void *dst;
-@@ -1569,15 +1598,40 @@ static int fit_image_uncipher(const void *fit, int image_noffset,
- 	if (cipher_noffset < 0)
- 		return 0;
- 
-+#ifndef USE_HOSTCC
-+	if (!tools_build()) {
-+		/*
-+		 * Avoid a full-size allocation when the FIT payload is already
-+		 * in writable DRAM. Require a non-ignored payload hash so a
-+		 * repeated attempt detects the consumed ciphertext before
-+		 * decrypting it again, even when verification is disabled.
-+		 */
-+		if (fit_range_in_writable_ram(*data, *size) &&
-+		    fit_image_has_enabled_hash(fit, image_noffset)) {
-+			if (!verified && !fit_image_verify(fit, image_noffset)) {
-+				ret = -EACCES;
-+				goto out;
-+			}
-+			ret = fit_image_decrypt_data_to(fit, image_noffset,
-+							cipher_noffset,
-+							*data, *size, *data,
-+							&size_dst);
-+			if (ret != -ENOSYS)
-+				goto out;
-+		}
-+	}
-+#endif
-+
- 	ret = fit_image_decrypt_data(fit, image_noffset, cipher_noffset,
- 				     *data, *size, &dst, &size_dst);
- 	if (ret)
- 		goto out;
- 
- 	*data = dst;
--	*size = size_dst;
-+out:
-+	if (!ret)
-+		*size = size_dst;
- 
-- out:
- 	return ret;
- }
- 
-@@ -2419,7 +2473,8 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
  	/* Decrypt data before uncompress/move */
- 	if (IS_ENABLED(CONFIG_FIT_CIPHER) && IMAGE_ENABLE_DECRYPT) {
+-	if (IS_ENABLED(CONFIG_FIT_CIPHER) && IMAGE_ENABLE_DECRYPT) {
++	if (!tools_build() && IMAGE_ENABLE_DECRYPT) {
  		puts("   Decrypting Data ... ");
--		if (fit_image_uncipher(fit, noffset, &buf, &size)) {
-+		if (fit_image_uncipher(fit, noffset, images->verify,
-+				       &buf, &size)) {
- 			puts("Error\n");
- 			return -EACCES;
- 		}
-diff --git a/include/image.h b/include/image.h
-index 03e290ad42e..0d32d2847e8 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1185,6 +1185,7 @@ int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
- #define FIT_DATA_OFFSET_PROP	"data-offset"
- #define FIT_DATA_SIZE_PROP	"data-size"
- #define FIT_IMAGE_DATA_PROP	"image-data"
-+#define FIT_DATA_SIZE_UNCIPHERED_PROP	"data-size-unciphered"
- #define FIT_TIMESTAMP_PROP	"timestamp"
- #define FIT_DESC_PROP		"description"
- #define FIT_ARCH_PROP		"arch"
-@@ -1887,11 +1888,45 @@ int fit_image_check_sig(const void *fit, int noffset, const void *data,
- 			size_t size, const void *key_blob, int required_keynode,
- 			char **err_msgp);
- 
-+/**
-+ * fit_image_decrypt_data() - Decrypt a FIT image payload
-+ *
-+ * @fit:		FIT image
-+ * @image_noffset:	Offset of the image node to decrypt
-+ * @cipher_noffset:	Offset of the cipher node for the image
-+ * @data:		Encrypted image payload
-+ * @size:		Size of encrypted image payload
-+ * @data_unciphered:	Returns allocated decrypted payload
-+ * @size_unciphered:	Returns size of decrypted payload
-+ * Return: 0 on success, <0 on error
-+ */
- int fit_image_decrypt_data(const void *fit,
- 			   int image_noffset, int cipher_noffset,
- 			   const void *data, size_t size,
- 			   void **data_unciphered, size_t *size_unciphered);
- 
-+/**
-+ * fit_image_decrypt_data_to() - Decrypt a FIT image payload to a buffer
-+ *
-+ * @fit:		FIT image
-+ * @image_noffset:	Offset of the image node to decrypt
-+ * @cipher_noffset:	Offset of the cipher node for the image
-+ * @data:		Encrypted image payload
-+ * @size:		Size of encrypted image payload
-+ * @data_unciphered:	Destination buffer for decrypted payload. The caller
-+ *			must provide at least @size bytes.
-+ * @size_unciphered:	Returns size of decrypted payload
-+ *
-+ * If @data and @data_unciphered are the same buffer, successful decryption
-+ * overwrites the encrypted payload.
-+ *
-+ * Return: 0 on success, <0 on error
-+ */
-+int fit_image_decrypt_data_to(const void *fit,
-+			      int image_noffset, int cipher_noffset,
-+			      const void *data, size_t size,
-+			      void *data_unciphered, size_t *size_unciphered);
-+
- /**
-  * fit_region_make_list() - Make a list of regions to hash
-  *
-@@ -2008,6 +2043,10 @@ struct cipher_algo {
- 	int (*decrypt)(struct image_cipher_info *info,
- 		       const void *cipher, size_t cipher_len,
- 		       void **data, size_t *data_len);
-+
-+	int (*decrypt_to)(struct image_cipher_info *info,
-+			  const void *cipher, size_t cipher_len,
-+			  void *data, size_t *data_len);
- };
- 
- int fit_image_cipher_get_algo(const void *fit, int noffset, char **algo);
-diff --git a/include/u-boot/aes.h b/include/u-boot/aes.h
-index d72322c1013..8fd43f02adc 100644
---- a/include/u-boot/aes.h
-+++ b/include/u-boot/aes.h
-@@ -35,6 +35,9 @@ static inline int image_aes_add_cipher_data(struct image_cipher_info *info,
- int image_aes_decrypt(struct image_cipher_info *info,
- 		      const void *cipher, size_t cipher_len,
- 		      void **data, size_t *size);
-+int image_aes_decrypt_to(struct image_cipher_info *info,
-+			 const void *cipher, size_t cipher_len,
-+			 void *data, size_t *size);
- #else
- static inline int image_aes_decrypt(struct image_cipher_info *info,
- 				    const void *cipher, size_t cipher_len,
-@@ -42,6 +45,13 @@ static inline int image_aes_decrypt(struct image_cipher_info *info,
- {
- 	return -ENXIO;
+ 		if (fit_image_uncipher(fit, noffset, images->verify,
+ 				       &buf, &size)) {
+diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+index 64e5f95546f..955ce88dfd5 100644
+--- a/common/spl/spl_fit.c
++++ b/common/spl/spl_fit.c
+@@ -230,6 +230,34 @@ static void fit_fill_image_info(const void *fit, int node,
+ 		image_info->entry_point = FDT_ERROR;
  }
-+
-+static inline int image_aes_decrypt_to(struct image_cipher_info *info,
-+				       const void *cipher, size_t cipher_len,
-+				       void *data, size_t *size)
+ 
++static int spl_fit_image_decrypt(const void *fit, int node, int cipher_node,
++				 void **data, size_t *size, void *dst)
 +{
-+	return -ENXIO;
-+}
- #endif /* IMAGE_ENABLE_DECRYPT */
- 
- #endif
-diff --git a/lib/Makefile b/lib/Makefile
-index f36a311f9e8..53bc5f2d911 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -18,7 +18,6 @@ obj-$(CONFIG_ARCH_AT91) += at91/
- obj-$(CONFIG_OPTEE_LIB) += optee/
- 
- obj-$(CONFIG_AES) += aes.o
--obj-$(CONFIG_AES) += aes/
- obj-$(CONFIG_$(PHASE_)BINMAN_FDT) += binman.o
- 
- obj-$(CONFIG_FW_LOADER) += fw_loader.o
-@@ -89,6 +88,7 @@ obj-$(CONFIG_$(PHASE_)ASN1_DECODER_LEGACY) += asn1_decoder.o
- 
- obj-$(CONFIG_$(PHASE_)ZLIB) += zlib/
- obj-$(CONFIG_$(PHASE_)ZSTD) += zstd/
-+obj-$(CONFIG_$(PHASE_)FIT_CIPHER) += aes/
- obj-$(CONFIG_$(PHASE_)GZIP) += gunzip.o
- obj-$(CONFIG_$(PHASE_)LZO) += lzo/
- obj-$(CONFIG_$(PHASE_)LZMA) += lzma/
-diff --git a/lib/aes/aes-decrypt.c b/lib/aes/aes-decrypt.c
-index 5d616983082..3085e416955 100644
---- a/lib/aes/aes-decrypt.c
-+++ b/lib/aes/aes-decrypt.c
-@@ -4,56 +4,108 @@
-  */
- 
- #ifndef USE_HOSTCC
-+#include <dm.h>
- #include <malloc.h>
- #endif
- #include <image.h>
- #include <uboot_aes.h>
- 
--int image_aes_decrypt(struct image_cipher_info *info,
--		      const void *cipher, size_t cipher_len,
--		      void **data, size_t *size)
--{
- #ifndef USE_HOSTCC
--	unsigned char key_exp[AES256_EXPAND_KEY_LENGTH];
--	unsigned int aes_blocks, key_len = info->cipher->key_len;
--
--	/*
--	 * The ciphertext is a whole number of AES blocks by construction, and
--	 * the decryption below writes one full block at a time, so anything
--	 * else would overflow the output buffer.
--	 */
-+static int image_aes_validate(struct image_cipher_info *info,
-+			      const void *cipher, size_t cipher_len,
-+			      void *data, size_t *size)
-+{
-+	if (!info || !info->cipher || !info->key || !info->iv || !cipher ||
-+	    !data || !size)
-+		return -EINVAL;
-+	if (info->cipher->iv_len != AES_BLOCK_LENGTH ||
-+	    (info->cipher->key_len != AES128_KEY_LENGTH &&
-+	     info->cipher->key_len != AES192_KEY_LENGTH &&
-+	     info->cipher->key_len != AES256_KEY_LENGTH))
-+		return -EINVAL;
-+	/* Decryption writes complete blocks, never beyond the ciphertext size. */
- 	if (!cipher_len || cipher_len % AES_BLOCK_LENGTH) {
- 		printf("Invalid ciphertext length\n");
- 		return -EINVAL;
- 	}
--
--	/*
--	 * Decryption produces exactly cipher_len bytes, so the unciphered
--	 * size the image claims cannot be larger than that.
--	 */
- 	if (info->size_unciphered > cipher_len) {
- 		printf("Invalid unciphered size\n");
- 		return -EINVAL;
- 	}
- 
-+	return 0;
-+}
-+#endif
-+
-+int image_aes_decrypt_to(struct image_cipher_info *info,
-+			 const void *cipher, size_t cipher_len,
-+			 void *data, size_t *size)
-+{
-+#ifdef USE_HOSTCC
-+	return -ENOSYS;
-+#else
-+	unsigned int aes_blocks, key_len;
++	size_t dst_size;
 +	int ret;
 +
-+	ret = image_aes_validate(info, cipher, cipher_len, data, size);
-+	if (ret)
++	puts("   Decrypting Data ... ");
++	ret = fit_image_decrypt_data_to(fit, node, cipher_node, *data, *size,
++					dst, &dst_size);
++	if (ret) {
++		puts("Error\n");
 +		return ret;
-+	key_len = info->cipher->key_len;
-+	aes_blocks = cipher_len / AES_BLOCK_LENGTH;
++	}
 +
-+	if (CONFIG_IS_ENABLED(DM_AES)) {
-+		ret = dm_aes_cbc_decrypt_with_key(key_len * 8, (u8 *)info->key,
-+						  (u8 *)info->iv, (u8 *)cipher,
-+						  data, aes_blocks);
-+		if (!ret) {
-+			*size = info->size_unciphered;
-+			return 0;
++	*data = dst;
++	*size = dst_size;
++
++	puts("OK\n");
++
++	return 0;
++}
++
++static bool spl_image_needs_decomp(uint8_t image_comp)
++{
++	return (IS_ENABLED(CONFIG_SPL_GZIP) && image_comp == IH_COMP_GZIP) ||
++	       (IS_ENABLED(CONFIG_SPL_LZMA) && image_comp == IH_COMP_LZMA);
++}
++
+ /**
+  * load_simple_fit(): load the image described in a certain FIT node
+  * @info:	points to information about the device to load data from
+@@ -258,12 +286,16 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 	size_t length;
+ 	ulong size;
+ 	ulong load_addr;
+-	void *load_ptr;
++	void *load_ptr = NULL;
++	size_t load_map_len = 0;
+ 	void *src;
+ 	uint8_t image_comp = -1, type = -1;
+ 	const void *data;
+ 	const void *fit = ctx->fit;
+ 	bool external_data = false;
++	bool encrypted;
++	bool needs_decomp = false;
++	int cipher_node = -ENOENT;
+ 	int ret;
+ 
+ 	log_debug("starting\n");
+@@ -295,6 +327,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 	if (spl_decompression_enabled()) {
+ 		fit_image_get_comp(fit, node, &image_comp);
+ 		debug("%s ", genimg_get_comp_name(image_comp));
++		needs_decomp = spl_image_needs_decomp(image_comp);
+ 	}
+ 
+ 	if (fit_image_get_load(fit, node, &load_addr)) {
+@@ -306,6 +339,14 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 		load_addr = image_info->load_addr;
+ 	}
+ 
++	cipher_node = fdt_subnode_offset(fit, node, FIT_CIPHER_NODENAME);
++	if (cipher_node >= 0 && !CONFIG_IS_ENABLED(FIT_CIPHER)) {
++		printf("Can't load %s: encrypted image without SPL_FIT_CIPHER\n",
++		       fit_get_name(fit, node, NULL));
++		return -ENOSYS;
++	}
++	encrypted = cipher_node >= 0;
++
+ 	if (!fit_image_get_data_position(fit, node, &offset)) {
+ 		external_data = true;
+ 	} else if (!fit_image_get_data_offset(fit, node, &offset)) {
+@@ -364,11 +405,12 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 		}
+ 		read_offset = fit_offset + aligned_offset;
+ 
+-		if (spl_decompression_enabled() &&
+-		    (image_comp == IH_COMP_GZIP || image_comp == IH_COMP_LZMA))
+-			src_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR, ARCH_DMA_MINALIGN), len);
++		if (needs_decomp || encrypted)
++			src_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR,
++						   ARCH_DMA_MINALIGN), len);
+ 		else
+-			src_ptr = map_sysmem(ALIGN(load_addr, ARCH_DMA_MINALIGN), len);
++			src_ptr = map_sysmem(ALIGN(load_addr, ARCH_DMA_MINALIGN),
++					     len);
+ 		length = len;
+ 
+ 		/*
+@@ -426,10 +468,40 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 		puts("OK\n");
+ 	}
+ 
++	if (encrypted) {
++		void *decrypt_ptr;
++
++		if (external_data) {
++			decrypt_ptr = src;
++		} else if (needs_decomp) {
++			decrypt_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR,
++						       ARCH_DMA_MINALIGN),
++						 length);
++		} else {
++			load_map_len = length;
++			load_ptr = map_sysmem(load_addr, load_map_len);
++			decrypt_ptr = load_ptr;
 +		}
-+		if (ret != -ENODEV && ret != -EOPNOTSUPP)
++
++		ret = spl_fit_image_decrypt(fit, node, cipher_node, &src, &length,
++					    decrypt_ptr);
++		if (ret)
 +			return ret;
 +	}
 +
-+	if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
-+		unsigned char key_exp[AES256_EXPAND_KEY_LENGTH];
+ 	if (CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS))
+ 		board_fit_image_post_process(fit, node, &src, &length);
+ 
+-	load_ptr = map_sysmem(load_addr, length);
++	size = needs_decomp ? CONFIG_SYS_BOOTM_LEN : length;
++	if (!load_ptr || size > load_map_len) {
++		void *old_load_ptr = load_ptr;
 +
-+		/* First we expand the key. */
-+		aes_expand_key((u8 *)info->key, key_len, key_exp);
-+
-+		aes_cbc_decrypt_blocks(key_len, key_exp, (u8 *)info->iv,
-+				       (u8 *)cipher, data, aes_blocks);
-+		*size = info->size_unciphered;
-+		return 0;
++		load_ptr = map_sysmem(load_addr, size);
++		load_map_len = size;
++		if (src == old_load_ptr)
++			src = load_ptr;
 +	}
 +
-+	return -ENOSYS;
-+#endif
-+}
-+
-+int image_aes_decrypt(struct image_cipher_info *info,
-+		      const void *cipher, size_t cipher_len,
-+		      void **data, size_t *size)
-+{
-+#ifdef USE_HOSTCC
-+	return -ENOSYS;
-+#else
-+	int ret;
-+
-+	ret = image_aes_validate(info, cipher, cipher_len, data, size);
-+	if (ret)
-+		return ret;
-+
- 	*data = malloc(cipher_len);
- 	if (!*data) {
- 		printf("Can't allocate memory to decrypt\n");
- 		return -ENOMEM;
+ 	if (IS_ENABLED(CONFIG_SPL_GZIP) && image_comp == IH_COMP_GZIP) {
+ 		size = length;
+ 		if (gunzip(load_ptr, CONFIG_SYS_BOOTM_LEN, src, &size)) {
+@@ -447,7 +519,8 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
+ 			return -EIO;
+ 		}
+ 		length = loadEnd - CONFIG_SYS_LOAD_ADDR;
+-	} else {
++	} else if (src != load_ptr) {
++		/* Direct decrypt of an embedded image can already be in place. */
+ 		memmove(load_ptr, src, length);
  	}
--	*size = info->size_unciphered;
--
--	memcpy(&key_exp[0], info->key, key_len);
--
--	/* First we expand the key. */
--	aes_expand_key((u8 *)info->key, key_len, key_exp);
  
--	/* Calculate the number of AES blocks to encrypt. */
--	aes_blocks = cipher_len / AES_BLOCK_LENGTH;
-+	ret = image_aes_decrypt_to(info, cipher, cipher_len, *data, size);
-+	if (ret) {
-+		free(*data);
-+		*data = NULL;
-+	}
- 
--	aes_cbc_decrypt_blocks(key_len, key_exp, (u8 *)info->iv,
--			       (u8 *)cipher, *data, aes_blocks);
-+	return ret;
- #endif
--
--	return 0;
- }
-diff --git a/test/lib/Makefile b/test/lib/Makefile
-index 9fc4a1a9b5d..94cf42d724a 100644
---- a/test/lib/Makefile
-+++ b/test/lib/Makefile
-@@ -31,6 +31,9 @@ obj-$(CONFIG_ERRNO_STR) += test_errno_str.o
- obj-$(CONFIG_UT_LIB_ASN1) += asn1.o
- obj-$(CONFIG_UT_LIB_RSA) += rsa.o
- obj-$(CONFIG_AES) += test_aes.o
-+ifeq ($(CONFIG_FIT_CIPHER)$(CONFIG_DM_AES),yy)
-+obj-y += test_aes_decrypt.o
-+endif
- obj-$(CONFIG_SHA256) += test_sha256_hmac.o
- obj-$(CONFIG_HKDF_MBEDTLS) += test_sha256_hkdf.o
- obj-$(CONFIG_GETOPT) += getopt.o
-diff --git a/test/lib/test_aes_decrypt.c b/test/lib/test_aes_decrypt.c
-new file mode 100644
-index 00000000000..3b498e23e4b
---- /dev/null
-+++ b/test/lib/test_aes_decrypt.c
-@@ -0,0 +1,89 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Tests for target-side FIT AES decryption
-+ *
-+ * Copyright (C) 2026 James Hilliard
-+ */
-+
-+#include <image.h>
-+#include <u-boot/aes.h>
-+#include <uboot_aes.h>
-+#include <test/lib.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+
-+static int lib_test_image_aes_decrypt(struct unit_test_state *uts)
-+{
-+	u8 key[AES256_KEY_LENGTH] = { };
-+	u8 key_exp[AES256_EXPAND_KEY_LENGTH];
-+	u8 iv[AES_BLOCK_LENGTH] = { };
-+	u8 plain[2 * AES_BLOCK_LENGTH];
-+	u8 cipher[sizeof(plain)];
-+	u8 output[sizeof(plain)];
-+	struct cipher_algo algo = {
-+		.name = "aes256",
-+		.key_len = sizeof(key),
-+		.iv_len = sizeof(iv),
-+	};
-+	struct image_cipher_info info = {
-+		.cipher = &algo,
-+		.key = key,
-+		.iv = iv,
-+		.size_unciphered = sizeof(plain),
-+	};
-+	size_t size;
-+	int i, ret;
-+
-+	for (i = 0; i < sizeof(key); i++)
-+		key[i] = i;
-+	for (i = 0; i < sizeof(iv); i++)
-+		iv[i] = 0x80 + i;
-+	for (i = 0; i < sizeof(plain); i++)
-+		plain[i] = 0x40 + i;
-+
-+	aes_expand_key(key, sizeof(key), key_exp);
-+	aes_cbc_encrypt_blocks(sizeof(key), key_exp, iv, plain, cipher,
-+			       ARRAY_SIZE(cipher) / AES_BLOCK_LENGTH);
-+
-+	size = 0;
-+	ut_assertok(image_aes_decrypt_to(&info, cipher, sizeof(cipher), output,
-+					 &size));
-+	ut_asserteq(sizeof(plain), size);
-+	ut_asserteq_mem(plain, output, sizeof(plain));
-+
-+	memcpy(output, cipher, sizeof(cipher));
-+	size = 0;
-+	ut_assertok(image_aes_decrypt_to(&info, output, sizeof(output), output,
-+					 &size));
-+	ut_asserteq(sizeof(plain), size);
-+	ut_asserteq_mem(plain, output, sizeof(plain));
-+
-+	size = 0x55;
-+	ret = image_aes_decrypt_to(&info, cipher, sizeof(cipher) - 1, output,
-+				   &size);
-+	ut_asserteq(-EINVAL, ret);
-+	ut_asserteq(0x55, size);
-+
-+	info.size_unciphered = sizeof(cipher) + 1;
-+	ret = image_aes_decrypt_to(&info, cipher, sizeof(cipher), output, &size);
-+	ut_asserteq(-EINVAL, ret);
-+	info.size_unciphered = sizeof(plain);
-+
-+	info.key = NULL;
-+	ret = image_aes_decrypt_to(&info, cipher, sizeof(cipher), output, &size);
-+	ut_asserteq(-EINVAL, ret);
-+	info.key = key;
-+	info.iv = NULL;
-+	ret = image_aes_decrypt_to(&info, cipher, sizeof(cipher), output, &size);
-+	ut_asserteq(-EINVAL, ret);
-+	info.iv = iv;
-+	info.cipher = NULL;
-+	ret = image_aes_decrypt_to(&info, cipher, sizeof(cipher), output, &size);
-+	ut_asserteq(-EINVAL, ret);
-+	ret = image_aes_decrypt_to(NULL, cipher, sizeof(cipher), output, &size);
-+	ut_asserteq(-EINVAL, ret);
-+
-+	return 0;
-+}
-+
-+LIB_TEST(lib_test_image_aes_decrypt, 0);
-diff --git a/test/py/tests/test_fit_cipher.py b/test/py/tests/test_fit_cipher.py
-new file mode 100644
-index 00000000000..4adb18988d8
---- /dev/null
-+++ b/test/py/tests/test_fit_cipher.py
-@@ -0,0 +1,118 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2026 James Hilliard
-+
-+"""Check encrypted FIT loading and retries with enabled or ignored hashes."""
-+
-+import hashlib
-+from pathlib import Path
-+import shutil
-+
-+import pytest
-+
-+import fit_util
-+import utils
-+
-+
-+# First two blocks of the public AES-256-CBC vector in NIST SP 800-38A.
-+KEY = bytes.fromhex('603deb1015ca71be2b73aef0857d7781'
-+                    '1f352c073b6108d72d9810a30914dff4')
-+IV = bytes(range(16))
-+PLAIN = bytes.fromhex('6bc1bee22e409f96e93d7e117393172a'
-+                      'ae2d8a571e03ac9c9eb76fac45af8e51')
-+CIPHER = bytes.fromhex('f58c4c04d6e5f1ba779eabfb5f7bfbd6'
-+                       '9cfc4e967edb808d679f777bc6702c7d')
-+
-+FIT = '''/dts-v1/;
-+/ {
-+    description = "Encrypted FIT retry test";
-+    #address-cells = <1>;
-+    timestamp = <1>;
-+    images {
-+        kernel {
-+            description = "AES-256-CBC test vector";
-+            data = [%(cipher)s];
-+            data-size-unciphered = <32>;
-+            type = "kernel";
-+            arch = "sandbox";
-+            os = "linux";
-+            compression = "none";
-+            load = <0x4000000>;
-+            entry = <0x4000000>;
-+            cipher {
-+                algo = "aes256";
-+                key-name-hint = "retry";
-+                iv = [%(iv)s];
-+            };
-+            %(hashes)s
-+        };
-+    };
-+    configurations {
-+        default = "conf";
-+        conf {
-+            kernel = "kernel";
-+        };
-+    };
-+};
-+'''
-+
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.buildconfigspec('fit_cipher')
-+@pytest.mark.buildconfigspec('cmd_bootm')
-+@pytest.mark.buildconfigspec('cmd_fdt')
-+@pytest.mark.requiredtool('dtc')
-+@pytest.mark.requiredtool('fdtput')
-+@pytest.mark.parametrize('hash_mode', ('absent', 'ignored', 'enabled', 'mixed'))
-+@pytest.mark.parametrize('verify', ('yes', 'no'))
-+def test_fit_cipher_retry(ubman, hash_mode, verify):
-+    """Only a checked payload hash can guard destructive in-place decryption."""
-+    checked = hash_mode in ('enabled', 'mixed')
-+    hashes = ''
-+    if hash_mode in ('ignored', 'mixed'):
-+        hashes += 'hash-ignored { algo = "sha256"; uboot-ignore = <1>; };'
-+    if checked:
-+        digest = hashlib.sha256(CIPHER).digest().hex(' ')
-+        hashes += f'hash-checked {{ algo = "sha256"; value = [{digest}]; }};'
-+
-+    name = f'fit-cipher-{hash_mode}-{verify}'
-+    fit = fit_util.make_dtb(ubman, FIT % {
-+        'cipher': CIPHER.hex(' '), 'iv': IV.hex(' '), 'hashes': hashes,
-+    }, name)
-+    dtb = fit_util.make_fname(ubman, f'{name}-control.dtb')
-+    payload = fit_util.make_fname(ubman, f'{name}-payload.bin')
-+    loaded = fit_util.make_fname(ubman, f'{name}-loaded.bin')
-+    old_dtb = ubman.config.dtb
-+    shutil.copyfile(old_dtb, dtb)
-+    utils.run_and_log(ubman, ['fdtput', '-p', '-t', 'bx', dtb,
-+                            '/cipher/key-aes256-retry', 'key',
-+                            *KEY.hex(' ').split()])
-+
-+    try:
-+        ubman.config.dtb = dtb
-+        ubman.restart_uboot()
-+        ubman.run_command(f'setenv verify {verify}')
-+        ubman.run_command(f'host load hostfs - 1000000 {fit}')
-+
-+        for attempt in range(2):
-+            output = ubman.run_command('bootm start 1000000')
-+            if attempt and checked:
-+                # A retry must reject the already consumed ciphertext.
-+                assert 'Bad hash value' in output
-+                assert 'Decrypting Data ... OK' not in output
-+            else:
-+                result = output.split('Decrypting Data ... ', 1)[1]
-+                assert result.splitlines()[0].endswith('OK')
-+                ubman.run_command('bootm loados')
-+                ubman.run_command(f'host save hostfs - 4000000 {loaded} 20')
-+                assert Path(loaded).read_bytes() == PLAIN
-+
-+            ubman.run_command_list([
-+                'fdt addr 1000000',
-+                'fdt get addr fit_cipher_data /images/kernel data',
-+                f'host save hostfs - $fit_cipher_data {payload} 20',
-+            ])
-+            # Ignored/absent hashes must retain the allocating fallback.
-+            assert Path(payload).read_bytes() == (PLAIN if checked else CIPHER)
-+    finally:
-+        ubman.config.dtb = old_dtb
-+        ubman.restart_uboot()
 
 -- 
 2.53.0
