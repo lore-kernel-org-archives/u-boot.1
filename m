@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15DCDCC6B2A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C833CCF2C4
 	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 04:36:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id AC5E78150D;
+	by smtp4.osuosl.org (Postfix) with ESMTP id D0915409E9;
 	Sat, 17 Oct 2026 04:36:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vhCPLP818zb4; Sat, 17 Oct 2026 04:36:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A2CAF8153D
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792211795;
-	b=lKkgWOlUy5voVuLEQlYCshZIvMUcpGzEk5glnsvUaXdh7jn9ZA4ABTYQOdPs7wXwj0UC
-	 Ke0QS9QRfVT3+5ufJhrHyWyLz5FOft+eDbH/3AKIWIOGyOugudC2B4kWPkdRV11+RNMBC
-	 tvq1dhYpnPaoiCH6vlIiJ/wxKICtJ8vTnGpr4hZWrL0ETDUmSRFikYWksFYjz32DI6zIA
-	 abRYXc6ULCMOd24TdSKzvv7ZEg0OSwXoqP/rXn5warvjErrcH23HrXIIaFN///2ILP6t3
-	 JImvS4zCeVbfyr8RP5l0D/wvx/wvOMwasiVCmskyA89tQiHGTcwEz+qDdM/sKCODIjA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qhwd1lYD_u9E; Sat, 17 Oct 2026 04:36:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 42CC5409ED
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792211797;
+	b=d/xwv8kY5ZT2u0cSCOF3ku7khl3dKsS8SyrvKleZO7yH2A2xXKCmQ46D+3vMv33s18qp
+	 7xtnZssVmBnUcoMbvIHtTdAKEr7qNSofa5tEExklqoY+SXvKvdtC1SLk2wDASW63JNczt
+	 j4XI/hadMiEVDQOSyVDgzffI70w3gJjZhjMWwX6S1Z0SaSdXCzBDr7D6MPeQBBIfdpkbI
+	 V2zcPKRuDpClQaUtD4R1zUAlW3DlQ3nwIldNeRPGSBKFpIveSRJFzlzL1crpy5emKri/A
+	 mBNIEcxv3nLxk7TeH23LhZMbn455RK8Ff8ksO/LGIk/E+sn9tHSbSBBexm3QQHATo/g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792211795;
+	c=relaxed/relaxed; t=1792211797;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,138 +32,138 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:In-Reply-To:To:Cc:X-Mailer:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=wTxgZFck3fqYOD51izeq1z3wEPtoXFPdInTR6K7LiDo=;
-	b=dWzs9PfhVuhd1HL8N3VY2KgcAdjjk7HBmb9LZjv9WUznLIFu5RyiUD7RYrNYexX0k4AC
-	 Zqte+iE7o7j1Qfca87KuYMeR0sg0PnnyM0+tOXqsTpqzeNvLbExyvBMYNY7vmbbEGsRU7
-	 Gi33XCxZEvCcBeBXfgS46ZkdNcCULu0ANimwwXLxV4dXUKhGwYdcMBgaNJ2MjmfPEnopO
-	 y+K2MRNTCZjklpHXxupoH8YmTwYpNaz3yQrLiRPLT9G//9Uo2PnOcW7O1bVv9HAej+Ir1
-	 06hAYh0cFnUNDd7VkUjq4fkARzbGZ/Nq8+eTocBNlk/gTpuy9GtJ6k0UGieCEhiUIfg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=1xoNO+T8N0aFOCi5xygH+NT1Rr4UGGgjfNYdwmRqSYM=;
+	b=EpD8U/5sKZ6Zu46c6W4naLBZ0pvOHZfTiB7FUru4SqTwpba53swjm4ZdZ0lDNSEe3hou
+	 EtjrcYooYmP04cuf/ZYW8ORQkzv9JFl/yLZ5r0Zqn3vS97VAfG4N0o61DgIpP+HmJxdhE
+	 b8Augokrx/R9lN7xKysD8LeLXJ336+PQ3pK0qCHwE6yRy71t8W3WqqpUDCBHBqFDl7Xzc
+	 4p+29k/jObxUxZLNYdFKjXsa6L3xzDUYW1htX0Q36m5qCaqNo2WWisssRhslRmaD/b6q+
+	 5Y0VJaIzpyxLapi5zi0fOM4hYtwnzgmI/rAFvsFgFiIfEHw0WTVZb3+MLArJsyLSX8A==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792211795;
-	bh=wTxgZFck3fqYOD51izeq1z3wEPtoXFPdInTR6K7LiDo=;
+	d=lists.u-boot-project.org; s=default; t=1792211797;
+	bh=1xoNO+T8N0aFOCi5xygH+NT1Rr4UGGgjfNYdwmRqSYM=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YcsjhhrD3A97wApIoqR86vrozz5IEVvnEsn1G0VqTsmGj2ZXFNtXeXsQQZMqchTxx
-	 SxtueefjsP6y34jqzzAeGBN/wvWt9t0xoE7+muZOvMwCZElFeeOp0/JpJpkAijJ+V0
-	 7ifp7EOG5Afmbp+oCncBdHe5r9VSa/kTyZ7razkyFvoKmHYIOc0zNoclxPJYjT9Cx3
-	 Z4i9bl6k5zBrsuOCaR8nCru0KFKB6gKNmSvv3raGmhsRhP1ZXFiXKZSmwFU2IGVneh
-	 h2gKq9LarktmHgta4hHnKxO+cnwM9WvywkYgR8l8moP4jz0g7PNp+mhuxCgBwOqkff
-	 hDf8/A9F52PYA==
+	b=pINYLQSIb10O4/3ziCTdVBXRcp+C5wSPZ6Jl5LDv4itVn4SQ1TG3n1blJ0MJnipUB
+	 uHo/NfzbWsd25Yy+BFsKUFS0gTfVX7vj9u+Hr6ml7hGapbXeZktvlAGMVpEpxKS9pu
+	 U9PPWpG/Ci7UEBatGM6ujizX0dnMzsl2aLSbIXMjZbCIULDGyu+KINZsbNgxHNW8Kp
+	 A+2umyUeGPo55AKz+TYe5PizekEvmNd0+E/ZcF4P0ACKMFoGYVO6do/XQSNrQcUUnL
+	 4c9YW5sz9kzHcbtVplaqbiZPy70aDmU2QwHaWlwYnjf6mb63nWfO4dPWTLrBNMAeJf
+	 a0HKeMg7Lht7w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A2CAF8153D;
-	Sat, 17 Oct 2026 04:36:35 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id B176C105
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:35:53 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 42CC5409ED;
+	Sat, 17 Oct 2026 04:36:37 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id C20B4362
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:35:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A366C405E3
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:35:53 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id B29068165E
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:35:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7yX8cSORuyii for <u-boot@lists.u-boot-project.org>;
- Sat, 17 Oct 2026 00:35:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B8E794081B
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c2c"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792197353;
- b=UVzIQk1hy10fC9LDYleWErqkUdO7UEpk8D+DpFvXY+tVvDv9S28S14SOyXZR72wES/Uv
- k6HLBX6VlpOYDP/fA7LhpAf73ED48GWj/MQEGRcfSwC+sIbq5b3M/pDya6BgstYj0XAch
- wvt7A5LC4l9PdMeN5mbpOZK+kfCoZwzQMNIOPpy6RERglhjBVad1CNnp70Xsdvi0K3VR0
- Pco/yN486eJcHE6t25T9Z3/+4Gan3GIVNYrsJpsRZzfu/stEXVBcT7ND4+Q2C5I7WEJjO
- S7DmS8HsVlTi8QO/z3eaRqMndLTZUcHML77ojuoV1+voRdVpQYDYmkMTPkrFtTxOmQg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KBppg5etnDJv for <u-boot@lists.u-boot-project.org>;
+ Sat, 17 Oct 2026 00:35:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3F2318156F
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2001:4860:4864:20::35"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792197356;
+ b=ROjRdiJsH97J0LY4sIHOT0yKGhPloyZEdyQKEebuCbLBG6aS0IILd3B9ob9Ytr0whj7w
+ mqsaT+Y8OKtiK+CaeYDe6JETsvyP4Bym0cGJBVyl4gUMS/4mMydJ7DM8wvn8i68mC8afK
+ KCQjpK/HLQQQqsuwgvHnGlwFX/tb2NQRRndHnbD9WWDBF9ogGCDKoSxRjMlkTIe2z7fx4
+ 1lAIoN5edlILPnn4FQQj+amufFDjcMAHr7eN9YvphVhQAblt3NaeL1/URcX05fX5nTFkV
+ KCCwlKPdf9T+w4SU7VMly2xpE7WGHcReog4eqPD4iw0xA5F4MVhkQkN55wer/LwBmvQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792197353;
+ c=relaxed/relaxed; t=1792197356;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
- bh=wTxgZFck3fqYOD51izeq1z3wEPtoXFPdInTR6K7LiDo=;
- b=LTWFUB3iIMGglzheCd2jsIe/56VsJeTpiDQP1j3Q1cO+8anq0anxPuY4b88EJqosfeRO
- RdmviCOvwMONBkra5GrOWvv96ySqyv7Kbpkzg51DvLJ5K/o3nsjffx/q3Mzg1KCtj7tY3
- COy9WIDqb03Y1GyFeIqOgUeAB0nDYDXyqFhZz82JbH1DyGwPzzyfff77gYfrLycGyqaRb
- LENMQkSluxmDCi75i9q+Hn9TS0lA0235H90KSnXVVN+9DrZ2tBDsQeWUmHSpMlPtgwuYr
- Zl362YDy7PUsS2BX8MRryzgBh6O5XDOvOJGxYOktCpAZZIvEPG89uc4nUDOhMR5l4Tw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=1xoNO+T8N0aFOCi5xygH+NT1Rr4UGGgjfNYdwmRqSYM=;
+ b=HHSWRrkMTFkImfKr9luEWSO3eZmLod2gn9m4B/6W0vmbCz5H0HvF5yoEU0q3FZl559Zd
+ szicD26yHItA1FW0zXXQr6plLwHToOaBj1qrcszOsuxC3A7RtennNt+G3L1ZTLObo8+kJ
+ TN1zO5A6DsZAXQCTzjYStTaFa5AKkfWNGy+pX/XZ+3FoYRMHS+WJecVgzMFolX8TKnwze
+ fB/dEqoqWUflrgcw+YvTghrbiG1YgMaD6BBc8FwvVzhVvv9xr2ClwwADGGFVLat8HYfw5
+ mXaazRPImA+lFociUoZ+LjmG5AOh2M1QdvrM4//Oovo00+btxHsUML4S4hoHs+h04jA==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=XyDemwpw; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c2c"
+ header.s=20251104 header.b=icuAqXBa; 
+ arc=none smtp.remote-ip="2001:4860:4864:20::35"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2c; helo=mail-oo1-xc2c.google.com;
+ client-ip=2001:4860:4864:20::35; helo=mail-oa1-x35.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=XyDemwpw
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B8E794081B
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:35:52 +0000 (UTC)
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-6f8a519e215so485107eaf.1
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 17:35:52 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=icuAqXBa
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3F2318156F
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:35:55 +0000 (UTC)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-49429181ce9so297580fac.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 17:35:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792197351; x=1792802151;
+ d=gmail.com; s=20251104; t=1792197354; x=1792802154;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=wTxgZFck3fqYOD51izeq1z3wEPtoXFPdInTR6K7LiDo=;
- b=XyDemwpwvy3oqCBMWZzBTO/OD9RBHItRJiuFmPmEoCGX8MIgzLTPEwx5qM8dbLRD6R
- yLZac1TqgggbIOMYqL6GqtTYjo/qj8RUcXhobgNskGKXcSxOVcsNunsE5tLcZ0REveDA
- SMVfV2IJY6UyJDaz3Q1Oa6gQ7W8GIYiaGxyE8EpRzVi2IH7EUEI0jr9ljRJItu0nfOhC
- VCHUdJYmJ1v/99cjKJvYJLvKX+SO+LjAmYtBKR1oLpXUndrnaeH9Rd/KSYNgWEP5lA4G
- wkqn9E8/2MkphvGRCdCSZsHhmkyti+sMVoHgF44FsZ4mp7CCjN20QgxXCwKVdNNoQLq2
- PpuQ==
+ bh=1xoNO+T8N0aFOCi5xygH+NT1Rr4UGGgjfNYdwmRqSYM=;
+ b=icuAqXBar+kotOk2PAZZ69H6IISBrC+EBR16xHDAiTqdQcqcHVsNpCGeIkqOs6pwRm
+ w01cILaP6MBwZelsXL09bd+LCdYdoB3U+qo3C/bZ0L2nX1TsfBJBcmAryaPDgKsC2D06
+ t5B2o/csQ9Jf6EaRRJkdvYHgxvHN02ALmUiWrvFyUZemWSzrYI+/DxuGdiQLAZvkh+F9
+ s7h3sNU9XnTKq/hvnWmOPuvQtYoIOQYjoPPqsg9g63vg38pIVPilme01D1G5sgjsFxxW
+ MU2i8hu2t0h0DwZ+xAWbSRwN0KriphabDSIFaPADK2NdCPS56Jvqjqs1g5xaWgvqipG9
+ z63g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792197351; x=1792802151;
+ d=1e100.net; s=20260707; t=1792197354; x=1792802154;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=wTxgZFck3fqYOD51izeq1z3wEPtoXFPdInTR6K7LiDo=;
- b=uDDxPLgDvLxAH5Jk71BN5cCo2dW3RKgQ8N8AOW5XJVGuDC75BorMfprc8kXWG2Fb93
- +DOjF5TudHdZng/6TnXcONLNaDqRQPbZXDgIJaOWzi3NyRjpfmE93LyCddF3npahtTJX
- 9ZiHQiWuEzilIlHNMIrLddLxuvN8LCN1wFZYny9Tx0kC02U81h1CjI94CKI2H3bvQNQs
- 1vhv6VoSFsi10E9IQuqg8qK/69hseqaP6NJY2xYCrboCuxEeh7Ui+Wd4+OzAo3Wf7SuS
- NR/xHLmArjybLsUW8/lnGgLXgaehhnfNbFtjXIaPID8gssPlqhKRola2hvEwevA8HWJr
- f3+w==
+ bh=1xoNO+T8N0aFOCi5xygH+NT1Rr4UGGgjfNYdwmRqSYM=;
+ b=tYhkXWlDkGoDlsUoMoFAkHq3zC7B7Cq2+hqrk59+lCqYjUSTcpPaLdAFO4UJER0Q8V
+ Ipfz1O3krYNLe64zTM4xefOY8+fZ3r4oVuTPLIYTLX4vSGoVL0CRrKVQnygxrG5Wi6aV
+ CrfozsHfZV1U1Bn4AUHobTEhV7ACHttvuvJqQDPTftNIABYAUa43RPoB7wIKNaz5Q6us
+ pifYYm4nzA2kJZIdmvIw0658hCMCyO8UUTTo4cSh8htrNew6m1vvYwjkJ8HU4xGRdh44
+ /cR1S5G4OEMLQj38reekMeHAWD6PMMDdMXlMRLYVvYNWgY5O13KDfDj6n8cTxung+cy2
+ RNRg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwkYerdjPiyFsAJZM8ntXq3LwaA4tSURhLJavTWGI5YJSS691rmw5/oOa1INQu3m7lBJvfc3h4=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJBw2Y6VbXHR5DM96vRMKSvca8GJjxDZfCHsHEaIuMM7krqok5v
- v+j05fbh8pqRH35Z8tHa1j+bdkAbUr6PluYVNT1Gl8QzUbvYjtqyP74f
-X-Gm-Gg: AYBFou28rI4Ye88+iCNsOhrKW3h6+o3Hdkld6ZIueB+kxmfvI3eSbbFWGr2rS2eYhOO
- UiI3ldYjTZAe1cN/XMcZBZKoZpEOHJ2UXEeynSZCLoUlIqOI4BfYWW5v7ftj3si8AjyRPdQEtgi
- IjHAgJGnBU/9HVVpFHJXSzTl06OjdiMvVSb/cDs72Cp+TKOD/se87SYEO4gZ8qbJg6IgfRE9Ma8
- 44YKV2CyWg5ilPlY81FHpSNA13oFg3HOb+lbsm10ojEo6yZB5ZKW9H8No/cpUYisDACqUWgcAKz
- Mf/uJIZ2gkOiHzDRUOmQvd6gqWAxpjoXUJS3x8Yezlv9aoq9jJhMiG0wgDUBzMxABDPcOcGXgSq
- yyhOZx/4QzR9vzoAHrvTBg41JRGDfyiYGcyHwcUgEpyaYrzyRZd48QovK4O3tUuLWI9NiEWRdzs
- Oa+n5gk9LMG3As2e4Cfu16yJr75Frpm21qb1R+y9OzljI06cKLEOaXrnMNIX8fc5y73b6xgHxlP
- 1SReGQ9KVU4NnGDrk6X+xopr0A4WzYdJJeNjekZYwcgTuAg7IdIpnCzwO0ZYn1Ebhu5IlJmlHqN
- IFsZE81BWWF7c0M+w3Nd88gZwP50lwp2rjUQeTEIWNeWMwGmBVK/xRgh9cMAJiqPAZLpnkKg6vo
- Zv/Gqm003fev5R8Zioxt/MQ==
-X-Received: by 2002:a05:6820:190b:b0:6c7:8dab:ca1a with SMTP id
- 006d021491bc7-701124b0100mr3384155eaf.17.1792197350878; 
- Fri, 16 Oct 2026 17:35:50 -0700 (PDT)
+ AKwUvBwfG+wG8wuuTI70UudG6BLchkMi5V2eB/jXy/6jqgE0pTwQDW1z3B9hv1MqoVVyxdbDyCrwoIc=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYIT28FDOBN77SkWnGFeVsF60cUhvj3+uOR8XI+2Z1RHDd5kwxYB
+ PFTmzAzur6MKUu4mdAFFFNwyniBu3OaU0KQlLnRkMbRjqgQAXVuyNLDH
+X-Gm-Gg: AYBFou1B+Ux99GRja2Tjymr6v9qOLxbjN9Ya8WHeVzAL74oIEdn8Jau0fjlRffe0udk
+ 6dx0FFx/2whouY8j6rtHXeNTt4EQuKkXxoBL4b0+0YBT0eA8AePDLO9TlNzA7Kcel9JGe/hR6ZK
+ /d5Lr2EnqjzaZk54IfV0hkn+VAfgaNoTkoPMhdE7H/XilQ+ZFMXvhSwMDjO/dKUE/FP+Po9aguU
+ 9Gy4NMREfjHLoWvrvQMTZdrCrrs0iUW5WNc+DgLqZTzrln5utDNO6xvGw77A/ZBoe9Vmr8HfU6t
+ qAs7gt4MEkv2CFyFBbar5raQDIFli+o4CJ+vopIpR2GmnFzOaOcarbA8oZZcOzGV3lcwk7zL8Ol
+ cMks7VYuBJx+I3OmgKbdh3Qgyu/rRnnoD1KhGYRZMaff1rfLOhk9+fCPgP1rL88y1yUbhDuT2PX
+ uyv3jVKg1KQe59mZ69QUz+uKZxt17LpSi8cp6gGpWA9hZ2NJ22MqpqpqJHnb7xU/t73d6yXLeEB
+ 4ieVr5+ePoD6Tx+rIbov0xvjXTYHuDLNhrFjGuuC5lpw8qd2lFgAkcsp24aKh4u9lxX8ma3GKYy
+ vaQ/7at7ZZHIIXR1NsedafV3ixCgBFbNycrsAGPyz7vGj49zPM+m017kQXJGs3aTFQcaSa9qFJ3
+ j5ZELERd0LZuF4ZGve24/zg==
+X-Received: by 2002:a05:6870:638e:b0:494:b4f2:3d8e with SMTP id
+ 586e51a60fabf-4a75796af7cmr1524338fac.27.1792197354389; 
+ Fri, 16 Oct 2026 17:35:54 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4a73b5b4291sm2745091fac.5.2026.10.16.17.35.47
+ 586e51a60fabf-4a73b5b4291sm2745091fac.5.2026.10.16.17.35.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Oct 2026 17:35:50 -0700 (PDT)
+ Fri, 16 Oct 2026 17:35:53 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Fri, 16 Oct 2026 18:35:20 -0600
-Subject: [PATCH v9 06/17] crypto: aspeed: preserve Caliptra hash update
- boundaries
+Date: Fri, 16 Oct 2026 18:35:21 -0600
+Subject: [PATCH v9 07/17] crypto: hash: support hardware-only progressive
+ hashing
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261016-submit-ce-series-v2-v9-6-c24e64daafe9@gmail.com>
+Message-Id: <20261016-submit-ce-series-v2-v9-7-c24e64daafe9@gmail.com>
 References: <20261016-submit-ce-series-v2-v9-0-c24e64daafe9@gmail.com>
 In-Reply-To: <20261016-submit-ce-series-v2-v9-0-c24e64daafe9@gmail.com>
 To: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
@@ -231,168 +231,276 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The Caliptra SHA accelerator consumes a stream of 32-bit DATAIN words.
-cptra_sha_update() pads every update to a word, so splitting an input at
-a non-word-aligned boundary inserts bytes into that stream. For example,
-one byte followed by three bytes does not hash the same data as a single
-four-byte update. This also affects one-shot hashing when watchdog chunks
-are not word-aligned.
+FIT configuration signatures hash multiple discontiguous regions through
+the legacy progressive hash interface. This still requires a software
+implementation even when image hashes use a driver-model hardware
+provider.
 
-Keep a partial word in the context across updates and write it, padded,
-only at finish. Empty updates must not write DATAIN, since that would
-insert a word into an existing stream. An entirely empty message still
-needs one DATAIN write at finish to start the streaming state machine,
-with DLEN left at zero.
+Add provider selection for progressive driver-model hashing and use it
+from hash_calculate(). Allow SPL_SHA256_LEGACY to be disabled explicitly,
+link the SHA-256 software support only for a selected software backend,
+and make legacy fallback paths reject an algorithm whose software
+callbacks are absent.
 
-Reject cumulative lengths which overflow the 32-bit DLEN register before
-changing the context or hardware. Share driver-local cleanup between
-finish and the one-shot update-error paths, zeroizing the engine and
-releasing its lock and context. Also free the allocated context when
-initial hardware-lock acquisition fails.
+Require the complete init, update, finish and abort lifecycle for
+progressive provider selection. Add an abort operation to the software
+provider and register Caliptra's existing cleanup helper with the new
+interface. Use these operations to release a context after an update
+failure. Finish and abort must stop hardware access before returning.
 
-Fixes: fca70d61817b ("drivers/crypto: aspeed: Add Caliptra SHA ACC support")
+Keep HACE on its existing one-shot path: it cannot currently guarantee
+stopped DMA after a timeout, so freeing its context is not a safe abort.
+Providers without abort support are skipped before initialization,
+leaving the legacy progressive fallback available.
+
+Enable DM_HASH in the sandbox configuration so these driver-model
+paths are built and exercised by the standard sandbox tests. Extend
+the hash provider-selection test to cover progressive initialization
+and error cleanup.
+
+This permits SPL to retain SHA-256 FIT support while relying exclusively
+on a hardware hash provider.
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
 Changes v8 -> v9:
-  - New patch, separating Caliptra streaming-input and cleanup fixes from
-    the generic progressive hash-provider changes
----
- drivers/crypto/aspeed/cptra_sha.c | 78 +++++++++++++++++++++++++--------------
- 1 file changed, 51 insertions(+), 27 deletions(-)
+  - Leave HACE on its existing one-shot path until it can guarantee a
+    DMA-safe abort, rather than freeing a potentially active context
+  - Make the hardware ownership requirement explicit and cover skipping a
+    provider without abort support while retaining its one-shot operations
+  - Move Caliptra's streaming-input and cleanup fixes to a preparatory
+    patch; retain its abort callback registration with the new hash API
 
-diff --git a/drivers/crypto/aspeed/cptra_sha.c b/drivers/crypto/aspeed/cptra_sha.c
-index 0dc00f306f1..62d6955493f 100644
---- a/drivers/crypto/aspeed/cptra_sha.c
-+++ b/drivers/crypto/aspeed/cptra_sha.c
-@@ -5,6 +5,7 @@
- #include <asm/io.h>
- #include <config.h>
- #include <dm.h>
-+#include <limits.h>
- #include <linux/bitfield.h>
- #include <linux/bitops.h>
- #include <linux/iopoll.h>
-@@ -36,6 +37,8 @@ enum cptra_sha_modes {
- struct cptra_sha_ctx {
- 	enum HASH_ALGO algo;
- 	uint32_t dgst_len;
-+	u32 pending;
-+	u32 pending_len;
- };
+Changes v7 -> v8:
+  - Add an explicit abort operation and release provider contexts after
+    update failures  (suggested by Simon Glass)
+  - Add the progressive provider-selection and error-cleanup test omitted
+    from v7
+  - Enable DM_HASH in sandbox so the hash provider tests are built and run
+    by normal sandbox CI
+
+Changes v6 -> v7:
+  - New patch
+---
+ boot/image-fit.c                  |   2 +-
+ common/hash.c                     |  21 ++++-
+ configs/sandbox_defconfig         |   1 +
+ drivers/crypto/aspeed/cptra_sha.c |   1 +
+ drivers/crypto/hash/hash-uclass.c |  44 ++++++++-
+ drivers/crypto/hash/hash_sw.c     |  20 +++--
+ include/u-boot/hash.h             |  32 +++++++
+ lib/Makefile                      |   4 +-
+ lib/hash-checksum.c               |  30 ++++++-
+ lib/mbedtls/Kconfig               |   2 +-
+ test/dm/hash.c                    | 184 ++++++++++++++++++++++++++++++++++++++
+ 11 files changed, 328 insertions(+), 13 deletions(-)
+
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index dacd8a61f31..30da18f571f 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -1349,7 +1349,7 @@ int calculate_hash(const void *data, int data_len, const char *name,
+ #endif
  
- struct cptra_sha {
-@@ -75,8 +78,11 @@ static int cptra_sha_init(struct udevice *dev, enum HASH_ALGO algo, void **ctxp)
- 	cs = dev_get_priv(dev);
- 
- 	/* get CPTRA SHA lock */
--	if (readl_poll_timeout(cs->regs + CPTRA_SHA_LOCK, reg, reg == 0, 1000000))
--		return -EBUSY;
-+	if (readl_poll_timeout(cs->regs + CPTRA_SHA_LOCK, reg, reg == 0,
-+			       1000000)) {
-+		rc = -EBUSY;
-+		goto free_n_out;
-+	}
- 
- 	/* zero clear SHA */
- 	writel(CPTRA_SHA_CTRL_ZEROIZE, cs->regs + CPTRA_SHA_CTRL);
-@@ -102,33 +108,42 @@ free_n_out:
- 
- static int cptra_sha_update(struct udevice *dev, void *ctx, const void *ibuf, uint32_t ilen)
- {
-+	struct cptra_sha_ctx *cs_ctx = ctx;
- 	struct cptra_sha *cs;
--	uint32_t din_be;
- 	uint32_t dlen_sum;
--	uint8_t *p8;
--	uint32_t i;
-+	const u8 *p8 = ibuf;
-+
-+	if (!ilen)
-+		return 0;
- 
- 	cs = dev_get_priv(dev);
- 
- 	/* update length */
--	dlen_sum = readl(cs->regs + CPTRA_SHA_DLEN) + ilen;
--	writel(dlen_sum, cs->regs + CPTRA_SHA_DLEN);
--
--	din_be = 0;
--	for (i = 0, p8 = (uint8_t *)ibuf; i < ilen; ++i) {
--		if (i && (i % sizeof(din_be) == 0)) {
--			writel(din_be, cs->regs + CPTRA_SHA_DATAIN);
--			din_be = 0;
-+	dlen_sum = readl(cs->regs + CPTRA_SHA_DLEN);
-+	if (ilen > U32_MAX - dlen_sum)
-+		return -EOVERFLOW;
-+	writel(dlen_sum + ilen, cs->regs + CPTRA_SHA_DLEN);
-+
-+	/* Preserve incomplete words across update boundaries. */
-+	while (ilen--) {
-+		cs_ctx->pending = (cs_ctx->pending << 8) | *p8++;
-+		if (++cs_ctx->pending_len == sizeof(cs_ctx->pending)) {
-+			writel(cs_ctx->pending, cs->regs + CPTRA_SHA_DATAIN);
-+			cs_ctx->pending = 0;
-+			cs_ctx->pending_len = 0;
- 		}
--
--		din_be <<= 8;
--		din_be |= p8[i];
+ 	ret = hash_lookup_algo(name, &algo);
+-	if (ret < 0) {
++	if (ret < 0 || !algo->hash_func_ws) {
+ 		debug("Unsupported hash algorithm\n");
+ 		return -1;
  	}
+diff --git a/common/hash.c b/common/hash.c
+index 5cbb4926c1d..8bbf9aa4825 100644
+--- a/common/hash.c
++++ b/common/hash.c
+@@ -38,6 +38,14 @@
+ #include <u-boot/md5.h>
+ #include <u-boot/sm3.h>
  
--	if (i % sizeof(din_be))
--		din_be <<= (8 * (sizeof(din_be) - (i % sizeof(din_be))));
-+	return 0;
-+}
- 
--	writel(din_be, cs->regs + CPTRA_SHA_DATAIN);
-+static int cptra_sha_abort(struct udevice *dev, void *ctx)
-+{
-+	struct cptra_sha *cs = dev_get_priv(dev);
++#ifdef USE_HOSTCC
++#define SHA256_SOFTWARE_ENABLED 1
++#else
++#define SHA256_SOFTWARE_ENABLED \
++	(CONFIG_IS_ENABLED(SHA256_LEGACY) || \
++	 CONFIG_IS_ENABLED(SHA256_MBEDTLS))
++#endif
 +
-+	writel(CPTRA_SHA_CTRL_ZEROIZE, cs->regs + CPTRA_SHA_CTRL);
-+	writel(0x1, cs->regs + CPTRA_SHA_LOCK);
-+	free(ctx);
- 
+ static int __maybe_unused hash_init_sha1(struct hash_algo *algo, void **ctxp)
+ {
+ 	sha1_context *ctx = malloc(sizeof(sha1_context));
+@@ -65,6 +73,7 @@ static int __maybe_unused hash_finish_sha1(struct hash_algo *algo, void *ctx,
  	return 0;
  }
-@@ -143,6 +158,16 @@ static int cptra_sha_finish(struct udevice *dev, void *ctx, void *obuf)
- 	cs = dev_get_priv(dev);
- 	cs_ctx = (struct cptra_sha_ctx *)ctx;
  
-+	if (cs_ctx->pending_len) {
-+		/* Only the final word may contain bytes beyond DLEN. */
-+		writel(cs_ctx->pending << (8 * (sizeof(cs_ctx->pending) -
-+					       cs_ctx->pending_len)),
-+		       cs->regs + CPTRA_SHA_DATAIN);
-+	} else if (!readl(cs->regs + CPTRA_SHA_DLEN)) {
-+		/* An empty stream still needs a DATAIN write to leave idle. */
-+		writel(0, cs->regs + CPTRA_SHA_DATAIN);
-+	}
-+
- 	/* trigger SHA calculation */
- 	writel(0x1, cs->regs + CPTRA_SHA_EXEC);
++#if SHA256_SOFTWARE_ENABLED
+ static int __maybe_unused hash_init_sha256(struct hash_algo *algo, void **ctxp)
+ {
+ 	sha256_context *ctx = malloc(sizeof(sha256_context));
+@@ -91,6 +100,7 @@ static int __maybe_unused hash_finish_sha256(struct hash_algo *algo, void *ctx,
+ 	free(ctx);
+ 	return 0;
+ }
++#endif
  
-@@ -158,12 +183,7 @@ static int cptra_sha_finish(struct udevice *dev, void *ctx, void *obuf)
- 	for (i = 0; i < (cs_ctx->dgst_len / sizeof(*p32)); ++i, p32++)
- 		*p32 = be32_to_cpu(readl(cs->regs + CPTRA_SHA_DIGEST(i)));
- 
--	/* release CPTRA SHA lock */
--	writel(0x1, cs->regs + CPTRA_SHA_LOCK);
--
--	free(cs_ctx);
--
--	return 0;
-+	return cptra_sha_abort(dev, ctx);
+ static int __maybe_unused hash_init_sha384(struct hash_algo *algo, void **ctxp)
+ {
+@@ -273,14 +283,14 @@ static struct hash_algo hash_algo[] = {
+ 		.chunk_size	= CHUNKSZ_SHA256,
+ #if CONFIG_IS_ENABLED(SHA_HW_ACCEL)
+ 		.hash_func_ws	= hw_sha256,
+-#else
++#elif SHA256_SOFTWARE_ENABLED
+ 		.hash_func_ws	= sha256_csum_wd,
+ #endif
+ #if CONFIG_IS_ENABLED(SHA_PROG_HW_ACCEL)
+ 		.hash_init	= hw_sha_init,
+ 		.hash_update	= hw_sha_update,
+ 		.hash_finish	= hw_sha_finish,
+-#else
++#elif SHA256_SOFTWARE_ENABLED
+ 		.hash_init	= hash_init_sha256,
+ 		.hash_update	= hash_update_sha256,
+ 		.hash_finish	= hash_finish_sha256,
+@@ -634,6 +644,13 @@ int hash_command(const char *algo_name, int flags, struct cmd_tbl *cmdtp,
+ 					goto done;
+ 			}
+ 		}
++		if (!algo->hash_func_ws) {
++			printf("Hash algorithm '%s' has no available provider\n",
++			       algo_name);
++			unmap_sysmem(buf);
++			free(output);
++			return CMD_RET_FAILURE;
++		}
+ 		algo->hash_func_ws(buf, len, output, algo->chunk_size);
+ done:
+ 		unmap_sysmem(buf);
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 424df09646a..98c45f70be4 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -201,6 +201,7 @@ CONFIG_CLK_K210_SET_RATE=y
+ CONFIG_SANDBOX_CLK_CCF=y
+ CONFIG_CLK_SCMI=y
+ CONFIG_CPU=y
++CONFIG_DM_HASH=y
+ CONFIG_DM_AES=y
+ CONFIG_AES_SOFTWARE=y
+ CONFIG_DM_DEMO=y
+diff --git a/drivers/crypto/aspeed/cptra_sha.c b/drivers/crypto/aspeed/cptra_sha.c
+index 62d6955493f..644fd8b2c9f 100644
+--- a/drivers/crypto/aspeed/cptra_sha.c
++++ b/drivers/crypto/aspeed/cptra_sha.c
+@@ -261,6 +261,7 @@ static const struct hash_ops cptra_sha_ops = {
+ 	.hash_init = cptra_sha_init,
+ 	.hash_update = cptra_sha_update,
+ 	.hash_finish = cptra_sha_finish,
++	.hash_abort = cptra_sha_abort,
+ 	.hash_digest_wd = cptra_sha_digest_wd,
+ 	.hash_digest = cptra_sha_digest,
+ };
+diff --git a/drivers/crypto/hash/hash-uclass.c b/drivers/crypto/hash/hash-uclass.c
+index ffca19af2de..0340eecf3f6 100644
+--- a/drivers/crypto/hash/hash-uclass.c
++++ b/drivers/crypto/hash/hash-uclass.c
+@@ -119,11 +119,43 @@ int hash_digest_wd_lookup(enum HASH_ALGO algo, const void *ibuf,
+ 	return found ? -EOPNOTSUPP : -ENODEV;
  }
  
- static int cptra_sha_digest_wd(struct udevice *dev, enum HASH_ALGO algo,
-@@ -189,16 +209,20 @@ static int cptra_sha_digest_wd(struct udevice *dev, enum HASH_ALGO algo,
++int hash_init_lookup(enum HASH_ALGO algo, struct udevice **devp, void **ctxp)
++{
++	struct udevice *dev;
++	int first_probe_err = 0;
++	bool found = false;
++	int ret;
++
++	for (ret = uclass_first_device_check(UCLASS_HASH, &dev); dev;
++	     ret = uclass_next_device_check(&dev)) {
++		found = true;
++		if (ret) {
++			if (!first_probe_err)
++				first_probe_err = ret;
++			continue;
++		}
++
++		ret = hash_init(dev, algo, ctxp);
++		if (!ret) {
++			*devp = dev;
++			return 0;
++		}
++		if (!hash_op_unsupported(ret))
++			return ret;
++	}
++
++	if (first_probe_err)
++		return first_probe_err;
++
++	return found ? -EOPNOTSUPP : -ENODEV;
++}
++
+ int hash_init(struct udevice *dev, enum HASH_ALGO algo, void **ctxp)
+ {
+ 	struct hash_ops *ops = (struct hash_ops *)device_get_ops(dev);
+ 
+-	if (!ops->hash_init)
++	if (!ops->hash_init || !ops->hash_update || !ops->hash_finish ||
++	    !ops->hash_abort)
+ 		return -ENOSYS;
+ 
+ 	return ops->hash_init(dev, algo, ctxp);
+@@ -149,6 +181,16 @@ int hash_finish(struct udevice *dev, void *ctx, void *obuf)
+ 	return ops->hash_finish(dev, ctx, obuf);
+ }
+ 
++int hash_abort(struct udevice *dev, void *ctx)
++{
++	struct hash_ops *ops = (struct hash_ops *)device_get_ops(dev);
++
++	if (!ops->hash_abort)
++		return -ENOSYS;
++
++	return ops->hash_abort(dev, ctx);
++}
++
+ UCLASS_DRIVER(hash) = {
+ 	.id	= UCLASS_HASH,
+ 	.name	= "hash",
+diff --git a/drivers/crypto/hash/hash_sw.c b/drivers/crypto/hash/hash_sw.c
+index 4590e225481..63a775d904f 100644
+--- a/drivers/crypto/hash/hash_sw.c
++++ b/drivers/crypto/hash/hash_sw.c
+@@ -218,6 +218,13 @@ static int sw_hash_update(struct udevice *dev, void *ctx, const void *ibuf, uint
+ 	return 0;
+ }
+ 
++static int sw_hash_abort(struct udevice *dev, void *ctx)
++{
++	free(ctx);
++
++	return 0;
++}
++
+ static int sw_hash_finish(struct udevice *dev, void *ctx, void *obuf)
+ {
+ 	struct sw_hash_ctx *hash_ctx = ctx;
+@@ -225,9 +232,7 @@ static int sw_hash_finish(struct udevice *dev, void *ctx, void *obuf)
+ 
+ 	hash_impl->finish(hash_ctx->algo_ctx, obuf);
+ 
+-	free(ctx);
+-
+-	return 0;
++	return sw_hash_abort(dev, ctx);
+ }
+ 
+ static int sw_hash_digest_wd(struct udevice *dev, enum HASH_ALGO algo,
+@@ -253,16 +258,20 @@ static int sw_hash_digest_wd(struct udevice *dev, enum HASH_ALGO algo,
  				chunk = chunk_sz;
  
- 			rc = cptra_sha_update(dev, ctx, cur, chunk);
+ 			rc = sw_hash_update(dev, ctx, cur, chunk);
 -			if (rc)
 +			if (rc) {
-+				cptra_sha_abort(dev, ctx);
++				sw_hash_abort(dev, ctx);
  				return rc;
 +			}
  
@@ -400,15 +508,414 @@ index 0dc00f306f1..62d6955493f 100644
  			schedule();
  		}
  	} else {
- 		rc = cptra_sha_update(dev, ctx, ibuf, ilen);
+ 		rc = sw_hash_update(dev, ctx, ibuf, ilen);
 -		if (rc)
 +		if (rc) {
-+			cptra_sha_abort(dev, ctx);
++			sw_hash_abort(dev, ctx);
  			return rc;
 +		}
  	}
  
- 	rc = cptra_sha_finish(dev, ctx, obuf);
+ 	rc = sw_hash_finish(dev, ctx, obuf);
+@@ -284,6 +293,7 @@ static const struct hash_ops hash_ops_sw = {
+ 	.hash_init = sw_hash_init,
+ 	.hash_update = sw_hash_update,
+ 	.hash_finish = sw_hash_finish,
++	.hash_abort = sw_hash_abort,
+ 	.hash_digest_wd = sw_hash_digest_wd,
+ 	.hash_digest = sw_hash_digest,
+ };
+diff --git a/include/u-boot/hash.h b/include/u-boot/hash.h
+index 7dba66047f5..456a73b6c4e 100644
+--- a/include/u-boot/hash.h
++++ b/include/u-boot/hash.h
+@@ -51,10 +51,41 @@ int hash_digest_wd(struct udevice *dev, enum HASH_ALGO algo,
+  */
+ int hash_digest_wd_lookup(enum HASH_ALGO algo, const void *ibuf,
+ 			  const u32 ilen, void *obuf, u32 chunk_sz);
++/**
++ * hash_init_lookup() - Start hashing with the first supporting provider
++ *
++ * Probe each hash device in order and initialize the first one which supports
++ * @algo. The selected device is returned for the matching update and finish
++ * operations.
++ *
++ * @algo: Hash algorithm
++ * @devp: Returns the selected hash device
++ * @ctxp: Returns the provider's progressive-hash context
++ * Return: 0 on success, -ENODEV if there are no providers, -EOPNOTSUPP if no
++ * provider supports @algo, or another negative error from a provider
++ */
++int hash_init_lookup(enum HASH_ALGO algo, struct udevice **devp, void **ctxp);
++
++/*
++ * A successful hash_init() returns a context which must be consumed by
++ * exactly one hash_finish() or hash_abort() call. Both operations release all
++ * provider resources, including when they return an error. Before returning,
++ * they must ensure that hardware can no longer access the context or buffers.
++ * Providers without a safe abort operation are skipped by hash_init_lookup().
++ */
+ int hash_init(struct udevice *dev, enum HASH_ALGO algo, void **ctxp);
+ int hash_update(struct udevice *dev, void *ctx, const void *ibuf, const uint32_t ilen);
+ int hash_finish(struct udevice *dev, void *ctx, void *obuf);
+ 
++/**
++ * hash_abort() - Discard a progressive hash operation
++ *
++ * @dev: Hash device selected by hash_init() or hash_init_lookup()
++ * @ctx: Progressive-hash context to release
++ * Return: 0 on success, or a negative provider error
++ */
++int hash_abort(struct udevice *dev, void *ctx);
++
+ /*
+  * struct hash_ops - Driver model for Hash operations
+  *
+@@ -66,6 +97,7 @@ struct hash_ops {
+ 	int (*hash_init)(struct udevice *dev, enum HASH_ALGO algo, void **ctxp);
+ 	int (*hash_update)(struct udevice *dev, void *ctx, const void *ibuf, const uint32_t ilen);
+ 	int (*hash_finish)(struct udevice *dev, void *ctx, void *obuf);
++	int (*hash_abort)(struct udevice *dev, void *ctx);
+ 
+ 	/* all-in-one operation */
+ 	int (*hash_digest)(struct udevice *dev, enum HASH_ALGO algo,
+diff --git a/lib/Makefile b/lib/Makefile
+index 30092dd4a04..f36a311f9e8 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -79,8 +79,8 @@ obj-$(CONFIG_BLAKE2) += blake2/blake2b.o
+ 
+ obj-$(CONFIG_$(PHASE_)MD5_LEGACY) += md5.o
+ obj-$(CONFIG_$(PHASE_)SHA1_LEGACY) += sha1.o
+-obj-$(CONFIG_$(PHASE_)SHA256) += sha256_common.o
+-obj-$(CONFIG_$(PHASE_)SHA256_LEGACY) += sha256.o
++obj-$(CONFIG_$(PHASE_)SHA256_LEGACY) += sha256_common.o sha256.o
++obj-$(CONFIG_$(PHASE_)SHA256_MBEDTLS) += sha256_common.o
+ obj-$(CONFIG_$(PHASE_)SHA512_LEGACY) += sha512.o
+ obj-$(CONFIG_$(PHASE_)SM3) += sm3.o
+ 
+diff --git a/lib/hash-checksum.c b/lib/hash-checksum.c
+index 1970a741294..e3e7f6adb7f 100644
+--- a/lib/hash-checksum.c
++++ b/lib/hash-checksum.c
+@@ -4,11 +4,13 @@
+  */
+ 
+ #ifndef USE_HOSTCC
++#include <dm.h>
+ #include <fdtdec.h>
+ #include <asm/byteorder.h>
+ #include <linux/errno.h>
+ #include <asm/unaligned.h>
+ #include <hash.h>
++#include <u-boot/hash.h>
+ #else
+ #include "fdt_host.h"
+ #endif
+@@ -20,13 +22,39 @@ int hash_calculate(const char *name,
+ 		    int region_count, uint8_t *checksum)
+ {
+ 	struct hash_algo *algo;
+-	int ret = 0;
++	int ret;
+ 	void *ctx;
+ 	int i;
+ 
+ 	if (region_count < 1)
+ 		return -EINVAL;
+ 
++#ifndef USE_HOSTCC
++	if (CONFIG_IS_ENABLED(DM_HASH)) {
++		enum HASH_ALGO hash_algo = hash_algo_lookup_by_name(name);
++		struct udevice *dev;
++
++		if (hash_algo != HASH_ALGO_INVALID)
++			ret = hash_init_lookup(hash_algo, &dev, &ctx);
++		else
++			ret = -EOPNOTSUPP;
++		if (!ret) {
++			for (i = 0; i < region_count; i++) {
++				ret = hash_update(dev, ctx, region[i].data,
++						  region[i].size);
++				if (ret) {
++					hash_abort(dev, ctx);
++					return ret;
++				}
++			}
++
++			return hash_finish(dev, ctx, checksum);
++		}
++		if (ret != -ENODEV && ret != -EOPNOTSUPP)
++			return ret;
++	}
++#endif
++
+ 	ret = hash_progressive_lookup_algo(name, &algo);
+ 	if (ret)
+ 		return ret;
+diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+index 66bc16db451..7ea0800554a 100644
+--- a/lib/mbedtls/Kconfig
++++ b/lib/mbedtls/Kconfig
+@@ -359,7 +359,7 @@ config SPL_LEGACY_HASHING
+ 	bool "Use U-Boot legacy hashing libraries (SPL)"
+ 	select SPL_MD5_LEGACY if SPL_MD5
+ 	select SPL_SHA1_LEGACY if SPL_SHA1
+-	select SPL_SHA256_LEGACY if SPL_SHA256
++	imply SPL_SHA256_LEGACY if SPL_SHA256
+ 	select SPL_SHA512_LEGACY if SPL_SHA512
+ 	select SPL_SHA384_LEGACY if SPL_SHA384
+ 	help
+diff --git a/test/dm/hash.c b/test/dm/hash.c
+index 6adf916dc77..19a01f5374c 100644
+--- a/test/dm/hash.c
++++ b/test/dm/hash.c
+@@ -10,13 +10,83 @@
+ #include <dm/root.h>
+ #include <dm/test.h>
+ #include <dm/uclass-internal.h>
++#include <image.h>
+ #include <u-boot/hash.h>
++#include <u-boot/hash-checksum.h>
+ #include <test/test.h>
+ #include <test/ut.h>
+ 
+ static int unsupported_calls;
+ static int success_calls;
+ static int hard_error_calls;
++static int unsupported_init_calls;
++static int success_init_calls;
++static int hard_error_init_calls;
++static int update_error_calls;
++static int finish_calls;
++static int abort_calls;
++
++static int hash_test_unsupported_init(struct udevice *dev,
++				      enum HASH_ALGO algo, void **ctxp)
++{
++	unsupported_init_calls++;
++
++	return -EOPNOTSUPP;
++}
++
++static int hash_test_success_init(struct udevice *dev, enum HASH_ALGO algo,
++				  void **ctxp)
++{
++	success_init_calls++;
++	*ctxp = dev;
++
++	return 0;
++}
++
++static int hash_test_hard_error_init(struct udevice *dev,
++				     enum HASH_ALGO algo, void **ctxp)
++{
++	hard_error_init_calls++;
++
++	return -EINVAL;
++}
++
++static int hash_test_update_error_init(struct udevice *dev,
++				       enum HASH_ALGO algo, void **ctxp)
++{
++	*ctxp = dev;
++
++	return 0;
++}
++
++static int hash_test_progressive_update(struct udevice *dev, void *ctx,
++					const void *ibuf, u32 ilen)
++{
++	return 0;
++}
++
++static int hash_test_update_error(struct udevice *dev, void *ctx,
++				  const void *ibuf, u32 ilen)
++{
++	update_error_calls++;
++
++	return -EIO;
++}
++
++static int hash_test_progressive_finish(struct udevice *dev, void *ctx,
++					void *obuf)
++{
++	finish_calls++;
++
++	return 0;
++}
++
++static int hash_test_progressive_abort(struct udevice *dev, void *ctx)
++{
++	abort_calls++;
++
++	return 0;
++}
+ 
+ static int hash_test_unsupported(struct udevice *dev, enum HASH_ALGO algo,
+ 				 const void *ibuf, const uint32_t ilen,
+@@ -53,17 +123,43 @@ static int hash_test_hard_error(struct udevice *dev, enum HASH_ALGO algo,
+ }
+ 
+ static const struct hash_ops hash_test_unsupported_ops = {
++	.hash_init = hash_test_unsupported_init,
++	.hash_update = hash_test_progressive_update,
++	.hash_finish = hash_test_progressive_finish,
++	.hash_abort = hash_test_progressive_abort,
+ 	.hash_digest_wd = hash_test_unsupported,
+ };
+ 
+ static const struct hash_ops hash_test_success_ops = {
++	.hash_init = hash_test_success_init,
++	.hash_update = hash_test_progressive_update,
++	.hash_finish = hash_test_progressive_finish,
++	.hash_abort = hash_test_progressive_abort,
+ 	.hash_digest_wd = hash_test_success,
+ };
+ 
+ static const struct hash_ops hash_test_hard_error_ops = {
++	.hash_init = hash_test_hard_error_init,
++	.hash_update = hash_test_progressive_update,
++	.hash_finish = hash_test_progressive_finish,
++	.hash_abort = hash_test_progressive_abort,
+ 	.hash_digest_wd = hash_test_hard_error,
+ };
+ 
++static const struct hash_ops hash_test_update_error_ops = {
++	.hash_init = hash_test_update_error_init,
++	.hash_update = hash_test_update_error,
++	.hash_finish = hash_test_progressive_finish,
++	.hash_abort = hash_test_progressive_abort,
++};
++
++static const struct hash_ops hash_test_no_abort_ops = {
++	.hash_init = hash_test_success_init,
++	.hash_update = hash_test_progressive_update,
++	.hash_finish = hash_test_progressive_finish,
++	.hash_digest_wd = hash_test_success,
++};
++
+ U_BOOT_DRIVER(hash_test_unsupported_drv) = {
+ 	.name = "hash_test_unsupported",
+ 	.id = UCLASS_HASH,
+@@ -82,6 +178,18 @@ U_BOOT_DRIVER(hash_test_hard_error_drv) = {
+ 	.ops = &hash_test_hard_error_ops,
+ };
+ 
++U_BOOT_DRIVER(hash_test_update_error_drv) = {
++	.name = "hash_test_update_error",
++	.id = UCLASS_HASH,
++	.ops = &hash_test_update_error_ops,
++};
++
++U_BOOT_DRIVER(hash_test_no_abort_drv) = {
++	.name = "hash_test_no_abort",
++	.id = UCLASS_HASH,
++	.ops = &hash_test_no_abort_ops,
++};
++
+ static int hash_test_unbind_all(void)
+ {
+ 	struct udevice *dev;
+@@ -111,7 +219,13 @@ static int hash_test_bind(const struct driver *drv, const char *name)
+ 
+ static int dm_test_hash_provider_selection(struct unit_test_state *uts)
+ {
++	const struct image_region region = {
++		.data = "test",
++		.size = 4,
++	};
++	struct udevice *dev;
+ 	u8 digest[32];
++	void *ctx;
+ 	int ret;
+ 
+ 	ut_assertok(hash_test_unbind_all());
+@@ -138,6 +252,18 @@ static int dm_test_hash_provider_selection(struct unit_test_state *uts)
+ 	for (int i = 0; i < sizeof(digest); i++)
+ 		ut_asserteq(0, digest[i]);
+ 
++	unsupported_init_calls = 0;
++	success_init_calls = 0;
++	ret = hash_init_lookup(HASH_ALGO_SHA256, &dev, &ctx);
++	ut_assertok(ret);
++	ut_asserteq(1, unsupported_init_calls);
++	ut_asserteq(1, success_init_calls);
++	ut_asserteq_str("hash-success", dev->name);
++	ut_asserteq_ptr(dev, ctx);
++	abort_calls = 0;
++	ut_assertok(hash_abort(dev, ctx));
++	ut_asserteq(1, abort_calls);
++
+ 	ut_assertok(hash_test_unbind_all());
+ 	ut_assertok(hash_test_bind(DM_DRIVER_GET(hash_test_hard_error_drv),
+ 				   "hash-hard-error"));
+@@ -151,7 +277,65 @@ static int dm_test_hash_provider_selection(struct unit_test_state *uts)
+ 	ut_asserteq(1, hard_error_calls);
+ 	ut_asserteq(0, success_calls);
+ 
++	hard_error_init_calls = 0;
++	success_init_calls = 0;
++	ret = hash_init_lookup(HASH_ALGO_SHA256, &dev, &ctx);
++	ut_asserteq(-EINVAL, ret);
++	ut_asserteq(1, hard_error_init_calls);
++	ut_asserteq(0, success_init_calls);
++
++	ut_assertok(hash_test_unbind_all());
++	ut_assertok(hash_test_bind(DM_DRIVER_GET(hash_test_update_error_drv),
++				   "hash-update-error"));
++	update_error_calls = 0;
++	finish_calls = 0;
++	abort_calls = 0;
++	ret = hash_calculate("sha256", &region, 1, digest);
++	ut_asserteq(-EIO, ret);
++	ut_asserteq(1, update_error_calls);
++	ut_asserteq(0, finish_calls);
++	ut_asserteq(1, abort_calls);
++
+ 	return 0;
+ }
+ 
+ DM_TEST(dm_test_hash_provider_selection, UTF_SCAN_FDT);
++
++/* A provider needs safe abort support only for progressive operations. */
++static int dm_test_hash_no_abort(struct unit_test_state *uts)
++{
++	struct udevice *dev;
++	u8 digest[32];
++	void *ctx = NULL;
++
++	ut_assertok(hash_test_unbind_all());
++	ut_assertok(hash_test_bind(DM_DRIVER_GET(hash_test_no_abort_drv),
++				   "hash-no-abort"));
++
++	success_init_calls = 0;
++	ut_asserteq(-EOPNOTSUPP,
++		    hash_init_lookup(HASH_ALGO_SHA256, &dev, &ctx));
++	ut_asserteq(0, success_init_calls);
++	ut_assertnull(ctx);
++
++	success_calls = 0;
++	ut_assertok(hash_digest_wd_lookup(HASH_ALGO_SHA256, "test", 4,
++					  digest, 4));
++	ut_asserteq(1, success_calls);
++	for (int i = 0; i < sizeof(digest); i++)
++		ut_asserteq(0x5a, digest[i]);
++
++	ut_assertok(hash_test_bind(DM_DRIVER_GET(hash_test_success_drv),
++				   "hash-success"));
++	ut_assertok(hash_init_lookup(HASH_ALGO_SHA256, &dev, &ctx));
++	ut_asserteq(1, success_init_calls);
++	ut_asserteq_str("hash-success", dev->name);
++	ut_asserteq_ptr(dev, ctx);
++	abort_calls = 0;
++	ut_assertok(hash_abort(dev, ctx));
++	ut_asserteq(1, abort_calls);
++
++	return 0;
++}
++
++DM_TEST(dm_test_hash_no_abort, UTF_SCAN_FDT);
 
 -- 
 2.53.0
