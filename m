@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37A69CCF2C9
-	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 13:01:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BD7FCCF2C4
+	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 13:01:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 02E71409A8;
-	Sat, 17 Oct 2026 13:01:31 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1BB09607EB;
+	Sat, 17 Oct 2026 13:01:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id E5SHO9OVnfGx; Sat, 17 Oct 2026 13:01:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 38174409A6
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792242090;
-	b=dsUAqWA+5YqD2nXGVF3jfxycgE+ctZR5kii4tXXFzoexlpjEOysZD4PQQ264Q7NkKGKj
-	 HViLWM2S+EWocu8OljbuIk7U3pDZKun8FC0mA9K/Cc/Cp15G9Lu/7rGUfzW/59AKCaqgR
-	 JQgCGMz/cNlJ03NvKBwb6Y2VZYJKuvqJAGBcFHNyvEqwpIHMCqB5G3f28+oJA7zOTRmSc
-	 N8A+mBHt0+4HHcgjV2O1a2yks2SJUuq16Ru0VtclK0EuNm1FPNfkbLWYtIegfyqnpwgdX
-	 XRvDzhF6OTTIy6T/N2Tn6Aj0pbJWAA0ibKIVeILGgEihp57cTIyWojNGRtPVHxLxC+Q==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QlZDAZPRd4Si; Sat, 17 Oct 2026 13:01:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org BC9A460686
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792242091;
+	b=kVYjTyFw/zseU1ubR6rCtmFxEQ6l0sG5bJ3N5n6lJHYdTiYGtzeT3+YF6nR2ay/1qjcl
+	 +57BUSJozyUkq2ItHeMhy6tj6gLuq823CWj/6X8WadGLNH/2yOesGHFNg35Zj1LHqRbRu
+	 9lGlwopPMFXbzn5Qic0Klw5AYcr7+TlF6D/ss6wMzsLT3In3GWUhzJRQIOhWufmng516v
+	 062Ve4inpSw7Ebsq20vb5B8wjB5TZx3doSPfxlomLLfR0nzWL8weP73+utvnOkPdzZw8C
+	 gXjmQWpS6ee0xyKjpFE+RN8FVIhXXMQRKS1/XwJKPnkFHn418ty9B04qJjm0VItiD9Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792242090;
+	c=relaxed/relaxed; t=1792242091;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,50 +32,52 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Endpoint-Received:X-Original-From:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=7J/naRGq2PGNQQzgDDaUQlm88DsVdA22AOiKHrCdGHA=;
-	b=Jc2PqIQ6DqMYDEppm8uIVoapg6BCtMPtBaqq+fQd096trRAcoWpEXhdB8GM6bmMjSwLm
-	 lRGoHd0K0j4mvgsIkvo7tgwG7x2ME/7Abhe0jL7bimmCPiHjqKakbcmAz1/FWkKxOz1/T
-	 HkMALetVWS2XROYLpn5e1YLERagxwVUXbjXmr8tMeId098OFBoKTZtFjo964Mfl3DoYA4
-	 xfvO8ygfapFrmRDwNo2EhHgjHYBibnGXRZb8UXX6g4Bqzr++bvDPlZ5gWXjkZT4fsB1Qd
-	 GDLLXYGvU7AK3WOHpXuUDnv8Rj3PGFiy4QN8dwPv09a3UkC8ksWwo5h+aY1x3hbyHSg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=a+V535JDGToW5DtPUIHXcU7MeP/jRLPveTu8Dx95HEo=;
+	b=d3pkhP7dAh285Y1JGfwKVuMO8tdDMKdttKFaRCDSfjxmlNkfTW556ZSyEuxTX7X3YaS+
+	 KoUecjAoVSR60BYxa80BYgdZ3vth97CsvPlRiYfhlYuziaswN7N6X4+naImTu2CgkvYuB
+	 3wY0X29rVmy2GaW7D/+UBit3GKrgCCIFb188kiBovWAT0kQUMafj1WoXf57IlMOeVQ37Z
+	 xdLQJvb3Fs4QYTBpijcrSvb8OxZYsR9MDY67n7dKrpONY2ifyIPQIMDzf12wNNo7cLFLl
+	 y6jHd/3bledaisYZCRBGddKEWfgGq4lzJypXfqxGS7nb2dIXvjpERgdVVyhjxXFXHgg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	dmarc=pass header.from=kernel.org;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=SbSUu3YM;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792242090;
-	bh=7J/naRGq2PGNQQzgDDaUQlm88DsVdA22AOiKHrCdGHA=;
+	d=lists.u-boot-project.org; s=default; t=1792242091;
+	bh=a+V535JDGToW5DtPUIHXcU7MeP/jRLPveTu8Dx95HEo=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=LsUwqNF2CyrIsFSf2d8/Kb6kDXBLf0u4agxmCfu1WtbTwzaw4faKhfhlI02vlXMG7
-	 OPP4gXDSEmFwUNfC1Lok6kaB0Dfb91dpqv2a4Fa86lhoewhUQGRBBCILWsFodzqBf8
-	 YcaDBngFyffXZInmicztbC3dnHfE61v5o5V3jz9Ew+kkLfmGdvK/yicksnoiF1rkk/
-	 2ZrYyKsAZEAwqhOtITa+DUxTHruDYQRSg5dxMGPXEMxCc3VUcMwlOjqF0U3W9T661X
-	 4g9DaXAp4GslrkIuRpWwjWl6EMr/dvi5YrYncQGZb+34cBcH2kB0VHpV+8zxPQanNg
-	 zEb1Sx6fAS9FA==
+	b=KHMO4nE4QWF4Z88qB3jsdL6GaRHvj7nM6xuOcOtFlycGC5R6UfCygTKu25ImFcnBm
+	 n79EmFK4ZQT8S6T4zUA9AohEv5T/vgeiLXqKyBtbxNBK9FYpqPwNJK2bI/DDLIWuT3
+	 9qCM0PWlIT8MszOEbjUFKXDqtETVADf3Oqhpcgslz5RWVAolhZ0AXNqfG6Dc+lPEFN
+	 wGkA94DYb+ujVSitTytvjAgTpPQIKuFIvuKMQ9gMSmljRUvN7xZy0IY9mI7C1H5s26
+	 0oy95cxHaBxJR5bCtjhCZVc8o5tyFhhQKxiWzHIJ32HNUQZ4UkcMHWVjPA8DaqXazO
+	 9anuWN7QgmxTA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 38174409A6;
-	Sat, 17 Oct 2026 13:01:30 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id B3458DCF
+	by smtp3.osuosl.org (Postfix) with ESMTP id BC9A460686;
+	Sat, 17 Oct 2026 13:01:31 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id B27B1255
  for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 07:39:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 99A1F608E2
+ by smtp3.osuosl.org (Postfix) with ESMTP id 98695608E0
  for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 07:39:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4PEvcm-kAiMS for <u-boot@lists.u-boot-project.org>;
+ id SSVjoYw-VzQK for <u-boot@lists.u-boot-project.org>;
  Sat, 17 Oct 2026 07:39:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org EA9AD6087E
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org CF89B6080C
 Authentication-Results: smtp3.osuosl.org; arc=none
  smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792222780;
- b=Slnm/K9pLs3FWorVqxk6PwOYPGYprpxObwSFJ3diVabSUwZMFiHCxfWjM/RNHXaIgR/F
- VKWnDRXRloVgpSNYkkDulYF/RhR2rRrbbjF3ERkBf3Dz2ydBzndDFY64NfuAmzoBkGs7y
- 3tWROvmBw0XAwrAbCJwVMmSgvNLF722XszaPkUbXZE8bOnQpR0ayQf3b9BNC4lCIOHCmy
- H/0/6sH86Ry8Jrtqgr5PEo8FbXE8ulh59m1hQybSWvRxCBevcxxVycZrOPJnAXKvUwyht
- EN0q5e1CoWRm8RzBCtG58OYJamL60vkTk59t/UlTuXDc6pgd8XkHHSpH3msJsiEV2EQ==
+ b=CwbzSZW2dDg5hud9ILKaY2PjxAnYmrd7IjmeYk1oX8zzvNG6FjCGgbtIKeXw6CAqVRNo
+ 1npDKtpdoNI7xQ4jHOTsE9G3O0kB5eHbBurMcc35D4x0bTZiqUyvY/cb9rAePRYTPCuzT
+ ur/i4AO5m1OTKD5+/smZMnVz2zNK8HUxzpccdYxS6c9PYkQA10aXJDt49rgAP5RQFoAhd
+ LmBdMhRT/3h6wd22xc2NayfF7NHgXsWH5oazgXPVMWj2eEUBZ2RTxzMP3ADQ9P1/V7ifP
+ mwGP6e5gHJMws05Sg8yeMkQCu7UF3EdoDC/4hxTQhUuEkAsFWqhoWe9QlBJIIioSbfA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1792222780;
  h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
@@ -83,16 +85,16 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
  X-Original-From:Reply-To;
- bh=7J/naRGq2PGNQQzgDDaUQlm88DsVdA22AOiKHrCdGHA=;
- b=sR9Fh9nkx3xjGlUVbSNEDmJ2LvFAP5f7j5MW0Pe3fZh0k8A2Sb9A61M9NhOfEIOSUxlX
- 9hAauQhCf0JS0UGft1dTuqXJxkmeZxTb1bbPKZelBQ35fvpwAGs5E1IwgoHeBAdnTDX8j
- PFg2sSrGzAWE1+YQnmRCcVbQKgJq+oC7bL/kE2Ca5daC7l093d98FWccG5NK5U96nUwJR
- jUNYugdqlY1czGsJkjNm+WDYAT/7zsl/VJe9TYOGxqvwCnw+xHnaFmsymzD7xzJZGusUJ
- KAs2n6vE2EUbSx1khksDxY7q4wh6yGROCOPqkfawwsqlt5ubNUnMPTI4ZRtahdrdzAQ==
+ bh=a+V535JDGToW5DtPUIHXcU7MeP/jRLPveTu8Dx95HEo=;
+ b=Qhkf3H/leRiIGBeE40I3yISkXZbHo/NItzAAJyy2cVdiJJUf9Z+L9ie269otWJs7IxOI
+ Q5NO+5h8lW3rKReo7MGdkAze5+VJ0748FFboISnv6vmXlUpYH7vTxaCxqLwMeokYzPTd7
+ bJhdg102B+Qop7t4ndzrge/CZBX60bSbon97E0vD+AXIzOq/vlCryEXw9l4SgboAdN07c
+ eJhgzJPzE/cmPdw0Ng8VphExY+IY5uYbl7FMMTXruy4PnG4PeT3ZK/zhGh122CopPCNFs
+ y0/MyLmbTqDJKFbS0/1d4PYF0R37sp3YcBTp8lYfKi4Zy3vEwEnG0WyCgRSGzGdhTCg==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20201202 header.b=a6YP38lo; 
+ header.s=k20201202 header.b=SbSUu3YM; 
  arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
@@ -100,40 +102,39 @@ Received-SPF: Pass (mailfrom) identity=mailfrom;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20201202 header.b=a6YP38lo
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20201202 header.b=SbSUu3YM
 Received: from sea.source.kernel.org (sea.source.kernel.org
  [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp3.osuosl.org (Postfix) with ESMTPS id EA9AD6087E
+ by smtp3.osuosl.org (Postfix) with ESMTPS id CF89B6080C
  for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 07:39:39 +0000 (UTC)
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 602EF43A7A;
+ by sea.source.kernel.org (Postfix) with ESMTP id 5294D435B6;
  Sat, 17 Oct 2026 07:39:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 44C2CC2BCFF;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 33834C2BD00;
  Sat, 17 Oct 2026 07:39:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1792222778;
- bh=120kuQQWhNb14k/ld3+q6/UtgGEBh5pZVS6tqpoHueI=;
+ bh=g9pFz3bpxBPczSiSSvad1eBu3ikCLEZAGcUmq0UCg4I=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=a6YP38lobrYovgaTohtFu8vIBUQZW+xqPVfxaSR1n+i0p8uKFZOchS/rpD6XvbCId
- ATJeFumnOSDFoTBx+prS/jEOLusLVtadKPUx6Lt2LIL2NRz71TCTmroNu6wcLj6psV
- U+OKxfHyrvyWwLKnnMyI3H37l1onn1VxqajnWdac3s+/TznR+1tw8UAJd6xRRWnEXb
- 4ojkBdUImFdMb7eCcesT2IKBkTwmg9fbcfOiLiodQfXUy0P70gNiJGzCuzustrAiLc
- fRk+KZSGI/np4jHCKzGEjNmCgyetKgupwyzYO1ehl5HXQTdMhesx2XgpSRjeIb0EQF
- TttURsS02DA8Q==
+ b=SbSUu3YMz7YyrzEJujbQK8epGHgBLPdPwFjoVHg87LHrt7B+ZzhHHjmZ0Qd0z/vfz
+ 1y91KQ+AF2MGQDvusWpyygTqA4cPL7YpuB9n7Zeoqw8CLCOEEHbMF8GTSXliVPu6P8
+ Due9ASmJwUl97ZeWqdTjIOjYT7ezxmUwh2bg57wJD8EZsgPEBVJRltPknGReA+TSrf
+ b9Brnp0gkk5Xs7aVblFBbGZy5wGCrIO16vy63acGfsTKZDQ8f4kYCvG8WGcRzjaarz
+ Bg7Q80y+oQ0TMmclJk0XFdDuTyjKkXJio6c4v2ApPRHxtdIQX/bV2I5QFkOjmiZe6a
+ nrAWDnz91EzPw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 31F3BCC6B2A;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 2164DCCF2C3;
  Sat, 17 Oct 2026 07:39:38 +0000 (UTC)
 From: Petr Hodina via B4 Relay <devnull+petr.hodina.protonmail.com@kernel.org>
-Date: Sat, 17 Oct 2026 09:39:04 +0200
-Subject: [PATCH v2 5/6] boot: Add a choice for the compression of the FDT
- in the FIT
+Date: Sat, 17 Oct 2026 09:39:03 +0200
+Subject: [PATCH v2 4/6] binman: test: Add tests for fit,compress
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261017-b4-binman-fit-fdt-compression-v2-5-d7e290847543@protonmail.com>
+Message-Id: <20261017-b4-binman-fit-fdt-compression-v2-4-d7e290847543@protonmail.com>
 References: <20261017-b4-binman-fit-fdt-compression-v2-0-d7e290847543@protonmail.com>
 In-Reply-To: <20261017-b4-binman-fit-fdt-compression-v2-0-d7e290847543@protonmail.com>
 To: u-boot@lists.u-boot-project.org
@@ -152,11 +153,11 @@ Cc: Simon Glass <sjg@chromium.org>,
  Daniel Golle <daniel@makrotopia.org>, Johan Jonker <jbx6244@gmail.com>, 
  Quentin Schulz <u-boot@0leil.net>, Petr Hodina <petr.hodina@protonmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792222776; l=1762;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792222776; l=3140;
  i=petr.hodina@protonmail.com; s=20260107; h=from:subject:message-id;
- bh=4zYaQ6H7gvea7wuTACDytrlHDVzm52hqn+UVZvLezIA=;
- b=6Z4bW1d5h1MvhOicY7WOFFB1h5sjSdERn/Q4t3unKTQAh5itQ/0zSz1w2l1c6bjXF3sTCjM76
- lbe3GEyKXGACPIwrHZ3ACRWTUs2+tcymEj8NH6yhtPUnMRxcIacWQoO
+ bh=6IPRRVuoewG+dDLGaql2qM+1Y8ADSTKQ9Qq9kD87Z9g=;
+ b=me/eiuxWmJjcbflkZ+6Hp89xwM0tVV+7D3thZ4ahly8Tw9JUAfa5OCNdAB3Ssf0h/TlQdzQnp
+ mzvCRGFYKkdCVcjwxlcMQW6Zykrf/Suw6u+d+W+DTFJbRBj7Kq5KzAH
 X-Developer-Key: i=petr.hodina@protonmail.com; a=ed25519;
  pk=3QaVc6AaAu1IsyyH86+LIOOFhD7kCws8Xhe+wwyE7Bg=
 X-Endpoint-Received: by B4 Relay for petr.hodina@protonmail.com/20260107
@@ -179,58 +180,70 @@ Errors-To: u-boot-bounces@lists.u-boot-project.org
 
 From: Petr Hodina <petr.hodina@protonmail.com>
 
-Add SPL_FIT_FDT_COMP so a board can select how binman compresses the
-devicetrees in its FIT (none, LZMA or gzip). LZMA and gzip are the only
-algorithms the SPL FIT loader can decompress. The default is none.
+Check that generated fdt images are compressed and that 'compression'
+is set from 'fit,compress', that an unknown algorithm is rejected and
+that a missing compression tool is reported.
 
 Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
 ---
- boot/Kconfig | 32 ++++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+ tools/binman/ftest.py | 44 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 8fcdc36c931..b84a75062b4 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -236,6 +236,38 @@ config SPL_FIT_FULL_CHECK
- 	  advantage of bugs or omissions in the code. This includes a bad
- 	  structure, multiple root nodes and the like.
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 8caf275d466..fdb22b0965f 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -4357,6 +4357,50 @@ class TestFunctional(unittest.TestCase):
+         """Test an image with an FIT with multiple FDT images"""
+         self.CheckFitFdt()
  
-+choice
-+	prompt "Compression of the FDT in the FIT"
-+	depends on SPL_FIT
-+	default SPL_FIT_FDT_COMP_NONE
-+	help
-+	  Select how binman compresses the devicetrees in the FIT. This is
-+	  independent of the compression of U-Boot itself. SPL must be able to
-+	  decompress the chosen algorithm. Only boards whose binman description
-+	  uses the fit,compress property are affected.
++    def _FitFdtCompress(self, fname):
++        entry_args = {'of-list': 'test-fdt1 test-fdt2'}
++        extra_indirs = [os.path.join(self._indir, TEST_FDT_SUBDIR)]
++        return self._DoReadFileDtb(fname, entry_args=entry_args,
++                                   extra_indirs=extra_indirs)[0]
 +
-+config SPL_FIT_FDT_COMP_NONE
-+	bool "None"
-+	help
-+	  Do not compress the devicetrees. This needs no decompression support
-+	  in SPL but makes the FIT larger.
++    def testFitFdtCompress(self):
++        """Test that fit,compress compresses generated fdt images"""
++        bintool = self.comp_bintools['lzma_alone']
++        self._CheckBintool(bintool)
++        data = self._FitFdtCompress('fit/fdt_compress.dts')
++        dtb = fdt.Fdt.FromData(data)
++        dtb.Scan()
++        for seq, expected in ((1, TEST_FDT1_DATA), (2, TEST_FDT2_DATA)):
++            fnode = dtb.GetNode('/images/fdt-%d' % seq)
++            self.assertEqual('lzma', fnode.props['compression'].value)
++            self.assertNotIn('fit,compress', fnode.props)
++            comp = fnode.props['data'].bytes
++            self.assertNotEqual(expected, comp)
++            self.assertEqual(expected, bintool.decompress(comp))
 +
-+config SPL_FIT_FDT_COMP_LZMA
-+	bool "LZMA"
-+	depends on SPL_LZMA
-+	help
-+	  Compress the devicetrees with LZMA. This gives the smallest FIT but
-+	  needs the most time and memory to decompress in SPL.
++    def testFitFdtCompressBad(self):
++        """Test an unsupported fdt compression algorithm"""
++        with self.assertRaises(ValueError) as e:
++            self._FitFdtCompress('fit/fdt_compress_bad.dts')
++        self.assertIn("Unknown algorithm 'bad'", str(e.exception))
 +
-+config SPL_FIT_FDT_COMP_GZIP
-+	bool "gzip"
-+	depends on SPL_GZIP
-+	help
-+	  Compress the devicetrees with gzip. This decompresses faster than
-+	  LZMA in SPL but the FIT is larger.
++    def testFitFdtCompressXz(self):
++        """Test that xz is rejected as it is not a FIT compression"""
++        with self.assertRaises(ValueError) as e:
++            self._FitFdtCompress('fit/fdt_compress_xz.dts')
++        self.assertIn("fit,compress 'xz' is not a FIT compression",
++                      str(e.exception))
 +
-+endchoice
++    def testFitFdtCompressMissing(self):
++        """Test that a missing compression tool is an error"""
++        with self.assertRaises(ValueError) as e:
++            self._DoTestFile('fit/fdt_compress.dts', allow_missing=True,
++                             force_missing_bintools='lzma_alone',
++                             entry_args={'of-list': 'test-fdt1 test-fdt2'},
++                             extra_indirs=[os.path.join(self._indir,
++                                                        TEST_FDT_SUBDIR)])
++        self.assertIn("tool 'lzma_alone' is missing", str(e.exception))
 +
- config SPL_FIT_SIGNATURE
- 	bool "Enable signature verification of FIT firmware within SPL"
- 	depends on SPL_DM
+     def testFitFdtMissingList(self):
+         """Test handling of a missing 'of-list' entry arg"""
+         with self.assertRaises(ValueError) as e:
 
 -- 
 2.55.0
