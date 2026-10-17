@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 970B1CCF2C7
-	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 13:01:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EEE2CCF2C4
+	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 13:01:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0C926606B9;
+	by smtp1.osuosl.org (Postfix) with ESMTP id D05AF813FC;
 	Sat, 17 Oct 2026 13:01:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hwVKgDTwcneh; Sat, 17 Oct 2026 13:01:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4D79B6064B
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792242081;
-	b=k2UAngZCpY1erZivQqLmQ6xjZZMj6wWDr+HA41W9NNse27y8ZF9XdYqWgmfoIpSirGoX
-	 ZT1WfVP3nP1OSQdKzFxE6MRpEjDqFrgQTkRUpZ+FMz6rqpxzLbAk6NhtMmsIxj15JA/VF
-	 7MPFVHoQ43xgIQRZ7y89UBs3T8lF58HDfaxuVoP8FqlW0Gfz3aSrQjkE6VnDzis7Cf/1N
-	 jsw6oYXPzNhWAGy5JWRan6/4JYiLId4P9gIjjhY8GzH9tedTlyw6Q0b9EvRQDTKHL44qt
-	 Qr5Zk/NYeYM9QDYvjKJKT9NviUpCBYI2wYD3UZ7dGS/uwPwua2vh7g8ueheTO3N2BVg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lY63kdizpypd; Sat, 17 Oct 2026 13:01:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org F23D2813F5
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792242083;
+	b=jP4Fz3QrHlHO+wcV9ZVzNPdMtU/afabJRVujiofwsnEo4zQmL+fv6uZQ7rVOhPuhUFhZ
+	 FAyft4kKcO/OebhcSsAWA1Mxr7eEPl9zRs2LRcFlC2106gKQlq3Y1FZg0/FUsoG0IQ+Ba
+	 RczJMRpQAIYJ10c1VoMGig7HwhiekmJlT5aDOYYqJSA8IxC7CVpNpjHxG0ixVHhntV56y
+	 bpKWFTnX1g+IlhLNE+x+uGa/doLroAB8/b2mZoopERWXSHRQi3qLPPSf7M/f2Gfbt8gcx
+	 8vL1QFL9aEOIxow0sAhZ7zkZ3D3ciF0E89T4FtqeCJ4PwNOHYd7k7w5uiM2q6I4k46A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792242081;
+	c=relaxed/relaxed; t=1792242083;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,146 +32,148 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=vS/FB4LqzKQSwbVHTheoF7AkWOy/4ISN7HKFfEncTXg=;
-	b=rC0U/Eb6klhqn6/3iQ5kWiKfjAYAc76QdGS4hNaiPQRcQon5l9TOsVAnG1l2BVcK8eRD
-	 nEQoziVKC6ie1MIMHBONH6Rw3YMmOlCQD5MnP2UssWeOEL5mqrZrweRF2/YqDdLREtPLt
-	 HePe4IGTS/r+tCOH6k2MC61K1fJSB8zxNt5qt3h6k6Z3x6yregwG6KOCQnRVaqJMgM/Dh
-	 YHSHXE2fnzhkO4/j5sjdFjc8CqTI4VigJuYmU3x8i9HtXWaZlcnwlHcX60mp5p8J3bvrB
-	 yZxrrnzpKfGJEUSoC3xdd1VlPioQUj+9ewNW/6VyjEv82/l+RGTn6qBXuCQOvigCiGA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=ffTQl9x/cTI7G+ZrDGk4LaQeO1I2wHhjJtn4BT3YsjI=;
+	b=R+dmuxy2dA3FCCUpZ6I99vEd6gs7XBdhTkLHMvq59g7teVIU/RysrJtVbzLy/cZM7G5p
+	 1LJ+Rl6aVdwEFNHSsN2ZcUMaykCkEn8c5m5u89hi/+pWKLpiy47gXS888s+/ES7sy8JBc
+	 BpRgBqltvAxWtnWaazJ0DDKV4BnulkoM0f3TlHtB2U/rTwGefBVzKXEAxnH1PBrGL4FcX
+	 vdok6cjb+9ZtIggQuQto876aKdX42dEWOiPyaXtm1358Q75VdcSeu+SjoQHLMOjArdsB+
+	 LmNGnMZ1G+G8ZVu5C77JLIalnOZKswBPXDutMVKyKqO9zRsPUQaOx41hYVA6kdNoh2w==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=canonical.com;
+	dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=rCSapGNa;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792242081;
-	bh=vS/FB4LqzKQSwbVHTheoF7AkWOy/4ISN7HKFfEncTXg=;
+	d=lists.u-boot-project.org; s=default; t=1792242083;
+	bh=ffTQl9x/cTI7G+ZrDGk4LaQeO1I2wHhjJtn4BT3YsjI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=y71Noda+1rDjW1sVx6AawOLJ/UAw44aghs2g3Ltr1XQTl0qdwdyS4Hz6udBRLclxl
-	 JTIMzNmo3Y/G4Wtvn0pTsP7WV4ySRRZnyGgMTOrWolHdFlOCL3EHct02CW+ukrcHC4
-	 VE7mxVvds0YOncrb/nemzo5dVEn4RRAMCwVxc8MgULqDhUvvb25XsuJSgyKiDPT3+j
-	 QVhawaTuTfQYz+zbQp7wyq0ebJufj3yzsJ1Sy1ikKzcHb1/GUk2qncjMn0jUtnYEV3
-	 WRWB69hojdjIPWG3UiA/1gT1AEWVozZBgpTMFqSjMJLmeBZi+2ez97U/o5+Wc7lYsU
-	 PSvH7lVS540/w==
+	b=WQDbS6N+lkdtrbosOzDTPCPIS76qxrMMe1om6VAO1RA3k5/u5rbva+joZZiCwEArl
+	 ctb+qvvq36ZiW3pJGdGWxM/3MtFXxAQZa02cqP+sgTBoITRjw/yKV/rhVJYqoRGxX+
+	 G+iYInfzrDe0FUiyc7YJ/3Ptqm6vIcSOXibgh0Msq89HUc/g7YwWQC1UAsRFt1HLPr
+	 uIjdtNbglTW1KS4hABagbAft9wpDfcZUi0qKTKE/glNdOVRCSgGER8PGs0tuXbbYh9
+	 LuIaC4i1C1aAOZD2S9GxUHe4sPdxyMQc0hJUTLpcQUnAJjHDgn3nNQ23zKUq8CnuhX
+	 5E/mLW4Ie1jPg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4D79B6064B;
-	Sat, 17 Oct 2026 13:01:21 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 7277D2A8
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 12:36:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F23D2813F5;
+	Sat, 17 Oct 2026 13:01:22 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id C52AA1AB
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 12:36:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 59503812DD
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 12:36:36 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id B745A812D4
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 12:36:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ofgd63M_x9Rb for <u-boot@lists.u-boot-project.org>;
- Sat, 17 Oct 2026 12:36:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 54BBC812D4
+ id 0iNLQYs5oJEn for <u-boot@lists.u-boot-project.org>;
+ Sat, 17 Oct 2026 12:36:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 072FB812D6
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=185.125.188.122
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792240595;
- b=AE4l8OXdUCQU3ExovJT9+oAAjyGWlv1upG15n0kLr7jjU9IqAtkmWY0RLYoYcKbvnrUO
- 9SY6hyr7CjdAvMApuDxqU+Gt22FFHQrO4EvYtb0IIWJCOjajbLYuR0IK3ChHtG50RrGWM
- CY/FGsSwSnB8CLAN6s2N4q4nqmRzTvtj72s2v1WFOUBT1ypi8aTVoK0djfvA7TFD4x3N2
- bx+4ZImY0V1GJp8XZmNPjY4PfYG3Np0kA/bknnxTOJiAFPjjTEi+7kP/sxWhf2OCahw90
- tad/qK7H2J6yc2nsZiHn0rwgv/R9NdbC/PES6LlnMDI1wz/Ng0JqZC77gr2BibifOIg==
+ arc=none smtp.remote-ip=185.125.188.123
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792240597;
+ b=Vv0ZlSF9tXjus5m4Ij9WFXa1iD4wVcyUGHGb/Zs7Jhl9DCjB19I/PmMk4cUJIf+1Y+n+
+ Txua0/VB7A9vO9/3g4TrjormuI4yaDZBCSmpAO1lAOgM89vrzeZDkb/a7Zegca/YpHdoE
+ QzK7oBkEAsaJlOBoJe5i1xU5HIme/R9Zx7LwA3rki/+eufPm3WfpNVyif3lZVmwyqZOVM
+ XpuzxmdOR01FIVSG+tlTpticB53MScHfFR2cWAmVGrsKDIUe5r6hA2Q4EQ5sFregdeCXY
+ cpIlSk9WQyVQcu3aWZJ9sZuTzyIwiDixXJbIs0ocV/9vn4TwuibAi4ozerSm6wEYDPA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792240595;
+ c=relaxed/relaxed; t=1792240597;
  h=Received-SPF:Received:DKIM-Signature:Received:
  X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
  X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
  In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
- bh=vS/FB4LqzKQSwbVHTheoF7AkWOy/4ISN7HKFfEncTXg=;
- b=AGUK98GNP7Tq6f+vDGuWhc7CEBp8BU0dlzDMrRnMa7nuMk4sHK7JlBMEVH6InS6eHPKJ
- OwDpSUk1b8ySeeCyFeK4xWntAC7y8J3u2FevdejU5X/w+q7dlwvAX7KG4+ISRRvJvQV5B
- HyfZq/8Qn13WOsyRYI+ysHYCoyzs69Xp6sy+EdaSp3iiTrdu+qej6Cv0sMgvbDIczK2kF
- GUkEu+xG6BMllrREdlSP6VF2z7OBYp2fEjg4IDAnSu1yNaP0wxSYumA581gPcZj9iaQz/
- BVNRjatDVADGVuXJ5gCw9OruKwoihpKCIa+oQyjuaB8izg64NHBObNu8vqPnGBIxPIA==
+ bh=ffTQl9x/cTI7G+ZrDGk4LaQeO1I2wHhjJtn4BT3YsjI=;
+ b=Xo6+p07VJfGqHQaJ7jQrJD8pP0cssoXgOmKBp1+6eu3ibY5NbTpeDGNYkj3TdaBvBFj3
+ mZ4ay08I3rF6oQRBBEbFetQiUvP/IDuqY81fU6X8HzlbgpR2rOOeswWcLeQLw5Mma7kxO
+ JeFApXrikVgWjpzKf8xHBKAAV0dAM7BI10kqHb+WWl3dcLbTlq9atPyjMa7g016tvikRL
+ +KCX6pqf4vUUG+6tkvoloe0rdH5UTLAIz5URgAWNkMzi1jdxjJVh9LSrywU99NBIeVkvR
+ drnWeoGrFv99tF16B7oqKdLfbDJJgjcXRdhft0PetdrR5vl/GtiqNG4X5b1K4j1UvUA==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=canonical.com;
  dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
- header.s=20251003 header.b=O3kXCcyJ; 
- arc=none smtp.remote-ip=185.125.188.122
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.122;
- helo=smtp-relay-internal-0.canonical.com;
+ header.s=20251003 header.b=rCSapGNa; 
+ arc=none smtp.remote-ip=185.125.188.123
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
  envelope-from=aristo.chen@canonical.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=O3kXCcyJ
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 54BBC812D4
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 12:36:34 +0000 (UTC)
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
+ header.a=rsa-sha256 header.s=20251003 header.b=rCSapGNa
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 072FB812D6
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 12:36:36 +0000 (UTC)
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 522423F19A
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 12:36:33 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 197013F162
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 12:36:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1792240593;
- bh=vS/FB4LqzKQSwbVHTheoF7AkWOy/4ISN7HKFfEncTXg=;
+ s=20251003; t=1792240595;
+ bh=ffTQl9x/cTI7G+ZrDGk4LaQeO1I2wHhjJtn4BT3YsjI=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=O3kXCcyJmPMvXPpyD9PWifKEwmA1yrUslNoTNJwngaY6ciNy5RdLc0xXKZr+gRzkG
- qGncwfJdrnObokVsLZvef1vt3LPrwOGzFhUMkULjBkpAPHO02uwKGzJt2m2kA8t0dC
- Tr0fKy3k+WmZW0jYBeU/VhV/juAikUe/vPHCsiIqPAYjBoN2ZI2osysuVg/48vKktR
- ckwQZ2BiTqwi9qATIAIaYynGpLpfCsP67flbGAlaxUVaddcf5m+87JsPsgbZRrjsbh
- 7gDN1FMgjP5DV3T7tDz9wcIc5zjKMMxSiISG5YFSQ16zQb+voo5o563Fvh6JEr3Yrm
- FRzMpwxb9aLPsDRduF+2F3J1rxDiPomLXOhPrsrwD3mkSYA5bOXnL0sILq/W8wg7Bv
- NGUXAGEAIFeq2SJvAZBIzACNKCTvAnbyRe4WSj2K6BYBTil3Xt8R/1g/0mOtWvSYbp
- P5/lfkzRfqViNZ1iNBDAkGejlgAQRvRo6hwhvy/YrVmZoNuL87ti1D2LX+P45mXdXn
- FpETvxGxPvRph37G57XThaI3D1IkLrKX7uJXmcqfxDAssBk4ypafM1aZubyO0CrBkK
- 064So4FilmEM4C91TsHzxqNExenshSpreJcnuKKeINLh8KXo8mt/7W7yTwCHi1n6aa
- dRBKklhevfvNoxw8lgNDVrhE=
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2e8ba4757baso7653315ad.0
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 05:36:33 -0700 (PDT)
+ b=rCSapGNa3I9gkeMWTP3+HexZsMbS9RBlNoDFLbWAY7qhbWs2gyqzpx1yL89bIgB8Y
+ Cioab4znVa9BnDAm/0nMOnao1f1lgzyGVcnpoLMjEvisYWe0pUjw1pq80hz7HN9sMz
+ TU/Gt1FUjzyO4pJvUCVtyLHe40yUWa+L1talaPK4pH0NYPws7lXj5Ik+YvL9qo3jBg
+ YoZYOvoQffcWjoOpHN33w5pQ5r+caksfrUsszgywmU9T+ebWQGUlalzcWe6hEH4LjX
+ PDUNXWvAH1yBNkKeeCPO1dmWzMWPiTtsKheJvU9Cm/kZvJcDdUxFODkK8iKNaIAgIa
+ ycJ0z2eHvAJeX/YDJePP77BzPohW9icEEgfxx2apRrA3ycCKUpR1aai/pq0RdMOLAe
+ LbJ8VkIvP9nVHfCfzJ6D3BE+5sRETLLHj5T3SlbEsvAxZMCyqkOx2EK6llF70RWAdt
+ FA3ewVbIKBcMxMujbuYV+B7PvsiTABIIlBvRkbRRnqO0oiMhD1aCTW+7t+6uTjcCkc
+ Rlhh/X9MY5O3jW1Ey/KFJmoJ3omAErQ0lXqi384byFnAy2jujvghPCofmPeFmx0JV1
+ c828NlSALtDcj1uYz0bDPK99vALjhoUt/CWa0kKNQHwIvfBERiroy9u8cy8lxuhFzR
+ LG4ceC7N/aBiVV9CHjoIRwmI=
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-2e941532594so7383465ad.3
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 05:36:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792240591; x=1792845391;
+ d=1e100.net; s=20260707; t=1792240593; x=1792845393;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=vS/FB4LqzKQSwbVHTheoF7AkWOy/4ISN7HKFfEncTXg=;
- b=C8JsZIRKx0Ys3jS8UcGm2L28hDftL+OYTeRnzGbj8NldgiEQwVToASE+9UHhVUxjDi
- yLM95v3KgL3tAjCcqEuNMm/BLACor8QVvQdx47/2Ig7HUr4CiHStAWT8tdGEEo3Dx1Fd
- aTF6Nef+DJ2UUeV0zXStH5ZJjCxJ0BNGOQVglVFNvcteMTsgQprk3AOtzum+33Hc670f
- 7MZUEKw8A50Ka0DGiTmb1IaXsrF/mh3pkS6FFurPcgxvJYarAWO+A52jKkn06w+HAXvE
- Wh+iiuU1StrwNiHuh/FRf2MB0xZOu9VzJB8Fqu49ebXJ24KOZpPIDIeAUP0PSmNOjS/i
- dNzg==
-X-Gm-Message-State: AFq9FYLXgwvgTrg/l2nvn6BgWywif7rxtO1TKDUm/durJ+bINTzyYjhz
- V/UmaAiRhfVT5+74UUIMwa53xYD9Pb3nBf2+t8cjTOB6WN6YFhfymIOJIRSQ9XJeaIMPT5aVnQA
- TN72x/PJEunz3vhFG1fMr9GFd/Yq5wBBFd7WjoOZskV/4gMU+pnxZHWmP2picY4G/I/4v+h393l
- 6lPDRcvBK1N2tfnxDcRw==
-X-Gm-Gg: AYBFou1EHHYZubCRaxMIc/ulaecYkSU8K6xRcZlQ3T40nTXkOT8SyftptomX+sgBZ5V
- jo6fhwraKFq9gYCawb4DEjIq+H7ABVodNPKD/kEd4kwBzcLV3pBIKKWDAD4t3N2lYXSRJG7aVQG
- 0e81EF/Al5J/eoTrvVhrVjrzvmMCaDPv57T8IVqqWLduNS7pKrDCDI7jghNnsdQZcuJqg23buF7
- 7QeMyy7/URAqY/7ht6NrUxw7R3A/tOJGhr6H+cccSa5BRMYNmewL1Wnjit+TWuuWUSGR133PMqV
- bgEPLg7umxQu9Wyg4HRGTR2+6g/7mcOyln9qSY7MuUGY+RGiqmzL4sZx80RiXMJcg6+aAafK+0F
- H3kS42pIbtkz8YW11yTvFv178oucHOqLs1LCaNA5l8YreNcM=
-X-Received: by 2002:a17:90b:5610:b0:3ac:8897:7b88 with SMTP id
- 98e67ed59e1d1-3acef5f43f0mr2041795a91.58.1792240591475; 
- Sat, 17 Oct 2026 05:36:31 -0700 (PDT)
-X-Received: by 2002:a17:90b:5610:b0:3ac:8897:7b88 with SMTP id
- 98e67ed59e1d1-3acef5f43f0mr2041783a91.58.1792240591097; 
- Sat, 17 Oct 2026 05:36:31 -0700 (PDT)
+ bh=ffTQl9x/cTI7G+ZrDGk4LaQeO1I2wHhjJtn4BT3YsjI=;
+ b=Z9t6EIlYlafxldH9DRnfl+LtSM8ygeB18+lmAEvun/Q7R76fNmLMxnEHVFx4bq+FXr
+ 3RZzfeqnflskMtsL9ADA2M31BiNoGRDg5vREzPMhiXQ2htXjIA68c78qA6cE2WLrJ9jb
+ JvzHho2mc6ThNuOx1yc9jLarCaqJjnzpc0GXDrfERm04dObx9A+3uQ5A0a1eRHdrCEnd
+ Syu2rW7PRwSVv+8LOxCSRtK+8TNncIqzMe6AgmNCnez/tio/X3GByzOp0/EoC+j4pxfv
+ BWeKCmyKBtQIouNXePD2fyQISKT5e/aqBliiKbyk/kA+zPluaPgHF/NaKHvkpkR/YvLZ
+ Wgeg==
+X-Gm-Message-State: AFq9FYLF9bO9XPhNOakm880a7vh9SD/cpKC/D+bvK6dvvM6BEgBGZEbQ
+ TWHoM7DBXiq7uvEkppQ+nIhhihkp3RvsyJN3wARFUHaKtCBlQI6CS2HuZDY1QuXmdGXJRpviO4E
+ FEry4mFgyqiOu03P/8nmDXTkwMddS7Z8ozClXPDMMxmXvKhpOlyAbew7CbdGNfuG4nJvNMdUCV6
+ P7QoWUwXaMVenY0WeUyw==
+X-Gm-Gg: AYBFou23okjAztEd7n9xKYijMfEXKIB6Ttnli2zCLGNO2RAhxS667XbRaRUWuo0lfdD
+ oY9EZjGgWwab9m8FvW2t4FcuxEx+wMg4/q63ghhiuEQJRK0mOpm3xnI2COn5uDgp3r+FsKkpCbb
+ vrR4TmIwfExDKe5SkZ4Uow4i7XKF2FMt2ghR1QQDJA+yPHe5ZGZc4fFyNCYtaT8ApdPGcA72Em9
+ dlUebAgtsxZOjD2kaM8jETeTz7g830aIyPpKKXZhMT2JfTXczdNBwUN5d5JdWo6WxpRw+cPkbvW
+ CJQUNtpGftZV4141cc7uD3JLIxjTHIebUMrTD+ALyw0x6dvdk4CcsgOu3APuM99DS368oxIxKuF
+ 7LTHKIHwTH9NEvgt6d8Ti92hbVyzOqR3XnRjuWehykGZiBNk=
+X-Received: by 2002:a17:90b:180b:b0:3ac:9669:845f with SMTP id
+ 98e67ed59e1d1-3acef152d1dmr2502655a91.41.1792240593476; 
+ Sat, 17 Oct 2026 05:36:33 -0700 (PDT)
+X-Received: by 2002:a17:90b:180b:b0:3ac:9669:845f with SMTP id
+ 98e67ed59e1d1-3acef152d1dmr2502632a91.41.1792240593007; 
+ Sat, 17 Oct 2026 05:36:33 -0700 (PDT)
 Received: from noble-uboot.lxd (211-75-139-218.hinet-ip.hinet.net.
  [211.75.139.218]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3acc48f4cadsm7909410a91.12.2026.10.17.05.36.28
+ 98e67ed59e1d1-3acc48f4cadsm7909410a91.12.2026.10.17.05.36.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 17 Oct 2026 05:36:29 -0700 (PDT)
+ Sat, 17 Oct 2026 05:36:32 -0700 (PDT)
 From: Aristo Chen <aristo.chen@canonical.com>
 To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Aristo Chen <aristo.chen@canonical.com>,
- Naveen Kumar Chaudhary <naveen.osdev@gmail.com>,
- =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Danis?= <frederic.danis@collabora.com>
-Subject: [PATCH v1 3/6] cmd: pstore: size the buffer again after pstore set
-Date: Sat, 17 Oct 2026 12:34:18 +0000
-Message-ID: <20261017123554.211799-4-aristo.chen@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>,
+	Aristo Chen <aristo.chen@canonical.com>
+Subject: [PATCH v1 4/6] test: pstore: check pstore save after a record is made
+ larger
+Date: Sat, 17 Oct 2026 12:34:19 +0000
+Message-ID: <20261017123554.211799-5-aristo.chen@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261017123554.211799-1-aristo.chen@canonical.com>
 References: <20261017123554.211799-1-aristo.chen@canonical.com>
@@ -191,37 +193,55 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-pstore display and pstore save copy each record into a buffer of
-buffer_size bytes, the largest record size, but compute buffer_size
-only while it is 0, so only on their first run. pstore set changes the
-record sizes without resetting it. After a first display or save, a
-pstore set with a larger record, console, ftrace or pmsg size makes the
-next display or save copy a record past the end of the buffer, which
-corrupts the heap.
+Run pstore display with the default record sizes, then make the console
+record twice as large with pstore set and save a full console record.
+Check that the whole record is saved. Without sizing the buffer again,
+the copy overflows it and the sandbox malloc checks stop U-Boot.
 
-Reset buffer_size in pstore set, so that it is computed again for the
-new sizes.
-
-Fixes: 9744d1a54784 ("cmd: Add command to display or save Linux PStore dumps")
 Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
 ---
- cmd/pstore.c | 3 +++
- 1 file changed, 3 insertions(+)
+ test/py/tests/test_pstore.py | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
-diff --git a/cmd/pstore.c b/cmd/pstore.c
-index 6a98a5c006b..77dc925e398 100644
---- a/cmd/pstore.c
-+++ b/cmd/pstore.c
-@@ -197,6 +197,9 @@ static int pstore_set(struct cmd_tbl *cmdtp, int flag,  int argc,
- 	if (argc > 7)
- 		pstore_ecc_size = hextoul(argv[7], NULL);
+diff --git a/test/py/tests/test_pstore.py b/test/py/tests/test_pstore.py
+index 28a60291a85..6c1d5eef2d1 100644
+--- a/test/py/tests/test_pstore.py
++++ b/test/py/tests/test_pstore.py
+@@ -112,3 +112,34 @@ def test_pstore_invalid_records(ubman):
+     assert(not os.listdir(outdir))
  
-+	/* Size the buffer again for the new record sizes on next use */
-+	buffer_size = 0;
+     shutil.rmtree(outdir)
 +
- 	if (pstore_length < (pstore_record_size + pstore_console_size
- 			     + pstore_ftrace_size + pstore_pmsg_size)) {
- 		printf("pstore <len> should be larger than the sum of all records sizes\n");
++@pytest.mark.buildconfigspec('cmd_pstore')
++def test_pstore_set_larger_record(ubman):
++    """Test that pstore save works after pstore set makes a record larger."""
++
++    size = 0x2000
++    console = PSTORE_ADDR + PSTORE_LENGTH - 2 * 4096 - size
++    outdir = tempfile.mkdtemp()
++
++    ubman.run_command('')
++    try:
++        # Size the buffer for the default record sizes
++        ubman.run_command_list([
++            'mw.b 0x%x 0 0x%x' % (PSTORE_ADDR, PSTORE_LENGTH),
++            'pstore set 0x%x 0x%x' % (PSTORE_ADDR, PSTORE_LENGTH),
++            'pstore display'])
++        # Make the console record larger and save a full one. With 0xaa
++        # data, an overflow of the buffer fails the sandbox malloc checks.
++        ubman.run_command_list([
++            'pstore set 0x%x 0x%x 0x1000 0x%x' % (PSTORE_ADDR, PSTORE_LENGTH,
++                                                  size),
++            'mw.b 0x%x 0xaa 0x%x' % (console + 12, size - 12)])
++        write_header(ubman, console, PSTORE_SIG, size - 12, size - 12)
++        ubman.run_command('pstore save hostfs - %s' % (outdir))
++        with open('%s/console-ramoops-0' % (outdir), 'rb') as f:
++            assert(f.read() == b'\xaa' * (size - 12))
++    finally:
++        # Restore the default record sizes
++        ubman.restart_uboot()
++
++    shutil.rmtree(outdir)
 -- 
 2.43.0
 
