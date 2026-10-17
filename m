@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 386BDCC6B2A
-	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 04:36:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71FD7CCF2C4
+	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 04:36:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C608081516;
-	Sat, 17 Oct 2026 04:36:41 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 15DB040A0F;
+	Sat, 17 Oct 2026 04:36:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1IlnCUb35FWU; Sat, 17 Oct 2026 04:36:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D33BE8156B
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792211799;
-	b=QASozVpIajkyP4lTqI2XzHHW9lk/TiC9w+NUQGQGPSuQiI2bvOH+tJE2pyk+hhMk3ZVh
-	 BOcvJRHAlJ19fgJTTTOyMHdrJl/fj5iO6STpl3UHMdMGaDXA0QiovlAIaCICbsF2k2cr5
-	 Fm1GyH6KysCoAJ+/W4ju3WxRFFp268+GnL5gykoPr70973bJVQM1RYsSP0qVyV+dkeTQk
-	 qDhgs0dbwEioreYjBA+E6HyWcutcs7H+sadQ47k7AnPTGHHeO3ef/ah59kYAg7vUkXniU
-	 rDnYNC16Ee+L4HNHAprpvTgdCUuC/isTsZGcjThIlBPtAsYmlKBey0Ri3RDWeMYA3mQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0RDfLOXVWBp7; Sat, 17 Oct 2026 04:36:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8980C409F6
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792211803;
+	b=RLyJ3lLaBd6phr2/EDlzXqJAOvRco8MDZDdQGhIUwmFQ4ezZFvfdKB/pEl6RWpEStVox
+	 6bINAmytpTwA3fT7G2wCRZ4sl53J8S4fLIZUijPw8nQzkwBr0OJCVi9bkrsE5Pkm2p1d/
+	 aIIiLC/fSLFHhIKaJhiJmX5Qdxmboh1xHE18mXL4YGxJ1mdVcIXRC8nNKPTRwj61FCBLC
+	 CDnHeM+XJ2t5rUZFLlCNdnja05mrWd2cAnzhF0qKpOqNH2LE3UH2aBulpJGLh/S2CgS8d
+	 TRRYiLD6pPISv4PFKcF8YOFvFtLTAVgUO4FSlgfQhD9IJe3u2Y/V74GdAsUlMy6w9EQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792211799;
+	c=relaxed/relaxed; t=1792211803;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,137 +32,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:In-Reply-To:To:Cc:X-Mailer:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=anL8dCf1pJN0E4ieBeE26RQ+8fbqGghGUFn46NQ/BmM=;
-	b=jzYlyJJzAoVDeQNar93zIJ6gkx57LVgFYBNs78X0/YVIgbt4Tl0X3Lpx1DEqrKSevwfN
-	 1NapdC2ACEvD/NQPh8hlVp13icrH7a+RBQvqH3OdOvTsFoemjxOqNaXrWHBlqXjXxg+cz
-	 ovkyle2INwbBn14A8K0+KukCoxOW9DNJAwjVUpM3Ib66sfIBunXqkiDvOeWNobeV0h7k5
-	 jNdQ9spVfzZV11EZFlWu5aG8lMHJOLJGSI4p+Ab3ec+Z9uiM5jpiridHD1lL06sqGTDfQ
-	 1upJYaolGjtcOQCqF3i6vroow62ZrHKU/Doekr9nWf/CYBzSM+fqqWJa09S8w2p+C8Q==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=fe3+U11CMU72wBQguUpiyKRRiB4m0LEe5rH39xaiMBE=;
+	b=mDK7wN1GqIcrMxp+22Lxbu3yAdOq3gSXry74BMcbnH/3NCRzFnoA/MQBC1AoztGJgSX5
+	 XcI4NFYdJmbhYsqkvH3yJP03QD7E0vuzd9xCL1QzUsOsAZOecreo2wu5c4Asfn9SZ8fUi
+	 x1wda/819N4w56H2sETAUxI+ugwtrFc3UpCcDG+Bkf39eGWBXr6frL5R6YbzGfiS1VubA
+	 boppZAQzf0RjbOoQR6OFlSw0gsqJ8bt4DFjPlzHiRLgUJyaIbd9+9IPiIyYiQURS8azUD
+	 yLXkQjwgV4JbCCJyOl5Vq5xpoefMqQ4FhmNKLDrm15XOmV7TdXh+TYTNj1TIx1iBoEQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792211799;
-	bh=anL8dCf1pJN0E4ieBeE26RQ+8fbqGghGUFn46NQ/BmM=;
+	d=lists.u-boot-project.org; s=default; t=1792211803;
+	bh=fe3+U11CMU72wBQguUpiyKRRiB4m0LEe5rH39xaiMBE=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vfR89TAg8cbj+D6/t3jpRQzXWB8LvZxi+TTbU0Hpib2inBezFyg2chxn++fKpkxPJ
-	 9hmD/3klz6b0TuW+xEOGQNnj9ddNsOSBgr4TAZCyeZmILhOiynqi08Ryp7PzdalFB5
-	 Ao2LHyjsDvb6btRgU5HWaWXA4xq4rPofdDCHhAunRuJ4Qm6s1IPPcYn2nTZLxM88aN
-	 1b6TQJAKQaeyNIe2FHM5liG9XUXIjxumZTzPtUsE9tNW+u9ig/7DpSqch8UfZtomqA
-	 HRx8cAkEs6VGf2DOsFd/jSeNTdz4kpSJNgLRnOSJU6K2Jdtgf3d3AzmqXtLRoE1yzz
-	 8Mvp/LNx5Z+TQ==
+	b=0bMtmlEbhqsuKHv7WvfRxRMNb3taGO54KkhV4xq0u+GzYGlXP9AYg5+raOzPNeaYf
+	 26HbSI/9Gep0uhMLww/g4jv6zGkrZ/Wwb7N7EnLT/ETq6akaYmN1pkqUTn4WQDTrDr
+	 TynGjgmcVgW7ncTzpsUeBmQEafZwU9YZmH3EMFo3YogHilYexH3hfhItPopDq4rSg1
+	 qtflfPNPWv4gqYJABrbkvWPmNF/OIBNvbPCxp9cjujTpaAkeMKycCjBzrl1xGvZdQi
+	 eNvDBxovEUWQ0GKW6hU7IYIm7937Ed5nLoL0fAIxkxowqSD8+y+qBaAD/1f0WeBuxk
+	 LsmidlGxqpsGw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D33BE8156B;
-	Sat, 17 Oct 2026 04:36:38 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 4EA2B105
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8980C409F6;
+	Sat, 17 Oct 2026 04:36:43 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id D857A362
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4CAFC409C8
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:01 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id CA0C160AF5
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EFE-1U9BGjhH for <u-boot@lists.u-boot-project.org>;
- Sat, 17 Oct 2026 00:36:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 2780D4022A
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2001:4860:4864:20::2e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792197360;
- b=nr7VsU4tRaJwgGLNp9q5olbY3ru5QzRfcJP/9R0TAf10UNykBq/flgCqkI4DAqG+4/zE
- zq+YZC+0Rg/0LJHtL/btMltyNZPitDxv3B2b9/pw819nrTX1gZLrAgWvlVsVjhrF85dp2
- XzRLPwV+fGut5xDC1I36bh8evHp3ZT1owvOQuGJNXGNu913tfu/qlqdFwRirWyBRExYHj
- MgsgXZdsCDMy7MePlcQpBvF8moKC4b6i0REKqEadPM/9WWRTeD0Desw2PC4uBxyhKBRml
- fiNmLLyQs+r53Q4gsAkLZ89cD2jWAfXRbH+g0ejX0L9hfZfqdVibYxnN9ZAH2D+Z3LQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kmXa2LdSGOXk for <u-boot@lists.u-boot-project.org>;
+ Sat, 17 Oct 2026 00:36:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 9128260A7E
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2001:4860:4864:20::29"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792197367;
+ b=QJRbvwO+DzRWFqZbwVZ5IM65GxTmi//JknMZK+C4ScUhe4ynGCPlFmypYxcUErZ/+HLZ
+ k6HD88wQuT3z/W7kaGJ0ofDanVeSWTpfZQy6JRgw068JtJmZ6owHcagZ1hQblTaMeWnoy
+ WM89dumQSg2jVKHmpvH6+qToLcYHJbEYOMFLtGryx+kAFIr1iiPgvyFD1DpBgS8D42lg7
+ PpcldY56Mh1c0jtAGFnbpBRIvk7GGZYie4S/+3XepVSs6Lj5VFLvIGZNBlk4T/KyrI1Iz
+ 3KN2wAoujONJurn5BeQIitBPWNp5IJUFYr8gsZIO6Q66E+2oBd/0xDXYqMq9Assmrwg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792197360;
+ c=relaxed/relaxed; t=1792197367;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
- bh=anL8dCf1pJN0E4ieBeE26RQ+8fbqGghGUFn46NQ/BmM=;
- b=cwHfZ9Y+5bZ1spEbGrAhXypbqg1iwJffR87CN2w2VtgGD70FVU0WVbsJ2HW9WRZECK/b
- na/sScg96ey/MeJD+0Rxerqv2qBtsz64STFwLyPTeU9U/VhW8snMY6zc2zCanqn9b82Qq
- JBCgFm119rEMQ6Un4VoVl+aL308flwoQPTQfD9wskBSj8KJbb+BdDX8w+JWRqgWX7EHse
- Wt/AN41/nihSr5fskTBb/lnBWJNfwrK39ocAmnhm+wTU6Mzu+2ImhhFcH/7Dadly7uRSa
- j2LKq9nPH91EjFTVspX7791b3FJ1I23cYeBs4ZnnWREsMKwXhRPe9AiuPrRBEposRHA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=fe3+U11CMU72wBQguUpiyKRRiB4m0LEe5rH39xaiMBE=;
+ b=F7d/+X1+DBNIVeAq76pvClgOZXuI316hFM8F4sEy1th6IBQ4r5ZiBT6N+LJk2Xe/a8NN
+ apNzXoxQRAOlKLUHSr7dNhLl4Kw9ihuJWA7HU1g6dGvMNCbnKWqb/yo7uYuNmHxTl8Hok
+ v6AHGyGVbR1bncMJ2E2RtYt100poe4U3vxraxttIPRPzRiQr2hcXyDdqJa/EXb2o1EPCk
+ fAvsNzLp7lH+4RsQ/dFwvI8hbudwIgFBtIG5q6387h6qLz5qUPQX7JBNt4Q99WCVpAjad
+ ba/L3pR6yOz+Fz3bw7pyPcKvSJBO3Ffax0eHXMZSwpeOyDTVjkayrHclsKGu1H5cxSg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=DiYMHxUh; 
- arc=none smtp.remote-ip="2001:4860:4864:20::2e"
+ header.s=20251104 header.b=PAyB5KEZ; 
+ arc=none smtp.remote-ip="2001:4860:4864:20::29"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::2e; helo=mail-oa1-x2e.google.com;
+ client-ip=2001:4860:4864:20::29; helo=mail-oa1-x29.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=DiYMHxUh
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2780D4022A
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:35:59 +0000 (UTC)
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-46556b9e02cso410377fac.1
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 17:35:59 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=PAyB5KEZ
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 9128260A7E
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:07 +0000 (UTC)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-4949f037131so299386fac.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 17:36:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792197359; x=1792802159;
+ d=gmail.com; s=20251104; t=1792197366; x=1792802166;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=anL8dCf1pJN0E4ieBeE26RQ+8fbqGghGUFn46NQ/BmM=;
- b=DiYMHxUhM8ZFbPNOmTFRnIVw0+YFFcrY3kEMdJrgW6jBpbe/W22gZ7+lhEwUa2VEYT
- s10NUmA2gY0xaA0+GBSYaxUTY3r6v4lUXKroD2rEjFOcu0+P8cidqVQQDDVuYY5zDnfB
- uCJp/aa6ARvTn/QryvD6Br7TjzDb8VcT5glpjCb/QP/uyFZLT+1xeUqZQdW39JhYEdCp
- IqPR9xzlZieJ0t+pHbkWg0rd4PRkj0fbX9jJmog57G3sDCyBMEmSnW6d7zbaT/ysN0v4
- v5LzUd8sfiMZmJc1SiBIBgU59RQPYkRwd3Ey1UsFUc96P6+BzYbaO3ySHtyXJD6o2hyw
- H9QA==
+ bh=fe3+U11CMU72wBQguUpiyKRRiB4m0LEe5rH39xaiMBE=;
+ b=PAyB5KEZKDGQg2x5IouDWga5prZM5kJSrXHx8MI59xFh3br6jTalqPge5+po0PEX5t
+ Om+aKKsyBuDrz9LNE6cauV1lLDTbIY1uYC0cUdTvtOeaAg3vYzG1S4laDk1esUMwJvMU
+ sdiuA9dvN/yhhsYtw/7Q2jg6nJWVvrBdRbmptJZ199GLQaV1AyW4AK6MndwxYVvniwLD
+ GKpMTVRT61JNTDC5t6TBbNu1AAHK/3cKw0f4YtgxEFpZAWHN6v7vCz4Y6pkfr85Fy93l
+ UgoaHEdyJL0Dh8Ra537bKp5iG7qsAsUQEMTlRfqgKZnypmo7v+gXbgy/ldFggpsQ6Zvw
+ LV4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792197359; x=1792802159;
+ d=1e100.net; s=20260707; t=1792197366; x=1792802166;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=anL8dCf1pJN0E4ieBeE26RQ+8fbqGghGUFn46NQ/BmM=;
- b=i7HId7nnfeuUeQVSaSRzqepl2UBKrfPD8ClWVN6hsVYsXp9wZ5ccy9NcacDrUcTXUz
- F2AqsPWQpHeGRQNmd6aX5uT3KtwtsFwIURPZuZzFZZ7Bu+bJMy44c52MKXmjPMHlx7l2
- V3yXXQ97iQ6CbH5UJGHObj0HL66RE6MGX/rbgrkZ6pNYGCcsXUUmZuRENApz/rN8DpZ3
- 3ED5XG1c9yMrDoWrBONOA5ItttDXD7IgUEyZOO043AVAvY5YQL+IH/RScHvr17WmNawC
- pWEkB5jHu85LctNB0QQ7THYM0u+prZ2wDQzmR1PVW/51uLI+KPKZEjE5ZTL6uA/a60yR
- KSOA==
+ bh=fe3+U11CMU72wBQguUpiyKRRiB4m0LEe5rH39xaiMBE=;
+ b=G3zipPqOiZ0G9guS2FKO3df0e+JU7gKzBI9XmuQPZIZTHCSA+ZTTEytZ/gSg9h/TRd
+ DJWGTPKpQRqrLjbmxsY7k2PGDzStmvwA/zCrnvk5YwqQaoVP3YjzJl/1fAsmOm+oFI1V
+ NC/RBakROev7+9zKtIjaBddRMhMyePk2JbC+Dg0qrGFpxwjxXzKQ8FGHaFnEHPXIXeXX
+ ynXgIad8iadtBMVgeEWz0hLtXRpB/C1KTIJJbwRP/+IChcoDk/Wf71b9N1nbkiva5tai
+ xnBaTps4JB49ERrlL/v3HXh9ozzNRUs6d+e+Z9jqj5taYtcwQVq+YbQ1UVr1BAkv+AhQ
+ 70dw==
 X-Forwarded-Encrypted: i=1;
- AKwUvByrAxyPID/QwmnGeJC2fzSzhgs50zCHnnGxC7Mv/pwSjV0oBP71KfzCSzyI+H8ChbRnokVJSQ4=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYKaxuPZc/riQYUBmK3q+lne4P/FqzyblZTdOBGk5V8OL+GWAaAb
- YboE3KZCAyZZj+eW12TMnViEz+CvCax4uv4C1K5bjWNFKClK4GeYGb0N
-X-Gm-Gg: AYBFou0LHY1p23SFvYhn26HVHJONUHc/+WjnbpP5jFYf0zSSgheXDLbSwyrZrMflCEJ
- 9sKwRCotZrIWUm1J39tI8j9zo2b/RG5HMFhagDev4DC+lxQeMFzlKoXDvixEdz6gAM3YmgF7Zb9
- zLB0sKAb2xgTXspm85a+7Wwd/R7YJGqboD0Zqj2N7xXe6Zi2rQk9BiT+iehxMZTxIp106Xd6+kf
- ipUg+Et6MA25Iyv6cl0n+ok9Oz4IWEeIYLqMY5hJ6GUJVmm4jacvjzVkdSC5d+2A9Eb1h4Vul+2
- +MuQgvpencjE1WkhFk3+luUqhbs2tgwgd+sUea9waBI/h77aJoHJA4sTz8KcsQpmdmAe1tYhnHN
- J9gLw4y4iIabzppXU+ZCWvpyHpasd7tPO6Pt42eHUDtAxbaAknqSMUQr7G7210jLJcZqI1sWoA+
- 7N4wmYEKrubpnqXtTfj2RcUaMCtwgXg11Ugq69Pir+WGh7hShVkXAKDs1c71RA7VsJUAHtm63PA
- jJAk4JBPxGyBpVe6bk7zbJTUoG0P/7wb3tjGyEzHLF7Sct6dC1Uos3f2VcOptD2DUwnDhKfrUVa
- jSC/lHKVOaBDXwk7r27PxBkTR2jFXapiG+BpL3mgbdgJnRwpoClSI4D3MPXfz8Us45Xtoiv1fmI
- oI16a8RtOt3XkwHaSkrlGRw==
-X-Received: by 2002:a05:6871:c684:b0:498:8e03:c1e0 with SMTP id
- 586e51a60fabf-4a730be8f20mr2599676fac.40.1792197358611; 
- Fri, 16 Oct 2026 17:35:58 -0700 (PDT)
+ AKwUvByBP6yuqxnhq9ApyjjDNkrQxXg5/cmChCYpOin48/V1s5P66ca9qBsDJshqmg7xuMGxpW4ereg=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJrRdIXTLzg/e19rBqxiDWJ0WXFYm176+SzRnl1HLLSPPD3jdwf
+ BmnX8Q3fQzl+95ni7SI8Lff2gCyvGC/OCN1xvmHDtWEclBFAyuH4Z6JO
+X-Gm-Gg: AYBFou1COqVp1Nif6x5wE7nVGua3dsda3lMTiY+JcbqLkFYGsPTSvod3iY7ZgTFiSqY
+ NoIVGQGkaOBVt0CCfzG8a6IJtJZaO4+K3XFFGSoMNIKqsGcEf5OFXlfdRQXwlkkzSTiss9L3LlL
+ uYwF+m+q6fOWtQuDj6dIEmlVtJYeYHktKkAnXQY8KzB3/yT+bpDgfb0Ge3MTmOs54+JIjcHUtnZ
+ Jh6GrHjM482f58Xpci6YaW9bZ3bpuw/1QgtgZ5RVpxoIw2tAEj5aZFCvuHowYaPTPcklKbWwRFm
+ A57AwCJZR5gma71W1+9lsMEhA1xpSVOyIBRCHS82XtcRg346Q44zdjz4wx3hFFtd+5FCYAwrj1Z
+ UiSuAwo8RE5wOWXZJ9810D4XB8spq/UdLecgA4o+J6ovBtL6iekIy9zTXeicqde3voaa6p80WZe
+ OT3AAOziKb3pABFa4BnQh1GG2pl2klHCjRiNeBgHMkhF9lw6w5comtr81KxqtV5DXtoUlGtaQBI
+ qs50UDf8AlIy26dYQaSBcLVWz5kGJIqiOIOkZmc9Pkb9qHRCBUVXWe6Dhtttv0qUDqK7WBxlI7R
+ h2N+FkrxpDZVNlUGm2m/gjOUswmZY9R+G72zrqFEk1Z4doStYLDabEbyjuqtjWZ819PC7d45Gxd
+ 4GWq3T0xNFVUKN7WRzwNxcA==
+X-Received: by 2002:a05:6870:1651:b0:439:a524:a29d with SMTP id
+ 586e51a60fabf-4a7575ad7c2mr1553941fac.1.1792197366027; 
+ Fri, 16 Oct 2026 17:36:06 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4a73b5b4291sm2745091fac.5.2026.10.16.17.35.54
+ 586e51a60fabf-4a73b5b4291sm2745091fac.5.2026.10.16.17.36.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Oct 2026 17:35:58 -0700 (PDT)
+ Fri, 16 Oct 2026 17:36:05 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Fri, 16 Oct 2026 18:35:22 -0600
-Subject: [PATCH v9 08/17] crypto: aes: fix software key-size handling
+Date: Fri, 16 Oct 2026 18:35:24 -0600
+Subject: [PATCH v9 10/17] crypto: aes: add software-key provider dispatch
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261016-submit-ce-series-v2-v9-8-c24e64daafe9@gmail.com>
+Message-Id: <20261016-submit-ce-series-v2-v9-10-c24e64daafe9@gmail.com>
 References: <20261016-submit-ce-series-v2-v9-0-c24e64daafe9@gmail.com>
 In-Reply-To: <20261016-submit-ce-series-v2-v9-0-c24e64daafe9@gmail.com>
 To: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
@@ -230,352 +230,468 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The AES uclass API expresses key sizes in bits, while the common software
-AES primitives take key lengths in bytes. The software provider passes the
-uclass value through unchanged, so AES-192 and AES-256 select the AES-128
-round count and key schedule shape. Key expansion also copies the bit count
-as a byte count for every key size.
+Generic callers which supply an AES key need a provider-owned slot policy,
+since hardware may reserve or preload particular key slots. Selecting only
+UCLASS_AES device zero also prevents a later provider from handling an
+operation unsupported by the first device.
 
-Validate the uclass key size, convert it to bytes once and retain that byte
-length for the software operations. Correct the primitive API documentation
-and add NIST ECB and CBC vectors for AES-128, AES-192 and AES-256.
+Add a callback through which each provider exposes a slot for
+software-provided keys. Add a CBC decrypt helper which probes providers in
+order. Continue past probe failures, returning the first such error if no
+provider succeeds. Once a provider probes successfully, try another only
+for explicitly unsupported operations; return hard slot, setup and decrypt
+failures without fallback.
+
+Use slot zero for the software provider and avoid Tegra's preloaded SBK
+slot. Add sandbox coverage for provider fallback and hard-error
+propagation.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
-Changes v5 -> v6:
-  - Drop stale AES-128 wording from the generic primitive docs
-    (suggested by Simon Glass)
-  - Return -EINVAL when no software key has been selected
-    (suggested by Simon Glass)
+Changes v8 -> v9:
+  - Clarify probe-error handling separately from operation fallback
 
 Changes v3 -> v4:
   - New patch
 ---
- drivers/crypto/aes/aes-sw.c |  45 ++++++++++++------
- include/uboot_aes.h         |  24 +++++-----
- test/dm/aes.c               | 109 ++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 153 insertions(+), 25 deletions(-)
+ drivers/crypto/aes/aes-sw.c      |   6 ++
+ drivers/crypto/aes/aes-uclass.c  |  73 +++++++++++++++++++
+ drivers/crypto/tegra/tegra_aes.c |   7 ++
+ include/uboot_aes.h              |  66 +++++++++++++++--
+ test/dm/aes.c                    | 149 +++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 297 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/crypto/aes/aes-sw.c b/drivers/crypto/aes/aes-sw.c
-index a65200fb79b..4ec9484c608 100644
+index 4ec9484c608..cd5c10cd2d5 100644
 --- a/drivers/crypto/aes/aes-sw.c
 +++ b/drivers/crypto/aes/aes-sw.c
-@@ -12,15 +12,25 @@ struct sw_aes_priv {
- 	u8 key_slots[SW_KEY_SLOTS][AES256_KEY_LENGTH];
- 	u8 key_schedule[AES256_EXPAND_KEY_LENGTH];
- 	u8 selected_slot;
--	u32 selected_key_size;
-+	u8 selected_key_len;
- 	bool key_expanded;
- };
+@@ -50,6 +50,11 @@ static int sw_aes_ops_available_key_slots(struct udevice *dev)
+ 	return SW_KEY_SLOTS;
+ }
  
-+static int sw_aes_key_len(u32 key_size)
++static int sw_aes_ops_get_software_key_slot(struct udevice *dev)
 +{
-+	if (key_size == AES128_KEY_LENGTH * 8 ||
-+	    key_size == AES192_KEY_LENGTH * 8 ||
-+	    key_size == AES256_KEY_LENGTH * 8)
-+		return key_size / 8;
-+
-+	return -EINVAL;
++	return 0;
 +}
 +
- static int prepare_aes(struct sw_aes_priv *priv)
- {
--	if (!priv->selected_key_size) {
-+	if (!priv->selected_key_len) {
- 		log_debug("%s: AES key size not set, setup a slot first\n", __func__);
--		return 1;
-+		return -EINVAL;
- 	}
- 
- 	if (priv->key_expanded)
-@@ -28,7 +38,8 @@ static int prepare_aes(struct sw_aes_priv *priv)
- 
- 	priv->key_expanded = 1;
- 
--	aes_expand_key(priv->key_slots[priv->selected_slot], priv->selected_key_size,
-+	aes_expand_key(priv->key_slots[priv->selected_slot],
-+		       priv->selected_key_len,
- 		       priv->key_schedule);
- 
- 	return 0;
-@@ -42,12 +53,16 @@ static int sw_aes_ops_available_key_slots(struct udevice *dev)
  static int sw_aes_ops_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
  {
  	struct sw_aes_priv *priv = dev_get_priv(dev);
-+	int key_len;
+@@ -164,6 +169,7 @@ static int sw_aes_ops_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src,
  
- 	if (slot >= SW_KEY_SLOTS)
--		return 1;
-+		return -EINVAL;
-+	key_len = sw_aes_key_len(key_size);
-+	if (key_len < 0)
-+		return key_len;
- 
- 	priv->selected_slot = slot;
--	priv->selected_key_size = key_size;
-+	priv->selected_key_len = key_len;
- 	priv->key_expanded = 0;
- 
- 	return 0;
-@@ -57,14 +72,18 @@ static int sw_aes_ops_set_key_for_key_slot(struct udevice *dev, u32 key_size,
- 					   u8 *key, u8 slot)
- {
- 	struct sw_aes_priv *priv = dev_get_priv(dev);
-+	int key_len;
- 
- 	if (slot >= SW_KEY_SLOTS)
--		return 1;
-+		return -EINVAL;
-+	key_len = sw_aes_key_len(key_size);
-+	if (key_len < 0)
-+		return key_len;
- 
--	memcpy(priv->key_slots[slot], key, key_size / 8);
-+	memcpy(priv->key_slots[slot], key, key_len);
- 
- 	if (priv->selected_slot == slot)
--		priv->selected_key_size = key_size;
-+		priv->selected_key_len = key_len;
- 
- 	priv->key_expanded = 0;
- 
-@@ -82,7 +101,7 @@ static int sw_aes_ops_aes_ecb_encrypt(struct udevice *dev, u8 *src, u8 *dst,
- 		return ret;
- 
- 	while (num_aes_blocks > 0) {
--		aes_encrypt(priv->selected_key_size, src, priv->key_schedule, dst);
-+		aes_encrypt(priv->selected_key_len, src, priv->key_schedule, dst);
- 		num_aes_blocks -= 1;
- 		src += AES_BLOCK_LENGTH;
- 		dst += AES_BLOCK_LENGTH;
-@@ -102,7 +121,7 @@ static int sw_aes_ops_aes_ecb_decrypt(struct udevice *dev, u8 *src, u8 *dst,
- 		return ret;
- 
- 	while (num_aes_blocks > 0) {
--		aes_decrypt(priv->selected_key_size, src, priv->key_schedule, dst);
-+		aes_decrypt(priv->selected_key_len, src, priv->key_schedule, dst);
- 		num_aes_blocks -= 1;
- 		src += AES_BLOCK_LENGTH;
- 		dst += AES_BLOCK_LENGTH;
-@@ -121,7 +140,7 @@ static int sw_aes_ops_aes_cbc_encrypt(struct udevice *dev, u8 *iv, u8 *src,
- 	if (ret)
- 		return ret;
- 
--	aes_cbc_encrypt_blocks(priv->selected_key_size, priv->key_schedule, iv,
-+	aes_cbc_encrypt_blocks(priv->selected_key_len, priv->key_schedule, iv,
- 			       src, dst, num_aes_blocks);
- 
- 	return 0;
-@@ -137,7 +156,7 @@ static int sw_aes_ops_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src,
- 	if (ret)
- 		return ret;
- 
--	aes_cbc_decrypt_blocks(priv->selected_key_size, priv->key_schedule,
-+	aes_cbc_decrypt_blocks(priv->selected_key_len, priv->key_schedule,
- 			       iv, src, dst, num_aes_blocks);
- 
- 	return 0;
-diff --git a/include/uboot_aes.h b/include/uboot_aes.h
-index 592b7dbee43..e463d5b0c42 100644
---- a/include/uboot_aes.h
-+++ b/include/uboot_aes.h
-@@ -47,30 +47,30 @@ enum {
-  * operations.
-  *
-  * @key		Key
-- * @key_size	Size of the key (in bits)
-+ * @key_len	Size of the key in bytes
-  * @expkey	Buffer to place expanded key, AES_EXPAND_KEY_LENGTH
-  */
--void aes_expand_key(u8 *key, u32 key_size, u8 *expkey);
-+void aes_expand_key(u8 *key, u32 key_len, u8 *expkey);
- 
- /**
-- * aes_encrypt() - Encrypt single block of data with AES 128
-+ * aes_encrypt() - Encrypt a single block of data with AES
-  *
-- * @key_size	Size of the aes key (in bits)
-+ * @key_len	Size of the AES key in bytes
-  * @in		Input data
-  * @expkey	Expanded key to use for encryption (from aes_expand_key())
-  * @out		Output data
-  */
--void aes_encrypt(u32 key_size, u8 *in, u8 *expkey, u8 *out);
-+void aes_encrypt(u32 key_len, u8 *in, u8 *expkey, u8 *out);
- 
- /**
-- * aes_decrypt() - Decrypt single block of data with AES 128
-+ * aes_decrypt() - Decrypt a single block of data with AES
-  *
-- * @key_size	Size of the aes key (in bits)
-+ * @key_len	Size of the AES key in bytes
-  * @in		Input data
-  * @expkey	Expanded key to use for decryption (from aes_expand_key())
-  * @out		Output data
-  */
--void aes_decrypt(u32 key_size, u8 *in, u8 *expkey, u8 *out);
-+void aes_decrypt(u32 key_len, u8 *in, u8 *expkey, u8 *out);
- 
- /**
-  * Apply chain data to the destination using EOR
-@@ -86,27 +86,27 @@ void aes_apply_cbc_chain_data(u8 *cbc_chain_data, u8 *src, u8 *dst);
- /**
-  * aes_cbc_encrypt_blocks() - Encrypt multiple blocks of data with AES CBC.
-  *
-- * @key_size		Size of the aes key (in bits)
-+ * @key_len		Size of the AES key in bytes
-  * @key_exp		Expanded key to use
-  * @iv			Initialization vector
-  * @src			Source data to encrypt
-  * @dst			Destination buffer
-  * @num_aes_blocks	Number of AES blocks to encrypt
-  */
--void aes_cbc_encrypt_blocks(u32 key_size, u8 *key_exp, u8 *iv, u8 *src, u8 *dst,
-+void aes_cbc_encrypt_blocks(u32 key_len, u8 *key_exp, u8 *iv, u8 *src, u8 *dst,
- 			    u32 num_aes_blocks);
- 
- /**
-  * Decrypt multiple blocks of data with AES CBC.
-  *
-- * @key_size		Size of the aes key (in bits)
-+ * @key_len		Size of the AES key in bytes
-  * @key_exp		Expanded key to use
-  * @iv			Initialization vector
-  * @src			Source data to decrypt
-  * @dst			Destination buffer
-  * @num_aes_blocks	Number of AES blocks to decrypt
-  */
--void aes_cbc_decrypt_blocks(u32 key_size, u8 *key_exp, u8 *iv, u8 *src, u8 *dst,
-+void aes_cbc_decrypt_blocks(u32 key_len, u8 *key_exp, u8 *iv, u8 *src, u8 *dst,
- 			    u32 num_aes_blocks);
- 
- /* An AES block filled with zeros */
-diff --git a/test/dm/aes.c b/test/dm/aes.c
-index 702e4db2b35..c58a5e257f5 100644
---- a/test/dm/aes.c
-+++ b/test/dm/aes.c
-@@ -29,6 +29,8 @@ static int dm_test_aes(struct unit_test_state *uts)
- 	u8 test_output[AES_BLOCK_LENGTH];
- 
- 	ut_assertok(uclass_first_device_err(UCLASS_AES, &dev));
-+	ut_asserteq(-EINVAL,
-+		    dm_aes_ecb_encrypt(dev, test_input, test_output, 1));
- 
- 	/* software AES exposes 2 key slots */
- 	ut_asserteq(2, dm_aes_get_available_key_slots(dev));
-@@ -55,3 +57,110 @@ static int dm_test_aes(struct unit_test_state *uts)
+ static const struct aes_ops aes_ops_sw = {
+ 	.available_key_slots = sw_aes_ops_available_key_slots,
++	.get_software_key_slot = sw_aes_ops_get_software_key_slot,
+ 	.select_key_slot = sw_aes_ops_select_key_slot,
+ 	.set_key_for_key_slot = sw_aes_ops_set_key_for_key_slot,
+ 	.aes_ecb_encrypt = sw_aes_ops_aes_ecb_encrypt,
+diff --git a/drivers/crypto/aes/aes-uclass.c b/drivers/crypto/aes/aes-uclass.c
+index 5bdd3d736c4..ec1ea075367 100644
+--- a/drivers/crypto/aes/aes-uclass.c
++++ b/drivers/crypto/aes/aes-uclass.c
+@@ -23,6 +23,21 @@ int dm_aes_get_available_key_slots(struct udevice *dev)
+ 	return ops->available_key_slots(dev);
  }
  
- DM_TEST(dm_test_aes, UTF_SCAN_FDT);
++int dm_aes_get_software_key_slot(struct udevice *dev)
++{
++	const struct aes_ops *ops;
 +
-+struct aes_test_vector {
-+	u32 key_size;
-+	u8 key[AES256_KEY_LENGTH];
-+	u8 ecb[AES_BLOCK_LENGTH];
-+	u8 cbc[AES_BLOCK_LENGTH];
-+};
++	if (!dev)
++		return -ENODEV;
 +
-+static const u8 aes_test_plaintext[AES_BLOCK_LENGTH] = {
-+	0x6b, 0xc1, 0xbe, 0xe2, 0x2e, 0x40, 0x9f, 0x96,
-+	0xe9, 0x3d, 0x7e, 0x11, 0x73, 0x93, 0x17, 0x2a,
-+};
++	ops = aes_get_ops(dev);
 +
-+static const u8 aes_test_iv[AES_BLOCK_LENGTH] = {
-+	0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-+	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-+};
++	if (!ops->get_software_key_slot)
++		return -ENOSYS;
 +
-+static const struct aes_test_vector aes_test_vectors[] = {
-+	{
-+		.key_size = 128,
-+		.key = {
-+			0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6,
-+			0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c,
-+		},
-+		.ecb = {
-+			0x3a, 0xd7, 0x7b, 0xb4, 0x0d, 0x7a, 0x36, 0x60,
-+			0xa8, 0x9e, 0xca, 0xf3, 0x24, 0x66, 0xef, 0x97,
-+		},
-+		.cbc = {
-+			0x76, 0x49, 0xab, 0xac, 0x81, 0x19, 0xb2, 0x46,
-+			0xce, 0xe9, 0x8e, 0x9b, 0x12, 0xe9, 0x19, 0x7d,
-+		},
-+	}, {
-+		.key_size = 192,
-+		.key = {
-+			0x8e, 0x73, 0xb0, 0xf7, 0xda, 0x0e, 0x64, 0x52,
-+			0xc8, 0x10, 0xf3, 0x2b, 0x80, 0x90, 0x79, 0xe5,
-+			0x62, 0xf8, 0xea, 0xd2, 0x52, 0x2c, 0x6b, 0x7b,
-+		},
-+		.ecb = {
-+			0xbd, 0x33, 0x4f, 0x1d, 0x6e, 0x45, 0xf2, 0x5f,
-+			0xf7, 0x12, 0xa2, 0x14, 0x57, 0x1f, 0xa5, 0xcc,
-+		},
-+		.cbc = {
-+			0x4f, 0x02, 0x1d, 0xb2, 0x43, 0xbc, 0x63, 0x3d,
-+			0x71, 0x78, 0x18, 0x3a, 0x9f, 0xa0, 0x71, 0xe8,
-+		},
-+	}, {
-+		.key_size = 256,
-+		.key = {
-+			0x60, 0x3d, 0xeb, 0x10, 0x15, 0xca, 0x71, 0xbe,
-+			0x2b, 0x73, 0xae, 0xf0, 0x85, 0x7d, 0x77, 0x81,
-+			0x1f, 0x35, 0x2c, 0x07, 0x3b, 0x61, 0x08, 0xd7,
-+			0x2d, 0x98, 0x10, 0xa3, 0x09, 0x14, 0xdf, 0xf4,
-+		},
-+		.ecb = {
-+			0xf3, 0xee, 0xd1, 0xbd, 0xb5, 0xd2, 0xa0, 0x3c,
-+			0x06, 0x4b, 0x5a, 0x7e, 0x3d, 0xb1, 0x81, 0xf8,
-+		},
-+		.cbc = {
-+			0xf5, 0x8c, 0x4c, 0x04, 0xd6, 0xe5, 0xf1, 0xba,
-+			0x77, 0x9e, 0xab, 0xfb, 0x5f, 0x7b, 0xfb, 0xd6,
-+		},
-+	},
-+};
++	return ops->get_software_key_slot(dev);
++}
 +
-+static int dm_test_aes_key_sizes(struct unit_test_state *uts)
+ int dm_aes_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
+ {
+ 	const struct aes_ops *ops;
+@@ -113,6 +128,64 @@ int dm_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src, u8 *dst, u32 num_ae
+ 	return ops->aes_cbc_decrypt(dev, iv, src, dst, num_aes_blocks);
+ }
+ 
++static bool aes_op_unsupported(int ret)
++{
++	return ret == -ENOSYS || ret == -EOPNOTSUPP;
++}
++
++int dm_aes_cbc_decrypt_with_key(u32 key_size, u8 *key, u8 *iv, u8 *src,
++				u8 *dst, u32 num_aes_blocks)
 +{
 +	struct udevice *dev;
-+	u8 key[AES256_KEY_LENGTH];
-+	u8 input[AES_BLOCK_LENGTH];
-+	u8 iv[AES_BLOCK_LENGTH];
-+	u8 buf[AES_BLOCK_LENGTH];
-+	int i, ret;
++	int first_probe_err = 0;
++	bool found = false;
++	int ret;
 +
-+	ut_assertok(uclass_first_device_err(UCLASS_AES, &dev));
++	for (ret = uclass_first_device_check(UCLASS_AES, &dev); dev;
++	     ret = uclass_next_device_check(&dev)) {
++		u8 slot;
 +
-+	for (i = 0; i < ARRAY_SIZE(aes_test_vectors); i++) {
-+		const struct aes_test_vector *vector = &aes_test_vectors[i];
++		found = true;
++		if (ret) {
++			if (!first_probe_err)
++				first_probe_err = ret;
++			continue;
++		}
 +
-+		memcpy(key, vector->key, vector->key_size / 8);
-+		memcpy(input, aes_test_plaintext, sizeof(input));
-+		memcpy(iv, aes_test_iv, sizeof(iv));
-+		ut_assertok(dm_aes_select_key_slot(dev, vector->key_size, 0));
-+		ret = dm_aes_set_key_for_key_slot(dev, vector->key_size, key, 0);
-+		ut_assertok(ret);
++		ret = dm_aes_get_software_key_slot(dev);
++		if (aes_op_unsupported(ret))
++			continue;
++		if (ret < 0)
++			return ret;
++		if (ret > U8_MAX)
++			return -ERANGE;
++		slot = ret;
 +
-+		ut_assertok(dm_aes_ecb_encrypt(dev, input, buf, 1));
-+		ut_asserteq_mem(vector->ecb, buf, sizeof(buf));
-+		ut_assertok(dm_aes_ecb_decrypt(dev, buf, buf, 1));
-+		ut_asserteq_mem(aes_test_plaintext, buf, sizeof(buf));
++		ret = dm_aes_set_key_for_key_slot(dev, key_size, key, slot);
++		if (aes_op_unsupported(ret))
++			continue;
++		if (ret)
++			return ret;
 +
-+		ut_assertok(dm_aes_cbc_encrypt(dev, iv, input, buf, 1));
-+		ut_asserteq_mem(vector->cbc, buf, sizeof(buf));
-+		ut_assertok(dm_aes_cbc_decrypt(dev, iv, buf, buf, 1));
-+		ut_asserteq_mem(aes_test_plaintext, buf, sizeof(buf));
++		ret = dm_aes_select_key_slot(dev, key_size, slot);
++		if (aes_op_unsupported(ret))
++			continue;
++		if (ret)
++			return ret;
++
++		ret = dm_aes_cbc_decrypt(dev, iv, src, dst, num_aes_blocks);
++		if (!ret)
++			return 0;
++		if (!aes_op_unsupported(ret))
++			return ret;
 +	}
 +
-+	ut_asserteq(-EINVAL, dm_aes_select_key_slot(dev, 64, 0));
-+	ret = dm_aes_set_key_for_key_slot(dev, 64, key, 0);
-+	ut_asserteq(-EINVAL, ret);
++	if (first_probe_err)
++		return first_probe_err;
++
++	return found ? -EOPNOTSUPP : -ENODEV;
++}
++
+ static void left_shift_vector(u8 *in, u8 *out, int size)
+ {
+ 	int carry = 0;
+diff --git a/drivers/crypto/tegra/tegra_aes.c b/drivers/crypto/tegra/tegra_aes.c
+index 716158510c6..679178eb91f 100644
+--- a/drivers/crypto/tegra/tegra_aes.c
++++ b/drivers/crypto/tegra/tegra_aes.c
+@@ -338,6 +338,12 @@ static int tegra_aes_ops_available_key_slots(struct udevice *dev)
+ 	return 4; /* 4 slots in Tegra20 and Tegra30 */
+ }
+ 
++static int tegra_aes_ops_get_software_key_slot(struct udevice *dev)
++{
++	/* Avoid SBK slot 0, which may hold a preloaded key. */
++	return TEGRA_AES_SLOT_SBK + 1;
++}
++
+ static int tegra_aes_ops_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
+ {
+ 	struct tegra_aes_priv *priv = dev_get_priv(dev);
+@@ -600,6 +606,7 @@ static int tegra_aes_probe(struct udevice *dev)
+ 
+ static const struct aes_ops tegra_aes_ops = {
+ 	.available_key_slots = tegra_aes_ops_available_key_slots,
++	.get_software_key_slot = tegra_aes_ops_get_software_key_slot,
+ 	.select_key_slot = tegra_aes_ops_select_key_slot,
+ 	.set_key_for_key_slot = tegra_aes_ops_set_key_for_key_slot,
+ 	.aes_ecb_encrypt = tegra_aes_ops_aes_ecb_encrypt,
+diff --git a/include/uboot_aes.h b/include/uboot_aes.h
+index e463d5b0c42..0c1756cef38 100644
+--- a/include/uboot_aes.h
++++ b/include/uboot_aes.h
+@@ -128,11 +128,17 @@ struct udevice;
+  * Note that some devices like Tegra AES engine may contain preloaded keys by bootrom,
+  * thus in those cases the set_key_for_key_slot() may be skipped.
+  *
+- * Sequence for a series of AES CBC encryption, one decryption and a CMAC hash example
+- * with 128bits key at slot 0 would be as follow:
++ * Generic callers which load a software-provided key should first ask the
++ * driver for a suitable software key slot. This lets hardware drivers avoid
++ * reserved or preloaded slots while keeping the slot policy local to the
++ * provider.
+  *
+- * set_key_for_key_slot(DEV, 128, KEY, 0);
+- * select_key_slot(DEV, 128, 0);
++ * Sequence for a series of AES CBC encryption, one decryption and a CMAC hash
++ * example with a 128-bit software-provided key would be as follows:
++ *
++ * slot = get_software_key_slot(DEV);
++ * set_key_for_key_slot(DEV, 128, KEY, slot);
++ * select_key_slot(DEV, 128, slot);
+  * aes_cbc_encrypt(DEV, IV1, SRC1, DST1, LEN1);
+  * aes_cbc_encrypt(DEV, IV2, SRC2, DST2, LEN2);
+  * aes_cbc_decrypt(DEV, IV3, SRC3, DST3, LEN3);
+@@ -146,6 +152,16 @@ struct aes_ops {
+ 	 */
+ 	int (*available_key_slots)(struct udevice *dev);
+ 
++	/**
++	 * get_software_key_slot() - Get a slot for software-provided keys
++	 *
++	 * @dev			The AES udevice
++	 * @return		Key slot to use for a software-provided key,
++	 *			0 or positive on success, negative value on
++	 *			failure
++	 */
++	int (*get_software_key_slot)(struct udevice *dev);
++
+ 	/**
+ 	 * select_key_slot() - Selects the AES key slot to use for following operations
+ 	 *
+@@ -210,6 +226,7 @@ struct aes_ops {
+ 	 * @iv			Initialization vector
+ 	 * @src			Source data of length 'num_aes_blocks' blocks
+ 	 * @dst			Destination data of length 'num_aes_blocks' blocks
++	 *			Must support dst == src for in-place decrypt
+ 	 * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
+ 	 * @return		0 on success, negative value on failure
+ 	 */
+@@ -229,6 +246,15 @@ struct aes_ops {
+  */
+ int dm_aes_get_available_key_slots(struct udevice *dev);
+ 
++/**
++ * dm_aes_get_software_key_slot - Get a slot for software-provided keys
++ *
++ * @dev			The AES udevice
++ * Return:		Key slot to use for a software-provided key,
++ *			0 or positive on success, -ve on failure
++ */
++int dm_aes_get_software_key_slot(struct udevice *dev);
++
+ /**
+  * dm_aes_select_key_slot - Selects the AES key slot to use for following operations
+  *
+@@ -291,11 +317,31 @@ int dm_aes_cbc_encrypt(struct udevice *dev, u8 *iv, u8 *src, u8 *dst, u32 num_ae
+  * @iv			Initialization vector
+  * @src			Source data of length 'num_aes_blocks' blocks
+  * @dst			Destination data of length 'num_aes_blocks' blocks
++ *			Must support dst == src for in-place decrypt
+  * @num_aes_blocks	Number of AES blocks to encrypt/decrypt
+  * Return:		0 on success, negative value on failure
+  */
+ int dm_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src, u8 *dst, u32 num_aes_blocks);
+ 
++/**
++ * dm_aes_cbc_decrypt_with_key() - Decrypt using a software-provided key
++ *
++ * Probe AES providers in order and use the first one which accepts the key
++ * and CBC operation. Hard failures from an accepting provider are returned
++ * without trying another provider.
++ *
++ * @key_size: AES key size in bits
++ * @key: AES key
++ * @iv: Initialization vector
++ * @src: Ciphertext input
++ * @dst: Plaintext output, which may be the same buffer as @src
++ * @num_aes_blocks: Number of AES blocks to decrypt
++ * Return: 0 on success, -ENODEV if there are no providers, -EOPNOTSUPP if no
++ * provider supports the operation, or another error from a provider
++ */
++int dm_aes_cbc_decrypt_with_key(u32 key_size, u8 *key, u8 *iv, u8 *src,
++				u8 *dst, u32 num_aes_blocks);
++
+ /**
+  * dm_aes_cmac - Hashes the input data with AES-CMAC, putting the result into dst.
+  * The key slot must be selected already.
+@@ -316,6 +362,11 @@ static inline int dm_aes_get_available_key_slots(struct udevice *dev)
+ 	return -ENOSYS;
+ }
+ 
++static inline int dm_aes_get_software_key_slot(struct udevice *dev)
++{
++	return -ENOSYS;
++}
++
+ static inline int dm_aes_select_key_slot(struct udevice *dev, u32 key_size, u8 slot)
+ {
+ 	return -ENOSYS;
+@@ -351,6 +402,13 @@ static inline int dm_aes_cbc_decrypt(struct udevice *dev, u8 *iv, u8 *src,
+ 	return -ENOSYS;
+ }
+ 
++static inline int dm_aes_cbc_decrypt_with_key(u32 key_size, u8 *key, u8 *iv,
++					      u8 *src, u8 *dst,
++					      u32 num_aes_blocks)
++{
++	return -ENOSYS;
++}
++
+ static inline int dm_aes_cmac(struct udevice *dev, u8 *src, u8 *dst, u32 num_aes_blocks)
+ {
+ 	return -ENOSYS;
+diff --git a/test/dm/aes.c b/test/dm/aes.c
+index c58a5e257f5..1ec80291926 100644
+--- a/test/dm/aes.c
++++ b/test/dm/aes.c
+@@ -6,7 +6,10 @@
+  */
+ 
+ #include <dm.h>
++#include <dm/device-internal.h>
++#include <dm/root.h>
+ #include <dm/test.h>
++#include <dm/uclass-internal.h>
+ #include <uboot_aes.h>
+ #include <test/test.h>
+ #include <test/ut.h>
+@@ -164,3 +167,149 @@ static int dm_test_aes_key_sizes(struct unit_test_state *uts)
+ }
+ 
+ DM_TEST(dm_test_aes_key_sizes, UTF_SCAN_FDT);
++
++static int unsupported_calls;
++static int success_calls;
++static int hard_error_calls;
++
++static int aes_test_get_slot(struct udevice *dev)
++{
++	return 0;
++}
++
++static int aes_test_set_key(struct udevice *dev, u32 key_size, u8 *key,
++			    u8 slot)
++{
++	return 0;
++}
++
++static int aes_test_select_key(struct udevice *dev, u32 key_size, u8 slot)
++{
++	return 0;
++}
++
++static int aes_test_unsupported_slot(struct udevice *dev)
++{
++	unsupported_calls++;
++
++	return -ENOSYS;
++}
++
++static int aes_test_success_decrypt(struct udevice *dev, u8 *iv, u8 *src,
++				    u8 *dst, u32 num_aes_blocks)
++{
++	success_calls++;
++	memcpy(dst, src, num_aes_blocks * AES_BLOCK_LENGTH);
 +
 +	return 0;
 +}
 +
-+DM_TEST(dm_test_aes_key_sizes, UTF_SCAN_FDT);
++static int aes_test_hard_error_decrypt(struct udevice *dev, u8 *iv, u8 *src,
++				       u8 *dst, u32 num_aes_blocks)
++{
++	hard_error_calls++;
++
++	return -EINVAL;
++}
++
++static const struct aes_ops aes_test_unsupported_ops = {
++	.get_software_key_slot = aes_test_unsupported_slot,
++};
++
++static const struct aes_ops aes_test_success_ops = {
++	.get_software_key_slot = aes_test_get_slot,
++	.set_key_for_key_slot = aes_test_set_key,
++	.select_key_slot = aes_test_select_key,
++	.aes_cbc_decrypt = aes_test_success_decrypt,
++};
++
++static const struct aes_ops aes_test_hard_error_ops = {
++	.get_software_key_slot = aes_test_get_slot,
++	.set_key_for_key_slot = aes_test_set_key,
++	.select_key_slot = aes_test_select_key,
++	.aes_cbc_decrypt = aes_test_hard_error_decrypt,
++};
++
++U_BOOT_DRIVER(aes_test_unsupported_drv) = {
++	.name = "aes_test_unsupported",
++	.id = UCLASS_AES,
++	.ops = &aes_test_unsupported_ops,
++};
++
++U_BOOT_DRIVER(aes_test_success_drv) = {
++	.name = "aes_test_success",
++	.id = UCLASS_AES,
++	.ops = &aes_test_success_ops,
++};
++
++U_BOOT_DRIVER(aes_test_hard_error_drv) = {
++	.name = "aes_test_hard_error",
++	.id = UCLASS_AES,
++	.ops = &aes_test_hard_error_ops,
++};
++
++static int aes_test_unbind_all(void)
++{
++	struct udevice *dev;
++	int ret;
++
++	for (;;) {
++		ret = uclass_find_first_device(UCLASS_AES, &dev);
++		if (ret || !dev)
++			return ret;
++		if (device_active(dev)) {
++			ret = device_remove(dev, DM_REMOVE_NORMAL);
++			if (ret)
++				return ret;
++		}
++		ret = device_unbind(dev);
++		if (ret)
++			return ret;
++	}
++}
++
++static int aes_test_bind(const struct driver *drv, const char *name)
++{
++	struct udevice *dev;
++
++	return device_bind(dm_root(), drv, name, 0, ofnode_null(), &dev);
++}
++
++static int dm_test_aes_provider_selection(struct unit_test_state *uts)
++{
++	u8 key[AES128_KEY_LENGTH] = { };
++	u8 iv[AES_BLOCK_LENGTH] = { };
++	u8 src[AES_BLOCK_LENGTH] = { 0x5a };
++	u8 dst[AES_BLOCK_LENGTH] = { };
++	int ret;
++
++	ut_assertok(aes_test_unbind_all());
++	ut_assertok(aes_test_bind(DM_DRIVER_GET(aes_test_unsupported_drv),
++				  "aes-unsupported"));
++	ut_assertok(aes_test_bind(DM_DRIVER_GET(aes_test_success_drv),
++				  "aes-success"));
++
++	unsupported_calls = 0;
++	success_calls = 0;
++	ut_assertok(dm_aes_cbc_decrypt_with_key(128, key, iv, src, dst, 1));
++	ut_asserteq(1, unsupported_calls);
++	ut_asserteq(1, success_calls);
++	ut_asserteq_mem(src, dst, sizeof(src));
++
++	ut_assertok(aes_test_unbind_all());
++	ut_assertok(aes_test_bind(DM_DRIVER_GET(aes_test_hard_error_drv),
++				  "aes-hard-error"));
++	ut_assertok(aes_test_bind(DM_DRIVER_GET(aes_test_success_drv),
++				  "aes-success"));
++
++	hard_error_calls = 0;
++	success_calls = 0;
++	ret = dm_aes_cbc_decrypt_with_key(128, key, iv, src, dst, 1);
++	ut_asserteq(-EINVAL, ret);
++	ut_asserteq(1, hard_error_calls);
++	ut_asserteq(0, success_calls);
++
++	return 0;
++}
++
++DM_TEST(dm_test_aes_provider_selection, UTF_SCAN_FDT);
 
 -- 
 2.53.0
