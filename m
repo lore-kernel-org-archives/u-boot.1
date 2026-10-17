@@ -1,170 +1,173 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B52F5CC6B2A
-	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 04:36:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9441CCCA463
+	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 04:36:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4D40E409D4;
+	by smtp1.osuosl.org (Postfix) with ESMTP id 61C6C81493;
 	Sat, 17 Oct 2026 04:36:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FIXMNlfL41rL; Sat, 17 Oct 2026 04:36:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8F129409D7
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792211781;
-	b=g8W4oH31AWmBVNfo6sP5CyU1asLXcYBraEnew5kyhNDInuYO/F/fVjtxDKbnVqqwIj2p
-	 FR74rl3ytepyvq1g/d+kvgWFJ2x3GIYvlYYEf0RWI1FpkyMv0/wvT+RdZW3hMD9BAZElO
-	 4qoz9t1TKTMJdHErOAvXtChxHb92kbQQtnHii/N1cEgVQys6RQRJGPSpY5C0LotTGxNh+
-	 vhw9RUU48SrpXjdEuQsDxtQfAjKpGbcInYif7aEYBmjfihuGvniHuuMoB0CpVJKSG78cz
-	 ji6UE9EO/GfCQXBm9uYSnovHdg8zfnNwQPLldst+1ALygJ4h53/t9LqpcVH/kTJ9hdQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qOArU_2th4AR; Sat, 17 Oct 2026 04:36:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B70018148B
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792211778;
+	b=I3VIlrjKfOounr7ReehzMCsJ5Nn0iHlonBJDer6dLVdvhIenk7J3WBhOm4WO4YxpOUzs
+	 kBnvlbX4/3xpBQYah9CDWkV0dvbmPAOvdsYxe/tRVoX+ts+a9gD1tVOfbtfTtT3XdAxI2
+	 SKAoZZq8JwXnm+62QNyvq6QoGPG51ug7CUP5cWQX3TBsmG6Z8XQ7Q7DqEIiQHFlfplSpv
+	 FmvDDbq2hdgcIaobJq3GCFZm3VZLKq8Bf+QdShtqE3yAYaThDs/0mMKKwy6vaiYZ1twvH
+	 ZZ+pq3at6Xs9mfpNiHzJzMQMCTBN9sxF8SOtXMmDWxdIVHnccTr8SvyRD4+b2x9ex4A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792211781;
+	c=relaxed/relaxed; t=1792211778;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 References:In-Reply-To:To:Cc:X-Mailer:X-Mailman-Approved-At:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
+	 Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=1XEBQ3uzR69M2nBOFTBjrzenv3EgWoQiRYWZo+q7syw=;
-	b=HRCYWRPbL+wIJvAxoWFgEIz5W7uA52swukosDHxowWTXVJ25ZMhryBCMRsHqI2aMFqNZ
-	 2gaZjhDhu6Sdd1lbqW231w57me2lMoef8wg6/evfPD3lViMSnxMk4qmuEq2OkddvZOFbO
-	 kwWI3RwWCPKqNj+h0n6MdZznlCMsEGm3wkF05WNJ+u/B4ztDqgiKSWSvdrP4W7rUxYXgu
-	 2+uFo392x3Rj8ixHGIVtcahlwrwjBmR1PbOmm2lcvaos/gGf3zBDYSrnPvnHbevmETEdt
-	 9n8cXMDFoPFKvE4l0180Ea0tsg6j0aSVu+Nm53YhtgBKtdtj/5Y5HFlqjSbf8bs9gjg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=Jg7IslzZWetB0AnP9FRvawuKiTAEUtfgiX65rqMiEPY=;
+	b=KQnYeQaEDJidZhl5Fzx45cJ4QzpVT0JqazCdFTHvHRX1qKEOMJgwS8qK17Ckvb6zEeaK
+	 wL8vmCLvvyBykayOxhs1Yc5/HWa/ce+j8MEQ/1bMUK35BitpddLwgh29f2PKpc9yCR9+D
+	 dImtneZ2WHFOjA2jfAHcW5Zqe2P0uxvYw2FLif6roNEnqKgATUfF6+jfd6HbV2sIW56Lw
+	 JGOF+WWzdbeaIF1CWkK721ysgijL4ofXciDaseDaCzoF+nSLlRTqYYHyV8M5HEvouTn2+
+	 Luf2Js40Vl3QJ5Qu1UNaBDvi2eezBWrHfELvJpyxcre/+L2gn9+D4/s4DSOT9i0eyFA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792211781;
-	bh=1XEBQ3uzR69M2nBOFTBjrzenv3EgWoQiRYWZo+q7syw=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=tt12DOZRgMZNVQWfHDkifoykvF+ZOd3OZJ1657e+XEQX3yRxGDREIhN+woTlwtEEq
-	 /9dV/MyAaLKBKVUIt4ZJv/Xz/H2mnazbEm/P2IBjXYn9y1N9Bfvyx3Ya624ztKGgjN
-	 6PFa+4x10hYjBirvVyZVLWunwpAZLaejvGNVpY9PN1ZbEXWzJCVW3nOZfcl+uKryX+
-	 YxNU0XlggUt+v3VCxz8cl215Z4ov7vMyVRk01Zt2t7Vmma14jDMXY1ziOibrJ3Y4Tf
-	 o9zd5+jH1zdvtIo9O2Tf0KI74YLvO5CEBQFeY9AToxQLNq2Bd02eJPUsz7SVVNvdGd
-	 RwWK7FDm0xjLA==
+	d=lists.u-boot-project.org; s=default; t=1792211778;
+	bh=Jg7IslzZWetB0AnP9FRvawuKiTAEUtfgiX65rqMiEPY=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=KId4ly4IGSzejLjppbojFgRML0OAItLJoF7uUuPdR4Qns4hyu83hpqAz4FhRrwHmx
+	 u283BOmd7fxQStxynYMr1iPDdzi5y0wdz6yOdnb6OCbx5FILYYpGmgUw+hRwXVf8oY
+	 OagSri1y0eK3JktvzEHE9EXmwxyxixZaYiIGaXc5g0VSfb/Oo0a8mxnDH1MOujsE4N
+	 KYErS8ZpPanc5YDv17zg8bk61oevgn2T/mxNvJS/9xtUWf8LCcyegb+VYP6fkbmQ+o
+	 xxzMY60N7dVMEcCQU4TQTTo0tw79z5+GkAEI4KA2jvJjVNmKOOrUJ+5N7c4h742LQq
+	 M677bLV2CbZfw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8F129409D7;
-	Sat, 17 Oct 2026 04:36:21 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 03A5D105
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:35:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B70018148B;
+	Sat, 17 Oct 2026 04:36:18 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5EA2F362
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:35:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E9B428165E
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5065260AEC
  for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:35:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id m4fV1JUs7xEs for <u-boot@lists.u-boot-project.org>;
- Sat, 17 Oct 2026 00:35:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2EB168156F
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c32"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792197335;
- b=CumxVbb4pzM3PSbnPNhUcPsO1GOoHUyitC7B6Wyzo6KkRIcVDa3dzckuy8ruOICO0GII
- Sdu+gQ0vX/bSjxXZKfYcBjTue7825XDU5Fvv8b1SQINJAeeojHX6ddZcFjU5iffxKybWX
- MHxbbou2BJ95m/PHZjTVH0IuDM7VJdvpuJVl22U4mCrek+XQf321guBl8ai3Y9K0iRwhK
- ZYGLFwVa4VRKNP+YERH5dTKC2hwdVFhix5p/0MnH3SXxfQJL4I27JV7QCpiYZhDoIQK8O
- ili6Tlxc4DZMA7ak6ZMnoBwuLs5yU1LgPHpnNfc223KItCRUnFDzkYScbI8SXy7RWQA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cktdxuzE_YiD for <u-boot@lists.u-boot-project.org>;
+ Sat, 17 Oct 2026 00:35:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B0C8660A7E
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2001:4860:4864:20::30"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792197334;
+ b=RulXUoO7eh3A6QAMRF+ptIWSqDRi2Rxd8ep6Ud6nIoODlvw0JzrRXzHQw6MU0oMPUpDj
+ o7gGgt7uY2+9TYseloUN5cah/EJcFZS1/A4npgyhGPcBLfp7wLzZDxcDhmwyqdRJiLmQq
+ b85v+nETNIrHSnoJMr0A2PIKqf6mv3xqhpeCAtAm1sSgurFt7d+vjQj3nGdXBF7EZwWHD
+ 8rEhXh0AEW/0tawPqxX7sJjUYVchTzOCqZ+N1fc8gYWMoQnQufA+bK3RAPmkaaP68+qkr
+ ug2z3SXOEwGqAEbdwZdoc5GUJJhHpUIwn7/qRFlJ60Q+8HtYJ96YHoNWHPhQPPzv1UA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792197335;
+ c=relaxed/relaxed; t=1792197334;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
- bh=1XEBQ3uzR69M2nBOFTBjrzenv3EgWoQiRYWZo+q7syw=;
- b=CcyiAiaR0l32buf479cgeZneFa4e80oZHJdMm8fxOuh1ZC7dJr8R9gnya/PBcluKbg0Q
- jMLTI3mpwbfMKTfDMaw3Drttv2qDZOP3G4v9xsaqPXGdyiy5hZ6jGiRHCi0ow77hKhfVg
- qkyks2TTkXuERn/cx2N4BW6VL0wKadqiWg6XD93+bz6xxtA+JYDCr0bZ8g4jEEDLIuDbA
- 7koqLFOdcRioVOMM6o8E/dyF089T+d7HnWhBB2p+Ml02RS1Q6tvrV5YEkFvrRT/v+QU4s
- J5+NB1q6VD4eGAFx2Rnwsh5mFcdub81P8d7dNN3O0yMD/+I4iVD9vV3HNERIo5aL2KQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ From:Subject:Date:Message-Id:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer;
+ bh=Jg7IslzZWetB0AnP9FRvawuKiTAEUtfgiX65rqMiEPY=;
+ b=im4pKCrom00ROnDU+Ed/7zwwzeG2SJSy8QIug/jiPZGidtZBxKXq+wTyHIHU98tBnRAS
+ IoF6aZZU65CNOEjqKiByNAmvge3vDL5qY3OYaEcy8m58ik4vfLLT+EIkkYS0qAbTZgqnL
+ UDZbMsuR9H8t2Wfq5Kc80QUw4L/OrOUtGW4GfjEVE/J5nGcm2dOV1ielFYFbfwV1ymeJj
+ qTdG5RDk34c8YyV1h/ZuQfOwBQ/seGXWQuLCzOJFDgACYsEy3UrJ3srxyfNBrOibeeO7o
+ Dx+gHf9mThY5icRil/sOAzttljKpafBFrrQlhT8qR3rh2NbVdlzYxIVnv6D6FGs3XFA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=AlH6pQaw; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c32"
+ header.s=20251104 header.b="m/IK5OxZ"; 
+ arc=none smtp.remote-ip="2001:4860:4864:20::30"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c32; helo=mail-oo1-xc32.google.com;
+ client-ip=2001:4860:4864:20::30; helo=mail-oa1-x30.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=AlH6pQaw
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2EB168156F
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:35:34 +0000 (UTC)
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-6dd059478dcso317884eaf.0
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 17:35:34 -0700 (PDT)
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=m/IK5OxZ
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B0C8660A7E
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:35:31 +0000 (UTC)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-48e2d5a69c4so258077fac.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 17:35:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792197334; x=1792802134;
+ d=gmail.com; s=20251104; t=1792197330; x=1792802130;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=1XEBQ3uzR69M2nBOFTBjrzenv3EgWoQiRYWZo+q7syw=;
- b=AlH6pQawsKhAqwSSuc7PAEjMJQib70/ppzRlWUTrPuAXIkjzaPB6Ep6SlhI1GHNa33
- e2O/8h+eZO4pPPHgbEjapRQkO9tAyECfTt25XPeyt/XRiO58FJ5SRC1qnTFAQvqOau7K
- mL1X9IYDLreKKcwcA94eIGzsNVRxQDRYWdMYxXuZq5ANDkvHCWVpzZF7R37T0R/frOPW
- RB4GkJmpwB5Y0ZsFBzmbkyqQK0IJmop6MxKJiJ+JLGi64YbusyL4lX/DvQ9V6M5jgYbV
- /S7XnTY8Nad2vRvUimPhUxowZ1aJQdFNbGSJFzuIS5CqQO9VmEhDyitceCJZ6AXFBL33
- ckbw==
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=Jg7IslzZWetB0AnP9FRvawuKiTAEUtfgiX65rqMiEPY=;
+ b=m/IK5OxZSHCDdrBq55Y/FMZu5bQS4cCMRlb1zXYW8RgwohoRbxZw64EXmmA3UfkC0W
+ kUqXft3zqHyRlV9SBB4we5g4C1w1qMM+XNazXXF/8AsmUS9B7XCCtZeb+SoKlYDmH5YB
+ 6Ut8zuCTfhfH50C6jLXNcoS3IUnyElcW9pr+ue9sUkkOwvmm+3FekRjwGB4NpQ9TyWy5
+ pyTmoqO9vLJqXwrKD+diGVhwbmhZC2/RjCwGHZ5kgk6a0PZRnWsNS9Di+EEKZyC02NUb
+ kEasdRP+W7yoo4NHpBDgV71/wqSLQnXjxY2JX18U0y7uyi2/ZBrmpBm3r3UNIrw+L9DU
+ T0jA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792197334; x=1792802134;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=1XEBQ3uzR69M2nBOFTBjrzenv3EgWoQiRYWZo+q7syw=;
- b=ooXSfbPusSySSLqO5/UFSC9YhiHAag3wTZydmfSrKXyhfJq5TC4PIwZCXj5DskxCGq
- QFQNWUWFWDcRXPswAbX9hHhV5pmSxSDvGL4ZtXsF+GjzTlcB0nr4HesFwHGv3IGRhCXy
- tEHw9lCwI9n08uC8P3uvNhu5jnp1vioc4HONhuQuHg4XU/l2Q8Q+1BU18sKV3t2IjcZ3
- y9NnThP4xpCWghlggasoM+x8vrYRLOSne3Y/JRqCRgHhECFNGGnm4hp4nqev6nwHmKm0
- zYvBUj962KAujUoAsesOqQhwQuhrib/F5KEPDsaxXl2JCkWsgbqiSEgnXUMA3tdm8YJW
- C95Q==
+ d=1e100.net; s=20260707; t=1792197330; x=1792802130;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=Jg7IslzZWetB0AnP9FRvawuKiTAEUtfgiX65rqMiEPY=;
+ b=yh45HGYxnN2KY+azUgFPf7+8rIgq8NTd5VZH2N8TSXs+nrYG5iD+PdD0h2Uj7VCVb9
+ b/FtjvvWq47w5S+zFjKhQvNACK5LI5pMoclNQKZgkHaGWA46FbHJ26UVT/fd5jI5grsj
+ lFAimeQqhWMC830nxCGUWZfdjAVVpBv/HgbsQj1JcJ3limvrmZlnqGKQXhwoOM3zjKca
+ yCsowynLmFxsey/RCvBtM7qEaKZ/gBgLU5a1ckDOtW+ij1ZmQk2h3XCmsJVGTZzm2Cpq
+ T34L1vYDsoxPza744jJpVOA2376qX3yvWZjBWoX6R4ZiF1aFSQLeUu2XBs0wl+kqPAdV
+ BvxA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzn3DqhNLsZicMNN5OMZnETRYMJ+5MIn8RptsPs9GBci6dnDzQA91M3P+nm3J57r6UPqdM3Y9s=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYKiz+A2Q1lbsQ6RI29Y78oT9UI4+cZM2ankjxWwyxloCW+QZf3g
- J/s8462oEVVaqe3abwnkuyKj3pKDu46fyv1ZZvRW7LNCixO2FgEDfHDB
-X-Gm-Gg: AYBFou2ZuykPYVGmqJmRrvrAid8KDuuZM2+Hf8MFCUXmD1G9ZC+neYZDvqGN26EzynI
- A03+PuQ03fjE/VShOT0GoHltp0H2CY7s/yjsnngn5UOJ4lCllJoz3Bi9BPK4pPH9gwTgZzQrMfI
- cAMNTseJKEFw49tXWPGsV2T1ovKbKwXoRvLVK2qqgzrRVwGoM4ehek8Hbvv6tZLeF8GeQuZ1jpt
- u3g2x+4WxlJI1DFlbMbZqRxr909cEj9nvjGBxaKlfMLF11PdzULi5gRjTlaa3mE0v8htmEYRHZV
- pYXKza+mAVp0kB8t6PfxguY23VSub3sBDwX3Cvr9w9U4nWfluDRAWxqNjoqEhqFuER/ExLEE7Rw
- 9Yf75AhzYweHY4b87tetfUMv4z4U4GuwBRGeLD0/t08E6VK9KT+kVleeSmSXOa9DMfwJwJY4NWs
- xeJ1AK2r8aWJx+yaUVesQR0WAXHFaZxJZeTupIqZUQiTdr5Q/t03YLUE/DxAKnwjPpr++c+cgPv
- hYBLDgOhxG/w1RXvpi8OJwR/UFwo2WxVjPUX80IRK4Fl8nEOa53Eh3bEo1l7anhlaJAUR+bytdb
- V/Nz5tQ9TQ42vQPVkiBXT3iuyB/ou3ZpVQwuSt1+/n633aq1SpGo8wrmhx7mcNvywFZOF7tCL9Z
- 2u7Et0RCCgxxRuHqLVEYe7g==
-X-Received: by 2002:a05:6820:820:b0:6da:453d:7cd4 with SMTP id
- 006d021491bc7-70355c8872cmr917818eaf.23.1792197333621; 
- Fri, 16 Oct 2026 17:35:33 -0700 (PDT)
+ AKwUvBxMs+wF/mxXRo60teNjMnX5Gc5/ozvvf04Ty4U2+4GH0b2PyLDip3zSUws+FwcovUMw0ZLPosQ=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYLDMz76aH08KL2VJYdXLxnFHs2xv2uk0UqUWWz5KWk+5rrhcOAp
+ +TzN7REhWzXJrqZCWpHLzkYIZNGdkIQ+yWY9+CDZ5vQwwqQPdRzVeO6n
+X-Gm-Gg: AYBFou0Xh8B8w/xg0pRshEXfjs2FTf6l5ZWpg5DmMQddCOZjvxzZuaCIQDHJH+WlCqN
+ 1Jw/GEvA+Ahu+7ABANzlSAXyHTUSIqGvGFthjchuBpOcog4ifcR9X52kplODPNVfS+1eRyVR9yM
+ 9AZX5JxJQEyE+eOQkzzPk+FecLIWs90Mg37VToNXYfHkKCKpxB9uz37y5QulI7+dFkQqWxP9iUQ
+ lu2X3yVjKy86VdoAhzIwytGUOkgi2u51DSXMYaXaNpC130MGOJ/xRrIEhGmPz39sqwytljNTuck
+ jy5Hd+XQRJfVDrC2OglE29ItrJMatXAw9qxN/RXNw5O/paJ7HyrePh91yW+mBpfU7vLzGrprJlz
+ e0rDbyJzAX5AwqgOtKTvE5kR0JgWy44j9UhdWrx9j3M9chtd3zbf8Kk8Vzo4MumxZ2jSGjco1t8
+ PIq+ILgWrInpmJsWnr89GplbcFM1+Fclr4PJeUhTzwd5852u8sAbGEaIX8uvVUWU9G5JKwEgoCC
+ xEfFYq4OokPdeRV2fjpDtBOB4lzu46L+1k41TEYrVgKj07ajWotLCr0iYGTRhKfx7AXiH3bPbQx
+ NbMCug0Nb2Gsa9Rs9Ei/hrl1IED/8aKBtqgkiepZt611R5hoOPIlORH4P8767WcrePeH++IOC6m
+ PCD5qWkZUZHs25I3wJOKQoA==
+X-Received: by 2002:a05:6871:e0f5:b0:486:c1b6:643a with SMTP id
+ 586e51a60fabf-4a7579e45admr1307519fac.19.1792197330211; 
+ Fri, 16 Oct 2026 17:35:30 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4a73b5b4291sm2745091fac.5.2026.10.16.17.35.30
+ 586e51a60fabf-4a73b5b4291sm2745091fac.5.2026.10.16.17.35.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Oct 2026 17:35:33 -0700 (PDT)
+ Fri, 16 Oct 2026 17:35:29 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Fri, 16 Oct 2026 18:35:15 -0600
-Subject: [PATCH v9 01/17] cmd: aes: fix DM operation handling
+Subject: [PATCH v9 00/17] crypto: allwinner: enable sun8i-ce FIT crypto
+Date: Fri, 16 Oct 2026 18:35:14 -0600
+Message-Id: <20261016-submit-ce-series-v2-v9-0-c24e64daafe9@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261016-submit-ce-series-v2-v9-1-c24e64daafe9@gmail.com>
-References: <20261016-submit-ce-series-v2-v9-0-c24e64daafe9@gmail.com>
-In-Reply-To: <20261016-submit-ce-series-v2-v9-0-c24e64daafe9@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33SzU7DMAwA4FeZciYo/z878R6IQ5o4WxBdoe0q0
+ NR3J2mRiEqHlIul+HPs+IYG6BMM6Hi4oR6mNKTukgP7cED+7C4nwCnkGDHCFNGE4eHatGnEHvC
+ aiSeGhdO6oZp4ZTzKme89xPS5qM8va5zTXsGPhSo3zmkYu/5rKTuxcu//CvkQHGNwsoEgjYtPp
+ 9alt0fftahUmHht2H2DZ0MSqoMz3jbwxxCVQfm+IZZ3aAheE9kYtzVkbdx5h8wG94JGpYKQjG0
+ NVRnM7BsqG4Z4GnM3MTq5NfSvYe71oss8LI8+GKFtDFvD1IbYN0yZB1hGmeDUWVEb8/r1PXxc8
+ 16NP/swz9+IYmAZdQIAAA==
+X-Change-ID: 20260702-submit-ce-series-v2-4a77b170c68c
 To: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
  Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, 
  u-boot@lists.u-boot-project.org
@@ -230,57 +233,325 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The DM AES command path takes operation-specific arguments after the
-common arguments. argv[1] holds the mode, "ecb" or "cbc", while argv[2]
-holds the requested operation, "enc" or "dec".
+This series enables Allwinner Crypto Engine backed FIT decryption and FIT
+signature/hash validation for secure-boot flows on H6/H616-class boards,
+covering both SPL and U-Boot proper.
 
-The DM path checked argv[1] for the operation, so the ecb and cbc
-commands always returned CMD_RET_USAGE before running. Parse argv[2]
-instead.
+The purpose is to use CE-backed AES, hash and ECDSA operations on H6/H616
+instead of relying only on software crypto paths. Word-aligned ECB and CBC
+decryption requests of at least 256 KiB use both the AES and RAES engines
+in SPL and U-Boot proper. The AES child uses the same fixed-memory
+scheduler for one or two engines. Each engine has two bounded descriptor
+banks, so software can refill a retired bank while its peer remains in
+flight. One fixed transfer object owns all scheduler state, and the parent
+polls and retires each completion snapshot as one operation.
 
-Fixes: b01444aa14cf ("cmd: aes: Add support for DM AES drivers")
-Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On the H616 test board with the CE at 300 MHz, target-timed and fully
+compared 64 MiB AES-256 decrypts reached 561.4 to 566.4 MiB/s for ECB
+and CBC with aligned and word-offset buffers. SHA-256 over a 64 MiB
+word-offset buffer reached 190.4 MiB/s. P-256 verification took 0.015 to
+0.016 seconds.
+
+At a high level this adds:
+
+  - SPL driver-model crypto plumbing for AES and hash providers.
+  - Driver-model provider selection for progressive hashing, so FIT
+    configuration signatures can be hashed entirely by hardware in SPL.
+  - RSA-local PKCS#1 v1.5 DigestInfo handling, keeping RSA metadata out of
+    generic checksum descriptors and ECDSA-only SPL builds.
+  - FIT decrypt-to-buffer support and SPL FIT cipher support, so SPL can
+    decrypt an encrypted U-Boot proper FIT without allocating another full
+    payload buffer.
+  - A shared sun8i-ce parent driver with one exclusive task-session
+    lifecycle, a cacheline-safe DMA mapping API, and one completion
+    poll/retire path, plus AES, hash and ECDSA children for H6/H616.
+  - Parallel AES/RAES processing for word-aligned ECB and CBC decryption
+    requests of at least 256 KiB, using two fixed banks of ten task
+    descriptors per engine and requesting completion only from each chain
+    tail.
+  - An H6/H616 ECDSA child for CE-backed FIT signature validation, plus
+    common ECDSA curve-size handling and key-export cleanup for secp224r1,
+    prime256v1, secp384r1 and secp521r1.
+  - Driver-model AES and FIT hash-provider dispatch with software fallback
+    for unsupported operations and hard-error propagation.
+
+The AES child supports software-provided AES-128/192/256 keys in ECB and
+CBC modes, including exact in-place operation. Word-aligned payload
+middles use direct DMA regardless of cacheline alignment, while fixed
+per-bank edge buffers isolate partial cachelines. Byte-unaligned payloads
+use a fixed 64 KiB repack buffer. The hash child supports one-shot and
+progressive CE MD5/SHA1/SHA256/SHA384/SHA512 operations. Progressive
+contexts buffer partial blocks, retain the intermediate hardware state and
+build final padding from the total message length. A fixed 128 KiB repack
+buffer handles byte-unaligned input, and no allocation scales with payload
+size. The ECDSA child exposes the H6/H616 CE ECC verifier through
+UCLASS_ECDSA.
+
+The previously separate "crypto: hash: use DM providers from hash command"
+prerequisite is now present in U-Boot main.
+
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
-Changes v1 -> v2:
-  - Limit the patch to the argv parsing fix  (suggested by Simon Glass)
-  - State that the commands always returned usage
+Changes v8 -> v9:
+  - Rebase onto current U-Boot main
+  - Preserve the upstream FIT property-length and external-data bounds
+    checks in the decrypt-to-buffer and SPL loading paths
+  - Validate allocating AES decrypt requests before allocating the output,
+    sharing the validation with the caller-supplied-buffer API
+  - Reconcile with upstream P-521 and software ECDSA support. Preserve the
+    32-bit-cell-padded public-key encoding and both P-521 algorithm names
+  - Extend the curve tests to check exported coordinates and verify FIT
+    signatures using those keys
+  - Drop the ECDSA documentation changes; the existing format
+    description remains correct with the preserved encoding
+  - Leave existing ECDSA diagnostics and surrounding FIT formatting unchanged
+  - Skip HACE for progressive hashing until it has a DMA-safe abort;
+    leave its existing one-shot path unchanged
+  - Require a non-ignored FIT payload hash for in-place decryption so
+    retries cannot decrypt previously consumed ciphertext
+  - Unwind partially bound CE children and enable device removal in SPL
+  - Add a separate Caliptra fix ahead of progressive hash-provider
+    selection: preserve fragmented and empty input streams, finalize empty
+    messages and reject data-length overflow
+  - Add a separate Tegra fix for AES-256 key sizes, engine failures and
+    clock/reset lookup errors before software-key FIT decryption; require
+    VDE resources only for BSEV, not BSEA
+  - Clarify probe-error handling and operation fallback in the AES and FIT
+    hash provider-selection descriptions, including which hash probe
+    errors still permit software fallback
+  - Link to v8: https://patch.msgid.link/20260814-submit-ce-series-v2-v8-0-fe9212431a94@gmail.com
+
+Changes v7 -> v8:
+  - Add an explicit progressive-hash abort operation and release provider
+    contexts after update errors  (suggested by Simon Glass)
+  - Add the progressive provider-selection and error-cleanup test omitted
+    from v7
+  - Enable DM_HASH in sandbox so provider-selection and progressive cleanup
+    coverage runs in normal sandbox CI
+  - Link to v7: https://patch.msgid.link/20260813-submit-ce-series-v2-v7-0-593fcd8479fd@gmail.com
+
+Changes v6 -> v7:
+  - Rebase onto current U-Boot main, which includes the separately submitted
+    hash-command driver-model provider selection prerequisite
+  - Move PKCS#1 v1.5 DigestInfo prefixes into the RSA verifier so generic
+    checksum descriptors and ECDSA-only SPL builds carry no RSA metadata
+  - Add generic progressive driver-model hash provider selection for FIT
+    configuration signatures and hardware-only SPL hashing
+  - Add progressive MD5, SHA-1, SHA-256, SHA-384 and SHA-512 operations to
+    the CE hash driver, including partial-block buffering and retained
+    intermediate state
+  - Fold the CE progressive implementation into the initial hash-driver
+    patch
+  - Validate a clean Buildroot build, targeted sandbox provider tests and
+    encrypted, signed SPL and U-Boot proper FIT boot on H616 hardware
+  - Link to v6: https://patch.msgid.link/20260728-submit-ce-series-v2-v6-0-80c1f7daffa5@gmail.com
+
+Changes v5 -> v6:
+  - Drop stale AES-128 wording and return -EINVAL when the
+    software AES provider has no selected key
     (suggested by Simon Glass)
-  - Add a Fixes tag  (suggested by Simon Glass)
+  - Leave signed FIT metadata unchanged and require/verify a payload hash
+    before unverified in-place decryption, so repeated loads fail before
+    AES processes plaintext  (suggested by Simon Glass)
+  - Return -ENOSYS from the allocating host decrypt stub
+    (suggested by Simon Glass)
+  - Add Reviewed-by tags from Simon Glass for hash-provider
+    selection, software AES dispatch, and CE ECDSA/hash support
+  - Send hash-command DM provider selection as a standalone prerequisite
+    (suggested by Tom Rini)
+  - Drop unrelated hash_digest_wd() indentation changes from that
+    prerequisite
+    (suggested by Tom Rini)
+  - Add Reviewed-by from Tom Rini to the SPL DM AES patch
+  - Document that no in-tree configuration relies on the old SPL hash
+    object key
+    (suggested by Tom Rini)
+  - Preserve the existing fit_image_decrypt_data() declaration wrapping
+  - Link to v5: https://patch.msgid.link/20260719-submit-ce-series-v2-v5-0-3c41f66d4522@gmail.com
+
+Changes v4 -> v5:
+  - Rebase on U-Boot main
+  - Replace independently claimed channel and engine sessions with one
+    exclusive parent session that tracks per-channel in-flight state,
+    deadlines, completion and abort cleanup
+  - Add one cacheline-safe DMA mapping API for AES, hash and ECDSA, with
+    descriptor-address validation and complete-cacheline output ownership
+  - Replace the separate one-shot, bounce and dual-CBC AES paths with one
+    fixed-memory one/two-lane scheduler using two ten-task banks per lane
+  - Use AES and RAES in parallel for word-aligned ECB and CBC decryption
+    requests of at least 256 KiB, with fair refill from a shared cursor
+  - Direct-map word-aligned cacheline-offset AES buffers using private
+    per-bank edge cachelines, and use a fixed 64 KiB repack only for
+    byte-unaligned buffers
+  - Replace the payload-sized word-unaligned hash bounce with one
+    continuation stream using 64 MiB direct chunks or a fixed 128 KiB
+    repack buffer
+  - Use the normal DM clock and reset lifecycle in SPL and U-Boot proper,
+    select the required SPL dependencies and retain the pre-RAM DT nodes
+  - Harden ECDSA input validation and use a cacheline-rounded
+    private result mapping
+  - Validate secure boot, every AES key size, AES-256 alignment and overlap
+    cases, bounded hash streaming and every supported ECDSA curve on H616
+  - Link to v4: https://patch.msgid.link/20260713-submit-ce-series-v2-v4-0-ff7edc705b8a@gmail.com
+
+Changes v3 -> v4:
+  - Enable CE ECDSA in SPL and U-Boot proper on both H6 and H616.
+  - Validate FIT cipher metadata before accessing key parameters.
+  - Rebase on U-Boot master.
+  - Try all registered AES and hash providers, preserving hard provider
+    errors and using software fallback only when no provider supports the
+    operation.
+  - Treat -EINVAL as a hard provider error and reserve fallback for
+    explicitly unsupported operations.
+  - Require SPL_OF_CONTROL for SPL FIT decryption and fix disabled AES
+    stubs.
+  - Correct AES-192/256 handling in the software DM provider and add
+    provider, decrypt-input and in-place-decrypt sandbox tests.
+  - Map SPL FIT destinations after post-processing determines the final
+    size and size decompression mappings for the maximum output.
+  - Exercise all supported ECDSA curve sizes in the host FIT signing test.
+  - Fold per-channel task sessions and engine ownership into the CE parent.
+  - Trim redundant CE scheduler state and checks, and derive each NIST
+    curve's a = p - 3 parameter instead of storing duplicate constants.
+  - Run CBC decrypts of at least 256 KiB across AES and RAES in SPL and
+    U-Boot proper with double-buffered ten-descriptor chains and tail-only
+    completion.
+  - Support exact in-place and aligned-offset dual-engine CBC decrypt.
+  - Submit ECDSA and hash work on their dedicated completion channels.
+  - Add target-timed 64 MiB AES-256-CBC and SHA-256 hardware results.
+  - Link to v3: https://patch.msgid.link/20260709-submit-ce-series-v2-v3-0-5017da8c9bef@gmail.com
+
+Changes v2 -> v3:
+  - Rebase on U-Boot master.
+  - Add review tags from Svyatoslav Ryhel and Simon Glass.
+  - Simplify the AES decrypt helper guard and validation flow.
+  - Document the AES provider in-place CBC decrypt contract.
+  - Tighten SPL encrypted-FIT buffer handling and error reporting.
+  - Clean up the SPL DM hash fallback and Kconfig help text.
+  - Link to v2: https://patch.msgid.link/20260702-submit-ce-series-v2-v2-0-ffda5bed58af@gmail.com
+
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Ion Agorria <ion@agorria.com>
+To: u-boot@lists.u-boot-project.org
+To: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
+To: Joel Stanley <joel@jms.id.au>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: James Hilliard <james.hilliard1@gmail.com>
+Cc: Daniel Golle <daniel@makrotopia.org>
+Cc: Aristo Chen <aristo.chen@canonical.com>
+Cc: Raymond Mao <raymondmaoca@gmail.com>
+Cc: Anton Ivanov <anton@binarly.io>
+Cc: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: Ryan Chen <ryan_chen@aspeedtech.com>
+Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Petr Hodina <petr.hodina@protonmail.com>
+Cc: Michael Srba <Michael.Srba@seznam.cz>
+Cc: Thierry Reding <treding@nvidia.com>
+Cc: Pranav Rajendran <pranavkasthuri@gmail.com>
+Cc: Carlo Caione <ccaione@baylibre.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Alexey Charkov <alchark@flipper.net>
+Cc: Johan Jonker <jbx6244@gmail.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Francesco Valla <francesco@valla.it>
+Cc: Andre Przywara <andre.przywara@arm.com>
+Cc: Lukasz Majewski <lukma@nabladev.com>
+Cc: Marek Vasut <marex@nabladev.com>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>
+
 ---
- cmd/aes.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+James Hilliard (17):
+      cmd: aes: fix DM operation handling
+      crypto: aes: allow DM AES in SPL
+      crypto: hash: allow DM hash in SPL
+      boot: image: try all DM hash providers
+      lib: rsa: internalize PKCS#1 DigestInfo prefixes
+      crypto: aspeed: preserve Caliptra hash update boundaries
+      crypto: hash: support hardware-only progressive hashing
+      crypto: aes: fix software key-size handling
+      crypto: tegra: preserve AES key sizes and engine failures
+      crypto: aes: add software-key provider dispatch
+      boot: image: add FIT decrypt-to-buffer helper
+      spl: fit: support encrypted payloads
+      clk: sunxi: add H6/H616 CE gates and reset
+      lib: ecdsa: support additional curve sizes
+      crypto: allwinner: add sun8i-ce AES driver
+      crypto: allwinner: add sun8i-ce ECDSA verifier
+      crypto: allwinner: add sun8i-ce hash driver
 
-diff --git a/cmd/aes.c b/cmd/aes.c
-index 3fd83013ffe..edcd87cf11b 100644
---- a/cmd/aes.c
-+++ b/cmd/aes.c
-@@ -175,9 +175,9 @@ int cmd_aes_ecb(int argc, char *const argv[], u32 key_len)
- 	if (ret)
- 		return ret;
- 
--	if (!strncmp(argv[1], "enc", 3))
-+	if (!strncmp(argv[2], "enc", 3))
- 		enc = 1;
--	else if (!strncmp(argv[1], "dec", 3))
-+	else if (!strncmp(argv[2], "dec", 3))
- 		enc = 0;
- 	else
- 		return CMD_RET_USAGE;
-@@ -223,9 +223,9 @@ int cmd_aes_cbc(int argc, char *const argv[], u32 key_len)
- 	if (ret)
- 		return ret;
- 
--	if (!strncmp(argv[1], "enc", 3))
-+	if (!strncmp(argv[2], "enc", 3))
- 		enc = 1;
--	else if (!strncmp(argv[1], "dec", 3))
-+	else if (!strncmp(argv[2], "dec", 3))
- 		enc = 0;
- 	else
- 		return CMD_RET_USAGE;
+ MAINTAINERS                                        |   1 +
+ arch/arm/dts/sunxi-u-boot.dtsi                     |  15 +
+ boot/Kconfig                                       |   9 +
+ boot/image-cipher.c                                |  47 +-
+ boot/image-fit.c                                   | 119 ++-
+ boot/image-sig.c                                   |   8 -
+ cmd/aes.c                                          |   8 +-
+ common/hash.c                                      |  21 +-
+ common/spl/spl_fit.c                               |  87 ++-
+ configs/sandbox_defconfig                          |   1 +
+ drivers/clk/sunxi/clk_h6.c                         |   5 +
+ drivers/clk/sunxi/clk_h616.c                       |   5 +
+ drivers/crypto/Kconfig                             |   2 +
+ drivers/crypto/Makefile                            |   1 +
+ drivers/crypto/aes/Kconfig                         |   8 +
+ drivers/crypto/aes/aes-sw.c                        |  51 +-
+ drivers/crypto/aes/aes-uclass.c                    |  73 ++
+ drivers/crypto/allwinner/Kconfig                   |   3 +
+ drivers/crypto/allwinner/Makefile                  |   3 +
+ drivers/crypto/allwinner/sun8i-ce/Kconfig          | 163 +++++
+ drivers/crypto/allwinner/sun8i-ce/Makefile         |   6 +
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-aes.c   | 809 +++++++++++++++++++++
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c  | 799 ++++++++++++++++++++
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c | 382 ++++++++++
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-hash.c  | 494 +++++++++++++
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h       | 128 ++++
+ drivers/crypto/aspeed/cptra_sha.c                  |  79 +-
+ drivers/crypto/hash/Kconfig                        |  13 +
+ drivers/crypto/hash/Makefile                       |   2 +-
+ drivers/crypto/hash/hash-uclass.c                  |  44 +-
+ drivers/crypto/hash/hash_sw.c                      |  20 +-
+ drivers/crypto/tegra/tegra_aes.c                   | 114 ++-
+ include/image.h                                    |  41 +-
+ include/u-boot/aes.h                               |  10 +
+ include/u-boot/ecdsa.h                             |  22 +
+ include/u-boot/fdt-libcrypto.h                     |   4 +-
+ include/u-boot/hash.h                              |  32 +
+ include/u-boot/sha1.h                              |   3 -
+ include/u-boot/sha256.h                            |   3 -
+ include/u-boot/sha512.h                            |   6 -
+ include/uboot_aes.h                                |  90 ++-
+ lib/Makefile                                       |   6 +-
+ lib/aes/aes-decrypt.c                              | 110 ++-
+ lib/ecdsa/Kconfig                                  |   2 +-
+ lib/ecdsa/ecdsa-libcrypto.c                        | 132 ++--
+ lib/ecdsa/ecdsa-verify.c                           |  26 +-
+ lib/fdt-libcrypto.c                                |  60 +-
+ lib/hash-checksum.c                                |  30 +-
+ lib/mbedtls/Kconfig                                |   2 +-
+ lib/mbedtls/sha1.c                                 |   5 -
+ lib/mbedtls/sha256.c                               |   6 -
+ lib/mbedtls/sha512.c                               |  12 -
+ lib/rsa/rsa-verify.c                               |  67 +-
+ lib/sha1.c                                         |   5 -
+ lib/sha256.c                                       |   6 -
+ lib/sha512.c                                       |  12 -
+ test/dm/aes.c                                      | 258 +++++++
+ test/dm/hash.c                                     | 184 +++++
+ test/lib/Makefile                                  |   3 +
+ test/lib/test_aes_decrypt.c                        |  89 +++
+ test/py/tests/test_fit_cipher.py                   | 118 +++
+ test/py/tests/test_fit_ecdsa.py                    |  40 +-
+ tools/image-sig-host.c                             |  15 +-
+ 63 files changed, 4523 insertions(+), 396 deletions(-)
+---
+base-commit: 65a7532545336e4b73e049a69436e255da7df961
+change-id: 20260702-submit-ce-series-v2-4a77b170c68c
 
--- 
-2.53.0
+Best regards,
+--  
+James Hilliard <james.hilliard1@gmail.com>
 
