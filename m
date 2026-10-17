@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98C01CCF2C4
-	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 04:36:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA95ACCA463
+	for <u-boot@archiver.kernel.org>; Sat, 17 Oct 2026 04:36:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3DCDB40A09;
-	Sat, 17 Oct 2026 04:36:57 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 65F3081496;
+	Sat, 17 Oct 2026 04:36:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oJHLKev7wQiK; Sat, 17 Oct 2026 04:36:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A57E0409E7
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792211815;
-	b=DJg1VCdcMC4xJL8/CLJv+vPIPkMrekNoSmH7ZhMn8gRUy5o4W8lv/pameRXRpXz+xO5z
-	 wHszgbivWRF3QpXa+WpqfnsJ+a1hS5pDPi72973nkDJMBVh8EyfR/uaeYG59SA51vvozl
-	 8VY3+iWjPA6yedX971o61vUZ3fkixl4SaMYW2q7dv8Yk9WoX/N8iu4vromQmCIOxeKDHd
-	 hK041PzflqqujPVwTM3Di2V7DoJy9faQxgvF5fQbKSVaoFWFcBoLOxwI1jmOsZ3RfzFl3
-	 pWB5/hwkMgLi54Zwm2t2r7VcZF3ehBd1scuxFRuendvph/MJd3TDH6r+EpWvMwEcu6Q==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id v295U9adjfyw; Sat, 17 Oct 2026 04:36:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 33FFE81514
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792211811;
+	b=SVXJLHoC/F8apQGtxb+6k8WufMQtedrbV/39+jBI5PHP3c1W7kgSXcens8QCBTdKuXYK
+	 c2TjVZzHijXq+7lQB6qurRivJu48SaLEhFVt5GqQXxeVUMvrdiQXjLwQ+rs4RKXQBluV3
+	 qpCBkT6xqfUvIMYQqiDVrtuf4S8Zm7VXwpgFf5kbCV9gBs+HQB1xWNSt0yhjLK8Jo05eJ
+	 2FR6sYTCu3FGd5qyK1/3d/QmPgwjz4qVZb+OY8WuwdFFMJTscy5MuVX+dH3bP1UNMvneq
+	 K9aY+jY27hACk8koSlydmDyW3kSo5sLEXxmsmduwhqx/AX0IXBfNdrst7g9NwzQ2QnA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792211815;
+	c=relaxed/relaxed; t=1792211811;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,137 +32,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:In-Reply-To:To:Cc:X-Mailer:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=iQZhLjqgx9lO1GLvPgL3IqO+zAlswTkZkPyQiVt8Xrk=;
-	b=hYTxNSXdLXk2fa6rUjdBJ2hV/NyvN61+z/wZtZ4N28OqaT88WaSyeftG5VWAWxgUFBQ0
-	 c+45kCWxEcSW54cVDDBGpC/nBZoKZevPsJ/yc9vuTh74qFb69mWh0+qjzztr7v/jykJzD
-	 gL2Mcav6Yu+oer7yFB660DqirX7Llnh1hmqDwEToIVI2IpVPADPlvN+j9dqylrJafGGZ7
-	 h7x3ICbNG04Hkb62zDkIrbe5mTeFGiQxt/mrFxZngrOKG25ExBeszLiSTeWunE05KUErb
-	 ADtZ9ntaKcnQoSs93ojo0zTJb4Iy77Zxp2cXdOoFcKxG+RHVmTl6cS1gBsQbiCQm4iw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=e2yXDw3Si8AlPZO422Z6UIaQ/P8DGHTmdCnwfqKa/oE=;
+	b=pu52rYeWFYUjX5glMtO85oZysUIQ8QCaS1KkAJ53pNatXzbAngoKFQCSM12mbjKQuoRu
+	 fBUSZSDi5yJACikcSUsO1G4HHBgfmlk6ix6rGHdJSAWAHo20fguH/yZbleHX73H2bqokL
+	 DHdruwuiN7UFY7emzVgVvaMv+JXyK+ZV+qPJaGpnrjx7OMwDm/gUq3IJnghPa9SOIeE96
+	 0RGDQcZNi3uTaZXWrcosaMKeURvx8dGFG3ycuCvmd/M6pJJEnGvPlSlTiL3IZ1LCYMJ4/
+	 5yzLMOevNQWR8ohpLfC27aFeqe6/lYI7rdnN+YRtQcqLLN5tKz4dJb2PH1J+yoCAVNw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792211815;
-	bh=iQZhLjqgx9lO1GLvPgL3IqO+zAlswTkZkPyQiVt8Xrk=;
+	d=lists.u-boot-project.org; s=default; t=1792211811;
+	bh=e2yXDw3Si8AlPZO422Z6UIaQ/P8DGHTmdCnwfqKa/oE=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jSDbiUpBok+PoSov9+LU5mKP/ebJxHk1Rc/EA0UVcYtT7246jPH0YWYicwUrGstEs
-	 Vxk/YJpbS0EhXbCVbh7di/rXuDJ21N6DAPN/s4GeuoWxtq5h+rd0S06Yw0hMsFNUOL
-	 08HIDvD8JUnm95itAyqB6bTzWwj96UVZa4OACdhSrjjN+MtF7X2NvAXUpYTgPyGPgF
-	 KR2Ytbuo3xukVkajk0F9cHGcw/piAdY3zPFHUz4IWph57faZkHqVniugw57te82slV
-	 dTVG4WGZ5lpV4cRwYjfC9pp2FGd/YwnC/mOi12ezqo0xU96Nh/jN98h6dl0h7tvRig
-	 VCI0VSyQnMXiw==
+	b=EtWUw0fpATGPmoFtDjGTJMBXuZ6crOA/da1E4irnMqm3Z/vX3sEWgMmFojU067hVb
+	 hMQA4z4J1iPfkYEzUjranoPk5r/gnhK3dMTBbE3NI9EKTlGfLNk9p2GHqytHGYGTyJ
+	 0O7jGQck9ozQU5gJk4+EzeKouGpuiYoBY7N4UIpe/ecJpNF3uNkVRu8QTLrS1Y/Z65
+	 21oSzqJgccAn7qd6KNM2rIPJ+7rHlCY0Hxmnf+AQvAp2mHUq0gdtXxKJrSIxGLOou0
+	 2woeu7NTgyeQzjeZRKStzJBhDozkz9coAF7L7OoJJF9h8VQPbVvreNotAl3bwkZWLO
+	 aqPYxP3LP/dbw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A57E0409E7;
-	Sat, 17 Oct 2026 04:36:55 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id B6E8B362
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 33FFE81514;
+	Sat, 17 Oct 2026 04:36:51 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 734F5362
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id A8A3E8165E
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:30 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6220460A7E
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sC98XBGddJNZ for <u-boot@lists.u-boot-project.org>;
- Sat, 17 Oct 2026 00:36:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 45E038156F
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2001:4860:4864:20::29"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792197389;
- b=dljEr2ui2Dk4ZeAE4ReSy3jb48S9Rkc5bwAwRC0D3br0x3ZlaKDU5xHIxPaD2vl/1xHC
- /qFBkLm7FPCrzM4dgNnQVTf37W7yDONFEqXA6OHxZa4zktJLXB0f+ek1B0GNSfNFp1P5D
- IakzrgB7suT2DZn3y+ZSNymRmtG6i8oyKY2vHu1EXxgrM3fK3hPpwgkyXdzuqZlmm0Nae
- MYQIZX2stFQVMJqZuq7Ubibu0kvGFwFhH2Y3R1tObROZT0z/bYAVsn+JNLkPPfqD/ywua
- GA239MES4r2wJs5deuSico5s0BVX2AWev48bPnxS2Mfkj0cKZEexxBZrueqR+rss3UA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id EbC6HU-Dj3OK for <u-boot@lists.u-boot-project.org>;
+ Sat, 17 Oct 2026 00:36:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D867E60AEC
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::330"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792197384;
+ b=NrlrpEbqih3Y0Xx1BjroPla7zVlBN79z0+xvmUjjbtDEACq8by+cfnGA6kajbttqBB7r
+ UaSoc0LDSGwF/SNfptnYJOcPgZ20DsvcIone3zk3p6f3I2cdwA5SIkvU0dluOhpv3Iyi9
+ hnw+b0WZVv5Bd16fr1XYlkDv0RJFrDXNBirtTgEq6la7g4PtMeGci5dHGYUdlA1MCvePN
+ BqruyGT+rffHxJJmUIdeG/4uDMVR0PMD3gD8LUGZpP43bAh2JsIhXp/ue0qoA+Ii1Z0R6
+ 3W7sTRr3LwpAaqzdLIYNgLvg9pqotJuisDSlB5kiX97lw4HwYT5fSUYaPUbfFTkAhvw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792197389;
+ c=relaxed/relaxed; t=1792197384;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
- bh=iQZhLjqgx9lO1GLvPgL3IqO+zAlswTkZkPyQiVt8Xrk=;
- b=ZvBCOFxGdbAshaOcsDPE0AzbfHbUHL55b6gk3hOY2TRA1HlxVQj3WNmymgBrUQ8vf9hQ
- /pXkU7IZUqLhvoPpXyJN/hVfU0tpBYBwjPkmmKtsKuD8ywgwE1/vLjO/3b2ncd3jGwCrJ
- YYdUe+vur1AnihDMRHaufiO700z6n8sqaogiKvGGEhO1feE5m5YcNhjL4UIc/IIW3YSTD
- TpS59HJ7DfVWK/QwvoANeub6/PS3xBuLwiM7WDkQkINcBXjwefY2d2udz3stWgCRKROBm
- vjG+hFJdOrAOuSZiS8DCHKAM/8g7W7oQsuPai26gS18Mwx2POu5/Pi8MOsT/hGNcbZQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=e2yXDw3Si8AlPZO422Z6UIaQ/P8DGHTmdCnwfqKa/oE=;
+ b=TVkdhsNJv67sUwojte5jUPILH/XMbVNs8ce/vN2li5cesa7V5ybVtbIFXsZQXnjyDHFj
+ f0Xj0z+vMCkt1LJ3drqSPwLtqd6Q7GrMsLcczlRnpzH2EEIRPLxE/GYdZRyQR02bugUNZ
+ Bz3a3oorcSDF4ovjc/AYSlPTLD4TBBPIEib40QR1C7WFSatH9IpXV9zPILinEKPBR2S9U
+ FKOGpIa/KcjZlp7v2bz9RlIoBKQ1UOzSZ29RP+gOCD9656/MnJHW8MygnSBWPYnsCZv2W
+ lRAHlG6VYMjcsn0qZ3UBNAm36RIrTVR5huocdiGcofItEepaE58jQY8q3gbBjmdSPTQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=RedYW3S5; 
- arc=none smtp.remote-ip="2001:4860:4864:20::29"
+ header.s=20251104 header.b="Cg/zExlU"; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::330"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::29; helo=mail-oa1-x29.google.com;
+ client-ip=2607:f8b0:4864:20::330; helo=mail-ot1-x330.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=RedYW3S5
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 45E038156F
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:28 +0000 (UTC)
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-4949f037131so299510fac.3
- for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 17:36:28 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=Cg/zExlU
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D867E60AEC
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 00:36:21 +0000 (UTC)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-81ba09a5d23so257369a34.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 16 Oct 2026 17:36:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792197388; x=1792802188;
+ d=gmail.com; s=20251104; t=1792197381; x=1792802181;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=iQZhLjqgx9lO1GLvPgL3IqO+zAlswTkZkPyQiVt8Xrk=;
- b=RedYW3S5LEj/3LLlTKybEmOJ01wlYEPyewx2asi+ugX7lCoDQKhppQM7jKQ1/0VC28
- XmkDodkCFmB04O3iDpwfIPORs4v4f7lWEalAU+BpKE+tnPl1QE35dNx0AnDkBrB3SO8l
- su5S0t1chzIzyZ1hmQSDXT7YZFo4qUUQstJrU3bCJnit6vh43BCuStitBjSw+wA+TJTf
- OEL5yQg/Mvrmp+0uHrkupt6hd3eCYMcBhhe/Y5tjdS0WFBFTLn3C17dqFXAz9/2umonn
- GAJ+jKb+XeJqhzeKBoiNZelTnP7uljyQ8FvR9B8w5fvZ/hj6iHTM/semZNU9dju9B3LV
- XFSw==
+ bh=e2yXDw3Si8AlPZO422Z6UIaQ/P8DGHTmdCnwfqKa/oE=;
+ b=Cg/zExlUn3keku+LBPxn+V9SHl7GugVWPqyGs951F9GfboBq7tI6zKQTpHUj2kGKWu
+ LFUWkkWv5KzhJg+MMFNcuAbM0ZOMEvNoTBeXrP7IcksdF0wbnyqEHNEy3KGiJgBCu8Pf
+ qENKvAM4dGN7aLZQ1jf3lfRzVVuyrkRkjM2ObcoThiVxW1GwM8WuZZpRbDKDVNALoVXN
+ 5UeYhSZ8IWGbZLt3EwtcJE6j/ULsc71H8aU36a/TELEVJXfaUd1uG/OkMmT6VT/Nvl41
+ eRN20yKneqC9Uu+LqWlaXIswDGXgxYKJVGmYcay2C9jIpahaVoUtI1FUebogSiJGzuPS
+ FzVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792197388; x=1792802188;
+ d=1e100.net; s=20260707; t=1792197381; x=1792802181;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=iQZhLjqgx9lO1GLvPgL3IqO+zAlswTkZkPyQiVt8Xrk=;
- b=DGYc4AW8ChVVJu78BcmQhmfEH1r4KFG6zRL6mOxKoTOS4mD9vWcK3HeaSiJBAmh8Wu
- qTShP9pIEuUsWC9W/nlR+Vua2cLFLBwXT0n5w6WH+lSyETVtpJ9tWjQ89/LDaWSeDblE
- avbzV8Gucj6M02akiFltkbY9LDVEtM5/AFQB1fClQ1+N/L9G8rUbbIqk5PRVGwmVYdyc
- GjR8sanjIa+qyZ49KbsEOWoDRoMAXWGWVFEJ5rpHxt6NVYL765mMsf6ywekW91Wbxd0g
- PCySimN+dMjqCLxNkB4MnaEErjuvBsmVoiJ6U2kLYczWOy/ObtkEk4bOXAeSGllZyb8v
- jlsA==
+ bh=e2yXDw3Si8AlPZO422Z6UIaQ/P8DGHTmdCnwfqKa/oE=;
+ b=LDftzmApcSaUKklIZOAMI69MPb+1ozzilNPp3XzqD1IfwrdH689JvPNhBPmTEE65g5
+ 2IOfMUM1CpgZeUko7f/oTnH0g0aRkRbKP9q7S4xoe5zWEw4IktdSVdxRtfgrqrZ0D6+4
+ cFAAkKYFqUruIBO5Hd02Z3jc77UQndp9ZcRHE7gHeeruFFk7tmtqJVFovUU3psHn+79R
+ 7bZl7dfhSrVpyuzczDUtfPQzah05oFMvbU+JgVcjb/1rPun3xGiItAuQmLiRSzI/M7vX
+ QXQ2IzpTFW9C08tkxS9MgxS5cYX5/a2ksNXacad1WLNKeU1bR5Avv7aGUGA1p22lB1dj
+ QsQQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwUSWgayh5fgBNtxFZ4rd1FCIQ5tzSIXzWn0Il5a8PT5TmyMhDAjYWAXRuMXQyTCAeEMzdu6ds=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYLk+v9/zujwj5ZNqVncCsOXJTwsxtlobeZKgHRwXyR0yMYWK6/w
- Q1FzVYYoT7QZYe915Na9sDdlls7Sd8PM+kAQUdE0VjjPTv2BwIZahK9U
-X-Gm-Gg: AYBFou0Rc8NhkOwJhNOHAHLotDgMGhoXLJHnJ0+abhEOxQgQtMReFpRQjGgXAlkXhHd
- qpLuNtQ52/6nb8zMQhXYWngQReL+3/NrD3kB5uwVEVmk0xMRvY7L1z2dt4CoSSBioTryDYWrWJz
- PeH52HvSYmqOEvA23CYLJ+W/T1fwMP4bE0EPwP/cbcGpWedjTcJodCACXvogS/caTryW+I/uYRO
- 157aiqBX0EIuH3RtgXChQkOdZK0hxaC2E6m+onULSIJPmXc7M9nET7FzNpxw8hNysSjk7Agqfsd
- aNTlCXLk4qKnAQuaxLJGvF8ZR723sxO5Sdr4cbtYDgJRi6MEi1WzOBaBXrpAHQ7Z2i6oRYOkgog
- RrzjZUkp0n1KAQwO+fawv4kJJQwDQNxl4yvO7CuGlqYFTecrnBLlo4FWoat8Qn+kO575bq26fKB
- mSFH8u3Prgbf8yUOM8Xr3Z2U98i4T2B77HFQEaidCi+2rDaxuN+tegjzlSBYHVoG+4WyOIWnfTG
- 7pEpyPMovUcZOOxmDc/QmRjnAi28I9a3xIR2pvPN++ezgNNfWRmF+VHQ2yPhVfYEa4ccasRi/vq
- qJM+zdiTT0R8+i0NjkF8QyjecBSNuCsh6OSsKG217ZB8m9KcL6EBxZITDcOxT3x7xW8EtDDZ/Ne
- bdl4deSedPOUMpFtrESvdzA==
-X-Received: by 2002:a05:6870:c0a:b0:498:f70a:b54e with SMTP id
- 586e51a60fabf-4a757a44085mr1471912fac.43.1792197387727; 
- Fri, 16 Oct 2026 17:36:27 -0700 (PDT)
+ AKwUvBxEwHMLz/rgu2tsTiTmDhyxYdXBivLPNFOPnnCNkPlI/6ettMY1+v56pytE0N0O7r+AKIvRSU8=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYLpSHeqdsLw9PDNHpMzlWSoB09V5tqXq3uey/VA4JJc85c6QmPG
+ JDRO2OToaNWBireCzCSrktEXTT4hyx8F2Z1xWuswjC1+OoTtJ5AGJF95
+X-Gm-Gg: AYBFou1bmJK7M3C1g4VDEEhDjyA/qSFuheEdM+7zjIZ8Vw+/0Ih0zCbPABjQbcuKoT+
+ HjwyJajtXsUNTspY8G7B9ke2JkvQSBm+SoUADIsiEYobMgyAt6lry9y2tOV4Opvbdtg7P/0jE09
+ ctrFbtXlLxhtCZNGPEyvCour5JdZY6Xejij8iCTGjzfixPnJblQwIXUQV605vPW4XdVwiV+OG19
+ vHsWh78vU+VZIN2PgVsMxybml02rwualofsvBT6s3x1MNxFifH87wIYQ27V3Xa9V0O3GJQtfvWa
+ 4Fn7v97bLNi0ofIivvmgkrcTPLKEyyaxWhRoL+Y1bAh68HoQQINP8QSIkHcFJuro8RjXNMgIJ9F
+ AbVv45vZYd6KqFolqqQpWKl7SXmIfhKsHjiJcHUM0ReeS095swMjYYPnaBGGzf5F/ohiskQUKUZ
+ 4mRYa7D8YrlU8E3esczzrQ58f1Jnp0Gvd1HVPxw/LbG6pBh6jMXKsXa3YjbLxrtHQNwYBsFjmYz
+ XFCMM0fvYGjpJa90Yst4P179jvMsZdJIJ1BuaUifqYOcj/joH8KyhiyPnqlcFexylIiLQn6B6ys
+ sZJJ65BPS6jQjAc2XZPw21Frsh7zeRbqN6KvBh1IiUeNlXVElFBcgExSq9XEZ/k7F9FTp9h4S5Q
+ Pqp/Kc59d46D1lzJ1NulYaQ==
+X-Received: by 2002:a05:6870:a0af:b0:494:a6ba:53de with SMTP id
+ 586e51a60fabf-4a757bc7c11mr1422281fac.60.1792197380581; 
+ Fri, 16 Oct 2026 17:36:20 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4a73b5b4291sm2745091fac.5.2026.10.16.17.36.24
+ 586e51a60fabf-4a73b5b4291sm2745091fac.5.2026.10.16.17.36.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Oct 2026 17:36:27 -0700 (PDT)
+ Fri, 16 Oct 2026 17:36:19 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Fri, 16 Oct 2026 18:35:30 -0600
-Subject: [PATCH v9 16/17] crypto: allwinner: add sun8i-ce ECDSA verifier
+Date: Fri, 16 Oct 2026 18:35:28 -0600
+Subject: [PATCH v9 14/17] lib: ecdsa: support additional curve sizes
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261016-submit-ce-series-v2-v9-16-c24e64daafe9@gmail.com>
+Message-Id: <20261016-submit-ce-series-v2-v9-14-c24e64daafe9@gmail.com>
 References: <20261016-submit-ce-series-v2-v9-0-c24e64daafe9@gmail.com>
 In-Reply-To: <20261016-submit-ce-series-v2-v9-0-c24e64daafe9@gmail.com>
 To: Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
@@ -230,589 +230,662 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The H6 and H616 Crypto Engines include an ECC engine which can verify
-ECDSA signatures. Add a UCLASS_ECDSA child for the sun8i-ce parent so FIT
-signature verification can use the hardware block from U-Boot proper and
-SPL.
+Hardware verifiers can support secp224r1 in addition to the curves already
+handled by the FIT code. Share the curve-size lookup between the host and
+target paths, add the ecdsa224 algorithm, and retain both upstream names
+for P-521: ecdsa521 and secp521r1.
 
-The CE takes explicit curve parameters for each operation. Provide tables
-for the curves accepted by U-Boot's FIT ECDSA parser: secp224r1,
-prime256v1, secp384r1 and secp521r1. Derive each curve's a = p - 3
-parameter from p instead of storing duplicate constants. Make each curve
-independently selectable for U-Boot proper and SPL. SRAM-constrained
-builds can keep only the curves they need. The task input layout follows
-the ECC verify buffer order used by Allwinner's CE implementation.
+Use BN_bn2binpad() to export public-key values without modifying the
+BIGNUM or allocating temporary arithmetic objects. Preserve the existing
+big-endian, 32-bit-cell-padded FDT encoding, including the 68-byte P-521
+coordinates. RSA key properties retain their existing encoding too.
+Keep fdt_add_bignum() errors in the libfdt namespace so callers can retry
+when the destination FDT needs to grow.
 
-The CE input buffer uses fixed-width curve fields. Reuse the parameter
-packing logic for the message digest as well, so wider digests are
-truncated to the leftmost curve-width bytes according to ECDSA rules.
-Map the private input and result through the parent's cacheline-safe DMA
-objects. Round result storage to complete cachelines while keeping the
-descriptor output curve-sized. Submit ECC work on the dedicated asymmetric
-completion channel. After retirement, unmap the result and input exactly
-once before inspecting the result.
+Clean up the libcrypto signing context so raw signatures are owned and
+freed consistently on error paths. Exercise all four curves and both
+P-521 names in the host FIT signing test, check the exported coordinate
+widths and values, and verify the signatures using the exported keys.
+
+SPL ECDSA verification uses UCLASS_ECDSA, so make SPL_ECDSA_VERIFY
+depend on SPL_DM.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
-Changes v4 -> v5:
-  - Let parent submission populate the descriptor transport fields
-  - Name fields in the fixed ECC input sequence and inline the trivial DM
-    verifier wrapper
-  - Reject missing key coordinates, digest or signature before curve lookup
-  - Use shared cacheline-safe DMA mappings and round private result storage
-    to complete cachelines
-  - Unmap the result and input before inspecting the verification result
+Changes v8 -> v9:
+  - Reconcile with upstream P-521 and software ECDSA support, preserving
+    the 32-bit-cell-padded key encoding and both P-521 algorithm names
+  - Check exported public-key coordinates and verify FIT signatures using
+    those keys in the host curve tests
+  - Drop documentation changes; the existing format description remains
+    correct with the preserved encoding
+  - Leave existing key-loading and verification diagnostics unchanged
 
 Changes v3 -> v4:
-  - Enable CE ECDSA for both H6 and H616
-  - Use the dedicated asymmetric channel and shared task-session path
-  - Derive the NIST a = p - 3 parameter instead of storing duplicate arrays
+  - Exercise secp224r1, prime256v1, secp384r1 and secp521r1 signing
 
 Changes v1 -> v2:
-  - Document the CE input-buffer layout  (suggested by Simon Glass)
-  - Document ECC byte-sized task length  (suggested by Simon Glass)
-  - Make CE ECDSA curves independently selectable
+  - Explain the RSA impact of fdt_add_bignum()  (suggested by Simon Glass)
+  - Document ECDSA public key byte-array widths  (suggested by Simon Glass)
+  - Document ecdsa_curve_size()  (suggested by Simon Glass)
+  - Keep fdt_add_bignum() errors in libfdt space
     (suggested by Simon Glass)
-  - Use neutral wording in comments and commit log
+  - Explain the SPL_DM dependency  (suggested by Simon Glass)
 ---
- drivers/crypto/allwinner/sun8i-ce/Kconfig          |  94 +++++
- drivers/crypto/allwinner/sun8i-ce/Makefile         |   1 +
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c  |   6 +
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c | 382 +++++++++++++++++++++
- drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h       |   3 +
- 5 files changed, 486 insertions(+)
+ include/u-boot/ecdsa.h          |  22 +++++++
+ include/u-boot/fdt-libcrypto.h  |   4 +-
+ lib/ecdsa/Kconfig               |   2 +-
+ lib/ecdsa/ecdsa-libcrypto.c     | 132 +++++++++++++++++++++++++---------------
+ lib/ecdsa/ecdsa-verify.c        |  26 +++-----
+ lib/fdt-libcrypto.c             |  60 ++++--------------
+ test/py/tests/test_fit_ecdsa.py |  40 +++++++++---
+ tools/image-sig-host.c          |   7 +++
+ 8 files changed, 167 insertions(+), 126 deletions(-)
 
-diff --git a/drivers/crypto/allwinner/sun8i-ce/Kconfig b/drivers/crypto/allwinner/sun8i-ce/Kconfig
-index ee011cf8280..01d58ac32fa 100644
---- a/drivers/crypto/allwinner/sun8i-ce/Kconfig
-+++ b/drivers/crypto/allwinner/sun8i-ce/Kconfig
-@@ -41,3 +41,97 @@ config SPL_SUNXI_CE_AES
- 	  Select this option to enable AES decryption in SPL using the Crypto
- 	  Engine found in Allwinner H6 and H616 compatible SoCs. This can be
- 	  used to decrypt FIT images before loading U-Boot proper.
-+
-+config SUNXI_CE_ECDSA
-+	bool "Allwinner sunxi CE ECDSA verifier"
-+	depends on ARCH_SUNXI
-+	depends on ECDSA_VERIFY
-+	depends on CLK && DM_RESET
-+	select SUNXI_CE
-+	help
-+	  Select this option to enable ECDSA signature verification using
-+	  the Crypto Engine found in Allwinner sunxi SoCs. FIT image
-+	  signatures can then be checked by the hardware accelerator in
-+	  U-Boot proper. Digests wider than the selected curve are
-+	  truncated according to ECDSA rules.
-+
-+config SPL_SUNXI_CE_ECDSA
-+	bool "Allwinner sunxi CE ECDSA verifier in SPL"
-+	depends on ARCH_SUNXI
-+	depends on MACH_SUN50I_H6 || MACH_SUN50I_H616
-+	depends on SPL_DM
-+	depends on SPL_OF_CONTROL
-+	depends on SPL_ECDSA_VERIFY
-+	select SPL_CRYPTO
-+	select SPL_SUNXI_CE
-+	help
-+	  Select this option to enable ECDSA signature verification in SPL
-+	  using the Crypto Engine found in Allwinner H6 and H616 compatible
-+	  SoCs.
-+	  This allows SPL FIT image signatures to be checked by the hardware
-+	  accelerator before U-Boot proper is loaded. Digests wider than the
-+	  selected curve are truncated according to ECDSA rules.
-+
-+if SUNXI_CE_ECDSA
-+
-+config SUNXI_CE_ECDSA_SECP224R1
-+	bool "Support secp224r1"
-+	default y
-+	help
-+	  Enable the secp224r1 curve parameters for the sunxi CE ECDSA
-+	  verifier.
-+
-+config SUNXI_CE_ECDSA_PRIME256V1
-+	bool "Support prime256v1"
-+	default y
-+	help
-+	  Enable the prime256v1 curve parameters for the sunxi CE ECDSA
-+	  verifier.
-+
-+config SUNXI_CE_ECDSA_SECP384R1
-+	bool "Support secp384r1"
-+	default y
-+	help
-+	  Enable the secp384r1 curve parameters for the sunxi CE ECDSA
-+	  verifier.
-+
-+config SUNXI_CE_ECDSA_SECP521R1
-+	bool "Support secp521r1"
-+	default y
-+	help
-+	  Enable the secp521r1 curve parameters for the sunxi CE ECDSA
-+	  verifier.
-+
-+endif
-+
-+if SPL_SUNXI_CE_ECDSA
-+
-+config SPL_SUNXI_CE_ECDSA_SECP224R1
-+	bool "Support secp224r1 in SPL"
-+	default y
-+	help
-+	  Enable the secp224r1 curve parameters for the sunxi CE ECDSA
-+	  verifier in SPL.
-+
-+config SPL_SUNXI_CE_ECDSA_PRIME256V1
-+	bool "Support prime256v1 in SPL"
-+	default y
-+	help
-+	  Enable the prime256v1 curve parameters for the sunxi CE ECDSA
-+	  verifier in SPL.
-+
-+config SPL_SUNXI_CE_ECDSA_SECP384R1
-+	bool "Support secp384r1 in SPL"
-+	default y
-+	help
-+	  Enable the secp384r1 curve parameters for the sunxi CE ECDSA
-+	  verifier in SPL.
-+
-+config SPL_SUNXI_CE_ECDSA_SECP521R1
-+	bool "Support secp521r1 in SPL"
-+	default y
-+	help
-+	  Enable the secp521r1 curve parameters for the sunxi CE ECDSA
-+	  verifier in SPL.
-+
-+endif
-diff --git a/drivers/crypto/allwinner/sun8i-ce/Makefile b/drivers/crypto/allwinner/sun8i-ce/Makefile
-index 2a8778065b1..753ea827a0d 100644
---- a/drivers/crypto/allwinner/sun8i-ce/Makefile
-+++ b/drivers/crypto/allwinner/sun8i-ce/Makefile
-@@ -2,3 +2,4 @@
+diff --git a/include/u-boot/ecdsa.h b/include/u-boot/ecdsa.h
+index f0ac0f327e9..3d70b138026 100644
+--- a/include/u-boot/ecdsa.h
++++ b/include/u-boot/ecdsa.h
+@@ -8,6 +8,7 @@
  
- obj-$(CONFIG_$(PHASE_)SUNXI_CE) += sun8i-ce-core.o
- obj-$(CONFIG_$(PHASE_)SUNXI_CE_AES) += sun8i-ce-aes.o
-+obj-$(CONFIG_$(PHASE_)SUNXI_CE_ECDSA) += sun8i-ce-ecdsa.o
-diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
-index 6c4ccf4c61f..0e5c6bf2c13 100644
---- a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
-+++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-core.c
-@@ -681,6 +681,12 @@ static int sunxi_ce_bind(struct udevice *dev)
- 			return ret;
+ #include <errno.h>
+ #include <image.h>
++#include <string.h>
+ 
+ /**
+  * crypto_algo API impementation for ECDSA;
+@@ -64,8 +65,29 @@ int ecdsa_verify(struct image_sign_info *info,
+ 		 uint8_t *sig, uint sig_len);
+ /** @} */
+ 
++#define ECDSA224_BYTES	(224 / 8)
+ #define ECDSA256_BYTES	(256 / 8)
+ #define ECDSA384_BYTES	(384 / 8)
+ #define ECDSA521_BYTES	((521 + 7) / 8)
+ 
++/**
++ * ecdsa_curve_size() - Get the size in bits for a named ECDSA curve
++ *
++ * @curve_name: OpenSSL short name for the curve
++ * Return: curve size in bits, or 0 if @curve_name is not supported
++ */
++static inline unsigned int ecdsa_curve_size(const char *curve_name)
++{
++	if (!strcmp(curve_name, "secp224r1"))
++		return 224;
++	else if (!strcmp(curve_name, "prime256v1"))
++		return 256;
++	else if (!strcmp(curve_name, "secp384r1"))
++		return 384;
++	else if (!strcmp(curve_name, "secp521r1"))
++		return 521;
++
++	return 0;
++}
++
+ #endif
+diff --git a/include/u-boot/fdt-libcrypto.h b/include/u-boot/fdt-libcrypto.h
+index b15d8a1eaf4..aa15561e225 100644
+--- a/include/u-boot/fdt-libcrypto.h
++++ b/include/u-boot/fdt-libcrypto.h
+@@ -19,9 +19,9 @@
+  * @prop_name:	What to call the property in the FDT
+  * @num:	pointer to a libcrypto big number
+  * @num_bits:	How big is 'num' in bits?
+- * Return: 0 if all good all working, -ve on horror
++ * Return: 0 on success, negative libfdt error on failure
+  */
+ int fdt_add_bignum(void *blob, int noffset, const char *prop_name,
+-		   BIGNUM *num, int num_bits);
++		   const BIGNUM *num, int num_bits);
+ 
+ #endif /* _FDT_LIBCRYPTO_H */
+diff --git a/lib/ecdsa/Kconfig b/lib/ecdsa/Kconfig
+index dac8bcf23dd..5be8f9eeac4 100644
+--- a/lib/ecdsa/Kconfig
++++ b/lib/ecdsa/Kconfig
+@@ -18,7 +18,7 @@ config ECDSA_VERIFY
+ 
+ config SPL_ECDSA_VERIFY
+ 	bool "Enable ECDSA verification support in SPL"
+-	depends on SPL
++	depends on SPL && SPL_DM
+ 	help
+ 	  Allow ECDSA signatures to be recognized and verified in SPL.
+ 
+diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
+index 5e69782424c..bb4cc89a5a5 100644
+--- a/lib/ecdsa/ecdsa-libcrypto.c
++++ b/lib/ecdsa/ecdsa-libcrypto.c
+@@ -33,7 +33,7 @@ struct signer {
+ 	EVP_PKEY *evp_key;	/* Pointer to EVP_PKEY object */
+ 	EC_KEY *ecdsa_key;	/* Pointer to EC_KEY object */
+ 	void *hash;		/* Pointer to hash used for verification */
+-	void *signature;	/* Pointer to output signature. Do not free()!*/
++	void *signature;	/* Pointer to raw signature buffer */
+ };
+ 
+ struct ecdsa_public_key {
+@@ -78,13 +78,8 @@ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+ 	if (!key->curve_name)
+ 		return -ENOMSG;
+ 
+-	if (!strcmp(key->curve_name, "prime256v1"))
+-		key->size_bits = 256;
+-	else if (!strcmp(key->curve_name, "secp384r1"))
+-		key->size_bits = 384;
+-	else if (!strcmp(key->curve_name, "secp521r1"))
+-		key->size_bits = 521;
+-	else
++	key->size_bits = ecdsa_curve_size(key->curve_name);
++	if (!key->size_bits)
+ 		return -EINVAL;
+ 
+ 	key->x = fdt_getprop(fdt, node, "ecdsa,x-point", &x_len);
+@@ -148,13 +143,8 @@ static int read_key_from_fdt(struct signer *ctx, const void *fdt, int node)
+ 		return ret;
  	}
  
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA)) {
-+		ret = sunxi_ce_bind_child(dev, "sun8i-ce-ecdsa");
-+		if (ret)
-+			return ret;
-+	}
-+
+-	if (!strcmp(pubkey.curve_name, "prime256v1")) {
+-		nid = NID_X9_62_prime256v1;
+-	} else if (!strcmp(pubkey.curve_name, "secp384r1")) {
+-		nid = NID_secp384r1;
+-	} else if (!strcmp(pubkey.curve_name, "secp521r1")) {
+-		nid = NID_secp521r1;
+-	} else {
++	nid = OBJ_sn2nid(pubkey.curve_name);
++	if (nid == NID_undef) {
+ 		fprintf(stderr, "Unsupported curve name: '%s'\n", pubkey.curve_name);
+ 		fdt_free_key(&pubkey);
+ 		return -EINVAL;
+@@ -211,7 +201,7 @@ static int read_key_from_fdt(struct signer *ctx, const void *fdt, int node)
  	return 0;
  }
  
-diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c
-new file mode 100644
-index 00000000000..f9b36347e4f
---- /dev/null
-+++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce-ecdsa.c
-@@ -0,0 +1,382 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2026 James Hilliard
-+ */
-+
-+#include <crypto/ecdsa-uclass.h>
-+#include <dm.h>
-+#include <malloc.h>
-+#include <memalign.h>
-+#include <string.h>
-+#include <linux/kernel.h>
-+#include "sun8i-ce.h"
-+
-+enum sunxi_ecdsa_field {
-+	SUNXI_ECDSA_FIELD_N,
-+	SUNXI_ECDSA_FIELD_S,
-+	SUNXI_ECDSA_FIELD_E,
-+	SUNXI_ECDSA_FIELD_R,
-+	SUNXI_ECDSA_FIELD_P,
-+	SUNXI_ECDSA_FIELD_A,
-+	SUNXI_ECDSA_FIELD_GX,
-+	SUNXI_ECDSA_FIELD_GY,
-+	SUNXI_ECDSA_FIELD_QX,
-+	SUNXI_ECDSA_FIELD_QY,
-+	SUNXI_ECDSA_FIELD_N2,
-+	SUNXI_ECDSA_FIELD_R2,
-+	SUNXI_ECDSA_FIELD_COUNT,
-+};
-+
-+#define SUNXI_ECDSA_MAX_WORDS						\
-+	(CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP521R1) ? 17 :		\
-+	 CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP384R1) ? 12 :		\
-+	 CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_PRIME256V1) ? 8 :		\
-+	 CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP224R1) ? 7 : 1)
-+#define SUNXI_ECDSA_MAX_BYTES		(SUNXI_ECDSA_MAX_WORDS * sizeof(u32))
-+#define SUNXI_ECDSA_MAX_SRC_BYTES	\
-+	(SUNXI_ECDSA_FIELD_COUNT * SUNXI_ECDSA_MAX_BYTES)
-+#define SUNXI_ECDSA_MAX_DST_BYTES	ALIGN(SUNXI_ECDSA_MAX_BYTES, \
-+					      ARCH_DMA_MINALIGN)
-+
-+struct sunxi_ecdsa_job {
-+	struct sunxi_ce_task task __aligned(ARCH_DMA_MINALIGN);
-+	u8 src[SUNXI_ECDSA_MAX_SRC_BYTES] __aligned(ARCH_DMA_MINALIGN);
-+	u8 dst[SUNXI_ECDSA_MAX_DST_BYTES] __aligned(ARCH_DMA_MINALIGN);
-+};
-+
-+struct sunxi_ecdsa_curve {
-+	/* p, Gx, Gy and n as consecutive big-endian curve-width values. */
-+	const u8 *params;
-+	u16 bits;
-+	u8 bytes;
-+	u8 words;
-+};
-+
-+static const u8 ecdsa_p224_params[] = {
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+	0x00, 0x00, 0x00, 0x01,
-+	/* Gx */
-+	0xb7, 0x0e, 0x0c, 0xbd, 0x6b, 0xb4, 0xbf, 0x7f,
-+	0x32, 0x13, 0x90, 0xb9, 0x4a, 0x03, 0xc1, 0xd3,
-+	0x56, 0xc2, 0x11, 0x22, 0x34, 0x32, 0x80, 0xd6,
-+	0x11, 0x5c, 0x1d, 0x21,
-+	/* Gy */
-+	0xbd, 0x37, 0x63, 0x88, 0xb5, 0xf7, 0x23, 0xfb,
-+	0x4c, 0x22, 0xdf, 0xe6, 0xcd, 0x43, 0x75, 0xa0,
-+	0x5a, 0x07, 0x47, 0x64, 0x44, 0xd5, 0x81, 0x99,
-+	0x85, 0x00, 0x7e, 0x34,
-+	/* n */
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x16, 0xa2,
-+	0xe0, 0xb8, 0xf0, 0x3e, 0x13, 0xdd, 0x29, 0x45,
-+	0x5c, 0x5c, 0x2a, 0x3d,
-+};
-+
-+static const u8 ecdsa_p256_params[] = {
-+	0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x01,
-+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-+	0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	/* Gx */
-+	0x6b, 0x17, 0xd1, 0xf2, 0xe1, 0x2c, 0x42, 0x47,
-+	0xf8, 0xbc, 0xe6, 0xe5, 0x63, 0xa4, 0x40, 0xf2,
-+	0x77, 0x03, 0x7d, 0x81, 0x2d, 0xeb, 0x33, 0xa0,
-+	0xf4, 0xa1, 0x39, 0x45, 0xd8, 0x98, 0xc2, 0x96,
-+	/* Gy */
-+	0x4f, 0xe3, 0x42, 0xe2, 0xfe, 0x1a, 0x7f, 0x9b,
-+	0x8e, 0xe7, 0xeb, 0x4a, 0x7c, 0x0f, 0x9e, 0x16,
-+	0x2b, 0xce, 0x33, 0x57, 0x6b, 0x31, 0x5e, 0xce,
-+	0xcb, 0xb6, 0x40, 0x68, 0x37, 0xbf, 0x51, 0xf5,
-+	/* n */
-+	0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xbc, 0xe6, 0xfa, 0xad, 0xa7, 0x17, 0x9e, 0x84,
-+	0xf3, 0xb9, 0xca, 0xc2, 0xfc, 0x63, 0x25, 0x51,
-+};
-+
-+static const u8 ecdsa_p384_params[] = {
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xfe,
-+	0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00,
-+	0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff,
-+	/* Gx */
-+	0xaa, 0x87, 0xca, 0x22, 0xbe, 0x8b, 0x05, 0x37,
-+	0x8e, 0xb1, 0xc7, 0x1e, 0xf3, 0x20, 0xad, 0x74,
-+	0x6e, 0x1d, 0x3b, 0x62, 0x8b, 0xa7, 0x9b, 0x98,
-+	0x59, 0xf7, 0x41, 0xe0, 0x82, 0x54, 0x2a, 0x38,
-+	0x55, 0x02, 0xf2, 0x5d, 0xbf, 0x55, 0x29, 0x6c,
-+	0x3a, 0x54, 0x5e, 0x38, 0x72, 0x76, 0x0a, 0xb7,
-+	/* Gy */
-+	0x36, 0x17, 0xde, 0x4a, 0x96, 0x26, 0x2c, 0x6f,
-+	0x5d, 0x9e, 0x98, 0xbf, 0x92, 0x92, 0xdc, 0x29,
-+	0xf8, 0xf4, 0x1d, 0xbd, 0x28, 0x9a, 0x14, 0x7c,
-+	0xe9, 0xda, 0x31, 0x13, 0xb5, 0xf0, 0xb8, 0xc0,
-+	0x0a, 0x60, 0xb1, 0xce, 0x1d, 0x7e, 0x81, 0x9d,
-+	0x7a, 0x43, 0x1d, 0x7c, 0x90, 0xea, 0x0e, 0x5f,
-+	/* n */
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xc7, 0x63, 0x4d, 0x81, 0xf4, 0x37, 0x2d, 0xdf,
-+	0x58, 0x1a, 0x0d, 0xb2, 0x48, 0xb0, 0xa7, 0x7a,
-+	0xec, 0xec, 0x19, 0x6a, 0xcc, 0xc5, 0x29, 0x73,
-+};
-+
-+static const u8 ecdsa_p521_params[] = {
-+	0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff,
-+	/* Gx */
-+	0x00, 0xc6, 0x85, 0x8e, 0x06, 0xb7, 0x04, 0x04,
-+	0xe9, 0xcd, 0x9e, 0x3e, 0xcb, 0x66, 0x23, 0x95,
-+	0xb4, 0x42, 0x9c, 0x64, 0x81, 0x39, 0x05, 0x3f,
-+	0xb5, 0x21, 0xf8, 0x28, 0xaf, 0x60, 0x6b, 0x4d,
-+	0x3d, 0xba, 0xa1, 0x4b, 0x5e, 0x77, 0xef, 0xe7,
-+	0x59, 0x28, 0xfe, 0x1d, 0xc1, 0x27, 0xa2, 0xff,
-+	0xa8, 0xde, 0x33, 0x48, 0xb3, 0xc1, 0x85, 0x6a,
-+	0x42, 0x9b, 0xf9, 0x7e, 0x7e, 0x31, 0xc2, 0xe5,
-+	0xbd, 0x66,
-+	/* Gy */
-+	0x01, 0x18, 0x39, 0x29, 0x6a, 0x78, 0x9a, 0x3b,
-+	0xc0, 0x04, 0x5c, 0x8a, 0x5f, 0xb4, 0x2c, 0x7d,
-+	0x1b, 0xd9, 0x98, 0xf5, 0x44, 0x49, 0x57, 0x9b,
-+	0x44, 0x68, 0x17, 0xaf, 0xbd, 0x17, 0x27, 0x3e,
-+	0x66, 0x2c, 0x97, 0xee, 0x72, 0x99, 0x5e, 0xf4,
-+	0x26, 0x40, 0xc5, 0x50, 0xb9, 0x01, 0x3f, 0xad,
-+	0x07, 0x61, 0x35, 0x3c, 0x70, 0x86, 0xa2, 0x72,
-+	0xc2, 0x40, 0x88, 0xbe, 0x94, 0x76, 0x9f, 0xd1,
-+	0x66, 0x50,
-+	/* n */
-+	0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-+	0xff, 0xfa, 0x51, 0x86, 0x87, 0x83, 0xbf, 0x2f,
-+	0x96, 0x6b, 0x7f, 0xcc, 0x01, 0x48, 0xf7, 0x09,
-+	0xa5, 0xd0, 0x3b, 0xb5, 0xc9, 0xb8, 0x89, 0x9c,
-+	0x47, 0xae, 0xbb, 0x6f, 0xb7, 0x1e, 0x91, 0x38,
-+	0x64, 0x09,
-+};
-+
-+static const struct sunxi_ecdsa_curve sunxi_ecdsa_secp224r1 = {
-+	.bits = 224,
-+	.bytes = 28,
-+	.words = 7,
-+	.params = ecdsa_p224_params,
-+};
-+
-+static const struct sunxi_ecdsa_curve sunxi_ecdsa_prime256v1 = {
-+	.bits = 256,
-+	.bytes = 32,
-+	.words = 8,
-+	.params = ecdsa_p256_params,
-+};
-+
-+static const struct sunxi_ecdsa_curve sunxi_ecdsa_secp384r1 = {
-+	.bits = 384,
-+	.bytes = 48,
-+	.words = 12,
-+	.params = ecdsa_p384_params,
-+};
-+
-+static const struct sunxi_ecdsa_curve sunxi_ecdsa_secp521r1 = {
-+	.bits = 521,
-+	.bytes = 66,
-+	.words = 17,
-+	.params = ecdsa_p521_params,
-+};
-+
-+static const struct sunxi_ecdsa_curve *
-+sunxi_ecdsa_find_curve(const struct ecdsa_public_key *pubkey)
-+{
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP224R1) &&
-+	    !strcmp(pubkey->curve_name, "secp224r1"))
-+		return &sunxi_ecdsa_secp224r1;
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_PRIME256V1) &&
-+	    !strcmp(pubkey->curve_name, "prime256v1"))
-+		return &sunxi_ecdsa_prime256v1;
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP384R1) &&
-+	    !strcmp(pubkey->curve_name, "secp384r1"))
-+		return &sunxi_ecdsa_secp384r1;
-+	if (CONFIG_IS_ENABLED(SUNXI_CE_ECDSA_SECP521R1) &&
-+	    !strcmp(pubkey->curve_name, "secp521r1"))
-+		return &sunxi_ecdsa_secp521r1;
-+
-+	return NULL;
+-static int alloc_ctx(struct signer *ctx, const struct image_sign_info *info)
++static int init_ctx(struct signer *ctx)
+ {
+ 	memset(ctx, 0, sizeof(*ctx));
+ 
+@@ -220,11 +210,21 @@ static int alloc_ctx(struct signer *ctx, const struct image_sign_info *info)
+ 		return -1;
+ 	}
+ 
++	return 0;
 +}
 +
-+static u8 *sunxi_ecdsa_copy_le_param(u8 *dst,
-+				     const struct sunxi_ecdsa_curve *curve,
-+				     const void *src, size_t len)
++static int alloc_sig_ctx(struct signer *ctx, const struct image_sign_info *info)
 +{
-+	const u8 *p = src;
-+	size_t copy_len;
-+	int i;
-+
-+	copy_len = min_t(size_t, len, curve->bytes);
-+	for (i = 0; i < copy_len; i++)
-+		dst[i] = p[copy_len - 1 - i];
-+
-+	return dst + curve->words * sizeof(u32);
-+}
-+
-+static void sunxi_ecdsa_fill_src(struct sunxi_ecdsa_job *job,
-+				 const struct sunxi_ecdsa_curve *curve,
-+				 const struct ecdsa_public_key *pubkey,
-+				 const void *hash, size_t hash_len,
-+				 const void *signature)
-+{
-+	const u8 *r = signature;
-+	const u8 *s = r + curve->bytes;
-+	const u8 *p = curve->params;
-+	const u8 *gx = p + curve->bytes;
-+	const u8 *gy = gx + curve->bytes;
-+	const u8 *n = gy + curve->bytes;
-+	const void *params[SUNXI_ECDSA_FIELD_COUNT] = {
-+		[SUNXI_ECDSA_FIELD_N] = n,
-+		[SUNXI_ECDSA_FIELD_S] = s,
-+		[SUNXI_ECDSA_FIELD_E] = hash,
-+		[SUNXI_ECDSA_FIELD_R] = r,
-+		[SUNXI_ECDSA_FIELD_P] = p,
-+		[SUNXI_ECDSA_FIELD_A] = p,
-+		[SUNXI_ECDSA_FIELD_GX] = gx,
-+		[SUNXI_ECDSA_FIELD_GY] = gy,
-+		[SUNXI_ECDSA_FIELD_QX] = pubkey->x,
-+		[SUNXI_ECDSA_FIELD_QY] = pubkey->y,
-+		[SUNXI_ECDSA_FIELD_N2] = n,
-+		[SUNXI_ECDSA_FIELD_R2] = r,
-+	};
-+	u8 *dst = job->src;
-+	u32 i;
-+
-+	/*
-+	 * The CE manual specifies this fixed sequence of little-endian
-+	 * curve-width fields for ECC signature verification:
-+	 *
-+	 *   n, s, e, r, p, a, Gx, Gy, Qx, Qy, n, r
-+	 */
-+	for (i = 0; i < ARRAY_SIZE(params); i++) {
-+		u8 *field = dst;
-+		size_t len = i == SUNXI_ECDSA_FIELD_E ? hash_len : curve->bytes;
-+
-+		dst = sunxi_ecdsa_copy_le_param(dst, curve, params[i], len);
-+		if (i == SUNXI_ECDSA_FIELD_A) {
-+			u32 borrow;
-+
-+			/* All supported NIST curves use a = p - 3. */
-+			for (borrow = 3; borrow; field++) {
-+				u8 val = *field;
-+
-+				*field = val - borrow;
-+				borrow = val < borrow;
-+			}
-+		}
+ 	ctx->hash = malloc(info->checksum->checksum_len);
+ 	ctx->signature = malloc(info->crypto->key_len * 2);
+ 
+-	if (!ctx->hash || !ctx->signature)
++	if (!ctx->hash || !ctx->signature) {
++		free(ctx->hash);
++		free(ctx->signature);
++		ctx->hash = NULL;
++		ctx->signature = NULL;
+ 		return -ENOMEM;
 +	}
-+}
-+
-+static void sunxi_ecdsa_fill_task(struct sunxi_ce_priv *priv,
-+				  struct sunxi_ecdsa_job *job,
-+				  const struct sunxi_ecdsa_curve *curve,
-+				  dma_addr_t src, dma_addr_t dst)
-+{
-+	struct sunxi_ce_task *task = &job->task;
-+	u32 bytes = curve->words * sizeof(u32);
-+
-+	task->t_asym_ctl = curve->words |
-+			   (SUNXI_CE_ECC_OP_VERIFY << SUNXI_CE_ECC_OP_SHIFT);
-+	/* The ECC engine uses a byte-sized task length. */
-+	task->t_dlen = SUNXI_ECDSA_FIELD_COUNT * bytes;
-+	task->t_src[0].addr = sunxi_ce_desc_dma_addr(priv, src);
-+	task->t_src[0].len = task->t_dlen / sizeof(u32);
-+	task->t_dst[0].addr = sunxi_ce_desc_dma_addr(priv, dst);
-+	task->t_dst[0].len = curve->words;
-+}
-+
-+static int sunxi_ecdsa_run(struct sunxi_ce_priv *priv,
-+			   struct sunxi_ecdsa_job *job,
-+			   const struct sunxi_ecdsa_curve *curve)
-+{
-+	size_t dst_len = curve->words * sizeof(u32);
-+	size_t src_len = SUNXI_ECDSA_FIELD_COUNT * dst_len;
-+	struct sunxi_ce_dma_buf src_dma = { };
-+	struct sunxi_ce_dma_buf dst_dma = { };
-+	u32 result;
-+	int ret;
-+
-+	ret = sunxi_ce_dma_map(priv, &src_dma, job->src, src_len,
-+			       DMA_TO_DEVICE);
-+	if (ret)
-+		goto out;
-+	ret = sunxi_ce_dma_map(priv, &dst_dma, job->dst, sizeof(job->dst),
-+			       DMA_FROM_DEVICE);
-+	if (ret)
-+		goto out;
-+
-+	sunxi_ecdsa_fill_task(priv, job, curve, src_dma.dma, dst_dma.dma);
-+
-+	ret = sunxi_ce_run_task(priv, SUNXI_CE_CHANNEL_ASYM,
-+				SUNXI_CE_METHOD_ECC, &job->task);
-+
-+out:
-+	sunxi_ce_dma_unmap(&dst_dma);
-+	sunxi_ce_dma_unmap(&src_dma);
+ 
+ 	return 0;
+ }
+@@ -237,8 +237,8 @@ static void free_ctx(struct signer *ctx)
+ 	if (ctx->evp_key)
+ 		EVP_PKEY_free(ctx->evp_key);
+ 
+-	if (ctx->hash)
+-		free(ctx->hash);
++	free(ctx->hash);
++	free(ctx->signature);
+ }
+ 
+ /*
+@@ -274,7 +274,12 @@ static ECDSA_SIG *ecdsa_sig_from_raw(void *buf, size_t order)
+ 	s_buf = (uintptr_t)buf + point_bytes;
+ 	r = BN_bin2bn(buf, point_bytes, NULL);
+ 	s = BN_bin2bn((void *)s_buf, point_bytes, NULL);
+-	ECDSA_SIG_set0(sig, r, s);
++	if (!r || !s || !ECDSA_SIG_set0(sig, r, s)) {
++		BN_free(r);
++		BN_free(s);
++		ECDSA_SIG_free(sig);
++		return NULL;
++	}
+ 
+ 	return sig;
+ }
+@@ -342,10 +347,6 @@ static int load_key_from_fdt(struct signer *ctx, const struct image_sign_info *i
+ 	if (!fdt)
+ 		return -EINVAL;
+ 
+-	ret = alloc_ctx(ctx, info);
+-	if (ret)
+-		return ret;
+-
+ 	sig_node = fdt_subnode_offset(fdt, 0, FIT_SIG_NODENAME);
+ 	if (sig_node < 0) {
+ 		fprintf(stderr, "No /signature node found\n");
+@@ -402,7 +403,9 @@ static int prepare_ctx(struct signer *ctx, const struct image_sign_info *info)
+ 	int key_len_bytes, ret;
+ 	char kname[1024];
+ 
+-	memset(ctx, 0, sizeof(*ctx));
++	ret = init_ctx(ctx);
 +	if (ret)
 +		return ret;
-+
-+	result = *(u32 *)job->dst;
-+
-+	return result == 1 ? 0 : -EPERM;
-+}
-+
-+static int sunxi_ecdsa_verify_dm(struct udevice *dev,
-+				 const struct ecdsa_public_key *pubkey,
-+				 const void *hash, size_t hash_len,
-+				 const void *signature, size_t sig_len)
-+{
-+	struct sunxi_ce_priv *priv = dev_get_priv(dev_get_parent(dev));
-+	const struct sunxi_ecdsa_curve *curve;
-+	struct sunxi_ecdsa_job *job;
+ 
+ 	if (info->fdt_blob) {
+ 		return load_key_from_fdt(ctx, info);
+@@ -416,10 +419,6 @@ static int prepare_ctx(struct signer *ctx, const struct image_sign_info *info)
+ 		return -EINVAL;
+ 	}
+ 
+-	ret = alloc_ctx(ctx, info);
+-	if (ret)
+-		return ret;
+-
+ 	ret = read_key(ctx, kname);
+ 	if (ret)
+ 		return ret;
+@@ -439,11 +438,18 @@ static int do_sign(struct signer *ctx, struct image_sign_info *info,
+ {
+ 	const struct checksum_algo *algo = info->checksum;
+ 	ECDSA_SIG *sig;
 +	int ret;
 +
-+	if (!priv || !pubkey || !pubkey->curve_name || !pubkey->x ||
-+	    !pubkey->y || !hash || !hash_len || !signature)
-+		return -EINVAL;
++	ret = algo->calculate(algo->name, region, region_count, ctx->hash);
++	if (ret)
++		return ret;
+ 
+-	algo->calculate(algo->name, region, region_count, ctx->hash);
+ 	sig = ECDSA_do_sign(ctx->hash, algo->checksum_len, ctx->ecdsa_key);
++	if (!sig)
++		return -EIO;
+ 
+ 	ecdsa_sig_encode_raw(ctx->signature, sig, info->crypto->key_len);
++	ECDSA_SIG_free(sig);
+ 
+ 	return 0;
+ }
+@@ -461,9 +467,15 @@ static int ecdsa_check_signature(struct signer *ctx, struct image_sign_info *inf
+ 			       sig, ctx->ecdsa_key);
+ 	if (!okay)
+ 		fprintf(stderr, "WARNING: Signature is fake news!\n");
++	else if (okay < 0)
++		fprintf(stderr, "ERROR: ECDSA signature verification failed\n");
+ 
+ 	ECDSA_SIG_free(sig);
+-	return !okay;
 +
-+	curve = sunxi_ecdsa_find_curve(pubkey);
-+	if (!curve || pubkey->size_bits != curve->bits ||
-+	    sig_len != curve->bytes * 2)
-+		return -EINVAL;
++	if (okay == 1)
++		return 0;
 +
-+	job = malloc_cache_aligned(sizeof(*job));
-+	if (!job)
-+		return -ENOMEM;
++	return okay < 0 ? -EIO : -EPERM;
+ }
+ 
+ static int do_verify(struct signer *ctx, struct image_sign_info *info,
+@@ -471,6 +483,7 @@ static int do_verify(struct signer *ctx, struct image_sign_info *info,
+ 		     uint8_t *raw_sig, uint sig_len)
+ {
+ 	const struct checksum_algo *algo = info->checksum;
++	int ret;
+ 
+ 	if (sig_len != info->crypto->key_len * 2) {
+ 		fprintf(stderr, "Signature has wrong length\n");
+@@ -478,7 +491,9 @@ static int do_verify(struct signer *ctx, struct image_sign_info *info,
+ 	}
+ 
+ 	memcpy(ctx->signature, raw_sig, sig_len);
+-	algo->calculate(algo->name, region, region_count, ctx->hash);
++	ret = algo->calculate(algo->name, region, region_count, ctx->hash);
++	if (ret)
++		return ret;
+ 
+ 	return ecdsa_check_signature(ctx, info);
+ }
+@@ -491,11 +506,16 @@ int ecdsa_sign(struct image_sign_info *info, const struct image_region region[],
+ 
+ 	ret = prepare_ctx(&ctx, info);
+ 	if (ret >= 0) {
+-		do_sign(&ctx, info, region, region_count);
+-		*sigp = ctx.signature;
+-		*sig_len = info->crypto->key_len * 2;
+-
+-		ret = ecdsa_check_signature(&ctx, info);
++		ret = alloc_sig_ctx(&ctx, info);
++		if (!ret)
++			ret = do_sign(&ctx, info, region, region_count);
++		if (!ret)
++			ret = ecdsa_check_signature(&ctx, info);
++		if (!ret) {
++			*sigp = ctx.signature;
++			*sig_len = info->crypto->key_len * 2;
++			ctx.signature = NULL;
++		}
+ 	}
+ 
+ 	free_ctx(&ctx);
+@@ -510,8 +530,12 @@ int ecdsa_verify(struct image_sign_info *info,
+ 	int ret;
+ 
+ 	ret = prepare_ctx(&ctx, info);
+-	if (ret >= 0)
+-		ret = do_verify(&ctx, info, region, region_count, sig, sig_len);
++	if (ret >= 0) {
++		ret = alloc_sig_ctx(&ctx, info);
++		if (!ret)
++			ret = do_verify(&ctx, info, region, region_count,
++					sig, sig_len);
++	}
+ 
+ 	free_ctx(&ctx);
+ 	return ret;
+@@ -577,42 +601,54 @@ static int do_add(struct signer *ctx, void *fdt, const char *key_node_name,
+ 	group = EC_KEY_get0_group(ctx->ecdsa_key);
+ 	key_bits = EC_GROUP_order_bits(group);
+ 	curve_name = OBJ_nid2sn(EC_GROUP_get_curve_name(group));
+-	/* Let 'x' and 'y' memory leak by not BN_free()'ing them. */
+ 	x = BN_new();
+ 	y = BN_new();
++	if (!x || !y) {
++		ret = -ENOMEM;
++		goto out;
++	}
 +
-+	memset(job, 0, sizeof(*job));
-+	sunxi_ecdsa_fill_src(job, curve, pubkey, hash, hash_len, signature);
+ 	point = EC_KEY_get0_public_key(ctx->ecdsa_key);
+-	EC_POINT_get_affine_coordinates(group, point, x, y, NULL);
++	if (!EC_POINT_get_affine_coordinates(group, point, x, y, NULL)) {
++		ret = -EINVAL;
++		goto out;
++	}
+ 
+ 	ret = fdt_setprop_string(fdt, key_node, FIT_KEY_HINT,
+ 				 info->keyname);
+ 	if (ret < 0)
+-		return ret;
++		goto out;
+ 
+ 	ret = fdt_setprop_string(fdt, key_node, "ecdsa,curve", curve_name);
+ 	if (ret < 0)
+-		return ret;
++		goto out;
+ 
+ 	ret = fdt_add_bignum(fdt, key_node, "ecdsa,x-point", x, key_bits);
+ 	if (ret < 0)
+-		return ret;
++		goto out;
+ 
+ 	ret = fdt_add_bignum(fdt, key_node, "ecdsa,y-point", y, key_bits);
+ 	if (ret < 0)
+-		return ret;
++		goto out;
+ 
+ 	ret = fdt_setprop_string(fdt, key_node, FIT_ALGO_PROP,
+ 				 info->name);
+ 	if (ret < 0)
+-		return ret;
++		goto out;
+ 
+ 	if (info->require_keys) {
+ 		ret = fdt_setprop_string(fdt, key_node, FIT_KEY_REQUIRED,
+ 					 info->require_keys);
+ 		if (ret < 0)
+-			return ret;
++			goto out;
+ 	}
+ 
+-	return key_node;
++	ret = key_node;
 +
-+	ret = sunxi_ecdsa_run(priv, job, curve);
-+	free(job);
-+
++out:
++	BN_free(x);
++	BN_free(y);
 +	return ret;
-+}
-+
-+static const struct ecdsa_ops sunxi_ecdsa_ops = {
-+	.verify = sunxi_ecdsa_verify_dm,
+ }
+ 
+ int ecdsa_add_verify_data(struct image_sign_info *info, void *fdt)
+diff --git a/lib/ecdsa/ecdsa-verify.c b/lib/ecdsa/ecdsa-verify.c
+index 341486de2d3..26e8590cd4a 100644
+--- a/lib/ecdsa/ecdsa-verify.c
++++ b/lib/ecdsa/ecdsa-verify.c
+@@ -13,24 +13,6 @@
+ #include <malloc.h>
+ #include <u-boot/ecdsa.h>
+ 
+-/*
+- * Derive size of an ECDSA key from the curve name
+- *
+- * While it's possible to extract the key size by using string manipulation,
+- * use a list of known curves for the time being.
+- */
+-static int ecdsa_key_size(const char *curve_name)
+-{
+-	if (!strcmp(curve_name, "prime256v1"))
+-		return 256;
+-	else if (!strcmp(curve_name, "secp384r1"))
+-		return 384;
+-	else if (!strcmp(curve_name, "secp521r1"))
+-		return 521;
+-
+-	return 0;
+-}
+-
+ /*
+  * This function fills keys with valid pointers (x and y) so
+  * the caller must then free those pointers with fdt_free_key().
+@@ -49,7 +31,7 @@ static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, int node)
+ 		return -ENOMSG;
+ 	}
+ 
+-	key->size_bits = ecdsa_key_size(key->curve_name);
++	key->size_bits = ecdsa_curve_size(key->curve_name);
+ 	if (key->size_bits == 0) {
+ 		debug("Unknown ECDSA curve '%s'", key->curve_name);
+ 		return -EINVAL;
+@@ -174,6 +156,12 @@ int ecdsa_verify(struct image_sign_info *info,
+ 	return ecdsa_verify_hash(dev, info, hash, sig, sig_len);
+ }
+ 
++U_BOOT_CRYPTO_ALGO(ecdsa224) = {
++	.name = "ecdsa224",
++	.key_len = ECDSA224_BYTES,
++	.verify = ecdsa_verify,
 +};
 +
-+U_BOOT_DRIVER(sun8i_ce_ecdsa) = {
-+	.name = "sun8i-ce-ecdsa",
-+	.id = UCLASS_ECDSA,
-+	.ops = &sunxi_ecdsa_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
-diff --git a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
-index d0035af559a..d5b7edd357d 100644
---- a/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
-+++ b/drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h
-@@ -21,6 +21,9 @@
- #define SUNXI_CE_COMM_INT		BIT(31)
- #define SUNXI_CE_METHOD_AES		0
- #define SUNXI_CE_METHOD_RAES		0x30
-+#define SUNXI_CE_METHOD_ECC		33
-+#define SUNXI_CE_ECC_OP_VERIFY		7
-+#define SUNXI_CE_ECC_OP_SHIFT		16
- #define SUNXI_CE_MAX_SG			8
- #define SUNXI_CE_MAX_CHANS		4
- #define SUNXI_CE_CHAN_ERR_MASK(x)	(0xffU << ((x) * 8))
+ U_BOOT_CRYPTO_ALGO(ecdsa256) = {
+ 	.name = "ecdsa256",
+ 	.key_len = ECDSA256_BYTES,
+diff --git a/lib/fdt-libcrypto.c b/lib/fdt-libcrypto.c
+index 090246b44e9..bd9d0907a0e 100644
+--- a/lib/fdt-libcrypto.c
++++ b/lib/fdt-libcrypto.c
+@@ -5,68 +5,34 @@
+  */
+ 
+ #include <libfdt.h>
++#include <stdio.h>
++#include <stdlib.h>
+ #include <u-boot/fdt-libcrypto.h>
+ 
+ int fdt_add_bignum(void *blob, int noffset, const char *prop_name,
+-		   BIGNUM *num, int num_bits)
++		   const BIGNUM *num, int num_bits)
+ {
+-	int nwords = (num_bits + 31) / 32;
+-	int size;
+-	uint32_t *buf, *ptr;
+-	BIGNUM *tmp, *big2, *big32, *big2_32;
+-	BN_CTX *ctx;
++	int size = ((num_bits + 31) / 32) * sizeof(uint32_t);
++	unsigned char *buf;
+ 	int ret;
+ 
+-	tmp = BN_new();
+-	big2 = BN_new();
+-	big32 = BN_new();
+-	big2_32 = BN_new();
++	if (size <= 0)
++		return -FDT_ERR_BADVALUE;
+ 
+-	/*
+-	 * Note: This code assumes that all of the above succeed, or all fail.
+-	 * In practice memory allocations generally do not fail (unless the
+-	 * process is killed), so it does not seem worth handling each of these
+-	 * as a separate case. Technicaly this could leak memory on failure,
+-	 * but a) it won't happen in practice, and b) it doesn't matter as we
+-	 * will immediately exit with a failure code.
+-	 */
+-	if (!tmp || !big2 || !big32 || !big2_32) {
+-		fprintf(stderr, "Out of memory (bignum)\n");
+-		return -ENOMEM;
+-	}
+-	ctx = BN_CTX_new();
+-	if (!ctx) {
+-		fprintf(stderr, "Out of memory (bignum context)\n");
+-		return -ENOMEM;
+-	}
+-	BN_set_word(big2, 2L);
+-	BN_set_word(big32, 32L);
+-	BN_exp(big2_32, big2, big32, ctx); /* B = 2^32 */
+-
+-	size = nwords * sizeof(uint32_t);
+ 	buf = malloc(size);
+ 	if (!buf) {
+ 		fprintf(stderr, "Out of memory (%d bytes)\n", size);
+-		return -ENOMEM;
++		return -FDT_ERR_NOSPACE;
+ 	}
+ 
+-	/* Write out modulus as big endian array of integers */
+-	for (ptr = buf + nwords - 1; ptr >= buf; ptr--) {
+-		BN_mod(tmp, num, big2_32, ctx); /* n = N mod B */
+-		*ptr = cpu_to_fdt32(BN_get_word(tmp));
+-		BN_rshift(num, num, 32); /*  N = N/B */
++	if (BN_bn2binpad(num, buf, size) != size) {
++		free(buf);
++		return -FDT_ERR_BADVALUE;
+ 	}
+ 
+-	/*
+-	 * We try signing with successively increasing size values, so this
+-	 * might fail several times
+-	 */
++	/* Callers may retry with a larger FDT if the property does not fit. */
+ 	ret = fdt_setprop(blob, noffset, prop_name, buf, size);
+ 	free(buf);
+-	BN_free(tmp);
+-	BN_free(big2);
+-	BN_free(big32);
+-	BN_free(big2_32);
+ 
+-	return ret ? -FDT_ERR_NOSPACE : 0;
++	return ret;
+ }
+diff --git a/test/py/tests/test_fit_ecdsa.py b/test/py/tests/test_fit_ecdsa.py
+index e59390374af..d1180d5ecfd 100644
+--- a/test/py/tests/test_fit_ecdsa.py
++++ b/test/py/tests/test_fit_ecdsa.py
+@@ -11,6 +11,7 @@ This test doesn't run the sandbox. It only checks the host tool 'mkimage'
+ """
+ 
+ import os
++import shutil
+ import pytest
+ import utils
+ from Cryptodome.Hash import SHA256
+@@ -50,12 +51,13 @@ class SignableFitImage(object):
+ 
+         return self.signable_nodes
+ 
+-    def change_signature_algo_to_ecdsa(self):
++    def change_signature_algo_to_ecdsa(self, algo):
+         for image in self.signable_nodes:
+-            self.__fdt_set(f'{image}/signature', algo='sha256,ecdsa256')
++            self.__fdt_set(f'{image}/signature', algo=f'sha256,{algo}')
+ 
+-    def sign(self, mkimage, key_file):
+-        utils.run_and_log(self.ubman, [mkimage, '-F', self.fit, f'-G{key_file}'])
++    def sign(self, mkimage, key_file, key_dest):
++        utils.run_and_log(self.ubman, [mkimage, '-F', self.fit, f'-G{key_file}',
++                                      '-K', key_dest, '-r'])
+ 
+     def check_signatures(self, key):
+         for image in self.signable_nodes:
+@@ -71,10 +73,17 @@ class SignableFitImage(object):
+ @pytest.mark.requiredtool('dtc')
+ @pytest.mark.requiredtool('fdtget')
+ @pytest.mark.requiredtool('fdtput')
+-def test_fit_ecdsa(ubman):
++@pytest.mark.parametrize('curve, algo', (
++    ('secp224r1', 'ecdsa224'),
++    ('prime256v1', 'ecdsa256'),
++    ('secp384r1', 'ecdsa384'),
++    ('secp521r1', 'ecdsa521'),
++    ('secp521r1', 'secp521r1'),
++))
++def test_fit_ecdsa(ubman, curve, algo):
+     """ Test that signatures generated by mkimage are legible. """
+     def generate_ecdsa_key():
+-        return ECC.generate(curve='prime256v1')
++        return ECC.generate(curve=curve)
+ 
+     def assemble_fit_image(dest_fit, its, destdir):
+         dtc_args = f'-I dts -O dtb -i {destdir}'
+@@ -86,11 +95,13 @@ def test_fit_ecdsa(ubman):
+ 
+     mkimage = ubman.config.build_dir + '/tools/mkimage'
+     datadir = ubman.config.source_dir + '/test/py/tests/vboot/'
+-    tempdir = os.path.join(ubman.config.result_dir, 'ecdsa')
++    tempdir = os.path.join(ubman.config.result_dir, f'ecdsa-{algo}')
+     os.makedirs(tempdir, exist_ok=True)
+     key_file = f'{tempdir}/ecdsa-test-key.pem'
+     fit_file = f'{tempdir}/test.fit'
+     dtc('sandbox-kernel.dts')
++    key_dest = f'{tempdir}/key.dtb'
++    shutil.copyfile(f'{tempdir}/sandbox-kernel.dtb', key_dest)
+ 
+     key = generate_ecdsa_key()
+ 
+@@ -109,6 +120,17 @@ def test_fit_ecdsa(ubman):
+     if len(nodes) == 0:
+         raise ValueError('FIT image has no "/image" nodes with "signature"')
+ 
+-    fit.change_signature_algo_to_ecdsa()
+-    fit.sign(mkimage, key_file)
++    fit.change_signature_algo_to_ecdsa(algo)
++    fit.sign(mkimage, key_file, key_dest)
+     fit.check_signatures(key)
++
++    # FDT coordinates retain the u32-padded encoding, including for P-521.
++    for name, value in (('x', key.pointQ.x), ('y', key.pointQ.y)):
++        output = utils.run_and_log(ubman, ['fdtget', '-tbi', key_dest,
++                                          '/signature/dev', f'ecdsa,{name}-point'])
++        coordinate = bytes(int(byte) for byte in output.split())
++        assert len(coordinate) == ((key.pointQ.size_in_bits() + 31) // 32) * 4
++        assert int.from_bytes(coordinate, 'big') == int(value)
++
++    fit_check_sign = ubman.config.build_dir + '/tools/fit_check_sign'
++    utils.run_and_log(ubman, [fit_check_sign, '-f', fit_file, '-k', key_dest])
+diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
+index 7145637a8b8..f6797147342 100644
+--- a/tools/image-sig-host.c
++++ b/tools/image-sig-host.c
+@@ -61,6 +61,13 @@ struct crypto_algo crypto_algos[] = {
+ 		.add_verify_data = rsa_add_verify_data,
+ 		.verify = rsa_verify,
+ 	},
++	{
++		.name = "ecdsa224",
++		.key_len = ECDSA224_BYTES,
++		.sign = ecdsa_sign,
++		.add_verify_data = ecdsa_add_verify_data,
++		.verify = ecdsa_verify,
++	},
+ 	{
+ 		.name = "ecdsa256",
+ 		.key_len = ECDSA256_BYTES,
 
 -- 
 2.53.0
