@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E815ECCF2C9
-	for <u-boot@archiver.kernel.org>; Sun, 18 Oct 2026 08:35:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76CE7CCF2D1
+	for <u-boot@archiver.kernel.org>; Sun, 18 Oct 2026 08:35:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A82B2606FD;
-	Sun, 18 Oct 2026 08:35:36 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 27CEA40966;
+	Sun, 18 Oct 2026 08:35:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TPDuYceUjGOr; Sun, 18 Oct 2026 08:35:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A631B606BA
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792312535;
-	b=SM6jtQb0bji2odvMmCDCLj+NBQwWPX8TfYEnIJuIFh82cNz5SOWZg/tq9MZJBU7Pnckb
-	 Z9otZ3+d3VI22Ye0SGhRSMk7aUAeAeNhf67U8uBLTny/hGvxFsFKLXfnmAfgZPxI6acaH
-	 TmWc2stqkSl6/3u6EPQzy3c/ec7jQIw+JAF+l5TaOZAhWcj+sQLWJDrcN4IEO+veOBcNx
-	 W6VJ5bB+UZsRV2uFf/LQUc0rJ5ujV79l82w/5j+2HnsLqVCgs6udjJNTCskZkealA1cAk
-	 vk7c5VRdi/FBu2SHIBXxZUEfOg9+gp98rYKCNeCore5BzehsQlVHV6VRZNqJWnfkPdA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bDov3J0MwWJ1; Sun, 18 Oct 2026 08:35:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 40D85409DF
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792312537;
+	b=aJJZ30tHLDD1qFpWHHrQyx3WR0Lza/fVSrnRCi0FbBT3jV+BgPE8gnZ8oz3++xu8Kquh
+	 cdMsywaMprmR8Ehb+UFFvqicU/Y/DYEZPxOrxw8oqAnsCPMMqk0Xb4sby0aZKmt71Vcno
+	 7aZg1Ns8rin3JXm8Sial5QS8FQSuRgj284qefwR4IHPfXYxcBS2uI7I3kEgk/wzWsCHim
+	 i8J+1Y5pqIoJLef1cQMUj/TzaUv+4MDUm/ZTZxSWpmEWjrjT/xFn2Io3TUGU9SNUYQFgg
+	 6h/CpQSguWERcuq/cuSTURdBE8XGy5iiCrB2DQAoFMNKEIyfuxDqYM1weSDqroVKi4w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792312535;
+	c=relaxed/relaxed; t=1792312537;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,130 +32,132 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=UZjvrrcNW1WisxWZQnYNNpU+C5ws/IyX5SJYa39tor8=;
-	b=gx+dtLjO9+7j2Gj78uxHFztvzhRyXLtVVHZ6R91GSYS4ATo+zTEQN75NR7GuFddeRWYg
-	 lnPaTdKKkrjL6KqdeSTnjC+SPcZtF45Y+eYSJv17TR/uq3efnp6NavUqbZde+4dyKpGmd
-	 eyboZdD8tcIakaskmOcZBSItr5qvLkwrrnIUOgo6dEagz+8SdhlGxlAG1Au4nj/oQRPb2
-	 2yMhO87NLpyJNTNOjrmpWSxPPdHbDb+VXhuOkEr325ogXG4SGiu/CZ+LMz2q6FuyHlnk7
-	 03oo+IciqzUzMsBnYRTh2Dgpv1rtdCz1v+h1E5NxBQ0kiwV988a+9hPo//fFZ2RCbGw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=DeApma2uplQJunJNCRhPcjySG9AUPfPJgLBPhzTwBCE=;
+	b=gcP83YhxPcLa6BnlnD/ZJxD2tG2iTesrrZvUHr0da+j7Og4UxLQJsdLf3r/IsZTPZ4Oi
+	 RB7n/o7KU7sX4KLDkHKXhulCXSyDed1yZxax+SIuuzhGADUv4T/C+46TsAesEIg8KHAcL
+	 y5iZTET/RyYOwW5wB8/igdC2geZydVJRi0oj+uPXILb5SqnmUD69vsYKkqXCtCkywxaMb
+	 bvyca2+qgdbsX/+kOAqhPIA/qaSLgSyJCWxVGZs2fUSVWEaTXPECQo8J3IlLA+v99rhhj
+	 /1ZkWdFJXlW369LMLObavBl14sVHXug88pBdbWUYj2ascvkRotofXmlMnL5+p9PfjqQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=oZohjzSN;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792312535;
-	bh=UZjvrrcNW1WisxWZQnYNNpU+C5ws/IyX5SJYa39tor8=;
+	d=lists.u-boot-project.org; s=default; t=1792312537;
+	bh=DeApma2uplQJunJNCRhPcjySG9AUPfPJgLBPhzTwBCE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=afSZ2I7IGGJV03CLk0hNuYmg2/lGS8OaH7A46XOK0imG0F76ZLYA3vIwuM9uGLr36
-	 iY4MPaCOxPkbIe8o+EKwFtknYj63iUBo8C2D0viW3dglSMutBQEC3qHSZnI6wqpZ+a
-	 63JjgoSLWQJ7ks1GheghftH9Myls15zzyT+CqaYXxANkeptTcgRI+byJyLRJHZpXuM
-	 8OEOUJt2jcuOBUmqaoKmNBbAy1dgbRXFPqDIP6BavyBQalRgVZYFLpYdSgYoQXq9GQ
-	 HvcZ1BozYO6d9C5EDLAl38ELrpt8NsFbf3PsmdIKcj3ExStPZfICIOBVbKnKYeLlTj
-	 yVlsn4Av6Qd+Q==
+	b=vg1U1pPmApw0a1dr4EOIu9CyD9Yy/twz4tDmm11LtMxBAAokAA8C7xGbxLhGL5cVm
+	 9J0BGETfPph9cfFttOqTwh3jhzONV4BibpPZgSef9HOOuJosttZjCPtaijSpdLjNwq
+	 Zb9raa2hzwKbkkd9IXr5b++Gpq/6zFPwwmkHgRWVd3wfYsuRsxcV7GkFAOxYsHQ1v8
+	 E/uvgBjh7jLeWYdRhJ66imNHbMcFGSiPdisLLGOOQHX5IWiyWcwk3UReLNeyUiPx5V
+	 FTgsSbbYLcCytKx10jf1OjHdqtmEvECeNgEuMVSrR7fwbAWMU250jeYjSr31XQYf58
+	 u9d/DKHePFdbw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A631B606BA;
-	Sun, 18 Oct 2026 08:35:35 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id DD41A75
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:35:28 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 40D85409DF;
+	Sun, 18 Oct 2026 08:35:37 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id EEDDD22B
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:35:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C0BF140949
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:35:28 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id CF55D40958
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:35:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vrZJCg77g6J5 for <u-boot@lists.u-boot-project.org>;
- Sun, 18 Oct 2026 08:35:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8B1B140856
+ id wCUpAzGRwXzH for <u-boot@lists.u-boot-project.org>;
+ Sun, 18 Oct 2026 08:35:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B7A1D4091C
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::332"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792312528;
- b=h4WjkTZYrj4CY81ZPn0TT4Dpz8TYbBRJHKVqakP5pjzGKMIjFt/h4BYGV7VHPEl/2vII
- RnFqryI8JzuMo+R82lozgQxbSj+YGLOSVa1C23pmUV/+jTu6MpXk5QZ3m9zOk79Lz6HrI
- sWPUZAqU0/Zzo9YkUj73wV7z/xeTXFCpCcJTOh313spc8Wejaza3C0Zo9/EAh10swG0CU
- ofS2vwYcgV+M7pwLlH04bUR1G47oaSycRZoS//NLRWUvyfd8jaVjr9wSEQA797rTbFi3p
- gRH/FbCOf7KaeUpJkJXko4fAcu72e6b5uI/V2+k7Sg97aZCG8ThVFbNXLBA6ivU7rYQ==
+ arc=none smtp.remote-ip="2a00:1450:4864:20::330"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792312529;
+ b=BNes9ljR+JVK3yOQHwq7SdadFzxo1/Sy3hCa3Sl6zC50miC4mT45sz/HphW0kjqYQ2wA
+ ELibTsl7LsQKoD+PNSJsVH5fSM4QEC1jI6euNNqmsnRE4Ut0IQMO3h9oUn2Tfv/+FkcD9
+ u7A7qtv5+ADa1OJ+qKGDwngmxVIUGf7DSS8MrT1RzwW4MaINccNwRJwOgAbBMiXoC1QD8
+ TcV7g9tApdZ0oK08mB2jJpItQ+6IPMlVjwglcVz/jsue+E4hoIK3TjypWpG3aSdZet+3v
+ 9l18eHaL9FMjTR09q+EeSQqcmhyY33flYDfLAmXgmtWd+t6qfkkqlD+OxsT9ud/YuhQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792312528;
+ c=relaxed/relaxed; t=1792312529;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Type:Content-Transfer-Encoding;
- bh=UZjvrrcNW1WisxWZQnYNNpU+C5ws/IyX5SJYa39tor8=;
- b=ask0aV7IqepSTROUQSXLt9nfaUt7D/lehBQ8k5C3/KPyEmenMsqo9m9UyulvPWPGrfrS
- FXHStSnU39q9qcbYa/TDZ63STPT/hVGOalHKoYZetGcP5Bvso3NUh2mj2cAqd0M3ddZHT
- 7hZAlrYR6zy13IsoG22v64WAa6SR6dMQLNAQcJdfOGK9yqoMH/84Aw0X9feM38XYfR+SB
- 8QAGwUyGzXMKOi2qjIv3IKYRFBoSXLhwUFz0aX3KMomiTQNnuOz9uGZ6Iya4C1M0ny0hG
- UdOBoNDn97aoPzhJabHL74XbZlUC4iG/N7Mw7dxRQdz/MhEG23WIgqUTfPr+782PZBw==
+ bh=DeApma2uplQJunJNCRhPcjySG9AUPfPJgLBPhzTwBCE=;
+ b=XOJRB1+hVxUV0DAyH42IQMnpbrXTvakgtHgnmIIwuMuGN5+ScwaDB0aTEx5Bj9wGHjE4
+ C6vYfDzO8K+XxW7jMEZExzASdQN3TyDAAjoUBvi4avQ4ONoYFP6KEpiyC+kUATupLStOL
+ ug5KqE79DVf628fuY7JVc/Ck3BpGiqtEaxHCfxVCri1uHf+taHWcUo1mLghyUirhRDSNU
+ G4l9aejjuPTmHA4nxghQ7c3YrEt+tv4NEoppvJmQ057Djyvg7lcKGaAO83+OZFAJSFIE4
+ uYm/MpbPkvQInxfs+mP7BhHtdJ2R17kBLfzvSWjEyZ4f165629d4aM/oQG2X5Y34F8Q==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=FLl+W3ZN; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::332"
+ header.s=20251104 header.b=oZohjzSN; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::330"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
+ client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
  envelope-from=pepe.schlehofer@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=FLl+W3ZN
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8B1B140856
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:35:27 +0000 (UTC)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4a1d75f2f11so7787255e9.3
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 01:35:27 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=oZohjzSN
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B7A1D4091C
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:35:28 +0000 (UTC)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4a16af2a232so8795365e9.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 01:35:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792312525; x=1792917325;
+ d=gmail.com; s=20251104; t=1792312526; x=1792917326;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=UZjvrrcNW1WisxWZQnYNNpU+C5ws/IyX5SJYa39tor8=;
- b=FLl+W3ZNBIxIkwba6y0YMT01Ebuq7JsXC21rgZeQWZP4bNqMtl9V/w4fyM2Vz9U5Xb
- 6Lp0wJ743pIiqarOLh4Wc/9xCEbZLkSm8JT62j9X4dBRSpKmS/1pvWCyxj57aiWalBCJ
- XOQ+5UkcH9iVPIYgIM38hCKvdR49VdcJUyCEoyF1nxSOP0qRex0wZAbtCzWVpCKZNDLG
- d0lujxywzqcs/DJ2PgTKUWXp97u2GO0j6zzRJqx9jfdbbWjcDixOdTZKwRXhn+ZM4rCT
- CQ0gtb9KO6CSxpMqAXmvdl9lQSbuQN1ORo7MpLNGjPImjP3H/Px8qmf178U0myd48Ljx
- x4eQ==
+ bh=DeApma2uplQJunJNCRhPcjySG9AUPfPJgLBPhzTwBCE=;
+ b=oZohjzSNdDlPxOH4+mPLS9dL1cxkbHTCntUUL/b9eZr7gL2m80a1MY4BKjyrQuXRzQ
+ To6vdhzy0nAfhg49nkbABfyMtztyaDAUbFK/eiYqox8geuo94G9PGPT64vBfoZWMR49w
+ OP6Ru0mwRgwvaZ+a8eN9xld1aF94CY4P6LvFYFT4R8m3+sawU4JyvM7bYJ38aB8uys3r
+ zVSbKihrtRCJHxOy9OdmPzH8ojxeMt3E1ajreEaQZsIEVxZCg5ix6du26/+HGFiaqVgT
+ GKjSxSdWclpPJ5kiCZD69NRMWe0sjYwu0vVr1x/tYjgJdAFFSye4YwECHNMy0q3QqbxD
+ EN7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792312525; x=1792917325;
+ d=1e100.net; s=20260707; t=1792312526; x=1792917326;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=UZjvrrcNW1WisxWZQnYNNpU+C5ws/IyX5SJYa39tor8=;
- b=Afy9kJDneshBexsic0qiuCKVN/7Ke42fNnAIKdL0Rq9vk4ybORm5u0g1mlE4ivI4n8
- UxcVWwfhAsv8MHlnngYqlJyEtsiwc8I/Xo0ztgk7GGsH98QIoBclftDEqzye3DFY5oGu
- BKeOMfr/EHNtWgVESvbl/CnaNUEbDhxb9UnKwe6xRw7k/6Y2wjEubK0ubNtkWp01hcnO
- 3m25/6LGaQLtOTA7cdLvUuslrSMWVz7OZijdvLYdrgOzlLbiSZor6VwkMBzhpHe/2WiB
- N3wEiAldLt7so2irGnXQBUJGneFGnHv8Z7LGzWJZEsySWvjWATJ/i9/Xgw6arBSKTiEn
- TSHw==
-X-Gm-Message-State: AFq9FYI+molwucPiD0jImB8uyOYrDgQGAEuCIVTTGb8HCXucI3/h2Fo0
- jJu3YVV61MXGdsUoGdYoJkvJsma1NF6sBYS1KJKqhJFeIoujw67M33UGzqWxda+j
-X-Gm-Gg: AYBFou2ow6iFULyZdMp++3dILRjK28ZmjcjmC0yXyZaj1FXeQIjCZ9V0FCuwe/2mE75
- VjFd5q8pM+uKiyEbQdIhFBhRGvydRRsxIS5w9gs2faMFLJABUeu+uiOPa9QbeOAv/AnDpQk78iG
- TKXSyE04JtOQcBI82a9Ovzslzv4wYqITX3+RwvGSoascp1aE9LnJ+0Uo8z3r83PNDuT9cXWaKzG
- p81Cpcj/6nLokBYdQD5yvpnmVy24eFJqtbKZvRZkehRPVLIqX5ffaIKT99y+mTKn3J49B+E1GEF
- UoJ54KL4Z4pytl8JIfVXvw7D1q4RzDN3UEF1k9/t7oWtTN9zc9OCcWE5TyEJVzsz/R19DCcQ9SV
- kowTDS+pscgtVHMOL32dzKpq4NtReOGAsibKprWkdzYf9r3tVpfe0AXl1ewnbBJNtZxyx+OtxpB
- qMXj1PS3wAMjvT+dEft5CkyYzYYnx4CyF87zBtD+Wg40PUHraE2DM0xcHcCrWW243fC7IvX75iy
- 45V3yiP0bauEMXonjrAm1JbbgTXqn03+5daEJvK5vp331WyfV+6iAlJmltacRaoljj18solO4wq
- rLBF0bPRKoSVDGZcPhR6skeAxWFiA5h3KqN9j1dOC2H43HRd4gVHKIsw8LB5LN32HhagkQ3jMlf
- XxBUdIFR9h2E00tm0Go08frY=
-X-Received: by 2002:a05:600c:8b0a:b0:4a1:dbdf:17a8 with SMTP id
- 5b1f17b1804b1-4a1dbdf1a18mr68191455e9.2.1792312525104; 
- Sun, 18 Oct 2026 01:35:25 -0700 (PDT)
+ bh=DeApma2uplQJunJNCRhPcjySG9AUPfPJgLBPhzTwBCE=;
+ b=K1dH+qgMPLsOnRN452lVRXb5GawrQ/CxhAvRODo23VtzqkfXnHFWnjwHmfy/XSHUvt
+ WeqNlacEBtcwx33QrMv5v6ULtCyUUdOZLng0Uwu8T6Kq13YsschYAvTMyPGy0G2ta7Y4
+ 7CIFHPdGHXJdU4S6n45xoi3LSmp+igWDDfVOotLVrye8xyWdVs85R0sm36OWs0ZNgktZ
+ /55K7LFTjGWq8Ux24eb2o751ktcTEj4GGlxz/reT5hmDi7/oEHcUzyVRELK4JOh17tai
+ sjHcoz1OZxadU5A2fpBGqcoJ6vIKCfaBsSZ/CLrOo8Lnsu22LsymZvkpp4NKnX3YvKyt
+ POdA==
+X-Gm-Message-State: AFq9FYJ9KO/ESrCM99e+Csp9uG07wDE5H7mQFCyHhmA33CzLZrn8t92W
+ JuF/Vq5ZEOW2/3RqJlvAk1GqNwUsW2D1hXBrCgM2yHrIKv5Du6MZS2lUvc1xYxZG
+X-Gm-Gg: AYBFou3cLH9gt0PwXGuU6vIN7LJCVJJ8RqNELkt6mnay4CCKt1G82hcmJXr2Qm8s/7U
+ dz2aSDreJqB5vpZx5vsvqP/YyczPBGa+tOazRLeEDebz+GIlvZwXWzCwlwAqN/hfxdknz/hWYYy
+ pBbj4l8DegKJwLCspUcJhgVQtYPolPLLWMlw1DEo+jpQ3ajI/l04wOJTMKf/QPaX8HAtpAOth7T
+ fqix2o9VJhkeTa+8BvEcEmop93LZ+90BRu/qlKpzxp9mrwJg6A5MTabnKtkpA3LR8qhbbTZeK1N
+ Ke1bCvE2ILQtdhtpcof4gvnT1xeIp16eiWsl+ET9qYNeOMn4Xe/N4WsN69u247bFXeX0+kgEjK5
+ wcD9DjiTc3wlPUtX7yjd7OC3QgRNA110NCY+de9RvbFXrKy3dcMqfUzLqWaIkgTPV5p1pRsZtML
+ N1iWtal2LA18mjEtyEDSsPlEJYOWB1kpbRx5CLZTzWtP9VyTnJAlMV+tAjsqdbgD7xAMGGQ3v6M
+ FDpYwmLowbZ5YF91cEs/KwCub/QXa3xpD9SAOgaIyn6+eIiqVZoW7TSvuZ67dVPRAc8DxYXlxKU
+ h23dWF3glwpIE2sTzPgqar5kFLBRtX8Toi/xd5uoYGJZHBv9LZWcxRxZ98E/cemjqCp8XsQmet1
+ Cwxm+Q7xlgO1VhQ9HOyvLlsE=
+X-Received: by 2002:a05:600c:4fce:b0:4a0:1b14:e283 with SMTP id
+ 5b1f17b1804b1-4a1d75ac25cmr102165585e9.1.1792312526312; 
+ Sun, 18 Oct 2026 01:35:26 -0700 (PDT)
 Received: from localhost.localdomain
  (dynamic-2a00-1028-8388-a84e-318a-f58b-5e43-a2b9.ipv6.o2.cz.
  [2a00:1028:8388:a84e:318a:f58b:5e43:a2b9])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1e3ebb3aasm43589595e9.0.2026.10.18.01.35.24
+ 5b1f17b1804b1-4a1e3ebb3aasm43589595e9.0.2026.10.18.01.35.25
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sun, 18 Oct 2026 01:35:24 -0700 (PDT)
+ Sun, 18 Oct 2026 01:35:25 -0700 (PDT)
 From: Josef Schlehofer <pepe.schlehofer@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>,
@@ -170,10 +172,10 @@ Cc: Tom Rini <trini@konsulko.com>,
  Heiko Schocher <hs@nabladev.com>,
  Holger Brunck <holger.brunck@hitachienergy.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 03/14] powerpc: lib: Add GPR save and restore routines to
- the private libgcc
-Date: Sun, 18 Oct 2026 10:35:05 +0200
-Message-ID: <20261018083516.49229-4-pepe.schlehofer@gmail.com>
+Subject: [PATCH v2 04/14] powerpc: lib: Add 64-bit division to the private
+ libgcc
+Date: Sun, 18 Oct 2026 10:35:06 +0200
+Message-ID: <20261018083516.49229-5-pepe.schlehofer@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20261018083516.49229-1-pepe.schlehofer@gmail.com>
 References: <20261018083516.49229-1-pepe.schlehofer@gmail.com>
@@ -193,269 +195,137 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-When GCC optimizes for size, it branches to libgcc's _restgpr_N_x
-routines to restore non-volatile registers. U-Boot's private libgcc
-lacks these routines, so builds with CONFIG_USE_PRIVATE_LIBGCC=y fail
-to link with Debian's GCC 14.2, for example qemu-ppce500:
+On 32-bit PowerPC, GCC lowers '/' and '%' on unsigned 64-bit operands
+to calls to __udivdi3() and __umoddi3(). U-Boot's private libgcc lacks
+these routines, so turris_1x_sdcard fails to link with
+CONFIG_USE_PRIVATE_LIBGCC=y:
 
-  undefined reference to `_restgpr_31_x'
+  undefined reference to `__udivdi3'
 
-Copy the 32-bit integer register save and restore routines from
-Linux's arch/powerpc/lib/crtsavres.S (v7.3-rc5), following the private
-libgcc's existing approach for shift routines. Put each group of
-routines in its own section so --gc-sections can discard unused
-groups. Linux's CONFIG_CC_OPTIMIZE_FOR_SIZE condition is then not
-needed.
+Implement both with a copy of __div64_32() from lib/div64.c whose
+divisor is widened to 64 bits. The copy keeps the private libgcc
+independent of lib/, which not every xPL phase links.
+
+Build the file without LTO, as ARM does for eabi_compat.o: LTO can
+drop these functions before GCC generates the calls that need them.
 
 Signed-off-by: Josef Schlehofer <pepe.schlehofer@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Christophe Leroy <christophe.leroy@csgroup.eu>
 Cc: Marek Behún <kabel@kernel.org>
 ---
 Changes in v2:
 - new patch
 
-The routines assemble to the same code as crtsavgpr.o, crtresgpr.o and
-crtresxgpr.o in Debian's libgcc 14.2.
+At -Os the two take 300 bytes, against 1036 and 992 bytes of
+_udivdi3.o and _umoddi3.o in Debian's libgcc 14.2.
 ---
- arch/powerpc/lib/Makefile    |   3 +-
- arch/powerpc/lib/crtsavres.S | 213 +++++++++++++++++++++++++++++++++++
- 2 files changed, 215 insertions(+), 1 deletion(-)
- create mode 100644 arch/powerpc/lib/crtsavres.S
+ arch/powerpc/lib/Makefile  |  3 +-
+ arch/powerpc/lib/udivdi3.c | 82 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 84 insertions(+), 1 deletion(-)
+ create mode 100644 arch/powerpc/lib/udivdi3.c
 
 diff --git a/arch/powerpc/lib/Makefile b/arch/powerpc/lib/Makefile
-index a3048975ae7..90f0e1e5fa9 100644
+index 90f0e1e5fa9..23e62996701 100644
 --- a/arch/powerpc/lib/Makefile
 +++ b/arch/powerpc/lib/Makefile
-@@ -5,7 +5,8 @@
- 
+@@ -6,7 +6,8 @@
  ## Build a couple of necessary functions into a private libgcc
  ## if the user asked for it
--lib-$(CONFIG_USE_PRIVATE_LIBGCC) += _ashldi3.o _ashrdi3.o _lshrdi3.o
-+lib-$(CONFIG_USE_PRIVATE_LIBGCC) += _ashldi3.o _ashrdi3.o _lshrdi3.o \
-+				    crtsavres.o
+ lib-$(CONFIG_USE_PRIVATE_LIBGCC) += _ashldi3.o _ashrdi3.o _lshrdi3.o \
+-				    crtsavres.o
++				    crtsavres.o udivdi3.o
++CFLAGS_REMOVE_udivdi3.o := $(LTO_CFLAGS)
  
  MINIMAL=
  
-diff --git a/arch/powerpc/lib/crtsavres.S b/arch/powerpc/lib/crtsavres.S
+diff --git a/arch/powerpc/lib/udivdi3.c b/arch/powerpc/lib/udivdi3.c
 new file mode 100644
-index 00000000000..8c35eedecb6
+index 00000000000..deb0b5d49e1
 --- /dev/null
-+++ b/arch/powerpc/lib/crtsavres.S
-@@ -0,0 +1,213 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
++++ b/arch/powerpc/lib/udivdi3.c
+@@ -0,0 +1,82 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Out-of-line integer register save and restore routines, which GCC calls
-+ * from function prologues and epilogues when it optimizes for size.
++ * 64-bit unsigned division and modulo for the private libgcc
 + *
-+ * This code was copied from crtsavres.S in arch/powerpc/lib of the Linux
-+ * kernel sources (v7.3-rc5, last changed by commit 699d53f04829
-+ * ("powerpc/vdso32: Fix use of crtsavres for PPC64")): the 32-bit integer
-+ * register routines, without the CONFIG_CC_OPTIMIZE_FOR_SIZE condition.
-+ * Each group of routines is in a section of its own, so that --gc-sections
-+ * drops the groups that nothing calls. The source file copyrights are as
-+ * follows:
++ * GCC calls __udivdi3() and __umoddi3() for '/' and '%' on unsigned 64-bit
++ * operands on 32-bit PowerPC. udivmod64() is __div64_32() from lib/div64.c
++ * with a 64-bit divisor: its shift-and-subtract loop already works on one,
++ * and the step that first divides the high word now only runs when the
++ * divisor fits into 32 bits. Like __div64_32(), the functions are not
++ * instrumented, as tracing code may divide. The source file copyrights are
++ * as follows:
 + *
-+ *   Copyright (C) 1995, 1996, 1998, 2000, 2001 Free Software Foundation, Inc.
-+ *   Copyright 2008 Freescale Semiconductor, Inc.
-+ *   Written By Michael Meissner
++ *   Copyright (C) 2003 Bernardo Innocenti <bernie@develer.com>
 + *
-+ * Based on gcc/config/rs6000/crtsavres.asm from gcc
++ *   Based on former do_div() implementation from asm-parisc/div64.h:
++ *	Copyright (C) 1999 Hewlett-Packard Co
++ *	Copyright (C) 1999 David Mosberger-Tang <davidm@hpl.hp.com>
 + */
 +
-+#include <asm/processor.h>
++#include <linux/types.h>
 +
-+/* Routines for saving integer registers, called by the compiler.  */
-+/* Called with r11 pointing to the stack header word of the caller of the */
-+/* function, just beyond the end of the integer save area.  */
++static notrace u64 udivmod64(u64 n, u64 base, u64 *rem)
++{
++	u64 b = base;
++	u64 res, d = 1;
++	u32 high = n >> 32;
 +
-+	.section ".text._savegpr_14","ax",@progbits
-+	.align	2
++	/* Reduce the thing a bit first */
++	res = 0;
++	if (!(base >> 32) && high >= base) {
++		high /= (u32)base;
++		res = (u64)high << 32;
++		n -= (u64)(high * (u32)base) << 32;
++	}
 +
-+_GLOBAL(_savegpr_14)
-+_GLOBAL(_save32gpr_14)
-+	stw	14,-72(11)	/* save gp registers */
-+_GLOBAL(_savegpr_15)
-+_GLOBAL(_save32gpr_15)
-+	stw	15,-68(11)
-+_GLOBAL(_savegpr_16)
-+_GLOBAL(_save32gpr_16)
-+	stw	16,-64(11)
-+_GLOBAL(_savegpr_17)
-+_GLOBAL(_save32gpr_17)
-+	stw	17,-60(11)
-+_GLOBAL(_savegpr_18)
-+_GLOBAL(_save32gpr_18)
-+	stw	18,-56(11)
-+_GLOBAL(_savegpr_19)
-+_GLOBAL(_save32gpr_19)
-+	stw	19,-52(11)
-+_GLOBAL(_savegpr_20)
-+_GLOBAL(_save32gpr_20)
-+	stw	20,-48(11)
-+_GLOBAL(_savegpr_21)
-+_GLOBAL(_save32gpr_21)
-+	stw	21,-44(11)
-+_GLOBAL(_savegpr_22)
-+_GLOBAL(_save32gpr_22)
-+	stw	22,-40(11)
-+_GLOBAL(_savegpr_23)
-+_GLOBAL(_save32gpr_23)
-+	stw	23,-36(11)
-+_GLOBAL(_savegpr_24)
-+_GLOBAL(_save32gpr_24)
-+	stw	24,-32(11)
-+_GLOBAL(_savegpr_25)
-+_GLOBAL(_save32gpr_25)
-+	stw	25,-28(11)
-+_GLOBAL(_savegpr_26)
-+_GLOBAL(_save32gpr_26)
-+	stw	26,-24(11)
-+_GLOBAL(_savegpr_27)
-+_GLOBAL(_save32gpr_27)
-+	stw	27,-20(11)
-+_GLOBAL(_savegpr_28)
-+_GLOBAL(_save32gpr_28)
-+	stw	28,-16(11)
-+_GLOBAL(_savegpr_29)
-+_GLOBAL(_save32gpr_29)
-+	stw	29,-12(11)
-+_GLOBAL(_savegpr_30)
-+_GLOBAL(_save32gpr_30)
-+	stw	30,-8(11)
-+_GLOBAL(_savegpr_31)
-+_GLOBAL(_save32gpr_31)
-+	stw	31,-4(11)
-+	blr
++	while ((s64)b > 0 && b < n) {
++		b = b + b;
++		d = d + d;
++	}
 +
-+/* Routines for restoring integer registers, called by the compiler.  */
-+/* Called with r11 pointing to the stack header word of the caller of the */
-+/* function, just beyond the end of the integer restore area.  */
++	do {
++		if (n >= b) {
++			n -= b;
++			res += d;
++		}
++		b >>= 1;
++		d >>= 1;
++	} while (d);
 +
-+	.section ".text._restgpr_14","ax",@progbits
-+	.align	2
++	*rem = n;
++	return res;
++}
 +
-+_GLOBAL(_restgpr_14)
-+_GLOBAL(_rest32gpr_14)
-+	lwz	14,-72(11)	/* restore gp registers */
-+_GLOBAL(_restgpr_15)
-+_GLOBAL(_rest32gpr_15)
-+	lwz	15,-68(11)
-+_GLOBAL(_restgpr_16)
-+_GLOBAL(_rest32gpr_16)
-+	lwz	16,-64(11)
-+_GLOBAL(_restgpr_17)
-+_GLOBAL(_rest32gpr_17)
-+	lwz	17,-60(11)
-+_GLOBAL(_restgpr_18)
-+_GLOBAL(_rest32gpr_18)
-+	lwz	18,-56(11)
-+_GLOBAL(_restgpr_19)
-+_GLOBAL(_rest32gpr_19)
-+	lwz	19,-52(11)
-+_GLOBAL(_restgpr_20)
-+_GLOBAL(_rest32gpr_20)
-+	lwz	20,-48(11)
-+_GLOBAL(_restgpr_21)
-+_GLOBAL(_rest32gpr_21)
-+	lwz	21,-44(11)
-+_GLOBAL(_restgpr_22)
-+_GLOBAL(_rest32gpr_22)
-+	lwz	22,-40(11)
-+_GLOBAL(_restgpr_23)
-+_GLOBAL(_rest32gpr_23)
-+	lwz	23,-36(11)
-+_GLOBAL(_restgpr_24)
-+_GLOBAL(_rest32gpr_24)
-+	lwz	24,-32(11)
-+_GLOBAL(_restgpr_25)
-+_GLOBAL(_rest32gpr_25)
-+	lwz	25,-28(11)
-+_GLOBAL(_restgpr_26)
-+_GLOBAL(_rest32gpr_26)
-+	lwz	26,-24(11)
-+_GLOBAL(_restgpr_27)
-+_GLOBAL(_rest32gpr_27)
-+	lwz	27,-20(11)
-+_GLOBAL(_restgpr_28)
-+_GLOBAL(_rest32gpr_28)
-+	lwz	28,-16(11)
-+_GLOBAL(_restgpr_29)
-+_GLOBAL(_rest32gpr_29)
-+	lwz	29,-12(11)
-+_GLOBAL(_restgpr_30)
-+_GLOBAL(_rest32gpr_30)
-+	lwz	30,-8(11)
-+_GLOBAL(_restgpr_31)
-+_GLOBAL(_rest32gpr_31)
-+	lwz	31,-4(11)
-+	blr
++/**
++ * __udivdi3() - divide two 64-bit unsigned integers
++ *
++ * @n:		dividend
++ * @d:		divisor
++ * Return:	quotient
++ */
++notrace u64 __udivdi3(u64 n, u64 d)
++{
++	u64 rem;
 +
-+/* Routines for restoring integer registers, called by the compiler.  */
-+/* Called with r11 pointing to the stack header word of the caller of the */
-+/* function, just beyond the end of the integer restore area.  */
++	return udivmod64(n, d, &rem);
++}
 +
-+	.section ".text._restgpr_14_x","ax",@progbits
-+	.align	2
++/**
++ * __umoddi3() - remainder of the division of two 64-bit unsigned integers
++ *
++ * @n:		dividend
++ * @d:		divisor
++ * Return:	remainder
++ */
++notrace u64 __umoddi3(u64 n, u64 d)
++{
++	u64 rem;
 +
-+_GLOBAL(_restgpr_14_x)
-+_GLOBAL(_rest32gpr_14_x)
-+	lwz	14,-72(11)	/* restore gp registers */
-+_GLOBAL(_restgpr_15_x)
-+_GLOBAL(_rest32gpr_15_x)
-+	lwz	15,-68(11)
-+_GLOBAL(_restgpr_16_x)
-+_GLOBAL(_rest32gpr_16_x)
-+	lwz	16,-64(11)
-+_GLOBAL(_restgpr_17_x)
-+_GLOBAL(_rest32gpr_17_x)
-+	lwz	17,-60(11)
-+_GLOBAL(_restgpr_18_x)
-+_GLOBAL(_rest32gpr_18_x)
-+	lwz	18,-56(11)
-+_GLOBAL(_restgpr_19_x)
-+_GLOBAL(_rest32gpr_19_x)
-+	lwz	19,-52(11)
-+_GLOBAL(_restgpr_20_x)
-+_GLOBAL(_rest32gpr_20_x)
-+	lwz	20,-48(11)
-+_GLOBAL(_restgpr_21_x)
-+_GLOBAL(_rest32gpr_21_x)
-+	lwz	21,-44(11)
-+_GLOBAL(_restgpr_22_x)
-+_GLOBAL(_rest32gpr_22_x)
-+	lwz	22,-40(11)
-+_GLOBAL(_restgpr_23_x)
-+_GLOBAL(_rest32gpr_23_x)
-+	lwz	23,-36(11)
-+_GLOBAL(_restgpr_24_x)
-+_GLOBAL(_rest32gpr_24_x)
-+	lwz	24,-32(11)
-+_GLOBAL(_restgpr_25_x)
-+_GLOBAL(_rest32gpr_25_x)
-+	lwz	25,-28(11)
-+_GLOBAL(_restgpr_26_x)
-+_GLOBAL(_rest32gpr_26_x)
-+	lwz	26,-24(11)
-+_GLOBAL(_restgpr_27_x)
-+_GLOBAL(_rest32gpr_27_x)
-+	lwz	27,-20(11)
-+_GLOBAL(_restgpr_28_x)
-+_GLOBAL(_rest32gpr_28_x)
-+	lwz	28,-16(11)
-+_GLOBAL(_restgpr_29_x)
-+_GLOBAL(_rest32gpr_29_x)
-+	lwz	29,-12(11)
-+_GLOBAL(_restgpr_30_x)
-+_GLOBAL(_rest32gpr_30_x)
-+	lwz	30,-8(11)
-+_GLOBAL(_restgpr_31_x)
-+_GLOBAL(_rest32gpr_31_x)
-+	lwz	0,4(11)
-+	lwz	31,-4(11)
-+	mtlr	0
-+	mr	1,11
-+	blr
++	udivmod64(n, d, &rem);
++
++	return rem;
++}
 -- 
 2.54.0 (Apple Git-157)
 
