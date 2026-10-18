@@ -4,170 +4,167 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0810CCF2C9
-	for <u-boot@archiver.kernel.org>; Sun, 18 Oct 2026 04:24:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAEB0CCA490
+	for <u-boot@archiver.kernel.org>; Sun, 18 Oct 2026 04:31:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id AD09981253;
-	Sun, 18 Oct 2026 04:24:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 78F5B811BC;
+	Sun, 18 Oct 2026 04:31:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2DweXjwjyI1U; Sun, 18 Oct 2026 04:24:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6C10B812CB
+ id ZcZ74paAD-7S; Sun, 18 Oct 2026 04:31:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 733C68122B
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792297456;
-	b=KpNxW/tqZhuti8noAyA3NmmEDJ+0a0KJq5god6Fc0X8G0TrQz7Mr7b0HX8Q6VYyzchvM
-	 q0Mi4I/HCLl3yYpe0r9zX9QjqW/xRb1pPxwwDPtZuav/I6cmZecta0rB2UoL8Rl/S0iN+
-	 Ot3lfE+Y6Bj9fYh9iHejNLl0RtRjMcxDYNMo/M9SVaxBTUhR1VdilbkWg41zMfo77Zqf+
-	 akolqACAicOWPJr2JC2IWIuoXxhZ6F19+ORy/Z8x2ck90fHAmboFYIY2cXad8bU/Oab12
-	 deUqopE+Vw1qBFE5BIHJsI1+sHkY3wafobRT3WQfrnhx7hKScm5r1ElqBuhtkRymhEA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792297897;
+	b=cBE2ECEuwOwiXL4BfCf81L1/rFhy1nZdIBine21DVkTj1J7OsLXipibxOfdbgq9ZJAa6
+	 s+sZvqlN9KgGpJ/WzATPFiJ6ZvvndaV0JYS/4a8mD8TwUauzGmKe+qb0dZg29a/ti20O6
+	 68Ma1G6rzaVvhxLAEJdlUlZOWKNL8t5b7HhlPwx4cTBBI97Q5An6yreO5IMIV5u9wRl2+
+	 3J8pC5n1lluDGo3ahT6o2oPoPS+bLxVFsXe4YDKWlW1MpGy5SHNPoRS6EQkgmxOE6yqZP
+	 A5PEiSEJvwWGGwywyVPojgXwTF8HQi5+/Y4G0OjYrRm2YVNeJQzQX8BCT+5OtlOy3Kw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792297456;
+	c=relaxed/relaxed; t=1792297897;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=OsUgCYNdJ20pGGyDlPAnL+OpJi3lIY4rgPeQDTiskFM=;
-	b=Vf84sVWGR9caG6lJkJYQNXtsAwYR3CidxvZx4Kaguuls5I9IVhgq0HiTsYe7CGazdbCq
-	 AX6iXOw8pcHUVpLWqdeYvrUR4Q8/Xr9cTsmSEBcFchxDBoa2eD30zHT/4MOexAjEZ3Bxk
-	 vB+oBlyg4HzBSOi53DXt/1mWfzsSEUuEWG0eAzBS7/HI2mQyicf9IMKsTPqLrUPKCpvOY
-	 rmHFJyMEXjRqEnpKJjP7fxTdfH1AJCwk8PYRRJf6lz0q7nl0IRHjdV81tvWP5x/veHyQ7
-	 nnmy31ReebZhvOClx92ZE693MXRw47SVTbrJKcYnkYjKnBNWbAXVHsa+FV2Rf50ZLWA==
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=TeL4XG0oKohrYi1q5jw/bVr0cJvDUy9q2Qa0XKy4UTk=;
+	b=fWzUskKSjgSk0PsfWIZ4sgm/WJQBG52FN2AuNPo5t012cRP0q3KNKnOEaaxWijruEmC6
+	 NBO1VS0eh+mWRnRsLBHDWnOFyF+eh3ipp+DvyOwM0XNMqHFO5To5Em3xDOSn8mpU5Behv
+	 tH3rWNzPIoL2RG3BNfXPe7oe/KAjc+Au8HcqO7ESzEt+fb7bpxrjYQ2pzsvIu8Tv3gdN4
+	 J74cZQ+QMzl1zdGIZSy2gXjsvfpkvwFWrYWZihYMxzZ/F38PFvFLkJjz5XqN3KxNlyY8h
+	 w0swvZACrCgYNqzRtNSqO1gumUDA0DSQiox7mlnAKaXi2S78WggbPUkkD6opPAPUOtA==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	dmarc=pass header.from=oss.tenstorrent.com;
-	dkim=pass header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=ZfCGUmEw;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792297456;
-	bh=OsUgCYNdJ20pGGyDlPAnL+OpJi3lIY4rgPeQDTiskFM=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=jk8fRaJ9n6v7W9kIHRzhD22GHpaiUm9i0MIOaQr+rqB4g7pMfrCWLEG6ta1Y2hf+t
-	 Od6vam9s/beSTamv9Su+DnSpgXWzVmmCsKDqq9opaRVd5Vbtjm3qmC+R2vRzAlbq5U
-	 NihDot19GrULi44QeNo7JEyU5S4WPpovvJ85q+FzGfwKau2qUiAboqA6oQZYbb1Ji0
-	 uTPnvKZ3Wj1u51dqkouV1e5wxiVMRvwIpTZMpriQ4JBSxaESpUNWfyhSwzu0ma/el8
-	 6DmRc6ssjsi39CnUKf4P9PrSJ/8D44XpPJPchZKA42gAXBD/tc/LEgiuqBLaiTwqkP
-	 RSHOF4lcsPgEA==
+	d=lists.u-boot-project.org; s=default; t=1792297897;
+	bh=TeL4XG0oKohrYi1q5jw/bVr0cJvDUy9q2Qa0XKy4UTk=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=u7NUd+tPNAk059MuVdTqRJM+SYUgaWN/JqwwRRyAfcNFnPAPpfjH/8XMkgEUv+pAh
+	 4oeramXsoZ5NDgoNEk17J8+H885adgQQkqtN4XlAP2DTlPhLyN7sShVtSBxrfYMcpO
+	 wjQx2H+MbAAXVxet/mYFJTbdEDnxeVKbBfJzQRkAKa9vxso3PzxIDAt1xHinPGRqSu
+	 m9fNW0IPGqcL+c2ZPmTdzyLRhXoFZ7TXVj/S1Iyd6UOd2KUoN0HX5/cq1/UYnFj8FZ
+	 g+KY3uk1RyiTzp26X8tJuHHbr9EWlal/C9zeb7WbcoSetSA1Cqf1lBJTeTmUSqe7S/
+	 agvockHL9lcwA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6C10B812CB;
-	Sun, 18 Oct 2026 04:24:16 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id B629423F
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 04:24:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 733C68122B;
+	Sun, 18 Oct 2026 04:31:37 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4FC3D61
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 04:31:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 9B76280C33
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 04:24:06 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2D4786063F
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 04:31:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 04BQ1lSAPk6G for <u-boot@lists.u-boot-project.org>;
- Sun, 18 Oct 2026 04:24:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B3CF680BB2
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::b130"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792297445;
- b=fkprCJnV7OtejMziQGi8CRvTLZG8Cv9uJHhPGnT6OC01xTqK7Bh0+RVAySbulGwquLDx
- rBDd8UexoQrk6azZ6aOi3Znol7rF76ivVIbR4CjmktFnIrO17Ir6aiQHppAZXJ3XvdErY
- WJKxMSlMO7EOgr2uyutMGpgJwBSm+Baw/849Nswv0o0cpM6ZgJRZ+RMWTzKTvzcfeMWP8
- nT39VfglFvjVD1nZ5a1TfQceowPPjx5AF/qL1B9p6eb5lLJ9cVGhb1FZZM3Lb3oTUX3Os
- rL5wGqcc11XM5IJtCjxSZNARN587WBuPSO/0VUptPq5hZqfiAyesP0IGolWLDo376/g==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id x4Boa2x-6oaq for <u-boot@lists.u-boot-project.org>;
+ Sun, 18 Oct 2026 04:31:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DD8DB60634
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::332"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792297894;
+ b=BklWshZ2Jva2qd/qqehQCNQp4YUBow2k96ECjKg1Px82ZfJ2l9MoVuBbjRfvChg5jEc5
+ iPGoNv+J3wR7dVekHxIeQWKv9XeDV4TqFJWaJFNMxqplm5rv9d8uS0/46QpmdaZbBZisq
+ QcQGxwrUo0rG85DU33bVfbjEEvHr4ElyWcRx6jIfAne86T8Kq3t18EtMt9/CQOdGN0Dlg
+ /RTt/PGBgBwcPnYjxb2Z7CJheKfMUas3qHksoLL6uIzzQ4LIB14aq76NoDQXbAJ5s48gM
+ RuDR8WTSQmjXf42yOwdHZ9oHNN49ldSlhkdpN0KkFU0NBpHillbxwjxw8q/FhMa21og==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792297445;
+ c=relaxed/relaxed; t=1792297894;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
- References:In-Reply-To:To:Cc:X-Mailer;
- bh=OsUgCYNdJ20pGGyDlPAnL+OpJi3lIY4rgPeQDTiskFM=;
- b=hwvWxiw+eZYicr1ZbLFLlkquiBdx6Fj8P54WskapqTacF9TPib8CgYhs7W0XCHHlfuAg
- 1aAnbPuSRaFqGfeCkir5vsmMNskTEpgho2OFTaK8rHEb1g74Gu1ke+KWMrfzSk7jQ5DXP
- MpNH4vydSzT9wfHr0dm+PL8cEe5U2UR8yYXq11Ge622vK3obJpXt45FDKUiou40DAlmcC
- Otxqr0e8rAYCuavCnzx3Gxi/gQnmbsRGF5Y5STwWjKfsXaAXAH5M73oYA9J/H0TUwZTEl
- eXPPy1mCvNjM+QGdmDl1YPOJHg+J8QLp1XbocpXhZktMoTX/X+vo3VdxizxxQYvgRYA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=pass header.from=oss.tenstorrent.com;
- dkim=pass header.d=tenstorrent.com header.i=@tenstorrent.com
- header.a=rsa-sha256 header.s=google header.b=ZfCGUmEw; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::b130"
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+ Content-Transfer-Encoding;
+ bh=TeL4XG0oKohrYi1q5jw/bVr0cJvDUy9q2Qa0XKy4UTk=;
+ b=s6h54bwmCpDImlytLdQEaRRV6D/tpwVlGDVk6YkEEwDNSsOsvmjVBQV/5vjad1ProEdw
+ hcXgT6E4BwB7yhLer7BQZ/D99ZLvc1ESvn0Oamxr687v/MMofBLwIFK01ZIJUk3DPpyCu
+ F30HLXCfhjAHIYVmgDnWZHVvdvJCZUQXT9ZjYvoG3/6Sfn05hFJmzDd3d62mkCwocZvQM
+ tQ/Vqf7vl3EuPcZr1KgRaji1/lKg0J5wnDLN9+5QEC4naaY3GRMw0iD+/DYwB8hqIUA2w
+ M+b1CVpaY1SIf3vpYj8kf/sBdpHEj2HzgnXNEzMsvEiPVVFKcjqWhIPUzBZPyoyiBeg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=linaro.org;
+ dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=fpHiKr8m; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::332"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b130; helo=mail-yx1-xb130.google.com;
- envelope-from=asrinivasan@tenstorrent.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=oss.tenstorrent.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=tenstorrent.com header.i=@tenstorrent.com
- header.a=rsa-sha256 header.s=google header.b=ZfCGUmEw
-Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
- [IPv6:2607:f8b0:4864:20::b130])
- by smtp1.osuosl.org (Postfix) with ESMTPS id B3CF680BB2
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 04:24:05 +0000 (UTC)
-Received: by mail-yx1-xb130.google.com with SMTP id
- 956f58d0204a3-679a420b96eso1071224d50.0
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 21:24:05 -0700 (PDT)
+ client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
+ envelope-from=semen.protsenko@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=fpHiKr8m
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id DD8DB60634
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 04:31:32 +0000 (UTC)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-81ae6aefdceso951320a34.0
+ for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 21:31:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1792297444; x=1792902244;
+ d=linaro.org; s=google; t=1792297891; x=1792902691;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=OsUgCYNdJ20pGGyDlPAnL+OpJi3lIY4rgPeQDTiskFM=;
- b=ZfCGUmEwhzHCUVDoJkM4LTdCSB3NUosttOgLPMXejr6D+S/ShkhCS0nS3AOEqTa3xU
- NUqF7qjhge0QW2iR5Xa+wS8kvqoZtWdRkw5cuxu4GpuI7NXLuW+T166FONxHFtBqx0nS
- LuLU6GMVWLuFBneXP+GW+Rk+bmPm8vhD7hw9S9AsPKLiSlxpVkTL4kHrwYm/dei/iy61
- BOEIqyqtC1S5TnbyHPih7JtVwY4lxtZDonMaH8857WJpDnW+kvJNYsH1oTSVTwUUJBC8
- nEOmKY5V22WpyP5d/bQqjpVmsC45XmYI3pd2EZx5VxfCygCrE3WGVVWNsR+ZQma0BvPw
- twNA==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=TeL4XG0oKohrYi1q5jw/bVr0cJvDUy9q2Qa0XKy4UTk=;
+ b=fpHiKr8myEz6wgE3ZB3vSa+FWJ/70vW2pEbkkfsWLgHUsyYw6mYyud96ObHfeR1mu3
+ 9+8JubL4rIlabBmlGWzRXYah+2u11u5BYXQgS8kPB231Wp1X7KVdpy4ncLcIopb2kI1n
+ HUWi9bF7N5/sgBMQKVWuhwc5axzDqkTJ8FsMPAnxkfAjyKa6LEo5/InvxjV5aUoeGsLO
+ 6t5MGBorDJ88aqdlsaDL2XVt5EDyHKdBO7KgpUwX9omU5mX4KyWP0zdIToRv6/aA3aj7
+ 7jenTmkrAcAQQ3aZtvz6ZBrGmM1EVLWAA+6wzSJYVlZtuecx/p1EC2BA7zlpp6WTHrzA
+ AUQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792297444; x=1792902244;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=OsUgCYNdJ20pGGyDlPAnL+OpJi3lIY4rgPeQDTiskFM=;
- b=V9GQan/509qyV5mbQfEOsVKtQ+ylzRoJORv/44UOncPcWLgldVtA7ueQT20j+dqZts
- urapOHBqS7qrRw2MKV7BIOHRYz/9VbN754RaewUarzg4kcSxgV6oQ0MQC2x6RTwfofyS
- G6EwUUcVObY7APrbChdiWKGqf+89YbFxouFnSOR/eIHGmMXx3mkw0/c5kXOl45Gl9dbI
- 4NGCKHODWti/3o13ISlwdPLWKhTa/9s1iG4C2q+Fqqt96n+W/WwEbXMyTJS4NwJPkt2q
- jgZkqzuDw0kaOuN2S1EOA8YiRoBql/f3oqyUtPdtJsu/kTpRNY13DenHeuePORZpKG2n
- XVTg==
-X-Gm-Message-State: AFq9FYInLobTalJcN/o0pOX0qmfBW3+10cwuHXA3b2POo9B+HpD4k3Xr
- maaOQ4Ef6L34lZaEqo5yccpEXDt3c9FiCrTVIJQw9D2NzrXcMbQX/PQuaBgRkWpbRzk=
-X-Gm-Gg: AYBFou1LRVGFOEx78NVlbXpOVSlrv4E4KcqaFywUMJQmRqCg1RQ+cPkaQ//iKGDSTtK
- 3so9WDUj3MEpuLTorcIV8GxCkLAJt7irHD4H/gDzbbZI1tPvQtSQHNUZGoXPGJULVbNwvSeGjSL
- RPQ6K1PNEWqjXPaD5i4ZSyuCibjzkNQEO2eRdvztq+MMNCPPlvxhn2e2IRcurpP5vYWoZ0nN3N2
- 2g2Mtkarx75pbgT1/g6RfRc4Ho93yBvhF8JeGWnm0N0gg7js5IiDa7/XIqmssk79iC8Wx56Pj9V
- N0OVyB4IyCS1xkD18Hhiz7TA5YiV6AaaUtVEtUerwlfaO0Ipi7xldaJSm8KC5Xa1/S663wVAalW
- 6TSAUV3bn/l+SjnANc+H8EY6EAxhiD1UlMiaPp+EjOlcpDAbU0WdaSPQnrlz7ZgHYxzdLjyXuR/
- z+zKGjgWb1VJu24s6EFhnoA+RNebDHUaBqNBMTv//FLFRpG1IciNRrWPptSGilPwqX+wdvhZbqA
- d79Dmsxnso+wsCQ4WYNLnQng65TPal11YGQbx9ZIRqqgJJJAQNd7tB26gSfQ+v2
-X-Received: by 2002:a05:690e:4506:20b0:675:61ed:ae79 with SMTP id
- 956f58d0204a3-679ca92c9d7mr768328d50.40.1792297444311; 
- Sat, 17 Oct 2026 21:24:04 -0700 (PDT)
-Received: from [192.168.2.129] ([2600:1700:220:59e0:4b47:590f:51dd:a46d])
- by smtp.gmail.com with ESMTPSA id
- 956f58d0204a3-679b1f0e01fsm2838791d50.20.2026.10.17.21.24.03
+ d=1e100.net; s=20260707; t=1792297891; x=1792902691;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=TeL4XG0oKohrYi1q5jw/bVr0cJvDUy9q2Qa0XKy4UTk=;
+ b=0lqkcLtlehNphsIb19M7avbtJCGWT+IOYwabvEWSSTF0e40QGaXhDFWp0XthGxLL8Q
+ 34+D190MR0a41miP4rb3dx1U6JfVFfCpftOkDIeFgDIlyAa4DGduzrFSxxtqB5Gic61h
+ 3Hlv3R+4+yGlFOyoYCpydG4FcSGFrdgFtXvWAjiepTEnT94vbRQYQ7n6pzNRmH1yuAyo
+ fcbOy/PntocJtbTN27PcuMpiCYu7ryOL0ADXu66N5l0rdKTQEUndrKtT5kP63T6KlmXG
+ 7U7k2mvG60wVeyJfe6Fp5kiHSpYHNNkt8qIJzWNNt+LCtvi1FP22zLIk4kPxSpyQjWYS
+ jg9g==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBx5fU7Y5kfyjvJY8geEZ1fIZRRXIV5VbfZN/+uEi0y08KK+BhtlwVar1AEr8LO4Q490txBLI4A=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYIx+4xaNQLdTxu+zUWBhXfApLyX9OjN09QUtuL6d9uyVkNgWvKR
+ SK5Vi/Jb60VeoCWpfQ2a+p3FCsOUUqibASFxIf0iLOe76BspMGMv/yEuba9vZXVbn+SpTxZ1LAr
+ Eo118P2Y=
+X-Gm-Gg: AYBFou22TwNl/uAidg2WxNpjh26z4CxJZeCH8gWmTJ6vO5TbIQmloj9YiKylTKyFyrT
+ 03GubnYssoYgTfB4WFnNJQAm2mpligEknoMEtxBINXmmHd7xIeg87P1kCFFCNdSIrzG+BKMM9X7
+ qpSjhOGynHPVdhTS2jKQt6lll6pBMdxZ9HeXA9pmPMs+twQW1BwVv6Gm4LT0HsBKNC7rcL5oR6u
+ xHM3pDTFH0X5VzuaeThJz55fc1JIUoMDfklrLET7ZcsctPjrlavrUoX4lxC5zIKzkEWe2BcYBo2
+ kQ2jU3XaCDQHy06QEpe6308rI2J7dwm4yjtllaJ6H/ZHfiVzmO5RBP3ytugs9xX5RTtQA5kdil8
+ ZDqKpzr7aMWgDYUYufdE4s1929ARmFeW1jtWAlU0ehLlILaHOnBYsnK0AjHC1aAyGMEJnQgsXtq
+ FaOC2ZC27CCoJlI2W8Ahkw/RlyyYpsH7SKrdYVt9uBacMdlPcCYTICpF66jyvnxWo1dgzZfwIVX
+ teCb20=
+X-Received: by 2002:a05:6808:3084:b0:533:72c7:f80c with SMTP id
+ 5614622812f47-53cd63bfbd7mr3593758b6e.42.1792297891222; 
+ Sat, 17 Oct 2026 21:31:31 -0700 (PDT)
+Received: from localhost ([2605:a601:1514:4f00:264b:feff:fe59:d7f7])
+ by smtp.gmail.com with UTF8SMTPSA id
+ 5614622812f47-5388a55671asm4433367b6e.5.2026.10.17.21.31.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 17 Oct 2026 21:24:04 -0700 (PDT)
-From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Date: Sat, 17 Oct 2026 23:23:50 -0500
-Subject: [PATCH v3 5/5] bios_emulator: extend VGA I/O ports to include
- ports 0x3B4-0x3DA
+ Sat, 17 Oct 2026 21:31:30 -0700 (PDT)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Alexey Klimov <alexey.klimov@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Minkyu Kang <mk7.kang@samsung.com>, u-boot@lists.u-boot-project.org
+Subject: [PATCH] lmb: Enable LMB_LIMIT_DMA_BELOW_RAM_TOP for ARCH_EXYNOS9
+Date: Sat, 17 Oct 2026 23:31:28 -0500
+Message-ID: <20261018043128.26916-1-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261017-aspeed_vbios_fixes-v3-5-961124989594@oss.tenstorrent.com>
-References: <20261017-aspeed_vbios_fixes-v3-0-961124989594@oss.tenstorrent.com>
-In-Reply-To: <20261017-aspeed_vbios_fixes-v3-0-961124989594@oss.tenstorrent.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-X-Mailer: b4 0.15.1
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -181,127 +178,126 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The IS_VGA_PORT macro currently doesn't cover the 0x3B4, 0x3B5 and 0x3BA
-I/O ports. Reads/writes to this currently fall through to LOG_inpb/outb
-which are unimplemented on non x86 architectures (which don't support
-I/O ports).
+Since commit a3075db94d49 ("lmb: Reinstate access to memory above
+ram_top") secondary CPUs cannot be brought online on the E850-96 board
+in the Linux kernel:
 
-Add these ports to the IS_VGA_PORT macro, and implement reads/writes to
-these ports. 0x3B4 and 0x3B5 are mirrors of 0x3D4 and 0x3D5 that are
-used in monochrome mode (bit 0 of 0x3C2 is not set), and 0x3BA is a
-mirror of 0x3DA in monochrome mode.
+    smp: Bringing up secondary CPUs ...
+    CPU1: failed to come online
+    CPU1: failed in unknown state : 0x0
+    CPU2: failed to come online
+    CPU2: failed in unknown state : 0x0
+    ...
 
-A vga_port_active() helper is added to check the current mode so that
-the monochrome ports share the same logic and env state as the colour
-ports. Reads to 0x3BA/0x3DA also use this helper, so the 0x3C0 address
-flip-flop is reset and the 0x3DA status bits are toggled only when the
-accessed port is decoded in the current mode. This also means 0x3DA no
-longer decodes in monochrome mode, which matches real hardware.
+This is happening because EL3_MON (the Secure Monitor firmware, which
+also implements PSCI) cannot handle 36-bit addresses in its CPU_ON PSCI
+function implementation. The E850-96 board has two 2 GiB RAM banks: the
+first one is mapped at 0x8000_0000, and the second one at 0x8_8000_0000.
+The commit mentioned above changed the LMB behavior (in U-Boot) in a way
+that the memory from the second RAM bank (which is mapped at 36-bit
+addresses) is not reserved anymore. The change in 'bdinfo' output:
 
-The extended range also covers the non-VGA ports 0x3B6-0x3B9 and
-0x3BB-0x3BF (LPT1 on legacy PCs): reads return 0xff and writes are
-dropped instead of reaching the real inb/outb path, which is harmless
-from the VBIOS's perspective.
+    - reserved[4]    [0x8_8000_0000 - 0x8_ffff_ffff], 0x8000_0000 bytes
+    + reserved[3]    [0x8_ffff_3000 - 0x8_ffff_ffff], 0xd000 bytes
 
-While these changes are needed for the Aspeed AST2600 VBIOS to run,
-these VGA ports are part of the general VGA spec and might be useful for
-other VBIOSes.
+That in turn leads to the Linux kernel image being placed in the second
+RAM bank with 36-bit addresses. The corresponding change in /proc/iomem:
 
-Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+    -   f480_0000 -   f67e_ffff : Kernel code
+    + 8_fa80_0000 - 8_fc7e_ffff : Kernel code
+    -   f6b6_0000 -   f71a_ffff : Kernel data
+    + 8_fcb6_0000 - 8_fd1a_ffff : Kernel data
+
+As evident from the Exynos850 device tree, it uses "psci" as a CPU
+enable method. That means the kernel relies on PSCI firmware (which is
+implemented as a part of EL3_MON firmware in case of Exynos850 SoC) to
+bring up secondary CPU cores. So when bringing up secondary CPUs the
+kernel makes an SMC call (for each secondary CPU) to execute CPU_ON PSCI
+function (see PSCI spec [1]). The kernel passes an "entry point address"
+to that SMC call, which is the address of the secondary_entry() function
+in the kernel, which should be executed when PSCI returns to the kernel
+from the SMC call:
+
+    static int cpu_psci_cpu_boot(unsigned int cpu)
+    {
+        phys_addr_t pa_secondary_entry = __pa_symbol(secondary_entry);
+        int err = psci_ops.cpu_on(cpu_logical_map(cpu),
+                                  pa_secondary_entry);
+        ...
+
+The pa_secondary_entry is a 64-bit variable, which is perfectly fine
+according to the PSCI spec. Unfortunately, in case when that address is
+actually bigger than 32-bit value, the EL3_MON firmware doesn't execute
+the function at that address -- that's the reason the secondary CPUs
+don't come up. And as discussed above, the kernel image is now located
+at a 36-bit address, which means the secondary_entry() function is at a
+36-bit address too:
+
+    - secondary_entry() address:   f67d_f5a8  // 32-bit address
+    + secondary_entry() address: 8_fc7d_f5a8  // 36-bit address
+
+It seems like a bug in the EL3_MON firmware, e.g. it might truncate the
+address to 32-bit by using a u32 variable (instead of u64) to store it
+internally. So the right way to fix this issue would be to fix the
+EL3_MON, but unfortunately it's closed source. So instead just enable
+LMB_LIMIT_DMA_BELOW_RAM_TOP for ARCH_EXYNOS9 to limit the available
+memory to the 32-bit boundary.
+
+Although this platform could benefit from having all memory available in
+U-Boot (e.g. for transferring big images over TFTP), and it looks like
+there are no hardware limitations on this platform too (DMA has 36-bit
+support, etc.), limiting the available memory in U-Boot is still the
+easiest way to workaround the EL3_MON problem, and 2 GiB is enough for
+all use cases in U-Boot currently. And of course all 4 GiB of RAM is
+available to use in Linux in any case, so it's not a bad tradeoff, and
+in fact it just brings back the previous behavior (before the "Reinstate
+access ..." patch).
+
+Enabling LMB_LIMIT_DMA_BELOW_RAM_TOP for the whole ARCH_EXYNOS9 family
+also seems justified, as it's likely that all modern ARM64 Exynos chips
+may share similar EL3_MON software, and thus possibly the same PSCI bug.
+For example, a similar issue was mentioned in exynos-mobile related
+patch [2], stating that after "Reinstate access ..." patch only CPU0 is
+able to come online on some variants of the Samsung Galaxy J6 (based on
+Exynos7870 SoC).
+
+This was tested on the E850-96 board:
+
+  1. Using 'bootefi' to boot the Linux kernel image
+     - before this patch: the issue is reproducible
+     - with this patch applied: the issue is not reproducible
+  2. Using 'booti' to boot the Linux kernel image from 0x8_8000_0000
+     - before this patch: the issue is reproducible
+     - with this patch applied: the image can't be loaded there anymore
+       ("Reading file would overwrite reserved memory"), as the second
+       RAM bank is reserved in LMB again
+  3. Using 'booti' to boot the Linux kernel image from 0x8000_0000
+     - the issue is not reproducible
+
+[1] https://support.arm.com/documentation/den0022/fb/
+[2] https://lore.kernel.org/u-boot/20260614-j6lte-lmb-v2-1-6046b54db536@disroot.org/
+
+Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- drivers/bios_emulator/besys.c | 50 +++++++++++++++++++++++++++++++++++--------
- 1 file changed, 41 insertions(+), 9 deletions(-)
+ lib/Kconfig | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/bios_emulator/besys.c b/drivers/bios_emulator/besys.c
-index 76a05e74f55..5c440c6792e 100644
---- a/drivers/bios_emulator/besys.c
-+++ b/drivers/bios_emulator/besys.c
-@@ -248,11 +248,27 @@ void X86API BE_wrl(u32 addr, u32 val)
- 
- #define IS_TIMER_PORT(port) (0x40 <= port && port <= 0x43)
- #define IS_CMOS_PORT(port)  (0x70 <= port && port <= 0x71)
--/*#define IS_VGA_PORT(port)   (_BE_env.emulateVGA && 0x3C0 <= port && port <= 0x3DA)*/
--#define IS_VGA_PORT(port)   (0x3C0 <= port && port <= 0x3DA)
-+/*#define IS_VGA_PORT(port)   (_BE_env.emulateVGA && 0x3B4 <= port && port <= 0x3DA)*/
-+#define IS_VGA_PORT(port)   (0x3B4 <= port && port <= 0x3DA)
- #define IS_PCI_PORT(port)   (0xCF8 <= port && port <= 0xCFF)
- #define IS_SPKR_PORT(port)  (port == 0x61)
- 
-+/****************************************************************************
-+PARAMETERS:
-+port    -  Port to check
-+
-+REMARKS:
-+Some VGA ports (the CRTC index/data pair 3B4/3D4 and 3B5/3D5, and
-+Input Status Register 1 3BA/3DA) have a monochrome (0x3Bx) and a
-+colour (0x3Dx) alias. Bit 0 of 0x3C2 selects which one is decoded:
-+0x3Bx when clear, 0x3Dx when set. Return true if port is decoded in
-+the current mode.
-+****************************************************************************/
-+static bool vga_port_active(int port)
-+{
-+	return (port >= 0x3d0) == !!(_BE_env.emu3C2 & 1);
-+}
-+
- /****************************************************************************
- PARAMETERS:
- port    - Port to read from
-@@ -313,18 +329,28 @@ static u8 VGA_inpb (const int port)
- 		if (_BE_env.emu3CE < GRA_C)
- 			return _BE_env.emu3CF[_BE_env.emu3CE];
- 		break;
-+	/*
-+	 * 3B4 and 3B5 are mirrors of 3D4 and 3D5 that are used in
-+	 * monochrome mode (i.e., bit 0 of 3C2 is not set)
-+	 */
-+	case 0x3B4:
- 	case 0x3D4:
--		if (_BE_env.emu3C2 & 0x1)
-+		if (vga_port_active(port))
- 			return _BE_env.emu3D4;
- 		break;
-+	case 0x3B5:
- 	case 0x3D5:
--		if ((_BE_env.emu3C2 & 0x1) && (_BE_env.emu3D4 < CRT_C))
-+		if (vga_port_active(port) && (_BE_env.emu3D4 < CRT_C))
- 			return _BE_env.emu3D5[_BE_env.emu3D4];
- 		break;
-+	/* 3BA is a mirror of 3DA */
-+	case 0x3BA:
- 	case 0x3DA:
--		_BE_env.flipFlop3C0 = 0;
--		val = _BE_env.emu3DA;
--		_BE_env.emu3DA ^= 0x9;
-+		if (vga_port_active(port)) {
-+			_BE_env.flipFlop3C0 = 0;
-+			val = _BE_env.emu3DA;
-+			_BE_env.emu3DA ^= 0x9;
-+		}
- 		break;
- 	}
- 	return val;
-@@ -390,12 +416,18 @@ static void VGA_outpb (int port, u8 val)
- 		if (_BE_env.emu3CE < GRA_C)
- 			_BE_env.emu3CF[_BE_env.emu3CE] = val;
- 		break;
-+	/*
-+	 * 3B4 and 3B5 are mirrors of 3D4 and 3D5 that are used in
-+	 * monochrome mode (i.e., bit 0 of 3C2 is not set)
-+	 */
-+	case 0x3B4:
- 	case 0x3D4:
--		if (_BE_env.emu3C2 & 0x1)
-+		if (vga_port_active(port))
- 			_BE_env.emu3D4 = val;
- 		break;
-+	case 0x3B5:
- 	case 0x3D5:
--		if ((_BE_env.emu3C2 & 0x1) && (_BE_env.emu3D4 < CRT_C))
-+		if (vga_port_active(port) && (_BE_env.emu3D4 < CRT_C))
- 			_BE_env.emu3D5[_BE_env.emu3D4] = val;
- 		break;
- 	}
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 021a82d47092..e0bfd10f2b7f 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -1371,7 +1371,8 @@ config SPL_LMB_ARCH_MEM_MAP
+ config LMB_LIMIT_DMA_BELOW_RAM_TOP
+ 	bool
+ 	depends on LMB
+-	default y if ARCH_BCM283X || ARCH_MVEBU || ARCH_ROCKCHIP || STARFIVE_JH7110
++	default y if ARCH_BCM283X || ARCH_EXYNOS9 || ARCH_MVEBU || \
++		     ARCH_ROCKCHIP || STARFIVE_JH7110
+ 	help
+ 	  Some architectures can not DMA above ram_top boundary,
+ 	  which is after 4 GiB or 32-bit boundary too. Limit the
 
+base-commit: 8d534cec0cc0109a37c0ded8854da03f1526dc0e
 -- 
-2.43.0
+2.47.3
 
