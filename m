@@ -1,189 +1,184 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27DB5CCA490
-	for <u-boot@archiver.kernel.org>; Sun, 18 Oct 2026 17:16:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 909EECCF2C9
+	for <u-boot@archiver.kernel.org>; Sun, 18 Oct 2026 18:58:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9B057406FA;
-	Sun, 18 Oct 2026 17:16:46 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3459060622;
+	Sun, 18 Oct 2026 18:58:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gawkQ5YJlsNv; Sun, 18 Oct 2026 17:16:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5ED1440608
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792343805;
-	b=TopKF4pWbZtPSScjubnLUleepIMHjMW9EwelRVL9PLSu+ZaAYOlT2eXXAoiGzoYHGuE0
-	 2QU8M1gFEBLOHuhpPf8O0Nh65Ga+O10m25dYC8pNnVHTW866nputQQh/HPQO9zsr4erqB
-	 IadviZkZ4YZ10QvRxYQbQVOjhY5tsJEA2irGfzMWM1axLwqLMz2FxxMuTL+iFt2rRkleB
-	 CrJ6aD5XClftIcy+0/I20s4ACqO0o/e4Wz+KPljOrCDgmBa9gPsLBP4O+lqyeQQXmFK51
-	 yuJjG4OjaVqtPme88E0oAVrho3Dyj3wykhKu40LhYEjxB++fVe5vsBFtRO1xY2CiehQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ht21Wco05qs9; Sun, 18 Oct 2026 18:58:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 833676062C
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792349913;
+	b=M2OMbYcjpOO50ZPEgxAm3Xdb2A2rmDecsdZmMjfnD2EYXfNFOw8cUKugykUhjJN5jGN7
+	 s3ePcmWabWSU75YtPyULH+TGIOGlokNrNvk2Tl61ovN0A5/YjH98sOjmHYz5CLOCmgrw7
+	 k1VtYwBh5WBdc7WzDM8OwEKdWFQevSYISo6P75qlzZkL5iHwRwIotKmDsz7ll1GSf8Zpt
+	 D9wghiAV5ml3RejF3IGjJoxKej4Ou5H2Nn3w5IbjUOa/swWxg4LJw5ninKgLfrdDJ9Ncx
+	 QNzfqHfvPPW7ivDiUg4trQrHsQhnPaO32D37WYtGZvYaaY48Xfl9efsN8uLQfppxHMg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792343805;
+	c=relaxed/relaxed; t=1792349913;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=rgnk/6qS0PmUcGU+dIZi1B5K8MZDT94/tHjnEaQxtys=;
-	b=HPOK7dmj0uyzUPFmHfEbbDZVsH3Rj/K7Rgav5ewBnmnI3TAyXOKMmwNuklbPilTwLXWI
-	 CksGTcWQxgr2LeulEDBqf1Y0qhvkgY0x8CzkhD+kPug3jBIEyOILv3HYvhvNpk6BW8ZFN
-	 GD22ryPe2dEWfoGg8VFVKG3mE4pOUcylE8Fz8N8tdM3xmUsF6b1lJPOgtyIrSS/Aqk/l7
-	 aJb2mqNP80Xx9vRuMqrgunSZy2WRbAxdDuP/WL351cWN1dnUIwZz+ueYPh741Wo+iW55N
-	 leEZzTLaNcPcer7yANw4GnTLBPVJLdmu6eC4xCfS9lqswwnm0ASDvvRxBueY2PQoyIw==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	bh=QEqV6IuElUufBmAJTQXOnvaEx2gCg53wIOBHAyt8uUY=;
+	b=jCtPeJG16fbZron8Qlyw1qXZ3tyAjpcwM77MqIbTHTLOG9jbxrQ0yelgyNUFwJPWCh1b
+	 1PeHXf/PRJIzbmnobvp25R3bL16GjDwx+8UjpZjH/z1XVdxmRf7CKNv92kNrvqB6pwAS1
+	 94+c7bAgZQdJMquRuPdV50irRdogUuuHLVaofAtPSWAgeAkLs/bgXw1n/FiA/Znfdv+bd
+	 qHGlnH3HxVcl5PNmI2bnavQOuKk77ORQ6Gm1z448G3yg2MdtHG0/bFAitapzjwc14nRms
+	 8ygzvOb4TDwRDXwRwBANSCFXP8Vs8szvLVgixB0nF/ERkleL3NRt/zMdW+vqDxFetqA==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792343805;
-	bh=rgnk/6qS0PmUcGU+dIZi1B5K8MZDT94/tHjnEaQxtys=;
+	d=lists.u-boot-project.org; s=default; t=1792349913;
+	bh=QEqV6IuElUufBmAJTQXOnvaEx2gCg53wIOBHAyt8uUY=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=gYnMw4AXDIuaasNibqpfH28hPFYzDTm0OVRAVEmFwajBwJDY2uyX+XnPisOnJElkT
-	 zWANN1qXMxODGsvJktGmyFMyk12PbowLXFw8TWmxRZFj7Ol+0Sa3qmGNaQXWkuillG
-	 ByxcTLGMBufviQubS9Jza1zZ7/ihIdgajNijYjavs3RWFP6+yQlw93AtdqqcBWfrKP
-	 AWEKWgNX4w6apiJi7K2ylWfM5ywh9bOHbSimQ1nXjIRXj5zFEW8tdgxfXmqkoAXhZF
-	 bcx+4SXhLxQ4dQstv0fSDxq9v7F9K3pqLDZClylHDXQduX/MzGOHI7oE7sqYgUea6P
-	 AFALFH+yk5acw==
+	b=LX/Ao00NTbqgo2Nc3NewLxO7EbN/pbW8t9chTsd/g59Z1a9OVshOGcKMMsu/x8iWv
+	 qd/vVGRkx5duHshzlT5HWGOJTL9BWrkL7CYlG/QI0/Vl6XA7rMgOE7Y9OwixuYfj64
+	 WU9tJ5jEbuRSX/89LVCTVt1Sd/MS/7c6DD5QjzV8pgRI7p69kA73x0h99g2/zQEW+M
+	 8XdBC/zKhTKFRgkqbBMpJm4HrX30J2r5ah20j7HMMhheComnYY8NPOG9j7PpuA2RAB
+	 ChwXxnblLeWgd7pP2zSCuPn4t3TpczdfrLIYeSzZU4bag6QtkY7AAfUtckOLCxyH8d
+	 MQe2BMghRKYFw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5ED1440608;
-	Sun, 18 Oct 2026 17:16:45 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id C65731E9
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 17:16:44 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 833676062C;
+	Sun, 18 Oct 2026 18:58:33 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2252979D
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 18:58:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B9D0580F90
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 17:16:44 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0932140049
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 18:58:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gB_dYP0W0kNi for <u-boot@lists.u-boot-project.org>;
- Sun, 18 Oct 2026 17:16:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 44FB280F82
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::1130"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792343803;
- b=bBnE1NMGsmsnurV0AW3bext2LTq09k2/XPnbXFOb5s9e6PbENsswqD7QPONoa4jkImE2
- tclzu09feaHTngoUEoQUzOTHQMu8UgP/ieQ/gJxHZVvRgtTAQ/SITTilPrhrU8GhdK5bv
- Zwu6pC3NGsQOe3JSYJ6I82XQTlAEdat+pQWuemb3lcOit6NLvFCy+Y/SxJeDFMInba7EJ
- pQHkvI52YZ1/Pa+sdZwoP0I65xLTIRhgJpT537pUlLQmdmPfYgsXJ+txidBiDAe2+durz
- gJ36jSUhn6FWj7FOzEKFOLBMDdPvpcoxPur8B5o7hGwYol8AW4b7a4U5wwUcaYno5wg==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DKaqo4ON26JG for <u-boot@lists.u-boot-project.org>;
+ Sun, 18 Oct 2026 18:58:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org BAD784008E
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::b12b"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792349911;
+ b=clO5tSz5TfMqOAMAjZAmvU0amPAooR2E5ltAtpSnNWXavsEGmaQPGPmjLFcZgiRpXT7r
+ Wr68v5qzgMYQumn9iRFh4blsMXBeJQdZX5YPAYWX9Pt3PiWSvcwljUKWZu/9A6N3nNYrd
+ 7soc2OHw7hlGV9WQmxUMv6iLuXPADVl0QOty7J1zIw2/ErKmsi37namOA9kfuhsNy/F/O
+ Txo7D8BiR6YtrVJ2xEETD+aNytaUp1I22xBGcsB4isGI+GIVW2ao6kfxxW0X0pZsvvYEO
+ Kcfy7Bm7/M0FMFVHIfjBp1brilB4TucQ0SEwbgPsJIWtSov3EwYu7MszZBPRc5kzdUw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792343803;
+ c=relaxed/relaxed; t=1792349911;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
- MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
- Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
- bh=rgnk/6qS0PmUcGU+dIZi1B5K8MZDT94/tHjnEaQxtys=;
- b=D7wyjltrK9O24kOooYOzFZ9Y1ZXyJqMJ9XYYHRqhd2pZv/+OmZbjp2megFs05K7tCp3T
- iJedWUFDcribsqDllMxCEPmCb9xlUo4WnTxfksXEgnIz9IqNHYf4oc3Aa6uhnH8h33Z5J
- 1omjiDIl8kO2oLNszh4ZH3BkW5MuPeMOfSrz2sj8xqTaNl6y50QQpjetFliBoIDJzIcVe
- +cjXooaPGj5yVjjhETQZ034IU47S0f1qobQUjN2nDd3US2EO/fuhuPNmFoTQFnubvvdOf
- ll+94G4x2JFk9GoATbZRuZgZbCQUF7W2OECkEOQ2S0hhfRjKsYs6mdMybjNiHXvjhCQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
- dmarc=pass header.from=linaro.org;
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=l6MElwmJ; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1130"
+ X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+ In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+ Content-Type:Content-Transfer-Encoding;
+ bh=QEqV6IuElUufBmAJTQXOnvaEx2gCg53wIOBHAyt8uUY=;
+ b=UxvBlCi0HC9vUW3GIPQr0tjHqzpAdhEel4WaPDQrI45UpM7L89rruadDvg3ulqJ0st9I
+ PPdQ03Lip9NcUOkl9Iam1pDTZseSvA+3Cf1A7G6M/1a/J42mVAIrlfP+WN7ysHDtffEXZ
+ QsjewUbDqJLENmb/aUENckd2/x1ZqXOcr9IDykhArpFsKgGWGfmorq7+mS5IfcEldV10d
+ WA4BTJXIjm1qFopOGAYxd6JTgW0tXjMLij3qT5YIYjq8E5m3d3O/wHkVGrciDQw2f82c/
+ b56eCQFbWmNIHRuNkEoOI+Hh4XTZDq2ioPlM7Mh/D45LO1EFzkD6u0LUuTDvAOx321Q==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
+ dmarc=pass header.from=oss.tenstorrent.com;
+ dkim=pass header.d=tenstorrent.com header.i=@tenstorrent.com
+ header.a=rsa-sha256 header.s=google header.b=Vlk0Vz9C; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::b12b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1130; helo=mail-yw1-x1130.google.com;
- envelope-from=semen.protsenko@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=l6MElwmJ
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 44FB280F82
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 17:16:42 +0000 (UTC)
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-8b0f59a5fdeso7516147b3.1
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 10:16:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792343801; cv=none;
+ client-ip=2607:f8b0:4864:20::b12b; helo=mail-yx1-xb12b.google.com;
+ envelope-from=asrinivasan@tenstorrent.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=oss.tenstorrent.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=tenstorrent.com header.i=@tenstorrent.com
+ header.a=rsa-sha256 header.s=google header.b=Vlk0Vz9C
+Received: from mail-yx1-xb12b.google.com (mail-yx1-xb12b.google.com
+ [IPv6:2607:f8b0:4864:20::b12b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BAD784008E
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 18:58:30 +0000 (UTC)
+Received: by mail-yx1-xb12b.google.com with SMTP id
+ 956f58d0204a3-679aeeddc6bso1444984d50.2
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 11:58:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792349909; cv=none;
  d=google.com; s=arc-20260327;
- b=Kj6qs5+Ty4VYvlHSMSeQLMwJGRMlk/mechyQGDGrVFWmce2u6eXw+hoZo4IdeI699N
- X2mIsO4NvYlBgZ6wHBr0nbqf3J5VIhoWB6PA5LgadwjUMuE9rZku8kszWdRLEOh+QA0K
- NQ3HtdiJyGJ6UEwrc3t4X7AUwwxAY/U2bi3A/1ZkbG95CkY4zpUD8YJZRMU9rQ8TecYv
- bZe+rkRBb1XkHWOfLCjM5nemgLLvzdp0YDt6TGFwUh6EThG/mrYxNHkvdeVnR5sa7GDY
- 9BkH5NvbZDT2M+14vYkap8w3G4NQ7yMjCSX76BhCHDOLKi2LuWiGlejofZ73U/QnUuET
- Ad1w==
+ b=fhKY7Pqk3mC9ZoH6TwFjHiqD02VkQBVVfl0mCYmRtXoiMqhfq7RalaRUm7w+X9kDcA
+ VLvXCYfpcjyJBWqpw+na+KpyX/ZCIxvCmOU7KWiq9OI2WAwnbS0X5T3NpVETsS6zg2uQ
+ z3w9ub8EhnpBkk5aaWsRzraXnPCJlLg8jksOljZaqS+LTKKPGitJ8Q/2wiGk4s1p4Fyo
+ LUYIv/F/f4PmUKjEXS3l7Bh4m8O0q5YfWSb3+65o7vImi/Um7/M3V51hEfMmD/WY9Ixm
+ e8rSXBoOWn+c5VrXpl7vbYk7iEdXS7aUSfP3BM49fZM7buN2ysQxkQD1b19TKtdaGCJu
+ D9Ug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=rgnk/6qS0PmUcGU+dIZi1B5K8MZDT94/tHjnEaQxtys=;
- fh=oK7cbSORsFlyqJgI90GSJljMunw+bI1mMjAk8JRFxAI=;
- b=ired1PgTpucDL1jRFbhe0QqR7A7Qlt91k0IhAHLYOdcZ0sc3P4S/aRqScGbHM+ftR8
- 3NjQvUdslfcyeZs4f4T5txcGSXPSOWCPFJes250aC9ry4/sjfBg0oN92jNDyIzR2ptCb
- Cb6K7KKsKwJ8+DaaBOBqOqHTSK/44zixE6HETIQlh5RcYJxTz4W+RZroJ4truMNgQs/B
- T1PmetFdLCB9q7F6ygRft3rLaGRJjoO0mjC0Zl13V8cHU5PMgMZBhvAK5yA3d0dvchU7
- W0On4yqLlIOo1glz9UGGS/DJ+ctl3CmKANeDlSlALK0XQmMFUM4GALIKiFSEuKirGC0f
- BuCA==; darn=lists.u-boot-project.org
+ bh=QEqV6IuElUufBmAJTQXOnvaEx2gCg53wIOBHAyt8uUY=;
+ fh=wYOX0HLKHiKXnHjiThLKGp5c2jv5UqzB0fUKMYGYMss=;
+ b=rmEDEIEY+cK8Ufksh+07TNdde/7EGBwWaaw3ZhABB719LtIkHg4/kf3/8oSsWtMVX8
+ v1JvqJi+dTbs8BQSLF5zDC1w7iidLw5eZwVvxmQ2a400F68Gn/rjBkn3kbNtlaWP/R9r
+ v3rV7N1P6yvic806GfLdWt4bL5M4XGeMvYJQ3rlgJ+/epwUbkLqDR4JFff7GdiQKs3pt
+ schA3BG24x5FlPDdjsT8HELiPsjlBJESPstVmxK/jc0OMeesGduq88pA5tWG3pRDDtPL
+ 2k3cvZGJBJUW6p8ImjzPXQorbn9lbrch0WxmjpfDeGth5mMJskQT05DLMTq9E2F7jZBT
+ cKwA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792343801; x=1792948601;
+ d=tenstorrent.com; s=google; t=1792349909; x=1792954709;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=rgnk/6qS0PmUcGU+dIZi1B5K8MZDT94/tHjnEaQxtys=;
- b=l6MElwmJ57I2LCgaoJkj1oa04WrGUg/IymW40OKFqcSEFUn3IH9AzqojBsEGtq50vZ
- JFEfQJfR0mtfJ4cVCYXz+AeH4TbUtVX8oy7C60G9ITEYy/sJi2iD544HE8ux4f4AF1qd
- IUPUnEXXczk+k61U7p7Zvt0+8NdyWwoptE2/dorTeh4n3nw79jy5ompnsyRCLBz7J/ix
- GeCb94gAObmDLBlspLte5OA6UH/EkXwDUKAnN2ZnK3SqqON5pwW4owOaBmhz3u0Dff4g
- XVE7RLsiCuSvExh9y6+3tWTZCjGw1ZsNYkHhgcMohoQO53MpiBh1+Jvi5JjSUrlCTpD7
- KzNA==
+ bh=QEqV6IuElUufBmAJTQXOnvaEx2gCg53wIOBHAyt8uUY=;
+ b=Vlk0Vz9CQ47v2oAA6jcopzELXKniOSnypVHv0FNnydxl6XAkMxOgTJcPX8j4YI7f/f
+ CyZY/oAERQX5+uMzZOvhAsmyKS56qHE8i1Gsm7IpEH11nO16i5RM5Dfc/6kbDiD4whyT
+ mewtJKsTZ7UVmeGWHeE2drsUiSye1V3/7BxjxyY1JJyzKrUOZW5oFr9UF/xwZwOQkrxs
+ lwgflrIlCcpvAzTn//HpXWFO+SU/qO5xHggqTjHiKczZ1q/Qnq4QXyeFZwXnASpk9tYf
+ EYDVIo+Juqi39V8Sm0eheEA/bau757xKa/cAL5VmLlO1lCtfXWSlJkWCVvW+ux+si/Ir
+ SUVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792343801; x=1792948601;
+ d=1e100.net; s=20260707; t=1792349909; x=1792954709;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=rgnk/6qS0PmUcGU+dIZi1B5K8MZDT94/tHjnEaQxtys=;
- b=AaP+lBbhvQnJVubtU2lKHqL73Wktw90VojSvR1gbNmlggCh30v+Dmfv/2W1iB53bzV
- aqVkvh1S5gldLFuSLLrWohrXCaEAui9IKFFMVeEhDW3DlQtSBmxBxxsvTz774P5UNB+U
- 1v+LUER8dIZjASusUL50Uiu788x+onk0jZaoqYqI6MKhK5o+9mJZ/ychNEV/IJ4Nzcxm
- mBMwW/34nCqty3V3qktq8vST0E983wuCrVPcpul0FKJ5eF76kPXZCyjM8E/xwaQQlVnu
- abdfhU43Favf7sxEFXi/TWhn9hnTdq4r/1as98TPJbLa5YCKVlMUNuJz6cx6My+OBgtw
- RGzQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvByF3wJ610X2F7vjyD6qvdOjIYEF2lbPHdG6G3Uh3qTWLEWJ97ofUvmHkuDJOsrw9/8o/qu7/FQ=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYLVI4GlrqKCdrHw0aQXleSaGdpXCUm5XGhKGGOVBUdwTPfcMUh8
- wiqLOAhnqCxb5mCxcoZL1am6kf483sMv96a2sxHqXUs6TeZshasZWmESVccMsVPTJnZfT1OFMHa
- XfStKVV5F+L80IVPjFwzPUCQhdb1q260dUExzhbgOyQ==
-X-Gm-Gg: AYBFou2vTb0C1EBejv90uT5m6fF4DAXQqhW73WvU7gEw4kXEMLARjnAqOeRc/o2ZgmG
- MXj31K/DwONG+EO3SKnocUCqUV8erezSj8dRx0HwphC952TsdTKoQKcTjH/CJcn9pjG9FXdPibe
- 4pDS37tHUySdWWzUy7qR5oXLdDZvguroIB6WfdhcFTfMSWWntZ7k18LJVrV5AlTFXb2iALhqr1y
- 1GMECtVlGqt9jE7kg387ovF9sWQsSpAd2O6eie9JdfB4+emOmmnlD6xCew0yqaXx27YaLjzzesZ
- m/QosignAnMwFiIFv5pWpKKU5KMK8Q1vUZxMncpebMfjbSBjRgINLljW8fO6Thd0u2PWokrtUJj
- zGuaK6H4xGNvycXAgD3lKzBBF5g==
-X-Received: by 2002:a05:690c:39a:b0:8b0:f074:75a0 with SMTP id
- 00721157ae682-8b0f219a675mr18927847b3.23.1792343801129; Sun, 18 Oct 2026
- 10:16:41 -0700 (PDT)
+ bh=QEqV6IuElUufBmAJTQXOnvaEx2gCg53wIOBHAyt8uUY=;
+ b=XDwP3IN6jOS416pODRExdY/u7kFtKhyoS608jTrc9kenXXG+UCug+RC9CqYrrAYX+E
+ NT377F95I0slhj09MT0Q/DIJdpUPvQ06xCtN9P7WPcCwjoICLBXlNqzTHHP/bHaje6+D
+ HH59fOGyZ1l9karZ1rImUKqBmJiF1Fj7R83FEEUNA9Bf0Szp7SwnoiIqZNz7buvxOt2b
+ 9VASqh5gNmtioHoC31JywSkUwVZ22iCpGYblyyKLP5IZ7AukUlKoh39+hL1N1+4T8PxI
+ +2GlYyv8BBctxgmE1pwRW9P7L6F7m45+2Yv01wYWOI/NBiyP/ajxUAJx5qt56w8DvWvx
+ kemA==
+X-Gm-Message-State: AFq9FYIMk7EpS+v5TDESSJHlXpzMsEmbkP80KMIQufA5k+mAgjrFXbjY
+ pY/Kyhm3fp4haXwXeMJTTw+ydcttGSNex2tXLxnQAPtxViGq9D6/+QFHlBx2cd7xgsT+WHl9Mq5
+ Cre2/S2RfUZK4iWKN/DrNszeRXUt32duyN/0juLA4Yg==
+X-Gm-Gg: AYBFou3IbL4ymBlYQWv35Z9BD1hVXNXhC1FjgtF1jm/U6i76vzfoXLSPg4pnuaZlcWx
+ TZLSUFD7jmwjdCUGV5xDiPCyE2wg3Vl8mcDNUuJrOFsHOxioNOtkjWlKgCP4FqfmGxWnhmKELKh
+ Gouqadb3y5AwQoSVKE28+jvjSpCoOPZEAGQljWLERLp/49tgT9F+X6WJXmLPhNRq/Df9mkADpdf
+ fwRkILqIzUjhGDNLUL2qRKFWXrPBvyYgRhSME4HSsBQMB03CH2lyeAZ3TudXSvFKI5bxxDGiRK9
+ gX9Ua9+8q/O6FeD1xtfkIgn0MSEef0NI32YYBWYhDf/xMI/YUzCx/RRxWnWgmvzc0LLE0LxAoeL
+ vy5qRZaJwWrSJYjpq6deLKbJIBHISZ4o718vaia9Za8lvSMaqOS32cLM=
+X-Received: by 2002:a05:690e:b8e:b0:679:cc49:55e6 with SMTP id
+ 956f58d0204a3-679cc4963d4mr1089256d50.80.1792349909311; Sun, 18 Oct 2026
+ 11:58:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20261018043128.26916-1-semen.protsenko@linaro.org>
-In-Reply-To: <20261018043128.26916-1-semen.protsenko@linaro.org>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Sun, 18 Oct 2026 12:16:27 -0500
-X-Gm-Features: AclHuK-ZrioPdQcEGtTiBkHX5MsVUddZiHDW_6R_CXHsAqs4Ss-Rpw13rzSaYHM
-Message-ID: <CAPLW+4kL2L5PF98XufC7+9bPivbQ_fMPz5P0fU9nju6=i_7etA@mail.gmail.com>
-Subject: Re: [PATCH] lmb: Enable LMB_LIMIT_DMA_BELOW_RAM_TOP for ARCH_EXYNOS9
-To: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Alexey Klimov <alexey.klimov@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Kaustabh Chakraborty <kauschluss@disroot.org>, 
- Minkyu Kang <mk7.kang@samsung.com>, u-boot@lists.u-boot-project.org
+References: <20261017-aspeed_vbios_fixes-v3-0-961124989594@oss.tenstorrent.com>
+ <CALeDE9MD-rqVaVdCRDq1ruPu4EzCiHvog2Qtu=50hVSBHtPyiA@mail.gmail.com>
+In-Reply-To: <CALeDE9MD-rqVaVdCRDq1ruPu4EzCiHvog2Qtu=50hVSBHtPyiA@mail.gmail.com>
+From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+Date: Sun, 18 Oct 2026 13:58:17 -0500
+X-Gm-Features: AclHuK-dFGgPSqr3pHPpjBDsPDyh67CQ2gAgWC8M9LWuoDYH8vD7SxgbQR6TNz4
+Message-ID: <CAEev2e8XZ979VL+WPWbLDu5dKUOSQRTY4QxEsDyxW0Oxoq1b6g@mail.gmail.com>
+Subject: Re: [PATCH v3 0/5] Misc Fixes for VGA BIOS Emulation
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -199,136 +194,28 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Sat, Oct 17, 2026 at 11:31=E2=80=AFPM Sam Protsenko
-<semen.protsenko@linaro.org> wrote:
->
-> Since commit a3075db94d49 ("lmb: Reinstate access to memory above
-> ram_top") secondary CPUs cannot be brought online on the E850-96 board
-> in the Linux kernel:
->
->     smp: Bringing up secondary CPUs ...
->     CPU1: failed to come online
->     CPU1: failed in unknown state : 0x0
->     CPU2: failed to come online
->     CPU2: failed in unknown state : 0x0
->     ...
->
-> This is happening because EL3_MON (the Secure Monitor firmware, which
-> also implements PSCI) cannot handle 36-bit addresses in its CPU_ON PSCI
-> function implementation. The E850-96 board has two 2 GiB RAM banks: the
-> first one is mapped at 0x8000_0000, and the second one at 0x8_8000_0000.
-> The commit mentioned above changed the LMB behavior (in U-Boot) in a way
-> that the memory from the second RAM bank (which is mapped at 36-bit
-> addresses) is not reserved anymore. The change in 'bdinfo' output:
->
->     - reserved[4]    [0x8_8000_0000 - 0x8_ffff_ffff], 0x8000_0000 bytes
->     + reserved[3]    [0x8_ffff_3000 - 0x8_ffff_ffff], 0xd000 bytes
->
-> That in turn leads to the Linux kernel image being placed in the second
-> RAM bank with 36-bit addresses. The corresponding change in /proc/iomem:
->
->     -   f480_0000 -   f67e_ffff : Kernel code
->     + 8_fa80_0000 - 8_fc7e_ffff : Kernel code
->     -   f6b6_0000 -   f71a_ffff : Kernel data
->     + 8_fcb6_0000 - 8_fd1a_ffff : Kernel data
->
-> As evident from the Exynos850 device tree, it uses "psci" as a CPU
-> enable method. That means the kernel relies on PSCI firmware (which is
-> implemented as a part of EL3_MON firmware in case of Exynos850 SoC) to
-> bring up secondary CPU cores. So when bringing up secondary CPUs the
-> kernel makes an SMC call (for each secondary CPU) to execute CPU_ON PSCI
-> function (see PSCI spec [1]). The kernel passes an "entry point address"
-> to that SMC call, which is the address of the secondary_entry() function
-> in the kernel, which should be executed when PSCI returns to the kernel
-> from the SMC call:
->
->     static int cpu_psci_cpu_boot(unsigned int cpu)
->     {
->         phys_addr_t pa_secondary_entry =3D __pa_symbol(secondary_entry);
->         int err =3D psci_ops.cpu_on(cpu_logical_map(cpu),
->                                   pa_secondary_entry);
->         ...
->
-> The pa_secondary_entry is a 64-bit variable, which is perfectly fine
-> according to the PSCI spec. Unfortunately, in case when that address is
-> actually bigger than 32-bit value, the EL3_MON firmware doesn't execute
-> the function at that address -- that's the reason the secondary CPUs
-> don't come up. And as discussed above, the kernel image is now located
-> at a 36-bit address, which means the secondary_entry() function is at a
-> 36-bit address too:
->
->     - secondary_entry() address:   f67d_f5a8  // 32-bit address
->     + secondary_entry() address: 8_fc7d_f5a8  // 36-bit address
->
-> It seems like a bug in the EL3_MON firmware, e.g. it might truncate the
-> address to 32-bit by using a u32 variable (instead of u64) to store it
-> internally. So the right way to fix this issue would be to fix the
-> EL3_MON, but unfortunately it's closed source. So instead just enable
-> LMB_LIMIT_DMA_BELOW_RAM_TOP for ARCH_EXYNOS9 to limit the available
-> memory to the 32-bit boundary.
->
-> Although this platform could benefit from having all memory available in
-> U-Boot (e.g. for transferring big images over TFTP), and it looks like
-> there are no hardware limitations on this platform too (DMA has 36-bit
-> support, etc.), limiting the available memory in U-Boot is still the
-> easiest way to workaround the EL3_MON problem, and 2 GiB is enough for
-> all use cases in U-Boot currently. And of course all 4 GiB of RAM is
-> available to use in Linux in any case, so it's not a bad tradeoff, and
-> in fact it just brings back the previous behavior (before the "Reinstate
-> access ..." patch).
->
-> Enabling LMB_LIMIT_DMA_BELOW_RAM_TOP for the whole ARCH_EXYNOS9 family
-> also seems justified, as it's likely that all modern ARM64 Exynos chips
-> may share similar EL3_MON software, and thus possibly the same PSCI bug.
-> For example, a similar issue was mentioned in exynos-mobile related
-> patch [2], stating that after "Reinstate access ..." patch only CPU0 is
-> able to come online on some variants of the Samsung Galaxy J6 (based on
-> Exynos7870 SoC).
->
-> This was tested on the E850-96 board:
->
->   1. Using 'bootefi' to boot the Linux kernel image
->      - before this patch: the issue is reproducible
->      - with this patch applied: the issue is not reproducible
->   2. Using 'booti' to boot the Linux kernel image from 0x8_8000_0000
->      - before this patch: the issue is reproducible
->      - with this patch applied: the image can't be loaded there anymore
->        ("Reading file would overwrite reserved memory"), as the second
->        RAM bank is reserved in LMB again
->   3. Using 'booti' to boot the Linux kernel image from 0x8000_0000
->      - the issue is not reproducible
->
-> [1] https://support.arm.com/documentation/den0022/fb/
-> [2] https://lore.kernel.org/u-boot/20260614-j6lte-lmb-v2-1-6046b54db536@d=
-isroot.org/
->
-> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-> ---
+Hi,
 
-Also, please add the forgotten tag:
+On Sun, Oct 18, 2026 at 11:12=E2=80=AFAM Peter Robinson <pbrobinson@gmail.c=
+om> wrote:
+>
+> On Sun, 18 Oct 2026 at 05:24, Anirudh Srinivasan
+> <asrinivasan@oss.tenstorrent.com> wrote:
+> >
+> > This series contains a bunch of mischallaneous fixes to the BIOSEMU
+> > codebase to get display output working in u-boot using an Aspeed AST260=
+0
+> > PCIE VGA card on a RISC-V system that doesn't support I/O ports. This
+> > was tested by passing the card through to a qemu riscv64 VM, but should
+> > work on any board supporting PCIe in u-boot.
+>
+> Why are you using BIOS emulation for display output? Why not just use
+> the EFI native frame buffer support?
 
-Reported-by: Alexey Klimov <alexey.klimov@linaro.org>
+I don't think u-boot supports running EFI option ROMs, and I think
+that most GPUs don't ship with those for RISC-V anyway.
 
->  lib/Kconfig | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index 021a82d47092..e0bfd10f2b7f 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -1371,7 +1371,8 @@ config SPL_LMB_ARCH_MEM_MAP
->  config LMB_LIMIT_DMA_BELOW_RAM_TOP
->         bool
->         depends on LMB
-> -       default y if ARCH_BCM283X || ARCH_MVEBU || ARCH_ROCKCHIP || STARF=
-IVE_JH7110
-> +       default y if ARCH_BCM283X || ARCH_EXYNOS9 || ARCH_MVEBU || \
-> +                    ARCH_ROCKCHIP || STARFIVE_JH7110
->         help
->           Some architectures can not DMA above ram_top boundary,
->           which is after 4 GiB or 32-bit boundary too. Limit the
->
-> base-commit: 8d534cec0cc0109a37c0ded8854da03f1526dc0e
-> --
-> 2.47.3
->
+U-boot does have support for running legacy VBIOSes, and also supports
+emulating these on non x86 architectures. This patch series is just a
+bunch of fixes to that codebase that were needed to get it working in
+my system.
