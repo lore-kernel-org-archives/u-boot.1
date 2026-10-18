@@ -1,169 +1,177 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAEB0CCA490
-	for <u-boot@archiver.kernel.org>; Sun, 18 Oct 2026 04:31:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D0D8CCF2C9
+	for <u-boot@archiver.kernel.org>; Sun, 18 Oct 2026 08:35:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 78F5B811BC;
-	Sun, 18 Oct 2026 04:31:38 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZcZ74paAD-7S; Sun, 18 Oct 2026 04:31:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 733C68122B
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792297897;
-	b=cBE2ECEuwOwiXL4BfCf81L1/rFhy1nZdIBine21DVkTj1J7OsLXipibxOfdbgq9ZJAa6
-	 s+sZvqlN9KgGpJ/WzATPFiJ6ZvvndaV0JYS/4a8mD8TwUauzGmKe+qb0dZg29a/ti20O6
-	 68Ma1G6rzaVvhxLAEJdlUlZOWKNL8t5b7HhlPwx4cTBBI97Q5An6yreO5IMIV5u9wRl2+
-	 3J8pC5n1lluDGo3ahT6o2oPoPS+bLxVFsXe4YDKWlW1MpGy5SHNPoRS6EQkgmxOE6yqZP
-	 A5PEiSEJvwWGGwywyVPojgXwTF8HQi5+/Y4G0OjYrRm2YVNeJQzQX8BCT+5OtlOy3Kw==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792297897;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=TeL4XG0oKohrYi1q5jw/bVr0cJvDUy9q2Qa0XKy4UTk=;
-	b=fWzUskKSjgSk0PsfWIZ4sgm/WJQBG52FN2AuNPo5t012cRP0q3KNKnOEaaxWijruEmC6
-	 NBO1VS0eh+mWRnRsLBHDWnOFyF+eh3ipp+DvyOwM0XNMqHFO5To5Em3xDOSn8mpU5Behv
-	 tH3rWNzPIoL2RG3BNfXPe7oe/KAjc+Au8HcqO7ESzEt+fb7bpxrjYQ2pzsvIu8Tv3gdN4
-	 J74cZQ+QMzl1zdGIZSy2gXjsvfpkvwFWrYWZihYMxzZ/F38PFvFLkJjz5XqN3KxNlyY8h
-	 w0swvZACrCgYNqzRtNSqO1gumUDA0DSQiox7mlnAKaXi2S78WggbPUkkD6opPAPUOtA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792297897;
-	bh=TeL4XG0oKohrYi1q5jw/bVr0cJvDUy9q2Qa0XKy4UTk=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=u7NUd+tPNAk059MuVdTqRJM+SYUgaWN/JqwwRRyAfcNFnPAPpfjH/8XMkgEUv+pAh
-	 4oeramXsoZ5NDgoNEk17J8+H885adgQQkqtN4XlAP2DTlPhLyN7sShVtSBxrfYMcpO
-	 wjQx2H+MbAAXVxet/mYFJTbdEDnxeVKbBfJzQRkAKa9vxso3PzxIDAt1xHinPGRqSu
-	 m9fNW0IPGqcL+c2ZPmTdzyLRhXoFZ7TXVj/S1Iyd6UOd2KUoN0HX5/cq1/UYnFj8FZ
-	 g+KY3uk1RyiTzp26X8tJuHHbr9EWlal/C9zeb7WbcoSetSA1Cqf1lBJTeTmUSqe7S/
-	 agvockHL9lcwA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 733C68122B;
-	Sun, 18 Oct 2026 04:31:37 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 4FC3D61
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 04:31:35 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2D4786063F
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 04:31:35 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1AAC460600;
+	Sun, 18 Oct 2026 08:35:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id x4Boa2x-6oaq for <u-boot@lists.u-boot-project.org>;
- Sun, 18 Oct 2026 04:31:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DD8DB60634
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::332"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792297894;
- b=BklWshZ2Jva2qd/qqehQCNQp4YUBow2k96ECjKg1Px82ZfJ2l9MoVuBbjRfvChg5jEc5
- iPGoNv+J3wR7dVekHxIeQWKv9XeDV4TqFJWaJFNMxqplm5rv9d8uS0/46QpmdaZbBZisq
- QcQGxwrUo0rG85DU33bVfbjEEvHr4ElyWcRx6jIfAne86T8Kq3t18EtMt9/CQOdGN0Dlg
- /RTt/PGBgBwcPnYjxb2Z7CJheKfMUas3qHksoLL6uIzzQ4LIB14aq76NoDQXbAJ5s48gM
- RuDR8WTSQmjXf42yOwdHZ9oHNN49ldSlhkdpN0KkFU0NBpHillbxwjxw8q/FhMa21og==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792297894;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
- Content-Transfer-Encoding;
- bh=TeL4XG0oKohrYi1q5jw/bVr0cJvDUy9q2Qa0XKy4UTk=;
- b=s6h54bwmCpDImlytLdQEaRRV6D/tpwVlGDVk6YkEEwDNSsOsvmjVBQV/5vjad1ProEdw
- hcXgT6E4BwB7yhLer7BQZ/D99ZLvc1ESvn0Oamxr687v/MMofBLwIFK01ZIJUk3DPpyCu
- F30HLXCfhjAHIYVmgDnWZHVvdvJCZUQXT9ZjYvoG3/6Sfn05hFJmzDd3d62mkCwocZvQM
- tQ/Vqf7vl3EuPcZr1KgRaji1/lKg0J5wnDLN9+5QEC4naaY3GRMw0iD+/DYwB8hqIUA2w
- M+b1CVpaY1SIf3vpYj8kf/sBdpHEj2HzgnXNEzMsvEiPVVFKcjqWhIPUzBZPyoyiBeg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=linaro.org;
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=fpHiKr8m; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::332"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
- envelope-from=semen.protsenko@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=fpHiKr8m
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- by smtp3.osuosl.org (Postfix) with ESMTPS id DD8DB60634
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 04:31:32 +0000 (UTC)
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-81ae6aefdceso951320a34.0
- for <u-boot@lists.u-boot-project.org>; Sat, 17 Oct 2026 21:31:32 -0700 (PDT)
+ id Cc6ogte2chPP; Sun, 18 Oct 2026 08:35:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0C6E060613
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792312528;
+	b=CcQ0jpCSDZIQh7ULzRuqCby7i8de00zGra9UG99BWb8SClWISmZ6siHqSR0afuB6MXPm
+	 sxBAwkU+g+sa90Om0YFj5zii+nU44GxUEt+lxTtmCZ8jyyeBzGCpXtL4qhDbSFVSnFO5p
+	 9y9Wf6vHGxLzzS06++icvf0gVUbjjEi80XCwgNFw2W5Ja7Y6F6nuecU95RUFqU5cUoLYv
+	 LK+eQhmTB8PH4mEaRWcQBsxKJ5+4EcXy4ev2zKRbSUk0adVwqe3TgbgSm70j3Q0edb9Qn
+	 Ayuc7E8xVESxfXlJFASp9M+9rXdwYYawbzcBHLUP0q0LTqmRcBznATeKDOYVlwPmIag==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1792312528;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=AE86frGH8Bk+nzLv47w8hkYv6zyCsiE5aemk9XjNi8Y=;
+	b=sgK+OfZh/YrS7YOpR8ROyreeubN3hBwbHq8HeLOwWCYerzbkSjF50kfjbFQUZE0U3Q/t
+	 6IEqc99LfcRwmn0uDUutpa0G60sv+X1vS4SKD/ifna0JJpdliv1WneNE8xPgytx0GSOuS
+	 B/MbrL6bw9IXFK7+2tPg0WyDHZ1ubCm5ujiH9Hk2gSsm/cq5kEfSlRSo5ML7hrI3nqt8h
+	 kdipam1KIvlQpJ0+oqfSLJ/AWXZUPbaT+BLSqUuTm7PvZCMJa/mumn9J3bd3swfina0H6
+	 e8m0HxSkEUQZMCUyyv/fsH54CAr4dtXFh2GTyXNDHcUjEXIK1BeHyy671crTgk29nhw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792297891; x=1792902691;
+	d=lists.u-boot-project.org; s=default; t=1792312528;
+	bh=AE86frGH8Bk+nzLv47w8hkYv6zyCsiE5aemk9XjNi8Y=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=SoYNFSTu3s+YfyBcZV/MZrrv7vFpJyk5IOb+FuvRWfsKEPis9hTrTmPwhdmULgBzI
+	 Oydylf03Qm3oeM+ZzwZfVDZXSbg+95KCMIN/4xkW1JTLCPhVi6UudP+DmVKZQgb4+V
+	 n23Jg5QDF6+JMLPSANjQUP2oc2JspMtjffzRPTiiDI2PtNLS3MhV+P95yK+0SeO0Xb
+	 LwCaJ9CycPYbJZkzfEBDUj7WbBgVEp6nLrrDLNtncwBbzbOxfV/VXQlxCo6nmjvK6z
+	 gyQCAKmFermTqRw8cpIP6RvN9sXYENTCYCBYJn5OikG410XnlZg2p71p3YEvq1csZL
+	 IXixbxsnOiHIA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0C6E060613;
+	Sun, 18 Oct 2026 08:35:28 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5509575
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:35:26 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 3AB734091C
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:35:26 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lmNU32tmqqBK for <u-boot@lists.u-boot-project.org>;
+ Sun, 18 Oct 2026 08:35:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BA42640856
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792312525;
+ b=IKqeD0J1Z8DhDfaIr6sYitIO8P+eG6YrJf1YC2Ba+NNrbz7VUmlaz7RjEMfeSLD0c/Kp
+ 1ydSoy2PNWuj2hEoJmryCNprgO7LPTwEgmZxOYErwCGWDTQ3y+R81jiG1BlNd/kZLEX2p
+ QUhM1PaBsGzJeZDkLQS1nDMtgFqGnZprDH6BXfkuXEL80Q4XMcate4Jbreib+jfhucSzR
+ g00q2X0CZfs+63y2w4tbFgxZIQ23sHC6CRxY+FQ2Qva+ChFjg8igcaYjgD7dsyF2WWuwL
+ 4Em5o1xDFgYvRITkBmvLbvfUCwwQEBecFT6n6oZJXbXRk108VXVAPdAji5Ah4MPG5EA==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1792312525;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+ Date:Message-ID:X-Mailer:MIME-Version:Content-Type:
+ Content-Transfer-Encoding;
+ bh=AE86frGH8Bk+nzLv47w8hkYv6zyCsiE5aemk9XjNi8Y=;
+ b=BBAkhE0KcX1BZNmqfLe2wj4FtPmSzbCRaI42wbn2y85X3ToO6eSifMCQq9zpD1wwdIAO
+ 0o+amKY96YfcyQXeX0cJkLwraEBMsPeYJLsfhY5kOieGJnhneLs85bu1JVFhYx5VWRJzy
+ TQA9DFBfdguqRMSp5E7uyG+s651MjtpIaWHmFAY/RINJwh2qaG2EtREDGSxo7NnQBM96N
+ GiL7Ia9S39YhJZ8ANKlCUrAEuY38VXFzECB/COlIc9p56E8741kHKqyzOKR07u5VDC79Q
+ GPXE2S5ZPrij6i2hbDzfikR7GGS+60Af8COvDJm/6fBCxzthlrOpoUh28jFOdaBqAhg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=gmail.com;
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=RGRKRhXc; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::32f; helo=mail-wm1-x32f.google.com;
+ envelope-from=pepe.schlehofer@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=RGRKRhXc
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id BA42640856
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:35:24 +0000 (UTC)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4a19cba5c14so12649175e9.3
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 01:35:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1792312522; x=1792917322;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=TeL4XG0oKohrYi1q5jw/bVr0cJvDUy9q2Qa0XKy4UTk=;
- b=fpHiKr8myEz6wgE3ZB3vSa+FWJ/70vW2pEbkkfsWLgHUsyYw6mYyud96ObHfeR1mu3
- 9+8JubL4rIlabBmlGWzRXYah+2u11u5BYXQgS8kPB231Wp1X7KVdpy4ncLcIopb2kI1n
- HUWi9bF7N5/sgBMQKVWuhwc5axzDqkTJ8FsMPAnxkfAjyKa6LEo5/InvxjV5aUoeGsLO
- 6t5MGBorDJ88aqdlsaDL2XVt5EDyHKdBO7KgpUwX9omU5mX4KyWP0zdIToRv6/aA3aj7
- 7jenTmkrAcAQQ3aZtvz6ZBrGmM1EVLWAA+6wzSJYVlZtuecx/p1EC2BA7zlpp6WTHrzA
- AUQQ==
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=AE86frGH8Bk+nzLv47w8hkYv6zyCsiE5aemk9XjNi8Y=;
+ b=RGRKRhXclMemOAhG0PmEuB8mS+P9haJLfTeYx+05O85olK5INz65Q0PP6Xdws3WOCh
+ n4bLOm5IFWekbjR6FLzPxT7GaXnFO+cVk6Nb27kksIKtRCmmpQeHpXDY+1YbxDyG4iBe
+ 9eSioHVZRTSJD1rOjzFbT867qwo+Sz0KAJLEncpDC4SP4SJIxNrEA0+Zzg/ISKJxUw0g
+ Vkrbrv06yiLOFqUmllUVWNZ8BhINp1KBzM+PWj64/rP3k/RbrAJX7bOo8JXRgPGOWVrh
+ kvOfft7JP81xM4P9pOkNf3NFVoALx9n2o8poTLTy5C/+pVyO/RoaenY8g9pGKwh4vHnO
+ s4EQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792297891; x=1792902691;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=TeL4XG0oKohrYi1q5jw/bVr0cJvDUy9q2Qa0XKy4UTk=;
- b=0lqkcLtlehNphsIb19M7avbtJCGWT+IOYwabvEWSSTF0e40QGaXhDFWp0XthGxLL8Q
- 34+D190MR0a41miP4rb3dx1U6JfVFfCpftOkDIeFgDIlyAa4DGduzrFSxxtqB5Gic61h
- 3Hlv3R+4+yGlFOyoYCpydG4FcSGFrdgFtXvWAjiepTEnT94vbRQYQ7n6pzNRmH1yuAyo
- fcbOy/PntocJtbTN27PcuMpiCYu7ryOL0ADXu66N5l0rdKTQEUndrKtT5kP63T6KlmXG
- 7U7k2mvG60wVeyJfe6Fp5kiHSpYHNNkt8qIJzWNNt+LCtvi1FP22zLIk4kPxSpyQjWYS
- jg9g==
-X-Forwarded-Encrypted: i=1;
- AKwUvBx5fU7Y5kfyjvJY8geEZ1fIZRRXIV5VbfZN/+uEi0y08KK+BhtlwVar1AEr8LO4Q490txBLI4A=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIx+4xaNQLdTxu+zUWBhXfApLyX9OjN09QUtuL6d9uyVkNgWvKR
- SK5Vi/Jb60VeoCWpfQ2a+p3FCsOUUqibASFxIf0iLOe76BspMGMv/yEuba9vZXVbn+SpTxZ1LAr
- Eo118P2Y=
-X-Gm-Gg: AYBFou22TwNl/uAidg2WxNpjh26z4CxJZeCH8gWmTJ6vO5TbIQmloj9YiKylTKyFyrT
- 03GubnYssoYgTfB4WFnNJQAm2mpligEknoMEtxBINXmmHd7xIeg87P1kCFFCNdSIrzG+BKMM9X7
- qpSjhOGynHPVdhTS2jKQt6lll6pBMdxZ9HeXA9pmPMs+twQW1BwVv6Gm4LT0HsBKNC7rcL5oR6u
- xHM3pDTFH0X5VzuaeThJz55fc1JIUoMDfklrLET7ZcsctPjrlavrUoX4lxC5zIKzkEWe2BcYBo2
- kQ2jU3XaCDQHy06QEpe6308rI2J7dwm4yjtllaJ6H/ZHfiVzmO5RBP3ytugs9xX5RTtQA5kdil8
- ZDqKpzr7aMWgDYUYufdE4s1929ARmFeW1jtWAlU0ehLlILaHOnBYsnK0AjHC1aAyGMEJnQgsXtq
- FaOC2ZC27CCoJlI2W8Ahkw/RlyyYpsH7SKrdYVt9uBacMdlPcCYTICpF66jyvnxWo1dgzZfwIVX
- teCb20=
-X-Received: by 2002:a05:6808:3084:b0:533:72c7:f80c with SMTP id
- 5614622812f47-53cd63bfbd7mr3593758b6e.42.1792297891222; 
- Sat, 17 Oct 2026 21:31:31 -0700 (PDT)
-Received: from localhost ([2605:a601:1514:4f00:264b:feff:fe59:d7f7])
- by smtp.gmail.com with UTF8SMTPSA id
- 5614622812f47-5388a55671asm4433367b6e.5.2026.10.17.21.31.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 17 Oct 2026 21:31:30 -0700 (PDT)
-From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Alexey Klimov <alexey.klimov@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Minkyu Kang <mk7.kang@samsung.com>, u-boot@lists.u-boot-project.org
-Subject: [PATCH] lmb: Enable LMB_LIMIT_DMA_BELOW_RAM_TOP for ARCH_EXYNOS9
-Date: Sat, 17 Oct 2026 23:31:28 -0500
-Message-ID: <20261018043128.26916-1-semen.protsenko@linaro.org>
-X-Mailer: git-send-email 2.47.3
+ d=1e100.net; s=20260707; t=1792312522; x=1792917322;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=AE86frGH8Bk+nzLv47w8hkYv6zyCsiE5aemk9XjNi8Y=;
+ b=t0uVkDGOXPCAFAfRnWHcYs5ABJuiwQmcKXRDhjEQ26avtuijwzCDLww4bizJzlkWY5
+ G1qShtZ1bxZpqwwAYafOHEt1Vv46YBB4WEvGBSA4X3RHdK1PZsRwSzqrd+Wlekxi+v6E
+ qv2+aIeiKKddq8oV3kP9uzzMVpnB+FyhPOD97bKw4hUWMI9oyje1xnaWwIXBwMUmGA4E
+ EgQBGrqSLXE6bYK/sQapky+jQUPyhJP05ueN2Cd0p7UUJDLY/iXTPiFhBXwxtWO6zAwq
+ MfnDry04WssGYQ8c3l4POUYSJw0SACudAXyoEC3ZdBiVOZYNdIKXeXDqyPMG3N1NV9Ee
+ 0seg==
+X-Gm-Message-State: AFq9FYJcksXp7W6NBkvB16fCO3E+K4BsPArYS2zZT4qy4ZI5LiPA+5g3
+ VxWaBxywY7CREcWr40olyVyBtFhhCTKfpPZJIvvVK4GYe0rAxhhXbSSAfLE/R2su
+X-Gm-Gg: AYBFou2aGNhgsU4SSt3dDljoJfvFkbndfnObiu9T65fNiGhUbAK1p4Z9EqCuk6iBYk0
+ igCYsTwDHsN/vBWMd+rdq+QObl3isTz+qOkURdJbQifB4GJL5A2pcFrUIKbdo2zzjvrM5m0bmX3
+ B4inZPPFyjbDQKMmPQhW4JEfwB+EoSNIvaqd0xiPsobWmHlrCnoXtvJhgx2/uge0ZNbWtzHkqvj
+ xlQ0YTZKTAK2hbevWv/PE46Xd3uhcHtlfAM3fy7KyzcCxFFbbpkDEn3W/OhOnLHW4A34JfJbqnc
+ nxb9NJaaqKWdFXuldS4XZUCYAsGv4LVH3zLcPyQA9nqSgIcHaJAsZKBEAodjLsjjaDULbou9P5i
+ N2vqN7qkKtN3aZR97jQiPFDYB2SeQ1IVBD4JFl5fmM20IiDD/Xn2lV25Nf2kQRVWmrXETtMnrfD
+ NtS8eva7iK4CV8DKhp7hcdB2foedFylFoxEjz/PeJxoye9s9KxFyXsV8GDVS3zk7HGOV3jpIbDZ
+ 9htFfmnyQMOtnkXsW+7/34khTiMILI/bZWAwoynu4Z0OGEKaRqTf23aPGgncA/7LqYa8YPwpD3X
+ dCvTPWmIMh5UFqvSZLiDcpcWP2s/ZEjSTtxb6op9tR0FpdD/mvTmZHCRAuzNvjgmTDkdG2EASoD
+ V6PpfIpVmNSfTYA7G8hzuAZY=
+X-Received: by 2002:a05:600c:3555:b0:4a1:d52e:c2d9 with SMTP id
+ 5b1f17b1804b1-4a1d762c1bdmr88118055e9.23.1792312521901; 
+ Sun, 18 Oct 2026 01:35:21 -0700 (PDT)
+Received: from localhost.localdomain
+ (dynamic-2a00-1028-8388-a84e-318a-f58b-5e43-a2b9.ipv6.o2.cz.
+ [2a00:1028:8388:a84e:318a:f58b:5e43:a2b9])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a1e3ebb3aasm43589595e9.0.2026.10.18.01.35.20
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Sun, 18 Oct 2026 01:35:21 -0700 (PDT)
+From: Josef Schlehofer <pepe.schlehofer@gmail.com>
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ =?UTF-8?q?Marek=20Moj=C3=ADk?= <marek.mojik@nic.cz>,
+ Peng Fan <peng.fan@nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>,
+ Qiang Zhao <qiang.zhao@nxp.com>, Shengzhou Liu <Shengzhou.Liu@nxp.com>,
+ Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Christophe Leroy <chleroy@kernel.org>, Mario Six <mario.six@gdsys.cc>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Heiko Schocher <hs@nabladev.com>,
+ Holger Brunck <holger.brunck@hitachienergy.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 00/14] powerpc: Enable LTO on mpc85xx
+Date: Sun, 18 Oct 2026 10:35:02 +0200
+Message-ID: <20261018083516.49229-1-pepe.schlehofer@gmail.com>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -178,126 +186,149 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Since commit a3075db94d49 ("lmb: Reinstate access to memory above
-ram_top") secondary CPUs cannot be brought online on the E850-96 board
-in the Linux kernel:
+This series allows LTO on mpc85xx and enables it for the CZ.NIC
+Turris 1.x. The Turris NOR image is limited to 768 KiB. LTO, together
+with dropping NVMe and SCSI from the NOR build, makes room for the ubi
+command and the BCH ECC code required by the NAND.
 
-    smp: Bringing up secondary CPUs ...
-    CPU1: failed to come online
-    CPU1: failed in unknown state : 0x0
-    CPU2: failed to come online
-    CPU2: failed in unknown state : 0x0
-    ...
+The series depends on two generic LTO fixes sent separately, as
+requested in the v1 review [1]:
+- "Makefile: Pass -static to the LTO link" [2], which fixes the LTO
+  link with default-PIE toolchains such as Debian's GCC.
+- "Makefile: Set LTO_ENABLE before including config.mk" (2/2 of [3]),
+  which makes patch 7 effective.
 
-This is happening because EL3_MON (the Secure Monitor firmware, which
-also implements PSCI) cannot handle 36-bit addresses in its CPU_ON PSCI
-function implementation. The E850-96 board has two 2 GiB RAM banks: the
-first one is mapped at 0x8000_0000, and the second one at 0x8_8000_0000.
-The commit mentioned above changed the LMB behavior (in U-Boot) in a way
-that the memory from the second RAM bank (which is mapped at 36-bit
-addresses) is not reserved anymore. The change in 'bdinfo' output:
+The series consists of:
 
-    - reserved[4]    [0x8_8000_0000 - 0x8_ffff_ffff], 0x8000_0000 bytes
-    + reserved[3]    [0x8_ffff_3000 - 0x8_ffff_ffff], 0xd000 bytes
+1-2. PowerPC global data:
+- Drop an unused SPL copy of gd.
+- Make the global data pointer LTO-safe.
 
-That in turn leads to the Linux kernel image being placed in the second
-RAM bank with 36-bit addresses. The corresponding change in /proc/iomem:
+3-5. PowerPC private libgcc:
+- Add GCC's out-of-line register save and restore routines from Linux.
+- Add 64-bit division routines.
+- Select the private libgcc for mpc85xx LTO builds, as the LTO link
+  puts it inside --whole-archive, where a toolchain libgcc does not
+  link.
 
-    -   f480_0000 -   f67e_ffff : Kernel code
-    + 8_fa80_0000 - 8_fc7e_ffff : Kernel code
-    -   f6b6_0000 -   f71a_ffff : Kernel data
-    + 8_fcb6_0000 - 8_fd1a_ffff : Kernel data
+6-9. mpc85xx LTO support:
+- Discard the LTO keep-syms section and its fixups.
+- Drop -ffunction-sections and -fdata-sections with LTO, as ARM does.
+- Allow CONFIG_LTO=y on mpc85xx.
+- Pass the make jobserver to xPL links, as GCC 12's lto-wrapper
+  requires.
 
-As evident from the Exynos850 device tree, it uses "psci" as a CPU
-enable method. That means the kernel relies on PSCI firmware (which is
-implemented as a part of EL3_MON firmware in case of Exynos850 SoC) to
-bring up secondary CPU cores. So when bringing up secondary CPUs the
-kernel makes an SMC call (for each secondary CPU) to execute CPU_ON PSCI
-function (see PSCI spec [1]). The kernel passes an "entry point address"
-to that SMC call, which is the address of the secondary_entry() function
-in the kernel, which should be executed when PSCI returns to the kernel
-from the SMC call:
+10-14. Turris 1.x:
+- Enable LTO.
+- Select the BCH ECC code required by the NAND.
+- Make the NVMe and SCSI boot targets conditional.
+- Add the ubi command to the NOR build.
+- Put the OTP MAC addresses and serial number into the kernel device
+  tree also after the environment has been reset.
 
-    static int cpu_psci_cpu_boot(unsigned int cpu)
-    {
-        phys_addr_t pa_secondary_entry = __pa_symbol(secondary_entry);
-        int err = psci_ops.cpu_on(cpu_logical_map(cpu),
-                                  pa_secondary_entry);
-        ...
+Since v2026.10, main's turris_1x_sdcard u-boot.bin has grown from
+1046491 to 1049419 bytes, exceeding the 1 MiB that its SPL loads
+from the card. The build does not catch this. Patch 10 brings the
+image back below the limit. Patch 11 fixes a separate problem:
+without it, NAND probing hits BUG().
 
-The pa_secondary_entry is a 64-bit variable, which is perfectly fine
-according to the PSCI spec. Unfortunately, in case when that address is
-actually bigger than 32-bit value, the EL3_MON firmware doesn't execute
-the function at that address -- that's the reason the secondary CPUs
-don't come up. And as discussed above, the kernel image is now located
-at a 36-bit address, which means the secondary_entry() function is at a
-36-bit address too:
+With Debian's GCC 14.2 and the two generic fixes, turris_1x_nor's
+u-boot-nodtb.bin shrinks from 757336 to 752000 bytes while gaining
+LTO, BCH ECC and the ubi command and dropping NVMe and SCSI. The
+turris_1x_sdcard u-boot.bin shrinks from 1049419 to 997059 bytes.
 
-    - secondary_entry() address:   f67d_f5a8  // 32-bit address
-    + secondary_entry() address: 8_fc7d_f5a8  // 36-bit address
+All 83 PowerPC defconfigs build, and all 71 mpc85xx defconfigs link
+with CONFIG_LTO=y. No .discard* section or zero fixup entry remains.
+test.py on qemu-ppce500 gives the same results as on main, with and
+without LTO. The single failing timing test also fails on main. With
+the kernel.org GCC 14.2 used by CI, both Turris LTO builds fit. With
+Debian's GCC 12.2 and make 4.3, the Turris SD card SPL links at -j8
+only with patch 9.
 
-It seems like a bug in the EL3_MON firmware, e.g. it might truncate the
-address to 32-bit by using a u32 variable (instead of u64) to store it
-internally. So the right way to fix this issue would be to fix the
-EL3_MON, but unfortunately it's closed source. So instead just enable
-LMB_LIMIT_DMA_BELOW_RAM_TOP for ARCH_EXYNOS9 to limit the available
-memory to the 32-bit boundary.
+Boot-tested on a Turris 1.1 from NOR and SD card. The NOR build also
+booted OpenWrt from a kernel in a UBI volume on NAND. Linux received
+the OTP MAC addresses and serial number even after "env default -a".
+With the SD card build, ethaddr and serial# values set in the
+environment were preserved. Other boards were build-tested only.
 
-Although this platform could benefit from having all memory available in
-U-Boot (e.g. for transferring big images over TFTP), and it looks like
-there are no hardware limitations on this platform too (DMA has 36-bit
-support, etc.), limiting the available memory in U-Boot is still the
-easiest way to workaround the EL3_MON problem, and 2 GiB is enough for
-all use cases in U-Boot currently. And of course all 4 GiB of RAM is
-available to use in Linux in any case, so it's not a bad tradeoff, and
-in fact it just brings back the previous behavior (before the "Reinstate
-access ..." patch).
+Changes in v2:
+- Based on main.
+- Replace "Makefile: Link a toolchain libgcc outside --whole-archive
+  with LTO" with patches 3-5, which make the private libgcc work for
+  mpc85xx LTO builds.
+- Add patch 7 to drop -ffunction-sections and -fdata-sections with LTO.
+- Send "Makefile: Skip undefined symbols in keep-syms-lto.c" [4] and
+  "Makefile: Pass -static to the LTO link" separately.
+- Explain in patch 10 that the SD card image already exceeds 1 MiB
+  without BCH ECC.
+- Shorten the commit messages of patches 6 and 9.
+- Keep Marek Mojík's Reviewed-by from v1. His Tested-by is not carried
+  over because the images have changed.
 
-Enabling LMB_LIMIT_DMA_BELOW_RAM_TOP for the whole ARCH_EXYNOS9 family
-also seems justified, as it's likely that all modern ARM64 Exynos chips
-may share similar EL3_MON software, and thus possibly the same PSCI bug.
-For example, a similar issue was mentioned in exynos-mobile related
-patch [2], stating that after "Reinstate access ..." patch only CPU0 is
-able to come online on some variants of the Samsung Galaxy J6 (based on
-Exynos7870 SoC).
+[1] https://lore.kernel.org/u-boot/20261012190720.GF3722450@bill-the-cat/
+[2] https://lore.kernel.org/u-boot/20261013074336.85242-1-pepe.schlehofer@gmail.com/
+[3] https://lore.kernel.org/u-boot/cover.1791877299.git.pepe.schlehofer@gmail.com/
+[4] https://lore.kernel.org/u-boot/20261013074313.84961-1-pepe.schlehofer@gmail.com/
+v1: https://lore.kernel.org/u-boot/20260928110434.70686-1-pepe.schlehofer@gmail.com/
 
-This was tested on the E850-96 board:
+Josef Schlehofer (14):
+  board: nxp: p1_p2_rdb_pc, p1010rdb: Drop unused SPL gd copy
+  powerpc: Make the global data pointer LTO safe
+  powerpc: lib: Add GPR save and restore routines to the private libgcc
+  powerpc: lib: Add 64-bit division to the private libgcc
+  powerpc: mpc85xx: Use the private libgcc with LTO
+  powerpc: mpc85xx: Discard LTO keep-syms sections
+  powerpc: Drop -ffunction-sections and -fdata-sections with LTO
+  powerpc: mpc85xx: Allow LTO
+  xpl: Pass the make jobserver to the xPL link
+  configs: turris_1x: Enable LTO
+  mtd: rawnand: fsl_elbc: Select NAND_ECC_BCH
+  board: CZ.NIC: turris_1x: Make NVMe and SCSI boot targets conditional
+  configs: turris_1x_nor: Enable CMD_UBI, drop NVMe and SCSI
+  board: CZ.NIC: turris_1x: Fix up MACs and serial number from OTP
 
-  1. Using 'bootefi' to boot the Linux kernel image
-     - before this patch: the issue is reproducible
-     - with this patch applied: the issue is not reproducible
-  2. Using 'booti' to boot the Linux kernel image from 0x8_8000_0000
-     - before this patch: the issue is reproducible
-     - with this patch applied: the image can't be loaded there anymore
-       ("Reading file would overwrite reserved memory"), as the second
-       RAM bank is reserved in LMB again
-  3. Using 'booti' to boot the Linux kernel image from 0x8000_0000
-     - the issue is not reproducible
+ arch/powerpc/Kconfig                      |   2 +
+ arch/powerpc/config.mk                    |   8 +-
+ arch/powerpc/cpu/mpc83xx/cpu_init.c       |   3 +-
+ arch/powerpc/cpu/mpc83xx/spl_minimal.c    |   3 +-
+ arch/powerpc/cpu/mpc85xx/cpu_init_early.c |   3 +-
+ arch/powerpc/cpu/mpc85xx/u-boot-spl.lds   |  11 +-
+ arch/powerpc/cpu/mpc85xx/u-boot.lds       |  11 +-
+ arch/powerpc/include/asm/global_data.h    |  30 +++
+ arch/powerpc/lib/Makefile                 |   5 +-
+ arch/powerpc/lib/crtsavres.S              | 213 ++++++++++++++++++++++
+ arch/powerpc/lib/gd.c                     |  14 ++
+ arch/powerpc/lib/udivdi3.c                |  82 +++++++++
+ board/CZ.NIC/turris_1x/turris_1x.c        |  20 ++
+ board/nxp/p1010rdb/spl.c                  |   9 +-
+ board/nxp/p1010rdb/spl_minimal.c          |   2 +-
+ board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c     |   3 +
+ board/nxp/p1_p2_rdb_pc/spl.c              |   9 +-
+ board/nxp/p1_p2_rdb_pc/spl_minimal.c      |   2 +-
+ board/nxp/t102xrdb/spl.c                  |   4 +-
+ board/nxp/t104xrdb/spl.c                  |   4 +-
+ board/nxp/t208xqds/spl.c                  |   4 +-
+ board/nxp/t208xrdb/spl.c                  |   4 +-
+ board/nxp/t4rdb/spl.c                     |   4 +-
+ common/board_r.c                          |   2 +-
+ common/init/board_init.c                  |   9 +-
+ common/spl/spl.c                          |   4 +-
+ configs/kmcoge5ne_defconfig               |   1 -
+ configs/turris_1x_nor_defconfig           |  10 +-
+ configs/turris_1x_sdcard_defconfig        |   2 +-
+ doc/build/gcc.rst                         |   6 +-
+ drivers/mtd/nand/raw/Kconfig              |   2 +
+ include/configs/turris_1x.h               |  20 +-
+ scripts/Makefile.xpl                      |   2 +-
+ 33 files changed, 446 insertions(+), 62 deletions(-)
+ create mode 100644 arch/powerpc/lib/crtsavres.S
+ create mode 100644 arch/powerpc/lib/gd.c
+ create mode 100644 arch/powerpc/lib/udivdi3.c
 
-[1] https://support.arm.com/documentation/den0022/fb/
-[2] https://lore.kernel.org/u-boot/20260614-j6lte-lmb-v2-1-6046b54db536@disroot.org/
 
-Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
----
- lib/Kconfig | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 021a82d47092..e0bfd10f2b7f 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -1371,7 +1371,8 @@ config SPL_LMB_ARCH_MEM_MAP
- config LMB_LIMIT_DMA_BELOW_RAM_TOP
- 	bool
- 	depends on LMB
--	default y if ARCH_BCM283X || ARCH_MVEBU || ARCH_ROCKCHIP || STARFIVE_JH7110
-+	default y if ARCH_BCM283X || ARCH_EXYNOS9 || ARCH_MVEBU || \
-+		     ARCH_ROCKCHIP || STARFIVE_JH7110
- 	help
- 	  Some architectures can not DMA above ram_top boundary,
- 	  which is after 4 GiB or 32-bit boundary too. Limit the
-
-base-commit: 8d534cec0cc0109a37c0ded8854da03f1526dc0e
+base-commit: 5e3b01c8466dbe45cd6a06299f8f4c7e8c1c2363
+prerequisite-patch-id: dd05ac311e66ce2e58bee21495f7a8ec9deb09f8
+prerequisite-patch-id: 272fe84ac4b6e21b07a782eeb57a58a4953afa1c
 -- 
-2.47.3
+2.54.0 (Apple Git-157)
 
