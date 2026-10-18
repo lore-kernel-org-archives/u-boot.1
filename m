@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FA11CCA490
-	for <u-boot@archiver.kernel.org>; Sun, 18 Oct 2026 08:35:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E815ECCF2C9
+	for <u-boot@archiver.kernel.org>; Sun, 18 Oct 2026 08:35:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C5F27409B4;
-	Sun, 18 Oct 2026 08:35:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A82B2606FD;
+	Sun, 18 Oct 2026 08:35:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ejQrsMKrTyta; Sun, 18 Oct 2026 08:35:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 938F140990
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792312532;
-	b=IMLqAdtzRyTovFqKOqbssfMJej1nSZgvfyvbcU/tHzzOR9gaQOx8cE6Sl3QBu/8B1v4P
-	 oedntoWE0jQmWxhdh3j0KihuIukOmHvAp//Jkkruc0jGPWc6N7QY0u/LBElW6dCm5sAzM
-	 q3alIxkWVR9+6w2R1/xjhcB1gKd/KNS5OE3PrmKz3u6YZe2NTrQWUJQvG2nen/D5ucWOm
-	 nH7YT3vaW++D4CsLt8i9IfyblW1EeJgu/ZqRQQ50SiECFjqNz3aZFbYVTfK7uct38HZll
-	 n+2tLlFO4LuOVkk6AqYqim3lyCzQzpRLLr6xkLtMr9sWgU1gyGOU4MgA+5kuav7zEeg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TPDuYceUjGOr; Sun, 18 Oct 2026 08:35:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A631B606BA
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792312535;
+	b=SM6jtQb0bji2odvMmCDCLj+NBQwWPX8TfYEnIJuIFh82cNz5SOWZg/tq9MZJBU7Pnckb
+	 Z9otZ3+d3VI22Ye0SGhRSMk7aUAeAeNhf67U8uBLTny/hGvxFsFKLXfnmAfgZPxI6acaH
+	 TmWc2stqkSl6/3u6EPQzy3c/ec7jQIw+JAF+l5TaOZAhWcj+sQLWJDrcN4IEO+veOBcNx
+	 W6VJ5bB+UZsRV2uFf/LQUc0rJ5ujV79l82w/5j+2HnsLqVCgs6udjJNTCskZkealA1cAk
+	 vk7c5VRdi/FBu2SHIBXxZUEfOg9+gp98rYKCNeCore5BzehsQlVHV6VRZNqJWnfkPdA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792312532;
+	c=relaxed/relaxed; t=1792312535;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,130 +32,130 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=gWini1JPP7163BXxBUGDot2hbTHPN+ol6tViR8CkhTA=;
-	b=DwSaxOtgn5GQov5EXTRm60lrrfS8R4vcJsLu581wpfY5jt1W0CPvX5il+gOhH4SYCYzw
-	 QesmMs+ASLM4VaDB8/YTI3VFfg1G5YTbdJJk4RH0aEV27xNc0CF9VqdHyP0y3IQklDTQE
-	 8FA0WvY1Lg0m+WM2fDOi38HDpxDDT6q4+3xEdVxrKSosMcxZAFAhPmPPJJQcf4FyskFFx
-	 tDEvleebTivq2AMq/xMqoM0JWezqIweckZdVQtwZe4ZKJd6s/f7uXBIxdUhGkbfTbuCky
-	 EjnB0HuvKY+6kU7GrIQXyOXgUdUkU5SgshC2k6jSL3CAcor+k47DLtDI1djeJdl3KWA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=UZjvrrcNW1WisxWZQnYNNpU+C5ws/IyX5SJYa39tor8=;
+	b=gx+dtLjO9+7j2Gj78uxHFztvzhRyXLtVVHZ6R91GSYS4ATo+zTEQN75NR7GuFddeRWYg
+	 lnPaTdKKkrjL6KqdeSTnjC+SPcZtF45Y+eYSJv17TR/uq3efnp6NavUqbZde+4dyKpGmd
+	 eyboZdD8tcIakaskmOcZBSItr5qvLkwrrnIUOgo6dEagz+8SdhlGxlAG1Au4nj/oQRPb2
+	 2yMhO87NLpyJNTNOjrmpWSxPPdHbDb+VXhuOkEr325ogXG4SGiu/CZ+LMz2q6FuyHlnk7
+	 03oo+IciqzUzMsBnYRTh2Dgpv1rtdCz1v+h1E5NxBQ0kiwV988a+9hPo//fFZ2RCbGw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792312532;
-	bh=gWini1JPP7163BXxBUGDot2hbTHPN+ol6tViR8CkhTA=;
+	d=lists.u-boot-project.org; s=default; t=1792312535;
+	bh=UZjvrrcNW1WisxWZQnYNNpU+C5ws/IyX5SJYa39tor8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=pTNBbFmCfAWEUsGh6+c4pUNmxMh5Guv8BUuKWkRaauLehxszkwczeBtREWoADoCFD
-	 2IBAv1Y73l6+j1ibhvN4dXn/z2BS/sCOHA75m3693Z7V9JJOArirgpndlilXnPFL6u
-	 jlEEJQ12iDx7fA3YPSX8ebIA2FWhN5aCwTkDp5++CX0uRR7VR+W6lfExpeBdWqUEKW
-	 3cyAtVfMLtDCGfKMaVaB03TpCfBizZcFK7YnT0Lm7w1mX8ebYMkWqo0aYvHd9qVElG
-	 YHlgPpty6V5D875Bc+QCo38VWN1iheBZMmDf+LsLAOZREMuU7bv/Cakvs3dtHAW9N/
-	 QH10lB9t9mDlg==
+	b=afSZ2I7IGGJV03CLk0hNuYmg2/lGS8OaH7A46XOK0imG0F76ZLYA3vIwuM9uGLr36
+	 iY4MPaCOxPkbIe8o+EKwFtknYj63iUBo8C2D0viW3dglSMutBQEC3qHSZnI6wqpZ+a
+	 63JjgoSLWQJ7ks1GheghftH9Myls15zzyT+CqaYXxANkeptTcgRI+byJyLRJHZpXuM
+	 8OEOUJt2jcuOBUmqaoKmNBbAy1dgbRXFPqDIP6BavyBQalRgVZYFLpYdSgYoQXq9GQ
+	 HvcZ1BozYO6d9C5EDLAl38ELrpt8NsFbf3PsmdIKcj3ExStPZfICIOBVbKnKYeLlTj
+	 yVlsn4Av6Qd+Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 938F140990;
-	Sun, 18 Oct 2026 08:35:32 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 86F9F2A8
+	by smtp3.osuosl.org (Postfix) with ESMTP id A631B606BA;
+	Sun, 18 Oct 2026 08:35:35 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id DD41A75
  for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:35:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6C9DA812F6
+ by smtp4.osuosl.org (Postfix) with ESMTP id C0BF140949
  for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:35:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aRhP_BoB3p-u for <u-boot@lists.u-boot-project.org>;
- Sun, 18 Oct 2026 08:35:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D2258812EC
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::333"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792312527;
- b=S1clQtVXIgMjnOOgLjSI3kRiZ0WuPNhI/fFyd6lleVT26GiD53ILb8xsQQbw1MpT3atc
- wSYRt0U2aKqMkZE/+cxn3MspajAvbZajJs4xsjlM+pUFTn6nNx4CVju1YOsXynKmrvJ2y
- Cbk1mBbrEMA2ylyN1dKwcO8RTw1CLve0EYZI00j3voymFOOIEQGw2c4ZVjEFLjczlJqNy
- f1AFRw1DOYUPIzXudgsEgC0w+R5NWzpEV17dL4ZVEmTBvLJPLqFjNeH0EF+hmf4tZDlO6
- GL2owHJ1Caw62TWEO1SSAyuUGF43yWWjBjhrcgktjKSp0EaDpYr5ooX98WUuFhosNgA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vrZJCg77g6J5 for <u-boot@lists.u-boot-project.org>;
+ Sun, 18 Oct 2026 08:35:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8B1B140856
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::332"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792312528;
+ b=h4WjkTZYrj4CY81ZPn0TT4Dpz8TYbBRJHKVqakP5pjzGKMIjFt/h4BYGV7VHPEl/2vII
+ RnFqryI8JzuMo+R82lozgQxbSj+YGLOSVa1C23pmUV/+jTu6MpXk5QZ3m9zOk79Lz6HrI
+ sWPUZAqU0/Zzo9YkUj73wV7z/xeTXFCpCcJTOh313spc8Wejaza3C0Zo9/EAh10swG0CU
+ ofS2vwYcgV+M7pwLlH04bUR1G47oaSycRZoS//NLRWUvyfd8jaVjr9wSEQA797rTbFi3p
+ gRH/FbCOf7KaeUpJkJXko4fAcu72e6b5uI/V2+k7Sg97aZCG8ThVFbNXLBA6ivU7rYQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792312527;
+ c=relaxed/relaxed; t=1792312528;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Type:Content-Transfer-Encoding;
- bh=gWini1JPP7163BXxBUGDot2hbTHPN+ol6tViR8CkhTA=;
- b=FFoFfbCHEx5wq2oVZH89TbY6VAiSOI+CSsrqxR7ube+J/bWA3g5ARN3g3SEfcDieWSSl
- CuSAZ1W9WNltmDBOStZPRGBZmCCcrXvP5B2sMszI2284/xwgYXQN/uwQvrynRnbcKoTKr
- +yIH4hqtg/YllYoUjOODF4gZt0MuqYBKtenHxi0LEm9uruyvO3QEXMYoui2T9WrZwGKHL
- rF8bmhfxAJTqsj+bWk8I/VOhZSjZ9cXng/Sqo1NIaWA7p/bcTnLjTuhS/CzpcoX6jdCHd
- WaHvgq3xBmr53dFIhyhzAZ2kj7f8Tr+WE4Ij+0neXhn9Kozw73CDc6dIIV84KLThv+Q==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=UZjvrrcNW1WisxWZQnYNNpU+C5ws/IyX5SJYa39tor8=;
+ b=ask0aV7IqepSTROUQSXLt9nfaUt7D/lehBQ8k5C3/KPyEmenMsqo9m9UyulvPWPGrfrS
+ FXHStSnU39q9qcbYa/TDZ63STPT/hVGOalHKoYZetGcP5Bvso3NUh2mj2cAqd0M3ddZHT
+ 7hZAlrYR6zy13IsoG22v64WAa6SR6dMQLNAQcJdfOGK9yqoMH/84Aw0X9feM38XYfR+SB
+ 8QAGwUyGzXMKOi2qjIv3IKYRFBoSXLhwUFz0aX3KMomiTQNnuOz9uGZ6Iya4C1M0ny0hG
+ UdOBoNDn97aoPzhJabHL74XbZlUC4iG/N7Mw7dxRQdz/MhEG23WIgqUTfPr+782PZBw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=n4r9Lc8f; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::333"
+ header.s=20251104 header.b=FLl+W3ZN; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::332"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::333; helo=mail-wm1-x333.google.com;
+ client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
  envelope-from=pepe.schlehofer@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=n4r9Lc8f
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D2258812EC
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:35:26 +0000 (UTC)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4a19cba5c14so12649345e9.3
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 01:35:26 -0700 (PDT)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=FLl+W3ZN
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8B1B140856
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:35:27 +0000 (UTC)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4a1d75f2f11so7787255e9.3
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 01:35:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792312524; x=1792917324;
+ d=gmail.com; s=20251104; t=1792312525; x=1792917325;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=gWini1JPP7163BXxBUGDot2hbTHPN+ol6tViR8CkhTA=;
- b=n4r9Lc8f2vPSQxFg4t99NhjGJVfyV/n0HQhdodE96AAzuzRHbSIJzqPHLY8iLfAhow
- XG6mwIM6MeL/45Jg3+wHkIzMdozPVQ3uiZZpiu6pBihouRNspG2mf9VtBzN2mi/I69BQ
- 5gqpu+8qMhBLN2EsgetjkpQHly4/Cr6etJjlqIlVVTAAa6NslW9lEQf3HaalzYXqbPUY
- 2tSW491F+yC/CMSg3zhi+MzWKQi/Rf0w0kGy1eHyK9XCnd9SuW7afK/a9NukgW8fortq
- BkoP0KccQVE1Sg/He2vfiHCUFIiy+6Z1q963rahpOGoXvQr4wBPjTvf63tOWguIW8dFb
- T/Rg==
+ bh=UZjvrrcNW1WisxWZQnYNNpU+C5ws/IyX5SJYa39tor8=;
+ b=FLl+W3ZNBIxIkwba6y0YMT01Ebuq7JsXC21rgZeQWZP4bNqMtl9V/w4fyM2Vz9U5Xb
+ 6Lp0wJ743pIiqarOLh4Wc/9xCEbZLkSm8JT62j9X4dBRSpKmS/1pvWCyxj57aiWalBCJ
+ XOQ+5UkcH9iVPIYgIM38hCKvdR49VdcJUyCEoyF1nxSOP0qRex0wZAbtCzWVpCKZNDLG
+ d0lujxywzqcs/DJ2PgTKUWXp97u2GO0j6zzRJqx9jfdbbWjcDixOdTZKwRXhn+ZM4rCT
+ CQ0gtb9KO6CSxpMqAXmvdl9lQSbuQN1ORo7MpLNGjPImjP3H/Px8qmf178U0myd48Ljx
+ x4eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792312524; x=1792917324;
+ d=1e100.net; s=20260707; t=1792312525; x=1792917325;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=gWini1JPP7163BXxBUGDot2hbTHPN+ol6tViR8CkhTA=;
- b=Q26spL8K7F11bANYgLbEQHajyxEM4azf1uxr6PdehUtVFiqoqrQnOJrGqDuoeR+tFb
- 8V1Kdvf1c8A+7R78zu5VAdntg5fHvs3qjBWG3LsydPRQjNEmWhBWTt6xDo9tIUR2Fuo3
- FzO/zci2ciJCU3O26mLujLfHMCQQNoKXEiyrdRxpF7otlK5sYyh/+sxliEmx+lnQRnTT
- AQOaUNt4YLOVb4F26rxK8FCkdrMc6vLEAI5TYL0B/QNNbwJfXWaQoRnLZf79h1JnVcl3
- H1kUgvYhpeBspE3lwKi6sMTBjPhyErL04OEnPMOz5BN9/Q8pwuSldj6bMqzhM2hm2dy6
- 2wDA==
-X-Gm-Message-State: AFq9FYIrjqSpJ3RZJuP+np7rcOZSRu9AmuJSjQf/erXCfvzteYAoWNUc
- VYCzrsWuuY7QLS92bA7VVJOqhG6c3PNTazS+1jAb8gdM6S4hombqzUIfghOfhiUe
-X-Gm-Gg: AYBFou3x8IZPFkxKhrKcdkfbtwMfMHBc3UPmc+9WmhZgkG4Sx2YXwSpTgrHy/JGlvc+
- tysjPR5sLcunnzExvlKp0i6u5g95yXu98l5AxetcaX28OXR10ZkgxAA/r8zCY66b0zWSZlQoxxk
- tsF6IJSII5Z9o15MWFkqtbTODX7aMzlOOhubteGXCdqvcp/wfajuS6z7PEsLCKCiznfGVv54XLp
- kkrbpSDSNl4Fy1ViUHHsp4uYs8F2y1kdyFQ1Re93Tmt9EKZaY7k/mNV/A6aFykZGPHm9D4qzL3y
- 3ovzOah4Auw3MLmjx440hfsLTY9XOtxu+eAZOze5H2fCTUnD51cTe01wxzWlis4iM+0ztpdtR27
- 3+hkyTcC+LBr7PG9GdROmv5jpYhlbbgjmMUJM1Q5SwslJisRUWM7c9fd+IFQ3uE5KkmxTVKdfm/
- UaQkk7DM5U34nme36TLyjdzS7tXSBn6wi41l4zGbq7asADo1AkUUaXUn5msh0tDOTQ/eXDyEdFw
- jyWWtxSUdcUqEJsPb2wEMCTQ894xcaDo6YqNwuBINpsLrThTPHMCE6U1oLsieHC4NSOKsHYBG2V
- cazyrgHif59FiYv/B/Jz59wFf9t8b+wQVCKZyI+d3tdbR52ofmUq+pzTdXnoow8dENJCTjPoTW3
- elha4Mn+qO/8kuP1QwCPjmks=
-X-Received: by 2002:a05:600c:c8c:b0:4a0:bc9:28c6 with SMTP id
- 5b1f17b1804b1-4a1d7643dadmr84467615e9.34.1792312524007; 
- Sun, 18 Oct 2026 01:35:24 -0700 (PDT)
+ bh=UZjvrrcNW1WisxWZQnYNNpU+C5ws/IyX5SJYa39tor8=;
+ b=Afy9kJDneshBexsic0qiuCKVN/7Ke42fNnAIKdL0Rq9vk4ybORm5u0g1mlE4ivI4n8
+ UxcVWwfhAsv8MHlnngYqlJyEtsiwc8I/Xo0ztgk7GGsH98QIoBclftDEqzye3DFY5oGu
+ BKeOMfr/EHNtWgVESvbl/CnaNUEbDhxb9UnKwe6xRw7k/6Y2wjEubK0ubNtkWp01hcnO
+ 3m25/6LGaQLtOTA7cdLvUuslrSMWVz7OZijdvLYdrgOzlLbiSZor6VwkMBzhpHe/2WiB
+ N3wEiAldLt7so2irGnXQBUJGneFGnHv8Z7LGzWJZEsySWvjWATJ/i9/Xgw6arBSKTiEn
+ TSHw==
+X-Gm-Message-State: AFq9FYI+molwucPiD0jImB8uyOYrDgQGAEuCIVTTGb8HCXucI3/h2Fo0
+ jJu3YVV61MXGdsUoGdYoJkvJsma1NF6sBYS1KJKqhJFeIoujw67M33UGzqWxda+j
+X-Gm-Gg: AYBFou2ow6iFULyZdMp++3dILRjK28ZmjcjmC0yXyZaj1FXeQIjCZ9V0FCuwe/2mE75
+ VjFd5q8pM+uKiyEbQdIhFBhRGvydRRsxIS5w9gs2faMFLJABUeu+uiOPa9QbeOAv/AnDpQk78iG
+ TKXSyE04JtOQcBI82a9Ovzslzv4wYqITX3+RwvGSoascp1aE9LnJ+0Uo8z3r83PNDuT9cXWaKzG
+ p81Cpcj/6nLokBYdQD5yvpnmVy24eFJqtbKZvRZkehRPVLIqX5ffaIKT99y+mTKn3J49B+E1GEF
+ UoJ54KL4Z4pytl8JIfVXvw7D1q4RzDN3UEF1k9/t7oWtTN9zc9OCcWE5TyEJVzsz/R19DCcQ9SV
+ kowTDS+pscgtVHMOL32dzKpq4NtReOGAsibKprWkdzYf9r3tVpfe0AXl1ewnbBJNtZxyx+OtxpB
+ qMXj1PS3wAMjvT+dEft5CkyYzYYnx4CyF87zBtD+Wg40PUHraE2DM0xcHcCrWW243fC7IvX75iy
+ 45V3yiP0bauEMXonjrAm1JbbgTXqn03+5daEJvK5vp331WyfV+6iAlJmltacRaoljj18solO4wq
+ rLBF0bPRKoSVDGZcPhR6skeAxWFiA5h3KqN9j1dOC2H43HRd4gVHKIsw8LB5LN32HhagkQ3jMlf
+ XxBUdIFR9h2E00tm0Go08frY=
+X-Received: by 2002:a05:600c:8b0a:b0:4a1:dbdf:17a8 with SMTP id
+ 5b1f17b1804b1-4a1dbdf1a18mr68191455e9.2.1792312525104; 
+ Sun, 18 Oct 2026 01:35:25 -0700 (PDT)
 Received: from localhost.localdomain
  (dynamic-2a00-1028-8388-a84e-318a-f58b-5e43-a2b9.ipv6.o2.cz.
  [2a00:1028:8388:a84e:318a:f58b:5e43:a2b9])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1e3ebb3aasm43589595e9.0.2026.10.18.01.35.23
+ 5b1f17b1804b1-4a1e3ebb3aasm43589595e9.0.2026.10.18.01.35.24
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sun, 18 Oct 2026 01:35:23 -0700 (PDT)
+ Sun, 18 Oct 2026 01:35:24 -0700 (PDT)
 From: Josef Schlehofer <pepe.schlehofer@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>,
@@ -170,9 +170,10 @@ Cc: Tom Rini <trini@konsulko.com>,
  Heiko Schocher <hs@nabladev.com>,
  Holger Brunck <holger.brunck@hitachienergy.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 02/14] powerpc: Make the global data pointer LTO safe
-Date: Sun, 18 Oct 2026 10:35:04 +0200
-Message-ID: <20261018083516.49229-3-pepe.schlehofer@gmail.com>
+Subject: [PATCH v2 03/14] powerpc: lib: Add GPR save and restore routines to
+ the private libgcc
+Date: Sun, 18 Oct 2026 10:35:05 +0200
+Message-ID: <20261018083516.49229-4-pepe.schlehofer@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20261018083516.49229-1-pepe.schlehofer@gmail.com>
 References: <20261018083516.49229-1-pepe.schlehofer@gmail.com>
@@ -192,376 +193,269 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-The register variable form of gd cannot be used with LTO (GCC bug
-68384). The LTO link fails with "multiple definition of `r2'". In LTO
-builds define gd through inline assembly accessors that read and write
-r2, following ARM and RISC-V. Other builds keep the register variable,
-and set_gd() assigns it.
+When GCC optimizes for size, it branches to libgcc's _restgpr_N_x
+routines to restore non-volatile registers. U-Boot's private libgcc
+lacks these routines, so builds with CONFIG_USE_PRIVATE_LIBGCC=y fail
+to link with Debian's GCC 14.2, for example qemu-ppce500:
 
-Every assignment to gd has to go through set_gd() for that to work, so
-convert all PowerPC ones, including those in common code, and give
-PowerPC its own arch_setup_gd() in the new arch/powerpc/lib/gd.c
-instead of the weak one, which assigns gd. Rename the gd parameter of
-the SPL board_init_r() functions, which the gd macro would otherwise
-replace.
+  undefined reference to `_restgpr_31_x'
+
+Copy the 32-bit integer register save and restore routines from
+Linux's arch/powerpc/lib/crtsavres.S (v7.3-rc5), following the private
+libgcc's existing approach for shift routines. Put each group of
+routines in its own section so --gc-sections can discard unused
+groups. Linux's CONFIG_CC_OPTIMIZE_FOR_SIZE condition is then not
+needed.
 
 Signed-off-by: Josef Schlehofer <pepe.schlehofer@gmail.com>
-Reviewed-by: Marek Mojík <marek.mojik@nic.cz>
-Cc: Marek Behún <kabel@kernel.org>
+Cc: Tom Rini <trini@konsulko.com>
 Cc: Christophe Leroy <christophe.leroy@csgroup.eu>
-Cc: Mario Six <mario.six@gdsys.cc>
-Cc: Priyanka Jain <priyanka.jain@nxp.com>
-Cc: Qiang Zhao <qiang.zhao@nxp.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Shengzhou Liu <Shengzhou.Liu@nxp.com>
-Cc: Marek Mojík <marek.mojik@nic.cz>
+Cc: Marek Behún <kabel@kernel.org>
 ---
-(no changes since v1)
+Changes in v2:
+- new patch
 
-The mpc83xx and common/spl/spl.c hunks change no build: mpc83xx cannot
-enable LTO and no PowerPC board builds common/spl/spl.c. They are
-converted so that no PowerPC code assigns gd directly.
-
-Unlike on ARM and RISC-V, set_gd() assigns the register variable in
-builds without LTO. GCC requires inline assembly that accesses a
-global register variable to declare that access through constraints.
-
-In the T-series SPLs, the board_init_r() bodies now use the global gd
-instead of the parameter. relocate_code() passes the CONFIG_SPL_GD_ADDR
-that board_init_f() has already set as gd and leaves r2 alone, so the
-pointer is the same.
-
-checkpatch asks for IS_ENABLED() on the #if lines in common/board_r.c,
-common/init/board_init.c and common/spl/spl.c. They choose how gd is
-set per architecture: set_gd() exists only on ARM, RISC-V and PowerPC,
-so IS_ENABLED() cannot replace them. The new arch/powerpc/lib/gd.c is
-covered by the POWERPC entry in MAINTAINERS.
+The routines assemble to the same code as crtsavgpr.o, crtresgpr.o and
+crtresxgpr.o in Debian's libgcc 14.2.
 ---
- arch/powerpc/cpu/mpc83xx/cpu_init.c       |  3 +--
- arch/powerpc/cpu/mpc83xx/spl_minimal.c    |  3 +--
- arch/powerpc/cpu/mpc85xx/cpu_init_early.c |  3 +--
- arch/powerpc/include/asm/global_data.h    | 30 +++++++++++++++++++++++
- arch/powerpc/lib/Makefile                 |  1 +
- arch/powerpc/lib/gd.c                     | 14 +++++++++++
- board/nxp/p1010rdb/spl_minimal.c          |  2 +-
- board/nxp/p1_p2_rdb_pc/spl_minimal.c      |  2 +-
- board/nxp/t102xrdb/spl.c                  |  4 +--
- board/nxp/t104xrdb/spl.c                  |  4 +--
- board/nxp/t208xqds/spl.c                  |  4 +--
- board/nxp/t208xrdb/spl.c                  |  4 +--
- board/nxp/t4rdb/spl.c                     |  4 +--
- common/board_r.c                          |  2 +-
- common/init/board_init.c                  |  9 ++++---
- common/spl/spl.c                          |  4 ++-
- 16 files changed, 69 insertions(+), 24 deletions(-)
- create mode 100644 arch/powerpc/lib/gd.c
+ arch/powerpc/lib/Makefile    |   3 +-
+ arch/powerpc/lib/crtsavres.S | 213 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 215 insertions(+), 1 deletion(-)
+ create mode 100644 arch/powerpc/lib/crtsavres.S
 
-diff --git a/arch/powerpc/cpu/mpc83xx/cpu_init.c b/arch/powerpc/cpu/mpc83xx/cpu_init.c
-index 340f9a0da56..5618b79a78b 100644
---- a/arch/powerpc/cpu/mpc83xx/cpu_init.c
-+++ b/arch/powerpc/cpu/mpc83xx/cpu_init.c
-@@ -139,8 +139,7 @@ void cpu_init_f (volatile immap_t * im)
- #endif
- 		0;
- 
--	/* Pointer is writable since we allocated a register for it */
--	gd = (gd_t *)SYS_INIT_SP_ADDR;
-+	set_gd((gd_t *)SYS_INIT_SP_ADDR);
- 
- 	/* global data region was cleared in start.S */
- 
-diff --git a/arch/powerpc/cpu/mpc83xx/spl_minimal.c b/arch/powerpc/cpu/mpc83xx/spl_minimal.c
-index 7036e3fae0c..1d48428573d 100644
---- a/arch/powerpc/cpu/mpc83xx/spl_minimal.c
-+++ b/arch/powerpc/cpu/mpc83xx/spl_minimal.c
-@@ -25,8 +25,7 @@ DECLARE_GLOBAL_DATA_PTR;
-  */
- void cpu_init_f (volatile immap_t * im)
- {
--	/* Pointer is writable since we allocated a register for it */
--	gd = (gd_t *)SYS_INIT_SP_ADDR;
-+	set_gd((gd_t *)SYS_INIT_SP_ADDR);
- 
- 	/* global data region was cleared in start.S */
- 
-diff --git a/arch/powerpc/cpu/mpc85xx/cpu_init_early.c b/arch/powerpc/cpu/mpc85xx/cpu_init_early.c
-index 75bfc07fe97..fb3d662c9d3 100644
---- a/arch/powerpc/cpu/mpc85xx/cpu_init_early.c
-+++ b/arch/powerpc/cpu/mpc85xx/cpu_init_early.c
-@@ -95,8 +95,7 @@ void cpu_init_early_f(void *fdt)
- 	int i;
- #endif
- 
--	/* Pointer is writable since we allocated a register for it */
--	gd = (gd_t *)SYS_INIT_SP_ADDR;
-+	set_gd((gd_t *)SYS_INIT_SP_ADDR);
- 
- 	/* gd area was zeroed during startup */
- 
-diff --git a/arch/powerpc/include/asm/global_data.h b/arch/powerpc/include/asm/global_data.h
-index 26cbc7854d9..d8aefd2ca0a 100644
---- a/arch/powerpc/include/asm/global_data.h
-+++ b/arch/powerpc/include/asm/global_data.h
-@@ -93,8 +93,38 @@ struct arch_global_data {
- 
- #include <asm-generic/global_data.h>
- 
-+#ifdef LTO_ENABLE
-+
-+#define DECLARE_GLOBAL_DATA_PTR
-+#define gd	get_gd()
-+
-+static inline gd_t *get_gd(void)
-+{
-+	gd_t *gd_ptr;
-+
-+	__asm__ volatile("mr %0, 2\n" : "=r" (gd_ptr));
-+
-+	return gd_ptr;
-+}
-+
-+static inline void set_gd(gd_t *gd_ptr)
-+{
-+	__asm__ volatile("mr 2, %0\n" : : "r" (gd_ptr));
-+}
-+
-+#else
-+
- #define DECLARE_GLOBAL_DATA_PTR     register gd_t *gd asm ("r2")
- 
-+/*
-+ * GCC does not see an asm statement write r2 and assumes that the
-+ * register variable is unchanged, so it may move gd accesses across the
-+ * write. Assign the variable itself.
-+ */
-+#define set_gd(gd_ptr)	(gd = (gd_ptr))
-+
-+#endif
-+
- #include <asm/u-boot.h>
- 
- #endif /* __ASM_GBL_DATA_H */
 diff --git a/arch/powerpc/lib/Makefile b/arch/powerpc/lib/Makefile
-index c0caa703caa..a3048975ae7 100644
+index a3048975ae7..90f0e1e5fa9 100644
 --- a/arch/powerpc/lib/Makefile
 +++ b/arch/powerpc/lib/Makefile
-@@ -18,6 +18,7 @@ endif
- endif
+@@ -5,7 +5,8 @@
  
- obj-y	+= bdinfo.o
-+obj-y	+= gd.o
+ ## Build a couple of necessary functions into a private libgcc
+ ## if the user asked for it
+-lib-$(CONFIG_USE_PRIVATE_LIBGCC) += _ashldi3.o _ashrdi3.o _lshrdi3.o
++lib-$(CONFIG_USE_PRIVATE_LIBGCC) += _ashldi3.o _ashrdi3.o _lshrdi3.o \
++				    crtsavres.o
  
- ifdef MINIMAL
- obj-y += cache.o time.o
-diff --git a/arch/powerpc/lib/gd.c b/arch/powerpc/lib/gd.c
+ MINIMAL=
+ 
+diff --git a/arch/powerpc/lib/crtsavres.S b/arch/powerpc/lib/crtsavres.S
 new file mode 100644
-index 00000000000..d36f784fbf7
+index 00000000000..8c35eedecb6
 --- /dev/null
-+++ b/arch/powerpc/lib/gd.c
-@@ -0,0 +1,14 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/arch/powerpc/lib/crtsavres.S
+@@ -0,0 +1,213 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
-+ * Copyright (C) 2026 Josef Schlehofer <pepe.schlehofer@gmail.com>
++ * Out-of-line integer register save and restore routines, which GCC calls
++ * from function prologues and epilogues when it optimizes for size.
++ *
++ * This code was copied from crtsavres.S in arch/powerpc/lib of the Linux
++ * kernel sources (v7.3-rc5, last changed by commit 699d53f04829
++ * ("powerpc/vdso32: Fix use of crtsavres for PPC64")): the 32-bit integer
++ * register routines, without the CONFIG_CC_OPTIMIZE_FOR_SIZE condition.
++ * Each group of routines is in a section of its own, so that --gc-sections
++ * drops the groups that nothing calls. The source file copyrights are as
++ * follows:
++ *
++ *   Copyright (C) 1995, 1996, 1998, 2000, 2001 Free Software Foundation, Inc.
++ *   Copyright 2008 Freescale Semiconductor, Inc.
++ *   Written By Michael Meissner
++ *
++ * Based on gcc/config/rs6000/crtsavres.asm from gcc
 + */
 +
-+#include <init.h>
-+#include <asm/global_data.h>
++#include <asm/processor.h>
 +
-+DECLARE_GLOBAL_DATA_PTR;
++/* Routines for saving integer registers, called by the compiler.  */
++/* Called with r11 pointing to the stack header word of the caller of the */
++/* function, just beyond the end of the integer save area.  */
 +
-+void arch_setup_gd(gd_t *new_gd)
-+{
-+	set_gd(new_gd);
-+}
-diff --git a/board/nxp/p1010rdb/spl_minimal.c b/board/nxp/p1010rdb/spl_minimal.c
-index 8cd79c6fb5f..33930fef8d9 100644
---- a/board/nxp/p1010rdb/spl_minimal.c
-+++ b/board/nxp/p1010rdb/spl_minimal.c
-@@ -45,7 +45,7 @@ void board_init_f(ulong bootflag)
- 	relocate_code(CONFIG_SPL_RELOC_STACK, 0, CONFIG_SPL_RELOC_TEXT_BASE);
- }
- 
--void board_init_r(gd_t *gd, ulong dest_addr)
-+void board_init_r(gd_t *dummy, ulong dest_addr)
- {
- 	puts("\nSecond program loader running in sram...");
- 	nand_boot();
-diff --git a/board/nxp/p1_p2_rdb_pc/spl_minimal.c b/board/nxp/p1_p2_rdb_pc/spl_minimal.c
-index 511bcf5506b..960b2c41457 100644
---- a/board/nxp/p1_p2_rdb_pc/spl_minimal.c
-+++ b/board/nxp/p1_p2_rdb_pc/spl_minimal.c
-@@ -43,7 +43,7 @@ void board_init_f(ulong bootflag)
- 	relocate_code(CONFIG_SPL_RELOC_STACK, 0, CONFIG_SPL_RELOC_TEXT_BASE);
- }
- 
--void board_init_r(gd_t *gd, ulong dest_addr)
-+void board_init_r(gd_t *dummy, ulong dest_addr)
- {
- 	puts("\nSecond program loader running in sram...");
- 	nand_boot();
-diff --git a/board/nxp/t102xrdb/spl.c b/board/nxp/t102xrdb/spl.c
-index de6cdda194e..f527f62a5dd 100644
---- a/board/nxp/t102xrdb/spl.c
-+++ b/board/nxp/t102xrdb/spl.c
-@@ -58,7 +58,7 @@ void board_init_f(ulong bootflag)
- 	memcpy((void *)CONFIG_SPL_GD_ADDR, (void *)gd, sizeof(gd_t));
- 
- 	/* Update GD pointer */
--	gd = (gd_t *)(CONFIG_SPL_GD_ADDR);
-+	set_gd((gd_t *)(CONFIG_SPL_GD_ADDR));
- 
- 	console_init_f();
- 
-@@ -87,7 +87,7 @@ void board_init_f(ulong bootflag)
- 	relocate_code(CONFIG_SPL_RELOC_STACK, (gd_t *)CONFIG_SPL_GD_ADDR, 0x0);
- }
- 
--void board_init_r(gd_t *gd, ulong dest_addr)
-+void board_init_r(gd_t *dummy, ulong dest_addr)
- {
- 	struct bd_info *bd;
- 
-diff --git a/board/nxp/t104xrdb/spl.c b/board/nxp/t104xrdb/spl.c
-index e02a1f95d4c..0310baa381c 100644
---- a/board/nxp/t104xrdb/spl.c
-+++ b/board/nxp/t104xrdb/spl.c
-@@ -55,7 +55,7 @@ void board_init_f(ulong bootflag)
- 	memcpy((void *)CONFIG_SPL_GD_ADDR, (void *)gd, sizeof(gd_t));
- 
- 	/* Update GD pointer */
--	gd = (gd_t *)(CONFIG_SPL_GD_ADDR);
-+	set_gd((gd_t *)(CONFIG_SPL_GD_ADDR));
- 
- #ifdef CONFIG_DEEP_SLEEP
- 	/* disable the console if boot from deep sleep */
-@@ -78,7 +78,7 @@ void board_init_f(ulong bootflag)
- 	relocate_code(CONFIG_SPL_RELOC_STACK, (gd_t *)CONFIG_SPL_GD_ADDR, 0x0);
- }
- 
--void board_init_r(gd_t *gd, ulong dest_addr)
-+void board_init_r(gd_t *dummy, ulong dest_addr)
- {
- 	struct bd_info *bd;
- 
-diff --git a/board/nxp/t208xqds/spl.c b/board/nxp/t208xqds/spl.c
-index 44ad4e68d9f..f8c641a9c64 100644
---- a/board/nxp/t208xqds/spl.c
-+++ b/board/nxp/t208xqds/spl.c
-@@ -73,7 +73,7 @@ void board_init_f(ulong bootflag)
- 	memcpy((void *)CONFIG_SPL_GD_ADDR, (void *)gd, sizeof(gd_t));
- 
- 	/* Update GD pointer */
--	gd = (gd_t *)(CONFIG_SPL_GD_ADDR);
-+	set_gd((gd_t *)(CONFIG_SPL_GD_ADDR));
- 
- 	console_init_f();
- 
-@@ -96,7 +96,7 @@ void board_init_f(ulong bootflag)
- 	relocate_code(CONFIG_SPL_RELOC_STACK, (gd_t *)CONFIG_SPL_GD_ADDR, 0x0);
- }
- 
--void board_init_r(gd_t *gd, ulong dest_addr)
-+void board_init_r(gd_t *dummy, ulong dest_addr)
- {
- 	struct bd_info *bd;
- 
-diff --git a/board/nxp/t208xrdb/spl.c b/board/nxp/t208xrdb/spl.c
-index df3b9c6fe40..4b1ab3618c3 100644
---- a/board/nxp/t208xrdb/spl.c
-+++ b/board/nxp/t208xrdb/spl.c
-@@ -33,7 +33,7 @@ void board_init_f(ulong bootflag)
- 	memcpy((void *)CONFIG_SPL_GD_ADDR, (void *)gd, sizeof(gd_t));
- 
- 	/* Update GD pointer */
--	gd = (gd_t *)(CONFIG_SPL_GD_ADDR);
-+	set_gd((gd_t *)(CONFIG_SPL_GD_ADDR));
- 
- 	console_init_f();
- 
-@@ -56,7 +56,7 @@ void board_init_f(ulong bootflag)
- 	relocate_code(CONFIG_SPL_RELOC_STACK, (gd_t *)CONFIG_SPL_GD_ADDR, 0x0);
- }
- 
--void board_init_r(gd_t *gd, ulong dest_addr)
-+void board_init_r(gd_t *dummy, ulong dest_addr)
- {
- 	struct bd_info *bd;
- 
-diff --git a/board/nxp/t4rdb/spl.c b/board/nxp/t4rdb/spl.c
-index 9d2472dec25..441015bf5a4 100644
---- a/board/nxp/t4rdb/spl.c
-+++ b/board/nxp/t4rdb/spl.c
-@@ -39,7 +39,7 @@ void board_init_f(ulong bootflag)
- 	memcpy((void *)CONFIG_SPL_GD_ADDR, (void *)gd, sizeof(gd_t));
- 
- 	/* Update GD pointer */
--	gd = (gd_t *)(CONFIG_SPL_GD_ADDR);
-+	set_gd((gd_t *)(CONFIG_SPL_GD_ADDR));
- 
- 	/* compiler optimization barrier needed for GCC >= 3.4 */
- 	__asm__ __volatile__("" : : : "memory");
-@@ -59,7 +59,7 @@ void board_init_f(ulong bootflag)
- 	relocate_code(CONFIG_SPL_RELOC_STACK, (gd_t *)CONFIG_SPL_GD_ADDR, 0x0);
- }
- 
--void board_init_r(gd_t *gd, ulong dest_addr)
-+void board_init_r(gd_t *dummy, ulong dest_addr)
- {
- 	struct bd_info *bd;
- 
-diff --git a/common/board_r.c b/common/board_r.c
-index a397e20959d..7a9de6ba5f3 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -796,7 +796,7 @@ void board_init_r(gd_t *new_gd, ulong dest_addr)
- 	if (CONFIG_IS_ENABLED(X86_64) && !IS_ENABLED(CONFIG_EFI_APP))
- 		arch_setup_gd(new_gd);
- 
--#if defined(CONFIG_RISCV)
-+#if defined(CONFIG_RISCV) || defined(CONFIG_PPC)
- 	set_gd(new_gd);
- #elif !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_ARM64)
- 	gd = new_gd;
-diff --git a/common/init/board_init.c b/common/init/board_init.c
-index 2a6f39f51ad..2faea5432c0 100644
---- a/common/init/board_init.c
-+++ b/common/init/board_init.c
-@@ -14,15 +14,16 @@
- DECLARE_GLOBAL_DATA_PTR;
- 
- /*
-- * Unfortunately x86, ARM and RISC-V can't compile this code as gd is defined
-- * as macro and cannot be assigned.
-+ * x86, RISC-V and PowerPC provide their own arch_setup_gd(), and ARM does
-+ * not call it.
-  */
--#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_RISCV)
-+#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_RISCV) && \
-+	!defined(CONFIG_PPC)
- __weak void arch_setup_gd(struct global_data *gd_ptr)
- {
- 	gd = gd_ptr;
- }
--#endif /* !CONFIG_X86 && !CONFIG_ARM */
-+#endif /* !CONFIG_X86 && !CONFIG_ARM && !CONFIG_RISCV && !CONFIG_PPC */
- 
- /**
-  * This function is called from board_init_f_init_reserve to set up
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 6c9a1a1cbcc..81aec2b1108 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -956,7 +956,9 @@ ulong spl_relocate_stack_gd(void)
- #if CONFIG_IS_ENABLED(LOG)
- 	log_fixup_for_gd_move(new_gd);
- #endif
--#if !defined(CONFIG_ARM) && !defined(CONFIG_RISCV)
-+#if defined(CONFIG_PPC)
-+	set_gd(new_gd);
-+#elif !defined(CONFIG_ARM) && !defined(CONFIG_RISCV)
- 	gd = new_gd;
- #endif
- 	return ptr;
++	.section ".text._savegpr_14","ax",@progbits
++	.align	2
++
++_GLOBAL(_savegpr_14)
++_GLOBAL(_save32gpr_14)
++	stw	14,-72(11)	/* save gp registers */
++_GLOBAL(_savegpr_15)
++_GLOBAL(_save32gpr_15)
++	stw	15,-68(11)
++_GLOBAL(_savegpr_16)
++_GLOBAL(_save32gpr_16)
++	stw	16,-64(11)
++_GLOBAL(_savegpr_17)
++_GLOBAL(_save32gpr_17)
++	stw	17,-60(11)
++_GLOBAL(_savegpr_18)
++_GLOBAL(_save32gpr_18)
++	stw	18,-56(11)
++_GLOBAL(_savegpr_19)
++_GLOBAL(_save32gpr_19)
++	stw	19,-52(11)
++_GLOBAL(_savegpr_20)
++_GLOBAL(_save32gpr_20)
++	stw	20,-48(11)
++_GLOBAL(_savegpr_21)
++_GLOBAL(_save32gpr_21)
++	stw	21,-44(11)
++_GLOBAL(_savegpr_22)
++_GLOBAL(_save32gpr_22)
++	stw	22,-40(11)
++_GLOBAL(_savegpr_23)
++_GLOBAL(_save32gpr_23)
++	stw	23,-36(11)
++_GLOBAL(_savegpr_24)
++_GLOBAL(_save32gpr_24)
++	stw	24,-32(11)
++_GLOBAL(_savegpr_25)
++_GLOBAL(_save32gpr_25)
++	stw	25,-28(11)
++_GLOBAL(_savegpr_26)
++_GLOBAL(_save32gpr_26)
++	stw	26,-24(11)
++_GLOBAL(_savegpr_27)
++_GLOBAL(_save32gpr_27)
++	stw	27,-20(11)
++_GLOBAL(_savegpr_28)
++_GLOBAL(_save32gpr_28)
++	stw	28,-16(11)
++_GLOBAL(_savegpr_29)
++_GLOBAL(_save32gpr_29)
++	stw	29,-12(11)
++_GLOBAL(_savegpr_30)
++_GLOBAL(_save32gpr_30)
++	stw	30,-8(11)
++_GLOBAL(_savegpr_31)
++_GLOBAL(_save32gpr_31)
++	stw	31,-4(11)
++	blr
++
++/* Routines for restoring integer registers, called by the compiler.  */
++/* Called with r11 pointing to the stack header word of the caller of the */
++/* function, just beyond the end of the integer restore area.  */
++
++	.section ".text._restgpr_14","ax",@progbits
++	.align	2
++
++_GLOBAL(_restgpr_14)
++_GLOBAL(_rest32gpr_14)
++	lwz	14,-72(11)	/* restore gp registers */
++_GLOBAL(_restgpr_15)
++_GLOBAL(_rest32gpr_15)
++	lwz	15,-68(11)
++_GLOBAL(_restgpr_16)
++_GLOBAL(_rest32gpr_16)
++	lwz	16,-64(11)
++_GLOBAL(_restgpr_17)
++_GLOBAL(_rest32gpr_17)
++	lwz	17,-60(11)
++_GLOBAL(_restgpr_18)
++_GLOBAL(_rest32gpr_18)
++	lwz	18,-56(11)
++_GLOBAL(_restgpr_19)
++_GLOBAL(_rest32gpr_19)
++	lwz	19,-52(11)
++_GLOBAL(_restgpr_20)
++_GLOBAL(_rest32gpr_20)
++	lwz	20,-48(11)
++_GLOBAL(_restgpr_21)
++_GLOBAL(_rest32gpr_21)
++	lwz	21,-44(11)
++_GLOBAL(_restgpr_22)
++_GLOBAL(_rest32gpr_22)
++	lwz	22,-40(11)
++_GLOBAL(_restgpr_23)
++_GLOBAL(_rest32gpr_23)
++	lwz	23,-36(11)
++_GLOBAL(_restgpr_24)
++_GLOBAL(_rest32gpr_24)
++	lwz	24,-32(11)
++_GLOBAL(_restgpr_25)
++_GLOBAL(_rest32gpr_25)
++	lwz	25,-28(11)
++_GLOBAL(_restgpr_26)
++_GLOBAL(_rest32gpr_26)
++	lwz	26,-24(11)
++_GLOBAL(_restgpr_27)
++_GLOBAL(_rest32gpr_27)
++	lwz	27,-20(11)
++_GLOBAL(_restgpr_28)
++_GLOBAL(_rest32gpr_28)
++	lwz	28,-16(11)
++_GLOBAL(_restgpr_29)
++_GLOBAL(_rest32gpr_29)
++	lwz	29,-12(11)
++_GLOBAL(_restgpr_30)
++_GLOBAL(_rest32gpr_30)
++	lwz	30,-8(11)
++_GLOBAL(_restgpr_31)
++_GLOBAL(_rest32gpr_31)
++	lwz	31,-4(11)
++	blr
++
++/* Routines for restoring integer registers, called by the compiler.  */
++/* Called with r11 pointing to the stack header word of the caller of the */
++/* function, just beyond the end of the integer restore area.  */
++
++	.section ".text._restgpr_14_x","ax",@progbits
++	.align	2
++
++_GLOBAL(_restgpr_14_x)
++_GLOBAL(_rest32gpr_14_x)
++	lwz	14,-72(11)	/* restore gp registers */
++_GLOBAL(_restgpr_15_x)
++_GLOBAL(_rest32gpr_15_x)
++	lwz	15,-68(11)
++_GLOBAL(_restgpr_16_x)
++_GLOBAL(_rest32gpr_16_x)
++	lwz	16,-64(11)
++_GLOBAL(_restgpr_17_x)
++_GLOBAL(_rest32gpr_17_x)
++	lwz	17,-60(11)
++_GLOBAL(_restgpr_18_x)
++_GLOBAL(_rest32gpr_18_x)
++	lwz	18,-56(11)
++_GLOBAL(_restgpr_19_x)
++_GLOBAL(_rest32gpr_19_x)
++	lwz	19,-52(11)
++_GLOBAL(_restgpr_20_x)
++_GLOBAL(_rest32gpr_20_x)
++	lwz	20,-48(11)
++_GLOBAL(_restgpr_21_x)
++_GLOBAL(_rest32gpr_21_x)
++	lwz	21,-44(11)
++_GLOBAL(_restgpr_22_x)
++_GLOBAL(_rest32gpr_22_x)
++	lwz	22,-40(11)
++_GLOBAL(_restgpr_23_x)
++_GLOBAL(_rest32gpr_23_x)
++	lwz	23,-36(11)
++_GLOBAL(_restgpr_24_x)
++_GLOBAL(_rest32gpr_24_x)
++	lwz	24,-32(11)
++_GLOBAL(_restgpr_25_x)
++_GLOBAL(_rest32gpr_25_x)
++	lwz	25,-28(11)
++_GLOBAL(_restgpr_26_x)
++_GLOBAL(_rest32gpr_26_x)
++	lwz	26,-24(11)
++_GLOBAL(_restgpr_27_x)
++_GLOBAL(_rest32gpr_27_x)
++	lwz	27,-20(11)
++_GLOBAL(_restgpr_28_x)
++_GLOBAL(_rest32gpr_28_x)
++	lwz	28,-16(11)
++_GLOBAL(_restgpr_29_x)
++_GLOBAL(_rest32gpr_29_x)
++	lwz	29,-12(11)
++_GLOBAL(_restgpr_30_x)
++_GLOBAL(_rest32gpr_30_x)
++	lwz	30,-8(11)
++_GLOBAL(_restgpr_31_x)
++_GLOBAL(_rest32gpr_31_x)
++	lwz	0,4(11)
++	lwz	31,-4(11)
++	mtlr	0
++	mr	1,11
++	blr
 -- 
 2.54.0 (Apple Git-157)
 
