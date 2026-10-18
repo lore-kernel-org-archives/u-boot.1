@@ -4,163 +4,165 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 301DACCF2C9
-	for <u-boot@archiver.kernel.org>; Sun, 18 Oct 2026 15:59:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 412C6CCF2C4
+	for <u-boot@archiver.kernel.org>; Sun, 18 Oct 2026 15:59:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 772DC80C7B;
-	Sun, 18 Oct 2026 15:59:14 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B0E2880FB7;
+	Sun, 18 Oct 2026 15:59:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3IoUrTTE0tHm; Sun, 18 Oct 2026 15:59:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C93B080C16
+ id 5kSuSokVE6re; Sun, 18 Oct 2026 15:59:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 93DEF80C43
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792339154;
-	b=eAEQPIioOw1yuD9yMZYMaNSnJ0El4iF9Jtjo46d8/QcR4Q0Q3OBjqv0QyxnP49OnfN1Y
-	 Lg2PZudp9dAb19CbewrpGXqW2rVA11SPQq2eQi4un+SogUaz6EDu0SXXYv24647sBp1KV
-	 tPAXjHsdFum2ovq7LD+pdxQXpM1LXaB3n2L9augoKY7cleIStyFkO+wkX4Cll20xXrneZ
-	 PQaMkGCsanU/u9Md0dxntPEjyvESsDdPuWhGCEk3tIPzFZOExtH+dyaN4Eb1LoDY+oOZt
-	 lWUXEiblOBG8rqKPLhl5KBuevJS4qwXBDNmlasfP0WLwdHGFvDvkXka8WNbpMuSbHZQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792339156;
+	b=BHClHK8Pxg2OVS1dZGFQor0gReOSVyH6zMe2l3+7YCXGdg1Rgh/CQ1MoX52sAOvCa61R
+	 +o002B3B7iOdZnNAAkXn/6op0fKmVBSg9aUspjENfOJqX3fIZtcPwcKOYiusNoQG34b3k
+	 wsqdQ5QQ9xyF/tqwEHvvNCOWh++t8V1aMoSUAt/JebBlWx4VxuHCk75gdOi2Pem5ELXaw
+	 aW0pHB7qGv4th0yw83zFjx/78wV7c/usVRGPq7nEoFDjnKjNMTQV6kkwHHS/cBFVA9b2i
+	 XKuvbQegjSGEmgx2UqU2srCpaXZtpf8af/EQp/hSE0wNG34DIbdY5EEE+WGFjboJXng==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792339154;
+	c=relaxed/relaxed; t=1792339156;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Sender:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=bY0hEi+/8nxJwDz8jSm+EE4JO9jflgSjOKIaJ5gTjmI=;
-	b=OMLyG+A90vi/fmD0dE2Ndmlev/WEWwRcf5WkeJ/K+5Pp59uhszRCBdcDgk4skVGTUDuL
-	 uhaMueBEknBd1oRVgdoE5AGPj9TLd6IDlDTWU0d9NVdT0xN6up7OtX1cYtEQ86NFtK1uI
-	 SE0JDYsxebZp8ubt56ia+AjJbv0qVnSG+CmBPPX2Oyo68FskHXuZIGzp9BKuvcPzsqtDe
-	 Sexx0UlQ68n7x4R5HXskTRN8tvJoBlQLghZEM5xhQczPJeaoUl8wUkd+cLu36gXnG7bEw
-	 +aNJIShK63/A1R4GQH3ysJS2KplSBq8MLrBGZZCwlgRjngKCR08TK0VQdXe3VXVTVIw==
+	 X-Received:Received:Sender:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=qwwD/FGDyePhoHhQ6n3UJIPf3QQwBiaSPIuEb2zl4uQ=;
+	b=nqGuRF3PB38KDUYnLneiclaqQUPG6FQBTbatpxrj3gke/cs1qEYKAqlVGTbzjGMar6iu
+	 G4/cwA32lTfoO9mha8PGEGdvnPbChWWwnrpuj/stxdpkCuGaDsej69n7+zCo+hKkF4Ii3
+	 Gr0K/4Sps9H8+Ia2MjYhGsANaXlhV4PI8gw2/Dmb44ZbvgJnfaIlJeKhYWODO43pGjvRr
+	 jRmu2rgDjL678GZ1QvJRzRJuAltzlf5L1fv4WPw1fV0tVKrvrkxTc2lRp7rrg3x+yTyLY
+	 c7rL0YGy+JI43sM/mNhcvBb2QRQJ9YI0YCeUPouBmBCqH05LxzJfDug04Y2qUsPGqqw==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=NrsHcf68;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792339153;
-	bh=bY0hEi+/8nxJwDz8jSm+EE4JO9jflgSjOKIaJ5gTjmI=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=vvRhOsB6ZiInvOm5mj/jjSOieEtemX6eeb18R+ExVQDbi4dgqVrJ2/dJ+dr1bbUzZ
-	 Igv+GHGlaQcIqzLcPOlCMLtugDmyPRtHlnk2Oeyc1HVpRmIkXA68hXDnrgFG4brMX7
-	 EMxPyb/XqMSEAQR95Brs9TMVGKln6yBFtTGx7WH9jyyH7wz97S+j4NIp+Vgr0PN1UO
-	 6uMcgEh4jjZudGDFZg9TTVR36M6g2+7+KtqcRvoBHk+tclM1xEAJMs+n4BQ9X4ZqEu
-	 YT0hUSLM3Ms5co59iucsb7Zy83sa8DywGFOAltXZ7rJBntUjT9mT9GxK++seUWsSdV
-	 wkZiDsnJtAupg==
+	d=lists.u-boot-project.org; s=default; t=1792339156;
+	bh=qwwD/FGDyePhoHhQ6n3UJIPf3QQwBiaSPIuEb2zl4uQ=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=y7s7r/ZFF7F6Vb4nzXev5cdjmM5uMAs4jP7t9qW4M7e4vWun1mcpo2bZFF98muHAD
+	 BhZ+1IGeIZ++JlZPwhvEoZzgWRZZLueVhL1uDtzmJqQrZHkp1b58FyD50gMpUSpASv
+	 3WgE9BGTpDNLpoI1LYlCXnVjqD3a8THaoOCkeJD9Eyz81x4E3Jvjbb2PMhW8wWxNfw
+	 r/ghL4Tp/rvqi0QB802YUHYJgcBwGeSWvbe09J+t3lBrXDyTvscVmElLQ940jL84jw
+	 sAcCrs0fN5g2OwfGd0psTH4XTC1QYF8M8yHxH53QLnBKyXvfA+9m/Bin1+mvSOiWOD
+	 x6VoRdLygwwdA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C93B080C16;
-	Sun, 18 Oct 2026 15:59:13 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 6249961
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 15:59:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 93DEF80C43;
+	Sun, 18 Oct 2026 15:59:16 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id ABD70255
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 15:59:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 540D6605FD
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 15:59:12 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 9DD4E80C43
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 15:59:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2zTlexYw1iR1 for <u-boot@lists.u-boot-project.org>;
- Sun, 18 Oct 2026 15:59:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 53BA3605EC
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792339151;
- b=fISeGP8yVyaUDZMp2aJSdAFJfgnN3ve31ZiVSROIQO430YlVlJ33effneiChFwXMhp4J
- ceiQrrmuR/BJPdeGfveX48uTziFCU+AuaALT0p/mXcjNzJ4Bd2KRzoH0+8N0pZ34sO8zW
- QduyplSEQ3YYBWpyhy7gDv68rcGFf6HfK7utsJ+lMWcBLQavp8oh6XfF8hcrJ20k8Pnf6
- aoqzFf7aV6x+ayw+4i8WTnvRjWS7Q0XJ81aGdNsTuswuziP1TC8a4R967LPp6txArzhhj
- XVa/kRx3lOu4cuMQ8q5o2Y8MlV4o9x3aDiPWs3iKy5V91bghRqzhvaudKZBfJekniPw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 714d51A8_xpd for <u-boot@lists.u-boot-project.org>;
+ Sun, 18 Oct 2026 15:59:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3698F80C16
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::434"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792339152;
+ b=LrMPKPP22Bm49Bc5A/sbJlXB1mZxrdp6v56bRQ+7bCxCIVXCvW8iZ83MrobcccfF4Lm/
+ PAXhdrXKcSAoh0ew6sGihRlLLry4/Ta8vKutoGD+VBQ4rzuQC86f3gIQvttrLmblc/sdY
+ UJLMJk8BQsP1diFuhCkOpz2ctlrvjRMWZUHeRWgNbMnq5g/wbAA8ASIKYYcMqT4d3DeyP
+ awcvDO/RlE6903aiOLcxWU3fman3LAuEiKJxWnOd1BYIbcAXcJck/wgqpkCpuiNdGpO4M
+ kpgpZpndqT3r+kAPlkrMI3ksBvA0xNMnKF521yDJ10JZISXWN3Qqofva3GejZsziXeg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792339151;
+ c=relaxed/relaxed; t=1792339152;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Sender:From:Subject:
- Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer;
- bh=bY0hEi+/8nxJwDz8jSm+EE4JO9jflgSjOKIaJ5gTjmI=;
- b=mQUZRotElkxiJcjWMWCDgqWjXNfRdCTst5dKPWHdR8ijZ+S7AxgZYJJ0reDAfSlMQ0Sh
- zPrZ2Y48rspzqZ1/PnceDxqRABLbwAoqaODDBjbHR7YIpgog+vQ2EeQdLZ83S9/L0049Y
- GGTSwz+KhKfKI+qaqR52F2lG+odcVhTbl1TdW7Oiv16YFwoPYVMrkNL9lbSc6iPKzdmRz
- 5LQ5ofkq/7fL49DW5yPQSk3t6zUAUNli4ykq1pur0VOG4B+ZnZljPZkbWp6O6cjnTq2nj
- 2JfSCPgFFcOSTBSllhfFrRNCa7MMtoJ9so7D7zbfsSdcoOT28BBbz7efL5HKN7dplDA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Sender:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
+ bh=qwwD/FGDyePhoHhQ6n3UJIPf3QQwBiaSPIuEb2zl4uQ=;
+ b=sbg9sx1LR8NBVvQ1LxUXxqCDs6kh5GMRcTa8xmYVND/2o0NPEggbCLH9gjIlJLhd6AEW
+ 7g1bey7N120ZgEoIUAH+ZrgXvP4YUV7faNko+nfkwHmesxOEOMTQB73TJyuuwXwd353yM
+ DPEp5FIXUV68cA9SLF9EIHD5CLsG3SZJQYNzAkvLmDsAaZcuJJWrNhDv+qnQOmU2dCzNL
+ e8zDsPXpOX8YHDxfM7H+BXFuqa8ZFTwwgj875ryqMJfiUSdJidyYRKoeJu1Lv3sqsGKYM
+ nTscObJy2FdSe2UIMgQ2M/fDXjrvEgppgAsV1dOuoLW8xt3sZIuCrXqNX5mmekoYYeA==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=CkVTL+yO; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
+ header.s=20251104 header.b=NrsHcf68; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::434"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
+ client-ip=2a00:1450:4864:20::434; helo=mail-wr1-x434.google.com;
  envelope-from=massimo.pegorer+oss@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=CkVTL+yO
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 53BA3605EC
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 15:59:10 +0000 (UTC)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4a1cef0439aso14283535e9.0
- for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:59:10 -0700 (PDT)
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=NrsHcf68
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3698F80C16
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 15:59:11 +0000 (UTC)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-48df4e9d2d4so741241f8f.3
+ for <u-boot@lists.u-boot-project.org>; Sun, 18 Oct 2026 08:59:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20251104; t=1792339149; x=1792943949;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:sender:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=bY0hEi+/8nxJwDz8jSm+EE4JO9jflgSjOKIaJ5gTjmI=;
- b=CkVTL+yOssaF4T67nqOCe7bH0S3dQsaGKEBMCGjlWoyokgWTNt5RFiaS6+GZ0TEFxu
- 3KS8rtipjMBdniW0+rd5jX6QGUHX2BfUsxAL0RGpKKXIFkt/so27stsbs6ac11/Fhn1A
- Z05w5+fJR6vtcDz9kz7WTShG/kIYgYfA6/y/8tPUTSELhfKOfmsEzS21TdlXDOklM+5i
- s26dC5rOKx4RGYv5JPF5XHSuF19p8/0RXV14lN4fHIeUnVi7OBnZlyNlmKV8X+KoOohO
- WWZgqzp1vnPDPdRaFB8xLGtAA8GVnYu5hBBAigD04Jp4wr58FFQ+dF8Iuj67ingj8xFr
- XEbw==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:sender:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=qwwD/FGDyePhoHhQ6n3UJIPf3QQwBiaSPIuEb2zl4uQ=;
+ b=NrsHcf68wN8SXmz6+oi+dIGiy5UUSTUA0TqmfhooV+A/N8HWpfUwbEmd0jlquRQUBZ
+ HUcGoBN7UFjSDBuN4IAglBID3ItxvWqTZgf+uJzLtsAMg2tKKddGITHghtyfpDQPQtgM
+ 58AL/TgXaxEpqtYduNlxX5zPrvXVzutW7+QUL/Ze24cCryGRKnLpNGSWjTegmMsFnguE
+ l1RZmgv2rOXWMynBOQpJvW0NdavP+c2syQnLBDRObuyHusLsLUGGO2qJcpm7TQNZZOhm
+ UVSlypRQBirHYOFBIclApwQME8tOyUKtkyAQsd0F7q3Mk4vybgGkFYNOMR1VzUCawdwQ
+ ACsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20260707; t=1792339149; x=1792943949;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:sender:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=bY0hEi+/8nxJwDz8jSm+EE4JO9jflgSjOKIaJ5gTjmI=;
- b=aseaTgnbVzx3yfoABQW1bZIgQCW19IugG6NlzkSP2hp4kMSxrPW07MX6GVMwKME+AY
- 0/LjSHLjhSs/gFn3lm6QgFu/Lg/p0FCfKmBHwVOZD+9ezEYXsev/cR1N3E9QfxT4v4Hi
- HJQakvJiK+W/g2OipFqBdeKUmkwcjWy1G1p0XfY9iXXzeDh/CKkvwvBIVALB57ENJ+3i
- wG2lkGtOaS9ekVB5GA1PR7mmLcxtOdtXGDKVdhzyXTlOrIsHh6WPG93j/ed4+8sTUUc8
- MTwAq9aaeca9WXIqP1Kj+3mED8iuzAWdlnrzlzhosSleYvXQiqAAdrGO3BkXWtpr4RxN
- 2sYw==
-X-Gm-Message-State: AFq9FYK7vOw5I8BvZz7MZqkrxT0F87BjrIJkO/iivd7sOvAGGxHGhQnd
- fJzwe3GdRufow5XBbeENIosJWslC8aIKegetnYueM4Ndrc5g2efM+RtAq5JylQ==
-X-Gm-Gg: AYBFou2SfFG9yuguGGz6trr3wJNHXQYwnZ+tEZrI8JrtZnkodWUqCWYWGSSYwSmHbfL
- j7mlX1c85lPxapeEHFECEn9qa4jidMxrkrU37XDHJbTvH8ksriBmyiNLpA307rkl8J4fke9oBKb
- Uh5xEOGhrx5isoh0nEOWFAY73YBCM/F5ZTdM9cFQeecMxwduHTtRykXIzdZoE8nxmL7+aYX17Tw
- 6ezfRkCKU3rbMpz+9P5em8wqkoPsupZ/EbodjX+0OimIcF+CB6W32IeiqMJVUFzOzmbRFAqmg0Y
- w4e2/iTtWivrdnwYl4wq+Isvjpw6nLripSUGJFc53+bZJW4SzPyOda8gl43QyOseyRXhZaeXhLq
- R50rMNDH7mIY89e/+FjEGpNwvqH22kufKaoOGN3bX0k7OppvjktxvKdaUFfFO5iEpI7zCjrbNfd
- z6ek80Tp1MqkywZsfqu8vShYfE33cx3RTX1bT9LTa5jdbQ5hT5CCaqNpEI/snJQnlqwFyFyp6N5
- AncFBdk
-X-Received: by 2002:a05:600c:3b13:b0:4a0:2150:55fb with SMTP id
- 5b1f17b1804b1-4a1d75ad08amr133475055e9.4.1792339148530; 
- Sun, 18 Oct 2026 08:59:08 -0700 (PDT)
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:sender:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=qwwD/FGDyePhoHhQ6n3UJIPf3QQwBiaSPIuEb2zl4uQ=;
+ b=mSnYAJqYnTb/xHiFWxm0LZTvlZyN2fhbog+XgBMq4c5oBKJ9VO3h12eqmhR+1H/sNa
+ Dm3eMhIfqCcdRAYhbr8SWJNY1jVNp3DkUwSen080T+EcgnxyhKUUlTp6x9oQcSKg3AUU
+ hqfU9FDe0xdZj/Zhx4DSQNvBjaFpaoqv2r/AwL3abCSKf68cS/1OuGknN5fUjbwzqUrK
+ 9b7YYgeljEywn50gJvbto6oI1eRnByOrbEevBWviPAMbF/KMo5APjj0pHFM9evf84Ljy
+ 7ak92tf8RUVgRnicTqQamYl99aPxABT9Aw+jR+e36GEzhN6oyW7UFJBlEAsU+xJneUdr
+ DvOQ==
+X-Gm-Message-State: AFq9FYKzirPF8ImAfue3z0z2GHAG+e32g9a26NXJxUBN1/7D3hz//TbW
+ e5DowfSPFDAp3bWWC0ggSi/Ay1x6l4l1KuKV41IQE0o8gPqEPCmE+DHO
+X-Gm-Gg: AYBFou1SRu8Uhdo+QZ88z3WqNLbpUGdv8hczEkbY93+eiPZxG+MLO1cfbPlXU6FpD4W
+ mk1TQMYlDVQzhaU2SF2YcJxJfah6Oa5kz4TWi3JW2GsbOnL2LBJhXyBynshxD5RZMCy+mNC9Omn
+ 8168yMfiWEDQhzsUaKK/ltmhl8ITDivmwg4ShzHaOaBnNFtL8QeVEMtM9oTrKF3iarBZg3Y5wWA
+ 4nADyzCApsytQlGMbWKnX18MP+8tGJmEHA0xrjXtvqMzaPT23JaZdtzsUOQvwDJ2CDVehSHrtLN
+ SQFsmtqF70dxko7xHX7geQhVOhiS51Erf9llpVTBxiFJuKZEIz+nd0OHhYfJt2xEU6lYprPfkbR
+ 1gkWJY94M9uevyV5roZYVL0c23cMYXw8FWdrgo2GjuS2puWhBxlEUAlkG4n7cH15FkBiDKAvu1R
+ G1rlprLYJCoZCYVpLNGMwjwiUzXYUKZI+eT0bEFnLEnOacjBA9A9iqDZMWxRBT/WwuNNuELwdGL
+ 2D4tmCU
+X-Received: by 2002:a5d:5d0b:0:b0:48d:f876:f370 with SMTP id
+ ffacd0b85a97d-48e0d78a05cmr7494523f8f.48.1792339149316; 
+ Sun, 18 Oct 2026 08:59:09 -0700 (PDT)
 Received: from [127.0.1.1] ([151.71.143.36]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48dfd503d78sm17053434f8f.50.2026.10.18.08.59.07
+ ffacd0b85a97d-48dfd503d78sm17053434f8f.50.2026.10.18.08.59.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 18 Oct 2026 08:59:08 -0700 (PDT)
+ Sun, 18 Oct 2026 08:59:09 -0700 (PDT)
 Sender: Massimo Pegorer <massimo.pegorer@gmail.com>
 From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Subject: [PATCH 0/2] Update branch and URL references in the documentation
-Date: Sun, 18 Oct 2026 17:59:03 +0200
-Message-Id: <20261018-master-main-v1-0-e07455d232bd@gmail.com>
+Date: Sun, 18 Oct 2026 17:59:04 +0200
+Subject: [PATCH 1/2] doc: Replace master with main as primary branch name
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAMfs1GoC/yXMQQ5AMBCF4avIrDVpK0FcRSxGDUaipINIxN0Vq
- 5dv8f4LhAKTQJVcEOhg4cVHmDQBN6IfSHEXDVbb3GhTqhlloxCHvWo1okNd5FlhIT7WQD2fX61
- ufsveTuS2NwH3/QCsyNggbwAAAA==
-X-Change-ID: 20261018-master-main-b0aaca076372
+Message-Id: <20261018-master-main-v1-1-e07455d232bd@gmail.com>
+References: <20261018-master-main-v1-0-e07455d232bd@gmail.com>
+In-Reply-To: <20261018-master-main-v1-0-e07455d232bd@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Quentin Schulz <quentin.schulz@cherry.de>, 
@@ -180,25 +182,117 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Replace master with main as name of the primary branch.
-Replace previous U-Boot git repo URL at DENX with current one.
+The primary branch name is main, not master anymore. Update references
+still naming it master in the documentation, replacing master with main.
 
 Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
 ---
-Massimo Pegorer (2):
-      doc: Replace master with main as primary branch name
-      global: Update references to U-Boot git repo URL
+ doc/CONTRIBUTE.rst              |  6 +++---
+ doc/develop/sending_patches.rst | 12 ++++++------
+ tools/buildman/buildman.rst     |  8 ++++----
+ 3 files changed, 13 insertions(+), 13 deletions(-)
 
- board/rockchip/evb_rk3229/README |  2 +-
- doc/CONTRIBUTE.rst               |  6 +++---
- doc/develop/sending_patches.rst  | 12 ++++++------
- tools/buildman/buildman.rst      | 10 +++++-----
- 4 files changed, 15 insertions(+), 15 deletions(-)
----
-base-commit: 8d534cec0cc0109a37c0ded8854da03f1526dc0e
-change-id: 20261018-master-main-b0aaca076372
+diff --git a/doc/CONTRIBUTE.rst b/doc/CONTRIBUTE.rst
+index e0394515702..b012648e3f2 100644
+--- a/doc/CONTRIBUTE.rst
++++ b/doc/CONTRIBUTE.rst
+@@ -73,11 +73,11 @@ considered as reasonable amount of time.
+ Development Branches
+ --------------------
+ 
+-The U-Boot developers use two main branches for developing the code. The master
++The U-Boot developers use two primary branches for developing the code. The main
+ branch is used for the current development cycle, while there is also a next
+ branch intended to land changes for the next release early to enable wider
+-testing of larger code changes. The next branch is merged to master shortly
+-after the tagging of a new major release.
++testing of larger code changes. The next branch is merged to main shortly after
++the tagging of a new major release.
+ 
+ Similar to Linux there is a three week merge window post release after which a
+ release candidate is tagged. There's typically a new release candidate every
+diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
+index b4f82eb18e1..8b8a70da4bb 100644
+--- a/doc/develop/sending_patches.rst
++++ b/doc/develop/sending_patches.rst
+@@ -36,7 +36,7 @@ configuration file and ``scripts/get_maintainer.pl``.
+ .. code-block:: bash
+ 
+    b4 prep -n mmc-fixes
+-   git rebase -i origin/master
++   git rebase -i origin/main
+    b4 prep --edit-cover
+    b4 prep --auto-to-cc
+ 
+@@ -65,7 +65,7 @@ fold them into your commits before resending the updated series.
+ .. code-block:: bash
+ 
+    b4 trailers -u
+-   git rebase -i origin/master
++   git rebase -i origin/main
+    b4 send
+ 
+ Using patman
+@@ -132,11 +132,11 @@ General Patch Submission Rules
+ * Send your patches as plain text messages: no HTML, no MIME, no links, no
+   compression, no attachments. Just plain text. The best way to generate
+   patches is by using the ``git format-patch`` command. For a patch that is
+-  fixing a bug or regression of some sort, please use the ``master`` branch of
++  fixing a bug or regression of some sort, please use the ``main`` branch of
+   the mainline U-Boot git repository located at
+   https://git.u-boot-project.org/u-boot/u-boot.git as reference. For new features, if
+   the ``next`` branch has been opened (which happens with the release of
+-  ``-rc2``) that branch should be used, otherwise ``master`` is acceptable.
++  ``-rc2``) that branch should be used, otherwise ``main`` is acceptable.
+ 
+ * Make sure that your mailer does not mangle the patch by automatic changes
+   like wrapping of longer lines etc.
+@@ -452,8 +452,8 @@ today. Not all states are used by all custodians.
+   it will be accepted for mainline.
+ 
+ * Awaiting Upstream: A custodian may have applied this to the ``next`` branch
+-  and has not merged yet to master, or has queued the patch up to be submitted
+-  to be merged, but has not yet.
++  and has not merged yet to ``main`` one, or has queued the patch up to be
++  submitted to be merged, but has not yet.
+ 
+ * Superseded: Patches are marked as 'superseded' when the poster submits a
+   new version of these patches.
+diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
+index a2061715788..151123ccdca 100644
+--- a/tools/buildman/buildman.rst
++++ b/tools/buildman/buildman.rst
+@@ -180,7 +180,7 @@ Setting up
+ 
+       cd /path/to/u-boot
+       git clone git://git.denx.de/u-boot.git .
+-      git checkout -b my-branch origin/master
++      git checkout -b my-branch origin/main
+       # Add some commits to the branch, reading for testing
+ 
+ #. Create ~/.buildman to tell Buildman where to find tool chains (see
+@@ -505,7 +505,7 @@ branch with a valid upstream):
+    ./tools/buildman/buildman -b <branch> -n
+ 
+ If it can't detect the upstream branch, try checking out the branch, and
+-doing something like ``git branch --set-upstream-to upstream/master``
++doing something like ``git branch --set-upstream-to upstream/main``
+ or something similar. Buildman will try to guess a suitable upstream branch
+ if it can't find one (you will see a message like "Guessing upstream as ...").
+ You can also use the -c option to manually specify the number of commits to
+@@ -1008,9 +1008,9 @@ Building Ranges
+ You can build a range of commits by specifying a range instead of a branch
+ when using the -b flag. For example::
+ 
+-    buildman -b upstream/master..us-buildman
++    buildman -b upstream/main..us-buildman
+ 
+-will build commits in us-buildman that are not in upstream/master.
++will build commits in us-buildman that are not in upstream/main.
+ 
+ 
+ Building Faster
 
-Best regards,
---  
-Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+-- 
+2.34.1
 
