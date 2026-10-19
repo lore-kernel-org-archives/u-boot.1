@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCCCBCCF2D6
-	for <u-boot@archiver.kernel.org>; Mon, 19 Oct 2026 10:27:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77D37CCF2D6
+	for <u-boot@archiver.kernel.org>; Mon, 19 Oct 2026 10:28:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6B63B40755;
-	Mon, 19 Oct 2026 10:27:54 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3B0D46067A;
+	Mon, 19 Oct 2026 10:28:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VOOhLtG5zAVo; Mon, 19 Oct 2026 10:27:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 97794406C7
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792405673;
-	b=AKGcET4kfXJ5NM8idtP09f1nGGLsAwV+F4V1H6XgqMYVB9FMGl8H/EeGc5pYZkeaclx3
-	 LdB2tgBMnEDOLyWaJd6ztKzT0L8T5fcY3DWNlhfDdhWoX8YGzRlTAH9EokPNbOKJ1AihY
-	 BJSGVyTvCYlxypVSaG6jspaaKjoG5dWLUsyFbmJwMWVz+NnANfBEwXcbN+6LnC9BjHtjZ
-	 eNiEJtHkDgbSQoCV3mtCB9pz4kh4CMOYsW6azSLtcI0I0eL2kIDnGbZ1Gu5reM5ZYQ3cC
-	 7gJO6wSeYxVA5z1rwJ0Uax0PPZlNLfq3trs4A6QmPhnHoUIPx+fjlI2H01dmigi+vwA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XxjdHbtzZKxm; Mon, 19 Oct 2026 10:28:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6483A606CF
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792405688;
+	b=PRjL6MmI6uLjmdw0hDspLxHvEPNKuKmHVAZ4+pTumpIATVAxTQDlY4jpSrA1JrXiFv8d
+	 WaVzmoCF6a+WCDiIJKAH2NE/TYAkHNUvPonBuJoUmYWwfSKhDMaHusI+RQKKfDAEhrTb4
+	 wvLN1d2bGkLUVOmmEuZRfd7CxJcFsP9Tyxa1vRUq2kn0gzSZsHph0/mLhmAHC0ULeSyfV
+	 vUB2wdXUOZHnWelMgRpTU3/6b5dGRmrOyqgucxthFgcNPhYQdZc0gxKglfOgDeh2DMM3U
+	 KHEihihUO5IWJSrZpPjtilQac36TIaprO4KkfRw9Gm1ak8fgO3kddFOcnsGVMu+A3xg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792405673;
+	c=relaxed/relaxed; t=1792405688;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,189 +31,186 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Gm-Gg:X-Received:X-Received:MIME-Version:References:In-Reply-To:
 	 From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
 	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=ULrFvNrGoCscQN5hY0YZfaO3xJBLB2NRTgBC66v5le4=;
-	b=RMjDs0r8pWyQV3FUaxYP8POrJWiEr/qxxGZ3cYHc3CRPuAaOv93Q2cBfMPvLnaPEanIM
-	 fujwg/771jUUcxqyT2NLMpVETUkqNvgntIMfl0YdtQTKNGpwoZnqESBG7UdoDvObcDe6D
-	 z+ZFW4Z0bfC7ZFPVKWZA3esjyeLDMkygTT/1OfiZ+xWrLUrptDcMs/YLlgDh9fQYAOQDQ
-	 FJX7wme+7Y97JEJOcg4upi8lqPt1PIl4qjThl9Xzm/T77g+zcbOHGpjwxF5+iJQT1HHMy
-	 yFZxtXSLY6rzHJpkCtKIcNOeb/ySBlF8ifH/6qVFAAAvSDt7r4I5Qk+pUgAEjmFhKjA==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=X7f3Yn4R;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=V1RkDjh+;
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=1HyhBpsh+zkvR8/AkM9YKgongpZh4kUWsz9XBkGJgLk=;
+	b=Nau2iGrnqVLwI3g30nk4/0S9tfNgaXhTENPP5MF2EcODBGf4Z7Rx8Ez/jsMmjUSgIC7i
+	 h2k+PRazF+Q3YMUXi4nYfTdbsYFdL0UvCu+Ilrzx741kiG06YxWtX/c/sObriHnarbwbg
+	 aSiT4i6SuKdhZAFW8w6jcoSh3vS/NLfT5j+3ZFNqQZWoBIOMOPvjKukntaA5OV8q8lih9
+	 3yffa8zObdKxz5zd1YzHwy5Ro8XYbjrMGiDgWfyAH+dBuiacw2H0cp/npMmioEnoqxNFF
+	 o7s9vQ3c5K3zttw/nGUyHHpDkrpXg3M1tQR9QDHUt4DUxVqxdceLzlpvSWNxC55AlSA==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792405673;
-	bh=ULrFvNrGoCscQN5hY0YZfaO3xJBLB2NRTgBC66v5le4=;
+	d=lists.u-boot-project.org; s=default; t=1792405688;
+	bh=1HyhBpsh+zkvR8/AkM9YKgongpZh4kUWsz9XBkGJgLk=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nbATO0C7TjHr9buPvDXgrzdJJL5CHyHR4z2fE1NKo8VnR+5RVzHnesUCumbm4n0I3
-	 MwMe1sawegizAcxB32Fh28o9OgxYTH1IUi6OKdPHXb7d3/nNWYFRFLTTymNFhrZTbl
-	 FNpsQSvlIbrH/XhxOQu/+5UD86HF3SYqahog8blg0dcHx6T/ULvQ+wmxxy8RwJA1V6
-	 W4p8SGEM/g1JPbDQqcw4vu/pZU8tiaNAFqx1n4Yr+AtL40i10aT1j67xjEKzl6V/vv
-	 lK8QsfnTATMmmjWCy8ZZx3mk4/NhzarWD5mxm2g7XMLLsaC/G8L3yUZkJuNctQtf/0
-	 0NyA6DWexCK3g==
+	b=MlcCmcnixBmE77IdGsqPDK7vYQV9broC1QJiTffWNLMOmLPYv7+VneEZ3bk+iY358
+	 plD2Cb1kuse2tZC8/40Gfq2+178liAqY0fs7LKw2+RlIpruWEKD4DYygVRYrr/Nf5a
+	 t/hOlk9puVjnbOWgQ4psxMdUsie/jvS1OG6/wXSqL8cnIoaqzb1cjmESwiokzaRrIn
+	 lDl4uRKF0Hljv4g1Wf1jKuJz4WXHdTEm3R/jfyQ3rw8QXpgOCnCKruIZJeYivaYfsC
+	 xmkkXS2gck6B2qNd/L+wOAu80/eFPjMz+UdXSrZOle4/EPTakQegc2cgtnL6a5Ln5W
+	 pdPYrsTf5DrZw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 97794406C7;
-	Mon, 19 Oct 2026 10:27:53 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 4822C1E9
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:27:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6483A606CF;
+	Mon, 19 Oct 2026 10:28:08 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D3B86279
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:28:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 45C12406FC
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:27:52 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id B99F040080
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:28:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FKiyCyEcvD9d for <u-boot@lists.u-boot-project.org>;
- Mon, 19 Oct 2026 10:27:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 75EC5406AC
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id m2X87wXL62PQ for <u-boot@lists.u-boot-project.org>;
+ Mon, 19 Oct 2026 10:28:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org EF4DE40079
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip=205.220.168.131
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792405671;
- b=XURy1ZEOqW8lvIPuF9V8aA5JcLCjOv3fVR18PdHnyZgujKWasTPeQxo8pSA1J97hVFPD
- IsCIvd65J35nlJy60iVQ1vvy/CNamx07C+vCETuUhK7kSl9IY6KX67DNNnVrtXP5IS6tx
- +/FmJw06kJ/7jpuYAwP8tK4+xA/f7p0HF8gcwzkXJS6bQlmK4/P4P/zf1Tj2ESlawjA2U
- 9qlKTPmbgbwUKRJYksfqRNmjDOBadw5Wyeh984/hy15KSgv520j+9OAcZksUPrLYp3xUh
- TZXtYlunGkk/caD1AdifzixDDzd41isC1g/5Hp+fJytKSTfUXA1+cH7tBu7ovJ4KvaQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792405686;
+ b=IY406Ev8/GKZ/spjtCgzB4K5tg0XPWmXg068jDls5OWsa3O65IAaGb0aCvDP8JT+pwXI
+ gGU88fBAZOltRKfylWaVat3UFKuvS8sTmuQOJXRJPorOqYnTyr2s5KcyOriTv0G2oBn3h
+ xbKt7jZhSACWLlGQBDO/XXoOrJh7d/cujmLNerex3NueQ7xCfFFOT2BKi3ecOJXZzn48f
+ 3b7NkFeDbySnO8HskzNKdVPQLxmDwZGwlLTzjMSJoS6p3yXRe8rVzmW7WIQrKf4s3PvEp
+ WqfVGvpMN7WSNjtuVNAtqaRWjFqJHNdf1Y0KtDCxfiQyBwabrGrathjPI5pUxTKa+YQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792405671;
+ c=relaxed/relaxed; t=1792405686;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
  DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
  X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
  References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
  Cc:Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
- X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
- X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
- X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
- bh=ULrFvNrGoCscQN5hY0YZfaO3xJBLB2NRTgBC66v5le4=;
- b=HVOS8indi/jjZsBFnI4EfzFcwmLIdslhGsIORw60NgsF17/HnKbYzR+/USBFBDtwsFyg
- yLPmBd6394+w8toCXL50bz/YdpUmp2NDtlclStf7dot4lQPLGXtA+1ji5ZzYaFWH9kPGs
- hARpVqGzKh7DVuo/JG/YzQjDC/OdGH63D02cnXt+R78wsSWJHnme/hLaBagIz/sKl8NpY
- WiAqO+CvBT5eH4AIbI0tPRlfTlKnv1hfZMxjFkxRru/oIJdoDLAgEkTvLbGrH7IQWU1b1
- WT8G9Jix0tF/2UxjZW80lf7A906E3F/KbG3WDIIZaMGI8UyI6A3TlEL4jkNclo2Hutw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+ X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
+ X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Virus-Version:
+ X-Proofpoint-Spam-Details;
+ bh=1HyhBpsh+zkvR8/AkM9YKgongpZh4kUWsz9XBkGJgLk=;
+ b=fCjy1PrIFYCPgirdy6wuah9Mfu7EuOFuMNQovuQXxS/DHIvJPMrtxk3UnWKWUUFmnH32
+ qxex6hC1PwxEraOYXqWloJOJ1e+euWbSw3Ti8sDO9HP0OpaaCG+cmzHrxkzGqqx9EVGDM
+ mXyp+LWvABfyR9CI2tV7NdSUWDnKh4itREsUB4t9FQtEyWhRD2eqFtBiMJwQ0t+5qYezj
+ j+IoG9l3MDdz34f7Ky6XXgyVuUNja7FFD6IUZQdAodF8pvV0uY6xcoAFtEOeZJswj8sTk
+ EUDeeXLEyVe3w6t6BCRcWMVsM65eDEn8ye8oX++pehJr3bGH61JPKmV4za+hGLy9/Kg==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
  dmarc=pass header.from=oss.qualcomm.com;
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=X7f3Yn4R; 
+ header.s=qcppdkim1 header.b=nU1SCIQC; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=V1RkDjh+; 
+ header.a=rsa-sha256 header.s=google header.b=Tt248eQD; 
  arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
  helo=mx0a-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=X7f3Yn4R; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=nU1SCIQC; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=V1RkDjh+
+ header.a=rsa-sha256 header.s=google header.b=Tt248eQD
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 75EC5406AC
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:27:50 +0000 (UTC)
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id EF4DE40079
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:28:05 +0000 (UTC)
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69J8OtB5723142
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:27:50 GMT
+ 69J8OrAR1665443
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:28:04 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- ULrFvNrGoCscQN5hY0YZfaO3xJBLB2NRTgBC66v5le4=; b=X7f3Yn4RUUBxys7q
- vzcm/3hzqxEHRo7rNDAirPBaEKTO2+YDE90Alme7VzrWVkBOWqr+kIQYRLzt6FSm
- h3uQ8/G+0cKtb6SFE4amH7sgMt8g675rEgv/lgWsAiVCKL92E2U/ZBD29Ue5wBSC
- cPyb11eGBQGYRinvNQXLlVA45CgJqIIUZTWaBrFuLOBasKXiJHfx/e6M9D0GY0Jg
- 2UUSxEEAcUaJAAiXaNy5UhRFVT4Q2WxNge1bnjHBp4jmO+DTSD1x79dbotCPCHNG
- t5Ozq7doWgzICWEHGQ4ryVCmIutpZuSzeZTazOS44K4Tfg5XmnbNkhhTOICDIfHo
- 2tZTcw==
-Received: from mail-yx1-f70.google.com (mail-yx1-f70.google.com
- [74.125.224.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdf65gkf4-1
+ 1HyhBpsh+zkvR8/AkM9YKgongpZh4kUWsz9XBkGJgLk=; b=nU1SCIQCLJa+8mHB
+ kYif+Sj9ytHlgifE6NLOjjBxq08cxjyaYdQf+HuW0/Hurnd7h5xaHoXXnKvRdM1y
+ B+iuIyDzRhj5UbfEzh9FCVMDQeOpGE2GyemEAhz74fWfxe10qdvPxTbZ/pBLcBuG
+ 5jCK6u19xKMnP/5zTo2jYWBNu79h2JVoAOoSaXztmULmW0CHKtX27ZeR1iLoB/do
+ e3f4Ocfacjmd48V8bm7fdol/NYnNwMKmTbLHCzN5CBiOsSyDSMSxPOWsvvEfoEuA
+ xCkUXE4eFaO6CtDfvHwDdAEjUxKPHQc2uHGZuufXi9UJu/eWna/ruNEOtrPEazUT
+ Sr7iBg==
+Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com
+ [209.85.128.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdf3n0kyk-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:27:50 +0000 (GMT)
-Received: by mail-yx1-f70.google.com with SMTP id
- 956f58d0204a3-6713ebbca2dso2427609d50.2
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 03:27:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792405669; cv=none;
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:28:04 +0000 (GMT)
+Received: by mail-yw1-f197.google.com with SMTP id
+ 00721157ae682-8afde3fe132so22566287b3.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 03:28:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792405684; cv=none;
  d=google.com; s=arc-20260327;
- b=cJE89wxOxmxmQuaBKZ6YnYuiM7p9qkIqs4o9fatzxOP4GYWBCmbsMOh7S6mXJwA0nK
- Gk7kcpDpjfIPuWVx7P41MelR4Cj7UrI5pWM9J1CCBcKZXPezuhbU20OzxbYSMKVT1oWd
- zi33OGC0tcIS/f9G722SLZg90BMs0Kg82vw+KocMUUbE6DglvTmAkWTFQ0xjwPlioSCB
- RIONE4bG4GPgtO9Vwmx5+q11Q6V26OKb8hOBEIfmXy+zBvdVbP0zI3OLkVlE3/C5Uiol
- IJqXNzzwepzIWvjOi4klgoPvFKhquok5UlnUOPh1g1vFA/eyy8XIoGYrfngoB9H0/Cfr
- 2/kA==
+ b=E8NdEHTiQTwKUtaiCPdqFjmr8AFE06Pipky2zptXX2O3dgeIvu+JfYhgvHaCHwTSDK
+ yE6WY9U7f0l1GMPRjumUlP3NnS8Rg4+N9WvvvgpJ66RvWb+uuZG0XUBOXsQEfHmmodAf
+ X1jNmgSraMhYXaHU6ZgnuHJzW2bZTeC+owyA4ntr6GGtCio4lTyofDDSa+CXeGziKJUc
+ sTSyaxUmn7qNlMJtzIBw1N8Z75vBnZwqCR947RahjK7q8AebGxTFAfjm//ZzGo6CR+Px
+ 2gHLxdfpG/wxDB2vJEdNmBTwCY+YAx42BQMGPZzfDtHnjB3Vpawan6U3hy+YhCYvYiYq
+ 2Ijg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=ULrFvNrGoCscQN5hY0YZfaO3xJBLB2NRTgBC66v5le4=;
- fh=y9CpJ7zLdah1JzbKC6bvaKW/NdEJJUyqB+/AH8//8Wk=;
- b=QfB2e98tklwXjPVMSZnVAg5TkFrGvqZugAOqQS8PT5IZ9179tsjNUdxKzOe+Nt9+i9
- nX1xym73j3oqOO32KsqVJLV1BVpmSGsCYb6VYaw0T8/FMQEpjxkquj+OMYau6CMxSk57
- kSATzfF5D8cgEz+n5M2cvYKEP7yAgGFgVaSaO8c6WPhM0BD7Jxj/BPm5qtnwI1vAUeiB
- Xz2nbdZVoRhN3todGDBSUXo3EfPT4GXM/1PZW9mCzF4ayPT/JNULEP9r1Xj0oQldJom2
- I/WugwXWjdqAdwxjoWoyecM+/QhR+A4ZPJdfO6e4E72Y4lUCsBeBfikKtuGSSLyKyB1Q
- pCsQ==; darn=lists.u-boot-project.org
+ bh=1HyhBpsh+zkvR8/AkM9YKgongpZh4kUWsz9XBkGJgLk=;
+ fh=W3fnFLlrASevLctr3svMHNvP10rvFRp7Q+xTMcuD7CY=;
+ b=MEgC+WjbmacUvFqFEy08M7aCcKYKROyq8CIOiW0950Cl2DtqHxVmXw+WGlY+Z18ydW
+ uoL9GsMrFoSH4teMo1OTYs7Auil2S/ZdCTG6++WFhEkfeAGwOovOCbA7Br/ul3dooDZ+
+ kac6hRbLeCyacvgrGScYSUD/mwfX/lht5JNhuY/aKeSr7CTl63cJctLGyh89SCjE0OyH
+ chmENym/WazaZidGClm3nSkmZJB8kOJdxFr9Viq6vGVHiZXIMDHN/FwTOjaY/Zp5iSOv
+ +CgmaywHnam02sKBzuWoPWiHMtg4HRJWwqefYXyUkdQRaIhsS7NunWAaFGXb9KBFET9N
+ U8aw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792405669; x=1793010469;
+ d=oss.qualcomm.com; s=google; t=1792405684; x=1793010484;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=ULrFvNrGoCscQN5hY0YZfaO3xJBLB2NRTgBC66v5le4=;
- b=V1RkDjh+uMcLabiUbXgQ80tYjkPsPqwdECcyANl8qgj+G9vFBISt1HDaYpCn1QQ9a3
- 1vww/Ac5yE2jXbNOol+2+fDbELmgyIDzpim8xjOVu0/G6Y/76XmHrKXVvgpOvxRGu63m
- 4Ed0u3avvOjzjoZIPQn7EnSbUYfc6949RJm/Nj8cWfXp6x4SUunFNAGnzomNuAgkXR7Q
- JUm1WW2j39Fkx3Jr61EdTdXEuxnNkqnI/qZw3M832U0YhT7xCwriXIHKrHTVCMK3l6yy
- UymRRjrgYZwJTctCB/1AvI/xz77iRck1X9yHTppC9nM0kYEnsENh6jmumfHubZaefyAz
- YJ2A==
+ bh=1HyhBpsh+zkvR8/AkM9YKgongpZh4kUWsz9XBkGJgLk=;
+ b=Tt248eQDaFtDXSbZ7PqRBSzxWM/JKbTF/4KMgDIDMaN9zZYrMhfHUUy0v9GPtTT1ds
+ 5XMhiJpqmhuCBCH++1+Z/2TLjuZ3tvVmInziLEHehjCBOZj2QB0wZw0LN+2IQqrSSHLT
+ 4mzQuWHMS+WBIlW37tkf/jx6Y+w1xX7x8S/dTny+aptkbPxuBEQL5zmAEIxBJLmbsDpb
+ gBcM8Q5YCzbYRAh9xfZ1cK9z1VJF5CYdoirD56/tfh/xr9/7QnklAA4B6UC26UtLJHvV
+ nMuKmET3P6RPYhBNlC5BrlLDjwzzAvhOT+N98hAtRtnVDk/pbRYwTtiUsBKy6Tcw7IH+
+ V6MQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792405669; x=1793010469;
+ d=1e100.net; s=20260707; t=1792405684; x=1793010484;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=ULrFvNrGoCscQN5hY0YZfaO3xJBLB2NRTgBC66v5le4=;
- b=u7reaRAK39ofpxByVaKuvIkPPdVgw8t0h9K8lfV+mwo1WjR4r5lqIEsJnI96LsZVpE
- fdO58kVP0UgxQsmBBihN95XIyyG6t/wtsPeA5yVaHb5v+lS6GNV3guaV+Xqi5GL9LgNQ
- F+EsUdx0of6q+Gwkd2iXeemAemO2E+LZAtrj3IqwKqzlEeEOPC5PN9cSHQ2zWAdr6+Xn
- XmOA8wwCpt6ztHa8pfkEBfhvlHOM9La4ZwXiJHBKslhgxZgmt+khxlA/l4cjeWfPcKJd
- JB9Y+rJlEiIzIFFG68ccW5Y7IGm65I1xEFS9GIVD9p2lScpEpHVxqMwEDMFl5EQy6gw/
- Bfhw==
+ bh=1HyhBpsh+zkvR8/AkM9YKgongpZh4kUWsz9XBkGJgLk=;
+ b=tWjOh6txNpF77t6MltG0bNdWn/8EDBmgkj9euxoV4MNIEHd1vU+6JKyjDoJci5Vqtl
+ SS4JWAdE401jLNVnSpOtAgmam2cBtID7Sr+BQq6g9vDU3d/P0CLplCDBdRJTKJbazTLG
+ CJAcl4dwHhzMNJhpd0grkcAwAB16Hv7ncYxOKDD0OZ69aoo1WY4cB/GvcC/vHF2Iht4u
+ b9X1gohSQdLjxy4tAHebzqmPySoLB/vJT8kJ2dTr+HTulgp589T+KuoZJhHyY3psWG1U
+ M4QwMkd4ns7YiY6l7GiyE2rmDwH+rRpxyUZ8H9yDRCMiEi70fAz6+4CGIsjcR0Vks1nf
+ 4mRQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwT4vxLjZFg7cnrpbPsvrW48y/8PxZw+eNglEt32qXz2psrehP2HfG1pTElB+XQ2IjMEPH0nxk=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJ+rM9RSOojvt4iZOI/z2g4cZ9yAdpNIilIq5SlwTTdlEQS2zko
- mgFwrnuL3RuzFzBoLS6U+oHsg0tQDWrCCOKJkyGKt/3EGyKDd2Kc6YFYOUMfx+2hafUZixV3Utt
- z2Ri4QVtq7H5LE3GsSbtnXNp0Xj2B5WNLKJAPzfChRILFoFm/ZNU1EKxLxTcn9nSvJ0BnH0AWOA
- pLE5c7Y3MiUs5ciNyAEYjB73RC3D+cORLV/KuSLVHPduJdYg==
-X-Gm-Gg: AYBFou1OnibOv+fxFNy4sGnGziAVTd/HX0MZQGrTtR6lcDqNEWtQS3UCstJgFkB3h7w
- zOgNeRhFCq8W1wWhMry7TZ1C1ietuda1s5qYB5OfGuCgim4RDoYn7IhgyCqw4DsNcUR0PoKdHs5
- VVTGfDPs5ncUSsQSCOYgOSc3tmwctAU2R2ntT1us6YXAy6LQtK4qAO0QhDGw==
-X-Received: by 2002:a05:690e:1186:b0:679:8eb0:c689 with SMTP id
- 956f58d0204a3-679ca91b098mr1726301d50.123.1792405669308; 
- Mon, 19 Oct 2026 03:27:49 -0700 (PDT)
-X-Received: by 2002:a05:690e:1186:b0:679:8eb0:c689 with SMTP id
- 956f58d0204a3-679ca91b098mr1726298d50.123.1792405668853; Mon, 19 Oct 2026
- 03:27:48 -0700 (PDT)
+ AKwUvBxFDHkdfjKwd4L83nDcKJ2ZeP7OniePVcnwzkVDdSOJSIzDE9OFZRhWtC3Xgvbitm7Uz8SVO4U=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYKDwvbKmThgy+3IQ4oeNIqyfqXRpQD+RxMItgHQ67weO6Nc08Wn
+ DUl8KdDFmZbZJ45kXH+MKbuqfN8yzkbdQFIkPcjHvO+7KjXaMfSW505NTrOnV0EW2Q0Oil6qG5O
+ f/shgXy++/ZU+WrGQPy5IIjt4st60MxI6uUml+G2wMkVsaEnw52nygjUM2uV/eWCkZDO7avjp7A
+ Abn5VjYqDLU6eBaEO9eWm11VGNDc75q7PjGBHRDA6RZwy0VQ==
+X-Gm-Gg: AYBFou10hKR7DansUtCEW1uIEgdUirnCBd/5xHuzkOiFqIRSGBNiGtX38HgOGh567Yi
+ rFndlVQQ75zuMPpb0LT52vKUMxAIHTGwmQ1SM+3axkNo0j7U7zXLT/Za4UurX8Razpbjj2XoYbJ
+ 27vbVVy3QcBv5pJJtbcCWhgm0NJkphgx3hfTY7Ybkt9eFUiXs5EtZKYMZ+8A==
+X-Received: by 2002:a05:690e:4198:b0:678:80a8:9a23 with SMTP id
+ 956f58d0204a3-679ca8c7e72mr1726869d50.89.1792405683768; 
+ Mon, 19 Oct 2026 03:28:03 -0700 (PDT)
+X-Received: by 2002:a05:690e:4198:b0:678:80a8:9a23 with SMTP id
+ 956f58d0204a3-679ca8c7e72mr1726865d50.89.1792405683308; Mon, 19 Oct 2026
+ 03:28:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20261015-test-avb-fixes-v1-0-9e5b82644359@kernel.org>
- <20261015-test-avb-fixes-v1-4-9e5b82644359@kernel.org>
-In-Reply-To: <20261015-test-avb-fixes-v1-4-9e5b82644359@kernel.org>
+ <20261015-test-avb-fixes-v1-5-9e5b82644359@kernel.org>
+In-Reply-To: <20261015-test-avb-fixes-v1-5-9e5b82644359@kernel.org>
 From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Mon, 19 Oct 2026 12:27:37 +0200
-X-Gm-Features: AclHuK8klfSohSXUMoaL3wE5s_rMzX8v4fIL4WXHbzpj6NrIkcLQDe7Yn4GUNpQ
-Message-ID: <CAPzfCAbSJwPB2hCr89wv73z7izwtwLyozMF_-HaBt0LUJKi16g@mail.gmail.com>
-Subject: Re: [PATCH 04/10] test/py: android: Use for loop to create the images
- / update disks
+Date: Mon, 19 Oct 2026 12:27:51 +0200
+X-Gm-Features: AclHuK9XEIlPBliZS2oi2Fb4Mxvfn9RlQI8U4GOJfz2e_dnbICHRQyIxglHlgUo
+Message-ID: <CAPzfCAa1h0Mm50JRaCevgJ_j2wBqbkm2m1E0DxnEN8OVj=KzTg@mail.gmail.com>
+Subject: Re: [PATCH 05/10] test/py: android: Add create_gpt_image() for image
+ creation
 To: Mattijs Korpershoek <mkorpershoek@kernel.org>
 Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.u-boot-project.org,
  Jan Kehren <jan.kehren@emteria.com>,
@@ -221,30 +218,30 @@ Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.u-boot-project.org,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA0MSBTYWx0ZWRfX1qjQ6psxXI8Q
- /p5KbGzRufByEn85HUmZku7HFjBvlfCnkFM/aOCfJ1QfMNDfbuRuQc/Asi5wfvPbympKM09wSSh
- 3sVzg6iwO4gpOO9ir9FFIHW0km57wU4=
-X-Proofpoint-ORIG-GUID: ctCjbVMtNIiutT0gs4Hn5BrarHDi_n7V
-X-Authority-Analysis: v=2.4 cv=Y5ptIReN c=1 sm=1 tr=0 ts=6ad5f0a6 cx=c_pps
- a=S/uc88zpIJVNbziUnJ6G4Q==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA0MSBTYWx0ZWRfX85Q/ckAMFf7d
+ htZ+SgxeM2E9SfIGa4W6Ums20iR3jCxh1RcA3ve5YkpmDTGzaWL0pOO7xhUKxRx54vWng+PTngi
+ +wZOMADCHXiYSEBLBTKGgO5T0vRrVjU=
+X-Proofpoint-ORIG-GUID: eeBdEZ3TSIAIang0u2_QPTKVw4hOGRuh
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA0MSBTYWx0ZWRfX+FyZDZRIZMW8
+ yXXjEhmGztBT6uhJM0HyU6c+pLFpIOp01K2je7u0NZB46WVo80F+zeOeXOBqNgeE3YZTo2usz8b
+ Z3Htl490UmzKqEUzQGC+vcedDKRffdS81Tm2WM7gES626iioMHPeUlJ6jtr7F9k712v8xVCsz8J
+ bucbtdR4hW2cgspL2abTGKbmrkY0sMaU5YhOwLPT71Rf2PEw6NGPnUzmiDcW0aFrXxXsA0ygWcv
+ upaGn/DxsXfMUvTLnCaq6M3lR2cKFh1Lhx48wWv/Zn7bgb315mbaIvT960ASLgPz5oyqhXNnCvP
+ SPqBLMfFVsvh3egBtrlAk+R4oW+YexC3L7bE7DhOOJziGR//36uvbhsLkR+Z79xXrBIIGXDlzGx
+ au2754NMBeYvB1UuWfvhNnu+gHH8zFwgbHTZ8OEMrsBm4bXL6R0qZD6KyvNh+/zk/P8Uf9oBUD4
+ gu4t7nxJG85b1sAp02Q==
+X-Proofpoint-GUID: eeBdEZ3TSIAIang0u2_QPTKVw4hOGRuh
+X-Authority-Analysis: v=2.4 cv=Zf2IpcVA c=1 sm=1 tr=0 ts=6ad5f0b4 cx=c_pps
+ a=0mLRTIufkjop4KoA/9S1MA==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
  a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=DJpcGTmdVt4CTyJn9g5Z:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
- a=1LsYVejWIwqCgaWe8gMA:9 a=QEXdDO2ut3YA:10 a=nd2WpGr1bMy9NW-iytEl:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA0MSBTYWx0ZWRfX+KLSIvV0gukU
- BRPaRhV31cZP0HCdy55pnh1kHg/WW0zMZIjiS7cjh6TwlCoq3dgLrmTzXaDWaARq3yjlTppwGfZ
- BsMee/3p3iOX94cnEE0tXlJwS+FtuVjnmi4U5RIBj9oUiwbCleNXZwUwGBazcJv5C4ntZzusGhJ
- hBIneIskJKv/1GNmkwaHWWXD0SqUhrDQp6g9+Tx9fRc2GXCQRsUSTa2C5+GzC9PrwVVCPRIjYUD
- RKuGJzDfSyRM5N7gluFjRmithDKqMrXV2MuzQrV0+DtcXv/xH9OaU5M8GAjo8uueJVpKc0Inxpy
- b4GLL66rp3uC5xcBwR+DuvFAsAl4BqZfJjWCGnTW42zeIsgq+ydRcSYoaYU3cO0VRBt9qe71biS
- TwvM1GS9aor8WWqMxjdSKfAAMXl3Ju/+zhidDR0IisP2+cg7SLt2RfoDwcvfqDBSa4wAk0k24kX
- 6ZM7HGQH4Vv/ki2zXoQ==
-X-Proofpoint-GUID: ctCjbVMtNIiutT0gs4Hn5BrarHDi_n7V
+ a=_K5XuSEh1TEqbUxoQ0s3:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=lgSpjSMEJTgu7Er1arMA:9 a=QEXdDO2ut3YA:10 a=WgItmB6HBUc_1uVUp3mg:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-19_03,2026-10-14_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 impostorscore=0 clxscore=1015 priorityscore=1501 malwarescore=0
- phishscore=0 bulkscore=0 adultscore=0 suspectscore=0 lowpriorityscore=0
+ spamscore=0 malwarescore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0
+ phishscore=0 priorityscore=1501 bulkscore=0 suspectscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610190041
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -265,104 +262,142 @@ Hi Mattijs,
 On Thu, Oct 15, 2026 at 3:55=E2=80=AFPM Mattijs Korpershoek
 <mkorpershoek@kernel.org> wrote:
 >
-> setup_android_image() creates 2 mmcX.img files:
+> There is quite some code duplication between the image creation for
+> mmc7.img and mmc8.img. If we want to add more images, this will be even
+> more duplication.
 >
-> * mmc7.img: For boot image v4 support
-> * mmc8.img: For boot image v2 support
->
-> There is quite some code that's common for both images. Currently,
-> most code is duplicated.
->
-> To prepare a cleaner refactoring, move the image descriptions into an
-> array and create each partition using a loop.
+> Add a common function, create_gpt_image() which removes all the code
+> duplication.
 >
 > Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 > ---
->  test/py/tests/test_android/android_image.py | 48 +++++++++++++----------=
+>  test/py/tests/test_android/android_image.py | 78 +++++++----------------=
 ------
->  1 file changed, 21 insertions(+), 27 deletions(-)
+>  1 file changed, 19 insertions(+), 59 deletions(-)
 >
 > diff --git a/test/py/tests/test_android/android_image.py b/test/py/tests/=
 test_android/android_image.py
-> index 8b536754656e..14dfd26fffd8 100644
+> index 14dfd26fffd8..b5fede8ebf0b 100644
 > --- a/test/py/tests/test_android/android_image.py
 > +++ b/test/py/tests/test_android/android_image.py
-> @@ -13,20 +13,6 @@ def setup_android_image(ubman):
+> @@ -7,13 +7,12 @@ import os
+>  import utils
+>  from test_android import test_abootimg
+>
+> -def setup_android_image(ubman):
+> +Partition =3D collections.namedtuple('part', 'start,size,name')
+> +
+> +def create_gpt_image(ubman, mmc_dev, required_parts, images):
+>      """Create a 20MB disk image with Android partitions"""
+> -    Partition =3D collections.namedtuple('part', 'start,size,name')
 >      parts =3D {}
 >      disk_data =3D None
->
-> -    def set_part_data(partnum, data):
-> -        """Set the contents of a disk partition
 > -
-> -        This updates disk_data by putting data in the right place
-> -
-> -        Args:
-> -            partnum (int): Partition number to set
-> -            data (bytes): Data for that partition
-> -        """
-> -        nonlocal disk_data
-> -
-> -        start =3D parts[partnum].start * sect_size
-> -        disk_data =3D disk_data[:start] + data + disk_data[start + len(d=
-ata):]
-> -
->      mmc_dev =3D 7
+> -    mmc_dev =3D 7
 >      fname =3D os.path.join(ubman.config.source_dir, f'mmc{mmc_dev}.img')
 >      utils.run_and_log(ubman, f'qemu-img create {fname} 20M')
-> @@ -68,15 +54,17 @@ def setup_android_image(ubman):
+>      utils.run_and_log(ubman, f'cgpt create {fname}')
+> @@ -24,14 +23,6 @@ def setup_android_image(ubman):
+>      sect_size =3D 512
+>      sect_1mb =3D (1 << 20) // sect_size
+>
+> -    required_parts =3D [
+> -        {'num': 1, 'label':'misc', 'size': '1M'},
+> -        {'num': 2, 'label':'boot_a', 'size': '4M'},
+> -        {'num': 3, 'label':'boot_b', 'size': '4M'},
+> -        {'num': 4, 'label':'vendor_boot_a', 'size': '4M'},
+> -        {'num': 5, 'label':'vendor_boot_b', 'size': '4M'},
+> -    ]
+> -
+>      for part in required_parts:
+>          size_str =3D part['size']
+>          if 'M' in size_str:
+> @@ -54,10 +45,6 @@ def setup_android_image(ubman):
 >      with open(fname, 'rb') as inf:
 >          disk_data =3D inf.read()
 >
-> -    test_abootimg.AbootimgTestDiskImage(ubman, 'bootv4.img', test_abooti=
-mg.boot_img_hex)
-> -    boot_img =3D os.path.join(ubman.config.result_dir, 'bootv4.img')
-> -    with open(boot_img, 'rb') as inf:
-> -        set_part_data(2, inf.read())
+> -    images =3D [
+> -        (2, 'bootv4.img', test_abootimg.boot_img_hex),
+> -        (4, 'vendor_boot.img', test_abootimg.vboot_img_hex),
+> -    ]
+>      for partnum, img_name, hex_data in images:
+>          test_abootimg.AbootimgTestDiskImage(ubman, img_name, hex_data)
+>          img_path =3D os.path.join(ubman.config.result_dir, img_name)
+> @@ -69,55 +56,28 @@ def setup_android_image(ubman):
+>      with open(fname, 'wb') as outf:
+>          outf.write(disk_data)
+>
+> -    mmc_dev =3D 8
+> -    fname =3D os.path.join(ubman.config.source_dir, f'mmc{mmc_dev}.img')
+> -    utils.run_and_log(ubman, f'qemu-img create {fname} 20M')
+> -    utils.run_and_log(ubman, f'cgpt create {fname}')
 > -
-> -    test_abootimg.AbootimgTestDiskImage(ubman, 'vendor_boot.img', test_a=
-bootimg.vboot_img_hex)
-> -    vendor_boot_img =3D os.path.join(ubman.config.result_dir, 'vendor_bo=
-ot.img')
-> -    with open(vendor_boot_img, 'rb') as inf:
-> -        set_part_data(4, inf.read())
+> -    ptr =3D 40
+> -
+> -    # Number of sectors in 1MB
+> -    sect_size =3D 512
+> -    sect_1mb =3D (1 << 20) // sect_size
+> -
+> +def setup_android_image(ubman):
+> +    mmc_dev =3D 7
+>      required_parts =3D [
+>          {'num': 1, 'label':'misc', 'size': '1M'},
+>          {'num': 2, 'label':'boot_a', 'size': '4M'},
+>          {'num': 3, 'label':'boot_b', 'size': '4M'},
+> +        {'num': 4, 'label':'vendor_boot_a', 'size': '4M'},
+> +        {'num': 5, 'label':'vendor_boot_b', 'size': '4M'},
+>      ]
 > +    images =3D [
 > +        (2, 'bootv4.img', test_abootimg.boot_img_hex),
 > +        (4, 'vendor_boot.img', test_abootimg.vboot_img_hex),
 > +    ]
-> +    for partnum, img_name, hex_data in images:
-> +        test_abootimg.AbootimgTestDiskImage(ubman, img_name, hex_data)
-> +        img_path =3D os.path.join(ubman.config.result_dir, img_name)
-> +        with open(img_path, 'rb') as inf:
-> +            data =3D inf.read()
-> +        start =3D parts[partnum].start * sect_size
-> +        disk_data =3D disk_data[:start] + data + disk_data[start + len(d=
-ata):]
+> +    create_gpt_image(ubman, mmc_dev, required_parts, images)
 >
->      with open(fname, 'wb') as outf:
->          outf.write(disk_data)
-> @@ -120,10 +108,16 @@ def setup_android_image(ubman):
->      with open(fname, 'rb') as inf:
->          disk_data =3D inf.read()
->
-> -    test_abootimg.AbootimgTestDiskImage(ubman, 'boot.img', test_abootimg=
-.img_hex)
-> -    boot_img =3D os.path.join(ubman.config.result_dir, 'boot.img')
-> -    with open(boot_img, 'rb') as inf:
-> -        set_part_data(2, inf.read())
-> +    images =3D [
-> +        (2, 'boot.img', test_abootimg.img_hex),
+> -    for part in required_parts:
+> -        size_str =3D part['size']
+> -        if 'M' in size_str:
+> -            size =3D int(size_str[:-1]) * sect_1mb
+> -        else:
+> -            size =3D int(size_str)
+> -        utils.run_and_log(
+> -            ubman,
+> -            f"cgpt add -i {part['num']} -b {ptr} -s {size} -l {part['lab=
+el']} -t basicdata {fname}")
+> -        ptr +=3D size
+> -
+> -    utils.run_and_log(ubman, f'cgpt boot -p {fname}')
+> -    out =3D utils.run_and_log(ubman, f'cgpt show -q {fname}')
+> -
+> -    # Create a dict (indexed by partition number) containing the above i=
+nfo
+> -    for line in out.splitlines():
+> -        start, size, num, name =3D line.split(maxsplit=3D3)
+> -        parts[int(num)] =3D Partition(int(start), int(size), name)
+> -
+> -    with open(fname, 'rb') as inf:
+> -        disk_data =3D inf.read()
+> -
+> +    mmc_dev =3D 8
+> +    required_parts =3D [
+> +        {'num': 1, 'label':'misc', 'size': '1M'},
+> +        {'num': 2, 'label':'boot_a', 'size': '4M'},
+> +        {'num': 3, 'label':'boot_b', 'size': '4M'},
 > +    ]
-> +    for partnum, img_name, hex_data in images:
-> +        test_abootimg.AbootimgTestDiskImage(ubman, img_name, hex_data)
-> +        img_path =3D os.path.join(ubman.config.result_dir, img_name)
-> +        with open(img_path, 'rb') as inf:
-> +            data =3D inf.read()
-> +        start =3D parts[partnum].start * sect_size
-> +        disk_data =3D disk_data[:start] + data + disk_data[start + len(d=
+>      images =3D [
+>          (2, 'boot.img', test_abootimg.img_hex),
+>      ]
+> -    for partnum, img_name, hex_data in images:
+> -        test_abootimg.AbootimgTestDiskImage(ubman, img_name, hex_data)
+> -        img_path =3D os.path.join(ubman.config.result_dir, img_name)
+> -        with open(img_path, 'rb') as inf:
+> -            data =3D inf.read()
+> -        start =3D parts[partnum].start * sect_size
+> -        disk_data =3D disk_data[:start] + data + disk_data[start + len(d=
 ata):]
->
->      with open(fname, 'wb') as outf:
->          outf.write(disk_data)
+> -
+> -    with open(fname, 'wb') as outf:
+> -        outf.write(disk_data)
+> +    create_gpt_image(ubman, mmc_dev, required_parts, images)
 >
 > --
 > 2.56.0
