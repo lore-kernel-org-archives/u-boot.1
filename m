@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB751CCF2D4
-	for <u-boot@archiver.kernel.org>; Mon, 19 Oct 2026 01:42:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 350E3CCF2D4
+	for <u-boot@archiver.kernel.org>; Mon, 19 Oct 2026 01:42:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 71D0080F65;
-	Mon, 19 Oct 2026 01:42:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D7E2980F92;
+	Mon, 19 Oct 2026 01:42:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id e3CA9ihD0UgY; Mon, 19 Oct 2026 01:42:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8D77580F42
+ id SPpHgXcvpgKQ; Mon, 19 Oct 2026 01:42:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3C42180F91
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792374134;
-	b=WtxWbgE7Xic+0I1pqnmiMPSf34E3X/cH42amo/blVa1wE6jSUhpvPuAjtbmTLDNstPfp
-	 9lbQE+OEJaI9A6YyJtGL05izAJDaIxmy3e9QJQGfBoiKRlYnKC4yuD13vnmzkL77Wxcyv
-	 JNoJtoZUS+bK0Ab4tJo/n2TjlCuLTxKjJhy1Ugnv6i4lfIHf7psEVKmTLxqaqCC4/Ub6d
-	 1KLS0h4oTBqupvrtOrgnwMQF3FafoD3CsLG3IZeicw+GdfRKoot46bUQCbIGpo4aM+8FO
-	 MfuqRttoZ4AlebCsugvZVYBUO55/ib8YoiTz82VYJrHMIMe5an2eGxGP7be+WCu0BSA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792374143;
+	b=Rq23/Ji186Pzkogxa0ohBpIUux08QELaygArpDYbCCHV5lC8XnxSENcVYN8+UZuzRJCq
+	 9DAwpanuRMYpAqwF0oJH/TrmCzk8YrCKZOxNAwS958XLno18wEY8JMvXXvZ8DxgN8LLl6
+	 twyjoCYLITXOivuMT7qw4yaoVzNG3854v6YjQUYhzAs9BnGKYDhOLMBOUqWw6gKcv+jKk
+	 o+dgP6E3OOWQwyMYVn7BfJY5Lg+eoWAwYN/qbABrPTjta8ufVDiGaEDWYpu51viZ99gAn
+	 V7mOUA2KNiu/SZiKgQFOLMizrfCWq2KIiiYw7f/mdOagcuBrMOkCDCBM8yIA1eagrKw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792374134;
+	c=relaxed/relaxed; t=1792374143;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -30,97 +30,98 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=JQ5E4MhyFEfO3FTpSwMoIGhdzI0JH3pMOXRrvt9EfK4=;
-	b=kqaBmZc9wOfBahwQIjaFF4qDQm2Tibu09ALLRpwFvGbd+ndiKXn84i9mVDFEZpIkWtMw
-	 o84gsj6LWCS7r8VTbi2ynbw6mOKf8ZDwPiAUf2I46draleZXTCFl/yeuNrh7YNUbf7lVQ
-	 GaIip/3OTW2czbFqcPQrhzRUSM+ZuCK7WNf2yGJ50Ykyx4P9fEjFUyujEDJH1BmG2+jiE
-	 LZqFhhcRzMiFSycDeiJoBYfjiGiZPHzlmaZ2Yy/hHwryy51O20OcnyNyt0oPNgjdI7aEY
-	 qTahhmstGIreoJPpGd9cnFZ5YMJPnasN6jreT5WD7vNEJkx/65GeBwoSOKEgi20Smfw==
+	bh=Iudlm15DiFvg+Bg9K7eLzpMSkxxDt0UORGygAQ4oxsI=;
+	b=oM+0BZdWBD+67obZMvzvjasVmqOXC39X3GA3YO2ey3Wksxs/y1C8qOs4VQO2pHRUmQXm
+	 K2U//MsusFICXE2HUYC3PEWDbmQ4y6hCOm93uMwddur3KTCS9ZsMII+2SWjRuxJbvqGWZ
+	 /c+5IUJhNvE9LD/N0njzeX65IEOPZ3f/ZS+r8E4g+3Z2Urcu6GzxpmwZXe3xyKcGRZad1
+	 mMpICuCt1rH8nOn6TF7+Qp+4hotszTnBfdKFgNPMYNcoyz4BZEUDPrJgcFyEXvahEuTXk
+	 ghd5GoszY0kkdh2/MXDM5tefwZxH/jXjdonlwcEMJGIiml7y9PCllye4tOqsYL2sSVg==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792374134;
-	bh=JQ5E4MhyFEfO3FTpSwMoIGhdzI0JH3pMOXRrvt9EfK4=;
+	d=lists.u-boot-project.org; s=default; t=1792374143;
+	bh=Iudlm15DiFvg+Bg9K7eLzpMSkxxDt0UORGygAQ4oxsI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=A++Fd/rvF4oyarungv+eeltuNXcR0xA0lS8vwWuPms2vsMPD9ZSUS/0qoIDDDNUQw
-	 4eM26YubnsT951peEUzKbFepiE1AfO16z3q1/DSMiOYdKYbJWfM8AoM2WrYXQfpTey
-	 JmGHGFiTVHJyDWU/Xj/vdLOPWQUcOqTOulyUk2dfG3dWppGnekWB/NsJyZLUpByvoa
-	 qZnJ5Wy3aaYm4bAz4ll+Ro+qt+G5S704up9xcNe8GtouzHNt2Sd681uJ+kuRnJ8GoN
-	 pYOJSsXyprxACWVhCZcqZRAfigWA4GL5Ibp+pvSzPWyd0G9PaxR8RLBxSjEH/+CxPH
-	 rx6wkjJLpZF5A==
+	b=h8o0HlZ6CgE1zCJ0186zn7hKf0x1okeA6JYDopJ4ojjBiYmfy9cXed9y0EfM6aB9e
+	 UCbjM/4EgSotUXjWSM/QRUu4Gs8u1TQGOL1mtp8wzw0+dQchGEOebcBl6LD2LPuOv9
+	 IFNhQy77n/RaTrxzMxMyCOApznk0ZNvbood6k0XonUnirrVEENWPH7QAlT9mg2QI8r
+	 WVRzNTkXeww4q5T1iAch64KRz6NA/6L0WxzFB8ZYjpOdjERJ/nPKlw4OfgzTVxjRYD
+	 C2smfD81NEh/XW7tZbtJWNpvHxccSV8t9/9S4srAjSmBBtg/pwWIGcgsCjIw9K2kVx
+	 jGYGAavy2hnLw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8D77580F42;
-	Mon, 19 Oct 2026 01:42:14 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 573542A8
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 01:42:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3C42180F91;
+	Mon, 19 Oct 2026 01:42:23 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 91EA2769
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 01:42:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 48E5560600
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 01:42:12 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 77F854007B
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 01:42:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9vL1-_Xo5nMU for <u-boot@lists.u-boot-project.org>;
- Mon, 19 Oct 2026 01:42:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E8AF160634
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792374131;
- b=Q6UjNM5IGx9nJeYxOFL9oy8k3Ax9EMAQFV8pOsBeL56OOfcs1F6izoEESUkOtvL/2A1+
- 3INsvauXxGg+bjea7PsZgO3S9AUzELNXGSfk/MZQYsbL+2I4cp0aAJhH2Vbf7qu7cCqy4
- 0bAkFi+WbajUUGOQh0aBTiwNtou4gx6ij4V6PoK/CnUntiVvAKwBDqLOfn+1aJE5dboIN
- EHCXH3o2QxfZCtd7lv20x9YWMvw/+NUDDqS0rpQmiNmJxG9UhMBogi41ULLAbFHpabbw7
- CQWFPbIqXPXWhuVwfFXKXiy6s/AH1UR/8TfIXO1vpQlGXmZht5GNbh8ROk6uMpjVikQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zDJywBPnaDYn for <u-boot@lists.u-boot-project.org>;
+ Mon, 19 Oct 2026 01:42:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 18FAD40064
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=116.202.128.144
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792374140;
+ b=H4ug+yldnHGRNPH3h1crNjnettYiuSL/cpbQhqV7g7ksO7hmhu0kgseRy+cgk0v26/GI
+ brdffC4BLMfKo0ERp/lk3OpbGQA6c7TQVZ5COI5ut7cBr5TGZCq/I/lehykT/6L+HcYtd
+ qvIgIVIr42SkaTswwm271MfViTc3josm0KE28jEPymCpnYzOjjhFpFZBS9XymuL0mHVnP
+ pQp6DQ3OG4IAfs0yHiYZbgNKMlxguwCf2famXOr1qjr1RNOuVqDHmDeeQV61AUrdGhear
+ epvl986gglXDHfomGKUwR62MZrD01LtWYvf3MyGbLdrSItjI6QeZtRbJtpOgDF3/p9A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792374131;
+ c=relaxed/relaxed; t=1792374140;
  h=Received-SPF:DKIM-Signature:Received:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=JQ5E4MhyFEfO3FTpSwMoIGhdzI0JH3pMOXRrvt9EfK4=;
- b=RGd7IRkhUSzvMp4Qycqg/Sttpkx1De/JDkYjJe9BVgExIWO28GHtehcNM4BiYXJRu2Ds
- F4trvjd9SVnhJoppZyJwcmbxxMnqXvgwo3SUeImHJ15ZzKNdGe3usB7PiNGVHQrX595w2
- PHEKFuI/0NOCmvIQYVtFS9r6Gz1owAeVQQuWgZuoC6tTiUGiUnY32Rgq/xnW/cCUcsX+F
- dYXsAiMz3JEElr7tP9U0zXF0DtaB5eU8fEDZRvQCZKUTokA6DPlbufrmkZihnHTq9Sps/
- xrvCue+xs0nTPZ4y4Q6Jj1/j1jTYvrLMvcgmLRkvp/hmxAGDcqYlY/UrjHiGTIF50Ig==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=Iudlm15DiFvg+Bg9K7eLzpMSkxxDt0UORGygAQ4oxsI=;
+ b=mzzdZWdVsNWRNOI6tL0NvFPNpfwQfDX99ittI8LZufkVEiTMdAQmU7y+wxos70p7EwJs
+ HwtzzBty68K7feBbKtGPMDecNxXolgmo2YLDe2AOSw6FNh1U7lywirFqSILWixKPQtH0a
+ UtiO/zQPcG2P9mJAfyUetb3W347/bDsBOCiYqnBsMmdoDWynKRE0/PTstalEJKtNmEL2/
+ 9nCiw3so1ttha6W60x9HbfOCqIj/a5pV6N0VIwAKDh1To1O2uJ5DuyJkSIb63MujUyBNB
+ vNcepuNAys+SnoBzm8dK2WXXiVSK4BS2uQbsX97GdiHAudjqcrzTFLt/jXYteLW/1kQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=freeshell.de;
  dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=LLeaH8Iw; 
- arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:4f8:231:482b::2;
+ header.s=s2025 header.b=Xdp0c7g+; 
+ arc=none smtp.remote-ip=116.202.128.144
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.202.128.144;
  helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=freeshell.de
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=LLeaH8Iw
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E8AF160634
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 01:42:10 +0000 (UTC)
+ header.s=s2025 header.b=Xdp0c7g+
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 18FAD40064
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 01:42:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1792374082;
- bh=JQ5E4MhyFEfO3FTpSwMoIGhdzI0JH3pMOXRrvt9EfK4=;
+ s=s2025; t=1792374087;
+ bh=Iudlm15DiFvg+Bg9K7eLzpMSkxxDt0UORGygAQ4oxsI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=LLeaH8IwkuPcSXNgauPBkH24U19hRv7kYkRmlTnf62fPCwzHDh+N/uVu3f19MyzIo
- RYbcRCo5f0Ws0oH3boTYbIj/DkbPCnMd8KK2esF12Qmok7up3e8gWFRhH8BHUfVNRy
- oeTx5tIjOn5nBsrykANsEP+4sqrACXTwPDjUsbHPN4GW6ehQf46p+PzoTvhx41K9OJ
- TGuN2oxuIyio7AWd5R1iGKy7dziU8PuGVeIO4LBE6nvOxJaIYgijEmtablpJkfzNLZ
- gLsT+8zlC5MoOc4070kcqmkjDcF0sKiFZfkwdK+5RkMuTrXeQDnc2usieJLUUXgVuo
- skGvNfq2pHc9A==
+ b=Xdp0c7g+0M7EtHctOJgZrdl9Ddyjq83cx37sO4oStj7i+BupX6pEF73xACTcqEZsC
+ Zhz8B+ZzAdWLD6YBIp0UEOI1trshT/ViNbaJNVimMcqOJNcEsizpmsDekWrRFiCPkx
+ rEhxNcUMdVRpiC+UA5zulEcC+vYwqaYrv0l2RoG/tK7n/EQ9o5WYdLh2NkhToVi2Fw
+ bGubCuqd0FJzuuTCp5GBwTDlAILt8LaF5zRBsx3DY/vmMHCmwxOCoTfAnwRignNLGC
+ wU+b+bMzf4XrwGSXyPMh9X+YMu/mAgvxSgWnDMUD54IL+OqgAZZc1pBwbdQM+loJI6
+ jcpmLN6JqCHdg==
 Received: from hay.lan (unknown [IPv6:2605:59ca:364f:d400:6ecf:39ff:fe00:8375])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id EDE8BB22019F;
- Mon, 19 Oct 2026 03:41:20 +0200 (CEST)
+ by freeshell.de (Postfix) with ESMTPSA id 88617B2201AF;
+ Mon, 19 Oct 2026 03:41:26 +0200 (CEST)
 From: E Shattow <e@freeshell.de>
-To: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>,
- Yixun Lan <dlan@kernel.org>, Tom Rini <trini@konsulko.com>
-Cc: Aurelien Jarno <aurelien@aurel32.net>
-Subject: [PATCH 3/4] riscv: dts: spacemit: add i2c aliases on K3 Pico-ITX board
-Date: Sun, 18 Oct 2026 18:40:20 -0700
-Message-ID: <20261019014044.698294-4-e@freeshell.de>
+To: u-boot@lists.u-boot-project.org, Yixun Lan <dlan@kernel.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: E Shattow <e@freeshell.de>
+Subject: [PATCH 4/4] configs: spacemit: k3: enable eeprom tlv command in main
+ app
+Date: Sun, 18 Oct 2026 18:40:21 -0700
+Message-ID: <20261019014044.698294-5-e@freeshell.de>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261019014044.698294-1-e@freeshell.de>
 References: <20261019014044.698294-1-e@freeshell.de>
@@ -139,37 +140,34 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-From: Aurelien Jarno <aurelien@aurel32.net>
+Enable "tlv" command. SPL is not yet upstream so this is only in the main
+app.
 
-Add i2c aliases for i2c2 and i2c8 on K3 Pico-ITX board. This is useful
-to keep a stable number for the /dev entries after loading the i2c-dev
-module.
-
-Signed-off-by: Aurelien Jarno <aurelien@aurel32.net>
-Reviewed-by: Yixun Lan <dlan@kernel.org>
-Link: https://patch.msgid.link/20260623204431.498700-5-aurelien@aurel32.net
-Signed-off-by: Yixun Lan <dlan@kernel.org>
-
-[ upstream commit: ae4e84366b5d621171da2e9fae2b1f8bea3312b8 ]
-
-(cherry picked from commit e1f4b93f2a556b0ae661285aa72cad07b3c65fa4)
+Signed-off-by: E Shattow <e@freeshell.de>
 ---
- dts/upstream/src/riscv/spacemit/k3-pico-itx.dts | 2 ++
+ configs/spacemit_k3_defconfig | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/dts/upstream/src/riscv/spacemit/k3-pico-itx.dts b/dts/upstream/src/riscv/spacemit/k3-pico-itx.dts
-index 143bf6f41260..309b4554d064 100644
---- a/dts/upstream/src/riscv/spacemit/k3-pico-itx.dts
-+++ b/dts/upstream/src/riscv/spacemit/k3-pico-itx.dts
-@@ -14,6 +14,8 @@
- 
- 	aliases {
- 		ethernet0 = &eth0;
-+		i2c2 = &i2c2;
-+		i2c8 = &i2c8;
- 		serial0 = &uart0;
- 	};
- 
+diff --git a/configs/spacemit_k3_defconfig b/configs/spacemit_k3_defconfig
+index 586305c62322..66d1a36c79c3 100644
+--- a/configs/spacemit_k3_defconfig
++++ b/configs/spacemit_k3_defconfig
+@@ -22,6 +22,7 @@ CONFIG_SYS_CBSIZE=256
+ CONFIG_SYS_PBSIZE=276
+ # CONFIG_BOARD_INIT is not set
+ CONFIG_HUSH_PARSER=y
++CONFIG_CMD_TLV_EEPROM=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_DHCP=y
+@@ -44,6 +45,7 @@ CONFIG_SPACEMIT_GPIO=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_SPACEMIT_K1=y
+ CONFIG_MISC=y
++CONFIG_I2C_EEPROM=y
+ CONFIG_PHY_GIGE=y
+ CONFIG_DWC_ETH_QOS=y
+ CONFIG_DWC_ETH_QOS_SPACEMIT=y
 -- 
 2.53.0
 
