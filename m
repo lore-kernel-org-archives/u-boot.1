@@ -1,186 +1,193 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9EF1CCF2DA
-	for <u-boot@archiver.kernel.org>; Mon, 19 Oct 2026 08:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 915F2CCF2D6
+	for <u-boot@archiver.kernel.org>; Mon, 19 Oct 2026 08:36:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 560D3605D8;
-	Mon, 19 Oct 2026 08:35:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 34EC980E2C;
+	Mon, 19 Oct 2026 08:36:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PiTitit7r6sM; Mon, 19 Oct 2026 08:35:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7F89D60612
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792398914;
-	b=V/uIrtbsglibJTv+NXUSxaFkwkzLoSrX5LX3aTw42dToG2F3BTonXcLODibGt3i2id/C
-	 i4qAF/G3TfY80XPF7zC4Mkw0yaZY0ZhBuanPD/AYwKl6NwDWNN3xR4xlABiD6QNg1l/6C
-	 9z6TGaVVALFg3nZqTmm3U2vaZPwpUgrrJhEyhi1+opzF/0l4farVH34OAXBJJwcTzXSnx
-	 Hk8U5CsvcGk7z0xhH4d6flbZTEx6SzAQ7BU3+L4Rha30pFTBZYXu2+TwBYnEch/Iae7mF
-	 +OJZjzn7WlIgZCgf3nfIujQHgfPuJ6Ea3BjlBuuZngUPhzMNi9LInYPpev7gSvkGttA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id CTASi4PLhh8V; Mon, 19 Oct 2026 08:36:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 80A9280F5F
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792398977;
+	b=WyKhs004JUhjDt354AekN4HPehReUWrYHzbtGaoIA0yNvTFX/CWp1ouEhHC2axdmSI7c
+	 H3VL65lBbtrr+TXjIRPRdiLONx6CZffMwSicaUr32QwJUzGZ56YQqTKezKdtNrkIf1NOv
+	 hYKKNaptiyMT2pzmjVRHpH4MXnYoErAn5VdqMY7FuIqlAVjlZsYIlaK347p+a1Xx2KJqh
+	 RDNEi1DhKOBOegItwh7VPK6VOi/VI14Q4VdJoM0eYYH2ZDl7D29Wvv09JS0KSdS/kpSiT
+	 zcWt65fzMXkGXuhMspYMcfnVM1z4aD97r58IfgVEWpXh/Jw5FVu6XkAbW40Aorvjc5A==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792398914;
+	c=relaxed/relaxed; t=1792398977;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=yzjb6KvTk++T4iW1mH2pnED4/T6DhqVz0QZrf9DwyLg=;
-	b=Rob0yDn9iroXhixAxsEme6p+9Yb/wudGr84o1NKHs/5ZZ5GD54Io7yQBWSugidTBWJ1o
-	 SZUJ+qFezz+Ufa6ACLjnqw+LTpcrMQzSzSKlziGiM4Qu/PFDsDRvWLINlY8EtSErzPkdA
-	 r3nsWvUDFISKVEW12GZmFtAlZzcG0pUtfGVqD9xCWdf9miT9p6fHhK+B/mmMGxFusY6M7
-	 WKEQsj5Gy7ljdByKYccVVdlJNQxNID57I7uM3uQ6GXVHhmFgGtI5VvFgY6RadSV6nTj3W
-	 Mk4YLwqfbkG/LE+RXycx0OQ5dqPtPK1AXQ+C51BGvCHvyS2WoAyIL2nr3NJSachJGQA==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=DcS0G807pDr/3yBF3UXDCw00F05JkTtwd2kZx1tYwJ0=;
+	b=jGVvNIKpYx5tCUvWs8FgNm7kZFOEt8bvXFLiYm+IeYLqS0vVh3S0TojFL+wi+UuV0wbJ
+	 W4WdprtDkkQE2r1fG70Tnn+1fyWNF2kLPykZ/uwt5gFZJJuRm5WTfvjHGIkt/UsSk/dSj
+	 P2tZt0Ci8TSFldV2UX3hTZkrkcTLO1+bG4ZGsQK54cRSZfv8l88icNZKrxRakZGmOETjn
+	 CJQ4ODQMQ36vR8/aOZS1L38/03E6xgb3EN/FH/bcP86bL+6j7/uQUWDB4N1Bg6DP0Cx+E
+	 IH9sY7sBKEADB0MNhYF3gve6e7Xjzchc5K/ppDQxS6QIhGnh6A4J78YqETM6i1UPAQQ==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
+	dmarc=pass header.from=riscstar.com;
+	dkim=pass header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256 header.s=20251104 header.b=oqgALZVL;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792398914;
-	bh=yzjb6KvTk++T4iW1mH2pnED4/T6DhqVz0QZrf9DwyLg=;
+	d=lists.u-boot-project.org; s=default; t=1792398977;
+	bh=DcS0G807pDr/3yBF3UXDCw00F05JkTtwd2kZx1tYwJ0=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=gUzaPqJ2G6xq6K6N/p9d/2Rvsqxdpb78JG/EvzLV5K6DtgWTRXnuCdibVryvxMBy3
-	 8J3MpQiK40SuB9VUSpQDZZMgXjolgCIUIdc2ET6bu8v4trrTtEn2Tl81Heky1HL6bh
-	 ua7rfFkjkW1YX41ApHjwCSD69EX1UZ0JXeZN26tsUzmfR+yd5ueQGSJZEdy0Qn13hn
-	 0dvfa4hgrUdi3RAGwgWhRNW2eckcYF2cNVTzPc7Xb05vELXQsQGjdkvzFbTl4i8FYW
-	 nJ3Dixp6ruydeSSTcNXpKr+ozUmQIUsJ4lHBqSRTlCESCEpr7DTBFRNAuiuafve24Q
-	 e3U5CaCSRdApQ==
+	b=gagSgfvMapbATaaCD137/z0C/t7hyjFY/xAf4fkbig51zO0Xlcrpg20uj2CFmh3tT
+	 HFWkK5seVtTRwAL5c4UOG0g6mludxmCAdk18xfe+fpnw3VKgZlozfpg8NxfsnwGzRf
+	 YBoVURrxLe8mB+FT3tBl1m6ZNuN9SXQeeHLWxEKRSHQYjO8rja4cbIjVLcc3MeI4Zw
+	 V7XU5dBl6RGFFk47kemx9K9BWmvDP+PENEEkJT8t94Uh0UFecYgeV3cN6v3NRjv10u
+	 ahZFHQZlEx1SJL5bpR/0xhzaSOqK1MHkiGMa+nowJrBaCRSgByRq7IOr5MPn8aPC/S
+	 52UBk0D7I31Xg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7F89D60612;
-	Mon, 19 Oct 2026 08:35:14 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 95FA31AB
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 08:35:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 80A9280F5F;
+	Mon, 19 Oct 2026 08:36:17 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id DA9791AB
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 08:36:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7C0FC4018B
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 08:35:12 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id CC57080F5F
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 08:36:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fE_895QTtnLa for <u-boot@lists.u-boot-project.org>;
- Mon, 19 Oct 2026 08:35:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 57DE540062
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::1133"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792398911;
- b=SdogOJTtbYucpCULRSa/2AReijfZQ9ZLKS6mhkiLC2JLdcPiANMCBLIDSS+7ZrvbjzXf
- AgGRHgPuTMfZx2xLisGqaLGys81pSyhJOqHFmEODDL39SC02wvBkLr7qK19ymB92E8zuA
- qs2ZzDHZFLGnWdDxwuBdyJxA8/VD8LMyFzznNfT34Lx3RUzmJZtxitojDvhne3ALHKKAB
- gcnexc7OCzg+0M+UkddOXh9eXE6PPk2y6wve/XmNv0WwzppGtahDB5A6t3HApFvhORqxL
- akwEOV1fxrufIIcEGPu5zHkRwSnItIgk80fpyi/uhz3+p/XVKQEO72TidgC6Rb4DoTQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Lg0VBg8A9GWz for <u-boot@lists.u-boot-project.org>;
+ Mon, 19 Oct 2026 08:36:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org AED1A80E2C
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::229"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792398975;
+ b=AWmKlarpZwgkw53QOzSb7isYfg6b2FVemRIHmPZVOxaU7TzObONTlHGI0A8J7R7RRI5A
+ 9YXAaF3CbPxJYJ8/AlBITK+ntLxSIi7t3aE1rFg5O0wF8gnhhWvGSQl9otRQvbjIjfNKD
+ skIf7SB9GKlQ1a8CcBaa21ge6DO7ixlUlYARbaaiSh82w80GGwTeXOyH4Hl2qtZXdehzb
+ YaJL0nWYUKbXHQCbfPKbBYdretJgJqMdsXKXZ0nepAHFGukaB36Oq747HsVTW2bPazhnD
+ Hx/RIBSoFZe95dVTYGepZg582ZDHD0CXO7qezYpq87FAhK2nRkPIoKilRm2sQFmzxjw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792398911;
+ c=relaxed/relaxed; t=1792398975;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
  In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type;
- bh=yzjb6KvTk++T4iW1mH2pnED4/T6DhqVz0QZrf9DwyLg=;
- b=f0mp5wwPloBVLASqAE2rPPZToB1wjkniDRFo24eyhlDaQQvoyHCrUK58UvQejUD8QrtP
- dghsD4TFcYB5Anb4THAGBfgfjYyWt/jrtP/O5b97cqRz2Ah2ac52+cbn4fAkAfs8uc3ON
- CWGLlgUkxtGUpvObxkmiTzzESD+Vq78TrsaqSuxu0kp++5bIVB2JqKnp8H6+lnnxbkSS6
- RAukaANiUH65Xiol5N47rJGksotycpz0lYofjm41OtNZRcF6jp8XprT+Ivfvp5+sCedwH
- 5uyDbiD0GPpSnV5fC3i6tTobTv5GMJwwq/vTS17cGeDvmSLInpsGbRRQRQDwhavsRMQ==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
- dmarc=pass header.from=linaro.org;
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b="x/7x8eG0"; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1133"
+ Content-Type:Content-Transfer-Encoding;
+ bh=DcS0G807pDr/3yBF3UXDCw00F05JkTtwd2kZx1tYwJ0=;
+ b=UHiQDQ2kY2By6k2KGE3OnOq0Yw2RWEsEjXgAfYVE6AKO+CrzAY3XicX9/NMpYXe6x6+S
+ XANBdGqVCH+PvKfrVs6iL6bHd82heW+0wLYb+4e5DLU/2YnNLVV/SobHIho0mby0+HEmv
+ WFuEzphaYF5PydGgpMDH3Bw6VlKx1ltoqb7r3PGbWWoslGuZVHT7lzsqSfX2wCSYcGpny
+ C2TrTnNSl/8THx4l+g5qEKCFpwGl+6NbKn2cXZxfUcjvfLN3KOt0mxTRqvGHlaJW+J1/x
+ V+/7l2e2Gmk+2UdJ2P6rYqjmBbtari8YJi7kzM1YRNgqhYP4c5eCZmjOMkFBFYhFCTw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+ dmarc=pass header.from=riscstar.com;
+ dkim=pass header.d=riscstar-com.20251104.gappssmtp.com
+ header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
+ header.s=20251104 header.b=oqgALZVL; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::229"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1133; helo=mail-yw1-x1133.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=x/7x8eG0
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 57DE540062
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 08:35:09 +0000 (UTC)
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-8b0a28a720aso12846397b3.2
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 01:35:09 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792398909; cv=none;
+ client-ip=2a00:1450:4864:20::229; helo=mail-lj1-x229.google.com;
+ envelope-from=eric.chung@riscstar.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=riscstar-com.20251104.gappssmtp.com
+ header.i=@riscstar-com.20251104.gappssmtp.com header.a=rsa-sha256
+ header.s=20251104 header.b=oqgALZVL
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id AED1A80E2C
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 08:36:14 +0000 (UTC)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-3a75f960be4so10420251fa.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 01:36:13 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792398972; cv=none;
  d=google.com; s=arc-20260327;
- b=VngNDEkcg3rfztYdQlap7xDCkQPkow8inu0lobnW3i2x8y9IMYA089Pz8g3bWJkDOC
- VVf6xEfNV1Gs6MSh/fETq0XzBCVTx9bK461TeqsQI51ikPh8ZlTaU6Qaf9CUdZAn/kB4
- 5XwZVCSldpUzsEWDfeYrDAf6/Xv56Yr8O+CQ8ato8CVo+uno8w63H7V2I7+dO2ZlIMQL
- AG3xe6kuMCeT4sXahSDJvCkhXPIj3Ou/75rC+bslh17lgKPf2lVzEU3Ulkx2o2ew0Hb4
- zczS1aEsC0Ap4lHIdRJTE5dCA2qOglgeBqqy/GSesKMYfJ4OcGVdB2TxQvZ+XkSWFy1t
- q5tQ==
+ b=MMsZVKELIGLBNE8Fo1oXzLt6C1Qdqb+WwDza866pMoQxjoIJddTXwHZD98O6DXYlpy
+ oE8KVSpQHfa1/QeoKBOwxNlBSJbEl767weCL/PmIN7P7/C80JD0b1EdmeV6A1RrR0I5l
+ N/bvFvZMyg6mS0T0kLRgLO2Al/c3W3vGZl5KYs2rRRmtGky4rtyAO2pfPU5BlHZjodqC
+ krrQmbDgyUeulIFOMGiWjCNvA7FHsaqekmYfgQvAkpUGdcrVDmqi4oAYsf0K/Re3IRVp
+ zEnaDD6U2U8gL/q6FA/nXZaPdJbgTm9QL8Jb8hTKINSEkT618ZC8XhNSw8lujtQy1esS
+ JrMw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=yzjb6KvTk++T4iW1mH2pnED4/T6DhqVz0QZrf9DwyLg=;
- fh=W8/f/M9jxjUraLqdVrNjjZeASRCwT0Jex7TG+FXiP8w=;
- b=DGLtWUg8N6eX3WvutlYI/MXt/LY2kOltJ8G1lFA7p+BJ/mVLxaUXrh9tes8/czALdz
- 8aTvOnmXaA+JGDXO5TR82EVutsmcbpz/lygNQ0X+KzdL+kTbTZzKghLZg243nPpdu5CT
- NsxtxVTLo3SxuW2Ayl9QXc4R3dgyRYd6qrSn6G8XfPSCoODCcQdwJqwYQNoJwS9cgeXW
- 2rCd+iNo7lMrkEis6ubpcjqgN8v4ql6MhIndXrat7lCo5O0ahbzSoQZaU33FwLdY4FtO
- Kf1JziuyaFFyLc0Ea9KNXYhYc81ZGAiJp+U5526if+K5QwY5/oU9yQ4SEb8yeXbGRdTa
- by4Q==; darn=lists.u-boot-project.org
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=DcS0G807pDr/3yBF3UXDCw00F05JkTtwd2kZx1tYwJ0=;
+ fh=PssCzfAZagILEbYV0uOcrKn/3Pne2m6Yt2vbWJ+c4C4=;
+ b=Ivf80yWpVZAwb9IdFlpcY5mWJNGCz9eY85WBcwLpybYsWFclk6bITgw8mboBxv5SMB
+ Q3DdS/d9obYwRmNcV/m3P8ktTznk4olvn+GM47NePRF/+WIWtgtR55NG5f3cOE0NkHdu
+ 9iDbjcjYABq8VjEY8CVsrrNGMGigOGnC2EFpmzY117XslyYo0XaVa6xnYn9sYGyRao7s
+ VKRRskWkdM454aeypsi6fOKx1lCOKNTG1TXXIauDFEIc6vWKL85zxF2tg0wCkCXrV0Tz
+ yDks7ph36NpT+b5j0LQ2R6+WeBoHcFoEYUsCnXWMclvZHmy6ESzCT3XgSnyZR7a1IqEC
+ INsQ==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792398909; x=1793003709;
+ d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1792398972; x=1793003772;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=yzjb6KvTk++T4iW1mH2pnED4/T6DhqVz0QZrf9DwyLg=;
- b=x/7x8eG0ejZcJVg0qIRms2wE9Bz+1z9UGT5MIhOUqtmNNRXz1s26TnVb4bW2Pt5rIv
- mQUBk3RI3qYDH2iU1aCwSX6hj4+ciDBamRMrFhD2k3uonEPqDFm1tgnG7wQeJnFxIqv6
- YsJ+Y8I3+A+4oHk4TKiNuvkG0xJdE6IbTro0NgwkApwNzO2wdAegy1Hc7NphK864Q7T1
- I2pVnTR5A+rLF+X15+wWPHrW01woukP+JHlnVCs70xgkes1+cJ4GFJYZWHh0iL6isvQJ
- us7D7jFZ9BVYsQfz0DKLZ+q0A93mlFEJeyeUd1M7s68Mrgfz55KL24e6kD8Mc1jqs9Wd
- LyoQ==
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=DcS0G807pDr/3yBF3UXDCw00F05JkTtwd2kZx1tYwJ0=;
+ b=oqgALZVLu+eceqvShV42/j0yRD11jn5qqv8QXL9jPNXQ/zDwtv/PvYBrFWr87nNUES
+ X/BGwgUUnBWAkuNL3Gjlm14KYZUUClHCbv/PdSyygEVW3bnVxvJk6cyAWydraIFbYjdH
+ YaVrrNEbt9YpnFV6J9d+LDcMkJgXzsdtsrYu8ZTBofOfpceA7gogNvcAIwgg+2kwT8yy
+ rq2w2ubcpFsd9jp79U6XhT5FtBZCcTnzd5MCcyEtUfqyASVYNs9OJnnPTiSg1OKhh91O
+ 9sJo8w3OhpGfsQqncx4ugt2/ELbMyw5QCtOP/n+w/72NRaYhASQDTdgNj1Hm0RQCW8A5
+ 17gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792398909; x=1793003709;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=yzjb6KvTk++T4iW1mH2pnED4/T6DhqVz0QZrf9DwyLg=;
- b=fuJt8xhGsnBvpWnJnq1BpSJeXZdy+ozoTVCO6hp0LxJxpzwenIC/lVd6wdDv5kBgUq
- SDD0eyK0OrVSMtZ6h+dEAO0TYcbYHC2/EvZCxg/c9MZxKFFYnXcciCEla1d4nTVylhbT
- 366ZK5FLNPY5SxkI8CnsHR06ylZJm2GClAuWNzS/uwUv4iNT3skt4W+REc/VSEkeApm1
- XLJ7kikm2X3GaBdC6mi8e5rwwvqpL8H0Kx4Zpqq1TXAoZOJnG+zt5Rfz/gBRhvkb5uWL
- KnpkDlHhqK3dsHweCVMTIEnws1e/HDwNLhee1VdlCCnF/VHvWZLRf+mahuBEah09sYJ0
- ONPQ==
-X-Gm-Message-State: AFq9FYKO9VHf4NsP0hYFCpDNnT+qvAFsPIOJ9esjFvy0XF8Xs/DIWIP1
- r3xZe7Kycpc73shfMB0qtU5t6Y1ug2PHxY2yQtG+p8aU0QrXvf111fND5ihOLbsGpAwV425LcBc
- Vd47ZmxVY2mngxd505/zrUU3sMbQt52NHY5JuYJKwLA==
-X-Gm-Gg: AYBFou14vFGE1S5XJtjmZdvzbE1qLs3h5cnjWXh1t6c7088/k/ehWUE3LAqNAHKLbpO
- Grq2ZCg2rVuloqyEUT2wvL5qCoiFVnTDQBE1UQ2MamLNbs5Kx82NMuy8mDEwyxRJ6boeZxKPcIK
- gahgb1D0ADRgXLrtsHpqtvXdBtzuXGtI8QWtkcEDH/BtvSwZ7bdBbOEfYiIx4Du1OS+BRY7h/Ii
- e7jSHP1aKOtRDGxI/ra6+3/Z7iQDPyuH5fgEn9VskGQgk6bTo/GVDUrCf+S0uGDg315Primbgt8
- Asc07V3gggzaBzMrIiZc/DzR7TI4GkvN1vzJQeEo6BTd3W6oMCRrip61VfOy/fE+BmWNCMbzw/S
- O4x8MM6AIHmZUXUwcJqefNM53mlGgmcJC8l+khQd+33uNEFoeOYad1vzpP50HQER/urKQpii3Bi
- l+3Fwa2+papvpMpOS0V1hM6keWfNV/pU56lj6Yna7qEeRLZfQ1I3NQExptHGi2qJf9QkwqA6F2G
- +ohT9OPtS+yYogUzkRtz4HrYATlXX+2ID73yQbTYEpSCdipPoq0AyXv+8e/4zLbncFr3BfHOcJm
- SH0B7D5aTaeU/edxTYfUTOfxUzzj0ob+QCanoS1DlrBYDoPrLoZS0GPRvBuBKSKSU3VEAYX+gF7
- i2yX2Zn6MX/GIOAKixvthXh8dtvsQB7ZjQZTpS5SNchfsH0pTi/qiBw==
-X-Received: by 2002:a05:690c:d82:b0:870:107b:635d with SMTP id
- 00721157ae682-8b0f21de1b9mr23957817b3.31.1792398908621; Mon, 19 Oct 2026
- 01:35:08 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1792398972; x=1793003772;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=DcS0G807pDr/3yBF3UXDCw00F05JkTtwd2kZx1tYwJ0=;
+ b=LQUx+jPkPkjI11xE26+9NTnIWuqRWyAs+J7kBH39r2EJ/GWwhKFbSVqxsbl76Bl6Bu
+ 9iNNQzynnacKQbaIXGuAITFKDH8MXH9BCIlvkxmVxusV/PXns61+nnsn9DJnU6MbgXTB
+ s31zHUpnVliBUuSXn0H122nZz6YAiFKq4MkcTejyJO6ndeFCDj17VPgzRKlOMMPt3Sep
+ nV1cXG9bHd43Pr50Nw0u5HIqXf3UAD+ZYbMScR5NS32+fC+EVyZThjvAqJMkILB5Hs7e
+ RMCiq/FN1mokCWYRrzoiFi3+BEtC4pIy6raZAIKM1KhymHhWww+zTLq6WcFhVU6O88MJ
+ RZxg==
+X-Gm-Message-State: AFq9FYIBWFLY7WbosRbMYXIsF7Vo70gi2zX75SOqsQn76XtBmAuVsiKj
+ g1uo1V4KX24Af3V43G9xo8w8tBu7ltr2ZpQiX1sqDMmcxb+TuC7bfnp+o4lJJMYpnjC79s51BqP
+ 1RasxbMe1sZevW3KsAcquANwA2piU8+J8u4ab/78+WQ==
+X-Gm-Gg: AYBFou0dXpDjCW8R71VESKutlnPqa7msVdgHZygKNde46qhIUOx/Tqn6l0ivHnXAOza
+ C8H1QkwMA5cHyZ77CVoXFJhSCm2dwxcyfdFJ+E1bkZWBdf62LBeH+uFGTXehomSqrv8pvOQwnY3
+ OSXEe+7o5SJolR9q6GcTS6BVtQDg5uYFvse4XgVU1n6gww58b731aTT5Hiy6KPmLBpS/i6JwxP8
+ 8iTMyJcwH2MPb6VHi79ARPdNeUYrF+jIByPrm9n8D/zSCfFTyGN4VMW6OPwEz84wh3lnb0cleiy
+ ZAXFIfeciIy0lJyUGd69iF0qPFx0DwmVQPkM4wiya56j0R/f99/nKYth9fZ+JLUb+QQ0BJXdlB9
+ VxtDfJY1EuFVM/FDsLmzloilI7qH9iGbAm0GnkByLuSmJ7MP3CwI3ybGy4LvlgzwROGjxeubyG8
+ pkqYQD5jBRecx/
+X-Received: by 2002:a05:651c:150a:b0:3ab:2bd8:41b6 with SMTP id
+ 38308e7fff4ca-3ab2bd84c78mr13400331fa.2.1792398971771; Mon, 19 Oct 2026
+ 01:36:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20261012-upstream-optee_rpmb_b4-v2-0-85d76a54273b@oss.qualcomm.com>
- <20261012-upstream-optee_rpmb_b4-v2-1-85d76a54273b@oss.qualcomm.com>
-In-Reply-To: <20261012-upstream-optee_rpmb_b4-v2-1-85d76a54273b@oss.qualcomm.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 19 Oct 2026 11:34:32 +0300
-X-Gm-Features: AclHuK_v8mRk9o2Wf7hON8H6XmPoBJ9Mqi-Ik7suJaLr4fOpTH1QHqhbBiJIk-U
-Message-ID: <CAC_iWjLeSNEAdVoSg2GSYeupH8daBUwT-oVATjGv0W0H0yri1g@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] optee: rpmb: select the RPMB partition per request
-To: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Cc: u-boot@lists.u-boot-project.org, Jens Wiklander <jenswi@kernel.org>, 
- Tom Rini <trini@konsulko.com>, Jan Kiszka <jan.kiszka@siemens.com>
+References: <cover.1790975598.git.DaveWK225@protonmail.com>
+ <b8f3a43efb9393b4a852c1d8ee9674e7c8a2a894.1790975598.git.DaveWK225@protonmail.com>
+In-Reply-To: <b8f3a43efb9393b4a852c1d8ee9674e7c8a2a894.1790975598.git.DaveWK225@protonmail.com>
+From: Eric Chung <eric.chung@riscstar.com>
+Date: Mon, 19 Oct 2026 16:36:00 +0800
+X-Gm-Features: AclHuK_3MQdLSMpv1qLcVkoeAJpwiBsTET4AJK9H-bKE7VIFvME5rsc7QbyEWgk
+Message-ID: <CAH22mJyfKS7du8W1pTwc1eFbgfn7O9Wq_oaSDp=wxBV6MVBw8w@mail.gmail.com>
+Subject: Re: [PATCH 2/9] pci: spacemit: hold the PHY interface in reset until
+ link start
+To: Dave Klotz <DaveWK225@protonmail.com>
+Cc: u-boot@lists.u-boot-project.org, Huan Zhou <pericycle.cc@gmail.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Yixun Lan <dlan@kernel.org>, 
+ Tom Rini <trini@konsulko.com>, u-boot-spacemit@groups.io
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -194,100 +201,58 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi Igor,
-
-On Mon, 12 Oct 2026 at 22:56, Igor Opaniuk
-<igor.opaniuk@oss.qualcomm.com> wrote:
+On Sat, Oct 3, 2026 at 5:30=E2=80=AFAM Dave Klotz <DaveWK225@protonmail.com=
+> wrote:
 >
-> The supplicant switched the eMMC to the RPMB hardware partition when the
-> device was first used and only switched back when the OP-TEE session was
-> released. Between two RPMB requests other users of the same device switch
-> it back to the user area: libavb does so for every partition read while
-> verifying a chain, and the Android bootmeth reads boot/vendor_boot right
-> after verification.
+> The probe sets APP_HOLD_PHY_RST and clears it again straight away,
+> before the PHY is initialised, so the controller's PIPE interface comes
+> out of reset while the PHY is still unconfigured and its PLL unlocked.
 >
-> With RPMB left selected those reads hit the RPMB partition, and the next
-> RPMB frames were routed to whatever partition the other user left
-> selected, which ends in status timeouts and I/O errors (seen with
-> the AVB TA on QEMU's emulated eMMC).
+> Linux's pcie-spacemit-k1 driver sets APP_HOLD_PHY_RST at probe and
+> clears it only in start_link(), in the same write that sets LTSSM_EN.
+> FreeBSD's spacemit_pcie driver, which runs these controllers on the
+> OrangePi RV2 and R2S, does the same and notes that releasing the PIPE
+> interface before the PHY is ready leaves the LTSSM stuck in Detect.
 >
-> Select the RPMB partition around every data request and restore the
-> previously selected partition afterwards.
-
-Overall this seems correct, a few comments below.
-
-[...]
-
-> +/*
-> + * The RPMB hardware partition is selected for the duration of a single
-> + * request only. Between two requests other users of the same eMMC, for
-> + * instance libavb reading the user area while verifying a chain of
-> + * partitions, switch the device back to the user area. Keeping RPMB
-> + * selected across requests would make those reads, and the following RPMB
-> + * frames, hit the wrong partition.
-> + */
-> +static int select_rpmb_part(struct optee_private *priv)
-> +{
-> +       int rc;
-> +
-> +       priv->rpmb_original_part = mmc_get_blk_desc(priv->rpmb_mmc)->hwpart;
-> +       rc = blk_select_hwpart_devnum(UCLASS_MMC, priv->rpmb_dev_id,
-> +                                     MMC_PART_RPMB);
-> +       if (rc)
-> +               debug("Device id %d: cannot select RPMB partition: %d\n",
-> +                     priv->rpmb_dev_id, rc);
-> +
-> +       return rc;
-> +}
-> +
-> +static void restore_part(struct optee_private *priv)
-> +{
-> +       int rc;
-> +
-> +       rc = blk_select_hwpart_devnum(UCLASS_MMC, priv->rpmb_dev_id,
-> +                                     priv->rpmb_original_part);
-> +       if (rc)
-> +               debug("%s: blk_select_hwpart_devnum() failed: %d\n",
-> +                     __func__, rc);
-> +}
-> +
->  static u32 rpmb_get_dev_info(u16 dev_id, struct rpmb_dev_info *info)
->  {
->         struct mmc *mmc = find_mmc_device(dev_id);
-> @@ -130,6 +146,7 @@ static u32 rpmb_process_request(struct optee_private *priv, void *req,
->  {
->         struct rpmb_req *sreq = req;
->         struct mmc *mmc;
-> +       int rc;
+> Keep the bit set through PHY init. The write that enables the LTSSM
+> already clears it.
 >
->         if (req_size < sizeof(*sreq))
->                 return TEE_ERROR_BAD_PARAMETERS;
-> @@ -139,9 +156,13 @@ static u32 rpmb_process_request(struct optee_private *priv, void *req,
->                 mmc = get_mmc(priv, sreq->dev_id);
-
-get_mmc already selects rpmb_original_part, which we now always overwrite.
-
-Cant we fold in select_rpmb_part() into get_mmc?
-
->                 if (!mmc)
->                         return TEE_ERROR_ITEM_NOT_FOUND;
-> -               if (mmc_rpmb_route_frames(mmc, RPMB_REQ_DATA(req),
-> -                                         req_size - sizeof(struct rpmb_req),
-> -                                         rsp, rsp_size))
-> +               if (select_rpmb_part(priv))
-> +                       return TEE_ERROR_ITEM_NOT_FOUND;
-> +               rc = mmc_rpmb_route_frames(mmc, RPMB_REQ_DATA(req),
-> +                                          req_size - sizeof(struct rpmb_req),
-> +                                          rsp, rsp_size);
-> +               restore_part(priv);
-> +               if (rc)
->                         return TEE_ERROR_BAD_PARAMETERS;
->                 return TEE_SUCCESS;
+> Signed-off-by: Dave Klotz <DaveWK225@protonmail.com>
+> ---
+>  drivers/pci/pcie_dw_spacemit.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
 >
+> diff --git a/drivers/pci/pcie_dw_spacemit.c b/drivers/pci/pcie_dw_spacemi=
+t.c
+> index 7ca5a5ad1a..04b3161e94 100644
+> --- a/drivers/pci/pcie_dw_spacemit.c
+> +++ b/drivers/pci/pcie_dw_spacemit.c
+> @@ -245,12 +245,14 @@ static int pcie_dw_spacemit_probe(struct udevice *d=
+ev)
 >
+>         ret =3D generic_phy_get_by_index_nodev(port, 0, &phy0);
+>         if (!ret) {
+> +               /*
+> +                * Hold the PHY interface in reset through PHY init; it i=
+s
+> +                * released together with LTSSM_EN when link training sta=
+rts.
+> +                */
+>                 reg =3D spacemit_pcie_readl(pci, PCIECTRL_K1X_CONF_DEVICE=
+_CMD);
+>                 reg |=3D DEVICE_TYPE_RC | APP_HOLD_PHY_RST | PCIE_PHY_LAN=
+E_CTRL_MASK;
+>                 reg &=3D ~GLOBAL_PHY_RST;
+>                 spacemit_pcie_writel(pci, PCIECTRL_K1X_CONF_DEVICE_CMD, r=
+eg);
+> -               reg &=3D ~(u32)APP_HOLD_PHY_RST;
+> -               spacemit_pcie_writel(pci, PCIECTRL_K1X_CONF_DEVICE_CMD, r=
+eg);
+>
+>                 ret =3D generic_phy_init(&phy0);
+>                 if (ret) {
 > --
-> 2.53.0
+> 2.55.0
 >
-
-Thanks
-/Ilias
+>
+Reviewed-by: Eric Chung <eric.chung@riscstar.com>
