@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94F14CCF2D6
-	for <u-boot@archiver.kernel.org>; Mon, 19 Oct 2026 10:51:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D9E2CCF2D5
+	for <u-boot@archiver.kernel.org>; Mon, 19 Oct 2026 10:51:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5B68060761;
-	Mon, 19 Oct 2026 10:51:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EE2E66076C;
+	Mon, 19 Oct 2026 10:51:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vr7xd749aICd; Mon, 19 Oct 2026 10:51:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 819C46073D
+ id re6Gl1OJUaCV; Mon, 19 Oct 2026 10:51:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 22B1760748
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792407073;
-	b=Z8Bd46zkBtV823xAIsBQ3+Cy7z/LxD0W7icUaEBS6tqoxqRDh3DyC0sRH5HnYFAB+O6T
-	 3wshPQ7Bku46Ytt60Nr8bkuO6SxzFc3ciz632B71RAD5mhN0kk0eNUVZWjaqQN5GKY0pP
-	 i09BtckimisnIsYImXeQcdIboBolI8TLS/cozmO4P9UOam0io3H1aP/yriKvWYS4tpTzF
-	 AQHIfpv76ZSPeG36lG36LEDsGgNUUiAyxsj1I3OnAoNdLJLRfXE7i4AubjweoCC708EyH
-	 jZPznrXW6OGYbe50xSEMoOt3RPVOOLR83QG8xCtN7xJNJ6Zb7o/j0Ig+NoQzeRS8anA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792407080;
+	b=Im+21VTWboeoc5rtl4YZtqiAT6uBxppRyp+9pTCebt7T4Rxd5Y8gaOzNf71K8CStKrzi
+	 L+WUF8iq5Zp/ClG+9B4O0uOI8uAANE08m73AE1JXb9xqvY2Pv13oIyLfHz/0o9wOYRdE+
+	 3yiOHaU02U9LnKmzz9tvIBZyqeEb3W7W39ltAcxiHB6zwFmmcO1riUvpx9hzqYOBm4Vit
+	 /xUhZuJF7SeM+Y47m+VG6VV8x2zIUzd4E0dzGDIiwzwTf/3etuvuKJsyV6UkOCAnmpbQm
+	 B1x6uOLyI70uNkg+lw7rXtLeB2KLaM0RkWIB3pGhV1Y8Ik1zc0Q09JSb6MwqXlFL+1w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792407073;
+	c=relaxed/relaxed; t=1792407080;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,77 +31,78 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=s+jAj4eUIRyhkAlthxE8ACKidZxIQItUupV+wIjaZ1E=;
-	b=FyqverLOkdbGGaXGW3Sejlg42uOHcw+rhSsAC19QmDxn7de+c5qJWmpiMxKy8Cpc+2sa
-	 Wf9N9prSPpiE4JA4uD8+Xk/K2+awaEbyR0PYBuoegZKdKlrSPE5vcfxfN9us6QldQqjBX
-	 xYCbO/QLzLs4R7zomNQr/RUGS1Se4oeAioJmPuRD+43jGQb0hnkvnimZB9eeQfd96NZwb
-	 gWzO2sAjHAXCCgvToreu0S0PKuaS9eIFXQHaPrIEt3lxeGXBM3Gu0WUWYedbi8QrkIcos
-	 UrfAuZV9WBpGDhddiuX79X59DDKlaB6TWj8VwlErhKmlWHodzS2rYaMziWVX+RFC08Q==
+	 X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=rIJcmCRHTuTIp1aXHSvqfX+lkGGKJ2JvZYpPfaLv+RI=;
+	b=p7k2r6jHwa7bz5w28vpA0mz0kEoJ8ZjrITTQZIcLrQRzvPDOWamTV91EKbOX7zg+VG6D
+	 4uKu8l7G++596L+nqpktIZVs5fxa/euqK/tq//YLdAp4PkuFggW79B6FPQqK/+aZmDcGe
+	 /OQXubnx0/IBICSRNjcEQ5xb6x5bAdrpK+SSEYm5OnMbkKZCK+iunCPOzAyi/5G2O7o9L
+	 IlFqmbPwmKaNjvzrxgA1Z7aqYNT2lv+eSskc4anL0YT0NxGE2wF5jaLF+Z4KhYb/0YQ2Q
+	 SoTvvzUZc8eetbvJVNEXu/PS1FCAGbgcGWMcGvmig3b6+C0SIBYqRKiYKU6BV9INK+Q==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792407073;
-	bh=s+jAj4eUIRyhkAlthxE8ACKidZxIQItUupV+wIjaZ1E=;
+	d=lists.u-boot-project.org; s=default; t=1792407080;
+	bh=rIJcmCRHTuTIp1aXHSvqfX+lkGGKJ2JvZYpPfaLv+RI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=CdQvSVlNqLjQGWLRq/S/+SFYf4Ru/vnrkKR7bGN+B6fqP8uQif26JuiIR3WVBEEBd
-	 yxPEzitD13OfNSVadVwLQLPN0G6VUPwwaIxyNCGMRJ7U7Wc7PrmRObn6Vc5tDT9sr4
-	 r/r4LSPxf1YsYqNEZMa+ZWtQiBTGA25FhfkrHbykQq1hMbiczjRuERQwuS9PhiYQnR
-	 uOlARniQCAWNkJmzC9BwlSzuHJ8fvksZDetO1EauHpuQavmtKIGpmHV6xF240RxZLJ
-	 T+y3oyACwBkpZ4ftOyrD8+3kc9wfnp1qyVowOuFJLlxZvDpqmqj2vax3wb2nZnWtWX
-	 nuIXvks0TT9/Q==
+	b=MAzwNlDsfFFG4QzE4uNJRONuziQdc8QrihrP0zr3+77QBg9PjOtICuKbDvNAIJBke
+	 pFTL9dUq6p2X8ZoSrh1tBgGCsz41cdCxcBqa+bELIUqQcea8pVsP/PWB9BOWPPDHHl
+	 ubPq1S0gaRhnG33N5IzfwM114/WPWky8P9yb99JWAS2ZD3h4h6GF1q9Dvxdm0EOjwX
+	 4k1vfL34IZkSQJHVZW+LgLdMCI7c0AiSY6yusIpSUoDaNV5kX8m0uqSe8pMY7qCwXP
+	 J3Wp/JFtZ0NqkREgGRo78uiDatHiNycjImghpsOqswGVPmj4/cF0X+D+6YoJw/LB2d
+	 WKcrLqCn+Jptw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 819C46073D;
-	Mon, 19 Oct 2026 10:51:13 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id F0AC61DE
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:51:10 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 22B1760748;
+	Mon, 19 Oct 2026 10:51:20 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 70A541E9
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:51:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E27CB407B3
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:51:10 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 56A21406CA
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:51:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oRHC8EKwWQjy for <u-boot@lists.u-boot-project.org>;
- Mon, 19 Oct 2026 10:51:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 22CFA406B0
+ id Kt3yfzD9A1of for <u-boot@lists.u-boot-project.org>;
+ Mon, 19 Oct 2026 10:51:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8B9DD406B0
 Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792407070;
- b=o527YlEgW85/MHbepAjBWDQKJFJOHWX5EQ0zCjLDqlyigsNL5RuB6TLLxEl44CO+02mq
- jYKBcg9JNFOuJ1YFJ6k/mcT/IRZ3Yz3q8s1dNt2Pd+pSaYPAKUvJ7s0ojy36QsaX/g2ST
- /KCLH2PSdAKEOhsXUD2VO79V3m4v8CnO3eEv6PGfShbWuKawyWrc9DmU6AlBCWu2LGbfs
- 6ppLyIsgxle6mk8WRN6i/84PvdKkVuy4/6VJ8mrDI4m4M/jJhqtDHX124+Ps+u3YZMwmg
- +BuK+tWr7JJ2bM8cwM9oF25NgLkUsRtJ7TzNebvQ8w2jxjOeQLdMj/tIyRIA2FZJDWA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792407077;
+ b=IPm7CrADgYPA9Yzb7FmESA1mVCEMzDK/jXLSlFiHIvlwx7+6ccbe7jM+jaSdBSK1hNJp
+ 5ajsmrKVE64f3iXXd/O+S8zMDjk0Iz8ymABtMdt9XJ+1G6Tpws6AeE08vmriczF8xZQ5A
+ JYMJVJ+rnmxPPmaRHMWy32U8HjWdIw/bgww+U07knt6pLf/8/gtzCE7xNWetkBTNmsF41
+ opuMx+LTwi0kbPHGrWOnI0zRY0FxkJucgThzz2qbuZVkPEhJlLSTJD30AmkfEYf1PckV6
+ 1tdSrkel1hFXP7QYU3sE0mU5oCk/kRrwFrvbf2uWFsJbx0aX6caDSZhCz2gGmzO0cqA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792407070;
+ c=relaxed/relaxed; t=1792407077;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
  DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
  X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
  Content-Type:Content-Transfer-Encoding:Message-Id:References:
  In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
- X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
- X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
- X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
- bh=s+jAj4eUIRyhkAlthxE8ACKidZxIQItUupV+wIjaZ1E=;
- b=PexG/d5C5icqlPz0IFzQvdAoRMyN86CNWZf+Cba8dhCOfwLvfz6ifQNlsrSkKo4AU7Jq
- U9M0dfVsw1J7PFRa1fBbwK3qRCL39IHNox7D9iXSM24XS+k2XgPDcfuc7Os6Knr4LxANW
- JisW4Kt6dWFWjAj++lcwBbEypfhpoy1lo0ZxfMamo355CF1HrQjEO3sMdJlS3S5qSTwL7
- U/R8qECS7JDoxVkJyrtTvtEznL4+UKGjhC0hV5teOIueD5AbcPSg/9QEsLODaZZg3kxNy
- eSD/5953Rs7411XAeUB0mEBvDsoyCFKZT11IgMAU3GbZjxsDbcth5f0OkC/usDtm4aQ==
+ X-Proofpoint-Spam-Info:X-Authority-Analysis:
+ X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+ X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+ X-Proofpoint-Spam-Details;
+ bh=rIJcmCRHTuTIp1aXHSvqfX+lkGGKJ2JvZYpPfaLv+RI=;
+ b=G175qmKeWF0sCE7S191Dsjv4GaV0ICYc1c87WD+XzmKZsuDW3XsyWIar4Mm81BNz+v7i
+ RgdhdYSp6qz5eIt4NXF4TqWoDC88UWctKtk+fNuScMAfeSG3shNJ024rZaQmHAmXpgfi0
+ wqcMTuUckiVChOi8kgs/m6f/3eRRlowmb7gTuhvLT1b9wqjnPSWwNuYyX+aV53mWAF/Iw
+ 82dpiix96Vx9zPwyR7xL2aQToQklGJ82xmBeoUCijI7nbqMgv+AbvfUMBsHXYQhIU3IaV
+ wohWJlA8DIqOnsS6C992+ciS/BrnM22j+T9OvDJe7VxFsTqXncO4c9B77XuPgVAMKBw==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=oss.qualcomm.com;
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=OiaUvzNo; 
+ header.s=qcppdkim1 header.b=G+njkd4h; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=L9xE3Ztj; 
+ header.a=rsa-sha256 header.s=google header.b="WFNm1z/f"; 
  arc=none smtp.remote-ip=205.220.180.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
  helo=mx0b-0031df01.pphosted.com;
@@ -110,89 +111,91 @@ Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=OiaUvzNo; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=G+njkd4h; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=L9xE3Ztj
+ header.a=rsa-sha256 header.s=google header.b=WFNm1z/f
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 22CFA406B0
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:51:09 +0000 (UTC)
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8B9DD406B0
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:51:17 +0000 (UTC)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69J8OvEj1168064
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:51:08 GMT
+ 69J8PD3h2193424
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:51:16 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- s+jAj4eUIRyhkAlthxE8ACKidZxIQItUupV+wIjaZ1E=; b=OiaUvzNoxOa16fwk
- NG2ZWutgj+DPjIaEKf5wDZOjgHODO2GEQNtLj9J/OMEBQiiEmRX/eNiHNUPNaCSS
- triLLd8iCjxuCfixDIjd/dx7/Bl8T4sNvFZBYbfMKE4vJEqW0QRyRTET3/L4b3YU
- 6E4bMbC7TQQ5TU2VVXWzf2QafAT9I98g4pxg7C6SlVzli6LbY3KsSYk2gz+dR/29
- i7zKZVOHhdM24GqAH+3m/AZ3IDvqroUcn5tnsFo6j4ABUUzYA22hQxKhWPGtJYK5
- yYScK9R+o9w5GsaoOZBvNeJfVoKCb9e4e1Hxepf+cWlFOFlPKKNevcF3eEDy19/m
- nizLbQ==
-Received: from mail-dl1-f70.google.com (mail-dl1-f70.google.com [74.125.82.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdf5c8pfq-1
+ rIJcmCRHTuTIp1aXHSvqfX+lkGGKJ2JvZYpPfaLv+RI=; b=G+njkd4hFkXAyByh
+ 6XZMz1l+nSkcfWqttISujovW3wqbKzQumyVM6LBQzdIe/BC80iKtVM9vaqZpnRu0
+ heFvWlmuKFJab+IOuVxryosDjhKPtQNc3pNytlJH0zrD0PAZAIuBEma7WPuQQ+oM
+ 3w+vZuplkQ6BXbkqh7TlLI+W1f7oxSEFPI2Tz1yB/uTXVCSIKtk6sbGVo/gKTsV7
+ 8bNiU2GPLqZw2O7May6sqrWINLxXUe/Ke7wa6DRysr+mr28Onwqy2XI+yX1NR7+u
+ cklH0OBn4nKGa9ifHAaBZ5+9GUUbzuYW6O/B7MbbeivjEFVKAf9rzSlC68kUvbqI
+ 0sCRtQ==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com
+ [74.125.82.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hd5w1abjw-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:51:08 +0000 (GMT)
-Received: by mail-dl1-f70.google.com with SMTP id
- a92af1059eb24-147be78cd56so8895682c88.1
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 03:51:08 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:51:16 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id
+ 5a478bee46e88-3510d0baf63so5226968eec.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 03:51:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792407067; x=1793011867;
+ d=oss.qualcomm.com; s=google; t=1792407075; x=1793011875;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=s+jAj4eUIRyhkAlthxE8ACKidZxIQItUupV+wIjaZ1E=;
- b=L9xE3Ztj77WhlUCj+Dh4APzoCuDyjfbkHL1vFmAgN/TV185iZpGxeYdlevWSp4J2G+
- uE8YwNWTIkltkyjLdlEQDEE6UfvOs6XE7gsD2gXfsN93TG7g/KRRDWLM87pt9gJTpFYO
- oZXQZvPNMNXKWIL98VpxF+HrmzBazbpOMBDczn+ITloQLmVHE7PDKS99SLy3kxSaPZnJ
- WrCE99n7/QohTLa7gIDxGIe2avw9uZtFJRJ9ccyH/d4HPAIqn0NMjT7rQaaGDLRjcjYA
- 0zY96xnjyXJcu4n8oRhYJ+AY9SY1OQT+Zu+0tZphchK+D1bjOHNtu/olE8IQrexvNUVN
- isjQ==
+ bh=rIJcmCRHTuTIp1aXHSvqfX+lkGGKJ2JvZYpPfaLv+RI=;
+ b=WFNm1z/f6+zuw+hk6G/PZxtQbv2gcnPTR10sgHbQlSg3m6jAuXT5fW3Fpg6YmeO97/
+ 6gf2Vde1jaC9U56C7R6+Gmw8ZLJZMS/16803GS2Du2k/DLFjuLYpSO3GMt5Fq/IACL67
+ 85v239nFxm3lrRR6tMYPbMTDEMjVlKyVu8xDtdalLSxikcqQn+7wA/kNtukLfXT5YaYg
+ 2L53v91/kCNkWugrOcG/X78k/Pf9eUm88eDm1LFz6sHqjSEp4u96AwFSkh1o2JH2F22o
+ N0AFaV8vbThsX3E8rkZT9XgEK2kilfC3pYV/kTs80B2VVG5UwTrcmpwbz/Uy2TjpwcoT
+ 23gA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792407067; x=1793011867;
+ d=1e100.net; s=20260707; t=1792407075; x=1793011875;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=s+jAj4eUIRyhkAlthxE8ACKidZxIQItUupV+wIjaZ1E=;
- b=1AT4JymFQQhEzyzKT5hMQJwMA+o4iXv7opjAw7pvc/nwcdPJE0SVIMBQhPhaPs9evf
- jEVoS/NQzccmfk3UEuGhKjUNPEPTcd0e4dRoQhReUQQCpPuEuhPWv1xqJybgQY3soM/c
- pv1TS/y/PUvbHkEVWIG6ESIZyN4KmPDd9UzIIK9d4yT1B+JradG4t4zxpGiRO9/uPjCK
- 4FaDB/5bmY3hZjdur0TiAWp30y+ZTI8pD46lNwOD/SJdVqoQ659jBzsKeaMVBaUYuU88
- h5r538rogK72LqWUXicRrZN+T4fR14P8yq82snjyPTK8w+2yg9TE/u4mH+PVWd0VZN/2
- r9fA==
-X-Gm-Message-State: AFq9FYJnaW8BxmK0CKuJ1Y2+fV3QYWpYb6rv0IWzKVbmKuMYwnETED8V
- rE5THSuv2aA9KhjkxpeXNQSWRVN3MFn/zdpmvrTZxdvWIB65YasbeFdpYYd32JYgPV3TcW6h0XH
- yLSpPPIZ64Psb0JSb595QvaE3ooxJR2qIj242x5N+QAVhzWy86UEzcjXwST9nN8lhryP5FhI=
-X-Gm-Gg: AYBFou1Ym1SU3OUoWZOyROdWS5ruuK953wAzZZub0h/5hngMZULeq2RcUhdTMExmgHF
- ADgkH6H2uOAHL1eou9tRUwANPMBoARtwcy3iU0i4yAls2UoSMeYETfV8DGEQ5SnDvqhOdg/jqiR
- 3tN09Ux90foWHcC+Y+T2U+QN9Hku+v4fbM4li2EsEi/QqbPxf1hUkw9MO75vqLQEGspJlggWDUo
- il9tGSeGmwRzuf748EXPiUSbioFtjbgT5iGL3VrCif+6JWct9qcJvdJ9WWKXMFsL4so8HoxCwHU
- XfxhLOBUexIF4B+6xhO4ebBVKQxeHyEHbjAFeo1vsAxB+a4kGkKW0PD2eDq68o6w33meAuuqab1
- HODEOTVXY/4BqZ372kxAMaEqb7pmVfi3aJJjm/ge5P9bK8Q9S9DRdb1nV4zTvFF6lXQVjBNxQQo
- ZIVteiNk2uIqz+JJNcwXYQsLkEuEzR
-X-Received: by 2002:a05:7022:e808:b0:14a:51c8:e9fd with SMTP id
- a92af1059eb24-185139aa548mr12088269c88.26.1792407066929; 
- Mon, 19 Oct 2026 03:51:06 -0700 (PDT)
-X-Received: by 2002:a05:7022:e808:b0:14a:51c8:e9fd with SMTP id
- a92af1059eb24-185139aa548mr12088216c88.26.1792407066217; 
- Mon, 19 Oct 2026 03:51:06 -0700 (PDT)
+ bh=rIJcmCRHTuTIp1aXHSvqfX+lkGGKJ2JvZYpPfaLv+RI=;
+ b=p8OSVQg+w7Lbg128q+NBuaIwZ/8c1YyClCtrHL2II1o2ZmL5RuXwfp/ieA/i6Uqp1E
+ e22Djx5OIJsd08YICwEOPUqQqW6c3Bi5Q5MhsdrLYbOXf0z8FZmUpLqUl2WXwB742H68
+ X/OoiI53ZzyprjT75sGRzoKWsx/eOU4uTV8ZJzAZvHJB2yyozv85TsZfPXhikDiqOxoi
+ bce83kp7NErXE9FXbuqoDMxck+w6b+q9DzINwxKa+k5mZIcOSghjiORCji0oHmX7QeaN
+ YpQjiT+R8Hz62b8aKjo0aFiKa1DHx8UE+2vLLalvff3VpJPn6iLs33fQ4NWNPKCY9mKw
+ f9xA==
+X-Gm-Message-State: AFq9FYI0pjQldWgQ/yyjBS+uG9bn2bCOTA5V657W+ImllJBmJnaxfIOF
+ U/NoZ8o3/mZ1m7GEMxAKbba/x1XvdffL+a/qfzNGQmNNoLCZTTZQEwZVsoJcb1Zq+luV8gez8BM
+ //7uhtT620PCAOwrsFg/qRWiN1BJFKfhfDlugrjpHQf3120w3rrdJkWMqvBJG4Qwohjeb87c=
+X-Gm-Gg: AYBFou1H/16Rqs+gnZ4KiqjhLYCoDwoTxmbunMdR1so1k35zuczEgpzaVWy2j6fOHJP
+ XIHUPzMnsznb93E4aYmZElSAhf1sPxCMhxr3HLeBwhxSMseZwZ0NqAMTnjp8VDAkPU35+nwf1v/
+ ihdM4Ph/BUczq64fr6ds4knVv4HWMOjU7gAaDgXPOTwiSqDp4D7aNecMM82WIMjow6+RAlafll8
+ CocXAziXdWypJ1iULD9qnab5Jpo6JDGljBTR2WJ8jAXIt218r5U7heucYG+jpHMj+8MBTMriHKq
+ pAFfR791PFsdF7xJjedmucNiRyUljAlQJMt/bVULX803m+ws+1kcUys9OLuh5UErJO4Z1uShLxP
+ +bUgpyGrB5d7TDvkq367lFn4DSPcvxfvqU75QGysHSsVM1ltraStywpgPVVC9xHKKvLRl9E6MsK
+ IaPJ2p+7xthuPYLi2cUHcawZ3Fggq5
+X-Received: by 2002:a05:7023:a87:b0:166:847c:f162 with SMTP id
+ a92af1059eb24-18514b00c6cmr11002439c88.45.1792407074849; 
+ Mon, 19 Oct 2026 03:51:14 -0700 (PDT)
+X-Received: by 2002:a05:7023:a87:b0:166:847c:f162 with SMTP id
+ a92af1059eb24-18514b00c6cmr11002390c88.45.1792407074198; 
+ Mon, 19 Oct 2026 03:51:14 -0700 (PDT)
 Received: from hu-bselvana-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-183190aa3ebsm25187828c88.8.2026.10.19.03.50.58
+ a92af1059eb24-183190aa3ebsm25187828c88.8.2026.10.19.03.51.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Oct 2026 03:51:05 -0700 (PDT)
+ Mon, 19 Oct 2026 03:51:13 -0700 (PDT)
 From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Date: Mon, 19 Oct 2026 16:19:01 +0530
-Subject: [PATCH v4 6/9] spl: ufs: add Kconfig choice for U-Boot location method
+Date: Mon, 19 Oct 2026 16:19:02 +0530
+Subject: [PATCH v4 7/9] part: introduce SPL_PARTITION_GET_INFO and select
+ it from consumers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261019-spl_ufs-v4-6-61432d0b258c@oss.qualcomm.com>
+Message-Id: <20261019-spl_ufs-v4-7-61432d0b258c@oss.qualcomm.com>
 References: <20261019-spl_ufs-v4-0-61432d0b258c@oss.qualcomm.com>
 In-Reply-To: <20261019-spl_ufs-v4-0-61432d0b258c@oss.qualcomm.com>
 To: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
@@ -212,38 +215,38 @@ Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
  Daniel Golle <daniel@makrotopia.org>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792407009; l=3265;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792407009; l=4211;
  i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
- bh=M6GwrtthP3A5g1YqulQC8ij8ki7xE6T+5iy2JsTw+/Y=;
- b=Xnyyt7+BNNUgEuT1tt2sq69QwdWwyZ0tgU2Np63Jp1eD3/ipmMGmE9N8nQUGxcLjkmXaEJIj2
- jdO0K5WFsCkCqP0ezMFJVskIV5+CqZPoL0euv6ZrqlNwTb7ktdEWXCO
+ bh=l1TyqR75NhOA3+uTQf36y6FcEeqi2iGKBPpd2AXLXZ0=;
+ b=0/EK3SjUK89yJDbXi6GfcyM809mTt82JmkwEtFzJa5T8SzrujGWA0vn0co+RL9MLyir0qRVXv
+ vOZWrBrKVoOCPE2HTDcjvdZzGkh4uJvDgAFlvb1y9JjORLHvMyJpjH8
 X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
  pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA0MyBTYWx0ZWRfX/ETpRwafE+Mq
- BU/uHefxIQyzKznAYEjUnfm0oyqDdreuvlF676iw4f7BbBMlGhjstXU86p41xVIE75TzXjA1Cdr
- Vs/4oimmblLlqYNE5InRPPyGPndbozU=
-X-Proofpoint-ORIG-GUID: H8huJKSMY3jBg2Bu1GDNXpzE6x_C0erN
-X-Proofpoint-GUID: H8huJKSMY3jBg2Bu1GDNXpzE6x_C0erN
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA0MyBTYWx0ZWRfXwl535yGe4Y+o
- 0fweBiQ5an7Bl3tXmyKG7ghr+42T/dlD0vxDmcgCrsVyWCv5SMWXqN6EKZYEdo6wZ2q9704QMBV
- iyvjMccUckscLiXfEd3LFel+AARLs4T0/Dx4n/tGIEB6Z0P2YpRCdUfiw6JNWI6H8sy+HFA/vWQ
- d7BVTh0YTCkAbBKsQBByyT3jok3vhoNgX2EjwS8XXNeKL93yFgzsnrlLdqXTH2w3ohPbulHJzaI
- p0hPLJuGWRZ1o6Gb7TBFlef01r8ofAtOcMr9Qq2ByX98btVIdSPEqpQb5nr/S5VH93VydnZpb25
- 3Xut15UjHlPgmJAQ5GXKgyNFEgGNOl2g+G7JPurHrHg5Lj8wMvBNsdSKzwFU02sjkVqkdC83EB9
- r3tia0eay+lZmSA+LW4D7lsOIR5EAYFjwTI3DhIGwWLjratI3f2fSvuARdGH9y/8z0sBsJbI4w+
- wZm/4L3J85iI5NyKzfA==
-X-Authority-Analysis: v=2.4 cv=K6O3jCWI c=1 sm=1 tr=0 ts=6ad5f61c cx=c_pps
- a=SvEPeNj+VMjHSW//kvnxuw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA0MyBTYWx0ZWRfX4yu5eRBMf7hY
+ 4aIHkOOKJEJ31UCZ44OuwbtHRRYrhDWpMTxcrryI5ZUv/XgiihcR+j9HeVf5RCdCAL5sLTOTfSQ
+ cwykpblRDReZf+/EDsco7cnceOUqCrY=
+X-Authority-Analysis: v=2.4 cv=KuPYSmWN c=1 sm=1 tr=0 ts=6ad5f624 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=0MC_39LZJF0Zaw0hVAIA:9 a=QEXdDO2ut3YA:10
- a=Kq8ClHjjuc5pcCNDwlU0:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=0qWeDD525EdcUZiRWVUA:9 a=QEXdDO2ut3YA:10
+ a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA0MyBTYWx0ZWRfX0rSMngCTOG32
+ dRIo1U8J1IjPJEp7nIACVW/fcUbeN9Pcy/GaBobL6yUz9VsTyBQGd4wkukNdVQg6B1xBJJvuiTb
+ 2ls28i/ig3s6V/NGxCXuD8WOR/NbWWk5+pf4yA54jwQ3i6CMt1SoD65RMyKBDqlaGM+UiAuz34w
+ uktX5C7UstFA/jldrkEHuLSUEnaEWwA4Kcb4iwSLonGdP7DNdhDKtwz602pqnTqkCVRThDOtx3R
+ FtC/2m1YtUowcMX3Boj9XcsX5oEyS0XI8wRW7nvNBOgyhyLBXalSeiT24U2ChIn++22ehAwx9w2
+ hjYSN3m/QSh/uqzV3JPm4AB3YKzgjsKq9kaNnIemWbIT66rYkOu4AHwH/V7nhUVQPy2wBNwN/9q
+ 05Ij9g5mHuEvFeb2nmoKOzEDhAUC8Y0OteG8aNB5ICqo5nphCYKv5fr0GNvwQ2KgwhHi4o0/A45
+ q3HCOuDjdmUr/z+5IIg==
+X-Proofpoint-ORIG-GUID: qrIEtzy3ILLiiaA5u4mipWrMMnXuWMYX
+X-Proofpoint-GUID: qrIEtzy3ILLiiaA5u4mipWrMMnXuWMYX
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-19_03,2026-10-14_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 bulkscore=0 impostorscore=0 malwarescore=0
- adultscore=0 suspectscore=0 clxscore=1015 priorityscore=1501 phishscore=0
+ phishscore=0 bulkscore=0 priorityscore=1501 impostorscore=0 malwarescore=0
+ spamscore=0 clxscore=1015 lowpriorityscore=0 adultscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610190043
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -259,97 +262,114 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Replace the single SPL_UFS_RAW_U_BOOT_SECTOR config with a Kconfig
-choice that lets the user select how U-Boot is located on the UFS
-LUN: by absolute sector offset or by partition.
+part_get_info_ptr() in include/part.h resolves the .get_info partition
+driver hook to a real function or NULL in SPL, depending on a list of
+defined() checks for the SPL features that need partition lookups.
 
-The sector-based path (SPL_UFS_RAW_U_BOOT_USE_SECTOR) retains the
-existing SPL_UFS_RAW_U_BOOT_SECTOR option with an explicit default
-of 0x0.
-
-The partition-based path (SPL_UFS_RAW_U_BOOT_USE_PARTITION) adds
-SPL_UFS_RAW_U_BOOT_PARTITION_NAME and
-SPL_UFS_RAW_U_BOOT_PARTITION_NUM, allowing U-Boot to be loaded by
-partition name (tried first) or partition number as a fallback.
-SPL_LIBDISK_SUPPORT is automatically selected when this path is
-chosen.
+Add an SPL_PARTITION_GET_INFO bool symbol in disk/Kconfig and have each
+consumer (EXT4, FAT, SquashFS, MMC raw-mode partition and partition
+type, and UFS raw-mode partition) select it. Replace the list of checks
+in part.h with a single check on CONFIG_SPL_PARTITION_GET_INFO, so a
+new SPL boot method only needs to select the symbol to get partition
+lookup support.
 
 Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 ---
 Changes in v4:
-- No changes
-
-Changes in v3:
-- No changes
-
-Changes in v2:
-- Introduce SPL_UFS_RAW_U_BOOT_USE_SECTOR to clearly select between
-  sector based or partition based lookup
+- Replace the ad-hoc part.h OR-chain check with a proper
+  SPL_PARTITION_GET_INFO Kconfig symbol selected by consumers
+- Drop Varadarajan's Reviewed-by as the approach changed
 ---
- common/spl/Kconfig | 46 +++++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 43 insertions(+), 3 deletions(-)
+ common/spl/Kconfig | 6 ++++++
+ disk/Kconfig       | 8 ++++++++
+ include/part.h     | 4 +---
+ 3 files changed, 15 insertions(+), 3 deletions(-)
 
 diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index c837f831212..a32c5fd11e6 100644
+index a32c5fd11e6..adeb2ccc7a7 100644
 --- a/common/spl/Kconfig
 +++ b/common/spl/Kconfig
-@@ -1660,13 +1660,53 @@ config SPL_UFS_RAW_U_BOOT_DEVNUM
- 	  SCSI device number, which might differ from the UFS LUN if you have
- 	  multiple SCSI devices attached and recognized by the SPL.
- 
--config SPL_UFS_RAW_U_BOOT_SECTOR
--	hex "Address on the UFS to load U-Boot from"
-+choice
-+	prompt "Method for locating U-Boot on UFS"
- 	depends on SPL_UFS
-+	default SPL_UFS_RAW_U_BOOT_USE_SECTOR
-+
-+config SPL_UFS_RAW_U_BOOT_USE_SECTOR
-+	bool "UFS raw mode: by sector"
-+	help
-+	  Use absolute sector number for specifying U-Boot location on UFS LUN.
-+	  When selected, SPL_UFS_RAW_U_BOOT_SECTOR specifies the sector offset.
-+
-+config SPL_UFS_RAW_U_BOOT_USE_PARTITION
-+	bool "UFS raw mode: by partition"
-+	select SPL_LIBDISK_SUPPORT
-+	help
-+	  Use a partition for loading U-Boot when using UFS in raw mode.
-+	  You can specify either a partition name or partition number.
-+
-+endchoice
-+
-+config SPL_UFS_RAW_U_BOOT_SECTOR
-+	hex "Sector offset to load U-Boot from in UFS raw mode"
-+	depends on SPL_UFS_RAW_U_BOOT_USE_SECTOR
- 	default 0x800 if ARCH_ROCKCHIP
-+	default 0x0
+@@ -575,12 +575,14 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
+ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+ 	bool "MMC raw mode: by partition"
+ 	select SPL_LOAD_BLOCK
++	select SPL_PARTITION_GET_INFO
  	help
--	  Address on the block device to load U-Boot from.
-+	  Absolute sector offset on the UFS LUN to load U-Boot from.
- 	  Units: UFS sectors (1 sector = 4096 bytes).
-+	  Note: Setting this to 0x0 will load from the start of the LUN.
-+
-+config SPL_UFS_RAW_U_BOOT_PARTITION_NAME
-+	string "Partition name to load U-Boot from"
-+	depends on SPL_UFS_RAW_U_BOOT_USE_PARTITION
-+	help
-+	  Name of the partition to load U-Boot from in UFS raw mode.
-+	  This is tried before partition number lookup.
-+	  Leave empty to skip name-based lookup.
-+	  Example: "boot", "uefi", "dtb_a"
-+
-+config SPL_UFS_RAW_U_BOOT_PARTITION_NUM
-+	int "Partition number to load U-Boot from"
-+	depends on SPL_UFS_RAW_U_BOOT_USE_PARTITION
-+	default 1
-+	help
-+	  Partition number to load U-Boot from when using UFS raw mode
-+	  with partition support. This is used if partition name is not
-+	  specified or not found.
+ 	  Use a partition for loading U-Boot when using MMC/SD in raw mode.
  
- config SPL_WATCHDOG
- 	bool "Support watchdog drivers"
+ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
+ 	bool "MMC raw mode: by partition type"
+ 	select SPL_LOAD_BLOCK
++	select SPL_PARTITION_GET_INFO
+ 	depends on DOS_PARTITION
+ 	help
+ 	  Use partition type for specifying U-Boot partition on MMC/SD in
+@@ -771,6 +773,7 @@ config SPL_ETH
+ config SPL_FS_EXT4
+ 	bool "Support EXT filesystems"
+ 	select SPL_CRC16 if EXT4_WRITE
++	select SPL_PARTITION_GET_INFO
+ 	help
+ 	  Enable support for EXT2/3/4 filesystems with SPL. This permits
+ 	  U-Boot (or Linux in Falcon mode) to be loaded from an EXT
+@@ -780,6 +783,7 @@ config SPL_FS_EXT4
+ config SPL_FS_SQUASHFS
+ 	bool "Support SquashFS filesystems"
+ 	select FS_SQUASHFS
++	select SPL_PARTITION_GET_INFO
+ 	help
+ 	  Enable support for SquashFS filesystems with SPL. This permits
+ 	  U-Boot (or Linux in Falcon mode) to be loaded from a SquashFS
+@@ -789,6 +793,7 @@ config SPL_FS_SQUASHFS
+ config SPL_FS_FAT
+ 	bool "Support FAT filesystems"
+ 	select FS_FAT
++	select SPL_PARTITION_GET_INFO
+ 	help
+ 	  Enable support for FAT and VFAT filesystems with SPL. This
+ 	  permits U-Boot (or Linux in Falcon mode) to be loaded from a FAT
+@@ -1674,6 +1679,7 @@ config SPL_UFS_RAW_U_BOOT_USE_SECTOR
+ config SPL_UFS_RAW_U_BOOT_USE_PARTITION
+ 	bool "UFS raw mode: by partition"
+ 	select SPL_LIBDISK_SUPPORT
++	select SPL_PARTITION_GET_INFO
+ 	help
+ 	  Use a partition for loading U-Boot when using UFS in raw mode.
+ 	  You can specify either a partition name or partition number.
+diff --git a/disk/Kconfig b/disk/Kconfig
+index fc30c13cee2..7a02c48365c 100644
+--- a/disk/Kconfig
++++ b/disk/Kconfig
+@@ -26,6 +26,14 @@ config SPL_PARTITIONS
+ 	  partition table types shold be enabled separately. This adds a
+ 	  small amount of size to SPL, typically 500 bytes.
+ 
++config SPL_PARTITION_GET_INFO
++	bool
++	help
++	  Enable this when an SPL boot method needs to look up a partition
++	  by name or number (part_get_info_ptr() resolves to a real
++	  function rather than NULL). Selected by whichever loader needs
++	  partition lookups, rather than being tested for directly.
++
+ config TPL_PARTITIONS
+ 	bool
+ 	select TPL_SPRINTF
+diff --git a/include/part.h b/include/part.h
+index 1dc510cb6b1..7c885928b62 100644
+--- a/include/part.h
++++ b/include/part.h
+@@ -463,9 +463,7 @@ ulong disk_blk_erase(struct udevice *dev, lbaint_t start, lbaint_t blkcnt);
+  */
+ #ifdef CONFIG_XPL_BUILD
+ # define part_print_ptr(x)	NULL
+-# if defined(CONFIG_SPL_FS_EXT4) || defined(CONFIG_SPL_FS_FAT) || \
+-	defined(CONFIG_SPL_FS_SQUASHFS) || \
+-	defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_ANY_PARTITION)
++# if defined(CONFIG_SPL_PARTITION_GET_INFO)
+ #  define part_get_info_ptr(x)	x
+ # else
+ #  define part_get_info_ptr(x)	NULL
 
 -- 
 2.34.1
