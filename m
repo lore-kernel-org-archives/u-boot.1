@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1D99CCF2DB
-	for <u-boot@archiver.kernel.org>; Mon, 19 Oct 2026 10:41:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 097E2CCF2DB
+	for <u-boot@archiver.kernel.org>; Mon, 19 Oct 2026 10:41:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 95CE8406CA;
-	Mon, 19 Oct 2026 10:41:08 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C2CD760722;
+	Mon, 19 Oct 2026 10:41:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oOMgAuvpr_l1; Mon, 19 Oct 2026 10:41:07 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5CCE4406AC
-Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1792406467;
-	b=ii3i8h4YErTtj2LQPXmbfHhjiAj5v6ZaqxgbwO0qexgRNg8UmqBxqoV34SRtqQ9Ev3MD
-	 YyZ7hG1JYylawEuiFeDuYnuW9ZXIyo2j7N40GT5gcyYfuUNEAUvHbU4T8xcp3SAiaRxpp
-	 WnXLWPjNJfmAE0Yr23ro2nqEwdZB7W6xnSRkEyM9kjM5oIb9b4vGaS4xDnz6M66NxXkf+
-	 SbmgVUEi82EYQzlF0IFw56hoWAVbDs3/dsX5Cl0F7Ue2VSVOUviOi+nqrcThDktyHhz0G
-	 FYIdsOS3T35bthWQTrOBiSeJZvIwq+1ESupqDCtl4eysgKbI7T4uEjOndgnBfzha5xQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id r6RtSGz7KCbc; Mon, 19 Oct 2026 10:41:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 85C5C606CF
+Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1792406492;
+	b=HxONcDzoD2KjYDUpsnwNw5nqiEq74vQdPp57xryykAy3bMObNNBiP/A30wGhUfe2oRXD
+	 bb4xAHLjjS0HVgsqQ7JsrtGaWjIByOg0kwf6fQwIFljE76GIpN/qrZvbfCDxhojV2pL1l
+	 Kdr5hGrOIplk71IoeM/s7umky4d442RnCNGCM06ZjgAbmmEsn/z2z+S/2qbmfg3aOhISS
+	 SsIkpVglIPY51ZoNxgPlksBFwuTAY7EsLIZ4DuVrtBkAKJbgu70JjuYdMtjPQs6wRd7SC
+	 Ww31joDDITqb2j7OS7mYesBe30tIShMGp2LYPC1J4koOKcRSAnrRLxjtbzOL9qZ/Gmw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792406467;
+	c=relaxed/relaxed; t=1792406492;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -50,55 +50,52 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=XmDZHfXolZetn0D6REeLzDtLBWek8RVjKhrUvvqXIsU=;
-	b=ach0WP6BhC1C5JKVdjyGsHk9fG7qZQldDj0UYWopoX60oyJZ9OyT5Zm0jTyEdo+5OzIq
-	 H8QUIpuuB9+HKziBTTRbQN74cspqrAlmHRgNYyHWIbKpjgEOfLg234iOo/OrP8Rj22eZw
-	 ZCXyUKJ2y0z6hkzFHiHX7A5IgQGRG2HRwmHjCtjUwlIWWIfYmW6lHLSEK9Vr3situ28ma
-	 pTKSeGyBYDzXs8QJ1/pyfz0UuLqXq/4sjrHnurinvs8Qqj/90mOsFXqbABhwLw2O+Blm7
-	 CzECkx1xJ821HrvostXGaGt86xJRaZsYVE6J/lP00c6zcWJZUihQMrAV6JBV0eLq68A==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
-	dmarc=pass header.from=ti.com;
-	dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=DBjxXmId;
-	dkim=pass header.d=ticloud.onmicrosoft.com header.i=@ticloud.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-ticloud-onmicrosoft-com header.b=eWp2uyhr;
+	bh=MNy3BVQZIMy+wL9KzWpFREIYaTY3J9F/1aeTpfaxDec=;
+	b=oxnEnmF9VG5C8ww61KUdISP2ZnUFjxtra5dACGq98EjAnWQiblm2O8rvcUqWHGMEjtYj
+	 SWN8Ww0/OAXq9ptM1shZH5J7nZ5Fyfra5gVPioCbAXLxIoK9w7J1pi3Jy1+wAmzNdZAqo
+	 1Lq5fw5UcvHbZN3Ydym3t+o5VnDFL+wEVvrBzVaF/xb1rLNWhBcO45asDlqEtD00TLa+V
+	 GKHVtyAnT7EgiG/mzWc93+Hw325DVq6IZEv8dNQUdtqf1xoTv2fNhizPRrj/Ddhah8G5c
+	 aWbOn4P8GN7U9MHksR9hCbFtAgcFEzNj9fPQDKoPeW6r65GtRbrO1S+l5PgRAhCgOug==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
 	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792406467;
-	bh=XmDZHfXolZetn0D6REeLzDtLBWek8RVjKhrUvvqXIsU=;
+	d=lists.u-boot-project.org; s=default; t=1792406492;
+	bh=MNy3BVQZIMy+wL9KzWpFREIYaTY3J9F/1aeTpfaxDec=;
 	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=MNzlbmXzzl6tERqIBmQ9lc/5H+HD5TZFtBZ7h+7s3tO53kZOZijnTsET2solSLwcf
-	 KBsOAaWz+dTYuD6WnhXgckTCeFv1MowL7wXD0HMjfeFdLhBcpMsLR3NiTN2O5hXqex
-	 WoqUCx9I5AyCmCmW2qFyHWWS59r/IFa9soZfsPQoAHLFfbLklkmzONqawZAdVvtCTz
-	 IDIfiOLn55jhnny+MWnrqoqci/7FMtplq+ZJSs0S/jTIdyyyeBZ2t85fBvWXDa1osg
-	 fpEk7Cxfe30AOGcgnCQBUCMJW5lq0DVVQaBbT1lS63zc1HmuVqzaE5/7mf0j1hI8uM
-	 XMCsaK571eeMw==
+	b=CHCk2q85H/PLmrDro9qs5CSMwL0NagvbC23NCofosfml0l/QFX9ilJOmTRnG3PqLu
+	 JUBZ0I497+t7k0cIW30h0Dl7elo23P53Kf4p/PSgOsDxmoGpUSe1ghfZjcqKMjbPwm
+	 LUIg0mmqfx1FbIUOM1yXhf/oZtyZdpuXla+ThMrBRH3zvBC4fvWAEXh8o5FPORN9o1
+	 o05W4scztPSlHEZnnPdG7wWQWTEFuGZSd34IzCwKeStNbFKijuMB3WetjDNiRBSGAG
+	 oKnARYBqVXUZOWVovV6F6Za/DY67WL/Y3PHQL5jBCfJrmSFZBvVpDjawylQ4ILER2U
+	 mdXooZPu/9DPw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5CCE4406AC;
-	Mon, 19 Oct 2026 10:41:07 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 85C5C606CF;
+	Mon, 19 Oct 2026 10:41:32 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 6F0D31AB
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:41:06 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 118E0D7E
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:41:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 5547F4069A
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:41:06 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0F3AD406FC
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:41:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pbHjF3v3pNTM for <u-boot@lists.u-boot-project.org>;
- Mon, 19 Oct 2026 10:41:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 16014406A0
+ id i8NphuxTNSrE for <u-boot@lists.u-boot-project.org>;
+ Mon, 19 Oct 2026 10:41:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D177F406A0
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip=148.163.150.75
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792406465;
- b=YNnqRZY59wDkesp1QVMp/Sj2zl1UrbAJ7wk9drlX97JDcBT0WbOjRfEolem+nhFykg96
- 35MPycChqLDaUp1qQKa2OKiOlwI8t/uXXWKk6iZZgtA8BHS8Ee4bZyCCbWlatJXCvcS1h
- OsWio+HnIgJfi2TxbMXt/UXOlH3J0BswaMKRPGcll1fgfEKFHkm8O1JlX7gSk6K7icpe8
- Y+rd0SDaWora33qvvFPKWhJux6lBXnvWc/DhxHvGN84cOQ8is2QqqsnYvhPkB+1UY4TDX
- VnSQpQYwTE4/9JFCjDgxIm9dO61bEGqXDCfCESTQL5oA1BKjhEZJJZg4I3i8tYiQtOA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792406490;
+ b=ghoOpeWoWu8ZJnglmCFin+wxytSWmpGVTiDkIgLmgVgkXtBl/7rwIQvUmUdbMb7ovFAm
+ rrWf8zZzCQ0cnrKAAxx8VNwEb++gcHdFc8w9nccnOca7Mqvnozj+nAofkKUSlQcrHc+BS
+ vymRlctRN7i/AItr4sSl7D/8733v38WfekewCEHrCDYEAM92p5kPPjtzBo0s5hPblCJsi
+ g/ObmNl/fz0WYxVs1Ucll6Uw2xU5sFTuQP0A+PnRCmaGggXjFSloLjHYbzaJ9mwZN0/rC
+ NzCHm2O4uiXwlXddwf7JYmuDU+jimo9BGy7BhoXP3zXeg1OVEgRO6E62p9iWdwMSYsg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792406465;
+ c=relaxed/relaxed; t=1792406490;
  h=Received-SPF:Received:DKIM-Signature:Received:DKIM-Signature:
  Received:Received:X-MS-Exchange-Authentication-Results:Received-SPF:
  Received:Received:Received:Received:Received:From:To:CC:Subject:Date:
@@ -121,19 +118,19 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
  X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
  X-Proofpoint-Spam-Details;
- bh=XmDZHfXolZetn0D6REeLzDtLBWek8RVjKhrUvvqXIsU=;
- b=LKKaPYxsq1cML3cI50sQIPODrrVOKrq9S3yQe5Oo4UfFJxJ4/2F7qgZVwNTnu/lr/6xQ
- 3IgBoAVq6d6yNJLJMjz6WarmkuFRs/7BuhvcXrmCiz0IOlWH2z0Vd6eOIcay0KVElIRNV
- RClsh+Gfa2ZaDNzTcRtzvUmFg8ADdwsOOL5ZXtgjX/y5Emab8obeW95MUWFWAXdT716oC
- qebRshHABTduZB1VQ5HKjy3yrap+j+xA+OscJwH4+u8AgWeWNi2QZpt5RX0rgVccRKsob
- sVD0T4JcxOs5G6xqxMO8kdEIcRebE1EaSgC8MaIVEbd6+px7B64dBFNYCBWgGhGVIqg==
+ bh=MNy3BVQZIMy+wL9KzWpFREIYaTY3J9F/1aeTpfaxDec=;
+ b=LhfMqhJ9tWLprNc8SEyFDEttYK3RH1fqNdXsC3JTF5ej3+rakY2QsnYpci1y6QzlKFZG
+ nzahYnnjntUPOOOxoGhMBPZzputmlsZgxKjEJZqqEmhtvArMJCbD9a8eEbBRgZDTtPlKS
+ urmVemkdAVFSnIZw/hfkh9TwbYcXdKs0OHtD09FVpyNJq29p2+vCZO45DG9BMRB9Sg7gP
+ b9muLkNIFxd7Nn4fe4T2V3uF2T35ozWcC8+LSN+MJTAx3s4hQHLi09kOdm+zKdiJpfL4o
+ /ROV6IWO++4rg1oCKanii0/euzHVPdM59aWPfG4IWTPkNlV9Es5KdHwnmiTKC0fitYg==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
  dmarc=pass header.from=ti.com;
  dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256
- header.s=proofpoint-05-2026 header.b=DBjxXmId; 
+ header.s=proofpoint-05-2026 header.b=cAxoDg6x; 
  dkim=pass header.d=ticloud.onmicrosoft.com header.i=@ticloud.onmicrosoft.com
  header.a=rsa-sha256 header.s=selector1-ticloud-onmicrosoft-com
- header.b=eWp2uyhr; 
+ header.b=Dg1mH7iN; 
  arc=pass header.oldest-pass=0 smtp.remote-ip=148.163.150.75
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.150.75;
  helo=mx0a-0002e601.pphosted.com; envelope-from=b-padhi@ti.com;
@@ -141,95 +138,94 @@ Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.150.75;
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
- header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=DBjxXmId; 
- dkim=pass (1024-bit key,
- unprotected) header.d=ticloud.onmicrosoft.com
+ dkim=pass (2048-bit key) header.d=ti.com header.i=@ti.com header.a=rsa-sha256
+ header.s=proofpoint-05-2026 header.b=cAxoDg6x; 
+ dkim=pass (1024-bit key) header.d=ticloud.onmicrosoft.com
  header.i=@ticloud.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-ticloud-onmicrosoft-com header.b=eWp2uyhr
+ header.s=selector1-ticloud-onmicrosoft-com header.b=Dg1mH7iN
 Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
  [148.163.150.75])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 16014406A0
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:41:04 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id D177F406A0
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 10:41:29 +0000 (UTC)
 Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
- by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 69J8MwRZ3814202;
- Mon, 19 Oct 2026 05:41:02 -0500
+ by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 69J8MxXh3814258;
+ Mon, 19 Oct 2026 05:41:27 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
  :content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=
- proofpoint-05-2026; bh=XmDZHfXolZetn0D6REeLzDtLBWek8RVjKhrUvvqXI
- sU=; b=DBjxXmIdp95pjrS53bJRn7bkJHFYpSeC067mtTCWwEr2MDkGiZLJfohnn
- 0l+aTw/GRXrg49UouASAznmkIxE6R/bWQYGw7H9EMZVz3/zTd1pEli64isKGlXON
- dH6tqScVE0DVTIxafViGzRci+9H+UHFYV6PAlXD8JQXR1JAfAzgWjpRq03+4Kaxj
- g7pi90kKebQMi3qzwRt6iFEogjyGCUGqEKXYKLKi3cbioJyJKRCMNlhcpaIMWva4
- qefQR5p+u99HS9c9Nz5QxOf6PPHtyt5lhEfarexat14aTLBvkGqbUlnChygoMUPK
- Osb0Un//rdiB3v4eSiqkwDojnXcUA==
-Received: from ph8pr06cu001.outbound.protection.outlook.com
- (mail-westus3azon11012069.outbound.protection.outlook.com [40.107.209.69])
- by m0380145.ppops.net (PPS) with ESMTPS id 4hct1jn5hy-1
+ proofpoint-05-2026; bh=MNy3BVQZIMy+wL9KzWpFREIYaTY3J9F/1aeTpfaxD
+ ec=; b=cAxoDg6xJorexGAW8VOUCie/AFeyLZIcqSMZLuLh57a6DJXX3vX2BiDYE
+ dec2xh/OvyFfYMOudAP6Me6V8vs9fx9mWLbSkKu3DibUoxkL/8qMlnWTpOQTmi2U
+ Qqb649Cc+M4dyhWBObXBUtcusZn/0i9R9/wSiAP0TrwovoNQ3fWbNw8POc6UMwbs
+ ZHob3JB9ZzAuwYwfyqgxq+K5rdhuu2V4EkcZDvIdRHIARg2iTqO5YGOkKoUermZv
+ natfCM0eIgVxQTyAwFgxyflqsDzwc7A/7NIwt4EcgLyP5GjbxBxoylZ6D4J8LQ30
+ ZEbWkIlwjyK4bW1iP/YqpW7z/Ia3Q==
+Received: from dm1pr04cu001.outbound.protection.outlook.com
+ (mail-centralusazon11010008.outbound.protection.outlook.com [52.101.61.8])
+ by m0380145.ppops.net (PPS) with ESMTPS id 4hct1jn5k5-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Mon, 19 Oct 2026 05:41:02 -0500 (CDT)
+ Mon, 19 Oct 2026 05:41:27 -0500 (CDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MBZozu6R0USmg6Mo+myTRqorHh/8Y1koxZoF0syC13YgseKRexUoJjlo1NIfC80ii0XEdGz21NDV9zoyoMLETdb3iF8Ofan6FetCPTwahCjfg0rVPped/eq5uT5WmtBwJ+PLDoLCT/UttnNtXwYQxnIFuPbEODV2aSnzcq19OmxfLhrXH1U4h0thVHEfFz6DSOgYV6Fqdt6icE3sDUkDaNEebQf4OgPdkzw9kDN488bsKITvgmpJNUmLES0IzO61+lzkC6DRaKr8QLqOfovXDlU8lXIhcimDxVOQsVL5rvl43JtNlnxEa6mqFyTdYuOWvfXrWHQzxAzvFw0A0w+KKw==
+ b=Nm4pkB8Mkm4zaE6xonScS8+J9T8drneOi83TMphe683CwIWx70UyvKU959ioJ//OLYioNHQYR5B0JwyDpbNAO+GufJ+m4zK/JRQ2AIWtnmtkHvbKzb9RFjsmvWedyCo7HuIkJcl3ZEIe3G95+wqCV99G4YsSBldAcLdu20wZqk4lsHdNdsnRKLJsDtCr90SzwAzIj+GgPyJoRmy7De7j+O3F7mFJ02tEzqPuVY/NAD3oMwDVzwiGdNnHmVm/zT/ctsK+FLcuo5VCAnJ+Vu/LS5F7HDjpw4+R+J7QomicLHTaf07w+NxUcMInu+2hDRp4eYnTkASgc59m1hpAx255wA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XmDZHfXolZetn0D6REeLzDtLBWek8RVjKhrUvvqXIsU=;
- b=KA9xSc9lw+o1ODot/tKU2ehIe2CtZGapio6lNxDpAY3RrAqWN9l0KalWkOdRbVOpLt42P3K8OUngYObBuK3Qj/yxf5M13OwFjcxx4qwuEyr9jGD9RTmaX5/Ti1eX9KL5WbMTWzwlZnsujBlw70Ssfadup4Qq1fpGXNOnSUcKCDL6xxLVmscm8nFtYhN6iyWbptRTM8hyeOumC9deh+rDKXEf5M5Gz+5gUFbguAVGRq48PnoEasTC7jZPUO3bkay4ZQhFOX1sowNPUfJeejv/D6yh1lCSSP3Z9wU0S6NUSBtfIRhRlS1V27vM4gwGEEi/Ov9bielMcXXKWtdQGIC/ZA==
+ bh=MNy3BVQZIMy+wL9KzWpFREIYaTY3J9F/1aeTpfaxDec=;
+ b=xLOgxJtqJABjSv5qSBXWMX+pCdCpvOWzvA0P3Wu9dWqMrs9U9G9/WRlzEbMHTV3MM6C5uj/3D7g3+RQ7bqM+R86kByvj0h4+tD+3ftNynjlFKXkAXk/cIi3jG+w+Js470+o7AE+gK57q6WoAsIjEjNCAp8d+F3xo7EG5cBe63XnJ3XUbm89zt+Fqu745B9ZnBGPC7TBAUoz3nHZgAnbUIsEBPHTbD60ffV3Y+yrfdU7a4GeH2oTQOAvNvY330uNaBt5O5vCXkhTExHYnHnCVDEc3QbvlyIJyDlYK2lOm8V35S+s9bJOhWAwEsh5QqeBGXpMJuAuUi9ZHZSH/a3mMeQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.u-boot-project.org
+ 198.47.23.194) smtp.rcpttodomain=lists.u-boot-project.org
  smtp.mailfrom=ti.com; dmarc=pass (p=quarantine sp=none pct=100) action=none
  header.from=ti.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ticloud.onmicrosoft.com; s=selector1-ticloud-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XmDZHfXolZetn0D6REeLzDtLBWek8RVjKhrUvvqXIsU=;
- b=eWp2uyhrs1M+kueYa9UTE3IOv2IFXV7RleHpegwvvO46xrptshsz9JVxuBvnqZDGRC2523n5+esJWlRwh6+grPa8W6V1uyYpxS9V6cn7ZFAXiyXTN+zTEbVAdyCNnLTgL1xSHmHqa/mxqo7bpilVJclrjtFBd/vhpPKzzTCjjv0=
-Received: from PH8PR15CA0008.namprd15.prod.outlook.com (2603:10b6:510:2d2::27)
- by DM6PR10MB4201.namprd10.prod.outlook.com (2603:10b6:5:216::10) with
+ bh=MNy3BVQZIMy+wL9KzWpFREIYaTY3J9F/1aeTpfaxDec=;
+ b=Dg1mH7iNYSSD+cxtU3HU5eegvRkRkHGMIM63Ixj6hPWShc0asxL5qAt2oMelnFxtU/0sMK52Zt8cennS7aVVRUJDXxQzU8b0E1yVm1t38T/oiHhyEYOgTXVOg3tHGUHiIJV6uYan8CkIG67mjKmwXjROXy1RhTYubkgOiqwUgvQ=
+Received: from PH0PR07CA0044.namprd07.prod.outlook.com (2603:10b6:510:e::19)
+ by IA1PR10MB7142.namprd10.prod.outlook.com (2603:10b6:208:3f4::18) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.14; Mon, 19 Oct
- 2026 10:40:55 +0000
-Received: from PH4PEPF0000B610.namprd21.prod.outlook.com
- (2603:10b6:510:2d2:cafe::a2) by PH8PR15CA0008.outlook.office365.com
- (2603:10b6:510:2d2::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.20 via Frontend Transport; Mon,
- 19 Oct 2026 10:40:55 +0000
+ 2026 10:40:23 +0000
+Received: from SJ1PEPF000026CA.namprd04.prod.outlook.com
+ (2603:10b6:510:e:cafe::4f) by PH0PR07CA0044.outlook.office365.com
+ (2603:10b6:510:e::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.19 via Frontend Transport; Mon,
+ 19 Oct 2026 10:40:23 +0000
 X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 198.47.21.195) smtp.mailfrom=ti.com;
+ is 198.47.23.194) smtp.mailfrom=ti.com;
  dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- PH4PEPF0000B610.mail.protection.outlook.com (10.167.243.91) with Microsoft
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SJ1PEPF000026CA.mail.protection.outlook.com (10.167.244.107) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.569.0 via Frontend Transport; Mon, 19 Oct 2026 10:40:53 +0000
-Received: from DFLE204.ent.ti.com (10.64.6.62) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ 15.21.522.6 via Frontend Transport; Mon, 19 Oct 2026 10:40:23 +0000
+Received: from DLEE204.ent.ti.com (157.170.170.84) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 19 Oct
- 2026 05:40:13 -0500
-Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 05:40:05 -0500
+Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE204.ent.ti.com
+ (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Mon, 19 Oct
- 2026 05:40:13 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 05:40:05 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Mon, 19 Oct 2026 05:40:13 -0500
+ Transport; Mon, 19 Oct 2026 05:40:05 -0500
 Received: from uda0510294.dhcp.ti.com (uda0510294.dhcp.ti.com [10.24.50.162])
  by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
- 69JAdgTn2629975; Mon, 19 Oct 2026 05:40:09 -0500
+ 69JAdgTl2629975; Mon, 19 Oct 2026 05:40:02 -0500
 From: Beleswar Padhi <b-padhi@ti.com>
 To: <trini@konsulko.com>, <sjg@chromium.org>
 CC: <afd@ti.com>, <bb@ti.com>, <anshuld@ti.com>, <hnagalla@ti.com>,
  <jm@ti.com>, <nm@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
  <b-padhi@ti.com>, <u-boot@lists.u-boot-project.org>
-Subject: [PATCH v8 7/7] doc: board: ti: k3: Add section for HSM M4F core
- loading
-Date: Mon, 19 Oct 2026 16:09:42 +0530
-Message-ID: <20261019103942.2497201-8-b-padhi@ti.com>
+Subject: [PATCH v8 5/7] remoteproc: k3-hsm: Introduce a remoteproc driver for
+ K3 HSM core
+Date: Mon, 19 Oct 2026 16:09:40 +0530
+Message-ID: <20261019103942.2497201-6-b-padhi@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261019103942.2497201-1-b-padhi@ti.com>
 References: <20261019103942.2497201-1-b-padhi@ti.com>
@@ -238,49 +234,50 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH4PEPF0000B610:EE_|DM6PR10MB4201:EE_
-X-MS-Office365-Filtering-Correlation-Id: fa653601-4e13-4793-1771-08df2dcd7372
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000026CA:EE_|IA1PR10MB7142:EE_
+X-MS-Office365-Filtering-Correlation-Id: 83a25f1a-c3ac-4e30-c7a1-08df2dcd6153
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|82310400026|36860700016|1800799024|376014|18002099003|22082099003|10067099003|3023799007|13003099007|261009223027099003|56012099006;
-X-Microsoft-Antispam-Message-Info: Wv0aqxJp4jw0zcArpzgwQVPf9hbFy/9Qg1YVoP+/G7OXH107C9MotTLxDvn7+KkFA0FJYSbY8CSoGTjJ8VjrNEzJVP3zh3Zwo4cgKboQsB/i7k97RbJFDXTe+KVbZoRxEUIZhSTATqKwbppr6tM5Os9aFOunNU6bR2wFsgIlS4+G/YJlyK1i6Ida8yof16Rh6fKPnMCt4/HJeI6QwvC59ri/qSmKD6ATnHyqVO9rrA/towA2CbkxIBK6oYupxwSfuPOh+CGYJaYyFTatbg3GtsvWcauO1ftyFcOQEftX4wxjj+PqYXmhvf+6BBHgKMEXPBdeRXRVyB3lTlIKeSQSIQlt52oxIi5soYYFsxhDh4Yf9Mt8yHk/JGrFbitl2Oz7HfVs7sHb1Z2ZTTP/Glz0HOf+Fbamcgg/kXZAeElKaJv/rD/FC6D5b1oNRah1pfL+kbneJEGsPRLthAA2jKjlXjgdbcCB5BFrSKX2m3OaHVGI2RdG6f5rHFE/Yvt+H3Y8xm2exoIKFrDaFhYgbuM5y7YWSP2qFZe5mRcAn6ZLIHsJrLMSzKY+gJXVgLu4H42avAOa2bpbDOkPOZCX4kVqoo3tBzF4eDRJ7qvs7zXwJDtbBKuYOhasPxJ8xlM69t9kvD45/7Jsbu5SrI9Yfi0qXg==
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(23010399003)(82310400026)(36860700016)(1800799024)(376014)(18002099003)(22082099003)(10067099003)(3023799007)(13003099007)(261009223027099003)(56012099006);
+ ARA:13230040|36860700016|82310400026|376014|1800799024|23010399003|18002099003|22082099003|10067099003|3023799007|13003099007|260925021911599003|260925022911599003|260925021311599003|261009221727099003|261009221227099003|261009220027099003|261009223327099003|261009223027099003|56012099006;
+X-Microsoft-Antispam-Message-Info: 2TS3G1A/ppKt+KnHwhNCnJiVB///N1KkQ7jxQ1D2DpPSIZW4QMF9cZnQJ6eBDL6YUhbQOaGbCJCXa4rHqZmNujmYmQSP4BqqgeZs1YMJ/FXIkoB6Vl7cd2sxBQHkpKtKYVEc4qHEd50GVPyXPD1aJ0t+ED8Xca+jY/hc6rUiyv5oz/2JRIrJ5OTCRS8/FuXOp/67jrqhcny/t4fkRnpbp9fRuxBkSZRFFiY/XdMHNl4IC33Q8QQo9HHcwYA9bbbNTdT5M1q9wXLHrTRYKRuk0n8hG/yHj23Ls33bbk9fqtKLQASuEK0dz3lRO8lzNkrpohWDgsJXnI42CmoArArEv99HS7NL1oW3HSfSqzKIHaJDSFW1x+cfAvDXSmCeLzn0RzTHzHAJpEA1Ae8emSmVA8FnQexGQFbkcLwTehayLHzuKuLdn2U5A7pgtIe+I3MOqnwnM0zTB7Le+CssopmUXpnL7d2ly2eiTT8Qwagu5GHPdOcmdYujlcAfv+gRadN8XozvRZI85HZ3RmomSS0leXhV/Uoe3932jYQeMQMY4j68BzD56lNP3otbRwspa5Vj2SngOhVyZ6cs14NQfsLTpfkdA/y+CPEt9NLGjxBAzwFj1hy6cwwPTGOIou4GVGmFFUGZp7fp3B6xwJ4vK9QTtw==
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(376014)(1800799024)(23010399003)(18002099003)(22082099003)(10067099003)(3023799007)(13003099007)(260925021911599003)(260925022911599003)(260925021311599003)(261009221727099003)(261009221227099003)(261009220027099003)(261009223327099003)(261009223027099003)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 2yPnz/BAZ+S3Fb/FX9Ek0roHYHqgEuJtV751Qrq2fgWZvMsMtJAKoPiKlMgZGI//VoJkaPtm6ZJ/gl1tPPtQ13ThGz/kI/JrsSit2EKi+Kydkl4SKJgnT/UrXeOyNawxmTXGYLKkTrCOv2DVbqYDT6T/4EMyN0SgCmYPH5G8vBIhvbvB8hCw041R2fZACo55+lbgjU0pvXEDCD7GQn3/C9dIW7Ox8PcDJpSxzQRlzk8dord2I34AymyQJQGoHJgaCm9/zQHKOklxHfgWAWJGT8vbjmQ32yoShw0Rn9WuKS3iDHpS3UNPEZ7Sk58QnxFmm4irYel5W3G9ohDpb6vhV0ml0xXlil1h8yPrTlQkxRiYWvd9ahU8jXLLhH+cFaNNQFMGIaygEy0eF0lMUkimrie3DmfZoS3WNjoHFOgKrbTB9CsEuT9fnuRsdL45sIbA
-X-Exchange-RoutingPolicyChecked: XZtH4OTW8e034tDKfC7ROs7da4TIu5fgmboHzPwhpMT760DDFug+gZytClCnzIiJp5TRwU+ZlA/jWb0aKpPBP3xYkiiU/vzPVKRo/sBv0p15j6j5zbIsh2BCywm3C2Mok+R+B9I6bfscE+9ypW8Adj0nyYss8160x9MHtT1TXA2OL6gUpsclJSNvC2dCtef8aXD9b1HuLWbwjCs4Lt6EZoYJyZHNreLBL0LMB/tOTZR/aB+FoHT1I/WTmXGcSu2NIeyxmj9QiNqJjt66LptgclfUE7hfp/LL1XhZpzzPqtuEs5VpifSWQdTc58VyzJ7bflINqHs4uXDeTt5xa0IT6A==
+X-MS-Exchange-AntiSpam-MessageData-0: vGont1VAYJwTor8CGffB9m5MLniGNlNTtSQG4L1wb+v9f9d4Pl9RTHCFRns3Ye3s8CoX29WK/toZDBPtg4W9lgHHyl2LQQJROLquAWXGCfGekVJ9qsjaoPSC2a7q2E6qEEFX/BP5+JtlpmvgrrZRHbAgwr3zf0R//EWK67jvXDr6kmesQdBCwaR9fKiuKBanN2DFTFayx2CpGCpk1+Z+FwGwolRIZGpy+V4g/idFX7oFJZByosmp4HkMxsSJ9r6VRQVe6wEtUITIn5955phAocmFiYTDmeYTf8En+it2KVB3dHeH2iDl0qlfFfY2P47tt1viC9wdphQ3e3sSU091IHWq663uGQGcZKE7PPJFphjIHSrCUA77Y7fa7xDsNsj9PJ/m1eseomzz2ev7WqqHBwqZxkn3a8oVrvQykJCMSnEv9tFLnSvTv20iMUPUdhEv
+X-Exchange-RoutingPolicyChecked: cENnzCfg20oyBmk5o7JRyqdvXXOPTl97/VKOMjy5eq2CUWXFgRMtRuUoWKD824hSEHe+iGffEAPggwFxW3njZOoM8Bbf0VdonCcy+4KLd2jaX8ZNJvYhTzKBvSkooZ6r0rkMN77YVLFtC3cQYzsYc/X9BlLyMOr0ZZtTHwnpfWWlSjkghYcUbtdGL1+qxpwBavq3syf/kfENn3KCC8oQjnD06EQV1x1ggVfU/5kREIz8O3M9d4GZUF7yaCfvWIfJvRuKSaL6GtPePWG9mxWUMG6zPK6oKhRuq6d890RMULXStk7EsPdWYeejo2aGA/ABiMeRZnxHgdLbceu/U4Aq+A==
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Oct 2026 10:40:53.7193 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fa653601-4e13-4793-1771-08df2dcd7372
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Oct 2026 10:40:23.2977 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 83a25f1a-c3ac-4e30-c7a1-08df2dcd6153
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: PH4PEPF0000B610.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000026CA.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR10MB4201
-X-Proofpoint-ORIG-GUID: VkQNsXf76SoW4KLVv1XoYdnNI_tgntMF
-X-Authority-Analysis: v=2.4 cv=ZN9CCn7b c=1 sm=1 tr=0 ts=6ad5f3be cx=c_pps
- a=Cwg/eoBiIzPoLCvUJpemAw==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=660iZSQnnn4A:10 a=AlMIdn_sM9wA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22 a=gO1vWkAQAl3rybz1DQOp:22
- a=VwQbUJbxAAAA:8 a=sozttTNsAAAA:8 a=voM4FWlXAAAA:8 a=NEAV23lmAAAA:8
- a=xyjKfQhMXZlMLvdiQTQA:9 a=IC2XNlieTeVoXbcui8wp:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA0MiBTYWx0ZWRfXycHaYw0w78ZZ
- x7ReNb1V5225rTIFt7si+5DzHVP8TmRzOqVgtC7Lx9blFSwosq9BXLUTdF0rhkbwxQs458gkVJy
- 4sIbo16fmdq5xuBaX33UKfVAeBoOyAvSHxNO7vUP11wlReuAsdZCPo5/OGEu9YOD8joHprGtKgI
- ti1P4TRuu2NJfw5zDz+x26F0oAx2ZqeFzWA9dJQEy5lmmCez0NYl+QDcx6FxbTFtdq7wgne3lIt
- l2nHMYB9ShDqfocjC7xy0ciaQNmEDmR7Qj5czsBruxHZfMRjwB9cONq01MuFZ8wQUp/p93RCerx
- PQk/yvuZ/DkMfNQlMEqfuv1jlYaDVUx/kvN/1r3IPAyYke++ZJVWe8xsV4QneuVUnPzzhEQQ5/w
- G8tsX9MF+U4imy7XKrtvGwjFOTGa/2qoWAf86A2FMLk0auA3Oi7ff5zSruX2vrIg9yhUwT6K2xR
- sIuuNFHzCZbJ0kf/v0g==
-X-Proofpoint-GUID: VkQNsXf76SoW4KLVv1XoYdnNI_tgntMF
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA0MiBTYWx0ZWRfX0sSApnijgZMm
- ZCSHQhTRn2sWu7ljxBDWV1LO0gLaRnnAlBFOwdJ3SkwIp6E3MXnZOmSu5+l3YZFeCI+O7LPrkIk
- YPcpeZPYX1cRibcAAPy4jVrPv1pzXsk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB7142
+X-Proofpoint-ORIG-GUID: Jfnt2dUvTs_HSrlxMXzMRIe5EjVknng9
+X-Authority-Analysis: v=2.4 cv=ZN9CCn7b c=1 sm=1 tr=0 ts=6ad5f3d7 cx=c_pps
+ a=E1AkXC+xFF28g4y6WI75Xg==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=660iZSQnnn4A:10 a=s63m1ICgrNkA:10
+ a=AlMIdn_sM9wA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
+ a=gO1vWkAQAl3rybz1DQOp:22 a=VwQbUJbxAAAA:8 a=sozttTNsAAAA:8 a=voM4FWlXAAAA:8
+ a=cm27Pg_UAAAA:8 a=7Uu7czuuXSSy5kTXNsoA:9 a=IC2XNlieTeVoXbcui8wp:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA0MiBTYWx0ZWRfX7m/FIMgJ4JCy
+ z6aRAVpyQpV1rypz6SeYr56pwtnPBscaBOYjClym8XGgCJNpFrXOw3ds6E88GsF/bQ994Uds8Fq
+ 7l2LiPfP57KkuSakatPtLXRMS52NsmdKAs3dvbPXfLHOnoaUkB6/pv2BxqyB9Md/SFEY0Anilx7
+ rdlfHTwCwo4aybUaskFLD6NlFuPI5EHguss4a2hR0Q9VsSxSDiCN80qa4jDl51b9rP6mIlyRwKh
+ GTE4tYmIjgUCP8MVi4leXiknkZxFeJNIMpo7exBtIdwH30BWbzaUVM8vx418941IxXtbIS2EOGf
+ u8qTODZFZk5CLG1bfC1PCeuJ2ozygJgVJcTOPFs3ZaTaelC6F2ModmuhGgGfr6L8IfdRjoFgbdZ
+ 4MPxNk8D9+o/dgsF4gi9BeNcVN3LUrIPNBFR/YsKduAtv3tw4UbcXsARbJi+yxcw3+pjY7h6UNE
+ bviPo2NFleEGdl8bhEA==
+X-Proofpoint-GUID: Jfnt2dUvTs_HSrlxMXzMRIe5EjVknng9
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA0MiBTYWx0ZWRfX+eEn+wJ7cTC9
+ WfN22+Rd7dAHWDCsYB5+OdjGZlPH4EI4dBaJLzctAxNO063QwNlIJATG8puZOZWhTNNmq8vLS6U
+ L5nF+O3aYMGuJR3Ofct1arIht5+XAgA=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-19_03,2026-10-14_01,2025-10-01_01
@@ -302,217 +299,388 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Add a concise section for loading and booting the HSM M4F core in TI K3
-SoCs like J721S2, J742S2 and J784S4.
+Some K3 SoCs like J721S2, J784S4, J722S, AM62X and AM62PX have a HSM
+(High Security Module) M4F core in the Wakeup Voltage Domain which could
+be used to run secure services like Authentication. Boot flow for HSM M4
+core is different than the general purpose M4F cores, and is as below:
+
+1. Request control of HSM M4F remote processor.
+2. Assert Reset on the HSM M4F remote processor.
+3. For HS devices, Request Secure Entity to Authenticate and Load HSM
+   firmware into core's internal SRAM memory region. For GP devices,
+   load the unsigned firmware manually.
+4. Deassert Reset on the HSM M4F remote processor.
+5. Release control of HSM M4F remote processor.
+
+Add a new remoteproc driver to support this boot flow for HSM M4F core.
 
 Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Udit Kumar <u-kumar1@ti.com>
 ---
 v8: Changelog:
 1. None to this patch.
 
 Link to v7:
-https://lore.kernel.org/all/20260922084536.2477291-8-b-padhi@ti.com/
+https://lore.kernel.org/all/20260922084536.2477291-6-b-padhi@ti.com/
 
 v7: Changelog:
-1. Included the HSM doc in the applicable board specific files.
-2. Carried R/B tag from Udit.
+1. Carried R/B tag from Udit.
 
 Link to v6:
-https://patchwork.ozlabs.org/project/uboot/patch/20260831083347.1168880-8-b-padhi@ti.com/
+https://patchwork.ozlabs.org/project/uboot/patch/20260831083347.1168880-6-b-padhi@ti.com/
 
 v6: Changelog:
-1. New patch. Adds documentation for loading and booting the TI K3 HSM
-   M4F remote processor.
+1. Add a call to ti_secure_image_check_binary() to strip off the
+   certificate for GP firmware. (needed after rebasing to main)
 
- doc/board/ti/j721s2_evm.rst |   7 ++
- doc/board/ti/j784s4_evm.rst |   7 ++
- doc/board/ti/k3.rst         | 136 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 150 insertions(+)
+Link to v5:
+https://lore.kernel.org/all/20260720080114.775206-7-b-padhi@ti.com/
 
-diff --git a/doc/board/ti/j721s2_evm.rst b/doc/board/ti/j721s2_evm.rst
-index 21683b90b1a..db932447e63 100644
---- a/doc/board/ti/j721s2_evm.rst
-+++ b/doc/board/ti/j721s2_evm.rst
-@@ -281,6 +281,13 @@ https://www.ti.com/lit/pdf/spruj68 under the `Bootmode Settings` section.
+v5: Changelog:
+1. Use get_device_type() to detect device type (GP, HS-FS, HS-SE).
+2. Avoid typecasting at certain places.
+3. Check buffer size before doing memcpy() for overruns.
+4. Add R/B tag.
+
+Link to v4:
+https://lore.kernel.org/all/20260425033742.1519298-11-b-padhi@ti.com/
+
+v4: Changelog:
+1. None
+
+Link to v3:
+https://lore.kernel.org/all/20251231173621.1069988-10-b-padhi@ti.com/
+
+v3: Changelog:
+1. New patch. Add a dedicated remoteproc driver to boot HSM core.
+
+ MAINTAINERS                          |   1 +
+ drivers/remoteproc/Kconfig           |  10 +
+ drivers/remoteproc/Makefile          |   1 +
+ drivers/remoteproc/ti_k3_hsm_rproc.c | 268 +++++++++++++++++++++++++++
+ 4 files changed, 280 insertions(+)
+ create mode 100644 drivers/remoteproc/ti_k3_hsm_rproc.c
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 28d090d3c36..9182389363c 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -741,6 +741,7 @@ F:	drivers/phy/ti-pipe3-phy.c
+ F:	drivers/ram/k3*
+ F:	drivers/ram/k3*/
+ F:	drivers/remoteproc/ipu_rproc.c
++F:	drivers/remoteproc/ti_k3_hsm_rproc.c
+ F:	drivers/remoteproc/k3_system_controller.c
+ F:	drivers/remoteproc/ti*
+ F:	drivers/reset/reset-dra7.c
+diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+index 7f9e35283f9..f1e586584f3 100644
+--- a/drivers/remoteproc/Kconfig
++++ b/drivers/remoteproc/Kconfig
+@@ -108,6 +108,16 @@ config REMOTEPROC_TI_K3_M4F
+ 	  on various TI K3 family of SoCs through the remote processor
+ 	  framework.
  
- For SW1, the switch state in the "ON" position = 1.
- 
-+HSM M4F Loading
-+----------------
++config REMOTEPROC_TI_K3_HSM_M4F
++	bool "TI K3 HSM M4F remoteproc support"
++	select REMOTEPROC
++	depends on ARCH_K3
++	depends on TI_SCI_PROTOCOL
++	help
++	  Say y here to support TI's HSM M4F remote processor subsystems
++	  on various TI K3 family of SoCs through the remote processor
++	  framework.
 +
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_hsm_m4f_loading
-+    :end-before: .. k3_rst_include_end_hsm_m4f_loading
+ config REMOTEPROC_TI_K3_R5F
+ 	bool "TI K3 R5F remoteproc support"
+ 	select REMOTEPROC
+diff --git a/drivers/remoteproc/Makefile b/drivers/remoteproc/Makefile
+index 250915d0de4..5f2127fcb05 100644
+--- a/drivers/remoteproc/Makefile
++++ b/drivers/remoteproc/Makefile
+@@ -17,6 +17,7 @@ obj-$(CONFIG_REMOTEPROC_STM32_COPRO) += stm32_copro.o
+ obj-$(CONFIG_REMOTEPROC_TI_K3_ARM64) += ti_k3_arm64_rproc.o
+ obj-$(CONFIG_REMOTEPROC_TI_K3_DSP) += ti_k3_dsp_rproc.o
+ obj-$(CONFIG_REMOTEPROC_TI_K3_M4F) += ti_k3_m4_rproc.o
++obj-$(CONFIG_REMOTEPROC_TI_K3_HSM_M4F) += ti_k3_hsm_rproc.o
+ obj-$(CONFIG_REMOTEPROC_TI_K3_R5F) += ti_k3_r5f_rproc.o
+ obj-$(CONFIG_REMOTEPROC_TI_POWER) += ti_power_proc.o
+ obj-$(CONFIG_REMOTEPROC_TI_PRU) += pru_rproc.o
+diff --git a/drivers/remoteproc/ti_k3_hsm_rproc.c b/drivers/remoteproc/ti_k3_hsm_rproc.c
+new file mode 100644
+index 00000000000..70240ab4aaf
+--- /dev/null
++++ b/drivers/remoteproc/ti_k3_hsm_rproc.c
+@@ -0,0 +1,268 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Texas Instruments' K3 HSM M4 Remoteproc driver
++ *
++ * Copyright (C) 2026 Texas Instruments Incorporated - http://www.ti.com/
++ *	Beleswar Padhi <b-padhi@ti.com>
++ */
 +
- Debugging U-Boot
- ----------------
- 
-diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
-index 54b4b6031f0..179d157206d 100644
---- a/doc/board/ti/j784s4_evm.rst
-+++ b/doc/board/ti/j784s4_evm.rst
-@@ -637,6 +637,13 @@ to the J784S4 endpoint:
- This program copies the boot image to the PCIe endpoint's memory region and
- writes the necessary control words to signal image transfer completion.
- 
-+HSM M4F Loading
-+----------------
++#include <cpu_func.h>
++#include <dm.h>
++#include <log.h>
++#include <malloc.h>
++#include <remoteproc.h>
++#include <errno.h>
++#include <asm/io.h>
++#include <dm/device_compat.h>
++#include <linux/err.h>
++#include <linux/sizes.h>
++#include <linux/soc/ti/ti_sci_protocol.h>
++#include "ti_sci_proc.h"
++#include <mach/security.h>
++#include "../../arch/arm/mach-k3/common.h"
 +
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_hsm_m4f_loading
-+    :end-before: .. k3_rst_include_end_hsm_m4f_loading
++#define PROC_BOOT_CTRL_RESET_FLAG_HSM_M4 0x00000001
 +
- Debugging U-Boot
- ----------------
- 
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index b918f88ff27..f846ad7e4ed 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -759,6 +759,142 @@ resorts to enabling for the entire DDR region:
-     bootph-all;
-   };
- 
-+HSM M4F Loading
-+----------------
++/**
++ * struct k3_hsm_mem - internal memory structure
++ * @cpu_addr: MPU virtual address of the memory region
++ * @bus_addr: Bus address used to access the memory region
++ * @dev_addr: Device address from remoteproc view
++ * @size: Size of the memory region
++ */
++struct k3_hsm_mem {
++	void __iomem *cpu_addr;
++	phys_addr_t bus_addr;
++	phys_addr_t dev_addr;
++	size_t size;
++};
 +
-+.. k3_rst_include_start_hsm_m4f_loading
++/**
++ * struct k3_hsm_mem_data - memory definitions for hsm remote core
++ * @name: name for this memory entry
++ * @dev_addr: device address for the memory entry
++ */
++struct k3_hsm_mem_data {
++	const char *name;
++	const u32 dev_addr;
++};
 +
-+Some K3 SoCs like J721S2, J742S2 and J784S4 have a High Security Module
-+(HSM) M4F core in the Wakeup Voltage Domain. The HSM M4 core is loaded at
-+R5 SPL stage. Boot flow for HSM M4 core is different than the general
-+purpose M4F cores, and is described as below:
++/**
++ * struct k3_hsm_privdata - Structure representing Remote processor data.
++ * @tsp:		Pointer to TISCI proc control handle
++ * @mem:		Array of available memories
++ * @num_mems:		Number of available memories
++ * @total_sram_size:	Total size of available memories
++ */
++struct k3_hsm_privdata {
++	struct ti_sci_proc tsp;
++	struct k3_hsm_mem *mem;
++	int num_mems;
++	size_t total_sram_size;
++};
 +
-+1) Request control of HSM M4F remote processor.
-+2) Assert Reset on the HSM M4F remote processor.
-+3) Load firmware into HSM M4F core's SRAM memory region.
++/**
++ * k3_hsm_load() - Load up the Remote processor image
++ * @dev:	rproc device pointer
++ * @addr:	Address at which image is available
++ * @size:	size of the image
++ *
++ * Return: 0 if all goes good, else appropriate error message.
++ */
++static int k3_hsm_load(struct udevice *dev, ulong addr, ulong size)
++{
++	struct k3_hsm_privdata *hsm = dev_get_priv(dev);
++	void *image_addr = (void *)addr;
++	size_t image_size = size;
++	int ret;
 +
-+   * For HS devices, request TIFS to authenticate and load the firmware.
-+   * For GP devices, load the firmware manually into HSM SRAM.
++	ret = ti_sci_proc_request(&hsm->tsp);
++	if (ret)
++		return ret;
 +
-+4) Deassert Reset on the HSM M4F remote processor.
-+5) Release control of HSM M4F remote processor.
++	ret = ti_sci_proc_set_control(&hsm->tsp,
++				      PROC_BOOT_CTRL_RESET_FLAG_HSM_M4, 0);
++	if (ret)
++		goto proc_release;
 +
-+This User Guide documents how to enable HSM core loading.
++	ti_secure_image_check_binary(&image_addr, &image_size);
++	ti_secure_image_post_process(&image_addr, &image_size);
 +
-+How to enable HSM M4F Loading
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++	if (get_device_type() == K3_DEVICE_TYPE_GP) {
++		/* Ensure firmware fits within total HSM SRAM bounds */
++		if (size > hsm->total_sram_size) {
++			dev_err(dev, "Firmware size (%lu) exceeds total SRAM size (%zu)\n",
++				size, hsm->total_sram_size);
++			ret = -EINVAL;
++			goto proc_release;
++		}
 +
-+By default, only the HSM demo firmware for HS-SE device type is packed in
-+`tispl.bin` FIT image. See the "How to build U-Boot with custom HSM
-+firmware" section below to change the default firmware for other device
-+types.
++		debug("Loading HSM GP binary into SRAM0_0\n");
++		memcpy((void *)hsm->mem[0].cpu_addr, image_addr, size);
++		flush_dcache_range((unsigned long)hsm->mem[0].cpu_addr,
++				   (unsigned long)(hsm->mem[0].cpu_addr + size));
++	}
 +
-+R5 SPL supports loading of HSM M4 core for all device types, i.e., HS-SE,
-+HS-FS, GP. However, this feature is disabled by default. To enable HSM
-+loading, set the ``CONFIG_K3_HSM_FW`` and
-+``CONFIG_REMOTEPROC_TI_K3_HSM_M4F`` configs in both
-+`<soc>_evm_r5_defconfig` and `<soc>_evm_a72_defconfig` files.
++proc_release:
++	ti_sci_proc_release(&hsm->tsp);
++	return ret;
++}
 +
-+For example, to enable HSM loading on J721S2 device, make the following
-+changes:
++/**
++ * k3_hsm_start() - Start the remote processor
++ * @dev:	rproc device pointer
++ *
++ * Return: 0 if all went ok, else return appropriate error
++ */
++static int k3_hsm_start(struct udevice *dev)
++{
++	struct k3_hsm_privdata *hsm = dev_get_priv(dev);
++	int ret;
 +
-+.. code-block:: diff
++	ret = ti_sci_proc_request(&hsm->tsp);
++	if (ret)
++		return ret;
 +
-+  diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
-+  index 806c97792f6..ebe100c2278 100644
-+  --- a/configs/j721s2_evm_r5_defconfig
-+  +++ b/configs/j721s2_evm_r5_defconfig
-+  @@ -187,3 +187,4 @@ CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
-+   CONFIG_PANIC_HANG=y
-+   CONFIG_LIB_RATIONAL=y
-+   CONFIG_SPL_LIB_RATIONAL=y
-+  +CONFIG_K3_HSM_FW=y
-+  +CONFIG_REMOTEPROC_TI_K3_HSM_M4F=y
-+  diff --git a/configs/j721s2_evm_a72_defconfig b/configs/j721s2_evm_a72_defconfig
-+  index 6db41cb457e..a07e6d63270 100644
-+  --- a/configs/j721s2_evm_a72_defconfig
-+  +++ b/configs/j721s2_evm_a72_defconfig
-+  @@ -198,3 +198,4 @@ CONFIG_UFS=y
-+   CONFIG_CADENCE_UFS=y
-+   CONFIG_TI_J721E_UFS=y
-+   CONFIG_TI_COMMON_CMD_OPTIONS=y
-+  +CONFIG_K3_HSM_FW=y
-+  +CONFIG_REMOTEPROC_TI_K3_HSM_M4F=y
++	ret = ti_sci_proc_set_control(&hsm->tsp, 0,
++				      PROC_BOOT_CTRL_RESET_FLAG_HSM_M4);
 +
-+Proceed to build U-Boot (`tiboot3.bin` and `tispl.bin`). One can verify if
-+the HSM binary is packed inside `tispl.bin` FIT image by using following
-+command:
++	ti_sci_proc_release(&hsm->tsp);
 +
-+.. prompt:: bash $
++	return ret;
++}
 +
-+  mkimage -l <output directory>/a72/tispl.bin
++static int k3_hsm_stop(struct udevice *dev)
++{
++	struct k3_hsm_privdata *hsm = dev_get_priv(dev);
++	int ret;
 +
-+.. code-block:: console
++	ret = ti_sci_proc_request(&hsm->tsp);
++	if (ret)
++		return ret;
 +
-+  <...>
-+  Image 2 (hsm)
-+   Description:  HSM binary
-+   Created:      Thu Mar 20 13:26:16 2025
-+   Type:         Standalone Program
-+   Compression:  uncompressed
-+   Data Size:    132694 Bytes = 129.58 KiB = 0.13 MiB
-+   Architecture: Unknown Architecture
-+   Load Address: 0x82000000
-+   Entry point:  0x82000000
-+  <...>
++	ret = ti_sci_proc_set_control(&hsm->tsp,
++				      PROC_BOOT_CTRL_RESET_FLAG_HSM_M4, 0);
 +
-+The HSM core loading can be verified by checking for the following log at
-+R5 SPL stage: 'Successfully loaded and started HSM core'.
++	ti_sci_proc_release(&hsm->tsp);
 +
-+.. code-block:: console
++	return ret;
++}
 +
-+  U-Boot SPL 2025.01-00391-ga7a25e886202-dirty (Mar 20 2025 - 11:04:05 +0530)
-+  SYSFW ABI: 4.0 (firmware rev 0x000b '11.0.9--v11.00.09+ (Fancy Rat)')
-+  Initialized 4 DRAM controllers
-+  SPL initial stack usage: 13456 bytes
-+  Trying to boot from MMC2
-+  Authentication passed
-+  Authentication passed
-+  Authentication passed
-+  Loading Environment from nowhere... OK
-+  Successfully loaded and started HSM core
-+  Authentication passed
-+  Authentication passed
-+  Starting ATF on ARM64 core...
++static const struct dm_rproc_ops k3_hsm_ops = {
++	.load = k3_hsm_load,
++	.start = k3_hsm_start,
++	.stop = k3_hsm_stop,
++};
 +
-+How to build U-Boot with custom HSM firmware
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++static int ti_sci_proc_of_to_priv(struct udevice *dev, struct ti_sci_proc *tsp)
++{
++	u32 ids[2];
++	int ret;
 +
-+To pack the firmware for any other device type, one can update the path in
-+the SoC binman template to point to the custom binary and re-build U-Boot
-+images (`tispl.bin`).
++	tsp->sci = ti_sci_get_by_phandle(dev, "ti,sci");
++	if (IS_ERR(tsp->sci)) {
++		dev_err(dev, "ti_sci get failed: %ld\n", PTR_ERR(tsp->sci));
++		return PTR_ERR(tsp->sci);
++	}
 +
-+`arch/arm/dts/k3-<soc>-binman.dtsi`
++	ret = dev_read_u32_array(dev, "ti,sci-proc-ids", ids, 2);
++	if (ret) {
++		dev_err(dev, "Proc IDs not populated %d\n", ret);
++		return ret;
++	}
 +
-+.. code-block:: dts
++	tsp->ops = &tsp->sci->ops.proc_ops;
++	tsp->proc_id = ids[0];
++	tsp->host_id = ids[1];
++	tsp->dev_id = dev_read_u32_default(dev, "ti,sci-dev-id",
++					   TI_SCI_RESOURCE_NULL);
++	if (tsp->dev_id == TI_SCI_RESOURCE_NULL) {
++		dev_err(dev, "Device ID not populated\n");
++		return -ENODEV;
++	}
 +
-+  hsm {
-+     hsm: blob-ext {
-+        filename = <path_to_custom_binary>;
-+     };
-+  };
++	return 0;
++}
 +
-+For example, To pack the HSM demo firmware for J784S4 HS-FS device type,
-+make following changes to `arch/arm/dts/k3-j784s4-binman.dtsi`
++static const struct k3_hsm_mem_data hsm_mems[] = {
++	{ .name = "sram0_0", .dev_addr = 0x0 },
++	{ .name = "sram0_1", .dev_addr = 0x20000 },
++	{ .name = "sram1",   .dev_addr = 0x30000 },
++};
 +
-+.. code-block:: dts
++static int k3_hsm_of_get_memories(struct udevice *dev)
++{
++	struct k3_hsm_privdata *hsm = dev_get_priv(dev);
++	int i;
 +
-+  hsm {
-+     hsm: blob-ext {
-+        filename = "ti-hsm/hsm-demo-firmware-j784s4-hs-fs.bin";
-+     };
-+  };
++	hsm->num_mems = ARRAY_SIZE(hsm_mems);
++	hsm->mem = calloc(hsm->num_mems, sizeof(*hsm->mem));
++	if (!hsm->mem)
++		return -ENOMEM;
 +
-+A list of all HSM demo firmwares can be found in `ti-linux-firmware
-+<https://github.com/TexasInstruments/ti-linux-firmware>`_ repository.
++	for (i = 0; i < hsm->num_mems; i++) {
++		hsm->mem[i].bus_addr = dev_read_addr_size_name(dev,
++							       hsm_mems[i].name,
++							       (fdt_addr_t *)&hsm->mem[i].size);
++		if (hsm->mem[i].bus_addr == FDT_ADDR_T_NONE) {
++			dev_err(dev, "%s bus address not found\n",
++				hsm_mems[i].name);
++			return -EINVAL;
++		}
++		hsm->mem[i].cpu_addr = map_physmem(hsm->mem[i].bus_addr,
++						   hsm->mem[i].size,
++						   MAP_NOCACHE);
++		hsm->mem[i].dev_addr = hsm_mems[i].dev_addr;
++		hsm->total_sram_size += hsm->mem[i].size;
++	}
 +
-+.. k3_rst_include_end_hsm_m4f_loading
++	return 0;
++}
 +
- .. _k3_rst_refer_openocd:
- 
- Common Debugging environment - OpenOCD
++/**
++ * k3_hsm_probe() - Basic probe
++ * @dev:	corresponding k3 remote processor device
++ *
++ * Return: 0 if all goes good, else appropriate error message.
++ */
++static int k3_hsm_probe(struct udevice *dev)
++{
++	struct k3_hsm_privdata *hsm;
++	int ret;
++
++	hsm = dev_get_priv(dev);
++
++	ret = ti_sci_proc_of_to_priv(dev, &hsm->tsp);
++	if (ret)
++		return ret;
++
++	ret = k3_hsm_of_get_memories(dev);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++static int k3_hsm_remove(struct udevice *dev)
++{
++	struct k3_hsm_privdata *hsm = dev_get_priv(dev);
++
++	free(hsm->mem);
++
++	return 0;
++}
++
++static const struct udevice_id k3_hsm_ids[] = {
++	{ .compatible = "ti,hsm-m4fss" },
++	{}
++};
++
++U_BOOT_DRIVER(k3_hsm) = {
++	.name = "k3_hsm",
++	.of_match = k3_hsm_ids,
++	.id = UCLASS_REMOTEPROC,
++	.ops = &k3_hsm_ops,
++	.probe = k3_hsm_probe,
++	.remove = k3_hsm_remove,
++	.priv_auto = sizeof(struct k3_hsm_privdata),
++};
 -- 
 2.34.1
 
