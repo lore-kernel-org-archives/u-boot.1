@@ -1,28 +1,28 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0227ACCF2D6
-	for <u-boot@archiver.kernel.org>; Mon, 19 Oct 2026 11:54:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3C1BCCF2D6
+	for <u-boot@archiver.kernel.org>; Mon, 19 Oct 2026 11:56:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 54B466067A;
-	Mon, 19 Oct 2026 11:54:22 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B5C48406AC;
+	Mon, 19 Oct 2026 11:56:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Cr4V3kWqfY06; Mon, 19 Oct 2026 11:54:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 866D4605F8
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792410860;
-	b=ByL70t7t+uM+UV8PcmBR1OEijry75GmHXJLv73yG078VWL9wijv7UuiatX0DvW9twPyN
-	 V4d93KndcSC5ZDbUZTjjApwRvtfxsBGGxdAXBoJcLkMfOzCqWo3ivAg0HE3xHV6hBZWx5
-	 kK2GK7eCalKnPxX5UxPsbnKGEG/6vNFjRx6h+wV6kvAnne+Y1nnXQ+Iz753r7McWnLvg+
-	 cNnZXROj38xJ7MJ0TXjWoty8JRkZeMY0BtPjl9FaIGQ8MVlmCnKuHiegf7LEyiDc4+WIO
-	 Uxwa0o7ptms94q8bywZyiImxxid1Vcn51exwj39LuZwQsm/KNPMglvf5lwABiNeYF/g==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fRaBS5QkxEZY; Mon, 19 Oct 2026 11:56:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 36E97406BE
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792410978;
+	b=FnsWTBQ3dwxqC5h1gz3csV72DSWBYUVsf/RxWdw2Nu9kjTaHEYeq0XmP4MtgCW+lUPWQ
+	 U0t+tz34GDED9mWyTkFATTIlWPMndT5laiLCyCBdqYyXAqYjwkfhrBsDUWrHQHV/yyvbE
+	 yEwZFxWONUqTgJSZXs5fFEVfIXg3rfrOK0oWrMmrK15YS6sEn6Zt4caYT86aTNifLs6k9
+	 go2NlwLcfb4WOPEKLqgtT/QhYKSkBtAwwa+7rVB2Z9GKnfpTOaFj4HipnRnH1aPuEqMoL
+	 BAsdpZid+v9I1o9Pm8S1XN+oSznBh9BB9j/z++XgcrfR/yBTKKWiOXJqxxPPiCiD/DQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792410860;
+	c=relaxed/relaxed; t=1792410978;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -30,94 +30,94 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=QVIV838+sqCJsA2kKQF3DVkjudZTQjNt9h0AbOnc7xw=;
-	b=d8QFDxEVd1vL0s/81LqvA9pd1DRXOdCcMOHqEXQVkbZ9xDHq5yHW9crssEKj5Euy7S9R
-	 ahCBmn9EceuzIgDe1ZmYqThlm+2MLWMhJtnt28Hl8ns+/HIJT2kaiL7shS5F6ibzmBNO6
-	 e42dxClZPfZ+SULqZzhlF2cwKm0+ejNWKkMeS2Xg7nwpyWqlp+CAgvPdMSFclAiVHzIzu
-	 mxw3RzyqTR8eYql9PtlZALP2V2Grens7xSaWWx6eaSEX0evwd3I/ac8UJJPxZNp8NXfjO
-	 zaVPCUfVAJygjafEzu9iLsfyVxLVFmOsd9u4wCOBaJgyPrF18IUrsxfgtQPQGNQgJHw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=MnVCEDaaARhL7DOHWEpFD0Sw29wHZ4gEm7D6kwCxkPU=;
+	b=A4HOTopWHECwD9mtlchhx6jS6R4opbquZJGKeglJh+hl+p3JSp64j0/4GJd1HT/YPX+O
+	 zf+IlhtjSchk/xMe0SkCM3aAWUCrY0P+40M/nMaCZJRF6xj/Ak5PR/vv2yxYWdpa8+aao
+	 h0gpJEBQFl1CSYC6vfVcLXPtK3QCpaDn4MC1/wkk4U/biksAu3RPxvONl0EN8DM3HZcmZ
+	 YEpFJayB/KPYyWMGC5yV0DJ1hb5EaTr+htNYl0GQz2TKYRyZUUJtgPCfVbH2scAXHMgj/
+	 /hBYLovU3O9G4nw9Ep7eJNvaHpHa1MfRWVmx/THmYGsLhdOWRlm4kE+A086WxU2bVCQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792410860;
-	bh=QVIV838+sqCJsA2kKQF3DVkjudZTQjNt9h0AbOnc7xw=;
+	d=lists.u-boot-project.org; s=default; t=1792410978;
+	bh=MnVCEDaaARhL7DOHWEpFD0Sw29wHZ4gEm7D6kwCxkPU=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=EecV7FNcrJaQx42I0QhvCiHljWA6ZWJoO7fXfo69n/IsdpxcLtT2bkUVo3y5oPCGX
-	 ImN8/JUmEO9bxgRjG/QBN+MhyYtVkpfq88rjWC/OgjVrkuYhjlAoiMkRWDdeJJQlE6
-	 4RmXp0+OfJJ7hnc+Pum5dnXjeAircQ5FA9nesV79jO2BXvVnX6cCt2RjyI+WggUMCh
-	 iUJejUdFq2hxdFRXUR42A16jWYzURZGtWSM/bYEUFmuhBAyRqfb9NjywdQF79IELlc
-	 xfZuJUgdgPvpd+rm8wqMkbNFjEsv1zo1fo09Tjq1HPQMtQfvoC1Vrq/3VUaTkcMf+o
-	 7lbeFZGltbz1Q==
+	b=EoxZuYx8gsWtfTcq6ovTrkwF1K9Fuv/WUtfqGSvrJoVLDOwWUBiVP4pOBRqIrhi0m
+	 Dc3hw2P3uGeg3vTSL+g7Rhby7F0mkSLNwrU/Jz6pzmn7xWlqdhrbAG00a/kIenvV4b
+	 IFpulNb6NszlxchJiKGkysl4KTldK3nhqaSCJCqBFbePpp6OBnvXMyvYmtGXQLWluA
+	 5l3kppBhxpp4L9p01FpsQ4Z6UgK2BoTLYf6tj1EWtZVojT+PZPMam6EzScDCxc0JRi
+	 Cfazj63+TCSq1XcosZOw9MhtcGoHskDfo5XB51VAeFI+OhDfx0IkuS3CTbUPtJEpxU
+	 vpD9QniOMvb5Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 866D4605F8;
-	Mon, 19 Oct 2026 11:54:20 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id EC9951DE
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 11:54:19 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 36E97406BE;
+	Mon, 19 Oct 2026 11:56:18 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8733B1E9
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 11:56:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id DE33440080
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 11:54:19 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 78FDF40079
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 11:56:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uWNDqkYE3XA1 for <u-boot@lists.u-boot-project.org>;
- Mon, 19 Oct 2026 11:54:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 3F9A240079
+ id 5lkWiixkwmkK for <u-boot@lists.u-boot-project.org>;
+ Mon, 19 Oct 2026 11:56:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 0893240080
 Authentication-Results: smtp2.osuosl.org; arc=none
  smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792410858;
- b=QX2frZZ98/m/IqaNqtdIrreeUfa19O82kQ/qfCB3sJPPC2B4yj+Jq8PCMk0sqXZePgt/
- arGeSNV5CQdXcbr2H31TwNYAhLBtRDxGBWGlAta+kmSqk07Ht9icNbSvgHIXRxf8GNGv8
- XW2cH6rR7Mq7vWS+V82U503UMKDup0spn/74Bi470Ju2mhwfwkreMQQoIF4xJW4s7F5Pc
- A0C9zNZsOtAfGEpeTdI9msv+BdFdqPUtjo4v87jvtTfGL5SLDdAha+NFKklxgy6oLJpq+
- AWkJ9yx/Wki78phyREoI0eeyZ44GPoCAwptWWteBdALMN6YtfWJ7tGruJNNy4PW6sQA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792410975;
+ b=G9K3o3Y2sYcSgSovdCD4BfiNblXBQ9JyyE37Iook5J4iWRRurPyIvLKM6cNl6SdTa07Y
+ gCZXxA5Ibgfiw4vLOx5DafppdJ+dr7wHymf0lmf766OCweyj0UPbgPAofVKlWbwN3lNhk
+ tKe4DreHps2Ea69n9EpPsu8X8IJCTwyI3el3HbYFlKKga32LEpBR/EBiKmHrOdA9yRZOQ
+ YevodFTmnFBHi2XnnBG4Z8E8d/zJz6GInyQ4yn0QW8KxP5Kwgu8DAxYMUZyFr2xC3Hs0b
+ +JGz23e4hHg8TV/FCvYTUfiGTnywns7l1iwHoF5Kbr+I6G5bvW8wH8eKmb87suH6aCQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792410858;
+ c=relaxed/relaxed; t=1792410975;
  h=Received-SPF:Received:Received:DKIM-Signature:Date:From:To:Cc:
  Subject:Message-ID:References:MIME-Version:Content-Type:
  Content-Disposition:In-Reply-To;
- bh=QVIV838+sqCJsA2kKQF3DVkjudZTQjNt9h0AbOnc7xw=;
- b=APcaGxXEeA2Tx96IF6AFG5RkClb4WTCZQ6bi/oQxiqDytn3jzp+7LdhieP8ShRNp5wYI
- VfClPyKGm+b4omBJ+guSjJHb3O6G9YuOqutbkHUalqqIRrIdyY+1Xn4yQrmOYvHzSXXKu
- cOPqCGJPJeMQ0CksDz7+COYwyfHxluSwsHJPhEaBY+CevbcH807utcKZE6O9Ps9feMXrZ
- 1EakndwygkMDdARu9+FvQAVOjkLQGrWDVQPKkVw4jj6oRxZFOIg+ccUJsjNUMsv3hMshx
- TG1FFn7rYci36a2p9+MQdT51L7vJf1r7jSB5WUotA91no5mDobAoDHn6uX6RsAz8FNQ==
+ bh=MnVCEDaaARhL7DOHWEpFD0Sw29wHZ4gEm7D6kwCxkPU=;
+ b=FkZAOxFmOJ7T3xbI6FxIfELL77vVbRs3thch1s0S56fr48pYq3GFbNfXG0bCDTRI3h2t
+ huGOwlfJXxpWFJH482NRxlzMyU+LylRMr+Vg8brIjIEXywz7NmXbOK/dtUecqezmnq0U/
+ 2DPRfhQ6qS3lwAc3kwTJDxI+pTsK+4XXqp4tnDg78TkysP33ntFnJmO+u7DrIaEZ+Wx78
+ 3gFexxyslTXgGkdIOnUs80W6+9LQy5HBJAwlpceOeVyH0n0FsuV3xOodI3B/ctQM0ZrLE
+ CQYvEm+F+7wH53kmnb92wvm98obNLBgKqtNotM3YOh+qy4jkKmzt0kscnlQncpalO7A==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b="WyAV/sWx"; 
+ header.s=k20260515 header.b=Yx7dhJ4f; 
  arc=none smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
  envelope-from=sumit.garg@kernel.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=WyAV/sWx
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20260515 header.b=Yx7dhJ4f
 Received: from tor.source.kernel.org (tor.source.kernel.org
  [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 3F9A240079
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 11:54:15 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0893240080
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 11:56:14 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 7FA5560136;
- Mon, 19 Oct 2026 11:54:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BD21D1F000C4;
- Mon, 19 Oct 2026 11:54:08 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 6DDC760136;
+ Mon, 19 Oct 2026 11:56:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C492E1F000C4;
+ Mon, 19 Oct 2026 11:56:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1792410853;
- bh=QVIV838+sqCJsA2kKQF3DVkjudZTQjNt9h0AbOnc7xw=;
+ s=k20260515; t=1792410973;
+ bh=MnVCEDaaARhL7DOHWEpFD0Sw29wHZ4gEm7D6kwCxkPU=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=WyAV/sWxn0aGZ/SEFxPrn4X2fSPz97RmKiPPJjRJxQAi8fDTwGKX8ag6B1Pl/VsSw
- 02oYFIF8rmRlQsuasjmckDRDNOmYKP3WiMB37WeaIL6xf7cZQVyWOTGT7ft9Uu+dJz
- bm99lS4xgTzeP3s7+C5oR2OJWFaWstfkfCukJSP/h0T867KoAcDCDtKJC4hg7IQOu0
- z3Mi3Dm1Xc4V4pcFl329K2QY2YUWqgO5gIoXojsC1L48MNCARrKZ1i6oNp/3vBrf3j
- 0f7laS6/17bHAIj7Ha7njAkf8n1za8K5tGOd3bhzrFmUkbEprjafqnAvxE3ZW4Z//T
- O0ibiM1K+Fzcg==
-Date: Mon, 19 Oct 2026 17:24:05 +0530
+ b=Yx7dhJ4f87A801wB2iPFVBl/+prlW+V0t+sfvCHioAfY8L9zI2/vh6RrUrg9XEKXv
+ IpiF8/ATp0Lhshp08FiGAW/11B6ggu2t0fTPGD8Z++wTUUMuQu4n1LYX/X/JpcYyE2
+ t88QCNUoIm5dh7VPxIHRzRuLpe95Enpcr8zGg7iGi/p0XCNujoHTFmSkigBxk2by8M
+ XtL/6V/Xn+xUxJgkgcDLXRsql6lhuZiDM5y2RBu/mcKf7A+w5IFcjQEDybzgOGLerC
+ +yxJkX1mpbUZlnMeSXUgRYaJBn33iJiKzh/9Z24agHrFy70hCpvhhoAy8fZCDoF2z9
+ +mxRDDD7ZYuZQ==
+Date: Mon, 19 Oct 2026 17:26:06 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.u-boot-project.org,
@@ -127,15 +127,14 @@ Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.u-boot-project.org,
  Johan Jonker <jbx6244@gmail.com>, Luca Weiss <luca.weiss@fairphone.com>,
  Biswapriyo Nath <nathbappai@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH v2 2/7] clk: qcom: qcs8300: Extend GCC clock driver to
- full gate/RCG coverage
-Message-ID: <atYE3Q0ivbXv3tiV@sumit-xelite>
+Subject: Re: [PATCH v2 3/7] pinctrl: qcom: Add QCS8300 pinctrl driver
+Message-ID: <atYFVmXEk8UG9Gpa@sumit-xelite>
 References: <20260812-b4-monaco-v2-0-865d288c0be6@oss.qualcomm.com>
- <20260812-b4-monaco-v2-2-865d288c0be6@oss.qualcomm.com>
+ <20260812-b4-monaco-v2-3-865d288c0be6@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Disposition: inline
-In-Reply-To: <20260812-b4-monaco-v2-2-865d288c0be6@oss.qualcomm.com>
+In-Reply-To: <20260812-b4-monaco-v2-3-865d288c0be6@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,613 +148,526 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-On Wed, 12 Aug 2026 at 06:42:00 +0530, Balaji Selvanathan wrote:
->Extend the QCS8300 GCC driver with the remaining RCGs (USB2/USB3,
->UFS PHY, SDCC1, QUPv3 wrap0/wrap1/wrap3 SE clocks, GP1-5, PDM2,
->EMAC0, PCIe0/1) and their gate clocks.
+On Wed, 12 Aug 2026 at 06:42:01 +0530, Balaji Selvanathan wrote:
+>Add pinctrl support for QCS8300.
 >
 >Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 >---
-> drivers/clk/qcom/clock-qcs8300.c | 545 +++++++++++++++++++++++++++++++++++++--
-> 1 file changed, 525 insertions(+), 20 deletions(-)
->
+> drivers/pinctrl/qcom/Kconfig           |   8 +
+> drivers/pinctrl/qcom/Makefile          |   1 +
+> drivers/pinctrl/qcom/pinctrl-qcs8300.c | 468 +++++++++++++++++++++++++++++++++
+> 3 files changed, 477 insertions(+)
 
 Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
 -Sumit
 
->diff --git a/drivers/clk/qcom/clock-qcs8300.c b/drivers/clk/qcom/clock-qcs8300.c
->index cd8aecdf788..cd47b384f1f 100644
->--- a/drivers/clk/qcom/clock-qcs8300.c
->+++ b/drivers/clk/qcom/clock-qcs8300.c
->@@ -14,12 +14,210 @@
-> #include <dt-bindings/clock/qcom,qcs8300-gcc.h>
-> #include "clock-qcom.h"
 >
->-#define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR 0xf038
->-#define USB30_PRIM_MASTER_CLK_CMD_RCGR 0xf020
->+#define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR	0x1b040
->+#define USB30_PRIM_MASTER_CLK_CMD_RCGR		0x1b028
->+#define USB3_PRIM_PHY_AUX_CMD_RCGR		0x1b06c
->+#define USB20_MASTER_CLK_CMD_RCGR		0x1c028
->+#define USB20_MOCK_UTMI_CLK_CMD_RCGR		0x1c040
->+
->+#define UFS_PHY_AXI_CLK_CMD_RCGR		0x8302c
->+#define UFS_PHY_ICE_CORE_CLK_CMD_RCGR		0x83074
->+#define UFS_PHY_PHY_AUX_CLK_CMD_RCGR		0x830a8
->+#define UFS_PHY_UNIPRO_CORE_CLK_CMD_RCGR	0x8308c
->+
->+#define SDCC1_APPS_CLK_CMD_RCGR			0x20014
->+#define SDCC1_ICE_CORE_CLK_CMD_RCGR		0x2002c
->+
->+#define QUPV3_WRAP0_S0_CLK_CMD_RCGR		0x23154
->+#define QUPV3_WRAP0_S1_CLK_CMD_RCGR		0x23288
->+#define QUPV3_WRAP0_S2_CLK_CMD_RCGR		0x233bc
->+#define QUPV3_WRAP0_S3_CLK_CMD_RCGR		0x234f0
->+#define QUPV3_WRAP0_S4_CLK_CMD_RCGR		0x23624
->+#define QUPV3_WRAP0_S5_CLK_CMD_RCGR		0x23758
->+#define QUPV3_WRAP0_S6_CLK_CMD_RCGR		0x2388c
->+#define QUPV3_WRAP0_S7_CLK_CMD_RCGR		0x239c0
->+#define QUPV3_WRAP1_S0_CLK_CMD_RCGR		0x24154
->+#define QUPV3_WRAP1_S1_CLK_CMD_RCGR		0x24288
->+#define QUPV3_WRAP1_S2_CLK_CMD_RCGR		0x243bc
->+#define QUPV3_WRAP1_S3_CLK_CMD_RCGR		0x244f0
->+#define QUPV3_WRAP1_S4_CLK_CMD_RCGR		0x24624
->+#define QUPV3_WRAP1_S5_CLK_CMD_RCGR		0x24758
->+#define QUPV3_WRAP1_S6_CLK_CMD_RCGR		0x2488c
->+#define QUPV3_WRAP1_S7_CLK_CMD_RCGR		0x249c0
->+#define QUPV3_WRAP3_S0_CLK_CMD_RCGR		0xc4158
->+
->+#define GP1_CLK_CMD_RCGR			0x70004
->+#define GP2_CLK_CMD_RCGR			0x71004
->+#define GP3_CLK_CMD_RCGR			0x62004
->+#define GP4_CLK_CMD_RCGR			0x1e004
->+#define GP5_CLK_CMD_RCGR			0x1f004
->+
->+#define PDM2_CLK_CMD_RCGR			0x3f010
->+
->+#define EMAC0_PHY_AUX_CLK_CMD_RCGR		0xb6028
->+#define EMAC0_PTP_CLK_CMD_RCGR			0xb6060
->+#define EMAC0_RGMII_CLK_CMD_RCGR		0xb6048
->+
->+#define PCIE_0_AUX_CLK_CMD_RCGR			0xa9078
->+#define PCIE_0_PHY_RCHNG_CLK_CMD_RCGR		0xa9054
->+#define PCIE_1_AUX_CLK_CMD_RCGR			0x77078
->+#define PCIE_1_PHY_RCHNG_CLK_CMD_RCGR		0x77054
->+
->+#define CFG_CLK_SRC_GPLL4_UFS_ICE_CORE		(3 << 8)
->+#define CFG_CLK_SRC_GPLL7_EMAC0			(2 << 8)
->+
->+static struct pll_vote_clk gpll4_vote_clk = {
->+	.status = 0x4000,
->+	.status_bit = BIT(31),
->+	.ena_vote = 0x4b028,
->+	.vote_bit = BIT(4),
->+};
->+
->+static struct pll_vote_clk gpll7_vote_clk = {
->+	.status = 0x7000,
->+	.status_bit = BIT(31),
->+	.ena_vote = 0x4b028,
->+	.vote_bit = BIT(7),
->+};
->+
->+static struct pll_vote_clk gpll9_vote_clk = {
->+	.status = 0x9000,
->+	.status_bit = BIT(31),
->+	.ena_vote = 0x4b028,
->+	.vote_bit = BIT(9),
->+};
->+
->+static const struct freq_tbl ftbl_gcc_qupv3_wrap_s0_clk_src[] = {
->+	F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625),
->+	F(14745600, CFG_CLK_SRC_GPLL0_EVEN, 1, 768, 15625),
->+	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
->+	F(29491200, CFG_CLK_SRC_GPLL0_EVEN, 1, 1536, 15625),
->+	F(32000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 75),
->+	F(48000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 25),
->+	F(64000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 16, 75),
->+	F(80000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 15),
->+	F(96000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 25),
->+	F(120000000, CFG_CLK_SRC_GPLL0, 5, 0, 0),
->+	{ }
->+};
->+
->+static const struct freq_tbl ftbl_gcc_qupv3_wrap_s2_clk_src[] = {
->+	F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625),
->+	F(14745600, CFG_CLK_SRC_GPLL0_EVEN, 1, 768, 15625),
->+	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
->+	F(29491200, CFG_CLK_SRC_GPLL0_EVEN, 1, 1536, 15625),
->+	F(32000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 75),
->+	F(48000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 25),
->+	F(64000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 16, 75),
->+	F(80000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 15),
->+	F(96000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 25),
->+	F(100000000, CFG_CLK_SRC_GPLL0, 6, 0, 0),
->+	{ }
->+};
->+
->+static const struct freq_tbl ftbl_gcc_qupv3_wrap3_s0_clk_src[] = {
->+	F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625),
->+	F(14745600, CFG_CLK_SRC_GPLL0_EVEN, 1, 768, 15625),
->+	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
->+	F(29491200, CFG_CLK_SRC_GPLL0_EVEN, 1, 1536, 15625),
->+	F(32000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 75),
->+	F(48000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 25),
->+	F(64000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 16, 75),
->+	F(75000000, CFG_CLK_SRC_GPLL0_EVEN, 4, 0, 0),
->+	F(80000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 15),
->+	F(96000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 25),
->+	F(100000000, CFG_CLK_SRC_GPLL0, 6, 0, 0),
->+	F(403200000, CFG_CLK_SRC_GPLL4, 2, 0, 0),
->+	{ }
->+};
->+
->+static const struct freq_tbl ftbl_gcc_gp_clk_src[] = {
->+	F(100000000, CFG_CLK_SRC_GPLL0, 6, 0, 0),
->+	F(200000000, CFG_CLK_SRC_GPLL0, 3, 0, 0),
->+	{ }
->+};
->+
->+static const struct freq_tbl ftbl_gcc_pdm2_clk_src[] = {
->+	F(60000000, CFG_CLK_SRC_GPLL0, 10, 0, 0),
->+	{ }
->+};
->+
->+static const struct freq_tbl ftbl_gcc_emac0_ptp_clk_src[] = {
->+	F(125000000, CFG_CLK_SRC_GPLL7_EMAC0, 8, 0, 0),
->+	F(230400000, CFG_CLK_SRC_GPLL4, 3.5, 0, 0),
->+	{ }
->+};
->+
->+static const struct freq_tbl ftbl_gcc_emac0_rgmii_clk_src[] = {
->+	F(5000000, CFG_CLK_SRC_GPLL0_EVEN, 10, 1, 6),
->+	F(50000000, CFG_CLK_SRC_GPLL0_EVEN, 6, 0, 0),
->+	F(125000000, CFG_CLK_SRC_GPLL7_EMAC0, 8, 0, 0),
->+	F(250000000, CFG_CLK_SRC_GPLL7_EMAC0, 4, 0, 0),
->+	{ }
->+};
->+
->+static const struct freq_tbl ftbl_gcc_pcie_0_phy_rchng_clk_src[] = {
->+	F(100000000, CFG_CLK_SRC_GPLL0, 6, 0, 0),
->+	{ }
->+};
->+
->+static const struct freq_tbl ftbl_gcc_sdcc1_apps_clk_src[] = {
->+	F(144000, CFG_CLK_SRC_CXO, 16, 3, 25),
->+	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
->+	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
->+	F(20000000, CFG_CLK_SRC_GPLL0_EVEN, 5, 1, 3),
->+	F(25000000, CFG_CLK_SRC_GPLL0_EVEN, 12, 0, 0),
->+	F(50000000, CFG_CLK_SRC_GPLL0_EVEN, 6, 0, 0),
->+	F(100000000, CFG_CLK_SRC_GPLL0_EVEN, 3, 0, 0),
->+	F(192000000, CFG_CLK_SRC_GPLL9, 4, 0, 0),
->+	F(384000000, CFG_CLK_SRC_GPLL9, 2, 0, 0),
->+	{ }
->+};
->+
->+static const struct freq_tbl ftbl_gcc_sdcc1_ice_core_clk_src[] = {
->+	F(150000000, CFG_CLK_SRC_GPLL0, 4, 0, 0),
->+	F(300000000, CFG_CLK_SRC_GPLL0, 2, 0, 0),
->+	{ }
->+};
->+
->+static const struct freq_tbl ftbl_gcc_ufs_phy_axi_clk_src[] = {
->+	F(25000000, CFG_CLK_SRC_GPLL0_EVEN, 12, 0, 0),
->+	F(75000000, CFG_CLK_SRC_GPLL0_EVEN, 4, 0, 0),
->+	F(150000000, CFG_CLK_SRC_GPLL0, 4, 0, 0),
->+	F(300000000, CFG_CLK_SRC_GPLL0, 2, 0, 0),
->+	{ }
->+};
->+
->+static const struct freq_tbl ftbl_gcc_ufs_phy_ice_core_clk_src[] = {
->+	F(75000000, CFG_CLK_SRC_GPLL0_EVEN, 4, 0, 0),
->+	F(201600000, CFG_CLK_SRC_GPLL4_UFS_ICE_CORE, 4, 0, 0),
->+	F(403200000, CFG_CLK_SRC_GPLL4_UFS_ICE_CORE, 2, 0, 0),
->+	{ }
->+};
->+
->+static const struct freq_tbl ftbl_gcc_ufs_phy_unipro_core_clk_src[] = {
->+	F(75000000, CFG_CLK_SRC_GPLL0_EVEN, 4, 0, 0),
->+	F(150000000, CFG_CLK_SRC_GPLL0, 4, 0, 0),
->+	F(300000000, CFG_CLK_SRC_GPLL0, 2, 0, 0),
->+	{ }
->+};
->+
->+static const struct freq_tbl ftbl_gcc_usb20_master_clk_src[] = {
->+	F(120000000, CFG_CLK_SRC_GPLL0, 5, 0, 0),
->+	{ }
->+};
->+
->+static const struct freq_tbl ftbl_gcc_usb30_prim_master_clk_src[] = {
->+	F(133333333, CFG_CLK_SRC_GPLL0, 4.5, 0, 0),
->+	F(200000000, CFG_CLK_SRC_GPLL0, 3, 0, 0),
->+	F(240000000, CFG_CLK_SRC_GPLL0, 2.5, 0, 0),
->+	{ }
->+};
+>diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+>index 0bea461fcc3..2af71945c4d 100644
+>--- a/drivers/pinctrl/qcom/Kconfig
+>+++ b/drivers/pinctrl/qcom/Kconfig
+>@@ -86,6 +86,14 @@ config PINCTRL_QCOM_QCS615
+> 	  Say Y here to enable support for pinctrl on the Snapdragon QCS615 SoC,
+> 	  as well as the associated GPIO driver.
 >
-> static ulong qcs8300_set_rate(struct clk *clk, ulong rate)
-> {
-> 	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
->+	const struct freq_tbl *freq;
->
-> 	if (clk->id < priv->data->num_clks)
-> 		debug("%s: %s, requested rate=%ld\n",
->@@ -31,28 +229,315 @@ static ulong qcs8300_set_rate(struct clk *clk, ulong rate)
-> 		clk_rcg_set_rate(priv->base, USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
-> 		return rate;
-> 	case GCC_USB30_PRIM_MASTER_CLK:
->-		WARN(rate != 200000000, "Unexpected rate for USB30_PRIM_MASTER_CLK: %lu\n", rate);
->+		freq = qcom_find_freq(ftbl_gcc_usb30_prim_master_clk_src, rate);
-> 		clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR,
->-				     1, 0, 0, CFG_CLK_SRC_GPLL0_ODD, 8);
->-		clk_rcg_set_rate(priv->base, 0xf064, 0, 0);
->+				     freq->pre_div, freq->m, freq->n, freq->src, 8);
->+		clk_rcg_set_rate(priv->base, USB3_PRIM_PHY_AUX_CMD_RCGR, 0, 0);
->+		return freq->freq;
->+	case GCC_USB20_MASTER_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_usb20_master_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, USB20_MASTER_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 8);
->+		return freq->freq;
->+	case GCC_USB20_MOCK_UTMI_CLK:
->+		WARN(rate != 19200000, "Unexpected rate for USB20_MOCK_UTMI_CLK: %lu\n", rate);
->+		clk_rcg_set_rate(priv->base, USB20_MOCK_UTMI_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
-> 		return rate;
->+	case GCC_UFS_PHY_AXI_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_ufs_phy_axi_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, UFS_PHY_AXI_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 8);
->+		return freq->freq;
->+	case GCC_UFS_PHY_UNIPRO_CORE_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_ufs_phy_unipro_core_clk_src, rate);
->+		clk_rcg_set_rate(priv->base, UFS_PHY_UNIPRO_CORE_CLK_CMD_RCGR,
->+				 freq->pre_div, freq->src);
->+		return freq->freq;
->+	case GCC_UFS_PHY_ICE_CORE_CLK:
->+		clk_enable_gpll0(priv->base, &gpll4_vote_clk);
->+		freq = qcom_find_freq(ftbl_gcc_ufs_phy_ice_core_clk_src, rate);
->+		clk_rcg_set_rate(priv->base, UFS_PHY_ICE_CORE_CLK_CMD_RCGR,
->+				 freq->pre_div, freq->src);
->+		return freq->freq;
->+	case GCC_UFS_PHY_PHY_AUX_CLK:
->+		clk_rcg_set_rate(priv->base, UFS_PHY_PHY_AUX_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
->+		return 19200000;
->+	case GCC_SDCC1_APPS_CLK:
->+		clk_enable_gpll0(priv->base, &gpll9_vote_clk);
->+		freq = qcom_find_freq(ftbl_gcc_sdcc1_apps_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, SDCC1_APPS_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 8);
->+		return freq->freq;
->+	case GCC_SDCC1_ICE_CORE_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_sdcc1_ice_core_clk_src, rate);
->+		clk_rcg_set_rate(priv->base, SDCC1_ICE_CORE_CLK_CMD_RCGR,
->+				 freq->pre_div, freq->src);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP0_S0_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s0_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP0_S0_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP0_S1_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s0_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP0_S1_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP0_S2_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s2_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP0_S2_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP0_S3_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s2_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP0_S3_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP0_S4_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s2_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP0_S4_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP0_S5_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s2_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP0_S5_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP0_S6_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s2_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP0_S6_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP0_S7_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s2_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP0_S7_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP1_S0_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s0_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP1_S0_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP1_S1_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s0_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP1_S1_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP1_S2_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s2_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP1_S2_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP1_S3_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s2_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP1_S3_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP1_S4_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s2_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP1_S4_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP1_S5_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s2_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP1_S5_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP1_S6_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s2_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP1_S6_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP1_S7_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap_s2_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP1_S7_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_QUPV3_WRAP3_S0_CLK:
->+		clk_enable_gpll0(priv->base, &gpll4_vote_clk);
->+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap3_s0_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, QUPV3_WRAP3_S0_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_GP1_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_gp_clk_src, rate);
->+		clk_rcg_set_rate(priv->base, GP1_CLK_CMD_RCGR, freq->pre_div, freq->src);
->+		return freq->freq;
->+	case GCC_GP2_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_gp_clk_src, rate);
->+		clk_rcg_set_rate(priv->base, GP2_CLK_CMD_RCGR, freq->pre_div, freq->src);
->+		return freq->freq;
->+	case GCC_GP3_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_gp_clk_src, rate);
->+		clk_rcg_set_rate(priv->base, GP3_CLK_CMD_RCGR, freq->pre_div, freq->src);
->+		return freq->freq;
->+	case GCC_GP4_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_gp_clk_src, rate);
->+		clk_rcg_set_rate(priv->base, GP4_CLK_CMD_RCGR, freq->pre_div, freq->src);
->+		return freq->freq;
->+	case GCC_GP5_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_gp_clk_src, rate);
->+		clk_rcg_set_rate(priv->base, GP5_CLK_CMD_RCGR, freq->pre_div, freq->src);
->+		return freq->freq;
->+	case GCC_PDM2_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_pdm2_clk_src, rate);
->+		clk_rcg_set_rate(priv->base, PDM2_CLK_CMD_RCGR, freq->pre_div, freq->src);
->+		return freq->freq;
->+	case GCC_EMAC0_PHY_AUX_CLK:
->+		clk_rcg_set_rate(priv->base, EMAC0_PHY_AUX_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
->+		return 19200000;
->+	case GCC_EMAC0_PTP_CLK:
->+		clk_enable_gpll0(priv->base, &gpll7_vote_clk);
->+		clk_enable_gpll0(priv->base, &gpll4_vote_clk);
->+		freq = qcom_find_freq(ftbl_gcc_emac0_ptp_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, EMAC0_PTP_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_EMAC0_RGMII_CLK:
->+		clk_enable_gpll0(priv->base, &gpll7_vote_clk);
->+		freq = qcom_find_freq(ftbl_gcc_emac0_rgmii_clk_src, rate);
->+		clk_rcg_set_rate_mnd(priv->base, EMAC0_RGMII_CLK_CMD_RCGR,
->+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
->+		return freq->freq;
->+	case GCC_PCIE_0_AUX_CLK:
->+		clk_rcg_set_rate(priv->base, PCIE_0_AUX_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
->+		return 19200000;
->+	case GCC_PCIE_0_PHY_RCHNG_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_pcie_0_phy_rchng_clk_src, rate);
->+		clk_rcg_set_rate(priv->base, PCIE_0_PHY_RCHNG_CLK_CMD_RCGR,
->+				 freq->pre_div, freq->src);
->+		return freq->freq;
->+	case GCC_PCIE_1_AUX_CLK:
->+		clk_rcg_set_rate(priv->base, PCIE_1_AUX_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
->+		return 19200000;
->+	case GCC_PCIE_1_PHY_RCHNG_CLK:
->+		freq = qcom_find_freq(ftbl_gcc_pcie_0_phy_rchng_clk_src, rate);
->+		clk_rcg_set_rate(priv->base, PCIE_1_PHY_RCHNG_CLK_CMD_RCGR,
->+				 freq->pre_div, freq->src);
->+		return freq->freq;
-> 	default:
-> 		return 0;
-> 	}
-> }
->
-> static const struct gate_clk qcs8300_clks[] = {
->-	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK, 0x1b088, BIT(0)),
->-	GATE_CLK(GCC_USB30_PRIM_MASTER_CLK, 0x1b018, BIT(0)),
->-	GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK, 0x1b084, BIT(0)),
->-	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK, 0x1b020, BIT(0)),
->-	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK, 0x1b024, BIT(0)),
->-	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK, 0x1b05c, BIT(0)),
->-	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0x1b060, BIT(0)),
->-	GATE_CLK(GCC_UFS_PHY_AHB_CLK, 0x83020, BIT(0)),
->-	GATE_CLK(GCC_UFS_PHY_AXI_CLK, 0x83018, BIT(0)),
->-	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK, 0x830d4, BIT(0)),
->-	GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK, 0x83064, BIT(0)),
->+	GATE_CLK_POLLED(GCC_AGGRE_NOC_QUPV3_AXI_CLK, 0x4b000, BIT(28), 0x8e200),
->+	GATE_CLK_POLLED(GCC_AGGRE_UFS_PHY_AXI_CLK, 0x830d4, BIT(0), 0x830d4),
->+	GATE_CLK_POLLED(GCC_AGGRE_USB2_PRIM_AXI_CLK, 0x1c05c, BIT(0), 0x1c05c),
->+	GATE_CLK_POLLED(GCC_AGGRE_USB3_PRIM_AXI_CLK, 0x1b084, BIT(0), 0x1b084),
->+	GATE_CLK_POLLED(GCC_AHB2PHY0_CLK, 0x76004, BIT(0), 0x76004),
->+	GATE_CLK_POLLED(GCC_AHB2PHY2_CLK, 0x76008, BIT(0), 0x76008),
->+	GATE_CLK_POLLED(GCC_AHB2PHY3_CLK, 0x7600c, BIT(0), 0x7600c),
->+	GATE_CLK_POLLED(GCC_BOOT_ROM_AHB_CLK, 0x4b000, BIT(10), 0x44004),
->+	GATE_CLK(GCC_CAMERA_HF_AXI_CLK, 0x32010, BIT(0)),
->+	GATE_CLK(GCC_CAMERA_SF_AXI_CLK, 0x32018, BIT(0)),
->+	GATE_CLK_POLLED(GCC_CAMERA_THROTTLE_XO_CLK, 0x32024, BIT(0), 0x32024),
->+	GATE_CLK_POLLED(GCC_CFG_NOC_USB2_PRIM_AXI_CLK, 0x1c060, BIT(0), 0x1c060),
->+	GATE_CLK_POLLED(GCC_CFG_NOC_USB3_PRIM_AXI_CLK, 0x1b088, BIT(0), 0x1b088),
->+	GATE_CLK_POLLED(GCC_DDRSS_GPU_AXI_CLK, 0x7d164, BIT(0), 0x7d164),
->+	GATE_CLK_POLLED(GCC_DISP_HF_AXI_CLK, 0x33010, BIT(0), 0x33010),
->+	GATE_CLK(GCC_EDP_REF_CLKREF_EN, 0x97448, BIT(0)),
->+	GATE_CLK_POLLED(GCC_EMAC0_AXI_CLK, 0xb6018, BIT(0), 0xb6018),
->+	GATE_CLK_POLLED(GCC_EMAC0_PHY_AUX_CLK, 0xb6024, BIT(0), 0xb6024),
->+	GATE_CLK_POLLED(GCC_EMAC0_PTP_CLK, 0xb6040, BIT(0), 0xb6040),
->+	GATE_CLK_POLLED(GCC_EMAC0_RGMII_CLK, 0xb6044, BIT(0), 0xb6044),
->+	GATE_CLK_POLLED(GCC_EMAC0_SLV_AHB_CLK, 0xb6020, BIT(0), 0xb6020),
->+	GATE_CLK_POLLED(GCC_GP1_CLK, 0x70000, BIT(0), 0x70000),
->+	GATE_CLK_POLLED(GCC_GP2_CLK, 0x71000, BIT(0), 0x71000),
->+	GATE_CLK_POLLED(GCC_GP3_CLK, 0x62000, BIT(0), 0x62000),
->+	GATE_CLK_POLLED(GCC_GP4_CLK, 0x1e000, BIT(0), 0x1e000),
->+	GATE_CLK_POLLED(GCC_GP5_CLK, 0x1f000, BIT(0), 0x1f000),
->+	GATE_CLK(GCC_GPU_GPLL0_CLK_SRC, 0x4b000, BIT(15)),
->+	GATE_CLK(GCC_GPU_GPLL0_DIV_CLK_SRC, 0x4b000, BIT(16)),
->+	GATE_CLK_POLLED(GCC_GPU_MEMNOC_GFX_CENTER_PIPELINE_CLK, 0x7d160, BIT(0), 0x7d160),
->+	GATE_CLK_POLLED(GCC_GPU_MEMNOC_GFX_CLK, 0x7d010, BIT(0), 0x7d010),
->+	GATE_CLK(GCC_GPU_SNOC_DVM_GFX_CLK, 0x7d01c, BIT(0)),
->+	GATE_CLK_POLLED(GCC_GPU_TCU_THROTTLE_AHB_CLK, 0x7d008, BIT(0), 0x7d008),
->+	GATE_CLK_POLLED(GCC_GPU_TCU_THROTTLE_CLK, 0x7d014, BIT(0), 0x7d014),
->+	GATE_CLK_POLLED(GCC_PCIE_0_AUX_CLK, 0x4b010, BIT(16), 0xa9038),
->+	GATE_CLK_POLLED(GCC_PCIE_0_CFG_AHB_CLK, 0x4b010, BIT(12), 0xa902c),
->+	GATE_CLK_POLLED(GCC_PCIE_0_MSTR_AXI_CLK, 0x4b010, BIT(11), 0xa9024),
->+	GATE_CLK_POLLED(GCC_PCIE_0_PHY_AUX_CLK, 0x4b010, BIT(13), 0xa9030),
->+	GATE_CLK_POLLED(GCC_PCIE_0_PHY_RCHNG_CLK, 0x4b010, BIT(15), 0xa9050),
->+	GATE_CLK(GCC_PCIE_0_PIPE_CLK, 0x4b010, BIT(14)),
->+	GATE_CLK(GCC_PCIE_0_PIPEDIV2_CLK, 0x4b018, BIT(22)),
->+	GATE_CLK_POLLED(GCC_PCIE_0_SLV_AXI_CLK, 0x4b010, BIT(10), 0xa901c),
->+	GATE_CLK_POLLED(GCC_PCIE_0_SLV_Q2A_AXI_CLK, 0x4b018, BIT(12), 0xa9018),
->+	GATE_CLK_POLLED(GCC_PCIE_1_AUX_CLK, 0x4b000, BIT(31), 0x77038),
->+	GATE_CLK_POLLED(GCC_PCIE_1_CFG_AHB_CLK, 0x4b008, BIT(2), 0x7702c),
->+	GATE_CLK_POLLED(GCC_PCIE_1_MSTR_AXI_CLK, 0x4b008, BIT(1), 0x77024),
->+	GATE_CLK_POLLED(GCC_PCIE_1_PHY_AUX_CLK, 0x4b008, BIT(3), 0x77030),
->+	GATE_CLK_POLLED(GCC_PCIE_1_PHY_RCHNG_CLK, 0x4b000, BIT(22), 0x77050),
->+	GATE_CLK(GCC_PCIE_1_PIPE_CLK, 0x4b008, BIT(4)),
->+	GATE_CLK(GCC_PCIE_1_PIPEDIV2_CLK, 0x4b018, BIT(16)),
->+	GATE_CLK_POLLED(GCC_PCIE_1_SLV_AXI_CLK, 0x4b008, BIT(0), 0x7701c),
->+	GATE_CLK_POLLED(GCC_PCIE_1_SLV_Q2A_AXI_CLK, 0x4b008, BIT(5), 0x77018),
->+	GATE_CLK(GCC_PCIE_CLKREF_EN, 0x9746c, BIT(0)),
->+	GATE_CLK_POLLED(GCC_PCIE_THROTTLE_CFG_CLK, 0x4b020, BIT(15), 0xb2034),
->+	GATE_CLK_POLLED(GCC_PDM2_CLK, 0x3f00c, BIT(0), 0x3f00c),
->+	GATE_CLK_POLLED(GCC_PDM_AHB_CLK, 0x3f004, BIT(0), 0x3f004),
->+	GATE_CLK_POLLED(GCC_PDM_XO4_CLK, 0x3f008, BIT(0), 0x3f008),
->+	GATE_CLK_POLLED(GCC_QMIP_CAMERA_NRT_AHB_CLK, 0x32008, BIT(0), 0x32008),
->+	GATE_CLK_POLLED(GCC_QMIP_CAMERA_RT_AHB_CLK, 0x3200c, BIT(0), 0x3200c),
->+	GATE_CLK_POLLED(GCC_QMIP_DISP_AHB_CLK, 0x33008, BIT(0), 0x33008),
->+	GATE_CLK_POLLED(GCC_QMIP_DISP_ROT_AHB_CLK, 0x3300c, BIT(0), 0x3300c),
->+	GATE_CLK_POLLED(GCC_QMIP_VIDEO_CVP_AHB_CLK, 0x34008, BIT(0), 0x34008),
->+	GATE_CLK_POLLED(GCC_QMIP_VIDEO_VCODEC_AHB_CLK, 0x3400c, BIT(0), 0x3400c),
->+	GATE_CLK_POLLED(GCC_QMIP_VIDEO_VCPU_AHB_CLK, 0x34010, BIT(0), 0x34010),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_CORE_2X_CLK, 0x4b008, BIT(9), 0x23018),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_CORE_CLK, 0x4b008, BIT(8), 0x2300c),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S0_CLK, 0x4b008, BIT(10), 0x2314c),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S1_CLK, 0x4b008, BIT(11), 0x23280),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S2_CLK, 0x4b008, BIT(12), 0x233b4),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S3_CLK, 0x4b008, BIT(13), 0x234e8),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S4_CLK, 0x4b008, BIT(14), 0x2361c),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S5_CLK, 0x4b008, BIT(15), 0x23750),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S6_CLK, 0x4b008, BIT(16), 0x23884),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S7_CLK, 0x4b008, BIT(17), 0x239b8),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP1_CORE_2X_CLK, 0x4b008, BIT(18), 0x24018),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP1_CORE_CLK, 0x4b008, BIT(19), 0x2400c),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP1_S0_CLK, 0x4b008, BIT(22), 0x2414c),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP1_S1_CLK, 0x4b008, BIT(23), 0x24280),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP1_S2_CLK, 0x4b008, BIT(24), 0x243b4),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP1_S3_CLK, 0x4b008, BIT(25), 0x244e8),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP1_S4_CLK, 0x4b008, BIT(26), 0x2461c),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP1_S5_CLK, 0x4b008, BIT(27), 0x24750),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP1_S6_CLK, 0x4b018, BIT(27), 0x24884),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP1_S7_CLK, 0x4b018, BIT(28), 0x249b8),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP3_CORE_2X_CLK, 0x4b000, BIT(24), 0xc4018),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP3_CORE_CLK, 0x4b000, BIT(23), 0xc400c),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP3_QSPI_CLK, 0x4b000, BIT(26), 0xc4284),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP3_S0_CLK, 0x4b000, BIT(25), 0xc4150),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP_0_M_AHB_CLK, 0x4b008, BIT(6), 0x23004),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP_0_S_AHB_CLK, 0x4b008, BIT(7), 0x23008),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP_1_M_AHB_CLK, 0x4b008, BIT(20), 0x24004),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP_1_S_AHB_CLK, 0x4b008, BIT(21), 0x24008),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP_3_M_AHB_CLK, 0x4b000, BIT(27), 0xc4004),
->+	GATE_CLK_POLLED(GCC_QUPV3_WRAP_3_S_AHB_CLK, 0x4b000, BIT(20), 0xc4008),
->+	GATE_CLK_POLLED(GCC_SDCC1_AHB_CLK, 0x2000c, BIT(0), 0x2000c),
->+	GATE_CLK_POLLED(GCC_SDCC1_APPS_CLK, 0x20004, BIT(0), 0x20004),
->+	GATE_CLK_POLLED(GCC_SDCC1_ICE_CORE_CLK, 0x20044, BIT(0), 0x20044),
->+	GATE_CLK(GCC_SGMI_CLKREF_EN, 0x97034, BIT(0)),
->+	GATE_CLK_POLLED(GCC_UFS_PHY_AHB_CLK, 0x83020, BIT(0), 0x83020),
->+	GATE_CLK_POLLED(GCC_UFS_PHY_AXI_CLK, 0x83018, BIT(0), 0x83018),
->+	GATE_CLK_POLLED(GCC_UFS_PHY_ICE_CORE_CLK, 0x8306c, BIT(0), 0x8306c),
->+	GATE_CLK_POLLED(GCC_UFS_PHY_PHY_AUX_CLK, 0x830a4, BIT(0), 0x830a4),
->+	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_0_CLK, 0x83028, BIT(0)),
->+	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_1_CLK, 0x830c0, BIT(0)),
->+	GATE_CLK(GCC_UFS_PHY_TX_SYMBOL_0_CLK, 0x83024, BIT(0)),
->+	GATE_CLK_POLLED(GCC_UFS_PHY_UNIPRO_CORE_CLK, 0x83064, BIT(0), 0x83064),
->+	GATE_CLK_POLLED(GCC_USB20_MASTER_CLK, 0x1c018, BIT(0), 0x1c018),
->+	GATE_CLK_POLLED(GCC_USB20_MOCK_UTMI_CLK, 0x1c024, BIT(0), 0x1c024),
->+	GATE_CLK_POLLED(GCC_USB20_SLEEP_CLK, 0x1c020, BIT(0), 0x1c020),
->+	GATE_CLK_POLLED(GCC_USB30_PRIM_MASTER_CLK, 0x1b018, BIT(0), 0x1b018),
->+	GATE_CLK_POLLED(GCC_USB30_PRIM_MOCK_UTMI_CLK, 0x1b024, BIT(0), 0x1b024),
->+	GATE_CLK_POLLED(GCC_USB30_PRIM_SLEEP_CLK, 0x1b020, BIT(0), 0x1b020),
->+	GATE_CLK_POLLED(GCC_USB3_PRIM_PHY_AUX_CLK, 0x1b05c, BIT(0), 0x1b05c),
->+	GATE_CLK_POLLED(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0x1b060, BIT(0), 0x1b060),
->+	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK, 0x1b064, BIT(0)),
->+	GATE_CLK(GCC_USB_CLKREF_EN, 0x97468, BIT(0)),
->+	GATE_CLK_POLLED(GCC_VIDEO_AXI0_CLK, 0x34014, BIT(0), 0x34014),
->+	GATE_CLK_POLLED(GCC_VIDEO_AXI1_CLK, 0x3401c, BIT(0), 0x3401c),
-> };
->
-> static int qcs8300_enable(struct clk *clk)
->@@ -74,11 +559,27 @@ static int qcs8300_enable(struct clk *clk)
-> 		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_AUX_CLK);
-> 		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_COM_AUX_CLK);
-> 		break;
->+	case GCC_QUPV3_WRAP0_S0_CLK ... GCC_QUPV3_WRAP0_S7_CLK:
->+		qcom_gate_clk_en(priv, GCC_QUPV3_WRAP_0_M_AHB_CLK);
->+		qcom_gate_clk_en(priv, GCC_QUPV3_WRAP_0_S_AHB_CLK);
->+		qcom_gate_clk_en(priv, GCC_QUPV3_WRAP0_CORE_CLK);
->+		qcom_gate_clk_en(priv, GCC_QUPV3_WRAP0_CORE_2X_CLK);
->+		break;
->+	case GCC_QUPV3_WRAP1_S0_CLK ... GCC_QUPV3_WRAP1_S7_CLK:
->+		qcom_gate_clk_en(priv, GCC_QUPV3_WRAP_1_M_AHB_CLK);
->+		qcom_gate_clk_en(priv, GCC_QUPV3_WRAP_1_S_AHB_CLK);
->+		qcom_gate_clk_en(priv, GCC_QUPV3_WRAP1_CORE_CLK);
->+		qcom_gate_clk_en(priv, GCC_QUPV3_WRAP1_CORE_2X_CLK);
->+		break;
->+	case GCC_QUPV3_WRAP3_S0_CLK:
->+		qcom_gate_clk_en(priv, GCC_QUPV3_WRAP_3_M_AHB_CLK);
->+		qcom_gate_clk_en(priv, GCC_QUPV3_WRAP_3_S_AHB_CLK);
->+		qcom_gate_clk_en(priv, GCC_QUPV3_WRAP3_CORE_CLK);
->+		qcom_gate_clk_en(priv, GCC_QUPV3_WRAP3_CORE_2X_CLK);
->+		break;
-> 	}
->
->-	qcom_gate_clk_en(priv, clk->id);
->-
->-	return 0;
->+	return qcom_gate_clk_en(priv, clk->id);
-> }
->
-> static const struct qcom_reset_map qcs8300_gcc_resets[] = {
->@@ -112,8 +613,12 @@ static const struct qcom_reset_map qcs8300_gcc_resets[] = {
-> };
->
-> static const struct qcom_power_map qcs8300_gdscs[] = {
->+	[GCC_EMAC0_GDSC] = { 0xb6004 },
->+	[GCC_PCIE_0_GDSC] = { 0xa9004 },
->+	[GCC_PCIE_1_GDSC] = { 0x77004 },
-> 	[GCC_UFS_PHY_GDSC] = { 0x83004 },
->-	[GCC_USB30_PRIM_GDSC] = { 0x1B004 },
->+	[GCC_USB20_PRIM_GDSC] = { 0x1c004 },
->+	[GCC_USB30_PRIM_GDSC] = { 0x1b004 },
-> };
->
-> static struct msm_clk_data qcs8300_gcc_data = {
+>+config PINCTRL_QCOM_QCS8300
+>+	bool "Qualcomm QCS8300 Pinctrl"
+>+	default y if PINCTRL_QCOM_GENERIC
+>+	select PINCTRL_QCOM
+>+	help
+>+	  Say Y here to enable support for pinctrl on the Snapdragon QCS8300 SoC,
+>+	  as well as the associated GPIO driver.
+>+
+> config PINCTRL_QCOM_SA8775P
+> 	bool "Qualcomm SA8775P Pinctrl"
+> 	default y if PINCTRL_QCOM_GENERIC
+>diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+>index 87cb128c4d4..e10fbc3d3ec 100644
+>--- a/drivers/pinctrl/qcom/Makefile
+>+++ b/drivers/pinctrl/qcom/Makefile
+>@@ -12,6 +12,7 @@ obj-$(CONFIG_PINCTRL_QCOM_MILOS) += pinctrl-milos.o
+> obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
+> obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
+> obj-$(CONFIG_PINCTRL_QCOM_QCS615) += pinctrl-qcs615.o
+>+obj-$(CONFIG_PINCTRL_QCOM_QCS8300) += pinctrl-qcs8300.o
+> obj-$(CONFIG_PINCTRL_QCOM_SA8775P) += pinctrl-sa8775p.o
+> obj-$(CONFIG_PINCTRL_QCOM_SC7280) += pinctrl-sc7280.o
+> obj-$(CONFIG_PINCTRL_QCOM_SDM660) += pinctrl-sdm660.o
+>diff --git a/drivers/pinctrl/qcom/pinctrl-qcs8300.c b/drivers/pinctrl/qcom/pinctrl-qcs8300.c
+>new file mode 100644
+>index 00000000000..91f7c4fcf1e
+>--- /dev/null
+>+++ b/drivers/pinctrl/qcom/pinctrl-qcs8300.c
+>@@ -0,0 +1,468 @@
+>+// SPDX-License-Identifier: GPL-2.0-only
+>+/*
+>+ * Qualcomm QCS8300 pinctrl
+>+ *
+>+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>+ *
+>+ */
+>+
+>+#include <dm.h>
+>+
+>+#include "pinctrl-qcom.h"
+>+
+>+#define MAX_PIN_NAME_LEN 32
+>+#define MSM_PIN_FUNCTION_COUNT 12
+>+
+>+static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+>+
+>+typedef unsigned int msm_pin_function[MSM_PIN_FUNCTION_COUNT];
+>+
+>+#define PINGROUP(id, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11)\
+>+	{\
+>+		msm_mux_gpio, /* gpio mode */\
+>+		msm_mux_##f1,\
+>+		msm_mux_##f2,\
+>+		msm_mux_##f3,\
+>+		msm_mux_##f4,\
+>+		msm_mux_##f5,\
+>+		msm_mux_##f6,\
+>+		msm_mux_##f7,\
+>+		msm_mux_##f8,\
+>+		msm_mux_##f9,\
+>+		msm_mux_##f10,\
+>+		msm_mux_##f11 /* egpio mode */\
+>+	}
+>+
+>+#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)\
+>+	{\
+>+		.name = pg_name,\
+>+		.ctl_reg = ctl,\
+>+		.io_reg = 0,\
+>+		.pull_bit = pull,\
+>+		.drv_bit = drv,\
+>+		.oe_bit = -1,\
+>+		.in_bit = -1,\
+>+		.out_bit = -1,\
+>+	}
+>+
+>+#define UFS_RESET(pg_name, ctl)\
+>+	{\
+>+		.name = pg_name,\
+>+		.ctl_reg = ctl,\
+>+		.io_reg = ctl + 0x4,\
+>+		.pull_bit = 3,\
+>+		.drv_bit = 0,\
+>+		.oe_bit = -1,\
+>+		.in_bit = -1,\
+>+		.out_bit = 0,\
+>+	}
+>+
+>+enum qcs8300_functions {
+>+	msm_mux_gpio,
+>+	msm_mux_aoss_cti,
+>+	msm_mux_atest_char,
+>+	msm_mux_atest_usb2,
+>+	msm_mux_audio_ref,
+>+	msm_mux_cam_mclk,
+>+	msm_mux_cci_async,
+>+	msm_mux_cci_i2c_scl,
+>+	msm_mux_cci_i2c_sda,
+>+	msm_mux_cci_timer,
+>+	msm_mux_cri_trng,
+>+	msm_mux_dbg_out,
+>+	msm_mux_ddr_bist,
+>+	msm_mux_ddr_pxi0,
+>+	msm_mux_ddr_pxi1,
+>+	msm_mux_ddr_pxi2,
+>+	msm_mux_ddr_pxi3,
+>+	msm_mux_edp0_hot,
+>+	msm_mux_edp0_lcd,
+>+	msm_mux_edp1_lcd,
+>+	msm_mux_egpio,
+>+	msm_mux_emac0_mcg0,
+>+	msm_mux_emac0_mcg1,
+>+	msm_mux_emac0_mcg2,
+>+	msm_mux_emac0_mcg3,
+>+	msm_mux_emac0_mdc,
+>+	msm_mux_emac0_mdio,
+>+	msm_mux_emac0_ptp_aux,
+>+	msm_mux_emac0_ptp_pps,
+>+	msm_mux_gcc_gp1,
+>+	msm_mux_gcc_gp2,
+>+	msm_mux_gcc_gp3,
+>+	msm_mux_gcc_gp4,
+>+	msm_mux_gcc_gp5,
+>+	msm_mux_hs0_mi2s,
+>+	msm_mux_hs1_mi2s,
+>+	msm_mux_hs2_mi2s,
+>+	msm_mux_ibi_i3c,
+>+	msm_mux_jitter_bist,
+>+	msm_mux_mdp0_vsync0,
+>+	msm_mux_mdp0_vsync1,
+>+	msm_mux_mdp0_vsync3,
+>+	msm_mux_mdp0_vsync6,
+>+	msm_mux_mdp0_vsync7,
+>+	msm_mux_mdp_vsync,
+>+	msm_mux_mi2s1_data0,
+>+	msm_mux_mi2s1_data1,
+>+	msm_mux_mi2s1_sck,
+>+	msm_mux_mi2s1_ws,
+>+	msm_mux_mi2s2_data0,
+>+	msm_mux_mi2s2_data1,
+>+	msm_mux_mi2s2_sck,
+>+	msm_mux_mi2s2_ws,
+>+	msm_mux_mi2s_mclk0,
+>+	msm_mux_mi2s_mclk1,
+>+	msm_mux_pcie0_clkreq,
+>+	msm_mux_pcie1_clkreq,
+>+	msm_mux_phase_flag,
+>+	msm_mux_pll_bist,
+>+	msm_mux_pll_clk,
+>+	msm_mux_prng_rosc0,
+>+	msm_mux_prng_rosc1,
+>+	msm_mux_prng_rosc2,
+>+	msm_mux_prng_rosc3,
+>+	msm_mux_qdss_cti,
+>+	msm_mux_qdss_gpio,
+>+	msm_mux_qup0_se0,
+>+	msm_mux_qup0_se1,
+>+	msm_mux_qup0_se2,
+>+	msm_mux_qup0_se3,
+>+	msm_mux_qup0_se4,
+>+	msm_mux_qup0_se5,
+>+	msm_mux_qup0_se6,
+>+	msm_mux_qup0_se7,
+>+	msm_mux_qup1_se0,
+>+	msm_mux_qup1_se1,
+>+	msm_mux_qup1_se2,
+>+	msm_mux_qup1_se3,
+>+	msm_mux_qup1_se4,
+>+	msm_mux_qup1_se5,
+>+	msm_mux_qup1_se6,
+>+	msm_mux_qup1_se7,
+>+	msm_mux_qup2_se0,
+>+	msm_mux_sailss_emac0,
+>+	msm_mux_sailss_ospi,
+>+	msm_mux_sgmii_phy,
+>+	msm_mux_tb_trig,
+>+	msm_mux_tgu_ch0,
+>+	msm_mux_tgu_ch1,
+>+	msm_mux_tgu_ch2,
+>+	msm_mux_tgu_ch3,
+>+	msm_mux_tsense_pwm1,
+>+	msm_mux_tsense_pwm2,
+>+	msm_mux_tsense_pwm3,
+>+	msm_mux_tsense_pwm4,
+>+	msm_mux_usb2phy_ac,
+>+	msm_mux_vsense_trigger,
+>+	msm_mux__,
+>+};
+>+
+>+#define MSM_PIN_FUNCTION(fname)\
+>+	[msm_mux_##fname] = {#fname, msm_mux_##fname}
+>+
+>+static const struct pinctrl_function msm_pinctrl_functions[] = {
+>+	MSM_PIN_FUNCTION(gpio),
+>+	MSM_PIN_FUNCTION(aoss_cti),
+>+	MSM_PIN_FUNCTION(atest_char),
+>+	MSM_PIN_FUNCTION(atest_usb2),
+>+	MSM_PIN_FUNCTION(audio_ref),
+>+	MSM_PIN_FUNCTION(cam_mclk),
+>+	MSM_PIN_FUNCTION(cci_async),
+>+	MSM_PIN_FUNCTION(cci_i2c_scl),
+>+	MSM_PIN_FUNCTION(cci_i2c_sda),
+>+	MSM_PIN_FUNCTION(cci_timer),
+>+	MSM_PIN_FUNCTION(cri_trng),
+>+	MSM_PIN_FUNCTION(dbg_out),
+>+	MSM_PIN_FUNCTION(ddr_bist),
+>+	MSM_PIN_FUNCTION(ddr_pxi0),
+>+	MSM_PIN_FUNCTION(ddr_pxi1),
+>+	MSM_PIN_FUNCTION(ddr_pxi2),
+>+	MSM_PIN_FUNCTION(ddr_pxi3),
+>+	MSM_PIN_FUNCTION(edp0_hot),
+>+	MSM_PIN_FUNCTION(edp0_lcd),
+>+	MSM_PIN_FUNCTION(edp1_lcd),
+>+	MSM_PIN_FUNCTION(egpio),
+>+	MSM_PIN_FUNCTION(emac0_mcg0),
+>+	MSM_PIN_FUNCTION(emac0_mcg1),
+>+	MSM_PIN_FUNCTION(emac0_mcg2),
+>+	MSM_PIN_FUNCTION(emac0_mcg3),
+>+	MSM_PIN_FUNCTION(emac0_mdc),
+>+	MSM_PIN_FUNCTION(emac0_mdio),
+>+	MSM_PIN_FUNCTION(emac0_ptp_aux),
+>+	MSM_PIN_FUNCTION(emac0_ptp_pps),
+>+	MSM_PIN_FUNCTION(gcc_gp1),
+>+	MSM_PIN_FUNCTION(gcc_gp2),
+>+	MSM_PIN_FUNCTION(gcc_gp3),
+>+	MSM_PIN_FUNCTION(gcc_gp4),
+>+	MSM_PIN_FUNCTION(gcc_gp5),
+>+	MSM_PIN_FUNCTION(hs0_mi2s),
+>+	MSM_PIN_FUNCTION(hs1_mi2s),
+>+	MSM_PIN_FUNCTION(hs2_mi2s),
+>+	MSM_PIN_FUNCTION(ibi_i3c),
+>+	MSM_PIN_FUNCTION(jitter_bist),
+>+	MSM_PIN_FUNCTION(mdp0_vsync0),
+>+	MSM_PIN_FUNCTION(mdp0_vsync1),
+>+	MSM_PIN_FUNCTION(mdp0_vsync3),
+>+	MSM_PIN_FUNCTION(mdp0_vsync6),
+>+	MSM_PIN_FUNCTION(mdp0_vsync7),
+>+	MSM_PIN_FUNCTION(mdp_vsync),
+>+	MSM_PIN_FUNCTION(mi2s1_data0),
+>+	MSM_PIN_FUNCTION(mi2s1_data1),
+>+	MSM_PIN_FUNCTION(mi2s1_sck),
+>+	MSM_PIN_FUNCTION(mi2s1_ws),
+>+	MSM_PIN_FUNCTION(mi2s2_data0),
+>+	MSM_PIN_FUNCTION(mi2s2_data1),
+>+	MSM_PIN_FUNCTION(mi2s2_sck),
+>+	MSM_PIN_FUNCTION(mi2s2_ws),
+>+	MSM_PIN_FUNCTION(mi2s_mclk0),
+>+	MSM_PIN_FUNCTION(mi2s_mclk1),
+>+	MSM_PIN_FUNCTION(pcie0_clkreq),
+>+	MSM_PIN_FUNCTION(pcie1_clkreq),
+>+	MSM_PIN_FUNCTION(phase_flag),
+>+	MSM_PIN_FUNCTION(pll_bist),
+>+	MSM_PIN_FUNCTION(pll_clk),
+>+	MSM_PIN_FUNCTION(prng_rosc0),
+>+	MSM_PIN_FUNCTION(prng_rosc1),
+>+	MSM_PIN_FUNCTION(prng_rosc2),
+>+	MSM_PIN_FUNCTION(prng_rosc3),
+>+	MSM_PIN_FUNCTION(qdss_cti),
+>+	MSM_PIN_FUNCTION(qdss_gpio),
+>+	MSM_PIN_FUNCTION(qup0_se0),
+>+	MSM_PIN_FUNCTION(qup0_se1),
+>+	MSM_PIN_FUNCTION(qup0_se2),
+>+	MSM_PIN_FUNCTION(qup0_se3),
+>+	MSM_PIN_FUNCTION(qup0_se4),
+>+	MSM_PIN_FUNCTION(qup0_se5),
+>+	MSM_PIN_FUNCTION(qup0_se6),
+>+	MSM_PIN_FUNCTION(qup0_se7),
+>+	MSM_PIN_FUNCTION(qup1_se0),
+>+	MSM_PIN_FUNCTION(qup1_se1),
+>+	MSM_PIN_FUNCTION(qup1_se2),
+>+	MSM_PIN_FUNCTION(qup1_se3),
+>+	MSM_PIN_FUNCTION(qup1_se4),
+>+	MSM_PIN_FUNCTION(qup1_se5),
+>+	MSM_PIN_FUNCTION(qup1_se6),
+>+	MSM_PIN_FUNCTION(qup1_se7),
+>+	MSM_PIN_FUNCTION(qup2_se0),
+>+	MSM_PIN_FUNCTION(sailss_emac0),
+>+	MSM_PIN_FUNCTION(sailss_ospi),
+>+	MSM_PIN_FUNCTION(sgmii_phy),
+>+	MSM_PIN_FUNCTION(tb_trig),
+>+	MSM_PIN_FUNCTION(tgu_ch0),
+>+	MSM_PIN_FUNCTION(tgu_ch1),
+>+	MSM_PIN_FUNCTION(tgu_ch2),
+>+	MSM_PIN_FUNCTION(tgu_ch3),
+>+	MSM_PIN_FUNCTION(tsense_pwm1),
+>+	MSM_PIN_FUNCTION(tsense_pwm2),
+>+	MSM_PIN_FUNCTION(tsense_pwm3),
+>+	MSM_PIN_FUNCTION(tsense_pwm4),
+>+	MSM_PIN_FUNCTION(usb2phy_ac),
+>+	MSM_PIN_FUNCTION(vsense_trigger),
+>+};
+>+
+>+static const msm_pin_function qcs8300_pin_functions[] = {
+>+	[0] = PINGROUP(0, _, _, _, _, _, _, _, _, _, _, _),
+>+	[1] = PINGROUP(1, pcie0_clkreq, _, _, _, _, _, _, _, _, _, _),
+>+	[2] = PINGROUP(2, _, _, _, _, _, _, _, _, _, _, _),
+>+	[3] = PINGROUP(3, phase_flag, _, _, _, _, _, _, _, _, _, _),
+>+	[4] = PINGROUP(4, sgmii_phy, qdss_cti, _, _, _, _, _, _, _, _, _),
+>+	[5] = PINGROUP(5, emac0_mdc, qdss_cti, _, _, _, _, _, _, _, _, _),
+>+	[6] = PINGROUP(6, emac0_mdio, _, _, _, _, _, _, _, _, _, _),
+>+	[7] = PINGROUP(7, usb2phy_ac, _, _, _, _, _, _, _, _, _, _),
+>+	[8] = PINGROUP(8, usb2phy_ac, _, _, _, _, _, _, _, _, _, _),
+>+	[9] = PINGROUP(9, phase_flag, _, _, _, _, _, _, _, _, _, _),
+>+	[10] = PINGROUP(10, qup2_se0, emac0_mcg0, _, _, _, _, _, _, _, _, _),
+>+	[11] = PINGROUP(11, qup2_se0, emac0_mcg1, _, _, _, _, _, _, _, _, _),
+>+	[12] = PINGROUP(12, qup2_se0, _, _, _, _, _, _, _, _, _, _),
+>+	[13] = PINGROUP(13, qup2_se0, _, _, _, _, _, _, _, _, _, _),
+>+	[14] = PINGROUP(14, qup2_se0, tb_trig, _, _, _, _, _, _, _, _, _),
+>+	[15] = PINGROUP(15, qup2_se0, _, sailss_ospi, sailss_emac0, _, _, _, _, _, _, _),
+>+	[16] = PINGROUP(16, qup2_se0, _, _, sailss_ospi, sailss_emac0, _, _, _, _, _, _),
+>+	[17] = PINGROUP(17, qup0_se0, qup0_se1, ibi_i3c, _, _, _, _, _, _, _, _),
+>+	[18] = PINGROUP(18, qup0_se0, qup0_se1, ibi_i3c, _, _, _, _, _, _, _, _),
+>+	[19] = PINGROUP(19, qup0_se1, qup0_se0, cci_timer, ibi_i3c, _, _, _, _, _, _, _),
+>+	[20] = PINGROUP(20, qup0_se1, qup0_se0, cci_timer, ibi_i3c, _, _, _, _, _, _, _),
+>+	[21] = PINGROUP(21, qup0_se5, cci_timer, _, _, _, _, _, _, _, _, _),
+>+	[22] = PINGROUP(22, pcie1_clkreq, qup0_se5, cci_timer, _, _, _, _, _, _, _, _),
+>+	[23] = PINGROUP(23, qup0_se5, cci_timer, qdss_cti, _, _, _, _, _, _, _, _),
+>+	[24] = PINGROUP(24, qup0_se5, emac0_ptp_aux, emac0_ptp_pps, qdss_cti, emac0_mcg2, _, _, _, _, _, _),
+>+	[25] = PINGROUP(25, qup0_se3, phase_flag, _, _, _, _, _, _, _, _, _),
+>+	[26] = PINGROUP(26, qup0_se3, phase_flag, _, _, _, _, _, _, _, _, _),
+>+	[27] = PINGROUP(27, qup0_se3, _, _, _, _, _, _, _, _, _, _),
+>+	[28] = PINGROUP(28, qup0_se3, phase_flag, _, _, _, _, _, _, _, _, _),
+>+	[29] = PINGROUP(29, qup0_se4, cci_i2c_sda, cci_async, emac0_ptp_pps, tgu_ch2, _, _, _, _, _, _),
+>+	[30] = PINGROUP(30, qup0_se4, cci_i2c_scl, cci_async, emac0_ptp_pps, tgu_ch3, _, _, _, _, _, _),
+>+	[31] = PINGROUP(31, qup0_se4, cci_i2c_sda, cci_async, emac0_ptp_aux, _, _, _, _, _, _, _),
+>+	[32] = PINGROUP(32, qup0_se4, cci_i2c_scl, emac0_ptp_aux, mdp_vsync, _, _, _, _, _, _, _),
+>+	[33] = PINGROUP(33, qup0_se2, qdss_gpio, _, _, _, _, _, _, _, _, _),
+>+	[34] = PINGROUP(34, qup0_se2, qdss_gpio, _, _, _, _, _, _, _, _, _),
+>+	[35] = PINGROUP(35, qup0_se2, gcc_gp1, _, _, _, _, _, _, _, _, _),
+>+	[36] = PINGROUP(36, qup0_se2, gcc_gp2, qdss_gpio, _, _, _, _, _, _, _, _),
+>+	[37] = PINGROUP(37, qup1_se0, ibi_i3c, qup1_se1, aoss_cti, _, _, _, _, _, _, _),
+>+	[38] = PINGROUP(38, qup1_se0, ibi_i3c, qup1_se1, aoss_cti, _, _, _, _, _, _, _),
+>+	[39] = PINGROUP(39, qup1_se1, ibi_i3c, qup1_se0, aoss_cti, _, _, _, _, _, _, _),
+>+	[40] = PINGROUP(40, qup1_se1, ibi_i3c, qup1_se0, aoss_cti, _, _, _, _, _, _, _),
+>+	[41] = PINGROUP(41, qup1_se3, _, _, _, _, _, _, _, _, _, _),
+>+	[42] = PINGROUP(42, qup1_se3, _, mdp_vsync, _, _, _, _, _, _, _, _),
+>+	[43] = PINGROUP(43, qup0_se7, _, tgu_ch0, _, _, _, _, _, _, _, _),
+>+	[44] = PINGROUP(44, qup0_se7, _, tgu_ch1, _, _, _, _, _, _, _, _),
+>+	[45] = PINGROUP(45, qup1_se4, hs1_mi2s, _, _, _, _, _, _, _, _, _),
+>+	[46] = PINGROUP(46, qup1_se4, hs1_mi2s, _, _, _, _, _, _, _, _, _),
+>+	[47] = PINGROUP(47, qup1_se4, hs1_mi2s, _, _, _, _, _, _, _, _, _),
+>+	[48] = PINGROUP(48, qup1_se4, hs1_mi2s, edp0_lcd, _, _, _, _, _, _, _, _),
+>+	[49] = PINGROUP(49, qup1_se5, hs2_mi2s, cci_timer, qdss_cti, edp1_lcd, ddr_pxi1, _, _, _, _, _),
+>+	[50] = PINGROUP(50, qup1_se5, hs2_mi2s, cci_timer, qdss_cti, _, ddr_pxi1, _, _, _, _, _),
+>+	[51] = PINGROUP(51, qup1_se5, hs2_mi2s, qdss_cti, _, _, _, _, _, _, _, _),
+>+	[52] = PINGROUP(52, qup1_se5, hs2_mi2s, qdss_cti, mdp_vsync, ddr_pxi2, _, _, _, _, _, _),
+>+	[53] = PINGROUP(53, ddr_bist, _, _, _, _, _, _, _, _, _, _),
+>+	[54] = PINGROUP(54, cci_i2c_sda, phase_flag, ddr_bist, _, _, _, _, _, _, _, _),
+>+	[55] = PINGROUP(55, cci_i2c_scl, phase_flag, ddr_bist, _, _, _, _, _, _, _, _),
+>+	[56] = PINGROUP(56, phase_flag, ddr_bist, _, _, _, _, _, _, _, _, _),
+>+	[57] = PINGROUP(57, cci_i2c_sda, prng_rosc0, qdss_gpio, _, _, _, _, _, _, _, _),
+>+	[58] = PINGROUP(58, cci_i2c_scl, prng_rosc1, qdss_gpio, _, _, _, _, _, _, _, _),
+>+	[59] = PINGROUP(59, cci_i2c_sda, prng_rosc2, qdss_gpio, _, _, _, _, _, _, _, _),
+>+	[60] = PINGROUP(60, cci_i2c_scl, prng_rosc3, qdss_gpio, _, _, _, _, _, _, _, _),
+>+	[61] = PINGROUP(61, cci_i2c_sda, qdss_gpio, _, _, _, _, _, _, _, _, _),
+>+	[62] = PINGROUP(62, cci_i2c_scl, qdss_gpio, _, _, _, _, _, _, _, _, _),
+>+	[63] = PINGROUP(63, cci_timer, cci_async, qdss_gpio, atest_usb2, _, _, _, _, _, _, _),
+>+	[64] = PINGROUP(64, cci_timer, cci_async, qdss_gpio, atest_usb2, _, _, _, _, _, _, _),
+>+	[65] = PINGROUP(65, cci_timer, cci_async, qdss_gpio, atest_usb2, _, _, _, _, _, _, _),
+>+	[66] = PINGROUP(66, phase_flag, _, atest_char, _, _, _, _, _, _, _, _),
+>+	[67] = PINGROUP(67, cam_mclk, vsense_trigger, atest_usb2, _, _, _, _, _, _, _, _),
+>+	[68] = PINGROUP(68, cam_mclk, gcc_gp4, atest_usb2, ddr_pxi0, _, _, _, _, _, _, _),
+>+	[69] = PINGROUP(69, cam_mclk, gcc_gp3, atest_usb2, ddr_pxi0, _, _, _, _, _, _, _),
+>+	[70] = PINGROUP(70, qdss_gpio, atest_char, _, _, _, _, _, _, _, _, _),
+>+	[71] = PINGROUP(71, qdss_gpio, atest_char, _, _, _, _, _, _, _, _, _),
+>+	[72] = PINGROUP(72, qdss_gpio, atest_char, _, _, _, _, _, _, _, _, _),
+>+	[73] = PINGROUP(73, _, qdss_gpio, _, _, _, _, _, _, _, _, _),
+>+	[74] = PINGROUP(74, pll_clk, qdss_gpio, atest_usb2, _, _, _, _, _, _, _, _),
+>+	[75] = PINGROUP(75, _, dbg_out, qdss_gpio, atest_usb2, _, _, _, _, _, _, _),
+>+	[76] = PINGROUP(76, gcc_gp5, tsense_pwm4, _, _, _, _, _, _, _, _, _),
+>+	[77] = PINGROUP(77, gcc_gp5, tsense_pwm3, _, _, _, _, _, _, _, _, _),
+>+	[78] = PINGROUP(78, tsense_pwm2, _, _, _, _, _, _, _, _, _, _),
+>+	[79] = PINGROUP(79, emac0_ptp_aux, emac0_ptp_pps, emac0_mcg3, _, tsense_pwm1, _, _, _, _, _, _),
+>+	[80] = PINGROUP(80, qup0_se6, mdp0_vsync6, _, atest_usb2, ddr_pxi3, _, _, _, _, _, _),
+>+	[81] = PINGROUP(81, qup0_se6, mdp0_vsync7, gcc_gp2, _, atest_usb2, ddr_pxi3, _, _, _, _, _),
+>+	[82] = PINGROUP(82, qup0_se6, gcc_gp3, _, _, _, _, _, _, _, _, _),
+>+	[83] = PINGROUP(83, qup0_se6, gcc_gp4, _, atest_usb2, ddr_pxi2, _, _, _, _, _, _),
+>+	[84] = PINGROUP(84, qup1_se2, gcc_gp1, _, atest_usb2, _, _, _, _, _, _, _),
+>+	[85] = PINGROUP(85, qup1_se2, _, atest_usb2, _, _, _, _, _, _, _, _),
+>+	[86] = PINGROUP(86, qup1_se2, _, _, _, _, _, _, _, _, _, _),
+>+	[87] = PINGROUP(87, qup1_se2, _, atest_usb2, _, _, _, _, _, _, _, _),
+>+	[88] = PINGROUP(88, qup1_se2, _, _, _, _, _, _, _, _, _, _),
+>+	[89] = PINGROUP(89, qup1_se6, qup1_se7, mdp0_vsync0, _, _, _, _, _, _, _, _),
+>+	[90] = PINGROUP(90, qup1_se6, qup1_se7, mdp0_vsync1, cri_trng, _, _, _, _, _, _, _),
+>+	[91] = PINGROUP(91, qup1_se7, qup1_se6, mdp0_vsync3, cri_trng, _, _, _, _, _, _, _),
+>+	[92] = PINGROUP(92, qup1_se7, qup1_se6, cri_trng, _, atest_usb2, _, _, _, _, _, _),
+>+	[93] = PINGROUP(93, atest_char, _, _, _, _, _, _, _, _, _, _),
+>+	[94] = PINGROUP(94, edp0_hot, _, _, _, _, _, _, _, _, _, _),
+>+	[95] = PINGROUP(95, _, _, _, _, _, _, _, _, _, _, _),
+>+	[96] = PINGROUP(96, _, _, _, _, _, _, _, _, _, _, _),
+>+	[97] = PINGROUP(97, mi2s_mclk0, jitter_bist, qdss_gpio, _, _, _, _, _, _, _, _),
+>+	[98] = PINGROUP(98, mi2s1_sck, phase_flag, _, qdss_gpio, _, _, _, _, _, _, _),
+>+	[99] = PINGROUP(99, mi2s1_ws, phase_flag, _, qdss_gpio, _, _, _, _, _, _, _),
+>+	[100] = PINGROUP(100, mi2s1_data0, phase_flag, _, qdss_gpio, _, _, _, _, _, _, _),
+>+	[101] = PINGROUP(101, mi2s1_data1, phase_flag, _, qdss_gpio, _, _, _, _, _, _, _),
+>+	[102] = PINGROUP(102, mi2s2_sck, phase_flag, _, qdss_gpio, _, _, _, _, _, _, _),
+>+	[103] = PINGROUP(103, mi2s2_ws, phase_flag, _, qdss_gpio, _, _, _, _, _, _, _),
+>+	[104] = PINGROUP(104, mi2s2_data0, phase_flag, _, qdss_gpio, _, _, _, _, _, _, _),
+>+	[105] = PINGROUP(105, mi2s2_data1, audio_ref, phase_flag, _, qdss_gpio, _, _, _, _, _, _),
+>+	[106] = PINGROUP(106, hs0_mi2s, phase_flag, _, qdss_gpio, _, _, _, _, _, _, _),
+>+	[107] = PINGROUP(107, hs0_mi2s, pll_bist, phase_flag, _, qdss_gpio, _, _, _, _, _, _),
+>+	[108] = PINGROUP(108, hs0_mi2s, phase_flag, _, qdss_gpio, _, _, _, _, _, _, _),
+>+	[109] = PINGROUP(109, hs0_mi2s, mi2s_mclk1, qdss_gpio, _, _, _, _, _, _, _, _),
+>+	[110] = PINGROUP(110, phase_flag, _, qdss_gpio, _, _, _, _, _, _, _, egpio),
+>+	[111] = PINGROUP(111, phase_flag, _, qdss_gpio, _, _, _, _, _, _, _, egpio),
+>+	[112] = PINGROUP(112, phase_flag, _, qdss_gpio, _, _, _, _, _, _, _, egpio),
+>+	[113] = PINGROUP(113, phase_flag, _, qdss_gpio, _, _, _, _, _, _, _, egpio),
+>+	[114] = PINGROUP(114, phase_flag, _, qdss_gpio, _, _, _, _, _, _, _, egpio),
+>+	[115] = PINGROUP(115, _, _, _, _, _, _, _, _, _, _, egpio),
+>+	[116] = PINGROUP(116, phase_flag, _, _, _, _, _, _, _, _, _, egpio),
+>+	[117] = PINGROUP(117, phase_flag, _, _, _, _, _, _, _, _, _, egpio),
+>+	[118] = PINGROUP(118, phase_flag, _, _, _, _, _, _, _, _, _, egpio),
+>+	[119] = PINGROUP(119, _, _, _, _, _, _, _, _, _, _, egpio),
+>+	[120] = PINGROUP(120, phase_flag, _, _, _, _, _, _, _, _, _, egpio),
+>+	[121] = PINGROUP(121, phase_flag, _, _, _, _, _, _, _, _, _, egpio),
+>+	[122] = PINGROUP(122, phase_flag, _, _, _, _, _, _, _, _, _, egpio),
+>+	[123] = PINGROUP(123, _, _, _, _, _, _, _, _, _, _, egpio),
+>+	[124] = PINGROUP(124, _, _, _, _, _, _, _, _, _, _, egpio),
+>+	[125] = PINGROUP(125, phase_flag, _, _, _, _, _, _, _, _, _, egpio),
+>+	[126] = PINGROUP(126, _, _, _, _, _, _, _, _, _, _, egpio),
+>+	[127] = PINGROUP(127, _, _, _, _, _, _, _, _, _, _, egpio),
+>+	[128] = PINGROUP(128, _, _, _, _, _, _, _, _, _, _, egpio),
+>+	[129] = PINGROUP(129, _, _, _, _, _, _, _, _, _, _, egpio),
+>+	[130] = PINGROUP(130, _, _, _, _, _, _, _, _, _, _, egpio),
+>+	[131] = PINGROUP(131, _, _, _, _, _, _, _, _, _, _, egpio),
+>+	[132] = PINGROUP(132, _, _, _, _, _, _, _, _, _, _, egpio),
+>+};
+>+
+>+static const struct msm_special_pin_data qcs8300_special_pins_data[] = {
+>+	[0] = UFS_RESET("ufs_reset", 0x92000),
+>+	[1] = SDC_QDSD_PINGROUP("sdc1_rclk", 0x89000, 15, 0),
+>+	[2] = SDC_QDSD_PINGROUP("sdc1_clk", 0x89000, 13, 6),
+>+	[3] = SDC_QDSD_PINGROUP("sdc1_cmd", 0x89000, 11, 3),
+>+	[4] = SDC_QDSD_PINGROUP("sdc1_data", 0x89000, 9, 0),
+>+};
+>+
+>+static const char *qcs8300_get_function_name(struct udevice *dev,
+>+					     unsigned int selector)
+>+{
+>+	return msm_pinctrl_functions[selector].name;
+>+}
+>+
+>+static const char *qcs8300_get_pin_name(struct udevice *dev,
+>+					unsigned int selector)
+>+{
+>+	if (selector >= 133 && selector <= 137)
+>+		snprintf(pin_name, MAX_PIN_NAME_LEN, "%s",
+>+			 qcs8300_special_pins_data[selector - 133].name);
+>+	else
+>+		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
+>+
+>+	return pin_name;
+>+}
+>+
+>+static int qcs8300_get_function_mux(__maybe_unused unsigned int pin,
+>+				    unsigned int selector)
+>+{
+>+	unsigned int i;
+>+	const msm_pin_function *func = qcs8300_pin_functions + pin;
+>+
+>+	for (i = 0; i < MSM_PIN_FUNCTION_COUNT; i++)
+>+		if ((*func)[i] == selector)
+>+			return i;
+>+
+>+	pr_err("Can't find requested function for pin %u\n", pin);
+>+
+>+	return -EINVAL;
+>+}
+>+
+>+static const struct msm_pinctrl_data qcs8300_data = {
+>+	.pin_data = {
+>+		.pin_count = 138,
+>+		.special_pins_start = 133,
+>+		.special_pins_data = qcs8300_special_pins_data,
+>+	},
+>+	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+>+	.get_function_name = qcs8300_get_function_name,
+>+	.get_function_mux = qcs8300_get_function_mux,
+>+	.get_pin_name = qcs8300_get_pin_name,
+>+};
+>+
+>+static const struct udevice_id msm_pinctrl_ids[] = {
+>+	{
+>+		.compatible = "qcom,qcs8300-tlmm",
+>+		.data = (ulong)&qcs8300_data
+>+	},
+>+	{ /* Sentinel */ }
+>+};
+>+
+>+U_BOOT_DRIVER(pinctrl_qcs8300) = {
+>+	.name		= "pinctrl_qcs8300",
+>+	.id		= UCLASS_NOP,
+>+	.of_match	= msm_pinctrl_ids,
+>+	.ops		= &msm_pinctrl_ops,
+>+	.bind		= msm_pinctrl_bind,
+>+	.flags		= DM_FLAG_PRE_RELOC,
+>+};
 >
 >-- 
 >2.34.1
