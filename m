@@ -1,273 +1,148 @@
 Return-Path: <u-boot-bounces@lists.u-boot-project.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60CDDCCF2D6
-	for <u-boot@archiver.kernel.org>; Mon, 19 Oct 2026 11:28:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16AA7CCF2E4
+	for <u-boot@archiver.kernel.org>; Mon, 19 Oct 2026 11:44:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2D61980F19;
-	Mon, 19 Oct 2026 11:28:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AF5E060612;
+	Mon, 19 Oct 2026 11:44:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EnGrdbho5GFa; Mon, 19 Oct 2026 11:28:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 76B2080F21
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792409293;
-	b=ZlsWLmjvtvw2HApPrc09n9nUWQOn6OqENMz3cPhakMFduSlSrrpPpKXo99GJsMripkUn
-	 na51rCapQcee7avdIilFcltHtKLXbfHE7Al+IhfRrcYqWKkFPxowfPQYcQ0djBk5msOyJ
-	 wtY++oiQaxP+e2KSoWRZnY8vGC9sls1NDTfz96+llJT/w9lpcAfxgQVOJYBmUdL/P5nXx
-	 SmaDxNXe3LwmVwerJ6R3WOXjmizhDfCTk9HshxGXtJvJBEwdcBWL6QwaJ//NpVKA8Dll6
-	 aSMdXLWUINvkYNiNmwdxTKzXH1/0SqplK1v0+LpCG7H34QFdW3GH/tG5DRduJDSSODg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NofZgvnd33HP; Mon, 19 Oct 2026 11:44:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8B8FE605FC
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792410256;
+	b=dbc98Wzhf1Exx4hD764vFRUz6mATQ/lliMVGe5iQpSJT0gQ+ekbcfGYV1ofZvsCksZNa
+	 2NSrX2Emk8STk615/jqEO9Socm1+rUUUaacutuODgPw7wjQ4juasLgHSySSp9QsEYx8Wp
+	 wPlpmK49kML7id0X2DfL6y3tWPQSl3w7IiQFnwHlrYjHl3VfexqoVAYyvO4qR5KYPaLfU
+	 e7EGWWwa4y2na+6vZLWJEsMOkps7C6QOKCZZ2a3CrMdZUiQ/BvYOxQwNBx3Gmjdw9guNf
+	 bL0D4hSCS6lFgC/c0HYmLjZ0p36ZlbdJiK5NQe+0BGDK2joxR8rnHXXrQzzg/k7fGfg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792409293;
+	c=relaxed/relaxed; t=1792410256;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:X-UI-Sender-Class:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:To:Content-Language:From:Autocrypt:Subject:
-	 Content-Type:Content-Transfer-Encoding:X-Provags-ID:UI-OutboundReport:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=HdOVFOx3qfNTGI5BPMhMsFLf8fMtob3MtI9pOMh163Q=;
-	b=UiOkq6+Oo0OEV+AFDnqsKyydcvQQLi59ERsMexsIEjK9xBJZ/MM/EwIYis03T/O5wRqJ
-	 ciY5dt9HczAxsJfHybITdcBtiNh9ttnRGwyyc3V8usHDhheILr+o7tflIFzlQjOgUkBeX
-	 50O0Zj66vuyi9uqtq44mdWekIPnfTbjb1hpl9Q4fbPQorEcxiB4Ve9DC+Aje8p8aBBFTc
-	 SkP5+e+RcEl0JUKNsTKXQ/qy4p98whAwuipa1GQQAAEfIEu9HAtwa4CabaBP9sV6u9Bm8
-	 lQ+O80mvxPcsEwFn1MdHLU41WAFLocYtfPf/r33Q2oVoLm4Mwkzh5Z1B5ohQOqFoztQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=tQ1FJHMUUaNw43AOOaYoZ/lwUEga2XXabl9XSKJmLLc=;
+	b=O6tmB+GqMKxIzzE602A2/5ymczHFZ3MOPg1T0/u31b158rZ9301NJVP5IRWi8Dn+fRBn
+	 wxNv1+4kNH8vztXUHwWiBQ6ht/oN7c3puGJFRdJH80Z+Q2NC5asOaGZdDouHivDqnMUa8
+	 Ofj67vSEkNqDYdDFCpT/Ct1xjDkiFTHSvSXvIjBSR+a+h8kAieyxwsKVnWWJuHphTh0Va
+	 ysF1m1dhoIHklIyKi8v4S96bRDSInfLme8WJg1fahjV8EhDo/E2PGJ3Rc5RJQuMti3mDp
+	 8FxU99bgWygwBn3M+Ya0BEqAX9FoNEz4REbBQyCnFXbk56f0UjwGyn8Hz3/p5HpMwQQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	dmarc=pass header.from=kernel.org;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dGFjYi0y;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792409293;
-	bh=HdOVFOx3qfNTGI5BPMhMsFLf8fMtob3MtI9pOMh163Q=;
-	h=Date:To:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=jbnNRGTSs7nKjJterEp7sy68FJ7J+NtcqeqD6cKBHjttKosV8YzeykJ5FgZKBacrr
-	 QJYSPe7zpWcnRhd3XJzRhIw+TYnAFMmwki3iFeXKFq9VQ6Yy8bMO+R2K4soEie42jh
-	 35R5/xeju3CdaBsVZn1AL8HlStx1BeqGPW0dzxolxF0Zu/w6Vg9m31nZcqUwb9Df6x
-	 cugzUcTaINGtOWqvM3cqKIAm1M4QXnP8GEIYEE6OCV4ptRkxN8HvRlGB8FyxLlb5l6
-	 fHskVDvWtu2cSs42b9Ay3LWN28yYcunIcvY3/tDi90YCmpDsXN2s9+7P7KP5yzuZ4G
-	 9IxXsVMGDPOgw==
+	d=lists.u-boot-project.org; s=default; t=1792410256;
+	bh=tQ1FJHMUUaNw43AOOaYoZ/lwUEga2XXabl9XSKJmLLc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=xyItsi4TCS9MVhABDYolxIBs1jJ53tAHk4z9b8StCAFNq0LFegSHLrVspykD2HCPs
+	 dtnCgP8XbOjl4HUWSUIe3l/ju3tzdVXanq8vtoVs23NdZm6J64x/frlBe3UJBYNuKx
+	 ZSsqbYzD1Di/jhgnT7kKOKy9kXPLVkNwQMGWM38fUh6/47KbGD0QcnHnYRt5U8sN+U
+	 t/s9v7yHD5RLy/0BVu4CbGahjxie/QOJOHKn7Z3dMSrxBA8kb4IAT+6EC1983ZJaFm
+	 ZbhRTTp9dU26D81zx4IlO5Ivg4+RnsWNcNMnErzDMnq9bn8HWDAdzEN0eAtqOsOm2x
+	 +1jWIrxfAS1tQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 76B2080F21;
-	Mon, 19 Oct 2026 11:28:13 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id B9D6F263
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 11:28:12 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8B8FE605FC;
+	Mon, 19 Oct 2026 11:44:16 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 28EE3263
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 11:44:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9F5EF40080
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 11:28:12 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1A8DD60600
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 11:44:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FjXUkoCcBjjP for <u-boot@lists.u-boot-project.org>;
- Mon, 19 Oct 2026 11:28:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org C28F240079
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=212.227.17.21
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792409292;
- b=ryz0JCbaisKtc5OmCl15RuRbUELjt6MdrTGzreprNOxBHeKoLdlp2N67UzGlv55NdzqI
- GKK5EA45tIvFSCBlPpxZpKCDx5o3NeV70Bt4Okz48BfkDH0/OLOzK5uaPllHymNHs7Cl7
- eO4Kyi47SqR2HAxm1scM84R2ZlMWnvuFt4YJxGxohknZ8CvNf9s4UlEjXih67ogPfqEau
- +dz+e9NXzWJRy/g9NxF46/3s5C3obGH1lbongAr3+oQdU6IFX/bX8VC6/cXmiu0ohXEt9
- xfqHiioUVmlSkVyyDjSz3LadEA6jwQbyoBTG5+wBQwRk9nHM/Lt57XfYHtgF4LqUhyA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id EMG9IvhtegVn for <u-boot@lists.u-boot-project.org>;
+ Mon, 19 Oct 2026 11:44:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D3EC8605FC
+Authentication-Results: smtp3.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792410253;
+ b=nkgCaHuXyvLPeipdduWuhOEkqJlfwIZFPLouoUKRfuI0LzZf6S3QA/ZxMIP3dQUgKMRH
+ Y1FCFrANx8/OWTvaWY/QSWiVyZHKLNc4aOKsq5gbkvflJhrMGkUKaMJtRCXSyLhJ7a/AV
+ M99WMaLByZAQF7LkcaKO7oZ2TacKOVSUNyRQmQKZVuBLr+3UZdBFsjtPQ6Q0+oFOSbDbv
+ mSshZgR9+GhtXXWlEVeKwyJnBA4W4kSLCnhr/YkowgD9CjizHFfSTGPv0+tUWrGgJmMzz
+ pA4WT+YJhJsKXgOp9VNWE8GBSqA0PxvJmBEO9KDNxzzMd47iecYbrV8m42fj8fn5gfQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792409292;
- h=Received-SPF:DKIM-Signature:X-UI-Sender-Class:Received:Message-ID:
- Date:MIME-Version:User-Agent:To:Content-Language:From:Autocrypt:
- Subject:Content-Type:Content-Transfer-Encoding:X-Provags-ID:
- X-Spam-Flag:UI-OutboundReport;
- bh=HdOVFOx3qfNTGI5BPMhMsFLf8fMtob3MtI9pOMh163Q=;
- b=Vizu9mpiE7ybTR44+Bl3qC7bk1QTJGG1dwFP6f4VftJyEJW+WupmsZ3QNiJGzMVBwsNq
- ypX2wTzk35UKJb2aC08dUexU/P+tfkPI2NvMn26zGi56ljnT0QUKFNb8dRSeUbBxBz62P
- c/kzuQr1GrkY0qVW1v1leB5DUZ15vRiL5uUw8eYPukbkCxP5aXFq6B148GP2Lu0whHrwt
- Ey4A+qteymvbqfx1Ag8SXa7I1oyxTsNeaWHRbMPR+cYueJQcwtsFvQaki7fnlSLu06Hzr
- c7Unn0dx0r46GTCfcrRkxooO5CpobdA4Luotz7b3uAdZjm6csWFsKLvtg3oiSmctqtg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=gmx.de;
- dkim=pass header.d=gmx.de header.i=fiona.klute@gmx.de header.a=rsa-sha256
- header.s=s31663417 header.b="Keo6G6a/"; 
- arc=none smtp.remote-ip=212.227.17.21
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.17.21;
- helo=mout.gmx.net; envelope-from=fiona.klute@gmx.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmx.de header.i=fiona.klute@gmx.de
- header.a=rsa-sha256 header.s=s31663417 header.b=Keo6G6a/
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C28F240079
- for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 11:28:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1792409285; x=1793014085; i=fiona.klute@gmx.de;
- bh=HdOVFOx3qfNTGI5BPMhMsFLf8fMtob3MtI9pOMh163Q=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:From:Subject:
- Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=Keo6G6a/WVLHhZVaTXiqb4lg2Z4dKiAYfenjlEFOuQtaz7t7ri4or6q4ZAHsL9I7
- HKwo+oaqAum0aUAcOb9m7i7g4Dxs0zSZ6XddsgJmnXCxV/UgZeb8PqESpvRv7IDdO
- k6jUtEU9N/8uiEtomQjbcgJvKiKJMyi6y4HXsQodYeXneIwCcR/Pc29lBElp1NRiA
- wgWXbynCtnE/JByvEzWBRiqdNYmwS9vBGxsMSQvMKPbNFRyL+7R1+5xwBTXPdSy80
- 9ppdnPno/oFPz2vPngPgH9OK93Ir/fU4jd3XlNN8nyRkWgk3Dae4rkJNvcDPuUJ3G
- UZK6zHnqSXGkj8QOgA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MbAgq-1wlcZp1bb6-00Zf4d; Mon, 19
- Oct 2026 13:28:05 +0200
-Message-ID: <f23265e6-5dff-414e-94ec-ab7312a0e1dd@gmx.de>
-Date: Mon, 19 Oct 2026 13:28:04 +0200
+ c=relaxed/relaxed; t=1792410253;
+ h=Received-SPF:Received:Received:DKIM-Signature:Date:From:To:Cc:
+ Subject:Message-ID:References:MIME-Version:Content-Type:
+ Content-Disposition:In-Reply-To;
+ bh=tQ1FJHMUUaNw43AOOaYoZ/lwUEga2XXabl9XSKJmLLc=;
+ b=l1mm4FwHyzV70Vt6T8ZsBtAqzSnO05c820yOXfdosQEL7RBdMeCPEJXTnn3UFXHjz8A8
+ JMRhnBwixx+HljqEubQ+ExT5VbCCDtFzYF/Bw3UPp/OjFDzkMlFXTciCGz6yZcWTOHzDS
+ yFM43GqcQg5b78NmVc/yQGlra5Nm20L7p2T/vbp+MRojGbRf8d+2eCQbRS0NNP8OA4nze
+ VuIQriLOeE961gHLKyhObg0SHCaSuJ6LaxcXbb8rNlJxactwxqOjC4yyOa/SQZJ3z0bJ9
+ KN9kQN79XutMXIeYfqe0i6ewdBOhVpW6ApnqWKv5s/7VWxG+8T1NmUpspXwQ9UkPREg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=kernel.org;
+ dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=dGFjYi0y; 
+ arc=none smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
+ envelope-from=sumit.garg@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=dGFjYi0y
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D3EC8605FC
+ for <u-boot@lists.u-boot-project.org>; Mon, 19 Oct 2026 11:44:10 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 40D7C6022F;
+ Mon, 19 Oct 2026 11:44:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4688F1F000CB;
+ Mon, 19 Oct 2026 11:44:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1792410248;
+ bh=tQ1FJHMUUaNw43AOOaYoZ/lwUEga2XXabl9XSKJmLLc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=dGFjYi0ySfVFGhC0aQuo0XYi1jPtPOZSZsyHVVXnRjXsYXbDXVT5KIVmfYm3Fodc9
+ 41dnCyydElDf+x5wqEht7sCLz04jzbeD6ObbuaIUXFXSSgpOO5fjL6nQ0BZDyIVWgS
+ r3b8ZnGhZGSWdeNAa18RKN7NKbzC6zDV48DobcBT1aHRgRzC6qfVLSudCD3xUpz4cz
+ JBkBfpUG6hgEjt2Js2LhD5OFhxLdkxsaDPyWSOuhhDd1nSbcaaPrXEtP6kla72P1Lc
+ nEy4LBxRTytkmp4lBZz+KCrje3OS+ip0YV/hT+blDkXS6+5X47Jp8CZi9FiNr8R6gH
+ DCqp7GtpRkuCg==
+Date: Mon, 19 Oct 2026 17:13:59 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Sumit Garg <sumit.garg@kernel.org>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ ilias.apalodimas@linaro.org, casey.connolly@linaro.org,
+ quic_varada@quicinc.com, neil.armstrong@linaro.org,
+ u-boot@lists.u-boot-project.org,
+ balaji.selvanathan@oss.qualcomm.com, Michael.Srba@seznam.cz,
+ nathbappai@gmail.com, jbx6244@gmail.com, quentin.schulz@cherry.de,
+ anshuld@ti.com, marcello.bauer@9elements.com,
+ tan.siewert@9elements.com, u-boot-qcom@groups.io
+Subject: Re: [PATCH RESEND v5 0/5] Add FIT multi-DTB selection for Qualcomm
+Message-ID: <atYCf3hDVgplILo5@sumit-xelite>
+References: <20261012170754.1606314-1-aswin.murugan@oss.qualcomm.com>
+ <20261012175042.GD3722450@bill-the-cat>
+ <6bff4593-8182-4524-be00-6963ed9330d4@oss.qualcomm.com>
+ <20261013150307.GB4042005@bill-the-cat>
+ <atIVfAF9YZ_Ocp7S@sumit-xelite>
+ <20261016162742.GK259661@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Marek Vasut <marex@denx.de>
-Content-Language: en-US, de-DE-1901, de-DE
-From: Fiona Klute <fiona.klute@gmx.de>
-Autocrypt: addr=fiona.klute@gmx.de; keydata=
- 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
-Subject: Security: "Permit write access only to listed variables" restricts
- only environment loading
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:st5MHOLQpAaxydy2QjAOFt3TRVcmfQ3vqYgee1TInhOMO3EgD4J
- /nSlDdJ903uHWuqFqrJSbiCqxLScAc+NwJ/A3nK9wijTn+0Vzztkj+8WXJ1ioDZ9rvD+Sfb
- UklDPn9suIC0wcdNDDvFn50nplkfusZ4/2V7kta0iRpc7WdeFOOndsAa2vcno9nxO0tTdRN
- YQjQK3CFDXCe9yBmDHbDA==
-UI-OutboundReport: notjunk:1;M01:P0:DAfoUplI6lE=;uuAAzkAYXOdFJKZIZoDceOAfBO2
- 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
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <20261016162742.GK259661@bill-the-cat>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -281,32 +156,128 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Errors-To: u-boot-bounces@lists.u-boot-project.org
 
-Hi everyone!
+On Fri, 16 Oct 2026 at 10:27:42 -0600, Tom Rini wrote:
+>On Fri, Oct 16, 2026 at 05:45:56PM +0530, Sumit Garg wrote:
+>> Hi Tom,
+>>
+>> On Tue, 13 Oct 2026 at 09:03:07 -0600, Tom Rini wrote:
+>> > On Tue, Oct 13, 2026 at 12:50:42PM +0530, Aswin Murugan wrote:
+>> > >
+>> > > On 10/12/2026 11:20 PM, Tom Rini wrote:
+>> > > Hi Tom,
+>> > > > On Mon, Oct 12, 2026 at 10:37:49PM +0530, Aswin Murugan wrote:
+>> > > > > This series adds dynamic device tree selection from FIT images for
+>> > > > > Qualcomm Snapdragon platforms, enabling U-Boot to select the
+>> > > > > appropriate DTB based on hardware parameters detected at boot.
+>> > > > >
+>> > > > > Qualcomm FIT-based DTB format is documented in [1].
+>> > > > >
+>> > > > > The FIT image contains only DTBs, while the kernel is provided
+>> > > > > separately as part of a UKI image.
+>> > > > >
+>> > > > > The implementation consists of:
+>> > > > >
+>> > > > > 1. Hardware detection infrastructure: Introduces the qcom,hwinfo
+>> > > > >     driver and qcom_hwdetect helper to collect hardware identification
+>> > > > >     data from SMEM, IMEM and TCSR into a single qcom_hw_params
+>> > > > >     structure for consumers such as FIT multi-DTB selection.
+>> > > > >
+>> > > > > 2. FIT multi-DTB selection: Implements DTB selection based on the
+>> > > > >     aggregated hardware information. The code parses metadata DTBs,
+>> > > > >     matches FIT configurations against detected hardware attributes,
+>> > > > >     applies overlays, and loads the selected DTB for EFI boot.
+>> > > > >
+>> > > > > [1] https://github.com/qualcomm-linux/qcom-dtb-metadata/blob/main/
+>> > > > >      Documentation.md
+>> > > > >
+>> > > > > ---
+>> > > > >
+>> > > > > Changes in v4:
+>> > > > ... which was sent as v5, and this is a re-send of?
+>> > > Yes, this is a resend of v4, which was sent as v5
+>> > > > > 1. Drop the SMEM cache infrastructure.
+>> > > > >
+>> > > > > 2. misc: qcom: add qcom,hwinfo driver to provide a common interface
+>> > > > >     for reading IMEM boot cookie and TCSR SOC version information.
+>> > > > >
+>> > > > > 3. arm: snapdragon: add qcom_hwdetect helper to aggregate hardware
+>> > > > >     information from SMEM, IMEM and TCSR into a single
+>> > > > >     struct qcom_hw_params.
+>> > > > >
+>> > > > > 4. Refactor FIT multi-DTB selection to consume qcom_hw_params instead
+>> > > > >     of accessing SMEM, IMEM and TCSR data directly.
+>> > > > >
+>> > > > > 5. Separate hardware discovery from FIT parsing and DTB matching
+>> > > > >     logic, reducing complexity and improving code organization.
+>> > > > >
+>> > > > > 6. Load FIT images directly from a raw GPT partition and remove the
+>> > > > >     FAT filesystem image based loading approach.
+>> > > > >
+>> > > > > 7. Drop IH_TYPE_FATFS, mkimage FAT image generation support and
+>> > > > >     related documentation updates.
+>> > > > >
+>> > > > > 8. arm: dts: enable qcom,hwinfo on qcs9100-ride-r3, qcs615-ride and
+>> > > > >     qcs6490-rb3gen2 by adding the required qcom,hwinfo DT nodes and
+>> > > > >     board-specific offsets.
+>> > > > >
+>> > > > > Link to v3:
+>> > > > > https://lore.kernel.org/u-boot/20260417120951.3454249-1-aswin.murugan@oss.qualcomm.com/
+>> > > > The FAT comments in v3 were addressed. I'm not really sure the discussion about if
+>> > > > this approach makes sense as really was addressed however?
+>> > >
+>> > > Yes, the FAT-related comments from v3 were addressed in this
+>> > > revision by dropping the FAT filesystem image-based loading
+>> > > approach and loading FIT image directly from a raw GPT
+>> > > partition.
+>> >
+>> > Right, thanks.
+>> >
+>> > > Regarding the broader design, the reasoning for using a
+>> > > DTB-only FIT was discussed in the v3 thread [1]. The intention
+>> > > is to support firmware-side DT selection while keeping DTB
+>> > > management independent of kernel packaging, matching existing
+>> > > Qualcomm deployment models. This is intended to coexist with,
+>> > > rather than replace, approaches such as UKI DT bundling.
+>> > >
+>> > > [1]: https://lore.kernel.org/u-boot/afSXa7q7hJC_ZW07@sumit-xelite/
+>> >
+>> > Yes, and I'd appreciate some of the people that were discussing things
+>> > in that thread chiming in and saying they're happy enough, as it wasn't
+>> > clear to me in re-reading the thread yesterday that the discussion ended
+>> > with agreement and instead just stopped.
+>> >
+>>
+>> As of now the Qualcomm subsystem maintenence is in really inactive state
+>> as you can see from the list of patchsets even carrying review tags are
+>> missing custodian attention here [1]. If you remember it from our earlier
+>> private thread with Casey and Neil many months ago, the maintainence
+>> situation hasn't improved at all.
+>>
+>> Even as a reviewer for the Qcom subsystem, I have tried earlier with all
+>> the reviews but patches were still floating on the list, which just
+>> demotivated me from doing further reviews.
+>>
+>> I would really like to get this maintainence situation fixed. Would it
+>> be fine with you to accept me as a Qcom subsystem custodian with more
+>> people from Qualcomm contributing as reviewers?
+>>
+>> In the meantime why we decide on that, can you help with picking patches
+>> which have been reviewed directly for the Qualcomm subsystem?
+>>
+>> [1] https://patchwork.ozlabs.org/project/uboot/list/?delegate=151538&param=4&page=1
+>
+>I don't have a problem with (and a number of our SoCs do this now) have
+>co-custodians, so I've reached out to Casey.
 
-The kconfig description of CONFIG_ENV_WRITEABLE_LIST says:
+Thanks, I will send a maintainer entry update soon.
 
-> If defined, only environment variables which explicitly set the 'w'
-> writeable flag can be written and modified at runtime. No variables
-> can be otherwise created, written or imported into the environment.
+>
+>Since you brought it up in this thread, you were in the original v3 with
+>questions / concerns about the approach that I wasn't sure if were
+>resolved.
+>
 
-This does not match actual behavior, "env set" and "env import" can=20
-modify variables as usual. The only thing that is blocked is loading=20
-variables without the "writable" flag from stored environment on boot=20
-(and "env load" based on what I see in the code, but I didn't test it).
+Conceptually the concerns are addressed, I will do the further code
+review shortly.
 
-As far as I can see, the issue has existed since the option was added in=
-=20
-commit d045cbacf2529266bb312add023e12c0d400bf67 ("env: Add support for=20
-explicit write access list"), where the commit message explicitly states
-"env import" and "env set" would be blocked.
-
-I consider this a security issue because preventing modifications that=20
-would circumvent security measures seems to be the whole point of=20
-CONFIG_ENV_WRITEABLE_LIST, and it only does a small part of what it's=20
-documented as doing. For my current setup restricting what can be=20
-changed in stored environment is enough, so I don't have a strong=20
-opinion on whether description or code need to be fixed.
-
-Best regards,
-Fiona
-
+-Sumit
