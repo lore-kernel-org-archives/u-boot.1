@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 362CB606A31B
-	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 09:38:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79C5C606A319
+	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 09:48:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=1LbDuGWr;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f9guzxUr
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Uwd3xeGB;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=osO9gDxE
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0581281067;
-	Tue, 20 Oct 2026 09:38:33 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EF87F405D2;
+	Tue, 20 Oct 2026 09:48:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id H2bm5zcDdD5Y; Tue, 20 Oct 2026 09:38:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 05A6281066
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792489111;
-	b=g/ZAepqbBPQQo0B+/D8tbWPyRleMbpRSyZKWrT5RTcwNQ5NzVwhjtK4kXn1RUcWmrEbr
-	 P5Rkfa5mDgJrPKTXdApQatEaNznrp7VDxFZ6PQZW5OXUmUxG8stpQ6EtzJZKPELqbmz07
-	 gNBdDFkrP2Pmax0INsUXJwi8Z73pV/a5F3qyNMWmw1zVhVTCZTQfQqyQnqnQwvh5gGjll
-	 QNsqxnmWYxefdkK/YNKvov/V99jn4ENOwQC3YmHh1x6yjIANA4XZ8Tj38YmbPgpTp5ERX
-	 +MClIui3nNhPYwZ+Qwi35S2r272NTQw9SvwMF6Qd4ZbKXEYSzJN9Ul8KzRyXFLdoUgg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vbC-cGAY3g_s; Tue, 20 Oct 2026 09:48:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org DF60740815
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792489722;
+	b=bhG1Hn9Ce5QFgmu1e15qsUYhPNoUcBj3iWraSHJtaGLZaJttVbVvIjH/0hwzNo3z1pr4
+	 93BjDzxroxm0I7c0eDis6v21tegACxP6EpWD/mKsVR7n3W8bYeaK3SAAh83TG4WbdbUqw
+	 B8kaFh1DD7MQefVOP/ASv61nQocmG5R30qp3gven3UJVUeIkjfW042yoGqeqy5vMc65yM
+	 kymP+HpOLQ1Fe47SjeiP5mc1sRY/xSsGxYrqE98MsD0i+e/etQ3OCJ5ljkv/H4o59sDaH
+	 5Shq3Gj5qzhhVvhu0u7bdIcrqQGnQQ+RGcScCBGHsxIPYgF1Y1x6663k06IEYsJ1MoA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792489111;
+	c=relaxed/relaxed; t=1792489722;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,90 +31,92 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Date:Message-ID:MIME-Version:Content-Type:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=GC0RZbiLv7Al1YY2MXByMbeWCj71hkx+3kLKivDr5ZA=;
-	b=T529wJtb2KaxMg8Rx+eH+mJonLjrDNVlM4B7IGZ91es4ANPB755YR+2J7X2RJcHUTxy+
-	 t3MdmR0uuTQK/zscBJhY8U3miOI8t5nu+iOJcjNzA5N1ELKfdxj4KxkxD7xnOstuyd5ST
-	 aK9zpDoKv48LfenNGKtaEVPqfdgl8f8D3e+w+4U6gQiMw7Y1ZkbQUO5XgRHBFOadJ1hOW
-	 URthLHQ+y5QC3lbIMp0whAEEbdr7pL15WhlpPnFNfMU9sd5uZqi9e3k6tpKIMtF0NvQrP
-	 JmLheG0ShmEB5WzxycXz/C2dNScD9L0A8DC49iSZcogWpZscK/TdH1SMELvWAa8UNKQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=YwbV+H3uunQF8KIHMYSkBIBtWxxh5JGdzvWdMNuJ8Vc=;
+	b=rbTGoA+klAl4qPXYZSZ7YlVJRop5PKwUjdQjY1r93ca43cWEBkUk2Cn7q+IkkCNYZqtH
+	 v0fNTuIVCvP7NCwIdnGTJemKnXMUKNIJM6J0S3LvZsXyJtUHtlCk3/PVKZW3FmEBywXx6
+	 kSnfEKg+5VuxQkpUieRwr+bYQK8HEFcgtKMRSnUKP86/vgeHe1qh4BYa6BAhKR9/V7FOd
+	 B7DlqsunJac7ZBlnXZmew+yGeze1MWMwEwJcZbpQbXCqbB4XblcvyOTc37VJ18akQR+Oi
+	 71jdKKBh1MhqL9F6JMVn/kd9g+7FDa60s/bi4W2XrtBPnIfoTTY8V2P7CyMc4YJmCBQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792489111;
-	bh=GC0RZbiLv7Al1YY2MXByMbeWCj71hkx+3kLKivDr5ZA=;
+	d=lists.u-boot-project.org; s=default; t=1792489722;
+	bh=YwbV+H3uunQF8KIHMYSkBIBtWxxh5JGdzvWdMNuJ8Vc=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=1LbDuGWrmzOERP322Pp4OI2Z9R2g2hMmAqQx2d5YBTRo2JLiaHPCL9xbLRb0usXi8
-	 ZLcwCsGmigdVdm7Hofp8ECahq6Lcnf4nlLUY1q5lyWS7gDgy77WFScUNcXjss4bFTu
-	 OyU3HsdxS3ADwi0/cGdLtDgViSWBhrSUVQUU5cJPUDlje+oEmqIPb0zYpzV0ufo77q
-	 PuEAXSLt1HWaBNp+RFNtBJ9VC68K+Hk+Dk5APeSfPHFsufx2OUMM75q6zySXLzzSrZ
-	 0k2kp7Hwc4FwIXGUAtdAQtQdcpTpZ07msEAPmCpDZWO75qNqxBvBj48VMy73ViUW4v
-	 25sOw4KpP3ysA==
+	b=Uwd3xeGBhCzeSiBTbNzMubfbtGMlE5p8jvah9X078WYuJy9q0bdEwAeC8tzP7yHqo
+	 rGs6qXoRrN9FQR7ZoYaj++5KNH21O1sPXmpoppY23bNw1tp0Qarn9k2HhoIIIMr4zK
+	 uK8bmyoaH+R6sE7/H+Fv0RD6plcTwpegN7npqBTUMXIeUbzPnkuWPFtxB+pb4Z9QOE
+	 mXVG0U0U3KhWTkvVSFNQfBv2fJ4m2M0DAJMsTW2oJDM0aBoVGg40DcUt3EYGKXwkEG
+	 KDqGBEEiqMGqSODNWF3ENgWZXtcBssEx6JnM39qi4O9LUg1AU1ruoz0CrWDfOmNGng
+	 cvDrOF8kSSvIw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 05A6281066;
-	Tue, 20 Oct 2026 09:38:31 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 2F8AE465
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:38:27 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DF60740815;
+	Tue, 20 Oct 2026 09:48:41 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id B0B5723A
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:48:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 1536A407EE
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:38:27 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 9699980AF3
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:48:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cXwCuLmicPIQ for <u-boot@lists.u-boot-project.org>;
- Tue, 20 Oct 2026 09:38:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6E8F1407F4
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792489106;
- b=L54GEIvncihh2fIbOjbK/TM2fyrFkdvlIvpoJVUWhPZd7UblQecToTcpDcelcnIBzLKr
- XHF9ZirmgrQwMM766tOHGGsdIaJT1IEG63vfYqtujwydjDVoj9GVcgQXe0c7mtr/2o2p+
- R+HFb6TIfiiqaKSL43F5OaG/FmowT3ZkmylGSV8dpfv/M7jwO4uWFF9+wGFjtt1gcPOzX
- 7jAzTW6hMlSdm63VqUG1O6MnCEM1cLAxZ0qAF3jRmqNt0BpwMNmVz7YySjeBwh8aEwTtD
- 7fxPXLK5uYBrk3nrrpPE606sWPDcNZx7Dvih0Ncsg+g0Vao40kTSQAC+UAWMtFb/mgw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5n_8JGuo6VZa for <u-boot@lists.u-boot-project.org>;
+ Tue, 20 Oct 2026 09:48:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E721480FFB
+Authentication-Results: smtp1.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792489720;
+ b=TuPujwX7MmIRXjUWVG8g1a/sjAoxYSn3B2T82drFFf3EkYrB5PkFubRg199roJEhiu2Y
+ r/kPMaK3Y/4ixHPQdp6kCOrj6aAqVvUhFowDlvY/6GUKIODWOHO1wwe5tiCLt+kdrNprp
+ PNuTjqsOykwWkohXGxP0ssoSqMc6eqpyPOT5W//NlruPMq/z44zaeU28E8WKk/9KbHbKF
+ YNv9TUCNuo6a/EdKaqn66g1Y3OzdZSIluRPNYIGiTgfUTN6eo6qSVjeFMIjc29tbly51N
+ aT5sfZh1b1jaQ7jNv1xG3yVJQo6t7yhbfOBya0QWMis1zwh5fPFQBaAs+rm1ojSLDHw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792489106;
+ c=relaxed/relaxed; t=1792489720;
  h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
  In-Reply-To:References:Date:Message-ID:MIME-Version:Content-Type;
- bh=GC0RZbiLv7Al1YY2MXByMbeWCj71hkx+3kLKivDr5ZA=;
- b=JFEQD/YOG3x4c2sqJcEFwqWe3ApHBhHCN0+di8AB+kD2MP855q0SuXcqiJGA8I32YVjK
- O/XMHSYaGD9LScXmyAFlE5K8ZHhtNIHMco82/pO0LG113yCs2A1jufzAu5ZF3L1UMA4aS
- OG8l9wVQIR6X8BOEsDBZP4j/is7oNO7nAEolYA+MmsqAhJOU2wbfthRuLmBJlM/13C+4T
- PXJchtFsnncKX5DgVWUh5y5/TRlc06Ef8Qym/X3WUHjQgANqoRwPemnjQUYbHsdho2e6R
- xJSXubVZR0O020H9iLtymF8J4AtwxaCmtnHDfQzPFsAKEZElpuWhjNR2qU54Wu9bXGA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=YwbV+H3uunQF8KIHMYSkBIBtWxxh5JGdzvWdMNuJ8Vc=;
+ b=nXXTgnIQVzJDs5dTpttSfnMua0e6E/K4RuAcexw8Bz9vBOl/N19pJZn6JNSR2eCI0Gew
+ uTizRzCjUZgnTwHMRLvkGXtMuNUokE3Qr4L2CHzHT5gvf44o11fB+Gw2rq+EF9gDzbfvU
+ tOdIWhqtoveN0YUpA8DmchAuqG8lxvhj4fa13bZprzqbeR8KXzotEEG08iUSAWL9cbRRk
+ fuvCUerXUPmR8nGT/Ql0Pngcopleq7Uq7wut/zDCa3dZ5bfEMx9lFZoP7rHE2r85HFEqI
+ uqp3S9jN8GqxYLVLrGQX9ZufaChk/giV7O8pjlN58Rdkef+Q7pXZi/LKBBhSJiw3f0Q==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=f9guzxUr; 
- arc=none smtp.remote-ip=172.105.4.254
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
- helo=tor.source.kernel.org; envelope-from=mkorpershoek@kernel.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.s=k20260515 header.b=osO9gDxE; 
+ arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=f9guzxUr
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6E8F1407F4
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:38:25 +0000 (UTC)
+ header.a=rsa-sha256 header.s=k20260515 header.b=osO9gDxE
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E721480FFB
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:48:39 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 4C27360A59;
- Tue, 20 Oct 2026 09:38:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84C891F000C4;
- Tue, 20 Oct 2026 09:38:23 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 7DF0640868;
+ Tue, 20 Oct 2026 09:48:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E15821F000C4;
+ Tue, 20 Oct 2026 09:48:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1792489104;
- bh=GC0RZbiLv7Al1YY2MXByMbeWCj71hkx+3kLKivDr5ZA=;
+ s=k20260515; t=1792489718;
+ bh=YwbV+H3uunQF8KIHMYSkBIBtWxxh5JGdzvWdMNuJ8Vc=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date;
- b=f9guzxUrh0uP7N35puCYnTRRZbURzSIA2eJArR22XMamJA8J9ycn6TR0spuhr0JOL
- 86aadOal/kcUyeRfgHAjasu0iDRnWiutD93GhDunzTaKxQ8CbgCzxLH5A87tjEonc9
- ns2jNhaFuiwCdc0kGrIsjCmpxnaecR5YCvFd7HuBbwOjctJP9+FnXT8OyDcyy8nwon
- RvVlxkgrqUt138aXYAaTdOx929AGvUa9NpwKrHf7vrfrH0jLs8Su0jqrJ7yvjf4bDY
- ZXV/dP683cUQXyytf6R0uqZjdo70io3IB/vtzSsGnoebYu/0I27h9OdSUoxYW8m8El
- k+pEwI0eWH9eA==
+ b=osO9gDxEBQwQxO0eZsmTBs4C0ztcfKf+Czexcl4pnAu4ZvOSiQ+BeVj5XnZtMzCav
+ sF7rI1DS7avylsqymDrNo6hngX38mgRs5giu9kRhj3FKLc0GSEnbvUwuzWI6FkzPbf
+ 8kZxE+Zm1zpQKNDSBvkNNdnCcLYZS5ufIROX9y3cqZFvRj0npAm2wBZylk55SL4m8I
+ 81bE2VL5ikq5RKkho1WxiQtluLxsVM24OWr9RKjnizlXCOF0F7nGmRmpqWd7zE3vJE
+ QZOJ47KPbVsAMDOzGhjUZcAzbhJHK6vflJGi6/8HaOAUS5TyDzpR2Zg+r2l3lwiezJ
+ uNSA4Q+Fz0wpA==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Patrick Delaunay
  <patrick.delaunay@foss.st.com>, u-boot@lists.u-boot-project.org, Kongyang
@@ -125,12 +127,13 @@ Cc: Lukasz Majewski <lukma@nabladev.com>, Marek Vasut
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  uboot-stm32@st-md-mailman.stormreply.com, Fabrice Gasnier
  <fabrice.gasnier@foss.st.com>
-Subject: Re: [PATCH 1/2] usb: gadget: dwc2_udc_otg: bypass debounce filter
-In-Reply-To: <20261008-dwc2-iddig-fixes-v1-1-24c302b8953f@foss.st.com>
+Subject: Re: [PATCH 2/2] usb: gadget: dwc2_udc_otg: wait for mode when
+ digital filter is active
+In-Reply-To: <20261008-dwc2-iddig-fixes-v1-2-24c302b8953f@foss.st.com>
 References: <20261008-dwc2-iddig-fixes-v1-0-24c302b8953f@foss.st.com>
- <20261008-dwc2-iddig-fixes-v1-1-24c302b8953f@foss.st.com>
-Date: Tue, 20 Oct 2026 11:38:21 +0200
-Message-ID: <xhkdbh5ig4sqa.fsf@mkorpers-koolstof.csb>
+ <20261008-dwc2-iddig-fixes-v1-2-24c302b8953f@foss.st.com>
+Date: Tue, 20 Oct 2026 11:48:36 +0200
+Message-ID: <xhkdbecdk4s97.fsf@mkorpers-koolstof.csb>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
@@ -156,19 +159,31 @@ Thank you for the patch.
 
 On Thu, Oct 08, 2026 at 17:37, Fabrice Gasnier <fabrice.gasnier@foss.st.com> wrote:
 
-> When using the A/B session valid override bits, also bypass the
-> debounce filter. There's no points in deboucing, while forcing
-
-s/deboucing/debouncing
-
-I can fix that up while applying
-
-> session. This solves some connect issue seen on stm32mp1, as forcing
-> session races with the controller initialization in reconfig_usbd().
+> When starting the dwc2 core, it may not be seen in the correct mode,
+> when the dwc2_core_reset() gets called. This is seen on stm32mp1 upon
+> first call to reconfig_usbd(), a warning can be seen:
+> - "Waiting for GINTSTS_CURMODE_HOST timeout"
 >
-> Fixes: 5739ef2bcb6d ("usb: dwc2: add "u-boot,force-vbus-detection" for stm32")
+> When the core gets initialized, wait for the debounce filters, so the
+> correct mode gets read and polled later in dwc2_core_reset().
+>
+> The routines are added to dwc2_core.c, and inspired by the linux dwc2
+> driver.
+
+It looks like this patch is based on linux commit
+2938fc63e0c2 ("usb: dwc2: Properly account for the force mode delays")
+
+Can we add it to the commit message? Or please add which linux kernel
+version this change is based on.
+
+If you wish, I can edit the commit message when applying. Please let me know.
+
+>
+> Fixes: c5d685b8993c ("usb: dwc2: Unify flush and reset logic with v4.20a support")
 > Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+
+The code looks good, so, with the additional details requested in the
+commit message:
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
-> ---
