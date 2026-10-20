@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47F19606A319
-	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 17:26:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8601606A31B
+	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 17:26:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=RdZVfLCq;
-	dkim=pass (2048-bit key, unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=9czQwkIt
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=aXxKODS/;
+	dkim=pass (2048-bit key, unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=CkwdZwEn
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 14C908116A;
-	Tue, 20 Oct 2026 17:26:15 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C12E340900;
+	Tue, 20 Oct 2026 17:26:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6Ok4faesDlBw; Tue, 20 Oct 2026 17:26:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0E04D81161
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792517174;
-	b=KhRTtjw6jDU+1xILHcgC2ThmM0prdpD3211J0YfpS8sbconDh6Wm0Hdrd13UVOZQvdMS
-	 rMQeG5YPd4pc3ww8N1jWpZ3ONHihJSypRHcw4rJMGl9JUtJyMiAI4cGzXDDSjUp3qmt8w
-	 n0TYv09J93CQfhrh6VMrpaaOFgN5Dy4p611kV3o4y2GJHJLsy3bSZtYoM/wmme1sxA6Lw
-	 JWJJj3ymY/iDJ57VmuWkQ3D4xPELpU5bEGCxxzn0B7GQaeJ3gxF3MSPSUbNT8FpLK3Ro+
-	 Q9oUhRJjSn6abo/vKnp2sRcgllO1L+kucRUeRHrxOR8yCZBrbi5VQetLTpmrIQkNYwA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XEtZ_3aFBqmo; Tue, 20 Oct 2026 17:26:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D339A408F1
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792517176;
+	b=BjFt1IPND3JxPEuMI3aXrPRzntb4cm09ILtjhCjKHKHeFAdCWIkkIuUj1/nI2SIAFefx
+	 +Ke5+1VckLn3ofCPCx3LZxiXFQYu3mYZCbVC3cSB/k1fk3b98LUTg+v1oMER6efBD+9WY
+	 bqVqx3LYMfyqEYDRGG6Ou/uJR54HTH116esFAL8vPTZI4H+dg7U3XOOEge3ccWtYyQtVi
+	 fgTZZ9iz0Bp/yLOCAFiQouxFJWXjpKcdAaK/OQF3jwdrSXDeVM2FZ29jbgF3kTPndh1i7
+	 zlWOLT69SrheOQOARIrpygtlim0GVjex7Pg95+QGv92VIDsPqYrMh4whW0GfTIZBb1g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792517174;
+	c=relaxed/relaxed; t=1792517176;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,135 +33,138 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=lAAQLQ/+Go10zgR+r2u29nnQx2GolxNmgNHz8oWQvZc=;
-	b=KMKKdMbaLIA106UCPzJoAhGGDgTy5vee9glSBQKgIUoY2IjAto+LneDozGeXqrqNFU9/
-	 TkxmTtIb/pk9ZfKn7QDo0gnPtuMVTgaqw1XX47b02fhY88hgSYzvcQpIgZenhhESwzDDR
-	 qIz4ImI5z6E51F6jfeU00whS+TqW4rKQZOV/2mHVIgaFlhVaAiDrzy7ZpXbryRknuFuNM
-	 oWT3k1NFmi6LxGkvv202/SeEfdYf/EH4vrzW8ly9YuXov6wWSYEtiZAQRFj8OLiO4qcUN
-	 D9kObX4r71dBnaj8D9Sw40qmOog1fdxPsBWn0jlpRfawhu7TSgNRf5a2OFC1xWFCpvQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=hTCJ3DV0ga9Csqse/MVP0Ms4OUeYDvmS+/r9GtpWoZ8=;
+	b=l1WunS3y1VDHvyWuBcgE3shOwFYMA+4hWrFnmlK+plVY8nMNOUrsAJ5WrkK53mik/gZm
+	 vZ2y5raxE3fGXAIspHz3EvaLSIKvtzDM6Q85IeuUSPQelfdFB8Y1sRgKWctL6ur8NyXR9
+	 +mE6E2J6tGLxNOivh4I+fMQUhYlD1qQbjGwwmJjlrCCvAlJZUHnZoTclywgqiMglx5oT4
+	 3fhuHpzGc6GrgbWV/vCDItrpNwUgoEuvBfAD2aEURdhkPCiE2EVeUTuV+I9UgOOLqQSA/
+	 JSwSQjqrmhyxEs/ffTfGxeUhxbuHECcbFA26Vnbloq5j6AkcMTULrIzQQ+ow6JZMMcg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=flipper.net;
+	dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=CkwdZwEn;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792517174;
-	bh=lAAQLQ/+Go10zgR+r2u29nnQx2GolxNmgNHz8oWQvZc=;
+	d=lists.u-boot-project.org; s=default; t=1792517176;
+	bh=hTCJ3DV0ga9Csqse/MVP0Ms4OUeYDvmS+/r9GtpWoZ8=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=RdZVfLCqLDx1xRVG4FFuByyAUcm66eWAekMz3twXF4c8vvKLXEbmWQnKdXVGAnT08
-	 tclwM0asnaFAsJg+RAv4EiELI1dvldfNqIQgHIF9YER56kNhhHAav7iC6imR+MC1wQ
-	 5tdfzOr0Et3HnM875dK673eCXP46f+Uex2NsiV9iKaWIo6b9FShHX5C1h7qzZUMtoG
-	 /C9X9Btw4/2t92D6GZZsdsJ0Jddzr7D9Y47zz4gucAkfoexGqA4FiuUnVVw5CyTKDe
-	 VDYDCgYw98tyyn6NqSJ8K+SG0gAq/rHCbGuwJJkIcVoAUffblNVkKf/f0iLw/TKLP/
-	 IjsVC2H0XicGg==
+	b=aXxKODS/ce85vw1dCMC1dMq8FiuydnlNZ+AEWd4ugvoyGnPj6KlGWIMh+CZJv0hih
+	 XWxSTeuVUBQ+togQuB2B2KGw/oMD/OYBoEoAajJUD4uPiPJfJWYpSUGewnkG399Con
+	 XiX8uZdNJbIMVmMdm7VpmyUC0TnbM3E90MfdxATCAgoi8Nepc8IJfababi1eV5PreX
+	 27IvW5UjRYSKd/e3NbZrB6OYbPbTBUGLO0qQxZmE/abKy+aWHuEmR4m3aaFMLnn2XL
+	 81cBhV8bvgZflWFTl4Q9yD57XvyT+yRIVZuYbgKeURW5kyJRplYT0P+58ko3eBZ0Xi
+	 MH8jLMKAitXBw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0E04D81161;
-	Tue, 20 Oct 2026 17:26:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D339A408F1;
+	Tue, 20 Oct 2026 17:26:15 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id BFD0D930
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 16:42:04 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id ED36B769
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 16:42:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A58AF4087B
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 16:42:04 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id D31C04080C
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 16:42:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Hp_81rsvtFRh for <u-boot@lists.u-boot-project.org>;
- Tue, 20 Oct 2026 16:42:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 767C9407A3
+ id gzpJ6ElKGuRc for <u-boot@lists.u-boot-project.org>;
+ Tue, 20 Oct 2026 16:42:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C34F2407A3
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::335"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792514523;
- b=dTchNQM9W4irVeQEXi44rClQFhLL+JRF9DaQ3iLZ004V05hNIA9g9mmfEt3M5f3kLaBX
- JuYO6QoJAO8y0Yktj/g+weJWrJcUiaBKXFb5wTSsAQn8yKTnC/UrIluYCiXBAUgggP8g2
- 6+gFWGT+dqoVO3+u3k6wFGlPXrS3U1ovwnIDug0U8/ibvw4R1cVjOm9Q6VRc89CkNdxS+
- yNrpnrcCNo7S7kElKBJFAi01mCuZBuCtBtk+cSm+jfp6G02lq1tcTcNhgofBYQajjTsMx
- vafDt8tkglQ7MdJYO6REEWcqATEcTA/Vr2iUAWbdjJRsxJzlpLnnpI+rEDTJIOa5X/Q==
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792514533;
+ b=BPnbT4DgKaves/pj9NBBdInlYswC0zaT2NR6/ocjd4F+S/MOGoiPJ6GHZ5kbgSMKmIvH
+ 4VF8fKb9DrMbScp84lJ7hSEkiZc3prZe2JbM9rgEA28cMVhpvSR5morTlKc5SzbLyannt
+ /gAvrgbZr7ctlIOBgf0AeJ3K71f0/qUbJPDuwVwRb/b6bhe/Zb/vxXwtx4w7y9YK9Jm01
+ badvNBOhkEl/HSsYjvZyj/qG+EADJuJUBcirQQMjCK+pT4OtYQy7WpRrzaN1XjpxAAd9x
+ 8qRYzUjCcQR5+3qowvEQsKMFoAwIxrnbOKoDAcDPbkG9byE0mxAQTuitl1Q+hyAnbYQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792514523;
+ c=relaxed/relaxed; t=1792514533;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=lAAQLQ/+Go10zgR+r2u29nnQx2GolxNmgNHz8oWQvZc=;
- b=tG06LKm565wbh4r/o79OWdQS0UU0R9QfkxPnRlNLqf/jaP6oMgYezfXwHN8bj0XHlzEW
- bLgG3RDtbe4y2yTbkBfKjhc9yMt5iZ0tvDJ2kjPUI0SzJ1n8R6wJFiE2CbZS9N2r034L+
- 0bqKRZRlsFK1b6c1gVaOxJNysL6nNoym2pPUw/fy8GR2P4wLZRWgAZz7c+11wWabgCd7J
- Mj2pnkzdQNoHuR9rMdC3mydjxA0/AsJXGdUYGGdUTHSO9ZJqKSWwGyIt5GoDa+pYHIL6Q
- EjxCgDNS08NQGXpaM9OF5Bh5mvwQUwIrjlOdJCwv8sJW9VxiTFTVoWEdmlRCyS8l2RA==
+ bh=hTCJ3DV0ga9Csqse/MVP0Ms4OUeYDvmS+/r9GtpWoZ8=;
+ b=UjrCFl86yzEJgkiXc+FINYFX7wUAaXkUPEi950U3A0Qq0AM6CQOFjGwdJ0xqYWkJSpVG
+ dYoU9pG1iKX0oDnJDKQYSxlJ23nOU5p3f7NdwHmt/gcO7vBcb7ia0bPEZ+VPKd1/WY829
+ W4gKIXLv3NQHOmxzznrPF0nKKLBpQ/iGcA5nJxuUJAS3Dq1TXJ87vdfSFPYklKPhrD1k9
+ nQ7P43sgclZcyT/Ss3UtKgAq14aEOE6F7JrXDiJf1fHvcqtSRHzLFrImtDywpeb1df3cV
+ V1wc+pajzHHbC/1uTb4pQl7tnuFo9JA/h3QF6/XfyH7Lv4WKxyXucxKPfhub1+667Dg==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=flipper.net;
  dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=9czQwkIt; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::335"
+ header.s=google header.b=CkwdZwEn; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::335; helo=mail-wm1-x335.google.com;
+ client-ip=2a00:1450:4864:20::32f; helo=mail-wm1-x32f.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
- header.a=rsa-sha256 header.s=google header.b=9czQwkIt
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 767C9407A3
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 16:42:03 +0000 (UTC)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-49d0da752ffso27994805e9.3
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:42:03 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=CkwdZwEn
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C34F2407A3
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 16:42:09 +0000 (UTC)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4a1dec056ddso19671445e9.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:42:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1792514521; x=1793119321;
+ d=flipper.net; s=google; t=1792514528; x=1793119328;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=lAAQLQ/+Go10zgR+r2u29nnQx2GolxNmgNHz8oWQvZc=;
- b=9czQwkItVuH6XHDzBZl0Y61bPfcyjhemr/ACsYNlysWzennD5cJw9xQo2VBAEuBIa1
- jlW0IqkoCOAdK2amNsp2NXW8wSsFZJnE7CG3MxGT9IhLoeXG85PY/CHXwVakyNZ7Ma5Y
- NjeoXSBIbDQpB1C0kn8N8mWxxayVYWL999XQwV5YGEWUI8UCDVfRMxqWHlBB6Mzh8tp3
- DIt6ptIL08Hwk7D0fM7k8tqiqopEeMltqsjSBmyl7etKzOvnGrCGZC6EbNrKFReyCTKE
- 3cBKmb4TlWYsp8kdl0kizZZBUC9UFZpxaYGcJy5au7kV+9w7qRpzIjgMpIV8+//JH59j
- Yx8g==
+ bh=hTCJ3DV0ga9Csqse/MVP0Ms4OUeYDvmS+/r9GtpWoZ8=;
+ b=CkwdZwEnB+CtktOoyFGrgyEye+tnYcdX1y8Qb0fBqPrgLMvhmCswHpOzzrp+SCDH7s
+ Fzh0xT3ljK3EVmr5DAK5HtHAoHttoJbkTvSvfxDRNr73+1E2mTKRNN7ZiIzXQw+qj/H0
+ buPI6LccoWE+qAtc71a9IkpZz6TByceOvDAFs7QEdqio6EXa5hswy8sWYyttxSVAJdbW
+ uzoMZH0juUXl9feubTB88WeFFPMahOoYpCd5CFnC2UEN+NEKgBAJ4Ir7jms32YTqXU3E
+ mSd7ouF+ZXcMnGjSKbzMd0UBg9HlLS1kHXKtaeOM0psQk224oVi19kuZf5mYUZniv7zv
+ yBGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792514521; x=1793119321;
+ d=1e100.net; s=20260707; t=1792514528; x=1793119328;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=lAAQLQ/+Go10zgR+r2u29nnQx2GolxNmgNHz8oWQvZc=;
- b=gMdTcoJH10ZG3wntN/dsgm3LssKoDjaUEwvJXAE0YRpcTChfN6GKT7BVDzZyFJ5GKU
- +ztBsbhgytx7BbeQy8ZulroNPC8lkKMLHqkZ9qEhzgG+x406PH3OL7CG0rqU28tbjWr5
- VP2uCbliWmnHlkswexeYe6rhYc+l0/FH7oe4vhLC9tgffMyFPBCctWLtWHJuLD7bakGO
- SCEpM2vVr2UJI/Ungwv6fuVtpHcfQ6QHxyC6f+3h+v1IAULJAf4ElYFGk/3ZF0aUBFUm
- IeDCGBDbFcbouTBJQdu8DsVIyyoCn9bClaYJrPqZaLaUqGtkl/thztCgZ6fpRUnvGMpx
- R3xw==
-X-Gm-Message-State: AFq9FYK7hSu5MbV6Jvjx5Rsx/D0D0GlXj8qisiQWqKZnKewxnC56kICc
- zsY5v+vEMWDS/ftCeiMoElfjNvmOQW4ob2W9vRQaYl7Zwsr7dbrb3s8q+MzDlq18P/Y=
-X-Gm-Gg: AYBFou3OX369EsYOKsgQNxCgF6w3yXtVNn8UX50p6uzXdZqP6XYTETQapJ61lBMPMR4
- Rl3nnHT11Bj43KngAfKYmrtvUhXq88JMlKf0tLs8WJM0gkuHT66kJCeAlEmHxjnKwK9M2kx63Lx
- ke9tpRSrmBS/K6Dlb5bTAq67NKpKfEgYr2nEN0XALCwOh7pm0Vtc/0EcbFsd3c8UAZM2yav23eQ
- TIr8J18/8IcDbaluS+GQQ6DP2ODq8ghC4/qJgASSz84S3wxA4h/fTskFi6GVHHBUMVlxpAxHJND
- mINTjtZ8yDWd7tg3t1eHk4E5GjaUhRGWaDgg6MgbJMl6N+9XAcElBajJ5RcEWfQ0UvIIRulLxCF
- isNHjLn3/4VIXpFn+JG3VtaoSXh+n3YFt04QshTS1nZB4L/dV8i62+Q/guTgt9RqZ3DsM9W4Jln
- szPPzp3nbAxiTdJZpy6NNaA9F/hqtaBf1HcgG6ZECb84KsyEEMI2ebQyV2n03Z4lR9941SHVfWq
- n80Je9PuLoWpUkU7onoVsfYySmD0q380DoOAQBcf2c6sz4cz6W4MA==
-X-Received: by 2002:a05:600c:1c0e:b0:4a0:b6:4619 with SMTP id
- 5b1f17b1804b1-4a1d7462e34mr261794895e9.0.1792514521421; 
- Tue, 20 Oct 2026 09:42:01 -0700 (PDT)
+ bh=hTCJ3DV0ga9Csqse/MVP0Ms4OUeYDvmS+/r9GtpWoZ8=;
+ b=Mq1fgS5i/Ae0QgxscsqvRCw9wY1PNDQiW+xrpytWeDP+bflJKlEXLfli16IJ9cwbEq
+ YJytn4XvH/8pASQSPx4NstQaPTy2SuQ779F+FqDmr2y81s5bzb91a2bH+MBJG24bopx4
+ Ba5k0Soji7jZ2FBmKYM0+YOrQAn+rQG6cX4pF0OL6OtX82RmiyFEw8WnMCm6qPy/fDtc
+ KEGiHMn/A+BII64vKwqoKVT9LXxZfsqxM/Ypq+aCUKTgF1iZv+78FCupP6lBYYzBKWlf
+ OY7c7WadZ3DmqX99bDj3LorVPIls7dXmN/rbQIMIEo+WTauwtei/k4DfvZRpz0QZHYPT
+ ky+Q==
+X-Gm-Message-State: AFq9FYLeqOxhA4WGXan05ZUir0debebtM1IYCAO4ZzeHs50GOHUyCpQJ
+ /6+4s4uMYDn6vY26mYo8rYeRsgqB7GzhIaMEXITgT8fRkTH3b2SN0AGJjdGbFkesloA=
+X-Gm-Gg: AYBFou2R+nlb5Ykre+YujhSqWSGwGNKN0NyQ7Xnsi+IEbBOM9LEiYpTkIMdtmOSt+BZ
+ s1PV4AR//aM/r2fjbxoRY4wUjiAZykUE8fXpSvxu12GmHedi3HMjwgWojn9KVJn48J/pAbHZZ0v
+ 6ym+N7+GHFZD0sL75T+pT7+DowFgL2RvYlBkPRqTFKInn8V5lTShXd2rmWmVaMJIi0BHdDQ1fjY
+ +LM4FrDPp0Fm02b5iLaXwJusqhygOJ3Kr8y6pR7VynOB3VCPgvXykl3+zGz00DExxCdB1/OB6Eq
+ V/ZanmI+jWVjVfG6nfOQiy1cq/sXG3nb6FsNb7aNJTMK4KO2YgMXtPu2IpzWiXWkdmIwXMjgxHG
+ dmXfElqz9dCHrcxTcCbUf3IHmoI0Z61z2TGOqhV6knnBpTD6ZTTdANZYyk2TSqLeNJB8STWV5ZR
+ 8WWyliIYKhAZDS+GTL/LJ9Jaq9s5gcu+mhasSdnojDPxXrQxEi1+1ShoH90Ij224piCSq8osnPG
+ Zbg0PfGz7lcCng5noCh8y1u9WgjCuvxi51NIMRGp0mQwXJLbOSPxQ==
+X-Received: by 2002:a05:600c:348f:b0:4a1:e774:370c with SMTP id
+ 5b1f17b1804b1-4a1e7743940mr151027945e9.30.1792514527742; 
+ Tue, 20 Oct 2026 09:42:07 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-86-98-194-229.alshamil.net.ae.
  [86.98.194.229]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1fc10de99sm643315e9.1.2026.10.20.09.41.55
+ 5b1f17b1804b1-4a1fc10de99sm643315e9.1.2026.10.20.09.42.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Oct 2026 09:42:00 -0700 (PDT)
+ Tue, 20 Oct 2026 09:42:06 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Tue, 20 Oct 2026 20:40:54 +0400
-Subject: [PATCH v3 07/23] spl: fit: Decompress any supported algorithm
+Date: Tue, 20 Oct 2026 20:40:55 +0400
+Subject: [PATCH v3 08/23] spl: fit: Report compressed data overlapping its
+ load address
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261020-spl-fit-compression-v3-7-6647aa23ade5@flipper.net>
+Message-Id: <20261020-spl-fit-compression-v3-8-6647aa23ade5@flipper.net>
 References: <20261020-spl-fit-compression-v3-0-6647aa23ade5@flipper.net>
 In-Reply-To: <20261020-spl-fit-compression-v3-0-6647aa23ade5@flipper.net>
 To: u-boot@lists.u-boot-project.org, Sean Anderson <seanga2@gmail.com>
@@ -190,12 +193,12 @@ Cc: Alexey Charkov <alchark@flipper.net>, Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
  Mehmet Fide <mehmet.fide@screeningeagle.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6129; i=alchark@flipper.net;
- h=from:subject:message-id; bh=QHGR9lVHeU7u3w/D+PpfXHWe3nkwEpMPOAraCUB+owE=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRdn7nq+xUGaZ37azb7H9Re3qmWL7R+QT8z394ajfeJH
- ZONC4K5OiayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
- QyMdYx0jBi5OAZjqlvmMDA+TA9wyA02am+65MLRvTy2y/n/o2vMiOwveyRWX02ZY+DL8Mw1iZrp
- W6D09/rXDd94L3TqnnQJ9I/bkh0w6p/Dpg/0ETgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4727; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=H3K9eeLxXhhi+g5ehuOXlhAVKF5PPKOyOjB4wGCikGQ=;
+ b=kA0DAAoWsqLYjxBZ1KUByyZiAGrXmaqiK116gYlNYgzjp9tssHrbOduMoET1CSu+dUZV3kq/4
+ 4iRBAAWCgA5FiEEnfakPZUyDpq6SEj1sqLYjxBZ1KUFAmrXmaobFIAAAAAABAAObWFudTIsMi41
+ KzEuMTIsMywyAAoJELKi2I8QWdSlbKYA/1NhVAV13jTaiSTLwJXAP5R/veKWMljEOXyjkmCrLal
+ fAQCjrpJGnGqbGD4569eeEzQW8IqOqR1hd/6jyHagzL+3CA==
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-Mailman-Approved-At: Tue, 20 Oct 2026 17:26:00 +0000
@@ -215,168 +218,126 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-load_simple_fit() open-codes gzip and lzma in two places, so a FIT built
-with any of the other algorithms image_decomp() implements for SPL (lzo,
-lz4 or zstd) is silently copied to its load address without decompression
-and jumped into, causing a hang with nothing on the console to aid
-debugging.
+load_simple_fit() stages compressed external data at SYS_LOAD_ADDR and
+decompresses it from there to the image's load address. Plenty of boards
+keep SYS_LOAD_ADDR just above TEXT_BASE, so a compressed U-Boot proper
+there unpacks over its own input, and all the console shows is an error
+from inside the decompressor, with nothing pointing at the cause. Worse,
+a decompressor which keeps no checksum of its output may not notice at
+all, and the image's hash only covers the input.
 
-Call image_decomp() instead, which can handle all compression algorithms
-enabled in the config, and will abort on an unknown one instead of trying
-to silently jump into it. Bound its output by the max_size the caller
-passes rather than by SYS_BOOTM_LEN, so that a compressed overlay can no
-longer run past the end of its buffer.
-
-Read the compression regardless of whether the phase has a decompressor,
-so that an unsupported compressed image can fail loudly instead of having
-SPL jump straight into its compressed data and hang. With no decompression
-support enabled for the phase, a short-circuit path is taken to avoid
-linking image_decomp() and the table of algorithms (up to 1.2KB total).
+Refuse input which reaches into the output, naming the addresses. The
+output size is only known once decompressed, so check against the input's
+length up front, which catches the common case before spending time on
+it, and against the whole output afterwards. This is conservative: input
+just above the output can survive when the output grows by less than the
+gap, but no layout is set up that way on purpose. If decompression fails
+outright, hint at an overlap the checks could not rule out.
 
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- common/spl/spl_fit.c | 78 ++++++++++++++++++++++++++++++++--------------------
- 1 file changed, 48 insertions(+), 30 deletions(-)
+ common/spl/spl_fit.c | 57 ++++++++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 55 insertions(+), 2 deletions(-)
 
 diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index 8dabd819998b..50c4b269f700 100644
+index 50c4b269f700..e0ded9b9b3dc 100644
 --- a/common/spl/spl_fit.c
 +++ b/common/spl/spl_fit.c
-@@ -6,7 +6,6 @@
- 
- #include <errno.h>
- #include <fpga.h>
--#include <gzip.h>
- #include <image.h>
- #include <log.h>
- #include <memalign.h>
-@@ -235,9 +234,10 @@ static void fit_fill_image_info(const void *fit, int node,
-  * @fit:	FIT to read from
-  * @noffset:	Offset of the image node
-  *
-- * With SPL_FIT_IMAGE_TINY, only tell apart the algorithms this phase can
-- * decompress, as spl_fit_image_get_os() does for OS types. This saves the
-- * table of every algorithm, and the strings which come with it.
-+ * With SPL_FIT_IMAGE_TINY, or without any decompressor in the phase, only
-+ * tell apart the algorithms this phase can decompress, as
-+ * spl_fit_image_get_os() does for OS types. This saves the table of every
-+ * algorithm, and the strings which come with it.
-  *
-  * Return: the compression (IH_COMP_...). An image without the property
-  * counts as uncompressed, as it always has in SPL. A name not recognised
-@@ -248,7 +248,8 @@ static u8 spl_fit_image_get_comp(const void *fit, int noffset)
- 	const char *name;
- 	u8 comp;
- 
--	if (!CONFIG_IS_ENABLED(FIT_IMAGE_TINY)) {
-+	if (CONFIG_IS_ENABLED(DECOMPRESSION) &&
-+	    !CONFIG_IS_ENABLED(FIT_IMAGE_TINY)) {
- 		if (fit_image_get_comp(fit, noffset, &comp))
- 			return IH_COMP_NONE;
- 		return comp;
-@@ -271,6 +272,38 @@ static u8 spl_fit_image_get_comp(const void *fit, int noffset)
+@@ -272,6 +272,40 @@ static u8 spl_fit_image_get_comp(const void *fit, int noffset)
  	return -1;
  }
  
 +/**
-+ * spl_fit_decompress() - Decompress an image to its load address
-+ * @comp:	Compression of the image (IH_COMP_...)
-+ * @src:	Compressed data
-+ * @length:	Length of the compressed data, updated to that of the output
-+ * @load_addr:	Address to decompress to
-+ * @max_size:	Most the output may take up
++ * decomp_overlaps() - Check whether decompressing may overwrite its input
++ * @in:		Start of the compressed input
++ * @in_len:	Length of the input
++ * @out:	Start of the output
++ * @out_len:	Length of the output, or as much of it as is known
 + *
-+ * Return: 0 if OK, -ENOSYS if the phase has no decompressor, or another -ve
-+ * error
++ * Return: true if the input and the output intersect
 + */
-+static int spl_fit_decompress(u8 comp, void *src, size_t *length,
-+			      ulong load_addr, ulong max_size)
++static bool decomp_overlaps(const void *in, ulong in_len, const void *out,
++			    ulong out_len)
 +{
-+	void *load_ptr = map_sysmem(load_addr, max_size);
-+	ulong load_end;
++	uintptr_t from = (uintptr_t)in, to = (uintptr_t)out;
 +
-+	if (!CONFIG_IS_ENABLED(DECOMPRESSION)) {
-+		log_debug("No decompressor for compression %d\n", comp);
-+		return -ENOSYS;
-+	}
++	return from >= to ? from - to < out_len : to - from < in_len;
++}
 +
-+	if (image_decomp(comp, load_addr, 0, -1, load_ptr, src, *length,
-+			 max_size, &load_end)) {
-+		log_err("Uncompressing error\n");
-+		return -EIO;
-+	}
-+	*length = load_end - load_addr;
++/**
++ * report_overlap() - Report compressed data overlapping its load address
++ * @src:	Start of the compressed data
++ * @load_addr:	Address it is decompressed to
++ * @external:	true if SPL staged the data at CONFIG_SYS_LOAD_ADDR
++ *
++ * Return: -EINVAL
++ */
++static int report_overlap(const void *src, ulong load_addr, bool external)
++{
++	log_err("Compressed data at %lx overlaps load address %lx%s\n",
++		(ulong)map_to_sysmem(src), load_addr,
++		external ? ", move CONFIG_SYS_LOAD_ADDR" : "");
 +
-+	return 0;
++	return -EINVAL;
 +}
 +
  /**
-  * load_simple_fit(): load the image described in a certain FIT node
-  * @info:	points to information about the device to load data from
-@@ -301,7 +334,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
- 	ulong load_addr;
- 	void *load_ptr;
- 	void *src;
--	u8 image_comp = -1;
-+	u8 image_comp;
- 	const void *data;
- 	const void *fit = ctx->fit;
- 	bool external_data = false;
-@@ -325,10 +358,8 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
- 		}
+  * spl_fit_decompress() - Decompress an image to its load address
+  * @comp:	Compression of the image (IH_COMP_...)
+@@ -279,12 +313,13 @@ static u8 spl_fit_image_get_comp(const void *fit, int noffset)
+  * @length:	Length of the compressed data, updated to that of the output
+  * @load_addr:	Address to decompress to
+  * @max_size:	Most the output may take up
++ * @external:	true if SPL staged the data at CONFIG_SYS_LOAD_ADDR
+  *
+  * Return: 0 if OK, -ENOSYS if the phase has no decompressor, or another -ve
+  * error
+  */
+ static int spl_fit_decompress(u8 comp, void *src, size_t *length,
+-			      ulong load_addr, ulong max_size)
++			      ulong load_addr, ulong max_size, bool external)
+ {
+ 	void *load_ptr = map_sysmem(load_addr, max_size);
+ 	ulong load_end;
+@@ -294,11 +329,29 @@ static int spl_fit_decompress(u8 comp, void *src, size_t *length,
+ 		return -ENOSYS;
  	}
  
--	if (CONFIG_IS_ENABLED(DECOMPRESSION)) {
--		image_comp = spl_fit_image_get_comp(fit, node);
--		debug("%s ", genimg_get_comp_name(image_comp));
--	}
-+	image_comp = spl_fit_image_get_comp(fit, node);
-+	debug("%s ", genimg_get_comp_name(image_comp));
++	/*
++	 * The input must not reach into the output, or decompressing may
++	 * overwrite input yet to be read. The output is normally at least as
++	 * large as the input, so check that much up front.
++	 */
++	if (decomp_overlaps(src, *length, load_ptr, *length))
++		return report_overlap(src, load_addr, external);
++
+ 	if (image_decomp(comp, load_addr, 0, -1, load_ptr, src, *length,
+ 			 max_size, &load_end)) {
+ 		log_err("Uncompressing error\n");
++		if (decomp_overlaps(src, *length, load_ptr, max_size))
++			log_warning("Compressed data may overlap its destination\n");
+ 		return -EIO;
+ 	}
++
++	/*
++	 * Check the rest once the output size is known: the image's hash only
++	 * covers the input, so nothing else would notice an output which
++	 * overwrote it part way.
++	 */
++	if (decomp_overlaps(src, *length, load_ptr, load_end - load_addr))
++		return report_overlap(src, load_addr, external);
+ 	*length = load_end - load_addr;
  
- 	if (fit_image_get_load(fit, node, &load_addr)) {
- 		if (!image_info->load_addr) {
-@@ -397,8 +428,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
- 		}
- 		read_offset = fit_offset + aligned_offset;
+ 	return 0;
+@@ -494,7 +547,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
  
--		if (CONFIG_IS_ENABLED(DECOMPRESSION) &&
--		    (image_comp == IH_COMP_GZIP || image_comp == IH_COMP_LZMA))
-+		if (image_comp != IH_COMP_NONE)
- 			src_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR, ARCH_DMA_MINALIGN), len);
- 		else
- 			src_ptr = map_sysmem(ALIGN(load_addr, ARCH_DMA_MINALIGN), len);
-@@ -462,25 +492,13 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
- 	if (CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS))
- 		board_fit_image_post_process(fit, node, &src, &length);
- 
--	load_ptr = map_sysmem(load_addr, length);
--	if (IS_ENABLED(CONFIG_SPL_GZIP) && image_comp == IH_COMP_GZIP) {
--		size = length;
--		if (gunzip(load_ptr, CONFIG_SYS_BOOTM_LEN, src, &size)) {
--			puts("Uncompressing error\n");
--			return -EIO;
--		}
--		length = size;
--	} else if (IS_ENABLED(CONFIG_SPL_LZMA) && image_comp == IH_COMP_LZMA) {
--		size = CONFIG_SYS_BOOTM_LEN;
--		ulong loadEnd;
--
--		if (image_decomp(IH_COMP_LZMA, CONFIG_SYS_LOAD_ADDR, 0, 0,
--				 load_ptr, src, length, size, &loadEnd)) {
--			puts("Uncompressing error\n");
--			return -EIO;
--		}
--		length = loadEnd - CONFIG_SYS_LOAD_ADDR;
-+	if (image_comp != IH_COMP_NONE) {
-+		ret = spl_fit_decompress(image_comp, src, &length, load_addr,
-+					 max_size);
-+		if (ret)
-+			return ret;
+ 	if (image_comp != IH_COMP_NONE) {
+ 		ret = spl_fit_decompress(image_comp, src, &length, load_addr,
+-					 max_size);
++					 max_size, external_data);
+ 		if (ret)
+ 			return ret;
  	} else {
-+		load_ptr = map_sysmem(load_addr, length);
- 		memmove(load_ptr, src, length);
- 	}
- 
 
 -- 
 2.55.0
