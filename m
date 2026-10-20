@@ -2,135 +2,146 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 216C9606A319
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 02:21:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE637606A319
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 02:21:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=MlP6c+IT;
-	dkim=pass (2048-bit key, unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=GHdawTaG
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=I3+M5eW8;
+	dkim=pass (2048-bit key, unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=LvWENZFs
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EE9CD6070C;
-	Wed, 21 Oct 2026 02:21:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B732860809;
+	Wed, 21 Oct 2026 02:21:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ysFmsgST2Qej; Wed, 21 Oct 2026 02:21:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3D1926074D
+ id aKh6s5dVbV0c; Wed, 21 Oct 2026 02:21:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E36A1607FD
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792549293;
-	b=EJanewi6a1oCVxeyTX5e2O4xsRblFuTMM4+vxl0xlYEU8rEnUOp79zCNGjLZb/EURXxk
-	 XbaMJ4O13UM1vMcVaXr6UGkrYKCdK2wJdC/BlYUpKLqa/WOy/XMvXob/M0LawW9TYULgF
-	 8Hi5JR0bmAV/Ji5DHfsND6/7peTEuzCgqGincYsi6c7M5i9SFK6wO9OYG+1V+19O1qIln
-	 HREXTfLYZjaHT+OIPiuv9ubDKpKaMAC9CYfmRDJl49RNNhsXZ4Ps9B4BIRtlqoba35zjI
-	 QMymd1wiZk66K7CfPpt4pKg6Q+sTXwJNkyIRg0xFFG+rfX6d+76n1BwwE4jxcQuABMQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792549296;
+	b=M87/j3VAkdo48hP6AbQFkZrrjr0EstBKNgpiblAIwM0u/KRJgspipWj/6CtN6xRW4x6d
+	 zTkEH6AwurPYzrYCzkb8gihb6Boz4lL0TkNbnpYE5JHP3VFGaz7usMhSDWQHwLIv9Hx0B
+	 h6mGP+xCASB0q6Ivh5/WJUpk8DzqR6X/1iLODYFPTwO0K9tLnRsoOXlvm63CLS6NBbOy1
+	 GmEzJGOAs8nDsq6yf57kfNnBWVq6vXmSTDuOq/UL6bq9H2wACMf3HtJlrEOM+eFgfcJII
+	 02+1eE9Jp3Mog6oN154nbwseec6xd6/tnNqydNU9UJMTJxq2TNUhFRVqDQ6kNxGHXNQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792549293;
+	c=relaxed/relaxed; t=1792549296;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
 	 References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Last-TLS-Session-Version:X-BeenThere:
+	 Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=FZa+kjvhCGX9p1yrlaEkinztkyVOZGVJgtzhLCuY/qE=;
-	b=B5D4Rs2LVExp3Xr4FRtXaCB7ExQozwZPjx0RIRi97mb1xapgv+3n3ClTESJ30JyjF54s
-	 l19cjKCndkpGOYD2VdLhP4WZ8m1ct4RKAfvVCso26qxXlSqoxT+FV6hgquKsDR7/MmHKC
-	 /2XwHumUJunEa3P/GdiGmMuxuT0jKvSCT9WK4G3AIa8qkjzwoWqGebe5f1as/ypSvS0dg
-	 Ep2/aPFSV21u439k7DgGckk52bRNJXVFneqIleGw+Vm575MNvoVgWESTwmBRijhAnBTOJ
-	 5fJDmXa73a3YVXff2OVZllcRrC8K2dtlrb6famZCYCwdtN+CPpchgvvBoPKlLSE1cOw==
+	bh=K6tRLQ1bbAUTDfTmOzArmWDE+diWaw/vQUkFvG53YwU=;
+	b=TkPDCU/TcVyv6hf0R78SY7yI18GCtxUkcNqSU135PnX789TeKVc3GiaYecw2ZqG+B+Q3
+	 asyqfIXB45ySt+CHw2yiYM3Sn4f0+ZKch8tsKU90Zm/+bs7DUZq6N6EKgqbyDMknRlCPE
+	 GqcLwdCM/9ltW613+iH36ep58VxlC+UfTv93B3dhUhbFrbABl7WASt2wqV4xsKv2ZLbw7
+	 0qwhrCuAe/+kql/MbM26nfVk8tAJeDJAOAdZOyCEG18rKQDB3PIoT+9aTvgcBw3xoQZ5U
+	 Qaw7wlRec3rwDVYCkjYx0xo1/E8GLYBf1cPvdSzRYiWDtLe2RKSuEH7q5UyW33U6IlQ==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792549293;
-	bh=FZa+kjvhCGX9p1yrlaEkinztkyVOZGVJgtzhLCuY/qE=;
+	d=lists.u-boot-project.org; s=default; t=1792549296;
+	bh=K6tRLQ1bbAUTDfTmOzArmWDE+diWaw/vQUkFvG53YwU=;
 	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=MlP6c+ITkV5mVDJxk4k0WkPfpYk4wWcrnUM+glD4b9s4vOlFbsIx3toO/0xRITMTF
-	 Bc/omemjyAploerhzbbkIFg0pv6B3MZdM4kHCBKODofw5QcyhZflLZnRYXJywWeMgO
-	 HEPezlCXmqsYFovhvA9W1M+tjzOK0IFY+GndwPPgx5WthX/c6d1VNq6CUud6PgDgNx
-	 BKS2UMTRjtgHKbL2tGIvRsIogH4CKkjlO6hecppS5TWSMMGHeUSafo3byQ3BKqmeer
-	 fOHmeJ6w2BrSz5AD7hWCouBYl8N6dVE9w9SUDzlpdbH6/+SwDefWJ7aO01uegschMq
-	 n35uo4cjlYn9A==
+	b=I3+M5eW8EDt6SZdAwHDNBkgSq3h04eGH0JKbkzTVRZQkGIE3WkyOWovWJW7D6xc3s
+	 EUR1PVGnKwvYCWs/wtqaYL62vUk1792GMgJ5Y2W3e1a4EuBhNLdH9flkSb0/cW4eRJ
+	 FYBKAWu9yNHOFPxKIOGRa89sVfOwfo1D6cu6Jd52tCpVweOFbFN2zpitCc2PvjVhkr
+	 fDQazBOMspHDXYzLB8IJpo6dzUrnm5M86meifFAVhZdRSJSZq/HDkWheckpKQQx6L8
+	 sZnF4BA3RfecUL4c6wC8AVMBx+VCk+J8nAEvZjgukQNUxR8Wwpy/5pnWySKynwA/Kd
+	 Xiv9vEVBDUM6Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3D1926074D;
-	Wed, 21 Oct 2026 02:21:33 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id CE0D93A4
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:21:31 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E36A1607FD;
+	Wed, 21 Oct 2026 02:21:35 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1FF88380
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:21:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id BFA1F407B2
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:21:31 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 05BEC81086
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:21:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dUtYa2Df_FtR for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 02:21:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C0A35407AD
-Authentication-Results: smtp4.osuosl.org; arc=none
- smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792549291;
- b=GB9RB9yWvIvijOr7wlfPZizb6UcZajHPIqGNXHVdqK4WWD8dK+dpZOMmA5p++f8DR7ud
- gAJYwMqpT1p6hiex6J2RfRH9Kk5CRbcXaqsuxLwTYkC5ii5TEO5RbE6GcOZ8Z9h15QPSE
- crEDlYqyvh7LypzE0wQgoC4K1CXTcXhMObQcQSK1lQyN4d70KvzqosTyrk9RII7N5XU7Z
- TSg1pbKMszYdRpKyHaA7PS5ghUnaoV5yFVWfEM1VIdUnW42Zl0DOp9noKaPuJSJzMD9L5
- AQwDaNniLm40+lB2L+osHo6eKw1yIjIdwWBmVyaB4Ko2zM93vXBiOE0NZ90cI2x/eZw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qOljz0o7bmCN for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 02:21:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org CC9AD80F90
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=80.241.56.152
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792549293;
+ b=h/H+7CYsx+KalRCrVhQ4plgr+GEGdxf0OOHBD9ks/c9vwIWVBSGZg081mLlNAJPWAzWs
+ R8WKwlOXHoEUuhQ+OPzrnb+z6VFTG2r1QESgcw1e0EpwvqAaj/J+V6E7wmlqtHlb3MSvL
+ 1rAM/FOQSKhYIH6QmCBcbHyS1Ov1rO+GPhzD1Uubuq7cmwRiW8ILxRp/PyDyaUQo5sr4k
+ gd409SX0VFXOVq0ccRhjnSoGF2hXjXKsnkDxNmr9SC+PLlhAQZTextN28tx5l6WM281RX
+ fP1i28omGQe9Cf5JIKXLg1rlWsW/vgwn7Ee7foTuadAuc2YK8ep+YbyZLZZhrCpDXFA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792549291;
+ c=relaxed/relaxed; t=1792549293;
  h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
  User-Agent:Subject:To:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version;
- bh=FZa+kjvhCGX9p1yrlaEkinztkyVOZGVJgtzhLCuY/qE=;
- b=rTYEQqPCLtBUhe4TVm9G81heXjtAuttGn7NSvdDyRu2WL3KjlnuzfMUHwealx59zYy4M
- gn6hMQxR7Bb+J/ElFb8K2pcLHg4vIUJpe/8tnWq1ohBTnkT/8ZP31BjONldywlh9nn3uH
- PhH2yiNSansTDB5q3n7TWpVKaeTI0/uA8aGtyNRaFOSf+13perkKt3K3DBzZ/9nPhfPDa
- jCaNTiUvzVuqZnNg4L2jOBmw8Njr7gbeWTYILytdpd5GQ0C8QRSi8QTAlVwZrJ5MIfDR9
- I40VDGxV9M3qwow7y/H4Root3xogs2pVyN8MIRQeRLkBEmm6LuPfVToy3ERAQQRaMPg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=nabladev.com;
- dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
- header.s=dkim header.b=GHdawTaG; 
- arc=none smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:f820:417:0:178:251:229:89; helo=mx.nabladev.com;
- envelope-from=marex@nabladev.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
- header.s=dkim header.b=GHdawTaG
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C0A35407AD
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:21:30 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 0E70310A36D; Wed, 21 Oct 2026 04:21:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1792549287;
- h=from:subject:date:message-id:to:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=FZa+kjvhCGX9p1yrlaEkinztkyVOZGVJgtzhLCuY/qE=;
- b=GHdawTaG/jqK5aMuhegMBj7xAIpsheVtlODz0l3KQdeFjxQ3/rwUE7lQ7S3K7NU5EGrFZv
- hz7LiPkQUQJYDT921Os/KVgWKvJpGe1cONfDjjQHViYrOrsfppjv+9028cUmC+RP1CtBF3
- 57sLwd/DxymMWXiFl2qjyiUfgaMNtOwUDYp2auegObsRKpf7MyL/rhOn4tz1mbHMimXJTT
- HjMriD8eS7dRkGXvqWyHVrvjZmfV1vY2Ue9tMebqlR967idtoe4WXSVhocq5gYg3vRBbOF
- 3a7Yc1LxPfjLSTaxKkQQf1tInlthkOaSOmPivXeng8+rF8FSsPregJI5uAkybw==
-Message-ID: <57fbea68-b608-45f9-933f-e9f28cc118c6@nabladev.com>
-Date: Tue, 20 Oct 2026 14:42:33 +0200
+ Content-Type:Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META;
+ bh=K6tRLQ1bbAUTDfTmOzArmWDE+diWaw/vQUkFvG53YwU=;
+ b=P9HLVwAIqRA40CO699qRkfu+D/XuSBYclGCiSL/y6XcewUVeK0hm24FYNeYObKUAY538
+ 1I/6jkj76MsJhz+MrlloOEAnIXozVuNgDLeZFPrNCC/xsi9XgQIEpDBAELt3OkAyooXwZ
+ uYoJKsHg9ycMF4Ir5t8wuw2nF/vlvAJxCh6NlN/0bWaITlgjxMwuY3obx0hXmtrUkCF26
+ /PpWdTiVV+ZyX4/r2COPxtL9xk+7xIL2DI9e4FeBF3SyF6b0GSxdKlqr4mhqpLoRrpXzw
+ XNjHcJg1iIp1HQYcr5YzCllBVCj26VK7R391b1vniL9Yl9sW6+QKRUzKVJeJqmhVKIg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=pass header.from=mailbox.org;
+ dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=LvWENZFs; 
+ arc=none smtp.remote-ip=80.241.56.152
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.152;
+ helo=mout-p-102.mailbox.org; envelope-from=marek.vasut@mailbox.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=LvWENZFs
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id CC9AD80F90
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:21:32 +0000 (UTC)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4j8Y1j0wsrzKwBn;
+ Wed, 21 Oct 2026 04:21:29 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1792549289;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=K6tRLQ1bbAUTDfTmOzArmWDE+diWaw/vQUkFvG53YwU=;
+ b=LvWENZFsTkAUDysEGWNghOXH8W7oIcGBlVoKX2B/hHasENav9u+3osl5Ul0Dr2rrBwMd+4
+ pAdPH6CS73jrbNzJJQNxDxOkPUUYDBcXOWskH9NRImhqfDxBy0wKuHZqDRaMUv5OPhHDb/
+ Uw2F6sKyrKUTBdA3BURlJhmRGmSNYv09WEdDDnb18KghQmKhlbEUJmCIM0JrwyuUb1nDeS
+ KFlDNxvlvuLAgDaLPKtgE3vnIdRUJXVoBa1xH89dn3oed91izJJOn0N+RmnGZsGOPOeXWU
+ On4tfzcZ1oqP3vqp2tCm1NcEVuYDMse2CeR33hcLW+U674zzuLosHfLTWu540g==
+Message-ID: <d4d51106-fb6a-48de-9e94-d41ff9119c7f@mailbox.org>
+Date: Tue, 20 Oct 2026 14:45:07 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] doc: fix description of CONFIG_ENV_WRITEABLE_LIST
-To: Fiona Klute <fiona.klute@gmx.de>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.u-boot-project.org
-References: <20261020112358.523872-1-fiona.klute@gmx.de>
+Subject: Re: [PATCH] configs: socfpga_de10_standard: Fix raw partition booting
+ from SDMMC
+To: Nimesh Acharya <nimeshacharya197@gmail.com>,
+ "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
+References: <20261019205932.28038-1-nimeshacharya197@gmail.com>
+ <097d4df2-1142-4eaf-b23d-60f2f4e291cf@mailbox.org>
+ <CAMb=oEaXycpsLz6wfxKVqucox+ZuJumMgaz3Q=+dfD8R3o804g@mail.gmail.com>
+ <4030a7f1-c924-4d51-bf93-eaaaf8df2ed0@mailbox.org>
+ <CAMb=oEYbdBJbQ-sjZ5q5YDXSjgH3j5PdM11smGXxqgGw-e7QQw@mail.gmail.com>
 Content-Language: en-US
-From: Marek Vasut <marex@nabladev.com>
-In-Reply-To: <20261020112358.523872-1-fiona.klute@gmx.de>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <CAMb=oEYbdBJbQ-sjZ5q5YDXSjgH3j5PdM11smGXxqgGw-e7QQw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 5ad57e6d5df59fa5811
+X-MBO-RS-META: djwptk1p5n7fffn44bh77i7179k5cw4c
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -140,53 +151,66 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-16.3 required=3.0 tests=BAYES_00,DATE_IN_PAST_12_24,
+X-Spam-Status: No, score=-6.3 required=3.0 tests=BAYES_00,DATE_IN_PAST_12_24,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 10/20/26 1:23 PM, Fiona Klute wrote:
-> CONFIG_ENV_WRITEABLE_LIST only restricts loading stored environment,
-> not runtime modification e.g. using "env set", while the Kconfig
-> description implied otherwise. Describe the actual behavior, and add a
-> note in the documentation.
+On 10/20/26 1:44 PM, Nimesh Acharya wrote:
+> On Tue, Oct 20, 2026 at 4:14 PM Marek Vasut <marek.vasut@mailbox.org> wrote:
 > 
-> Signed-off-by: Fiona Klute <fiona.klute@gmx.de>
-> ---
-> Changes v1 -> v2:
-> * "can be written from" -> "can be loaded from"
-> * clarify that "env save" will also store non-writeable variables
+>> On 10/20/26 10:35 AM, Nimesh Acharya wrote:
+>>> Thanks for bringing that up. In fact, on running grep -E
+>>>
+>> 'SPL_FS_LOAD_PAYLOAD_NAME|MMCSD_FS_BOOT_PARTITION|MMCSD_RAW_MODE|SPL_FS_FAT|SPL_FS_EXT4|SPL_LOAD_FIT|SPL_RAW_IMAGE'
+>>> $B/*/.config
+>>>
+>>> I get this output for the default config:
+>>>
+>>> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION_TYPE=0xa2
+>>> # CONFIG_SPL_FS_FAT is not set
+>>> # CONFIG_SPL_LOAD_FIT is not set
+>>> CONFIG_SPL_RAW_IMAGE_SUPPORT=y
+>>> CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+>>> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+>>> # CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION is not set
+>>> # CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE is not set
+>>> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x200
+>>> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET=0x0
+>>> # CONFIG_SPL_FS_EXT4 is not set
+>>> CONFIG_SYS_MMCSD_FS_BOOT_PARTITION=1
+>>>
+>>> So, me adding CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION_TYPE=0xa2 again
+>> is
+>>> indeed redundant. I'll fix this soon.
+>> Please stop top-posting.
+>>
+>> Is CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE=y the only option
+>> you have to add ?
+>>
+>> In any case, please do a V2 and make sure the
+>> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE is in the right
+>> place in the defconfig, not at the end.
+>>
 > 
->   doc/develop/environment.rst | 7 +++++++
->   env/Kconfig                 | 5 +++--
->   2 files changed, 10 insertions(+), 2 deletions(-)
+> Both, CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE=y and
+> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET=0x200 are to be added.
+
+OK
+
+> Both of these values are not visibly set in
+> configs/socfpga_de10_standard_defconfig
+> nor arch/arm/mach-socfpga/Kconfig in the main branch. The meta-intel-fpga
+> layer in Yocto does not set these either, however
+> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET=0x0 seems to be set by
+> default (as seen from the .config) which makes the default OE build
+> non-bootable.
 > 
-> diff --git a/doc/develop/environment.rst b/doc/develop/environment.rst
-> index a7ed4aab0a5..c402ee026f7 100644
-> --- a/doc/develop/environment.rst
-> +++ b/doc/develop/environment.rst
-> @@ -89,3 +89,10 @@ an association in the static list.
->   If CONFIG_REGEX is defined, the variable name is evaluated as a regular
->   expression. This allows multiple variables to define the same flags without
->   explicitly listing them all.
-> +
-> +If CONFIG_ENV_WRITEABLE_LIST is defined, only environment variables
-> +which explicitly set the 'w' writeable flag can be loaded from stored
-> +environment. It restricts only environment loading, not runtime
-> +modification using "env set", etc. Non-writable variables can still be
-
-s@can still be@are@
-
-> +written to stored environment (e.g. ``env save``, or ``fw_setenv``
-> +from a running OS), but will be ignored when loading the environment.
-> diff --git a/env/Kconfig b/env/Kconfig
-> index c6df09a3349..394e91833a3 100644
-> --- a/env/Kconfig
-With that fixed:
-
-Reviewed-by: Marek Vasut <marex@nabladev.com>
-
-Thank you !
+> The requested change is required to have a bootable system, and has been
+> verified on the board.
+> 
+> Sorry for top-posting and sending V2 too soon.
+Please send a V3, thanks !
