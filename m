@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7A4D606A319
-	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 10:16:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65F5560A2607
+	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 10:16:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=YIyRYZya;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=eImpr/Sq
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=lE8y03HE;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=MTc5pXyb
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8051B8119D;
-	Tue, 20 Oct 2026 10:16:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C5E3A811BD;
+	Tue, 20 Oct 2026 10:16:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wegBd1x2tuv1; Tue, 20 Oct 2026 10:16:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C529381187
+ id 6DRQMZndLKqj; Tue, 20 Oct 2026 10:16:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A23888119E
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792491394;
-	b=Rrum0MkM73yyR5cYNuK5rXh5vaTimzxEPhFYgXP0SW3pTRbFshjkSKo8svr+2SE/KQcU
-	 8G+nryGsW0nCi+3fhSssMYUUEjP13pbQFaFefTnqJSzHjeWY5GDSEoOF4cYhiBmQKeWXf
-	 6SYuwH/TSxp+AXgmXbEi8peVr2ZFAfZZpuN9h0wn9tXASNFboa8ufjjCyaBt/yLVI4C5r
-	 nASunIsQ/DT1HlREChotJ4LVhRWPAovwOU+LB3KTBL61Rj26JSWG00Y4rVCqa6Rj28ei2
-	 eXk04msPisLivkegdGQMoMXP/jYZ8CVizB2kyJBACqIwLakmXtLt35HQBxIYNOaJ4eg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792491396;
+	b=LjT8RERUa1Foc+tAhZrnffJXn3KKepEaab2nuPXfEExQ6WNJLItqBEjVMVgohbr3rC8G
+	 t8ggMwPYXsiVobuu55VV0jbxG/5ofb3DyOZ6QrcRrqZev5IdkQ3RI8/3X83hng8k0izTR
+	 gd9MGMuj9/MwqJYNPa7uIUTWRcmz71DB5/+36gkOd2t/tExcjA3AEmCHmzev4TMQPZylD
+	 t96IZGmLr8XdCFShLe2f1KE5ozoLCGlG0tJ3ARgE21LchsPUYvJ8CKrjeRqtjssDGfbk5
+	 fgBcjg/277EePJsEB7wc109bCw2IsR058ixurHCeP9kLu7xJ7unlJwxXzo1GCS14p+g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792491394;
+	c=relaxed/relaxed; t=1792491396;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,125 +33,125 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=TAk0wiADUY+M9oaCU5xpmrzG7Z8LhQFoLndxix59FD4=;
-	b=kOurWTWpjCGNvz0UGXEZfkVqQ7VIRPoDHh0PSE5RXssyvnBdGQZTIXMMq+zVsCZfrag1
-	 HA1Y43/pICvNGuzpeHD+fWr2hcR07sNnVciRNJRsOhfjjyXbveRGY+1uCZD3DOu+Rj/3T
-	 uL3C+IgT2LMXgcKJoux46DYRSgx49Vgkvhy/uiiKGwIKHnrBDMOy7nV/Semt+ixYFoRO+
-	 UMPlaZUJAt0L4yG7EApdc3XATHU1fqSoNlafUbYErL0gs9A+bVkOnsjrJMzp0fmlu26CE
-	 92G8UY+s3Imnq4IwnSY8Hc1R1LRMulXsaDqA8zEMkrkbzVajfWCm3GcOlCaZCOSek4g==
+	bh=VlbYE6l4NkXEOoR2pOGcQ/Xll6k6DNHVBA/N4pReSBI=;
+	b=a1mT+erZ3r9cHRr734HX+k5lPWWv5XoMlQRaaOylb5HeURXfGuEcFjlja2efo/hj17XS
+	 4mNyxraaAu4XUb8JJSkJmxtlklkzKLqbHeIdNndNqCwbOhpRGsZefygxqi4azc9Udvr+w
+	 Cc1ydSYT8DjVDkKf6WSPdv+O+1/0rOOlxRopzgn2fbDNPJF0bagjk4ptv07wz/LX7ygy/
+	 CzJU+sC8dwhFRlaNBat/oaCnYDTkLrWmm+/Padd+o8DA+vCl44VwfMlF8pL8Pqna97jUn
+	 ORQ39NkrDRoficfbpcqzL3vivXcCV0mNw3uwJuV+Yv2X1362VZbKMdnfja4g+4FXH0g==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792491394;
-	bh=TAk0wiADUY+M9oaCU5xpmrzG7Z8LhQFoLndxix59FD4=;
+	d=lists.u-boot-project.org; s=default; t=1792491396;
+	bh=VlbYE6l4NkXEOoR2pOGcQ/Xll6k6DNHVBA/N4pReSBI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YIyRYZya0CnCnSoluMds0jL4PBFEHlFlBIg9dxL164Nuf/4sPF65EGajwQo7+l9CQ
-	 o9uMP6jqyecvzwJ0plSxJT4GJlp17G8o3UlI8UZz7ri9jTyXQTd/WQo8QFrYraad7N
-	 wUID2UWV+Y6O+y0nvOHvw13uhNnf9d4TmMWGigeK7VPwbFIwg+ZbDuaOfPOW/9+MCL
-	 HT0cst4jPlRKh1Szq+t8DquMzmvPOy7Bqh6+h4ZSqyE/zIhAhW7IIyxbbR0PRuGx8b
-	 M81ejHN8SbNB21f0/nadeZOAxaYlFVrQcdxItJS3d3GaRqMnwZAPR7YKHioGwOxpWx
-	 f0D8Azww0Yreg==
+	b=lE8y03HE+HdeqoVOB25d1IU5BGD8+DpmynytjQEhZe6J/PzVHMcTlUL6+kuwrrQHh
+	 v1Bd1ku4H7d205B2L5E6JsxQLFFuD2wf2VGTTNetKfxKWb/C0lJWIa8BNTLV46ewwO
+	 t7JojfveDANT8VMbteqMUKwJAGAeI9908Ky3zJ1OwKSe0yFzSoZvYCWk9RvED+6hVC
+	 /7wZNKRsqYr84CFtvPt8yJvzSrHrMjGUnSn7bUWPi4FmZeMLJ9VZ2VDz2+/9L0bS3u
+	 NCFzMx7f65DJfikzJs6+xvN9g5x7qi6rWYR3g4hKK5+VR6wz1b27hYBLWnPJQiiZFr
+	 FpzVI37MC0tXQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C529381187;
-	Tue, 20 Oct 2026 10:16:33 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 0F8723A8
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 10:16:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A23888119E;
+	Tue, 20 Oct 2026 10:16:35 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4DD2F1E9
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 10:16:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 01BEF40328
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 10:16:19 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 33DC56083C
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 10:16:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id M7p-r8TQZPVD for <u-boot@lists.u-boot-project.org>;
- Tue, 20 Oct 2026 10:16:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 100D9400FC
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792491378;
- b=jVLJ8nv58BhHKIx3cGGsKBMKKQxp7AgzJyY+ZSzcG2W2i8HgUQZ9imgU9NP9zMzUbAXo
- KL56L4g72CkFexix0ZRXu2HvEUfvigda8qF+jD/xqg+y5OCYF8jcf/fkSKXKBIXFkVfRO
- 70viJx/McAp1uewRBSXYe1B/vorbzf3esudiEWX6BGXgiItpu6gOqzAbqIHWy/Ohu77bz
- aJWkNgXr+0TnQ1c/6/c+Vd3eTBVQIZ5r+FwtX0rZWjnyNmFx9UosAEaV3ntJr9HtZzRyi
- v8+IXyTqFD9OI39bQRFzruYBHwqWwxCunkuu4Emya1eOB2ilFv9wDf9pPQzfkMztoVA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XdtqzS3P2igl for <u-boot@lists.u-boot-project.org>;
+ Tue, 20 Oct 2026 10:16:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3808D60825
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32c"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792491379;
+ b=JrDPTo2HlUklNzEJ/mGkSvIcPZlkjaDqoUC49hDB+rtT9HG/zlJTgWt9YX+7RY1Gc/w4
+ hNPq2dsyzxOBHJc/JC+Fzv0Ar7NIfoBbFwy0+Ah9gixq5RwVO78f/5YUAJZwtdhHm4Zul
+ icAp0HpkIQkasJS+bYJVqpIR3HIdR68p56S9yeocHmo58hEyYWikEiW0Sj3BfN/iBt8i9
+ Ts40fNLLqPEGevt5QIPkt89R8v8bEeksJhUTeaNZLusmkxRVJtO0mbKjM0bFGnuUlB23L
+ eG7/3hMTiuQPvlme61eo+4YluoRVRVMc+KAHQhkISLy+IcebM02cmh/i5DkCf3sfRdw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792491378;
+ c=relaxed/relaxed; t=1792491379;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
  MIME-Version:Content-Transfer-Encoding;
- bh=TAk0wiADUY+M9oaCU5xpmrzG7Z8LhQFoLndxix59FD4=;
- b=ajz3lWw6Gjc7/endApaOrw0jIjNYRe6VcEzVWdmiQ19bJHGT0fJeweu+WI8/8Ebpm1jD
- 2AU/456qPsIm/AOTBQH/27Vk9wUPqVJnPqKnvn/mVWq+ct1HMrgS551sU4gc+8i5gTljw
- nY8BmFHNj73e3mBp465V8uhLTqq+E04NOWk15KydS93yMns8b3LxsxDXlEJj+7mch+iWj
- AAjyJPFdCFbvmCc1H4gn+Js7thAo8as3dQpQmCd/wYkoUdNcWFu/mj7mR8TEnJIxtoz0S
- SjiWqKxDyVHSG2SLRt9ywJBBYR4v33blm1VW8kzrxFwHe8pMnqqnNnrSAZio2IrImcA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=VlbYE6l4NkXEOoR2pOGcQ/Xll6k6DNHVBA/N4pReSBI=;
+ b=Mj6tOAsdEKZN7MRQqKylvHZasSwxGQrCskG93P5j2hlodtJG1QvtBHSqDtqIayomxnr5
+ KBmIpbKVTqDKmdX3tPsAo6Yp9TPURFAwWaJPVuDq+3sgxORzA/zGZLi1acsGb+yEp0P3V
+ RCgbhzqkp1ulJ8kDqjLdyOXOhnHBzCVlNyr2MMx3QJhzwnwWFUK4sG94WvWIUDsiqhEB+
+ jC4mA0kN1bq96CiTD+k+0I9dvvC5Tl54bwAd8zXXoeR/NTTKCQ0X4VCK7wZDW7ri06x7x
+ DBA2h6dtc8qYOpvSjBxjg176udRlVyJAZPWh8I5ShWLlM5q7p+YO6b4baR7cAzywjPg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b="eImpr/Sq"; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
+ header.s=20251104 header.b=MTc5pXyb; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32f; helo=mail-wm1-x32f.google.com;
+ client-ip=2a00:1450:4864:20::32c; helo=mail-wm1-x32c.google.com;
  envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=eImpr/Sq
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 100D9400FC
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 10:16:17 +0000 (UTC)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4a1f68a9855so2542535e9.1
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 03:16:17 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=MTc5pXyb
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3808D60825
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 10:16:18 +0000 (UTC)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4a1635f7c89so29055755e9.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 03:16:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792491375; x=1793096175;
+ d=gmail.com; s=20251104; t=1792491377; x=1793096177;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=TAk0wiADUY+M9oaCU5xpmrzG7Z8LhQFoLndxix59FD4=;
- b=eImpr/SqfGKXXSUQPhFHbXuevz98nHwez4t+EvbvP2G/dJhNtDFHrtDResSQfeB+zg
- lWEAuZHrPn+NpYWAFtf8qASZG+LYq41tIysfqrdopG0tKmP57+ik8OIL1yHd2ZUJnwre
- eduVd7xRRNIF8o1GP43aM6h6W2Ozfg/3zt9wwZR50CZrLGPY6EMweKSH+lq7spTYCn5Y
- fdjNx7dvpCFxY8SsPSrTKVqIdzAfX4h4m2nyDsSjxjxueLEDfZNWJPbrX2hhEyFgWZXz
- 6JTaeYFpxEEeb4qIDKqaHH9W4ecScSlS5SPe+ZWh6cDr+vvRJ0AZx4MzDPePytMAe4rJ
- UPBw==
+ bh=VlbYE6l4NkXEOoR2pOGcQ/Xll6k6DNHVBA/N4pReSBI=;
+ b=MTc5pXyb/GSnNAoHxEID7ig4gj7q+w6mi0tuV4RvcfwjvoiIIUO7gWhfXEdfudXpxz
+ 6to3sjTLYPBK6qzsx2Zbk+24qn/ypBzuJ7bhL4OmP73THb6l03SzzhPBzrxLv3nR0hNP
+ +pqJ23FDfP2PYLzdtEabCeznoD8yz8seS4gusRllaGcRubYCbnTasNyjVaU5yc4D2575
+ MB983tmgRAPfkTwKVYyWea8WjW8bL8n+Ef0ezaEwjtARsccBzYVZE8xQfIrsaCnRhZ7o
+ wnV8flBp2LjGYJzZQ/sMr8An1LeO5/NVBePbp3TItJlyZXhBxt/atAoWuwuH0UB0lWq+
+ Cn+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792491375; x=1793096175;
+ d=1e100.net; s=20260707; t=1792491377; x=1793096177;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=TAk0wiADUY+M9oaCU5xpmrzG7Z8LhQFoLndxix59FD4=;
- b=qMlr4gthvoqoDhnePw6kEKrIvIoL+txV7wQ/Wfq6RuCE5F/R4LyrE+kD4Ouud2S0wm
- kJW4YYK3g2qGMGeVK5PurCXgJnANHMBXIjTC7K5m92z1EVXOYCG5nbC4BEYJe+QEPX2a
- HOl0OgthvRk2Z7vRAc4c5PzBsBpCLV5xA1BqiqRsh7UunB/Y5R4Rwn5CFL3RvYsnoBHe
- X/6yOL+OhXfG4jkbUyPCqf8fn9Ml+5fUJdUFC22IqEKvnS9sP8CotZpgKIn7Y4EDVdMd
- HUL2AYTd9PWdkBvCn4G5xkZERrUKMr6hK9LoF4IR8CUgt1Pzra+Vagstsw01lhguffgx
- LSEg==
+ bh=VlbYE6l4NkXEOoR2pOGcQ/Xll6k6DNHVBA/N4pReSBI=;
+ b=TR31jNszGqc4GDUHKYoN4llGnCZr32+c7thyMKUV03PRZZc6QIPKSRcegkI+oeL3/+
+ ChcmHC/giRjKB+LtDNzyW2pPjWV6h8TJCl9kQfQCzhZMiTJsYBwVA2M82bEpRvsEbBvf
+ qz36xHMD4fJzHMTyZmgo9HQKZvMl7qgg7cxbud2I8EXZT8oovxBwqbHHD5yFyiXD2Aoo
+ 6/OoPtHN4gpp32I++oT2WPZLZ2bKIvdTRGxflkbj9boErwKPMlza+h2B6YhuR0MLp/em
+ nGezGHsHrCaV0ERt7GEFfPr07esuwN+gbQtfyf49VYrF42CLpUP9Sy7Z2X/4TByydg/B
+ HcWA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBy9dqxFoVjGHQmGwOWj5BO3C2i6xIWw/vN4cdwQi+Fyd9zmfbH2zNSIViwjwjTuTCv5M1Pw5yc=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJ2+o1WdBqzi/xddkT0JO4v9lg+zM1MKMuZSWu39o7OlkmogrEV
- oA16v2MQeF0mHEzT7S8JcHA6qY1Q9ryssiKTJ8SFWC1n+WbQPucVupRO
-X-Gm-Gg: AYBFou3tkWP/Mw/VsVf4D87F4WfsZa6zz7objImAgZEjD0u9KUhAyPEngNMPdeaIY46
- i5oDGv7v+2wA2lIDzplD6Zjvm+rf0E9UYot27vtm5b9sp8rzG9TQzDfvRpUPBXTyno7IWrGsvYr
- mDTLkdghkkbI7VFD4Ce6xMmAl3CBzs/pBSKnTR7AN+S09EXYcpQYLezVGe86jl8dIlB+gganNtV
- Z6Kdyf2sJUgHh5ib3xntlzprVTTVzm/00tK1BaNINK02bg/WtnwMWM0z5OTVcmeO92G/dmWVSkQ
- udWdbnbfa9q6/NI139q2FGs6TGQr/e+deyjGpoEQ40+z2Q2KfiSh8ZMqzcatxye7NGFRVQ9fnE7
- A+sbi7RgTXZBJShXK7Rfu423I4LGB+tI8fd2FtTz91sMcvPr6nv6LpN3KqfyqUFxMZQHrSgzZiO
- pqfs1WCeJAIb8ALvT0sYY6SFIfqFBZYhtQj7abt2Ou1YYuLCRvAD8hOreXrAgaNxFrDKi5rId7a
- v9T
-X-Received: by 2002:a05:600c:8b6b:b0:4a1:e7ce:10a4 with SMTP id
- 5b1f17b1804b1-4a1e7ce1832mr116929175e9.29.1792491375493; 
- Tue, 20 Oct 2026 03:16:15 -0700 (PDT)
+ AKwUvBzPleAphrgywFfARX2EIheTwsK+qim32ATMclBjUDIt5hwlr5NcPFZUFTsey4oKLh4onT7m2CY=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYKvxO3CxZtsgbeLm6RMbGVn3sQPKwTaGVHPqvX5y9V5IGZAQlz5
+ YJTeBlib+nEcG2EDKObB4wnV5Es8pGfip5jDmT0s3N5J4Vda/7HaKcy5
+X-Gm-Gg: AYBFou2w10tfXTymupGEnUPqeafxpSYKqGKa4k6nSImR5V/QTRSYS2NPaA5CwTVLc3J
+ EaxpOPHO1r6JKq2E+9t99Nx8STP1qpNDuhlIugNMr5HluaEbZTvM2Vmh5K2+Zz6hJW38eESwjAQ
+ PogeWsjmoVEZpx+ClzSY6XyYieCLgCy3uUXkaY1eePWQtOHhTUwmBog+8M6wGn1EjdWy2a5KG8S
+ vio4MrUKNY4KTWZZn8L02cA6NZjqyQqz1f7UbnqFrowTge8t6MHNRaU50TfP0NKHmW5v+wXsV2V
+ xAzkFCnzUcFidN9zRzmv7GlzAPuB6c153Ebe40eflfAKXzz1JnOke8DBYQBE+Aich1xyYzWoF9x
+ B6HHZmimMY+k/wH3MaQWnCjv495N+oT0af5dLwKmSZtq2FUe0owrVA811cypKfhHQ7ofo/AxJeQ
+ RqmFuPsKIxgrEIEuJsWKY76RnFZn7pUt3UBS5mAn6N4mhkVbLusw3VMVaogDYq439qhHBUUgIbQ
+ kbk
+X-Received: by 2002:a05:600c:1c0e:b0:4a0:b6:4619 with SMTP id
+ 5b1f17b1804b1-4a1d7462e34mr237283745e9.0.1792491376448; 
+ Tue, 20 Oct 2026 03:16:16 -0700 (PDT)
 Received: from deb05.proceq.com ([213.160.61.66])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1f2ca3597sm60140505e9.2.2026.10.20.03.16.14
+ 5b1f17b1804b1-4a1f2ca3597sm60140505e9.2.2026.10.20.03.16.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 20 Oct 2026 03:16:15 -0700 (PDT)
 From: Mehmet Fide <mehmet.fide@gmail.com>
@@ -160,9 +160,10 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Fabio Estevam <festevam@gmail.com>, Stefan Agner <stefan@agner.ch>,
  Francesco Dolcini <francesco@dolcini.it>, u-boot@lists.u-boot-project.org,
  mehmet.fide@screeningeagle.com
-Subject: [PATCH v7 6/9] usb: ehci-vf: use usb_get_dr_mode()
-Date: Tue, 20 Oct 2026 12:16:05 +0200
-Message-ID: <20261020101608.2818265-7-mehmet.fide@gmail.com>
+Subject: [PATCH v7 7/9] usb: ehci-vf: request the ID detect gpio through the
+ device
+Date: Tue, 20 Oct 2026 12:16:06 +0200
+Message-ID: <20261020101608.2818265-8-mehmet.fide@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261020101608.2818265-1-mehmet.fide@gmail.com>
 References: <20261020101608.2818265-1-mehmet.fide@gmail.com>
@@ -181,129 +182,165 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Mehmet Fide <mehmet.fide@screeningeagle.com>
 
-The driver parses the dr_mode property itself, through the flat tree,
-into an enum of its own that mirrors enum usb_dr_mode. Use
-usb_get_dr_mode() and USB_DR_MODE_* instead, as ehci-mx6 does. A
-missing property still means host and a value the driver does not
-know still fails the probe with -EINVAL.
+The ID detect gpio of an OTG port is requested through the flat node,
+the result is never checked and the gpio is never freed: a bad gpio
+description or a failing read silently leaves the port in device mode,
+and every probe after a "usb stop" fails to request the pin again and
+reads it only because the failed request left the descriptor pointing
+at it.
+
+Request it through the device in the probe and fail the probe on any
+error but a missing property, which keeps the port in device mode as
+before. Free it in a remove hook and on the failing probe paths, so
+that the probe after a "usb stop" can request it again.
+
+The flat tree access was the last user of the global data pointer:
+drop it.
 
 Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
 ---
 
 Notes:
     Changes in v7:
-    - Marek's review: this patch only replaces the private enum and the
-      strcmp() chain; the ID detect gpio moves to the next patch
-    - a missing dr_mode property means host and an unknown value fails with
-      -EINVAL again, as before the series; v6 made an unknown value host
-    
-    Changes in v6:
-    - new patch, from the review of the register base patch in v5: the
-      private enum duplicated USB_DR_MODE_*
+    - new patch, split out of the previous one on Marek's review
+    - gpio_request_by_name() and dm_gpio_get_value() are checked; only a
+      missing property is tolerated
+    - the gpio is requested in the probe and freed in a new remove hook and
+      on the failing probe paths, so the probe after a "usb stop" can
+      request it again
 
- drivers/usb/host/ehci-vf.c | 40 ++++++++++++++------------------------
- 1 file changed, 15 insertions(+), 25 deletions(-)
+ drivers/usb/host/ehci-vf.c | 61 +++++++++++++++++++++++++-------------
+ 1 file changed, 40 insertions(+), 21 deletions(-)
 
 diff --git a/drivers/usb/host/ehci-vf.c b/drivers/usb/host/ehci-vf.c
-index e5f9ec0fdbb..1d7b3bdc285 100644
+index 1d7b3bdc285..edf100fc3b8 100644
 --- a/drivers/usb/host/ehci-vf.c
 +++ b/drivers/usb/host/ehci-vf.c
-@@ -21,8 +21,8 @@
- #include <asm/mach-imx/regs-usbphy.h>
- #include <linux/delay.h>
- #include <usb/ehci-ci.h>
--#include <linux/libfdt.h>
- #include <fdtdec.h>
-+#include <linux/usb/otg.h>
+@@ -10,7 +10,6 @@
+ #include <log.h>
+ #include <usb.h>
+ #include <errno.h>
+-#include <asm/global_data.h>
+ #include <linux/compiler.h>
+ #include <asm/io.h>
+ #include <asm-generic/gpio.h>
+@@ -37,8 +36,6 @@
+ #define UCMD_RUN_STOP		(1 << 0) /* controller run/stop */
+ #define UCMD_RESET			(1 << 1) /* controller reset */
  
- #include "ehci.h"
- 
-@@ -150,29 +150,19 @@ int ehci_vf_common_init(struct usb_ehci *ehci, int index)
- 	return 0;
- }
- 
--/* Possible port types (dual role mode) */
--enum dr_mode {
--	DR_MODE_NONE = 0,
--	DR_MODE_HOST,		/* supports host operation */
--	DR_MODE_DEVICE,		/* supports device operation */
--	DR_MODE_OTG,		/* supports both */
--};
+-DECLARE_GLOBAL_DATA_PTR;
 -
- struct ehci_vf_priv_data {
- 	struct ehci_ctrl ctrl;
- 	struct usb_ehci *ehci;
- 	struct gpio_desc cdet_gpio;
- 	enum usb_init_type init_type;
--	enum dr_mode dr_mode;
-+	enum usb_dr_mode dr_mode;
- 	u32 portnr;
- };
- 
+ static const unsigned phy_bases[] = {
+ 	USB_PHY0_BASE_ADDR,
+ 	USB_PHY1_BASE_ADDR,
+@@ -162,7 +159,6 @@ struct ehci_vf_priv_data {
  static int vf_usb_of_to_plat(struct udevice *dev)
  {
  	struct ehci_vf_priv_data *priv = dev_get_priv(dev);
--	const void *dt_blob = gd->fdt_blob;
- 	int node = dev_of_offset(dev);
--	const char *mode;
+-	int node = dev_of_offset(dev);
  	fdt_addr_t phy_addr;
  	ofnode phy_node;
  	int i;
-@@ -192,16 +182,16 @@ static int vf_usb_of_to_plat(struct udevice *dev)
- 	priv->portnr = i;
- 
- 	priv->ehci = dev_read_addr_ptr(dev);
--	mode = fdt_getprop(dt_blob, node, "dr_mode", NULL);
--	if (mode) {
--		if (0 == strcmp(mode, "host")) {
--			priv->dr_mode = DR_MODE_HOST;
-+	if (ofnode_read_string(dev_ofnode(dev), "dr_mode")) {
-+		priv->dr_mode = usb_get_dr_mode(dev_ofnode(dev));
-+		switch (priv->dr_mode) {
-+		case USB_DR_MODE_HOST:
- 			priv->init_type = USB_INIT_HOST;
--		} else if (0 == strcmp(mode, "peripheral")) {
--			priv->dr_mode = DR_MODE_DEVICE;
-+			break;
-+		case USB_DR_MODE_PERIPHERAL:
- 			priv->init_type = USB_INIT_DEVICE;
--		} else if (0 == strcmp(mode, "otg")) {
--			priv->dr_mode = DR_MODE_OTG;
-+			break;
-+		case USB_DR_MODE_OTG:
- 			/*
- 			 * We set init_type to device by default when OTG
- 			 * mode is requested. If a valid gpio is provided
-@@ -209,17 +199,17 @@ static int vf_usb_of_to_plat(struct udevice *dev)
- 			 * of the gpio pin.
- 			 */
- 			priv->init_type = USB_INIT_DEVICE;
--		} else {
--			debug("%s: Cannot decode dr_mode '%s'\n",
--			      __func__, mode);
-+			break;
-+		default:
-+			debug("%s: Cannot decode dr_mode\n", __func__);
- 			return -EINVAL;
- 		}
- 	} else {
--		priv->dr_mode = DR_MODE_HOST;
-+		priv->dr_mode = USB_DR_MODE_HOST;
+@@ -209,18 +205,6 @@ static int vf_usb_of_to_plat(struct udevice *dev)
  		priv->init_type = USB_INIT_HOST;
  	}
  
--	if (priv->dr_mode == DR_MODE_OTG) {
+-	if (priv->dr_mode == USB_DR_MODE_OTG) {
+-		gpio_request_by_name_nodev(offset_to_ofnode(node),
+-					   "fsl,cdet-gpio", 0, &priv->cdet_gpio,
+-					   GPIOD_IS_IN);
+-		if (dm_gpio_is_valid(&priv->cdet_gpio)) {
+-			if (dm_gpio_get_value(&priv->cdet_gpio))
+-				priv->init_type = USB_INIT_DEVICE;
+-			else
+-				priv->init_type = USB_INIT_HOST;
+-		}
+-	}
+-
+ 	return 0;
+ }
+ 
+@@ -260,12 +244,27 @@ static int ehci_usb_probe(struct udevice *dev)
+ 	struct ehci_hcor *hcor;
+ 	int ret;
+ 
 +	if (priv->dr_mode == USB_DR_MODE_OTG) {
- 		gpio_request_by_name_nodev(offset_to_ofnode(node),
- 					   "fsl,cdet-gpio", 0, &priv->cdet_gpio,
- 					   GPIOD_IS_IN);
++		ret = gpio_request_by_name(dev, "fsl,cdet-gpio", 0,
++					   &priv->cdet_gpio, GPIOD_IS_IN);
++		if (ret && ret != -ENOENT)
++			return ret;
++		if (!ret) {
++			ret = dm_gpio_get_value(&priv->cdet_gpio);
++			if (ret < 0)
++				goto err_gpio;
++			priv->init_type = ret ? USB_INIT_DEVICE : USB_INIT_HOST;
++		}
++	}
++
+ 	ret = ehci_vf_common_init(ehci, priv->portnr);
+ 	if (ret)
+-		return ret;
++		goto err_gpio;
+ 
+-	if (priv->init_type != plat->init_type)
+-		return -ENODEV;
++	if (priv->init_type != plat->init_type) {
++		ret = -ENODEV;
++		goto err_gpio;
++	}
+ 
+ 	if (priv->init_type == USB_INIT_HOST) {
+ 		setbits_le32(&ehci->usbmode, CM_HOST);
+@@ -279,7 +278,17 @@ static int ehci_usb_probe(struct udevice *dev)
+ 	hcor = (struct ehci_hcor *)((uint32_t)hccr +
+ 				HC_LENGTH(ehci_readl(&hccr->cr_capbase)));
+ 
+-	return ehci_register(dev, hccr, hcor, &vf_ehci_ops, 0, priv->init_type);
++	ret = ehci_register(dev, hccr, hcor, &vf_ehci_ops, 0, priv->init_type);
++	if (ret)
++		goto err_gpio;
++
++	return 0;
++
++err_gpio:
++	if (dm_gpio_is_valid(&priv->cdet_gpio))
++		dm_gpio_free(dev, &priv->cdet_gpio);
++
++	return ret;
+ }
+ 
+ static const struct udevice_id vf_usb_ids[] = {
+@@ -287,12 +296,22 @@ static const struct udevice_id vf_usb_ids[] = {
+ 	{ }
+ };
+ 
++static int ehci_usb_remove(struct udevice *dev)
++{
++	struct ehci_vf_priv_data *priv = dev_get_priv(dev);
++
++	if (dm_gpio_is_valid(&priv->cdet_gpio))
++		dm_gpio_free(dev, &priv->cdet_gpio);
++
++	return ehci_deregister(dev);
++}
++
+ U_BOOT_DRIVER(ehci_vf) = {
+ 	.name = "ehci_vf",
+ 	.id = UCLASS_USB,
+ 	.of_match = vf_usb_ids,
+ 	.probe = ehci_usb_probe,
+-	.remove = ehci_deregister,
++	.remove = ehci_usb_remove,
+ 	.ops = &ehci_usb_ops,
+ 	.of_to_plat = vf_usb_of_to_plat,
+ 	.plat_auto	= sizeof(struct usb_plat),
 -- 
 2.55.0
 
