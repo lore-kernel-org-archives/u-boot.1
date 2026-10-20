@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4ADF4606A31A
-	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 09:01:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9B1E606A31A
+	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 09:03:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=cc8aaHlO;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=oyiG8xMh
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=YI2n0YMK;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=ktcLQgak
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D78F94082D;
-	Tue, 20 Oct 2026 09:01:29 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5A9E460830;
+	Tue, 20 Oct 2026 09:03:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id m6qxmxuTv4oW; Tue, 20 Oct 2026 09:01:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org CBB144081F
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792486889;
-	b=eJuPQIBCx9pUpWKjU3eFYe1JY0UIhb4rbFllfnRLk5+gSkQjF3/4H/qs53EFboaPO8Ki
-	 lYkn0AxV8orT9PHM8La5Mo6Oogi5Dw1tOT2Iq9ZRATwcj/dtNsp/d4dX5uah8oLVO1ZlO
-	 81gUS3ZAYfk1lVU/E3XRPhni8yl52pJTTbQrU/ZvtZULY6Jf12DO8TQ6+wLjDuzdu/I2M
-	 V9N+DAK4d88C9A9QxoOCK0xNzghnQfriMJ21QV2OFMLqw1iNw8csMj8GTxsbtduzdZenp
-	 eU+R7Z85kosZ5ylP3K3monZuKDermu6Xi72Lh48kv9+IywoIflYElJ/QNZMWn0Pr5TA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jg5WHyu_Ek9f; Tue, 20 Oct 2026 09:03:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2DF68605DA
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792487031;
+	b=O0eZeW7uZ0rlpqqWQuXWe3KmyNbMO7eg0IxIkp7eemFe/LS/lVfowS0x5QXZx0dZkOUm
+	 IPHW+z6AtM9gAIlOx+drgRi85JTPhC+MoCLwTktfRJzn2D7tV7rJKNC/0qakdOXo6GV7S
+	 EytoZBwNHr29x98AcGLBqMom980ApqKRPgejoAgcg3lNNwBNWQ4mCGYPnJhNWoHyGvx7v
+	 8cy5Dqko7yJXIcfYdghgCavH4qSq1XdPzhtaiYTmZAETnrPJzhTDwUt7YEatOcVsibHpA
+	 H1UZA+KvPzXhtC23MF9fWtZ/8lOylIeJuAuY6I3QxX/xQgMLgMs9qkWJix3dazlH9Rw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792486889;
+	c=relaxed/relaxed; t=1792487031;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -34,145 +34,147 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Reply-To:Errors-To;
-	bh=AlCbr1idVLaLeGwrPNICr/dwSWQie4V+z66lPFg3Nh0=;
-	b=omj6oGeoBXwOQbaqGtiyI8ok44hBB7kR53ERP92fwz4kdBLGh6/zEqeTi2Y7T/Xqj2Lk
-	 xyaXzoigdDDfj6I1YnEZpU+ttCzNLMPqGRhDWUyd1A4MShvshBzhf7bmq5QkXakOmvdNu
-	 6sSoENq4WKebN33F7X3Cfe0tjAi++wNJZWUXVb1NJ64LKKF3uyEXTPjIfVn3o+zbV4iJB
-	 5z5C9LiBStjZXZGWjCcC/Sz8Vq/mC07bdd6/MupMBKbd6qf3dLyTvrA1UQlSEudK8pq3p
-	 jEcHDgjGOK6TjSPb3kqbLhI4dGMlPtEGoodtxh+CepGPmAyhbZ4pQfu2QyOi4xGi7kg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=Qq+UP3tIxbYZu2XNDcXlYp7xSe393KDYCnzGdHWxTEI=;
+	b=iw6lD66nT9hKQXj0d6oKUNguh99r1NKQfTl9Q+JHDha2Mvbwwl1ZACJpPLOW5BQ/IMRT
+	 3+3upgyyVjoG2aLQVf/VueyIqMzDAd3cJusAQEUQr/ZR8zjHINzoZG6GjsLrENRuRszoh
+	 1jCJSzUmGpFgu0hRCytYmKPzhhcyZWSm530KIwm6BIgRO43fC1VCsxRf4+MrG1/NOt/8y
+	 nYYlcdXeAfycFpTAZrIePI1E48lkzFHxqDIsNeXeCGdqSmpxOEnee7UCvXud37jCaRNbw
+	 yKhmyGhwPW2hJyhwj9UR++7NXXm0YcMNsVidUzb9e34HQsaSDNauY6vg8OpE93iWlXA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792486888;
-	bh=AlCbr1idVLaLeGwrPNICr/dwSWQie4V+z66lPFg3Nh0=;
+	d=lists.u-boot-project.org; s=default; t=1792487031;
+	bh=Qq+UP3tIxbYZu2XNDcXlYp7xSe393KDYCnzGdHWxTEI=;
 	h=Date:From:Subject:To:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=cc8aaHlOXgenq5noN99nNaPUsg3qCmsrC6GTorp4VUwedpOuwCpBYkOViRBu5khyR
-	 2umrrSVbyWrvd64gPLB6IMnjTuyovaOswUMZn2buz3RooVh4dXnfJXHxm5myChBQw/
-	 uNssM1j1QEgr5XxDTJwYtEtL/QJK+0oC/jFoJswkX+p8JLBELkVpfynpcDhRkTB/hA
-	 mFlNwks5cYqU6Sx2u2tZF5dvWvgUCMGRx9BYlf83V0d2koEJL+pAx9AW/BG7CfOONb
-	 6AFffKVVy7FxBEbJ2gnThMsV7UuOv5Q1TQweEKLZgbDc5tvgQC+rDXUxlp52OJdwD+
-	 ExY+BBlbdhIGQ==
+	b=YI2n0YMKmbxERG5rB4jKf4XF1ET32jr0eT0Qz6c5QJTHMiwn5aq2w2C0IiUkNDJCn
+	 WBUs2AmKR9oH8nl7mmtlole73O2YtqtalQCJ0sl2HpKdRVTKPqlk2W/BLf2ISzyODZ
+	 M6kzI1me61mv34D6ojlfKcYKXgO8wcqgr3JrJnPaXNCBU9LlP7KdRW5LrgWpMUH1vp
+	 dn0zSg6Srj429kvyHlYoctF7EWHyBbo+qsN4GTmWAnSe4YqB+ffoKpV9dF+lDrEtfH
+	 keHv9/c+2Vre2iMu6MiE59Ulk72YDLuGlkp6x14NCbc4Y4AKtRrlczWcHkTXWo2j9v
+	 6QbqEajI5Mo/w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CBB144081F;
-	Tue, 20 Oct 2026 09:01:28 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id D7F0D1E9
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:01:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2DF68605DA;
+	Tue, 20 Oct 2026 09:03:51 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id BD6291DE
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:03:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id BDF5D60856
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:01:27 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id AF67E40328
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:03:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4iEyKdcIkbHE for <u-boot@lists.u-boot-project.org>;
- Tue, 20 Oct 2026 09:01:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8D1F860854
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::436"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792486887;
- b=LUlayLcWG+Qy7jL92OAaq4C/2LvzRSueskk5a2EK7wWhTtd2fTmbVC7aw7IUgBnRpJL1
- bXpmWbcNG8/YjXQZBA8WjLQd3321PZ2ArLvZttB0X8gqiwYDcDoQxNt+a0fSoLlnzvSq8
- 8MWSfsg0BMtlm6PGRSRfPJn+d4DbZjZTjyXRO805ppbZUHjqBRDD1EHyS/FVFxmmvXg+p
- fEEeRIxjAadQ4AgrPDTcR4lQmRSEI4JRC1Q9pMoXchIN50mA9puiVqORTGbVSlXAtwv0N
- +H7G8MLjqZ2jSzhdW68AMD7iC8fBirDSqm5XXfhaNQ/Dsve4Ulvx3sBDdpqXPGeMkOA==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VKgu5IiadL68 for <u-boot@lists.u-boot-project.org>;
+ Tue, 20 Oct 2026 09:03:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 6F25D4016F
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::430"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792487028;
+ b=eiHN1B2hzHQth2PfrsS1MB394KTvUT8HDOnx0GzCIddcg60gkGz8o8W1wDKpSZ/NL+Cx
+ pyQH8bhqkWngOFuAnU6yPYxaUjgJJgAva0q2BOkJsrm31u4z3JQ4MQY8J1FwA+u0PCSmI
+ x46sDruGS+u9QeRFzRKQINUtmuXgHLnnTj3DU1okT1GzNhTLi1004ERC5fOT+tRZWEH6C
+ mSzSpuZg4UWO8q3BUF4WQdF35/c2fBBMPoBJpO/kpTkFs/MuNimO3aYbIhID8zMfNrwSP
+ 5JJEfDIHdYprHJDBfrSTq4d5p89qDTeM0N+/lh1s6jas2mMrVAWzi+4CYXT5vagMOIA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792486887;
+ c=relaxed/relaxed; t=1792487028;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Message-ID:Date:MIME-Version:User-Agent:From:Reply-To:Subject:To:
  References:Content-Language:Autocrypt:Organization:In-Reply-To:
  Content-Type:Content-Transfer-Encoding;
- bh=AlCbr1idVLaLeGwrPNICr/dwSWQie4V+z66lPFg3Nh0=;
- b=OVq7eUwVVi51fsXYNTjPTp20EKUPXL/Lua8QqSSDWWwG1DEhxH6v8kweHaSkFyI2qb7Q
- kN6TEKrsJvI8wbby9OOoq+35gqY9TQMVp4wq+zhJ47YOUjaJl0VItOFwX6xrP6BXHwJ+R
- VGRFg0eEIDgKnc3C3QvEIgjtHeriIexbSeDYaAI5DOZ15FM74YF0WliRQYJHmIdZHYKJA
- qsa2y9m/4HA4RbeUF7qkopWUsRA9eweXzxvgX4zWfy7hY+vhd4a02/62/4nIt68EC80DF
- L4wrvKxhdavXMv/L1kz/AG05cc5MqI9dVKxnDdx9RLCXP+4KqZhYI0oeoTb1JbMHJwA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=Qq+UP3tIxbYZu2XNDcXlYp7xSe393KDYCnzGdHWxTEI=;
+ b=thCuJMycn35mh+5+3Q5iOGqfU8MR2Z/eQPcyzFGIz8vfASLObe0e0z9Eo9y5hj+lh/m2
+ nP9uL7216qUW611g102/cXwzs1T8eyswY42ln/o4iL25WtzgyXGAdjdE97s5kg1i/QksV
+ rlx+qwZG5t2oiHaFnznyFAYI+qqbDhFZW8ih2MQAwMs0868FjVoH3KzAhK9QEhJ+IpHh/
+ SQsUnkZkGY9KPV33yZiGIM0zGpI6h36b3JLQDL4FdKjstrNo+ZaOJQpub46PUhm2WVpbO
+ jJLQgb+U6zwNWh3e+hyGLB5pc3pNJ9NRsQIR6+Y+W2k004B/75gPl2WSg6XUhIavqWg==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=linaro.org;
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=oyiG8xMh; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::436"
+ header.s=google header.b=ktcLQgak; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::430"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::436; helo=mail-wr1-x436.google.com;
+ client-ip=2a00:1450:4864:20::430; helo=mail-wr1-x430.google.com;
  envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=oyiG8xMh
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 8D1F860854
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:01:26 +0000 (UTC)
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-48afcd7ba9bso1796053f8f.3
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 02:01:25 -0700 (PDT)
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=ktcLQgak
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6F25D4016F
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:03:45 +0000 (UTC)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-48b060ec084so2064815f8f.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 02:03:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792486884; x=1793091684;
+ d=linaro.org; s=google; t=1792487023; x=1793091823;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=AlCbr1idVLaLeGwrPNICr/dwSWQie4V+z66lPFg3Nh0=;
- b=oyiG8xMhrtCl3nISalc50MIl2gLojCKWSCjmnCKb6gKsUzsfLRKfY5XEA2MPzVdvWx
- qfsvBzmovJhnk1E9GwNWRFj0PFTQtsbehsEMWxSIrVTZbkWSw+ixdoOeO/IPfRgm5AQV
- l0L1rp8aVQimyUnpzhkewb6YGQU4eudNzu7s7hKlxU3T1/wbuLkjxAvN6WJuAU/jGo/r
- LEUvIPF7ue6T1EVMlMjsX38nAdHyMozJXsiZ0YgxKgPbLSqA9Ac8SCksp5rGASqzQZfB
- 9+gaVoWG50u0s/N0pEhuPhYEeU4jAW1SUkv8xP61Y0nkL8peFumvnFVq6hsoXc0enNI2
- kvYA==
+ bh=Qq+UP3tIxbYZu2XNDcXlYp7xSe393KDYCnzGdHWxTEI=;
+ b=ktcLQgakmtshNJc6BEWiXCVmhdBkYT32qNM+DErs6Qc+KhhmQHUVaTInAA0QUxW3KD
+ OCkCvf4FPgUWmniAH0sBuGyYwXCSxFLHtdvUEDd1kORH6jRmtXV4Gd/tPpcq4yoPDIJU
+ 312HwA8jv0TKRZSebTECRWMLE3oGZYpv9M/8gTo3dSb1jtSOlzebrZ7G439Is9Hxk1Fc
+ 6XEAl1G2w0j02LAhhkIe0ujQPVHOlRCdT181QsmKWCOlqJGyeZMC3cv2vjgygZ14K0mB
+ KDI7JW2q4ZAChCTIoSeXD1I9HYh4hmr+SkPJXZKmEQZBA2I8nodlJkKe/0W3530iwRfS
+ 7zDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792486884; x=1793091684;
+ d=1e100.net; s=20260707; t=1792487023; x=1793091823;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=AlCbr1idVLaLeGwrPNICr/dwSWQie4V+z66lPFg3Nh0=;
- b=ZFOjwUMtEaydRg5fgICljYuzNebG9kmTixiIDfs35S65XWcgszkw2/li2J6NjxtdHJ
- Vw9VGmlHtRKdrU8kqup5cE9exO33oWRWw261vFPEzO6t0xJTIion+yiTzIdfIWI7NBNI
- J0gNxrNHWP3H2SKLNSyYC+t6n/e3WmZtA5PX8TQW1E7VCEsLQdzODtVe6JWT2wxO+HD9
- mII+u9JxoTB1DwEx25HgMFC676QzAQZ4hOIgr9+r8DZI1LYNmimPLDeW5D2ycfBHUHDO
- EIt4iyaQiLSfWSmNs/5vQC1WBXvL5D1xtKaHe9bbs8KBr6WXzEtBzttBLgBT6iXdfsdt
- +o2g==
+ bh=Qq+UP3tIxbYZu2XNDcXlYp7xSe393KDYCnzGdHWxTEI=;
+ b=youvWFMwbgqlCUhZh/vCKZdH6YmnR95oyxXdd8VIHvb5rKiSMpywWrvcDDUcNZ65T9
+ guNrk+udFVVJun63ntjjsUkLy1OsS/F513Tv1dGilGi8C4ldDWE/2pY/wxesyIdgfvU5
+ Z3AnVjYjXOdOcFRHDXtAsmjMnBq5v39+xcf4w5aBWmQ5Kazd3y39K27oWNXKtPtAFGTK
+ 4UKK/mugrqn2hkocJBeZcd/MhGKOT/GVhDpLoFkHyTNts26K+0P0KSisG1Y2hv1o+Xxs
+ FXCc1CDoSj3Ln6lFMhpY62sCYFQa0zd1MWdgsubDRPbicfqFPDud3/ymK9XGrA7Srj40
+ qgig==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzPedfx+IJINLEx6V6cj4HtTvg0zKrUdIsqvBXRHUzW4Oyk314w5AsCY7WYEbc/gLq9R+aABH4=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJIqKUNsX1+PpMjae1Y/VE2n7FLPNnn9/aieMmihxM0Ou5QC56v
- ITlllecpIgjTXGyLIFGaQFmfGRT/nxCDdM2udyi2oWhtz4R1sOdFACgmrUKXq9Niqsk=
-X-Gm-Gg: AYBFou00bjVL9jvAMoD5MgCYKmiu3/fV5UZjNWq5jMm8Q1pbZKBDeBo1KMwxGLiam9/
- 4lp4gLrtjDuTO16rsm2FJ9BbMHM+LKoJfPTpbVy+L6W3WyjNCp8tVSFFIJQcCI3+NlE+tdFVB7C
- vuGW4jaFEHBZr1dWF9Sx6TygrYoWiPK4XSK1itPRfOLiuunTx+I+tSWxeyxpN8hDXweI6CJkVW/
- R4bx8R2EEoowvgaMCojlYeivWeJo9rWsYvFeENzxyDvHdYGVdPhqcItF76e7z+GZQQb6+Ikyfu1
- B8FmXWiDwBWJQXsg/ASKFPANp/gWW8jFknGDcux5Mf2kzNfhtYOJnAZCDLJScesXggtt1xpqqb5
- qs7iF2SrUiFepFgN4eENiDtSqPrk/SJNiN6jSG6bhPYFX6ecOcoe7CZksx/V1j5yNxI53dkfusw
- eGwnbIBD7U1HvfRsrWhNGDlgTH/1o52FWv+q+HqUcAd0/+xM0ayKNn5El7tXVL7bFBxySkM1R40
- fDEM7L+IF08FAeUrIMx4twl3CaGQvpN+X3nbUIGtQ/804x8BUPdjg==
-X-Received: by 2002:a5d:64c7:0:b0:48e:e2a:4093 with SMTP id
- ffacd0b85a97d-48e0e2a427amr16803383f8f.19.1792486883576; 
- Tue, 20 Oct 2026 02:01:23 -0700 (PDT)
+ AKwUvBx8TjZgDc7YxZ5xfvNwPd5vkZ85lE+XWYIS/DBNAtLgIEwTTquQulZEz1uxXyThnhsqYRN4IuM=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJi1Q/y4TVR0sF3HpnYiesxGxcVDVp4tOmwEhWiry+Bo7bcNYPC
+ hcZoZIaaoWmG2i324pIV+LaDeBnkeMlUrGrGlKGKQsdsmGeSLThKOFKN3sJJoBkls2s=
+X-Gm-Gg: AYBFou2LxYOA0IMdIiFLV1nfMnj6kgPM/SLtOaXPiDc6z/YcmwMioTnS0fwAKL/TSB8
+ WlLQ4NUdCTXSv1bNEZlONqHJT24cnaSXj2JfRNDbxwGBR66i1JHN2+Tf8lnr/QRdTVOvgPRPxu2
+ hTIA+c2c+cECLGFhBRetw5s2voBmW+XEMCOEJX8Bxr4S1Wdc+8qemzdIxMbxade6UFg482a4KUn
+ o+c2jRrA+4jBrzJPie112tJbfYiEsEQ9pOCslPYEsyCXIPi2LW1dYt+JgwBUGrpk79DT1T2J6QW
+ +xKV+/NDW8Mawi76bLm5Kp0gyIZvoE9aRIto2kjM9qMYwaXvTGhUVjTXTv7ZwRW+8Pa2eLxsQpW
+ WD4dkOTudJiKaclJIus2W9TEiZQAH+oPvaS7fNkH8NgZ91V3JRKgC3YF7YJVamm1P2iH8MbFpjq
+ R13hvCYOJ0q5Nv2xvEMc2oKoTlD0JK3RjtZjBwJr7K/VPVkPTg5KHfgK/5Q0u1zNHMUSoP1FS4B
+ rcLaPJ7evClX6DkKcJ/90bYF5fRDeWA/lM8msO1sH4FprV1i4616w==
+X-Received: by 2002:a05:600c:5492:b0:4a1:d992:9476 with SMTP id
+ 5b1f17b1804b1-4a1d992951cmr207480965e9.23.1792487023391; 
+ Tue, 20 Oct 2026 02:03:43 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:e3a1:1a65:a394:be54?
  ([2a01:e0a:106d:1080:e3a1:1a65:a394:be54])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e1d817d69sm4787756f8f.22.2026.10.20.02.01.22
+ 5b1f17b1804b1-4a1f2d699dasm61104385e9.12.2026.10.20.02.03.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Oct 2026 02:01:22 -0700 (PDT)
-Message-ID: <d848cc76-3b8f-4ac0-9328-2cab69910a21@linaro.org>
-Date: Tue, 20 Oct 2026 11:01:22 +0200
+ Tue, 20 Oct 2026 02:03:42 -0700 (PDT)
+Message-ID: <3780de1d-4101-4e53-a8f4-702dc72de78d@linaro.org>
+Date: Tue, 20 Oct 2026 11:03:42 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v5 0/3] mach-snapdragon: Add early EL2 hypervisor switch
- support
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, trini@konsulko.com,
- ilias.apalodimas@linaro.org, casey.connolly@linaro.org,
- sumit.garg@kernel.org, quic_varada@quicinc.com, Michael.Srba@seznam.cz,
- balaji.selvanathan@oss.qualcomm.com, u-boot-qcom@groups.io,
- u-boot@lists.u-boot-project.org
-References: <20261013110525.2465737-1-aswin.murugan@oss.qualcomm.com>
+Subject: Re: [PATCH v1 1/5] i2c: geni: Add 32MHz clock and chip probing support
+To: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>,
+ trini@konsulko.com, ilias.apalodimas@linaro.org, peng.fan@nxp.com,
+ jh80.chung@samsung.com, tanmay.kathpalia@altera.com,
+ casey.connolly@linaro.org, sumit.garg@kernel.org, lukma@nabladev.com,
+ hs@nabladev.com, Michael.Srba@seznam.cz,
+ balaji.selvanathan@oss.qualcomm.com, aswin.murugan@oss.qualcomm.com,
+ u-boot@lists.u-boot-project.org, u-boot-qcom@groups.io
+References: <20261007174151.2590649-1-gurumoorthy.santhakumar@oss.qualcomm.com>
+ <20261007174151.2590649-2-gurumoorthy.santhakumar@oss.qualcomm.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -199,7 +201,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20261013110525.2465737-1-aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20261007174151.2590649-2-gurumoorthy.santhakumar@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -214,58 +216,151 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 10/13/26 13:05, Aswin Murugan wrote:
-> This series adds support for exiting Gunyah hypervisor and switching to
-> EL2 during early boot on Qualcomm Dragonwing family platforms. This
-> enables U-Boot to run at EL2, which is required for supporting
-> hypervisors that need EL2 privilege level.
+On 10/7/26 19:41, Gurumoorthy Santhakumar wrote:
+> Add support for 32MHz GENI SE clocks through dedicated timing tables
+> selected via the qcom,geni-se-clk-32mhz DT property. Also add chip
+> probing support.
 > 
-> - Adds early boot0.h infrastructure to exit Gunyah via TrustZone SMC
-> - Creates a reusable config fragment for easy platform enablement
-> - Enables the feature on QCS9100 platform
+> Depends on:
+> misc: qcom_geni: Add minicore support
+> Link: https://lore.kernel.org/u-boot/20261005-spl-v10-1-c4ca29bf27ed@oss.qualcomm.com/
 > 
-> Changes in v5:
-> - No code changes, rebased onto the latest main branch.
-> Link to v4: https://lore.kernel.org/u-boot/20260703172634.140515-1-aswin.murugan@oss.qualcomm.com/
+> Signed-off-by: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
+> ---
+>   drivers/i2c/geni_i2c.c | 76 ++++++++++++++++++++++++++++++++++++------
+>   1 file changed, 66 insertions(+), 10 deletions(-)
 > 
-> Changes in v4:
-> - Updated Kconfig and gunyah_exit_boot0.h header comments for better clarity on platform support
-> - Split config changes into reusable fragment and qcs9100 platform enablement
-> Link to v3: https://lore.kernel.org/u-boot/20260515130934.388894-1-aswin.murugan@oss.qualcomm.com/
-> 
-> Change in v3:
-> - Corrected the logic to accurately detect the current Exception Level (EL)
->    and fuction properly when U-Boot enters either EL2 or EL1.
-> Link to v2: https://lore.kernel.org/u-boot/20260515065632.90772-1-aswin.murugan@oss.qualcomm.com/
-> 
-> Change in v2:
-> - EL2 switch is made at early stage instead of doing at the very last stage in
->    the previous version
-> - This change is based on the patch [1]
-> Link to v1: https://lore.kernel.org/u-boot/20260419173829.1074404-1-aswin.murugan@oss.qualcomm.com/
-> 
-> Aswin Murugan (3):
->    mach-snapdragon: Add early EL2 hypervisor switch support
->    configs: qualcomm: Add Gunyah exit config fragment
->    configs: qcom_qcs9100: Enable Gunyah exit support
-> 
->   arch/arm/mach-snapdragon/Kconfig              |  8 +++++
->   arch/arm/mach-snapdragon/include/mach/boot0.h |  2 ++
->   .../include/mach/gunyah_exit_boot0.h          | 36 +++++++++++++++++++
->   board/qualcomm/exit-gunyah.config             |  4 +++
->   configs/qcom_qcs9100_defconfig                |  1 +
->   5 files changed, 51 insertions(+)
->   create mode 100644 arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
->   create mode 100644 board/qualcomm/exit-gunyah.config
-> 
+> diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
+> index 7498cbcb41a..9edba3dd551 100644
+> --- a/drivers/i2c/geni_i2c.c
+> +++ b/drivers/i2c/geni_i2c.c
+> @@ -96,18 +96,35 @@ struct geni_i2c_priv {
+>    * clk_freq_out = t / t_cycle
+>    * source_clock = 19.2 MHz
+>    */
+> -static const struct geni_i2c_clk_fld geni_i2c_clk_map[] = {
+> -	{I2C_SPEED_STANDARD_RATE, 7, 10, 11, 26},
+> -	{I2C_SPEED_FAST_RATE, 2,  5, 12, 24},
+> -	{I2C_SPEED_FAST_PLUS_RATE, 1, 3,  9, 18},
+> +static const struct geni_i2c_clk_fld geni_i2c_clk_map_19p2mhz[] = {
+> +	{I2C_SPEED_STANDARD_RATE, 7, 10, 12, 26},
+> +	{I2C_SPEED_FAST_RATE, 2,  5, 11, 22},
+> +	{I2C_SPEED_FAST_PLUS_RATE, 1, 2,  8, 18},
+>   };
+>   
+> -static int geni_i2c_clk_map_idx(struct geni_i2c_priv *geni, unsigned int clk_freq)
+> +/* source_clock = 32 MHz */
+> +static const struct geni_i2c_clk_fld geni_i2c_clk_map_32mhz[] = {
+> +	{I2C_SPEED_STANDARD_RATE, 12, 9, 10, 26},
+> +	{I2C_SPEED_FAST_RATE, 4,  3, 9, 19},
+> +	{I2C_SPEED_FAST_PLUS_RATE, 2, 3, 5, 15},
+> +};
+> +
+> +static int geni_i2c_clk_map_idx(struct geni_i2c_priv *geni,
+> +				unsigned int clk_freq, bool use_32mhz)
+>   {
+> -	const struct geni_i2c_clk_fld *itr = geni_i2c_clk_map;
+> +	const struct geni_i2c_clk_fld *itr;
+> +	int array_size;
+>   	int i;
+>   
+> -	for (i = 0; i < ARRAY_SIZE(geni_i2c_clk_map); i++, itr++) {
+> +	if (use_32mhz) {
+> +		itr = geni_i2c_clk_map_32mhz;
+> +		array_size = ARRAY_SIZE(geni_i2c_clk_map_32mhz);
+> +	} else {
+> +		itr = geni_i2c_clk_map_19p2mhz;
+> +		array_size = ARRAY_SIZE(geni_i2c_clk_map_19p2mhz);
+> +	}
+> +
+> +	for (i = 0; i < array_size; i++, itr++) {
+>   		if (itr->clk_freq_out == clk_freq) {
+>   			geni->clk_fld = itr;
+>   			return 0;
+> @@ -262,6 +279,38 @@ static int geni_i2c_xfer_rx(struct geni_i2c_priv *geni, struct i2c_msg *msg, u32
+>   	return geni_i2c_fifo_rx_drain(geni, msg);
+>   }
+>   
+> +/* Probe to see if a chip is present. */
+> +static int geni_i2c_probe_chip(struct udevice *dev, uint chip_addr,
+> +			       uint chip_flags)
+> +{
+> +	struct geni_i2c_priv *geni = dev_get_priv(dev);
+> +	u32 m_param = (chip_addr << SLV_ADDR_SHFT) & SLV_ADDR_MSK;
+> +	u32 status;
+> +	ulong start;
+> +
+> +	(void)chip_flags;
+> +
+> +	/* Add delay before chip detect to prevent the bus going undefined. */
+> +	mdelay(1);
+> +
+> +	qcom_geni_i2c_conf(geni);
+> +	writel(0, geni->base + SE_I2C_TX_TRANS_LEN);
+> +	geni_i2c_setup_m_cmd(geni, I2C_ADDR_ONLY, m_param);
+> +	writel(1, geni->base + SE_GENI_TX_WATERMARK_REG);
+> +
+> +	start = get_timer(0);
+> +	while (get_timer(start) < I2C_TIMEOUT_MS) {
+> +		status = readl(geni->base + SE_GENI_M_IRQ_STATUS);
+> +		if (status & M_CMD_DONE_EN) {
+> +			writel(status, geni->base + SE_GENI_M_IRQ_CLEAR);
+> +			return (status & SE_I2C_ERR) ? -ENODEV : 0;
+> +		}
+> +		udelay(10);
+> +	}
+> +
+> +	return -ETIMEDOUT;
+> +}
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+This probe_chip callback is unrelated to this change, move it to a separate commit.
 
-Thanks,
 Neil
+
+> +
+>   static int geni_i2c_xfer(struct udevice *bus, struct i2c_msg msgs[], int num)
+>   {
+>   	struct geni_i2c_priv *geni = dev_get_priv(bus);
+> @@ -468,6 +517,8 @@ static int geni_i2c_probe(struct udevice *dev)
+>   	ofnode parent_node = ofnode_get_parent(dev_ofnode(dev));
+>   	struct geni_i2c_priv *geni = dev_get_priv(dev);
+>   	u32 proto, tx_depth, fifo_disable;
+> +	u32 clk_freq;
+> +	bool use_32mhz;
+>   	int ret;
+>   
+>   	geni->is_master_hub = dev_get_driver_data(dev) & GENI_I2C_IS_MASTER_HUB;
+> @@ -538,19 +589,24 @@ static int geni_i2c_probe(struct udevice *dev)
+>   	geni_i2c_config_packing(geni, BITS_PER_BYTE,
+>   				PACKING_BYTES_PW, true, true, true);
+>   
+> -	/* Setup for standard rate */
+> -	return geni_i2c_clk_map_idx(geni, I2C_SPEED_STANDARD_RATE);
+> +	clk_freq = dev_read_u32_default(dev, "clock-frequency",
+> +					I2C_SPEED_STANDARD_RATE);
+> +	use_32mhz = dev_read_bool(dev, "qcom,geni-se-clk-32mhz");
+> +
+> +	return geni_i2c_clk_map_idx(geni, clk_freq, use_32mhz);
+>   }
+>   
+>   static int geni_i2c_set_bus_speed(struct udevice *dev, unsigned int clk_freq)
+>   {
+>   	struct geni_i2c_priv *geni = dev_get_priv(dev);
+> +	bool use_32mhz = dev_read_bool(dev, "qcom,geni-se-clk-32mhz");
+>   
+> -	return geni_i2c_clk_map_idx(geni, clk_freq);
+> +	return geni_i2c_clk_map_idx(geni, clk_freq, use_32mhz);
+>   }
+>   
+>   static const struct dm_i2c_ops geni_i2c_ops = {
+>   	.xfer		= geni_i2c_xfer,
+> +	.probe_chip	= geni_i2c_probe_chip,
+>   	.set_bus_speed	= geni_i2c_set_bus_speed,
+>   };
+>   
+
