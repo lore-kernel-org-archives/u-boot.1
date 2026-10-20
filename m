@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E4BC606A33D
-	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 10:16:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AB28606A320
+	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 10:16:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=YYTV3NmM;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=ra8d3xak
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=vFAI93ZV;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=FkR4MDRY
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id ADA32810F8;
-	Tue, 20 Oct 2026 10:16:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 89A5B81155;
+	Tue, 20 Oct 2026 10:16:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id sMOmZcYa3T0b; Tue, 20 Oct 2026 10:16:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7E4958110C
+ id 4b1DswV6nFY4; Tue, 20 Oct 2026 10:16:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 52FEE81090
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792491385;
-	b=EHqtE2gCg/Opv3ZFg2szrbgICbg1fNzCst6wpLOQKabtRrjg5Lgcy+OVH8R1RbDfc4Qy
-	 lCs1QuL55xT9k0OKrmM5Am1gbcHAHh7Lj8GUcP/cN8i5SnCewepNOmougT+IoBfqJmnse
-	 SAkjWWp/wyyqnLCB5mp0IhSc2i1ZKi+5banjU5nGzh2DfvMyO2kwtUgkdAncQFbWWjPml
-	 EZvhgsR8w7O1LX3l7nFZ5XVvabku0hTeOyhR2ywonb05NI7h7hucn6guz06/0yk1zhFQF
-	 nwenk/9akMabpzkJowRViHIXiFqdaMhw3/qLmrbawEF/i8TVLE7RrMqOQMOf/43zGAA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792491388;
+	b=MkZWAtX+PDGc2BT0LarxC23jK7NVsGOX44WjuVEOJev1AuJorwZP7/axGIScAYTtbDON
+	 hruOYc99ahAw1sFdS68wG+vmVPF3dS6EOp8N3RgQn8cy8uZECIjTWVS9oG1wa1u6o1NfG
+	 1Sc8hzZkPJHgF/+vSX1GgRuZEqnVM090013eNT9HmPZpxsnCDOYpR24xxU5Mm9NwMN3Tv
+	 npqml2SdxYyp/ad5tW9xOauq6LavLtULNvVE+qOjLvWB2Ff5Az2XUOw7X48lJVPiIeBsp
+	 iF8DnBY/tloU7cSgm68thAcFLjyAn79S89TD8cMNn5J1XMH4ZPF+nF2knYHPldAPMcw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792491385;
+	c=relaxed/relaxed; t=1792491388;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,136 +33,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=M09pOZHjYw2QGuYgrQbkFGjL7VcfS1j4y3M+MqZ5Z3A=;
-	b=ga/vsYfgZq61KopHjU/C4SnwjY9HFxaYrZuT8G0vhIlofwcUfcQavmJhYK8KVG3ZXeQh
-	 qENXBKNWzbJ/qa7FJcM3RqYzB6zbHXSiTPB1K2//GsWq1n1jqJl8KB49xEi51qhfP9If2
-	 kgdXxBgOz2O3+t8W9jVZBfKc4L9RZCfteh3AZ/RKwT9M8y+NV/iR1Qk0Bpt66MWthy9wg
-	 DTNE8JaQcbnr3pu9TGScsAaZmKXD8Gf8pIUrHAvKaEiu14s9HYdy3DnfC1+9qWZEgUwH1
-	 uKNJOhC6Q4yrsfVPQ3z/dAz0VnBIlxkgPhneinzcsaPvLmPhEp20AhQ3tbdja3sL0VA==
+	bh=lA4y2K8QsP7dF2BCMgHCCbrqSsLvqsZhJf3Ct481FIM=;
+	b=dUl8dlmFw31twNBivVKWoqnX9wHPD6O50DBsYWzKalhpukAb/VquoX8D3yGLpur5brca
+	 gL1c23/QWxdBywEJkutURWVk7wfQn+GVzRseByd+pv+jcO4Aj0uSrjdUiyimBlA27OX2y
+	 KH1zRGQXE1sX6hs5v9idoyg0C0V573osrJI3af9wU9b0xqPp0VsIg3rr4kDT5g4tKCupl
+	 vt8LuXKGkb4GTYHb+t450lFNI6Jqa3adjlm854iw8qcRL6iSIX2N36bUAq9QNBMMjzOCi
+	 EDAiW7tSR20wTmyJiE5S2LlDBR/z0IukGiVfCoqqUJJL603rYINTHvzqItE8n99AvCw==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792491385;
-	bh=M09pOZHjYw2QGuYgrQbkFGjL7VcfS1j4y3M+MqZ5Z3A=;
+	d=lists.u-boot-project.org; s=default; t=1792491388;
+	bh=lA4y2K8QsP7dF2BCMgHCCbrqSsLvqsZhJf3Ct481FIM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YYTV3NmM4FY4ty378qz0unNx2YpFRWJnwZPLE5b4bgz09e1QmqGIDqtJC/91/EQmj
-	 wCMXVReg/TRfngMRSdLQTKHi1sEFC+FLRrWQCyclmnSfxqHnKYKlBaR9+SxgrrZqTt
-	 tQCh+Tmudnuj6+88eYMUA7GG3MdKLL2uk5qSGG/yVxmPetVk3EI4AQGhsgKpFfqxFq
-	 q+DBIuUtMz0INxw8I/Cy5jS5T/H3i39o9fTzcvB/H04B1w237MJUJBBh50Pp9KeKNq
-	 dU9ZSc1JCdQd6iOthlZyB9HToQswQ4Yh/6HJ2bQNlP4OUair2NigsfUUJIZBrAMLsy
-	 kkxHx9V5jvQLw==
+	b=vFAI93ZVzxZjZcNiVuzWYOMxP9S85Y8N1IzuCxuG4zgjduLQYDzS+pQW2EhH3Xbs0
+	 BOeYGTQrEyT7TIZR/bkJzz1KtAqxP+25DGl6zk6dLGnoeUUrsRwPdZtBsPq7+daO5P
+	 /+S1OA4PVe3xW9x1kDFRzR57zNDR+AJsI/hOvbFB99fB8KqS8K5XPnEBsoZL2tWNQV
+	 ax963+LHOUsxzSFNziEJQIhnWOOklF2LZpM72oQQLvsroII38SNvLzAJGAULxbzibm
+	 2BsOJPEf06AUux5+uqOIizUBGOJ64Ez4Ccpbw4+5ESn9ovM4QOyUGbsD+Fjpwnr5eq
+	 szYEGNrLSLVuQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7E4958110C;
-	Tue, 20 Oct 2026 10:16:25 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 52FEE81090;
+	Tue, 20 Oct 2026 10:16:28 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 71475769
+ by lists1.osuosl.org (Postfix) with ESMTP id 6F7AE1AB
  for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 10:16:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 624C640328
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6D2C34016F
  for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 10:16:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Lp2mU5p6jK4K for <u-boot@lists.u-boot-project.org>;
- Tue, 20 Oct 2026 10:16:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 866B64016F
+ id rA5LHZZKT_cF for <u-boot@lists.u-boot-project.org>;
+ Tue, 20 Oct 2026 10:16:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 629B1400FC
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32b"
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792491376;
- b=gRBVi5gLWl6qQQSGcP8lRCxq429v3uHeEgc2yTSoaYcwHe1d8WD7snT9nVtYEuqdJYTC
- EXl/4Evw7nHFLL+QdmU1QnlNE+rKpA0mob0f9jjF0U73cZTQRF+Y72HmllS36yb+4cUIG
- JoWh4Pipi/djxhKp/CWj8MJeWdrBWWOSaC8TgPGKNX/n+Ff53mpp76f32VJu9JNbi8v+3
- djp/O0VojUqwpTLiOxN0mZiOrFztG8raPZoESMwxGnAZvYnZYPM66+EAVvKA7JhbgX/1k
- aX9jy3rHcEdgNXnkFBnlNAVGowoUiZ+uD0q5vuHYiQpwqjAHI8+vEC8G0ix8fiY+j3A==
+ b=bIsH1pU78iZS1bNJSRw2oUp2J8knQOSyJ/F4xclwOlwzwhYWx+wmfvXZZSOYVMusWRAH
+ p2PeJbANxiQSzgd+xdK6eKtGCwUY1bebv9TAaVkHb8X54jrotaKdFoQs8XKp9StgmfH+B
+ r+gQm3y34tcMViYbguu0KkY79Zhyz//Uq/NGkviMhBvICzJ9q8QlHGJbeNNFOEWNgpnkL
+ 8+l5UReNdQxABOOvTOMO8TV0vFkei3E9PVhN0StGvQEDucuOg0zlpYjc3Ayk2hYtXbicq
+ mrjIzfv2fqAg17fHLIs1NJaFfo42FeomcqalPOezB7YdjivxalVpjvkQ4bExfTzFE6Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1792491376;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
  MIME-Version:Content-Transfer-Encoding;
- bh=M09pOZHjYw2QGuYgrQbkFGjL7VcfS1j4y3M+MqZ5Z3A=;
- b=obRuqybcdnVDi1CNsZduMXyUWd+vh7pn83TfKabz62Tjnv3JgPYy98dug3yw6TmhpiYr
- j3y8jo55vSyq5FwfbnM83fUvhsz2BnSixdaw2/A3ZCBDbfCK6RTrfSfO5UFOJlDMHv0Rk
- RvMhOveuO9sD4aqG3v5bXmQn6Guuie54XwLo8ViucUONUjwY8sfHWOOeKaNPKlAkHEot2
- 49mS6uSO+yqfOMBqhbEi2PE/ds63CNQJvppcQQ/9F5ap9N+hosSNpAKa1pBFX7ApQQg3o
- eCuHTpkLds8HHyyjpVCWWkGuwn6ykdLMsVVw9ljU0d3enpnMgPcLL3QmFD9jR+04CDQ==
+ bh=lA4y2K8QsP7dF2BCMgHCCbrqSsLvqsZhJf3Ct481FIM=;
+ b=WszvxIaAdFP7xdnOL0DwVh6FVjVe1PJQ/1vo7HMNsYWjKy1lWiKQurrUUKsSuaopnTNa
+ 10zG63sAWeTrR16+/P31zEaYBuqgA+pmBLddE7M4GUIWILJ+03uHNB5i3VczTxhopYTq3
+ ggGaB6jGu6ApiH5BWE4MbaYHGt+uSWFdctEpW0VoFz8w1aJw61bS66/T1ECgic8GvnRaB
+ 2aX31knaScAJnap5JTUmS9S11O86XsASZdD35zOYPjiilnDJcSWzIT/GpR+UPqvZarh8s
+ fzQmHG6WDI70gHz3xNCdaE6vulx5TlT9zgj+2L5q0tVe7wAOy837GTP3jfkik3ohA8w==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=ra8d3xak; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::32b"
+ header.s=20251104 header.b=FkR4MDRY; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32b; helo=mail-wm1-x32b.google.com;
+ client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
  envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=ra8d3xak
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 866B64016F
+ header.a=rsa-sha256 header.s=20251104 header.b=FkR4MDRY
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 629B1400FC
  for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 10:16:15 +0000 (UTC)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4a1dfd49525so19421155e9.0
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 03:16:15 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4a1698ea378so22913765e9.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 03:16:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792491374; x=1793096174;
+ d=gmail.com; s=20251104; t=1792491373; x=1793096173;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=M09pOZHjYw2QGuYgrQbkFGjL7VcfS1j4y3M+MqZ5Z3A=;
- b=ra8d3xakskv9k6INOF61+J6KYZHpIMJiyS0AKI6//ohKDyrCR9XGn1eorx0HTFrjfr
- ohs9+Np6lE9PEcPNYVwNUbBW8Y0YWpkJVC5ddHhnx5T1X2og0gHVOin/GObzk7XPClvx
- PYSbkAVsF0keO1b6lmeaCdUAgEUpl7j6hDCKf6Ui65QwOAzZ/HmIbBo1xJjq38xeX4/W
- Iki9Q/H0ZpQ2SNY2rvPWrdtYpDUreMK8R2em9JhUAOWLpQT5RynFnqJr9wu6TTkZNryK
- KKrsQA5MyEBJS63EMfOwhkoVidn66UGH3Ib9uiMShR+9+uetg8I64Mn9X6Qk4nCJuneM
- GuXA==
+ bh=lA4y2K8QsP7dF2BCMgHCCbrqSsLvqsZhJf3Ct481FIM=;
+ b=FkR4MDRYuhMZof7OhVli5ZLozOEwdszFXfuZ1Wbk2SNAdFzrMY6iQ8LG2zaoGdpgkv
+ otecG6eqvWzzExA7LnEiJiy8qXFFPmSg1oEnOYwLq3N6pBvN4VGIdXwjOHAsE9e0XmQL
+ ABGzv7oJSprOqf4/SixELcw1WgsNTeKAvrzWaxWph+IcI7IlGYJoGDZ548UKEuRSwXK6
+ CBj/pfAL66N03Jnkgjr5zh/BdeAEMlZUeYOKet+XWnBJWgOCNJfUe27FU5xT5TDgmpak
+ uQEh7LoFgUpci1mNZHRfTSx6Y7vMq5MgNUlHqKLKFz6QyOB3aVUBrbjXjmIssatk/Aw0
+ M7Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792491374; x=1793096174;
+ d=1e100.net; s=20260707; t=1792491373; x=1793096173;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=M09pOZHjYw2QGuYgrQbkFGjL7VcfS1j4y3M+MqZ5Z3A=;
- b=H/CiCReJUewYe4nO3aKjYBWhYe91FKAzCv7fN2J0lX03fiC+PWHWrO/nmIt2zgOVba
- /pOBEpyhyAJoaDsgnvQvwVA5sfvykXhwRxWM738nXNJhUQnS3UioFnI9rdvbpe0cBg5a
- CA+iaoL5OScrBg0bFqYaUZiSUBCLCd7QfpWAGhufMh5TvRsluBp6Q2VSsz12/KvfAOVC
- v561Qlf2fmp81j4HRB/1JIewjkMa4CO3FUw7eSDF1KFcSM14AY2SkjJiuqkQSgFwwYbu
- RFVD/YOqL597G//Y7jYgRn++xNIHF0qvL8RqKB3fcY8ZE1YGFQ/vVYQ9VWhO3uf7NGzA
- BaPA==
+ bh=lA4y2K8QsP7dF2BCMgHCCbrqSsLvqsZhJf3Ct481FIM=;
+ b=nTf77yRThcxeAeRbOl/YTdB8oIFfA60WbKe4tF+ZNcXu5uYaqgPxsn6JFO3tciqhlr
+ C5D9B/YKZkgKCOZEkqz+ISOMSeiHVXKxSzxOQuanPO5a//QQglQ0byc0PP2NYqpYvcgX
+ IeVXZKqdYIGHYcMISefV/brUoc2qVLeGq+RX6a08oVAECM6hoUsNakrcbPV6Y5DW2GJz
+ gyFznPzFj/QM79abkDChb9Nv7K5kkdoBZRy5OosuHWlzaCxmfP5v1oKvPMqbbm5N/Qad
+ 20hZA815S5SGvfk7GQ1R4gLqRQ6qxWeH5wa7aydFMKwtpwvbMIgnbibNkkuR9wSOBQeu
+ ebMg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwNbknqWkVLM7nCSxjY8+teJv4agtvR3KnUf1NWIvnbpggzgUGtTQ+0g/Ql8kndYVn9Ms92P94=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYLHB4hP/XZ+ISWm1Daxc8ujwgA/yFrOCW/wCJqSarT+g1qb9ka5
- yk+KDCJyPC1NXaQIcgA5hHGtmpqVFHK//Irhqhcty2ppSCVb58b0A7jI
-X-Gm-Gg: AYBFou36ckSa/xI1GHcxaxkledvxZBiC7jL4IjaIKM2M5SnKG16BQsDi1P9xIO7wnDI
- 0wybgIMnPL8BeHIiKhkh84LytzNpbtN6XfNXZ8o0EwofbdON5eQwaDUVEq6x7aO9nR7qJP/Ny+r
- tRP3UQ4/cvPc/zIo+SQnrOOe1hpg9Duw807o1BI2RD+pjASD9dIjrlZgLO+HpsqucO7LV6/0EJW
- lvQ61H2g7ZBAozh2djSTVCJ8JThbLmzTsfwHCvbZOwlHmXUn9/1r3OjRk8V+Bg5kNQN7JipVt2d
- LcbCjpiWlrxVQuvCUiBMvfaC2Ikc81Z2lbGXMI81hkSzLGamN6kc5VfXPh8MXr/QBQ/7cmR4+2C
- sXgx3ZsgorYk3juBt9xxUbGgvzNxjxtPsi9RRtEnT9YQUURTSSFOcOMPflewtviepHgztXJgNv8
- CVTScKij+VOp/6BoEfPx/Peq+kqi2xoI4DUgqk841Tu9f5nON08MeyunQJz/jE46/tCRM69hQxY
- PBF
-X-Received: by 2002:a05:600c:6207:b0:4a1:e3e4:c438 with SMTP id
- 5b1f17b1804b1-4a1e3e4c4efmr140922655e9.26.1792491373775; 
- Tue, 20 Oct 2026 03:16:13 -0700 (PDT)
+ AKwUvByUK8ROKdYgB2RvdlLAK1wbugSWS9oDB6QmgG4EUVJA9oCdXNhtEsIA1fiMwQyOJYYc93WDZCk=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYIBsaNlrk/3Sc7hLwBlf28A/EZboZwB6NBue90iTac7Z87jSlDe
+ 71KbJtbL0xCKJVredzqrw+HFpm5QM7bbcSG+8L2fdfjZK2QlPyZZE2Fc
+X-Gm-Gg: AYBFou3wRSB6m7VkNcLRQYiAQGTfiU7NyQ7PJTyPBRL7zehmuL3/EkGML9Ltp5DjggM
+ YV495LcHMEZ0pXoGR/nvH2P+aSHEsxVErE2K7uuzMJUa7gIFvIzyu4414XiN7fn7HiGJKxz5MkH
+ vavOJk6kiDn4fotC0QvmcL7Z4z/Fvn6sIiDGbccml9OmO230zCpqkH81z5oxm2DTe6hcuW+rtJw
+ F0NJH8Ji5bd3b3Jf1tDCDrT17gCD546XZ1t6uOaRDRsV5XHf6htRvtRjJmp60VBIdB49Ye3wLo0
+ /8LYTxC3wkWLXVBXx3HLSENcagjcCXVSNPKlHp0kAWoNu8JXq4GfcNbJ2mMGYw4Dpu0fjZ0ny0f
+ i/Sf8xjoV2ovpH/ctiDg419LZrNnVXtgW6RNJIztumNFWNRqcZiJNgKa1b0h8nzF0WTVhrSc7Ex
+ Hc3AtS0xMTQ1u9U+J9p/KRxRPeTAp9haYHHuoqOF7nYDi0AXp1Iyoo8ppZyeVsCYACNkbmXfRlL
+ 123
+X-Received: by 2002:a05:600c:4e11:b0:4a1:acaa:c355 with SMTP id
+ 5b1f17b1804b1-4a1d75f252fmr207822665e9.10.1792491372861; 
+ Tue, 20 Oct 2026 03:16:12 -0700 (PDT)
 Received: from deb05.proceq.com ([213.160.61.66])
  by smtp.gmail.com with ESMTPSA id
  5b1f17b1804b1-4a1f2ca3597sm60140505e9.2.2026.10.20.03.16.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Oct 2026 03:16:13 -0700 (PDT)
+ Tue, 20 Oct 2026 03:16:12 -0700 (PDT)
 From: Mehmet Fide <mehmet.fide@gmail.com>
 To: Marek Vasut <marek.vasut+usb@mailbox.org>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Fabio Estevam <festevam@gmail.com>, Stefan Agner <stefan@agner.ch>,
  Francesco Dolcini <francesco@dolcini.it>, u-boot@lists.u-boot-project.org,
  mehmet.fide@screeningeagle.com
-Subject: [PATCH v7 4/9] usb: ehci-vf: drop the empty bind hook
-Date: Tue, 20 Oct 2026 12:16:03 +0200
-Message-ID: <20261020101608.2818265-5-mehmet.fide@gmail.com>
+Subject: [PATCH v7 3/9] usb: ehci-vf: remove the code path for a build without
+ DM_USB
+Date: Tue, 20 Oct 2026 12:16:02 +0200
+Message-ID: <20261020101608.2818265-4-mehmet.fide@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261020101608.2818265-1-mehmet.fide@gmail.com>
 References: <20261020101608.2818265-1-mehmet.fide@gmail.com>
@@ -188,10 +189,14 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Mehmet Fide <mehmet.fide@screeningeagle.com>
 
-vf_usb_bind() only returns 0. Its comment describes a hack that keeps
-the second controller from taking sequence number 0, but no such code
-is there, and an empty .bind cannot influence the numbering the uclass
-does. Remove it.
+USB_EHCI_HCD selects USB_HOST, and USB_HOST selects DM_USB, so the
+!CONFIG_IS_ENABLED(DM_USB) branch of this driver can never be selected.
+It also cannot compile: ehci_hcd_init() calls ehci_vf_common_init() with
+one argument while the function takes two, so the branch has been dead
+since the controller was added as a second parameter.
+
+Remove it, together with the board_usb_phy_mode() hook that no board
+implements and nothing else calls.
 
 Reviewed-by: Marek Vasut <marek.vasut+usb@mailbox.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
@@ -200,11 +205,10 @@ Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
 
 Notes:
     Changes in v7:
-    - the Reviewed-by moved above the Signed-off-by
+    - Reviewed-by from Marek and Simon
     
     Changes in v6:
-    - dropped the two Fixes tags, the hook was not empty at those commits
-    - Reviewed-by from Marek and Simon
+    - the commit message names USB_HOST as the option that selects DM_USB
     
     Changes in v5:
     - none
@@ -212,42 +216,80 @@ Notes:
     Changes in v4:
     - none, rebased on next
 
- drivers/usb/host/ehci-vf.c | 15 ---------------
- 1 file changed, 15 deletions(-)
+ drivers/usb/host/ehci-vf.c | 49 --------------------------------------
+ 1 file changed, 49 deletions(-)
 
 diff --git a/drivers/usb/host/ehci-vf.c b/drivers/usb/host/ehci-vf.c
-index 5d27318de62..e5f9ec0fdbb 100644
+index 32fe05920d0..5d27318de62 100644
 --- a/drivers/usb/host/ehci-vf.c
 +++ b/drivers/usb/host/ehci-vf.c
-@@ -261,20 +261,6 @@ static const struct ehci_ops vf_ehci_ops = {
- 	.init_after_reset = vf_init_after_reset
- };
+@@ -128,11 +128,6 @@ static void usb_oc_config(int index)
+ 	setbits_le32(ctrl, UCTRL_OVER_CUR_DIS);
+ }
  
--static int vf_usb_bind(struct udevice *dev)
+-int __weak board_usb_phy_mode(int port)
 -{
--	/*
--	 * Without this hack, if we return ENODEV for USB Controller 0, on
--	 * probe for the next controller, USB Controller 1 will be given a
--	 * sequence number of 0. This conflicts with our requirement of
--	 * sequence numbers while initialising the peripherals.
--	 *
--	 * FIXME: Check that this still works OK with the new sequence numbers
--	 */
+-	return 0;
+-}
+-
+ int __weak board_ehci_hcd_init(int port)
+ {
+ 	return 0;
+@@ -155,49 +150,6 @@ int ehci_vf_common_init(struct usb_ehci *ehci, int index)
+ 	return 0;
+ }
+ 
+-#if !CONFIG_IS_ENABLED(DM_USB)
+-int ehci_hcd_init(int index, enum usb_init_type init,
+-		struct ehci_hccr **hccr, struct ehci_hcor **hcor)
+-{
+-	struct usb_ehci *ehci;
+-	enum usb_init_type type;
+-	int ret;
+-
+-	if (index >= ARRAY_SIZE(nc_reg_bases))
+-		return -EINVAL;
+-
+-	ehci = (struct usb_ehci *)nc_reg_bases[index];
+-
+-	ret = ehci_vf_common_init(index);
+-	if (ret)
+-		return ret;
+-
+-	*hccr = (struct ehci_hccr *)((uint32_t)&ehci->caplength);
+-	*hcor = (struct ehci_hcor *)((uint32_t)*hccr +
+-			HC_LENGTH(ehci_readl(&(*hccr)->cr_capbase)));
+-
+-	type = board_usb_phy_mode(index);
+-	if (type != init)
+-		return -ENODEV;
+-
+-	if (init == USB_INIT_DEVICE) {
+-		setbits_le32(&ehci->usbmode, CM_DEVICE);
+-		writel((PORT_PTS_UTMI | PORT_PTS_PTW), &ehci->portsc);
+-		setbits_le32(&ehci->portsc, USB_EN);
+-	} else if (init == USB_INIT_HOST) {
+-		setbits_le32(&ehci->usbmode, CM_HOST);
+-		writel((PORT_PTS_UTMI | PORT_PTS_PTW), &ehci->portsc);
+-		setbits_le32(&ehci->portsc, USB_EN);
+-	}
 -
 -	return 0;
 -}
 -
- static int ehci_usb_probe(struct udevice *dev)
- {
- 	struct usb_plat *plat = dev_get_plat(dev);
-@@ -315,7 +301,6 @@ U_BOOT_DRIVER(ehci_vf) = {
- 	.name = "ehci_vf",
- 	.id = UCLASS_USB,
- 	.of_match = vf_usb_ids,
--	.bind = vf_usb_bind,
- 	.probe = ehci_usb_probe,
- 	.remove = ehci_deregister,
- 	.ops = &ehci_usb_ops,
+-int ehci_hcd_stop(int index)
+-{
+-	return 0;
+-}
+-#else
+ /* Possible port types (dual role mode) */
+ enum dr_mode {
+ 	DR_MODE_NONE = 0,
+@@ -372,4 +324,3 @@ U_BOOT_DRIVER(ehci_vf) = {
+ 	.priv_auto	= sizeof(struct ehci_vf_priv_data),
+ 	.flags = DM_FLAG_ALLOC_PRIV_DMA,
+ };
+-#endif
 -- 
 2.55.0
 
