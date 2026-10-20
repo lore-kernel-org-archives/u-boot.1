@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 317B1606A31D
-	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 17:26:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48282606A31D
+	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 17:26:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ff9Nr5jl;
-	dkim=pass (2048-bit key, unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=bDPsiHFl
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Qq5/RDcs;
+	dkim=pass (2048-bit key, unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=kaqFXpRg
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 09BCA40976;
-	Tue, 20 Oct 2026 17:26:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1FF866085E;
+	Tue, 20 Oct 2026 17:26:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id J5aFu5NQgfgp; Tue, 20 Oct 2026 17:26:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 1B5FA40918
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792517196;
-	b=J2loI16uq/JpeIpgGN4TGnn63QU7htcDwYd7vbAlKSiwvAz+L+wChI8bvHkW41ZVh5ce
-	 alytfRwhzNjaTX8oqnblbffqInrHe5BAblBJggvGMkcE3x+Jk+8KTHYdqdeYAjQ7EbVuj
-	 Wg42XRjmfEwf1rsLuPzQw2BEGuZz5hNYNCmQB/NRucAf0mfHHNkT6eIwUMLJ2bhFr6lxy
-	 cIInSd2XlLE3EO0xV65QtdkA5Jgv7Ca+sLJH8VRFxiSAyyVq0xwp7bYyRRvNhypHYTPK+
-	 D1zBUHSHYoFWCxRiPyACamLZGHtW/p0g0UjrKs5uaRFUr5CJ8AZnULHdx4nB/GdzpFg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mQc9nWJADA_J; Tue, 20 Oct 2026 17:26:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C86A3607B8
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792517193;
+	b=MhXkV45g4xz0akp/lcgvpKcp84bqu8kCHVk/ljLFzvrkZfmj2wNnR5n5aEeZ8+N3uK1n
+	 TwbfizNjFjzJBxoYFlpHyV6fBw0WcAMEUlOBUkiI3NmQcYu2YAXGDzec7J9rIs4TgZBOO
+	 oARTkKbMZ/KVEQzMTTPVzrVDLMiV5aKLWMN9WqwxQyC3SvO4edXQ2zJjid+yFVXS7kP03
+	 jUICAl5pBOuRYAlj9IT1di8Z9Ktlpq231Gvt18DLAgDrBNpJ/wWzom3IIqS1Cf2TGjtYf
+	 +3peGWlw4jXWVdgtXdxl2xyxpWQ7WzAAtI1OHcEDhBUKMFAUJ7jWYmCHDNnuy3ok1yA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792517196;
+	c=relaxed/relaxed; t=1792517193;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,136 +33,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=c2NotH6uCpHDBP7Ge5Oqt0z4P8f8xo+K902eYTSmULk=;
-	b=lqkXTkS6zX4xx32Rl9VEi3WbxM6aFq16FatJLzT2iXl8lmlORTPhB/hLAXN/ThCAg9CF
-	 tKY0Zqn9/12dkDbfND27b5FRaUTMNfKLXA1ym0oujrHILpeYpZdsGF4+DhaCpeAISu9dS
-	 Ik2UZGXlRAnHGW4NxHUfFg/XP6cyivbu+0YQQp2ApudnZzBn8dvhvB/sIjx5TAVL0SvVY
-	 BtyZlue4gh1x81CiMeFqRnIWNi+EkOxkdh7kHubLIa/SL7spF/3bD2VjZEnknFQPHQrf9
-	 sl95Idy0Oe56647rtO4Cn7T2UzHSWp7HNK6hbjDy2zxH03ssmQJofiTQDndL3BmPojg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=6WOv8zj4x/mWgnM19CzTePhBCZ0lG+bFDsX6+VuGsuk=;
+	b=IRP0cFAZOoVfwxqhAFvlEf39pRhHtB3aaFNuZ9W8JNxl/EBe4cA9QOs5TtXtt7DcvMEe
+	 HxL/YHQvDIVy/IB/NOQPSb3vdV1GCGKQ5kt56Devp2KvgJ8oVQIg3ux1QZC7+FDri1xjB
+	 k50Gcy1S5w4liDbrf4nxyJ+51UPfyhfydOEJfkSons3TNKkuPcC5e0noex4XzHRpZl5gZ
+	 w/PVaNCMz7Q9Y4v2y4wsCchjGUjfKLDWa/gTBEV72hp++dKTbzKXSoXw1aEQduHaUXHKc
+	 bAQm4t47XvjVO7jMpQlTSFAgzMV660/fuIhQ33bFSUW+LAmupqxcLmG/FNVah9f+XHg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	dmarc=pass header.from=flipper.net;
+	dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=kaqFXpRg;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792517196;
-	bh=c2NotH6uCpHDBP7Ge5Oqt0z4P8f8xo+K902eYTSmULk=;
+	d=lists.u-boot-project.org; s=default; t=1792517192;
+	bh=6WOv8zj4x/mWgnM19CzTePhBCZ0lG+bFDsX6+VuGsuk=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ff9Nr5jlTMBtJHaWqQQpm6IBdcD50cTxqzpC7Fuj/fY/u/DZYqkduyh6FpRRcugUY
-	 T2BfpTvRGA3k0bxUXPriTs0tc/PUPaSNVZW67+vUsv3g5wtx2G54KcCH8HWDtv9kP9
-	 0Pc5mqUJitqGqByoT0HbzlnrjhzpUsc1t7tSrlA6eAQatYIFa6li97kR2KH1XCoSY9
-	 vqAPPab1sgoTxk5ZxhKf5rUDBErO5+D590UUYIp9WKDvtJTfqZCbNUTrMfB7bU0ySs
-	 vJDAYC5Cs2WtJNIQDnVesUVmkID30OyqWZgzcRb0QoASxRzdZA93HiolofRY63Gng2
-	 Imb1LlAshdLOA==
+	b=Qq5/RDcsLguHm13NSmLZtAESNfbHNvzEef68cXOiRiv5EmhjkVp/iu2T+BG8GVwvb
+	 +LAxSB5VNHHlng1XHE+CwcSQj2aNcROCpAnrkvcvTneLeVwpQQUQ9r3hH4P1vpOl97
+	 kxKmooPsAN5KV4lxQEfRrce6+zf61j5vNv5H5MNx7Yaz18iLOSqphqn5yEbi1GiI5x
+	 dQVFLdXSewWZjwNWONQU9njBOcDeA+NgBzLpD3+soXkqZJuPUBaWqJ8r7+eRrFpFxe
+	 RQ+Ki5Cl3wdTIOhP9hZJMyuWj48VxSQN5iX9mKFj9C6u4oxe5bCHVoBKcfhR9z7Fbd
+	 gclyA51/NJ0jQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1B5FA40918;
-	Tue, 20 Oct 2026 17:26:36 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 35DC8930
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 16:43:28 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C86A3607B8;
+	Tue, 20 Oct 2026 17:26:32 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id BF7223A4
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 16:43:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 33517400CD
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 16:43:28 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id A557E60773
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 16:43:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iLu6zgf-prFO for <u-boot@lists.u-boot-project.org>;
- Tue, 20 Oct 2026 16:43:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 2004A40060
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::335"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792514607;
- b=oD6GkeGzn4KFIw1U7eCVFkGyX3J8mQzIcP/hfKRf8hdKa/XFzquU5MK9HtAWBGFL1GAT
- 9sz/ljTdCAjWrX0d+7cUG+Sa/xqIyJZlp2dGsEOwSigHbwqTkkdVzAlOztVNHxDDgs2pA
- 206KYsYQJttv+odwD/Uml/9TyhuxJ64+osoOKfJsO0gn/sVmNmpQprkUvUbIvFh0mL6Bw
- XNIeBq467mkl6BARPQzkD2ePTsEd/L47Y9CKew/mQmW2dQJAUXwZhuXMtq/UQI9EsVDC5
- /XBbu3pnqdFO1QEO9P6eyCILN0V5wKCXRAmISH3+qjAetHDj3EQURJdygWooVC3AerQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fJCj3vE1-inc for <u-boot@lists.u-boot-project.org>;
+ Tue, 20 Oct 2026 16:43:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E3AB26071D
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792514594;
+ b=iW+0rOp+OcKKcj+hM84mMNlLsvKWG5a0P25aLX3wxWoTxoOCDVdxLLyqUqZcCwPDM8M5
+ WUKwDPc3bJGrubVnFLlRXScmOOx33cc62G7/NC4LicrYL99g0ktiN8ygrsqdSziHxirRd
+ sEc4R/KrPpGd7rCp9JkY3LkrlRC+5V/r+nvWfPWxzs0hmVW3zwRKL9J6vaD+8REXjBv03
+ rM+cpFAoZYsWzYwtgJX8oWPAbv5BygsN9D9QlSW/skgYGrs0d2AK5dc8VZeKAX93VnVDF
+ lBYR0d13gqMIlPRuKBVHNWQqfzvhSScEuRl2G1eU1C1Yre5wxMpqt7S6Bc6XYELvrRw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792514607;
+ c=relaxed/relaxed; t=1792514594;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=c2NotH6uCpHDBP7Ge5Oqt0z4P8f8xo+K902eYTSmULk=;
- b=JVis3sQDxaOL80BSczcAwbatz4l2QydRTy/xZO3C4lENgpHQTB8uUkmMr3v4sJpuuNKh
- Y91x7kHtKkXcA4mSXZMK4VUqRlW67KJqzD2XrAat1jOu6ha8hutClnLvgjgncXu2Ye1zD
- Vlh82cUBa8hFXhMFfnMmu8pcsNgKh+JL+r8Qb1kovE8mdNucdTceQP8nTcfcn1EjxOcGh
- IwQHazQBtZToJ3UOoVl9AOOyXQfQ4My45t5CNq6riY/22PzjvZnCKBPkDc95o14hF0tPC
- a9HhJMgwCB+P5nCCu/WLwmGKrEWG7GPD8cMOrXcBod8aYkThpPyATzRTmyEx9b3u9FA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=6WOv8zj4x/mWgnM19CzTePhBCZ0lG+bFDsX6+VuGsuk=;
+ b=lStSg0j0R6CdIeBTPKYLWRJVqFNAfwGsULRjZ8hjK13bJfzNLEd2tZb+YKdYt9CIKV+o
+ 2gFNZhGOtSQ0mpzPXXzWQisoZulj44+SpQ+EnLtni2StY2mZhyB/GtYip0nCwwutQCGos
+ QxhYlH60lmPheziB+2XyaYShKtg1wybRQ37GraddV6NBGw9gT9buuefKbFDwodNxDjfNb
+ 52o4f2zOVWXpBUu1H524V8eUogzMQj37NZ82IRn2lrbuZfb81IsvVsQw1YdoSZnxpuH9z
+ bnYHUKN90JwmpKOzYzuUQjXgXsMGvrzG50vi9foulZ6EEvZT439l9V9ZABB9AH7Wd+w==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=flipper.net;
  dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=bDPsiHFl; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::335"
+ header.s=google header.b=kaqFXpRg; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::335; helo=mail-wm1-x335.google.com;
+ client-ip=2a00:1450:4864:20::32f; helo=mail-wm1-x32f.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
- header.a=rsa-sha256 header.s=google header.b=bDPsiHFl
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2004A40060
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 16:43:25 +0000 (UTC)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4a1df146015so21279955e9.0
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:43:24 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=kaqFXpRg
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id E3AB26071D
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 16:43:13 +0000 (UTC)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4a1cef0439aso37991335e9.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:43:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1792514603; x=1793119403;
+ d=flipper.net; s=google; t=1792514591; x=1793119391;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=c2NotH6uCpHDBP7Ge5Oqt0z4P8f8xo+K902eYTSmULk=;
- b=bDPsiHFlAG5ctSCOQKZUlgzdOlWbnuvmIM/m/YQO/LJh9lL2vcEzJe6ta+lzXaH7oG
- bBgvXosHevuReGHrBESgOGWa8VOVRZNDZgi484dRJJQF0CPMVPbAU1h62j24lefXuQI7
- DdWT1ch47GCZkqleeC0Ygy1BKpM694flWm36H+X4j9YJwPCbiH2Vndt2jHGrEupWhHJp
- l8OTx3JvtOCbknUY/FrB3nq4HKnnz0UTXe5mA8WygJ3vg+xsVsXKHu2me6/MzfQh6ShN
- cxXbgvrhJjMJ4AhtAyBvfJFN4D4AsB3z9tsWMMXQbb284LB+tc7O7p+m1VVTuZ+aNdur
- EaRQ==
+ bh=6WOv8zj4x/mWgnM19CzTePhBCZ0lG+bFDsX6+VuGsuk=;
+ b=kaqFXpRgA36TFj+j8+x7Hh96DE3gq5JXknSv1pXlAxZQC3+5NIvlYdTGxiV3oAvUa6
+ EblDuK8qgDEHsYJbbJiBrnljLI71fusZZlt/Evqj3ugEL3rdaFz9m1KlTnMP5Silr/mA
+ D6JaJnTiMy9LRkkxCxKBZHOaxq2TuhP1lSCO+x5EMgLlyeCdN2+ylOmngAx4R0+D0Vu3
+ B9+XhDvMcrujDtg4sy20BfNDhfjaCdZ4gIT4RGUD6IV19SKtrwzgf6+cqSkMnHcwqATd
+ ilNzk3Kk0o67uzbsHl4rZtCHPMcT6mz6rabHxD5M3cMb1OWQ04lSY+p7GVgLXrElKjyw
+ lcuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792514603; x=1793119403;
+ d=1e100.net; s=20260707; t=1792514591; x=1793119391;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=c2NotH6uCpHDBP7Ge5Oqt0z4P8f8xo+K902eYTSmULk=;
- b=H2bXNMb9oDfREo9TOSv224UCrTEhhZZd81f6TBKWsRKmlJ7O7wnfmd93wM2EU9fKGP
- d/g9tJNjwXtZ3flkerGOsiN+LRRojF8QuJLvrewbdFTlpk+TII1fLxLkB62Mf+8ATFbl
- NeotaNuspwOzi8Qv2ZCOf4JQVcKi0N1BsKYfuZ7VwR1eFt7j/9N2c/Tnx/3szsqOF2+j
- XTaJ+OzxMmZCObVDiSOPB+IcyKvsOQCFYfG4hNrUQENU1Aj7xM5ov5+dOvQd3DfxdeCI
- dimIBVB1OYQfN1qUAJk2i0uUMj7F0KbZ6oJ4fA/6FalLJP6aqLTgJTAiTJBOu/fuqLpR
- 0hKw==
-X-Gm-Message-State: AFq9FYKFaN2WkImK4GaI8zRzOYj/+d4D7KBUH967UG4oFdohALKClimy
- owtYjYS05bYXOVPGq/rIvNmKZV4oEX6IoS6W5lsOOlQ95uTmbz7ieWdFUnmCrFDYp58=
-X-Gm-Gg: AYBFou34Vcy3GqLpvb3JsuoQtciIFCKflZE9FrtWxAf05ETnv2aoX71LVPe2lleKf3W
- 6N03nwaK9DrpoW7Uep1z5/R/or7n38aedyHDqA8zvRznm6ZXI0Xs4ByE+wmGM7e+Kq1+rk8/hiz
- GA4uMammmHmoTWHy1NFphK5u5tgGBcZS6PV65CdG1gGDHpXVrmCeXZ7u1sYvmYr0dmPwE0da8lA
- nRuXwlPiW+aVj/CPI1zDq5JAhtcy25lmtFUTSU2i+KGAIu3oUHIUVRp0FaRpm7tsPmx2u9f+kOA
- jwFsI7YkEGczMfO9sOe/NL3YQ5gba9FFXNOTufuVt+UyN87Aoc0TPIOy138izdPP9ZlHXFY0QN8
- eLOlHu6oQ+35a4r3YHhu3D4gxlsnkSIMn2y9It1cQdXS5oEaKjYRyV733w0uO2vAOUDMeaoe+mE
- lQuH88K4ZXBzxdvkMxxIL+pTk3D5vLAqloFLkrN8KhiTLZ+B3LN81Ymm7H3mESKHHaezoJTfPT9
- 2t+xgYmxibML+BvhD1SoNWUyARnFFYKJdUZzr7/KTmZemJaSa2scw==
-X-Received: by 2002:a05:600c:548c:b0:49f:dc71:e609 with SMTP id
- 5b1f17b1804b1-4a1d7610f2dmr251229035e9.20.1792514603145; 
- Tue, 20 Oct 2026 09:43:23 -0700 (PDT)
+ bh=6WOv8zj4x/mWgnM19CzTePhBCZ0lG+bFDsX6+VuGsuk=;
+ b=nn0CIarPGrHjrsw+XdPbpWSjhJM86RZhWvaVul+ellfaxC2aEybxLtVzwhswTbWQc6
+ sfnUt88VU270KIQzdvwaHDxC8UZQEPJzYf8B11D1Hbj4IPNYKkr0bWFSY7F6LjtytbSL
+ bO9h38peCNinm99Wo6Vxzhb4FZnajegceJSI5D2sKOvj0Pj0QFRqxqcutnu5YO7fjk+u
+ HoUGVHmiOywSLY9cWDQCVZLmZTDpKqjbnhfHD5Yag/LK0RJ6oxAD7iz3gN3miO4kcnta
+ t2rm+8GUvvriaGQRzP582aRT7TV9y3y4Y1FWpnorJ+uGsuR0PmHTsaM/6GNB3DqqpCDH
+ fAkQ==
+X-Gm-Message-State: AFq9FYKYDd3j5FdnfnJDmq+sSoUlgZfUzURyZaxTwR7CZ5ROnXvNwzQe
+ SxWZqI1QWIF9jfLZzvslMbMMFf3GfL820UQ9JLR7oq5GdvfKMvu0LkV5kSgdVQLSZZA=
+X-Gm-Gg: AYBFou18KoVwdCM/kvLtVp9I7iXHIVmMhFLF9BVtBkyrICpsl3XJ9+6IuiZemlh1Xfm
+ 4EIo2tb8yu5UkB5+Q473CAvF1PIVX6+IZBVRjtvpYGH17vcJZAlz9qeJ4VH4lNTXBjfLYudo2D1
+ WDEcp5IUYMe89DE9RxXs5rb6yscHCh5RLxvug7o98g5rb/zKIOwaAWTXAuKA36eVNZE37gd0P6h
+ SQzon0Eyw3e9T4LsVoolNdFjHz1DA6Ro+j3GL1u/nHGhsJF0hLCbyKRsPdnW12vrN6Z85KJRVcv
+ 2G1ztUxDv1VKE0bfckQM/8MO/Le94EjWEc+OzBN0VmE2S7cqem1n+DAIwaZn1pmxvcb2HvcoMDI
+ Oow5t593qo+zMDniu1F62ldqdX4GgvCzthBPfGVpjYBymZoFGY/H7XbFpB0QwulmYPpZntENNkh
+ BpvcKEy64JEaF/2a9uso3WAjQQEg3ESG8BBgFh9JkiKxY/gKN0D2iK0EAZFOoTctj8Rerg/r+a7
+ vrheMlnEJcfFjihc+fNLh0V/1cO019T66WGzKq19QYKS+a7Wg4T6w==
+X-Received: by 2002:a05:600c:8706:b0:49c:fc6c:be19 with SMTP id
+ 5b1f17b1804b1-4a1d76224f0mr249228385e9.31.1792514591408; 
+ Tue, 20 Oct 2026 09:43:11 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-86-98-194-229.alshamil.net.ae.
  [86.98.194.229]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1fc10de99sm643315e9.1.2026.10.20.09.43.17
+ 5b1f17b1804b1-4a1fc10de99sm643315e9.1.2026.10.20.09.43.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Oct 2026 09:43:22 -0700 (PDT)
+ Tue, 20 Oct 2026 09:43:11 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Tue, 20 Oct 2026 20:41:07 +0400
-Subject: [PATCH v3 20/23] boot: fit: Allow choosing how SPL's FIT payload
- is compressed
+Date: Tue, 20 Oct 2026 20:41:05 +0400
+Subject: [PATCH v3 18/23] binman: Allow choosing the compression level
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261020-spl-fit-compression-v3-20-6647aa23ade5@flipper.net>
+Message-Id: <20261020-spl-fit-compression-v3-18-6647aa23ade5@flipper.net>
 References: <20261020-spl-fit-compression-v3-0-6647aa23ade5@flipper.net>
 In-Reply-To: <20261020-spl-fit-compression-v3-0-6647aa23ade5@flipper.net>
 To: u-boot@lists.u-boot-project.org, Sean Anderson <seanga2@gmail.com>
@@ -191,12 +192,13 @@ Cc: Alexey Charkov <alchark@flipper.net>, Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
  Mehmet Fide <mehmet.fide@screeningeagle.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5505; i=alchark@flipper.net;
- h=from:subject:message-id; bh=wjhDcmpawvTZcgZQGJvLeX/g4qAruDhoxQBbCf7+oR8=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRdn7la9rdp59cd8+fk/d3s79pxYb/q0RP8b2o3qpwJb
- Xw3LVA+r2MiC4MYF4OlmCLL3G9LbKca8c3a5eHxFWYOKxPIEGmRBgYgYGHgy03MKzXSMdIz1TbU
- MzTSMdYxYuDiFICp7t/HyLC6r2ueqOL1y7VTkj7uy5V93VP2STfi1muehQt68l/mCGcxMhyzuCr
- y/al9lEjqm+ivPJMC9wZrPrFaJJ0xXfvWRss9JxkA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=21337; i=alchark@flipper.net; 
+ h=from:subject:message-id;
+ bh=r7HQA+QrmZt+jtE17MpN+3KBmWH2HT5NH2yydBQeinM=; 
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRdn7k6+67INKtJ0rxZu07Wzl6VWs7ZeaZS4u2nJUzBK
+ XxGMtc4OyayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
+ QyMdYx0jBi5OAZjqLnlGhgXe99w2lh68r3auUH67hOvt5I25TOmOkd2eXRKKvOuvKzP8Ty6z3SI
+ n4Bzx3Pv15O6Qd8XNPt977C578Tn3Pd1i+O8PHwA=
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-Mailman-Approved-At: Tue, 20 Oct 2026 17:26:00 +0000
@@ -216,150 +218,521 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Platforms which build the FIT that SPL loads have no say in how the
-U-Boot proper payload inside it is compressed. The ones that compress at
-all infer the algorithm from whichever SPL decompressor happens to be
-enabled, so turning one on for an unrelated reason silently changes the
-image, and asking for a particular algorithm is impossible.
+Every compression algorithm binman drives has a level, and the best one
+to use depends on what the image is for: a payload sent over USB wants
+the smallest it can get, one read from fast storage would rather not
+wait for it. Today only the tool's own default is reachable.
 
-Add a generic choice for it, covering every algorithm SPL can unpack,
-where each option enables the decompressor that provides it, alongside a
-companion compression level.
+Add a 'compress-level' property, passed through as -<level>, which is how
+all compressors want it except lzma: the LZMA SDK tool has no such option,
+and is controlled by the -lc/-lp/-pb values binman already passes.
 
-Gate it on HAVE_SPL_FIT_COMPRESSION so it is only offered where it does
-something: a platform selects that once its image generation honours the
-resulting string. Until then the choice stays hidden and the string reads
-"none", so an image description may reference it unconditionally.
-
-Offer the level only for algorithms whose tools take one, so that a new
-algorithm has to opt in. Let 0 stand for passing none, which leaves a
-tool's own level 0 (gzip's 'store') out of reach, as binman rejects it
-anyway.
-
-Leave sizing the SPL heap for zstd to the platform: it may come from
-SPL_SYS_MALLOC_F_LEN, SPL_SYS_MALLOC_SIZE or a board-specific region, so
-there is no single symbol to check it against.
+Have each tool declare the levels it takes, and reject anything outside
+them with the node's path, whether or not the tool is installed. The tools
+do not reliably refuse a bad level themselves: gzip, bzip2, xz and lzop
+read -12 as -1 -2 and quietly compress at level 2, and a typo or a
+leftover level after switching algorithms would otherwise just produce a
+larger image with nothing to say why.
 
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- boot/Kconfig | 97 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 97 insertions(+)
+ tools/binman/binman.rst                            | 21 ++++++
+ tools/binman/bintool.py                            | 20 +++++-
+ tools/binman/btool/btool_gzip.py                   |  2 +-
+ tools/binman/btool/bzip2.py                        |  3 +-
+ tools/binman/btool/lz4.py                          |  9 ++-
+ tools/binman/btool/lzma_alone.py                   |  5 +-
+ tools/binman/btool/lzop.py                         |  2 +-
+ tools/binman/btool/xz.py                           |  3 +-
+ tools/binman/btool/zstd.py                         |  3 +-
+ tools/binman/entry.py                              | 18 ++++-
+ tools/binman/etype/blob.py                         |  5 ++
+ tools/binman/ftest.py                              | 81 ++++++++++++++++++++++
+ tools/binman/test/entry/compress_level.dts         | 12 ++++
+ tools/binman/test/entry/compress_level_gzip.dts    | 12 ++++
+ tools/binman/test/entry/compress_level_lzma.dts    | 12 ++++
+ .../test/entry/compress_level_no_compress.dts      | 11 +++
+ tools/binman/test/entry/compress_level_range.dts   | 12 ++++
+ tools/binman/test/entry/compress_level_zero.dts    | 12 ++++
+ 18 files changed, 230 insertions(+), 13 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 8fcdc36c9318..cdad11918ff4 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -66,6 +66,15 @@ config BUTTON_CMD
- 	    "button_cmd_0_name=vol_down"
- 	    "button_cmd_0=fastboot usb 0"
+diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
+index 3a860421a697..c661f31a7d8d 100644
+--- a/tools/binman/binman.rst
++++ b/tools/binman/binman.rst
+@@ -711,6 +711,11 @@ compress:
+     Sets the compression algorithm to use (for blobs only). See the entry
+     documentation for details.
  
-+config HAVE_SPL_FIT_COMPRESSION
-+	bool
-+	help
-+	  Selected by platforms which build the FIT containing the U-Boot
-+	  proper by applying compression specified in SPL_FIT_UBOOT_COMP and
-+	  SPL_FIT_UBOOT_COMP_LEVEL. This in turn shows the selection for those
-+	  options in Kconfig, so that the user can configure any supported
-+	  compression without the platform itself duplicating the boilerplate.
++compress-level:
++    Sets how hard the compression algorithm should try, as the level number
++    the tool itself uses. Requires 'compress'. See the entry documentation
++    for details.
 +
- menuconfig FIT
- 	bool "Flattened Image Tree (FIT)"
- 	select HASH
-@@ -347,6 +356,94 @@ config SPL_FIT_IMAGE_POST_PROCESS
- 	  injected into the FIT creation (i.e. the blobs would have been pre-
- 	  processed before being added to the FIT image).
+ missing-msg:
+     Sets the tag of the message to show if this entry is missing. This is
+     used for external blobs. When they are missing it is helpful to show
+@@ -1182,6 +1187,22 @@ The entry will then contain the compressed data, using the 'lz4' compression
+ algorithm. Currently this is the only one that is supported. The uncompressed
+ size is written to the node in an 'uncomp-size' property, if -u is used.
  
-+choice
-+	prompt "Compression for U-Boot proper in the FIT that SPL loads"
-+	depends on SPL_FIT && HAVE_SPL_FIT_COMPRESSION
-+	default SPL_FIT_UBOOT_COMP_NONE
-+	help
-+	  Pick how U-Boot proper is compressed in the FIT which SPL loads it
-+	  from. SPL unpacks it on the way to its load address, so the image
-+	  gets smaller and the boot gains a decompression step.
++Where an algorithm offers a choice of how hard to try, 'compress-level' passes
++one through::
 +
-+	  Compress it where the storage it sits in is tight. Whether it also
-+	  saves time depends on how fast that storage reads against how fast
-+	  the SoC unpacks, so measure both on the board at hand rather than
-+	  assuming either way.
++    blob {
++        filename = "datafile";
++        compress = "zstd";
++        compress-level = <19>;
++    };
 +
-+config SPL_FIT_UBOOT_COMP_NONE
-+	bool "none"
-+	help
-+	  Store U-Boot proper in the FIT as it is. SPL copies it into place
-+	  instead of unpacking it, and building the image needs no host
-+	  compression tool.
++The number is the tool's own level, so its meaning follows that tool. Binman
++accepts 1 to 9 for gzip, bzip2, lzo and xz, 1 to 12 for lz4 and 1 to 19 for
++zstd, and reports anything else as an error rather than leave the tool to
++reinterpret it. Leaving the property out uses the level binman has always used:
++the tool's own default, except for lz4, which gets 5. It cannot be used with
++'lzma', whose LZMA SDK tool has no such option.
 +
-+config SPL_FIT_UBOOT_COMP_GZIP
-+	bool "gzip"
-+	select SPL_GZIP
-+	help
-+	  Compress U-Boot proper in the FIT with gzip, using the host 'gzip'
-+	  binary. A middling ratio, quick to unpack, and its decompressor
-+	  needs less of the SPL heap than zstd does.
+ Compression is also supported for sections. In that case the entire section is
+ compressed in one block, including all its contents. This means that accessing
+ an entry from the section requires decompressing the entire section. Also, the
+diff --git a/tools/binman/bintool.py b/tools/binman/bintool.py
+index 4cf8d5b165bf..096cfc5c5fa4 100644
+--- a/tools/binman/bintool.py
++++ b/tools/binman/bintool.py
+@@ -59,6 +59,10 @@ class Bintool:
+     # Flag to run 'apt-get update -y' once on first use of apt_install()
+     apt_updated = False
+ 
++    # Highest level a compression tool accepts, from 1 up, or None if it has
++    # no notion of one
++    max_level = None
 +
-+config SPL_FIT_UBOOT_COMP_LZMA
-+	bool "lzma"
-+	select SPL_LZMA
-+	help
-+	  Compress U-Boot proper in the FIT with LZMA, using the host
-+	  'lzma_alone' binary. The best ratio on offer, and by far the
-+	  slowest to unpack.
+     def __init__(self, name, desc, version_regex=None, version_args='-V'):
+         self.name = name
+         self.desc = desc
+@@ -542,12 +546,16 @@ class BintoolPacker(Bintool):
+             property if none
+         version_regex: Regular expressions to extract the version from tool
+             version output,  '(v[0-9.]+)' if none
++        max_level: Highest compression level the tool accepts as -<level>,
++            or None if it takes none
+     """
+     def __init__(self, name, compression=None, compress_args=None,
+                  decompress_args=None, fetch_package=None,
+-                 version_regex=r'(v[0-9.]+)', version_args='-V'):
++                 version_regex=r'(v[0-9.]+)', version_args='-V',
++                 max_level=None):
+         desc = '%s compression' % (compression if compression else name)
+         super().__init__(name, desc, version_regex, version_args)
++        self.max_level = max_level
+         if compress_args is None:
+             compress_args = ['--compress']
+         self.compress_args = compress_args
+@@ -558,11 +566,14 @@ class BintoolPacker(Bintool):
+             fetch_package = name
+         self.fetch_package = fetch_package
+ 
+-    def compress(self, indata):
++    def compress(self, indata, level=None):
+         """Compress data
+ 
+         Args:
+             indata (bytes): Data to compress
++            level (int): Compression level to use, from 1 to max_level, or
++                None for the tool's own default. Every packer tool spells
++                this as -<level>.
+ 
+         Returns:
+             bytes: Compressed data
+@@ -570,7 +581,10 @@ class BintoolPacker(Bintool):
+         with tempfile.NamedTemporaryFile(prefix='comp.tmp',
+                                          dir=tools.get_output_dir()) as tmp:
+             tools.write_file(tmp.name, indata)
+-            args = self.compress_args + ['--stdout', tmp.name]
++            args = self.compress_args[:]
++            if level is not None:
++                args.append(f'-{level}')
++            args += ['--stdout', tmp.name]
+             return self.run_cmd(*args, binary=True)
+ 
+     def decompress(self, indata):
+diff --git a/tools/binman/btool/btool_gzip.py b/tools/binman/btool/btool_gzip.py
+index 0d75028120fe..de628b168c6d 100644
+--- a/tools/binman/btool/btool_gzip.py
++++ b/tools/binman/btool/btool_gzip.py
+@@ -28,4 +28,4 @@ class Bintoolgzip(bintool.BintoolPacker):
+     """
+     def __init__(self, name):
+         super().__init__(name, compress_args=[],
+-                         version_regex=r'gzip ([0-9.]+)')
++                         version_regex=r'gzip ([0-9.]+)', max_level=9)
+diff --git a/tools/binman/btool/bzip2.py b/tools/binman/btool/bzip2.py
+index c3897d63acb5..9cc30dcba19b 100644
+--- a/tools/binman/btool/bzip2.py
++++ b/tools/binman/btool/bzip2.py
+@@ -27,4 +27,5 @@ class Bintoolbzip2(bintool.BintoolPacker):
+         man bzip2
+     """
+     def __init__(self, name):
+-        super().__init__(name, version_regex=r'bzip2.*Version ([0-9.]+)', version_args='--help')
++        super().__init__(name, version_regex=r'bzip2.*Version ([0-9.]+)', version_args='--help',
++                         max_level=9)
+diff --git a/tools/binman/btool/lz4.py b/tools/binman/btool/lz4.py
+index fd520d13a566..609a4724c92b 100644
+--- a/tools/binman/btool/lz4.py
++++ b/tools/binman/btool/lz4.py
+@@ -77,20 +77,25 @@ class Bintoollz4(bintool.Bintool):
+     """
+     def __init__(self, name):
+         super().__init__(name, 'lz4 compression', r'.* (v[0-9.]*),.*')
++        self.max_level = 12
+ 
+-    def compress(self, indata):
++    def compress(self, indata, level=None):
+         """Compress data with lz4
+ 
+         Args:
+             indata (bytes): Data to compress
++            level (int): Compression level (1 to 12), or None for the level
++                5 binman has always used here
+ 
+         Returns:
+             bytes: Compressed data
+         """
++        if level is None:
++            level = 5
+         with tempfile.NamedTemporaryFile(prefix='comp.tmp',
+                                          dir=tools.get_output_dir()) as tmp:
+             tools.write_file(tmp.name, indata)
+-            args = ['--no-frame-crc', '-B4', '-5', '-c', tmp.name]
++            args = ['--no-frame-crc', '-B4', f'-{level}', '-c', tmp.name]
+             return self.run_cmd(*args, binary=True)
+ 
+     def decompress(self, indata):
+diff --git a/tools/binman/btool/lzma_alone.py b/tools/binman/btool/lzma_alone.py
+index 1fda2f68c7b4..b5630dc618a1 100644
+--- a/tools/binman/btool/lzma_alone.py
++++ b/tools/binman/btool/lzma_alone.py
+@@ -55,11 +55,14 @@ class Bintoollzma_alone(bintool.Bintool):
+     def __init__(self, name):
+         super().__init__(name, 'lzma_alone compression')
+ 
+-    def compress(self, indata):
++    def compress(self, indata, level=None):
+         """Compress data with lzma_alone
+ 
+         Args:
+             indata (bytes): Data to compress
++            level (int): Unused: the LZMA SDK tool has no -<level> option,
++                and is steered by the -lc/-lp/-pb/-d values below instead.
++                With max_level left at None, Entry rejects a level anyway.
+ 
+         Returns:
+             bytes: Compressed data
+diff --git a/tools/binman/btool/lzop.py b/tools/binman/btool/lzop.py
+index f6903b4db75e..8760f843ecaa 100644
+--- a/tools/binman/btool/lzop.py
++++ b/tools/binman/btool/lzop.py
+@@ -27,4 +27,4 @@ class Bintoollzop(bintool.BintoolPacker):
+         man lzop
+     """
+     def __init__(self, name):
+-        super().__init__(name, 'lzo', compress_args=[])
++        super().__init__(name, 'lzo', compress_args=[], max_level=9)
+diff --git a/tools/binman/btool/xz.py b/tools/binman/btool/xz.py
+index e2b413d18bda..23b90180f7e1 100644
+--- a/tools/binman/btool/xz.py
++++ b/tools/binman/btool/xz.py
+@@ -28,4 +28,5 @@ class Bintoolxz(bintool.BintoolPacker):
+     """
+     def __init__(self, name):
+         super().__init__(name, fetch_package='xz-utils',
+-                         version_regex=r'xz \(XZ Utils\) ([0-9.]+)')
++                         version_regex=r'xz \(XZ Utils\) ([0-9.]+)',
++                         max_level=9)
+diff --git a/tools/binman/btool/zstd.py b/tools/binman/btool/zstd.py
+index 299bd371269e..aac16172b5c3 100644
+--- a/tools/binman/btool/zstd.py
++++ b/tools/binman/btool/zstd.py
+@@ -27,4 +27,5 @@ class Bintoolzstd(bintool.BintoolPacker):
+         man zstd
+     """
+     def __init__(self, name):
+-        super().__init__(name)
++        # Levels past 19 need --ultra, which binman does not pass
++        super().__init__(name, max_level=19)
+diff --git a/tools/binman/entry.py b/tools/binman/entry.py
+index 9b39c7118892..bd1f4dfc5a1b 100644
+--- a/tools/binman/entry.py
++++ b/tools/binman/entry.py
+@@ -143,6 +143,7 @@ class Entry(object):
+         self.image_pos = None
+         self.extend_size = False
+         self.compress = 'none'
++        self.compress_level = None
+         self.missing = False
+         self.faked = False
+         self.external = False
+@@ -325,6 +326,9 @@ class Entry(object):
+ 
+         # This is only supported by blobs and sections at present
+         self.compress = fdt_util.GetString(self._node, 'compress', 'none')
++        self.compress_level = fdt_util.GetInt(self._node, 'compress-level')
++        if self.compress_level is not None and self.compress == 'none':
++            self.Raise("'compress-level' requires 'compress'")
+         self.offset_from_elf = fdt_util.GetPhandleNameOffset(self._node,
+                                                              'offset-from-elf')
+ 
+@@ -1222,7 +1226,7 @@ features to produce new behaviours.
+         if self.compress != 'none':
+             self.uncomp_size = len(indata)
+             if self.comp_bintool.is_present():
+-                data = self.comp_bintool.compress(indata)
++                data = self.comp_bintool.compress(indata, self.compress_level)
+                 uniq = self.GetUniqueName()
+                 fname = tools.get_output_filename(f'comp.{uniq}')
+                 tools.write_file(fname, data)
+@@ -1293,7 +1297,8 @@ features to produce new behaviours.
+             btools (dict of Bintool):
+ 
+         Raise:
+-            ValueError if compression algorithm is not supported
++            ValueError if compression algorithm is not supported, or does not
++                support the compression level asked for
+         """
+         algo = self.compress
+         if algo != 'none':
+@@ -1304,6 +1309,15 @@ features to produce new behaviours.
+             name = names.get(self.compress, self.compress)
+             self.comp_bintool = self.AddBintool(btools, name)
+ 
++            # Check here, so that it is reported even if the tool is missing
++            level = self.compress_level
++            max_level = self.comp_bintool.max_level
++            if level is not None and max_level is None:
++                self.Raise(f"'compress-level' is not supported by '{algo}'")
++            if level is not None and not 1 <= level <= max_level:
++                self.Raise(f"'compress-level' must be 1 to {max_level} "
++                           f"for '{algo}'")
 +
-+config SPL_FIT_UBOOT_COMP_LZO
-+	bool "lzo"
-+	select SPL_LZO
-+	help
-+	  Compress U-Boot proper in the FIT with LZO, using the host 'lzop'
-+	  binary. A poor ratio in exchange for fast decompression.
+     @classmethod
+     def AddBintool(self, tools, name):
+         """Add a new bintool to the tools used by this etype
+diff --git a/tools/binman/etype/blob.py b/tools/binman/etype/blob.py
+index acd9ae34074e..111c31d4ba55 100644
+--- a/tools/binman/etype/blob.py
++++ b/tools/binman/etype/blob.py
+@@ -22,6 +22,11 @@ class Entry_blob(Entry):
+         - compress: Compression algorithm to use:
+             none: No compression
+             lz4: Use lz4 compression (via 'lz4' command-line utility)
++        - compress-level: How hard to compress, as the level number the
++            compression tool itself uses (e.g. 1 to 9 for gzip). Requires
++            'compress' and an algorithm which has levels, so not 'lzma'.
++            Without it, binman uses the tool's default, except for lz4, for
++            which it has always passed level 5 instead
+ 
+     This entry reads data from a file and places it in the entry. The
+     default filename is often specified specified by the subclass. See for
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 8caf275d4664..0c45c7207e44 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -2168,6 +2168,87 @@ class TestFunctional(unittest.TestCase):
+         bintool = self.comp_bintools['lz4']
+         return bintool.decompress(data)
+ 
++    def _ReadFileRecordingArgs(self, name, fname):
++        """Build an image, recording the arguments a bintool is run with
 +
-+config SPL_FIT_UBOOT_COMP_LZ4
-+	bool "lz4"
-+	select SPL_LZ4
-+	help
-+	  Compress U-Boot proper in the FIT with LZ4, using the host 'lz4'
-+	  binary. The fastest to unpack and the worst ratio, so it suits a
-+	  fast boot medium.
++        Args:
++            name (str): Name of the bintool to record
++            fname (str): Device tree source filename to build
 +
-+config SPL_FIT_UBOOT_COMP_ZSTD
-+	bool "zstd"
-+	select SPL_ZSTD
-+	help
-+	  Compress U-Boot proper in the FIT with Zstandard, using the host
-+	  'zstd' binary. Close to the LZMA ratio for a fraction of the time,
-+	  but its decompressor needs a workspace from the SPL heap, which has
-+	  to be large enough to hold it - see SPL_ZSTD.
++        Returns:
++            tuple:
++                bytes: Image data
++                list of tuple: Arguments of each run of that bintool
++        """
++        original = bintool.Bintool.run_cmd
++        calls = []
 +
-+endchoice
++        def recording_run_cmd(self_tool, *args, binary=False):
++            if self_tool.name == name:
++                calls.append(args)
++            return original(self_tool, *args, binary=binary)
 +
-+config SPL_FIT_UBOOT_COMP
-+	string
-+	default "gzip" if SPL_FIT_UBOOT_COMP_GZIP
-+	default "lzma" if SPL_FIT_UBOOT_COMP_LZMA
-+	default "lzo" if SPL_FIT_UBOOT_COMP_LZO
-+	default "lz4" if SPL_FIT_UBOOT_COMP_LZ4
-+	default "zstd" if SPL_FIT_UBOOT_COMP_ZSTD
-+	default "none"
++        with unittest.mock.patch.object(bintool.Bintool, 'run_cmd',
++                                        new=recording_run_cmd):
++            data = self._DoReadFile(fname, use_real_dtb=True)
++        return data, calls
 +
-+config SPL_FIT_UBOOT_COMP_LEVEL
-+	int "Compression level for U-Boot proper"
-+	depends on SPL_FIT_UBOOT_COMP_GZIP || SPL_FIT_UBOOT_COMP_LZO || \
-+		   SPL_FIT_UBOOT_COMP_LZ4 || SPL_FIT_UBOOT_COMP_ZSTD
-+	range 0 9 if SPL_FIT_UBOOT_COMP_GZIP || SPL_FIT_UBOOT_COMP_LZO
-+	range 0 12 if SPL_FIT_UBOOT_COMP_LZ4
-+	range 0 19 if SPL_FIT_UBOOT_COMP_ZSTD
-+	default 0
-+	help
-+	  How hard to compress U-Boot proper, numbered the way the chosen
-+	  algorithm's own tool numbers it, from 1 up.
++    def testCompressLevel(self):
++        """Test that a compression level reaches the tool and round-trips"""
++        self._CheckLz4()
++        data, calls = self._ReadFileRecordingArgs('lz4',
++                                                  'entry/compress_level.dts')
++        self.assertEqual(COMPRESS_DATA, self._decompress(data))
++        self.assertTrue(calls)
++        for args in calls:
++            self.assertIn('-12', args)
++            self.assertNotIn('-5', args)
 +
-+	  0 is not a level but asks for none to be given, leaving it to
-+	  binman: that is the tool's own default, except for lz4, for which
-+	  binman passes level 5.
++    def testCompressLevelPacker(self):
++        """Test a compression level reaching a tool binman drives generically"""
++        btool = self.comp_bintools['gzip']
++        self._CheckBintool(btool)
++        data, calls = self._ReadFileRecordingArgs(
++            'gzip', 'entry/compress_level_gzip.dts')
++        self.assertEqual(COMPRESS_DATA, btool.decompress(data))
++        self.assertTrue(calls)
++        for args in calls:
++            self.assertIn('-9', args)
 +
- config TPL_FIT
- 	bool "Support Flattened Image Tree within TPL"
- 	depends on TPL
++    def testCompressLevelUnsupported(self):
++        """Test that lzma rejects a level its tool cannot express"""
++        with self.assertRaises(ValueError) as e:
++            self._DoReadFile('entry/compress_level_lzma.dts',
++                             use_real_dtb=True)
++        self.assertIn(
++            "Node '/binman/blob': 'compress-level' is not supported by 'lzma'",
++            str(e.exception))
++
++    def testCompressLevelRange(self):
++        """Test that a compression level beyond the tool's range is rejected"""
++        with self.assertRaises(ValueError) as e:
++            self._DoReadFile('entry/compress_level_range.dts',
++                             use_real_dtb=True)
++        self.assertIn(
++            "Node '/binman/blob': 'compress-level' must be 1 to 9 for 'gzip'",
++            str(e.exception))
++
++    def testCompressLevelZero(self):
++        """Test that a compression level of 0 is rejected"""
++        with self.assertRaises(ValueError) as e:
++            self._DoReadFile('entry/compress_level_zero.dts',
++                             use_real_dtb=True)
++        self.assertIn(
++            "Node '/binman/blob': 'compress-level' must be 1 to 12 for 'lz4'",
++            str(e.exception))
++
++    def testCompressLevelNoCompress(self):
++        """Test that a compression level without an algorithm is rejected"""
++        with self.assertRaises(ValueError) as e:
++            self._DoReadFile('entry/compress_level_no_compress.dts',
++                             use_real_dtb=True)
++        self.assertIn("'compress-level' requires 'compress'", str(e.exception))
++
+     def testCompress(self):
+         """Test compression of blobs"""
+         self._CheckLz4()
+diff --git a/tools/binman/test/entry/compress_level.dts b/tools/binman/test/entry/compress_level.dts
+new file mode 100644
+index 000000000000..78c999590469
+--- /dev/null
++++ b/tools/binman/test/entry/compress_level.dts
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	binman {
++		blob {
++			filename = "compress";
++			compress = "lz4";
++			compress-level = <12>;
++		};
++	};
++};
+diff --git a/tools/binman/test/entry/compress_level_gzip.dts b/tools/binman/test/entry/compress_level_gzip.dts
+new file mode 100644
+index 000000000000..d2852fd653dd
+--- /dev/null
++++ b/tools/binman/test/entry/compress_level_gzip.dts
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	binman {
++		blob {
++			filename = "compress";
++			compress = "gzip";
++			compress-level = <9>;
++		};
++	};
++};
+diff --git a/tools/binman/test/entry/compress_level_lzma.dts b/tools/binman/test/entry/compress_level_lzma.dts
+new file mode 100644
+index 000000000000..da52497b11a0
+--- /dev/null
++++ b/tools/binman/test/entry/compress_level_lzma.dts
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	binman {
++		blob {
++			filename = "compress";
++			compress = "lzma";
++			compress-level = <5>;
++		};
++	};
++};
+diff --git a/tools/binman/test/entry/compress_level_no_compress.dts b/tools/binman/test/entry/compress_level_no_compress.dts
+new file mode 100644
+index 000000000000..1e58202ce639
+--- /dev/null
++++ b/tools/binman/test/entry/compress_level_no_compress.dts
+@@ -0,0 +1,11 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	binman {
++		blob {
++			filename = "compress";
++			compress-level = <9>;
++		};
++	};
++};
+diff --git a/tools/binman/test/entry/compress_level_range.dts b/tools/binman/test/entry/compress_level_range.dts
+new file mode 100644
+index 000000000000..bee98ffc7429
+--- /dev/null
++++ b/tools/binman/test/entry/compress_level_range.dts
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	binman {
++		blob {
++			filename = "compress";
++			compress = "gzip";
++			compress-level = <12>;
++		};
++	};
++};
+diff --git a/tools/binman/test/entry/compress_level_zero.dts b/tools/binman/test/entry/compress_level_zero.dts
+new file mode 100644
+index 000000000000..96caeaa361d6
+--- /dev/null
++++ b/tools/binman/test/entry/compress_level_zero.dts
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	binman {
++		blob {
++			filename = "compress";
++			compress = "lz4";
++			compress-level = <0>;
++		};
++	};
++};
 
 -- 
 2.55.0
