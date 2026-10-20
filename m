@@ -1,191 +1,248 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A57A7606A31D
-	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 15:07:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77F65606A328
+	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 15:38:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=WgJ+hyNW;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=Gm0RNSmi
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=p/PYz1pF;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=n1Wi30vv;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=UUqvmVLc
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BEBCF6084F;
-	Tue, 20 Oct 2026 15:07:57 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 75EC381068;
+	Tue, 20 Oct 2026 15:38:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9iZofFPqZSf2; Tue, 20 Oct 2026 15:07:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DC3936082D
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792508877;
-	b=qiBrtfrNNlpN06KsCzqULsiGtJenPviWH3AQMMtitnvlxsiQb1vnRgQcRrK9dMvmoxXj
-	 qt5grh80AReXoXach6cMi/SE+BUESpfEbutZKGHfWBCnsG7SsJ/TXX2bklQGl27LwYi44
-	 Sx5/xRu+pc+OPB+Q9GaWonJTVHRerL2ZZVjCBY++FWeqJnxDBw9OBCF2Sh2UigYRhFots
-	 dU2bFNuDdvH96WXb5VkzPBij1so+Inf2VTze15UmeiPNZEy4HwtuRPXXXRV9v/KgGq9Ff
-	 Hu4C0w73WnwOmQoRc1R71vC3EhSo2EKQ9UGsO38zuBbnPY6qJH4GhX48qmIXPryTMww==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id EzrgSa387a_C; Tue, 20 Oct 2026 15:38:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org F298980E81
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792510712;
+	b=eKVeRrjE0N9HFaeA1nIQbpdqZe912GuRlPKhkrRIIjn4bQAek4UxIt0CWsFUopCIkiiu
+	 ee5giviM8t4QBuoR6mNy86FVCZ2FEYcuxaOXe3Ayudt0cvyJsthx62PsTKkqH412ygNvh
+	 IzddWfY381kFMlpb0dqxJ5fRVRkaTGel0rMThDuxm7Z5LfVcEle7ZM1PZ5hBVvrzIwlZ8
+	 Cy4S+cd+k9ptfoUxIkLl7ZyN7Q6Cx9tQUil2D8b0EZTh78BEULZNfeAYdkiILZxwgLARo
+	 xdYOewQ4Xbw8h3Mrt1S/t4ow1WWC/yjeRWcAGW7Slng/NR5q3/ylBucgBo8fiCWGt6Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792508877;
+	c=relaxed/relaxed; t=1792510712;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=EpGtOu9utZc+dlp9ZVeiu2fN9Tbtg5nQIBfY3jCyFCM=;
-	b=UUxRJ6BVXauSr3Uj27oI7+2XJIUOhIYMVI1boj6VVJNicl4AD4OqVinlB+7awkT5UPVy
-	 jPlCwR9lBCJk/wo8/B5ii+KU+Dwu85cBfSICDovfln81CNGVwAdf1F1kxbIvRbk6zy8UB
-	 MCQ/q11q77zvNfZp0PCM9UtPycjdlOqbR1n/R+ByCNFw9piZYmGBmDIG/c0xW+IgHfYRf
-	 5xpDulYwI/jdqyPnze++YPPr7iA/3e4EZ48aSYl/xbVdfum9l0xoc+63ybqpuFbFPm8yh
-	 WNbIpqr+qhSQ1mwSW/95HnHHAUb9J1LdTuMbpgNF+JR83Tp0zw8H27fwuwD2WEA2AZQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	dmarc=none header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=Gm0RNSmi;
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=yxMhhGNAtiLDfydpGuAKIVRihygH1/V8M48zQKiofZE=;
+	b=QVmxZYcSCn52ps2OxEotD5vRj6luVqZvkB7ADmIroc2c3hjWX7BUF8LK5Te91bv5PLct
+	 5j18muUoyCWtutkp7081GjD7gaY3D06RFUG2KP50x+96Z5sx14O5c6UA3gxsxwhwvMQ8/
+	 sonxHw3dqw7sPYr1wX5OeHbe3N5i9OLdZDQwng1j2BGOY6OSawyxpLLGc1I5Cl4lyZ78J
+	 +IsL4OnALw1jaB03kFk+ISXH2bh4wBOCJN/gCeyZRFVQNPspV1CfeWStCJEq9N+VVhoz3
+	 nAoGY1ZUELi9G2kjEPI86GV1EvZBNDAWr8SiqIJsCXVOW1hZf0NmrTGhSCfW1N+3fLw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792508877;
-	bh=EpGtOu9utZc+dlp9ZVeiu2fN9Tbtg5nQIBfY3jCyFCM=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=WgJ+hyNWEuwe94V6QA0xT3cPPq3X9gyKjn/3O7/hkykmFvgC+e6apAJ5xGegugSwr
-	 pJLS5DcJaaXztrq+h1YHsabHvE6ICO6wxueqMkX2RTcIeuTZAbYE1ZxfCTbc0i3Z/y
-	 QBGIitMbYf9Imd8AeAO0KSGSpa5rH6JZAadQADBHEInN9R88UWjnQTIM7inT4KpoZ8
-	 3sJGQerS5gg1+XL1F+HU3nz1ojl938uk+yKlPugp3JiAerKoXXD/WNENLKxK608bHP
-	 PGzdGxKOn7SPSoEWjbcc1piglCZ75+I++9lTWsCiYAOTvMXXFYlCrxovFF8o34UU75
-	 J+qsSvvqEFQ0A==
+	d=lists.u-boot-project.org; s=default; t=1792510712;
+	bh=yxMhhGNAtiLDfydpGuAKIVRihygH1/V8M48zQKiofZE=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=p/PYz1pFwLVbN7Xv+ZOEwShx8O/rLLsHqHFjS3FSs8BmMtR3nRh6Z3NK2EeeNytUC
+	 ecqnvLJiJT/GLO9rNOX9Nfp3wM/2sOm6PzeZSVM9kpjMYIrpzlX6ztWZPWhD6C+aMv
+	 vF4Dt/9n0j69EZ7bndTTBraKQ7O+sS1fuaGOuf4PxAigeq3HUGJhL8vIzsVQoCoLli
+	 A3Z00JPCr96/Zo8VeaINz6CQf5P8yRfHhb0JCFGsg/KnRXjCmoi/uKbIGluCfbkr6E
+	 aasUnuZEMNRlL40YG6y3l7nAf74a2MUNNRJJfFgKkGNRvPPeq++F9eP4gu8Bivvfv3
+	 JvD0A4mYukxFA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DC3936082D;
-	Tue, 20 Oct 2026 15:07:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F298980E81;
+	Tue, 20 Oct 2026 15:38:31 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 363E811CD
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:07:53 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 12BF6930
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 27DE06082D
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:07:53 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id ECB2B607C1
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jlZk8bjozKgU for <u-boot@lists.u-boot-project.org>;
- Tue, 20 Oct 2026 15:07:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A027D607ED
+ id 4UOM7YFkXNvh for <u-boot@lists.u-boot-project.org>;
+ Tue, 20 Oct 2026 15:38:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A5E43607CF
 Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::430"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792508872;
- b=CILNDSwGCOFBTX2uNmU+EL6wFGV18BEtn9rd2AMnjz+Mvf5RLzTmTNSy7FxTpi9+BxQQ
- QpTWE4LzquQjA/Wg563l/Fo8DUEndaI67EsrrKrOFRuMXhw70+f02EJg/EPjzHenWwLf7
- rNgjwEkAKrepJB03D28LaPA1LckRumgMp+e1AIk26p0XlzRjS4bmjpQf4mfWyHptXQtWz
- 2/K09Zdx97B5bEEYVqHViapihptp/C+cxdZ7cb6PEDIvgAzLClq7L0CI85hh2QK6RZdNq
- 0rLW0G8CSvOhlQpyezYULERM0wWuyfnoMi3PSxygrM7H0hDoKQc9i8Z92tphV7nWDXQ==
+ arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792510708;
+ b=WlcgsJz24WgYq92xsTlzC57cw1capAH96lty5OjWguZG9vc4Q8tx4A5QjiQQ94Jc+edy
+ aWV0Keqqgq685+yJQJlotlhE6B298w/NcPW3yUveZDpQudEuyCeqQ//Z0goq7iyICXO8J
+ fyCeAdpYxBNHOqN/LmV9w/8yoodXQpOfYScxyv1MjmjKVdGMQGuQ9/L/gvRQrGdwMOJnK
+ zlAxMWF59In5nhA+TaVdYu5/SDCNYzbyDOMa1Hbyl9NzgeXHy+m20gLGhScDJ5W67V3uu
+ KrBfySQqx3lUn6+qInCbC1MLNKH/rFVDBV+fgFWGZerG+JvFXGkL3k69aP9Cqzc3zkQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792508872;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Subject:From:To:
- Cc:In-Reply-To:References:Date:Message-Id:X-Mailer:
- X-Developer-Signature:X-Developer-Key;
- bh=EpGtOu9utZc+dlp9ZVeiu2fN9Tbtg5nQIBfY3jCyFCM=;
- b=ScLCdG/aUd0hq7Z8Rmo5ppEZRHv4WdJzWAeIZqx4wwBdMmInJNADh1qPRb+yxLiVAqp0
- NIZXW6Cgl56sX9gwv9FnUO3DcSlWEq132IN5NB6HTxsVxq/EA0qCsEJFBi8NINyhI/2Bw
- 0YQCRH/Z6l3odKI94/P2z6B1+d2Act3xvQyTeW85MyCZbDhGpp3ektREELyWIBZ2GgAcS
- oNHjhnbnMqNan/ej/Yk5PmnxRwIPlzUpmYKogAY9TYiZdOWeu6ZQPa3W2VKeT0M14Pk1I
- 91q5cB8/1FIKQC+7vNZBAkI7n5kFlhY06aTxeIH9LCUvgr99S8BVH1FrZdU+OIwo2pA==
+ c=relaxed/relaxed; t=1792510708;
+ h=Received-SPF:Received:DKIM-Signature:Received:Received:
+ DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
+ Subject:Date:Message-Id:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+ X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+ X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
+ X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+ bh=yxMhhGNAtiLDfydpGuAKIVRihygH1/V8M48zQKiofZE=;
+ b=Thf+0ZQX3ofRbsHQ6aT2kBhh7ITnccMbHY/qnVZW3eCYSTt2dilkyNdtspzcfF18pRRM
+ QZjHS0le0qeb3fUwCp0TEZ8OU8vgjSoCKEjWunx6kRCFCdY3ZoWo4mmHFWs7jcdr0kz7x
+ UQWy6MI0Yt7/dPb2+gW3aQUMubYFykTeMP97yAVJw9q0HwMECXPYr4/TC4a7u31Ep9hzM
+ 0cHwhh3PB4+BBHoTZVaaEyMv6L49Z4quPJ9XuwumYu7DN2Mn85epAmz8lelOERBrx7wKN
+ HjqKQL5ePOl44yTu7jr3epPPOpUgkX87PycaM4uHKEsem2Kl5JHSHZLOsy8Z1uF3ZCA==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=none header.from=baylibre.com;
- dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=Gm0RNSmi; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::430"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::430; helo=mail-wr1-x430.google.com;
- envelope-from=glaroque@baylibre.com; receiver=<UNKNOWN> 
+ dmarc=pass header.from=oss.qualcomm.com;
+ dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
+ header.s=qcppdkim1 header.b=n1Wi30vv; 
+ dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=UUqvmVLc; 
+ arc=none smtp.remote-ip=205.220.180.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=Gm0RNSmi
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A027D607ED
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:07:50 +0000 (UTC)
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-48afcfc4bf5so2840816f8f.1
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 08:07:50 -0700 (PDT)
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=n1Wi30vv; 
+ dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=UUqvmVLc
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A5E43607CF
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:27 +0000 (UTC)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69KFG2JQ2009841
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=yxMhhGNAtiLDfydpGuAKIV
+ RihygH1/V8M48zQKiofZE=; b=n1Wi30vvkTAU5uK7iLWpD1fVNh8bgbSy0KWQZP
+ c6vOdgn2dVJVo3ljmv/lhBa7H4nKl0I7FR1a0n2pR7tpU8YPIxs5hI021eG3LCfd
+ oUSiWD1ofNeLAWNu4UD4MuvSF0elLewiFLqiJWS5pc/VLBQE18SV09xnynhMVaI3
+ Yes5ap+546tEn1O3gfmRFvtorbfB/qKuka9ZxnOaBtRDP/OW+2Puaf2OWwlAKkWM
+ QSTwzPpiwzCO206mkZX1x7Z8w/ngg/Fjx36EGskXQEbIMjiVKr2fOcMRnJsxK9GJ
+ bhuYhqwL7udsUTY5W9kKTeKjzyE2rAfbIu6VM0WlmGjlAbRw==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdw5n376w-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:26 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id
+ 6a1803df08f44-91b994cb09fso70387006d6.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 08:38:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1792508869; x=1793113669;
+ d=oss.qualcomm.com; s=google; t=1792510706; x=1793115506;
  darn=lists.u-boot-project.org; 
- h=message-id:date:references:in-reply-to:cc:to:from:subject
- :content-transfer-encoding:content-type:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=EpGtOu9utZc+dlp9ZVeiu2fN9Tbtg5nQIBfY3jCyFCM=;
- b=Gm0RNSminiM0XJL9qt/0sJpK/SZe7Ipoj2Ckvm1zbdtt+QNbpDycGKkX9qGfz/97XY
- JRSwVnGQZdd5Pl8ypcgKc14JLyWFso2REcCAaZB7wdZeQjb+7+X0nrWfhGa1tYDL7+en
- Ce/frt5+kNEV6NOsXzfNasrjqan7iw9ju689iL2CDd0VFdcu+YItuD9B14pzUdivt1Jy
- BPhzwVpAe62OF5JnRsqHyUxwtw1Y4TfYNWz70ijOoAPJGsvjuMgfmI0VIEg7doCcXPmX
- tjzQOHJQMWgjztW3C5pQf4nDf8KDHl8z/0FnqDi9hgElqWo9UwjYjrhdYr8PJ9VJl0Hx
- tKxA==
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=yxMhhGNAtiLDfydpGuAKIVRihygH1/V8M48zQKiofZE=;
+ b=UUqvmVLcpjt++pm7OUCq7tsyp3o1zf3iXGdX5pK48iSIg97qUHfhIq8HSeQZR5i0CE
+ hMKKqtfgZZ6DJ6u5Sg4KO46/96RfAbFV2OgYWMjMfnY2bsQB3YIdgTpDdvRUD1rJyeZJ
+ 87SoZ2cWfS4l4Kq539Xt8egYmlMiwDyswkma4RvjccbJ9qFjYLpwwwh9IxSy9eqOTF1d
+ wAFPl4bf/5aOTT/h4XW9ume0wLCkjl0w3A7IY9g5shdTXlUP12f/qAYnWEAj1Lf9rt5R
+ oTssr6ijCqrFmnm/hZ7vOI6VeWuXAxA1ZXGSwSd1SvScD76VSGvDjZB7HoR123KOLwNd
+ NZhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792508869; x=1793113669;
- h=message-id:date:references:in-reply-to:cc:to:from:subject
- :content-transfer-encoding:content-type:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=EpGtOu9utZc+dlp9ZVeiu2fN9Tbtg5nQIBfY3jCyFCM=;
- b=w1/UQ2ImWBml1eXXyFJeci/HXw0OaT/FqZyHNkLowycmdirEEQSkWNj13+jtqJqfJt
- f05nToMMQJkgzIt5i+Q4/pK75xcbaHMWCHB1xOn07H5Snl2Co+FIFvqFmJYLoZ7AquB/
- yt4zs61Uo4/EXFPZikcYdc1mT3GoGO+y0sFhcCWoIXFGAmhMETUHPKFCh8cUMaYftlMI
- dNnBydNNVX9I9EbUHdIKYF9LVxypvPw6/rttVzAj/GVhbBQIG5m5KKluatq6mxKFhxrl
- kQtssQM2Pgd3VoGugI1aG3EhtbJCMuVJqbAmSR23yk6HW/t57tSr9iRH3gMqLkMWbBik
- Roow==
+ d=1e100.net; s=20260707; t=1792510706; x=1793115506;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=yxMhhGNAtiLDfydpGuAKIVRihygH1/V8M48zQKiofZE=;
+ b=DNwPu7RyU90PefeFarKPCwBuCWJ+XVZDDH2n7KSE//fLj4L7iYqeTO8f1jD2CwdNGZ
+ 74gClrz5zabvSfECn+HligHyYWKaDUZTYOeSSjgrF0PuzGN28cr9v2I/vwha7t0Ceyfp
+ qUyTFd9p+BfS0GSqJSGOLbLW1KiS3t9ZKJtk5xwMUgzdbHvMHBSzACdFISUbifvDeK3r
+ 7qOHCG8PDx/aiw9H3RjIMxgYZB6TsOu/Eljs6p1ourzg46okXex4eRg0f3KAZNvZJJZu
+ ZafANsdeIIzYw0U58SukD8Fp76DBJjDnCHAQ8QK75qhHIIzzxd+RhSILzd85jrS9wFma
+ Xl2g==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxYzPuVpd4tqPMXtys5SC7bdiTf20VxU6bf5mh2i9+nVcW3LuOlJVDmVPjCIBm16m4jQNpvrD0=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYKXLFYTWefjpx/yjQdT6BctPDJ8leDW8ee5hrPP7vlhMlSP8GiB
- UBjBZbDimk87CNSb53hBEW+webApwBjytGA4Vu/HSab4Ley2+gbbeN6abt2xpk/f0NjIQzPTC/s
- iFNfZ
-X-Gm-Gg: AYBFou1tftwdswPxfaZVMGsCgaS0/teT9lw89aKDIBlf7jo+UUTM8xIqsjonHKneqVF
- yiZ/i0kifmuo9AOpvFLw7wWKNXW5eEUHU0KoBMvpk8PxsmpqXNoSVu+sXOsPGJslekUoixh3l8N
- erwgRzlYypl5QeROO0I4MNTF+qo3eOZ27zBuBhjVCpjpsRy/OkXquLJ6ktahXyrF9G54i3Z79N7
- DaVSMjK8kp/XnzCikSPX5yxexc8kyBtrMwwXuMChVcftUqlJTH5juZIa4qjBOeSmSFxjWIt88Ab
- 2bEs7MR4eww7ZDkQslidzNWBry4cYtycZT+MadxC2+F3l7tcA/15S/Ub49plM92G05D73HGbF0H
- MbJJH2vkNMEyc6j3Mvg4p6AJX6b7hiEppsG7azTuhcNhiDC+sNejXoXlWdLrQwLxg5xCGXppegU
- qRvzs3ng/ePSH72pgNT58F42d/eWfiwGXdtZTbU0hr4B7S1e9i6tj174EW7wD99PSBBRXpswmJE
- O0Rd9ykkY4rGkqG6xVj
-X-Received: by 2002:a05:6000:4a0b:b0:48d:f5ba:fb02 with SMTP id
- ffacd0b85a97d-48e07fb05b5mr23505569f8f.49.1792508867908; 
- Tue, 20 Oct 2026 08:07:47 -0700 (PDT)
-Received: from [127.0.1.1] ([2a01:e0a:e50:3860::e1d1:d182])
+ AKwUvBwmZn/M+gqdKw13FBeX7YJqLXQglyRBIEowh/GlCAA39/bjDCsUBaBwaRr8JoRrM+yv28+/1D4=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYKpKlQO6iXJ5S2IoVPFmxj0NBxIuXUuz8AaxzUwy3w7CC9+VfgT
+ dy8R6omy+C2LMWnA7iermKk9C7QMCSTr/9ERXkCsWw79l4XY+UwT9I+bPcnV6fk97ilM40t8tc+
+ TQ2upo24e4oOd0Os7FS+26k9/L1gKYEZpUk63IpYFodit1N+UAyEBHbhC9rTDEjwEXnRs83s=
+X-Gm-Gg: AYBFou1EERTFO9dGxUl5wgPs5vZ0PMn9Dmz2/PaO0iGoV0Lc+/QYsIgQeaGrGKLktMQ
+ ntuBEFCkEpcLTRhFroBcv4kzafE8XUHfqektrbu7j2L3iqbuZRAJ6b9e9ECuvpKQhabWIYr5o93
+ Io5mMXi92QI8oOWK5VRifXjKPdIU9tOMfneXRlX3cpbnX9VXjwMCmblfZHKmC5gdwjdSQXD+2tv
+ TwxWZpCbmXjjrg7Nn2oZEpqz42i+s7mrF3u7Jq3hmTaxvsLiqRwkYXUmnSelq4uubNlxpAcZc2Z
+ NUOqQ8sJ4NgKU3sKWy8DpoqRnBWgwW4SUKrkA9V2Bx1A9IoinUSwZsmaPq9+ydikgO5IwBFjWXM
+ z05xGFHvf/M74Jo0qXoUxGdFc+RLEivoT/tXkRuylZuYJ
+X-Received: by 2002:a05:620a:6410:b0:93f:24e6:4052 with SMTP id
+ af79cd13be357-93f29b7604fmr1760896085a.10.1792510705665; 
+ Tue, 20 Oct 2026 08:38:25 -0700 (PDT)
+X-Received: by 2002:a05:620a:6410:b0:93f:24e6:4052 with SMTP id
+ af79cd13be357-93f29b7604fmr1760890385a.10.1792510705075; 
+ Tue, 20 Oct 2026 08:38:25 -0700 (PDT)
+Received: from [127.0.1.1] (185-164-141-21.cgnat.inetia.pl. [185.164.141.21])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e1d8214cbsm6581816f8f.43.2026.10.20.08.07.47
+ 4fb4d7f45d1cf-6b38a1b140fsm5574963a12.9.2026.10.20.08.38.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Oct 2026 08:07:47 -0700 (PDT)
+ Tue, 20 Oct 2026 08:38:24 -0700 (PDT)
+From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+Subject: [PATCH v3 0/5] avb: device lock state, root key provisioning and
+ in-place verification
+Date: Tue, 20 Oct 2026 17:38:07 +0200
+Message-Id: <20261020-upstream-avb_lock_unlock_b4-v3-0-e280795a98cc@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v2 05/10] test/py: android: Add create_gpt_image() for
- image creation
-From: Guillaume La Roque <glaroque@baylibre.com>
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.u-boot-project.org, 
- Jan Kehren <jan.kehren@emteria.com>, 
- Guillaume La Roque <glaroque@baylibre.com>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, 
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6WRTW7DIBCFr2KxLhbGGP+sco+qisZ4WpPEOAGMW
+ kW+e8GJqi7aKlJXaEbzvnnzuBKHVqMjXXYlFoN2ejaxKJ8yokYwb0j1EGvCGZcFKwq6nJ23CBO
+ F0O9PszruF7M9vaBDCVxK1bB2ECQSzhZf9ftGf3651W7pD6h8QqaJHhzS3oJRY2odwNBQ0tS96
+ y1elmjK3yC3eTVPk/ZdhkMj20aWqt6mJ3QONsNddrcrWc2lYHld81YKymlckB9xtGh2OPl4OuS
+ R9pi6/Jda/KZOwYza+dl+bL8Qiu3ShwIPBWUURAWooBJx5252Lr8scEoZfeED/47kfyN5RDa1k
+ Ay4wKpqf0Cu6/oJYQ4dFzkCAAA=
+X-Change-ID: 20261011-upstream-avb_lock_unlock_b4-d3a266c809d4
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Shahriyar Jalayeri <shahriyar@byteray.co.uk>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Pengpeng Hou <pengpeng@iscas.ac.cn>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ahmad Fatoum <a.fatoum@pengutronix.de>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Jan Kehren <jan.kehren@emteria.com>,
  Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-In-Reply-To: <20261020-test-avb-fixes-v2-5-997f8f04fd3f@kernel.org>
-References: <20261020-test-avb-fixes-v2-0-997f8f04fd3f@kernel.org>
- <20261020-test-avb-fixes-v2-5-997f8f04fd3f@kernel.org>
-Date: Tue, 20 Oct 2026 17:07:42 +0200
-Message-Id: <179250886243.3573513.9903551154853491203.b4-review@b4>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792508867; l=5395;
- i=glaroque@baylibre.com; s=20261019; h=from:subject:message-id;
- bh=MNJI57hvJVoyD3Y4YEyu9YB3nmiZe7CN401BJeTMbOk=;
- b=YKP8x5jymNqPDB8bkrUReb8brLVW5F4u9N56HSf8/bZje6fLm1ZrFey0KWmKfQGb2VqTyGPEv
- FqSeLEmc7OpAd6CBeMUqylKMSihU6J6IU8MgCst7qPDX75nkhvW5h8L
-X-Developer-Key: i=glaroque@baylibre.com; a=ed25519;
- pk=nMpSg4NT6M6q143E089emouMc+MXpHO9CWmnEUfjhjI=
+X-Proofpoint-GUID: rJCuqJzEsNjQIw88grrD9AEWBtPngZuu
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDA2MiBTYWx0ZWRfX9co9IYqEvevY
+ hSrHln+7n138MdnuNWrpstBdsg6HFcNAW03/B+MveDCobmFKzfpsSD6oBH6g0EeNA0JXzdYWSIj
+ 1askBNm3iNyU3kGlNE3cknQPkQiaVhA=
+X-Proofpoint-ORIG-GUID: rJCuqJzEsNjQIw88grrD9AEWBtPngZuu
+X-Authority-Analysis: v=2.4 cv=A5z5rKWG c=1 sm=1 tr=0 ts=6ad78af2 cx=c_pps
+ a=UgVkIMxJMSkC9lv97toC5g==:117 a=JsdSkJyxCPcZmfxNhm0PvA==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=HAEnkh90AAAA:8 a=Y4ZAcZfw-zZUe6kDIGYA:9
+ a=QEXdDO2ut3YA:10 a=1HOtulTD9v-eNWfpl4qZ:22 a=FO4_E8m0qiDe52t0p3_H:22
+ a=LzkeyO55kmtmzvcb4Ayl:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDA2MiBTYWx0ZWRfXz+F1+3hSKEnJ
+ 2S1whSitBxysFSYivJVTNbIcNR59IW9xy4GpFL9Ao+hknZa0iF/7n1sWyb57+SO38wEll80qh0j
+ 3PID0HLdoR9XTDAaf0b4rdw1q75cv3dRF/dwzRP3kl1glXQVGSMzhat6YhKSRHcqdpSK68EaXQn
+ htxDVj99QpZ1oz8gusOmVzl09VpeD/kGc9qyhELibRoc3hMsbkNZd10GZ+3QEqNwsLNdkPcClAP
+ pu2me64Waq5ybaBjOuOXxIpMmmTDQAZwi/MZHxycEDqfJwBHUd26R9O/N4EjbYtGcI3pk9IEeVd
+ 3QNhxWZMyRKtcQv5X4Wrga4fU4o9/RyqEKhJbngbjByUJ9IKoRHUfa2jQQFdo2zmLtaMvoMqafY
+ cXKKVwx6XpVfFpYUM36YXU8Stbcx26rTCVt6CkBSMNLk0K3oKt3c0PMVmgC3Y6rVKDIXtbHI2LO
+ 2AGK03L0TBkXbfKU5YQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-20_02,2026-10-19_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 malwarescore=0 adultscore=0 priorityscore=1501 suspectscore=0
+ phishscore=0 spamscore=0 bulkscore=0 impostorscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610200062
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -202,139 +259,134 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-> There is quite some code duplication between the image creation for
-> mmc7.img and mmc8.img. If we want to add more images, this will be even
-> more duplication.
-> 
-> Add a common function, create_gpt_image() which removes all the code
-> duplication.
-> 
-> Reviewed-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-> Tested-by: Guillaume La Roque <glaroque@baylibre.com>
-> Tested-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
->
-> diff --git a/test/py/tests/test_android/android_image.py b/test/py/tests/test_android/android_image.py
-> index 14dfd26fffd8..b5fede8ebf0b 100644
-> --- a/test/py/tests/test_android/android_image.py
-> +++ b/test/py/tests/test_android/android_image.py
-> @@ -7,13 +7,12 @@ import os
->  import utils
->  from test_android import test_abootimg
->  
-> -def setup_android_image(ubman):
-> +Partition = collections.namedtuple('part', 'start,size,name')
-> +
-> +def create_gpt_image(ubman, mmc_dev, required_parts, images):
->      """Create a 20MB disk image with Android partitions"""
-> -    Partition = collections.namedtuple('part', 'start,size,name')
->      parts = {}
->      disk_data = None
-> -
-> -    mmc_dev = 7
->      fname = os.path.join(ubman.config.source_dir, f'mmc{mmc_dev}.img')
->      utils.run_and_log(ubman, f'qemu-img create {fname} 20M')
->      utils.run_and_log(ubman, f'cgpt create {fname}')
-> @@ -24,14 +23,6 @@ def setup_android_image(ubman):
->      sect_size = 512
->      sect_1mb = (1 << 20) // sect_size
->  
-> -    required_parts = [
-> -        {'num': 1, 'label':'misc', 'size': '1M'},
-> -        {'num': 2, 'label':'boot_a', 'size': '4M'},
-> -        {'num': 3, 'label':'boot_b', 'size': '4M'},
-> -        {'num': 4, 'label':'vendor_boot_a', 'size': '4M'},
-> -        {'num': 5, 'label':'vendor_boot_b', 'size': '4M'},
-> -    ]
-> -
->      for part in required_parts:
->          size_str = part['size']
->          if 'M' in size_str:
-> @@ -54,10 +45,6 @@ def setup_android_image(ubman):
->      with open(fname, 'rb') as inf:
->          disk_data = inf.read()
->  
-> -    images = [
-> -        (2, 'bootv4.img', test_abootimg.boot_img_hex),
-> -        (4, 'vendor_boot.img', test_abootimg.vboot_img_hex),
-> -    ]
->      for partnum, img_name, hex_data in images:
->          test_abootimg.AbootimgTestDiskImage(ubman, img_name, hex_data)
->          img_path = os.path.join(ubman.config.result_dir, img_name)
-> @@ -69,55 +56,28 @@ def setup_android_image(ubman):
->      with open(fname, 'wb') as outf:
->          outf.write(disk_data)
->  
-> -    mmc_dev = 8
-> -    fname = os.path.join(ubman.config.source_dir, f'mmc{mmc_dev}.img')
-> -    utils.run_and_log(ubman, f'qemu-img create {fname} 20M')
-> -    utils.run_and_log(ubman, f'cgpt create {fname}')
-> -
-> -    ptr = 40
-> -
-> -    # Number of sectors in 1MB
-> -    sect_size = 512
-> -    sect_1mb = (1 << 20) // sect_size
-> -
-> +def setup_android_image(ubman):
-> +    mmc_dev = 7
->      required_parts = [
->          {'num': 1, 'label':'misc', 'size': '1M'},
->          {'num': 2, 'label':'boot_a', 'size': '4M'},
->          {'num': 3, 'label':'boot_b', 'size': '4M'},
-> +        {'num': 4, 'label':'vendor_boot_a', 'size': '4M'},
-> +        {'num': 5, 'label':'vendor_boot_b', 'size': '4M'},
->      ]
-> +    images = [
-> +        (2, 'bootv4.img', test_abootimg.boot_img_hex),
-> +        (4, 'vendor_boot.img', test_abootimg.vboot_img_hex),
-> +    ]
-> +    create_gpt_image(ubman, mmc_dev, required_parts, images)
->  
-> -    for part in required_parts:
-> -        size_str = part['size']
-> -        if 'M' in size_str:
-> -            size = int(size_str[:-1]) * sect_1mb
-> -        else:
-> -            size = int(size_str)
-> -        utils.run_and_log(
-> -            ubman,
-> -            f"cgpt add -i {part['num']} -b {ptr} -s {size} -l {part['label']} -t basicdata {fname}")
-> -        ptr += size
-> -
-> -    utils.run_and_log(ubman, f'cgpt boot -p {fname}')
-> -    out = utils.run_and_log(ubman, f'cgpt show -q {fname}')
-> -
-> -    # Create a dict (indexed by partition number) containing the above info
-> -    for line in out.splitlines():
-> -        start, size, num, name = line.split(maxsplit=3)
-> -        parts[int(num)] = Partition(int(start), int(size), name)
-> -
-> -    with open(fname, 'rb') as inf:
-> -        disk_data = inf.read()
-> -
-> +    mmc_dev = 8
-> +    required_parts = [
-> +        {'num': 1, 'label':'misc', 'size': '1M'},
-> +        {'num': 2, 'label':'boot_a', 'size': '4M'},
-> +        {'num': 3, 'label':'boot_b', 'size': '4M'},
-> +    ]
->      images = [
->          (2, 'boot.img', test_abootimg.img_hex),
->      ]
-> -    for partnum, img_name, hex_data in images:
-> -        test_abootimg.AbootimgTestDiskImage(ubman, img_name, hex_data)
-> -        img_path = os.path.join(ubman.config.result_dir, img_name)
-> -        with open(img_path, 'rb') as inf:
-> -            data = inf.read()
-> -        start = parts[partnum].start * sect_size
-> -        disk_data = disk_data[:start] + data + disk_data[start + len(data):]
-> -
-> -    with open(fname, 'wb') as outf:
-> -        outf.write(disk_data)
-> +    create_gpt_image(ubman, mmc_dev, required_parts, images)
+This series completes the device state handling of the AVB 2.0
+implementation when the state is kept by the OP-TEE AVB TA, and fixes
+the way the Android bootmeth hands the boot images to libavb.
 
-Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
+Patches 1 and 2 add the shell side: "avb read_pvalue_hex" and
+"avb write_pvalue_hex" provision binary persistent values such as the
+SHA-256 digest of the vbmeta signing key that CONFIG_AVB_ROOT_KEY_TEE
+consumes, and "avb lock"/"avb unlock" set the lock state through a new
+avb_write_lock_state() helper. Until now U-Boot could only read the
+lock state, so a device backed by the TA could never leave the unlocked
+(orange) state.
 
--- 
-Guillaume La Roque <glaroque@baylibre.com>
+Patch 3 makes bootmeth_android verify the boot images in the buffers it
+boots them from, via AvbOps.get_preloaded_partition(), instead of
+letting libavb read, hash and free its own copies and then reading the
+partitions a second time for booting. This closes the TOCTOU window
+reported on the list and halves the amount of data read from storage.
+
+Patch 4 adds "fastboot flashing lock|unlock|get_unlock_ability" and the
+"unlocked" variable, so the state can be changed with the Android
+fastboot tool, and makes the state matter to fastboot: "flash" and
+"erase" are refused while the device is locked, and unlocking follows
+the "OEM unlocking" setting Android keeps in the frp partition. Both
+transitions erase userdata and metadata before the state changes, as
+AVB requires.
+
+Patch 5 documents the root key sources, the provisioning of the TEE
+digest and the lock state in doc/android/avb2.rst.
+
+The series is based on Jan Kehren's "avb: Support verified boot from
+non-mmc storage" v3 (avb_ops_alloc() takes the storage interface
+there), as agreed in that thread.
+
+Tested on QEMU virt with OP-TEE 4.11.0-rc1 and the Cuttlefish Android
+17 images: the chain boots locked (green) to sys.boot_completed, a
+modified kernel is refused, "fastboot flashing unlock/lock" over
+"fastboot tcp" erase the partitions and flip the state reported by
+"getvar unlocked" and "avb is_unlocked", flash/erase are refused while
+locked, unlock is refused while the OEM unlocking byte in frp is clear,
+and the sandbox AVB tests pass. Build-tested with sandbox (in tree,
+per patch), sandbox64 (out of tree), khadas-vim3_android_ab, sei510 and
+am57xx_evm.
+
+The lock state is stored in RPMB by the TA; on boards where U-Boot
+serves the RPMB requests of OP-TEE itself, the two fixes in "optee: two
+RPMB fixes for RPMB requests served by U-Boot" are needed at run time.
+There is no build dependency on them.
+
+Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+---
+Changes in v3:
+- Rebased on Jan Kehren's "avb: Support verified boot from non-mmc
+  storage" v3; the fastboot code calls the new two-argument
+  avb_ops_alloc(UCLASS_MMC, dev).
+- Patch 3 (Guillaume): drop the "if (priv->boot_addr)" check, boot is
+  always loaded by then; register the vendor_boot buffer on the boot
+  image header version instead of the recorded address, which was
+  never initialised for header v2 images; allocate the bootmeth
+  private data with calloc(). Add the Fixes: tag (Mattijs).
+- Patch 4 (Mattijs): the "unlocked" getvar entry is now inside
+  #if CONFIG_IS_ENABLED(FASTBOOT_CMD_FLASHING), like has-slot, instead
+  of a NULL dispatch.
+- Patch 4 (Guillaume): "flash" and "erase" are refused while the
+  device is locked; the userdata/metadata wipe goes through the same
+  back-end dispatch as "erase" instead of calling fastboot_mmc_erase()
+  directly, so FASTBOOT_CMD_FLASHING now only depends on
+  FASTBOOT_FLASH; "flashing unlock" honours get_unlock_ability, which
+  reads Android's "OEM unlocking" flag from the last byte of the frp
+  partition (always allowed without an frp partition). The flashing
+  code has no mmc specifics left: the frp lookup and the AVB ops use
+  the fastboot flash device of whichever block based back end is
+  configured, and getvar "unlocked" goes through a small
+  fastboot_flashing_is_unlocked() helper, so fb_getvar.c no longer
+  includes avb_verify.h.
+- Patch 5: document the lock enforcement and the OEM unlocking policy.
+- Collected the Reviewed-by/Tested-by tags on patches 1, 2, 3 and 5.
+  Patch 3 and the doc changed slightly after the review (see above),
+  shout if you want the tags dropped.
+- Link to v2: https://patch.msgid.link/20261012-upstream-avb_lock_unlock_b4-v2-0-87460a24e559@oss.qualcomm.com
+
+Changes in v2:
+- fastboot: guard the flashing_lock/unlock/get_unlock_ability prototypes
+  with FASTBOOT_CMD_FLASHING. They were declared unconditionally while
+  their definitions sit under that option, so every configuration with
+  fastboot but without the flashing commands (sandbox, sei510, ...)
+  failed with "declared 'static' but never defined" under -Werror. v1
+  was only build-tested on configurations that enable the option; the
+  sandbox CI jobs caught it. The series is now also build-tested with
+  sandbox, sandbox64 (out of tree) and the arm64/arm32 boards that
+  enable AVB or fastboot flashing, and the 107-column dispatch line is
+  wrapped.
+- Link to v1: https://patch.msgid.link/20261011-upstream-avb_lock_unlock_b4-v1-0-a45aeca54016@oss.qualcomm.com
+
+---
+Igor Opaniuk (5):
+      cmd: avb: add read_pvalue_hex/write_pvalue_hex
+      cmd: avb: add lock/unlock commands
+      avb: verify the boot images in the buffers they are booted from
+      fastboot: add flashing lock/unlock/get_unlock_ability
+      doc: android/avb2: document the root key provisioning and lock state
+
+ boot/bootmeth_android.c       |  73 +++++++++--
+ cmd/avb.c                     | 141 ++++++++++++++++++++++
+ common/avb_verify.c           | 102 ++++++++++++++++
+ doc/android/avb2.rst          |  75 ++++++++++++
+ drivers/fastboot/Kconfig      |  15 +++
+ drivers/fastboot/fb_command.c | 275 +++++++++++++++++++++++++++++++++++++++++-
+ drivers/fastboot/fb_getvar.c  |  22 ++++
+ include/avb_verify.h          |  39 ++++++
+ include/fastboot.h            |  14 +++
+ 9 files changed, 738 insertions(+), 18 deletions(-)
+---
+base-commit: ed869863c7e2aca50d57a05d843830dd843138c4
+change-id: 20261011-upstream-avb_lock_unlock_b4-d3a266c809d4
+prerequisite-message-id: 20261016072640.772964-2-jan.kehren@emteria.com
+prerequisite-patch-id: d0ea5299485f2cfba253ac68ab2d228255604a35
+prerequisite-patch-id: 16b2dfbd478a6707672b4e62902987126c96544b
+prerequisite-patch-id: f4f311b25e3405dfa47a0f67bdbe43d718a183be
+prerequisite-message-id: 20261016072640.772964-3-jan.kehren@emteria.com
+prerequisite-patch-id: d0ea5299485f2cfba253ac68ab2d228255604a35
+prerequisite-patch-id: 16b2dfbd478a6707672b4e62902987126c96544b
+prerequisite-patch-id: f4f311b25e3405dfa47a0f67bdbe43d718a183be
+prerequisite-message-id: 20261016072640.772964-4-jan.kehren@emteria.com
+prerequisite-patch-id: d0ea5299485f2cfba253ac68ab2d228255604a35
+prerequisite-patch-id: 16b2dfbd478a6707672b4e62902987126c96544b
+prerequisite-patch-id: f4f311b25e3405dfa47a0f67bdbe43d718a183be
+
+Best regards,
+--  
+Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+
