@@ -1,192 +1,284 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF839606A32C
-	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 09:22:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4A41606A319
+	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 09:23:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=gpv9SCdT;
-	dkim=pass (2048-bit key, unprotected) header.d=9elements.com header.i=@9elements.com header.a=rsa-sha256 header.s=google header.b=KCtfJBNu
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zBqo2Mo4;
+	dkim=pass (2048-bit key, unprotected) header.d=gmx.de header.i=fiona.klute@gmx.de header.a=rsa-sha256 header.s=s31663417 header.b=rA4E5suh
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C93AF40820;
-	Tue, 20 Oct 2026 09:22:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7A7C28100F;
+	Tue, 20 Oct 2026 09:23:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LiElIAyF1TKL; Tue, 20 Oct 2026 09:22:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 033E5407E2
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792488134;
-	b=rErfFnQF4D8n3sjNIyeDDlTNzHqfCms5QuMdQx7qSGdowygxtDb/C+amfrI9tN38jxWB
-	 gSzrEqRgyU2qoaY1BQf3kBoCUi/w4vLrbc2pkoql/BuijcWwWVqPNxW4fQyi7zn9ngGfe
-	 rFezlUiL9ExqY/QOrjzPJHAJv1ouF8Glg4FGKTHSQ9fA/Fp5U/1H/3JZNxrAPptVYdQ5U
-	 Vx3kbeQvhHlcyEv2iTYyTaQOiUhn2HOP/vrk7SGN2CkVNWrNZOz8HNZfNt08HtzIRqbBs
-	 Fd/QRA108NOsU3E7Q941tG40PfPrA5pKhIS5PqbPV/FjhXCUHjh8yx7LBMctsccJpPA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5yjs0KrDmarX; Tue, 20 Oct 2026 09:23:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BAEE58109A
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792488183;
+	b=ae9C36WFDc0rxVjndA6Km1G3owjwqBFFcdiihL9fXFISkzaIpM1ikgsvayhOOBSiRdQ3
+	 HI+6jToDJGghlSLlW+Dbk/K0HxZzp9u4vEzSsXzL0NM+b+BdCtyLmK/pS3uygpMF9VoW1
+	 vQIRyRX5v2RDFtOhNaGIp4n+tBsYd4DoXp6fMM5IVR7stbJ6ykGTrXSUnLE/XXa8XxfNa
+	 qlX2UjW/Vu3PwaPXhtDlAK4OXtuRw+HTRigmHRrXzK8AKC/3t01b7NZ17CbqsO5WX9ytE
+	 kVc9vjfE5pkqT8gdYCPMO1b0nDNJn3Ic4hCuoFEySraemIRi4REjqN+Ukya3D0XIFKw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792488134;
+	c=relaxed/relaxed; t=1792488183;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=TOssb9EnZAJa9gjv879ab2TCnrJ24+6NwigIs2ujFH8=;
-	b=XgDvrhlA+PCZoN3EGOXUSANMQYmeyPa0ugLeKQkr7aD/hwhZPX7/kQgjGzXA0BYOaDLW
-	 wIFEJeYR5SIjjoQzTkTFdrzLXYOD6V9Z9xiUlIu9+lgUo3yMvjvRTqVIKm5QpKG3RJxaN
-	 kSjHnXcMaMl7ySG7IzTtY3JOpLgd2X1J7/UG4KEQB9FeT3yfh0GG5VF+zcFA+SCO0DFd4
-	 m/eA3sRXhTFxa9BoHeGwLNKrxGdU9B2ItOVbnv6XdrRQ56KJenKxDMGMHVsWNAg4P2dTG
-	 OiLmnAVQiuk8ovjVQsQKsmp0UUJf6T0xPipw+W4EcQ3ZJ+HxJadCHpO8rfvUOGUXR8Q==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	dmarc=pass header.from=9elements.com;
-	dkim=pass header.d=9elements.com header.i=@9elements.com header.a=rsa-sha256 header.s=google header.b=KCtfJBNu;
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:X-UI-Sender-Class:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:References:Content-Language:From:
+	 Autocrypt:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 X-Provags-ID:UI-OutboundReport:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=BU0cw3qaKNUmCaNmnlDeC493DVsjClomaABg5Hstk8E=;
+	b=iLeC/hIPjLa1qFdrk5g6EsVtJIDVqkdRbTmqgoNq8vQYvcynY9RSJf43KS6WWzYI3eVx
+	 zTPQJ/HpNyNygKX2C6RQG0VVYRp03FwIZ3o42i4FGKW7RzDd+jnH/ddxDn18s/i2jfsaS
+	 7Qr4ian4soXVpK7s3OVPnkG9ELqtnPtIT5cxPi6rdhqesNKsEVOR3dqlkJGdULjbkakkG
+	 1POq3YhHgL9R9nKtDiUNAezuM/mxnTCvjv3UNlmdgcWvGEnFPT4SB41J7w1Xznceg9s+E
+	 0+DcFvQA9VTF8PQ0OBWkndye72auZv2dSVA9l6dVApi8QSuirDO+6vmHe9N/Q9DuQ3Q==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792488134;
-	bh=TOssb9EnZAJa9gjv879ab2TCnrJ24+6NwigIs2ujFH8=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1792488183;
+	bh=BU0cw3qaKNUmCaNmnlDeC493DVsjClomaABg5Hstk8E=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=gpv9SCdTu3ha6bhpMiRmdzx+/ABfV2iOHLn3vwJL4rZzxq0iLkORZQRcC2/sLSqQ1
-	 RqYb1KFJfe/hoZkFWmFPkSV1pZkppSoUd4t7yw7jI7iyfQGlfsu4wbYgICPQuZve2v
-	 ct+w0fIEFQ6GdvvH9ldlJ/jvTJxBBhwqGtmdJ6LyQjtRakgse9OwxgusefgLmStYPq
-	 KDbYnkPqTPiyWrPIeXJmxgby02PjyZkf2pmdXmOZKQnRKs24ePtSQnH5GOvrmMswD7
-	 oy7D5FUzDnpnqbNwMjjZvmzY4EcxBMKGUzCgu/CQbrUPew8/nRwBkiAxZI+lkXE/jq
-	 yRPxTbhnubcjQ==
+	b=zBqo2Mo4bgeI2ow16mzPpg7JD3oLqUHjUSRtbMSoT56QLU1BJ8asOwC6lTpwLgNC6
+	 YXD7Pb2pzjdGz9oYzLE7EvUQdkV8Do2gkgcqRj1NvQde7l0V0d38Tu/D3xEy77O1Kb
+	 cYjUiPUJFbRG9tv5/D01qLRFDXCVrpgQAJl20c08dIhw0IHkgrUfRh4DxCIqIBVjnQ
+	 t7hMT+nAmWYjLjGciDSV4KjiB0wcejJEzyw0+iY9fli/CSx/S18uyh5kpSfYeSrum7
+	 42hxbXXAv4mwWwVunPPOpQZroM6KyeTwaAVt20Rf8nM7J4hWd4ko6TZOt3+VOJCOtI
+	 RG0y6guwysXyQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 033E5407E2;
-	Tue, 20 Oct 2026 09:22:14 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 9256F465
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:22:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BAEE58109A;
+	Tue, 20 Oct 2026 09:23:03 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id E8565769
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:23:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8FD7E407E2
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:22:12 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id D808C6083C
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:23:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RFj1pdMyhzQJ for <u-boot@lists.u-boot-project.org>;
- Tue, 20 Oct 2026 09:22:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9276C407E0
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::335"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792488131;
- b=UTOCEUCY9ZmsyaiGDWuJDWxKl8FLrdIVTX9NHY5ZvmH5nuzlXKrf2eIYJvjjkmRWdVpE
- MSggo9Fx+JL8sZcOYXVH0tRKL1woHwyxjajO25brejXTeWZP8EOi0cbOHsX7mLdpSQW0I
- +h8f8L4+3x1jiPTZZwGJ/SHAaTNWpliPh08UpWTh9okmt2L3Jy2nbbiNHq2MtVhsps63B
- oVZYegsBuEml+aokLm1awl1jD4eOlLCYmuV8EUHLok9jmX77bTZAVS3MZEXP5+6HZ4/04
- Zir+U4gmjSlQ7tML5Nr0EuuuEdU6EUPzaFBby0NMA+D6UoGeQbFp65caUH5EJHqJnSw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xNH3pUk8euEq for <u-boot@lists.u-boot-project.org>;
+ Tue, 20 Oct 2026 09:23:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7E9C960830
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=212.227.15.15
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792488181;
+ b=KTQEGVLU3IbLJlmVIKU6E0FYeLy/sExN83SzxOFElAZHNY/XCiDQ9vH8VLIjnqOoCNro
+ 5yBh0Q15Exaz8ai+DonzFzRhl9ncVyTQ+MunGzZH5eLJudT8vBhP1T1nYfjOJChL+aAbP
+ WOazrSTp4aJzHiUb2t5YCipBN0kXlwi1yMz8SRHiTOAGKkEHixSq9jSiOeSY3MGxT2IQU
+ 6bd78OVKCvk/1ShYrdrlOprb48QRJG+Jv9ZdTFfp+LquXYuONV5YLUZHbvvLmbboA40ft
+ BhKZ4MLKIkIAjZmx32v3IBpzPl5opby/3X6o+E2gFBbFewSJadXcMzvwM87XGtV4R+Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792488131;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Subject:From:To:
- Cc:In-Reply-To:References:Date:Message-Id:X-Mailer:
- X-Developer-Signature:X-Developer-Key;
- bh=TOssb9EnZAJa9gjv879ab2TCnrJ24+6NwigIs2ujFH8=;
- b=YjhhxJEw8LW7cDnrRTeihkzgAsdJggRjDHQitV/yGjIVR5GSIzjnF3+eqzo9+gHMVPzK
- WGBHZB6+D+bjoauF8zASPzDOtK21U5NGxWEL7KaqRyix+3b2rzTklAC2gS5EnQy+i4yF1
- 5JRAzdfw5ssEFB0wfJc2L18IoUQOxDQQLV7BxyaQHyg5Nr3QJwlE87NCPzd6bgOzK9Wx/
- xSH68Y+prrQuWmtaRheV0+1Rd1Ksl7CPXFClAnNw+30Y/uDUsMfDXr5OP9yCBQmXqz19s
- ILjy82t2kMtKtFlgxRDspw6ReV91L9dIQLDo/nMiCHHXNL3Emati/3d3SmBFDG8Jnmw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=9elements.com;
- dkim=pass header.d=9elements.com header.i=@9elements.com header.a=rsa-sha256
- header.s=google header.b=KCtfJBNu; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::335"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::335; helo=mail-wm1-x335.google.com;
- envelope-from=tan.siewert@9elements.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=9elements.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=9elements.com header.i=@9elements.com
- header.a=rsa-sha256 header.s=google header.b=KCtfJBNu
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9276C407E0
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:22:10 +0000 (UTC)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4a1d484b4a9so38519035e9.0
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 02:22:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1792488128; x=1793092928;
- darn=lists.u-boot-project.org; 
- h=message-id:date:references:in-reply-to:cc:to:from:subject
- :content-transfer-encoding:content-type:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=TOssb9EnZAJa9gjv879ab2TCnrJ24+6NwigIs2ujFH8=;
- b=KCtfJBNu5iK7a+W8ntm8EC0glOeZilkQ/83n/IGvW2hFNI0AM/VZaGpHOj7baUp7m7
- 1bbn5LKPQSoj0yUuet0t6cA2yPeD87Er3I8Nk5hkQW923DPUhEw10IBRh0wdefUphMcG
- ZHeZb8K3JbrpJ9lNjbk2Pt7AoA3AVLvCjl+ul5DVhc9XNsZKnLoBeMsmFdmUk1pNbqTq
- 3l4u9dOUkkua27MunfM2lzM5Z7iG2YlfoaKNhZGXxOPKGqmgB5c7wSMbrjcB7DK/vcat
- Mv9nYwsQP8XDE89TTWGJGlqBMMmx6MRW2nrWiyA89E1X5o6eXN50pYSjt5xUOO/FnaAi
- l80A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792488128; x=1793092928;
- h=message-id:date:references:in-reply-to:cc:to:from:subject
- :content-transfer-encoding:content-type:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=TOssb9EnZAJa9gjv879ab2TCnrJ24+6NwigIs2ujFH8=;
- b=ws+Th6dtvMsNtO0UD/c/TbNjsdzCLn98+DI4G5rYmYyX1X9FmjnA04KSamOXzMODm6
- mC++naoxLvYVj/l0jR3bxz+8oTQIFTgBM18zRPBtPBIaoTVnlIyyhTrDdfzmv7d7/ciq
- FoI92M7B4xGMWeJJcNptMFNzZPqey63Ali5Sl+iY11bsqMPpYLUdAJ0K7NuCxUXqR4I3
- v6RWLe/Bw2W2aga3DKyrRe8TpAhw+lvib3Hg9fMOj7F0JqXa1MCkUBkm1mtPj5youjZD
- 12Xmx1O8tyGtrcz7o0dzec3n8O6rKL+HJZI1ChmHAdqDjqVlEi4RnbID2Yyw3GMgK/fv
- 8Wfg==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxUzUn/GpGj5y5vHvqbyUp0Yg8M+JfyHqiv4765h6/+ffVw7XNSVi5xs6oNnio7/RtT46Hansc=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJM8q9F4aLDKZWLLaU/x6X72vKldFyHCxQxxx8HA6oKX3dC349Y
- MtslKCTLvBLeBjcfAXUrsxmQ9TJMyXIFTOqCvjOiDdJvUxEpTlbJtCkOreO2zbBqsS/bZLj+FIu
- 2Us5y
-X-Gm-Gg: AYBFou0/9OaMV8OWCFiJcCUfT3p7kj+iJixLgKr74Lnb1sSXq6dCB8MTGyFKmqPcy/D
- +TdOGc/yBiEIw1sd/5Ks6sTP1t0NA5jxzhOIudg0OcCAvFsh+8YtkP3w3Rxs/HCpZ45B0pk4GNp
- pk/YjDnECJaZiPzgLK1w4rPjanlYGjMsiZO5FdpA3XYp73TxD7LRH8AX87g/ZnuHng1545aClcW
- H06iaOrSkrHCrRJwgRbF6CkeF5Vx33mFR5YHmgu2LxK/48hNmR+K6nerFOUZ+A2CD5su1aPJ8RW
- Kef0SDQAINaAw55moGd8SfYyc3owPMmg4hANctCswgRTezdsC4cgHIvH6kLLGT8Vd9cebsl2XuC
- jsxzOsn87h1vxzPwoC+6xNDAZpaxYZVPA/n9JyOeigyLp290ZW82CvBH7dEM1vUlZ43Cd9Ipaet
- IBQ11LzPs4t7zkSo5NJJowAn/VKsnl0XvTnMBFQUCfnccGQMXubToQT2Ooe7f+Rtfwi/+QpcWLr
- TRlGHgJF5/qPbYJ
-X-Received: by 2002:a05:600c:524e:b0:4a1:db17:c7e6 with SMTP id
- 5b1f17b1804b1-4a1db17ca8cmr182478485e9.2.1792488127883; 
- Tue, 20 Oct 2026 02:22:07 -0700 (PDT)
-Received: from white-mocha.local ([2a01:599:842:3b3c:7750:5d83:528b:95b1])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e1d8244e1sm4629932f8f.44.2026.10.20.02.22.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Oct 2026 02:22:07 -0700 (PDT)
+ c=relaxed/relaxed; t=1792488181;
+ h=Received-SPF:DKIM-Signature:X-UI-Sender-Class:Received:Message-ID:
+ Date:MIME-Version:User-Agent:Subject:To:References:Content-Language:
+ From:Autocrypt:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+ X-Provags-ID:X-Spam-Flag:UI-OutboundReport;
+ bh=BU0cw3qaKNUmCaNmnlDeC493DVsjClomaABg5Hstk8E=;
+ b=SXbNsKEnBpE27y2WbTndFcf/trTMdVA4eAoCMrCjMvEruvjE0gfwj+vaRp4DcpqNG2rq
+ u++tNypO5zBSErOWmhYQCfTFymgfTfd9C+hKjfU0jeIh3OGsiv1jT/X7WHvmX/OlIC8UM
+ qg6CQix7mJ8ZEU3HDf5BZ7Thz4chuisvjWBId4Zk4Oec68bXRoqFEsEE5005JvG6DpCWF
+ rCwC9jD1u2WkSH8XQ2+JZpxXcv2tdXlpw7x+xldUmBTNhdT9i3vnmdFWYvsHOOUgmJSQ1
+ YnH2oHy/kR4y46Ax0/X7qrq4Psdqz0uWjrLBZ/N4hHIOyptWJU+R4HLmZlJBtxwya1g==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=gmx.de;
+ dkim=pass header.d=gmx.de header.i=fiona.klute@gmx.de header.a=rsa-sha256
+ header.s=s31663417 header.b=rA4E5suh; 
+ arc=none smtp.remote-ip=212.227.15.15
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.15.15;
+ helo=mout.gmx.net; envelope-from=fiona.klute@gmx.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmx.de header.i=fiona.klute@gmx.de header.a=rsa-sha256
+ header.s=s31663417 header.b=rA4E5suh
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7E9C960830
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:22:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1792488173; x=1793092973; i=fiona.klute@gmx.de;
+ bh=BU0cw3qaKNUmCaNmnlDeC493DVsjClomaABg5Hstk8E=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=rA4E5suhiyKNzePedulU4sdFJGRtW+5HiMN07EURJwOskqGmUkYE6daPJ29aNUOu
+ WV+vvI90nsJJOSYhccc0aP7OnwnesFtsXRVxlv06WsCFfupLe3YB32kqHSvyw+7S6
+ 2YDtjg+rzOJeTB2HRfBoPxU6vl55KhNCDuxA6OTAyih2laPdIklshb5cjTSsllGYk
+ SIVMQkO0juHX4rm8/bd2oqVZIROghiqe6+4pdm6J1HTRT8as6WulFM7dnTfSAgKkY
+ fWHNMl6RTmnpKCzJrC1BkAbJ/CZiVHCKfSpE36PVP/CyKOn9trv5GjooCbba0kLX9
+ vnkQBUO8QkSPk5ef/g==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MNKhs-1wyo1H1wAE-00Xnfp; Tue, 20
+ Oct 2026 11:22:53 +0200
+Message-ID: <f27b3197-5655-45a2-9b2b-5101673516fd@gmx.de>
+Date: Tue, 20 Oct 2026 11:22:52 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH] spi: aspeed: Add read timing calibration
-From: Tan Siewert <tan.siewert@9elements.com>
-To: Cooper Huang <cooper_huang@aspeedtech.com>
-Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
- Joel Stanley <joel@jms.id.au>, u-boot@lists.u-boot-project.org, 
- Chin-Ting Kuo <chin-ting_kuo@aspeedtech.com>, 
- =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Ryan Chen <ryan_chen@aspeedtech.com>, 
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Tom Rini <trini@konsulko.com>, 
- Peng Fan <peng.fan@nxp.com>, Tan Siewert <tan.siewert@9elements.com>, 
- Vince Chang <vince_chang@aspeedtech.com>
-In-Reply-To: <20261019-spi-aspeed-calibration-v1-1-800d80c9939f@aspeedtech.com>
-References: <20261019-spi-aspeed-calibration-v1-1-800d80c9939f@aspeedtech.com>
-Date: Tue, 20 Oct 2026 11:21:58 +0200
-Message-Id: <179248811801.62553.17352762992867794012.b4-review@b4>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792488118; l=11321;
- i=tan.siewert@9elements.com; s=20260527; h=from:subject:message-id;
- bh=66Wqb6ClPMr49kBBNN7reFc22sf+xFb771w8xttLVhA=;
- b=hcWB6UFeMb9HTj4nti2FCWbL6/1184glqxq7JF46yqrSqhR2Y1JvIrd+TOakJCwRsryY5UC7X
- 2erah8Vew9hAZa0pXNtfcxunwL8YiK49RUW3jc5QL1z0zYr0u1Qwf1/
-X-Developer-Key: i=tan.siewert@9elements.com; a=ed25519;
- pk=ORQd/zQf+LsAvJGXP1CjQwVO6t6iEOGq/eGUsmRVTG4=
+User-Agent: Mozilla Thunderbird
+Subject: Re: Security: "Permit write access only to listed variables"
+ restricts only environment loading
+To: Marek Vasut <marex@nabladev.com>, u-boot@lists.u-boot-project.org,
+ Tom Rini <trini@konsulko.com>
+References: <f23265e6-5dff-414e-94ec-ab7312a0e1dd@gmx.de>
+ <542b5753-9c28-4565-b03f-f7b300351821@nabladev.com>
+ <0fea15c6-edd3-4f55-a347-d799aa86ad4d@gmx.de>
+ <a3ece217-3d96-409b-ad60-623a5cab07f2@nabladev.com>
+Content-Language: en-US, de-DE-1901, de-DE
+From: Fiona Klute <fiona.klute@gmx.de>
+Autocrypt: addr=fiona.klute@gmx.de; keydata=
+ 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
+In-Reply-To: <a3ece217-3d96-409b-ad60-623a5cab07f2@nabladev.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:ge50+KJUTufc+sr4x/cCNG+ROR7X/KLrYcaQKG7Z1h7H75DmHPv
+ 4lZCVIVs6SWMMfA2+gcmrEiKk2onCu6Rx4NK1hhFQ16Dsysx7+IQKZr+K6EK/Qm9w3nDAjQ
+ cWwFV35GzJbqdf2i2Yq2FJQPqZ8pyc02xpC5azFifPD7/kJGj71eWW9a/nMCnVIAKj3Gh6v
+ qRXHS0YBR/rIM1LAlRzAw==
+UI-OutboundReport: notjunk:1;M01:P0:3sFy5GBg8Kg=;5MuTNl2LYpAlW5SXn6GUXg2WlCU
+ 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
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -196,346 +288,95 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
+X-Spam-Status: No, score=-4.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-> At high SPI clock frequencies, the controller must delay the sampling
-> of the read data, and the right delay depends on the board. Port the
-> read timing calibration from the Linux driver: golden data is read at
-> HCLK/16, then the timing settings of each HCLK divider, from the
-> fastest one allowed down to HCLK/5, are scanned until the reads match.
-> 
-> Until the calibration is done, the flash is accessed at HCLK/16, as in
-> Linux, since faster settings may not work without the timing
-> compensation.
-> 
-> Compared to Linux:
-> - each setting is checked by reading 1KB twice, instead of 16KB ten
->   times, to keep the boot time short.
-> - the AST2600 setting picked in the passing window is mapped back to
->   the input delay that was tested. Linux writes the column index as
->   the delay, which is one step off.
-> 
-> Based on the following Linux commits:
-> - eeaec1ea05c0 ("spi: aspeed: Calibrate read timings")
-> - 31dcc7e1f8a9 ("spi: aspeed: Update clock selection strategy")
-> - efb79de36e94 ("spi: aspeed: Improve timing calibration algorithm
->   for AST2600 platform")
-> 
-> Link: https://git.kernel.org/torvalds/c/eeaec1ea05c0
-> Link: https://git.kernel.org/torvalds/c/31dcc7e1f8a9
-> Link: https://git.kernel.org/torvalds/c/efb79de36e94
-> Signed-off-by: Cooper Huang <cooper_huang@aspeedtech.com>
->
-> diff --git a/drivers/spi/spi-aspeed-smc.c b/drivers/spi/spi-aspeed-smc.c
-> index e60bd77387a..57156122e85 100644
-> --- a/drivers/spi/spi-aspeed-smc.c
-> +++ b/drivers/spi/spi-aspeed-smc.c
+Hi Marek!
 
-*snip*
+Am 19.10.26 um 17:57 schrieb Marek Vasut:
+> On 10/19/26 3:37 PM, Fiona Klute wrote:
+>=20
+> Hello Fiona,
+>=20
+>>>> The kconfig description of CONFIG_ENV_WRITEABLE_LIST says:
+>>>>
+>>>>> If defined, only environment variables which explicitly set the 'w'
+>>>>> writeable flag can be written and modified at runtime. No variables
+>>>>> can be otherwise created, written or imported into the environment.
+>>>>
+>>>> This does not match actual behavior, "env set" and "env import" can=
+=20
+>>>> modify variables as usual.
+>>>
+>>> Right, and if the attacker has access to these commands, that means=20
+>>> the attacker has shell access to U-Boot, at which point they can do=20
+>>> pretty much anything with the system. If the attacker has shell=20
+>>> access to U- Boot, it is game over. For CONFIG_ENV_WRITEABLE_LIST to=
+=20
+>>> be usable, the U-Boot shell access must be blocked (bootdelay set to=
+=20
+>>> -2).
+>>>
+>>>> The only thing that is blocked is loading variables without the=20
+>>>> "writable" flag from stored environment on boot (and "env load"=20
+>>>> based on what I see in the code, but I didn't test it).
+>>>>
+>>>> As far as I can see, the issue has existed since the option was=20
+>>>> added in commit d045cbacf2529266bb312add023e12c0d400bf67 ("env: Add=
+=20
+>>>> support for explicit write access list"), where the commit message=20
+>>>> explicitly states
+>>>> "env import" and "env set" would be blocked.
+>>>>
+>>>> I consider this a security issue because preventing modifications=20
+>>>> that would circumvent security measures seems to be the whole point=
+=20
+>>>> of CONFIG_ENV_WRITEABLE_LIST, and it only does a small part of what=
+=20
+>>>> it's documented as doing. For my current setup restricting what can=
+=20
+>>>> be changed in stored environment is enough, so I don't have a strong=
+=20
+>>>> opinion on whether description or code need to be fixed.
+>>> Please see above, does the security concern persist if U-Boot shell=20
+>>> access is not available ?
+>>
+>> As I wrote, for my setup the loading restriction is sufficient,=20
+>> precisely because I'd block shell access in production.
+>>
+>> But that doesn't change that the fact that the description promises=20
+>> security restrictions that don't exist, and if someone relies on those=
+=20
+>> without checking they'll likely get into trouble. That why I consider=
+=20
+>> this a security issue.
+>>
+>> And for someone who does check (like I did) it's rather concerning if=
+=20
+>> a write access the documentation says will be blocked actually works,=
+=20
+>> and it wastes time figuring out what's actually going on, even if the=
+=20
+>> end result is "what I really need works, the documentation is wrong".
+>>
+>> It's fair to say there's no point in having environment restrictions=20
+>> if someone has shell access, but having documentation describing such=
+=20
+>> restrictions suggests otherwise (U-Boot does a lot of things, I don't=
+=20
+>> know everything other people might get up to!). Again, I think fixing=
+=20
+>> the documentation would be an appropriate way to handle this, but=20
+>> that's not my call.
+> Would you be willing to send a patch which updates/improves the=20
+> documentation ?
+>=20
+> Thank you for your help!
 
-> @@ -724,6 +736,239 @@ static int aspeed_spi_exec_op_user_mode(struct spi_slave *slave,
->  	return 0;
->  }
->  
-> +/* Read timing calibration, ported from the Linux driver */
-> +static bool aspeed_spi_check_reads(struct aspeed_spi_flash *flash,
-> +				   const u8 *golden_buf, u8 *test_buf)
-> +{
-> +	int i;
-> +
-> +	for (i = 0; i < CALIBRATE_REPEAT_COUNT; i++) {
-> +		memcpy_fromio(test_buf, (void __iomem *)flash->ahb_base,
-> +			      CALIBRATE_BUF_SIZE);
-> +		if (memcmp(test_buf, golden_buf, CALIBRATE_BUF_SIZE))
-> +			return false;
-> +	}
-> +
-> +	return true;
-> +}
-> +
-> +/* Check that enough words are neither all 0's nor all 1's */
-> +static bool aspeed_spi_check_calib_data(const u8 *buf, size_t len)
-> +{
-> +	const u32 *buf32 = (const u32 *)buf;
+I've just sent a patch. :-)
 
-Compared to Linux we only have a 1 KiB buffere here (64 out of 256 words), i.e.
-25% of the data has to be neither 0x00 nor 0xff.
-What if the first 1 KiB has more padding? That'd be enough to be counted as "too
-uniform" and the flash would run at max_hz without calibration.
-
-Can we scale the threshold to the buffer size maybe (len / 256 to match Linux),
-or keep a bigger buffer and only shorten the repeated reads? Either way, please
-mention it in the "Compared to Linux" list in the commit message.
-
-> +	u32 cnt = 0;
-> +	size_t i;
-> +
-> +	for (i = 0; i < len / sizeof(u32); i++) {
-> +		if (buf32[i] != 0 && buf32[i] != 0xffffffff)
-> +			cnt++;
-> +	}
-> +
-> +	return cnt >= 64;
-> +}
-> +
-> +static u32 ast2400_fread_tpass(int i)
-> +{
-> +	return (i / 2) | ((i & 1) ? 0 : TIMING_DELAY_DI);
-> +}
-> +
-> +/* The timing register is shared by all CS, only CE0 is calibrated. */
-> +static int ast2400_spi_calibrate(struct udevice *dev, u32 hdiv,
-> +				 const u8 *golden_buf, u8 *test_buf)
-> +{
-> +	struct aspeed_spi_priv *priv = dev_get_priv(dev->parent);
-> +	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
-> +	u32 cs = slave_plat->cs[0];
-> +	struct aspeed_spi_flash *flash = &priv->flashes[cs];
-> +	uintptr_t timing_reg = (uintptr_t)&priv->regs->timings[0];
-> +	u32 shift = (hdiv - 1) * 4;
-> +	u32 timing_base;
-> +	u32 timing_val;
-> +	int pass_cnt = 0;
-> +	int i;
-> +
-> +	/* Other CS reuse the CE0 timing, require three passes as well. */
-
-The code reads more like that other CS can't change the shared timing register?
-So maybe reword it to something like "Only check that the current CE0 setting
-reads back correctly three times." or so?
-
-> +	if (cs != 0) {
-> +		for (i = 0; i < 3; i++) {
-> +			if (!aspeed_spi_check_reads(flash, golden_buf,
-> +						    test_buf))
-> +				return -EIO;
-> +		}
-> +
-> +		return 0;
-> +	}
-> +
-> +	/* The AST2400 SPI controller has its timing register at 0x14. */
-> +	if (priv->info == &ast2400_spi_info)
-> +		timing_reg = (uintptr_t)priv->regs + 0x14;
-> +
-> +	timing_base = readl(timing_reg) & ~(0xfu << shift);
-> +
-> +	for (i = 0; i < (TIMING_DELAY_HCYCLE_MAX + 1) * 2; i++) {
-> +		timing_val = ast2400_fread_tpass(i);
-> +		writel(timing_base | (timing_val << shift), timing_reg);
-> +
-> +		if (!aspeed_spi_check_reads(flash, golden_buf, test_buf)) {
-> +			pass_cnt = 0;
-> +			continue;
-> +		}
-> +
-> +		/* Use the middle one of three consecutive passing settings. */
-> +		if (++pass_cnt == 3) {
-> +			timing_val = ast2400_fread_tpass(i - 1);
-> +			writel(timing_base | (timing_val << shift), timing_reg);
-> +			return 0;
-> +		}
-> +	}
-> +
-> +	return -EIO;
-> +}
-> +
-> +/* Column 0 is without input delay, columns 1 to 16 are input delays 0 to 15 */
-> +static u32 ast2600_timing_val(int hcycle, int col)
-> +{
-> +	if (!col)
-> +		return hcycle;
-> +
-> +	return TIMING_DELAY_DI | hcycle | ((col - 1) << 4);
-> +}
-> +
-> +/*
-> + * Each CS has its own timing register. Use the center of the longest
-> + * passing window of input delays within a single HCLK cycle delay.
-> + */
-> +static int ast2600_spi_calibrate(struct udevice *dev, u32 hdiv,
-> +				 const u8 *golden_buf, u8 *test_buf)
-> +{
-> +	struct aspeed_spi_priv *priv = dev_get_priv(dev->parent);
-> +	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
-> +	u32 cs = slave_plat->cs[0];
-> +	struct aspeed_spi_flash *flash = &priv->flashes[cs];
-> +	u32 *timing_reg = &priv->regs->timings[cs];
-> +	u32 shift = (hdiv - 2) * 8;
-> +	u32 timing_base;
-> +	u32 timing_val;
-> +	int best_hcycle = 0;
-> +	int best_col = 0;
-> +	int best_len = 0;
-> +	int hcycle;
-> +	int start;
-> +	int col;
-> +
-> +	timing_base = readl(timing_reg) & ~(0xffu << shift);
-> +
-> +	for (hcycle = 0; hcycle <= TIMING_DELAY_HCYCLE_MAX; hcycle++) {
-> +		start = 0;
-> +
-> +		for (col = 0; col <= TIMING_DELAY_INPUT_MAX; col++) {
-> +			timing_val = ast2600_timing_val(hcycle, col);
-> +			writel(timing_base | (timing_val << shift), timing_reg);
-> +
-> +			if (!aspeed_spi_check_reads(flash, golden_buf,
-> +						    test_buf)) {
-> +				start = col + 1;
-> +				continue;
-> +			}
-> +
-> +			if (col - start + 1 > best_len) {
-> +				best_len = col - start + 1;
-> +				best_hcycle = hcycle;
-> +				best_col = start + best_len / 2;
-> +			}
-> +		}
-> +	}
-> +
-> +	if (best_len < TIMING_MIN_PASS_WINDOW)
-> +		return -EIO;
-> +
-> +	timing_val = ast2600_timing_val(best_hcycle, best_col);
-> +	writel(timing_base | (timing_val << shift), timing_reg);
-> +
-> +	return 0;
-> +}
-> +
-> +static bool aspeed_spi_need_calibration(struct udevice *dev)
-> +{
-> +	struct aspeed_spi_plat *plat = dev_get_plat(dev->parent);
-> +	struct aspeed_spi_priv *priv = dev_get_priv(dev->parent);
-> +	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
-> +
-> +	/* The calibration is done when the read direct mapping is created. */
-> +	return CONFIG_IS_ENABLED(SPI_DIRMAP) && priv->info->calibrate &&
-> +	       slave_plat->max_hz >= plat->hclk_rate / CALIBRATE_MAX_HDIV;
-> +}
-> +
-> +static int aspeed_spi_do_calibration(struct udevice *dev)
-> +{
-> +	struct udevice *bus = dev->parent;
-> +	struct aspeed_spi_plat *plat = dev_get_plat(bus);
-> +	struct aspeed_spi_priv *priv = dev_get_priv(bus);
-> +	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
-> +	const struct aspeed_spi_info *info = priv->info;
-> +	u32 cs = slave_plat->cs[0];
-> +	struct aspeed_spi_flash *flash = &priv->flashes[cs];
-> +	uintptr_t ce_ctrl_reg = (uintptr_t)&priv->regs->ce_ctrl[cs];
-> +	u8 *golden_buf;
-> +	u8 *test_buf;
-> +	u32 clk_setting = 0;
-> +	u32 ctrl_val;
-> +	u32 hdiv;
-> +	int ret;
-> +
-> +	if (!aspeed_spi_need_calibration(dev))
-> +		return 0;
-> +
-> +	if (info == &ast2400_spi_info)
-> +		ce_ctrl_reg = (uintptr_t)&priv->regs->ctrl;
-> +
-> +	test_buf = malloc(CALIBRATE_BUF_SIZE * 2);
-> +	if (!test_buf)
-> +		return -ENOMEM;
-> +
-> +	golden_buf = test_buf + CALIBRATE_BUF_SIZE;
-> +
-> +	/* Read the golden data at HCLK/16. */
-> +	ctrl_val = flash->ce_ctrl_read & ~info->clk_ctrl_mask;
-> +	writel(ctrl_val, ce_ctrl_reg);
-> +	memcpy_fromio(golden_buf, (void __iomem *)flash->ahb_base,
-> +		      CALIBRATE_BUF_SIZE);
-> +
-> +	if (!aspeed_spi_check_calib_data(golden_buf, CALIBRATE_BUF_SIZE)) {
-> +		dev_dbg(dev, "calibration area too uniform, skipped\n");
-
-Why's this dev_dbg? In linux it's dev_info and this information seems useful to
-be reported to the user.
-
-> +		clk_setting = info->get_clk_setting(dev, slave_plat->max_hz);
-> +		goto out;
-> +	}
-> +
-> +	for (hdiv = info->min_hdiv; hdiv <= CALIBRATE_MAX_HDIV; hdiv++) {
-> +		u32 hdiv_freq = plat->hclk_rate / hdiv;
-> +
-> +		if (hdiv_freq > slave_plat->max_hz)
-> +			continue;
-> +
-> +		clk_setting = info->get_clk_setting(dev, hdiv_freq);
-> +		writel(ctrl_val | clk_setting, ce_ctrl_reg);
-> +
-> +		ret = info->calibrate(dev, hdiv, golden_buf, test_buf);
-> +		dev_dbg(dev, "HCLK/%u: %s\n", hdiv, ret ? "FAIL" : "PASS");
-> +		if (!ret)
-> +			break;
-> +	}
-> +
-> +	if (hdiv > CALIBRATE_MAX_HDIV) {
-> +		dev_warn(dev, "no good read timing found, using HCLK/16\n");
-> +		clk_setting = 0;
-> +	}
-
-get_clk_setting sets flash->max_freq too. If every divider fails it'd stay at
-HCLK/5 while the controller runs at HCLK/16.
-I mean, it _should_ have no effect as it's only called if "flash->max_freq == 0"
-in claim_bus, but the stored value would be wrong.
-
-> +
-> +out:
-> +	flash->ce_ctrl_user &= ~info->clk_ctrl_mask;
-> +	flash->ce_ctrl_user |= clk_setting;
-> +	flash->ce_ctrl_read = ctrl_val | clk_setting;
-> +	writel(flash->ce_ctrl_read, ce_ctrl_reg);
-> +	free(test_buf);
-> +
-> +	return 0;
-> +}
-> +
->  static int aspeed_spi_dirmap_create(struct spi_mem_dirmap_desc *desc)
->  {
->  	int ret = 0;
-> @@ -779,6 +1024,10 @@ static int aspeed_spi_dirmap_create(struct spi_mem_dirmap_desc *desc)
->  
->  	writel(priv->flashes[cs].ce_ctrl_read, ce_ctrl_reg);
->  
-> +	ret = aspeed_spi_do_calibration(dev);
-> +	if (ret)
-> +		return ret;
-> +
->  	dev_dbg(dev, "read bus width: %d ce_ctrl_val: 0x%08x\n",
->  		op_tmpl.data.buswidth, priv->flashes[cs].ce_ctrl_read);
->  
-
-*snip*
-
-> @@ -1167,7 +1432,8 @@ static int aspeed_spi_claim_bus(struct udevice *dev)
->  
->  	dev_dbg(bus, "%s: claim bus CS%u\n", bus->name, slave_plat->cs[0]);
->  
-> -	if (flash->max_freq == 0) {
-> +	/* Stay at HCLK/16 until the read timing is calibrated. */
-> +	if (flash->max_freq == 0 && !aspeed_spi_need_calibration(dev)) {
-
-If dirmap_create fails before or during the calibration (e.g.
-aspeed_spi_decoded_range_config fails or aspeed_spi_do_calibration returns
--ENOMEM) then need_calibration stays true, so the clock is never raised and the
-flash silently stays at HCLK/16.
-
-Maybe add a per-flash "calibrated" bool or so for claim_bus to check instead and
-in the failure path fall back to the uncalibrated max_hz or at least print a
-warning?
-
-Tan
-
--- 
-Tan Siewert <tan.siewert@9elements.com>
