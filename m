@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7C48606A319
-	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 08:57:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02758606A31A
+	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 08:57:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bqWQdO6a;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=mD0nEgTV
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=H/SjRnCI;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=g+cxwnum
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9053160854;
-	Tue, 20 Oct 2026 08:57:02 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4164A4082C;
+	Tue, 20 Oct 2026 08:57:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4Q2fEeQWafcz; Tue, 20 Oct 2026 08:57:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 95FDD6083C
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792486621;
-	b=WktntZd8HOD/sDSLLu9FO8f8eg8ChE4SoU7xpahbcUqhRLXgL1HpYPQzZWXLoKTa2vnu
-	 VA31o3mwSeSt3Jy4JOv0mPuAsZBsSzcHzISt76/v4qrG61QFxtR/RpSwU2o5qym1xXPuE
-	 V1KLTy+r33Q7BPIFQQcQ5me84A4HydW+KPjuj/wX2dJGo/E0i5yhXaRf1PkIFru/OSfo+
-	 vydS85y8Gn10RjqdFfkjgu3HpvWorHZ2NSBDN0DSuUIwjiIQbbCNBwOWgDuQoEr1K7zd7
-	 dsHcJDQfpR2qgbcjvjVxjAsXINj8FZYa4lf4QinruYjz9I04d20gEkTqbn+wgLz5CSw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 23jixyUCpQUw; Tue, 20 Oct 2026 08:57:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6FE694081F
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792486664;
+	b=RwRNDx4sC4I+/A5o2A6F3/03KgQEYd3FJAgvEWhd8fTnJRl60D0Aj6C350+/yWocF7sI
+	 H5s5hhO5WGOoziD11u3Q6f9bZ6MdaH0268Ah4lijrkHho3Mg0XgBdDrm8Z9TU/m8hq8bG
+	 X53Z/aB9RfqnS53Px356eHBhWbbg0iawEJtOuNGreHM50Fsn4s+ZdcvUYPfhlru9m1zNg
+	 5cKZSysDLf7tIRrOkgKopHLulXVYp+gBcxVYKK6SjtKBYlY+Nj7O828c7dLXd7T+4bS1h
+	 rmlHBni5Qa3bJ1XVQypg6dO4q/9ShjY470FcssSgRjunqn31f8FNebEkCr9HHRWizjA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792486621;
+	c=relaxed/relaxed; t=1792486664;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -34,139 +34,140 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Reply-To:Errors-To;
-	bh=p7ASprC4lngBq9CCoLWZci5w8Xo/eEEtGPujgTQZtvQ=;
-	b=O0P8KtdPeHW02peHsIfhqXXO1NSL/VYwMbUiVLEhYUfX6qthQYRob3NcKPtVExwk1dxF
-	 7kL8ekKTP/uVoPqrtmbZla4AgbPjQyx+k0ekfpyzDOYcQHDyzoeLP/JNBmH5ZPYVWVgQS
-	 s+uw67yoDZ6qM1AiKsbHxrTAHKMZgw8sA0TgMO+Y6g2CQM4VYPgTWltiCmMFd17ABxYUt
-	 HSy6Ws+VdkJzKm3lq7bsMATDh3uva+2CTt2a8a3yguC2pBja6RrtBY5IyLCUoVG9/rrc7
-	 0/42I3igscfeMT8RR7vb1oWcB1n8zHWjfaLMsfvb+MyXAth6NyPMh9lw1xv28SjrusA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=w1dvuexSdkH7Yqr+disTfUQPOZQYTREvFn8YpJEaCZI=;
+	b=Y6mzVR/IktQeIL1GAAj6uHwVL6sGyjFDKUCaob2Bsgv+LQiXl4rLcgcL8nWinqJjKZTE
+	 suEvffp9BmTr5PxhvEB/lq3hgPibt1SJCYm/pUVvaD5J5Vq5VgFL5ERborQzyuT7VRHWT
+	 e16SewSV127UJNvW8F0uuj21hnShkZsMkS7egGwrfOPG4wx558y1OWawoK0HHtH462XTj
+	 LuV8V5wE91eLsM667/4rYRWPCouw9fPI22aSkdk5phaYCvh+0wfy/tC1C/GhzKbKhOGMl
+	 Fy2n9k3Q0qvIHaqdq8CkWUFpPlsQxYwp6Qgadum5gS6TSzInle7zpJb0V372m03yMsw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=g+cxwnum;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792486621;
-	bh=p7ASprC4lngBq9CCoLWZci5w8Xo/eEEtGPujgTQZtvQ=;
+	d=lists.u-boot-project.org; s=default; t=1792486664;
+	bh=w1dvuexSdkH7Yqr+disTfUQPOZQYTREvFn8YpJEaCZI=;
 	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=bqWQdO6aDALn2Z1HN1EJ5iQv4pnZG1Lw7IuepZKT5tlscpGVHoxsbjjteLa5kmRNw
-	 4ezS81f6TwpKLxYLThfIuVReRHd8ZafKlDp1xrzeoqAnaVqMDgY27Je9vHCApkjFt7
-	 GBMLPwEriS3C2dFgdUk1X26qPYkHK1Vmu15fCiNGeuoup0d9mavIdAxdMLur27MVDK
-	 CMBgp/Q80WUq968Kff/HdaXQqcge1zMmPQfGa2jpnArPsrdQqexIozbovVgtlOAv0i
-	 y6DvqHxg00HmdEibk4o9xr8Xxe3qW2aLwuno14jAB/66ObtNnMOeBUxxaadTIbo7AV
-	 uSCRIbeD3yz+Q==
+	b=H/SjRnCI4s6qyLscSoBU8SWw3LDmbo0T12na8QxSq8j8O63KNEJPDItVoT6Ihy+bQ
+	 0Ez4IOi+H9UJilf93sLyMCY4k6MIGVX97TNdhd9TrtIe2tk82hKaCrYroQb3vfvXYG
+	 lhAMWXj6u8mkzi11I90vOggvBe4nLG7P9qjZlMLQncrwKfDKr1+zO3eY2XHGFpcaUi
+	 Yc7n0lu5DvHbo2RJ4TPKRpZvu99prYobbg9uQtq5NYI1L/qcFzpT0ar2RJoIvaijvP
+	 FtkAMfSXGzsPOGDJwCc7sgu+ujxLJ+hNvIQITLF29K207Gt31L3t7kwDRMM7DemAiu
+	 9jry3XqEAfffA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 95FDD6083C;
-	Tue, 20 Oct 2026 08:57:01 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 0C38F279
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 08:57:00 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6FE694081F;
+	Tue, 20 Oct 2026 08:57:44 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0ABFB279
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 08:57:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id DF36740328
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 08:56:59 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id DDF9F4081F
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 08:57:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NCw5VENVlca8 for <u-boot@lists.u-boot-project.org>;
- Tue, 20 Oct 2026 08:56:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org A532B4016F
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792486619;
- b=Ga2fZ0gQEiv0K4vmpwxblfTNQ/+F4Rz4uTZzCZaPf4sphhENZL6QozeOtZHTZUs0t6xH
- zJs/8+lQhBp/z7xcwwWodg3MLmb0B/3rcRdilbNUTmznezidz7IqtK+9qgCt8tNysCNSQ
- JvWx4ENLWwKNRNU9Ey+hQ2yFHeU871F2hU0DbqnEwwopUT2NvtI9u7uyEvkzVUI7hPsSF
- CggqlBhUAELqGSwRGfegq75dPJuYBzE6BPtER4j4hRUYKKvd6UQXjOrXxYrJOFJ4qpOPL
- +I/rn3gpYbH1O7fxZQmZHIUR036kg+HmJML0W1AcxGgFqnKBNqAuJxGLQOrLpbMg7Tw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QU50r31dPXoH for <u-boot@lists.u-boot-project.org>;
+ Tue, 20 Oct 2026 08:57:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org ED6AD40818
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::331"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792486662;
+ b=QZilyjgc3quVUa2EZ38x/mCY4xe6UW9vr6m61llCax91wyEkgTnlTQje3Muz4d8Pqps4
+ qoQsIn7HxWYemCzkQFArszkw7ACkgSk07vUpoM7ZO2WK15KWlN1BUU4tYvJ4IvIC65Zvu
+ dXocnT1HxdeR4X/M4ne2JxC6hxj0/Q7d7Jpe+c1gee5LpDlmhVRoe0fJYE3tAFy8uAntj
+ j6mBrBCABY2AsvIrGNbBk2nx2sezflBAlnJtylXPdXuc1G9Qub6bPuvxKjMC/Nmm6BCOa
+ 2wsVH/b4Ap9+QAJvhE4pFSodZ/YJPQl69EAlxBS59n05svlvwJ3Z/u6HSzMXe1QSGHg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792486619;
+ c=relaxed/relaxed; t=1792486662;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Message-ID:Date:MIME-Version:User-Agent:From:Reply-To:Subject:To:Cc:
  References:Content-Language:Autocrypt:Organization:In-Reply-To:
  Content-Type:Content-Transfer-Encoding;
- bh=p7ASprC4lngBq9CCoLWZci5w8Xo/eEEtGPujgTQZtvQ=;
- b=aunYOu4CMWPoSydT7PghFmuUH3Q10/RjzB244e6CAG41f6XsPltF8TegxzyD86FQgYNN
- /fCNent+ZnSgwWQELTDAQuDKp7WJjUPL9JlfhbwzX+uxWk8qJT6M9BbNsUpOJ1RiffnH6
- cmTQOam+QddqA+lb6XyhnDKOyBRibDcLX89t7fWLavm2Pu9Ym9uU675eGOEYtu7PMm28f
- wJBbVE1ZcAC05nfjT6SRAa8DfnaSCbM1cFNCZGI3VxObb0+3UsHZVRcRdsOe7TOXiKdt+
- zhRYo5mAbc9CpvPRaNSzwfZuOc5MGGQnq2G9AkXyi41bfMGDa7MCIsNxbntxvCDhxZQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=w1dvuexSdkH7Yqr+disTfUQPOZQYTREvFn8YpJEaCZI=;
+ b=ALGvrteMX+lZYpUhbCJfe7ARwTJRs8hOwge3e3geRKCrnupjvaD4EbDteFoyio2S0iel
+ cUp9Nx3pic5T0uytfBungyuik9jEMocspjV2//kgHwZVdWpS00t5BFQbEfStF2zlkz/do
+ 5I9tmb0tRuf5sz0GNP1t4MXT0FniNY7KACrOTYUf4RPZ2TDfDZGz9+S3kcAUnql+veex6
+ PpFmihB0W6KQlMJD00qaw6EUHLGfgWzwxoMaPi4Cnl2KE012GLY7qt8AAxiCJ51pCehhu
+ F3TAQbdsn3Zdz0DHk4WevgaWPO3OApHon03ToOHd9R2GChMAFbB+Dpd8oHZXQmG8mPg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=linaro.org;
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=mD0nEgTV; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
+ header.s=google header.b=g+cxwnum; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::331"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
+ client-ip=2a00:1450:4864:20::331; helo=mail-wm1-x331.google.com;
  envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=mD0nEgTV
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A532B4016F
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 08:56:58 +0000 (UTC)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4a16aaf2067so36685395e9.0
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 01:56:57 -0700 (PDT)
+ header.s=google header.b=g+cxwnum
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id ED6AD40818
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 08:57:41 +0000 (UTC)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4a1df146015so17251355e9.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 01:57:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792486616; x=1793091416;
+ d=linaro.org; s=google; t=1792486659; x=1793091459;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=p7ASprC4lngBq9CCoLWZci5w8Xo/eEEtGPujgTQZtvQ=;
- b=mD0nEgTVZRnXKRaQVNhBmvIEqsQVDhX6m04/LtcxLqCX8uZOogetj8RmwKQRZQ8LoZ
- dblp0a0WlC5kYjXWAcD55GOYmxWkAO0Nm+xLKZABtZITx7ztHfTfF7/2IIsd84NoQIGL
- RVS49d1jMg0jzL55gSt7ViY0WSIR8cc0jzjju0aGKLJ3dgp0OKXIx2WyOZoBc5jGIBAA
- couSvLfF25ZjDBfQSss1l8bbpEtYkJTxLuGDdphxLTgKl+wPcTlLGWXmohVz4iaKRC+L
- 478RuiCFAauOgK/uS9GypFLYyFj4MGncOHOXoa2Rm09f0+ZrvbJ+pNgJABC8VJZRTUzP
- i53A==
+ bh=w1dvuexSdkH7Yqr+disTfUQPOZQYTREvFn8YpJEaCZI=;
+ b=g+cxwnumCPvrPU+BJTQk60VlSoadFkv16nE9CVrqbfC6v2Xh2eceN6z12PVFBatep6
+ aIyWL23S71iKg91LoXMEmXpD/aUoNvm5Q1twNtbPHfvDTjmEeLqMjiSlX6BWXA7icjVq
+ D4CywaIzmxREWSCTpRGQRtFpn1eAnbioRoiT2bG7ewqOwqjbwamPcqvx9jouLxtJpCQr
+ BIHi1IZv3VaD+dXTSXPjxO3wlxUHRdALYlz5plt37YclAJ05MO7iVXuMSHGYrt2ajRUW
+ +1U97/MXgAMDv2iYDOGqi0PbKAzqVdma1KdCeoua633s64HYRzrccHRJ3DCqJ1iJ0L8Y
+ Kb7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792486616; x=1793091416;
+ d=1e100.net; s=20260707; t=1792486659; x=1793091459;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=p7ASprC4lngBq9CCoLWZci5w8Xo/eEEtGPujgTQZtvQ=;
- b=x9pvFrlc3wZ4EaEM1vtxggYbsDExJZvcpmrN1ypAkHF+3dDXBN06uW3YgNfnbrTV4G
- ICBjVd/Zm3fjM08PIf0KCTMYnN7SUP4LqIxId4B9hi7Kah1rrOOMDUyZEbb8pC3TCklL
- 4sFy5FpYQA1Vl15dRib9v/26+1gMEmuzNVGf5FtbL7foK1Gm2MjM6n4b4TJoVp4ukMv+
- eCP6MsO7z3DpZeUVVX6YHUrZMcrhhXHvq7Tt2NGIgwXTQJwspPsQeD5NRuoWTvIDyZee
- 9IgQ2dvIUZDYPLQQs1YGjgbCx+O+iNyh2eyky+In4rz6lIN3UAqcqUTl1oK1ZhX9O6zK
- CJow==
+ bh=w1dvuexSdkH7Yqr+disTfUQPOZQYTREvFn8YpJEaCZI=;
+ b=pz4ta4L+w69wx9W7ZOhkGdvQ6eBFaOeIWGHG2ccnUF+EkhHurM5rC2dMlr74Vck3eW
+ Ih+2IOXGuIK5Q9OcgmlbvJ4dfyotQ/xak1pBCbe9R6DDGwjK1FkeunoZ7BaJUpJLabXF
+ wrs9zav9oioTQ+Yk8aZ3es+AcDsIL8dAXqKsx9IWUHr+JK/o+AYsDqbRfbgBU8Ugslcg
+ Hhw+6B3sccaXQHimXy4dxj5RHfCLtmD3H+Q/xGbtxk2rKJzEjQ4ZIZrBpTHMXyJ/PIow
+ 3HWJP6j35qgTb6UEL1isAYR7/j2HhDqtZVBTtGmB908fj6UCOOJ4LiF/E7PET4oiZ8Wv
+ RDkA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBx8mh7gKTJiOxJ+YEG5OQMhOmcKxlQex2H88UZleuULK9d0VHe+7pHzQDLkCDbSvgHnKHxFUMQ=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYI+LtsrtJ8CbWJ4wl9VGCs5Cw9Lgp6S/IaF652uXqmIdCz1kDTd
- rSrj2ifGDrLno7/pSko+Q9oBocY7L4//wYedR44vORBP795H9yyF/4LSHlKP1Qn02/w=
-X-Gm-Gg: AYBFou2wkKYMROU/CPSUQ74Tt4Q4b0TwuiwPBmiiEZed50OR2N3pscYrqMztPuiTBxW
- Kem2FWpP5c//Mu0RjRj6zPycx/Ytqqbm+lCKknyJVO8k1SElrmnKBakdU/U/kAInVE/mel3WTf6
- HCzShGaZhL6AM3WCRImpFA2jQODVhblHME1rdXvo7FJXDNpPSSOfBJiB97BJiHN5naKZ11ir7UP
- 1br5ilZ+1mbJQWx4hWTyPvJwqSz7A5jtROmn45Fd3VIZtbljB5xA389+PuijhxXmeQnz56Zt4l8
- DTHHJQ3Y62/9Iii5LFNjPrMRKbWa6FFTPhSI+GIdqI3lXWH6etvjxLOI7nhyrpyCzE159yD6nn6
- cV76ER/kT85IyfRXc4fQULpJdXypiogZREHw+QcQZyHJugLIffEZVr9C7LwgHDVFobHxHV/twFZ
- l8233jHXH8uelyz1804Kj4af0HnpKCiAHMwout0GxQvyB24FlrcKGbwSEtv7V8QzZcHdsBtJ7Rg
- SEt4c6vLnCGTEO2PNRWMry1UnerRiQ6dDLFbEZuOEqWNLuTldablMR4saEpWtfkhA==
-X-Received: by 2002:a05:600c:4503:b0:4a0:a34:6e7d with SMTP id
- 5b1f17b1804b1-4a1d7614e56mr234427885e9.18.1792486615796; 
- Tue, 20 Oct 2026 01:56:55 -0700 (PDT)
+ AKwUvBxFm/6jAmYn0IfqWKXNIyxvWLs9HqZ4Gcb18f5eGoDUuxWziGTUFN8wXoUhGh73dPCivoLlz/c=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYKhpr8oVjjjrueZyuRW6MzPfMPlGoXIemOOlZ8k4+gva3oL/OrU
+ bLucE8r5qFndxcYqkJTlyHFKH7DB+4xq9nSFheCyxxgxDV6TyKRmLwxRZYCgtqB75qw=
+X-Gm-Gg: AYBFou1StFlGLzPfd/aR6YnWuMJxMy6qO8xvc9CNPnabeFU2fu2keggvHVLIoBYLCB4
+ FQaVmwaxWBgFdkF9gtLWQP/ptNnqANcISQqOUYxx8U8srWsOluV7HrOZZxhb4Je0vIsqqXd6X4U
+ shxAjgYyW8snRrcINmIOH1Y/spjZW41Zpa0HIilwrt6vIkOVEbhtqYMWS1suMTxlwwH77x2lBh2
+ uZeITSeS0ZL9nrTcQKrmcxGnSZzbFnEnVsEHpz75ZbGDmtG0PC2Ju4+KMePFNiJd2Uw+rm7F7eY
+ 5oqLhce2o8YJQdenC6M/IesO0+1Fu/4vsYypHYGQ8IoXfSK030lBgEI26pEQECXClBHzMwSoQDI
+ kfjYrHSXPB1Xg1ngAbR+uPHpsNnxiqpWEa0VdTdbmS3NdtL859MNeGT/D30xPXUjkt7ZcR0l9ID
+ 2KyYq80SWm803/1EKSTihKza/Ocra2tQ8aYRo7JH+oIK6Dk93GDPUqTC3hrM5pj7R79TWnWA5sX
+ 585h9FAcqHLi+OAu9eIrBh/l57PA+5fdDcJO+iqGowdQ16ZP3u5Jg==
+X-Received: by 2002:a05:600c:4fce:b0:4a0:5b:7bc0 with SMTP id
+ 5b1f17b1804b1-4a1d7611f69mr234416385e9.21.1792486659130; 
+ Tue, 20 Oct 2026 01:57:39 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:e3a1:1a65:a394:be54?
  ([2a01:e0a:106d:1080:e3a1:1a65:a394:be54])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1cf04ffe9sm243052965e9.0.2026.10.20.01.56.54
+ 5b1f17b1804b1-4a1f2d324f8sm50363435e9.6.2026.10.20.01.57.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Oct 2026 01:56:55 -0700 (PDT)
-Message-ID: <e9095e7f-61ed-4fd4-a116-844b3c563170@linaro.org>
-Date: Tue, 20 Oct 2026 10:56:54 +0200
+ Tue, 20 Oct 2026 01:57:38 -0700 (PDT)
+Message-ID: <dbc27c68-4caf-445b-9aae-6ddf61bee7d7@linaro.org>
+Date: Tue, 20 Oct 2026 10:57:37 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v4 9/9] spl: ufs: add partition-based U-Boot loading
- support
+Subject: Re: [PATCH v4 8/9] spl: add UFS boot mode defines to spl.h
 To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
  u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
  Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
@@ -183,7 +184,7 @@ Cc: Tom Rini <trini@konsulko.com>, Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Alexey Charkov <alchark@flipper.net>, Peng Fan <peng.fan@nxp.com>,
  Daniel Golle <daniel@makrotopia.org>
 References: <20261019-spl_ufs-v4-0-61432d0b258c@oss.qualcomm.com>
- <20261019-spl_ufs-v4-9-61432d0b258c@oss.qualcomm.com>
+ <20261019-spl_ufs-v4-8-61432d0b258c@oss.qualcomm.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -210,7 +211,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20261019-spl_ufs-v4-9-61432d0b258c@oss.qualcomm.com>
+In-Reply-To: <20261019-spl_ufs-v4-8-61432d0b258c@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -225,234 +226,47 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 10/19/26 12:49, Balaji Selvanathan wrote:
-> Refactor spl_ufs.c to support loading U-Boot either from a raw
-> sector offset or from a named/numbered partition, controlled by
-> the Kconfig choice introduced in the previous commit.
+> Add UFS_MODE_RAW and UFS_MODE_FS defines to include/spl.h,
+> mirroring the existing MMCSD_MODE_* constants. These are used
+> by spl_ufs_boot_mode() to select between raw sector and
+> filesystem boot paths in spl_ufs_load().
 > 
-> The monolithic spl_ufs_load_image() is split into helper functions:
-> ufs_load_image_raw_sector() handles sector-based loading, and
-> ufs_load_image_raw_partition() resolves the target sector by looking
-> up a partition name first, falling back to partition number. A new
-> exported spl_ufs_load() function drives the boot-mode switch and
-> can be reused by other callers. A weak spl_ufs_boot_mode() hook
-> allows board code to override the default raw boot mode.
-> 
+> Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 > Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > ---
 > Changes in v4:
-> - No changes
+> - No changes in v4
 > 
 > Changes in v3:
-> - Renamed h_spl_load_read to spl_ufs_load_read
-> - Simplified partition selection logic in ufs_load_image_raw_partition
-> 
-> Changes in v2:
-> - Refactored the codes in common/spl/spl_ufs.c to use helper functions
->    to make the codes readable and clear
+> - No changes in v3
 > ---
->   common/spl/spl_ufs.c | 153 ++++++++++++++++++++++++++++++++++++++++++++-------
->   1 file changed, 134 insertions(+), 19 deletions(-)
+>   include/spl.h | 4 ++++
+>   1 file changed, 4 insertions(+)
 > 
-> diff --git a/common/spl/spl_ufs.c b/common/spl/spl_ufs.c
-> index cef1843f40f..dc871d0f22f 100644
-> --- a/common/spl/spl_ufs.c
-> +++ b/common/spl/spl_ufs.c
-> @@ -3,15 +3,19 @@
->    * (C) Copyright 2025 Alexey Charkov <alchark@gmail.com>
->    */
+> diff --git a/include/spl.h b/include/spl.h
+> index 390d18fd9d5..0b2527ee90d 100644
+> --- a/include/spl.h
+> +++ b/include/spl.h
+> @@ -29,6 +29,10 @@ struct legacy_img_hdr;
+>   #define MMCSD_MODE_FS		2
+>   #define MMCSD_MODE_EMMCBOOT	3
 >   
-> +#include <dm.h>
-> +#include <log.h>
->   #include <spl.h>
->   #include <spl_load.h>
->   #include <scsi.h>
-> -#include <errno.h>
-> -#include <image.h>
-> +#include <part.h>
-> +#include <blk.h>
->   #include <linux/compiler.h>
-> -#include <log.h>
-> +#include <errno.h>
->   
-> -static ulong spl_ufs_load_read(struct spl_load_info *load, ulong off, ulong size, void *buf)
-> +/* Block read callback for spl_load framework */
-> +static ulong spl_ufs_load_read(struct spl_load_info *load, ulong off,
-> +			       ulong size, void *buf)
->   {
->   	struct blk_desc *bd = load->priv;
->   	lbaint_t sector = off >> bd->log2blksz;
-> @@ -20,30 +24,141 @@ static ulong spl_ufs_load_read(struct spl_load_info *load, ulong off, ulong size
->   	return blk_dread(bd, sector, count, buf) << bd->log2blksz;
->   }
->   
-> -static int spl_ufs_load_image(struct spl_image_info *spl_image,
-> -			      struct spl_boot_device *bootdev)
-> +/* Load image from raw sector */
-> +static int ufs_load_image_raw_sector(struct spl_image_info *spl_image,
-> +				     struct spl_boot_device *bootdev,
-> +				     struct blk_desc *bd,
-> +				     unsigned long sector)
->   {
-> -	unsigned long sector = CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR;
-> -	int devnum = CONFIG_SPL_UFS_RAW_U_BOOT_DEVNUM;
->   	struct spl_load_info load;
-> +	int ret;
+> +/* UFS boot modes */
+> +#define UFS_MODE_RAW		1
+> +#define UFS_MODE_FS		2
 > +
-> +	debug("spl: ufs: loading from sector 0x%lx\n", sector);
-> +
-> +	spl_load_init(&load, spl_ufs_load_read, bd, bd->blksz);
-> +	ret = spl_load(spl_image, bootdev, &load, 0, sector << bd->log2blksz);
-> +
-> +	if (ret) {
-> +		printf("%s: ufs block read error\n", __func__);
-> +		log_debug("(error=%d)\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +/* Find and load from partition */
-> +#ifdef CONFIG_SPL_UFS_RAW_U_BOOT_USE_PARTITION
-> +static int ufs_load_image_raw_partition(struct spl_image_info *spl_image,
-> +					struct spl_boot_device *bootdev,
-> +					struct blk_desc *bd)
-> +{
-> +	struct disk_partition part_info;
-> +	int ret = -ENOENT;
-> +
-> +	/* Try partition name first if configured */
-> +#ifdef CONFIG_SPL_UFS_RAW_U_BOOT_PARTITION_NAME
-> +	if (strlen(CONFIG_SPL_UFS_RAW_U_BOOT_PARTITION_NAME) > 0) {
-> +		debug("spl: ufs: trying partition name '%s'\n",
-> +		      CONFIG_SPL_UFS_RAW_U_BOOT_PARTITION_NAME);
-> +		ret = part_get_info_by_name(bd,
-> +					    CONFIG_SPL_UFS_RAW_U_BOOT_PARTITION_NAME,
-> +					    &part_info);
-> +		if (ret >= 0)
-> +			debug("spl: ufs: found partition '%s' at 0x%lx\n",
-> +			      CONFIG_SPL_UFS_RAW_U_BOOT_PARTITION_NAME,
-> +			      (ulong)part_info.start);
-> +		else
-> +			debug("spl: ufs: partition name not found: %d\n", ret);
-> +	}
-> +#endif
-> +
-> +	/* Fall back to partition number if name lookup failed */
-> +	if (ret < 0 && IS_ENABLED(CONFIG_SPL_UFS_RAW_U_BOOT_PARTITION_NUM)) {
-> +		debug("spl: ufs: trying partition number %d\n",
-> +		      CONFIG_SPL_UFS_RAW_U_BOOT_PARTITION_NUM);
-> +		ret = part_get_info(bd, CONFIG_SPL_UFS_RAW_U_BOOT_PARTITION_NUM,
-> +				    &part_info);
-> +		if (ret >= 0)
-> +			debug("spl: ufs: found partition %d at 0x%lx\n",
-> +			      CONFIG_SPL_UFS_RAW_U_BOOT_PARTITION_NUM,
-> +			      (ulong)part_info.start);
-> +		else
-> +			debug("spl: ufs: partition number not found: %d\n", ret);
-> +	}
-> +
-> +	if (ret >= 0)
-> +		return ufs_load_image_raw_sector(spl_image, bootdev, bd,
-> +						 part_info.start);
-> +
-> +	puts("spl: ufs: partition error\n");
-> +	return ret;
-> +}
-> +#endif /* CONFIG_SPL_UFS_RAW_U_BOOT_USE_PARTITION */
-> +
-> +u32 __weak spl_ufs_boot_mode(const u32 boot_device)
-> +{
-> +	return UFS_MODE_RAW;
-> +}
-> +
-> +int spl_ufs_load(struct spl_image_info *spl_image,
-> +		 struct spl_boot_device *bootdev,
-> +		 const char *filename)
-> +{
-> +	u32 boot_mode;
-> +	int ret = 0;
-> +	int devnum = CONFIG_SPL_UFS_RAW_U_BOOT_DEVNUM;
->   	struct blk_desc *bd;
-> -	int err;
->   
-> -	/* try to recognize storage devices immediately */
-> -	scsi_scan(false);
-> +	log_debug("spl: ufs: devnum=%d\n", devnum);
-> +
-> +	ret = scsi_scan(false);
-> +	if (ret) {
-> +		printf("spl: ufs: scsi scan failed: %d\n", ret);
-> +		return ret;
-> +	}
-> +
->   	bd = blk_get_devnum_by_uclass_id(UCLASS_SCSI, devnum);
-> -	if (!bd)
-> +	if (!bd) {
-> +		printf("spl: ufs: could not get device %d\n", devnum);
->   		return -ENODEV;
-> +	}
->   
-> -	spl_load_init(&load, spl_ufs_load_read, bd, bd->blksz);
-> -	err = spl_load(spl_image, bootdev, &load, 0, sector << bd->log2blksz);
-> -	if (err) {
-> -		puts("spl_ufs_load_image: ufs block read error\n");
-> -		log_debug("(error=%d)\n", err);
-> -		return err;
-> +	boot_mode = spl_ufs_boot_mode(bootdev->boot_device);
-> +	ret = -EINVAL;
-> +
-> +	switch (boot_mode) {
-> +	case UFS_MODE_RAW:
-> +		debug("spl: ufs: boot mode: raw\n");
-> +
-> +#ifdef CONFIG_SPL_UFS_RAW_U_BOOT_USE_SECTOR
-> +		ret = ufs_load_image_raw_sector(spl_image, bootdev, bd,
-> +						CONFIG_SPL_UFS_RAW_U_BOOT_SECTOR);
-> +		if (!ret)
-> +			return 0;
-> +#elif defined(CONFIG_SPL_UFS_RAW_U_BOOT_USE_PARTITION)
-> +		ret = ufs_load_image_raw_partition(spl_image, bootdev, bd);
-> +		if (!ret)
-> +			return 0;
-> +#endif
-> +		break;
-> +	default:
-> +		puts("spl: ufs: wrong boot mode\n");
+>   struct blk_desc;
+>   struct legacy_img_hdr;
+>   struct spl_boot_device;
+> 
 
-What's the point of introducing the boot_mode logic with UFS_MODE_FS and not
-implementing it ?
-
-Just drop spl_ufs_boot_mode, the defines and just stick with the UFS_MODE_RAW
-by default and add support for that in a separate patches when needed by
-an implementation.
+Drop this patch and add them when needed
 
 Neil
-
->   	}
->   
-> -	return 0;
-> +	return ret;
-> +}
-> +
-> +/* SPL load image entry point */
-> +static int spl_ufs_load_image(struct spl_image_info *spl_image,
-> +			      struct spl_boot_device *bootdev)
-> +{
-> +	return spl_ufs_load(spl_image, bootdev,
-> +#ifdef CONFIG_SPL_FS_LOAD_PAYLOAD_NAME
-> +			    CONFIG_SPL_FS_LOAD_PAYLOAD_NAME);
-> +#else
-> +			    NULL);
-> +#endif
->   }
->   
->   SPL_LOAD_IMAGE_METHOD("UFS", 0, BOOT_DEVICE_UFS, spl_ufs_load_image);
-> 
-
