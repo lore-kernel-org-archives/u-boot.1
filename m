@@ -1,30 +1,30 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACBB8606A32E
-	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 15:38:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 367C5606A32A
+	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 15:38:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=t71L7ACc;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=EDGDusFk;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=X2rY6MPi
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=IlGB5Ep2;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=R0hZutzQ;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CFF1UwCa
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 12FD0608AA;
-	Tue, 20 Oct 2026 15:38:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id EB92680A5A;
+	Tue, 20 Oct 2026 15:38:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ch_UdMV-Easb; Tue, 20 Oct 2026 15:38:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C65AE60844
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792510720;
-	b=ifW9SF+2tXrDBDcP9ffRLk+CXcx7tel/JK3rLpOA0Q2ykvdclA/Jhx9CTsnwHaXCUIM7
-	 cJgUNk57PHnNMumHCtxZeFJHMzJS/38vN2E1iLKeaNm/2ykDKdIM9B65eKe7a0mcXFUyj
-	 ArtqTKBM/NY3Ur/12Z8S8TKzDZpaiv8fq5yDcqpJ86nV8PvG626Ev874i1zq21cjb2GY4
-	 2ajwP/8YLym4yV4xBcToSk2eVA9jfrQiKY96HTwxiHCxhBY5IGf+4FbeWWUAvtxELBNYV
-	 BU59wGLoGO4e7kSwxoc6pLEI/bG062PHyDjjm897ogvPaZ2fwA2KlilHR8zm6NJlRmw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UuFSbVBbeOep; Tue, 20 Oct 2026 15:38:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0F6EC80982
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792510722;
+	b=VcS044h6g7Igda3mYkvrBD/bGx46H63lO5ifiHTemhty3oygvVoLVAgbDCXNkN0s8Sv4
+	 lcjNO6JOc+Dm9p2aDawx1R8IkaUL3jAmqOhdzhWEeVKYEdHuxmmDtMB7Eojfyd6KBxWOe
+	 pGyqJIBmipYXkIO+HMDn8hCxmkF52lfMSzxVboFt2vsCQqwn99a6I6dvZF5gw6x9XGuA9
+	 pWgvyxTVgyB1PUs9CMIPzYTjua0a1qGboXjCnMLxcSeDsES1eVx0vhQ6YeSaxP1v9AZFX
+	 ZkGEtqlp0joM7+HgPEkzonZFHZTGh0pSdTWVjlP/9cvVr7Q66qzz3iv+5hsP+e0VhXg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792510720;
+	c=relaxed/relaxed; t=1792510722;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,173 +32,171 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
 	 X-Gm-Gg:X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=vpcHPqYRwxYV6JxW00pQGV4iZLyyRalww5ts4GEgYkM=;
-	b=hcJblTtBe7lg4A8SajR2h/Kg75+AAEbikUbc6iBAm3ACplPbyW1naYVBCjMGxFjCDXDq
-	 N3V8lA+Ejf5GrpolRKF2c6I5DQ16Hh2GJeBO1SH0EJUBdyop4e0idc2AWB/1F80f4Wsjw
-	 qJ9GrIlPIfZd5B6A6s4eGwf+XoOswKbDcaZgtFtuWAwVjhpTOauqaNajbg7aAwjTdqj4S
-	 4fGLRNn0mPSfmd7iI6RzNpxCw379oMpzMPp+gpyKYhLz60/jKjahtSBSwSGJe9e2ahJ2J
-	 4kHDoYFk0AQsgiZHv6XV+ofxJbs9ekT0C/84fndw8DwOwJMZ7tNADp8/5jWMG/wNfaA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=klw+scYeRC5bRswOz/vBYHH9AF61OFmddaXD+zCVtSg=;
+	b=P+5xDse18kgBiff3zR8htHtodUBGrpQwJ7PlPCcHGnoHIka5kkT0A5X7swgeUx0ael8b
+	 BBFOKrNDYFr+IxqeiNVsiub1wjqeR95pCEV9JJqsbLEMvamljlI5cELRTpIZnxtnHivtQ
+	 4z9gFmU/WW51yEat8HxxUfMRYfgV34fHMofAWfBa2qVVfTSeeKN6XeUUto6/yT3NpCQpw
+	 wLqrYV/l2XsQEMcLQ2uIdcmhmFc1ReauwvHM75Wse+mK/RxjmzEx9DBL7WyGoF7e772Kk
+	 98OtIj/O+WqX9WtpMYB6bO2BXQu0nqDQtgKmL0JH1wQr83KO29gSVDi5CK5Nyg/rNQQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792510719;
-	bh=vpcHPqYRwxYV6JxW00pQGV4iZLyyRalww5ts4GEgYkM=;
+	d=lists.u-boot-project.org; s=default; t=1792510722;
+	bh=klw+scYeRC5bRswOz/vBYHH9AF61OFmddaXD+zCVtSg=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=t71L7ACcy120gqUg2ad3P6oxnKOvyZ7z+mmR3Kpj5eip6kZp0yUyGO8TTN3m8vo/c
-	 rVG5Ksj1htynpIbDUtsrmeOc5RmybwXOmQNNZbimluh8V2mP9sQtfCeZCIYon2gBMz
-	 ePMB0f0z7sri7IX88AsH2oMTD62tH2bJpskesfV6lIVtj7CBWTtyeoOlsROb5VkQEe
-	 ZX1HaN44d3l6CkBmqioXzoyiBIT6WZ1VRUYkL9Q/J1+NbcQgGVFpyBjjt9FAlnmrde
-	 uMfum6U4s8VzzoZIrdZZbp0PG3H5rk0bxRc359uGt9+6lwdoTblWTiuh9Ur+xNrXeT
-	 CX9AJIPMdTlcw==
+	b=IlGB5Ep2uaNFCJ7hzoLrrAxLN7MU6eUIGklEEdoLrlH6A46tvvwNtto4M6F+bNTLr
+	 yEUSoVO1OOZHgEbuu1caFKcgHgxXB3yQWRfBIaAIwk7FzF6bihv3Te0A5YmMgj+M5m
+	 vswzlXJc5m9sJu9xHECNQNgXaGsGEhwm3pzoGkw5UnMHpy2UFsDE7F1jXfA9dGfJhi
+	 kf/3sQOnXcsGtGR6Ewq71A39No2bUIk0w8f9jpsbLc6GTk0PvQGNb78U1/zsm915LU
+	 TERGOkTVh5r3TRBOE9eoIO8cw1RhaofnXuEJdU7HQNrtMKPfBoQvil6pPk0NHLCHkS
+	 gZ4MUijS1ChJA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C65AE60844;
-	Tue, 20 Oct 2026 15:38:39 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id C2C3411CD
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:38 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0F6EC80982;
+	Tue, 20 Oct 2026 15:38:42 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9061F75
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B4A2C8110A
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:38 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8107360899
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wANTOLPmlHYe for <u-boot@lists.u-boot-project.org>;
- Tue, 20 Oct 2026 15:38:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 898088102D
-Authentication-Results: smtp1.osuosl.org;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JvycIY6DFDsv for <u-boot@lists.u-boot-project.org>;
+ Tue, 20 Oct 2026 15:38:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org ADE8260807
+Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792510717;
- b=R0iZ3BwM6iENgX4L1unVG3mJz81RuMuambVSXYdXkcn0lLWxgevuFvW5up/VXTrclWxt
- 4HBvUzUYw6WVJmt688jAl8o0zptUauQguRc/a+gNFQH0Ab0ezR8xCi89/KEeWlBY3XwMw
- /uese4ltifcvpTZ697V3FZtrhAYS3/15zXQX/UYg6HjChXOogqNqynSFrx98EjFPoJwWj
- COqzJWpuVXJImueyBAX7WLwptfRgyDug76m71xk9pKY6sTwfO781ywPTPlv/z5lEtvL2n
- GvgsIEp8r/4DtSu24PQx2omxqmXTATpXsP0drP++A9ZlWAXwi+JUrlJfqsnugzNj1Cg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792510718;
+ b=DZ86sUHyPVxNX/mwMXdCbe8unWV0DAGAYzYNBpyTtZyrP5rtTD8fmsPC22CcHr82EUFt
+ K12bKlA1MGBi+3W4ZPu4G9+IxqDkDI0Bt0IUbxmQdgzUMqvywmvr73fNRoGiwIlnUcGbC
+ MEAxqAvX2gUiSZE/iVn3ElQzsBD14L3XhatL7qDOOEUSVaDJM3cqXKyWw4JIQLHamvRXo
+ pFqBdxfevi17fAVdxgaUU3DNMh+4V9NMhsA91uV1ZNu4vUXD+koLG59VGoa4D7nQeNWK1
+ 8octecY9V0NwNjiXHCdBK0zLQDSVGoEeHRQsgxYCjOht6ez2Ca7lCkl7CJlSwtw2slQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792510717;
+ c=relaxed/relaxed; t=1792510718;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
  DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
  X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
  Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
- X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
- X-Proofpoint-Spam-Info:X-Authority-Analysis:X-Proofpoint-GUID:
- X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
- bh=vpcHPqYRwxYV6JxW00pQGV4iZLyyRalww5ts4GEgYkM=;
- b=Ahk3C3XiIw/NHZ4FbMUHFHFh8DasLanSY09MUk0DE/w+9SeM4PGBwLuu2LqoM3cJp5VZ
- cJrggU2ZayBXtPtFc882HwEU5jek9u18bFjM4xgTA8L8OAOTpy79UvaMuThMGuW3Nfbz5
- fku7xubTeZHZ3cH/ejSdbSoG0dwSMN7awJ2O0lYSfGj0GQ27oMlxZxHHX2EaprkqrFriw
- tGeyLoliIRisJlkNn52UoYiGlXwVD7IMNDPZh6j5sDF1Q+1J/s88RMVoIn6N4esAylk62
- jG33QCH+umF+rpGGDT8AVkUkB/3p1fQohB2bxL+ALJ7eA/1LRrXXtZGxq7ABh95BL+A==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ Message-Id:References:In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-GUID:
+ X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+ X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+ X-Proofpoint-Spam-Details;
+ bh=klw+scYeRC5bRswOz/vBYHH9AF61OFmddaXD+zCVtSg=;
+ b=EEIe7R+NZvgqqQn+3V2x8weYcwTt2PVqAvJpEHZV6CylIs6WQ6pL6rD+7kwdyMg8U7iU
+ Ia6IfLO5/IMkub+t5JPo5UOzFF78+GjA+YMPHv0ASKyTABrYQHOc+PYXDbOp8cQ5pfzEA
+ 5y+3cyrZ7Ps+uyzprQBL4Xq2tMKvjGg/aZW6YonbXSabzDnOtLmfJdpuV1PY3psD6pbbe
+ 5ud4U7OtfnEUpp7i4t7XMZwyI3XCOYva8Tl3R2t5M7bFu2BPKHZtJIFlTIPBgoBVMUw5H
+ 1A98Wq46oGRx/8Ykn3/JYsfpJtksq0QO3hx5l6TWfsCp8YTiMdX6NuwrILrcx+DB3jA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=oss.qualcomm.com;
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=EDGDusFk; 
+ header.s=qcppdkim1 header.b=R0hZutzQ; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=X2rY6MPi; 
+ header.a=rsa-sha256 header.s=google header.b=CFF1UwCa; 
  arc=none smtp.remote-ip=205.220.180.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
  helo=mx0b-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=EDGDusFk; dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=X2rY6MPi
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=R0hZutzQ; 
+ dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=CFF1UwCa
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 898088102D
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:36 +0000 (UTC)
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id ADE8260807
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:37 +0000 (UTC)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69KDACRm1429966
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:35 GMT
+ 69KFL14i2020275
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:36 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- vpcHPqYRwxYV6JxW00pQGV4iZLyyRalww5ts4GEgYkM=; b=EDGDusFkE9P3/Otz
- o2ggmY1D6JLPFof1GQK6gTYIcy7cHS9YZubL8yob1X8zzMqSLm5WRN7++qB4baGH
- jv73c5SNOFmwkQFhAEPeL/+bw5veiK6IUf8RS8uMwHbMG+Rd/9EeTIGJ3Fffa8R3
- PyxsL7rLcTZwCahrDqYZLSh7LGWkROL95gx85ZQkMHq7yJuZLbN4zklJLwMdnZO3
- 5ZOhHFaBY1xiE4tzechnY4KE7njBRVv3pkjSVV0cDVJV6OOR4zEBfrazzxRb0MU+
- 0ASK26F4RmZcYOZB/wtUioAz2c8CZ9v8xZi+7VJSZDrvj2UjsoSYQ7MakKpR2RYF
- 2k5nrg==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdw5qb5v3-1
+ klw+scYeRC5bRswOz/vBYHH9AF61OFmddaXD+zCVtSg=; b=R0hZutzQWUAn8uFH
+ /d1m8omP0iBBBCucp1V6LC/3+taxtdqV121yShGq4OnGf6NHlNqOcMGenrYoZ11P
+ rPf3Q5jt/UBCov1LqPz5wmWQt3gu1D+56C4AaPstbujn8f8WLabKwcNQCGX0E4FF
+ cyHEMqt/RPhOMe7wQAGRSsn/ph2gCweAV5K14d2aPPQS5oWTxP0qhi3rx4eMo3+a
+ mntlJbPRHs9+gI7+deiS3Ocyy76VzDAVWF32JKJg/Ps4PJDVC+y/sYwgg6Nsr27P
+ TIPQMdRcFGLxG5YsvaulEzGYAak3/07EiVvIPV7wwYgBxljN0DrP6YJ8a/hjNbjD
+ uajfAQ==
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
+ [209.85.219.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdw5n3783-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:34 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-91b8c60c550so90198046d6.0
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 08:38:34 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 15:38:36 +0000 (GMT)
+Received: by mail-qv1-f69.google.com with SMTP id
+ 6a1803df08f44-91792488228so66381866d6.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 08:38:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792510714; x=1793115514;
+ d=oss.qualcomm.com; s=google; t=1792510716; x=1793115516;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=vpcHPqYRwxYV6JxW00pQGV4iZLyyRalww5ts4GEgYkM=;
- b=X2rY6MPiJ1WgDmEjGx0HlnEbcOBqVY3lzs33EnokIzuNau6kB8imgK8e3+2kymHS/u
- o9CEMk6fmQ1OBNyNhzsKUEVM4Hj8/Yg1908hnD32fcXJftS09WxW4tMfhM8hnMDoxELL
- e2Bx9GS8AjRngHWcCkvKj5JGdU82b9C8uReQP61/3R7LwGUzCbhTbwExxwZdxjn7dWYk
- yjzw9bQn8IMNa8FJGLwddOuhLpBkGD/b70FGJFHN3Ki4e2+7ChK005slriUMNi5lnQnK
- cKNbLQr/evoFCaMPYuXYYgXYFyZyDsJOkdfLcIoB7XWa9jqkjMl/UKKDcVIpSQQMgYyB
- 96sA==
+ bh=klw+scYeRC5bRswOz/vBYHH9AF61OFmddaXD+zCVtSg=;
+ b=CFF1UwCa3eliWxrctGhUqwnc/m2i8OZCVrDgTqTbGqSs+3pyqNwZiRdcmq0DD8bJHq
+ ejJ6efQvbuiNZiKd8q+r3yfdn5l7z4l4DFj868HaSsj8Khdj8znSmpBR4k503bwRvSBB
+ 214fvy6SrLbifJvF/+RrJtPER0aE5whDUz3QGpF+0WGhRp6t63XZWvqkXl/IGyfxvMMs
+ 7j8IXOh/QksALXEVRf2568ZLR3O2mVlQyyp1XYMxH/2ujPX2opeJkauj2Bq85LdobCxz
+ pmbmtA0LPGLmQsBaoh1OK9LchhTvdJFfBFwowqnCfFnETk1K7tlF9bOlNBWugIaep6+x
+ QBVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792510714; x=1793115514;
+ d=1e100.net; s=20260707; t=1792510716; x=1793115516;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=vpcHPqYRwxYV6JxW00pQGV4iZLyyRalww5ts4GEgYkM=;
- b=lh0H6Tl0pmCPGArtrK07Pnzkztl49Tk3KB+m3AUNUSLaWrm9VQhkHa1LdrNHS2hN6v
- xhUgPlOzHdQaGfhVSEYT6ph00cehKIhTckll/zSpvzPilTCssBvPy2RriGYmQTrFQkbu
- 6NYr7CAuxU8sgGpSXoc0wUw9p6Dv6OfKKtiLMt1xazCTS18pY3z62dfnXsKt1cLJOpSc
- kEboNmS80oXBG9s9Kdj0FG02K+4lkVPOR1drkWIUcXxgchreZDyrmQoGo/0uPTGfIo32
- ujp++ThcBor5hI6kQxyaf2YL6QncRVtc1zBRu/225r2AYCx+ny24PAiKwlXaFuTAYBLq
- r6EQ==
+ bh=klw+scYeRC5bRswOz/vBYHH9AF61OFmddaXD+zCVtSg=;
+ b=rhqJdXHMPYACFIGE1v9W8+x4B6YpH+cKrQjPXnPxmoZNsQzmqUSbroTE1PbFylfV5c
+ 3St/FEbZyx+/Fmjaewg2ImfHlQosDJ2LiV4n7mX8Ogq+oK4R6K6r2elXdx63nOGJZGRQ
+ iPrGLUjQwvSm9KCvFmirq8CtAqmsndLQaN39ynuDmHYcvu8nus4r6OtYkUvncma9KU9b
+ jVebHRRN2/pgFj7AAirORhYqGUgvOXv4TuDbMHoiktg0uVDuJTzxXm104L3KnVE/+hxz
+ FD0ZkUfu5+jj/OoDsDYEtz/8OQgFkazqA9bWnWf05E0Z3Czzjousmp63RUdlj9Jd/pwv
+ H0TQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzoA0+WnP07Zn2Q3zVZbtMqMuIdyas3Zx6hOGHgOy89hxbj4RKZYs+yenG5GKMK8+r5GhVrexc=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIFiA1VRsCoDZxT+l+oMomKKBOh+feA+8CnwikB1pvfKXGO9IJk
- T4KO/RVeA900S5Ttdw2OzPLbb7OgfhGMQ85ZFJ7MqD1ttukSOl4ZxrlUVshpN7amDUXA5bkuT52
- bVqA8aYYQkdHAchzx3HaqnNCi4r8/KiKLlelHES1uOiw85c9V27tqoEYZSXrwshcWo07uyYU=
-X-Gm-Gg: AYBFou0quUX1GiUmztOVTKH0iSviFZpFjYFbXVw9lWeE6PqhAyU7vJnHRgmMEk4B6Lg
- rhgHm5xBkMCoBGz6fbtACCzSwrjICkdAkn2i+z2q/HPw54/IUKpqDMA4s0nfkZHs5JF0otwlzCE
- mm7ok777MRJPsnvMuFUA5oyKl3AW2OUT62L5bBUXOX00MTUayYfBH6lrsUhwqEpm8yP8Tgy2wF/
- f/ylX6bgIuGD0vRpvV5553Mej+xQb5M7E78ui3e5UiYI6vt2efSLQxWgmW/WwOlrLmesA4LZNr2
- dBJ86//inckWRYETuTBYtxiRlgcbldDcB4Jwefu1VxjzztNQk/NsauLi0FgNJxPqLKnu1o+n1DK
- 93l/xjzohD/wzhepLHKGCLn3uDoevt3isVO/nu5quxd0l
-X-Received: by 2002:a05:620a:4416:b0:93b:d79a:c462 with SMTP id
- af79cd13be357-93f29d95c80mr1799619685a.58.1792510713956; 
- Tue, 20 Oct 2026 08:38:33 -0700 (PDT)
-X-Received: by 2002:a05:620a:4416:b0:93b:d79a:c462 with SMTP id
- af79cd13be357-93f29d95c80mr1799612185a.58.1792510713189; 
- Tue, 20 Oct 2026 08:38:33 -0700 (PDT)
+ AKwUvByXnxKCzoJmZUbJ6cbyUsOEVp2US8mNlUbUGlbA+E1g5EOxJJf+jP6J1CNnlPTmlJHDRU26r9A=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYLF1g00OpNSTEzRhKY5gt6seMBy6u86YhubEOqUjuc27k6QLEuA
+ JlLTYX7jS1Oj9DMW7oAT/OqdEvHUTTDdS8ly1C8tnpPD/8+mePyxP2xOdhfLHEmpnbDARW0ipcw
+ oUNUnEm8Vn75UEtq8onFmAWyDHq16jaeUgHwEibkx44mSuSVoCML3gssexUCEd1R1I0anyKA=
+X-Gm-Gg: AYBFou1bSn+3JwGWxjvRoyeG2juQQ7dRI7GeD+io7mtNPrcNBXuMO1ObfeAILdmfu2r
+ 38IrRQoUAEks9VzDnFAb9OuOsC7Zc3u1trusCb11t16mrOs9XTtPPfLGztGmrRqUxcdwWVfLu2M
+ Q6a/MnVVOcnq8plKZlKL4iSJU2Ywloq/8q5I9K4P7O1D02oohoOOjy1bFERLP5mbwCwr7IDKkLw
+ oZIr9xOjJo/X8kRMil+RLYLxDbzBP60ieCr9lciWV9fYVFwibiGUQa8mr2ZSXDKThdUEMqIeKMC
+ yYfzkTUh0CGez5TMVjrKH+fsNz2/m1ra5ASR8ewa4ztiMzYS+peL8eEgrLePnqmUmTTKw4YXteI
+ n/NBo17F9Ek9fRmggFab8ipisX1Yd4X19I9CXmEMRgTSp
+X-Received: by 2002:a05:620a:c4e:b0:93b:ebd8:9147 with SMTP id
+ af79cd13be357-93f29cf01a1mr1792154685a.18.1792510708683; 
+ Tue, 20 Oct 2026 08:38:28 -0700 (PDT)
+X-Received: by 2002:a05:620a:c4e:b0:93b:ebd8:9147 with SMTP id
+ af79cd13be357-93f29cf01a1mr1792149385a.18.1792510708191; 
+ Tue, 20 Oct 2026 08:38:28 -0700 (PDT)
 Received: from [127.0.1.1] (185-164-141-21.cgnat.inetia.pl. [185.164.141.21])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6b38a1b140fsm5574963a12.9.2026.10.20.08.38.31
+ 4fb4d7f45d1cf-6b38a1b140fsm5574963a12.9.2026.10.20.08.38.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Oct 2026 08:38:32 -0700 (PDT)
+ Tue, 20 Oct 2026 08:38:26 -0700 (PDT)
 From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Tue, 20 Oct 2026 17:38:10 +0200
-Subject: [PATCH v3 3/5] avb: verify the boot images in the buffers they are
- booted from
+Date: Tue, 20 Oct 2026 17:38:08 +0200
+Subject: [PATCH v3 1/5] cmd: avb: add read_pvalue_hex/write_pvalue_hex
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261020-upstream-avb_lock_unlock_b4-v3-3-e280795a98cc@oss.qualcomm.com>
+Message-Id: <20261020-upstream-avb_lock_unlock_b4-v3-1-e280795a98cc@oss.qualcomm.com>
 References: <20261020-upstream-avb_lock_unlock_b4-v3-0-e280795a98cc@oss.qualcomm.com>
 In-Reply-To: <20261020-upstream-avb_lock_unlock_b4-v3-0-e280795a98cc@oss.qualcomm.com>
 To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
@@ -213,34 +211,33 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Jan Kehren <jan.kehren@emteria.com>,
  Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Proofpoint-ORIG-GUID: muT4WbNCaa7jqYqwdXjLpryxLvigVq80
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDA2MiBTYWx0ZWRfXxk8erO87ZV/n
- wu6JmJLI6eLxMBv7WEnRE7eXPNW8C/BY8jHJ0TD8ds6XihbL6a1ejiZURQJUwCyE/dgpo74/839
- nAmwbbXpKi+mwylqkt6rUwumF5PK3GW39/nfGyOzyYhbW36MT0g0XKn8XyIFMtUEXJIJaZZoMk6
- 40bzsH9nmtD/xwlYEMwAubnI8/du2OpNvLppkkzR4f8CSPyr0lr14N9dsDoaKysJ4TdZmMdg440
- q/q3BHF0guq0MJTisXeQMTiRopmbFJHdhWWf40CblBXkhU4efEFaY1HreJv/fb+AZW4XoDPS5X1
- /MtV+hW9nBUT6V0jAn3ZoftOe3fURJIcLhhnT3HDMx4AYBYGgLn8jyshJ0lGbOZ5yhYciEbdxLU
- hppzQ5flStTEaua4r1vGwknjbSqUCPRo4djaWJT6ScDKTZmVcXRh3lqzG+g5mj+K/dmjelzynzp
- SXczDVNoUgtqq8s1EwQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDA2MiBTYWx0ZWRfX0EpcKXehLVU6
- uHrlM5uk5j+Xe6JD8DCCQB2uHteYw21aDyURNtw3yGzCxphrm7dZ7C9EeDuwj3s0hIhJOny97RW
- 2PLY9EJ9Z7Jpgb5rPDsqLPhGc4xpq9s=
-X-Authority-Analysis: v=2.4 cv=LpcHWXdc c=1 sm=1 tr=0 ts=6ad78afa cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=JsdSkJyxCPcZmfxNhm0PvA==:17
+X-Proofpoint-GUID: Cyxsiuo_PX8bgUpQUEPAX66emCDyOIOD
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDA2MiBTYWx0ZWRfX9QJF7uB92uPs
+ TiwaSdNFZXBMzAsdnBP4OTI6uYJdJ0dX1OTHQ39i2Zvb5SRVW3Ir3uuXo+CMuVbkxKq0ExuV3e3
+ Y46j+/R6pjOOxPqEFCbjClW5iWcg3g4=
+X-Proofpoint-ORIG-GUID: Cyxsiuo_PX8bgUpQUEPAX66emCDyOIOD
+X-Authority-Analysis: v=2.4 cv=A5z5rKWG c=1 sm=1 tr=0 ts=6ad78afc cx=c_pps
+ a=wEM5vcRIz55oU/E2lInRtA==:117 a=JsdSkJyxCPcZmfxNhm0PvA==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=qJaU2Z4SIW9asTuPRKsA:9 a=QEXdDO2ut3YA:10
- a=1HOtulTD9v-eNWfpl4qZ:22
-X-Proofpoint-GUID: muT4WbNCaa7jqYqwdXjLpryxLvigVq80
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=VwQbUJbxAAAA:8 a=IpJZQVW2AAAA:8 a=EUspDBNiAAAA:8 a=MoAT0fEG2T6-BM8MC5gA:9
+ a=QEXdDO2ut3YA:10 a=OIgjcC2v60KrkQgK7BGD:22 a=IawgGOuG5U0WyFbmm1f5:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDA2MiBTYWx0ZWRfXxILkpZqIRuss
+ inIG4loO+k6cF9/rOLRTeNnQlaGgkfrfnlXiQjRwuXUQ0dmMSJ6BCxkaHI0pyIW1fNr16ib52VP
+ LQc6JNf6Jn3UQH/q7mGpogW19GNxe9x1Vzm39MERWqzI2sjiZUjrCiGZl9OiN2C0QCXsd8bnUCl
+ VLJuw2nn9DdgP6HUF5FVKSiYrYdQK8ZaK0AgNRutXCQn7U0fiP/LHdjTcmOFu/syrzAJ1AnbvlU
+ qMaySKGKoB17vZUR0AK9aVYyBBmkU2CY2OazA0l0SXf55N/9g9X8Oo04itSQR3IJHnO+MrGiEZ+
+ F/jeX8ZlzBYolOedy1mTwepEWm/D6sxsfc9zxwEsIPxyxi3IZxPahUAetJYkZOalLbT6YqqbURE
+ E/CawrEmYkZKbUw3ouL2mmyyVJYGacLCqGU+/Gb28tdoRvrmMpXy/8mWW6fpcq1Us4Z3zKV6sT3
+ QeDE1XMvjOt2POVZvfA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-10-20_02,2026-10-19_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 adultscore=0 phishscore=0 clxscore=1015 impostorscore=0
- malwarescore=0 suspectscore=0 lowpriorityscore=0 bulkscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610200062
+ clxscore=1015 malwarescore=0 adultscore=0 priorityscore=1501 suspectscore=0
+ phishscore=0 spamscore=0 bulkscore=0 impostorscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610200062
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -252,334 +249,158 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-bootmeth_android let libavb read boot and vendor_boot into its own buffers,
-hash them and free them, and then read both partitions again to boot them.
-The bytes that were verified and the bytes that were booted were therefore
-two separate reads of the storage device, which an attacker able to
-interpose the device can tell apart (reported on the list as a TOCTOU
-issue). It also read every image twice.
+write_pvalue stores its argument as a NUL-terminated string, which cannot
+carry binary data such as the 32-byte SHA-256 root key digest consumed by
+CONFIG_AVB_ROOT_KEY_TEE (persistent value avb.root_pub_digest). Add
+hex-string variants to provision and dump raw persistent values from the
+U-Boot shell.
 
-Load boot and vendor_boot first and hand the buffers to libavb through
-AvbOps.get_preloaded_partition(), so the hashes are computed over the
-memory that bootm consumes afterwards. If a hash descriptor covers more
-bytes than the boot image header announced, the tail is read into the same
-buffer, bounded by the partition size; a descriptor larger than the buffer
-fails verification.
-
-boot is always loaded before verification runs and vendor_boot exists from
-boot image header version 3 on, so the preloaded buffers are registered on
-those facts rather than on the recorded addresses, which do not have a
-defined value for a header version 2 image since the bootmeth private data
-is not zeroed. Allocate it with calloc() for the same reason.
-
-Fixes: 125d9f3306ea ("bootstd: Add a bootmeth for Android")
-Reported-by: Ahmad Fatoum <a.fatoum@pengutronix.de>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
 Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 ---
- boot/bootmeth_android.c | 73 +++++++++++++++++++++++++++++++++++++--------
- common/avb_verify.c     | 79 +++++++++++++++++++++++++++++++++++++++++++++++++
- include/avb_verify.h    | 36 ++++++++++++++++++++++
- 3 files changed, 175 insertions(+), 13 deletions(-)
+ cmd/avb.c | 101 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 101 insertions(+)
 
-diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-index ae05c084883..6f7e232d2c3 100644
---- a/boot/bootmeth_android.c
-+++ b/boot/bootmeth_android.c
-@@ -48,6 +48,11 @@ struct android_priv {
- 	u32 header_version;
- 	u32 boot_img_size;
- 	u32 vendor_boot_img_size;
-+	/* Where boot and vendor_boot were loaded, and the partition sizes */
-+	ulong boot_addr;
-+	ulong boot_part_size;
-+	ulong vendor_boot_addr;
-+	ulong vendor_boot_part_size;
- };
- 
- static int android_check(struct udevice *dev, struct bootflow_iter *iter)
-@@ -235,7 +240,7 @@ static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
- 	if (ret < 0)
- 		return log_msg_ret("bcb read", ret);
- 
--	priv = malloc(sizeof(struct android_priv));
-+	priv = calloc(1, sizeof(struct android_priv));
- 	if (!priv)
- 		return log_msg_ret("buf", -ENOMEM);
- 
-@@ -353,7 +358,8 @@ static int android_read_file(struct udevice *dev, struct bootflow *bflow,
-  * Return: 0 if OK, negative errno on failure.
-  */
- static int read_slotted_partition(struct blk_desc *desc, const char *const name,
--				  const char slot[2], ulong image_size, ulong addr)
-+				  const char slot[2], ulong image_size, ulong addr,
-+				  ulong *part_size)
- {
- 	struct disk_partition partition;
- 	char partname[PART_NAME_LEN];
-@@ -396,6 +402,9 @@ static int read_slotted_partition(struct blk_desc *desc, const char *const name,
- 	if (n < num_blks)
- 		return log_msg_ret("part read", -EIO);
- 
-+	if (part_size)
-+		*part_size = (ulong)partition.size * desc->blksz;
-+
- 	return 0;
+diff --git a/cmd/avb.c b/cmd/avb.c
+index 8a915b65834..3c13d6a2cb2 100644
+--- a/cmd/avb.c
++++ b/cmd/avb.c
+@@ -6,6 +6,7 @@
+ #include <avb_verify.h>
+ #include <command.h>
+ #include <env.h>
++#include <hexdump.h>
+ #include <image.h>
+ #include <malloc.h>
+ #include <mmc.h>
+@@ -439,6 +440,100 @@ int do_avb_write_pvalue(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	return CMD_RET_FAILURE;
  }
  
-@@ -440,6 +449,7 @@ static int run_avb_verification(struct bootflow *bflow)
- 	enum avb_boot_state boot_state;
- 	char *extra_args;
- 	char slot_suffix[3] = "";
-+	char partname[PART_NAME_LEN];
- 	bool unlocked = false;
- 	int ret;
- 
-@@ -450,6 +460,33 @@ static int run_avb_verification(struct bootflow *bflow)
- 	if (priv->slot)
- 		sprintf(slot_suffix, "_%s", priv->slot);
- 
-+	/*
-+	 * Hand libavb the buffers boot and vendor_boot were loaded into by
-+	 * boot_android_normal(), so the bytes it hashes are the bytes that get
-+	 * booted and the partitions are read only once. vendor_boot exists from
-+	 * boot image header version 3 on.
-+	 */
-+	snprintf(partname, sizeof(partname), "boot%s", slot_suffix);
-+	ret = avb_ops_add_preloaded(avb_ops, partname,
-+				    map_sysmem(priv->boot_addr, 0),
-+				    priv->boot_img_size, priv->boot_part_size);
-+	if (ret) {
-+		ret = log_msg_ret("avb preload boot", ret);
-+		goto out;
-+	}
-+	if (priv->header_version >= 3) {
-+		snprintf(partname, sizeof(partname), "vendor_boot%s",
-+			 slot_suffix);
-+		ret = avb_ops_add_preloaded(avb_ops, partname,
-+					    map_sysmem(priv->vendor_boot_addr, 0),
-+					    priv->vendor_boot_img_size,
-+					    priv->vendor_boot_part_size);
-+		if (ret) {
-+			ret = log_msg_ret("avb preload vendor_boot", ret);
-+			goto out;
-+		}
-+	}
-+
- 	ret = avb_ops->read_is_device_unlocked(avb_ops, &unlocked);
- 	if (ret != AVB_IO_RESULT_OK) {
- 		ret = log_msg_ret("avb lock", -EIO);
-@@ -566,6 +603,26 @@ static int boot_android_normal(struct bootflow *bflow)
- 	ulong loadaddr = env_get_hex("loadaddr", 0);
- 	ulong vloadaddr = env_get_hex("vendor_boot_comp_addr_r", 0);
- 
-+	/*
-+	 * Load the images first and verify them in place: libavb hashes these
-+	 * buffers (see run_avb_verification()), so a storage device that
-+	 * returns different data on a second read cannot slip past the check.
-+	 */
-+	ret = read_slotted_partition(desc, "boot", priv->slot, priv->boot_img_size,
-+				     loadaddr, &priv->boot_part_size);
-+	if (ret < 0)
-+		return log_msg_ret("read boot", ret);
-+	priv->boot_addr = loadaddr;
-+
-+	if (priv->header_version >= 3) {
-+		ret = read_slotted_partition(desc, "vendor_boot", priv->slot,
-+					     priv->vendor_boot_img_size, vloadaddr,
-+					     &priv->vendor_boot_part_size);
-+		if (ret < 0)
-+			return log_msg_ret("read vendor_boot", ret);
-+		priv->vendor_boot_addr = vloadaddr;
-+	}
-+
- 	ret = run_avb_verification(bflow);
- 	if (ret < 0)
- 		return log_msg_ret("avb", ret);
-@@ -575,18 +632,8 @@ static int boot_android_normal(struct bootflow *bflow)
- 	if (ret < 0)
- 		return log_msg_ret("read slot", ret);
- 
--	ret = read_slotted_partition(desc, "boot", priv->slot, priv->boot_img_size,
--				     loadaddr);
--	if (ret < 0)
--		return log_msg_ret("read boot", ret);
--
--	if (priv->header_version >= 3) {
--		ret = read_slotted_partition(desc, "vendor_boot", priv->slot,
--					     priv->vendor_boot_img_size, vloadaddr);
--		if (ret < 0)
--			return log_msg_ret("read vendor_boot", ret);
-+	if (priv->header_version >= 3)
- 		set_avendor_bootimg_addr(vloadaddr);
--	}
- 	set_abootimg_addr(loadaddr);
- 
- 	if (priv->slot)
-diff --git a/common/avb_verify.c b/common/avb_verify.c
-index 7b60be4da7a..92f4f82df48 100644
---- a/common/avb_verify.c
-+++ b/common/avb_verify.c
-@@ -1103,6 +1103,84 @@ AvbIOResult avb_write_lock_state(AvbOps *ops, bool locked)
- }
- #endif
- 
-+/**
-+ * get_preloaded_partition() - hand libavb a partition the caller loaded
-+ *
-+ * Without this callback libavb reads every requested partition into its own
-+ * buffer, hashes that copy and frees it, and the bootloader then reads the
-+ * partition a second time to boot it: the verified bytes and the booted bytes
-+ * are different reads of the storage device. Serving the caller's buffer makes
-+ * libavb hash the memory that is booted afterwards.
-+ *
-+ * The boot image header may describe fewer bytes than the hash descriptor
-+ * covers; the missing tail is then read into the same buffer, up to its
-+ * capacity, before it is handed out.
-+ */
-+static AvbIOResult get_preloaded_partition(AvbOps *ops, const char *partition,
-+					   size_t num_bytes, u8 **out_pointer,
-+					   size_t *out_num_bytes_preloaded)
++int do_avb_read_pvalue_hex(struct cmd_tbl *cmdtp, int flag, int argc,
++			   char *const argv[])
 +{
-+	struct AvbOpsData *ops_data = ops->user_data;
-+	struct avb_preloaded *p = NULL;
-+	size_t num_read = 0;
-+	AvbIOResult rc;
-+	int i;
++	const char *name;
++	size_t bytes;
++	size_t bytes_read;
++	size_t i;
++	u8 *buffer;
++	char *endp;
++	int ret;
 +
-+	*out_pointer = NULL;
-+	*out_num_bytes_preloaded = 0;
-+
-+	for (i = 0; i < ops_data->num_preloaded; i++) {
-+		if (!strcmp(ops_data->preloaded[i].name, partition)) {
-+			p = &ops_data->preloaded[i];
-+			break;
-+		}
-+	}
-+	if (!p)
-+		return AVB_IO_RESULT_OK; /* not preloaded, libavb reads it */
-+
-+	if (num_bytes > p->max_size) {
-+		printf("%s: %s: %zu bytes to verify, buffer holds %zu\n",
-+		       __func__, partition, num_bytes, p->max_size);
-+		return AVB_IO_RESULT_ERROR_INSUFFICIENT_SPACE;
++	if (!avb_ops) {
++		printf("AVB is not initialized, please run 'avb init <id>'\n");
++		return CMD_RET_FAILURE;
 +	}
 +
-+	if (num_bytes > p->size) {
-+		rc = read_from_partition(ops, partition, p->size,
-+					 num_bytes - p->size,
-+					 (u8 *)p->addr + p->size, &num_read);
-+		if (rc != AVB_IO_RESULT_OK)
-+			return rc;
-+		if (num_read != num_bytes - p->size)
-+			return AVB_IO_RESULT_ERROR_IO;
-+		p->size = num_bytes;
++	if (argc != 3)
++		return CMD_RET_USAGE;
++
++	name = argv[1];
++	bytes = dectoul(argv[2], &endp);
++	if (*endp && *endp != '\n')
++		return CMD_RET_USAGE;
++
++	buffer = malloc(bytes);
++	if (!buffer)
++		return CMD_RET_FAILURE;
++
++	ret = avb_ops->read_persistent_value(avb_ops, name, bytes,
++					     buffer, &bytes_read);
++	if (ret == AVB_IO_RESULT_OK) {
++		printf("Read %zu bytes, value = ", bytes_read);
++		for (i = 0; i < bytes_read; i++)
++			printf("%02x", buffer[i]);
++		printf("\n");
++		free(buffer);
++		return CMD_RET_SUCCESS;
 +	}
 +
-+	*out_pointer = p->addr;
-+	*out_num_bytes_preloaded = num_bytes;
++	printf("Failed to read persistent value, err = %d\n", ret);
 +
-+	return AVB_IO_RESULT_OK;
++	free(buffer);
++
++	return CMD_RET_FAILURE;
 +}
 +
-+int avb_ops_add_preloaded(AvbOps *ops, const char *partition, void *addr,
-+			  size_t size, size_t max_size)
++int do_avb_write_pvalue_hex(struct cmd_tbl *cmdtp, int flag, int argc,
++			    char *const argv[])
 +{
-+	struct AvbOpsData *ops_data = ops->user_data;
-+	struct avb_preloaded *p;
++	const char *name;
++	const char *hex;
++	size_t len, bytes;
++	u8 *buffer;
++	int ret;
 +
-+	if (ops_data->num_preloaded >= AVB_MAX_PRELOADED)
-+		return -ENOSPC;
-+	if (strlen(partition) >= sizeof(p->name) || size > max_size)
-+		return -EINVAL;
++	if (!avb_ops) {
++		printf("AVB is not initialized, please run 'avb init <id>'\n");
++		return CMD_RET_FAILURE;
++	}
 +
-+	p = &ops_data->preloaded[ops_data->num_preloaded++];
-+	strcpy(p->name, partition);
-+	p->addr = addr;
-+	p->size = size;
-+	p->max_size = max_size;
++	if (argc != 3)
++		return CMD_RET_USAGE;
 +
-+	return 0;
++	name = argv[1];
++	hex = argv[2];
++	len = strlen(hex);
++	if (!len || len % 2) {
++		printf("Value must be an even number of hex digits\n");
++		return CMD_RET_USAGE;
++	}
++	bytes = len / 2;
++
++	buffer = malloc(bytes);
++	if (!buffer)
++		return CMD_RET_FAILURE;
++
++	if (hex2bin(buffer, hex, bytes)) {
++		printf("Value is not a valid hex string\n");
++		free(buffer);
++		return CMD_RET_USAGE;
++	}
++
++	ret = avb_ops->write_persistent_value(avb_ops, name, bytes, buffer);
++	free(buffer);
++	if (ret == AVB_IO_RESULT_OK) {
++		printf("Wrote %zu bytes\n", bytes);
++		return CMD_RET_SUCCESS;
++	}
++
++	printf("Failed to write persistent value `%s`, err = %d\n", name, ret);
++
++	return CMD_RET_FAILURE;
 +}
 +
- /**
-  * ============================================================================
-  * AVB root key digest providers (selected via CONFIG_AVB_ROOT_KEY_*)
-@@ -1170,6 +1248,7 @@ AvbOps *avb_ops_alloc(enum uclass_id uclass_id, int dev_num)
- 	ops_data->ops.user_data = ops_data;
- 
- 	ops_data->ops.read_from_partition = read_from_partition;
-+	ops_data->ops.get_preloaded_partition = get_preloaded_partition;
- 	ops_data->ops.write_to_partition = write_to_partition;
- 	ops_data->ops.validate_vbmeta_public_key = validate_vbmeta_public_key;
- 	ops_data->ops.read_rollback_index = read_rollback_index;
-diff --git a/include/avb_verify.h b/include/avb_verify.h
-index e89bb229e02..2b5b24958ae 100644
---- a/include/avb_verify.h
-+++ b/include/avb_verify.h
-@@ -23,6 +23,26 @@ enum avb_boot_state {
- 	AVB_RED,
- };
- 
-+#define AVB_MAX_PRELOADED	4
-+
-+/**
-+ * struct avb_preloaded - a partition already loaded into memory by the caller
-+ *
-+ * libavb hashes the preloaded bytes instead of reading the partition again,
-+ * so what gets verified is exactly what the bootloader goes on to boot.
-+ *
-+ * @name: partition name including the slot suffix, e.g. "boot_a"
-+ * @addr: start of the buffer holding the partition data
-+ * @size: number of bytes loaded so far
-+ * @max_size: capacity of the buffer (at most the partition size)
-+ */
-+struct avb_preloaded {
-+	char name[32];
-+	void *addr;
-+	size_t size;
-+	size_t max_size;
-+};
-+
- struct AvbOpsData {
- 	struct AvbOps ops;
- 	enum uclass_id uclass_id;
-@@ -32,6 +52,8 @@ struct AvbOpsData {
- 	struct udevice *tee;
- 	u32 session;
- #endif
-+	struct avb_preloaded preloaded[AVB_MAX_PRELOADED];
-+	int num_preloaded;
- };
- 
- struct avb_blk_part {
-@@ -45,6 +67,20 @@ enum avb_io_type {
- };
- 
- AvbOps *avb_ops_alloc(enum uclass_id uclass_id, int dev_num);
-+
-+/**
-+ * avb_ops_add_preloaded() - register a partition that is already in memory
-+ *
-+ * @ops: AvbOps from avb_ops_alloc()
-+ * @partition: partition name including the slot suffix, e.g. "boot_a"
-+ * @addr: buffer holding the first @size bytes of the partition
-+ * @size: bytes loaded in @addr
-+ * @max_size: capacity of @addr; a hash descriptor covering more than this
-+ *	fails verification instead of overflowing the buffer
-+ * Return: 0 on success, -ENOSPC when no slot is left, -EINVAL on a bad name
-+ */
-+int avb_ops_add_preloaded(AvbOps *ops, const char *partition, void *addr,
-+			  size_t size, size_t max_size);
+ static struct cmd_tbl cmd_avb[] = {
+ 	U_BOOT_CMD_MKENT(init, 3, 0, do_avb_init, "", ""),
+ 	U_BOOT_CMD_MKENT(read_rb, 2, 0, do_avb_read_rb, "", ""),
+@@ -452,6 +547,8 @@ static struct cmd_tbl cmd_avb[] = {
  #ifdef CONFIG_OPTEE_TA_AVB
- AvbIOResult avb_write_lock_state(AvbOps *ops, bool locked);
+ 	U_BOOT_CMD_MKENT(read_pvalue, 3, 0, do_avb_read_pvalue, "", ""),
+ 	U_BOOT_CMD_MKENT(write_pvalue, 3, 0, do_avb_write_pvalue, "", ""),
++	U_BOOT_CMD_MKENT(read_pvalue_hex, 3, 0, do_avb_read_pvalue_hex, "", ""),
++	U_BOOT_CMD_MKENT(write_pvalue_hex, 3, 0, do_avb_write_pvalue_hex, "", ""),
  #endif
+ };
+ 
+@@ -491,6 +588,10 @@ U_BOOT_CMD(
+ #ifdef CONFIG_OPTEE_TA_AVB
+ 	"avb read_pvalue <name> <bytes> - read a persistent value <name>\n"
+ 	"avb write_pvalue <name> <value> - write a persistent value <name>\n"
++	"avb read_pvalue_hex <name> <bytes> - read a persistent value <name>\n"
++	"    and print it as hex\n"
++	"avb write_pvalue_hex <name> <hex> - write the bytes given as a hex\n"
++	"    string to persistent value <name>\n"
+ #endif
+ 	"avb verify [slot_suffix] - run verification process using hash data\n"
+ 	"    from vbmeta structure\n"
 
 -- 
 2.53.0
