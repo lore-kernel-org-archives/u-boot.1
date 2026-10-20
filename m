@@ -1,207 +1,232 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ECB8F606A322
-	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 09:16:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 309A6606A319
+	for <u-boot@archiver.kernel.org>; Tue, 20 Oct 2026 09:21:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=wtVccU74;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=wXKAviwd
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=udcOiChV;
+	dkim=pass (2048-bit key, unprotected) header.d=gmx.de header.i=fiona.klute@gmx.de header.a=rsa-sha256 header.s=s31663417 header.b=cKYN9QBu
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4E9EC4082C;
-	Tue, 20 Oct 2026 09:16:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 080588109E;
+	Tue, 20 Oct 2026 09:21:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Msc6DA1jnQvI; Tue, 20 Oct 2026 09:16:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 35F6C4081F
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792487802;
-	b=h/99AWYkwr9JLRHkAvBGfEOFJ8rSiK3gi6DIvkxFkE7BQSP3b8q5EsbNEfU40VimZzee
-	 oglPmIupEZan+HkFH2jXWqGQJSAmOF7ub3zmZ8/vhY3OD5+TQVI8FA8KPynTBYZ2Bo7uD
-	 i+pNYE/xO0ci/DDD83BtKZnFKbOgxv8azFiMyFmOWbdrIxqOkANnTXnS3OJJBQSknMRKV
-	 mMY0dvP2YoAjrp4zSCal/IAeCV5nQNrx6FScAUsS3SSvkazIaPD2GuL2rIwOmETOlyb3b
-	 djiKT7/E7iu8aK2m4Vqgye8HI/Z/SOx+HTPORLtdJeOas15tswhiiJRRZ7cdlJxoxLg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xxV3XjS5EKjV; Tue, 20 Oct 2026 09:21:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3830E8100F
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792488117;
+	b=FzzwdduOjSAYphLQBu5vrMhC8PBZs61tUbx679uN2SI4JOcpDkqLxfTWQroKQfjykjvG
+	 NvfqRcdhXvHkPTUB+6GQiM03CA7hMZfve5iBrRJqxdKI15xWfl+9uybqcrniFlid/WW7j
+	 Lv8bKlicbr6ssvcrMv6sP8aByjHwWO3+gJS3B6Z3VfJUWfP67aU6PkMajtj6g6GM8+ebA
+	 9XeBjnaGq7DxXRafUSVeq1+iN2W6DrJ3xdW/91qcP91ZuE5+3+lb/XO3iZtUnGQwAFsxQ
+	 Q/oCaMZiwQQk6UIKHHBD/IofQTtXB7Em7ryVFCEMlZNB1RoxSlE01wWO9uRKoj6y2SQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792487802;
+	c=relaxed/relaxed; t=1792488117;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:From:Subject:To:Cc:References:
-	 Content-Language:Autocrypt:Organization:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Reply-To:Errors-To;
-	bh=DhtNdRhfW9rc1NDhT/BpzEZte/D1al0VIKYi23015RI=;
-	b=oDtnWwQli8GTCT5iSTq8Wz9Ay3Q2rHRUUu90Uay9WaLLk0MgPf3vEEWURWr1y+CNva0V
-	 JyzmgyrJaX143yR15FawNau06K807Zw7DgI5J4JIOR/r940bNczHACNrxQJXq4YA1t/CK
-	 cjzjmb9UPJgBF1w20/KoSwixmqY4q60WVaUKgMm7RNZCk7u73/naUbQBO0zpZUoY4Pjmh
-	 p4c8VbL6xG5r9VajAQlqNZ+S3sFHjD/O7ULsbQfkktfktJGlnud7nijhcauWOs9Ibg0/L
-	 Xfwa+msMzxkOfI1VgaPjUSxCaXS+NcT9eZ6cgeb19QEUV7rGqrFAlK91AWcMVvQHNGw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:X-UI-Sender-Class:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Provags-ID:UI-OutboundReport:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=x27VnVcO+PUXaO8ysN9b2Uu5vyTuiP03ZyZnMS/vjqk=;
+	b=F/ta5Q5t3JKxZxHCxmJJLf52inWPieHWCYEjUbQmB/VqO9b+2jelqSUN8nzDf6I1A7Xb
+	 /k7uc80VlubOqzaewk5N675v3Ku4U1F/yGFdPva8NITQYAT/LeYydh5QR/Q76GU4kmpn0
+	 v9EUCvRtKJAuHA+D5SzzKyQbZahbBanEV3LG6IYBA/Ugt1CXPKRpoLekdvmL+IpFKFI+z
+	 Qf52KYLJtolqpk/Gd0PF6La2BjFEK/V27Schh819Lje4EwNjBAcm18Si2832TmA4mPN58
+	 z/y96ymhbGRPTWmPbs/WDFmuJ0nRmWV5sDXMaonieZCm885yZa1MZV+/Bu1j81/q81w==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=gmx.de;
+	dkim=pass header.d=gmx.de header.i=fiona.klute@gmx.de header.a=rsa-sha256 header.s=s31663417 header.b=cKYN9QBu;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792487802;
-	bh=DhtNdRhfW9rc1NDhT/BpzEZte/D1al0VIKYi23015RI=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=wtVccU74siJFkt3Izw/k4Z5ZQzt7FAEdJ+hE0gY0yNOi7FVYl224UNsHLQKwq6Tth
-	 OCvpKj3TnjyQeLi0UOGcnMOX2ndt50INsLK+lveAO9r+uzey66Q2sWr+H0F4khdcFV
-	 o50CpB7IgvegILLQtXwxxesr173EcVy4JvFTZU4OPI5mtso96KpCzAuby8P6XSgEKB
-	 ckxTINlRWPATVfJVePlabOto1LAoIyxhUBxRoAVCQU6uEpnw7OMxXNiPkIli9/gVq7
-	 XmoqhVUXjsBSis+3mhlu41XyPO3p707OhaeNH03k5rcwU70YgfK45Ebn7gjBIr/A0W
-	 LUx6mNO3ZOmtA==
+	d=lists.u-boot-project.org; s=default; t=1792488117;
+	bh=x27VnVcO+PUXaO8ysN9b2Uu5vyTuiP03ZyZnMS/vjqk=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=udcOiChVxMuKdOCEjDp1gBGvfcD1B7GiZysUE90TJEMTLtilKN08rILbewLGPu6MF
+	 hPt/w2yWfS4XCIhRu2hEJzq+jQF9JXdAiBoMyj2ngGuFmI8QvZu7xnULl8ntZ/7WLH
+	 dEmWA34qP7U3XkuXnRaoQER1BZo1sU6XqMo0MnPp+GiswD97tw4K+pmy/QrNAR7D3R
+	 x8GqNaZP+ztVCYlkDp+l+ZJGfHvuLehunucK9v+6Jct9mgNuZnHESjbK898SU6CbHv
+	 6V3zyyFIVBNBvS7vGFA651WybvjHvTy7+OGP0u0Wo6B/tjs+KJxQOn0D5NGTTNfbrx
+	 Ru7PuR0psx8cg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 35F6C4081F;
-	Tue, 20 Oct 2026 09:16:42 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id AF44F465
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:16:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3830E8100F;
+	Tue, 20 Oct 2026 09:21:57 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0E1703A8
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:21:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 95B6640328
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:16:40 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id E7FA08100F
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:21:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hCJDVeqw1aYs for <u-boot@lists.u-boot-project.org>;
- Tue, 20 Oct 2026 09:16:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 6A77E4016F
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::434"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792487799;
- b=OL6oDsk9DWmBeYivtoaCArl5BRyS32zB6hGHm++0PNu/SY+iJStsm5Ymi7Xt+XSzE57J
- jjUEwIWf+5aIy014GwRMO878UArC6onk5A8lJ9tRUU+C0DUo8k3TwVTcZSJeRy5Qbo0yD
- REYWL6ZQjYetfnqdTAW0K1P51YZOWBlUROsHYjcRGfIK9KS6N/Xb6dD0QsWL9Dn7Lb9iA
- vOJVI5vDuh6lfqUQBhro855fA2nyPZnpBiHb+QmHgZlMAPlbnN9oFqxjWWwqMb09b+DxG
- kw74DLk0z6rRKo1DyeDJnE3F0AoPp2UA287XlHNaJCmo5qVc5Eea9KtUp8dXaf3Do3g==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vYouplv8C42O for <u-boot@lists.u-boot-project.org>;
+ Tue, 20 Oct 2026 09:21:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4C59481004
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=212.227.15.15
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792488115;
+ b=mRdnE4Z59IRp5OQSOJk7KLqLD5zjBSj89wQtsZqAgOIDMSiVb+8eqmfRO1H5sGbhMnm8
+ oY35DQ6hRckt+x5RPXP00DNzNXDHACZQp4smO71BdZ6U235A8DItS158sLRh21mg0yUj6
+ 1jJO3IfQ0b+rKy0u+EfnPqfnaC6hpkt0ntrcNSNN5Amr1T+b6ZSE2HxMAKbj1gCDtA1sG
+ fEGp4FfaDL4EraxQGUayv4TXpDmKbifmrUqlrpBP+jUoqGXNO/plDooWv+GmLUkndpmuK
+ UyzH5/OQ+dL2iUigcOk6WmFH7z+Aq7fLpLPl7xGsBXemUvtil2MfLgcMvQqHZ4Zo3vw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792487799;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Message-ID:Date:MIME-Version:User-Agent:From:Reply-To:Subject:To:Cc:
- References:Content-Language:Autocrypt:Organization:In-Reply-To:
- Content-Type:Content-Transfer-Encoding;
- bh=DhtNdRhfW9rc1NDhT/BpzEZte/D1al0VIKYi23015RI=;
- b=BcvfyqXt9z3xCWOK4LgCUEg7kVAShl5kfVLqMRIJdNQocPVkZ4kR9ytET5I57ruFAZge
- HEn8gVLXwY86As3t0QzFFjLRxcGE3wKeDMtmpPUUsY0pCf+dV+ltCrGv4e5JHhRi6g3Yg
- BQ0t1mgJnjm00ux5romBPmTHaeGuypwqmcy60EM3ZbePnbwdSACfEr5pKl13/j8lrewCc
- 1zBO2ucF6ZzvC+IwkpvbdeLWuo59IWHtPyMAN3KvW/HoCDDliGMweh6KMYuVVGUTi4ciE
- hWbyEffOxRydab/geQ4PZF5DEeCNmBFT4vENi7k5iRe+1vB6fwFVdS+jIM+/IigAaUg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=linaro.org;
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=wXKAviwd; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::434"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::434; helo=mail-wr1-x434.google.com;
- envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=wXKAviwd
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6A77E4016F
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:16:39 +0000 (UTC)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-48c4d870d54so1959424f8f.2
- for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 02:16:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792487797; x=1793092597;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:cc:to:subject:reply-to:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=DhtNdRhfW9rc1NDhT/BpzEZte/D1al0VIKYi23015RI=;
- b=wXKAviwdhl60LrVzXuazGeYIx+JKrwGklsJCblGbiqScpp49+WkwgAzDrMVjU8A7M8
- xndJqxixv3XFYmKD4zASxcjxVFcQW/lg/bqfHaeYz0szrHITmwXMQ6hYF66jfWy20AV7
- fTWjBcwpNosfCVb8sElD8khzbiipYbfQfI8cbJ+1Z1NkEvWSvvdIfLHsbUYlo22Fdcx/
- VmcQCFOGMOlcyuahdwBFC8J3isOSxuzrdStsBHLqE8S5K+yuZ6G3OUsAExIpa4REBusd
- NCz08d019kPtFSc9quWK4DZJH6NP/bkAiWxXk1zvGBCdG7eHrvJ2BaPv4NMNEO398D98
- lQ9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792487797; x=1793092597;
- h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:cc:to:subject:reply-to:from
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=DhtNdRhfW9rc1NDhT/BpzEZte/D1al0VIKYi23015RI=;
- b=yBml6W9a0BWZ2rcI4qznyR95bVagjgy66OyZ/c8I+Qmgis8patlsgDkCYrGLdxopxe
- ny19yL/Nalvrgxl1Q+5dBPUoC4hjrTt0FMFt++W3qeX2ylVa3nmd227LnCZOikfFJgHA
- M+qcWRr5RitGN3zSNh6Y0f/Y3VJcgTyhwN+74UH8LTcZRd4oeuFQwvaHXx0Kfn7cYLsp
- s/yNsKdyrJx5Zz6jEncxumY0uiROLpz5l0kAE0IfDv+4iCLWlwdHXk0XIQ+dR/JjRYEz
- DLjR0xbTYu+7YTUMwSFk7/yk0wLpM51OT/DTt7G7Kft85VIvfGxehZcrzZKrcsx6oO3u
- Fg5Q==
-X-Forwarded-Encrypted: i=1;
- AKwUvBzZ6NkGjpHMCMcmBWcE0voI5EDmQobbVekQOiOKxfANEnmjbXE+7mSL7P4IZ4n+kQlrypAd63s=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYKqyqsSBteyUWuPg9pinQAF/MbtTYg7fJKE3THwUQMYHjDphNVL
- r9wnJHjG6yWbsuKPp/EBQt6Qvg0JG+oJH4+KGfLrj1el7FRJrGNa38jaui4L+hOT9Mc=
-X-Gm-Gg: AYBFou1BbaqOSp2QPPIxguuiNco2lk6ddAD+t39XOR2FvkHO5i7MBGBMQQbkdotWeYh
- +NrFO2m+SYX0+NpXaS0lWRlaF/Vlm7QsqusxdTVe0Vop8YDzYTdTZXLITZQkme1oGMez8zpVFpW
- EdkhV94dasP+cLFzAO5cZhBm8Q4eMGRiFOhqnlmWsxRhrnkE6Izw+OS+qGiMtgjQuzRc+KC94ee
- gDhWb82b/WtrHb7Tq6L8//bYWWzcVGb7G/ggH8zpMMVVpr0poLQqI64dH9wZaS5B4jqQOW58q8V
- +i/g9m4a1LgEcYMAVglQk4JTwzP2C5g8SQS3IHBpEhMspJxym6Tvq38lYNZ95mBGAl5eF3zSZFz
- pdJ+8Oyw5LL33seDWWgI+cUXDI4Pn1j7SU0GvHt3Wj/27JhdK2j74xe46l1iyZeg/Zn+gcNlNzB
- suQdifgoQIsb/ojbYVcyw2ygThz83fTqLCXzcMmt+jsKWy14n3tP4cntQoveudYNWuddO39KxGF
- val1H4JpC/3Ali+USkvR/tSvdLV8gFpxPFXprfSEqUIvigwmIsC51eDdohMntxz
-X-Received: by 2002:a05:6000:2dc8:b0:48c:4d32:ccf8 with SMTP id
- ffacd0b85a97d-48e07bbe524mr20911019f8f.16.1792487796798; 
- Tue, 20 Oct 2026 02:16:36 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:e3a1:1a65:a394:be54?
- ([2a01:e0a:106d:1080:e3a1:1a65:a394:be54])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e1d823cfcsm4813357f8f.39.2026.10.20.02.16.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Oct 2026 02:16:36 -0700 (PDT)
-Message-ID: <ccf4e1b0-cb62-4950-9265-12731463e15a@linaro.org>
-Date: Tue, 20 Oct 2026 11:16:35 +0200
+ c=relaxed/relaxed; t=1792488115;
+ h=Received-SPF:DKIM-Signature:X-UI-Sender-Class:Received:From:To:Cc:
+ Subject:Date:Message-ID:X-Mailer:MIME-Version:
+ Content-Transfer-Encoding:X-Provags-ID:X-Spam-Flag:UI-OutboundReport;
+ bh=x27VnVcO+PUXaO8ysN9b2Uu5vyTuiP03ZyZnMS/vjqk=;
+ b=imLWBFokw8oVnTkU+5Ors5VX3kU9llID95OUffhhu+AEVS6n4L4qSycIJ2aRQ11IZrLd
+ V969MIO+7hc6laOTUdd17puLOl+mcQYu5kEsdSeaa9/UNtgoxzI4SlaeRlJHjt9Fh5Ksb
+ kj2aSU0zPg3RdN/umDlXGQM/JaMq2xMq/witTka7XKja8kmuYVWaAfGTml9zVUDgJcTsa
+ Za/uoOTF3foNUiL4dzswgTJanmDyP+dCEmEN2KVZQqOvlLd4fl299F8PosUxgTV0adTrk
+ jIZHa69Z2ft27BaQ8Q8eq+gY5en45AOfx8oTj3dmNNenLzrhoDNPbjDE02YSxJPkr5Q==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=pass header.from=gmx.de;
+ dkim=pass header.d=gmx.de header.i=fiona.klute@gmx.de header.a=rsa-sha256
+ header.s=s31663417 header.b=cKYN9QBu; 
+ arc=none smtp.remote-ip=212.227.15.15
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.15.15;
+ helo=mout.gmx.net; envelope-from=fiona.klute@gmx.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmx.de header.i=fiona.klute@gmx.de header.a=rsa-sha256
+ header.s=s31663417 header.b=cKYN9QBu
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 4C59481004
+ for <u-boot@lists.u-boot-project.org>; Tue, 20 Oct 2026 09:21:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1792488106; x=1793092906; i=fiona.klute@gmx.de;
+ bh=x27VnVcO+PUXaO8ysN9b2Uu5vyTuiP03ZyZnMS/vjqk=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-ID:
+ MIME-Version:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=cKYN9QBu8TOj3gHaUpmStZR1FC3CnEf9X5IqK/FolWKmDRTfeuyweXEnK/kfeW6U
+ meLcd6C/fYMvp4Rrmlk/QIHuNRTQHOxsa000Pdzk5u8d5cCTQeUK0obLMmra5qzZC
+ ji4l3KV3DnlIn0HlmtcetulYiXpOxgrEn75Hpk8Erw58/eloqZ6OVxuU7XxTjQr1+
+ D92vKyKwEWFEqYO3TcFegfXvRwQ/7YBW2+Wg2rw0ZnU5Y4GZZTX6ojp9byD3yuw4Z
+ 3LafB2vILVzzwyYlSfGG91eWbkavBT9tWe2JgKyRvYvI+1Ns0wqqudXIYguAIlnIv
+ H5Hb4OzVhQ8babIj9A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MfpOd-1whYMl1EpF-00q7xj; Tue, 20
+ Oct 2026 11:21:46 +0200
+From: Fiona Klute <fiona.klute@gmx.de>
+To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@nabladev.com>,
+ u-boot@lists.u-boot-project.org
+Cc: Fiona Klute <fiona.klute@gmx.de>
+Subject: [PATCH] doc: fix description of CONFIG_ENV_WRITEABLE_LIST
+Date: Tue, 20 Oct 2026 11:21:37 +0200
+Message-ID: <20261020092137.242656-1-fiona.klute@gmx.de>
+X-Mailer: git-send-email 2.55.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2] phy: qcom: qmp-combo: honor USB-C orientation for port
- select
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.u-boot-project.org
-Cc: Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
- Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-References: <20261013-ss-orientation-v2-1-8daddb44447e@oss.qualcomm.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20261013-ss-orientation-v2-1-8daddb44447e@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+X-Provags-ID: V03:K1:B97Jv3MUs5UG8lx5HkL5+KBwZhi8gzaiqb5e0q7LFtQmB6poL3s
+ f6+q3HH88rDkZu5nSlEihwAEzGUHCnGJxtkU1siJVRHqAT2fh+Z+5M7PSmKtchUwUkEORor
+ V1p43wEM7b1O8tRk3FgZwO3nHU5EoBryVrSrCW9jklMRYpqrwWjxE9OVrqcKt5OFsjgJlre
+ tTT78epBE9dH3vdY2XpKw==
+UI-OutboundReport: notjunk:1;M01:P0:Tpd2T4f44U8=;yZ1dFoxZR5lOULt3a9CUwU9SRn5
+ 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
+ xtwDvxwKVXW3UyqJRkjs4lnebrOrE=
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -211,122 +236,45 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	NORMAL_HTTP_TO_IP,NUMERIC_HTTP_ADDR,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-14.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MIME_BASE64_TEXT,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 10/13/26 19:08, Balaji Selvanathan wrote:
-> The TypeC port-select mux was always programmed with SW_PORTSELECT_MUX
-> set and SW_PORTSELECT_VAL left clear, regardless of which way the
-> USB-C cable was inserted. On a board where the cable goes in reversed,
-> the SuperSpeed/DP lanes end up routed to the wrong side of the
-> connector, so USB3/DP never comes up correctly.
-> 
-> Cable orientation is reported by a GPIO on the qcom,pmic-glink node
-> ("orientation-gpios"), and is now sampled each time the PHY is
-> enabled to check for the orientation.
-> 
-> Taken from Linux commit 815891eee668 ("phy: qcom-qmp-combo: Introduce
-> orientation variable").
-> 
-> Tested on QCS6490 RB3 Gen2 board.
-> 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
-> Changes in v2:
-> - Instead of reading the orientation at probe, read it only during the PHY init
-> - Updated the commit message to better explain why this change is required
-> - Link to v1: https://lore.kernel.org/u-boot/20260724-kodiak_ss_orientation-v1-1-d9d8fd271e0c@oss.qualcomm.com/
-> ---
->   drivers/phy/qcom/phy-qcom-qmp-combo.c | 26 ++++++++++++++++++++++++++
->   1 file changed, 26 insertions(+)
-> 
-> diff --git a/drivers/phy/qcom/phy-qcom-qmp-combo.c b/drivers/phy/qcom/phy-qcom-qmp-combo.c
-> index 0d63e482ee4..65141489d51 100644
-> --- a/drivers/phy/qcom/phy-qcom-qmp-combo.c
-> +++ b/drivers/phy/qcom/phy-qcom-qmp-combo.c
-> @@ -7,10 +7,12 @@
->   #include <dm.h>
->   #include <dm/device_compat.h>
->   #include <dm/devres.h>
-> +#include <dm/ofnode.h>
->   #include <generic-phy.h>
->   #include <reset.h>
->   #include <power/regulator.h>
->   #include <asm/io.h>
-> +#include <asm-generic/gpio.h>
->   #include <linux/bitops.h>
->   #include <linux/compat.h>
->   #include <linux/delay.h>
-> @@ -39,6 +41,7 @@
->   #define DP_MODE                                 BIT(1) /* enables DP mode */
->   
->   /* QPHY_V3_DP_COM_TYPEC_CTRL register bits */
-> +#define SW_PORTSELECT_VAL                       BIT(0)
->   #define SW_PORTSELECT_MUX                       BIT(1)
->   
->   /* PHY slot identifiers for device tree phandle arguments */
-> @@ -283,6 +286,27 @@ static int qmp_combo_com_exit(struct qmp_combo *qmp)
->   	return 0;
->   }
->   
-> +static bool qmp_combo_read_orientation(void)
-> +{
-> +	ofnode node;
-> +	struct gpio_desc desc;
-> +	int ret, val;
-> +
-> +	node = ofnode_by_compatible(ofnode_null(), "qcom,pmic-glink");
-> +	if (!ofnode_valid(node))
-> +		return false;
-> +
-> +	ret = gpio_request_by_name_nodev(node, "orientation-gpios", 0,
-> +					 &desc, GPIOD_IS_IN);
-> +	if (ret)
-> +		return false;
-
-So yes it will work with single-usb platforms, but will severely break
-the other platforms with multiple controllers (X1, ...).
-
-The real way to fix this is by following the graph to the pmic-glink,
-not the simplest but not the hardest, and there's all the required functions
-to do that in dm/ofnode_graph.h
-
-The path is:
-qmp-combo/port0 -> redriver/port@1 -> redriver/port@0 -> connector@0/port@0
-
-get the connector reg and use this as index of the orientation-gpios.
-
-Neil
-
-> +
-> +	val = dm_gpio_get_value(&desc);
-> +	dm_gpio_free(desc.dev, &desc);
-> +
-> +	return val > 0;
-> +}
-> +
->   static int qmp_combo_com_init(struct qmp_combo *qmp)
->   {
->   	void __iomem *com = qmp->com;
-> @@ -333,6 +357,8 @@ static int qmp_combo_com_init(struct qmp_combo *qmp)
->   		     SW_USB3PHY_RESET_MUX | SW_USB3PHY_RESET);
->   
->   	val = SW_PORTSELECT_MUX;
-> +	if (qmp_combo_read_orientation())
-> +		val |= SW_PORTSELECT_VAL;
->   	writel(val, com + QPHY_V3_DP_COM_TYPEC_CTRL);
->   
->   	writel(USB3_MODE | DP_MODE, com + QPHY_V3_DP_COM_PHY_MODE_CTRL);
-> 
-> ---
-> base-commit: fed92546960a92177d67c0b8d7b22385f50fed29
-> change-id: 20261013-ss-orientation-d85a156e806a
-> 
-> Best regards,
-
+Q09ORklHX0VOVl9XUklURUFCTEVfTElTVCBvbmx5IHJlc3RyaWN0cyBsb2FkaW5nIHN0b3JlZCBl
+bnZpcm9ubWVudCwKbm90IHJ1bnRpbWUgbW9kaWZpY2F0aW9uIGUuZy4gdXNpbmcgImVudiBzZXQi
+LCB3aGlsZSB0aGUgS2NvbmZpZwpkZXNjcmlwdGlvbiBpbXBsaWVkIG90aGVyd2lzZS4gRGVzY3Jp
+YmUgdGhlIGFjdHVhbCBiZWhhdmlvciwgYW5kIGFkZCBhCm5vdGUgaW4gdGhlIGRvY3VtZW50YXRp
+b24uCgpTaWduZWQtb2ZmLWJ5OiBGaW9uYSBLbHV0ZSA8ZmlvbmEua2x1dGVAZ214LmRlPgotLS0K
+IGRvYy9kZXZlbG9wL2Vudmlyb25tZW50LnJzdCB8IDcgKysrKysrKwogZW52L0tjb25maWcgICAg
+ICAgICAgICAgICAgIHwgNSArKystLQogMiBmaWxlcyBjaGFuZ2VkLCAxMCBpbnNlcnRpb25zKCsp
+LCAyIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RvYy9kZXZlbG9wL2Vudmlyb25tZW50LnJz
+dCBiL2RvYy9kZXZlbG9wL2Vudmlyb25tZW50LnJzdAppbmRleCBhN2VkNGFhYjBhNS4uZTdjZjZk
+ZTM1ODYgMTAwNjQ0Ci0tLSBhL2RvYy9kZXZlbG9wL2Vudmlyb25tZW50LnJzdAorKysgYi9kb2Mv
+ZGV2ZWxvcC9lbnZpcm9ubWVudC5yc3QKQEAgLTg5LDMgKzg5LDEwIEBAIGFuIGFzc29jaWF0aW9u
+IGluIHRoZSBzdGF0aWMgbGlzdC4KIElmIENPTkZJR19SRUdFWCBpcyBkZWZpbmVkLCB0aGUgdmFy
+aWFibGUgbmFtZSBpcyBldmFsdWF0ZWQgYXMgYSByZWd1bGFyCiBleHByZXNzaW9uLiBUaGlzIGFs
+bG93cyBtdWx0aXBsZSB2YXJpYWJsZXMgdG8gZGVmaW5lIHRoZSBzYW1lIGZsYWdzIHdpdGhvdXQK
+IGV4cGxpY2l0bHkgbGlzdGluZyB0aGVtIGFsbC4KKworSWYgQ09ORklHX0VOVl9XUklURUFCTEVf
+TElTVCBpcyBkZWZpbmVkLCBvbmx5IGVudmlyb25tZW50IHZhcmlhYmxlcword2hpY2ggZXhwbGlj
+aXRseSBzZXQgdGhlICd3JyB3cml0ZWFibGUgZmxhZyBjYW4gYmUgd3JpdHRlbiBmcm9tIHN0b3Jl
+ZAorZW52aXJvbm1lbnQuIEl0IHJlc3RyaWN0cyBvbmx5IGVudmlyb25tZW50IGxvYWRpbmcsIG5v
+dCBydW50aW1lCittb2RpZmljYXRpb24gdXNpbmcgImVudiBzZXQiLCBldGMuIE5vbi13cml0YWJs
+ZSB2YXJpYWJsZXMgY2FuIHN0aWxsIGJlCit3cml0dGVuIHRvIHN0b3JlZCBlbnZpcm9ubWVudCBi
+eSBleHRlcm5hbCB0b29scyAoZS5nLiBgYGZ3X3NldGVudmBgCitmcm9tIGEgcnVubmluZyBPUyks
+IGJ1dCB3aWxsIGJlIGlnbm9yZWQgd2hlbiBsb2FkaW5nIHRoZSBlbnZpcm9ubWVudC4KZGlmZiAt
+LWdpdCBhL2Vudi9LY29uZmlnIGIvZW52L0tjb25maWcKaW5kZXggYzZkZjA5YTMzNDkuLjcwZjZj
+Y2E3MDFjIDEwMDY0NAotLS0gYS9lbnYvS2NvbmZpZworKysgYi9lbnYvS2NvbmZpZwpAQCAtODk3
+LDggKzg5Nyw5IEBAIGNvbmZpZyBFTlZfV1JJVEVBQkxFX0xJU1QKIAlzZWxlY3QgRU5WX0FQUEVO
+RAogCWhlbHAKIAkgIElmIGRlZmluZWQsIG9ubHkgZW52aXJvbm1lbnQgdmFyaWFibGVzIHdoaWNo
+IGV4cGxpY2l0bHkgc2V0IHRoZSAndycKLQkgIHdyaXRlYWJsZSBmbGFnIGNhbiBiZSB3cml0dGVu
+IGFuZCBtb2RpZmllZCBhdCBydW50aW1lLiBObyB2YXJpYWJsZXMKLQkgIGNhbiBiZSBvdGhlcndp
+c2UgY3JlYXRlZCwgd3JpdHRlbiBvciBpbXBvcnRlZCBpbnRvIHRoZSBlbnZpcm9ubWVudC4KKwkg
+IHdyaXRlYWJsZSBmbGFnIGNhbiBiZSB3cml0dGVuIGZyb20gc3RvcmVkIGVudmlyb25tZW50LiBU
+aGlzCisJICByZXN0cmljdHMgb25seSBlbnZpcm9ubWVudCBsb2FkaW5nLCBub3QgcnVudGltZSBt
+b2RpZmljYXRpb24gdXNpbmcKKwkgICJlbnYgc2V0IiwgZXRjLgogCiBjb25maWcgRU5WX0FDQ0VT
+U19JR05PUkVfRk9SQ0UKIAlib29sICJCbG9jayBmb3JjZWQgZW52aXJvbm1lbnQgb3BlcmF0aW9u
+cyIKLS0gCjIuNTUuMAoK
