@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96A8F606A319
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 12:55:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 682BA606A31A
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 12:55:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=xv03wzaT;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=J0dnolSd
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XrNijhLX;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=HD9sscOa
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 152366083B;
-	Wed, 21 Oct 2026 12:55:07 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 461A660837;
+	Wed, 21 Oct 2026 12:55:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0k8xYXz3rSBM; Wed, 21 Oct 2026 12:55:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org AF703608A9
+ id Ug9fxEzgLejB; Wed, 21 Oct 2026 12:55:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 63691608C3
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792587306;
-	b=mVZPlGrl+UkJwdeaCOplEnvBzmH9fG5PYZKgDOh2eVOouDRGOzyC8DdyVytpsKUqhlvJ
-	 kEfTicCYGQFxBWkjY1Tm9L4iYfluGWc7U04pKDcnEdpczfyMRkwzY7zf4I2WFwu9uL0yM
-	 SL9ukIh/FCvXNhsQkuRFx7dGxTqmdzIdz190yM6iSg+tr6veeeddAj+HpjA0n6RBwSexV
-	 GZOu97U89oh3J77DTbt+by2/m0YflBeuKpUT8VygikioJ4tv6eUvQONCA0uId6xFowliA
-	 eiRnibY5SuggvM9b3GgFD0hOrsFgwbJbSNSXvaBbTJXyaLYdsD1dyuqnfdWpnPFK8Ug==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792587313;
+	b=RF5hTPBiErq41gswieqnAoD90TpnoMl4rtcQuP9P91I+D+xBGKg+RR6HSvDgVac4YAS0
+	 ajduxGxYL9eqTgGcCxJNOlT8apURcbxoikB0rRiiIJ+YypFZwXj1O5AQWG/I4ByFQc9xE
+	 Ac1JuWyS/JPKciSQRO6ez/tqtAnyCgsFbyG+VrBlAMpQHzpsut9WPVofUgdJ5g/Wm36hK
+	 7KhWPFAVoGtQHmcjO5cUmoj4zkTimJcJh7jONC5Bq85gWHSv/UJ0lF5PWjqQtO7VB/Smu
+	 GlEfYGn/oc4KZAA39P8Z7vMiki3IhRNKS5zWTRxZk3uBI2aqi6YxyYIXqtcfots+fOA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792587306;
+	c=relaxed/relaxed; t=1792587313;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,135 +33,136 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=UzHCT04BRdq1NkoXo1FPgd2DNVDdzWiRhKSN+lF9zBU=;
-	b=HWhx3bnZnm4wuQ93jda3yx6IYc5ebIydx0Kw4QYG/T/pVnYHBLXCq80ggbLpw+c4/bMW
-	 C9NoXyiCtBcpmAd5e7JuCsZSkCJPJQHlzv0MbfH/JddUxszKf8aXU85K5P6c4E2aof19/
-	 MUeh4fGES0KpE4KrTKOG36IKGHzGMgjj6wqFqmXOTFDxUl7MDJZQVjkbHcsck43QVOkr7
-	 1mffCBY/68DtapfP7S1fxSdPC2fVK/w+RDNEeFor4N1G6eSfzI8RbzM8hFV0U9V6rb+Zx
-	 xLec1iPMIhdqykTnXcDQelK4agNtz/Q0AxHSEX0xq8iXKtsYvYIVfQ3IYJeH08IpVbw==
+	bh=Ps1GpZawckRVETiSLl9d7NAMBkSr8W/V9NQfJ2jZ7EU=;
+	b=UaWTbyWozfoQwjdsCoq8U79gV7Scy1PQ0XczywLxrFXkeiE3js1gzf38joIN1/oZ2NFX
+	 BqODDepoFbxi2rj4UNaMLbKEWO4FFCwwei+UcoozbJzIZkNpctfw+MCg4aWyTHIxfmdwu
+	 vUGptXunficFX6Eo/y3OOkUrX7Hb9AUycXQ5+FWUn0lK+CxoqS0PJkMNbPVI2kn7TiJrn
+	 wNWUITtHIdF87y9ZYb8WuArDQ/HVx2+FahgU+KI+yMn12XV7og/XQNmbCs1q9ZK54IGyq
+	 RNCFRUAbS+0J506QqUPhKjHHAW0VtBmzXYhkQMcWEq6xNK0sBdUL8z6R5UXCtTZLdWg==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792587306;
-	bh=UzHCT04BRdq1NkoXo1FPgd2DNVDdzWiRhKSN+lF9zBU=;
+	d=lists.u-boot-project.org; s=default; t=1792587313;
+	bh=Ps1GpZawckRVETiSLl9d7NAMBkSr8W/V9NQfJ2jZ7EU=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xv03wzaTCi+2n7lHMsMf1ISwUC6GBVRoZNT6WqxuprriPmhSMPehbsKnX9wL3bahO
-	 AjQfVEY8BGEK9kwHqA5Er/FRZ7PulUmMdW9SqPxm4dUpeZlfr48uDQvM1G5bv+Fx/D
-	 NMqJUVddhRihf2BH7MRyWVHDhqNjzx9yv+y51saNJDjHpyTOe8gO7C2vnawIVRHXEx
-	 r7gWYQoYxZ6rQT3/c/ceiSYGiinmBLG9WOvo8vIyq59oXJdDNm+pSNXF7k2ONoJ4oY
-	 C7bBy754b9tLioCqbF0Kt1SDKs8SYD419n28TPcZnKJ8eTUoyl0g0OZpy048l3i+/f
-	 VZwuMpEeghbXw==
+	b=XrNijhLXcAQQ1V/rI6JJECLhAOLzuaE63STLYva9lrjIBeMPe5UZlRBaUEcAG+O1c
+	 9clctwlO118EFdzo8l4Pu7fVvcvI54pExg6YXJ8pvXhg0Mw2n+3MK7FtuJDajumOHK
+	 /qERCuHLPkYml0h5gcNVUmrEaCLOtrRnv8QFL3Z2+PJQzUME2EsoBOehqbPQGuJbAo
+	 jf3Egmor0HBqzrAYmjllcUQVcSq7oLaz93khrkdUCBigKUPJSGlInIxaPjP6ITDYhS
+	 zJ3zHB06KCk7b5bKmucEelkgAXJjKTApwSTtzGtoc3SqTbu9Ypfd56s05ddl9aWKsH
+	 A+TWOUzX8nHbw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AF703608A9;
-	Wed, 21 Oct 2026 12:55:05 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 545721AB
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:55:04 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 63691608C3;
+	Wed, 21 Oct 2026 12:55:13 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id E7CE83A4
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:55:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3A9D5403AD
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:55:04 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id C44804084B
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:55:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VAFR3AL5QZwU for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 12:55:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 0127C403A6
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::936"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792587303;
- b=kOGqF7LOHwqogmq+YMBWP3ZMt1VBcuBcz3dhgxOGOrybFuw5Tc9IHuXZp8tw9g+wvlyf
- UvyQ8wLvKnbYqFIiXsnJKlAEbDCL0CA33r/C4gka1TvyoKQwwrSvBy6ZorESEOZxJ/dHP
- mkC1UNHAw2SAxWCVaoPgj5DxlBALrXwVlAa6VVZtpIzsgN2JpJnG3i1dRKnW9buq+bMxL
- urPfjZYanGF5h+vBy9TqTkY/Vzpe1ptHHP9aP3eG8iop8nu9J78m32WLE08gfPREYuYN/
- LN6ebCAKp0dcPb6eH4Y8deogj4Ga80aDoJVRXEeUs9BLe40NSt1DXW+UbK2UpAV5Xcw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0m2QX71HOcaS for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 12:55:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 88BCB4082D
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::e2e"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792587309;
+ b=OhCmJxP4/gY6Uk1R1WqewxFvBFFFXHaL3bQDJNAg2BhKOvFSFlcb+1tgC+WW34bzTugx
+ QS85Mz7KdJpghU7mFJBxiLk2qYmnNYbQuOF73vhEN4LjplC0FaOa97mlktA2P2MbIOuDH
+ BgLbeuJFfM3v73IefyTQzyc7QTE4JFm0wYbCsKtqX9c7R520tGI9IfI/NmHYwmKSLFEZp
+ nFhfz6+IW2oTuHUBiE8PvU/rFpUq+u3+1a88lXgOaMiektFpZN7aCYsW5RXr9gnK99Orc
+ 9pzSfaJIJ/S0HV6L0+Nrdm8v0HF2Bp0905yq0kUSKJMKHIS+EzVPrqaJgHUdZ0o72PA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792587303;
+ c=relaxed/relaxed; t=1792587309;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=UzHCT04BRdq1NkoXo1FPgd2DNVDdzWiRhKSN+lF9zBU=;
- b=oqd+2wbZQxWGqA7kwqwHFG3GpdNbhIm8hsC4DCm6e7Yf+Ap8n9x4QEJIfJQF1sVLrKj7
- clf+Z4Z0+EAw/EbmnVd1dkbZLu0Vlg/IAgXOsxCdCW8ULZxcyvkN9Kp60SErjLO6kjh83
- TKu3qzT3caZeR3tYeXTqb5QnMTTx5IaSm67u4nc6i5+3mQT8Dy/CC7nVmdJXPBarfnB0W
- 6yIrozWjBVF0mbtaZGsTs0f8jcNKz8anuiPWNARN5WdMekbSdULjc60l6fPX6I0YPX0tj
- H+FS9n1G4rjEDXWzIcNrBOLSCiq3m/tEZpglvs28eDQw7TV82ooEghGPJcmyTeJapTA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=Ps1GpZawckRVETiSLl9d7NAMBkSr8W/V9NQfJ2jZ7EU=;
+ b=DnKa0bdYjoZrF94MMzRNFBBxv0mCpt/tzjOYpi0XHfumEF/GFoe62yfSVStlg49e0Uxg
+ WZ1EmeK+Yw+vAHupIWG7RmcA5GirV/vNM4RMQTEh2jT+47lVE6+R0b1cb57NKgA6Z8baz
+ hoktIGAHOZsHcpAUvbmZdVGrBD8ny5vN0Z7nqW+2/58Lkep/QEwGc4jk5J/QvVs7lI6GF
+ EPb35nHSMZXxu2Gn0TZmaRySjjmpqyvyMYSBTSAkuIVTdPBtrrOIwBElZtxeJ72njeEqy
+ 6YuJR6eHcrh78ZtJ9e/vZOFJZaibVR3m8nfOpglf+yJ34kqCqt1HJFpxXC+XiyN4FYg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=none header.from=baylibre.com;
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=J0dnolSd; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::936"
+ header.s=google header.b=HD9sscOa; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::e2e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::936; helo=mail-ua1-x936.google.com;
+ client-ip=2607:f8b0:4864:20::e2e; helo=mail-vs1-xe2e.google.com;
  envelope-from=hfranco@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=J0dnolSd
-Received: from mail-ua1-x936.google.com (mail-ua1-x936.google.com
- [IPv6:2607:f8b0:4864:20::936])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0127C403A6
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:55:01 +0000 (UTC)
-Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-9851592ada1so269655241.0
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 05:55:01 -0700 (PDT)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=HD9sscOa
+Received: from mail-vs1-xe2e.google.com (mail-vs1-xe2e.google.com
+ [IPv6:2607:f8b0:4864:20::e2e])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 88BCB4082D
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:55:08 +0000 (UTC)
+Received: by mail-vs1-xe2e.google.com with SMTP id
+ ada2fe7eead31-7cc0ccc2fddso218346137.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 05:55:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1792587300; x=1793192100;
+ d=baylibre.com; s=google; t=1792587307; x=1793192107;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=UzHCT04BRdq1NkoXo1FPgd2DNVDdzWiRhKSN+lF9zBU=;
- b=J0dnolSdWD+NcGTm0yzWz9mR1nS8EIHzqX5snigXN33eYdw8zJ5bBl4Ao8trCVpDlE
- dSTS8zsHUTUoInrBAh8rfMtk28Kj40DIQJ+delgdikmV2hH1+EQVgHNyXVMdG54iSpAG
- WdicrwRD8AgcA284juKfc+DlpyAJgw7D87JH5Xhkgg1upi1TWDkNAw2XSprDrlEnO88R
- +z79D3zr6h4MYmpHS7L7Ok5n6ygNjGKmwlNhyMKY4K8XMAddgxhmxrbimlBW4SiCZExz
- NbPoTtKbDOEKZSHPsqb2oVSl6g0SiYj8AeSPlqgOd5irkX55QhJYavZz7NUoOd0c7c5V
- fO5A==
+ bh=Ps1GpZawckRVETiSLl9d7NAMBkSr8W/V9NQfJ2jZ7EU=;
+ b=HD9sscOat2rv8xIl8pzXff54xHy78L6ka8WjIrku4bEsXsBSyVYqDpLTTxh6fVNcq/
+ rB+sYiQ0wO6DpUZXB7x6f9sZhms++iZzIFnP9YdCAEH7vvNmOUtJ45K7FVpgAoMHBBgH
+ LDm20VfJbhI51xtc6LoHRZUUjqZmCA4guneuJj2v12mZbSx1XyKL01w0QpS5Xa/xU7tc
+ Utq2ns6clegxo5Rs/fMWwnJtzL+GwQwVy5BJI/ZMjQae2Zj6lLSYPxdijtZszRPg2h6s
+ 9JRgnQt/43aBcgo2n2RX/y3fXxhl09I6Lz7zOymh4/bR6LTiXu1T9PaezGV2YogImAdc
+ N+3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792587300; x=1793192100;
+ d=1e100.net; s=20260707; t=1792587307; x=1793192107;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=UzHCT04BRdq1NkoXo1FPgd2DNVDdzWiRhKSN+lF9zBU=;
- b=I7y3yG9VUSX6NovF3l7ZcRVpCXoLuNs3tNt/hSTUT0GIfRxhDheOzTFpgDfDoZFgkG
- T5i/2jUk4q3TaGrtKO705KJRlD67eR/lyxddeoJg+laiGHsIX/6xuEiXB5qYYRSXslxb
- yub7TVtmyILjb48pnv3wlXRwzKnNfszUP6GVWOBegQfB4Rvjxuviio6n6hL22Ry/+6Aw
- cK2URoX/SQG0rGmz/0BaHtxMOiZxxhTztu3YcyHcPT50EX0dYKpqeFt7a8Rd3PSyb7e3
- ZL8sBnUZqtVgdhc8bwzJKjIS3HpbG1QWN0W41FzAaUUo5fE96aW5lbpJZOcvz+U+yHVq
- bwqA==
-X-Gm-Message-State: AFq9FYLDKzfoi4Z7q4mo6TIvtXR7luWI6oWUqkAIux6BPNRFIxlPAXVX
- 3J8jAsT8fkTJZQQU63MN/4sHJCqVW2ZtO6mee7VELPuFSEDimb2wmvGn8GtuBm+CaiY=
-X-Gm-Gg: AYBFou3+XBSTgno2Xi8D1x9YkwRbGhCWRoBOaOiAcAQAiAFGzqM3fnzZ/BhyNACbKmA
- IRha7Mgr30gcBMBN8ln/erunSqyw5nlMjCDhkycixhAF4MQIadQL5oTImRYK8ZQmy2n/S7PVQv2
- nGDfUYQX5zUDS2KSPYP6u7woDVnewRGbW/aQ3AvqWMJka8BVW0+mItibiMwORAwGhnHS+6OuVTx
- mcjsiOwzWOSCEyv0F0Tx36NZ18OWyxqlTV02MvA8NlKr8zfzgbeIKySproZieB87dlXDDYRq3LJ
- HKEQQpl+7mUBSi8fQ5UeD32HKktSkQ3pgbXZP2vC3ELxRPbVSQBDi5/wDBfWZThUImmfl6jOtep
- OwsF8ZFTCBgl52O0ePo7SpAEmpGTFrjXTio/G/sLt/cwKOzPSxwo5wqiYb5917x+uZmOhd9AuhH
- bFTTuEvNWUBUOlfl6aCtjGQlbgDV1R9/PIHymLU/wYU9+DwkExSTKFXDD6t5chLqarUa1/wEbiJ
- +1/m6cPLFZnLbiMdeBXf/I/DQH2L0EUqK3M6yZ1cOOTxM2szDQAG9RlEMjJK4xyJAqb7u19gp9w
- llfLhug+7I6hY2jm9Yk=
-X-Received: by 2002:a05:6102:3709:b0:7b5:4700:3a6a with SMTP id
- ada2fe7eead31-7cc926d0a55mr619813137.26.1792587300452; 
- Wed, 21 Oct 2026 05:55:00 -0700 (PDT)
+ bh=Ps1GpZawckRVETiSLl9d7NAMBkSr8W/V9NQfJ2jZ7EU=;
+ b=Tc90dgyc1w7PAxuewuvA5iuYENLL56TksNkOoVYRyj9FOmEpF04nYlRLtXevPt8cOj
+ YNc9vHTIch28tchR4s/aLwhOYhKlHI2bshvck3sdVRpGYh8gdwJ2P06a2Hc1qedptLa0
+ b2Rt8Vvd1mh8Tx1bo9KQVWVqu9+uwfOWbvScwNvwgbZw8cdU0VjpBFhGFdNAslwwq0uS
+ zpqzcVUJ1W5kbUnZlu9a9S1RE1d8nEZTut1/IZc/HEiAo5INX+G9flSPgwSpT96jTQ9S
+ 988l7PGrdPJrwPlBcZrYgIBUN+JPU6Ph/QDSH0QermFs7Cn+RHkIwAfzXpt6k1BCYvyH
+ YLAA==
+X-Gm-Message-State: AFq9FYKgvgXEEtpLECIcsJM4xnq7eCKWneXiroEN+3dyhk3KMeFHcHua
+ yjr2S3Px3b6CmWwct6Zb0c3zz3P7v5GYnkrTKL0GZwnMVO2tl5nUaimopxEdx+zE4RtcmvTi945
+ FZldEBSA=
+X-Gm-Gg: AYBFou3LQYLwR3p8DCVNdJSWW03dDNQkx/AtidzsUH/jNm2KkjCZbYddmKCZbTVWzQk
+ 62oGQRPJcH1PC8X+Bk1OrXhvYQ74UCfb2/X9dEe/mxUxtzlvSvXrZh3l3myarzR6omnvx0xBE5P
+ k4G5yd08y6EbOJd+t+Wi6TeE0ScifFXrJwcM14S/P+2VkNItSRVcp/DSuohcPDFcY2Hj/sE7nOh
+ 44orIKVt+Qt1lZ478mz1TgDpWDcZvuFxK4xUQNMvBLR+8L2QVw90Y0J9er953pfm2ZhIlMbfdAY
+ VgLbDA7FtAn6/DRCEz6WUfrkBCFJcyphu2Dtq7BYQ+1ufi7Mlh/GzFPk+JG3eU048/jYSqlei2v
+ VrARzXg3Zg+L7IYIfkqniy3QLmH5ciw1lRJ9gJcQvZXUsgCF9jgs8RSgBSSfSqKdwd2NoHjLXEb
+ qmNm42CA9a3HWWR94lzF4pNOKv1WKOzyFORFco1ihDkMkkzADjruUiYrj8fALuT12pQGag4VoA5
+ T4++Ot81PShvgmZPQb0/TnE8SWEWUAZH4K43Mqd4z47LZ0xjQX/8tX04uFjc6Y925SgqE4QFE+j
+ vsZhn7GSpnoaFPZ0+Wk=
+X-Received: by 2002:a05:6102:2d04:b0:7c3:43cd:6fa6 with SMTP id
+ ada2fe7eead31-7cc926825c6mr643925137.18.1792587305620; 
+ Wed, 21 Oct 2026 05:55:05 -0700 (PDT)
 Received: from [127.0.1.1] ([2804:14c:4c5:8bf0::33ca])
  by smtp.gmail.com with ESMTPSA id
- a1e0cc1a2514c-990d0e0ba56sm3013863241.1.2026.10.21.05.54.55
+ a1e0cc1a2514c-990d0e0ba56sm3013863241.1.2026.10.21.05.55.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Oct 2026 05:55:00 -0700 (PDT)
+ Wed, 21 Oct 2026 05:55:05 -0700 (PDT)
 From: Hiago De Franco <hfranco@baylibre.com>
-Date: Wed, 21 Oct 2026 09:54:18 -0300
-Subject: [PATCH 2/8] riscv: cv1800b: add SPL support
+Date: Wed, 21 Oct 2026 09:54:19 -0300
+Subject: [PATCH 3/8] ram: sophgo: add CV180x DDR2 driver
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261021-milkv-duo-spl-v1-2-ee7618860237@baylibre.com>
+Message-Id: <20261021-milkv-duo-spl-v1-3-ee7618860237@baylibre.com>
 References: <20261021-milkv-duo-spl-v1-0-ee7618860237@baylibre.com>
 In-Reply-To: <20261021-milkv-duo-spl-v1-0-ee7618860237@baylibre.com>
 To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>
@@ -186,86 +187,1897 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add SUPPORT_SPL and SPL_CPU.
+Add a RAM driver that brings up and trains the DDR2 controller and PHY
+of the Sophgo CV180x (CV1800B) SoC, for use in SPL.
 
-harts_early_init() enables the C906 caches and T-HEAD ISA extensions.
+The driver is ported from the Sophgo FSBL [1]
+(plat/cv180x/ddr/ddr_sys_bring_up.c), split into the same stages as the
+vendor code: controller/PHY init, register patching, pinmux setup and
+package detection, followed by read-gating, write-DQ and read-DQ
+training with BIST verification after each step. DDR2 has no write
+leveling.
+
+[1] https://github.com/sophgo/fsbl
 
 Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
 ---
- arch/riscv/cpu/cv1800b/Kconfig  |  2 ++
- arch/riscv/cpu/cv1800b/Makefile |  4 ++++
- arch/riscv/cpu/cv1800b/spl.c    | 31 +++++++++++++++++++++++++++++++
- 3 files changed, 37 insertions(+)
+ board/sophgo/milkv_duo/MAINTAINERS  |   1 +
+ drivers/ram/Kconfig                 |   1 +
+ drivers/ram/Makefile                |   1 +
+ drivers/ram/sophgo/Kconfig          |   6 +
+ drivers/ram/sophgo/Makefile         |   6 +
+ drivers/ram/sophgo/cv180x_ddr.c     | 140 ++++++++
+ drivers/ram/sophgo/cvx16_pinmux.c   |  54 +++
+ drivers/ram/sophgo/ddr_patch_regs.c |  39 +++
+ drivers/ram/sophgo/ddr_pkg_info.c   | 110 +++++++
+ drivers/ram/sophgo/ddr_sys.c        | 635 ++++++++++++++++++++++++++++++++++++
+ drivers/ram/sophgo/ddr_sys.h        | 108 ++++++
+ drivers/ram/sophgo/ddrc_init.c      | 476 +++++++++++++++++++++++++++
+ drivers/ram/sophgo/phy_init.c       | 193 +++++++++++
+ 13 files changed, 1770 insertions(+)
 
-diff --git a/arch/riscv/cpu/cv1800b/Kconfig b/arch/riscv/cpu/cv1800b/Kconfig
-index 57f724ae043..29a65b93942 100644
---- a/arch/riscv/cpu/cv1800b/Kconfig
-+++ b/arch/riscv/cpu/cv1800b/Kconfig
-@@ -7,7 +7,9 @@ config SOPHGO_CV1800B
- 	select ARCH_EARLY_INIT_R
- 	select SYS_CACHE_SHIFT_6
- 	select SYS_CACHE_THEAD_CMO
-+	select SUPPORT_SPL
- 	imply CPU
- 	imply CPU_RISCV
- 	imply RISCV_TIMER
-+	imply SPL_CPU
- 	imply CMD_CPU
-diff --git a/arch/riscv/cpu/cv1800b/Makefile b/arch/riscv/cpu/cv1800b/Makefile
-index da12e0f64e1..d16211f3a60 100644
---- a/arch/riscv/cpu/cv1800b/Makefile
-+++ b/arch/riscv/cpu/cv1800b/Makefile
-@@ -2,5 +2,9 @@
- #
- # Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
+diff --git a/board/sophgo/milkv_duo/MAINTAINERS b/board/sophgo/milkv_duo/MAINTAINERS
+index 6941dc5b376..5e15e461b17 100644
+--- a/board/sophgo/milkv_duo/MAINTAINERS
++++ b/board/sophgo/milkv_duo/MAINTAINERS
+@@ -5,3 +5,4 @@ F:	board/sophgo/milkv_duo/
+ F:	board/sophgo/common/
+ F:	configs/milkv_duo_defconfig
+ F:	doc/board/sophgo/milkv_duo.rst
++F:	drivers/ram/sophgo/
+diff --git a/drivers/ram/Kconfig b/drivers/ram/Kconfig
+index acd6d9cfd6a..3432aa30839 100644
+--- a/drivers/ram/Kconfig
++++ b/drivers/ram/Kconfig
+@@ -145,6 +145,7 @@ source "drivers/ram/octeon/Kconfig"
+ source "drivers/ram/renesas/Kconfig"
+ source "drivers/ram/rockchip/Kconfig"
+ source "drivers/ram/sifive/Kconfig"
++source "drivers/ram/sophgo/Kconfig"
+ source "drivers/ram/stm32mp1/Kconfig"
+ source "drivers/ram/starfive/Kconfig"
+ source "drivers/ram/sunxi/Kconfig"
+diff --git a/drivers/ram/Makefile b/drivers/ram/Makefile
+index 82afd5fcbcc..e9f4581c4f0 100644
+--- a/drivers/ram/Makefile
++++ b/drivers/ram/Makefile
+@@ -33,4 +33,5 @@ obj-$(CONFIG_CADENCE_DDR_CTRL) += cadence/
  
-+ifdef CONFIG_XPL_BUILD
-+obj-y += spl.o
-+else
- obj-y += dram.o
- obj-y += cpu.o
-+endif
-diff --git a/arch/riscv/cpu/cv1800b/spl.c b/arch/riscv/cpu/cv1800b/spl.c
+ ifdef CONFIG_XPL_BUILD
+ obj-$(CONFIG_SPL_THEAD_TH1520_DDR) += thead/
++obj-$(CONFIG_SPL_SOPHGO_CV180X_DDR) += sophgo/
+ endif
+diff --git a/drivers/ram/sophgo/Kconfig b/drivers/ram/sophgo/Kconfig
 new file mode 100644
-index 00000000000..6fd62d66da7
+index 00000000000..44ba85dbcff
 --- /dev/null
-+++ b/arch/riscv/cpu/cv1800b/spl.c
-@@ -0,0 +1,31 @@
++++ b/drivers/ram/sophgo/Kconfig
+@@ -0,0 +1,6 @@
++config SPL_SOPHGO_CV180X_DDR
++	bool "Sophgo CV180x DDR driver in SPL"
++	depends on SPL_RAM && SOPHGO_CV1800B
++	help
++	  This enables the DDR2 controller and PHY initialization and
++	  training for the Sophgo CV180x (CV1800B) SoC in SPL.
+diff --git a/drivers/ram/sophgo/Makefile b/drivers/ram/sophgo/Makefile
+new file mode 100644
+index 00000000000..161f993b4ed
+--- /dev/null
++++ b/drivers/ram/sophgo/Makefile
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (c) 2026 Hiago De Franco <hfranco@baylibre.com>
++
++obj-y += cv180x_ddr.o ddr_pkg_info.o ddr_sys.o cvx16_pinmux.o \
++	 ddrc_init.o phy_init.o ddr_patch_regs.o
+diff --git a/drivers/ram/sophgo/cv180x_ddr.c b/drivers/ram/sophgo/cv180x_ddr.c
+new file mode 100644
+index 00000000000..28af828a2f7
+--- /dev/null
++++ b/drivers/ram/sophgo/cv180x_ddr.c
+@@ -0,0 +1,140 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
++ * Sophgo CV180x DDR2 driver for SPL
++ *
 + * Copyright (c) 2026, Hiago De Franco <hfranco@baylibre.com>
 + *
-+ * CSR setup based on the Sophgo FSBL (https://github.com/sophgo/fsbl),
-+ * lib/cpu/riscv/bl2_entrypoint.S.
++ * Based on the Sophgo FSBL (https://github.com/sophgo/fsbl),
++ * plat/cv180x/ddr/ddr_sys_bring_up.c.
++ *
 + */
 +
-+#include <asm/csr.h>
-+#include <linux/bitops.h>
++#include <config.h>
++#include <dm.h>
++#include <linux/sizes.h>
++#include <ram.h>
 +
-+#define CSR_MCOR			0x7c2
-+#define  CSR_MCOR_CACHE_INV		BIT(4)
-+#define  CSR_MCOR_CACHE_SEL_BOTH	(BIT(1) | BIT(0))
-+#define CSR_MHCR			0x7c1
-+#define  CSR_MHCR_DE			BIT(1)
-+#define  CSR_MHCR_IE			BIT(0)
-+#define CSR_MXSTATUS			0x7c0
-+#define  CSR_MXSTATUS_CLINTEE		BIT(17)
-+#define  CSR_MXSTATUS_MAEE		BIT(21)
-+#define  CSR_MXSTATUS_MM		BIT(15)
-+#define  CSR_MXSTATUS_THEADISAEE	BIT(22)
-+#define  CSR_MXSTATUS_UCME		BIT(16)
++#include "ddr_sys.h"
 +
-+void harts_early_init(void)
++struct cv180x_ddr_priv {
++	struct ram_info info;
++};
++
++static int cv180x_ddr_bist(const char *step, bool sram)
 +{
-+	csr_write(CSR_MXSTATUS, CSR_MXSTATUS_THEADISAEE | CSR_MXSTATUS_MAEE |
-+		  CSR_MXSTATUS_CLINTEE | CSR_MXSTATUS_UCME | CSR_MXSTATUS_MM);
-+	csr_write(CSR_MCOR, CSR_MCOR_CACHE_INV | CSR_MCOR_CACHE_SEL_BOTH);
-+	csr_set(CSR_MHCR, CSR_MHCR_IE | CSR_MHCR_DE);
++	int ret;
++
++	if (sram)
++		cvx16_bist_wr_sram_init();
++	else
++		cvx16_bist_wr_prbs_init();
++
++	ret = cvx16_bist_start_check();
++	if (ret)
++		debug("DDR: %s BIST failed after %s: %d\n",
++		      sram ? "SRAM" : "PRBS", step, ret);
++
++	return ret;
++}
++
++static int cv180x_ddr_probe(struct udevice *dev)
++{
++	struct cv180x_ddr_priv *priv = dev_get_priv(dev);
++	u8 vendor, dram_cap;
++	int ret;
++
++	ret = read_ddr_pkg_info(&vendor);
++	if (ret)
++		return ret;
++
++	cvx16_pll_init();
++	ddrc_init(vendor);
++
++	/* Release the DDRC soft reset */
++	writel(0x0, DDR_TOP_BASE + 0x20);
++
++	/*
++	 * AXI QoS: M1 VIP realtime 0xa, M2 VIP offline 0x8, M3 CPU 0x7,
++	 * M4 TPU 0x0, M5 video codec 0x9, M6 high speed peripherals 0x2
++	 */
++	writel(0x007788aa, TOP_BASE + 0x1d8);
++	writel(0x00002299, TOP_BASE + 0x1dc);
++
++	phy_init();
++	writel(0x02620504, PHYD_BASE + 0xa4);
++	ret = cvx16_pinmux(vendor);
++	if (ret)
++		return ret;
++	ddr_patch_set();
++	cvx16_en_rec_vol_mode();
++
++	cvx16_set_dfi_init_start();
++	cvx16_ddr_phy_power_on_seq1();
++	cvx16_polling_dfi_init_start();
++	cvx16_dfi_init_start_isr();
++	cvx16_ddr_phy_power_on_seq3();
++	cvx16_wait_for_dfi_init_complete();
++	cvx16_polling_synp_normal_mode();
++	cv180x_ddr_bist("init", false);
++
++	/* DDR2 has no write leveling */
++	ctrl_init_low_patch();
++	cv180x_ddr_bist("low patch", false);
++	cvx16_rdglvl_req();
++	cv180x_ddr_bist("rdglvl", false);
++
++	cvx16_wdqlvl_req(WDQLVL_DQ_DM);
++	cvx16_wdqlvl_req(WDQLVL_DQ);
++	cvx16_wdqlvl_req(WDQLVL_DM);
++	cv180x_ddr_bist("wdqlvl", false);
++
++	/* param_phyd_pirdlvl_capture_cnt = 1 */
++	clrsetbits_le32(PHYD_BASE + 0x8c, GENMASK(7, 4), FIELD_PREP(GENMASK(7, 4), 1));
++	cvx16_rdlvl_req();
++	cv180x_ddr_bist("rdlvl", false);
++
++	ctrl_init_high_patch();
++	ret = ctrl_init_detect_dram_size(&dram_cap);
++	if (ret)
++		return ret;
++	ctrl_init_update_by_dram_size(vendor, dram_cap);
++	cvx16_clk_gating_enable();
++
++	ret = cv180x_ddr_bist("training", false) ?: cv180x_ddr_bist("training", true);
++	if (ret) {
++		pr_err("DDR: BIST failed\n");
++		return ret;
++	}
++
++	priv->info.base = CFG_SYS_SDRAM_BASE;
++	priv->info.size = (size_t)SZ_1M << dram_cap;
++
++	return 0;
++}
++
++static int cv180x_ddr_get_info(struct udevice *dev, struct ram_info *info)
++{
++	struct cv180x_ddr_priv *priv = dev_get_priv(dev);
++
++	*info = priv->info;
++
++	return 0;
++}
++
++static const struct ram_ops cv180x_ddr_ops = {
++	.get_info = cv180x_ddr_get_info,
++};
++
++static const struct udevice_id cv180x_ddr_ids[] = {
++	{ .compatible = "sophgo,cv1800b-ddr" },
++	{ }
++};
++
++U_BOOT_DRIVER(cv180x_ddr) = {
++	.name = "cv180x_ddr",
++	.id = UCLASS_RAM,
++	.of_match = cv180x_ddr_ids,
++	.ops = &cv180x_ddr_ops,
++	.probe = cv180x_ddr_probe,
++	.priv_auto = sizeof(struct cv180x_ddr_priv),
++};
+diff --git a/drivers/ram/sophgo/cvx16_pinmux.c b/drivers/ram/sophgo/cvx16_pinmux.c
+new file mode 100644
+index 00000000000..835c993253f
+--- /dev/null
++++ b/drivers/ram/sophgo/cvx16_pinmux.c
+@@ -0,0 +1,54 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Sophgo CV180x DDR PHY DQ/CA swap for each SiP DDR2 vendor
++ *
++ * Copyright (c) 2026, Hiago De Franco <hfranco@baylibre.com>
++ *
++ * Based on the Sophgo FSBL (https://github.com/sophgo/fsbl),
++ * plat/cv180x/ddr/cvx16_pinmux.c.
++ *
++ */
++
++#include "ddr_sys.h"
++
++struct ddr_pinmux {
++	u8 vendor;
++	u32 regs[12];
++};
++
++static const struct ddr_pinmux ddr_pinmux[] = {
++	{ DDR_VENDOR_ESMT_512M_DDR2, {		/* N25_DDR2_512 */
++		0x0c06080b, 0x070d0904, 0x00010502, 0x110a0e03,
++		0x0f141610, 0x00151312, 0x00000000, 0x00000100,
++		0x71840532, 0x00000006, 0x76103425, 0x00000008,
++	} },
++	{ DDR_VENDOR_ETRON_512M_DDR2, {		/* ETRON_DDR2_512 */
++		0x070b090c, 0x04050608, 0x0e02030d, 0x110a0100,
++		0x0f131614, 0x00151012, 0x00000000, 0x00000100,
++		0x86014532, 0x00000007, 0x76012345, 0x00000008,
++	} },
++	{ DDR_VENDOR_UNILC_N25_512M_DDR2, {	/* UniIC_DDR2_512M */
++		0x00040608, 0x02090b0c, 0x0e01070d, 0x0a031605,
++		0x10110f14, 0x00121513, 0x00000000, 0x00000100,
++		0x61437025, 0x00000008, 0x63410725, 0x00000008,
++	} },
++};
++
++int cvx16_pinmux(u8 vendor)
++{
++	const struct ddr_pinmux *p;
++	int i;
++
++	for (p = ddr_pinmux; p < ddr_pinmux + ARRAY_SIZE(ddr_pinmux); p++) {
++		if (p->vendor != vendor)
++			continue;
++
++		for (i = 0; i < ARRAY_SIZE(p->regs); i++)
++			writel(p->regs[i], PHYD_BASE + i * 4);
++		return 0;
++	}
++
++	pr_err("DDR: no pinmux for vendor %x\n", vendor);
++
++	return -ENODEV;
++}
+diff --git a/drivers/ram/sophgo/ddr_patch_regs.c b/drivers/ram/sophgo/ddr_patch_regs.c
+new file mode 100644
+index 00000000000..31f003150fd
+--- /dev/null
++++ b/drivers/ram/sophgo/ddr_patch_regs.c
+@@ -0,0 +1,39 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Sophgo CV180x DDR2-1333 x16 PHY patch settings
++ *
++ * Copyright (c) 2026, Hiago De Franco <hfranco@baylibre.com>
++ *
++ * Based on the Sophgo FSBL (https://github.com/sophgo/fsbl),
++ * plat/cv180x/ddr/ddr_config/ddr2_1333_x16/ddr_patch_regs.c.
++ *
++ */
++
++#include "ddr_sys.h"
++
++static const struct ddr_reg ddr_patch_regs[] = {
++	/* BYTE0 DQ driving */
++	{ 0xa38, 0x00000808 },
++	/* BYTE1 DQ driving */
++	{ 0xa78, 0x00000808 },
++
++	/* BYTE0 RX DQ deskew */
++	{ 0xb00, 0x03010504 },
++	{ 0xb04, 0x02030203 },
++	/* BYTE0 DQ8 deskew [6:0], neg DQS [15:8], pos DQS [23:16] */
++	{ 0xb08, 0x002a4204 },
++
++	/* BYTE1 RX DQ deskew */
++	{ 0xb30, 0x08030803 },
++	{ 0xb34, 0x02070205 },
++	/* BYTE1 DQ8 deskew [6:0], neg DQS [15:8], pos DQS [23:16] */
++	{ 0xb38, 0x002b4003 },
++};
++
++void ddr_patch_set(void)
++{
++	const struct ddr_reg *r;
++
++	for (r = ddr_patch_regs; r < ddr_patch_regs + ARRAY_SIZE(ddr_patch_regs); r++)
++		writel(r->val, PHYD_BASE + r->off);
++}
+diff --git a/drivers/ram/sophgo/ddr_pkg_info.c b/drivers/ram/sophgo/ddr_pkg_info.c
+new file mode 100644
+index 00000000000..64d818dda56
+--- /dev/null
++++ b/drivers/ram/sophgo/ddr_pkg_info.c
+@@ -0,0 +1,110 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Sophgo CV180x SiP DDR detection
++ *
++ * Copyright (c) 2026, Hiago De Franco <hfranco@baylibre.com>
++ *
++ * Based on the Sophgo FSBL (https://github.com/sophgo/fsbl),
++ * plat/cv180x/ddr/ddr_pkg_info.c.
++ *
++ */
++
++#include "ddr_sys.h"
++
++#define REG_CONF_INFO		(TOP_BASE + 0x4)
++#define  CONF_INFO_PKG_TYPE	GENMASK(30, 28)
++#define REG_GP_REG3		(TOP_BASE + 0x8c)
++#define REG_EFUSE_LEAKAGE	((void __iomem *)0x03050108)
++#define  EFUSE_DDR_VENDOR	GENMASK(25, 21)
++#define  EFUSE_DDR_CAPACITY	GENMASK(28, 26)
++#define  EFUSE_DDR_PKG		GENMASK(31, 29)
++
++/* Second source parts, described by the efuse */
++#define PKG_TYPE_FROM_EFUSE_0	0x0
++#define PKG_TYPE_FROM_EFUSE_1	0x4
++
++#define DDR_CAPACITY_UNKNOWN	0
++#define DDR_CAPACITY_512M	1
++#define DDR_CAPACITY_1G		2
++#define DDR_CAPACITY_2G		3
++#define DDR_CAPACITY_4G		4
++
++#define PKG_QFN88		1
++#define PKG_BGA			2
++#define PKG_QFN68		3
++
++struct ddr_pkg {
++	u8 vendor;
++	u8 capacity;
++	u8 pkg;
++};
++
++static const struct ddr_pkg ddr_pkg_types[] = {
++	/* QFN68 7x7, 1Gb DDR3 */
++	[0x2] = { DDR_VENDOR_ESMT_1G, DDR_CAPACITY_1G, PKG_QFN68 },
++	/* QFN68 7x7, 512Mb DDR2 (25nm) */
++	[0x3] = { DDR_VENDOR_ESMT_512M_DDR2, DDR_CAPACITY_512M, PKG_QFN68 },
++	/* QFN88 9x9, 1Gb DDR3 */
++	[0x6] = { DDR_VENDOR_ESMT_1G, DDR_CAPACITY_1G, PKG_QFN88 },
++	/* QFN88 9x9, 512Mb DDR2 (25nm) */
++	[0x7] = { DDR_VENDOR_ESMT_512M_DDR2, DDR_CAPACITY_512M, PKG_QFN88 },
++};
++
++static bool ddr_vendor_is_ddr2(u8 vendor)
++{
++	switch (vendor) {
++	case DDR_VENDOR_ESMT_512M_DDR2:
++	case DDR_VENDOR_ETRON_512M_DDR2:
++	case DDR_VENDOR_UNILC_N25_512M_DDR2:
++		return true;
++	default:
++		return false;
++	}
++}
++
++/*
++ * Identify the DDR from the package type strap and the efuse, and record the
++ * chip id in GP_REG3 for later stages. Only DDR2 is supported.
++ */
++int read_ddr_pkg_info(u8 *vendor)
++{
++	u32 conf_info = readl(REG_CONF_INFO);
++	u32 efuse = readl(REG_EFUSE_LEAKAGE);
++	u32 pkg_type = FIELD_GET(CONF_INFO_PKG_TYPE, conf_info);
++	struct ddr_pkg ddr = { };
++	u32 chip_id = 0;
++
++	if (pkg_type == PKG_TYPE_FROM_EFUSE_0 || pkg_type == PKG_TYPE_FROM_EFUSE_1) {
++		ddr.vendor = FIELD_GET(EFUSE_DDR_VENDOR, efuse);
++		ddr.capacity = FIELD_GET(EFUSE_DDR_CAPACITY, efuse);
++		ddr.pkg = FIELD_GET(EFUSE_DDR_PKG, efuse);
++	} else if (pkg_type < ARRAY_SIZE(ddr_pkg_types)) {
++		ddr = ddr_pkg_types[pkg_type];
++	}
++
++	debug("DDR: pkg_type %x, pkg %x, capacity %x, vendor %x\n",
++	      pkg_type, ddr.pkg, ddr.capacity, ddr.vendor);
++
++	/* CV1800B/CV1801B on QFN68, CV1800C/CV1801C on QFN88 */
++	switch (ddr.capacity) {
++	case DDR_CAPACITY_512M:
++		chip_id = ddr.pkg == PKG_QFN88 ? 0x1800c : 0x1800b;
++		break;
++	case DDR_CAPACITY_1G:
++		chip_id = ddr.pkg == PKG_QFN88 ? 0x1801c : 0x1801b;
++		break;
++	default:
++		/* No known CV180x chip id for the other capacities */
++		break;
++	}
++	writel(chip_id, REG_GP_REG3);
++
++	if (!ddr_vendor_is_ddr2(ddr.vendor)) {
++		pr_err("DDR: unsupported DDR, pkg_type %x vendor %x\n", pkg_type, ddr.vendor);
++		return -ENODEV;
++	}
++
++	*vendor = ddr.vendor;
++
++	return 0;
++}
+diff --git a/drivers/ram/sophgo/ddr_sys.c b/drivers/ram/sophgo/ddr_sys.c
+new file mode 100644
+index 00000000000..31166fa64d7
+--- /dev/null
++++ b/drivers/ram/sophgo/ddr_sys.c
+@@ -0,0 +1,635 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Sophgo CV180x DDR PHY training
++ *
++ * Copyright (c) 2026, Hiago De Franco <hfranco@baylibre.com>
++ *
++ * Based on the Sophgo FSBL (https://github.com/sophgo/fsbl),
++ * plat/cv180x/ddr/ddr_sys.c.
++ */
++
++#include "ddr_sys.h"
++
++/* DDR PLL synthesizer for DDR_DATA_RATE, SSC itself stays disabled */
++#define DDR_PLL_TAR_FREQ	(DDR_DATA_RATE >> 4)
++#define DDR_PLL_SSC_SET		(752ULL * 67108864 / DDR_PLL_TAR_FREQ)
++#define DDR_PLL_SSC_SPAN	(DDR_PLL_TAR_FREQ * 250 / 100)
++#define DDR_PLL_SSC_STEP	(DDR_PLL_SSC_SET * 15 / (DDR_PLL_SSC_SPAN * 1000))
++
++/* BIST controller */
++#define BIST_CTRL		0x00
++#define BIST_ADDR_START		0x10
++#define BIST_ADDR_END		0x14
++#define BIST_ADDR_STEP		0x18
++#define BIST_SSO_PERIOD		0x24
++#define BIST_CMD(n)		(0x40 + (n) * 4)
++#define BIST_NUM_CMDS		6
++#define BIST_STATUS		0x80
++#define  BIST_STATUS_DONE	BIT(2)
++#define  BIST_STATUS_FAIL	BIT(3)
++
++#define BIST_OP_WRITE		1
++#define BIST_OP_READ		2
++#define BIST_OP_GOTO		3
++#define BIST_PAT_0F		3
++#define BIST_PAT_PRBS		5
++#define BIST_PAT_SRAM		6
++#define BIST_PAT_SSO_8X1_DM	7
++
++/* op, SRAM start/stop, pattern and repeat count, no DQ/DM inversion or rotation */
++#define BIST_CMD_VAL(op, start, stop, pat, repeat) \
++	(((op) << 30) | ((start) << 21) | ((stop) << 12) | ((pat) << 9) | (repeat))
++#define BIST_CMD_GOTO(loop)	((BIST_OP_GOTO << 30) | (loop))
++
++#define BIST_SSO_FMIN		5
++#define BIST_SSO_FMAX		15
++#define BIST_SSO_SRAM_STOP						\
++	(9 * (BIST_SSO_FMIN + BIST_SSO_FMAX) *				\
++	 (BIST_SSO_FMAX - BIST_SSO_FMIN + 1) / 8 +			\
++	 (BIST_SSO_FMAX - BIST_SSO_FMIN + 1))
++
++/* DDR controller */
++#define DDRC_PWRCTL			0x30
++#define  DDRC_PWRCTL_SELFREF_SW		BIT(5)
++#define  DDRC_PWRCTL_DFI_DRAM_CLK_DIS	BIT(3)
++#define  DDRC_PWRCTL_POWERDOWN_EN	BIT(1)
++#define  DDRC_PWRCTL_SELFREF_EN		BIT(0)
++#define  DDRC_PWRCTL_TRAINING_MASK	(DDRC_PWRCTL_SELFREF_SW |	\
++					 DDRC_PWRCTL_DFI_DRAM_CLK_DIS |	\
++					 DDRC_PWRCTL_POWERDOWN_EN |	\
++					 DDRC_PWRCTL_SELFREF_EN)
++#define DDRC_PHY_STOP_CLK		0x30
++#define  DDRC_EN_PHYD_STOP_CLK		BIT(9)
++#define  DDRC_PHYD_STOP_CLK_SEL		BIT(10)
++#define  DDRC_EN_PHYA_STOP_CLK		BIT(11)
++#define  DDRC_PHYA_STOP_CLK_SEL		BIT(12)
++#define DDRC_PCTRL(n)			(0x490 + 0xb0 * (n))
++/* Only ports 0 to 2 are configured by ddrc_init() */
++#define DDRC_NUM_PORTS			3
++#define DDRC_PSTAT			0x3fc
++
++/* PHY training status */
++#define PHYD_TRAIN_DONE			0x3444
++#define  PHYD_RDGLVL_DONE		BIT(1)
++#define  PHYD_RDLVL_DONE		BIT(2)
++#define  PHYD_WDQLVL_DONE		BIT(3)
++
++/*
++ * All the CV180x SiP DDR2 parts are 512 Mbit. As in the vendor code,
++ * dram_cap_in_mbyte holds log2 of the size in MiB: 6 means 64 MiB.
++ */
++#define DDR2_CAP_IN_MBYTE		6
++
++static void cvx16_bist_setup(const u32 *cmd, int count, u32 addr_step)
++{
++	int i;
++
++	for (i = 0; i < BIST_NUM_CMDS; i++)
++		writel(i < count ? cmd[i] : 0, DDR_BIST_BASE + BIST_CMD(i));
++
++	writel(0x00000000, DDR_BIST_BASE + BIST_ADDR_START);
++	writel(0x000fffff, DDR_BIST_BASE + BIST_ADDR_END);
++	writel(addr_step, DDR_BIST_BASE + BIST_ADDR_STEP);
++}
++
++void cvx16_bist_wr_prbs_init(void)
++{
++	static const u32 cmd[] = {
++		BIST_CMD_VAL(BIST_OP_WRITE, 0, 511, BIST_PAT_PRBS, 0),
++		BIST_CMD_VAL(BIST_OP_READ, 0, 511, BIST_PAT_PRBS, 0),
++	};
++
++	/* BIST clock enable */
++	writel(0x00060006, DDR_BIST_BASE + BIST_CTRL);
++	cvx16_bist_setup(cmd, ARRAY_SIZE(cmd), 4);
++}
++
++void cvx16_bist_wr_sram_init(void)
++{
++	static const u32 cmd[] = {
++		BIST_CMD_VAL(BIST_OP_WRITE, 0, BIST_SSO_SRAM_STOP, BIST_PAT_SRAM, 15),
++		BIST_CMD_VAL(BIST_OP_READ, 0, BIST_SSO_SRAM_STOP, BIST_PAT_SRAM, 15),
++		0,
++		BIST_CMD_GOTO(1),
++	};
++
++	/* BIST clock enable, axi_len 8 */
++	writel(0x000c000c, DDR_BIST_BASE + BIST_CTRL);
++	writel((BIST_SSO_FMAX << 8) | BIST_SSO_FMIN, DDR_BIST_BASE + BIST_SSO_PERIOD);
++	/* 2 KiB AXI address step */
++	cvx16_bist_setup(cmd, ARRAY_SIZE(cmd), 2048 / 4 / 16);
++}
++
++static void cvx16_bist_rdglvl_init(void)
++{
++	static const u32 cmd[] = {
++		BIST_CMD_VAL(BIST_OP_READ, 0, 3, BIST_PAT_PRBS, 0),
++	};
++
++	writel(0x00060006, DDR_BIST_BASE + BIST_CTRL);
++	cvx16_bist_setup(cmd, ARRAY_SIZE(cmd), 4);
++}
++
++/* Continuous PRBS and SRAM write/read */
++static void cvx16_bist_rdlvl_init(void)
++{
++	static const u32 cmd[] = {
++		BIST_CMD_VAL(BIST_OP_WRITE, 0, 511, BIST_PAT_PRBS, 2),
++		BIST_CMD_VAL(BIST_OP_READ, 0, 511, BIST_PAT_PRBS, 2),
++		BIST_CMD_VAL(BIST_OP_WRITE, 0, BIST_SSO_SRAM_STOP, BIST_PAT_SRAM, 2),
++		BIST_CMD_VAL(BIST_OP_READ, 0, BIST_SSO_SRAM_STOP, BIST_PAT_SRAM, 2),
++		BIST_CMD_GOTO(1),
++	};
++
++	writel(0x00060006, DDR_BIST_BASE + BIST_CTRL);
++	writel((BIST_SSO_FMAX << 8) | BIST_SSO_FMIN, DDR_BIST_BASE + BIST_SSO_PERIOD);
++	cvx16_bist_setup(cmd, ARRAY_SIZE(cmd), 4);
++}
++
++/* PRBS and SRAM write/read */
++static void cvx16_bist_wdqlvl_init(void)
++{
++	static const u32 cmd[] = {
++		BIST_CMD_VAL(BIST_OP_WRITE, 0, 511, BIST_PAT_PRBS, 0),
++		BIST_CMD_VAL(BIST_OP_READ, 0, 511, BIST_PAT_PRBS, 0),
++		BIST_CMD_VAL(BIST_OP_WRITE, 0, BIST_SSO_SRAM_STOP, BIST_PAT_SRAM, 0),
++		BIST_CMD_VAL(BIST_OP_READ, 0, BIST_SSO_SRAM_STOP, BIST_PAT_SRAM, 0),
++	};
++
++	writel(0x00060006, DDR_BIST_BASE + BIST_CTRL);
++	writel((BIST_SSO_FMAX << 8) | BIST_SSO_FMIN, DDR_BIST_BASE + BIST_SSO_PERIOD);
++	cvx16_bist_setup(cmd, ARRAY_SIZE(cmd), 4);
++}
++
++static void cvx16_bist_wdmlvl_init(void)
++{
++	static const u32 cmd[] = {
++		BIST_CMD_VAL(BIST_OP_WRITE, 0, BIST_SSO_SRAM_STOP, BIST_PAT_0F, 0),
++		BIST_CMD_VAL(BIST_OP_WRITE, 0, BIST_SSO_SRAM_STOP, BIST_PAT_SSO_8X1_DM, 0),
++		BIST_CMD_VAL(BIST_OP_READ, 0, BIST_SSO_SRAM_STOP, BIST_PAT_SSO_8X1_DM, 0),
++	};
++
++	writel(0x00060006, DDR_BIST_BASE + BIST_CTRL);
++	writel((BIST_SSO_FMAX << 8) | BIST_SSO_FMIN, DDR_BIST_BASE + BIST_SSO_PERIOD);
++	cvx16_bist_setup(cmd, ARRAY_SIZE(cmd), 4);
++}
++
++/* Run the programmed BIST, returns 0 if it passed */
++int cvx16_bist_start_check(void)
++{
++	u32 status;
++	int ret;
++
++	/* BIST enable */
++	writel(0x00030003, DDR_BIST_BASE + BIST_CTRL);
++
++	ret = ddr_readl_poll(DDR_BIST_BASE + BIST_STATUS, status,
++			     status & BIST_STATUS_DONE);
++	if (!ret && (status & BIST_STATUS_FAIL))
++		ret = -EIO;
++
++	/* BIST disable */
++	writel(0x00050000, DDR_BIST_BASE + BIST_CTRL);
++
++	return ret;
++}
++
++static void cvx16_rdvld_train(void)
++{
++	u32 byte0_vld, rdvld_offset;
++	int i;
++
++	cvx16_bist_wr_prbs_init();
++
++	byte0_vld = readl(PHYD_BASE + 0xb14);
++	rdvld_offset = FIELD_GET(GENMASK(3, 0), readl(PHYD_BASE + 0x94));
++
++	/*
++	 * Lower the read valid window until the BIST fails, then step back.
++	 * Byte 1 is written with the byte 0 value, as the vendor code does.
++	 */
++	for (i = 9; i > 1; i--) {
++		byte0_vld = u32_replace_bits(byte0_vld, i, GENMASK(20, 16));
++		writel(byte0_vld, PHYD_BASE + 0xb14);
++		writel(byte0_vld, PHYD_BASE + 0xb44);
++		if (cvx16_bist_start_check()) {
++			i += 1 + rdvld_offset;
++			byte0_vld = u32_replace_bits(byte0_vld, i, GENMASK(20, 16));
++			writel(byte0_vld, PHYD_BASE + 0xb14);
++			writel(byte0_vld, PHYD_BASE + 0xb44);
++			break;
++		}
++	}
++}
++
++static void cvx16_ddr_pll_ssc_set(void)
++{
++	u32 rddata;
++
++	writel(DDR_PLL_SSC_SET, TOP_BASE + 0x2954);
++	writel(FIELD_GET(GENMASK(15, 0), DDR_PLL_SSC_SPAN), TOP_BASE + 0x2958);
++	writel(FIELD_GET(GENMASK(23, 0), DDR_PLL_SSC_STEP), TOP_BASE + 0x295c);
++
++	rddata = readl(TOP_BASE + 0x2950);
++	/* Toggle SSC_SW_UP, disable SSC and bypass, set EXTPULSE */
++	rddata ^= BIT(0);
++	rddata &= ~(BIT(1) | GENMASK(3, 2) | BIT(4) | BIT(6));
++	rddata |= BIT(5);
++	writel(rddata, TOP_BASE + 0x2950);
++}
++
++static void cvx16_clk_normal(void)
++{
++	/* DDRPLL_SEL_LOW_SPEED = 0, DDRPLL_MAS_DIV_OUT_SEL = 0 */
++	clrbits_le32(PHYD_APB_BASE + 0xc, BIT(13) | BIT(14));
++	cvx16_ddr_pll_ssc_set();
++}
++
++static void cvx16_clk_div2(void)
++{
++	/* DDRPLL_MAS_DIV_OUT_SEL = 1 */
++	setbits_le32(PHYD_APB_BASE + 0xc, BIT(14));
++}
++
++static void cvx16_clk_div40(void)
++{
++	/* DDRPLL_SEL_LOW_SPEED = 1 */
++	setbits_le32(PHYD_APB_BASE + 0xc, BIT(13));
++}
++
++static void cvx16_chg_pll_freq(void)
++{
++	u32 rddata, cur_speed, next_speed;
++
++	/* Assert RESETZ_DIV, RESETZ_DQS and DDRPLL_MAS_RSTZ_DIV */
++	writel(0, PHYD_APB_BASE + 0x4);
++	writel(0, PHYD_APB_BASE + 0x8);
++	clrbits_le32(PHYD_APB_BASE + 0xc, BIT(7));
++
++	/* [0] EN_PLL_SPEED_CHG, [5:4] CUR_PLL_SPEED, [9:8] NEXT_PLL_SPEED */
++	rddata = readl(PHYD_APB_BASE + 0x4c);
++	cur_speed = FIELD_GET(GENMASK(5, 4), rddata);
++	next_speed = FIELD_GET(GENMASK(9, 8), rddata);
++
++	if ((rddata & BIT(0)) && next_speed != 3) {
++		rddata = u32_replace_bits(rddata, next_speed, GENMASK(5, 4));
++		rddata = u32_replace_bits(rddata, cur_speed, GENMASK(9, 8));
++		writel(rddata, PHYD_APB_BASE + 0x4c);
++
++		if (next_speed == 0)
++			cvx16_clk_div40();
++		else if (next_speed == 1)
++			cvx16_clk_div2();
++		else
++			cvx16_clk_normal();
++	}
++
++	/* De-assert RESETZ_DIV, DDRPLL_MAS_RSTZ_DIV and RESETZ_DQS */
++	writel(1, PHYD_APB_BASE + 0x4);
++	setbits_le32(PHYD_APB_BASE + 0xc, BIT(7));
++	writel(1, PHYD_APB_BASE + 0x8);
++
++	/* DDRPLL lock */
++	ddr_readl_poll(PHYD_APB_BASE + 0x10, rddata, rddata & BIT(15));
++}
++
++static void cvx16_dll_cal(void)
++{
++	u32 rddata;
++
++	/* param_phyd_dll_rx_start_cal [1], param_phyd_dll_tx_start_cal [17] */
++	clrbits_le32(PHYD_BASE + 0x40, BIT(1) | BIT(17));
++
++	/* Only calibrate at high speed */
++	if (FIELD_GET(GENMASK(5, 4), readl(PHYD_APB_BASE + 0x4c))) {
++		setbits_le32(PHYD_BASE + 0x40, BIT(1) | BIT(17));
++		ddr_readl_poll(PHYD_BASE + 0x3014, rddata, rddata & BIT(16));
++	}
++}
++
++static void cvx16_set_dfi_init_complete(void)
++{
++	udelay(20);
++	writel(0x00000010, PHYD_BASE + 0x120);
++	/* param_phyd_clkctrl_init_complete */
++	writel(0x00000001, PHYD_BASE + 0x118);
++}
++
++void cvx16_ddr_phy_power_on_seq1(void)
++{
++	/* TX_CA_PD_CKE0 and TX_CA_PD_RESETZ, then all CA PD = 0 */
++	clrbits_le32(PHYD_APB_BASE + 0x40, BIT(24) | BIT(30));
++	writel(0, PHYD_APB_BASE + 0x40);
++
++	/* TX_SEL_GPIO = 1, DQ PD = 0, TX_SEL_GPIO = 0 */
++	setbits_le32(PHYD_APB_BASE + 0x1c, BIT(7));
++	writel(0, PHYD_APB_BASE);
++	clrbits_le32(PHYD_APB_BASE + 0x1c, BIT(7));
++}
++
++static void cvx16_ddr_phy_power_on_seq2(void)
++{
++	cvx16_chg_pll_freq();
++
++	/* param_phyd_sel_cke_oenz, param_phyd_tx_ca_*_oenz */
++	clrbits_le32(PHYD_BASE + 0x154, BIT(0));
++	writel(0, PHYD_BASE + 0x130);
++
++	cvx16_dll_cal();
++
++	/* CA PD = 0, BYTE PD = 0 */
++	writel(0x80000000, PHYD_APB_BASE + 0x40);
++	writel(0, PHYD_APB_BASE);
++}
++
++void cvx16_ddr_phy_power_on_seq3(void)
++{
++	/* param_phyd_sel_cke_oenz, param_phyd_tx_ca_*_oenz */
++	clrbits_le32(PHYD_BASE + 0x154, BIT(0));
++	writel(0, PHYD_BASE + 0x130);
++
++	/* Gate the extended OENZ dline clock of both bytes to save power */
++	setbits_le32(PHYD_BASE + 0x204, BIT(18));
++	setbits_le32(PHYD_BASE + 0x224, BIT(18));
++}
++
++/* Handle the PHY dfi_init_start request */
++void cvx16_dfi_init_start_isr(void)
++{
++	/* param_phyd_clkctrl_init_complete */
++	writel(0, PHYD_BASE + 0x118);
++	cvx16_ddr_phy_power_on_seq2();
++	cvx16_set_dfi_init_complete();
++}
++
++void cvx16_wait_for_dfi_init_complete(void)
++{
++	u32 rddata;
++
++	/* DFISTAT.dfi_init_complete */
++	ddr_readl_poll(DDRC_BASE + 0x1bc, rddata, rddata & BIT(0));
++	writel(0, DDRC_BASE + 0x320);
++	clrsetbits_le32(DDRC_BASE + 0x1b0, GENMASK(5, 0), 5);
++	writel(1, DDRC_BASE + 0x320);
++}
++
++void cvx16_polling_dfi_init_start(void)
++{
++	u32 rddata;
++
++	ddr_readl_poll(PHYD_BASE + 0x3028, rddata, rddata & BIT(8));
++}
++
++void cvx16_polling_synp_normal_mode(void)
++{
++	u32 rddata;
++
++	/* STAT.operating_mode */
++	ddr_readl_poll(DDRC_BASE + 0x4, rddata, FIELD_GET(GENMASK(2, 0), rddata) == 1);
++}
++
++static void cvx16_dfi_ca_park_prbs(bool enable)
++{
++	u32 rddata;
++
++	/* param_phyd_sw_dfi_phyupd_req */
++	writel(0x00000001, PHYD_BASE + 0x174);
++	/* dfi_phyupd_req and dfi_phyupd_ack */
++	ddr_readl_poll(PHYD_BASE + 0x3030, rddata,
++		       FIELD_GET(GENMASK(9, 8), rddata) == 3);
++
++	writel(enable ? 0x1b : 0, DDR_TOP_BASE);
++	writel(0x01, DDR_TOP_BASE + 0x4);
++	writel(0x1ffffcb, DDR_TOP_BASE + 0x8);
++	writel(0x3fffffff, DDR_TOP_BASE + 0xc);
++
++	/* param_phyd_sw_dfi_phyupd_req_clr */
++	writel(0x00000010, PHYD_BASE + 0x174);
++}
++
++static void cvx16_clk_gating_disable(void)
++{
++	/* TOP_REG_CG_EN_* */
++	writel(0x000012f5, PHYD_APB_BASE + 0x44);
++	/* PHYD_SHIFT_GATING_EN */
++	writel(0x00000000, PHYD_BASE + 0xf4);
++	clrbits_le32(DDRC_BASE + DDRC_PHY_STOP_CLK,
++		     DDRC_EN_PHYD_STOP_CLK | DDRC_EN_PHYA_STOP_CLK);
++	/* DFI read/write clock gating */
++	clrbits_le32(DDRC_BASE + 0x148, BIT(23) | BIT(31));
++}
++
++void cvx16_clk_gating_enable(void)
++{
++	/* TOP_REG_CG_EN_*, with TOP_REG_CG_EN_PHYA_GATED from the controller */
++	writel(0x00006c81, PHYD_APB_BASE + 0x44);
++	clrsetbits_le32(DDRC_BASE + 0x190, GENMASK(28, 24), FIELD_PREP(GENMASK(28, 24), 6));
++	/* PHYD_SHIFT_GATING_EN */
++	writel(0x00030033, PHYD_BASE + 0xf4);
++	/* Enable PHYD and PHYA stop clock, with the new stop clock selection */
++	clrsetbits_le32(DDRC_BASE + DDRC_PHY_STOP_CLK,
++			DDRC_PHYD_STOP_CLK_SEL | DDRC_PHYA_STOP_CLK_SEL,
++			DDRC_EN_PHYD_STOP_CLK | DDRC_EN_PHYA_STOP_CLK);
++	/* DFI read/write clock gating */
++	setbits_le32(DDRC_BASE + 0x148, BIT(23) | BIT(31));
++}
++
++/*
++ * Quiesce the controller before a training step: disable all AXI ports but
++ * port 0, low power modes and clock gating. Returns the PWRCTL bits to restore.
++ */
++static u32 cvx16_training_enter(void)
++{
++	u32 rddata, pwrctl;
++	int i;
++
++	for (i = 1; i < DDRC_NUM_PORTS; i++)
++		writel(0, DDRC_BASE + DDRC_PCTRL(i));
++
++	/* PSTAT.rd_port_busy_n and PSTAT.wr_port_busy_n */
++	ddr_readl_poll(DDRC_BASE + DDRC_PSTAT, rddata, rddata == 0);
++
++	/* PWRCTL.deeppowerdown_en must stay 0 for DDR2 */
++	pwrctl = readl(DDRC_BASE + DDRC_PWRCTL);
++	writel(pwrctl & ~DDRC_PWRCTL_TRAINING_MASK, DDRC_BASE + DDRC_PWRCTL);
++	cvx16_clk_gating_disable();
++
++	return pwrctl & DDRC_PWRCTL_TRAINING_MASK;
++}
++
++static void cvx16_training_exit(u32 pwrctl)
++{
++	int i;
++
++	clrsetbits_le32(DDRC_BASE + DDRC_PWRCTL, DDRC_PWRCTL_TRAINING_MASK, pwrctl);
++
++	for (i = 1; i < DDRC_NUM_PORTS; i++)
++		writel(1, DDRC_BASE + DDRC_PCTRL(i));
++
++	cvx16_clk_gating_enable();
++}
++
++/* Needs ctrl_init_low_patch() first, as all the training steps */
++void cvx16_rdglvl_req(void)
++{
++	u32 rddata, pwrctl;
++
++	pwrctl = cvx16_training_enter();
++
++	cvx16_bist_rdglvl_init();
++	/* param_phyd_dfi_rdglvl_req */
++	setbits_le32(PHYD_BASE + 0x184, BIT(0));
++
++	ddr_readl_poll(PHYD_BASE + PHYD_TRAIN_DONE, rddata, rddata & PHYD_RDGLVL_DONE);
++	/* BIST clock disable */
++	writel(0x00040000, DDR_BIST_BASE + BIST_CTRL);
++
++	cvx16_training_exit(pwrctl);
++}
++
++void cvx16_rdlvl_req(void)
++{
++	u32 rddata, pwrctl;
++	bool vref_training_en;
++
++	pwrctl = cvx16_training_enter();
++	cvx16_dfi_ca_park_prbs(true);
++
++	/* param_phyd_pirdlvl_deskew_start = 0x20, param_phyd_pirdlvl_deskew_end = 0x1f */
++	rddata = readl(PHYD_BASE + 0x80);
++	rddata = u32_replace_bits(rddata, 0x20, GENMASK(22, 16));
++	rddata = u32_replace_bits(rddata, 0x1f, GENMASK(30, 24));
++	writel(rddata, PHYD_BASE + 0x80);
++
++	/*
++	 * Save param_phyd_pirdlvl_vref_training_en [2], then clear it together
++	 * with param_phyd_pirdlvl_rx_init_deskew_en [1] and
++	 * param_phyd_pirdlvl_rdvld_training_en [3]
++	 */
++	rddata = readl(PHYD_BASE + 0x8c);
++	vref_training_en = rddata & BIT(2);
++	writel(rddata & ~GENMASK(3, 1), PHYD_BASE + 0x8c);
++
++	cvx16_bist_rdlvl_init();
++	/* param_phyd_dfi_rdlvl_req */
++	setbits_le32(PHYD_BASE + 0x188, BIT(0));
++	ddr_readl_poll(PHYD_BASE + PHYD_TRAIN_DONE, rddata, rddata & PHYD_RDLVL_DONE);
++
++	if (vref_training_en) {
++		/*
++		 * Final training keeping the RX trigger level, still without
++		 * vref training, then restore param_phyd_pirdlvl_vref_training_en
++		 */
++		setbits_le32(PHYD_BASE + 0x188, BIT(0));
++		ddr_readl_poll(PHYD_BASE + PHYD_TRAIN_DONE, rddata, rddata & PHYD_RDLVL_DONE);
++		setbits_le32(PHYD_BASE + 0x8c, BIT(2));
++	}
++
++	cvx16_rdvld_train();
++
++	/* BIST clock disable */
++	writel(0x00040000, DDR_BIST_BASE + BIST_CTRL);
++	cvx16_dfi_ca_park_prbs(false);
++	cvx16_training_exit(pwrctl);
++}
++
++/**
++ * cvx16_wdqlvl_req() - Write DQ/DM leveling with BIST data
++ * @lvl_mode: WDQLVL_DM, WDQLVL_DQ or WDQLVL_DQ_DM
++ */
++void cvx16_wdqlvl_req(u32 lvl_mode)
++{
++	u32 rddata, pwrctl;
++
++	pwrctl = cvx16_training_enter();
++	cvx16_dfi_ca_park_prbs(true);
++
++	/* param_phyd_piwdqlvl_dq_mode [12], param_phyd_piwdqlvl_dm_mode [13] */
++	rddata = readl(PHYD_BASE + 0xbc);
++	rddata = u32_replace_bits(rddata, lvl_mode != WDQLVL_DM, BIT(12));
++	rddata = u32_replace_bits(rddata, lvl_mode != WDQLVL_DQ, BIT(13));
++	writel(rddata, PHYD_BASE + 0xbc);
++
++	if (lvl_mode == WDQLVL_DM) {
++		setbits_le32(DDRC_BASE + 0xc, BIT(7));
++		cvx16_bist_wdmlvl_init();
++	} else {
++		cvx16_bist_wdqlvl_init();
++	}
++
++	/*
++	 * param_phyd_dfi_wdqlvl_req [0], param_phyd_dfi_wdqlvl_bist_data_en [4],
++	 * param_phyd_dfi_wdqlvl_vref_train_en [10]
++	 */
++	rddata = readl(PHYD_BASE + 0x18c);
++	rddata |= BIT(0) | BIT(4);
++	rddata = u32_replace_bits(rddata, lvl_mode != WDQLVL_DM, BIT(10));
++	writel(rddata, PHYD_BASE + 0x18c);
++
++	ddr_readl_poll(PHYD_BASE + PHYD_TRAIN_DONE, rddata, rddata & PHYD_WDQLVL_DONE);
++
++	clrbits_le32(DDRC_BASE + 0xc, BIT(7));
++	/* BIST clock disable */
++	writel(0x00040000, DDR_BIST_BASE + BIST_CTRL);
++	cvx16_dfi_ca_park_prbs(false);
++	cvx16_training_exit(pwrctl);
++}
++
++void cvx16_set_dfi_init_start(void)
++{
++	/* Trigger dfi_init_start from the controller, the PHY is ready */
++	writel(0, DDRC_BASE + 0x320);
++	setbits_le32(DDRC_BASE + 0x1b0, BIT(5));
++	writel(1, DDRC_BASE + 0x320);
++}
++
++/* Enable the voltage mode receiver of both bytes, DDR2 only */
++void cvx16_en_rec_vol_mode(void)
++{
++	/*
++	 * f0_param_phya_reg_rx_byteN_en_lsmode [0],
++	 * f0_param_phya_reg_byteN_en_rec_vol_mode [12]
++	 */
++	writel(0x00001001, PHYD_BASE + 0x500);
++	writel(0x00001001, PHYD_BASE + 0x540);
++}
++
++void cvx16_pll_init(void)
++{
++	u32 rddata;
++
++	/* TX_VREF_PD */
++	writel(0x00000000, PHYD_APB_BASE + 0x28);
++	/* ZQ_240 option */
++	writel(0x00080001, PHYD_APB_BASE + 0x54);
++
++	cvx16_ddr_pll_ssc_set();
++
++	/*
++	 * DDRPLL: EN_DLLCLK, EN_LCKDET, ICTRL = 1, SEL_4BIT, SEL_MODE = 1,
++	 * everything else cleared
++	 */
++	clrsetbits_le32(PHYD_APB_BASE + 0xc, GENMASK(15, 0), 0x030b);
++	/* TOP_REG_DDRPLL_TEST */
++	clrbits_le32(PHYD_APB_BASE + 0x10, GENMASK(7, 0));
++	/* TOP_REG_RESETZ_DIV, TOP_REG_DDRPLL_MAS_RSTZ_DIV */
++	writel(0x1, PHYD_APB_BASE + 0x4);
++	setbits_le32(PHYD_APB_BASE + 0xc, BIT(7));
++
++	ddr_readl_poll(PHYD_APB_BASE + 0x10, rddata, rddata & BIT(15));
++}
++
++/*
++ * The vendor code does not probe the size of the DDR2 parts, they are all
++ * 512 Mbit. Report it and store it for later stages, as the vendor does.
++ */
++int ctrl_init_detect_dram_size(u8 *dram_cap_in_mbyte)
++{
++	*dram_cap_in_mbyte = DDR2_CAP_IN_MBYTE;
++	writel(DDR2_CAP_IN_MBYTE, PHYD_BASE + 0x208);
++
++	/* BIST clock disable */
++	writel(0x00040000, DDR_BIST_BASE + BIST_CTRL);
++
++	return 0;
++}
+diff --git a/drivers/ram/sophgo/ddr_sys.h b/drivers/ram/sophgo/ddr_sys.h
+new file mode 100644
+index 00000000000..71964542d5f
+--- /dev/null
++++ b/drivers/ram/sophgo/ddr_sys.h
+@@ -0,0 +1,108 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Sophgo CV180x DDR controller and PHY
++ *
++ * Copyright (c) 2026, Hiago De Franco <hfranco@baylibre.com>
++ *
++ * Based on the Sophgo FSBL (https://github.com/sophgo/fsbl),
++ * plat/cv180x/ddr (DDR_CFG=ddr2_1333_x16).
++ */
++
++#ifndef __SOPHGO_DDR_SYS_H
++#define __SOPHGO_DDR_SYS_H
++
++#include <asm/io.h>
++#include <linux/bitfield.h>
++#include <linux/bitops.h>
++#include <linux/delay.h>
++#include <linux/errno.h>
++#include <linux/iopoll.h>
++#include <linux/kernel.h>
++#include <linux/printk.h>
++#include <linux/types.h>
++
++#define TOP_BASE	((void __iomem *)0x03000000)
++#define PHYD_BASE	((void __iomem *)0x08000000)
++#define DDRC_BASE	(PHYD_BASE + 0x4000)
++#define PHYD_APB_BASE	(PHYD_BASE + 0x6000)
++#define DDR_TOP_BASE	(PHYD_BASE + 0xa000)
++#define DDR_BIST_BASE	((void __iomem *)0x08010000)
++
++/* MBps; only the DDR2-1333 x16 register set is ported */
++#define DDR_DATA_RATE		1333
++
++#define DDR_POLL_TIMEOUT_US	5000000
++
++/* The vendor code polls these forever; give up and report instead */
++#define ddr_readl_poll(addr, val, cond)					\
++({									\
++	int __ret = readl_poll_timeout(addr, val, cond, DDR_POLL_TIMEOUT_US); \
++									\
++	if (__ret)							\
++		pr_err("%s: DDR poll timeout\n", __func__);		\
++	__ret;								\
++})
++
++/* SiP DDR vendor codes, from conf_info/efuse */
++#define DDR_VENDOR_UNKNOWN		0x00
++#define DDR_VENDOR_NY_4G		0x01
++#define DDR_VENDOR_NY_2G		0x02
++#define DDR_VENDOR_ESMT_1G		0x03
++#define DDR_VENDOR_ESMT_512M_DDR2	0x04
++#define DDR_VENDOR_ETRON_1G		0x05
++#define DDR_VENDOR_ESMT_2G		0x06
++#define DDR_VENDOR_PM_2G		0x07
++#define DDR_VENDOR_PM_1G		0x08
++#define DDR_VENDOR_ETRON_512M_DDR2	0x09
++#define DDR_VENDOR_ESMT_N25_1G		0x0a
++#define DDR_VENDOR_NY_N20_1G		0x0b
++#define DDR_VENDOR_ESMT_N21_2G		0x0c
++#define DDR_VENDOR_ESMT_N19_4G		0x0d
++#define DDR_VENDOR_UNILC_N25_512M_DDR2	0x0e
++#define DDR_VENDOR_UNILC_N25_1G		0x0f
++#define DDR_VENDOR_UNILC_N21_2G		0x10
++
++/* offset from PHYD_BASE, value */
++struct ddr_reg {
++	u16 off;
++	u32 val;
++};
++
++/* cvx16_wdqlvl_req() lvl_mode */
++#define WDQLVL_DM	0
++#define WDQLVL_DQ	1
++#define WDQLVL_DQ_DM	2
++
++/* ddr_pkg_info.c */
++int read_ddr_pkg_info(u8 *vendor);
++
++/* cvx16_pinmux.c, ddr_patch_regs.c, phy_init.c, ddrc_init.c */
++int cvx16_pinmux(u8 vendor);
++void ddr_patch_set(void);
++void phy_init(void);
++void ddrc_init(u8 vendor);
++void ctrl_init_high_patch(void);
++void ctrl_init_low_patch(void);
++/* dram_cap_in_mbyte is log2 of the DRAM size in MiB */
++void ctrl_init_update_by_dram_size(u8 vendor, u8 dram_cap_in_mbyte);
++
++/* ddr_sys.c */
++void cvx16_bist_wr_prbs_init(void);
++void cvx16_bist_wr_sram_init(void);
++int cvx16_bist_start_check(void);
++void cvx16_pll_init(void);
++void cvx16_en_rec_vol_mode(void);
++void cvx16_set_dfi_init_start(void);
++void cvx16_ddr_phy_power_on_seq1(void);
++void cvx16_polling_dfi_init_start(void);
++void cvx16_dfi_init_start_isr(void);
++void cvx16_ddr_phy_power_on_seq3(void);
++void cvx16_wait_for_dfi_init_complete(void);
++void cvx16_polling_synp_normal_mode(void);
++void cvx16_rdglvl_req(void);
++void cvx16_rdlvl_req(void);
++void cvx16_wdqlvl_req(u32 lvl_mode);
++void cvx16_clk_gating_enable(void);
++int ctrl_init_detect_dram_size(u8 *dram_cap_in_mbyte);
++
++#endif /* __SOPHGO_DDR_SYS_H */
+diff --git a/drivers/ram/sophgo/ddrc_init.c b/drivers/ram/sophgo/ddrc_init.c
+new file mode 100644
+index 00000000000..c34dd601edf
+--- /dev/null
++++ b/drivers/ram/sophgo/ddrc_init.c
+@@ -0,0 +1,476 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Sophgo CV180x DDR2-1333 x16 controller settings
++ *
++ * Copyright (c) 2026, Hiago De Franco <hfranco@baylibre.com>
++ *
++ * Based on the Sophgo FSBL (https://github.com/sophgo/fsbl),
++ * plat/cv180x/ddr/ddr_config/ddr2_1333_x16/ddrc_init.c.
++ *
++ */
++
++#include "ddr_sys.h"
++
++#define DDRC_ADDRMAP(n)		(0x200 + (n) * 4)
++#define DDRC_NUM_ADDRMAP	12
++
++/* ADDRMAP0 to ADDRMAP11 */
++static void ddrc_set_addrmap(const u32 *map)
++{
++	int i;
++
++	for (i = 0; i < DDRC_NUM_ADDRMAP; i++)
++		writel(map[i], DDRC_BASE + DDRC_ADDRMAP(i));
++}
++
++/* R[17:13] B[2] R[12:0] B[1:0] C[9:0], from 0.5 Gbit to 4 Gbit */
++static const u32 ddrc_addrmap_etron[DDRC_NUM_ADDRMAP] = {
++	0x00001f1f, 0x00141414, 0x00000000, 0x1f000000,
++	0x00001f1f, 0x030f0303, 0x06060603, 0x00000606,
++	0x00003f3f, 0x03030303, 0x03030303, 0x001f1f03,
++};
++
++static const u32 ddrc_addrmap_esmt[DDRC_NUM_ADDRMAP] = {
++	0x00001f1f, 0x00140707, 0x00000000, 0x1f000000,
++	0x00001f1f, 0x050f0505, 0x06060605, 0x00000606,
++	0x00003f3f, 0x05050505, 0x05050505, 0x001f1f05,
++};
++
++void ddrc_init(u8 vendor)
++{
++	bool etron = vendor == DDR_VENDOR_ETRON_512M_DDR2;
++
++	/*
++	 * PATCH0.use_blk_ext:0:2:=0x1
++	 * PATCH0.dis_auto_ref_cnt_fix:2:1:=0x0
++	 * PATCH0.dis_auto_ref_algn_to_8:3:1:=0x0
++	 * PATCH0.starve_stall_at_dfi_ctrlupd:4:1:=0x1
++	 * PATCH0.starve_stall_at_abr:5:1:=0x1
++	 * PATCH0.dis_rdwr_switch_at_abr:6:1:=0x1
++	 * PATCH0.dfi_wdata_same_to_axi:7:1:=0x0
++	 * PATCH0.pagematch_limit_threshold:8:3=0x3
++	 * PATCH0.qos_sel:12:2:=0x2
++	 * PATCH0.burst_rdwr_xpi:16:4:=0x4
++	 * PATCH0.always_critical_when_urgent_hpr:20:1:=0x1
++	 * PATCH0.always_critical_when_urgent_lpr:21:1:=0x1
++	 * PATCH0.always_critical_when_urgent_wr:22:1:=0x1
++	 * PATCH0.disable_hif_rcmd_stall_path:24:1:=0x1
++	 * PATCH0.disable_hif_wcmd_stall_path:25:1:=0x1
++	 * PATCH0.derate_sys_en:29:1:=0x1
++	 * PATCH0.ref_4x_sys_high_temp:30:1:=0x1
++	 */
++	writel(0x63746371, DDRC_BASE + 0xc);
++	/*
++	 * PATCH1.ref_adv_stop_threshold:0:7:=0x0
++	 * PATCH1.ref_adv_dec_threshold:8:7:=0x0
++	 * PATCH1.ref_adv_max:16:7:=0x0
++	 * PATCH1.burst_rdwr_wr_xpi:24:4:=0x4
++	 * PATCH1.use_blk_extend:28:2:=0x1
++	 */
++	writel(0x14000000, DDRC_BASE + 0x44);
++	/*
++	 * PATCH5.vpr_fix:0:1:=0x1
++	 * PATCH5.vpw_fix:1:1:=0x1
++	 */
++	writel(0x00000003, DDRC_BASE + 0x6c);
++	/*
++	 * PATCH4.t_phyd_rden:16:6=0x1d (ETRON), 0x1c (others)
++	 * PATCH4.phyd_rd_clk_stop:23:1=0x1
++	 * PATCH4.t_phyd_wren:24:6=0x18 (ETRON), 0x17 (others)
++	 * PATCH4.phyd_wr_clk_stop:31:1=0x1
++	 */
++	writel(etron ? 0x989d0000 : 0x979c0000, DDRC_BASE + 0x148);
++	writel(0x81041400, DDRC_BASE);
++	writel(0x00000000, DDRC_BASE + 0x30);
++	writel(0x006a0001, DDRC_BASE + 0x34);
++	writel(0x00020000, DDRC_BASE + 0x38);
++	writel(0x00201070, DDRC_BASE + 0x50);
++	writel(0x00000000, DDRC_BASE + 0x60);
++	writel(etron ? 0x00510023 : 0x0051002c, DDRC_BASE + 0x64);
++	writel(0x00010043, DDRC_BASE + 0xd0);
++	writel(0x00000000, DDRC_BASE + 0xd4);
++	if (etron) {
++		writel(0x03030040, DDRC_BASE + 0xdc);
++		writel(0x00800000, DDRC_BASE + 0xe0);
++		writel(0x0b01160f, DDRC_BASE + 0x100);
++		writel(0x00020414, DDRC_BASE + 0x104);
++		writel(0x04050409, DDRC_BASE + 0x108);
++		writel(0x00001004, DDRC_BASE + 0x10c);
++		writel(0x05020405, DDRC_BASE + 0x110);
++		writel(0x01010202, DDRC_BASE + 0x114);
++		writel(0x00000503, DDRC_BASE + 0x120);
++	} else {
++		writel(0x03730040, DDRC_BASE + 0xdc);
++		writel(0x00800000, DDRC_BASE + 0xe0);
++		writel(0x0a011610, DDRC_BASE + 0x100);
++		writel(0x00030414, DDRC_BASE + 0x104);
++		writel(0x03040408, DDRC_BASE + 0x108);
++		writel(0x00003004, DDRC_BASE + 0x10c);
++		writel(0x05020406, DDRC_BASE + 0x110);
++		writel(0x01010303, DDRC_BASE + 0x114);
++		writel(0x00000503, DDRC_BASE + 0x120);
++	}
++	/* phyd related */
++	/*
++	 * DFITMG0.dfi_t_ctrl_delay:24:5:=0x4
++	 * DFITMG0.dfi_rddata_use_dfi_phy_clk:23:1:=0x1
++	 * DFITMG0.dfi_t_rddata_en:16:7:=0x7 (ETRON), 0x5 (others)
++	 * DFITMG0.dfi_wrdata_use_dfi_phy_clk:15:1:=0x1
++	 * DFITMG0.dfi_tphy_wrdata:8:6:=0x3
++	 * DFITMG0.dfi_tphy_wrlat:0:6:=0x4 (ETRON), 0x2 (others)
++	 */
++	writel(etron ? 0x04878304 : 0x04858302, DDRC_BASE + 0x190);
++	/*
++	 * DFITMG1.dfi_t_cmd_lat:28:4:=0x0
++	 * DFITMG1.dfi_t_parin_lat:24:2:=0x0
++	 * DFITMG1.dfi_t_wrdata_delay:16:5:=0x7
++	 * DFITMG1.dfi_t_dram_clk_disable:8:5:=0x1
++	 * DFITMG1.dfi_t_dram_clk_enable:0:5:=0x2
++	 */
++	writel(0x00070102, DDRC_BASE + 0x194);
++	/*
++	 * DFILPCFG0.dfi_tlp_resp:24:5:=0x7
++	 * DFILPCFG0.dfi_lp_wakeup_dpd:20:4:=0xc
++	 * DFILPCFG0.dfi_lp_en_dpd:16:1:=0x1
++	 * DFILPCFG0.dfi_lp_wakeup_sr:12:4:=0x3
++	 * DFILPCFG0.dfi_lp_en_sr:8:1:=0x1
++	 * DFILPCFG0.dfi_lp_wakeup_pd:4:4:=0x2
++	 * DFILPCFG0.dfi_lp_en_pd:0:1:=0x1
++	 */
++	writel(0x07c13121, DDRC_BASE + 0x198);
++	/*
++	 * DFILPCFG1.dfi_lp_wakeup_mpsm:4:4:=0x2
++	 * DFILPCFG1.dfi_lp_en_mpsm:0:1:=0x1
++	 */
++	writel(0x00000021, DDRC_BASE + 0x19c);
++	writel(0xc0400018, DDRC_BASE + 0x1a0);
++	writel(0x00fe00ff, DDRC_BASE + 0x1a4);
++	writel(0x80000000, DDRC_BASE + 0x1a8);
++	writel(0x000002c1, DDRC_BASE + 0x1b0);
++	writel(0x00000001, DDRC_BASE + 0x1c0);
++	writel(0x00000001, DDRC_BASE + 0x1c4);
++	/* address map, auto gen. */
++	ddrc_set_addrmap(etron ? ddrc_addrmap_etron : ddrc_addrmap_esmt);
++	writel(etron ? 0x07030710 : 0x07010708, DDRC_BASE + 0x240);
++	writel(0x00000000, DDRC_BASE + 0x244);
++	/*
++	 * SCHED.opt_vprw_sch:31:1:=0x0
++	 * SCHED.rdwr_idle_gap:24:7:=0x0
++	 * SCHED.go2critical_hysteresis:16:8:=0x0
++	 * SCHED.lpddr4_opt_act_timing:15:1:=0x0
++	 * SCHED.lpr_num_entries:8:7:=0x3f
++	 * SCHED.autopre_rmw:7:1:=0x1
++	 * SCHED.dis_opt_ntt_by_pre:6:1:=0x0
++	 * SCHED.dis_opt_ntt_by_act:5:1:=0x0
++	 * SCHED.opt_wrcam_fill_level:4:1:=0x0
++	 * SCHED.rdwr_switch_policy_sel:3:1:=0x0
++	 * SCHED.pageclose:2:1:=0x1
++	 * SCHED.prefer_write:1:1:=0x0
++	 * SCHED.dis_opt_wrecc_collision_flush:0:1:=0x1
++	 */
++	writel(0x00003f85, DDRC_BASE + 0x250);
++	/*
++	 * SCHED1.page_hit_limit_rd:28:3:=0x0
++	 * SCHED1.page_hit_limit_wr:24:3:=0x0
++	 * SCHED1.visible_window_limit_rd:20:3:=0x0
++	 * SCHED1.visible_window_limit_wr:16:3:=0x0
++	 * SCHED1.delay_switch_write:12:4:=0x0
++	 * SCHED1.pageclose_timer:0:8:=0x20
++	 */
++	writel(0x00000020, DDRC_BASE + 0x254);
++	/*
++	 * PERFHPR1.hpr_xact_run_length:24:8:=0x10
++	 * PERFHPR1.hpr_max_starve:0:16:=0xa8
++	 */
++	writel(0x100000a8, DDRC_BASE + 0x25c);
++	/*
++	 * PERFLPR1.lpr_xact_run_length:24:8:=0x10
++	 * PERFLPR1.lpr_max_starve:0:16:=0xa8
++	 */
++	writel(0x100000a8, DDRC_BASE + 0x264);
++	/*
++	 * PERFWR1.w_xact_run_length:24:8:=0x10
++	 * PERFWR1.w_max_starve:0:16:=0xa8
++	 */
++	writel(0x100000a8, DDRC_BASE + 0x26c);
++	/*
++	 * DBG0.dis_max_rank_wr_opt:7:1:=0x0
++	 * DBG0.dis_max_rank_rd_opt:6:1:=0x0
++	 * DBG0.dis_collision_page_opt:4:1:=0x0
++	 * DBG0.dis_act_bypass:2:1:=0x0
++	 * DBG0.dis_rd_bypass:1:1:=0x0
++	 * DBG0.dis_wc:0:1:=0x0
++	 */
++	writel(0x00000000, DDRC_BASE + 0x300);
++	/*
++	 * DBG1.dis_hif:1:1:=0x0
++	 * DBG1.dis_dq:0:1:=0x0
++	 */
++	writel(0x00000000, DDRC_BASE + 0x304);
++	writel(0x00000000, DDRC_BASE + 0x30c);
++	/* SWCTL.sw_done:0:1:=0x1 */
++	writel(0x00000001, DDRC_BASE + 0x320);
++	/*
++	 * POISONCFG.rd_poison_intr_clr:24:1:=0x0
++	 * POISONCFG.rd_poison_intr_en:20:1:=0x0
++	 * POISONCFG.rd_poison_slverr_en:16:1:=0x0
++	 * POISONCFG.wr_poison_intr_clr:8:1:=0x0
++	 * POISONCFG.wr_poison_intr_en:4:1:=0x0
++	 * POISONCFG.wr_poison_slverr_en:0:1:=0x0
++	 */
++	writel(0x00000000, DDRC_BASE + 0x36c);
++	/*
++	 * PCCFG.dch_density_ratio:12:2:=0x0
++	 * PCCFG.bl_exp_mode:8:1:=0x0
++	 * PCCFG.pagematch_limit:4:1:=0x1
++	 * PCCFG.go2critical_en:0:1:=0x1
++	 */
++	writel(0x00000011, DDRC_BASE + 0x400);
++	/*
++	 * PCFGR_0.rdwr_ordered_en:16:1:=0x0
++	 * PCFGR_0.rd_port_pagematch_en:14:1:=0x1
++	 * PCFGR_0.rd_port_urgent_en:13:1:=0x1
++	 * PCFGR_0.rd_port_aging_en:12:1:=0x0
++	 * PCFGR_0.read_reorder_bypass_en:11:1:=0x0
++	 * PCFGR_0.rd_port_priority:0:10:=0x0
++	 */
++	writel(0x00006000, DDRC_BASE + 0x404);
++	/*
++	 * PCFGW_0.wr_port_pagematch_en:14:1:=0x1
++	 * PCFGW_0.wr_port_urgent_en:13:1:=0x1
++	 * PCFGW_0.wr_port_aging_en:12:1:=0x0
++	 * PCFGW_0.wr_port_priority:0:10:=0x0
++	 */
++	writel(0x00006000, DDRC_BASE + 0x408);
++	/* PCTRL_0.port_en:0:1:=0x1 */
++	writel(0x00000001, DDRC_BASE + 0x490);
++	/*
++	 * PCFGQOS0_0.rqos_map_region2:24:8:=0x0
++	 * PCFGQOS0_0.rqos_map_region1:20:4:=0x0
++	 * PCFGQOS0_0.rqos_map_region0:16:4:=0x0
++	 * PCFGQOS0_0.rqos_map_level2:8:8:=0x0
++	 * PCFGQOS0_0.rqos_map_level1:0:8:=0x7
++	 */
++	writel(0x00000007, DDRC_BASE + 0x494);
++	/*
++	 * PCFGQOS1_0.rqos_map_timeoutr:16:16:=0x0
++	 * PCFGQOS1_0.rqos_map_timeoutb:0:16:=0x6a
++	 */
++	writel(0x0000006a, DDRC_BASE + 0x498);
++	/*
++	 * PCFGWQOS0_0.wqos_map_region2:24:8:=0x0
++	 * PCFGWQOS0_0.wqos_map_region1:20:4:=0x0
++	 * PCFGWQOS0_0.wqos_map_region0:16:4:=0x0
++	 * PCFGWQOS0_0.wqos_map_level2:8:8:=0xe
++	 * PCFGWQOS0_0.wqos_map_level1:0:8:=0x7
++	 */
++	writel(0x00000e07, DDRC_BASE + 0x49c);
++	/*
++	 * PCFGWQOS1_0.wqos_map_timeout2:16:16:=0x1a8
++	 * PCFGWQOS1_0.wqos_map_timeout1:0:16:=0x1a8
++	 */
++	writel(0x01a801a8, DDRC_BASE + 0x4a0);
++	/*
++	 * PCFGR_1.rdwr_ordered_en:16:1:=0x0
++	 * PCFGR_1.rd_port_pagematch_en:14:1:=0x1
++	 * PCFGR_1.rd_port_urgent_en:13:1:=0x1
++	 * PCFGR_1.rd_port_aging_en:12:1:=0x0
++	 * PCFGR_1.read_reorder_bypass_en:11:1:=0x0
++	 * PCFGR_1.rd_port_priority:0:10:=0x0
++	 */
++	writel(0x00006000, DDRC_BASE + 0x4b4);
++	/*
++	 * PCFGW_1.wr_port_pagematch_en:14:1:=0x1
++	 * PCFGW_1.wr_port_urgent_en:13:1:=0x1
++	 * PCFGW_1.wr_port_aging_en:12:1:=0x0
++	 * PCFGW_1.wr_port_priority:0:10:=0x0
++	 */
++	writel(0x00006000, DDRC_BASE + 0x4b8);
++	/* PCTRL_1.port_en:0:1:=0x1 */
++	writel(0x00000001, DDRC_BASE + 0x540);
++	/*
++	 * PCFGQOS0_1.rqos_map_region2:24:8:=0x0
++	 * PCFGQOS0_1.rqos_map_region1:20:4:=0x0
++	 * PCFGQOS0_1.rqos_map_region0:16:4:=0x0
++	 * PCFGQOS0_1.rqos_map_level2:8:8:=0x0
++	 * PCFGQOS0_1.rqos_map_level1:0:8:=0x7
++	 */
++	writel(0x00000007, DDRC_BASE + 0x544);
++	/*
++	 * PCFGQOS1_1.rqos_map_timeoutr:16:16:=0x0
++	 * PCFGQOS1_1.rqos_map_timeoutb:0:16:=0x6a
++	 */
++	writel(0x0000006a, DDRC_BASE + 0x548);
++	/*
++	 * PCFGWQOS0_1.wqos_map_region2:24:8:=0x0
++	 * PCFGWQOS0_1.wqos_map_region1:20:4:=0x0
++	 * PCFGWQOS0_1.wqos_map_region0:16:4:=0x0
++	 * PCFGWQOS0_1.wqos_map_level2:8:8:=0xe
++	 * PCFGWQOS0_1.wqos_map_level1:0:8:=0x7
++	 */
++	writel(0x00000e07, DDRC_BASE + 0x54c);
++	/*
++	 * PCFGWQOS1_1.wqos_map_timeout2:16:16:=0x1a8
++	 * PCFGWQOS1_1.wqos_map_timeout1:0:16:=0x1a8
++	 */
++	writel(0x01a801a8, DDRC_BASE + 0x550);
++	/*
++	 * PCFGR_2.rdwr_ordered_en:16:1:=0x0
++	 * PCFGR_2.rd_port_pagematch_en:14:1:=0x1
++	 * PCFGR_2.rd_port_urgent_en:13:1:=0x1
++	 * PCFGR_2.rd_port_aging_en:12:1:=0x0
++	 * PCFGR_2.read_reorder_bypass_en:11:1:=0x0
++	 * PCFGR_2.rd_port_priority:0:10:=0x0
++	 */
++	writel(0x00006000, DDRC_BASE + 0x564);
++	/*
++	 * PCFGW_2.wr_port_pagematch_en:14:1:=0x1
++	 * PCFGW_2.wr_port_urgent_en:13:1:=0x1
++	 * PCFGW_2.wr_port_aging_en:12:1:=0x0
++	 * PCFGW_2.wr_port_priority:0:10:=0x0
++	 */
++	writel(0x00006000, DDRC_BASE + 0x568);
++	/* PCTRL_2.port_en:0:1:=0x1 */
++	writel(0x00000001, DDRC_BASE + 0x5f0);
++	/*
++	 * PCFGQOS0_2.rqos_map_region2:24:8:=0x0
++	 * PCFGQOS0_2.rqos_map_region1:20:4:=0x0
++	 * PCFGQOS0_2.rqos_map_region0:16:4:=0x0
++	 * PCFGQOS0_2.rqos_map_level2:8:8:=0x0
++	 * PCFGQOS0_2.rqos_map_level1:0:8:=0x7
++	 */
++	writel(0x00000007, DDRC_BASE + 0x5f4);
++	/*
++	 * PCFGQOS1_2.rqos_map_timeoutr:16:16:=0x0
++	 * PCFGQOS1_2.rqos_map_timeoutb:0:16:=0x6a
++	 */
++	writel(0x0000006a, DDRC_BASE + 0x5f8);
++	/*
++	 * PCFGWQOS0_2.wqos_map_region2:24:8:=0x0
++	 * PCFGWQOS0_2.wqos_map_region1:20:4:=0x0
++	 * PCFGWQOS0_2.wqos_map_region0:16:4:=0x0
++	 * PCFGWQOS0_2.wqos_map_level2:8:8:=0xe
++	 * PCFGWQOS0_2.wqos_map_level1:0:8:=0x7
++	 */
++	writel(0x00000e07, DDRC_BASE + 0x5fc);
++	/*
++	 * PCFGWQOS1_2.wqos_map_timeout2:16:16:=0x1a8
++	 * PCFGWQOS1_2.wqos_map_timeout1:0:16:=0x1a8
++	 */
++	writel(0x01a801a8, DDRC_BASE + 0x600);
++}
++
++void ctrl_init_high_patch(void)
++{
++	/* enable auto PD */
++	writel(0x00000002, DDRC_BASE + 0x30);
++	/* enable auto ctrl_upd */
++	writel(0x00400018, DDRC_BASE + 0x1a0);
++	/* enable clock gating */
++	writel(0x00000000, DDR_TOP_BASE + 0x14);
++	/* change xpi to multi DDR burst */
++	writel(0x63746371, DDRC_BASE + 0xc);
++	writel(0x08000000, DDRC_BASE + 0x44);
++}
++
++void ctrl_init_low_patch(void)
++{
++	/* disable auto PD/SR */
++	writel(0x00000000, DDRC_BASE + 0x30);
++	/* disable auto ctrl_upd */
++	writel(0xc0400018, DDRC_BASE + 0x1a0);
++	/* disable clock gating */
++	writel(0x00000fff, DDR_TOP_BASE + 0x14);
++	/* change xpi to single DDR burst */
++	writel(0x63746371, DDRC_BASE + 0xc);
++	writel(0x14000000, DDRC_BASE + 0x44);
++}
++
++/* RFSHTMG, DRAMTMG0 and DRAMTMG8 for 32 MiB (5) to 512 MiB (9) per device */
++struct ddrc_size_timing {
++	u32 rfshtmg;
++	u32 dramtmg0;
++	u32 dramtmg8;
++};
++
++#define DDRC_SIZE_MIN	5
++#define DDRC_SIZE_MAX	9
++
++static const struct ddrc_size_timing ddrc_size_timing_etron[] = {
++	{ 0x00510019, 0x0b01160f, 0x00000502 },
++	{ 0x00510023, 0x0b01160f, 0x00000503 },
++	{ 0x0051002b, 0x0b0f160f, 0x00000503 },
++	{ 0x00510041, 0x0b0f160f, 0x00000504 },
++	{ 0x0051006e, 0x0b0f160f, 0x00000505 },
++};
++
++static const struct ddrc_size_timing ddrc_size_timing_esmt[] = {
++	{ 0x00510019, 0x0b011610, 0x00000502 },
++	{ 0x0051002c, 0x0a011610, 0x00000503 },
++	{ 0x0051002b, 0x0b0f1610, 0x00000503 },
++	{ 0x00510041, 0x0b0f1610, 0x00000504 },
++	{ 0x0051006e, 0x0b0f1610, 0x00000505 },
++};
++
++static const u32 ddrc_addrmap_32m[DDRC_NUM_ADDRMAP] = {
++	0x00001f1f, 0x003f0606, 0x00000000, 0x1f1f0000,
++	0x00001f1f, 0x040f0404, 0x04040404, 0x00000404,
++	0x00003f3f, 0x04040404, 0x04040404, 0x001f1f04,
++};
++
++static const u32 ddrc_addrmap_64m[DDRC_NUM_ADDRMAP] = {
++	0x00001f1f, 0x003f0707, 0x00000000, 0x1f000000,
++	0x00001f1f, 0x050f0505, 0x05050505, 0x00000505,
++	0x00003f3f, 0x05050505, 0x05050505, 0x001f1f05,
++};
++
++static const u32 ddrc_addrmap_128m[DDRC_NUM_ADDRMAP] = {
++	0x00001f1f, 0x00070707, 0x00000000, 0x1f000000,
++	0x00001f1f, 0x060f0606, 0x06060606, 0x00000606,
++	0x00003f3f, 0x06060606, 0x06060606, 0x001f1f06,
++};
++
++void ctrl_init_update_by_dram_size(u8 vendor, u8 dram_cap_in_mbyte)
++{
++	u32 mstr = readl(DDRC_BASE);
++	u32 bus_width = FIELD_GET(GENMASK(13, 12), mstr);
++	u32 dev_config = FIELD_GET(GENMASK(31, 30), mstr);
++	u8 dram_cap_in_mbyte_per_dev = dram_cap_in_mbyte;
++	const struct ddrc_size_timing *t;
++
++	if (bus_width > 1 || dev_config > 2) {
++		pr_err("DDR: unsupported MSTR %#x\n", mstr);
++		return;
++	}
++
++	/* System capacity to x16 capacity, then to device capacity */
++	dram_cap_in_mbyte_per_dev >>= 1 - bus_width;
++	dram_cap_in_mbyte_per_dev >>= 2 - dev_config;
++
++	if (dram_cap_in_mbyte_per_dev < DDRC_SIZE_MIN ||
++	    dram_cap_in_mbyte_per_dev > DDRC_SIZE_MAX) {
++		pr_err("DDR: no timing for %u MiB per device\n",
++		       1 << dram_cap_in_mbyte_per_dev);
++		return;
++	}
++
++	if (vendor == DDR_VENDOR_ETRON_512M_DDR2)
++		t = &ddrc_size_timing_etron[dram_cap_in_mbyte_per_dev - DDRC_SIZE_MIN];
++	else
++		t = &ddrc_size_timing_esmt[dram_cap_in_mbyte_per_dev - DDRC_SIZE_MIN];
++
++	writel(t->rfshtmg, DDRC_BASE + 0x64);
++	writel(t->dramtmg0, DDRC_BASE + 0x100);
++	writel(t->dramtmg8, DDRC_BASE + 0x120);
++
++	if (dram_cap_in_mbyte_per_dev == 5)
++		ddrc_set_addrmap(ddrc_addrmap_32m);
++	else if (dram_cap_in_mbyte_per_dev == 6)
++		ddrc_set_addrmap(ddrc_addrmap_64m);
++	else
++		ddrc_set_addrmap(ddrc_addrmap_128m);
++
++	/* toggle refresh_update_level */
++	writel(0x00000002, DDRC_BASE + 0x60);
++	writel(0x00000000, DDRC_BASE + 0x60);
++}
+diff --git a/drivers/ram/sophgo/phy_init.c b/drivers/ram/sophgo/phy_init.c
+new file mode 100644
+index 00000000000..7fbccf8e770
+--- /dev/null
++++ b/drivers/ram/sophgo/phy_init.c
+@@ -0,0 +1,193 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Sophgo CV180x DDR2-1333 x16 PHY settings
++ *
++ * Copyright (c) 2026, Hiago De Franco <hfranco@baylibre.com>
++ *
++ * Based on the Sophgo FSBL (https://github.com/sophgo/fsbl),
++ * plat/cv180x/ddr/ddr_config/ddr2_1333_x16/phy_init.c.
++ *
++ */
++
++#include "ddr_sys.h"
++
++static const struct ddr_reg phy_init_regs[] = {
++	{ 0x000, 0x03020100 },
++	{ 0x004, 0x07060504 },
++	{ 0x008, 0x0b0a0908 },
++	{ 0x00c, 0x0f0e0d0c },
++	{ 0x010, 0x13121110 },
++	{ 0x014, 0x00161514 },
++	{ 0x018, 0x00000000 },
++	{ 0x01c, 0x00000100 },
++	{ 0x020, 0x76543210 },
++	{ 0x024, 0x00000008 },
++	{ 0x028, 0x76543210 },
++	{ 0x02c, 0x00000008 },
++	{ 0x040, 0x00000000 },
++	{ 0x044, 0x007f000d },
++	{ 0x048, 0x00000000 },
++	{ 0x04c, 0x00000010 },
++	{ 0x050, 0x00000004 },
++	{ 0x054, 0x0c000b00 },
++	{ 0x058, 0x0916004f },
++	{ 0x05c, 0x00000000 },
++	{ 0x060, 0x04000370 },
++	{ 0x064, 0x0e000940 },
++	{ 0x068, 0x00800000 },
++	{ 0x070, 0x00000108 },
++	{ 0x074, 0x00072000 },
++	{ 0x080, 0x1f00e000 },
++	{ 0x084, 0x0109100f },
++	{ 0x088, 0x0a010114 },
++	{ 0x08c, 0xaaaa008f },
++	{ 0x090, 0x00003800 },
++	{ 0x094, 0x00000801 },
++	{ 0x0a0, 0x07400540 },
++	{ 0x0a4, 0x01420504 },
++	{ 0x0a8, 0x0055000a },
++	{ 0x0ac, 0x00553c5a },
++	{ 0x0b0, 0x00aaa5c3 },
++	{ 0x0b4, 0x00aaf0f0 },
++	{ 0x0b8, 0x1e000f0f },
++	{ 0x0bc, 0x00083e13 },
++	{ 0x0f0, 0x00000000 },
++	{ 0x0f4, 0x00030033 },
++	{ 0x0f8, 0x0021002c },
++	{ 0x0fc, 0x00370016 },
++	{ 0x100, 0x04000000 },
++	{ 0x104, 0x00000000 },
++	{ 0x10c, 0x00000000 },
++	{ 0x110, 0x00000000 },
++	{ 0x114, 0x00000000 },
++	{ 0x118, 0x00000000 },
++	{ 0x11c, 0x00006a10 },
++	{ 0x120, 0x00000000 },
++	{ 0x124, 0xfffffef7 },
++	{ 0x128, 0x0000001f },
++	{ 0x12c, 0x00000001 },
++	{ 0x130, 0x00000101 },
++	{ 0x134, 0x00000100 },
++	{ 0x138, 0x00000014 },
++	{ 0x140, 0x00000000 },
++	{ 0x144, 0x00000000 },
++	{ 0x148, 0x00000808 },
++	{ 0x14c, 0x00000000 },
++	{ 0x150, 0x00000005 },
++	{ 0x154, 0x00000101 },
++	{ 0x158, 0x00000000 },
++	{ 0x15c, 0x00000000 },
++	{ 0x164, 0x00000000 },
++	{ 0x168, 0x00333331 },
++	{ 0x16c, 0x00000000 },
++	{ 0x170, 0x00000000 },
++	{ 0x174, 0x00000100 },
++	{ 0x180, 0x00020010 },
++	{ 0x184, 0x00000000 },
++	{ 0x188, 0x00000000 },
++	{ 0x18c, 0x00050400 },
++	{ 0x190, 0x0002120e },
++	{ 0x200, 0x00000000 },
++	{ 0x204, 0x00000440 },
++	{ 0x208, 0x00000000 },
++	{ 0x220, 0x00000000 },
++	{ 0x224, 0x00000440 },
++	{ 0x228, 0x00000000 },
++	{ 0x400, 0x00000000 },
++	{ 0x404, 0x00000000 },
++	{ 0x408, 0x00000000 },
++	{ 0x40c, 0x00000000 },
++	{ 0x410, 0x00100000 },
++	{ 0x414, 0x00100000 },
++	{ 0x418, 0x00000000 },
++	{ 0x41c, 0x00004040 },
++	{ 0x500, 0x00041001 },
++	{ 0x504, 0x00100000 },
++	{ 0x508, 0x00000000 },
++	{ 0x50c, 0x00000000 },
++	{ 0x510, 0x00000004 },
++	{ 0x514, 0x00000000 },
++	{ 0x518, 0x00000000 },
++	{ 0x51c, 0x00000000 },
++	{ 0x520, 0x00000003 },
++	{ 0x540, 0x00041001 },
++	{ 0x544, 0x00100000 },
++	{ 0x548, 0x00000000 },
++	{ 0x54c, 0x00000000 },
++	{ 0x550, 0x00000004 },
++	{ 0x554, 0x00000000 },
++	{ 0x558, 0x00000000 },
++	{ 0x55c, 0x00000000 },
++	{ 0x560, 0x00000003 },
++	{ 0x900, 0x00000400 },
++	{ 0x92c, 0x00000400 },
++	{ 0x930, 0x00000400 },
++	{ 0x934, 0x00000400 },
++	{ 0x938, 0x00000400 },
++	{ 0x940, 0x00000000 },
++	{ 0x970, 0x00000000 },
++	{ 0x974, 0x00000000 },
++	{ 0x978, 0x00000000 },
++	{ 0x97c, 0x08080404 },
++	{ 0x980, 0x08080808 },
++	{ 0xa00, 0x06400640 },
++	{ 0xa04, 0x06400640 },
++	{ 0xa08, 0x06400640 },
++	{ 0xa0c, 0x06400640 },
++	{ 0xa10, 0x00000640 },
++	{ 0xa14, 0x0d000000 },
++	{ 0xa18, 0x0a000b00 },
++	{ 0xa1c, 0x00040400 },
++	{ 0xa20, 0x00400040 },
++	{ 0xa24, 0x00400040 },
++	{ 0xa28, 0x00400040 },
++	{ 0xa2c, 0x00400040 },
++	{ 0xa30, 0x00000040 },
++	{ 0xa34, 0x00000000 },
++	{ 0xa38, 0x00000808 },
++	{ 0xa3c, 0x08080808 },
++	{ 0xa40, 0x06400640 },
++	{ 0xa44, 0x06400640 },
++	{ 0xa48, 0x06400640 },
++	{ 0xa4c, 0x06400640 },
++	{ 0xa50, 0x00000640 },
++	{ 0xa54, 0x0d000000 },
++	{ 0xa58, 0x0a000b00 },
++	{ 0xa5c, 0x00040400 },
++	{ 0xa60, 0x00400040 },
++	{ 0xa64, 0x00400040 },
++	{ 0xa68, 0x00400040 },
++	{ 0xa6c, 0x00400040 },
++	{ 0xa70, 0x00000040 },
++	{ 0xa74, 0x00000000 },
++	{ 0xa78, 0x00000808 },
++	{ 0xa7c, 0x08080808 },
++	{ 0xb00, 0x00000000 },
++	{ 0xb04, 0x00000000 },
++	{ 0xb08, 0x00404000 },
++	{ 0xb0c, 0x00000900 },
++	{ 0xb10, 0x00000000 },
++	{ 0xb14, 0x00070e0e },
++	{ 0xb18, 0x00000000 },
++	{ 0xb1c, 0x00000000 },
++	{ 0xb20, 0x40400000 },
++	{ 0xb24, 0x00100010 },
++	{ 0xb30, 0x00000000 },
++	{ 0xb34, 0x00000000 },
++	{ 0xb38, 0x00404000 },
++	{ 0xb3c, 0x00000900 },
++	{ 0xb40, 0x00000000 },
++	{ 0xb44, 0x00070e0e },
++	{ 0xb48, 0x00000000 },
++	{ 0xb4c, 0x00000000 },
++	{ 0xb50, 0x40400000 },
++	{ 0xb54, 0x00100010 },
++};
++
++void phy_init(void)
++{
++	const struct ddr_reg *r;
++
++	for (r = phy_init_regs; r < phy_init_regs + ARRAY_SIZE(phy_init_regs); r++)
++		writel(r->val, PHYD_BASE + r->off);
 +}
 
 -- 
