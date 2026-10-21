@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FFD1606A319
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 02:20:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38D61606A31A
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 02:20:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=nsZgZ3CI;
-	dkim=pass (2048-bit key, unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256 header.s=selector2 header.b=pe2C1yul
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ymcg04lJ;
+	dkim=pass (2048-bit key, unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256 header.s=selector2 header.b=FUAKE7UU
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D46606070C;
-	Wed, 21 Oct 2026 02:19:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C21B1607E4;
+	Wed, 21 Oct 2026 02:20:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nsVuVc72l41f; Wed, 21 Oct 2026 02:19:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0428B60754
+ id xYbrt2y_EWyp; Wed, 21 Oct 2026 02:20:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 132AA6074D
 Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1792549199;
-	b=SWHvlSrJTv9mrevD2YmMbRlVgrCkv7LVN5eT0uwZWE06mWjbS4eBI7KGWHQtbuA5jXnp
-	 4Fub/CpziVO4lUjGs5vaB/wtzww/HgMX1cX5D9msRoQf07YDf+j6EUuX1V+UDpFOiKRNw
-	 omAJmGlvLq0w/Y1OZE05SdJ4YGS7b1HuEVkj7gqBG3CPcNR8pRAGC9bYb3gfffD0RlGg5
-	 2jF9SxlbcDli6UxRXMFalJmHF/PdoxI7H36jYKvA1dg2MkkPYZf//lr1/v2sJNUiXZga4
-	 /a3S01h/wxcHoq5yoO8mAr6ce4VABcSMGLMhAKvHLE7lU8VSRLetntY/831kyhuJvuw==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1792549242;
+	b=N38c7UItIJF3hFOYVRyx+NPHM4nubGqOIkJre1UDF5l8YZCbtUC5Dgggwn75tu6pQ+0S
+	 r2d3Ls65MYXC1j63+lkxg6QXnt3BNxZxPLQV67OOcxLB8mgwGfaxwLCMRI1LuDLZlzOBq
+	 IKlbV4TqFmgzKtniubLlq+MeUcLtyZgHPeMDlboBjMif2KygEsSjGCm7I7fcc4scUrVrf
+	 JVsd1mAGz1Wxn0C3ngU9sfxXCMeCoqHSd5FxgifFgEBRe+CWNCrVfZNS9TBIgptmRwhTM
+	 JnMe1ShsIy7z2QJwQlTcdeGreZ2DDg0jfELU7UyHPT5d0p57HFoW0tme9pmyYapaalw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792549199;
+	c=relaxed/relaxed; t=1792549242;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:X-Comment:Received:Received:
@@ -47,52 +47,52 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Virus-Status:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=4i71Ex/C+gNrRiKAdfl/8HTJlQIpACg9nTlS5USw2t4=;
-	b=CqSEJa+8WKuab6Dkui7VCaXYVaEYnRMhbf2BckqzmCVijzoeigMfxVHNhK5AmFBcMni/
-	 TM7k8jDza5IB2+6tuNr2E60UCNVWgJH7zlaJzIwRmBnGIAzHSmh2tGhza7YVmW2R7as4i
-	 K+r64XWdvF8swj9Gahila8FBsleNqUOguiXm6JDwmTKwAaRB+9pkAXqI/MdzKv6Nr5fFP
-	 7uaFceueryOucH4lL1KTo3V6Y5eCGIIHr2lxYnwghHsxZDypGqNd+pjWArcGeEpKz2V4P
-	 sm74TC5+72Zd8VX9mmVO1KtDm/+kIzba7EHGO/7S32S4Q4XNYWe7NflYofYn6aVEztQ==
+	bh=R2rIExMA3xqiw7rQW96+hUni0PloAVQKgRSmX5uMPn8=;
+	b=mzzFthkiJKUQYcuNGRRAoZrDCn6vlOYbjqeqa+cde1u0FNWmNCBr5nU82UD0NGVzpxAs
+	 NhZ4vhz+3fv79ZzV9urUFedWJAjsEgmiF9ImrtD5KXN8KlN94/PmTFfUvfCN2LzySm0KY
+	 hrF9fWTqeWbLWOqRKPpMAIkHw0HYgia+JXiVKxuQNr08xY5IAK2E51HMoMs8xYnQWg4xt
+	 oy614cGYRTZvV2FzyMX+aNVG49bK1S9X01r8HKrZNmsFG+EXLus+8K0MlJBU/vPywgjIG
+	 Si098DHEr+LR+4EtTUwuuFSRcM+Cnj/C+IGegXFowl5fVQ2ledOW27Pet5hDlBNlazA==
 ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
 	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792549199;
-	bh=4i71Ex/C+gNrRiKAdfl/8HTJlQIpACg9nTlS5USw2t4=;
+	d=lists.u-boot-project.org; s=default; t=1792549242;
+	bh=R2rIExMA3xqiw7rQW96+hUni0PloAVQKgRSmX5uMPn8=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nsZgZ3CI7n0pTbeL7I7vaWgbU7r+aGN6+B2jI7RKWTb60Vufc01nLhFia9eRCu+lh
-	 13ZtPfHScIdKi7BM4fL8TZ+G0U26zoiZVaYgxJmFuPJSG9DeUZNFQ3toHkof3ipTat
-	 m3pjzXiBtzju3PypZMeoHHe9QTFSkCcbm5KD2BV2GUgTC4GYA5WBPT5B2nN09E802S
-	 gV3dAPumOkTLv0THuiAjiUkFe5sk8i5HTt+oe2Ne2Ii6Pbc5zpS604+OI2aU/e8gq2
-	 CL4AWNRW6Jl4ygCQCyitPvP+4K8WeFtAE8oyIspJFg1EELLKa8go/WVwTnJgzijA1j
-	 6bJVb9iPw+WNg==
+	b=ymcg04lJ9DhH23tafas+9/V/E/ZBVh++o3dpgAQCLSx++CSPiNGmdiL5eEA3R5Ljd
+	 /P1eiItnMxTfQzUBe2/+YcvqsawMCgZ48StSUY4zoCZMmRFDcFv9snCckCxzfaC66L
+	 inRlzvTWdSj48ZV4qIGsgQDl9pAXj3hrvbEkOFATH/6W7ObwVFACQbW4wlgOh3kzjo
+	 RoL/8G3h8WaNWIfUzJLBGrpkj2u2/VQ3EXc7xcbBc2dzsJIkfd3XJe7ATbI2mreguw
+	 62PTbw/3tR6oGpnts97mwo0eir0eLJcnD8YOorsTTK6aCsRM18uiEz3jVwzHR/mkBP
+	 x0NFKRaN1xkWw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0428B60754;
-	Wed, 21 Oct 2026 02:19:59 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 3310E995
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:19:57 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 132AA6074D;
+	Wed, 21 Oct 2026 02:20:42 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7A9B7995
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:20:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 303A340261
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:19:57 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6C5A481086
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:20:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HYKJUGllHfat for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 02:19:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 3BC7940253
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gAG9t4dinU36 for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 02:20:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B3AD680F90
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip="2a01:238:438b:c500:173d:9f52:ddab:ee01"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792549196;
- b=hcJNR2u2Nil0q3oXQjpJcleuu7cmyW/k3+dS3v0nBau9F0JxRfjT1XyrrKFbgdb0e3ZI
- G5bi2sfvQjI+r3y3prNoLK+n3LVMpZp4CPby+7DWKrrMTG+Qk1GwUoccAm/OUkTAW1F5j
- rhWUpwB8BiZqnb6I8b+1ZFVRMbLo1QHwfr8J/0sgyMbx54No0P7m/Cr+JO1X4K+jkkMvj
- RO0xyixbeendX0YUIdk4zyQAmLwzhoZQQSu/zrZqdSjFVa18pbpi/hoW22/NX7xNS7t3K
- aQiG4rBakLmUdSXomjwKfWtbJka/w3dtoRbWdtwNnFz4VvcU0wCqhyrGFTxGbxfxY8w==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792549239;
+ b=CQpO8Kg2KkvP2ts8UIPUgbwiM7+7qEdEou68Wh5ZhDBB4WInKzrElMwasArqnIOvJ1cC
+ XKcV2WHxl3vpAhljYCKs4qGHcm32NQLabGzFwK9w3JksRqmuYaDxbJ7oCQaTSy7W70/dG
+ AwVY7X0YnNBBOoomKjVazuvqzV4RWJSRn6XCfJuTFItqpT33Iw5GYKCozJ+Vn2B+p4gTe
+ 4/iQ9+B5DosDMLC4lidDu7s8KUYn2DneesyKp0hQ13C7xsqBf6J0hUVA2qqIEFR9Q+c5G
+ Gl1Yz1J6s7Sj7b8yM1S8Vk8v/SXg5liJ+NeQ4BXhai5CqQ7GE7KDm0Qtc5Y5mNJPXtw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792549196;
+ c=relaxed/relaxed; t=1792549239;
  h=X-Comment:Received:X-Spam-Checker-Version:X-Spam-Level:X-Spam-Status:
  Received:DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:
  Subject:To:Cc:References:Content-Language:From:In-Reply-To:
@@ -112,76 +112,76 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-UserPrincipalName:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-Virus-Scanned:
  X-Virus-Status;
- bh=4i71Ex/C+gNrRiKAdfl/8HTJlQIpACg9nTlS5USw2t4=;
- b=bw+Q5bfverOasgFJ6Pqjnbd8qn9QX2i5Ad9Z5V5FIEAbxcgWdry3QslQkwcOPjFaeKmy
- uOt6K+kI3Wm+73GWIab+udlsGaCbFDRlkLy/siyPk313PcPonVIkMTirUyRZ2eNHjp6gI
- tEoKvwCVplaM/6bChBOsmpglMUTsqw5sOw1aP3ZVXF2e0y1dxfTgd++W/FhDY0ICGgx3H
- 1PyH+0ENfhDhBKLPkMfEdqwqIfKL5LKv5aEs9SvVax2zxlz6VH8XRt2MruLkAVqHMTV7T
- yFQkZbH6kYZNVuDXti7EQns6Id83CiUuwrYYxKiVM2M3KI0P8u9D6WGolgMCK/caB3w==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
+ bh=R2rIExMA3xqiw7rQW96+hUni0PloAVQKgRSmX5uMPn8=;
+ b=jEDFmzfgw7SgM0rjh8Xh79rXch8+js/6ZQK8DqrxNcJ3Az7WcbQIVUkiuiltJzVxnm7Q
+ lUaUSD5FVzyTjF/1okzT5tUpmTJ+WOpNYLEJ7Kr95l89L4QXqhxkBVgfRqhy3kNCli/H1
+ FRoHOom1FJ91JquBtxeU5HBDtOL+OJiKBGTzkKV/ngLvx9lLIoHbZWWCyc/aeylVLmT3V
+ tQoW4pESHaTa6h3yu93rOUgavZQK3W7BaBTXzS35SZEDBr1fH5x2qKDCYOaTKQuGjhRG8
+ u8bPNkr1WHMbIgW6MRl4c/ILDiBg0FWGex/NpBbUHZAjDmhwwyIkq32OHEJNSiB8u4g==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
  dmarc=pass header.from=altera.com;
  spf=fail smtp.mailfrom=altera.com;
  dkim=pass header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=pe2C1yul; 
+ header.s=selector2 header.b=FUAKE7UU; 
  arc=pass header.oldest-pass=0
  smtp.remote-ip="2a01:238:438b:c500:173d:9f52:ddab:ee01"
 X-Comment: SPF check N/A for local connections -
  client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
  envelope-from=tien.fong.chee@altera.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: smtp2.osuosl.org; spf=fail smtp.mailfrom=altera.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; spf=fail smtp.mailfrom=altera.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=pe2C1yul
+ header.s=selector2 header.b=FUAKE7UU
 Received: from phobos.denx.de (phobos.denx.de
  [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 3BC7940253
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:19:53 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B3AD680F90
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:20:38 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B06F844F6; Wed, 21 Oct 2026 04:19:51 +0200 (CEST)
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c005::5])
+ id B4FBF844F6; Wed, 21 Oct 2026 04:20:36 +0200 (CEST)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 733F38056B
- for <u-boot@lists.denx.de>; Wed, 21 Oct 2026 04:19:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A4908056B
+ for <u-boot@lists.denx.de>; Wed, 21 Oct 2026 04:20:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tien.fong.chee@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xwbWzt3N9nydpMbDRbCCpO/x6hi0PxqnBxw+ZnGRsA2Mck6qmR6e+udW1jCb+qukwyIQgqOlGlnbY7JM+6wfsNK9NKxf4sTClfmq1Squ8KaAwSYFCAryTrYXy64E6z8NmxTnSOZQPmZRjxK94zWek2T7NcXjnhCXiFWSINdupdwz+LjBYaMrav3LDLH8T+uJDYhhu4cUuMz3NjwOd0H0rv7flJ7qDHUuTGYpc1NCMVb0HCql5eTQaNIZHdaAoQq1h8NQBti5YcZh3YVVIg/v5gUBVdIhCL84Is8CVmOlmmW+mgorBfy6ntr6nn/3+sBRIJTuupNC17aglkFaG35UnQ==
+ b=dwAfcMHneXNsFRDO+cqQ+6dpFOPApvc2eXV/jPJ/MER/BsG5bFoaYvUSpxa5YMK6TqIj83GGNjgZrCgreVwrUE0b1VuNhb6p8rsYCF11CTfAdYOGOcDKXGZlfLOb9C4A5ETBc15TtmTSKebnMZNVN6ml08DLiMosqTYGTI0u9pA+4jClTrg1FdEItzabh2EF2xSXXnePa2eDhpxqpbWFVUwjyYR0CEnHXGPly8CbVZHqYhXPI4ZD/Irc0GHqytxN2WwHYzK2xHLhpTwk1fbnDsYEWyKziQ7R5ej6S2SdDd3t3MlaC3ApWlcVdLQAxTJRGQoyTm527xBt6UfSJqsnWg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4i71Ex/C+gNrRiKAdfl/8HTJlQIpACg9nTlS5USw2t4=;
- b=IkRj6VdBwpcSNOG6s/GXBhKrZxTOoOpxIOR2owcLzbkh+wZ5OPSB3u6v+T5UtbOg9PM6s64aIeLHMJtVJymDs2kiTp6utd5ZECihJH3f7H7aeSVBqvOFPL7O4ucgB7yyYPanDzWEX8p3AJL4JsN6r26m1gjQOmDevt6VmChhulNEo2w4Xc6NU+YY48Ki8OF8NiUJGrCbfEh0rcSInaavrAPNrwX0C7DmtwKmAY/u0CiKb8mIs+hCznj7IyZ7BJM7EYRxjrxpi9hSlKBAUsHh4jCRzT52nHemitk91OxdLszRi2Mt+0tDgDhI3OlVIC/OTQEt7WzqcjskgQY3kmqR8g==
+ bh=R2rIExMA3xqiw7rQW96+hUni0PloAVQKgRSmX5uMPn8=;
+ b=IKdY5mbPT8G8UzMKVHfSYj1ncpTDkR85/InO37bj+we1NMyDHRUNjJ0suQ6vVI9gVkcGlfgA71KdSe+CLIxcCqmZJU1E+Afn/8BBywReNp3SbK70rnzdz3ZaJ+xLliwmBmI1ZihlbUa8vRsm7XMoA7c/kP6YC8FWnZ7ZNItymSj7VoMZrKe/z3AFjvb9ErQ1d0A+lAMpaiad2brf0TyiafC+kzwmqxZSDLHfMb/zrqBdfm3fi82zl0sMyvKtYny/Lt7lBLOMe/H6ldDnYDx9EPbvsAtbpxQ65fFhV54NOaWawWJa0PhgzC3M0V6Xd8/816GVkRuhbsWlLfsjKMURVw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4i71Ex/C+gNrRiKAdfl/8HTJlQIpACg9nTlS5USw2t4=;
- b=pe2C1yulfG2vtb8ezz09FalKKG4o/Aa2NV21FJ/ZFJlWG0Bywb7AZrLo3T8bO72YzUDozeFuLyNLtQyPP/pN+W14jl4NjCq0RxlkaMBgXpEguRrC4NhrGB4QAFAgXVUMbl6Bf5+QXUChz6MVWvaKCUS02Ls+8nqDFx1Gg+lAB6LC1/AQYv3AJUsI0C1CdfWmth4vh2AdXZ2EWbG3Z5/h1HKcw0KS/jlnU+5wXYsSyTY3DGV4pkQ1ys2GYnXYpKPpSEbLpaInvp4TNy5VF9ex+C6E2JqdUM0i4DK+8P6OdArNF/LFhX2IDf7vbUd70yG1s6Ehft1+xMpQ3ZQNQ/KJ1Q==
+ bh=R2rIExMA3xqiw7rQW96+hUni0PloAVQKgRSmX5uMPn8=;
+ b=FUAKE7UUH4/A1Jm/HkUbz+dFoY6+4G9uXUP8ttgKrYU+czRWzz9k78ce5Oem2qQqA8aBc/bvKH8CsjkTWxdyD93VvH9Q0xfEoKBTgRVb8YTcTThaSRnOTUK84oXI2yUcv77ME9OwrlXzMaXbJ/aN3fNDe7xETZaVuhvWG0FZr1yK98RKQZXLK4rWzf11nLf469rNSUOO4CbinpLBF5DQ51aTi94MmPtQ+yYmUoTbmxMc5fQ4AnXyl6nlE/eF6TyJalxST7EnYAVRW37z+dldAX6OulCIPsUOTsVG2Rmdd4cUTraY/6HcQQT2W4HSP+gLE6F6T+juZRDMTbMLQ7IQSw==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from CHBPR03MB959535.namprd03.prod.outlook.com
  (2603:10b6:610:40d::14) by CH7PR03MB7833.namprd03.prod.outlook.com
  (2603:10b6:610:249::7) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.15; Wed, 21 Oct
- 2026 02:18:08 +0000
+ 2026 02:20:22 +0000
 Received: from CHBPR03MB959535.namprd03.prod.outlook.com
  ([fe80::26cf:5066:9d0f:c79d]) by CHBPR03MB959535.namprd03.prod.outlook.com
  ([fe80::26cf:5066:9d0f:c79d%4]) with mapi id 15.21.0546.012; Wed, 21 Oct 2026
- 02:18:08 +0000
-Message-ID: <baf2c25c-e788-449d-95dd-c8d0edddd80e@altera.com>
-Date: Wed, 21 Oct 2026 10:18:00 +0800
+ 02:20:22 +0000
+Message-ID: <1aeab7fb-9a5d-4bc4-8037-eda4c6d8d858@altera.com>
+Date: Wed, 21 Oct 2026 10:20:14 +0800
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 06/15] ddr: altera: n5x: set DDR init progress bit for
- watchdog recovery
+Subject: Re: [PATCH v4 07/15] ddr: altera: n5x: re-init DDR when double-bit
+ ECC error is detected
 To: Chen Huei Lok <chen.huei.lok@altera.com>, u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
@@ -189,79 +189,79 @@ Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Boon Khai Ng <boon.khai.ng@altera.com>,
  Kok Kiang Hea <kok.kiang.hea@altera.com>
 References: <20261016044047.21496-1-chen.huei.lok@altera.com>
- <20261016044047.21496-7-chen.huei.lok@altera.com>
+ <20261016044047.21496-8-chen.huei.lok@altera.com>
 Content-Language: en-US
 From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-In-Reply-To: <20261016044047.21496-7-chen.huei.lok@altera.com>
+In-Reply-To: <20261016044047.21496-8-chen.huei.lok@altera.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: JH0PR01CA0006.apcprd01.prod.exchangelabs.com
- (2603:1096:990:56::8) To CHBPR03MB959535.namprd03.prod.outlook.com
+X-ClientProxiedBy: JH0PR02CA0008.apcprd02.prod.outlook.com
+ (2603:1096:990:5::15) To CHBPR03MB959535.namprd03.prod.outlook.com
  (2603:10b6:610:40d::14)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CHBPR03MB959535:EE_|CH7PR03MB7833:EE_
-X-MS-Office365-Filtering-Correlation-Id: bf73bd96-a198-46b6-2cc7-08df2f198c04
+X-MS-Office365-Filtering-Correlation-Id: 6fb48c03-effe-44d8-b15b-08df2f19dbb8
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|23010399003|56012099006|4143699003|11063799006|261009223027099003|10067099003|22082099003|55112099003|18002099003;
-X-Microsoft-Antispam-Message-Info: MXzE+tVCF1/9K+HLZdw4cxaZLAUJUfxmotGiS6DYz4skmaOvEIeqb6gyen8TMx5Ch62Q+XzS102Ot0hljg2FRijNv2R1Mox4Nrhd5D44h4e/h8gP6DcCaqa2KkSb6jZYNW3u9yyw75XREj19K5iPVZXEP0ho55/0vl96sTBzh0/uDMRbqfkjVvj4dNV/UF6MwFozg2qM2ADGyfoEJYnp+hvOAIi4YiNyiAOi4FrMjnot+s6W6vY8gYTz1hc5OPjyNqKwN+JjhVEf045CdOZb2SEpeWwjUSd4bUD1GlE0hd/jcsLFLH2589upTaPOFl7gWgJ5dPQGxG3CQFDa0j0PKFOaj5tIg7qkl+rbNzSRvr7v0XIyfS4/Ygxmvp6b2q36jCI7wIO8eJ2YO6jOpKjfpxF+60nDzc8KKLGJXuSYywYCC4sZQWILSS1Fb880rbWspSYfgNWa13djOon+BcLg7yY3taQifSGCFEmxwCAAu/kd5H7+Mh7WQgY7EliDEx+auZMfunDfcE4rvBbiUcgdbEsdAM6BxCDedJrklJkSraa++zjZmfjPiv8LkDHls8DV8poBSjVkkTXBnXv5mGlOzTdhYOP7wmvmB3DBbXATIVNjl0P8Qk/yq509tuENX6EO3HPYdQOkDHp8OjB/hemKE/ONJy7rM+wMRU/LWb3pf3U=
+ ARA:13230040|366016|1800799024|376014|23010399003|56012099006|4143699003|11063799006|261009223027099003|10067099003|22082099003|55112099003|18002099003|6133799003;
+X-Microsoft-Antispam-Message-Info: tshdowEg6RQflOg5yIxtl2aePcxgirFbx8sou1KMiqxaeUXD7ZDI2maIBaKZXTGECgDetaDlMCY0SojOa2s+yeNDpvDHzmZT6jooLvdRMot0vZYbJnOeSHNz8ZjGKlam/CYOKCipOVwVP/XHgsbEcmukAB/OC+4RqdK6R0SqsdNgLRvQdanJh101B9suPDmJW3V5uCX3/NoUdATYMk6SzfTym1h0vx/Ge5brrkHPEmKshZK7R9qP6KqKCVe7uiNJo489eCcyN7d/gAskU3EgNyVE9uZvli07PK0NNVvwHHBGn00tnf7O0Z1GVQcw8k9MDvsatvfJTgsZjZHK9nnK+YVZrccugsuaJaxfKHDPTKOK6fN1iNf5kRQ/GIP7N4qmNumjJVyZrhL2j65ULnFhXmcZFUq5ciPP8dhiCg6ZYgyWrfYHSWtWdSFH6qC0bClYUHKKdVpetlMy9mRGA0PQ3fLysAX671MCaFyN9PU5p58a4oGt7nrHzgT/5ubdWQYJNydXQUQ75sIEZMalBv/PqV8GW9lRJpOxQJqKH3ZV4BOan7TdbAgzoTaQwHb/IxuYVg5EfgUOx6zKsXSbMeAzerZ9iUpCc9yeZvfcjB/vKQbgjKs0I5iIE0A87PlpVzYJ4LFTGzBYW5zG0SBWcHaH6wgoF0WoGX5ZFjz1dM8U91E=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CHBPR03MB959535.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(56012099006)(4143699003)(11063799006)(261009223027099003)(10067099003)(22082099003)(55112099003)(18002099003);
+ SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(56012099006)(4143699003)(11063799006)(261009223027099003)(10067099003)(22082099003)(55112099003)(18002099003)(6133799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YjZwdlA3eXZFUFV0eXpxK1RrU0twSG1DbFF2a2IxWEdoVWsrVllYZ3p6dDhQ?=
- =?utf-8?B?L3FvSzJkdFZXVkJZK1ZsQVlYM0dHbWNXWWM2bnVVcHZjaFg2U1ZrVUVHNVJJ?=
- =?utf-8?B?a2tsRE5wbDZGcW5SWFlQT2M5U1hFWmQvdHBuSmRROGZ4VzhuMkIwMEVXejgz?=
- =?utf-8?B?VnlNdDl3eS9iM2FBMUhwNndwOWtHK0VsYnJvb0Q2ckFlNWFOMGJTaWhoeWRk?=
- =?utf-8?B?a0JtTWtWcXBCNVphN1hqTHNKRExYSmFOa0pDSlJWOW9JeG1NSXpLYXRlSXl5?=
- =?utf-8?B?azQ5NXhSN3dsVlFHSWtiSER0cUlZeEZwSk5RNm40NVVJNDREOVc4UHdRd2JX?=
- =?utf-8?B?b09YTE5BdGxTZjFzd1ExZkt3QitnaGJ3UkE2aUxpK0M4b2tZdXBjYjNpQ1U5?=
- =?utf-8?B?WDNiVU9xQXdrWkl5VktRRVVzUUlaNWROQXJUL29pNWdLSEtlSzUzZWFoQVA1?=
- =?utf-8?B?a2x6UUkvQ1BHS2E4SmwzMEduYnRNQi82UW8rRDRIR2R2Y2FSTlFIUFRDdnZV?=
- =?utf-8?B?TllWTFBsbW92Mml6ODJqNVFiZE5yNkV4U1hlTXo2K1ZJZDY2cWhPVHA3ay8x?=
- =?utf-8?B?NVVuMTdrR1pmQnkrZ2NnSGRuT3QwbkJidEdSanRCVllYSHl1bTgxYjJOclV2?=
- =?utf-8?B?bWxSTWdFWGFSYlRHRlh0c3VNOGtuVFNxNDcvZGduL0RPS2VVS2J6bGRxSkFQ?=
- =?utf-8?B?S01aUTFMUjRQeEs4NktQTTZjaTlTMktQQkNqQ1F5SVNNc3BoVytiRGdyelR3?=
- =?utf-8?B?eTNRemxYRHFhcVJWV24rVjY3dnhjcTZ3NXFLdlRRSjBLdzhGS3d3WFFEUHFM?=
- =?utf-8?B?YUo5MVZwZ2svZzVDSGRVeXZsZ0I4LzByNU1JaUI3ZlFVTG9uQTJhVHNDTUVk?=
- =?utf-8?B?KzdNdjB5ck9xaU5pTTZJMllmSnNWNHJoRzFEZktXakdzenJWUWk1Y3pHTE9m?=
- =?utf-8?B?WEI2K2ZpYWMwRklQV3g0WFoxVXcrb0tSSU03eEZTRmRMZ0V2S2VBVVlFWlBa?=
- =?utf-8?B?SGNBc3RvUU5sdUlPVnhydDVpSHU2NHE2KzFaZTdmdHc4VGRNTU9YTXNiaUNz?=
- =?utf-8?B?aUVvbExIVGZyTkdPSkZkYVROdlA5em5UeVlFV1ZsallpNG9HeTQ3VlZiRkxm?=
- =?utf-8?B?YUZnOEsvSitka0NkU1RaYlhvWVByQklDV0krY2tMZzI1UWNzaVlzeXJQTGQ3?=
- =?utf-8?B?M3dwMi95NkRhVFpMK2ZwcGdlL3l5TEdLU1FqTkkxbGlZeHhXbHZNNDJJUmFP?=
- =?utf-8?B?Q3c1RkxiQ0pxK2V6MVRuKzBMWWUrODc1N0N0SE8rUSt5eGNLMkJoM1V2Wktl?=
- =?utf-8?B?cmVpMVAyb1BDYjF3WTVMcFdNcDRETVc1ZlhOS09Rei9DZWFPa0RLS1dCQml1?=
- =?utf-8?B?R0lwSlpWYlM0ZFNaMndJcVIzVUFqL1hKdzNxQlhPVnVKWXdTRkh2ZjdsZHRj?=
- =?utf-8?B?WG9rbThsVWdtY1Z5ME96L3hpVUpYQzdGaEV1Y1dYRksvQkovWUdjQzVSVnk2?=
- =?utf-8?B?ZXdKblg2M1dnU3kyV3BIRzhackpUNHJlUU9nSk5lTHpBTnR0NHNyeFhkK21h?=
- =?utf-8?B?bWtTL1VZT3dEQlFmN3dQMDNFODNjL05FN1pybkliNDhBcGZ2ekRmNkErcnRZ?=
- =?utf-8?B?VnhCSzVqbitxT0dQUTZJY25LN2Q0V3NPaGhuM2ZSOWdrc3N5UXQ2OFU2dlZz?=
- =?utf-8?B?b2w4MWxGYjNEckJCdXVFeUI4dDN4aHFIVjc0bVVDMG96RGxLOWU1YzUzSjBZ?=
- =?utf-8?B?WlRUazJPa0NMYTNvN2N6bSsvYkRZMGt6TmpTdGd0QThuckZsREEzRlMvbE40?=
- =?utf-8?B?S2dUVUppUitNc25ZN3ZFcEhvOCt5OEZ4SGV5WUxWWFdzZXB5aEZQNlljajNn?=
- =?utf-8?B?TUFHR0tYd2JuazZxdE9GT1JEN2dmRVdHTEpYRUxOb0tPSUJOb0NScnBzWVFZ?=
- =?utf-8?B?REhka096c2U4cmI1ak9jemFHcjFRSXdvSVVTOHZQOU92Mk1YcFRZMlNnaFph?=
- =?utf-8?B?M1F5bzJSYk43bkp2SDhRRVBGS201amg1TnJJMGNVSkRPTXlWSGVwT01YNWR3?=
- =?utf-8?B?aGVDTG9kZWdrblJVQy8xQ1FublY3UjNkQ2NFanNxWTlMOExJL2xjdmJ5T0ZB?=
- =?utf-8?B?aUI0eERreHUrOERXWUVTWTBZQ0J3WjlvRE92WXlxbmE0L2t3emRxVW14OW5j?=
- =?utf-8?B?WVNOeEZNUC9MbU5ObzNSdXpVbEVhNWt2bkRiRHVGZjBWTTVKbmtrODNuVFBP?=
- =?utf-8?B?dUhubkhheXRZTFNkQytuVU5DaW0zellqMUVGT29EUDVBWEFwREM5bVpLWUM2?=
- =?utf-8?B?Zi9KNitmMnZCajZRRWdpY1UwZXl6VGNSeTNXelMrZXEyMU1UNE1Rdz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SHl4N004bitqbjExYXdQWS9UOUJBOXNwa2crNTc4QzdWL3QydUdGTTlOUGt1?=
+ =?utf-8?B?QWxOeXBucWJtVEhSQ3U0Z2F2SmthbVF2bnZzUEVVYW5MSkNYMThSU2hWYVc4?=
+ =?utf-8?B?Tm5lbUtzS2ljUWpWT2pSbW41dGg4NTFxTGhES1hFS0V5cVBZS1VoTFg5U1pX?=
+ =?utf-8?B?K1pDbjA2SDA1eGNlcjQ4SmhTa0hYQmxUaW9oaWNmbS9mRzRScEI4NkJXVVhT?=
+ =?utf-8?B?Z2ZBSEdUUmNWY0xUT0NuMmkrMnZ1K2dPOElEOEFST0x4djJQQVRYSkhSUGN0?=
+ =?utf-8?B?aW8rK2xCVThEL01nTGVJd0xtTjNYTHpqTWxITWlqbERjeGIwckdmZXBraGNk?=
+ =?utf-8?B?REMvelZ2dDA4RVV5NlI5aURsZkpoeE9zZm1IYUhJTHROb2RXczdCT3RVVW00?=
+ =?utf-8?B?dXk2NzZvZ2dPVGJsQ202aGt3VmNYcG1iWktiZEMydWV5cEsreWlFRUx6NDNC?=
+ =?utf-8?B?UU55WFYwUldveWlNVmpUS3hIc0NWZFdaN2NGdWN6aU1jN3hDUDJWM0p0L3R4?=
+ =?utf-8?B?akxLV1ZoZEhyZGF1Z0ppNWkyK1ZhMXdFUmsrRlhLZU0zRGlOUjd1bERscDVZ?=
+ =?utf-8?B?VVcyWTBUcWw3aXBpTEVMT0plVXgxWXdma2cya1pXNkVkcTBnZ04zM0duUmJa?=
+ =?utf-8?B?ZGFGSEJGaTJnOGZWK3lpTHpjdm41ZDFBUGJhNC95R3ExbzJCM2JDaDFwQU1Q?=
+ =?utf-8?B?RVJoU1k4M2dMdXR2UUtuZGRjUnY2WlRvSEJoVzM3S3hqTVlXZUxZKy92Z1RQ?=
+ =?utf-8?B?UllSZ3dRRU5tNDJUcXNXeGtrZVNpVmozc1JqMnN2NUZaa2ZNK2J0SDFVSFFO?=
+ =?utf-8?B?QzZCTjJiM1NjODhzdWVoVkh1blBPaWRteG43b0J6dll0R2w4Mi9adkRQbmRn?=
+ =?utf-8?B?V3BOV0FzczRrZ2lEbnZVdjgxSGIyMFNhanludDFQY3JCaTB3Mmh0MmJqa2w2?=
+ =?utf-8?B?Z1RkVGNTRHh2aFIxbmxuZHFXa1VCbHZ3WTQ5WWNqOTFwT2luTlR0azNhSXZv?=
+ =?utf-8?B?cmRWTXhTcEhleTRJdUczS1o5TnNiZlk2dk9STG5Dckd0cmwrTS85bFdxNXEx?=
+ =?utf-8?B?NCtuRGpWanNMSzdmbnNEYnJOd3hhYzYyQWwzZVVSWTZOa0NKbEVRdy9XOHdl?=
+ =?utf-8?B?RDErZW52QmJIQXFXcFVuYm0rbXRFellKQ201eUc4Zi9zZGVJbFd4UlE2MXl2?=
+ =?utf-8?B?cG0xZXppUWhzM0ovRmhYSHZwbjVNVmtNSFIyQ2JSNlBLeWo4ajg2REpyaFl0?=
+ =?utf-8?B?S0RCK1Z0eXJDOXNFWkl0ZlJUL3o3eWwxLzZ2OUMzZG5XTTVCREF0YUpsWTI4?=
+ =?utf-8?B?QXdMa2hZamp1SFNibEFBTXArbXdhbi94TkJaVVlDc21UY3QweEhyN3g4akl2?=
+ =?utf-8?B?UUJMNmtsam55YUw1dmVmZ1JnLzZWVVJVTEV1YmtHTzhiSzdyTEFhdFMrWng2?=
+ =?utf-8?B?ZkNMZ2dONTVacHdqOGZ2SWU2YXdhbThGSXYvdjlhYVplN3F5K2VBejJQK200?=
+ =?utf-8?B?aE5JeWxPdWdYRGtqS0U5N0EyWjcrVWR5cjB5L2hiSTA0SktaMTBFWVZUL1Zi?=
+ =?utf-8?B?d2dVaXkzVlQzcVFuMHdiNkd0Ym96aG5Va01jOTlnSDhLekdxUTRiUzdmaE5i?=
+ =?utf-8?B?MWIwM3I4SkV5OCt0aUdzbUdvZk1ORWVCN3E2RVlBYzd3OHBkdEhsTmkwQ2o2?=
+ =?utf-8?B?TWpqN0tTcjh6OFBjdFFxY3ByMmp3ZG90RVliQy9SbDkvZklBMXVnNVRldE5T?=
+ =?utf-8?B?MWZuMDRjditzK1JzQmE2amZoc2doOWttMHZQc2FVYnY1eE9MaGlLQjVEbnM2?=
+ =?utf-8?B?blNZYkxUZWd4THVXU1N1cVl1TXl0ZzViRlIydmYyR1BKd01nOW42MmpjRHkw?=
+ =?utf-8?B?YWFzZFZ0VlhPanRCelh5ajZjRjZxaDBTTUFFYmpYd1l6RG1oTDl4a1pUUlND?=
+ =?utf-8?B?ZG5OSkhaLzZ6cU5hNHpiQlJzSERiZzlIU2VoRVRVOUpmMENhVDMyMXc3RWR3?=
+ =?utf-8?B?YzBNdmxoL1BCZ05yMFJUQTNIWmw5Wjg3SXJzU0hBTG9HcHl6bE9nL1JDT2RH?=
+ =?utf-8?B?ODBhU3loSGFOdjFheUIzQ25kaUFicnY4amZScnN6SGgvQzZTbk9GVThJSnh3?=
+ =?utf-8?B?dmExamdTdzZlOXhqaGxObG1RempheXpRaUpPeGs2Ulk0ZWowbHVBUExvb1ZP?=
+ =?utf-8?B?RFlIR0kxakNTT0xYWVp1VEF3OE1uQmMxYmNidDhLWWY1SHhGWjZhQXBFWUM3?=
+ =?utf-8?B?K2pCQzd0ZXk3VDVpVzdGWXRueEd5a3BPVXNmNlB5b1Q0TTJvRU9YQlpDRkNU?=
+ =?utf-8?B?Q2VCQjZ4UjlqbTNadWgrU1psY2NGWnYwZkNNNU04VjRpeXorSGhTZz09?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bf73bd96-a198-46b6-2cc7-08df2f198c04
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6fb48c03-effe-44d8-b15b-08df2f19dbb8
 X-MS-Exchange-CrossTenant-AuthSource: CHBPR03MB959535.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2026 02:18:08.0320 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2026 02:20:21.9745 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: f86yaqPUZvFJicl/8gW03FkANJb/OW8PT24PrlZi134KFEHrCdMr7jeBKivffKFK/717xJlTZmFoQWyJJrAQmHeKPBHIodhG693UEIW4M7s=
+X-MS-Exchange-CrossTenant-UserPrincipalName: mrpDsQsz11hyLtXKqXf/2OmaREbiELsjBkTO06/K9qa6B7HvoiTsDcHjmBwGQj0I+/NAtOgIJeF5JEaO8di6rhsO7a6Sq0FU9wpvxjcLisM=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH7PR03MB7833
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
@@ -284,64 +284,83 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 On 16/10/2026 12:40 pm, Chen Huei Lok wrote:
 > From: Tien Fong Chee <tien.fong.chee@altera.com>
 >
-> Bit[30] of the boot scratch cold 8 register tracks DDR init progress. SDM
-> inspects it when the watchdog fires due to a DDR init hang, so that it can
-> run a clean reset of the DDR subsystem before the next attempt.
->
-> Set the bit when SDRAM init starts and clear it once the basic memory test
-> has passed.
+> A double-bit ECC error (DBE) means the retained DDR contents can no longer
+> be trusted. Detect the DBE status and force a full DDR init and
+> calibration in that case instead of taking the retention / warm-reset skip
+> path.
 >
 > Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
 > Signed-off-by: Chen Huei Lok <chen.huei.lok@altera.com>
 > ---
->   drivers/ddr/altera/sdram_n5x.c | 16 ++++++++++++++++
->   1 file changed, 16 insertions(+)
+>   drivers/ddr/altera/sdram_n5x.c | 33 ++++++++++++++++++++++++---------
+>   1 file changed, 24 insertions(+), 9 deletions(-)
 >
 > diff --git a/drivers/ddr/altera/sdram_n5x.c b/drivers/ddr/altera/sdram_n5x.c
-> index 4ac22c536fc..4da0617e37c 100644
+> index 4da0617e37c..1bbd5bb0082 100644
 > --- a/drivers/ddr/altera/sdram_n5x.c
 > +++ b/drivers/ddr/altera/sdram_n5x.c
-> @@ -420,6 +420,18 @@ enum data_process {
+> @@ -420,6 +420,17 @@ enum data_process {
 >   	LOADING
 >   };
 >   
-> +void ddr_init_inprogress(bool start)
+> +bool is_ddr_dbe_triggered(void)
 > +{
-> +	if (start)
-> +		setbits_le32(socfpga_get_sysmgr_addr() +
-> +			     SYSMGR_SOC64_BOOT_SCRATCH_COLD8,
-> +			     ALT_SYSMGR_SCRATCH_REG_8_DDR_PROGRESS_MASK);
-> +	else
-> +		clrbits_le32(socfpga_get_sysmgr_addr() +
-> +			     SYSMGR_SOC64_BOOT_SCRATCH_COLD8,
-> +			     ALT_SYSMGR_SCRATCH_REG_8_DDR_PROGRESS_MASK);
+> +	u32 reg = readl(socfpga_get_sysmgr_addr() +
+> +			SYSMGR_SOC64_BOOT_SCRATCH_COLD8);
+> +
+> +	if (reg & ALT_SYSMGR_SCRATCH_REG_8_DDR_DBE_MASK)
+> +		return true;
+> +
+> +	return false;
 > +}
 > +
->   bool is_ddr_retention_enabled(u32 reg)
+>   void ddr_init_inprogress(bool start)
 >   {
->   	if (reg & ALT_SYSMGR_SCRATCH_REG_0_DDR_RETENTION_MASK)
-> @@ -2820,6 +2832,7 @@ int sdram_mmr_init_full(struct udevice *dev)
+>   	if (start)
+> @@ -478,17 +489,20 @@ bool is_ddr_init_skipped(u32 reg)
 >   
->   	if (!is_ddr_init_skipped(reg)) {
->   		printf("SDRAM init in progress ...\n");
-> +		ddr_init_inprogress(true);
+>   	reset_type_print(reset_t);
 >   
->   		/*
->   		 * Polling reset complete, must be high to ensure DDR
-> @@ -2970,6 +2983,9 @@ int sdram_mmr_init_full(struct udevice *dev)
->   
->   	sdram_size_check(&bd);
->   
-> +	/* Marking end of ddr init with passing basic memory test */
-> +	ddr_init_inprogress(false);
+> -	if (reset_t == WARM_RESET) {
+> -		debug("%s: DDR init is skipped\n", __func__);
+> -		return true;
+> -	}
+> -
+> -	if (reset_t == COLD_RESET) {
+> -		if (is_ddr_retention_enabled(reg)) {
+> -			debug("%s: DDR retention bit is set\n", __func__);
+> +	if (!is_ddr_dbe_triggered()) {
+> +		if (reset_t == WARM_RESET) {
+>   			debug("%s: DDR init is skipped\n", __func__);
+>   			return true;
+>   		}
 > +
->   	sdram_set_firewall(&bd);
+> +		if (reset_t == COLD_RESET) {
+> +			if (is_ddr_retention_enabled(reg)) {
+> +				debug("%s: DDR retention bit is set\n",
+> +				      __func__);
+> +				debug("%s: DDR init is skipped\n", __func__);
+> +				return true;
+> +			}
+> +		}
+>   	}
 >   
->   	if (is_ddr_retention_enabled(reg)) {
+>   	debug("%s: DDR init is required\n", __func__);
+> @@ -500,7 +514,8 @@ bool is_ddr_calibration_skipped(u32 reg)
+>   	enum reset_type reset_t = get_reset_type(reg);
+>   
+>   	if ((reset_t == NCONFIG || reset_t == JTAG_CONFIG ||
+> -	     reset_t == RSU_RECONFIG) && is_ddr_retention_enabled(reg)) {
+> +	     reset_t == RSU_RECONFIG) && is_ddr_retention_enabled(reg) &&
+> +	     !is_ddr_dbe_triggered()) {
+>   		debug("%s: DDR retention bit is set\n", __func__);
+>   		return true;
+>   	}
 
 
 Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
 
 Best regards,
 Tien Fong
+
 
