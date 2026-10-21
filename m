@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30FD6606A319
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 12:48:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FDBF606A31B
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 12:48:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=AmjTXAxf;
-	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=I6wLDria
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=rcrlgAb0;
+	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=E7sES1QI
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B17D760856;
-	Wed, 21 Oct 2026 12:48:02 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 49C37608F2;
+	Wed, 21 Oct 2026 12:48:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id m3_Jw8lH5KU2; Wed, 21 Oct 2026 12:48:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8A61B608B2
+ id GKJcMtP3EJ2Y; Wed, 21 Oct 2026 12:48:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E8910608BF
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792586881;
-	b=fJDCxC7ByfvDxzRVPtllr+lH8ebaZrj/wDb1+z6F9XC+063ISFLJ39hFIG5qNkZpJLF8
-	 UV0lnVfCxn51wVTMR3l6YDHZMr1S4wtWvCU//f67OlBeekqkvLBpGjvYdkHW7bprLaBdQ
-	 ZNhlFFPnsnuFGxO8JjgBWZ7HSSM4BWYJ0nVOTAJjFxyUvTa89p65/HMGwn/BKd2VSuDV/
-	 3Bj0L8E5yESn4EkecD8Yy+Mr3+sqVG5IARnVSaBVBxAt1IQiPeF1by/PKty7sqULIMVEa
-	 +2L0twj9lTW2M/4YWnJpM9H94HET4szUNPD1KPBtcWB24jggW/yJAWkHnAXTg8D553w==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792586884;
+	b=Swrs1x0GhdBv9IGGeJ9bAVWIpbI1soccym3oSbcTzP1ytQxKd+TmHMD2phpRALQsLF2V
+	 QdiOeRWR5l1wZfH6ynw9iutjqwyqjq7CTnEM7XikqRzHgF0y5bhHuEDOzBuPavHDVOQ3W
+	 YyBsHBj60lcBY4dasnOxU0oWzh5M0Hz/wXl3YL3zGWphkhfrYoGYwXqFoENFVIZbq5rlG
+	 LQssI/FCDFdQwofdaGp/nazjb0MZpXVLDAyg/zWkf/iM6xKgawpNw4XK0xqu9fHvdOZyo
+	 r97pQVoeQp+PcdAx44kcEebS+LHpEELL6wPcfjwVgHV2kZHPZ3q5ZyapG7UGMpKCm1Q==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792586881;
+	c=relaxed/relaxed; t=1792586884;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,153 +33,153 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Cc:Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=chVRqe5C+7QK7Cv5eZiu07BLRMnfCfCVMjVJ0bHXjHs=;
-	b=hRfv1+noohVMyIHSJuocrbr5zDvmib68gi+a2+LCb7smkxaQEiOpK9TYS5p+qslZQlAj
-	 wSZBgWsdDUg05Y7h+1GA95XFt+1QFOiixWIFv1bsB2yF3sW3EGGrbJd6EHXrNNwcSiIPe
-	 5fdH1JYup4d/q22DWk1pBOFkyzXr4K9TymMYXIJO/BhkMRMmDWdL4Gb9IluQ2RzVHLNUd
-	 rjZaZ/1jBvKnVEOrdK3yqDLi8SBv8bZ1BQSConh3tR4s+YEbamCHROKh+yeXruHYgJ2GY
-	 rbo8RU6lIHnA/egKD26Nglo2mnwHtrQIuolqXAP9Bc08hereXoZ8ao5VLvg7MYm4LIw==
+	bh=9wU5r5U5XaBrhVG936QbC2no6jNc/JMdIXOaS+YuoWo=;
+	b=MZyLc3ERRWsIWwxErWxlvbEZySduleP2sFs/ALY3IRLorhuMobciNyOhh2IqE8xdqybb
+	 +qxq/sWv6gV2VMEZveRKsKkY5AJP9YZrVJJjGuD6qTsNG9Gi5FPxoRQTwkYH7kX1P2f+p
+	 Hzz8X+8L+B26Ovg1+qEEH1Fznz/ZeWijgL7nB+5WoxR0NVucnoKH/XSSsm35d4W95GLki
+	 oihlqYKJsJfloyIE0DKXXFO8M1ZDcF7stHtqEfCwZclidpd/9eejqsVwxASwVUYD0itbg
+	 kIK/KLogQk/7HuPSwajWMqJkk2/Iua9t1uiBUe5TPvQx/fpTkkyW8hPzE1rhZ8yfXug==
 ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792586881;
-	bh=chVRqe5C+7QK7Cv5eZiu07BLRMnfCfCVMjVJ0bHXjHs=;
+	d=lists.u-boot-project.org; s=default; t=1792586884;
+	bh=9wU5r5U5XaBrhVG936QbC2no6jNc/JMdIXOaS+YuoWo=;
 	h=In-Reply-To:References:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=AmjTXAxfgaT9pdV7+yNyBE9xpCaZ8ktUlXgxiM7WoxpAUwhzxqXuW0ofugonr9OaL
-	 IrBXLl5rJESpTC9ZCQkWk7m7AVRayCKo5Z6xGFmwBHcyWoKHLRj0/Le7/Jdz2c380V
-	 q1e80lFDQoVps5n8jg9SdbwMW5nXGY7qdkzkAVI4zjazj9jFDq7UDPJktCCEJxjdYf
-	 kX2h/H2B0yfB07i/gOTIu2QqcT0FtEyP5V0HxhrkPxMD159+nL3H0XN3QmQim2tfiT
-	 z1NR6MemwmRGj4sn6feOMawNCey0Hy575cdm9PYIIxeEwkQ7GrfTcU+QDiDnvVH2A1
-	 OG8vVT3Ae6u/A==
+	b=rcrlgAb0wk9T2nq2xBi+bWw7KeFPFMEFLSO1pSe65yuFRpIl19+RVJSimspv6FUSw
+	 kVl5c2SEfMyndFTGnywz4+0XEsaUkDr5iu1hYce9YcG5sw5eIc3eDEUMXeAXhzVH0U
+	 61FOoMeEhHA/G7Dgcld/gxEh2bxYjUVBqW6SmyUagh1Pa8x/1LlySrEt4NpTET3FQh
+	 Z1zFW4zfnefy9FKHT7AaHUlmqHRuZqeZxcVyMwVJ+W8CSvyOcBC1GRCj6/81Fi1Kee
+	 03ucWJdNqf0yM0uIyJuKDPJCMgEQtBGqctV+NKMR0y7HlQYmJlg4X/anFLYz8f3/Cp
+	 bUmXgZox6Z6Nw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8A61B608B2;
-	Wed, 21 Oct 2026 12:48:01 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id B23AB1AB
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:47:58 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E8910608BF;
+	Wed, 21 Oct 2026 12:48:03 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id DE8973AF
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:47:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 97D42810C5
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:47:58 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id C4869810C5
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:47:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kBVpPR6MQH1d for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 12:47:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4AF0B80FFF
+ id VEZrK11W6bTP for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 12:47:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B084380FFF
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:20::535"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792586877;
- b=hKglMlNb3Sr1XiilKbGjZt6X39fb9Rax9YWdXjklYAr3ia9fPplilk3cDPiJKHrEC4Ye
- 0DoUmXlp4nBsZrwRY9fAVJDrfFZl9vSK2rVry79NOBsK/rw5wrTZwjV1NLakJO6rXYXsB
- QyPcoUa2tni2GQRhLlh+ydPaY6y9SfqPGcQlphGme8cPCYw8Mz5K1Ib79osKKTyWeH+mg
- 85pH2qd4wMH6bC9M2dRrhTJqZ3uD/pmgt/TCoSkIDj662EPlK8l2Bfv+wIm83JREs5e5o
- eEnaq58v08Ejeauf4eK4YbBbTGzlaKez/oRR+N1L5CCj2zFbnzVMVHHkhNHNsLCwHdg==
+ smtp.remote-ip="2a00:1450:4864:20::531"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792586879;
+ b=e1Rs2+wd2Z4Ufde5QHa07QE4LiOWw+e/1BQgDI33P8ra1xx+AejURVzKhOk6FqGODd/V
+ eOZUITY0GpbeeAGqHsA1Ps3F++eY50m4R9pvV0srpxC0J+WzhjgUM12nZ8F2QA9Nq5vTN
+ pAkQ48fsUxfOuqzKR62rxg6ao7zqdnN7EjVeVLuNE8KhjsKrUBA4RLmy5zgmcYs4Moemw
+ y00GTjAe1jVMoU5Ctsu7UgZJwV3CQFiUASrsHlUft6eKKyWH1SdmVcDf1Fp0rg9XSX4tr
+ do1Y4ceuQo4sFPWqO74iDbuXjOz6EOW8xufkR9IFoc7/7mOC/gqpuEIE+F6Lc403c/w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792586877;
+ c=relaxed/relaxed; t=1792586879;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Received:MIME-Version:In-Reply-To:References:From:Date:X-Gm-Features:
  Message-ID:Subject:To:Cc:Content-Type;
- bh=chVRqe5C+7QK7Cv5eZiu07BLRMnfCfCVMjVJ0bHXjHs=;
- b=UZY8JTQ7/fTmlEeugArCCTnUYb/jk8IW0CKq3HnI2ZrUZw7rP0cpVek/uQTCEvahOXbr
- Iysc9+9ZTEOXlX51DUoPduCW0joBRqn0oJXQdcCZLfm2x9FZ/yiAGfI/BYxRSXZHSCb5Z
- zQtVCWRJ9HBBLTFs9qT+1gG/6r/j2KIq0YrACzEVtMNsshgG/385rix3uSgbvqXY0BEsz
- GXZmwuwr0Y1fslge/v0w65YgIEivA+kSP6AhN3z4nz+nCScMqO5aRWwESMrXo1s6WGvTT
- a3bhuDQWlHXQsaNsSJ81t9svxfHUuocmoTtix+OzNFINoQM+2ebUrVbOqDLQEwT393g==
+ bh=9wU5r5U5XaBrhVG936QbC2no6jNc/JMdIXOaS+YuoWo=;
+ b=gVjazdmPt4mNh3kE/Osqt6Vis3GETHJnO09o857ZtQz5aBRQ3dw57r1yvmRHyzRgu2sM
+ Pu+FSF7c5tKm6ygJqTSuBpuC9uuFFkP7SJKteORq6NqL7GVUWv3ZpiIzS6pwuk1k8y38u
+ de2Z9TSTCHVt5bw2LVTsM7PKW+Iq8gSY13rFGs8eaWkiZmD5DvNFmGdS9Ru3Q8PXPAkQS
+ 1FJoXowDzUfRjrD9llz403GORmFNq8BLnduOHNiwDig7PyDpEL+lKMl6zImfKGLPLq0sl
+ UobQsU9CRejItCaCta1N89Zr547lZOa2Knn9LCYEMEoarAc6fGA8WNNN8gfoTyvPd0A==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
  dmarc=pass header.from=chromium.org;
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=I6wLDria; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::535"
+ header.s=google header.b=E7sES1QI; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::531"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::535; helo=mail-ed1-x535.google.com;
+ client-ip=2a00:1450:4864:20::531; helo=mail-ed1-x531.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=I6wLDria
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 4AF0B80FFF
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:47:56 +0000 (UTC)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-6b1b13e09ffso876176a12.3
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 05:47:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792586875; cv=none;
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=E7sES1QI
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B084380FFF
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:47:57 +0000 (UTC)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-6b413b0a974so420911a12.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 05:47:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792586876; cv=none;
  d=google.com; s=arc-20260327;
- b=ZVWxQrGW63Hb/cNPX36elDWhK1wZNK0Ovacx1m9Kjj9DY5ErfB/NXayhaqnFaK7R3J
- SszEe8B4ibGj7+qiKStwh3vWWPmPvZ5kODaulEN0ZDgOJplpqZmZtCSHe41Ku4qDhgDp
- TmuCZ839lFhZSisDamudTsJWXxx2MDn4O08DJ+llJj79FKuisjiOYRltVmBp1igDhSsK
- mlTCEIoNZiAbCdewij2hz/nBttNaiaOCQmSftSPI3nA0au9PXJAuaGln0BsPs3ramY8t
- G8+ZY2o3Lvk6Hqsm+n5Jzy/iJ+Eq4b2xFYyjJtlsbMqbF1JZRvSA4LNPChZQoPOasp3L
- mxQA==
+ b=p0S8HqpKL1S7HIpnWXM/10XK+TUfroFVvIFO214AGr+BzxUZ4PduY8tscecZ6m+xdS
+ LMZ09ZnpjnQcUdnXaccUW8XYXiRazVJI5YKY4M8T+xf5KiECPI88Z50hZQgPzbufooH7
+ jbjzuP9YyIMpTUj5w/7s1ywDtUcWtp64pXvABwiJ0Ojg4VU/X5cFDVICAwQY7Fn2es4X
+ r0a6tklcHLm6s8xP8aZ/Y1n26rEPWyD9EGejupNiAcW8gJkZfFocWUTbTs/WW93SaYH/
+ 7MIf19zawu6gHMaSweao7yVYye/8j+tgshkgl5IJ077Bx3bEsEclLVdQIjmJ8b5hQ9N1
+ 824g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:references:in-reply-to
  :mime-version:dkim-signature;
- bh=chVRqe5C+7QK7Cv5eZiu07BLRMnfCfCVMjVJ0bHXjHs=;
- fh=5AWcIrbOXF7+5ReDmahTRk66ErvUwFH6JYmKho88x6c=;
- b=V8OEOyyGtLgNP8lRgvm7u44hBjB/lGyyiDKEyaQbYo0/PYiyh2dKREkAgtKPSbcvlc
- V4LmFGTYH7rJ8M/blKRzT4MYEN1x4IWkfYSwxLoilh96s2M/jr0EAbF7FOHiQ7ewSTkm
- DaSVXtnNnKsVwHVRY7cLHrlP0K/U36rXYQaD8N04E3zjuCkiAQcS96zTXI4avNjxERm6
- uPAoAxl9Ot5PHEGhyvUtOHtsu0jRelfousvmwYHSpa/RmlgM38WgZ70a8fkP4zf2GBfL
- GYfQqG29dgIUuf5GCltJejFU8sEe7kmBfCGQFtnYLJZzc9HP+yyuiFGJuAsn5/tkxrKs
- FM7g==; darn=lists.u-boot-project.org
+ bh=9wU5r5U5XaBrhVG936QbC2no6jNc/JMdIXOaS+YuoWo=;
+ fh=2RNABXrBNpbyQ5ILRnmEX5kxc9Ffe+QKK1McSEnthCs=;
+ b=e6UvouDc/uEMisPmAP+2ImT1f0jprBDpyUbz3hrAwWwBC2+vtpeKPNygGP5hYZc8nu
+ Z/qKGjkE37HOAzBFFJlkDyrEx4fY1c620TrWOpGlB4nTfxeb+9HcrHHMWorCyaBIrRgu
+ 6Phzzj/YRNWF2Zk0t4WovJP8uGyh4Zlzt4YRGCCL0omuF+AaxGV+5I5leUh1Y4QyURjz
+ 9udq3mz0Yz4D5ORzENyKuCx08xqSXttK+thWQTr746QX1MSpqp4u6yjeV84kf5Rp3S3B
+ GjM8qew+T63QFEmT7ZULp6p4iw65vwEf4DAd5xavHZEoeg5TQrjWbV8Qgnu2jMoWnk7d
+ fjkg==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1792586875; x=1793191675;
+ d=chromium.org; s=google; t=1792586876; x=1793191676;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:references
  :in-reply-to:mime-version:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=chVRqe5C+7QK7Cv5eZiu07BLRMnfCfCVMjVJ0bHXjHs=;
- b=I6wLDriaQXXrCHgCkK43c3Vj1KssCYrh/9D8am3PoT9XQx80i2effs+jY2MEcsCFoq
- ImDMvSZBLqp+FHrOdA3ixO4HiT3wrONAKRLvGnwkJiQgjfcx9dqixjppcQNVlOaYPR6T
- 7RbGTD2x5KA4ej5bQz639tOXdsKiCOyqRBqc4=
+ bh=9wU5r5U5XaBrhVG936QbC2no6jNc/JMdIXOaS+YuoWo=;
+ b=E7sES1QIRIuS0eBaR4FNTzgovuVJvRx/uekgFQbpFhhkwwh3mRaRqfIw8rFysSWB2R
+ sWYFe36taIlVZDRZ6Cjwhrizj26aCUve6PlMxXvBWX8Pd8bJout+UBwGugG06lSTOtYn
+ JqkshUYIKf7ID+H7Efw94vAPlotjKCHTjmTu4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792586875; x=1793191675;
+ d=1e100.net; s=20260707; t=1792586876; x=1793191676;
  h=content-type:cc:to:subject:message-id:date:from:references
  :in-reply-to:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=chVRqe5C+7QK7Cv5eZiu07BLRMnfCfCVMjVJ0bHXjHs=;
- b=Uo1l7wwS0BhWEdjhAY+J/jAy1LtJ5rfPkIwJJEUhllothuh0X/qZhOQnI8Nxzg6toi
- yJaQ0WtAf4t2aG4egFanGnBRSEdY2k8x/qYdHNnSZC5JJRx5MZpnPxVcXinRWb1t+Ji3
- ozDwM7s74zJK+0YdnZjcS06P7YtflrTwqZZ6kdZFOVJn0sTshcOPrz0GoF4iuzqyvf9f
- yOwlXOFF6ckfVefx/3hl5uaqjoThmRgrO67Q/M1V6nobP87NCEiSVi9OSDMz+NUz3of7
- Z5BHPzUQSfzk7VCY+Oqf/8/ozXsyc46ReIptLaf2wBGDbUET4+U7SRIXd+elDM326zsv
- R1jw==
+ bh=9wU5r5U5XaBrhVG936QbC2no6jNc/JMdIXOaS+YuoWo=;
+ b=w7JjHoDErZYBy7s6up1BJDOmqG0LgSymvjEgC3We34n0Te3ItkYf58DTgmLzQNqaqr
+ w62WdGu6CQ4F79MlNNIeLfWG72eHgGPtdTsl1U3SpMWRkvaDhrlfmc7y9ApBeRARK6HF
+ ejcK/jtMsz/8xiu2Z4i8Ydfps04BvgPB81biBPuQ6aDn40P0PKts50VvcJ4zvwA9NTV6
+ yn2ZNDsCBhYkl4VNgebSlsZgmaQ+njXfk5euGIU/TMiB7EhUfuznwBLJWrMzGika8/tj
+ UCODVw/BdyUMjKQm3cv9bDKs3eEtAdsJk5C2Dmkvn0VDe1JTItEOmSucmfPOcpAaXZmp
+ YlMw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwLiXPyTsWYelkR9p3Xe0ucrBuqRrlrQOs69sq3A95w/mceYV44t7zmBnDQqFVe1hVtyPhlPOc=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYK1fUFnmIDtSzS1dM3RLZaYKk/Y4iPDWI5sDI6UelLUlg0XJGVq
- YJX+RoDpQyQbmhdqk8vtBhxUmOnUpuYlqv1nhxLSH14LeIzmawWZ52CCiFzLtH2UBlaFx/DWOT/
- OK8kAuPxVnJdanL4rgF6E2MgTAGsE9NItVZTSsEKwjWMC8ox0i9MBhw==
-X-Gm-Gg: AYBFou0IO/ON2FSp+ziHn/mayznDaMY1z5NzOpE5xLTDge5MBngwr5LNPBQyWcMDW4u
- dVJxuKH4pRVntCBwQSgxDGygjVM9yX80Me+4kRtjoWQrSTWY3S7hzNjgbntXVvFJk9Gcp8AU2G7
- lQoaHRxn+j+J3GNv1v635rkUaD/kfBMVLaTQgcVYMuWwpjXfLc5ClrIe1VcPqZcaC2+ARlAoXg8
- 7krOPzP/j4q3XcMc/SmnAI6dz+KVBUx6liu763lL65gNgmrp0UsLw3GkwvNw+GsfQ6gqGE7bPcr
- /b6afZ4JgPwQ7e9Ly5oxpjRcBQeBCB8WuKVK/EL1ETc5SfNP6DK6YRz7yVsRbGjn2lsbfk0OTSQ
- laFcfic4q+E7p45f455AfQ/w2Ss9jsq0rlSo=
-X-Received: by 2002:a05:6402:e96:b0:6b4:329:10aa with SMTP id
- 4fb4d7f45d1cf-6b408eddf12mr1330935a12.39.1792586874529; Wed, 21 Oct 2026
- 05:47:54 -0700 (PDT)
+ AKwUvBztYnisiNuJvmAvOmrShvpULFtCi5dtThsGui30YSoQjH6RIJ1dGPRu0nNdFtk0b+H0uC3uaDQ=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJi0QELEhQVHQtmYmR/LCTA5FuZiy64I5b3H/JQ+Tfh5r3ReBAT
+ kDTx/Dk4gMVbsrGK1hPa7TzDzn2NClNkpZTIf8lOzeA/m2hgjCWhqmpKzbzDbtyV6Qz55sMHLyC
+ frnCQfmqT+6C9CU5/Ps6Uj4stK7p9sFWdd+n6IWDx
+X-Gm-Gg: AYBFou0zuVNUpota98hVfoKoAmv1uXNTCON1bb6U1GLVg1qEBlJklWPOF2WJK+GVy2s
+ PIc6Z3vFVFC8GVwGBT3chbXeOXBp7bXtpS5+qZPOdtkJ1GEWaM1jH0UtE6YIiu9yW29Ts1PEMRz
+ HOyvDpn60k6O2m92N6gTVVIwS4ymA5298mKhD34kQkFrwSta9oe/0QHF25gFVIvtcoGIulveyzJ
+ 1QC8744vKPmK9rQIqS8WVHjjkl8Y5DPtTc92lQ6s/G7PrvVLYuBpCAi/lpk8HmDaEohoEs53IVr
+ O1H6kWLD9ELy2X9cqoZs8TB27xXP3tQiPkeZiXUMI2z5tG134G92hMkSvDxKQ94iLf9wIAt2YI3
+ w7RF2AJZpQ9Op0uuM6MSHSMCKPvuVVeUKaA0=
+X-Received: by 2002:a05:6402:4605:b0:6ac:73f8:2e4f with SMTP id
+ 4fb4d7f45d1cf-6b408ec96d4mr1202565a12.29.1792586875970; Wed, 21 Oct 2026
+ 05:47:55 -0700 (PDT)
 Received: from 415065739583 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 21 Oct 2026 14:47:51 +0200
+ HTTPREST; Wed, 21 Oct 2026 12:47:53 +0000
 Received: from 415065739583 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 21 Oct 2026 11:40:32 +0000
+ HTTPREST; Wed, 21 Oct 2026 13:40:35 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20260902211501.127915-2-bhargavdas100@gmail.com>
+In-Reply-To: <20260902211501.127915-4-bhargavdas100@gmail.com>
 References: <20260902211501.127915-1-bhargavdas100@gmail.com>
- <20260902211501.127915-2-bhargavdas100@gmail.com>
+ <20260902211501.127915-4-bhargavdas100@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 21 Oct 2026 14:47:51 +0200
-X-Gm-Features: AclHuK-4H5VFHVvQihuRNdFDLnKRwt5Thg2Tnvf5i-hXKPzfdFORMW74h-_F5F8
-Message-ID: <CAFLszTg_rNous1M9PDMHp8QWcNU3gCBAs89yfpshdAw-cjQJ6A@mail.gmail.com>
-Subject: Re: [PATCH v2 1/4] arm: Add RP2350 architecture support
+Date: Wed, 21 Oct 2026 12:47:53 +0000
+X-Gm-Features: AclHuK8nvuCta1vRqV8Xj_1c8fTUtJIUFIH9JbEKc6pwyD9MsByAQK7xyzWfIhg
+Message-ID: <CAFLszThHH8hq0B7VDt5m_akKegQ4p-JUrHSzEcRdbBvNg0=WPA@mail.gmail.com>
+Subject: Re: [PATCH v2 3/4] board: raspberrypi: Add Pico 2 support
 To: bhargavdas100@gmail.com
 Cc: u-boot@lists.denx.de, u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
@@ -192,186 +192,155 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-11.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-16.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 Hi Bhargav,
 
 On 2026-09-02T21:14:48, Bhargav Das <bhargavdas100@gmail.com> wrote:
-> arm: Add RP2350 architecture support
+> board: raspberrypi: Add Pico 2 support
 >
-> Add initial U-Boot architecture support for the RP2350 SoC.
+> Add board support for the Raspberry Pi Pico 2.
 >
-> RP2350 specs:
-> - CPU: Dual-core Arm Cortex-M33 or dual-core RISC-V Hazard3 @ 150MHz.
-> - Memory: 520 KB on-chip SRAM, 4 MB on-board QSPI flash.
+> UART1 console is functional as of now.
 >
-> Only Arm core support is added here.
+> misc_init_r() sets a fixed value for the "serial#" environment variable.
+> This fixed value is hardcoded as just a placeholder to confirm that
+> evn_set() works post-relocation.
+
+Please can you drop this, along with CONFIG_MISC_INIT_R? 'serial#' is
+meant to be unique to the board, and 'SC1631' is the part number, so
+every Pico 2 would report the same serial number. Setting it from OTP
+can come later. (BTW 'evn_set' should be env_set() )
+
 >
-> The architecture is added under arch/arm/mach-rp2xxx/.
+> Signed-off-by: Bhargav Das <bhargavdas100@gmail.com>
 >
-> This patch implements early SoC bring-up:
->   - XOSC (12MHz crystal) startup
->   - PLL_SYS configuration to 150MHz
->   - CLK_REF/CLK_SYS/CLK_PERI clock switching
->   - UART1 early console init (115200 8N1)
->
-> Cortex-M33 is an Armv8-M core, but U-Boot does not yet have a CPU_V8M
-> architecture variant. Currently there is no arch_cpu_init() setup for this
-> architecture.
+>  board/raspberrypi/pico2/Kconfig     | 15 +++++++
+>  board/raspberrypi/pico2/MAINTAINERS |  9 +++++
+>  board/raspberrypi/pico2/Makefile    |  3 ++
+>  board/raspberrypi/pico2/pico2.c     | 81 +++++++++++++++++++++++++++++++++++++
+>  configs/rpi_pico2_defconfig         | 29 +++++++++++++
+>  include/configs/rpi_pico2.h         | 36 +++++++++++++++++
+>  6 files changed, 173 insertions(+)
 
-U-Boot already has CPU_V8M, and the Renesas RSIP port (RCAR_64_RSIP)
-uses it. It selects CPU_V7M_V8M, builds with -march=armv8-m.main and
-reuses the armv7m CPU directory. Please can you select it instead of
-CPU_V7M and update the commit message? That gives the compiler the
-correct architecture, and the PMSAv8 MPU work can go on top later.
+> diff --git a/board/raspberrypi/pico2/pico2.c b/board/raspberrypi/pico2/pico2.c
+> @@ -0,0 +1,81 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +#include <dm.h>
+> +#include <env.h>
+> +#include <init.h>
+> +#include <log.h>
+> +#include <asm/global_data.h>
+> +#include <asm/io.h>
+> +#include <asm/arch/rp2350.h>
+> +#include <dm/platform_data/serial_pl01x.h>
 
-> [...]
->
->  arch/arm/Kconfig                          |   7 +
->  arch/arm/Makefile                         |   2 +
->  arch/arm/include/asm/arch-rp2xxx/rp2350.h | 352 ++++++++++++++++++++++++++++++
->  arch/arm/mach-rp2xxx/Kconfig              |  58 +++++
->  arch/arm/mach-rp2xxx/Makefile             |   4 +
->  arch/arm/mach-rp2xxx/image_def.S          |  23 ++
->  arch/arm/mach-rp2xxx/rp2350.c             | 213 ++++++++++++++++++
->  arch/arm/mach-rp2xxx/u-boot.lds           |  94 ++++++++
->  8 files changed, 753 insertions(+)
+As far as I can tell, dm.h, log.h, asm/io.h and serial_pl01x.h are not
+used. Please can you drop them?
 
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> @@ -2076,6 +2076,10 @@ config ARCH_STM32
-> +config ARCH_RP2XXX
-> +	bool "Raspberry Pi RP2xxx SoCs"
-> +	select CPU_V7M
-
-It would also be worth selecting DM, DM_SERIAL and OF_CONTROL here, as
-ARCH_STM32 does, rather than relying on the defconfig.
-
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> @@ -2336,6 +2340,9 @@ config SYS_KWD_CONFIG
+> diff --git a/board/raspberrypi/pico2/pico2.c b/board/raspberrypi/pico2/pico2.c
+> @@ -0,0 +1,81 @@
+> +int dram_init(void)
+> +{
+> +	gd->ram_base = RP2350_SRAM_BASE;
+> +	gd->ram_size = RP2350_SRAM_SIZE;
 > +
-> +source "arch/arm/mach-rp2xxx/Kconfig"
+> +	return 0;
+> +}
+
+Patch 2 puts the memory node in rp2350.dtsi but nothing reads it.
+Please can you use fdtdec_setup_mem_size_base() here and
+fdtdec_setup_memory_banksize() in dram_init_banksize(), as the stm32
+boards do, so the size is only defined in the devicetree?
+
+> diff --git a/board/raspberrypi/pico2/pico2.c b/board/raspberrypi/pico2/pico2.c
+> @@ -0,0 +1,81 @@
+> +int board_early_init_f(void)
+> +{
+> +	rp2350_soc_init();
 > +
+> +	return 0;
+> +}
 
-Please drop the extra blank line and put this in alphabetical order
-with the other mach-* sources. The same applies to the machine- line
-in arch/arm/Makefile: the comment above that list asks for it to be
-sorted by CONFIG name, and the other entries use tabs.
+The XOSC/PLL/clock setup is the same for any RP2350 board, so I'd
+expect it to live in mach-rp2xxx (e.g. arch_cpu_init(), which only
+needs the clock setup, not the MPU code) rather than in each board
+file. Then any other board using the SoC gets it automatically. What
+do you think?
 
-> diff --git a/arch/arm/mach-rp2xxx/Kconfig b/arch/arm/mach-rp2xxx/Kconfig
-> @@ -0,0 +1,58 @@
-> +config TARGET_RPI_PICO2
-> +	bool "Raspberry Pi Pico 2"
-> +	help
-> +	  Raspberry Pi Pico 2 board based on RP2350 SoC.
+> diff --git a/board/raspberrypi/pico2/pico2.c b/board/raspberrypi/pico2/pico2.c
+> @@ -0,0 +1,81 @@
+> +int board_init(void)
+> +{
+> +	/* Nothing special needed post-relocation for basic shell */
+> +	return 0;
+> +}
+
+If there is nothing to do, you can drop this function and disable
+CONFIG_BOARD_INIT in the defconfig.
+
+> diff --git a/configs/rpi_pico2_defconfig b/configs/rpi_pico2_defconfig
+> @@ -0,0 +1,29 @@
+> +CONFIG_CMD_TIMER=y
+> +CONFIG_OF_CONTROL=y
+> +# CONFIG_OF_UPSTREAM is not set
+> +CONFIG_OF_EMBED=y
+> +CONFIG_NO_NET=y
+> +CONFIG_SPECIFY_CONSOLE_INDEX=y
+> +CONFIG_DM_SERIAL=y
+> +CONFIG_PL01X_SERIAL=y
+> +CONFIG_TIMER=y
+
+Patch 4 says that with CONFIG_TIMER enabled but no driver, the 'timer'
+command and any udelay() crash. Please can you enable CONFIG_TIMER and
+CONFIG_CMD_TIMER in the timer patch instead, or put the timer patch
+first, so this commit doesn't produce a board that crashes?
+
+With DM_SERIAL and stdout-path in the devicetree,
+CONFIG_SPECIFY_CONSOLE_INDEX should not be needed.
+
+> diff --git a/include/configs/rpi_pico2.h b/include/configs/rpi_pico2.h
+> @@ -0,0 +1,36 @@
+> + * Flash (XIP):  0x10000000 - 0x103FFFFF (4MB on Pico 2)
+> + *   0x10000000  Second stage bootloader (256 bytes - handled by ROM)
+> + *   0x10000100  U-Boot image starts here
+> + *   0x100F0000  Environment storage
+
+This looks like the RP2040 layout. The RP2350 has no boot2,
+CONFIG_TEXT_BASE is 0x10000000 and the environment is not stored in
+flash, so the comment doesn't match the code. Please can you fix or
+drop it?
+
+> diff --git a/include/configs/rpi_pico2.h b/include/configs/rpi_pico2.h
+> @@ -0,0 +1,36 @@
+> +/* Flash geometry */
+> +#define CFG_SYS_FLASH_BASE		RP2350_FLASH_XIP_BASE
+> +#define CFG_SYS_MAX_FLASH_BANKS		1
+> +#define CFG_SYS_MAX_FLASH_SECT		64
 > +
-> +source "board/raspberrypi/pico2/Kconfig"
-
-board/raspberrypi/pico2/Kconfig only arrives in patch 3, so Kconfig
-fails for every board at this commit. Please can you move
-TARGET_RPI_PICO2 and this source line into patch 3?
-
-> diff --git a/arch/arm/mach-rp2xxx/Kconfig b/arch/arm/mach-rp2xxx/Kconfig
-> @@ -0,0 +1,58 @@
-> +	help
-> +	  Raspberry Pi RP2350 SoC.
-> +	  Dual-core ARM Cortex-M33 with TrustZone,
-> +	  520KB SRAM, supports up to 16MB XIP QSPI flash.
-
-This says 16MB but rp2350.h says the XIP window is 32MB. Which is right?
-
-> diff --git a/arch/arm/mach-rp2xxx/Kconfig b/arch/arm/mach-rp2xxx/Kconfig
-> @@ -0,0 +1,58 @@
-> +config RP2350_EARLY_UART
-> +	bool "Enable early UART init for RP2350"
-> +	default y
-
-If this is disabled, the build fails: CONFIG_RP2350_EARLY_UART_TX_GPIO
-and friends are not defined, but rp2350.c uses them unconditionally
-and rp2350_soc_init() always calls rp2350_uart_early_init().
-
-More generally, U-Boot already has CONFIG_DEBUG_UART_PL011 for this,
-with board_debug_uart_init() doing the pinmux and reset. That would
-remove the private PL011 register struct, the baud-rate constants and
-these Kconfig options, and the DM pl01x driver takes over once it
-probes. What do you think?
-
-> diff --git a/arch/arm/mach-rp2xxx/Kconfig b/arch/arm/mach-rp2xxx/Kconfig
-> @@ -0,0 +1,58 @@
-> +	help
-> +	  Select which UART peripheral to use for early debug output.
-> +	    0 = UART0  (default; TX=GPIO0, RX=GPIO1)
-> +	    1 = UART1  (TX=GPIO4, RX=GPIO5)
-
-The default is actually 1.
-
-> diff --git a/arch/arm/mach-rp2xxx/rp2350.c b/arch/arm/mach-rp2xxx/rp2350.c
-> @@ -0,0 +1,213 @@
-> +#include <asm/armv7_mpu.h>
-
-The MPU code has gone, so this include is not needed.
-
-> diff --git a/arch/arm/mach-rp2xxx/rp2350.c b/arch/arm/mach-rp2xxx/rp2350.c
-> @@ -0,0 +1,213 @@
-> +	/* Reset PLL */
-> +	rp2350_reg_set(&resets->reset, RESETS_RESET_PLL_SYS);
-> +	rp2350_reg_clr(&resets->reset, RESETS_RESET_PLL_SYS);
-> +	rp2350_wait_reset_done(RESETS_RESET_PLL_SYS);
+> +/* SRAM */
+> +#define CFG_SYS_SDRAM_BASE		RP2350_SRAM_BASE
+> +#define CFG_SYS_SDRAM_SIZE		RP2350_SRAM_SIZE
 > +
-> +	/* Configure: REFDIV=1 */
-> +	writel(1, &pll->cs);
-> +
-> +	/* Power up only VCO and set feedback divisor */
-> +	writel(PLL_PWR_POSTDIVPD | PLL_PWR_DSMPD, &pll->pwr);
-> +
-> +	writel(125, &pll->fbdiv_int);  /* VCO = 12 * 125 = 1500MHz */
+> +/*
+> + * Stack / Malloc
+> + * Stack at top of SRAM, grows downward
+> + * Malloc heap immediately below stack
+> + */
+> +#define CFG_SYS_INIT_SP_ADDR		RP2350_SRAM_TOP
 
-One thing I'd like to check here. This resets PLL_SYS without first
-moving clk_sys off it. That is fine from a cold boot, but if U-Boot
-starts with clk_sys already on the PLL (e.g. chain-loaded from an SDK
-application), the CPU loses its clock. The SDK's clocks_init() first
-switches clk_sys and clk_ref to their non-aux sources and waits for
-SELECTED before touching the PLLs. That would also avoid changing the
-clk_sys AUXSRC later while the glitchless mux may still be on aux.
-
-Also, the SDK writes FBDIV_INT before powering up the VCO, and the
-datasheet asks for the same order. Here it is the other way round.
-
-> diff --git a/arch/arm/mach-rp2xxx/rp2350.c b/arch/arm/mach-rp2xxx/rp2350.c
-> @@ -0,0 +1,213 @@
-> +	/* set AUXSRC = PLL_SYS, leave SRC unchanged */
-> +	clrsetbits_le32(&clocks->clk_sys_ctrl, (0x7 << 5),
-> +			(CLK_SYS_SRC_PLL_SYS << 5));
-> +
-> +	/* switch glitchless mux to aux */
-> +	clrsetbits_le32(&clocks->clk_sys_ctrl, 0x3, 0x1);
-> +	clrsetbits_le32(&clocks->clk_sys_ctrl, 0x3, CLK_SYS_SRC_AUX);
-
-The second and third writes do the same thing, since CLK_SYS_SRC_AUX
-is 0x1. Please can you add defines for the SRC/AUXSRC masks and
-shifts, ENABLE and the SELECTED bits, and use them here and for
-clk_ref and clk_peri, instead of 0x3, 0x7 << 5, BIT(1) and BIT(11)?
-
-The XOSC and PLL-lock loops have no timeout, unlike
-rp2350_wait_reset_done(). It would be worth making them consistent.
-
-> diff --git a/arch/arm/mach-rp2xxx/u-boot.lds b/arch/arm/mach-rp2xxx/u-boot.lds
-> @@ -0,0 +1,94 @@
-> +	.text :
-> +	{
-> +		*(.vectors)                /* Cortex-M33 vector table at image start */
-> +		KEEP(*(.image_def))         /* RP2350 IMAGE_DEF block loop */
-> +		arch/arm/cpu/armv7m/start.o (.text*)
-> +	}
-
-Apart from the .image_def line, this is a copy of
-arch/arm/cpu/u-boot.lds, so it will drift as the common script
-changes. Could you add KEEP(*(.image_def)) (or a more generic section
-name) after *(.vectors) in the common script and drop this file?
+Most of these are unused. The flash ones only matter with
+CONFIG_MTD_NOR_FLASH, nothing uses CFG_SYS_SDRAM_SIZE, and
+CFG_SYS_INIT_SP_ADDR is ignored because the defconfig sets
+CONFIG_CUSTOM_SYS_INIT_SP_ADDR. As far as I can tell only
+CFG_SYS_SDRAM_BASE has an effect, so please can you cut this down to
+just that?
 
 Regards,
 Simon
