@@ -2,169 +2,170 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4A49606A319
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 12:55:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A29C606A319
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 12:55:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=G8ENJLNu;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=nHZ2H+zc
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=e8cmjzpe;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=aE25vKXe
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6ECB46085B;
-	Wed, 21 Oct 2026 12:55:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2745860892;
+	Wed, 21 Oct 2026 12:55:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id p_6K-fmONlah; Wed, 21 Oct 2026 12:54:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5EC0760818
+ id R-x7CSBR2x2B; Wed, 21 Oct 2026 12:55:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E75DA60837
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792587299;
-	b=tb8HLMROTcOl3or0nVGO/WwWpOch82YMcHzK8l1Zz8x2Rc97hFyZ7FvNfPK9ayqSk8kH
-	 lJbNxaHyrLRSmx314S7Ggjy5tRrbQzavHsMpe9Gyum8/7o7sTUJFbwCfx29oxPKrs49aU
-	 g2/aG5lniSTKaVAGfoLUCf4zG3L9SwHL67Wz11+NcLbje4ZPE7Do60r5U8//aozNlLp6M
-	 HOynvSIIhnZObZfW7ZUmLlInW/0yGpUC/sTU+Bb/h0ycvRdHsO6DiFgZk/5z3UoOatM2l
-	 JjyzXggfaXqtmVqU17O1MYpWxZJEGLFJg6MM7aPuAjUcMpExee0x7/vBw01IrlHT6BA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792587303;
+	b=OVrbJIZMY22Bg5P42xNmjP7xj2sUSYBb/fSnwEzgChTVhgSTIOb+TJvEPN3DsrgAkpiO
+	 673atL9CLAqrS9GosX6Bnq6F83qNNNhHKoOJffqn/304hKTE5WGe9gdhN0kL3Z/GF7SmO
+	 AHQVLNAuwBOiIlT0MqRrBxD9QumbY4cVFaL1ZmlcZApriY0Fc4pwsqJnYv1CkTlx7MdE8
+	 Wt/Lm8LBk7pF+QOkOPg1cks0Wfly7PennPbrtuf0r9WTMGeCoixGHJP61dwUh5z2qZJ4F
+	 6C7lxLobsNrcYuRHO9Gxw0fzv/CY/UJgR20k901xSOdoBMLxPlX7wbSlGsB5fLbU9qA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792587299;
+	c=relaxed/relaxed; t=1792587303;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=Hi9HDBpzLFA7jOJ7jdgcQbgAxp7r00KuFszb8ylGuB4=;
-	b=MQvzvvEzi3cwbqTpRKT3bGwvlr9Zh9V2sq8f2ETK+5S76BR2w2q3C/AUad1ujchIO0VV
-	 7jkuD2VcX14g6ejxU+ZiA8Qv1ZDav9qL+Yz3dkfZlOwPMYV3KgbLEQHNSN4yzxVylPzUr
-	 mnVFULSPcHcsEHGGPGuE8R2b7WnmEM3sgcvbfbS3hzwwUDW4T/KSte/SG6rUU5k6hikEJ
-	 rzsYrBRIt714NREbv1QeTOVSa+/0VbrQyhzhSaI69Mhamlt1Lhg4sCSa5x5I0P8micNFu
-	 pFLDoClQIRAEtovO9wsZe+iNfzWZYniizfS0N4puVDLBpLyRVKYyem3tJHC/eocK0kg==
+	bh=8Jqi8DbMfHsnXg/2UClEZyOyd/e1Ty0Z278a0Y1CXMI=;
+	b=L9fphNJvBla3D4j2TBPvPW7Ds+xcaYSCAF0g+Am16CoV1riJc5eX0EEgVWTiNNJQOZLf
+	 QvC6YxKVmNcmXfi8zA8d7VZckvPMTKTeQifOe4d3bBE2xDCt+oqcytGcoi4aIXD2xLRB0
+	 FoEis1tngYoTCA7lNqzNoz+HUQZXt8JzsBIPHmVBUitcu0iSlR8AFppB2kOKUvYh8e51k
+	 LYr1gQxPcFsXIlOZk+2S291sP4YgLrRVt80JlXseVEE4dM5EWNr3fLmWKewv8r/A9k436
+	 56RI9zizGSMynjeU3rpOyKxwEri/9REL40N6TzV/Sn4ntoFw2DL7bMOOCP1OI0ok0gw==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	dmarc=none header.from=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=aE25vKXe;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792587299;
-	bh=Hi9HDBpzLFA7jOJ7jdgcQbgAxp7r00KuFszb8ylGuB4=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=G8ENJLNu8bUaD26NJH4IQhxvi7JlI9B4t8WpF0SDstnd+hmdp/Q7eGtCr00Tg7ny0
-	 c4Ay36qiyKCTMHtB3Q6TxOWRvo8SeSa+wjTlHKmzKw085FBYrW6+G6CJZIq5J98+d1
-	 gSXhC7hx2dyCzeFzcWNqVct3ag7mW8LQuW4ZKuaUmhkh1aIHjmyqTfKlBiNhT9/8kp
-	 IgwcKarVyqZQqiZzZA+5N4dNoeJq/sJdq7AKTj7/w1qTQ51xoP9nKsmkPPrV4D/edH
-	 5+KRXqF9i2+Z+CMrJmwgu6D2CGZbQY+7WHAV9GgEARzCi2IxdIqi9zH/Tx7jGaiukv
-	 FvJtGte0rJViA==
+	d=lists.u-boot-project.org; s=default; t=1792587303;
+	bh=8Jqi8DbMfHsnXg/2UClEZyOyd/e1Ty0Z278a0Y1CXMI=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=e8cmjzpe+FfSFpAaiFadS0QaguSpQ2wiphPbE+2OajJ84/fqLyLfPWjrTpmef10it
+	 +rOTvtn7DcfVUiqjw0MygpgJjvEvoVHtvbgebncwtqbQ5TStIoGbyPTK3cDuzCc74e
+	 UaG3zx3h6nexUzs954tKyUPNY1N7IbKsx+Xosc7U0YhvzvWekvMeUfPqwbt8KTBnK1
+	 iP/+sgt8Gq0eZR6QtkQrGC0Ru4pP4fEQ5JvlDPU+c5cj1w47jS4HC5O89uZkiTIDNo
+	 xPqsbyyIsX3gvsyzqj3jjeID1feEY37nds6pc+Ors/77xdtBIV5kO+F9h2UDimWtBF
+	 t+LEUfYWFlolw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5EC0760818;
-	Wed, 21 Oct 2026 12:54:59 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id B2D10930
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:54:57 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E75DA60837;
+	Wed, 21 Oct 2026 12:55:02 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6630F23A
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:54:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A460140866
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:54:57 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 4BA0060834
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:54:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JtCO3n_BzbDj for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 12:54:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BBE784082D
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::e36"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792587296;
- b=ktZlCs/xgyEwakYPBL+oXa78Rw3kbegxC/NQfaYYysdx4bpciqerPWjSbGrkFL04ODAi
- 2Q/+TynRJ6Rzu+05/5XODmCpY1jKEhI6RxUKiUPxi8DahD5h2aUeqF9Qlx7/UcScJ39Yc
- 6xSkjFhJhHoc/JShkCgajE/10wQjpcXg68w9FQeGpgaFIOW7FtXNzbjLL96aywjVaDhFc
- 3Iiem74hMJud7E9P+h08MT4P0/nlDEEWKwS36aeNC3vU4Thvwjg0qhmIwoJI6AH/ItrfU
- RhGnmRhf/4W869g21+2xPyR9UtRKChgBENS7Vs9xCkrRD6bD4pko4e6urfKxBFbCOIg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qVfoMktNlUKG for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 12:54:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5BCCB60818
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::a34"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792587298;
+ b=nm6ZMbIo+JWv+eAYVrKh5RpOl11cbu6uNHClJzsP9KkMTRdCKiouQXuBZslxeKJmL/BL
+ mOWwcn5pMu0jIbLujB6xDXGJ2pn70xstcICkIKhJ2V9ReRVWQaSBcu4Fovur2bxJXIiep
+ zkbk4ozFdt9Gdt6XDTRFb9GNK/DNSTR2yPhY0DRLUJcWIx3rP+LTjbf2uAr3SpVL1EeeE
+ vf/0tntNvaPu615CRPK0lTmdnytWQdk0A7iWj/0pcC8FlaJk7rRn3fjFxWJvVBsTEP3aI
+ 8nc6QKCriEGccSAGQ0R5RnY7DooAZfmJI6N7Jll7wMd5sDQlHEDtjLO5KZcI/yOmm5A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792587296;
+ c=relaxed/relaxed; t=1792587298;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
- Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer;
- bh=Hi9HDBpzLFA7jOJ7jdgcQbgAxp7r00KuFszb8ylGuB4=;
- b=DqVdHFe7Zq0gmFHX9Q086sP5osAHGnuUEQviRBk29aQb2a5T71xpGWrOy4lbGuvHiTp7
- LBqXZOkAPd3WLY4xzDAAP8CkNRzZQVeMi0/SihtlEALZO5DU+ClriIFUgRAG4PALKAhQB
- 8ymRlNYl2lxOPbdtvvTB4t65XOT42/Qtd38oCXm9XqZdevph7H6POyjAitECPAORq9fa4
- l9Q8U5aODhOWQQNnDbuUWQqyBrgmmiYOUiSe0JYW736DRhK/5xcVko79HvnuN+Fd0nD5E
- xQOYsVyE9bRAeuo7NVY9xGqAlBqXR3pzX8B9rd2HPD+09E1sI8PcbQ3qwLJfhiMJBow==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+ References:In-Reply-To:To:Cc:X-Mailer;
+ bh=8Jqi8DbMfHsnXg/2UClEZyOyd/e1Ty0Z278a0Y1CXMI=;
+ b=oDqpY/cCz5h2yPK/gePvmztoB3fawCFEDv7Xg21J8/moGB4CHiMh3X/+heuwRz8kg7Hg
+ DGynuy3jc3LHWtWF1BtYndxD8iQUxr9auqsfzvuc8fh7Bhj3NNUVh9c/f9SalX6q0x4XA
+ qGB/NY8PSdYMWSQyoSaVfCXMe36OedZ+RGdSYnMLXbaL+jRLEARG10mK89wcsULVTK0O0
+ Ygel6LVrspyl+fE96Mi1aG6KmpEQpai1LKSGgNRaPCbJmzIimJosp2pgu2xhHtDp47VZ+
+ NMQSf4PC+hc1pAExp3kMaddil2Vh+rbyDBB41GIVgTleeqSyLRl/shIg+D91sNesN7w==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=none header.from=baylibre.com;
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=nHZ2H+zc; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::e36"
+ header.s=google header.b=aE25vKXe; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::a34"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::e36; helo=mail-vs1-xe36.google.com;
+ client-ip=2607:f8b0:4864:20::a34; helo=mail-vk1-xa34.google.com;
  envelope-from=hfranco@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=nHZ2H+zc
-Received: from mail-vs1-xe36.google.com (mail-vs1-xe36.google.com
- [IPv6:2607:f8b0:4864:20::e36])
- by smtp4.osuosl.org (Postfix) with ESMTPS id BBE784082D
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:54:51 +0000 (UTC)
-Received: by mail-vs1-xe36.google.com with SMTP id
- ada2fe7eead31-7cc0e865dd1so205285137.1
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 05:54:51 -0700 (PDT)
+ header.s=google header.b=aE25vKXe
+Received: from mail-vk1-xa34.google.com (mail-vk1-xa34.google.com
+ [IPv6:2607:f8b0:4864:20::a34])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5BCCB60818
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:54:56 +0000 (UTC)
+Received: by mail-vk1-xa34.google.com with SMTP id
+ 71dfb90a1353d-5ea97b74acaso101466e0c.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 05:54:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1792587291; x=1793192091;
+ d=baylibre.com; s=google; t=1792587295; x=1793192095;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=Hi9HDBpzLFA7jOJ7jdgcQbgAxp7r00KuFszb8ylGuB4=;
- b=nHZ2H+zckNPktRHHLJQbgzD1k0bS5CSTQClRNmd6GMVYa8yRGFkBav5vbcJslNp/ON
- z0I58cY2VyHW9zqUTuuSa4tGb3hAgzs22lT6fuF0Z203t9QpmlLiro6L7/D5F/ZEk82M
- NuTC6d5PPFThfJmu7eV/bSoelKQf2qfTeutQq7dQhD/Cq3zuzaP2ji547ByFc7MUwzZe
- GE9fcLh93i1wisLPWChwfgOlVeeWTibsSd9qC0lsNalDs09aH01fpKxj5vUJlTjhORzK
- 3T2TyfH+ehAzAS5jLC1rdKbODE89sj6XE8VMcdj5fAWA9x7ml4KxqVzeCfFfT7WuJdXD
- cqrg==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=8Jqi8DbMfHsnXg/2UClEZyOyd/e1Ty0Z278a0Y1CXMI=;
+ b=aE25vKXerTh3bzgbq76s5SXO3uto3rd98mkD3aRurbMwNfFFUc1SXmZkOGwqHj79HI
+ PaMVjjz9+yhY1l+UKZg0jH7xJdxr6VpMYnoVUFTsjeIe1CI4osYrDmPZZTwBIe6eOUdm
+ //5k3QCufK4yB6MKRwB9nQcKuJOaNqFJFOJMk/jdSqSun6eVFrjCG1uwECaoU8qe/JZ1
+ vqOIxCl1jiXFwbY42fFZiQ+2GojDYoAPDBdHx6kky/pTxqsU0yPkhTDhPh0rox1YGNck
+ DIPqr/phqAxYJfcuVIzj+CA5c7g1cNtBsdlC+lBZZ0g4Hh4xS2fHEjFe5JpZzs+iid0z
+ c9Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792587291; x=1793192091;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=Hi9HDBpzLFA7jOJ7jdgcQbgAxp7r00KuFszb8ylGuB4=;
- b=Khwvi1qdylshvZx+iTmm5xa4cHfIYt/xigDKxMNHoHDGCRTcjUbyZEU8d+PZrQBBOk
- TXty/AFbCW2a5f5UCY77FgWskNmNCJ5zMkWJH3r4a4Ay+1ZnGA5Gu9pL6wOfsU1WsDLK
- PY8semGYCejYY+qAAsZLB7nquYAJ71IPmKzFvrUF8S/YT/Y2x29vkZ5WemcQtNnggTfP
- 05QsCdL0iGWHmY92xBDfw7qJ3pVCDd0Hg71v9cZkGw6cTfZmEy00Z3WipWzoaK/5CO+7
- FaQWInArfz/wcDZuJA9SEoVOWg73bDF485BFSg/lrrShWAro4aVwUh+fVdB2/x5JFDPJ
- mQTw==
-X-Gm-Message-State: AFq9FYI8q03uQrWOVoEHDJPp/a0edlo3uH7toItcPwsBDMdDBNbELF+7
- d9AzbMH1KsYhlkQvNvsSFi0qzm74xA+Qtg8vR82OfI14OUWXUydTHBWdJPQo9szU5NE=
-X-Gm-Gg: AYBFou2nUwFGCEAe58+mtiNYkzsTMqIhC9YXm06MHGhvTnkvmOD3DDf2XeTZnag4FIl
- UzWolWUGu04l/T9gf77zhtoMaGNWMEkBfB0MqiUvB8kG4uLFUFbqZZpSGrLCvV9sNxBGylnQNVw
- 0y4LvduJ2bYbFypwtkAfS9FOmMGYeBnru6++dItcAVhQM0l/7bmR66XNw41jf98mDFrAOrhLiQH
- /GoydyoUrEqQhi8OSR7kC5hPmZPLQFXM1+PwcYf1OuY2dejLluqp3u6xRCTqcTjVHpWt/QZd4at
- 67E5otX3iCLpWNrcwFaVkdoySxzj/On0krJDtt+WFY91LvGJXwQCtgtZ7KtB2GO2lGgRb5vfHI7
- yAqqbz2mESMgZIjCYBan6oGFYkJmsbdqFgIAu8gELe1ginRDKHxshA4HCFOmC5+HuIIbCWDM78h
- /DfQy92PNJP3YphtoC/t4o4vhc+MGSUnY4yG9RZa+iDNl5jqS0RIgAagVopWJuioQUK5VKxxXpk
- 5HhoHKRHAlUNS6DkEbHMLBJfWpQtK15zkoeBgoJsTB760MP0gl2VquAx8DlFCFFC58GrftiM5NN
- QIUfxgHpl4PUOw7siu0=
-X-Received: by 2002:a05:6102:5489:b0:7a6:b8fe:e834 with SMTP id
- ada2fe7eead31-7cc926d293emr659403137.27.1792587290763; 
- Wed, 21 Oct 2026 05:54:50 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1792587295; x=1793192095;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=8Jqi8DbMfHsnXg/2UClEZyOyd/e1Ty0Z278a0Y1CXMI=;
+ b=y2VQuEfCUThxRhL6R8XTn4olOJh3LLcekehFx+BWtSGQxaY8OAMpLN11ssBInMUTRQ
+ imko+v6SOnzV96iAdvzjnoaF3LhAgsguUkYxGiJ04MFEy0OkqQeKNfEWAAouOHmeD7xF
+ pqbCDrOAxpKzFgAZOaqMW1Yv5d5XCCBoII4RniEKvjk5jbKuMf9eauIyM0M0pTdHXkPa
+ hOEm4QZBqsHH5of49NcDH5kFYP1/alxOz6v+2sz1H38a7HLt0LEN27iAOHShSr3yHCvo
+ IvA08g7zzb8UgctpUQHOv0zXqzVzny6/arVs16jkMsv+42ybhqUNNUqxjB6yXGUVCeRZ
+ 7sKg==
+X-Gm-Message-State: AFq9FYJ3PkjwpigEvWi08Gyiahnsk0UMg0PndQmxYXpQucvMkuriOq6g
+ NFAers/aYmRlOeSApkPczuZ3vSupey1jNIkCfF+f/IFaO87DhMpvIIabir/Am5MIopA=
+X-Gm-Gg: AYBFou0yjrpEOT39bRU4sEtV79BeW2K+bk4Ws2WqHWt7hKdS/MZcd1O1QoYT+A5HFXb
+ f5v1bBK9IpmUxT2nDgKh4hBoVGvecWTQDG7tL4dS0Me453Df3+PycK41AoznGb6KiC5NoUrE8C6
+ dAJ8HQO40hZu86n+4QIrr7+Pu57DQLCCXvskIY84Q8uJCdq8zl+1LMIMwhnFCYl0wY/Qtw5NLEX
+ yo8u0/NvFyMJ0pZaww82wi6jfmQTkXRYu2net9B/VPY9ZTgeIlDIB/vBNmZIXndOWZYqm1vFxmz
+ DjVHzkWpkm5JSr7yeRYYzy98nKM4wrBO6XVCRlRW9kW7EFQBFKLPnqVEvUgA0dVIUOlYxCHZQWX
+ VJZiihV6Y5LhnkYhvKsPqxT6bPT0Y82fDgxipQXLMrB6+QGoANTnS/R1OEGJkbZiMduc9wymTYo
+ kiZfvLpzNtWfE1MmrXg8MaP2i/kB6ijOvjQYHeM81vwKhT1z6rWKj9EVZZ2zfKtRagMvIm2m+tg
+ iUeFwV3XP5u60Qwl3qlUMI0AswHpx8oQB7bPf7TXcoiy/ST64GlHVmmpC5nJfD45cGZwDa+WTZ+
+ FX9oVMO0wCfd/7thmCI=
+X-Received: by 2002:a05:6102:915:b0:7cb:bc5e:7dab with SMTP id
+ ada2fe7eead31-7cc926978c5mr587404137.24.1792587295636; 
+ Wed, 21 Oct 2026 05:54:55 -0700 (PDT)
 Received: from [127.0.1.1] ([2804:14c:4c5:8bf0::33ca])
  by smtp.gmail.com with ESMTPSA id
- a1e0cc1a2514c-990d0e0ba56sm3013863241.1.2026.10.21.05.54.46
+ a1e0cc1a2514c-990d0e0ba56sm3013863241.1.2026.10.21.05.54.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Oct 2026 05:54:50 -0700 (PDT)
+ Wed, 21 Oct 2026 05:54:55 -0700 (PDT)
 From: Hiago De Franco <hfranco@baylibre.com>
-Subject: [PATCH 0/8] riscv: sophgo: add SPL support for the Milk-V Duo
-Date: Wed, 21 Oct 2026 09:54:16 -0300
-Message-Id: <20261021-milkv-duo-spl-v1-0-ee7618860237@baylibre.com>
+Date: Wed, 21 Oct 2026 09:54:17 -0300
+Subject: [PATCH 1/8] binman: add Sophgo CV18xx FIP entry type
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/02OQQ6DIBBFr0JmXRqgapWrNC5UhpZWxQKSJsa7F
- 2sXLt/k//9mAY/OoAdJFnAYjTd2TMBPBLpHM96RGpUYBBMFZ/xKB9O/IlWzpX7qqUChGyzKvNQ
- cUmdyqM3nt3erd/Zz+8QubCP/hMP3nERhj0HbeKSdHQYTJImb6MwZHB+QZLuySlQHfWtt8EFRn
- inMMUN2QS2jgHpdv73+TIzWAAAA
-X-Change-ID: 20261017-milkv-duo-spl-2e2fae6858f1
+Message-Id: <20261021-milkv-duo-spl-v1-1-ee7618860237@baylibre.com>
+References: <20261021-milkv-duo-spl-v1-0-ee7618860237@baylibre.com>
+In-Reply-To: <20261021-milkv-duo-spl-v1-0-ee7618860237@baylibre.com>
 To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
@@ -184,94 +185,271 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This series adds SPL support for the Milk-V Duo (Sophgo CV1800B, 64 MiB
-DDR2), so the board no longer needs the vendor FSBL to bring up DDR,
-configure the PLLs and hand off to OpenSBI and U-Boot proper.
+Add a binman entry type that builds the FIP image loaded by the
+BootROM of the Sophgo CV180x/CV181x SoCs named fip.bin.
 
-Currently this board only builds a bare u-boot.bin that depends on the
-vendor FSBL (and the vendor fiptool) to do all of the early hardware
-bring-up before U-Boot starts. With this series:
-
-- The SPL is loaded directly by the BootROM from fip.bin, built by a new
-  binman entry type that reproduces the fiptool image layout (param1
-  header + BL2 header) without depending on the vendor tool.
-- SPL enables the C906 caches and T-HEAD ISA extensions, brings up and
-  trains the DDR2 controller/PHY, and initializes the PLLs, all ported
-  from the Sophgo FSBL sources [1] (plat/cv180x).
-- SPL also takes over the RTC power domain configuration for shutdown,
-  warm reset, power-cycle and watchdog reset, matching what the vendor
-  FSBL used to configure.
-- SPL then loads the FIT image (OpenSBI, U-Boot and the DT) placed at
-  offset 0x40000 of fip.bin via the BootROM ROMAPI, and hands off to
-  OpenSBI, which starts U-Boot in S-mode.
-- Board documentation is updated.
-
-Tested by booting a Milk-V Duo board from an SD card (fip.bin on the FAT
-partition) built with this series (SPL -> OpenSBI -> U-Boot -> Linux).
-
-This series used the help of Claude Opus 5.5 to read the FSBL and turn
-it into U-Boot SPL.
-
-[1] https://github.com/sophgo/fsbl.git
+The image reuses the layout produced by the vendor fiptool: a 4KiB
+param1 header with size and CRC-16/XMODEM checksums, followed by a
+32-byte BL2 header (first instruction jumps over it). Unlike the
+vendor tool, only the entry's subnodes (typically u-boot-spl) are
+packed as BL2, since the BootROM does not use the BLCP, param2,
+monitor or second stage loader it also supports.
 
 Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
 ---
-Hiago De Franco (8):
-      binman: add Sophgo CV18xx FIP entry type
-      riscv: cv1800b: add SPL support
-      ram: sophgo: add CV180x DDR2 driver
-      board: sophgo: milkv_duo: add SPL support
-      board: sophgo: milkv_duo: initialize PLLs in SPL
-      board: sophgo: milkv_duo: enable RTC power and reset
-      doc: board: sophgo: milkv_duo: update documentation
-      doc: board: sophgo: milkv_duo: document the SPL boot flow
+ tools/binman/etype/sophgo_cv18xx_fip.py            | 89 ++++++++++++++++++++++
+ tools/binman/ftest.py                              | 54 +++++++++++++
+ tools/binman/test/vendor/sophgo_cv18xx_fip.dts     | 18 +++++
+ .../test/vendor/sophgo_cv18xx_fip_bad_offset.dts   | 16 ++++
+ .../test/vendor/sophgo_cv18xx_fip_collection.dts   | 19 +++++
+ 5 files changed, 196 insertions(+)
 
- arch/riscv/cpu/cv1800b/Kconfig                     |   2 +
- arch/riscv/cpu/cv1800b/Makefile                    |   4 +
- arch/riscv/cpu/cv1800b/spl.c                       |  31 +
- arch/riscv/dts/cv1800b-milkv-duo-u-boot.dtsi       |  92 +++
- arch/riscv/include/asm/arch-cv1800b/rom_api.h      |  36 ++
- board/sophgo/milkv_duo/Kconfig                     |   5 +
- board/sophgo/milkv_duo/MAINTAINERS                 |   6 +-
- board/sophgo/milkv_duo/Makefile                    |   1 +
- board/sophgo/milkv_duo/spl.c                       | 250 ++++++++
- configs/milkv_duo_defconfig                        |  18 +
- doc/board/sophgo/milkv_duo.rst                     |  76 ++-
- drivers/ram/Kconfig                                |   1 +
- drivers/ram/Makefile                               |   1 +
- drivers/ram/sophgo/Kconfig                         |   6 +
- drivers/ram/sophgo/Makefile                        |   6 +
- drivers/ram/sophgo/cv180x_ddr.c                    | 140 +++++
- drivers/ram/sophgo/cvx16_pinmux.c                  |  54 ++
- drivers/ram/sophgo/ddr_patch_regs.c                |  39 ++
- drivers/ram/sophgo/ddr_pkg_info.c                  | 110 ++++
- drivers/ram/sophgo/ddr_sys.c                       | 635 +++++++++++++++++++++
- drivers/ram/sophgo/ddr_sys.h                       | 108 ++++
- drivers/ram/sophgo/ddrc_init.c                     | 476 +++++++++++++++
- drivers/ram/sophgo/phy_init.c                      | 193 +++++++
- tools/binman/etype/sophgo_cv18xx_fip.py            |  89 +++
- tools/binman/ftest.py                              |  54 ++
- tools/binman/test/vendor/sophgo_cv18xx_fip.dts     |  18 +
- .../test/vendor/sophgo_cv18xx_fip_bad_offset.dts   |  16 +
- .../test/vendor/sophgo_cv18xx_fip_collection.dts   |  19 +
- 28 files changed, 2454 insertions(+), 32 deletions(-)
----
-base-commit: a58e2b7af42c179ace2c6210de0a219fa3f3cf3c
-change-id: 20261017-milkv-duo-spl-2e2fae6858f1
-prerequisite-change-id: 20260929-milkv-duo-bootstd-14de5e4e03ef:v2
-prerequisite-patch-id: 0aaa37872f2b82c2abfc84364f9256c7cb3394fe
-prerequisite-patch-id: 927c8bc825dd9897467da6b194ae8c7c411ec874
-prerequisite-patch-id: 7c0fedb64aabab799b72eef81efc8becec8f44cd
+diff --git a/tools/binman/etype/sophgo_cv18xx_fip.py b/tools/binman/etype/sophgo_cv18xx_fip.py
+new file mode 100644
+index 00000000000..6fb189d2616
+--- /dev/null
++++ b/tools/binman/etype/sophgo_cv18xx_fip.py
+@@ -0,0 +1,89 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright (c) 2026, Hiago De Franco <hfranco@baylibre.com>
++#
++# Entry-type module for the Sophgo CV18xx BootROM FIP image
++#
++
++import binascii
++import struct
++
++from binman.etype.section import Entry_section
++from u_boot_pylib import tools
++
++FIP_ALIGN = 0x200
++PARAM1_SIZE = 0x1000
++
++# jal zero, +32: jump over the BL2 header expected by the BootROM
++BL2_HEADER = struct.pack('<I', 0x0200006f) + tools.get_bytes(0, 28)
++
++# The subnodes follow param1 and the BL2 header
++SPL_OFFSET = PARAM1_SIZE + len(BL2_HEADER)
++
++# Empty register list, only the "scan start" terminator
++CHIP_CONF = struct.pack('<II', 0xffffffa0, 0xffffffff)
++
++
++def fip_cksum(data):
++    """CRC-16/XMODEM followed by the 0xcafe marker"""
++    return struct.pack('<HH', binascii.crc_hqx(data, 0), 0xcafe)
++
++
++class Entry_sophgo_cv18xx_fip(Entry_section):
++    """Sophgo CV18xx FIP image
++
++    This creates the FIP image loaded by the BootROM of the Sophgo CV180x and
++    CV181x SoCs, named fip.bin. The subnodes, typically just u-boot-spl, form
++    the BL2 image, which the BootROM loads into SRAM and runs::
++
++        sophgo-cv18xx-fip {
++            u-boot-spl {
++            };
++        };
++
++    The image contains:
++
++    - param1: 4KiB header with the BL2 size and checksums, read by the BootROM
++    - BL2: a 32-byte header whose first instruction jumps over it, followed by
++      the subnodes, aligned to 512 bytes
++
++    Unlike the vendor fiptool, no BLCP, param2, monitor or second stage loader
++    is packed, as the BootROM does not use them: SPL loads the next stages
++    itself, e.g. from a FIT placed after this entry.
++    """
++
++    def _PackEntries(self):
++        """Pack the subnodes after param1 and the BL2 header"""
++        offset = SPL_OFFSET
++        for entry in self.GetEntries().values():
++            offset = entry.Pack(offset)
++        return offset
++
++    def BuildSectionData(self, required):
++        data = super().BuildSectionData(required)
++        if data is None:
++            return None
++
++        # Once packed, the subnodes are preceded by the space reserved for
++        # param1 and the BL2 header, which is filled in below
++        entries = self.GetEntries().values()
++        if all(entry.offset is not None for entry in entries):
++            if any(entry.offset < SPL_OFFSET for entry in entries):
++                self.Raise('Subnodes must be placed at %#x or later' %
++                           SPL_OFFSET)
++            data = data[SPL_OFFSET:]
++
++        bl2 = BL2_HEADER + data
++        bl2 += tools.get_bytes(0, tools.align(len(bl2), FIP_ALIGN) - len(bl2))
++
++        param1 = bytearray(PARAM1_SIZE)
++        param1[0x00:0x08] = b'CVBL01\n\0'
++        param1[0x90:0xb4] = tools.get_bytes(0xff, 36)           # NOR_INFO
++        struct.pack_into('<I', param1, 0xbc, len(CHIP_CONF))    # CHIP_CONF_SIZE
++        param1[0xc0:0xc4] = fip_cksum(b'')                      # BLCP_IMG_CKSUM
++        param1[0xd4:0xd8] = fip_cksum(bl2)                      # BL2_IMG_CKSUM
++        struct.pack_into('<I', param1, 0xd8, len(bl2))          # BL2_IMG_SIZE
++        param1[0xe8:0xe8 + len(CHIP_CONF)] = CHIP_CONF
++        # PARAM_CKSUM covers NAND_INFO up to the signatures
++        param1[0x0c:0x10] = fip_cksum(param1[0x10:0x800])
++
++        return bytes(param1) + bl2
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index a0e8bde7901..413850cf13d 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -6,6 +6,7 @@
+ #
+ #    python -m unittest func_test.TestFunctional.testHelp
+ 
++import binascii
+ import collections
+ import configparser
+ import glob
+@@ -5598,6 +5599,59 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         self.assertIn("Node '/binman/renesas-rcar4-sa0': SRAM data longer than 966656 Bytes",
+                       str(exc.exception))
+ 
++    def testSophgoCv18xxFip(self):
++        """Test that binman can produce a Sophgo CV18xx FIP image"""
++        def cksum(buf):
++            return struct.pack('<HH', binascii.crc_hqx(buf, 0), 0xcafe)
++
++        self._SetupSplElf()
++        data = self._DoReadFileRealDtb('vendor/sophgo_cv18xx_fip.dts')
++
++        # param1
++        self.assertEqual(b'CVBL01\n\0', data[:8])
++        self.assertEqual(cksum(data[0x10:0x800]), data[0xc:0x10])
++        self.assertEqual(tools.get_bytes(0xff, 36), data[0x90:0xb4])
++        self.assertEqual(struct.pack('<I', 8), data[0xbc:0xc0])
++        self.assertEqual(cksum(b''), data[0xc0:0xc4])
++        bl2 = data[0x1000:0x1200]
++        self.assertEqual(cksum(bl2), data[0xd4:0xd8])
++        self.assertEqual(struct.pack('<I', len(bl2)), data[0xd8:0xdc])
++        self.assertEqual(struct.pack('<II', 0xffffffa0, 0xffffffff),
++                         data[0xe8:0xf0])
++
++        # BL2: header, SPL and padding to 512 bytes
++        spl_end = 0x20 + len(U_BOOT_SPL_DATA)
++        self.assertEqual(struct.pack('<I', 0x0200006f) +
++                         tools.get_bytes(0, 28), bl2[:0x20])
++        self.assertEqual(U_BOOT_SPL_DATA, bl2[0x20:spl_end])
++        self.assertEqual(tools.get_bytes(0, 0x200 - spl_end), bl2[spl_end:])
++
++        fip = control.images['image'].GetEntries()['sophgo-cv18xx-fip']
++        self.assertEqual(0x1200, fip.size)
++        spl = fip.GetEntries()['u-boot-spl']
++        self.assertEqual(0x1020, spl.offset)
++        self.assertEqual(0x1020, spl.image_pos)
++
++        image_fname = tools.get_output_filename('image.bin')
++        self.assertEqual(U_BOOT_SPL_DATA,
++                         control.ReadEntry(image_fname,
++                                           'sophgo-cv18xx-fip/u-boot-spl'))
++
++    def testSophgoCv18xxFipCollection(self):
++        """Test using a Sophgo CV18xx FIP image in a collection"""
++        self._SetupSplElf()
++        data = self._DoReadFile('vendor/sophgo_cv18xx_fip_collection.dts')
++        self.assertEqual(data[:0x1200], data[0x1200:])
++
++    def testSophgoCv18xxFipBadOffset(self):
++        """Test a Sophgo CV18xx FIP subnode overlapping the headers"""
++        self._SetupSplElf()
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('vendor/sophgo_cv18xx_fip_bad_offset.dts')
++        self.assertIn(
++            "Node '/binman/sophgo-cv18xx-fip': Subnodes must be placed at 0x1020 or later",
++            str(exc.exception))
++
+     def testFitFdtOper(self):
+         """Check handling of a specified FIT operation"""
+         entry_args = {
+diff --git a/tools/binman/test/vendor/sophgo_cv18xx_fip.dts b/tools/binman/test/vendor/sophgo_cv18xx_fip.dts
+new file mode 100644
+index 00000000000..7bec144e2b7
+--- /dev/null
++++ b/tools/binman/test/vendor/sophgo_cv18xx_fip.dts
+@@ -0,0 +1,18 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		sophgo-cv18xx-fip {
++			u-boot-spl {
++			};
++		};
++
++		fdtmap {
++		};
++	};
++};
+diff --git a/tools/binman/test/vendor/sophgo_cv18xx_fip_bad_offset.dts b/tools/binman/test/vendor/sophgo_cv18xx_fip_bad_offset.dts
+new file mode 100644
+index 00000000000..8c0b68008e2
+--- /dev/null
++++ b/tools/binman/test/vendor/sophgo_cv18xx_fip_bad_offset.dts
+@@ -0,0 +1,16 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		sophgo-cv18xx-fip {
++			u-boot-spl {
++				offset = <0>;
++			};
++		};
++	};
++};
+diff --git a/tools/binman/test/vendor/sophgo_cv18xx_fip_collection.dts b/tools/binman/test/vendor/sophgo_cv18xx_fip_collection.dts
+new file mode 100644
+index 00000000000..a13cb7b7ba6
+--- /dev/null
++++ b/tools/binman/test/vendor/sophgo_cv18xx_fip_collection.dts
+@@ -0,0 +1,19 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		collection {
++			content = <&fip>;
++		};
++
++		fip: sophgo-cv18xx-fip {
++			u-boot-spl {
++			};
++		};
++	};
++};
 
-Best regards,
---  
-Hiago
+-- 
+2.53.0
 
