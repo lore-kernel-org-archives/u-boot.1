@@ -1,30 +1,30 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 760A7606A319
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 16:16:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 239B5606B6E6
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 16:16:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=oK8a1QuU;
-	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=M/DTYFzO;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=ihI07fl2
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=qbYNLPYG;
+	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=Ho821FTI;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=oJilelfS
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 47A6B81228;
-	Wed, 21 Oct 2026 16:16:32 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id F2DF260A35;
+	Wed, 21 Oct 2026 16:16:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LyfdqRtCTpOO; Wed, 21 Oct 2026 16:16:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 94CCF811F7
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792599390;
-	b=fvmH0xLfYVgjM9pEi3z05LLpxDsEiPO/I85wTxEm3gwKbUcAacd/SeVXkyyIK4dGqTWu
-	 GA5Bn62eXo4DVAXstt4TPetxGJ1bHhwoxOkTxQ2iEThUZ6SBgsXO3/IGRbJ03PUTh2Row
-	 jIMYVXY7NoZgFAOnxbdiHMVw0mXuu9LWuNay46aHNEGMQxEq6hduo76J9fwRvhvrOCoHh
-	 lcLFw1DtgEeZ4FKSNWW0SNvGK9see4PZxZxaTTLNRYxKjuZXyvvotZpAqTvuwk1jkzFoJ
-	 Bu1lVLKAxQnJjV13hEciAjY6dM6+jQPP2rp4PQJy2zt+/xgM0llNtlybYxzgvjGPzQQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pc8gSOeU9w2C; Wed, 21 Oct 2026 16:16:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DC0496084A
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792599383;
+	b=b0G7dPMdp1uGl8TM5VnLOf0kUcZEmqIgh4qSoTRf7MqOSYuZhJieJE0tG6RtVeobEIrj
+	 uBgGLfdTM5EAu5SU3ST1Pd7xR+wK+pk3Rn4+uO3MdbCL4tqFyfKhrnyWamcgB7BHo3N+F
+	 pYLKYrLW8zNWRExNaEQIX5kpMX7E0VC4nJRRV2u+VhV98jtD3JividtQRNB0jASUWCtzn
+	 ATiyp9pPfIMp6tKDN8Uk8q2y+zgShaCfky8p+KOYZOkQRUIqJj5qlQSGxjN1wfXrpJGR9
+	 Ol+LBuR4KmCwQ9UBS2k/vukDlMw4vQrw+r/ECDGuX+2UGtMaGvjxMolMd/rI26YzqWQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792599390;
+	c=relaxed/relaxed; t=1792599383;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -33,103 +33,102 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=oCEhzFIJc/jXQ6xu2n5wyrZqQxnDUyhKG57D8wRcmes=;
-	b=cVYwACw6CU+ZaRJ4ZsVmeZ/MvVANhYElN8SoWSkMNAcdg756ATn/dDy/nDHHOYwwxWNO
-	 hfjTj7VmmOYdiQasyvCQqcpXqZ4A3SxzGWujPTOzxeO4KEvgSQ5yvA1zkEj5FO+TJwggj
-	 utY2uPv+z0p8ksUJuSPQDig8cP/ewnmzLwxiV3auUmjjfGhan/n1c/vURAHzHv/RROleg
-	 Sv76/V/TtWm2QJNBwMeIPNbqaTPYy25BlHZXldIHBC1BOGiN48LALXM6sPn308+vmePry
-	 0m1/2OijVcGHqA75WKsGJNfRtzepS2fPOkcrj1n8dguptVBCW+y7Rl/0jIKyZ9kn+MQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=g/ioZDLDviZV+3DLewlxQXmZegfcWNeesRxI5sl1xKo=;
+	b=H9Zc1PcDt7Yu28vNwVWCxPkX6WnNSiKEFzVOuwqfAA140x7GLYfLiYNIe3Df2tinYiYB
+	 LzjY/AnUUn/TQhAAqhFm4ej2751yvs9kGBeW33GsqWWgStfYGVL37WvVEAfUkA6kObhEZ
+	 Tipkfz9gwgn0sgVehwK3aQT+tcsaVrqsYUeqZprPu0+u+d/5I3oKSqg92CZnUJc3oFrUn
+	 eOrnCehFhJXJ+C/27Eac5pOUoygLuE+DzunXOEpQcP0FVh0Lh3avVAKK56o+jYBrdzhaU
+	 nbROhFrnGtcp3KyxhLoc9waIq/k5XvCFUJyxjZ2EXENrggj9DaY9wERJRjXhjlQycdQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792599390;
-	bh=oCEhzFIJc/jXQ6xu2n5wyrZqQxnDUyhKG57D8wRcmes=;
+	d=lists.u-boot-project.org; s=default; t=1792599383;
+	bh=g/ioZDLDviZV+3DLewlxQXmZegfcWNeesRxI5sl1xKo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=oK8a1QuUMLkBEKBDTOLurw0p9djQJLLgFSOYhDeICknBtpqTe2k2KXKYqr35JaLeH
-	 Xl9wninO0YsmB3wrzYJw4jblpsl6hkB2bXc1ZOPJakVXTPQidCnnbUMlNdac7v5b4G
-	 wTzXadYinl5EWxFHbIaqFK85EjcICO7IX3QF0hSmJJp+WAY9K/J7GU0/9KLBQQZfxP
-	 xQYrWP1nWw4os9viXmhhlLUz3YMnRdr53ZcbSlekCBVy1mjvsj58LMmSicrUsoUfPX
-	 NUP/mSEzcqNz/NBXjZCRZ5D9ykTPndvpcw0BzAtVKX6ZGgBRVGbQHIY4jKImxYoLAx
-	 v1uH9VbLmluzQ==
+	b=qbYNLPYGqsYufXhmy4XG8JJiPkBdkOebwyWduL0tqinMd6MyiZ90aYDLIHBmrBIs3
+	 nYIvKlJBK1C4uHtHKd3r8chMs6f3NAu1DaFmdk38Crq8lGle5z3WC9pgtTZDpL7QJs
+	 mCjpb5hakzlDWW9lbWTLbkCNwo4WHxpcEqoiIAM2fYfFymCNGv+0/1CmFE3s6wqgMZ
+	 vkpDOWkIAb45AIU9Ra6BrKm4f8ruTigUS/2e6CREOOU5iOVwidLbKV2eiFq3Ku95LZ
+	 TAT9RTk2GUXMwP6vQMT82r8lelwl4HzHWdVmDMFgs+zrkuKbHfydEkfoEy48vYxemJ
+	 X4WHVtbBGb25A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 94CCF811F7;
-	Wed, 21 Oct 2026 16:16:30 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with UTF8SMTP id 8F16195C
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DC0496084A;
+	Wed, 21 Oct 2026 16:16:22 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with UTF8SMTP id 3225E95C
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with UTF8SMTP id 810B060848
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:59 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with UTF8SMTP id 180A5403B9
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024)
- with UTF8SMTP id ZGrqTk654xbX for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 16:01:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7349B606C2
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792598518;
- b=b/CYJ/xRd/J9hMKqzCkeYgedPUe7Qb9z76FKZnjv/sajcV7bA7GG7PZkEOTeoInSy8mc
- keQOP+ZqQtNZ12KFg2lMVBb9vLUjqi0R0gbQ5ZnSIENoxKkAbBS2MSx/5bJ8Tq82bmOav
- vIz05gzSFfTGFiOyN2l6kzSiEmWUUFUA5JcV2VyWMXmhXpEDFrarC6v6ug5QR/hsltYgY
- bOrWClG6a3G/m/b84X0MXt1w7u/rK44B4QU3/2duq3ZODp6huvtflYo7R9TEv/lmT/vic
- g1P6SegwY9Sbs5rXuCTeXynfLrKH6PqiMOm4yLgM7OW1YUSfgMUTg7o8UWX7+P4fPFw==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024)
+ with UTF8SMTP id 3cNkrq1_0lAb for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 16:01:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 370F84039F
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792598516;
+ b=SCfYuJAwHgYQ+cv9Nl1MU89ZaQEdwQ3srPTXLIyyOlbGlYDgia8zG/WQVL3m5GbEEgT+
+ oOchJRGbFWrKw6GLqgZxpY7L3G/nvX4TKOGB2Ubum9rvBk7z+XsAnqNdcbRbms/Z1JrSD
+ koT+bDe4hM1siupTpnbFrg2wwX5nxXtIqeYRvvQwRgNt+2A//dQiKT3XFqTs0dRGpNSo1
+ oZ5LTmy+1o1lJgAj/LP8N8Ooi1l5Ze4EJ0QrKCx2AsIYQ40W6bKbr+4mfPu5NCJ7Fw/e9
+ qNAmRiUiSq/Y/kC+qWlnYxth5u9TDPShg6K2/WOKzStrvg6WNaF5N151xWWbkXRF6mA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792598518;
+ c=relaxed/relaxed; t=1792598516;
  h=Received-SPF:DKIM-Signature:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=oCEhzFIJc/jXQ6xu2n5wyrZqQxnDUyhKG57D8wRcmes=;
- b=S5O+IVs2PecYz7jHXUgpUwm2MIyhEeLPJ2yZKmoYfHmASf/IH94It2QA7q2h918giUZe
- 0t4c2f/D8WvIqpaPUdMqmVKAx67P0JFOGLDaiUaVduCxfNCh768ll1r++gkXJMb8I+byp
- +uuXIOQUE2PvPBXYfVnIXsCl0hGoCsy6KUjOZ+od4tRR4yyXJ1579/o8smIcLFIjn5feo
- qwoMQ4/WLboVfahcMTMSWoaD+FOEeHgDG2pShzpt8TNW9Vp4xIwEIkYXdefSChXdB9lNN
- smQKWNXKp7FaJWupHdaOFQtbIBSn1piThI3+68Y3QonM5HTv9dpDVGXq6tfPFHpDTqg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=g/ioZDLDviZV+3DLewlxQXmZegfcWNeesRxI5sl1xKo=;
+ b=hPgaCElybQO0vuMOsGBf4AOinDYjAeTSgwKe7t21LvMWI80n8z+MwhLETE1bNHOn/nx3
+ rNQj66LlhfPPsUUsQQh+e+YzqURf/0F7YqNLYdWh0myVD6J58sz1SLXu26GItoOEKj/Bs
+ LCoAF0q7Iir2Hj4WHzD+xuu6+R/gpppTVBp1E0IRWswdqhE1D2ih6dzu1ID/12XnP16Qk
+ +hGuqEpTLWW0vPikXF+9iNy6o2I/qfU7UMA5HuAXy33jsYmvInfW5Fzy2QQ6P88v/Nm6c
+ 3tDdwFSejRN2M7G00EOysU6bxHKjKXAYbBGN/lEE574QQfB6ZEJwmfy2zeeXaGljeyw==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=mainlining.org;
  dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256
- header.s=202507r header.b="M/DTYFzO"; 
+ header.s=202507r header.b=Ho821FTI; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=ihI07fl2; 
+ header.a=ed25519-sha256 header.s=202507e header.b=oJilelfS; 
  arc=none smtp.remote-ip=5.75.144.95
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=5.75.144.95;
  helo=mail.mainlining.org; envelope-from=brads@mainlining.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=mainlining.org
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=mainlining.org
- header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r
- header.b=M/DTYFzO; 
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org
+ header.a=rsa-sha256 header.s=202507r header.b=Ho821FTI; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=ihI07fl2
+ header.a=ed25519-sha256 header.s=202507e header.b=oJilelfS
 Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
- by smtp3.osuosl.org (Postfix) with UTF8SMTPS id 7349B606C2
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:56 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with UTF8SMTPS id 370F84039F
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1792598508; bh=oCEhzFIJc/jXQ6xu2n5wyrZ
- qQxnDUyhKG57D8wRcmes=; b=M/DTYFzOmzJ03DEPq/4OUpbK1S8f4or82YrJ1W+ZXTFYUgtElS
- yfO7OgTpmPyTSUDVAmRblEoq0wq/jDuT3gSKNrgtZHnHzgGs2a8bEYXRjyIXidfK+p6xTwWmJwy
- GNsC0W/pObgmhvRKTGcbcDk697EPJfN1oYh5BmL+yueQw71zWM+HRczdjejANWLY6M5dRpw3SbB
- /yFD0Z9etULTSt550QHGOIjXlY4Am8MUr2iCWLmqwkRTwK6LaOSMfGcA+lIOvVv9S8p+ywz4qBr
- w65nnllJ1TcsD3waaSTQqPhKWB4W4gKo/QnKIkTJh3AWdoMl2CU20ypKFFpS0I8B3qg==;
+ h=Message-ID:Date:Subject:To:From; t=1792598506; bh=g/ioZDLDviZV+3DLewlxQXm
+ ZegfcWNeesRxI5sl1xKo=; b=Ho821FTIDypTqIzaIbcnS9UB4B5eyoDLPXgeH0m85prYpKlT1a
+ wkT1VD3aazd2ZGFyxULPTXJMMFTPXbqsP66Wz9oB+VZSo2sNLatw9O37+sQMHFsK3cTCOKP6lTD
+ CLSGv6+M/UAi0zxd2Sc3ty09k8B02NcTE2+WhLLWUg3/axaDZ/4fLPOB1EAD27B2oV4EeV9XetD
+ 6mGl3kMDWWox2pZNBighn9fJcDyzwSK1mJwZ7fJ/0OCH+la8KMiHGd952Y0SFFfV8lXVKBklWxU
+ MVwKjD0AlKw408pV66nsBOUKxokYQDeqOPOo4pusH3xN+OiTLQQLyDLKgjATR+1HIfA==;
 DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1792598508; bh=oCEhzFIJc/jXQ6xu2n5wyrZ
- qQxnDUyhKG57D8wRcmes=; b=ihI07fl2AK3U/eeoa7Osy2sIKqNx5bD8fYHHyafT16uIl3tG1J
- Z7VnPq7ILV1xctEci0BM4lh5e0o18DLCnkBw==;
+ h=Message-ID:Date:Subject:To:From; t=1792598506; bh=g/ioZDLDviZV+3DLewlxQXm
+ ZegfcWNeesRxI5sl1xKo=; b=oJilelfSmuDxLtJ6wiD87A5c7A78iF0Kg0Edw0yBPzFHsduU4+
+ EVuM+di9xRm+NKPFKwBGHJJ43USPYmlnWnBQ==;
 From: Bradley Morgan <brads@mainlining.org>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.u-boot-project.org
 Cc: Bradley Morgan <brads@mainlining.org>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
  Peng Fan <peng.fan@oss.nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>
-Subject: [PATCH v3 08/26] powerpc: mpc85xx: Remove P3041 support
-Date: Wed, 21 Oct 2026 16:01:04 +0000
-Message-ID: <20261021160145.10430-9-brads@mainlining.org>
+Subject: [PATCH v3 03/26] board: powerpc: Remove P2020RDB-PC support
+Date: Wed, 21 Oct 2026 16:00:59 +0000
+Message-ID: <20261021160145.10430-4-brads@mainlining.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261021160145.10430-1-brads@mainlining.org>
 References: <20261021160145.10430-1-brads@mainlining.org>
@@ -146,627 +145,1668 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	UPPERCASE_50_75,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The P3041DS was the last user in the tree of ARCH_P3041. With that
-board removed, nothing selects the SoC option now.
-
-Drop its remaining unmaintained CPU, SERDES, FM and errata support.
+The P2020RDB-PC board is unmaintained and lacks active community
+testing. Remove its target, configurations, and board specific code.
 
 Signed-off-by: Bradley Morgan <brads@mainlining.org>
 ---
- arch/Kconfig.nxp                          |   3 +-
- arch/powerpc/cpu/mpc85xx/Kconfig          |  45 +-------
- arch/powerpc/cpu/mpc85xx/Makefile         |   2 -
- arch/powerpc/cpu/mpc85xx/cmd_errata.c     |   6 +-
- arch/powerpc/cpu/mpc85xx/cpu_init.c       |   4 +-
- arch/powerpc/cpu/mpc85xx/p3041_ids.c      | 112 ------------------
- arch/powerpc/cpu/mpc85xx/p3041_serdes.c   | 133 ----------------------
- arch/powerpc/cpu/mpc85xx/release.S        |   2 +-
- arch/powerpc/cpu/mpc8xxx/cpu.c            |   1 -
- arch/powerpc/include/asm/config_mpc85xx.h |  10 --
- arch/powerpc/include/asm/immap_85xx.h     |   3 +-
- arch/powerpc/include/asm/processor.h      |   1 -
- doc/README.pblimage                       |   6 +-
- drivers/net/Kconfig                       |   1 -
- drivers/net/fm/Makefile                   |   3 +-
- drivers/usb/common/fsl-errata.c           |   5 -
- 16 files changed, 15 insertions(+), 322 deletions(-)
- delete mode 100644 arch/powerpc/cpu/mpc85xx/p3041_ids.c
- delete mode 100644 arch/powerpc/cpu/mpc85xx/p3041_serdes.c
+ arch/powerpc/cpu/mpc85xx/Kconfig             |  10 --
+ arch/powerpc/dts/Makefile                    |   1 -
+ arch/powerpc/dts/p2020rdb-pc.dts             |  59 -------
+ arch/powerpc/dts/p2020rdb-pc.dtsi            |  50 ------
+ arch/powerpc/dts/p2020rdb-pc_36b.dts         |  59 -------
+ board/nxp/p1_p2_rdb_pc/Kconfig               |   3 +-
+ board/nxp/p1_p2_rdb_pc/MAINTAINERS           |   8 -
+ board/nxp/p1_p2_rdb_pc/README                |   6 +-
+ board/nxp/p1_p2_rdb_pc/ddr.c                 |  31 ----
+ board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c        |   2 -
+ boot/Kconfig                                 |   2 +-
+ configs/P2020RDB-PC_36BIT_NAND_defconfig     | 164 -------------------
+ configs/P2020RDB-PC_36BIT_SDCARD_defconfig   | 145 ----------------
+ configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig | 147 -----------------
+ configs/P2020RDB-PC_36BIT_defconfig          | 125 --------------
+ configs/P2020RDB-PC_NAND_defconfig           | 162 ------------------
+ configs/P2020RDB-PC_SDCARD_defconfig         | 142 ----------------
+ configs/P2020RDB-PC_SPIFLASH_defconfig       | 145 ----------------
+ configs/P2020RDB-PC_defconfig                | 123 --------------
+ doc/README.mpc85xx-sd-spi-boot               |   3 -
+ drivers/ddr/fsl/Kconfig                      |   2 +-
+ include/configs/p1_p2_rdb_pc.h               |  21 ---
+ 22 files changed, 5 insertions(+), 1405 deletions(-)
+ delete mode 100644 arch/powerpc/dts/p2020rdb-pc.dts
+ delete mode 100644 arch/powerpc/dts/p2020rdb-pc.dtsi
+ delete mode 100644 arch/powerpc/dts/p2020rdb-pc_36b.dts
+ delete mode 100644 configs/P2020RDB-PC_36BIT_NAND_defconfig
+ delete mode 100644 configs/P2020RDB-PC_36BIT_SDCARD_defconfig
+ delete mode 100644 configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig
+ delete mode 100644 configs/P2020RDB-PC_36BIT_defconfig
+ delete mode 100644 configs/P2020RDB-PC_NAND_defconfig
+ delete mode 100644 configs/P2020RDB-PC_SDCARD_defconfig
+ delete mode 100644 configs/P2020RDB-PC_SPIFLASH_defconfig
+ delete mode 100644 configs/P2020RDB-PC_defconfig
 
-diff --git a/arch/Kconfig.nxp b/arch/Kconfig.nxp
-index 152692e3230..ff645aea0d3 100644
---- a/arch/Kconfig.nxp
-+++ b/arch/Kconfig.nxp
-@@ -5,8 +5,7 @@ config FSL_TRUST_ARCH_v1
- 
- config NXP_ESBC
- 	bool "NXP ESBC (secure boot) functionality"
--	select FSL_TRUST_ARCH_v1 if ARCH_P3041 || ARCH_P4080 || \
--		ARCH_P5040 || ARCH_P2041
-+	select FSL_TRUST_ARCH_v1 if ARCH_P4080 || ARCH_P5040 || ARCH_P2041
- 	help
- 	  Enable Freescale Secure Boot feature. Normally selected by defconfig.
- 	  If unsure, do not change.
 diff --git a/arch/powerpc/cpu/mpc85xx/Kconfig b/arch/powerpc/cpu/mpc85xx/Kconfig
-index 7fee93862c7..ab80a1ab317 100644
+index 309becda5ac..7e885014ebe 100644
 --- a/arch/powerpc/cpu/mpc85xx/Kconfig
 +++ b/arch/powerpc/cpu/mpc85xx/Kconfig
-@@ -584,41 +584,6 @@ config ARCH_P2041
- 	select FSL_ELBC
- 	imply CMD_NAND
+@@ -157,16 +157,6 @@ config TARGET_P1020RDB_PD
+ 	imply SATA
+ 	imply PANIC_HANG
  
--config ARCH_P3041
--	bool
--	select BACKSIDE_L2_CACHE
--	select E500MC
--	select FSL_CORENET
--	select FSL_LAW
--	select SYS_CACHE_SHIFT_6
--	select SYS_FSL_DDR_VER_44
--	select SYS_FSL_ERRATUM_A004510
--	select SYS_FSL_ERRATUM_A004849
--	select SYS_FSL_ERRATUM_A005275
--	select SYS_FSL_ERRATUM_A005812
--	select SYS_FSL_ERRATUM_A006261
--	select SYS_FSL_ERRATUM_CPU_A003999
--	select SYS_FSL_ERRATUM_DDR_A003
--	select SYS_FSL_ERRATUM_DDR_A003474
--	select SYS_FSL_ERRATUM_ESDHC111
--	select SYS_FSL_ERRATUM_I2C_A004447
--	select SYS_FSL_ERRATUM_NMG_CPU_A011
--	select SYS_FSL_ERRATUM_SRIO_A004034
--	select SYS_FSL_ERRATUM_USB14
--	select SYS_FSL_HAS_DDR3
--	select SYS_FSL_HAS_SEC
--	select SYS_FSL_QORIQ_CHASSIS1
--	select SYS_FSL_PCIE_COMPAT_QORIQ_PCIE_v22
--	select SYS_FSL_SEC_BE
--	select SYS_FSL_SEC_COMPAT_4
--	select SYS_FSL_USB1_PHY_ENABLE
--	select SYS_FSL_USB2_PHY_ENABLE
--	select FSL_ELBC
--	imply CMD_NAND
+-config TARGET_P2020RDB
+-	bool "Support P2020RDB-PC"
+-	select SUPPORT_SPL
+-	select SUPPORT_TPL
+-	select ARCH_P2020
+-	select SYS_L2_SIZE_512KB
+-	imply CMD_EEPROM
 -	imply SATA
--	imply CMD_REGINFO
--	imply FSL_SATA
+-	imply SATA_SIL
 -
- config ARCH_P4080
- 	bool
- 	select BACKSIDE_L2_CACHE
-@@ -929,7 +894,6 @@ config MAX_CPUS
- 	default 8 if ARCH_P4080
- 	default 4 if ARCH_B4860 || \
- 		     ARCH_P2041 || \
--		     ARCH_P3041 || \
- 		     ARCH_P5040 || \
- 		     ARCH_T1040 || \
- 		     ARCH_T1042 || \
-@@ -971,7 +935,6 @@ config SYS_CCSRBAR_DEFAULT
- 	default 0xfe000000 if	ARCH_B4420	|| \
- 				ARCH_B4860	|| \
- 				ARCH_P2041	|| \
--				ARCH_P3041	|| \
- 				ARCH_P4080	|| \
- 				ARCH_P5040	|| \
- 				ARCH_T1024	|| \
-@@ -1036,7 +999,7 @@ config SYS_FSL_ERRATUM_A004510_SVR_REV
- 
- config SYS_FSL_ERRATUM_A004510_SVR_REV2
- 	hex
--	depends on (SYS_FSL_ERRATUM_A004510 && (ARCH_P2041 || ARCH_P3041))
-+	depends on (SYS_FSL_ERRATUM_A004510 && ARCH_P2041)
- 	default 0x11
- 
- config SYS_FSL_ERRATUM_A005125
-@@ -1111,7 +1074,7 @@ config SYS_FSL_A004447_SVR_REV
- 	depends on SYS_FSL_ERRATUM_I2C_A004447
- 	default 0x10 if ARCH_P1010
- 	default 0x11 if ARCH_P1023 || ARCH_P2041 || ARCH_BSC9132
--	default 0x20 if ARCH_P3041 || ARCH_P4080
-+	default 0x20 if ARCH_P4080
- 
- config SYS_FSL_ERRATUM_IFC_A002769
- 	bool
-@@ -1188,7 +1151,6 @@ config SYS_FSL_NUM_LAWS
- 	default 32 if	ARCH_B4420	|| \
- 			ARCH_B4860	|| \
- 			ARCH_P2041	|| \
--			ARCH_P3041	|| \
- 			ARCH_P4080	|| \
- 			ARCH_P5040	|| \
- 			ARCH_T2080	|| \
-@@ -1353,7 +1315,6 @@ config SYS_FSL_LBC_CLK_DIV
- 		ARCH_MPC8560
- 
- 	default 2 if	ARCH_P2041	|| \
--			ARCH_P3041	|| \
- 			ARCH_P4080	|| \
- 			ARCH_P5040
- 	default 1
-@@ -1416,7 +1377,7 @@ config SYS_FSL_SRIO_LIODN
- 
- config SYS_FSL_TBCLK_DIV
- 	int
--	default 32 if ARCH_P2041 || ARCH_P3041
-+	default 32 if ARCH_P2041
- 	default 16 if ARCH_P4080 || ARCH_P5040 || ARCH_T4240 || ARCH_B4860 || \
- 			ARCH_B4420 || ARCH_T1040 || ARCH_T1042 || \
- 			ARCH_T1024 || ARCH_T2080
-diff --git a/arch/powerpc/cpu/mpc85xx/Makefile b/arch/powerpc/cpu/mpc85xx/Makefile
-index 6717e2c4578..664e566b06e 100644
---- a/arch/powerpc/cpu/mpc85xx/Makefile
-+++ b/arch/powerpc/cpu/mpc85xx/Makefile
-@@ -37,7 +37,6 @@ obj-$(CONFIG_SYS_DPAA_QBMAN) += portals.o
- 
- # various SoC specific assignments
- obj-$(CONFIG_ARCH_P2041) += p2041_ids.o
--obj-$(CONFIG_ARCH_P3041) += p3041_ids.o
- obj-$(CONFIG_ARCH_P4080) += p4080_ids.o
- obj-$(CONFIG_ARCH_P5040) += p5040_ids.o
- obj-$(CONFIG_ARCH_T4240) += t4240_ids.o
-@@ -66,7 +65,6 @@ obj-$(CONFIG_ARCH_P1024)	+= p1021_serdes.o
- obj-$(CONFIG_ARCH_P1025)	+= p1021_serdes.o
- obj-$(CONFIG_ARCH_P2020)	+= p2020_serdes.o
- obj-$(CONFIG_ARCH_P2041) += p2041_serdes.o
--obj-$(CONFIG_ARCH_P3041) += p3041_serdes.o
- obj-$(CONFIG_ARCH_P4080) += p4080_serdes.o
- obj-$(CONFIG_ARCH_P5040) += p5040_serdes.o
- obj-$(CONFIG_ARCH_T4240) += t4240_serdes.o
-diff --git a/arch/powerpc/cpu/mpc85xx/cmd_errata.c b/arch/powerpc/cpu/mpc85xx/cmd_errata.c
-index f91a4d441d3..52de04323c9 100644
---- a/arch/powerpc/cpu/mpc85xx/cmd_errata.c
-+++ b/arch/powerpc/cpu/mpc85xx/cmd_errata.c
-@@ -25,7 +25,7 @@ static void check_erratum_a4849(uint32_t svr)
- 	void __iomem *dcsr = (void *)CFG_SYS_DCSRBAR + 0xb0000;
- 	unsigned int i;
- 
--#if defined(CONFIG_ARCH_P2041) || defined(CONFIG_ARCH_P3041)
-+#ifdef CONFIG_ARCH_P2041
- 	static const uint8_t offsets[] = {
- 		0x50, 0x54, 0x58, 0x90, 0x94, 0x98
- 	};
-@@ -44,7 +44,7 @@ static void check_erratum_a4849(uint32_t svr)
- 		}
- 	}
- 
--#if defined(CONFIG_ARCH_P2041) || defined(CONFIG_ARCH_P3041)
-+#ifdef CONFIG_ARCH_P2041
- 	x108 = 0x12;
- #endif
- 
-@@ -162,7 +162,7 @@ static int do_errata(struct cmd_tbl *cmdtp, int flag, int argc,
- #ifdef CONFIG_SYS_FSL_ERRATUM_NMG_CPU_A011
- 	/*
- 	 * NMG_CPU_A011 applies to P4080 rev 1.0, 2.0, fixed in 3.0
--	 * also applies to P3041 rev 1.0, 1.1, P2041 rev 1.0, 1.1
-+	 * also applies to P2041 rev 1.0, 1.1
- 	 * The SVR has been checked by cpu_init_r().
- 	 */
- 	if (enable_cpu_a011_workaround)
-diff --git a/arch/powerpc/cpu/mpc85xx/cpu_init.c b/arch/powerpc/cpu/mpc85xx/cpu_init.c
-index 4390f754809..6d150cb8ba2 100644
---- a/arch/powerpc/cpu/mpc85xx/cpu_init.c
-+++ b/arch/powerpc/cpu/mpc85xx/cpu_init.c
-@@ -659,8 +659,8 @@ int cpu_init_r(void)
- 	 * CPU22 and NMG_CPU_A011 share the same workaround.
- 	 * CPU22 applies to P4080 rev 1.0, 2.0, fixed in 3.0
- 	 * NMG_CPU_A011 applies to P4080 rev 1.0, 2.0, fixed in 3.0
--	 * also applies to P3041 rev 1.0, 1.1, P2041 rev 1.0, 1.1, both
--	 * fixed in 2.0. NMG_CPU_A011 is activated by default and can
-+	 * also applies to P2041 rev 1.0, 1.1, fixed in 2.0.
-+	 * NMG_CPU_A011 is activated by default and can
- 	 * be disabled by hwconfig with syntax:
- 	 *
- 	 * fsl_cpu_a011:disable
-diff --git a/arch/powerpc/cpu/mpc85xx/p3041_ids.c b/arch/powerpc/cpu/mpc85xx/p3041_ids.c
+ config TARGET_TURRIS_1X
+ 	bool "Support Turris 1.x"
+ 	select SUPPORT_SPL
+diff --git a/arch/powerpc/dts/Makefile b/arch/powerpc/dts/Makefile
+index 01191273269..e44d49cabdf 100644
+--- a/arch/powerpc/dts/Makefile
++++ b/arch/powerpc/dts/Makefile
+@@ -11,7 +11,6 @@ dtb-$(CONFIG_TARGET_P1010RDB_PA) += p1010rdb-pa.dtb p1010rdb-pa_36b.dtb
+ dtb-$(CONFIG_TARGET_P1010RDB_PB) += p1010rdb-pb.dtb p1010rdb-pb_36b.dtb
+ dtb-$(CONFIG_TARGET_P1020RDB_PC) += p1020rdb-pc.dtb p1020rdb-pc_36b.dtb
+ dtb-$(CONFIG_TARGET_P1020RDB_PD) += p1020rdb-pd.dtb
+-dtb-$(CONFIG_TARGET_P2020RDB) += p2020rdb-pc.dtb p2020rdb-pc_36b.dtb
+ dtb-$(CONFIG_TARGET_P3041DS) += p3041ds.dtb
+ dtb-$(CONFIG_TARGET_P4080DS) += p4080ds.dtb
+ dtb-$(CONFIG_TARGET_P5040DS) += p5040ds.dtb
+diff --git a/arch/powerpc/dts/p2020rdb-pc.dts b/arch/powerpc/dts/p2020rdb-pc.dts
 deleted file mode 100644
-index 0675a59414b..00000000000
---- a/arch/powerpc/cpu/mpc85xx/p3041_ids.c
+index 84d32360baa..00000000000
+--- a/arch/powerpc/dts/p2020rdb-pc.dts
 +++ /dev/null
-@@ -1,112 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
+@@ -1,59 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+ OR X11
 -/*
-- * Copyright 2010-2011 Freescale Semiconductor, Inc.
+- * P2020RDB-PC Device Tree Source
+- *
+- * Copyright 2013 - 2015 Freescale Semiconductor Inc.
+- * Copyright 2019 NXP
 - */
 -
--#include <config.h>
--#include <linux/kernel.h>
--#include <asm/fsl_portals.h>
--#include <asm/fsl_liodn.h>
+-/include/ "p2020.dtsi"
 -
--#ifdef CONFIG_SYS_DPAA_QBMAN
--struct qportal_info qp_info[CFG_SYS_QMAN_NUM_PORTALS] = {
--	/* dqrr liodn, frame data liodn, liodn off, sdest */
--	SET_QP_INFO(1,  2,  1, 0),
--	SET_QP_INFO(3,  4,  2, 1),
--	SET_QP_INFO(5,  6,  3, 2),
--	SET_QP_INFO(7,  8,  4, 3),
--	SET_QP_INFO(9, 10,  5, 0),
--	SET_QP_INFO(1, 12,  6, 1),
--	SET_QP_INFO(13, 14,  7, 2),
--	SET_QP_INFO(15, 16,  8, 3),
--	SET_QP_INFO(17, 18,  9, 0), /* for now sdest to 0 */
--	SET_QP_INFO(19, 20, 10, 0), /* for now sdest to 0 */
+-/ {
+-	model = "fsl,P2020RDB-PC";
+-	compatible = "fsl,P2020RDB-PC";
+-	#address-cells = <2>;
+-	#size-cells = <2>;
+-	interrupt-parent = <&mpic>;
+-
+-	lbc: localbus@ffe05000 {
+-		reg = <0 0xffe05000 0 0x1000>;
+-	};
+-
+-	soc: soc@ffe00000 {
+-		ranges = <0x0 0x0 0xffe00000 0x100000>;
+-	};
+-
+-	pci2: pcie@ffe08000 {
+-		reg = <0x0 0xffe08000 0x0 0x1000>;	/* registers */
+-		status = "disabled";
+-	};
+-
+-	pci1: pcie@ffe09000 {
+-		reg = <0x0 0xffe09000 0x0 0x1000>;	/* registers */
+-		ranges = <0x01000000 0x0 0x00000000 0x0 0xffc10000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xa0000000 0x0 0xa0000000 0x0 0x20000000>; /* non-prefetchable memory */
+-	};
+-
+-	pci0: pcie@ffe0a000 {
+-		reg = <0x0 0xffe0a000 0x0 0x1000>;	/* registers */
+-		ranges = <0x01000000 0x0 0x00000000 0x0 0xffc00000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0x80000000 0x0 0x80000000 0x0 0x20000000>; /* non-prefetchable memory */
+-	};
+-
+-	aliases {
+-		spi0 = &espi0;
+-	};
 -};
--#endif
 -
--struct srio_liodn_id_table srio_liodn_tbl[] = {
--	SET_SRIO_LIODN_2(1, 199, 200),
--	SET_SRIO_LIODN_2(2, 201, 202),
+-/include/ "p2020rdb-pc.dtsi"
+-/include/ "p2020-post.dtsi"
+-
+-&espi0 {
+-	flash@0 {
+-		compatible = "jedec,spi-nor";
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		reg = <0>;
+-		spi-max-frequency = <10000000>; /* input clock */
+-	};
 -};
--int srio_liodn_tbl_sz = ARRAY_SIZE(srio_liodn_tbl);
--
--struct liodn_id_table liodn_tbl[] = {
--#ifdef CONFIG_SYS_DPAA_QBMAN
--	SET_QMAN_LIODN(31),
--	SET_BMAN_LIODN(32),
--#endif
--
--	SET_SDHC_LIODN(1, 64),
--
--	SET_PME_LIODN(117),
--
--	SET_USB_LIODN(1, "fsl-usb2-mph", 125),
--	SET_USB_LIODN(2, "fsl-usb2-dr", 126),
--
--	SET_SATA_LIODN(1, 127),
--	SET_SATA_LIODN(2, 128),
--
--	SET_PCI_LIODN(CONFIG_SYS_FSL_PCIE_COMPAT, 1, 193),
--	SET_PCI_LIODN(CONFIG_SYS_FSL_PCIE_COMPAT, 2, 194),
--	SET_PCI_LIODN(CONFIG_SYS_FSL_PCIE_COMPAT, 3, 195),
--	SET_PCI_LIODN(CONFIG_SYS_FSL_PCIE_COMPAT, 4, 196),
--
--	SET_DMA_LIODN(1, "fsl,eloplus-dma", 197),
--	SET_DMA_LIODN(2, "fsl,eloplus-dma", 198),
--
--	SET_GUTS_LIODN("fsl,rapidio-delta", 199, rio1liodnr, 0),
--	SET_GUTS_LIODN(NULL, 200, rio2liodnr, 0),
--	SET_GUTS_LIODN(NULL, 201, rio1maintliodnr, 0),
--	SET_GUTS_LIODN(NULL, 202, rio2maintliodnr, 0),
--};
--int liodn_tbl_sz = ARRAY_SIZE(liodn_tbl);
--
--#ifdef CONFIG_SYS_DPAA_FMAN
--struct fman_liodn_id_table fman1_liodn_tbl[] = {
--	SET_FMAN_RX_1G_LIODN(1, 0, 10),
--	SET_FMAN_RX_1G_LIODN(1, 1, 11),
--	SET_FMAN_RX_1G_LIODN(1, 2, 12),
--	SET_FMAN_RX_1G_LIODN(1, 3, 13),
--	SET_FMAN_RX_1G_LIODN(1, 4, 14),
--	SET_FMAN_RX_10G_LIODN(1, 0, 15),
--};
--int fman1_liodn_tbl_sz = ARRAY_SIZE(fman1_liodn_tbl);
--#endif
--
--struct liodn_id_table sec_liodn_tbl[] = {
--	SET_SEC_JR_LIODN_ENTRY(0, 129, 130),
--	SET_SEC_JR_LIODN_ENTRY(1, 131, 132),
--	SET_SEC_JR_LIODN_ENTRY(2, 133, 134),
--	SET_SEC_JR_LIODN_ENTRY(3, 135, 136),
--	SET_SEC_RTIC_LIODN_ENTRY(a, 154),
--	SET_SEC_RTIC_LIODN_ENTRY(b, 155),
--	SET_SEC_RTIC_LIODN_ENTRY(c, 156),
--	SET_SEC_RTIC_LIODN_ENTRY(d, 157),
--	SET_SEC_DECO_LIODN_ENTRY(0, 97, 98),
--	SET_SEC_DECO_LIODN_ENTRY(1, 99, 100),
--};
--int sec_liodn_tbl_sz = ARRAY_SIZE(sec_liodn_tbl);
--
--#ifdef CONFIG_SYS_DPAA_RMAN
--struct liodn_id_table rman_liodn_tbl[] = {
--	/* Set RMan block 0-3 liodn offset */
--	SET_RMAN_LIODN(0, 6),
--	SET_RMAN_LIODN(1, 7),
--	SET_RMAN_LIODN(2, 8),
--	SET_RMAN_LIODN(3, 9),
--};
--int rman_liodn_tbl_sz = ARRAY_SIZE(rman_liodn_tbl);
--#endif
--
--struct liodn_id_table liodn_bases[] = {
--	[FSL_HW_PORTAL_SEC]  = SET_LIODN_BASE_2(64, 100),
--#ifdef CONFIG_SYS_DPAA_FMAN
--	[FSL_HW_PORTAL_FMAN1] = SET_LIODN_BASE_1(32),
--#endif
--#ifdef CONFIG_SYS_DPAA_PME
--	[FSL_HW_PORTAL_PME]   = SET_LIODN_BASE_2(136, 172),
--#endif
--#ifdef CONFIG_SYS_DPAA_RMAN
--	[FSL_HW_PORTAL_RMAN] = SET_LIODN_BASE_1(80),
--#endif
--};
-diff --git a/arch/powerpc/cpu/mpc85xx/p3041_serdes.c b/arch/powerpc/cpu/mpc85xx/p3041_serdes.c
+diff --git a/arch/powerpc/dts/p2020rdb-pc.dtsi b/arch/powerpc/dts/p2020rdb-pc.dtsi
 deleted file mode 100644
-index b1586f110e8..00000000000
---- a/arch/powerpc/cpu/mpc85xx/p3041_serdes.c
+index 0d2acc746e4..00000000000
+--- a/arch/powerpc/dts/p2020rdb-pc.dtsi
 +++ /dev/null
-@@ -1,133 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
+@@ -1,50 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+ OR X11
 -/*
-- * Copyright 2009-2011 Freescale Semiconductor, Inc.
+- * P2020 RDB-PC Device Tree Source stub (no addresses or top-level ranges)
+- *
+- * Copyright 2011 Freescale Semiconductor Inc.
+- * Copyright 2020 NXP
 - */
 -
--#include <asm/fsl_serdes.h>
--#include <asm/processor.h>
--#include <asm/io.h>
--#include "fsl_corenet_serdes.h"
+-&soc {
+-	mdio@24520 {
+-		phy0: ethernet-phy@0 {
+-			interrupts = <3 1 0 0>;
+-			reg = <0x0>;
+-			};
+-		phy1: ethernet-phy@1 {
+-			interrupts = <2 1 0 0>;
+-			reg = <0x1>;
+-			};
+-	};
 -
--static u8 serdes_cfg_tbl[][SRDS_MAX_LANES] = {
--	[0x2] = {PCIE1, PCIE1, PCIE1, PCIE1, PCIE2, PCIE2, PCIE2, PCIE2,
--		PCIE4, AURORA, PCIE3, SGMII_FM1_DTSEC2, SGMII_FM1_DTSEC3,
--		SGMII_FM1_DTSEC4, NONE, NONE, SATA1, SATA2, },
--	[0x4] = {SRIO2, SRIO2, SRIO2, SRIO2, SRIO1, SRIO1, SRIO1, SRIO1,
--		PCIE2, AURORA, PCIE3, SGMII_FM1_DTSEC2, SGMII_FM1_DTSEC3,
--		SGMII_FM1_DTSEC4, XAUI_FM1, XAUI_FM1, XAUI_FM1, XAUI_FM1, },
--	[0xb] = {PCIE1, PCIE1, PCIE1, PCIE1, SRIO2, SRIO2, SRIO1, SRIO1,
--		PCIE2, AURORA, PCIE3, SGMII_FM1_DTSEC2, SGMII_FM1_DTSEC3,
--		SGMII_FM1_DTSEC4, NONE, NONE, SATA1, SATA2, },
--	[0x10] = {PCIE1, PCIE1, PCIE1, PCIE1, PCIE1, PCIE1, PCIE1, PCIE1,
--		AURORA, AURORA, XAUI_FM1, XAUI_FM1, XAUI_FM1, XAUI_FM1,
--		NONE, NONE, SATA1, SATA2, },
--	[0x11] = {PCIE1, PCIE1, PCIE1, PCIE1, PCIE2, PCIE2, PCIE2, PCIE2,
--		AURORA, AURORA, SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2,
--		SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, NONE, NONE, SATA1, SATA2, },
--	[0x13] = {PCIE1, PCIE1, PCIE1, PCIE1, PCIE2, PCIE2, PCIE2, PCIE2,
--		AURORA, AURORA, SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2,
--		SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, XAUI_FM1, XAUI_FM1,
--		XAUI_FM1, XAUI_FM1, },
--	[0x14] = {PCIE1, PCIE1, PCIE1, PCIE1, PCIE2, PCIE2, PCIE2, PCIE2,
--		AURORA, AURORA, PCIE3, PCIE3, PCIE3, PCIE3,
--		SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2, SGMII_FM1_DTSEC3,
--		SGMII_FM1_DTSEC4, },
--	[0x15] = {PCIE1, PCIE1, PCIE1, PCIE1, PCIE2, PCIE2, PCIE2, PCIE2,
--		AURORA, AURORA, XAUI_FM1, XAUI_FM1, XAUI_FM1, XAUI_FM1,
--		NONE, NONE, SATA1, SATA2, },
--	[0x16] = {PCIE1, PCIE1, PCIE1, PCIE1, PCIE2, PCIE2, PCIE2, PCIE2,
--		AURORA, AURORA, SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2,
--		SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, SRIO1, SRIO1, SRIO1,
--		SRIO1, },
--	[0x17] = {SRIO2, SRIO2, SRIO2, SRIO2, SRIO1, SRIO1, SRIO1, SRIO1,
--		AURORA, AURORA, SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2,
--		SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, NONE, NONE, SATA1, SATA2, },
--	[0x18] = {SRIO2, SRIO2, SRIO2, SRIO2, SRIO1, SRIO1, SRIO1, SRIO1,
--		AURORA, AURORA, SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2,
--		SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, SGMII_FM1_DTSEC5, NONE,
--		NONE, NONE, },
--	[0x1b] = {SRIO2, SRIO2, SRIO2, SRIO2, SRIO1, SRIO1, SRIO1, SRIO1,
--		AURORA, AURORA, XAUI_FM1, XAUI_FM1, XAUI_FM1, XAUI_FM1,
--		NONE, NONE, SATA1, SATA2, },
--	[0x1d] = {SRIO2, SRIO2, SRIO2, SRIO2, SRIO1, SRIO1, SRIO1, SRIO1,
--		AURORA, AURORA, PCIE3, PCIE3, PCIE3, PCIE3, NONE, NONE,
--		SATA1, SATA2, },
--	[0x20] = {PCIE1, PCIE1, PCIE1, PCIE1, SRIO1, SRIO1, SRIO1, SRIO1,
--		AURORA, AURORA, SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2,
--		SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, XAUI_FM1, XAUI_FM1,
--		XAUI_FM1, XAUI_FM1, },
--	[0x21] = {PCIE1, PCIE1, PCIE1, PCIE1, SRIO1, SRIO1, SRIO1, SRIO1,
--		AURORA, AURORA, PCIE3, PCIE3, PCIE3, PCIE3,
--		SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2, SGMII_FM1_DTSEC3,
--		SGMII_FM1_DTSEC4, },
--	[0x22] = {PCIE1, PCIE1, PCIE1, PCIE1, SRIO1, SRIO1, SRIO1, SRIO1,
--		AURORA, AURORA, XAUI_FM1, XAUI_FM1, XAUI_FM1, XAUI_FM1,
--		NONE, NONE, SATA1, SATA2, },
--	[0x23] = {PCIE1, PCIE1, PCIE1, PCIE1, SRIO2, SRIO2, SRIO1, SRIO1,
--		AURORA, AURORA, SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2,
--		SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, NONE, NONE, SATA1, SATA2, },
--	[0x24] = {PCIE1, PCIE1, PCIE1, PCIE1, SRIO2, SRIO2, SRIO1, SRIO1,
--		AURORA, AURORA, SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2,
--		SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, SGMII_FM1_DTSEC5, NONE,
--		NONE, NONE, },
--	[0x28] = {PCIE1, PCIE1, PCIE3, PCIE3, PCIE2, PCIE2, PCIE2, PCIE2,
--		AURORA, AURORA, SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2,
--		SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, NONE, NONE, SATA1, SATA2, },
--	[0x29] = {PCIE1, PCIE1, PCIE3, PCIE3, PCIE2, PCIE2, PCIE2, PCIE2,
--		AURORA, AURORA, SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2,
--		SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, SGMII_FM1_DTSEC5, NONE,
--		NONE, NONE, },
--	[0x2a] = {PCIE1, PCIE1, PCIE3, PCIE3, PCIE2, PCIE2, PCIE2, PCIE2,
--		AURORA, AURORA, SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2,
--		SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, XAUI_FM1, XAUI_FM1,
--		XAUI_FM1, XAUI_FM1, },
--	[0x2b] = {PCIE1, PCIE1, PCIE3, PCIE3, PCIE2, PCIE2, PCIE2, PCIE2,
--		AURORA, AURORA, XAUI_FM1, XAUI_FM1, XAUI_FM1, XAUI_FM1,
--		NONE, NONE, SATA1, SATA2, },
--	[0x2f] = {PCIE1, PCIE1, PCIE3, PCIE3, SRIO2, SRIO2, SRIO1, SRIO1,
--		AURORA, AURORA, XAUI_FM1, XAUI_FM1, XAUI_FM1, XAUI_FM1,
--		NONE, NONE, SATA1, SATA2, },
--	[0x31] = {PCIE1, PCIE1, PCIE3, PCIE3, SRIO1, SRIO1, SRIO1, SRIO1,
--		AURORA, AURORA, SGMII_FM1_DTSEC1, SGMII_FM1_DTSEC2,
--		SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, SGMII_FM1_DTSEC5, NONE,
--		NONE, NONE, },
--	[0x33] = {PCIE1, PCIE1, PCIE3, PCIE3, SRIO1, SRIO1, SRIO1, SRIO1,
--		AURORA, AURORA, XAUI_FM1, XAUI_FM1, XAUI_FM1, XAUI_FM1,
--		NONE, NONE, SATA1, SATA2, },
--	[0x34] = {PCIE1, PCIE1, PCIE1, PCIE1, SGMII_FM1_DTSEC1,
--		SGMII_FM1_DTSEC2, SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, AURORA,
--		AURORA, XAUI_FM1, XAUI_FM1, XAUI_FM1, XAUI_FM1, NONE,
--		NONE, SATA1, SATA2, },
--	[0x35] = {PCIE1, PCIE1, PCIE1, PCIE1, PCIE2, PCIE2,
--		SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, AURORA, AURORA, XAUI_FM1,
--		XAUI_FM1, XAUI_FM1, XAUI_FM1, NONE, NONE, SATA1, SATA2, },
--	[0x36] = {PCIE1, PCIE1, PCIE3, PCIE3, SGMII_FM1_DTSEC1,
--		SGMII_FM1_DTSEC2, SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, AURORA,
--		AURORA, XAUI_FM1, XAUI_FM1, XAUI_FM1, XAUI_FM1, NONE,
--		NONE, SATA1, SATA2, },
--	[0x37] = {PCIE1, PCIE1, PCIE3, PCIE3, PCIE2, PCIE2,
--		SGMII_FM1_DTSEC3, SGMII_FM1_DTSEC4, AURORA, AURORA, XAUI_FM1,
--		XAUI_FM1, XAUI_FM1, XAUI_FM1, NONE, NONE, SATA1, SATA2, },
+-	mdio@25520 {
+-		tbi0: tbi-phy@11 {
+-			reg = <0x11>;
+-			device_type = "tbi-phy";
+-		};
+-	};
+-
+-	mdio@26520 {
+-		status = "disabled";
+-	};
+-
+-	enet0: ethernet@24000 {
+-		phy-connection-type = "rgmii-id";
+-		fixed-link {
+-			speed = <1000>;
+-			full-duplex;
+-		};
+-	};
+-
+-	enet1: ethernet@25000 {
+-		tbi-handle = <&tbi0>;
+-		phy-handle = <&phy0>;
+-		phy-connection-type = "sgmii";
+-	};
+-
+-	enet2: ethernet@26000 {
+-		phy-handle = <&phy1>;
+-		phy-connection-type = "rgmii-id";
+-	};
+-};
+diff --git a/arch/powerpc/dts/p2020rdb-pc_36b.dts b/arch/powerpc/dts/p2020rdb-pc_36b.dts
+deleted file mode 100644
+index c847417df99..00000000000
+--- a/arch/powerpc/dts/p2020rdb-pc_36b.dts
++++ /dev/null
+@@ -1,59 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+ OR X11
+-/*
+- * P2020RDB-PC (36-bit address map) Device Tree Source
+- *
+- * Copyright 2013 - 2015 Freescale Semiconductor Inc.
+- * Copyright 2019 NXP
+- */
+-
+-/include/ "p2020.dtsi"
+-
+-/ {
+-	model = "fsl,P2020RDB-PC";
+-	compatible = "fsl,P2020RDB-PC";
+-	#address-cells = <2>;
+-	#size-cells = <2>;
+-	interrupt-parent = <&mpic>;
+-
+-	lbc: localbus@fffe05000 {
+-		reg = <0xf 0xffe05000 0 0x1000>;
+-	};
+-
+-	soc: soc@fffe00000 {
+-		ranges = <0x0 0xf 0xffe00000 0x100000>;
+-	};
+-
+-	pci2: pcie@fffe08000 {
+-		reg = <0xf 0xffe08000 0x0 0x1000>;	/* registers */
+-		status = "disabled";
+-	};
+-
+-	pci1: pcie@fffe09000 {
+-		reg = <0xf 0xffe09000 0x0 0x1000>;	/* registers */
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xffc10000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xc0000000 0xc 0x20000000 0x0 0x20000000>; /* non-prefetchable memory */
+-	};
+-
+-	pci0: pcie@fffe0a000 {
+-		reg = <0xf 0xffe0a000 0x0 0x1000>;	/* registers */
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xffc00000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0x80000000 0xc 0x00000000 0x0 0x20000000>; /* non-prefetchable memory */
+-	};
+-
+-	aliases {
+-		spi0 = &espi0;
+-	};
 -};
 -
--enum srds_prtcl serdes_get_prtcl(int cfg, int lane)
--{
--	if (!serdes_lane_enabled(lane))
--		return NONE;
+-/include/ "p2020rdb-pc.dtsi"
+-/include/ "p2020-post.dtsi"
 -
--	return serdes_cfg_tbl[cfg][lane];
--}
--
--int is_serdes_prtcl_valid(u32 prtcl) {
--	int i;
--
--	if (prtcl >= ARRAY_SIZE(serdes_cfg_tbl))
--		return 0;
--
--	for (i = 0; i < SRDS_MAX_LANES; i++) {
--		if (serdes_cfg_tbl[prtcl][i] != NONE)
--			return 1;
--	}
--
--	return 0;
--}
-diff --git a/arch/powerpc/cpu/mpc85xx/release.S b/arch/powerpc/cpu/mpc85xx/release.S
-index 391751ce1e7..078d8cf3f34 100644
---- a/arch/powerpc/cpu/mpc85xx/release.S
-+++ b/arch/powerpc/cpu/mpc85xx/release.S
-@@ -208,7 +208,7 @@ __secondary_start_page:
- 	/*
- 	 * CPU22 applies to P4080 rev 1.0, 2.0, fixed in 3.0
- 	 * NMG_CPU_A011 applies to P4080 rev 1.0, 2.0, fixed in 3.0
--	 * also appleis to P3041 rev 1.0, 1.1, P2041 rev 1.0, 1.1
-+	 * also applies to P2041 rev 1.0, 1.1
- 	 */
- 	mfspr   r3,SPRN_SVR
- 	rlwinm	r6,r3,24,~0x800		/* clear E bit */
-diff --git a/arch/powerpc/cpu/mpc8xxx/cpu.c b/arch/powerpc/cpu/mpc8xxx/cpu.c
-index d64eb7328fe..b8bec9ed2e8 100644
---- a/arch/powerpc/cpu/mpc8xxx/cpu.c
-+++ b/arch/powerpc/cpu/mpc8xxx/cpu.c
-@@ -56,7 +56,6 @@ static struct cpu_type cpu_type_list[] = {
- 	CPU_TYPE_ENTRY(P2020, P2020, 2),
- 	CPU_TYPE_ENTRY(P2040, P2040, 4),
- 	CPU_TYPE_ENTRY(P2041, P2041, 4),
--	CPU_TYPE_ENTRY(P3041, P3041, 4),
- 	CPU_TYPE_ENTRY(P4040, P4040, 4),
- 	CPU_TYPE_ENTRY(P4080, P4080, 8),
- 	CPU_TYPE_ENTRY(P5010, P5010, 1),
-diff --git a/arch/powerpc/include/asm/config_mpc85xx.h b/arch/powerpc/include/asm/config_mpc85xx.h
-index d7d18c3eeca..07be48d518d 100644
---- a/arch/powerpc/include/asm/config_mpc85xx.h
-+++ b/arch/powerpc/include/asm/config_mpc85xx.h
-@@ -44,16 +44,6 @@
- #define CFG_SYS_FSL_SRIO_IB_WIN_NUM	5
- #define CFG_SYS_FSL_CORENET_SNOOPVEC_COREONLY 0xf0000000
+-&espi0 {
+-	flash@0 {
+-		compatible = "jedec,spi-nor";
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		reg = <0>;
+-		spi-max-frequency = <10000000>; /* input clock */
+-	};
+-};
+diff --git a/board/nxp/p1_p2_rdb_pc/Kconfig b/board/nxp/p1_p2_rdb_pc/Kconfig
+index 2ab46d99434..2c82048564d 100644
+--- a/board/nxp/p1_p2_rdb_pc/Kconfig
++++ b/board/nxp/p1_p2_rdb_pc/Kconfig
+@@ -1,6 +1,5 @@
+ if	TARGET_P1020RDB_PC	|| \
+-	TARGET_P1020RDB_PD	|| \
+-	TARGET_P2020RDB
++	TARGET_P1020RDB_PD
  
--#elif defined(CONFIG_ARCH_P3041)
--#define CFG_SYS_NUM_FMAN		1
--#define CFG_SYS_NUM_FM1_DTSEC	5
--#define CFG_SYS_NUM_FM1_10GEC	1
--#define CFG_SYS_FM_MURAM_SIZE	0x28000
--#define CFG_SYS_FSL_SRIO_MAX_PORTS	2
--#define CFG_SYS_FSL_SRIO_OB_WIN_NUM	9
--#define CFG_SYS_FSL_SRIO_IB_WIN_NUM	5
--#define CFG_SYS_FSL_CORENET_SNOOPVEC_COREONLY 0xf0000000
+ config SYS_BOARD
+ 	default "p1_p2_rdb_pc"
+diff --git a/board/nxp/p1_p2_rdb_pc/MAINTAINERS b/board/nxp/p1_p2_rdb_pc/MAINTAINERS
+index 1ce3501f379..d9a5cdf3f42 100644
+--- a/board/nxp/p1_p2_rdb_pc/MAINTAINERS
++++ b/board/nxp/p1_p2_rdb_pc/MAINTAINERS
+@@ -15,11 +15,3 @@ F:	configs/P1020RDB-PD_defconfig
+ F:	configs/P1020RDB-PD_NAND_defconfig
+ F:	configs/P1020RDB-PD_SDCARD_defconfig
+ F:	configs/P1020RDB-PD_SPIFLASH_defconfig
+-F:	configs/P2020RDB-PC_defconfig
+-F:	configs/P2020RDB-PC_36BIT_defconfig
+-F:	configs/P2020RDB-PC_36BIT_NAND_defconfig
+-F:	configs/P2020RDB-PC_36BIT_SDCARD_defconfig
+-F:	configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig
+-F:	configs/P2020RDB-PC_NAND_defconfig
+-F:	configs/P2020RDB-PC_SDCARD_defconfig
+-F:	configs/P2020RDB-PC_SPIFLASH_defconfig
+diff --git a/board/nxp/p1_p2_rdb_pc/README b/board/nxp/p1_p2_rdb_pc/README
+index fd849bfc29a..5bf27816ab2 100644
+--- a/board/nxp/p1_p2_rdb_pc/README
++++ b/board/nxp/p1_p2_rdb_pc/README
+@@ -6,10 +6,8 @@ P1_P2_RDB_PC represents a set of boards including
+     P1020RDB-PD
+     P1021RDB-PC
+     P1024RDB
+-    P2020RDB-PC
+ 
+-They have similar design of P1020RDB but have DDR3 instead of DDR2. P2020RDB-PC
+-has 64-bit DDR. All others have 32-bit DDR.
++They have similar design of P1020RDB but have DDR3 instead of DDR2.
+ 
+ Key features on these boards include:
+     * DDR3
+@@ -46,7 +44,7 @@ enable QE-TDM for linux kernel, set "qe;tdm" in hwconfig. Syntax is as below
+ 
+ Device tree support and how to enable it for different configs
+ --------------------------------------------------------------
+-Device tree support is available for p1020rdb and p2020rdb for below mentioned boot,
++Device tree support is available for p1020rdb for below mentioned boot,
+ 1. NOR Boot
+ 2. NAND Boot
+ 3. SD Boot
+diff --git a/board/nxp/p1_p2_rdb_pc/ddr.c b/board/nxp/p1_p2_rdb_pc/ddr.c
+index 8622a5a610a..74c9c78c4e1 100644
+--- a/board/nxp/p1_p2_rdb_pc/ddr.c
++++ b/board/nxp/p1_p2_rdb_pc/ddr.c
+@@ -46,37 +46,6 @@ dimm_params_t ddr_raw_timing = {
+ 	.refresh_rate_ps = 7800000,
+ 	.tfaw_ps = 37500,
+ };
+-#elif defined(CONFIG_TARGET_P2020RDB)
+-/* Micron MT41J128M16_15E */
+-dimm_params_t ddr_raw_timing = {
+-	.n_ranks = 1,
+-	.rank_density = 1073741824u,
+-	.capacity = 1073741824u,
+-	.primary_sdram_width = 64,
+-	.ec_sdram_width = 0,
+-	.registered_dimm = 0,
+-	.mirrored_dimm = 0,
+-	.n_row_addr = 14,
+-	.n_col_addr = 10,
+-	.n_banks_per_sdram_device = 8,
+-	.edc_config = 0,
+-	.burst_lengths_bitmask = 0x0c,
 -
- #elif defined(CONFIG_ARCH_P4080) /* also supports P4040 */
- #define CFG_SYS_NUM_FMAN		2
- #define CFG_SYS_NUM_FM1_DTSEC	4
-diff --git a/arch/powerpc/include/asm/immap_85xx.h b/arch/powerpc/include/asm/immap_85xx.h
-index 9e082a87a3b..e1d1ca80092 100644
---- a/arch/powerpc/include/asm/immap_85xx.h
-+++ b/arch/powerpc/include/asm/immap_85xx.h
-@@ -1522,8 +1522,7 @@ typedef struct ccsr_gur {
- #define FSL_CORENET_RCWSR11_EC2_FM1_DTSEC2		0x00080000
- #define FSL_CORENET_RCWSR11_EC2_USB2			0x00100000
+-	.tckmin_x_ps = 1500,
+-	.caslat_x = 0x7e << 4,	/* 5,6,7,8,9,10 */
+-	.taa_ps = 13500,
+-	.twr_ps = 15000,
+-	.trcd_ps = 13500,
+-	.trrd_ps = 6000,
+-	.trp_ps = 13500,
+-	.tras_ps = 36000,
+-	.trc_ps = 49500,
+-	.trfc_ps = 160000,
+-	.twtr_ps = 7500,
+-	.trtp_ps = 7500,
+-	.refresh_rate_ps = 7800000,
+-	.tfaw_ps = 30000,
+-};
+ #elif (defined(CONFIG_TARGET_P1020MBG) || defined(CONFIG_TARGET_P1020RDB_PD))
+ /* Micron MT41J512M8_187E */
+ dimm_params_t ddr_raw_timing = {
+diff --git a/board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c b/board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c
+index a19a98dd0d1..57c355068db 100644
+--- a/board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c
++++ b/board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c
+@@ -220,8 +220,6 @@ int board_early_init_f(void)
+ #define BOARD_NAME "P1020RDB-PC"
+ #elif defined(CONFIG_TARGET_P1020RDB_PD)
+ #define BOARD_NAME "P1020RDB-PD"
+-#elif defined(CONFIG_TARGET_P2020RDB)
+-#define BOARD_NAME "P2020RDB-PC"
  #endif
--#if defined(CONFIG_ARCH_P2041) || \
--	defined(CONFIG_ARCH_P3041)
-+#if defined(CONFIG_ARCH_P2041)
- #define FSL_CORENET_RCWSR11_EC1_FM1_DTSEC4_RGMII	0x00000000
- #define FSL_CORENET_RCWSR11_EC1_FM1_DTSEC4_MII		0x00800000
- #define FSL_CORENET_RCWSR11_EC1_FM1_DTSEC4_NONE		0x00c00000
-diff --git a/arch/powerpc/include/asm/processor.h b/arch/powerpc/include/asm/processor.h
-index 2357734a5be..31d52f3b734 100644
---- a/arch/powerpc/include/asm/processor.h
-+++ b/arch/powerpc/include/asm/processor.h
-@@ -1048,7 +1048,6 @@
- #define SVR_P2020	0x80E200
- #define SVR_P2040	0x821000
- #define SVR_P2041	0x821001
--#define SVR_P3041	0x821103
- #define SVR_P4040	0x820100
- #define SVR_P4080	0x820000
- #define SVR_P5010	0x822100
-diff --git a/doc/README.pblimage b/doc/README.pblimage
-index e99b010d262..7145622b575 100644
---- a/doc/README.pblimage
-+++ b/doc/README.pblimage
-@@ -14,15 +14,15 @@ Building PBL Boot Image and boot steps
- 1. Building PBL Boot Image.
-    The default Image is u-boot.pbl.
  
--   For eSPI boot(available on P2041/P3041/P4080/P5020/P5040/T4240):
-+   For eSPI boot(available on P2041/P4080/P5020/P5040/T4240):
- 	To build the eSPI boot image:
- 	make <board_name>_SPIFLASH
+ int checkboard_p1_p2(void)
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 8fcdc36c931..11b5036caad 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -1179,7 +1179,7 @@ config RAMBOOT_PBL
+ choice
+ 	prompt "Freescale PBL (or predecessor) load location"
+ 	depends on RAMBOOT_PBL || ((TARGET_P1010RDB_PA || TARGET_P1010RDB_PB \
+-		|| TARGET_P1020RDB_PC || TARGET_P1020RDB_PD || TARGET_P2020RDB) \
++		|| TARGET_P1020RDB_PC || TARGET_P1020RDB_PD) \
+ 		&& !CMD_NAND) || (TARGET_TURRIS_1X && SYS_MPC85XX_NO_RESETVEC)
  
--   For SD boot(available on P2041/P3041/P4080/P5020/P5040/T4240):
-+   For SD boot(available on P2041/P4080/P5020/P5040/T4240):
- 	To build the SD boot image:
- 	make <board_name>_SDCARD
+ config SDCARD
+diff --git a/configs/P2020RDB-PC_36BIT_NAND_defconfig b/configs/P2020RDB-PC_36BIT_NAND_defconfig
+deleted file mode 100644
+index 6a8b750555b..00000000000
+--- a/configs/P2020RDB-PC_36BIT_NAND_defconfig
++++ /dev/null
+@@ -1,164 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x11000000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_OFFSET=0x100000
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc_36b"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_SERIAL=y
+-CONFIG_TPL_TEXT_BASE=0xF8F80000
+-CONFIG_TPL_LIBCOMMON_SUPPORT=y
+-CONFIG_TPL_LIBGENERIC_SUPPORT=y
+-CONFIG_TPL_SERIAL=y
+-CONFIG_SPL_TEXT_BASE=0xFF800000
+-CONFIG_SPL=y
+-CONFIG_TPL_MAX_SIZE=0x20000
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_TPL_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PHYS_64BIT=y
+-CONFIG_MP=y
+-CONFIG_TPL_SYS_MONITOR_BASE=0xF8F80000
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x1000
+-CONFIG_SPL_NAND_BOOT=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_INIT_MINIMAL=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_RELOC_TEXT_BASE=0xf8ffe000
+-CONFIG_SPL_RELOC_STACK=0xf8fffff0
+-CONFIG_TPL_GD_ADDR=0xf8fac000
+-CONFIG_TPL_RELOC_TEXT_BASE=0xf8f80000
+-CONFIG_TPL_RELOC_STACK=0xf8fb0000
+-CONFIG_TPL_RELOC_MALLOC=y
+-CONFIG_TPL_RELOC_MALLOC_ADDR=0xf8fb4000
+-CONFIG_TPL_RELOC_MALLOC_SIZE=0xc000
+-CONFIG_SPL_NAND_SUPPORT=y
+-CONFIG_TPL=y
+-CONFIG_TPL_ENV_SUPPORT=y
+-CONFIG_TPL_I2C=y
+-CONFIG_TPL_MPC8XXX_INIT_DDR=y
+-CONFIG_TPL_NAND_SUPPORT=y
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=fef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=fef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_NAND=y
+-CONFIG_ENV_RANGE=0xc000
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xFF800C21
+-CONFIG_SYS_OR0_PRELIM=0xFFFF8396
+-CONFIG_SYS_BR1_PRELIM_BOOL=y
+-CONFIG_SYS_BR1_PRELIM=0xEF001001
+-CONFIG_SYS_OR1_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_TPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_TPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_ELBC=y
+-CONFIG_SYS_NAND_BLOCK_SIZE=0x4000
+-CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
+-CONFIG_SYS_NAND_U_BOOT_OFFS=0x20000
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPL_NS16550_MIN_FUNCTIONS=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_ADDR_MAP=y
+diff --git a/configs/P2020RDB-PC_36BIT_SDCARD_defconfig b/configs/P2020RDB-PC_36BIT_SDCARD_defconfig
+deleted file mode 100644
+index e516e8c0d6e..00000000000
+--- a/configs/P2020RDB-PC_36BIT_SDCARD_defconfig
++++ /dev/null
+@@ -1,145 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x11000000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x0
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc_36b"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_MMC=y
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_TEXT_BASE=0xf8f80000
+-CONFIG_SPL=y
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_SPL_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PHYS_64BIT=y
+-CONFIG_MP=y
+-CONFIG_SPL_SYS_MONITOR_BASE=0xF8F80000
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_FSL_FIXED_MMC_LOCATION=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x20000
+-CONFIG_SPL_MMC_BOOT=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_GD_ADDR=0xf8f9c000
+-CONFIG_SPL_RELOC_STACK=0xf8f9d000
+-CONFIG_SPL_RELOC_MALLOC=y
+-CONFIG_SPL_RELOC_MALLOC_ADDR=0xf8fa5000
+-CONFIG_SPL_RELOC_MALLOC_SIZE=0x5b000
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=fef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=fef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xEF001001
+-CONFIG_SYS_OR0_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_SPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_ADDR_MAP=y
+diff --git a/configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig b/configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig
+deleted file mode 100644
+index bc25dbe17df..00000000000
+--- a/configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig
++++ /dev/null
+@@ -1,147 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x11000000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x100000
+-CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc_36b"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_TEXT_BASE=0xf8f80000
+-CONFIG_SPL=y
+-CONFIG_SPL_SPI_FLASH_SUPPORT=y
+-CONFIG_SPL_SPI=y
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_SPL_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PHYS_64BIT=y
+-CONFIG_MP=y
+-CONFIG_SPL_SYS_MONITOR_BASE=0xF8F80000
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_SPIFLASH=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x20000
+-CONFIG_SPL_SPI_BOOT=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_GD_ADDR=0xf8f9c000
+-CONFIG_SPL_RELOC_STACK=0xf8f9d000
+-CONFIG_SPL_RELOC_MALLOC=y
+-CONFIG_SPL_RELOC_MALLOC_ADDR=0xf8fa5000
+-CONFIG_SPL_RELOC_MALLOC_SIZE=0x5b000
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=fef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=fef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xEF001001
+-CONFIG_SYS_OR0_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_SPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_ADDR_MAP=y
+diff --git a/configs/P2020RDB-PC_36BIT_defconfig b/configs/P2020RDB-PC_36BIT_defconfig
+deleted file mode 100644
+index 429b83465ad..00000000000
+--- a/configs/P2020RDB-PC_36BIT_defconfig
++++ /dev/null
+@@ -1,125 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0xEFF40000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_SECT_SIZE=0x20000
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc_36b"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_ENV_ADDR=0xEFF20000
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_MPC85XX_HAVE_RESET_VECTOR=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_PHYS_64BIT=y
+-CONFIG_MP=y
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_NO_PBL=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=fef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=fef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_FLASH=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xEF001001
+-CONFIG_SYS_OR0_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_COMMON_INIT_DDR=y
+-CONFIG_SPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SYS_NS16550=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_STORAGE=y
+-CONFIG_ADDR_MAP=y
+diff --git a/configs/P2020RDB-PC_NAND_defconfig b/configs/P2020RDB-PC_NAND_defconfig
+deleted file mode 100644
+index e60677d55dc..00000000000
+--- a/configs/P2020RDB-PC_NAND_defconfig
++++ /dev/null
+@@ -1,162 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x11000000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_OFFSET=0x100000
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_SERIAL=y
+-CONFIG_TPL_TEXT_BASE=0xF8F80000
+-CONFIG_TPL_LIBCOMMON_SUPPORT=y
+-CONFIG_TPL_LIBGENERIC_SUPPORT=y
+-CONFIG_TPL_SERIAL=y
+-CONFIG_SPL_TEXT_BASE=0xFF800000
+-CONFIG_SPL=y
+-CONFIG_TPL_MAX_SIZE=0x20000
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_TPL_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_MP=y
+-CONFIG_TPL_SYS_MONITOR_BASE=0xF8F80000
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x1000
+-CONFIG_SPL_NAND_BOOT=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_INIT_MINIMAL=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_RELOC_TEXT_BASE=0xf8ffe000
+-CONFIG_SPL_RELOC_STACK=0xf8fffff0
+-CONFIG_TPL_GD_ADDR=0xf8fac000
+-CONFIG_TPL_RELOC_TEXT_BASE=0xf8f80000
+-CONFIG_TPL_RELOC_STACK=0xf8fb0000
+-CONFIG_TPL_RELOC_MALLOC=y
+-CONFIG_TPL_RELOC_MALLOC_ADDR=0xf8fb4000
+-CONFIG_TPL_RELOC_MALLOC_SIZE=0xc000
+-CONFIG_SPL_NAND_SUPPORT=y
+-CONFIG_TPL=y
+-CONFIG_TPL_ENV_SUPPORT=y
+-CONFIG_TPL_I2C=y
+-CONFIG_TPL_MPC8XXX_INIT_DDR=y
+-CONFIG_TPL_NAND_SUPPORT=y
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=ef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=ef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_NAND=y
+-CONFIG_ENV_RANGE=0xc000
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xFF800C21
+-CONFIG_SYS_OR0_PRELIM=0xFFFF8396
+-CONFIG_SYS_BR1_PRELIM_BOOL=y
+-CONFIG_SYS_BR1_PRELIM=0xEF001001
+-CONFIG_SYS_OR1_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_TPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_TPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_MTD_RAW_NAND=y
+-CONFIG_NAND_FSL_ELBC=y
+-CONFIG_SYS_NAND_BLOCK_SIZE=0x4000
+-CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
+-CONFIG_SYS_NAND_U_BOOT_OFFS=0x20000
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPL_NS16550_MIN_FUNCTIONS=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_STORAGE=y
+diff --git a/configs/P2020RDB-PC_SDCARD_defconfig b/configs/P2020RDB-PC_SDCARD_defconfig
+deleted file mode 100644
+index fe433c5e358..00000000000
+--- a/configs/P2020RDB-PC_SDCARD_defconfig
++++ /dev/null
+@@ -1,142 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x11000000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x0
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_MMC=y
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_TEXT_BASE=0xf8f80000
+-CONFIG_SPL=y
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_SPL_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_MP=y
+-CONFIG_SPL_SYS_MONITOR_BASE=0xF8F80000
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_FSL_FIXED_MMC_LOCATION=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x20000
+-CONFIG_SPL_MMC_BOOT=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_GD_ADDR=0xf8f9c000
+-CONFIG_SPL_RELOC_STACK=0xf8f9d000
+-CONFIG_SPL_RELOC_MALLOC=y
+-CONFIG_SPL_RELOC_MALLOC_ADDR=0xf8fa5000
+-CONFIG_SPL_RELOC_MALLOC_SIZE=0x5b000
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=ef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=ef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_MMC=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xEF001001
+-CONFIG_SYS_OR0_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_SPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+diff --git a/configs/P2020RDB-PC_SPIFLASH_defconfig b/configs/P2020RDB-PC_SPIFLASH_defconfig
+deleted file mode 100644
+index 0184dcb4e8b..00000000000
+--- a/configs/P2020RDB-PC_SPIFLASH_defconfig
++++ /dev/null
+@@ -1,145 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0x11000000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SPL_LIBCOMMON_SUPPORT=y
+-CONFIG_SPL_LIBGENERIC_SUPPORT=y
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x100000
+-CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_SERIAL=y
+-CONFIG_SPL_TEXT_BASE=0xf8f80000
+-CONFIG_SPL=y
+-CONFIG_SPL_SPI_FLASH_SUPPORT=y
+-CONFIG_SPL_SPI=y
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_SPL_SYS_MPC85XX_NO_RESETVEC=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_MP=y
+-CONFIG_SPL_SYS_MONITOR_BASE=0xF8F80000
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_SPIFLASH=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-# CONFIG_SPL_FRAMEWORK is not set
+-CONFIG_SPL_MAX_SIZE=0x20000
+-CONFIG_SPL_SPI_BOOT=y
+-CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
+-CONFIG_SPL_FLUSH_IMAGE=y
+-CONFIG_SPL_GD_ADDR=0xf8f9c000
+-CONFIG_SPL_RELOC_STACK=0xf8f9d000
+-CONFIG_SPL_RELOC_MALLOC=y
+-CONFIG_SPL_RELOC_MALLOC_ADDR=0xf8fa5000
+-CONFIG_SPL_RELOC_MALLOC_SIZE=0x5b000
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MPC8XXX_INIT_DDR=y
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=ef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=ef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xEF001001
+-CONFIG_SYS_OR0_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_SPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SPL_SYS_NS16550_SERIAL=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_STORAGE=y
+diff --git a/configs/P2020RDB-PC_defconfig b/configs/P2020RDB-PC_defconfig
+deleted file mode 100644
+index a3efd89e218..00000000000
+--- a/configs/P2020RDB-PC_defconfig
++++ /dev/null
+@@ -1,123 +0,0 @@
+-CONFIG_PPC=y
+-CONFIG_TEXT_BASE=0xEFF40000
+-CONFIG_SYS_MALLOC_LEN=0x100000
+-CONFIG_SF_DEFAULT_SPEED=10000000
+-CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_SECT_SIZE=0x20000
+-CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc"
+-CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_ENV_ADDR=0xEFF20000
+-CONFIG_MPC85xx=y
+-CONFIG_SYS_INIT_RAM_LOCK=y
+-# CONFIG_CMD_ERRATA is not set
+-CONFIG_TARGET_P2020RDB=y
+-CONFIG_MPC85XX_HAVE_RESET_VECTOR=y
+-CONFIG_L2_CACHE=y
+-CONFIG_ENABLE_36BIT_PHYS=y
+-CONFIG_USE_UBOOTPATH=y
+-CONFIG_PCIE1=y
+-CONFIG_PCIE2=y
+-CONFIG_MP=y
+-CONFIG_FIT=y
+-CONFIG_FIT_VERBOSE=y
+-CONFIG_NO_PBL=y
+-CONFIG_BOOTDELAY=10
+-CONFIG_OF_BOARD_SETUP=y
+-CONFIG_OF_STDOUT_VIA_ALIAS=y
+-CONFIG_USE_BOOTCOMMAND=y
+-CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
+-CONFIG_SYS_PBSIZE=276
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_BOARD_EARLY_INIT_R=y
+-# CONFIG_MISC_INIT_R is not set
+-CONFIG_HUSH_PARSER=y
+-# CONFIG_AUTO_COMPLETE is not set
+-CONFIG_CMD_IMLS=y
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
+-CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
+-CONFIG_CMD_I2C=y
+-CONFIG_LOADS_ECHO=y
+-CONFIG_SYS_LOADS_BAUD_CHANGE=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_PCI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+-# CONFIG_CMD_HASH is not set
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_MTDPARTS=y
+-CONFIG_MTDIDS_DEFAULT="nor0=ef000000.nor"
+-CONFIG_MTDPARTS_DEFAULT="mtdparts=ef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
+-CONFIG_OF_CONTROL=y
+-CONFIG_ENV_OVERWRITE=y
+-CONFIG_ENV_IS_IN_FLASH=y
+-CONFIG_USE_BOOTFILE=y
+-CONFIG_BOOTFILE="uImage"
+-CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eTSEC1"
+-CONFIG_USE_HOSTNAME=y
+-CONFIG_USE_ROOTPATH=y
+-CONFIG_LBA48=y
+-CONFIG_DDR_CLK_FREQ=66666666
+-CONFIG_SYS_SPD_BUS_NUM=1
+-CONFIG_CHIP_SELECTS_PER_CTRL=1
+-CONFIG_SYS_DDR_RAW_TIMING=y
+-CONFIG_SYS_BR0_PRELIM_BOOL=y
+-CONFIG_SYS_BR0_PRELIM=0xEF001001
+-CONFIG_SYS_OR0_PRELIM=0xFC000FF7
+-CONFIG_SYS_BR2_PRELIM_BOOL=y
+-CONFIG_SYS_BR2_PRELIM=0xFFB00801
+-CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
+-CONFIG_SYS_BR3_PRELIM_BOOL=y
+-CONFIG_SYS_BR3_PRELIM=0xFFA00801
+-CONFIG_SYS_OR3_PRELIM=0xFFF009F7
+-CONFIG_COMMON_INIT_DDR=y
+-CONFIG_SPL_COMMON_INIT_DDR=y
+-CONFIG_DM_I2C=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+-CONFIG_SYS_I2C_FSL=y
+-CONFIG_SYS_FSL_I2C_OFFSET=0x3000
+-CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
+-CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
+-CONFIG_SYS_I2C_EEPROM_ADDR=0x52
+-CONFIG_FSL_ESDHC=y
+-CONFIG_MTD=y
+-CONFIG_MTD_NOR_FLASH=y
+-CONFIG_FLASH_CFI_DRIVER=y
+-CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+-CONFIG_SYS_FLASH_EMPTY_INFO=y
+-CONFIG_FLASH_CFI_MTD=y
+-CONFIG_SYS_FLASH_CFI=y
+-CONFIG_SYS_FLASH_QUIET_TEST=y
+-CONFIG_SYS_MAX_FLASH_SECT=128
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_DM_MDIO=y
+-CONFIG_PHY_GIGE=y
+-CONFIG_E1000=y
+-CONFIG_MII=y
+-CONFIG_VSC7385_ENET=y
+-CONFIG_TSEC_ENET=y
+-CONFIG_PHY_ATHEROS=y
+-CONFIG_PHY_BROADCOM=y
+-CONFIG_PHY_DAVICOM=y
+-CONFIG_PHY_LXT=y
+-CONFIG_PHY_MARVELL=y
+-CONFIG_PHY_NATSEMI=y
+-CONFIG_PHY_REALTEK=y
+-CONFIG_PHY_SMSC=y
+-CONFIG_PHY_VITESSE=y
+-CONFIG_PHY_FIXED=y
+-CONFIG_PCIE_FSL=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_PT7C4338=y
+-CONFIG_DM_SERIAL=y
+-CONFIG_SYS_NS16550=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_FSL_ESPI=y
+-CONFIG_USB=y
+-CONFIG_USB_EHCI_FSL=y
+-CONFIG_USB_STORAGE=y
+diff --git a/doc/README.mpc85xx-sd-spi-boot b/doc/README.mpc85xx-sd-spi-boot
+index 7608fc3aacb..8e98fc9f659 100644
+--- a/doc/README.mpc85xx-sd-spi-boot
++++ b/doc/README.mpc85xx-sd-spi-boot
+@@ -59,9 +59,6 @@ P1022DS		config_sram_p1022ds.dat
+ P2020DS		config_sram_p2020ds.dat
+ P1020RDB	config_ddr2_1g_p1020rdb_533M.dat
+ P1020RDB	config_ddr2_1g_p1020rdb_667M.dat
+-P2020RDB	config_ddr2_1g_p2020rdb_800M.dat
+-P2020RDB	config_ddr2_1g_p2020rdb_667M.dat
+-P2020RDB	config_ddr3_1gb_64bit_p2020rdb_pc.dat
+ P1020RDB	config_ddr3_1gb_p1_p2_rdb_pc_800M.dat
+ P1011RDB	config_ddr3_1gb_p1_p2_rdb_pc_800M.dat
+ P1010RDB	config_ddr3_1gb_p1010rdb_800M.dat
+diff --git a/drivers/ddr/fsl/Kconfig b/drivers/ddr/fsl/Kconfig
+index b11fa79ca59..d5c0af7d3b1 100644
+--- a/drivers/ddr/fsl/Kconfig
++++ b/drivers/ddr/fsl/Kconfig
+@@ -291,7 +291,7 @@ config SYS_OR7_PRELIM
+ endmenu
  
--   For Nand boot(available on P2041/P3041/P5020/P5040):
-+   For Nand boot(available on P2041/P5020/P5040):
- 	To build the NAND boot image:
- 	make <board_name>_NAND
+ if TARGET_P1010RDB_PA || TARGET_P1010RDB_PB || TARGET_P1020RDB_PC || \
+-	TARGET_P1020RDB_PD || TARGET_P2020RDB
++	TARGET_P1020RDB_PD
  
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index c057504cf66..fb0dc39cf35 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -970,7 +970,6 @@ config SYS_DPAA_QBMAN
- 		     ARCH_T2080 || \
- 		     ARCH_T4240 || \
- 		     ARCH_P4080 || \
--		     ARCH_P3041 || \
- 		     ARCH_P5040 || \
- 		     ARCH_LS1043A || \
- 		     ARCH_LS1046A
-diff --git a/drivers/net/fm/Makefile b/drivers/net/fm/Makefile
-index b34209d2b3e..af8fca353a9 100644
---- a/drivers/net/fm/Makefile
-+++ b/drivers/net/fm/Makefile
-@@ -14,9 +14,8 @@ obj-$(CONFIG_SYS_FMAN_V3) += memac.o
+ config COMMON_INIT_DDR
+ 	bool "Do not have a TLB entry to cover common DDR init with serial presence detect (SPD)"
+diff --git a/include/configs/p1_p2_rdb_pc.h b/include/configs/p1_p2_rdb_pc.h
+index 2d9d5b27511..2ef8fa02188 100644
+--- a/include/configs/p1_p2_rdb_pc.h
++++ b/include/configs/p1_p2_rdb_pc.h
+@@ -60,25 +60,6 @@
+  */
+ #endif
  
- # SoC specific SERDES support
- obj-$(CONFIG_ARCH_P1023)	+= p1023.o
--# The P204x, P304x, and P5020 are the same
-+# The P204x and P5020 are the same
- obj-$(CONFIG_ARCH_P2041) += p5020.o
--obj-$(CONFIG_ARCH_P3041) += p5020.o
- obj-$(CONFIG_ARCH_P4080) += p4080.o
- obj-$(CONFIG_ARCH_P5040) += p5040.o
- obj-$(CONFIG_ARCH_T1040) += t1040.o
-diff --git a/drivers/usb/common/fsl-errata.c b/drivers/usb/common/fsl-errata.c
-index 66ff93b2982..e2f0563e33c 100644
---- a/drivers/usb/common/fsl-errata.c
-+++ b/drivers/usb/common/fsl-errata.c
-@@ -54,7 +54,6 @@ bool has_erratum_a005275(void)
+-#if defined(CONFIG_TARGET_P2020RDB)
+-#define __SW_BOOT_MASK		0x03
+-#define __SW_BOOT_NOR		0xc8
+-#define __SW_BOOT_SPI		0x28
+-#define __SW_BOOT_SD		0x68
+-#define __SW_BOOT_SD2		0x18
+-#define __SW_BOOT_NAND		0xe8
+-#define __SW_BOOT_PCIE		0xa8
+-#define __SW_NOR_BANK_MASK	0xfd
+-#define __SW_NOR_BANK_UP	0x00
+-#define __SW_NOR_BANK_LO	0x02
+-#define __SW_BOOT_NOR_BANK_UP	0xc8 /* (__SW_BOOT_NOR | __SW_NOR_BANK_UP) */
+-#define __SW_BOOT_NOR_BANK_LO	0xca /* (__SW_BOOT_NOR | __SW_NOR_BANK_LO) */
+-#define __SW_BOOT_NOR_BANK_MASK	0x01 /* (__SW_BOOT_MASK & __SW_NOR_BANK_MASK) */
+-/*
+- * Dynamic MTD Partition support with mtdparts
+- */
+-#endif
+-
+ #ifdef CONFIG_SDCARD
+ #define CFG_SYS_MMC_U_BOOT_SIZE	(768 << 10)
+ #define CFG_SYS_MMC_U_BOOT_DST	CONFIG_TEXT_BASE
+@@ -125,7 +106,6 @@
+ #define CFG_SYS_SDRAM_BASE		CFG_SYS_DDR_SDRAM_BASE
  
- 	switch (soc) {
- #ifdef CONFIG_PPC
--	case SVR_P3041:
- 	case SVR_P2041:
- 	case SVR_P2040:
- 		return IS_SVR_REV(svr, 1, 0) || IS_SVR_REV(svr, 1, 1);
-@@ -85,10 +84,6 @@ bool has_erratum_a006261(void)
- 		return IS_SVR_REV(svr, 1, 0) ||
- 			IS_SVR_REV(svr, 1, 1) ||
- 			IS_SVR_REV(svr, 2, 0) || IS_SVR_REV(svr, 2, 1);
--	case SVR_P3041:
--		return IS_SVR_REV(svr, 1, 0) ||
--			IS_SVR_REV(svr, 1, 1) ||
--			IS_SVR_REV(svr, 2, 0) || IS_SVR_REV(svr, 2, 1);
- 	case SVR_P5010:
- 	case SVR_P5020:
- 	case SVR_P5021:
+ /* Default settings for DDR3 */
+-#ifndef CONFIG_TARGET_P2020RDB
+ #define CFG_SYS_DDR_CS0_BNDS		0x0000003f
+ #define CFG_SYS_DDR_CS0_CONFIG	0x80014302
+ #define CFG_SYS_DDR_CS0_CONFIG_2	0x00000000
+@@ -155,7 +135,6 @@
+ #define CFG_SYS_DDR_MODE_1		0x40461520
+ #define CFG_SYS_DDR_MODE_2		0x8000c000
+ #define CFG_SYS_DDR_INTERVAL		0x0C300000
+-#endif
+ 
+ /*
+  * Memory map
 -- 
 2.47.3
 
