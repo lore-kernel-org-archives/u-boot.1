@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70C15606A31B
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 12:55:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79937606A319
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 12:55:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=tBFaljHg;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=EPc9hrbX
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XBua2egp;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=PDpGUpjm
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id ECA70608CE;
-	Wed, 21 Oct 2026 12:55:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 514DA60AFD;
+	Wed, 21 Oct 2026 12:55:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vsSWzhF7qP0C; Wed, 21 Oct 2026 12:55:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6084E6085B
+ id 5qboxWVvwi4a; Wed, 21 Oct 2026 12:55:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4E385608EA
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792587325;
-	b=KjFZyPtTR9deKfkNOqZloJ3nh2AdMsCfW2U8gnXtK/k8gF2YR03w8+6+mcDqGZrZ8AZL
-	 jBi4LcaSGS8ZO92xBzpEMvdHSUIkbZg4QNYU1ad9hsaraJC5tfd7A5v9LCrB44qHdz9MX
-	 idLWe9HFwLa0YrZrIb8Oba3matVUzIwv9iFmsj4v7Vvybdo1QbP4vYT4y0ySM/439XAO0
-	 019cK8U/yeNC0ovjtgic/Kd0NuxJVfIvS9HEhKuo5rZMfvm9evkwd9X/MwIYnnvtsKUpX
-	 Por1FMyWyjNQAVXPdZeatFPhuvNjCfaMPU8b5WuSIIyn9z66UkRAILW/DSZy9wtn7Pw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792587336;
+	b=I4rBJeL/W1tAU1ocppwkgrUsmhELGny44JcWQJ81T1ezeshe/Sb2/hBvaYEK2rJAsmBZ
+	 xaNtvt0OJsFfT4O6oWbPhiCtcESqqH90sTNxdWgaWRvyzBA9kpFt/Nzz5cnUk5hPI92Gq
+	 /I8NnPH/TgF76VrfeHE9iT23esZ7E3nZviwl+CwDvPS6R6yDGz69SXGpWhuKU702BzCwz
+	 HCitj75pLY1njzYkAz1OMJd+6Tn/zGsXmt7ma/50mnM+PYfis56MkQb1m0PObWnGvS3Vg
+	 NQo1m0dEWmbWvB2XZbU2D09hJCP3S/zatBjpGKyHYHynsamBrlCV4Ero63aKLVHoxJg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792587325;
+	c=relaxed/relaxed; t=1792587336;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,135 +33,135 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=O0iGoD7zYCL1UXlu91Te7duGyunZ/U/synolaap0hGM=;
-	b=CoPOVVZ2pYYNPMwJo8UbY16YG1EOaPZ0vn0vRVsb6ffMk8ViMNTXZ7ggPKfDaVijGQrp
-	 Qx+bJ+s+0bOj56COzzsuDmlqjO8m9PRxyFxYFHXYlofY6ZI/pJrwaE4ERFINQaUBbQ1Ra
-	 jfl7o49R9y4QthXU1MamU5j7JdhnSDRDZGGX2UTm2KzdykLCJnTu8dlsgvaqMKpq3mNHY
-	 3W36OdwcbH578DjDtvQeNE4FEYGvWDevgZIDNvGJLW9PEVl3Sq17+83IcgEYCAzg6HaNZ
-	 28Zi92BvUTd6f9cYyv6sK0lbgX9u7dPAVTT1b065a46Z4VENzr/8zIAnR9x2BDtqCkw==
+	bh=lBsWZEywnK1dQWbrnWBGPhggIWJGqZBgzIYeGjxxziw=;
+	b=KKsULk6p2qU1a+CJ06RI1VYrMvkjqNb94vb95M8dQeve6YCz7l6ytneehDUf6iUzhzJr
+	 cNFxk8X3K6VkDnKo8mUcS0L3Ff4F9GLrV7y7v4/bd29WEK//0tz5lY/kyH2k43KrOdDs6
+	 kQ1S50u+rcpoleY6+lw6+IIebZPC6s1GaLa2XUzFsv2DT5jwkJB2vfot/r3mi5ih/xFlX
+	 Z/wN8Fb2HlHgXOcODjn08Pn2V+bvHSq4r64KXGtIq8yEhqKeiwkRLsyrbe8Ow41AHaw4G
+	 cr7F1PkjPuP4Hhwox/tKA42voVedFvkH0cFWvNZdK31pjScnov4XHjbimukMWEdQcFg==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792587325;
-	bh=O0iGoD7zYCL1UXlu91Te7duGyunZ/U/synolaap0hGM=;
+	d=lists.u-boot-project.org; s=default; t=1792587336;
+	bh=lBsWZEywnK1dQWbrnWBGPhggIWJGqZBgzIYeGjxxziw=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=tBFaljHgALKCX3ULmCRVN2I3eX3vUnsGanDD88+bt7k5dlsJ1b756sem/H1WIS6Nl
-	 /ZLnrsJzjCAAyBnL8uNTertYYwpqSFYKvNGR0QfKzgx32v0iW04oqSUGbQI3zAmSBG
-	 0LZJvciDh6XlPxw3+zaQd5uCup93+/1V0gdBYtKKXzKGFGzHojySI3ZtlxNbuhxOpW
-	 GDIUTKoBuUkGeBGhSZ6m2F3eIj7xwpN2GReQPU5QBxp6StK96gaT3Y53jMsnSBGp3e
-	 IOD2c6xWdCB2NhR7IUHcef2O4CiotaY7Y7AYh59GKVCHK+Ny+In085CGipxCz8D0rP
-	 s5hYsyVSM54VQ==
+	b=XBua2egp0Gfh/HkObjmrHP3Z778J3qsruq1fx+xj/oc40kvlXDNFuHl3q5BMabIXJ
+	 lsT2GeL4zkvV9mmUTb1tVPbsm3eBiyg+AN8WV9hl5WETEnwcmls15dxWifhj9l4l8A
+	 2OtEELvgUWGGOoEDQqlR2qM1KnT7OsRb+WYRPlDGIWxGOWGwe1yXj9FGHr2LMABT3T
+	 EqgZotWPGhVDNwbQsyxdbbxZSKZ1Cz4J4kpxcZmz3inCTJ9tVFTLGJzh7QFrwmlcD0
+	 af9aJO61fKuLwpvg/2nss7sc/t2EUKa3atNOTM6Lh00dpk8fNb4eAg4ZYAfyQtis/G
+	 okUPvqlAOEYVg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6084E6085B;
-	Wed, 21 Oct 2026 12:55:25 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4E385608EA;
+	Wed, 21 Oct 2026 12:55:36 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 59DEE23A
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:55:24 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id F1FC4765
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:55:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4BF8C810A2
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:55:24 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id E3E61810C5
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:55:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id y_YlCjzkxjxP for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 12:55:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2BC8680E0F
+ id tqH02B_LMMdf for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 12:55:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DF64E810A2
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::e36"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792587323;
- b=qW/vSnvyL+am4ACCcbeGCXkr+KeZET66RSjHZ/0rWvLreE9swEH+0ERX36iMFp0gCNXl
- avrIKF4WLfmfVHVmb4AgW7g42EMB1rLITX9c++CQKtlHdc7ncixpN9OgioeqTy2FODXU8
- j1wc7Nx6Is5SEUEGqh+KafmY6V4bUb1FxvAf8HMqJJjgmwGaw8ZRkaQvdSXsPY3cEocGJ
- cFGVB91Sv8KeREWwG+654Jiwz+Oyekxi9GPVT+c/qKLBnNAvY1mflLkezDW5tGzkc0wtI
- LdTaPy6uQFicas4y5bVwkw9KT9PGmSepBqK7oP90I9Bfs9iPj3r5diqkPBYHw7ycwjQ==
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::a34"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792587334;
+ b=iu/qngX8jr9ilRDK0gEb5OwDvz7OyqpObi1j4uhiwlqdyH9ExIxLhupt1My+jrIP40Bf
+ UGqFpWasipOq3/GX1zOUDtzU8RiXe0uZIpLfFdSWCDE/ujJLbMfpDpKrEr6EBdX/wCm0k
+ 9RKEt6LOdxSx2BA70XFrT524+ceoKfMDIE30/IbQBICEHA1JsAHT27uamilEcg2EG2FZK
+ crdI3yQXclejf8ahplZ00pGdx/VvV3IdsLtndXgjloEGaiFu+3vH2ID4W5kTc6vFdHvQ4
+ K5sfP3BieHguxtHIHzDW+mvCluNkGj5bD/3pOzs9NOtc3VZSK4q/kpwgk+BV31D8inA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792587323;
+ c=relaxed/relaxed; t=1792587334;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=O0iGoD7zYCL1UXlu91Te7duGyunZ/U/synolaap0hGM=;
- b=k3XEfw89iARyPg7jnLthRX/TSImqctXF3PzJ19G4nUdEy239rkG08jPyvk0J9whlMLz3
- vL5ahTNfwSZAHX1EsGpoUFPm7FQtBhwJq1EcpxIn3FDhMRMkdrVXj5Cw0RJTmsVQYP4mF
- BSJeQrC1DhbcnfDv8bMHXyMoh4hSBSlP3xCKxMxKDW8gDRKyBzR8o2jaCTEcX0Jx0SqLJ
- mBneFkb/xEfXiyDhjW0HURe8VrhMKCDAhbund1ozGlZw578E0a/Yp5y44i3o2jH5jKD5B
- Q0vqoVA1/zc3yxPgWp2TuDqHuJRLtjA7tLDFPwYmeH0DuS47vZDYjqwJK7LsQ6VvJnw==
+ bh=lBsWZEywnK1dQWbrnWBGPhggIWJGqZBgzIYeGjxxziw=;
+ b=ottwDw9H3DPJM7CgRXb7sO2F2M0eUQP6tCAPJ3LOcGCyQ/erl5xV2m79WGboKe3uxblG
+ hNgx1yU9SGSfp+koUcWGYVL42Wes1/JA/WOwpIbIOQYCCBOk/1uu8bGseC2E5EX0rEZd0
+ qgq4E+SYRG606WJKRM0zYn/h9JLBcpgX7lG58nWCS69Mi2xTbjKEG7iXpCIpQNRz/49ed
+ z4pqU2ZzRiJ+IkW+dX+qeWwgwL9vu5v8ih6p7kCkLsMWRX3wJoeV+agqq92s12Efs26IS
+ ZFFBBtH5ejQHxl0P3PVdw7nuvc3NCb7CJvFkAU656P53axRb9aebcI1ZmSA9Lw+7YFQ==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=none header.from=baylibre.com;
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=EPc9hrbX; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::e36"
+ header.s=google header.b=PDpGUpjm; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::a34"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::e36; helo=mail-vs1-xe36.google.com;
+ client-ip=2607:f8b0:4864:20::a34; helo=mail-vk1-xa34.google.com;
  envelope-from=hfranco@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=EPc9hrbX
-Received: from mail-vs1-xe36.google.com (mail-vs1-xe36.google.com
- [IPv6:2607:f8b0:4864:20::e36])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2BC8680E0F
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:55:22 +0000 (UTC)
-Received: by mail-vs1-xe36.google.com with SMTP id
- ada2fe7eead31-7c4818e4165so578002137.0
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 05:55:22 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=PDpGUpjm
+Received: from mail-vk1-xa34.google.com (mail-vk1-xa34.google.com
+ [IPv6:2607:f8b0:4864:20::a34])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id DF64E810A2
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:55:32 +0000 (UTC)
+Received: by mail-vk1-xa34.google.com with SMTP id
+ 71dfb90a1353d-5eab93a9862so182701e0c.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 05:55:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1792587321; x=1793192121;
+ d=baylibre.com; s=google; t=1792587332; x=1793192132;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=O0iGoD7zYCL1UXlu91Te7duGyunZ/U/synolaap0hGM=;
- b=EPc9hrbXhZUy0yaBu7Mh2mZdE/Xcp5OaxZKc7lQaDZaDIYOJYBchsyq8O9BqKetzAM
- Yi0KR4lfE5zVSEYFywXYjSRrH3qk91/oAZd/IX0/BH5tGb+tZYbIPtloZqovuIgVOULa
- ukXwfKZwx4En7Jxb3IuwpsJUroi+KEtmKbDXSueqo1zmxr4SXLd1ND5rHqQv7W4s3xJK
- FOZ+xt9KYDj8Jfg/JCbwXnRa2Hh65vJ3Z8Hr4ENOumOl72Jihnlf5h4TJOMH7zyfHlqS
- MK5T1Qjo+d/vHNgdg+2FzFSWp8UmLOPOtWYPFNPi/usUqMBaiIIWm5Ii+V4kjmxhlInx
- X9kA==
+ bh=lBsWZEywnK1dQWbrnWBGPhggIWJGqZBgzIYeGjxxziw=;
+ b=PDpGUpjmNA/mLZpVUfDQE3FaQ4e0j6Lk74Lr6htO8vQrV269YnFrkudYJ1hO5Tjx/W
+ +ZWfgAjF3iwQgnV+X7TJLvP5T53ijTbAepN+ulGyKDyWBv7jW3O0P+RmaYJvNTHOQUpu
+ rG/njKS0QmJCPb+4yN0da8AKeDN+eMWC5kZHhgQ0gkd76w7g1FKSrtaaOHNuLIh08GDi
+ rBikDiI78QqMyYvxmKIgHb9FYk0FB9W4J5TI+//SIislD9L4uripBkdS+GyTL0vAvoHN
+ trWRSz1aWLhN/J8DX3pfLc6ByErGQ8n/yhjmUIZU7JxAnLURclSS3tAWx2GYPAjwcfYg
+ VX1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792587321; x=1793192121;
+ d=1e100.net; s=20260707; t=1792587332; x=1793192132;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=O0iGoD7zYCL1UXlu91Te7duGyunZ/U/synolaap0hGM=;
- b=0kmsqZF6sjaxJ0nl91SuPTlPAPPWGNwe4odqJ+0FZaLeT86bG/r0KDEjbIpZLrIcuj
- fyttkx+YZwdFlVPY8HQ3Bwb+ckOuHMxWeLTz52aSaj6U6/Y8efwcw4qIfv0U1QGNE+S6
- dsU5Leu3YigYsNacTkasPYsu2UT0AtzlZNqHx5L3FIbALGzJRho/vgDDxACDD0hUj/QH
- QwEhGpEAVzFxuFYsL0nGlUB3hcc/dfWlcvpu1ruvuFcedwIkESAW1DXywYnJHYLYStFz
- LmJCKbZRmTRCkhfOJhaZSUiX3vpnQty6Ul2EmLzgd8RWdJDshtqd9xLVjPmtiKEpU5qJ
- SrKg==
-X-Gm-Message-State: AFq9FYKpcZjjjNFkxzyVgVqbJlV9S8azhRMicqoHgD/MZDfG3BJf5Qo1
- YN5oEIHupWeQcEfgjAZkdSnf/LPv45y45llbkWiy8ZjB0VUD+N6s0zGO9RJ78UnwwG0=
-X-Gm-Gg: AYBFou1pVadyuYMmkU8HOuSf8SPS6qD2K1BmUZHb0QtzAbelGJMAxYvdqeBJ41gZEzN
- td50FsBFbXFk5JKAGXJa3jIWXD8iKT8Nq3aUaffx/EHSHxSfo0vae7YveCUR6D22cth5LFi4jqn
- peDZ0XpLJs+DRvm/m0Q2nF6zu3ITgdFkZcybgOshJfQyP8pJ7nT3QHrb3GR2hHcbpQvVZ1gk/vX
- Mxcv/HZt7juuIaxEW/VHUH33WkibciqFamDJsf0tXSAPZ5XpR7VcQ3lLaWmuPeNHhG9YkKLKjnS
- U+yCRyGLN9L0t+4knqDY5qJeGxJ4WsnidsrNbZS3zDpQoQsYn2hMSn3xqrKmWkgR63T3RtvpVZx
- edc0xDMqlQauvKxuNvqPp2B2kMSf1c7qH0V4iGwYTFjHRyuh6rv22sxg6/Ap/JMQ7Ad3VSBeJGw
- AZ5xxOUtcC3/u7G63XM93YoQzrZonUTYZA6aReWp1LH/jaR0GNfAiqzi7/+dvA0IvmAtBWBQtO1
- N0nC4mQOrSwNjRKWyM3EFSGntvjkh8GlHM9J59L6kSDHeK7+5kXGH8XN9fOXXGfdGCNs2iHHQcr
- ZErCqtQboKsr4XzZ9bY=
-X-Received: by 2002:a05:6102:a1da:10b0:7cc:38aa:63a with SMTP id
- ada2fe7eead31-7cc7bbe310amr864133137.17.1792587321465; 
- Wed, 21 Oct 2026 05:55:21 -0700 (PDT)
+ bh=lBsWZEywnK1dQWbrnWBGPhggIWJGqZBgzIYeGjxxziw=;
+ b=oxEAF//Pt5zpi5UUta8Xw/eJ6CjOTphENYkbg/TshxSKT+P2OLhI24YGEeRz8K+I4d
+ LPTOxyvefkyiMvpXh0JpUQDwhJNOb6q1Urr/3QiHY1328e8z/b3ITsKz7QHvrJTHtW3S
+ F7WGcZ1U6plqfOzpsiv3DR6Z9PWHNaXoCQcX7uTX4r4s2jfcXse+nyxAvf0MWoWlf0+h
+ XC1O1s+i2YqdMgwYOD5bLz3TynihfDy59ykARe+6W8dTu5E1meLA4XBxEzqwdxjMsDTw
+ 8lS9CLFbRHwF3pkvQBL08HpyM0Q4qNzCjva+7JHArJAM/97OOeLXXXH6V7TEDd2VosPw
+ duEA==
+X-Gm-Message-State: AFq9FYJmr9lF/cL1Vt9OrMktbURGi04AF8Zo72vBeiLiZ5TE6aCMWlNV
+ qbSKVqjq5wH5E/dKmnaOTkxYEfI6cNZwNu7LRnrry/e4BAjajCBDXbpR30HRa93wXi0=
+X-Gm-Gg: AYBFou25bIe3XJdJwFrbjGxASxwWC8CXuu5pacGVhpR1DuaXS3nMDuEPlwTkFdT9H9x
+ d0IIIhAvNsraYeobVGZyPN4z4OmRCRCLSO9W4IGP1AmkCOv71kdct3rJ5A5n8PCcq7PoUE+OnKG
+ 0QM8PRO8mFbb3tBKWP7guwg0gsXbzTSSh71AsciESWZ1a3rFDKmPGd2MhOn2L0t441CK0Ql0WhD
+ gHt6GLTjkNF6zE3fxFLzmuBGYf0lSmEoBaSZIaYMh2iwQ6epsLusGiPV+3VsqNE/K3s0otY6RJ1
+ UIIhia3OZ+rLHzvAcJSyaL+xFaVoRzUU+D9YZRFlwpNY4Yzt3M0h8w1Lo3bs7m8B7ZPIXpP1u2v
+ zoUJ+/GD7foFb4MlS5MjagdnAiaCuwaQH3dOGckm0lFy7HMJ4fmoGdCyMYBYISGsPsdERLi6XKd
+ H27StRk8riNdrLH1RWWCGfd9ehL/0HtJqTGlfOkwXKR+6gtcu988e1rUbM1qTfzU1kYZccGK5+N
+ brqFhlXhnqQXYDZV7Lb1dyiHvOdXMOGmyOW7R0RFAqfPxOeBA+7ujX7tU8rgpIwd+AMS+iazQO6
+ q2foA6LPN9ph0cdAOUM=
+X-Received: by 2002:a05:6102:524a:b0:7cc:232b:f5a9 with SMTP id
+ ada2fe7eead31-7cc92740daamr585573137.24.1792587331403; 
+ Wed, 21 Oct 2026 05:55:31 -0700 (PDT)
 Received: from [127.0.1.1] ([2804:14c:4c5:8bf0::33ca])
  by smtp.gmail.com with ESMTPSA id
- a1e0cc1a2514c-990d0e0ba56sm3013863241.1.2026.10.21.05.55.16
+ a1e0cc1a2514c-990d0e0ba56sm3013863241.1.2026.10.21.05.55.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Oct 2026 05:55:21 -0700 (PDT)
+ Wed, 21 Oct 2026 05:55:30 -0700 (PDT)
 From: Hiago De Franco <hfranco@baylibre.com>
-Date: Wed, 21 Oct 2026 09:54:22 -0300
-Subject: [PATCH 6/8] board: sophgo: milkv_duo: enable RTC power and reset
+Date: Wed, 21 Oct 2026 09:54:24 -0300
+Subject: [PATCH 8/8] doc: board: sophgo: milkv_duo: document the SPL boot flow
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261021-milkv-duo-spl-v1-6-ee7618860237@baylibre.com>
+Message-Id: <20261021-milkv-duo-spl-v1-8-ee7618860237@baylibre.com>
 References: <20261021-milkv-duo-spl-v1-0-ee7618860237@baylibre.com>
 In-Reply-To: <20261021-milkv-duo-spl-v1-0-ee7618860237@baylibre.com>
 To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>
@@ -183,119 +183,126 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Let the RTC power domain handle shutdown, warm reset, power-cycle and
-watchdog reset requests, and stop the board from powering back on by
-itself after a power off.
+Update the board documentation now that SPL replaces the vendor
+FSBL: OpenSBI is built standalone and passed to the U-Boot build via
+OPENSBI=, which produces fip.bin directly instead of u-boot-dtb.bin.
 
-Without this, the reset and poweroff paths are left in their BootROM
-defaults, which do not match what the vendor FSBL configures.
+Replace the FSBL + vendor fiptool boot instructions with copying
+fip.bin to the SD card, and refresh the sample boot log to include
+the SPL banner.
 
 Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
 ---
- board/sophgo/milkv_duo/spl.c | 53 +++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 52 insertions(+), 1 deletion(-)
+ doc/board/sophgo/milkv_duo.rst | 71 ++++++++++++++++++++++++------------------
+ 1 file changed, 41 insertions(+), 30 deletions(-)
 
-diff --git a/board/sophgo/milkv_duo/spl.c b/board/sophgo/milkv_duo/spl.c
-index 8b2dc2756ae..97681e5a61b 100644
---- a/board/sophgo/milkv_duo/spl.c
-+++ b/board/sophgo/milkv_duo/spl.c
-@@ -2,7 +2,7 @@
- /*
-  * Copyright (c) 2026, Hiago De Franco <hfranco@baylibre.com>
-  *
-- * PLL setup based on the Sophgo FSBL (https://github.com/sophgo/fsbl),
-+ * PLL and RTC setup based on the Sophgo FSBL (https://github.com/sophgo/fsbl),
-  * plat/cv180x/platform.c.
-  */
+diff --git a/doc/board/sophgo/milkv_duo.rst b/doc/board/sophgo/milkv_duo.rst
+index d99a945a61f..39d54d70cf3 100644
+--- a/doc/board/sophgo/milkv_duo.rst
++++ b/doc/board/sophgo/milkv_duo.rst
+@@ -14,54 +14,65 @@ Support for the following drivers is already enabled:
+ 1. ns16550 UART Driver.
+ 2. Synopsys DesignWare MSHC Driver.
+ 3. Synopsys DesignWare Ethernet Controller.
++4. SPL with DDR2 initialization.
  
-@@ -13,7 +13,9 @@
- #include <hang.h>
- #include <linux/bitops.h>
- #include <linux/delay.h>
-+#include <linux/iopoll.h>
- #include <linux/kernel.h>
-+#include <log.h>
- #include <spl.h>
- #include <spl_load.h>
+ Building
+ ~~~~~~~~
+ 1. Add the RISC-V toolchain to your PATH.
+-2. Setup ARCH & cross compilation environment variable:
++2. Build mainline OpenSBI for the generic platform:
++
++.. code-block:: console
++
++   cd <OpenSBI-dir>
++   PLATFORM=generic CROSS_COMPILE=<riscv64 toolchain prefix> make
++
++This will generate build/platform/generic/firmware/fw_dynamic.bin.
++
++3. Build U-Boot, pointing OPENSBI to the fw_dynamic.bin file:
  
-@@ -52,6 +54,25 @@
- #define CLK_DIV(div, src)		(((div) << 16) | ((src) << 8) | BIT(3) | BIT(0))
- #define clkgen_reg(off)			((void __iomem *)(CLKGEN_BASE + (off)))
+ .. code-block:: console
  
-+#define RTC_BASE			0x05026000UL
-+#define RTC_EN_SHDN_REQ			0x0c0
-+#define RTC_EN_PWR_CYC_REQ		0x0c8
-+#define RTC_EN_WARM_RST_REQ		0x0cc
-+#define RTC_EN_PWR_VBAT_DET		0x0d0
-+#define  RTC_EN_PWR_VBAT_DET_PWR_UP	BIT(2)
-+#define RTC_EN_WDT_RST_REQ		0x0e0
-+#define RTC_CTRL_BASE			0x05025000UL
-+#define RTC_CTRL0_UNLOCKKEY		0x004
-+#define  RTC_CTRL0_UNLOCKKEY_VAL	0xab18
-+#define RTC_CTRL0			0x008
-+#define  RTC_CTRL0_WRITE_MASK		GENMASK(31, 16)
-+#define  RTC_CTRL0_HW_WDG_RST_EN	BIT(11)
-+#define RTC_POR_RST_CTRL		0x0ac
-+#define RTC_EN_REQ_TIMEOUT_US		100000
-+
-+#define rtc_reg(off)			((void __iomem *)(RTC_BASE + (off)))
-+#define rtc_ctrl_reg(off)		((void __iomem *)(RTC_CTRL_BASE + (off)))
-+
- struct cv18xx_clk_div {
- 	u16 off;
- 	u32 val;
-@@ -173,6 +194,35 @@ static void cv18xx_pll_init(void)
- 	writel(0, clkgen_reg(CLK_BYP_1));
- }
+    export CROSS_COMPILE=<riscv64 toolchain prefix>
+    cd <U-Boot-dir>
+    make milkv_duo_defconfig
+-   make
++   OPENSBI=<OpenSBI-dir>/build/platform/generic/firmware/fw_dynamic.bin make
  
-+static void cv18xx_rtc_init(void)
-+{
-+	static const u16 en_reqs[] = {
-+		RTC_EN_SHDN_REQ, RTC_EN_WARM_RST_REQ,
-+		RTC_EN_PWR_CYC_REQ, RTC_EN_WDT_RST_REQ,
-+	};
-+	u32 val;
-+	int i;
-+
-+	/* Let the RTC domain handle power off, reset and watchdog requests */
-+	for (i = 0; i < ARRAY_SIZE(en_reqs); i++) {
-+		writel(1, rtc_reg(en_reqs[i]));
-+		if (readl_poll_timeout(rtc_reg(en_reqs[i]), val, val == 1,
-+				       RTC_EN_REQ_TIMEOUT_US))
-+			log_warning("RTC: failed to set register 0x%lx\n",
-+				    RTC_BASE + en_reqs[i]);
-+	}
-+
-+	writel(1, rtc_ctrl_reg(RTC_POR_RST_CTRL));
-+
-+	writel(RTC_CTRL0_UNLOCKKEY_VAL, rtc_ctrl_reg(RTC_CTRL0_UNLOCKKEY));
-+	/* BIT(6) is set as in the vendor FSBL */
-+	setbits_le32(rtc_ctrl_reg(RTC_CTRL0), RTC_CTRL0_WRITE_MASK |
-+		     RTC_CTRL0_HW_WDG_RST_EN | BIT(6));
-+
-+	/* Do not power up again after a power off */
-+	clrbits_le32(rtc_reg(RTC_EN_PWR_VBAT_DET), RTC_EN_PWR_VBAT_DET_PWR_UP);
-+}
-+
- void board_init_f(ulong dummy)
- {
- 	struct udevice *dev;
-@@ -190,6 +240,7 @@ void board_init_f(ulong dummy)
- 		panic("Failed to probe the CPU: %d\n", ret);
+-This will generate u-boot-dtb.bin
++This will generate fip.bin, the image the BootROM loads. Binman builds it from
++the SPL, with the 32-byte BL2 header the BootROM expects, followed at offset
++0x40000 by a FIT image containing OpenSBI, U-Boot and the device tree. The
++vendor fiptool is not needed.
  
- 	riscv_cpu_setup();
-+	cv18xx_rtc_init();
+ Booting
+ ~~~~~~~
+-Currently, we rely on vendor FSBL(First Stage Boot Loader) to initialize the
+-clock and load the u-boot image, then bootup from it.
+-
+-Alternatively, to run u-boot-dtb.bin on top of FSBL, follow these steps:
+-
+-1. Use the vendor-provided tool to create a unified fip.bin file containing
+-   FSBL, OpenSBI, and U-Boot.
+-
+-2. Place the generated fip.bin file into the FAT partition of the SD card.
+-
+-3. Insert the SD card into the board and power it on.
+-
+-The board will automatically execute the FSBL from the fip.bin file.
+-Subsequently, it will transition to OpenSBI, and finally, OpenSBI will invoke
+-U-Boot.
++The BootROM loads the SPL from the fip.bin file in the FAT partition of the SD
++card. The SPL initializes the DDR and the PLLs, then loads the FIT image from
++offset 0x40000 of fip.bin through the BootROM API and jumps to OpenSBI, which
++starts U-Boot in S-mode.
  
- 	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
- 	if (ret)
++Copy fip.bin to the FAT partition of the SD card, insert the card into the
++board and power it on.
+ 
+ Sample boot log from Milk-V Duo board
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ .. code-block:: none
+ 
+-   U-Boot 2024.01-rc5-00010-g51965baa36 (Dec 28 2023 - 13:15:53 +0800)milkv_duo
++  U-Boot SPL 2026.10-00011-gf0ec1f67053d (Oct 20 2026 - 15:08:30 -0300)
++  Trying to boot from ROMAPI
++  SD/0x40000/0x200/0x200/0.SD/0x40000/0xca000/0xc9ee9/0.
++  OpenSBI v1.9
++  ...
+ 
+-   DRAM:  63.3 MiB
+-   Core:  10 devices, 8 uclasses, devicetree: separate
+-   Loading Environment from nowhere... OK
+-   In:    serial@4140000
+-   Out:   serial@4140000
+-   Err:   serial@4140000
+-   Net:   No ethernet found.
+-   milkv_duo# cpu detail
+-     0: cpu@0      rv64imafdc
+-      ID = 0, freq = 0 Hz: L1 cache, MMU
+-   milkv_duo#
++  U-Boot 2026.10-00011-gf0ec1f67053d (Oct 20 2026 - 15:08:30 -0300)milkv_duo
++
++  DRAM:  63.3 MiB
++  Core:  23 devices, 15 uclasses, devicetree: separate
++  MMC:   mmc@4310000: 0
++  Loading Environment from nowhere... OK
++  In:    serial@4140000
++  Out:   serial@4140000
++  Err:   serial@4140000
++  Net:
++  Warning: ethernet@4070000 (eth0) using random MAC address - be:2a:c8:b9:53:10
++  eth0: ethernet@4070000
++  Hit any key to stop autoboot: 0
++  milkv_duo#
 
 -- 
 2.53.0
