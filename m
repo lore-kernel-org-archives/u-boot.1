@@ -2,29 +2,29 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95597606BF18
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 16:16:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8D16606B6EC
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 16:16:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=UaMnFsKN;
-	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=Jtgq9sZT;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=yECbhXRU
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Ic6n3yPC;
+	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=DheUd/h8;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=0n74YP7t
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4ACC060ACF;
-	Wed, 21 Oct 2026 16:16:45 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AB38560AEE;
+	Wed, 21 Oct 2026 16:16:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ulAx_OxBrstJ; Wed, 21 Oct 2026 16:16:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org EEADD60A62
+ id haqWPT1qSHn9; Wed, 21 Oct 2026 16:16:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2534660846
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792599389;
-	b=YjttaWQ9ItUvjOEdoqfYiFfhO4Mhftc2eHHWaDZ2ONz3EFrc43ZHp9cgbygNOppwNIYa
-	 xLoXAh8tFRBgKse+9P54z38klnV0FsVqpRngvm9Tm5AqgHWtRIB61Q6GKdb9vUEAchpc9
-	 NEvhoV+Gn93t+0SZ1vk+3Luhh7GASdBxlXTqPdVXd/8KStj+MoJmrloPSp+89SRjS3InY
-	 FWTvMhcOsUGQ7PoN3+W0Dum8spe7marynDtLuwYSnPgIAVBOw8T+dCrOCHwRIGUtSeUK8
-	 1VFTNoRIZWSCNdJNm/rE9Hv5HTACRV4AWuUhQwtQWibvhTVqD7+BwLJQjAPocAI5GIA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792599392;
+	b=YzBCEadC0uCwQEcOFJaIP8QD8onBuCVf3Es+X29kx/vevsh1PdlBrFAtBBnXlBPL3A3T
+	 D3oz9N9V51V2T5W9mT0qDPLTiUijB26kJpfA2W/8YghH26wU+dwH4jcU31lsmhR+EaTpd
+	 TTjYNCl9beAubw+vJvs5ZEejFIqYeyTGrbNW9XmG9V0iiiA+fDl9gYhtWMErcOXFQF7Ll
+	 TMOrvt7I5Jw7h9i1nA6tA9E2k6/t/CZ5C3Wc0nSHGjE98kEwrpisSGdSvmiHZ7vYbvK1J
+	 7tyFuOdvDPggjAtUmZT2iQbpc06zovA3DGFvTcsGyUgUg5Va5m3QelANOM5ktzsUOVw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792599389;
+	c=relaxed/relaxed; t=1792599392;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -33,101 +33,101 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=qiRopueyvWrTwZYw/9jsPIFQh/uKQL81oBU+NdRbmTk=;
-	b=Ht6DQqv0LrKPh9Kss3F+7ByoJd9RVQ7nhHty9SPqOdbBjUEHlmF3jJWbE4TFArM02ck/
-	 de1tDCJ7Vx+z7av0Jyb1iZWMVOMoS/yyTRx0ifTP7N14c462EhIsRQUxN5fzj0/3K3LXB
-	 I1f5r/XGgaU3XpYAcrGLEb7tDPOOf4g4a/zsfIqRekDQ0oScCH3/LaDoprf2w2GEN+mCw
-	 SUVCX1uqq9CdKrGEdRVEBjrIbMpqUo2O3gS/zPZzbYnzQDplRdTqxbspmE3gAGxMC53zG
-	 saG61gAKk7/3Neb3WWzQ1JbxGI1mpXc4sRPemklSD0sXZS6Y5qii2Vm+GeMsfSW6IWg==
+	bh=hPfgVyUDEGG5FhlPizgmjhYpgCwJGGZ5NXPwaA/3h5E=;
+	b=azOH/BN6J1zBZTYNS291CttAsoEqbj34mEYwOzSOd8frtLtG1pOyyBmx6H+ClGcHorSH
+	 p9huiRWU4EITSbwVuv9hfAneH55rOcQfpTjWcujPfkdMcb25yAgPRqh4rQ9qaW4vbTp5w
+	 TO1SI5xxw+z/pxgazlTMitGfieluCaAncbt4pkl+YwJ6lKRR1/tdReEXOTkEkJ6pLj2aH
+	 ALjpg6Z+VnSpeBLqpfJ3ThZpbI3tLV0xbGKXdJFAYKrA57Pt2UrCfYXd+ej319TgOZO7+
+	 BN6i7vRcMtibw4ax1/kBJvRa1VRHS9yrnFteZFGxROjEtNN+znKyw3upUJwNAGa/gBg==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792599389;
-	bh=qiRopueyvWrTwZYw/9jsPIFQh/uKQL81oBU+NdRbmTk=;
+	d=lists.u-boot-project.org; s=default; t=1792599392;
+	bh=hPfgVyUDEGG5FhlPizgmjhYpgCwJGGZ5NXPwaA/3h5E=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=UaMnFsKNft+TO4mSz00qoHGrCCGh8pLaTmXnQkIvHHvF0mDlQUwdl1IfN6vEqVr9S
-	 5kIsIjaXbOqyl5cNDNCPDyMBwN6K0IzKJa48dvem5KR6gdCnyfbGPcvwYwfBibpCSU
-	 yF9EH4lwWxFI/HHPdW3x6Tuz09xCZ8Jc1bQ5BdAHz3lKQgz65kSF2sDSFVsgHLVO68
-	 Rd6PZNO3ocXup+PAheNqv59Q3NDP1H2Dkp1H24///BV9UIR8bOzlsPuWuXXYEi/8EB
-	 BoObjYrKabCIy9dLwk5ayMLhmQASciXSNR8XNM6uPNjxRwpo9354eiGP7CP+I6q2u+
-	 IpNw0XqqfjHTQ==
+	b=Ic6n3yPC0ojpGeEjd4ba/ioSNJQrqKM8jfswmOJiNKo5npKVtpH6RdZS741o5rZbC
+	 sXBgm6FgOENwVOAcKBuZBEugHwpAkKozvPb/yu2lFmUiV6qmTteXlKH9CTwxD14hLl
+	 tsXseoEjSV1XkJppZ42smJhpC3nkHk/g7LIkyg4dXqGraZVvSl6Xw/UypTiMaoc4Iz
+	 dYH8s3A3J5nrjlgvn5gZUr8hGyBdCgWDn5TxcniYtRFjWyc/87lJHl2EAyjx/HnYfS
+	 POE+YOrj92eTPYMj76Qlct5e5/hBmsild8UYK3VBeQ+uB8Y+0r4W5ijqhmRIy5Gjoh
+	 RS3vNHIjjIOHg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EEADD60A62;
-	Wed, 21 Oct 2026 16:16:28 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with UTF8SMTP id 4BCA295C
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2534660846;
+	Wed, 21 Oct 2026 16:16:32 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with UTF8SMTP id DD8C51E17
  for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with UTF8SMTP id 3D59540889
+ by smtp1.osuosl.org (Postfix) with UTF8SMTP id C4085811A1
  for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024)
- with UTF8SMTP id HYPwFJfvSCiA for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 16:01:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0DC1A40877
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792598517;
- b=GuyN/1zPG5d7aetJpbMQm/hoorMoDRv6fmE1RH7M46wHGHQXcqY8XRYiWMmQ32YhOlDL
- t44vwFT6wzEBkpGU6ZFKd9Jg2IDrLeC+G1TAlLq6RqjJktYOxoGfFea64uTGl/EEJI4tp
- 2/0aEPDntbQUs2FOneoA+fRDlYU9K0fFw3LupfTrqtLKYMgYUyFUIOHXA5Dz4K/F3TG73
- YvRb4RsSpYh0MlQ4PQwYnCfRSh7bUCJU8E07r49DxD6x/qCnchr711xEpszmuqsW129r7
- uk1JxqAnJNz8kFYl1r/t+aTvPsLeZAO4aWtmIyy+GF44G3jdGXzE01dtXt54/UZD4QQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024)
+ with UTF8SMTP id ZE7zqUJZ-Ji9 for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 16:01:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9AD8A81160
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792598518;
+ b=jYTE5bvDUPT1UPT/wpsjDot0zLq+TcFk3mEBvRnsdzjc153iv6aUlDFLUtPcq7NC17kT
+ y72aCCAUfKr9CLIYBbo87hHUgwcCaYSPUgFcUyHGQSA/Qqz2yLjb7L1XXYuzbhAs43gDs
+ tnHG36A3xYWJj1CJFFUY+8pnseQmqoHInPSfU/+y8i2eboqHgAE+IXnEzjrbleTtJvI6N
+ HMXy5nahLBMD6NsJkxOyd8D0Km3NjHEH2wNuJlVVn7GH9W6mo91W8qxwxowd1jHlrb1YU
+ uQCLLxFY3hQMpdbBTaa19nF94bohXjfpBmqh/cFjanN7cL/PCZzhi2dVg4JMIpNuxTw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792598517;
+ c=relaxed/relaxed; t=1792598518;
  h=Received-SPF:DKIM-Signature:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=qiRopueyvWrTwZYw/9jsPIFQh/uKQL81oBU+NdRbmTk=;
- b=cCqKME64f89q0K25c4Qp5G76lXbPUxIc3YUcPJ2dUGNRJuTHUkHz1jKqojKf7/xyoM35
- /Pq6s7GAPduOwgtYyNOVWa5d0ZM70+Zm/wiSuzddcKWFB8rUO8z7l7qJGoRLT7uYFUkOf
- Fc8aCc+Xo+66wJ09Qgf0+mYu/iQgpVwBGucoxUyGxV4Mbo7LMjDFsb526PNvmTpMzY2lM
- ivenDg9Y3jvghbjixxEdM8WXNWoQfm8QaG3D5n/0Zulh4sBW0c/HqUXjyAx3ugkaR+PKm
- 1ZPo/2xVYn6uR5rAFXG3J2ulKG9B4ljMkavQAQKHHeJholFP4g0zIB88IC34P0CoYUg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=hPfgVyUDEGG5FhlPizgmjhYpgCwJGGZ5NXPwaA/3h5E=;
+ b=Vmrh2o2nCQXc0hBLOs0MP3jyBaOAKIRRPF2aL50ulmLpi/vtZ6Jbm6KWixEBb7M0lRd4
+ LxnWft8s3zQJZupDGfQxIZ+e3qHZLb3jreKjzDh6DVD8jnlFNlOvgpWqL2/ny8TkbPiyY
+ GiflMmSYq4B6LtOnat1MbH00trR6Vk5nC2vTkHbtLjvd40FS+ym7JG3lsrP/ZfIzh7SI/
+ nhj6TBxMuzh9OHlnGp4nbCJLcxJUWjsShqN8dnaBVt9CLOuxCUo2X5jJ6PGdyamMSZ0ba
+ nRQY/CywC/q9ya82KmXD/KeWcvckQebzVq2p6JwJDC7q13ptlDGsTBkeQK0jOsx1I/w==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=mainlining.org;
  dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256
- header.s=202507r header.b=Jtgq9sZT; 
+ header.s=202507r header.b="DheUd/h8"; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=yECbhXRU; 
+ header.a=ed25519-sha256 header.s=202507e header.b=0n74YP7t; 
  arc=none smtp.remote-ip=5.75.144.95
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=5.75.144.95;
  helo=mail.mainlining.org; envelope-from=brads@mainlining.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=mainlining.org
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org
- header.a=rsa-sha256 header.s=202507r header.b=Jtgq9sZT; 
+ header.a=rsa-sha256 header.s=202507r header.b=DheUd/h8; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=yECbhXRU
+ header.a=ed25519-sha256 header.s=202507e header.b=0n74YP7t
 Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
- by smtp4.osuosl.org (Postfix) with UTF8SMTPS id 0DC1A40877
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:56 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with UTF8SMTPS id 9AD8A81160
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1792598510; bh=qiRopueyvWrTwZYw/9jsPIF
- Qh/uKQL81oBU+NdRbmTk=; b=Jtgq9sZT0pCoj2o7y2kbsWVtWDuY+9KHNFVysywFOADCx89Wfh
- pfrEWSzcu/69FKSnA81mQXaTarsWhuc/nxEauJMrYtjgjU3RxefDqujyWe9YuW9sSquzhvMpQeo
- Pyloij7eTYg7HHEkkG/C7+yZNzL7yHuGD9OA0029+FzDTfRhqU7LsdtVBiVeUeRmjZ4ETfufFEU
- 0GmPS3zsLLQrapQmdzEgS6gYrUmNKYkwPizMHcv66OtuqV5xIngiMKZEjd5ZwAvjUDMiE942wKn
- US7I4B4Yl35MhxE+0bSKIQXqZWHsEFeO9+u1k45gLZA+NkwVLv9qJQspXOC7gl+X+AA==;
+ h=Message-ID:Date:Subject:To:From; t=1792598514; bh=hPfgVyUDEGG5FhlPizgmjhY
+ pgCwJGGZ5NXPwaA/3h5E=; b=DheUd/h80SX3QnJ6l5xcwxFhhb7e2M2cTB6CC5S0kGWtQbstMb
+ 6261SmHXUDwxxlWM5SHE52CMAe0kYpzLoeuEsTnmvmolguJ5yByQxX0e9/NfbW6NFY6P9MEbpAB
+ fSkiLIeYOv1P2vMWkZWLIhMEl+K+ui9G8g4+deT1/PGboWtxU6Vh36tqoEF6d1zjP1TlxlQTuxZ
+ ccV2Lmx/g6k9x4DCYj4CkgWVkT5MHfM7MmO14Y0tj20eMn6w53lqaGUq1hFcExMcSf7PsjthIG5
+ UboCkkqnG/H1j8mvD/U1/jU5u74nPa4EJYggQVuN5qPEdb+eCsjW/DBzzqusbvkYivg==;
 DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1792598510; bh=qiRopueyvWrTwZYw/9jsPIF
- Qh/uKQL81oBU+NdRbmTk=; b=yECbhXRU+y79CLU9QhzUw6VCDchzUFPScVPJI2afpWonUXaoHj
- WxeKlNnTbrUx7EOKfK5olx3pWvMvM1X1kNCQ==;
+ h=Message-ID:Date:Subject:To:From; t=1792598514; bh=hPfgVyUDEGG5FhlPizgmjhY
+ pgCwJGGZ5NXPwaA/3h5E=; b=0n74YP7tESMRGRsryrSLChcKgoVxxnFchDLfllCBbHXREOn9nJ
+ 5DcMsEWm8M+WdjFNOqI3hqJwNKdkkGjESTAQ==;
 From: Bradley Morgan <brads@mainlining.org>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.u-boot-project.org
-Cc: Bradley Morgan <brads@mainlining.org>, Mario Six <mario.six@gdsys.cc>,
- Sinan Akman <sinan@writeme.com>
-Subject: [PATCH v3 11/26] powerpc: mpc83xx: Remove MPC837x support
-Date: Wed, 21 Oct 2026 16:01:07 +0000
-Message-ID: <20261021160145.10430-12-brads@mainlining.org>
+Cc: Bradley Morgan <brads@mainlining.org>,
+	Mario Six <mario.six@gdsys.cc>
+Subject: [PATCH v3 20/26] powerpc: mpc83xx: Remove MPC831x support
+Date: Wed, 21 Oct 2026 16:01:16 +0000
+Message-ID: <20261021160145.10430-21-brads@mainlining.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261021160145.10430-1-brads@mainlining.org>
 References: <20261021160145.10430-1-brads@mainlining.org>
@@ -151,544 +151,570 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-MPC837XERDB was the last user in the tree of ARCH_MPC837X. With that
-board removed, nothing selects the SoC option now.
-
-Drop its unmaintained clock, CPU, reset and peripheral support.
+No target in the tree selects ARCH_MPC831X, and the family lacks active
+community maintenance. Remove the orphaned family support, register
+handling, and device tree code.
 
 Signed-off-by: Bradley Morgan <brads@mainlining.org>
 ---
- arch/powerpc/cpu/mpc83xx/Kconfig              |  20 ---
- arch/powerpc/cpu/mpc83xx/cpu.c                |   3 -
- arch/powerpc/cpu/mpc83xx/hid/Kconfig          |   4 +-
- arch/powerpc/cpu/mpc83xx/hrcw/Kconfig         |  52 ++++----
- arch/powerpc/cpu/mpc83xx/initreg/Kconfig.spcr |   2 +-
- arch/powerpc/cpu/mpc83xx/speed.c              |  57 ++-------
- arch/powerpc/include/asm/arch-mpc83xx/gpio.h  |   2 +-
- arch/powerpc/include/asm/arch-mpc83xx/soc.h   |  16 +--
- arch/powerpc/include/asm/global_data.h        |   8 +-
- arch/powerpc/include/asm/immap_83xx.h         |  45 -------
- arch/powerpc/include/asm/mpc8xxx_spi.h        |   3 +-
- doc/README.sata                               |  68 ----------
- .../clock/fsl,mpc83xx-clk.txt                 |   3 +-
- doc/device-tree-bindings/cpu/fsl,mpc83xx.txt  |   3 +-
- drivers/clk/mpc83xx_clk.c                     |   1 -
- drivers/clk/mpc83xx_clk.h                     |  11 +-
- drivers/cpu/mpc83xx_cpu.c                     |  13 --
- drivers/cpu/mpc83xx_cpu.h                     |  11 --
- drivers/ram/mpc83xx_sdram.c                   |  12 +-
- include/mpc83xx.h                             | 120 +-----------------
- 20 files changed, 58 insertions(+), 396 deletions(-)
- delete mode 100644 doc/README.sata
+ arch/Kconfig                                  |  3 +-
+ arch/powerpc/cpu/mpc83xx/Kconfig              | 13 ----
+ arch/powerpc/cpu/mpc83xx/cpu.c                |  6 +-
+ arch/powerpc/cpu/mpc83xx/cpu_init.c           | 14 +---
+ arch/powerpc/cpu/mpc83xx/fdt.c                | 42 +----------
+ arch/powerpc/cpu/mpc83xx/hid/hid.h            |  5 --
+ arch/powerpc/cpu/mpc83xx/hrcw/Kconfig         | 38 +---------
+ arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr |  2 +-
+ arch/powerpc/cpu/mpc83xx/initreg/Kconfig.spcr |  2 +-
+ arch/powerpc/cpu/mpc83xx/spd_sdram.c          |  2 +-
+ arch/powerpc/cpu/mpc83xx/speed.c              | 27 +++----
+ arch/powerpc/include/asm/arch-mpc83xx/gpio.h  |  2 +-
+ arch/powerpc/include/asm/arch-mpc83xx/soc.h   | 20 +-----
+ arch/powerpc/include/asm/global_data.h        |  4 +-
+ arch/powerpc/include/asm/immap_83xx.h         | 35 ---------
+ arch/powerpc/include/asm/mpc8xxx_spi.h        |  1 -
+ .../clock/fsl,mpc83xx-clk.txt                 |  2 -
+ doc/device-tree-bindings/cpu/fsl,mpc83xx.txt  |  8 +--
+ drivers/clk/mpc83xx_clk.c                     |  8 +--
+ drivers/clk/mpc83xx_clk.h                     |  8 +--
+ drivers/cpu/mpc83xx_cpu.c                     | 17 -----
+ drivers/cpu/mpc83xx_cpu.h                     | 14 ----
+ drivers/ram/mpc83xx_sdram.c                   |  2 -
+ include/mpc83xx.h                             | 72 ++-----------------
+ 24 files changed, 42 insertions(+), 305 deletions(-)
 
+diff --git a/arch/Kconfig b/arch/Kconfig
+index e806fa2e3e7..8ea591cba4f 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -467,8 +467,7 @@ config SYS_IMMR
+ 	hex "Address for the Internal Memory-Mapped Registers (IMMR) window"
+ 	depends on PPC || FSL_LSCH2 || FSL_LSCH3 || ARCH_LS1021A
+ 	default 0xFF000000 if MPC8xx
+-	default 0xF0000000 if ARCH_MPC8313
+-	default 0xE0000000 if MPC83xx && !ARCH_MPC8313
++	default 0xE0000000 if MPC83xx
+ 	default 0x01000000 if ARCH_LS1021A || FSL_LSCH2 || FSL_LSCH3
+ 	default 0xFFE00000 if ARCH_P1010 || ARCH_P1020 || \
+ 			      ARCH_P1021 || ARCH_P1024 || \
 diff --git a/arch/powerpc/cpu/mpc83xx/Kconfig b/arch/powerpc/cpu/mpc83xx/Kconfig
-index 088283d646c..daae933e52e 100644
+index daae933e52e..06d84c2d945 100644
 --- a/arch/powerpc/cpu/mpc83xx/Kconfig
 +++ b/arch/powerpc/cpu/mpc83xx/Kconfig
-@@ -103,15 +103,9 @@ config MPC83XX_TSEC2_SUPPORT
- config MPC83XX_PCIE1_SUPPORT
- 	bool
- 
--config MPC83XX_PCIE2_SUPPORT
--	bool
--
- config MPC83XX_SDHC_SUPPORT
- 	bool
- 
--config MPC83XX_SATA
--	bool
--
- config MPC83XX_SECOND_I2C
- 	bool
- 
-@@ -162,20 +156,6 @@ config ARCH_MPC8360
+@@ -125,19 +125,6 @@ config ARCH_MPC8308
+ 	select MPC83XX_PCIE1_SUPPORT
  	select MPC83XX_SECOND_I2C
- 	select SYS_CACHE_SHIFT_5
  
--config ARCH_MPC837X
+-config ARCH_MPC831X
 -	bool
 -	select MPC83XX_PCI_SUPPORT
 -	select MPC83XX_TSEC1_SUPPORT
 -	select MPC83XX_TSEC2_SUPPORT
--	select MPC83XX_PCIE1_SUPPORT
--	select MPC83XX_PCIE2_SUPPORT
--	select MPC83XX_SDHC_SUPPORT
--	select MPC83XX_SATA
--	select MPC83XX_LDP_PIN
--	select MPC83XX_SECOND_I2C
 -	select SYS_CACHE_SHIFT_5
+-
+-config ARCH_MPC8313
+-	bool
+-	select ARCH_MPC831X
+-	select MPC83XX_SECOND_I2C
 -	select FSL_ELBC
 -
- source "arch/powerpc/cpu/mpc83xx/hrcw/Kconfig"
- source "arch/powerpc/cpu/mpc83xx/bats/Kconfig"
- source "arch/powerpc/cpu/mpc83xx/lblaw/Kconfig"
+ config ARCH_MPC832X
+ 	bool
+ 	select MPC83XX_QUICC_ENGINE
 diff --git a/arch/powerpc/cpu/mpc83xx/cpu.c b/arch/powerpc/cpu/mpc83xx/cpu.c
-index 3c8cbd4252d..f8e9f716936 100644
+index f8e9f716936..e1f70f40fec 100644
 --- a/arch/powerpc/cpu/mpc83xx/cpu.c
 +++ b/arch/powerpc/cpu/mpc83xx/cpu.c
-@@ -61,9 +61,6 @@ int checkcpu(void)
- 		CPU_TYPE_ENTRY(8358_TBGA_),
- 		CPU_TYPE_ENTRY(8358_PBGA_),
- 		CPU_TYPE_ENTRY(8360),
--		CPU_TYPE_ENTRY(8377),
--		CPU_TYPE_ENTRY(8378),
--		CPU_TYPE_ENTRY(8379),
- 	};
+@@ -24,7 +24,7 @@
+ #include <tsec.h>
+ #include <netdev.h>
+ #include <fsl_esdhc.h>
+-#if defined(CONFIG_BOOTCOUNT_LIMIT) && !defined(CONFIG_ARCH_MPC831X)
++#if defined(CONFIG_BOOTCOUNT_LIMIT)
+ #include <linux/immap_qe.h>
+ #include <asm/io.h>
+ #endif
+@@ -48,10 +48,6 @@ int checkcpu(void)
+ 	} cpu_type_list [] = {
+ 		CPU_TYPE_ENTRY(8308),
+ 		CPU_TYPE_ENTRY(8309),
+-		CPU_TYPE_ENTRY(8311),
+-		CPU_TYPE_ENTRY(8313),
+-		CPU_TYPE_ENTRY(8314),
+-		CPU_TYPE_ENTRY(8315),
+ 		CPU_TYPE_ENTRY(8321),
+ 		CPU_TYPE_ENTRY(8323),
+ 		CPU_TYPE_ENTRY(8343),
+diff --git a/arch/powerpc/cpu/mpc83xx/cpu_init.c b/arch/powerpc/cpu/mpc83xx/cpu_init.c
+index 340f9a0da56..555dd502b36 100644
+--- a/arch/powerpc/cpu/mpc83xx/cpu_init.c
++++ b/arch/powerpc/cpu/mpc83xx/cpu_init.c
+@@ -84,12 +84,6 @@ void cpu_init_f (volatile immap_t * im)
+ #ifdef CFG_SYS_SCCR_TSEC2CM /* TSEC2 clock mode */
+ 		SCCR_TSEC2CM |
+ #endif
+-#ifdef CONFIG_SYS_SCCR_TSEC1ON /* TSEC1 clock switch */
+-		SCCR_TSEC1ON |
+-#endif
+-#ifdef CONFIG_SYS_SCCR_TSEC2ON /* TSEC2 clock switch */
+-		SCCR_TSEC2ON |
+-#endif
+ #ifdef CONFIG_SYS_SCCR_USBMPHCM /* USB MPH clock mode */
+ 		SCCR_USBMPHCM |
+ #endif
+@@ -122,12 +116,6 @@ void cpu_init_f (volatile immap_t * im)
+ #ifdef CFG_SYS_SCCR_TSEC2CM /* TSEC2 clock mode */
+ 		(CFG_SYS_SCCR_TSEC2CM << SCCR_TSEC2CM_SHIFT) |
+ #endif
+-#ifdef CONFIG_SYS_SCCR_TSEC1ON /* TSEC1 clock switch */
+-		(CONFIG_SYS_SCCR_TSEC1ON << SCCR_TSEC1ON_SHIFT) |
+-#endif
+-#ifdef CONFIG_SYS_SCCR_TSEC2ON /* TSEC2 clock switch */
+-		(CONFIG_SYS_SCCR_TSEC2ON << SCCR_TSEC2ON_SHIFT) |
+-#endif
+ #ifdef CONFIG_SYS_SCCR_USBMPHCM /* USB MPH clock mode */
+ 		(CONFIG_SYS_SCCR_USBMPHCM << SCCR_USBMPHCM_SHIFT) |
+ #endif
+@@ -177,7 +165,7 @@ void cpu_init_f (volatile immap_t * im)
  
- 	immr = (immap_t *)CONFIG_SYS_IMMR;
-diff --git a/arch/powerpc/cpu/mpc83xx/hid/Kconfig b/arch/powerpc/cpu/mpc83xx/hid/Kconfig
-index 9473213bac4..e733a59d021 100644
---- a/arch/powerpc/cpu/mpc83xx/hid/Kconfig
-+++ b/arch/powerpc/cpu/mpc83xx/hid/Kconfig
-@@ -434,7 +434,7 @@ config HID2_IWLCK_1
- config HID2_IWLCK_2
- 	bool "Way 0 through 2 locked"
+ 	/* System General Purpose Register */
+ #ifdef CFG_SYS_SICRH
+-#if defined(CONFIG_ARCH_MPC834X) || defined(CONFIG_ARCH_MPC8313)
++#if defined(CONFIG_ARCH_MPC834X)
+ 	/* regarding to MPC34x manual rev.1 bits 28..29 must be preserved */
+ 	__raw_writel((im->sysconf.sicrh & 0x0000000C) | CFG_SYS_SICRH,
+ 		     &im->sysconf.sicrh);
+diff --git a/arch/powerpc/cpu/mpc83xx/fdt.c b/arch/powerpc/cpu/mpc83xx/fdt.c
+index 1bd4f2b3449..08c3e783597 100644
+--- a/arch/powerpc/cpu/mpc83xx/fdt.c
++++ b/arch/powerpc/cpu/mpc83xx/fdt.c
+@@ -17,7 +17,7 @@ extern void ft_qe_setup(void *blob);
+ DECLARE_GLOBAL_DATA_PTR;
  
--if ARCH_MPC8360 || ARCH_MPC837X
-+if ARCH_MPC8360
+ #if defined(CONFIG_BOOTCOUNT_LIMIT) && \
+-	(defined(CONFIG_QE) && !defined(CONFIG_ARCH_MPC831X))
++	defined(CONFIG_QE)
+ #include <linux/immap_qe.h>
  
- config HID2_IWLCK_3
- 	bool "Way 0 through 3 locked"
-@@ -470,7 +470,7 @@ config HID2_DWLCK_1
- config HID2_DWLCK_2
- 	bool "Way 0 through 2 locked"
+ void fdt_fixup_muram (void *blob)
+@@ -50,44 +50,6 @@ void ft_cpu_setup(void *blob, struct bd_info *bd)
+ 		 REVID_MAJOR(spridr) >= 2)
+ 		fdt_fixup_crypto_node(blob, 0x0204);
  
--if ARCH_MPC8360 || ARCH_MPC837X
-+if ARCH_MPC8360
+-#ifdef CONFIG_ARCH_MPC8313
+-	/*
+-	* mpc8313e erratum IPIC1 swapped TSEC interrupt ID numbers on rev. 1
+-	* h/w (see AN3545).  The base device tree in use has rev. 1 ID numbers,
+-	* so if on Rev. 2 (and higher) h/w, we fix them up here
+-	*/
+-	if (REVID_MAJOR(immr->sysconf.spridr) >= 2) {
+-		int nodeoffset, path;
+-		const char *prop;
+-
+-		nodeoffset = fdt_path_offset(blob, "/aliases");
+-		if (nodeoffset >= 0) {
+-			prop = fdt_getprop(blob, nodeoffset, "ethernet0", NULL);
+-			if (prop) {
+-				u32 tmp[] = { 32, 0x8, 33, 0x8, 34, 0x8 };
+-
+-				path = fdt_path_offset(blob, prop);
+-				prop = fdt_getprop(blob, path, "interrupts",
+-						   NULL);
+-				if (prop)
+-					fdt_setprop(blob, path, "interrupts",
+-						    &tmp, sizeof(tmp));
+-			}
+-			prop = fdt_getprop(blob, nodeoffset, "ethernet1", NULL);
+-			if (prop) {
+-				u32 tmp[] = { 35, 0x8, 36, 0x8, 37, 0x8 };
+-
+-				path = fdt_path_offset(blob, prop);
+-				prop = fdt_getprop(blob, path, "interrupts",
+-						   NULL);
+-				if (prop)
+-					fdt_setprop(blob, path, "interrupts",
+-						    &tmp, sizeof(tmp));
+-			}
+-		}
+-	}
+-#endif
+-
+ 	do_fixup_by_prop_u32(blob, "device_type", "cpu", 4,
+ 		"timebase-frequency", (bd->bi_busfreq / 4), 1);
+ 	do_fixup_by_prop_u32(blob, "device_type", "cpu", 4,
+@@ -116,7 +78,7 @@ void ft_cpu_setup(void *blob, struct bd_info *bd)
+ 	fdt_fixup_memory(blob, (u64)gd->ram_base, (u64)gd->ram_size);
  
- config HID2_DWLCK_3
- 	bool "Way 0 through 3 locked"
+ #if defined(CONFIG_BOOTCOUNT_LIMIT) && \
+-	(defined(CONFIG_QE) && !defined(CONFIG_ARCH_MPC831X))
++	defined(CONFIG_QE)
+ 	fdt_fixup_muram (blob);
+ #endif
+ }
+diff --git a/arch/powerpc/cpu/mpc83xx/hid/hid.h b/arch/powerpc/cpu/mpc83xx/hid/hid.h
+index 089d1d77f0b..0ae528af878 100644
+--- a/arch/powerpc/cpu/mpc83xx/hid/hid.h
++++ b/arch/powerpc/cpu/mpc83xx/hid/hid.h
+@@ -48,12 +48,7 @@
+ 	CONFIG_HID0_INIT_SLEEP_BIT \
+ )
+ 
+-#ifdef CONFIG_TARGET_IDS8313
+-/* IDS8313 defines a reserved bit; keep to not break compatibility */
+-#define CFG_HID2_SPECIAL 0x00020000
+-#else
+ #define CFG_HID2_SPECIAL 0x0
+-#endif
+ 
+ #define CFG_SYS_HID2 ( \
+ 	CONFIG_HID2_LET_BIT |\
 diff --git a/arch/powerpc/cpu/mpc83xx/hrcw/Kconfig b/arch/powerpc/cpu/mpc83xx/hrcw/Kconfig
-index 0fc3b7765f2..49d5db098f7 100644
+index 49d5db098f7..eef39021354 100644
 --- a/arch/powerpc/cpu/mpc83xx/hrcw/Kconfig
 +++ b/arch/powerpc/cpu/mpc83xx/hrcw/Kconfig
-@@ -7,7 +7,7 @@ config LBMC_CLOCK_MODE_1_1
- 	bool "1 : 1"
- 
- config LBMC_CLOCK_MODE_1_2
--	depends on ARCH_MPC8360 || ARCH_MPC837X
-+	depends on ARCH_MPC8360
- 	bool "1 : 2"
+@@ -24,7 +24,7 @@ config DDR_MC_CLOCK_MODE_1_1
  
  endchoice
-@@ -19,7 +19,7 @@ config DDR_MC_CLOCK_MODE_1_2
- 	bool "1 : 2"
  
- config DDR_MC_CLOCK_MODE_1_1
--	depends on ARCH_MPC8360 || ARCH_MPC837X
-+	depends on ARCH_MPC8360
- 	bool "1 : 1"
+-if !ARCH_MPC8313 && !ARCH_MPC832X
++if !ARCH_MPC832X
  
- endchoice
-@@ -30,7 +30,6 @@ choice
+ choice
  	prompt "System PLL VCO division"
+@@ -36,11 +36,9 @@ config SYSTEM_PLL_VCO_DIV_2
+ 	bool "2"
  
- config SYSTEM_PLL_VCO_DIV_1
--	depends on !ARCH_MPC837X
- 	bool "1"
+ config SYSTEM_PLL_VCO_DIV_4
+-	depends on !ARCH_MPC831X
+ 	bool "4"
  
- config SYSTEM_PLL_VCO_DIV_2
-@@ -67,39 +66,39 @@ config SYSTEM_PLL_FACTOR_6_1
- 	bool "6 : 1"
+ config SYSTEM_PLL_VCO_DIV_8
+-	depends on !ARCH_MPC831X
+ 	bool "8"
  
- config SYSTEM_PLL_FACTOR_7_1
--	depends on ARCH_MPC8360 || ARCH_MPC837X
-+	depends on ARCH_MPC8360
- 	bool "7 : 1"
+ endchoice
+@@ -418,21 +416,9 @@ choice
+ config TSEC1_MODE_MII
+ 	bool "MII"
  
- config SYSTEM_PLL_FACTOR_8_1
--	depends on ARCH_MPC8360 || ARCH_MPC837X
-+	depends on ARCH_MPC8360
- 	bool "8 : 1"
- 
- config SYSTEM_PLL_FACTOR_9_1
--	depends on ARCH_MPC8360 || ARCH_MPC837X
-+	depends on ARCH_MPC8360
- 	bool "9 : 1"
- 
- config SYSTEM_PLL_FACTOR_10_1
--	depends on ARCH_MPC8360 || ARCH_MPC837X
-+	depends on ARCH_MPC8360
- 	bool "10 : 1"
- 
- config SYSTEM_PLL_FACTOR_11_1
--	depends on ARCH_MPC8360 || ARCH_MPC837X
-+	depends on ARCH_MPC8360
- 	bool "11 : 1"
- 
- config SYSTEM_PLL_FACTOR_12_1
--	depends on ARCH_MPC8360 || ARCH_MPC837X
-+	depends on ARCH_MPC8360
- 	bool "12 : 1"
- 
- config SYSTEM_PLL_FACTOR_13_1
--	depends on ARCH_MPC8360 || ARCH_MPC837X
-+	depends on ARCH_MPC8360
- 	bool "13 : 1"
- 
- config SYSTEM_PLL_FACTOR_14_1
--	depends on ARCH_MPC8360 || ARCH_MPC837X
-+	depends on ARCH_MPC8360
- 	bool "14 : 1"
- 
- config SYSTEM_PLL_FACTOR_15_1
--	depends on ARCH_MPC8360 || ARCH_MPC837X
-+	depends on ARCH_MPC8360
- 	bool "15 : 1"
- 
- config SYSTEM_PLL_FACTOR_16_1
-@@ -391,10 +390,6 @@ config BOOT_ROM_INTERFACE_PCI1
- 	depends on MPC83XX_PCI_SUPPORT
- 	bool "PCI1"
- 
--config BOOT_ROM_INTERFACE_ON_CHIP_BOOT_ROM
--	depends on ARCH_MPC837X
--	bool "PCI2"
+-config TSEC1_MODE_RMII
+-	depends on ARCH_MPC831X
+-	bool "RMII"
 -
- config BOOT_ROM_INTERFACE_GPCM_8BIT
- 	bool "Local bus GPCM - 8-bit ROM"
- 
-@@ -402,7 +397,7 @@ config BOOT_ROM_INTERFACE_GPCM_16BIT
- 	bool "Local bus GPCM - 16-bit ROM"
- 
- config BOOT_ROM_INTERFACE_GPCM_32BIT
--	depends on ARCH_MPC8360 || ARCH_MPC837X
-+	depends on ARCH_MPC8360
- 	bool "Local bus GPCM - 32-bit ROM"
- 
- config BOOT_ROM_INTERFACE_NAND_FLASH_8BIT_SMALL
-@@ -431,11 +426,11 @@ config TSEC1_MODE_RGMII
+ config TSEC1_MODE_RGMII
  	bool "RGMII"
  
- config TSEC1_MODE_RTBI
--	depends on ARCH_MPC831X || ARCH_MPC837X
-+	depends on ARCH_MPC831X
- 	bool "RTBI"
- 
- config TSEC1_MODE_SGMII
--	depends on ARCH_MPC831X || ARCH_MPC837X
-+	depends on ARCH_MPC831X
- 	bool "SGMII"
- 
+-config TSEC1_MODE_RTBI
+-	depends on ARCH_MPC831X
+-	bool "RTBI"
+-
+-config TSEC1_MODE_SGMII
+-	depends on ARCH_MPC831X
+-	bool "SGMII"
+-
  endchoice
-@@ -458,11 +453,11 @@ config TSEC2_MODE_RGMII
+ 
+ endif
+@@ -445,21 +431,9 @@ choice
+ config TSEC2_MODE_MII
+ 	bool "MII"
+ 
+-config TSEC2_MODE_RMII
+-	depends on ARCH_MPC831X
+-	bool "RMII"
+-
+ config TSEC2_MODE_RGMII
  	bool "RGMII"
  
- config TSEC2_MODE_RTBI
--	depends on ARCH_MPC831X || ARCH_MPC837X
-+	depends on ARCH_MPC831X
- 	bool "RTBI"
- 
- config TSEC2_MODE_SGMII
--	depends on ARCH_MPC831X || ARCH_MPC837X
-+	depends on ARCH_MPC831X
- 	bool "SGMII"
- 
+-config TSEC2_MODE_RTBI
+-	depends on ARCH_MPC831X
+-	bool "RTBI"
+-
+-config TSEC2_MODE_SGMII
+-	depends on ARCH_MPC831X
+-	bool "SGMII"
+-
  endchoice
-@@ -540,12 +535,12 @@ config DDR_MC_CLOCK_MODE
+ 
+ endif
+@@ -490,7 +464,7 @@ endchoice
+ 
+ endif
+ 
+-if ARCH_MPC831X || ARCH_MPC832X || ARCH_MPC8360
++if ARCH_MPC832X || ARCH_MPC8360
+ 
+ choice
+ 	prompt "LALE timing"
+@@ -534,7 +508,7 @@ config DDR_MC_CLOCK_MODE
+ 
  config SYSTEM_PLL_VCO_DIV
  	int
- 	default 2 if ARCH_MPC8313 || ARCH_MPC832X
--	default 0 if SYSTEM_PLL_VCO_DIV_2 && !ARCH_MPC8360 && !ARCH_MPC837X
--	default 1 if SYSTEM_PLL_VCO_DIV_4 && !ARCH_MPC8360 && !ARCH_MPC837X
--	default 2 if SYSTEM_PLL_VCO_DIV_8 && !ARCH_MPC8360 && !ARCH_MPC837X
--	default 0 if SYSTEM_PLL_VCO_DIV_4 && (ARCH_MPC8360 || ARCH_MPC837X)
--	default 1 if SYSTEM_PLL_VCO_DIV_8 && (ARCH_MPC8360 || ARCH_MPC837X)
--	default 2 if SYSTEM_PLL_VCO_DIV_2 && (ARCH_MPC8360 || ARCH_MPC837X)
-+	default 0 if SYSTEM_PLL_VCO_DIV_2 && !ARCH_MPC8360
-+	default 1 if SYSTEM_PLL_VCO_DIV_4 && !ARCH_MPC8360
-+	default 2 if SYSTEM_PLL_VCO_DIV_8 && !ARCH_MPC8360
-+	default 0 if SYSTEM_PLL_VCO_DIV_4 && ARCH_MPC8360
-+	default 1 if SYSTEM_PLL_VCO_DIV_8 && ARCH_MPC8360
-+	default 2 if SYSTEM_PLL_VCO_DIV_2 && ARCH_MPC8360
- 	default 3 if SYSTEM_PLL_VCO_DIV_1
- 
- config SYSTEM_PLL_FACTOR
-@@ -610,7 +605,6 @@ config BOOT_ROM_INTERFACE
+-	default 2 if ARCH_MPC8313 || ARCH_MPC832X
++	default 2 if ARCH_MPC832X
+ 	default 0 if SYSTEM_PLL_VCO_DIV_2 && !ARCH_MPC8360
+ 	default 1 if SYSTEM_PLL_VCO_DIV_4 && !ARCH_MPC8360
+ 	default 2 if SYSTEM_PLL_VCO_DIV_8 && !ARCH_MPC8360
+@@ -615,19 +589,13 @@ config TSEC1_MODE
  	hex
- 	default 0x0 if BOOT_ROM_INTERFACE_DDR_SDRAM
- 	default 0x4 if BOOT_ROM_INTERFACE_PCI1
--	default 0xc if BOOT_ROM_INTERFACE_ON_CHIP_BOOT_ROM
- 	default 0x14 if BOOT_ROM_INTERFACE_GPCM_8BIT
- 	default 0x18 if BOOT_ROM_INTERFACE_GPCM_16BIT
- 	default 0x1c if BOOT_ROM_INTERFACE_GPCM_32BIT
-@@ -648,7 +642,7 @@ config TRUE_LITTLE_ENDIAN
+ 	default 0x0 if !MPC83XX_TSEC1_SUPPORT
+ 	default 0x0 if TSEC1_MODE_MII
+-	default 0x1 if TSEC1_MODE_RMII
+ 	default 0x3 if TSEC1_MODE_RGMII
+-	default 0x5 if TSEC1_MODE_RTBI
+-	default 0x6 if TSEC1_MODE_SGMII
  
- config LALE_TIMING
+ config TSEC2_MODE
+ 	hex
+ 	default 0x0 if !MPC83XX_TSEC2_SUPPORT
+ 	default 0x0 if TSEC2_MODE_MII
+-	default 0x1 if TSEC2_MODE_RMII
+ 	default 0x3 if TSEC2_MODE_RGMII
+-	default 0x5 if TSEC2_MODE_RTBI
+-	default 0x6 if TSEC2_MODE_SGMII
+ 
+ config SECONDARY_DDR_IO
  	int
--	default 0 if ARCH_MPC830X || ARCH_MPC837X
-+	default 0 if ARCH_MPC830X
- 	default 0 if LALE_TIMING_NORMAL
- 	default 1 if LALE_TIMING_EARLIER
+diff --git a/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr b/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr
+index 86c5f42dd37..a85e698a867 100644
+--- a/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr
++++ b/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.lcrr
+@@ -1,6 +1,6 @@
+ menu "LCRR - Clock Ratio Register register"
  
+-if !ARCH_MPC831X && !ARCH_MPC832X
++if !ARCH_MPC832X
+ 
+ choice
+ 	prompt "DLL bypass"
 diff --git a/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.spcr b/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.spcr
-index 33e1295df14..91686b3b8b4 100644
+index 91686b3b8b4..7bf7bda09e0 100644
 --- a/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.spcr
 +++ b/arch/powerpc/cpu/mpc83xx/initreg/Kconfig.spcr
 @@ -14,7 +14,7 @@ config SPCR_OPT_SPEC_READ
  
  endchoice
  
--if ARCH_MPC8308 || ARCH_MPC831X || ARCH_MPC837X
-+if ARCH_MPC8308 || ARCH_MPC831X
+-if ARCH_MPC8308 || ARCH_MPC831X
++if ARCH_MPC8308
  
  choice
  	prompt "TSEC emergency priority"
+diff --git a/arch/powerpc/cpu/mpc83xx/spd_sdram.c b/arch/powerpc/cpu/mpc83xx/spd_sdram.c
+index e847c03f378..949efc8e828 100644
+--- a/arch/powerpc/cpu/mpc83xx/spd_sdram.c
++++ b/arch/powerpc/cpu/mpc83xx/spd_sdram.c
+@@ -37,7 +37,7 @@ void board_add_ram_info(int use_default)
+ 	printf(" (DDR%d", ((ddr->sdram_cfg & SDRAM_CFG_SDRAM_TYPE_MASK)
+ 			   >> SDRAM_CFG_SDRAM_TYPE_SHIFT) - 1);
+ 
+-#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
++#if defined(CONFIG_ARCH_MPC8308)
+ 	if ((ddr->sdram_cfg & SDRAM_CFG_DBW_MASK) == SDRAM_CFG_DBW_16)
+ 		puts(", 16-bit");
+ 	else if ((ddr->sdram_cfg & SDRAM_CFG_DBW_MASK) == SDRAM_CFG_DBW_32)
 diff --git a/arch/powerpc/cpu/mpc83xx/speed.c b/arch/powerpc/cpu/mpc83xx/speed.c
-index 0185ab50ad9..a2343c67f28 100644
+index a2343c67f28..e2ed3caf022 100644
 --- a/arch/powerpc/cpu/mpc83xx/speed.c
 +++ b/arch/powerpc/cpu/mpc83xx/speed.c
-@@ -88,7 +88,7 @@ int get_clocks(void)
+@@ -87,7 +87,7 @@ int get_clocks(void)
+ 	u32 lcrr;
  
  	u32 csb_clk;
- #if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
--	defined(CONFIG_ARCH_MPC834X) || defined(CONFIG_ARCH_MPC837X)
-+	defined(CONFIG_ARCH_MPC834X)
+-#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
++#if defined(CONFIG_ARCH_MPC8308) || \
+ 	defined(CONFIG_ARCH_MPC834X)
  	u32 tsec1_clk;
  	u32 tsec2_clk;
- 	u32 usbdr_clk;
-@@ -117,14 +117,10 @@ int get_clocks(void)
+@@ -117,7 +117,7 @@ int get_clocks(void)
  	u32 qe_clk;
  	u32 brg_clk;
  #endif
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
--	defined(CONFIG_ARCH_MPC837X)
-+#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
+-#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
++#if defined(CONFIG_ARCH_MPC8308)
  	u32 pciexp1_clk;
  	u32 pciexp2_clk;
  #endif
--#if defined(CONFIG_ARCH_MPC837X)
--	u32 sata_clk;
--#endif
+@@ -146,7 +146,7 @@ int get_clocks(void)
  
- 	if ((im->sysconf.immrbar & IMMRBAR_BASE_ADDR) != (u32) im)
- 		return -1;
-@@ -151,7 +147,7 @@ int get_clocks(void)
  	sccr = im->clk.sccr;
  
- #if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
--	defined(CONFIG_ARCH_MPC834X) || defined(CONFIG_ARCH_MPC837X)
-+	defined(CONFIG_ARCH_MPC834X)
+-#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
++#if defined(CONFIG_ARCH_MPC8308) || \
+ 	defined(CONFIG_ARCH_MPC834X)
  	switch ((sccr & SCCR_TSEC1CM) >> SCCR_TSEC1CM_SHIFT) {
  	case 0:
- 		tsec1_clk = 0;
-@@ -172,7 +168,7 @@ int get_clocks(void)
- #endif
- 
- #if defined(CONFIG_ARCH_MPC830X) || defined(CONFIG_ARCH_MPC831X) || \
--	defined(CONFIG_ARCH_MPC834X) || defined(CONFIG_ARCH_MPC837X)
-+	defined(CONFIG_ARCH_MPC834X)
- 	switch ((sccr & SCCR_USBDRCM) >> SCCR_USBDRCM_SHIFT) {
- 	case 0:
- 		usbdr_clk = 0;
-@@ -192,8 +188,7 @@ int get_clocks(void)
+@@ -167,7 +167,7 @@ int get_clocks(void)
  	}
  #endif
  
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC834X) || \
--	defined(CONFIG_ARCH_MPC837X)
-+#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC834X)
- 	switch ((sccr & SCCR_TSEC2CM) >> SCCR_TSEC2CM_SHIFT) {
+-#if defined(CONFIG_ARCH_MPC830X) || defined(CONFIG_ARCH_MPC831X) || \
++#if defined(CONFIG_ARCH_MPC830X) || \
+ 	defined(CONFIG_ARCH_MPC834X)
+ 	switch ((sccr & SCCR_USBDRCM) >> SCCR_USBDRCM_SHIFT) {
  	case 0:
- 		tsec2_clk = 0;
-@@ -295,15 +290,12 @@ int get_clocks(void)
+@@ -206,13 +206,6 @@ int get_clocks(void)
+ 		/* unknown SCCR_TSEC2CM value */
+ 		return -4;
+ 	}
+-#elif defined(CONFIG_ARCH_MPC8313)
+-	tsec2_clk = tsec1_clk;
+-
+-	if (!(sccr & SCCR_TSEC1ON))
+-		tsec1_clk = 0;
+-	if (!(sccr & SCCR_TSEC2ON))
+-		tsec2_clk = 0;
+ #endif
+ 
+ #if defined(CONFIG_ARCH_MPC834X)
+@@ -286,7 +279,7 @@ int get_clocks(void)
+ 	i2c1_clk = csb_clk;
+ #elif defined(CONFIG_ARCH_MPC832X)
+ 	i2c1_clk = enc_clk;
+-#elif defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
++#elif defined(CONFIG_ARCH_MPC8308)
  	i2c1_clk = enc_clk;
  #elif defined(CONFIG_FSL_ESDHC)
  	i2c1_clk = sdhc_clk;
--#elif defined(CONFIG_ARCH_MPC837X)
--	i2c1_clk = enc_clk;
- #endif
- #if !defined(CONFIG_ARCH_MPC832X)
+@@ -295,7 +288,7 @@ int get_clocks(void)
  	i2c2_clk = csb_clk; /* i2c-2 clk is equal to csb clk */
  #endif
  
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
--	defined(CONFIG_ARCH_MPC837X)
-+#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
+-#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
++#if defined(CONFIG_ARCH_MPC8308)
  	switch ((sccr & SCCR_PCIEXP1CM) >> SCCR_PCIEXP1CM_SHIFT) {
  	case 0:
  		pciexp1_clk = 0;
-@@ -341,26 +333,6 @@ int get_clocks(void)
- 	}
+@@ -392,7 +385,7 @@ int get_clocks(void)
  #endif
  
--#if defined(CONFIG_ARCH_MPC837X)
--	switch ((sccr & SCCR_SATA1CM) >> SCCR_SATA1CM_SHIFT) {
--	case 0:
--		sata_clk = 0;
--		break;
--	case 1:
--		sata_clk = csb_clk;
--		break;
--	case 2:
--		sata_clk = csb_clk / 2;
--		break;
--	case 3:
--		sata_clk = csb_clk / 3;
--		break;
--	default:
--		/* unknown SCCR_SATA1CM value */
--		return -11;
--	}
--#endif
--
- 	lbiu_clk = csb_clk *
- 		   (1 + ((im->clk.spmr & SPMR_LBIUCM) >> SPMR_LBIUCM_SHIFT));
- 	lcrr = (im->im_lbc.lcrr & LCRR_CLKDIV) >> LCRR_CLKDIV_SHIFT;
-@@ -421,7 +393,7 @@ int get_clocks(void)
- 
  	gd->arch.csb_clk = csb_clk;
- #if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
--	defined(CONFIG_ARCH_MPC834X) || defined(CONFIG_ARCH_MPC837X)
-+	defined(CONFIG_ARCH_MPC834X)
+-#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
++#if defined(CONFIG_ARCH_MPC8308) || \
+ 	defined(CONFIG_ARCH_MPC834X)
  	gd->arch.tsec1_clk = tsec1_clk;
  	gd->arch.tsec2_clk = tsec2_clk;
- 	gd->arch.usbdr_clk = usbdr_clk;
-@@ -448,13 +420,9 @@ int get_clocks(void)
+@@ -420,7 +413,7 @@ int get_clocks(void)
  	gd->arch.qe_clk = qe_clk;
  	gd->arch.brg_clk = brg_clk;
  #endif
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
--	defined(CONFIG_ARCH_MPC837X)
-+#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
+-#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
++#if defined(CONFIG_ARCH_MPC8308)
  	gd->arch.pciexp1_clk = pciexp1_clk;
  	gd->arch.pciexp2_clk = pciexp2_clk;
--#endif
--#if defined(CONFIG_ARCH_MPC837X)
--	gd->arch.sata_clk = sata_clk;
  #endif
- 	gd->arch.pci_clk = pci_sync_in;
- 	gd->cpu_clk = gd->arch.core_clk;
-@@ -524,7 +492,7 @@ static int do_clocks(struct cmd_tbl *cmdtp, int flag, int argc,
+@@ -491,7 +484,7 @@ static int do_clocks(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	printf("  SDHC:                %-4s MHz\n",
  	       strmhz(buf, gd->arch.sdhc_clk));
  #endif
- #if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
--	defined(CONFIG_ARCH_MPC834X) || defined(CONFIG_ARCH_MPC837X)
-+	defined(CONFIG_ARCH_MPC834X)
+-#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
++#if defined(CONFIG_ARCH_MPC8308) || \
+ 	defined(CONFIG_ARCH_MPC834X)
  	printf("  TSEC1:               %-4s MHz\n",
  	       strmhz(buf, gd->arch.tsec1_clk));
- 	printf("  TSEC2:               %-4s MHz\n",
-@@ -536,16 +504,11 @@ static int do_clocks(struct cmd_tbl *cmdtp, int flag, int argc,
+@@ -504,7 +497,7 @@ static int do_clocks(struct cmd_tbl *cmdtp, int flag, int argc,
  	printf("  USB MPH:             %-4s MHz\n",
  	       strmhz(buf, gd->arch.usbmph_clk));
  #endif
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
--	defined(CONFIG_ARCH_MPC837X)
-+#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
+-#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
++#if defined(CONFIG_ARCH_MPC8308)
  	printf("  PCIEXP1:             %-4s MHz\n",
  	       strmhz(buf, gd->arch.pciexp1_clk));
  	printf("  PCIEXP2:             %-4s MHz\n",
- 	       strmhz(buf, gd->arch.pciexp2_clk));
--#endif
--#if defined(CONFIG_ARCH_MPC837X)
--	printf("  SATA:                %-4s MHz\n",
--	       strmhz(buf, gd->arch.sata_clk));
- #endif
- 	return 0;
- }
 diff --git a/arch/powerpc/include/asm/arch-mpc83xx/gpio.h b/arch/powerpc/include/asm/arch-mpc83xx/gpio.h
-index df95d2238fd..dd368af7b91 100644
+index dd368af7b91..6449fded125 100644
 --- a/arch/powerpc/include/asm/arch-mpc83xx/gpio.h
 +++ b/arch/powerpc/include/asm/arch-mpc83xx/gpio.h
-@@ -8,7 +8,7 @@
+@@ -6,7 +6,7 @@
+ /*
+  * The MCP83xx's 1-2 GPIO controllers each with 32 bits.
   */
- #if defined(CONFIG_ARCH_MPC8313) || defined(CONFIG_ARCH_MPC8308)
+-#if defined(CONFIG_ARCH_MPC8313) || defined(CONFIG_ARCH_MPC8308)
++#if defined(CONFIG_ARCH_MPC8308)
  #define MPC83XX_GPIO_CTRLRS 1
--#elif defined(CONFIG_ARCH_MPC834X) || defined(CONFIG_ARCH_MPC837X)
-+#elif defined(CONFIG_ARCH_MPC834X)
+ #elif defined(CONFIG_ARCH_MPC834X)
  #define MPC83XX_GPIO_CTRLRS 2
- #else
- #define MPC83XX_GPIO_CTRLRS 0
 diff --git a/arch/powerpc/include/asm/arch-mpc83xx/soc.h b/arch/powerpc/include/asm/arch-mpc83xx/soc.h
-index ce54f9bebbe..d61d3a944f1 100644
+index d61d3a944f1..0eeaa23b190 100644
 --- a/arch/powerpc/include/asm/arch-mpc83xx/soc.h
 +++ b/arch/powerpc/include/asm/arch-mpc83xx/soc.h
-@@ -15,14 +15,12 @@ enum soc_type {
+@@ -10,8 +10,6 @@
+ enum soc_type {
+ 	SOC_MPC8308,
+ 	SOC_MPC8309,
+-	SOC_MPC8313,
+-	SOC_MPC8315,
  	SOC_MPC832X,
  	SOC_MPC8349,
  	SOC_MPC8360,
--	SOC_MPC8379,
- };
- 
- static inline bool mpc83xx_has_sdhc(int type)
+@@ -26,25 +24,12 @@ static inline bool mpc83xx_has_sdhc(int type)
+ static inline bool mpc83xx_has_tsec(int type)
  {
  	return (type == SOC_MPC8308) ||
--	       (type == SOC_MPC8309) ||
--	       (type == SOC_MPC8379);
-+	       (type == SOC_MPC8309);
- }
- 
- static inline bool mpc83xx_has_tsec(int type)
-@@ -30,27 +28,23 @@ static inline bool mpc83xx_has_tsec(int type)
- 	return (type == SOC_MPC8308) ||
- 	       (type == SOC_MPC8313) ||
- 	       (type == SOC_MPC8315) ||
--	       (type == SOC_MPC8349) ||
--	       (type == SOC_MPC8379);
-+	       (type == SOC_MPC8349);
+-	       (type == SOC_MPC8313) ||
+-	       (type == SOC_MPC8315) ||
+ 	       (type == SOC_MPC8349);
  }
  
  static inline bool mpc83xx_has_pcie1(int type)
  {
- 	return (type == SOC_MPC8308) ||
--	       (type == SOC_MPC8315) ||
--	       (type == SOC_MPC8379);
-+	       (type == SOC_MPC8315);
- }
- 
- static inline bool mpc83xx_has_pcie2(int type)
- {
--	return (type == SOC_MPC8315) ||
--	       (type == SOC_MPC8379);
-+	return type == SOC_MPC8315;
- }
- 
- static inline bool mpc83xx_has_sata(int type)
- {
--	return (type == SOC_MPC8315) ||
--	       (type == SOC_MPC8379);
-+	return type == SOC_MPC8315;
+-	return (type == SOC_MPC8308) ||
+-	       (type == SOC_MPC8315);
+-}
+-
+-static inline bool mpc83xx_has_pcie2(int type)
+-{
+-	return type == SOC_MPC8315;
+-}
+-
+-static inline bool mpc83xx_has_sata(int type)
+-{
+-	return type == SOC_MPC8315;
++	return type == SOC_MPC8308;
  }
  
  static inline bool mpc83xx_has_pci(int type)
+@@ -54,8 +39,7 @@ static inline bool mpc83xx_has_pci(int type)
+ 
+ static inline bool mpc83xx_has_second_i2c(int type)
+ {
+-	return (type != SOC_MPC8315) &&
+-	       (type != SOC_MPC832X);
++	return type != SOC_MPC832X;
+ }
+ 
+ static inline bool mpc83xx_has_quicc_engine(int type)
 diff --git a/arch/powerpc/include/asm/global_data.h b/arch/powerpc/include/asm/global_data.h
-index 26cbc7854d9..608e49667af 100644
+index 608e49667af..168eb55b497 100644
 --- a/arch/powerpc/include/asm/global_data.h
 +++ b/arch/powerpc/include/asm/global_data.h
-@@ -27,7 +27,7 @@ struct arch_global_data {
+@@ -26,7 +26,7 @@ struct arch_global_data {
+ #else
  	/* There are other clocks in the MPC83XX */
  	u32 csb_clk;
- # if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
--	defined(CONFIG_ARCH_MPC834X) || defined(CONFIG_ARCH_MPC837X)
-+	defined(CONFIG_ARCH_MPC834X)
+-# if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
++# if defined(CONFIG_ARCH_MPC8308) || \
+ 	defined(CONFIG_ARCH_MPC834X)
  	u32 tsec1_clk;
  	u32 tsec2_clk;
- 	u32 usbdr_clk;
-@@ -39,14 +39,10 @@ struct arch_global_data {
+@@ -39,7 +39,7 @@ struct arch_global_data {
  	u32 enc_clk;
  	u32 lbiu_clk;
  	u32 lclk_clk;
--# if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
--	defined(CONFIG_ARCH_MPC837X)
-+# if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
+-# if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
++# if defined(CONFIG_ARCH_MPC8308)
  	u32 pciexp1_clk;
  	u32 pciexp2_clk;
  # endif
--# if defined(CONFIG_ARCH_MPC837X)
--	u32 sata_clk;
--# endif
- # if defined(CONFIG_ARCH_MPC8360)
- 	u32 mem_sec_clk;
- # endif /* CONFIG_ARCH_MPC8360 */
 diff --git a/arch/powerpc/include/asm/immap_83xx.h b/arch/powerpc/include/asm/immap_83xx.h
-index 1fa6073b268..2eff504a80d 100644
+index 2eff504a80d..c7e7616529d 100644
 --- a/arch/powerpc/include/asm/immap_83xx.h
 +++ b/arch/powerpc/include/asm/immap_83xx.h
-@@ -760,51 +760,6 @@ typedef struct immap {
+@@ -688,41 +688,6 @@ typedef struct immap {
+ 	u8			res7[0xC0000];
  } immap_t;
- static_assert(sizeof(immap_t) == 0x100000);
  
--#elif defined(CONFIG_ARCH_MPC837X)
+-#elif defined(CONFIG_ARCH_MPC8313)
 -typedef struct immap {
 -	sysconf83xx_t		sysconf;	/* System configuration */
 -	wdt83xx_t		wdt;		/* Watch Dog Timer (WDT) Registers */
@@ -700,8 +726,8 @@ index 1fa6073b268..2eff504a80d 100644
 -	reset83xx_t		reset;		/* Reset Module */
 -	clk83xx_t		clk;		/* System Clock Module */
 -	pmc83xx_t		pmc;		/* Power Management Control Module */
--	gpio83xx_t		gpio[2];	/* General purpose I/O module */
--	u8			res0[0x1200];
+-	gpio83xx_t		gpio[1];	/* General purpose I/O module */
+-	u8			res0[0x1300];
 -	ddr83xx_t		ddr;		/* DDR Memory Controller Memory */
 -	fsl_i2c_t		i2c[2];		/* I2C Controllers */
 -	u8			res1[0x1300];
@@ -715,444 +741,339 @@ index 1fa6073b268..2eff504a80d 100644
 -	u8			res4[0x80];
 -	ios83xx_t		ios;		/* Sequencer */
 -	pcictrl83xx_t		pci_ctrl[1];	/* PCI Controller Control and Status Registers */
--	u8			res5[0xa00];
--	pex83xx_t		pciexp[2];	/* PCI Express Controller */
--	u8			res6[0xd000];
--	sata83xx_t		sata[4];	/* SATA Controller */
--	u8			res7[0x7000];
--	usb83xx_t		usb[1];		/* USB DR Controller */
+-	u8			res5[0x1aa00];
+-	usb83xx_t		usb[1];
 -	tsec83xx_t		tsec[2];
--	u8			res8[0x8000];
--	sdhc83xx_t		sdhc;		/* SDHC Controller */
--	u8			res9[0x1000];
+-	u8			res6[0xA000];
 -	security83xx_t		security;
--	u8			res10[0xA3000];
--	serdes83xx_t		serdes[2];	/* SerDes Registers */
--	u8			res11[0xCE00];
--	rom83xx_t		rom;		/* On Chip ROM */
+-	u8			res7[0xC0000];
 -} immap_t;
--static_assert(sizeof(immap_t) == 0x100000);
 -
- #elif defined(CONFIG_ARCH_MPC8360)
+ #elif defined(CONFIG_ARCH_MPC8308)
  typedef struct immap {
  	sysconf83xx_t		sysconf;	/* System configuration */
 diff --git a/arch/powerpc/include/asm/mpc8xxx_spi.h b/arch/powerpc/include/asm/mpc8xxx_spi.h
-index 2b2095ad481..c136b3fb4af 100644
+index c136b3fb4af..5d8d7db2933 100644
 --- a/arch/powerpc/include/asm/mpc8xxx_spi.h
 +++ b/arch/powerpc/include/asm/mpc8xxx_spi.h
-@@ -13,8 +13,7 @@
- #if defined(CONFIG_ARCH_MPC8308) || \
- 	defined(CONFIG_ARCH_MPC8313) || \
- 	defined(CONFIG_ARCH_MPC832X) || \
--	defined(CONFIG_ARCH_MPC834X) || \
--	defined(CONFIG_ARCH_MPC837X)
-+	defined(CONFIG_ARCH_MPC834X)
+@@ -11,7 +11,6 @@
+ #include <asm/types.h>
  
- typedef struct spi8xxx {
- 	u8 res0[0x20];	/* 0x0-0x01f reserved */
-diff --git a/doc/README.sata b/doc/README.sata
-deleted file mode 100644
-index b1104bbd3b9..00000000000
---- a/doc/README.sata
-+++ /dev/null
-@@ -1,68 +0,0 @@
--1. SATA usage in U-Boot
--
--	There are two ways to operate the hard disk
--
--	* Read/write raw blocks from/to SATA hard disk
--	* ext2load to read a file from ext2 file system
--
--1.0 How to read the SATA hard disk's information?
--
--	=> sata info
--
--SATA device 0: Model: ST3320620AS Firm: 3.AAD Ser#:		4QF01ZTN
--	    Type: Hard Disk
--	    Supports 48-bit addressing
--	    Capacity: 305245.3 MB = 298.0 GB (625142448 x 512)
--
--1.1 How to raw write the kernel, file system, dtb to a SATA hard disk?
--
--	Notes: Hard disk sectors are normally 512 bytes, so
--		0x1000 sectors = 2 MBytes
--
--	write kernel
--	=> tftp 40000 /tftpboot/uImage.837x
--	=> sata write 40000 0 2000
--
--	write ramdisk
--	=> tftp 40000 /tftpboot/ramdisk.837x
--	=> sata write 40000 2000 8000
--
--	write dtb
--	=> tftp 40000 /tftpboot/mpc837xemds.dtb
--	=> sata write 40000 a000 1000
--
--1.2 How to raw read the kernel, file system, dtb from a SATA hard disk?
--
--	load kernel
--	=> sata read 200000 0 2000
--
--	load ramdisk
--	=> sata read 1000000 2000 8000
--
--	load dtb
--	=> sata read 2000000 a000 1000
--
--	boot
--	=> bootm 200000 1000000 2000000
--
--1.3 How to load an image from an ext2 file system in U-Boot?
--
--	U-Boot doesn't support writing to an ext2 file system, so the
--	files must be written by other means (e.g. linux).
--
--	=> ext2ls sata 0:1 /
--	<DIR>	    4096 .
--	<DIR>	    4096 ..
--	<DIR>	   16384 lost+found
--		 1352023 uImage.837x
--		 3646377 ramdisk.837x
--		   12288 mpc837xemds.dtb
--		      12 hello.txt
--
--	=> ext2load sata 0:1 200000 /uImage.837x
--
--	=> ext2load sata 0:1 1000000 /ramdisk.837x
--
--	=> ext2load sata 0:1 2000000 /mpc837xemds.dtb
--
--	=> bootm 200000 1000000 2000000
+ #if defined(CONFIG_ARCH_MPC8308) || \
+-	defined(CONFIG_ARCH_MPC8313) || \
+ 	defined(CONFIG_ARCH_MPC832X) || \
+ 	defined(CONFIG_ARCH_MPC834X)
+ 
 diff --git a/doc/device-tree-bindings/clock/fsl,mpc83xx-clk.txt b/doc/device-tree-bindings/clock/fsl,mpc83xx-clk.txt
-index 8313da85076..065575d87f0 100644
+index 065575d87f0..baaacb62846 100644
 --- a/doc/device-tree-bindings/clock/fsl,mpc83xx-clk.txt
 +++ b/doc/device-tree-bindings/clock/fsl,mpc83xx-clk.txt
-@@ -10,8 +10,7 @@ Required properties:
-                              "fsl,mpc8315-clk",
+@@ -6,8 +6,6 @@ system.
+ Required properties:
+ - compatible: must be one of "fsl,mpc8308-clk",
+                              "fsl,mpc8309-clk",
+-                             "fsl,mpc8313-clk",
+-                             "fsl,mpc8315-clk",
                               "fsl,mpc832x-clk",
                               "fsl,mpc8349-clk",
--                             "fsl,mpc8360-clk",
--                             "fsl,mpc8379-clk"
-+                             "fsl,mpc8360-clk"
-   depending on which SoC is employed
- - #clock-cells: Must be 1
- 
+                              "fsl,mpc8360-clk"
 diff --git a/doc/device-tree-bindings/cpu/fsl,mpc83xx.txt b/doc/device-tree-bindings/cpu/fsl,mpc83xx.txt
-index ac563d906ac..efdcdfbdba0 100644
+index efdcdfbdba0..5bdbd309fbf 100644
 --- a/doc/device-tree-bindings/cpu/fsl,mpc83xx.txt
 +++ b/doc/device-tree-bindings/cpu/fsl,mpc83xx.txt
-@@ -10,8 +10,7 @@ Required properties:
-                              "fsl,mpc8315",
+@@ -6,8 +6,6 @@ Required properties:
+ - compatible: must be one of "fsl,mpc83xx",
+                              "fsl,mpc8308",
+                              "fsl,mpc8309",
+-                             "fsl,mpc8313",
+-                             "fsl,mpc8315",
                               "fsl,mpc832x",
                               "fsl,mpc8349",
--                             "fsl,mpc8360",
--                             "fsl,mpc8379"
-+                             "fsl,mpc8360"
- - clocks: has to have two entries, which must be the core clock at index 0 and
-   the CSB (Coherent System Bus) clock at index 1. Both are given by a suitable
-   "fsl,mpc83xx-clk" device
+                              "fsl,mpc8360"
+@@ -18,15 +16,15 @@ Required properties:
+ Example:
+ 
+ socclocks: clocks {
+-	compatible = "fsl,mpc8315-clk";
++	compatible = "fsl,mpc832x-clk";
+ 	#clock-cells = <1>;
+ };
+ 
+ cpus {
+ 	compatible = "cpu_bus";
+ 
+-	PowerPC,8315@0 {
+-		compatible = "fsl,mpc8315";
++	PowerPC,8321@0 {
++		compatible = "fsl,mpc832x";
+ 		clocks = <&socclocks MPC83XX_CLK_CORE
+ 		          &socclocks MPC83XX_CLK_CSB>;
+ 	};
 diff --git a/drivers/clk/mpc83xx_clk.c b/drivers/clk/mpc83xx_clk.c
-index a43fff2e7ed..20f77a983da 100644
+index 20f77a983da..bca09f17d5f 100644
 --- a/drivers/clk/mpc83xx_clk.c
 +++ b/drivers/clk/mpc83xx_clk.c
-@@ -326,7 +326,6 @@ static const struct udevice_id mpc83xx_clk_match[] = {
+@@ -51,7 +51,7 @@ static inline bool is_clk_valid(struct udevice *clk, int id)
+ 	case MPC83XX_CLK_I2C1:
+ 		return true;
+ 	case MPC83XX_CLK_TDM:
+-		return type == SOC_MPC8315;
++		return false;
+ 	case MPC83XX_CLK_SDHC:
+ 		return mpc83xx_has_sdhc(type);
+ 	case MPC83XX_CLK_TSEC1:
+@@ -64,9 +64,9 @@ static inline bool is_clk_valid(struct udevice *clk, int id)
+ 	case MPC83XX_CLK_PCIEXP1:
+ 		return mpc83xx_has_pcie1(type);
+ 	case MPC83XX_CLK_PCIEXP2:
+-		return mpc83xx_has_pcie2(type);
++		return false;
+ 	case MPC83XX_CLK_SATA:
+-		return mpc83xx_has_sata(type);
++		return false;
+ 	case MPC83XX_CLK_DMAC:
+ 		return (type == SOC_MPC8308) || (type == SOC_MPC8309);
+ 	case MPC83XX_CLK_PCI:
+@@ -321,8 +321,6 @@ const struct clk_ops mpc83xx_clk_ops = {
+ static const struct udevice_id mpc83xx_clk_match[] = {
+ 	{ .compatible = "fsl,mpc8308-clk", .data = SOC_MPC8308 },
+ 	{ .compatible = "fsl,mpc8309-clk", .data = SOC_MPC8309 },
+-	{ .compatible = "fsl,mpc8313-clk", .data = SOC_MPC8313 },
+-	{ .compatible = "fsl,mpc8315-clk", .data = SOC_MPC8315 },
  	{ .compatible = "fsl,mpc832x-clk", .data = SOC_MPC832X },
  	{ .compatible = "fsl,mpc8349-clk", .data = SOC_MPC8349 },
  	{ .compatible = "fsl,mpc8360-clk", .data = SOC_MPC8360 },
--	{ .compatible = "fsl,mpc8379-clk", .data = SOC_MPC8379 },
- 	{ /* sentinel */ }
- };
- 
 diff --git a/drivers/clk/mpc83xx_clk.h b/drivers/clk/mpc83xx_clk.h
-index 6b74fc5f16b..b9486a4c202 100644
+index b9486a4c202..ce3683f3932 100644
 --- a/drivers/clk/mpc83xx_clk.h
 +++ b/drivers/clk/mpc83xx_clk.h
-@@ -244,15 +244,8 @@ static int retrieve_mode(int clk, int soc_type, struct clk_mode *mode)
+@@ -204,10 +204,8 @@ static int retrieve_mode(int clk, int soc_type, struct clk_mode *mode)
+ 		set_mode(mode, 0, 1, TYPE_SCCR_STANDARD);
  		break;
- 	case MPC83XX_CLK_SATA:
- 		/* FIXME(mario.six@gdsys.cc): All SATA controllers must have the same clock ratio */
--		if (soc_type == SOC_MPC8379) {
--			set_mode(mode, 24, 25, TYPE_SCCR_STANDARD);
--			set_mode(mode, 26, 27, TYPE_SCCR_STANDARD);
--			set_mode(mode, 28, 29, TYPE_SCCR_STANDARD);
--			set_mode(mode, 30, 31, TYPE_SCCR_STANDARD);
--		} else {
--			set_mode(mode, 18, 19, TYPE_SCCR_STANDARD);
--			set_mode(mode, 20, 21, TYPE_SCCR_STANDARD);
--		}
-+		set_mode(mode, 18, 19, TYPE_SCCR_STANDARD);
-+		set_mode(mode, 20, 21, TYPE_SCCR_STANDARD);
+ 	case MPC83XX_CLK_TSEC2:
+-		if (soc_type == SOC_MPC8313) /* I2C and TSEC2 are the same register */
+-			set_mode(mode, 2, 3, TYPE_SCCR_STANDARD);
+-		else /* FIXME(mario.six@gdsys.cc): This has separate enable/disable bit! */
+-			set_mode(mode, 0, 1, TYPE_SCCR_STANDARD);
++		/* FIXME(mario.six@gdsys.cc): This has separate enable/disable bit! */
++		set_mode(mode, 0, 1, TYPE_SCCR_STANDARD);
  		break;
- 	case MPC83XX_CLK_TDM:
- 		set_mode(mode, 26, 27, TYPE_SCCR_STANDARD);
+ 	case MPC83XX_CLK_SDHC:
+ 		set_mode(mode, 4, 5, TYPE_SCCR_STANDARD);
+@@ -228,7 +226,7 @@ static int retrieve_mode(int clk, int soc_type, struct clk_mode *mode)
+ 		set_mode(mode, 12, 13, TYPE_SCCR_STANDARD);
+ 		break;
+ 	case MPC83XX_CLK_USBDR:
+-		if (soc_type == SOC_MPC8313 || soc_type == SOC_MPC8349)
++		if (soc_type == SOC_MPC8349)
+ 			set_mode(mode, 10, 11, TYPE_SCCR_STANDARD);
+ 		else
+ 			set_mode(mode, 8, 9, TYPE_SCCR_STANDARD);
 diff --git a/drivers/cpu/mpc83xx_cpu.c b/drivers/cpu/mpc83xx_cpu.c
-index 127d3c3af08..780b08f0885 100644
+index 780b08f0885..01ac307c821 100644
 --- a/drivers/cpu/mpc83xx_cpu.c
 +++ b/drivers/cpu/mpc83xx_cpu.c
-@@ -82,9 +82,6 @@ static inline void determine_family(const struct udevice *dev)
- 	case 0x804:
- 		priv->family = FAMILY_836X;
+@@ -70,9 +70,6 @@ static inline void determine_family(const struct udevice *dev)
+ 	case 0x811:
+ 		priv->family = FAMILY_830X;
  		break;
--	case 0x80C:
--		priv->family = FAMILY_837X;
+-	case 0x80B:
+-		priv->family = FAMILY_831X;
 -		break;
- 	default:
- 		priv->family = FAMILY_UNKNOWN;
- 	}
-@@ -150,15 +147,6 @@ static inline void determine_type(const struct udevice *dev)
- 	case 0x8048:
- 		priv->type = TYPE_8360;
+ 	case 0x806:
+ 		priv->family = FAMILY_832X;
  		break;
--	case 0x80C6:
--		priv->type = TYPE_8377;
+@@ -108,18 +105,6 @@ static inline void determine_type(const struct udevice *dev)
+ 	case 0x8110:
+ 		priv->type = TYPE_8309;
+ 		break;
+-	case 0x80B2:
+-		priv->type = TYPE_8311;
 -		break;
--	case 0x80C4:
--		priv->type = TYPE_8378;
+-	case 0x80B0:
+-		priv->type = TYPE_8313;
 -		break;
--	case 0x80C2:
--		priv->type = TYPE_8379;
+-	case 0x80B6:
+-		priv->type = TYPE_8314;
 -		break;
- 	default:
- 		priv->type = TYPE_UNKNOWN;
- 	}
-@@ -338,7 +326,6 @@ static const struct udevice_id mpc83xx_cpu_ids[] = {
+-	case 0x80B4:
+-		priv->type = TYPE_8315;
+-		break;
+ 	case 0x8066:
+ 		priv->type = TYPE_8321;
+ 		break;
+@@ -321,8 +306,6 @@ static const struct udevice_id mpc83xx_cpu_ids[] = {
+ 	{ .compatible = "fsl,mpc83xx", },
+ 	{ .compatible = "fsl,mpc8308", },
+ 	{ .compatible = "fsl,mpc8309", },
+-	{ .compatible = "fsl,mpc8313", },
+-	{ .compatible = "fsl,mpc8315", },
  	{ .compatible = "fsl,mpc832x", },
  	{ .compatible = "fsl,mpc8349", },
  	{ .compatible = "fsl,mpc8360", },
--	{ .compatible = "fsl,mpc8379", },
- 	{ /* sentinel */ }
- };
- 
 diff --git a/drivers/cpu/mpc83xx_cpu.h b/drivers/cpu/mpc83xx_cpu.h
-index 2aaa4e18844..20579cecf5e 100644
+index 20579cecf5e..d9773d893f1 100644
 --- a/drivers/cpu/mpc83xx_cpu.h
 +++ b/drivers/cpu/mpc83xx_cpu.h
-@@ -39,7 +39,6 @@ static const char * const e300_names[] = {
+@@ -35,7 +35,6 @@ static const char * const e300_names[] = {
+ /**
+  * enum mpc83xx_cpu_family - Identifiers for MPC83xx CPU families
+  * @FAMILY_830X:    Identifier for the MPC830x CPU family
+- * @FAMILY_831X:    Identifier for the MPC831x CPU family
   * @FAMILY_832X:    Identifier for the MPC832x CPU family
   * @FAMILY_834X:    Identifier for the MPC834x CPU family
   * @FAMILY_836X:    Identifier for the MPC836x CPU family
-- * @FAMILY_837X:    Identifier for the MPC837x CPU family
-  * @FAMILY_UNKNOWN: Identifier for an unknown MPC83xx CPU family
+@@ -43,7 +42,6 @@ static const char * const e300_names[] = {
   */
  enum mpc83xx_cpu_family {
-@@ -48,7 +47,6 @@ enum mpc83xx_cpu_family {
+ 	FAMILY_830X,
+-	FAMILY_831X,
  	FAMILY_832X,
  	FAMILY_834X,
  	FAMILY_836X,
--	FAMILY_837X,
- 	FAMILY_UNKNOWN,
- };
- 
-@@ -73,9 +71,6 @@ enum mpc83xx_cpu_family {
-  * @TYPE_8358_PBGA: Identifier for the MPC8358 CPU type (Plastic Ball Grid Array
-  *		    version)
-  * @TYPE_8360:      Identifier for the MPC8360 CPU type
-- * @TYPE_8377:      Identifier for the MPC8377 CPU type
-- * @TYPE_8378:      Identifier for the MPC8378 CPU type
-- * @TYPE_8379:      Identifier for the MPC8379 CPU type
-  * @TYPE_UNKNOWN:   Identifier for an unknown MPC83xx CPU type
-  */
+@@ -54,10 +52,6 @@ enum mpc83xx_cpu_family {
+  * enum mpc83xx_cpu_type - Identifiers for MPC83xx CPU types
+  * @TYPE_8308:      Identifier for the MPC8308 CPU type
+  * @TYPE_8309:      Identifier for the MPC8309 CPU type
+- * @TYPE_8311:      Identifier for the MPC8311 CPU type
+- * @TYPE_8313:      Identifier for the MPC8313 CPU type
+- * @TYPE_8314:      Identifier for the MPC8314 CPU type
+- * @TYPE_8315:      Identifier for the MPC8315 CPU type
+  * @TYPE_8321:      Identifier for the MPC8321 CPU type
+  * @TYPE_8323:      Identifier for the MPC8323 CPU type
+  * @TYPE_8343:      Identifier for the MPC8343 CPU type
+@@ -76,10 +70,6 @@ enum mpc83xx_cpu_family {
  enum mpc83xx_cpu_type {
-@@ -94,9 +89,6 @@ enum mpc83xx_cpu_type {
- 	TYPE_8358_TBGA,
- 	TYPE_8358_PBGA,
- 	TYPE_8360,
--	TYPE_8377,
--	TYPE_8378,
--	TYPE_8379,
- 	TYPE_UNKNOWN,
- };
- 
-@@ -117,9 +109,6 @@ static const char * const cpu_type_names[] = {
- 	[TYPE_8358_TBGA] = "8358_TBGA",
- 	[TYPE_8358_PBGA] = "8358_PBGA",
- 	[TYPE_8360] = "8360",
--	[TYPE_8377] = "8377",
--	[TYPE_8378] = "8378",
--	[TYPE_8379] = "8379",
- 	[TYPE_UNKNOWN] = "Unknown CPU",
- };
- 
+ 	TYPE_8308,
+ 	TYPE_8309,
+-	TYPE_8311,
+-	TYPE_8313,
+-	TYPE_8314,
+-	TYPE_8315,
+ 	TYPE_8321,
+ 	TYPE_8323,
+ 	TYPE_8343,
+@@ -96,10 +86,6 @@ enum mpc83xx_cpu_type {
+ static const char * const cpu_type_names[] = {
+ 	[TYPE_8308] = "8308",
+ 	[TYPE_8309] = "8309",
+-	[TYPE_8311] = "8311",
+-	[TYPE_8313] = "8313",
+-	[TYPE_8314] = "8314",
+-	[TYPE_8315] = "8315",
+ 	[TYPE_8321] = "8321",
+ 	[TYPE_8323] = "8323",
+ 	[TYPE_8343] = "8343",
 diff --git a/drivers/ram/mpc83xx_sdram.c b/drivers/ram/mpc83xx_sdram.c
-index 28a663289a2..d45c4e6264e 100644
+index d45c4e6264e..888fec949df 100644
 --- a/drivers/ram/mpc83xx_sdram.c
 +++ b/drivers/ram/mpc83xx_sdram.c
-@@ -167,8 +167,7 @@ static int mpc83xx_sdram_static_init(ofnode node, u32 cs, u32 mapaddr, u32 size)
- 	odt_rd_cfg = ofnode_read_u32_default(node, "odt_rd_cfg", 0);
- 	switch (odt_rd_cfg) {
- 	case ODT_RD_ONLY_OTHER_DIMM:
--		if (!IS_ENABLED(CONFIG_ARCH_MPC8360) &&
--		    !IS_ENABLED(CONFIG_ARCH_MPC837X)) {
-+		if (!IS_ENABLED(CONFIG_ARCH_MPC8360)) {
- 			debug("%s: odt_rd_cfg value %d invalid.\n",
- 			      ofnode_get_name(node), odt_rd_cfg);
- 			return -EINVAL;
-@@ -179,8 +178,7 @@ static int mpc83xx_sdram_static_init(ofnode node, u32 cs, u32 mapaddr, u32 size)
+@@ -177,7 +177,6 @@ static int mpc83xx_sdram_static_init(ofnode node, u32 cs, u32 mapaddr, u32 size)
+ 	case ODT_RD_ONLY_CURRENT:
  	case ODT_RD_ONLY_OTHER_CS:
  		if (!IS_ENABLED(CONFIG_ARCH_MPC830X) &&
- 		    !IS_ENABLED(CONFIG_ARCH_MPC831X) &&
--		    !IS_ENABLED(CONFIG_ARCH_MPC8360) &&
--		    !IS_ENABLED(CONFIG_ARCH_MPC837X)) {
-+		    !IS_ENABLED(CONFIG_ARCH_MPC8360)) {
+-		    !IS_ENABLED(CONFIG_ARCH_MPC831X) &&
+ 		    !IS_ENABLED(CONFIG_ARCH_MPC8360)) {
  			debug("%s: odt_rd_cfg value %d invalid.\n",
  			      ofnode_get_name(node), odt_rd_cfg);
- 			return -EINVAL;
-@@ -198,8 +196,7 @@ static int mpc83xx_sdram_static_init(ofnode node, u32 cs, u32 mapaddr, u32 size)
- 	odt_wr_cfg = ofnode_read_u32_default(node, "odt_wr_cfg", 0);
- 	switch (odt_wr_cfg) {
- 	case ODT_WR_ONLY_OTHER_DIMM:
--		if (!IS_ENABLED(CONFIG_ARCH_MPC8360) &&
--		    !IS_ENABLED(CONFIG_ARCH_MPC837X)) {
-+		if (!IS_ENABLED(CONFIG_ARCH_MPC8360)) {
- 			debug("%s: odt_wr_cfg value %d invalid.\n",
- 			      ofnode_get_name(node), odt_wr_cfg);
- 			return -EINVAL;
-@@ -210,8 +207,7 @@ static int mpc83xx_sdram_static_init(ofnode node, u32 cs, u32 mapaddr, u32 size)
+@@ -206,7 +205,6 @@ static int mpc83xx_sdram_static_init(ofnode node, u32 cs, u32 mapaddr, u32 size)
+ 	case ODT_WR_ONLY_CURRENT:
  	case ODT_WR_ONLY_OTHER_CS:
  		if (!IS_ENABLED(CONFIG_ARCH_MPC830X) &&
- 		    !IS_ENABLED(CONFIG_ARCH_MPC831X) &&
--		    !IS_ENABLED(CONFIG_ARCH_MPC8360) &&
--		    !IS_ENABLED(CONFIG_ARCH_MPC837X)) {
-+		    !IS_ENABLED(CONFIG_ARCH_MPC8360)) {
+-		    !IS_ENABLED(CONFIG_ARCH_MPC831X) &&
+ 		    !IS_ENABLED(CONFIG_ARCH_MPC8360)) {
  			debug("%s: odt_wr_cfg value %d invalid.\n",
  			      ofnode_get_name(node), odt_wr_cfg);
- 			return -EINVAL;
 diff --git a/include/mpc83xx.h b/include/mpc83xx.h
-index aa8803413cd..b8d2c3edd56 100644
+index b8d2c3edd56..8a1a9e7a9b9 100644
 --- a/include/mpc83xx.h
 +++ b/include/mpc83xx.h
-@@ -74,11 +74,6 @@
- #define SPR_8358_TBGA_			0x804A
- #define SPR_8358_PBGA_			0x804E
- #define SPR_8360			0x8048
--#define SPR_837X_FAMILY			0x80C
--#define SPR_8377			0x80C6
--#define SPR_8378			0x80C4
--#define SPR_8379			0x80C2
--
- /*
-  * SPCR - System Priority Configuration Register
-  */
-@@ -118,9 +113,8 @@
+@@ -57,11 +57,6 @@
+ 
+ #define SPR_8308			0x8100
+ #define SPR_8309			0x8110
+-#define SPR_831X_FAMILY			0x80B
+-#define SPR_8311			0x80B2
+-#define SPR_8313			0x80B0
+-#define SPR_8314			0x80B6
+-#define SPR_8315			0x80B4
+ #define SPR_832X_FAMILY			0x806
+ #define SPR_8321			0x8066
+ #define SPR_8323			0x8062
+@@ -113,8 +108,8 @@
  #define SPCR_TSEC2EP			0x00000003
  #define SPCR_TSEC2EP_SHIFT		(31-31)
  
--#elif defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
--	defined(CONFIG_ARCH_MPC837X)
--/* SPCR bits - MPC8308, MPC831x and MPC837X specific */
-+#elif defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
-+/* SPCR bits - MPC8308 and MPC831x specific */
+-#elif defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
+-/* SPCR bits - MPC8308 and MPC831x specific */
++#elif defined(CONFIG_ARCH_MPC8308)
++/* SPCR bits - MPC8308 specific */
  /* TSEC data priority */
  #define SPCR_TSECDP			0x00003000
  #define SPCR_TSECDP_SHIFT		(31-19)
-@@ -237,59 +231,6 @@
- #define SICRH_TSOBI1			0x00000002
- #define SICRH_TSOBI2			0x00000001
+@@ -199,38 +194,6 @@
+ #define SICRL_URT_CTPR			0x06000000
+ #define SICRL_IRQ_CTPR			0x00C00000
  
--#elif defined(CONFIG_ARCH_MPC837X)
--/* SICRL bits - MPC837X specific */
--#define SICRL_USB_A			0xC0000000
--#define SICRL_USB_B			0x30000000
--#define SICRL_USB_B_SD			0x20000000
+-#elif defined(CONFIG_ARCH_MPC8313)
+-/* SICRL bits - MPC8313 specific */
+-#define SICRL_LBC			0x30000000
 -#define SICRL_UART			0x0C000000
--#define SICRL_GPIO_A			0x02000000
--#define SICRL_GPIO_B			0x01000000
--#define SICRL_GPIO_C			0x00800000
--#define SICRL_GPIO_D			0x00400000
--#define SICRL_GPIO_E			0x00200000
--#define SICRL_GPIO_F			0x00180000
--#define SICRL_GPIO_G			0x00040000
--#define SICRL_GPIO_H			0x00020000
--#define SICRL_GPIO_I			0x00010000
--#define SICRL_GPIO_J			0x00008000
--#define SICRL_GPIO_K			0x00004000
--#define SICRL_GPIO_L			0x00003000
--#define SICRL_DMA_A			0x00000800
--#define SICRL_DMA_B			0x00000400
--#define SICRL_DMA_C			0x00000200
--#define SICRL_DMA_D			0x00000100
--#define SICRL_DMA_E			0x00000080
--#define SICRL_DMA_F			0x00000040
--#define SICRL_DMA_G			0x00000020
--#define SICRL_DMA_H			0x00000010
--#define SICRL_DMA_I			0x00000008
--#define SICRL_DMA_J			0x00000004
--#define SICRL_LDP_A			0x00000002
--#define SICRL_LDP_B			0x00000001
+-#define SICRL_SPI_A			0x03000000
+-#define SICRL_SPI_B			0x00C00000
+-#define SICRL_SPI_C			0x00300000
+-#define SICRL_SPI_D			0x000C0000
+-#define SICRL_USBDR_11			0x00000C00
+-#define SICRL_USBDR_10			0x00000800
+-#define SICRL_USBDR_01			0x00000400
+-#define SICRL_USBDR_00			0x00000000
+-#define SICRL_ETSEC1_A			0x0000000C
+-#define SICRL_ETSEC2_A			0x00000003
 -
--/* SICRH bits - MPC837X specific */
--#define SICRH_DDR			0x80000000
--#define SICRH_TSEC1_A			0x10000000
--#define SICRH_TSEC1_B			0x08000000
--#define SICRH_TSEC2_A			0x00400000
--#define SICRH_TSEC2_B			0x00200000
--#define SICRH_TSEC2_C			0x00100000
--#define SICRH_TSEC2_D			0x00080000
--#define SICRH_TSEC2_E			0x00040000
--#define SICRH_TMR			0x00010000
--#define SICRH_GPIO2_A			0x00008000
--#define SICRH_GPIO2_B			0x00004000
--#define SICRH_GPIO2_C			0x00002000
--#define SICRH_GPIO2_D			0x00001000
--#define SICRH_GPIO2_E			0x00000C00
--#define SICRH_GPIO2_E_SD		0x00000800
--#define SICRH_GPIO2_F			0x00000300
--#define SICRH_GPIO2_G			0x000000C0
--#define SICRH_GPIO2_H			0x00000030
--#define SICRH_SPI			0x00000003
--#define SICRH_SPI_SD			0x00000001
+-/* SICRH bits - MPC8313 specific */
+-#define SICRH_INTR_A			0x02000000
+-#define SICRH_INTR_B			0x00C00000
+-#define SICRH_IIC			0x00300000
+-#define SICRH_ETSEC2_B			0x000C0000
+-#define SICRH_ETSEC2_C			0x00030000
+-#define SICRH_ETSEC2_D			0x0000C000
+-#define SICRH_ETSEC2_E			0x00003000
+-#define SICRH_ETSEC2_F			0x00000C00
+-#define SICRH_ETSEC2_G			0x00000300
+-#define SICRH_ETSEC1_B			0x00000080
+-#define SICRH_ETSEC1_C			0x00000060
+-#define SICRH_GTX1_DLY			0x00000008
+-#define SICRH_GTX2_DLY			0x00000004
+-#define SICRH_TSOBI1			0x00000002
+-#define SICRH_TSOBI2			0x00000001
 -
  #elif defined(CONFIG_ARCH_MPC8308)
  /* SICRL bits - MPC8308 specific */
  #define SICRL_SPI_PF0			(0 << 28)
-@@ -522,13 +463,6 @@
- #define HRCWL_SVCOD_DIV_8		0x20000000
- #define HRCWL_SVCOD_DIV_1		0x30000000
- 
--#elif defined(CONFIG_ARCH_MPC837X)
--#define HRCWL_SVCOD			0x30000000
--#define HRCWL_SVCOD_SHIFT		28
--#define HRCWL_SVCOD_DIV_4		0x00000000
--#define HRCWL_SVCOD_DIV_8		0x10000000
--#define HRCWL_SVCOD_DIV_2		0x20000000
--#define HRCWL_SVCOD_DIV_1		0x30000000
- #endif
- 
- /*
-@@ -576,15 +510,11 @@
- #if defined(CONFIG_ARCH_MPC834X)
- #define HRCWH_ROM_LOC_PCI2		0x00200000
- #endif
--#if defined(CONFIG_ARCH_MPC837X)
--#define HRCWH_ROM_LOC_ON_CHIP_ROM	0x00300000
--#endif
- #define HRCWH_ROM_LOC_LOCAL_8BIT	0x00500000
+@@ -514,7 +477,7 @@
  #define HRCWH_ROM_LOC_LOCAL_16BIT	0x00600000
  #define HRCWH_ROM_LOC_LOCAL_32BIT	0x00700000
  
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
--	defined(CONFIG_ARCH_MPC837X)
-+#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
+-#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
++#if defined(CONFIG_ARCH_MPC8308)
  #define HRCWH_ROM_LOC_NAND_SP_8BIT	0x00100000
  #define HRCWH_ROM_LOC_NAND_SP_16BIT	0x00200000
  #define HRCWH_ROM_LOC_NAND_LP_8BIT	0x00500000
-@@ -636,8 +566,7 @@
+@@ -566,7 +529,7 @@
  /*
   * RSR - Reset Status Register
   */
--#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X) || \
--	defined(CONFIG_ARCH_MPC837X)
-+#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
+-#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
++#if defined(CONFIG_ARCH_MPC8308)
  #define RSR_RSTSRC			0xF0000000	/* Reset source */
  #define RSR_RSTSRC_SHIFT		28
  #else
-@@ -850,45 +779,6 @@
- #define SCCR_TDMCM_2			0x00000020
- #define SCCR_TDMCM_3			0x00000030
+@@ -712,29 +675,8 @@
+ #define SCCR_USBCM_2			0x00A00000
+ #define SCCR_USBCM_3			0x00F00000
  
--#elif defined(CONFIG_ARCH_MPC837X)
--/* SCCR bits - MPC837X specific */
+-#elif defined(CONFIG_ARCH_MPC8313)
+-/* TSEC1 bits are for TSEC2 as well */
 -#define SCCR_TSEC1CM			0xc0000000
 -#define SCCR_TSEC1CM_SHIFT		30
 -#define SCCR_TSEC1CM_0			0x00000000
@@ -1160,48 +1081,42 @@ index aa8803413cd..b8d2c3edd56 100644
 -#define SCCR_TSEC1CM_2			0x80000000
 -#define SCCR_TSEC1CM_3			0xC0000000
 -
--#define SCCR_TSEC2CM			0x30000000
--#define SCCR_TSEC2CM_SHIFT		28
--#define SCCR_TSEC2CM_0			0x00000000
--#define SCCR_TSEC2CM_1			0x10000000
--#define SCCR_TSEC2CM_2			0x20000000
--#define SCCR_TSEC2CM_3			0x30000000
+-#define SCCR_TSEC1ON			0x20000000
+-#define SCCR_TSEC1ON_SHIFT		29
+-#define SCCR_TSEC2ON			0x10000000
+-#define SCCR_TSEC2ON_SHIFT		28
 -
--#define SCCR_SDHCCM			0x0c000000
--#define SCCR_SDHCCM_SHIFT		26
--#define SCCR_SDHCCM_0			0x00000000
--#define SCCR_SDHCCM_1			0x04000000
--#define SCCR_SDHCCM_2			0x08000000
--#define SCCR_SDHCCM_3			0x0c000000
--
--#define SCCR_USBDRCM			0x00c00000
--#define SCCR_USBDRCM_SHIFT		22
+-#define SCCR_USBDRCM			0x00300000
+-#define SCCR_USBDRCM_SHIFT		20
 -#define SCCR_USBDRCM_0			0x00000000
--#define SCCR_USBDRCM_1			0x00400000
--#define SCCR_USBDRCM_2			0x00800000
--#define SCCR_USBDRCM_3			0x00c00000
+-#define SCCR_USBDRCM_1			0x00100000
+-#define SCCR_USBDRCM_2			0x00200000
+-#define SCCR_USBDRCM_3			0x00300000
 -
--/* All of the four SATA controllers must have the same clock ratio */
--#define SCCR_SATA1CM			0x000000c0
--#define SCCR_SATA1CM_SHIFT		6
--#define SCCR_SATACM			0x000000ff
--#define SCCR_SATACM_SHIFT		0
--#define SCCR_SATACM_0			0x00000000
--#define SCCR_SATACM_1			0x00000055
--#define SCCR_SATACM_2			0x000000aa
--#define SCCR_SATACM_3			0x000000ff
- #endif
- 
- #define SCCR_PCIEXP1CM			0x00300000
-@@ -932,7 +822,7 @@
- #elif defined(CONFIG_ARCH_MPC832X)
- #define CSCONFIG_ODT_RD_CFG		0x00400000
- #define CSCONFIG_ODT_WR_CFG		0x00040000
--#elif defined(CONFIG_ARCH_MPC8360) || defined(CONFIG_ARCH_MPC837X)
-+#elif defined(CONFIG_ARCH_MPC8360)
+ #elif defined(CONFIG_ARCH_MPC8308)
+-/* SCCR bits - MPC8315/MPC8308 specific */
++/* SCCR bits - MPC8308 specific */
+ #define SCCR_TSEC1CM			0xc0000000
+ #define SCCR_TSEC1CM_SHIFT		30
+ #define SCCR_TSEC1CM_0			0x00000000
+@@ -810,7 +752,7 @@
+  */
+ #define CSCONFIG_EN			0x80000000
+ #define CSCONFIG_AP			0x00800000
+-#if defined(CONFIG_ARCH_MPC830X) || defined(CONFIG_ARCH_MPC831X)
++#if defined(CONFIG_ARCH_MPC830X)
  #define CSCONFIG_ODT_RD_NEVER		0x00000000
  #define CSCONFIG_ODT_RD_ONLY_CURRENT	0x00100000
  #define CSCONFIG_ODT_RD_ONLY_OTHER_CS	0x00200000
+@@ -932,7 +874,7 @@
+ #define SDRAM_CFG_SDRAM_TYPE_MASK	0x07000000
+ #define SDRAM_CFG_SDRAM_TYPE_SHIFT	24
+ #define SDRAM_CFG_DYN_PWR		0x00200000
+-#if defined(CONFIG_ARCH_MPC8308) || defined(CONFIG_ARCH_MPC831X)
++#if defined(CONFIG_ARCH_MPC8308)
+ #define SDRAM_CFG_DBW_MASK		0x00180000
+ #define SDRAM_CFG_DBW_16		0x00100000
+ #define SDRAM_CFG_DBW_32		0x00080000
 -- 
 2.47.3
 
