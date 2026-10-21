@@ -1,132 +1,239 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E803C606A31A
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 16:08:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D100B606A31D
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 16:09:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=RlT/2Yv5;
-	dkim=pass (1024-bit key, unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.a=rsa-sha256 header.s=default header.b=At1lWtQG
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=D9oqE8hs;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LGQ69A1m;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=EVFlSdMR
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C0E2560856;
-	Wed, 21 Oct 2026 16:08:20 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AB62880EE8;
+	Wed, 21 Oct 2026 16:09:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TCsZsufhIag7; Wed, 21 Oct 2026 16:08:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B7A9560844
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792598899;
-	b=ndygXNe997DSZI+NGmMgtwwsnRKTVwvpYFB+qJ+KMUn19imujjBBPvbtqtAiFG4O6vtw
-	 JxneHb/1J/3qFFcy8S3Ilf8HQU0oQM99+5vBBOtN+RuYr2Qhm+WXtiuvVikQVo5VNhqqD
-	 Q+f3lENzIUeP8AMaPFiu5LCEsnwhzAKE3WX5a6nW8psdObJnISs5TBqqmKA5XQpcLIUFB
-	 S72s5KQzZlzfz7CXAzFFTOYTQwRVLKCVfxCZf8CzuLZYzeFy0FxBcRYVlaoD8Qdv/LTmh
-	 a5BV3AzWLyMWGcZpWN8oTh4Z9BArxzL84uVD+mDDAcjgwNMCoG/Ak202heVrg3ttmwg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WI3qP3knCB8D; Wed, 21 Oct 2026 16:09:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7879680F88
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792598976;
+	b=F8APAjQ7cwhoy1v+dKj/Wb3A7dH0EaygrWcxip/t6FpnWS5KJAu0Ql87AbDauRoGUBUM
+	 leF1lJRk9B//MkkuhJ8GkJhsCo2IULeZeBbj9f8C9lbMWcCocHG34j2ZEBg54L+VLFhXg
+	 mUeEWRqa9XVEznBBpiX+k6PCW7geG6mLl2kuuWL2Ts+O/5yTZcqFp5GDfrCxO7ZNBfDNd
+	 wZU+gmKnkoIbIZW0znXhuO9+88zFEjj/IHJ1nHIkevr4oZ2wfMoAoAcbVopqaI9XtsBjG
+	 nbGGKHPsUxeGMyNzNZzPLXqI58zV4GChX0HM7QpXbpolCUkHQwfE7OyR8q7O4v2Q1aA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792598899;
+	c=relaxed/relaxed; t=1792598976;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Filter:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=LfZzLSPZ0VANr57id5Rgwqs/LdospUGPlderyNg8mkQ=;
-	b=oNN/CRR5GGcBi2KQGjGvCS6jax1D8AWu3nrlckL64gEmq4fGGlNp16mioO7bHEgKFh6f
-	 Go8O2Dl3azUWFLnFXHXaBw/fO7EpV4kcWl+7GP7r4ZEbQ0nQkRTbqP31pc9c8Onw8Tace
-	 SqqyyNi5ZzHf54oe1/pXkCCwiSgaKQ9JWlDkfqT61CGpjFRizjibTtMx71B4V7+hK4Qbb
-	 vc0znA3YAfm3WDSjeEmGUFku6pM4z75nWar4vk2kVNUMQ2yNM3b/FbR+p6wu3XmswkDeo
-	 D3Scqudq82nrXFZIXvKeYxwyWPtZaHPwf39V2EsPfWTaEQRQnJzZnmlxz0WzA8WuICA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Subject:Date:
+	 Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=iJGcUC0wbP1Z9eZm/GdIWw8iITGybvUDQkhgqhbXuPQ=;
+	b=h6LivUZ70YHms1LRPIzlkm7r1Tu2ZdpOAYiYsppWUFwu1mQNRPv5riTNh/qmTF6z6fNf
+	 d4rd3QTV2XmyUqPHJIJBVlnNu8b1CQ8/ih5KjCcb+ns1WboFgl7fRVFDYoFLUgdWysDyG
+	 i+7eillJpBh1V+7BIsx8x06oy4RoyDL8Sxeb/utwtwSbq6kYkCv2vMa0dTQ4+RpYVGLJd
+	 wE4DrJeyPwlfDjUEdb7/OnjX8YMtBViY7petZi1GCYjdDenD9k3VgDLhZuPY8+/GH0sOM
+	 l7sA5TM0sMGIyyQjJF4cNCot6HVD/D8/+KDTV1B+GPKdeWUM+7i/mj7MuuABIj25JPA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LGQ69A1m;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=EVFlSdMR;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792598899;
-	bh=LfZzLSPZ0VANr57id5Rgwqs/LdospUGPlderyNg8mkQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=RlT/2Yv5RpIam6FYhX/zv+tOOmCS4yjA9fqhr1bnyTjYqVMRQuGJ2wKkxUZxP0KeY
-	 tW4WqK4Tm0Rk4Y/opt5rvF8IBx/lHjunO/YmVVs2IqEUGzCIHajWtz6zBzcZLjP4Wi
-	 xnb8t2i+mYhja4wMTunGsEL+nnvRXWQ+fFv0sE3UuOhAkMKrIayQ/v4IFk3+u5eY4y
-	 C1W6e2QqkcjOTj593MC3wwSriYPLsj5shAJYGAa8Fp9di7FQ4P04ewKoh7NPSTV2lu
-	 ATjrPI9Ge+PI3JgukpN8zoW/mPp0IcZIzL1MqVb179ZHVPpYtemP54YBya0nASKBxn
-	 3DbqjWA2gyb5w==
+	d=lists.u-boot-project.org; s=default; t=1792598976;
+	bh=iJGcUC0wbP1Z9eZm/GdIWw8iITGybvUDQkhgqhbXuPQ=;
+	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=D9oqE8hskpx/32UEVecyIbTdxd9kzNkCngd3NNnLzPxFBiWt+7FZw1ds24jugLmn4
+	 eM1oIq2LvUpez6YiDfegxEj8nECqQ4qZsP+f9XDbz7iB0wgFnA/8N1E2AMFTKh967l
+	 DlP33Ek4DjGMMno/wj3ROFJYAwTyEYnEmYPlfxaWe4X48YMA3X8NZVczF0YXLp63/r
+	 D3KJizG/n9mGOFK82j8/a1Bw2yzyQwkyLkLlBOSFVDn/r6BGE3Eew5FS+7W9j8+ATe
+	 WZrM0RRbR/PxYm2FD4977KWL+inZCFGFMH6xe+RA9kmrhtdIwFlAZJBzjWCfq7CNnf
+	 DGcI8fvax/zJg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B7A9560844;
-	Wed, 21 Oct 2026 16:08:19 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id CCEE795C
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:08:18 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7879680F88;
+	Wed, 21 Oct 2026 16:09:36 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 76F871E11
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:09:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id BEB824039F
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:08:18 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 691C680F88
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:09:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LuE1mnACeEPY for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 16:08:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org B536540077
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=13.77.154.182
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792598897;
- b=B2i6VufTSgog1LrroIRVfY+PDDQuTA+ULtATF621lq8wmo5kPtQMZnc//eHF5S1LEm9i
- O+a8tFoaQTt0hCgnhis+on0My1v8ySFo70msqydzLQ7oYWb1EEQ9auT1wOUqmGHylC04J
- fwd4OZC8Gvei2vJcZ9hapfiKm5asD68jHy66NclnWFyEoitPDp9ronrqhJtUHipnx4HiB
- YPpFnsq0gbwIdgRG8c8G+HCKaP/3eBIeWB0Z7Ilk5Jw00A9NBBQRaAwgNHE49GZ85aTp4
- N6nZfLzRgN4CFveSxb782RITvC0D7VrMQVp7clFDO/GbSEOjTc4sI7MsR4EVgTgWPog==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hr5ql7jw4wdq for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 16:09:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 57FA280EE8
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip=205.220.168.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792598973;
+ b=DQnxq42fq4trTBECLHYPOdzysscB55CJD/Kj35jEGUYQzSKHG6KX8GR8w3horhZr8J7i
+ F5S7fUnwqryAo5W/8I22fAYAjuJsa2I86r9n+U2kjv+1VoeCgfqEPJ9DphSFEolxeuha7
+ 6onuUToyb+Zmq+HLGHvQSI6EiqIskuTLP5ugiUTtkJFD4Cmy8UtHiH858Kbc3AHfK2FdE
+ 1V7LBDyzR3Kt5GfBMHbh1nnnqUBo0Ec7bKPhUfb3GCPsAFnlpT1uLMkg2CBlKwtYX/Crb
+ fBdmGaluYpb9iNkz0ZPLBOVBxKBU0eZ7mbRa6kX6s5ehjhzMhPpSy7FKb5WuGJneDjg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792598897;
- h=Received-SPF:Received:DKIM-Filter:DKIM-Signature:Date:From:To:Cc:
- Subject:Message-ID:References:MIME-Version:Content-Type:
- Content-Disposition:In-Reply-To;
- bh=LfZzLSPZ0VANr57id5Rgwqs/LdospUGPlderyNg8mkQ=;
- b=r4TE8rU3jKnlvRmul9UGFK3KqqGv0IdDsn82DfujGi1E4NbTlCeUf9nhfIKRMjlQcdWd
- JqHc8Plbqduz29LRm1StrURWjKYjYM8doAmCLkbDkTTt0Ka52cxc6RptnHDTZvvplRKqQ
- CkgBnrFKMHwftAFzS0CyDLZqZhzgmTNKuOhGOQ0YLU0j4U+C1MtZGtb8MV9nyx41LGHrO
- NKmkUEIHjSE/nTniWhKPz/qbVSHIr7czOmGJRmTwdPfhOxK0nrG/bR3bBQo3P6pYH7Qgn
- U7xeAT1XrQ8pABwNOJt6USaQ4v59B9Usn5tdPmDExq/fRu1nn9G6MsVSWLMQa1iGmvQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=linux.microsoft.com;
- dkim=pass header.d=linux.microsoft.com header.i=@linux.microsoft.com
- header.a=rsa-sha256 header.s=default header.b=At1lWtQG; 
- arc=none smtp.remote-ip=13.77.154.182
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=13.77.154.182;
- helo=linux.microsoft.com; envelope-from=sriramsriram@linux.microsoft.com;
+ c=relaxed/relaxed; t=1792598973;
+ h=Received-SPF:Received:DKIM-Signature:Received:Received:
+ DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:
+ Subject:Date:Message-Id:X-Mailer:MIME-Version:
+ Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
+ X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
+ X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+ X-Proofpoint-Spam-Details;
+ bh=iJGcUC0wbP1Z9eZm/GdIWw8iITGybvUDQkhgqhbXuPQ=;
+ b=pU3XJg6kNBqVp5BtsgIvszZfy+R/rUS/65g0gNm0xEGP3gHTlm0cLjRfI1IrZkWnWn2d
+ JHd0lEm/61xSHKbFwea1ovgEmh60zfkEf2PO3IkQ91EfmRGWIQlM4wFRVWFLPcgGV3RSq
+ 8RCo/a7D8C/wxI33NT1AdfIikcqGpTpWCXOyNgSTVBbo4ZQe0glQyI5tw6m/DJeSjR1iV
+ LlkWi2MRsX2imIYvrUs6aSK0ktwpcSCutxWg4DHy/yZuNSqWXxOW9mV+h+9IH4t6jDLz4
+ 75qPof/HORWl4X/ksCeziLmk1KhI8iXRcb1UyzBQlrRnQH1MCftPsHKCSnBdst1Jvwg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=pass header.from=oss.qualcomm.com;
+ dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
+ header.s=qcppdkim1 header.b=LGQ69A1m; 
+ dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=EVFlSdMR; 
+ arc=none smtp.remote-ip=205.220.168.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
+ helo=mx0a-0031df01.pphosted.com; envelope-from=aswin.murugan@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
- header.from=linux.microsoft.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com
- header.a=rsa-sha256 header.s=default header.b=At1lWtQG
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by smtp2.osuosl.org (Postfix) with ESMTP id B536540077
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:08:17 +0000 (UTC)
-Received: by linux.microsoft.com (Postfix, from userid 1251)
- id A888120B7166; Wed, 21 Oct 2026 09:08:09 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com A888120B7166
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1792598889;
- bh=LfZzLSPZ0VANr57id5Rgwqs/LdospUGPlderyNg8mkQ=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=At1lWtQG3Xd3IyvYVFCaPKmbpySeey22sUuG07UYdzkHbPW4uT9Z23VLn4lRPx6uW
- nqfOmkA293zO1bUwDUC0TsZxoGJklMFzEgrm7icscj8XSNHV81Q3b4gywGZ9ybXZjS
- onMfBVXqUjzVp5xCmS6H41/SzVxvLhjFMFWGK5iQ=
-Date: Wed, 21 Oct 2026 09:08:09 -0700
-From: Sriram Sriram <sriramsriram@linux.microsoft.com>
-To: Jerome Forissier <jerome.forissier@arm.com>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Drew Kluemke <ankluemk@microsoft.com>,
- Daniel Munic <v-dmunic@microsoft.com>, nd@arm.com
-Subject: Re: [PATCH v2 0/3] Bounds hardening in NFS, TFTP and ext4
-Message-ID: <atjjabSILKYStdbD@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
-References: <20260909192016.217183-1-sriramsriram@linux.microsoft.com>
- <20260915205210.260404-1-sriramsriram@linux.microsoft.com>
- <cde13a24-7ee8-42a3-9f7e-46b08ae3fab0@arm.com>
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=LGQ69A1m; 
+ dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=EVFlSdMR
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 57FA280EE8
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:09:31 +0000 (UTC)
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69LFU7gE1046543
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:09:31 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=iJGcUC0wbP1Z9eZm/GdIWw8iITGybvUDQkh
+ gqhbXuPQ=; b=LGQ69A1m0/UumvH+JyGxvnWK1BbT9jhTqWYKwhQYz5BIxM4Xwje
+ PW3AasgU821+yYYO4cvjXDXU2kvyOyPAAmZAMQtRcKoRE67zyEOewq0uzVhaKxTg
+ 4aAD5FD1yiwjXRfA0Ij5aQgVuB2+khkEH67OVXULAohfwIJcYPKnz2B6SadvaxTc
+ 0aB3JJB9K110bRUeeZIKTe3fklt6G084a9kb1lKJOsBowBQkfh+CCxyNBaSqZq4P
+ 12cmpAo8cjo8qsnYcEAmcHJ4xlIPiMgDSUKOm0Z42e+yCxAjfmnMWr04kjUjbTa1
+ I4bTA0nXdvMau2itu6gF6Pe9II1jWSo00hQ==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
+ [74.125.82.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hetj49n38-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:09:30 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id
+ 5a478bee46e88-36637676140so1538826eec.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 09:09:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1792598967; x=1793203767;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=iJGcUC0wbP1Z9eZm/GdIWw8iITGybvUDQkhgqhbXuPQ=;
+ b=EVFlSdMRU3WdSyrTQYOeUGr2nkJdCMNHoQSGTyh6mlaX3EsJncMsCVsqnyn2ZBEpPe
+ d1f/E4gaaalLI6/oHRRRhF9Cvj53acNTfIg9Sio8iHp6Pfjv1O+7QYma7gGhldy+XyfE
+ n5DCi/u2luPtb43oerBOovI6apQcY+cwTAIAhxj0EiEw1wP4LoMv88ERZE06HhDXUC1R
+ oJpNv9KFubRmUsYU6gXoNEb2jsl+np15VVffq1eyMUNsFytHBwUzZjM0mxYJIjSoLtYQ
+ j5ifE7EeEp4nF0QOHljblusOmY7pE5KZBzfenZ+Z108CG7hjw29yaRyXo/pA/mk0IgGm
+ uM/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792598967; x=1793203767;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=iJGcUC0wbP1Z9eZm/GdIWw8iITGybvUDQkhgqhbXuPQ=;
+ b=gNpHAySFIYYdU2QBkFrbXNJyDPcp12FQDoxblvdgQWM0f+pRya1hD4OlLjfEeeJJPI
+ T5LlQmYWYgWl53yZaiPF1cxu44oeJu6TZnaXKiu9+p5GT79Z+WKWgdDGGFN1InqcoAOI
+ FVlCNxnU9Yq8oq+MyHnp39/wOgy36zrG0eAcQ+OK6ZhAnBQweQjiYBQsUAETLdjhKI76
+ QV2nMTusKBPDJ+Ir5JGPjUBghbcWN6fBZlxjEC3UMz7d/aubel/oe8ZUh+v+ObX5AVHA
+ /HduBHCq654P1GOofDaUT5nVMYp4dZV0J0EtdiXZQW049I2ovW4g39KjB+i9K5+f9B0k
+ pdwg==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzZEn9mD5vkB3X+QECP7dWQMi1NN2d8Y5R7UE7zwj07zlEJ/PVMpLh3bxfDthJqHC+IP2M+3Qw=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJuReTqVpCgx+Yuk2xHa4HYcltOmZTOFV0Mq9t+XS66cELX50sI
+ IjMTB1mc4GiK8pzAjKioaKDstE5YfvtjvdxVk4bPC0DIrtyHCheSd/NjvZpgGZg/W99tmBnnRuI
+ eiL51wv9XrS7n0UhDdUxGhtujQ3zdLah6GJ2mIAon5g5kDvJkwbTjRxGc01dg7Djp8sQLq84=
+X-Gm-Gg: AYBFou2uW+nLsmy2cFrYd2Wj8Aojv8p31uVgYUjuAw40IVZXgCBYiKqZLUcq76hb0BB
+ Q47eU7w/SY/2DguUtuZlrfh3+RWLC3pTO6Q+IVhPKiI19nyB4bFQrnT+aeuXA/0qGUgH6iilU0o
+ TnBYgeMc8B6Q+7rj4YfTbYxArRmw1VgqAY0ym45aKsj3mfhX72pXRO+KL10K0KAc6Eis44Y1nXL
+ 8gErsFY6WbMfDRjNDenRmnk+ODqKpCajO785hGr3nlvniqci7AMOl14jqUUNKDvLX5JOO+qVpLy
+ diYAT0dVpCtPzP0yOruR4Mn6SP7iS0WxF8RU9DavMfYtXDZNsr0mGXEk46264z6CldO5qFl0dmD
+ LlG4m6GSsccZlydcThDFVIst655DHY+UMkJtumFbsGXf5fpyYBcQhbSeI+Z5TsW5kOK2M3oRp0T
+ A3cdIcPY0JHULNAx6zrrc=
+X-Received: by 2002:a05:7301:1527:b0:35c:2986:35ab with SMTP id
+ 5a478bee46e88-3674d54de68mr3734726eec.13.1792598967453; 
+ Wed, 21 Oct 2026 09:09:27 -0700 (PDT)
+X-Received: by 2002:a05:7301:1527:b0:35c:2986:35ab with SMTP id
+ 5a478bee46e88-3674d54de68mr3734689eec.13.1792598966697; 
+ Wed, 21 Oct 2026 09:09:26 -0700 (PDT)
+Received: from hu-aswinm-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-367405ee5e3sm8216884eec.4.2026.10.21.09.09.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Oct 2026 09:09:26 -0700 (PDT)
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, trini@konsulko.com,
+ aswin.murugan@oss.qualcomm.com, lukma@nabladev.com,
+ marek.vasut+usb@mailbox.org, Michael.Srba@seznam.cz,
+ william.bright@imd-tec.com, luca.weiss@fairphone.com,
+ nikroks@mainlining.org, nathbappai@gmail.com, macpaul.lin@mediatek.com,
+ jbx6244@gmail.com, dlechner@baylibre.com,
+ balaji.selvanathan@oss.qualcomm.com,
+ varadarajan.narayanan@oss.qualcomm.com, u-boot-qcom@groups.io,
+ u-boot@lists.u-boot-project.org
+Subject: [PATCH v4 00/12] arm64: qcom: Add initial support for Shikra SoC
+Date: Wed, 21 Oct 2026 21:39:04 +0530
+Message-Id: <20261021160916.3894471-1-aswin.murugan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cde13a24-7ee8-42a3-9f7e-46b08ae3fab0@arm.com>
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: khf2HfqtOL4Uh4SqSc0UMstxINaaMSgZ
+X-Proofpoint-GUID: khf2HfqtOL4Uh4SqSc0UMstxINaaMSgZ
+X-Authority-Analysis: v=2.4 cv=N768hG9B c=1 sm=1 tr=0 ts=6ad8e3ba cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=gu6fZOg2AAAA:8
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=XM3drYV-cKaoLeI7bekA:9
+ a=PxkB5W3o20Ba91AHUih5:22 a=2RSlZUUhi9gRBrsHwhhZ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA2NCBTYWx0ZWRfX+t5zCTk0QGwn
+ QYMN+RjrnES9J4HIYX7Lf+LK9A0wxmmDZKYGw7fGhtFeZ8vnRTEZRzpTlF68jX5qDDplae1HwDf
+ +Jt2EX/C5JOVdSunkDHkzTlYbpfDJoqDRBmZf0FhU2lf/xRBNIkniEntS6C1minJ4Ek00jc58hV
+ R0tYZTf1t60Qf+wJuVKkuu5FbJNgE1fzIN8LbkYDaEO1oqvCjyGTQPkaARxQm2/PVneQ/I/1UpM
+ WLBUBgiw79/JQHSqIeVGuVCEldRaMNaKt3oSTAgJ2nNCwfzeOxYAxqnAf33tvwl7UOwPBdfsBpG
+ WgCOHbJRupUwQzegcAkDmPDh6yFACH8qPz7G5XDg99PVwyquiU/rzOphsKTNc2x7gK91pbglwdN
+ 6h6RAMpijEPBfA8aBJjp0/GOdpSMNGj9qAC/hjS3rF+OFYMd3GTEHZkYFV2UgglA/KaEzNyU2YQ
+ p5aZ7Imo+UhUAzbCikw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA2NCBTYWx0ZWRfXwx7zNe82kJZP
+ i5x+ZgBB8hlxNeMf2Qy24MeTSWEHsJqjY61SYmk2tSrZYI3WRTBiJ0FmJpcop2Zs5zIItU6fqJ9
+ mY2ySEJVbkrtSAYs1dz3y2fv+wzmZg0=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-21_04,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 clxscore=1015 malwarescore=0 suspectscore=0 phishscore=0
+ bulkscore=0 adultscore=0 impostorscore=0 lowpriorityscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210064
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -136,59 +243,90 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, Oct 21, 2026 at 11:50:51AM +0200, Jerome Forissier wrote:
-> > Three independent hardening fixes found by internal static analysis and
-> > code review. They do not depend on each other.
-> >
-> > Changes in v2:
-> >  - Dropped "boot: image-fit: add overflow guard for FIT decompression
-> >    buffer" (2/4 in v1). As Tom pointed out, max_decomp_len is used both
-> >    as the allocation size and as the unc_len bound handed to
-> >    image_decomp(), so a wrapped multiply cannot leave the bound larger
-> >    than the buffer, and image_decomp() already fails cleanly on a bound
-> >    that is too small. The claim in that commit message was wrong, so the
-> >    patch is withdrawn rather than reworded.
-> >  - net: tftp: replaced the four bounded strncasecmp() comparisons with a
-> >    single check that the packet ends in a NUL, per Tom's review. It is
-> >    smaller (+16 bytes of .text on am335x_evm_defconfig instead of +24)
-> >    and it also covers the dectoul() calls, which v1 left unbounded.
-> >    Retitled to match.
-> >  - Rebased onto current master (a44f46af0aa).
-> >  - No change to the NFS and ext4 patches.
-> >
-> > Daniel Munic (1):
-> >   fs: ext4: widen ext4fs_update() block-group loop counter
-> >
-> > Drew Kluemke (2):
-> >   net: nfs: add bounds checks on memcpy into stack-allocated rpc_pkt
-> >   net: tftp: verify the OACK packet is NUL terminated
-> >
-> >  fs/ext4/ext4_write.c |  2 +-
-> >  net/nfs-common.c     | 10 ++++++++++
-> >  net/tftp.c           |  7 +++++++
-> >  3 files changed, 18 insertions(+), 1 deletion(-)
-> 
-> Applied to u-boot-net branch for-main [1], thanks!
-> 
-> [1] https://git.u-boot-project.org/u-boot/custodians/u-boot-net/-/commits/for-main
-> 
-> [1/3] net: nfs: add bounds checks on memcpy into stack-allocated rpc_pkt
->       commit: a9631ec898a6f71334c88d29c8e6c9cdb1334a41
-> 
-> [2/3] net: tftp: verify the OACK packet is NUL terminated
->       commit: 2044f0c8ac168e3a2d23a47e21c61f248f93f285
-> 
-> Best regards,
-> -- 
-> Jerome Forissier <jerome.forissier@arm.com>
-Great! Thank you.
+This series adds initial support for the Qualcomm Shikra SoC in U-Boot,
+including device tree, clock, pinctrl, SMEM updates, USB and configuration
+changes required to enable early boot on Shikra-based platforms.
 
-Regards,
-Sriram
+The device tree support is ported from a Linux linux-next branch
+
+The series includes:
+  - GCC clock driver support
+  - Pinctrl driver for Shikra TLMM
+  - USB hsphy & ssphy support
+  - SMEM update to support higher host count required by Shikra
+  - Defconfig updates and Shikra-specific defconfig
+  - MAINTAINERS entry for Shikra platforms
+  - Documentation for Shikra platform
+
+Thanks,
+Aswin
+
+Changes in v4:
+- Drop DTS files already present upstream.
+- Keep only the IQS board variant defconfig, remove the CQS board variant defconfig.
+- Add documentation for the board.
+
+Link to v3: https://marc.info/?l=u-boot&m=178668446732727&w=2
+
+Changes in v3:
+- Added USB3 support
+- Created defconfigs for IQS & CQS variants
+- Added WDT & fastboot configs in the shikra defconfig
+
+Link to v2: https://marc.info/?l=u-boot&m=178595470886921&w=2
+
+Changes in v2:
+- Added USB hsphy support
+- Ported Shikra dts files from Linux linux-next branch
+- Created config fragment for debug UART
+
+Link to v1: https://lore.kernel.org/u-boot/20260615121828.1798789-1-aswin.murugan@oss.qualcomm.com/
+
+Aswin Murugan (12):
+  clk: qcom: add GCC clock driver support for shikra SoC
+  pinctrl: qcom: add driver for shikra SoC
+  qcom_defconfig: Enable Shikra clock driver
+  phy: qcom: qusb2: add Shikra PHY configuration
+  phy: qcom: add QMP USB3 PHY driver for Shikra
+  configs: qcom: enable PHY_QCOM_QMP_USB3_LEGACY
+  configs: qcom: add debug UART config fragment for shikra-evk
+  tools: qcom: mkmbn: add Shikra board mappings
+  configs: add shikra defconfig for IQS board
+  qcom: smem: increase SMEM_HOST_COUNT for newer SMEM versions
+  board: qualcomm: add MAINTAINERS entries for Shikra platforms
+  doc: board: qualcomm: document Shikra IQS (IQ2)
+
+ board/qualcomm/MAINTAINERS                  |   5 +
+ board/qualcomm/debug-shikra-evk.config      |   5 +
+ configs/qcom_defconfig                      |   2 +
+ configs/qcom_shikra_iqs_defconfig           |  31 ++
+ doc/board/qualcomm/dragonwing.rst           |   9 +-
+ drivers/clk/qcom/Kconfig                    |   8 +
+ drivers/clk/qcom/Makefile                   |   1 +
+ drivers/clk/qcom/clock-shikra.c             | 344 +++++++++++++
+ drivers/phy/qcom/Kconfig                    |   7 +
+ drivers/phy/qcom/Makefile                   |   1 +
+ drivers/phy/qcom/phy-qcom-qmp-usb3-legacy.c | 534 ++++++++++++++++++++
+ drivers/phy/qcom/phy-qcom-qusb2.c           |  14 +
+ drivers/pinctrl/qcom/Kconfig                |   8 +
+ drivers/pinctrl/qcom/Makefile               |   1 +
+ drivers/pinctrl/qcom/pinctrl-shikra.c       | 478 ++++++++++++++++++
+ drivers/soc/qcom/smem.c                     |   2 +-
+ tools/qcom/mkmbn/mkmbn.py                   |   2 +
+ 17 files changed, 1447 insertions(+), 5 deletions(-)
+ create mode 100644 board/qualcomm/debug-shikra-evk.config
+ create mode 100644 configs/qcom_shikra_iqs_defconfig
+ create mode 100644 drivers/clk/qcom/clock-shikra.c
+ create mode 100644 drivers/phy/qcom/phy-qcom-qmp-usb3-legacy.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-shikra.c
+
+-- 
+2.34.1
+
