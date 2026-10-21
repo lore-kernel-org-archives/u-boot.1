@@ -2,186 +2,116 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5F72606A319
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 14:05:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 982B2606A31B
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 14:09:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=lUGztXz6;
-	dkim=pass (2048-bit key, unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=d8YXsqpo
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=cLM+jMAm
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6615481176;
-	Wed, 21 Oct 2026 14:05:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3D3B781179;
+	Wed, 21 Oct 2026 14:09:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id v5Zmq9XILqma; Wed, 21 Oct 2026 14:05:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 850B081179
+ id gX_gf7ajw7LD; Wed, 21 Oct 2026 14:09:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2851A8116F
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792591541;
-	b=eRlpIKHIYKvHIsNO5hm1Z7a9Cm7SyWltYpfXiKJTVN4cZgm8Eb8ERULMsA+PsIXqDM1f
-	 ShOBex6aKcKCAicYk2R2esXkuHDdBhndx47nea5imEDtLHxhhlHPcg6lmzCokC9oV44Ax
-	 RJpZJ4x2FiBiiccPstx4u63p/+QI4DmD5r3FCBMEtCJ540YeDuMx/kGbzOM7l9wq48oWg
-	 V+I5wI7dufSugfBgglEU1xkNCu4q2do1hJWVcItXjlAW4/2dIcWqONNB0QfSEdyrUeTVW
-	 rYt82jGLJfM871LJEvEjPdEWnDxwKjnOi8oay7Q/GknYeB6YZoi0o5xeIeWe2IUOyaA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792591758;
+	b=R7vL3ZPLjWjjYQEsr91TOlY1DWeLa1KhAcL0E85sczE6+7WcguL933Om+RNQ8nYqGaxE
+	 TAeCA0bkTp9oDX3sWpDkPTJJOsbwccUnQtwJcMQzu5FYL7mQjQgFulhacB5xSbFs8RneB
+	 pXIpoLHF9wy8JnPfy0lCf9qKBBcn2KExnhOjrmJH2gqwkAuMrBFz1FTrevpeCqC2h9T1A
+	 8aSE9AewZMiE/jkogfd4dHZ927rQWel3YxgdMja/EEezo4x+deVP1vOBYIgJEHxkPU5N0
+	 xaS81Sk0Y5DnCL4xC+0PmFfqMNO4wkcJXIEwNz5TCSfCpmL7RYxeYCIudFr9kiqFZuA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792591541;
+	c=relaxed/relaxed; t=1792591758;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:Date:
+	 From:To:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=BhQy5mjPEkhHRJYNaAOqumLSshThuPL4drLaEqGHPRI=;
-	b=Z9FKJp3Fo0sCDjPUDTbvVS7Yc7g5akw/WZM5q498Udl0f9zrpiz/FGO3PHWc5K6CAJeH
-	 /HoF6rmhe8DtnAFQrBdZfhdsElI5bY5oSoTzUitHjw4xGsLKKBIw/57fo9SdbC1kzpEkb
-	 ecPR3t2W6SVJGu2BjguutEDdOHd8oiP76ZRzB4hOVADocft4awVrNIOauuYubqoQvnewB
-	 Qte16bEZEi40Iekgah5EbTS5giyXVx6B5U4+PFtREUx2KM+6JxBVjlM8xk3V/QHQlbTOx
-	 KTMlibilm7zq8qTb0TJ+/uSIpBQLDviVOPeh3/K8fLyGZh8iHWWLkgtOFMRmzqkYUhQ==
+	bh=QFwzMZrbRvDb1uziFF1mpm4Ga4FddR6qRxi1RbPJMu8=;
+	b=qdHwE7OmlOAIp3vSLyzByw3vXIK8+HCUFQY3ybi9u2HWM/QAvUhHPNO1AtilOyvoLMWO
+	 8XMZErystygB1z8K3vgCtxmTz7OsFgIUO//XnEEUq5IdHJHzpFzyTMbmO+GGw4vbNI/U6
+	 fpqHGfezzRmwmPLXHQ7YoFXa2P76uSc9oH1SLDVzbVFmYjwtNAO1jIFmQnd+fYRYnWUc5
+	 qIgHVWn49Gu7rC70bFmw8XcgdXpM4khO7SleLG8qvIzSko4wjY0XdfoHzsn4qJtUNge8b
+	 q29STKFWw8Nx0mU2XvivKjq84R8LJwmQeOQzFJtdy2J2OImM7mViNtoMQYqfHABwdGA==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792591541;
-	bh=BhQy5mjPEkhHRJYNaAOqumLSshThuPL4drLaEqGHPRI=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	d=lists.u-boot-project.org; s=default; t=1792591758;
+	bh=QFwzMZrbRvDb1uziFF1mpm4Ga4FddR6qRxi1RbPJMu8=;
+	h=Date:From:To:Subject:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=lUGztXz6qI0Y87k5aMtruvBBuW4RuH0IoNzs814MWVRE0iWig0OFCw+21wAqw4r4U
-	 5UIKJHLFreLyrAIfq/yC9u4IYEojceMrJHB9zSUTH57fb6GOIzmmFk+ZUUWZ89pdHy
-	 +vGsYiXGeBuCFhJLmx2lTOpEMQwycacOsbCwv2Wqeb778CEqkNqrI4pAze5pYd6u0g
-	 tQh5ZdoEZY+47UYuPoeAL7bxjOiJo3EX7oMwGXkU8ET2+ojtPsmteGHveY/jno3PvB
-	 sDfchWoAXPDcufxM1x8vpEakSp+Mb5mUKdwvY1CD3ct3+h02Z29MI5U/g5doVX7bPX
-	 7limemmV/lCaQ==
+	b=cLM+jMAmI8gATSdrs/EaZpBg8fEnixXB4H0qWtif0IYxA2urWHW0GgH0J14tTmKhe
+	 kWHuH+Y1UxDQh/0H22qHlar6ndk+99sH2ePVV1t19qKfUQofTweYUte7xmQW4iRJeP
+	 HvD6vqSfifK1DKUf54bElwZj8QgueGs10Ds8XPvuyelX/2GzcJJGk00BFUwrN4aFSW
+	 +fo/9uAL76RzJ+9APZ/3kZWgqDwtW376U5TnFgD1vOdfKgep0IuNQKlcA/nmfjJP0z
+	 PC2UJ3sbsb2OKifRhn5z6UKd+g2gVwDrqV7+I13zFDoCls8FrYN3TpamKU1AxbFTV6
+	 RjqF9oFXYbJGA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 850B081179;
-	Wed, 21 Oct 2026 14:05:41 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 93CF43AF
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 14:05:39 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2851A8116F;
+	Wed, 21 Oct 2026 14:09:18 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 78A8A3AF
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 14:09:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8546D60823
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 14:05:39 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6ACDF403AF
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 14:09:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PFMyY97hLunx for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 14:05:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3EFFF60844
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32a"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792591538;
- b=RVZM6x0eqpyNkSzH1ghIDbGjlKPDWJlfhNm5fcZdaGvGiMF9YSDA83JhJjBzduHlvYAp
- +S1tcJVNkmo6CgyWwbJZY+jlV2tJVIZEF4ZkQzVypMJ8HqBohwDq14nz8i6gxhzImaarW
- 0YEUQaXOWCqQmvVmRsLkiuxVLLmafmXEIJRPZizB4bLZUDeqHCnIlXF6sQ+Iy66DDZWB/
- 7vAVpgznHU+K8gwAyTE898TQ+/ybkYY70Gt+/uCfrlgeTdKHW6GZcQaef8COxNkk6bTNX
- C5rA6pwJqZVECzcPCO/06Qk4gIeSE63qNdUdc1PHE1KVqrnf8T8Bin1X7pu7SIaktpw==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GwNioFLN3u6v for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 14:09:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 461954039F
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a07:2ec0:3002::65"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792591755;
+ b=OK0QGro+KBhUIa+orsbxDQZeDYysDLu2dZtX2o+fYDRKksLf7we6vQ/iK3R5AO5nlHL2
+ tkNmDW5y7IG8wwBLA3rP4Y7gnOMgZYmiyX4pFJAsy8CVncx73CIiF/zdeE1toK6gM0ya+
+ 1UHtXi1/4shWd4Dy4RkEw7arrM8qo3AF5w+MJAzHqal8RVkeuUC9N/sjxaVF2D78/atcZ
+ i1QMWzu/tr1L+DoKKcZPN8PxWwRh1dxh8D+fRVDIMrhnKWfZ3kXn4mIwf1cFfbLecGREY
+ wJfhPRebP5rApNwQW8ro0//LBsXVRpBBk9baEX+WZ291MwYnC8t5/bQWJ+MYaPHMecA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792591538;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
- X-Developer-Signature:X-Developer-Key;
- bh=BhQy5mjPEkhHRJYNaAOqumLSshThuPL4drLaEqGHPRI=;
- b=PYwrMRjaQtUukqFYG8eqilGbC8tGmyTNhaf7bgjglSVV3AYOg0ZsHsIezsevFvwNSFPw
- 5SipWZBsiO1pDXG1oWlxFryWHbTtbKXK0VsFYgNLcyZiIB3DihT0gOu9gmND1RsObIW4I
- 5SQj6EGH8ByExIVqBqbmLo0AbbN+oSrJsSUoObc6Vc/b6WfJ+jxyCR0syJ5nlWCZdCAy3
- ooXkqbT2bWxISPbG5fuZ6WrRtnKbyggOnmns5/aXZf4EjAwm8XPKwwAzlN2IYPH094lvY
- R11uRXfNPgs3OWnLa3s2gksXF9BQ/idGpHz/g20CY9EyUcYvSmpEvpaDhzJIycDOAvw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=flipper.net;
- dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=d8YXsqpo; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::32a"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32a; helo=mail-wm1-x32a.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=d8YXsqpo
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 3EFFF60844
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 14:05:36 +0000 (UTC)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4a1df146015so6270115e9.0
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 07:05:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1792591534; x=1793196334;
- darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=BhQy5mjPEkhHRJYNaAOqumLSshThuPL4drLaEqGHPRI=;
- b=d8YXsqpoeneS8pYkQgiZqKQg8U2rZtacyuBTSm64Qm3CK0BLv/UX9bxfa4+cPPY9qU
- 0jvEB0XaLo1D8uwFGvJL5QKxEjJhQ5JBWPRFMPZcyIHzzbAfOzzmV7Dym41OAv2DsOKz
- W7FSmZvQklqXPitm9F3wV2EwGPcCdbS0CmF5SktB53mgnlQhw4F1DJC4RzOuv1aO+45r
- 6vI7SQx8f3xazdGTOWqWveTwvj3QFS4wpEsbbmOAEl5zO87hLqhLmXm7I7muUTzrdr72
- AMhQ+PPwHcU6JxB7iHc19ZmUjbbbhLi0Bm6VBcGctdEsc0MvqGwHOypa9INxL4mVAOxA
- bFqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792591534; x=1793196334;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=BhQy5mjPEkhHRJYNaAOqumLSshThuPL4drLaEqGHPRI=;
- b=L9omuwVQBaObbU2dZYpgUWFvpWh87Xw33IrknIlr/yUOqgFS0kApVIwyU/nm4cqGYi
- GhkrWXn4Cvr1SX+A6YKBAfbCuXZcXzez6CWCku4LHEi7ywX3Ypv0xAnYwPdX9FWXmM7F
- OsNc5BDDJAX5jbXY2tR4RdXXtHaaOsJbvebDsyU8CI9bLd+yPsyr5Am5pdLX4+KBkwKu
- p1RaaUr29ca4eh/PQ/yWM9tknvZJYa/SkVG7yNESFMng7Wn4yiv6RiKbE0ZLJaKcpZQo
- uyk+613LPagF1vHucplb9BV/y0xICpoPy2UQwGAbSm71Ub4pTtgSIwSeiTSWX5U7g4JL
- ILnQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxlCSAOPG0k94EBgN5WJnPPuz3QX6CRJ0SyUS7kv1mtHkdVp0by5LtqmE9x9XzUfpEukXo1jXI=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYL7ihxJWgDWzLbyxx6NvhQigv+uXUUdQF2eQBrPDSLPRTVmHhcI
- zPGDTlFCVNMNwwJad9p0J3KhX1MSwt2KvFNL3/+qsN6UFB3qMgJlwef4+XnZ1hpG6wMYt/Lg2od
- BjF2N
-X-Gm-Gg: AYBFou3229Nozxzy/ettWybrkudOEWIK3ucfubq0yqpVjdmuO1GwNKBjDq+BjU311VV
- pKwHXIY+lgaVkVDHXamBIZm1vp+HOBLjjHItbpgnQ/vCHy1SNy56f8itxNSMNq5+rdyVfkcrArm
- fe6o7XF5nzX1OGFSD5l1u9veuZFrXwmUbHbhfmTue6pMPgbCINvU29wc3cGfxZLsuDqMJhOadGn
- NGxGPmwXIfP1lHLKsL0nKL1F+Z6nfihLxDNnmY4ieZ3nBrDVCUlc6OgXfL+PWVuEGfhVZqrl0MG
- 7779LKAtNqCQv9dFrtdA26z+R4FQH3LNQ0FeysUJkfCzXA6uGo0XYELtqKKjLQzOvzbIzYc6X/m
- WW3JpJ4SOSzjmssLHk9B2VT4/+EnZMu9lj0AUshrdeCkIOfkOR909Bts7vddyOjE1xLtvJPRE/Z
- eSpKch+kk3iyxqJyezAsET/C8BrXVvBoh6zv6mxQF4ESfarOVS3PD+mWTSh59HbyjW70RDavP0Y
- jnNcu1OxlH6TJyW8JrfOQ9U8SE4BwFKR8dneqCNyMEsGaKt9klt2WjOYw5U9U4ZtcruiZgMnvSs
- GTdQUhhyIEb82SzIUjZT8l9T9v+wVJuarYTCYpS+U1QjRtwCmzhUSKQm
-X-Received: by 2002:a05:600c:3ba4:b0:4a0:1a7f:2abb with SMTP id
- 5b1f17b1804b1-4a1fdb07925mr51763425e9.11.1792591534126; 
- Wed, 21 Oct 2026 07:05:34 -0700 (PDT)
-Received: from alchark-surface.localdomain (bba-86-98-194-229.alshamil.net.ae.
- [86.98.194.229]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a201d7ac99sm19070045e9.9.2026.10.21.07.05.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Oct 2026 07:05:33 -0700 (PDT)
-From: Alexey Charkov <alchark@flipper.net>
-Date: Wed, 21 Oct 2026 18:05:27 +0400
-Subject: [PATCH] configs: rk3576: Move SYS_LOAD_ADDR clear of the RAM boot FIT
+ c=relaxed/relaxed; t=1792591755;
+ h=Received-SPF:Received:Date:From:To:Subject:Message-ID:MIME-Version:
+ Content-Type:Content-Disposition;
+ bh=QFwzMZrbRvDb1uziFF1mpm4Ga4FddR6qRxi1RbPJMu8=;
+ b=rm8OlPh6H/ks95jji1S+XR3FPJqPlZr9rnLZ3gKktghfEW9FzQpt7N2cZP6EGna7Ytgd
+ 9AMvbZIBuqTgRDECpLDVaWscy4S89RwYPBSNpy3rss+gruJ1PVyTYSdjmL7SB83lCMlOy
+ iN/dCKijeorCIzm0HW43pdZaIGrJrHBgq2iF0gAHnzZ4U4k6/Jo7ppX5uR3wZdMX5op8f
+ Pb5uhl8LmvtljBBMUdz5I0KMmzNUSCGGLsmN4UU6iyeHryQrAwpcr89PR0u1md4pRNHjr
+ kQtSADiLY/z6Uc/5P3JaXRXVnaeaPafscq0efbT86E7VvLR84RP/UIEpebzUhETQIuA==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ dmarc=none header.from=makrotopia.org;
+ arc=none smtp.remote-ip="2a07:2ec0:3002::65"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a07:2ec0:3002::65;
+ helo=pidgin.makrotopia.org; envelope-from=daniel@makrotopia.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=none (p=none dis=none)
+ header.from=makrotopia.org
+Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
+ [IPv6:2a07:2ec0:3002::65])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 461954039F
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 14:09:14 +0000 (UTC)
+Received: from local by pidgin.makrotopia.org with esmtpsa
+ (TLS1.3:TLS_AES_256_GCM_SHA384:256:X25519MLKEM768) (Exim 4.100.1)
+ (envelope-from <daniel@makrotopia.org>) id 1xJWwx-0000000022O-3ayZ;
+ Wed, 21 Oct 2026 14:09:05 +0000
+Date: Wed, 21 Oct 2026 15:08:59 +0100
+From: Daniel Golle <daniel@makrotopia.org>
+To: Tom Rini <trini@konsulko.com>, Daniel Golle <daniel@makrotopia.org>,
+ Simon Glass <sjg@chromium.org>, Aristo Chen <aristo.chen@canonical.com>,
+ Anton Ivanov <anton@binarly.io>, Vincent Jardin <vjardin@free.fr>,
+ Randolph Sapp <rs@ti.com>, Anders Roxell <anders.roxell@linaro.org>,
+ u-boot@lists.u-boot-project.org, openwrt-devel@lists.openwrt.org
+Subject: [PATCH v2 00/11] imagemap: structural and cosmetic review follow-ups
+Message-ID: <cover.1792591479.git.daniel@makrotopia.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261021-rk3576-load-addr-v1-1-2b38b39044ac@flipper.net>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ6CQAxA0auQrm3CdAAjVzEshmnVggHSUUJCu
- LujLt/i/x2SmEqCttjBZNWk85ThTgXER5jugsrZQCU1riSHNvr63OBzDoyB2ZCEohfP9SVUkLP
- F5Kbbb3nt/k7vfpD4+n7gOD6uygrbdAAAAA==
-X-Change-ID: 20261021-rk3576-load-addr-2e2c3e3d59a4
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
-Cc: Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <u-boot@0leil.net>, 
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
- Heiko Stuebner <heiko@sntech.de>, Alexey Charkov <alchark@flipper.net>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4671; i=alchark@flipper.net;
- h=from:subject:message-id; bh=jipnJtS571QZwTaanDrbUFuA03PCImNjSqh3nizStOw=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTdOLb61u/QSQa1+z9P7Q+02Nhv8+uB4VsmIe3SHUL3l
- 29PYvP61DGRhUGMi8FSTJFl7rcltlON+Gbt8vD4CjOHlQlkiLRIAwMQsDDw5SbmlRrpGOmZahvq
- GRrpGOsYMXBxCsBUV11i+B9iXa59+N1COzvOmnuZrsfuJJsedDz1TTDbM13obitLpiUjQ39Xh3y
- lwmo9vaOfXj38eKesbo23q+7a1C2fd3Yu2ezuxQgA
-X-Developer-Key: i=alchark@flipper.net; a=openpgp;
- fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -191,129 +121,113 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-SPL stages a compressed FIT image at SYS_LOAD_ADDR to verify and unpack
-it. When booting from RAM, as from Maskrom, the whole FIT already sits in
-DRAM at SPL_LOAD_FIT_ADDRESS (0x40200000), and a large FIT (e.g. carrying
-a Falcon mode kernel and an initramfs) runs well past 0x40c00800.
+The clean-up half of the v1 review of the imagemap series
+(cover.1787272661.git.daniel@makrotopia.org). It applies on top of
+"imagemap: fixes from the v1 review", which carries the correctness
+changes and which several of these patches touch the same lines as.
 
-Use 0x48000000 on every RK3576 board to avoid overlapping the source FIT
-with the destination address.
+Patches 1 to 4 are self-contained tidy-ups without any functional
+changes: the suite list put back in alphabetical order, a derived size
+for the header probe in place of a bare 64, a corrected rationale on the
+imagemap_lookup() guard, and test locals hoisted out of an anonymous
+block and a mid-block declaration.
 
-Signed-off-by: Alexey Charkov <alchark@flipper.net>
+Patches 5 and 6 correct the documentation: the imagemap_create()
+signature, which callers a reader can actually reach, bootmeth_openwrt
+described as a future consumer, the index entry sorted, and the section
+on phase gating that the commit adding the file claimed was there.
+
+Patches 7 to 10 are the structural ones which do introduce functional
+changes: imagemap devices are named after the partition they cover and
+hold a name driver model owns, so two mappings on one block device stay
+distinct. bootm_start() sets the imagemap itself, keeping the invariant
+in one function. The data-position and totalsize-alignment sequence is
+shared between fit_image_get_data() and the storage path, which also
+gives the latter the range check it lacked and settles the two spellings
+of the alignment. Finally the two imagemap pointers compile only when
+CONFIG_IMAGEMAP is on, reached through accessors that fold away when it
+is off.
+
+Patch 11 adds a new unit test Simon had asked for in his review.
+
+The sandbox defconfig symbol ordering and the FIT_VERITY_NODENAME
+rename that the v1 review also asked for are already in the tree, so
+they are not separate patches in this posting.
+
+One review point is not addressed here. Moving the imagemap out of the
+global images struct and into an explicit parameter of
+fit_image_get_data() means changing that function and fit_image_verify(),
+both public, and their callers under arch/arm, arch/x86, arch/arm/mach-k3,
+cmd/, common/ and tools/. It is also a design question rather than a
+cleanup: the transparency of the verification path is exactly what lets
+imagemap hook in without touching the FIT code. I would rather agree the
+shape first than guess at it, so it is left out and proposed separately.
+
+Tested on sandbox as for the first series: every commit builds, "ut
+imagemap" passes 14/14 under "ut -r3", host tools build, the
+documentation builds with no warnings, and a full test.py run matches
+unmodified next. Built with CONFIG_IMAGEMAP=n as well, which patch 10
+exists to keep working.
+
+Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- configs/generic-rk3576_defconfig     | 2 +-
- configs/nanopi-m5-rk3576_defconfig   | 2 +-
- configs/nanopi-r76s-rk3576_defconfig | 2 +-
- configs/omni3576-rk3576_defconfig    | 2 +-
- configs/roc-pc-rk3576_defconfig      | 2 +-
- configs/rock-4d-rk3576_defconfig     | 2 +-
- configs/sige5-rk3576_defconfig       | 2 +-
- 7 files changed, 7 insertions(+), 7 deletions(-)
+v2: 
+ - The sandbox defconfig symbol ordering and the FIT_VERITY_NODENAME
+   rename that the v1 review also asked for are already in the tree, so
+   the cover no longer counts them as patches in this series; they were
+   not dropped between postings.
+ - Patch 3: the guard rationale now says "same width" instead of
+   "same rank"; on ILP32 loff_t outranks ulong and the subtraction
+   stays signed, and it is the LP64 unsigned conversion that makes
+   the guard essential.
+ - Patch 7: the named path duplicates the caller's name directly
+   instead of copying it through a fixed-size buffer that truncated
+   it.
+ - Patch 9: the helper is renamed fit_image_get_ext_data_offset() to
+   match its siblings, fit_image_get_data() folds the embedded case
+   into an early return, and the message explains the dropped
+   signed-value guard.
+ - Patch 10: adds bootm_info_set_imagemap(), keeps the bootm_info_*
+   guards in step with bootm_imagemap(), keeps the device in a local
+   in the storage path, and shares the release between the OS-GO and
+   error paths in a helper.
+ - Patch 11: the scenario comment no longer names the reviewer, the
+   bare 64 and 256 become named constants, and the pointer
+   comparison drops its casts.
+ - Patches 1, 2, 4, 5, 6 and 8: no changes.
 
-diff --git a/configs/generic-rk3576_defconfig b/configs/generic-rk3576_defconfig
-index 5e25653820c2..fe2b5cde4b2e 100644
---- a/configs/generic-rk3576_defconfig
-+++ b/configs/generic-rk3576_defconfig
-@@ -4,7 +4,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rk3576-generic"
- CONFIG_ROCKCHIP_RK3576=y
--CONFIG_SYS_LOAD_ADDR=0x40c00800
-+CONFIG_SYS_LOAD_ADDR=0x48000000
- CONFIG_DEBUG_UART_BASE=0x2AD40000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/nanopi-m5-rk3576_defconfig b/configs/nanopi-m5-rk3576_defconfig
-index 88b6d0f9e868..ef799c799939 100644
---- a/configs/nanopi-m5-rk3576_defconfig
-+++ b/configs/nanopi-m5-rk3576_defconfig
-@@ -8,7 +8,7 @@ CONFIG_SF_DEFAULT_MODE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-nanopi-m5"
- CONFIG_ROCKCHIP_RK3576=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
--CONFIG_SYS_LOAD_ADDR=0x40c00800
-+CONFIG_SYS_LOAD_ADDR=0x48000000
- CONFIG_SF_DEFAULT_BUS=6
- CONFIG_DEBUG_UART_BASE=0x2AD40000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/nanopi-r76s-rk3576_defconfig b/configs/nanopi-r76s-rk3576_defconfig
-index af149dc4ba56..86b19f5e9ca7 100644
---- a/configs/nanopi-r76s-rk3576_defconfig
-+++ b/configs/nanopi-r76s-rk3576_defconfig
-@@ -5,7 +5,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-nanopi-r76s"
- CONFIG_ROCKCHIP_RK3576=y
--CONFIG_SYS_LOAD_ADDR=0x40c00800
-+CONFIG_SYS_LOAD_ADDR=0x48000000
- CONFIG_DEBUG_UART_BASE=0x2AD40000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/omni3576-rk3576_defconfig b/configs/omni3576-rk3576_defconfig
-index 13ef3112f1b8..969c4fe6c281 100644
---- a/configs/omni3576-rk3576_defconfig
-+++ b/configs/omni3576-rk3576_defconfig
-@@ -4,7 +4,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-luckfox-omni3576"
- CONFIG_ROCKCHIP_RK3576=y
--CONFIG_SYS_LOAD_ADDR=0x40c00800
-+CONFIG_SYS_LOAD_ADDR=0x48000000
- CONFIG_DEBUG_UART_BASE=0x2AD40000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/roc-pc-rk3576_defconfig b/configs/roc-pc-rk3576_defconfig
-index 53491efcec25..7023c3dd0488 100644
---- a/configs/roc-pc-rk3576_defconfig
-+++ b/configs/roc-pc-rk3576_defconfig
-@@ -5,7 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-roc-pc"
- CONFIG_ROCKCHIP_RK3576=y
- CONFIG_TARGET_ROC_PC_RK3576=y
--CONFIG_SYS_LOAD_ADDR=0x40c00800
-+CONFIG_SYS_LOAD_ADDR=0x48000000
- CONFIG_DEBUG_UART_BASE=0x2AD40000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/rock-4d-rk3576_defconfig b/configs/rock-4d-rk3576_defconfig
-index 93faf09962cf..be8f94926e93 100644
---- a/configs/rock-4d-rk3576_defconfig
-+++ b/configs/rock-4d-rk3576_defconfig
-@@ -8,7 +8,7 @@ CONFIG_SF_DEFAULT_MODE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-rock-4d"
- CONFIG_ROCKCHIP_RK3576=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
--CONFIG_SYS_LOAD_ADDR=0x40c00800
-+CONFIG_SYS_LOAD_ADDR=0x48000000
- CONFIG_SF_DEFAULT_BUS=5
- CONFIG_DEBUG_UART_BASE=0x2AD40000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/sige5-rk3576_defconfig b/configs/sige5-rk3576_defconfig
-index be46f63798b5..01a1632f5a34 100644
---- a/configs/sige5-rk3576_defconfig
-+++ b/configs/sige5-rk3576_defconfig
-@@ -4,7 +4,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-armsom-sige5"
- CONFIG_ROCKCHIP_RK3576=y
--CONFIG_SYS_LOAD_ADDR=0x40c00800
-+CONFIG_SYS_LOAD_ADDR=0x48000000
- CONFIG_DEBUG_UART_BASE=0x2AD40000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
+Daniel Golle (11):
+  test: cmd_ut: keep the suite list alphabetical
+  boot: bootm: derive the header probe size
+  boot: imagemap: correct the lookup guard rationale
+  test: boot: imagemap: declare locals at the top
+  doc: imagemap: describe the API and phase gating
+  doc: develop: sort the imagemap index entry
+  boot: imagemap: name the device after its partition
+  boot: bootm: set the imagemap from bootm_start()
+  boot: fit: share the external-data offset calculation
+  boot: build the imagemap pointers only when enabled
+  test: boot: imagemap: caller-owned region not resized
 
----
-base-commit: 62c9805d8d57cad407f0295879cc9a6182da464a
-change-id: 20261021-rk3576-load-addr-2e2c3e3d59a4
+ boot/bootm.c             |  55 ++++++------
+ boot/image-fit.c         | 175 +++++++++++++++++++++------------------
+ boot/imagemap.c          |  37 +++++++--
+ doc/develop/imagemap.rst |  30 +++++--
+ doc/develop/index.rst    |   2 +-
+ include/bootm.h          |  31 +++++++
+ include/image.h          |  31 +++++++
+ test/boot/imagemap.c     | 121 +++++++++++++++++++++++----
+ test/cmd_ut.c            |   4 +-
+ 9 files changed, 351 insertions(+), 135 deletions(-)
 
-Best regards,
---  
-Alexey Charkov <alchark@flipper.net>
 
+base-commit: e36b675ebc4c41f1f4187c46d363d581c371d538
+-- 
+2.56.0
