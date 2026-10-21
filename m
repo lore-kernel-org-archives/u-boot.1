@@ -1,30 +1,30 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95236606A319
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 16:16:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1307606A319
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 16:16:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=otP66hX3;
-	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=hnd6Nx7J;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=oRrZKusZ
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=GAplnuo4;
+	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=kGURYpHB;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=Qw4m6N9+
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7070B608EA;
-	Wed, 21 Oct 2026 16:16:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9A43781217;
+	Wed, 21 Oct 2026 16:16:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6d9s4v9FaM1k; Wed, 21 Oct 2026 16:16:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7CF96608F7
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792599377;
-	b=Op7ylHnXeP8pKU/EgKEDASAghisEM5GnFaL+YoBLoq1lnDKH+4yTr9C68bTh7N1JO0LT
-	 tkv7dDla3p7EFDGd8Kw1N56jPp6yASKzt4OeWrMB37dKWaCYATZk616L1nLGy7nxY74uK
-	 M16L4GeuS224/CwgX+XRhvl/3FWhkuLbdU3FVYxFFjDNER7y1Nuo8fQoKNlG08iAiMaNc
-	 1NOyxXECM0P79DtxsMioSabV/L9l5Hx/2VsKEESruZBM0RO5KuiHM0chM803o6773YZjt
-	 1FDcvK39xLea0QZ1fXhOonZVmxgiDcrYs4AqlpNYud/24A0SNkG75bNMuNXW3SdysVw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id doefGFgPR2uj; Wed, 21 Oct 2026 16:16:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 992DC8120E
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792599384;
+	b=PxewXg6xhsaXVE013LwNnVuK4ep48jMxYhi7oVeUdoAI0t+eFWtlwVlu0i3NN0USmIN5
+	 U7W9OH7PgFnnLGc0nNgof+/hqXsGK+oXGfL7ZYDiFwdFiBMR/0cdQ/Vjm0zJfMoDgHsH0
+	 t947gTj/qhMCqx2Z+vc7Ky0XGnMG8tHh1siiA4NmmJ4urq1EdWQHHijpnBVdsvjJlT+y6
+	 Q1OksNeMqqzyU7G3gZaS4Sg2hxFio4zgC8252H5ed9cj/2u+w0z1DJ8gycPD5QnN3NlAa
+	 KIBg8CYNJqt1pp5FcMjFd8NYKfJar5Geue4sNroD3ApMQq3xIDDTGwuUKIN6j7CMsVA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792599377;
+	c=relaxed/relaxed; t=1792599384;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -33,103 +33,102 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=lLc2MIDxtXpWpGq5S+oi9hn05J0D7eezn3pbR52dEM4=;
-	b=lRolk8mTel1TOCgKcM9BSoFoFFoZxIWykIfdCeH/CjkMB6g+QKB1Nj2FI+ddDAeU89Nb
-	 TEx0UAlVFpmJHqw9VIZTvTw0DFGkazrQB6PSBDhIVxt91Ek0EyEP8n4R3qYisF2Hj58Vi
-	 ZCorig9nEJuAW410EEKYsPIzeqJJ4G7gDl/+wK8fq4G/2k6lKB6CKHXr4+sD/8WIqhyI8
-	 9bcWWHD9aoPZz9vSF/+km/zsa2HU4+5/+7xDwhTGNlP23wjn0DhNkXQIaXRIWiCXYwsPj
-	 501K7HcFFSOTVwJEKDP4BRSSmmqNNRttwnwPubJprva6OkRDfAsNh2OQhCjiqvcRi8Q==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=2TV9L3xcIi+rMojg7FAadcXsRKPKvAKqkfRLIDufbko=;
+	b=cAjeChWlyFzvv3mZCl9Q0LcTTb4gTZCdZSSGdTtuU5WoPDHKtlGFeY6O+YsyoC/i2AVo
+	 oAkXn0jEalvbeNV/yry0G2GTShnbuV7Im5l3bkfBeyVtzt/09cgdwTCsynG7vnIanbDPh
+	 Hzwc/qjN8eREP34WxZyqlL04GcBvolxfBkRLI+lHIaN1q7A+MQo+U6OESLt38bfXCQXZL
+	 SrndsbalipDcy0srupNinmJKMh3tZ/vxYWSmob8YG30cX/su2oz0KHA8+3KS7rraM2F6v
+	 /Ro2nmEfOZrfqiANvTHS3zIVQ0iLFNI08gzOy+VwrDVCwJ33BmDq5tVlbAa8UMS5W2g==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792599377;
-	bh=lLc2MIDxtXpWpGq5S+oi9hn05J0D7eezn3pbR52dEM4=;
+	d=lists.u-boot-project.org; s=default; t=1792599384;
+	bh=2TV9L3xcIi+rMojg7FAadcXsRKPKvAKqkfRLIDufbko=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=otP66hX3TV18QLKwcW3+HbW5OFhubRzUNLZ7xPIrE1UNzI8CGL3ZV4qVXqH0aiT7v
-	 fAvMeT04dsEs/0m69yMlv47aVvJzGXm+fHh6/EFWFaqtweO8o1XPez9XvY8Mb6MocW
-	 eCyQShuWZfTX9H2DKlfWMpxsCmgVmzXPtDzliQ0dw8c5BDGBhVQJZlYjcxv0Mo7vpv
-	 4/MlTKFhFqEYrX5e1JtVVl6r/Q5dwYrWZstR89oE471FEy/Lq+wGtVETppgQO0K4/y
-	 bNaIhLJAkhBO32r1SiuAGYGdTcmrNhCduhjnJQM3vyGnnY18gjcuguPtpc5PA15aXi
-	 woLXUInmAFi4w==
+	b=GAplnuo4PQ5Yz5rCy/izBRq7jqNCftGBORutk4/eMg/e8AJ6rNt7SD0jUYUy9sOmq
+	 6rVo8fXoHXMCanek4+WaQSX6RK+yqS2LsFH7tMzgqEp7xq5xmiDNyIwxZiA3bnt8fZ
+	 8KSLzPX568qRn1LLqlqv9jLmzbH+dy+iq7KWz9gqxkS//6FnYhPiDd+UBblFrEc3LM
+	 3k2DK/Tlu7OWKKg8Rkh+trcDJ11AluCpIhCuCUaFN1IzjNz0cE0Y9oOdyF848uYJhL
+	 DNWx1P0HqunGZeja3dZo9Z6Nu7buhp8vzEbSWhW/yzjK0EdL8sxVmjVCmjZbdLNCy2
+	 axF2QLf7x5MZA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7CF96608F7;
-	Wed, 21 Oct 2026 16:16:17 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with UTF8SMTP id 841521E17
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 992DC8120E;
+	Wed, 21 Oct 2026 16:16:24 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with UTF8SMTP id 9A463356
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with UTF8SMTP id 695DB403B9
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:55 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with UTF8SMTP id 80E864084B
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024)
- with UTF8SMTP id 783XA3gf9HVz for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 16:01:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 184104016B
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792598514;
- b=KkTZdhqXwTja5Is2+QX12APrFQfTRX0Z3nY5P1boNM0OlAnfUb9/c9GkNgnyfzTHHXh8
- Jv0VI2DV8Aa3OVvw1jHNY5ME2yvwgjyUbfu++V8vGt8dRxbMdZsV1bwyX2jmxRje+3NIX
- 2Mp0Yey39edGb38c9jP0ssKuRFH/ZwjpCKnSKYl0+OmMPvEjlIOuIppKm2Xg4yS4DeUFn
- IHtKLN10fkX4nXoyzZwyZFq/c7mbpVSuRkd4e4pT90V2/ListUQ7o19C8J/6X7Wg0eIbI
- AyFdhIKBLFQDAn4bAAP16AQsVNsu/T5xGaWxPIy0ctuDdUHgJoU/ZbDoa6U9oznCHsw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024)
+ with UTF8SMTP id sMRgj7b-wW_Y for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 16:01:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 4C36040879
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792598517;
+ b=esAZToHtJhtxtx03kQb1G1HvdhEb/Fts6Q8cp4zoS+d7Epx4iY3dleE2QX0dWNT8MZQr
+ s/LM4WP2QB2vkNpvWAG3h+WzhdVbU/wRXt1ybsps75g8lglSxR4SofY4QmYoWKKKsrfTa
+ qJd06UBlcAYcMh4Y6J9UqjNoxzoh5TiptAFcWvfijhs4mcopJvzaqXg9wBjKzFIaCROwb
+ Nz/gO/TN9SclHj5KeIfVZFBws/2eIxR7TEusFs0T/Db9rDz39KFr9ip9A+ut+yDhQVFWy
+ 3hOlYd/FjUUv2UzOfF9Kr9WwLPrjTbU7SZTwL1FWx8oV9gRBciMdF9y21x0fUQqT3NA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792598514;
+ c=relaxed/relaxed; t=1792598517;
  h=Received-SPF:DKIM-Signature:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=lLc2MIDxtXpWpGq5S+oi9hn05J0D7eezn3pbR52dEM4=;
- b=paq+iXgb1++YmkQ7iCtEfe7ZBNwD0Q5vW9tposKcCa5jCoZeFR2pGSK/rR7eChDvbunR
- tFjOfeIRM3vRcB4h0cFLqmno92veFjTSE6phMyXb9CtBiufR1Knyk77vPPdh7yzDynBJn
- a2qhUfH6/AYwUlEvsf5IxdTVuVCbVQti2Xqh975rJX601sL0AXcnhzhXYB3M4N7sJtpL2
- yQO6vCBkIQS8LLlLSaIRUiRJmw1fDclaoPxNMv4brawV+ZBDfIJSQLcqdPUPo7iOL4Idq
- eyzWGMds0dlBICpHMJS/3VZkmXAQLEnSwVWVQPdBdWB14uzKYHKZMLUkjX5BTR3I+Sw==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=2TV9L3xcIi+rMojg7FAadcXsRKPKvAKqkfRLIDufbko=;
+ b=RdO/OiwD75sdcqtwFi4bQSElIlRRMxtL9ruRy0e7oYmpNE+Ft14lGE1FjhzqssQJp3YX
+ 6+jEq0lCaH305xLZxSy2C3bHD/+4qelVmu5Ilmj9TxghI5aIsHRANRSxe4PjiYOJ2bHEY
+ QlxMOjJMYhaxG6e4soj8175xTXg3b8XQH3QzWs+XuX5bZb4gqBQScXunQsG46ZrpVPkJb
+ sk2yuFH9lsMwFbPAL/fOjp9nI/DKBvIaBkbh0KUDHE2dS3LCYU3bIaN8wxpVwEsM5pQfy
+ nos0/uIxLzW75HEcVmlz1ZggTi4x70WcJB13I2ehhP6b7O9A2wvyH9kg33kvdCFJYbg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=mainlining.org;
  dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256
- header.s=202507r header.b=hnd6Nx7J; 
+ header.s=202507r header.b=kGURYpHB; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=oRrZKusZ; 
+ header.a=ed25519-sha256 header.s=202507e header.b=Qw4m6N9+; 
  arc=none smtp.remote-ip=5.75.144.95
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=5.75.144.95;
  helo=mail.mainlining.org; envelope-from=brads@mainlining.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=mainlining.org
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=mainlining.org
- header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r
- header.b=hnd6Nx7J; 
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org
+ header.a=rsa-sha256 header.s=202507r header.b=kGURYpHB; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=oRrZKusZ
+ header.a=ed25519-sha256 header.s=202507e header.b=Qw4m6N9+
 Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
- by smtp2.osuosl.org (Postfix) with UTF8SMTPS id 184104016B
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:53 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with UTF8SMTPS id 4C36040879
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1792598510; bh=lLc2MIDxtXpWpGq5S+oi9hn
- 05J0D7eezn3pbR52dEM4=; b=hnd6Nx7JNLC/169hIPQ7Uduye+F9XZwS/FuiOExl7TswbVaaRt
- C1sd0FBxuj+kKRAWh53Nr2Isn8RfgzcO0wp5dhYqD2BXQnop1WBsynmqO96MdOChgHh4wlX3ZOr
- HRalYprkc1NV8ldPbOxHcuEWLRWZVpw2tAtUWzLeD/Dbls9993U9qCCe4jOjc84GmRLbWGMiVi/
- XGVscuKEab5LcMNisCQ47SPWahvIf640udlcAEoSU1oNecohu7PrnLjDQzb6nXWwLK0/D8ccpwA
- 2tCm7j8x8T/1H0zdTEsgH1ifaCaI56zInWugNtSPqasi9/t3bK1Y13k9EqUUnT5zVTA==;
+ h=Message-ID:Date:Subject:To:From; t=1792598513; bh=2TV9L3xcIi+rMojg7FAadcX
+ sRKPKvAKqkfRLIDufbko=; b=kGURYpHB4RpCBqKxjrUn6QCy8QDc0ZMmKJy7RUHxzlsJNKsdut
+ Al0rcUbRXkNMmpOK14RwJGJzuKj/W8789FAGZvvBidbE9jqFu0ZIcSioAeYD65Dx3CSxU/WYR5U
+ vrVFqtGoPxci72qNbUEdZ1sQl2O8ax/S7pY+Gex7mWvV4AX+vc3jhhZw4Bydhrv91tILqYdnFat
+ Av1miwia0uJnzSE6RBgEN/bJKyxPAHwIJl5anQwJXrujFkftQJq26RvBYAkxlKs4TIDBkb4F/tE
+ o1dXJYZWsgkeceHwdklMfDoFIORlvixdZVgiVl6aLVSFvp+lu+oMHJq2VqhHvQYHUQw==;
 DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1792598510; bh=lLc2MIDxtXpWpGq5S+oi9hn
- 05J0D7eezn3pbR52dEM4=; b=oRrZKusZSpWY9ui6osdJVjA9zEIyNn+C7BfMFDf46JGv4+xx61
- pOuY+Nyv3d2YPeJAc/z5PUvIr0HIJk1advCQ==;
+ h=Message-ID:Date:Subject:To:From; t=1792598513; bh=2TV9L3xcIi+rMojg7FAadcX
+ sRKPKvAKqkfRLIDufbko=; b=Qw4m6N9+t0HLSnD5eE4ectCErNv0tpHnoeqE4gybZU1HpV6HHK
+ 2DL/ILPzhVt79G7CThsR5m96TieYgN+stLBg==;
 From: Bradley Morgan <brads@mainlining.org>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.u-boot-project.org
 Cc: Bradley Morgan <brads@mainlining.org>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
  Peng Fan <peng.fan@oss.nxp.com>
-Subject: [PATCH v3 12/26] powerpc: mpc85xx: Remove C29x support
-Date: Wed, 21 Oct 2026 16:01:08 +0000
-Message-ID: <20261021160145.10430-13-brads@mainlining.org>
+Subject: [PATCH v3 18/26] powerpc: mpc85xx: Remove MPC8560 support
+Date: Wed, 21 Oct 2026 16:01:14 +0000
+Message-ID: <20261021160145.10430-19-brads@mainlining.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261021160145.10430-1-brads@mainlining.org>
 References: <20261021160145.10430-1-brads@mainlining.org>
@@ -149,387 +148,216 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-No board in the tree selects ARCH_C29X, and the family lacks active
-community maintenance. Remove the unused platform support and its
-C29x specific crypto, clocking and SERDES setup.
+No board in the tree selects ARCH_MPC8560, and the SoC is unmaintained.
+Remove the unused architecture configuration, reset and clock handling,
+and CPU identification.
 
 Signed-off-by: Bradley Morgan <brads@mainlining.org>
 ---
- arch/Kconfig.nxp                          |  4 +-
- arch/powerpc/cpu/mpc85xx/Kconfig          | 22 +------
- arch/powerpc/cpu/mpc85xx/Makefile         |  1 -
- arch/powerpc/cpu/mpc85xx/c29x_serdes.c    | 70 -----------------------
- arch/powerpc/cpu/mpc85xx/cpu_init.c       | 11 ----
- arch/powerpc/cpu/mpc8xxx/cpu.c            |  3 -
- arch/powerpc/include/asm/config_mpc85xx.h |  3 -
- arch/powerpc/include/asm/immap_85xx.h     | 22 -------
- arch/powerpc/include/asm/processor.h      |  3 -
- drivers/crypto/fsl/jr.c                   | 14 +----
- drivers/mmc/Kconfig                       |  3 +-
- include/fsl_sec.h                         |  3 -
- 12 files changed, 7 insertions(+), 152 deletions(-)
- delete mode 100644 arch/powerpc/cpu/mpc85xx/c29x_serdes.c
+ arch/powerpc/cpu/mpc85xx/Kconfig      |  9 +--------
+ arch/powerpc/cpu/mpc85xx/cpu.c        | 17 -----------------
+ arch/powerpc/cpu/mpc85xx/cpu_init.c   |  6 ++----
+ arch/powerpc/cpu/mpc85xx/fdt.c        |  6 ++----
+ arch/powerpc/cpu/mpc85xx/speed.c      |  4 +---
+ arch/powerpc/cpu/mpc8xxx/cpu.c        |  1 -
+ arch/powerpc/include/asm/fsl_lbc.h    |  2 +-
+ arch/powerpc/include/asm/immap_85xx.h |  4 ----
+ arch/powerpc/include/asm/processor.h  |  1 -
+ 9 files changed, 7 insertions(+), 43 deletions(-)
 
-diff --git a/arch/Kconfig.nxp b/arch/Kconfig.nxp
-index 8b8210224b5..4ce12613131 100644
---- a/arch/Kconfig.nxp
-+++ b/arch/Kconfig.nxp
-@@ -286,14 +286,14 @@ config SYS_FSL_IFC_BANK_COUNT
- 	depends on ARCH_LS1043A || ARCH_LS1046A || ARCH_LS2080A || \
- 		ARCH_LS1088A || ARCH_LS1021A || ARCH_B4860 || ARCH_B4420 || \
- 		ARCH_T4240 || ARCH_T1040 || ARCH_T1042 || ARCH_T1024 || \
--		ARCH_T2080 || ARCH_C29X || ARCH_P1010 || ARCH_BSC9131 || \
-+		ARCH_T2080 || ARCH_P1010 || ARCH_BSC9131 || \
- 		ARCH_BSC9132
- 	default 3 if ARCH_BSC9131 || ARCH_BSC9132
- 	default 4 if ARCH_LS1043A || ARCH_LS1046A || ARCH_B4860 || \
- 			ARCH_B4420 || ARCH_P1010
- 	default 8 if ARCH_LS2080A || ARCH_LS1088A || ARCH_LS1021A || \
- 			ARCH_T4240 || ARCH_T1040 || ARCH_T1042 || \
--			ARCH_T1024 || ARCH_T2080 || ARCH_C29X
-+			ARCH_T1024 || ARCH_T2080
- 
- config FSL_QIXIS
- 	bool "Enable QIXIS support"
 diff --git a/arch/powerpc/cpu/mpc85xx/Kconfig b/arch/powerpc/cpu/mpc85xx/Kconfig
-index 32461cfae50..b1b134ca990 100644
+index 2d405501c57..bcdeef59fe7 100644
 --- a/arch/powerpc/cpu/mpc85xx/Kconfig
 +++ b/arch/powerpc/cpu/mpc85xx/Kconfig
-@@ -321,23 +321,6 @@ config ARCH_BSC9132
- 	imply CMD_PCI
- 	imply CMD_REGINFO
+@@ -335,11 +335,6 @@ config ARCH_MPC8544
+ 	select SYS_PPC_E500_USE_DEBUG_TLB
+ 	select FSL_ELBC
  
--config ARCH_C29X
+-config ARCH_MPC8560
 -	bool
 -	select FSL_LAW
--	select SYS_FSL_DDR_VER_46
--	select SYS_FSL_ERRATUM_A005125
--	select SYS_FSL_ERRATUM_ESDHC111
--	select FSL_PCIE_RESET
--	select SYS_FSL_HAS_DDR3
--	select SYS_FSL_HAS_SEC
--	select SYS_FSL_SEC_BE
--	select SYS_FSL_SEC_COMPAT_6
--	select SYS_PPC_E500_USE_DEBUG_TLB
--	select FSL_IFC
--	imply CMD_NAND
--	imply CMD_PCI
--	imply CMD_REGINFO
+-	select SYS_FSL_HAS_DDR1
 -
- config ARCH_MPC8536
+ config ARCH_P1010
  	bool
- 	select FSL_LAW
-@@ -843,7 +826,6 @@ config SYS_CCSRBAR_DEFAULT
- 	hex "Default CCSRBAR address"
+ 	select A003399_NOR_WORKAROUND if SYS_FSL_ERRATUM_IFC_A003399 && !SPL
+@@ -756,7 +751,6 @@ config SYS_CCSRBAR_DEFAULT
  	default	0xff700000 if	ARCH_BSC9131	|| \
  				ARCH_BSC9132	|| \
--				ARCH_C29X	|| \
- 				ARCH_MPC8536	|| \
- 				ARCH_MPC8540	|| \
  				ARCH_MPC8544	|| \
-@@ -1057,7 +1039,6 @@ config SYS_FSL_NUM_LAWS
- 			ARCH_T1042
- 	default 12 if	ARCH_BSC9131	|| \
- 			ARCH_BSC9132	|| \
--			ARCH_C29X	|| \
- 			ARCH_MPC8536	|| \
- 			ARCH_P1010	|| \
- 			ARCH_P1011	|| \
-@@ -1182,8 +1163,7 @@ config SYS_PPC_E500_DEBUG_TLB
- 			ARCH_P1025	|| \
+-				ARCH_MPC8560	|| \
+ 				ARCH_P1010	|| \
+ 				ARCH_P1020	|| \
+ 				ARCH_P1021	|| \
+@@ -969,7 +963,6 @@ config SYS_FSL_NUM_LAWS
+ 			ARCH_P1024	|| \
  			ARCH_P2020
- 	default 3 if	ARCH_P1010	|| \
--			ARCH_BSC9132	|| \
--			ARCH_C29X
-+			ARCH_BSC9132
+ 	default 10 if ARCH_MPC8544
+-	default 8 if	ARCH_MPC8560
  	help
- 	  Select a temporary TLB entry to be used during boot to work
- 	  around limitations in e500v1 and e500v2 external debugger
-diff --git a/arch/powerpc/cpu/mpc85xx/Makefile b/arch/powerpc/cpu/mpc85xx/Makefile
-index b4bca7bbe6b..93b0c28ca03 100644
---- a/arch/powerpc/cpu/mpc85xx/Makefile
-+++ b/arch/powerpc/cpu/mpc85xx/Makefile
-@@ -51,7 +51,6 @@ obj-$(CONFIG_SYS_FSL_QORIQ_CHASSIS1) += fsl_corenet_serdes.o
- obj-$(CONFIG_SYS_FSL_QORIQ_CHASSIS2) += fsl_corenet2_serdes.o
+ 	  Number of local access windows. This is fixed per SoC.
+ 	  If not sure, do not change.
+@@ -1104,7 +1097,7 @@ config SYS_FSL_IFC_CLK_DIV
  
- # SoC specific SERDES support
--obj-$(CONFIG_ARCH_C29X)	+= c29x_serdes.o
- obj-$(CONFIG_ARCH_MPC8536) += mpc8536_serdes.o
- obj-$(CONFIG_ARCH_MPC8544) += mpc8544_serdes.o
- obj-$(CONFIG_ARCH_P1010)	+= p1010_serdes.o
-diff --git a/arch/powerpc/cpu/mpc85xx/c29x_serdes.c b/arch/powerpc/cpu/mpc85xx/c29x_serdes.c
-deleted file mode 100644
-index bbe4a0dd62b..00000000000
---- a/arch/powerpc/cpu/mpc85xx/c29x_serdes.c
-+++ /dev/null
-@@ -1,70 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * Copyright 2013 Freescale Semiconductor, Inc.
-- */
+ config SYS_FSL_LBC_CLK_DIV
+ 	int "Divider of platform clock"
+-	depends on FSL_ELBC || ARCH_MPC8560
++	depends on FSL_ELBC
+ 
+ 	default 2 if	ARCH_P2041
+ 	default 1
+diff --git a/arch/powerpc/cpu/mpc85xx/cpu.c b/arch/powerpc/cpu/mpc85xx/cpu.c
+index c33250faac6..b4e9f6aac66 100644
+--- a/arch/powerpc/cpu/mpc85xx/cpu.c
++++ b/arch/powerpc/cpu/mpc85xx/cpu.c
+@@ -301,22 +301,6 @@ int checkcpu (void)
+ 
+ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+-/* Everything after the first generation of PQ3 parts has RSTCR */
+-#if defined(CONFIG_ARCH_MPC8560)
+-	unsigned long val, msr;
 -
--#include <config.h>
--#include <log.h>
--#include <asm/io.h>
--#include <asm/immap_85xx.h>
--#include <asm/fsl_serdes.h>
+-	/*
+-	 * Initiate hard reset in debug control register DBCR0
+-	 * Make sure MSR[DE] = 1.  This only resets the core.
+-	 */
+-	msr = mfmsr ();
+-	msr |= MSR_DE;
+-	mtmsr (msr);
 -
--#define SRDS1_MAX_LANES		4
--
--static u32 serdes1_prtcl_map;
--
--struct serdes_config {
--	u32 protocol;
--	u8 lanes[SRDS1_MAX_LANES];
--};
--
--static const struct serdes_config serdes1_cfg_tbl[] = {
--	/* SerDes 1 */
--	{1, {PCIE1, PCIE1, PCIE1, PCIE1} },
--	{2, {PCIE1, PCIE1, PCIE1, PCIE1} },
--	{3, {PCIE1, PCIE1, NONE, NONE} },
--	{4, {PCIE1, PCIE1, NONE, NONE} },
--	{5, {PCIE1, NONE, NONE, NONE} },
--	{6, {PCIE1, NONE, NONE, NONE} },
--	{}
--};
--
--int is_serdes_configured(enum srds_prtcl device)
--{
--	if (!(serdes1_prtcl_map & (1 << NONE)))
--		fsl_serdes_init();
--
--	return (1 << device) & serdes1_prtcl_map;
--}
--
--void fsl_serdes_init(void)
--{
--	ccsr_gur_t *gur = (void *)CFG_SYS_MPC85xx_GUTS_ADDR;
--	u32 pordevsr = in_be32(&gur->pordevsr);
--	u32 srds_cfg = (pordevsr & MPC85xx_PORDEVSR_IO_SEL) >>
--				MPC85xx_PORDEVSR_IO_SEL_SHIFT;
--	const struct serdes_config *ptr;
--	int lane;
--
--	if (serdes1_prtcl_map & (1 << NONE))
--		return;
--
--	debug("PORDEVSR[IO_SEL_SRDS] = %x\n", srds_cfg);
--
--	if (srds_cfg > ARRAY_SIZE(serdes1_cfg_tbl)) {
--		printf("Invalid PORDEVSR[IO_SEL_SRDS] = %d\n", srds_cfg);
--		return;
--	}
--
--	ptr = &serdes1_cfg_tbl[srds_cfg];
--	if (!ptr->protocol)
--		return;
--
--	for (lane = 0; lane < SRDS1_MAX_LANES; lane++) {
--		enum srds_prtcl lane_prtcl = ptr->lanes[lane];
--		serdes1_prtcl_map |= (1 << lane_prtcl);
--	}
--
--	/* Set the first bit to indicate serdes has been initialized */
--	serdes1_prtcl_map |= (1 << NONE);
--}
+-	val = mfspr(DBCR0);
+-	val |= 0x70000000;
+-	mtspr(DBCR0,val);
+-#else
+ 	volatile ccsr_gur_t *gur = (void *)(CFG_SYS_MPC85xx_GUTS_ADDR);
+ 
+ 	/* Call board-specific preparation for reset */
+@@ -331,7 +315,6 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 
+ 	/* Attempt last-stage board-specific reset */
+ 	board_reset_last();
+-#endif
+ 
+ 	return 1;
+ }
 diff --git a/arch/powerpc/cpu/mpc85xx/cpu_init.c b/arch/powerpc/cpu/mpc85xx/cpu_init.c
-index e7e9b3dbd1c..710b3b31354 100644
+index c6923a797f9..7970c296e5a 100644
 --- a/arch/powerpc/cpu/mpc85xx/cpu_init.c
 +++ b/arch/powerpc/cpu/mpc85xx/cpu_init.c
-@@ -881,17 +881,6 @@ int cpu_init_r(void)
- 	pamu_init();
- #endif
- 
--#ifdef CONFIG_FSL_CAAM
--#if defined(CONFIG_ARCH_C29X)
--	if ((SVR_SOC_VER(svr) == SVR_C292) ||
--	    (SVR_SOC_VER(svr) == SVR_C293))
--		sec_init_idx(1);
--
--	if (SVR_SOC_VER(svr) == SVR_C293)
--		sec_init_idx(2);
--#endif
--#endif
--
- #if defined(CONFIG_FSL_SATA_V2) && defined(CONFIG_SYS_FSL_ERRATUM_SATA_A001)
+@@ -546,8 +546,7 @@ int l2cache_init(void)
+ 		return -1;
+ 		break;
+ 	case 0x1:
+-		if (ver == SVR_8560 ||
+-		    ver == SVR_8541 || ver == SVR_8555) {
++		if (ver == SVR_8541 || ver == SVR_8555) {
+ 			puts("128 KiB ");
+ 			/* set L2E=1, L2I=1, & L2BLKSZ=1 (128 KiBibyte) */
+ 			cache_ctl = 0xc4000000;
+@@ -557,8 +556,7 @@ int l2cache_init(void)
+ 		}
+ 		break;
+ 	case 0x2:
+-		if (ver == SVR_8560 ||
+-		    ver == SVR_8541 || ver == SVR_8555) {
++		if (ver == SVR_8541 || ver == SVR_8555) {
+ 			puts("256 KiB ");
+ 			/* set L2E=1, L2I=1, & L2BLKSZ=2 (256 KiBibyte) */
+ 			cache_ctl = 0xc8000000;
+diff --git a/arch/powerpc/cpu/mpc85xx/fdt.c b/arch/powerpc/cpu/mpc85xx/fdt.c
+index e115c19cf8d..e7d1d9473d2 100644
+--- a/arch/powerpc/cpu/mpc85xx/fdt.c
++++ b/arch/powerpc/cpu/mpc85xx/fdt.c
+@@ -229,15 +229,13 @@ static inline u32 l2cache_size(void)
+ 	case 0x0:
+ 		break;
+ 	case 0x1:
+-		if (ver == SVR_8560 ||
+-		    ver == SVR_8541 || ver == SVR_8555)
++		if (ver == SVR_8541 || ver == SVR_8555)
+ 			return 128;
+ 		else
+ 			return 256;
+ 		break;
+ 	case 0x2:
+-		if (ver == SVR_8560 ||
+-		    ver == SVR_8541 || ver == SVR_8555)
++		if (ver == SVR_8541 || ver == SVR_8555)
+ 			return 256;
+ 		else
+ 			return 512;
+diff --git a/arch/powerpc/cpu/mpc85xx/speed.c b/arch/powerpc/cpu/mpc85xx/speed.c
+index 8e9808953dc..ed4ae33e6a8 100644
+--- a/arch/powerpc/cpu/mpc85xx/speed.c
++++ b/arch/powerpc/cpu/mpc85xx/speed.c
+@@ -593,9 +593,7 @@ int get_clocks(void)
+ 	 * for that SOC. This information is taken from application note
+ 	 * AN2919.
+ 	 */
+-#if defined(CONFIG_ARCH_MPC8560)
+-	gd->arch.i2c1_clk = sys_info.freq_systembus;
+-#elif defined(CONFIG_ARCH_MPC8544)
++#if defined(CONFIG_ARCH_MPC8544)
  	/*
- 	 * For P1022/1013 Rev1.0 silicon, after power on SATA host
+ 	 * On the 8544, the I2C clock is the same as the SEC clock.  This can be
+ 	 * either CCB/2 or CCB/3, depending on the value of cfg_sec_freq. See
 diff --git a/arch/powerpc/cpu/mpc8xxx/cpu.c b/arch/powerpc/cpu/mpc8xxx/cpu.c
-index 47daf51fc1b..2ee7348391a 100644
+index ff6087904ba..0a5232ef9eb 100644
 --- a/arch/powerpc/cpu/mpc8xxx/cpu.c
 +++ b/arch/powerpc/cpu/mpc8xxx/cpu.c
-@@ -87,9 +87,6 @@ static struct cpu_type cpu_type_list[] = {
- 	CPU_TYPE_ENTRY(BSC9131, 9131, 1),
- 	CPU_TYPE_ENTRY(BSC9132, 9132, 2),
- 	CPU_TYPE_ENTRY(BSC9232, 9232, 2),
--	CPU_TYPE_ENTRY(C291, C291, 1),
--	CPU_TYPE_ENTRY(C292, C292, 1),
--	CPU_TYPE_ENTRY(C293, C293, 1),
- #elif defined(CONFIG_MPC86xx)
- 	CPU_TYPE_ENTRY(8610, 8610, 1),
- 	CPU_TYPE_ENTRY(8641, 8641, 2),
-diff --git a/arch/powerpc/include/asm/config_mpc85xx.h b/arch/powerpc/include/asm/config_mpc85xx.h
-index e5890376df8..f115dcce76a 100644
---- a/arch/powerpc/include/asm/config_mpc85xx.h
-+++ b/arch/powerpc/include/asm/config_mpc85xx.h
-@@ -126,9 +126,6 @@
- #define CFG_SYS_FM1_CLK		0
- #define CFG_SYS_FM_MURAM_SIZE	0x28000
- 
--#elif defined(CONFIG_ARCH_C29X)
--#define CFG_SYS_FSL_SEC_IDX_OFFSET	0x20000
--
- #endif
- 
- #endif /* _ASM_MPC85xx_CONFIG_H_ */
+@@ -33,7 +33,6 @@ static struct cpu_type cpu_type_list[] = {
+ 	CPU_TYPE_ENTRY(8547, 8547, 1),
+ 	CPU_TYPE_ENTRY(8548, 8548, 1),
+ 	CPU_TYPE_ENTRY(8555, 8555, 1),
+-	CPU_TYPE_ENTRY(8560, 8560, 1),
+ 	CPU_TYPE_ENTRY(8567, 8567, 1),
+ 	CPU_TYPE_ENTRY(8568, 8568, 1),
+ 	CPU_TYPE_ENTRY(8569, 8569, 1),
+diff --git a/arch/powerpc/include/asm/fsl_lbc.h b/arch/powerpc/include/asm/fsl_lbc.h
+index d98673c40b3..9efb6ae6cd0 100644
+--- a/arch/powerpc/include/asm/fsl_lbc.h
++++ b/arch/powerpc/include/asm/fsl_lbc.h
+@@ -321,7 +321,7 @@ void lbc_sdram_init(void);
+  */
+ #define LCRR_CLKDIV			0x0000001F
+ #define LCRR_CLKDIV_SHIFT		0
+-#if defined(CONFIG_MPC83xx) || defined(CONFIG_ARCH_MPC8560)
++#if defined(CONFIG_MPC83xx)
+ #define LCRR_CLKDIV_2			0x00000002
+ #define LCRR_CLKDIV_4			0x00000004
+ #define LCRR_CLKDIV_8			0x00000008
 diff --git a/arch/powerpc/include/asm/immap_85xx.h b/arch/powerpc/include/asm/immap_85xx.h
-index a9336d73f20..489fcd43351 100644
+index 4479ef813c8..b646d24bc6b 100644
 --- a/arch/powerpc/include/asm/immap_85xx.h
 +++ b/arch/powerpc/include/asm/immap_85xx.h
-@@ -1768,11 +1768,6 @@ typedef struct ccsr_gur {
- #ifdef CONFIG_ARCH_MPC8536
- #define MPC85xx_PORPLLSR_DDR_RATIO	0x3e000000
- #define MPC85xx_PORPLLSR_DDR_RATIO_SHIFT	25
--#elif defined(CONFIG_ARCH_C29X)
--#define MPC85xx_PORPLLSR_DDR_RATIO	0x00003f00
--#define MPC85xx_PORPLLSR_DDR_RATIO_SHIFT	(9 - ((gur->pordevsr2 \
--					& MPC85xx_PORDEVSR2_DDR_SPD_0) \
--					>> MPC85xx_PORDEVSR2_DDR_SPD_0_SHIFT))
- #else
- #if defined(CONFIG_ARCH_BSC9131) || defined(CONFIG_ARCH_BSC9132)
- #define MPC85xx_PORPLLSR_DDR_RATIO	0x00003f00
-@@ -1817,9 +1812,6 @@ typedef struct ccsr_gur {
- #elif defined(CONFIG_ARCH_BSC9132)
- #define MPC85xx_PORDEVSR_IO_SEL		0x00FE0000
- #define MPC85xx_PORDEVSR_IO_SEL_SHIFT	17
--#elif defined(CONFIG_ARCH_C29X)
--#define MPC85xx_PORDEVSR_IO_SEL		0x00e00000
--#define MPC85xx_PORDEVSR_IO_SEL_SHIFT	21
- #else
- #define MPC85xx_PORDEVSR_IO_SEL		0x00780000
- #define MPC85xx_PORDEVSR_IO_SEL_SHIFT	19
-@@ -1835,10 +1827,6 @@ typedef struct ccsr_gur {
- #define MPC85xx_PORDEVSR_RIO_DEV_ID	0x00000007
- 	u32	pordbgmsr;	/* POR debug mode status */
- 	u32	pordevsr2;	/* POR I/O device status 2 */
--#if defined(CONFIG_ARCH_C29X)
--#define MPC85xx_PORDEVSR2_DDR_SPD_0	0x00000008
--#define MPC85xx_PORDEVSR2_DDR_SPD_0_SHIFT	3
--#endif
- #define MPC85xx_PORDEVSR2_SBC_MASK	0x10000000
- /* The 8544 RM says this is bit 26, but it's really bit 24 */
- #define MPC85xx_PORDEVSR2_SEC_CFG	0x00000080
-@@ -1972,11 +1960,6 @@ typedef struct ccsr_gur {
- #ifdef CONFIG_ARCH_BSC9132
- #define MPC85xx_PMUXCR0_SIM_SEL_MASK	0x0003b000
- #define MPC85xx_PMUXCR0_SIM_SEL		0x00014000
--#endif
--#if defined(CONFIG_ARCH_C29X)
--#define MPC85xx_PMUXCR_SPI_MASK			0x00000300
--#define MPC85xx_PMUXCR_SPI			0x00000000
--#define MPC85xx_PMUXCR_SPI_GPIO			0x00000100
- #endif
- 	u32	pmuxcr2;	/* Alt. function signal multiplex control 2 */
- #if defined(CONFIG_ARCH_P1010)
-@@ -2515,13 +2498,8 @@ struct ccsr_pman {
- #define CFG_SYS_MPC85xx_USB2_PHY_OFFSET	0xE5100
- #define CFG_SYS_MDIO1_OFFSET			0x24000
- #define CFG_SYS_MPC85xx_ESDHC_OFFSET		0x2e000
--#if defined(CONFIG_ARCH_C29X)
--#define CFG_SYS_FSL_SEC_OFFSET		0x80000
--#define CFG_SYS_FSL_JR0_OFFSET               0x81000
--#else
- #define CFG_SYS_FSL_SEC_OFFSET		0x30000
- #define CFG_SYS_FSL_JR0_OFFSET               0x31000
--#endif
- #define CFG_SYS_MPC85xx_SERDES2_OFFSET	0xE3100
- #define CFG_SYS_MPC85xx_SERDES1_OFFSET	0xE3000
- #define CFG_SYS_SEC_MON_OFFSET		0xE6000
+@@ -123,10 +123,6 @@ typedef struct ccsr_i2c {
+ 	u8	res[4096 - 1 * sizeof(struct fsl_i2c_base)];
+ } ccsr_i2c_t;
+ 
+-typedef struct ccsr_duart {
+-	u8 res[4096];
+-} ccsr_duart_t;
+-
+ /* eSPI Registers */
+ typedef struct ccsr_espi {
+ 	u32	mode;		/* eSPI mode */
 diff --git a/arch/powerpc/include/asm/processor.h b/arch/powerpc/include/asm/processor.h
-index 306dfd01346..1d6f960be94 100644
+index 77414c05aba..b78a726445d 100644
 --- a/arch/powerpc/include/asm/processor.h
 +++ b/arch/powerpc/include/asm/processor.h
-@@ -1056,9 +1056,6 @@
- #define SVR_T4120	0x824001
- #define SVR_T4160	0x824100
- #define SVR_T4080	0x824102
--#define SVR_C291	0x850000
--#define SVR_C292	0x850020
--#define SVR_C293	0x850030
- #define SVR_B4860	0x868000
- #define SVR_G4860	0x868001
- #define SVR_B4460	0x868003
-diff --git a/drivers/crypto/fsl/jr.c b/drivers/crypto/fsl/jr.c
-index 3a5032bcaf6..ed69ba92750 100644
---- a/drivers/crypto/fsl/jr.c
-+++ b/drivers/crypto/fsl/jr.c
-@@ -30,22 +30,14 @@
- #define CIRC_CNT(head, tail, size)	(((head) - (tail)) & (size - 1))
- #define CIRC_SPACE(head, tail, size)	CIRC_CNT((tail), (head) + 1, (size))
- 
--uint32_t sec_offset[CONFIG_SYS_FSL_MAX_NUM_OF_SEC] = {
--	0,
--#if defined(CONFIG_ARCH_C29X)
--	CFG_SYS_FSL_SEC_IDX_OFFSET,
--	2 * CFG_SYS_FSL_SEC_IDX_OFFSET
--#endif
--};
--
- #if CONFIG_IS_ENABLED(DM)
- struct udevice *caam_dev;
- #else
- #define SEC_ADDR(idx)	\
--	(ulong)((CFG_SYS_FSL_SEC_ADDR + sec_offset[idx]))
-+	(ulong)CFG_SYS_FSL_SEC_ADDR
- 
- #define SEC_JR0_ADDR(idx)	\
--	(ulong)(SEC_ADDR(idx) +	\
-+	(ulong)(CFG_SYS_FSL_SEC_ADDR +	\
- 	 (CFG_SYS_FSL_JR0_OFFSET - CFG_SYS_FSL_SEC_OFFSET))
- struct caam_regs caam_st;
- #endif
-@@ -688,7 +680,7 @@ static void jr_setown_non_trusted(ccsr_sec_t *sec)
- }
- #endif
- 
--int sec_init_idx(uint8_t sec_idx)
-+static int sec_init_idx(uint8_t sec_idx)
- {
- 	int ret = 0;
- 	struct caam_regs *caam;
-diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index b3731dfe4a1..4eb5d80e336 100644
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -911,8 +911,7 @@ config FSL_SDHC_V2_3
- config FSL_ESDHC
- 	bool "Freescale/NXP eSDHC controller support"
- 	depends on ARCH_LS1021A || FSL_LSCH2 || FSL_LSCH3 || PPC
--	select FSL_SDHC_V2_3 if ARCH_P1010 || ARCH_BSC9131 || ARCH_BSC9132 \
--		|| ARCH_C29X
-+	select FSL_SDHC_V2_3 if ARCH_P1010 || ARCH_BSC9131 || ARCH_BSC9132
- 	help
- 	  This selects support for the eSDHC (Enhanced Secure Digital Host
- 	  Controller) found on numerous Freescale/NXP SoCs.
-diff --git a/include/fsl_sec.h b/include/fsl_sec.h
-index 8c5e59c5b1c..4b769759593 100644
---- a/include/fsl_sec.h
-+++ b/include/fsl_sec.h
-@@ -374,9 +374,6 @@ int gen_mppubk(u8 *dst);
- 
- int sign_mppubk(const u8 *m, int data_size, u8 *dgst, u8 *c, u8 *d);
- 
--#if defined(CONFIG_ARCH_C29X)
--int sec_init_idx(uint8_t);
--#endif
- int sec_init(void);
- 
- u8 caam_get_era(void);
+@@ -1021,7 +1021,6 @@
+ #define SVR_8547	0x803101
+ #define SVR_8548	0x803100
+ #define SVR_8555	0x807100
+-#define SVR_8560	0x807000
+ #define SVR_8567	0x807501
+ #define SVR_8568	0x807500
+ #define SVR_8569	0x808000
 -- 
 2.47.3
 
