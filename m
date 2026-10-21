@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 817C0606A329
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 12:31:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5700D60A3815
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 12:35:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=lrnu7cY9;
-	dkim=pass (1024-bit key, unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=iIeE0PgW
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=eiv9zNfe;
+	dkim=pass (1024-bit key, unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=B8W/ZO80
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4BB43607F3;
-	Wed, 21 Oct 2026 12:31:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2E35E607E7;
+	Wed, 21 Oct 2026 12:35:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qcf8C_IJYjdX; Wed, 21 Oct 2026 12:31:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3A694607E4
+ id uX9LxOFYkf0H; Wed, 21 Oct 2026 12:35:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 57BF1607E9
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792585902;
-	b=FV0tHmXckayigLU1eftT4Y4+KPl6yPaDpvaIAA4m0fifalCdecNhdmXLZHWQD2EkDU5C
-	 DLi4HALVB4Q5Xhu+nT2XEiNvnHzm9iMLyYprzC+hvdVt2QEy1+VRuK6CvtIx3iVjpHfI3
-	 mEwK40hf6vh1nXaI6jQ8+Y9IC6Ref0XktgUqMdIZUdsEQc9BnFsNjQxFketAOcp/asq2C
-	 nLVixOtWwmcjCCAWqaTaF1pzN31LcztFifNv1VJCSf55k1nMZO2OhiFh/axu0s6OqgEW6
-	 9DGL8uyCNl6q35ZfKgTv8jdepgETjyF8bLm/SajUAzzFNsgxn+LSIel4Jd3lCVzXAmg==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792586145;
+	b=kPv6DTrDY9541pzFTU7lG9W/xc+3FV7uhdieQOe4xr1u3StM9W2v8V/b01fLJJDbrbjh
+	 lP4pCVnxbMNza3EbCM77YRRCSql9BQwFvnPPCvM6Ww6TvlU+v+WS+izoPqe2a1Me+x4bS
+	 baQHziNUyjnK2H0LqQiOoqcsxcPQlt1eH2WEVKeTF9FK8/KGltUJQZEv2a2mrhK4LxYUU
+	 o7PEAt2X+M6Q3kXW1yujHQLSSAuNRtPkBg7GGu4DTs6fDnw0d/Va9F5bWXHachonKEvAg
+	 ofqjmEmKRfeM1D/2LEr/sQw4EEGm0N3hjc5EflamicTrSSU9WGWt+FG/OnNHVYvocjw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792585902;
+	c=relaxed/relaxed; t=1792586145;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -33,117 +33,111 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=1WutkJRbLZrOl05obzFs3c9vc56f/aPyl9dJm6KFwog=;
-	b=j3qdiRIyLmvQ1G55UjNNjCLDbRcTZ1RsuEDQE/GJZjhldVPWcXHJN5/n0yqfmxWRmPKU
-	 r+0b/7tXopD/4PYD7ETs18jh/OyMB4SlCP/ZkfFROyvEsNhnkQA/yhHd/wrqaQXaS+WuJ
-	 F+juAkobg++a6A6MZNedKrvdXbqBb8ZNOBdPZJlmXBa4+dR/tHYBbj7zpp0pGYK3ACH73
-	 PmMidnE19HJCkUaH0lNcTovZI42KcOUgMlsIioryuBHbPLhKt5pZFP3/F3F7IFvzEOWUu
-	 zltpBW3vDIZJFj3S+cUKWZV0HrIYnGYxIekG6zrRT8gTq6Tv3cV36PEZ1T/zEC3XarA==
+	bh=W1WEeA/4ckbmQxayvL6hpRC4g6xhX9Z9SDPBste9ye4=;
+	b=IC4rFUCpuiHJjJtwfYlTrnYnvceJzaVu3Wiz3cx4VYdlClF849fe3s6XX685XBCA5JUK
+	 I5DkMfxeTeGz8N2FIrcoFBY7Jsqnuog/dsuG6vZBu3ZAcbB188xdvBKn9NUz2Ckh2R9Ag
+	 XMaJrokFXzFbsr/1Hs0xWDzB2Jb32FmZg/KRVuKmZ/wGx5jqnBZrbqD4rCFISHE4JCFhF
+	 o+dVpWcpkfzK99wqjfyu1/cS/4sZFLUnHOcArllDMv8/MVJI8c9JksWvsS4WE9kw5Ydj3
+	 t1bJJPOBLdrJ+88S7+rMjq6J2C8PuAxPAye8m4xJVrNVaNCeQVlo3vaSpz0p1zehjfA==
 ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792585902;
-	bh=1WutkJRbLZrOl05obzFs3c9vc56f/aPyl9dJm6KFwog=;
+	d=lists.u-boot-project.org; s=default; t=1792586145;
+	bh=W1WEeA/4ckbmQxayvL6hpRC4g6xhX9Z9SDPBste9ye4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=lrnu7cY9pmtKLezrvarp7mDE9eQwxlB7RKf3dKb7KEBcObqLP2kqkokZtzDgAbEHo
-	 KABATwRw+RqtFr/PBoeKRGz5/f7MqMofXFX+5xP5AgdbmB85y68XFr73D55sbqj0OI
-	 IYAm4yE/Ps+TATskJyr3EjlhOFZOlSU+vSfGagpB2SZHQFbHqpxfwmiXlLGB19WC9W
-	 qloBxYZdB7isGBOEGzXdssmHO4jDbWZj/83UahGZf8FZfKh0qE+l7OeVNPQLGn5peU
-	 KPD8A8VQYM2ev4RBNoPStQPxaLuuk/KF4yQdon0jdv9p0tcyp45qpU6fCelhGBQRSs
-	 UL+SgM/4E18SQ==
+	b=eiv9zNfeb7ivB33kaQNT/1sLrrzC3jd9rZH07Ax9EM7Aj2Cepg8G1ZL/2Sev1/Bpb
+	 kswQgVdT4WqPxZLFu471CUSl+3Gw3D7YE7TkeCmbuGUE/UjA8tMuGEEwRxVx47sO4o
+	 xjdYVUIrJLy9xQQF28UctEzX/rbxpqcAQGdcg6p1fn/5x2QTkyo8HY6Wxczec1KeL9
+	 FMFUaRfurLFv5rQTGSEVuJMFahiO6u/CRCM/4BQ55Vx1AQPW2555ShMgYQ/HG7g01b
+	 BxWoxO/ysTXduE8QvCg26szEi838kunHxPCH7HTMCpYhvq3gQWQ0S/9a635aWCChQV
+	 mc2X9rIcOJfPA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3A694607E4;
-	Wed, 21 Oct 2026 12:31:42 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 20D942A8
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:31:41 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 57BF1607E9;
+	Wed, 21 Oct 2026 12:35:45 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 09627930
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:35:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0643940398
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:31:41 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 41A8A40649
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:35:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pIi1QTzH4AVC for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 12:31:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org BA29940399
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.180.15
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792585900;
- b=SI2Yfwi69iUkP7hKFloe+yrMtTWRaxHKWNBeQm3GThpQUYLze7MrIoLONzRKVEMjt3lC
- dQtebmkUSUIIOThnVFcYlrGfRLLpgjhxyQh//Pca+x+BLFBFMEgxbvvQr7d53qkfMcbdD
- VMsui1nmfnPst+UgzdOPq6/gg/Fkz+ZlMGgSizu9kSxfSqpfjoN613pAFXEK+g5toUtLd
- kFrD9W4zVdUJPPxZM7ju+DJTaxiWqyVkNPO0u77NExqSiRNZXmt0ndS8riWTUPUqNRp+i
- 8tZFkQ2BHFahxE80OtbKxqKQcq+srZgxnEKKlCyTlQWRHr6e3W052uhrVxeyLWLwmxA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fyugFNjO-Ufj for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 12:35:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5500E40631
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=165.173.180.12
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792586133;
+ b=P06LdogEpWDP1h6k6lCdP+CWtULhxCBMY03L3CwLQTiv/K4jt51FZbSRk4s2xuaASfVr
+ 3W1hpRIgs53o0kKISEJUTpVQh3tzjV6yb1d6CekPFXcRCTA+ArPxs3hbD8r/oIUzouyUt
+ bOCpVxDZdKgvbKvf63P8NVvQWu0f6x4AMm12gDfLWG1oPP5UmwyirFRUDJz1i+QmXKqiO
+ zhFpcMj5+klN4NuP8TL9djRXh8dBA/0k51SY/qrOGpSfMGpuY4e1nwRLu18iiyITs5Eji
+ 2+z5g0whBgjbrAtp6tquWNJTrDlU4bOAbn95J3uTDQ8fUnN09LazPHa61xyHgWDLVFg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792585900;
+ c=relaxed/relaxed; t=1792586133;
  h=Received-SPF:DKIM-Signature:Received:Date:From:To:Cc:Subject:
  Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
  Content-Transfer-Encoding:In-Reply-To:X-Zoho-Virus-Status:
  X-Zoho-AV-Stamp:X-ZohoMailClient;
- bh=1WutkJRbLZrOl05obzFs3c9vc56f/aPyl9dJm6KFwog=;
- b=HPdKAQXJGYJ6eap54Cb5dSw+PARQ+OfyUjPY4PzIk2hSXIR0wXUW+ndjOmbGOrTJqanP
- yxTfaUGCA4UCAAYpdbCSdONdRsCWx7tlliu5/EDerJ4lwZ6eVhAJ4hZaRAVAUyg5JsDT7
- 9OPCKtr3qSUAL7Byy+PXAonFeigltvkKVZxaPvamO5hWM+fEXGB0acyOoBDjN0nLNPLaB
- ZK/yuxf5Dp53dkavl7Fibq5/ofIlsma6J+9oRxjx/BeFGBPzfcnBIuudnL6Q6/r4PE3sU
- QvIWROunITo20mRhEaSm2vdtWLFm1qmeh82t5KNEccd2/vEW2FTWhCHuuALEUpepBfw==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
+ bh=W1WEeA/4ckbmQxayvL6hpRC4g6xhX9Z9SDPBste9ye4=;
+ b=WX7yTEiIMjyJ/J/8hnddnnFwvtjudObKQlixTAAwzPyxi11peXAM1nKxdyApSBnANSJt
+ OiXQYX46NEwchleyIwr5AkTSTSvcs5IWSiRQuicTDljd2xw7vyzwk7Fw+d2SQJMS4gTVP
+ 7O6YomCu935brDN/howWHBxn51wURWCGR1YbseJr1T5xWvo7IbLRqvvQfj94lApEWyvcK
+ DHH45byzR2sq8h4QyCbjK0wU/9MbnJkvRZoQ7ClhOeBOK/Qhg20/S+HbpgZVycvYpgn+e
+ uHWsNPfDn4/UpBHdfVI4j6Ucx7drJxag7C8kE9649O62gToCqMBx1VaUqqg6UzQrRFw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
  dmarc=pass header.from=ziyao.cc;
  dkim=pass header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=iIeE0PgW; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
- helo=sender6-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.s=zmail header.b="B8W/ZO80"; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.12
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.12;
+ helo=sender6-op-o12.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=iIeE0PgW
-Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
- [165.173.180.15])
- by smtp2.osuosl.org (Postfix) with ESMTPS id BA29940399
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:31:39 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1792585870; cv=none; 
+ header.s=zmail header.b=B8W/ZO80
+Received: from sender6-op-o12.zoho.com (sender6-op-o12.zoho.com
+ [165.173.180.12])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 5500E40631
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:35:31 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1792586127; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=A59Jo0+4wR2++7bdcfQ7sjYfdhvKaRQklmJ89srhM5xqwkr6NlhmpW5iUU0EOpMeS3zo1aVE95/4mb78ApUa2aPBROkkbNukN/mNbV+pS2Kh6Ug0NXtTgRwmY0kc286lyHBEZdnO+G9sLlOs6E+u36hpT5mjT2G0Ydh5YVM3w8Y=
+ b=BVNcsVRjP5nzOv65iU9352VD55YYScBpQlKDPQ/K7Qbj1z9XxR5dLN+rPXtaIS0WQWOdMbTes361jobwtv1F+auXVVqqkUzmZkWKRvJ4e9KOpOJ0KxebYiqrVfMtE6J0V05oq745V0IjCrgx4l21r2zpRawmNJKMsi+1Oj+lwi8=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1792585870;
+ s=zohoarc; t=1792586127;
  h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=1WutkJRbLZrOl05obzFs3c9vc56f/aPyl9dJm6KFwog=; 
- b=BE8vj1gPSyURyx9Lg7nLrgTMIHr9VzDtPa4qHiJUqEJsJFAjzaehO1y1PzTrrHLYWcGjJ+b0x+ctLoebcKbTHZiubooDRv172g/A4EmBsEcu5Su33VEKj7A2LVgv/NKmenPGaLgvwn/2q+NWfqn7KSR1keiXj0CcqegOq0KRnw0=
+ bh=W1WEeA/4ckbmQxayvL6hpRC4g6xhX9Z9SDPBste9ye4=; 
+ b=WArQxmoxGoUeobxQdwzPcu87hTdyBQc76k1RxbFtWh0bPBRhXfFsSdzeQZCkYQ1idMTe+dPwKjhUE2RIN1YFT+3QJY+O83wX/7jy19W4p5QWE0YHtZugz2uk4MjOrq4ATfxOGw9ZYu8wsdazW6I+mAEiEQ1bFUQ+xy2dFDZebas=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1792585870; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1792586127; 
  s=zmail; d=ziyao.cc; i=me@ziyao.cc;
  h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:Message-Id:Reply-To;
- bh=1WutkJRbLZrOl05obzFs3c9vc56f/aPyl9dJm6KFwog=;
- b=iIeE0PgWMtk4ughKlebC2tYNPXvfJJjbG4tLKf+FLWacGOuUIfJwco0AL91FX3Sy
- lnbag1T1NdjCvQ2/9D1xfWF5+M4QhVqI4zedTwFV4MNYE2pOwO3ZoKn7SmPeC3PcqJQ
- Gg6HrP+Uicdvo7ggBj1OtIpI7E14qmhQyNrfrdL0=
-Received: by smtp.zohomail.com with SMTPS id 1792585867407634.7202923507089;
- Wed, 21 Oct 2026 05:31:07 -0700 (PDT)
-Date: Wed, 21 Oct 2026 12:30:59 +0000
+ bh=W1WEeA/4ckbmQxayvL6hpRC4g6xhX9Z9SDPBste9ye4=;
+ b=B8W/ZO80z4jPq88CdXJDn7pEbUCBLM0Y/ZCpi3w/p3rU7TDZvvSVylSl7/cILcA1
+ E7H9B1s0A3hZO6YSCfPpHSYFJ36LFKy0R7vXiCKfICkW3sI1GWOzqte/RoEtJdstIyz
+ W+koYui36bLDJhVjhM634C08hzty49VDf4hdJ8AU=
+Received: by smtp.zohomail.com with SMTPS id 1792586124819755.5717752811571;
+ Wed, 21 Oct 2026 05:35:24 -0700 (PDT)
+Date: Wed, 21 Oct 2026 12:35:21 +0000
 From: Yao Zi <me@ziyao.cc>
-To: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Yao Zi <me@ziyao.cc>, u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Tim Ouyang <tim609@andestech.com>,
- Leo Liang <leo.liang@sifive.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH v2] iommu: Add RISC-V IOMMU driver
-Message-ID: <atiwg1Zus9vNQQJx@pie>
-References: <20260825-riscv_iommu-v2-1-e0b816494b1a@oss.tenstorrent.com>
- <CAEev2e9WvQD3ZJNU91-UH1p5KBw1zXZgqhJuBC+6y+Q9HvwrwQ@mail.gmail.com>
- <CAEev2e87Wn=pE1uqFTpi1EVBiyHq=vLPFmvBTOv7Nzrdji0CNA@mail.gmail.com>
+To: Umut Tezduyar Lindskog <umut@tezduyar.com>, u-boot@lists.u-boot-project.org
+Cc: Yao Zi <me@ziyao.cc>
+Subject: Re: U-Boot UEFI implementation vs EDK II UEFI Payload
+Message-ID: <atixibbQNFPiLJ57@pie>
+References: <CAFKnvs4jwfemfGE0i0zvg3LyjePU0KZU_1fb68PVeOBD+nqZDw@mail.gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAEev2e87Wn=pE1uqFTpi1EVBiyHq=vLPFmvBTOv7Nzrdji0CNA@mail.gmail.com>
+In-Reply-To: <CAFKnvs4jwfemfGE0i0zvg3LyjePU0KZU_1fb68PVeOBD+nqZDw@mail.gmail.com>
 X-Zoho-Virus-Status: 1
 X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/292.565.41
 X-ZohoMailClient: External
@@ -156,53 +150,56 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue, Oct 20, 2026 at 05:53:18PM -0500, Anirudh Srinivasan wrote:
-> Hi Yao Zi,
+On Tue, Oct 20, 2026 at 02:15:44PM +0200, Umut Tezduyar Lindskog wrote:
+> Hi,
 > 
-> On Tue, Sep 22, 2026 at 1:37 PM Anirudh Srinivasan
-> <asrinivasan@oss.tenstorrent.com> wrote:
-> >
-> > Hi,
-> >
-> > On Tue, Aug 25, 2026 at 11:43 AM Anirudh Srinivasan
-> > <asrinivasan@oss.tenstorrent.com> wrote:
-> > >
-> > > Adds a basic driver for IOMMUs that conform to the RISC-V IOMMU
-> > > specification. This driver sets up the IOMMU in bare mode so that
-> > > peripherals requiring DMA in U-Boot can function.
-> > >
-> > > Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-> > > ---
-> > > Changes in v2:
-> > > - Changed DDTP read timeout to 3s from 10s
-> > > - Link to v1: https://patch.msgid.link/20260803-riscv_iommu-v1-1-793cfa421ab2@oss.tenstorrent.com
-> > > ---
-> > > Hi,
-> > >
-> > > This is a pre-requisite for U-Boot on Tenstorrent Atlantis. On this
-> > > platform, the IOMMU comes up in Off mode at boot, so this is needed for
-> > > SD and NVME boot to work in U-Boot.
-> > > ---
-> > >  MAINTAINERS                 |  1 +
-> > >  drivers/iommu/Kconfig       |  8 +++++
-> > >  drivers/iommu/Makefile      |  1 +
-> > >  drivers/iommu/riscv_iommu.c | 82 +++++++++++++++++++++++++++++++++++++++++++++
-> > >  4 files changed, 92 insertions(+)
-> >
-> > Gentle ping on this.
+> I have been looking into U-Boot’s UEFI implementation and trying to
+> understand some of the architectural decisions behind it.
 > 
-> Gentle ping on this series.
+> I noticed that EDK II has a UefiPayloadPkg component, which is intended to
+> provide UEFI services on top of an existing bootloader. This made me
+> curious why U-Boot maintains its own UEFI implementation rather than using
+> EDK II’s.
+> 
+> I am not suggesting that one approach is better than the other. I am just
+> trying to understand the history and the trade-offs.
+> 
+> I have a few questions:
+> 
+> 1. Was integrating EDK II’s UefiPayloadPkg ever considered for U-Boot? If
+> so, what were the main reasons for choosing a native implementation?
+> 2. What are the main advantages of U-Boot’s native UEFI implementation
+> compared to using EDK II? Is it primarily about binary size, complexity,
+> dependencies, or having better control over the implementation?
 
-I'll try to have a look soon, but am a little busy these days with
-travelling and work. Please ping me again if I don't reply after next
-Friday, thanks.
+A point which I could come up with, is that one doesn't need to
+re-implement drivers already available in U-Boot on EDK2 with U-Boot
+EFI. And porting drivers from Linux to U-Boot would be easier than
+targetting EDK2, I think.
 
-Best regards,
+And personally speaking, to me it's easier to work with U-Boot :)
+
+> 3. Are there any significant disadvantages to maintaining a separate UEFI
+> implementation? For example, keeping up with UEFI specifications,
+> compatibility with EFI applications, or implementing features such as
+> Secure Boot.
+> 4. Would there be any technical advantages to using EDK II’s UefiPayloadPkg
+> on top of U-Boot today (instead of it's own UEFI implementation)?
+> 
+> I realize some of these questions might have obvious answers for people
+> familiar with U-Boot’s history. I am mainly interested in understanding the
+> design decisions and the reasoning behind having two independent
+> implementations.
+> 
+> Thanks!
+> Umut
+
+Regards,
 Yao Zi
