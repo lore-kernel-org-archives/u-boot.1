@@ -1,30 +1,30 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 239B5606B6E6
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 16:16:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A573F606B6E6
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 16:16:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=qbYNLPYG;
-	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=Ho821FTI;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=oJilelfS
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=oqNEi0lX;
+	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=FpzQA0ij;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=fv7HaRgQ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F2DF260A35;
-	Wed, 21 Oct 2026 16:16:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7FCC681253;
+	Wed, 21 Oct 2026 16:16:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pc8gSOeU9w2C; Wed, 21 Oct 2026 16:16:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DC0496084A
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792599383;
-	b=b0G7dPMdp1uGl8TM5VnLOf0kUcZEmqIgh4qSoTRf7MqOSYuZhJieJE0tG6RtVeobEIrj
-	 uBgGLfdTM5EAu5SU3ST1Pd7xR+wK+pk3Rn4+uO3MdbCL4tqFyfKhrnyWamcgB7BHo3N+F
-	 pYLKYrLW8zNWRExNaEQIX5kpMX7E0VC4nJRRV2u+VhV98jtD3JividtQRNB0jASUWCtzn
-	 ATiyp9pPfIMp6tKDN8Uk8q2y+zgShaCfky8p+KOYZOkQRUIqJj5qlQSGxjN1wfXrpJGR9
-	 Ol+LBuR4KmCwQ9UBS2k/vukDlMw4vQrw+r/ECDGuX+2UGtMaGvjxMolMd/rI26YzqWQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FNio4TsWRrZf; Wed, 21 Oct 2026 16:16:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org F08098123E
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792599395;
+	b=TwXI+cNtp2Nz1YLnBfqZKuqkfa+paaFf4mFm+fd96Dmya000lwO6zRZ7hwfCVIgY27FG
+	 Q9I2gL/JakXuE97WSkwHY9bKr//JFXDOUv4EljpDeUYcKCJHPIyI6GwYgGZhvlBKH5vdx
+	 pOpm+HYw0A8gBmHKVZrbtwvRtf5MEh2uaG8DmnYxQf33uQD4q7lUU9O0ORBxkz/ebfQ6V
+	 CBLrZUnFdJl7sHoVQXUX6FufuiDmpR8h6csL0yesG7A9PohQTB6kM4IuwIWIrHw3wulwc
+	 F3QOVazXl2trF1ihNnWG4yChi0ILngH7YqR5LidQbMrw3pFrZRwjyQo5IuKxDq+1Deg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792599383;
+	c=relaxed/relaxed; t=1792599395;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -33,102 +33,105 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=g/ioZDLDviZV+3DLewlxQXmZegfcWNeesRxI5sl1xKo=;
-	b=H9Zc1PcDt7Yu28vNwVWCxPkX6WnNSiKEFzVOuwqfAA140x7GLYfLiYNIe3Df2tinYiYB
-	 LzjY/AnUUn/TQhAAqhFm4ej2751yvs9kGBeW33GsqWWgStfYGVL37WvVEAfUkA6kObhEZ
-	 Tipkfz9gwgn0sgVehwK3aQT+tcsaVrqsYUeqZprPu0+u+d/5I3oKSqg92CZnUJc3oFrUn
-	 eOrnCehFhJXJ+C/27Eac5pOUoygLuE+DzunXOEpQcP0FVh0Lh3avVAKK56o+jYBrdzhaU
-	 nbROhFrnGtcp3KyxhLoc9waIq/k5XvCFUJyxjZ2EXENrggj9DaY9wERJRjXhjlQycdQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=R6DCSwGv59BtYX+2mBrDpmQrrMudm5M0OVqmCWTy86s=;
+	b=fcvodV/myvUsWuQZJjxg+pqSUZYmH8K1yMET1UdA2QtjGyHgVqwawrOOusZv3JKts7Ps
+	 pU1dO9pWoLXFQrl1BtbQafL91uhapUlGzyVc3Dmh9Dzelc2iCVpW2pBbcFVWvDPj9ehMX
+	 3tWwk9l+yzWA3wuwlxa4tqpYB3KwbpbMKkpjKBSzGBLozE0QH8YH3DcJJzk3BpAk9YT/m
+	 gDDENiKkW1weU2uQwnSrQMY5A6P/+Z0ugxEpdcsnjGWAWB55YLDp29qniHMIzHoq6qvvg
+	 8SM0451JnAFTT9G7Q0ZswLHMn3Fk4Jtz41BiRerOT/gOiTHYH2Kur6zZwMQQuU3mCQw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=mainlining.org;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=FpzQA0ij;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=fv7HaRgQ;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792599383;
-	bh=g/ioZDLDviZV+3DLewlxQXmZegfcWNeesRxI5sl1xKo=;
+	d=lists.u-boot-project.org; s=default; t=1792599395;
+	bh=R6DCSwGv59BtYX+2mBrDpmQrrMudm5M0OVqmCWTy86s=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=qbYNLPYGqsYufXhmy4XG8JJiPkBdkOebwyWduL0tqinMd6MyiZ90aYDLIHBmrBIs3
-	 nYIvKlJBK1C4uHtHKd3r8chMs6f3NAu1DaFmdk38Crq8lGle5z3WC9pgtTZDpL7QJs
-	 mCjpb5hakzlDWW9lbWTLbkCNwo4WHxpcEqoiIAM2fYfFymCNGv+0/1CmFE3s6wqgMZ
-	 vkpDOWkIAb45AIU9Ra6BrKm4f8ruTigUS/2e6CREOOU5iOVwidLbKV2eiFq3Ku95LZ
-	 TAT9RTk2GUXMwP6vQMT82r8lelwl4HzHWdVmDMFgs+zrkuKbHfydEkfoEy48vYxemJ
-	 X4WHVtbBGb25A==
+	b=oqNEi0lXHqyApnB/8GNMS+cqXfWAioPXZutLbi4EeJZSOOGE5H86JuKKAmVDUSmmz
+	 whaFJXzKmDYGPaW1tvAZ9doe56qPQ3CoPszA7P10XZF6mdnKEtvxkvwAxIC6e2ximN
+	 wDK5hkXDuZkOpf5JQXg7eBaZiysRUI8apQfR2+gNTFKTOcqobM7UtQPGDQeh/fV4Zo
+	 Qf6aOpb9wQWv8fcFVTZA6I+4xHe5qQ7pIO44jJTuTbgeAQpsr96Ools8BqNrcL6uC9
+	 MyOi9s/feKDQOzJ9iBJpVRhHyoFfCX09BRGB+ZIn73Syu3kF8Vnx7j7Pikdp3cHE5h
+	 PeESzed3wnO2A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DC0496084A;
-	Wed, 21 Oct 2026 16:16:22 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with UTF8SMTP id 3225E95C
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F08098123E;
+	Wed, 21 Oct 2026 16:16:34 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with UTF8SMTP id 3DB0095C
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:02:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with UTF8SMTP id 180A5403B9
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:58 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with UTF8SMTP id 2F5F681160
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:02:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024)
- with UTF8SMTP id 3cNkrq1_0lAb for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 16:01:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 370F84039F
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792598516;
- b=SCfYuJAwHgYQ+cv9Nl1MU89ZaQEdwQ3srPTXLIyyOlbGlYDgia8zG/WQVL3m5GbEEgT+
- oOchJRGbFWrKw6GLqgZxpY7L3G/nvX4TKOGB2Ubum9rvBk7z+XsAnqNdcbRbms/Z1JrSD
- koT+bDe4hM1siupTpnbFrg2wwX5nxXtIqeYRvvQwRgNt+2A//dQiKT3XFqTs0dRGpNSo1
- oZ5LTmy+1o1lJgAj/LP8N8Ooi1l5Ze4EJ0QrKCx2AsIYQ40W6bKbr+4mfPu5NCJ7Fw/e9
- qNAmRiUiSq/Y/kC+qWlnYxth5u9TDPShg6K2/WOKzStrvg6WNaF5N151xWWbkXRF6mA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024)
+ with UTF8SMTP id NnQZT9gELtqF for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 16:01:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7BF2E8117B
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792598519;
+ b=Z6w+LBFHSf1HQ7hkgfLOUR2GGws6UOru4ee3b8C1UDy/ifzmLz1Tibyk4iairn15ow4Q
+ 7U7o9xpYxMHVy0OAJZT02+Kg21NLAudxPWB1uOd3ub8DG//tFwNKvIxJ2CAwiwANChvds
+ C5m6+OJDoGhUjowxQfM4DIreCggtYXMV2FXiSTMlHjyrRbS4JgpyYaDfcQ+t4smdwmoVe
+ cxveukXG+xK7Kza5z4kHe5/C/BOTgFED8lKpR3zh2FNtJVV464f5rXCsod8M5uN/rLJ+5
+ /KzVtyM0UpHhaLTiWijpRL+idaw/cSQIfYorwldfAbGB/nfLTl+EflOsZBxhryhV+Cw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792598516;
+ c=relaxed/relaxed; t=1792598519;
  h=Received-SPF:DKIM-Signature:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=g/ioZDLDviZV+3DLewlxQXmZegfcWNeesRxI5sl1xKo=;
- b=hPgaCElybQO0vuMOsGBf4AOinDYjAeTSgwKe7t21LvMWI80n8z+MwhLETE1bNHOn/nx3
- rNQj66LlhfPPsUUsQQh+e+YzqURf/0F7YqNLYdWh0myVD6J58sz1SLXu26GItoOEKj/Bs
- LCoAF0q7Iir2Hj4WHzD+xuu6+R/gpppTVBp1E0IRWswdqhE1D2ih6dzu1ID/12XnP16Qk
- +hGuqEpTLWW0vPikXF+9iNy6o2I/qfU7UMA5HuAXy33jsYmvInfW5Fzy2QQ6P88v/Nm6c
- 3tDdwFSejRN2M7G00EOysU6bxHKjKXAYbBGN/lEE574QQfB6ZEJwmfy2zeeXaGljeyw==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=R6DCSwGv59BtYX+2mBrDpmQrrMudm5M0OVqmCWTy86s=;
+ b=tTbTpjU06OOLZGv1P6Huh5MuDuaXKsFhBeRAsOY/KuFyReQRwMFAMqaQzfhXYyrhi87c
+ b7PnSJ18/PQWRZOseOTanhjI7OYBs9nWowRj2BGdZ+NJSSXnkxoU7J62JAN1FBTdsAf9s
+ 321Ur4f/WJnfZTisB37xaiYuLSsktn++yvkvp7jd9kNcJdKuKJESRhUmfKxoZk+sSfP4G
+ a6wxIj8f+Y1uoWOJQO4nWHdY+beRZRRG82q0vokI50atD8g9sbpBI4QcT1OBLqLnYiw2p
+ LGVsr1oAIRAjf6jblWxPuTRf0GdoO3g4hux7pV/A8o2Sc3N+K89SEGR8uAuN83QKUFg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=mainlining.org;
  dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256
- header.s=202507r header.b=Ho821FTI; 
+ header.s=202507r header.b=FpzQA0ij; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=oJilelfS; 
+ header.a=ed25519-sha256 header.s=202507e header.b=fv7HaRgQ; 
  arc=none smtp.remote-ip=5.75.144.95
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=5.75.144.95;
  helo=mail.mainlining.org; envelope-from=brads@mainlining.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=mainlining.org
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org
- header.a=rsa-sha256 header.s=202507r header.b=Ho821FTI; 
+ header.a=rsa-sha256 header.s=202507r header.b=FpzQA0ij; 
  dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=oJilelfS
+ header.a=ed25519-sha256 header.s=202507e header.b=fv7HaRgQ
 Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
- by smtp2.osuosl.org (Postfix) with UTF8SMTPS id 370F84039F
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:54 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with UTF8SMTPS id 7BF2E8117B
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 16:01:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1792598506; bh=g/ioZDLDviZV+3DLewlxQXm
- ZegfcWNeesRxI5sl1xKo=; b=Ho821FTIDypTqIzaIbcnS9UB4B5eyoDLPXgeH0m85prYpKlT1a
- wkT1VD3aazd2ZGFyxULPTXJMMFTPXbqsP66Wz9oB+VZSo2sNLatw9O37+sQMHFsK3cTCOKP6lTD
- CLSGv6+M/UAi0zxd2Sc3ty09k8B02NcTE2+WhLLWUg3/axaDZ/4fLPOB1EAD27B2oV4EeV9XetD
- 6mGl3kMDWWox2pZNBighn9fJcDyzwSK1mJwZ7fJ/0OCH+la8KMiHGd952Y0SFFfV8lXVKBklWxU
- MVwKjD0AlKw408pV66nsBOUKxokYQDeqOPOo4pusH3xN+OiTLQQLyDLKgjATR+1HIfA==;
+ h=Message-ID:Date:Subject:To:From; t=1792598507; bh=R6DCSwGv59BtYX+2mBrDpmQ
+ rrMudm5M0OVqmCWTy86s=; b=FpzQA0ijmeHPA0Mi+8pK8/HSDRDmcp4zzzOI4NvMBLAP+TSvBz
+ ep+gbITljpbox8WiFF6bb66D2xwleREJT4PGJxChfEZvEWTOdvdFNj9TWFtqpyFHWvv+A7YLuLC
+ nKLX+M5LsUbPeoKSk5IbleeJmK2qrnR4h4Aau6ub3ipVO6y7YQ5fY9Bl+YdOPLBU8TRbvAXaXg2
+ 8IKtaZt18sccRWw2mNzQCf0ps1GeGutrP1AtzIu+eR0Df1qrZB3BJUKNSgj/jAGm18I2PSy4Xvn
+ It3cH8lAsmjufs+70CNkomSNu9KwD7o0FfEAQHLoau3FlcPrAwOcz6Ks6H1T2P3XMmQ==;
 DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
  c=relaxed/relaxed; 
- h=Message-ID:Date:Subject:To:From; t=1792598506; bh=g/ioZDLDviZV+3DLewlxQXm
- ZegfcWNeesRxI5sl1xKo=; b=oJilelfSmuDxLtJ6wiD87A5c7A78iF0Kg0Edw0yBPzFHsduU4+
- EVuM+di9xRm+NKPFKwBGHJJ43USPYmlnWnBQ==;
+ h=Message-ID:Date:Subject:To:From; t=1792598507; bh=R6DCSwGv59BtYX+2mBrDpmQ
+ rrMudm5M0OVqmCWTy86s=; b=fv7HaRgQ26hqmnxQT9dTQ9xBO1jJoTS+5MbulSWNZWaruwbxX3
+ AkikvwTwzTPxSqOVul5ozjEQn3FvwDoWcEDA==;
 From: Bradley Morgan <brads@mainlining.org>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.u-boot-project.org
 Cc: Bradley Morgan <brads@mainlining.org>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
  Peng Fan <peng.fan@oss.nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>
-Subject: [PATCH v3 03/26] board: powerpc: Remove P2020RDB-PC support
-Date: Wed, 21 Oct 2026 16:00:59 +0000
-Message-ID: <20261021160145.10430-4-brads@mainlining.org>
+Subject: [PATCH v3 05/26] board: powerpc: Remove P4080DS support
+Date: Wed, 21 Oct 2026 16:01:01 +0000
+Message-ID: <20261021160145.10430-6-brads@mainlining.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261021160145.10430-1-brads@mainlining.org>
 References: <20261021160145.10430-1-brads@mainlining.org>
@@ -145,1668 +148,655 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	UPPERCASE_50_75,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The P2020RDB-PC board is unmaintained and lacks active community
-testing. Remove its target, configurations, and board specific code.
+The P4080DS development system is unmaintained and lacks active
+community testing. Drop its target, device trees, and board guide.
 
 Signed-off-by: Bradley Morgan <brads@mainlining.org>
 ---
- arch/powerpc/cpu/mpc85xx/Kconfig             |  10 --
- arch/powerpc/dts/Makefile                    |   1 -
- arch/powerpc/dts/p2020rdb-pc.dts             |  59 -------
- arch/powerpc/dts/p2020rdb-pc.dtsi            |  50 ------
- arch/powerpc/dts/p2020rdb-pc_36b.dts         |  59 -------
- board/nxp/p1_p2_rdb_pc/Kconfig               |   3 +-
- board/nxp/p1_p2_rdb_pc/MAINTAINERS           |   8 -
- board/nxp/p1_p2_rdb_pc/README                |   6 +-
- board/nxp/p1_p2_rdb_pc/ddr.c                 |  31 ----
- board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c        |   2 -
- boot/Kconfig                                 |   2 +-
- configs/P2020RDB-PC_36BIT_NAND_defconfig     | 164 -------------------
- configs/P2020RDB-PC_36BIT_SDCARD_defconfig   | 145 ----------------
- configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig | 147 -----------------
- configs/P2020RDB-PC_36BIT_defconfig          | 125 --------------
- configs/P2020RDB-PC_NAND_defconfig           | 162 ------------------
- configs/P2020RDB-PC_SDCARD_defconfig         | 142 ----------------
- configs/P2020RDB-PC_SPIFLASH_defconfig       | 145 ----------------
- configs/P2020RDB-PC_defconfig                | 123 --------------
- doc/README.mpc85xx-sd-spi-boot               |   3 -
- drivers/ddr/fsl/Kconfig                      |   2 +-
- include/configs/p1_p2_rdb_pc.h               |  21 ---
- 22 files changed, 5 insertions(+), 1405 deletions(-)
- delete mode 100644 arch/powerpc/dts/p2020rdb-pc.dts
- delete mode 100644 arch/powerpc/dts/p2020rdb-pc.dtsi
- delete mode 100644 arch/powerpc/dts/p2020rdb-pc_36b.dts
- delete mode 100644 configs/P2020RDB-PC_36BIT_NAND_defconfig
- delete mode 100644 configs/P2020RDB-PC_36BIT_SDCARD_defconfig
- delete mode 100644 configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig
- delete mode 100644 configs/P2020RDB-PC_36BIT_defconfig
- delete mode 100644 configs/P2020RDB-PC_NAND_defconfig
- delete mode 100644 configs/P2020RDB-PC_SDCARD_defconfig
- delete mode 100644 configs/P2020RDB-PC_SPIFLASH_defconfig
- delete mode 100644 configs/P2020RDB-PC_defconfig
+ arch/powerpc/cpu/mpc85xx/Kconfig   |   9 --
+ arch/powerpc/dts/Makefile          |   1 -
+ arch/powerpc/dts/p4080.dtsi        | 148 -------------------
+ arch/powerpc/dts/p4080ds.dts       | 220 -----------------------------
+ arch/powerpc/dts/p4080si-post.dtsi |  62 --------
+ board/nxp/common/Makefile          |   2 -
+ doc/README.srio-pcie-boot-corenet  | 118 ----------------
+ 7 files changed, 560 deletions(-)
+ delete mode 100644 arch/powerpc/dts/p4080.dtsi
+ delete mode 100644 arch/powerpc/dts/p4080ds.dts
+ delete mode 100644 arch/powerpc/dts/p4080si-post.dtsi
+ delete mode 100644 doc/README.srio-pcie-boot-corenet
 
 diff --git a/arch/powerpc/cpu/mpc85xx/Kconfig b/arch/powerpc/cpu/mpc85xx/Kconfig
-index 309becda5ac..7e885014ebe 100644
+index 65081b5bd63..5e480325062 100644
 --- a/arch/powerpc/cpu/mpc85xx/Kconfig
 +++ b/arch/powerpc/cpu/mpc85xx/Kconfig
-@@ -157,16 +157,6 @@ config TARGET_P1020RDB_PD
- 	imply SATA
- 	imply PANIC_HANG
+@@ -87,15 +87,6 @@ config TARGET_SOCRATES
+ 	select ARCH_MPC8544
+ 	select BINMAN
  
--config TARGET_P2020RDB
--	bool "Support P2020RDB-PC"
--	select SUPPORT_SPL
--	select SUPPORT_TPL
--	select ARCH_P2020
--	select SYS_L2_SIZE_512KB
--	imply CMD_EEPROM
+-config TARGET_P4080DS
+-	bool "Support P4080DS"
+-	select PHYS_64BIT
+-	select ARCH_P4080
+-	select BOARD_LATE_INIT if CHAIN_OF_TRUST
+-	select FSL_NGPIXIS
 -	imply SATA
--	imply SATA_SIL
+-	imply PANIC_HANG
 -
- config TARGET_TURRIS_1X
- 	bool "Support Turris 1.x"
- 	select SUPPORT_SPL
+ config TARGET_P5040DS
+ 	bool "Support P5040DS"
+ 	select PHYS_64BIT
 diff --git a/arch/powerpc/dts/Makefile b/arch/powerpc/dts/Makefile
-index 01191273269..e44d49cabdf 100644
+index c603369e7cc..09b79faf165 100644
 --- a/arch/powerpc/dts/Makefile
 +++ b/arch/powerpc/dts/Makefile
 @@ -11,7 +11,6 @@ dtb-$(CONFIG_TARGET_P1010RDB_PA) += p1010rdb-pa.dtb p1010rdb-pa_36b.dtb
  dtb-$(CONFIG_TARGET_P1010RDB_PB) += p1010rdb-pb.dtb p1010rdb-pb_36b.dtb
  dtb-$(CONFIG_TARGET_P1020RDB_PC) += p1020rdb-pc.dtb p1020rdb-pc_36b.dtb
  dtb-$(CONFIG_TARGET_P1020RDB_PD) += p1020rdb-pd.dtb
--dtb-$(CONFIG_TARGET_P2020RDB) += p2020rdb-pc.dtb p2020rdb-pc_36b.dtb
- dtb-$(CONFIG_TARGET_P3041DS) += p3041ds.dtb
- dtb-$(CONFIG_TARGET_P4080DS) += p4080ds.dtb
+-dtb-$(CONFIG_TARGET_P4080DS) += p4080ds.dtb
  dtb-$(CONFIG_TARGET_P5040DS) += p5040ds.dtb
-diff --git a/arch/powerpc/dts/p2020rdb-pc.dts b/arch/powerpc/dts/p2020rdb-pc.dts
+ dtb-$(CONFIG_TARGET_SOCRATES) += socrates.dtb
+ dtb-$(CONFIG_TARGET_T1024RDB) += t1024rdb.dtb
+diff --git a/arch/powerpc/dts/p4080.dtsi b/arch/powerpc/dts/p4080.dtsi
 deleted file mode 100644
-index 84d32360baa..00000000000
---- a/arch/powerpc/dts/p2020rdb-pc.dts
+index 8ab5cf541a0..00000000000
+--- a/arch/powerpc/dts/p4080.dtsi
 +++ /dev/null
-@@ -1,59 +0,0 @@
+@@ -1,148 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0+ OR X11
 -/*
-- * P2020RDB-PC Device Tree Source
+- * P4080/P4040 Silicon/SoC Device Tree Source (pre include)
 - *
-- * Copyright 2013 - 2015 Freescale Semiconductor Inc.
-- * Copyright 2019 NXP
+- * Copyright 2011 - 2015 Freescale Semiconductor Inc.
+- * Copyright 2019-2020 NXP
 - */
 -
--/include/ "p2020.dtsi"
+-/dts-v1/;
+-
+-/include/ "e500mc_power_isa.dtsi"
 -
 -/ {
--	model = "fsl,P2020RDB-PC";
--	compatible = "fsl,P2020RDB-PC";
+-	compatible = "fsl,P4080";
 -	#address-cells = <2>;
 -	#size-cells = <2>;
 -	interrupt-parent = <&mpic>;
 -
--	lbc: localbus@ffe05000 {
--		reg = <0 0xffe05000 0 0x1000>;
+-	cpus {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		cpu0: PowerPC,e500mc@0 {
+-			device_type = "cpu";
+-			reg = <0>;
+-			fsl,portid-mapping = <0x80000000>;
+-		};
+-		cpu1: PowerPC,e500mc@1 {
+-			device_type = "cpu";
+-			reg = <1>;
+-			fsl,portid-mapping = <0x40000000>;
+-		};
+-		cpu2: PowerPC,e500mc@2 {
+-			device_type = "cpu";
+-			reg = <2>;
+-			fsl,portid-mapping = <0x20000000>;
+-		};
+-		cpu3: PowerPC,e500mc@3 {
+-			device_type = "cpu";
+-			reg = <3>;
+-			fsl,portid-mapping = <0x10000000>;
+-		};
+-		cpu4: PowerPC,e500mc@4 {
+-			device_type = "cpu";
+-			reg = <4>;
+-			fsl,portid-mapping = <0x08000000>;
+-		};
+-		cpu5: PowerPC,e500mc@5 {
+-			device_type = "cpu";
+-			reg = <5>;
+-			fsl,portid-mapping = <0x04000000>;
+-		};
+-		cpu6: PowerPC,e500mc@6 {
+-			device_type = "cpu";
+-			reg = <6>;
+-			fsl,portid-mapping = <0x02000000>;
+-		};
+-		cpu7: PowerPC,e500mc@7 {
+-			device_type = "cpu";
+-			reg = <7>;
+-			fsl,portid-mapping = <0x01000000>;
+-		};
 -	};
 -
--	soc: soc@ffe00000 {
--		ranges = <0x0 0x0 0xffe00000 0x100000>;
+-	soc: soc@ffe000000 {
+-		ranges = <0x00000000 0xf 0xfe000000 0x1000000>;
+-		reg = <0xf 0xfe000000 0 0x00001000>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		device_type = "soc";
+-		compatible = "simple-bus";
+-
+-		mpic: pic@40000 {
+-			interrupt-controller;
+-			#address-cells = <0>;
+-			#interrupt-cells = <4>;
+-			reg = <0x40000 0x40000>;
+-			compatible = "fsl,mpic", "chrp,open-pic";
+-			device_type = "open-pic";
+-			clock-frequency = <0x0>;
+-		};
+-
+-		espi0: spi@110000 {
+-			compatible = "fsl,mpc8536-espi";
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <0x110000 0x1000>;
+-			fsl,espi-num-chipselects = <4>;
+-			status = "disabled";
+-		};
+-
+-		esdhc: esdhc@114000 {
+-			compatible = "fsl,esdhc";
+-			reg = <0x114000 0x1000>;
+-			clock-frequency = <0>;
+-		};
+-
+-		usb0@210000 {
+-			compatible = "fsl-usb2-mph";
+-			reg = <0x210000 0x1000>;
+-			phy_type = "ulpi";
+-		};
+-
+-		usb1@211000 {
+-			compatible = "fsl-usb2-dr";
+-			reg = <0x211000 0x1000>;
+-			phy_type = "ulpi";
+-		};
+-		/include/ "qoriq-i2c-0.dtsi"
+-		/include/ "qoriq-i2c-1.dtsi"
 -	};
 -
--	pci2: pcie@ffe08000 {
--		reg = <0x0 0xffe08000 0x0 0x1000>;	/* registers */
--		status = "disabled";
+-	pcie@ffe200000 {
+-		compatible = "fsl,pcie-p4080", "fsl,pcie-fsl-qoriq";
+-		reg = <0xf 0xfe200000 0x0 0x1000>;   /* registers */
+-		law_trgt_if = <0>;
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		device_type = "pci";
+-		bus-range = <0x0 0xff>;
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xf8000000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xe0000000 0xc 0x00000000 0x0 0x20000000>; /* non-prefetchable memory */
 -	};
 -
--	pci1: pcie@ffe09000 {
--		reg = <0x0 0xffe09000 0x0 0x1000>;	/* registers */
--		ranges = <0x01000000 0x0 0x00000000 0x0 0xffc10000 0x0 0x00010000   /* downstream I/O */
--			  0x02000000 0x0 0xa0000000 0x0 0xa0000000 0x0 0x20000000>; /* non-prefetchable memory */
+-	pcie@ffe201000 {
+-		compatible = "fsl,pcie-p4080", "fsl,pcie-fsl-qoriq";
+-		reg = <0xf 0xfe201000 0x0 0x1000>;   /* registers */
+-		law_trgt_if = <1>;
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		device_type = "pci";
+-		bus-range = <0x0 0xff>;
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xf8010000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xe0000000 0xc 0x20000000 0x0 0x20000000>; /* non-prefetchable memory */
 -	};
 -
--	pci0: pcie@ffe0a000 {
--		reg = <0x0 0xffe0a000 0x0 0x1000>;	/* registers */
--		ranges = <0x01000000 0x0 0x00000000 0x0 0xffc00000 0x0 0x00010000   /* downstream I/O */
--			  0x02000000 0x0 0x80000000 0x0 0x80000000 0x0 0x20000000>; /* non-prefetchable memory */
+-	pcie@ffe202000 {
+-		compatible = "fsl,pcie-p4080", "fsl,pcie-fsl-qoriq";
+-		reg = <0xf 0xfe202000 0x0 0x1000>;   /* registers */
+-		law_trgt_if = <2>;
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		device_type = "pci";
+-		bus-range = <0x0 0xff>;
+-		ranges = <0x01000000 0x0 0x00000000 0xf 0xf8020000 0x0 0x00010000   /* downstream I/O */
+-			  0x02000000 0x0 0xe0000000 0xc 0x40000000 0x0 0x20000000>; /* non-prefetchable memory */
 -	};
+-};
+diff --git a/arch/powerpc/dts/p4080ds.dts b/arch/powerpc/dts/p4080ds.dts
+deleted file mode 100644
+index d5618f1e49a..00000000000
+--- a/arch/powerpc/dts/p4080ds.dts
++++ /dev/null
+@@ -1,220 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+ OR X11
+-/*
+- * P4080DS Device Tree Source
+- *
+- * Copyright 2011 - 2015 Freescale Semiconductor Inc.
+- * Copyright 2019-2020 NXP
+- */
+-
+-/include/ "p4080.dtsi"
+-
+-/ {
+-	model = "fsl,P4080DS";
+-	compatible = "fsl,P4080DS";
+-	#address-cells = <2>;
+-	#size-cells = <2>;
+-	interrupt-parent = <&mpic>;
 -
 -	aliases {
+-		phy_rgmii = &phyrgmii;
+-		phy5_slot3 = &phy5slot3;
+-		phy6_slot3 = &phy6slot3;
+-		phy7_slot3 = &phy7slot3;
+-		phy8_slot3 = &phy8slot3;
+-		emi1_slot3 = &p4080mdio2;
+-		emi1_slot4 = &p4080mdio1;
+-		emi1_slot5 = &p4080mdio3;
+-		emi1_rgmii = &p4080mdio0;
+-		emi2_slot4 = &p4080xmdio1;
+-		emi2_slot5 = &p4080xmdio3;
 -		spi0 = &espi0;
+-	};
+-
+-	soc: soc@ffe000000 {
+-		ranges = <0x00000000 0xf 0xfe000000 0x1000000>;
+-		reg = <0xf 0xfe000000 0 0x00001000>;
+-
+-		fman@400000 {
+-			ethernet@e0000 {
+-				phy-handle = <&phy0>;
+-				phy-connection-type = "sgmii";
+-			};
+-
+-			ethernet@e2000 {
+-				phy-handle = <&phy1>;
+-				phy-connection-type = "sgmii";
+-			};
+-
+-			ethernet@e4000 {
+-				phy-handle = <&phy2>;
+-				phy-connection-type = "sgmii";
+-			};
+-
+-			ethernet@e6000 {
+-				phy-handle = <&phy3>;
+-				phy-connection-type = "sgmii";
+-			};
+-
+-			ethernet@f0000 {
+-				phy-handle = <&phy10>;
+-				phy-connection-type = "xgmii";
+-			};
+-		};
+-
+-		fman@500000 {
+-			ethernet@e0000 {
+-				phy-handle = <&phy5>;
+-				phy-connection-type = "sgmii";
+-			};
+-
+-			ethernet@e2000 {
+-				phy-handle = <&phy6>;
+-				phy-connection-type = "sgmii";
+-			};
+-
+-			ethernet@e4000 {
+-				phy-handle = <&phy7>;
+-				phy-connection-type = "sgmii";
+-			};
+-
+-			ethernet@e6000 {
+-				phy-handle = <&phy8>;
+-				phy-connection-type = "sgmii";
+-			};
+-
+-			ethernet@f0000 {
+-				phy-handle = <&phy11>;
+-				phy-connection-type = "xgmii";
+-			};
+-		};
+-	};
+-
+-	mdio-mux-emi1 {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		compatible = "mdio-mux-gpio", "mdio-mux";
+-		mdio-parent-bus = <&mdio0>;
+-		gpios = <&gpio0 1 0>, <&gpio0 0 0>;
+-
+-		p4080mdio0: mdio@0 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <0>;
+-
+-			phyrgmii: ethernet-phy@0 {
+-				reg = <0x0>;
+-			};
+-		};
+-
+-		p4080mdio1: mdio@1 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <1>;
+-
+-			phy5: ethernet-phy@1c {
+-				reg = <0x1c>;
+-			};
+-
+-			phy6: ethernet-phy@1d {
+-				reg = <0x1d>;
+-			};
+-
+-			phy7: ethernet-phy@1e {
+-				reg = <0x1e>;
+-			};
+-
+-			phy8: ethernet-phy@1f {
+-				reg = <0x1f>;
+-			};
+-		};
+-
+-		p4080mdio2: mdio@2 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <2>;
+-			status = "disabled";
+-
+-			phy5slot3: ethernet-phy@1c {
+-				reg = <0x1c>;
+-			};
+-
+-			phy6slot3: ethernet-phy@1d {
+-				reg = <0x1d>;
+-			};
+-
+-			phy7slot3: ethernet-phy@1e {
+-				reg = <0x1e>;
+-			};
+-
+-			phy8slot3: ethernet-phy@1f {
+-				reg = <0x1f>;
+-			};
+-		};
+-
+-		p4080mdio3: mdio@3 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <3>;
+-
+-			phy0: ethernet-phy@1c {
+-				reg = <0x1c>;
+-			};
+-
+-			phy1: ethernet-phy@1d {
+-				reg = <0x1d>;
+-			};
+-
+-			phy2: ethernet-phy@1e {
+-				reg = <0x1e>;
+-			};
+-
+-			phy3: ethernet-phy@1f {
+-				reg = <0x1f>;
+-			};
+-		};
+-	};
+-
+-	mdio-mux-emi2 {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		compatible = "mdio-mux-gpio", "mdio-mux";
+-		mdio-parent-bus = <&xmdio0>;
+-		gpios = <&gpio0 3 0>, <&gpio0 2 0>;
+-
+-		p4080xmdio1: mdio@1 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <1>;
+-
+-			phy11: ethernet-phy@0 {
+-				compatible = "ethernet-phy-ieee802.3-c45";
+-				reg = <0x0>;
+-			};
+-		};
+-
+-		p4080xmdio3: mdio@3 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <3>;
+-
+-			phy10: ethernet-phy@4 {
+-				compatible = "ethernet-phy-ieee802.3-c45";
+-				reg = <0x4>;
+-			};
+-		};
 -	};
 -};
 -
--/include/ "p2020rdb-pc.dtsi"
--/include/ "p2020-post.dtsi"
--
 -&espi0 {
+-	status = "okay";
 -	flash@0 {
 -		compatible = "jedec,spi-nor";
 -		#address-cells = <1>;
 -		#size-cells = <1>;
 -		reg = <0>;
--		spi-max-frequency = <10000000>; /* input clock */
+-		/* input clock */
+-		spi-max-frequency = <10000000>;
 -	};
 -};
-diff --git a/arch/powerpc/dts/p2020rdb-pc.dtsi b/arch/powerpc/dts/p2020rdb-pc.dtsi
+-
+-/include/ "p4080si-post.dtsi"
+diff --git a/arch/powerpc/dts/p4080si-post.dtsi b/arch/powerpc/dts/p4080si-post.dtsi
 deleted file mode 100644
-index 0d2acc746e4..00000000000
---- a/arch/powerpc/dts/p2020rdb-pc.dtsi
+index 56b79b14f4a..00000000000
+--- a/arch/powerpc/dts/p4080si-post.dtsi
 +++ /dev/null
-@@ -1,50 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+ OR X11
+@@ -1,62 +0,0 @@
+-// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
 -/*
-- * P2020 RDB-PC Device Tree Source stub (no addresses or top-level ranges)
+- * P4080/P4040 Silicon/SoC Device Tree Source (post include)
 - *
-- * Copyright 2011 Freescale Semiconductor Inc.
+- * Copyright 2011 - 2015 Freescale Semiconductor Inc.
 - * Copyright 2020 NXP
+- *
 - */
 -
 -&soc {
--	mdio@24520 {
--		phy0: ethernet-phy@0 {
--			interrupts = <3 1 0 0>;
--			reg = <0x0>;
--			};
--		phy1: ethernet-phy@1 {
--			interrupts = <2 1 0 0>;
--			reg = <0x1>;
--			};
--	};
 -
--	mdio@25520 {
--		tbi0: tbi-phy@11 {
--			reg = <0x11>;
--			device_type = "tbi-phy";
+-/include/ "qoriq-clockgen1.dtsi"
+-/include/ "qoriq-gpio-0.dtsi"
+-/include/ "qoriq-sec4.0-0.dtsi"
+-
+-/* include used FMan blocks */
+-/include/ "qoriq-fman-0.dtsi"
+-/include/ "qoriq-fman-0-1g-0.dtsi"
+-/include/ "qoriq-fman-0-1g-1.dtsi"
+-/include/ "qoriq-fman-0-1g-2.dtsi"
+-/include/ "qoriq-fman-0-1g-3.dtsi"
+-/include/ "qoriq-fman-0-10g-0.dtsi"
+-	fman@400000 {
+-		enet0: ethernet@e0000 {
+-		};
+-
+-		enet1: ethernet@e2000 {
+-		};
+-
+-		enet2: ethernet@e4000 {
+-		};
+-
+-		enet3: ethernet@e6000 {
+-		};
+-
+-		enet4: ethernet@f0000 {
 -		};
 -	};
 -
--	mdio@26520 {
--		status = "disabled";
--	};
+-/include/ "qoriq-fman-1.dtsi"
+-/include/ "qoriq-fman-1-1g-0.dtsi"
+-/include/ "qoriq-fman-1-1g-1.dtsi"
+-/include/ "qoriq-fman-1-1g-2.dtsi"
+-/include/ "qoriq-fman-1-1g-3.dtsi"
+-/include/ "qoriq-fman-1-10g-0.dtsi"
+-	fman@500000 {
+-		enet5: ethernet@e0000 {
+-		};
 -
--	enet0: ethernet@24000 {
--		phy-connection-type = "rgmii-id";
--		fixed-link {
--			speed = <1000>;
--			full-duplex;
+-		enet6: ethernet@e2000 {
+-		};
+-
+-		enet7: ethernet@e4000 {
+-		};
+-
+-		enet8: ethernet@e6000 {
+-		};
+-
+-		enet9: ethernet@f0000 {
 -		};
 -	};
--
--	enet1: ethernet@25000 {
--		tbi-handle = <&tbi0>;
--		phy-handle = <&phy0>;
--		phy-connection-type = "sgmii";
--	};
--
--	enet2: ethernet@26000 {
--		phy-handle = <&phy1>;
--		phy-connection-type = "rgmii-id";
--	};
 -};
-diff --git a/arch/powerpc/dts/p2020rdb-pc_36b.dts b/arch/powerpc/dts/p2020rdb-pc_36b.dts
+diff --git a/board/nxp/common/Makefile b/board/nxp/common/Makefile
+index ba1aa084aa4..8fd6d6ce8c2 100644
+--- a/board/nxp/common/Makefile
++++ b/board/nxp/common/Makefile
+@@ -49,7 +49,6 @@ obj-$(CONFIG_DEEP_SLEEP)		+= mpc85xx_sleep.o
+ endif
+ 
+ 
+-obj-$(CONFIG_TARGET_P4080DS)		+= ics307_clk.o
+ obj-$(CONFIG_TARGET_P5040DS)		+= ics307_clk.o
+ ifeq ($(CONFIG_$(PHASE_)POWER_LEGACY),y)
+ obj-$(CONFIG_POWER_PFUZE100)	+= pfuze.o
+@@ -66,7 +65,6 @@ obj-$(CONFIG_EMC2305)              += emc2305.o
+ 
+ # deal with common files for P-series corenet based devices
+ obj-$(CONFIG_TARGET_P2041RDB)	+= p_corenet/
+-obj-$(CONFIG_TARGET_P4080DS)	+= p_corenet/
+ obj-$(CONFIG_TARGET_P5040DS)	+= p_corenet/
+ 
+ obj-$(CONFIG_LAYERSCAPE_NS_ACCESS)	+= ns_access.o
+diff --git a/doc/README.srio-pcie-boot-corenet b/doc/README.srio-pcie-boot-corenet
 deleted file mode 100644
-index c847417df99..00000000000
---- a/arch/powerpc/dts/p2020rdb-pc_36b.dts
+index 5625ad1a2bb..00000000000
+--- a/doc/README.srio-pcie-boot-corenet
 +++ /dev/null
-@@ -1,59 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+ OR X11
--/*
-- * P2020RDB-PC (36-bit address map) Device Tree Source
-- *
-- * Copyright 2013 - 2015 Freescale Semiconductor Inc.
-- * Copyright 2019 NXP
-- */
+@@ -1,118 +0,0 @@
+----------------------------------------
+-SRIO and PCIE Boot on Corenet Platforms
+----------------------------------------
 -
--/include/ "p2020.dtsi"
+-For some PowerPC processors with SRIO or PCIE interface, boot location can be
+-configured to SRIO or PCIE by RCW. The processor booting from SRIO or PCIE can
+-do without flash for u-boot image, ucode and ENV. All the images can be fetched
+-from another processor's memory space by SRIO or PCIE link connected between
+-them.
 -
--/ {
--	model = "fsl,P2020RDB-PC";
--	compatible = "fsl,P2020RDB-PC";
--	#address-cells = <2>;
--	#size-cells = <2>;
--	interrupt-parent = <&mpic>;
+-This document describes the processes based on an example implemented on P4080DS
+-platforms and a RCW example with boot from SRIO or PCIE configuration.
 -
--	lbc: localbus@fffe05000 {
--		reg = <0xf 0xffe05000 0 0x1000>;
--	};
+-Environment of the SRIO or PCIE boot:
+-	a) Master and slave can be SOCs in one board or SOCs in separate boards.
+-	b) They are connected with SRIO or PCIE links, whether 1x, 2x or 4x, and
+-	   directly or through switch system.
+-	c) Only Master has NorFlash for booting, and all the Master's and Slave's
+-	   U-Boot images, UCodes will be stored in this flash.
+-	d) Slave has its own EEPROM for RCW and PBI.
+-	e) Slave's RCW should configure the SerDes for SRIO or PCIE boot port, set
+-	   the boot location to SRIO or PCIE, and holdoff all the cores.
 -
--	soc: soc@fffe00000 {
--		ranges = <0x0 0xf 0xffe00000 0x100000>;
--	};
+-	-----------       -----------             -----------
+-	|         |       |         |             |         |
+-	|         |       |         |             |         |
+-	| NorFlash|<----->| Master  |SRIO or PCIE |  Slave  |<---->[EEPROM]
+-	|         |       |         |<===========>|         |
+-	|         |       |         |             |         |
+-	-----------       -----------             -----------
 -
--	pci2: pcie@fffe08000 {
--		reg = <0xf 0xffe08000 0x0 0x1000>;	/* registers */
--		status = "disabled";
--	};
+-The example based on P4080DS platform:
+-	Two P4080DS platforms can be used to implement the boot from SRIO or PCIE.
+-	Their SRIO or PCIE ports 1 will be connected directly and will be used for
+-	the boot from SRIO or PCIE.
 -
--	pci1: pcie@fffe09000 {
--		reg = <0xf 0xffe09000 0x0 0x1000>;	/* registers */
--		ranges = <0x01000000 0x0 0x00000000 0xf 0xffc10000 0x0 0x00010000   /* downstream I/O */
--			  0x02000000 0x0 0xc0000000 0xc 0x20000000 0x0 0x20000000>; /* non-prefetchable memory */
--	};
+-	1. Slave's RCW example for boot from SRIO port 1 and all cores in holdoff.
+-		00000000: aa55 aa55 010e 0100 0c58 0000 0000 0000
+-		00000010: 1818 1818 0000 8888 7440 4000 0000 2000
+-		00000020: f440 0000 0100 0000 0000 0000 0000 0000
+-		00000030: 0000 0000 0083 0000 0000 0000 0000 0000
+-		00000040: 0000 0000 0000 0000 0813 8040 063c 778f
 -
--	pci0: pcie@fffe0a000 {
--		reg = <0xf 0xffe0a000 0x0 0x1000>;	/* registers */
--		ranges = <0x01000000 0x0 0x00000000 0xf 0xffc00000 0x0 0x00010000   /* downstream I/O */
--			  0x02000000 0x0 0x80000000 0xc 0x00000000 0x0 0x20000000>; /* non-prefetchable memory */
--	};
+-	2. Slave's RCW example for boot from PCIE port 1 and all cores in holdoff.
+-		00000000: aa55 aa55 010e 0100 0c58 0000 0000 0000
+-		00000010: 1818 1818 0000 8888 1440 4000 0000 2000
+-		00000020: f040 0000 0100 0000 0020 0000 0000 0000
+-		00000030: 0000 0000 0083 0000 0000 0000 0000 0000
+-		00000040: 0000 0000 0000 0000 0813 8040 547e ffc9
 -
--	aliases {
--		spi0 = &espi0;
--	};
--};
+-	3. Sequence in Step by Step.
+-		a) Update RCW for slave with boot from SRIO or PCIE port 1 configuration.
+-		b) Program slave's U-Boot image, UCode, and ENV parameters into master's
+-		   NorFlash.
+-		c) Set environment variable "bootmaster" to "SRIO1" or "PCIE1" and save
+-		   environment for master.
+-					env set bootmaster SRIO1
+-				or
+-					env set bootmaster PCIE1
+-					saveenv
+-		d) Restart up master and it will boot up normally from its NorFlash.
+-		   Then, it will finish necessary configurations for slave's boot from
+-		   SRIO or PCIE port 1.
+-		e) Master will set inbound SRIO or PCIE windows covered slave's U-Boot
+-		   image stored in master's NorFlash.
+-		f) Master will set an inbound SRIO or PCIE window covered slave's UCode
+-		   and ENV stored in master's NorFlash.
+-		g) Master will set outbound SRIO or PCIE  windows in order to configure
+-		   slave's registers for the core's releasing.
+-		h) Since all cores of slave in holdoff, slave should be powered on before
+-		   all the above master's steps, and wait to be released by master. In the
+-		   startup phase of the slave from SRIO or PCIE, it will finish some
+-		   necessary configurations.
+-		i) Slave will set a specific TLB entry for the boot process.
+-		j) Slave will set a LAW entry with the TargetID SRIO or PCIE port 1 for
+-		   the boot.
+-		k) Slave will set a specific TLB entry in order to fetch UCode and ENV
+-		   from master.
+-		l) Slave will set a LAW entry with the TargetID SRIO or PCIE port 1 for
+-		   UCode and ENV.
 -
--/include/ "p2020rdb-pc.dtsi"
--/include/ "p2020-post.dtsi"
+-How to use this feature:
+-	To use this feature, you need to focus those points.
 -
--&espi0 {
--	flash@0 {
--		compatible = "jedec,spi-nor";
--		#address-cells = <1>;
--		#size-cells = <1>;
--		reg = <0>;
--		spi-max-frequency = <10000000>; /* input clock */
--	};
--};
-diff --git a/board/nxp/p1_p2_rdb_pc/Kconfig b/board/nxp/p1_p2_rdb_pc/Kconfig
-index 2ab46d99434..2c82048564d 100644
---- a/board/nxp/p1_p2_rdb_pc/Kconfig
-+++ b/board/nxp/p1_p2_rdb_pc/Kconfig
-@@ -1,6 +1,5 @@
- if	TARGET_P1020RDB_PC	|| \
--	TARGET_P1020RDB_PD	|| \
--	TARGET_P2020RDB
-+	TARGET_P1020RDB_PD
- 
- config SYS_BOARD
- 	default "p1_p2_rdb_pc"
-diff --git a/board/nxp/p1_p2_rdb_pc/MAINTAINERS b/board/nxp/p1_p2_rdb_pc/MAINTAINERS
-index 1ce3501f379..d9a5cdf3f42 100644
---- a/board/nxp/p1_p2_rdb_pc/MAINTAINERS
-+++ b/board/nxp/p1_p2_rdb_pc/MAINTAINERS
-@@ -15,11 +15,3 @@ F:	configs/P1020RDB-PD_defconfig
- F:	configs/P1020RDB-PD_NAND_defconfig
- F:	configs/P1020RDB-PD_SDCARD_defconfig
- F:	configs/P1020RDB-PD_SPIFLASH_defconfig
--F:	configs/P2020RDB-PC_defconfig
--F:	configs/P2020RDB-PC_36BIT_defconfig
--F:	configs/P2020RDB-PC_36BIT_NAND_defconfig
--F:	configs/P2020RDB-PC_36BIT_SDCARD_defconfig
--F:	configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig
--F:	configs/P2020RDB-PC_NAND_defconfig
--F:	configs/P2020RDB-PC_SDCARD_defconfig
--F:	configs/P2020RDB-PC_SPIFLASH_defconfig
-diff --git a/board/nxp/p1_p2_rdb_pc/README b/board/nxp/p1_p2_rdb_pc/README
-index fd849bfc29a..5bf27816ab2 100644
---- a/board/nxp/p1_p2_rdb_pc/README
-+++ b/board/nxp/p1_p2_rdb_pc/README
-@@ -6,10 +6,8 @@ P1_P2_RDB_PC represents a set of boards including
-     P1020RDB-PD
-     P1021RDB-PC
-     P1024RDB
--    P2020RDB-PC
- 
--They have similar design of P1020RDB but have DDR3 instead of DDR2. P2020RDB-PC
--has 64-bit DDR. All others have 32-bit DDR.
-+They have similar design of P1020RDB but have DDR3 instead of DDR2.
- 
- Key features on these boards include:
-     * DDR3
-@@ -46,7 +44,7 @@ enable QE-TDM for linux kernel, set "qe;tdm" in hwconfig. Syntax is as below
- 
- Device tree support and how to enable it for different configs
- --------------------------------------------------------------
--Device tree support is available for p1020rdb and p2020rdb for below mentioned boot,
-+Device tree support is available for p1020rdb for below mentioned boot,
- 1. NOR Boot
- 2. NAND Boot
- 3. SD Boot
-diff --git a/board/nxp/p1_p2_rdb_pc/ddr.c b/board/nxp/p1_p2_rdb_pc/ddr.c
-index 8622a5a610a..74c9c78c4e1 100644
---- a/board/nxp/p1_p2_rdb_pc/ddr.c
-+++ b/board/nxp/p1_p2_rdb_pc/ddr.c
-@@ -46,37 +46,6 @@ dimm_params_t ddr_raw_timing = {
- 	.refresh_rate_ps = 7800000,
- 	.tfaw_ps = 37500,
- };
--#elif defined(CONFIG_TARGET_P2020RDB)
--/* Micron MT41J128M16_15E */
--dimm_params_t ddr_raw_timing = {
--	.n_ranks = 1,
--	.rank_density = 1073741824u,
--	.capacity = 1073741824u,
--	.primary_sdram_width = 64,
--	.ec_sdram_width = 0,
--	.registered_dimm = 0,
--	.mirrored_dimm = 0,
--	.n_row_addr = 14,
--	.n_col_addr = 10,
--	.n_banks_per_sdram_device = 8,
--	.edc_config = 0,
--	.burst_lengths_bitmask = 0x0c,
+-	1. Slave's RCW with SRIO or PCIE boot configurations, and all cores in holdoff
+-	   configurations.
+-	   Please refer to the examples given above.
 -
--	.tckmin_x_ps = 1500,
--	.caslat_x = 0x7e << 4,	/* 5,6,7,8,9,10 */
--	.taa_ps = 13500,
--	.twr_ps = 15000,
--	.trcd_ps = 13500,
--	.trrd_ps = 6000,
--	.trp_ps = 13500,
--	.tras_ps = 36000,
--	.trc_ps = 49500,
--	.trfc_ps = 160000,
--	.twtr_ps = 7500,
--	.trtp_ps = 7500,
--	.refresh_rate_ps = 7800000,
--	.tfaw_ps = 30000,
--};
- #elif (defined(CONFIG_TARGET_P1020MBG) || defined(CONFIG_TARGET_P1020RDB_PD))
- /* Micron MT41J512M8_187E */
- dimm_params_t ddr_raw_timing = {
-diff --git a/board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c b/board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c
-index a19a98dd0d1..57c355068db 100644
---- a/board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c
-+++ b/board/nxp/p1_p2_rdb_pc/p1_p2_rdb_pc.c
-@@ -220,8 +220,6 @@ int board_early_init_f(void)
- #define BOARD_NAME "P1020RDB-PC"
- #elif defined(CONFIG_TARGET_P1020RDB_PD)
- #define BOARD_NAME "P1020RDB-PD"
--#elif defined(CONFIG_TARGET_P2020RDB)
--#define BOARD_NAME "P2020RDB-PC"
- #endif
- 
- int checkboard_p1_p2(void)
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 8fcdc36c931..11b5036caad 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -1179,7 +1179,7 @@ config RAMBOOT_PBL
- choice
- 	prompt "Freescale PBL (or predecessor) load location"
- 	depends on RAMBOOT_PBL || ((TARGET_P1010RDB_PA || TARGET_P1010RDB_PB \
--		|| TARGET_P1020RDB_PC || TARGET_P1020RDB_PD || TARGET_P2020RDB) \
-+		|| TARGET_P1020RDB_PC || TARGET_P1020RDB_PD) \
- 		&& !CMD_NAND) || (TARGET_TURRIS_1X && SYS_MPC85XX_NO_RESETVEC)
- 
- config SDCARD
-diff --git a/configs/P2020RDB-PC_36BIT_NAND_defconfig b/configs/P2020RDB-PC_36BIT_NAND_defconfig
-deleted file mode 100644
-index 6a8b750555b..00000000000
---- a/configs/P2020RDB-PC_36BIT_NAND_defconfig
-+++ /dev/null
-@@ -1,164 +0,0 @@
--CONFIG_PPC=y
--CONFIG_TEXT_BASE=0x11000000
--CONFIG_SYS_MALLOC_LEN=0x100000
--CONFIG_SF_DEFAULT_SPEED=10000000
--CONFIG_ENV_SIZE=0x4000
--CONFIG_ENV_OFFSET=0x100000
--CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc_36b"
--CONFIG_SYS_MONITOR_LEN=786432
--CONFIG_SPL_SERIAL=y
--CONFIG_TPL_TEXT_BASE=0xF8F80000
--CONFIG_TPL_LIBCOMMON_SUPPORT=y
--CONFIG_TPL_LIBGENERIC_SUPPORT=y
--CONFIG_TPL_SERIAL=y
--CONFIG_SPL_TEXT_BASE=0xFF800000
--CONFIG_SPL=y
--CONFIG_TPL_MAX_SIZE=0x20000
--CONFIG_MPC85xx=y
--CONFIG_SYS_INIT_RAM_LOCK=y
--# CONFIG_CMD_ERRATA is not set
--CONFIG_TARGET_P2020RDB=y
--CONFIG_L2_CACHE=y
--CONFIG_ENABLE_36BIT_PHYS=y
--CONFIG_SYS_MPC85XX_NO_RESETVEC=y
--CONFIG_TPL_SYS_MPC85XX_NO_RESETVEC=y
--CONFIG_USE_UBOOTPATH=y
--CONFIG_PCIE1=y
--CONFIG_PCIE2=y
--CONFIG_PHYS_64BIT=y
--CONFIG_MP=y
--CONFIG_TPL_SYS_MONITOR_BASE=0xF8F80000
--CONFIG_FIT=y
--CONFIG_FIT_VERBOSE=y
--CONFIG_BOOTDELAY=10
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
--CONFIG_SYS_PBSIZE=276
--CONFIG_BOARD_EARLY_INIT_F=y
--CONFIG_BOARD_EARLY_INIT_R=y
--# CONFIG_MISC_INIT_R is not set
--# CONFIG_SPL_FRAMEWORK is not set
--CONFIG_SPL_MAX_SIZE=0x1000
--CONFIG_SPL_NAND_BOOT=y
--CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
--CONFIG_SPL_INIT_MINIMAL=y
--CONFIG_SPL_FLUSH_IMAGE=y
--CONFIG_SPL_RELOC_TEXT_BASE=0xf8ffe000
--CONFIG_SPL_RELOC_STACK=0xf8fffff0
--CONFIG_TPL_GD_ADDR=0xf8fac000
--CONFIG_TPL_RELOC_TEXT_BASE=0xf8f80000
--CONFIG_TPL_RELOC_STACK=0xf8fb0000
--CONFIG_TPL_RELOC_MALLOC=y
--CONFIG_TPL_RELOC_MALLOC_ADDR=0xf8fb4000
--CONFIG_TPL_RELOC_MALLOC_SIZE=0xc000
--CONFIG_SPL_NAND_SUPPORT=y
--CONFIG_TPL=y
--CONFIG_TPL_ENV_SUPPORT=y
--CONFIG_TPL_I2C=y
--CONFIG_TPL_MPC8XXX_INIT_DDR=y
--CONFIG_TPL_NAND_SUPPORT=y
--CONFIG_HUSH_PARSER=y
--# CONFIG_AUTO_COMPLETE is not set
--CONFIG_CMD_IMLS=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
--CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_I2C=y
--CONFIG_LOADS_ECHO=y
--CONFIG_SYS_LOADS_BAUD_CHANGE=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--# CONFIG_CMD_HASH is not set
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_MTDPARTS=y
--CONFIG_MTDIDS_DEFAULT="nor0=fef000000.nor"
--CONFIG_MTDPARTS_DEFAULT="mtdparts=fef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_NAND=y
--CONFIG_ENV_RANGE=0xc000
--CONFIG_ENV_RELOC_GD_ENV_ADDR=y
--CONFIG_USE_BOOTFILE=y
--CONFIG_BOOTFILE="uImage"
--CONFIG_USE_ETHPRIME=y
--CONFIG_ETHPRIME="eTSEC1"
--CONFIG_USE_HOSTNAME=y
--CONFIG_USE_ROOTPATH=y
--CONFIG_LBA48=y
--CONFIG_DDR_CLK_FREQ=66666666
--CONFIG_SYS_SPD_BUS_NUM=1
--CONFIG_CHIP_SELECTS_PER_CTRL=1
--CONFIG_SYS_DDR_RAW_TIMING=y
--CONFIG_SYS_BR0_PRELIM_BOOL=y
--CONFIG_SYS_BR0_PRELIM=0xFF800C21
--CONFIG_SYS_OR0_PRELIM=0xFFFF8396
--CONFIG_SYS_BR1_PRELIM_BOOL=y
--CONFIG_SYS_BR1_PRELIM=0xEF001001
--CONFIG_SYS_OR1_PRELIM=0xFC000FF7
--CONFIG_SYS_BR2_PRELIM_BOOL=y
--CONFIG_SYS_BR2_PRELIM=0xFFB00801
--CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
--CONFIG_SYS_BR3_PRELIM_BOOL=y
--CONFIG_SYS_BR3_PRELIM=0xFFA00801
--CONFIG_SYS_OR3_PRELIM=0xFFF009F7
--CONFIG_TPL_COMMON_INIT_DDR=y
--CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
--CONFIG_TPL_SYS_I2C_LEGACY=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_I2C_FSL=y
--CONFIG_SYS_FSL_I2C_OFFSET=0x3000
--CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
--CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
--CONFIG_SYS_I2C_EEPROM_ADDR=0x52
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_FLASH_CFI_MTD=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=128
--CONFIG_MTD_RAW_NAND=y
--CONFIG_NAND_FSL_ELBC=y
--CONFIG_SYS_NAND_BLOCK_SIZE=0x4000
--CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
--CONFIG_SYS_NAND_U_BOOT_OFFS=0x20000
--CONFIG_DM_SPI_FLASH=y
--CONFIG_SPI_FLASH_SPANSION=y
--CONFIG_DM_MDIO=y
--CONFIG_PHY_GIGE=y
--CONFIG_E1000=y
--CONFIG_MII=y
--CONFIG_VSC7385_ENET=y
--CONFIG_TSEC_ENET=y
--CONFIG_PHY_ATHEROS=y
--CONFIG_PHY_BROADCOM=y
--CONFIG_PHY_DAVICOM=y
--CONFIG_PHY_LXT=y
--CONFIG_PHY_MARVELL=y
--CONFIG_PHY_NATSEMI=y
--CONFIG_PHY_REALTEK=y
--CONFIG_PHY_SMSC=y
--CONFIG_PHY_VITESSE=y
--CONFIG_PHY_FIXED=y
--CONFIG_PCIE_FSL=y
--CONFIG_DM_RTC=y
--CONFIG_RTC_PT7C4338=y
--CONFIG_DM_SERIAL=y
--CONFIG_SPL_SYS_NS16550_SERIAL=y
--CONFIG_SPL_NS16550_MIN_FUNCTIONS=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_ESPI=y
--CONFIG_USB=y
--CONFIG_USB_EHCI_FSL=y
--CONFIG_USB_STORAGE=y
--CONFIG_ADDR_MAP=y
-diff --git a/configs/P2020RDB-PC_36BIT_SDCARD_defconfig b/configs/P2020RDB-PC_36BIT_SDCARD_defconfig
-deleted file mode 100644
-index e516e8c0d6e..00000000000
---- a/configs/P2020RDB-PC_36BIT_SDCARD_defconfig
-+++ /dev/null
-@@ -1,145 +0,0 @@
--CONFIG_PPC=y
--CONFIG_TEXT_BASE=0x11000000
--CONFIG_SYS_MALLOC_LEN=0x100000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
--CONFIG_SF_DEFAULT_SPEED=10000000
--CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_OFFSET=0x0
--CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc_36b"
--CONFIG_SYS_MONITOR_LEN=786432
--CONFIG_SPL_MMC=y
--CONFIG_SPL_SERIAL=y
--CONFIG_SPL_TEXT_BASE=0xf8f80000
--CONFIG_SPL=y
--CONFIG_MPC85xx=y
--CONFIG_SYS_INIT_RAM_LOCK=y
--# CONFIG_CMD_ERRATA is not set
--CONFIG_TARGET_P2020RDB=y
--CONFIG_L2_CACHE=y
--CONFIG_ENABLE_36BIT_PHYS=y
--CONFIG_SYS_MPC85XX_NO_RESETVEC=y
--CONFIG_SPL_SYS_MPC85XX_NO_RESETVEC=y
--CONFIG_USE_UBOOTPATH=y
--CONFIG_PCIE1=y
--CONFIG_PCIE2=y
--CONFIG_PHYS_64BIT=y
--CONFIG_MP=y
--CONFIG_SPL_SYS_MONITOR_BASE=0xF8F80000
--CONFIG_FIT=y
--CONFIG_FIT_VERBOSE=y
--CONFIG_FSL_FIXED_MMC_LOCATION=y
--CONFIG_BOOTDELAY=10
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
--CONFIG_SYS_PBSIZE=276
--CONFIG_BOARD_EARLY_INIT_F=y
--CONFIG_BOARD_EARLY_INIT_R=y
--# CONFIG_MISC_INIT_R is not set
--# CONFIG_SPL_FRAMEWORK is not set
--CONFIG_SPL_MAX_SIZE=0x20000
--CONFIG_SPL_MMC_BOOT=y
--CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
--CONFIG_SPL_FLUSH_IMAGE=y
--CONFIG_SPL_GD_ADDR=0xf8f9c000
--CONFIG_SPL_RELOC_STACK=0xf8f9d000
--CONFIG_SPL_RELOC_MALLOC=y
--CONFIG_SPL_RELOC_MALLOC_ADDR=0xf8fa5000
--CONFIG_SPL_RELOC_MALLOC_SIZE=0x5b000
--CONFIG_SPL_ENV_SUPPORT=y
--CONFIG_SPL_I2C=y
--CONFIG_SPL_MPC8XXX_INIT_DDR=y
--CONFIG_HUSH_PARSER=y
--# CONFIG_AUTO_COMPLETE is not set
--CONFIG_CMD_IMLS=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
--CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_I2C=y
--CONFIG_LOADS_ECHO=y
--CONFIG_SYS_LOADS_BAUD_CHANGE=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--# CONFIG_CMD_HASH is not set
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_MTDPARTS=y
--CONFIG_MTDIDS_DEFAULT="nor0=fef000000.nor"
--CONFIG_MTDPARTS_DEFAULT="mtdparts=fef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_MMC=y
--CONFIG_ENV_RELOC_GD_ENV_ADDR=y
--CONFIG_USE_BOOTFILE=y
--CONFIG_BOOTFILE="uImage"
--CONFIG_USE_ETHPRIME=y
--CONFIG_ETHPRIME="eTSEC1"
--CONFIG_USE_HOSTNAME=y
--CONFIG_USE_ROOTPATH=y
--CONFIG_LBA48=y
--CONFIG_DDR_CLK_FREQ=66666666
--CONFIG_SYS_SPD_BUS_NUM=1
--CONFIG_CHIP_SELECTS_PER_CTRL=1
--CONFIG_SYS_DDR_RAW_TIMING=y
--CONFIG_SYS_BR0_PRELIM_BOOL=y
--CONFIG_SYS_BR0_PRELIM=0xEF001001
--CONFIG_SYS_OR0_PRELIM=0xFC000FF7
--CONFIG_SYS_BR2_PRELIM_BOOL=y
--CONFIG_SYS_BR2_PRELIM=0xFFB00801
--CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
--CONFIG_SYS_BR3_PRELIM_BOOL=y
--CONFIG_SYS_BR3_PRELIM=0xFFA00801
--CONFIG_SYS_OR3_PRELIM=0xFFF009F7
--CONFIG_SPL_COMMON_INIT_DDR=y
--CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_I2C_FSL=y
--CONFIG_SYS_FSL_I2C_OFFSET=0x3000
--CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
--CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
--CONFIG_SYS_I2C_EEPROM_ADDR=0x52
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_FLASH_CFI_MTD=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=128
--CONFIG_DM_SPI_FLASH=y
--CONFIG_SPI_FLASH_SPANSION=y
--CONFIG_DM_MDIO=y
--CONFIG_PHY_GIGE=y
--CONFIG_E1000=y
--CONFIG_MII=y
--CONFIG_VSC7385_ENET=y
--CONFIG_TSEC_ENET=y
--CONFIG_PHY_ATHEROS=y
--CONFIG_PHY_BROADCOM=y
--CONFIG_PHY_DAVICOM=y
--CONFIG_PHY_LXT=y
--CONFIG_PHY_MARVELL=y
--CONFIG_PHY_NATSEMI=y
--CONFIG_PHY_REALTEK=y
--CONFIG_PHY_SMSC=y
--CONFIG_PHY_VITESSE=y
--CONFIG_PHY_FIXED=y
--CONFIG_PCIE_FSL=y
--CONFIG_DM_RTC=y
--CONFIG_RTC_PT7C4338=y
--CONFIG_DM_SERIAL=y
--CONFIG_SPL_SYS_NS16550_SERIAL=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_ESPI=y
--CONFIG_USB=y
--CONFIG_USB_EHCI_FSL=y
--CONFIG_USB_STORAGE=y
--CONFIG_ADDR_MAP=y
-diff --git a/configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig b/configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig
-deleted file mode 100644
-index bc25dbe17df..00000000000
---- a/configs/P2020RDB-PC_36BIT_SPIFLASH_defconfig
-+++ /dev/null
-@@ -1,147 +0,0 @@
--CONFIG_PPC=y
--CONFIG_TEXT_BASE=0x11000000
--CONFIG_SYS_MALLOC_LEN=0x100000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
--CONFIG_SF_DEFAULT_SPEED=10000000
--CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_OFFSET=0x100000
--CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc_36b"
--CONFIG_SYS_MONITOR_LEN=786432
--CONFIG_SPL_SERIAL=y
--CONFIG_SPL_TEXT_BASE=0xf8f80000
--CONFIG_SPL=y
--CONFIG_SPL_SPI_FLASH_SUPPORT=y
--CONFIG_SPL_SPI=y
--CONFIG_MPC85xx=y
--CONFIG_SYS_INIT_RAM_LOCK=y
--# CONFIG_CMD_ERRATA is not set
--CONFIG_TARGET_P2020RDB=y
--CONFIG_L2_CACHE=y
--CONFIG_ENABLE_36BIT_PHYS=y
--CONFIG_SYS_MPC85XX_NO_RESETVEC=y
--CONFIG_SPL_SYS_MPC85XX_NO_RESETVEC=y
--CONFIG_USE_UBOOTPATH=y
--CONFIG_PCIE1=y
--CONFIG_PCIE2=y
--CONFIG_PHYS_64BIT=y
--CONFIG_MP=y
--CONFIG_SPL_SYS_MONITOR_BASE=0xF8F80000
--CONFIG_FIT=y
--CONFIG_FIT_VERBOSE=y
--CONFIG_SPIFLASH=y
--CONFIG_BOOTDELAY=10
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
--CONFIG_SYS_PBSIZE=276
--CONFIG_BOARD_EARLY_INIT_F=y
--CONFIG_BOARD_EARLY_INIT_R=y
--# CONFIG_MISC_INIT_R is not set
--# CONFIG_SPL_FRAMEWORK is not set
--CONFIG_SPL_MAX_SIZE=0x20000
--CONFIG_SPL_SPI_BOOT=y
--CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
--CONFIG_SPL_FLUSH_IMAGE=y
--CONFIG_SPL_GD_ADDR=0xf8f9c000
--CONFIG_SPL_RELOC_STACK=0xf8f9d000
--CONFIG_SPL_RELOC_MALLOC=y
--CONFIG_SPL_RELOC_MALLOC_ADDR=0xf8fa5000
--CONFIG_SPL_RELOC_MALLOC_SIZE=0x5b000
--CONFIG_SPL_ENV_SUPPORT=y
--CONFIG_SPL_I2C=y
--CONFIG_SPL_MPC8XXX_INIT_DDR=y
--CONFIG_HUSH_PARSER=y
--# CONFIG_AUTO_COMPLETE is not set
--CONFIG_CMD_IMLS=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
--CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_I2C=y
--CONFIG_LOADS_ECHO=y
--CONFIG_SYS_LOADS_BAUD_CHANGE=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--# CONFIG_CMD_HASH is not set
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_MTDPARTS=y
--CONFIG_MTDIDS_DEFAULT="nor0=fef000000.nor"
--CONFIG_MTDPARTS_DEFAULT="mtdparts=fef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_ENV_RELOC_GD_ENV_ADDR=y
--CONFIG_USE_BOOTFILE=y
--CONFIG_BOOTFILE="uImage"
--CONFIG_USE_ETHPRIME=y
--CONFIG_ETHPRIME="eTSEC1"
--CONFIG_USE_HOSTNAME=y
--CONFIG_USE_ROOTPATH=y
--CONFIG_LBA48=y
--CONFIG_DDR_CLK_FREQ=66666666
--CONFIG_SYS_SPD_BUS_NUM=1
--CONFIG_CHIP_SELECTS_PER_CTRL=1
--CONFIG_SYS_DDR_RAW_TIMING=y
--CONFIG_SYS_BR0_PRELIM_BOOL=y
--CONFIG_SYS_BR0_PRELIM=0xEF001001
--CONFIG_SYS_OR0_PRELIM=0xFC000FF7
--CONFIG_SYS_BR2_PRELIM_BOOL=y
--CONFIG_SYS_BR2_PRELIM=0xFFB00801
--CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
--CONFIG_SYS_BR3_PRELIM_BOOL=y
--CONFIG_SYS_BR3_PRELIM=0xFFA00801
--CONFIG_SYS_OR3_PRELIM=0xFFF009F7
--CONFIG_SPL_COMMON_INIT_DDR=y
--CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_I2C_FSL=y
--CONFIG_SYS_FSL_I2C_OFFSET=0x3000
--CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
--CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
--CONFIG_SYS_I2C_EEPROM_ADDR=0x52
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_FLASH_CFI_MTD=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=128
--CONFIG_DM_SPI_FLASH=y
--CONFIG_SPI_FLASH_SPANSION=y
--CONFIG_DM_MDIO=y
--CONFIG_PHY_GIGE=y
--CONFIG_E1000=y
--CONFIG_MII=y
--CONFIG_VSC7385_ENET=y
--CONFIG_TSEC_ENET=y
--CONFIG_PHY_ATHEROS=y
--CONFIG_PHY_BROADCOM=y
--CONFIG_PHY_DAVICOM=y
--CONFIG_PHY_LXT=y
--CONFIG_PHY_MARVELL=y
--CONFIG_PHY_NATSEMI=y
--CONFIG_PHY_REALTEK=y
--CONFIG_PHY_SMSC=y
--CONFIG_PHY_VITESSE=y
--CONFIG_PHY_FIXED=y
--CONFIG_PCIE_FSL=y
--CONFIG_DM_RTC=y
--CONFIG_RTC_PT7C4338=y
--CONFIG_DM_SERIAL=y
--CONFIG_SPL_SYS_NS16550_SERIAL=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_ESPI=y
--CONFIG_USB=y
--CONFIG_USB_EHCI_FSL=y
--CONFIG_USB_STORAGE=y
--CONFIG_ADDR_MAP=y
-diff --git a/configs/P2020RDB-PC_36BIT_defconfig b/configs/P2020RDB-PC_36BIT_defconfig
-deleted file mode 100644
-index 429b83465ad..00000000000
---- a/configs/P2020RDB-PC_36BIT_defconfig
-+++ /dev/null
-@@ -1,125 +0,0 @@
--CONFIG_PPC=y
--CONFIG_TEXT_BASE=0xEFF40000
--CONFIG_SYS_MALLOC_LEN=0x100000
--CONFIG_SF_DEFAULT_SPEED=10000000
--CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc_36b"
--CONFIG_SYS_MONITOR_LEN=786432
--CONFIG_ENV_ADDR=0xEFF20000
--CONFIG_MPC85xx=y
--CONFIG_SYS_INIT_RAM_LOCK=y
--# CONFIG_CMD_ERRATA is not set
--CONFIG_TARGET_P2020RDB=y
--CONFIG_MPC85XX_HAVE_RESET_VECTOR=y
--CONFIG_L2_CACHE=y
--CONFIG_ENABLE_36BIT_PHYS=y
--CONFIG_USE_UBOOTPATH=y
--CONFIG_PCIE1=y
--CONFIG_PCIE2=y
--CONFIG_PHYS_64BIT=y
--CONFIG_MP=y
--CONFIG_FIT=y
--CONFIG_FIT_VERBOSE=y
--CONFIG_NO_PBL=y
--CONFIG_BOOTDELAY=10
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
--CONFIG_SYS_PBSIZE=276
--CONFIG_BOARD_EARLY_INIT_F=y
--CONFIG_BOARD_EARLY_INIT_R=y
--# CONFIG_MISC_INIT_R is not set
--CONFIG_HUSH_PARSER=y
--# CONFIG_AUTO_COMPLETE is not set
--CONFIG_CMD_IMLS=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
--CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_I2C=y
--CONFIG_LOADS_ECHO=y
--CONFIG_SYS_LOADS_BAUD_CHANGE=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--# CONFIG_CMD_HASH is not set
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_MTDPARTS=y
--CONFIG_MTDIDS_DEFAULT="nor0=fef000000.nor"
--CONFIG_MTDPARTS_DEFAULT="mtdparts=fef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_FLASH=y
--CONFIG_USE_BOOTFILE=y
--CONFIG_BOOTFILE="uImage"
--CONFIG_USE_ETHPRIME=y
--CONFIG_ETHPRIME="eTSEC1"
--CONFIG_USE_HOSTNAME=y
--CONFIG_USE_ROOTPATH=y
--CONFIG_LBA48=y
--CONFIG_DDR_CLK_FREQ=66666666
--CONFIG_SYS_SPD_BUS_NUM=1
--CONFIG_CHIP_SELECTS_PER_CTRL=1
--CONFIG_SYS_DDR_RAW_TIMING=y
--CONFIG_SYS_BR0_PRELIM_BOOL=y
--CONFIG_SYS_BR0_PRELIM=0xEF001001
--CONFIG_SYS_OR0_PRELIM=0xFC000FF7
--CONFIG_SYS_BR2_PRELIM_BOOL=y
--CONFIG_SYS_BR2_PRELIM=0xFFB00801
--CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
--CONFIG_SYS_BR3_PRELIM_BOOL=y
--CONFIG_SYS_BR3_PRELIM=0xFFA00801
--CONFIG_SYS_OR3_PRELIM=0xFFF009F7
--CONFIG_COMMON_INIT_DDR=y
--CONFIG_SPL_COMMON_INIT_DDR=y
--CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_I2C_FSL=y
--CONFIG_SYS_FSL_I2C_OFFSET=0x3000
--CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
--CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
--CONFIG_SYS_I2C_EEPROM_ADDR=0x52
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_FLASH_CFI_MTD=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=128
--CONFIG_DM_SPI_FLASH=y
--CONFIG_SPI_FLASH_SPANSION=y
--CONFIG_DM_MDIO=y
--CONFIG_PHY_GIGE=y
--CONFIG_E1000=y
--CONFIG_MII=y
--CONFIG_VSC7385_ENET=y
--CONFIG_TSEC_ENET=y
--CONFIG_PHY_ATHEROS=y
--CONFIG_PHY_BROADCOM=y
--CONFIG_PHY_DAVICOM=y
--CONFIG_PHY_LXT=y
--CONFIG_PHY_MARVELL=y
--CONFIG_PHY_NATSEMI=y
--CONFIG_PHY_REALTEK=y
--CONFIG_PHY_SMSC=y
--CONFIG_PHY_VITESSE=y
--CONFIG_PHY_FIXED=y
--CONFIG_PCIE_FSL=y
--CONFIG_DM_RTC=y
--CONFIG_RTC_PT7C4338=y
--CONFIG_DM_SERIAL=y
--CONFIG_SYS_NS16550=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_ESPI=y
--CONFIG_USB=y
--CONFIG_USB_EHCI_FSL=y
--CONFIG_USB_STORAGE=y
--CONFIG_ADDR_MAP=y
-diff --git a/configs/P2020RDB-PC_NAND_defconfig b/configs/P2020RDB-PC_NAND_defconfig
-deleted file mode 100644
-index e60677d55dc..00000000000
---- a/configs/P2020RDB-PC_NAND_defconfig
-+++ /dev/null
-@@ -1,162 +0,0 @@
--CONFIG_PPC=y
--CONFIG_TEXT_BASE=0x11000000
--CONFIG_SYS_MALLOC_LEN=0x100000
--CONFIG_SF_DEFAULT_SPEED=10000000
--CONFIG_ENV_SIZE=0x4000
--CONFIG_ENV_OFFSET=0x100000
--CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc"
--CONFIG_SYS_MONITOR_LEN=786432
--CONFIG_SPL_SERIAL=y
--CONFIG_TPL_TEXT_BASE=0xF8F80000
--CONFIG_TPL_LIBCOMMON_SUPPORT=y
--CONFIG_TPL_LIBGENERIC_SUPPORT=y
--CONFIG_TPL_SERIAL=y
--CONFIG_SPL_TEXT_BASE=0xFF800000
--CONFIG_SPL=y
--CONFIG_TPL_MAX_SIZE=0x20000
--CONFIG_MPC85xx=y
--CONFIG_SYS_INIT_RAM_LOCK=y
--# CONFIG_CMD_ERRATA is not set
--CONFIG_TARGET_P2020RDB=y
--CONFIG_L2_CACHE=y
--CONFIG_ENABLE_36BIT_PHYS=y
--CONFIG_SYS_MPC85XX_NO_RESETVEC=y
--CONFIG_TPL_SYS_MPC85XX_NO_RESETVEC=y
--CONFIG_USE_UBOOTPATH=y
--CONFIG_PCIE1=y
--CONFIG_PCIE2=y
--CONFIG_MP=y
--CONFIG_TPL_SYS_MONITOR_BASE=0xF8F80000
--CONFIG_FIT=y
--CONFIG_FIT_VERBOSE=y
--CONFIG_BOOTDELAY=10
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
--CONFIG_SYS_PBSIZE=276
--CONFIG_BOARD_EARLY_INIT_F=y
--CONFIG_BOARD_EARLY_INIT_R=y
--# CONFIG_MISC_INIT_R is not set
--# CONFIG_SPL_FRAMEWORK is not set
--CONFIG_SPL_MAX_SIZE=0x1000
--CONFIG_SPL_NAND_BOOT=y
--CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
--CONFIG_SPL_INIT_MINIMAL=y
--CONFIG_SPL_FLUSH_IMAGE=y
--CONFIG_SPL_RELOC_TEXT_BASE=0xf8ffe000
--CONFIG_SPL_RELOC_STACK=0xf8fffff0
--CONFIG_TPL_GD_ADDR=0xf8fac000
--CONFIG_TPL_RELOC_TEXT_BASE=0xf8f80000
--CONFIG_TPL_RELOC_STACK=0xf8fb0000
--CONFIG_TPL_RELOC_MALLOC=y
--CONFIG_TPL_RELOC_MALLOC_ADDR=0xf8fb4000
--CONFIG_TPL_RELOC_MALLOC_SIZE=0xc000
--CONFIG_SPL_NAND_SUPPORT=y
--CONFIG_TPL=y
--CONFIG_TPL_ENV_SUPPORT=y
--CONFIG_TPL_I2C=y
--CONFIG_TPL_MPC8XXX_INIT_DDR=y
--CONFIG_TPL_NAND_SUPPORT=y
--CONFIG_HUSH_PARSER=y
--# CONFIG_AUTO_COMPLETE is not set
--CONFIG_CMD_IMLS=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
--CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_I2C=y
--CONFIG_LOADS_ECHO=y
--CONFIG_SYS_LOADS_BAUD_CHANGE=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--# CONFIG_CMD_HASH is not set
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_MTDPARTS=y
--CONFIG_MTDIDS_DEFAULT="nor0=ef000000.nor"
--CONFIG_MTDPARTS_DEFAULT="mtdparts=ef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_NAND=y
--CONFIG_ENV_RANGE=0xc000
--CONFIG_ENV_RELOC_GD_ENV_ADDR=y
--CONFIG_USE_BOOTFILE=y
--CONFIG_BOOTFILE="uImage"
--CONFIG_USE_ETHPRIME=y
--CONFIG_ETHPRIME="eTSEC1"
--CONFIG_USE_HOSTNAME=y
--CONFIG_USE_ROOTPATH=y
--CONFIG_LBA48=y
--CONFIG_DDR_CLK_FREQ=66666666
--CONFIG_SYS_SPD_BUS_NUM=1
--CONFIG_CHIP_SELECTS_PER_CTRL=1
--CONFIG_SYS_DDR_RAW_TIMING=y
--CONFIG_SYS_BR0_PRELIM_BOOL=y
--CONFIG_SYS_BR0_PRELIM=0xFF800C21
--CONFIG_SYS_OR0_PRELIM=0xFFFF8396
--CONFIG_SYS_BR1_PRELIM_BOOL=y
--CONFIG_SYS_BR1_PRELIM=0xEF001001
--CONFIG_SYS_OR1_PRELIM=0xFC000FF7
--CONFIG_SYS_BR2_PRELIM_BOOL=y
--CONFIG_SYS_BR2_PRELIM=0xFFB00801
--CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
--CONFIG_SYS_BR3_PRELIM_BOOL=y
--CONFIG_SYS_BR3_PRELIM=0xFFA00801
--CONFIG_SYS_OR3_PRELIM=0xFFF009F7
--CONFIG_TPL_COMMON_INIT_DDR=y
--CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
--CONFIG_TPL_SYS_I2C_LEGACY=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_I2C_FSL=y
--CONFIG_SYS_FSL_I2C_OFFSET=0x3000
--CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
--CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
--CONFIG_SYS_I2C_EEPROM_ADDR=0x52
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_FLASH_CFI_MTD=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=128
--CONFIG_MTD_RAW_NAND=y
--CONFIG_NAND_FSL_ELBC=y
--CONFIG_SYS_NAND_BLOCK_SIZE=0x4000
--CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
--CONFIG_SYS_NAND_U_BOOT_OFFS=0x20000
--CONFIG_DM_SPI_FLASH=y
--CONFIG_SPI_FLASH_SPANSION=y
--CONFIG_DM_MDIO=y
--CONFIG_PHY_GIGE=y
--CONFIG_E1000=y
--CONFIG_MII=y
--CONFIG_VSC7385_ENET=y
--CONFIG_TSEC_ENET=y
--CONFIG_PHY_ATHEROS=y
--CONFIG_PHY_BROADCOM=y
--CONFIG_PHY_DAVICOM=y
--CONFIG_PHY_LXT=y
--CONFIG_PHY_MARVELL=y
--CONFIG_PHY_NATSEMI=y
--CONFIG_PHY_REALTEK=y
--CONFIG_PHY_SMSC=y
--CONFIG_PHY_VITESSE=y
--CONFIG_PHY_FIXED=y
--CONFIG_PCIE_FSL=y
--CONFIG_DM_RTC=y
--CONFIG_RTC_PT7C4338=y
--CONFIG_DM_SERIAL=y
--CONFIG_SPL_SYS_NS16550_SERIAL=y
--CONFIG_SPL_NS16550_MIN_FUNCTIONS=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_ESPI=y
--CONFIG_USB=y
--CONFIG_USB_EHCI_FSL=y
--CONFIG_USB_STORAGE=y
-diff --git a/configs/P2020RDB-PC_SDCARD_defconfig b/configs/P2020RDB-PC_SDCARD_defconfig
-deleted file mode 100644
-index fe433c5e358..00000000000
---- a/configs/P2020RDB-PC_SDCARD_defconfig
-+++ /dev/null
-@@ -1,142 +0,0 @@
--CONFIG_PPC=y
--CONFIG_TEXT_BASE=0x11000000
--CONFIG_SYS_MALLOC_LEN=0x100000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
--CONFIG_SF_DEFAULT_SPEED=10000000
--CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_OFFSET=0x0
--CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc"
--CONFIG_SYS_MONITOR_LEN=786432
--CONFIG_SPL_MMC=y
--CONFIG_SPL_SERIAL=y
--CONFIG_SPL_TEXT_BASE=0xf8f80000
--CONFIG_SPL=y
--CONFIG_MPC85xx=y
--CONFIG_SYS_INIT_RAM_LOCK=y
--# CONFIG_CMD_ERRATA is not set
--CONFIG_TARGET_P2020RDB=y
--CONFIG_L2_CACHE=y
--CONFIG_ENABLE_36BIT_PHYS=y
--CONFIG_SYS_MPC85XX_NO_RESETVEC=y
--CONFIG_SPL_SYS_MPC85XX_NO_RESETVEC=y
--CONFIG_USE_UBOOTPATH=y
--CONFIG_PCIE1=y
--CONFIG_PCIE2=y
--CONFIG_MP=y
--CONFIG_SPL_SYS_MONITOR_BASE=0xF8F80000
--CONFIG_FIT=y
--CONFIG_FIT_VERBOSE=y
--CONFIG_FSL_FIXED_MMC_LOCATION=y
--CONFIG_BOOTDELAY=10
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
--CONFIG_SYS_PBSIZE=276
--CONFIG_BOARD_EARLY_INIT_F=y
--CONFIG_BOARD_EARLY_INIT_R=y
--# CONFIG_MISC_INIT_R is not set
--# CONFIG_SPL_FRAMEWORK is not set
--CONFIG_SPL_MAX_SIZE=0x20000
--CONFIG_SPL_MMC_BOOT=y
--CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
--CONFIG_SPL_FLUSH_IMAGE=y
--CONFIG_SPL_GD_ADDR=0xf8f9c000
--CONFIG_SPL_RELOC_STACK=0xf8f9d000
--CONFIG_SPL_RELOC_MALLOC=y
--CONFIG_SPL_RELOC_MALLOC_ADDR=0xf8fa5000
--CONFIG_SPL_RELOC_MALLOC_SIZE=0x5b000
--CONFIG_SPL_ENV_SUPPORT=y
--CONFIG_SPL_I2C=y
--CONFIG_SPL_MPC8XXX_INIT_DDR=y
--CONFIG_HUSH_PARSER=y
--# CONFIG_AUTO_COMPLETE is not set
--CONFIG_CMD_IMLS=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
--CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_I2C=y
--CONFIG_LOADS_ECHO=y
--CONFIG_SYS_LOADS_BAUD_CHANGE=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--# CONFIG_CMD_HASH is not set
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_MTDPARTS=y
--CONFIG_MTDIDS_DEFAULT="nor0=ef000000.nor"
--CONFIG_MTDPARTS_DEFAULT="mtdparts=ef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_MMC=y
--CONFIG_ENV_RELOC_GD_ENV_ADDR=y
--CONFIG_USE_BOOTFILE=y
--CONFIG_BOOTFILE="uImage"
--CONFIG_USE_ETHPRIME=y
--CONFIG_ETHPRIME="eTSEC1"
--CONFIG_USE_HOSTNAME=y
--CONFIG_USE_ROOTPATH=y
--CONFIG_LBA48=y
--CONFIG_DDR_CLK_FREQ=66666666
--CONFIG_SYS_SPD_BUS_NUM=1
--CONFIG_CHIP_SELECTS_PER_CTRL=1
--CONFIG_SYS_DDR_RAW_TIMING=y
--CONFIG_SYS_BR0_PRELIM_BOOL=y
--CONFIG_SYS_BR0_PRELIM=0xEF001001
--CONFIG_SYS_OR0_PRELIM=0xFC000FF7
--CONFIG_SYS_BR2_PRELIM_BOOL=y
--CONFIG_SYS_BR2_PRELIM=0xFFB00801
--CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
--CONFIG_SYS_BR3_PRELIM_BOOL=y
--CONFIG_SYS_BR3_PRELIM=0xFFA00801
--CONFIG_SYS_OR3_PRELIM=0xFFF009F7
--CONFIG_SPL_COMMON_INIT_DDR=y
--CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_I2C_FSL=y
--CONFIG_SYS_FSL_I2C_OFFSET=0x3000
--CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
--CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
--CONFIG_SYS_I2C_EEPROM_ADDR=0x52
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_FLASH_CFI_MTD=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=128
--CONFIG_DM_SPI_FLASH=y
--CONFIG_SPI_FLASH_SPANSION=y
--CONFIG_DM_MDIO=y
--CONFIG_PHY_GIGE=y
--CONFIG_E1000=y
--CONFIG_MII=y
--CONFIG_VSC7385_ENET=y
--CONFIG_TSEC_ENET=y
--CONFIG_PHY_ATHEROS=y
--CONFIG_PHY_BROADCOM=y
--CONFIG_PHY_DAVICOM=y
--CONFIG_PHY_LXT=y
--CONFIG_PHY_MARVELL=y
--CONFIG_PHY_NATSEMI=y
--CONFIG_PHY_REALTEK=y
--CONFIG_PHY_SMSC=y
--CONFIG_PHY_VITESSE=y
--CONFIG_PHY_FIXED=y
--CONFIG_PCIE_FSL=y
--CONFIG_DM_RTC=y
--CONFIG_RTC_PT7C4338=y
--CONFIG_DM_SERIAL=y
--CONFIG_SPL_SYS_NS16550_SERIAL=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_ESPI=y
--CONFIG_USB=y
--CONFIG_USB_EHCI_FSL=y
-diff --git a/configs/P2020RDB-PC_SPIFLASH_defconfig b/configs/P2020RDB-PC_SPIFLASH_defconfig
-deleted file mode 100644
-index 0184dcb4e8b..00000000000
---- a/configs/P2020RDB-PC_SPIFLASH_defconfig
-+++ /dev/null
-@@ -1,145 +0,0 @@
--CONFIG_PPC=y
--CONFIG_TEXT_BASE=0x11000000
--CONFIG_SYS_MALLOC_LEN=0x100000
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
--CONFIG_SF_DEFAULT_SPEED=10000000
--CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_OFFSET=0x100000
--CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc"
--CONFIG_SYS_MONITOR_LEN=786432
--CONFIG_SPL_SERIAL=y
--CONFIG_SPL_TEXT_BASE=0xf8f80000
--CONFIG_SPL=y
--CONFIG_SPL_SPI_FLASH_SUPPORT=y
--CONFIG_SPL_SPI=y
--CONFIG_MPC85xx=y
--CONFIG_SYS_INIT_RAM_LOCK=y
--# CONFIG_CMD_ERRATA is not set
--CONFIG_TARGET_P2020RDB=y
--CONFIG_L2_CACHE=y
--CONFIG_ENABLE_36BIT_PHYS=y
--CONFIG_SYS_MPC85XX_NO_RESETVEC=y
--CONFIG_SPL_SYS_MPC85XX_NO_RESETVEC=y
--CONFIG_USE_UBOOTPATH=y
--CONFIG_PCIE1=y
--CONFIG_PCIE2=y
--CONFIG_MP=y
--CONFIG_SPL_SYS_MONITOR_BASE=0xF8F80000
--CONFIG_FIT=y
--CONFIG_FIT_VERBOSE=y
--CONFIG_SPIFLASH=y
--CONFIG_BOOTDELAY=10
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
--CONFIG_SYS_PBSIZE=276
--CONFIG_BOARD_EARLY_INIT_F=y
--CONFIG_BOARD_EARLY_INIT_R=y
--# CONFIG_MISC_INIT_R is not set
--# CONFIG_SPL_FRAMEWORK is not set
--CONFIG_SPL_MAX_SIZE=0x20000
--CONFIG_SPL_SPI_BOOT=y
--CONFIG_SPL_SYS_CCSR_DO_NOT_RELOCATE=y
--CONFIG_SPL_FLUSH_IMAGE=y
--CONFIG_SPL_GD_ADDR=0xf8f9c000
--CONFIG_SPL_RELOC_STACK=0xf8f9d000
--CONFIG_SPL_RELOC_MALLOC=y
--CONFIG_SPL_RELOC_MALLOC_ADDR=0xf8fa5000
--CONFIG_SPL_RELOC_MALLOC_SIZE=0x5b000
--CONFIG_SPL_ENV_SUPPORT=y
--CONFIG_SPL_I2C=y
--CONFIG_SPL_MPC8XXX_INIT_DDR=y
--CONFIG_HUSH_PARSER=y
--# CONFIG_AUTO_COMPLETE is not set
--CONFIG_CMD_IMLS=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
--CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_I2C=y
--CONFIG_LOADS_ECHO=y
--CONFIG_SYS_LOADS_BAUD_CHANGE=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--# CONFIG_CMD_HASH is not set
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_MTDPARTS=y
--CONFIG_MTDIDS_DEFAULT="nor0=ef000000.nor"
--CONFIG_MTDPARTS_DEFAULT="mtdparts=ef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_ENV_RELOC_GD_ENV_ADDR=y
--CONFIG_USE_BOOTFILE=y
--CONFIG_BOOTFILE="uImage"
--CONFIG_USE_ETHPRIME=y
--CONFIG_ETHPRIME="eTSEC1"
--CONFIG_USE_HOSTNAME=y
--CONFIG_USE_ROOTPATH=y
--CONFIG_LBA48=y
--CONFIG_DDR_CLK_FREQ=66666666
--CONFIG_SYS_SPD_BUS_NUM=1
--CONFIG_CHIP_SELECTS_PER_CTRL=1
--CONFIG_SYS_DDR_RAW_TIMING=y
--CONFIG_SYS_BR0_PRELIM_BOOL=y
--CONFIG_SYS_BR0_PRELIM=0xEF001001
--CONFIG_SYS_OR0_PRELIM=0xFC000FF7
--CONFIG_SYS_BR2_PRELIM_BOOL=y
--CONFIG_SYS_BR2_PRELIM=0xFFB00801
--CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
--CONFIG_SYS_BR3_PRELIM_BOOL=y
--CONFIG_SYS_BR3_PRELIM=0xFFA00801
--CONFIG_SYS_OR3_PRELIM=0xFFF009F7
--CONFIG_SPL_COMMON_INIT_DDR=y
--CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_I2C_FSL=y
--CONFIG_SYS_FSL_I2C_OFFSET=0x3000
--CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
--CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
--CONFIG_SYS_I2C_EEPROM_ADDR=0x52
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_FLASH_CFI_MTD=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=128
--CONFIG_DM_SPI_FLASH=y
--CONFIG_SPI_FLASH_SPANSION=y
--CONFIG_DM_MDIO=y
--CONFIG_PHY_GIGE=y
--CONFIG_E1000=y
--CONFIG_MII=y
--CONFIG_VSC7385_ENET=y
--CONFIG_TSEC_ENET=y
--CONFIG_PHY_ATHEROS=y
--CONFIG_PHY_BROADCOM=y
--CONFIG_PHY_DAVICOM=y
--CONFIG_PHY_LXT=y
--CONFIG_PHY_MARVELL=y
--CONFIG_PHY_NATSEMI=y
--CONFIG_PHY_REALTEK=y
--CONFIG_PHY_SMSC=y
--CONFIG_PHY_VITESSE=y
--CONFIG_PHY_FIXED=y
--CONFIG_PCIE_FSL=y
--CONFIG_DM_RTC=y
--CONFIG_RTC_PT7C4338=y
--CONFIG_DM_SERIAL=y
--CONFIG_SPL_SYS_NS16550_SERIAL=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_ESPI=y
--CONFIG_USB=y
--CONFIG_USB_EHCI_FSL=y
--CONFIG_USB_STORAGE=y
-diff --git a/configs/P2020RDB-PC_defconfig b/configs/P2020RDB-PC_defconfig
-deleted file mode 100644
-index a3efd89e218..00000000000
---- a/configs/P2020RDB-PC_defconfig
-+++ /dev/null
-@@ -1,123 +0,0 @@
--CONFIG_PPC=y
--CONFIG_TEXT_BASE=0xEFF40000
--CONFIG_SYS_MALLOC_LEN=0x100000
--CONFIG_SF_DEFAULT_SPEED=10000000
--CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_SECT_SIZE=0x20000
--CONFIG_DEFAULT_DEVICE_TREE="p2020rdb-pc"
--CONFIG_SYS_MONITOR_LEN=786432
--CONFIG_ENV_ADDR=0xEFF20000
--CONFIG_MPC85xx=y
--CONFIG_SYS_INIT_RAM_LOCK=y
--# CONFIG_CMD_ERRATA is not set
--CONFIG_TARGET_P2020RDB=y
--CONFIG_MPC85XX_HAVE_RESET_VECTOR=y
--CONFIG_L2_CACHE=y
--CONFIG_ENABLE_36BIT_PHYS=y
--CONFIG_USE_UBOOTPATH=y
--CONFIG_PCIE1=y
--CONFIG_PCIE2=y
--CONFIG_MP=y
--CONFIG_FIT=y
--CONFIG_FIT_VERBOSE=y
--CONFIG_NO_PBL=y
--CONFIG_BOOTDELAY=10
--CONFIG_OF_BOARD_SETUP=y
--CONFIG_OF_STDOUT_VIA_ALIAS=y
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="setenv bootargs root=/dev/$bdev rw rootdelay=30 console=$consoledev,$baudrate $othbootargs;usb start;ext2load usb 0:1 $loadaddr /boot/$bootfile;ext2load usb 0:1 $fdtaddr /boot/$fdtfile;bootm $loadaddr - $fdtaddr"
--CONFIG_SYS_PBSIZE=276
--CONFIG_BOARD_EARLY_INIT_F=y
--CONFIG_BOARD_EARLY_INIT_R=y
--# CONFIG_MISC_INIT_R is not set
--CONFIG_HUSH_PARSER=y
--# CONFIG_AUTO_COMPLETE is not set
--CONFIG_CMD_IMLS=y
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3
--CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=5
--CONFIG_CMD_I2C=y
--CONFIG_LOADS_ECHO=y
--CONFIG_SYS_LOADS_BAUD_CHANGE=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--# CONFIG_CMD_HASH is not set
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_MTDPARTS=y
--CONFIG_MTDIDS_DEFAULT="nor0=ef000000.nor"
--CONFIG_MTDPARTS_DEFAULT="mtdparts=ef000000.nor:256k(vsc7385-firmware),256k(dtb),4608k(kernel),9984k(fs),1280k(u-boot)"
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_FLASH=y
--CONFIG_USE_BOOTFILE=y
--CONFIG_BOOTFILE="uImage"
--CONFIG_USE_ETHPRIME=y
--CONFIG_ETHPRIME="eTSEC1"
--CONFIG_USE_HOSTNAME=y
--CONFIG_USE_ROOTPATH=y
--CONFIG_LBA48=y
--CONFIG_DDR_CLK_FREQ=66666666
--CONFIG_SYS_SPD_BUS_NUM=1
--CONFIG_CHIP_SELECTS_PER_CTRL=1
--CONFIG_SYS_DDR_RAW_TIMING=y
--CONFIG_SYS_BR0_PRELIM_BOOL=y
--CONFIG_SYS_BR0_PRELIM=0xEF001001
--CONFIG_SYS_OR0_PRELIM=0xFC000FF7
--CONFIG_SYS_BR2_PRELIM_BOOL=y
--CONFIG_SYS_BR2_PRELIM=0xFFB00801
--CONFIG_SYS_OR2_PRELIM=0xFFFE09FF
--CONFIG_SYS_BR3_PRELIM_BOOL=y
--CONFIG_SYS_BR3_PRELIM=0xFFA00801
--CONFIG_SYS_OR3_PRELIM=0xFFF009F7
--CONFIG_COMMON_INIT_DDR=y
--CONFIG_SPL_COMMON_INIT_DDR=y
--CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_I2C_FSL=y
--CONFIG_SYS_FSL_I2C_OFFSET=0x3000
--CONFIG_SYS_FSL_HAS_I2C2_OFFSET=y
--CONFIG_SYS_FSL_I2C2_OFFSET=0x3100
--CONFIG_SYS_I2C_EEPROM_ADDR=0x52
--CONFIG_FSL_ESDHC=y
--CONFIG_MTD=y
--CONFIG_MTD_NOR_FLASH=y
--CONFIG_FLASH_CFI_DRIVER=y
--CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
--CONFIG_SYS_FLASH_EMPTY_INFO=y
--CONFIG_FLASH_CFI_MTD=y
--CONFIG_SYS_FLASH_CFI=y
--CONFIG_SYS_FLASH_QUIET_TEST=y
--CONFIG_SYS_MAX_FLASH_SECT=128
--CONFIG_DM_SPI_FLASH=y
--CONFIG_SPI_FLASH_SPANSION=y
--CONFIG_DM_MDIO=y
--CONFIG_PHY_GIGE=y
--CONFIG_E1000=y
--CONFIG_MII=y
--CONFIG_VSC7385_ENET=y
--CONFIG_TSEC_ENET=y
--CONFIG_PHY_ATHEROS=y
--CONFIG_PHY_BROADCOM=y
--CONFIG_PHY_DAVICOM=y
--CONFIG_PHY_LXT=y
--CONFIG_PHY_MARVELL=y
--CONFIG_PHY_NATSEMI=y
--CONFIG_PHY_REALTEK=y
--CONFIG_PHY_SMSC=y
--CONFIG_PHY_VITESSE=y
--CONFIG_PHY_FIXED=y
--CONFIG_PCIE_FSL=y
--CONFIG_DM_RTC=y
--CONFIG_RTC_PT7C4338=y
--CONFIG_DM_SERIAL=y
--CONFIG_SYS_NS16550=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_FSL_ESPI=y
--CONFIG_USB=y
--CONFIG_USB_EHCI_FSL=y
--CONFIG_USB_STORAGE=y
-diff --git a/doc/README.mpc85xx-sd-spi-boot b/doc/README.mpc85xx-sd-spi-boot
-index 7608fc3aacb..8e98fc9f659 100644
---- a/doc/README.mpc85xx-sd-spi-boot
-+++ b/doc/README.mpc85xx-sd-spi-boot
-@@ -59,9 +59,6 @@ P1022DS		config_sram_p1022ds.dat
- P2020DS		config_sram_p2020ds.dat
- P1020RDB	config_ddr2_1g_p1020rdb_533M.dat
- P1020RDB	config_ddr2_1g_p1020rdb_667M.dat
--P2020RDB	config_ddr2_1g_p2020rdb_800M.dat
--P2020RDB	config_ddr2_1g_p2020rdb_667M.dat
--P2020RDB	config_ddr3_1gb_64bit_p2020rdb_pc.dat
- P1020RDB	config_ddr3_1gb_p1_p2_rdb_pc_800M.dat
- P1011RDB	config_ddr3_1gb_p1_p2_rdb_pc_800M.dat
- P1010RDB	config_ddr3_1gb_p1010rdb_800M.dat
-diff --git a/drivers/ddr/fsl/Kconfig b/drivers/ddr/fsl/Kconfig
-index b11fa79ca59..d5c0af7d3b1 100644
---- a/drivers/ddr/fsl/Kconfig
-+++ b/drivers/ddr/fsl/Kconfig
-@@ -291,7 +291,7 @@ config SYS_OR7_PRELIM
- endmenu
- 
- if TARGET_P1010RDB_PA || TARGET_P1010RDB_PB || TARGET_P1020RDB_PC || \
--	TARGET_P1020RDB_PD || TARGET_P2020RDB
-+	TARGET_P1020RDB_PD
- 
- config COMMON_INIT_DDR
- 	bool "Do not have a TLB entry to cover common DDR init with serial presence detect (SPD)"
-diff --git a/include/configs/p1_p2_rdb_pc.h b/include/configs/p1_p2_rdb_pc.h
-index 2d9d5b27511..2ef8fa02188 100644
---- a/include/configs/p1_p2_rdb_pc.h
-+++ b/include/configs/p1_p2_rdb_pc.h
-@@ -60,25 +60,6 @@
-  */
- #endif
- 
--#if defined(CONFIG_TARGET_P2020RDB)
--#define __SW_BOOT_MASK		0x03
--#define __SW_BOOT_NOR		0xc8
--#define __SW_BOOT_SPI		0x28
--#define __SW_BOOT_SD		0x68
--#define __SW_BOOT_SD2		0x18
--#define __SW_BOOT_NAND		0xe8
--#define __SW_BOOT_PCIE		0xa8
--#define __SW_NOR_BANK_MASK	0xfd
--#define __SW_NOR_BANK_UP	0x00
--#define __SW_NOR_BANK_LO	0x02
--#define __SW_BOOT_NOR_BANK_UP	0xc8 /* (__SW_BOOT_NOR | __SW_NOR_BANK_UP) */
--#define __SW_BOOT_NOR_BANK_LO	0xca /* (__SW_BOOT_NOR | __SW_NOR_BANK_LO) */
--#define __SW_BOOT_NOR_BANK_MASK	0x01 /* (__SW_BOOT_MASK & __SW_NOR_BANK_MASK) */
--/*
-- * Dynamic MTD Partition support with mtdparts
-- */
--#endif
+-	2. U-Boot image's compilation.
+-	   For master, U-Boot image should be generated normally.
 -
- #ifdef CONFIG_SDCARD
- #define CFG_SYS_MMC_U_BOOT_SIZE	(768 << 10)
- #define CFG_SYS_MMC_U_BOOT_DST	CONFIG_TEXT_BASE
-@@ -125,7 +106,6 @@
- #define CFG_SYS_SDRAM_BASE		CFG_SYS_DDR_SDRAM_BASE
- 
- /* Default settings for DDR3 */
--#ifndef CONFIG_TARGET_P2020RDB
- #define CFG_SYS_DDR_CS0_BNDS		0x0000003f
- #define CFG_SYS_DDR_CS0_CONFIG	0x80014302
- #define CFG_SYS_DDR_CS0_CONFIG_2	0x00000000
-@@ -155,7 +135,6 @@
- #define CFG_SYS_DDR_MODE_1		0x40461520
- #define CFG_SYS_DDR_MODE_2		0x8000c000
- #define CFG_SYS_DDR_INTERVAL		0x0C300000
--#endif
- 
- /*
-  * Memory map
+-	   For example, master U-Boot image used on P4080DS should be compiled with
+-
+-				make P4080DS_config.
+-
+-	   For slave, U-Boot image should be generated specifically by
+-
+-				make xxxx_SRIO_PCIE_BOOT_config.
+-
+-	   For example, slave U-Boot image used on P4080DS should be compiled with
+-
+-				make P4080DS_SRIO_PCIE_BOOT_config.
+-
+-	3. Necessary modifications based on a specific environment.
+-	   For a specific environment, the addresses of the slave's U-Boot image,
+-	   UCode, ENV stored in master's NorFlash, and any other configurations
+-	   can be modified in the file:
+-				include/configs/corenet_ds.h.
+-
+-	4. Set and save the environment variable "bootmaster" with "SRIO1", "SRIO2"
+-	   or "PCIE1", "PCIE2", "PCIE3" for master, and then restart it in order to
+-	   perform the role as a master for boot from SRIO or PCIE.
+-
+-NOTE: When the Slave's ENV parameters are stored in Master's NorFlash,
+-      it can fetch them through PCIE or SRIO interface. But the ENV
+-      parameters can not be modified by "saveenv" or other commands under
+-      the Slave's u-boot environment, because the Slave can not erase,
+-      write Master's NorFlash by PCIE or SRIO link.
 -- 
 2.47.3
 
