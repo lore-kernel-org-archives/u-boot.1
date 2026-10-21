@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FDBF606A31B
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 12:48:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE0B7606A319
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 12:48:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=rcrlgAb0;
-	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=E7sES1QI
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=t77yNP9G;
+	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=d0eUfNks
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 49C37608F2;
-	Wed, 21 Oct 2026 12:48:06 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 86469608F5;
+	Wed, 21 Oct 2026 12:48:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GKJcMtP3EJ2Y; Wed, 21 Oct 2026 12:48:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E8910608BF
+ id 91epK_Pr_TP9; Wed, 21 Oct 2026 12:48:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3EC64608CB
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792586884;
-	b=Swrs1x0GhdBv9IGGeJ9bAVWIpbI1soccym3oSbcTzP1ytQxKd+TmHMD2phpRALQsLF2V
-	 QdiOeRWR5l1wZfH6ynw9iutjqwyqjq7CTnEM7XikqRzHgF0y5bhHuEDOzBuPavHDVOQ3W
-	 YyBsHBj60lcBY4dasnOxU0oWzh5M0Hz/wXl3YL3zGWphkhfrYoGYwXqFoENFVIZbq5rlG
-	 LQssI/FCDFdQwofdaGp/nazjb0MZpXVLDAyg/zWkf/iM6xKgawpNw4XK0xqu9fHvdOZyo
-	 r97pQVoeQp+PcdAx44kcEebS+LHpEELL6wPcfjwVgHV2kZHPZ3q5ZyapG7UGMpKCm1Q==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792586887;
+	b=mBO3jF1IlRcDxGaIPwg6LAZ6R+WIKcMBqJKwrt2OIeFiJsptiS3tvbAdgTuNZDD4OnLa
+	 gdKip6jjj8KotRcz2aUAVY/3Ty3eGUxrXqrvEJXeuuute7p7JxVzR2dUkP94g0jOx8ZyB
+	 RE8Cb5B1C8HnYVq1ypG9r7KpaVXhOMHyV+xD85FFPwXz/P8VpR1AYd/3loStaz0sXKcvg
+	 82fC1tziB4nUg6vPUAksKxydO6I2ujHRBPPajN+DTlEAO3hAr6wq6h1LR5BthRnTDDhsb
+	 9eP4bOcGdfLRYDmfNEsQHM6oFAjdwNi8y+hMZlseTIo5LjTZ2ZoeOAKpaxcW5xAJeqg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792586884;
+	c=relaxed/relaxed; t=1792586887;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,153 +33,155 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Cc:Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=9wU5r5U5XaBrhVG936QbC2no6jNc/JMdIXOaS+YuoWo=;
-	b=MZyLc3ERRWsIWwxErWxlvbEZySduleP2sFs/ALY3IRLorhuMobciNyOhh2IqE8xdqybb
-	 +qxq/sWv6gV2VMEZveRKsKkY5AJP9YZrVJJjGuD6qTsNG9Gi5FPxoRQTwkYH7kX1P2f+p
-	 Hzz8X+8L+B26Ovg1+qEEH1Fznz/ZeWijgL7nB+5WoxR0NVucnoKH/XSSsm35d4W95GLki
-	 oihlqYKJsJfloyIE0DKXXFO8M1ZDcF7stHtqEfCwZclidpd/9eejqsVwxASwVUYD0itbg
-	 kIK/KLogQk/7HuPSwajWMqJkk2/Iua9t1uiBUe5TPvQx/fpTkkyW8hPzE1rhZ8yfXug==
+	bh=8DkyX5W8gcEybzsw1sY+wvxRh0BNxCPFa7//o6gRmfU=;
+	b=bowFBZX8+7kzh/vp6SvPrMxGt1AdaankM9E0v/1lwQe6ixRgTTRVdWVkaWxpe+eBoFOV
+	 sHi9qQ1d9If08k2yq+idkdKwl54ayU1FB8rt7MlMpR1va+Q3sBZcJs/GV5o2qNWPVIkVg
+	 T85XOsTbNOaH1x/nhm+QgJCYvuSO7Jgu0vqEhceEb0hKEgJqmCwj9OCnTtusi2+5KnoUb
+	 BhDtvUL6x54loFaP9fO1oEfn665zZef/gBlsic4hHXZlCQKiNQDE82ts/e7ERY74mAJQJ
+	 dmFODD711mHPPEYlhhWwMZkZ9mORrA8GIaxBADQiP567Vzn0rR4NTlvy8VpSNApw3pw==
 ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
+	dmarc=pass header.from=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=d0eUfNks;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792586884;
-	bh=9wU5r5U5XaBrhVG936QbC2no6jNc/JMdIXOaS+YuoWo=;
+	d=lists.u-boot-project.org; s=default; t=1792586887;
+	bh=8DkyX5W8gcEybzsw1sY+wvxRh0BNxCPFa7//o6gRmfU=;
 	h=In-Reply-To:References:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=rcrlgAb0wk9T2nq2xBi+bWw7KeFPFMEFLSO1pSe65yuFRpIl19+RVJSimspv6FUSw
-	 kVl5c2SEfMyndFTGnywz4+0XEsaUkDr5iu1hYce9YcG5sw5eIc3eDEUMXeAXhzVH0U
-	 61FOoMeEhHA/G7Dgcld/gxEh2bxYjUVBqW6SmyUagh1Pa8x/1LlySrEt4NpTET3FQh
-	 Z1zFW4zfnefy9FKHT7AaHUlmqHRuZqeZxcVyMwVJ+W8CSvyOcBC1GRCj6/81Fi1Kee
-	 03ucWJdNqf0yM0uIyJuKDPJCMgEQtBGqctV+NKMR0y7HlQYmJlg4X/anFLYz8f3/Cp
-	 bUmXgZox6Z6Nw==
+	b=t77yNP9Gky6C0qiMMBsZ2IB9d49v/nzXbs7Tf9a6M5oB3vQMyDTVx/Zt7cMj7rsVX
+	 oxnLuza92GdybsveNGagKzOLrXmPegK0H6GE5ca5thb8n0V/5A7SzDLf/t4YVW3pRc
+	 MNR5td5wUpWlncN67Hydrqz4YVeYjPGq0c/BEUtRnpsIhoQXUS8Xssikyn2uV/RXPj
+	 uTTtzpiK+w3Y2d/EOT/CsG433hC1Yz1mtKW5KU2YQKQuPTb73nlngaE1zHDeDeHoJF
+	 M9icM2T01+WdmCDQIJ64l67rFFwnu6TxPDKUfeFLhup+zWGQ/H27E/i7CojA1m7KJZ
+	 mnCUG0vBjovZg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E8910608BF;
-	Wed, 21 Oct 2026 12:48:03 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id DE8973AF
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:47:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3EC64608CB;
+	Wed, 21 Oct 2026 12:48:07 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id A772F930
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:48:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C4869810C5
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:47:59 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 88EF7607E4
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:48:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VEZrK11W6bTP for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 12:47:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B084380FFF
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id k8L-NWava99H for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 12:48:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3F3C860856
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip="2a00:1450:4864:20::531"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792586879;
- b=e1Rs2+wd2Z4Ufde5QHa07QE4LiOWw+e/1BQgDI33P8ra1xx+AejURVzKhOk6FqGODd/V
- eOZUITY0GpbeeAGqHsA1Ps3F++eY50m4R9pvV0srpxC0J+WzhjgUM12nZ8F2QA9Nq5vTN
- pAkQ48fsUxfOuqzKR62rxg6ao7zqdnN7EjVeVLuNE8KhjsKrUBA4RLmy5zgmcYs4Moemw
- y00GTjAe1jVMoU5Ctsu7UgZJwV3CQFiUASrsHlUft6eKKyWH1SdmVcDf1Fp0rg9XSX4tr
- do1Y4ceuQo4sFPWqO74iDbuXjOz6EOW8xufkR9IFoc7/7mOC/gqpuEIE+F6Lc403c/w==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792586880;
+ b=o+t9cRsbXhW3wE0SPn0hLlkUC0cwQRKmqPKP334acGlNf5Wi39LB5twMULVPIw9fyHgP
+ t4uc1sh0DhW6zI4RUjVSUiCcmEJSP9dnRmAl/Vw30rfYvqZ4UarAGDGjWzH0NP0+fCxJY
+ EvMVzhFquSwB7rcsciWqyt1W+qHhMvwUw5JlNdNXTUHSUEePzwdl1YHY8Y5nF+eRtZZX8
+ MgSTvDUxofX7iVFidYZ4Y9Cz4UoPaHTsELAZW0It/us7gGp+NTCizkGvolAaMBh/aayHm
+ RhNgJCUsZoJ3FH3sFspRRJ/87U6RCOKhbtea5WV7uzIVpD+jnjJ5cLn2qQnMStn+sYw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792586879;
+ c=relaxed/relaxed; t=1792586880;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Received:MIME-Version:In-Reply-To:References:From:Date:X-Gm-Features:
  Message-ID:Subject:To:Cc:Content-Type;
- bh=9wU5r5U5XaBrhVG936QbC2no6jNc/JMdIXOaS+YuoWo=;
- b=gVjazdmPt4mNh3kE/Osqt6Vis3GETHJnO09o857ZtQz5aBRQ3dw57r1yvmRHyzRgu2sM
- Pu+FSF7c5tKm6ygJqTSuBpuC9uuFFkP7SJKteORq6NqL7GVUWv3ZpiIzS6pwuk1k8y38u
- de2Z9TSTCHVt5bw2LVTsM7PKW+Iq8gSY13rFGs8eaWkiZmD5DvNFmGdS9Ru3Q8PXPAkQS
- 1FJoXowDzUfRjrD9llz403GORmFNq8BLnduOHNiwDig7PyDpEL+lKMl6zImfKGLPLq0sl
- UobQsU9CRejItCaCta1N89Zr547lZOa2Knn9LCYEMEoarAc6fGA8WNNN8gfoTyvPd0A==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+ bh=8DkyX5W8gcEybzsw1sY+wvxRh0BNxCPFa7//o6gRmfU=;
+ b=laNSApXA7CKzISzw7JuUqKUOjaWfVd8X+I8AnwcBZDstowob1XY9hFXAHKIUYzI5zBZs
+ 2uqftTaJI93llPCMCebdv7A4ZngrL1AFKvLD5k+adFBt514TWTsB1stYD/IAZXlzlKiPB
+ q0qB8SVcQaiLdxb+tjziYfuFKWujAxxqvdcxDFgERXicuWxsuupGtNlCNOmdnjHmFfefb
+ R5t4Xx2a/gM3j2+Bwbcsi3cuim84KqSP4r0mvzF178JNx3JiXDcqMz44ZGGApK9hxJlQd
+ ykNVnadn7mlotnNN+yL78knMLbRCYoNRBqj1Hy2yYy+xJVqKduPkW1H8cPll7ALR+Rw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
  dmarc=pass header.from=chromium.org;
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=E7sES1QI; 
+ header.s=google header.b=d0eUfNks; 
  arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::531"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a00:1450:4864:20::531; helo=mail-ed1-x531.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=E7sES1QI
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=d0eUfNks
 Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
  [IPv6:2a00:1450:4864:20::531])
- by smtp1.osuosl.org (Postfix) with ESMTPS id B084380FFF
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:47:57 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3F3C860856
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:47:59 +0000 (UTC)
 Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-6b413b0a974so420911a12.2
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 05:47:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792586876; cv=none;
+ 4fb4d7f45d1cf-6b1afcd2d23so879947a12.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 05:47:59 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792586877; cv=none;
  d=google.com; s=arc-20260327;
- b=p0S8HqpKL1S7HIpnWXM/10XK+TUfroFVvIFO214AGr+BzxUZ4PduY8tscecZ6m+xdS
- LMZ09ZnpjnQcUdnXaccUW8XYXiRazVJI5YKY4M8T+xf5KiECPI88Z50hZQgPzbufooH7
- jbjzuP9YyIMpTUj5w/7s1ywDtUcWtp64pXvABwiJ0Ojg4VU/X5cFDVICAwQY7Fn2es4X
- r0a6tklcHLm6s8xP8aZ/Y1n26rEPWyD9EGejupNiAcW8gJkZfFocWUTbTs/WW93SaYH/
- 7MIf19zawu6gHMaSweao7yVYye/8j+tgshkgl5IJ077Bx3bEsEclLVdQIjmJ8b5hQ9N1
- 824g==
+ b=DJixagqxvpO69XcYOTYB+Ju9EGhrl90B1A6cP1TDxSkM0RzqawbX4bK9WIVwYdNfI8
+ 1YvqdpeEqe7B6wafw8fodEMLu4VAkMy1Nv5O/2XXjI6Dy+vse97ATSupWNpJ13jBHrt3
+ BZwt8aakwHzyvEspRqiIy08l7So41iwJYyTzpT8mP62dh1jFxAAxsTiiZzXAcDIDQliC
+ y4KgWUejWf9NxV0qwWyCNU6/6gduaWyXOd4gv1pBfcclPFqlzz13gQpr5zWEXoZ5+ta4
+ IFJ5Qs5fcVxbHwCyKJIOzwHBuCxFwnKNNlhVjRARJsX/GPycceUT4NFu+mw7Vq/DSIHV
+ 4u0w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:references:in-reply-to
  :mime-version:dkim-signature;
- bh=9wU5r5U5XaBrhVG936QbC2no6jNc/JMdIXOaS+YuoWo=;
- fh=2RNABXrBNpbyQ5ILRnmEX5kxc9Ffe+QKK1McSEnthCs=;
- b=e6UvouDc/uEMisPmAP+2ImT1f0jprBDpyUbz3hrAwWwBC2+vtpeKPNygGP5hYZc8nu
- Z/qKGjkE37HOAzBFFJlkDyrEx4fY1c620TrWOpGlB4nTfxeb+9HcrHHMWorCyaBIrRgu
- 6Phzzj/YRNWF2Zk0t4WovJP8uGyh4Zlzt4YRGCCL0omuF+AaxGV+5I5leUh1Y4QyURjz
- 9udq3mz0Yz4D5ORzENyKuCx08xqSXttK+thWQTr746QX1MSpqp4u6yjeV84kf5Rp3S3B
- GjM8qew+T63QFEmT7ZULp6p4iw65vwEf4DAd5xavHZEoeg5TQrjWbV8Qgnu2jMoWnk7d
- fjkg==; darn=lists.u-boot-project.org
+ bh=8DkyX5W8gcEybzsw1sY+wvxRh0BNxCPFa7//o6gRmfU=;
+ fh=6fpq92GWJ70Qk2cHIBHbw3/JULXpe1Y2ppLaf4lV+J4=;
+ b=cOeBbboXQ6UsHCfFLGqssugnsby2ySq7yzKFvsv5E5rhM0mbcahxRKN6DlbU78+DVa
+ yK+R8l6PEuDCtcAyp8W5J7VSTdsGfW5kmlKloAO1bVaKuTeJUI12DfzwuKJY/uGAccue
+ 2J/xuMbL5cI5xBdDCmBLz3Izd8j8U1lwH0gV6tImmRJt/ahQ2xLgrdK/ujDImqPYl8PW
+ Zcea6OW4+jxOwogjvlMj9M7vMkxYEk8OUimsUIYaQ8hKjl+Cg7FhnUnWLOmx938WvEww
+ uhuThuzRsh1mO9fhacfyMDBjd4/6WHjNJ4PDcDN4o3vFXi49rt7z7jBnS3MVIDE9HBt4
+ zQvg==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1792586876; x=1793191676;
+ d=chromium.org; s=google; t=1792586877; x=1793191677;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:references
  :in-reply-to:mime-version:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=9wU5r5U5XaBrhVG936QbC2no6jNc/JMdIXOaS+YuoWo=;
- b=E7sES1QIRIuS0eBaR4FNTzgovuVJvRx/uekgFQbpFhhkwwh3mRaRqfIw8rFysSWB2R
- sWYFe36taIlVZDRZ6Cjwhrizj26aCUve6PlMxXvBWX8Pd8bJout+UBwGugG06lSTOtYn
- JqkshUYIKf7ID+H7Efw94vAPlotjKCHTjmTu4=
+ bh=8DkyX5W8gcEybzsw1sY+wvxRh0BNxCPFa7//o6gRmfU=;
+ b=d0eUfNksq8jPc3iVkFj1yrZ0nrBlYm+ONqHN30wXVHvSaUCqHNm8P6kVf+xnZzBRpi
+ N3SVYP8kGMSVCiegwv6uKUiPtU/neL+BtHEvT+rafIEi80Wv3eytoRuh3GW+/7YoauGg
+ Zdq5syTM+vptyqojDyIxjH32+UW43w4onydwE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792586876; x=1793191676;
+ d=1e100.net; s=20260707; t=1792586877; x=1793191677;
  h=content-type:cc:to:subject:message-id:date:from:references
  :in-reply-to:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=9wU5r5U5XaBrhVG936QbC2no6jNc/JMdIXOaS+YuoWo=;
- b=w7JjHoDErZYBy7s6up1BJDOmqG0LgSymvjEgC3We34n0Te3ItkYf58DTgmLzQNqaqr
- w62WdGu6CQ4F79MlNNIeLfWG72eHgGPtdTsl1U3SpMWRkvaDhrlfmc7y9ApBeRARK6HF
- ejcK/jtMsz/8xiu2Z4i8Ydfps04BvgPB81biBPuQ6aDn40P0PKts50VvcJ4zvwA9NTV6
- yn2ZNDsCBhYkl4VNgebSlsZgmaQ+njXfk5euGIU/TMiB7EhUfuznwBLJWrMzGika8/tj
- UCODVw/BdyUMjKQm3cv9bDKs3eEtAdsJk5C2Dmkvn0VDe1JTItEOmSucmfPOcpAaXZmp
- YlMw==
+ bh=8DkyX5W8gcEybzsw1sY+wvxRh0BNxCPFa7//o6gRmfU=;
+ b=pwFJRBE0Q19GVZDbHgIKQjHYmncQzCYMgST+SvKpLf6d6/+85LtLbThJ/jz6gqMhru
+ r398Kdqx+2ZEkbgcXgfE5DOf0q1haPG5+21CxG4uPVPztyjtH8P+lgj82/6PXLNufY7g
+ vO+X/33rfOiz1ZoD2JhNq1eNwkI/pDTDjiCiGZaerT5G8fabmLsORwuUTzppNqvt5zoV
+ qIN/Vb/rTUBQzp+u4VJoY1+7OWyX4oDJDPCI2ttOxmE9VbMYugFobTkExA1h7PdIcRIe
+ STBjHISuhp95WCfUS0GQxtt7ykDl0FbVeb99jdQQmtjAJZW52AnBB9YZ2ZxUrXqSM+7X
+ U+3g==
 X-Forwarded-Encrypted: i=1;
- AKwUvBztYnisiNuJvmAvOmrShvpULFtCi5dtThsGui30YSoQjH6RIJ1dGPRu0nNdFtk0b+H0uC3uaDQ=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJi0QELEhQVHQtmYmR/LCTA5FuZiy64I5b3H/JQ+Tfh5r3ReBAT
- kDTx/Dk4gMVbsrGK1hPa7TzDzn2NClNkpZTIf8lOzeA/m2hgjCWhqmpKzbzDbtyV6Qz55sMHLyC
- frnCQfmqT+6C9CU5/Ps6Uj4stK7p9sFWdd+n6IWDx
-X-Gm-Gg: AYBFou0zuVNUpota98hVfoKoAmv1uXNTCON1bb6U1GLVg1qEBlJklWPOF2WJK+GVy2s
- PIc6Z3vFVFC8GVwGBT3chbXeOXBp7bXtpS5+qZPOdtkJ1GEWaM1jH0UtE6YIiu9yW29Ts1PEMRz
- HOyvDpn60k6O2m92N6gTVVIwS4ymA5298mKhD34kQkFrwSta9oe/0QHF25gFVIvtcoGIulveyzJ
- 1QC8744vKPmK9rQIqS8WVHjjkl8Y5DPtTc92lQ6s/G7PrvVLYuBpCAi/lpk8HmDaEohoEs53IVr
- O1H6kWLD9ELy2X9cqoZs8TB27xXP3tQiPkeZiXUMI2z5tG134G92hMkSvDxKQ94iLf9wIAt2YI3
- w7RF2AJZpQ9Op0uuM6MSHSMCKPvuVVeUKaA0=
-X-Received: by 2002:a05:6402:4605:b0:6ac:73f8:2e4f with SMTP id
- 4fb4d7f45d1cf-6b408ec96d4mr1202565a12.29.1792586875970; Wed, 21 Oct 2026
- 05:47:55 -0700 (PDT)
+ AKwUvBwfp2/9CTf6se8ijTC7JGRub8Y3/0eAwW3t8oelZGrztzMMlusPZWrQ3mfEKH3FscAsgx2T2EU=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYLIkWpk/fcCwPWdGIV1HvatWLUxtKIzFScS36w6VcbLByywAWAN
+ iRWvouWUBFf4MP0F0noM6sPBotdNBHIOgXQJreMZEiQuu2NGMwBbnqRLt3Ft+HDOj5wNdDstRbn
+ wXFd45/l3rVk7p8Jl02v8XbyO2I2pag5ZAfCVe83n
+X-Gm-Gg: AYBFou29Hr/FsqFAtGzr6PWQrM+KvFpp49QjXBuHMsJcj5lCKW/L92akNa2xzJYqoxg
+ wCXlSkO8UTfEWXAtSgnqfH/rkhaIXEuMZ4hpLElpfhzIJ0dIoaTwGTb3SAUKvVHXjTgb7U863Rv
+ EOXaVsurm86m9BiBVIZ/2KQ+2KfgieZBauVuSKPT6XvWzM9lwgLDb6YkLt8/sK0FFMPURlnMTtd
+ 8+a9WQqQeGhEbw+5zZFusrixKVlE6DaKN00y1GNKUlrmBjB3mQVu00t5yaO2iaoS0RWW6PexEZ8
+ uOtp0BeY4UCS6gz0UNPMgsl5L4TMyYUzYcQpxxf4bRxKExXsxZOiMO6vsqr0I1P091LRH5yfxe3
+ mKRYGLvjLvPCjm6Kisg2KkgtW8acCPtbTI54=
+X-Received: by 2002:a05:6402:28c8:b0:6b1:a544:da5f with SMTP id
+ 4fb4d7f45d1cf-6b408ebb43amr1324069a12.27.1792586877073; Wed, 21 Oct 2026
+ 05:47:57 -0700 (PDT)
 Received: from 415065739583 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 21 Oct 2026 12:47:53 +0000
+ HTTPREST; Wed, 21 Oct 2026 08:47:52 -0400
 Received: from 415065739583 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 21 Oct 2026 13:40:35 +0200
+ HTTPREST; Wed, 21 Oct 2026 07:40:33 -0400
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20260902211501.127915-4-bhargavdas100@gmail.com>
+In-Reply-To: <20260902211501.127915-3-bhargavdas100@gmail.com>
 References: <20260902211501.127915-1-bhargavdas100@gmail.com>
- <20260902211501.127915-4-bhargavdas100@gmail.com>
+ <20260902211501.127915-3-bhargavdas100@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 21 Oct 2026 12:47:53 +0000
-X-Gm-Features: AclHuK8nvuCta1vRqV8Xj_1c8fTUtJIUFIH9JbEKc6pwyD9MsByAQK7xyzWfIhg
-Message-ID: <CAFLszThHH8hq0B7VDt5m_akKegQ4p-JUrHSzEcRdbBvNg0=WPA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/4] board: raspberrypi: Add Pico 2 support
+Date: Wed, 21 Oct 2026 08:47:52 -0400
+X-Gm-Features: AclHuK8H_h7unhJd0zpyCE-ITC8oSyHpsX-5TK87l920JXFL7bVtFKgPfdV8uAU
+Message-ID: <CAFLszTi4r8SoE2YOm6cnKp8hURMaVbn6mj+3bC+A_iSffLDVmQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] arm: dts: Add RP2350 device tree
 To: bhargavdas100@gmail.com
 Cc: u-boot@lists.denx.de, u-boot@lists.u-boot-project.org
 Content-Type: text/plain; charset="UTF-8"
@@ -203,144 +205,60 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 Hi Bhargav,
 
 On 2026-09-02T21:14:48, Bhargav Das <bhargavdas100@gmail.com> wrote:
-> board: raspberrypi: Add Pico 2 support
+> arm: dts: Add RP2350 device tree
 >
-> Add board support for the Raspberry Pi Pico 2.
+> Add device tree for the RP2350 SoC (rp2350.dtsi) and the Raspberry Pi
+> Pico 2 board (rp2350-pico2.dts).
 >
-> UART1 console is functional as of now.
->
-> misc_init_r() sets a fixed value for the "serial#" environment variable.
-> This fixed value is hardcoded as just a placeholder to confirm that
-> evn_set() works post-relocation.
+> rpi_pico2_defconfig selects CONFIG_OF_EMBED, building the dtb from
+> u-boot's source rather than CONFIG_OF_UPSTREAM.
 
-Please can you drop this, along with CONFIG_MISC_INIT_R? 'serial#' is
-meant to be unique to the board, and 'SC1631' is the part number, so
-every Pico 2 would report the same serial number. Setting it from OTP
-can come later. (BTW 'evn_set' should be env_set() )
+These are two separate choices. OF_UPSTREAM is off because Linux has
+no RP2350 devicetree, so please say that here. OF_EMBED is different:
+its Kconfig help says "Boards in the mainline U-Boot tree should not
+use it". OF_SEPARATE should work fine, since the dtb is just appended
+to u-boot.bin and picotool can still convert and load the result.
+Please can you switch the defconfig in patch 3 and drop this
+paragraph?
 
+>
+> Currently for the uart nodes 'clock' property is used instead of 'clocks'
+> as there is no dm based clock driver. This will be updated once a clk
+> driver is introduced.
 >
 > Signed-off-by: Bhargav Das <bhargavdas100@gmail.com>
 >
->  board/raspberrypi/pico2/Kconfig     | 15 +++++++
->  board/raspberrypi/pico2/MAINTAINERS |  9 +++++
->  board/raspberrypi/pico2/Makefile    |  3 ++
->  board/raspberrypi/pico2/pico2.c     | 81 +++++++++++++++++++++++++++++++++++++
->  configs/rpi_pico2_defconfig         | 29 +++++++++++++
->  include/configs/rpi_pico2.h         | 36 +++++++++++++++++
->  6 files changed, 173 insertions(+)
+>  arch/arm/dts/Makefile         |  1 +
+>  arch/arm/dts/rp2350-pico2.dts | 25 +++++++++++++++++++++++++
+>  arch/arm/dts/rp2350.dtsi      | 37 +++++++++++++++++++++++++++++++++++++
+>  3 files changed, 63 insertions(+)
 
-> diff --git a/board/raspberrypi/pico2/pico2.c b/board/raspberrypi/pico2/pico2.c
-> @@ -0,0 +1,81 @@
+> diff --git a/arch/arm/dts/rp2350-pico2.dts b/arch/arm/dts/rp2350-pico2.dts
+> @@ -0,0 +1,25 @@
 > +// SPDX-License-Identifier: GPL-2.0+
-> +#include <dm.h>
-> +#include <env.h>
-> +#include <init.h>
-> +#include <log.h>
-> +#include <asm/global_data.h>
-> +#include <asm/io.h>
-> +#include <asm/arch/rp2350.h>
-> +#include <dm/platform_data/serial_pl01x.h>
 
-As far as I can tell, dm.h, log.h, asm/io.h and serial_pl01x.h are not
-used. Please can you drop them?
+The .dtsi is '(GPL-2.0-only OR MIT)' but the board .dts is GPL-2.0+.
+Please can you use the same licence for both? The dual licence is
+normal for devicetree files.
 
-> diff --git a/board/raspberrypi/pico2/pico2.c b/board/raspberrypi/pico2/pico2.c
-> @@ -0,0 +1,81 @@
-> +int dram_init(void)
-> +{
-> +	gd->ram_base = RP2350_SRAM_BASE;
-> +	gd->ram_size = RP2350_SRAM_SIZE;
-> +
-> +	return 0;
-> +}
+> diff --git a/arch/arm/dts/rp2350.dtsi b/arch/arm/dts/rp2350.dtsi
+> @@ -0,0 +1,37 @@
+> +		uart1: serial@40078000 {
+> +			compatible = "arm,pl011", "arm,primecell";
+> +			reg = <0x40078000 0x1000>;
+> +			clock = <150000000>;	/* CLK_PERI = clk_sys 150MHz */
+> +			status = "disabled";
+> +		};
 
-Patch 2 puts the memory node in rp2350.dtsi but nothing reads it.
-Please can you use fdtdec_setup_mem_size_base() here and
-fdtdec_setup_memory_banksize() in dram_init_banksize(), as the stm32
-boards do, so the size is only defined in the devicetree?
-
-> diff --git a/board/raspberrypi/pico2/pico2.c b/board/raspberrypi/pico2/pico2.c
-> @@ -0,0 +1,81 @@
-> +int board_early_init_f(void)
-> +{
-> +	rp2350_soc_init();
-> +
-> +	return 0;
-> +}
-
-The XOSC/PLL/clock setup is the same for any RP2350 board, so I'd
-expect it to live in mach-rp2xxx (e.g. arch_cpu_init(), which only
-needs the clock setup, not the MPU code) rather than in each board
-file. Then any other board using the SoC gets it automatically. What
+You don't need a real clock driver to use 'clocks'. You could add a
+'fixed-clock' node for clk_peri with clock-frequency = <150000000> and
+point the UARTs at it with 'clocks = <&clk_peri>'.
+pl01x_serial_of_to_plat() already handles this through
+clk_get_by_index(), so you would just need CONFIG_CLK and
+CONFIG_CLK_FIXED_RATE, plus bootph-all on the clock node so it is
+available before relocation. That gives a standard binding now, and
+when the clock driver arrives only the phandle needs to change. What
 do you think?
-
-> diff --git a/board/raspberrypi/pico2/pico2.c b/board/raspberrypi/pico2/pico2.c
-> @@ -0,0 +1,81 @@
-> +int board_init(void)
-> +{
-> +	/* Nothing special needed post-relocation for basic shell */
-> +	return 0;
-> +}
-
-If there is nothing to do, you can drop this function and disable
-CONFIG_BOARD_INIT in the defconfig.
-
-> diff --git a/configs/rpi_pico2_defconfig b/configs/rpi_pico2_defconfig
-> @@ -0,0 +1,29 @@
-> +CONFIG_CMD_TIMER=y
-> +CONFIG_OF_CONTROL=y
-> +# CONFIG_OF_UPSTREAM is not set
-> +CONFIG_OF_EMBED=y
-> +CONFIG_NO_NET=y
-> +CONFIG_SPECIFY_CONSOLE_INDEX=y
-> +CONFIG_DM_SERIAL=y
-> +CONFIG_PL01X_SERIAL=y
-> +CONFIG_TIMER=y
-
-Patch 4 says that with CONFIG_TIMER enabled but no driver, the 'timer'
-command and any udelay() crash. Please can you enable CONFIG_TIMER and
-CONFIG_CMD_TIMER in the timer patch instead, or put the timer patch
-first, so this commit doesn't produce a board that crashes?
-
-With DM_SERIAL and stdout-path in the devicetree,
-CONFIG_SPECIFY_CONSOLE_INDEX should not be needed.
-
-> diff --git a/include/configs/rpi_pico2.h b/include/configs/rpi_pico2.h
-> @@ -0,0 +1,36 @@
-> + * Flash (XIP):  0x10000000 - 0x103FFFFF (4MB on Pico 2)
-> + *   0x10000000  Second stage bootloader (256 bytes - handled by ROM)
-> + *   0x10000100  U-Boot image starts here
-> + *   0x100F0000  Environment storage
-
-This looks like the RP2040 layout. The RP2350 has no boot2,
-CONFIG_TEXT_BASE is 0x10000000 and the environment is not stored in
-flash, so the comment doesn't match the code. Please can you fix or
-drop it?
-
-> diff --git a/include/configs/rpi_pico2.h b/include/configs/rpi_pico2.h
-> @@ -0,0 +1,36 @@
-> +/* Flash geometry */
-> +#define CFG_SYS_FLASH_BASE		RP2350_FLASH_XIP_BASE
-> +#define CFG_SYS_MAX_FLASH_BANKS		1
-> +#define CFG_SYS_MAX_FLASH_SECT		64
-> +
-> +/* SRAM */
-> +#define CFG_SYS_SDRAM_BASE		RP2350_SRAM_BASE
-> +#define CFG_SYS_SDRAM_SIZE		RP2350_SRAM_SIZE
-> +
-> +/*
-> + * Stack / Malloc
-> + * Stack at top of SRAM, grows downward
-> + * Malloc heap immediately below stack
-> + */
-> +#define CFG_SYS_INIT_SP_ADDR		RP2350_SRAM_TOP
-
-Most of these are unused. The flash ones only matter with
-CONFIG_MTD_NOR_FLASH, nothing uses CFG_SYS_SDRAM_SIZE, and
-CFG_SYS_INIT_SP_ADDR is ignored because the defconfig sets
-CONFIG_CUSTOM_SYS_INIT_SP_ADDR. As far as I can tell only
-CFG_SYS_SDRAM_BASE has an effect, so please can you cut this down to
-just that?
 
 Regards,
 Simon
