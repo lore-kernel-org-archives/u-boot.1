@@ -2,171 +2,184 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E9FA606A31F
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 11:07:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E16F606A31A
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 11:30:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=g/D977xk;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=MzpVko1h
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=PEuJ9+9v;
+	dkim=pass (2048-bit key, unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=Q4xp/W7S
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2A5D981164;
-	Wed, 21 Oct 2026 11:07:28 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DF2818100D;
+	Wed, 21 Oct 2026 11:30:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Z9ULT4pfB-3O; Wed, 21 Oct 2026 11:07:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org EA247810E6
+ id G_AlWUXIC0-M; Wed, 21 Oct 2026 11:30:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C74DA80F24
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792580847;
-	b=CjOxYZQ1GLbzybaZ7mGishpQkUQDiHiIPINEZiKFEm1XelZ7zX823dRvzUCP4DBV20OR
-	 2kvnWYnnvm+7z3uiIrnGWFJrdpPAfZz9yukk0iei5eEVgB89coWX8CG5JNElIOLx+HmMB
-	 TMg3dcM/gzIa6IaVeay29vjUBSaDaylp2BYM3Jk0bfzqXFXcG3blOQyViI6Rs/lzTYp1Z
-	 kz+JY3VCYUaWbbRshvtj5SoPA7bQ4Zjfk6ZXYwr+mD8g4b4UE5HxvGbW9ew07A9BNkPIr
-	 V+XNoD539jluKHpxIzIs0pzH0Xht2Cq5krrg8qxMv63jH9zTKDvx2iBnOCyv6XPQUEA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792582225;
+	b=iaBE+8GHs0LJ7iGagcuvZR22sf0zO5PfRijkGjywsIrsO0ZJfq6kQo/YM2VwYj/WI5Dp
+	 le2iWbZ8oQBSQH+7ONrGUOwXxkGEfrSNenjBAPnAFuYS369eaFLeA9bB0LqZGfJzyOdbg
+	 U7vMPO/MU0PdP7omIj9mREmrJIrB9zrJIAS9MHGM1IK/AiDy7VI/W0DgBVpEBA+wQKmSk
+	 z44YI9hE2yFHCejY7n8y/0JbiBvG9CE33FXm2RNxpCpNz7MrheFkiETdCowcg2dr2HUKC
+	 DOnzKT3IOeYHhQz9yK8Ob3uvfvKu2I3nUwt4Xlyh4LMFUjrxfj7legn7sSXxUDkhE4A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792580847;
+	c=relaxed/relaxed; t=1792582225;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=qfZ4biPZQGywVxciADaP22GQlGoW2anSW/mg1YJdvHQ=;
-	b=r7teaHoXDAdWgd4D+B4WBzA4DFvzBdBCIkJCkqDyLWhtbNLh2jdyVoLwdiVxPBo77FAX
-	 BQgyn3Z2pUN0jk447MZgNGkrOzskssCaV88ZOZaXjDIUZNVS03iEoeKpIa7hX6nXeWtGG
-	 6MhBMYwa3xV5JBWOYYjcxBR8sTOxAj5UC0Odetn95nTZAeEd0NxCIJap8roPUuuDcVnop
-	 Ywb8lk2zmPzzFSKdWoIdSfPLp/I083QK6hVu3Q5Mw85HyWYCjaqvPjoQsN661s+Tj5Ton
-	 UNguYQNZKTTn81051IBCgqDZU8srL1vG5jTGCOiEPzAtrOAirCHApuiEZRaqpGZB1VQ==
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=zYX18Gdg6qqJRBoCMXR7eCCrdcWzYBNcqeOGqPwDSQ4=;
+	b=gAllulRZpKHViXS6hM9kQMb3Gb++qbZeqLO87hjwmg6JGxmkU8QBAOcVZOKnZZY7orsX
+	 eMKZGdLb1M92htBJO/xsuKVOKqWxSsvl8CFsVLEpt3a+XYsYCwVVUSbHLpqZX6S/on+lc
+	 3VVh4Un/ma6JONFEnpde/yQIg4cGEXeRAF6GnGmu+p8bDv3tIFPKLuhk0GrbyGBe9f6Mt
+	 iE796IuJ98XMkB6IH2ddepFqfQytMwKIC+zRBVF0BPk3EFUQuOXALuRXLc+kfDCVmfklo
+	 jsrSzvuVTp0aldMHFyr+6swWsb535imi3vNnH1eZwOhrvtSkJGKBUmTUkd5Rqe1v7iA==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792580847;
-	bh=qfZ4biPZQGywVxciADaP22GQlGoW2anSW/mg1YJdvHQ=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=g/D977xkmJyFK7q1SleoIdk0t9t8jCFRbEF5TfNhUfShA3LA9BNdpwlUCsf5PQaTj
-	 2EaDKGHMM3yB+l3PzLM8eRynS2SIBnxHWEPUXo+WIFFwLaBQXmv9iG9RTNsdjgFHck
-	 85awTjQ8LerMMcycSeV7nwdb0Yl2TdJJMzZFwOLEC4VvhWby0+knBury+mKWpqmxoW
-	 3Pe5u4PPdYuRjKPAzZNPJSqia3uUyLnaQ56RPn7BmzHY0dhAn221zS//hdT4X8a01M
-	 DviwSlxzvtwHd3nTa+M4nf9ycn7yBvAUEJxZ9yiYtEi//+ulXQdi04twpp21v46P1c
-	 zDlEN9r2rh8qg==
+	d=lists.u-boot-project.org; s=default; t=1792582224;
+	bh=zYX18Gdg6qqJRBoCMXR7eCCrdcWzYBNcqeOGqPwDSQ4=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=PEuJ9+9vYkdTa1G4m94eqxrf7UYz1gOJQhPxtGOwCSMadNU1/HICAjqi8ujKI/hxB
+	 zhmAh+cRyCQh9jxvH0RhMRmhVAQn+2KObrlpJ1lbOCLeeyxxkNaZaEFd8G7tLSmkAX
+	 u2NAd/iAQhJghUYoD6VBVaaepcD5gCTcqm1F8JrWxcnFX8ZKzo0/ZjAFEsh/b1G7jo
+	 Ci+WcUNE23t1NF10smgpLgx5dtn4PqNMqYjThVy5FOo0FFeDPo7JrpBcZREkLAlp/L
+	 yZqVb300ATQJFFWAsIPb2AbAQViR1FKJKdwKaIby5AVeGylMxVCjfLBN0Rg8LaAkLU
+	 mAh4jd6gMHtKg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EA247810E6;
-	Wed, 21 Oct 2026 11:07:26 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id F150A3A4
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 11:07:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C74DA80F24;
+	Wed, 21 Oct 2026 11:30:24 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id A83DE1AB
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 11:30:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E340740761
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 11:07:22 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 99F894007E
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 11:30:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id N4SRki6qz6LU for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 11:07:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org EA8244075F
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::102b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792580842;
- b=TSEWyLEYNUKyETOk5qFi5GKABPeOhzg3AUfxXqUUGLA08wlz3lZeSacpI8I7aWD2HSZC
- aMxD8GuUX+XD6+bVEsqEEOK4DsIlTZQd+07MffOUZIpeIBBVHovb9AG1fqmOFoDq68Ywc
- /V70NiBF8sk67hu8Xx8A+fkE1EFn+z/jyCEA8pLxREx7bL/XPz/9T6ixErAqE1AfVEYQQ
- 4kuuU2HyVXpPH4nW8TsQwznYQ4QXK5i739Qgu5tBdVPT3Vkj2meUyyCACI9mHgJCQBqSy
- oCTQZmjhXHlAboEhHrSIOIcdJt6wLJQu1jggmMoNix5IUWUuonIKFULwmtReTddzo+Q==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Rb5JbC1W_dnv for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 11:30:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 59DFD40060
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792582220;
+ b=ZRpaIUCFFmtNmOq0rgjNbVx3cRHfb0F9YY+oYEda1XBomE8thQK+iWOG8AKticG+4qUE
+ QrK6p9lPV5BSj4eEuIxWcnh26yt8aPrq45evYYQG8422bP19SVlQoH1GekyrhHEjOlaQf
+ k6WAEodmMqREADziUIgnUt4ajDWypDllhxTewwhVeaOtAi7f3wMvLY9sB7zMLei4j8k9c
+ 39SMjCKIqXp2aw2Rc0GD9QUQ/nxQ25Yt9zyO+fOU2mNvdYr70SqeeQQVvhsxg+tK+drCM
+ a5NS2/LKPd2DRjusld6IZRPF2dKQwyLBvUe+SE8qPV/gCusL+5240LjGY4z++eEldrw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792580842;
+ c=relaxed/relaxed; t=1792582220;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding;
- bh=qfZ4biPZQGywVxciADaP22GQlGoW2anSW/mg1YJdvHQ=;
- b=A08xDSB6ZnxykgLCZA5PZBLcc6gMbUi27/QvECXvYk3wNhjdoRz2a4UQa4sRNv0SuEdq
- h6UXEYarOhyJbmBAnMsf/ROzu8R4DNrfL2hEF11kAQmaVdSb7CMWgp8WZtVqjau84Jyx6
- J+O1JQIhsW0uSTfDFp6veX2WxghkzjB67DXlfY4D/ztwj6aUzrnUmTmxWpTsY0W47bl4L
- FrmS+3MYN8SKSpuB9sj3/vVolpl+24NAHckr2uas4z+N1t9CJAcituZRmDXSp75eJ7DWa
- nJ0Ach68rGghBZGdnBHjcX1vGO/6kuyOemMKsaa5Plxqsrzj/etU7N8L4ufzDo+GX1g==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=MzpVko1h; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::102b"
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+ X-Developer-Signature:X-Developer-Key;
+ bh=zYX18Gdg6qqJRBoCMXR7eCCrdcWzYBNcqeOGqPwDSQ4=;
+ b=ickihJjm7X3E6e/zcvkThp/CAocp6LcjqeHFF/TJafUVjDf6CtaIAWD8K1jxjj90rQZG
+ gSFO56CgYHKvoEaujReV29i8iTTbaoWdA6E25OAeHly+TbKibiaQs3lRwWkw7wxMxTNnR
+ MKFSrOxBi0AJd9ZQw2pFGwntvB0ek7iuVyXJHcxgcKtzxD6+ITa9ma9Rz2eQ5H0oyrkph
+ AFEhg1z5gtezh8Ts2tSIXknzf5vIcoq/w2ocsjQPL2N7qRNPUOQZgLbTBOpVbu8HIT8X0
+ Yz5qbko58+Ep/FWlFpwzPJ1D3TAg9n4CgT586TAt/9pZs5P97h2c9aC+JI1hBVunFWg==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ dmarc=pass header.from=flipper.net;
+ dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b="Q4xp/W7S"; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::102b; helo=mail-pj1-x102b.google.com;
- envelope-from=alan.tseng.cs@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=MzpVko1h
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
- by smtp4.osuosl.org (Postfix) with ESMTPS id EA8244075F
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 11:07:21 +0000 (UTC)
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-3ab868eb9cfso323670a91.0
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 04:07:21 -0700 (PDT)
+ client-ip=2a00:1450:4864:20::42b; helo=mail-wr1-x42b.google.com;
+ envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=Q4xp/W7S
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 59DFD40060
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 11:30:18 +0000 (UTC)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-48bbb06e746so330636f8f.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 04:30:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792580841; x=1793185641;
+ d=flipper.net; s=google; t=1792582216; x=1793187016;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=qfZ4biPZQGywVxciADaP22GQlGoW2anSW/mg1YJdvHQ=;
- b=MzpVko1hA84zEWaAipd9MfMoY881Q1r3aEa+HrCjlu19z417G9d0xtweZAFiV2WKvd
- kj+7T0TxVT7DcFbupa9cvEdTQoqag5+oRRk/aKiHxHc0OjKyXymxV/qMwJPLpabEM/gC
- Wcw3zqi9+yRrwbIf27LS9+65EKF/Gq9kccbpon3HAbQT4PmwjmxC6V9yfu9jpKJsQV0d
- 3tW6MxjvK7ju323ULRfPUB7yjxxfjuh3Vq0EcsjmdbdqXsc0tUqoeFALstKtBnQ86pQy
- mfvMqZAR9EzkVTa4S+qBD0fxX7F7HQzfSjCKnt+nhOaOxCHCRhwO9lYfTyQ1mHieKhur
- KlKA==
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=zYX18Gdg6qqJRBoCMXR7eCCrdcWzYBNcqeOGqPwDSQ4=;
+ b=Q4xp/W7SoICZYCIBhFr4XPxbAPh2wJcJEK4h09REaGP/oRjwCYmTa+odvs5/2oFdHJ
+ QdQtNg3CRUn1zUoNaBYUsVgJN5Q4DdJqUlwBYBqlUcsFRnl0lWM/XrmiphCgtZ18K1Xc
+ hCFcr5G09ODjR3ONLv83aqCY4rj+RelC1Nr4rKCb54OfI1e1EXCUjsrEjmyLjOR6RkJY
+ EUiI1/TAZcI4Ofl2u+ySPeAFgZXV7+EhoLO7WWbo9yI0g2VVsIefgM7+LjCcdullXmhH
+ Sxzg9U+c9JKPf8P3c02z+1lCNh5ARFik4KueTyqw3ZAZ57oSDinhAN7VS52gEvo4mHUJ
+ i2Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792580841; x=1793185641;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=qfZ4biPZQGywVxciADaP22GQlGoW2anSW/mg1YJdvHQ=;
- b=S+8efmV/4zmHSD/k/yYCWwLMzT54qebfFJYN0kSCnXk4ZxfMVBJ+wV5DL9L1ppyFAh
- oMTGvbQcXFy1DI6f1SGK0fSbPWZu0MrL9ie5xXK917CE67wO8taZFcYG6bTRhCAC2sUM
- xrl7vIe3E+m5XfmaRvSwfhRR5CUWFN5CmhT+deivpkze5yYhyiYefmZKAe2mEcpXi+mm
- 1ItGFmyQkbcBFNkomZVQmdfnG7kM4QxhfUYsJgc1WcwkKdtYFFN34tDlotwFcSe6W2k8
- QWDevJTupmPsKvrLFYXvhj8ghuIdZQA+/ehfhS8pFywqfqPV/YOEcljXv1Cyf6Isegmv
- SikQ==
-X-Gm-Message-State: AFq9FYJXZy1/mtyiJN8LL6Z5A6KPeDKTrCh3gBaZsxg/PM7Z6i+4ditR
- 4G12iP256Dy+wIE7wMYbUhroF2hpJhSjwfvtaJghxgvqGD5Uwec4o6memwigg5eafAc=
-X-Gm-Gg: AYBFou3ZZ6ihy+N3bOBpdx2PHEp9bQ8gwFeFaFUihlp6SX4pXpeQ2bO6KFEjPrL1A6v
- 5mYLYDCchMfXJShJIU6XrgZ2/ErxKKcoOe9eCFKFeLy1t8IGkfFGIYH0AAjXViZrt1nzOwkuIb1
- Q1pke08dyNMdxkjz7nqFSaflntMN7OrbLhYEQMQzRgdEtZ/RAxyOHjoI4ZnfvlxzrAHtUxsztZK
- Lq6wzCi1aMcvZL4ToeJgcgLR1kTG+64LJ8QrDosD06EJIBxWV4jX8/4RWdbwsaKqnbX8C5TI8ZP
- IWt5DQ1dyveOyMH3E8Tnsy6fiYsGb+zf7HbCLfgS+Af/ereY9Zi7xFXUagZp4xOOpuG80+vMvhd
- vMmQgpYxBpkrqdkmubAiV64leA2jF2pbvjmXKPpasNz0Rry61QJUm347mJSokYC+9yJyUndaXB9
- 7SEI+yPhqnntpmHNq+/FteSuWVhHMJFsfIiRX/qObJ/EIA3QhTV5xz8i6UZQWUYhzm0RSmg6dje
- TNiTjHZLdyd/zmRemsCJamAsn8vnfw7J9hdx0Sa/7NPnypfvBIow923twcsffDnUEg5ReSOQ3eK
- iwfoJn8LiAOq+rzz21r04highX2qaiTZ1jCSphI8FG1tx+t5vC5ooyUnRWROJIm8n/jEmQz+BJG
- tveJNmnuQOjdjgC+lI4flLmoF/f6zYRjv/A0=
-X-Received: by 2002:a17:90b:2ccc:b0:3ad:5c64:c7a0 with SMTP id
- 98e67ed59e1d1-3ad86ef45bemr1396094a91.38.1792580840739; 
- Wed, 21 Oct 2026 04:07:20 -0700 (PDT)
-Received: from alanhc-14700.tailb22ec2.ts.net
- (180-177-138-120.dynamic.kbronet.com.tw. [180.177.138.120])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ad7ffbbba1sm4029380a91.1.2026.10.21.04.07.19
+ d=1e100.net; s=20260707; t=1792582216; x=1793187016;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=zYX18Gdg6qqJRBoCMXR7eCCrdcWzYBNcqeOGqPwDSQ4=;
+ b=mKluaRimURykhhMHOriZvxRJY34vuHqmeAABrCTbXxZcs2Wf4CgjBEAtvfCFWFmMxF
+ yocfPf57TNeh4IYD2uD7ofPqwt+oLlUr+Y6O7wNrqLj0/L0CTpKHzoQslo9vW4Tt85ec
+ ZX+h6rz2zB+ewjCTeY/v6+T6CaKLr7GfNUTUkmLXqXYOQ18v1iGCrXhhKkASYZdsmxpZ
+ 9mI2jDVdHK9kqmYmRCCOJTVCiI/8cNz3+quuvV6uyWHuL2Ti9i4T0tAY2stw7piVTIDa
+ Ucu0Vgm9+E6qjBSS9RPva6DmTp3hBs8Rk2jtBUPAfDghuPsMdVW6mRe/x0kc8lWlbzX6
+ M1Pw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzX7GjZqqRK4SoGFptBFOJuK4iEDN0WIICBw3aDuEX701or7ejQNyG/DixNVrgEcNRlNXsTc5A=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYLT7dCS1WHsTJwihhUUGQ2OfW4TlMgQj04raxlwA1UGxO1yOa83
+ lHeCU1yV0w4CYJJ20ayci9Wp+xa1L3/dCTO+Eio7CceIUsP8xawMoxhkGvyV4vLtLmo0mK1NPg1
+ wrIpMHG0=
+X-Gm-Gg: AYBFou3SIkrpBcycLkqKfnA+av6yPECkUYy0wPeFzPS6nLe9pmz4P7YLMtLNvDjZaDF
+ UOZsN/8uyY0Ejt038TNkaiZgVapWaB/oa6cR9/PHrjvINZab5LgoXEfiXcydItWQ2mWAKX9x3qc
+ ADdGLbtyf4BzxL1EQrOq/zsI5Ba0hzY3bb+VuNmFe3DwJECVoBYYm2tm3VF7FET5rXi6T/0I7hV
+ odNXFl9pX6LRauoUHSJLNm6oNw1oT+vlQ2A1jQcLX8edR3zetTb8QV12xIGjBuEtCsYijwJA720
+ Fm2Rhuck+n6DaV8H/ikCLx3CVDyaEidxyNyZ/P46E+g46Fzvib+Kmm6wdYAVsjBSSdYjLTknbPP
+ UtzBZtSiIATSZv74aW9C3rg25GU7YgEArJoShAPP9O4kbuxPOnrFfu2u3D7LqAD3e2BXGTMn++J
+ kTpmAkNpBRVU6ZOEJaeBTMl1c+BmTAEv0Q9z01SWotNY2RbrtoLsLklGkfMS7yDJG0RTyKC0ZWy
+ NHpxoS0te1+9hdKJx9D9WEJjYWKtwY2xk+eEjArcHFnyfIpW/h4wavRyT37JuG1ttCov1jQfX3l
+ zBV0UWY13cNgnNL9HlhVpGHfe5Atx3Scx+VDMcOGaKtNhfyChUG2Jki2bw==
+X-Received: by 2002:adf:efd2:0:b0:48a:efed:ac97 with SMTP id
+ ffacd0b85a97d-48e264f06c6mr2428818f8f.33.1792582214853; 
+ Wed, 21 Oct 2026 04:30:14 -0700 (PDT)
+Received: from alchark-surface.localdomain (bba-86-98-194-229.alshamil.net.ae.
+ [86.98.194.229]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48e2581f0bdsm4814932f8f.19.2026.10.21.04.30.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Oct 2026 04:07:20 -0700 (PDT)
-From: Hung-Chun Tseng <alan.tseng.cs@gmail.com>
-To: u-boot@lists.u-boot-project.org
-Cc: bmeng.cn@gmail.com, trini@konsulko.com, visitorckw@gmail.com,
- sjg@chromium.org, xypron.glpk@gmx.de
-Subject: [PATCH v4 5/5] test: dm: Add tests for the virtio RTC driver
-Date: Wed, 21 Oct 2026 19:07:06 +0800
-Message-ID: <20261021110706.2947351-6-alan.tseng.cs@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261021110706.2947351-1-alan.tseng.cs@gmail.com>
-References: <20261021110706.2947351-1-alan.tseng.cs@gmail.com>
+ Wed, 21 Oct 2026 04:30:13 -0700 (PDT)
+From: Alexey Charkov <alchark@flipper.net>
+Date: Wed, 21 Oct 2026 15:30:09 +0400
+Subject: [PATCH] test: dm: rtc: stop both RTCs before comparing them
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261021-rtc_dual-v1-1-8cf78da56d8d@flipper.net>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXM4QpAMBSG4VvR+W1lK1vciqTZzjgS2kxK7t3w8
+ 6n3+y4I6AkD1NkFHg8KtC4JPM/AjHoZkJFNBlEIyQvBmd9NZ6OemdXoql4rJUsHKd88Ojq/q6b
+ 9HWI/odnfPdz3A98DnO5sAAAA
+X-Change-ID: 20261021-rtc_dual-daef9ba7765f
+To: Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, Alexey Charkov <alchark@flipper.net>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2680; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=eStpN0oqw7lSbwh8vmBOUGh3HNsoyevY6e2KVAXwT4Y=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTdWOR2WNFoT36P1euLWbs8Dv/JnVs2b/2N2sNLGQR2P
+ IiQvn3iecdEFgYxLgZLMUWWud+W2E414pu1y8PjK8wcViaQIdIiDQxAwMLAl5uYV2qkY6Rnqm2o
+ Z2ikY6xjxMDFKQBT3biEkWFWoHfr9ztTMj/s5creeO3Q4ccBVbNs1rEknWH5GDPlyPT5jAyNxc0
+ mKUUO9xU/WB4uWZZw/XKa4lKLswpL0rcmVC0OecIEAA==
+X-Developer-Key: i=alchark@flipper.net; a=openpgp;
+ fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -176,393 +189,83 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add a virtio RTC device to the sandbox test device tree and emulate it
-through the sandbox virtio transport. The emulated device answers the
-VIRTIO_RTC_REQ_CFG, VIRTIO_RTC_REQ_CLOCK_CAP and VIRTIO_RTC_REQ_READ
-requests from a configurable list of clocks.
+Each sandbox I2C RTC emulator takes its base time from the OS when it is
+bound, and rtc_dual reads the first RTC on the live system time, then
+expects the second one, stopped on its base time one second ahead, to
+differ from that reading. When a second ticks over between binding and
+the first reading, the two match and the test fails, which happens about
+once in a thousand runs.
 
-The tests check that the driver:
-- does not use the virtqueue in probe()
-- reads the time from the first UTC clock and looks it up only once
-- remembers that there is no UTC clock and does not ask again
-- reports a failed request and looks for the clock again next time
-- gives up with -ETIMEDOUT when the device does not answer
+Stop both RTCs on the same base time and offset before reading them, so
+that the second one is exactly one second ahead regardless of when the
+test runs.
 
-Signed-off-by: Hung-Chun Tseng <alan.tseng.cs@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Fixes: 4772511475ce ("dm: rtc: Add tests for real-time clocks")
+Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
-(no changes since v3)
+I got lucky enough to run into a false positive from this test while
+running the CI test suite over a completely unrelated patch series:
 
-Changes in v3:
-- New patch (Simon)
+https://git.u-boot-project.org/u-boot/contributors/alchark/u-boot/-/jobs/119251
 
- MAINTAINERS               |   1 +
- arch/sandbox/dts/test.dts |   5 +
- test/dm/Makefile          |   1 +
- test/dm/virtio_rtc.c      | 306 ++++++++++++++++++++++++++++++++++++++
- 4 files changed, 313 insertions(+)
- create mode 100644 test/dm/virtio_rtc.c
+Apparently it has never been caught in over 10 years due to a rather low
+incidence rate of the underlying race condition.
+---
+ test/dm/rtc.c | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 2ce94d7f5..486bfea29 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1876,6 +1876,7 @@ VIRTIO RTC
- M:	Hung-Chun Tseng <alan.tseng.cs@gmail.com>
- S:	Maintained
- F:	drivers/virtio/virtio_rtc.c
-+F:	test/dm/virtio_rtc.c
+diff --git a/test/dm/rtc.c b/test/dm/rtc.c
+index 88f080b64a83..874c21a96762 100644
+--- a/test/dm/rtc.c
++++ b/test/dm/rtc.c
+@@ -284,19 +284,30 @@ static int dm_test_rtc_dual(struct unit_test_state *uts)
+ 	struct rtc_time now1, now2, cmp;
+ 	struct udevice *dev1, *dev2;
+ 	struct udevice *emul1, *emul2;
+-	long offset;
++	long base_time, offset;
  
- WATCHDOG
- M:	Stefan Roese <stefan.roese@mailbox.org>
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 25c99ef81..758b04a1b 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -1974,6 +1974,11 @@
- 		virtio-type = <2>;	/* block */
- 	};
+ 	ut_assertok(uclass_get_device(UCLASS_RTC, 0, &dev1));
+-	ut_assertok(dm_rtc_get(dev1, &now1));
+ 	ut_assertok(uclass_get_device(UCLASS_RTC, 1, &dev2));
+-	ut_assertok(dm_rtc_get(dev2, &now2));
  
-+	sandbox-virtio-rtc {
-+		compatible = "sandbox,virtio1";
-+		virtio-type = <17>;	/* clock */
-+	};
+ 	ut_assertok(i2c_emul_find(dev1, &emul1));
+ 	ut_assertnonnull(emul1);
+ 	ut_assertok(i2c_emul_find(dev2, &emul2));
+ 	ut_assertnonnull(emul2);
+ 
++	/*
++	 * Stop both RTCs on the same time before reading them, so that only
++	 * the offsets set here tell them apart and no second can tick over
++	 * between the readings being compared
++	 */
++	base_time = sandbox_i2c_rtc_get_set_base_time(emul1, -1);
++	sandbox_i2c_rtc_get_set_base_time(emul2, base_time);
+ 	offset = sandbox_i2c_rtc_set_offset(emul1, false, -1);
++	sandbox_i2c_rtc_set_offset(emul2, false, offset);
 +
- 	sandbox_scmi {
- 		compatible = "sandbox,scmi-devices";
- 		power-domains = <&pwrdom_scmi 2>;
-diff --git a/test/dm/Makefile b/test/dm/Makefile
-index 5dd6b57bb..975adce55 100644
---- a/test/dm/Makefile
-+++ b/test/dm/Makefile
-@@ -142,6 +142,7 @@ ifeq ($(CONFIG_VIRTIO_SANDBOX),y)
- obj-y += virtio.o
- obj-$(CONFIG_VIRTIO_RNG) += virtio_device.o
- obj-$(CONFIG_VIRTIO_RNG) += virtio_rng.o
-+obj-$(CONFIG_VIRTIO_RTC) += virtio_rtc.o
- endif
- ifeq ($(CONFIG_WDT_GPIO)$(CONFIG_WDT_SANDBOX),yy)
- obj-y += wdt.o
-diff --git a/test/dm/virtio_rtc.c b/test/dm/virtio_rtc.c
-new file mode 100644
-index 000000000..23f7934dd
---- /dev/null
-+++ b/test/dm/virtio_rtc.c
-@@ -0,0 +1,306 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2026, Hung-Chun Tseng <alan.tseng.cs@gmail.com>
-+ *
-+ * Tests for the virtio RTC driver, with the device emulated through the
-+ * sandbox virtio transport
-+ */
++	ut_assertok(dm_rtc_get(dev1, &now1));
++	ut_assertok(dm_rtc_get(dev2, &now2));
++	ut_assertok(cmp_times(&now1, &now2, true));
 +
-+#include <dm.h>
-+#include <rtc.h>
-+#include <time.h>
-+#include <virtio_types.h>
-+#include <virtio.h>
-+#include <virtio_ring.h>
-+#include <asm/test.h>
-+#include <dm/device-internal.h>
-+#include <dm/test.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+
-+/* Message types and clock types from the virtio specification */
-+#define REQ_READ		0x0001
-+#define REQ_CFG			0x1000
-+#define REQ_CLOCK_CAP		0x1001
-+
-+#define S_OK			0
-+#define S_EIO			4
-+
-+#define CLOCK_UTC		0
-+#define CLOCK_TAI		1
-+#define CLOCK_MONOTONIC		2
-+#define CLOCK_UTC_SMEARED	3
-+#define CLOCK_UTC_MAYBE_SMEARED	4
-+
-+/* Request: le16 msg_type, 6 reserved bytes, then le16 clock_id */
-+struct emul_req {
-+	__le16 msg_type;
-+	u8 reserved[6];
-+	__le16 clock_id;
-+};
-+
-+/* Response: u8 status, 7 reserved bytes, then the message payload */
-+struct emul_resp {
-+	u8 status;
-+	u8 reserved[7];
-+	union {
-+		__le16 num_clocks;
-+		u8 type;
-+		__le64 clock_reading;
-+	};
-+};
-+
-+/* 2023-11-14 22:13:20 UTC, plus some nanoseconds */
-+#define EMUL_TIME_S		1700000000ULL
-+#define EMUL_TIME_NS		(EMUL_TIME_S * 1000000000ULL + 123456789)
-+
-+#define EMUL_MAX_CLOCKS		4
-+
-+/**
-+ * struct virtio_rtc_emul - State of the emulated device
-+ *
-+ * @num_clocks: number of clocks the device reports
-+ * @types: type of each clock
-+ * @cap_status: status to return for VIRTIO_RTC_REQ_CLOCK_CAP
-+ * @no_reply: do not answer requests, but move time past the timeout
-+ * @cfg_count: number of VIRTIO_RTC_REQ_CFG requests seen
-+ * @cap_count: number of VIRTIO_RTC_REQ_CLOCK_CAP requests seen
-+ * @read_count: number of VIRTIO_RTC_REQ_READ requests seen
-+ * @read_clock: clock ID of the last VIRTIO_RTC_REQ_READ
-+ * @last_avail: next available ring entry to process
-+ */
-+struct virtio_rtc_emul {
-+	u16 num_clocks;
-+	u8 types[EMUL_MAX_CLOCKS];
-+	u8 cap_status;
-+	bool no_reply;
-+	int cfg_count;
-+	int cap_count;
-+	int read_count;
-+	u16 read_clock;
-+	u16 last_avail;
-+};
-+
-+static struct virtio_rtc_emul emul;
-+
-+static u32 emul_handle(const struct emul_req *req, struct emul_resp *resp)
-+{
-+	u16 clock_id = le16_to_cpu(req->clock_id);
-+
-+	memset(resp, '\0', sizeof(*resp));
-+	resp->status = S_OK;
-+
-+	switch (le16_to_cpu(req->msg_type)) {
-+	case REQ_CFG:
-+		emul.cfg_count++;
-+		resp->num_clocks = cpu_to_le16(emul.num_clocks);
-+		return 16;
-+	case REQ_CLOCK_CAP:
-+		emul.cap_count++;
-+		resp->status = emul.cap_status;
-+		if (clock_id >= emul.num_clocks)
-+			resp->status = S_EIO;
-+		else
-+			resp->type = emul.types[clock_id];
-+		return 16;
-+	case REQ_READ:
-+		emul.read_count++;
-+		emul.read_clock = clock_id;
-+		resp->clock_reading = cpu_to_le64(EMUL_TIME_NS);
-+		return 16;
-+	default:
-+		resp->status = S_EIO;
-+		return 8;
-+	}
-+}
-+
-+static int emul_notify(struct udevice *dev, struct virtqueue *vq)
-+{
-+	struct udevice *vdev = vq->vdev;
-+	struct vring *vr = &vq->vring;
-+
-+	if (emul.no_reply) {
-+		timer_test_add_offset(2000);
-+		return 0;
-+	}
-+
-+	while (emul.last_avail != virtio16_to_cpu(vdev, vr->avail->idx)) {
-+		u16 head = virtio16_to_cpu(vdev, vr->avail->ring[emul.last_avail %
-+								 vr->num]);
-+		struct vring_desc *out = &vr->desc[head];
-+		struct vring_desc *in = &vr->desc[virtio16_to_cpu(vdev,
-+								   out->next)];
-+		void *req = (void *)(uintptr_t)virtio64_to_cpu(vdev, out->addr);
-+		void *resp = (void *)(uintptr_t)virtio64_to_cpu(vdev, in->addr);
-+		u16 used = virtio16_to_cpu(vdev, vr->used->idx);
-+		u32 len;
-+
-+		len = emul_handle(req, resp);
-+		vr->used->ring[used % vr->num].id = cpu_to_virtio32(vdev, head);
-+		vr->used->ring[used % vr->num].len = cpu_to_virtio32(vdev, len);
-+		vr->used->idx = cpu_to_virtio16(vdev, used + 1);
-+		emul.last_avail++;
-+	}
-+
-+	return 0;
-+}
-+
-+/* Set up the emulated device and return the virtio RTC device */
-+static int setup(struct unit_test_state *uts, u16 num_clocks, const u8 *types,
-+		 struct udevice **devp)
-+{
-+	struct udevice *bus;
-+
-+	memset(&emul, '\0', sizeof(emul));
-+	emul.num_clocks = num_clocks;
-+	memcpy(emul.types, types, num_clocks);
-+
-+	ut_assertok(uclass_get_device_by_name(UCLASS_VIRTIO,
-+					      "sandbox-virtio-rtc", &bus));
-+	sandbox_virtio_set_notify(bus, emul_notify);
-+	ut_assertok(device_find_first_child(bus, devp));
-+	ut_asserteq_str(VIRTIO_RTC_DRV_NAME, (*devp)->driver->name);
-+	ut_assertok(device_probe(*devp));
-+
-+	return 0;
-+}
-+
-+/* Test reading the time from the only UTC clock */
-+static int dm_test_virtio_rtc_get(struct unit_test_state *uts)
-+{
-+	static const u8 types[] = { CLOCK_MONOTONIC, CLOCK_UTC, CLOCK_TAI };
-+	struct udevice *dev;
-+	struct rtc_time tm;
-+
-+	ut_assertok(setup(uts, ARRAY_SIZE(types), types, &dev));
-+
-+	/* probe() must not use the virtqueue */
-+	ut_asserteq(0, emul.cfg_count);
-+
-+	ut_assertok(dm_rtc_get(dev, &tm));
-+	ut_asserteq(1, emul.cfg_count);
-+	ut_asserteq(3, emul.cap_count);
-+	ut_asserteq(1, emul.read_count);
-+	ut_asserteq(1, emul.read_clock);
-+
-+	ut_asserteq(2023, tm.tm_year);
-+	ut_asserteq(11, tm.tm_mon);
-+	ut_asserteq(14, tm.tm_mday);
-+	ut_asserteq(22, tm.tm_hour);
-+	ut_asserteq(13, tm.tm_min);
-+	ut_asserteq(20, tm.tm_sec);
-+	ut_asserteq(2, tm.tm_wday);
-+
-+	/* The clock is looked up only once */
-+	ut_assertok(dm_rtc_get(dev, &tm));
-+	ut_asserteq(1, emul.cfg_count);
-+	ut_asserteq(3, emul.cap_count);
-+	ut_asserteq(2, emul.read_count);
-+
-+	/* The clocks are read-only */
-+	ut_asserteq(-ENOSYS, dm_rtc_set(dev, &tm));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_virtio_rtc_get, UTF_SCAN_FDT);
-+
-+/* Test that a clock which smears leap seconds is preferred */
-+static int dm_test_virtio_rtc_smeared(struct unit_test_state *uts)
-+{
-+	static const u8 types[] = { CLOCK_UTC, CLOCK_UTC_MAYBE_SMEARED,
-+				    CLOCK_UTC_SMEARED, CLOCK_TAI };
-+	struct udevice *dev;
-+	struct rtc_time tm;
-+
-+	ut_assertok(setup(uts, ARRAY_SIZE(types), types, &dev));
-+
-+	/* The search stops at the smeared clock */
-+	ut_assertok(dm_rtc_get(dev, &tm));
-+	ut_asserteq(3, emul.cap_count);
-+	ut_asserteq(2, emul.read_clock);
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_virtio_rtc_smeared, UTF_SCAN_FDT);
-+
-+/* Test that the first UTC clock is used if none smears leap seconds */
-+static int dm_test_virtio_rtc_fallback(struct unit_test_state *uts)
-+{
-+	static const u8 types[] = { CLOCK_TAI, CLOCK_UTC_MAYBE_SMEARED,
-+				    CLOCK_UTC };
-+	struct udevice *dev;
-+	struct rtc_time tm;
-+
-+	ut_assertok(setup(uts, ARRAY_SIZE(types), types, &dev));
-+
-+	ut_assertok(dm_rtc_get(dev, &tm));
-+	ut_asserteq(3, emul.cap_count);
-+	ut_asserteq(1, emul.read_clock);
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_virtio_rtc_fallback, UTF_SCAN_FDT);
-+
-+/* Test that a device without a UTC clock is only queried once */
-+static int dm_test_virtio_rtc_no_utc(struct unit_test_state *uts)
-+{
-+	static const u8 types[] = { CLOCK_TAI, CLOCK_MONOTONIC };
-+	struct udevice *dev;
-+	struct rtc_time tm;
-+
-+	ut_assertok(setup(uts, ARRAY_SIZE(types), types, &dev));
-+
-+	ut_asserteq(-ENODEV, dm_rtc_get(dev, &tm));
-+	ut_asserteq(1, emul.cfg_count);
-+	ut_asserteq(2, emul.cap_count);
-+
-+	ut_asserteq(-ENODEV, dm_rtc_get(dev, &tm));
-+	ut_asserteq(1, emul.cfg_count);
-+	ut_asserteq(2, emul.cap_count);
-+	ut_asserteq(0, emul.read_count);
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_virtio_rtc_no_utc, UTF_SCAN_FDT);
-+
-+/* Test that a failed request stops the search and is not remembered */
-+static int dm_test_virtio_rtc_error(struct unit_test_state *uts)
-+{
-+	static const u8 types[] = { CLOCK_TAI, CLOCK_UTC };
-+	struct udevice *dev;
-+	struct rtc_time tm;
-+
-+	ut_assertok(setup(uts, ARRAY_SIZE(types), types, &dev));
-+
-+	emul.cap_status = S_EIO;
-+	ut_asserteq(-EIO, dm_rtc_get(dev, &tm));
-+	ut_asserteq(1, emul.cap_count);
-+
-+	/* The next read looks for the clock again */
-+	emul.cap_status = S_OK;
-+	ut_assertok(dm_rtc_get(dev, &tm));
-+	ut_asserteq(2, emul.cfg_count);
-+	ut_asserteq(3, emul.cap_count);
-+	ut_asserteq(1, emul.read_count);
-+	ut_asserteq(1, emul.read_clock);
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_virtio_rtc_error, UTF_SCAN_FDT);
-+
-+/* Test that the driver gives up if the device does not answer */
-+static int dm_test_virtio_rtc_timeout(struct unit_test_state *uts)
-+{
-+	static const u8 types[] = { CLOCK_UTC };
-+	struct udevice *dev;
-+	struct rtc_time tm;
-+
-+	ut_assertok(setup(uts, ARRAY_SIZE(types), types, &dev));
-+
-+	emul.no_reply = true;
-+	ut_asserteq(-ETIMEDOUT, dm_rtc_get(dev, &tm));
-+	ut_asserteq(0, emul.cfg_count);
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_virtio_rtc_timeout, UTF_SCAN_FDT);
--- 
-2.43.0
+ 	sandbox_i2c_rtc_set_offset(emul2, false, offset + 1);
+ 	memset(&cmp, '\0', sizeof(cmp));
+ 	ut_assertok(dm_rtc_get(dev2, &cmp));
+
+---
+base-commit: e36b675ebc4c41f1f4187c46d363d581c371d538
+change-id: 20261021-rtc_dual-daef9ba7765f
+
+Best regards,
+--  
+Alexey Charkov <alchark@flipper.net>
 
