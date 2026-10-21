@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4274606A31A
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 02:29:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1D50606A319
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 02:30:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Mi+yW935;
-	dkim=pass (2048-bit key, unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256 header.s=selector2 header.b=BSpRtfb5
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=VR7S7B/s;
+	dkim=pass (2048-bit key, unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256 header.s=selector2 header.b=vVev6FCY
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B5F396079A;
-	Wed, 21 Oct 2026 02:29:25 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 633A640758;
+	Wed, 21 Oct 2026 02:30:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NDwGS22J43Ii; Wed, 21 Oct 2026 02:29:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DCE9B60754
-Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1792549765;
-	b=pH007SWAdIsyqfwcu4J0HkPSNSag7aXUt8GmxhzLnDzaSgyV1nQ13BEa1w4AcCFeWXY7
-	 I3hD9NhBSFz4xYI12ixrB410suw33SEFb61XgqCI1cTup7LVl1sCjYPay3qQH/pQx+ALC
-	 VKFoqiQW6+V4P58Ulruf+x8gqF2pLcksA9VEK0DHpmJ5rhRwmc0EXdsIgWB2RVD/DpoHk
-	 W8lowpOHoTu+h5vGjDKvrF8ae/KosNViqpkR1rvLw2TE7x2x0Gbx2cGFX9iHNbhGoOfoZ
-	 v+gpCImlAL6hb5ifvGqms6h4owNhlR/MQZuOBd5p17LW2tzR3DJi4f3C6vF2k2MAndQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bQs5CiSw505P; Wed, 21 Oct 2026 02:30:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 45A76405B6
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1792549831;
+	b=UtdP0djo0Do+st55Ous1+Id47GzK5Da3i44pSSibHBUvIMkGWtZdiXr9txmdyH9vf43p
+	 FZMI3CNWJZf/eHFHcE8rVmx4S8NMXivbF5Xuv+6y5tH8DXRk1ZpI0EjF+B7oEhZAhN60U
+	 rrVArhkBcTNHZCphDzUTAwHvbivlkO73IR184NXPXdcm1YKmdolR7iORdihPMTbqaN+Dl
+	 uesnbfhf6x4UfR+uf8uMKbpv5v9wEom42/j55pyuNv2mmXgml6uu5VQCdNzBOHN3G4bsF
+	 wYot21q8scQrvYEWzYQLxr+GYcK+UJFf+gv3sFofUERd3KeW/s+1vyaSADHzK78tBdQ==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792549765;
+	c=relaxed/relaxed; t=1792549831;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:X-Comment:Received:Received:
@@ -47,52 +47,55 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Virus-Status:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=Uym9YZUgiMne6WJTxia1l3giDCfVY6BktMxVTp6adW8=;
-	b=qCUXQO6aCgrXxbo4szpOuOfesVqWPhmVSpFZm03D7eHK4LWoW/z2U/FLx3A/HsRNacjc
-	 Nj5RgA04cJZ5LsydirgxK40WluGwF/8zwOUDTJPHZQC9CcWIQx9//Kh6Okx056u3CvJkp
-	 xp1dbnO6rAT/ZPdDL3WlNTNjMc5NGZUJ2O2dLPG9Qh9JBkNU5/01HXXgpsmx4j9w70DpG
-	 XokzJ9SIl14YMLluYLbbExX1Z/3hyEhcWI37nfrOu2OUFFDnGnwAZ+OJl6iIYpbYk0vWq
-	 iWE8qGwdzM5p8T4oWK7hesg4nsjASjUhFM+qCtC2ywkeZLvSMl0d1D4k/8G3pLnGcOA==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
+	bh=KNljZ9EcyEIQosbqazwL99rpYfafRpmzShISq8+wQhU=;
+	b=Qt12lhUdUUKeTpUR91+NQE+zOpar+n8VJfhz/wLcVHzgHBXLwncy8iRw0TtMhVcDcA38
+	 +nskuqtEC+y5kh+pg6nIyt2aTHklAfRnAykQ/xoSoJFbRfroMlDQdoASzmEePaDfiTjvA
+	 6SMatHl9c38d4A2B06ue5P2doMA1IurNyFXwXQYnLqfR3anCdSE1evf7Mp7QIjDWOvj3B
+	 PertAyuqz+avbFz6vNo2KZpFS3yFKt9J8jwo6HTlPzbRHg7qfgnDs5MUBJFaNYd2dgC4T
+	 CezOOxuNwiyaVvFZIwutlAwTS1ihEQaXfgAGUBARbFpXh6FGbFwiJuY+pc9WerezUBw==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	dmarc=pass header.from=altera.com;
+	spf=fail smtp.mailfrom=altera.com;
+	dkim=pass header.d=altera.com header.i=@altera.com header.a=rsa-sha256 header.s=selector2 header.b=vVev6FCY;
 	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792549765;
-	bh=Uym9YZUgiMne6WJTxia1l3giDCfVY6BktMxVTp6adW8=;
+	d=lists.u-boot-project.org; s=default; t=1792549831;
+	bh=KNljZ9EcyEIQosbqazwL99rpYfafRpmzShISq8+wQhU=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Mi+yW935Fk+muFuvNnBKYUgtyV2UW6KlapRa8qe0poCNyN8z0IugUjncMskgiEkeK
-	 eET8BhAzznmEB1+mItoctwF5Ybn+++xiYM5zqWQ9yXywJzLqXjSnTDrvHSF8558iKs
-	 Qzp5NVWiK0NkUUKPbGPGw27jN8tTXUjrUrrgDnTSOhOCC7xurX2eyfddpB9SL8XE4X
-	 NyPNEDMvQ+nMYy+fcbmoRKfkXtFK+6AZ1HvBVUP/C4RnH7RPAXt2APxVSb9Bp97DtX
-	 A72ysgu86AIb7Gxf8mB47dgevvOPCKE+I9SpLvKaqm9/EzS4uQ6A/P4U2HvNbbkSkX
-	 TLovQIakHywSA==
+	b=VR7S7B/sMUTCZh14pavmY0+I88mgqmWEZmv+EZm1OZ+5MeeR13mtlAAyAPy6A9kz2
+	 C4/jVV/RGa2t05dV+1VGO5m+ck/uJmnQUgJRnsznLxO95zwK0q1kVU4E2Gp1ffcj7n
+	 3I33Cst19/gwK+8JbSRVSp1H+Tg+bXN69ZFI1WAGD2rpHbNvHJInpFwDB1GFnaVk1g
+	 zjD0Vsj1+PAvbpowkchh81Ihf/6khF/ZdeJvwNqR3rlsPGZv1NZLwh0ONq5czIU+Ht
+	 ny18BpNbA+IwkDapWYazL6R2YC9nEEIgVAiEn7H4pZugtFveKyGEwMQYAGv5gPjs6r
+	 isLPmh1ozxegg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DCE9B60754;
-	Wed, 21 Oct 2026 02:29:24 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id DD9A2995
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:29:22 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 45A76405B6;
+	Wed, 21 Oct 2026 02:30:31 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 22AF21AB
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:30:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CF23A40112
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:29:22 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 201F8405C3
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:30:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WVSNk8R87wF7 for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 02:29:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org F3EEF40060
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xOFyt_J7AtNE for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 02:30:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 43F154059B
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip=85.214.62.61
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792549762;
- b=pWt/VW9/VHKdgOtO7WYGmmf3tL4/49SrPNZWSujLQkuNy90oC3gE2qUNN5ng1UC4YSu/
- rxJmYiFayagXEHYoM+yWD5KBsi6WBXtcAh2+ZnHFHFtOUOpChIKQqyDQYWJclea4GkMXU
- O0B+ZGdVLLOnQ7UQZCEwNmi5GBK3GYZBztuzemg93qH93Q+TG+eBPq/pW0Gw5zX0v61z0
- jmV8bWqS8IaHTii9PI93/H/5S9Rxf9FYOTPSb0ya+AC/EWCAYS0Cj8pe+ukzhMpFiBtOg
- mlcmsG56FaoI1pYCyRzuTwawJCfD498Hehep8IhHmvFre/Pg/T0LDBKt3FKIFbSroCw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792549828;
+ b=GWmk5MoCXUx3Txe9ZP3Zq+hFpoLHoUTG4hfRt7kiuozlWChWKIEjdd5UKdy7SCm6IWKz
+ cSuCK/9F/kKArUQpCV4V2wcENofW3Q+eTDU17ySbPLbpcmXJm/Z0KYx0+f4eEzCYxQS36
+ Kz8lrZPBhkF0lpS08MpVvfHZh4vpBHHE9omMBVztaGKUC6EDsSPP6P3I7zak9Qw/x/r5L
+ Vto+943yev6IykQZJeUNEl8PAX3A0/0b9TYNDMDBhgHcnF5pMrAfPYaOgjrXRWvSjfWZ3
+ 1DkciCXtb8vUQ48Cc4nXnQpJ8Bc2jft3mdFH3GTEZRShIT88PnkpbO0MB4ULvfGurEQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792549762;
+ c=relaxed/relaxed; t=1792549828;
  h=X-Comment:Received:X-Spam-Checker-Version:X-Spam-Level:X-Spam-Status:
  Received:DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:
  Subject:To:Cc:References:Content-Language:From:In-Reply-To:
@@ -112,74 +115,74 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-UserPrincipalName:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-Virus-Scanned:
  X-Virus-Status;
- bh=Uym9YZUgiMne6WJTxia1l3giDCfVY6BktMxVTp6adW8=;
- b=mFsBFVcLcoXjV3bWKM5k303ZAaNFKcDA9OaPmWpHVmP2N9PjXEFdJb230baZw96asOwk
- nckMRwldQDdX7s/34+viwUZlbkX5dlez7agaKxAZkb+FUn0YjOi2CmHYrJ23b68kdA0QI
- TejE5ii1sJGrVJr9D+ow+ZdJ7/7mCM+cewbxGrbKzHW0tAZ7g7RTayTIxrV/L4xzJS69d
- ittvETidp8JBES+5r1xOrTEXDoUy4+9CPcihxGUoOhgmalusqLQAgF+w7Jrb7Fk0eBsA8
- eUfl/YEgWZ6aoh6H1b/6o0D4eOPbA2eaeMybvXAIa/JJLLXXQtpi7Ao6nDiT7gqzQwA==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
+ bh=KNljZ9EcyEIQosbqazwL99rpYfafRpmzShISq8+wQhU=;
+ b=JiFYSvD3bgo82XqEnrLdUPP7GlTAPPubhVMitZHVh1qr1E8lZyS7BGqF1lwfB3o/QU4P
+ HvY/UPYfkKOCVSs9YZVNeAvwBfLfH0d1Qfta/pvN8GV3SjiYC9ImPPfsAraaf0aFh4D5b
+ lL7Ezp4CM4KMUrD/B7ZmoreskF8S2MjGybdiqm54Jdoncn1yORMhURuzod6PKbfaZLZ1p
+ 7uVBUdCvD5A/2Xh1icnfy7gMj65kDO46mLxWfr/qrZD31JR2BEZjS1IxJmHl0K6S2P6Hq
+ vUL4Ou3FFrwJ5k4qKvlJY+FobTTWdcF2WpII3RKcmttjSOvufLv+a4fSFa643B13PTA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
  dmarc=pass header.from=altera.com;
  spf=fail smtp.mailfrom=altera.com;
  dkim=pass header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=BSpRtfb5; 
+ header.s=selector2 header.b=vVev6FCY; 
  arc=pass header.oldest-pass=0 smtp.remote-ip=85.214.62.61
 X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
  helo=phobos.denx.de; envelope-from=tien.fong.chee@altera.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: smtp2.osuosl.org; spf=fail smtp.mailfrom=altera.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; spf=fail smtp.mailfrom=altera.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=BSpRtfb5
+ header.s=selector2 header.b=vVev6FCY
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp2.osuosl.org (Postfix) with ESMTPS id F3EEF40060
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:29:20 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 43F154059B
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 02:30:26 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3EB5844F6; Wed, 21 Oct 2026 04:29:18 +0200 (CEST)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
+ id 94668844F6; Wed, 21 Oct 2026 04:30:24 +0200 (CEST)
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C33058056B
- for <u-boot@lists.denx.de>; Wed, 21 Oct 2026 04:29:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 594B18056B
+ for <u-boot@lists.denx.de>; Wed, 21 Oct 2026 04:30:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tien.fong.chee@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gVb6UirhafG4mUhTb5/YC3Oihcki6Ms6GT2+yQb0UcXGj4O3LHzOBnsxqy81nOwZyWy4kSdf+dWjv7jSIGtfCabBbcpV2Vjregt4Xm5hOmApOBmlGCKggKYzKHD7kWUI7nuor5YkpNYQudXsqUi/IbevIXQLbWNpFQ3rzItrrxbM3J/KHjwsaTsPn22b74nnJ8ImYzIYz76n9cRI5QEus4IOkpXU1zsNzGnL7hJJq0g8/38S3GBm6m/0Gr/2dYPyjMulYKQTSLawIM3rAVG58di+OKIoRf4he7uxcQtt/y9myrXiD1HKbP77W4Hu+mvAb9TOajYZqJp3YdrFp1EPtA==
+ b=H6lmYKUW0k7gINyiNJ3LOMwzzxhLgfxlQ4bT3lcIUzLti6fKImCszMeHuxeINyxzgfGOTwHS8XXoFROQvbRU4ekTtXfj3rcQxHSSmLfV3I6hYxenufxsnOFBt3SFfiZ8BrrGRNyDXdaC7HA+MShYxO05bsGEjaESa/jmkEixS9nNpATcqbx8fs2m4uuCK00sLPmyoMd0XIphoo3KYVGoHcmzDuF2A2fLVwuRcdPo/wRRbJP45AYTtP9euXH9mVnCZAQc4/1wOWOqJlPQ2TlrKySPTnC6HpNTj+AWl4YEFxRj06dcPaoup6Twe5dFGi8jAtl1PSJJnndnGHtGBsCVAw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Uym9YZUgiMne6WJTxia1l3giDCfVY6BktMxVTp6adW8=;
- b=TIaFN4nJyDjjiNrsUdw27GJZbMtzw4Tp2AebajJhdCxn1w0o7hXXy2rcYv+BOHsHxEPRatE11uwPeCzPrpGPkvL7X5Qxjbvyrpczl5yNlFL73Gs3/L+f1M/+rJ+ye8FzPw+LOATjO2s3/rIzRikuna6QZFeFPVeacGP91PiVRfjKvpzcNYrjw6fRy5iAdUzy1wL3Sv4ntuSLj7OgBWGaonnd2RWlWwIC2F1FRPEDsRswOnJNMsIibfVbmIPap4rjwZu3xsFrA1pO781QcRxVT1J9yVKjpSk3epChF3LuWkYb0b3RFZfM9A1Y7j2LcGx8uagpC3Cf+PaKZKbX90/MVg==
+ bh=KNljZ9EcyEIQosbqazwL99rpYfafRpmzShISq8+wQhU=;
+ b=LnUSbLyP+/GGZjpSiFW1pmm+C9zy223yEIi2/mAG6ro5EU9sMsyaNtSVHV7B+KrdOBIL/FHA+nhnl21zIbXWttfUzDs60LlqkO3YhsMjhOxzDyu6UiFwalU9fr4d3xui0K3g6xkqCDsWmEw9S09awiKiDjJrB4dAzoAn3B8ePwu1hjImAjqZ1X5X03gQH9EM5UFTHO+2eiRxtHeCv+TgIiDbdl/PcMGQgyLaL2bwccB/xWlEQUQn7G8OzR+zyi4qM7GIwDlwXwO9rIS5mNuVzZzgVBooZ5p1IGBVIyFpbxeAYmNnDBB+8xaDfsOFpo+CiOpUedX0qxkUBUs2pQ6qjw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Uym9YZUgiMne6WJTxia1l3giDCfVY6BktMxVTp6adW8=;
- b=BSpRtfb5na+bpCTsbYhXd3sjnBj+4COueHDBdyxZpCB8qEnMX3O995zpnLmTd72gIrr4XdTQfRr5EnKrGBFadurXdGjJYnjIXX9fzOEOHxZjFiBG0WQSZFqE2aj0wKWAgcVsrnAAg9ZSNvSbjWk8Rb79lAfQ5M2TijUTgZZohVbiOL3h4x+2ote+iWYaORzS7QK26YIaWkydIzGqJPPw4qjZmm0fJvjwpIlPljmXq7vviVeFvppl7qQ6ow7A8AezoPBC+XbsAAdH6O6UQwaF0x7b6iuACjsw499zht44vcHYLK0h5gHHOIJ4NBtIb54IWwlAl360mQKIlb8K7QuOCA==
+ bh=KNljZ9EcyEIQosbqazwL99rpYfafRpmzShISq8+wQhU=;
+ b=vVev6FCYHsZDABRlaYmb571HLsqzo2t29ankM2yDvNkjvjvDFYqQAScfKtTEBsIV7zejdhioQ0SV2O7vT6r/WcMtqY/Cx39z8giokKq8jIybyR8NPaDHiFpwp+qzwiVloK6n6CnFIDLh9GBKFuFf/Kc93EYPtBxFNJy0uFakAq+HDfQ55Ui01Yrv1OxHVrSvt3UGiLxo2KRN/LwLdDWlWsxU5OxzU7S4z8p0YOpGp9hZyCK8CKvxVFceSgmdIBGNgbbjzlRdGzPY9h01oXFDkeF8Y596jV+TLFDgbP5Aa9FmIIIPnIBG+A1ztbdoH4cTsId1nuJehLb0tYTmK9+tNg==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from CHBPR03MB959535.namprd03.prod.outlook.com
  (2603:10b6:610:40d::14) by IA5PR03MB989654.namprd03.prod.outlook.com
  (2603:10b6:208:608::18) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.15; Wed, 21 Oct
- 2026 02:29:08 +0000
+ 2026 02:30:15 +0000
 Received: from CHBPR03MB959535.namprd03.prod.outlook.com
  ([fe80::26cf:5066:9d0f:c79d]) by CHBPR03MB959535.namprd03.prod.outlook.com
  ([fe80::26cf:5066:9d0f:c79d%4]) with mapi id 15.21.0546.012; Wed, 21 Oct 2026
- 02:29:07 +0000
-Message-ID: <cfc6573d-b591-4683-8655-8c1e206951ab@altera.com>
-Date: Wed, 21 Oct 2026 10:29:01 +0800
+ 02:30:15 +0000
+Message-ID: <e5b56bd2-6018-4bac-ad5f-db95fac6471f@altera.com>
+Date: Wed, 21 Oct 2026 10:30:08 +0800
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 13/15] ddr: altera: n5x: drop always-false unsigned
- less-than-zero checks
+Subject: Re: [PATCH v4 14/15] ddr: altera: n5x: reconfigure DDR when mem-clk
+ handoff changes
 To: Chen Huei Lok <chen.huei.lok@altera.com>, u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
@@ -187,80 +190,80 @@ Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Boon Khai Ng <boon.khai.ng@altera.com>,
  Kok Kiang Hea <kok.kiang.hea@altera.com>
 References: <20261016044047.21496-1-chen.huei.lok@altera.com>
- <20261016044047.21496-14-chen.huei.lok@altera.com>
+ <20261016044047.21496-15-chen.huei.lok@altera.com>
 Content-Language: en-US
 From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
-In-Reply-To: <20261016044047.21496-14-chen.huei.lok@altera.com>
+In-Reply-To: <20261016044047.21496-15-chen.huei.lok@altera.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SG2PR04CA0213.apcprd04.prod.outlook.com
- (2603:1096:4:187::11) To CHBPR03MB959535.namprd03.prod.outlook.com
+X-ClientProxiedBy: SI2PR01CA0054.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:193::22) To CHBPR03MB959535.namprd03.prod.outlook.com
  (2603:10b6:610:40d::14)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: CHBPR03MB959535:EE_|IA5PR03MB989654:EE_
-X-MS-Office365-Filtering-Correlation-Id: df56e825-3b47-4c49-9a3a-08df2f1b1554
+X-MS-Office365-Filtering-Correlation-Id: 45687c0d-aced-4fa2-283d-08df2f1b3d42
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|1800799024|23010399003|56012099006|4143699003|11063799006|261009223027099003|10067099003|18002099003|22082099003|55112099003|13003099007;
-X-Microsoft-Antispam-Message-Info: icm6nqtdsFpsNgBYfXmF50u4ccAYD1T/HRaF3MXqqe9i3bbbNbiWmleH+hs7yYtXtGhv+u/hQClJkaHPX00zV9ox/jCzkuMG5k5Ydc/JhrDj8LR4vcOYf7x36e21DIFOtEYXGHQfW2GALsYMQYDV5uT8ipWkk+/gSzOldpd4E658j0FBqsxee5SEL/d2pWBL2T7JovNMw7FrlcvUJLvbsfYSLMiS4iuZ5FpyKGIyXCunI1IitrUciOWGZ2nvw0OTtjz1P6GSaiNrHo/6YrfJhaMRxB5hKu+P7ysT5MIFEFDJwbqZo91ezjPcZ/M1P6s9XxIUBxT79SYkSUSjLQnLc4c3PyVbrBh3ZQG0ar3HBTmEpbR4q4qExeI40aFA2s0IVHUonGI5Ls75hK4ez5/9uB2DovLelPpusIJYSRxrKzIZxS9D+RLk0E+q6IsQmd25VH59aW2bEYcty6RQOb46tdL7i7WVIomD+WGK1IgBBMVon64keVcG7VBpnsYpXynIOZ+4/3TjHQ64RJYN/21Rjo3yLO0Oq19xeDnTnxpHLr2d50gmCAiFUgVmHJUF+EckcxWp0fMbqCA0bYgvfiabIYMOO006+4POaE1P8ppcwTM=
+ ARA:13230040|376014|366016|1800799024|23010399003|56012099006|4143699003|11063799006|261009223027099003|10067099003|18002099003|22082099003|55112099003|6133799003;
+X-Microsoft-Antispam-Message-Info: hYbqCL9X6Z+vtjrxgRjufYuyT0mmPa5KOtsvKFQSuOIVQOB+sH+JIM/WOuwOz/OC0DPy2jkRjv7Y1aJF/8n+RU5AHBUE3p05howyURaOvPmlvie9kDl8nSL254QG2QCE8GFrc+M5bVpb4JUcNwmvd8xBG2XIASXPS10d4PbLuf9nhdQjD8JbtBiX45j6EtdXwI0L/rqQOCmFRdbOTj2j23h3qk2+vF5lugPgMf5Kf2smhnH2Ba4F9UsX68m9G4NCi9tV57UnaiC1juKBJn3MUMJC4WRyjTdPOaZtheXWkQviLRp6JvstsoQfjeKfhJy6oOmdaFW2LsFj75yF0mWe6ShzCjtVnydopBvfCn0AyiugxxYX9QhSaH6fp9xXEK41J9C3wL5af8EzrR4TRxiQApDVbaLTFQOE7YmB33WUPtGvx5Recul1f7PAOTETOpj9uEhlTqCSfJ4jl+Ki/YgXnO2gqrSOoJ2ihryiCGk5jHpP0fgooOZhV0u/F2bN2UjQMdndEjdAFFPHAaZRSU7TcctVEM+cK6banka/RIOxGhw7ahh4mKL2JJ65W3wQU8tqdl7PF9FsW/w3ZO3KiCnw2XepxY3guBFO8kT4owv9kE5hUqWpC++Ron5ThnwXQ+ECBN+poLD3VIfLGRkdZHa0NLEqTjttHWjGj8H0TqaSgSA=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CHBPR03MB959535.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(56012099006)(4143699003)(11063799006)(261009223027099003)(10067099003)(18002099003)(22082099003)(55112099003)(13003099007);
+ SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(56012099006)(4143699003)(11063799006)(261009223027099003)(10067099003)(18002099003)(22082099003)(55112099003)(6133799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MkNSNHo5WmIvNTVtenVhWHg5WjU4VUE0U0hzeStnZFVWWldhakpwVTN4cG42?=
- =?utf-8?B?bWh4dURqZmFScTE1TnpHSWxybGF4eGtDZFBPQTUvQzJwWUgzd0syUlhrc0VP?=
- =?utf-8?B?UlhvT1V4NHlWRXg1VWxUMEtTY3NRZ2lhYnJTbHlsc3p5NG12RldmbjBQRlFm?=
- =?utf-8?B?akd4bjBSKzZFMk1FbGoyV3NSNzNDTEpmaHFPbzBFRWJLZzcraXM5Yk96d29R?=
- =?utf-8?B?UjZIS2pNMFBadWh4Qmd5dStUWTFudlBKck4xTDYvaTFsLzZuZzdmUUptK1lk?=
- =?utf-8?B?Rk5WOE9IU2ltWmh1cEU0Z3dDcFY5UWVsdHl4c081MFA5TFk1dlU4UjR2NEVQ?=
- =?utf-8?B?a2YxWkVjNWtmMllETXU4S0tIRzZxb2lTVzA0QStUZlR4dFIvR3ArblZqMU5v?=
- =?utf-8?B?eGgra2g0SWRsOUdJV0ZTMGkyNFhBVGJVWDBQVGxOQnFmc0xSbkcvQlQwWjk2?=
- =?utf-8?B?SVpoaVQ0SnNLYWhhSGY4UHRuOXJQK2VvaDJrM21zVkJWVS85ZThmS2pTdGJO?=
- =?utf-8?B?SVdNTUlCWWRKSERzWDB6cFg0YktkWGVoZ3JsaEN5QTRvMVRJLy9XWXVDWE5T?=
- =?utf-8?B?NjJMQlBDRyszbjhuQ21INUNFb3h5aUJyaHNaVkl4Y0NTai95V1d6ZXdVWGlQ?=
- =?utf-8?B?Sk5hVVNNbG1YOW8yRWtjVThKdXhxb2pDWEU5aW5TZ2lKMlVMT3FkVVE4Mm1P?=
- =?utf-8?B?TjhuZkxMclFydExjM1M3TGgyQjNKdnViditvMlFDdnhqclZnM1J4RXk0cC9Q?=
- =?utf-8?B?aHBIbVUybHZPYXhjUENmRHVKZ2Y1bkI2eGM5QkF1d0xtL3lkYlc5SlBLNC94?=
- =?utf-8?B?QXhkR2h4bkkvWG9NVnl4WkVrOXFnbEJuL1ppeWJvQXlOa1ozOWl4cXdUcXps?=
- =?utf-8?B?WVROVkdxMU4wcU1OVTV4KysyUTRlaE9FejIrU3hJODc2WmN0ZkVvaVVMQ1d3?=
- =?utf-8?B?Sms4OGhzUjNkZzZVZFZ1eTJVcjhnSUh6dkMrZk9xVGdzQmxJcmhkUm0wMXpI?=
- =?utf-8?B?UVVLZkw3bTd2b0lDZTNpOGxLdUhKd3E5Z0xycjltVWVqNENINnNzYVZ1bUVJ?=
- =?utf-8?B?YnhTWTA4L0lsUmcyc3E1WE9ERU94WWFtYS9HMTZ6bmtuQ3BRazZzNFczSVZI?=
- =?utf-8?B?bEhVRlJhVkpMQ09zM0lidm1tV25ubWJyejN2LzYzdVF4T0JjeXd3L1pic1FZ?=
- =?utf-8?B?UWJaYnpRa0t6WHZnM1BWdGQ4UkN5UmN3bDhqSTRzenhSb2wzUFVvSi94S2Ry?=
- =?utf-8?B?R0hPVGttRS9RQTV0TEVhNzRDUTlTcG5lT0NMbTBlME5zdnY4NVYyUEN6NzEx?=
- =?utf-8?B?UW9jVnRGTlR2WHJtNjJsb2I4SmVGbGhuRzlaUzhtYjcrVm9JVlVRTFg3NVRK?=
- =?utf-8?B?M2RrSU1rTk8rSjJqeEdhVlZrYWM2YWdLNFRDb0xoRFFGNnpGc0xtUTM0amFK?=
- =?utf-8?B?aGl2RGJpOTFSTEE0Um12WUJBOFVIREc1c3JUdmRkQjM4OTNWYml4S3pONkN4?=
- =?utf-8?B?TTlwOGE2cGJlci8wdVNlL2JkUm5KZTZQZVExVFhpVnNZVlpCcGIrWHNsQVlq?=
- =?utf-8?B?TEJEc09CK1RvWlZsa2QvMGYwaHFXVlFCWmtlSE1vL2lLVWlvaVBPUEtzMng4?=
- =?utf-8?B?TjhQU1FSMStYajRvbXNhbGxIb3pKWjR0TVJGVEhXcG1vMEhqaDBSTTNIZlor?=
- =?utf-8?B?NUl0WTJla3VFaTliU2RTd05NaGF3L0xsbFRMTnZvTXd5QURoU3lrNWVjemlS?=
- =?utf-8?B?NWk1Z29nNjVERVI1THN3elFNZXpZTTdUVG5sVzNpQXBBY1ZlVCtKSG9OaHJt?=
- =?utf-8?B?VENwNUVvV1doL084eHRTRTZQZDdxYzREMnBMQkp4dCtpVmRVYmJXcjBpSlYr?=
- =?utf-8?B?ZTB2ajlab0hvMGxTYk52YUZMa3I0WUxwVzBBalhJMiswcFB3SGpLd3Z1azJO?=
- =?utf-8?B?djR3THJnSE1tZHhNWjBSSzZXZVdmakdHcUJlSU9iK0lYTDkwUG5wYXB3K3pt?=
- =?utf-8?B?UHZrWTlDVHlhRzBCMSszdUk0RDROQ2JDVnp4UjY4TUlqbnRiM0dZWTlyOHNW?=
- =?utf-8?B?L3VlQVJnN2lPQ2ovTktLZHo0d0h2VlZIeWJMdVNkOXNJRFhHTCs5SEdpM1Rr?=
- =?utf-8?B?elpyYW9ZM1JOMlJnVUViM21hUXJOQlJHb3B6aG5CZ0dUZWZMOUNXZURjaGhj?=
- =?utf-8?B?VCtGYysxWFlhV3RFK054eVFVYTNzVmhqTFBVbXk5Y3R0N3VxWkxQL1ZBelA4?=
- =?utf-8?B?bjJqUm9lZTd2c1phYzBqTllRdnZ4d1hjang1YWlpamU1cHgyZGZJQ01HV0d6?=
- =?utf-8?B?aHYxaXZCOVNUUUprdnBXemJFVDV2a29GaUtTelAvUG42VXNCbTFFa1dtaEVF?=
- =?utf-8?Q?ogufQcbVsxoCBw3Y=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UFgvNW41Y3RBWjY0SUhKbHFjRWhabkRNeXZ6R3BEeVVnMU9KUE5IRE1yQkNQ?=
+ =?utf-8?B?b2FBNjU0RnQzS1A4MzFmY2lvOXRZTXBQa1k1Z3BlMnFtRjhvRks5NEZLWU1j?=
+ =?utf-8?B?d29EQUMxTGF4NWdUQWM5MVB2Zis2aXdjTm9vQy9aL2huM05WN3YzRFJVdjZu?=
+ =?utf-8?B?aTViZEM0SnFjYTBNRlFjd1lKeEtQb3N1YTR0Wk5oelM1YnZjcjlSZUZWZVhw?=
+ =?utf-8?B?eW9xQU9IK1REeXJsWng3L1NKeEZyYllpd2NDYzJnUzg5RnREVitRMCsyZm8v?=
+ =?utf-8?B?MUlOTXMzMXUveG5pNXpUdVBuWkNDSklkNVdxNGs5TU9LVDhVODhqWWdCaEg4?=
+ =?utf-8?B?bDlYWFp6bElYUXZwTXdCMHhwbVF3K2FvdFRuMlE5OE4wS1pHVVpoK1A5Ykhh?=
+ =?utf-8?B?Um5yNG1ndWoya25CZC8xOFl2Zm5FYlY4SGdWVkZTSmZpaXRwRE1wcEloaHRK?=
+ =?utf-8?B?Q1VRTTljMkdxb2lSVklVZmtESHFmbkFpd3BWdnRlNFhkZjZRK2tlWHl2d2NI?=
+ =?utf-8?B?dVNKZWppbmNCUHRHd085UzZXZHZGSHBxc3kwS1dtRG55TTIrbDFqZGdzUnQw?=
+ =?utf-8?B?MlJ3S2VEakV6SElEZzlMRDJ0SWY4VGY0YnlZSzdNdmdsOCt6OHg2dng0ZnFO?=
+ =?utf-8?B?Um53aWIzVkY1WWpEelh3V3hxSnRSWGdhWDNjcEFiYUZVVHF0Q25JSnZHUG1W?=
+ =?utf-8?B?UWRRcVk3YThVZUZLWHY3VUNiUHl6aXNtMmIxcjRLNlBUeis1cWVjeENKZGwv?=
+ =?utf-8?B?SjZZM094TlNqeWgxbGptUENCY2s1YUUzUUw3TGFTcmM2akxrSXlvZmcvcUMv?=
+ =?utf-8?B?MkIvbmFjazdURW9hODhRbnA0R2lrSHM1MDBocWpKQkpKM2N6cTR6bDBveFB0?=
+ =?utf-8?B?ODFibFpncnBTbXNucnY4U0RWZGEyUFhhSXRpeWVVSFZFUDBoNlUxVXJuTnpC?=
+ =?utf-8?B?L1E0V05FV1NPbHBCQnJHT1dLODRwTEIyRkFwRmdlRGtFbW54NGt4ZHdHd1ps?=
+ =?utf-8?B?WXVaZStrU3czQlFlakhNLy9STXJMMFArWUNVbCtlL0x4UU5vTzZMTDJyekVH?=
+ =?utf-8?B?ZmhoZGtEZWlibEV0ZGJKRkNVMUpWVU45aUdXYU5pWXJjcW1wd3lQSnVlMjQ0?=
+ =?utf-8?B?MmhER0xvU1ZmZ1pSNm55Sm52ZjVnQXpQOS9XZDQ0Y2RyMFhQTjhxMmxWR0gr?=
+ =?utf-8?B?dkJFOXFOcm5rNDZMcDlhZ3pvZk9WVjFvaEZrWWdpN2RWamdSMlJaNGVWUTYr?=
+ =?utf-8?B?RlpPNE5KaVgyWDZjMDd0U2VkclZSQi9SUzFQMGlDRGNmTnA1Z0g3alNnc3Z4?=
+ =?utf-8?B?SWJOQ2lmazllVS82NnlqWDVRakFjczdMWStYdEF6dXlmVzBQUWU2aGIvUThm?=
+ =?utf-8?B?ZEdyZUJRZHE5dWZsSVYrUnBxRnpndFpscFlnSnQ2clZmWXNKSlREcG4vdkR3?=
+ =?utf-8?B?OXhCZzB3eG1YZ3BUbzZIN3ExdVZ1dDcybmJLWGJvVW01QlF2SzArclBXaUhs?=
+ =?utf-8?B?QmxmM3JTR2FKbGxITnRUdFlMMS9BeFNNVEZIbUc3ZXU0elZ3ekgyM1pHVDE3?=
+ =?utf-8?B?bWpFME5sdXM5amp6R1E2Q0crQXNzNTI3cW5Uc1duaFJVbi96cFdUaVFHRzVa?=
+ =?utf-8?B?SEwwYXp0OUcwV0YraXo0UGNFMXMzZjlaeVpxQ0s1S1Q1bjB2SlJLSEF2ZWdy?=
+ =?utf-8?B?OExCNGgzZDJTUDNBZFduYzRLV2J2eFVzS2JKeXdMKzFpVy92WDhuekNVTlNE?=
+ =?utf-8?B?NEpzVGtYemNQSkRHSWVHaUNzKzdkL3d0MERmNlQ0SzYyR01paXlpbXE1TDZF?=
+ =?utf-8?B?Y29SQklwVE96UjByamxtMU5XandWenVKbS9sajg2dUJUUjZXWUhnaCtkWEpR?=
+ =?utf-8?B?WlNtcW1hVUpZRFQxRGhreHAwVURidmJyaVd6dExpQ1RaTkw0TEFuekNkUjdi?=
+ =?utf-8?B?VUdOV1NiTUZIanp6YjRwcy9NNS9mQ3dybVhYNEJ4LzJHVWZWcmdycDZiWnE4?=
+ =?utf-8?B?SFk2ekkyMFhuNlYzZ1h6VVRLUmxqdWp0ZGs5c0d3bWtId3ZCdmwzZEU3Tmoy?=
+ =?utf-8?B?RjMxQm4zOFRxeXI3RWU5MEtKaWNrenRyYWdUUitydGk3UGpQSnpOcnp5UCt2?=
+ =?utf-8?B?VW1EUTFaakFqa1ArUWdiMXQydW40Zld2ekwwOThQeG9NRUZEakJWcEZUck1q?=
+ =?utf-8?B?Z3A2MU1EbkloWVAzRHhIbmRPc2ZwdWNWZjhELzVHc005c3EvaGhSdklEU21u?=
+ =?utf-8?B?OXNzMnRCLzRNaEVNc21rNGVBRW5nanpvVEs0bysxeC9wdkxubkpKWjFKT3Nm?=
+ =?utf-8?B?M2doL2VsZ3Brd09MYytRZUs0TkY0dHRRUnFlQXgwUFVENVpseXIwdXBmejJ5?=
+ =?utf-8?Q?f1a7q0LAs2OdM3ps=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: df56e825-3b47-4c49-9a3a-08df2f1b1554
+X-MS-Exchange-CrossTenant-Network-Message-Id: 45687c0d-aced-4fa2-283d-08df2f1b3d42
 X-MS-Exchange-CrossTenant-AuthSource: CHBPR03MB959535.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2026 02:29:07.8979 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2026 02:30:15.0898 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7M0Qk4zGRkDgAuq++5PV77RMDkghV5QCZIBUHpz1lcsLepHbmZktYSU3LZAnQieDBlhvBGbPzvSI3QMKZ1r7KxyloZnx7RcmoUXpjYVkTes=
+X-MS-Exchange-CrossTenant-UserPrincipalName: JFgXh3rPXYdepHRFyyLHDAQmyOvUGtqiJrheQMdb1jcq0i/Tj9HJ7eLCOK1IJwmjoQujgblicSp2aBBQJLEBPjcVcaGpMz5hh+L7VghEY4M=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA5PR03MB989654
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
@@ -273,93 +276,166 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_FAIL,
-	SPF_HELO_NONE,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 16/10/2026 12:40 pm, Chen Huei Lok wrote:
-> The *_handoff_length fields are unsigned, so the "< 0" checks on them in
-> populate_ddr_handoff() can never be true. Remove these dead comparisons.
+> Trigger a DDR reconfiguration when the memory clock values in the handoff
+> data have changed, so that a retention restore is not attempted against a
+> DDR configuration that no longer matches the running mem-clk settings.
 >
 > Signed-off-by: Chen Huei Lok <chen.huei.lok@altera.com>
 > ---
->   drivers/ddr/altera/sdram_n5x.c | 32 ++++++--------------------------
->   1 file changed, 6 insertions(+), 26 deletions(-)
+>   .../mach-socfpga/include/mach/handoff_soc64.h |  1 +
+>   arch/arm/mach-socfpga/wrap_handoff_soc64.c    |  7 ++-
+>   drivers/ddr/altera/sdram_n5x.c                | 59 ++++++++++++++++++-
+>   3 files changed, 65 insertions(+), 2 deletions(-)
 >
+> diff --git a/arch/arm/mach-socfpga/include/mach/handoff_soc64.h b/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
+> index ae5af1f0100..0fb43acc98b 100644
+> --- a/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
+> +++ b/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
+> @@ -47,6 +47,7 @@
+>   #define SOC64_HANDOFF_BASE		0x0007F000
+>   #elif IS_ENABLED(CONFIG_ARCH_SOCFPGA_N5X)
+>   #define SOC64_HANDOFF_BASE		0xFFE5F000
+> +#define SOC64_HANDOFF_DDR_CLK_HANDOFF	(SOC64_HANDOFF_BASE + 0x610)
+>   #define SOC64_HANDOFF_MISC		(SOC64_HANDOFF_BASE + 0x630)
+>   
+>   /* DDR handoff */
+> diff --git a/arch/arm/mach-socfpga/wrap_handoff_soc64.c b/arch/arm/mach-socfpga/wrap_handoff_soc64.c
+> index ecde90f76f4..72e98806f8d 100644
+> --- a/arch/arm/mach-socfpga/wrap_handoff_soc64.c
+> +++ b/arch/arm/mach-socfpga/wrap_handoff_soc64.c
+> @@ -27,7 +27,6 @@ static enum endianness check_endianness(u32 handoff)
+>   	case SOC64_HANDOFF_MAGIC_IOCTL:
+>   	case SOC64_HANDOFF_MAGIC_FPGA:
+>   	case SOC64_HANDOFF_MAGIC_DELAY:
+> -	case SOC64_HANDOFF_MAGIC_CLOCK:
+>   	case SOC64_HANDOFF_MAGIC_SDRAM:
+>   #if IS_ENABLED(CONFIG_ARCH_SOCFPGA_AGILEX5)
+>   	case SOC64_HANDOFF_MAGIC_PERI:
+> @@ -35,6 +34,12 @@ static enum endianness check_endianness(u32 handoff)
+>   	case SOC64_HANDOFF_MAGIC_MISC:
+>   #endif
+>   		return BIG_ENDIAN;
+> +	case SOC64_HANDOFF_MAGIC_CLOCK:
+> +		if (IS_ENABLED(CONFIG_ARCH_SOCFPGA_N5X)) {
+> +			debug("%s: mem clk  handoff data\n", __func__);
+> +			return LITTLE_ENDIAN;
+> +		}
+> +		return BIG_ENDIAN;
+>   #if IS_ENABLED(CONFIG_ARCH_SOCFPGA_N5X)
+>   	case SOC64_HANDOFF_DDR_UMCTL2_MAGIC:
+>   		debug("%s: umctl2 handoff data\n", __func__);
 > diff --git a/drivers/ddr/altera/sdram_n5x.c b/drivers/ddr/altera/sdram_n5x.c
-> index be512cd33b1..558415d7931 100644
+> index 558415d7931..11aa020d380 100644
 > --- a/drivers/ddr/altera/sdram_n5x.c
 > +++ b/drivers/ddr/altera/sdram_n5x.c
-> @@ -1,6 +1,6 @@
->   // SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause
->   /*
-> - * Copyright (C) 2020-2022 Intel Corporation <www.intel.com>
-> + * Copyright (C) 2020-2023 Intel Corporation <www.intel.com>
->    *
->    */
+> @@ -37,8 +37,9 @@ DECLARE_GLOBAL_DATA_PTR;
 >   
-> @@ -1731,12 +1731,6 @@ int populate_ddr_handoff(struct ddr_handoff *handoff)
->   	debug("%s: Umctl2 handoff length in word(32-bit) = 0x%x\n", __func__,
->   	      (u32)handoff->cntlr_handoff_length);
+>   /* DDR handoff SHA384 attribute */
+>   #define DDR_HANDOFF_IMG_ADDR	0xFFE44000
+> -#define DDR_HANDOFF_IMG_LEN	0x1A000
+> +#define DDR_HANDOFF_IMG_LEN	0x1A200
+>   #define CHUNKSZ_PER_WD_RESET	(256 * 1024)
+> +#define MEMCLK_HANDOFF_SIZE 0x2C
 >   
-> -	/* Wrong format on user setting data */
-> -	if (handoff->cntlr_handoff_length < 0) {
-> -		debug("%s: Wrong format on user setting data\n", __func__);
-> -		return -ENOEXEC;
-> -	}
-> -
->   	/* Get the next handoff section address */
->   	next_section_header = handoff->cntlr_handoff_base +
->   				handoff->cntlr_total_length;
-> @@ -1789,13 +1783,6 @@ int populate_ddr_handoff(struct ddr_handoff *handoff)
->   		      __func__,
->   		     (u32)handoff->cntlr2_handoff_length);
+>   /* MPFE NOC registers */
+>   #define FPGA2SDRAM_MGR_MAIN_SIDEBANDMGR_FLAGOUTSET0	0xF8024050
+> @@ -1105,6 +1106,28 @@ static void phy_ocram(phys_addr_t phy_base, phys_addr_t phy_offset,
+>   	}
+>   }
 >   
-> -		/* Wrong format on user setting data */
-> -		if (handoff->cntlr2_handoff_length < 0) {
-> -			debug("%s: Wrong format on umctl2 user setting data\n",
-> -			      __func__);
-> -			return -ENOEXEC;
-> -		}
-> -
->   		/* Get the next handoff section address */
->   		next_section_header = handoff->cntlr2_handoff_base +
->   					handoff->cntlr2_total_length;
-> @@ -1831,13 +1818,6 @@ int populate_ddr_handoff(struct ddr_handoff *handoff)
->   		debug("%s: PHY handoff length in word(32-bit) = 0x%x\n",
->   		      __func__, (u32)handoff->phy_handoff_length);
+> +static int populate_memclk_handoff(void *handoff_base, u32 *mclk_table, u32 size)
+> +{
+> +	u32 handoff_table[MEMCLK_HANDOFF_SIZE - 4];
+> +	u32 length = ARRAY_SIZE(handoff_table);
+> +	u32 offset = length - 8;
+> +	u32 i;
+> +	int ret = 0;
+> +
+> +	ret = socfpga_handoff_read((void *)handoff_base, handoff_table, length);
+> +	if (ret) {
+> +		debug("%s: handoff read failed. ret: %d\n", __func__, ret);
+> +		return ret;
+> +	}
+> +
+> +	for (i = 0; i < size; i++) {
+> +		mclk_table[i] = handoff_table[offset + i];
+> +		debug("mclk_table[%d]: 0x%x\n", i, mclk_table[i]);
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+>   static int cal_data_ocram(phys_addr_t phy_base, u32 addr,
+>   			  enum data_process proc)
+>   {
+> @@ -1390,6 +1413,11 @@ static int cal_data_ocram(phys_addr_t phy_base, u32 addr,
+>   	size_t phybak_num;
+>   	const u32 *phybak_p = phybak;
+>   	u16 *data;
+> +	u32 memclk_table[4];
+> +	u32 size = ARRAY_SIZE(memclk_table);
+> +	u8 *memclk_hash_offset = (u8 *)(SOC64_OCRAM_PHY_BACKUP_BASE - SZ_1K);
+> +	int ret = 0;
+> +
+>   	struct bac_cal_data_t *cal = (struct bac_cal_data_t *)
+>   					((uintptr_t)addr);
 >   
-> -		/* Wrong format on PHY user setting data */
-> -		if (handoff->phy_handoff_length < 0) {
-> -			debug("%s: Wrong format on PHY user setting data\n",
-> -			      __func__);
-> -			return -ENOEXEC;
-> -		}
-> -
->   		/* Get the next handoff section address */
->   		next_section_header = handoff->phy_handoff_base +
->   					handoff->phy_total_length;
-> @@ -1875,11 +1855,11 @@ int populate_ddr_handoff(struct ddr_handoff *handoff)
->   		debug("%s: PHY engine handoff length in word(32-bit) = 0x%x\n",
->   		      __func__, (u32)handoff->phy_engine_handoff_length);
+> @@ -1424,6 +1452,17 @@ static int cal_data_ocram(phys_addr_t phy_base, u32 addr,
+>   	};
 >   
-> -		/* Wrong format on PHY init engine setting data */
-> -		if (handoff->phy_engine_handoff_length < 0) {
-> -			debug("%s: Wrong format on PHY init engine ",
-> -			      __func__);
-> -			debug("user setting data\n");
-> +		/* Checking DDR handoff is overflow? */
-> +		if (SOC64_OCRAM_PHY_BACKUP_BASE <=
-> +		    (handoff->phy_engine_handoff_base +
-> +		    handoff->phy_engine_total_length)) {
-> +			printf("%s: DDR handoff is overflow\n ", __func__);
->   			return -ENOEXEC;
->   		}
+>   	if (proc == STORE) {
+> +		ret = populate_memclk_handoff((void *)SOC64_HANDOFF_CLOCK,
+> +					      memclk_table, size);
+> +		if (ret) {
+> +			debug("%s: Memclks config Magic Number miss match. ret :%d\n",
+> +			      __func__, ret);
+> +			return -EFAULT;
+> +		}
+> +
+> +		sha384_csum_wd((u8 *)memclk_table, 4 * size,
+> +			       memclk_hash_offset, CHUNKSZ_PER_WD_RESET);
+> +
+>   		/* Creating header */
+>   		/* Generate HASH384 from the DDR config */
+>   		sha384_csum_wd((u8 *)DDR_HANDOFF_IMG_ADDR,
+> @@ -1454,10 +1493,28 @@ static bool is_ddrconfig_hash_match(const void *buffer)
+>   {
+>   	int ret;
+>   	u8 hash[SHA384_SUM_LEN];
+> +	u32 memclk_table[4];
+> +	u32 size = ARRAY_SIZE(memclk_table);
 >   
+>   	/* Magic symbol in first 4 bytes of header */
+>   	struct cal_header_t *header = (struct cal_header_t *)buffer;
+>   
+> +	/*
+> +	 * Read and generate the hash for the Mem clk values and store before
+> +	 * calcuting the HASH384 generation before Image.
+> +	 */
+> +	ret = populate_memclk_handoff((void *)SOC64_HANDOFF_CLOCK,
+> +				      memclk_table, size);
+> +	if (ret) {
+> +		debug("%s: Memclks config Magic Number miss match. ret : %d\n",
+> +		      __func__, ret);
+> +		return false;
+> +	}
+> +
+> +	sha384_csum_wd((u8 *)memclk_table, (4 * sizeof(u32)),
+> +		       (u8 *)DDR_HANDOFF_IMG_ADDR + DDR_HANDOFF_IMG_LEN - SZ_512,
+> +		       CHUNKSZ_PER_WD_RESET);
+> +
+>   	/* Generate HASH384 from the image */
+>   	sha384_csum_wd((u8 *)DDR_HANDOFF_IMG_ADDR, DDR_HANDOFF_IMG_LEN,
+>   		       hash, CHUNKSZ_PER_WD_RESET);
 
 
 Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
