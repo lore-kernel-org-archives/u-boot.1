@@ -2,242 +2,179 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C9B4606A319
-	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 12:54:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4A49606A319
+	for <u-boot@archiver.kernel.org>; Wed, 21 Oct 2026 12:55:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=NTsWm3pq;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=hoR77wC/;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BEGXKAtX
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=G8ENJLNu;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=nHZ2H+zc
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 13A3A60818;
-	Wed, 21 Oct 2026 12:54:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6ECB46085B;
+	Wed, 21 Oct 2026 12:55:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vAUH6lb2Q13P; Wed, 21 Oct 2026 12:54:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org BA13B605F1
+ id p_6K-fmONlah; Wed, 21 Oct 2026 12:54:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5EC0760818
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792587260;
-	b=klhwPup5FETJ5oJXAoxCgfNQAMXU8I3trwbC06aZ0ZH2Ekezi7EbPZfLTGu5QSQHFPv0
-	 QV88Hfb2XhjoOM/jodRJvlK3e3iHlIILy9Z2OUnvFSM7SqZnKVvj3Yq1CYmKKOS7uS1Bk
-	 5NLQWdaBM+tDC8gvck+in540pZQi+3Rw0+H7RDpDROB3myoH/riMwaAe5Ok73ePKv4qAx
-	 MYcV0502OJfTSKkdHXvEYhJu5jvGfJBn19PhVHiGyulXyyRPJM/7mVPaxkcsNp99pJlHg
-	 hiNhMMu2QvrQJGLnm+Em33gY28AmNeSIPvsZrpyim5Sm1uA4hZbaaBc4AM/yGSITamA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792587299;
+	b=tb8HLMROTcOl3or0nVGO/WwWpOch82YMcHzK8l1Zz8x2Rc97hFyZ7FvNfPK9ayqSk8kH
+	 lJbNxaHyrLRSmx314S7Ggjy5tRrbQzavHsMpe9Gyum8/7o7sTUJFbwCfx29oxPKrs49aU
+	 g2/aG5lniSTKaVAGfoLUCf4zG3L9SwHL67Wz11+NcLbje4ZPE7Do60r5U8//aozNlLp6M
+	 HOynvSIIhnZObZfW7ZUmLlInW/0yGpUC/sTU+Bb/h0ycvRdHsO6DiFgZk/5z3UoOatM2l
+	 JjyzXggfaXqtmVqU17O1MYpWxZJEGLFJg6MM7aPuAjUcMpExee0x7/vBw01IrlHT6BA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792587260;
+	c=relaxed/relaxed; t=1792587299;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Received:DKIM-Signature:
-	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=5QXBAZIk9B1WSPwgdYXiBPNgmVraFDu3I1/q+7ykt6Q=;
-	b=W7uWKp2R7YhHkdrPXguV1na8FdkBbYZkELgTp5siUyQbumGB+2ctZbrZ/fd/xebTI2m5
-	 3VoPA/LezMQsEN2k5/gWFXq5QTGDlXVsavceCljcWEz5dzmH1W7mScmxFDA2zkZC4hKvp
-	 6S1R8WC0zFMMfBIo3uXX+N+2cwAAnomRWgdMS3siVqpMFjM2xCcs3agxV5A41RB47zdTc
-	 AqA0iqt1MWTqsteJEBs7Kq4wlc3ivsh9R8xb9Ll5YqBZy11hTh3/wMi/mXAFddQCeMCqD
-	 7x3JgVrW6KzHkwVlAsLwx7+rWZMhxTe838/dAj9fPBfuXstl1hLoDyEFfnoFlqn6pdA==
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=Hi9HDBpzLFA7jOJ7jdgcQbgAxp7r00KuFszb8ylGuB4=;
+	b=MQvzvvEzi3cwbqTpRKT3bGwvlr9Zh9V2sq8f2ETK+5S76BR2w2q3C/AUad1ujchIO0VV
+	 7jkuD2VcX14g6ejxU+ZiA8Qv1ZDav9qL+Yz3dkfZlOwPMYV3KgbLEQHNSN4yzxVylPzUr
+	 mnVFULSPcHcsEHGGPGuE8R2b7WnmEM3sgcvbfbS3hzwwUDW4T/KSte/SG6rUU5k6hikEJ
+	 rzsYrBRIt714NREbv1QeTOVSa+/0VbrQyhzhSaI69Mhamlt1Lhg4sCSa5x5I0P8micNFu
+	 pFLDoClQIRAEtovO9wsZe+iNfzWZYniizfS0N4puVDLBpLyRVKYyem3tJHC/eocK0kg==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792587260;
-	bh=5QXBAZIk9B1WSPwgdYXiBPNgmVraFDu3I1/q+7ykt6Q=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=NTsWm3pqd+Dt37K8SDCaturJWsYUm8sh8GKZIaGeDCzyHtLXMiuK9rLo/KFIF9oK7
-	 xgznSTdbO6NrKXi/HbZDl1X2rlR9SuEBMK6LEELfk9FzN+2Q+kbUQstCUd/uY6QbDW
-	 jT6t1YQ/UCs2KG0ADGC6cw37Y1LyXWzeorLwUBti8lS29F8hI2N6n/ixYaiXgABQFb
-	 fIn60YAhrZbLH3B2tA3Wlw3qpZrcsnaJjepfcCDFBbFkN5u1TfeDj6264nOiZnleNd
-	 ApGRzSrVHK/Nnt9V3Wa6gRYLfGge+O60TfHtEHMj56XAObuR1JoSKY7IhoDZxw4wi/
-	 Nhc6EDmN5utXw==
+	d=lists.u-boot-project.org; s=default; t=1792587299;
+	bh=Hi9HDBpzLFA7jOJ7jdgcQbgAxp7r00KuFszb8ylGuB4=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=G8ENJLNu8bUaD26NJH4IQhxvi7JlI9B4t8WpF0SDstnd+hmdp/Q7eGtCr00Tg7ny0
+	 c4Ay36qiyKCTMHtB3Q6TxOWRvo8SeSa+wjTlHKmzKw085FBYrW6+G6CJZIq5J98+d1
+	 gSXhC7hx2dyCzeFzcWNqVct3ag7mW8LQuW4ZKuaUmhkh1aIHjmyqTfKlBiNhT9/8kp
+	 IgwcKarVyqZQqiZzZA+5N4dNoeJq/sJdq7AKTj7/w1qTQ51xoP9nKsmkPPrV4D/edH
+	 5+KRXqF9i2+Z+CMrJmwgu6D2CGZbQY+7WHAV9GgEARzCi2IxdIqi9zH/Tx7jGaiukv
+	 FvJtGte0rJViA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BA13B605F1;
-	Wed, 21 Oct 2026 12:54:20 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 727F323A
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:54:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5EC0760818;
+	Wed, 21 Oct 2026 12:54:59 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id B2D10930
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:54:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6429380E0C
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:54:19 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id A460140866
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:54:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MSMOu7npRr9u for <u-boot@lists.u-boot-project.org>;
- Wed, 21 Oct 2026 12:54:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1767C80C25
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792587258;
- b=bnAmEXDES9bSEnNhnIMXRa/BztzjNpPUHC6zYoxg1mFlWhgoWal1u6N4KS/LRGviuQmU
- VTH7hza+yN5oLsKi9adDG+rWPYEaOC7+1UOzDhyMC1RoXHjxW63FKIOiY0Ofk6feqqyYU
- Ho3JAo97NRFousuyp3IzEhWOMiv0sMhLcye8ktNhNBrK8KQYU6Am7zSXBiPykGk+JSJDs
- nQji6G7/epbEO/uug+dOMt4Bwm14KX9g9lECvpgyz4/2k45YYaqMBLV/JKtkxY+WvKomu
- 9j70DiqvvAPhuwVgWLSZb5zhXuaw2w80VHSrfB9ginF+BTTFlKVSYCvT4GkZyhsCVyg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id JtCO3n_BzbDj for <u-boot@lists.u-boot-project.org>;
+ Wed, 21 Oct 2026 12:54:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BBE784082D
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::e36"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792587296;
+ b=ktZlCs/xgyEwakYPBL+oXa78Rw3kbegxC/NQfaYYysdx4bpciqerPWjSbGrkFL04ODAi
+ 2Q/+TynRJ6Rzu+05/5XODmCpY1jKEhI6RxUKiUPxi8DahD5h2aUeqF9Qlx7/UcScJ39Yc
+ 6xSkjFhJhHoc/JShkCgajE/10wQjpcXg68w9FQeGpgaFIOW7FtXNzbjLL96aywjVaDhFc
+ 3Iiem74hMJud7E9P+h08MT4P0/nlDEEWKwS36aeNC3vU4Thvwjg0qhmIwoJI6AH/ItrfU
+ RhGnmRhf/4W869g21+2xPyR9UtRKChgBENS7Vs9xCkrRD6bD4pko4e6urfKxBFbCOIg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792587258;
- h=Received-SPF:Received:DKIM-Signature:Received:Received:
- DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
- X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
- Date:MIME-Version:User-Agent:Subject:To:References:Content-Language:
- From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
- X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
- X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
- X-Proofpoint-Spam-Details;
- bh=5QXBAZIk9B1WSPwgdYXiBPNgmVraFDu3I1/q+7ykt6Q=;
- b=dHIHv14ELkfG6MRqAYZ/Wb6A/gBZDvNeS1ICXC52JzOXrfypBZik6b3YSXFp2hlbiQyh
- AJRWFfI6DX5MGVzl3+RXB+N9WBRNPDKXoovTeda1RZQeW3z8w4x2jLU09FfDta/Usqn4O
- opDIcGYS2iUHQBBoPCpgU7EmO2TcywEWagAzMbEjw7+kf1F9cRVH27imEM7IMK5Sz81sB
- r0XbhJBNO5QxQ3quNpheNs45QPevqzCSuJsrVW3g17jyoVbOpuC11TCIZkfb78BDy3FNh
- CcqhX6CkgjXWqAu7Vr+ulbdoDJLAfRPuzImNpuvE9T+mHjjLxi3Y6uj8KMzB7GSNrGA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=pass header.from=oss.qualcomm.com;
- dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b="hoR77wC/"; 
- dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=BEGXKAtX; 
- arc=none smtp.remote-ip=205.220.180.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
- helo=mx0b-0031df01.pphosted.com;
- envelope-from=gurumoorthy.santhakumar@oss.qualcomm.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=hoR77wC/; 
- dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=BEGXKAtX
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 1767C80C25
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:54:16 +0000 (UTC)
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69LBg7kf3658160
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:54:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 5QXBAZIk9B1WSPwgdYXiBPNgmVraFDu3I1/q+7ykt6Q=; b=hoR77wC/atm3wsgd
- RU1xN3EKALTPwUI5hlxcRfEGEVYVAnhejTObrbD5m80VqjyrQaC0tvy3TmWX16i3
- Xcg0d/FPWex04C1unaec3PyJwXKABM5RMsoQS6LtuckokMcicON6kL1O7pV0L3PJ
- RH6Jx4g15UllkdhQIrXdFDNFP1zWxH0hSCU9HL+5gABWCTCkcLbGupO+v5quGVj0
- jYAIripNHU/ElQaMZY4Rk2t56eL/B6er4ghwJ4pf9f+KrmxyDCX8SIzBoeVHq/0k
- DxynuYnEkEb2ivV8dAl6GSGErHk0pFGezDQv7xcr3FQVbfTnze/1kaIjLc9IVilt
- 1wdZlw==
-Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4heeb9brwc-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:54:14 +0000 (GMT)
-Received: by mail-dl1-f69.google.com with SMTP id
- a92af1059eb24-147be78cd56so2351154c88.1
- for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 05:54:14 -0700 (PDT)
+ c=relaxed/relaxed; t=1792587296;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
+ Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer;
+ bh=Hi9HDBpzLFA7jOJ7jdgcQbgAxp7r00KuFszb8ylGuB4=;
+ b=DqVdHFe7Zq0gmFHX9Q086sP5osAHGnuUEQviRBk29aQb2a5T71xpGWrOy4lbGuvHiTp7
+ LBqXZOkAPd3WLY4xzDAAP8CkNRzZQVeMi0/SihtlEALZO5DU+ClriIFUgRAG4PALKAhQB
+ 8ymRlNYl2lxOPbdtvvTB4t65XOT42/Qtd38oCXm9XqZdevph7H6POyjAitECPAORq9fa4
+ l9Q8U5aODhOWQQNnDbuUWQqyBrgmmiYOUiSe0JYW736DRhK/5xcVko79HvnuN+Fd0nD5E
+ xQOYsVyE9bRAeuo7NVY9xGqAlBqXR3pzX8B9rd2HPD+09E1sI8PcbQ3qwLJfhiMJBow==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=none header.from=baylibre.com;
+ dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=nHZ2H+zc; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::e36"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::e36; helo=mail-vs1-xe36.google.com;
+ envelope-from=hfranco@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=nHZ2H+zc
+Received: from mail-vs1-xe36.google.com (mail-vs1-xe36.google.com
+ [IPv6:2607:f8b0:4864:20::e36])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id BBE784082D
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 12:54:51 +0000 (UTC)
+Received: by mail-vs1-xe36.google.com with SMTP id
+ ada2fe7eead31-7cc0e865dd1so205285137.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 21 Oct 2026 05:54:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792587254; x=1793192054;
+ d=baylibre.com; s=google; t=1792587291; x=1793192091;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=5QXBAZIk9B1WSPwgdYXiBPNgmVraFDu3I1/q+7ykt6Q=;
- b=BEGXKAtXUdnNflegeC7O+yL4j2ohtqLBSeTEIOphVX3R1/e7qiODyDhtcjLKu7YLh2
- D+ANB8jpjQI4mqdcJGq2KkfBfKoYX9cip7fk0k4ABN1NLYxDbL7BR5gMcj2xq35zySjS
- SWXfE/a5xAqNL1fUgxvUqbx6dgjkmEaStQd0TAah4P+nyP7MjFsQNhXNQ8Qm/8H7DB3E
- IbduKRBBUfvGGEYqifs3z21JRgzPdUfGXZMsjIabVej4LPP3UPdozXZ7NWohvl0e7NdF
- ohtuKCUTT4nm5PWh4fCg1lE5SJ5uIUNHEwpXnHNWvpR/8UDSQWUJGlp4RQCYNgSXlOqt
- yPrw==
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=Hi9HDBpzLFA7jOJ7jdgcQbgAxp7r00KuFszb8ylGuB4=;
+ b=nHZ2H+zckNPktRHHLJQbgzD1k0bS5CSTQClRNmd6GMVYa8yRGFkBav5vbcJslNp/ON
+ z0I58cY2VyHW9zqUTuuSa4tGb3hAgzs22lT6fuF0Z203t9QpmlLiro6L7/D5F/ZEk82M
+ NuTC6d5PPFThfJmu7eV/bSoelKQf2qfTeutQq7dQhD/Cq3zuzaP2ji547ByFc7MUwzZe
+ GE9fcLh93i1wisLPWChwfgOlVeeWTibsSd9qC0lsNalDs09aH01fpKxj5vUJlTjhORzK
+ 3T2TyfH+ehAzAS5jLC1rdKbODE89sj6XE8VMcdj5fAWA9x7ml4KxqVzeCfFfT7WuJdXD
+ cqrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792587254; x=1793192054;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=5QXBAZIk9B1WSPwgdYXiBPNgmVraFDu3I1/q+7ykt6Q=;
- b=jCgPpUkldtmqyDsa60ZUJSr2WUoOSTP+FuUMsMRCsVyqnK2x5XQKhRS0LP/K3V2496
- MWI/MEYOodwzpvUC9+xZF0bPu1fKSt3HJL2uMGKa2nDe88l0jeQJGV4ZZ38ACfj0ZE2N
- wXXvxm4RB6PVJJQTM1aBu73e02EYzwMgHrs3VGCqk8r1O6naJ3jXjAu3DUHS86pAs54J
- sAGUh7ii/IduOnPRyQnc37ZslAOQy1gE+HZvJeNH9tVLsCCGITADdzt88Ctvyb4+ZQHF
- FaWZiT0/mfyulJZyuueDSDC490LHZgrom6rIY/Lqq97HIU+byuxu39sc42B4Y1LYeS30
- CCQA==
-X-Forwarded-Encrypted: i=1;
- AKwUvBx9+I2kRPl1aeSbVlvHW9GKEmOSFAvH5AWUi15I01TkGhRmEOUMr4/HIQ86YhsTQAfuquhRH7A=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYK0Zm06FLz0EQVgGLHwfHxN6iprTjy1JZzJtnueabAqomQVU+I6
- S8Cs67MLCVYBEOh8lUQ/jW8fCVAM+56WVkcFdYYn8d0W7tv3Gt+RRFrF/JEyV4yNYGuBQXGzjGc
- 5sbFFWzAiQYUbUZjCPK02jB2DemubUIgarIft+4AppSJmt8jQuuSb9w7LXkmUw4Qo3WXo/zo=
-X-Gm-Gg: AYBFou1oOjO4XsbQV1Zmwi54f4Hx00AtzzUnSl8/pj3zI/V3wwhK2zEvQB7qZFfqdxQ
- pJANZXl0IPs92Ep8zIKhTgh8J6dn0wBXBN98wCkvyLorg1XicLvq7euB2UWRsSYKp3XGX4zMFTV
- 4nGxW85U1ojAjxmEctaDPyqMbUl8eyFBfJqPVfsg6hCgmdeTrSlu/mL86zEI+f0q6CPMZ4u5Lrp
- xyfQkK98PTdYr1qR951KrKNKgZOxC5B02bL08fI5rxWtW49X4xXXsg7GLKQ5FV0gIyx6wtuZ+L1
- DT8aaV+/zuPSXPWh0KQJkvmvD8gINjVeKt+zDPHOrnDj0Gsty1at5JOrCUmsND1jVs50TTR79sw
- iGmgaToPK61DEjcqYyQOsA4VX+FlYa1eNG1VgSJIAHTYv
-X-Received: by 2002:a05:7022:b045:10b0:18a:d7db:f76 with SMTP id
- a92af1059eb24-190a8f51eb5mr2490553c88.36.1792587253547; 
- Wed, 21 Oct 2026 05:54:13 -0700 (PDT)
-X-Received: by 2002:a05:7022:b045:10b0:18a:d7db:f76 with SMTP id
- a92af1059eb24-190a8f51eb5mr2490510c88.36.1792587252758; 
- Wed, 21 Oct 2026 05:54:12 -0700 (PDT)
-Received: from [10.152.192.83] ([202.46.23.19])
+ d=1e100.net; s=20260707; t=1792587291; x=1793192091;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=Hi9HDBpzLFA7jOJ7jdgcQbgAxp7r00KuFszb8ylGuB4=;
+ b=Khwvi1qdylshvZx+iTmm5xa4cHfIYt/xigDKxMNHoHDGCRTcjUbyZEU8d+PZrQBBOk
+ TXty/AFbCW2a5f5UCY77FgWskNmNCJ5zMkWJH3r4a4Ay+1ZnGA5Gu9pL6wOfsU1WsDLK
+ PY8semGYCejYY+qAAsZLB7nquYAJ71IPmKzFvrUF8S/YT/Y2x29vkZ5WemcQtNnggTfP
+ 05QsCdL0iGWHmY92xBDfw7qJ3pVCDd0Hg71v9cZkGw6cTfZmEy00Z3WipWzoaK/5CO+7
+ FaQWInArfz/wcDZuJA9SEoVOWg73bDF485BFSg/lrrShWAro4aVwUh+fVdB2/x5JFDPJ
+ mQTw==
+X-Gm-Message-State: AFq9FYI8q03uQrWOVoEHDJPp/a0edlo3uH7toItcPwsBDMdDBNbELF+7
+ d9AzbMH1KsYhlkQvNvsSFi0qzm74xA+Qtg8vR82OfI14OUWXUydTHBWdJPQo9szU5NE=
+X-Gm-Gg: AYBFou2nUwFGCEAe58+mtiNYkzsTMqIhC9YXm06MHGhvTnkvmOD3DDf2XeTZnag4FIl
+ UzWolWUGu04l/T9gf77zhtoMaGNWMEkBfB0MqiUvB8kG4uLFUFbqZZpSGrLCvV9sNxBGylnQNVw
+ 0y4LvduJ2bYbFypwtkAfS9FOmMGYeBnru6++dItcAVhQM0l/7bmR66XNw41jf98mDFrAOrhLiQH
+ /GoydyoUrEqQhi8OSR7kC5hPmZPLQFXM1+PwcYf1OuY2dejLluqp3u6xRCTqcTjVHpWt/QZd4at
+ 67E5otX3iCLpWNrcwFaVkdoySxzj/On0krJDtt+WFY91LvGJXwQCtgtZ7KtB2GO2lGgRb5vfHI7
+ yAqqbz2mESMgZIjCYBan6oGFYkJmsbdqFgIAu8gELe1ginRDKHxshA4HCFOmC5+HuIIbCWDM78h
+ /DfQy92PNJP3YphtoC/t4o4vhc+MGSUnY4yG9RZa+iDNl5jqS0RIgAagVopWJuioQUK5VKxxXpk
+ 5HhoHKRHAlUNS6DkEbHMLBJfWpQtK15zkoeBgoJsTB760MP0gl2VquAx8DlFCFFC58GrftiM5NN
+ QIUfxgHpl4PUOw7siu0=
+X-Received: by 2002:a05:6102:5489:b0:7a6:b8fe:e834 with SMTP id
+ ada2fe7eead31-7cc926d293emr659403137.27.1792587290763; 
+ Wed, 21 Oct 2026 05:54:50 -0700 (PDT)
+Received: from [127.0.1.1] ([2804:14c:4c5:8bf0::33ca])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1903ca044d4sm6377675c88.17.2026.10.21.05.54.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Oct 2026 05:54:12 -0700 (PDT)
-Message-ID: <be3b6542-f315-4c82-9fd2-b60be39a9969@oss.qualcomm.com>
-Date: Wed, 21 Oct 2026 18:24:05 +0530
+ a1e0cc1a2514c-990d0e0ba56sm3013863241.1.2026.10.21.05.54.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Oct 2026 05:54:50 -0700 (PDT)
+From: Hiago De Franco <hfranco@baylibre.com>
+Subject: [PATCH 0/8] riscv: sophgo: add SPL support for the Milk-V Duo
+Date: Wed, 21 Oct 2026 09:54:16 -0300
+Message-Id: <20261021-milkv-duo-spl-v1-0-ee7618860237@baylibre.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/5] i2c: geni: Add 32MHz clock and chip probing support
-To: Heiko Schocher <hs@nabladev.com>, trini@konsulko.com,
- ilias.apalodimas@linaro.org, peng.fan@nxp.com, jh80.chung@samsung.com,
- tanmay.kathpalia@altera.com, casey.connolly@linaro.org,
- neil.armstrong@linaro.org, sumit.garg@kernel.org, lukma@nabladev.com,
- Michael.Srba@seznam.cz, balaji.selvanathan@oss.qualcomm.com,
- aswin.murugan@oss.qualcomm.com, u-boot@lists.u-boot-project.org,
- u-boot-qcom@groups.io
-References: <20261007174151.2590649-1-gurumoorthy.santhakumar@oss.qualcomm.com>
- <20261007174151.2590649-2-gurumoorthy.santhakumar@oss.qualcomm.com>
- <ec34c46d-519b-964f-1d64-4e32d841ce54@nabladev.com>
-Content-Language: en-US
-From: Gurumoorthy Santhakumar <gurumoorthy.santhakumar@oss.qualcomm.com>
-In-Reply-To: <ec34c46d-519b-964f-1d64-4e32d841ce54@nabladev.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA1MSBTYWx0ZWRfXxkFVA4TlOxzc
- RsXHXQlK7iWaU5CgVcbdFfk5EGGopYxU2wPjZXrwZv0cA/kp8umb5X5bfGr+5vzdx1pBzCy8aFb
- kt7kpoHa8Ezl7re4Xuqtw2i3vmQFDd0=
-X-Proofpoint-GUID: l9QNlhsqMYB4pWnyHvUuEmdfBBCXS-M0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA1MSBTYWx0ZWRfX3gZUkrjihzw+
- jRJ6DsKAlj8jFgxpDDzBUgXofnDfQ+Cs2H0972KqMBehS4OUf8FfFhl8xokjvZ2tpe0pZ6PaQY9
- pRUH2h2sTnGHCcDiUdmOp9a0OAjkHhCWTJnu1WTBJDglsIQvvoRSGuyb1YC+1WGdaFygq8KDhMd
- 2h1bfNo0v1zDBQ2CTF5HmNi9ncWD2hF5lmkbioSLBQcAhqf45rJunrX55eofy9Fj1vUhlko6SXH
- mWbwAYoUbFL4BaPWCVOEIHl8dbCnnhy4ypze0+CW7Y9Mv7KfhnDeyn6u98YJpYsX9ZQFmFP0L1t
- szvkpaDWXjNy1vAzkbsY8EqGuTf8M/5ghgKNylttjtdxbLw0ddpJkpeYO6it7K5/4vC00iyT1s9
- wmAkNEhiQd97s2qQ6m5isXzRP+9NPMVejFI5S9x3++UUv2kZQC6Fx8IqnhxBLZ0YOl9YlSruxWh
- 2CDAoYXzoF2B8JbXtwA==
-X-Authority-Analysis: v=2.4 cv=R42WitRX c=1 sm=1 tr=0 ts=6ad8b5f6 cx=c_pps
- a=kVLUcbK0zfr7ocalXnG1qA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=COk6AnOGAAAA:8 a=oparXEaGMrLl-ryp3CUA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=vr4QvYf-bLy2KjpDp97w:22
- a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-ORIG-GUID: l9QNlhsqMYB4pWnyHvUuEmdfBBCXS-M0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-21_03,2026-10-21_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 lowpriorityscore=0 priorityscore=1501 suspectscore=0 spamscore=0
- malwarescore=0 adultscore=0 clxscore=1015 impostorscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610210051
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/02OQQ6DIBBFr0JmXRqgapWrNC5UhpZWxQKSJsa7F
+ 2sXLt/k//9mAY/OoAdJFnAYjTd2TMBPBLpHM96RGpUYBBMFZ/xKB9O/IlWzpX7qqUChGyzKvNQ
+ cUmdyqM3nt3erd/Zz+8QubCP/hMP3nERhj0HbeKSdHQYTJImb6MwZHB+QZLuySlQHfWtt8EFRn
+ inMMUN2QS2jgHpdv73+TIzWAAAA
+X-Change-ID: 20261017-milkv-duo-spl-2e2fae6858f1
+To: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Marek Vasut <marex@nabladev.com>, Tim Ouyang <tim609@andestech.com>, 
+ Leo Liang <leo.liang@sifive.com>, Kongyang Liu <seashell11234455@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Bin Liu <b-liu@ti.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Andrei Lalaev <andrey.lalaev@gmail.com>, Zhuxu Ran <zhuxu_ran@zohomail.com>, 
+ Udit Kumar <u-kumar1@ti.com>
+X-Mailer: b4 0.16.0
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -247,202 +184,94 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Heiko Schocher,
+This series adds SPL support for the Milk-V Duo (Sophgo CV1800B, 64 MiB
+DDR2), so the board no longer needs the vendor FSBL to bring up DDR,
+configure the PLLs and hand off to OpenSBI and U-Boot proper.
 
-Thanks for the feedback, I've addressed the comments in the v2 patch, 
-please refer [PATCH v2 0/7] i2c: qcom: Add GENI I2C support for IPQ5424 
-- Gurumoorthy Santhakumar
+Currently this board only builds a bare u-boot.bin that depends on the
+vendor FSBL (and the vendor fiptool) to do all of the early hardware
+bring-up before U-Boot starts. With this series:
 
-<https://lore.kernel.org/u-boot/20261021125003.2948090-1-gurumoorthy.santhakumar@oss.qualcomm.com/>Regards,
-Gurumoorthy
+- The SPL is loaded directly by the BootROM from fip.bin, built by a new
+  binman entry type that reproduces the fiptool image layout (param1
+  header + BL2 header) without depending on the vendor tool.
+- SPL enables the C906 caches and T-HEAD ISA extensions, brings up and
+  trains the DDR2 controller/PHY, and initializes the PLLs, all ported
+  from the Sophgo FSBL sources [1] (plat/cv180x).
+- SPL also takes over the RTC power domain configuration for shutdown,
+  warm reset, power-cycle and watchdog reset, matching what the vendor
+  FSBL used to configure.
+- SPL then loads the FIT image (OpenSBI, U-Boot and the DT) placed at
+  offset 0x40000 of fip.bin via the BootROM ROMAPI, and hands off to
+  OpenSBI, which starts U-Boot in S-mode.
+- Board documentation is updated.
 
-On 10/15/2026 1:51 PM, Heiko Schocher wrote:
-> Hello Gurumoorthy Santhakumar,
->
-> On 07.10.26 19:41, Gurumoorthy Santhakumar wrote:
->> Add support for 32MHz GENI SE clocks through dedicated timing tables
->> selected via the qcom,geni-se-clk-32mhz DT property. Also add chip
->> probing support.
->>
->> Depends on:
->> misc: qcom_geni: Add minicore support
->> Link: 
->> https://lore.kernel.org/u-boot/20261005-spl-v10-1-c4ca29bf27ed@oss.qualcomm.com/
->>
->> Signed-off-by: Gurumoorthy Santhakumar 
->> <gurumoorthy.santhakumar@oss.qualcomm.com>
->> ---
->>   drivers/i2c/geni_i2c.c | 76 ++++++++++++++++++++++++++++++++++++------
->>   1 file changed, 66 insertions(+), 10 deletions(-)
->>
->> diff --git a/drivers/i2c/geni_i2c.c b/drivers/i2c/geni_i2c.c
->> index 7498cbcb41a..9edba3dd551 100644
->> --- a/drivers/i2c/geni_i2c.c
->> +++ b/drivers/i2c/geni_i2c.c
->> @@ -96,18 +96,35 @@ struct geni_i2c_priv {
->>    * clk_freq_out = t / t_cycle
->>    * source_clock = 19.2 MHz
->>    */
->> -static const struct geni_i2c_clk_fld geni_i2c_clk_map[] = {
->> -    {I2C_SPEED_STANDARD_RATE, 7, 10, 11, 26},
->> -    {I2C_SPEED_FAST_RATE, 2,  5, 12, 24},
->> -    {I2C_SPEED_FAST_PLUS_RATE, 1, 3,  9, 18},
->> +static const struct geni_i2c_clk_fld geni_i2c_clk_map_19p2mhz[] = {
->> +    {I2C_SPEED_STANDARD_RATE, 7, 10, 12, 26},
->
-> value changes from 11 -> 12 ? Why?
->
->> +    {I2C_SPEED_FAST_RATE, 2,  5, 11, 22},
->> +    {I2C_SPEED_FAST_PLUS_RATE, 1, 2,  8, 18},
->>   };
->
-> You change here the values for I2C_SPEED_FAST_PLUS_RATE.
->
-> Have you checked, that the frequency is still the same with this 
-> settings?
->
-> Ah, I found your settings also in the linux driver!
->
-> It came in through commit
-> """
-> commit a815975cbaeb4ab29f45312ef23be2871b2e8b82
-> Author: Mukesh Kumar Savaliya <quic_msavaliy@quicinc.com>
-> Date:   Wed Jan 22 12:16:34 2025 +0530
->
->     i2c: qcom-geni: Update i2c frequency table to match hardware guidance
-> """
-> I see this as a seperate patch, and please refer to the above
-> linux commit ... sorry for this nitpick...
->
->>   -static int geni_i2c_clk_map_idx(struct geni_i2c_priv *geni, 
->> unsigned int clk_freq)
->> +/* source_clock = 32 MHz */
->> +static const struct geni_i2c_clk_fld geni_i2c_clk_map_32mhz[] = {
->> +    {I2C_SPEED_STANDARD_RATE, 12, 9, 10, 26},
->> +    {I2C_SPEED_FAST_RATE, 4,  3, 9, 19},
->> +    {I2C_SPEED_FAST_PLUS_RATE, 2, 3, 5, 15},
->> +};
->> +
->> +static int geni_i2c_clk_map_idx(struct geni_i2c_priv *geni,
->> +                unsigned int clk_freq, bool use_32mhz)
->>   {
->> -    const struct geni_i2c_clk_fld *itr = geni_i2c_clk_map;
->> +    const struct geni_i2c_clk_fld *itr;
->> +    int array_size;
->>       int i;
->>   -    for (i = 0; i < ARRAY_SIZE(geni_i2c_clk_map); i++, itr++) {
->> +    if (use_32mhz) {
->> +        itr = geni_i2c_clk_map_32mhz;
->> +        array_size = ARRAY_SIZE(geni_i2c_clk_map_32mhz);
->> +    } else {
->> +        itr = geni_i2c_clk_map_19p2mhz;
->> +        array_size = ARRAY_SIZE(geni_i2c_clk_map_19p2mhz);
->> +    }
->> +
->> +    for (i = 0; i < array_size; i++, itr++) {
->>           if (itr->clk_freq_out == clk_freq) {
->>               geni->clk_fld = itr;
->>               return 0;
->> @@ -262,6 +279,38 @@ static int geni_i2c_xfer_rx(struct geni_i2c_priv 
->> *geni, struct i2c_msg *msg, u32
->>       return geni_i2c_fifo_rx_drain(geni, msg);
->>   }
->>   +/* Probe to see if a chip is present. */
->> +static int geni_i2c_probe_chip(struct udevice *dev, uint chip_addr,
->> +                   uint chip_flags)
->> +{
->> +    struct geni_i2c_priv *geni = dev_get_priv(dev);
->> +    u32 m_param = (chip_addr << SLV_ADDR_SHFT) & SLV_ADDR_MSK;
->> +    u32 status;
->> +    ulong start;
->> +
->> +    (void)chip_flags;
->> +
->> +    /* Add delay before chip detect to prevent the bus going 
->> undefined. */
->> +    mdelay(1);
->> +
->> +    qcom_geni_i2c_conf(geni);
->> +    writel(0, geni->base + SE_I2C_TX_TRANS_LEN);
->> +    geni_i2c_setup_m_cmd(geni, I2C_ADDR_ONLY, m_param);
->> +    writel(1, geni->base + SE_GENI_TX_WATERMARK_REG);
->> +
->> +    start = get_timer(0);
->> +    while (get_timer(start) < I2C_TIMEOUT_MS) {
->> +        status = readl(geni->base + SE_GENI_M_IRQ_STATUS);
->> +        if (status & M_CMD_DONE_EN) {
->> +            writel(status, geni->base + SE_GENI_M_IRQ_CLEAR);
->> +            return (status & SE_I2C_ERR) ? -ENODEV : 0;
->> +        }
->> +        udelay(10);
->> +    }
->> +
->> +    return -ETIMEDOUT;
->> +}
->> +
->>   static int geni_i2c_xfer(struct udevice *bus, struct i2c_msg 
->> msgs[], int num)
->>   {
->>       struct geni_i2c_priv *geni = dev_get_priv(bus);
->> @@ -468,6 +517,8 @@ static int geni_i2c_probe(struct udevice *dev)
->>       ofnode parent_node = ofnode_get_parent(dev_ofnode(dev));
->>       struct geni_i2c_priv *geni = dev_get_priv(dev);
->>       u32 proto, tx_depth, fifo_disable;
->> +    u32 clk_freq;
->> +    bool use_32mhz;
->>       int ret;
->>         geni->is_master_hub = dev_get_driver_data(dev) & 
->> GENI_I2C_IS_MASTER_HUB;
->> @@ -538,19 +589,24 @@ static int geni_i2c_probe(struct udevice *dev)
->>       geni_i2c_config_packing(geni, BITS_PER_BYTE,
->>                   PACKING_BYTES_PW, true, true, true);
->>   -    /* Setup for standard rate */
->> -    return geni_i2c_clk_map_idx(geni, I2C_SPEED_STANDARD_RATE);
->> +    clk_freq = dev_read_u32_default(dev, "clock-frequency",
->> +                    I2C_SPEED_STANDARD_RATE);
->> +    use_32mhz = dev_read_bool(dev, "qcom,geni-se-clk-32mhz");
->
-> Hmm.. this property is not defined in linux code... do you plan to 
-> push this
-> to linux?
->
-> It seems to me, this is not needed in the linux driver at all!
->
->
-> Could you check, if you can adapt geni_i2c_clk_map_idx() to the one 
-> from linux?
->
-> They get the current clock from geni_se_clk_freq_match(). Is it 
-> possible to
-> port this to u-boot?
->
-> Thanks!
->
->> +
->> +    return geni_i2c_clk_map_idx(geni, clk_freq, use_32mhz);
->>   }
->>     static int geni_i2c_set_bus_speed(struct udevice *dev, unsigned 
->> int clk_freq)
->>   {
->>       struct geni_i2c_priv *geni = dev_get_priv(dev);
->> +    bool use_32mhz = dev_read_bool(dev, "qcom,geni-se-clk-32mhz");
->>   -    return geni_i2c_clk_map_idx(geni, clk_freq);
->> +    return geni_i2c_clk_map_idx(geni, clk_freq, use_32mhz);
->>   }
->>     static const struct dm_i2c_ops geni_i2c_ops = {
->>       .xfer        = geni_i2c_xfer,
->> +    .probe_chip    = geni_i2c_probe_chip,
->>       .set_bus_speed    = geni_i2c_set_bus_speed,
->>   };
->>
->
-> bye,
-> Heiko
+Tested by booting a Milk-V Duo board from an SD card (fip.bin on the FAT
+partition) built with this series (SPL -> OpenSBI -> U-Boot -> Linux).
+
+This series used the help of Claude Opus 5.5 to read the FSBL and turn
+it into U-Boot SPL.
+
+[1] https://github.com/sophgo/fsbl.git
+
+Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
+---
+Hiago De Franco (8):
+      binman: add Sophgo CV18xx FIP entry type
+      riscv: cv1800b: add SPL support
+      ram: sophgo: add CV180x DDR2 driver
+      board: sophgo: milkv_duo: add SPL support
+      board: sophgo: milkv_duo: initialize PLLs in SPL
+      board: sophgo: milkv_duo: enable RTC power and reset
+      doc: board: sophgo: milkv_duo: update documentation
+      doc: board: sophgo: milkv_duo: document the SPL boot flow
+
+ arch/riscv/cpu/cv1800b/Kconfig                     |   2 +
+ arch/riscv/cpu/cv1800b/Makefile                    |   4 +
+ arch/riscv/cpu/cv1800b/spl.c                       |  31 +
+ arch/riscv/dts/cv1800b-milkv-duo-u-boot.dtsi       |  92 +++
+ arch/riscv/include/asm/arch-cv1800b/rom_api.h      |  36 ++
+ board/sophgo/milkv_duo/Kconfig                     |   5 +
+ board/sophgo/milkv_duo/MAINTAINERS                 |   6 +-
+ board/sophgo/milkv_duo/Makefile                    |   1 +
+ board/sophgo/milkv_duo/spl.c                       | 250 ++++++++
+ configs/milkv_duo_defconfig                        |  18 +
+ doc/board/sophgo/milkv_duo.rst                     |  76 ++-
+ drivers/ram/Kconfig                                |   1 +
+ drivers/ram/Makefile                               |   1 +
+ drivers/ram/sophgo/Kconfig                         |   6 +
+ drivers/ram/sophgo/Makefile                        |   6 +
+ drivers/ram/sophgo/cv180x_ddr.c                    | 140 +++++
+ drivers/ram/sophgo/cvx16_pinmux.c                  |  54 ++
+ drivers/ram/sophgo/ddr_patch_regs.c                |  39 ++
+ drivers/ram/sophgo/ddr_pkg_info.c                  | 110 ++++
+ drivers/ram/sophgo/ddr_sys.c                       | 635 +++++++++++++++++++++
+ drivers/ram/sophgo/ddr_sys.h                       | 108 ++++
+ drivers/ram/sophgo/ddrc_init.c                     | 476 +++++++++++++++
+ drivers/ram/sophgo/phy_init.c                      | 193 +++++++
+ tools/binman/etype/sophgo_cv18xx_fip.py            |  89 +++
+ tools/binman/ftest.py                              |  54 ++
+ tools/binman/test/vendor/sophgo_cv18xx_fip.dts     |  18 +
+ .../test/vendor/sophgo_cv18xx_fip_bad_offset.dts   |  16 +
+ .../test/vendor/sophgo_cv18xx_fip_collection.dts   |  19 +
+ 28 files changed, 2454 insertions(+), 32 deletions(-)
+---
+base-commit: a58e2b7af42c179ace2c6210de0a219fa3f3cf3c
+change-id: 20261017-milkv-duo-spl-2e2fae6858f1
+prerequisite-change-id: 20260929-milkv-duo-bootstd-14de5e4e03ef:v2
+prerequisite-patch-id: 0aaa37872f2b82c2abfc84364f9256c7cb3394fe
+prerequisite-patch-id: 927c8bc825dd9897467da6b194ae8c7c411ec874
+prerequisite-patch-id: 7c0fedb64aabab799b72eef81efc8becec8f44cd
+
+Best regards,
+--  
+Hiago
+
