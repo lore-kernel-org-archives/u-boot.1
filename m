@@ -2,194 +2,239 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1653B606A333
-	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 09:42:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20A6B606A31E
+	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 10:00:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bSlO6dKE;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Kqcb1flM
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=z6+xhy8d;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YS2RC+RR;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VdxpduG1
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E979C4077B;
-	Thu, 22 Oct 2026 09:42:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E540640769;
+	Thu, 22 Oct 2026 10:00:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id M18RzR36-Hnq; Thu, 22 Oct 2026 09:42:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2E9E24090E
+ id DyTYypJtyYSw; Thu, 22 Oct 2026 10:00:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 18CA240786
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792662131;
-	b=nf6FAptHB6nI4vv4ELdO0sKjz6VHL2kjNkfIUd7x1K5Y6/EYD4WYD2aktOfUF0KKiktb
-	 0SDffyAWy54JUDRUCD7jN1IflyC2Gt9uz9sXWp8eZc+omnYMPgRAWcBB0cXMr5Iuex6qb
-	 EPsMWXWPycqLFrajDVJOL6OHjjPU8lRxntjLte2hj7IrJdkY66Qf0NHwyBddnZpxoepPz
-	 9VAw94wL1K5c8PbcyRJOpuel1p5dvhqx358y/xXhqgZU0BGkyptQUjdx2xohK70ME5Hi6
-	 6GcZWsUM6fuPS9LPcKO60DRoi+2ddZFXj4LUPrJBoL8tRjSNYskH7f9qS6/e85CLHpg==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792662131;
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792663213;
+	b=dgyQcchkE66WMri7MvTqGiWV42L/m9HAV6frPcoouq/Sf+I2BrnkoVQIxtgveDVaPR+r
+	 8+md7V+6vgHlGUeoEhvjbajneSEyNGb8l6sknE+G0h9m47BdDDZEGHZ4FKkbMHq5CxEgL
+	 vWurhknlYdD4oaL44OFtNn5QjyAhP8RN7gQT2zXCGlV/3cA7TeZt91e7qyhKtVOY/j0dN
+	 SNPmZs4nvFD9HK/AMZRutdQ50jaoS7ONENBdh62dWz+tRPZliJLfzfQjSaNG6p3SbhOyz
+	 VRx5dk/D7y2Sf24Gl90C9INMbHX/49+xYCwWhKUywoou+rOIapGAswDagtrwB7t4Mbg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1792663213;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=wj8MBa/3M8lrGygm1LOUtRdLCS/YWO7kqIdO8RHak50=;
-	b=NV3dt7XJp62aUVu6YBJpr4enT/aKthL06aPnxRuxndwnRDVgI9CrZdpruh5JuhaMFte0
-	 UoiWye8LXZlbIBfQQ+2kKYgJEFvJRBZeFImMflZu2MCUk8krl1R+FwaprL56xR9mzl0D5
-	 VbYIpL9UZrFrlXB2AZuI+zZnabvO5Bb5CFccKNzNpmD6hjHIG+GOUJontFJbsaxhIWZKo
-	 pJ40gy0lvlO4aT5th3WALbus2nv8ZTvE6oMjUp2G4TFNgPjqKeJrpJq/6/hBn0O2Ivz+N
-	 b2eznoEf+P7fL2mHypqIMJl+W3eq/jhNyGSqg3t+jiAmnQGam3QcI6dHVzMGYnKBnsA==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
-	dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Kqcb1flM;
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=KOgOV1zcgH6Y99MZfb8sFkdniCjTtRzOpyBAqMCy3sA=;
+	b=ONll6r5G0k6HCcUZGnqtgHThJW79fbnpLyamEJgO4ltnaM8+pRTcxf4/STEar6FpGFWX
+	 WfZpzGs0mxmiojjesLkmA4G2kU6FbvwnlRPWbMlW55NMD3QpUNN5DhUhNjNZaCK1gUDf9
+	 3Lq3q6MQ6SLyg0/ew36nuj7aUeDIJZMtJNBAo2stytTqtCnF0NT8rbPuueZyiPwbztpPC
+	 J1cNDKjheUfvHY63WfcRQjvHzRcuI5STdqip5TqnU/S4UF4c6D3Z44Jwh7wBdTbYO0EUc
+	 c8Tv4oDMZK5m8Oh2BEdmFEnMTxqP2qn2IZU9lzb8J0Dr1pMhtTlU/yxlgljQDd4kDkA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792662131;
-	bh=wj8MBa/3M8lrGygm1LOUtRdLCS/YWO7kqIdO8RHak50=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1792663213;
+	bh=KOgOV1zcgH6Y99MZfb8sFkdniCjTtRzOpyBAqMCy3sA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bSlO6dKE3kGkTZpt8QYW5rZYC7KZ7PPLcoYRDfz+UVVaBYu77mol9lxnb9DqmBq7/
-	 lG91yjiBh2HtHVweeTmcE0jSCbvxLvxpLtcKZYsf5asag4DK9/fr+e8O13jHVJYVOz
-	 1zZQBoFhIA5k3rItiPtuU01/GmCIW9Rwg09HxuUGLbZuL/zwPSiJiemLrfWHQi+gLK
-	 zDPRtRlHOUB32Fp3/pcwUYxS0bwir9LCbgRZvsWp2LhjhsFZ6JpZuhM2q3QyBSCHBS
-	 4xs/ypo30SsL1ag8ETRQ6/iQAdGZHtvgrRAP47KEkqG9EGwoKyoUKXC4wWqdVEu0d0
-	 axEbco99IPK4g==
+	b=z6+xhy8dSvzApSpGf5I+lkFk0WzC+rbRpybMujFM0b8faOVF10H+yfwpl9V4WBt/L
+	 DMXvom8la56dFlOPw6NhvcC7IqgA1vVwKAPNWHYUX5bthxmA9/3JmiN5WIHumMY9PO
+	 suFRtAgdTBUEVmOWwB3I91AXc4LrCwWplJIIMaGo9p41t/O3me6050c1KKf1xEUA0F
+	 +q53rHs2WG0GO09kDJc7zsFx0iuV6o7K0f0lr5Ri0OawmLlt6lw26Y3+IpHk35GqFU
+	 fkr9/tEnQiDAjp79VMPW/A8Rtb3gddl8Z1DNiXDAIHrrhAPGEB6vxa0ex8/xmo/5C+
+	 GU3+VZ+BtarQQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2E9E24090E;
-	Thu, 22 Oct 2026 09:42:11 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id B9972356
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 09:42:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 18CA240786;
+	Thu, 22 Oct 2026 10:00:13 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 02B6D356
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 10:00:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id B731D4090E
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 09:42:09 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id DCB3A60884
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 10:00:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qlEzhNSPGQGZ for <u-boot@lists.u-boot-project.org>;
- Thu, 22 Oct 2026 09:42:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9EFB94077B
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::1136"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792662129;
- b=ra1aSBZKDv9YYAZsDfFGJboRmpnyfjicr4zpn5/K+BSynqZKRQ616nSdVpPjSGxpf1CB
- aKcuJB0xdnrIcwTqXw/FDjIdW6bCaaWYRZMrTb7+/xd0T+6QdqlUGW2+YdweLY9Cln28P
- QD5mZsw3Sj8000mRWyPHPlMg1cnaaSa6rN4Ro4OBKh7IiBsziRAc9+lddFreOKUE3yKY6
- 2mrfE5tknCoTsLffZAgiiu4WdeozCjWJHWMeAhPIiCN9AXYvzVef1YzUdSvU4eHC7eJqn
- w/4+b6CXuF2HTNz6XFpXsn/6VBInpoMCxWeALJ6b3sAsD9tiKlsm4V/avvnpm0ADRLQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792662129;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
- In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type;
- bh=wj8MBa/3M8lrGygm1LOUtRdLCS/YWO7kqIdO8RHak50=;
- b=LCA+iqHRVxc1FkGwB2ieBS63B9jwROd6q037OD+/co7yvLMO5CN6KpL+M4bRaAX2UipW
- LF8uT0HLvdnIaVFxvavCN+nKyFr8LKSzADh69ym4WCqET5rxXPtR2zDdURp3+7e6aRo71
- pOwgTvivEUEfK8lrgkBVKm87hlXiV9Kk66Bw1i6POuAZQNvWc3Vqkhpjftp90RNObKqGF
- S6dQBs53jeEjZ2PRHJGeGfcf7vY4MIwQI5OFIJYK3yX/j7/3qvLpQFIFlbzd2QUUidh1C
- 5cjA3MLm0e6tc5RfwV1yEyTrqZ2jjU+fRSHtf1au6+bh43x98jCYg6b6bWb/i+ROlbQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
- dmarc=pass header.from=linaro.org;
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=Kqcb1flM; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1136"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1136; helo=mail-yw1-x1136.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=Kqcb1flM
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9EFB94077B
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 09:42:07 +0000 (UTC)
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-8726acc5eadso15173287b3.0
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 02:42:07 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792662127; cv=none;
- d=google.com; s=arc-20260327;
- b=aG6KVKSHH9ZK5jylu3BxzHED9jJ+pqQZaJNAZQP8+QfzG6aWSb5oc9MgIG2ZpqOPAt
- Rynja6bKcXOdfRjchAzY3tY8qdEdRcy2VHvSg0621PQqNjghAka+uBq8IDcCr7TAvSfY
- EY9OPy0j9V+q7BLTMqPwARCRnd0eJkOgtU8n9fQaME/hmCb7d/c5B0ZAJlA8acJgcF+O
- 0O8pvxwkff4fe5WqoTwjtHeZ7HKAwQnk3WpwEZnQlu2S4jUCZTzWeTsISeFHxEKCGtOj
- VlFCA6ZPuujz7xVO2wtSk35WFhaY5nnfM305oJ3XUZl95Qf9thzb9enSSME/cjDs9vQ/
- akXw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=wj8MBa/3M8lrGygm1LOUtRdLCS/YWO7kqIdO8RHak50=;
- fh=iKgM+FuDjQK4OI2nolAT9u8ho9hisYHu881P0Yp034M=;
- b=KaA0G00x1mM3NKThZbvG7eXeL2VPzaJaXI89agPPOd2Phgnhf+0n6NsnquPRudMOY5
- WE28fhwIU1WHTPP5hAmOctRM0N8ESDbSqaGMiuiEXOMplXHWQYyrmdUyX2RmVgp3qPlm
- f5sYmdtFQUL2vgtHLU7PTtgtynfdsi6MwZVZKsXUSbvL12nOEKQrlJwx8arlMzxzO2QP
- 8wendLLBIMu8rtM0+iLtH5N+0zqkbcFk1DfeBZAkdAXXKjkXATX4Rnj0AeJSdHCNL/C6
- oqsSTHMa8Oral/lFUi9cz6/VszVRk3QY/KVUZNWu3z1tWR4u1csVcobe4IIV/hB3OhgL
- gaVg==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id o0_0Ld1NuJQg for <u-boot@lists.u-boot-project.org>;
+ Thu, 22 Oct 2026 10:00:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 794A96070D
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792663211;
+ b=ZaXkLmNPnwT0EJo2ICTkXDmuRb2uyaR/5JrrMK1P694r3ZUQ3LnlbYgKbB4gwdhCw4y2
+ IScdamxP92hNf8bPwyy2GlK87B1RIyeViWMLqZLlMxJUXyeoMpOfHCpBf6jq+d1NvtBEY
+ /oBrR5sh770Rfm2eTFUSh8Lc4O6Ad95Spja5fqT6kKAjXi7NGmvJZXznsZVKuurD815Gr
+ N6ay39V4gvMpkdZd7wOzOzgYogmiCJ4a3ErFYz0zjRfFcxoyW5umfY2MZl7J6e6ptA5Ft
+ TMC7BXDU8Ww03o6oNBtbL7lKIcr/yLMHsyM65tQ6cVgpI/tiZ/sy8Jg+bRK6qBuwlfQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1792663211;
+ h=Received-SPF:Received:DKIM-Signature:Received:Received:
+ DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+ Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+ Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+ X-Proofpoint-Spam-Info:X-Authority-Analysis:
+ X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+ X-Proofpoint-Spam-Details;
+ bh=KOgOV1zcgH6Y99MZfb8sFkdniCjTtRzOpyBAqMCy3sA=;
+ b=SPEwBoOGtW05z+7Cch46st9buCttvqlZXVwUtInTIcTc3XCSoJwah4dxgMtjiB5Ac93d
+ PWerCSGEZQ1OyBjjEMKAHJw4bzg1IZU+eVgzyV7QDQ60kZaLOZgzgkYpdGiICevrpgnl+
+ 9sRWMafCmj4p8JE0Qk7BX5uOt1TjqeioUOjIMuaazHisVJk9yAAbuWOPf1MZAoYUBHGLx
+ KMnD7/Qlhj2z80WnCRn8yxf03XlFK/ZJeLkTqtsTR4rXNpRvoR+rbYRXAAJ0zBy4CCGT3
+ kkqLwYNWszd1kEonv8rSkp99gEILDREjNadIMt4euWpmM72rq4NpsOXvdN6KR+nJDJA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=oss.qualcomm.com;
+ dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
+ header.s=qcppdkim1 header.b=YS2RC+RR; 
+ dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=VdxpduG1; 
+ arc=none smtp.remote-ip=205.220.180.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com; envelope-from=aswin.murugan@oss.qualcomm.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=YS2RC+RR; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=VdxpduG1
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 794A96070D
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 10:00:07 +0000 (UTC)
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69MA06aL3427069
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 10:00:06 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ KOgOV1zcgH6Y99MZfb8sFkdniCjTtRzOpyBAqMCy3sA=; b=YS2RC+RRg6Uhg2LV
+ +PDODoIAaQj61f8eyRiG+wd0AiUZLY6P3mMq8XzrTmWFMFG94t0I/lYfU/16iXoo
+ 6PiPuhPdQyzR7pARAsXeHE+wFI7P9mE6cSmCvXohe+hMwSWeTqfcYQimwAo+bUJN
+ K1faxV+pxKhGL7VGyQGDPqqKJ98O+Rd3xedxz5mlbXe8K5dpCR2wDjYBGoMaz7/Q
+ SlhYJjmh1lw84l27wbSvP9dlrKge39MsuZIlW3Pn9wUVOgeYn8mZgKy95nlwNNSZ
+ wqAkuTj1RVktCje+h7dkvKIXcHJsepG/F03gHae6ZxVK/Norp5+0xkk85aRoY0ZU
+ S6kN+A==
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfewq0eqd-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 10:00:05 +0000 (GMT)
+Received: by mail-dl1-f69.google.com with SMTP id
+ a92af1059eb24-151dcfb1569so362673c88.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 03:00:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792662127; x=1793266927;
+ d=oss.qualcomm.com; s=google; t=1792663199; x=1793267999;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=wj8MBa/3M8lrGygm1LOUtRdLCS/YWO7kqIdO8RHak50=;
- b=Kqcb1flMyG9fOQdaxY0oFFT/g9a6pSh73DgwczZNYQzsiPpkeFjLu20THdST1jAUFq
- XiptvH4CpkxoHAGeTwaiBjnCuOKx8lmsq5hagyg8yaebwg4+nazSx8dTT4q5PyvcV/fo
- RXc4F+QwN8YEn2lwhl6M3v2nQFWkwy3MlTmutCabdkOCRagm6AuYUikvdmC4c12M4PD2
- MDiV4ylXA9ZnLurvVLy53iLWYnNgOiOmmPnl94vSM4p4VH0lIdgYju+3xWTpRNOuwt7U
- bOEaakT8CZOXAappEVqEi9+kkxXVVgBTYpqM/oZyebkfLYRDQ35ryiisOfTMUqO7Uj+3
- geRg==
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=KOgOV1zcgH6Y99MZfb8sFkdniCjTtRzOpyBAqMCy3sA=;
+ b=VdxpduG1CW59wAUo1Y5NC+5iddJcXomQDADIYu2g2/9DYQYT5tXqKS1Dmtm7KzMm0A
+ RoSjAtu3v0uYFv7r0Up5aBg8JAh8byVQf0O7P3Bk79nSA4DbZQ42ZkysFRqCWwRWWzUR
+ LXcbbJQbQgm45CMhQ92tI9hWTfWBxzIFmtnGlpgdOTITE/0crh/7LDlOERV/AaB/TavS
+ sqy5xEdrZSS8J4GuTOItOghfXSNDw++pY2xu+bqlOBQeUp+zyHhWHpH8R8ys2mkNjaCd
+ xAdNMOwN90IIQAHS12xNGCsRxtoSJ2p/yX7GtykZHk+Snk5c6b/8xJvIluzJjAYn3EW8
+ s8Pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792662127; x=1793266927;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=wj8MBa/3M8lrGygm1LOUtRdLCS/YWO7kqIdO8RHak50=;
- b=Jw77SfjmuW+lQQdUFWEkirOWt1THaxTclDG+OyFpzpXqa3nYH28qIfWNx2a5eYq+1X
- VnZsk8unX41nz3dPmMdz8oNslr9vcS+WYY0qoUSPNQXcGnKISzIw+Xa4lbtptS+7SKy7
- OzFXpHir14MHDscI2suwSoc47pkDuqu86m6TUtC6SKgdhxCjKNg+32xuw/4iCM9O6TSd
- WDHlxUADjgyKocOSKnxAnJl2bHoQ31bcMjBO8bHvvUhstDg0w5z+SzfhAoJ3MB8bBjRD
- W+n4Yzci3DUdf+OWIu6rJy98ppclq7b00tzymS9LKPWiBqqeA7AfaimDMToAOKPIs/28
- u6zQ==
-X-Gm-Message-State: AFq9FYLKI4oS6rx6fQxXQYfLI5EdrDCO6U1PrO9mfuFVviIavjJOOwP0
- /Rfpcs5yAVnEQoHJdXqAjXvv8MBh7aZFRqT/UGD5SAoHo3jFK7+VOR+NX5c9hDEHhoixSaNVH8o
- GqIMBkcXH0pr29GL1sCr3QQzwXFC0aOpVN424RAYTqw==
-X-Gm-Gg: AYBFou04tNZlvWdyCmB/vwY30up8E4mwkNiuuLyYgp6PEpFFj84VGg6qSwiGRGgd11V
- o5eUg0d3Enm9LQj+SnpB5ZfKaqf7hWC7QACDmAiM9Tir5WfW3Ych6cTgP4181u3BUzNVf0satYk
- vozh/eocp4BZyjm9npmx3ckmQKTE9ldTIbdf+Sj1lRIQsS8CTcUeLhWohcmmfSeLeA17h9ROtb6
- Euvs7sINd4aK8PqvHfQO8Qxp9A/o8M84zLPAvw4TzbuWSGdP7ke3rs8T7CyJTIhIYrYBm5QaSmJ
- gXWkYU7Xiay2+whrehwLlXI+YK7L6L1WF5Fmh4cnHw0Y4QgyFF8BUGC7KlrUy2GmoVNnFx0sRTk
- 8sPJ5dpv+ha2FoFGtpjiZkU7k1T1LMAk7XEw0MDMi3CGPoZkjf73Ert6tQz499u+N9hoKlCZ1SQ
- WmqNbmAqOxMc4kqRnh4y6aHoJ1aTIdeEz7tOaFMHk3vTK57gPtXUEbNyxffmCNzTh5j4iUi7+n1
- FapFttMkqG2HaiJIskWYG3y79lxV5Ej8+Bb1Fc7W+XO2x5b4QwnVhsudxCqZoPOf3iSnTHS7+aF
- gebIOuZY9sz9FjPMnucvKHTtyvzMBHNQXQ+aEW0G+35G827ySxjuT4XezZneR+h0Xe/jGQkid5C
- Zyw0wDfr/U7zs3hvAA6iKfJY1JKxbng5SKZBJtYKNZspGZzaYn1UHCzeTz6McTXvoUcTYPv/RSK
- 29hjHIBDtznUqir23/gl4UhJ4H6AAp3td8rOcDrsp+VFjtmMS88hyf1eVv
-X-Received: by 2002:a05:690c:a203:20b0:8ab:4c8f:2844 with SMTP id
- 00721157ae682-8b133d0ebfcmr23170057b3.39.1792662126711; Thu, 22 Oct 2026
- 02:42:06 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1792663199; x=1793267999;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=KOgOV1zcgH6Y99MZfb8sFkdniCjTtRzOpyBAqMCy3sA=;
+ b=Nbdd7q/AF4llBbbHVsuw31G7aO6n6rG5rPZSUMbLdQl3UWF25I/VJjxF6W6v1TTmrv
+ eAuL9Rq0GflsD7ZihOQNpo9epL9aMflpUndEukKjCCkPbBeorc9ddQpg4KOm0OGP/qAb
+ H44F5AfTM8vOXCjPVBPHE6HvsstCoBrIIaELzcxKbYGz4X8yML7AUUwyW2/tuI7ENJfJ
+ mIIQmMqXCe2yAcuXHpF3JPuAimpPAqxC6AO9XMp2lLlIpIFW+DqYo9+4oCDhrjgK0EFN
+ TlNwvXkyYgU/N/4KV0ERy0rFftCLHCnGWTHVMc2C2vqVb/WJ/vqwKY7Q6MnamkffVSVj
+ Q7Bg==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxM8WLxFaBZpUQ/s6iCE5W6Nbqda0L8UiO/BCer3+V8Ke1rZkPUD6hOEMXUIOqa4skDebFYQjs=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYILmvK0+t7PnLh0r3+tGdK96r2sYUqCzzD1VeugKDByw6On7IkU
+ TiPhqaHk9ZuoFRAMM0ZPvkmo45qyt3HSefjTQJKHs/zAWU/cRCXmGWKr7RoQYJUkcQv8CJaaZI5
+ M9IJKzmqIWhkOcaAOwEoXIqepsb1av09DStuNyT1jk37YqcMlXMAzbvpdAL/dEzFTKNAT4Bc=
+X-Gm-Gg: AYBFou1+fviJmeKOmo9J+9gdjFhvavnxfFFXvbHN/ExA04KyHgNdS+fxgnexZu6UaVl
+ NPh/JnZFVmLHdjmxLFS8rGKUHTZM2u3zDJ5m5zYfwKeqecMlWwPrY+7uQgSK3TkXEPzVztbiS71
+ MeER59ILw+ItVXYkIHW9DdHiOK8P0cKsS2YEDWP3uHJbuGRxTcx1Z4ZSf2e+2Fx7OBCqDkantaV
+ T4p/KvfncjG8krwpfyTI5i4iwisimCUgwfHsxFecOJhxtG97JTZFabea0EDsJQvpkhbd2mwfj8F
+ ml5ZARrkTBhsPrC0X6F5daM2SdjJJLvw7xKOyXc3QMMVy5g5/gphFBy7FgiHTymiFjGgL1v+XFq
+ KePFqZTAklwdZ87oBGkN0N4FhBJRg0wQ=
+X-Received: by 2002:a05:7023:905:b0:184:60dc:c381 with SMTP id
+ a92af1059eb24-192f113b4c6mr2888729c88.23.1792663198951; 
+ Thu, 22 Oct 2026 02:59:58 -0700 (PDT)
+X-Received: by 2002:a05:7023:905:b0:184:60dc:c381 with SMTP id
+ a92af1059eb24-192f113b4c6mr2888692c88.23.1792663198400; 
+ Thu, 22 Oct 2026 02:59:58 -0700 (PDT)
+Received: from [10.151.40.133] ([202.46.23.19])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-1903e4f2eacsm12497310c88.23.2026.10.22.02.59.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 22 Oct 2026 02:59:57 -0700 (PDT)
+Message-ID: <0969e99e-ac27-4a84-a6ab-907aa17023eb@oss.qualcomm.com>
+Date: Thu, 22 Oct 2026 15:29:52 +0530
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <c07a80c76774c3dcdafcda659fc098278b1bdc96.1792504358.git.michal.simek@amd.com>
-In-Reply-To: <c07a80c76774c3dcdafcda659fc098278b1bdc96.1792504358.git.michal.simek@amd.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 22 Oct 2026 12:41:30 +0300
-X-Gm-Features: AclHuK-Y2ugTjZMpPOgj17seksfmG98IdncOp4GQKrfLwoVDjOMw-axYn-CAk-w
-Message-ID: <CAC_iWjJm5M=2_mBAywcXHgJ4-kez6T48bGArHo7XwFyiVNVgZg@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: set dfu_alt_info before FWU alt num lookup
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.u-boot-project.org, git@amd.com, 
- Padmarao Begari <padmarao.begari@amd.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jonathan Humphreys <j-humphreys@ti.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RESEND v1] mach-snapdragon: raise block cache limit to
+ cache full GPT table
+To: Sumit Garg <sumit.garg@kernel.org>
+Cc: trini@konsulko.com, ilias.apalodimas@linaro.org, casey.connolly@linaro.org,
+ neil.armstrong@linaro.org, Michael.Srba@seznam.cz,
+ u-boot-qcom@groups.io, u-boot@lists.u-boot-project.org
+References: <20261013094310.2408439-1-aswin.murugan@oss.qualcomm.com>
+ <atIavP8ucOMC-LN7@sumit-xelite>
+Content-Language: en-US
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <atIavP8ucOMC-LN7@sumit-xelite>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: oOQ1AVnGQFIp5_EQCa-qV5ypkwQw8qCf
+X-Proofpoint-ORIG-GUID: oOQ1AVnGQFIp5_EQCa-qV5ypkwQw8qCf
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIyMDAzOSBTYWx0ZWRfX/yYJON5Sp71l
+ ka0c5Uwk/GGGyTWFZwdh+T8dlU6f+oWLb1xgn259pVsj1lqmlej7eSIE4WzCRycTWnsSBTYjMxc
+ E78U8eLYxGWNHKeqswK50nTI9Zytyfo=
+X-Authority-Analysis: v=2.4 cv=G4OJgNk5 c=1 sm=1 tr=0 ts=6ad9dea5 cx=c_pps
+ a=kVLUcbK0zfr7ocalXnG1qA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=1VxDqnHFAAAA:8 a=EUspDBNiAAAA:8 a=q1uuNYVdm6WhdRfwAy8A:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=vr4QvYf-bLy2KjpDp97w:22 a=aZ5uHUMKh6B-zo3GvD48:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIyMDAzOSBTYWx0ZWRfX8E0H57LrGIQF
+ wPFoATyVrUu3NYXTF+tAhZ0zlGVq10NUsl3ryRl1/BTnVTAaLU//japcfiDuj7sD0EwqsSWp+jH
+ rOSlLiq0+DceahvijcolSKM4AmmlDG4qcLkvm6dmZbUWXXLic3ndY+j6bgB9p38qLPId1AI4NGE
+ L5GdSuYWCZvyP/TiMhcWBtWKrDj1RUMUUPxF7gpWGv82jReLX9yB8nFdAycDC5EvxQhP3klOsPq
+ 64cMKYY8Yt6vUJYqPtTn9GsPzbZVJGjwGRP3LN7fIzXaF9nW2QucZuImaTeXPnRjj9qXBT9WLSj
+ l3tL4ZcJsbwnN+wu4I/0+VmMQAxnFr4hngtbtrL6RT+rxwzyhj3RzClEAW8Hb09LaeU26AlibEL
+ DYnYSylVe/8mLzLemNYs+h/U1ifzoBtc3KwpOudM+rl1SjwOCJxK3MRBtpLbck3PrOxHw9L4T/F
+ ygYUduxrLDNCCkNy9rw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-22_04,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 clxscore=1015 phishscore=0 lowpriorityscore=0 bulkscore=0
+ impostorscore=0 adultscore=0 malwarescore=0 spamscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610220039
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -199,113 +244,108 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Thanks Michal,
+Hi Sumit,
 
+On 10/16/2026 6:08 PM, Sumit Garg wrote:
+> On Tue, 13 Oct 2026 at 15:13:10 +0530, Aswin Murugan wrote:
+>> From: Aswin Murugan via U-Boot <u-boot@lists.u-boot-project.org>
+>>
+>> part_get_info() calls find_valid_gpt() -> alloc_read_gpt_entries(),
+>> which re-reads the entire GPT partition entry array from disk on
+>> every call once per partition while looking up each partition
+>> during boot.
+>>
+>> This happens because blkcache_fill() skips caching reads larger than
+>> max_blocks_per_entry (default: 8 blocks/4KiB), and the GPT entry
+>> array is bigger than that, so it never gets cached and every call
+>> triggers a fresh eMMC read.
+>>
+>> Raise the per-entry block-cache limit to cover the full GPT table
+>> (computed from CONFIG_EFI_PARTITION_ENTRIES_NUMBERS) so it is cached
+>> after the first read, turning subsequent GPT entry reads into cache
+>> hits and avoiding redundant eMMC accesses.
+>>
+>> Improves boot time by ~800ms on eMMC based devices.
+>>
+>> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+>> ---
+>> arch/arm/mach-snapdragon/board.c | 18 ++++++++++++++++++
+>> 1 file changed, 18 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-snapdragon/board.c 
+>> b/arch/arm/mach-snapdragon/board.c
+>> index 87adb100edd..b87e5ce0e89 100644
+>> --- a/arch/arm/mach-snapdragon/board.c
+>> +++ b/arch/arm/mach-snapdragon/board.c
+>> @@ -11,16 +11,19 @@
+>> #define pr_fmt(fmt) "QCOM: " fmt
+>>
+>> #include <asm/psci.h>
+>> +#include <blk.h>
+>> #include <dm/ofnode.h>
+>> #include <env.h>
+>> #include <fdt_support.h>
+>> #include <init.h>
+>> #include <linux/arm-smccc.h>
+>> #include <linux/errno.h>
+>> +#include <linux/kernel.h>
+>> #include <linux/psci.h>
+>> #include <linux/sizes.h>
+>> #include <lmb.h>
+>> #include <malloc.h>
+>> +#include <part.h>
+>> #include <soc/qcom/smem.h>
+>> #include <sort.h>
+>> #include <time.h>
+>> @@ -30,6 +33,12 @@
+>> enum qcom_boot_source qcom_boot_source __section(".data") = 0;
+>> enum qcom_memmap_source qcom_memmap_source __section(".data") = 0;
+>>
+>> +/* Number of 512-byte blocks needed to hold the full GPT entry array 
+>> (entries * entry size) */
+>> +#define GPT_PTE_SECTOR_SIZE    512
+>> +#define GPT_PTE_BLOCKS \
+>> +    DIV_ROUND_UP(CONFIG_EFI_PARTITION_ENTRIES_NUMBERS * 
+>> GPT_ENTRY_SIZE, \
+>> +             GPT_PTE_SECTOR_SIZE)
+>> +
+>> #if CONFIG_IS_ENABLED(SYSRESET_PSCI)
+>
+> This PSCI change is irrelavent to this commit, if needed propose a
+> separate commit.
+>
+> -Sumit
+>
+There is no PSCI change as part of this commit
 
-On Tue, 20 Oct 2026 at 16:52, Michal Simek <michal.simek@amd.com> wrote:
->
-> From: Padmarao Begari <padmarao.begari@amd.com>
->
-> efi_firmware_raw_set_image() derives dfu_alt_num from image_index by
-> calling fwu_get_dfu_alt_num() when CONFIG_FWU_MULTI_BANK_UPDATE is
-> enabled. fwu_get_dfu_alt_num() calls fwu_plat_get_alt_num(), whose MTD
-> and GPT backends call dfu_init_env_entities() to parse the
-> "dfu_alt_info" env variable.
->
-> "dfu_alt_info" is set from update_info.dfu_string further down, just
-> before dfu_write_by_alt(). Boards that do not already have
-> "dfu_alt_info" in the env hit fwu_get_dfu_alt_num() while it is still
-> unset:
->
->   "dfu_alt_info" env variable not defined!
->   Firmware update failed: <NULL>
->   All capsules were not updated. Not updating FWU metadata
->
-> Move the "dfu_alt_info" save and set above the dfu_alt_num derivation.
-> Make the fwu_get_dfu_alt_num() error path goto restore_dfu instead of
-> returning, so the old value is written back and orig_dfu_env is freed.
->
-> Fixes: 546152624f46 ("efi_firmware: set EFI capsule dfu_alt_info env explicitly")
-> Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
+Thanks,
+Aswin
 
-I've qued up the CI and I don't expect it to fail.
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
->
->  lib/efi_loader/efi_firmware.c | 35 ++++++++++++++++++++---------------
->  1 file changed, 20 insertions(+), 15 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-> index 84de95f5c230..346b00c1663a 100644
-> --- a/lib/efi_loader/efi_firmware.c
-> +++ b/lib/efi_loader/efi_firmware.c
-> @@ -765,6 +765,24 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
->         if (status != EFI_SUCCESS)
->                 return EFI_EXIT(status);
->
-> +       /*
-> +        * "dfu_alt_info" must be set before fwu_get_dfu_alt_num(), which
-> +        * parses it through dfu_init_env_entities() to locate the image.
-> +        */
-> +       orig_dfu_env = env_get("dfu_alt_info");
-> +       if (orig_dfu_env) {
-> +               orig_dfu_env = strdup(orig_dfu_env);
-> +               if (!orig_dfu_env) {
-> +                       log_err("strdup() failed!\n");
-> +                       return EFI_EXIT(EFI_OUT_OF_RESOURCES);
-> +               }
-> +       }
-> +       if (env_set("dfu_alt_info", update_info.dfu_string)) {
-> +               log_err("Unable to set env variable \"dfu_alt_info\"!\n");
-> +               free(orig_dfu_env);
-> +               return EFI_EXIT(EFI_DEVICE_ERROR);
-> +       }
-> +
->         /*
->          * dfu_alt_num is assigned from 0 while image_index starts from 1.
->          * dfu_alt_num is calculated by (image_index - 1) when multi bank update
-> @@ -779,27 +797,14 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
->                 ret = fwu_get_dfu_alt_num(image_index, &dfu_alt_num);
->                 if (ret) {
->                         log_debug("Unable to get FWU image_index\n");
-> -                       return EFI_EXIT(EFI_DEVICE_ERROR);
-> +                       goto restore_dfu;
->                 }
->         }
->
-> -       orig_dfu_env = env_get("dfu_alt_info");
-> -       if (orig_dfu_env) {
-> -               orig_dfu_env = strdup(orig_dfu_env);
-> -               if (!orig_dfu_env) {
-> -                       log_err("strdup() failed!\n");
-> -                       return EFI_EXIT(EFI_OUT_OF_RESOURCES);
-> -               }
-> -       }
-> -       if (env_set("dfu_alt_info", update_info.dfu_string)) {
-> -               log_err("Unable to set env variable \"dfu_alt_info\"!\n");
-> -               free(orig_dfu_env);
-> -               return EFI_EXIT(EFI_DEVICE_ERROR);
-> -       }
-> -
->         ret = dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
->                                NULL, NULL);
->
-> +restore_dfu:
->         if (env_set("dfu_alt_info", orig_dfu_env))
->                 log_warning("Unable to restore env variable \"dfu_alt_info\".  Further DFU operations may fail!\n");
->
-> ---
->
-> --
-> 2.43.0
->
+>> static void show_psci_version(void)
+>> {
+>> @@ -153,6 +162,15 @@ int board_init(void)
+>> {
+>> #if CONFIG_IS_ENABLED(SYSRESET_PSCI)
+>>     show_psci_version();
+>> +#endif
+>> +    /*
+>> +     * Default cache only covers 8 blocks, too small for the GPT
+>> +     * partition-entry array, so it's never cached and gets re-read
+>> +     * and CRC-checked on every part_get_info() call. Raise the limit
+>> +     * to cache it after the first read.
+>> +     */
+>> +#if CONFIG_IS_ENABLED(BLOCK_CACHE)
+>> +    blkcache_configure(GPT_PTE_BLOCKS, 32);
+>> #endif
+>>     qcom_board_init();
+>>     return 0;
+>> -- 
+>> 2.34.1
+>>
