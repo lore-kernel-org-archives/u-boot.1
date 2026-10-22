@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A128F606A31F
-	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 07:48:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 326A6606A319
+	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 07:49:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=UCUkHyX1;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=ygKTkPrA
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Tn2Or8Ok;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=NGXP7WdY
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7736D80822;
-	Thu, 22 Oct 2026 07:48:42 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0873F408C4;
+	Thu, 22 Oct 2026 07:49:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id G5YT-WaukvKI; Thu, 22 Oct 2026 07:48:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E46EF8083F
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792655321;
-	b=b81/9kAWGqkPaOhfxh0Bn8xZj8Skjr529cdzUf8CBpPQwG7p4dCsWfUWQayvOLefSHXL
-	 9brcXTcnKLMrMxMaBPkWBnNUbgM/K7b+iard1a6TLCJ26Myl7lp8CCHQMDbxif6W6YZ2y
-	 YavRKipVYUqOGoihmtybt+DbmwIzoXHIOgDfN8enVaoHBFjlzQvlsGVMxOtMO3GsMXhxZ
-	 T/1SYNmoS4asQspAJEmcwgbHTtYuJJFZ6LMuuP9v8s8kcRD6awee/Tlw2Q0WQTHLayhLS
-	 ZA5JT/WBnzfJ57mvZViCpRZoia9fiem+gjJf09WqlQz0Z9G+HjfZuw3t+D3x/pcz9Bg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id uOyxbC9ik33T; Thu, 22 Oct 2026 07:49:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B648C4077B
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792655360;
+	b=NjZpqOEF5N0a4vjEwXseJnDbeKy0QKWPmHwxBs2Ax4FhxOiKKW/2OEyfnqDhSwQw5PhI
+	 La1/dJJKesbmAYkl05gLyUlS1FkSijLHKQ+FDx4EIbAq7jJc0yLR6Xu0+fkXLaqA/ig+T
+	 zn5xAr7AAj9WFMQH98zTz5FfUgFA5rfdHQCn6IJle5w/pKaoYz787zkS3tZSvMZ7vc9Hl
+	 aMd8gtpfXU8NzgpGY3wjg0UBmdy2hdlPZhp/WlSrqXlXwqUdi3TJcYeBu5UkKTtVA3lwz
+	 lwPFh7ySsR5A5do3rhyFkS7dzzcd8w/1l/RSAq8H6JJWX7lx6762Ew2LUvUUKyv/87g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792655321;
+	c=relaxed/relaxed; t=1792655360;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -34,139 +34,140 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Reply-To:Errors-To;
-	bh=bpTcYjc69vLiHeaOnANLz1N+0S7Esjy1zuKfmRQdwJs=;
-	b=bZ9R0bW7zrJUQA0oBbQgBoUJt0lOCOyvC4gZ65gJuLY+dAdIjE16uGKdwQsOvaeCMQ0H
-	 keITviF0yJ5EsaS4ZbHxrOpwXNdWL6emrsamuREoQ23oz4MGBHegvdCBkqfQRVQ3wdA/h
-	 Z1YDN0KHT6W0gk6+NDNRUNuiwPmwB9rPoygEDIwoR2i8mCE+1cf6S0gF3KmFN8yGabl8c
-	 EXtjasDORZvBSXMi+TPKL9ft6sL5jNn1lyGs7PYa6HfFjKIh8GNBp1B5oJUAU1CAnoOHl
-	 EDjfLKjgdsQluwMc9yOS6XFp6Nh3gs4Vx0Id29kFblHYuEZITdIaFIjaqAtNJhfq1bA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=Bc1lxAlKj8D+eYEvLRmawPbvf7ggT9xrwz1NwPS/uDc=;
+	b=sbCFekS/khbvc8KNwFGrtP29Sxt/8Y2iZF0WppxtBKxTZdVvtrs4MQ/ilDU7N7HHgA6H
+	 SZfniXAHLP/Yl/9UI0fPri1Qa7RlzxtmthZNj6aLOWJrVwz2zpd3NsFFZBxgMQXI5BLCG
+	 fgCYtBruSiIODZaPMIck35I7yrGJ7JNiwazYJjuMSUX7FZRd0nkdeeS/irAwjvGm6MR19
+	 kFgudqkzxQup0D5BwQ6QO+L3woj1oWqbTQ43GNCWOgH++P7nJujeSSp0vIuVsmEtN1Qzv
+	 tKrs6ICPGc7BpZJItlfAdnR4rbBMRZYSPHq640qNXb0MkbD+qNP8VXX6sDMwSoHSdLA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792655321;
-	bh=bpTcYjc69vLiHeaOnANLz1N+0S7Esjy1zuKfmRQdwJs=;
+	d=lists.u-boot-project.org; s=default; t=1792655360;
+	bh=Bc1lxAlKj8D+eYEvLRmawPbvf7ggT9xrwz1NwPS/uDc=;
 	h=Date:From:Subject:To:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=UCUkHyX1eMhnpMoBa/r4LqSoYKFjrnDAIQGSrusKVtJgjthZtxovwRQirBXdx8QEb
-	 3hJgRFqBz1xub1bQdJBZTNbMQzUMhjtOB5RscTK6mGQbZ+fpd73Wau9R06EFKoSVMi
-	 A0Vb+Jm6O8mBbG6oO/24MdGcCGyeUlZ/+FzOlU4dgvCvgZ6+GqvzX+eibXc5ojUB4R
-	 mXadI1Us5HHkbdLhwqDpb9aZUo7rTnEN9WWiVrp43G+i/Iuiwc1o5tP2ed9olhcyGd
-	 2wm/0oaCFegYWmVAlKwaMdq5eB17+wXdeEXpxIFwTi8mgKHwTgBpQgtSHeFw0dT85L
-	 F9uN+28VOe8cQ==
+	b=Tn2Or8OkQBpnjqP0aA/D5j1xe2Xltf9vvq9YCOk0Lj5LPVDibYxxxW+vRnsnoV8Tk
+	 aZ8FrDK/nnqtJrKsrWtNl2IhXhhkpxcKN3CPjI20R3yJ8Rp44aDeSLMieQO+nprEOR
+	 2wW6/uzfkzakAvu2Yzj9HblBaS61Q23w5JJGE/9RdYmvC4057lLL45jNdPqZ73QogR
+	 Z1kUQls91jyjmZ7ibvZDB/bJchqz62ysk/I/L2ik/DzKsI4m4z27cwaURhuoYapnZD
+	 4UJ71cmnsUIN9NpIcU0qn0EMEFRjkAPTQymlypXPovdwaUm9oWAKmZJj3ebGLvORn+
+	 mNoFFbmdfaMmw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E46EF8083F;
-	Thu, 22 Oct 2026 07:48:40 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 9361B3C1
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 07:48:39 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B648C4077B;
+	Thu, 22 Oct 2026 07:49:20 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id C1178235
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 07:49:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 796AE607C4
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 07:48:39 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id B393B607C4
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 07:49:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bDstYXNPcRKV for <u-boot@lists.u-boot-project.org>;
- Thu, 22 Oct 2026 07:48:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8BB8760834
+ id v6XjCxF0VRXX for <u-boot@lists.u-boot-project.org>;
+ Thu, 22 Oct 2026 07:49:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2A8E36066A
 Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::430"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792655318;
- b=FBwHEfKfGtnAzFWEpWDv6DfaW2wk2Ei048YiaoZXivM0Kin+3UsKl2n1b0mZSvEluPo4
- Y//nn/nWGQDaZXJvJI5Uw2lXjCZXRg7sjIisc5Py1XVCBqsGi+XLrcV5YmWDMmWXL0J32
- C5YZudgL27qZSzCeK23ZhAwMpj9viIIUu+Za0hwFO7/qPsojWRWmJlzqwDtKy5keUDHrv
- 8GXHiKNNlrzt4jhnuhdSI9dv7sMytYe76P0LEXf0dxij8s42SP0b4dvPOmueXDST4AyZG
- 3VxmxX26tu191ZJmVVgXlrxL6kaPxSoE4z3A+RBe2AeE/Kp3UjCKkAHwMoh1mX72NdA==
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792655357;
+ b=WI4HFjTlLnqczEVh6eVrqBMPlQldbl/DPXniMYA+xLVXie5DCJ/br7zx561mWTHFzUly
+ zWGHzaEICDtuSwgvAAc3/KX088B6Yy9pQj/VHW1Lo7y4/gozHZEspwl+ujApgKc3nCBHn
+ qR2RTWbn5rMX9b8Uti2uutf4Q9aAziiXeqrYfLxt5HXoJ7ncpsgucY7giz8kcEWX6eObF
+ QsKhANomq6+EnbF0ASMxyA0pmoNQFVdRjQ4kin87ZM9mC5QbtCN1dVQINelywz/qBUxkU
+ Kee+XvT1glbh97e6vh0N/Pw5CGf01YXK4otoryw0q6DIaXY90jn1/WKAbcPqTmh3ZqQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792655318;
+ c=relaxed/relaxed; t=1792655357;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Message-ID:Date:MIME-Version:User-Agent:From:Reply-To:Subject:To:
  References:Content-Language:Autocrypt:Organization:In-Reply-To:
  Content-Type:Content-Transfer-Encoding;
- bh=bpTcYjc69vLiHeaOnANLz1N+0S7Esjy1zuKfmRQdwJs=;
- b=rNCRcGToz6sONmyi2zzaFWBSnnOKCJmX0ZQhXeOip6yjz7bCuae5sXXnXMKu1HYaoL4W
- V1JmE5ZbZKSzyhBGphmMahBzWaoYNbdrLbQOrFsVzq0mhbGnEmUSSZrdL8TDFLmgumZXp
- Z0gJtWLxJiw1dEbDXTlBfUW9CqxBePO6dO3kF+wiJ4JW9eK1oqPXZLhmshdl43fWtFcl0
- rjzaUFPR/i15cVgDwDOzIe2UNC0frjF+0YKC6dYQ98tUYCYvisJ15F6ZnaARFC7vr3oTc
- x0vSQuaVQZsGOmHm4DBM8BrPhgq6/U4Hdr6txCUHPfgc5GCrH296awTewkJajm8A8PQ==
+ bh=Bc1lxAlKj8D+eYEvLRmawPbvf7ggT9xrwz1NwPS/uDc=;
+ b=USTxBuno3mhc25ddGzC4MHylOPeApv3UEvGd+HcBTIglS/3l18PwxhUwiJ/ta9bG3/eT
+ ilgiQKdX0heepH6u48HL7ouQIZEyapZ11jRvjmjh+R/qA/0qWOnDmaCbjF/Cqt0rjol/f
+ 1ZqbLgOh77S2r9n48Z/PBR5s2LLuRpJ6hWMthwxjgDnSKxgF1ThsTOqLizXeptKaM1Rm2
+ kxXyLYdy5ILInhrAXJkkLLGFje0iGmVx7t3Eh9/26i6N9JXMohzTn1tPtx32NZzUKDxFz
+ s1MEw5SMRFRzL0NM0ohIqh0Lvja3BRzVepZOcPLmZF4zmW2VY90kpOLW0JWS4H5idyg==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=linaro.org;
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=ygKTkPrA; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::430"
+ header.s=google header.b=NGXP7WdY; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::430; helo=mail-wr1-x430.google.com;
+ client-ip=2a00:1450:4864:20::42c; helo=mail-wr1-x42c.google.com;
  envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=ygKTkPrA
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 8BB8760834
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 07:48:34 +0000 (UTC)
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-48dfdd0678dso1277555f8f.0
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 00:48:34 -0700 (PDT)
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
+ header.a=rsa-sha256 header.s=google header.b=NGXP7WdY
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 2A8E36066A
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 07:49:16 +0000 (UTC)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-48c45111bebso993932f8f.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 00:49:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1792655313; x=1793260113;
+ d=linaro.org; s=google; t=1792655355; x=1793260155;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=bpTcYjc69vLiHeaOnANLz1N+0S7Esjy1zuKfmRQdwJs=;
- b=ygKTkPrAvIpZk0IhUQ/8AV3rXC7edf/ELr3+zTInlpBKqini2WyFsnzcfa/JZ5QYIg
- nUzmhqt0UJcomDruW4JdrTZBKOCLLe1VU+rBwBwWZuNRYbuXu6bfsy7M4fqjA+Hh6O12
- XmT2TRxaADBY3WQKu+XoVzvmF5OyK76FP2VYhECr7lpZtvrKdY9TtXr1VQe6KsSTcs8d
- GvenjDHAXv1Xf395ceNnyjlXO4t6IMbU4sdpssrpCDUQFk7aagMizQo36hUcls/u963p
- 4A1Ev815Fy2OIxica+GF7UhkJeRyLAE8aiE9zKrYNtlM0RmVWUuHFAeLJ8vNLKBiJaJy
- MeeA==
+ bh=Bc1lxAlKj8D+eYEvLRmawPbvf7ggT9xrwz1NwPS/uDc=;
+ b=NGXP7WdYWFZUXJNoLRoHgHqLiowtKRBnueV/9q+WQLQkqVDy0KTadKJAgYM8rdIV9q
+ 9VoK7qEBZtF82dcMFQhK9akFTc1gkf//9cagRToe2XYVL20xcwmW1FgRu1ilNw7rENGY
+ eyvVfHGnn99Uv5k3Zx0pfj2P3R+xJ5zrqPr159WnIcU5GTHvXPM0uq345k9j+PdpyaV0
+ amcWyLn29/MPuIzcUPnRbz7B8zfxDeaDjj4SOz6NvK9XI3QWbmw2QnNWxVG/kvScWMip
+ AeJpFrgQgjEiW6cj4R5QZWSmWfUPEc6+oLMI2JBXpMAnY9Dd90lyFU62KQnFEpySDagY
+ 7xgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792655313; x=1793260113;
+ d=1e100.net; s=20260707; t=1792655355; x=1793260155;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=bpTcYjc69vLiHeaOnANLz1N+0S7Esjy1zuKfmRQdwJs=;
- b=mwKQC3e+4XOwrliJKjXxjGTUeYK8FGf13BIo6cfxc7LROdriSoYi4ylBJdi38pSLpi
- L+o9WKEVztW0Xy23uf+tSy4BzSF9Qj4mCuz8FpsiAPiTz/B5ETeOxkVU0utWV87qe/WG
- afG3EHTVZJvs+fOymYn0e58Y9gQ341mZoN+mVFkO/9h5nbioxnKLgt9fB5iD18iW+uuJ
- HGPGfiKrMTPIuW8IWrslVSVeCbRcgCQZwBTBMCz1zm7xv2SljdfJ1MtYJi5ANI6fdDqE
- f6FIScPiJoOt493UqB/7gr+YDd3AjTrBtHv5dji9kWW76Mj6mW0PGjM3S9NlvtvWUKI+
- amKg==
+ bh=Bc1lxAlKj8D+eYEvLRmawPbvf7ggT9xrwz1NwPS/uDc=;
+ b=10X95xg/wdebcAhQ9pULAzYRGjxl12T8tnZCXr11ZCkbAioH8jsy2IUr6d7oLcRahW
+ HsaGFRc2PoZuut8QhdSRScvptTmZ8o5IPKLoMJR2BD8yRMUoJHayGQwvtVWgvRpW0Cko
+ FI1a9DR8f5vah470RHq8x48WOrT1RBIbnmJqYAzlmnO82/wvCvQELTxjGJJ98kn5HoNI
+ yTjLLCzJIceEgPSmR+YJWn3Ba76VPcu9xjAgv1d4Srs+HFOm5TqwbRtcPp8MB6T/as1/
+ F+eFaW/+rdhaHFNLu4JcmBtw8Zw6dZ3lsenl9NIHHbSBAiM+LbedJNqoXhOCb+iCjKbo
+ jZpA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBx5By+xYZlB/lXtw+R2eeOlavoXzhGrvdBFkjNAUKFgQ0SksA6MVzaPetecddaAGHPQKaeKh14=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYI7flWidIpINBF5ip5b0gDUvpXHmkK3FREwe8TdeB08muYKpxhf
- l0M5vBHma8sQXdTepj6Z57gXVLMOLtz1PmYFtyQZQ56/v11JhZo52oOkA3eBIUAwkzw=
-X-Gm-Gg: AYBFou3lUnd0Dh8KMF2OnLo3CPAbKBolQfAlbsqLspRwBNqE3yR6goh0xtY3HMDpJ3M
- NO3FyDLRcfugEfdJiPeYBmVPhqR0a64SyzhsaBvBozW/1qOVEqvnivtaDTog0ZR7quU7lu/D0yM
- NfDWdy49BgiisrfgMJYTbG02Nap9ji2nyA6bm3G6mWGXLFV9kex4dRcguDSMZvxZkOxs3U7Xut/
- nDVmEx4pC3SSabppxR6IlCZ81D8WtXCzup3odDVtIbdoCm+pYETPYG5lqEFqyjSvPyNhEMrYzpR
- XHXwOkwVy+zyZglS8YPl+dQu8+vqk28puz8+Klwh3YXnXRIv9k6ad89CLQHudi1VCnqvL+4Q9VO
- dfk6gLHxRJcBuvbP4IcAny74l1kpdbVOK5A1V9DMohWMED7ti/RdPqvQ+g6L0fZAiRYSsHMLuVk
- wAp9tEBoxAStuNE+cq7J1tdFYAwl+H5la8BZGUTyuv4vPnP1ShHbIr2AYfCqjRt0dRPF0O8iav+
- S3z5lfgE8y0wODbY1tHjwBnuJtzvzamxP3DTtDTBQzlcMI5lhWCi5kiuCe8Ih2csOdH090PEY2Q
- 6KjVPwdQbM9oGrFLHNBPBb5NBKQ70aoYtRk=
-X-Received: by 2002:a05:6000:1862:b0:48e:932:af0b with SMTP id
- ffacd0b85a97d-48e264bd74fmr9633320f8f.32.1792655312714; 
- Thu, 22 Oct 2026 00:48:32 -0700 (PDT)
+ AKwUvBxKYdA6j9wGzc8ANtSE7ab+ic/BFa4icHAXyF/WURXzkEpw5jUNZWhGL4DzST5rMiIGFZpyMX0=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYIEi8WNVVlbWKxQdXyHq51ls0L0zXCz3n+jOaXchr1AG3YrWa0B
+ HssyC+3DmXPSsz8eSoMR9KpE3Pi6cZOCFDvFWsFg075adttC5n3FPUkjk0c4l4dzSLE=
+X-Gm-Gg: AYBFou0Am9NEgltiF5X7MmHRGltx6wTkG3XfEmJzURQnIYO1hRwmPEd1lKfj2gfyF6r
+ P80hmq3nAorg4R0XF/TlklUOiLRtmgpwitMOZ0PpPTTTA8ioqoWupTy+U1G5QOs0v1NEpvnd4aD
+ 4Bh8yHrJ2TXTgwAfHKzexSNwfFv1JobjaB40eT9QN5WG67Mmec+3cFnhQZeKbtYvzHfDy5n9cCz
+ qmbtMhDTAFtXI6T1dWcHi7/QmwdOcDGU52hBso/OnD5eJcDGTAWWQypP4ypBeuqOJitjGTqGs7h
+ lsJ8NE/yc0+oRuTnsHWF45orxVKl8mC5npbg5f8zdwqeKF27/8lEjB02e6OmGEkeFTlodC24NcR
+ OXJUqOoSTG5YnmDZLYOVfxX/0MqVXZygRzBgrebVUJyZet7o3ls79jLm7Yvv9VjNGQz8mmkR50p
+ 6oHDcSi/DZy8Amels1DrjXjudFO3nKKWlVwlV4ojxhWyv8vOZ6ODMwWHaAM51Jaf0ztaQoREmT7
+ udPh5GKEtb9cJrQ/JmU53h2/yTRbCCvk9ENjVZR12xh1SHsIEQUbWJil7O6X4V5VKZuCt7QeHpT
+ 3YTShk3OKEeHZa0AN7hDL5Dlw+cvBCqnZo4=
+X-Received: by 2002:a05:6000:161b:b0:48c:7caa:12cd with SMTP id
+ ffacd0b85a97d-48e264b1606mr6142307f8f.22.1792655354474; 
+ Thu, 22 Oct 2026 00:49:14 -0700 (PDT)
 Received: from ?IPV6:2a01:cb1c:fcf:4600:211e:45da:8a88:2665?
  ([2a01:cb1c:fcf:4600:211e:45da:8a88:2665])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e25828c6dsm11374151f8f.24.2026.10.22.00.48.31
+ ffacd0b85a97d-48e25835247sm10548454f8f.41.2026.10.22.00.49.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 22 Oct 2026 00:48:32 -0700 (PDT)
-Message-ID: <d657fe8a-f644-4e8e-bbc8-03dd1a2c1409@linaro.org>
-Date: Thu, 22 Oct 2026 09:48:31 +0200
+ Thu, 22 Oct 2026 00:49:14 -0700 (PDT)
+Message-ID: <a8c912d2-748d-4f4d-9acd-99924c54837e@linaro.org>
+Date: Thu, 22 Oct 2026 09:49:13 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v4 02/12] pinctrl: qcom: add driver for shikra SoC
+Subject: Re: [PATCH v4 01/12] clk: qcom: add GCC clock driver support for
+ shikra SoC
 To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
  casey.connolly@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
  lukma@nabladev.com, marek.vasut+usb@mailbox.org, Michael.Srba@seznam.cz,
@@ -176,7 +177,7 @@ To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
  balaji.selvanathan@oss.qualcomm.com, varadarajan.narayanan@oss.qualcomm.com,
  u-boot-qcom@groups.io, u-boot@lists.u-boot-project.org
 References: <20261021160916.3894471-1-aswin.murugan@oss.qualcomm.com>
- <20261021160916.3894471-3-aswin.murugan@oss.qualcomm.com>
+ <20261021160916.3894471-2-aswin.murugan@oss.qualcomm.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -203,7 +204,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20261021160916.3894471-3-aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20261021160916.3894471-2-aswin.murugan@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -218,548 +219,413 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 10/21/26 18:09, Aswin Murugan wrote:
-> Add a Qualcomm TLMM pinctrl driver for the Shikra SoC. This driver
-> provides pin configuration support required for enabling peripherals
-> on the platform.
+> Add initial support for the Global Clock Controller (GCC) on
+> Qualcomm Shikra SoC.
 > 
-> The implementation is based on existing Qualcomm pinctrl drivers in
-> U-Boot and the Linux kernel, with adaptations for the Shikra pin
-> layout, functions, and groups.
+> This introduces a new clock driver (clock-shikra.c) implementing
+> the required clocks for early boot and peripheral enablement.
+> Update Kconfig and Makefile to include the Shikra GCC clock
+> driver in the build.
 > 
-> This enables proper pin configuration during early boot on Shikra-based
-> boards.
+> The driver currently provides basic clock definitions required
+> for system initialization.
 > 
 > Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 > ---
->   drivers/pinctrl/qcom/Kconfig          |   8 +
->   drivers/pinctrl/qcom/Makefile         |   1 +
->   drivers/pinctrl/qcom/pinctrl-shikra.c | 478 ++++++++++++++++++++++++++
->   3 files changed, 487 insertions(+)
->   create mode 100644 drivers/pinctrl/qcom/pinctrl-shikra.c
+>   drivers/clk/qcom/Kconfig        |   8 +
+>   drivers/clk/qcom/Makefile       |   1 +
+>   drivers/clk/qcom/clock-shikra.c | 344 ++++++++++++++++++++++++++++++++
+>   3 files changed, 353 insertions(+)
+>   create mode 100644 drivers/clk/qcom/clock-shikra.c
 > 
-> diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-> index 7dd3782c14b..6e786917809 100644
-> --- a/drivers/pinctrl/qcom/Kconfig
-> +++ b/drivers/pinctrl/qcom/Kconfig
-> @@ -132,6 +132,14 @@ config PINCTRL_QCOM_SDM845
->   	  Say Y here to enable support for pinctrl on the Snapdragon 845 SoC,
->   	  as well as the associated GPIO driver.
+> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+> index 95b650831a3..1a7957e2201 100644
+> --- a/drivers/clk/qcom/Kconfig
+> +++ b/drivers/clk/qcom/Kconfig
+> @@ -103,6 +103,14 @@ config CLK_QCOM_SDM845
+>   	  on the Snapdragon 845 SoC. This driver supports the clocks
+>   	  and resets exposed by the GCC hardware block.
 >   
-> +config PINCTRL_QCOM_SHIKRA
-> +	bool "Qualcomm Shikra Pinctrl"
-> +	default y if PINCTRL_QCOM_GENERIC
-> +	select PINCTRL_QCOM
+> +config CLK_QCOM_SHIKRA
+> +	bool "Qualcomm Shikra GCC"
+> +	select CLK_QCOM
 > +	help
-> +	  Say Y here to enable support for pinctrl on the Snapdragon Shikra SoC,
-> +	  as well as the associated GPIO driver.
+> +	  Say Y here to enable support for the Global Clock Controller
+> +	  on the Shikra SoC. This driver supports the clocks
+> +	  and resets exposed by the GCC hardware block.
 > +
->   config PINCTRL_QCOM_SM6115
->   	bool "Qualcomm SM6115 Pinctrl"
->   	default y if PINCTRL_QCOM_GENERIC
-> diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-> index a7a9ad03569..e12e62beb57 100644
-> --- a/drivers/pinctrl/qcom/Makefile
-> +++ b/drivers/pinctrl/qcom/Makefile
-> @@ -18,6 +18,7 @@ obj-$(CONFIG_PINCTRL_QCOM_SC7280) += pinctrl-sc7280.o
->   obj-$(CONFIG_PINCTRL_QCOM_SDM660) += pinctrl-sdm660.o
->   obj-$(CONFIG_PINCTRL_QCOM_SDM670) += pinctrl-sdm670.o
->   obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
-> +obj-$(CONFIG_PINCTRL_QCOM_SHIKRA) += pinctrl-shikra.o
->   obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
->   obj-$(CONFIG_PINCTRL_QCOM_SM6125) += pinctrl-sm6125.o
->   obj-$(CONFIG_PINCTRL_QCOM_SM6350) += pinctrl-sm6350.o
-> diff --git a/drivers/pinctrl/qcom/pinctrl-shikra.c b/drivers/pinctrl/qcom/pinctrl-shikra.c
+>   config CLK_QCOM_SM6115
+>   	bool "Qualcomm SM6115 GCC"
+>   	select CLK_QCOM
+> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+> index 1adca029b11..58d8166072d 100644
+> --- a/drivers/clk/qcom/Makefile
+> +++ b/drivers/clk/qcom/Makefile
+> @@ -17,6 +17,7 @@ obj-$(CONFIG_CLK_QCOM_QCS615) += clock-qcs615.o
+>   obj-$(CONFIG_CLK_QCOM_SA8775P) += clock-sa8775p.o
+>   obj-$(CONFIG_CLK_QCOM_SC7180) += clock-sc7180.o
+>   obj-$(CONFIG_CLK_QCOM_SC7280) += clock-sc7280.o
+> +obj-$(CONFIG_CLK_QCOM_SHIKRA) += clock-shikra.o
+>   obj-$(CONFIG_CLK_QCOM_SM6115) += clock-sm6115.o
+>   obj-$(CONFIG_CLK_QCOM_SM6125) += clock-sm6125.o
+>   obj-$(CONFIG_CLK_QCOM_SM6350) += clock-sm6350.o
+> diff --git a/drivers/clk/qcom/clock-shikra.c b/drivers/clk/qcom/clock-shikra.c
 > new file mode 100644
-> index 00000000000..13c3768d84e
+> index 00000000000..2c3c5c9b4d8
 > --- /dev/null
-> +++ b/drivers/pinctrl/qcom/pinctrl-shikra.c
-> @@ -0,0 +1,478 @@
+> +++ b/drivers/clk/qcom/clock-shikra.c
+> @@ -0,0 +1,344 @@
 > +// SPDX-License-Identifier: GPL-2.0-only
 > +/*
 > + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 > + */
 > +
+> +#include <linux/types.h>
+> +#include <clk-uclass.h>
 > +#include <dm.h>
+> +#include <linux/delay.h>
+> +#include <asm/io.h>
+> +#include <linux/bug.h>
+> +#include <linux/bitops.h>
+> +#include <dt-bindings/clock/qcom,shikra-gcc.h>
+> +#include "clock-qcom.h"
 > +
-> +#include "pinctrl-qcom.h"
+> +#define GCC_QUPV3_WRAP0_S0_CLK_CMD_RCGR	0x1f148
+> +#define GCC_SDCC1_APPS_CLK_CMD_RCGR		0x38028
+> +#define GCC_SDCC2_APPS_CLK_CMD_RCGR		0x1e00c
+> +#define GCC_USB30_PRIM_MASTER_CLK_CMD_RCGR	0x1a01c
+> +#define GCC_USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR	0x1a034
+> +#define GCC_USB3_PRIM_PHY_AUX_CLK_CMD_RCGR	0x1a060
 > +
-> +#define MAX_PIN_NAME_LEN 32
-> +static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
-> +
-> +typedef unsigned int msm_pin_function[12];
-> +
-> +#define PINGROUP(id, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11)\
-> +	{						\
-> +		msm_mux_gpio, /* gpio mode */		\
-> +		msm_mux_##f1,				\
-> +		msm_mux_##f2,				\
-> +		msm_mux_##f3,				\
-> +		msm_mux_##f4,				\
-> +		msm_mux_##f5,				\
-> +		msm_mux_##f6,				\
-> +		msm_mux_##f7,				\
-> +		msm_mux_##f8,				\
-> +		msm_mux_##f9,				\
-> +		msm_mux_##f10,				\
-> +		msm_mux_##f11				\
-> +	}
-> +
-> +#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
-> +	{						\
-> +		.name = pg_name,			\
-> +		.ctl_reg = ctl,				\
-> +		.io_reg = 0,				\
-> +		.pull_bit = pull,			\
-> +		.drv_bit = drv,				\
-> +		.oe_bit = -1,				\
-> +		.in_bit = -1,				\
-> +		.out_bit = -1,				\
-> +	}
-> +
-> +enum shikra_functions {
-> +	msm_mux_gpio,
-> +	msm_mux_agera_pll,
-> +	msm_mux_atest_bbrx,
-> +	msm_mux_atest_char,
-> +	msm_mux_atest_gpsadc,
-> +	msm_mux_atest_tsens,
-> +	msm_mux_atest_usb,
-> +	msm_mux_cam_mclk,
-> +	msm_mux_cci_async,
-> +	msm_mux_cci_i2c0,
-> +	msm_mux_cci_i2c1,
-> +	msm_mux_cci_timer,
-> +	msm_mux_char_exec,
-> +	msm_mux_cri_trng,
-> +	msm_mux_dac_calib,
-> +	msm_mux_dbg_out_clk,
-> +	msm_mux_ddr_bist,
-> +	msm_mux_ddr_pxi,
-> +	msm_mux_dmic,
-> +	msm_mux_emac_dll,
-> +	msm_mux_emac_mcg,
-> +	msm_mux_emac_phy,
-> +	msm_mux_emac0_ptp_aux,
-> +	msm_mux_emac0_ptp_pps,
-> +	msm_mux_emac1_ptp_aux,
-> +	msm_mux_emac1_ptp_pps,
-> +	msm_mux_ext_mclk,
-> +	msm_mux_gcc_gp,
-> +	msm_mux_gsm0_tx,
-> +	msm_mux_i2s0,
-> +	msm_mux_i2s1,
-> +	msm_mux_i2s2,
-> +	msm_mux_i2s3,
-> +	msm_mux_jitter_bist,
-> +	msm_mux_m_voc,
-> +	msm_mux_mdp_vsync_e,
-> +	msm_mux_mdp_vsync_out0,
-> +	msm_mux_mdp_vsync_out1,
-> +	msm_mux_mdp_vsync_p,
-> +	msm_mux_mdp_vsync_s,
-> +	msm_mux_mpm_pwr,
-> +	msm_mux_mss_lte,
-> +	msm_mux_nav_gpio,
-> +	msm_mux_pa_indicator_or,
-> +	msm_mux_pbs_in,
-> +	msm_mux_pbs_out,
-> +	msm_mux_pcie0_clk_req_n,
-> +	msm_mux_phase_flag,
-> +	msm_mux_pll,
-> +	msm_mux_prng_rosc,
-> +	msm_mux_pwm,
-> +	msm_mux_qdss_cti,
-> +	msm_mux_qup0_se0,
-> +	msm_mux_qup0_se1,
-> +	msm_mux_qup0_se1_01,
-> +	msm_mux_qup0_se1_23,
-> +	msm_mux_qup0_se2,
-> +	msm_mux_qup0_se3_01,
-> +	msm_mux_qup0_se3_23,
-> +	msm_mux_qup0_se4_01,
-> +	msm_mux_qup0_se4_23,
-> +	msm_mux_qup0_se5,
-> +	msm_mux_qup0_se6,
-> +	msm_mux_qup0_se7_01,
-> +	msm_mux_qup0_se7_23,
-> +	msm_mux_qup0_se8,
-> +	msm_mux_qup0_se9,
-> +	msm_mux_qup0_se9_01,
-> +	msm_mux_qup0_se9_23,
-> +	msm_mux_rgmii,
-> +	msm_mux_sd_write_protect,
-> +	msm_mux_sdc_cdc,
-> +	msm_mux_sdc_tb_trig,
-> +	msm_mux_ssbi_wtr,
-> +	msm_mux_swr0_rx,
-> +	msm_mux_swr0_tx,
-> +	msm_mux_tgu_ch_trigout,
-> +	msm_mux_tsc_async,
-> +	msm_mux_tsense_pwm,
-> +	msm_mux_uim1,
-> +	msm_mux_uim2,
-> +	msm_mux_unused_adsp,
-> +	msm_mux_unused_gsm1,
-> +	msm_mux_usb0_phy_ps,
-> +	msm_mux_vfr,
-> +	msm_mux_vsense_trigger_mirnat,
-> +	msm_mux_wlan,
-> +	msm_mux__,
+> +static const struct pll_vote_clk gpll6_vote_clk = {
+> +	.status = 0x6024,
+> +	.status_bit = BIT(31),
+> +	.ena_vote = 0x79000,
+> +	.vote_bit = BIT(6),
 > +};
 > +
-> +#define MSM_PIN_FUNCTION(fname)                         \
-> +	[msm_mux_##fname] = {#fname, msm_mux_##fname}
-> +
-> +static const struct pinctrl_function msm_pinctrl_functions[] = {
-> +	MSM_PIN_FUNCTION(gpio),
-> +	MSM_PIN_FUNCTION(agera_pll),
-> +	MSM_PIN_FUNCTION(atest_bbrx),
-> +	MSM_PIN_FUNCTION(atest_char),
-> +	MSM_PIN_FUNCTION(atest_gpsadc),
-> +	MSM_PIN_FUNCTION(atest_tsens),
-> +	MSM_PIN_FUNCTION(atest_usb),
-> +	MSM_PIN_FUNCTION(cam_mclk),
-> +	MSM_PIN_FUNCTION(cci_async),
-> +	MSM_PIN_FUNCTION(cci_i2c0),
-> +	MSM_PIN_FUNCTION(cci_i2c1),
-> +	MSM_PIN_FUNCTION(cci_timer),
-> +	MSM_PIN_FUNCTION(char_exec),
-> +	MSM_PIN_FUNCTION(cri_trng),
-> +	MSM_PIN_FUNCTION(dac_calib),
-> +	MSM_PIN_FUNCTION(dbg_out_clk),
-> +	MSM_PIN_FUNCTION(ddr_bist),
-> +	MSM_PIN_FUNCTION(ddr_pxi),
-> +	MSM_PIN_FUNCTION(dmic),
-> +	MSM_PIN_FUNCTION(emac_dll),
-> +	MSM_PIN_FUNCTION(emac_mcg),
-> +	MSM_PIN_FUNCTION(emac_phy),
-> +	MSM_PIN_FUNCTION(emac0_ptp_aux),
-> +	MSM_PIN_FUNCTION(emac0_ptp_pps),
-> +	MSM_PIN_FUNCTION(emac1_ptp_aux),
-> +	MSM_PIN_FUNCTION(emac1_ptp_pps),
-> +	MSM_PIN_FUNCTION(ext_mclk),
-> +	MSM_PIN_FUNCTION(gcc_gp),
-> +	MSM_PIN_FUNCTION(gsm0_tx),
-> +	MSM_PIN_FUNCTION(i2s0),
-> +	MSM_PIN_FUNCTION(i2s1),
-> +	MSM_PIN_FUNCTION(i2s2),
-> +	MSM_PIN_FUNCTION(i2s3),
-> +	MSM_PIN_FUNCTION(jitter_bist),
-> +	MSM_PIN_FUNCTION(m_voc),
-> +	MSM_PIN_FUNCTION(mdp_vsync_e),
-> +	MSM_PIN_FUNCTION(mdp_vsync_out0),
-> +	MSM_PIN_FUNCTION(mdp_vsync_out1),
-> +	MSM_PIN_FUNCTION(mdp_vsync_p),
-> +	MSM_PIN_FUNCTION(mdp_vsync_s),
-> +	MSM_PIN_FUNCTION(mpm_pwr),
-> +	MSM_PIN_FUNCTION(mss_lte),
-> +	MSM_PIN_FUNCTION(nav_gpio),
-> +	MSM_PIN_FUNCTION(pa_indicator_or),
-> +	MSM_PIN_FUNCTION(pbs_in),
-> +	MSM_PIN_FUNCTION(pbs_out),
-> +	MSM_PIN_FUNCTION(pcie0_clk_req_n),
-> +	MSM_PIN_FUNCTION(phase_flag),
-> +	MSM_PIN_FUNCTION(pll),
-> +	MSM_PIN_FUNCTION(prng_rosc),
-> +	MSM_PIN_FUNCTION(pwm),
-> +	MSM_PIN_FUNCTION(qdss_cti),
-> +	MSM_PIN_FUNCTION(qup0_se0),
-> +	MSM_PIN_FUNCTION(qup0_se1),
-> +	MSM_PIN_FUNCTION(qup0_se1_01),
-> +	MSM_PIN_FUNCTION(qup0_se1_23),
-> +	MSM_PIN_FUNCTION(qup0_se2),
-> +	MSM_PIN_FUNCTION(qup0_se3_01),
-> +	MSM_PIN_FUNCTION(qup0_se3_23),
-> +	MSM_PIN_FUNCTION(qup0_se4_01),
-> +	MSM_PIN_FUNCTION(qup0_se4_23),
-> +	MSM_PIN_FUNCTION(qup0_se5),
-> +	MSM_PIN_FUNCTION(qup0_se6),
-> +	MSM_PIN_FUNCTION(qup0_se7_01),
-> +	MSM_PIN_FUNCTION(qup0_se7_23),
-> +	MSM_PIN_FUNCTION(qup0_se8),
-> +	MSM_PIN_FUNCTION(qup0_se9),
-> +	MSM_PIN_FUNCTION(qup0_se9_01),
-> +	MSM_PIN_FUNCTION(qup0_se9_23),
-> +	MSM_PIN_FUNCTION(rgmii),
-> +	MSM_PIN_FUNCTION(sd_write_protect),
-> +	MSM_PIN_FUNCTION(sdc_cdc),
-> +	MSM_PIN_FUNCTION(sdc_tb_trig),
-> +	MSM_PIN_FUNCTION(ssbi_wtr),
-> +	MSM_PIN_FUNCTION(swr0_rx),
-> +	MSM_PIN_FUNCTION(swr0_tx),
-> +	MSM_PIN_FUNCTION(tgu_ch_trigout),
-> +	MSM_PIN_FUNCTION(tsc_async),
-> +	MSM_PIN_FUNCTION(tsense_pwm),
-> +	MSM_PIN_FUNCTION(uim1),
-> +	MSM_PIN_FUNCTION(uim2),
-> +	MSM_PIN_FUNCTION(unused_adsp),
-> +	MSM_PIN_FUNCTION(unused_gsm1),
-> +	MSM_PIN_FUNCTION(usb0_phy_ps),
-> +	MSM_PIN_FUNCTION(vfr),
-> +	MSM_PIN_FUNCTION(vsense_trigger_mirnat),
-> +	MSM_PIN_FUNCTION(wlan),
+> +static const struct pll_vote_clk gpll7_vote_clk = {
+> +	.status = 0x7024,
+> +	.status_bit = BIT(31),
+> +	.ena_vote = 0x79000,
+> +	.vote_bit = BIT(7),
 > +};
 > +
-> +static const msm_pin_function shikra_pin_functions[] = {
-> +	[0] = PINGROUP(0, qup0_se0, m_voc, _, phase_flag, _, _, _, _, _, _, _),
-> +	[1] = PINGROUP(1, qup0_se0, mpm_pwr, ddr_bist, _, phase_flag, atest_tsens, _, _, _, _,
-> +			_),
-> +	[2] = PINGROUP(2, qup0_se0, ddr_bist, _, phase_flag, atest_tsens, _, _, _, _, _, _),
-> +	[3] = PINGROUP(3, qup0_se0, ddr_bist, _, phase_flag, dac_calib, _, _, _, _, _, _),
-> +	[4] = PINGROUP(4, qup0_se1_23, qup0_se1_01, ddr_bist, _, phase_flag, dac_calib, _, _, _,
-> +			_, _),
-> +	[5] = PINGROUP(5, qup0_se1_23, qup0_se1_01, _, phase_flag, dac_calib, _, _, _, _, _, _),
-> +	[6] = PINGROUP(6, qup0_se2, cri_trng, _, phase_flag, dac_calib, _, _, _, _, _, _),
-> +	[7] = PINGROUP(7, qup0_se2, cri_trng, _, phase_flag, dac_calib, _, _, _, _, _, _),
-> +	[8] = PINGROUP(8, qup0_se2, _, phase_flag, dac_calib, _, _, _, _, _, _, _),
-> +	[9] = PINGROUP(9, qup0_se2, _, phase_flag, dac_calib, _, _, _, _, _, _, _),
-> +	[10] = PINGROUP(10, qup0_se3_01, qup0_se3_23, _, _, _, _, _, _, _, _, _),
-> +	[11] = PINGROUP(11, qup0_se3_01, qup0_se3_23, _, phase_flag, _, _, _, _, _, _, _),
-> +	[12] = PINGROUP(12, qup0_se4_01, qup0_se4_23, char_exec, _, _, _, _, _, _, _, _),
-> +	[13] = PINGROUP(13, qup0_se4_01, qup0_se4_23, char_exec, _, _, _, _, _, _, _, _),
-> +	[14] = PINGROUP(14, qup0_se5, pll, tgu_ch_trigout, dac_calib, wlan, _, _, _, _, _, _),
-> +	[15] = PINGROUP(15, qup0_se5, tgu_ch_trigout, _, dac_calib, wlan, _, _, _, _, _, _),
-> +	[16] = PINGROUP(16, qup0_se5, tgu_ch_trigout, _, phase_flag, dac_calib, _, _, _, _, _,
-> +			_),
-> +	[17] = PINGROUP(17, qup0_se5, tgu_ch_trigout, _, phase_flag, dac_calib, _, _, _, _, _,
-> +			_),
-> +	[18] = PINGROUP(18, qup0_se6, dac_calib, _, _, _, _, _, _, _, _, _),
-> +	[19] = PINGROUP(19, qup0_se6, dac_calib, _, _, _, _, _, _, _, _, _),
-> +	[20] = PINGROUP(20, qup0_se7_01, qup0_se7_23, cri_trng, _, _, _, _, _, _, _, _),
-> +	[21] = PINGROUP(21, qup0_se7_01, qup0_se7_23, tsense_pwm, _, _, _, _, _, _, _, _),
-> +	[22] = PINGROUP(22, qup0_se8, pll, agera_pll, pbs_out, _, _, _, _, _, _, _),
-> +	[23] = PINGROUP(23, qup0_se8, agera_pll, pbs_out, _, _, _, _, _, _, _, _),
-> +	[24] = PINGROUP(24, qup0_se8, pbs_out, _, _, _, _, _, _, _, _, _),
-> +	[25] = PINGROUP(25, qup0_se8, _, _, _, _, _, _, _, _, _, _),
-> +	[26] = PINGROUP(26, qup0_se9_23, qup0_se9_01, _, _, _, _, _, _, _, _, _),
-> +	[27] = PINGROUP(27, qup0_se9_23, qup0_se9_01, prng_rosc, _, _, _, _, _, _, _, _),
-> +	[28] = PINGROUP(28, qup0_se1, qup0_se6, emac_mcg, prng_rosc, _, phase_flag, qdss_cti, _,
-> +			_, _, _),
-> +	[29] = PINGROUP(29, qup0_se1, qup0_se6, emac_mcg, _, phase_flag, qdss_cti, _, _, _, _,
-> +			_),
-> +	[30] = PINGROUP(30, qup0_se2, qup0_se6, _, phase_flag, qdss_cti, _, _, _, _, _, _),
-> +	[31] = PINGROUP(31, qup0_se2, qup0_se6, emac1_ptp_aux, emac1_ptp_pps, _, phase_flag,
-> +			qdss_cti, _, _, _, _),
-> +	[32] = PINGROUP(32, pwm, sdc_tb_trig, _, _, _, _, _, _, _, _, _),
-> +	[33] = PINGROUP(33, emac1_ptp_aux, emac1_ptp_pps, sdc_tb_trig, _, _, _, _, _, _, _, _),
-> +	[34] = PINGROUP(34, cam_mclk, _, _, _, _, _, _, _, _, _, _),
-> +	[35] = PINGROUP(35, cam_mclk, unused_adsp, _, _, _, _, _, _, _, _, _),
-> +	[36] = PINGROUP(36, cci_i2c0, _, _, _, _, _, _, _, _, _, _),
-> +	[37] = PINGROUP(37, cci_i2c0, _, _, _, _, _, _, _, _, _, _),
-> +	[38] = PINGROUP(38, cci_timer, _, _, _, _, _, _, _, _, _, _),
-> +	[39] = PINGROUP(39, cci_async, _, _, _, _, _, _, _, _, _, _),
-> +	[40] = PINGROUP(40, cci_timer, emac_mcg, pwm, _, _, _, _, _, _, _, _),
-> +	[41] = PINGROUP(41, cci_i2c1, _, _, _, _, _, _, _, _, _, _),
-> +	[42] = PINGROUP(42, cci_i2c1, _, _, _, _, _, _, _, _, _, _),
-> +	[43] = PINGROUP(43, cci_timer, emac_mcg, pll, _, _, _, _, _, _, _, _),
-> +	[44] = PINGROUP(44, emac_mcg, pll, _, _, _, _, _, _, _, _, _),
-> +	[45] = PINGROUP(45, tsc_async, emac_mcg, pwm, gcc_gp, _, _, _, _, _, _, _),
-> +	[46] = PINGROUP(46, tsc_async, emac_mcg, _, _, _, _, _, _, _, _, _),
-> +	[47] = PINGROUP(47, cci_timer, emac_mcg, _, _, _, _, _, _, _, _, _),
-> +	[48] = PINGROUP(48, _, qup0_se9, _, _, pbs_in, phase_flag, _, _, _, _, _),
-> +	[49] = PINGROUP(49, _, qup0_se9, _, _, pbs_in, phase_flag, _, _, _, _, _),
-> +	[50] = PINGROUP(50, _, qup0_se9, _, _, pbs_in, phase_flag, _, _, _, _, _),
-> +	[51] = PINGROUP(51, _, qup0_se9, pbs_in, _, _, _, _, _, _, _, _),
-> +	[52] = PINGROUP(52, _, _, _, _, _, _, _, _, _, _, _),
-> +	[53] = PINGROUP(53, _, nav_gpio, gcc_gp, pwm, _, pbs_in, atest_usb, _, _, _, _),
-> +	[54] = PINGROUP(54, _, pwm, _, pbs_in, phase_flag, atest_char, _, _, _, _, _),
-> +	[55] = PINGROUP(55, _, pwm, _, pbs_in, phase_flag, atest_char, _, _, _, _, _),
-> +	[56] = PINGROUP(56, _, pwm, _, pbs_in, phase_flag, atest_char, _, _, _, _, _),
-> +	[57] = PINGROUP(57, _, pwm, _, pbs_in, phase_flag, atest_char, _, _, _, _, _),
-> +	[58] = PINGROUP(58, _, nav_gpio, pwm, _, pbs_in, atest_bbrx, atest_usb,
-> +			vsense_trigger_mirnat, emac_dll, _, _),
-> +	[59] = PINGROUP(59, _, vfr, _, pbs_in, atest_bbrx, atest_usb, emac_dll, _, _, _, _),
-> +	[60] = PINGROUP(60, _, emac1_ptp_aux, emac1_ptp_pps, emac0_ptp_aux, emac0_ptp_pps, _,
-> +			pbs_in, atest_gpsadc, atest_usb, emac_dll, _),
-> +	[61] = PINGROUP(61, _, pwm, gcc_gp, pa_indicator_or, dbg_out_clk, pbs_in, atest_usb,
-> +			emac_dll, _, _, _),
-> +	[62] = PINGROUP(62, _, pwm, _, pbs_in, phase_flag, atest_char, _, _, _, _, _),
-> +	[63] = PINGROUP(63, _, nav_gpio, emac0_ptp_aux, emac0_ptp_pps, _, pbs_in, phase_flag,
-> +			dac_calib, _, _, _),
-> +	[64] = PINGROUP(64, _, unused_gsm1, dac_calib, _, _, _, _, _, _, _, _),
-> +	[65] = PINGROUP(65, _, _, _, _, _, _, _, _, _, _, _),
-> +	[66] = PINGROUP(66, _, dac_calib, _, _, _, _, _, _, _, _, _),
-> +	[67] = PINGROUP(67, _, _, _, _, _, _, _, _, _, _, _),
-> +	[68] = PINGROUP(68, _, ssbi_wtr, emac1_ptp_aux, emac1_ptp_pps, pwm, dac_calib, _, _, _,
-> +			_, _),
-> +	[69] = PINGROUP(69, _, ssbi_wtr, emac0_ptp_aux, emac0_ptp_pps, _, phase_flag, dac_calib,
-> +			_, _, _, _),
-> +	[70] = PINGROUP(70, _, ssbi_wtr, _, phase_flag, dac_calib, _, _, _, _, _, _),
-> +	[71] = PINGROUP(71, _, ssbi_wtr, nav_gpio, _, phase_flag, _, _, _, _, _, _),
-> +	[72] = PINGROUP(72, _, _, phase_flag, _, _, _, _, _, _, _, _),
-> +	[73] = PINGROUP(73, _, _, _, _, _, _, _, _, _, _, _),
-> +	[74] = PINGROUP(74, pll, _, pbs_in, phase_flag, _, _, _, _, _, _, _),
-> +	[75] = PINGROUP(75, gsm0_tx, _, _, _, _, _, _, _, _, _, _),
-> +	[76] = PINGROUP(76, pll, _, _, _, _, _, _, _, _, _, _),
-> +	[77] = PINGROUP(77, uim2, pwm, _, _, _, _, _, _, _, _, _),
-> +	[78] = PINGROUP(78, uim2, _, _, _, _, _, _, _, _, _, _),
-> +	[79] = PINGROUP(79, uim2, pwm, _, _, _, _, _, _, _, _, _),
-> +	[80] = PINGROUP(80, uim2, pwm, _, _, _, _, _, _, _, _, _),
-> +	[81] = PINGROUP(81, uim1, _, _, _, _, _, _, _, _, _, _),
-> +	[82] = PINGROUP(82, uim1, _, _, _, _, _, _, _, _, _, _),
-> +	[83] = PINGROUP(83, uim1, _, _, _, _, _, _, _, _, _, _),
-> +	[84] = PINGROUP(84, uim1, _, _, _, _, _, _, _, _, _, _),
-> +	[85] = PINGROUP(85, emac0_ptp_aux, emac0_ptp_pps, _, _, _, _, _, _, _, _, _),
-> +	[86] = PINGROUP(86, mdp_vsync_p, mdp_vsync_out0, mdp_vsync_out1, _, _, _, _, _, _, _, _),
-> +	[87] = PINGROUP(87, _, pwm, _, _, _, _, _, _, _, _, _),
-> +	[88] = PINGROUP(88, gcc_gp, _, dac_calib, _, _, _, _, _, _, _, _),
-> +	[89] = PINGROUP(89, gcc_gp, _, dac_calib, _, _, _, _, _, _, _, _),
-> +	[90] = PINGROUP(90, usb0_phy_ps, _, dac_calib, _, _, _, _, _, _, _, _),
-> +	[91] = PINGROUP(91, nav_gpio, _, _, _, _, _, _, _, _, _, _),
-> +	[92] = PINGROUP(92, nav_gpio, _, _, _, _, _, _, _, _, _, _),
-> +	[93] = PINGROUP(93, _, _, _, _, _, _, _, _, _, _, _),
-> +	[94] = PINGROUP(94, mdp_vsync_e, qdss_cti, qdss_cti, _, _, _, _, _, _, _, _),
-> +	[95] = PINGROUP(95, nav_gpio, mdp_vsync_s, qdss_cti, qdss_cti, _, _, _, _, _, _, _),
-> +	[96] = PINGROUP(96, dmic, cam_mclk, i2s1, jitter_bist, atest_gpsadc, atest_usb, _, _, _,
-> +			_, _),
-> +	[97] = PINGROUP(97, dmic, i2s1, dac_calib, _, _, _, _, _, _, _, _),
-> +	[98] = PINGROUP(98, dmic, cam_mclk, i2s1, _, sdc_cdc, atest_usb, ddr_pxi, _, _, _, _),
-> +	[99] = PINGROUP(99, dmic, i2s1, jitter_bist, sdc_cdc, atest_usb, ddr_pxi, _, _, _, _, _),
-> +	[100] = PINGROUP(100, i2s2, nav_gpio, _, sdc_cdc, atest_usb, ddr_pxi, _, _, _, _, _),
-> +	[101] = PINGROUP(101, i2s2, nav_gpio, _, sdc_cdc, atest_usb, ddr_pxi, _, _, _, _, _),
-> +	[102] = PINGROUP(102, i2s2, pwm, _, phase_flag, _, _, _, _, _, _, _),
-> +	[103] = PINGROUP(103, ext_mclk, i2s2, _, _, _, _, _, _, _, _, _),
-> +	[104] = PINGROUP(104, ext_mclk, nav_gpio, _, _, _, _, _, _, _, _, _),
-> +	[105] = PINGROUP(105, swr0_tx, i2s0, _, _, _, _, _, _, _, _, _),
-> +	[106] = PINGROUP(106, swr0_tx, i2s0, _, _, _, _, _, _, _, _, _),
-> +	[107] = PINGROUP(107, swr0_rx, i2s0, _, _, _, _, _, _, _, _, _),
-> +	[108] = PINGROUP(108, swr0_rx, i2s0, _, _, _, _, _, _, _, _, _),
-> +	[109] = PINGROUP(109, swr0_rx, i2s0, sd_write_protect, _, _, _, _, _, _, _, _),
-> +	[110] = PINGROUP(110, ext_mclk, i2s0, _, gcc_gp, _, _, _, _, _, _, _),
-> +	[111] = PINGROUP(111, i2s3, _, _, _, _, _, _, _, _, _, _),
-> +	[112] = PINGROUP(112, i2s3, _, _, _, _, _, _, _, _, _, _),
-> +	[113] = PINGROUP(113, i2s3, _, _, _, _, _, _, _, _, _, _),
-> +	[114] = PINGROUP(114, ext_mclk, i2s3, _, _, _, _, _, _, _, _, _),
-> +	[115] = PINGROUP(115, mss_lte, _, _, _, _, _, _, _, _, _, _),
-> +	[116] = PINGROUP(116, mss_lte, _, dac_calib, _, _, _, _, _, _, _, _),
-> +	[117] = PINGROUP(117, pcie0_clk_req_n, _, dac_calib, _, _, _, _, _, _, _, _),
-> +	[118] = PINGROUP(118, _, dac_calib, _, _, _, _, _, _, _, _, _),
-> +	[119] = PINGROUP(119, _, _, _, _, _, _, _, _, _, _, _),
-> +	[120] = PINGROUP(120, emac_phy, _, _, _, _, _, _, _, _, _, _),
-> +	[121] = PINGROUP(121, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[122] = PINGROUP(122, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[123] = PINGROUP(123, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[124] = PINGROUP(124, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[125] = PINGROUP(125, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[126] = PINGROUP(126, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[127] = PINGROUP(127, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[128] = PINGROUP(128, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[129] = PINGROUP(129, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[130] = PINGROUP(130, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[131] = PINGROUP(131, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[132] = PINGROUP(132, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[133] = PINGROUP(133, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[134] = PINGROUP(134, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[135] = PINGROUP(135, _, _, _, _, _, _, _, _, _, _, _),
-> +	[136] = PINGROUP(136, emac_phy, _, _, _, _, _, _, _, _, _, _),
-> +	[137] = PINGROUP(137, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[138] = PINGROUP(138, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[139] = PINGROUP(139, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[140] = PINGROUP(140, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[141] = PINGROUP(141, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[142] = PINGROUP(142, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[143] = PINGROUP(143, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[144] = PINGROUP(144, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[145] = PINGROUP(145, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[146] = PINGROUP(146, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[147] = PINGROUP(147, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[148] = PINGROUP(148, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[149] = PINGROUP(149, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[150] = PINGROUP(150, rgmii, _, _, _, _, _, _, _, _, _, _),
-> +	[151] = PINGROUP(151, _, _, _, _, _, _, _, _, _, _, _),
-> +	[152] = PINGROUP(152, _, _, _, _, _, _, _, _, _, _, _),
-> +	[153] = PINGROUP(153, _, _, _, _, _, _, _, _, _, _, _),
-> +	[154] = PINGROUP(154, _, _, _, _, _, _, _, _, _, _, _),
-> +	[155] = PINGROUP(155, _, _, _, _, _, _, _, _, _, _, _),
-> +	[156] = PINGROUP(156, _, _, _, _, _, _, _, _, _, _, _),
-> +	[157] = PINGROUP(157, _, _, _, _, _, _, _, _, _, _, _),
-> +	[158] = PINGROUP(158, _, _, _, _, _, _, _, _, _, _, _),
-> +	[159] = PINGROUP(159, _, _, _, _, _, _, _, _, _, _, _),
-> +	[160] = PINGROUP(160, _, _, _, _, _, _, _, _, _, _, _),
-> +	[161] = PINGROUP(161, _, _, _, _, _, _, _, _, _, _, _),
-> +	[162] = PINGROUP(162, _, _, _, _, _, _, _, _, _, _, _),
-> +	[163] = PINGROUP(163, _, _, _, _, _, _, _, _, _, _, _),
-> +	[164] = PINGROUP(164, _, _, _, _, _, _, _, _, _, _, _),
-> +	[165] = PINGROUP(165, _, _, _, _, _, _, _, _, _, _, _),
-> +};
-> +
-> +static const struct msm_special_pin_data shikra_special_pins_data[] = {
-> +	[0] = SDC_QDSD_PINGROUP("sdc1_rclk", 0xac004, 0, 0),
-> +	[1] = SDC_QDSD_PINGROUP("sdc1_clk", 0xac000, 13, 6),
-> +	[2] = SDC_QDSD_PINGROUP("sdc1_cmd", 0xac000, 11, 3),
-> +	[3] = SDC_QDSD_PINGROUP("sdc1_data", 0xac000, 9, 0),
-> +	[4] = SDC_QDSD_PINGROUP("sdc2_clk", 0xaa000, 14, 6),
-> +	[5] = SDC_QDSD_PINGROUP("sdc2_cmd", 0xaa000, 11, 3),
-> +	[6] = SDC_QDSD_PINGROUP("sdc2_data", 0xaa000, 9, 0),
-> +};
-> +
-> +static const char *shikra_get_function_name(struct udevice *dev, unsigned int selector)
-> +{
-> +	return msm_pinctrl_functions[selector].name;
-> +}
-> +
-> +static const char *shikra_get_pin_name(struct udevice *dev, unsigned int selector)
-> +{
-> +	if (selector >= 166 && selector <= 172)
-> +		snprintf(pin_name, MAX_PIN_NAME_LEN, "%s",
-> +			 shikra_special_pins_data[selector - 166].name);
-> +	else
-> +		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
-> +
-> +	return pin_name;
-> +}
-> +
-> +static int shikra_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
-> +{
-> +	unsigned int i;
-> +	const msm_pin_function *func = NULL;
-> +
-> +	if (pin >= ARRAY_SIZE(shikra_pin_functions))
-> +		return -EINVAL;
-> +
-> +	func = shikra_pin_functions + pin;
-> +	for (i = 0; i < 12; i++)
-> +		if ((*func)[i] == selector)
-> +			return i;
-> +
-> +	pr_err("Can't find requested function for pin %u pin\n", pin);
-> +
-> +	return -EINVAL;
-> +}
-> +
-> +static const struct msm_pinctrl_data shikra_data = {
-> +	.pin_data = {
-> +		.pin_count = 173,
-> +		.special_pins_start = 166,
-> +		.special_pins_data = shikra_special_pins_data,
-> +	},
-> +	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
-> +	.get_function_name = shikra_get_function_name,
-> +	.get_function_mux = shikra_get_function_mux,
-> +	.get_pin_name = shikra_get_pin_name,
-> +};
-> +
-> +static const struct udevice_id msm_pinctrl_ids[] = {
-> +	{ .compatible = "qcom,shikra-tlmm", .data = (ulong)&shikra_data },
+> +static const struct freq_tbl ftbl_gcc_qupv3_wrap0_s0_clk_src[] = {
+> +	F(7372800, CFG_CLK_SRC_GPLL0_AUX2, 1, 384, 15625),
+> +	F(14745600, CFG_CLK_SRC_GPLL0_AUX2, 1, 768, 15625),
+> +	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
+> +	F(29491200, CFG_CLK_SRC_GPLL0_AUX2, 1, 1536, 15625),
+> +	F(32000000, CFG_CLK_SRC_GPLL0_AUX2, 1, 8, 75),
+> +	F(48000000, CFG_CLK_SRC_GPLL0_AUX2, 1, 4, 25),
+> +	F(64000000, CFG_CLK_SRC_GPLL0_AUX2, 1, 16, 75),
+> +	F(75000000, CFG_CLK_SRC_GPLL0_AUX2, 4, 0, 0),
+> +	F(80000000, CFG_CLK_SRC_GPLL0_AUX2, 1, 4, 15),
+> +	F(96000000, CFG_CLK_SRC_GPLL0_AUX2, 1, 8, 25),
+> +	F(100000000, CFG_CLK_SRC_GPLL0_AUX2, 3, 0, 0),
+> +	F(102400000, CFG_CLK_SRC_GPLL0_AUX2, 1, 128, 375),
+> +	F(112000000, CFG_CLK_SRC_GPLL0_AUX2, 1, 28, 75),
+> +	F(117964800, CFG_CLK_SRC_GPLL0_AUX2, 1, 6144, 15625),
+> +	F(120000000, CFG_CLK_SRC_GPLL0_AUX2, 2.5, 0, 0),
+> +	F(128000000, CFG_CLK_SRC_GPLL6, 3, 0, 0),
 > +	{ }
 > +};
 > +
-> +U_BOOT_DRIVER(pinctrl_shikra) = {
-> +	.name		= "pinctrl_shikra",
-> +	.id		= UCLASS_NOP,
-> +	.of_match	= msm_pinctrl_ids,
-> +	.ops		= &msm_pinctrl_ops,
-> +	.bind		= msm_pinctrl_bind,
-> +	.flags		= DM_FLAG_PRE_RELOC,
+> +static const struct freq_tbl ftbl_gcc_sdcc1_apps_clk_src[] = {
+> +	F(144000, CFG_CLK_SRC_CXO, 16, 3, 25),
+> +	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
+> +	F(20000000, CFG_CLK_SRC_GPLL0_AUX2, 5, 1, 3),
+> +	F(25000000, CFG_CLK_SRC_GPLL0_AUX2, 6, 1, 2),
+> +	F(50000000, CFG_CLK_SRC_GPLL0_AUX2, 6, 0, 0),
+> +	F(100000000, CFG_CLK_SRC_GPLL0_AUX2, 3, 0, 0),
+> +	F(192000000, CFG_CLK_SRC_GPLL6, 2, 0, 0),
+> +	F(384000000, CFG_CLK_SRC_GPLL6, 1, 0, 0),
+> +	{ }
 > +};
-
-Looks good
+> +
+> +static const struct freq_tbl ftbl_gcc_sdcc2_apps_clk_src[] = {
+> +	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
+> +	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
+> +	F(25000000, CFG_CLK_SRC_GPLL0_AUX2, 12, 0, 0),
+> +	F(50000000, CFG_CLK_SRC_GPLL0_AUX2, 6, 0, 0),
+> +	F(100000000, CFG_CLK_SRC_GPLL0_AUX2, 3, 0, 0),
+> +	F(202000000, CFG_CLK_SRC_GPLL7, 4, 0, 0),
+> +	{ }
+> +};
+> +
+> +static const struct freq_tbl ftbl_gcc_usb30_prim_master_clk_src[] = {
+> +	F(66666667, CFG_CLK_SRC_GPLL0_AUX2, 4.5, 0, 0),
+> +	F(133333333, CFG_CLK_SRC_GPLL0, 4.5, 0, 0),
+> +	F(200000000, CFG_CLK_SRC_GPLL0, 3, 0, 0),
+> +	F(240000000, CFG_CLK_SRC_GPLL0, 2.5, 0, 0),
+> +	{ }
+> +};
+> +
+> +static ulong shikra_set_rate(struct clk *clk, ulong rate)
+> +{
+> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> +	const struct freq_tbl *freq;
+> +
+> +	switch (clk->id) {
+> +	case GCC_QUPV3_WRAP0_S0_CLK:
+> +		/*
+> +		 * ftbl_gcc_qupv3_wrap0_s0_clk_src[]'s last entry is
+> +		 * GPLL6-sourced; vote defensively even though this port's
+> +		 * only requested rate (debug_uart_clock, 14745600) resolves
+> +		 * to the GPLL0-sourced entry.
+> +		 */
+> +		clk_enable_gpll0(priv->base, &gpll6_vote_clk);
+> +		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s0_clk_src, rate);
+> +		clk_rcg_set_rate_mnd(priv->base, GCC_QUPV3_WRAP0_S0_CLK_CMD_RCGR,
+> +				     freq->pre_div, freq->m, freq->n, freq->src, 16);
+> +		return freq->freq;
+> +	case GCC_SDCC1_APPS_CLK:
+> +		clk_enable_gpll0(priv->base, &gpll6_vote_clk);
+> +		freq = qcom_find_freq(ftbl_gcc_sdcc1_apps_clk_src, rate);
+> +		clk_rcg_set_rate_mnd(priv->base, GCC_SDCC1_APPS_CLK_CMD_RCGR,
+> +				     freq->pre_div, freq->m, freq->n, freq->src, 8);
+> +		return freq->freq;
+> +	case GCC_SDCC2_APPS_CLK:
+> +		clk_enable_gpll0(priv->base, &gpll7_vote_clk);
+> +		freq = qcom_find_freq(ftbl_gcc_sdcc2_apps_clk_src, rate);
+> +		clk_rcg_set_rate_mnd(priv->base, GCC_SDCC2_APPS_CLK_CMD_RCGR,
+> +				     freq->pre_div, freq->m, freq->n, freq->src, 8);
+> +		return freq->freq;
+> +	case GCC_USB30_PRIM_MASTER_CLK:
+> +		freq = qcom_find_freq(ftbl_gcc_usb30_prim_master_clk_src, rate);
+> +		clk_rcg_set_rate_mnd(priv->base, GCC_USB30_PRIM_MASTER_CLK_CMD_RCGR,
+> +				     freq->pre_div, freq->m, freq->n, freq->src, 8);
+> +		clk_rcg_set_rate(priv->base, GCC_USB3_PRIM_PHY_AUX_CLK_CMD_RCGR,
+> +				 0, CFG_CLK_SRC_CXO);
+> +		return freq->freq;
+> +	case GCC_USB30_PRIM_MOCK_UTMI_CLK:
+> +		WARN(rate != 19200000,
+> +		     "Unexpected rate for USB30_PRIM_MOCK_UTMI_CLK: %lu\n", rate);
+> +		clk_rcg_set_rate(priv->base, GCC_USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR,
+> +				 0, CFG_CLK_SRC_CXO);
+> +		return rate;
+> +	default:
+> +		return 0;
+> +	}
+> +}
+> +
+> +static const struct gate_clk shikra_clks[] = {
+> +	GATE_CLK(GCC_AHB2PHY_CSI_CLK, 0x1d004, BIT(0)),
+> +	GATE_CLK(GCC_AHB2PHY_USB_CLK, 0x1d008, BIT(0)),
+> +	GATE_CLK_POLLED(GCC_BOOT_ROM_AHB_CLK, 0x7900c, BIT(1), 0x23004),
+> +	GATE_CLK(GCC_CAMSS_AXI_CLK, 0x58044, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_CAMNOC_ATB_CLK, 0x5804c, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_CAMNOC_DRAGONLINK_ATB_CLK, 0x58060, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_CAMNOC_NTS_XO_CLK, 0x58050, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_CCI_0_CLK, 0x56018, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_CPHY_0_CLK, 0x52088, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_CPHY_1_CLK, 0x5208c, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_CSI0PHYTIMER_CLK, 0x45018, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_CSI1PHYTIMER_CLK, 0x45034, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_MCLK0_CLK, 0x51018, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_MCLK1_CLK, 0x51034, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_MCLK2_CLK, 0x51050, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_MCLK3_CLK, 0x5106c, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_NRT_AXI_CLK, 0x58054, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_OPE_AHB_CLK, 0x5503c, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_OPE_CLK, 0x5501c, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_RT_AXI_CLK, 0x5805c, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_TFE_0_CLK, 0x5201c, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_TFE_0_CPHY_RX_CLK, 0x5207c, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_TFE_0_CSID_CLK, 0x520ac, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_TFE_1_CLK, 0x5203c, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_TFE_1_CPHY_RX_CLK, 0x52080, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_TFE_1_CSID_CLK, 0x520cc, BIT(0)),
+> +	GATE_CLK(GCC_CAMSS_TOP_AHB_CLK, 0x58028, BIT(0)),
+> +	GATE_CLK_POLLED(GCC_CAM_THROTTLE_NRT_CLK, 0x79004, BIT(16), 0x17070),
+> +	GATE_CLK_POLLED(GCC_CAM_THROTTLE_RT_CLK, 0x79004, BIT(15), 0x1706c),
+> +	GATE_CLK(GCC_CFG_NOC_USB2_PRIM_AXI_CLK, 0x111c4, BIT(0)),
+> +	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK, 0x1a07c, BIT(0)),
+> +	GATE_CLK(GCC_DDRSS_GPU_AXI_CLK, 0x71000, BIT(0)),
+> +	GATE_CLK(GCC_DDRSS_MEMNOC_PCIE_SF_CLK, 0x29044, BIT(0)),
+> +	GATE_CLK(GCC_DISP_GPLL0_DIV_CLK_SRC, 0x79004, BIT(11)),
+> +	GATE_CLK(GCC_DISP_HF_AXI_CLK, 0x17020, BIT(0)),
+> +	GATE_CLK_POLLED(GCC_DISP_THROTTLE_CORE_CLK, 0x79004, BIT(13), 0x17064),
+> +	GATE_CLK(GCC_EMAC0_AHB_CLK, 0xad010, BIT(0)),
+> +	GATE_CLK(GCC_EMAC0_AXI_CLK, 0xad014, BIT(0)),
+> +	GATE_CLK(GCC_EMAC0_AXI_SYS_NOC_CLK, 0x109d4, BIT(0)),
+> +	GATE_CLK(GCC_EMAC0_CC_SGMIIPHY_RX_CLK, 0xad044, BIT(0)),
+> +	GATE_CLK(GCC_EMAC0_CC_SGMIIPHY_TX_CLK, 0xad03c, BIT(0)),
+> +	GATE_CLK(GCC_EMAC0_PHY_AUX_CLK, 0xad018, BIT(0)),
+> +	GATE_CLK(GCC_EMAC0_PTP_CLK, 0xad034, BIT(0)),
+> +	GATE_CLK(GCC_EMAC0_RGMII_CLK, 0xad038, BIT(0)),
+> +	GATE_CLK(GCC_EMAC1_AHB_CLK, 0xae010, BIT(0)),
+> +	GATE_CLK(GCC_EMAC1_AXI_CLK, 0xae014, BIT(0)),
+> +	GATE_CLK(GCC_EMAC1_AXI_SYS_NOC_CLK, 0x109f4, BIT(0)),
+> +	GATE_CLK(GCC_EMAC1_CC_SGMIIPHY_RX_CLK, 0xae044, BIT(0)),
+> +	GATE_CLK(GCC_EMAC1_CC_SGMIIPHY_TX_CLK, 0xae03c, BIT(0)),
+> +	GATE_CLK(GCC_EMAC1_PHY_AUX_CLK, 0xae018, BIT(0)),
+> +	GATE_CLK(GCC_EMAC1_PTP_CLK, 0xae034, BIT(0)),
+> +	GATE_CLK(GCC_EMAC1_RGMII_CLK, 0xae038, BIT(0)),
+> +	GATE_CLK(GCC_GP1_CLK, 0x4d000, BIT(0)),
+> +	GATE_CLK(GCC_GP2_CLK, 0x4e000, BIT(0)),
+> +	GATE_CLK(GCC_GP3_CLK, 0x4f000, BIT(0)),
+> +	GATE_CLK(GCC_GPU_GPLL0_CLK_SRC, 0x7900c, BIT(18)),
+> +	GATE_CLK(GCC_GPU_GPLL0_DIV_CLK_SRC, 0x7900c, BIT(19)),
+> +	GATE_CLK(GCC_GPU_MEMNOC_GFX_CLK, 0x3600c, BIT(0)),
+> +	GATE_CLK(GCC_GPU_SMMU_VOTE_CLK, 0x7d000, BIT(0)),
+> +	GATE_CLK(GCC_GPU_SNOC_DVM_GFX_CLK, 0x36018, BIT(0)),
+> +	GATE_CLK_POLLED(GCC_GPU_THROTTLE_CORE_CLK, 0x7900c, BIT(21), 0x36048),
+> +	GATE_CLK(GCC_MMU_TCU_VOTE_CLK, 0x7d06c, BIT(0)),
+> +	GATE_CLK_POLLED(GCC_PCIE_AUX_CLK, 0x79018, BIT(0), 0xaf044),
+> +	GATE_CLK_POLLED(GCC_PCIE_CFG_AHB_CLK, 0x7900c, BIT(27), 0xaf010),
+> +	GATE_CLK(GCC_PCIE_CLKREF_EN, 0xb8000, BIT(0)),
+> +	GATE_CLK_POLLED(GCC_PCIE_MSTR_AXI_CLK, 0x7900c, BIT(30), 0xaf020),
+> +	GATE_CLK_POLLED(GCC_PCIE_PIPE_CLK, 0x79018, BIT(2), 0xaf050),
+> +	GATE_CLK_POLLED(GCC_PCIE_RCHNG_PHY_CLK, 0x7900c, BIT(31), 0xaf040),
+> +	GATE_CLK_POLLED(GCC_PCIE_SLEEP_CLK, 0x79018, BIT(1), 0xaf04c),
+> +	GATE_CLK_POLLED(GCC_PCIE_SLV_AXI_CLK, 0x7900c, BIT(29), 0xaf018),
+> +	GATE_CLK_POLLED(GCC_PCIE_SLV_Q2A_AXI_CLK, 0x7900c, BIT(28), 0xaf014),
+> +	GATE_CLK_POLLED(GCC_PCIE_TBU_CLK, 0x79018, BIT(6), 0xaf098),
+> +	GATE_CLK_POLLED(GCC_PCIE_THROTTLE_CORE_CLK, 0x79018, BIT(5), 0xaf094),
+> +	GATE_CLK_POLLED(GCC_PCIE_THROTTLE_XO_CLK, 0x79018, BIT(4), 0xaf090),
+> +	GATE_CLK(GCC_PCIE_TILE_AXI_SYS_NOC_CLK, 0x10f2c, BIT(0)),
+> +	GATE_CLK(GCC_PDM2_CLK, 0x2000c, BIT(0)),
+> +	GATE_CLK(GCC_PDM_AHB_CLK, 0x20004, BIT(0)),
+> +	GATE_CLK(GCC_PDM_XO4_CLK, 0x20008, BIT(0)),
+> +	GATE_CLK(GCC_PWM0_XO512_CLK, 0x2002c, BIT(0)),
+> +	GATE_CLK_POLLED(GCC_QMIP_CAMERA_NRT_AHB_CLK, 0x79004, BIT(9), 0x17014),
+> +	GATE_CLK_POLLED(GCC_QMIP_CAMERA_RT_AHB_CLK, 0x79004, BIT(12), 0x17060),
+> +	GATE_CLK_POLLED(GCC_QMIP_DISP_AHB_CLK, 0x79004, BIT(10), 0x17018),
+> +	GATE_CLK_POLLED(GCC_QMIP_GPU_CFG_AHB_CLK, 0x7900c, BIT(20), 0x36040),
+> +	GATE_CLK_POLLED(GCC_QMIP_PCIE_CFG_AHB_CLK, 0x79018, BIT(3), 0xaf08c),
+> +	GATE_CLK_POLLED(GCC_QMIP_VIDEO_VCODEC_AHB_CLK, 0x79004, BIT(8), 0x17010),
+> +	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_CORE_2X_CLK, 0x79004, BIT(21), 0x1f014),
+> +	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_CORE_CLK, 0x79004, BIT(20), 0x1f00c),
+> +	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S0_CLK, 0x79004, BIT(22), 0x1f144),
+> +	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S1_CLK, 0x79004, BIT(23), 0x1f274),
+> +	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S2_CLK, 0x79004, BIT(24), 0x1f3a4),
+> +	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S3_CLK, 0x79004, BIT(25), 0x1f4d4),
+> +	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S4_CLK, 0x79004, BIT(26), 0x1f604),
+> +	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S5_CLK, 0x79004, BIT(27), 0x1f734),
+> +	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S6_CLK, 0x79004, BIT(28), 0x1f864),
+> +	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S7_CLK, 0x79004, BIT(29), 0x1f994),
+> +	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S8_CLK, 0x79004, BIT(30), 0x1fac4),
+> +	GATE_CLK_POLLED(GCC_QUPV3_WRAP0_S9_CLK, 0x79004, BIT(31), 0x1fbf4),
+> +	GATE_CLK_POLLED(GCC_QUPV3_WRAP_0_M_AHB_CLK, 0x79004, BIT(18), 0x1f004),
+> +	GATE_CLK_POLLED(GCC_QUPV3_WRAP_0_S_AHB_CLK, 0x79004, BIT(19), 0x1f008),
+> +	GATE_CLK(GCC_SDCC1_AHB_CLK, 0x38008, BIT(0)),
+> +	GATE_CLK(GCC_SDCC1_APPS_CLK, 0x38004, BIT(0)),
+> +	GATE_CLK(GCC_SDCC1_ICE_CORE_CLK, 0x3800c, BIT(0)),
+> +	GATE_CLK(GCC_SDCC2_AHB_CLK, 0x1e008, BIT(0)),
+> +	GATE_CLK(GCC_SDCC2_APPS_CLK, 0x1e004, BIT(0)),
+> +	GATE_CLK(GCC_SYS_NOC_USB2_PRIM_AXI_CLK, 0x10a14, BIT(0)),
+> +	GATE_CLK(GCC_SYS_NOC_USB3_PRIM_AXI_CLK, 0x1a078, BIT(0)),
+> +	GATE_CLK(GCC_TSCSS_AHB_CLK, 0xac024, BIT(0)),
+> +	GATE_CLK(GCC_TSCSS_CNTR_CLK, 0xac020, BIT(0)),
+> +	GATE_CLK(GCC_TSCSS_ETU_CLK, 0xac01c, BIT(0)),
+> +	GATE_CLK(GCC_UFS_CLKREF_EN, 0x8c000, BIT(0)),
+> +	GATE_CLK(GCC_USB20_MASTER_CLK, 0xb0010, BIT(0)),
+> +	GATE_CLK(GCC_USB20_MOCK_UTMI_CLK, 0xb001c, BIT(0)),
+> +	GATE_CLK(GCC_USB20_SLEEP_CLK, 0xb0018, BIT(0)),
+> +	GATE_CLK(GCC_USB30_PRIM_MASTER_CLK, 0x1a010, BIT(0)),
+> +	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK, 0x1a018, BIT(0)),
+> +	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK, 0x1a014, BIT(0)),
+> +	GATE_CLK(GCC_USB3_PRIM_CLKREF_EN, 0x9f000, BIT(0)),
+> +	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0x1a054, BIT(0)),
+> +	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK, 0x1a058, BIT(0)),
+> +	GATE_CLK(GCC_VCODEC0_AXI_CLK, 0x6e008, BIT(0)),
+> +	GATE_CLK(GCC_VENUS_AHB_CLK, 0x6e010, BIT(0)),
+> +	GATE_CLK(GCC_VENUS_CTL_AXI_CLK, 0x6e004, BIT(0)),
+> +	GATE_CLK(GCC_VIDEO_AXI0_CLK, 0x1701c, BIT(0)),
+> +	GATE_CLK_POLLED(GCC_VIDEO_THROTTLE_CORE_CLK, 0x79004, BIT(14), 0x17068),
+> +	GATE_CLK(GCC_VIDEO_VCODEC0_SYS_CLK, 0x6d044, BIT(0)),
+> +	GATE_CLK(GCC_VIDEO_VENUS_CTL_CLK, 0x6d02c, BIT(0)),
+> +};
+> +
+> +static int shikra_enable(struct clk *clk)
+> +{
+> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> +
+> +	if (priv->data->num_clks < clk->id) {
+> +		debug("%s: unknown clk id %lu\n", __func__, clk->id);
+> +		return 0;
+> +	}
+> +
+> +	debug("%s: clk %ld: %s\n", __func__, clk->id, shikra_clks[clk->id].name);
+> +
+> +	return qcom_gate_clk_en(priv, clk->id);
+> +}
+> +
+> +static const struct qcom_reset_map shikra_gcc_resets[] = {
+> +	[GCC_CAMSS_OPE_BCR] = { 0x55000 },
+> +	[GCC_CAMSS_TFE_BCR] = { 0x52000 },
+> +	[GCC_CAMSS_TOP_BCR] = { 0x58000 },
+> +	[GCC_EMAC0_BCR] = { 0xad000 },
+> +	[GCC_EMAC1_BCR] = { 0xae000 },
+> +	[GCC_GPU_BCR] = { 0x36000 },
+> +	[GCC_MMSS_BCR] = { 0x17000 },
+> +	[GCC_PCIE_BCR] = { 0xaf000 },
+> +	[GCC_PCIE_PHY_BCR] = { 0xb1000 },
+> +	[GCC_PDM_BCR] = { 0x20000 },
+> +	[GCC_QUPV3_WRAPPER_0_BCR] = { 0x1f000 },
+> +	[GCC_QUSB2PHY_PRIM_BCR] = { 0x1c000 },
+> +	[GCC_QUSB2PHY_SEC_BCR] = { 0x1c004 },
+> +	[GCC_SDCC1_BCR] = { 0x38000 },
+> +	[GCC_SDCC2_BCR] = { 0x1e000 },
+> +	[GCC_TSCSS_BCR] = { 0xac000 },
+> +	[GCC_USB20_BCR] = { 0xb0000 },
+> +	[GCC_USB30_PRIM_BCR] = { 0x1a000 },
+> +	[GCC_USB3PHY_PHY_PRIM_SP0_BCR] = { 0x1b008 },
+> +	[GCC_USB3_DP_PHY_PRIM_BCR] = { 0x1b020 },
+> +	[GCC_USB3_PHY_PRIM_SP0_BCR] = { 0x1b000 },
+> +	[GCC_USB_PHY_CFG_AHB2PHY_BCR] = { 0x1d000 },
+> +	[GCC_VCODEC0_BCR] = { 0x6d034 },
+> +	[GCC_VENUS_BCR] = { 0x6d018 },
+> +	[GCC_VIDEO_INTERFACE_BCR] = { 0x6e000 },
+> +};
+> +
+> +static const struct qcom_power_map shikra_gdscs[] = {
+> +	[GCC_CAMSS_TOP_GDSC] = { 0x58004 },
+> +	[GCC_EMAC0_GDSC] = { 0xad004 },
+> +	[GCC_EMAC1_GDSC] = { 0xae004 },
+> +	[GCC_PCIE_GDSC] = { 0xaf004 },
+> +	[GCC_USB20_GDSC] = { 0xb0004 },
+> +	[GCC_USB30_PRIM_GDSC] = { 0x1a004 },
+> +	[GCC_VCODEC0_GDSC] = { 0x6d038 },
+> +	[GCC_VENUS_GDSC] = { 0x6d01c },
+> +};
+> +
+> +static struct msm_clk_data shikra_gcc_data = {
+> +	.resets = shikra_gcc_resets,
+> +	.num_resets = ARRAY_SIZE(shikra_gcc_resets),
+> +	.clks = shikra_clks,
+> +	.num_clks = ARRAY_SIZE(shikra_clks),
+> +
+> +	.power_domains = shikra_gdscs,
+> +	.num_power_domains = ARRAY_SIZE(shikra_gdscs),
+> +
+> +	.enable = shikra_enable,
+> +	.set_rate = shikra_set_rate,
+> +};
+> +
+> +static const struct udevice_id gcc_shikra_of_match[] = {
+> +	{
+> +		.compatible = "qcom,shikra-gcc",
+> +		.data = (ulong)&shikra_gcc_data,
+> +	},
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(gcc_shikra) = {
+> +	.name		= "gcc_shikra",
+> +	.id		= UCLASS_NOP,
+> +	.of_match	= gcc_shikra_of_match,
+> +	.bind		= qcom_cc_bind,
+> +	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
+> +};
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
