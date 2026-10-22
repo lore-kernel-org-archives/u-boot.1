@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD150606A339
-	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 19:41:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D0AA606A31E
+	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 19:41:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=rV8i2Aks;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=HhbrGj5A
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=pfPHv9oK;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=AIIdGtf3
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 98F56409C1;
-	Thu, 22 Oct 2026 19:41:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0B04B60848;
+	Thu, 22 Oct 2026 19:41:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tgLZPsEal3x0; Thu, 22 Oct 2026 19:41:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B2FD2409C3
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792698081;
-	b=rjQIJJNhLnVSr9psgLezIIimoxCcfNesxYOiYPnKKLWRflV3Jby4K2jFO2pNWW75XkeF
-	 4yt9TEMrKWHl5pXrXMmHubgol+MFYT+jfxrHHGyxWwck2FJlr6s+4OHkVjSrNghf7MVJ4
-	 Tid9tdKxqGdiqNgLmihQe2WFZPMK2W5BYb+7wTGPJTBEEnfqFHMtT0B7Z1uD3xsNHFktT
-	 q5eFfA427H1QsiEVVRl2p0tnT32um5XfhKV02pkhgt1ZgGLp20ZI2DuOhuvjb5Kz996k/
-	 a3TJFWZ3sKhEBDdALRNxa85dLP5pO54JwB6oBQ5GLfozZv7SobaUxs2+fo8x1iD6Mkg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Rj-1yOOGrBu7; Thu, 22 Oct 2026 19:41:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 746D360821
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792698083;
+	b=NOuJDnFvL2o3g5gZH+cGq2N56iLxaiGCQSAbcuhkedqg4GWtwVtuCZEoH180j3BtyMBK
+	 7kwMEF55PcOre3CZ/bMkF/FJR5lDF/w/x/S+Al4TwfTTKFx60rWAjQkPt+5JGss+tuNmH
+	 vBqfBRhJ6jHr3ELOx080mdRKNoxTLIqzmFroQlkdwL7amSDEuGvqqURTxltL/F6kqv3Ua
+	 rtd/6o0/H5wjVXFVeW/f78+McNnADFKyCwhMcYfwxhzM8RnDDhydrKtVYYwAlaAtzmAfV
+	 0UpXPkG+jOixortSY+s36TCPU4+TvFphS08cwXaQmgN8H6VyiTjyuSmJDs5xNFKG6kA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792698081;
+	c=relaxed/relaxed; t=1792698083;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,128 +33,128 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=6O2TaTxezk/xeKLsE0GPimsl5fRqKlG85DVBD+fHP9w=;
-	b=ZZs5dQSQ7cqcSBb6u6nngDLQDSvNuBU6mQnMdlXZtHRngQ80g1oqODnW28ggMu9jS9YN
-	 T4mI4HSAjUrdkBPGnNKvrOFwWEmMGw4Mg3I3aVtQgnDmq9T5g//heC+IGLDunkRDWq/LZ
-	 jggh8G3jiQGSdxuaLQHWhe19PX+93d+sXML6mhd9GLTOVyZem7exP0WzU/plVAqZkpZ8L
-	 WNI46gWfBI10VjWgsMI2+VQcWKXrBXtTCy64zmergQjkT4KrCWMonnw7UzrBKvF10DOl6
-	 IJHrwjmhvFETbr2IwzFB61Fdz8Z65JX45Z8ZbMUOhcxpYomGj9ivicN44qrd2QvSNAw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=j/kYfPm+SkOc4Th0C8ZZh+41EnRT9xTwwIupLZ2MpE4=;
+	b=bQ4JDhrtud37+dpXYR62i120bsS7gQ3yaVhk/a4Kukn0VDtLRlo6K23PbVQZdww3xIzZ
+	 k1jTRQb4UzCupWPiwo7jv+WFF+QKg/zkAhFVkmcPmNfZDhcQNXcmgEjoODgqi2t0M/2uO
+	 89qLRQuN+/fUZypKSjTNM9fXZQ+20zLX/7qDrdimV/z+XcZWQJjiqS+NX8bPmbhfl9gzo
+	 nz5hFyKQ34aIMIpXLF7ISUJ3iy4W0lCVCJ/MweifvZdKZVf2WoPpluv/0kkBbFtwbvYO0
+	 Cxt5+PHdog9VSor9m/0+f2DNP0+4rwqNouh07WM6tnFMema8HrO7lbMkQI7pVtbyTTQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792698081;
-	bh=6O2TaTxezk/xeKLsE0GPimsl5fRqKlG85DVBD+fHP9w=;
+	d=lists.u-boot-project.org; s=default; t=1792698083;
+	bh=j/kYfPm+SkOc4Th0C8ZZh+41EnRT9xTwwIupLZ2MpE4=;
 	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=rV8i2Aks+TpNLwDfTfpFhU2UYSW7+vadD+HoCpfXzMlyX3Uvez/buCgRUs0tBwTuT
-	 U5j0QjRmby3DGNXcasEkBtaQ5mOk2p9f8FoRgbmq/Tq5F8QUKMu21DWQ2rHksiCgdG
-	 kO/Cp6zR0mMCKVKntB3gcK1hDF6KQphmUFn8bAoPSDOfCp79RhIs+vu3J2xlfkQqVe
-	 Sgzwf0hejcfuNjRY/hbjBrpRA7ZQA62RRLnhDi5P+/zgQDlOkie1AJ9SZ3dGkkGwE8
-	 O8t8aVlJYr2oKS3C4lNHmY1IafgHN3GkR6c65dacmoNNq0JeRDcnx4w/PoEo811yKw
-	 AMpY+spdsjD2w==
+	b=pfPHv9oKzIQEjlz3zRPgY3AbkGFsuTRSJF0sAv3PYnEZEUF3fhp1zHqr23IliUFUb
+	 91VWmjodY9A8cAG2zEcCHebY2AORpdGIestF7Hu5QO7LfMsvKQHDws4NOSwOkvnaMn
+	 epYfhP9tmuHK8+55ExIIe3X6Kd9OrHYX6yZVx4E+QyhJx5cnVs8o4Rs++NzpbryZzc
+	 B9RJ8rzHhchTPdA2JfkFpT0VLhkSUn+zWyMmzFnXB/Lc4mpbR0PBJ5KlSmnVx3I5J6
+	 MFdBuCR5/IiGbCvxh9lNM5bVlGPQKQkTwt/UqYnFTzhmyvcM4DQcnUi8qnL9AIFcOk
+	 zWdXVEp1n+IVw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B2FD2409C3;
-	Thu, 22 Oct 2026 19:41:21 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E96DC3A4
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 19:41:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 746D360821;
+	Thu, 22 Oct 2026 19:41:23 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id C91F23A4
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 19:41:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CD735607E7
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 19:41:14 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id AEA3B8121F
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 19:41:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dKw8NRFIGjJR for <u-boot@lists.u-boot-project.org>;
- Thu, 22 Oct 2026 19:41:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C660F6062D
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792698074;
- b=gIsz6iK0+0PDE9AFuUZLoojOCcANwysKbr7HgSuamx9Cf3ceE8mYUc2UND0H0EV0GrF8
- f9/nHBkiFk2B7NlNBscM518fCiqtNS6jf7/cZ8UfrqqVqPQAMhCOXhpy/RCHGBECtP/RU
- Vr5FwnONSelSD/w3MRw4fnrIIlKCTJHbpusyUyaoAHuG6XcUDkct9qUN3lBGlA5fTqmyX
- 6A24bpQYOuYrecv3iylF2Vb1+oSdS56OnNnb/OaRJS0xkOGubWVgDcoGdR/SN3i0EQO2c
- /CTrxVSBMUPdOnkHm2rlSrxcwE+o0rvnJzI9YuqbsSBcUYtx7nm7G0Ll2fMbTzv+3kQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id zR3ikYuihRHM for <u-boot@lists.u-boot-project.org>;
+ Thu, 22 Oct 2026 19:41:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 11F978126B
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792698076;
+ b=iRfUYgkVyxPu4CtkJ0Il88ZQC+DVgzxkSNnaO8p92YbOGVQi/QAKwsawMsSTcZxG+6qw
+ TSBuSd8D0iM+tB/JzCJuKAHtN2y289sMpHmz9U37uDunyJQJs/scVKn334luMOoOeP4n5
+ f7eq6HSchmU04n7Q9MrArTxngEoDf4I4Le844vnFvhFsljedLEAngY7L6O9D+ICkeqq8i
+ MphvaWBRntcXZi4k1OBxAwGV0go4bXgk26kNqybe8+vjH5oGc3hXmRTBc5yzAcEeJIbGq
+ n3Zra8O7uxCEnaYnIiHOFFfTFdMkc6JTW/31xQ9PJvlmvF6B03QNPNXq0qLCyIf73pQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792698074;
+ c=relaxed/relaxed; t=1792698076;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:To:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
  MIME-Version:Content-Transfer-Encoding;
- bh=6O2TaTxezk/xeKLsE0GPimsl5fRqKlG85DVBD+fHP9w=;
- b=gnOoP4+w5MDlUGJQd2LyVtf6T4fW7crgcIf8+d85O7cq/ctKqbf2xSeTddYMwlzPZcHo
- K2NKEy2xf+xKaH0NNs9nE/R/+m0HiC/OIhEsjdQwKNayoiSzHmK5YDYGbHNOssL3ji3qq
- oTaIzjdJqXmZX65TQXfTop+yOighD6+7TZJ8aKTEHstmbzv/70+W2TAmf035J8Ikm6/hT
- 4qS4Zg3Q+d5otXOQjBpFZ20AZMNFd5eiGXdvRt1ZD/7lYV6q7/hKzVIFCUamh7jUsMTGq
- IenjTckq2JMQUG+8Zv+tphray9gCHQBOEKxasnCFCNf30OP8IPtafpB7xoLgnGajYBw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=j/kYfPm+SkOc4Th0C8ZZh+41EnRT9xTwwIupLZ2MpE4=;
+ b=DA2MmLRdQQ8nKXs65nqGCYc+t3kW/mr7Nr08HRu7mapf+sW2orStoYJGwoyKLTcdchQu
+ vqfF9Tm1T6cVBOjxcNp1qUnmpI/CBzGzNJ1jpJr38WPJ8GDcenx9fkYFLIikYgFhwpH+0
+ MMBEJia6xQAnjmKhya3M7OqO/IOU3C4Xd4pF1LV8CF71EOO+AbKqCpV3Do+5bf98MCTn/
+ 5WoBbJAE6Tld4+84+othMR02Xcu8n6mAhRuJkpWKWGk1BPR8EEqRei/OK1rimEL+gKGU4
+ EAOt4hyyjnp8YbBiYNhqBFHBRUUuE8B5y+RgWkJKmoevlLhFBV6aD9R2+doLEPH7xdg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=HhbrGj5A; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
+ header.s=20251104 header.b=AIIdGtf3; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32f; helo=mail-wm1-x32f.google.com;
+ client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
  envelope-from=ansuelsmth@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=HhbrGj5A
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id C660F6062D
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 19:41:13 +0000 (UTC)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4a1b07c3c5fso1686595e9.1
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 12:41:13 -0700 (PDT)
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=AIIdGtf3
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 11F978126B
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 19:41:15 +0000 (UTC)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4a1df146015so1322965e9.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 12:41:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792698072; x=1793302872;
+ d=gmail.com; s=20251104; t=1792698074; x=1793302874;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=6O2TaTxezk/xeKLsE0GPimsl5fRqKlG85DVBD+fHP9w=;
- b=HhbrGj5ADEcQ4Bh8w8sj40VCrrPBS//G+rxOuNSPSBs9uwmfkd6xq1PA0987b+Js4R
- 3gFN4T5m9ZESCkj99YJnX94MwuKn8PgYBMYBPGj3Z+Ac1vTbbI2HLJqYmxu/BrRSWFr2
- tbfVL5HxvBSICDsMjWFK55ag4adaETaQkMd0i2SYwAP3EJ9EnNn6K7A98KW+K3LOG3Mk
- yslRllcPGC3prxCPjvbjQXJrbOQ1tGicmkU5Ev4QkI6MPJdXq7YUVR4MLONS0wTjcRIB
- aIhwETssnVlVTSGbR6spQ6aX605t2F0MK02SlpWFWCXKKC/e+X0PE7IPhiHAAk10fDwc
- ecqg==
+ bh=j/kYfPm+SkOc4Th0C8ZZh+41EnRT9xTwwIupLZ2MpE4=;
+ b=AIIdGtf3fujdT4AEzm8YfmC+SHK1+0BIwe21Y6LvNdAMIB57Sm6pt1IJ2+5DGENu3I
+ bzvhrTsyLB98p++u4z/19JLBVXYYBvjy39BYtudIiceugNpUw0LjMBxvXh+0fUe/IFRl
+ KaI6FJ3d+/4XRJUuEUTo68kC1PIYQkrVFHzAL4PAknY2zyxlX0ofwVbRN0gpp0FIxrHJ
+ ponglOJXW8jVSiZmoX68xBp6B5DaXWyUDl4vB1MbcOaG1xJfWW45Q71bxEryU9ZK6K2M
+ X1pBxSOAB2HYBDEXOG5x8wnhRsT98VgEyRE1st+w8R58mndifclCw0mE56QpMQuk8d3j
+ 8Naw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792698072; x=1793302872;
+ d=1e100.net; s=20260707; t=1792698074; x=1793302874;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=6O2TaTxezk/xeKLsE0GPimsl5fRqKlG85DVBD+fHP9w=;
- b=htyyY803Y0Qz6DgvhWSPcwbKV04h95OYl/hijfl6ysePkbGuHLOghsLsXCW0llVf5u
- R1dfI4pGbLKx8pdqtqB4dXVcycQzXACYTLc4QkUiyNGzXQXxXZZMfAMTZs/d5ZSP9f+B
- mJ6yOXHlkGi8MWrCKUUck5CHfGzZk1Pw2V28ksgOTHd/GJJVOycXgpFTJ4On3kMNaOoX
- 5GPaCPvO5cnV3mnzVBjejbg8+3rkvcmoizPtHTXZRgHLsuveHof9RYSwycQXuDVi6mfS
- yZs8nH4y5bSfOuj1cm8cRwLIhfcQk/M0sz3keu95uEagIIdt7UeHpf+BA+CV3MxCb3YP
- ejrQ==
+ bh=j/kYfPm+SkOc4Th0C8ZZh+41EnRT9xTwwIupLZ2MpE4=;
+ b=eHLLMu+XhjyhEBvc0HRqwB+JVS7bDA506e71Tf5R6RUSoWSVWuVjcCfEpl0cuHRt/X
+ AJrY5lvuVDxbwXscwxrMTPIZmVsns24Ud0dO/Xrvrr8XNuh7PhJl1QozB2k6XE7le6Mz
+ BFRlJ0MUvrGQJytFnGyq0t0UdHLJn0itDB31Ei0pew3MsTM67Yr4NLXtgGQ9whBX3/Uc
+ Ygbj8GjSOGSCXcAgZXOfz4T3H/nwBA92y1CUxPfpraF/BtCsXmFbqZMFKiwvkj/nCA5d
+ sTLrYPaql9o58PI4uiqsOaVC7gOqpkm6oCHaRD73zZbzoHCwreiw4k3Nwtf/H9FYwVHY
+ e4RQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBz5bqfYFLzqUzEatwMiwwj0HfyoRNvDlm/JoZlWbCJ8NbDWySxHcaZbfFIz0AStkw+Rx/dRfQc=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYKKCylb1Hq1xxZjtasFJ52wRWGSty/q5SvnxXEG4xvv7K1Rb3UD
- OEaPQuCKsLMjLYjxeGOVVAuwsn8OX+JYMRm4vUg/6stCESsxzj6igpsO
-X-Gm-Gg: AYBFou0QahoD19XyPIOOHsJoGRTnI/6ZpjORgG1j3DdJDJanOT6LO0/X3Uguprfcw4d
- 5aFOtfInGPSpjEBZoKPQ8z6uKbWM7j114M56bF3/pWRiOawaLUKmggMkbEDDRMck7CBa5x4Cuxp
- BRT9hwov5sAMINSdZTyTucdfbfd1fR5gBUhcMDTL3nonb+Ivi/JRlf3d3Xl/jHaztVcYQ0WeOd/
- N/iGBtYGUh+otZPuCG4QJ/GpEer67y/6ngThH04o6RYnQBl00BU42HEZZkbtleasWvkpB6FZ6WP
- 304xBFjN/Z0NHAFifgcSzv71CxQUM8lvpAwGkwE5GTuqk6i+Uk5mmM0ptPFeKTNvqRnf/sYzP14
- VkG6PcSqS28Xu5ZJzKPlQl0CpT4F/XDQF9nbhz+xZNardFZ8Iw8gC9cpCtDJ5h3Bw6oIP6rFF4O
- PVyGlznDP3p55FawXycfEPNZmBcYE8EFtvUiA8rDrLJPZSsD8gF3kE9TviO8NEzT91Rx5lPSRqE
- xE/Rpn07a+6hMYdlmI+v1IwPNNxLSsd/qwV8V7YfZjCfSMxaZ2lhK6TGb3Bw+sQHOL4us41VXm9
- StO6px7wR4WbQ4ih/+DBYX+EokVxrUO4jstCy1fM5em4ZOebHclJ6Q+knqkx
-X-Received: by 2002:a05:600c:3b07:b0:4a1:d087:f6ab with SMTP id
- 5b1f17b1804b1-4a211cbb062mr1471915e9.18.1792698071792; 
- Thu, 22 Oct 2026 12:41:11 -0700 (PDT)
+ AKwUvByMQtK7DBrMKqGCIwBFfyoJto2klNePP4VfU35G98JETuodlHj4Wh9dXCcFXWrqJvlrdhaFtSo=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYK0G7fFlZrGsG6/81GC/PcOPEIUirwbX2pJQowJ/iypxDbjI80c
+ sS0cGnZMw7Kry5p3LwC0wHB10XSpjctbE/y/8ZIq0v9KTgWwTLNi/8ke
+X-Gm-Gg: AYBFou0uDOCMjvitelMx6nh40T5KLyBVSPtlqTRvhOcVApmDebPmbHoiWzDubNJFTaW
+ eCIe8n45Q91iJsc+4NGjmWt5x296fZllYiFcJfoK503zfUTMmYKd4z5+hgLN7sdUhHiw8ktuiBJ
+ LuNERCnwNA1xluPFpKQBPf5/9oGLJsXlQDOzrcIAHAQfX4Z+obkstOb3WNqs8IRtILnFs2bW1lT
+ IdZ0aYUTn55gev829a2kr08MaljLw3X6NpLvPO4ov/2geLpQN88e+lyhQSabhpTJTdGQ+bHffyU
+ nHO3MZeaf6cqHctFdc95YnvLCKeKzUm6Mmf1DQIBFHZHsLoy+nf4uzyU+NtjMUIblFBMcteAo84
+ Gy+HfiqaBb5zOxeJlEKdq+OpqVCZvPRY6liImsyDtK7kDkGAaR94fhySaqE4ZE7ShklyV7jPrHt
+ 5W6c7jhJYPanE+epdCZO/7E8KpDRkrCWIkPucb2SLGu9sw8e/Ak7ORiZTjNG7tShL9AkU6OHNMj
+ BhFSDY6NDfrdAeGD+2AR0i19gxnNZrva54c+q8lKNoBgPYYKCFsIYNjBfz/g2jD6GIYI1WWOX42
+ FutaBAgHu37uQQO94E7BvmZ0/aryRM2nbJm3giWyeK5WLT8vjk4hbDvm6K7f
+X-Received: by 2002:a05:600c:a00c:b0:4a2:a6e:80f5 with SMTP id
+ 5b1f17b1804b1-4a211c8facemr2300495e9.11.1792698073685; 
+ Thu, 22 Oct 2026 12:41:13 -0700 (PDT)
 Received: from Ansuel-XPS24.localdomain (93-34-92-187.ip49.fastwebnet.it.
  [93.34.92.187]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4a211be8f79sm3185715e9.14.2026.10.22.12.41.10
+ 5b1f17b1804b1-4a211be8f79sm3185715e9.14.2026.10.22.12.41.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Oct 2026 12:41:11 -0700 (PDT)
+ Thu, 22 Oct 2026 12:41:13 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
@@ -177,9 +177,9 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>, Yao Zi <me@ziyao.cc>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Martin Schwan <m.schwan@phytec.de>, u-boot@lists.u-boot-project.org
-Subject: [PATCH v8 4/7] misc: fw_loader: implement request_firmware_size() OP
-Date: Thu, 22 Oct 2026 21:40:39 +0200
-Message-ID: <20261022194049.670889-5-ansuelsmth@gmail.com>
+Subject: [PATCH v8 5/7] misc: fw_loader: introduce FIP loader driver
+Date: Thu, 22 Oct 2026 21:40:40 +0200
+Message-ID: <20261022194049.670889-6-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261022194049.670889-1-ansuelsmth@gmail.com>
 References: <20261022194049.670889-1-ansuelsmth@gmail.com>
@@ -198,198 +198,691 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-It might be useful to get the firmware size before reading it to allocate
-the correct size. This is needed for case where the firmware size change
-across different firmware version and is not always the same. In such case
-the only way to handle this scenario is to allocate a big-enough buffer to
-read the firmware.
+Introduce a variant of the FS loader driver to extract images from FIP
+image. These image can contain additional binary used to init Network
+accelerator or PHY firmware blob.
 
-To better handle this, introduce the request_firmware_size() OP to get the
-firmware size before reading it. This way proper buffer can be allocated
-and dynamic firmware size can be better supported.
+The way FIP handle image type is with the usage of UUID.
 
-FS loader is updated to handle the new .get_size() handler.
+This FIP loader driver implement a simple FIP image parser that check
+every entry for a matching UUID.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Similar to FS loader, this driver also support both UBI and Block
+devices.
+
+Also an additional property is added to handle special case with eMMC
+that doesn't have a GPT partition and require a global offset to
+reference the FIP partition.
+
+An example usage of this driver is the following:
+
+Entry in DTS:
+
+	fs_loader0: fip-loader {
+		bootph-all;
+		compatible = "u-boot,fip-loader";
+		phandlepart = <&mmc0 0>;
+		partoffset = <0x100>;
+	};
+
+	ethernet@1fb50000 {
+		firmware-loader = <&fs_loader0>;
+	}
+
+FIP loader user:
+
+	/* get the FW loader from the ethernet node */
+	get_fw_loader_from_node(dev_ofnode(dev), &fw_loader);
+
+	/* read the blob identified by "58704aef-389f-3e52-b475-e0bf2234a6a2" UUID */
+	request_firmware_into_buf(fw_loader, "58704aef-389f-3e52-b475-e0bf2234a6a2",
+				  buf, 261400, 0);
+
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/misc/fw_loader/fs_loader.c        | 68 +++++++++++++++++++----
- drivers/misc/fw_loader/fw_loader-uclass.c | 19 +++++++
- drivers/misc/fw_loader/internal.h         |  7 +++
- include/fw_loader.h                       |  9 +++
- 4 files changed, 91 insertions(+), 12 deletions(-)
+ drivers/misc/Kconfig                |  23 ++
+ drivers/misc/fw_loader/Makefile     |   1 +
+ drivers/misc/fw_loader/fip_loader.c | 556 ++++++++++++++++++++++++++++
+ drivers/misc/fw_loader/internal.h   |   2 +
+ 4 files changed, 582 insertions(+)
+ create mode 100644 drivers/misc/fw_loader/fip_loader.c
 
-diff --git a/drivers/misc/fw_loader/fs_loader.c b/drivers/misc/fw_loader/fs_loader.c
-index 9923fb5e123d..c7aef99be8bb 100644
---- a/drivers/misc/fw_loader/fs_loader.c
-+++ b/drivers/misc/fw_loader/fs_loader.c
-@@ -80,18 +80,10 @@ static int select_fs_dev(struct fw_loader_plat *plat)
- 	return ret;
- }
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index 1cab469a3434..f1091e96775e 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -624,6 +624,17 @@ config MPC83XX_SERDES
+ config FW_LOADER_UCLASS
+ 	bool
  
--/**
-- * fw_get_filesystem_firmware - load firmware into an allocated buffer.
-- * @dev: An instance of a driver.
-- *
-- * Return: Size of total read, negative value when error.
-- */
--static int fw_get_filesystem_firmware(struct udevice *dev)
-+static int fw_get_filesystem_prepare(struct udevice *dev)
- {
--	struct firmware *upriv = dev_get_uclass_priv(dev);
- 	struct fw_loader_plat *plat = dev_get_uclass_plat(dev);
- 	struct fw_loader_env_info info = { };
--	loff_t actread = 0;
- 	int ret;
++config FIP_LOADER
++	bool "Enable loader driver from FIP partition"
++	select LIB_UUID
++	select FW_LOADER_UCLASS
++	help
++	  This is FIP partition generic loader which can be used to load
++	  the file image from the FIP image into target such as memory.
++
++	  The consumer driver would then use this loader to program whatever,
++	  ie. the FPGA device/PHY firmware.
++
+ config FS_LOADER
+ 	bool "Enable loader driver for file system"
+ 	select FW_LOADER_UCLASS
+@@ -637,6 +648,18 @@ config FS_LOADER
+ config SPL_FW_LOADER_UCLASS
+ 	bool
  
- 	generic_fw_loader_env_info(&info);
-@@ -114,6 +106,29 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
- 		ret = select_fs_dev(plat);
- 	}
++config SPL_FIP_LOADER
++	bool "Enable loader driver from FIP partition in SPL"
++	select LIB_UUID
++	select SPL_FW_LOADER_UCLASS
++	depends on SPL
++	help
++	  This is FIP partition generic loader which can be used to load
++	  the file image from the FIP image into target such as memory.
++
++	  The consumer driver would then use this loader to program whatever,
++	  ie. the FPGA device/PHY firmware.
++
+ config SPL_FS_LOADER
+ 	bool "Enable loader driver for file system in SPL"
+ 	select SPL_FW_LOADER_UCLASS
+diff --git a/drivers/misc/fw_loader/Makefile b/drivers/misc/fw_loader/Makefile
+index f5df0db61c22..120722c4ed17 100644
+--- a/drivers/misc/fw_loader/Makefile
++++ b/drivers/misc/fw_loader/Makefile
+@@ -1,4 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0+
  
+ obj-$(CONFIG_$(PHASE_)FW_LOADER_UCLASS) += fw_loader-uclass.o
++obj-$(CONFIG_$(PHASE_)FIP_LOADER) += fip_loader.o
+ obj-$(CONFIG_$(PHASE_)FS_LOADER) += fs_loader.o
+diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
+new file mode 100644
+index 000000000000..1df5b46af1d0
+--- /dev/null
++++ b/drivers/misc/fw_loader/fip_loader.c
+@@ -0,0 +1,556 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2025 Christian Marangi <ansuelsmth@gmail.com>
++ *
++ */
++
++#define LOG_CATEGORY UCLASS_FIRMWARE_LOADER
++
++#include <blk.h>
++#include <dm.h>
++#include <div64.h>
++#include <env.h>
++#include <errno.h>
++#include <fs.h>
++#include <linux/kernel.h>
++#include <log.h>
++#include <malloc.h>
++#include <memalign.h>
++#include <part.h>
++#include <u-boot/uuid.h>
++
++#if CONFIG_IS_ENABLED(CMD_UBIFS)
++#include <ubi_uboot.h>
++#endif
++
++#include "internal.h"
++
++#define TOC_HEADER_NAME	0xaa640001
++
++/*
++ * FIP toc and entry is always in the
++ * native byte order of the system.
++ */
++struct fip_toc_header {
++	u32 name;
++	u32 serial_number;
++	u64 flags;
++} __packed;
++
++struct fip_toc_entry {
++	struct uuid uuid;
++	u64 offset_address;
++	u64 size;
++	u64 flags;
++} __packed;
++
++enum fip_storage_interface {
++	FIP_STORAGE_INTERFACE_BLK,
++	FIP_STORAGE_INTERFACE_UBI,
++};
++
++struct fip_storage_info {
++	enum fip_storage_interface storage_interface;
++
++	/* BLK info */
++	struct disk_partition part_info;
++	struct blk_desc *desc;
++	unsigned int part_offset;
++
++	/* UBI info */
++	char *ubi_volume;
++};
++
++static bool validate_fip_toc_header(struct fip_toc_header *hdr)
++{
++	if (hdr->name != TOC_HEADER_NAME) {
++		log_err("Invalid FIP header\n");
++		return false;
++	}
++
++	return true;
++}
++
++static int firmware_name_to_uuid(struct firmware *firmwarep,
++				 struct uuid *uuid)
++{
++	const char *uuid_str = firmwarep->name;
++	int ret;
++
++	ret = uuid_str_to_bin(uuid_str, (unsigned char *)uuid,
++			      UUID_STR_FORMAT_STD);
++	if (ret)
++		log_err("Invalid UUID str: %s\n", uuid_str);
++
 +	return ret;
 +}
 +
-+static void fw_get_filesystem_release(struct udevice *dev)
++static int check_fip_toc_entry(struct fip_toc_entry *ent,
++			       struct uuid *uuid,
++			       struct fip_toc_entry *dent)
 +{
-+#ifdef CONFIG_CMD_UBIFS
-+	umount_ubifs();
++	struct uuid uuid_null = { };
++
++	/* NULL uuid. We parsed every entry */
++	if (!memcmp(&ent->uuid, &uuid_null, sizeof(uuid_null)))
++		return -ENOENT;
++
++	/* We found the related uuid */
++	if (!memcmp(&ent->uuid, uuid, sizeof(*uuid))) {
++		log_debug("Found matching FIP entry. offset: 0x%llx size: %lld\n",
++			  ent->offset_address, ent->size);
++		memcpy(dent, ent, sizeof(*ent));
++		return 0;
++	}
++
++	return -EAGAIN;
++}
++
++static int blk_read_fip_toc_header(struct blk_desc *desc, lbaint_t offset,
++				   char *buf, struct fip_toc_header *hdr)
++{
++	lbaint_t blkcnt = BLOCK_CNT(sizeof(*hdr), desc);
++	lbaint_t to_read, read = 0;
++	int i, ret;
++
++	for (i = 0; i < blkcnt && read < sizeof(*hdr); i++) {
++		to_read = min(desc->blksz,
++			      (lbaint_t)(sizeof(*hdr) - read));
++
++		ret = blk_dread(desc, offset + i, 1, buf);
++		if (ret != 1)
++			return -EINVAL;
++
++		memcpy((u8 *)hdr + read, buf, to_read);
++		read += to_read;
++	}
++
++	return read;
++}
++
++static int blk_read_fip_toc_entry(struct blk_desc *desc, lbaint_t offset,
++				  int pos, char *buf,
++				  struct fip_toc_entry *ent)
++{
++	lbaint_t left, consumed, to_read, read = 0;
++	lbaint_t blkstart, blkcnt;
++	int i, ret;
++
++	consumed = pos % desc->blksz;
++	left = desc->blksz - consumed;
++	to_read = min(left, (lbaint_t)sizeof(*ent));
++
++	blkstart = BLOCK_CNT(pos, desc);
++	blkcnt = BLOCK_CNT(sizeof(*ent) - to_read, desc);
++
++	/* Read data from previous cached block if present */
++	if (consumed) {
++		memcpy(ent, buf + consumed, to_read);
++		read += to_read;
++	}
++
++	for (i = 0; i < blkcnt && read < sizeof(*ent); i++) {
++		to_read = min(desc->blksz,
++			      (lbaint_t)(sizeof(*ent) - read));
++
++		ret = blk_dread(desc, offset + blkstart + i, 1, buf);
++		if (ret != 1)
++			return -EINVAL;
++
++		memcpy((u8 *)ent + read, buf, to_read);
++		read += to_read;
++	}
++
++	return read;
++}
++
++static int blk_parse_fip_firmware(struct firmware *firmwarep,
++				  struct blk_desc *desc,
++				  struct disk_partition *part_info,
++				  unsigned int part_offset,
++				  struct fip_toc_entry *dent)
++{
++	lbaint_t offset = part_info->start + part_offset;
++	struct fip_toc_header hdr;
++	struct fip_toc_entry ent;
++	struct uuid uuid;
++	unsigned int pos;
++	char *read_buf;
++	int ret;
++
++	/* Allocate a Scratch Buffer for FIP parsing */
++	read_buf = malloc(desc->blksz);
++	if (!read_buf)
++		return -ENOMEM;
++
++	ret = blk_read_fip_toc_header(desc, offset, read_buf, &hdr);
++	if (ret < 0) {
++		ret = -EINVAL;
++		goto out;
++	}
++
++	pos = ret;
++
++	if (!validate_fip_toc_header(&hdr)) {
++		ret = -EINVAL;
++		goto out;
++	}
++
++	ret = firmware_name_to_uuid(firmwarep, &uuid);
++	if (ret)
++		goto out;
++
++	/* Loop for every FIP entry searching for uuid */
++	while (true) {
++		ret = blk_read_fip_toc_entry(desc, offset, pos,
++					     read_buf, &ent);
++		if (ret < 0)
++			goto out;
++
++		pos += ret;
++
++		ret = check_fip_toc_entry(&ent, &uuid, dent);
++		if (ret != -EAGAIN)
++			break;
++	}
++
++out:
++	free(read_buf);
++	return ret;
++}
++
++#if CONFIG_IS_ENABLED(CMD_UBIFS)
++static int ubi_parse_fip_firmware(struct firmware *firmwarep,
++				  char *ubi_vol,
++				  struct fip_toc_entry *dent)
++{
++	struct fip_toc_header hdr;
++	struct fip_toc_entry ent;
++	struct uuid uuid;
++	unsigned int pos;
++	int ret;
++
++	ret = ubi_volume_read(ubi_vol, (char *)&hdr, 0, sizeof(hdr));
++	if (ret)
++		return ret;
++
++	pos = sizeof(hdr);
++
++	if (!validate_fip_toc_header(&hdr))
++		return -EINVAL;
++
++	ret = firmware_name_to_uuid(firmwarep, &uuid);
++	if (ret)
++		return ret;
++
++	/* Loop for every FIP entry searching for uuid */
++	while (true) {
++		ret = ubi_volume_read(ubi_vol, (char *)&ent, pos,
++				      sizeof(ent));
++		if (ret)
++			return ret;
++
++		ret = check_fip_toc_entry(&ent, &uuid, dent);
++		if (ret != -EAGAIN)
++			break;
++
++		pos += sizeof(ent);
++	}
++
++	return ret;
++}
 +#endif
++
++static int parse_fip_firmware(struct firmware *firmwarep,
++			      struct fip_storage_info *info,
++			      struct fip_toc_entry *dent)
++{
++	switch (info->storage_interface) {
++	case FIP_STORAGE_INTERFACE_BLK:
++		return blk_parse_fip_firmware(firmwarep, info->desc,
++					      &info->part_info,
++					      info->part_offset,
++					      dent);
++#if CONFIG_IS_ENABLED(CMD_UBIFS)
++	case FIP_STORAGE_INTERFACE_UBI:
++		return ubi_parse_fip_firmware(firmwarep,
++					      info->ubi_volume,
++					      dent);
++#endif
++	default:
++		return -EINVAL;
++	}
++}
++
++static int blk_read_fip_firmware(struct firmware *firmwarep,
++				 struct blk_desc *desc,
++				 struct disk_partition *part_info,
++				 unsigned int part_offset,
++				 const struct fip_toc_entry *ent)
++{
++	unsigned int offset = part_info->start + part_offset;
++	unsigned long pos, to_read, read = 0;
++	unsigned long long blkstart;
++	unsigned int blkcnt;
++	char *read_buf;
++	size_t size;
++	int i, ret;
++
++	read_buf = malloc(desc->blksz);
++	if (!read_buf)
++		return -ENOMEM;
++
++	size = min(firmwarep->size, (size_t)ent->size - firmwarep->offset);
++	blkcnt = BLOCK_CNT(size, desc);
++	blkstart = ent->offset_address + firmwarep->offset;
++	pos = do_div(blkstart, desc->blksz);
++
++	/* Read data in the middle of a block */
++	if (pos) {
++		to_read = min(desc->blksz - pos, (unsigned long)size);
++		ret = blk_dread(desc, offset + blkstart, 1, read_buf);
++		if (ret != 1) {
++			ret = -EINVAL;
++			goto out;
++		}
++
++		memcpy((u8 *)firmwarep->data, read_buf + pos, to_read);
++		read += to_read;
++		blkstart++;
++	}
++
++	/* Consume all the remaining block */
++	for (i = 0; i < blkcnt && read < size; i++) {
++		to_read = min(desc->blksz, (unsigned long)(size - read));
++		ret = blk_dread(desc, offset + blkstart + i, 1, read_buf);
++		if (ret != 1) {
++			ret = -EINVAL;
++			goto out;
++		}
++
++		memcpy((u8 *)firmwarep->data + read, read_buf, to_read);
++		read += to_read;
++	}
++
++	ret = read;
++
++out:
++	free(read_buf);
++	return ret;
++}
++
++#if CONFIG_IS_ENABLED(CMD_UBIFS)
++static int ubi_read_fip_firmware(struct firmware *firmwarep,
++				 char *ubi_vol,
++				 const struct fip_toc_entry *ent)
++{
++	unsigned int offset = firmwarep->offset;
++	size_t size;
++	int ret;
++
++	size = min(firmwarep->size, (size_t)ent->size - offset);
++	ret = ubi_volume_read(ubi_vol,
++			      (u8 *)firmwarep->data,
++			      ent->offset_address + offset,
++			      size);
++	if (ret)
++		return ret;
++
++	return size - firmwarep->offset;
++}
++#endif
++
++static int read_fip_firmware(struct firmware *firmwarep,
++			     struct fip_storage_info *info,
++			     const struct fip_toc_entry *dent)
++{
++	switch (info->storage_interface) {
++	case FIP_STORAGE_INTERFACE_BLK:
++		return blk_read_fip_firmware(firmwarep, info->desc,
++					     &info->part_info,
++					     info->part_offset,
++					     dent);
++#if CONFIG_IS_ENABLED(CMD_UBIFS)
++	case FIP_STORAGE_INTERFACE_UBI:
++		return ubi_read_fip_firmware(firmwarep,
++					     info->ubi_volume,
++					     dent);
++#endif
++	default:
++		return -EINVAL;
++	}
++}
++
++static int fw_parse_storage_info(struct udevice *dev,
++				 struct fip_storage_info *info)
++{
++	struct fw_loader_plat *plat = dev_get_uclass_plat(dev);
++	struct fw_loader_env_info env_info = { };
++	int ret;
++
++	generic_fw_loader_env_info(&env_info);
++	info->part_offset = env_get_hex("fw_partoffset", 0);
++
++	if (env_info.storage_interface && env_info.dev_part) {
++		int part;
++
++		part = part_get_info_by_dev_and_name_or_num(env_info.storage_interface,
++							    env_info.dev_part,
++							    &info->desc,
++							    &info->part_info, 1);
++		if (part < 0)
++			return part;
++
++		info->storage_interface = FIP_STORAGE_INTERFACE_BLK;
++
++		return 0;
++	}
++
++	if (env_info.storage_interface && env_info.ubi_mtdpart &&
++	    env_info.ubi_volume) {
++		if (strcmp("ubi", env_info.storage_interface))
++			return -ENODEV;
++
++		ret = generic_fw_loader_ubi_select(env_info.ubi_mtdpart);
++		if (ret)
++			return ret;
++
++		info->ubi_volume = env_info.ubi_volume;
++		info->storage_interface = FIP_STORAGE_INTERFACE_UBI;
++
++		return 0;
++	}
++
++	info->part_offset = plat->partoffset;
++
++	if (plat->phandlepart.phandle) {
++		int part;
++
++		ret = generic_fw_loader_get_phandle_desc(plat, &info->desc);
++		if (ret)
++			return ret;
++
++		part = plat->phandlepart.partition;
++		if (part >= 1)
++			ret = part_get_info(info->desc, part,
++					    &info->part_info);
++		else
++			ret = part_get_info_whole_disk(info->desc,
++						       &info->part_info);
++
++		info->storage_interface = FIP_STORAGE_INTERFACE_BLK;
++
++		return ret;
++	}
++
++	if (plat->mtdpart && plat->ubivol) {
++		ret = generic_fw_loader_ubi_select(plat->mtdpart);
++		if (ret)
++			return ret;
++
++		info->ubi_volume = plat->ubivol;
++		info->storage_interface = FIP_STORAGE_INTERFACE_UBI;
++
++		return 0;
++	}
++
++	return -EINVAL;
 +}
 +
 +/**
-+ * fw_get_filesystem_firmware - load firmware into an allocated buffer.
++ * fw_get_fip_firmware - load firmware into an allocated buffer.
 + * @dev: An instance of a driver.
 + *
 + * Return: Size of total read, negative value when error.
 + */
-+static int fw_get_filesystem_firmware(struct udevice *dev)
++static int fw_get_fip_firmware(struct udevice *dev)
 +{
-+	struct firmware *upriv = dev_get_uclass_priv(dev);
-+	loff_t actread = 0;
++	struct fip_storage_info info = { };
++	struct firmware *firmwarep;
++	struct fip_toc_entry ent;
 +	int ret;
 +
-+	ret = fw_get_filesystem_prepare(dev);
- 	if (ret)
- 		goto out;
- 
-@@ -128,14 +143,43 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
- 	}
- 
- out:
--#ifdef CONFIG_CMD_UBIFS
--	umount_ubifs();
--#endif
-+	fw_get_filesystem_release(dev);
++	ret = fw_parse_storage_info(dev, &info);
++	if (ret)
++		return ret;
++
++	firmwarep = dev_get_uclass_priv(dev);
++	if (!firmwarep)
++		return -EINVAL;
++
++	ret = parse_fip_firmware(firmwarep, &info, &ent);
++	if (ret)
++		return ret;
++
++	if (firmwarep->offset > ent.size) {
++		log_err("Invalid offset. Entry too small\n");
++		return -EINVAL;
++	}
++
++	ret = read_fip_firmware(firmwarep, &info, &ent);
++	if (ret < 0)
++		log_err("Failed to read %s from FIP: %d.\n",
++			firmwarep->name, ret);
++
 +	return ret;
 +}
 +
 +/**
-+ * fw_get_filesystem_firmware_size - get firmware size.
++ * fw_get_fip_firmware_size - get firmware size.
 + * @dev: An instance of a driver.
 + *
 + * Return: Size of firmware, negative value when error.
 + */
-+static int fw_get_filesystem_firmware_size(struct udevice *dev)
++static int fw_get_fip_firmware_size(struct udevice *dev)
 +{
-+	struct firmware *upriv = dev_get_uclass_priv(dev);
-+	loff_t size = 0;
++	struct fip_storage_info info = { };
++	struct firmware *firmwarep;
++	struct fip_toc_entry ent;
 +	int ret;
 +
-+	ret = fw_get_filesystem_prepare(dev);
++	ret = fw_parse_storage_info(dev, &info);
 +	if (ret)
-+		goto out;
-+
-+	ret = fs_size(upriv->name, &size);
-+	if (ret) {
-+		debug("Error: %d Failed to get size for %s.\n",
-+		      ret, upriv->name);
-+		goto out;
-+	}
-+
-+	ret = size;
-+
-+out:
-+	fw_get_filesystem_release(dev);
- 	return ret;
- }
- 
- static const struct fw_loader_ops fs_loader_ops = {
- 	.get_firmware = fw_get_filesystem_firmware,
-+	.get_size = fw_get_filesystem_firmware_size,
- };
- 
- static const struct udevice_id fs_loader_ids[] = {
-diff --git a/drivers/misc/fw_loader/fw_loader-uclass.c b/drivers/misc/fw_loader/fw_loader-uclass.c
-index 7f19d6c4af4c..4e67f2559fa2 100644
---- a/drivers/misc/fw_loader/fw_loader-uclass.c
-+++ b/drivers/misc/fw_loader/fw_loader-uclass.c
-@@ -210,3 +210,22 @@ int request_firmware_into_buf(struct udevice *dev,
- 
- 	return ops->get_firmware(dev);
- }
-+
-+int request_firmware_size(struct udevice *dev, const char *name)
-+{
-+	const struct fw_loader_ops *ops;
-+	int ret;
-+
-+	if (!dev)
-+		return -EINVAL;
-+
-+	ret = _request_firmware_prepare(dev, name, NULL, 0, 0);
-+	if (ret < 0) /* error */
 +		return ret;
 +
-+	ops = fw_loader_get_ops(dev);
-+	if (!ops->get_size)
-+		return -EOPNOTSUPP;
++	firmwarep = dev_get_uclass_priv(dev);
++	if (!firmwarep)
++		return -EINVAL;
 +
-+	return ops->get_size(dev);
++	ret = parse_fip_firmware(firmwarep, &info, &ent);
++	if (ret)
++		return ret;
++
++	return ent.size - firmwarep->offset;
 +}
++
++static const struct fw_loader_ops fip_loader_ops = {
++	.get_firmware = fw_get_fip_firmware,
++	.get_size = fw_get_fip_firmware_size,
++};
++
++static int fip_loader_of_to_plat(struct udevice *dev)
++{
++	struct fw_loader_plat *plat = dev_get_uclass_plat(dev);
++	ofnode fw_loader_node;
++
++	fw_loader_node = dev_ofnode(dev);
++	if (ofnode_valid(fw_loader_node)) {
++		ofnode_read_u32(fw_loader_node, "partoffset",
++				&plat->partoffset);
++	}
++
++	return 0;
++}
++
++static const struct udevice_id fip_loader_ids[] = {
++	{ .compatible = "u-boot,fip-loader"},
++	{ }
++};
++
++U_BOOT_DRIVER(fip_loader) = {
++	.name		= "fip-loader",
++	.id		= UCLASS_FIRMWARE_LOADER,
++	.of_match	= fip_loader_ids,
++	.of_to_plat	= fip_loader_of_to_plat,
++	.ops		= &fip_loader_ops,
++};
 diff --git a/drivers/misc/fw_loader/internal.h b/drivers/misc/fw_loader/internal.h
-index 9ff43e872554..1abe7504a81e 100644
+index 1abe7504a81e..5af061321512 100644
 --- a/drivers/misc/fw_loader/internal.h
 +++ b/drivers/misc/fw_loader/internal.h
-@@ -32,6 +32,13 @@ struct fw_loader_ops {
- 	 * @dev:	Firmware Loader device to read firmware from
- 	 */
- 	int (*get_firmware)(struct udevice *dev);
-+
-+	/**
-+	 * get_size() - get firmware size from Firmware Loader driver
-+	 *
-+	 * @dev:	Firmware Loader device to get firmware size from
-+	 */
-+	int (*get_size)(struct udevice *dev);
+@@ -49,11 +49,13 @@ struct fw_loader_ops {
+  * This holds information about all supported storage devices for driver use.
+  *
+  * @phandlepart: Attribute data for block device.
++ * @partoffset: Global offset for BLK partition.
+  * @mtdpart: MTD partition for ubi partition.
+  * @ubivol: UBI volume-name for ubifsmount.
+  */
+ struct fw_loader_plat {
+ 	struct phandle_part phandlepart;
++	u32 partoffset;
+ 	char *mtdpart;
+ 	char *ubivol;
  };
- 
- #define fw_loader_get_ops(dev)	((const struct fw_loader_ops *)(dev)->driver->ops)
-diff --git a/include/fw_loader.h b/include/fw_loader.h
-index 99c47380a172..01f242dcbefd 100644
---- a/include/fw_loader.h
-+++ b/include/fw_loader.h
-@@ -38,6 +38,15 @@ int request_firmware_into_buf(struct udevice *dev,
- 			      const char *name,
- 			      void *buf, size_t size, u32 offset);
- 
-+/**
-+ * request_firmware_size - Get firmware size.
-+ * @dev: An instance of a driver.
-+ * @name: Name of firmware file.
-+ *
-+ * Return: Size of firmware, negative value when error.
-+ */
-+int request_firmware_size(struct udevice *dev, const char *name);
-+
- /**
-  * request_firmware_into_buf_via_script() -
-  * Load firmware using a U-Boot script and copy to buffer
 -- 
 2.55.0
 
