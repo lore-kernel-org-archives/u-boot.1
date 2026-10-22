@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6919606A322
-	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 16:20:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F590606A319
+	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 16:20:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=e1hiRc+7;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=CsFkJ/jR
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Az70OJkJ;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=gEflWjAr
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8F21640879;
-	Thu, 22 Oct 2026 16:20:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 78C92608F6;
+	Thu, 22 Oct 2026 16:20:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id T9KrEBppgY4P; Thu, 22 Oct 2026 16:20:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 727B240801
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792686038;
-	b=IRmhhr3zP1HvwozK3PEDXu4n9aF9bJtfDqy134OE6CwpfU/m2CmHPcThWHJEto2r0qca
-	 +Ca+P5BYs5y1QVg69rLSfYaBJbkeotOOGIrS+MbgofdppLyrLDhp00selk4ObSQXqS4oi
-	 9gPLy9MDoTucj/9Of6hs5AHudDXEirjynli6j/HUfkqAIbpluYpgvvlSDLQSCVeKvChFF
-	 n2sTJJ8gYKWsnVMu9QY2I7k51K62gyFPtklOmmC9FHWc01SnZxIvy1ZqQ/BrHQ3/ZJ0Fv
-	 XGEvcpbLnduQH2J5R+K07Qeq95tWU4ByMFo0N1A9K4qNo8IQL1CZjyrWPk5HPi2uPRQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0mN20Rpd4jcL; Thu, 22 Oct 2026 16:20:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 03E8D6084A
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792686040;
+	b=iumrHsDeXzlaGz72nf86ABsGy7/s55qcslBRiHIP9tplnjEjJa6JSadBVOatyHgqHjMR
+	 NT0T2MQf+6Akql96XAa9jBhsilrjC10pJOtvjf9mZ5pnvXUtfkTjW5Vj9sNskCTDHLk/H
+	 ViqiXJJ7dOR7JWxuUuWOnyELcO5GtbCpeOPHX0kQ4zM6izUNgkM4s0gSPS0xpZfDgtvf4
+	 tVoiUTV67Jc8oezvj2uNLyNZYkx7xU8V4qYY6ofEbxtqB09YBCmRy4MF7xiILR7jd6cKR
+	 pIWJTfNP/nj2HIj3cYJYqw58Iw+uB+sCsFg1cpU5ifa6FV9SRJ0nvyiRQrxwICq5gKQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792686038;
+	c=relaxed/relaxed; t=1792686040;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,136 +33,138 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=YNUW9/Yv5oUgtU2bhkwSq+JjxYqJyKvDFMVCKralZGg=;
-	b=iNzMphdRi/dx0nstQzPVharPHR+xkc8joAXnxu0cShC2hT/l9I1dD3OVIOB+TIB6n1Xr
-	 Lp8gPWe8tyIdZgNCYcy1RyPdXUoKkTq5MIJ+h3eULkuoHjYR4mync13yzdhEJpfgdMR2N
-	 AZFqxrBVgArmpk/VGqszNljxCsBYZSYppBa3ZvuT++AVf1VruUKCjuHksjjkzGRD7FDFx
-	 /LVSzoSpZu9YuZ+W2MaLrEteoi82Tm0LPFJWbeEm3aRqiqEItE5SB5YhWrdpC3PRdATLg
-	 9BjbXlqDn3Q2FXMr7O/pHLEpko6gHEYAtipGGNhk7OWxC5gTjGGPi/Jn2q7Jku3173Q==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=K2jFAEKWkENNtsCV3CcUqwGAw7ytDfhxgnsfKmwKD2M=;
+	b=bY78ppdyQ4CSJD2tg9QMB4ox4+ehR4Lp1mvdyzFddkgXUAaCyUSrS8yt0lK54ghw5/Og
+	 2iaQNWA0bERYfVQKh+2MjrD8qhx4rXR382Bv5ZgOeHY9KKTy/2tz1tXf0Ocruw2H7RxQc
+	 LFePd9uvbfh+FYdCnTMsSsQzX/icUq6JJK6kHUsecpuNnb6fU1IohjBjgFBkFjehs3vy+
+	 0RrmkgCPPZ7iNj0vXcMH8DFt3M3YZWkMPMo3wjE/ccrcfcVGClkHkrp76fNtN8WQ0C8f4
+	 zx4de/RbXKOP+KqcTSMzLxZWRIHD+AskURudHC2Jv9wYbQudYPy+vvpWyqikH1IVNsA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	dmarc=none header.from=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=gEflWjAr;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792686038;
-	bh=YNUW9/Yv5oUgtU2bhkwSq+JjxYqJyKvDFMVCKralZGg=;
+	d=lists.u-boot-project.org; s=default; t=1792686040;
+	bh=K2jFAEKWkENNtsCV3CcUqwGAw7ytDfhxgnsfKmwKD2M=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=e1hiRc+7kxMDo0r8RUPsjbsps7dW8DV5HE7NlOHqQto7iFgFweOqK9O9yU6a/cjdp
-	 OvD/aVerw8wkTQ/i2/T/DcadWjdFCNpsTTjy6nIuVvge3/OshYzap+YZoYUf/QZjzc
-	 iRFIz1qmKfcO0hZnRPNtEqA1iqLYBadgCtpJFOJUl86M8HlXzEPyi4QnxLacJIwsOo
-	 pq9OlZisKY4PTFK6Jn3Kvqn+XCfVP9BLoGpCXXLPsaYy6WBQv/CLEok472ZTwGAaNP
-	 s1CVy/5f9XdZYos3IRwHq9pIaQ5Yi9AuASoMNfEH9+3vbkWxtSQ3NFR+3a4epRUin7
-	 XNEsaMX8ybKeA==
+	b=Az70OJkJdsX3Qt9968aua+NpCuHsv8SG3yoqYQI4jNGGnTyQ7noQn0Y3JtADWUEhW
+	 rIneDS35DPv6QH35y0QSaOpv1mJuugToBoMRL5m7biAFV7t/yMBjYf4W4K00nuQdm0
+	 J5NK/v4gdcHLgJ++lZKlfv2x4NytnRtB2FoGwYwObgU2SkrfYGhkzvKxCM/7VpGhRu
+	 DS2ZXh/O8o3dkBZURjTzVGM/GQ7l++pHhS/rGaS6el6c1sWN/4xvnLwUl35ORLLSE9
+	 pr9omPf0LOoa6m3QH45S0SGtmvKhKDFW0l4IjFLx66MmqFOYOxrARvFaUd1+bIsSy/
+	 ZzbvMPn+KA7OQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 727B240801;
-	Thu, 22 Oct 2026 16:20:38 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 7EF7B3A4
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 16:20:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 03E8D6084A;
+	Thu, 22 Oct 2026 16:20:40 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0332F3A4
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 16:20:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 70F2C8117B
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 16:20:33 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id DD57E6084A
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 16:20:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5BVEkN-gtFWo for <u-boot@lists.u-boot-project.org>;
- Thu, 22 Oct 2026 16:20:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4143781174
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792686032;
- b=o0V+my+CR0kjhzbYmHvt/MWxN4rDFv2VTNcp+Of2luY42B/4CB60tVjLWXf9c6qAK7N7
- sgzbR1CYOaFH9cHmzhofNHeajLWrdrvx23mW1LopE+GIseTMynm6+pP4+ZZKK1qxMh9a2
- WLFhpKwbGIRt8bXCgzdP2VFYWKCWrp0iI4nGJIY8cxg03NxgzbpBDH+n75HHsLliIJ8zU
- mrYWhdpEvP3R9GkOgGYcmYNvhCf+ytXxXeA325u+rp3fTntPE0/jsSyQxYNXvOTqkktR+
- YtgBtBgR6Apmp73ZjTIWELGXF+5NlRnsoHBteOXUSSlq60X+MeSoiHwUFcJen+aLCkQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8eqybwUzWrrM for <u-boot@lists.u-boot-project.org>;
+ Thu, 22 Oct 2026 16:20:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 227FA6089D
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::332"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792686034;
+ b=JEJ9OZQQst/1GlWiSiTN5Ah2kGwmzo+3Bx9DjkABNb8UZRoGRH0AlXyGlFzDvITjuZhw
+ f6niAboOtQIFiqG0rDRhG2cJunvSFdzzbW5EINO360SZDUEifqE6xGc2cggbJREHDkpNL
+ Tk8hJgIQcf9mbRB3YYShWJmHu6d+s1MsGHvVWHIN7OD5zrmtAQlrTmRjhWZOirUQo5ZSC
+ MfanZhIOXF9ajrr6oxM7hVHQYfv6Hk6BGBrdQkiI7hV8By4EoY+AOqbQ8XYfdYZQN8URC
+ X4V0Dj9uB4LWRvhQOpPh2FOgabMj2QwbWlAxAGBAV/ZDr/CdEGGijh3Z1pWvofP+0yA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792686032;
+ c=relaxed/relaxed; t=1792686034;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=YNUW9/Yv5oUgtU2bhkwSq+JjxYqJyKvDFMVCKralZGg=;
- b=TUK60uIySe1HvyzUefXRnsJy/HJTw0uJofa4s4rQzC346kBaABpOcw7crtUqYaO+YvHW
- Gt2Nrpuo/5UkJWELClwcwyvoqLEXLl7yRn5+K7nsLg+4Jk9yvkXs2BUo4z5RIl5r7rs6y
- hM85amgoZWSE1nlg2gpmarzQJF7TV2ABvD9ixPYT1Z2iVoQbYNcoeTj6Z3hjfCNtWK5c7
- 8qISk11NMOPVP2/JxZwbrxCacFpCoAh2ZDjVmALBXuqxx8OxEzix0/vW145sQHhDokN23
- 3hi+ja+f42nmbgDH6TPle/1b+AM3Z8BHLpiB2FChb2UJz3A6+eiP/GsVQ7iZzg4L2GA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=K2jFAEKWkENNtsCV3CcUqwGAw7ytDfhxgnsfKmwKD2M=;
+ b=HA+7pX4a+NXPTTmtJnU6N3shFfOHUMAAlw2265rcQ8PTHRVfQB1O454wtVm99XjXVZEE
+ g9icf1fvfFcGZPkogYwcc7Ax6EPqpHpikoqY5DBbdKBB4v2A2/2z+qDU4AIkApJUTdipy
+ ZVJJVj0X73qek2UCf1hzLpjlZTVnkOyetj3s/oZdMT2stNbRzbs9JMIVHL/+2fg9CcMHd
+ XfiisL1UWnO8IsQA1pf9ZJ3NfEnOsZoTmJtHOUKN/bURsaitNd8n08tf8S1vDvFFbDVQ8
+ 7RkdGL62/KiK7KLDTeHo3Wyg4y6WqwTet7FG6aP3NRGsy8UnoI6vjGI1s05POs7UgUw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=none header.from=baylibre.com;
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b="CsFkJ/jR"; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
+ header.s=google header.b=gEflWjAr; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::332"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
+ client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
  envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=CsFkJ/jR
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 4143781174
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 16:20:31 +0000 (UTC)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4980fe6b3beso7151855e9.0
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 09:20:31 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=gEflWjAr
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 227FA6089D
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 16:20:33 +0000 (UTC)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4a0286c981dso21623655e9.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 09:20:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1792686030; x=1793290830;
+ d=baylibre.com; s=google; t=1792686032; x=1793290832;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=YNUW9/Yv5oUgtU2bhkwSq+JjxYqJyKvDFMVCKralZGg=;
- b=CsFkJ/jR29e9i38racBenDz+40kfF4vBqPaMfn2u6k0qAHt5XguOXXmouOj4MvqDlS
- FBs+kbL0Mf823XTdJFwnGKP23YJkWkrywjXfyltzqbv9pP5SQU2fsy/ay2bZvVBGHgRD
- tqcZorTwPH3xQUSgusGizTm0pjVKHLAffByBkqj3SbRgAdZtL76RUQNSjoXRl5ubtm3Q
- VRFNomRgBpBS6w2NXbIGxEdlZvZ9RaosWX+d9LkrIvSHvAIbs3IFCqgnDoopHQ5Vb+ym
- kOwXMier3mu5tAOk7GmpbakL8q3XPvdmrLp0smVXIdzyKbdoOXdzM6EXLv8qCw5A8T89
- sC/Q==
+ bh=K2jFAEKWkENNtsCV3CcUqwGAw7ytDfhxgnsfKmwKD2M=;
+ b=gEflWjArXydWqCl2yVAFggiuQIxj22gEpWo+UA3mjjiYtBRz6+WwQnXCcjLH8KYYwc
+ bvASFKtlLHNVPzyXM2avrPUbL8uuAvlbbJx7+qix342G8v8wEemZRjaC1GfS+yGjebKy
+ +4JTIllbAI47B7QThyJKAT4nrEZiMwDIbMPa2xkO82v06UCVULpHU+pC9wNZqFHGx2Zy
+ glhE2aLC2wIeUxKkfX92bM3xr3s65VZx203ah518KI/iD+iCs7/URX18vSRePLM7PqE5
+ kzAjW3ve+VlZvQcvAmY6aRX3OdYqJ3UgMoJ34R6CiDUN6nnO2DFju9g9YHWRW4dWW2CN
+ 9jLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792686030; x=1793290830;
+ d=1e100.net; s=20260707; t=1792686032; x=1793290832;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=YNUW9/Yv5oUgtU2bhkwSq+JjxYqJyKvDFMVCKralZGg=;
- b=zrR1CbCMCqdE0M7cpeDidQvBcDCMV9e6ihfoQM/wRl+g3vKfEdMc2BGt03rqpCNPhW
- Orf6DVvFURVECWfNz9ScBHzE08U9iJqhxZHK0sYwzzFFoYgapcNbVk3qwMP4vBUQz49c
- 9WrhecchVxk1le/0B0wb4UdBrMnlIfR3r1g9XJWOIad/dkXifx0p5OFfppw8IRdOQNlG
- w9CBbSyf94lujARHcZQrb+jBa6wQiWq6w4Yk9JYBc1EAZz/Mi5uvI/4aSgpeZlyzqHSM
- XeQyRRaRRjoyhQMf2KU0xs4/t8x6M94X6u567LtoAfcsCSxR/QzPHcgqFghMI06cQwo/
- n1KQ==
-X-Gm-Message-State: AFq9FYLdzOKPWvG3YvtH/sfm4Eqt+b2pPilygFS61VFBPFL2Xp++R+pt
- Vr7Pu+zqHPaAZ0EmX2FXdK7y5cSHYii4vVejgCXotMU8lwpJ3JW81/ArWJccGqxzkkA=
-X-Gm-Gg: AYBFou2doNpCpWGdcaDF2rZxxgSFghAchKjwzyJgZVO54pMYKXM3xCOw90vlF32bz6K
- ee69TTiDLvSYTf5oMTcBMw4KuPc9vMBPacWqd0Eqv3b/F7tmqJhuIkW/utWIGqC8Ypi2UlfhBTH
- 4Xm7yzFP9SifUaEUPQ9E0Drqd0QS5TDhQVqq6r76mVj8JWFCv0eLDJ4f4A0lvzkySOZxeyqls89
- 2EnC95Bu4KNLLwhsljNEEVQtCTayonY1ewB0J47HEha8OavN3wEnHRt3oqy+GKtvC06d7dEaoYX
- yk7cWwrFd+ZH5yniaI9TdWMm1qnyuFQngHTa0scYXfX106kYtxtylmHOUjtWUfyoshiADApAr1q
- DByh2Ju4ckttEvNKxXXNmlTCvx3GhHMtmHLsvBtHcmHhRZJ8GSfcnIp4U4G7sivAqxXmP4ZPsJl
- JM01hfmbF5NQKZXzfq/3zOyjCLVTFeCOg/1r3pmGk94kM4ehTbK7hNcEBfNYnvHq04nnZINNyns
- 7I5AejKQyVDOlHHqcIZBJEiKLOFqNdmz9XitDmqwOtK2Ta95VIp/PVS2ZyYOD6swQsVSgF6w3am
- MeY3s3L7uGRSq+jfnf84jPiXibljbvsDpppsDLSuXb9zsujCgg==
-X-Received: by 2002:a05:600c:524f:b0:4a2:10f9:37db with SMTP id
- 5b1f17b1804b1-4a210f9390emr902715e9.7.1792686029462; 
- Thu, 22 Oct 2026 09:20:29 -0700 (PDT)
+ bh=K2jFAEKWkENNtsCV3CcUqwGAw7ytDfhxgnsfKmwKD2M=;
+ b=CBVgx/bkkoFq61K2U8r5wJQ+U2NgXLv5VRjqlOk77wX8P+puIIrT6gJVsQwHBWrasi
+ SesTr/CU+mlQNDh5OveAr28mroaym4EJ9ivvaGiOzDLRYQzg0w8WUctUpATrX/B9J9ML
+ psHUehoonfQM8cutvcixzO1c5bkUeYqA8BUPcmBJzSsNyDQJyAma0hYw7kH/V6nA7/x/
+ Z2fq+3D6iYkeoQp9bhzzdJl9f+Ut3tbT8yQJkoEJd36+gCLGXM2U8V5WfF4CR8k6KPEU
+ hjQfP7kKzt8Kj5dd4DaH0jTFmnxOBSm+FG28QuID8kieV+IgtCU75Z3Gz23WpKy9jgA4
+ 0ziA==
+X-Gm-Message-State: AFq9FYKuoDjbUPUJz3FWI6JP3ZyAP1earxV6wi5bRysxaojX8wFklFZY
+ BpS1t+g5QL9GmgYu4Jd5alb2796A4QxH98hiGaCs5nJQX4SNpzKI7kKeAAH96DKmPuY=
+X-Gm-Gg: AYBFou0ojnsSLNwACgiQ0Il9+WAe0WhSg1tryaizNA7iFr/kcCR/vD5HmxHwnNxFWuG
+ 9vnV+Lmr8h+udyaIyHphqo0k4j1/i/V8gUU3rb2P+0iLNCjLOTbfnM4NparcPtU1mQtUjv8W/Hf
+ bEQncZ1zzkKq8FDXTZgK/7bzJIRkMG0Q3ixP5l+kxiOfDoXGRDqRLJAlO7suKn2pHocTtY5HFpQ
+ qXLhhLvbyGGlJ++Q8cBnib+PPz0ccpaQ71GLrr034iagrLu6P6nyjIsvXSJe5TE+dTDxsZuqF2m
+ LGFvv2i2z2UnsQt3JXdlWY13Y0qHrbNz3K8dzqqKxk9oacqrLF0ZRZVFmTrlpv2WzOF9XG4Dscw
+ S2qfYrTvlp2syk+DOaXDxuJo1t69Jp9YwftWMk4x9ZTEosEmYqa8KsGWKAFk3OnezB68Bd/5rot
+ CXdVTncE2BK944pIhWQ6R247YtVYw5jZb42oQ8LhVTyMrn/BUhsrT3HzoJ61jF5B+v6ruECo2vu
+ 3OUPQCbSWgIsdtby1xWeDzsWZmTFupXUVRyRIF74IAzmnJK8iK2+q4chqn19oZl/0q9Z/oc4Csq
+ 9scBX7FCIcOUhQP0SIRUzojIqLp8vA==
+X-Received: by 2002:a05:600c:2d56:b0:4a2:fd2:9855 with SMTP id
+ 5b1f17b1804b1-4a20fd29d25mr6618025e9.13.1792686031691; 
+ Thu, 22 Oct 2026 09:20:31 -0700 (PDT)
 Received: from [127.0.0.1] (mob-83-225-32-96.net.vodafone.it. [83.225.32.96])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a21029928fsm6905905e9.3.2026.10.22.09.20.27
+ 5b1f17b1804b1-4a21029928fsm6905905e9.3.2026.10.22.09.20.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Oct 2026 09:20:29 -0700 (PDT)
+ Thu, 22 Oct 2026 09:20:31 -0700 (PDT)
 From: Carlo Caione <ccaione@baylibre.com>
-Date: Thu, 22 Oct 2026 18:20:14 +0200
-Subject: [PATCH v2 4/5] cmd: fdt: add 'fdt fit' to prepare a devicetree for
- other boot commands
+Date: Thu, 22 Oct 2026 18:20:15 +0200
+Subject: [PATCH v2 5/5] test: py: cover fdt fit preparation and failure
+ handling
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261022-ccaione-upstream-fdt-fit-v2-4-4140e0c4d5a9@baylibre.com>
+Message-Id: <20261022-ccaione-upstream-fdt-fit-v2-5-4140e0c4d5a9@baylibre.com>
 References: <20261022-ccaione-upstream-fdt-fit-v2-0-4140e0c4d5a9@baylibre.com>
 In-Reply-To: <20261022-ccaione-upstream-fdt-fit-v2-0-4140e0c4d5a9@baylibre.com>
 To: u-boot@lists.u-boot-project.org
@@ -196,264 +198,413 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-A board may keep its devicetree and overlays in a FIT while booting
-a kernel or EFI application from elsewhere. Boot scripts need a way
-to verify and assemble that devicetree without asking bootm to boot
-the FIT.
+Boot scripts rely on fdt fit either returning a complete, verified
+devicetree or failing without touching the destination. Regressions
+could otherwise leave a script with an incomplete tree or overwrite
+memory before an error is reported.
 
-Add fdt fit to prepare the devicetree described by one FIT
-configuration and copy it to an address chosen by the script. The
-result can then be passed to bootefi, booti or another boot command.
-
-Always check image hashes and enforce any required configuration
-signatures, even when verify=no. Reject chained configurations:
-signing each configuration separately does not authenticate the
+Add sandbox coverage for successful preparation and failure cases,
+including overlay order, compression and FIT load addresses. Check
+that verify=no cannot bypass required signatures and that
+individually signed configurations cannot be chained into a new
 combination.
-
-Only copy the completed result after verification, overlay
-application and destination checks succeed. The script remains
-responsible for loading the FIT and stopping the boot on failure.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
- cmd/Kconfig           |  9 ++++++
- cmd/fdt.c             | 83 +++++++++++++++++++++++++++++++++++++++++++++++++++
- doc/usage/cmd/fdt.rst | 75 ++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 167 insertions(+)
+ configs/sandbox_defconfig     |   1 +
+ test/py/tests/test_fdt_fit.py | 371 ++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 372 insertions(+)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 7124b961dc2..c81534810c5 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -577,6 +577,15 @@ config CMD_FDT
- 	help
- 	  Do FDT related setup before booting into the Operating System.
- 
-+config CMD_FDT_FIT
-+	bool "fdt fit - load the devicetree of a FIT configuration"
-+	depends on CMD_FDT && FIT
-+	imply OF_LIBFDT_OVERLAY
-+	help
-+	  Add the 'fdt fit' subcommand, which loads the devicetree of a FIT
-+	  configuration, applies the overlays the configuration lists and
-+	  copies the result to a given address.
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index f307972a762..cd44c42d954 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -65,6 +65,7 @@ CONFIG_CMD_BOOTZ=y
+ CONFIG_BOOTM_OPENRTOS=y
+ CONFIG_BOOTM_OSE=y
+ CONFIG_CMD_BOOTMENU=y
++CONFIG_CMD_FDT_FIT=y
+ CONFIG_CMD_ASKENV=y
+ CONFIG_CMD_GREPENV=y
+ CONFIG_CMD_ERASEENV=y
+diff --git a/test/py/tests/test_fdt_fit.py b/test/py/tests/test_fdt_fit.py
+new file mode 100644
+index 00000000000..3a039b32515
+--- /dev/null
++++ b/test/py/tests/test_fdt_fit.py
+@@ -0,0 +1,371 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright (c) 2026 BayLibre SAS
 +
- config CMD_EXTENSION
- 	bool "Extension board management command"
- 	select CMD_FDT
-diff --git a/cmd/fdt.c b/cmd/fdt.c
-index 7e2abf96103..94b2376d072 100644
---- a/cmd/fdt.c
-+++ b/cmd/fdt.c
-@@ -11,6 +11,7 @@
- #include <env.h>
- #include <fdt_support.h>
- #include <image.h>
-+#include <lmb.h>
- #include <malloc.h>
- #include <mapmem.h>
- #include <asm/global_data.h>
-@@ -145,6 +146,79 @@ static int fdt_get_header_value(int argc, char *const argv[])
- 	return CMD_RET_FAILURE;
- }
- 
-+/*
-+ * fdt fit <addr>[#<conf>] <dest> [<length>]
-+ *
-+ * Load the devicetree of a FIT configuration, with its overlays applied, and
-+ * copy it to <dest>. Images are always verified, so the configuration must
-+ * also satisfy any required signature in the control devicetree. Unlike bootm,
-+ * image load addresses are ignored and configurations cannot be chained.
-+ */
-+static int fdt_fit(int argc, char *const argv[])
-+{
-+	struct bootm_headers images = { .verify = 1 };
-+	const char *conf = NULL;
-+	ulong addr, dest, data, len;
-+	bool owned;
-+	void *fdt;
-+	int ret;
++"""Test the 'fdt fit' command
 +
-+	if (argc < 2 || argc > 3)
-+		return CMD_RET_USAGE;
++Build a FIT holding a base devicetree and two overlays, with configurations
++which combine them, then check the devicetree produced for each
++configuration and that images failing to load or verify are rejected.
++"""
 +
-+	if (!fit_parse_conf(argv[0], image_load_addr, &addr, &conf))
-+		addr = hextoul(argv[0], NULL);
-+	dest = hextoul(argv[1], NULL);
++import gzip
++import os
++import shutil
 +
-+	/* Only a single configuration authenticates the whole combination */
-+	if (conf && strchr(conf, '#')) {
-+		puts("Chained configurations are not supported\n");
-+		return CMD_RET_FAILURE;
-+	}
++import pytest
++import fit_util
++import utils
 +
-+	if (boot_get_fdt_fit(&images, addr, NULL, &conf, IH_ARCH_DEFAULT,
-+			     FIT_LOAD_PREPARE, &data, &len, &owned) < 0)
-+		return CMD_RET_FAILURE;
++FIT_ADDR = 0x1000000
++DEST_ADDR = 0x2000000
 +
-+	fdt = map_sysmem(data, len);
-+	ret = CMD_RET_FAILURE;
-+	if (fdt_check_full(fdt, len)) {
-+		puts("Invalid FDT in FIT\n");
-+		goto out;
-+	}
++BASE_DTS = '''
++/dts-v1/;
 +
-+	len = fdt_totalsize(fdt);
-+	if (argc > 2) {
-+		ulong newlen = hextoul(argv[2], NULL);
++/ {
++	model = "fdt fit test";
 +
-+		if (newlen < len) {
-+			printf("New length 0x%lX < existing length 0x%lX, aborting.\n",
-+			       newlen, len);
-+			goto out;
-+		}
-+		len = newlen;
-+	}
++	test-node {
++		base-prop = "base-value";
++		order = "base";
++	};
++};
++'''
 +
-+	if (CONFIG_IS_ENABLED(LMB) && lmb_read_check(dest, len)) {
-+		puts("ERROR: trying to overwrite reserved memory...\n");
-+		goto out;
-+	}
++OVERLAY_DTS = '''
++/dts-v1/;
++/plugin/;
 +
-+	ret = fdt_open_into(fdt, map_sysmem(dest, len), len);
-+	if (ret) {
-+		printf("libfdt fdt_open_into(): %s\n", fdt_strerror(ret));
-+		ret = CMD_RET_FAILURE;
-+		goto out;
-+	}
-+	ret = CMD_RET_SUCCESS;
++&{/test-node} {
++	%(name)s-prop = "%(name)s-value";
++	order = "%(name)s";
++};
++'''
 +
-+out:
-+	if (owned)
-+		free(fdt);
++FDT_IMAGE = '''
++		%(name)s {
++			data = /incbin/("%(fname)s");
++			type = "flat_dt";
++			arch = "sandbox";
++			compression = "%(compression)s";
++			hash-1 {
++				algo = "sha256";
++			};
++		};
++'''
 +
-+	return ret;
-+}
++CONFIG = '''
++		%(name)s {
++			fdt = %(fdt)s;
++			%(sig)s
++		};
++'''
 +
- /*
-  * Flattened Device Tree command, see the help for parameter definitions.
-  */
-@@ -281,6 +355,10 @@ static int do_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		return CMD_RET_SUCCESS;
- 	}
- 
-+	/* Load the devicetree of a FIT configuration */
-+	if (IS_ENABLED(CONFIG_CMD_FDT_FIT) && strncmp(argv[1], "fi", 2) == 0)
-+		return fdt_fit(argc - 2, argv + 2);
++SIGNATURE = '''signature {
++				algo = "sha256,rsa2048";
++				key-name-hint = "dev";
++			};'''
 +
- 	if (!working_fdt) {
- 		puts("No FDT memory address configured. Please configure\n"
- 		     "the FDT address via \"fdt addr <address>\" command.\n"
-@@ -1124,6 +1202,11 @@ U_BOOT_LONGHELP(fdt,
- #endif
- #ifdef CONFIG_OF_SYSTEM_SETUP
- 	"fdt systemsetup                     - Do system-specific set up\n"
-+#endif
-+#ifdef CONFIG_CMD_FDT_FIT
-+	"fdt fit    <addr>[#<conf>] <dest> [<length>] - Load the fdt of a FIT\n"
-+	"                                      configuration, apply its overlays and\n"
-+	"                                      copy it to <dest>\n"
- #endif
- 	"fdt move   <fdt> <newaddr> <length> - Copy the fdt to <addr> and make it active\n"
- 	"fdt resize [<extrasize>]            - Resize fdt to size + padding to 4k addr + some optional <extrasize> if needed\n"
-diff --git a/doc/usage/cmd/fdt.rst b/doc/usage/cmd/fdt.rst
-index 493ed895bc7..88222a9939d 100644
---- a/doc/usage/cmd/fdt.rst
-+++ b/doc/usage/cmd/fdt.rst
-@@ -12,6 +12,7 @@ Synopsis
- ::
- 
-     fdt addr [-cq] [addr [len]]
-+    fdt fit <addr>[#<conf>] <dest> [<len>]
- 
- Description
- -----------
-@@ -48,6 +49,46 @@ If the `len` argument is provided, then the device tree is expanded to that
- size. This can be used to make space for more nodes and properties. It is
- assumed that there is enough space in memory for this expansion.
- 
-+fdt fit
-+~~~~~~~
++def make_test_fit(ubman, basename, sig, compress_base=False):
++    """Create a FIT with a base devicetree, two overlays and configurations
 +
-+This loads the device tree of a FIT configuration and copies it to `dest`. The
-+FIT must already be in memory at `addr`.
++    Args:
++        ubman (ConsoleBase): U-Boot console
++        basename (str): Base name of the FIT to create
++        sig (str): Signature node to add to each configuration, or ''
++        compress_base (bool): Compress the base devicetree with gzip
 +
-+The configuration `conf` is selected as for the bootm command. If it is
-+omitted, the configuration matching the control FDT is used when
-+CONFIG_FIT_BEST_MATCH is enabled, otherwise the default configuration of the
-+FIT. The `fdt` property of the configuration lists a base device tree followed
-+by any overlays: the base device tree is loaded and the overlays are applied to
-+it in order.
++    Returns:
++        str: Filename of the FIT
++    """
++    images = {'base': fit_util.make_dtb(ubman, BASE_DTS, 'fdt-fit-base')}
++    if compress_base:
++        compressed = images['base'] + '.gz'
++        with open(images['base'], 'rb') as inf, gzip.open(compressed, 'wb') as outf:
++            shutil.copyfileobj(inf, outf)
++        images['base'] = compressed
++    for name in ('ov-a', 'ov-b'):
++        images[name] = fit_util.make_dtb(ubman, OVERLAY_DTS % {'name': name},
++                                         f'fdt-fit-{name}')
 +
-+Each image is checked against its hashes, whatever the value of the `verify`
-+environment variable. With CONFIG_FIT_SIGNATURE, the configuration must also
-+satisfy the signature policy of the control FDT, so an unsigned configuration
-+is rejected when a key has `required = "conf"`. A configuration signature
-+covers the hashes of all the images listed by the configuration, so it
-+authenticates the base device tree, the overlays and their order as one unit.
++    configs = {
++        'conf-base': '"base"',
++        'conf-a': '"base", "ov-a"',
++        'conf-ab': '"base", "ov-a", "ov-b"',
++        'conf-b': '"ov-b"',
++    }
 +
-+Unlike bootm, the command does not accept further configurations appended to
-+`conf` with `#`. Each of them would be verified on its own, so a chain could
-+combine device trees in a way which no configuration lists and nobody signed.
-+List each valid combination of a base device tree and overlays in its own
-+configuration instead.
++    its = '/dts-v1/;\n\n/ {\n\tdescription = "fdt fit test";\n'
++    its += '\t#address-cells = <1>;\n\n\timages {'
++    for name, fname in images.items():
++        compression = 'gzip' if name == 'base' and compress_base else 'none'
++        its += FDT_IMAGE % {'name': name, 'fname': fname,
++                           'compression': compression}
++    its += '\t};\n\n\tconfigurations {\n\t\tdefault = "conf-base";\n'
++    for name, fdt in configs.items():
++        its += CONFIG % {'name': name, 'fdt': fdt, 'sig': sig}
++    its += '\t};\n};\n'
 +
-+The command fails if any image cannot be loaded, verified or applied, and
-+nothing is written to `dest` in that case. Unlike bootm, the command ignores
-+FIT image `load` addresses: only the completed device tree is copied to
-+`dest`, after checking that the destination does not overlap reserved memory
-+when CONFIG_LMB is enabled. Alignment and decompression of the base device
-+tree are still handled as needed.
++    its_fname = fit_util.make_its(ubman, its, {}, f'{basename}.its')
++    fit = fit_util.make_fname(ubman, f'{basename}.fit')
++    mkimage = os.path.join(ubman.config.build_dir, 'tools/mkimage')
++    utils.run_and_log(ubman, [mkimage, '-f', its_fname, fit])
 +
-+If the `len` argument is provided, then the device tree is expanded to that
-+size, leaving space for later changes. The command fails if `len` is smaller
-+than the device tree. Without `len`, the device tree is copied at its own size.
-+The working FDT is not changed; use `fdt addr` to select the result.
++    return fit
 +
-+This subcommand requires CONFIG_CMD_FDT_FIT.
++def corrupt_overlay(ubman, fit, basename):
++    """Copy a FIT, changing the data of the ov-b image but not its hash
 +
- Example
- -------
- 
-@@ -66,3 +107,37 @@ address and expand it to 0xf000 in size::
-     Working FDT set to 10000
-     => md 10000 4
-     00010000: edfe0dd0 00f00000 78000000 7c270000  ...........x..'|
++    Args:
++        ubman (ConsoleBase): U-Boot console
++        fit (str): Filename of the FIT to copy
++        basename (str): Base name of the copy
 +
-+Load a FIT holding a device tree and its overlays, then copy the device tree of
-+the `conf-a` configuration, a base device tree with one overlay, to 2000000 and
-+inspect it::
++    Returns:
++        str: Filename of the copy
++    """
++    with open(fit, 'rb') as inf:
++        data = inf.read()
++    assert data.count(b'ov-b-value') == 1
++    out = fit_util.make_fname(ubman, basename)
++    with open(out, 'wb') as outf:
++        outf.write(data.replace(b'ov-b-value', b'ov-b-evil!'))
 +
-+    => load mmc 0#firmware 1000000 fdt.itb
-+    1771 bytes read in 1 ms (1.7 MiB/s)
-+    => fdt fit 1000000#conf-a 2000000
-+    ## Loading fdt (any) from FIT Image at 01000000 ...
-+       Using 'conf-a' configuration
-+       Verifying Hash Integrity ... OK
-+       Trying 'base' fdt subimage
-+       ...
-+       Verifying Hash Integrity ... sha256+ OK
-+    ## Loading fdt (any) from FIT Image at 01000000 ...
-+       Trying 'ov-a' fdt subimage
-+       ...
-+       Verifying Hash Integrity ... sha256+ OK
-+    => fdt addr 2000000
-+    Working FDT set to 2000000
-+    => fdt print /test-node
-+    test-node {
-+            ov-a-prop = "ov-a-value";
-+            base-prop = "base-value";
-+            order = "ov-a";
-+    };
++    return out
 +
-+A boot script can prepare a device tree kept with the firmware in this way and
-+pass it to the boot command, stopping if any step fails::
++def load_fit(ubman, fit):
++    """Load a file into memory at FIT_ADDR and clear the destination"""
++    output = ubman.run_command(f'host load hostfs - {FIT_ADDR:x} {fit}')
++    assert 'bytes read' in output
++    ubman.run_command(f'mw.l {DEST_ADDR:x} 0 400')
 +
-+    if load mmc 0#firmware ${loadaddr} fdt.itb &&
-+       fdt fit ${loadaddr}#conf-a ${fdt_addr_r}; then
-+            bootefi bootmgr ${fdt_addr_r}
-+    fi
++def fdt_fit(ubman, args):
++    """Run 'fdt fit' and report whether it succeeded
++
++    Args:
++        ubman (ConsoleBase): U-Boot console
++        args (str): Arguments for the command
++
++    Returns:
++        tuple:
++            bool: True if the command succeeded
++            str: Command output
++    """
++    output = ubman.run_command(f'fdt fit {args}; echo rc=$?')
++    return output.rstrip().endswith('rc=0'), output
++
++def get_test_node(ubman):
++    """Return the test node of the devicetree at DEST_ADDR"""
++    ubman.run_command(f'fdt addr {DEST_ADDR:x}')
++    return ubman.run_command('fdt print /test-node')
++
++def check_dest_untouched(ubman, addr=DEST_ADDR):
++    """Check that nothing was written to a cleared destination"""
++    output = ubman.run_command(f'md.l {addr:x} 4')
++    assert '00000000 00000000 00000000 00000000' in output
++
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.buildconfigspec('cmd_fdt_fit')
++@pytest.mark.requiredtool('dtc')
++@pytest.mark.requiredtool('fdtput')
++def test_fdt_fit(ubman):
++    """Test loading the devicetree of a FIT configuration"""
++    fit = make_test_fit(ubman, 'fdt-fit', '')
++
++    with ubman.log.section('Default configuration'):
++        load_fit(ubman, fit)
++        ok, output = fdt_fit(ubman, f'{FIT_ADDR:x} {DEST_ADDR:x}')
++        assert ok, output
++        assert "Using 'conf-base' configuration" in output
++        node = get_test_node(ubman)
++        assert 'base-prop = "base-value"' in node
++        assert 'ov-a-prop' not in node
++
++    with ubman.log.section('Overlays applied in order'):
++        load_fit(ubman, fit)
++        ok, output = fdt_fit(ubman, f'{FIT_ADDR:x}#conf-ab {DEST_ADDR:x}')
++        assert ok, output
++        node = get_test_node(ubman)
++        assert 'base-prop = "base-value"' in node
++        assert 'ov-a-prop = "ov-a-value"' in node
++        assert 'ov-b-prop = "ov-b-value"' in node
++        assert 'order = "ov-b"' in node
++
++    with ubman.log.section('Chained configuration'):
++        load_fit(ubman, fit)
++        ok, output = fdt_fit(ubman,
++                             f'{FIT_ADDR:x}#conf-a#conf-b {DEST_ADDR:x}')
++        assert not ok
++        assert 'Chained configurations are not supported' in output
++        check_dest_untouched(ubman)
++
++    with ubman.log.section('Length'):
++        load_fit(ubman, fit)
++        ok, output = fdt_fit(ubman, f'{FIT_ADDR:x}#conf-a {DEST_ADDR:x} 4000')
++        assert ok, output
++        ubman.run_command(f'fdt addr {DEST_ADDR:x}')
++        output = ubman.run_command('fdt header get size totalsize; echo $size')
++        assert output.splitlines()[-1] == '4000'
++
++        load_fit(ubman, fit)
++        ok, output = fdt_fit(ubman, f'{FIT_ADDR:x}#conf-a {DEST_ADDR:x} 10')
++        assert not ok
++        assert 'aborting' in output
++        check_dest_untouched(ubman)
++
++    with ubman.log.section('Missing configuration'):
++        load_fit(ubman, fit)
++        ok, output = fdt_fit(ubman, f'{FIT_ADDR:x}#conf-none {DEST_ADDR:x}')
++        assert not ok
++        assert "Could not find configuration node 'conf-none'" in output
++        check_dest_untouched(ubman)
++
++    with ubman.log.section('Corrupted overlay'):
++        bad_fit = corrupt_overlay(ubman, fit, 'fdt-fit-bad-overlay.fit')
++        load_fit(ubman, bad_fit)
++        ok, output = fdt_fit(ubman, f'{FIT_ADDR:x}#conf-ab {DEST_ADDR:x}')
++        assert not ok
++        assert 'Bad hash value' in output
++        assert 'load of ov-b failed' in output
++        check_dest_untouched(ubman)
++
++    with ubman.log.section('Missing overlay'):
++        missing_fit = fit_util.make_fname(ubman, 'fdt-fit-missing.fit')
++        shutil.copyfile(fit, missing_fit)
++        utils.run_and_log(ubman, ['fdtput', '-t', 's', missing_fit,
++                                  '/configurations/conf-a', 'fdt', 'base',
++                                  'ov-missing'])
++        load_fit(ubman, missing_fit)
++        ok, output = fdt_fit(ubman, f'{FIT_ADDR:x}#conf-a {DEST_ADDR:x}')
++        assert not ok
++        assert 'load of ov-missing failed' in output
++        check_dest_untouched(ubman)
++
++    with ubman.log.section('Not a FIT'):
++        load_fit(ubman, fit_util.make_fname(ubman, 'fdt-fit-base.dtb'))
++        ok, output = fdt_fit(ubman, f'{FIT_ADDR:x} {DEST_ADDR:x}')
++        assert not ok
++        check_dest_untouched(ubman)
++
++    with ubman.log.section('Usage'):
++        ok, output = fdt_fit(ubman, f'{FIT_ADDR:x}')
++        assert not ok
++        assert 'Usage:' in output
++
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.buildconfigspec('cmd_fdt_fit')
++@pytest.mark.requiredtool('dtc')
++@pytest.mark.requiredtool('fdtput')
++@pytest.mark.parametrize('compress_base', [False, True])
++def test_fdt_fit_load_addr(ubman, compress_base):
++    """Ignore FIT load addresses, including before an overlay failure"""
++    if compress_base and not ubman.config.buildconfig.get('config_gzip'):
++        pytest.skip('gzip support not enabled')
++
++    fit = make_test_fit(ubman, 'fdt-fit-load', '', compress_base)
++    utils.run_and_log(ubman, ['fdtput', '-t', 'x', fit, '/images/base',
++                              'load', f'{DEST_ADDR:x}'])
++
++    with ubman.log.section('Load address equals destination, bad overlay'):
++        bad_fit = corrupt_overlay(ubman, fit, 'fdt-fit-load-bad.fit')
++        load_fit(ubman, bad_fit)
++        ok, output = fdt_fit(ubman, f'{FIT_ADDR:x}#conf-ab {DEST_ADDR:x}')
++        assert not ok
++        assert 'load of ov-b failed' in output
++        check_dest_untouched(ubman)
++
++    with ubman.log.section('Load address equals destination, short length'):
++        load_fit(ubman, fit)
++        ok, output = fdt_fit(ubman, f'{FIT_ADDR:x}#conf-base {DEST_ADDR:x} 10')
++        assert not ok
++        assert 'aborting' in output
++        check_dest_untouched(ubman)
++
++    with ubman.log.section('Only the requested destination is written'):
++        load_addr = 0x3000000
++        utils.run_and_log(ubman, ['fdtput', '-t', 'x', fit, '/images/base',
++                                  'load', f'{load_addr:x}'])
++        for conf in ('conf-base', 'conf-ab'):
++            load_fit(ubman, fit)
++            ubman.run_command(f'mw.l {load_addr:x} 0 400')
++            ok, output = fdt_fit(ubman, f'{FIT_ADDR:x}#{conf} {DEST_ADDR:x}')
++            assert ok, output
++            node = get_test_node(ubman)
++            assert 'base-prop = "base-value"' in node
++            order = 'base' if conf == 'conf-base' else 'ov-b'
++            assert f'order = "{order}"' in node
++            check_dest_untouched(ubman, load_addr)
++
++@pytest.mark.boardspec('sandbox')
++@pytest.mark.buildconfigspec('cmd_fdt_fit')
++@pytest.mark.buildconfigspec('fit_signature')
++@pytest.mark.requiredtool('dtc')
++@pytest.mark.requiredtool('openssl')
++def test_fdt_fit_signed(ubman):
++    """Test 'fdt fit' with a required configuration signature
++
++    This restarts U-Boot with a control devicetree holding the public key,
++    so it must run on sandbox.
++    """
++    keydir = fit_util.make_fname(ubman, 'fdt-fit-keys')
++    os.makedirs(keydir, exist_ok=True)
++    key = os.path.join(keydir, 'dev')
++    utils.run_and_log(ubman, f'openssl genpkey -algorithm RSA -out {key}.key '
++                      '-pkeyopt rsa_keygen_bits:2048 '
++                      '-pkeyopt rsa_keygen_pubexp:65537')
++    utils.run_and_log(ubman, f'openssl req -batch -new -x509 -key {key}.key '
++                      f'-out {key}.crt')
++
++    vboot_dts = os.path.join(ubman.config.source_dir,
++                             'test/py/tests/vboot/sandbox-u-boot.dts')
++    dtb = fit_util.make_fname(ubman, 'fdt-fit-u-boot.dtb')
++    utils.run_and_log(ubman, ['dtc', vboot_dts, '-O', 'dtb', '-o', dtb])
++
++    unsigned_fit = make_test_fit(ubman, 'fdt-fit-unsigned', '')
++    fit = make_test_fit(ubman, 'fdt-fit-signed', SIGNATURE)
++    mkimage = os.path.join(ubman.config.build_dir, 'tools/mkimage')
++    utils.run_and_log(ubman, [mkimage, '-F', '-k', keydir, '-K', dtb, '-r',
++                              fit])
++    bad_fit = corrupt_overlay(ubman, fit, 'fdt-fit-signed-bad-overlay.fit')
++
++    old_dtb = ubman.config.dtb
++    try:
++        ubman.config.dtb = dtb
++        ubman.restart_uboot()
++        ubman.run_command('setenv verify no')
++
++        with ubman.log.section('Signed configuration'):
++            load_fit(ubman, fit)
++            ok, output = fdt_fit(ubman, f'{FIT_ADDR:x}#conf-ab {DEST_ADDR:x}')
++            assert ok, output
++            assert 'sha256,rsa2048:dev+' in output
++            node = get_test_node(ubman)
++            assert 'order = "ov-b"' in node
++
++        with ubman.log.section('Chained signed configurations'):
++            # Each is signed, but no configuration lists base plus only ov-b
++            for first in ('conf-a', 'conf-base'):
++                load_fit(ubman, fit)
++                ok, output = fdt_fit(ubman,
++                                     f'{FIT_ADDR:x}#{first}#conf-b {DEST_ADDR:x}')
++                assert not ok
++                assert 'Chained configurations are not supported' in output
++                assert 'dev+' not in output
++                check_dest_untouched(ubman)
++
++        with ubman.log.section('Unsigned configuration'):
++            load_fit(ubman, unsigned_fit)
++            ok, output = fdt_fit(ubman, f'{FIT_ADDR:x}#conf-ab {DEST_ADDR:x}')
++            assert not ok
++            check_dest_untouched(ubman)
++
++        with ubman.log.section('Signed configuration, corrupted overlay'):
++            load_fit(ubman, bad_fit)
++            ok, output = fdt_fit(ubman, f'{FIT_ADDR:x}#conf-ab {DEST_ADDR:x}')
++            assert not ok
++            assert 'sha256,rsa2048:dev+' in output
++            assert 'load of ov-b failed' in output
++            check_dest_untouched(ubman)
++    finally:
++        ubman.config.dtb = old_dtb
++        ubman.restart_uboot()
 
 -- 
 2.56.0
