@@ -1,194 +1,152 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4882606A31A
-	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 19:45:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 590A4606A31A
+	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 20:00:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=eUCjmL94;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=gC/5mpoA
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=oGRpgAwZ;
+	dkim=pass (2048-bit key, unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=oLU2UMfy
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 92E56409BA;
-	Thu, 22 Oct 2026 19:45:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0C90360848;
+	Thu, 22 Oct 2026 20:00:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VMk-_Qq_MJNZ; Thu, 22 Oct 2026 19:45:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A1B454099B
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792698326;
-	b=RBWbOZkwhECX8iDhHmnbfL0Lna6NWHGBJma32Jh15ElX6cZiSuLClib7mI58fGNtmBOY
-	 t2G4Gwo1n5nFtWyLlAEDhsnirM+ewhL412Rflmmfz8a9EuXBMoahFwr2fFNuPHXiazBgD
-	 X3mCs1/VqV49/oeUdQJKmtKp2DOlVDfzV2cTEXUKDoQO9gwrLIU6/NbJuY8Kf9FeLJB4g
-	 3VsUjFKYKntAIgl/h9oYB+fUgzjVi3Uqr7tuR1fVU1xfwJiDKHpq0wwrkFEnMP+Rz030Y
-	 xXgKpD542UACm6IVijFhsG5Ckcp6JBPWr/+KRO4a26AQzebubm5XzVhyp78YrtXi96g==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792698326;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fk_X4AyXk9ue; Thu, 22 Oct 2026 20:00:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DF8BE607E7
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792699213;
+	b=HHpC12QgbGCVA+w7GZN33upwLsIqCNOnhBtW/BE3yMODNx/6Xs8smELVejJXWxhotZrS
+	 OZq0jI3G4s5yi+gGdgCNh4dFNwl7wfSffro0ja10kEnTMYhJxHh3uz0Ti9NgG/LR00l0n
+	 DVcD80ubhGS8r89aVIrSb5PzlHZt13b/P/be0Svzx1Nba+LMwzcvzW9I1TaR8rv8jxwiT
+	 X9V9qo+XLPsTnciFh5kRSXMyUx+WOArTKlRG0gHaVQNCOzer3iuzTDuDI+zDKDBdoPA8D
+	 SFheQ5Qojy/TPVL6VEzmYXWVDTTjmQ/5t8ZIwGnNubfl4ednFTcCLMmONfWgXh8e6sA==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1792699213;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
-	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=DDyOrYi1bFnjDYuWpSGASqMArOlNlFZD6lZ3gS/gfn0=;
-	b=IZrxi+CDJrP3GrztLT6jJ74s7WA30Me4R+piW2QgfbBVjmvFfJ67R/KRaK/ZuhHZUVl9
-	 UCxuWkuPwQwpmwX7yFhWlXnQ2S619mKSHLeU/+0tddRWgiTGN5EKk37TFCVdoZHkbDXsW
-	 Amt2epPE3nUGFKcfPpGHJ6rRbRuO5L746FrVfTRiu5kKen05Hy9m2HwBz7v+UNbqHyfBX
-	 Kryy1IKcQ88509RjfVXxlVMuHxmBzUUbQDy3Ps7U2HmTG9Yjfz4xJDa7wS4AFm4fyK4S7
-	 zNi6E7lpVo2G/l/69lcPZW/DLxE2KTcpJAZLWo/SOwfZJ0YMtghs39yTZxAS2Z5F9Qg==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
+	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
+	 X-Report-Abuse:X-Report-Abuse-To:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=Rsfp2AP75O35UTq4W7syypQrLxE59YCz2KxD1N7PaO0=;
+	b=k5qIw1AdbzTjldUrUTL4RMUW1013KCFltCgLDbhiJaZ3GEYgNDhXUUg+QZEOeDq+ASQh
+	 tKUVBP+SF3ww8r1g8/OVWaENPfUcEaZZS5bIZclf5f8scvt5rZ5RqGtJx9fF9l12rq55z
+	 XuPsQ2NwlU279TjvvFKYmKMUQB9nRYBfUVS8mng4UFKVw7n/LPVfbiDnK7MzRkog7RwOy
+	 q+JxmY6QrWmp26zmIiSisQZxcGdofEuibzMQfrxbyHoiiAx98PMQG2YbsoRHYVSSLJ0RX
+	 owOUsjq3aWoA12JmxUrA3Fme+1rl1slWtYNZvfrkEL2l3nnXvKmm0/ABGotQnWhma1Q==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792698326;
-	bh=DDyOrYi1bFnjDYuWpSGASqMArOlNlFZD6lZ3gS/gfn0=;
-	h=References:In-Reply-To:From:Date:Subject:To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1792699213;
+	bh=Rsfp2AP75O35UTq4W7syypQrLxE59YCz2KxD1N7PaO0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=eUCjmL946ooh+vEKsnJBtWMXDTpLCLSS63aeZ5Daj0JVgyTC6r2VuBSYbzZp8+BCL
-	 p18LPNNZmctOs8dIA5T4+KrrmSBQ17NZcwHbmMkRWTv7Xjt4DGy1cbvESUVP0BLOAF
-	 DxmhXXynSDAIYFEshPzLjsZK/tBKAvgUx24BzIoyibVv03YllkuqlSaHyWQeChtObi
-	 oAwMZopFfcnoWVaEYUW4QhgUMhg96zWORwwh5dqJetL9uopgm5hyn/GsM0J0ZUxLoG
-	 GwOUa21nmHQVMr+VPVASSeuTVXbrZcm5XzuBk+5PgAePn7lP1JGc4gMhwN5PHjFvCI
-	 Ky1sijJcFAtlA==
+	b=oGRpgAwZkNmuuRnRUqEYTw+0tI+kff4SbfgM8BWB+jfSkX4Kve0QSWxSU3JNk+5TP
+	 27YoGFXGgU/rIcC8F57TVenMokiQLme6jwx3oWpw5TxUkAcqXeADqp9zMuVqEQpmuB
+	 PLF26sEhWmFAzUaUzn3irce20tN0NaDD13VVZIXIy78TZgF7ldSUEBTogd7Aw61J/7
+	 k6aL7TDInY5uFE2CC0XHOeSimoxd4uzo02cgIWj7fmaCmwmrytm8JXAUjQSH9a/stA
+	 G6VAIw3e1lLX7bitPwGopD3esOja9UBXkwB7ON05mSKbgdZKEzDCbX7HBel2AXfqBc
+	 YAlEyoOEgwc5g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A1B454099B;
-	Thu, 22 Oct 2026 19:45:26 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 40A013C1
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 19:45:25 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DF8BE607E7;
+	Thu, 22 Oct 2026 20:00:12 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id C12E43A7
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 20:00:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 32AA6401A1
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 19:45:25 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id A3BD24099B
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 20:00:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wKg5fR0suHvp for <u-boot@lists.u-boot-project.org>;
- Thu, 22 Oct 2026 19:45:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 1B45E400B1
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::f2b"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792698324;
- b=UyBvP1lBUXeo7mP41SHzjClqV3aXg+ME54BsUGQEr2Xg8vX2lR02xtvqtWYOL5FXg987
- dRkDKkeywnpuzQvG+DE9l/P5WynNau/xjM0yTCqx8WDV8480Iatf0TNXNfTyvb5a1rIvi
- SVh9dBxBmhTXo3jyf6yfMnQRjJF/IIC46OxGVri9jm7lzgIanznFcDN+PaOMmVf5J7gUa
- 0YWaDTayVMH4a7Q6d+j32VKo7GwGHPTRaU2qqWEFKASpjaVXOe0qdP1rS7PWFK1rJ5WCU
- 6/Rsq7GogkK1neFN8zkMXiBI6QAU5/wSJRlZ+P+B3SuuhtJ89tGULUU42ZvPd/sGbgw==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792698324;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
- MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
- Message-ID:Subject:To:Content-Type;
- bh=DDyOrYi1bFnjDYuWpSGASqMArOlNlFZD6lZ3gS/gfn0=;
- b=P3DhZ2p3xp4WPKGsd6EMNFEadnzZVfNmA8IfaeCJIXKG/kETl15+kVnjB2iUgGPDc5mL
- WkFJKS1ilGsPu9Fr4Zf4G0IskcWntowsldwOYhe9WnkiwNxZVQa4nk3BE3Do5IvmerTLx
- cRqVrq1UrYAcL3UkwXhVx1PrSGy59kXyOLD8cv19Omfv2x9Ge5bIP9HkTIWKlAR9HoCM4
- 1LrBKBrM2AeBloObcB9OfumxaiMc1kVal5z8Dsmgq/rOHrHkw+iTW1Cd53ti0x3feQIic
- ZRkiK7eMpMnd7gveVj29GCOHBJ0LTpzL7XzES9J2gqbhj+29swqYDpESB6O3TaG3Txw==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b="gC/5mpoA"; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::f2b"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::f2b; helo=mail-qv1-xf2b.google.com;
- envelope-from=ansuelsmth@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=gC/5mpoA
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1B45E400B1
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 19:45:23 +0000 (UTC)
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-91befbcad6dso3391916d6.3
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 12:45:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792698322; cv=none;
- d=google.com; s=arc-20260327;
- b=qmhS2x2TQastpBF6B3sX2/LxdRWYgMbvEOLuLNWr/mliEZceOfIfPJFnzTTDN3jw82
- 32ysEdMuFkhr60qV6g7+fjW6x1IyseKzSGYwieosblYt6Htq3ZtKznkW374JWVNdFZ+o
- F5IJw1Z3s1XgWw7oqXotepM1GF/IjTideVT8H/FpGmyq2Fni9Nvi6r4EcUEBszfOjYfy
- 4rX57Szp7cRJUYT0hIR3WCLpI+xiWlbVneVuyF4P60H/nrlUyMWBluB76e6uZEDAnDkH
- tTKRSlE4WGE6kOvUv9G4guvSE3MllnaF2fo0k2YyaKjjrDqNn0qT1Cs+c+lx/PHVJ6xo
- PZrg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :dkim-signature;
- bh=DDyOrYi1bFnjDYuWpSGASqMArOlNlFZD6lZ3gS/gfn0=;
- fh=CypjphZz0uuYnxzP/+VDtahMJjRv2gRIFzffUTPCLdo=;
- b=Tag2ZyjYvIxiOBQlrQX5LTMopR/2pm5tF1O/wVeqFRx+/C2EMzDXi6RbPH+lOn0rld
- x/jr6quskITmAIqs6+DcMWUgGOG4sdPNUccRgT7cncooYs82srXdJfAORjJIIh2k+69v
- reul9c3IBZ/+j1z8hCnAF6I3Xwg0C9XJKt7QfYgJh7B/FUg+A39lq0InOeY2LTdAj3SY
- ooyEqcPczp69sD8RDHwrcucPmt9RHJ9Vq7PBTvyrLa1z3jCzmIr0aCiMBmJO664hVCGU
- Ora6cJGjS1HOMTyvTLt5Z9rYFmP1s8R3P3ZFXmZicNNSygisQCm0ZOvcnG/aykCIGjfC
- s+5g==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792698322; x=1793303122;
- darn=lists.u-boot-project.org; 
- h=content-type:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=DDyOrYi1bFnjDYuWpSGASqMArOlNlFZD6lZ3gS/gfn0=;
- b=gC/5mpoA2PPNntH940YRRC/lcoxW1lYtuucabV5ZAcpUQ9a+R0WC+yA7tR2/o8oPPR
- GQdskwfh+CUanTBfpIMnMpRcP72zBFY4MEV5xALvo7cfIKeDWH/XUyuOZtD3OZE/umRy
- xb1peKGSIFcyPeOoTghvYG0xkKklIAhCK9xYVb0jNPdXQ9Ri85T7DebOAYE8qoBFRpzo
- CGZcN9BvnSjOCLR7/TPzG1AZqoNeEorH4VTHDEwEqosSrdbPLHD9v0PKH91n+wkHonQA
- TM8qqMmJaZgviGrwRTzfnJdXxlAVv16lsZQSn6U9Bh9IGBT1RQCa5vLHCOG+Nsw4o13i
- vrUA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792698322; x=1793303122;
- h=content-type:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=DDyOrYi1bFnjDYuWpSGASqMArOlNlFZD6lZ3gS/gfn0=;
- b=AO3tncptcmEuVPTVFI60fTKDAQhy89o86dbh+Stst760P47GW4tGHK4LUruLRcAciy
- UJDdz6clwvO9VTH1sSUHKGkD7EKChZHt1FbnVPg7CIkOvmkF2V/9OU2gXzMy8Q5D9+b2
- ScqjftPu4nq1FPCB1+cYuX3arP4lzPv1U2guWv7o9kMivrGqu7rkqH9IaUqWPGnJQGls
- lsIPAjKhJfGEB47KEFX1+D4VOEHMFY6hfhfNqI/WdV3n8ACPGCMI09N8bG2SLuaLCrcD
- wNnrV9VxCh9GWjOVtD9rWbhLAQBGIk1U5AznoQSJWZUnkQhfZHbRzgw73TcgJaCi38hn
- nLVg==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxfIvjrKQ7l+61GUSEp4F/jHkrVv2mrwgrKWxlL679ltl3dMuR5uSZNlyx4gpM2OvqtrQv45m4=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYKJXfEWpFZXL6SG69T+7TKKriyn4BdjJmbsPFV729WRMxAaMNkC
- xUjNFKRi4vv21qcyou1xxpMxclicAbp9dglKTSb+h46k+cdN46YplIJg8s5JhI90tVsaJPRdsYH
- M555/BxAatM4XGazlkB9jzrNmz5PlH9UvIeSk0IE=
-X-Gm-Gg: AYBFou03c+OUrege51OtoVINlJWZQ6YTqXa/KBSFrBNrCZ8VCx7UMC35+3g6pbbNFS7
- 4tKgTmOz57IIWngwFnzWVyBZPjQai0Kub5vMroeWNbJzY7N3vDccYdD8Tfb4u73HevACBp2KUpm
- 5ZqpUxAFEo+XDCIasCYFpxlCGxC/1gGUKkFB6/U+A2CbYg9kUpgDA6sPf0wB+vKhc6+X8d+s35k
- oN2fSSTktCgJXWZjN5rAxTeZ6tuh25a6EzYgDKXdOBWhzQ0vLI1Gu5DRNSNJvcPDkHuSf+ZnXZ9
- 25S/yyHaTC96iej5Vxx/GOC5NrLK3ufwmZ5GL0fgOFZG8mZvnWyQXShH6Gov56g+Bnt3ojDtpQm
- eQ3PJk4qBTkHD1jm8io4EZy8MkqgMfaho8bTiJ0X53ckvXXHW0s/nq09KXTNvbEufXYw=
-X-Received: by 2002:a05:6214:21ae:b0:915:bd52:6dd6 with SMTP id
- 6a1803df08f44-91c12dfe83fmr109505416d6.4.1792698321668; Thu, 22 Oct 2026
- 12:45:21 -0700 (PDT)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5n2FfTyj3FuG for <u-boot@lists.u-boot-project.org>;
+ Thu, 22 Oct 2026 20:00:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C1C5D4094E
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=121.127.44.73
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792699209;
+ b=SRCPxq1J9tSrhOAum40ZxMBulOJ4jFi+ipsZ44/PNdFDZoCj6SKw8axDWeJC69yr8yNB
+ CK7MUTaRbGA+L15fSqmNz/2OgfHt9+ppLq2vNk5k1s8LC3buX6yB6C51qaL0IGV+i+43O
+ ZLW2YdPPVrksdAYZO34WH0rmzxEo1T3CpRfJwAcXhJd5JVGS+FalPwJJwE+Ou05Jiik42
+ JfMTSIDark5xsA3jDFmVgVnDkolCIqJVrzof/U/ggmcH0xhVKrP2B4fSUj486Q/9kSwaf
+ 5ChrQp4L2b3mFqkRUjDE3Sh5yU7m2ni/SdflkKQ5wYri4rJNCvfcZ2KshfAqn3RQ5+w==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1792699209;
+ h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
+ X-Forward-Email-Sender:X-Forward-Email-Version:
+ X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
+ X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
+ Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding;
+ bh=Rsfp2AP75O35UTq4W7syypQrLxE59YCz2KxD1N7PaO0=;
+ b=l4ygcsFoDn4dWOUiSMKVId374Y/PO+TAEacfP3ZwdpzgJ6gVuqaa6XnEwSi+5kKvi0dr
+ g7WHjfTDpwpeZ90Za/PsT2hX7c0pPoNCRhbqaDnypkDxbCvqB3chCvNklCXaclsJR++qP
+ VmVUrbgbuJpEvH1+E4yQNeycbqgrh2V5QnuQzyAfQpQeG4bggza7NEw1bj+N91cDBRAIw
+ Pw9KqqxPOWqyxRwM3ay+ShcjURxJQvHLIi289pVaBi5Al7XZTfC7FPBzUA0xEL1LzniDr
+ NV+ITFHnkkcySDoY/Q9mGDToPKNe2YALED5fN8vEt4xGZG6EPZHNRCmyxOix9JIaqFw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=kwiboo.se;
+ dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=oLU2UMfy; 
+ arc=none smtp.remote-ip=121.127.44.73
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.73;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=107d=in=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=oLU2UMfy
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C1C5D4094E
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 20:00:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1792699207;
+ bh=Rsfp2AP75O35UTq4W7syypQrLxE59YCz2KxD1N7PaO0=;
+ b=oLU2UMfyyICB5H3JPL1eJBr2XhTEoJxwGf7nL5WaNO2qgmkM1MC/1xldkVyF6tmSgTr1rVoLH
+ Wf1gE+QWFOyUaRLtijXUU/av7jAx+cAWtNe6My0qP0uTe9DrRuWYy3IH4zFdieOLShRD9Dc6h1R
+ qdKJxGD4blLzipmoIgyCC9/LabXWyTa9Ju7I8fFHTV5Het0ej+EeXjmYXC48EcM5S83AfPXgZHN
+ FV9VYYJzLVnFVx/yyvOW8CfbA0w5Q7oL3ZA4covSu5GXaOZconB3MV3bxk5QqAjdD1vFI8/NOMI
+ NM3B/xgQL8/pAoljUg2Vrkf/4wQ5AxhFUW6KUiyF/CPg==
+X-Forward-Email-ID: 6ada6b43fab43371f369e54e
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.18.9
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <322a4e95-2c3d-4a84-8b57-3b078f9ffcde@kwiboo.se>
+Date: Thu, 22 Oct 2026 22:00:01 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261022190206.666950-1-ansuelsmth@gmail.com>
-In-Reply-To: <20261022190206.666950-1-ansuelsmth@gmail.com>
-From: "Christian Marangi (Ansuel)" <ansuelsmth@gmail.com>
-Date: Thu, 22 Oct 2026 21:45:05 +0200
-X-Gm-Features: AclHuK80ICzEkwK4kKh8tXU9uiahRLsDPeSDNUOxuXGtImcmdtcjRnCe9hfvO74
-Message-ID: <CA+_ehUwYhr48YB_MhN-yODqP4oW8_L0DpeLYEZEZM_s9VWtqWw@mail.gmail.com>
-Subject: Re: [PATCH v3 00/16] arm: airoha: add AN7583 SoC support
-To: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Lukasz Majewski <lukma@denx.de>, Jerome Forissier <jerome.forissier@arm.com>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Anshul Dalal <anshuld@ti.com>, Simon Glass <sjg@chromium.org>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, Julien Stephan <jstephan@baylibre.com>,
- Julien Masson <jmasson@baylibre.com>,
- Zhengping Zhang <zhengping.zhang@airoha.com>, 
- David Lechner <dlechner@baylibre.com>, Wayen Yan <win847@gmail.com>, 
- u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 22/23] rockchip: generic-rk3576: Compress U-Boot proper
+ with zstd
+To: Alexey Charkov <alchark@flipper.net>
+Cc: "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+References: <20261020-spl-fit-compression-v3-0-6647aa23ade5@flipper.net>
+ <20261020-spl-fit-compression-v3-22-6647aa23ade5@flipper.net>
+ <7a91e605-33b0-4f4f-9789-d10be821d0cc@kwiboo.se>
+ <CAKTNdwG22u_51cBLbu3wufBdB9ojSQqGMPMG58x-Nk7u_xC6sg@mail.gmail.com>
+ <a451ef1e-abb6-453c-b146-90d64f24f5ab@kwiboo.se>
+ <CAKTNdwHMW4HyfhSWkT241URB4H6JMg1MCt1-VOcUsufgm=So=g@mail.gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAKTNdwHMW4HyfhSWkT241URB4H6JMg1MCt1-VOcUsufgm=So=g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -198,115 +156,135 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Il giorno gio 22 ott 2026 alle ore 21:02 Christian Marangi
-<ansuelsmth@gmail.com> ha scritto:
->
-> This patch series adds AN7583 SoC support. It is based on u-boot patches
-> of Christian Marangi airoha openwrt branch
->
->   https://github.com/Ansuel/openwrt/commits/main-airoha-6.12/
->
-> AN7583 is not included to upstream linux, but actively supported by
-> upstream openwrt. The patches were adapted for latest U-Boot.
->
-> Since I'm not seeing progress, I'm again taking over the series [1]
-> from Mikhail.
->
-> [1] https://lore.kernel.org/all/20260902085311.1550804-1-mikhail.kshevetskiy@iopsys.eu/
->
-> Changes v3:
-> - Rebase on top of next
-> - Fix MAINTAINERS spacing
-> - Improve commit title and description
-> - Don't pollute dts/upstream for clk but use dedicated header
-> - Update 7583.dtsi for new scuclk node (reflect new upstream proposal)
-> - Fix some minor checkpatch warning on reset header
-> - Reorganize patch for better bisectability
->
-> Changes v2: (from Mikhail)
-> - fixed arch/arm/mach-airoha/an7583/init.c compilation issue
-> - added an7583 specific helper needed for clk-airoha
-> - patches for proper support of clk, reset, network
->
-> Christian Marangi (13):
->   dt-bindings: clock: airoha: Document support for AN7583 clock
->   dt-bindings: reset: airoha: Document support for AN7583 reset
->   airoha: add support for Airoha AN7583 SoC
->   clk: airoha: add support for Airoha AN7583 SoC clock
->   reset: airoha: Add support for Airoha AN7583 reset
->   net: airoha: add support for Airoha AN7583
->   ARM: dts: an7583: add Ethernet node
->   ARM: dts: an7583: add MMC node
->   net: airoha: add support for Airoha AN7583 PCS driver
->   ARM: dts: an7583: add PCS nodes
->   configs: an7583: enable PCS for Airoha AN7583
->   net: Add support for Airoha AN7583 MDIO Controller
->   configs: an7583: enable MDIO_AIROHA by default
->
-> Mikhail Kshevetskiy (3):
->   arm: airoha: introduce AN7583 helpers to get SCU and CHIP_SCU regmaps
->   configs: an7583: add mii/mdio support
->   ARM: dts: an7583: add mdio child node to switch node
->
->  arch/arm/dts/an7583-evb.dts                   |   85 +
->  arch/arm/dts/an7583.dtsi                      |  526 ++++
->  arch/arm/include/asm/arch-an7583              |    1 +
->  arch/arm/mach-airoha/Kconfig                  |   14 +
->  arch/arm/mach-airoha/Makefile                 |    1 +
->  arch/arm/mach-airoha/an7583/Makefile          |    4 +
->  arch/arm/mach-airoha/an7583/init.c            |   66 +
->  arch/arm/mach-airoha/an7583/scu-regmap.c      |   30 +
->  board/airoha/an7583/MAINTAINERS               |    5 +
->  board/airoha/an7583/Makefile                  |    3 +
->  board/airoha/an7583/an7583_rfb.c              |   16 +
->  configs/an7583_evb_defconfig                  |   83 +
->  drivers/clk/airoha/clk-airoha.c               |  159 ++
->  drivers/net/Kconfig                           |    7 +
->  drivers/net/Makefile                          |    1 +
->  drivers/net/airoha/Kconfig                    |    8 +
->  drivers/net/airoha/Makefile                   |    1 +
->  drivers/net/airoha/pcs-airoha-common.c        |   27 +
->  drivers/net/airoha/pcs-airoha.h               |   17 +
->  drivers/net/airoha/pcs-an7583.c               | 2202 +++++++++++++++++
->  drivers/net/airoha_eth.c                      |   94 +
->  drivers/net/mdio-airoha.c                     |  221 ++
->  drivers/reset/reset-airoha.c                  |   60 +
->  include/configs/an7583.h                      |   19 +
->  include/dt-bindings/clock/an7583-clk.h        |    9 +
->  .../dt-bindings/reset/airoha,an7583-reset.h   |   62 +
->  26 files changed, 3721 insertions(+)
->  create mode 100644 arch/arm/dts/an7583-evb.dts
->  create mode 100644 arch/arm/dts/an7583.dtsi
->  create mode 120000 arch/arm/include/asm/arch-an7583
->  create mode 100644 arch/arm/mach-airoha/an7583/Makefile
->  create mode 100644 arch/arm/mach-airoha/an7583/init.c
->  create mode 100644 arch/arm/mach-airoha/an7583/scu-regmap.c
->  create mode 100644 board/airoha/an7583/MAINTAINERS
->  create mode 100644 board/airoha/an7583/Makefile
->  create mode 100644 board/airoha/an7583/an7583_rfb.c
->  create mode 100644 configs/an7583_evb_defconfig
->  create mode 100644 drivers/net/airoha/pcs-an7583.c
->  create mode 100644 drivers/net/mdio-airoha.c
->  create mode 100644 include/configs/an7583.h
->  create mode 100644 include/dt-bindings/clock/an7583-clk.h
->  create mode 100644 include/dt-bindings/reset/airoha,an7583-reset.h
->
+Hi Alexey,
 
-For Tom. Clarification on the status of dtsi and some dt-binding header.
-I'm fighting upstream for the missing piece but it seems no maintainer
-are picking clk changes. The DT patch already have review and ack tag
-so they got approved. I would really like to clean all the pending
-patch from OpenWrt for this target. The idea here is that we have these
-temp header and they get dropped as soon as everything is up with
-the target migrated to OF_UPSTREAM. I hope you understand the situation
-with the A(I)pocalyps.
+On 10/21/2026 6:17 AM, Alexey Charkov wrote:
+> On Tue, Oct 20, 2026 at 10:41 PM Jonas Karlman <jonas@kwiboo.se> wrote:
+>>
+>> Hi Alexey,
+>>
+>> On 10/20/2026 8:01 PM, Alexey Charkov wrote:
+>>> Hi Jonas,
+>>>
+>>> On Tue, Oct 20, 2026 at 9:47 PM Jonas Karlman <jonas@kwiboo.se> wrote:
+>>>>
+>>>> Hi Alexey,
+>>>>
+>>>> On 10/20/2026 6:41 PM, Alexey Charkov wrote:
+>>>>> No in-tree board picks a compression for U-Boot proper, so CI never
+>>>>> builds the compressed path of the Rockchip FIT, nor links zstd into an
+>>>>> arm64 SPL.
+>>>>>
+>>>>> Turn it on for the generic RK3576 image, at the highest level, which
+>>>>> shrinks the payload from 690KB to 296KB. The image is meant to boot from
+>>>>> whatever medium the board has, so this suits it, and its SPL heap and
+>>>>> SYS_LOAD_ADDR already leave the decompressor room to work.
+>>>>>
+>>>>> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+>>>>> ---
+>>>>>  configs/generic-rk3576_defconfig | 2 ++
+>>>>>  1 file changed, 2 insertions(+)
+>>>>>
+>>>>> diff --git a/configs/generic-rk3576_defconfig b/configs/generic-rk3576_defconfig
+>>>>> index 5e25653820c2..dec4364876b6 100644
+>>>>> --- a/configs/generic-rk3576_defconfig
+>>>>> +++ b/configs/generic-rk3576_defconfig
+>>>>> @@ -9,6 +9,8 @@ CONFIG_DEBUG_UART_BASE=0x2AD40000
+>>>>>  CONFIG_DEBUG_UART_CLOCK=24000000
+>>>>>  CONFIG_DEBUG_UART=y
+>>>>>  # CONFIG_BOOTMETH_VBE is not set
+>>>>> +CONFIG_SPL_FIT_UBOOT_COMP_ZSTD=y
+>>>>> +CONFIG_SPL_FIT_UBOOT_COMP_LEVEL=19
+>>>>
+>>>> I do not like this, it breaks consistency with the other RK generic
+>>>> targets, which are meant to be as lean and bare minimum as possible, not
+>>>> a playground for testing features, we have sandbox for that ;-)
+>>>>
+>>>> Please enable this feature on a real target, not a target meant for
+>>>> basic board bring up and recovery.
+>>>
+>>> It is in fact quite helpful for recovery workflows, because it
+>>> massively reduces the size of the maskrom 0x472 payload, which as you
+>>> are well aware is quite a thorn in the backside, given the boot ROM
+>>> peculiarities. My reasoning is that the generic board build will be
+>>> much more likely used over maskrom than flashed to storage, unlike all
+>>> the other targets, so enabling compression here is pretty much a
+>>> no-regret move. As long as it works, of course, but that's what we
+>>> have tests for (and CI).
+>>
+>> The generic targets are likely used written to storage much more than
+>> recovery or loaded from maskrom, they are typically used by Openwrt and
+>> Armbian for new board targets until proper board support has landed in
+>> upstream Linux and U-Boot.
+>>
+>> I can understand the idea and may possible have been on-board if all RK
+>> generic targets were changed and tested. The inconsistency among the
+>> targets are my biggest concern, secondary that this adds more code that
+>> potentially can fail during runtime.
+> 
+> I could enable this on other generic targets, too, but my sample only
+> includes an embarrassing number of different RK3576 boards and not
+> other SoC versions, so testing it directly is a challenge for me.
 
-(forgot to include this in the cover letter)
+I would likely NAK any change to enable new Kconfig options on any or
+all RK generic targets. Please see the generic RK targets as a superset
+of bare minimum required to boot a board, nothing more or less. If your
+dedicated board target fails to boot the generic target should continue
+to have a high chance of working on same board.
+
+> 
+> On the potential failures - true, but see my point above regarding
+> tests, which I believe still stands :)
+> 
+> I'm not particularly attached to enabling the option on the generic
+> board specifically; I just thought it could help people since it helps
+> my use cases.
+
+Sorry, the generic RK targets are not the correct target for this (or
+other) nice to have feature, they should only include the very bare
+minimum options required to boot.
+
+If these options where enabled at SoC level I would likely not have
+cared as much or at all as I typically value consistency above function.
+
+> 
+>> I added these generic targets to have safe and proven defaults, because
+>> the evb targets that typically could be used for similar purposes
+>> started to grew in features, and I really do not want the same thing
+>> happen to these targets. Boot speed for the generic targets is also
+>> not a priority.
+>>
+>>> FWIW, I'm also using Zstd decompression in SPL on the Flipper One with
+>>> Falcon payloads, but it's not upstream yet.
+>>
+>> Maybe you can add one of the rk3576-evb boards as a target in mean time
+>> and test on such target?
+> 
+> I ran this code on a RK3576 EVB1, too. Maybe it's time to upstream its
+> defconfig after all. Along with my local patch patch moving the
+> SYS_LOAD_ADDR to a less overlapping location across existing RK3576
+> boards.
+
+Sounds good, please upstream support for your evaluation board, it
+should be a perfect target for testing new Kconfig options due to its
+intended purpose. I do not have access to any RK evaluation boards,
+otherwise support already would have been upstream ;-)
+
+If SYS_LOAD_ADDR needs to change on RK3576, it likely also should be
+changed on other RK SoC targets that use ROCKCHIP_COMMON_STACK_ADDR=y.
+
+Regards,
+Jonas
+
+> 
+> Best regards,
+> Alexey
+
