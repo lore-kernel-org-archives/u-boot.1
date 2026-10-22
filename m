@@ -1,166 +1,172 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8530606A319
-	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 07:09:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60D13606A31B
+	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 07:09:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=LWzSI2XW;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=iNtblGWY
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=kOjQp1hL;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=jil91Bit
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9F3C96066A;
-	Thu, 22 Oct 2026 07:09:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3533D80C6A;
+	Thu, 22 Oct 2026 07:09:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qde6HTsjbxEc; Thu, 22 Oct 2026 07:09:07 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7B9FC6068B
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792652947;
-	b=HyP8agQjtvh7D/vFHYErzuOGxbsr/4jV0uzT5I+QOEduLj/iBI0qjtDmUDz8w3RkNsF3
-	 TkFlP+JZukC202tPtBV+S2Hr5jMIJ59VAH4yjkzbdMlDYJJkd8fFnzkM1AYHQcmkhpCSg
-	 49JSNkSKsqGWDfc5CkWypv7WWc+vb1/85vIKMpC5oIKF5OOBBrU/GO6xexvAGMLtdqDdN
-	 /F5np0eLTid92QyEP77AUzZgGtpZ/eQwH7fPTYd0h52wfM16M37HP4j3TLY4Ay+jiu8xE
-	 hbQKDf5BOiUikrqKioFY7+senRDHyyRkNDUpPqQMp/mtueOsSRIbDGQrO6MIKUizIRg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fClsyYOG0SZ1; Thu, 22 Oct 2026 07:09:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3CA7780C8E
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792652950;
+	b=k+7GDqL4Y6MNVT/MKAkpu/24844KoCggaHuQ62sEVr3305foPv8BFZqTjTB9ChcadNos
+	 opTcx6Ly/OJxetEQEmQ+tzlO/JuUiuWb0etbFRX7Gn+iKjNQazltoIB7EOI8WafM3wxDS
+	 FO6n+YfauYryd7z18ZQgY1EprroQwnCHejIt/3O0EUcLpR0pXjPSrC7goNcx37XyC+4VH
+	 H6PRF8CQ9Bz9wbkq3kuxUdRgGGYgjaXZpCxk5sFUvjkwrDh49qabZ7MrwjASRoloTxdOL
+	 wR5x8+IgJ3Qx/kh/GGJ7JA/1obKS+BbXCh5/cikYCPFvMrhWHj5GwrEkLk1XwxvidIg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792652947;
+	c=relaxed/relaxed; t=1792652950;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=lcgJSKHgFRuil3WkX8LzT6F1hUUZR8P7IPA4gHNRtbs=;
-	b=sRP71+/yz8YnUahXIMJQFFTk+UFxH5RbnlMpWLmPZ5PWLIISugoRjRrrYd+cz4zvF5HU
-	 KxCst26Q4667ICgZdnsvx1HqKSTmlqzQcOlG1CtWZD/h8s9qabWmwW18JPqtjQ5HjmuQP
-	 2bcXSpydoNJnVfGFZKAL1PT95LJwUrlDAeKtIQvx3AW6lxz5KoOTSeZlmV4AcpU1W11Im
-	 GvYid4uJfIB2KGuZo7xWq71DlbmG4V+idLOXzIMgRggLDtHTStaISpxCFkR9+2IEKlao/
-	 JpNtpfPCPNRpj5fxL4fvAEL01n5Dnpd+gZQ+5axNUQIOGHjGDB0b8UtiHhsN58MkGQQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=/CqUFK3PcKSMN6ZpFD4M1IAHe0JJ6TSlK8qLZpaXZAM=;
+	b=JcB2ybyvOYb6QQ/vOwc0zhgmEUBpsBmycVdnNmLcBZMWdhYJUj1EPhLEizbATaK6uNkA
+	 4Hr76+KvEBZW0/d0yjsg33HWgqpKWjEXGb48HgaFfVEGEHwdP3G5yxVwH8ZABrGhbE+oR
+	 RON8fTUZJe43asYP7KyKPcSw/7DSyP3UAyozc5OgrvuWW7T3bYEWKLxhjawI1YQXzQHB/
+	 UbTNNrIYbqrZ06ie+Dw6aQbJbSTWF5PUhMtQvf8Yxoek69R4gRfmC+AkTxqApUsC5RoAY
+	 7korpzMKkSo4f4ck5Y5S5XU2NCeAMi3xxKnOmlaRqf2gtEkGNG4hTV5E3bMyIdBiuPQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792652947;
-	bh=lcgJSKHgFRuil3WkX8LzT6F1hUUZR8P7IPA4gHNRtbs=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=LWzSI2XWNMjib7rnFkF/f2/IXjd7dT3VHG17+7BEAg5ILRmapZwf85GRRgvYKDFmk
-	 Q/tPoxWwQAK3O1ksTs8m7zBabNhxzXlq9UokVskojqeZzjljhRKVtJGTSEt37vNaF+
-	 cv5sL8lRVQlqS73EKBQi3LnSO1xMsKSjoeYIFTRjQriq0FSv9aK2KOg+5s5Snww2pS
-	 S/hGQhm+fU7AjL9bTlVII2szTS6ftzdz9z4tog4XUuSiQ2S1IINwQ5vb1CA9eQYaaW
-	 7CQ+5qcTZ5kbMCi439UX2rIzLvsvbn7KwiBlpKA8FzBUoLc9aJAsJQO6M+AcrGhmGX
-	 20ykcRnw+Ks8g==
+	d=lists.u-boot-project.org; s=default; t=1792652950;
+	bh=/CqUFK3PcKSMN6ZpFD4M1IAHe0JJ6TSlK8qLZpaXZAM=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=kOjQp1hLja0KWZxVnhFJIlPSy6MVhnHbchFwhDwxnNLkUcFwh/TDILCNTqwDimOVA
+	 ZISsjybneZ3/5pOQqYkUT7xg35I375Jw8qOq8Ny7dIyqf/6GrQluXxbmesFc6+lEaT
+	 SkVBzGlQ0W8pYrnZIu/hjdTLon9+nJprgnPXbw6LhwUb/H5LAc7rMFFufvPQIxdDKy
+	 bqeLKPNXUMuW0PN/0fU0wwQR0dMitp6tVhRc9sLvDabN6rsKXUC2T8B/+Vzxqt09Mz
+	 1JD6Oq29Jgmw1vRwVPSY8QjFGj2M7PMxXzkRk5zo3Tc7wUSdysszGbju9uECAWkKwB
+	 rq0UXm5hGt5fw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7B9FC6068B;
-	Thu, 22 Oct 2026 07:09:07 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 30EDF371
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 07:09:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3CA7780C8E;
+	Thu, 22 Oct 2026 07:09:10 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 182411AB
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 07:09:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 22E6740075
+ by smtp4.osuosl.org (Postfix) with ESMTP id F1CF14070A
  for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 07:09:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jiucVMaYbTcs for <u-boot@lists.u-boot-project.org>;
- Thu, 22 Oct 2026 07:09:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org AD3DB40042
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::435"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792652945;
- b=sGO/QUQElEeWeTK1nMCocZVS3TfSQ+IAncH0hbe5jmmPEbQ5z2bO7B4g5+RHGiqx+pTw
- SR505+4qpZq0/FwO1RpjbzQukdxXTbzD4LpNdPgTdia5ZYki5LLd4v9K5G9omfzmAuoo8
- uAz3vaCdaBhQ9sEMOxxX3lnpdJGWCQX9HEbzJBNkBe2EpZGVXVZYvmiGc79SU+Ino3VN5
- JmKRed9XM43BVrvsc5iFOkrMmQn+HPjmTDdFqHfhiM4s6+xwIv+Yexc6zU1QJaAKvMuTc
- jpEQB6NBpDts2S/sF3PWzzQKYbmhxHIpddXS/L0abB07mFa/D8sB5ZZDL14MT20eeSw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BJ7i52ZlRZts for <u-boot@lists.u-boot-project.org>;
+ Thu, 22 Oct 2026 07:09:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D49B8406E6
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::432"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792652946;
+ b=qk7KXcSlraiPMu51B+b8Mb3mCT8NLlVsr3j4GKpj4MZ3oR4ynGULiiM8Z/pcMC9wBlE0
+ LctcpHMjYKizRaKCX1hjGLoFK4DxG4lWTb+tF4cvSebs/euLy76Co7zNmBt3HiH7g8PEv
+ NwWOGewVOhSKR/sEHO31r7+3sdTbZ08ZRN1DGZFBlVIBrl+GYSukTfiDSyKn8xVbz7fCP
+ ZD8Wkt0rvZ9xoHa1Xn3xZFHZdwQC9IfsXuo2btepjQV0fNa0zsksOMP8Z/x3t86Qw8Tnk
+ HMfasU+ccntDgHG5kKQfEiHbYJP/Ba97pIwGC3iE2tie63omiylTwE5vgThlTNZhgFA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792652945;
+ c=relaxed/relaxed; t=1792652946;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
- Content-Transfer-Encoding;
- bh=lcgJSKHgFRuil3WkX8LzT6F1hUUZR8P7IPA4gHNRtbs=;
- b=XITAmWFJRLIFILVunKx3kmc3kzF+Mx19oCPVa7eXW+SCI6yE/eDxEEbv6xmI/IzpXIsR
- hPirBumMw/5czUSPOguuzmDP9/zK0CbDcunb1Bya6F+/IlX7UCURPJJVC9H4dYcLu0DO5
- zigJtV47V93BpqxBvmRfFdJrZ+FRV3VHo+ObGJNclG20lXxy+y21oDY7gbAhN2eCl+5Ws
- OgbE0rOHiGY0CUSR4qcwdt9fj+zU4yYQBZoNteFKXib+pkkl02Ayf7AUgTopFE0ecdoJk
- +GotoVjJ0alvwh1MukwXuULj78QMPi5/iXOXWJNmh6LoKwZnawXFmiZo5ZpWWuGsO7A==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+ MIME-Version:Content-Transfer-Encoding;
+ bh=/CqUFK3PcKSMN6ZpFD4M1IAHe0JJ6TSlK8qLZpaXZAM=;
+ b=kQVIrs/CcXL0+JoE6ZRIQStZcDBUoPOhjeQ17LtZrttvISpfLNENt5ravrsijXgLLoYS
+ fHPnJoP7fnqy0a99gLserSz0iTs3jIsMSgKtuAU0j3zqdit71mCe0B00yejWi7eOFkpBo
+ NWIfv4k0BE5QxBgqBd+VDS7e+7qdKooMmHks3Wzfm3GlX5GFjoqP7NFWJurN8pIoJ0ded
+ Pz+Gqc6uywOeVuf/eRkFbMnU3JfzRH8Dhykh45YyGLag4ge0/SeUrpN278zV4tVaDl0gz
+ wmSQS6ISXvvXTQd8QhNu4jEVIwza9nUJgNzeLgOiEUaHuTT+1xHqbHMAFCoLgGDtTHw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=iNtblGWY; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::435"
+ header.s=20251104 header.b=jil91Bit; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::432"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::435; helo=mail-wr1-x435.google.com;
+ client-ip=2a00:1450:4864:20::432; helo=mail-wr1-x432.google.com;
  envelope-from=mehmet.fide@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=iNtblGWY
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- by smtp2.osuosl.org (Postfix) with ESMTPS id AD3DB40042
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 07:09:04 +0000 (UTC)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-48b0584ad71so1019895f8f.0
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 00:09:04 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=jil91Bit
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id D49B8406E6
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 07:09:05 +0000 (UTC)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-48e00eee27dso1115270f8f.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 00:09:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792652942; x=1793257742;
+ d=gmail.com; s=20251104; t=1792652943; x=1793257743;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=lcgJSKHgFRuil3WkX8LzT6F1hUUZR8P7IPA4gHNRtbs=;
- b=iNtblGWYxTBNiCHmn7qvC43yyje8Lhji4p4rQ9pIY3Pe1jjOUaurrFWzcoH8Z9f8BM
- VnACJILVAeBD5QQVtlBou7iX9tdMia805S9No1jq1yd8UOHJGQo0kq5ajxvWoS5B5Mnc
- jE+z4Z8kfFfamlIX7K1h0m3paMETlMNtjsTpwKi5w30pNJqIjbeVjVmpdmX0NNp2+uZL
- W3zkA16JBFYvrCujQUT80ir6ApLFEvND8nzT0g8DqFdpD4Ia56EaJdFQ53kC0byB3jUa
- QH4IipLy4/nHB6GiOlqu5e+l4H7zC/77QYotPIS3Oh3iuvUWNRbx3If7Zdkwa0w4okPY
- C/Cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792652942; x=1793257742;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=lcgJSKHgFRuil3WkX8LzT6F1hUUZR8P7IPA4gHNRtbs=;
- b=fJisDth8GV8MtKHF1Aw91P1YX7ciLUBeKEyql232dPI6f+nKYodPcgoXlHQwY8ZjXJ
- jgnSidFIbXTtlHCXIKjlzRn+iT4VXlld+dXwp1W1gAm03g3JK6RhsJ2xezOB1+ApKty0
- KpgJ1kOkrIjigHJtZVC2xliWGnW9a8U3MFDi2OLie+9/MreUGd2WZomxi5Gx9Hwk3dTQ
- FSNXvCcY6k4nODYMIJyowY9te/knKzgZaYZdEGz8MdtW8A576g0L++Td+jt4jbJkLwhc
- 0hsqInzdGGC/0OJQjHRLwsoQkpJKeLek43hKwld44iEsKwZT8LMUBGPhaq0KtPX3RrEU
- 1SdA==
+ bh=/CqUFK3PcKSMN6ZpFD4M1IAHe0JJ6TSlK8qLZpaXZAM=;
+ b=jil91BitiFaizOdXhvMlYkLGftizjSlEFcbTxWe0igHdlMX0AlrBeIuU9OMVaRDZD4
+ 92Zj5WMF92UI/qIT2PULJWVvnufez/UyE+BeodfuIHbnthUL7igdlCtGL7OVemJcXiHn
+ iyRbETIZH5SJVubyLFwVO1xjPs9hqkPss1jWe8O7dFrkic6AVBrMFhQEhLGYPdc5hRK1
+ 42IwMlpk5nQSB98x1TJyrBAKuhgcpUMTOBvOaeqBYHUjaJzeRx9SSmiQKrJb9uez1UtM
+ sUG1VAn4ipt07ynWRx/5h98HKKpbG/MzkpO1/Ex97TTAGsJDwTSU9IDD+mozeRbjH7hC
+ BItA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792652943; x=1793257743;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=/CqUFK3PcKSMN6ZpFD4M1IAHe0JJ6TSlK8qLZpaXZAM=;
+ b=1CeZyqJYu1tjD3fK33LvCGZLZns6nwMR1+EtZ38QmOfOKSVzud418La2xfa9xGRlmx
+ nIgkvdDPhsDewQLqR+ZEHbR3CbhG5RMaxaduT2Sx96JlO9GqQvORRF7pj5gzyXUl4u5u
+ PIJ5DDhUsHWWp/+GiR1ywHEcGRCSR5KiT8c5ny0Dg5DaZVbMrSKK8oy+f+lYybTZDazg
+ JP4BtqNyL00J7TdZtI7R4RMW8o8nLAwQay9QBt0n5/WnqZH4uUS8rXVyIBPW1oWQ2kEn
+ B7C94SnsPs+vQzv2IIBMiKwUo4UlZrJ1PrbFM25pTlXPdNDbQk4Malp/5vFBHOeGwN8C
+ zFwQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBziVS0OZssTISpiCko1HVlHKlFe0abxfVHTbh8Sp/JuvWpVOAR7JpjBhwA6cROjx8ieeut9Zzw=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIO7eafBFuf7+JqlIsS0tlpNk3Ia9JVSNQQdUgSmfaCrDDNIDuU
- muOU6LA8molur9JbFRdvlqJjJnr3vaH6B0qJJevBIglVlnqlfzzY8b8G
-X-Gm-Gg: AYBFou3ffToXX402ck6nz2PBL/CV9oqTPw0BY1/KzFRNckSpzVKTP+fKqXf+0K7cEfJ
- aCSxJa2GQGFDu0MadxRLQM3ud//vr2sZMRVnZZUHhvjX8mPTSuIvhS8ay8t3k845vOQoPWoWQ9U
- 7iP2ubM/LIzC6nOgfe4InZscyvqFvrlyUZJs1uebhvsEiqijGRtS6n/grgmfYZ2tXjaevqWaVlS
- N3lPwaV70PDslhbkhIsy1mVNo89Oy77stNjNM8dKlwWV4Jjftbb4q/a4yC/UJ2DMwawzQaO0geO
- lnWQlL+zQ9XvTtAelLB5KLilxIPmYc+n/gC5RrZhutIy8qama5Foj/yZl2ECeA3zzf1kT1SHj1L
- PwJLkTZKe9hzU3PRU6rCHD5GMgFThdUC8FJJGHmhPdFECBp2S/0wUUMENGEb5IqrBW0TSIrnv0n
- l8HAW7Iy/TuwjbXnZ11h7kNbFRZL5eaHAqFS5qXLUXS4tMP1YFJsAMzu+yF04sfHJc24guFPH8l
- VAHAaLEkYMve4+juSIxzjEcKDiCgUsiGzNFCb1tHV/jgBa4mb8tmxPhlsVlzQ==
-X-Received: by 2002:a05:600c:3b2a:b0:49f:fd2d:23c7 with SMTP id
- 5b1f17b1804b1-4a1fdd4ea2amr84465445e9.27.1792652942071; 
- Thu, 22 Oct 2026 00:09:02 -0700 (PDT)
+ AKwUvBwc7KX5kYcQiOKQYZGI65W2to9IOyrXFXJ/paeFhlH5felxq19NiLt5iYhjaBBfWHK2G71kk6k=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJQysadujjyRTSZ6LUe5bx35fZp34ErNgIX+nAWsTYHONw8wgtd
+ JtuMUP4cLGQhTOuY+zOjQ3LERALgfM7krpUx9nlmczcCFoKYoPdyZfE3
+X-Gm-Gg: AYBFou38uGxPWf1Qy2QpwQlXQKnUuvJ8/r2np2OQy2un4DD+VDID1HoEPZ3Gt8Ex07W
+ ay6Bvw44/m5K8peW8srqEBSoKOZb/JyXMNuhh+M1TJyPZj0ssBKW10my92YbYGTyuFZVwLK/n3N
+ JfNc/mzoPuXuLhEahOhg/iQgZiYGWj9BOUUBkuLdszXIAPnSzHcJ5ar1yg4IWlsjwFBnxixOUBv
+ pK8kmEd8xhDk74Ix9sBtIDudNjrw2GcTYO2M73mZL3SGxFw6oEanKA69EtSWqYV6t26j+jkSHd+
+ AP8H7k2TQqGUKQh82vb6BybhM0o9zuPPn0oEWMRhbIbtg0+SIGdVcldAgfC2GIJCbma4D2d2iH8
+ nbR4bOkFDBHO8XAL4m8XdzxQcLgizKXZwjIal5XxYi30wZvLPo7uDbp7ifFA/Y6bO+5HLgOgPG2
+ jCKw09Xx3T8SBywNqlLbSN1asnUJPQZSFtn231cUnj4ldmLu3GGMkEo51TmjRsVMNzIZIIvP32O
+ Txv0HF0j6uhR8JilygMYy7dxBaL6xUy1OKA3XPKwWC1+z6dXI/VzIMPRTCppw==
+X-Received: by 2002:a05:6000:4918:b0:48a:fe3b:64b7 with SMTP id
+ ffacd0b85a97d-48e264e7f0fmr9017856f8f.53.1792652943080; 
+ Thu, 22 Oct 2026 00:09:03 -0700 (PDT)
 Received: from deb05.proceq.com ([213.160.61.66])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e25835247sm10347613f8f.41.2026.10.22.00.09.01
+ ffacd0b85a97d-48e25835247sm10347613f8f.41.2026.10.22.00.09.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Oct 2026 00:09:01 -0700 (PDT)
+ Thu, 22 Oct 2026 00:09:02 -0700 (PDT)
 From: Mehmet Fide <mehmet.fide@gmail.com>
 To: Marek Vasut <marek.vasut+usb@mailbox.org>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Fabio Estevam <festevam@gmail.com>, Stefan Agner <stefan@agner.ch>,
  Francesco Dolcini <francesco@dolcini.it>, u-boot@lists.u-boot-project.org,
  mehmet.fide@screeningeagle.com
-Subject: [PATCH v8 00/10] usb: ehci-vf: make the USB host port usable
-Date: Thu, 22 Oct 2026 09:08:50 +0200
-Message-ID: <20261022070900.616265-1-mehmet.fide@gmail.com>
+Subject: [PATCH v8 01/10] fdtdec: match an alias to its stem only when the
+ number follows it
+Date: Thu, 22 Oct 2026 09:08:51 +0200
+Message-ID: <20261022070900.616265-2-mehmet.fide@gmail.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261022070900.616265-1-mehmet.fide@gmail.com>
+References: <20261022070900.616265-1-mehmet.fide@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -173,163 +179,191 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Mehmet Fide <mehmet.fide@screeningeagle.com>
 
-"usb start" on a Colibri VF50 or VF61 kills U-Boot with a data abort,
-and even with that fixed the host port stays unpowered:
+fdtdec_get_alias_seq() and fdtdec_get_alias_highest_id() compare the
+alias name with the stem by strncmp() over the length of the stem, so
+every alias that starts with the stem counts. On a Colibri VF50 the
+aliases usbphy0 and usbphy1 matched the "usb" stem, the two USB
+controllers were given the sequence numbers 2 and 3, and ehci-vf
+indexed its two-entry tables with them. The live tree disagrees: there
+of_alias_scan() splits an alias into the stem and the number and
+of_alias_get_id() compares the stem exactly.
 
-- patch 1 makes the flat-tree alias lookups match a stem exactly, as
-  the live tree does; their prefix match is what gave the two USB
-  controllers of the Vybrid the sequence numbers 2 and 3
-- patch 2 fixes the data abort: the controller index came from that
-  sequence number and indexed past the driver's tables
-- patches 3 to 8 drop the dead non-DM path and the empty bind hook,
-  add ofnode_get_alias_seq(), take dr_mode through usb_get_dr_mode()
-  and the ID detect gpio through the device, and the PHY, usbmisc and
-  anatop bases from the device tree instead of the tables
-- patch 9 sorts the includes
-- patch 10 enables the vbus-supply of the port
+Match an alias only when the stem is followed by its number, as the
+live tree does. A test covers both lookups with the sandbox aliases,
+where "test" is a prefix of testbus3 and of the testfdt aliases.
 
-Patches 3 to 8 are the follow-up Marek asked for in his review of the
-data abort fix: the PHY and usbmisc tables are gone, and the port index
-that is left, for board_ehci_hcd_init() and the anatop registers, comes
-from the usbphy alias of the PHY node.
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Mehmet Fide <mehmet.fide@screeningeagle.com>
+---
 
-v8:
-- Marek's review of v7: patch 6 reads dr_mode through usb_get_dr_mode()
-  alone and takes USB_DR_MODE_UNKNOWN as host, for legacy device trees
-  without the property; an unknown value now means host as well, as
-  in v6, instead of the -EINVAL of v7
-- new patch 9 sorts the includes; patch 10 adds its two in order and
-  leaves the argument of the reset hook named dev
-- patches 7 and 8 carry Marek's Reviewed-by
-- rebased on main
+Notes:
+    Changes in v8:
+    - none, rebased on main
+    
+    Changes in v7:
+    - Reviewed-by from Simon
+    - rebased on main
+    
+    Changes in v6:
+    - none
+    
+    Changes in v5:
+    - new patch, from the review of the alias lookup in v4: the live and the
+      flat implementation disagreed on a stem that is a prefix of an alias
+    - the test calls fdtdec directly, which checkpatch warns about; the two
+      lookups under test have no livetree form
 
-v7:
-- Marek's review of v6: the dr_mode patch is split in two, patch 6 only
-  replaces the private enum and the strcmp() chain, the new patch 7
-  moves the ID detect gpio request to the device and into the probe,
-  checks the results of gpio_request_by_name() and dm_gpio_get_value(),
-  and frees the gpio in a new remove hook and on the failing probe
-  paths, so the probe that follows a "usb stop" can request it again
-- a dr_mode value the driver does not know fails the probe with
-  -EINVAL again, as it did before the series; v6 made it host
-- patch 8 keeps the u32 portnr, the alias lookup writes a local int
-- the tags sit above the Signed-off-by; patch 3 carries Marek's
-  Reviewed-by
-- Simon's Reviewed-by on v6 carried to patches 1 to 5, whose code is
-  unchanged; patches 6 and 8 changed after his review and patch 7 is
-  new
-- patch 9 drops the Reviewed-by of Marek and Simon on v6: its VBUS code
-  is unchanged, but it now adds its line to the remove hook of patch 7
-- rebased on main
+ lib/fdtdec.c     | 43 ++++++++++++++++++++++++++++++-------------
+ test/dm/fdtdec.c | 35 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 65 insertions(+), 13 deletions(-)
 
-v6:
-- Marek's review of v5: patch 3 names USB_HOST as the option that
-  selects DM_USB, patch 4 loses its two Fixes tags, patches 2 and 4
-  carry his Reviewed-by
-- new patch 6: the driver's own dr_mode enum and parsing go, it uses
-  usb_get_dr_mode() and USB_DR_MODE_* as ehci-mx6 does
-- patch 7 reads the phandles of the controller node with
-  dev_read_phandle_with_args() and passes the private data to the
-  helpers instead of single addresses
-- patch 8 reports through dev_err() and dev_dbg()
-
-v5:
-- Simon's review of patch 4 (now 5): the live and the flat lookup
-  treated the stem differently, exact against prefix, and the register
-  base patch relied on the prefix to find usbphy0 with the "usb" stem.
-  New patch 1 makes the flat lookup exact, ofnode_get_alias_seq()
-  documents it and its test checks a prefix stem; the PHY node is
-  looked up with the "usbphy" stem
-- ofnode_get_alias_seq() now works on a node of any tree, on the live
-  tree as well: of_alias_get_id() looks a node outside the control tree
-  up in the /aliases node of its own tree; a test uses the other tree of
-  the sandbox tests
-- the checkpatch note of patch 4 (now 5) moved below the --- line
-- rebased on main after the v2026.10 release
-
-v4:
-- rebased on next; the dm core change that moved of_to_plat() after
-  pinctrl is gone, the regulator GPIO is now claimed at probe time
-  upstream, which is what the vbus patch needed
-- the data abort fix joins the series, the register base patch depends
-  on it
-- the vbus patch enables VBUS in the reset hook only, as ehci-mx6 does;
-  v3 enabled it there and in the shared init, so the regulator counted
-  two enables per probe and "usb stop" never switched VBUS off
-- the dm core patch gains a test and no longer documents -ENOENT for a
-  missing alias, the live tree returns -ENODEV
-
-v7 of this series:
-https://lore.kernel.org/u-boot/20261020101608.2818265-1-mehmet.fide@gmail.com/
-v6 of this series:
-https://lore.kernel.org/u-boot/20261016072526.2277530-1-mehmet.fide@gmail.com/
-v5 of this series:
-https://lore.kernel.org/u-boot/20261013090738.377537-1-mehmet.fide@gmail.com/
-v4 of this series:
-https://lore.kernel.org/u-boot/cover.1791381507.git.mehmet.fide@screeningeagle.com/
-v2 of the register base series:
-https://lore.kernel.org/u-boot/20260820071511.1036506-1-mehmet.fide@gmail.com/
-v3 of the vbus series:
-https://lore.kernel.org/u-boot/20260820102523.1076815-1-mehmet.fide@gmail.com/
-the data abort fix on its own:
-https://lore.kernel.org/u-boot/20260818151236.2891878-1-mehmet.fide@gmail.com/
-
-Tested on a Colibri VF50 V1.2A on the Iris carrier, colibri_vf_defconfig
-on main (06f988df538): "usb start" finds a USB stick behind the host
-port at usb@400b4000 and reads the same data before and after "usb
-reset", VBUS goes on at "usb start" and off at "usb stop", also after
-repeated resets, and Linux takes the port over when U-Boot boots it
-without "usb stop". The code of patches 1 to 5 is the one tested on a
-VF61 V1.2B for v6; patches 6 to 10 changed only in the driver and were
-tested on the VF50 as above. With local device trees that make usb0 an
-OTG port with the fsl,cdet-gpio colibri_vf had before its device tree
-sync, both ID states went through "usb start", "usb reset" and "usb
-stop" cycles: read as device, the port is not available on every start
-and the gpio stays free; read as host (GPIO_ACTIVE_LOW), the port holds
-the gpio while it runs and gives it back at "usb stop". Without the
-frees, every probe after the first fails with -EBUSY. An unknown dr_mode
-and a missing one both give a host port. The five ARCH_VF610 boards
-build at every patch, and "ut dm" on sandbox gives the same result as
-on main, plus the three tests of patches 1 and 5 on the live and the
-flat tree.
-
-Mehmet Fide (10):
-  fdtdec: match an alias to its stem only when the number follows it
-  usb: ehci-vf: take the controller index from the device tree
-  usb: ehci-vf: remove the code path for a build without DM_USB
-  usb: ehci-vf: drop the empty bind hook
-  dm: core: add ofnode_get_alias_seq()
-  usb: ehci-vf: use usb_get_dr_mode()
-  usb: ehci-vf: request the ID detect gpio through the device
-  usb: ehci-vf: take the register bases from the device tree
-  usb: ehci-vf: sort the includes
-  usb: ehci-vf: enable the vbus supply of the port
-
- arch/sandbox/dts/other.dts |   5 +
- drivers/core/of_access.c   |  42 +++++
- drivers/core/ofnode.c      |  20 +++
- drivers/core/read.c        |  20 +--
- drivers/usb/host/ehci-vf.c | 314 ++++++++++++++++++-------------------
- include/dm/of_access.h     |   7 +-
- include/dm/ofnode.h        |  16 ++
- include/dm/read.h          |   8 +-
- lib/fdtdec.c               |  43 +++--
- test/dm/fdtdec.c           |  35 +++++
- test/dm/ofnode.c           |  49 ++++++
- 11 files changed, 360 insertions(+), 199 deletions(-)
-
-
-base-commit: 06f988df538e5507287918d45100a66921b6feef
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index d25535bf36c..5fe7e85a943 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -508,10 +508,29 @@ int fdtdec_add_aliases_for_id(const void *blob, const char *name,
+ 	return num_found;
+ }
+ 
++/**
++ * alias_seq_of() - get the number an alias gives a stem
++ *
++ * @name: Alias name, e.g. "serial2"
++ * @base: Stem to match, e.g. "serial"
++ * Return: the number that follows the stem, -1 if @name is not @base
++ * followed by a number (usbphy0 is not a "usb" alias)
++ */
++static int alias_seq_of(const char *name, const char *base)
++{
++	int base_len = strlen(base);
++	const char *num = name + base_len;
++
++	if (strncmp(name, base, base_len) || !*num ||
++	    strspn(num, "0123456789") != strlen(num))
++		return -1;
++
++	return dectoul(num, NULL);
++}
++
+ int fdtdec_get_alias_seq(const void *blob, const char *base, int offset,
+ 			 int *seqp)
+ {
+-	int base_len = strlen(base);
+ 	const char *find_name;
+ 	int find_namelen;
+ 	int prop_offset;
+@@ -531,8 +550,11 @@ int fdtdec_get_alias_seq(const void *blob, const char *base, int offset,
+ 
+ 		prop = fdt_getprop_by_offset(blob, prop_offset, &name, &len);
+ 		debug("   - %s, %s\n", name, prop);
+-		if (len < find_namelen || *prop != '/' || prop[len - 1] ||
+-		    strncmp(name, base, base_len))
++		if (len < find_namelen || *prop != '/' || prop[len - 1])
++			continue;
++
++		val = alias_seq_of(name, base);
++		if (val < 0)
+ 			continue;
+ 
+ 		slash = strrchr(prop, '/');
+@@ -549,12 +571,9 @@ int fdtdec_get_alias_seq(const void *blob, const char *base, int offset,
+ 				continue;
+ 		}
+ 
+-		val = trailing_strtol(name);
+-		if (val != -1) {
+-			*seqp = val;
+-			debug("Found seq %d\n", *seqp);
+-			return 0;
+-		}
++		*seqp = val;
++		debug("Found seq %d\n", *seqp);
++		return 0;
+ 	}
+ 
+ 	debug("Not found\n");
+@@ -563,7 +582,6 @@ int fdtdec_get_alias_seq(const void *blob, const char *base, int offset,
+ 
+ int fdtdec_get_alias_highest_id(const void *blob, const char *base)
+ {
+-	int base_len = strlen(base);
+ 	int prop_offset;
+ 	int aliases;
+ 	int max = -1;
+@@ -580,11 +598,10 @@ int fdtdec_get_alias_highest_id(const void *blob, const char *base)
+ 
+ 		prop = fdt_getprop_by_offset(blob, prop_offset, &name, &len);
+ 		debug("   - %s, %s\n", name, prop);
+-		if (*prop != '/' || prop[len - 1] ||
+-		    strncmp(name, base, base_len))
++		if (*prop != '/' || prop[len - 1])
+ 			continue;
+ 
+-		val = trailing_strtol(name);
++		val = alias_seq_of(name, base);
+ 		if (val > max) {
+ 			debug("Found seq %d\n", val);
+ 			max = val;
+diff --git a/test/dm/fdtdec.c b/test/dm/fdtdec.c
+index 495f57234a4..075f7e5471f 100644
+--- a/test/dm/fdtdec.c
++++ b/test/dm/fdtdec.c
+@@ -8,6 +8,7 @@
+ #include <dm/of_extra.h>
+ #include <dm/test.h>
+ #include <fdt_support.h>
++#include <fdtdec.h>
+ #include <mapmem.h>
+ #include <smbios.h>
+ #include <test/ut.h>
+@@ -188,3 +189,37 @@ static int dm_test_fdt_chosen_smbios(struct unit_test_state *uts)
+ 	return 0;
+ }
+ DM_TEST(dm_test_fdt_chosen_smbios, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++
++/* test fdtdec_get_alias_seq() and fdtdec_get_alias_highest_id() */
++static int dm_test_fdtdec_alias_seq(struct unit_test_state *uts)
++{
++	const void *blob = gd->fdt_blob;
++	int seq;
++
++	ut_assertok(fdtdec_get_alias_seq(blob, "testfdt",
++					 fdt_path_offset(blob,
++							 "/some-bus/c-test@1"),
++					 &seq));
++	ut_asserteq(12, seq);
++	ut_assertok(fdtdec_get_alias_seq(blob, "testbus",
++					 fdt_path_offset(blob, "/some-bus"),
++					 &seq));
++	ut_asserteq(3, seq);
++
++	/* the stem must be followed by the number: testbus3 is no "test" */
++	ut_asserteq(-ENOENT,
++		    fdtdec_get_alias_seq(blob, "test",
++					 fdt_path_offset(blob, "/some-bus"),
++					 &seq));
++	ut_asserteq(-ENOENT,
++		    fdtdec_get_alias_seq(blob, "spi",
++					 fdt_path_offset(blob, "/i2c@0"),
++					 &seq));
++
++	ut_asserteq(12, fdtdec_get_alias_highest_id(blob, "testfdt"));
++	ut_asserteq(3, fdtdec_get_alias_highest_id(blob, "testbus"));
++	ut_asserteq(-1, fdtdec_get_alias_highest_id(blob, "test"));
++
++	return 0;
++}
++DM_TEST(dm_test_fdtdec_alias_seq, UTF_SCAN_PDATA | UTF_SCAN_FDT);
 -- 
 2.55.0
 
