@@ -2,176 +2,147 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABD13606A31B
-	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 18:40:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F4DB606A31D
+	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 18:52:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=tvBboOua;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=m7BwpgTu
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=LW1sCeI5;
+	dkim=pass (2048-bit key, unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=VZANIjnE
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 74F5A8121F;
-	Thu, 22 Oct 2026 18:40:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 725A781199;
+	Thu, 22 Oct 2026 18:52:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NKHQs6TUcJVA; Thu, 22 Oct 2026 18:40:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 50E84811F3
+ id xgOQ81otxJjN; Thu, 22 Oct 2026 18:52:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 95BC381175
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792694434;
-	b=beainfcyoKRsauPm6cDevcgAxCHkwGik9gHCg4SoCIM1BvJ+cv4JmSqpCCn0iQow02Kj
-	 ra/2IwP3KgCg50f5vBTHsFP2qldGjPHd74w1loYBeVybieKOKqzTkxbIprqs29XiTxuGz
-	 kfRsK/+8FUES9PkR8ocf136N5QEN1QhUhGrG6HfpVAr4FR6FN4wRSbWQXNvCBh7iN5PlW
-	 U7xpzkhND2nurhFCqD3rn5tKKmAYFiJe/u9S4OeTk/yKX7XWNuDKw8Xjnl5IRe7JKLvmV
-	 gdZL+x189vCzxg3xjwP1RtL9yJ63SzHiE8bRcntWCnjfhqA56u/ZLLLCakiga2SSIRw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792695135;
+	b=h8mQsbp5XmpUwGZfDkzDqde9OPO2nUo9r0zG9rs0YChIb59Ug2vXzNudqtiJ3/Yj38IX
+	 72Dt0aMMoItJvXXheSY4IIPGmVE0wSSdz20xPDBSNrcXLLsiOhHvHWFJe1zenm1lZwKt3
+	 BOc1TjRIkwBNZXtbr1mcm32bXbBzfsxACEcuPIt+UuSQSVj3qmAMEQqW/Hke0Dl3YhksD
+	 8MkPMOHUiPjhnZ+8w10mYO+w3xBKY7ukfuQowf8hreFLevXiwzlXUN4TdGEM5F3N4fYHk
+	 Z0SrRRjDnNvCkwsMSdbcmk5K+u/C7Mc2yolNs6FVCo7avhSgF2tLm3eubEYrNIMdsYg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792694434;
+	c=relaxed/relaxed; t=1792695135;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Message-ID:Date:MIME-Version:User-Agent:From:
-	 Subject:To:Cc:References:Content-Language:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=BuWdhy1jsc0HW4TV482GO3U/mHQSdFTcQDmPVTW44tM=;
-	b=ljVp8uBcrCOIKqCo0UcEw7dJ8Rzd/1LRsorDoD7ot2Tn1TzRk5m0MzRbWpMEJooC+z1Q
-	 n6SPGMNzbZznY/lsJld5XDjhw6k9dxZEHdOD5UjcjO5rUfTrdY3oAHyijQLgkQnk9COy2
-	 DxL4czv5XJ5RQvCompsoW2MJsR8DdSqUAaV+OVABLTycTApKhEDwCCCOwDtVGT564pvX1
-	 1o6rW8epwjrg5hVwD9N3RQpIghYUv+gi67Q3Wk+04Ca/absSjpUg3hgFRD3tUVZsFEZHt
-	 ++Thksyyssn7Ui2QYARRvPOTo/wGD5KpugUxFWWwCjBDC39qd443oNYkbXN8yckofiw==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
+	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
+	 X-Report-Abuse:X-Report-Abuse-To:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=J1XK8RYGRkS/TozIwIjeshjPHiBwW6ImYvU1LN0NQLg=;
+	b=rYpLi81coZ21lVZ8JR44EjrO8xKaDrS3uMnotwQNyeUwKy6f7NkCvx/hLXAHvnWeLQW8
+	 4XEbUfmDYvZksfekLUm1IdVFjCjGgu2cV6USVbTFgfUO6nQR0/jHztZBCWLdxJNELcYN3
+	 e49Gpl5e2uys9SUUpMJxvq/XPc3m3FFUuYsq9HD7519uxbWioj5tW3rV4z0T8nKOo5MLw
+	 l/sBsQXZ9nT+QR2JCnmKxauCKACHf+V0+SZvugFSURfuxUlsYITK0rZ1JZg/k9VZ0IInR
+	 oTMn925T3hTjJW1MLAcjQlro5CCihy/IoIAtG0XC2koRNeNuDaPLZn7LIHs2dC/BTFg==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=m7BwpgTu;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792694434;
-	bh=BuWdhy1jsc0HW4TV482GO3U/mHQSdFTcQDmPVTW44tM=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1792695135;
+	bh=J1XK8RYGRkS/TozIwIjeshjPHiBwW6ImYvU1LN0NQLg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=tvBboOuazVdWHxmRy7ojOFqL+Dle+UGKR+j2/+X86hIBq5yu5ERd2SGadJ06E7dv+
-	 nn7kDnpM6Sg+7N1jrH+zJQZI2V7UEyGqpoAzxuWOdcU4/LOJikuXakksyIVfjwuZsf
-	 7hcIbbdg/U88y4wnqRXnuO+pB+IFXKeqGrKSIoJeCCBfFVuvELNaP9lN2bjPWhRCtL
-	 VMRFlDagTYPQTCncAu6E50T3q0HMakcdUMlRezsH5ssu7lEd9HuCZwR5vBoQLc6Sal
-	 iTsxmA3Qdz2NBEUmk0cVYIILcJLM7LssvHl5ZvbgKtC7icp4sluLjF9EinCom5aRdK
-	 RyAIsWev8K8FA==
+	b=LW1sCeI5QOg2xniNTIMpLmSxLttCZSTFo3SjElZCRyVTU4p+cuzp7v9aaVczLweNO
+	 2ksQUd0ZI8Y1glorVK6J6q9GaytyHLHoNwOsiKkcqhECta3mwLIHeOISCcp+QEASn+
+	 NZjQqKmWC9hvvunsYulGkQ4oFqvuE+vMaXKYIgAzZHy7qXtN131IJLcazkpTYezybP
+	 UEBOsbwB7vEtFjzacXWSo5jPfW7rwVbpnf/MOAnW/txplTTe2wsGPgO5SeV2fM/Bdt
+	 7F+BezQjCa6Nyp4Z+eBYywTv17iSxPOHKJMZ5cQ+WvgkJpa2brU5vZj56drQ7UEqHj
+	 cE8VXp751K4lw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 50E84811F3;
-	Thu, 22 Oct 2026 18:40:34 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 7EEA43C1
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 18:40:18 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 95BC381175;
+	Thu, 22 Oct 2026 18:52:15 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1A69E3C1
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 18:52:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6D84981217
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 18:40:18 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0C2724097B
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 18:52:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mJiM_v7AOOHX for <u-boot@lists.u-boot-project.org>;
- Thu, 22 Oct 2026 18:40:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org F05F9810F5
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42d"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792694417;
- b=kmrCN1FNfD+BSzEAr682P1BxSvtDqWv+LVOEAIEJM0rJOm7zAgG09liqJiw1G+NVcQa2
- OeGH27NCRnKEhVgwV2aSDPqAzagBMnngbxJDK6IFgIxhw+DgolA8JzVddarmOyAqKD1kw
- XDivEe9Fwxm5/vvzfnacR9xG6lyvgO5owhGsipY/YhGCHdbWEAu5swofHw9g6kLicm5Qo
- XuYc/lBYRq8AHlrSxTxXxbKh6kh7ALFGjychCXpDlP2/X92IpELm5PdwUPnZnSShyhrJj
- T7z1pNpXnbCYkTFBdNBijayAbx0Lp8FojSSaPHy68gZGPqIVmllDj1RLlY3lFUPxYIw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XPZotorNUwXu for <u-boot@lists.u-boot-project.org>;
+ Thu, 22 Oct 2026 18:52:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 46BD340979
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=121.127.44.73
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792695134;
+ b=ayK4iHfgXHNlNQ3GovmHxpsKFA/dLSg+ULAq/+SDoAfo4Do4v2KkashkzdYqnr0V0jVX
+ bVZNOuPmNuc8ztEbE6u5ungr7hiUjzvw3D56jHdaArwQEEz2vFaV6IqmDq1hQ94sIxH7b
+ zTVLdvx0VyIgPf6oUeaeu4XB2HUSY961Ujm01V/9d/ezld0NLDM2+xmkrD+x1wFPfdT+l
+ airBcsKN0hHkN4E3htL+MDcJvMVKN0wr5EMXtcSuf4IBJrdVMams4GBsYPGinXXK016dm
+ CHMrqADdBKvUQHuajv/mu0+OJfGrmYxpBy6Usk1kKjkVYOpnPoPrpOUwuQSlNxkf22w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792694417;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
- MIME-Version:User-Agent:From:Subject:To:Cc:References:
- Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
- bh=BuWdhy1jsc0HW4TV482GO3U/mHQSdFTcQDmPVTW44tM=;
- b=hlGfuttTlIAt6ciH4nPCz0Mf/BO9HTwTUXrRAfwTb/zAWSRAlQNsFY2GvEfHD8v9bzXi
- SyIxfum3I7ZxEVQi64rqVwC7OxkcItyivtvujNKdN/xGNJbxyFuGMHv7nJdQBrtJnEdYs
- kWa68mUjJQ4xeIxF0/UpZULL4cML91C1E0El5dFC5eyvwIyLp/IHhjjvaudtzYl+Qy3RC
- QQJjcTMX4J6zzZ63uH5JJQVv94xrmq4gwx9EnZ9tq6dr+UPOwuRvvd8sW2hyRj9hIdnDS
- th4q9T5ryNkrHHlvHiwGugzHIdhAqCHSWcs+Wx3y2doRm7qf1RWIuFWImYmBCdsw4iw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=m7BwpgTu; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::42d"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42d; helo=mail-wr1-x42d.google.com;
- envelope-from=anon87111@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=m7BwpgTu
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- by smtp1.osuosl.org (Postfix) with ESMTPS id F05F9810F5
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 18:40:16 +0000 (UTC)
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-48e0d885929so67526f8f.3
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 11:40:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792694415; x=1793299215;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :references:cc:to:subject:from:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=BuWdhy1jsc0HW4TV482GO3U/mHQSdFTcQDmPVTW44tM=;
- b=m7BwpgTukODO7syVQwvaDT9EtPQ/ve6S5oKbiiG3WOanChI11zmTKQFeuoYudmmXXl
- g9w2/WG3ka7PGpbldPsHs9rSeJWNm8hOnt7sZt5gq0V9ccsMLW6cABhhsN/7mX7+gWV7
- QEL1A1ErKD80RbL7RoXfzZLt1wkivFb9LDhR8KWH6GiUETYtfzWWUbAjKmwbk1DiuJKa
- PCdNHoD9wBIm/Z2HLYSXjW2wPm4Ss4rA79fq3cnKADiYx1awmT2SWiaC9pq3IxMsxHEO
- qHcuoffHgBVEXcCwfdowPnS4rfej9EnvSa1AZyzttTgKAHWKKX5iMt5lRI+W8nesxTbk
- Qy+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792694415; x=1793299215;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :references:cc:to:subject:from:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=BuWdhy1jsc0HW4TV482GO3U/mHQSdFTcQDmPVTW44tM=;
- b=D+3sz3Tu+eFVSR1afiSm7wtmpG4AoRWp8I3QIPZm8tSTy4bB1sUaO4DC01eCgDCV0i
- 9H88C656YPb2+QA1pA+5QkmCRcTFRMhnWllCoPgsQf81joKD2PFWmDLapxxkCAz0ClpI
- SYJHwt6YOD7+X6xsI8MgqfvODVA3I24CagprcEPKVuFzP+/jEleRYgNHuHmw5GrPgTG9
- 1OaHWGbVJ08xco8pTIe6y8Na4YY0Fr8DLzlYKG00P+WJapD7OpL3L40prMNXvyXrc4fk
- Z3nWfLw/+qjGWAfl0PhnE2sFVvrCjEtCKgNtijX6OV8tt4J/VH4EQgQ/WSKmsUyBlSc0
- UFoQ==
-X-Gm-Message-State: AFq9FYIrPYY6BfCyMaxb8VHfRFrjidYxg+R6zKUNSorkA8DEs9tG2LSa
- DtSd9FUUvTydCfglJ7QX55WIDkfWe62BWTosuQOj2H0GlCCKs+AYZYAxSIk9/ii4
-X-Gm-Gg: AYBFou38rOF13sqn6QP0m3VNCKlEHhJsdq+Hq0O6yhKupKG5eKvMLnEvS6KiybXYKcj
- DamNWz6ePsFgkiFsnLr+/Q0Ub+42diDKCWA4Now6rme7eijLVkbgPW190HH4UiJ+lNYNo5y8Qty
- qaBymVVFGtFHAiZxRpf8UVnh/lW+xUom03IusGF8RLJkqITZGBYRH85D6lt8JGleJJ9TwRK6I1V
- WimXTk45yebNtGTfwJkiYgcGLWtK6kYr4IZzNPvXdHWpNfvWxO8Ex4tcDcCs5JTmeBQ6TS2fmk0
- flWtnILwfE0D2m4XwICILXk0txTbh4Kku/OvWOwipU2iHivuw/K2JqUrA1XwqPuGoTi7AOVRWkN
- 35TnMhSa9wmPmUyk4FU3rQinsGXlpfGZNX9emOluz7V+bqMvEJ1nYcw4XVfrXS/2DcMAOS/YNFs
- +mGs9q6V0J2ufHpRRSPClhXjiFTK3EvDaL0FJSBFnZYYGYZfylpyUvBp+Xxe/SWa9UjmQPEXZTk
- CAYIowZ03UCMGAmjeLotDlyuLarbhJ7/Hm3dTPS9PWIjbuEStKMPi1zPXWqq+poyMq3asGLrQAV
- pS3OCmkqiVWG6IKcxqTcZ8THx2M=
-X-Received: by 2002:a05:6000:481b:b0:48e:37e:470f with SMTP id
- ffacd0b85a97d-48e264e6054mr11946210f8f.51.1792694414602; 
- Thu, 22 Oct 2026 11:40:14 -0700 (PDT)
-Received: from ?IPV6:2001:7e8:c647:4001:7656:3cff:fedb:3af7?
- ([2001:7e8:c647:4001:7656:3cff:fedb:3af7])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e37a0f66dsm67644f8f.53.2026.10.22.11.40.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 22 Oct 2026 11:40:12 -0700 (PDT)
-Message-ID: <b710a08f-e050-4543-8c5c-291d73d56050@gmail.com>
-Date: Thu, 22 Oct 2026 20:40:12 +0200
+ c=relaxed/relaxed; t=1792695134;
+ h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
+ X-Forward-Email-Sender:X-Forward-Email-Version:
+ X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
+ X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
+ Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding;
+ bh=J1XK8RYGRkS/TozIwIjeshjPHiBwW6ImYvU1LN0NQLg=;
+ b=Lenr152smBiS333wN8i3WTt9LCRzltMZTKSYsAQkPhqm1056DdUqIb0/eCMZTk7OXtlM
+ cTB2mkfURHbMOCOiIitFRyUxEjgrkndM6Dwy18hvz4DiH1fmCseiXzuwpWMD5jXuu8T2q
+ L2WcpdIQacW4AR+4RL5eCaxo8LqGB/zvc6tlKKyR0mYVrzNka8mVHN/qj5Toy1AAYPeee
+ HVgnU9r9Cf/HEGXwQF0RIX28ihTCP2UFuMtNoGw1n33C2MGNPih7LKOLlMCutZp7NzCbp
+ VFBtdU32q19SVcutnrqCG4RjUDbfCHYdOg+iBBEOPnqDCE3Zq2W0gs1QoNg5OhppWxw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=kwiboo.se;
+ dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=VZANIjnE; 
+ arc=none smtp.remote-ip=121.127.44.73
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.73;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=107d=in=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=VZANIjnE
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 46BD340979
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 18:52:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1792695131;
+ bh=J1XK8RYGRkS/TozIwIjeshjPHiBwW6ImYvU1LN0NQLg=;
+ b=VZANIjnEDotVdiQwXRP8UpA6GuVnW4CL4vAhxg4r4U6K4naxY0hbIkHrPbTONsQkUNOlWbhK3
+ fhOQXKN0O93sN4S/BcMp5kmjnRGjuN4iQ1YBJNDYjIFUYGsb+Pjl4DSOEXECq4Z0SIfqMCzxxsd
+ 6r/HuEtueR5JIuCrF4CLf17ujsrSYnP+sqP6OXYX9AfewqPOR1OSAFb8IiUNNV2T4TfEefObbd1
+ 4T1f7qJ29mnEW6+D+IM3HhrKIalxX0Afa9bEeR/UONEwkmqKpnFBXWGKmo/xUFop4VooWSOq0W5
+ eOep7HPC9Sz55Lci5Xx26UhnYpulAF4U34xT45HCk22g==
+X-Forward-Email-ID: 6ada5b58f18cf83ae426d33f
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.18.9
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <7a9ef465-4cb3-4bf3-b0be-e5403165cc31@kwiboo.se>
+Date: Thu, 22 Oct 2026 20:52:05 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: anon87111 <anon87111@gmail.com>
-Subject: [PATCH v3 3/3] test: vboot: cover required image keys
-To: u-boot@lists.u-boot-project.org
-Cc: trini@konsulko.com, sjg@chromium.org, 0xiviel@gmail.com, me@ziyao.cc
-References: <20261022180000.1792693930-0-anon87111@gmail.com>
+Subject: Re: [PATCH] rockchip: ram: Fix LPDDR5X size decoding
+To: 1579567540@qq.com
+Cc: Quentin Schulz <u-boot@0leil.net>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Kever Yang <kever.yang@rock-chips.com>,
+ Anshul Dalal <anshuld@ti.com>, u-boot@lists.u-boot-project.org
+References: <20261019-lpddr5x-size-fix-v1-1-3688217baaa2@qq.com>
 Content-Language: en-US
-In-Reply-To: <20261022180000.1792693930-0-anon87111@gmail.com>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20261019-lpddr5x-size-fix-v1-1-3688217baaa2@qq.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Thu, 22 Oct 2026 18:40:31 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -181,213 +152,128 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add a test for two keys marked required = "image" where the FIT carries a
-signature from only one of them. Without the binding fix the single
-signature satisfies both required keys and the image boots.
+Hi Cunhao,
 
-The default policy refuses it, required-mode "any" accepts it, and
-required-mode "all" refuses it again.
+On 10/19/2026 9:31 AM, Cunhao Lu via B4 Relay wrote:
+> From: Cunhao Lu <1579567540@qq.com>
+> 
+> The shared SDRAM decoder treats type 10 as DDR5 and uses the wrong
+> bank count for LPDDR5X. On the 4 GiB OK3572-C, register values
+> 0x100043c1 and 0x30001001 therefore produce a size of 1 GiB.
+> 
+> Define LPDDR5X as type 10 and DDR5 as type 11. Apply the existing
+> LPDDR5 bank decoding to LPDDR5X so the same register values yield
+> 4 GiB. The type values match include/soc/rockchip/rockchip_grf.h in
+> the kernel-6.12 sources of Forlinx OK3572-C BSP Alpha1.
+> 
+> Signed-off-by: Cunhao Lu <1579567540@qq.com>
+> ---
+> This patch fixes LPDDR5X capacity decoding in Rockchip's shared SDRAM
+> decoder.
+> 
+> The geometry registers captured on a Forlinx OK3572-C with 4 GiB of
+> LPDDR5X are 0x100043c1 and 0x30001001. The current decoder labels type
+> 10 as DDR5 and uses the generic bank calculation. With the bank bit
+> set, it assumes four banks instead of 16 and reports only 1 GiB.
+> 
+> Define LPDDR5X as type 10 and DDR5 as type 11, following the Rockchip
+> type definitions in Forlinx OK3572-C BSP Alpha1. Use the existing
+> LPDDR5 bank calculation for LPDDR5X so the captured register values
+> decode to the correct 4 GiB capacity.
+> 
+> The fix applies to mainline independently of the RK3572 SoC and board
+> support.
+> 
+> Host-side validation of the decoder with the captured register values
+> reproduced 1 GiB before the fix and returned 4 GiB after it. Regression
+> checks for eight other memory type codes produced the same results
+> before and after the fix, with no UBSan errors.
+> ---
+>  arch/arm/include/asm/arch-rockchip/sdram.h | 3 ++-
+>  arch/arm/mach-rockchip/sdram.c             | 4 ++--
+>  2 files changed, 4 insertions(+), 3 deletions(-)
+> 
+> diff --git a/arch/arm/include/asm/arch-rockchip/sdram.h b/arch/arm/include/asm/arch-rockchip/sdram.h
+> index 476fc1c4e..f5a213fde 100644
+> --- a/arch/arm/include/asm/arch-rockchip/sdram.h
+> +++ b/arch/arm/include/asm/arch-rockchip/sdram.h
+> @@ -14,7 +14,8 @@ enum {
+>  	LPDDR4 = 7,
+>  	LPDDR4X = 8,
+>  	LPDDR5 = 9,
+> -	DDR5 = 10,
+> +	LPDDR5X = 10,
+> +	DDR5 = 11,
 
-All nine in tree sign-images-*.its hint "dev", and mkimage -g does not
-redirect a hint the node already carries, so a prod hinted fixture is
-needed to get two keys marked required on the image gate.
-sign-images-sha256-rsa2048-prod.its is the in tree
-sign-images-sha256-rsa2048.its with its two key-name-hint values changed.
+We should probably just drop the DDR5 symbol, and could possible also
+add a DDR2 symbol. DRAM init blobs likely use something like following:
 
-Signed-off-by: anon87111 <anon87111@gmail.com>
----
- test/py/tests/test_vboot.py                   | 98 ++++++++++++++-----
- .../vboot/sign-images-sha256-rsa2048-prod.its | 42 ++++++++
- 2 files changed, 117 insertions(+), 23 deletions(-)
- create mode 100644 test/py/tests/vboot/sign-images-sha256-rsa2048-prod.its
+	switch (dram_type) {
+	case 0:
+		return "DDR4";
+	case 2:
+		return "DDR2";
+	case 3:
+		return "DDR3";
+	case 5:
+		return "LPDDR2";
+	case 6:
+		return "LPDDR3";
+	case 7:
+		return "LPDDR4";
+	case 8:
+		return "LPDDR4X";
+	case 9:
+		return "LPDDR5";
+	case 10:
+		return "LPDDR5X";
+	default:
+		return "Unknown Device";
+	}
 
-diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
-index d02fa5b16f..db488159ca 100644
---- a/test/py/tests/test_vboot.py
-+++ b/test/py/tests/test_vboot.py
-@@ -84,27 +84,28 @@ def make_fit(its, ubman, mkimage, dtc_args, datadir, fit):
- # Only run the full suite on a few combinations, since it doesn't add any more
- # test coverage.
- TESTDATA_IN = [
--    ['sha1-basic', 'sha1', '-rsa2048', '', None, False, True, False, False],
--    ['sha1-pad', 'sha1', '-rsa2048', '', '-E -p 0x10000', False, False, False, False],
--    ['sha1-pss', 'sha1', '-rsa2048', '-pss', None, False, False, False, False],
--    ['sha1-pss-pad', 'sha1', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False],
--    ['sha256-basic', 'sha256', '-rsa2048', '', None, False, False, False, False],
--    ['sha256-pad', 'sha256', '-rsa2048', '', '-E -p 0x10000', False, False, False, False],
--    ['sha256-pss', 'sha256', '-rsa2048', '-pss', None, False, False, False, False],
--    ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False],
--    ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, True, False, False, False],
--    ['sha256-pss-pad-required', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', True, True, False, False],
--    ['sha256-basic-ecdsa256', 'sha256', '-ecdsa256', '', None, False, False, False, False],
--    ['sha256-basic-ecdsa384', 'sha256', '-ecdsa384', '', None, False, False, False, False],
--    ['sha256-basic-ecdsa521', 'sha256', '-ecdsa521', '', None, False, False, False, False],
--    ['sha384-basic', 'sha384', '-rsa3072', '', None, False, False, False, False],
--    ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False, False, False, False],
--    ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', False, False, True, False],
--    ['sha256-global-sign', 'sha256', '-rsa2048', '', '', False, False, False, True],
--    ['sha256-global-sign-pss', 'sha256', '-rsa2048', '-pss', '', False, False, False, True],
--    ['sha256-global-sign-ecdsa256', 'sha256', '-ecdsa256', '', '', False, False, False, True],
--    ['sha256-global-sign-ecdsa384', 'sha256', '-ecdsa384', '', '', False, False, False, True],
--    ['sha256-global-sign-ecdsa521', 'sha256', '-ecdsa521', '', '', False, False, False, True],
-+    ['sha1-basic', 'sha1', '-rsa2048', '', None, False, True, False, False, False],
-+    ['sha1-pad', 'sha1', '-rsa2048', '', '-E -p 0x10000', False, False, False, False, False],
-+    ['sha1-pss', 'sha1', '-rsa2048', '-pss', None, False, False, False, False, False],
-+    ['sha1-pss-pad', 'sha1', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False, False],
-+    ['sha256-basic', 'sha256', '-rsa2048', '', None, False, False, False, False, False],
-+    ['sha256-pad', 'sha256', '-rsa2048', '', '-E -p 0x10000', False, False, False, False, False],
-+    ['sha256-pss', 'sha256', '-rsa2048', '-pss', None, False, False, False, False, False],
-+    ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False, False],
-+    ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, True, False, False, False, False],
-+    ['sha256-pss-pad-required', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', True, True, False, False, False],
-+    ['sha256-basic-ecdsa256', 'sha256', '-ecdsa256', '', None, False, False, False, False, False],
-+    ['sha256-basic-ecdsa384', 'sha256', '-ecdsa384', '', None, False, False, False, False, False],
-+    ['sha256-basic-ecdsa521', 'sha256', '-ecdsa521', '', None, False, False, False, False, False],
-+    ['sha384-basic', 'sha384', '-rsa3072', '', None, False, False, False, False, False],
-+    ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False, False, False, False, False],
-+    ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', False, False, True, False, False],
-+    ['sha256-global-sign', 'sha256', '-rsa2048', '', '', False, False, False, True, False],
-+    ['sha256-global-sign-pss', 'sha256', '-rsa2048', '-pss', '', False, False, False, True, False],
-+    ['sha256-global-sign-ecdsa256', 'sha256', '-ecdsa256', '', '', False, False, False, True, False],
-+    ['sha256-global-sign-ecdsa384', 'sha256', '-ecdsa384', '', '', False, False, False, True, False],
-+    ['sha256-global-sign-ecdsa521', 'sha256', '-ecdsa521', '', '', False, False, False, True, False],
-+    ['sha256-required-image', 'sha256', '-rsa2048', '', None, False, False, False, False, True],
- ]
- 
- # Mark all but the first test as slow, so they are not run with '-k not slow'
-@@ -117,10 +118,10 @@ TESTDATA += [pytest.param(*v, marks=pytest.mark.slow) for v in TESTDATA_IN[1:]]
- @pytest.mark.requiredtool('fdtget')
- @pytest.mark.requiredtool('fdtput')
- @pytest.mark.requiredtool('openssl')
--@pytest.mark.parametrize("name,sha_algo,sig_algo,padding,sign_options,required,full_test,algo_arg,global_sign",
-+@pytest.mark.parametrize("name,sha_algo,sig_algo,padding,sign_options,required,full_test,algo_arg,global_sign,required_image",
-                          TESTDATA)
- def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
--               full_test, algo_arg, global_sign):
-+               full_test, algo_arg, global_sign, required_image):
-     """Test verified boot signing with mkimage and verification with 'bootm'.
- 
-     This works using sandbox only as it needs to update the device tree used
-@@ -477,6 +478,55 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
-                   'Bad Data Hash', False)
-         ubman.log.action('%s: Check in-bounds hashed-strings size' % sha_algo)
- 
-+    def test_required_image_key(sha_algo, sig_algo, padding, sign_options):
-+        """Test that a required image key must verify its own signature.
-+
-+        Two keys are marked required = "image" and the FIT carries a signature
-+        from only one of them. Under the default policy the image must be
-+        refused. Under required-mode "any" it must boot.
-+
-+        Args:
-+            sha_algo: Either 'sha1' or 'sha256', to select the algorithm to use
-+            sig_algo: Signature algorithm to use, e.g. '-rsa2048'.
-+            padding: Either '' or '-pss', to select the padding to use for the
-+                    rsa signature algorithm.
-+            sign_options: Options to mkimage when signing a fit image.
-+        """
-+        # Compile our device tree files for kernel and U-Boot. These are
-+        # regenerated here since mkimage will modify them (by adding a
-+        # public key) below.
-+        dtc('sandbox-kernel.dts', ubman, dtc_args, datadir, tmpdir, dtb)
-+        dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
-+
-+        ubman.log.action('%s: Test FIT with required images' % sha_algo)
-+
-+        # Sign the images with the prod key and mark it required. This puts the
-+        # prod public key into sandbox-u-boot.dtb marked required = "image".
-+        make_fit('sign-images-%s%s%s-prod.its' % (sha_algo, sig_algo, padding),
-+                 ubman, mkimage, dtc_args, datadir, fit)
-+        sign_fit(sha_algo, sign_options)
-+
-+        # Sign the images with the dev key and mark it required too. This adds
-+        # the dev key to the control dtb and overwrites the FIT, which now
-+        # carries a dev signature only.
-+        make_fit('sign-images-%s%s%s.its' % (sha_algo, sig_algo, padding),
-+                 ubman, mkimage, dtc_args, datadir, fit)
-+        sign_fit(sha_algo, sign_options)
-+
-+        # Both keys are now marked required = "image" and the FIT has no prod
-+        # signature. The default policy is "all", so this must be refused.
-+        run_bootm(sha_algo, 'required image key', '', False)
-+
-+        # With required-mode "any" the dev signature alone is enough.
-+        utils.run_and_log(ubman, 'fdtput -t s %s /signature required-mode any' %
-+                          dtb)
-+        run_bootm(sha_algo, 'required image key any', 'dev+', True)
-+
-+        # Back to "all" and the missing prod signature must fail again.
-+        utils.run_and_log(ubman, 'fdtput -t s %s /signature required-mode all' %
-+                          dtb)
-+        run_bootm(sha_algo, 'required image key all', '', False)
-+
-     def test_required_key(sha_algo, sig_algo, padding, sign_options):
-         """Test verified boot with the given hash algorithm.
- 
-@@ -619,6 +669,8 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
-         ubman.config.dtb = dtb
-         if global_sign:
-             test_global_sign(sha_algo, sig_algo, padding, sign_options)
-+        elif required_image:
-+            test_required_image_key(sha_algo, sig_algo, padding, sign_options)
-         elif required:
-             test_required_key(sha_algo, sig_algo, padding, sign_options)
-         else:
-diff --git a/test/py/tests/vboot/sign-images-sha256-rsa2048-prod.its b/test/py/tests/vboot/sign-images-sha256-rsa2048-prod.its
-new file mode 100644
-index 0000000000..58e3232de5
---- /dev/null
-+++ b/test/py/tests/vboot/sign-images-sha256-rsa2048-prod.its
-@@ -0,0 +1,42 @@
-+/dts-v1/;
-+
-+/ {
-+	description = "Chrome OS kernel image with one or more FDT blobs";
-+	#address-cells = <1>;
-+
-+	images {
-+		kernel {
-+			data = /incbin/("test-kernel.bin");
-+			type = "kernel_noload";
-+			arch = "sandbox";
-+			os = "linux";
-+			compression = "none";
-+			load = <0x4>;
-+			entry = <0x8>;
-+			kernel-version = <1>;
-+			signature {
-+				algo = "sha256,rsa2048";
-+				key-name-hint = "prod";
-+			};
-+		};
-+		fdt-1 {
-+			description = "snow";
-+			data = /incbin/("sandbox-kernel.dtb");
-+			type = "flat_dt";
-+			arch = "sandbox";
-+			compression = "none";
-+			fdt-version = <1>;
-+			signature {
-+				algo = "sha256,rsa2048";
-+				key-name-hint = "prod";
-+			};
-+		};
-+	};
-+	configurations {
-+		default = "conf-1";
-+		conf-1 {
-+			kernel = "kernel";
-+			fdt = "fdt-1";
-+		};
-+	};
-+};
--- 
-2.53.0
+>  	UNUSED = 0xFF
+>  };
+>  
+> diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
+> index 2e404df1b..b58919137 100644
+> --- a/arch/arm/mach-rockchip/sdram.c
+> +++ b/arch/arm/mach-rockchip/sdram.c
+> @@ -403,8 +403,8 @@ size_t rockchip_sdram_size(phys_addr_t reg)
+>  		cs0_col = 9 + (sys_reg2 >> SYS_REG_COL_SHIFT(ch) &
+>  			  SYS_REG_COL_MASK);
+>  		cs1_col = cs0_col;
+> -		if (dram_type == LPDDR5)
+> -			/* LPDDR5: 0:8bank(bk=3), 1:16bank(bk=4) */
+> +		if (dram_type == LPDDR5 || dram_type == LPDDR5X)
+> +			/* LPDDR5/LPDDR5X: 0:8bank(bk=3), 1:16bank(bk=4) */
+
+This seem to be correct and fixes size detection on my OK3572-C board
+when the dram info from rk atags are ignored.
+
+With the DDR5 symbol dropped this is,
+
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+
+Regards,
+Jonas
+
+>  			bk = 3 + ((sys_reg2 >> SYS_REG_BK_SHIFT(ch)) &
+>  			SYS_REG_BK_MASK);
+>  		else
+> 
+> ---
+> base-commit: 8d534cec0cc0109a37c0ded8854da03f1526dc0e
+> change-id: 20261019-lpddr5x-size-fix-fbe1c1a168de
+> 
+> Best regards,
+> --  
+> Cunhao Lu <1579567540@qq.com>
+
