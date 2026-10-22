@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0019606A31B
-	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 18:40:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABD13606A31B
+	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 18:40:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ZcL9uVhf;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=jUgGCODP
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=tvBboOua;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=m7BwpgTu
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 21D408124D;
-	Thu, 22 Oct 2026 18:40:18 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 74F5A8121F;
+	Thu, 22 Oct 2026 18:40:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mNwD0l7t_MbX; Thu, 22 Oct 2026 18:40:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3E9D981217
+ id NKHQs6TUcJVA; Thu, 22 Oct 2026 18:40:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 50E84811F3
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792694417;
-	b=qUGrm5Cbdr24SVhfyLv9+YfWWgFdDCb4W8Iq9EH/KLF4r4NFq+ZeUyjjjxHSQEITpe1G
-	 ZpLlYwbEKZK44TWIpDxe09tLDVe95IQCIR8uvpfMapHVIVdJ//s5J4jDsLKdtDp8XE0XE
-	 4S2hIyyZlLUgg7BSoA1yM1M0+I1zx88uKBHDDCnjgbYdi8V1PGIrnu9tZydkoF1TlsFww
-	 v1nZX55mja27m9cBY/f/l/jTOqzqX04BmA+W7pPoNloEmKqxAX3RY0V8uNp9Jv8ZdUSDq
-	 LtAYY/bUh6DL/J69XGK1M9W7X+jMnPDec46USLDfQLBWhOoo/bXfOdJeF6iF/RrKzrw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792694434;
+	b=beainfcyoKRsauPm6cDevcgAxCHkwGik9gHCg4SoCIM1BvJ+cv4JmSqpCCn0iQow02Kj
+	 ra/2IwP3KgCg50f5vBTHsFP2qldGjPHd74w1loYBeVybieKOKqzTkxbIprqs29XiTxuGz
+	 kfRsK/+8FUES9PkR8ocf136N5QEN1QhUhGrG6HfpVAr4FR6FN4wRSbWQXNvCBh7iN5PlW
+	 U7xpzkhND2nurhFCqD3rn5tKKmAYFiJe/u9S4OeTk/yKX7XWNuDKw8Xjnl5IRe7JKLvmV
+	 gdZL+x189vCzxg3xjwP1RtL9yJ63SzHiE8bRcntWCnjfhqA56u/ZLLLCakiga2SSIRw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792694417;
+	c=relaxed/relaxed; t=1792694434;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,137 +33,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=gJ+QtWYb/3xoQqUhhl9OhQDlcv1qF3l9T14JBOUGm5Y=;
-	b=k2OzNYITIHfUiGQ84x+6UzyZQw9nvIIFfu9MZBxTPI8Zpvi4hAEBDH01/ZxBiUvuqjQP
-	 w2EyfOgkGe18uETs1plwfbek8bs9mLHqoM0cK5owogvPgExyZcA1/kTACsM0hzKyxXT//
-	 kTBFaVAeZkLkOpz2Ucb4ZfnmfJLaKVLOIGODYD7vkXx0me5Lui+0LyzWR1YTTA4hsyxNt
-	 y+/J/iCEsiQZpoRshugJEtJXm1m8/eI9i8LA0in0mVcofRVTBC8wvSX67hzcpAyAuu4ui
-	 h1DYj5lqNqpUeY3Bd06v3PqKdM4kdQtvSePgxB/BbtUeKKAhazq/XGIGjLUTm5mXI6Q==
+	bh=BuWdhy1jsc0HW4TV482GO3U/mHQSdFTcQDmPVTW44tM=;
+	b=ljVp8uBcrCOIKqCo0UcEw7dJ8Rzd/1LRsorDoD7ot2Tn1TzRk5m0MzRbWpMEJooC+z1Q
+	 n6SPGMNzbZznY/lsJld5XDjhw6k9dxZEHdOD5UjcjO5rUfTrdY3oAHyijQLgkQnk9COy2
+	 DxL4czv5XJ5RQvCompsoW2MJsR8DdSqUAaV+OVABLTycTApKhEDwCCCOwDtVGT564pvX1
+	 1o6rW8epwjrg5hVwD9N3RQpIghYUv+gi67Q3Wk+04Ca/absSjpUg3hgFRD3tUVZsFEZHt
+	 ++Thksyyssn7Ui2QYARRvPOTo/wGD5KpugUxFWWwCjBDC39qd443oNYkbXN8yckofiw==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=jUgGCODP;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=m7BwpgTu;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792694417;
-	bh=gJ+QtWYb/3xoQqUhhl9OhQDlcv1qF3l9T14JBOUGm5Y=;
+	d=lists.u-boot-project.org; s=default; t=1792694434;
+	bh=BuWdhy1jsc0HW4TV482GO3U/mHQSdFTcQDmPVTW44tM=;
 	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZcL9uVhfKXhzH+FqIAFJGm/0zowokVYbJQt5PTiUTSp7sf6cblI4E3DqUJJdYByga
-	 fjfYPIWilg1VJ2BOTjJV79rkD7QsGNS3tRsIa4goPHBFI7031yd0jLWksyqxjAS51g
-	 +g5f4HxwlLc7QtGqSCgzTfC3IDhD/kK33HEUyErUY3dxDiCqHCwWtjRb6u2Wh/9lHS
-	 oB86GGsYFWr+K4piz77nc0Qbb016/jeAJR2X7c73FY3dHicb1JFLAO9YzRIB7cX7xz
-	 ffGWp2HaFYtcETGjXaQcVTC7wyPI9yCBX27vw6DU2jR0Dfxl1VozJQgWnX1F8EDenb
-	 Em5Y3OrZRc7Jw==
+	b=tvBboOuazVdWHxmRy7ojOFqL+Dle+UGKR+j2/+X86hIBq5yu5ERd2SGadJ06E7dv+
+	 nn7kDnpM6Sg+7N1jrH+zJQZI2V7UEyGqpoAzxuWOdcU4/LOJikuXakksyIVfjwuZsf
+	 7hcIbbdg/U88y4wnqRXnuO+pB+IFXKeqGrKSIoJeCCBfFVuvELNaP9lN2bjPWhRCtL
+	 VMRFlDagTYPQTCncAu6E50T3q0HMakcdUMlRezsH5ssu7lEd9HuCZwR5vBoQLc6Sal
+	 iTsxmA3Qdz2NBEUmk0cVYIILcJLM7LssvHl5ZvbgKtC7icp4sluLjF9EinCom5aRdK
+	 RyAIsWev8K8FA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3E9D981217;
-	Thu, 22 Oct 2026 18:40:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 50E84811F3;
+	Thu, 22 Oct 2026 18:40:34 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id AD5D8356
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 18:39:46 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 7EEA43C1
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 18:40:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 664C0810F5
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 18:39:46 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6D84981217
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 18:40:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gPcUSWqqYA3A for <u-boot@lists.u-boot-project.org>;
- Thu, 22 Oct 2026 18:39:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5EEDD810F4
+ id mJiM_v7AOOHX for <u-boot@lists.u-boot-project.org>;
+ Thu, 22 Oct 2026 18:40:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org F05F9810F5
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::429"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792694385;
- b=WAHX1nlemCNQOVmjOQqS2ZU8ntZngsFPTG8D1dFEOmMcXSv6l9hndWlBkqz2piK9lj0m
- m8lMrADgq2AmJCKLVDYeqk9TJ1dAZNgXt/bcF0oPhtLdkUIJMru17QSsrdk2ppDzXYLNC
- HeK/BHFqSfaQVK/THu8gN5yJWj4cCQmRjwY2DjeIFERdPJPMMh/l6NU0aeL3jiOB7jAak
- i7GEkrcV706cNZK1TRfxvTFXCYxy9SeDjPX6+cQ0071KObf78eFkCBXsc8UWMegkiLw+u
- AA3pc14G9gOo3+Xnpt6nmxq7buT/AxyCRUDNH+CPRL4NN9iT0WWNRtzMoxtXfpn2nfQ==
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42d"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792694417;
+ b=kmrCN1FNfD+BSzEAr682P1BxSvtDqWv+LVOEAIEJM0rJOm7zAgG09liqJiw1G+NVcQa2
+ OeGH27NCRnKEhVgwV2aSDPqAzagBMnngbxJDK6IFgIxhw+DgolA8JzVddarmOyAqKD1kw
+ XDivEe9Fwxm5/vvzfnacR9xG6lyvgO5owhGsipY/YhGCHdbWEAu5swofHw9g6kLicm5Qo
+ XuYc/lBYRq8AHlrSxTxXxbKh6kh7ALFGjychCXpDlP2/X92IpELm5PdwUPnZnSShyhrJj
+ T7z1pNpXnbCYkTFBdNBijayAbx0Lp8FojSSaPHy68gZGPqIVmllDj1RLlY3lFUPxYIw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792694385;
+ c=relaxed/relaxed; t=1792694417;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
  MIME-Version:User-Agent:From:Subject:To:Cc:References:
  Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
- bh=gJ+QtWYb/3xoQqUhhl9OhQDlcv1qF3l9T14JBOUGm5Y=;
- b=ObOclBWfudU2FyFdB4nGdHFew39GK9Foj0TWjgi7z9WfE1B8E9m9MeuA0bX485D4LdT8
- XKi0jAmZ6ry/VFd3CAjLdDmT+WWBTC3GqMIchCjDH02JpQbYEVEOLBRQuXSsuqjenBcOg
- 0bxxicu2edO4COR/6RUHaNaZ/q0tq7WkiFxbYJr7yIeKVBIsc9YuhpmngCbR6a1ZjKbIK
- qbrl4NJcfCDkeRl267yeH8hlnLZcVRWkh05sxJ2qifzjZZZMeuPrNrdlbIaLMWi3lVptV
- dUjs5mPk/5pZ7HZRot26c2qoollmJL3IuuYkshM6ZIcUcyYZzUfDBvJlkrLkS48CJAA==
+ bh=BuWdhy1jsc0HW4TV482GO3U/mHQSdFTcQDmPVTW44tM=;
+ b=hlGfuttTlIAt6ciH4nPCz0Mf/BO9HTwTUXrRAfwTb/zAWSRAlQNsFY2GvEfHD8v9bzXi
+ SyIxfum3I7ZxEVQi64rqVwC7OxkcItyivtvujNKdN/xGNJbxyFuGMHv7nJdQBrtJnEdYs
+ kWa68mUjJQ4xeIxF0/UpZULL4cML91C1E0El5dFC5eyvwIyLp/IHhjjvaudtzYl+Qy3RC
+ QQJjcTMX4J6zzZ63uH5JJQVv94xrmq4gwx9EnZ9tq6dr+UPOwuRvvd8sW2hyRj9hIdnDS
+ th4q9T5ryNkrHHlvHiwGugzHIdhAqCHSWcs+Wx3y2doRm7qf1RWIuFWImYmBCdsw4iw==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=jUgGCODP; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::429"
+ header.s=20251104 header.b=m7BwpgTu; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42d"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::429; helo=mail-wr1-x429.google.com;
+ client-ip=2a00:1450:4864:20::42d; helo=mail-wr1-x42d.google.com;
  envelope-from=anon87111@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=jUgGCODP
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 5EEDD810F4
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 18:39:44 +0000 (UTC)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-48b0584ad71so88723f8f.0
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 11:39:44 -0700 (PDT)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=m7BwpgTu
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id F05F9810F5
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 18:40:16 +0000 (UTC)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-48e0d885929so67526f8f.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 11:40:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792694383; x=1793299183;
+ d=gmail.com; s=20251104; t=1792694415; x=1793299215;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :references:cc:to:subject:from:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=gJ+QtWYb/3xoQqUhhl9OhQDlcv1qF3l9T14JBOUGm5Y=;
- b=jUgGCODPeNR/ZhJGOMAAiZ9oCRu5peStvvpdiVrqUvY9hew2i027OXqmgTrcRoavFV
- uOCH3+c/t9weiao+jWtKWIs1v7OU7RXbm6lW7UYaaAazqVlmFunpn7N05kMgv13yeL/i
- +9y2WwRDFeJPkrf9rxSaKSnle001S7ooFkQ9ZLHKKgY5Bj/nX2Xjb8vVNP05emCWCPpn
- SZLKdx3ZNX3C8GkIUZXDvW2I93gy1AS5DT1rjzekRNQWcWfgcLb586mF9T8TgjahMl6h
- Y6W/MajecEEpboweROt6xWnLq9rtKU24wB7AKlLiFGYCcMU6GHUcwUGx1SBn0Yh2LNdf
- uxqA==
+ bh=BuWdhy1jsc0HW4TV482GO3U/mHQSdFTcQDmPVTW44tM=;
+ b=m7BwpgTukODO7syVQwvaDT9EtPQ/ve6S5oKbiiG3WOanChI11zmTKQFeuoYudmmXXl
+ g9w2/WG3ka7PGpbldPsHs9rSeJWNm8hOnt7sZt5gq0V9ccsMLW6cABhhsN/7mX7+gWV7
+ QEL1A1ErKD80RbL7RoXfzZLt1wkivFb9LDhR8KWH6GiUETYtfzWWUbAjKmwbk1DiuJKa
+ PCdNHoD9wBIm/Z2HLYSXjW2wPm4Ss4rA79fq3cnKADiYx1awmT2SWiaC9pq3IxMsxHEO
+ qHcuoffHgBVEXcCwfdowPnS4rfej9EnvSa1AZyzttTgKAHWKKX5iMt5lRI+W8nesxTbk
+ Qy+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792694383; x=1793299183;
+ d=1e100.net; s=20260707; t=1792694415; x=1793299215;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :references:cc:to:subject:from:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=gJ+QtWYb/3xoQqUhhl9OhQDlcv1qF3l9T14JBOUGm5Y=;
- b=NhFowZGt0iEbuomD9b1sRBoSgba1WPqjmU8rqIp2SsuepWd5KEdqnr9ENJe8vPw4uB
- qWDyl7p3jCDJmVUPsb35ATXG/WFM9q8sV/t+liZZqA19YvfeY909tG/FkHDt0k5GQDo7
- 1mUF3/0R+fa0YHm8lChdJPcNVNoGORXdvvuQyFzfxsNCbuKWgw2WSW45ZQ+V16keS3p/
- d7geuWlKy2so9BHIMf+eg4OR8oLFR5Mn6Ib96osPqFZF4gOKd+TEnfTnc2sqr260AYWq
- Lcaye5Dlz3505RsTKy+8TTOcM22jsjj4nsAWUoQSvH4+H8Nka0SaFuRgQPs9AOAtas8I
- jDXg==
-X-Gm-Message-State: AFq9FYIGAS6iwv1OeM5ExXNUpdJWSRbAH2DbHKtekIH5whqs9BNSne2h
- yvKbDAF/t25Lj4WWL/k+7f3RXfR9GPCBPiJKVDHuyymAupxRx1HH9qoVFpV9EfwJ
-X-Gm-Gg: AYBFou0yQb1xeRpJCcHZq4tD2gqkwnLVujjbao9YGUW3bs15+ir9ZPBUxY62Ic+3XQ2
- s+SpaLTdcOpXA5oDD2/zpT3kDRGeGoVKI9ja7w1C8VJP+JK3rb5neLi5ssls5KbrcbctZFL99Uv
- bdma1gbLhQH3BIBZB/NDiE5+J8Bfz0x27563IeEBJf3qGWz/r5VRJy07EzBx5+5/diw66uUiJDJ
- 8B1YVspyzOWxvw7FqcfB2ym10IPuyL+1CChmbVXmMWYjkNNGWfZJFZ6PwSQPV88NT78FcOwrbnV
- pypghCOrArE9tqFE0x0uvMRQHYnIUCbqpp/pTN4QN/EgxikEznEZK1q86V1yUvz3Qu+Tx7N/pu9
- kIMf2NbBHhxM2UV+BOmO92vs6ccvqF60cm4awZGZ4kAfwwdsu2fg0F8xF+LXBYGFUbFeERPyWzz
- 5u5ueTZFiB50CNfNgOu9kNta41hITGAqk+7mEvtplrOUsxoCP43zrjAu2cdNedPrj+UV6zJ7a/4
- A+hAyESbj+ekUz6gWc6tAhcOkMaVChQFifxkzXi9DxotFH8FRVHABJzQrpjHvA9/2SHg84xLpw6
- k67Ymep8O/a5sEOO0hyaACI6b18=
-X-Received: by 2002:a05:6000:2386:b0:48c:490a:336b with SMTP id
- ffacd0b85a97d-48e2642399cmr13776131f8f.5.1792694383045; 
- Thu, 22 Oct 2026 11:39:43 -0700 (PDT)
+ bh=BuWdhy1jsc0HW4TV482GO3U/mHQSdFTcQDmPVTW44tM=;
+ b=D+3sz3Tu+eFVSR1afiSm7wtmpG4AoRWp8I3QIPZm8tSTy4bB1sUaO4DC01eCgDCV0i
+ 9H88C656YPb2+QA1pA+5QkmCRcTFRMhnWllCoPgsQf81joKD2PFWmDLapxxkCAz0ClpI
+ SYJHwt6YOD7+X6xsI8MgqfvODVA3I24CagprcEPKVuFzP+/jEleRYgNHuHmw5GrPgTG9
+ 1OaHWGbVJ08xco8pTIe6y8Na4YY0Fr8DLzlYKG00P+WJapD7OpL3L40prMNXvyXrc4fk
+ Z3nWfLw/+qjGWAfl0PhnE2sFVvrCjEtCKgNtijX6OV8tt4J/VH4EQgQ/WSKmsUyBlSc0
+ UFoQ==
+X-Gm-Message-State: AFq9FYIrPYY6BfCyMaxb8VHfRFrjidYxg+R6zKUNSorkA8DEs9tG2LSa
+ DtSd9FUUvTydCfglJ7QX55WIDkfWe62BWTosuQOj2H0GlCCKs+AYZYAxSIk9/ii4
+X-Gm-Gg: AYBFou38rOF13sqn6QP0m3VNCKlEHhJsdq+Hq0O6yhKupKG5eKvMLnEvS6KiybXYKcj
+ DamNWz6ePsFgkiFsnLr+/Q0Ub+42diDKCWA4Now6rme7eijLVkbgPW190HH4UiJ+lNYNo5y8Qty
+ qaBymVVFGtFHAiZxRpf8UVnh/lW+xUom03IusGF8RLJkqITZGBYRH85D6lt8JGleJJ9TwRK6I1V
+ WimXTk45yebNtGTfwJkiYgcGLWtK6kYr4IZzNPvXdHWpNfvWxO8Ex4tcDcCs5JTmeBQ6TS2fmk0
+ flWtnILwfE0D2m4XwICILXk0txTbh4Kku/OvWOwipU2iHivuw/K2JqUrA1XwqPuGoTi7AOVRWkN
+ 35TnMhSa9wmPmUyk4FU3rQinsGXlpfGZNX9emOluz7V+bqMvEJ1nYcw4XVfrXS/2DcMAOS/YNFs
+ +mGs9q6V0J2ufHpRRSPClhXjiFTK3EvDaL0FJSBFnZYYGYZfylpyUvBp+Xxe/SWa9UjmQPEXZTk
+ CAYIowZ03UCMGAmjeLotDlyuLarbhJ7/Hm3dTPS9PWIjbuEStKMPi1zPXWqq+poyMq3asGLrQAV
+ pS3OCmkqiVWG6IKcxqTcZ8THx2M=
+X-Received: by 2002:a05:6000:481b:b0:48e:37e:470f with SMTP id
+ ffacd0b85a97d-48e264e6054mr11946210f8f.51.1792694414602; 
+ Thu, 22 Oct 2026 11:40:14 -0700 (PDT)
 Received: from ?IPV6:2001:7e8:c647:4001:7656:3cff:fedb:3af7?
  ([2001:7e8:c647:4001:7656:3cff:fedb:3af7])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e379cf6aesm118457f8f.18.2026.10.22.11.39.41
+ ffacd0b85a97d-48e37a0f66dsm67644f8f.53.2026.10.22.11.40.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 22 Oct 2026 11:39:42 -0700 (PDT)
-Message-ID: <c752b277-c4af-4ab5-b882-092c89df3f09@gmail.com>
-Date: Thu, 22 Oct 2026 20:39:41 +0200
+ Thu, 22 Oct 2026 11:40:12 -0700 (PDT)
+Message-ID: <b710a08f-e050-4543-8c5c-291d73d56050@gmail.com>
+Date: Thu, 22 Oct 2026 20:40:12 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: anon87111 <anon87111@gmail.com>
-Subject: [PATCH v3 2/3] image-fit-sig: honour required-mode on the image gate
+Subject: [PATCH v3 3/3] test: vboot: cover required image keys
 To: u-boot@lists.u-boot-project.org
 Cc: trini@konsulko.com, sjg@chromium.org, 0xiviel@gmail.com, me@ziyao.cc
 References: <20261022180000.1792693930-0-anon87111@gmail.com>
@@ -171,7 +171,7 @@ Content-Language: en-US
 In-Reply-To: <20261022180000.1792693930-0-anon87111@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Thu, 22 Oct 2026 18:40:12 +0000
+X-Mailman-Approved-At: Thu, 22 Oct 2026 18:40:31 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -189,115 +189,205 @@ X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-fit_config_verify_required_keys() reads the required-mode property from
-the /signature node and accepts either all or any of the required keys.
-fit_image_verify_required_sigs() has no such policy: every key marked
-required = "image" must verify.
+Add a test for two keys marked required = "image" where the FIT carries a
+signature from only one of them. Without the binding fix the single
+signature satisfies both required keys and the image boots.
 
-Mirror the configuration gate so both behave the same way. The default
-stays "all", so this changes nothing unless required-mode is set to
-"any".
+The default policy refuses it, required-mode "any" accepts it, and
+required-mode "all" refuses it again.
 
-no_sigsp keeps its meaning. It reports that the image carried no verified
-signature at all, which is a separate question from the policy outcome,
-so it is still driven by the success count and not by the number of keys
-marked required.
-
-Update the documentation, which scoped required-mode to signed
-configurations.
+All nine in tree sign-images-*.its hint "dev", and mkimage -g does not
+redirect a hint the node already carries, so a prod hinted fixture is
+needed to get two keys marked required on the image gate.
+sign-images-sha256-rsa2048-prod.its is the in tree
+sign-images-sha256-rsa2048.its with its two key-name-hint values changed.
 
 Signed-off-by: anon87111 <anon87111@gmail.com>
 ---
- boot/image-fit-sig.c        | 32 ++++++++++++++++++++++++++++----
- doc/usage/fit/signature.rst | 13 +++++++------
- 2 files changed, 35 insertions(+), 10 deletions(-)
+ test/py/tests/test_vboot.py                   | 98 ++++++++++++++-----
+ .../vboot/sign-images-sha256-rsa2048-prod.its | 42 ++++++++
+ 2 files changed, 117 insertions(+), 23 deletions(-)
+ create mode 100644 test/py/tests/vboot/sign-images-sha256-rsa2048-prod.its
 
-diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-index d6c61e1045..4b50e45965 100644
---- a/boot/image-fit-sig.c
-+++ b/boot/image-fit-sig.c
-@@ -190,6 +190,9 @@ int fit_image_verify_required_sigs(const void *fit, int image_noffset,
- 				   const void *key_blob, int *no_sigsp)
- {
- 	int verify_count = 0;
-+	int reqd_sigs = 0;
-+	bool reqd_policy_all = true;
-+	const char *reqd_mode;
- 	int noffset;
- 	int key_node;
+diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+index d02fa5b16f..db488159ca 100644
+--- a/test/py/tests/test_vboot.py
++++ b/test/py/tests/test_vboot.py
+@@ -84,27 +84,28 @@ def make_fit(its, ubman, mkimage, dtc_args, datadir, fit):
+ # Only run the full suite on a few combinations, since it doesn't add any more
+ # test coverage.
+ TESTDATA_IN = [
+-    ['sha1-basic', 'sha1', '-rsa2048', '', None, False, True, False, False],
+-    ['sha1-pad', 'sha1', '-rsa2048', '', '-E -p 0x10000', False, False, False, False],
+-    ['sha1-pss', 'sha1', '-rsa2048', '-pss', None, False, False, False, False],
+-    ['sha1-pss-pad', 'sha1', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False],
+-    ['sha256-basic', 'sha256', '-rsa2048', '', None, False, False, False, False],
+-    ['sha256-pad', 'sha256', '-rsa2048', '', '-E -p 0x10000', False, False, False, False],
+-    ['sha256-pss', 'sha256', '-rsa2048', '-pss', None, False, False, False, False],
+-    ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False],
+-    ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, True, False, False, False],
+-    ['sha256-pss-pad-required', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', True, True, False, False],
+-    ['sha256-basic-ecdsa256', 'sha256', '-ecdsa256', '', None, False, False, False, False],
+-    ['sha256-basic-ecdsa384', 'sha256', '-ecdsa384', '', None, False, False, False, False],
+-    ['sha256-basic-ecdsa521', 'sha256', '-ecdsa521', '', None, False, False, False, False],
+-    ['sha384-basic', 'sha384', '-rsa3072', '', None, False, False, False, False],
+-    ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False, False, False, False],
+-    ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', False, False, True, False],
+-    ['sha256-global-sign', 'sha256', '-rsa2048', '', '', False, False, False, True],
+-    ['sha256-global-sign-pss', 'sha256', '-rsa2048', '-pss', '', False, False, False, True],
+-    ['sha256-global-sign-ecdsa256', 'sha256', '-ecdsa256', '', '', False, False, False, True],
+-    ['sha256-global-sign-ecdsa384', 'sha256', '-ecdsa384', '', '', False, False, False, True],
+-    ['sha256-global-sign-ecdsa521', 'sha256', '-ecdsa521', '', '', False, False, False, True],
++    ['sha1-basic', 'sha1', '-rsa2048', '', None, False, True, False, False, False],
++    ['sha1-pad', 'sha1', '-rsa2048', '', '-E -p 0x10000', False, False, False, False, False],
++    ['sha1-pss', 'sha1', '-rsa2048', '-pss', None, False, False, False, False, False],
++    ['sha1-pss-pad', 'sha1', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False, False],
++    ['sha256-basic', 'sha256', '-rsa2048', '', None, False, False, False, False, False],
++    ['sha256-pad', 'sha256', '-rsa2048', '', '-E -p 0x10000', False, False, False, False, False],
++    ['sha256-pss', 'sha256', '-rsa2048', '-pss', None, False, False, False, False, False],
++    ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False, False],
++    ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, True, False, False, False, False],
++    ['sha256-pss-pad-required', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', True, True, False, False, False],
++    ['sha256-basic-ecdsa256', 'sha256', '-ecdsa256', '', None, False, False, False, False, False],
++    ['sha256-basic-ecdsa384', 'sha256', '-ecdsa384', '', None, False, False, False, False, False],
++    ['sha256-basic-ecdsa521', 'sha256', '-ecdsa521', '', None, False, False, False, False, False],
++    ['sha384-basic', 'sha384', '-rsa3072', '', None, False, False, False, False, False],
++    ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False, False, False, False, False],
++    ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', False, False, True, False, False],
++    ['sha256-global-sign', 'sha256', '-rsa2048', '', '', False, False, False, True, False],
++    ['sha256-global-sign-pss', 'sha256', '-rsa2048', '-pss', '', False, False, False, True, False],
++    ['sha256-global-sign-ecdsa256', 'sha256', '-ecdsa256', '', '', False, False, False, True, False],
++    ['sha256-global-sign-ecdsa384', 'sha256', '-ecdsa384', '', '', False, False, False, True, False],
++    ['sha256-global-sign-ecdsa521', 'sha256', '-ecdsa521', '', '', False, False, False, True, False],
++    ['sha256-required-image', 'sha256', '-rsa2048', '', None, False, False, False, False, True],
+ ]
  
-@@ -207,6 +210,14 @@ int fit_image_verify_required_sigs(const void *fit, int image_noffset,
- 		return 0;
- 	}
+ # Mark all but the first test as slow, so they are not run with '-k not slow'
+@@ -117,10 +118,10 @@ TESTDATA += [pytest.param(*v, marks=pytest.mark.slow) for v in TESTDATA_IN[1:]]
+ @pytest.mark.requiredtool('fdtget')
+ @pytest.mark.requiredtool('fdtput')
+ @pytest.mark.requiredtool('openssl')
+-@pytest.mark.parametrize("name,sha_algo,sig_algo,padding,sign_options,required,full_test,algo_arg,global_sign",
++@pytest.mark.parametrize("name,sha_algo,sig_algo,padding,sign_options,required,full_test,algo_arg,global_sign,required_image",
+                          TESTDATA)
+ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
+-               full_test, algo_arg, global_sign):
++               full_test, algo_arg, global_sign, required_image):
+     """Test verified boot signing with mkimage and verification with 'bootm'.
  
-+	/* Get required-mode policy property from DTB */
-+	reqd_mode = fdt_getprop(key_blob, key_node, "required-mode", NULL);
-+	if (reqd_mode && !strcmp(reqd_mode, "any"))
-+		reqd_policy_all = false;
+     This works using sandbox only as it needs to update the device tree used
+@@ -477,6 +478,55 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
+                   'Bad Data Hash', False)
+         ubman.log.action('%s: Check in-bounds hashed-strings size' % sha_algo)
+ 
++    def test_required_image_key(sha_algo, sig_algo, padding, sign_options):
++        """Test that a required image key must verify its own signature.
 +
-+	debug("%s: required-mode policy set to '%s'\n", __func__,
-+	      reqd_policy_all ? "all" : "any");
++        Two keys are marked required = "image" and the FIT carries a signature
++        from only one of them. Under the default policy the image must be
++        refused. Under required-mode "any" it must boot.
 +
- 	fdt_for_each_subnode(noffset, key_blob, key_node) {
- 		const char *required;
- 		int ret;
-@@ -215,14 +226,27 @@ int fit_image_verify_required_sigs(const void *fit, int image_noffset,
- 				       NULL);
- 		if (!required || strcmp(required, "image"))
- 			continue;
++        Args:
++            sha_algo: Either 'sha1' or 'sha256', to select the algorithm to use
++            sig_algo: Signature algorithm to use, e.g. '-rsa2048'.
++            padding: Either '' or '-pss', to select the padding to use for the
++                    rsa signature algorithm.
++            sign_options: Options to mkimage when signing a fit image.
++        """
++        # Compile our device tree files for kernel and U-Boot. These are
++        # regenerated here since mkimage will modify them (by adding a
++        # public key) below.
++        dtc('sandbox-kernel.dts', ubman, dtc_args, datadir, tmpdir, dtb)
++        dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
 +
-+		reqd_sigs++;
++        ubman.log.action('%s: Test FIT with required images' % sha_algo)
 +
- 		ret = fit_image_verify_sig(fit, image_noffset, data, size,
- 					   key_blob, noffset);
- 		if (ret) {
--			printf("Failed to verify required signature '%s'\n",
--			       fit_get_name(key_blob, noffset, NULL));
--			return ret;
-+			if (reqd_policy_all) {
-+				printf("Failed to verify required signature '%s'\n",
-+				       fit_get_name(key_blob, noffset, NULL));
-+				return ret;
-+			}
-+		} else {
-+			verify_count++;
-+			if (!reqd_policy_all)
-+				break;
- 		}
--		verify_count++;
-+	}
++        # Sign the images with the prod key and mark it required. This puts the
++        # prod public key into sandbox-u-boot.dtb marked required = "image".
++        make_fit('sign-images-%s%s%s-prod.its' % (sha_algo, sig_algo, padding),
++                 ubman, mkimage, dtc_args, datadir, fit)
++        sign_fit(sha_algo, sign_options)
 +
-+	if (reqd_sigs && !verify_count) {
-+		printf("Failed to verify 'any' of the required signature(s)\n");
-+		return -EPERM;
- 	}
++        # Sign the images with the dev key and mark it required too. This adds
++        # the dev key to the control dtb and overwrites the FIT, which now
++        # carries a dev signature only.
++        make_fit('sign-images-%s%s%s.its' % (sha_algo, sig_algo, padding),
++                 ubman, mkimage, dtc_args, datadir, fit)
++        sign_fit(sha_algo, sign_options)
++
++        # Both keys are now marked required = "image" and the FIT has no prod
++        # signature. The default policy is "all", so this must be refused.
++        run_bootm(sha_algo, 'required image key', '', False)
++
++        # With required-mode "any" the dev signature alone is enough.
++        utils.run_and_log(ubman, 'fdtput -t s %s /signature required-mode any' %
++                          dtb)
++        run_bootm(sha_algo, 'required image key any', 'dev+', True)
++
++        # Back to "all" and the missing prod signature must fail again.
++        utils.run_and_log(ubman, 'fdtput -t s %s /signature required-mode all' %
++                          dtb)
++        run_bootm(sha_algo, 'required image key all', '', False)
++
+     def test_required_key(sha_algo, sig_algo, padding, sign_options):
+         """Test verified boot with the given hash algorithm.
  
- 	if (verify_count)
-diff --git a/doc/usage/fit/signature.rst b/doc/usage/fit/signature.rst
-index e5d6ce85c7..c8856772bc 100644
---- a/doc/usage/fit/signature.rst
-+++ b/doc/usage/fit/signature.rst
-@@ -404,14 +404,15 @@ that might be used by the target needs to be signed with 'required' keys.
- 
- This happens automatically as part of a bootm command when FITs are used.
- 
--For Signed Configurations, the default verification behavior can be changed by
--the following optional property in /signature node in U-Boot's control FDT.
-+The default verification behavior can be changed by the following optional
-+property in the /signature node in U-Boot's control FDT. It applies to both
-+the configuration gate and the image gate.
- 
- required-mode
--    Valid values are "any" to allow verified boot to succeed if
--    the selected configuration is signed by any of the 'required' keys, and "all"
--    to allow verified boot to succeed if the selected configuration is signed by
--    all of the 'required' keys.
-+    Valid values are "any" to allow verified boot to succeed if the selected
-+    configuration or image is signed by any of the 'required' keys, and "all"
-+    to allow verified boot to succeed only if it is signed by all of the
-+    'required' keys. The default is "all".
- 
- This property can be added to a binary device tree using fdtput as shown in
- below examples::
+@@ -619,6 +669,8 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
+         ubman.config.dtb = dtb
+         if global_sign:
+             test_global_sign(sha_algo, sig_algo, padding, sign_options)
++        elif required_image:
++            test_required_image_key(sha_algo, sig_algo, padding, sign_options)
+         elif required:
+             test_required_key(sha_algo, sig_algo, padding, sign_options)
+         else:
+diff --git a/test/py/tests/vboot/sign-images-sha256-rsa2048-prod.its b/test/py/tests/vboot/sign-images-sha256-rsa2048-prod.its
+new file mode 100644
+index 0000000000..58e3232de5
+--- /dev/null
++++ b/test/py/tests/vboot/sign-images-sha256-rsa2048-prod.its
+@@ -0,0 +1,42 @@
++/dts-v1/;
++
++/ {
++	description = "Chrome OS kernel image with one or more FDT blobs";
++	#address-cells = <1>;
++
++	images {
++		kernel {
++			data = /incbin/("test-kernel.bin");
++			type = "kernel_noload";
++			arch = "sandbox";
++			os = "linux";
++			compression = "none";
++			load = <0x4>;
++			entry = <0x8>;
++			kernel-version = <1>;
++			signature {
++				algo = "sha256,rsa2048";
++				key-name-hint = "prod";
++			};
++		};
++		fdt-1 {
++			description = "snow";
++			data = /incbin/("sandbox-kernel.dtb");
++			type = "flat_dt";
++			arch = "sandbox";
++			compression = "none";
++			fdt-version = <1>;
++			signature {
++				algo = "sha256,rsa2048";
++				key-name-hint = "prod";
++			};
++		};
++	};
++	configurations {
++		default = "conf-1";
++		conf-1 {
++			kernel = "kernel";
++			fdt = "fdt-1";
++		};
++	};
++};
 -- 
 2.53.0
