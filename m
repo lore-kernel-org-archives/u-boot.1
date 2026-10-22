@@ -2,95 +2,96 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA5E5606A319
-	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 13:30:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85E37606A319
+	for <u-boot@archiver.kernel.org>; Thu, 22 Oct 2026 13:30:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=iPqprB3O;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=McxSqs03
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Xhjm9CNV;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IQDk6W/j
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 73C9B608CB;
-	Thu, 22 Oct 2026 13:30:44 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EE20A608F5;
+	Thu, 22 Oct 2026 13:30:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 28TALFgqADcy; Thu, 22 Oct 2026 13:30:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 744A360787
+ id OOv-R24B2LH8; Thu, 22 Oct 2026 13:30:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1A84C608BD
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792675843;
-	b=G8iLIVRS94+rLWWrfGMgYS0VCzD5mSoGsKKvh+jyYI2G4sXXtwBuUxu+yn3B5O49cQFl
-	 Hnr7AJVLo82dg1SwT3PwgDAAhDg9OpMO0D6JcBKdnjN3XMebtg6kSfzky5+0A+KBpI0RS
-	 A/1X6tcbc5PmnLzwS7GzeoBWWvqSs9Cud3OP0ZotIcvOI0hNwGC+B1PQIiYkgb+zccahL
-	 xfQ3ROBg72K6mWZ3+j1KTkyVNQq795C1Oct8dcdTaIx3x77oXDqamxjdLaZs9LRnDCgjT
-	 pVCYfj9XlfCCFMK5Y2fpOUjy6Tia+EEJTdoUBWAUw/OJcYcjFBk0iRvvU4ovFyfCeFg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792675847;
+	b=Q/UpBVpGsQDq9zkmVUDTnlzbCzcMfNPKzvNlurNG5QAtONJK8p6uSiGyjA+XKcgleGai
+	 +y6EZOcUyPo+GVyW41KepIowyT6274kQf+HMyF2FtM1BDofKM5bo97nYAsKYfA11yKoJb
+	 3u/FIRE9toDZEHJHMFlRrEgT7DJepgePeXW0MTJ0NWy+WE7XcEkmObqebM0kwxLs23qPx
+	 GXxElQV9bnp3OcS4FDjcf2I0oey4IZxmVpFpax2SVYXVIqUC91DD8o1Myc0wJgkRkhYLa
+	 mHA/LAG7Uw7Wt5CxSOu7U2a6+fL7nPyRG7GXNufoAUl7URm5uvKjoj9XbVkVbOsU3bA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792675843;
+	c=relaxed/relaxed; t=1792675847;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=h3VpyHBSzKKqGG7b+uXFU4Pr9zstOHttqlX7oYM85js=;
-	b=R/gOX7vZhN0PteN1n2Nnwav4l8hM0yAicoDP+LkyAqhJ85qa/44u+gz0aLWKTbtZBL2J
-	 9TKByKA31zkrO7vJEoDYzY/CKXtpdo/VkcRaeD+cNwiIHpHOpgYe8399Fey5XFqQF9Mvy
-	 exsTV3Sdvqq2Sqqm5gcWlOqSJyaH1UbBYuoKkIwHHSCzRVzyp1ZccDihelrv2Z2wDuApc
-	 yrgiTjzEugbURers8knkQD70ZAO9n2BrEAnbJabwhcj+eyosuZbpxdxq62ZdzdIJZx+6K
-	 UqKAtPvCGt/x/XGTAR1Ot0TRigO6X6+u29HDy9dM638U3ppeHQDn9zpEYfisYhLgjBA==
+	bh=fSecHvPa7bV24tLKOpNsK3km2QqAjl75hkIgPbjSeOM=;
+	b=mluue5uexb+NuIjk6VKrgVlNsVgKjld4goDEXNqOWlPMRaxaNx1c2z8UMKldYeioWRas
+	 s8EJ0uqJ7PiutHd8tuZ08gOiwngcqSkDSiHS277b4rDOy6OdW6EMhB6K7UoF/zh2wwVHF
+	 lpMRBL2rPvUdEdaQW1ck0zm3RFPQKPNBWZdcXnxDD9H58gtzDuR7EL0ZTCUQ2Z/ZAR2vJ
+	 AV3fifJg/HVDal5smD8hPKRKZpFiJSWkblioWOnvZrMM9MfEx24rcZZf9lZ1m5csoar8d
+	 h/MLKfDutrQ31kmVkwtVWwwbhwoOH2dfQCDhbzeT2nccm68uHBYDnRHucPAoLoK2l1Q==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792675843;
-	bh=h3VpyHBSzKKqGG7b+uXFU4Pr9zstOHttqlX7oYM85js=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=iPqprB3OvjrPvBp7p769eI8aAFwRnlZ2IE1X8FyuDmgIUQ9PvmeKb9+t2dh2jSWKQ
-	 RWpIfYPu+WcYp7fyh9D92XPDyvjUchgAfSxCjZRzvoA33GKyf9ufxdnlgIFtZjEAj1
-	 d5nrwGH/OC6o50Qu6q1QAUmF95KSVoZuCO0O0o77lZRXEbbHbs3MUFuyaD7EJMFeS/
-	 pA5MmN+4+1j6sh5pNDkTLlVH8EYO5ZU+RmaWxrWhaUwOb4gjF9DiaHqen0jc4HhvVj
-	 EDrT9jv6HDVYiJWUNVMjkWJc2LiNN8KFaNOupkQqbbeayhk8fm3TWZlaB4b0JcvhSZ
-	 2vpCXArt2z2qw==
+	d=lists.u-boot-project.org; s=default; t=1792675847;
+	bh=fSecHvPa7bV24tLKOpNsK3km2QqAjl75hkIgPbjSeOM=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Xhjm9CNVoM51bkR1cw6xj6clyiQawW2dqH49l7s1bcYvEWcmRQ/YdtGw7Qq6aPlzx
+	 E64GMU/7WcHUa0WoWNkfzyPDlxPgCpkd4tHfHwQTa0k6tRdmk2M7DGTx2s4P9oZ4gB
+	 I28XwrTQFwadDM3TR4NasdW1714i8BwghhZ+oI/r86h2YjTBFxuREzJWiNTT2TkwcI
+	 BBMzS43vONcuP1l36vX/z4t7yxeEEVaU/iA83Fj4TQSOnsujbFuTAc34DmZ/obTiTd
+	 LrDmuBM0ACsGK/5WWZjj8A/zeJj3oQwHUkvhIQFjKJYmJkaFer2zCy+5bgNSM7ELZc
+	 GOtIjdhCcTD3g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 744A360787;
-	Thu, 22 Oct 2026 13:30:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1A84C608BD;
+	Thu, 22 Oct 2026 13:30:47 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id A906A3AF
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 13:30:42 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id C1A3A3A4
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 13:30:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 9AA6F8121A
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 13:30:42 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id A7CEF8121A
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 13:30:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6vnzlSMe_BSn for <u-boot@lists.u-boot-project.org>;
- Thu, 22 Oct 2026 13:30:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9129081176
+ id 7l_axb59bgU5 for <u-boot@lists.u-boot-project.org>;
+ Thu, 22 Oct 2026 13:30:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 07EDC81176
 Authentication-Results: smtp1.osuosl.org; arc=none
  smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792675841;
- b=rbhKHxGY10pYYOuOd3YubrJqjMR93kjEpx8GmD1+ROjqeSQNkJC8LxxCZJkUVH0W5Ylj
- PLJoIsuDYfxh7fEAiv3zMJhkoDyFEX0QsZCB8AiUh7+C/cA9cjd1XBY7MQab9k1LaXx90
- J2kRQUK6IxoHnpUPHkkZtV7+Z91/D+oS2HgOasJFfNv0ccD9+mMYsoulkSFL9cGH4eVHK
- RX6+ZshChT7Z626eBLTJ1WhKGuSbEi8zoIInfiqY46aAniRFj9Tx/npLanWHmeAkVVaa6
- 1sRfsCMr380WSw9phtUYA371BTzzk2VN0SYblCw58X3v/5mS50C+ZYOZXDuCIj+5NzA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792675843;
+ b=SODdu6wukYSBriUh1UAYUMDnh9U2dcsJSPaW/XvR7BszDYUjIrxByyHHGipyF5iLfIQP
+ U9ieWkxOU7uhgqBEJot+HHiZPi6/vk4uDl3rNo48wDV+Ni/gW00mPJoqxxWZB7Nmsywp6
+ CX8GkWH4WTBFWdcFjQmMBqr6OS1CiQ6NemiMuuaoNYxz5CkX2wXjCkkMHA3VI9FqPyq+l
+ DiRG+VL49pzPI9TtsrjuovSit/AysFRLqAPDSuQ055UID1xEnVYquVMpxOBBxhYB3jmnw
+ aC3QgkXnkz8BYuVWGgWu/QkRowVNm3a1IfJ5btJDft+CXE90B1hW0eREpYrrviuN3Kw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792675841;
- h=Received-SPF:Received:Received:DKIM-Signature:From:Subject:Date:
- Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+ c=relaxed/relaxed; t=1792675843;
+ h=Received-SPF:Received:Received:DKIM-Signature:From:Date:Subject:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+ References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=h3VpyHBSzKKqGG7b+uXFU4Pr9zstOHttqlX7oYM85js=;
- b=Odjepb4sC5XmpIUk/px9bPDfP93ZDgTZadK8PBTEzQabQRTLUE7KuLngf7/eLKTQIgkM
- Va/KQHjdSSFCZ8hjkXvhm07fRQgf82IxBwKYT+V8Z8ZvB5pRaxTSrSBkc1W3idIBL6TUF
- G0NtIfz8J4/3ytca2+n6yt1IiAvOkl6gVVwOGf/771Zkf147HP4cSdLXUHsy1wKrMLDuO
- aL2l2C40i1YyQ+iEAHcQbZcuCx75bID3IY8bN333ViEyU0uK3OPDhHVcJVk47H3gAQoEl
- N4oH6WBjPbFY8SKiydcD1KDjM0CNY3mP/E2x/vfS4tVideQapO5ibRRW3ng7xtLalPA==
+ bh=fSecHvPa7bV24tLKOpNsK3km2QqAjl75hkIgPbjSeOM=;
+ b=CYtE6iWMIAll/7Dbo2Q/RHROq5R57twy29dGutw5OlgczSnNyHA9cvWnAI0EZ+9zzrBG
+ gdevC5aS4oTHOknDR2SB7nS7XZ11CY79MiqkvBFNf+XlHrzy3Bu3/UPSRUmw8AAPZSuak
+ oPFsvMZIi4ifBItzUc5jdmZWevs5QXuiTHBPQplVqWCi+Jo3KvPTkUGN5e1wvfSL6KG8c
+ PHNcdrJLTXUbeqzXVfndu5hEDYKzvSQLA38j+eDL5ofZe3RkvJS/4q8JasCbMEHA0uy5c
+ OznPvMjPkvx70QwG6Gi+Pya9o66yhxQSsbTNhHk/W63LBq+Ub/kt8bC5a7pKnHxF40A==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=McxSqs03; 
+ header.s=k20260515 header.b="IQDk6W/j"; 
  arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
@@ -99,39 +100,37 @@ Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=McxSqs03
+ header.a=rsa-sha256 header.s=k20260515 header.b=IQDk6W/j
 Received: from sea.source.kernel.org (sea.source.kernel.org
  [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9129081176
- for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 13:30:41 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 07EDC81176
+ for <u-boot@lists.u-boot-project.org>; Thu, 22 Oct 2026 13:30:42 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 35A5241E5A;
- Thu, 22 Oct 2026 13:30:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 98DBC1F000C1;
- Thu, 22 Oct 2026 13:30:39 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 7A01043274;
+ Thu, 22 Oct 2026 13:30:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDC431F000C1;
+ Thu, 22 Oct 2026 13:30:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1792675840;
- bh=h3VpyHBSzKKqGG7b+uXFU4Pr9zstOHttqlX7oYM85js=;
- h=From:Subject:Date:To:Cc;
- b=McxSqs03qL0k3BAD7dlhcfDyUtVlRbO25Vtn6/5AP+3FPhs3yt536YomLl/b3mHZW
- cok7m2bk/CGvXBpi0KcdSIoXqyO1/wfNHZA6dgKZHpjIS/s6N3E42WASjXdccp/E7/
- 6cdqHEHdojWJ7vTYixTYDqb5aw2QUA0+PaPdGItMB1BQ1RAlc/0ipgwRu81XTJlIdD
- AvAfC8k1+KnOEeV7vcW5RkAz6EOkfHBACNfussm16s2bFvUjEj8xQaiE9Tfux+bIaT
- +lqT+eS7X6f+Srycz+S/w6n6GHb8mWI8rrpRL9pkhjUdjnnbWKtJpl9N829YLUFr2K
- ClMpd/fcaagBg==
+ s=k20260515; t=1792675842;
+ bh=fSecHvPa7bV24tLKOpNsK3km2QqAjl75hkIgPbjSeOM=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc;
+ b=IQDk6W/j9yvdr6VHCkIkrUuVZ9apXkq/wUmWhNSUe7NBcp1LSCxtLm/GfvveT0OJC
+ z1IJcFAVK6/cJ18GRO9iwxmzycKOSm6+iSCXpZFNoNW76P2I8mmKq9gd2/ZboEAMwb
+ fmy07H4eLJ6BKeivnaSt2e/QjS0KpxYO8L/t6A0h6RG7pxVNpkygtvipKiQaDCt7UX
+ ebT9vcjdn8EJG50MUFxsz767qI0XMgELt2vlzENL+7mjxqoXVNqUkqZ2Ihwl4/S645
+ fG/hHl6l3y6h1Hn/xdi5+HO/9kh45EOCQA1kvt/AW6L5k5m3KvhPiQtBCpjlt9hQ0K
+ owCCC/mXta9fg==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: [PATCH v3 00/10] Fix AVB pytest suite for sandbox
-Date: Thu, 22 Oct 2026 15:30:29 +0200
-Message-Id: <20261022-test-avb-fixes-v3-0-d3a6ff9ba097@kernel.org>
+Date: Thu, 22 Oct 2026 15:30:30 +0200
+Subject: [PATCH v3 01/10] avb: Use map_to_sysmem() for flush_cache()
+ address
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3XMQQ6CMBCF4auYWTumHVpoXXkP4wJkCo0GTEsaD
- eHuFlYa4/LN5PtniBw8RzjuZgicfPTjkEex38G1r4eO0bd5AwkqpZAaJ44T1qlB558c0daqNMR
- G6KqFjB6Bt0c250vevY/TGF5bP8n1+jeVJAq0rBtDpVKFtqcbh4HvhzF0sLYSfXgSP55Wbytnn
- FCuLdyXX5blDWMysdTtAAAA
-X-Change-ID: 20261015-test-avb-fixes-9a4682e8057d
+Message-Id: <20261022-test-avb-fixes-v3-1-d3a6ff9ba097@kernel.org>
+References: <20261022-test-avb-fixes-v3-0-d3a6ff9ba097@kernel.org>
+In-Reply-To: <20261022-test-avb-fixes-v3-0-d3a6ff9ba097@kernel.org>
 To: Igor Opaniuk <igor.opaniuk@gmail.com>, u-boot@lists.u-boot-project.org
 Cc: Jan Kehren <jan.kehren@emteria.com>, 
  Guillaume La Roque <glaroque@baylibre.com>, Tom Rini <trini@konsulko.com>, 
@@ -139,16 +138,16 @@ Cc: Jan Kehren <jan.kehren@emteria.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
  Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2382;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1623;
  i=mkorpershoek@kernel.org; h=from:subject:message-id;
- bh=coGwVSNG6/Q3qmeFa9iwD7QR0adcthVxsKroOFr5b0Q=;
- b=owEBbQGS/pANAwAKARkNHbRmThk1AcsmYgBq2g/4iN1X6tWHvUVtzSgfISwxFqkdXpDmo3BTT
- 2i5sGK+MJqJATMEAAEKAB0WIQQu6UKnth9qvlMTrQAZDR20Zk4ZNQUCatoP+AAKCRAZDR20Zk4Z
- NUojB/0W9tnEYg17fOLCTsrXepbx+fK1Ou4C4j48TG2/ro18yG+7EhE3DnJ69rRPfIg56h3i/bx
- ChhwDRcvThrSHSsKd30ADMEcoZ1GOyGjkELzCPMm3+s8IaKlyAXhJYhbMIRuMYMbm+MxczWEz17
- yBits0Z5TI0WCtpc9W+Ll87er3k1a3ksthoQBs2M/pFTVriRWVaFyFm9mlEKZcGNksOjL6acBXE
- hqLIW58RILHnbO8u/ZCHeAkXiXQjDMiDDNUYUHtt/F9/ZneJZyErAFqPO1wVz3qQ+yNVjb8WLdB
- DCh7UrusPQj+RkwpuFTnnt+VIaoWsugLhytA6eeFq5YtUh9b
+ bh=fQZFl1AVTrtCVIH2moMgHoJlKA9dL0YL4NrkHTY46tw=;
+ b=owEBbQGS/pANAwAKARkNHbRmThk1AcsmYgBq2g/8A9WGOEeeg2Ms8ZeIoQO0t7wDDzJd96rBM
+ 7DyG0vyOyuJATMEAAEKAB0WIQQu6UKnth9qvlMTrQAZDR20Zk4ZNQUCatoP/AAKCRAZDR20Zk4Z
+ NR6XB/sGOJsVuu9h37ANbnU44yUBPVsFlPeVx9AYGb5/k2ScmQdoW0Slv3iAcaDpIGwhfVmGFRC
+ 4figSeJMsoylEb/euOrhxS1zVe8H3jbd2sv458KQ8EIYVJ7V5CZnnqfKtoNpO0jaHjM8UVOJoHn
+ iQ4QHpTKKKN8GLd4mM7yeAwZQuyPRuvbmaKPWOTpfNFsBOMckjMFIJ7kbC1DrLJxe4L6Bi/CzuL
+ ZSMsVXucaCWh9fNY6SMTOKjK9o6WRTrrKTKu9vtPzKYASlk09D78bubQKvskqSZaFX7fNEIFJXM
+ ut0JzZsVL6h8JxwvrWx5kU6zq59SiDXFxNpWKefDlsWm6nZ0
 X-Developer-Key: i=mkorpershoek@kernel.org; a=openpgp;
  fpr=8234A35B45C0D26B31C1A2DA570338B018144F28
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -168,55 +167,50 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The AVB tests have the following limitations on sandbox:
+flush_cache() expects a U-Boot physical address, but avb_verify's
+mmc_read_and_flush() passes a raw pointer cast to ulong.
+On sandbox, host heap pointers (e.g. 0x1a27ee70) can be outside the
+emulated SDRAM region (0x0 to gd->ram_size), causing map_sysmem()
+inside flush_cache() to crash:
 
-* The mmc1.img required by sandbox is not created when the avb test runs
-* mmc1.img contains a Fedora image, so avb verification cannot be done
-* The tests silently pass due to bad usage of string.find()
+  phys_to_virt: Cannot map sandbox address 1a27ee70
+    (SDRAM from 0 to 10000000)
 
-This series improve the test suite to have more useful results on
-sandbox.
+Fix the crash by using map_to_sysmem() to convert the buffer
+pointer to a proper U-Boot address.
 
+Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
+Reviewed-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+Tested-by: Guillaume La Roque <glaroque@baylibre.com>
+Tested-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 ---
-Changes in v3:
-- Fix typo in commit message for PATCH 10/10 (Simon)
-- Drop U-Boot restart in sandbox tests (Simon)
-- Add error handling on bind /mmc12 (Simon)
-- Use unbind /mmc12 on teardown using yield (Simon)
-- Add docstring for create_gpt_image (Simon)
-- Link to v2: https://patch.msgid.link/20261020-test-avb-fixes-v2-0-997f8f04fd3f@kernel.org
+ common/avb_verify.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Changes in v2:
-- Add missing find() return code check in test_avb_mmc_uuid (Guillaume)
-- Skip avb tests when qemu-img or cgpt is not installed (Igor)
-- Link to v1: https://lore.kernel.org/r/20261015-test-avb-fixes-v1-0-9e5b82644359@kernel.org
+diff --git a/common/avb_verify.c b/common/avb_verify.c
+index 09f1534c3cc5..d157adc4af07 100644
+--- a/common/avb_verify.c
++++ b/common/avb_verify.c
+@@ -7,6 +7,7 @@
+ #include <blk.h>
+ #include <cpu_func.h>
+ #include <image.h>
++#include <mapmem.h>
+ #include <malloc.h>
+ #include <part.h>
+ #include <tee.h>
+@@ -346,7 +347,7 @@ static unsigned long mmc_read_and_flush(struct mmc_part *part,
+ 	blks = blk_dread(part->mmc_blk,
+ 			 start, sectors, tmp_buf);
+ 	/* flush cache after read */
+-	flush_cache((ulong)tmp_buf, sectors * part->info.blksz);
++	flush_cache(map_to_sysmem(tmp_buf), sectors * part->info.blksz);
+ 
+ 	if (unaligned)
+ 		memcpy(buffer, tmp_buf, sectors * part->info.blksz);
 
----
-Mattijs Korpershoek (10):
-      avb: Use map_to_sysmem() for flush_cache() address
-      test/py: android: Move android image creation to a dedicated file
-      test/py: android: Drop verbose printing and unused return
-      test/py: android: Use for loop to create the images / update disks
-      test/py: android: Add create_gpt_image() for image creation
-      test/py: android: Add setup_android_v{4,2}_image subfunctions
-      test/py: avb: Use format specifiers instead of str() for mmc_dev
-      test/py: avb: Move mmc device number to a pytest fixture
-      test/py: avb: Add sandbox AVB testing with dedicated mmc12 device
-      test/py: avb: Fix find() logic when matching response strings
-
- arch/sandbox/dts/test.dts                   |   8 ++
- common/avb_verify.c                         |   3 +-
- test/py/tests/test_android/android_image.py | 116 +++++++++++++++++++++++++
- test/py/tests/test_android/test_abootimg.py |  77 +++++++++++++++++
- test/py/tests/test_android/test_avb.py      |  81 +++++++++++------
- test/py/tests/test_ut.py                    | 129 +---------------------------
- 6 files changed, 261 insertions(+), 153 deletions(-)
----
-base-commit: fed92546960a92177d67c0b8d7b22385f50fed29
-change-id: 20261015-test-avb-fixes-9a4682e8057d
-
-Best regards,
---  
-Mattijs Korpershoek <mkorpershoek@kernel.org>
+-- 
+2.56.0
 
