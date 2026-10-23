@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2166606A31B
-	for <u-boot@archiver.kernel.org>; Fri, 23 Oct 2026 09:06:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 961DF606A31A
+	for <u-boot@archiver.kernel.org>; Fri, 23 Oct 2026 09:06:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=EL72qtuA;
-	dkim=pass (2048-bit key, unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-softathome1-onmicrosoft-com header.b=I8Y2nAt4
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=0BBnN1We;
+	dkim=pass (2048-bit key, unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-softathome1-onmicrosoft-com header.b=U+AAk04G
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 74E2060664;
-	Fri, 23 Oct 2026 09:06:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 661C9606EE;
+	Fri, 23 Oct 2026 09:06:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fTQq0o1wxeFO; Fri, 23 Oct 2026 09:06:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1E6B160669
+ id dmlC0DZKTKkV; Fri, 23 Oct 2026 09:06:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org BFF626068D
 Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1792746397;
-	b=muwdPE6e0DMACrOERG2hqBpTkAQSRShukE9nh0sKzOh2XuirzEFzGwjZRvG4cQDwGtL4
-	 qnDh5tMUtsyVUI8M8IKOSlRPMEaOrtAG5zajbbiimMXZ5RmWzvuZMMOKyD/EQMSZKP4/f
-	 pbYPlcBXBAqkHiE3YMsEz69UpSd4HatkXgzhRse1ft5QGkYk4jIBZGO6o4F1UzxMZc0B/
-	 181nsvDDSlu8fal6zHHi7WlhdjJ3B0y2hPoqfZslXXTP4ljWAoepDLFjyShZ+dulN9kFa
-	 +jOA9tds2BW7xMUcSaj5AfcEvvqfM1UHvZI50keDPiBM0CXDE5uXGFDr2a6tj7xGW5A==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1792746403;
+	b=ITBFPDJnviBRjW74UevIwPQTqC49l4cYFPN7OygdzQTDPkmvOu5Q59nx9hTgKPTAoZHB
+	 XH8F6Psxl3VZGrLNsJNkqipOIqQ80lgdyA9zOvBrNTAhYgUJ0HJjPSB/tDUGojlO2t5hu
+	 8gcJ1dymLLUZYVDrpNT6Lh0qPSXag99PPJASLy4D356rpR4O8IBT/ivzlr9b0CrXSxSyK
+	 uGGYMtLObIFbCOPKY0O34sDHRLXvR2eCy/zYb5g30Dk15Ny/vtkk+j0H8C1l47Q3e6WYL
+	 wepOVk6dUjo8jUMVYx/EafbK/c7ujKdiUUlvsud04Q2poEf/R8vVo9444ly89YdHcrg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792746397;
+	c=relaxed/relaxed; t=1792746403;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -46,52 +46,52 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=72m68sVz53Bi0eqJC81vdiKJSvCSi/JKSppG0dXWykc=;
-	b=VhnoTkoVDtGFHVbelrn5Xtrwkzswa8wDfvhlwUACKoC3iX6QE6lxWHEHUXR6uSLjwVtK
-	 kNR3RwB2afZLO15ZMjfQqr5JfG4CH3Y0TaR4NR7dXC6PLkhTR4Imev/UfKH0wcg6R1Oe2
-	 f4zEgj+11GWq++JXcnG8sy7XDR6/max45eh7lPxbJV1QDNw2nsx2A0EjzNiZKaOQRvpH+
-	 +A2dmMNR8dYdpUHmgm2f/lNWVJDNWCI18yA/QWAOmY9u81wllKPuo2QOIj6Ibn1P6Z3lF
-	 mCDnAVwVgxq8hHP41EBUCyI+qbmveJq13/zLVvDm+hp0lMvbBY7i745SmNkZ7EW9aIw==
+	bh=EjVsEvdaMPI+eNiirqyUE8IKdkD6+tnRr+ZKzyo+JT0=;
+	b=R/TLIvVWP7nBAz3LGuzZH30JH38mz6Qs7pVy9jTT55WguiaGbTxM7cirAMnu94bcDnBr
+	 nwTlwqBpiEq97RfoEpYWxq5X2yMy+w8Y2N883PlSZ4Tjn2LPJ+BUBbi9ltinZqqxNw/R/
+	 65FiYKhrcd6JS4Csf+X3R3I895MWJk10R3BODxV6mMstMV2U/a7XP/r69mJV8FZn4wEPz
+	 9PjoXTEEvt/2yWeHb5NEIh7ekDk2HJle3fGjc1eA9rZfj2hvep/2JDmGHKAI7DGEQyBOq
+	 q1cVpnGgJMOGDtVJFxX5f7REfaPPK6jc3bZr2PhKzCn7Ysndq6qN3SA9cN/ALYoSb0g==
 ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
 	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792746397;
-	bh=72m68sVz53Bi0eqJC81vdiKJSvCSi/JKSppG0dXWykc=;
+	d=lists.u-boot-project.org; s=default; t=1792746403;
+	bh=EjVsEvdaMPI+eNiirqyUE8IKdkD6+tnRr+ZKzyo+JT0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=EL72qtuAMzR4lxxtq9YzBF1EVVVV+zc5d7MJQppQ/SyOopqy2A23MTG3n60Oyaxkx
-	 OUK51oxKWhtCt0Gniwxx27qBtxAW6dQ1HvovQGKeaFI/QxHp/2I5MzjZm94D/dB2gQ
-	 cJFOggQzbZaDUvRbBYB/8aVyl7B6M9y1nR8xZV6vGaPn3Mjk64XQ1dypJGgrL9y7Lf
-	 COd7FLgMf+WGQ55HoIZp9V0l8wkCqY6mok8EHvz1ztbNVxJSp+54DsbyUVkgD2rcMm
-	 Mdntu9go22RRFk83xT+ulkM9Gjt0T0jDLYDjt2+gX+Dz+PYtiAM7cIh1nfHedK6bw7
-	 +c30Ca8SJAeog==
+	b=0BBnN1WeNxaTBBwe8z5HyCF9CEHm3ZNKyFABwigwZUnnpBNhPTfW2ph9LolKBoNBq
+	 /3enEpJ82wGRKAssLETTYDL3u1hM9JMb39aQ75ftTMtGsSdFC+pv5qHQ3dgn0Gm0f0
+	 6iA6/QsrixiCik+CjdKG39I4kwm7IBGQ53HWiuRhlFD8VS8uwlN/GOeVvavdBb7+Nf
+	 GiVbo6h9nsOwfUeCMof7NbkTO4qZNvEsQUgsjg/ie+rBuKj47qymYQ/aMCagkSS+OB
+	 nelzkHH+gided9pgJ4h5Ht+3uv0taQr1Op/GENd3Bra/O2soHoBQIjUM1EYWnV/h/b
+	 hauo9Hj4uT9cg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1E6B160669;
-	Fri, 23 Oct 2026 09:06:37 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 47408380
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 09:06:34 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BFF626068D;
+	Fri, 23 Oct 2026 09:06:43 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9C474371
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 09:06:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3851640844
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 09:06:34 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8A3AC40845
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 09:06:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wpf493jAO8w9 for <u-boot@lists.u-boot-project.org>;
- Fri, 23 Oct 2026 09:06:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A65EE406CF
+ id cNNmQNgBXxrj for <u-boot@lists.u-boot-project.org>;
+ Fri, 23 Oct 2026 09:06:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E620C406CF
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip="2a01:111:f403:c20a::1"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792746393;
- b=sUQDl0w1VuDpNo3+IRo4PrZ37j4/QeBtQWYI4cPR3BP2i7etBKy3z5/O5skVycgA1y2N
- iC8165bBNdlqZRIjNww5D/KGzpiG1Lh3uLM3j0AV5/iHm+aSWg7UCzfuq42tQVRBjGYqb
- EI2hlX4+y+OJ7kuJF070RGJRuUojXXIaRm0rYWFmGy5V5pg1QdjQr0ExEvJFXn4cufgI8
- +hpZSKzB6pZtMrz/Gubddq7KGNfkIPuNcKr79G516WBp1bxVpfKAwMbz68tvjHZTQn2xe
- 503iUKu3pzRwGt0LN8WqIJoPEqBDcTOdm5iHu9ukSCxABJnknZhDzBuM37IPKQFws9w==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792746395;
+ b=doM4lMA1acUgMo0E3oaSxVhi0pvu8A44ys6t44kjNz5+VwoTo9Qqn/DujFYFc5W0fOXj
+ 4y7iDpUSmwGMTdTT0eWrGo30hiy1MM1xRT0YU4tXI8u52ri3cqhKtO/Jdc+4fbPsa+qNK
+ VFBBVv2JEL1qDn9ReL0kcOusgrTNh9mI8FA+dC25/Akxi9jwBiXKSVMZlmCGrdiaKdSaQ
+ 3sfLeERNP65FCgMTlkavCx1dibB4Ol6FfGSnZkVl73/OwzLKNcgOhBY3KxXrVBphJ29VL
+ JFQYtQvVSNUZfIMQlQLATvXzeqYGtw7kG+uA7XCc3qAVFb9+r39F2umobT7fIlY4QRQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792746393;
+ c=relaxed/relaxed; t=1792746395;
  h=Received-SPF:DKIM-Signature:Received:Received:
  X-MS-Exchange-Authentication-Results:Received-SPF:Received:Received:
  From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
@@ -109,17 +109,17 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
  X-MS-Exchange-CrossTenant-FromEntityHeader:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=72m68sVz53Bi0eqJC81vdiKJSvCSi/JKSppG0dXWykc=;
- b=YKO5+o8F7iiZxjxlPOM7hmdsWpngC5Ere3U8ywUJiZAoNHYoBhEqvbSea4OmC391sCyq
- 11kv3z8Ubtp/mSxhttmiaFhXZ2e1pZ7lGGi1U0vrX76de0+rnbXVqO2Dwa0cp3yoCBdWy
- PEgqqMmmRsZoRZTOUCZI6kudBpZt+eay+B7PrGrsd0/sqqOFUNY7Bn+Qp9FKp9rUWCIS/
- zp2tjoVDZ/5ukqRhtJHBVCvuEfbZnuKuG1O3Zt1s2Fe2DU1zbsInlJ0rWmNjm6g8V8lFx
- c+szcN/FDtc5WerwNQdeHfdmsHzNLjPUsmWh2/AtZFUG1LtsPut8AbgoPNPobn9rMyQ==
+ bh=EjVsEvdaMPI+eNiirqyUE8IKdkD6+tnRr+ZKzyo+JT0=;
+ b=pA2pzfp7Ctsg/v+iWPTdUVOaUXCAMfyOzbE5bQQWJCzqpF0P6wISB8pEf0Ik0R56G6GY
+ cK1rRq/U6zdFgPLlpneTR757G6d3nc0voUAadGPpi9BnFjg7Q4SW1Rl6O1J1TKzDXFSlY
+ 634k3dzoZLCQCUyMzUApyX48b8phSFopDtfamxr0ow8SkkB7YqlSkP+i6BYDLJBScl3Xo
+ DDA0h4pntPVNgzMVu/KjJF1vnRVkfrX4i7eGk2vamBxh68ZJNdH4aJhk2bnPWmJNRGOgk
+ xgN2gVLWunfNK0xas0xcd1U5maZQP71feQwW612P/kJQi3ygDcdbCO0Yp8ZeXuSQzLg==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
  dmarc=none header.from=softathome.com;
  dkim=pass header.d=softathome1.onmicrosoft.com
  header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-softathome1-onmicrosoft-com header.b=I8Y2nAt4; 
+ header.s=selector1-softathome1-onmicrosoft-com header.b=U+AAk04G; 
  arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c20a::1"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a01:111:f403:c20a::1;
@@ -127,22 +127,22 @@ Received-SPF: Pass (mailfrom) identity=mailfrom;
  envelope-from=yan.wang@softathome.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org; dmarc=none (p=none dis=none)
  header.from=softathome.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=softathome1.onmicrosoft.com
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=softathome1.onmicrosoft.com
  header.i=@softathome1.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-softathome1-onmicrosoft-com header.b=I8Y2nAt4
+ header.s=selector1-softathome1-onmicrosoft-com header.b=U+AAk04G
 Received: from PA5P264CU001.outbound.protection.outlook.com
  (mail-francecentralazlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20a::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id A65EE406CF
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E620C406CF
  for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 09:06:32 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PZnH4WMKGJE1u6bExxnDoaS2bE0LxDV5Cp9y4BkRnGUtaiST1lDJnOyneFG8qS+4EFvvkbkoDE7n+5rTUdsQ0T1e3KZPejQR2eoN646h9Va2+zlOMf0Ps+yBHnxCNmOWR9ie9QRM8q3ycRqIaOzBd/S9rNP/gTBuTMK+qD0tzE0ZYmzlAyPsmNuofFywNbwiejkgL/QoPH3Cn3cuetAHxn8KjofwF2omcNiTfoW6XbgDXdbvVPspu/XkpOiUbAbswSK55y1yCbFfCUR2cUW306P2XdCSo0Hs/uyuDHJayIPqOAyU8RmmuwrDCbFfEdU18xVLQgezexI17ULEWUnzvw==
+ b=T3PcahwecRiD1Qq1TF83lrKu5Gd0BXaHhkVARUou4ozDm33BOXISbnxXj/Gg5+CVw3Bxs3l2CYJgsVhmSG1VPuH6fmznqt8LwS4K4tbLZovGGbjO4NDY+9F+zuvHx2eoHn/Kdp0FIsmTi9ZKHoAiIrN9l9C4KZGQnoYejHpAzlBu66tdSrN3nuWScSro26S+8EsKGYdW2HgH2u+9+MxS7/YvtGMQ9X8bSdzyG0+nYCZ18p1c67I2uX+KywNt4D7fJaME30RRrxTZtZtTR8W2PRyKld10X6tyawq8eyUH0+c4WjIeKBg4HxGV5+Cf69ETrpuIdEF+kTozMI1LPIZqeA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=72m68sVz53Bi0eqJC81vdiKJSvCSi/JKSppG0dXWykc=;
- b=fy9zUQ+PdkA2JsaFIkKaRpGPLYulb2dqEn6wK33QJ/VIY/DVCDzoHaO6CjAcC+s9rKosWP5qbFZyUMNasCPGk1U9VAFDH9dYSB4d8Rbh73K85FLgfTcLz78iJjPxsit1pzCsjXyUKmEI064Gn1ppUaRX/forMgHa2XPaBaHDOfsd/P5xsjj6mlp+TN1yGEHY+0VAOjILGplykY0NLKoAB1RtBRLKdP8pZdPCBqJihEhlwvS6Z62ca5V8PAf2jSpcJtw8vE8XodNfQ/xOIJ3+Bh1f8OU+uTdIg2RCRxZYMQ1fkuYaBwf9l0OGWoxbVnmTGU2JdVT6K8FAQzAGivswsg==
+ bh=EjVsEvdaMPI+eNiirqyUE8IKdkD6+tnRr+ZKzyo+JT0=;
+ b=Plkpeeqf/Bfle8VnhtfpV08YdR4yQnTF/N8UwYVET2kNZpAe0ByT/55n2v3cRuIpZ+kvW+Zt5B/yrpQ52xkD8Rj9Qdl38siCUqr/aiWSOxK1+epSEllIz2a1Sk9XB0/S4eXcihZDY9wnWt9MTJ4WZbUngZjNxUuws261+cdZrU0EIcyP4aYZqF61S5V/HZunLtGhzFh+5N6dkwYLAv4jsbjtm5ewMplVw0vSc7je0tsr6PjwFRfN+vJ4hr89/e/z1D9G1li6pN64TNdvaVCPTgBHm0hV/bOpWF8h0q/F6h7OmWNNfLeRvwqxwPsZpjiZaIqRXnvirzr+OyrOqgZhTA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -150,18 +150,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=72m68sVz53Bi0eqJC81vdiKJSvCSi/JKSppG0dXWykc=;
- b=I8Y2nAt4j2NhhqT9uROz0AJON0uxAShMgy6lzSG/ZSRw7Oh7xtws18TsmKGuR4bZtiOf67rl97tqAUsADsFzHPA6G6+1y2tvaA9ZvvRFkkCWBxONQwYJR+rfY+k9LXPm8Ll/41ifGNlYVgavWOkhsHt2vcN3CeB4/KgrUPrWe1U5ihocHhdNejQ87fACCwSaHr3PoEYsdMfrUqUYFx7eVDcYptcvXNWfayW4JtIm3GzYfho7IR9hcAgZVoODM0vALBn7IYRNNV6+k4lioxLQZsgmF7oW6iDkUGzYDGF6g2mbS+Hw7KSjb0tYKFZSknZL+6TeiukMx/xSyy3wJHag9A==
-Received: from PA7P264CA0109.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:34c::10)
- by MR1PPFE977920DA.FRAP264.PROD.OUTLOOK.COM (2603:10a6:508:1::2dc)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=EjVsEvdaMPI+eNiirqyUE8IKdkD6+tnRr+ZKzyo+JT0=;
+ b=U+AAk04GIGeRc87yUSWpI4h6buZwbrFTfjn97Ry/lZgrdIqnyvvrOO+Bei3k1A74UFbB8H3CYyDkgJUo/sOugH+u20JwaL0Ufw1ry83Y0SHmHQiUqojXK2ZNo3GK1SH7e8/QTNTarxnnDigkzz/1VD68nKO0RNid2UIPMT/eF8AXP7fYM/Mdl1+1MPlk3VCuf3avjbKo3B5WKz6Mfn+lpWPnTtg9J34IrYjMywIig1NGXmDsapXxAM40LZBWLSx/m3HhvAMAmgRGTJlP4d5XWORhmnhlTlEBzttYBwGogvZKVovmC33liMER/HmO6MbqIJX1I8kLJ11l0Sr6wQDMDQ==
+Received: from ZR0P278CA0015.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:16::25)
+ by PR0P264MB3401.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:110::6) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.19; Fri, 23 Oct
- 2026 09:06:27 +0000
-Received: from PA1PEPF000CC3F9.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:34c:cafe::56) by PA7P264CA0109.outlook.office365.com
- (2603:10a6:102:34c::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.546.19 via Frontend Transport; Fri,
- 23 Oct 2026 09:06:26 +0000
+ 2026 09:06:28 +0000
+Received: from MR1PEPF00000D59.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:910:16:cafe::b) by ZR0P278CA0015.outlook.office365.com
+ (2603:10a6:910:16::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.546.16 via Frontend Transport; Fri,
+ 23 Oct 2026 09:06:28 +0000
 X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
  is 149.6.166.170)
  smtp.mailfrom=softathome.com; dkim=none (message not
@@ -172,22 +172,21 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- PA1PEPF000CC3F9.mail.protection.outlook.com (10.167.242.4) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.569.4
- via Frontend Transport; Fri, 23 Oct 2026 09:06:26 +0000
+ MR1PEPF00000D59.mail.protection.outlook.com (10.167.241.6) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.546.15
+ via Frontend Transport; Fri, 23 Oct 2026 09:06:28 +0000
 Received: from localhost.localdomain (unknown [192.168.72.34])
- by proxy.softathome.com (Postfix) with ESMTPSA id 8C6EE2024F;
- Fri, 23 Oct 2026 11:06:26 +0200 (CEST)
+ by proxy.softathome.com (Postfix) with ESMTPSA id 0E41120078;
+ Fri, 23 Oct 2026 11:06:28 +0200 (CEST)
 From: yan wang <yan.wang@softathome.com>
 To: sjg@chromium.org, alpernebiyasak@gmail.com, trini@konsulko.com,
  alchark@flipper.net, paul.henrys_ext@softathome.com,
  philippe.reynes@softathome.com, marex@nabladev.com, raymondmaoca@gmail.com
 Cc: u-boot@lists.u-boot-project.org,
 	yan wang <yan.wang@softathome.com>
-Subject: [PATCH v2 3/4] binman: pre_load: Add HSM signing support to pre-load
- entry type
-Date: Fri, 23 Oct 2026 11:06:09 +0200
-Message-ID: <20261023090611.778581-4-yan.wang@softathome.com>
+Subject: [PATCH v2 4/4] binman: Add functional test for pre-load HSM signing
+Date: Fri, 23 Oct 2026 11:06:10 +0200
+Message-ID: <20261023090611.778581-5-yan.wang@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261023090611.778581-1-yan.wang@softathome.com>
 References: <CAFLszTjVm0ApA=N-9ATAVd-ZvUu-NgCGJ3iUyOUP25h-ivNHRQ@mail.gmail.com>
@@ -197,30 +196,30 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA1PEPF000CC3F9:EE_|MR1PPFE977920DA:EE_
+X-MS-TrafficTypeDiagnostic: MR1PEPF00000D59:EE_|PR0P264MB3401:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 814e7027-49ba-45e2-6978-08df30e4eb44
+X-MS-Office365-Filtering-Correlation-Id: 12624677-6552-4e09-8d56-08df30e4ec42
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|23010399003|36860700016|56012099006|5023799004|4143699003|261022105027099003|261022075727099003|261021130227099003|261022113327099003|261021121427099003|261021133027099003|261021135927099003|261021123027099003|261009223027099003|261022115727099003|22082099003|17002099007|18002099003|6133799003|10067099003|3023799007;
-X-Microsoft-Antispam-Message-Info: og2u56eOYqrgJYvXZgTLv/uv/pLoSM0ipZ349NQYI78JOdLB+UrB3f2Kq+ap1lzPqMKL5Cbi+xBTERzsZTtqF6UYMID+qji0UnFLLNedUKw1bbHT8lMS8ouH3euVfZ7X0rXXr2GDKXVJAG1U8m0btV1zHOMie+qOLxA6iBamU9u/rn1O1NSIYIVIdDNrez6kmJrJ8+7cKIkpuRT2oyHqAFQ37yeXdXw70vR4DLq9jY/8LyltbCPdFaV+IAfQpiVdAA/6iFEsrybDxItZmJ2t2ppJWrMg0VqV/76tdEnsa6yYWGoiqHOme+VWOSrLGM3KlANsVuW1uNBx6lpxihgyjyQxLXHa9+S/E+mh0J492R8yyx7DFNbWA4YyEpF4dwfgxzEZQPOXtwpcOIBxZKrBDAlVUkyG1M92L48S5BZOGSgUW68eQWvkppqHV/A3VYQkSu5qBzduuYF/saWrrjfX1rUGSHtRSZ89H3bBoYEj0JgToqOgyF1GuiEDCt+aw7CybPXDerbRf6m7QoMty0C48ege+art5Yebxk3WXN/Lov/Mya+XFaX7/uFS6M1EHl7UH7rVEIwNtFnASVm0e+WOCSVDRJK2Fr8jJqx8ob7jlZxftFhvUwOezRDB7VLn1oycxTWcdTrbIsi2uUhrSkOP4DSKf9yEjWjBwT6j3uYjM+HF3LNv9rETp4hCbjPCONUaOuVKZ4P7WC9J2vTTqrG1Cw==
+ ARA:13230040|1800799024|23010399003|376014|82310400026|36860700016|261022105027099003|261022113327099003|3023799007|261021123027099003|261022075727099003|261022115727099003|10067099003|261021121427099003|261021135927099003|261021133027099003|261021130227099003|261009223327099003|261009221227099003|261009220027099003|261009221727099003|261009223027099003|56012099006|4143699003|17002099007|18002099003|22082099003|6133799003;
+X-Microsoft-Antispam-Message-Info: MLR2ufb/JXqtSGSlpiyy04xjFj3vQ/KJg7JzrVmcy2tnxVloiRG7dOViS4r310C/Rh3xNkQU54URzyZudFURH2EYdsKve9HNQMZM7w5uyZie5jJnFikaWLiEDPDfGoUH8HqyA+51YrBHytbWcfRaXdeQ0mmU/VV+dWibakXbmME9dA7XU5VfOOOIEsDjuPiT26uJgRGF/wQ1WA6PeIPI5pFDwN6ZmltA7kQGpvOS1z8/nvjQ6/Bj/5TRuwnGdte3HN3Fw5ONPW8yVwJ23Q6n4r1wkSmcMAogM2JRCQ1uweusqvSkDcWkrY27xGUQlSpounU+xa1xPFS+rGco1tqY2o9kITc/NbqKLrhKGiT7yPqdFC737GiR/h2K3Wmbei+V+xmBLAv0CSRKTELPPwNSsfyGh4Xoid2R7cvhzFbUg7PywHd5IxhH+c0tRZ2aNcxae5Ey+iotZ6dJLkFUgYXrFfLPpornTzoiFK3o8ZxVChbMaTuU78Q5br6dTEiqnTYIiU7QVrKjZFRCagsuQFZCsrr1vJj//AcUu41qf3wQvyVS26yKDGmmnL8J6suSWyTUXM6GyiRRByv/6VjogCedG1D2FggKqRYbOHqlzFIEu4IH8sF813/D5QS1Tfm8bGHz/b3yuXDpO0dBmJgzvG83ueHW4b5MXVbu9jJUQRnDMJtEPhOfp9Jf90b5EzsRRmqLCi3x0cEN5IaYiLh6gg+5Tg==
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(23010399003)(36860700016)(56012099006)(5023799004)(4143699003)(261022105027099003)(261022075727099003)(261021130227099003)(261022113327099003)(261021121427099003)(261021133027099003)(261021135927099003)(261021123027099003)(261009223027099003)(261022115727099003)(22082099003)(17002099007)(18002099003)(6133799003)(10067099003)(3023799007);
+ SFS:(13230040)(1800799024)(23010399003)(376014)(82310400026)(36860700016)(261022105027099003)(261022113327099003)(3023799007)(261021123027099003)(261022075727099003)(261022115727099003)(10067099003)(261021121427099003)(261021135927099003)(261021133027099003)(261021130227099003)(261009223327099003)(261009221227099003)(261009220027099003)(261009221727099003)(261009223027099003)(56012099006)(4143699003)(17002099007)(18002099003)(22082099003)(6133799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 8SHnmlFDKQdSK29x27c6Om7qsXksd+SN8U820I+4QPvkQVHeqVzI0oilX/XvSa5cIH2RvWXppnxMT11NlxejfHQxgEb26ybI0gxcOf5AjQN+uBC3559vQLIUdyMVOq/2VSU5xKblAvHv4kc2F+yv+v1qNTw41QK/37J51yMfldCOfzTyHN4dSPPpBOHjUDWSrrtEDCzwsRtZ8NZpTrLSHx1vQb6ZVCT1zm3+rz7uIdMnzFklsPLN11p1cnGU4eKeBjNS8YPQhHoZv3cKPy8NB5Yri6BIFZ5M1fbyav6tkaHUq9z6Xb6T64wWmGAPsP8sUF99u+6+p/8ELldEKF2N8Gcvh3rn9w9auqMgDzVbNVEQqvYSCytKvTJnWuCoTGCzLq+lDhMPek/A5Mk3DU4Q2To3oUWyPsLSu2L3Fm5mkJ4dgYRoNjXayM3qALlb8Y9J
+X-MS-Exchange-AntiSpam-MessageData-0: U3iIWs22r1JeexhaM8gYp0b1RFLl08fNpNJx+06gkBiDEEcrJYpojcoA6SF+bxniRk80UjP5uM5rfFmBT6xqQ4w9RejGsiZalP84AyTwSX4r5Yxk4WxI1s+38CcO8utKP6Hq8rWx5JlqXslKczDpM5oPrSAkMte82GKx880hC8HdHZvH8wLNENPeWHpUv6AIgB9C10+Fg9sXrktLcStGklkDFnwOkishiZN6IowcHfpytInjTskxI1FKAa8NPkf7k73QmKvp1mXAuQD+QMcQ551ig/dQKIO1LgV/WeA1TP+sb9iePXj8izLtP7oRGwu1owBT2sYeHXYAO9k28YrtIdKNgerT0xKCuTVLtTz+obiBtgw/GyGNH3M/dyoBgDulhu/rQ32TtOTuuvnKw/cACAk/ch6Ft4rZrRv81Np8+xa+CeFqZ+2IsRFL1sMgpnFL
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2026 09:06:26.7175 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 814e7027-49ba-45e2-6978-08df30e4eb44
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2026 09:06:28.3556 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 12624677-6552-4e09-8d56-08df30e4ec42
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA1PEPF000CC3F9.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D59.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1PPFE977920DA
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR0P264MB3401
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -233,314 +232,548 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Extend the pre-load entry type to support signing via hardware
-security modules (HSM) using PKCS#11. The implementation integrates
-with the pkcs11_tool btool to perform signing operations.
+Add end-to-end functional test for HSM-based signing of pre-load
+headers. The test verifies that binman can use PKCS#11 libraries
+to sign data via hardware security modules and can generate pre-load
+headers with HSM signatures.
 
 Signed-off-by: yan wang <yan.wang@softathome.com>
 ---
 Changes in v2:
-- Replace the hsm-support, hsm-library, hsm-token-label, hsm-token-serial,
-  hsm-slot-index, hsm-key-label, hsm-key-id and hsm-pin properties with a
-  single hsm-key PKCS#11 URI (RFC 7512), in line with FIT signing
-- Do not store the PIN in the devicetree: use -a pre-load-hsm-pin or the
-  PKCS11_SIGN_PIN environment variable
-- Take the library path from -a pre-load-hsm-library, the hsm-library
-  property or the module-path attribute of the URI
-- Drop the _SignData() refactoring of v1; keep the file-based code
-  unchanged and add a separate _SignHsmData() helper to reduce the diff
-- Write the data to a file in the output directory, as sign() now takes a
-  file
-- Add ECDSA support
-- Validate the HSM configuration early in ReadNode(), before the tool is
-  looked up
-- Check the length of the returned signature
-- If pkcs11-tool is missing, record it as a missing bintool and emit a
-  dummy header instead of raising an error
+- Merge v1 patches 4 and 5
+- Extend testPreLoadHsmSign (SoftHSM) to cover both pkcs-1.5 and PSS
+- Add testPreLoadHsmEcdsaSign (SoftHSM) which verifies the signatures with
+  the public key read from the token
+- Add tests for an invalid URI, hash and algorithm, module-path in the URI,
+  the data checks in _SignHsmData(), a bad signature length and a missing
+  tool before the header signature
+- Merge testPreLoadHsmSignRuntimeError into testPreLoadHsmSignError
+- Drop testPreLoadDefaultPadding and testPreLoadHsmMissingLibrary; move
+  testPreLoadMissingKeyName to patch 2
+- Rework the devicetrees for the hsm-key URI and make them smaller
 
- tools/binman/etype/pre_load.py | 222 ++++++++++++++++++++++++++++++++-
- 1 file changed, 221 insertions(+), 1 deletion(-)
+ tools/binman/ftest.py                         | 230 ++++++++++++++++++
+ tools/binman/test/security/pre_load_hsm.dts   |  21 ++
+ .../test/security/pre_load_hsm_ecdsa.dts      |  21 ++
+ .../security/pre_load_hsm_invalid_algo.dts    |  21 ++
+ .../security/pre_load_hsm_invalid_padding.dts |  22 ++
+ .../security/pre_load_hsm_invalid_sha.dts     |  21 ++
+ .../security/pre_load_hsm_invalid_uri.dts     |  21 ++
+ .../security/pre_load_hsm_module_path.dts     |  21 ++
+ .../test/security/pre_load_hsm_sign.dts       |  21 ++
+ .../test/security/pre_load_hsm_sign_pss.dts   |  22 ++
+ 10 files changed, 421 insertions(+)
+ create mode 100644 tools/binman/test/security/pre_load_hsm.dts
+ create mode 100644 tools/binman/test/security/pre_load_hsm_ecdsa.dts
+ create mode 100644 tools/binman/test/security/pre_load_hsm_invalid_algo.dts
+ create mode 100644 tools/binman/test/security/pre_load_hsm_invalid_padding.dts
+ create mode 100644 tools/binman/test/security/pre_load_hsm_invalid_sha.dts
+ create mode 100644 tools/binman/test/security/pre_load_hsm_invalid_uri.dts
+ create mode 100644 tools/binman/test/security/pre_load_hsm_module_path.dts
+ create mode 100644 tools/binman/test/security/pre_load_hsm_sign.dts
+ create mode 100644 tools/binman/test/security/pre_load_hsm_sign_pss.dts
 
-diff --git a/tools/binman/etype/pre_load.py b/tools/binman/etype/pre_load.py
-index 49a63ecaafa..14bfb23afb5 100644
---- a/tools/binman/etype/pre_load.py
-+++ b/tools/binman/etype/pre_load.py
-@@ -7,6 +7,7 @@
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index d4522e905e0..08523141b48 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -22,10 +22,15 @@ import unittest
+ import unittest.mock
+ import urllib.error
  
- import os
- import struct
-+from urllib.parse import unquote
- from dtoc import fdt_util
- from u_boot_pylib import tools
++from Cryptodome.Hash import SHA256
++from Cryptodome.PublicKey import ECC
++from Cryptodome.Signature import DSS
++
+ from binman import bintool
+ from binman import cbfs_util
+ from binman import cmdline
+ from binman import control
++from binman.btool import pkcs11_tool as pkcs11_tool_btool
+ from binman import elf
+ from binman import elf_test
+ from binman import fip_util
+@@ -5992,6 +5997,231 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         self.assertIn('key-name is required for file-based signing',
+                       str(exc.exception))
  
-@@ -21,6 +22,34 @@ from Cryptodome.Signature import pkcs1_15
- from Cryptodome.Signature import pss
- from Cryptodome.Signature import DSS
- 
-+def _parse_pkcs11_uri(uri):
-+    """Parse a PKCS#11 URI (RFC 7512) into a dict of path and query attributes.
++    def testPreLoadHsmSign(self):
++        """Test pre-load header signed by SoftHSM via PKCS#11 (pkcs-1.5 and PSS)
 +
-+    Path attributes (e.g. token=, object=, serial=, slot-id=) are separated by
-+    semicolons. Query attributes (e.g. module-path=) follow '?' and are
-+    separated by ampersands.
-+
-+    Args:
-+        uri (str): PKCS#11 URI string starting with 'pkcs11:'
-+
-+    Returns:
-+        dict: Mapping of attribute name to percent-decoded value
-+
-+    Raises:
-+        ValueError: If the string does not start with 'pkcs11:'
-+    """
-+    if not uri.startswith('pkcs11:'):
-+        raise ValueError(f'Not a PKCS#11 URI: {uri!r}')
-+    rest = uri[7:]
-+    path_part, _, query_part = rest.partition('?')
-+    attrs = {}
-+    for part in (path_part.split(';') + (query_part.split('&') if query_part else [])):
-+        if '=' in part:
-+            k, v = part.split('=', 1)
-+            attrs[k.strip()] = unquote(v.strip())
-+    return attrs
-+
-+
- PRE_LOAD_MAGIC = b'UBSH'
- 
- RSAS = {
-@@ -53,6 +82,37 @@ class Entry_pre_load(Entry_collection):
-         - key-name: Filename of the private key to sign
-         - header-size: Total size of the header
-         - version: Version of the header
-+        - pre-load-hsm-library: Path to the PKCS#11 module (.so). This is a
-+          host-specific detail that varies by distribution and should not be
-+          committed to the board DTS. Pass it at build time with
-+          -a pre-load-hsm-library=... . It may also be set via the hsm-library
-+          DT property when the build host is always the same, or embedded in
-+          the hsm-key URI as the module-path= query attribute.
-+        - pre-load-hsm-pin: PIN/passphrase to unlock the PKCS#11 token. Must
-+          NOT be stored in the DT. May also be read from the PKCS11_SIGN_PIN
-+          environment variable, mirroring how mkimage reads MKIMAGE_SIGN_PIN
-+          for FIT signing.
-+
-+    HSM Signing Properties (optional):
-+        When hsm-key is present, signing is done via a PKCS#11 token instead
-+        of a key file, following the same convention as FIT signing.
-+
-+        - hsm-key: PKCS#11 URI (RFC 7512) identifying the token and private
-+          key. Supported path attributes: token=, serial=, slot-id=, object=,
-+          id=. The module-path= query attribute may embed the library path in
-+          the URI as an alternative to the pre-load-hsm-library entry arg.
-+          Examples::
-+
-+              hsm-key = "pkcs11:token=uboot-hsm;object=uboot-key";
-+              hsm-key = "pkcs11:serial=abc123;object=uboot-key";
-+              hsm-key = "pkcs11:slot-id=0;object=uboot-key";
-+
-+    This entry creates a pre-load header that contains a global image
-+    signature. The signature can be created using either a traditional RSA
-+    key file (key-name) or a Hardware Security Module (HSM) via PKCS#11
-+    (hsm-key), enabling production keys to remain on the HSM and never touch
-+    the build machine's filesystem.
-+
- 
-     This entry creates a pre-load header that contains a global
-     image signature.
-@@ -77,6 +137,28 @@ class Entry_pre_load(Entry_collection):
-                 };
-             };
-         };
-+
-+    Example with HSM signing::
-+
-+        binman {
-+            pre-load {
-+                content = <&image>;
-+                algo-name = "sha256,rsa2048";
-+                padding-name = "pss";
-+                header-size = <4096>;
-+                version = <1>;
-+                hsm-key = "pkcs11:token=uboot-hsm;object=uboot-key";
-+            };
-+
-+            image: blob-ext {
-+                filename = "sandbox.itb";
-+            };
-+        };
-+
-+    Invoke binman with::
-+
-+        binman ... -a pre-load-hsm-library=/usr/lib/softhsm/libsofthsm2.so \\
-+                   -a pre-load-hsm-pin=1234
-     """
- 
-     def __init__(self, section, etype, node):
-@@ -87,6 +169,18 @@ class Entry_pre_load(Entry_collection):
-         self.header_size = fdt_util.GetInt(self._node, 'header-size')
-         self.version = fdt_util.GetInt(self._node, 'version')
- 
-+        # HSM properties (optional); populated from hsm-key URI in ReadNode()
-+        self.hsm_key_uri = fdt_util.GetString(self._node, 'hsm-key')
-+        self.hsm_library = fdt_util.GetString(self._node, 'hsm-library')
-+        self.hsm_token_label = None
-+        self.hsm_token_serial = None
-+        self.hsm_slot_index = None
-+        self.hsm_key_label = None
-+        self.hsm_key_id = None
-+        self.hsm_pin = None
-+
-+        self.pkcs11_tool = None
-+
-     def ReadNode(self):
-         super().ReadNode()
-         self.key_path, = self.GetEntryArgsOrProps(
-@@ -94,6 +188,50 @@ class Entry_pre_load(Entry_collection):
-         if self.key_path is None:
-             self.key_path = ''
- 
-+        # hsm-library may be supplied as an entry arg so the host-specific
-+        # library path is not committed to the board DTS.
-+        hsm_lib_arg, = self.GetEntryArgsOrProps(
-+            [EntryArg('pre-load-hsm-library', str)])
-+        if hsm_lib_arg:
-+            self.hsm_library = hsm_lib_arg
-+
-+        # PIN from entry arg or environment variable, NOT from the DT.
-+        pin_arg, = self.GetEntryArgsOrProps([EntryArg('pre-load-hsm-pin', str)])
-+        self.hsm_pin = pin_arg or os.environ.get('PKCS11_SIGN_PIN')
-+
-+        # Validate HSM config early, before any tool is loaded, so a bad DT
-+        # fails immediately regardless of whether pkcs11-tool is installed.
-+        if self.hsm_key_uri:
-+            try:
-+                uri_attrs = _parse_pkcs11_uri(self.hsm_key_uri)
-+            except ValueError as e:
-+                self.Raise(str(e))
-+            self.hsm_token_label = uri_attrs.get('token')
-+            self.hsm_token_serial = uri_attrs.get('serial')
-+            self.hsm_slot_index = uri_attrs.get('slot-id')
-+            self.hsm_key_label = uri_attrs.get('object')
-+            self.hsm_key_id = uri_attrs.get('id')
-+            # module-path query attribute may carry the library path; the
-+            # pre-load-hsm-library entry arg (already applied above) takes
-+            # priority since it is more explicit.
-+            if 'module-path' in uri_attrs and not self.hsm_library:
-+                self.hsm_library = uri_attrs['module-path']
-+
-+            hash_name, sign_name = self.algo_name.split(',')
-+            if hash_name not in SHAS:
-+                self.Raise(f'{hash_name} is not supported')
-+            if sign_name not in RSAS and sign_name not in ECDSAS:
-+                self.Raise(f'{sign_name} is not supported')
-+            padding_name = self.padding_name or 'pkcs-1.5'
-+            if padding_name not in ('pss', 'pkcs-1.5'):
-+                self.Raise(f'Unsupported padding scheme: {padding_name}')
-+
-+    def AddBintools(self, btools):
-+        """Register pkcs11-tool if HSM signing is requested"""
-+        super().AddBintools(btools)
-+        if self.hsm_key_uri:
-+            self.pkcs11_tool = self.AddBintool(btools, 'pkcs11_tool')
-+
-     def _CreateHeaderRsa(self, hash_name, sign_name, padding_name, key_name):
-         # Check hash and signature name/type
-         if hash_name not in SHAS:
-@@ -197,8 +335,90 @@ class Entry_pre_load(Entry_collection):
- 
-         return data + pad
- 
-+    def _SignHsmData(self, data):
-+        """Sign data with the configured HSM via PKCS#11."""
-+        hash_name, sign_name = self.algo_name.split(',')
-+        padding_name = self.padding_name or 'pkcs-1.5'
-+
-+        if hash_name not in SHAS:
-+            self.Raise(f'{hash_name} is not supported')
-+        if sign_name not in RSAS and sign_name not in ECDSAS:
-+            self.Raise(f'{sign_name} is not supported')
-+
-+        padding = {'pss': 'pss', 'pkcs-1.5': 'pkcs1v15'}.get(padding_name)
-+        if padding is None:
-+            self.Raise(f'Unsupported padding scheme: {padding_name}')
-+
-+        if not self.pkcs11_tool.is_present():
-+            self.record_missing_bintool(self.pkcs11_tool)
-+            return None
-+
-+        input_fname = tools.get_output_filename(
-+            f'{self.GetUniqueName()}_hsm_input.bin')
-+        tools.write_file(input_fname, data)
-+
-+        try:
-+            signature = self.pkcs11_tool.sign(
-+                input_file=input_fname,
-+                module=self.hsm_library,
-+                token_label=self.hsm_token_label,
-+                token_serial=self.hsm_token_serial,
-+                slot_index=self.hsm_slot_index,
-+                key_label=self.hsm_key_label,
-+                key_id=self.hsm_key_id,
-+                pin=self.hsm_pin,
-+                hash_algo=hash_name,
-+                sign_algo=sign_name,
-+                padding=padding)
-+        except (ValueError, RuntimeError) as e:
-+            self.Raise(f'HSM signing failed: {e}')
-+
-+        expected = (RSAS[sign_name] if sign_name in RSAS
-+                    else ECDSAS[sign_name])
-+        if len(signature) != expected:
-+            self.Raise(
-+                f'HSM returned {len(signature)}-byte signature but '
-+                f'{sign_name} requires {expected} bytes')
-+        return signature
-+
-     def _CreateHeader(self):
--        """Create a pre load header"""
-+        """Create a pre-load header.
-+
-+        When HSM signing is active the pkcs11-tool btool is called twice per
-+        _CreateHeader() invocation (once for the image signature and once for
-+        the header signature). Binman may call ProcessContents() several times
-+        as entries settle, so consider caching the slot and mechanism results
-+        in a real deployment against a rate-limited HSM.
++        Sets up a SoftHSM v2 token, generates an RSA-2048 key pair on it, and
++        builds two pre-load images (one with pkcs-1.5, one with PSS). Both are
++        verified with preload_check_sign using the public key extracted from the
++        token.
 +        """
-+        if self.hsm_key_uri:
-+            # HSM path: use the HSM signing helper
-+            img_sig = self._SignHsmData(self.image)
-+            if img_sig is None:
-+                # pkcs11-tool is missing; return a dummy header
-+                return tools.get_bytes(0, self.header_size)
++        softhsm2_util = bintool.Bintool.create('softhsm2_util')
++        self._CheckBintool(softhsm2_util)
 +
-+            hash_sig = SHA256.new(img_sig)
++        pkcs11_tool = bintool.Bintool.create('pkcs11-tool')
++        self._CheckBintool(pkcs11_tool)
 +
-+            version = self.version
-+            header_size = self.header_size
-+            image_size = len(self.image)
-+            ofs_img_sig = 64 + len(img_sig)
-+            flags = 0
-+            reserved0 = 0
-+            reserved1 = 0
++        p11_kit = bintool.Bintool.create('p11-kit')
++        self._CheckBintool(p11_kit)
 +
-+            first_header = struct.pack('>4sIIIIIII32s', PRE_LOAD_MAGIC,
-+                                       version, header_size, image_size,
-+                                       ofs_img_sig, flags, reserved0,
-+                                       reserved1, hash_sig.digest())
++        openssl = bintool.Bintool.create('openssl')
++        self._CheckBintool(openssl)
 +
-+            hdr_sig = self._SignHsmData(first_header)
-+            if hdr_sig is None:
-+                return tools.get_bytes(0, self.header_size)
++        prefix = 'testPreLoadHsmSign.'
 +
-+            data = first_header + hdr_sig + img_sig
-+            pad = bytearray(self.header_size - len(data))
-+            return data + pad
- 
-         # File-based path: dispatch on signing algorithm
-         if not self.key_name:
++        # Configure SoftHSMv2
++        softhsm2_data = tools.read_file(self.TestFile('fit/softhsm2.conf'))
++        softhsm2_conf = self._MakeInputFile(f'{prefix}softhsm2.conf',
++                                            softhsm2_data)
++        softhsm2_tokens_dir = self._MakeInputDir(f'{prefix}softhsm2.tokens')
++        with open(softhsm2_conf, 'a') as f:
++            f.write(f'directories.tokendir = {softhsm2_tokens_dir}\n')
++
++        # Locate the SoftHSM2 shared library via p11-kit
++        p11_kit_config = configparser.ConfigParser()
++        p11_kit_config.read_string(p11_kit.run_cmd('print-config'))
++        softhsm2_lib = p11_kit_config.get('softhsm2', 'module', fallback=None)
++        self.assertIsNotNone(softhsm2_lib,
++                             'softhsm2 module not found in p11-kit config')
++
++        pubkey_der = os.path.join(self._indir, 'pubkey.der')
++        pubkey_pem = os.path.join(self._indir, 'pubkey.pem')
++
++        with unittest.mock.patch.dict('os.environ',
++                                      {'SOFTHSM2_CONF': softhsm2_conf}):
++            softhsm2_util.run_cmd('--init-token', '--free', '--label',
++                                  'uboot-hsm', '--pin', '1234',
++                                  '--so-pin', '1234')
++            pkcs11_tool.run_cmd('--module', softhsm2_lib,
++                                '--keypairgen', '--key-type', 'rsa:2048',
++                                '--label', 'uboot-key', '--login',
++                                '--pin', '1234')
++            pkcs11_tool.run_cmd('--module', softhsm2_lib,
++                                '--read-object', '--type', 'pubkey',
++                                '--label', 'uboot-key', '--login',
++                                '--pin', '1234', '--output-file', pubkey_der)
++            openssl.run_cmd_result('rsa', '-pubin', '-inform', 'DER',
++                                   '-in', pubkey_der, '-out', pubkey_pem)
++
++            entry_args = {
++                'pre-load-hsm-library': softhsm2_lib,
++                'pre-load-hsm-pin': '1234',
++            }
++
++            # pkcs-1.5 (default padding)
++            data = self._DoReadFileDtb('security/pre_load_hsm_sign.dts',
++                                       entry_args=entry_args)[0]
++            image_fname = tools.get_output_filename('image.bin')
++            self.assertEqual(PRE_LOAD_MAGIC, data[:len(PRE_LOAD_MAGIC)])
++            self.assertEqual(PRE_LOAD_VERSION, data[4:4 + len(PRE_LOAD_VERSION)])
++            self.assertEqual(PRE_LOAD_HDR_SIZE,
++                             data[8:8 + len(PRE_LOAD_HDR_SIZE)])
++            self.assertTrue(self._CheckPreload(image_fname, pubkey_pem))
++
++            # PSS padding
++            data = self._DoReadFileDtb('security/pre_load_hsm_sign_pss.dts',
++                                       entry_args=entry_args)[0]
++            image_fname = tools.get_output_filename('image.bin')
++            self.assertEqual(PRE_LOAD_MAGIC, data[:len(PRE_LOAD_MAGIC)])
++            self.assertTrue(
++                self._CheckPreload(image_fname, pubkey_pem, padding='pss'))
++
++    def testPreLoadHsmEcdsaSign(self):
++        """Test pre-load header signed by SoftHSM with ECDSA."""
++        softhsm2_util = bintool.Bintool.create('softhsm2_util')
++        self._CheckBintool(softhsm2_util)
++        pkcs11_tool = bintool.Bintool.create('pkcs11-tool')
++        self._CheckBintool(pkcs11_tool)
++        p11_kit = bintool.Bintool.create('p11-kit')
++        self._CheckBintool(p11_kit)
++
++        prefix = 'testPreLoadHsmEcdsaSign.'
++        conf = self._MakeInputFile(
++            f'{prefix}softhsm2.conf',
++            tools.read_file(self.TestFile('fit/softhsm2.conf')))
++        token_dir = self._MakeInputDir(f'{prefix}tokens')
++        with open(conf, 'a') as fd:
++            fd.write(f'directories.tokendir = {token_dir}\n')
++
++        cfg = configparser.ConfigParser()
++        cfg.read_string(p11_kit.run_cmd('print-config'))
++        lib = cfg.get('softhsm2', 'module', fallback=None)
++        self.assertIsNotNone(lib)
++
++        with unittest.mock.patch.dict('os.environ', {'SOFTHSM2_CONF': conf}):
++            softhsm2_util.run_cmd('--init-token', '--free', '--label',
++                                  'uboot-hsm', '--pin', '1234',
++                                  '--so-pin', '1234')
++            pkcs11_tool.run_cmd('--module', lib, '--keypairgen',
++                                '--key-type', 'EC:prime256v1',
++                                '--label', 'uboot-ecdsa', '--login',
++                                '--pin', '1234')
++            pubkey_der = os.path.join(self._indir, 'ecpubkey.der')
++            pkcs11_tool.run_cmd('--module', lib, '--read-object',
++                                '--type', 'pubkey', '--label', 'uboot-ecdsa',
++                                '--login', '--pin', '1234',
++                                '--output-file', pubkey_der)
++            args = {'pre-load-hsm-library': lib, 'pre-load-hsm-pin': '1234'}
++            data = self._DoReadFileDtb('security/pre_load_hsm_ecdsa.dts',
++                                       entry_args=args)[0]
++            self.assertEqual(PRE_LOAD_MAGIC, data[:len(PRE_LOAD_MAGIC)])
++
++            # preload_check_sign needs the private key for ECDSA, which an HSM
++            # never exports, so verify with the public key read from the token.
++            # Layout: header (64 bytes), header signature (64 bytes), image
++            # signature (64 bytes), then padding up to the 4096-byte header.
++            pub = ECC.import_key(tools.read_file(pubkey_der))
++            first_header = data[:64]
++            hdr_sig = data[64:128]
++            img_sig = data[128:192]
++            image = data[4096:]
++            self.assertEqual(SHA256.new(img_sig).digest(), first_header[32:64])
++            DSS.new(pub, 'fips-186-3').verify(SHA256.new(image), img_sig)
++            DSS.new(pub, 'fips-186-3').verify(SHA256.new(first_header),
++                                              hdr_sig)
++
++    def testPreLoadHsmInvalidPadding(self):
++        """Test HSM signing with invalid padding-name (validated before tool check)"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('security/pre_load_hsm_invalid_padding.dts')
++        self.assertIn('Unsupported padding scheme', str(exc.exception))
++
++    def testPreLoadHsmMissingTool(self):
++        """Test that binman still produces an image if pkcs11-tool is missing"""
++        with terminal.capture() as (_, stderr):
++            self._DoTestFile('security/pre_load_hsm.dts',
++                             force_missing_bintools='pkcs11-tool')
++        err = stderr.getvalue()
++        self.assertRegex(err, "Image 'image'.*missing bintools.*: pkcs11-tool")
++
++    def testPreLoadHsmSignError(self):
++        """Test HSM signing when sign() raises ValueError or RuntimeError"""
++        Btool = pkcs11_tool_btool.Bintoolpkcs11_tool
++        for exc_type in (ValueError, RuntimeError):
++            with unittest.mock.patch.object(Btool, 'is_present',
++                                            return_value=True), \
++                 unittest.mock.patch.object(Btool, 'sign',
++                                            side_effect=exc_type('Mock HSM error')):
++                with self.assertRaises(ValueError) as exc:
++                    self._DoReadFile('security/pre_load_hsm.dts')
++                self.assertIn('HSM signing failed', str(exc.exception))
++
++    def testPreLoadHsmInvalidUri(self):
++        """Test HSM signing with a hsm-key that is not a PKCS#11 URI"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('security/pre_load_hsm_invalid_uri.dts')
++        self.assertIn('Not a PKCS#11 URI', str(exc.exception))
++
++    def testPreLoadHsmInvalidSha(self):
++        """Test HSM signing with an unsupported hash algorithm"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('security/pre_load_hsm_invalid_sha.dts')
++        self.assertIn('sha1 is not supported', str(exc.exception))
++
++    def testPreLoadHsmInvalidAlgo(self):
++        """Test HSM signing with an unsupported signing algorithm"""
++        with self.assertRaises(ValueError) as exc:
++            self._DoReadFile('security/pre_load_hsm_invalid_algo.dts')
++        self.assertIn('rsa1234 is not supported', str(exc.exception))
++
++    def testPreLoadHsmModulePath(self):
++        """Test that module-path in the hsm-key URI sets the HSM library"""
++        self._DoTestFile('security/pre_load_hsm_module_path.dts',
++                         force_missing_bintools='pkcs11-tool')
++        entry = control.images['image'].GetEntries()['pre-load']
++        self.assertEqual('/no/lib.so', entry.hsm_library)
++
++    def testPreLoadHsmSignDataChecks(self):
++        """Test _SignHsmData() re-validates algorithm and padding"""
++        self._DoTestFile('security/pre_load_hsm.dts',
++                         force_missing_bintools='pkcs11-tool')
++        entry = control.images['image'].GetEntries()['pre-load']
++        for algo, padding, msg in (
++                ('sha1,rsa2048', None, 'sha1 is not supported'),
++                ('sha256,rsa1234', None, 'rsa1234 is not supported'),
++                ('sha256,rsa2048', 'bad', 'Unsupported padding scheme')):
++            entry.algo_name = algo
++            entry.padding_name = padding
++            with self.assertRaises(ValueError) as exc:
++                entry._SignHsmData(b'data')
++            self.assertIn(msg, str(exc.exception))
++
++    def testPreLoadHsmBadSignatureLength(self):
++        """Test HSM signing when the returned signature has the wrong size"""
++        Btool = pkcs11_tool_btool.Bintoolpkcs11_tool
++        with unittest.mock.patch.object(Btool, 'is_present',
++                                        return_value=True), \
++             unittest.mock.patch.object(Btool, 'sign',
++                                        return_value=b'short'):
++            with self.assertRaises(ValueError) as exc:
++                self._DoReadFile('security/pre_load_hsm.dts')
++        self.assertIn('HSM returned 5-byte signature', str(exc.exception))
++
++    def testPreLoadHsmHeaderSignMissing(self):
++        """Test dummy header when the tool vanishes before the header sign"""
++        from binman.etype import pre_load as pre_load_etype
++        calls = []
++
++        def fake_sign(data):
++            calls.append(1)
++            return bytes(256) if len(calls) % 2 else None
++
++        with unittest.mock.patch.object(pre_load_etype.Entry_pre_load,
++                                        '_SignHsmData',
++                                        side_effect=fake_sign):
++            data = self._DoReadFile('security/pre_load_hsm.dts')
++        self.assertEqual(tools.get_bytes(0, 4096), data[:4096])
++
+     def _CheckSafeUniqueNames(self, *images):
+         """Check all entries of given images for unsafe unique names"""
+         for image in images:
+diff --git a/tools/binman/test/security/pre_load_hsm.dts b/tools/binman/test/security/pre_load_hsm.dts
+new file mode 100644
+index 00000000000..5671559c838
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_hsm.dts
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,rsa2048";
++			header-size = <4096>;
++			version = <0x11223344>;
++			hsm-key = "pkcs11:token=uboot-hsm;object=uboot-key";
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
+diff --git a/tools/binman/test/security/pre_load_hsm_ecdsa.dts b/tools/binman/test/security/pre_load_hsm_ecdsa.dts
+new file mode 100644
+index 00000000000..5b00ed8d69d
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_hsm_ecdsa.dts
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,ecdsa256";
++			header-size = <4096>;
++			version = <0x11223344>;
++			hsm-key = "pkcs11:token=uboot-hsm;object=uboot-ecdsa";
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
+diff --git a/tools/binman/test/security/pre_load_hsm_invalid_algo.dts b/tools/binman/test/security/pre_load_hsm_invalid_algo.dts
+new file mode 100644
+index 00000000000..49d1c18f478
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_hsm_invalid_algo.dts
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,rsa1234";
++			header-size = <4096>;
++			version = <0x11223344>;
++			hsm-key = "pkcs11:token=uboot-hsm;object=uboot-key";
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
+diff --git a/tools/binman/test/security/pre_load_hsm_invalid_padding.dts b/tools/binman/test/security/pre_load_hsm_invalid_padding.dts
+new file mode 100644
+index 00000000000..6ef11a59bb1
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_hsm_invalid_padding.dts
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,rsa2048";
++			padding-name = "invalid";
++			header-size = <4096>;
++			version = <0x11223344>;
++			hsm-key = "pkcs11:token=uboot-hsm;object=uboot-key";
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
+diff --git a/tools/binman/test/security/pre_load_hsm_invalid_sha.dts b/tools/binman/test/security/pre_load_hsm_invalid_sha.dts
+new file mode 100644
+index 00000000000..e6c693e4954
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_hsm_invalid_sha.dts
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha1,rsa2048";
++			header-size = <4096>;
++			version = <0x11223344>;
++			hsm-key = "pkcs11:token=uboot-hsm;object=uboot-key";
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
+diff --git a/tools/binman/test/security/pre_load_hsm_invalid_uri.dts b/tools/binman/test/security/pre_load_hsm_invalid_uri.dts
+new file mode 100644
+index 00000000000..17838935f61
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_hsm_invalid_uri.dts
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,rsa2048";
++			header-size = <4096>;
++			version = <0x11223344>;
++			hsm-key = "http://not-a-pkcs11-uri";
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
+diff --git a/tools/binman/test/security/pre_load_hsm_module_path.dts b/tools/binman/test/security/pre_load_hsm_module_path.dts
+new file mode 100644
+index 00000000000..ae25d63b53d
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_hsm_module_path.dts
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,rsa2048";
++			header-size = <4096>;
++			version = <0x11223344>;
++			hsm-key = "pkcs11:token=uboot-hsm;object=uboot-key?module-path=/no/lib.so";
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
+diff --git a/tools/binman/test/security/pre_load_hsm_sign.dts b/tools/binman/test/security/pre_load_hsm_sign.dts
+new file mode 100644
+index 00000000000..5671559c838
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_hsm_sign.dts
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,rsa2048";
++			header-size = <4096>;
++			version = <0x11223344>;
++			hsm-key = "pkcs11:token=uboot-hsm;object=uboot-key";
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
+diff --git a/tools/binman/test/security/pre_load_hsm_sign_pss.dts b/tools/binman/test/security/pre_load_hsm_sign_pss.dts
+new file mode 100644
+index 00000000000..452f9f6d8a6
+--- /dev/null
++++ b/tools/binman/test/security/pre_load_hsm_sign_pss.dts
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0+
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pre-load {
++			content = <&image>;
++			algo-name = "sha256,rsa2048";
++			padding-name = "pss";
++			header-size = <4096>;
++			version = <0x11223344>;
++			hsm-key = "pkcs11:token=uboot-hsm;object=uboot-key";
++		};
++
++		image: blob-ext {
++			filename = "refcode.bin";
++		};
++	};
++};
 -- 
 2.43.0
 
