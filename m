@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F994606A31A
-	for <u-boot@archiver.kernel.org>; Fri, 23 Oct 2026 14:55:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C340D606A31E
+	for <u-boot@archiver.kernel.org>; Fri, 23 Oct 2026 14:55:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=jDu2SY9L;
-	dkim=pass (2048-bit key, unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=nYJdwaYK
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=BA/K1mL7;
+	dkim=pass (2048-bit key, unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=4J/wFch0
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 50D80409BC;
-	Fri, 23 Oct 2026 14:55:29 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 78096813AC;
+	Fri, 23 Oct 2026 14:55:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oOMiIHw0HtV3; Fri, 23 Oct 2026 14:55:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 47D7A4096C
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792767326;
-	b=cp/YKBN2lLIqSGu3cQ2zOI4HBVzI5Vripyz641jgsjtriSxXghKTlBQaoVkyLhWDHgGy
-	 GfHLxyhFFUJYGMzNVr2pk0K9McmJ1z110VHTypri4By5ekjWJ2XYKCb+winriRU/D6RMz
-	 PvVd8z1LZU6m+OFjPml+tWfTpNSY3wt5OzyBkTW2DDwndmjeKTWAMw1Y7kqq6kMdNvPMy
-	 V1gP/Fb+qZkKoDQGMKOOFvgjL/T5V1B6JY6LY1UgbXmV+N7HUiJohGX+WlENeFPk/5pbQ
-	 pYGOAA9pVSoRsr4jgjNBnGlD/ftiIIZeuNFgtE4IVjugc9xT2rEcinP1VOgFIeivljQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6CBBMhrAhxj3; Fri, 23 Oct 2026 14:55:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3B5C581303
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792767329;
+	b=Q1R7x5GqzP9uVCC4dDlk0FkBA++NZ/sRyDqHWcutcTMLipdT+cn8Rj5EV/w7Z9g3ITrD
+	 hB6pYs39MAGT4+dsnfOj48va/ktDnLWxEG/xe7IRWtgJbarP0IqvdxUp/isXC2mfh2w4b
+	 JrOnxLQZ/fkGvmNFUNCpsC4BChnhcaSTvdVqOFkuOiMj/SIf5G+GgEZpysYXQCj6MTUM7
+	 qX2y/m+4viMpvKNzYhYRhxtQNogWUI9XUTCDV+ypWpnxdGGd1rPxyh/FvkBNGIigWd+53
+	 i5cBqzZor7rsf9z4XX83KQFQ0JJJ+z5tvgbYKrHr7PkekjACzAeOkoN+KvL5GQUoqOw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792767326;
+	c=relaxed/relaxed; t=1792767329;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -34,139 +34,139 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Developer-Key:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=OhanT5ShDY4xKobVn7m+mUCnsnftaj6OemnGZzSDSdQ=;
-	b=KQ6fYCyoB0Mwb60QccevYBuJEajZywvPrsH0CuD9grT0g+f15b9ONN0iZHNXH3V2tTeS
-	 qSwmFiY+ga/YVr9GYjTnL+bsPKs2Iemt6ePqqc3GBjW2w934LIM2DtjNCVDd+Q0LLnXyX
-	 9O1D3FpaAH637znwPP6epQ/ja14fxs67xL/F8VXB5dvBuavxp8nyumOMigm6szTHZUGSR
-	 92rZ3GGNd00E95Y8LHcv0JT/5/EL1tY8s4u5/5LKXlfUC3eMnDEVks4ZRb8oXBQKlEsDC
-	 HunAT+As+DjVOVPVFKikWxb+W5h/QrCAp/gfjxys1A11uOtwlEyFcBDERdBTBUFVtQg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=twXp1QWFYRMiMNtTosMX6pmD+Wat58Nx5phZT/7Wyv8=;
+	b=JDDj/4ODzLK+SWMZ3cnHaK159G1xqXIVhTrZ2bL7s0JJSEXSEKDL9mKyKmYKVrr/UpAa
+	 8BCSivnjmEPkHPsik1Nr/qlsvXDDjdMBr3ojRdvTnUVAv06qgw8S7UTmv4thlPDSet6cs
+	 5/rquYULSVcGRS1d/7OQFSPMblHvHwJ+HuTxb1o6Yf19j9uPhJ1NvOjoElK2M+TJ2MVnN
+	 mFubaRUpqy4UlrvYxxXRmuECuZshGMfQeTPWzIVwB33ekKpFhQRlAOrgB2yWkRHsQUebW
+	 gkRb6O38WQr1pybVectBFxpFUDpzoM9nn9F5cMM5GlUGYL/mMyImlpD/0WALAeNgBdA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792767326;
-	bh=OhanT5ShDY4xKobVn7m+mUCnsnftaj6OemnGZzSDSdQ=;
+	d=lists.u-boot-project.org; s=default; t=1792767329;
+	bh=twXp1QWFYRMiMNtTosMX6pmD+Wat58Nx5phZT/7Wyv8=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jDu2SY9L3bv0qLs81MXtex8DAYGfbVP8b9bR2dt9f+nWFw2DO1Mdj/a+NwJpzzewE
-	 IGrR/g4eN5ESsvBAHA1AASrxsTcb/CcKHVt/0QgHcJ56dXiSIOTM/6ijrAhgAxevpq
-	 2JtGrS60uPpjUeFkTw+zn00NLR+lK3NJzif/aJ37JZVTK2uiFw03n8Fv2rKXwoqIKW
-	 GfXEBf1I8yG1P/HV7epAxccWpE3n4+LHw9ZZKYsTg+OtijGxYrQXUxR+YofrFz6+nV
-	 scW8FOCG2qEmBJAMR78PvICxz28l9wDQXAk53hz1lybJWB2lEkOfzweg4RjzLF/tqW
-	 mdN4X1YBoRprg==
+	b=BA/K1mL7GcPGEVPsNQ5M23JisY5ncq6IqBPy51UTCwWX5XYUGWE5gAz7df84o83Y2
+	 Ngf25qRZeiYax5HfjhckK+gTQ0Q/8Z3U7O9vGHd/xwRU6GzzJQq1m43Jx7tongNXZX
+	 W7FFIul2uAmKxUG8XpfCW6e9yq2BNb7LpjWT7/xMSEsFjT90QM8vN0lXoeUCpfr/M4
+	 TQzCmPfnfj+twIyijexwqlv9MDtd3vMXKDSb0gUdMebmfaA8K3BYFhw8CEcyR5LKLp
+	 GRKYuYYiSVHe6LJG1gzW7nSu4PQUj8TQkus5XM9lLOYtTGsLi/4VvpNY6fCl+q8Hag
+	 2L4Cf6IAKIs8w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 47D7A4096C;
-	Fri, 23 Oct 2026 14:55:26 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 710A0235
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 14:36:20 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3B5C581303;
+	Fri, 23 Oct 2026 14:55:29 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id B82C43C1
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 14:36:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 564FE606C4
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 14:36:20 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9DDA5401F1
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 14:36:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id L5Y3YQ4oUwX2 for <u-boot@lists.u-boot-project.org>;
- Fri, 23 Oct 2026 14:36:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8E872605D8
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792766178;
- b=Uz5uZy9eH/rjzIhEutp/SIPdHkgDeLZuGS78ex8pHLEIUtYDgUYHQDh3V0XKIwma8C6S
- SkRxJtHSRz5qiNzgeGXdftmz1t5kqTabRmlqhgcXFF2ueCnICdonjzDRjpgvzpmk+rnZb
- 5sXzUCbDCYksCnwTqACddGar/8u2Chl9YhHe5RBBe/YcFHLk0VXGb9QGeyG7S4C+xo3gp
- KjUSGzDQANksf+MDCE6u57lbxbuMOMMS3OB71rX/438MbGZC1ysJjje486yQEAh9KLmb+
- +Fcnyej2N4E99fuAT0swKvCekmIrbxeTw6FWZmAljsmLggwG2u6Xp/nG2Al5nsLwBwQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 7jIahprXklZO for <u-boot@lists.u-boot-project.org>;
+ Fri, 23 Oct 2026 14:36:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 4C0C5401DF
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792766195;
+ b=Fy16WDy0Ro9SIEXRo/6G9vY+jWwN22QxK5ikMLd/5MB4BPY9+h7EmQi1p9zEkpuvcF1h
+ QAxFfgHQYKL+sq9FleuH7MS5J1v2yt62hyvFLtg/3G1/C9zMzWqff1zhOPdXtQoTbjupD
+ Q4ATPw55P+kXjhIQk95k1xbxYP3iktyR6J/OK/3FcU54460ZB5goQ0Qlk/1cW+R3f30/v
+ hxuQANTLqz8x5jzWZ5VTtdpYHCUSmbcyHS+EgrJtG5H15zXyL7W2dz3+0+CfYtV0S0uX6
+ byZ2v9X4syyZk7lUdyLgaFNcWvdubcsthdypmSllCG10ajYFhCobxkUGypuhvE+5XHQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792766178;
+ c=relaxed/relaxed; t=1792766195;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Developer-Signature:X-Developer-Key;
- bh=OhanT5ShDY4xKobVn7m+mUCnsnftaj6OemnGZzSDSdQ=;
- b=YxqLvuXnheVCfSnBYoU5+EqYmrx4QRUsGVH3LPLRly7NAWFRgF+gAzOz92rFi8huu4X/
- 1TKO+r0YF32kbA+nCKHZkrVCyj9PUqOF1HLOE64SHJFgpG7RBgWJSMADHrKdnWLfWHHjb
- NFwhHv27aH474KzwFh3MRfl0zu9vUt/8Px0f/xvQZljRNbgLceKJZpVUWCwiv5tvSeAwa
- gT1g3SH63TDNYu/kog2+M7IiQNDj/U+LYFCpXKqA4jGNhbmMzKpiqD/GuD6IJC5mbY7iq
- J050erQtUySn3XncPGZaWQUh9tmFfhhK9RocWyygIqMkGFHtTasFPnwdsMwOeOhW0XQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=twXp1QWFYRMiMNtTosMX6pmD+Wat58Nx5phZT/7Wyv8=;
+ b=RiwjEiXTm40dV5ICODvNcxM+LXoRmn+0FIPx0iIo4XhOzO/cNztaRrdHOdegPAmbE1gb
+ hOtKl2bHscgzsfugnrg9Wri6lcfqIrBNxoMeMHAC9oBI7gEYw/BvcrzxG3NZKaThd4SnF
+ 321AQXX5LG82YI2t01O0N552d0P9IlgIlqOpsAfy4LrPF8EijlIPSRhvzDnHbiHzMsag8
+ PcEmQuRq1V78STJRw/l2YOTTAoYX/KMacoM4Ixo2wT/LzSQrrooSl7e9O4eReO8Do/ou+
+ i1qyOlZTCg/hIk88F6GkBldsqjsnp3eDutKD35IvZCsaJwi9/9oHaAO50+F9sBFxvQA==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=flipper.net;
  dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=nYJdwaYK; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
+ header.s=google header.b="4J/wFch0"; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32f; helo=mail-wm1-x32f.google.com;
+ client-ip=2a00:1450:4864:20::32b; helo=mail-wm1-x32b.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=nYJdwaYK
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 8E872605D8
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 14:36:17 +0000 (UTC)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4a1dede3c2cso11191885e9.2
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 07:36:17 -0700 (PDT)
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
+ header.a=rsa-sha256 header.s=google header.b=4J/wFch0
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 4C0C5401DF
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 14:36:34 +0000 (UTC)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-49d05d51553so6833035e9.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 07:36:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1792766175; x=1793370975;
+ d=flipper.net; s=google; t=1792766193; x=1793370993;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=OhanT5ShDY4xKobVn7m+mUCnsnftaj6OemnGZzSDSdQ=;
- b=nYJdwaYKFGOhRTkH++TlafC0wGXNAhcIFwjgRzH2bd1OuSJGBnFAPyYFsU+0GqclRj
- Noigp1Jj37Q6zJN0WRklx6kE3S9MwBJoSxS+Fx1Fmh2JarE64LFGSv3tEfdPJsQ9iDWU
- 98uUQwBT+ptjtJ3RQjZTKtnZ6MK1ay8gegZ+FDEZrcPufoQnHc2BUHnEY9KDHTTw1V7n
- 3tUXy/xhFSygPo9b6c4FyFOEyuc/qU7yxz+aO8NICF6XeFD8KhesNPPm4TVdyWbdoSXO
- T4Wmr3MlecBhXI49ajRsKKaBKXLuX0X9skApil5+zfX3KbRiib5f2uvLzAs1FvGGAG+D
- ch/A==
+ bh=twXp1QWFYRMiMNtTosMX6pmD+Wat58Nx5phZT/7Wyv8=;
+ b=4J/wFch03fBO2utrjJz/iHhGwCtgaVkPr2iLJlbhpSptzKFbDwTzmZFJDPIRNPeCoS
+ aQ2dWG/EPer84HuSK5hoAKqKr6E9H/YSZrzUupS+wTiYtFIwaWz6R/XJvdrPgIF98XIm
+ d166FZYmxM+lhx3YVOKQaQ4GGQr5YwPlblSYH1PD/u1zwJRokIPkLtBpvRAJm65M2mQn
+ gt05fz8IIRtlkV4Oahtp3cABHC2+TY1o3Mf0YYsCB2l8Rszbs3At3CEskecSe6KeLHYc
+ ADOYIFVtwC77rH7axccldqrnv4HxL0C9fKoexQbJLkpNBFVzr1nC0K1NnRDnqZNKHxH8
+ mLTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792766175; x=1793370975;
+ d=1e100.net; s=20260707; t=1792766193; x=1793370993;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=OhanT5ShDY4xKobVn7m+mUCnsnftaj6OemnGZzSDSdQ=;
- b=Z8Upzw44hyG5BYYJiq8FdoH80sTKUFsHOl/EcCzQDW+iC/gASPQtrZNrcQvemG4Jnl
- cQhFUX7wFND3Xbn+FUbmx+Qd2kiefJ2t/0UJpLe/1YJnRiiNUjMA7zbU29HYMPt7JZ2F
- 13GqwNuxJVNrrDkLO7c2zPVmI1RdjtXf8A7KnVGYXBdDXq03ee+TGv7zCYVUMSdfZNgg
- ILzj0e5RA9gsrju9tk8BLd4o52I42F30Xi0cGwm6rFvXLUwKmRj/adOd0aesbPFjuklh
- vrKmbjV8VC09sqc/2pTiMo48r9NwcscMqsBCYhuwbUFgYZF7JsbCPTTeBIdErqYyr9pM
- 8Ldw==
+ bh=twXp1QWFYRMiMNtTosMX6pmD+Wat58Nx5phZT/7Wyv8=;
+ b=cRVhOx9oZ17vL8PZqpcC+mPaTyehfzCNJrv6FRqWu0AdvAJ6fd9s/detJh0DEdSBvz
+ E+WGu6JEYH4TrAf8u/9qk2JWdcyZZVtklibxkDhVRo5+bOdCofK4lP0CSvAhadLenBMu
+ QJzLjoc5gLM2hzKr7jidNb2SaWAtNZitvtunV4rTWyPTdqcgKcyeuLh53uQeke1KgjRT
+ r+l8gdk9jWvoOHJLqNJl12r487g5VSoX2R1X+22bX5ZliHCdvC1D//S4CZQVXSqdP3Bo
+ LHboEGHzOpXZ2dmGs4iiAbbl7bPNz0tvXYOThJC1tc09rSjntdm60WKTSrDLtAslFpdk
+ daCA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxCfejpyRK1jKT0Qr6p6wOFKsxuRz3JY+EuLd1TARtkOEwnhUldTjRpe0S06InU3MpFnkwgGvw=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYLKercILj7oPT2uLGeCUVjwLH053wzdppMFr4GlapjbKDyOE5Ib
- 3chX5JO6c+cQnzAN1ZKQ3ru+B82BNFIbKyKyiKfxqPx9bLDtBoFQO2iOa5ynfh1WPZE=
-X-Gm-Gg: AYBFou05llI2jF+su9fMsOL27VsMnOlZFMNyjeMkLl5CHYzmTjzGRK59ihzBYWe1TMX
- v5ouJRTbykr0uLkZXfagRepv1rGlKrMhPLLClfY10Im5/IJqni/CM4LgJv6QFQaiGmCKjrORJmi
- +9tQUpHSnNpFDR1n7OHU3VD2Drl9ZArOxLUJtSFP+Uxf3WFjON9C4DZ5QqkZo+iG2kjEGdWYijU
- egnAhfZ6duF4McIzI9KGyPJC1alHVF8AC4wtbfo44OMKCdBXCDFmuE6hmKRDcjc2ECGkTn7XPv8
- kVIz8UTFI+VEinMyJPnzhpZXrx7x2TWGgTMs9NjufrCgMS2PsjJ8VueVtUShbhLvTeq87DfWv8R
- aeoItcbTORAncbAxRFlEI/eNgKitzF0UMw5IQyjw2Bs8tURX4wLy3AaC2//TWWkM//cSfZKo/Ab
- yXHOIBQ8BKCCtKjZkxeSv6T0VWkCzQO0YSOboMr49nM/w47vqsS7jVgRwD6/i7T5NCuxHZu+ngh
- VM10udpF0jtQHcM+Ejtt32u/BCHeZxpxw15AJvfvbulrcnHJh/YlOYHuBqR9OwApWqHvh4KaqOC
- nCTQU0qWy9KADh6iUnODWUPuu6SLBorEf4GV
-X-Received: by 2002:a05:600c:1f88:b0:49f:bd3c:bc24 with SMTP id
- 5b1f17b1804b1-4a211f03ac9mr41138115e9.31.1792766174856; 
- Fri, 23 Oct 2026 07:36:14 -0700 (PDT)
+ AKwUvByLhkprDbXzd9eS3DAD38nw2hxXuSzncosn/Jpl+AR9o3SOJTy1liCfvS5xUQBD8Pl4bnlhjz8=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYKxODRdyfngVAUyiznQXb+dKYCnwFes7UmWemwgiqHMj5T3phol
+ 6/3JQ0nxTA0ztOQNvBsJjmS/F3wTQejhjIDkYy4UX1k5deinUeKWgvs5uatV9tTSgpg=
+X-Gm-Gg: AYBFou1Eep+Bo1rU3FlLbEqOG+mIOxdvMhnGE8pmQQI+cbJeTx4ae/AyScjCNxsKb0J
+ NfmrKIzhDr+aWLjyfiieFjQkKn22hN/7rnzkVU7XkuKqFZ5pKipjyZoI9OSRx1WEdBW+3GdfaIx
+ oZilA4mJfStArO2JxksCyTFYKZNnmN0fvWmAUKnpsNzkbjwyP+nYxHHvqvxSUWJi7l5E7rkS+E/
+ Dla/DiyczgabsIVAME6HiXUw5Gnwogr2Efqzq9v033IKGGbYK55PmMQc3J3jTiOmyzthMdTASUL
+ EHu/TJ7G5H/79U0WhaVnh7v81TERS1h08sIbAOsXEv7HzDbVr6fuDPCb9Np1+BnF2G2xmluuvqn
+ dqmB7S4frn0geTTQcq3jZjLJokpPrPktUmA/j31hfvE5R/YbxFOxwZrk8VzcZeq5ZFMubSyo1XL
+ C746poa5RNBVF3DlJtZsHydz2JgmlfMkPiSEBYz/p7kwUurS/W9mYvksDaw4e7Sn67G3V1EBDNQ
+ vVocOKcboQ6dUNc5v6h/ZdQ5oDAU6HLiTaOp//YUGnh6uP5qrF3N/dM2rDJYwCurhoOP3E16zUR
+ +gDjuYBVJC7CZsEJ10/0FKHbS4Hq580ZvIQ=
+X-Received: by 2002:a05:600d:82e4:b0:4a2:1655:87e2 with SMTP id
+ 5b1f17b1804b1-4a21655890cmr32981745e9.19.1792766192613; 
+ Fri, 23 Oct 2026 07:36:32 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-86-98-194-229.alshamil.net.ae.
  [86.98.194.229]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a29cd9d0aasm9906875e9.3.2026.10.23.07.36.06
+ 5b1f17b1804b1-4a29cd9d0aasm9906875e9.3.2026.10.23.07.36.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Oct 2026 07:36:14 -0700 (PDT)
+ Fri, 23 Oct 2026 07:36:31 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Fri, 23 Oct 2026 18:35:54 +0400
-Subject: [PATCH v2 1/3] rockchip: Use a common SYS_LOAD_ADDR clear of SPL
- and the RAM boot FIT
+Date: Fri, 23 Oct 2026 18:35:56 +0400
+Subject: [PATCH v2 3/3] rockchip: Share one default env memory layout
+ between common-stack SoCs
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261023-rk3576-load-addr-v2-1-d2a42a1e90df@flipper.net>
+Message-Id: <20261023-rk3576-load-addr-v2-3-d2a42a1e90df@flipper.net>
 References: <20261023-rk3576-load-addr-v2-0-d2a42a1e90df@flipper.net>
 In-Reply-To: <20261023-rk3576-load-addr-v2-0-d2a42a1e90df@flipper.net>
 To: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>, 
@@ -206,13 +206,13 @@ Cc: Tom Rini <trini@konsulko.com>,
  Johan Jonker <jbx6244@gmail.com>, Torsten Duwe <duwe@lst.de>, 
  Heiko Stuebner <heiko@sntech.de>, Alexey Charkov <alchark@flipper.net>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=72104; i=alchark@flipper.net; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=11258; i=alchark@flipper.net; 
  h=from:subject:message-id;
- bh=2VXBOdDnElcmKRNxM4ggHDatoQegxwsSARJmkRh7Wb0=; 
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTdLji7vYEp46r5s5wLb/8I2TZO0nXMeLWwcoLlQqvZm
- vsWXz5yp2MiC4MYF4OlmCLL3G9LbKca8c3a5eHxFWYOKxPIEGmRBgYgYGHgy03MKzXSMdIz1TbU
- MzTSMdYxYuDiFICpln7GyPDQ08y1JIr/DPMmIedFCk5XHnSdlZizUe6ggkwy00Xx0t2MDN97JA0
- TvddJSqc+OCOyzvzsry2HStRqOmboRTMVyHkf4QcA
+ bh=W/WeihNP8DLQpmg5sFWxX9/QT4iV9A0TtmLjlVkfaSY=; 
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTdLji7Yo9JS/vp5AKVTyHPLZ2t/b1qV3rOLp3lmzwxb
+ vpG9dbZHRNZGMS4GCzFFFnmfltiO9WIb9YuD4+vMHNYmUCGSIs0MAABCwNfbmJeqZGOkZ6ptqGe
+ oZGOsY4RAxenAEz1l6uMDIdl1Gr3PF4irV/a6n/NNIpzQlJu7UKdkoUvtGemL1pu4cLwPzy/4R/
+ T1v237F4uSJj7Xfp7Tsb3Bu/t0soH//HMFN93hxkA
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-Mailman-Approved-At: Fri, 23 Oct 2026 14:55:23 +0000
@@ -227,1755 +227,325 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-SPL stages the data of a GZIP or LZMA compressed FIT image at
-SYS_LOAD_ADDR before unpacking it to its load address. Each board sets
-its own value, and none of them suits the common memory layout:
+Each SoC with the common memory layout carries its own default load
+addresses, in one of three variants. None of them suits every board:
+the PX30/RK3308/RK3328/RK3506 one puts ramdisk_addr_r and
+kernel_comp_addr_r in or beyond U-Boot proper relocated to the top of
+128 MiB of DRAM, all of them overlap the new SYS_LOAD_ADDR, and the
+RK3288 one uses that very address as ramdisk_addr_r.
 
-- On PX30, RK3328 and RK3399 it is 0x800800, inside U-Boot proper since
-  TEXT_BASE moved to 0x800000. With SPL_GZIP or SPL_LZMA enabled binman
-  compresses U-Boot proper, and SPL then unpacks it over its own input.
-- Elsewhere it is 0x800800 (RK3288) or 0xc00800 above the start of DRAM,
-  which a RAM boot FIT at SPL_LOAD_FIT_ADDRESS reaches once it grows past
-  some 6 or 10 MiB.
+Define a single layout in rockchip-common.h as offsets from the start of
+DRAM, and drop the per-SoC copies. Keep everything up to the ramdisk
+below 96 MiB so that it fits boards with 128 MiB, and stack the windows
+so that loadaddr overlaps none of them:
 
-Default SYS_LOAD_ADDR to 64 MiB above the start of DRAM on every board
-using the common layout, and drop the per-board values so that new
-boards do not copy stale ones. This is the first round address above
-SPL's own stack, heap and BSS, which already cap a RAM boot FIT at some
-57 MiB, so neither of them can reach the staging buffer. It also clears
-TF-A and U-Boot proper, and leaves 64 MiB to stage into on RK3506 boards
-with only 128 MiB of DRAM.
+  0x00200000  scriptaddr, pxefile_addr_r, fdt_addr_r, fdtoverlay_addr_r
+  0x00600000  kernel_addr_r
+  0x04000000  loadaddr
+  0x05000000  ramdisk_addr_r
+  0x0b000000  kernel_comp_addr_r
 
-Fixes: b57363a2b9b6 ("rockchip: Move TEXT_BASE to 8 MiB offset from start of DRAM")
+This trades some headroom on larger boards: the kernel gets 58 MiB, or
+74 MiB with bootstd, which never uses loadaddr, instead of 128 MiB, and
+the ramdisk 96 MiB instead of everything up to the end of DRAM. A 32-bit
+zImage, loaded below 32 MiB, also relocates itself before decompressing.
+
+Require a layout from every SoC header including rockchip-common.h, so
+that a board disabling ROCKCHIP_COMMON_STACK_ADDR fails to build rather
+than coming up without load addresses.
+
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- arch/arm/mach-rockchip/Kconfig                | 5 +++++
- configs/9tripod-x3568-v4-rk3568_defconfig     | 1 -
- configs/anbernic-rg-ds-rk3568_defconfig       | 1 -
- configs/anbernic-rgxx3-rk3566_defconfig       | 1 -
- configs/bpi-r2-pro-rk3568_defconfig           | 1 -
- configs/chromebook_bob_defconfig              | 1 -
- configs/chromebook_kevin_defconfig            | 1 -
- configs/cm3588-nas-rk3588_defconfig           | 1 -
- configs/coolpi-4b-rk3588s_defconfig           | 1 -
- configs/coolpi-cm5-evb-rk3588_defconfig       | 1 -
- configs/coolpi-cm5-genbook-rk3588_defconfig   | 1 -
- configs/eaidk-610-rk3399_defconfig            | 1 -
- configs/easepi-r1-rk3568_defconfig            | 1 -
- configs/evb-px30_defconfig                    | 1 -
- configs/evb-rk3308_defconfig                  | 1 -
- configs/evb-rk3328_defconfig                  | 1 -
- configs/evb-rk3399_defconfig                  | 1 -
- configs/evb-rk3568_defconfig                  | 1 -
- configs/evb-rk3588_defconfig                  | 1 -
- configs/fastrhino-r66s-rk3568_defconfig       | 1 -
- configs/ficus-rk3399_defconfig                | 1 -
- configs/firefly-px30_defconfig                | 1 -
- configs/firefly-rk3288_defconfig              | 1 -
- configs/firefly-rk3399_defconfig              | 1 -
- configs/gameforce-ace-rk3588s_defconfig       | 1 -
- configs/generic-rk3328_defconfig              | 1 -
- configs/generic-rk3399_defconfig              | 1 -
- configs/generic-rk3528_defconfig              | 1 -
- configs/generic-rk3568_defconfig              | 1 -
- configs/generic-rk3576_defconfig              | 1 -
- configs/generic-rk3588_defconfig              | 1 -
- configs/hinlink-h28k-rk3528_defconfig         | 1 -
- configs/jaguar-rk3588_defconfig               | 1 -
- configs/khadas-edge-captain-rk3399_defconfig  | 1 -
- configs/khadas-edge-rk3399_defconfig          | 1 -
- configs/khadas-edge-v-rk3399_defconfig        | 1 -
- configs/khadas-edge2-rk3588s_defconfig        | 1 -
- configs/lckfb-tspi-rk3566_defconfig           | 1 -
- configs/leez-rk3399_defconfig                 | 1 -
- configs/lubancat-2-rk3568_defconfig           | 1 -
- configs/miqi-rk3288_defconfig                 | 1 -
- configs/mnt-reform2-rk3588_defconfig          | 1 -
- configs/nanopc-t4-rk3399_defconfig            | 1 -
- configs/nanopc-t6-rk3588_defconfig            | 1 -
- configs/nanopi-m4-2gb-rk3399_defconfig        | 1 -
- configs/nanopi-m4-rk3399_defconfig            | 1 -
- configs/nanopi-m4b-rk3399_defconfig           | 1 -
- configs/nanopi-m5-rk3576_defconfig            | 1 -
- configs/nanopi-neo4-rk3399_defconfig          | 1 -
- configs/nanopi-r2c-plus-rk3328_defconfig      | 1 -
- configs/nanopi-r2c-rk3328_defconfig           | 1 -
- configs/nanopi-r2s-plus-rk3328_defconfig      | 1 -
- configs/nanopi-r2s-rk3328_defconfig           | 1 -
- configs/nanopi-r3s-rk3566_defconfig           | 1 -
- configs/nanopi-r4s-rk3399_defconfig           | 1 -
- configs/nanopi-r5c-rk3568_defconfig           | 1 -
- configs/nanopi-r5s-rk3568_defconfig           | 1 -
- configs/nanopi-r6c-rk3588s_defconfig          | 1 -
- configs/nanopi-r6s-rk3588s_defconfig          | 1 -
- configs/nanopi-r76s-rk3576_defconfig          | 1 -
- configs/nanopi-zero2-rk3528_defconfig         | 1 -
- configs/neu6a-io-rk3588_defconfig             | 1 -
- configs/neu6b-io-rk3588_defconfig             | 1 -
- configs/nova-rk3588s_defconfig                | 1 -
- configs/odroid-go2_defconfig                  | 1 -
- configs/odroid-m1-rk3568_defconfig            | 1 -
- configs/odroid-m1s-rk3566_defconfig           | 1 -
- configs/odroid-m2-rk3588s_defconfig           | 1 -
- configs/omni3576-rk3576_defconfig             | 1 -
- configs/orangepi-3b-rk3566_defconfig          | 1 -
- configs/orangepi-5-max-rk3588_defconfig       | 1 -
- configs/orangepi-5-plus-rk3588_defconfig      | 1 -
- configs/orangepi-5-rk3588s_defconfig          | 1 -
- configs/orangepi-5-ultra-rk3588_defconfig     | 1 -
- configs/orangepi-r1-plus-lts-rk3328_defconfig | 1 -
- configs/orangepi-r1-plus-rk3328_defconfig     | 1 -
- configs/orangepi-rk3399_defconfig             | 1 -
- configs/pinebook-pro-rk3399_defconfig         | 1 -
- configs/pinephone-pro-rk3399_defconfig        | 1 -
- configs/pinetab2-rk3566_defconfig             | 1 -
- configs/powkiddy-x55-rk3566_defconfig         | 1 -
- configs/puma-rk3399_defconfig                 | 1 -
- configs/px30-core-ctouch2-of10-px30_defconfig | 1 -
- configs/px30-core-ctouch2-px30_defconfig      | 1 -
- configs/px30-core-edimm2.2-px30_defconfig     | 1 -
- configs/qnap-ts433-rk3568_defconfig           | 1 -
- configs/quartz64-a-rk3566_defconfig           | 1 -
- configs/quartz64-b-rk3566_defconfig           | 1 -
- configs/quartzpro64-rk3588_defconfig          | 1 -
- configs/radxa-cm3-io-rk3566_defconfig         | 1 -
- configs/radxa-e20c-rk3528_defconfig           | 1 -
- configs/radxa-e25-rk3568_defconfig            | 1 -
- configs/radxa-zero-3-rk3566_defconfig         | 1 -
- configs/ringneck-px30_defconfig               | 1 -
- configs/roc-cc-rk3308_defconfig               | 1 -
- configs/roc-cc-rk3328_defconfig               | 1 -
- configs/roc-pc-mezzanine-rk3399_defconfig     | 1 -
- configs/roc-pc-rk3399_defconfig               | 1 -
- configs/roc-pc-rk3576_defconfig               | 1 -
- configs/roc-pc-rk3588s_defconfig              | 1 -
- configs/rock-2-rk3528_defconfig               | 1 -
- configs/rock-3a-rk3568_defconfig              | 1 -
- configs/rock-3b-rk3568_defconfig              | 1 -
- configs/rock-3c-rk3566_defconfig              | 1 -
- configs/rock-4c-plus-rk3399_defconfig         | 1 -
- configs/rock-4d-rk3576_defconfig              | 1 -
- configs/rock-4se-rk3399_defconfig             | 1 -
- configs/rock-5-itx-rk3588_defconfig           | 1 -
- configs/rock-5c-rk3588s_defconfig             | 1 -
- configs/rock-pi-4-rk3399_defconfig            | 1 -
- configs/rock-pi-4c-rk3399_defconfig           | 1 -
- configs/rock-pi-e-rk3328_defconfig            | 1 -
- configs/rock-pi-e-v3-rk3328_defconfig         | 1 -
- configs/rock-pi-n10-rk3399pro_defconfig       | 1 -
- configs/rock-pi-s-rk3308_defconfig            | 1 -
- configs/rock-s0-rk3308_defconfig              | 1 -
- configs/rock5a-rk3588s_defconfig              | 1 -
- configs/rock5b-rk3588_defconfig               | 1 -
- configs/rock64-rk3328_defconfig               | 1 -
- configs/rock960-rk3399_defconfig              | 1 -
- configs/rockpro64-rk3399_defconfig            | 1 -
- configs/sige1-rk3528_defconfig                | 1 -
- configs/sige5-rk3576_defconfig                | 1 -
- configs/sige7-rk3588_defconfig                | 1 -
- configs/soquartz-blade-rk3566_defconfig       | 1 -
- configs/soquartz-cm4-rk3566_defconfig         | 1 -
- configs/soquartz-model-a-rk3566_defconfig     | 1 -
- configs/tiger-rk3588_defconfig                | 1 -
- configs/tinker-rk3288_defconfig               | 1 -
- configs/tinker-s-rk3288_defconfig             | 1 -
- configs/toybrick-rk3588_defconfig             | 1 -
- configs/turing-rk1-rk3588_defconfig           | 1 -
- 132 files changed, 5 insertions(+), 131 deletions(-)
+ include/configs/px30_common.h     | 12 ------------
+ include/configs/rk3288_common.h   |  2 ++
+ include/configs/rk3308_common.h   | 12 ------------
+ include/configs/rk3328_common.h   | 12 ------------
+ include/configs/rk3399_common.h   | 12 ------------
+ include/configs/rk3506_common.h   | 12 ------------
+ include/configs/rk3528_common.h   | 12 ------------
+ include/configs/rk3568_common.h   | 12 ------------
+ include/configs/rk3576_common.h   | 12 ------------
+ include/configs/rk3588_common.h   | 12 ------------
+ include/configs/rockchip-common.h | 34 ++++++++++++++++++++++++++++++++++
+ 11 files changed, 36 insertions(+), 108 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 1a2e7847c9e7..5146713ae070 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -832,6 +832,11 @@ config SPL_TEXT_BASE
- 	default 0x40000000 if ROCKCHIP_RK3576
- 	default 0x00000000
+diff --git a/include/configs/px30_common.h b/include/configs/px30_common.h
+index 2a3dc362f98d..5698e6a91b1a 100644
+--- a/include/configs/px30_common.h
++++ b/include/configs/px30_common.h
+@@ -16,18 +16,6 @@
+ #define CFG_SYS_SDRAM_BASE		0
+ #define SDRAM_MAX_SIZE			0xff000000
  
-+config SYS_LOAD_ADDR
-+	default 0x64000000 if SPL_TEXT_BASE = 0x60000000
-+	default 0x44000000 if SPL_TEXT_BASE = 0x40000000
-+	default 0x04000000 if SPL_TEXT_BASE = 0x00000000
+-#define ENV_MEM_LAYOUT_SETTINGS \
+-	"scriptaddr=0x00500000\0" \
+-	"script_offset_f=0xffe000\0" \
+-	"script_size_f=0x2000\0" \
+-	"pxefile_addr_r=0x00600000\0" \
+-	"fdt_addr_r=0x01e00000\0" \
+-	"fdtoverlay_addr_r=0x01f00000\0" \
+-	"kernel_addr_r=0x02080000\0" \
+-	"ramdisk_addr_r=0x06000000\0" \
+-	"kernel_comp_addr_r=0x08000000\0" \
+-	"kernel_comp_size=0x2000000\0"
+-
+ #define CFG_EXTRA_ENV_SETTINGS \
+ 	ENV_MEM_LAYOUT_SETTINGS \
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+diff --git a/include/configs/rk3288_common.h b/include/configs/rk3288_common.h
+index 327e32b66566..0b7daac20b55 100644
+--- a/include/configs/rk3288_common.h
++++ b/include/configs/rk3288_common.h
+@@ -6,6 +6,7 @@
+ #ifndef __CONFIG_RK3288_COMMON_H
+ #define __CONFIG_RK3288_COMMON_H
+ 
++#ifndef CONFIG_ROCKCHIP_COMMON_STACK_ADDR
+ #define ENV_MEM_LAYOUT_SETTINGS \
+ 	"scriptaddr=0x00000000\0" \
+ 	"pxefile_addr_r=0x00100000\0" \
+@@ -13,6 +14,7 @@
+ 	"fdtoverlay_addr_r=0x01f00000\0" \
+ 	"kernel_addr_r=0x02000000\0" \
+ 	"ramdisk_addr_r=0x04000000\0"
++#endif
+ 
+ #include "rockchip-common.h"
+ 
+diff --git a/include/configs/rk3308_common.h b/include/configs/rk3308_common.h
+index 2de55538fdf1..f32ff7952591 100644
+--- a/include/configs/rk3308_common.h
++++ b/include/configs/rk3308_common.h
+@@ -13,18 +13,6 @@
+ #define CFG_SYS_SDRAM_BASE		0
+ #define SDRAM_MAX_SIZE			0xff000000
+ 
+-#define ENV_MEM_LAYOUT_SETTINGS		\
+-	"scriptaddr=0x00500000\0"	\
+-	"script_offset_f=0xffe000\0"	\
+-	"script_size_f=0x2000\0"	\
+-	"pxefile_addr_r=0x00600000\0"	\
+-	"fdt_addr_r=0x01e00000\0"	\
+-	"fdtoverlay_addr_r=0x01f00000\0"	\
+-	"kernel_addr_r=0x02080000\0"	\
+-	"ramdisk_addr_r=0x06000000\0"	\
+-	"kernel_comp_addr_r=0x08000000\0"	\
+-	"kernel_comp_size=0x2000000\0"
+-
+ #define CFG_EXTRA_ENV_SETTINGS		\
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
+ 	"partitions=" PARTS_DEFAULT	\
+diff --git a/include/configs/rk3328_common.h b/include/configs/rk3328_common.h
+index bd2bfe291033..28e190e2ea2c 100644
+--- a/include/configs/rk3328_common.h
++++ b/include/configs/rk3328_common.h
+@@ -13,18 +13,6 @@
+ #define CFG_SYS_SDRAM_BASE		0
+ #define SDRAM_MAX_SIZE			0xff000000
+ 
+-#define ENV_MEM_LAYOUT_SETTINGS		\
+-	"scriptaddr=0x00500000\0"	\
+-	"script_offset_f=0xffe000\0"	\
+-	"script_size_f=0x2000\0"	\
+-	"pxefile_addr_r=0x00600000\0"	\
+-	"fdt_addr_r=0x01e00000\0"	\
+-	"fdtoverlay_addr_r=0x01f00000\0"	\
+-	"kernel_addr_r=0x02080000\0"	\
+-	"ramdisk_addr_r=0x06000000\0"	\
+-	"kernel_comp_addr_r=0x08000000\0"	\
+-	"kernel_comp_size=0x2000000\0"
+-
+ #define CFG_EXTRA_ENV_SETTINGS		\
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
+ 	"partitions=" PARTS_DEFAULT	\
+diff --git a/include/configs/rk3399_common.h b/include/configs/rk3399_common.h
+index 76f40e7cd5f8..50d63ed6bc34 100644
+--- a/include/configs/rk3399_common.h
++++ b/include/configs/rk3399_common.h
+@@ -19,18 +19,6 @@
+ #define ROCKCHIP_DEVICE_SETTINGS
+ #endif
+ 
+-#define ENV_MEM_LAYOUT_SETTINGS		\
+-	"scriptaddr=0x00c00000\0"	\
+-	"script_offset_f=0xffe000\0"	\
+-	"script_size_f=0x2000\0"	\
+-	"pxefile_addr_r=0x00e00000\0"	\
+-	"kernel_addr_r=0x02000000\0"	\
+-	"kernel_comp_addr_r=0x0a000000\0"	\
+-	"fdt_addr_r=0x12000000\0"	\
+-	"fdtoverlay_addr_r=0x12100000\0"	\
+-	"ramdisk_addr_r=0x12180000\0"	\
+-	"kernel_comp_size=0x8000000\0"
+-
+ #define CFG_EXTRA_ENV_SETTINGS		\
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
+ 	"partitions=" PARTS_DEFAULT	\
+diff --git a/include/configs/rk3506_common.h b/include/configs/rk3506_common.h
+index 5e4ef67289f0..075ce2edd64b 100644
+--- a/include/configs/rk3506_common.h
++++ b/include/configs/rk3506_common.h
+@@ -17,18 +17,6 @@
+ #define ROCKCHIP_DEVICE_SETTINGS
+ #endif
+ 
+-#define ENV_MEM_LAYOUT_SETTINGS			\
+-	"scriptaddr=0x00500000\0"		\
+-	"script_offset_f=0xffe000\0"		\
+-	"script_size_f=0x2000\0"		\
+-	"pxefile_addr_r=0x00600000\0"		\
+-	"kernel_addr_r=0x02080000\0"		\
+-	"kernel_comp_addr_r=0x08000000\0"	\
+-	"fdt_addr_r=0x01e00000\0"		\
+-	"fdtoverlay_addr_r=0x01f00000\0"	\
+-	"ramdisk_addr_r=0x06000000\0"		\
+-	"kernel_comp_size=0x2000000\0"
+-
+ #define CFG_EXTRA_ENV_SETTINGS			\
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
+ 	ENV_MEM_LAYOUT_SETTINGS			\
+diff --git a/include/configs/rk3528_common.h b/include/configs/rk3528_common.h
+index f7dc6ecd5944..08ed6643369d 100644
+--- a/include/configs/rk3528_common.h
++++ b/include/configs/rk3528_common.h
+@@ -17,18 +17,6 @@
+ #define ROCKCHIP_DEVICE_SETTINGS
+ #endif
+ 
+-#define ENV_MEM_LAYOUT_SETTINGS			\
+-	"scriptaddr=0x00c00000\0"		\
+-	"script_offset_f=0xffe000\0"		\
+-	"script_size_f=0x2000\0"		\
+-	"pxefile_addr_r=0x00e00000\0"		\
+-	"kernel_addr_r=0x02000000\0"		\
+-	"kernel_comp_addr_r=0x0a000000\0"	\
+-	"fdt_addr_r=0x12000000\0"		\
+-	"fdtoverlay_addr_r=0x12100000\0"	\
+-	"ramdisk_addr_r=0x12180000\0"		\
+-	"kernel_comp_size=0x8000000\0"
+-
+ #define CFG_EXTRA_ENV_SETTINGS			\
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
+ 	ENV_MEM_LAYOUT_SETTINGS			\
+diff --git a/include/configs/rk3568_common.h b/include/configs/rk3568_common.h
+index b2a35db0b949..0a6498606b65 100644
+--- a/include/configs/rk3568_common.h
++++ b/include/configs/rk3568_common.h
+@@ -19,18 +19,6 @@
+ #define ROCKCHIP_DEVICE_SETTINGS
+ #endif
+ 
+-#define ENV_MEM_LAYOUT_SETTINGS		\
+-	"scriptaddr=0x00c00000\0"	\
+-	"script_offset_f=0xffe000\0"	\
+-	"script_size_f=0x2000\0"	\
+-	"pxefile_addr_r=0x00e00000\0"	\
+-	"kernel_addr_r=0x02000000\0"	\
+-	"kernel_comp_addr_r=0x0a000000\0"	\
+-	"fdt_addr_r=0x12000000\0"	\
+-	"fdtoverlay_addr_r=0x12100000\0"	\
+-	"ramdisk_addr_r=0x12180000\0"	\
+-	"kernel_comp_size=0x8000000\0"
+-
+ #define CFG_EXTRA_ENV_SETTINGS		\
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
+ 	ENV_MEM_LAYOUT_SETTINGS		\
+diff --git a/include/configs/rk3576_common.h b/include/configs/rk3576_common.h
+index 14d1d8636093..5568ac767415 100644
+--- a/include/configs/rk3576_common.h
++++ b/include/configs/rk3576_common.h
+@@ -20,18 +20,6 @@
+ #define ROCKCHIP_DEVICE_SETTINGS
+ #endif
+ 
+-#define ENV_MEM_LAYOUT_SETTINGS		\
+-	"scriptaddr=0x40c00000\0" \
+-	"script_offset_f=0xffe000\0"	\
+-	"script_size_f=0x2000\0"	\
+-	"pxefile_addr_r=0x40e00000\0" \
+-	"kernel_addr_r=0x42000000\0" \
+-	"kernel_comp_addr_r=0x4a000000\0"	\
+-	"fdt_addr_r=0x52000000\0"	\
+-	"fdtoverlay_addr_r=0x52100000\0"	\
+-	"ramdisk_addr_r=0x52180000\0"	\
+-	"kernel_comp_size=0x8000000\0"
+-
+ #define CFG_EXTRA_ENV_SETTINGS		\
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
+ 	ENV_MEM_LAYOUT_SETTINGS		\
+diff --git a/include/configs/rk3588_common.h b/include/configs/rk3588_common.h
+index 2f0d40deb640..a6bba445f401 100644
+--- a/include/configs/rk3588_common.h
++++ b/include/configs/rk3588_common.h
+@@ -18,18 +18,6 @@
+ #define ROCKCHIP_DEVICE_SETTINGS
+ #endif
+ 
+-#define ENV_MEM_LAYOUT_SETTINGS		\
+-	"scriptaddr=0x00c00000\0"	\
+-	"script_offset_f=0xffe000\0"	\
+-	"script_size_f=0x2000\0"	\
+-	"pxefile_addr_r=0x00e00000\0"	\
+-	"kernel_addr_r=0x02000000\0"	\
+-	"kernel_comp_addr_r=0x0a000000\0"	\
+-	"fdt_addr_r=0x12000000\0"	\
+-	"fdtoverlay_addr_r=0x12100000\0"	\
+-	"ramdisk_addr_r=0x12180000\0"	\
+-	"kernel_comp_size=0x8000000\0"
+-
+ #define CFG_EXTRA_ENV_SETTINGS		\
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
+ 	ENV_MEM_LAYOUT_SETTINGS		\
+diff --git a/include/configs/rockchip-common.h b/include/configs/rockchip-common.h
+index d5550a46575a..ed2a026bcefb 100644
+--- a/include/configs/rockchip-common.h
++++ b/include/configs/rockchip-common.h
+@@ -30,6 +30,40 @@
+ 	"name=boot,size=112M,bootable,uuid=${uuid_gpt_boot};" \
+ 	"name=rootfs,size=-,uuid="ROOT_UUID
+ 
++#ifdef CONFIG_ROCKCHIP_COMMON_STACK_ADDR
++/*
++ * Default load addresses as offsets from the start of DRAM, the same on
++ * every SoC with the common memory layout. Everything up to the ramdisk
++ * fits below U-Boot proper relocated to the top of 128 MiB of DRAM, and
++ * loadaddr (SYS_LOAD_ADDR) sits just above SPL's own stack, heap and BSS.
++ * Offsets are pasted after the DRAM base nibble, so they must stay below
++ * 0x10000000.
++ */
++#if CONFIG_SPL_TEXT_BASE == 0x60000000
++#define ROCKCHIP_DRAM_HI	"0x6"
++#elif CONFIG_SPL_TEXT_BASE == 0x40000000
++#define ROCKCHIP_DRAM_HI	"0x4"
++#else
++#define ROCKCHIP_DRAM_HI	"0x0"
++#endif
 +
- config SPL_HAS_BSS_LINKER_SECTION
- 	default y if ARM64
++#define ENV_MEM_LAYOUT_SETTINGS \
++	"scriptaddr="		ROCKCHIP_DRAM_HI "0200000\0" \
++	"script_offset_f=0xffe000\0" \
++	"script_size_f=0x2000\0" \
++	"pxefile_addr_r="	ROCKCHIP_DRAM_HI "0300000\0" \
++	"fdt_addr_r="		ROCKCHIP_DRAM_HI "0400000\0" \
++	"fdtoverlay_addr_r="	ROCKCHIP_DRAM_HI "0500000\0" \
++	"kernel_addr_r="	ROCKCHIP_DRAM_HI "0600000\0" \
++	"ramdisk_addr_r="	ROCKCHIP_DRAM_HI "5000000\0" \
++	"kernel_comp_addr_r="	ROCKCHIP_DRAM_HI "b000000\0" \
++	"kernel_comp_size=0x2000000\0"
++#endif
++
++#ifndef ENV_MEM_LAYOUT_SETTINGS
++#error "Define ENV_MEM_LAYOUT_SETTINGS for boards without ROCKCHIP_COMMON_STACK_ADDR"
++#endif
++
+ #endif
  
-diff --git a/configs/9tripod-x3568-v4-rk3568_defconfig b/configs/9tripod-x3568-v4-rk3568_defconfig
-index c0e7a5653595..f6b73a29a1ff 100644
---- a/configs/9tripod-x3568-v4-rk3568_defconfig
-+++ b/configs/9tripod-x3568-v4-rk3568_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-9tripod-x3568-v4"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/anbernic-rg-ds-rk3568_defconfig b/configs/anbernic-rg-ds-rk3568_defconfig
-index 816f78da4a31..846c9970868c 100644
---- a/configs/anbernic-rg-ds-rk3568_defconfig
-+++ b/configs/anbernic-rg-ds-rk3568_defconfig
-@@ -8,7 +8,6 @@ CONFIG_ROCKCHIP_RK3568=y
- CONFIG_ROCKCHIP_RK8XX_DISABLE_BOOT_ON_POWERON=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_ANBERNIC_RG_DS_RK3568=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/anbernic-rgxx3-rk3566_defconfig b/configs/anbernic-rgxx3-rk3566_defconfig
-index 854de8b00a4b..719f01175699 100644
---- a/configs/anbernic-rgxx3-rk3566_defconfig
-+++ b/configs/anbernic-rgxx3-rk3566_defconfig
-@@ -8,7 +8,6 @@ CONFIG_ROCKCHIP_RK3568=y
- CONFIG_ROCKCHIP_RK8XX_DISABLE_BOOT_ON_POWERON=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_ANBERNIC_RGXX3_RK3566=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/bpi-r2-pro-rk3568_defconfig b/configs/bpi-r2-pro-rk3568_defconfig
-index c5199a394489..481a8a113e46 100644
---- a/configs/bpi-r2-pro-rk3568_defconfig
-+++ b/configs/bpi-r2-pro-rk3568_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-bpi-r2-pro"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
-index cbb8beb91c20..d29154a733d3 100644
---- a/configs/chromebook_bob_defconfig
-+++ b/configs/chromebook_bob_defconfig
-@@ -11,7 +11,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_BOOT_MODE_REG=0
- # CONFIG_SPL_MMC is not set
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xff1a0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
-index a9dbe33e3d64..efe676924d2d 100644
---- a/configs/chromebook_kevin_defconfig
-+++ b/configs/chromebook_kevin_defconfig
-@@ -12,7 +12,6 @@ CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_BOOT_MODE_REG=0
- # CONFIG_SPL_MMC is not set
- CONFIG_TARGET_CHROMEBOOK_KEVIN=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xff1a0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/cm3588-nas-rk3588_defconfig b/configs/cm3588-nas-rk3588_defconfig
-index 5b5ef8d5ac13..1ad8ce2aec70 100644
---- a/configs/cm3588-nas-rk3588_defconfig
-+++ b/configs/cm3588-nas-rk3588_defconfig
-@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-friendlyelec-cm3588-nas"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_CM3588_NAS_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/coolpi-4b-rk3588s_defconfig b/configs/coolpi-4b-rk3588s_defconfig
-index e67726224033..aa2e3a3676c3 100644
---- a/configs/coolpi-4b-rk3588s_defconfig
-+++ b/configs/coolpi-4b-rk3588s_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ROCKCHIP_RK3588=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_EVB_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=5
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/coolpi-cm5-evb-rk3588_defconfig b/configs/coolpi-cm5-evb-rk3588_defconfig
-index 4326e1168499..35edf88f5839 100644
---- a/configs/coolpi-cm5-evb-rk3588_defconfig
-+++ b/configs/coolpi-cm5-evb-rk3588_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ROCKCHIP_RK3588=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_EVB_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=5
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/coolpi-cm5-genbook-rk3588_defconfig b/configs/coolpi-cm5-genbook-rk3588_defconfig
-index 85fbde726469..d15d0680a9b8 100644
---- a/configs/coolpi-cm5-genbook-rk3588_defconfig
-+++ b/configs/coolpi-cm5-genbook-rk3588_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ROCKCHIP_RK3588=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_GENBOOK_CM5_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=5
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/eaidk-610-rk3399_defconfig b/configs/eaidk-610-rk3399_defconfig
-index 39ba69318634..a21f066def42 100644
---- a/configs/eaidk-610-rk3399_defconfig
-+++ b/configs/eaidk-610-rk3399_defconfig
-@@ -8,7 +8,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-eaidk-610"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/easepi-r1-rk3568_defconfig b/configs/easepi-r1-rk3568_defconfig
-index fa400956b63e..04273b203720 100644
---- a/configs/easepi-r1-rk3568_defconfig
-+++ b/configs/easepi-r1-rk3568_defconfig
-@@ -6,7 +6,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-easepi-r1"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/evb-px30_defconfig b/configs/evb-px30_defconfig
-index afc45308bee1..c8fbd9df7864 100644
---- a/configs/evb-px30_defconfig
-+++ b/configs/evb-px30_defconfig
-@@ -8,7 +8,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_PX30=y
- CONFIG_TARGET_EVB_PX30=y
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xff178000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/evb-rk3308_defconfig b/configs/evb-rk3308_defconfig
-index c0eb5bbdcbd3..42e68f57dfba 100644
---- a/configs/evb-rk3308_defconfig
-+++ b/configs/evb-rk3308_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-evb"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3308=y
- CONFIG_TARGET_EVB_RK3308=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFF0E0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- # CONFIG_DEBUG_UART_BOARD_INIT is not set
-diff --git a/configs/evb-rk3328_defconfig b/configs/evb-rk3328_defconfig
-index 5fb7b20ed956..540535a78070 100644
---- a/configs/evb-rk3328_defconfig
-+++ b/configs/evb-rk3328_defconfig
-@@ -8,7 +8,6 @@ CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3328-evb"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3328=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/evb-rk3399_defconfig b/configs/evb-rk3399_defconfig
-index f282e77ac1e8..3fef982cd40e 100644
---- a/configs/evb-rk3399_defconfig
-+++ b/configs/evb-rk3399_defconfig
-@@ -9,7 +9,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-evb"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/evb-rk3568_defconfig b/configs/evb-rk3568_defconfig
-index 4a5a7454e102..8f6c570c06b6 100644
---- a/configs/evb-rk3568_defconfig
-+++ b/configs/evb-rk3568_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-evb1-v10"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/evb-rk3588_defconfig b/configs/evb-rk3588_defconfig
-index c7f6256a6264..1336aac89db4 100644
---- a/configs/evb-rk3588_defconfig
-+++ b/configs/evb-rk3588_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-evb1-v10"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_EVB_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/fastrhino-r66s-rk3568_defconfig b/configs/fastrhino-r66s-rk3568_defconfig
-index fc753516d72a..6f0f3aa13bc9 100644
---- a/configs/fastrhino-r66s-rk3568_defconfig
-+++ b/configs/fastrhino-r66s-rk3568_defconfig
-@@ -6,7 +6,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-fastrhino-r66s"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/ficus-rk3399_defconfig b/configs/ficus-rk3399_defconfig
-index 4352b947743e..57034c399668 100644
---- a/configs/ficus-rk3399_defconfig
-+++ b/configs/ficus-rk3399_defconfig
-@@ -8,7 +8,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-ficus"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_ROCK960_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/firefly-px30_defconfig b/configs/firefly-px30_defconfig
-index 316f960d32e7..818e76caae1a 100644
---- a/configs/firefly-px30_defconfig
-+++ b/configs/firefly-px30_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ROCKCHIP_PX30=y
- CONFIG_TARGET_EVB_PX30=y
- CONFIG_DEBUG_UART_CHANNEL=1
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF160000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/firefly-rk3288_defconfig b/configs/firefly-rk3288_defconfig
-index 58f26f1b1f3c..5f77e07a8183 100644
---- a/configs/firefly-rk3288_defconfig
-+++ b/configs/firefly-rk3288_defconfig
-@@ -12,7 +12,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3288=y
- CONFIG_TARGET_FIREFLY_RK3288=y
- CONFIG_SYS_BOOTM_LEN=0x4000000
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SPL_SIZE_LIMIT=0x40000
- CONFIG_DEBUG_UART_BASE=0xff690000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/firefly-rk3399_defconfig b/configs/firefly-rk3399_defconfig
-index 83b9de5feb9f..3418993b2572 100644
---- a/configs/firefly-rk3399_defconfig
-+++ b/configs/firefly-rk3399_defconfig
-@@ -9,7 +9,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-firefly"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/gameforce-ace-rk3588s_defconfig b/configs/gameforce-ace-rk3588s_defconfig
-index e4050bd77df1..4aeac4336b31 100644
---- a/configs/gameforce-ace-rk3588s_defconfig
-+++ b/configs/gameforce-ace-rk3588s_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-gameforce-ace"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/generic-rk3328_defconfig b/configs/generic-rk3328_defconfig
-index 77da0a341a81..f7c6e0b4c891 100644
---- a/configs/generic-rk3328_defconfig
-+++ b/configs/generic-rk3328_defconfig
-@@ -9,7 +9,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3328=y
- CONFIG_ROCKCHIP_EXTERNAL_TPL=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
-diff --git a/configs/generic-rk3399_defconfig b/configs/generic-rk3399_defconfig
-index 4a95379c931c..947c5caecc30 100644
---- a/configs/generic-rk3399_defconfig
-+++ b/configs/generic-rk3399_defconfig
-@@ -10,7 +10,6 @@ CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_EXTERNAL_TPL=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/generic-rk3528_defconfig b/configs/generic-rk3528_defconfig
-index 130aa124298a..b28555c4e49a 100644
---- a/configs/generic-rk3528_defconfig
-+++ b/configs/generic-rk3528_defconfig
-@@ -4,7 +4,6 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rk3528-generic"
- CONFIG_ROCKCHIP_RK3528=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFF9F0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
-index a33c3af9255a..a890698963f0 100644
---- a/configs/generic-rk3568_defconfig
-+++ b/configs/generic-rk3568_defconfig
-@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rk3568-generic"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=4
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/generic-rk3576_defconfig b/configs/generic-rk3576_defconfig
-index 5e25653820c2..06a29b5246cb 100644
---- a/configs/generic-rk3576_defconfig
-+++ b/configs/generic-rk3576_defconfig
-@@ -4,7 +4,6 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rk3576-generic"
- CONFIG_ROCKCHIP_RK3576=y
--CONFIG_SYS_LOAD_ADDR=0x40c00800
- CONFIG_DEBUG_UART_BASE=0x2AD40000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
-index ac450e6d7577..9781373a40d8 100644
---- a/configs/generic-rk3588_defconfig
-+++ b/configs/generic-rk3588_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rk3588-generic"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_EVB_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/hinlink-h28k-rk3528_defconfig b/configs/hinlink-h28k-rk3528_defconfig
-index 46d4c367f8cd..59d54d7e2cf8 100644
---- a/configs/hinlink-h28k-rk3528_defconfig
-+++ b/configs/hinlink-h28k-rk3528_defconfig
-@@ -4,7 +4,6 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3528-hinlink-h28k"
- CONFIG_ROCKCHIP_RK3528=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFF9F0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/jaguar-rk3588_defconfig b/configs/jaguar-rk3588_defconfig
-index ed3883b4f9c6..d6a7f5bd92d3 100644
---- a/configs/jaguar-rk3588_defconfig
-+++ b/configs/jaguar-rk3588_defconfig
-@@ -10,7 +10,6 @@ CONFIG_ROCKCHIP_RK3588=y
- CONFIG_ROCKCHIP_BOOT_MODE_REG=0x0
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_JAGUAR_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=5
- CONFIG_DEBUG_UART_BASE=0xfeb50000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/khadas-edge-captain-rk3399_defconfig b/configs/khadas-edge-captain-rk3399_defconfig
-index 753fc165d896..4a9e88338376 100644
---- a/configs/khadas-edge-captain-rk3399_defconfig
-+++ b/configs/khadas-edge-captain-rk3399_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/khadas-edge-rk3399_defconfig b/configs/khadas-edge-rk3399_defconfig
-index ec3428d34c39..090059df55f2 100644
---- a/configs/khadas-edge-rk3399_defconfig
-+++ b/configs/khadas-edge-rk3399_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/khadas-edge-v-rk3399_defconfig b/configs/khadas-edge-v-rk3399_defconfig
-index 282ed561560e..59f2f817bc86 100644
---- a/configs/khadas-edge-v-rk3399_defconfig
-+++ b/configs/khadas-edge-v-rk3399_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/khadas-edge2-rk3588s_defconfig b/configs/khadas-edge2-rk3588s_defconfig
-index 5fc7ce702ec5..dd94bd6627be 100644
---- a/configs/khadas-edge2-rk3588s_defconfig
-+++ b/configs/khadas-edge2-rk3588s_defconfig
-@@ -8,7 +8,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-khadas-edge2"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_KHADAS_EDGE2_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/lckfb-tspi-rk3566_defconfig b/configs/lckfb-tspi-rk3566_defconfig
-index 7aa218345b74..a88c0d2f7d66 100644
---- a/configs/lckfb-tspi-rk3566_defconfig
-+++ b/configs/lckfb-tspi-rk3566_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-lckfb-tspi"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/leez-rk3399_defconfig b/configs/leez-rk3399_defconfig
-index 30e3aeedba04..86a1dbfdb0c6 100644
---- a/configs/leez-rk3399_defconfig
-+++ b/configs/leez-rk3399_defconfig
-@@ -8,7 +8,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-leez-p710"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/lubancat-2-rk3568_defconfig b/configs/lubancat-2-rk3568_defconfig
-index 7548bf60b06d..4e76b58eed06 100644
---- a/configs/lubancat-2-rk3568_defconfig
-+++ b/configs/lubancat-2-rk3568_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-lubancat-2"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/miqi-rk3288_defconfig b/configs/miqi-rk3288_defconfig
-index 1c03bd14b629..170f10d8b891 100644
---- a/configs/miqi-rk3288_defconfig
-+++ b/configs/miqi-rk3288_defconfig
-@@ -12,7 +12,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3288=y
- CONFIG_TARGET_MIQI_RK3288=y
- CONFIG_SYS_BOOTM_LEN=0x4000000
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xff690000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/mnt-reform2-rk3588_defconfig b/configs/mnt-reform2-rk3588_defconfig
-index a6ba0aa5178b..408056db21c3 100644
---- a/configs/mnt-reform2-rk3588_defconfig
-+++ b/configs/mnt-reform2-rk3588_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-mnt-reform2"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_EVB_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/nanopc-t4-rk3399_defconfig b/configs/nanopc-t4-rk3399_defconfig
-index f8ae436a1ee2..592bb0445b50 100644
---- a/configs/nanopc-t4-rk3399_defconfig
-+++ b/configs/nanopc-t4-rk3399_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/nanopc-t6-rk3588_defconfig b/configs/nanopc-t6-rk3588_defconfig
-index ba9a5adece7c..fdce0af3e14a 100644
---- a/configs/nanopc-t6-rk3588_defconfig
-+++ b/configs/nanopc-t6-rk3588_defconfig
-@@ -10,7 +10,6 @@ CONFIG_ROCKCHIP_RK3588=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_NANOPCT6_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=5
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/nanopi-m4-2gb-rk3399_defconfig b/configs/nanopi-m4-2gb-rk3399_defconfig
-index 96a76a5280b5..a717f6e91b59 100644
---- a/configs/nanopi-m4-2gb-rk3399_defconfig
-+++ b/configs/nanopi-m4-2gb-rk3399_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/nanopi-m4-rk3399_defconfig b/configs/nanopi-m4-rk3399_defconfig
-index e316371e005c..79d45f49c691 100644
---- a/configs/nanopi-m4-rk3399_defconfig
-+++ b/configs/nanopi-m4-rk3399_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/nanopi-m4b-rk3399_defconfig b/configs/nanopi-m4b-rk3399_defconfig
-index 9c503c586eb0..eb7ee707bd61 100644
---- a/configs/nanopi-m4b-rk3399_defconfig
-+++ b/configs/nanopi-m4b-rk3399_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/nanopi-m5-rk3576_defconfig b/configs/nanopi-m5-rk3576_defconfig
-index 88b6d0f9e868..fc0765165dbb 100644
---- a/configs/nanopi-m5-rk3576_defconfig
-+++ b/configs/nanopi-m5-rk3576_defconfig
-@@ -8,7 +8,6 @@ CONFIG_SF_DEFAULT_MODE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-nanopi-m5"
- CONFIG_ROCKCHIP_RK3576=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
--CONFIG_SYS_LOAD_ADDR=0x40c00800
- CONFIG_SF_DEFAULT_BUS=6
- CONFIG_DEBUG_UART_BASE=0x2AD40000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/nanopi-neo4-rk3399_defconfig b/configs/nanopi-neo4-rk3399_defconfig
-index 29b5cb47b814..23e48166dd26 100644
---- a/configs/nanopi-neo4-rk3399_defconfig
-+++ b/configs/nanopi-neo4-rk3399_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/nanopi-r2c-plus-rk3328_defconfig b/configs/nanopi-r2c-plus-rk3328_defconfig
-index f46636cf3456..cda0b350f606 100644
---- a/configs/nanopi-r2c-plus-rk3328_defconfig
-+++ b/configs/nanopi-r2c-plus-rk3328_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3328-nanopi-r2c-plus"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3328=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/nanopi-r2c-rk3328_defconfig b/configs/nanopi-r2c-rk3328_defconfig
-index 18624ee0c30e..06de9f28444b 100644
---- a/configs/nanopi-r2c-rk3328_defconfig
-+++ b/configs/nanopi-r2c-rk3328_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3328-nanopi-r2c"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3328=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/nanopi-r2s-plus-rk3328_defconfig b/configs/nanopi-r2s-plus-rk3328_defconfig
-index f2396d266888..6f12c5614f85 100644
---- a/configs/nanopi-r2s-plus-rk3328_defconfig
-+++ b/configs/nanopi-r2s-plus-rk3328_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3328-nanopi-r2s-plus"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3328=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/nanopi-r2s-rk3328_defconfig b/configs/nanopi-r2s-rk3328_defconfig
-index 7d17b24cb0c0..4c81c34dbd7a 100644
---- a/configs/nanopi-r2s-rk3328_defconfig
-+++ b/configs/nanopi-r2s-rk3328_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3328-nanopi-r2s"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3328=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/nanopi-r3s-rk3566_defconfig b/configs/nanopi-r3s-rk3566_defconfig
-index 2424c7477c09..611fabdcd317 100644
---- a/configs/nanopi-r3s-rk3566_defconfig
-+++ b/configs/nanopi-r3s-rk3566_defconfig
-@@ -6,7 +6,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-nanopi-r3s"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/nanopi-r4s-rk3399_defconfig b/configs/nanopi-r4s-rk3399_defconfig
-index 3a2d24d29c2b..46390172994b 100644
---- a/configs/nanopi-r4s-rk3399_defconfig
-+++ b/configs/nanopi-r4s-rk3399_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/nanopi-r5c-rk3568_defconfig b/configs/nanopi-r5c-rk3568_defconfig
-index e75a24dadc85..87882cb150cc 100644
---- a/configs/nanopi-r5c-rk3568_defconfig
-+++ b/configs/nanopi-r5c-rk3568_defconfig
-@@ -6,7 +6,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-nanopi-r5c"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/nanopi-r5s-rk3568_defconfig b/configs/nanopi-r5s-rk3568_defconfig
-index c971f376b384..a6e75de47094 100644
---- a/configs/nanopi-r5s-rk3568_defconfig
-+++ b/configs/nanopi-r5s-rk3568_defconfig
-@@ -6,7 +6,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-nanopi-r5s"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/nanopi-r6c-rk3588s_defconfig b/configs/nanopi-r6c-rk3588s_defconfig
-index 861e3234d295..d5247fdac47b 100644
---- a/configs/nanopi-r6c-rk3588s_defconfig
-+++ b/configs/nanopi-r6c-rk3588s_defconfig
-@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-nanopi-r6c"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_NANOPI_R6C_RK3588S=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/nanopi-r6s-rk3588s_defconfig b/configs/nanopi-r6s-rk3588s_defconfig
-index 743dfca441b6..d2997cb4296d 100644
---- a/configs/nanopi-r6s-rk3588s_defconfig
-+++ b/configs/nanopi-r6s-rk3588s_defconfig
-@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-nanopi-r6s"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_NANOPI_R6S_RK3588S=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/nanopi-r76s-rk3576_defconfig b/configs/nanopi-r76s-rk3576_defconfig
-index af149dc4ba56..891c62e56e78 100644
---- a/configs/nanopi-r76s-rk3576_defconfig
-+++ b/configs/nanopi-r76s-rk3576_defconfig
-@@ -5,7 +5,6 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-nanopi-r76s"
- CONFIG_ROCKCHIP_RK3576=y
--CONFIG_SYS_LOAD_ADDR=0x40c00800
- CONFIG_DEBUG_UART_BASE=0x2AD40000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/nanopi-zero2-rk3528_defconfig b/configs/nanopi-zero2-rk3528_defconfig
-index 2c725380ef4c..a46c48afe339 100644
---- a/configs/nanopi-zero2-rk3528_defconfig
-+++ b/configs/nanopi-zero2-rk3528_defconfig
-@@ -4,7 +4,6 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3528-nanopi-zero2"
- CONFIG_ROCKCHIP_RK3528=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFF9F0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/neu6a-io-rk3588_defconfig b/configs/neu6a-io-rk3588_defconfig
-index 19f129e96f00..d3a40136147f 100644
---- a/configs/neu6a-io-rk3588_defconfig
-+++ b/configs/neu6a-io-rk3588_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-edgeble-neu6a-io"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_RK3588_NEU6=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/neu6b-io-rk3588_defconfig b/configs/neu6b-io-rk3588_defconfig
-index 2cf5aeccf519..643e621b0a8a 100644
---- a/configs/neu6b-io-rk3588_defconfig
-+++ b/configs/neu6b-io-rk3588_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-edgeble-neu6b-io"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_RK3588_NEU6=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/nova-rk3588s_defconfig b/configs/nova-rk3588s_defconfig
-index f7d7492ff466..11026d10f0c1 100644
---- a/configs/nova-rk3588s_defconfig
-+++ b/configs/nova-rk3588s_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-indiedroid-nova"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_NOVA_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/odroid-go2_defconfig b/configs/odroid-go2_defconfig
-index dfdea66cd70c..f6e5e4d21f93 100644
---- a/configs/odroid-go2_defconfig
-+++ b/configs/odroid-go2_defconfig
-@@ -15,7 +15,6 @@ CONFIG_ROCKCHIP_RK8XX_DISABLE_BOOT_ON_POWERON=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_ODROID_GO2=y
- CONFIG_DEBUG_UART_CHANNEL=1
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=2
- CONFIG_DEBUG_UART_BASE=0xFF160000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/odroid-m1-rk3568_defconfig b/configs/odroid-m1-rk3568_defconfig
-index b00985b04056..e72ea5db7846 100644
---- a/configs/odroid-m1-rk3568_defconfig
-+++ b/configs/odroid-m1-rk3568_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ROCKCHIP_RK3568=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_ODROID_M1_RK3568=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=4
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/odroid-m1s-rk3566_defconfig b/configs/odroid-m1s-rk3566_defconfig
-index d59882a2a590..9f636a05d977 100644
---- a/configs/odroid-m1s-rk3566_defconfig
-+++ b/configs/odroid-m1s-rk3566_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-odroid-m1s"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_ODROID_M1S_RK3566=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/odroid-m2-rk3588s_defconfig b/configs/odroid-m2-rk3588s_defconfig
-index e71e61ddb0ba..abd827921324 100644
---- a/configs/odroid-m2-rk3588s_defconfig
-+++ b/configs/odroid-m2-rk3588s_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-odroid-m2"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_ODROID_M2_RK3588S=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/omni3576-rk3576_defconfig b/configs/omni3576-rk3576_defconfig
-index 13ef3112f1b8..f6f4950d084e 100644
---- a/configs/omni3576-rk3576_defconfig
-+++ b/configs/omni3576-rk3576_defconfig
-@@ -4,7 +4,6 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-luckfox-omni3576"
- CONFIG_ROCKCHIP_RK3576=y
--CONFIG_SYS_LOAD_ADDR=0x40c00800
- CONFIG_DEBUG_UART_BASE=0x2AD40000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/orangepi-3b-rk3566_defconfig b/configs/orangepi-3b-rk3566_defconfig
-index 1cd78789fa1c..d292c31ccc72 100644
---- a/configs/orangepi-3b-rk3566_defconfig
-+++ b/configs/orangepi-3b-rk3566_defconfig
-@@ -10,7 +10,6 @@ CONFIG_ROCKCHIP_RK3568=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_ORANGEPI_3B_RK3566=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=4
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/orangepi-5-max-rk3588_defconfig b/configs/orangepi-5-max-rk3588_defconfig
-index 0861df962cf6..9c5668e7b768 100644
---- a/configs/orangepi-5-max-rk3588_defconfig
-+++ b/configs/orangepi-5-max-rk3588_defconfig
-@@ -10,7 +10,6 @@ CONFIG_ROCKCHIP_RK3588=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_EVB_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=5
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/orangepi-5-plus-rk3588_defconfig b/configs/orangepi-5-plus-rk3588_defconfig
-index 52523f87aec4..256e49a35b22 100644
---- a/configs/orangepi-5-plus-rk3588_defconfig
-+++ b/configs/orangepi-5-plus-rk3588_defconfig
-@@ -10,7 +10,6 @@ CONFIG_ROCKCHIP_RK3588=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_EVB_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=5
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/orangepi-5-rk3588s_defconfig b/configs/orangepi-5-rk3588s_defconfig
-index e0eba389289d..2660edb22524 100644
---- a/configs/orangepi-5-rk3588s_defconfig
-+++ b/configs/orangepi-5-rk3588s_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ROCKCHIP_RK3588=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_EVB_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=5
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/orangepi-5-ultra-rk3588_defconfig b/configs/orangepi-5-ultra-rk3588_defconfig
-index fb7f44329836..c7180020e2e8 100644
---- a/configs/orangepi-5-ultra-rk3588_defconfig
-+++ b/configs/orangepi-5-ultra-rk3588_defconfig
-@@ -10,7 +10,6 @@ CONFIG_ROCKCHIP_RK3588=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_EVB_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=5
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
-index a70a96287a10..6a6fd5e1206d 100644
---- a/configs/orangepi-r1-plus-lts-rk3328_defconfig
-+++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3328-orangepi-r1-plus-lts"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3328=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
-diff --git a/configs/orangepi-r1-plus-rk3328_defconfig b/configs/orangepi-r1-plus-rk3328_defconfig
-index 40e79d52535a..ed8dad4f232f 100644
---- a/configs/orangepi-r1-plus-rk3328_defconfig
-+++ b/configs/orangepi-r1-plus-rk3328_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3328-orangepi-r1-plus"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3328=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
-diff --git a/configs/orangepi-rk3399_defconfig b/configs/orangepi-rk3399_defconfig
-index 8313c7c06362..ecc038e12e17 100644
---- a/configs/orangepi-rk3399_defconfig
-+++ b/configs/orangepi-rk3399_defconfig
-@@ -9,7 +9,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-orangepi"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/pinebook-pro-rk3399_defconfig b/configs/pinebook-pro-rk3399_defconfig
-index cbf95b4692f0..555380126bee 100644
---- a/configs/pinebook-pro-rk3399_defconfig
-+++ b/configs/pinebook-pro-rk3399_defconfig
-@@ -12,7 +12,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_PINEBOOK_PRO_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/pinephone-pro-rk3399_defconfig b/configs/pinephone-pro-rk3399_defconfig
-index 81bc6d5400db..6e23821813a5 100644
---- a/configs/pinephone-pro-rk3399_defconfig
-+++ b/configs/pinephone-pro-rk3399_defconfig
-@@ -11,7 +11,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_PINEPHONE_PRO_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/pinetab2-rk3566_defconfig b/configs/pinetab2-rk3566_defconfig
-index f284dadb99d6..c74de46645ba 100644
---- a/configs/pinetab2-rk3566_defconfig
-+++ b/configs/pinetab2-rk3566_defconfig
-@@ -11,7 +11,6 @@ CONFIG_ROCKCHIP_RK8XX_DISABLE_BOOT_ON_POWERON=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_QUARTZ64_RK3566=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=4
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/powkiddy-x55-rk3566_defconfig b/configs/powkiddy-x55-rk3566_defconfig
-index 37a359c91a90..d317389fe1d6 100644
---- a/configs/powkiddy-x55-rk3566_defconfig
-+++ b/configs/powkiddy-x55-rk3566_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-powkiddy-x55"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
-index 09b965d46374..a827716129e6 100644
---- a/configs/puma-rk3399_defconfig
-+++ b/configs/puma-rk3399_defconfig
-@@ -12,7 +12,6 @@ CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_BOOT_MODE_REG=0x0
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_PUMA_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF180000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/px30-core-ctouch2-of10-px30_defconfig b/configs/px30-core-ctouch2-of10-px30_defconfig
-index 06b60483841d..819c6e226b16 100644
---- a/configs/px30-core-ctouch2-of10-px30_defconfig
-+++ b/configs/px30-core-ctouch2-of10-px30_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ROCKCHIP_PX30=y
- CONFIG_TARGET_PX30_CORE=y
- CONFIG_DEBUG_UART_CHANNEL=1
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF160000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/px30-core-ctouch2-px30_defconfig b/configs/px30-core-ctouch2-px30_defconfig
-index aa6e44f5348b..94eb896e10db 100644
---- a/configs/px30-core-ctouch2-px30_defconfig
-+++ b/configs/px30-core-ctouch2-px30_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ROCKCHIP_PX30=y
- CONFIG_TARGET_PX30_CORE=y
- CONFIG_DEBUG_UART_CHANNEL=1
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF160000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/px30-core-edimm2.2-px30_defconfig b/configs/px30-core-edimm2.2-px30_defconfig
-index fcc27ce8761d..2f61dfe85665 100644
---- a/configs/px30-core-edimm2.2-px30_defconfig
-+++ b/configs/px30-core-edimm2.2-px30_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ROCKCHIP_PX30=y
- CONFIG_TARGET_PX30_CORE=y
- CONFIG_DEBUG_UART_CHANNEL=1
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF160000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/qnap-ts433-rk3568_defconfig b/configs/qnap-ts433-rk3568_defconfig
-index 638331966755..f7d6427e750d 100644
---- a/configs/qnap-ts433-rk3568_defconfig
-+++ b/configs/qnap-ts433-rk3568_defconfig
-@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-qnap-ts433"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_QNAP_TS433_RK3568=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/quartz64-a-rk3566_defconfig b/configs/quartz64-a-rk3566_defconfig
-index 780fd581f0aa..332f5487e196 100644
---- a/configs/quartz64-a-rk3566_defconfig
-+++ b/configs/quartz64-a-rk3566_defconfig
-@@ -10,7 +10,6 @@ CONFIG_ROCKCHIP_RK3568=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_QUARTZ64_RK3566=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=4
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/quartz64-b-rk3566_defconfig b/configs/quartz64-b-rk3566_defconfig
-index 4d92a67cd73d..b24bd613bc01 100644
---- a/configs/quartz64-b-rk3566_defconfig
-+++ b/configs/quartz64-b-rk3566_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ROCKCHIP_RK3568=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_QUARTZ64_RK3566=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=4
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/quartzpro64-rk3588_defconfig b/configs/quartzpro64-rk3588_defconfig
-index 0ad74e8bbef4..3bb4f6109377 100644
---- a/configs/quartzpro64-rk3588_defconfig
-+++ b/configs/quartzpro64-rk3588_defconfig
-@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-quartzpro64"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_QUARTZPRO64_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/radxa-cm3-io-rk3566_defconfig b/configs/radxa-cm3-io-rk3566_defconfig
-index 875f0b76fa5f..54f223561b7f 100644
---- a/configs/radxa-cm3-io-rk3566_defconfig
-+++ b/configs/radxa-cm3-io-rk3566_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-radxa-cm3-io"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/radxa-e20c-rk3528_defconfig b/configs/radxa-e20c-rk3528_defconfig
-index 3d86ac51c9b5..ccef7d40c887 100644
---- a/configs/radxa-e20c-rk3528_defconfig
-+++ b/configs/radxa-e20c-rk3528_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3528-radxa-e20c"
- CONFIG_ROCKCHIP_RK3528=y
- CONFIG_TARGET_RADXA_ROCK_2_RK3528=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFF9F0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/radxa-e25-rk3568_defconfig b/configs/radxa-e25-rk3568_defconfig
-index 779d540e22dc..ee03b9386b14 100644
---- a/configs/radxa-e25-rk3568_defconfig
-+++ b/configs/radxa-e25-rk3568_defconfig
-@@ -6,7 +6,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-radxa-e25"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/radxa-zero-3-rk3566_defconfig b/configs/radxa-zero-3-rk3566_defconfig
-index f5cf09a5e4af..a88d90ea83a9 100644
---- a/configs/radxa-zero-3-rk3566_defconfig
-+++ b/configs/radxa-zero-3-rk3566_defconfig
-@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-radxa-zero-3w"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_RADXA_ZERO_3_RK3566=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/ringneck-px30_defconfig b/configs/ringneck-px30_defconfig
-index 756469351058..8ea12f3f5eca 100644
---- a/configs/ringneck-px30_defconfig
-+++ b/configs/ringneck-px30_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_PX30=y
- CONFIG_TARGET_RINGNECK_PX30=y
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF030000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/roc-cc-rk3308_defconfig b/configs/roc-cc-rk3308_defconfig
-index b775a6e13522..a31e6a36e20d 100644
---- a/configs/roc-cc-rk3308_defconfig
-+++ b/configs/roc-cc-rk3308_defconfig
-@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-roc-cc"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3308=y
- CONFIG_TARGET_ROC_RK3308_CC=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFF0C0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/roc-cc-rk3328_defconfig b/configs/roc-cc-rk3328_defconfig
-index 7e114908fe23..c2befc4fbf2b 100644
---- a/configs/roc-cc-rk3328_defconfig
-+++ b/configs/roc-cc-rk3328_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3328-roc-cc"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3328=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/roc-pc-mezzanine-rk3399_defconfig b/configs/roc-pc-mezzanine-rk3399_defconfig
-index 8b4d8c1b0aae..9f94f97d5bda 100644
---- a/configs/roc-pc-mezzanine-rk3399_defconfig
-+++ b/configs/roc-pc-mezzanine-rk3399_defconfig
-@@ -13,7 +13,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_ROC_PC_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/roc-pc-rk3399_defconfig b/configs/roc-pc-rk3399_defconfig
-index 4347bab598ab..7e67f8a12452 100644
---- a/configs/roc-pc-rk3399_defconfig
-+++ b/configs/roc-pc-rk3399_defconfig
-@@ -13,7 +13,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_ROC_PC_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/roc-pc-rk3576_defconfig b/configs/roc-pc-rk3576_defconfig
-index 53491efcec25..0af9f2cebfd5 100644
---- a/configs/roc-pc-rk3576_defconfig
-+++ b/configs/roc-pc-rk3576_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-roc-pc"
- CONFIG_ROCKCHIP_RK3576=y
- CONFIG_TARGET_ROC_PC_RK3576=y
--CONFIG_SYS_LOAD_ADDR=0x40c00800
- CONFIG_DEBUG_UART_BASE=0x2AD40000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/roc-pc-rk3588s_defconfig b/configs/roc-pc-rk3588s_defconfig
-index 226243d79772..ae8364d98b5f 100644
---- a/configs/roc-pc-rk3588s_defconfig
-+++ b/configs/roc-pc-rk3588s_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-roc-pc"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_ROC_PC_RK3588S=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_ENV_OFFSET_REDUND=0x400000
-diff --git a/configs/rock-2-rk3528_defconfig b/configs/rock-2-rk3528_defconfig
-index 2219bc9de561..aa78ddbc0ea4 100644
---- a/configs/rock-2-rk3528_defconfig
-+++ b/configs/rock-2-rk3528_defconfig
-@@ -5,7 +5,6 @@ CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3528-rock-2a"
- CONFIG_ROCKCHIP_RK3528=y
- CONFIG_TARGET_RADXA_ROCK_2_RK3528=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFF9F0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/rock-3a-rk3568_defconfig b/configs/rock-3a-rk3568_defconfig
-index e753185610f2..4a0ffa654d0a 100644
---- a/configs/rock-3a-rk3568_defconfig
-+++ b/configs/rock-3a-rk3568_defconfig
-@@ -8,7 +8,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-rock-3a"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=4
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/rock-3b-rk3568_defconfig b/configs/rock-3b-rk3568_defconfig
-index c3bf48b9e34c..3e39024c24ca 100644
---- a/configs/rock-3b-rk3568_defconfig
-+++ b/configs/rock-3b-rk3568_defconfig
-@@ -8,7 +8,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-rock-3b"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=4
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/rock-3c-rk3566_defconfig b/configs/rock-3c-rk3566_defconfig
-index 417aa33a6637..8e9ca60dd218 100644
---- a/configs/rock-3c-rk3566_defconfig
-+++ b/configs/rock-3c-rk3566_defconfig
-@@ -8,7 +8,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-rock-3c"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=4
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/rock-4c-plus-rk3399_defconfig b/configs/rock-4c-plus-rk3399_defconfig
-index 0f6bdfdfb06a..2557d28b2ab9 100644
---- a/configs/rock-4c-plus-rk3399_defconfig
-+++ b/configs/rock-4c-plus-rk3399_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_ROCKPI4_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/rock-4d-rk3576_defconfig b/configs/rock-4d-rk3576_defconfig
-index 93faf09962cf..ffd13a87d949 100644
---- a/configs/rock-4d-rk3576_defconfig
-+++ b/configs/rock-4d-rk3576_defconfig
-@@ -8,7 +8,6 @@ CONFIG_SF_DEFAULT_MODE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-rock-4d"
- CONFIG_ROCKCHIP_RK3576=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
--CONFIG_SYS_LOAD_ADDR=0x40c00800
- CONFIG_SF_DEFAULT_BUS=5
- CONFIG_DEBUG_UART_BASE=0x2AD40000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/rock-4se-rk3399_defconfig b/configs/rock-4se-rk3399_defconfig
-index 7f22aede912c..b46e4db5b084 100644
---- a/configs/rock-4se-rk3399_defconfig
-+++ b/configs/rock-4se-rk3399_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_ROCKPI4_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/rock-5-itx-rk3588_defconfig b/configs/rock-5-itx-rk3588_defconfig
-index cb014de41883..77c4fe4b4dc5 100644
---- a/configs/rock-5-itx-rk3588_defconfig
-+++ b/configs/rock-5-itx-rk3588_defconfig
-@@ -10,7 +10,6 @@ CONFIG_ROCKCHIP_RK3588=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_ROCK5B_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=5
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/rock-5c-rk3588s_defconfig b/configs/rock-5c-rk3588s_defconfig
-index 3d044a814980..95022659232a 100644
---- a/configs/rock-5c-rk3588s_defconfig
-+++ b/configs/rock-5c-rk3588s_defconfig
-@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-rock-5c"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_ROCK_5C_RK3588S=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-rk3399_defconfig
-index e5c9072c27fe..3410727bead7 100644
---- a/configs/rock-pi-4-rk3399_defconfig
-+++ b/configs/rock-pi-4-rk3399_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_ROCKPI4_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/rock-pi-4c-rk3399_defconfig b/configs/rock-pi-4c-rk3399_defconfig
-index 4be7b0f8130e..0f6b819a2b66 100644
---- a/configs/rock-pi-4c-rk3399_defconfig
-+++ b/configs/rock-pi-4c-rk3399_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_ROCKPI4_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/rock-pi-e-rk3328_defconfig b/configs/rock-pi-e-rk3328_defconfig
-index 662c71c9dd93..30cf1710ee52 100644
---- a/configs/rock-pi-e-rk3328_defconfig
-+++ b/configs/rock-pi-e-rk3328_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3328-rock-pi-e"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3328=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/rock-pi-e-v3-rk3328_defconfig b/configs/rock-pi-e-v3-rk3328_defconfig
-index c344081eb77e..518a3822b93d 100644
---- a/configs/rock-pi-e-v3-rk3328_defconfig
-+++ b/configs/rock-pi-e-v3-rk3328_defconfig
-@@ -9,7 +9,6 @@ CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3328-rock-pi-e-v3"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3328=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/rock-pi-n10-rk3399pro_defconfig b/configs/rock-pi-n10-rk3399pro_defconfig
-index 602a723ea7d9..031cfb633769 100644
---- a/configs/rock-pi-n10-rk3399pro_defconfig
-+++ b/configs/rock-pi-n10-rk3399pro_defconfig
-@@ -8,7 +8,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399pro-rock-pi-n10"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_EVB_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/rock-pi-s-rk3308_defconfig b/configs/rock-pi-s-rk3308_defconfig
-index a62afd05c4cb..db1b73fb64ef 100644
---- a/configs/rock-pi-s-rk3308_defconfig
-+++ b/configs/rock-pi-s-rk3308_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-rock-pi-s"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3308=y
- CONFIG_TARGET_EVB_RK3308=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFF0A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- # CONFIG_DEBUG_UART_BOARD_INIT is not set
-diff --git a/configs/rock-s0-rk3308_defconfig b/configs/rock-s0-rk3308_defconfig
-index f8633961495b..fbdfff0dcb16 100644
---- a/configs/rock-s0-rk3308_defconfig
-+++ b/configs/rock-s0-rk3308_defconfig
-@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-rock-s0"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3308=y
- CONFIG_TARGET_EVB_RK3308=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFF0A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- # CONFIG_DEBUG_UART_BOARD_INIT is not set
-diff --git a/configs/rock5a-rk3588s_defconfig b/configs/rock5a-rk3588s_defconfig
-index 24b2eef35f24..f9bbde7243e9 100644
---- a/configs/rock5a-rk3588s_defconfig
-+++ b/configs/rock5a-rk3588s_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-rock-5a"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_ROCK5A_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
-index da5fb3a2c302..484fbc5c8f5e 100644
---- a/configs/rock5b-rk3588_defconfig
-+++ b/configs/rock5b-rk3588_defconfig
-@@ -10,7 +10,6 @@ CONFIG_ROCKCHIP_RK3588=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_ROCK5B_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=5
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/rock64-rk3328_defconfig b/configs/rock64-rk3328_defconfig
-index f32037e03150..35a95c92edda 100644
---- a/configs/rock64-rk3328_defconfig
-+++ b/configs/rock64-rk3328_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3328-rock64"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3328=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
-diff --git a/configs/rock960-rk3399_defconfig b/configs/rock960-rk3399_defconfig
-index db121f03ae6c..9595de694bcf 100644
---- a/configs/rock960-rk3399_defconfig
-+++ b/configs/rock960-rk3399_defconfig
-@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-rock960"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_TARGET_ROCK960_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
-index 1d2bff35fc02..0791620cefd8 100644
---- a/configs/rockpro64-rk3399_defconfig
-+++ b/configs/rockpro64-rk3399_defconfig
-@@ -12,7 +12,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_ROCKPRO64_RK3399=y
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/sige1-rk3528_defconfig b/configs/sige1-rk3528_defconfig
-index 150e0fcc7188..413fa68c9f66 100644
---- a/configs/sige1-rk3528_defconfig
-+++ b/configs/sige1-rk3528_defconfig
-@@ -4,7 +4,6 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3528-armsom-sige1"
- CONFIG_ROCKCHIP_RK3528=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFF9F0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/sige5-rk3576_defconfig b/configs/sige5-rk3576_defconfig
-index be46f63798b5..c5945966f7e5 100644
---- a/configs/sige5-rk3576_defconfig
-+++ b/configs/sige5-rk3576_defconfig
-@@ -4,7 +4,6 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-armsom-sige5"
- CONFIG_ROCKCHIP_RK3576=y
--CONFIG_SYS_LOAD_ADDR=0x40c00800
- CONFIG_DEBUG_UART_BASE=0x2AD40000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/sige7-rk3588_defconfig b/configs/sige7-rk3588_defconfig
-index 00b9759715b4..8de2792d5ff2 100644
---- a/configs/sige7-rk3588_defconfig
-+++ b/configs/sige7-rk3588_defconfig
-@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-armsom-sige7"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_SIGE7_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SPL_SPI=y
-diff --git a/configs/soquartz-blade-rk3566_defconfig b/configs/soquartz-blade-rk3566_defconfig
-index 7de159a88819..f3c6c131cb40 100644
---- a/configs/soquartz-blade-rk3566_defconfig
-+++ b/configs/soquartz-blade-rk3566_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-soquartz-blade"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_QUARTZ64_RK3566=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/soquartz-cm4-rk3566_defconfig b/configs/soquartz-cm4-rk3566_defconfig
-index 4455ee5b5aa0..b1f6870a4846 100644
---- a/configs/soquartz-cm4-rk3566_defconfig
-+++ b/configs/soquartz-cm4-rk3566_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-soquartz-cm4"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_QUARTZ64_RK3566=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/soquartz-model-a-rk3566_defconfig b/configs/soquartz-model-a-rk3566_defconfig
-index abdab5144963..518b53e598ce 100644
---- a/configs/soquartz-model-a-rk3566_defconfig
-+++ b/configs/soquartz-model-a-rk3566_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-soquartz-model-a"
- CONFIG_ROCKCHIP_RK3568=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_QUARTZ64_RK3566=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFE660000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
-diff --git a/configs/tiger-rk3588_defconfig b/configs/tiger-rk3588_defconfig
-index 105e8e10e0b8..22a2554a934e 100644
---- a/configs/tiger-rk3588_defconfig
-+++ b/configs/tiger-rk3588_defconfig
-@@ -10,7 +10,6 @@ CONFIG_ROCKCHIP_RK3588=y
- CONFIG_ROCKCHIP_BOOT_MODE_REG=0x0
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_TIGER_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_SF_DEFAULT_BUS=5
- CONFIG_DEBUG_UART_BASE=0xfeb50000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/tinker-rk3288_defconfig b/configs/tinker-rk3288_defconfig
-index b22962786b24..44edf9f1d6f2 100644
---- a/configs/tinker-rk3288_defconfig
-+++ b/configs/tinker-rk3288_defconfig
-@@ -11,7 +11,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3288=y
- CONFIG_TARGET_TINKER_RK3288=y
- CONFIG_SYS_BOOTM_LEN=0x4000000
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SPL_SIZE_LIMIT=0x4b000
- CONFIG_DEBUG_UART_BASE=0xff690000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/tinker-s-rk3288_defconfig b/configs/tinker-s-rk3288_defconfig
-index 93057cd991b1..9ec15e85ef1d 100644
---- a/configs/tinker-s-rk3288_defconfig
-+++ b/configs/tinker-s-rk3288_defconfig
-@@ -11,7 +11,6 @@ CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3288=y
- CONFIG_TARGET_TINKER_RK3288=y
- CONFIG_SYS_BOOTM_LEN=0x4000000
--CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SPL_SIZE_LIMIT=0x4b000
- CONFIG_DEBUG_UART_BASE=0xff690000
- CONFIG_DEBUG_UART_CLOCK=24000000
-diff --git a/configs/toybrick-rk3588_defconfig b/configs/toybrick-rk3588_defconfig
-index 14b231ae3e28..f40f0c555cda 100644
---- a/configs/toybrick-rk3588_defconfig
-+++ b/configs/toybrick-rk3588_defconfig
-@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-toybrick-x0"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_TOYBRICK_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEB50000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
-diff --git a/configs/turing-rk1-rk3588_defconfig b/configs/turing-rk1-rk3588_defconfig
-index 0b3efec23e60..82ed697964ca 100644
---- a/configs/turing-rk1-rk3588_defconfig
-+++ b/configs/turing-rk1-rk3588_defconfig
-@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-turing-rk1"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_TURINGRK1_RK3588=y
--CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFEBC0000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_PCI=y
+ #endif /* _ROCKCHIP_COMMON_H_ */
 
 -- 
 2.55.0
