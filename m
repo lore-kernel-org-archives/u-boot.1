@@ -1,30 +1,30 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 711CC606A31A
-	for <u-boot@archiver.kernel.org>; Fri, 23 Oct 2026 15:12:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C87E606A32E
+	for <u-boot@archiver.kernel.org>; Fri, 23 Oct 2026 15:12:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DlYdNMG7;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=pTnRaLc5;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Q3Hw7/kJ
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=PlRiRW2E;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=kt/syqXQ;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bJTphyH3
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 46F3D4099C;
-	Fri, 23 Oct 2026 15:12:04 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0C853813EC;
+	Fri, 23 Oct 2026 15:12:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4drNuiK_NDu2; Fri, 23 Oct 2026 15:12:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7C0CA409D5
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792768322;
-	b=i1MBQc4XzE1AydytplQ2AH8NvwwaERa/hakV+ValyifuslHkAA/wgnRqOQHN3FOEFO6r
-	 GiMAh+p3hjAfcPzmcMJjHUlbBRKBuaioEvAjvZjzYaYHSsqAUc48J1r8lYyPuByoDWVTl
-	 EsEDZjJPGARnrkys2tnw4/PdIrx/qLZeVbTNEqf6H5+PUNoOYqjB1PFUQtUe4y7pI9lyj
-	 GdsS6SxWYCQfiQyS/JtwXiLyygUHQbrrmYH8os1OVY8x8hk/by3C2LFX2LUJZBCcHF+qW
-	 ZLpN/w7F9VcTvfwuNc7VTzU8LsB+7ucoKAaLNrRFfPZzLGBVcpcA9oJDYIdf49FlFZg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id EK-lwQYBTQZd; Fri, 23 Oct 2026 15:12:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2CE2C813D5
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792768324;
+	b=k4GV72nwMoil5UbxohoA9mqpJ5flmggH6wqyT4ksMXXVSoSLVqzBou4uuqm/92J2uenp
+	 DOTLHW0J9HgUhLm9ZXVPbcgVst3to9bTGG0BndB1Y4fuYJOcX0t9PI8FAWEMqymxQvjOi
+	 TTa/WINz/vQN/t2/FUAPq58dU9Hy0kaqSQggmd7h751sKTpZ1JTCbsL/wOge5vse+yspV
+	 g4CB6JOCmB9yThMvzngBRh8xuvi8zp4mh8+F1g1MsX61rqJZGV1YUgEF5/LTDYMnF0gad
+	 kln3rmkTKeS+J2lNIy9ftRPXVG1M0wb74NkwEEaShKZ/4g2KeyY6SwI1JF5ciCsBeeQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792768322;
+	c=relaxed/relaxed; t=1792768324;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,171 +32,171 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
 	 X-Gm-Gg:X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=VLLJDpzxyE8w3yG5QpCB1c+r3F+i4ZVIjaE5q6dGSwE=;
-	b=PvutmSf16HVV96rLouS7YRBlmYT+HB1xGBC5eBRGeg+T3sTEis99HTz0CkHLELrH+NLz
-	 1lyzRG8lXQWHbHXCfWBmdiyCt1t54yNGAUmr3k5F9Fe5ESHi3L67r+3+hadOQBaJ5Alz7
-	 HicvyfSw1kCh8GLzbZQDvdkHDf7kddfRaXKxZP+Zw1dRpP6dLPGwWOrbmkY5Ty+eIPNO8
-	 vbR9aTe7rqC9aOJoRwQOM6MC/mBBFpRWw6cyt60S4BuApy7OEVStxr4vqvtecDuWRRJyz
-	 sNTheLYYAdX+U1wsXI1jUPpwQSggL0Gx+YfgqykZZ6os0WVnF1cfYEFKKIC/GYKP44g==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=JjXDcCh5+royAoG4fdNVP7OFgDccHJEi/JU+fHDiZfs=;
+	b=pG9SwvvjF19yiBZB3d64s4iOgAa9eV0J+LFOsZs/lpsqPLc6Yyx2wN+8jgBD5RRqWYbp
+	 tj9Y/3/uftKZVk/mtZvHFX/kqnFMIs3UrmWSklJ3liEsaZ38Nig7dlgEe0vAniwZOw1bo
+	 q0cqMhhh7OJeeHIm5ymIZMRYhht5C9ALIvktatbgOlOgfbjW8s/G+kAJBEExRos2BX8FQ
+	 OSaeG7JKJcYIvbtXOqVvUNrX9Mds6i4p/VVNQbD/K/iljtyrcHhVgkqRaH1RFFlTblO23
+	 EluNoRrTcl4TwwoEB7kArNnhpHcrfxSk09MHnRK0ClGS+/v1CjAdcI0i9uFIWX5KFfg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792768322;
-	bh=VLLJDpzxyE8w3yG5QpCB1c+r3F+i4ZVIjaE5q6dGSwE=;
+	d=lists.u-boot-project.org; s=default; t=1792768324;
+	bh=JjXDcCh5+royAoG4fdNVP7OFgDccHJEi/JU+fHDiZfs=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=DlYdNMG7QUPAuI4VyryRE6dqGFDdxGUymXu88IVVxRD3c+1xcxg3Z6DS9TiY4bxaG
-	 kXcJ2edoJQ23OqLd91O4nDV74GpOxdZ7V7LkxX7vi8Oy21Pa1r4lp1PmNheX7gmYE6
-	 6PEU94TTeTrrQyAIdlToyqeBkc78hkzvxg1BKTg1RezN9WxUKHK8r78JGS0IZUCdHC
-	 Nxws2DIb3vTXXUuwKyrfhE0g8kJHcsVJN0njMaNZhS2nZ2Ma9gHPR59TNvlnbjor9i
-	 k001gOfP86/eh3uzOEiCcGYj5ixtYbkIwAH/OTwbsEyKUPno6BB+nSxiMBvipVL3Dq
-	 UVCZ/uAJFaO0A==
+	b=PlRiRW2EWacEM1SFnRyf0rQJpkQRGnwMXeuhilDv5Ay03mLUdECGyKOxyjXfmlRcS
+	 /4WcFKD1vBZ10U0lzFat064kKebZNKjJ7PIiN6RUy6LSKZYYxuCt5k0/CE/mgIPhn9
+	 Y3NvuuvqWoQ+reAsh8QyK24PXYLiTqUFeU0oWguS2+HrbuU3hZXmDynZAZIUQpWcMu
+	 aMboXC7ZR1QPsKa+nySOAusfb/9pKbjXAnbV1WcQbo5Op6w/gtLYWcZzolq2Lw0GqV
+	 hgScN5Gytd2jDPPjgZ1KRzGd334BxRne3jhtSL75uGIbcaK98j5SrvJEx/tcbe8EJ5
+	 xb1gC9My8nesg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7C0CA409D5;
-	Fri, 23 Oct 2026 15:12:02 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 79FD8235
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2CE2C813D5;
+	Fri, 23 Oct 2026 15:12:04 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id E40CC12C
  for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 15:12:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 5FD5E60648
+ by smtp4.osuosl.org (Postfix) with ESMTP id C656B4097D
  for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 15:12:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yvI04scCnuIe for <u-boot@lists.u-boot-project.org>;
- Fri, 23 Oct 2026 15:12:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0046B60628
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=205.220.168.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792768320;
- b=nk0mpcL0jczJRwm/gV2ly8JTBltyb8/nkFSK6QeMJtE6qPs12Hkj7JrOUhsWmD8gL2Sr
- 0d0ikex1QISpO8qzXkKvsik96rKQpQp+yzbmykf63A5IThNvjOEDo2VTu2VQk14idqaL9
- ZRh5q1yK9CA0dAzTyI+4XeICG42jxRr9pQ/dL1wjxZTZ+4G/o9KL02jejH8KNKstC8vmc
- tgpnXWq2uX0IKwwqzsprvz1vf5r0wjJnTYAHB8WrIEUzcJe7JSQ6o2yuCdK4Ie3dI/Uu7
- F9Q2wUglvokWcSvezKEuXhxMsq0grwk6IwJgAf651FYWWg0T/4dHVM5KK4nMjirfGPQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wc_yypzDD3qe for <u-boot@lists.u-boot-project.org>;
+ Fri, 23 Oct 2026 15:12:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E228E409D5
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792768321;
+ b=COR95r5eqihg3dDkUVTdgPlSLOIag7jAffa9jcXadUC17IUOHdw5BsoLOP+IUYcl+Et9
+ eoewCCMToyRCebDUcBUUvPKS+sN1mrf93NZHLgS3Czu3/WWJSY1DL3qycUYVvI+TgObq+
+ 2LohcseYrwJgSLvcc7ClNO7rY7ck8RkUqlmvGFce/FHaayjjpYPuo7L4gycMSIb1hz7HN
+ Rxa+zMWv5bGu6/2MxR992OW3aa6hv/zwAWE6adboDpdr8eiyRb2vauK3Y7DOAWZxpEvKp
+ +k1sISwwFuqUZAmEEBgzRRNfFJ8c3mOTDJi+bQh7Vr680NmziuH+J60Iib3hMN2q9OA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792768320;
+ c=relaxed/relaxed; t=1792768321;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
  DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
  X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
  Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:References:In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-GUID:
- X-Proofpoint-Spam-Info:X-Authority-Analysis:
- X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+ Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+ X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+ X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-GUID:
  X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
- bh=VLLJDpzxyE8w3yG5QpCB1c+r3F+i4ZVIjaE5q6dGSwE=;
- b=j1NATn+5wmOrT4FyxvmoRJ6ORtgrtgpJa/h7bDJ6xy8+UszvswwIZMcr03rFOCWxmxou
- asdJZe/5mWghrTixSuCMNJ6kfKKQdPgATYp3kd5mhwu/5eKRsgzyWpUKjFbccwg1vaYI2
- 5x2Otsk65qYlyS1jFVQKjEol0ZhzIRUlVKJmZ2WyT5rtGABofEisPxrXKS9C3ynebCZHJ
- /rgKJwFtStopgYrUt408/2xpcPD5DKeeivCvZxfCGOeeNEIfQv2VjvPQRAJtdV0ZLcA9z
- JOHuOSu/l3qC/ry07jcpmXkDM9W+EB5CUOSc+fn1KMUswN8iatP9/6GqfkPBl4wq/VA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=JjXDcCh5+royAoG4fdNVP7OFgDccHJEi/JU+fHDiZfs=;
+ b=haAi5AjqZaPHFpJAFluEitqSMpIgjHfyU1F+4ZTSNGoHh4DgF+FASALuJz3lokl7ehuP
+ 4zCSfHQL6dNHwauCF3lX1eyZVifHKKTK0//4mPQC6yZek+ATm9qRySFokqopU1gOEpikG
+ mDFlA8X60ycOCAq2iCBbnu50GTQnqZmj41nwJL7DxtJTX9rEogrlBNfcDm2oeYcnqejWC
+ MNuI4jbrspG+X+acZD9EPBVdr/j2puIlepS2D16Zm1QFkdd/ly3SJTb03c8Fa/Qs7ZkWB
+ a+FVt5l/C7TmGTAlD5dOLDSRzeqxqM2aUpHXgfD0vkE5soz2R9pu2Q6v1KzPJBU7cKg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=oss.qualcomm.com;
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=pTnRaLc5; 
+ header.s=qcppdkim1 header.b="kt/syqXQ"; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b="Q3Hw7/kJ"; 
- arc=none smtp.remote-ip=205.220.168.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
- helo=mx0a-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
+ header.a=rsa-sha256 header.s=google header.b=bJTphyH3; 
+ arc=none smtp.remote-ip=205.220.180.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=pTnRaLc5; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=kt/syqXQ; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=Q3Hw7/kJ
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0046B60628
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 15:11:59 +0000 (UTC)
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ header.a=rsa-sha256 header.s=google header.b=bJTphyH3
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E228E409D5
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 15:12:00 +0000 (UTC)
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69NE5v5W4063351
+ 69NE6Dde1955148
  for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 15:11:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- VLLJDpzxyE8w3yG5QpCB1c+r3F+i4ZVIjaE5q6dGSwE=; b=pTnRaLc59BjARX60
- Qm3AGjp5jGzYqDbjK1tgIuKG/7iZf3gtfYul6mKMxbSxzfwuN4SSv5cfXiE0OW9o
- ofjo+pvMQjlgbfCHbEA/lTSrOyxk3q7iYa0scKR3Jg1pLf+xmo3cKvdu6bYfvkNa
- pdYJIsDGg6ljVu6iuJkwKOdj1BL494kIDVX1GGuKBtGjAlxP11MyKbPnbWHzMInc
- hgRprLOsNVr0ZS+r0a9CKJMKxAATQibo4/41pxyaIXSkUMi9/WcqOvjU+An7NmBY
- 59Lmvy/I9U1g8uSF75OJ5dNpW+w+BXe2BEFYkN3D9j+SsaxX3Yi85aVWlH6BjXUw
- jxJfNg==
-Received: from mail-ua1-f70.google.com (mail-ua1-f70.google.com
- [209.85.222.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfqmrc8e8-1
+ JjXDcCh5+royAoG4fdNVP7OFgDccHJEi/JU+fHDiZfs=; b=kt/syqXQ02JmIj4O
+ 6lzbs9Q37NRxxV2fnSU3sdfEqOhEMJTe0CtZjMQjcxUDwb8fo6RGCwXClIBAEXJI
+ N1Cl2zaCsX2fXV2RoI6KZaNa2F5HjzvUROZkY51x+UxtoL73noLwQawawMhRPpAV
+ XDFh4ucOHtMDZhnKgg3vsKXKXJlw1xeVzQPOcs8fWrljx1GDITZm5elCYWXUGfvi
+ /y/6475sXg9W5AIjzK3Rm/QyEsdx0wQPivW+daOzIUfoKe92rdVmvrlLVhrrtPtJ
+ p7aEYVhPnDNmnMgmT7ImQGl6izb+9oCSep6CTw/ktIe6Ywhm0SK9gCKANcFXF8wu
+ 6pmQiQ==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hfqmbm9jv-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 15:11:58 +0000 (GMT)
-Received: by mail-ua1-f70.google.com with SMTP id
- a1e0cc1a2514c-98a9c848bf0so234239241.0
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 08:11:58 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 15:11:59 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-93caf6c528aso156933685a.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 08:11:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792768318; x=1793373118;
+ d=oss.qualcomm.com; s=google; t=1792768313; x=1793373113;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=VLLJDpzxyE8w3yG5QpCB1c+r3F+i4ZVIjaE5q6dGSwE=;
- b=Q3Hw7/kJjh+NgRdgnHLdaZCCxYPGiBv1eSst5uvUKGJ35anU1hc6T/2JTBw4Njhb6q
- Mo9lgT7fLWx879rU53UmtiudqmqICBkvn1w91HWna+LXPu8AUmqPuD5U2x748zc7l0+7
- KLVK/lM7jR+fECWIfOlvIavd96QDHwmDK0nbxdSTFiRYkC8SS/vloD0LXYyFwe+ti1fx
- 8C/NREmh5EjqAqqV+Xk+P/2gW5d4WNb2oDQGpmNbXycLdzOonqEHU2srSpM7s1TZGE8r
- lGV6GbImRON8RwmWX6NxBzP8yTP+Z8G+XQhEH6ZT1nRu8dzrTjanTrnDMH2ojn1yuWeO
- dTJw==
+ bh=JjXDcCh5+royAoG4fdNVP7OFgDccHJEi/JU+fHDiZfs=;
+ b=bJTphyH39vSudAVkA5N7niF3mU1sXbvSi0X68HTdSTn8XMy8MOrdv5mW73/qcBElY7
+ O3Az6idXGuCGL12LPrQreTeaS2giYm7NPbGxJ+yBgqfWQWSi3Ze5lUCe9W8OlpRBw4Nl
+ 0yMJykscRuy+s6I/TFPVDpfZtyh8mkVhrbkpWEF6AyzGXoojUqLw9ZLaUhD9nBq/qC/c
+ X3ooXqlSsae6VzxQM+025MXwSgo/beZs7+iUqwtQY+9i0bv8FZAVXb17LxzNJGoBl8Cc
+ 9gvjoFBZZoV8mfDH3HYXSHbXP6nLO7WK70WtrvyPOWGs6ukXl7QdS/dA0mrqgHZKZ0j/
+ e8gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792768318; x=1793373118;
+ d=1e100.net; s=20260707; t=1792768313; x=1793373113;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=VLLJDpzxyE8w3yG5QpCB1c+r3F+i4ZVIjaE5q6dGSwE=;
- b=mtcryR1137YrMcwYpAJ1w8OzrEcGQNy6l3Y25vnmsD6Kuo4CbZ4qLl5UyJs7eyGQYL
- og3ae5AeRaFBr7o/XICK1bLeszqZytldMwdf/z0np7i2IwGCD27xxKzxrq8m8dS0JyUN
- CxRBJAtRIP7jde/twRqHdl2nfUqesj8iz5+yN7UOAS5di8D+BqoOascSBWHgUXSWDDiu
- l23dE0tl83MLZoQcYFhV0Apq4ti47gQR7Au+G4PN8ruA00q1cdipbDUeNtBVCPtSuEQS
- cYlafGHCeB56EduYLCkgIlZbhHKOOuTjtoBk23bgPFsLAmyQP76PfYPe7qGeLxuBd1Ei
- VjFg==
+ bh=JjXDcCh5+royAoG4fdNVP7OFgDccHJEi/JU+fHDiZfs=;
+ b=vPXL1Rm127dwyIuQqzXubLWf+D0i+Qv1HXYQPc9pu7JRzN672Wc4SXIyPrm2VShXNo
+ YnVKhTaCSChE/ZA8ShlK++7EflIcJpAY6T2LGeq4IifGsPZaIaWCQHRRwNcyAVKDEt19
+ WGBjQbOUnl0eXkVRRv6DYy/Vt/24Tremxc7jOth5BRWzM96ibuYMdrN9e/L3bSlmkIzV
+ x832jkWsHJIF95KUdaT1+n57cQTkwsl2b2/+wc0A56uC8tB7WINtSm7O6wv14or2HWTa
+ 538nLbVioT+NYF4ImhdUgFodrgWG4xfrp9/RRVPNEQF7BjNUnm2A5mvD2XX87NYgnxVK
+ q/KA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwt8GsRYJE5kKVwEvW0GUX2E5lY1UlQiTj3dAVxPJsIcnkVLFb2A1v3ukscQblyt0TOpqCg88M=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJIfSLlgYHbRs90Wdka1Zrf6PNGQ2CDR04rkCuyx6TqIYorryTd
- WyUUtBlGepUQkA+x9ACMcKtQm27UxyH7TrL0IeVUroWrVEFjsshyKYO1T581MNhTZZKaZTmUnr9
- sDehNxs/S150eL0rchb3N3mRYXe6nNIrS1taS9KV0AsFbYPedFr1LIc9QM2zH5t3/wmtNgV8=
-X-Gm-Gg: AYBFou2W1tguRPDoaQmGmbaRfmwXrqsRQg5MQC2TV831zEQFTWyHY9dhb1zLiikhkNe
- CSGM96/za7uesEjFFA/7BplEVBBmCoxqoKsJxOIRX0kzglzr7As2ZXZVPfp9gwwzG0Stu36L0Oj
- MLDmO2xTj9yfgIjFTdPFaTAWMKH7ZW1WPs1IxZWRCMGGKQXIjDoaiUxNf5Gv6qG/6eEfCLOFjg7
- YXCA+spzWoZxQdl4vL3+MFnr71YECImgWUEfsTTDlXxzGjmw0vXGyke3U4V2SK9AWOFNDoWD1zJ
- QSXJvu/f8gR8QRnOAkeIAI1iKGOb0jf4xRATYfCof97LCWstCr7X+opXKV7ohoV91oC9mkCelO/
- SzZuPu/DflTygqUw5J8W0qz+vkEmAT9hUJqv4rWQKESZRGOY=
-X-Received: by 2002:a05:6102:83d9:b0:7c1:f530:2d8e with SMTP id
- ada2fe7eead31-7ccc34426ccmr857669137.35.1792768317196; 
- Fri, 23 Oct 2026 08:11:57 -0700 (PDT)
-X-Received: by 2002:a05:6102:83d9:b0:7c1:f530:2d8e with SMTP id
- ada2fe7eead31-7ccc34426ccmr857646137.35.1792768316567; 
- Fri, 23 Oct 2026 08:11:56 -0700 (PDT)
+ AKwUvBy5wyOF40p1Y31CO/2Tpv+QtPXWTtVltqHkzMBFrqiLcmaqZe6y8UqkQfpV2Ki+SEHKGPu21MI=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYImKQwY5wNr4aD3plcdxQbLsoY6PnWgijOAP2W1aZKrkFM8sYll
+ doxy++6LtknAKv3AVIBCkBHqF+EutF/GZ90usQ2E5obI2SliP+GNX2lMvE1RLqhZB2LPNbs9VwK
+ ZjFRqy1snk5N5imFdeep2FRVw8/IEeMBGtiBH54CdNfAOLtDxDfm+55nLJfDfUTBAj1FkZ/A=
+X-Gm-Gg: AYBFou0wgM8ejT0sJ93AhaYkzZsfIFDmBkCcWiYWS1kE0WVUmTSKa7D0zaAhOA79nVJ
+ bK54YOwUz5UjwikEAqDUsOUdBu3ZSO6cWCiCx34/I3Wj4oyDf9ZgKs08JfMd2m4lNaa7XsXAvi6
+ HC3YD4BGkNnFihQTmgU4KkJ++jlRODPnNcVKn5ddtjMoBjjXdO/ohvG+FsKEGOexSOwDeePdZi6
+ K6ta3VxA0TY94wzwRVZ12CPg7v6fbMo+/v8L50Zf+6Ib3p9WhIjTJIbi9Bxnnm+ti8NEFGYpEsH
+ nRnm5cN5xbs+e5ND+T29oVDMf1/JrgENupbQMzJ7z0/d6u4wpuFjyNSwndDSsOXvPw2BHCR8G3k
+ KBeK16z4/0DZcA8tBOAO3QdMPVMg2Vtqoc6WfGNJ1kUEcH1o=
+X-Received: by 2002:a05:620a:8905:b0:93f:5593:574e with SMTP id
+ af79cd13be357-93f6f91df0fmr460256285a.23.1792768313249; 
+ Fri, 23 Oct 2026 08:11:53 -0700 (PDT)
+X-Received: by 2002:a05:620a:8905:b0:93f:5593:574e with SMTP id
+ af79cd13be357-93f6f91df0fmr460251485a.23.1792768312761; 
+ Fri, 23 Oct 2026 08:11:52 -0700 (PDT)
 Received: from [127.0.1.1] (185-164-143-216.cgnat.inetia.pl. [185.164.143.216])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c46b8bc2dccsm13229866b.42.2026.10.23.08.11.54
+ a640c23a62f3a-c46b8bc2dccsm13229866b.42.2026.10.23.08.11.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Oct 2026 08:11:55 -0700 (PDT)
+ Fri, 23 Oct 2026 08:11:51 -0700 (PDT)
 From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Fri, 23 Oct 2026 17:11:43 +0200
-Subject: [PATCH v5 4/5] fastboot: add flashing lock/unlock/get_unlock_ability
+Date: Fri, 23 Oct 2026 17:11:41 +0200
+Subject: [PATCH v5 2/5] cmd: avb: add lock/unlock commands
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261023-upstream-avb_lock_unlock_b4-v5-4-6453a6f63028@oss.qualcomm.com>
+Message-Id: <20261023-upstream-avb_lock_unlock_b4-v5-2-6453a6f63028@oss.qualcomm.com>
 References: <20261023-upstream-avb_lock_unlock_b4-v5-0-6453a6f63028@oss.qualcomm.com>
 In-Reply-To: <20261023-upstream-avb_lock_unlock_b4-v5-0-6453a6f63028@oss.qualcomm.com>
 To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
@@ -211,31 +211,31 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Jan Kehren <jan.kehren@emteria.com>,
  Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Proofpoint-GUID: WUg3DHtEe09rqKDvxCLzogsUWrIUSqoX
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA1OSBTYWx0ZWRfXxlyJVOBwLhv2
- DMvsffo/77Leu8jar71g6kiabzRM9td4IVN4OQFx+ba/JgRjOHBgRWUBdgr8sW4mBciMbz7Q6Bo
- DKdhUhIImzHKiJhqH2bWFWB/x8/nT/I=
-X-Authority-Analysis: v=2.4 cv=VNZIDNPX c=1 sm=1 tr=0 ts=6adb793e cx=c_pps
- a=R6oCqFB+Yf/t2GF8e0/dFg==:117 a=+XDFW8w5h4l+9U6kKVkjeg==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA1OSBTYWx0ZWRfXzyj/BwgyqpHM
+ iZ0Wrx5eqB8POJkLj9HZIw6g2u+Mvlgfup7CcayyMoQaI1kRQQiTyqZzhjMmZzFAwN3tHAGaBMx
+ F2wcJU660+iWLxFoCiX+cZbEGk70cic=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA1OSBTYWx0ZWRfXy4BUf8zfsZyt
+ M/1Zbhw4bdZc8e/ccQ3T1mJytPJqkSO8baDm1t4myJ2J1xPAxHThwmKdrvA/inBk+msG9VqqPQr
+ QbkpuBxjnjjJePXZSAJpRXRZfCrWPKQ41SyAZiDyaTiKPcTUxsbFJRrkcOBVQ/KuYHs+/WuUl0i
+ mpbCjPnAN3mONfb6zAgw5ppJiA1ZMvK/ytvGjDm4/HPSa42a9wq3kefvW1V6hbEXgEUndT8Rg3l
+ l3PYZ8hB7S5xInSy6sKmbvVEsR+QKWKONDf4ht2ZS3oAvr56QDRzYDCsD5ZOHlpdS+2/lx97Cus
+ 8GNval3eADndEttUlP4ijwNkz2nLPewgY2cxrNS6PuV77qeMp2ywZKIves/0KsCcXpZ2d80n6A+
+ 4m9xybLQbXn1fWRSPRgdqhM3nnytCkdizFmOO8o8nk2BVUK3/fXXATmEhdlCdg5D5fnJ7x6Y7tQ
+ CrFyQrRRjhM/SZgdUSw==
+X-Proofpoint-ORIG-GUID: 6MLK-CLvPYE-AkwO8cDZ7aBpqAT9gvF7
+X-Authority-Analysis: v=2.4 cv=Nt1E4MdJ c=1 sm=1 tr=0 ts=6adb793f cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=+XDFW8w5h4l+9U6kKVkjeg==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=IpJZQVW2AAAA:8 a=EUspDBNiAAAA:8 a=5JHqtTIscBY7JO8zqbAA:9 a=QEXdDO2ut3YA:10
- a=TD8TdBvy0hsOASGTdmB-:22 a=IawgGOuG5U0WyFbmm1f5:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA1OSBTYWx0ZWRfX9bBK9Dh6VTAF
- erK7GRVEdNBiNW2Rr1mw1WCp1zTISa14aQXo4kr8SWt3cfbIp6XZYk7BXCp3p1ixQ65Leyr+SE3
- 8t96vQCVGnatVnlN94v63StJPAVF7L3budjkKLWXfuV3Xt0TxIqNpdXHNyJ3XasWsYfLCMeof9H
- ldLO36W3WMImBJ0FQOk0Pcl24JVIrqrjKc2Kx1oxxM8njqdwuq+29GAtnsexuKe6oWdn9SEFVWC
- NXqqxN/3ANVKSzOS03VhQAkENI/V+xXuloeBxjQcLNg+Zfavp7SfBlZBJz7KGvHL2b9ofHep+95
- Tw/f19CTatJkjvhhpLepqs+EK22tNiYULS/2LjikjepGmaC2XuqydttYd3oomZI08J+OwsATN3K
- XrEU75vMYMTnFBZjZU9Tpmh9dRC+btDIe/eP6ocBi7vDFeH7HFy3i7oLHrE3k1ddWtAVCGvY2Vt
- amB+0hrQNIiXsLG/I2A==
-X-Proofpoint-ORIG-GUID: WUg3DHtEe09rqKDvxCLzogsUWrIUSqoX
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=VwQbUJbxAAAA:8 a=IpJZQVW2AAAA:8 a=EUspDBNiAAAA:8 a=MoAT0fEG2T6-BM8MC5gA:9
+ a=QEXdDO2ut3YA:10 a=bTQJ7kPSJx9SKPbeHEYW:22 a=IawgGOuG5U0WyFbmm1f5:22
+X-Proofpoint-GUID: 6MLK-CLvPYE-AkwO8cDZ7aBpqAT9gvF7
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-23_04,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 bulkscore=0 adultscore=0 phishscore=0
- impostorscore=0 spamscore=0 lowpriorityscore=0 malwarescore=0 clxscore=1015
+ spamscore=0 clxscore=1015 impostorscore=0 suspectscore=0 malwarescore=0
+ phishscore=0 priorityscore=1501 lowpriorityscore=0 bulkscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610230059
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -249,637 +249,141 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Android's fastboot client changes the device lock state with
-"fastboot flashing lock|unlock" and asks "flashing get_unlock_ability"
-first. U-Boot has the state in the AVB TA (avb_write_lock_state(), used by
-the "avb lock/unlock" shell commands) but no fastboot front end for it, so
-a device could only be unlocked from the serial console. The state also
-had no effect on fastboot: a locked device still accepted "flash",
-"erase", "boot" and the oem commands.
+The OP-TEE AVB TA stores the device lock state
+(TA_AVB_CMD_READ/WRITE_LOCK_STATE) but U-Boot only ever read it, so a
+device backed by the TA could never leave the unlocked (orange) state from
+the bootloader. Add avb lock and avb unlock, which set the state through a
+new avb_write_lock_state() helper. As documented by the TA, changing the
+state resets all rollback indexes.
 
-Add the three commands and the "unlocked" variable behind
-CONFIG_FASTBOOT_CMD_FLASHING. As AVB requires, both transitions erase
-userdata (and metadata, which holds the file based encryption keys) before
-the state changes and are refused when a partition cannot be erased; the
-TA resets the rollback indexes on a state change. A device that is
-already in the requested state is refused without a wipe. The erase goes
-through the configured flash back end, like the "erase" command, and the
-lock state itself lives in the TA, so nothing here depends on the storage
-type.
-
-While the device is locked, the commands that change the storage or run
-code are refused with "device is locked": "flash", "erase", "boot", "oem
-format", "oem partconf", "oem bootbus", "oem run", "UCmd" and "ACmd";
-"flashing unlock" is the only way out of that state.
-
-Unlocking follows the "OEM unlocking" developer setting the way Android's
-PersistentDataBlockService stores it in the frp (persistent data block)
-partition, looked up on the fastboot flash device of the mmc or block
-back end: the SHA-256 digest in the first 32 bytes of the partition must
-match the rest of it (Android formats the partition otherwise, which
-clears the setting) and its last byte must be non-zero. get_unlock_ability
-reports that and "flashing unlock" is refused otherwise, so a device
-without an frp partition, or with a back end that has no partition table,
-can only be unlocked from the U-Boot shell.
-
-Tested on QEMU virt with OP-TEE over "fastboot tcp": unlock and lock
-erase the partitions and flip the state reported by getvar unlocked and
-"avb is_unlocked"; flash, erase and boot are refused while locked; unlock
-is refused while the OEM unlocking byte in frp is clear, after the frp
-digest was corrupted, and on an unlocked device; lock on a locked device
-is refused without a wipe.
-
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 Reviewed-by: Guillaume La Roque <glaroque@baylibre.com>
+Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 ---
- drivers/fastboot/Kconfig      |  19 +++
- drivers/fastboot/fb_command.c | 363 +++++++++++++++++++++++++++++++++++++++++-
- drivers/fastboot/fb_getvar.c  |  22 +++
- include/fastboot.h            |  14 ++
- 4 files changed, 412 insertions(+), 6 deletions(-)
+ cmd/avb.c            | 40 ++++++++++++++++++++++++++++++++++++++++
+ common/avb_verify.c  | 23 +++++++++++++++++++++++
+ include/avb_verify.h |  3 +++
+ 3 files changed, 66 insertions(+)
 
-diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-index 88ed42ca5b9..9a5251d4b60 100644
---- a/drivers/fastboot/Kconfig
-+++ b/drivers/fastboot/Kconfig
-@@ -282,6 +282,25 @@ config FASTBOOT_MBR_NAME
- 	  specified on the "fastboot flash" command line matches the value
- 	  defined here. The default target name for updating MBR is "mbr".
+diff --git a/cmd/avb.c b/cmd/avb.c
+index 3c13d6a2cb2..8e0ab0eff06 100644
+--- a/cmd/avb.c
++++ b/cmd/avb.c
+@@ -534,6 +534,41 @@ int do_avb_write_pvalue_hex(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	return CMD_RET_FAILURE;
+ }
  
-+config FASTBOOT_CMD_FLASHING
-+	bool "Enable the 'flashing lock/unlock/get_unlock_ability' commands"
-+	depends on FASTBOOT_FLASH && AVB_VERIFY && OPTEE_TA_AVB
-+	select SHA256
-+	help
-+	  Add the Android "flashing lock", "flashing unlock" and "flashing
-+	  get_unlock_ability" commands and the "unlocked" variable. The device
-+	  lock state is the one AVB enforces, kept by the OP-TEE AVB TA. While
-+	  the device is locked, the commands that change the storage or run
-+	  code ("flash", "erase", "boot", "oem format/partconf/bootbus/run",
-+	  "UCmd", "ACmd") are refused. As required by AVB, the userdata (and
-+	  metadata) partition is erased before the state changes in either
-+	  direction, and the TA resets the rollback indexes on a state change.
-+	  Unlocking is only allowed when Android's "OEM unlocking" developer
-+	  setting, kept by PersistentDataBlockService in the frp partition of
-+	  the fastboot flash device, is enabled and the partition's digest is
-+	  valid; a device without an frp partition can only be unlocked from
-+	  the U-Boot shell.
++#ifdef CONFIG_OPTEE_TA_AVB
++static int avb_set_lock(bool locked)
++{
++	int ret;
 +
- config FASTBOOT_CMD_OEM_FORMAT
- 	bool "Enable the 'oem format' command"
- 	depends on FASTBOOT_FLASH_MMC && CMD_GPT
-diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-index bbfd1637860..63b0f5705fe 100644
---- a/drivers/fastboot/fb_command.c
-+++ b/drivers/fastboot/fb_command.c
-@@ -13,11 +13,17 @@
- #include <fb_mmc.h>
- #include <fb_nand.h>
- #include <fb_spi_flash.h>
-+#include <memalign.h>
- #include <part.h>
- #include <stdlib.h>
- #include <video_console.h>
- #include <vsprintf.h>
- #include <linux/printk.h>
-+#if CONFIG_IS_ENABLED(FASTBOOT_CMD_FLASHING)
-+#include <avb_verify.h>
-+#include <blk.h>
-+#include <u-boot/sha256.h>
++	if (!avb_ops) {
++		printf("AVB is not initialized, please run 'avb init <id>'\n");
++		return CMD_RET_FAILURE;
++	}
++
++	ret = avb_write_lock_state(avb_ops, locked);
++	if (ret != AVB_IO_RESULT_OK) {
++		printf("Failed to %s the device, err = %d\n",
++		       locked ? "lock" : "unlock", ret);
++		return CMD_RET_FAILURE;
++	}
++
++	printf("Device %s, rollback indexes reset\n",
++	       locked ? "locked" : "unlocked");
++
++	return CMD_RET_SUCCESS;
++}
++
++int do_avb_lock(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++{
++	return avb_set_lock(true);
++}
++
++int do_avb_unlock(struct cmd_tbl *cmdtp, int flag, int argc,
++		  char *const argv[])
++{
++	return avb_set_lock(false);
++}
 +#endif
- 
- #define FASTBOOT_DOT_LINE_WIDTH_DEFAULT	74
- 
-@@ -37,6 +43,7 @@ static u32 fastboot_bytes_received;
- static u32 fastboot_bytes_expected;
- 
- static void okay(char *, char *);
-+static void boot_image(char *, char *);
- static void getvar(char *, char *);
- static void download(char *, char *);
- static void flash(char *, char *);
-@@ -51,6 +58,14 @@ static void oem_console(char *, char *);
- static void oem_board(char *, char *);
- static void run_ucmd(char *, char *);
- static void run_acmd(char *, char *);
-+#if CONFIG_IS_ENABLED(FASTBOOT_CMD_FLASHING)
-+static void flashing_lock(char *, char *);
-+static void flashing_unlock(char *, char *);
-+static void flashing_get_unlock_ability(char *, char *);
-+static bool flashing_refuse_if_locked(char *response);
-+#else
-+static inline bool flashing_refuse_if_locked(char *response) { return false; }
-+#endif
- 
- struct fastboot_command {
- 	const char *command;
-@@ -123,7 +138,7 @@ static const struct fastboot_command commands[FASTBOOT_COMMAND_COUNT] = {
- 	},
- 	[FASTBOOT_COMMAND_BOOT] =  {
- 		.command = "boot",
--		.dispatch = okay
-+		.dispatch = boot_image
- 	},
- 	[FASTBOOT_COMMAND_CONTINUE] =  {
- 		.command = "continue",
-@@ -181,6 +196,20 @@ static const struct fastboot_command commands[FASTBOOT_COMMAND_COUNT] = {
- 		.command = "ACmd",
- 		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT, (run_acmd), (NULL))
- 	},
-+	[FASTBOOT_COMMAND_FLASHING_LOCK] = {
-+		.command = "flashing lock",
-+		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_CMD_FLASHING, (flashing_lock), (NULL))
-+	},
-+	[FASTBOOT_COMMAND_FLASHING_UNLOCK] = {
-+		.command = "flashing unlock",
-+		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_CMD_FLASHING, (flashing_unlock), (NULL))
-+	},
-+	[FASTBOOT_COMMAND_FLASHING_GET_UNLOCK_ABILITY] = {
-+		.command = "flashing get_unlock_ability",
-+		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_CMD_FLASHING,
-+					      (flashing_get_unlock_ability),
-+					      (NULL))
-+	},
- };
++
+ static struct cmd_tbl cmd_avb[] = {
+ 	U_BOOT_CMD_MKENT(init, 3, 0, do_avb_init, "", ""),
+ 	U_BOOT_CMD_MKENT(read_rb, 2, 0, do_avb_read_rb, "", ""),
+@@ -549,6 +584,8 @@ static struct cmd_tbl cmd_avb[] = {
+ 	U_BOOT_CMD_MKENT(write_pvalue, 3, 0, do_avb_write_pvalue, "", ""),
+ 	U_BOOT_CMD_MKENT(read_pvalue_hex, 3, 0, do_avb_read_pvalue_hex, "", ""),
+ 	U_BOOT_CMD_MKENT(write_pvalue_hex, 3, 0, do_avb_write_pvalue_hex, "", ""),
++	U_BOOT_CMD_MKENT(lock, 1, 0, do_avb_lock, "", ""),
++	U_BOOT_CMD_MKENT(unlock, 1, 0, do_avb_unlock, "", ""),
  #endif
- 
-@@ -265,6 +294,19 @@ static void okay(char *cmd_parameter, char *response)
- 	fastboot_okay(NULL, response);
- }
- 
-+/**
-+ * boot_image() - accept "boot"; the downloaded image is started afterwards
-+ *
-+ * Refused on a locked device: nobody verified the image.
-+ */
-+static void __maybe_unused boot_image(char *cmd_parameter, char *response)
-+{
-+	if (flashing_refuse_if_locked(response))
-+		return;
-+
-+	fastboot_okay(NULL, response);
-+}
-+
- /**
-  * getvar() - Read a config/version variable
-  *
-@@ -416,6 +458,9 @@ void fastboot_data_complete(char *response)
-  */
- static void __maybe_unused flash(char *cmd_parameter, char *response)
- {
-+	if (flashing_refuse_if_locked(response))
-+		return;
-+
- 	if (CONFIG_IS_ENABLED(FASTBOOT_FLASH_BLOCK))
- 		fastboot_block_flash_write(cmd_parameter, fastboot_buf_addr,
- 					   image_size, response);
-@@ -442,19 +487,27 @@ static void __maybe_unused flash(char *cmd_parameter, char *response)
-  * Erases the partition indicated by cmd_parameter (clear to 0x00s). Writes
-  * to response.
-  */
--static void __maybe_unused erase(char *cmd_parameter, char *response)
-+static void __maybe_unused erase_partition(const char *name, char *response)
- {
- 	if (CONFIG_IS_ENABLED(FASTBOOT_FLASH_BLOCK))
--		fastboot_block_erase(cmd_parameter, response);
-+		fastboot_block_erase(name, response);
- 
- 	if (CONFIG_IS_ENABLED(FASTBOOT_FLASH_MMC))
--		fastboot_mmc_erase(cmd_parameter, response);
-+		fastboot_mmc_erase(name, response);
- 
- 	if (CONFIG_IS_ENABLED(FASTBOOT_FLASH_NAND))
--		fastboot_nand_erase(cmd_parameter, response);
-+		fastboot_nand_erase(name, response);
- 
- 	if (CONFIG_IS_ENABLED(FASTBOOT_FLASH_SPI))
--		fastboot_spi_flash_erase(cmd_parameter, response);
-+		fastboot_spi_flash_erase(name, response);
-+}
-+
-+static void __maybe_unused erase(char *cmd_parameter, char *response)
-+{
-+	if (flashing_refuse_if_locked(response))
-+		return;
-+
-+	erase_partition(cmd_parameter, response);
- }
- 
- /**
-@@ -465,6 +518,9 @@ static void __maybe_unused erase(char *cmd_parameter, char *response)
-  */
- static void __maybe_unused run_ucmd(char *cmd_parameter, char *response)
- {
-+	if (flashing_refuse_if_locked(response))
-+		return;
-+
- 	if (!cmd_parameter) {
- 		pr_err("missing slot suffix\n");
- 		fastboot_fail("missing command", response);
-@@ -492,6 +548,9 @@ void fastboot_acmd_complete(void)
-  */
- static void __maybe_unused run_acmd(char *cmd_parameter, char *response)
- {
-+	if (flashing_refuse_if_locked(response))
-+		return;
-+
- 	if (!cmd_parameter) {
- 		pr_err("missing slot suffix\n");
- 		fastboot_fail("missing command", response);
-@@ -566,6 +625,9 @@ static void __maybe_unused oem_format(char *cmd_parameter, char *response)
- 					      (CONFIG_VAL(FASTBOOT_FLASH_MMC_DEV)),
- 					      (-1));
- 
-+	if (flashing_refuse_if_locked(response))
-+		return;
-+
- 	if (!env_get("partitions")) {
- 		fastboot_fail("partitions not set", response);
- 	} else {
-@@ -590,6 +652,9 @@ static void __maybe_unused oem_partconf(char *cmd_parameter, char *response)
- 					      (CONFIG_VAL(FASTBOOT_FLASH_MMC_DEV)),
- 					      (-1));
- 
-+	if (flashing_refuse_if_locked(response))
-+		return;
-+
- 	if (!cmd_parameter) {
- 		fastboot_fail("Expected command parameter", response);
- 		return;
-@@ -617,6 +682,9 @@ static void __maybe_unused oem_bootbus(char *cmd_parameter, char *response)
- 					      (CONFIG_VAL(FASTBOOT_FLASH_MMC_DEV)),
- 					      (-1));
- 
-+	if (flashing_refuse_if_locked(response))
-+		return;
-+
- 	if (!cmd_parameter) {
- 		fastboot_fail("Expected command parameter", response);
- 		return;
-@@ -672,3 +740,286 @@ static void __maybe_unused oem_board(char *cmd_parameter, char *response)
- {
- 	fastboot_oem_board(cmd_parameter, (void *)fastboot_buf_addr, image_size, response);
- }
-+
-+#if CONFIG_IS_ENABLED(FASTBOOT_CMD_FLASHING)
-+/**
-+ * flashing_flash_dev() - block device of the fastboot flash back end
-+ *
-+ * Return: the device of the mmc or block back end, NULL for back ends
-+ * without a block device (nand, spi)
-+ */
-+static struct blk_desc *flashing_flash_dev(void)
-+{
-+	if (CONFIG_IS_ENABLED(FASTBOOT_FLASH_MMC))
-+		return blk_get_dev("mmc",
-+				   CONFIG_IS_ENABLED(FASTBOOT_FLASH_MMC,
-+						     (CONFIG_VAL(FASTBOOT_FLASH_MMC_DEV)),
-+						     (-1)));
-+
-+	if (CONFIG_IS_ENABLED(FASTBOOT_FLASH_BLOCK))
-+		return blk_get_dev(CONFIG_IS_ENABLED(FASTBOOT_FLASH_BLOCK,
-+						     (CONFIG_VAL(FASTBOOT_FLASH_BLOCK_INTERFACE_NAME)),
-+						     ("")),
-+				   CONFIG_IS_ENABLED(FASTBOOT_FLASH_BLOCK,
-+						     (CONFIG_VAL(FASTBOOT_FLASH_BLOCK_DEVICE_ID)),
-+						     (-1)));
-+
-+	return NULL;
-+}
-+
-+/**
-+ * flashing_avb_ops() - AVB ops for the lock state calls
-+ *
-+ * The lock state is kept by the AVB TA and these ops never read a
-+ * partition, so the storage device is only informational: the fastboot
-+ * flash device when it is a block device, none otherwise.
-+ *
-+ * @response: fastboot response buffer, filled on failure
-+ * Return: the ops, to be released with avb_ops_free(), or NULL
-+ */
-+static AvbOps *flashing_avb_ops(char *response)
-+{
-+	struct blk_desc *desc = flashing_flash_dev();
-+	AvbOps *ops;
-+
-+	ops = avb_ops_alloc(desc ? desc->uclass_id : UCLASS_INVALID,
-+			    desc ? desc->devnum : -1);
-+	if (!ops)
-+		fastboot_fail("cannot allocate AVB ops", response);
-+
-+	return ops;
-+}
-+
-+int fastboot_flashing_is_unlocked(bool *unlocked, char *response)
-+{
-+	AvbOps *ops;
-+	AvbIOResult rc;
-+
-+	ops = flashing_avb_ops(response);
-+	if (!ops)
-+		return -1;
-+
-+	rc = ops->read_is_device_unlocked(ops, unlocked);
-+	avb_ops_free(ops);
-+	if (rc != AVB_IO_RESULT_OK) {
-+		fastboot_fail("cannot read the device lock state", response);
-+		return -1;
-+	}
-+
-+	return 0;
-+}
-+
-+/**
-+ * flashing_refuse_if_locked() - fail a flash or erase on a locked device
-+ *
-+ * A locked device must not let fastboot change its partitions; only
-+ * "flashing unlock", which wipes userdata, may be used to leave that state.
-+ *
-+ * @response: fastboot response buffer, filled when the command is refused
-+ * Return: true if the command must not run
-+ */
-+static bool flashing_refuse_if_locked(char *response)
-+{
-+	bool unlocked;
-+
-+	if (fastboot_flashing_is_unlocked(&unlocked, response))
-+		return true;
-+	if (!unlocked) {
-+		fastboot_fail("device is locked", response);
-+		return true;
-+	}
-+
-+	return false;
-+}
-+
-+/**
-+ * flashing_set_lock() - set the AVB device lock state through the AVB TA
-+ *
-+ * @locked: new state
-+ * @response: fastboot response buffer, filled on failure
-+ * Return: 0 on success, -1 otherwise
-+ */
-+static int flashing_set_lock(bool locked, char *response)
-+{
-+	AvbOps *ops;
-+	AvbIOResult rc;
-+
-+	ops = flashing_avb_ops(response);
-+	if (!ops)
-+		return -1;
-+
-+	rc = avb_write_lock_state(ops, locked);
-+	avb_ops_free(ops);
-+	if (rc != AVB_IO_RESULT_OK) {
-+		fastboot_fail("cannot change the device lock state", response);
-+		return -1;
-+	}
-+
-+	return 0;
-+}
-+
-+/**
-+ * flashing_wipe_userdata() - erase userdata and metadata
-+ *
-+ * AVB requires user data to be wiped on every change of the device state,
-+ * in either direction, so userdata (and metadata, which holds the file
-+ * based encryption keys) are erased before the state changes. The erase
-+ * goes through the configured flash back end, like the "erase" command,
-+ * but without the lock check, since this is how a locked device gets
-+ * unlocked.
-+ *
-+ * @response: fastboot response buffer, filled on failure
-+ * Return: 0 on success, -1 when a partition could not be erased
-+ */
-+static int flashing_wipe_userdata(char *response)
-+{
-+	struct disk_partition info;
-+	struct blk_desc *desc;
-+
-+	erase_partition("userdata", response);
-+	if (!strncmp(response, "FAIL", 4))
-+		return -1;
-+
-+	/*
-+	 * metadata is optional on older layouts: skip it when the flash
-+	 * device has a partition table without it, otherwise its erase has
-+	 * to succeed like the one of userdata.
-+	 */
-+	desc = flashing_flash_dev();
-+	if (desc && part_get_info_by_name(desc, "metadata", &info) < 0)
-+		return 0;
-+
-+	erase_partition("metadata", response);
-+	if (!strncmp(response, "FAIL", 4))
-+		return -1;
-+
-+	return 0;
-+}
-+
-+/* blocks of the frp partition hashed per read */
-+#define FLASHING_FRP_CHUNK	128
-+
-+/**
-+ * flashing_unlock_allowed() - evaluate Android's "OEM unlocking" setting
-+ *
-+ * Android's PersistentDataBlockService keeps the developer option "OEM
-+ * unlocking" in the last byte of the frp (persistent data block)
-+ * partition, non-zero when the user allowed the bootloader to be unlocked,
-+ * and guards the partition with a SHA-256 digest in its first 32 bytes,
-+ * computed over the whole partition with those bytes taken as zero; on a
-+ * mismatch it formats the partition, which clears the option. Apply the
-+ * same rules: no frp partition (or no block device behind the flash back
-+ * end), a read error, a bad digest or a zero byte all refuse unlocking.
-+ *
-+ * Return: true if "flashing unlock" may proceed
-+ */
-+static bool flashing_unlock_allowed(void)
-+{
-+	u8 stored[SHA256_SUM_LEN], digest[SHA256_SUM_LEN];
-+	struct disk_partition info;
-+	struct blk_desc *desc;
-+	sha256_context ctx;
-+	lbaint_t blk, cnt;
-+	bool allowed = false;
-+	u8 last = 0;
-+	u8 *buf;
-+
-+	desc = flashing_flash_dev();
-+	if (!desc || part_get_info_by_name(desc, "frp", &info) < 0)
-+		return false;
-+
-+	buf = malloc_cache_aligned(FLASHING_FRP_CHUNK * info.blksz);
-+	if (!buf)
-+		return false;
-+
-+	sha256_starts(&ctx);
-+	for (blk = 0; blk < info.size; blk += cnt) {
-+		cnt = info.size - blk;
-+		if (cnt > FLASHING_FRP_CHUNK)
-+			cnt = FLASHING_FRP_CHUNK;
-+		if (blk_dread(desc, info.start + blk, cnt, buf) != cnt)
-+			goto out;
-+		if (!blk) {
-+			memcpy(stored, buf, SHA256_SUM_LEN);
-+			memset(buf, 0, SHA256_SUM_LEN);
-+		}
-+		sha256_update(&ctx, buf, cnt * info.blksz);
-+		last = buf[cnt * info.blksz - 1];
-+	}
-+	sha256_finish(&ctx, digest);
-+	allowed = !memcmp(stored, digest, SHA256_SUM_LEN) && last;
-+out:
-+	free(buf);
-+
-+	return allowed;
-+}
-+
-+/**
-+ * flashing_lock() - lock the device
-+ *
-+ * Verification errors stop the boot afterwards. The AVB TA resets the
-+ * rollback indexes on a state change. Locking needs no permission from
-+ * the OS: it only takes privileges away. A device that is already locked
-+ * is left alone, so userdata is not wiped for nothing.
-+ */
-+static void flashing_lock(char *cmd_parameter, char *response)
-+{
-+	bool unlocked;
-+
-+	if (fastboot_flashing_is_unlocked(&unlocked, response))
-+		return;
-+	if (!unlocked) {
-+		fastboot_fail("device already locked", response);
-+		return;
-+	}
-+
-+	if (flashing_wipe_userdata(response))
-+		return;
-+
-+	if (flashing_set_lock(true, response))
-+		return;
-+
-+	fastboot_okay(NULL, response);
-+}
-+
-+/**
-+ * flashing_unlock() - unlock the device
-+ *
-+ * Refused on a device that is already unlocked, when Android's "OEM
-+ * unlocking" setting does not allow it, and when userdata cannot be
-+ * erased.
-+ */
-+static void flashing_unlock(char *cmd_parameter, char *response)
-+{
-+	bool unlocked;
-+
-+	if (fastboot_flashing_is_unlocked(&unlocked, response))
-+		return;
-+	if (unlocked) {
-+		fastboot_fail("device already unlocked", response);
-+		return;
-+	}
-+
-+	if (!flashing_unlock_allowed()) {
-+		fastboot_fail("unlocking is not allowed, enable OEM unlocking in Android",
-+			      response);
-+		return;
-+	}
-+
-+	if (flashing_wipe_userdata(response))
-+		return;
-+
-+	if (flashing_set_lock(false, response))
-+		return;
-+
-+	fastboot_okay(NULL, response);
-+}
-+
-+/**
-+ * flashing_get_unlock_ability() - report whether unlocking is allowed
-+ */
-+static void flashing_get_unlock_ability(char *cmd_parameter, char *response)
-+{
-+	fastboot_okay(flashing_unlock_allowed() ? "1" : "0", response);
-+}
-+#endif /* FASTBOOT_CMD_FLASHING */
-diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
-index 2eacc84c465..a85e1b0915a 100644
---- a/drivers/fastboot/fb_getvar.c
-+++ b/drivers/fastboot/fb_getvar.c
-@@ -28,6 +28,9 @@ static void getvar_has_slot(char *var_parameter, char *response);
- static void getvar_partition_type(char *part_name, char *response);
- static void getvar_partition_size(char *part_name, char *response);
- static void getvar_is_userspace(char *var_parameter, char *response);
-+#if CONFIG_IS_ENABLED(FASTBOOT_CMD_FLASHING)
-+static void getvar_unlocked(char *var_parameter, char *response);
-+#endif
- 
- static const struct {
- 	const char *variable;
-@@ -87,6 +90,12 @@ static const struct {
- 		.variable = "partition-size",
- 		.dispatch = getvar_partition_size,
- 		.list = false
-+#endif
-+#if CONFIG_IS_ENABLED(FASTBOOT_CMD_FLASHING)
-+	}, {
-+		.variable = "unlocked",
-+		.dispatch = getvar_unlocked,
-+		.list = true
- #endif
- 	}, {
- 		.variable = "is-userspace",
-@@ -354,3 +363,16 @@ void fastboot_getvar(char *cmd_parameter, char *response)
- 		fastboot_fail("Variable not implemented", response);
- 	}
- }
-+
-+#if CONFIG_IS_ENABLED(FASTBOOT_CMD_FLASHING)
-+/* "yes" when the device is unlocked according to the AVB TA, else "no" */
-+static void getvar_unlocked(char *var_parameter, char *response)
-+{
-+	bool unlocked;
-+
-+	if (fastboot_flashing_is_unlocked(&unlocked, response))
-+		return;
-+
-+	fastboot_okay(unlocked ? "yes" : "no", response);
-+}
-+#endif
-diff --git a/include/fastboot.h b/include/fastboot.h
-index f02d2559f2b..f3aa6fcc229 100644
---- a/include/fastboot.h
-+++ b/include/fastboot.h
-@@ -53,9 +53,23 @@ enum {
- 	FASTBOOT_COMMAND_OEM_BOARD,
- 	FASTBOOT_COMMAND_ACMD,
- 	FASTBOOT_COMMAND_UCMD,
-+	FASTBOOT_COMMAND_FLASHING_LOCK,
-+	FASTBOOT_COMMAND_FLASHING_UNLOCK,
-+	FASTBOOT_COMMAND_FLASHING_GET_UNLOCK_ABILITY,
- 	FASTBOOT_COMMAND_COUNT
  };
  
+@@ -592,6 +629,9 @@ U_BOOT_CMD(
+ 	"    and print it as hex\n"
+ 	"avb write_pvalue_hex <name> <hex> - write the bytes given as a hex\n"
+ 	"    string to persistent value <name>\n"
++	"avb lock - lock the device (verification errors stop the boot);\n"
++	"    resets all rollback indexes\n"
++	"avb unlock - unlock the device; resets all rollback indexes\n"
+ #endif
+ 	"avb verify [slot_suffix] - run verification process using hash data\n"
+ 	"    from vbmeta structure\n"
+diff --git a/common/avb_verify.c b/common/avb_verify.c
+index 227b2d22465..7b60be4da7a 100644
+--- a/common/avb_verify.c
++++ b/common/avb_verify.c
+@@ -1080,6 +1080,29 @@ free_name:
+ }
+ #endif
+ 
++#ifdef CONFIG_OPTEE_TA_AVB
 +/**
-+ * fastboot_flashing_is_unlocked() - read the AVB device lock state
++ * avb_write_lock_state() - sets the device lock state in the AVB TA
 + *
-+ * Available with CONFIG_FASTBOOT_CMD_FLASHING.
++ * @ops: contains AvbOps handlers
++ * @locked: true to lock the device, false to unlock it
 + *
-+ * @unlocked: set to the state on success
-+ * @response: fastboot response buffer, filled on failure
-+ * Return: 0 on success, -1 otherwise
++ * Changing the lock state resets all rollback indexes in the TA.
++ *
++ * Return: AVB_IO_RESULT_OK or an AvbIOResult error
 + */
-+int fastboot_flashing_is_unlocked(bool *unlocked, char *response);
++AvbIOResult avb_write_lock_state(AvbOps *ops, bool locked)
++{
++	struct tee_param param = {
++		.attr = TEE_PARAM_ATTR_TYPE_VALUE_INPUT,
++		.u.value.a = locked,
++	};
++
++	return invoke_func(ops->user_data, TA_AVB_CMD_WRITE_LOCK_STATE, 1,
++			   &param);
++}
++#endif
 +
  /**
-  * Reboot reasons
-  */
+  * ============================================================================
+  * AVB root key digest providers (selected via CONFIG_AVB_ROOT_KEY_*)
+diff --git a/include/avb_verify.h b/include/avb_verify.h
+index 6dbbb39a8a3..e89bb229e02 100644
+--- a/include/avb_verify.h
++++ b/include/avb_verify.h
+@@ -45,6 +45,9 @@ enum avb_io_type {
+ };
+ 
+ AvbOps *avb_ops_alloc(enum uclass_id uclass_id, int dev_num);
++#ifdef CONFIG_OPTEE_TA_AVB
++AvbIOResult avb_write_lock_state(AvbOps *ops, bool locked);
++#endif
+ void avb_ops_free(AvbOps *ops);
+ 
+ /**
 
 -- 
 2.53.0
