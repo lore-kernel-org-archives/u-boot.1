@@ -1,30 +1,30 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52BE6606A31B
-	for <u-boot@archiver.kernel.org>; Fri, 23 Oct 2026 19:51:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 121D3606A31E
+	for <u-boot@archiver.kernel.org>; Fri, 23 Oct 2026 19:51:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=sjScIzXi;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=o3Yxauhm;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BcbttE4G
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=NqqOCZZe;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=g/W5SYzq;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kMahyW4b
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2449981678;
-	Fri, 23 Oct 2026 19:51:23 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E547760A5E;
+	Fri, 23 Oct 2026 19:51:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id U23lJBYZRwrn; Fri, 23 Oct 2026 19:51:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 53F5981690
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792785080;
-	b=fQVKB7tJg9fana2R+EVcAFUBXm39+6hC0xB2zMBvyu6ppQoyzZqtk5CCazJhVS9iUwR+
-	 6oQ6xjCXaNTXdQhnMCNyWaNV4KJhu9mHOVBS6xGOeG141SWScVn+B4Ddgfh7dlUthWwsO
-	 uCWCcKWRBjxU+5YHUy8JpmI24+1izX/F0nATB1+HDcGYm2xOLZrp0mesWi3lPthHYfQii
-	 nIdZQsVt1y53fnZO2cer3KSF/5GeE2ZihT8nBkOhQHdlX0UwwtRhJ1Tim8iSiK7A1dKzX
-	 5X7w4t0CEg7gdxjAz65VyK9D9ziI6pB1YTxTgMCfCre4f+aUTEsOhcqBxfcllR0pSDg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id r-SDQz4nBpJK; Fri, 23 Oct 2026 19:51:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4AF3060A4B
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792785084;
+	b=YZEgybz3CveehRH5Iu5hWiXaMWVaLaX9XEXwFrfxllbHMB2mYGrXGYXJpomt1Rl9nPV9
+	 DiycFzwQUEo7Cp3a4SKbsHItEgJp0/XcCU3Gjacip6disDwkjznSHwY7LRj9GSr1nPEdh
+	 SyBxLEbUEwn5/EIVZCYAGEem0I6lCoRVd1T2eRC+nkfa5tjpRg8c1vrOIeoFTVOUGcr/f
+	 bqwrxYkG4TlAM4kBfurOO5JVj2vRSqzl/lNd6GFLOjSXFOi+24bxMwzvhTm/apPoTnbyr
+	 rMljiONXpUZ8bCOFdMlFKctkGWDvLtraRLj0wrpxP0cx8WXDUQ2lHOwcx9Y76LAj/Dw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792785080;
+	c=relaxed/relaxed; t=1792785084;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,173 +32,172 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
 	 X-Gm-Gg:X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Authority-Analysis:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=IwJA+Ovq2E4/hp9Tmhktd2RnQflUjfPFhmY9PwivUfY=;
-	b=ZVTDySkLr5ddCIUo2vAoVQKcIijv3LtfBRVoZwkGM4uIKOwdGZQrxnC8PHQy0XHT5+bC
-	 4XiNe7ONSw1gd+FqIzxKoCjPqgcYtmhyCpQ3yHcGRh6QCcmlfAsDL6Ybpdg5XiWwSopcI
-	 9H8IWew15pUTfOXhLhQXCoB3qJJJUqV3lc6a22XjsrqDuqd4TwIZ3RehyafKKXCnkoGqG
-	 B7ugIqCdyXQdQCG5A9bPo+llvVgAvH9/g1EpJU+PHwDy9Z2mNCCAXY/3JD2mnHnXfFFg1
-	 Vww6Gw4sXIhJ+FAm9P3sFyQWQCEo69KlyNDHpiXbTSKpGpuN4Apbg862XmJUY6PCM/A==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=EgWDfFGbskPJPlFnJ/b0S9Bx/kIskZx+/cuJRY36cY4=;
+	b=nKB0lrgGqiRmSitQvABslfpvwzsRUetQOFPvgYDEmHJWgEMAmJl5w6Xpo+fcKsXYsb7J
+	 ebcQC1yPJIFdz4B1NQIQf1yFw1IkuzMPm8545GmHo+V0UgH+qMPoTXC9eze8mvPYD8Xg3
+	 1F8/mC1GNAFxOCTIpNsCBWF9i1W9IyWc+AJmCxbRw59rhtU8Olo6UGREC+rmw+ZUt0bPU
+	 RuG22QGwyzShLwDivkUTVavjCPXOiuMemQkfMlqBvHXa3WjgsIM7bbm0y+3RC5HBhDCtv
+	 cYC+vEMFmDzQ9eFBEz06leOgAFPxHkIAdekCRevz2CN2JBTArb6FT+w63Sic1pJH3NA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792785080;
-	bh=IwJA+Ovq2E4/hp9Tmhktd2RnQflUjfPFhmY9PwivUfY=;
+	d=lists.u-boot-project.org; s=default; t=1792785084;
+	bh=EgWDfFGbskPJPlFnJ/b0S9Bx/kIskZx+/cuJRY36cY4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=sjScIzXieiTSsWbrEW96tQtFRtv442cZHFqsJjdeyjSV9FJFksPiLEvdZO7PpiHtR
-	 rbnZcXHyp6FThV8ZSM+qP2A/bvoHygvKKRvsPLl/9zfRsYyutxZiC/3oQHSBWLpIqb
-	 IUCgGaZ7xNqFmSRCQ/3TltZ0wCQhg32nX7+Bozw5/JwQ3icY25U5E8QE8IoMWmc7T0
-	 lUSRjbXXEvWYBI8C9zid4pdWrhkdb9rLnOccVO2tt5wDg/13DsTQV//cjjInFVa8mk
-	 iKxTRrlvXPBkwHuiiYQf6oo5Cm8Va2n/44FQnRLWfruzHPrscZKX2GpDL7NjPrpa0b
-	 UWdx/Ie07+OmA==
+	b=NqqOCZZevRH4gORBp/tk/+j8MuerOT9BpHgWXdWaZy6WVfxD4TlEaNR7/j8jSqX0L
+	 qsZcA9HhHH8RI5fwvvxVb0j0rTzdDMH1hXAd8EPuQ2/sYOczWp7c0FbC50OmZSVdav
+	 oKj+gqU3UlzqLbFBBwUySK2HFHiGQKyiP/r4JRB0uiK81v7pWM9ZthL/ksiE1ICqFx
+	 IRrhxzqVEOdcNAjfDfforx/mIAmSSaXEft+++ok0Sh/3q8MzYsXPR0C+4HA/JAHGdR
+	 uEbCM+Td3JYtaywGWDniwx74FFpYPbmvWYOuIi7ccEmEr4N09UWjW9acdERMYDLmF1
+	 u+oV0Dgi3YIbw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 53F5981690;
-	Fri, 23 Oct 2026 19:51:20 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 654BE3C4
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:51:16 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4AF3060A4B;
+	Fri, 23 Oct 2026 19:51:24 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 26B88235
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:51:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 41A0660A4C
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:51:16 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0E84F40474
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:51:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Wfzm_6u0-whJ for <u-boot@lists.u-boot-project.org>;
- Fri, 23 Oct 2026 19:51:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8568F60A4B
-Authentication-Results: smtp3.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id L-1D2uf9IeOm for <u-boot@lists.u-boot-project.org>;
+ Fri, 23 Oct 2026 19:51:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 933C140061
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip=205.220.168.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792785074;
- b=XJKauRYF742i+/uC7fUELMF9yirm4soo+dTILZj8M4+axFmCUQwfMBOlDTgeHITq+y4O
- jDyGU6MpCQ7t1VFPp3APgO+50yy6xTRrU1mtPWkTfnQTyuIxVCv97O15RFAIRXx4wGAjX
- 3Yj7rW73xKY4BHzxJipY3NP3GtJA2q1NcvjKgHAUsm5J+BMZUYbq5EThYYeWYPgseCe85
- 79fU4J+YIG/0KDGKgACWhwWW7uzz2lHNSlejtPKZxE+N44LH6ArePenriE00MDdbQVPbV
- qvAgl+V9JqrxllLYEvtJFvr+9QYwh+x3CuKaqO9izWUixJazbFLyxou+0V2Hbi3DJUA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792785079;
+ b=NYc1vxozWvA+eQETWefFcVdS5ljG+JpvblsaH9g8cAqPXfDCondgMzVs7KSotce8lSis
+ oxIfbisSPUw+FV+4QAgdoOQ71cnDOTt1ddLtuWWFFgdQ4iyisB/NtkBkVCW/WkDi6Q6vv
+ 3Jxxyubf4eBFUoofrUT6LN2kU1Oiu6yAb+azgLt2wNHbiCAByK9m+jiMcYDeZDasImy/K
+ eM3AUp5Fb46GMLR2jJh4mxIcVYou27tB2Axi3KoFCkmKFYxQvFry/Es1zIkcdSRJjJKVK
+ qDnj3YJhpjGrL65amwHiOvHS62uiIIMC8TWUV5iUBYUhALzsn6RK/Nle76FKl4NsUGA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792785074;
+ c=relaxed/relaxed; t=1792785079;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
  DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
  X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
  Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:References:In-Reply-To:To:Cc:X-Mailer:X-Authority-Analysis:
- X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
- X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
- X-Proofpoint-Spam-Details;
- bh=IwJA+Ovq2E4/hp9Tmhktd2RnQflUjfPFhmY9PwivUfY=;
- b=YN8ay7fM6lL4kFKxmSnCYOG510YUvHhZ6xH8mKXAdXbjrDE3lYy1J9qNrDWuM1Jc4m+s
- mkbUJewqevnunMmIkOsNOXhEyewBYvu8h/2qqMxn77hGO+5CSfvCD0b389VuniOAhzkSR
- Be8zLq64inHCWX6NGr7bmt9l0qc/MS7mwMJEEz8s4FFrLGi8MXvisOGYQs3ZoQB06PJPR
- De/J+v8d1GAZRLU024GZnUmp7GuYn1LOUg8rXV5e04htJdt5H+sgEY23PVucyq9u1eZww
- k26EyKnYaVfUF9GVP2bmP5dBw5s0/ihhfG9Tih2hYd9b3zWLmKjrjf0Uia8aa/AH5Gg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+ X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+ X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
+ X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+ bh=EgWDfFGbskPJPlFnJ/b0S9Bx/kIskZx+/cuJRY36cY4=;
+ b=psk1tTvP90rTOA7hb3mHMaXF+BlOqTyqhcyF6VRjCwoDphKsJCijg29x2p87PXjQcJYw
+ DSQfnvk8bF+0DK+aYHz71oemoYIJKyGxQVWfygNo8Am2LFAp0SuCBIL8EAxQBKKi8rjpA
+ zfoAc+9S3uk6Y3UdJXQ7G0xBH8oijBk2muA+TT2kz9EA/vF+bdCEocMjYxeXqmADsgfqh
+ C35SBHrj+/YcSqEdoZlXTZOeYB+zH3wEc1YCvqLhUPnoK3gcqGfKxE41FSjulgiNqD/JI
+ PLB8Mu9l1Nn1GHaQSKf0bYibY4hCxQz/ezm76wAVenfuP6TkThoxOmj8/eV+UjgrxoQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=oss.qualcomm.com;
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=o3Yxauhm; 
+ header.s=qcppdkim1 header.b="g/W5SYzq"; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=BcbttE4G; 
+ header.a=rsa-sha256 header.s=google header.b=kMahyW4b; 
  arc=none smtp.remote-ip=205.220.168.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
  helo=mx0a-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
  header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=o3Yxauhm; dkim=pass (2048-bit key,
+ header.b=g/W5SYzq; dkim=pass (2048-bit key,
  unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=BcbttE4G
+ header.a=rsa-sha256 header.s=google header.b=kMahyW4b
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 8568F60A4B
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:51:13 +0000 (UTC)
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 933C140061
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:51:19 +0000 (UTC)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69NIZN2o453742
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:51:13 GMT
+ 69NIZRWc463374
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:51:18 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- IwJA+Ovq2E4/hp9Tmhktd2RnQflUjfPFhmY9PwivUfY=; b=o3YxauhmHkVOfTLz
- d77TGfMnjum6C4ooT6adHsEySttl6F6PVC3b16jYUo9p5xJWWfynbHYcZTuKnqk0
- V5CzzlU1egQzgn+qETUgMSqV/oEkWb+yJxGjB1ooK5uGbA+SIiXvgXM5Fz//NyvD
- Hob9pqB7zhVR+2eJyVDkLHvcbDTGmGyAIv/YngucpYqvAmVQZT4iFJwKODb4Hoh9
- 6N5B7a9UMtOX7Br3wK/0h2tuFvCx+YW5sm13Lba7ODrhK8XMvenZD/iujU8KZ56W
- 18CshH4eveWwifpyoDdaQR2Ur+roGPo5CP2qT8XyLGI0YhV39CvZCHo4V7GO0SdY
- q4E9Og==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hgcr689h1-1
+ EgWDfFGbskPJPlFnJ/b0S9Bx/kIskZx+/cuJRY36cY4=; b=g/W5SYzqRrVa4LO4
+ IZaorTLI49sdgSRrpi4x+REd8ykcgvGpZ3UaxUskDYJN1OG+dQptWZNzxze4gdN1
+ VcoFyDw32qK40S0TO0UEjocMihMy4LCGQt9j6MyCvBd5ja70hzD2Xr6HU/AbHjj/
+ LeYh9wDxq3KXkYnskmp4SLj6rAgaADo/wEly+s/TGoQHSmor+eREiKW2bX0k2AEl
+ hQXoIaZ66Cr9AHOzax2kXoQeb7HpPeFJPmEXeGX8nvoyzDbOyn2qY1y/sFVxXftq
+ eTleB1nlM4c3zCAtYNcoNPcYcfDqzH0cd/UE1RdV8smGCPdBl0ZmS8yyfKEP0uBh
+ Udjduw==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hg7bw1pvk-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:51:12 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-93f5844e383so226859485a.1
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 12:51:12 -0700 (PDT)
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:51:18 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-93f37c94ceeso468964285a.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 12:51:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1792785072; x=1793389872;
+ d=oss.qualcomm.com; s=google; t=1792785077; x=1793389877;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=IwJA+Ovq2E4/hp9Tmhktd2RnQflUjfPFhmY9PwivUfY=;
- b=BcbttE4G7+X0wNTo1drL0LRa0t6cMm8wYBkAoOmQvm8cvAZMa+JQ+nJE+H0o98NGHW
- DJeuTL6XxU+/VndcQ2oYOLQB8X4/eNJ7jWZ/3D4jM4/SDU4AlRxya6h8+eOhtXnAPsDJ
- pU7wzowy6Ub5Igt2h7/loMjzaWeXTQcSa+6uRC2p1MaVEK2Eln6N69KlVwtfnTgGl/aO
- gCBWBoQD0euBZDMANqE1HrpgHgH7hcex14jE3vFLd9MLRxeENjKraWIJeT+ZMSrBkxkm
- mJkiJ8rqHEhKBTi9B7otMdrMG1hF7WrFUeiwsHmwFzrivjn9bURp8gvbQs+CEhrKqDyJ
- Vjhg==
+ bh=EgWDfFGbskPJPlFnJ/b0S9Bx/kIskZx+/cuJRY36cY4=;
+ b=kMahyW4bgvc6F/ZekUAftwXgwtnwNZC+cnG9btpKuY7vKkjRtCi1S89j1lBCMj3eLQ
+ KGT7rc/XJ48s45vsCMOV60XyxxOyvTbcktnIbKcdD/TF5llNUwOxwY2fsPRvqiw91MIo
+ HWmyopTkcexARPl/8JnWatzyXyzExCLaIWm/poFouJrLlG0ND5jStXOwoGVS7DMkkMQr
+ i0MlenFGmQzj2A2e/NcMA26ce3/Df/4DBIqi6tU9aAAHKdwuGFcmRrPdoXdJmik7JUgi
+ 4Vw1fQWDK2Li+w/ROUahoosDcNR8uQ60D3Lau32akOBlsenAn67YidK0ZkN6SkvJjOq3
+ nQyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792785072; x=1793389872;
+ d=1e100.net; s=20260707; t=1792785077; x=1793389877;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=IwJA+Ovq2E4/hp9Tmhktd2RnQflUjfPFhmY9PwivUfY=;
- b=bc2IqXjSkwACbtJbYBbpvzycSlbmDh0S7pKDm8HYZguDH8512RbWXeVOjrknHRq4Xa
- QQPN59ziFQJpl5+qP87VxTile4C/SPCFLGRdPJdLNOnL7Zeqc+yCGp3HQLwjeNNskpvB
- neTEkFS43BvnsKksNdSM84QOpor4hG5+MkENmoeEb6mAJPpkrkz+RbKcRPKqottSJyyV
- mPrPWrgkF3E4vR6DWaY/Kjvo3VNaIcw9PPaRohXEwelTEzFTEnH9bbXU8mvsfJG7/hyF
- QSFaKV4V0jnYZvUh5/zqdoTlP61Q4PRFPPzllEj4haLtLapa8PYscP+9GsHrbUwQJfBD
- JNhw==
+ bh=EgWDfFGbskPJPlFnJ/b0S9Bx/kIskZx+/cuJRY36cY4=;
+ b=Zf27qOgjktnXoVTPLLXtfGzKctbEJC7+KyevcNEjV6xzsQ8oSGHRvPG1s2hxcwzUhg
+ gwvwAGlxHVfJCLSZF9q1di/ll9PydvUcbOFHzebVd40V2Zd2qFYxl02tGbLBAbBPjUgl
+ /Ad7qxwROrIViDQHeharV7KUdhZQQPhJVm/t1F1JHxKyrlxWorZmRCby/pFpRRa+AbrB
+ z7xSDYT1y/NuNKKM+r4rH6GHR6bgb066hy+dLbz38OYv8IZa3ZSfS6G4z2DmrxIEhbgP
+ 7nNTxKyRyjJeyPRgoUzRnFYskIeiaUyolKWLlIY2AUMP1wdPAcAc/LwgMmhySaj7MmMV
+ Q51g==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxXlblbgzAXgPWfnRthabMKN8PXAyYN1Hz+BEyfwYJYFfggzUgFnfApkUT9rd6TEUciizMtnxI=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYKECE9nVCxqxM8WUNb/8uyvWujuPus8h3SMDvdhW/fHpvot+50S
- PTMtDeWApppN6vZlliSUhVxY85rOFl7qKAg+dUvz/uHYN/DJAadUpzYSrTllen6jVFi5FgkTBYR
- ahSN233hyV4eDdQ9+dHA9GduoKfEXg5ADXuhzgIo04J63nx69+ZlqNyv4OROVMJOPaWGXo3A=
-X-Gm-Gg: AYBFou156YFqZxh1dF29WaRG3RUO8eHeSKDPx0Qp2GuYctDZXbC7aAYo71Jv6PJFshD
- 2jLbMXybwKzJv7vdGQpYjmNR/3iFJLUmg79VHSPGNuRZ3HgZzQ7G2lhcnWs6IiZQ0q/GHvEagqi
- xeZhaJZPRPZjvLJ1muArw9uBwZVW3sBPqz10WDHTu//TSFBwXoYzv1tuhsjEiFdrXDfT5VRL9ta
- zUdkb4jpacOvB4YboB0BbDiVjuor0dJW/YE7AbvWggFFz1+VAepfOvnetEdaUO+RJhK9F1JYh8a
- AjmyXGiQuGnv4Oc0AA83eNF2BUAPxkALTseuxTG9583lLauUc7QogtxpG67FG9QuKnweg0hn0js
- Qy+2XBGLJdNfiH8teYHWgNy6RyvRuNaXET8wNnOmRpomdk0g=
-X-Received: by 2002:a05:620a:458e:b0:93f:216f:f404 with SMTP id
- af79cd13be357-940ef956be3mr10320585a.40.1792785071093; 
- Fri, 23 Oct 2026 12:51:11 -0700 (PDT)
-X-Received: by 2002:a05:620a:458e:b0:93f:216f:f404 with SMTP id
- af79cd13be357-940ef956be3mr10316685a.40.1792785070341; 
- Fri, 23 Oct 2026 12:51:10 -0700 (PDT)
+ AKwUvBwHtVl0/PagMjRYKCU/VBomCxyb6l1S4q3tFzgXcK9V9LGxHGuPA547dvnIjCFyRgIn+e/PkDo=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJf9ofpT9fpYOywkHhAG+QHFMilRI1p1sgpXjBsSsgDJUDN3R4+
+ xHPDp7EbCadEALzz4G/riHeF3vwI2IR/oLvcapTmsapSD/tTZLKXqhWLZBWC+nBqE48EV7+opuq
+ XNOQEhgQmR7VpY4jvtwd2NmscjluJWyg+MlUeUJNaoLo6/pmVO+KtXPgtisrWfr6S0JjBCDs=
+X-Gm-Gg: AYBFou1LzRiNCM/gOo7AkUEc9/8PJhBb8WdejJ7sQ3i5XfQCs6b09NRxg32mBQwJBKB
+ DjutbV4wPdndYX4gZVY/4Fq4jbsd8aL4vd35AqyWuCQeGwsl7Ozp1mHv+uSKWfnHdmi67QoIcZU
+ LHaM8wuZnEa72unlOFcuzMMvJQHi3TDAXa36jgL0jGVIiSJ9WuK/lDjOtIPZqxjoq54T2EDOERt
+ KHj85EOc0z2zCjR9MbRYILUZU3KhGv+6kaADALdJRBf5W2CD/UVd4zN5LQytHQxwg7GN3HM1aNb
+ SvnM3qPfpGWUFphucMVIyHPHayT8sm7QkzzpDZzELbbE4g4i/eyUM4qpoPN3mIBwCGLWnuiLEof
+ t9tgZEOZUMXsWj3f4ELG2ZMAPm9iMC/oweTt1KUQz74TkVtc=
+X-Received: by 2002:a05:620a:2a03:b0:93a:1196:ce5 with SMTP id
+ af79cd13be357-940ef9c024cmr7815585a.33.1792785074231; 
+ Fri, 23 Oct 2026 12:51:14 -0700 (PDT)
+X-Received: by 2002:a05:620a:2a03:b0:93a:1196:ce5 with SMTP id
+ af79cd13be357-940ef9c024cmr7810485a.33.1792785073070; 
+ Fri, 23 Oct 2026 12:51:13 -0700 (PDT)
 Received: from [127.0.1.1] (185-164-143-216.cgnat.inetia.pl. [185.164.143.216])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c46bd7984f5sm456366b.77.2026.10.23.12.51.08
+ a640c23a62f3a-c46bd7984f5sm456366b.77.2026.10.23.12.51.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Oct 2026 12:51:09 -0700 (PDT)
+ Fri, 23 Oct 2026 12:51:11 -0700 (PDT)
 From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Fri, 23 Oct 2026 21:50:45 +0200
-Subject: [PATCH 1/2] libavb: build the SHA functions on U-Boot's SHA
- library
+Date: Fri, 23 Oct 2026 21:50:46 +0200
+Subject: [PATCH 2/2] libavb: update to AOSP 1.4.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261023-upstream-libavb_b4-v1-1-97ed25b09ed3@oss.qualcomm.com>
+Message-Id: <20261023-upstream-libavb_b4-v1-2-97ed25b09ed3@oss.qualcomm.com>
 References: <20261023-upstream-libavb_b4-v1-0-97ed25b09ed3@oss.qualcomm.com>
 In-Reply-To: <20261023-upstream-libavb_b4-v1-0-97ed25b09ed3@oss.qualcomm.com>
 To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
@@ -212,31 +211,31 @@ Cc: Tom Rini <trini@konsulko.com>,
  Jan Kehren <jan.kehren@emteria.com>,
  Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Authority-Analysis: v=2.4 cv=HMRWhYtv c=1 sm=1 tr=0 ts=6adbbab0 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=+XDFW8w5h4l+9U6kKVkjeg==:17
+X-Proofpoint-ORIG-GUID: Wegc9MDRjoHVMiDv1KGXdCUpM6T0LkW4
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA3OCBTYWx0ZWRfXwgvvFx4FkYMr
+ MsQM7SsgPM2BKAoqaBpANXz4qvE6/uYVa0GF0qHOonzbWDhKhJhjCW1NnOdL8FYkzUGi2xn7e1t
+ HoEsr3IvG/+h6yPueJGLW+sBEL2E0JQ=
+X-Authority-Analysis: v=2.4 cv=QdTzLcbv c=1 sm=1 tr=0 ts=6adbbab6 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=+XDFW8w5h4l+9U6kKVkjeg==:17
  a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=e4PMwjkC_zZuZ-H3NLYA:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA3OCBTYWx0ZWRfX4B9rdMAKFdM3
- gelKPllj7Ti9TdpJxt6PsVAnDaqasMddOu3SuuGkizSTPQqGwPbvWdKkZlB1Ku66vvu+4xpQzZF
- Z/pAlLf2Gvj0pk0KG6Z9XjzTejJnONTeCtShX5fpiP6CpgkFu4rf6EoK8annpnKuD1kx9HBGULW
- qlquSRptbLyMrwd7td2LMC716me4JQ+vp3X/mjovrJAt/gJUt3Zl5ITrUsqVmgQ9y2aDDt5yWhE
- GVoNdz4Kunwl0FQTpE1sEMr3QASsf3s0biHhYtgfXFJSzkdbMUNHBTvc5iK+IOVsIHTG9a3PVt/
- ib2RIdIoqr2ELNGn45p8r0XFvr9arnB5l/gHi6VGtdQalkgyybcFrKO6uAs4hUiWQ2eaRF7vhIR
- cVjpsn1yVR0Id54wEt8HDl0iuSVeYc3eAPUo/4zeCT3ppcppYpOB01J4bS3iilnOqzwDacJUhPV
- n1OMbDYmf+amhWMzSQw==
-X-Proofpoint-ORIG-GUID: MTY8xKgKY50AFpzhS8y-t3Xoy7EfWiH7
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIzMDA3OCBTYWx0ZWRfX6Tx8+x5GO5fO
- 4gJWcBoGQbF9uW/r8BIqyI7n221lKhw9UCNT7EPInVpZilx+kgO+bHBjA6aUMhFFJ9VvDapEmNE
- Lc83LQvdzGEq9/QwIR8UuILK3yAPHJw=
-X-Proofpoint-GUID: MTY8xKgKY50AFpzhS8y-t3Xoy7EfWiH7
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=xja0-Uqil9uwDQTdiaIA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-GUID: Wegc9MDRjoHVMiDv1KGXdCUpM6T0LkW4
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIzMDA3OCBTYWx0ZWRfX1lHmuFsIVojh
+ YIAV0raT9bs/nbC9BKswF3Y0bk60a3vt6h9qITgSGWjCef5UBzSYdGWapBCk87QfmWzczD1Uk71
+ D8jDgGRiVuZw30yw2IVQr41Mwfw/T9Nlr3VXxaki1YlQeQ1w5jDroKoTwtQqmNMxUo6G6GtHagM
+ Bf67Jxl9SmHypHLXNgXZm6cgsHM6dCpdPKYZ+iyivH/81HBLNjyTOrEpXdQxqXKvCpomP66NWOg
+ HrqN7hf/mSCVgI9InF1X3kKvxozOzKHYpGKqsegDvLuc+WfGYjQhSoJxgmXksDKG63wV1K1jeEW
+ iJs/L2kYWAeAzie5n/Nhwb0F4UJc3/r0fVksItsoW0x+GKkHIhIA2KQt4Oqs8aAipKaHlGNzyjZ
+ CUu5CH8nTlhTM/fhDe9wfUNjK99gczv4e0KzG6NqT0JAWXc8d6uxbU66xV36BkCDGpgZtcsTxYn
+ vCy8SRv2FwxGyNdxxhA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-10-23_05,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 clxscore=1015 suspectscore=0 spamscore=0 phishscore=0
- priorityscore=1501 impostorscore=0 malwarescore=0 bulkscore=0 adultscore=0
+ suspectscore=0 lowpriorityscore=0 phishscore=0 impostorscore=0 spamscore=0
+ bulkscore=0 priorityscore=1501 malwarescore=0 adultscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610230078
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -255,957 +254,2122 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-libavb carried its own SHA-256 and SHA-512 implementations although
-U-Boot has lib/sha256.c and lib/sha512.c, with hardware acceleration and
-the mbedTLS back end behind the same API. Hashing a 64 MiB boot image is
-the dominant cost of AVB verification, so use U-Boot's.
+Resync lib/libavb from external/avb main at c5066a96caa7 (2026-08-19,
+"Make ML-DSA-65 signing deterministic to prevent OTA issues")  moving
+from 1.3.0 (a1fe228b8654, 2023-09) to 1.4.0. The U-Boot glue (avb_sysdeps.h,
+avb_sysdeps_posix.c, the crypto back end) is unchanged.
 
-Follow upstream libavb's crypto back end layout: avb_sha.h takes the
-implementation contexts from crypto/avb_crypto_ops_impl.h, which here
-typedefs them to U-Boot's sha256_context/sha512_context, and
-crypto/sha_impl.c maps avb_sha*_init/update/final onto
-sha*_starts/update/finish. LIBAVB selects SHA256 and SHA512, and the
-bundled avb_sha256.c and avb_sha512.c are dropped.
+What this picks up:
+  - "Fix verification bypass in chained vbmeta partitions" (3575ab6):
+    a chained vbmeta that fails verification no longer lets the slot
+    continue when verification errors are not allowed
+  - "Fix silent failure in RSA verification on memory allocation error",
+    OOB read fixes in the key parsers
+  - androidboot.vbmeta.public_key_digest and per-partition
+    androidboot.vbmeta.<name>.{hash_alg,digest} command line options,
+    AvbPartitionData gains the digest
+  - AVB_MAX_NUMBER_OF_LOADED_PARTITIONS is public
+  - ML-DSA-65/87 algorithm types: avb_mldsa.c is imported with the stub
+    back end (crypto/mldsa_impl.c), so such signatures are rejected
+    rather than unknown; a real implementation needs a ML-DSA library
+  - libavb_atx renamed to libavb_cert (unused here)
+
+avb_crc32.c, the BoringSSL back end and the bundled SHA implementations
+are not imported.
 
 Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 ---
- lib/Kconfig                             |   2 +
- lib/libavb/Makefile                     |   8 +-
- lib/libavb/avb_sha.h                    |  24 +-
- lib/libavb/avb_sha256.c                 | 375 --------------------------------
- lib/libavb/avb_sha512.c                 | 361 ------------------------------
- lib/libavb/crypto/avb_crypto_ops_impl.h |  43 ++++
- lib/libavb/crypto/sha_impl.c            |  50 +++++
- 7 files changed, 111 insertions(+), 752 deletions(-)
+ lib/libavb/Makefile            |   4 +-
+ lib/libavb/avb_cmdline.c       | 109 ++++++++++-
+ lib/libavb/avb_cmdline.h       |   2 +
+ lib/libavb/avb_crypto.c        | 348 ++---------------------------------
+ lib/libavb/avb_crypto.h        |  21 ++-
+ lib/libavb/avb_mldsa.c         | 136 ++++++++++++++
+ lib/libavb/avb_mldsa.h         | 144 +++++++++++++++
+ lib/libavb/avb_ops.h           |  10 +-
+ lib/libavb/avb_rsa.c           | 398 +++++++++++++++++++++++++++++++++++++++--
+ lib/libavb/avb_rsa.h           |  10 +-
+ lib/libavb/avb_sha.h           |   3 +
+ lib/libavb/avb_slot_verify.c   | 116 ++++++++----
+ lib/libavb/avb_slot_verify.h   |  13 +-
+ lib/libavb/avb_sysdeps.h       |   1 +
+ lib/libavb/avb_util.h          |  10 --
+ lib/libavb/avb_vbmeta_image.c  | 118 ++++++++----
+ lib/libavb/avb_version.h       |   2 +-
+ lib/libavb/crypto/mldsa_impl.c |  57 ++++++
+ 18 files changed, 1057 insertions(+), 445 deletions(-)
 
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 021a82d4709..73b6bbecbff 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -631,6 +631,8 @@ menu "Android Verified Boot"
- config LIBAVB
- 	bool "Android Verified Boot 2.0 support"
- 	depends on ANDROID_BOOT_IMAGE
-+	select SHA256
-+	select SHA512
- 	help
- 	  This enables support of Android Verified Boot 2.0 which can be used
- 	  to assure the end user of the integrity of the software running on a
 diff --git a/lib/libavb/Makefile b/lib/libavb/Makefile
-index b983fe768e5..89451758db4 100644
+index 89451758db4..6045d882a27 100644
 --- a/lib/libavb/Makefile
 +++ b/lib/libavb/Makefile
-@@ -4,10 +4,12 @@
+@@ -4,12 +4,12 @@
  
  obj-$(CONFIG_LIBAVB) += avb_chain_partition_descriptor.o avb_cmdline.o
  obj-$(CONFIG_LIBAVB) += avb_crypto.o avb_footer.o avb_hashtree_descriptor.o
--obj-$(CONFIG_LIBAVB) += avb_property_descriptor.o avb_sha256.o
-+obj-$(CONFIG_LIBAVB) += avb_property_descriptor.o
+-obj-$(CONFIG_LIBAVB) += avb_property_descriptor.o
++obj-$(CONFIG_LIBAVB) += avb_property_descriptor.o avb_mldsa.o
  obj-$(CONFIG_LIBAVB) += avb_slot_verify.o avb_util.o avb_version.o
  obj-$(CONFIG_LIBAVB) += avb_descriptor.o avb_hash_descriptor.o
--obj-$(CONFIG_LIBAVB) += avb_kernel_cmdline_descriptor.o avb_rsa.o avb_sha512.o
-+obj-$(CONFIG_LIBAVB) += avb_kernel_cmdline_descriptor.o avb_rsa.o
+ obj-$(CONFIG_LIBAVB) += avb_kernel_cmdline_descriptor.o avb_rsa.o
  obj-$(CONFIG_LIBAVB) += avb_sysdeps_posix.o avb_vbmeta_image.o
-+obj-$(CONFIG_LIBAVB) += crypto/sha_impl.o
+-obj-$(CONFIG_LIBAVB) += crypto/sha_impl.o
++obj-$(CONFIG_LIBAVB) += crypto/sha_impl.o crypto/mldsa_impl.o
  
--ccflags-y = -DAVB_COMPILATION
-+# avb_sha.h includes the crypto back end's avb_crypto_ops_impl.h
-+ccflags-y = -DAVB_COMPILATION -I$(srctree)/$(src)/crypto
-diff --git a/lib/libavb/avb_sha.h b/lib/libavb/avb_sha.h
-index fdd92fbe22d..ffe3cc74984 100644
---- a/lib/libavb/avb_sha.h
-+++ b/lib/libavb/avb_sha.h
-@@ -21,27 +21,25 @@ extern "C" {
- #include "avb_crypto.h"
- #include "avb_sysdeps.h"
+ # avb_sha.h includes the crypto back end's avb_crypto_ops_impl.h
+ ccflags-y = -DAVB_COMPILATION -I$(srctree)/$(src)/crypto
+diff --git a/lib/libavb/avb_cmdline.c b/lib/libavb/avb_cmdline.c
+index 842629abe0e..3235a6f2e76 100644
+--- a/lib/libavb/avb_cmdline.c
++++ b/lib/libavb/avb_cmdline.c
+@@ -188,11 +188,33 @@ static int cmdline_append_hex(AvbSlotVerifyData* slot_data,
+   return ret;
+ }
  
--/* Block size in bytes of a SHA-256 digest. */
--#define AVB_SHA256_BLOCK_SIZE 64
++static const char* cmdline_get_digest_name(AvbDigestType avb_digest_type) {
++  const char* ret = NULL;
++  switch (avb_digest_type) {
++    case AVB_DIGEST_TYPE_SHA256:
++      ret = "sha256";
++      break;
++    case AVB_DIGEST_TYPE_SHA512:
++      ret = "sha512";
++      break;
++      /* Do not add a 'default:' case here because of -Wswitch. */
++  }
++
++  if (ret == NULL) {
++    avb_error("Unknown AvbDigestType.\n");
++    ret = "unknown";
++  }
++
++  return ret;
++}
++
+ AvbSlotVerifyResult avb_append_options(
+     AvbOps* ops,
+     AvbSlotVerifyFlags flags,
+     AvbSlotVerifyData* slot_data,
+     AvbVBMetaImageHeader* toplevel_vbmeta,
++    const uint8_t* toplevel_vbmeta_public_key_data,
++    size_t toplevel_vbmeta_public_key_length,
+     AvbAlgorithmType algorithm_type,
+     AvbHashtreeErrorMode hashtree_error_mode,
+     AvbHashtreeErrorMode resolved_hashtree_error_mode) {
+@@ -200,17 +222,37 @@ AvbSlotVerifyResult avb_append_options(
+   const char* verity_mode;
+   bool is_device_unlocked;
+   AvbIOResult io_ret;
++  char* requested_partition_hash_alg = NULL;
++  char* requested_partition_digest = NULL;
+ 
+-  /* Add androidboot.vbmeta.device option... except if not using a vbmeta
+-   * partition since it doesn't make sense in that case.
+-   */
++  /* Add options that only make sense if there is a vbmeta partition. */
+   if (!(flags & AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION)) {
++    /* Add androidboot.vbmeta.device option. */
+     if (!cmdline_append_option(slot_data,
+                                "androidboot.vbmeta.device",
+                                "PARTUUID=$(ANDROID_VBMETA_PARTUUID)")) {
+       ret = AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
+       goto out;
+     }
++
++    /* Set androidboot.vbmeta.public_key_digest to the SHA-256 hash of the
++     * public key used to verify the vbmeta image. */
++    if (toplevel_vbmeta_public_key_data != NULL &&
++        toplevel_vbmeta_public_key_length > 0) {
++      AvbSHA256Ctx ctx;
++      avb_sha256_init(&ctx);
++      avb_sha256_update(&ctx,
++                        toplevel_vbmeta_public_key_data,
++                        toplevel_vbmeta_public_key_length);
++      uint8_t* vbmeta_public_key_digest = avb_sha256_final(&ctx);
++      if (!cmdline_append_hex(slot_data,
++                              "androidboot.vbmeta.public_key_digest",
++                              vbmeta_public_key_digest,
++                              AVB_SHA256_DIGEST_SIZE)) {
++        ret = AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
++        goto out;
++      }
++    }
+   }
+ 
+   /* Add androidboot.vbmeta.avb_version option. */
+@@ -247,7 +289,9 @@ AvbSlotVerifyResult avb_append_options(
+     case AVB_ALGORITHM_TYPE_NONE:
+     case AVB_ALGORITHM_TYPE_SHA256_RSA2048:
+     case AVB_ALGORITHM_TYPE_SHA256_RSA4096:
+-    case AVB_ALGORITHM_TYPE_SHA256_RSA8192: {
++    case AVB_ALGORITHM_TYPE_SHA256_RSA8192:
++    case AVB_ALGORITHM_TYPE_MLDSA65:
++    case AVB_ALGORITHM_TYPE_MLDSA87: {
+       size_t n, total_size = 0;
+       uint8_t vbmeta_digest[AVB_SHA256_DIGEST_SIZE];
+       avb_slot_verify_data_calculate_vbmeta_digest(
+@@ -291,7 +335,7 @@ AvbSlotVerifyResult avb_append_options(
+       }
+     } break;
+     case _AVB_ALGORITHM_NUM_TYPES:
+-      avb_assert_not_reached();
++      __builtin_trap();
+       break;
+   }
+ 
+@@ -332,7 +376,7 @@ AvbSlotVerifyResult avb_append_options(
+       case AVB_HASHTREE_ERROR_MODE_MANAGED_RESTART_AND_EIO:
+         // Should never get here because MANAGED_RESTART_AND_EIO is
+         // remapped by avb_manage_hashtree_error_mode().
+-        avb_assert_not_reached();
++        __builtin_trap();
+         break;
+       case AVB_HASHTREE_ERROR_MODE_PANIC:
+         verity_mode = "panicking";
+@@ -361,10 +405,61 @@ AvbSlotVerifyResult avb_append_options(
+     }
+   }
+ 
++  size_t i;
++  for (i = 0; i < slot_data->num_loaded_partitions; i++) {
++    if (slot_data->loaded_partitions[i].partition_name != NULL &&
++        slot_data->loaded_partitions[i].digest != NULL) {
++      requested_partition_hash_alg =
++          avb_strdupv("androidboot.vbmeta.",
++                      slot_data->loaded_partitions[i].partition_name,
++                      ".hash_alg",
++                      NULL);
++      if (requested_partition_hash_alg == NULL) {
++        ret = AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
++        goto out;
++      }
++
++      requested_partition_digest =
++          avb_strdupv("androidboot.vbmeta.",
++                      slot_data->loaded_partitions[i].partition_name,
++                      ".digest",
++                      NULL);
++      if (requested_partition_digest == NULL) {
++        ret = AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
++        goto out;
++      }
++
++      if (!cmdline_append_option(
++              slot_data,
++              requested_partition_hash_alg,
++              cmdline_get_digest_name(
++                  slot_data->loaded_partitions[i].digest_type)) ||
++          !cmdline_append_hex(slot_data,
++                              requested_partition_digest,
++                              slot_data->loaded_partitions[i].digest,
++                              slot_data->loaded_partitions[i].digest_size)) {
++        ret = AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
++        goto out;
++      }
++
++      avb_free(requested_partition_hash_alg);
++      requested_partition_hash_alg = NULL;
++      avb_free(requested_partition_digest);
++      requested_partition_digest = NULL;
++    }
++  }
++
+   ret = AVB_SLOT_VERIFY_RESULT_OK;
+ 
+ out:
 -
--/* Block size in bytes of a SHA-512 digest. */
--#define AVB_SHA512_BLOCK_SIZE 128
-+/* The following types must be set to something appropriate
-+ *
-+ *   AvbSHA256ImplCtx - SHA-256 context used by the implementation
-+ *   AvbSHA512ImplCtx - SHA-512 context used by the implementation
-+ *
-+ * We expect the implementation to provide a header file with the name
-+ * avb_crypto_ops_impl.h to do all this.
-+ */
-+#include "avb_crypto_ops_impl.h"
++  if (requested_partition_hash_alg != NULL) {
++    avb_free(requested_partition_hash_alg);
++    requested_partition_hash_alg = NULL;
++  }
++  if (requested_partition_digest != NULL) {
++    avb_free(requested_partition_digest);
++    requested_partition_digest = NULL;
++  }
+   return ret;
+ }
  
- /* Data structure used for SHA-256. */
- typedef struct {
--  uint32_t h[8];
--  uint64_t tot_len;
--  size_t len;
--  uint8_t block[2 * AVB_SHA256_BLOCK_SIZE];
-+  AvbSHA256ImplCtx impl;
-   uint8_t buf[AVB_SHA256_DIGEST_SIZE]; /* Used for storing the final digest. */
- } AvbSHA256Ctx;
+diff --git a/lib/libavb/avb_cmdline.h b/lib/libavb/avb_cmdline.h
+index 96539d84bdd..e3dd7fcc1aa 100644
+--- a/lib/libavb/avb_cmdline.h
++++ b/lib/libavb/avb_cmdline.h
+@@ -46,6 +46,8 @@ AvbSlotVerifyResult avb_append_options(
+     AvbSlotVerifyFlags flags,
+     AvbSlotVerifyData* slot_data,
+     AvbVBMetaImageHeader* toplevel_vbmeta,
++    const uint8_t* toplevel_vbmeta_public_key_data,
++    size_t toplevel_vbmeta_public_key_length,
+     AvbAlgorithmType algorithm_type,
+     AvbHashtreeErrorMode hashtree_error_mode,
+     AvbHashtreeErrorMode resolved_hashtree_error_mode);
+diff --git a/lib/libavb/avb_crypto.c b/lib/libavb/avb_crypto.c
+index f1836d5fc31..dc6c5161e55 100644
+--- a/lib/libavb/avb_crypto.c
++++ b/lib/libavb/avb_crypto.c
+@@ -8,338 +8,24 @@
+ #include "avb_sha.h"
+ #include "avb_util.h"
  
- /* Data structure used for SHA-512. */
- typedef struct {
--  uint64_t h[8];
--  uint64_t tot_len;
--  size_t len;
--  uint8_t block[2 * AVB_SHA512_BLOCK_SIZE];
-+  AvbSHA512ImplCtx impl;
-   uint8_t buf[AVB_SHA512_DIGEST_SIZE]; /* Used for storing the final digest. */
- } AvbSHA512Ctx;
- 
-diff --git a/lib/libavb/avb_sha256.c b/lib/libavb/avb_sha256.c
-deleted file mode 100644
-index 86ecca57b72..00000000000
---- a/lib/libavb/avb_sha256.c
-+++ /dev/null
-@@ -1,375 +0,0 @@
--// SPDX-License-Identifier: BSD-3-Clause
--/*
-- * Copyright (C) 2005, 2007 Olivier Gay <olivier.gay@a3.epfl.ch>
-- * All rights reserved.
-- *
-- * FIPS 180-2 SHA-224/256/384/512 implementation
-- * Last update: 02/02/2007
-- * Issue date:  04/30/2005
+-/* NOTE: The PKC1-v1.5 padding is a blob of binary DER of ASN.1 and is
+- * obtained from section 5.2.2 of RFC 4880.
 - */
 -
--#include "avb_sha.h"
--
--#define SHFR(x, n) (x >> n)
--#define ROTR(x, n) ((x >> n) | (x << ((sizeof(x) << 3) - n)))
--#define ROTL(x, n) ((x << n) | (x >> ((sizeof(x) << 3) - n)))
--#define CH(x, y, z) ((x & y) ^ (~x & z))
--#define MAJ(x, y, z) ((x & y) ^ (x & z) ^ (y & z))
--
--#define SHA256_F1(x) (ROTR(x, 2) ^ ROTR(x, 13) ^ ROTR(x, 22))
--#define SHA256_F2(x) (ROTR(x, 6) ^ ROTR(x, 11) ^ ROTR(x, 25))
--#define SHA256_F3(x) (ROTR(x, 7) ^ ROTR(x, 18) ^ SHFR(x, 3))
--#define SHA256_F4(x) (ROTR(x, 17) ^ ROTR(x, 19) ^ SHFR(x, 10))
--
--#define UNPACK32(x, str)                 \
--  {                                      \
--    *((str) + 3) = (uint8_t)((x));       \
--    *((str) + 2) = (uint8_t)((x) >> 8);  \
--    *((str) + 1) = (uint8_t)((x) >> 16); \
--    *((str) + 0) = (uint8_t)((x) >> 24); \
--  }
--
--#define UNPACK64(x, str)                         \
--  {                                              \
--    *((str) + 7) = (uint8_t)x;                   \
--    *((str) + 6) = (uint8_t)((uint64_t)x >> 8);  \
--    *((str) + 5) = (uint8_t)((uint64_t)x >> 16); \
--    *((str) + 4) = (uint8_t)((uint64_t)x >> 24); \
--    *((str) + 3) = (uint8_t)((uint64_t)x >> 32); \
--    *((str) + 2) = (uint8_t)((uint64_t)x >> 40); \
--    *((str) + 1) = (uint8_t)((uint64_t)x >> 48); \
--    *((str) + 0) = (uint8_t)((uint64_t)x >> 56); \
--  }
--
--#define PACK32(str, x)                                                    \
--  {                                                                       \
--    *(x) = ((uint32_t) * ((str) + 3)) | ((uint32_t) * ((str) + 2) << 8) | \
--           ((uint32_t) * ((str) + 1) << 16) |                             \
--           ((uint32_t) * ((str) + 0) << 24);                              \
--  }
--
--/* Macros used for loops unrolling */
--
--#define SHA256_SCR(i) \
--  { w[i] = SHA256_F4(w[i - 2]) + w[i - 7] + SHA256_F3(w[i - 15]) + w[i - 16]; }
--
--#define SHA256_EXP(a, b, c, d, e, f, g, h, j)                               \
--  {                                                                         \
--    t1 = wv[h] + SHA256_F2(wv[e]) + CH(wv[e], wv[f], wv[g]) + sha256_k[j] + \
--         w[j];                                                              \
--    t2 = SHA256_F1(wv[a]) + MAJ(wv[a], wv[b], wv[c]);                       \
--    wv[d] += t1;                                                            \
--    wv[h] = t1 + t2;                                                        \
--  }
--
--static const uint32_t sha256_h0[8] = {0x6a09e667,
--                                      0xbb67ae85,
--                                      0x3c6ef372,
--                                      0xa54ff53a,
--                                      0x510e527f,
--                                      0x9b05688c,
--                                      0x1f83d9ab,
--                                      0x5be0cd19};
--
--static const uint32_t sha256_k[64] = {
--    0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1,
--    0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
--    0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174, 0xe49b69c1, 0xefbe4786,
--    0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
--    0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147,
--    0x06ca6351, 0x14292967, 0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13,
--    0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85, 0xa2bfe8a1, 0xa81a664b,
--    0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
--    0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a,
--    0x5b9cca4f, 0x682e6ff3, 0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
--    0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2};
--
--/* SHA-256 implementation */
--void avb_sha256_init(AvbSHA256Ctx* ctx) {
--#ifndef UNROLL_LOOPS
--  int i;
--  for (i = 0; i < 8; i++) {
--    ctx->h[i] = sha256_h0[i];
--  }
--#else
--  ctx->h[0] = sha256_h0[0];
--  ctx->h[1] = sha256_h0[1];
--  ctx->h[2] = sha256_h0[2];
--  ctx->h[3] = sha256_h0[3];
--  ctx->h[4] = sha256_h0[4];
--  ctx->h[5] = sha256_h0[5];
--  ctx->h[6] = sha256_h0[6];
--  ctx->h[7] = sha256_h0[7];
--#endif /* !UNROLL_LOOPS */
--
--  ctx->len = 0;
--  ctx->tot_len = 0;
--}
--
--static void SHA256_transform(AvbSHA256Ctx* ctx,
--                             const uint8_t* message,
--                             size_t block_nb) {
--  uint32_t w[64];
--  uint32_t wv[8];
--  uint32_t t1, t2;
--  const unsigned char* sub_block;
--  size_t i;
--
--#ifndef UNROLL_LOOPS
--  size_t j;
--#endif
--
--  for (i = 0; i < block_nb; i++) {
--    sub_block = message + (i << 6);
--
--#ifndef UNROLL_LOOPS
--    for (j = 0; j < 16; j++) {
--      PACK32(&sub_block[j << 2], &w[j]);
--    }
--
--    for (j = 16; j < 64; j++) {
--      SHA256_SCR(j);
--    }
--
--    for (j = 0; j < 8; j++) {
--      wv[j] = ctx->h[j];
--    }
--
--    for (j = 0; j < 64; j++) {
--      t1 = wv[7] + SHA256_F2(wv[4]) + CH(wv[4], wv[5], wv[6]) + sha256_k[j] +
--           w[j];
--      t2 = SHA256_F1(wv[0]) + MAJ(wv[0], wv[1], wv[2]);
--      wv[7] = wv[6];
--      wv[6] = wv[5];
--      wv[5] = wv[4];
--      wv[4] = wv[3] + t1;
--      wv[3] = wv[2];
--      wv[2] = wv[1];
--      wv[1] = wv[0];
--      wv[0] = t1 + t2;
--    }
--
--    for (j = 0; j < 8; j++) {
--      ctx->h[j] += wv[j];
--    }
--#else
--    PACK32(&sub_block[0], &w[0]);
--    PACK32(&sub_block[4], &w[1]);
--    PACK32(&sub_block[8], &w[2]);
--    PACK32(&sub_block[12], &w[3]);
--    PACK32(&sub_block[16], &w[4]);
--    PACK32(&sub_block[20], &w[5]);
--    PACK32(&sub_block[24], &w[6]);
--    PACK32(&sub_block[28], &w[7]);
--    PACK32(&sub_block[32], &w[8]);
--    PACK32(&sub_block[36], &w[9]);
--    PACK32(&sub_block[40], &w[10]);
--    PACK32(&sub_block[44], &w[11]);
--    PACK32(&sub_block[48], &w[12]);
--    PACK32(&sub_block[52], &w[13]);
--    PACK32(&sub_block[56], &w[14]);
--    PACK32(&sub_block[60], &w[15]);
--
--    SHA256_SCR(16);
--    SHA256_SCR(17);
--    SHA256_SCR(18);
--    SHA256_SCR(19);
--    SHA256_SCR(20);
--    SHA256_SCR(21);
--    SHA256_SCR(22);
--    SHA256_SCR(23);
--    SHA256_SCR(24);
--    SHA256_SCR(25);
--    SHA256_SCR(26);
--    SHA256_SCR(27);
--    SHA256_SCR(28);
--    SHA256_SCR(29);
--    SHA256_SCR(30);
--    SHA256_SCR(31);
--    SHA256_SCR(32);
--    SHA256_SCR(33);
--    SHA256_SCR(34);
--    SHA256_SCR(35);
--    SHA256_SCR(36);
--    SHA256_SCR(37);
--    SHA256_SCR(38);
--    SHA256_SCR(39);
--    SHA256_SCR(40);
--    SHA256_SCR(41);
--    SHA256_SCR(42);
--    SHA256_SCR(43);
--    SHA256_SCR(44);
--    SHA256_SCR(45);
--    SHA256_SCR(46);
--    SHA256_SCR(47);
--    SHA256_SCR(48);
--    SHA256_SCR(49);
--    SHA256_SCR(50);
--    SHA256_SCR(51);
--    SHA256_SCR(52);
--    SHA256_SCR(53);
--    SHA256_SCR(54);
--    SHA256_SCR(55);
--    SHA256_SCR(56);
--    SHA256_SCR(57);
--    SHA256_SCR(58);
--    SHA256_SCR(59);
--    SHA256_SCR(60);
--    SHA256_SCR(61);
--    SHA256_SCR(62);
--    SHA256_SCR(63);
--
--    wv[0] = ctx->h[0];
--    wv[1] = ctx->h[1];
--    wv[2] = ctx->h[2];
--    wv[3] = ctx->h[3];
--    wv[4] = ctx->h[4];
--    wv[5] = ctx->h[5];
--    wv[6] = ctx->h[6];
--    wv[7] = ctx->h[7];
--
--    SHA256_EXP(0, 1, 2, 3, 4, 5, 6, 7, 0);
--    SHA256_EXP(7, 0, 1, 2, 3, 4, 5, 6, 1);
--    SHA256_EXP(6, 7, 0, 1, 2, 3, 4, 5, 2);
--    SHA256_EXP(5, 6, 7, 0, 1, 2, 3, 4, 3);
--    SHA256_EXP(4, 5, 6, 7, 0, 1, 2, 3, 4);
--    SHA256_EXP(3, 4, 5, 6, 7, 0, 1, 2, 5);
--    SHA256_EXP(2, 3, 4, 5, 6, 7, 0, 1, 6);
--    SHA256_EXP(1, 2, 3, 4, 5, 6, 7, 0, 7);
--    SHA256_EXP(0, 1, 2, 3, 4, 5, 6, 7, 8);
--    SHA256_EXP(7, 0, 1, 2, 3, 4, 5, 6, 9);
--    SHA256_EXP(6, 7, 0, 1, 2, 3, 4, 5, 10);
--    SHA256_EXP(5, 6, 7, 0, 1, 2, 3, 4, 11);
--    SHA256_EXP(4, 5, 6, 7, 0, 1, 2, 3, 12);
--    SHA256_EXP(3, 4, 5, 6, 7, 0, 1, 2, 13);
--    SHA256_EXP(2, 3, 4, 5, 6, 7, 0, 1, 14);
--    SHA256_EXP(1, 2, 3, 4, 5, 6, 7, 0, 15);
--    SHA256_EXP(0, 1, 2, 3, 4, 5, 6, 7, 16);
--    SHA256_EXP(7, 0, 1, 2, 3, 4, 5, 6, 17);
--    SHA256_EXP(6, 7, 0, 1, 2, 3, 4, 5, 18);
--    SHA256_EXP(5, 6, 7, 0, 1, 2, 3, 4, 19);
--    SHA256_EXP(4, 5, 6, 7, 0, 1, 2, 3, 20);
--    SHA256_EXP(3, 4, 5, 6, 7, 0, 1, 2, 21);
--    SHA256_EXP(2, 3, 4, 5, 6, 7, 0, 1, 22);
--    SHA256_EXP(1, 2, 3, 4, 5, 6, 7, 0, 23);
--    SHA256_EXP(0, 1, 2, 3, 4, 5, 6, 7, 24);
--    SHA256_EXP(7, 0, 1, 2, 3, 4, 5, 6, 25);
--    SHA256_EXP(6, 7, 0, 1, 2, 3, 4, 5, 26);
--    SHA256_EXP(5, 6, 7, 0, 1, 2, 3, 4, 27);
--    SHA256_EXP(4, 5, 6, 7, 0, 1, 2, 3, 28);
--    SHA256_EXP(3, 4, 5, 6, 7, 0, 1, 2, 29);
--    SHA256_EXP(2, 3, 4, 5, 6, 7, 0, 1, 30);
--    SHA256_EXP(1, 2, 3, 4, 5, 6, 7, 0, 31);
--    SHA256_EXP(0, 1, 2, 3, 4, 5, 6, 7, 32);
--    SHA256_EXP(7, 0, 1, 2, 3, 4, 5, 6, 33);
--    SHA256_EXP(6, 7, 0, 1, 2, 3, 4, 5, 34);
--    SHA256_EXP(5, 6, 7, 0, 1, 2, 3, 4, 35);
--    SHA256_EXP(4, 5, 6, 7, 0, 1, 2, 3, 36);
--    SHA256_EXP(3, 4, 5, 6, 7, 0, 1, 2, 37);
--    SHA256_EXP(2, 3, 4, 5, 6, 7, 0, 1, 38);
--    SHA256_EXP(1, 2, 3, 4, 5, 6, 7, 0, 39);
--    SHA256_EXP(0, 1, 2, 3, 4, 5, 6, 7, 40);
--    SHA256_EXP(7, 0, 1, 2, 3, 4, 5, 6, 41);
--    SHA256_EXP(6, 7, 0, 1, 2, 3, 4, 5, 42);
--    SHA256_EXP(5, 6, 7, 0, 1, 2, 3, 4, 43);
--    SHA256_EXP(4, 5, 6, 7, 0, 1, 2, 3, 44);
--    SHA256_EXP(3, 4, 5, 6, 7, 0, 1, 2, 45);
--    SHA256_EXP(2, 3, 4, 5, 6, 7, 0, 1, 46);
--    SHA256_EXP(1, 2, 3, 4, 5, 6, 7, 0, 47);
--    SHA256_EXP(0, 1, 2, 3, 4, 5, 6, 7, 48);
--    SHA256_EXP(7, 0, 1, 2, 3, 4, 5, 6, 49);
--    SHA256_EXP(6, 7, 0, 1, 2, 3, 4, 5, 50);
--    SHA256_EXP(5, 6, 7, 0, 1, 2, 3, 4, 51);
--    SHA256_EXP(4, 5, 6, 7, 0, 1, 2, 3, 52);
--    SHA256_EXP(3, 4, 5, 6, 7, 0, 1, 2, 53);
--    SHA256_EXP(2, 3, 4, 5, 6, 7, 0, 1, 54);
--    SHA256_EXP(1, 2, 3, 4, 5, 6, 7, 0, 55);
--    SHA256_EXP(0, 1, 2, 3, 4, 5, 6, 7, 56);
--    SHA256_EXP(7, 0, 1, 2, 3, 4, 5, 6, 57);
--    SHA256_EXP(6, 7, 0, 1, 2, 3, 4, 5, 58);
--    SHA256_EXP(5, 6, 7, 0, 1, 2, 3, 4, 59);
--    SHA256_EXP(4, 5, 6, 7, 0, 1, 2, 3, 60);
--    SHA256_EXP(3, 4, 5, 6, 7, 0, 1, 2, 61);
--    SHA256_EXP(2, 3, 4, 5, 6, 7, 0, 1, 62);
--    SHA256_EXP(1, 2, 3, 4, 5, 6, 7, 0, 63);
--
--    ctx->h[0] += wv[0];
--    ctx->h[1] += wv[1];
--    ctx->h[2] += wv[2];
--    ctx->h[3] += wv[3];
--    ctx->h[4] += wv[4];
--    ctx->h[5] += wv[5];
--    ctx->h[6] += wv[6];
--    ctx->h[7] += wv[7];
--#endif /* !UNROLL_LOOPS */
--  }
--}
--
--void avb_sha256_update(AvbSHA256Ctx* ctx, const uint8_t* data, size_t len) {
--  size_t block_nb;
--  size_t new_len, rem_len, tmp_len;
--  const uint8_t* shifted_data;
--
--  tmp_len = AVB_SHA256_BLOCK_SIZE - ctx->len;
--  rem_len = len < tmp_len ? len : tmp_len;
--
--  avb_memcpy(&ctx->block[ctx->len], data, rem_len);
--
--  if (ctx->len + len < AVB_SHA256_BLOCK_SIZE) {
--    ctx->len += len;
--    return;
--  }
--
--  new_len = len - rem_len;
--  block_nb = new_len / AVB_SHA256_BLOCK_SIZE;
--
--  shifted_data = data + rem_len;
--
--  SHA256_transform(ctx, ctx->block, 1);
--  SHA256_transform(ctx, shifted_data, block_nb);
--
--  rem_len = new_len % AVB_SHA256_BLOCK_SIZE;
--
--  avb_memcpy(ctx->block, &shifted_data[block_nb << 6], rem_len);
--
--  ctx->len = rem_len;
--  ctx->tot_len += (block_nb + 1) << 6;
--}
--
--uint8_t* avb_sha256_final(AvbSHA256Ctx* ctx) {
--  size_t block_nb;
--  size_t pm_len;
--  uint64_t len_b;
--#ifndef UNROLL_LOOPS
--  size_t i;
--#endif
--
--  block_nb =
--      (1 + ((AVB_SHA256_BLOCK_SIZE - 9) < (ctx->len % AVB_SHA256_BLOCK_SIZE)));
--
--  len_b = (ctx->tot_len + ctx->len) << 3;
--  pm_len = block_nb << 6;
--
--  avb_memset(ctx->block + ctx->len, 0, pm_len - ctx->len);
--  ctx->block[ctx->len] = 0x80;
--  UNPACK64(len_b, ctx->block + pm_len - 8);
--
--  SHA256_transform(ctx, ctx->block, block_nb);
--
--#ifndef UNROLL_LOOPS
--  for (i = 0; i < 8; i++) {
--    UNPACK32(ctx->h[i], &ctx->buf[i << 2]);
--  }
--#else
--  UNPACK32(ctx->h[0], &ctx->buf[0]);
--  UNPACK32(ctx->h[1], &ctx->buf[4]);
--  UNPACK32(ctx->h[2], &ctx->buf[8]);
--  UNPACK32(ctx->h[3], &ctx->buf[12]);
--  UNPACK32(ctx->h[4], &ctx->buf[16]);
--  UNPACK32(ctx->h[5], &ctx->buf[20]);
--  UNPACK32(ctx->h[6], &ctx->buf[24]);
--  UNPACK32(ctx->h[7], &ctx->buf[28]);
--#endif /* !UNROLL_LOOPS */
--
--  return ctx->buf;
--}
-diff --git a/lib/libavb/avb_sha512.c b/lib/libavb/avb_sha512.c
-deleted file mode 100644
-index b19054fc749..00000000000
---- a/lib/libavb/avb_sha512.c
-+++ /dev/null
-@@ -1,361 +0,0 @@
--// SPDX-License-Identifier: BSD-3-Clause
--/*
-- * Copyright (C) 2005, 2007 Olivier Gay <olivier.gay@a3.epfl.ch>
-- * All rights reserved.
-- *
-- * FIPS 180-2 SHA-224/256/384/512 implementation
-- * Last update: 02/02/2007
-- * Issue date:  04/30/2005
-- */
--
--#include "avb_sha.h"
--
--#define SHFR(x, n) (x >> n)
--#define ROTR(x, n) ((x >> n) | (x << ((sizeof(x) << 3) - n)))
--#define ROTL(x, n) ((x << n) | (x >> ((sizeof(x) << 3) - n)))
--#define CH(x, y, z) ((x & y) ^ (~x & z))
--#define MAJ(x, y, z) ((x & y) ^ (x & z) ^ (y & z))
--
--#define SHA512_F1(x) (ROTR(x, 28) ^ ROTR(x, 34) ^ ROTR(x, 39))
--#define SHA512_F2(x) (ROTR(x, 14) ^ ROTR(x, 18) ^ ROTR(x, 41))
--#define SHA512_F3(x) (ROTR(x, 1) ^ ROTR(x, 8) ^ SHFR(x, 7))
--#define SHA512_F4(x) (ROTR(x, 19) ^ ROTR(x, 61) ^ SHFR(x, 6))
--
--#define UNPACK32(x, str)                 \
--  {                                      \
--    *((str) + 3) = (uint8_t)((x));       \
--    *((str) + 2) = (uint8_t)((x) >> 8);  \
--    *((str) + 1) = (uint8_t)((x) >> 16); \
--    *((str) + 0) = (uint8_t)((x) >> 24); \
--  }
--
--#define UNPACK64(x, str)                         \
--  {                                              \
--    *((str) + 7) = (uint8_t)x;                   \
--    *((str) + 6) = (uint8_t)((uint64_t)x >> 8);  \
--    *((str) + 5) = (uint8_t)((uint64_t)x >> 16); \
--    *((str) + 4) = (uint8_t)((uint64_t)x >> 24); \
--    *((str) + 3) = (uint8_t)((uint64_t)x >> 32); \
--    *((str) + 2) = (uint8_t)((uint64_t)x >> 40); \
--    *((str) + 1) = (uint8_t)((uint64_t)x >> 48); \
--    *((str) + 0) = (uint8_t)((uint64_t)x >> 56); \
--  }
--
--#define PACK64(str, x)                                                        \
--  {                                                                           \
--    *(x) =                                                                    \
--        ((uint64_t) * ((str) + 7)) | ((uint64_t) * ((str) + 6) << 8) |        \
--        ((uint64_t) * ((str) + 5) << 16) | ((uint64_t) * ((str) + 4) << 24) | \
--        ((uint64_t) * ((str) + 3) << 32) | ((uint64_t) * ((str) + 2) << 40) | \
--        ((uint64_t) * ((str) + 1) << 48) | ((uint64_t) * ((str) + 0) << 56);  \
--  }
--
--/* Macros used for loops unrolling */
--
--#define SHA512_SCR(i) \
--  { w[i] = SHA512_F4(w[i - 2]) + w[i - 7] + SHA512_F3(w[i - 15]) + w[i - 16]; }
--
--#define SHA512_EXP(a, b, c, d, e, f, g, h, j)                               \
--  {                                                                         \
--    t1 = wv[h] + SHA512_F2(wv[e]) + CH(wv[e], wv[f], wv[g]) + sha512_k[j] + \
--         w[j];                                                              \
--    t2 = SHA512_F1(wv[a]) + MAJ(wv[a], wv[b], wv[c]);                       \
--    wv[d] += t1;                                                            \
--    wv[h] = t1 + t2;                                                        \
--  }
--
--static const uint64_t sha512_h0[8] = {0x6a09e667f3bcc908ULL,
--                                      0xbb67ae8584caa73bULL,
--                                      0x3c6ef372fe94f82bULL,
--                                      0xa54ff53a5f1d36f1ULL,
--                                      0x510e527fade682d1ULL,
--                                      0x9b05688c2b3e6c1fULL,
--                                      0x1f83d9abfb41bd6bULL,
--                                      0x5be0cd19137e2179ULL};
--
--static const uint64_t sha512_k[80] = {
--    0x428a2f98d728ae22ULL, 0x7137449123ef65cdULL, 0xb5c0fbcfec4d3b2fULL,
--    0xe9b5dba58189dbbcULL, 0x3956c25bf348b538ULL, 0x59f111f1b605d019ULL,
--    0x923f82a4af194f9bULL, 0xab1c5ed5da6d8118ULL, 0xd807aa98a3030242ULL,
--    0x12835b0145706fbeULL, 0x243185be4ee4b28cULL, 0x550c7dc3d5ffb4e2ULL,
--    0x72be5d74f27b896fULL, 0x80deb1fe3b1696b1ULL, 0x9bdc06a725c71235ULL,
--    0xc19bf174cf692694ULL, 0xe49b69c19ef14ad2ULL, 0xefbe4786384f25e3ULL,
--    0x0fc19dc68b8cd5b5ULL, 0x240ca1cc77ac9c65ULL, 0x2de92c6f592b0275ULL,
--    0x4a7484aa6ea6e483ULL, 0x5cb0a9dcbd41fbd4ULL, 0x76f988da831153b5ULL,
--    0x983e5152ee66dfabULL, 0xa831c66d2db43210ULL, 0xb00327c898fb213fULL,
--    0xbf597fc7beef0ee4ULL, 0xc6e00bf33da88fc2ULL, 0xd5a79147930aa725ULL,
--    0x06ca6351e003826fULL, 0x142929670a0e6e70ULL, 0x27b70a8546d22ffcULL,
--    0x2e1b21385c26c926ULL, 0x4d2c6dfc5ac42aedULL, 0x53380d139d95b3dfULL,
--    0x650a73548baf63deULL, 0x766a0abb3c77b2a8ULL, 0x81c2c92e47edaee6ULL,
--    0x92722c851482353bULL, 0xa2bfe8a14cf10364ULL, 0xa81a664bbc423001ULL,
--    0xc24b8b70d0f89791ULL, 0xc76c51a30654be30ULL, 0xd192e819d6ef5218ULL,
--    0xd69906245565a910ULL, 0xf40e35855771202aULL, 0x106aa07032bbd1b8ULL,
--    0x19a4c116b8d2d0c8ULL, 0x1e376c085141ab53ULL, 0x2748774cdf8eeb99ULL,
--    0x34b0bcb5e19b48a8ULL, 0x391c0cb3c5c95a63ULL, 0x4ed8aa4ae3418acbULL,
--    0x5b9cca4f7763e373ULL, 0x682e6ff3d6b2b8a3ULL, 0x748f82ee5defb2fcULL,
--    0x78a5636f43172f60ULL, 0x84c87814a1f0ab72ULL, 0x8cc702081a6439ecULL,
--    0x90befffa23631e28ULL, 0xa4506cebde82bde9ULL, 0xbef9a3f7b2c67915ULL,
--    0xc67178f2e372532bULL, 0xca273eceea26619cULL, 0xd186b8c721c0c207ULL,
--    0xeada7dd6cde0eb1eULL, 0xf57d4f7fee6ed178ULL, 0x06f067aa72176fbaULL,
--    0x0a637dc5a2c898a6ULL, 0x113f9804bef90daeULL, 0x1b710b35131c471bULL,
--    0x28db77f523047d84ULL, 0x32caab7b40c72493ULL, 0x3c9ebe0a15c9bebcULL,
--    0x431d67c49c100d4cULL, 0x4cc5d4becb3e42b6ULL, 0x597f299cfc657e2aULL,
--    0x5fcb6fab3ad6faecULL, 0x6c44198c4a475817ULL};
--
--/* SHA-512 implementation */
--
--void avb_sha512_init(AvbSHA512Ctx* ctx) {
--#ifdef UNROLL_LOOPS_SHA512
--  ctx->h[0] = sha512_h0[0];
--  ctx->h[1] = sha512_h0[1];
--  ctx->h[2] = sha512_h0[2];
--  ctx->h[3] = sha512_h0[3];
--  ctx->h[4] = sha512_h0[4];
--  ctx->h[5] = sha512_h0[5];
--  ctx->h[6] = sha512_h0[6];
--  ctx->h[7] = sha512_h0[7];
--#else
--  int i;
--
--  for (i = 0; i < 8; i++)
--    ctx->h[i] = sha512_h0[i];
--#endif /* UNROLL_LOOPS_SHA512 */
--
--  ctx->len = 0;
--  ctx->tot_len = 0;
--}
--
--static void SHA512_transform(AvbSHA512Ctx* ctx,
--                             const uint8_t* message,
--                             size_t block_nb) {
--  uint64_t w[80];
--  uint64_t wv[8];
--  uint64_t t1, t2;
--  const uint8_t* sub_block;
--  size_t i, j;
--
--  for (i = 0; i < block_nb; i++) {
--    sub_block = message + (i << 7);
--
--#ifdef UNROLL_LOOPS_SHA512
--    PACK64(&sub_block[0], &w[0]);
--    PACK64(&sub_block[8], &w[1]);
--    PACK64(&sub_block[16], &w[2]);
--    PACK64(&sub_block[24], &w[3]);
--    PACK64(&sub_block[32], &w[4]);
--    PACK64(&sub_block[40], &w[5]);
--    PACK64(&sub_block[48], &w[6]);
--    PACK64(&sub_block[56], &w[7]);
--    PACK64(&sub_block[64], &w[8]);
--    PACK64(&sub_block[72], &w[9]);
--    PACK64(&sub_block[80], &w[10]);
--    PACK64(&sub_block[88], &w[11]);
--    PACK64(&sub_block[96], &w[12]);
--    PACK64(&sub_block[104], &w[13]);
--    PACK64(&sub_block[112], &w[14]);
--    PACK64(&sub_block[120], &w[15]);
--
--    SHA512_SCR(16);
--    SHA512_SCR(17);
--    SHA512_SCR(18);
--    SHA512_SCR(19);
--    SHA512_SCR(20);
--    SHA512_SCR(21);
--    SHA512_SCR(22);
--    SHA512_SCR(23);
--    SHA512_SCR(24);
--    SHA512_SCR(25);
--    SHA512_SCR(26);
--    SHA512_SCR(27);
--    SHA512_SCR(28);
--    SHA512_SCR(29);
--    SHA512_SCR(30);
--    SHA512_SCR(31);
--    SHA512_SCR(32);
--    SHA512_SCR(33);
--    SHA512_SCR(34);
--    SHA512_SCR(35);
--    SHA512_SCR(36);
--    SHA512_SCR(37);
--    SHA512_SCR(38);
--    SHA512_SCR(39);
--    SHA512_SCR(40);
--    SHA512_SCR(41);
--    SHA512_SCR(42);
--    SHA512_SCR(43);
--    SHA512_SCR(44);
--    SHA512_SCR(45);
--    SHA512_SCR(46);
--    SHA512_SCR(47);
--    SHA512_SCR(48);
--    SHA512_SCR(49);
--    SHA512_SCR(50);
--    SHA512_SCR(51);
--    SHA512_SCR(52);
--    SHA512_SCR(53);
--    SHA512_SCR(54);
--    SHA512_SCR(55);
--    SHA512_SCR(56);
--    SHA512_SCR(57);
--    SHA512_SCR(58);
--    SHA512_SCR(59);
--    SHA512_SCR(60);
--    SHA512_SCR(61);
--    SHA512_SCR(62);
--    SHA512_SCR(63);
--    SHA512_SCR(64);
--    SHA512_SCR(65);
--    SHA512_SCR(66);
--    SHA512_SCR(67);
--    SHA512_SCR(68);
--    SHA512_SCR(69);
--    SHA512_SCR(70);
--    SHA512_SCR(71);
--    SHA512_SCR(72);
--    SHA512_SCR(73);
--    SHA512_SCR(74);
--    SHA512_SCR(75);
--    SHA512_SCR(76);
--    SHA512_SCR(77);
--    SHA512_SCR(78);
--    SHA512_SCR(79);
--
--    wv[0] = ctx->h[0];
--    wv[1] = ctx->h[1];
--    wv[2] = ctx->h[2];
--    wv[3] = ctx->h[3];
--    wv[4] = ctx->h[4];
--    wv[5] = ctx->h[5];
--    wv[6] = ctx->h[6];
--    wv[7] = ctx->h[7];
--
--    j = 0;
--
--    do {
--      SHA512_EXP(0, 1, 2, 3, 4, 5, 6, 7, j);
--      j++;
--      SHA512_EXP(7, 0, 1, 2, 3, 4, 5, 6, j);
--      j++;
--      SHA512_EXP(6, 7, 0, 1, 2, 3, 4, 5, j);
--      j++;
--      SHA512_EXP(5, 6, 7, 0, 1, 2, 3, 4, j);
--      j++;
--      SHA512_EXP(4, 5, 6, 7, 0, 1, 2, 3, j);
--      j++;
--      SHA512_EXP(3, 4, 5, 6, 7, 0, 1, 2, j);
--      j++;
--      SHA512_EXP(2, 3, 4, 5, 6, 7, 0, 1, j);
--      j++;
--      SHA512_EXP(1, 2, 3, 4, 5, 6, 7, 0, j);
--      j++;
--    } while (j < 80);
--
--    ctx->h[0] += wv[0];
--    ctx->h[1] += wv[1];
--    ctx->h[2] += wv[2];
--    ctx->h[3] += wv[3];
--    ctx->h[4] += wv[4];
--    ctx->h[5] += wv[5];
--    ctx->h[6] += wv[6];
--    ctx->h[7] += wv[7];
--#else
--    for (j = 0; j < 16; j++) {
--      PACK64(&sub_block[j << 3], &w[j]);
--    }
--
--    for (j = 16; j < 80; j++) {
--      SHA512_SCR(j);
--    }
--
--    for (j = 0; j < 8; j++) {
--      wv[j] = ctx->h[j];
--    }
--
--    for (j = 0; j < 80; j++) {
--      t1 = wv[7] + SHA512_F2(wv[4]) + CH(wv[4], wv[5], wv[6]) + sha512_k[j] +
--           w[j];
--      t2 = SHA512_F1(wv[0]) + MAJ(wv[0], wv[1], wv[2]);
--      wv[7] = wv[6];
--      wv[6] = wv[5];
--      wv[5] = wv[4];
--      wv[4] = wv[3] + t1;
--      wv[3] = wv[2];
--      wv[2] = wv[1];
--      wv[1] = wv[0];
--      wv[0] = t1 + t2;
--    }
--
--    for (j = 0; j < 8; j++)
--      ctx->h[j] += wv[j];
--#endif /* UNROLL_LOOPS_SHA512 */
--  }
--}
--
--void avb_sha512_update(AvbSHA512Ctx* ctx, const uint8_t* data, size_t len) {
--  size_t block_nb;
--  size_t new_len, rem_len, tmp_len;
--  const uint8_t* shifted_data;
--
--  tmp_len = AVB_SHA512_BLOCK_SIZE - ctx->len;
--  rem_len = len < tmp_len ? len : tmp_len;
--
--  avb_memcpy(&ctx->block[ctx->len], data, rem_len);
--
--  if (ctx->len + len < AVB_SHA512_BLOCK_SIZE) {
--    ctx->len += len;
--    return;
--  }
--
--  new_len = len - rem_len;
--  block_nb = new_len / AVB_SHA512_BLOCK_SIZE;
--
--  shifted_data = data + rem_len;
--
--  SHA512_transform(ctx, ctx->block, 1);
--  SHA512_transform(ctx, shifted_data, block_nb);
--
--  rem_len = new_len % AVB_SHA512_BLOCK_SIZE;
--
--  avb_memcpy(ctx->block, &shifted_data[block_nb << 7], rem_len);
--
--  ctx->len = rem_len;
--  ctx->tot_len += (block_nb + 1) << 7;
--}
--
--uint8_t* avb_sha512_final(AvbSHA512Ctx* ctx) {
--  size_t block_nb;
--  size_t pm_len;
--  uint64_t len_b;
--
--#ifndef UNROLL_LOOPS_SHA512
--  size_t i;
--#endif
--
--  block_nb =
--      1 + ((AVB_SHA512_BLOCK_SIZE - 17) < (ctx->len % AVB_SHA512_BLOCK_SIZE));
--
--  len_b = (ctx->tot_len + ctx->len) << 3;
--  pm_len = block_nb << 7;
--
--  avb_memset(ctx->block + ctx->len, 0, pm_len - ctx->len);
--  ctx->block[ctx->len] = 0x80;
--  UNPACK64(len_b, ctx->block + pm_len - 8);
--
--  SHA512_transform(ctx, ctx->block, block_nb);
--
--#ifdef UNROLL_LOOPS_SHA512
--  UNPACK64(ctx->h[0], &ctx->buf[0]);
--  UNPACK64(ctx->h[1], &ctx->buf[8]);
--  UNPACK64(ctx->h[2], &ctx->buf[16]);
--  UNPACK64(ctx->h[3], &ctx->buf[24]);
--  UNPACK64(ctx->h[4], &ctx->buf[32]);
--  UNPACK64(ctx->h[5], &ctx->buf[40]);
--  UNPACK64(ctx->h[6], &ctx->buf[48]);
--  UNPACK64(ctx->h[7], &ctx->buf[56]);
--#else
--  for (i = 0; i < 8; i++)
--    UNPACK64(ctx->h[i], &ctx->buf[i << 3]);
--#endif /* UNROLL_LOOPS_SHA512 */
--
--  return ctx->buf;
--}
-diff --git a/lib/libavb/crypto/avb_crypto_ops_impl.h b/lib/libavb/crypto/avb_crypto_ops_impl.h
+-static const uint8_t
+-    padding_RSA2048_SHA256[AVB_RSA2048_NUM_BYTES - AVB_SHA256_DIGEST_SIZE] = {
+-        0x00, 0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0x00, 0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65,
+-        0x03, 0x04, 0x02, 0x01, 0x05, 0x00, 0x04, 0x20};
+-
+-static const uint8_t
+-    padding_RSA4096_SHA256[AVB_RSA4096_NUM_BYTES - AVB_SHA256_DIGEST_SIZE] = {
+-        0x00, 0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0x00, 0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60,
+-        0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05, 0x00, 0x04, 0x20};
+-
+-static const uint8_t
+-    padding_RSA8192_SHA256[AVB_RSA8192_NUM_BYTES - AVB_SHA256_DIGEST_SIZE] = {
+-        0x00, 0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0x00, 0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65,
+-        0x03, 0x04, 0x02, 0x01, 0x05, 0x00, 0x04, 0x20};
+-
+-static const uint8_t
+-    padding_RSA2048_SHA512[AVB_RSA2048_NUM_BYTES - AVB_SHA512_DIGEST_SIZE] = {
+-        0x00, 0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0x00, 0x30, 0x51, 0x30, 0x0d, 0x06, 0x09, 0x60,
+-        0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03, 0x05, 0x00, 0x04, 0x40};
+-
+-static const uint8_t
+-    padding_RSA4096_SHA512[AVB_RSA4096_NUM_BYTES - AVB_SHA512_DIGEST_SIZE] = {
+-        0x00, 0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x30, 0x51, 0x30,
+-        0x0d, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03,
+-        0x05, 0x00, 0x04, 0x40};
+-
+-static const uint8_t
+-    padding_RSA8192_SHA512[AVB_RSA8192_NUM_BYTES - AVB_SHA512_DIGEST_SIZE] = {
+-        0x00, 0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+-        0xff, 0xff, 0xff, 0xff, 0x00, 0x30, 0x51, 0x30, 0x0d, 0x06, 0x09, 0x60,
+-        0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03, 0x05, 0x00, 0x04, 0x40};
+-
+-static AvbAlgorithmData algorithm_data[_AVB_ALGORITHM_NUM_TYPES] = {
+-    /* AVB_ALGORITHM_TYPE_NONE */
+-    {.padding = NULL, .padding_len = 0, .hash_len = 0},
+-    /* AVB_ALGORITHM_TYPE_SHA256_RSA2048 */
+-    {.padding = padding_RSA2048_SHA256,
+-     .padding_len = sizeof(padding_RSA2048_SHA256),
+-     .hash_len = AVB_SHA256_DIGEST_SIZE},
+-    /* AVB_ALGORITHM_TYPE_SHA256_RSA4096 */
+-    {.padding = padding_RSA4096_SHA256,
+-     .padding_len = sizeof(padding_RSA4096_SHA256),
+-     .hash_len = AVB_SHA256_DIGEST_SIZE},
+-    /* AVB_ALGORITHM_TYPE_SHA256_RSA8192 */
+-    {.padding = padding_RSA8192_SHA256,
+-     .padding_len = sizeof(padding_RSA8192_SHA256),
+-     .hash_len = AVB_SHA256_DIGEST_SIZE},
+-    /* AVB_ALGORITHM_TYPE_SHA512_RSA2048 */
+-    {.padding = padding_RSA2048_SHA512,
+-     .padding_len = sizeof(padding_RSA2048_SHA512),
+-     .hash_len = AVB_SHA512_DIGEST_SIZE},
+-    /* AVB_ALGORITHM_TYPE_SHA512_RSA4096 */
+-    {.padding = padding_RSA4096_SHA512,
+-     .padding_len = sizeof(padding_RSA4096_SHA512),
+-     .hash_len = AVB_SHA512_DIGEST_SIZE},
+-    /* AVB_ALGORITHM_TYPE_SHA512_RSA8192 */
+-    {.padding = padding_RSA8192_SHA512,
+-     .padding_len = sizeof(padding_RSA8192_SHA512),
+-     .hash_len = AVB_SHA512_DIGEST_SIZE},
+-};
+-
+-const AvbAlgorithmData* avb_get_algorithm_data(AvbAlgorithmType algorithm) {
+-  if ((size_t)algorithm < _AVB_ALGORITHM_NUM_TYPES) {
+-    return &algorithm_data[algorithm];
++size_t avb_get_algorithm_hash_size(AvbAlgorithmType algorithm) {
++  switch (algorithm) {
++    case AVB_ALGORITHM_TYPE_NONE:
++      return 0;
++    case AVB_ALGORITHM_TYPE_SHA256_RSA2048:
++    case AVB_ALGORITHM_TYPE_SHA256_RSA4096:
++    case AVB_ALGORITHM_TYPE_SHA256_RSA8192:
++      return AVB_SHA256_DIGEST_SIZE;
++    case AVB_ALGORITHM_TYPE_SHA512_RSA2048:
++    case AVB_ALGORITHM_TYPE_SHA512_RSA4096:
++    case AVB_ALGORITHM_TYPE_SHA512_RSA8192:
++      return AVB_SHA512_DIGEST_SIZE;
++    case AVB_ALGORITHM_TYPE_MLDSA65:
++    case AVB_ALGORITHM_TYPE_MLDSA87:
++      return 0;
++    default:
++      return SIZE_MAX;
+   }
+-  return NULL;
+ }
+ 
+ bool avb_rsa_public_key_header_validate_and_byteswap(
+diff --git a/lib/libavb/avb_crypto.h b/lib/libavb/avb_crypto.h
+index d8f649b137c..1d9cdff0c82 100644
+--- a/lib/libavb/avb_crypto.h
++++ b/lib/libavb/avb_crypto.h
+@@ -81,6 +81,14 @@ typedef enum {
+  *
+  * AVB_ALGORITHM_TYPE_SHA512_RSA8192: Like above, but only with
+  * a 8192-bit RSA key and |signature_size| set to 1024.
++ *
++ * AVB_ALGORITHM_TYPE_MLDSA65: A ML-DSA-65 key is used to sign the
++ * data. ML-DSA has an internal hash function and there is no external
++ * hash function. The field |hash_size| must be 0, |signature_size|
++ * must be 3309.
++ *
++ * AVB_ALGORITHM_TYPE_MLDSA87: Like above, but only with a ML-DSA-87
++ * key and |signature_size| set to 4627.
+  */
+ typedef enum {
+   AVB_ALGORITHM_TYPE_NONE,
+@@ -90,20 +98,15 @@ typedef enum {
+   AVB_ALGORITHM_TYPE_SHA512_RSA2048,
+   AVB_ALGORITHM_TYPE_SHA512_RSA4096,
+   AVB_ALGORITHM_TYPE_SHA512_RSA8192,
++  AVB_ALGORITHM_TYPE_MLDSA65,
++  AVB_ALGORITHM_TYPE_MLDSA87,
+   _AVB_ALGORITHM_NUM_TYPES
+ } AvbAlgorithmType;
+ 
+-/* Holds algorithm-specific data. The |padding| is needed by avb_rsa_verify. */
+-typedef struct {
+-  const uint8_t* padding;
+-  size_t padding_len;
+-  size_t hash_len;
+-} AvbAlgorithmData;
+-
+-/* Provides algorithm-specific data for a given |algorithm|. Returns NULL if
++/* Provides the hash size for the given |algorithm|. Returns SIZE_MAX if
+  * |algorithm| is invalid.
+  */
+-const AvbAlgorithmData* avb_get_algorithm_data(AvbAlgorithmType algorithm)
++size_t avb_get_algorithm_hash_size(AvbAlgorithmType algorithm)
+     AVB_ATTR_WARN_UNUSED_RESULT;
+ 
+ /* The header for a serialized RSA public key.
+diff --git a/lib/libavb/avb_mldsa.c b/lib/libavb/avb_mldsa.c
 new file mode 100644
-index 00000000000..ab7418ad083
+index 00000000000..26f54c590dd
 --- /dev/null
-+++ b/lib/libavb/crypto/avb_crypto_ops_impl.h
-@@ -0,0 +1,43 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
++++ b/lib/libavb/avb_mldsa.c
+@@ -0,0 +1,136 @@
++// SPDX-License-Identifier: MIT
 +/*
-+ * U-Boot crypto back end for libavb: the SHA contexts come from U-Boot's own
-+ * SHA-256/SHA-512 library (lib/sha256.c, lib/sha512.c, or mbedTLS when
-+ * CONFIG_MBEDTLS_LIB_CRYPTO is set), which may also use hardware
-+ * acceleration. ML-DSA is not supported, see crypto/mldsa_impl.c.
++ * Copyright (C) 2025 The Android Open Source Project
++ */
++
++#include "avb_mldsa.h"
++
++#include "avb_util.h"
++#include "avb_vbmeta_image.h"
++
++bool avb_mldsa_public_key_header_validate_and_byteswap(
++    const AvbMLDSAPublicKeyHeader* src, AvbMLDSAPublicKeyHeader* dest) {
++  avb_memcpy(dest, src, sizeof(AvbMLDSAPublicKeyHeader));
++
++  dest->key_num_bytes = avb_be32toh(dest->key_num_bytes);
++
++  return true;
++}
++
++static bool avb_mldsa_validate_public_key(const uint8_t* key,
++                                          size_t key_num_bytes,
++                                          AvbAlgorithmType algorithm,
++                                          AvbMLDSAPublicKeyHeader* out_header) {
++  uint32_t expected_key_num_bytes;
++
++  if (key == NULL || out_header == NULL) {
++    avb_error("Invalid input.\n");
++    return false;
++  }
++
++  if (key_num_bytes < sizeof(AvbMLDSAPublicKeyHeader)) {
++    avb_error("Invalid key length.\n");
++    return false;
++  }
++
++  if (!avb_mldsa_public_key_header_validate_and_byteswap(
++          (const AvbMLDSAPublicKeyHeader*)key, out_header)) {
++    avb_error("Invalid key.\n");
++    return false;
++  }
++
++  switch (algorithm) {
++    case AVB_ALGORITHM_TYPE_MLDSA65:
++      expected_key_num_bytes = 1952;
++      break;
++    case AVB_ALGORITHM_TYPE_MLDSA87:
++      expected_key_num_bytes = 2592;
++      break;
++    default:
++      avb_error("Unexpected algorithm.\n");
++      return false;
++  }
++
++  if (out_header->key_num_bytes != expected_key_num_bytes) {
++    avb_error("Unexpected key length.\n");
++    return false;
++  }
++
++  if (key_num_bytes !=
++      sizeof(AvbMLDSAPublicKeyHeader) + out_header->key_num_bytes) {
++    avb_error("Key does not match expected length.\n");
++    return false;
++  }
++
++  return true;
++}
++
++bool avb_mldsa_prehash_init(AvbMLDSAPrehashCtx* ctx,
++                            AvbAlgorithmType algorithm,
++                            const uint8_t* key,
++                            size_t key_num_bytes,
++                            const uint8_t* context,
++                            size_t context_len) {
++  AvbMLDSAPublicKeyHeader h;
++
++  if (ctx == NULL) {
++    avb_error("Invalid input.\n");
++    return false;
++  }
++
++  if (!avb_mldsa_validate_public_key(key, key_num_bytes, algorithm, &h)) {
++    return false;
++  }
++
++  return avb_mldsa_prehash_init_impl(ctx,
++                                     algorithm,
++                                     key + sizeof(AvbMLDSAPublicKeyHeader),
++                                     h.key_num_bytes,
++                                     context,
++                                     context_len);
++}
++
++bool avb_mldsa_verify_message_representative(
++    AvbAlgorithmType algorithm,
++    const uint8_t* key,
++    size_t key_num_bytes,
++    const uint8_t* sig,
++    size_t sig_num_bytes,
++    const uint8_t msg_rep[AVB_MLDSA_MU_BYTES]) {
++  AvbMLDSAPublicKeyHeader h;
++  uint32_t expected_sig_num_bytes;
++
++  if (key == NULL || sig == NULL || msg_rep == NULL) {
++    avb_error("Invalid input.\n");
++    return false;
++  }
++
++  if (!avb_mldsa_validate_public_key(key, key_num_bytes, algorithm, &h)) {
++    return false;
++  }
++
++  switch (algorithm) {
++    case AVB_ALGORITHM_TYPE_MLDSA65:
++      expected_sig_num_bytes = 3309;
++      break;
++    case AVB_ALGORITHM_TYPE_MLDSA87:
++      expected_sig_num_bytes = 4627;
++      break;
++    default:
++      avb_error("Unexpected algorithm.\n");
++      return false;
++  }
++
++  if (sig_num_bytes != expected_sig_num_bytes) {
++    avb_error("Signature length does not match key length.\n");
++    return false;
++  }
++
++  return avb_mldsa_verify_message_representative_impl(
++      algorithm,
++      key + sizeof(AvbMLDSAPublicKeyHeader),
++      h.key_num_bytes,
++      sig,
++      sig_num_bytes,
++      msg_rep);
++}
+diff --git a/lib/libavb/avb_mldsa.h b/lib/libavb/avb_mldsa.h
+new file mode 100644
+index 00000000000..6ee0823e31c
+--- /dev/null
++++ b/lib/libavb/avb_mldsa.h
+@@ -0,0 +1,144 @@
++/* SPDX-License-Identifier: MIT */
++/*
++ * Copyright (C) 2025 The Android Open Source Project
 + */
 +
 +#ifdef AVB_INSIDE_LIBAVB_H
-+#error "You can't include avb_crypto_ops_impl.h in the public header libavb.h."
++#error "You can't include avb_mldsa.h in the public header libavb.h."
 +#endif
 +
 +#ifndef AVB_COMPILATION
 +#error "Never include this file, it may only be used from internal avb code."
 +#endif
 +
-+#ifndef AVB_CRYPTO_OPS_IMPL_H_
-+#define AVB_CRYPTO_OPS_IMPL_H_
++#ifndef AVB_MLDSA_H_
++#define AVB_MLDSA_H_
 +
-+#include <u-boot/sha256.h>
-+#include <u-boot/sha512.h>
++#ifdef __cplusplus
++extern "C" {
++#endif
 +
-+/* Block size in bytes of a SHA-256 digest. */
-+#define AVB_SHA256_BLOCK_SIZE 64
++#include "avb_crypto.h"
++#include "avb_crypto_ops_impl.h"
++#include "avb_sysdeps.h"
 +
-+/* Block size in bytes of a SHA-512 digest. */
-+#define AVB_SHA512_BLOCK_SIZE 128
++/* The header for a serialized ML-DSA public key.
++ *
++ * Following this header is |key_num_bytes| bytes of the public key, serialized
++ * according to FIPS 204, Algorithm 22 (`pkEncode`).
++ *
++ * All fields in this struct are stored in network byte order when
++ * serialized.  To generate a copy with fields swapped to native byte
++ * order, use the function avb_mldsa_public_key_header_validate_and_byteswap().
++ *
++ * The `avb_mldsa_prehash_init()` and
++ * `avb_mldsa_verify_message_representative()` functions expect a key in this
++ * serialized format.
++ *
++ * The 'avbtool extract_public_key' command can be used to generate a
++ * serialized ML-DSA public key.
++ */
++typedef struct AvbMLDSAPublicKeyHeader {
++  uint32_t key_num_bytes;
++} AVB_ATTR_PACKED AvbMLDSAPublicKeyHeader;
 +
-+/* SHA-256 context: U-Boot's. */
-+typedef sha256_context AvbSHA256ImplCtx;
++/* Copies |src| to |dest| and validates, byte-swapping fields in the
++ * process if needed. Returns true if valid, false if invalid.
++ */
++bool avb_mldsa_public_key_header_validate_and_byteswap(
++    const AvbMLDSAPublicKeyHeader* src,
++    AvbMLDSAPublicKeyHeader* dest) AVB_ATTR_WARN_UNUSED_RESULT;
 +
-+/* SHA-512 context: U-Boot's. */
-+typedef sha512_context AvbSHA512ImplCtx;
++#define AVB_MLDSA_MU_BYTES 64
 +
-+/* Dummy structs for the stub ML-DSA implementation */
-+typedef struct {
-+  int dummy;
-+} AvbMLDSA65PrehashImplCtx;
-+typedef struct {
-+  int dummy;
-+} AvbMLDSA87PrehashImplCtx;
++struct AvbMLDSAPrehashCtx {
++  AvbAlgorithmType algorithm;
++  union {
++    AvbMLDSA65PrehashImplCtx mldsa65;
++    AvbMLDSA87PrehashImplCtx mldsa87;
++  } ctx;
++};
++typedef struct AvbMLDSAPrehashCtx AvbMLDSAPrehashCtx;
 +
-+#endif /* AVB_CRYPTO_OPS_IMPL_H_ */
-diff --git a/lib/libavb/crypto/sha_impl.c b/lib/libavb/crypto/sha_impl.c
-new file mode 100644
-index 00000000000..6fca8deaa9b
---- /dev/null
-+++ b/lib/libavb/crypto/sha_impl.c
-@@ -0,0 +1,50 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * libavb SHA-256/SHA-512 on top of U-Boot's SHA library, so that libavb
-+ * shares one implementation with the rest of U-Boot (including hardware
-+ * acceleration and the mbedTLS back end) instead of carrying its own.
++/* Initializes the prehashing context with the given algorithm and key.
++ * The key is expected to be in the format described in
++ * `AvbMLDSAPublicKeyHeader`.
++ *
++ * @ctx: The context to initialize.
++ * @algorithm: The ML-DSA algorithm type.
++ * @key: Pointer to the serialized public key.
++ * @key_num_bytes: The size of the serialized public key.
++ * @context: Optional context string for domain separation.
++ * @context_len: The length of the context string.
++ *
++ * Returns true on success, false on failure.
++ */
++bool avb_mldsa_prehash_init(AvbMLDSAPrehashCtx* ctx,
++                            AvbAlgorithmType algorithm,
++                            const uint8_t* key,
++                            size_t key_num_bytes,
++                            const uint8_t* context,
++                            size_t context_len);
++
++/* Updates the prehashing operation with a chunk of data.
++ *
++ * @ctx: The prehashing context.
++ * @data: Pointer to the data chunk.
++ * @data_len: The length of the data chunk.
++ */
++void avb_mldsa_prehash_update(AvbMLDSAPrehashCtx* ctx,
++                              const uint8_t* data,
++                              size_t data_len);
++
++/* Finalizes the prehashing and outputs the message representative (mu).
++ *
++ * @ctx: The prehashing context.
++ * @out_msg_rep: Output buffer for the message representative (must be
++ * AVB_MLDSA_MU_BYTES).
++ *
++ * Returns true on success, false on failure.
++ */
++bool avb_mldsa_prehash_finalize(AvbMLDSAPrehashCtx* ctx,
++                                uint8_t out_msg_rep[AVB_MLDSA_MU_BYTES]);
++
++/* Verifies the ML-DSA signature against the precomputed message representative.
++ * The key is expected to be in the format described in
++ * `AvbMLDSAPublicKeyHeader`.
++ *
++ * @algorithm: The ML-DSA algorithm type.
++ * @key: Pointer to the serialized public key.
++ * @key_num_bytes: The size of the serialized public key.
++ * @sig: Pointer to the signature.
++ * @sig_num_bytes: The size of the signature.
++ * @msg_rep: The precomputed message representative (AVB_MLDSA_MU_BYTES).
++ *
++ * Returns true if the signature is valid, false otherwise.
++ */
++bool avb_mldsa_verify_message_representative(
++    AvbAlgorithmType algorithm,
++    const uint8_t* key,
++    size_t key_num_bytes,
++    const uint8_t* sig,
++    size_t sig_num_bytes,
++    const uint8_t msg_rep[AVB_MLDSA_MU_BYTES]);
++
++bool avb_mldsa_verify_message_representative_impl(
++    AvbAlgorithmType algorithm,
++    const uint8_t* key,
++    size_t key_num_bytes,
++    const uint8_t* sig,
++    size_t sig_num_bytes,
++    const uint8_t msg_rep[AVB_MLDSA_MU_BYTES]);
++
++bool avb_mldsa_prehash_init_impl(AvbMLDSAPrehashCtx* ctx,
++                                 AvbAlgorithmType algorithm,
++                                 const uint8_t* key,
++                                 size_t key_num_bytes,
++                                 const uint8_t* context,
++                                 size_t context_len);
++
++#ifdef __cplusplus
++}
++#endif
++
++#endif /* AVB_MLDSA_H_ */
+diff --git a/lib/libavb/avb_ops.h b/lib/libavb/avb_ops.h
+index 6a5c589da8e..5987ffe1abe 100644
+--- a/lib/libavb/avb_ops.h
++++ b/lib/libavb/avb_ops.h
+@@ -63,8 +63,8 @@ typedef struct AvbOps AvbOps;
+ /* Forward-declaration of operations in libavb_ab. */
+ struct AvbABOps;
+ 
+-/* Forward-declaration of operations in libavb_atx. */
+-struct AvbAtxOps;
++/* Forward-declaration of operations in libavb_cert. */
++struct AvbCertOps;
+ 
+ /* High-level operations/functions/methods that are platform
+  * dependent.
+@@ -85,10 +85,10 @@ struct AvbOps {
+    */
+   struct AvbABOps* ab_ops;
+ 
+-  /* If libavb_atx is used, this should point to the
+-   * AvbAtxOps. Otherwise it must be set to NULL.
++  /* If libavb_cert is used, this should point to the
++   * AvbCertOps. Otherwise it must be set to NULL.
+    */
+-  struct AvbAtxOps* atx_ops;
++  struct AvbCertOps* cert_ops;
+ 
+   /* Reads |num_bytes| from offset |offset| from partition with name
+    * |partition| (NUL-terminated UTF-8 string). If |offset| is
+diff --git a/lib/libavb/avb_rsa.c b/lib/libavb/avb_rsa.c
+index b64749980c0..779e161f99e 100644
+--- a/lib/libavb/avb_rsa.c
++++ b/lib/libavb/avb_rsa.c
+@@ -18,6 +18,304 @@
+ #include "avb_util.h"
+ #include "avb_vbmeta_image.h"
+ 
++/* NOTE: The PKC1-v1.5 padding is a blob of binary DER of ASN.1 and is
++ * obtained from section 5.2.2 of RFC 4880.
 + */
 +
-+#include "../avb_sha.h"
-+#include "avb_crypto_ops_impl.h"
++static const uint8_t
++    padding_SHA256_RSA2048[AVB_RSA2048_NUM_BYTES - AVB_SHA256_DIGEST_SIZE] = {
++        0x00, 0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0x00, 0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65,
++        0x03, 0x04, 0x02, 0x01, 0x05, 0x00, 0x04, 0x20};
 +
-+/* U-Boot's update functions take a 32-bit length */
-+#define SHA_CHUNK 0x40000000
++static const uint8_t
++    padding_SHA256_RSA4096[AVB_RSA4096_NUM_BYTES - AVB_SHA256_DIGEST_SIZE] = {
++        0x00, 0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0x00, 0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60,
++        0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05, 0x00, 0x04, 0x20};
 +
-+void avb_sha256_init(AvbSHA256Ctx* avb_ctx) {
-+  sha256_starts(&avb_ctx->impl);
-+}
++static const uint8_t
++    padding_SHA256_RSA8192[AVB_RSA8192_NUM_BYTES - AVB_SHA256_DIGEST_SIZE] = {
++        0x00, 0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0x00, 0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65,
++        0x03, 0x04, 0x02, 0x01, 0x05, 0x00, 0x04, 0x20};
 +
-+void avb_sha256_update(AvbSHA256Ctx* avb_ctx, const uint8_t* data, size_t len) {
-+  while (len) {
-+    size_t n = len > SHA_CHUNK ? SHA_CHUNK : len;
++static const uint8_t
++    padding_SHA512_RSA2048[AVB_RSA2048_NUM_BYTES - AVB_SHA512_DIGEST_SIZE] = {
++        0x00, 0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0x00, 0x30, 0x51, 0x30, 0x0d, 0x06, 0x09, 0x60,
++        0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03, 0x05, 0x00, 0x04, 0x40};
 +
-+    sha256_update(&avb_ctx->impl, data, n);
-+    data += n;
-+    len -= n;
++static const uint8_t
++    padding_SHA512_RSA4096[AVB_RSA4096_NUM_BYTES - AVB_SHA512_DIGEST_SIZE] = {
++        0x00, 0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x30, 0x51, 0x30,
++        0x0d, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03,
++        0x05, 0x00, 0x04, 0x40};
++
++static const uint8_t
++    padding_SHA512_RSA8192[AVB_RSA8192_NUM_BYTES - AVB_SHA512_DIGEST_SIZE] = {
++        0x00, 0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
++        0xff, 0xff, 0xff, 0xff, 0x00, 0x30, 0x51, 0x30, 0x0d, 0x06, 0x09, 0x60,
++        0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03, 0x05, 0x00, 0x04, 0x40};
++
+ typedef struct IAvbKey {
+   unsigned int len; /* Length of n[] in number of uint32_t */
+   uint32_t n0inv;   /* -1 / n[0] mod 2^32 */
+@@ -25,22 +323,47 @@ typedef struct IAvbKey {
+   uint32_t* rr;     /* R^2 as array (host-byte order) */
+ } IAvbKey;
+ 
+-static IAvbKey* iavb_parse_key_data(const uint8_t* data, size_t length) {
++static IAvbKey* iavb_parse_key_data(AvbAlgorithmType algorithm,
++                                    const uint8_t* data,
++                                    size_t length) {
+   AvbRSAPublicKeyHeader h;
+   IAvbKey* key = NULL;
++  uint32_t expected_key_num_bits;
+   size_t expected_length;
+   unsigned int i;
+   const uint8_t* n;
+   const uint8_t* rr;
+ 
++  if (length < sizeof(AvbRSAPublicKeyHeader)) {
++    avb_error("Invalid key length.\n");
++    goto fail;
 +  }
-+}
 +
-+uint8_t* avb_sha256_final(AvbSHA256Ctx* avb_ctx) {
-+  sha256_finish(&avb_ctx->impl, avb_ctx->buf);
-+  return avb_ctx->buf;
-+}
-+
-+void avb_sha512_init(AvbSHA512Ctx* avb_ctx) {
-+  sha512_starts(&avb_ctx->impl);
-+}
-+
-+void avb_sha512_update(AvbSHA512Ctx* avb_ctx, const uint8_t* data, size_t len) {
-+  while (len) {
-+    size_t n = len > SHA_CHUNK ? SHA_CHUNK : len;
-+
-+    sha512_update(&avb_ctx->impl, data, n);
-+    data += n;
-+    len -= n;
+   if (!avb_rsa_public_key_header_validate_and_byteswap(
+           (const AvbRSAPublicKeyHeader*)data, &h)) {
+     avb_error("Invalid key.\n");
+     goto fail;
+   }
+ 
+-  if (!(h.key_num_bits == 2048 || h.key_num_bits == 4096 ||
+-        h.key_num_bits == 8192)) {
++  switch (algorithm) {
++    case AVB_ALGORITHM_TYPE_SHA256_RSA2048:
++    case AVB_ALGORITHM_TYPE_SHA512_RSA2048:
++      expected_key_num_bits = 2048;
++      break;
++    case AVB_ALGORITHM_TYPE_SHA256_RSA4096:
++    case AVB_ALGORITHM_TYPE_SHA512_RSA4096:
++      expected_key_num_bits = 4096;
++      break;
++    case AVB_ALGORITHM_TYPE_SHA256_RSA8192:
++    case AVB_ALGORITHM_TYPE_SHA512_RSA8192:
++      expected_key_num_bits = 8192;
++      break;
++    default:
++      avb_error("Unexpected algorithm.\n");
++      goto fail;
 +  }
++
++  if (h.key_num_bits != expected_key_num_bits) {
+     avb_error("Unexpected key length.\n");
+     goto fail;
+   }
+@@ -153,10 +476,11 @@ static void montMul(const IAvbKey* key, uint32_t* c, uint32_t* a, uint32_t* b) {
+ /* In-place public exponentiation. (65537}
+  * Input and output big-endian byte array in inout.
+  */
+-static void modpowF4(const IAvbKey* key, uint8_t* inout) {
++static bool modpowF4(const IAvbKey* key, uint8_t* inout) {
+   uint32_t* a = (uint32_t*)avb_malloc(key->len * sizeof(uint32_t));
+   uint32_t* aR = (uint32_t*)avb_malloc(key->len * sizeof(uint32_t));
+   uint32_t* aaR = (uint32_t*)avb_malloc(key->len * sizeof(uint32_t));
++  bool success = false;
+   if (a == NULL || aR == NULL || aaR == NULL) {
+     goto out;
+   }
+@@ -194,6 +518,8 @@ static void modpowF4(const IAvbKey* key, uint8_t* inout) {
+     *inout++ = (uint8_t)(tmp >> 0);
+   }
+ 
++  success = true;
++
+ out:
+   if (a != NULL) {
+     avb_free(a);
+@@ -204,29 +530,59 @@ out:
+   if (aaR != NULL) {
+     avb_free(aaR);
+   }
++  return success;
 +}
 +
-+uint8_t* avb_sha512_final(AvbSHA512Ctx* avb_ctx) {
-+  sha512_finish(&avb_ctx->impl, avb_ctx->buf);
-+  return avb_ctx->buf;
++static const uint8_t* get_padding(AvbAlgorithmType algorithm,
++                                  size_t* padding_num_bytes) {
++  switch (algorithm) {
++    case AVB_ALGORITHM_TYPE_SHA256_RSA2048:
++      *padding_num_bytes = sizeof(padding_SHA256_RSA2048);
++      return padding_SHA256_RSA2048;
++    case AVB_ALGORITHM_TYPE_SHA256_RSA4096:
++      *padding_num_bytes = sizeof(padding_SHA256_RSA4096);
++      return padding_SHA256_RSA4096;
++    case AVB_ALGORITHM_TYPE_SHA256_RSA8192:
++      *padding_num_bytes = sizeof(padding_SHA256_RSA8192);
++      return padding_SHA256_RSA8192;
++    case AVB_ALGORITHM_TYPE_SHA512_RSA2048:
++      *padding_num_bytes = sizeof(padding_SHA512_RSA2048);
++      return padding_SHA512_RSA2048;
++    case AVB_ALGORITHM_TYPE_SHA512_RSA4096:
++      *padding_num_bytes = sizeof(padding_SHA512_RSA4096);
++      return padding_SHA512_RSA4096;
++    case AVB_ALGORITHM_TYPE_SHA512_RSA8192:
++      *padding_num_bytes = sizeof(padding_SHA512_RSA8192);
++      return padding_SHA512_RSA8192;
++    default:
++      *padding_num_bytes = 0;
++      return NULL;
++  }
+ }
+ 
+ /* Verify a RSA PKCS1.5 signature against an expected hash.
+  * Returns false on failure, true on success.
+  */
+-bool avb_rsa_verify(const uint8_t* key,
++bool avb_rsa_verify(AvbAlgorithmType algorithm,
++                    const uint8_t* key,
+                     size_t key_num_bytes,
+                     const uint8_t* sig,
+                     size_t sig_num_bytes,
+                     const uint8_t* hash,
+-                    size_t hash_num_bytes,
+-                    const uint8_t* padding,
+-                    size_t padding_num_bytes) {
++                    size_t hash_num_bytes) {
+   uint8_t* buf = NULL;
+   IAvbKey* parsed_key = NULL;
++  size_t algorithm_hash_size;
++  const uint8_t* padding = NULL;
++  size_t padding_num_bytes = 0;
+   bool success = false;
+ 
+-  if (key == NULL || sig == NULL || hash == NULL || padding == NULL) {
++  if (key == NULL || sig == NULL || hash == NULL) {
+     avb_error("Invalid input.\n");
+     goto out;
+   }
+ 
+-  parsed_key = iavb_parse_key_data(key, key_num_bytes);
++  parsed_key = iavb_parse_key_data(algorithm, key, key_num_bytes);
+   if (parsed_key == NULL) {
+     avb_error("Error parsing key.\n");
+     goto out;
+@@ -237,6 +593,23 @@ bool avb_rsa_verify(const uint8_t* key,
+     goto out;
+   }
+ 
++  algorithm_hash_size = avb_get_algorithm_hash_size(algorithm);
++  if (algorithm_hash_size == SIZE_MAX) {
++    avb_error("Invalid or unknown algorithm.\n");
++    goto out;
++  }
++
++  if (hash_num_bytes != algorithm_hash_size) {
++    avb_error("Hash has wrong size for algorithm.\n");
++    goto out;
++  }
++
++  padding = get_padding(algorithm, &padding_num_bytes);
++  if (!padding) {
++    avb_error("Padding not known for algorithm.\n");
++    goto out;
++  }
++
+   if (padding_num_bytes != sig_num_bytes - hash_num_bytes) {
+     avb_error("Padding length does not match hash and signature lengths.\n");
+     goto out;
+@@ -249,7 +622,10 @@ bool avb_rsa_verify(const uint8_t* key,
+   }
+   avb_memcpy(buf, sig, sig_num_bytes);
+ 
+-  modpowF4(parsed_key, buf);
++  if (!modpowF4(parsed_key, buf)) {
++    avb_error("RSA modulus computation failed.\n");
++    goto out;
++  }
+ 
+   /* Check padding bytes.
+    *
+diff --git a/lib/libavb/avb_rsa.h b/lib/libavb/avb_rsa.h
+index 8741790e094..8dd2f38b8d6 100644
+--- a/lib/libavb/avb_rsa.h
++++ b/lib/libavb/avb_rsa.h
+@@ -28,8 +28,7 @@ extern "C" {
+ 
+ /* Using the key given by |key|, verify a RSA signature |sig| of
+  * length |sig_num_bytes| against an expected |hash| of length
+- * |hash_num_bytes|. The padding to expect must be passed in using
+- * |padding| of length |padding_num_bytes|.
++ * |hash_num_bytes|.
+  *
+  * The data in |key| must match the format defined in
+  * |AvbRSAPublicKeyHeader|, including the two large numbers
+@@ -38,14 +37,13 @@ extern "C" {
+  *
+  * Returns false if verification fails, true otherwise.
+  */
+-bool avb_rsa_verify(const uint8_t* key,
++bool avb_rsa_verify(AvbAlgorithmType algorithm,
++                    const uint8_t* key,
+                     size_t key_num_bytes,
+                     const uint8_t* sig,
+                     size_t sig_num_bytes,
+                     const uint8_t* hash,
+-                    size_t hash_num_bytes,
+-                    const uint8_t* padding,
+-                    size_t padding_num_bytes) AVB_ATTR_WARN_UNUSED_RESULT;
++                    size_t hash_num_bytes) AVB_ATTR_WARN_UNUSED_RESULT;
+ 
+ #ifdef __cplusplus
+ }
+diff --git a/lib/libavb/avb_sha.h b/lib/libavb/avb_sha.h
+index ffe3cc74984..94bcffa5324 100644
+--- a/lib/libavb/avb_sha.h
++++ b/lib/libavb/avb_sha.h
+@@ -26,6 +26,9 @@ extern "C" {
+  *   AvbSHA256ImplCtx - SHA-256 context used by the implementation
+  *   AvbSHA512ImplCtx - SHA-512 context used by the implementation
+  *
++ * For example, if AvbSHA512Ctx is implemented using BoringSSL this would
++ * typedef AvbSHA512ImplCtx to SHA512_CTX.
++ *
+  * We expect the implementation to provide a header file with the name
+  * avb_crypto_ops_impl.h to do all this.
+  */
+diff --git a/lib/libavb/avb_slot_verify.c b/lib/libavb/avb_slot_verify.c
+index d37ffed0148..28f907ffc75 100644
+--- a/lib/libavb/avb_slot_verify.c
++++ b/lib/libavb/avb_slot_verify.c
+@@ -15,9 +15,6 @@
+ #include "avb_vbmeta_image.h"
+ #include "avb_version.h"
+ 
+-/* Maximum number of partitions that can be loaded with avb_slot_verify(). */
+-#define MAX_NUMBER_OF_LOADED_PARTITIONS 32
+-
+ /* Maximum number of vbmeta images that can be loaded with avb_slot_verify(). */
+ #define MAX_NUMBER_OF_VBMETA_IMAGES 32
+ 
+@@ -272,6 +269,7 @@ static AvbSlotVerifyResult load_and_verify_hash_partition(
+   bool image_preloaded = false;
+   uint8_t* digest;
+   size_t digest_len;
++  AvbDigestType digest_type;
+   const char* found;
+   uint64_t image_size;
+   size_t expected_digest_len = 0;
+@@ -381,12 +379,14 @@ static AvbSlotVerifyResult load_and_verify_hash_partition(
+     avb_sha256_update(&sha256_ctx, image_buf, image_size_to_hash);
+     digest = avb_sha256_final(&sha256_ctx);
+     digest_len = AVB_SHA256_DIGEST_SIZE;
++    digest_type = AVB_DIGEST_TYPE_SHA256;
+   } else if (avb_strcmp((const char*)hash_desc.hash_algorithm, "sha512") == 0) {
+     avb_sha512_init(&sha512_ctx);
+     avb_sha512_update(&sha512_ctx, desc_salt, hash_desc.salt_len);
+     avb_sha512_update(&sha512_ctx, image_buf, image_size_to_hash);
+     digest = avb_sha512_final(&sha512_ctx);
+     digest_len = AVB_SHA512_DIGEST_SIZE;
++    digest_type = AVB_DIGEST_TYPE_SHA512;
+   } else {
+     avb_error(part_name, ": Unsupported hash algorithm.\n");
+     ret = AVB_SLOT_VERIFY_RESULT_ERROR_INVALID_METADATA;
+@@ -434,13 +434,22 @@ out:
+   if ((ret == AVB_SLOT_VERIFY_RESULT_OK || result_should_continue(ret)) &&
+       image_buf != NULL) {
+     AvbPartitionData* loaded_partition;
+-    if (slot_data->num_loaded_partitions == MAX_NUMBER_OF_LOADED_PARTITIONS) {
++    if (slot_data->num_loaded_partitions ==
++        AVB_MAX_NUMBER_OF_LOADED_PARTITIONS) {
+       avb_error(part_name, ": Too many loaded partitions.\n");
+       ret = AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
+       goto fail;
+     }
+     loaded_partition =
+         &slot_data->loaded_partitions[slot_data->num_loaded_partitions++];
++    loaded_partition->digest = avb_calloc(digest_len);
++    if (loaded_partition->digest == NULL) {
++      ret = AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
++      goto fail;
++    }
++    avb_memcpy(loaded_partition->digest, digest, digest_len);
++    loaded_partition->digest_size = digest_len;
++    loaded_partition->digest_type = digest_type;
+     loaded_partition->partition_name = avb_strdup(found);
+     loaded_partition->data_size = image_size;
+     loaded_partition->data = image_buf;
+@@ -501,7 +510,8 @@ static AvbSlotVerifyResult load_requested_partitions(
+     }
+ 
+     /* Move to slot_data. */
+-    if (slot_data->num_loaded_partitions == MAX_NUMBER_OF_LOADED_PARTITIONS) {
++    if (slot_data->num_loaded_partitions ==
++        AVB_MAX_NUMBER_OF_LOADED_PARTITIONS) {
+       avb_error(part_name, ": Too many loaded partitions.\n");
+       ret = AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
+       goto out;
+@@ -546,6 +556,8 @@ static AvbSlotVerifyResult load_and_verify_vbmeta(
+     size_t expected_public_key_length,
+     AvbSlotVerifyData* slot_data,
+     AvbAlgorithmType* out_algorithm_type,
++    uint8_t** out_toplevel_vbmeta_public_key_data,
++    size_t* out_toplevel_vbmeta_public_key_length,
+     AvbCmdlineSubstList* out_additional_cmdline_subst,
+     bool use_ab_suffix) {
+   char full_partition_name[AVB_PART_NAME_MAX_SIZE];
+@@ -734,6 +746,8 @@ static AvbSlotVerifyResult load_and_verify_vbmeta(
+                                    0 /* expected_public_key_length */,
+                                    slot_data,
+                                    out_algorithm_type,
++                                   out_toplevel_vbmeta_public_key_data,
++                                   out_toplevel_vbmeta_public_key_length,
+                                    out_additional_cmdline_subst,
+                                    use_ab_suffix);
+       goto out;
+@@ -753,6 +767,22 @@ static AvbSlotVerifyResult load_and_verify_vbmeta(
+   switch (vbmeta_ret) {
+     case AVB_VBMETA_VERIFY_RESULT_OK:
+       avb_assert(pk_data != NULL && pk_len > 0);
++      if (is_main_vbmeta) {
++        if (out_toplevel_vbmeta_public_key_data != NULL) {
++          *out_toplevel_vbmeta_public_key_data = avb_malloc(pk_len);
++          if (*out_toplevel_vbmeta_public_key_data == NULL) {
++            ret = AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
++            goto out;
++          }
++          // Copy the public key data into the output parameter since pk_data
++          // is a pointer to data in vbmeta_buf, whose memory gets deallocated
++          // at the end of this function.
++          avb_memcpy(*out_toplevel_vbmeta_public_key_data, pk_data, pk_len);
++        }
++        if (out_toplevel_vbmeta_public_key_length != NULL) {
++          *out_toplevel_vbmeta_public_key_length = pk_len;
++        }
++      }
+       break;
+ 
+     case AVB_VBMETA_VERIFY_RESULT_OK_NOT_SIGNED:
+@@ -1033,11 +1063,13 @@ static AvbSlotVerifyResult load_and_verify_vbmeta(
+                                    chain_desc.public_key_len,
+                                    slot_data,
+                                    NULL, /* out_algorithm_type */
++                                   out_toplevel_vbmeta_public_key_data,
++                                   out_toplevel_vbmeta_public_key_length,
+                                    NULL, /* out_additional_cmdline_subst */
+                                    use_ab_suffix);
+         if (sub_ret != AVB_SLOT_VERIFY_RESULT_OK) {
+           ret = sub_ret;
+-          if (!result_should_continue(ret)) {
++          if (!allow_verification_error || !result_should_continue(ret)) {
+             goto out;
+           }
+         }
+@@ -1182,22 +1214,25 @@ static AvbSlotVerifyResult load_and_verify_vbmeta(
+             goto out;
+           }
+ 
+-          ret = read_persistent_digest(ops,
+-                                       part_name,
+-                                       digest_len,
+-                                       NULL /* initial_digest */,
+-                                       digest_buf);
+-          if (ret != AVB_SLOT_VERIFY_RESULT_OK) {
++          AvbSlotVerifyResult sub_ret =
++              read_persistent_digest(ops,
++                                     part_name,
++                                     digest_len,
++                                     NULL /* initial_digest */,
++                                     digest_buf);
++          if (sub_ret != AVB_SLOT_VERIFY_RESULT_OK) {
++            ret = sub_ret;
+             goto out;
+           }
+ 
+           if (out_additional_cmdline_subst) {
+-            ret =
++            sub_ret =
+                 avb_add_root_digest_substitution(part_name,
+                                                  digest_buf,
+                                                  digest_len,
+                                                  out_additional_cmdline_subst);
+-            if (ret != AVB_SLOT_VERIFY_RESULT_OK) {
++            if (sub_ret != AVB_SLOT_VERIFY_RESULT_OK) {
++              ret = sub_ret;
+               goto out;
+             }
+           }
+@@ -1374,6 +1409,8 @@ AvbSlotVerifyResult avb_slot_verify(AvbOps* ops,
+   AvbAlgorithmType algorithm_type = AVB_ALGORITHM_TYPE_NONE;
+   bool using_boot_for_vbmeta = false;
+   AvbVBMetaImageHeader toplevel_vbmeta;
++  uint8_t* toplevel_vbmeta_public_key_data = NULL;
++  size_t toplevel_vbmeta_public_key_length = 0;
+   bool allow_verification_error =
+       (flags & AVB_SLOT_VERIFY_FLAGS_ALLOW_VERIFICATION_ERROR);
+   AvbCmdlineSubstList* additional_cmdline_subst = NULL;
+@@ -1440,8 +1477,8 @@ AvbSlotVerifyResult avb_slot_verify(AvbOps* ops,
+     ret = AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
+     goto fail;
+   }
+-  slot_data->loaded_partitions =
+-      avb_calloc(sizeof(AvbPartitionData) * MAX_NUMBER_OF_LOADED_PARTITIONS);
++  slot_data->loaded_partitions = avb_calloc(
++      sizeof(AvbPartitionData) * AVB_MAX_NUMBER_OF_LOADED_PARTITIONS);
+   if (slot_data->loaded_partitions == NULL) {
+     ret = AVB_SLOT_VERIFY_RESULT_ERROR_OOM;
+     goto fail;
+@@ -1464,21 +1501,24 @@ AvbSlotVerifyResult avb_slot_verify(AvbOps* ops,
+ 
+     /* No vbmeta partition, go through each of the requested partitions... */
+     for (size_t n = 0; requested_partitions[n] != NULL; n++) {
+-      ret = load_and_verify_vbmeta(ops,
+-                                   requested_partitions,
+-                                   ab_suffix,
+-                                   flags,
+-                                   allow_verification_error,
+-                                   0 /* toplevel_vbmeta_flags */,
+-                                   0 /* rollback_index_location */,
+-                                   requested_partitions[n],
+-                                   avb_strlen(requested_partitions[n]),
+-                                   NULL /* expected_public_key */,
+-                                   0 /* expected_public_key_length */,
+-                                   slot_data,
+-                                   &algorithm_type,
+-                                   additional_cmdline_subst,
+-                                   true /*use_ab_suffix*/);
++      ret = load_and_verify_vbmeta(
++          ops,
++          requested_partitions,
++          ab_suffix,
++          flags,
++          allow_verification_error,
++          0 /* toplevel_vbmeta_flags */,
++          0 /* rollback_index_location */,
++          requested_partitions[n],
++          avb_strlen(requested_partitions[n]),
++          NULL /* expected_public_key */,
++          0 /* expected_public_key_length */,
++          slot_data,
++          &algorithm_type,
++          NULL /* out_toplevel_vbmeta_public_key_data */,
++          NULL /* out_toplevel_vbmeta_public_key_length */,
++          additional_cmdline_subst,
++          true /*use_ab_suffix*/);
+       if (!allow_verification_error && ret != AVB_SLOT_VERIFY_RESULT_OK) {
+         goto fail;
+       }
+@@ -1499,6 +1539,8 @@ AvbSlotVerifyResult avb_slot_verify(AvbOps* ops,
+                                  0 /* expected_public_key_length */,
+                                  slot_data,
+                                  &algorithm_type,
++                                 &toplevel_vbmeta_public_key_data,
++                                 &toplevel_vbmeta_public_key_length,
+                                  additional_cmdline_subst,
+                                  true /*use_ab_suffix*/);
+     if (!allow_verification_error && ret != AVB_SLOT_VERIFY_RESULT_OK) {
+@@ -1579,6 +1621,8 @@ AvbSlotVerifyResult avb_slot_verify(AvbOps* ops,
+                                  flags,
+                                  slot_data,
+                                  &toplevel_vbmeta,
++                                 toplevel_vbmeta_public_key_data,
++                                 toplevel_vbmeta_public_key_length,
+                                  algorithm_type,
+                                  hashtree_error_mode,
+                                  resolved_hashtree_error_mode);
+@@ -1612,6 +1656,10 @@ AvbSlotVerifyResult avb_slot_verify(AvbOps* ops,
+     avb_slot_verify_data_free(slot_data);
+   }
+ 
++  if (toplevel_vbmeta_public_key_data != NULL) {
++    avb_free(toplevel_vbmeta_public_key_data);
++  }
++
+   avb_free_cmdline_subst_list(additional_cmdline_subst);
+   additional_cmdline_subst = NULL;
+ 
+@@ -1625,6 +1673,9 @@ fail:
+   if (slot_data != NULL) {
+     avb_slot_verify_data_free(slot_data);
+   }
++  if (toplevel_vbmeta_public_key_data != NULL) {
++    avb_free(toplevel_vbmeta_public_key_data);
++  }
+   if (additional_cmdline_subst != NULL) {
+     avb_free_cmdline_subst_list(additional_cmdline_subst);
+   }
+@@ -1661,6 +1712,9 @@ void avb_slot_verify_data_free(AvbSlotVerifyData* data) {
+       if (loaded_partition->data != NULL && !loaded_partition->preloaded) {
+         avb_free(loaded_partition->data);
+       }
++      if (loaded_partition->digest != NULL) {
++        avb_free(loaded_partition->digest);
++      }
+     }
+     avb_free(data->loaded_partitions);
+   }
+diff --git a/lib/libavb/avb_slot_verify.h b/lib/libavb/avb_slot_verify.h
+index b86c96cbd06..22fdd2c9fbd 100644
+--- a/lib/libavb/avb_slot_verify.h
++++ b/lib/libavb/avb_slot_verify.h
+@@ -17,6 +17,9 @@
+ extern "C" {
+ #endif
+ 
++/* Maximum number of partitions that can be loaded with avb_slot_verify(). */
++#define AVB_MAX_NUMBER_OF_LOADED_PARTITIONS 32
++
+ /* Return codes used in avb_slot_verify(), see that function for
+  * documentation for each field.
+  *
+@@ -140,6 +143,9 @@ typedef struct {
+   size_t data_size;
+   bool preloaded;
+   AvbSlotVerifyResult verify_result;
++  uint8_t* digest;
++  size_t digest_size;
++  AvbDigestType digest_type;
+ } AvbPartitionData;
+ 
+ /* AvbVBMetaData contains a vbmeta struct loaded from a partition when
+@@ -229,11 +235,16 @@ typedef struct {
+  *
+  *   androidboot.vbmeta.device_state: set to "locked" or "unlocked"
+  *   depending on the result of the result of AvbOps's
+- *   read_is_unlocked() function.
++ *   read_is_device_unlocked() function.
+  *
+  *   androidboot.vbmeta.{hash_alg, size, digest}: Will be set to
+  *   the digest of all images in |vbmeta_images|.
+  *
++ *   androidboot.vbmeta.public_key_digest: Will be set to the SHA-256
++ *   digest of the public key used to verify the vbmeta partition (or
++ *   boot partition if there is no vbmeta partition). If the flag
++ *   AVB_SLOT_VERIFY_FLAGS_NO_VBMETA_PARTITION is used, this is not set.
++ *
+  *   androidboot.vbmeta.device: This is set to the value
+  *   PARTUUID=$(ANDROID_VBMETA_PARTUUID) before substitution so it
+  *   will end up pointing to the vbmeta partition for the verified
+diff --git a/lib/libavb/avb_sysdeps.h b/lib/libavb/avb_sysdeps.h
+index aece8e0a018..9d024a9b347 100644
+--- a/lib/libavb/avb_sysdeps.h
++++ b/lib/libavb/avb_sysdeps.h
+@@ -19,6 +19,7 @@ extern "C" {
+  * like uint8_t, uint64_t, and bool (with |false|, |true| keywords)
+  * must be present.
+  */
++#include <limits.h>
+ #include <stdio.h>
+ #include <stdbool.h>
+ #include <linux/types.h>
+diff --git a/lib/libavb/avb_util.h b/lib/libavb/avb_util.h
+index d0612cc97f3..3e0f8e1eec5 100644
+--- a/lib/libavb/avb_util.h
++++ b/lib/libavb/avb_util.h
+@@ -66,15 +66,6 @@ extern "C" {
+     }                                        \
+   } while (0)
+ 
+-/* Aborts the program if reached.
+- *
+- * This has no effect unless AVB_ENABLE_DEBUG is defined.
+- */
+-#define avb_assert_not_reached()         \
+-  do {                                   \
+-    avb_fatal("assert_not_reached()\n"); \
+-  } while (0)
+-
+ /* Print functions, used for diagnostics.
+  *
+  * These have no effect unless AVB_ENABLE_DEBUG is defined.
+@@ -85,7 +76,6 @@ extern "C" {
+   } while (0)
+ #else
+ #define avb_assert(expr)
+-#define avb_assert_not_reached()
+ #define avb_debug(message, ...)
+ #endif
+ 
+diff --git a/lib/libavb/avb_vbmeta_image.c b/lib/libavb/avb_vbmeta_image.c
+index 44d75fda322..575bc71f1b3 100644
+--- a/lib/libavb/avb_vbmeta_image.c
++++ b/lib/libavb/avb_vbmeta_image.c
+@@ -4,12 +4,84 @@
+  */
+ 
+ #include "avb_vbmeta_image.h"
++
+ #include "avb_crypto.h"
++#include "avb_mldsa.h"
+ #include "avb_rsa.h"
+ #include "avb_sha.h"
+ #include "avb_util.h"
+ #include "avb_version.h"
+ 
++static AvbVBMetaVerifyResult image_verify_rsa(
++    const AvbVBMetaImageHeader* h,
++    const uint8_t* authentication_block,
++    const uint8_t* auxiliary_block,
++    const uint8_t* computed_hash) {
++  int verification_result;
++
++  if (avb_safe_memcmp(authentication_block + h->hash_offset,
++                      computed_hash,
++                      h->hash_size) != 0) {
++    avb_error("Hash does not match!\n");
++    return AVB_VBMETA_VERIFY_RESULT_HASH_MISMATCH;
++  }
++
++  verification_result =
++      avb_rsa_verify(h->algorithm_type,
++                     auxiliary_block + h->public_key_offset,
++                     h->public_key_size,
++                     authentication_block + h->signature_offset,
++                     h->signature_size,
++                     authentication_block + h->hash_offset,
++                     h->hash_size);
++
++  if (verification_result == 0) {
++    return AVB_VBMETA_VERIFY_RESULT_SIGNATURE_MISMATCH;
++  }
++
++  return AVB_VBMETA_VERIFY_RESULT_OK;
++}
++
++static AvbVBMetaVerifyResult image_verify_mldsa(
++    const AvbVBMetaImageHeader* h,
++    const uint8_t* header_block,
++    const uint8_t* authentication_block,
++    const uint8_t* auxiliary_block) {
++  AvbMLDSAPrehashCtx ctx;
++
++  if (!avb_mldsa_prehash_init(&ctx,
++                              h->algorithm_type,
++                              auxiliary_block + h->public_key_offset,
++                              h->public_key_size,
++                              NULL,
++                              0)) {
++    return AVB_VBMETA_VERIFY_RESULT_SIGNATURE_MISMATCH;
++  }
++
++  avb_mldsa_prehash_update(&ctx, header_block, sizeof(AvbVBMetaImageHeader));
++  if (h->auxiliary_data_block_size > 0) {
++    avb_mldsa_prehash_update(
++        &ctx, auxiliary_block, h->auxiliary_data_block_size);
++  }
++
++  uint8_t message_representative[AVB_MLDSA_MU_BYTES];
++  if (!avb_mldsa_prehash_finalize(&ctx, message_representative)) {
++    return AVB_VBMETA_VERIFY_RESULT_SIGNATURE_MISMATCH;
++  }
++
++  if (!avb_mldsa_verify_message_representative(
++          h->algorithm_type,
++          auxiliary_block + h->public_key_offset,
++          h->public_key_size,
++          authentication_block + h->signature_offset,
++          h->signature_size,
++          message_representative)) {
++    return AVB_VBMETA_VERIFY_RESULT_SIGNATURE_MISMATCH;
++  }
++
++  return AVB_VBMETA_VERIFY_RESULT_OK;
++}
++
+ AvbVBMetaVerifyResult avb_vbmeta_image_verify(
+     const uint8_t* data,
+     size_t length,
+@@ -18,13 +90,12 @@ AvbVBMetaVerifyResult avb_vbmeta_image_verify(
+   AvbVBMetaVerifyResult ret;
+   AvbVBMetaImageHeader h;
+   uint8_t* computed_hash;
+-  const AvbAlgorithmData* algorithm;
++  size_t algorithm_hash_size;
+   AvbSHA256Ctx sha256_ctx;
+   AvbSHA512Ctx sha512_ctx;
+   const uint8_t* header_block;
+   const uint8_t* authentication_block;
+   const uint8_t* auxiliary_block;
+-  int verification_result;
+ 
+   ret = AVB_VBMETA_VERIFY_RESULT_INVALID_VBMETA_HEADER;
+ 
+@@ -134,14 +205,14 @@ AvbVBMetaVerifyResult avb_vbmeta_image_verify(
+   }
+ 
+   /* Ensure algorithm field is supported. */
+-  algorithm = avb_get_algorithm_data(h.algorithm_type);
+-  if (!algorithm) {
++  algorithm_hash_size = avb_get_algorithm_hash_size(h.algorithm_type);
++  if (algorithm_hash_size == SIZE_MAX) {
+     avb_error("Invalid or unknown algorithm.\n");
+     goto out;
+   }
+ 
+   /* Bail if the embedded hash size doesn't match the chosen algorithm. */
+-  if (h.hash_size != algorithm->hash_len) {
++  if (h.hash_size != algorithm_hash_size) {
+     avb_error("Embedded hash has wrong size.\n");
+     goto out;
+   }
+@@ -165,6 +236,8 @@ AvbVBMetaVerifyResult avb_vbmeta_image_verify(
+       avb_sha256_update(
+           &sha256_ctx, auxiliary_block, h.auxiliary_data_block_size);
+       computed_hash = avb_sha256_final(&sha256_ctx);
++      ret = image_verify_rsa(
++          &h, authentication_block, auxiliary_block, computed_hash);
+       break;
+     /* Explicit fall-through: */
+     case AVB_ALGORITHM_TYPE_SHA512_RSA2048:
+@@ -176,36 +249,21 @@ AvbVBMetaVerifyResult avb_vbmeta_image_verify(
+       avb_sha512_update(
+           &sha512_ctx, auxiliary_block, h.auxiliary_data_block_size);
+       computed_hash = avb_sha512_final(&sha512_ctx);
++      ret = image_verify_rsa(
++          &h, authentication_block, auxiliary_block, computed_hash);
++      break;
++    /* Explicit fall-through: */
++    case AVB_ALGORITHM_TYPE_MLDSA65:
++    case AVB_ALGORITHM_TYPE_MLDSA87:
++      ret = image_verify_mldsa(
++          &h, header_block, authentication_block, auxiliary_block);
+       break;
+     default:
+       avb_error("Unknown algorithm.\n");
+       goto out;
+   }
+ 
+-  if (avb_safe_memcmp(authentication_block + h.hash_offset,
+-                      computed_hash,
+-                      h.hash_size) != 0) {
+-    avb_error("Hash does not match!\n");
+-    ret = AVB_VBMETA_VERIFY_RESULT_HASH_MISMATCH;
+-    goto out;
+-  }
+-
+-  verification_result =
+-      avb_rsa_verify(auxiliary_block + h.public_key_offset,
+-                     h.public_key_size,
+-                     authentication_block + h.signature_offset,
+-                     h.signature_size,
+-                     authentication_block + h.hash_offset,
+-                     h.hash_size,
+-                     algorithm->padding,
+-                     algorithm->padding_len);
+-
+-  if (verification_result == 0) {
+-    ret = AVB_VBMETA_VERIFY_RESULT_SIGNATURE_MISMATCH;
+-    goto out;
+-  }
+-
+-  if (h.public_key_size > 0) {
++  if (ret == AVB_VBMETA_VERIFY_RESULT_OK && h.public_key_size > 0) {
+     if (out_public_key_data != NULL) {
+       *out_public_key_data = auxiliary_block + h.public_key_offset;
+     }
+@@ -214,8 +272,6 @@ AvbVBMetaVerifyResult avb_vbmeta_image_verify(
+     }
+   }
+ 
+-  ret = AVB_VBMETA_VERIFY_RESULT_OK;
+-
+ out:
+   return ret;
+ }
+diff --git a/lib/libavb/avb_version.h b/lib/libavb/avb_version.h
+index e6f7798769d..65d1554e490 100644
+--- a/lib/libavb/avb_version.h
++++ b/lib/libavb/avb_version.h
+@@ -18,7 +18,7 @@ extern "C" {
+ 
+ /* The version number of AVB - keep in sync with avbtool. */
+ #define AVB_VERSION_MAJOR 1
+-#define AVB_VERSION_MINOR 3
++#define AVB_VERSION_MINOR 4
+ #define AVB_VERSION_SUB 0
+ 
+ /* Returns a NUL-terminated string for the libavb version in use.  The
+diff --git a/lib/libavb/crypto/mldsa_impl.c b/lib/libavb/crypto/mldsa_impl.c
+new file mode 100644
+index 00000000000..97f9424a7b8
+--- /dev/null
++++ b/lib/libavb/crypto/mldsa_impl.c
+@@ -0,0 +1,57 @@
++// SPDX-License-Identifier: MIT
++/*
++ * Copyright (C) 2025 The Android Open Source Project
++ */
++
++#include "../avb_mldsa.h"
++#include "../avb_sysdeps.h"
++#include "../avb_util.h"
++
++bool avb_mldsa_prehash_init_impl(AvbMLDSAPrehashCtx* ctx,
++                                 AvbAlgorithmType algorithm,
++                                 const uint8_t* key,
++                                 size_t key_num_bytes,
++                                 const uint8_t* context,
++                                 size_t context_len) {
++  (void)ctx;
++  (void)algorithm;
++  (void)key;
++  (void)key_num_bytes;
++  (void)context;
++  (void)context_len;
++  avb_error("ML-DSA prehashing not implemented.\n");
++  return false;
++}
++
++void avb_mldsa_prehash_update(AvbMLDSAPrehashCtx* ctx,
++                              const uint8_t* data,
++                              size_t data_len) {
++  (void)ctx;
++  (void)data;
++  (void)data_len;
++}
++
++bool avb_mldsa_prehash_finalize(AvbMLDSAPrehashCtx* ctx,
++                                uint8_t out_msg_rep[AVB_MLDSA_MU_BYTES]) {
++  (void)ctx;
++  (void)out_msg_rep;
++  avb_error("ML-DSA prehashing not implemented.\n");
++  return false;
++}
++
++bool avb_mldsa_verify_message_representative_impl(
++    AvbAlgorithmType algorithm,
++    const uint8_t* key,
++    size_t key_num_bytes,
++    const uint8_t* sig,
++    size_t sig_num_bytes,
++    const uint8_t msg_rep[AVB_MLDSA_MU_BYTES]) {
++  (void)algorithm;
++  (void)key;
++  (void)key_num_bytes;
++  (void)sig;
++  (void)sig_num_bytes;
++  (void)msg_rep;
++  avb_error("ML-DSA verification not implemented.\n");
++  return false;
 +}
 
 -- 
