@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F7D0606A31A
-	for <u-boot@archiver.kernel.org>; Fri, 23 Oct 2026 22:18:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5CF97606A31A
+	for <u-boot@archiver.kernel.org>; Fri, 23 Oct 2026 22:18:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=CXdzB+w2;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=O9RTdU7z
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=UrGYT4XT;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=I+NLRqO0
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5D49E40AB4;
-	Fri, 23 Oct 2026 22:18:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2B82181696;
+	Fri, 23 Oct 2026 22:18:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CljuuMjd9sf1; Fri, 23 Oct 2026 22:18:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9CC2F40ABC
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792793934;
-	b=JbwxuQcd6sfAoANNm3cSz1LghbOJBgaw/N629Qmccadsnplm9sKDiIe5JbLVmvv5h9vm
-	 MtEeKeLHc3x5S9b3H/NeoSUe+qrpjoXInsYZSxtD8C9gX5J6sOUoImMZ3L5QLAuLcTdKW
-	 JTr19ezQjFCL+zjZXFSnX8ans5L3DeXrQeJJ8YvnUzfSUqvQEykNh7U3JnG1VoGX4n+vK
-	 ZvOHtAxOPNMydip539CU6Krx7ggRBHPdhng4OVsIayUw3jOUrgmYZOmxy6cSSjfAAR2Wk
-	 yfuEOF+CfCrL5CXQlizIBjD0fBaNYt8hU3aW8nUGlkKPBO13YEUIttvT527LMAMPDfw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GzBsBSSOwxll; Fri, 23 Oct 2026 22:18:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 40DA98169A
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792793938;
+	b=Y9KpH1+apVnydrabvKdtA1txVqe7hCjZ9pSmmNpbNElMHPrQwiTwlnf8NacyYzrj8aFE
+	 zjj3vZTWh8q/+bHNgaQsUlThOIwJHl15PqOuPxPZpdMhcQVMDReO27BAD/t2Tm84M0BWM
+	 tfW393Tm+mgUGSkHzCgyxLztN4ys+qeXLrc6CXsNPM5cIBGzGVe/IhELR0IAq45xRMBbH
+	 5s7gDK3EfPeVT4ZV3jmCR+4mnN5fT97iC0uqZR4Xf6ZkmTY1k8Rps6MVi7TpE9Zdz8/QZ
+	 YWxC+1EhflkmNEa0kpqAyuFklgXnQFFJZE1oiJi32vIiPEL3MB0Wjv9anuR6pbC+KIw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792793934;
+	c=relaxed/relaxed; t=1792793938;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,101 +32,99 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=sDaNkgRGFwFmKDvq/EAoc3JwKGtCkl9xxlfAP01fhWs=;
-	b=dvmSuNA5ofLGpY34OAH6d0gYw0ax5eg+R+wzIQrdNX2LdKXy6TH7on80r9umsoqcmtsT
-	 PfGhahYADCbNzKgT0su4nyGn+nuxtka2a7HjWl/mATBjRUinyi2TtQWLptsMi8poUYaaa
-	 Z3zHm/FoCEDBNF+JHEUqU2NZzlGzrg44Jcgp1817WhW/PUTbKyNy4O2qaDhVkJTJV1/EK
-	 Qi7AFaQ/eGTlqwhNX5+oJGlcDxns1LXEabl2hXOSpRgZIvrxIrULc4q9HZKD7XJFRx+HG
-	 fFndkH3i+pt2qaUqE5/at3RMM4dnEPSaDniRdmjnoKbBIQE/wEAeaB2kFcQ68GWVJ0g==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=C7qjAgyKXAXRQdzS80eYoVzeXnkLd2ByTYUBCB7KpT8=;
+	b=L//rXM2RVJZEDfmzmKxWaLeAtQm3U8sh8ivqeRzVCEmgeODHMA/ONThYWR3fBvCGEEVW
+	 i9TaOgH/MAlruTctlf82wgMA7d3YGjq2Jxw326XU1LaDaZylI/dSODY0Rk/UJRKKqkZTz
+	 eoDfA7XCox+ZhlsLVU/MSUOGkv9CQxuPfkO4Hw2uwdosP4fMFzvN9YA/LapsdXrwcabGW
+	 pCE2KHWQVPTFsvlOnfTooJXVDy1kq15KrDOG8lyK6N7f1Otd8+3SULZNZo5EaP2oCIIMC
+	 5nh8hcP2UbYAVkjKDJQEaf9j3s77QPY1goh7d5H0HoIgRLvMFtSlQjo9DbgU2v8KzCg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792793934;
-	bh=sDaNkgRGFwFmKDvq/EAoc3JwKGtCkl9xxlfAP01fhWs=;
+	d=lists.u-boot-project.org; s=default; t=1792793938;
+	bh=C7qjAgyKXAXRQdzS80eYoVzeXnkLd2ByTYUBCB7KpT8=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=CXdzB+w2DOutH/Nah2EN31pCZvFYDmUW7M0xjCEcjaxHqaWid8u6NrKVrfr5mPrNp
-	 EO9jB8yYjxrACKHj2nzavaX4WY+bYFNKc8gx4rFBXrJwugXTouHgeoQr7M/mng0k4L
-	 Mo3ZIh+dV0WtFo3wdZyFJonwkHQ3qu8aRlKKL/Lj3wXFBAhCSQh3mOyMhBuLrZlgKP
-	 2KpZ6MDXrue0qBVRclXww0LozYQiKNE2ip7eL76i9pTHv68uh4ZMfPeQDiWruESx4e
-	 Hej6c/aUfRQapezM42AItQSdmky6unydTQYy6KEBGz0mfUj3UXdGZEXJoui6FayuOa
-	 HsMioZtv7XEGQ==
+	b=UrGYT4XT2awsYM4tl65krIOaTU+qNSGBUqm6QyzFIPxpbx4kP8OpQY5J3dDlmqjJL
+	 PyAdSUXyyqT8bXqijjtOFTvu4PiQgEQiAVkQcJIRUs2g1upYTzpPQDbY+ajDNzwTOD
+	 FPO6b0h2ZqHFWnPefMU1DOHJFyrXAQ6E01D9bazpHgzopgO2hvC8cxn3o+wHM1Wx2H
+	 50hPnzyDwXnfqV17RxUQpSoAN/ZG/ntnAwIiIC91G4S39zCSd1Ctp+uoA3KPmhxxVU
+	 MHwnltna5V1IJRKwIZ8Tjy7x8vTqPs9fry8SYwEUOV0natT0Df0CAYDpFdesgVI699
+	 yTaqoI6uWDJ6Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9CC2F40ABC;
-	Fri, 23 Oct 2026 22:18:54 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 71A1C79F
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 22:18:49 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 40DA98169A;
+	Fri, 23 Oct 2026 22:18:58 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id DD7A279F
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 22:18:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 6F79240488
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 22:18:49 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id CEEE760A7E
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 22:18:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BDWoar7lLChZ for <u-boot@lists.u-boot-project.org>;
- Fri, 23 Oct 2026 22:18:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org BDF264016D
-Authentication-Results: smtp2.osuosl.org; arc=none
- smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792793928;
- b=CYvBuVhSYyLfjKpalw8Zp3eGZzYDHK+BgY1/6kZ+Hf11HAUyVFYdTVofA57t7JTgVLWS
- VdScaZ75Yslc9jjr/z64SWspHvrgPFS6P6mepla5LiBeoX040JqOFBuxl3X6p+HsUgYVk
- RXAkmVAkl4r9XvX1TIMNti20K+Rb8fMurkXKC4aJetQsr43o4noyj5gHzsj0IclFrc6vl
- dcSMrOGXN1MHjlNmyKsHI35jhnUZ+HQG4CdP6pMVq+Nza6gnHLHs/tQwwPR6g0BgJtvCu
- 4MFGliGiZ2Da6t1NC8SiAByOM8dNiD+Y/8LX2uV4FWzQ23zLWQZNsuzxkDkxJLnvH+A==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cZBSfUusasSw for <u-boot@lists.u-boot-project.org>;
+ Fri, 23 Oct 2026 22:18:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B96BC6065A
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=172.105.4.254
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792793931;
+ b=augQMZ7Nn1PewV1HRpsIAdAjRqLdysYjwfuV0lpi/Ht6yE3rIaDiZtHR4eecLaSomouh
+ IO/4dcZq9UDc9NE2lVsI59a0utGhRAaGoiQz5yxnwSPHElCvlVrmdTtRCLq0me3Az5w5L
+ 7ojynxNzc1hE8Id8fwRj7nEdHG0VbKaMOpXoPdxnPvkAXnxy4DUXozIJRYpNlVT1b62TM
+ NBf+U59u9uQoU3dDs25pwjCnhwtQLVL9HI2pPxhNQs0mjJuY1rSi6ZdobFGozq7QgD6lx
+ po19VrlIZwwlqaG+X+19qTTcTcBc1sotkaIL5e8cMxdJ5/bJsK3pBPBhqLuogFoTluA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792793928;
+ c=relaxed/relaxed; t=1792793931;
  h=Received-SPF:Received:Received:DKIM-Signature:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=sDaNkgRGFwFmKDvq/EAoc3JwKGtCkl9xxlfAP01fhWs=;
- b=H0Dc0Gv99+pFXuVtXrT/+Sri0fLkkSRaN7k54IfQNiu8j8AgjWF13rBU3ME9xSHTVh3R
- uqeZu52Slft+X4KUkD0xFJ+Qq2zDF33pulM2RWhptF2lPG8t3rKlSt9ekpcvkTeneT+bI
- G1+e/n9Rutnv4lffX142rZDSAgDWxYOuQbsHCZM3zsquZerhnK6gyyGeTeQ61FtfABvqa
- PvnntQwYFZr6jN+7spOOvXJkt+hrVz0naPRpLY18/4SPuApDQnDBTR92nQxA8/b3dyQ55
- OcOcUOsDVGtcRb+jAxBq9VhkgwfFKdRAqAMl+MF+4/iwBm5sAxYbNIrXrqKQwSSnGsQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=C7qjAgyKXAXRQdzS80eYoVzeXnkLd2ByTYUBCB7KpT8=;
+ b=LyQ2Hpe8eQHn2DGe2RjdXseclhYPQGRX/d9ZY3CkhSbeJqAF2GRRV4PaCEnuKENl4VUN
+ hgCwIF+zMkiyrlzM1UM2abOyTDuXq7IhCIrETOYBOMYRyL9co1y+46aL40BzAD2UbWpaV
+ fjzeYLQ0Ken+jieuVffNvPl3w2+hoLxg8TPvmgG3fv4s9o0MNQRBvBbQgFf+y8XqSnSCq
+ Fh9OMY0GKJ+zCniXD6oKu+TzA3RfGKrrCK1p7clOS/Kb3/8TcvDGfCpkqGIms+k1vz3nF
+ 4rsvJOJusW6AhziG2TLP0ubZpBJN1LJAlW4ghwROm1e1xa8VLu9XyMKLeVzlfxcuJXg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=O9RTdU7z; 
- arc=none smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
- envelope-from=linusw@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.s=k20260515 header.b=I+NLRqO0; 
+ arc=none smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org; envelope-from=linusw@kernel.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=O9RTdU7z
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp2.osuosl.org (Postfix) with ESMTPS id BDF264016D
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 22:18:48 +0000 (UTC)
+ header.a=rsa-sha256 header.s=k20260515 header.b=I+NLRqO0
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B96BC6065A
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 22:18:50 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id B03ED6022B;
+ by tor.source.kernel.org (Postfix) with ESMTP id C1A3F60A54;
+ Fri, 23 Oct 2026 22:18:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6ECA1F01825;
  Fri, 23 Oct 2026 22:18:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CAFAA1F01825;
- Fri, 23 Oct 2026 22:18:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1792793927;
- bh=sDaNkgRGFwFmKDvq/EAoc3JwKGtCkl9xxlfAP01fhWs=;
+ s=k20260515; t=1792793929;
+ bh=C7qjAgyKXAXRQdzS80eYoVzeXnkLd2ByTYUBCB7KpT8=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=O9RTdU7zJVa72zxzvTgDrvYOrd1PamV0bj8ePw3WvrI14PhigXIgln3iF/VXmS6b2
- l3qqGgbfyJQ5COx6abVSphQLVEMynwcUeqg/gPQNgL+j21hqTunmLbiColoNpBdj85
- GuOzEmYyN3Ep231BJAb8EFgWHw6T9KwfhCL1XLu1brS7sfmLujfSYYG2pdPQdcIUGX
- HKt1BDWs2KSZpuzvUw2aLFxrC7J5i81QbZYLQ8iPSKCnSfr3ALOCBFjcrT0fLhY0ft
- FfUammGuy/Sb4CVY+8hm/EooMALgyTfyuWXg9j9Ov9wSpMhOLKUkWFi2X4G9euKp+I
- nKc8v7sdqJ5sg==
+ b=I+NLRqO04ek3GqaZyF50MXbg5ioF13QEaQtL8pFhVjLCDmAecP0NMLJ8URNjR2ZLR
+ RUyi9ccy1Tg8No8BFyYvDO19U2yQkVD1/n9jpppPUGt+e29grR1L3byK9s8xIVy2AG
+ etqqKjoPle/0Rdm5ev6Cwcs09DzgR2jniWs4zR91HQmaSHaulRkBcwedEPWW8fklgO
+ LYZShbm7mvQ4HQZYqxtDyNxmXhoxyrUV2yrr3jF34czEhcFRHmBZxS+kzqv6Dh/qKg
+ uubytS+TNxAXlRA3JEnj8D9Cshq9dHvhDEqT1Oy53jGuuqHsRQb/nJHA32wTQRgjUR
+ ZQHaJj64mmxfA==
 From: Linus Walleij <linusw@kernel.org>
-Date: Sat, 24 Oct 2026 00:18:34 +0200
-Subject: [PATCH v8 7/8] ARM: dts: ux500: Harmonize GPIO key names
+Date: Sat, 24 Oct 2026 00:18:35 +0200
+Subject: [PATCH v8 8/8] arm: u8500: Package Stemmy device trees in FIT
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261024-ux500-external-sdcard-v8-7-badcdf6db2ea@kernel.org>
+Message-Id: <20261024-ux500-external-sdcard-v8-8-badcdf6db2ea@kernel.org>
 References: <20261024-ux500-external-sdcard-v8-0-badcdf6db2ea@kernel.org>
 In-Reply-To: <20261024-ux500-external-sdcard-v8-0-badcdf6db2ea@kernel.org>
 To: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
@@ -147,52 +145,153 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-19.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-U-Boot want to use the volume down key for activating fastboot mode,
-however the code there relies on using the key label, and this
-differs betweem Golden and the other devices, so harmonize this
-by using the same label as the other devices.
+Build all seven supported Samsung Ux500 device trees into the FIT
+appended to Stemmy U-Boot. Select the appropriate configuration at
+runtime from the machine ID passed by the Samsung firmware. Codina
+and Codina TMO share a machine ID, so distinguish Codina TMO by its
+board ID.
+
+Keep the multi-DTB FIT selection, default device tree and device tree
+list in stemmy_defconfig. This leaves the base U8500 platform available
+to non-Samsung devices (non-Stemmy) using their own board, defconfig
+and device tree selection.
+
+Print the firmware machine and board IDs to aid diagnostics and future
+machine ID mappings.
 
 Signed-off-by: Linus Walleij <linusw@kernel.org>
-
-[ upstream commit: 18fb6f060ebaf10aa69f7411868dcde376c528c2 ]
 ---
- dts/upstream/src/arm/st/ste-ux500-samsung-golden.dts | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ board/ste/stemmy/stemmy.c | 77 ++++++++++++++++++++++++++++++++++++++++++++---
+ configs/stemmy_defconfig  |  2 ++
+ 2 files changed, 74 insertions(+), 5 deletions(-)
 
-diff --git a/dts/upstream/src/arm/st/ste-ux500-samsung-golden.dts b/dts/upstream/src/arm/st/ste-ux500-samsung-golden.dts
-index d4f364ec8685..1bb667300ed3 100644
---- a/dts/upstream/src/arm/st/ste-ux500-samsung-golden.dts
-+++ b/dts/upstream/src/arm/st/ste-ux500-samsung-golden.dts
-@@ -391,21 +391,21 @@
- 		label = "GPIO Buttons";
+diff --git a/board/ste/stemmy/stemmy.c b/board/ste/stemmy/stemmy.c
+index 66330184af86..8526deeb29bc 100644
+--- a/board/ste/stemmy/stemmy.c
++++ b/board/ste/stemmy/stemmy.c
+@@ -21,6 +21,11 @@ static ulong fw_atags __section(".data");
+ static const struct tag *fw_atags_copy;
+ static uint fw_atags_size;
  
- 		volume-up {
--			label = "Volume Up";
-+			label = "VOL+";
- 			/* GPIO67 (VOL_UP) */
- 			gpios = <&gpio2 3 GPIO_ACTIVE_LOW>;
- 			linux,code = <KEY_VOLUMEUP>;
- 		};
++#define SBL_BOARD "board_id="
++#define SBL_LCDTYPE "lcdtype="
++static ulong board_id;
++static ulong lcdtype;
++
+ void save_boot_params(ulong r0, ulong r1, ulong r2, ulong r3)
+ {
+ 	fw_mach = r1;
+@@ -40,6 +45,70 @@ static const struct tag *fw_atags_get(void)
+ 	return tags;
+ }
  
- 		volume-down {
--			label = "Volume Down";
-+			label = "VOL-";
- 			/* GPIO92 (VOL_DOWN) */
- 			gpios = <&gpio2 28 GPIO_ACTIVE_LOW>;
- 			linux,code = <KEY_VOLUMEDOWN>;
- 		};
++static ulong fw_board_id_get(void)
++{
++	const struct tag *t, *tags = fw_atags_get();
++	const char *str;
++
++	if (!tags)
++		return 0;
++
++	for_each_tag(t, tags) {
++		if (t->hdr.tag != ATAG_CMDLINE)
++			continue;
++
++		str = strstr(t->u.cmdline.cmdline, SBL_BOARD);
++		if (str)
++			return simple_strtoul(str + strlen(SBL_BOARD), NULL, 10);
++	}
++
++	return 0;
++}
++
++int board_fit_config_name_match(const char *name)
++{
++	const char *dt_name;
++
++	switch (fw_mach) {
++	case 5000:
++		dt_name = "ste-ux500-samsung-janice";
++		break;
++	case 3296:
++	case 5002:
++		dt_name = "ste-ux500-samsung-gavini";
++		break;
++	case 5003:
++		switch (fw_board_id_get()) {
++		case 0x101:
++		case 0x102:
++		case 0x103:
++		case 0x104:
++		case 0x105:
++		case 0x106:
++		case 0x107:
++			dt_name = "ste-ux500-samsung-codina-tmo";
++			break;
++		default:
++			dt_name = "ste-ux500-samsung-codina";
++			break;
++		}
++		break;
++	case 5006:
++		dt_name = "ste-ux500-samsung-kyle";
++		break;
++	case 5008:
++		dt_name = "ste-ux500-samsung-golden";
++		break;
++	case 5009:
++		dt_name = "ste-ux500-samsung-skomer";
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return strcmp(name, dt_name);
++}
++
+ int dram_init(void)
+ {
+ 	const struct tag *t, *tags = fw_atags_get();
+@@ -96,11 +165,6 @@ static void parse_serial(const struct tag_serialnr *serialnr)
+ 	env_set("serial#", serial);
+ }
  
- 		home {
--			label = "Home";
-+			label = "HOME";
- 			/* GPIO91 (HOME_KEY) */
- 			gpios = <&gpio2 27 GPIO_ACTIVE_LOW>;
- 			linux,code = <KEY_HOMEPAGE>;
+-#define SBL_BOARD "board_id="
+-#define SBL_LCDTYPE "lcdtype="
+-static ulong board_id = 0;
+-static ulong lcdtype = 0;
+-
+ static void parse_cmdline(const struct tag_cmdline *cmdline)
+ {
+ 	char *buf;
+@@ -181,6 +245,9 @@ static void copy_atags(const struct tag *tags)
+ int misc_init_r(void)
+ {
+ 	copy_atags(fw_atags_get());
++	printf("Firmware machine ID: %lu, board ID: %lu\n",
++	       fw_mach, board_id);
++
+ 	return 0;
+ }
+ 
+diff --git a/configs/stemmy_defconfig b/configs/stemmy_defconfig
+index c253780df2ef..7c9df043457e 100644
+--- a/configs/stemmy_defconfig
++++ b/configs/stemmy_defconfig
+@@ -12,6 +12,8 @@ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x100000
+ CONFIG_DEFAULT_DEVICE_TREE="st/ste-ux500-samsung-janice"
++CONFIG_OF_LIST="st/ste-ux500-samsung-codina st/ste-ux500-samsung-codina-tmo st/ste-ux500-samsung-gavini st/ste-ux500-samsung-golden st/ste-ux500-samsung-janice st/ste-ux500-samsung-kyle st/ste-ux500-samsung-skomer"
++CONFIG_MULTI_DTB_FIT=y
+ CONFIG_OF_UPSTREAM=y
+ CONFIG_SYS_BOOTM_LEN=0x4000000
+ CONFIG_SYS_LOAD_ADDR=0x100000
 
 -- 
 2.56.0
