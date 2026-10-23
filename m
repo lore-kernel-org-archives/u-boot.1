@@ -2,157 +2,160 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABBC6606A32A
-	for <u-boot@archiver.kernel.org>; Fri, 23 Oct 2026 19:00:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB9D6606A31D
+	for <u-boot@archiver.kernel.org>; Fri, 23 Oct 2026 19:00:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Z+BSc/a7;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=bIJ1yg3D
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=myHi+6nh;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=PAE3k2GX
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7FA9360A3D;
-	Fri, 23 Oct 2026 19:00:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BFDB860A54;
+	Fri, 23 Oct 2026 19:00:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Lv9g2rc9trJs; Fri, 23 Oct 2026 19:00:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 44AD46090B
+ id y1GEFRiX9d1q; Fri, 23 Oct 2026 19:00:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A5E6F6090B
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792782046;
-	b=e7zfpKlesNkidDBk8Rf0ncJYvjRvgkUmdpNFeajajPsJw7qbpdMOBEJABXEwdqesU00W
-	 teRZCLyCsAOWTTLHEcgZB4wKe19nMBBE/3smArFTMtR7DpJh9B+WYFB8YZ/L/5EobsrN2
-	 URil3vBPnzP+wmxPtoaSa7szuVLuE0p8iuKY7b3LTFHxtrS1p4FO1dm/fZX3V3fxmAPlH
-	 k5fZsMHIU+jsoUHZ+VHqCuPFoXP8ARkjyY3HeZbtdi9cCYRcIdOj+L81R5Hqpo/3Q9WUj
-	 P1EX3gSNYS4ViOn+jxDTFebteB/QZbEDqQ2ML0P7zgHWhF9tsgYLnGdojoouLZpwZsg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792782054;
+	b=Tak34+yPZlmm5wfQXjofc4zlipMgQ3S6XlWyQQHdgT8ZNp0LHxLTnhnX74pL7LQwK4zB
+	 YwRm38Zk0/c+dFNHjkrorm64GKaVAzgHvUFhE4wfb9FuHQKJLu8t0MJgO+LmLzZywpM3h
+	 a82ueGDXNAOx62p8IVAHgrFVVFxda4SIQeb9jAtbLqBg/ph3nHf5k3QmmQGe2wpoGmQGj
+	 Bt8DaGTT7wWcoFEQKqDHTQcjG0srwLK7DXP4e5pyMcFScUeGxphAgtbs43esqjs9IMh+2
+	 XbR1NTX931Qq7GGzKzRMUHBVCq8I9vkdtydf/tK0QVzBo8DshI6LbcTI79Y+k1F1u0g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792782046;
+	c=relaxed/relaxed; t=1792782054;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Subject:Date:
-	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=AS7KMY/inXJFPjUtn7kE4ZSZ1dxAEeJxLrGE2P15t0I=;
-	b=XkceJu8nsTJuFjsoFzmN1+8SNB5FI9kdnaIojyEbHeZPb6cCHPtOi/AzlLCyjvDc2P+X
-	 2wldfPFjlXmF8LfLZ1j8DvOCxpxlXbyOxHsbqL3WxfqMBaexnzinelpEBCllOPMUqCkgt
-	 IbXXueiPWu44bsR69dgdfDm6EI8L3r4KwnNoEFneMl52l5feslxGfXR/hXw6hLpUrNXnA
-	 LUh4GCYFIjlzSvvFKs3GYd3nXN6/HlPSZZ33BWnlxUUITfAGuNbrDySlv1xcNkWpI2fkB
-	 SzJZcuGkAIERRc6H5vuJJFfkliZzK9d4Sm1jFWljqCmWFH6h5lj0SxwT+oTtK26QgQg==
+	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=YROAXK+QBZ0pV6ljVAeiYsM5C7MC6Lr4UQ4pbgMy6QU=;
+	b=lYyX7+3uJnbI1p9V/V3nadCCdsYoXhCebFDpEzIyFga7Q13Hd1bV//ZsdiyinYK7ryzk
+	 rkWoGsS0zuy/3GC8IEB1saKYrimrpwgHSYMgvSZ2f9v5L8/yN67rgnvUYvbAwJvztGRni
+	 hi8UdqTmeI6xlG6THVZuwPzl2Q+zJctzMNtswtj8TX7L2kU78WwdMErrPe4AXkR1miZOe
+	 2YGZb34KDLGcs3c7EEPw6DUINgciIagVyT6gplRroDOEzgNBgu4wR4093PAYq1IfUFsIx
+	 lRln9eEiGAHrnK6p16Gu5Vg9mgNmklPjTKLJWUCO2JCxss5pPRI+v4naqlDbMkTflJw==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792782046;
-	bh=AS7KMY/inXJFPjUtn7kE4ZSZ1dxAEeJxLrGE2P15t0I=;
-	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Z+BSc/a7Or/o7ijr09naVCyNfFz+EFUEjKPVe/Gs5FK3ImUj/csnQ7A6OM7OxsXBH
-	 ZhB2gco7X2299rDGqOnTqKHiReL5FyREPTdeG6A6I9L1tv0q5Dq0oeFU5NcRBfUxIR
-	 E9Pl2HO9Wbdu9bB4ggJ/DUDPTzxJ1uJWD45a7WC5v9lL4VpsGDrhXjKSsFyLNjhvqD
-	 LDbOmuhrLplMq3GAw+tdHPZnzIymWWEcpALuJpwym0qF8UhSP6BIOLIp3gnub8eCJ5
-	 6MPAf3m9F2Wdvcra8KLmhUegzRtexE15TV0XjGgJJwb8nw+JP5ke315RUcA8sSNono
-	 AsMJd5/6rFIfg==
+	d=lists.u-boot-project.org; s=default; t=1792782054;
+	bh=YROAXK+QBZ0pV6ljVAeiYsM5C7MC6Lr4UQ4pbgMy6QU=;
+	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=myHi+6nhdwGvMObKrgMHZar2KR+In6JTGZ/YSut9Ihhx8eVO3EMktUVACKtULI63A
+	 3H4OW5eFtedla2auFP/iBM7IuJC5aSD/rAREh3LiL/QpIpqYwxyTsoYxfgAr7mW9bC
+	 kFvgkbhgDUPAXb2g9RN6WXFHS7SJ4T/KMbS8T1UH+i/p1r2/no9KwpIKtv/On1j3MG
+	 KkaaoPFQyJH+AH1o+nj0GXoXlVK/xCVFkz0FnLFRTpAUz/OAXm86wEZZFPjQt92639
+	 h6cLSUSZq8rYUMswwQQ6LX7KhmJN4jj5zMi0xTpJelaD7UDahUs8Yx6lDA/JJt59fk
+	 bwM9d+7xLft3g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 44AD46090B;
-	Fri, 23 Oct 2026 19:00:46 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 7CD8B388
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:00:45 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A5E6F6090B;
+	Fri, 23 Oct 2026 19:00:54 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6E304388
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:00:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 62CC44007C
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:00:45 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5F2A040A52
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:00:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id O5ZzVuI_LupV for <u-boot@lists.u-boot-project.org>;
- Fri, 23 Oct 2026 19:00:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 23A9E40061
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::329"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792782044;
- b=XkOabCgBfTA805S6KH0DoymwFu2W4xAFHCjS6licflhU0/XhA5LcTupF7vhibL06PVOc
- H1e2jVJa7btJYkkM02D089uiIs6JTAiA0YKogZxwASydjMwhGywFjPxyxlVpMz7EoLPWu
- MEIdMWCqiXYlDPx87rglcsJf9kcZjrrcW7PLjuOT5Mi7a24WGPYBpCsxOR0FnWKv4vOvU
- Nve4OEBij07sAIsBsE/AJbB/+jn9T+Nxm29zIOaqomcrhBHfv6dS5yTtXBebbISOwAO0E
- Lj/BVPoy7ZthO24YGegZrVwqefmVVrAIWC9FgLLkRZ1lQA1OsOpiDktRMBpca0vSg7w==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id l0pXsuA2kJb4 for <u-boot@lists.u-boot-project.org>;
+ Fri, 23 Oct 2026 19:00:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2D3DB4096C
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32d"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792782048;
+ b=XLqFGvhoF2EXRalUPs+Ws5UgeMCjH4JFQmkA7n7PrH8uzi9DISa1sCTiMZaJNxp4MlZS
+ 44V9nzMejyz7Jj3rD9qjbgpNn3t6Gb3k3EF3jJpUZ8MOtx4iWKwLH7ElLRiRAnM7yUrI/
+ 9BR5GBfgp9900JXkwJYmwudshDZHJm3E/mNbA5sgHK5UPzco3i7Kr5vajnzyCjcQhcqQF
+ Gm8BXVoe0kpFKNdr0RcXGn35dl4H3r7IZja8cOoqfczGGlrz5f3xFWs7ab1KmrYKtxcNN
+ 7Y2HDyOMXhp/M+2ZEGphZrp7Zt1ejsVFIN52rsOsOcQ5yWV1+/OKM+5zMsI4JyqWKFg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792782044;
+ c=relaxed/relaxed; t=1792782048;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:To:Subject:Date:Message-ID:X-Mailer:MIME-Version:
- Content-Transfer-Encoding;
- bh=AS7KMY/inXJFPjUtn7kE4ZSZ1dxAEeJxLrGE2P15t0I=;
- b=RD8uZqHGWlsHr1QvBfkdkSHuWJ48iJai58u1eLZXxI3bgPWcqItwo6RfWLxMi0RB4lAu
- YxxmfS7oEz366lnNKCl7AFH6klmVj1x/JcvfgqfUjmoJKvkc51fzOc4ki38hM1mzT0ZQr
- yyhvxPuusqS393gJnAfsm5VOwSnB+XnJ20d0jvMwDf7XDQXU9vXTkDCeIlNwKGFhXmA2U
- 5yJ/2YMZB0Bykx9fEE5vKuDvtNuoSd03iAfckm1XpHoGDy9T5V4UDWw4syi8XlLwlkR4z
- 78D9dj50KvR7rVr4ZMoKHyQCRlqZDoENnWsKYDYD3fJ10yxfGttN/aix3GNCxYJoc5g==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ From:To:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+ MIME-Version:Content-Transfer-Encoding;
+ bh=YROAXK+QBZ0pV6ljVAeiYsM5C7MC6Lr4UQ4pbgMy6QU=;
+ b=S9Y9pNehwduSHVTDGPV1KjVlEorKll4qpPtawTn/GuaCbaaZVQJJ813e6nOSV7k7ShYs
+ Y+4BFRbGnjid9NGE6Rv4oTJ7++GP1Cd3RU82FaEj1FcTLBP0RvBbDzZjXhmfncMG9f7Jh
+ eJTrZfz996PlymeVTYgzKADxLikijZK3A0iEbIi+sfjWpSnvCaqLIYsjQFZZMyRCsz/K/
+ Q0/+/RVGO9JwE0sVbuu/ojPpJVntI6afGGY79tcwnMQ7keOi77/7JxouxbHTeoi2lgL0E
+ q1lXMOUkmuah0oD7Yvbpf/5scuHElOcUEhrE/4lRzcDnj6qZYwUdfgrwqVKFmkSj0fQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=bIJ1yg3D; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::329"
+ header.s=20251104 header.b=PAE3k2GX; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32d"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::329; helo=mail-wm1-x329.google.com;
+ client-ip=2a00:1450:4864:20::32d; helo=mail-wm1-x32d.google.com;
  envelope-from=ansuelsmth@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=bIJ1yg3D
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 23A9E40061
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:00:43 +0000 (UTC)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4a140e7405dso11901395e9.3
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 12:00:43 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=PAE3k2GX
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2D3DB4096C
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 19:00:47 +0000 (UTC)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4a1698ea378so8647325e9.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 12:00:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792782041; x=1793386841;
+ d=gmail.com; s=20251104; t=1792782045; x=1793386845;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=AS7KMY/inXJFPjUtn7kE4ZSZ1dxAEeJxLrGE2P15t0I=;
- b=bIJ1yg3D27NdyEAV1FNmSiFM96wnd+PriECkuXP0EHJbuWkyTX9+szAThtPaWEfcO9
- u/suCTJLZ+pCSmLU93AU6Lc6DHELavU+u8GLHVUJ4CUC5DxhERY80O5hpfa22rrbtV5q
- SecLs/x+rFHJE9dYVI0mgqKNhrCLU/EQ2eF6l69HOghiCkJg+c+NnRw3NIB0TVjn6T/3
- g/IVMA0x7lZF5aBYcprXHB+O86bL9gouIzcmVIX8MQ/uG8SHVwBGC2E5oB49HB9uZuep
- WxQ+LzJAfVGMve3pRV7sEdMnydbogojJ76JTXbAIMDJo/uGB41M62qwh/CyfTGYHl0Yj
- I14w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792782041; x=1793386841;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=AS7KMY/inXJFPjUtn7kE4ZSZ1dxAEeJxLrGE2P15t0I=;
- b=Xt/B1xLfUGlKTAQ2v7SStSt8ZI9bXJvpQ+yAgW3IRFFUq+Tv1angxjQF8fpznWcKIN
- vbaHkGbb2emCkS4doR+X3HeIRt/noAnrukDBCuEi/FgqRPIA8Guu6+4mm32JiQlrL8CO
- Z/xcMIUi2eDfQ0yhHvfLwkDDT97dLIN5CTNhXCjTz+JYJ+4A1NQwt/x41wFpnxcwXyeB
- FkLa4HEtSgX4m4DMdtbKi/kEQ/8Mo5Mpm0kw2u8KhD4cFjypv6OE0O3/JGmUOtfLTUi6
- fi/jLp90LrV/KBBuPL6prq2Fu+nXvk3ePQ0B7pxwr8CjYaXr5ZoBvKUYPfkafE9GCTDf
- VyBw==
+ bh=YROAXK+QBZ0pV6ljVAeiYsM5C7MC6Lr4UQ4pbgMy6QU=;
+ b=PAE3k2GXtFe6GdTj/oi7ezOhAD/Vj0YgZ6xCiicnV+MLKq/dLG17/nsG+V0IxUXrGn
+ JsQwTjAEgYwveBNmfVbC6tSAswop21Zg4jg+RYDzc0ZlstYeRqbCFjcMjQDKopNIUS4k
+ MvJBPORZvkyyh5bRk6zWUgLUDM4afP1MIJANn7tgoFTsJFfXmJBRTCcfugARg83L+c9B
+ 5KKmDJXj4TlaIjAq+aRj0vPyQPygNy+50xDfGBa0BpAdOQ8EwoCQB7yCBqVRqGGyrzjl
+ RxWuZi78ilgZE2yuGVfKLhZfKfbGQgDKqk4IhcdnXbgCFRg8LSekrezgOIfG0LNQbPnp
+ Q+Ww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792782045; x=1793386845;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=YROAXK+QBZ0pV6ljVAeiYsM5C7MC6Lr4UQ4pbgMy6QU=;
+ b=E+Go+kLLqlN8Fmrnki6ZfpTiNnXRpq+hsw1/YPCamGPc+xKDmGuq1W4OTJ2Y+dX3WI
+ Jieuwyf8u8PLaoamfDtiKCHYRWazCSEF6UH9cpq+TH6Iq8EUVH1CF+ry/sLtzibiI4ZL
+ wDi7VXgoQxuTYC4kmwKefW7JbA4jcW9jKB9WIqXDOyZpeLPqv8bHqHccJEGYPjJdLcux
+ YsV0sjY4W6gviWQAy7v6h6L6jioZkoqAZAVL01zgGZDdbVIoZ554HNIsTaE11bmYEp31
+ RadurZy7o9d3w42UcTTA0vRdA9UOajiPDDbW1WKIUFb3qHfOTQpPtkbA/vk4OMKi1zfa
+ ywUw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzHt/uXSP5hu/mGD7Ro0duZRHCGttczx6oFzEoyA0U/18hqetpPdb8eDK2UVtt01bq3+ZQyaQs=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIOaeYgIKiDTligk/w+gYBS+LlUhtgMVgpUrKD/EkGH4oJPTKL/
- HehL2+5sx1/a5HX5i+IdwBt8y5zEhXTTWi2JRdxc0+Lz+cQ5Mtl9YDg5
-X-Gm-Gg: AYBFou1VO+lHzcO21boMzxJifFfORyJrPiKxEt22cG4rXehekp/A7zFdJmlPsICghaK
- Hq3i6kHD/o22tZaQd615XbjucGDABpsA9Oe0gA+gq964oAB64hZJqejeyg/C4n60zTqjsCtYTNJ
- /mICENPzC/4RKonuoSFayGzYdXPpfCBxtWUXKwDSZZn0Hi8bNuJsgAbwKpoaVYe76Ht4sh8/gcq
- atSYAsH2zXMh+fZoZ/hQ2gsSuqf5j0zZFEqRnxhOAdAa/vX1vaARAyWvawek76gr3qrx9yvvINt
- bF63MEGF72+g2YFWapfBGOPEcB4khMdkiqKfadt7GZa0pTRjAb6uczD0pztN5zkasbgsQ+IJ+j2
- CNVWRIoB3DU1cDlF80C2GJj3pVlbrlIrtUn0U2QNi+ULEbGze0IstQrdaPrCNrQpPp7yq1RiGPt
- +aQd+F+Grt1yMCUsRsR4zQ0QX54duoZZPnOfxIF1scVYnJC762J6CC18XhNUy4mW8jwW7OjIH4i
- wHzRFursn9k8EecuL7bT6S75B0jFEKpNNOiHXaT7601OCHuVMBzrFD5GWNHejH6zAFonVSY2sDY
- 9W0F1uP3UGg0aAln4vC8oFvykDT+jIHSKpT6tWar3fOPj3M2ihBoGikYItCsKBl1XzXERID4Wqb
- /faTiBw==
-X-Received: by 2002:a05:600c:a00b:b0:4a2:1a:a122 with SMTP id
- 5b1f17b1804b1-4a211c9c5f1mr49346665e9.9.1792782041317; 
- Fri, 23 Oct 2026 12:00:41 -0700 (PDT)
+ AKwUvBzsLElYxDu1Lu3DlghtTNJV9pkOE9V9F/d7jkEEMxCuoRk67pDza+qZsCGR8m4XfsqOiN9WVFU=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYLyKWLmvgnVUsBWUYun9SfXki1HWXQ6RkBaajT1ukxIoe/xsP5t
+ B4bOquyomxGYNc3y/0DQIrBlVlG6FUrSz2Bok4DdLq9YxrOlRJ2wvd06
+X-Gm-Gg: AYBFou2dSbYTenNr6Rt5JmkpKZJT60LSPtZcjNM3ZyxUiR3FR2pNuWo/yRw7XCEAZ8z
+ Blr19u7xeDcpRbDQGKeW7Qgbgu5bAsj7kamibR+38OvDhDu5Ml9Mk9juotGm89EboBqhsuHWjc/
+ SL74AcjetYX+e3uvbmhxR7Z75LlOrzvpW8pVFwhOPTgZoSDz5tCtNMLpmyAz4VNxHM8eoOsBNnz
+ g86Dj+Zev5pVTFaj4QIZUIY4bjVnNJ9q9dG/cI+78Qop+v2KFnPs/189E6WV2pHRoxQAV3vQE1t
+ ggDN7nBdd63V8fCdBogCIN1lsbwmmE5pI6UqsSXVXc9hk6O3aNP0T5jYDDaJ6Fu+9S9Ii1kqfKc
+ bgn36HukINHDQd6k3oP3XLpQDXWcXADu+rfWCTzeBijN16zWGEF1NGz5LZXDaV3WoFaG0FzGrLm
+ ZJu7pfoupY+rA4Ac2aKWn4jB0LjmuRFq+LnEcROwQCYheTbsv8W3zYpIJO5P1xvewZK0F6tLyyB
+ ZioshlN4zXGQ+jQf89NDaDS1iOGMO3WBq+kGPuKJe5t8ve8CtSkAWrs5bqYXXa2cBkBU/+H7HrX
+ +eK4PeA25jYwsChm9V+5W16m4NQahFV8NAj0E6bLkBOcb7jsczX2o9bF+enLVntuyYxQqCDRfHj
+ 0dmPhIQ==
+X-Received: by 2002:a05:600c:4204:b0:4a1:ac66:6059 with SMTP id
+ 5b1f17b1804b1-4a211cd4a3fmr32021545e9.26.1792782045286; 
+ Fri, 23 Oct 2026 12:00:45 -0700 (PDT)
 Received: from Ansuel-XPS24.localdomain (93-34-92-187.ip49.fastwebnet.it.
  [93.34.92.187]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4a35a0aa097sm2481275e9.3.2026.10.23.12.00.39
+ 5b1f17b1804b1-4a35a0aa097sm2481275e9.3.2026.10.23.12.00.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Oct 2026 12:00:40 -0700 (PDT)
+ Fri, 23 Oct 2026 12:00:44 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
@@ -174,11 +177,13 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
  Randolph Sapp <rs@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Martin Schwan <m.schwan@phytec.de>, u-boot@lists.u-boot-project.org
-Subject: [PATCH v9 0/8] misc: fs_loader: reorg and split to FS and FW loader +
- FIP loader
-Date: Fri, 23 Oct 2026 21:00:21 +0200
-Message-ID: <20261023190034.911023-1-ansuelsmth@gmail.com>
+Subject: [PATCH v9 2/8] misc: fs_loader: reorganize and split to FS loader and
+ FW UCLASS
+Date: Fri, 23 Oct 2026 21:00:23 +0200
+Message-ID: <20261023190034.911023-3-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261023190034.911023-1-ansuelsmth@gmail.com>
+References: <20261023190034.911023-1-ansuelsmth@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -193,176 +198,1057 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This series mainly rework the FS loader to permit reading firmware from
-container that are not exactly a readable filesystem.
+In preparation to the introduction of variant of the FS loader,
+reorganize and split the driver to generic fw_loader UCLASS and
+specific fs_loader function. Create a dedicated directory for the loader
+and move the internal structs and functions to a dedicated header file.
+While at it also drop some redundant check and rename some variables as we
+are updating the code for the UCLASS rework.
+Doc are renamed and updated to a more generic name and for the new UCLASS.
 
-Also splitting out the generic firmware loader infra from the
-filesystem-specific code will make adding new loader types easier.
+This will permit to reuse all the property and logic of FS loader
+with container that are not exactly a readable filesystem.
 
-One scenario is when a firmware is shipped in a FIP container as
-a generic blob with an UUID.
-
-FIP are mostly used on ARM in the context of ATF.
-In such context U-Boot is loaded as BL31 and the PHY firmware
-can't be stored in the FIT image for the kernel as U-Boot should
-not depend on the presence of the kernel to correctly enable PHY
-for Ethernet port.
-
-To handle such case the PHY firmware is stored in FIP with a
-predictable UUID.
-
-One example is with Airoha 8811H firmware where the FIP can
-have a blob with UUID "d39d2cf2-9bd0-3ca7-93e9-e71b4f9250b2".
-(generated from command "uuidgen -n @dns --md5 --name en8811h.bin")
-
-With these example DTS entry:
-
-fw_loader0: fip-loader {
-	bootph-all;
-	compatible = "u-boot,fip-loader";
-	phandlepart = <&mmc0 0>;
-	partoffset = <0x100>;
-};
-
-mdio {
-  en8811: ethernet-phy@f {
-    reg = <0xf>;
-    firmware-name = "d39d2cf2-9bd0-3ca7-93e9-e71b4f9250b2";
-    firmware-loader = <&fw_loader0>;
-  };
-};
-
-And PHY driver using the get_fw_loader_from_node() and the
-common request_firmware_into_buf() it's possible to
-load the PHY firmware transparently by just declaring
-the required entry in the DTS.
-
-get_fw_loader_from_node() is implemented to actual get the
-loader from DT. This was something that was already in mind
-from when the FS loader was implemented but then it was
-never implemented in favor of a single loader per device.
-
-The first patch is a minor fixup for something that probably
-won't ever happen.
-
-The second one is a good reworking of the FS and FW loader
-moving the internal struct to a dedicated header. (this is
-really to enforce what drivers should use and what
-driver should not mess with)
-
-Then there is the request_firmware_size() new OP to get only
-the size of the firmware. Useful for case where the firmware
-size is not always the same and change across different version.
-(the patter might be get size -> alloc buffer -> get firmware).
-
-Then the FIP loader as a basic parser of FIP. This only
-read the FIP header, loop all the entry and search for a
-matching UUID. If nothing is found then no firmware blob.
-Very simple implementation.
-
-This is being CI tested on [0]
-
-[0] https://github.com/u-boot/u-boot/pull/884
-
-Changes v9:
-- Drop FIP blob in favor of dynamic generation
-- Rename fs_loader to fw_loader
-- Add additional patch for offset validation
-- More use of lbaint_t
-- Handle reading 0 for UBI
-- Update MTD/UBI documentation and YAML conditions
-- Make generic_fw_loader_get_phandle_desc handling explicit
-Changes v8:
-- Address all the comments from Simon
-- Massively improve test coverage for both FS and FIP
-- Enable mmc node when needed for the tests
-- Change FIP implementation to follow FS one
-  (read up to buf size or end of entry size)
-  (complain when offset is bigger than size of entry)
-- Update related documentation for fw loader
-- Rebase on top of next
-Changes v7:
-- Add tests
-- Rebase on top of next
-- Fix compilation for vpl
-Changes v6:
-- Rework to generic FW loader UCLASS
-- Account for firmware offset in FIP loader
-- Add UBI example in documentation
-- Improve variables order
-Changes v5:
-- Fix unment dependency for config flag
-- Move request_firmware_size before FIP loader
-- Add documentation patch
-- Improve get_fw_loader_from_node() implementation
-- use min() instead of custom MIN()
-- Fix handling of some return value
-Changes v4:
-- Rebase on top of next
-Changes v3:
-- Add review tag where possible
-- Check blk_dread ret
-- Generalize mount_ubifs with generic_fw_loader_ubi_select
-- Fix some typo
-- Drop useless ubifs umount (nothing is mounted in FIP)
-Changes v2:
-- Better handle header include to fix compilation error
-  on some devices
-- Fix typo for ubifs fix commit
-
-Christian Marangi (8):
-  misc: fs_loader: fix ubifs not unmounted on dev_get_priv error
-  misc: fs_loader: reorganize and split to FS loader and FW UCLASS
-  misc: fw_loader: implement generic get_fw_loader_from_node()
-  misc: fs_loader: validate requested offset on reading file
-  misc: fw_loader: implement request_firmware_size() OP
-  doc: dtbinding: Update documentation for Generic Firmware loader
-  misc: fw_loader: introduce FIP loader driver
-  test: dm: Add test for FW Loader feature
-
- arch/sandbox/dts/test.dts                     |  38 ++
- configs/sandbox64_defconfig                   |   2 +
- configs/sandbox_defconfig                     |   2 +
- configs/sandbox_flattree_defconfig            |   2 +
- configs/sandbox_noinst_defconfig              |   1 +
- configs/sandbox_spl_defconfig                 |   2 +
- configs/sandbox_vpl_defconfig                 |   2 +
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+---
  ...irmware_loader.rst => firmware_loader.rst} |   6 +-
  doc/develop/driver-model/index.rst            |   2 +-
- doc/device-tree-bindings/misc/fs_loader.txt   |  48 --
- doc/device-tree-bindings/misc/fw_loader.yaml  | 112 ++++
- drivers/misc/Kconfig                          |  31 +
+ drivers/misc/Kconfig                          |   8 +
  drivers/misc/Makefile                         |   2 +-
- drivers/misc/fs_loader.c                      | 326 ----------
- drivers/misc/fw_loader/Makefile               |   5 +
- drivers/misc/fw_loader/fip_loader.c           | 558 ++++++++++++++++++
- drivers/misc/fw_loader/fs_loader.c            | 234 ++++++++
- drivers/misc/fw_loader/fw_loader-uclass.c     | 231 ++++++++
- drivers/misc/fw_loader/internal.h             | 100 ++++
+ drivers/misc/fs_loader.c                      | 328 ------------------
+ drivers/misc/fw_loader/Makefile               |   4 +
+ drivers/misc/fw_loader/fs_loader.c            | 175 ++++++++++
+ drivers/misc/fw_loader/fw_loader-uclass.c     | 188 ++++++++++
+ drivers/misc/fw_loader/internal.h             |  91 +++++
  include/dm/uclass-id.h                        |   2 +-
- include/fs_loader.h                           |  47 +-
- include/fw_loader.h                           |  42 ++
- test/dm/Makefile                              |   1 +
- test/dm/fw_loader.c                           | 218 +++++++
- test/py/tests/test_ut.py                      |  58 ++
- 25 files changed, 1647 insertions(+), 425 deletions(-)
+ include/fs_loader.h                           |  47 +--
+ include/fw_loader.h                           |  19 +
+ 12 files changed, 493 insertions(+), 379 deletions(-)
  rename doc/develop/driver-model/{fs_firmware_loader.rst => firmware_loader.rst} (95%)
- delete mode 100644 doc/device-tree-bindings/misc/fs_loader.txt
- create mode 100644 doc/device-tree-bindings/misc/fw_loader.yaml
  delete mode 100644 drivers/misc/fs_loader.c
  create mode 100644 drivers/misc/fw_loader/Makefile
- create mode 100644 drivers/misc/fw_loader/fip_loader.c
  create mode 100644 drivers/misc/fw_loader/fs_loader.c
  create mode 100644 drivers/misc/fw_loader/fw_loader-uclass.c
  create mode 100644 drivers/misc/fw_loader/internal.h
- create mode 100644 test/dm/fw_loader.c
 
+diff --git a/doc/develop/driver-model/fs_firmware_loader.rst b/doc/develop/driver-model/firmware_loader.rst
+similarity index 95%
+rename from doc/develop/driver-model/fs_firmware_loader.rst
+rename to doc/develop/driver-model/firmware_loader.rst
+index 630daf636f18..2d11a74d5e2f 100644
+--- a/doc/develop/driver-model/fs_firmware_loader.rst
++++ b/doc/develop/driver-model/firmware_loader.rst
+@@ -4,7 +4,7 @@
+ File System Firmware Loader
+ ===========================
+ 
+-This is file system firmware loader for U-Boot framework, which has very close
++This is firmware loader for U-Boot framework, which has very close
+ to some Linux Firmware API. For the details of Linux Firmware API, you can refer
+ to https://docs.kernel.org/driver-api/firmware/index.html.
+ 
+@@ -87,7 +87,7 @@ For example of getting DT phandle from /chosen and creating instance:
+ 	}
+ 
+ 	phandle = fdt32_to_cpu(*phandle_p);
+-	ret = uclass_get_device_by_phandle_id(UCLASS_FS_FIRMWARE_LOADER,
++	ret = uclass_get_device_by_phandle_id(UCLASS_FIRMWARE_LOADER,
+ 					     phandle, &dev);
+ 	if (ret)
+ 		return ret;
+@@ -145,7 +145,7 @@ instance:
+ 
+ .. code-block:: c
+ 
+-	ret = uclass_get_device_by_phandle_id(UCLASS_FS_FIRMWARE_LOADER,
++	ret = uclass_get_device_by_phandle_id(UCLASS_FIRMWARE_LOADER,
+ 					     phandle, &dev);
+ 	if (ret)
+ 		return ret;
+diff --git a/doc/develop/driver-model/index.rst b/doc/develop/driver-model/index.rst
+index 8e12bbd9366a..b2d46da4e239 100644
+--- a/doc/develop/driver-model/index.rst
++++ b/doc/develop/driver-model/index.rst
+@@ -15,7 +15,7 @@ subsystems
+    design
+    ethernet
+    fdt-fixup
+-   fs_firmware_loader
++   firmware_loader
+    i2c-howto
+    livetree
+    migration
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index 5f22bcb330ee..1cab469a3434 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -621,8 +621,12 @@ config MPC83XX_SERDES
+ 	help
+ 	  Support for serdes found on MPC83xx SoCs.
+ 
++config FW_LOADER_UCLASS
++	bool
++
+ config FS_LOADER
+ 	bool "Enable loader driver for file system"
++	select FW_LOADER_UCLASS
+ 	help
+ 	  This is file system generic loader which can be used to load
+ 	  the file image from the storage into target such as memory.
+@@ -630,8 +634,12 @@ config FS_LOADER
+ 	  The consumer driver would then use this loader to program whatever,
+ 	  ie. the FPGA device.
+ 
++config SPL_FW_LOADER_UCLASS
++	bool
++
+ config SPL_FS_LOADER
+ 	bool "Enable loader driver for file system in SPL"
++	select SPL_FW_LOADER_UCLASS
+ 	depends on SPL
+ 	help
+ 	  This is file system generic loader which can be used to load
+diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+index 9ddbe9cd1142..f138ff9126f1 100644
+--- a/drivers/misc/Makefile
++++ b/drivers/misc/Makefile
+@@ -36,7 +36,7 @@ obj-$(CONFIG_FSL_DEVICE_DISABLE) += fsl_devdis.o
+ obj-$(CONFIG_FSL_IFC) += fsl_ifc.o
+ obj-$(CONFIG_FSL_IIM) += fsl_iim.o
+ obj-$(CONFIG_FSL_SEC_MON) += fsl_sec_mon.o
+-obj-$(CONFIG_$(PHASE_)FS_LOADER) += fs_loader.o
++obj-$(CONFIG_$(PHASE_)FW_LOADER_UCLASS) += fw_loader/
+ obj-$(CONFIG_GATEWORKS_SC) += gsc.o
+ obj-$(CONFIG_GXP_EEPROM) += gxp_eeprom.o
+ obj-$(CONFIG_GDSYS_IOEP) += gdsys_ioep.o
+diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
+deleted file mode 100644
+index cd4695b08eea..000000000000
+--- a/drivers/misc/fs_loader.c
++++ /dev/null
+@@ -1,328 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+- /*
+- * Copyright (C) 2018-2019 Intel Corporation <www.intel.com>
+- *
+- */
+-
+-#define LOG_CATEGORY UCLASS_FS_FIRMWARE_LOADER
+-
+-#include <dm.h>
+-#include <env.h>
+-#include <errno.h>
+-#include <blk.h>
+-#include <fs.h>
+-#include <fs_loader.h>
+-#include <log.h>
+-#include <dm/device-internal.h>
+-#include <dm/root.h>
+-#include <linux/string.h>
+-#include <mapmem.h>
+-#include <malloc.h>
+-#include <spl.h>
+-
+-#ifdef CONFIG_CMD_UBIFS
+-#include <ubi_uboot.h>
+-#endif
+-
+-/**
+- * struct firmware - A place for storing firmware and its attribute data.
+- *
+- * This holds information about a firmware and its content.
+- *
+- * @size: Size of a file
+- * @data: Buffer for file
+- * @priv: Firmware loader private fields
+- * @name: Filename
+- * @offset: Offset of reading a file
+- */
+-struct firmware {
+-	size_t size;
+-	const u8 *data;
+-	const char *name;
+-	u32 offset;
+-};
+-
+-#ifdef CONFIG_CMD_UBIFS
+-static int mount_ubifs(char *mtdpart, char *ubivol)
+-{
+-	int ret = ubi_part(mtdpart, NULL);
+-
+-	if (ret) {
+-		debug("Cannot find mtd partition %s\n", mtdpart);
+-		return ret;
+-	}
+-
+-	return cmd_ubifs_mount(ubivol);
+-}
+-
+-static int umount_ubifs(void)
+-{
+-	return cmd_ubifs_umount();
+-}
+-#else
+-static int mount_ubifs(char *mtdpart, char *ubivol)
+-{
+-	debug("Error: Cannot load image: no UBIFS support\n");
+-	return -ENOSYS;
+-}
+-#endif
+-
+-static int select_fs_dev(struct device_plat *plat)
+-{
+-	int ret;
+-
+-	if (plat->phandlepart.phandle) {
+-		ofnode node;
+-
+-		node = ofnode_get_by_phandle(plat->phandlepart.phandle);
+-
+-		struct udevice *dev;
+-
+-		ret = device_get_global_by_ofnode(node, &dev);
+-		if (!ret) {
+-			struct blk_desc *desc = blk_get_by_device(dev);
+-			if (desc) {
+-				ret = fs_set_blk_dev_with_part(desc,
+-					plat->phandlepart.partition);
+-			} else {
+-				debug("%s: No device found\n", __func__);
+-				return -ENODEV;
+-			}
+-		}
+-	} else if (plat->mtdpart && plat->ubivol) {
+-		ret = mount_ubifs(plat->mtdpart, plat->ubivol);
+-		if (ret)
+-			return ret;
+-
+-		ret = fs_set_blk_dev("ubi", NULL, FS_TYPE_UBIFS);
+-	} else {
+-		debug("Error: unsupported storage device.\n");
+-		return -ENODEV;
+-	}
+-
+-	if (ret)
+-		debug("Error: could not access storage.\n");
+-
+-	return ret;
+-}
+-
+-/**
+- * _request_firmware_prepare - Prepare firmware struct.
+- *
+- * @dev: An instance of a driver.
+- * @name: Name of firmware file.
+- * @dbuf: Address of buffer to load firmware into.
+- * @size: Size of buffer.
+- * @offset: Offset of a file for start reading into buffer.
+- *
+- * Return: Negative value if fail, 0 for successful.
+- */
+-static int _request_firmware_prepare(struct udevice *dev,
+-				    const char *name, void *dbuf,
+-				    size_t size, u32 offset)
+-{
+-	if (!name || name[0] == '\0')
+-		return -EINVAL;
+-
+-	struct firmware *firmwarep = dev_get_priv(dev);
+-
+-	if (!firmwarep)
+-		return -ENOMEM;
+-
+-	firmwarep->name = name;
+-	firmwarep->offset = offset;
+-	firmwarep->data = dbuf;
+-	firmwarep->size = size;
+-
+-	return 0;
+-}
+-
+-/**
+- * fw_get_filesystem_firmware - load firmware into an allocated buffer.
+- * @dev: An instance of a driver.
+- *
+- * Return: Size of total read, negative value when error.
+- */
+-static int fw_get_filesystem_firmware(struct udevice *dev)
+-{
+-	loff_t actread = 0;
+-	char *storage_interface, *dev_part, *ubi_mtdpart, *ubi_volume;
+-	int ret;
+-
+-	storage_interface = env_get("storage_interface");
+-	dev_part = env_get("fw_dev_part");
+-	ubi_mtdpart = env_get("fw_ubi_mtdpart");
+-	ubi_volume = env_get("fw_ubi_volume");
+-
+-	if (storage_interface && dev_part) {
+-		ret = fs_set_blk_dev(storage_interface, dev_part, FS_TYPE_ANY);
+-	} else if (storage_interface && ubi_mtdpart && ubi_volume) {
+-		ret = mount_ubifs(ubi_mtdpart, ubi_volume);
+-		if (ret)
+-			return ret;
+-
+-		if (!strcmp("ubi", storage_interface))
+-			ret = fs_set_blk_dev(storage_interface, NULL,
+-				FS_TYPE_UBIFS);
+-		else
+-			ret = -ENODEV;
+-	} else {
+-		ret = select_fs_dev(dev_get_plat(dev));
+-	}
+-
+-	if (ret)
+-		goto out;
+-
+-	struct firmware *firmwarep = dev_get_priv(dev);
+-
+-	if (!firmwarep) {
+-		ret = -EINVAL;
+-		goto out;
+-	}
+-
+-	ret = fs_read(firmwarep->name, (ulong)map_to_sysmem(firmwarep->data),
+-			firmwarep->offset, firmwarep->size, &actread);
+-
+-	if (ret) {
+-		debug("Error: %d Failed to read %s from flash %lld != %zu.\n",
+-		      ret, firmwarep->name, actread, firmwarep->size);
+-	} else {
+-		ret = actread;
+-	}
+-
+-out:
+-#ifdef CONFIG_CMD_UBIFS
+-	umount_ubifs();
+-#endif
+-	return ret;
+-}
+-
+-/**
+- * request_firmware_into_buf - Load firmware into a previously allocated buffer.
+- * @dev: An instance of a driver.
+- * @name: Name of firmware file.
+- * @buf: Address of buffer to load firmware into.
+- * @size: Size of buffer.
+- * @offset: Offset of a file for start reading into buffer.
+- *
+- * The firmware is loaded directly into the buffer pointed to by @buf.
+- *
+- * Return: Size of total read, negative value when error.
+- */
+-int request_firmware_into_buf(struct udevice *dev,
+-			      const char *name,
+-			      void *buf, size_t size, u32 offset)
+-{
+-	int ret;
+-
+-	if (!dev)
+-		return -EINVAL;
+-
+-	ret = _request_firmware_prepare(dev, name, buf, size, offset);
+-	if (ret < 0) /* error */
+-		return ret;
+-
+-	ret = fw_get_filesystem_firmware(dev);
+-
+-	return ret;
+-}
+-
+-static int fs_loader_of_to_plat(struct udevice *dev)
+-{
+-	u32 phandlepart[2];
+-
+-	ofnode fs_loader_node = dev_ofnode(dev);
+-
+-	if (ofnode_valid(fs_loader_node)) {
+-		struct device_plat *plat;
+-
+-		plat = dev_get_plat(dev);
+-		if (!ofnode_read_u32_array(fs_loader_node,
+-					  "phandlepart",
+-					  phandlepart, 2)) {
+-			plat->phandlepart.phandle = phandlepart[0];
+-			plat->phandlepart.partition = phandlepart[1];
+-		}
+-
+-		plat->mtdpart = (char *)ofnode_read_string(
+-				 fs_loader_node, "mtdpart");
+-
+-		plat->ubivol = (char *)ofnode_read_string(
+-				 fs_loader_node, "ubivol");
+-	}
+-
+-	return 0;
+-}
+-
+-static int fs_loader_probe(struct udevice *dev)
+-{
+-#if CONFIG_IS_ENABLED(DM) && CONFIG_IS_ENABLED(BLK)
+-	int ret;
+-	struct device_plat *plat = dev_get_plat(dev);
+-
+-	if (plat->phandlepart.phandle) {
+-		ofnode node = ofnode_get_by_phandle(plat->phandlepart.phandle);
+-		struct udevice *parent_dev = NULL;
+-
+-		ret = device_get_global_by_ofnode(node, &parent_dev);
+-		if (!ret) {
+-			struct udevice *dev;
+-
+-			ret = blk_get_from_parent(parent_dev, &dev);
+-			if (ret) {
+-				debug("fs_loader: No block device: %d\n",
+-					ret);
+-
+-				return ret;
+-			}
+-		}
+-	}
+-#endif
+-
+-	return 0;
+-};
+-
+-static const struct udevice_id fs_loader_ids[] = {
+-	{ .compatible = "u-boot,fs-loader"},
+-	{ }
+-};
+-
+-U_BOOT_DRIVER(fs_loader) = {
+-	.name			= "fs-loader",
+-	.id			= UCLASS_FS_FIRMWARE_LOADER,
+-	.of_match		= fs_loader_ids,
+-	.probe			= fs_loader_probe,
+-	.of_to_plat	= fs_loader_of_to_plat,
+-	.plat_auto	= sizeof(struct device_plat),
+-	.priv_auto	= sizeof(struct firmware),
+-};
+-
+-static struct device_plat default_plat = { 0 };
+-
+-int get_fs_loader(struct udevice **dev)
+-{
+-	int ret;
+-	ofnode node = ofnode_get_chosen_node("firmware-loader");
+-
+-	if (ofnode_valid(node))
+-		return uclass_get_device_by_ofnode(UCLASS_FS_FIRMWARE_LOADER,
+-						   node, dev);
+-
+-	/* Try the first device if none was chosen */
+-	ret = uclass_first_device_err(UCLASS_FS_FIRMWARE_LOADER, dev);
+-	if (ret != -ENODEV)
+-		return ret;
+-
+-	/* Just create a new device */
+-	ret = device_bind(dm_root(), DM_DRIVER_REF(fs_loader), "default-loader",
+-			  &default_plat, ofnode_null(), dev);
+-	if (ret)
+-		return ret;
+-
+-	return device_probe(*dev);
+-}
+-
+-UCLASS_DRIVER(fs_loader) = {
+-	.id		= UCLASS_FS_FIRMWARE_LOADER,
+-	.name		= "fs-loader",
+-};
+diff --git a/drivers/misc/fw_loader/Makefile b/drivers/misc/fw_loader/Makefile
+new file mode 100644
+index 000000000000..f5df0db61c22
+--- /dev/null
++++ b/drivers/misc/fw_loader/Makefile
+@@ -0,0 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++obj-$(CONFIG_$(PHASE_)FW_LOADER_UCLASS) += fw_loader-uclass.o
++obj-$(CONFIG_$(PHASE_)FS_LOADER) += fs_loader.o
+diff --git a/drivers/misc/fw_loader/fs_loader.c b/drivers/misc/fw_loader/fs_loader.c
+new file mode 100644
+index 000000000000..b1eb0311dd2b
+--- /dev/null
++++ b/drivers/misc/fw_loader/fs_loader.c
+@@ -0,0 +1,175 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2018-2019 Intel Corporation <www.intel.com>
++ *
++ */
++
++#define LOG_CATEGORY UCLASS_FIRMWARE_LOADER
++
++#include <dm.h>
++#include <errno.h>
++#include <blk.h>
++#include <fs.h>
++#include <fs_loader.h>
++#include <log.h>
++#include <dm/device-internal.h>
++#include <dm/root.h>
++#include <linux/string.h>
++#include <mapmem.h>
++#include <malloc.h>
++#include <spl.h>
++
++#ifdef CONFIG_CMD_UBIFS
++#include <ubi_uboot.h>
++#endif
++
++#include "internal.h"
++
++#ifdef CONFIG_CMD_UBIFS
++static int mount_ubifs(char *mtdpart, char *ubivol)
++{
++	int ret;
++
++	ret = generic_fw_loader_ubi_select(mtdpart);
++	if (ret)
++		return ret;
++
++	return cmd_ubifs_mount(ubivol);
++}
++
++static int umount_ubifs(void)
++{
++	return cmd_ubifs_umount();
++}
++#else
++static int mount_ubifs(char *mtdpart, char *ubivol)
++{
++	debug("Error: Cannot load image: no UBIFS support\n");
++	return -ENOSYS;
++}
++#endif
++
++static int select_fs_dev(struct fw_loader_plat *plat)
++{
++	int ret;
++
++	if (plat->phandlepart.phandle) {
++		struct blk_desc *desc;
++
++		ret = generic_fw_loader_get_phandle_desc(plat, &desc);
++		if (ret)
++			debug("%s: No device found\n", __func__);
++		else
++			ret = fs_set_blk_dev_with_part(desc,
++				plat->phandlepart.partition);
++	} else if (plat->mtdpart && plat->ubivol) {
++		ret = mount_ubifs(plat->mtdpart, plat->ubivol);
++		if (ret)
++			return ret;
++
++		ret = fs_set_blk_dev("ubi", NULL, FS_TYPE_UBIFS);
++	} else {
++		debug("Error: unsupported storage device.\n");
++		return -ENODEV;
++	}
++
++	if (ret)
++		debug("Error: could not access storage.\n");
++
++	return ret;
++}
++
++/**
++ * fw_get_filesystem_firmware - load firmware into an allocated buffer.
++ * @dev: An instance of a driver.
++ *
++ * Return: Size of total read, negative value when error.
++ */
++static int fw_get_filesystem_firmware(struct udevice *dev)
++{
++	struct firmware *upriv = dev_get_uclass_priv(dev);
++	struct fw_loader_plat *plat = dev_get_uclass_plat(dev);
++	struct fw_loader_env_info info = { };
++	loff_t actread = 0;
++	int ret;
++
++	generic_fw_loader_env_info(&info);
++
++	if (info.storage_interface && info.dev_part) {
++		ret = fs_set_blk_dev(info.storage_interface,
++				     info.dev_part, FS_TYPE_ANY);
++	} else if (info.storage_interface && info.ubi_mtdpart &&
++		   info.ubi_volume) {
++		ret = mount_ubifs(info.ubi_mtdpart, info.ubi_volume);
++		if (ret)
++			return ret;
++
++		if (!strcmp("ubi", info.storage_interface))
++			ret = fs_set_blk_dev(info.storage_interface, NULL,
++					     FS_TYPE_UBIFS);
++		else
++			ret = -ENODEV;
++	} else {
++		ret = select_fs_dev(plat);
++	}
++
++	if (ret)
++		goto out;
++
++	ret = fs_read(upriv->name, (ulong)map_to_sysmem(upriv->data),
++		      upriv->offset, upriv->size, &actread);
++
++	if (ret) {
++		debug("Error: %d Failed to read %s from flash %lld != %zu.\n",
++		      ret, upriv->name, actread, upriv->size);
++	} else {
++		ret = actread;
++	}
++
++out:
++#ifdef CONFIG_CMD_UBIFS
++	umount_ubifs();
++#endif
++	return ret;
++}
++
++static const struct fw_loader_ops fs_loader_ops = {
++	.get_firmware = fw_get_filesystem_firmware,
++};
++
++static const struct udevice_id fs_loader_ids[] = {
++	{ .compatible = "u-boot,fs-loader"},
++	{ }
++};
++
++U_BOOT_DRIVER(fs_loader) = {
++	.name			= "fs-loader",
++	.id			= UCLASS_FIRMWARE_LOADER,
++	.of_match		= fs_loader_ids,
++	.ops			= &fs_loader_ops,
++};
++
++static struct fw_loader_plat default_plat = { 0 };
++
++int get_fs_loader(struct udevice **dev)
++{
++	int ret;
++	ofnode node = ofnode_get_chosen_node("firmware-loader");
++
++	if (ofnode_valid(node))
++		return uclass_get_device_by_ofnode(UCLASS_FIRMWARE_LOADER,
++						   node, dev);
++
++	/* Try the first device if none was chosen */
++	ret = uclass_first_device_err(UCLASS_FIRMWARE_LOADER, dev);
++	if (ret != -ENODEV)
++		return ret;
++
++	/* Just create a new device */
++	ret = device_bind(dm_root(), DM_DRIVER_REF(fs_loader), "default-loader",
++			  &default_plat, ofnode_null(), dev);
++	if (ret)
++		return ret;
++
++	return device_probe(*dev);
++}
+diff --git a/drivers/misc/fw_loader/fw_loader-uclass.c b/drivers/misc/fw_loader/fw_loader-uclass.c
+new file mode 100644
+index 000000000000..0d95fac8f42b
+--- /dev/null
++++ b/drivers/misc/fw_loader/fw_loader-uclass.c
+@@ -0,0 +1,188 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2018-2019 Intel Corporation <www.intel.com>
++ *
++ */
++
++#include <blk.h>
++#include <dm.h>
++#include <dm/device.h>
++#include <env.h>
++#include <errno.h>
++#include <fw_loader.h>
++#include <linux/types.h>
++
++#if CONFIG_IS_ENABLED(CMD_UBIFS)
++#include <ubi_uboot.h>
++#endif
++
++#include "internal.h"
++
++#if CONFIG_IS_ENABLED(CMD_UBIFS)
++int generic_fw_loader_ubi_select(char *mtdpart)
++{
++	int ret;
++
++	ret = ubi_part(mtdpart, NULL);
++	if (ret)
++		debug("Cannot find mtd partition %s\n", mtdpart);
++
++	return ret;
++}
++#else
++int generic_fw_loader_ubi_select(char *mtdpart)
++{
++	debug("Error: Cannot select ubi partition: no UBIFS support\n");
++	return -ENOSYS;
++}
++#endif
++
++#if CONFIG_IS_ENABLED(BLK)
++static int fw_loader_get_blk_dev_from_node(ofnode node)
++{
++	struct udevice *parent_dev = NULL;
++	struct udevice *blk_dev;
++	int ret;
++
++	ret = device_get_global_by_ofnode(node, &parent_dev);
++	if (ret)
++		return ret;
++
++	ret = blk_get_from_parent(parent_dev, &blk_dev);
++	if (ret)
++		debug("fw_loader: No block device: %d\n", ret);
++
++	return ret;
++}
++#else
++static int fw_loader_get_blk_dev_from_node(ofnode node)
++{
++	debug("fw_loader: No block device support\n");
++	return 0;
++}
++#endif
++
++void generic_fw_loader_env_info(struct fw_loader_env_info *info)
++{
++	info->storage_interface = env_get("storage_interface");
++	info->dev_part = env_get("fw_dev_part");
++	info->ubi_mtdpart = env_get("fw_ubi_mtdpart");
++	info->ubi_volume = env_get("fw_ubi_volume");
++}
++
++int generic_fw_loader_get_phandle_desc(struct fw_loader_plat *plat,
++				       struct blk_desc **desc)
++{
++	struct blk_desc *disk_desc;
++	struct udevice *disk_dev;
++	ofnode node;
++	int ret;
++
++	node = ofnode_get_by_phandle(plat->phandlepart.phandle);
++
++	ret = device_get_global_by_ofnode(node, &disk_dev);
++	if (ret)
++		return ret;
++
++	disk_desc = blk_get_by_device(disk_dev);
++	if (!disk_desc)
++		return -ENODEV;
++
++	*desc = disk_desc;
++
++	return 0;
++}
++
++static int fw_loader_pre_probe(struct udevice *dev)
++{
++#if CONFIG_IS_ENABLED(DM)
++	struct fw_loader_plat *plat = dev_get_uclass_plat(dev);
++	ofnode fw_loader_node;
++
++	fw_loader_node = dev_ofnode(dev);
++	if (ofnode_valid(fw_loader_node)) {
++		u32 phandlepart[2];
++
++		if (!ofnode_read_u32_array(fw_loader_node, "phandlepart",
++					   phandlepart, 2)) {
++			plat->phandlepart.phandle = phandlepart[0];
++			plat->phandlepart.partition = phandlepart[1];
++		}
++
++		plat->mtdpart = (char *)ofnode_read_string(fw_loader_node,
++							   "mtdpart");
++
++		plat->ubivol = (char *)ofnode_read_string(fw_loader_node,
++							  "ubivol");
++	}
++
++	if (plat->phandlepart.phandle) {
++		ofnode node = ofnode_get_by_phandle(plat->phandlepart.phandle);
++		int ret;
++
++		ret = fw_loader_get_blk_dev_from_node(node);
++		if (ret)
++			return ret;
++	}
++#endif
++
++	return 0;
++}
++
++UCLASS_DRIVER(fw_loader) = {
++	.id		= UCLASS_FIRMWARE_LOADER,
++	.name		= "fw_loader",
++	.pre_probe	= fw_loader_pre_probe,
++	.per_device_plat_auto = sizeof(struct fw_loader_plat),
++	.per_device_auto = sizeof(struct firmware),
++};
++
++/**
++ * _request_firmware_prepare - Prepare firmware struct.
++ *
++ * @dev: An instance of a driver.
++ * @name: Name of firmware file.
++ * @dbuf: Address of buffer to load firmware into.
++ * @size: Size of buffer.
++ * @offset: Offset of a file for start reading into buffer.
++ *
++ * Return: Negative value if fail, 0 for successful.
++ */
++static int _request_firmware_prepare(struct udevice *dev,
++				     const char *name, void *dbuf,
++				     size_t size, u32 offset)
++{
++	struct firmware *upriv = dev_get_uclass_priv(dev);
++
++	if (!name || name[0] == '\0')
++		return -EINVAL;
++
++	upriv->name = name;
++	upriv->offset = offset;
++	upriv->data = dbuf;
++	upriv->size = size;
++
++	return 0;
++}
++
++int request_firmware_into_buf(struct udevice *dev,
++			      const char *name,
++			      void *buf, size_t size, u32 offset)
++{
++	const struct fw_loader_ops *ops;
++	int ret;
++
++	if (!dev)
++		return -EINVAL;
++
++	ret = _request_firmware_prepare(dev, name, buf, size, offset);
++	if (ret < 0) /* error */
++		return ret;
++
++	ops = fw_loader_get_ops(dev);
++
++	if (!ops->get_firmware)
++		return -EOPNOTSUPP;
++
++	return ops->get_firmware(dev);
++}
+diff --git a/drivers/misc/fw_loader/internal.h b/drivers/misc/fw_loader/internal.h
+new file mode 100644
+index 000000000000..9ff43e872554
+--- /dev/null
++++ b/drivers/misc/fw_loader/internal.h
+@@ -0,0 +1,91 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (C) 2018-2019 Intel Corporation <www.intel.com>
++ */
++#ifndef _FW_LOADER_INTERNAL_H_
++#define _FW_LOADER_INTERNAL_H_
++
++/**
++ * struct phandle_part - A place for storing phandle of node and its partition
++ *
++ * This holds information about a phandle of the block device, and its
++ * partition where the firmware would be loaded from.
++ *
++ * @phandle: Phandle of storage device node
++ * @partition: Partition of block device
++ */
++struct phandle_part {
++	u32 phandle;
++	u32 partition;
++};
++
++/**
++ * struct fw_loader_ops - driver operations for Firmware Loader uclass
++ *
++ * Drivers MUST support these operation. These operations are intended
++ * to be used by uclass code, not directly from other code.
++ */
++struct fw_loader_ops {
++	/**
++	 * get_firmware() - get firmware from Firmware Loader driver
++	 *
++	 * @dev:	Firmware Loader device to read firmware from
++	 */
++	int (*get_firmware)(struct udevice *dev);
++};
++
++#define fw_loader_get_ops(dev)	((const struct fw_loader_ops *)(dev)->driver->ops)
++
++/**
++ * struct fw_loader_plat - A place for storing all supported storage devices
++ *
++ * This holds information about all supported storage devices for driver use.
++ *
++ * @phandlepart: Attribute data for block device.
++ * @mtdpart: MTD partition for ubi partition.
++ * @ubivol: UBI volume-name for ubifsmount.
++ */
++struct fw_loader_plat {
++	struct phandle_part phandlepart;
++	char *mtdpart;
++	char *ubivol;
++};
++
++/**
++ * struct firmware - A place for storing firmware and its attribute data.
++ *
++ * This holds information about a firmware and its content.
++ *
++ * @size: Size of a file
++ * @data: Buffer for file
++ * @name: Filename
++ * @offset: Offset of reading a file
++ */
++struct firmware {
++	size_t size;
++	const u8 *data;
++	const char *name;
++	u32 offset;
++};
++
++/**
++ * struct fw_loader_env_info - struct for FW loader configuration from ENV
++ *
++ * @storage_interface: "storage_interface" ENV value
++ * @dev_part: "fw_dev_part" ENV value
++ * @ubi_mtdpart: "fw_ubi_mtdpart" ENV value
++ * @ubi_volume: "fw_ubi_volume" ENV value
++ */
++struct fw_loader_env_info {
++	char *storage_interface;
++	char *dev_part;
++	char *ubi_mtdpart;
++	char *ubi_volume;
++};
++
++int generic_fw_loader_ubi_select(char *mtdpart);
++void generic_fw_loader_env_info(struct fw_loader_env_info *info);
++int generic_fw_loader_get_phandle_desc(struct fw_loader_plat *plat,
++				       struct blk_desc **desc);
++
++#endif
+diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
+index 7de9312cde7a..48f36e88fee9 100644
+--- a/include/dm/uclass-id.h
++++ b/include/dm/uclass-id.h
+@@ -69,7 +69,7 @@ enum uclass_id {
+ 	UCLASS_FIRMWARE,	/* Firmware */
+ 	UCLASS_FPGA,		/* FPGA device */
+ 	UCLASS_FUZZING_ENGINE,	/* Fuzzing engine */
+-	UCLASS_FS_FIRMWARE_LOADER,		/* Generic loader */
++	UCLASS_FIRMWARE_LOADER,	/* Firmware loader */
+ 	UCLASS_FWU_MDATA,	/* FWU Metadata Access */
+ 	UCLASS_GPIO,		/* Bank of general-purpose I/O pins */
+ 	UCLASS_HASH,		/* Hash device */
+diff --git a/include/fs_loader.h b/include/fs_loader.h
+index 7e16e0f70309..3c64efe1b439 100644
+--- a/include/fs_loader.h
++++ b/include/fs_loader.h
+@@ -6,52 +6,9 @@
+ #ifndef _FS_LOADER_H_
+ #define _FS_LOADER_H_
+ 
+-struct udevice;
+-
+-/**
+- * struct phandle_part - A place for storing phandle of node and its partition
+- *
+- * This holds information about a phandle of the block device, and its
+- * partition where the firmware would be loaded from.
+- *
+- * @phandle: Phandle of storage device node
+- * @partition: Partition of block device
+- */
+-struct phandle_part {
+-	u32 phandle;
+-	u32 partition;
+-};
+-
+-/**
+- * struct phandle_part - A place for storing all supported storage devices
+- *
+- * This holds information about all supported storage devices for driver use.
+- *
+- * @phandlepart: Attribute data for block device.
+- * @mtdpart: MTD partition for ubi partition.
+- * @ubivol: UBI volume-name for ubifsmount.
+- */
+-struct device_plat {
+-	struct phandle_part phandlepart;
+-	char *mtdpart;
+-	char *ubivol;
+-};
++#include <fw_loader.h>
+ 
+-/**
+- * request_firmware_into_buf - Load firmware into a previously allocated buffer.
+- * @dev: An instance of a driver.
+- * @name: Name of firmware file.
+- * @buf: Address of buffer to load firmware into.
+- * @size: Size of buffer.
+- * @offset: Offset of a file for start reading into buffer.
+- *
+- * The firmware is loaded directly into the buffer pointed to by @buf.
+- *
+- * Return: Size of total read, negative value when error.
+- */
+-int request_firmware_into_buf(struct udevice *dev,
+-			      const char *name,
+-			      void *buf, size_t size, u32 offset);
++struct udevice;
+ 
+ /**
+  * get_fs_loader() - Get the chosen filesystem loader
+diff --git a/include/fw_loader.h b/include/fw_loader.h
+index 35574482b2b9..56f5e3be6195 100644
+--- a/include/fw_loader.h
++++ b/include/fw_loader.h
+@@ -1,10 +1,29 @@
+ /* SPDX-License-Identifier: GPL-2.0 */
+ /*
++ * Copyright (C) 2018-2019 Intel Corporation <www.intel.com>
+  * Copyright (C) 2025 Lucien Jheng <lucienzx159@gmail.com>
+  */
+ #ifndef _FW_LOADER_H_
+ #define _FW_LOADER_H_
+ 
++struct udevice;
++
++/**
++ * request_firmware_into_buf - Load firmware into a previously allocated buffer.
++ * @dev: An instance of a driver.
++ * @name: Name of firmware file.
++ * @buf: Address of buffer to load firmware into.
++ * @size: Size of buffer.
++ * @offset: Offset of a file for start reading into buffer.
++ *
++ * The firmware is loaded directly into the buffer pointed to by @buf.
++ *
++ * Return: Size of total read, negative value when error.
++ */
++int request_firmware_into_buf(struct udevice *dev,
++			      const char *name,
++			      void *buf, size_t size, u32 offset);
++
+ /**
+  * request_firmware_into_buf_via_script() -
+  * Load firmware using a U-Boot script and copy to buffer
 -- 
 2.55.0
 
