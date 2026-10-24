@@ -2,28 +2,28 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DF37606A31B
-	for <u-boot@archiver.kernel.org>; Sat, 24 Oct 2026 00:10:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A35B606A31A
+	for <u-boot@archiver.kernel.org>; Sat, 24 Oct 2026 00:10:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ezDHPYUr;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=WJmwAe/Q
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=duBIq7QR;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=ke7SeGWc
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D0D1440AA0;
-	Sat, 24 Oct 2026 00:10:18 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0C97440AFA;
+	Sat, 24 Oct 2026 00:10:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id d-6MuMSf9Khz; Sat, 24 Oct 2026 00:10:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org F3BA040ACD
+ id ppqMccWW4He9; Sat, 24 Oct 2026 00:10:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 13D7240AF6
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792800618;
-	b=a9ioKSpRiMpSbZ3Vy+MVluy3DzgguvTuPVq/AwDKSEke+LCT4TsBGz5tU5LsZHQVGlYP
-	 sTBlPp2b0COz0VdsxV5MhcXLlZRyHf2FaVil33WulYfvGDh+QsWaI4qMXML8aSK6WGSd6
-	 kr1ZZIIfog6a8yqolD5OAXqi+MieiUeg6+1/ge1st90ecVCslCFpDsCOYTmOT5Px8GGdT
-	 PojnyYkrW/5V9uGcNHy6caBmUHySs1xCJhJxFVFMEy0T86NBw3DSFrdCaD3k30hY94kzL
-	 +cIre5IlXlzD5HTwkd9cqXETfS5Nw7s2w7VoJIEexkWbhUm9o3txOFzqV9pjfgtegoA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792800621;
+	b=DXeRu0MqqvexcGGexM2LbmeZ02dKP274c2Ykkt28B4ETdwV9EuFA+t690P31HcjqhOQj
+	 2C6OCLuPxDF0PvavCWEGMV7bgYkyq+86n+lc0/YJHZAqnQbATyQEBeJUdBiGn1ALflAqG
+	 m3two0wPxkQjb7XXSsyTQyHOFQ+lFieAwucaNeJAdjjuhfNmGojGMEVqfRrGOO9omC6IN
+	 AaGQ//TG0FreeyXZz96k/4IJ+2g6zRfJ0Bch9TBLjiQM2RGcaYsOVJZ4Mo28h8Opjg8bW
+	 m55pvfnuZ1sTj6a3ww5e1OhfGdh/C1zXG+pqBnNV7VpWtPqzvn0anpW9O960lxbWX6g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792800618;
+	c=relaxed/relaxed; t=1792800621;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,135 +33,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=fXR6EIAol1Ogz5VmrYrJcNuAXYX7dqOfCTds7a0L2qQ=;
-	b=NzW+pJCiIK3O0JSbTyeHQrMD12XmqAwi8sz/1WDAW6FDWOzAd0gGTqxf23R+pmPHKSbq
-	 Q+RgRSSmJLJYbUvM36t/3vHSgA7uOF8BYBdTLBA8Yx0S25KJGanvbkopHmDj4qABNgxOD
-	 jIAKLyCS0yhRlABl/WmwMeeI4/bT3l1ck2p4B2o7b7rba+M1G/M3EqUyXbtuMhVbh/Vh4
-	 gY8GJ9K7w2SZ+zU+qrmzgDVhQhMtBLpagfqs9WXWlhvYuIVZXFJeuR4ZR6FdR0LH9kHTz
-	 H7dYD84Oo18tno4jvkfWrwJVharjJYeHjZOhmGnOd4kdLXBW9my5pha6FPNfbAWe4Zw==
+	bh=U1zS0mU+2S/qhOZEadnVcGfZbMZ/lN1Z7BfkHwKa9Dk=;
+	b=WrFrdGz0zUR59d+OxPOopZjG4UzGvoDv2lgBvMlojNYHg2EYUyFm/0IZsUKS5cPo6mQ1
+	 BgDGVcP/nRKqqJGir8xR8Px7sJhtsQs7Cjqt0T6A5utZiQQc0XHeVB3mVJnKYz5dgRzjG
+	 qCXylBRPYc08v1SPsNcwnBwtw2h+hAZo9oVXI2qAiUKytF7/1bvHupJTYDKBWqCrrNdTJ
+	 0ZijEc2aMv6ecHxQM1QwymtiwsXop63Daozu1PnOKv7MBrCRLjZW/N8PxkW6GcP8NMuAT
+	 M7gNGDLAH71PE9qOJj2Yvm+aSc42cE5BAjZOglyindXGcOg27b3MkKZGsAUCTNojqig==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=none header.from=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=ke7SeGWc;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792800618;
-	bh=fXR6EIAol1Ogz5VmrYrJcNuAXYX7dqOfCTds7a0L2qQ=;
+	d=lists.u-boot-project.org; s=default; t=1792800621;
+	bh=U1zS0mU+2S/qhOZEadnVcGfZbMZ/lN1Z7BfkHwKa9Dk=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ezDHPYUrOpVPQScJnZnL0qi8qZJE6tnt8RpDr+NiXxw+uUFp+UJM6lJLKc2m/efCY
-	 DxgoIewodGhTO9yy9KH+LagmfakQVWfzeUaF5XpGNxoAU44BnpR4lEqgsQ7iEtcGrs
-	 12X5ShTdH/+9N42kTawZSTxolOX5HNm6ouOIdvIZD5+vTHivMLAV7jAFZT6cguMTmp
-	 ZE1Hd4wXvrkL6usSR3U0skwW0oKQ4+MfApnyD2CcTMj8pC61ltv+Tek/MYJmp//Npq
-	 z6EfLikaGoIgAxlIa4I8pUKCOXoTDGMjZQeuKC5v48MPKwYBnUGFyrHtQOVLLA1R1h
-	 eBVdhneA9h62g==
+	b=duBIq7QRiJlU7sWq6lxx6gRtWl3++RDU1yamAXobWr7KBFYMh5kvqlnbJ01f3BeNW
+	 VCInunqxqrj52vw/7ke0HVjJvzkOM+gF+yemhe/7Ukdl3tPSX+sfXIKpjAdrQ7pCYF
+	 S2si5UBJOsj5y+e0VTCeD63O4QEO8L4RcKOZ8yOWfJqfcb9d3hPqbK6s8Zmb+/Gqd3
+	 x5A1Bb1EKMuFe3YFC3I7kGZ+7E3hOYUepZpmMRnXCZTv181oI+9B9f/zaVGzvnw2QO
+	 pVh4ETBEPfeXtENEpX3r4sGh5YnBd+b6x+aBcILRLeby0Pzz7FspXusDs1aEqMRDVC
+	 u/90zuDkWulgQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F3BA040ACD;
-	Sat, 24 Oct 2026 00:10:17 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 559BA3B6
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 00:10:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 13D7240AF6;
+	Sat, 24 Oct 2026 00:10:21 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9F9B43D9
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 00:10:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 3B51E80C8B
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 00:10:14 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 9028440ACD
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 00:10:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hYZLxmpvUGu1 for <u-boot@lists.u-boot-project.org>;
- Sat, 24 Oct 2026 00:10:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 790C680C79
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::232"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792800613;
- b=C6Yp1ae2SlOXSVw2bOzOG70GfCXuNO4d4MYA0KP4ENkcxC0rWPdaq8OayztaYUnvrXtX
- 6TJV86PBjEyMY4846Cy+RzvPzTaR0Iio7M9kxhyrWLBksUT4eKQyCkNNw2wAmV2+n3Fz8
- HL9kAvc8tUy35d/xaopyVhB6EcJj/CjaIIAQ6EEK6JxP0gcWL67+dCukkVO07HmIJCHWi
- 5augTKqVfLWy6JQNCqDqGZLahNzLpnxVszHgYKpicq3MWEUecjLxRPUhlbjhy91Ef4nW2
- Ar/XAIcrUcXLjUWxxrFmkoMHzz6jjkLyV06isvaD4YGZxRw49ujGOr9EmpaiRddg0LA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8vydJ6y70R5r for <u-boot@lists.u-boot-project.org>;
+ Sat, 24 Oct 2026 00:10:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BDD2F40A30
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::332"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792800617;
+ b=WyPl5imycGaWXGpqf8snNBOG6aFeZPKBAqklfrdHI+kvG+DCHg3KULZdLakz54uvMYdX
+ 3qfNJRt2nVLRAoW30F4MUtNYgNw7Q/VvtlGah7cDVGS4FEBHuIGKI5QOjC/RY/xm8p+mQ
+ 0Bt9L56SVNpj/ym9+AwEslBQXKJFjNSENRWtqabBRaxLsikkCp+kw7H4V/7Rf86EwSgia
+ A/tUhX3aFRBGMDEIp4fxURaBVAcuO0QpavEzUfABrk0ZLfSYFQq7SmmCxfK1PZv1eAyiy
+ Qo2Z7DEehgdf0sObsLr2pYqX45x0asiFwrOI8CGLIYmqe4k9z6t4xizqYzuorQ4WpaA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792800613;
+ c=relaxed/relaxed; t=1792800617;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=fXR6EIAol1Ogz5VmrYrJcNuAXYX7dqOfCTds7a0L2qQ=;
- b=gQPr/ih506WA57H8wsoKdHMan3lC9kZi2A/bY+0EOS4uguPmDOcDwtkF+wlre72MhhJ2
- 3GHXL2rV3Imfk4Lhmjp1yzV/j+Roqypb2UUThmXGb7mKefRetdtif7o9v2zUY9dU9Pq04
- KNm+eNX/E1vZIXtvA4s3G/kgHOYhG5wBKzZGM8k7g7nDn0CG0UBRir7iHG8NT/1BVQslJ
- O5dVeNPE3wcuy68v/kkw5LCVbV8+vNcafxtoSmRXwG/wNgeqcpqeKwdi040vRgwlnx2Nv
- pPFmMsWffTi0VyipUWjVY7z4/eRevW+vAix7Wo5zWAKMT3VaqJ4tZVEDauDQ20EGq5A==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=U1zS0mU+2S/qhOZEadnVcGfZbMZ/lN1Z7BfkHwKa9Dk=;
+ b=gjAn4yM5pVr+Xrvy8Smxk2BlHfIw9kgzjOC0lPoEvFGU+h42pWlKZ1EoQts4y+P+fmSa
+ cLxUQwYRwCOJyP2squTNFKPvAqgfxRGa16EooX9y44lZ98k5Swk/nsyylkY8XWI3OtdA1
+ JxBapVX+zoLZFi2VbiNZDN8XJZfvYlkHXmK5Hhh8cI8kHE9MIlU1ZcVeZl0RGHFtSBSiU
+ /MFgtac2C4bxM/8HD9yJRF6Ah4rvWkveh1zp+B3T2lU7sMwN5+mjOI4ATm4xvqADc/+l8
+ +EScKYpmk2VvGfPOkwEoDcnaK3DGOyfd96ofwyTt/irOMliJ1CYV9x/J9EuxyJEQwqA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=none header.from=baylibre.com;
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b="WJmwAe/Q"; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::232"
+ header.s=google header.b=ke7SeGWc; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::332"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::232; helo=mail-oi1-x232.google.com;
+ client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=WJmwAe/Q
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 790C680C79
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 00:10:13 +0000 (UTC)
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-4f55a53898cso651517b6e.3
- for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 17:10:13 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=ke7SeGWc
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id BDD2F40A30
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 00:10:16 +0000 (UTC)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-82109f51565so595586a34.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 23 Oct 2026 17:10:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1792800612; x=1793405412;
+ d=baylibre.com; s=google; t=1792800615; x=1793405415;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=fXR6EIAol1Ogz5VmrYrJcNuAXYX7dqOfCTds7a0L2qQ=;
- b=WJmwAe/QhN7DYweHKfdsE+Oov+0+KXfPPCKmfk8CjhJIa6KS0qRKjgNPvR97WI2TNU
- D3gQNwMjwTXRVefOv1dEL9QMWHW1saizzsln9tCEWsr1r923qwTpSsQKmiCGtxginnh1
- wY478xMhiETHJnw4b5F8Oqne7vxAffUlYo8fGiLv8uqKCl6JQsJzrTX5P9wWeOEA6qYs
- E+sWE9Fgg1rz10IPBjBrmwzWdnGZxX2FJwz8a4buGtCanWz77BP40mTYZUuu5tx6xh2P
- hEkbHo58OK8pB9Myns8H4x/NvuVqBN7k/MXxn8kESe7CJdmbS2N9UwYU5JwbdBwvBtnl
- ifEA==
+ bh=U1zS0mU+2S/qhOZEadnVcGfZbMZ/lN1Z7BfkHwKa9Dk=;
+ b=ke7SeGWcOFMxsewlSIQaLQeOte1aZW3nLMt04xukDit6N2Oy7hCijvUvVm4WYj0sYi
+ /gWRpDJQGH3O4Msbm+s/pVSLMJzJxumhOyvJvT8/o7iirSTHaw4FqXZfOjrJaOeJ4Oct
+ nP9T66kcuv+YbPBThomMtu1zoxY2X/Jf5+QzkCsBfbCqE3EKGpWUeH4oVEiEEKUbZdIv
+ 80zss2Tynwdv2Cfm6zJCsFGxcdh4DjDgySkYTCCkxWmEWQzXiGLJcMoWBSHIrbDn20ZU
+ 3kLkCH8gm8EJGgLcN9jluyqRNCMzPMxWn9YidDwilsHwJNhvB8+Ad5pBgy0jbJfyeCDw
+ agvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792800612; x=1793405412;
+ d=1e100.net; s=20260707; t=1792800615; x=1793405415;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=fXR6EIAol1Ogz5VmrYrJcNuAXYX7dqOfCTds7a0L2qQ=;
- b=qjSe6RflSl0c4PU7y1eJVdtAFqI500eF/1Zm+Oe8GV760j2tMU/OFFmVeTqfYgp/QJ
- pLtZ4qHKg692SLEIeWnt+CzA4RaEv1DpihmaiEjy7icOhR8EARpcxfW6ubn7vQp9ZU07
- Cf9Pu5wS1grR7bt4Lu6EPHSMMf/wawvxsKnkpikqw2+VYU74nAo4Su6kMLs/GfpAyAnp
- goVeXd5aUAx4v1hdeMwMVnz6WMwawC2ZKN+RimfJKgymO9cCDCBkVe31zpD/t1sCagUi
- FiE+hvS1vU4UmCC3Xnv3MN9uHXwu8bfQGi/0fXUgNEF1I6ze/WDQBUy5mVupUFa5AwV6
- oRew==
-X-Gm-Message-State: AFq9FYLkkyEIo1wdpxc4g2Rt5WuxRsrcetHPNx4pWwA2GVdKE/Deha8R
- SedGNXA+VQ/1vlmBt5dKY0F1d4UUv4Poonw2IBqr3rUOT/L96qpLn5gCXzh25yApsVk=
-X-Gm-Gg: AYBFou2e6/woZQiPLBxYkQ8IhjXUxzxEV6UquYmmwsv+VbZhg64nDPba2xlok2zbqAH
- RIl0DFU+S4JMsvi2ep4T2W6o7foiqFO0AwSMP3UrRoGPYNOxASBUB3Q4YIC2nzNjTUp0IniVFb8
- 8EmVCwwyz133cMvYZM7jDb8GLzOgkw2tZnA7PrWbcgXkOmyYr68Qn9kNmdeEQS6aJJPef3h/S4A
- 8zX3ajpUn0gBTvhQRqNnRSC08yqL4NRivKhdTfMZ2x5XSmZKVFSknqTZKfifY737fWL3zaKYY0X
- ji5vdQyAgkEyoelwlWPS2kDoJsT1P6ajWSCt8jBhjvpmBL9JpKQ46oO3ZiUtRSE/QQW7Rl+S6jO
- XE9fSNWddP3/vpx8gCq7g9wpLa9OZ6Lj0ajZfnGpJyBCr3pQ7+W1rKksK8Zj6y5hBL8bomci2e3
- t0qQANPiOTPtdFu1HtvtFGJYLZoKe7CEVYK7Z4/i8BSozhAEQZ6+dR49hr18D+QJUAS6V7j6imS
- 0LZbIJQ8D6NF4T+Tk3LN80+VTtbNBi1Cyfkd2ugTBqDQlYAaRzqDUNuSE8/
-X-Received: by 2002:a05:6808:148c:b0:53a:b182:9999 with SMTP id
- 5614622812f47-55c00263132mr569150b6e.43.1792800612164; 
- Fri, 23 Oct 2026 17:10:12 -0700 (PDT)
+ bh=U1zS0mU+2S/qhOZEadnVcGfZbMZ/lN1Z7BfkHwKa9Dk=;
+ b=NNksgLsm3PMNRBaLzkO7v9oSbkAtwJcm6ExTkUeL8ac/5APL1OrUy9uCYNsgBxWYuJ
+ rFXPhmorLeR4lUUj3dKjVz1XCgnKSFqG3eGHWtNqnH+lVqV5ALKKBX5vjkJZG2+2jBjB
+ 6xH6ILVBVDNpbLoOGssSbLg9bes1hZ/q+yTenIHR4YC1x5vz2+yTYmTbeKmrro7FTI1C
+ Q9rRc1c4OG/VIbxcmXqz7Rgi73DUWRMbbq96PoNvLfGnZ4vQ2PTdvcpAu9G7QtmnC0Ji
+ HzOxTUVL3hmkMN5BoED4l8Fwr82Pzr+A5eELyQn6g6S8xhhXsGN+M1gEoMsNE4hoAK84
+ ehSw==
+X-Gm-Message-State: AFq9FYKWWcQp6QzseCP9OSzL6JcPHqUx83BOaIvZ4pgfmEV3lESFaLk+
+ qbMbz27/L1WdSYZLGztIbd//BUVDGTszNuFZuseJ+uLyy1VZfhYXSE2FmC+pbWcudBc=
+X-Gm-Gg: AYBFou1t1BMbFP6P+Pxe5w9E+CQ5JnGwUXnJW87TMa3pmzymn0rTZUI5kMrSKuQyFFO
+ W6pYc2ZI/TqSZfVzdK1TBr17EiLFylZqXxGfU0q9nZuBr6z2jKPmbdkVNKapNgkh8v+LxGA9AFW
+ fGjuIMQFRSCJjs9eB0RzFj5z2KFoQ1zw9eps14Vqpj0uRSfV2CEjf2IVGIK9R6G7YnHVstAAITV
+ CuECTd68dG7Xhpbkso+eveyt1A3+cz0y2mPj468/YVZmONMXF9YYeSj26zjefuxAhOqQC8Jr9ql
+ EVvWFn+hdVejGjs65bKTRc9Jvw+bemkSscYyvRIFB6jK8GLnjo2rQWi9De0/92wnj611RMUQak5
+ j74sdkB2a8Pzq2kaIAUHQPpusAbO2WPc6sF5PT/8IuB1yyr5fTZu2H7ChLBYwM5lAOal4/hRL1r
+ 7E2lTcnGRieSsnGukmZ7i8Fil14SpEiAFdPKc9BD7Vz9PU9L0xYWDt0oDPNm0Hx7rNbP0EYE62R
+ 7BbHKDYYS04FPwNzFoRRW9dbIK+s7Z/f7DjJI5VUH6s+8VZJzQFv499ePZG
+X-Received: by 2002:a05:6808:50a6:b0:4f4:73a9:f838 with SMTP id
+ 5614622812f47-55c002962ccmr555005b6e.22.1792800615260; 
+ Fri, 23 Oct 2026 17:10:15 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:d2b5:d533:1cac:8248])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-55c04248804sm328636b6e.3.2026.10.23.17.10.09
+ 5614622812f47-55c04248804sm328636b6e.3.2026.10.23.17.10.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Oct 2026 17:10:10 -0700 (PDT)
+ Fri, 23 Oct 2026 17:10:13 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Fri, 23 Oct 2026 19:09:08 -0500
-Subject: [PATCH 2/7] arm: mediatek: mt8189: use phase-aware PSCI reset
+Date: Fri, 23 Oct 2026 19:09:09 -0500
+Subject: [PATCH 3/7] spl: atf: optionally pass the bloblist to BL33
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261023-mtk-genio-720-spl-v1-2-f2c0ee094fd0@baylibre.com>
+Message-Id: <20261023-mtk-genio-720-spl-v1-3-f2c0ee094fd0@baylibre.com>
 References: <20261023-mtk-genio-720-spl-v1-0-f2c0ee094fd0@baylibre.com>
 In-Reply-To: <20261023-mtk-genio-720-spl-v1-0-f2c0ee094fd0@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -176,17 +178,17 @@ To: Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.u-boot-project.org, Carlo Caione <ccaione@baylibre.com>, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1277; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4243; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=aATxrsaoedVRe6CI51+HeY3G2r+TP6fJVjj6jhoz9UQ=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq2/c0CboabEKvHRkJDCUVF9tLlb6fz+GyTZWks
- MYA82nGA+aJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCatv3NBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AHPQH/iYv0u07i+JODtRmcAyZdD50p077ZtGEYbB4ns5
- MzgAEapHoCtUV7/QYN3+3DPd733PN0uUQPcxeuYxao1WnYD3nDm+TxTfco1UitjsCRczTHtHDXa
- gj9w7GqclxM8VLqn6yZZg35DwTWekOwq4GaK8ntvW8x8SMCgvZJ2SkNG2UfZOaXMDbZ6hvVGnJ1
- VaVYFOIoIJ6ztVgyUJFPJP/BL1aJfWBrZKhQj2Oi5vR6OuKFY5SW1FWYKXi/M3cillep8zYaiLD
- 8SJdoR1c3/TBzpO0Cv6XWsyB2RVLVcNTEt17EHP7kDSpMl1eI6bN7D21VwglLRomlFG86c5EK/X
- fCz4=
+ bh=peZIw+67VpSHbs+DWNKenbwhZ+dSBf9e554jZapsdKA=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq2/c7bzuFFf20DQIn1IGDqFLvhYZtGCvQCtlAm
+ TLijFDURoGJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCatv3OxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ayj0IAJ1GwKQlRfxbvqJhsIoY8nUQQoREQqws1c4ZbpM
+ J+4ZdNz0ZIwbWk/eNyE2vUm/zOtitryhcIJGGo53CWKRrEyEub1h3ix+rqZZ+sY5OuTD2NN+5xe
+ 1MeoGP80q0EmzsNfeR9liTXmQFHtnZJxLujnMDBdIdUaeZn045WPTw/GC+aKTxx2jLsMQdugjgA
+ OKjvq2cZNROtPWj/aLpc9Bv6+uouWKg821ofpEzdnOvuts3ayNtbDeZcJV3+h8O/Qsakqibr1Su
+ Qkor4QHonBabbgXayeIQF26RU6WthxGmUvZ8CgDUa7Ne+mrW8aDRNnV4U7vvUos3BkRLIGC41XF
+ /50Y=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -205,49 +207,115 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Make reset_cpu() use PSCI only when it is enabled for the current phase
-and fall back to the watchdog otherwise, as already done on MT8188.
+Add SPL_ATF_BL33_BLOBLIST to pass the bloblist of SPL to BL33 with the
+register convention of the Firmware Handoff specification, through the
+BL33 entry point arguments that SPL gives to BL31. Without it, BL33
+still gets the primary CPU MPID in x0.
 
-SPL runs before BL31 is loaded, so a PSCI system reset is unavailable
-there.
+U-Boot proper already looks for a bloblist in its boot registers, but
+when SPL starts it through BL31, the only other way for it to find the
+bloblist is a fixed address in memory. Memory at a fixed address can
+still hold a bloblist from an earlier boot, for example after a warm
+reset, when an earlier stage did not write a new one. Passing it in
+registers ties it to the current boot.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- arch/arm/mach-mediatek/mt8189/init.c | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+ common/spl/Kconfig   | 13 +++++++++++++
+ common/spl/spl_atf.c | 29 +++++++++++++++++++++++++----
+ 2 files changed, 38 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm/mach-mediatek/mt8189/init.c b/arch/arm/mach-mediatek/mt8189/init.c
-index c0b7050c6a3..a0de674c452 100644
---- a/arch/arm/mach-mediatek/mt8189/init.c
-+++ b/arch/arm/mach-mediatek/mt8189/init.c
-@@ -7,8 +7,10 @@
- #include <cpu_func.h>
- #include <fdtdec.h>
- #include <stdio.h>
-+#include <wdt.h>
- #include <asm/global_data.h>
- #include <asm/system.h>
-+#include <dm/uclass.h>
- #include <linux/kernel.h>
- #include <linux/sizes.h>
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index fb8bbbd2f5c..28ac80d697a 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1705,6 +1705,19 @@ config SPL_ATF_LOAD_IMAGE_V2
+ 	  If you want to load a bl31 image from the SPL and need the new
+ 	  method, say Y.
  
-@@ -32,8 +34,15 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- 
- void reset_cpu(void)
- {
--	if (!CONFIG_IS_ENABLED(SYSRESET))
-+	struct udevice *wdt;
++config SPL_ATF_BL33_BLOBLIST
++	bool "Pass the bloblist to BL33"
++	depends on SPL_ATF && SPL_BLOBLIST
++	help
++	  Pass the bloblist to BL33, which is normally U-Boot proper, with the
++	  register convention of the Firmware Handoff specification instead of
++	  passing the primary CPU MPID in x0. BL33 then finds the bloblist
++	  without relying on a fixed address in memory.
 +
-+	if (CONFIG_IS_ENABLED(PSCI_RESET)) {
- 		psci_system_reset();
-+	} else {
-+		uclass_first_device(UCLASS_WDT, &wdt);
-+		if (wdt)
-+			wdt_expire_now(wdt, 0);
-+	}
- }
++	  BL31 must pass the BL33 entry point arguments on unchanged. This
++	  only affects the default bl2_plat_get_bl31_params() and
++	  bl2_plat_get_bl31_params_v2() implementations.
++
+ config SPL_ATF_NO_PLATFORM_PARAM
+ 	bool "Pass no platform parameter"
+ 	depends on SPL_ATF
+diff --git a/common/spl/spl_atf.c b/common/spl/spl_atf.c
+index cb0604ce034..8b65f466bbc 100644
+--- a/common/spl/spl_atf.c
++++ b/common/spl/spl_atf.c
+@@ -10,12 +10,16 @@
+  */
  
- static const char *mediatek_get_segment_name_string(void)
+ #include <atf_common.h>
++#include <bloblist.h>
+ #include <cpu_func.h>
+ #include <errno.h>
+ #include <image.h>
+ #include <log.h>
+ #include <spl.h>
+ #include <asm/cache.h>
++#include <asm/global_data.h>
++
++DECLARE_GLOBAL_DATA_PTR;
+ 
+ /* Holds all the structures we need for bl31 parameter passing */
+ struct bl2_to_bl31_params_mem {
+@@ -41,6 +45,25 @@ struct bl2_to_bl31_params_mem_v2 {
+ 	struct entry_point_info bl31_ep_info;
+ };
+ 
++static void bl2_plat_set_bl33_args(struct entry_point_info *ep_info)
++{
++	/*
++	 * Pass the bloblist to BL33 with the register convention of the
++	 * Firmware Handoff specification.
++	 */
++	if (CONFIG_IS_ENABLED(ATF_BL33_BLOBLIST) && gd_bloblist()) {
++		ep_info->args.arg0 = (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
++		ep_info->args.arg1 = BLOBLIST_MAGIC |
++			((u64)BLOBLIST_REGCONV_VER << BLOBLIST_REGCONV_SHIFT_64);
++		ep_info->args.arg2 = 0;
++		ep_info->args.arg3 = bloblist_get_base();
++		return;
++	}
++
++	/* BL33 expects to receive the primary CPU MPID (through x0) */
++	ep_info->args.arg0 = 0xffff & read_mpidr();
++}
++
+ struct bl31_params *bl2_plat_get_bl31_params_default(ulong bl32_entry,
+ 						     ulong bl33_entry,
+ 						     ulong fdt_addr)
+@@ -87,8 +110,7 @@ struct bl31_params *bl2_plat_get_bl31_params_default(ulong bl32_entry,
+ 	SET_PARAM_HEAD(bl33_ep_info, ATF_PARAM_EP, ATF_VERSION_1,
+ 		       ATF_EP_NON_SECURE);
+ 
+-	/* BL33 expects to receive the primary CPU MPID (through x0) */
+-	bl33_ep_info->args.arg0 = 0xffff & read_mpidr();
++	bl2_plat_set_bl33_args(bl33_ep_info);
+ 	bl33_ep_info->pc = bl33_entry;
+ 	bl33_ep_info->spsr = SPSR_64(MODE_EL2, MODE_SP_ELX,
+ 				     DISABLE_ALL_EXCEPTIONS);
+@@ -162,8 +184,7 @@ struct bl_params *bl2_plat_get_bl31_params_v2_default(ulong bl32_entry,
+ 	SET_PARAM_HEAD(bl_params_node->ep_info, ATF_PARAM_EP,
+ 		       ATF_VERSION_2, ATF_EP_NON_SECURE);
+ 
+-	/* BL33 expects to receive the primary CPU MPID (through x0) */
+-	bl_params_node->ep_info->args.arg0 = 0xffff & read_mpidr();
++	bl2_plat_set_bl33_args(bl_params_node->ep_info);
+ 	bl_params_node->ep_info->pc = bl33_entry;
+ 	bl_params_node->ep_info->spsr = SPSR_64(MODE_EL2, MODE_SP_ELX,
+ 						DISABLE_ALL_EXCEPTIONS);
 
 -- 
 2.53.0
