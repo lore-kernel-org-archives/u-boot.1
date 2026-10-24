@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0296D606A31A
-	for <u-boot@archiver.kernel.org>; Sat, 24 Oct 2026 22:35:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E644F606A31A
+	for <u-boot@archiver.kernel.org>; Sat, 24 Oct 2026 22:35:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=VsQdSEJi;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=f4aU2KgN
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=b/uHFVmk;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=SqKS99uU
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D37A9406AE;
-	Sat, 24 Oct 2026 22:35:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BBFBE60649;
+	Sat, 24 Oct 2026 22:35:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rxzbDQsllHZj; Sat, 24 Oct 2026 22:35:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E73CC40698
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792881342;
-	b=gLOL4AdJaqFQA7aw6kQ8p4bErsuCkowcN19v0mhzsbJAIKHXl0HH3kVWvuN4rc+gZpHw
-	 4VFOPkHpmzU9hRkpmgBc3qxJC29EkFClxayv9Icf8IBnHO4Diaqiqoyg//sBujPi3vBce
-	 RVOcTWbwusUdoki67AifKyiQFrNqFEErlQ6ydtcFu8eI4gLWevoSerFRkvJxWulGEdFRh
-	 43ow10KN2q8yXrGXTr3gdxSgCJZD3Jpo4cLtdAazwVU67WiN4lz/uU3cc3ZhnRtzpiOoD
-	 4K9B5841wl4KF39C8wLM7ztTaY1KEfK6CnfPTzHQ/qYnm9sbQt4AruRx4BYSJRiI2vg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id uu_TNrRzu4Wq; Sat, 24 Oct 2026 22:35:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A840E6061B
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792881332;
+	b=LDrRJAo6VwRl2hSAdLFXwRbRmLm5gQWV2xLKp4vFw+zFRabKaOV/rbuVzLxzpfQ6usMc
+	 gXt0X4PbcAeSKj/GhRgmkyuhD6byB3/7MUPP2Y4aYNAeVhuTWSMGqnQsK/GDDcBfk7kI5
+	 +vYPwF4qtDV7YF7jr/7UZNeyy28CCUMicaq92JKxkTimVgXoMgQsbKewBRqJ1bci8sWwV
+	 lNM6Lbxbi3+Y3sne+1OIvfDLuxrbwTS9++Ey8YGxY+XpoGxEgM+g419D0Fca9iNJbcgzq
+	 NKKxX7Sx+4RonZLPfR+yFQYI//i6PLuPCqLudZOFOZxwlEiFqZatLxVvGkLPoWv1HTQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792881342;
+	c=relaxed/relaxed; t=1792881332;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,138 +33,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=4pawsgXL4bjb40BD4RlGZInU6H/ucZ4Plr9jMTeg9GA=;
-	b=WQsjCvTy49Tc0kqjoafWcaWhqDgoMN2ygRioAOkJY2+r6MOM01IUi6MEByvVRBZURGw4
-	 Xu8dhgwFPKq9sUlr9hs9qVcy+T3WkCl/n3Nm09rWBdvBupcL5USGNsS0ORu8wmaX6qsJJ
-	 VxVGvpLY3d/xuoKhHh3+29oOtdB05fvinOkwpQtBuO27Objtb+EA1weUBeX/laje2Nvbk
-	 dx7zPTDFDetdveKAFcp2CNIDdYop8aJp5REBn/3IIhWKP4L/v/Q/UH1MFqfpyEmmaJHLL
-	 2poGBtseUNnMP03vfvN4fj8cW6EXa0p39QLgWrMyg0DEV6/C8tc9HLth/hmvvNzWumA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=DR4M3bHC8OUu4h2bTokXH9JCB7NYAorhOznPJcyZ3BY=;
+	b=IJwSQ344mwU1g67Opnz0/mgHKCH2tJrElWFDTYKc+UfDzqfCZESP7+msHwHMDuI5htYq
+	 dgGCOU6biD8H8cqspFHND+t70nC3P+Of+XgNv1Yv4/CeICDNYz2ZTq+XZXBF/dK0eqVOz
+	 8QDe26xH679m60FcWKDRR3r31EhLPR9kaTazDJsNQ5Njoky8pLyG9lfqPqTTzUMBtHP/f
+	 7+RcplyfcaQMkWEFko+G2SyR3L8yD09+wOkVZl5KmZy6e11MbOrL2wIc4ma4nw2f4ieIB
+	 sEvCucISQp9/Yt5YmAy21U95zEqx62QwT/HuLY4XDDQNpw2L4+zsvhdLyPjZayuOQHg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792881342;
-	bh=4pawsgXL4bjb40BD4RlGZInU6H/ucZ4Plr9jMTeg9GA=;
+	d=lists.u-boot-project.org; s=default; t=1792881331;
+	bh=DR4M3bHC8OUu4h2bTokXH9JCB7NYAorhOznPJcyZ3BY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=VsQdSEJi5qLAuNi/ZHs9d1B2bCVaThnncd04xNXifqIoDHs993fsS21tAs29yNbJe
-	 XPrWU2OHF7wOB++6im/ZXWcMxtWnUo7XRI9j5CIRaZkjh73iE3FWfNrxndojv56Dhc
-	 iQwlOnF8QyoZisoPd+3hmv9bc2MeVPoGQZGWqfW4FNMqUlrpG8Ha2LohmS3xowHjJL
-	 b4f6bFv7cqryUpCY0LsKMrIWzsZUN1/5VPj20ZSSQJPZTLlME2Lbed1RrBz0a62TKA
-	 7btIEI6JcHbtzYsu2RfkxOoqxftG9kuqNI0B77WX2NGcznfZ+gLEUdPrppGoe83YdY
-	 ZKzj5ZFSInjIw==
+	b=b/uHFVmk2TywSKeuCOlEQ9gMpebOBDHY/mxir8c4c+RkSj2rYAD/bWzKpyiyZtPt4
+	 tZ6peiQc/Mmjad2QqCd4Z2/MithPCbUJokAtoXnQ13GGHq+BJWZ+aYBk/xoHDxESTs
+	 0UVCe0EEzp1guiZUyR2fTWpGg4YGxrAeQod2J3xRqRpSFd1IsN2zvD0eazQt5G9SKe
+	 89rxlgkgWnvKmAxVPaIUgQHFUqFEyQ+/7tsY/y+5k7F+mIdxtgG9xCMU4IaMGi47zY
+	 +k0CHffsAO3S10x70bazECMAG9FVezDlCfUCoNjwe04BkruUFOJCjI01XD0A513mhx
+	 KOhczO6uTtLVQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E73CC40698;
-	Sat, 24 Oct 2026 22:35:41 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id DB05D356
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:35 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A840E6061B;
+	Sat, 24 Oct 2026 22:35:31 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 807CF380
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CD20C40079
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:35 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 7445680F33
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HmUa2wNLe3Up for <u-boot@lists.u-boot-project.org>;
- Sat, 24 Oct 2026 22:35:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 044284006B
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2001:4860:4864:20::36"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792881334;
- b=LDxiZEL6RU2p5bjjbaE4fDWzsoMSCL0LBOPq+ldB5qTJIib6EXkrqYldWmYCtDtrfRhZ
- Ziryf+cjXzGo6n4FXwf8M9hpwWTjfVAicu6pdjrmLcZR6yL4yqYGe1Uz69CQLDv2KU0kC
- HSxriC3mY7o3kQwzjCgakSdn7+S3sv+25jUKOKz9+tOHUvIbhqPeE7bEehD8omlZJGk2B
- BVmQ6jVshKmqelmbZCfcka2pYnEg+BLkC4kbG2hS0B063O0Pd0gexLl5JZS0zRqdbo7xU
- VyQpUF/BRTFO5dkxoWWGV15kWvr2c/Ft4x9LS9EPeOtDv0vdc3h8z39kq/XGqrqfJ9A==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id L5Qe1xJO5aRb for <u-boot@lists.u-boot-project.org>;
+ Sat, 24 Oct 2026 22:35:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 75F6780E3B
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c33"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792881325;
+ b=mVOd+lc2+xpBf2wJmpUgo6OmxQHeqGx8eprc//+7eu5ZyhXd2mdy7HuXynCH+QqOWqFg
+ GGcc01f5Z8w9tE0vsrddHoSFn3XIM2xLNKRDzOAcq4H0P92IMEfUKw40UD4OCE9NgpRFK
+ qsS7MZSjrXYMh3gzzbp3LfObmQHo9d0SEOSnvGZrV+zzBNwWMuJrgvD5OohYiPxIB0aYP
+ zNF8rCsNY8eJlL/MoTlI0DEAHIpZIY93ioMz03q9C6Uu+pl5qJIjsJvvzPwAAeUzuTpuq
+ naHzPElricX9G1/3MpYL5HPvgKkj3fvqfDU3QDyvjo5cFrmpPMz9Zxl/B047Gm4mycA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792881334;
+ c=relaxed/relaxed; t=1792881325;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=4pawsgXL4bjb40BD4RlGZInU6H/ucZ4Plr9jMTeg9GA=;
- b=TPD+zpvwOUx+Wjyo8r+1MrmobWhMJHSSwE5P914c9S7YSZ/je3xsRT6dMaMtGdBQFbIg
- BoBTNV3U3BBqsKak5b+DcznmuJyZkusPwseq36DtDM9hL6bsTqk2SI6iLsmOFKjSBKalt
- Bci7GAhsPNjdA7Nr/mMHZsYeD3/5easkSR+JlVmG/lJy9iYUEv6MuC3tjBx0OX+Bfk4e5
- IrazdWDBfPA12kKZaj6YwAp8BE6AiO1+0tZBPCqjiifkwzgYRYDgK1320oof9w+kjhHS6
- SBAlhoBF2mLWCCtm50IcTY/UjtvvidLZzeTVAtVZs99optJlrWW/2Y0ooh+PfXkUeZw==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=DR4M3bHC8OUu4h2bTokXH9JCB7NYAorhOznPJcyZ3BY=;
+ b=sImvjiPN7QggwukLf9kPEzkFUmDLNbe3COL9Km7s7HMoEcB1RB6LKzedKA2iI3y8W3bG
+ +ZIALYwTYzJvBXFQpHJZOs2hBZzKSrYQKHCV4Ct6gDhuBetF9U97sXe6hvOoa3VuqQp37
+ sG49B7Mk7OTkcKhOwnpnhwX/9YbJh5tO5NZ8re6uivdskgoYzb5RGhpvaYjSU2FSJznHH
+ MHXiv3YgE9GMg7nnIYSgNRInDzO6qqBXX6vHlMriuVnXjNRN4tfxfIWAbmwQyIehNyNzD
+ 50uM1yrQrDRzcRBtkY2yMPvXGhdT5Dh4Mp0dM7GTK+3VTnR/zYrfZV8ZPxtOCcfErzQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=f4aU2KgN; 
- arc=none smtp.remote-ip="2001:4860:4864:20::36"
+ header.s=20251104 header.b=SqKS99uU; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c33"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::36; helo=mail-oa1-x36.google.com;
+ client-ip=2607:f8b0:4864:20::c33; helo=mail-oo1-xc33.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=f4aU2KgN
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 044284006B
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:33 +0000 (UTC)
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-4a755bbe158so1077866fac.0
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 15:35:33 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=SqKS99uU
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 75F6780E3B
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:25 +0000 (UTC)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-6e560e00a86so1303008eaf.1
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 15:35:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792881332; x=1793486132;
+ d=gmail.com; s=20251104; t=1792881324; x=1793486124;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=4pawsgXL4bjb40BD4RlGZInU6H/ucZ4Plr9jMTeg9GA=;
- b=f4aU2KgN2ZpVy86t2FewvVzB7huaQyNeXljSl3o97OcuyZgjB4bmJndy1s7vdTGufr
- g8eX1W0SnJl0VDGXVXV41KJhOhiB7hGemFez8ZTj3mUOfkMGtpO32wGL/bMCnE9fbKfr
- 8e8S/x7TSE20FgphbIe/Wcpgt4KupFFYWU2XEil2GLcbBMVG7u3QBKR9x32ebprlz+1P
- 2nvW1rMZ2aIZgWTDSS1GvPi2s8Ae6CJOBz1zHQSK+UIQbJmZsHeZN7yC/Tn5EoqDMz9V
- x19fztsBeIPNWO+IFdA+4hDyaCc3nzWezMoRLIyJLXBM3zPS3k6e/caaI6fXmBdfHjmz
- Z9Vw==
+ bh=DR4M3bHC8OUu4h2bTokXH9JCB7NYAorhOznPJcyZ3BY=;
+ b=SqKS99uUHE26W8Z5GL8PRBALPepdFbU8oW7k8CJ5BAy0mDOxQxgvX3UDoCFa/C3Cb5
+ 4TLoGQs4XNnKxGhrY7ON1GaOBN12TrqPHA3VGNZXMJeGOqvLDy2D6XlFt/Ehv8JyUta/
+ 5pHvkfBVUe6SdCuWKGMt+zcUs/jVKtmtvuyQYe4+NGQkKUj6K3wkXXBNsS7hk7GcivnV
+ Q1AwE5v22Lu32Zh2FbtbqTd7LCa/qlQk4BmP2H0IdoZeRLbfXcn04iGo+0nROR2KJnoC
+ ZxgMkQb2fLgaKnVkpzPZQLrkM3IyTefiyKaQnNY9WEA3tH2Zhb6LmRyNv8iwmqBlTR51
+ gkcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792881332; x=1793486132;
+ d=1e100.net; s=20260707; t=1792881324; x=1793486124;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=4pawsgXL4bjb40BD4RlGZInU6H/ucZ4Plr9jMTeg9GA=;
- b=urHlWxcxx8a6GEDIzFXHhHDlVRdb4WlSQsF11Y/Mzrpz0MSAfidoiNJ4TARlybwFqM
- DONIWoAlB8kDf8+2hLVWEwzcDQQ4aVMBAh1M6NWpzYEnPIOshaxax94dbJqQaVruTDLt
- rrOmirnvj9oMgXWiNyYHC3TCpJFF/wNmP9AhFljmwWPa1QwKJMpyCd3fOZQcf/XIpJKi
- VDkgAe6F9J2/C4U9SEwGEe2hseTaQDilsCTyuxKLJeA0p2C+wNri0XhTzu7qCah+/DLX
- sYVGK9vB0nU8YlMSvJH+c06SY7V++oa+CKIJfGxSEVE2mdd15RuOtKAVC0DjUSxlG6Vx
- SpaQ==
-X-Gm-Message-State: AFq9FYLMqOBwDabiVP2viShO69Rn+Z0d2TKjcidPWPxaaIezXkBbf4AF
- v/atgeGD2S2AoeQmBnL+xQfQqvemelYc+oVU5lsH6s1hJ5ogQNnuRDyb
-X-Gm-Gg: AYBFou3V7Ixqu6oVA2bPMb49WL6bEamT7CbEKB1fpicaCiOJI6xvkfIGnLorObrhxvb
- 4aYJWnCYTgAolD/JE5ZvtjVdq16y4Sb4tvYw7lduyyP4SdqOj17sw/2tFBwQc1mPejjqlfGY3jW
- +sZYN+7WyVCEz25I7Y43f+2F3ZF14xLZ6ipLTp6p1UoTKRvmk2wiOKiqah2i/Wsrn7vz2730/v2
- IaFkA2iu62HtI8w5XkVzssAziubFwzPwIOkxyfeae2Wcj1g+LlTFNpCxf/4wIUEY5G9hlbmysCb
- HjojitaRyyiGEkm1KjixujkEzKP8Ehv6Mhna5cuwOdA1Oy/LcAbjm1YXX4O4oZIQxHlj7r6iZ95
- sZN1bzGrQL9C/kfku8M2phTplDMD2jgEIo4DeZZWRkBmbJDz5VTpKTtdNVcpCULfVzCuvOzrPi1
- 4uDrhZZnEm8TTwf7u/5iLo/yHYtcjatTPJs6gW3q+ZRHWK/cvDZXDFwW2OqiHAmT6BJscBKqvvm
- xIQJwuiOGCNhz0uK0VT0MS2PAVejV1UATPl82VJYrIZfbaOInMSz/Y6y1X//Q6QXp0mnpugihKB
- sPXdVOOGSN+RrGeNEXRTwvRbHergXQmjjw3zRhoy+ESjUo72NoisUmC2d6h8hkOT8KgZEzQsvgz
- oOlTNAy1Ae1LHdgym6AsFM41MTUiyNPOUfIyW9E1D/hbZ6/joCO8xZHOh5kQPFQ+rWl4xlsv2X1
- TjxMY=
-X-Received: by 2002:a05:6870:7a1a:b0:4a2:4e0c:5964 with SMTP id
- 586e51a60fabf-4a83f526627mr1569953fac.18.1792881332196; 
- Sat, 24 Oct 2026 15:35:32 -0700 (PDT)
+ bh=DR4M3bHC8OUu4h2bTokXH9JCB7NYAorhOznPJcyZ3BY=;
+ b=k62u5w1iNhnLqlo1upPGxeOLV7CxSQqnC352oJm3Bi95HlvV2zupbVKsqtzjs4eXGe
+ 49tkS8NXaGH7F5jFFkoE7+hGjizz2PMk4XElELGQdnxBR+KQICj8+8bHZ+z67Jo722t1
+ uhTVzNVBUigqrvhJWGXBI1a8C4F8po5nIUBrnywSAFAXgfthcZl07Fb0DZsKujQHt3h9
+ rhndBfLjrFSi+U2wEyrmLv4KiS17LHe26Sgasf4BdLO7TWm/3p244woJuTZjq5BS3xNI
+ 5ejxCXmcDKLN09BIXUHCtoZz+d5OpdcCP5Kbp9C+TsWm7WBN82/bK5QB5V8/w5YmNhQG
+ 1KIQ==
+X-Gm-Message-State: AFq9FYKPLb3bphH5hMIL0wau5mkUxJpBGS5OGnM0w09hvSeTbb606NhV
+ /o5vw3lFJDPquC6Cdka+Gwo+ZLLmOvtH2eSKeIvEgksI9LccSdZtwaBg
+X-Gm-Gg: AYBFou1iv+N6+wL+rmgN3MV0iZelnHdw1u8KdZrU7XOmTSMaVEqWkh431eCCV9MmfzQ
+ geykVGqmlQ8OSsddtxBwfIlbUHI/MjbnDPEOcBt4jq7irDCGsT7VefOjueP/F1Zh7az55W6RBQ6
+ YRY+XDnxes16se1F+9g/vB8FHVJFNgCQwpSiYAACIYo4WoarU+nMJnXOlPNmFBOWDgd1L9SIV0G
+ MiYF71CxkGxlI4kjVCND+a3zYA4aGKf8sFlgErUdLYSDwWJxGsySsbbV/RpctAAHQb30eH7izG0
+ WeHrJ+gI00iwasx0ehV7Ug5KWC6cFz0tJbbxyY5UvdGJe3aEiZtXIWs0hqD2n2bcHQSsrw67ocF
+ xNZenuJb9dzBqDeqpNdq72wWYEnUWcxPR7hWETTCA08ffdVY6+WkhMtuGLQylmV4vZX2tYuXw/F
+ obFktMURWUaAbnKEFxfp9T8LF8AtVF8UD+iC/giYgwquRtWL+g1SdFufb03QuvBnTp76uijy9Ln
+ 9y+XBgg2G1I/rOStyh1Gfwl423oDW6CQrcCP8eHzlyIA1x4/WQiw4GWWVh0RFdXlhJyDWrxvHu1
+ mTnhHG0w/i8XAif56Y9XRFt/k0qpoOqgnAbc76XprbOw4St69zW3VVbdti+3SxefJzsSyniXjWE
+ x/60BmSko3n6At+RndAjhtmLcnq91qvg5f/vhs3Fst3Eg5zQ5cZnfzGAzgu4ldCgmAMQH+sMY34
+ CD3RM=
+X-Received: by 2002:a05:6820:1395:b0:6e2:3d8b:a01c with SMTP id
+ 006d021491bc7-70ba0da04fbmr1563775eaf.19.1792881323994; 
+ Sat, 24 Oct 2026 15:35:23 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4a8430d8130sm1706457fac.5.2026.10.24.15.35.30
+ 586e51a60fabf-4a8430d8130sm1706457fac.5.2026.10.24.15.35.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 Oct 2026 15:35:31 -0700 (PDT)
+ Sat, 24 Oct 2026 15:35:23 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Sat, 24 Oct 2026 16:34:57 -0600
-Subject: [PATCH v2 10/16] net: lwip: honor autostart after TFTP download
- commands
+Date: Sat, 24 Oct 2026 16:34:52 -0600
+Subject: [PATCH v2 05/16] net: tftp: make automatic updates stack-independent
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261024-submit-lwip-tftp-combined-v1-v2-10-0f663f735ee8@gmail.com>
+Message-Id: <20261024-submit-lwip-tftp-combined-v1-v2-5-0f663f735ee8@gmail.com>
 References: <20261024-submit-lwip-tftp-combined-v1-v2-0-0f663f735ee8@gmail.com>
 In-Reply-To: <20261024-submit-lwip-tftp-combined-v1-v2-0-0f663f735ee8@gmail.com>
 To: Jerome Forissier <jerome.forissier@arm.com>
@@ -202,741 +201,1036 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Match the legacy tftpboot and tftpsrv commands by checking autostart after
-a successful nonempty download. Run the boot hook only after the TFTP
-callbacks and shared runtime attachment are removed, and propagate its
-result. Internal callers use the download-only helpers; tftpput never
-boots its source buffer.
+The update code overrides variables internal to the legacy TFTP
+client before calling net_loop(). This cannot work with lwIP. The
+timeout override is also ineffective with the legacy client because
+tftp_start() uses a separate private value.
 
-Exercise receive-server autostart, empty files and metadata failures in
-sandbox without handing off to a bootable image.
+Add a common helper which scopes an initial-request timeout around
+tftpb_run(). Keep the documented 100 ms server probe and zero retries
+for automatic updates, without changing the normal transfer timeout or
+the RFC 2349 timeout option. Both stacks switch to their normal timeout
+and retry budget after the first DATA or OACK response. Leave the timeout
+environment variables unchanged, and remove the update-only globals.
 
-Also deliver a second WRQ and DATA in the final receive batch. A completed,
-empty or failed command must retain its original result and leave the
-image and published metadata untouched by the later transfer.
+Resolve the server or gateway MAC address before starting lwIP's short
+request timer. Like the legacy stack, keep the bounded ARP retry phase
+separate from the server-response budget so a lost ARP reply does not
+exhaust the probe before its request reaches the server.
 
-Exercise command and helper downloads with autostart enabled. Check that
-internal TFTP and DHCP callers return downloaded data without booting
-it, restore the exact environment value, and preserve errors. A direct
-TFTP command must attempt to boot the same non-bootable bytes after
-releasing the network runtime and propagate the boot failure.
+Suppress autostart while downloading: unlike net_loop(), the command
+path can otherwise attempt to boot an update before the caller processes
+it. Preserve the exact previous autostart value, including its absence,
+and restore it on transfer failure as well as success.
 
-Check that a stale DHCP filename does not override a later command's
-bootfile setting or its IP-derived default, with either network stack.
+This dispatches through the selected network stack. Have the lwIP
+client publish net_boot_file_size for the update cache flush, reset the
+legacy client's private timeout settings for each transfer, and select
+the required network commands.
 
-Preserve colon-containing filenames and lwIP's numeric destination-port
-extension. Inspect requested block and window sizes, including overrides
-above the default, upload MTU limits, and builds with NET_TFTP_VARS
-disabled. Keep client-specific override tests conditional on that option.
-
-Cover read-only autostart settings and the protocol-default 512-byte
-block size, which does not require a blksize wire option.
+Add sandbox coverage for both stacks: lost ARP replies, gateway resolution,
+bounded ARP failure and cancellation, silent-server probes, request retries,
+normal DATA and OACK recovery, subsequent ordinary transfers, automatic
+boot suppression and preservation of environment settings.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- cmd/Kconfig               |   5 +-
- doc/usage/cmd/tftpsrv.rst |   9 +-
- net/lwip/tftp.c           |  12 +-
- test/dm/lwip_dhcp.c       |   8 ++
- test/dm/lwip_net_loop.c   |   3 +-
- test/dm/lwip_tftp.c       | 109 ++++++++++++++---
- test/dm/tftp.c            | 303 +++++++++++++++++++++++++++++++++++++++++++---
- 7 files changed, 404 insertions(+), 45 deletions(-)
+ common/Kconfig                                    |   6 +-
+ common/update.c                                   |  55 ++--
+ include/net-common.h                              |  24 ++
+ include/net/tftp.h                                |   3 -
+ lib/lwip/lwip/src/apps/tftp/tftp.c                |  30 +-
+ lib/lwip/lwip/src/include/lwip/apps/tftp_client.h |   1 +
+ net/Kconfig                                       |   1 -
+ net/lwip/tftp.c                                   |  58 ++++
+ net/net-common.c                                  |  46 +++
+ net/tftp.c                                        |  55 ++--
+ test/dm/Makefile                                  |   3 +
+ test/dm/tftp.c                                    | 362 ++++++++++++++++++++++
+ 12 files changed, 579 insertions(+), 65 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 3e79920e7d1..c72b00325d9 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2321,8 +2321,9 @@ config CMD_TFTPSRV
- 	depends on CMD_TFTPBOOT
+diff --git a/common/Kconfig b/common/Kconfig
+index c739225621b..bcefa5ebc57 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -1036,8 +1036,10 @@ config UPDATE_COMMON
+ 
+ config UPDATE_TFTP
+ 	bool "Auto-update using fitImage via TFTP"
+-	depends on FIT && OF_LIBFDT && !MTD_NOR_FLASH
++	depends on FIT && OF_LIBFDT && !MTD_NOR_FLASH && NET
+ 	select UPDATE_COMMON
++	select CMD_NET
++	select CMD_TFTPBOOT
  	help
- 	  Act as a TFTP server and receive the first incoming file into
--	  memory. The command returns successfully after the transfer so
--	  boot scripts can boot the received image from the load address.
-+	  memory. If autostart is enabled, boot the received image after a
-+	  successful nonempty transfer. Otherwise return to the caller so
-+	  boot scripts can use the image at the load address.
+ 	  This option allows performing update of NOR with data in fitImage
+ 	  sent via TFTP boot.
+@@ -1045,11 +1047,13 @@ config UPDATE_TFTP
+ config UPDATE_TFTP_CNT_MAX
+ 	int "The number of connection retries during auto-update"
+ 	default 0
++	range 0 2147483647
+ 	depends on UPDATE_TFTP || DFU_TFTP
  
- config CMD_WGET
- 	bool "wget"
-diff --git a/doc/usage/cmd/tftpsrv.rst b/doc/usage/cmd/tftpsrv.rst
-index d067afdba57..2c6d08cdc80 100644
---- a/doc/usage/cmd/tftpsrv.rst
-+++ b/doc/usage/cmd/tftpsrv.rst
-@@ -25,10 +25,10 @@ loadAddress
-     image load address.
+ config UPDATE_TFTP_MSEC_MAX
+ 	int "Delay in mSec to wait for the TFTP server during auto-update"
+ 	default 100
++	range 1 1073741823
+ 	depends on UPDATE_TFTP || DFU_TFTP
  
- After a successful transfer, the *fileaddr* and *filesize* environment
--variables describe the received file. The command returns successfully after
--the transfer has completed. It does not boot the file automatically; boot
--scripts can use commands such as bootm, booti or bootefi to boot from the
--load address.
-+variables describe the received file. If *autostart* is enabled, a nonempty
-+file is passed to bootm after the transfer completes. Otherwise, the command
-+returns without booting the file; boot scripts can use commands such as
-+bootm, booti or bootefi to boot from the load address.
+ config UPDATE_LOAD_ADDR
+diff --git a/common/update.c b/common/update.c
+index 06e53cbd402..5adce3fc245 100644
+--- a/common/update.c
++++ b/common/update.c
+@@ -13,7 +13,6 @@
+ #include <command.h>
+ #include <env.h>
+ #include <net.h>
+-#include <net/tftp.h>
+ #include <malloc.h>
+ #include <mapmem.h>
+ #include <dfu.h>
+@@ -23,8 +22,6 @@
+ /* env variable holding the location of the update file */
+ #define UPDATE_FILE_ENV		"updatefile"
  
- The transfer is aborted if no transfer has started after about 50 seconds or
- if Ctrl-C is pressed.
-@@ -45,6 +45,7 @@ In the example the following steps are executed:
- ::
+-extern ulong tftp_timeout_ms;
+-extern int tftp_timeout_count_max;
+ #ifdef CONFIG_MTD_NOR_FLASH
+ #include <flash.h>
+ #include <mtd/cfi_flash.h>
+@@ -32,48 +29,38 @@ static uchar *saved_prot_info;
+ #endif
+ static int update_load(char *filename, ulong msec_max, int cnt_max, ulong addr)
+ {
+-	int rv, ret;
+-	ulong saved_timeout_msecs;
+-	int saved_timeout_count;
++	const char *netretry;
+ 	char *saved_netretry, *saved_bootfile;
++	int rv = 1;
++	int ret;
  
-     => setenv autoload no
-+    => setenv autostart no
-     => dhcp
-     BOOTP broadcast 1
-     DHCP client bound to address 192.168.1.40 (7 ms)
+-	rv = 0;
+-	/* save used globals and env variable */
+-	saved_timeout_msecs = tftp_timeout_ms;
+-	saved_timeout_count = tftp_timeout_count_max;
+-	saved_netretry = strdup(env_get("netretry"));
++	netretry = env_get("netretry");
++	saved_netretry = netretry ? strdup(netretry) : NULL;
++	if (netretry && !saved_netretry)
++		return 1;
+ 	saved_bootfile = strdup(net_boot_file_name);
+-
+-	/* set timeouts for auto-update */
+-	tftp_timeout_ms = msec_max;
+-	tftp_timeout_count_max = cnt_max;
++	if (!saved_bootfile)
++		goto out_free_netretry;
+ 
+ 	/* we don't want to retry the connection if errors occur */
+-	env_set("netretry", "no");
++	if (env_set("netretry", "no"))
++		goto out_restore;
+ 
+ 	/* download the update file */
+-	image_load_addr = addr;
+-	copy_filename(net_boot_file_name, filename, sizeof(net_boot_file_name));
+-	ret = net_loop(TFTPGET);
++	ret = tftpb_run_timeout(addr, filename, msec_max, cnt_max);
+ 
+-	if (ret < 0)
+-		rv = 1;
+-	else
++	if (!ret) {
+ 		flush_cache(addr, net_boot_file_size);
++		rv = 0;
++	}
+ 
+-	/* restore changed globals and env variable */
+-	tftp_timeout_ms = saved_timeout_msecs;
+-	tftp_timeout_count_max = saved_timeout_count;
+-
++out_restore:
+ 	env_set("netretry", saved_netretry);
+-	if (saved_netretry != NULL)
+-		free(saved_netretry);
+-
+-	if (saved_bootfile != NULL) {
+-		copy_filename(net_boot_file_name, saved_bootfile,
+-			      sizeof(net_boot_file_name));
+-		free(saved_bootfile);
+-	}
++	copy_filename(net_boot_file_name, saved_bootfile,
++		      sizeof(net_boot_file_name));
++	free(saved_bootfile);
++out_free_netretry:
++	free(saved_netretry);
+ 
+ 	return rv;
+ }
+diff --git a/include/net-common.h b/include/net-common.h
+index f1f670dbd8b..12c1689bf57 100644
+--- a/include/net-common.h
++++ b/include/net-common.h
+@@ -535,6 +535,30 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+  */
+ int tftpb_run(ulong addr, const char *fname);
+ 
++/**
++ * tftpb_run_timeout() - Download via TFTP with an initial server-probe timeout
++ *
++ * Normal transfer timeouts apply after the server responds. Suppresses
++ * automatic boot and restores autostart on success and failure. Does not
++ * change the timeout environment variables or the RFC 2349 timeout option.
++ *
++ * @addr: Address to load the file into
++ * @fname: Filename of file to load
++ * @timeout_ms: Initial request timeout in milliseconds, 1..U32_MAX / 4
++ * @max_retries: Maximum number of initial request retransmissions
++ * Return: 0 if successful, otherwise a negative error code
++ */
++int tftpb_run_timeout(ulong addr, const char *fname, ulong timeout_ms,
++		      int max_retries);
++
++struct tftp_request_timeout {
++	ulong msecs;
++	int max_retries;
++};
++
++/* Initial request override for the current synchronous download, or NULL. */
++const struct tftp_request_timeout *tftp_get_request_timeout(void);
++
+ /**
+  * do_ping - Run the ping command
+  *
+diff --git a/include/net/tftp.h b/include/net/tftp.h
+index c7e14817280..a02ea051db6 100644
+--- a/include/net/tftp.h
++++ b/include/net/tftp.h
+@@ -22,9 +22,6 @@ void tftp_start(enum proto_t protocol);	/* Begin TFTP get/put */
+ void tftp_start_server(void);	/* Wait for incoming TFTP put */
+ #endif
+ 
+-extern ulong tftp_timeout_ms;
+-extern int tftp_timeout_count_max;
+-
+ /**********************************************************************/
+ 
+ #endif /* __TFTP_H__ */
+diff --git a/lib/lwip/lwip/src/apps/tftp/tftp.c b/lib/lwip/lwip/src/apps/tftp/tftp.c
+index e3453fa9bfa..49749fb8262 100644
+--- a/lib/lwip/lwip/src/apps/tftp/tftp.c
++++ b/lib/lwip/lwip/src/apps/tftp/tftp.c
+@@ -101,6 +101,8 @@ struct tftp_state {
+   u32_t put_tsize;
+   u32_t timeout_msecs;
+   u32_t max_retries;
++  u32_t request_timeout_msecs;
++  u32_t request_max_retries;
+   u32_t retries;
+   u8_t request_timeout;
+   u8_t negotiated_timeout;
+@@ -809,7 +811,7 @@ tftp_req_tmr(void *arg)
+     return;
+   }
+ 
+-  if (tftp_state.retries >= tftp_state.max_retries) {
++  if (tftp_state.retries >= tftp_state.request_max_retries) {
+     transfer_timed_out();
+     return;
+   }
+@@ -818,7 +820,7 @@ tftp_req_tmr(void *arg)
+   ret = resend_request();
+   LWIP_UNUSED_ARG(ret);
+   tftp_state.retries++;
+-  sys_timeout(tftp_state.timeout_msecs, tftp_req_tmr, NULL);
++  sys_timeout(tftp_state.request_timeout_msecs, tftp_req_tmr, NULL);
+ }
+ 
+ /**
+@@ -853,6 +855,8 @@ tftp_init_common(u8_t mode, const struct tftp_context *ctx)
+   tftp_state.tftp_mode = mode;
+   tftp_state.timeout_msecs = TFTP_TIMEOUT_MSECS;
+   tftp_state.max_retries = TFTP_MAX_RETRIES;
++  tftp_state.request_timeout_msecs = TFTP_TIMEOUT_MSECS;
++  tftp_state.request_max_retries = TFTP_MAX_RETRIES;
+   tftp_state.wrq_pending = false;
+ 
+   udp_recv(pcb, tftp_recv, NULL);
+@@ -930,6 +934,26 @@ tftp_set_timeout(u32_t timeout_msecs, u32_t max_retries)
+ 
+   tftp_state.timeout_msecs = timeout_msecs;
+   tftp_state.max_retries = max_retries;
++  tftp_state.request_timeout_msecs = timeout_msecs;
++  tftp_state.request_max_retries = max_retries;
++  return ERR_OK;
++}
++
++/** @ingroup tftp
++ * Override the initial request timeout after tftp_set_timeout().
++ * Transfer timeouts and the advertised RFC 2349 option remain unchanged.
++ * @param timeout_msecs Initial request timeout in milliseconds
++ * @param max_retries Maximum number of request retransmissions
++ * @return ERR_ARG if the timeout is zero or outside sys_timeout()'s range
++ */
++err_t
++tftp_client_set_request_timeout(u32_t timeout_msecs, u32_t max_retries)
++{
++  if ((timeout_msecs == 0) || (timeout_msecs > LWIP_UINT32_MAX / 4))
++    return ERR_ARG;
++
++  tftp_state.request_timeout_msecs = timeout_msecs;
++  tftp_state.request_max_retries = max_retries;
+   return ERR_OK;
+ }
+ 
+@@ -1005,7 +1029,7 @@ start_send_requests(const ip_addr_t *addr, u16_t port, u16_t opcode, const char*
+     return ret;
+   }
+ 
+-  sys_timeout(tftp_state.timeout_msecs, tftp_req_tmr, NULL);
++  sys_timeout(tftp_state.request_timeout_msecs, tftp_req_tmr, NULL);
+   return ERR_OK;
+ }
+ 
+diff --git a/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h b/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h
+index 6a5019c079b..1d54c9ff2bc 100644
+--- a/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h
++++ b/lib/lwip/lwip/src/include/lwip/apps/tftp_client.h
+@@ -45,6 +45,7 @@ enum tftp_transfer_mode {
+ 
+ err_t tftp_init_client(const struct tftp_context* ctx);
+ err_t tftp_client_bind(u16_t port);
++err_t tftp_client_set_request_timeout(u32_t timeout_msecs, u32_t max_retries);
+ void tftp_client_set_blksize(u16_t blksize);
+ void tftp_client_set_tsize(u32_t tsize);
+ u32_t tftp_client_get_tsize(void);
+diff --git a/net/Kconfig b/net/Kconfig
+index 0f50b422f4f..1018df11df9 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -48,7 +48,6 @@ config NETCONSOLE
+ 
+ config ARP_TIMEOUT
+ 	int "Milliseconds before trying ARP again"
+-	depends on NET_LEGACY
+ 	default 5000
+ 
+ config NET_RETRY_COUNT
 diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-index 4cf451e1184..f29a20f518e 100644
+index 5347155120c..025b65a3a82 100644
 --- a/net/lwip/tftp.c
 +++ b/net/lwip/tftp.c
-@@ -581,7 +581,9 @@ int do_tftpsrv(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+@@ -12,6 +12,7 @@
+ #include <linux/kconfig.h>
+ #include <lwip/apps/tftp_client.h>
+ #include <lwip/apps/tftp_server.h>
++#include <lwip/etharp.h>
+ #include <lwip/timeouts.h>
+ #include <mapmem.h>
+ #include <net.h>
+@@ -152,6 +153,7 @@ static void tftp_close(void *handle)
+ 		return;
+ 	}
+ 	ctx->done = SUCCESS;
++	net_boot_file_size = ctx->size;
  
- out:
- 	net_lwip_stop(&net);
--	return ret;
-+	if (ret || !net_boot_file_size)
-+		return ret;
-+	return bootm_maybe_autostart(cmdtp, argv[0]);
+ 	tftp_tsize = tftp_transfer_size(ctx);
+ 	if (tftp_tsize) {
+@@ -275,12 +277,54 @@ static int tftp_get_blocksize(enum tftp_operation operation, u16 *blksize)
+ 	return 0;
  }
  
- static int tftp_default_filename(char *fname, size_t size)
-@@ -807,7 +809,13 @@ out:
- 
- int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++/* Resolve the next hop before starting an internal caller's short RRQ timer. */
++static int tftp_probe_arp(struct netif *netif, const ip4_addr_t *server)
++{
++	const ip4_addr_t *target = server;
++	const ip4_addr_t *resolved;
++	struct eth_addr *ethaddr;
++	ulong start;
++	int tries;
++
++	if (ip4_addr_isbroadcast(server, netif) || ip4_addr_ismulticast(server))
++		return 0;
++	if (!ip4_addr_net_eq(server, netif_ip4_addr(netif), netif_ip4_netmask(netif)) &&
++	    !ip4_addr_islinklocal(server)) {
++		target = netif_ip4_gw(netif);
++		/* Leave a missing route to the TFTP client's normal error handling. */
++		if (ip4_addr_isany_val(*target))
++			return 0;
++	}
++	if (etharp_find_addr(netif, target, &ethaddr, &resolved) >= 0)
++		return 0;
++
++	/* Match net/arp.c's bounded retry policy, including the initial request. */
++	for (tries = 0; tries < max(1, CONFIG_NET_RETRY_COUNT - 1); tries++) {
++		start = get_timer(0);
++		/* Do not queue an RRQ or create a pending entry with its own timer. */
++		etharp_request(netif, target);
++		do {
++			net_lwip_poll();
++			if (ctrlc()) {
++				printf("\nAbort\n");
++				return -EINTR;
++			}
++			if (etharp_find_addr(netif, target, &ethaddr, &resolved) >= 0)
++				return 0;
++		} while (get_timer(start) <= CONFIG_ARP_TIMEOUT);
++	}
++
++	printf("\nARP Retry count exceeded\n");
++	return -EAGAIN;
++}
++
+ static int tftp_loop(struct net_lwip_ctx *net,
+ 		     enum tftp_operation operation,
+ 		     ulong addr, ulong size, char *fname, ip_addr_t srvip,
+ 		     u16 srvport, u16 srcport, u32 timeout_msecs,
+ 		     u32 max_retries)
  {
--	return do_tftp(cmdtp, flag, argc, argv, TFTP_DOWNLOAD);
++	const struct tftp_request_timeout *request = tftp_get_request_timeout();
+ 	struct tftp_ctx ctx;
+ 	bool initialized = false;
+ 	u16 blksize;
+@@ -303,6 +347,7 @@ static int tftp_loop(struct net_lwip_ctx *net,
+ 	ctx.daddr = addr;
+ 	ctx.total_size = size;
+ 	ctx.upload = operation == TFTP_UPLOAD;
++	net_boot_file_size = 0;
+ 
+ 	printf("Using %s device\n", net->dev->name);
+ 	printf("TFTP %s server %s; our IP address is %s\n",
+@@ -318,6 +363,13 @@ static int tftp_loop(struct net_lwip_ctx *net,
+ 		printf("Loading: ");
+ 	}
+ 
++	if (operation == TFTP_DOWNLOAD && request) {
++		int ret = tftp_probe_arp(net->netif, ip_2_ip4(&srvip));
++
++		if (ret)
++			return ret;
++	}
++
+ 	err = tftp_init_client(&tftp_context);
+ 	if (err != ERR_OK) {
+ 		log_err("tftp_init_client err: %d\n", err);
+@@ -338,6 +390,11 @@ static int tftp_loop(struct net_lwip_ctx *net,
+ 		log_err("tftp_set_timeout err: %d\n", err);
+ 		goto out_cleanup;
+ 	}
++	if (operation == TFTP_DOWNLOAD && request) {
++		err = tftp_client_set_request_timeout(request->msecs, request->max_retries);
++		if (err != ERR_OK)
++			goto out_cleanup;
++	}
+ 
+ 	tftp_client_set_blksize(blksize);
+ 
+@@ -422,6 +479,7 @@ static int tftpsrv_loop(struct net_lwip_ctx *net, ulong addr)
+ 	ctx.done = NOT_DONE;
+ 	ctx.daddr = addr;
+ 	ctx.is_server = true;
++	net_boot_file_size = 0;
+ 
+ 	printf("Using %s device\n", net->dev->name);
+ 	printf("Listening for TFTP transfer on %s\n", ipaddr);
+diff --git a/net/net-common.c b/net/net-common.c
+index 3a9a0635ad8..c5d13a23b09 100644
+--- a/net/net-common.c
++++ b/net/net-common.c
+@@ -1,6 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0
+ 
+ #include <env.h>
++#include <limits.h>
+ #include <malloc.h>
+ #include <net-common.h>
+ #include <rtc.h>
+@@ -105,6 +106,13 @@ int dhcp_run(ulong addr, const char *fname, bool autoload)
+ #endif
+ 
+ #if defined(CONFIG_CMD_TFTPBOOT)
++static const struct tftp_request_timeout *tftp_request_timeout;
++
++const struct tftp_request_timeout *tftp_get_request_timeout(void)
++{
++	return tftp_request_timeout;
++}
++
+ int tftpb_run(ulong addr, const char *fname)
+ {
+ 	char *tftp_argv[] = {"tftpboot", NULL, (char *)fname, NULL};
+@@ -123,4 +131,42 @@ int tftpb_run(ulong addr, const char *fname)
+ 	return 0;
+ }
+ 
++int tftpb_run_timeout(ulong addr, const char *fname, ulong timeout_ms,
++		      int max_retries)
++{
++	struct tftp_request_timeout timeout = { timeout_ms, max_retries };
++	const struct tftp_request_timeout *saved = tftp_request_timeout;
++	const char *autostart_env = env_get("autostart");
++	char *saved_autostart = NULL;
++	int restore_ret = 0;
 +	int ret;
 +
-+	ret = do_tftp(cmdtp, flag, argc, argv, TFTP_DOWNLOAD);
-+	if (ret || !net_boot_file_size)
-+		return ret;
-+	/* The transfer's callbacks and runtime attachment are already gone. */
-+	return bootm_maybe_autostart(cmdtp, argv[0]);
- }
- 
- int do_tftpput(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-diff --git a/test/dm/lwip_dhcp.c b/test/dm/lwip_dhcp.c
-index c93579aea49..60b4d2a311e 100644
---- a/test/dm/lwip_dhcp.c
-+++ b/test/dm/lwip_dhcp.c
-@@ -251,10 +251,18 @@ static int dhcp_handoff_check(struct unit_test_state *uts,
- 	}
- 	*test = (struct dhcp_handoff_test){ .offer = "offered.bin", .fail = true };
- 	ut_assertok(env_set("autoload", "NFS"));
-+	ut_assertok(env_set("autostart", "yes-please"));
- 	ut_asserteq(-ENOENT, dhcp_run(0x2000000, "explicit.bin", true));
- 	ut_asserteq_str("NFS", env_get("autoload"));
- 	ut_assert(!test->dhcp_alive);
- 	ut_assertnull(netif_default);
-+	*test = (struct dhcp_handoff_test){ .offer = "offered.bin" };
-+	if (IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
-+		ut_assertok(dhcp_run(0x2000000, "explicit.bin", true));
-+		ut_asserteq_str("yes-please", env_get("autostart"));
-+		ut_asserteq_str("NFS", env_get("autoload"));
-+		ut_assertnull(netif_default);
-+	}
- 	*test = (struct dhcp_handoff_test){ .offer = "", .timeout = true };
- 	ut_asserteq(-ENOENT, dhcp_run(0x2000000, NULL, true));
- 	ut_asserteq(0, test->tftp);
-diff --git a/test/dm/lwip_net_loop.c b/test/dm/lwip_net_loop.c
-index 2e646e40020..4fedc9ba9e4 100644
---- a/test/dm/lwip_net_loop.c
-+++ b/test/dm/lwip_net_loop.c
-@@ -71,13 +71,14 @@ static int net_loop_check(struct unit_test_state *uts, int *mode)
- 	ut_assertok(env_set("tftpdstp", NULL));
- 	ut_assertok(env_set("loadaddr", "2000000"));
- 	ut_assertok(env_set("bootfile", "other.bin"));
--	ut_assertok(env_set("autostart", "no"));
-+	ut_assertok(env_set("autostart", "yes"));
- 	strcpy(net_boot_file_name, "test.bin");
- 	image_load_addr = 0x2100000;
- 	for (*mode = -1; *mode <= 1; (*mode)++) {
- 		net_boot_file_size = 1234;
- 		ut_asserteq(*mode < 0 ? -EINVAL : *mode, net_loop(TFTPGET));
- 		ut_asserteq(*mode > 0 ? 1 : 0, net_boot_file_size);
-+		ut_asserteq_str("yes", env_get("autostart"));
- 		if (*mode >= 0)
- 			ut_asserteq_str("2100000", env_get("fileaddr"));
- 	}
-diff --git a/test/dm/lwip_tftp.c b/test/dm/lwip_tftp.c
-index 3c2562f99a1..7d84120ab4c 100644
---- a/test/dm/lwip_tftp.c
-+++ b/test/dm/lwip_tftp.c
-@@ -33,6 +33,9 @@ struct tftp_protocol_test {
- 	bool initialized;
- 	bool fail_data_alloc;
- 	bool window_requested;
-+	bool server_empty;
-+	bool server_followup;
-+	bool server_failure;
- 	char timeout[4];
- };
- 
-@@ -724,7 +727,10 @@ static int tftp_test_windows(struct unit_test_state *uts,
- static void tftp_test_server_input(void *arg)
- {
- 	static const char wrq[] = "\000\002file\000octet";
-+	static const char other[] = "\000\002other\000octet";
- 	static const u8 data[] = { 0, 3, 0, 1, 'a', 'b', 'c' };
-+	static const u8 extra[] = { 0, 3, 0, 1, 'X', 'Y', 'Z' };
-+	static const char error[] = "\000\005\000\001missing";
- 	struct tftp_protocol_test *test = arg;
- 
- 	if (!test->server_phase++) {
-@@ -733,35 +739,95 @@ static void tftp_test_server_input(void *arg)
- 		/* Lose DATA 1 long enough for the server to retransmit ACK 0. */
- 		timer_test_add_offset(5001);
- 		sys_timeout(1, tftp_test_server_input, test);
-+	} else if (test->server_failure) {
-+		test->error = tftp_test_input(test, error, sizeof(error), 0);
- 	} else {
--		test->error = tftp_test_input(test, data, sizeof(data), 0);
-+		test->error = tftp_test_input(test, data,
-+					      test->server_empty ? 4 : sizeof(data), 0);
-+	}
-+	if (test->server_phase == 2 && test->server_followup && !test->error) {
-+		/* More packets can arrive before the command leaves its RX loop. */
-+		test->error = tftp_test_input(test, other, sizeof(other), 0);
-+		if (!test->error)
-+			test->error = tftp_test_input(test, extra, sizeof(extra), 0);
- 	}
- }
- 
- static int tftp_test_server_command(struct unit_test_state *uts,
- 				    struct tftp_protocol_test *test)
- {
--	int ret;
-+	int i, ret;
- 
- 	if (test->initialized)
- 		tftp_cleanup();
--	memset(test, 0, sizeof(*test));
--	ipaddr_aton("1.1.2.2", &test->server);
--	ut_assertok(env_set("autostart", "yes"));
--	sys_timeout(1, tftp_test_server_input, test);
--	ret = run_command("tftpsrv 2000000", 0);
--	sys_untimeout(tftp_test_server_input, test);
--	ut_assertok(ret);
--	ut_assertok(test->error);
--	ut_asserteq(2, test->server_phase);
--	ut_asserteq(3, test->sent);
--	ut_asserteq(4, test->opcode);
--	ut_asserteq(1, test->block);
--	ut_asserteq(0x2000000, image_load_addr);
--	ut_asserteq_str("3", env_get("filesize"));
--	ut_asserteq_str("2000000", env_get("fileaddr"));
--	ut_asserteq_str("yes", env_get("autostart"));
--	ut_asserteq_mem("abc", map_sysmem(0x2000000, 3), 3);
-+	for (i = 0; i < 4; i++) {
-+		memset(test, 0, sizeof(*test));
-+		test->server_empty = i == 2;
-+		ipaddr_aton("1.1.2.2", &test->server);
-+		ut_assertok(env_set("autostart", i ? "yes" : "no"));
-+		if (i == 3)
-+			ut_assertok(env_set(".flags", "filesize:xr"));
-+		sys_timeout(1, tftp_test_server_input, test);
-+		ret = run_command("tftpsrv 2000000", 0);
-+		sys_untimeout(tftp_test_server_input, test);
-+		ut_assertok(env_set(".flags", NULL));
-+		/*
-+		 * Non-bootable data must fail autostart, but an empty file must
-+		 * not boot stale RAM. Metadata errors are transfer failures.
-+		 */
-+		if (i == 3 || (i == 1 && IS_ENABLED(CONFIG_CMD_BOOTM)))
-+			ut_assert(ret != CMD_RET_SUCCESS);
-+		else
-+			ut_assertok(ret);
-+		ut_assertok(test->error);
-+		ut_asserteq(2, test->server_phase);
-+		ut_asserteq(3, test->sent);
-+		ut_asserteq(4, test->opcode);
-+		ut_asserteq(1, test->block);
-+		ut_asserteq(i >= 2 ? 0 : 3, net_boot_file_size);
-+		ut_asserteq(0x2000000, image_load_addr);
-+		ut_asserteq_str("2000000", env_get("fileaddr"));
-+		ut_asserteq_str(i ? "yes" : "no", env_get("autostart"));
-+		ut_asserteq_mem("abc", map_sysmem(0x2000000, 3), 3);
-+	}
-+	return 0;
-+}
++	if (!timeout_ms || timeout_ms > U32_MAX / 4 || max_retries < 0)
++		return -EINVAL;
 +
-+static int tftp_test_server_completion(struct unit_test_state *uts,
-+				       struct tftp_protocol_test *test)
-+{
-+	u8 expected[6];
-+	void *buf = map_sysmem(0x2000000, sizeof(expected));
-+	int i, ret;
-+
-+	ut_assertok(env_set("autostart", "no"));
-+	for (i = 0; i < 3; i++) {
-+		memset(test, 0, sizeof(*test));
-+		test->server_followup = true;
-+		test->server_empty = i == 1;
-+		test->server_failure = i == 2;
-+		ipaddr_aton("1.1.2.2", &test->server);
-+		memset(buf, 0xa5, sizeof(expected));
-+		memset(expected, 0xa5, sizeof(expected));
-+		if (!i)
-+			memcpy(expected, "abc", 3);
-+		ut_assertok(env_set("fileaddr", "1234"));
-+		ut_assertok(env_set("filesize", "5678"));
-+		sys_timeout(1, tftp_test_server_input, test);
-+		ret = run_command("tftpsrv 2000000", 0);
-+		sys_untimeout(tftp_test_server_input, test);
-+		ut_asserteq(i == 2 ? CMD_RET_FAILURE : CMD_RET_SUCCESS, ret);
-+		ut_assertok(test->error);
-+		ut_asserteq(2, test->server_phase);
-+		ut_asserteq(i == 2 ? 4 : 5, test->sent);
-+		ut_asserteq(5, test->opcode);
-+		ut_asserteq(2, test->block);
-+		ut_asserteq(i ? 0 : 3, net_boot_file_size);
-+		ut_asserteq_str(i == 2 ? "1234" : "2000000", env_get("fileaddr"));
-+		ut_asserteq_str(i == 2 ? "5678" : i ? "0" : "3", env_get("filesize"));
-+		ut_asserteq_mem(expected, buf, sizeof(expected));
-+	}
-+	unmap_sysmem(buf);
- 	return 0;
- }
- #endif
-@@ -769,7 +835,7 @@ static int tftp_test_server_command(struct unit_test_state *uts,
- static int dm_test_lwip_tftp_protocol(struct unit_test_state *uts)
- {
- 	static const char * const vars[] = {
--		"ethact", "ipaddr", "netmask", "fileaddr", "filesize", "autostart",
-+		"ethact", "ipaddr", "netmask", "fileaddr", "filesize", "autostart", ".flags",
- 	};
- 	struct tftp_protocol_test test = {};
- 	struct net_lwip_ctx net = {};
-@@ -817,6 +883,8 @@ static int dm_test_lwip_tftp_protocol(struct unit_test_state *uts)
- #if IS_ENABLED(CONFIG_CMD_TFTPSRV)
- 	if (!ret)
- 		ret = tftp_test_server_command(uts, &test);
-+	if (!ret)
-+		ret = tftp_test_server_completion(uts, &test);
- #endif
- 	if (test.initialized)
- 		tftp_cleanup();
-@@ -824,6 +892,7 @@ static int dm_test_lwip_tftp_protocol(struct unit_test_state *uts)
- 	tftp_test_active = NULL;
- 	net_lwip_stop(&net);
- restore_env:
-+	env_set(".flags", NULL);
- 	image_load_addr = load_addr;
- 	net_boot_file_size = size;
- 	for (i = 0; i < ARRAY_SIZE(vars); i++)
-diff --git a/test/dm/tftp.c b/test/dm/tftp.c
-index eb178573312..b70aa6f4722 100644
---- a/test/dm/tftp.c
-+++ b/test/dm/tftp.c
-@@ -15,6 +15,10 @@
- #include <asm/unaligned.h>
- #include <dm/test.h>
- #include <test/ut.h>
-+#if IS_ENABLED(CONFIG_NET_LWIP)
-+#include <lwip/timeouts.h>
-+#include <lwip/udp.h>
-+#endif
- 
- static const char tftp_test_data[] = "update data, not a bootable image";
- 
-@@ -29,6 +33,7 @@ enum tftp_test_probe {
- 
- struct tftp_test_context {
- 	bool fail;
-+	bool empty;
- 	bool autostart;
- 	unsigned int requests;
- 	unsigned int arp_requests;
-@@ -41,8 +46,47 @@ struct tftp_test_context {
- 	ulong ack_start;
- 	ulong ack_delay;
- 	unsigned int advertised_timeout;
-+	char filename[64];
-+	u16 blocksize;
-+	u16 windowsize;
-+	u16 port;
- };
- 
-+static ulong tftp_test_option(const char *packet, size_t len, const char *option)
-+{
-+	const char *end = packet + len;
-+	const char *name = packet + 2;
-+	size_t size;
-+	int i;
-+
-+	/* Skip the request's filename and mode before walking option pairs. */
-+	for (i = 0; i < 2; i++) {
-+		if (name >= end)
-+			return 0;
-+		size = strnlen(name, end - name);
-+		if (size == end - name)
-+			return 0;
-+		name += size + 1;
-+	}
-+	while (name < end) {
-+		const char *value;
-+
-+		size = strnlen(name, end - name);
-+		if (size == end - name)
-+			break;
-+		value = name + size + 1;
-+		if (value >= end)
-+			break;
-+		size = strnlen(value, end - value);
-+		if (size == end - value)
-+			break;
-+		if (!strcmp(name, option))
-+			return simple_strtoul(value, NULL, 10);
-+		name = value + size + 1;
-+	}
-+	return 0;
-+}
-+
- /* Answer an RRQ with one short DATA block or a file-not-found error. */
- static int tftp_test_tx_handler(struct udevice *dev, void *packet,
- 				unsigned int len)
-@@ -52,9 +96,9 @@ static int tftp_test_tx_handler(struct udevice *dev, void *packet,
- 	struct ethernet_hdr *eth = packet, *reply_eth;
- 	struct ip_udp_hdr *ip, *reply_ip;
- 	const char *data = ctx->fail ? "not found" : tftp_test_data;
--	unsigned int data_len = strlen(data) + 1;
-+	unsigned int data_len = ctx->empty ? 0 : strlen(data) + 1;
- 	unsigned int reply_len, header_len = 4;
--	u16 opcode, reply_opcode = ctx->fail ? 5 : 3, block = 1;
-+	u16 opcode, reply_opcode = 3, block = 1;
- 	bool partial = false;
- 	u8 *payload;
- 
-@@ -98,16 +142,16 @@ static int tftp_test_tx_handler(struct udevice *dev, void *packet,
- 			return 0;
- 		ctx->ack_delay = get_timer(ctx->ack_start);
- 		block = ctx->probe == TFTP_PROBE_DATA ? 2 : 1;
--	} else if (opcode == 1 && ntohs(ip->udp_dst) == 69) {
--		unsigned int i, request_len = len - ETHER_HDR_SIZE - IP_UDP_HDR_SIZE;
-+	} else if (opcode == 1 || opcode == 2) {
-+		size_t request_len = len - ETHER_HDR_SIZE - IP_UDP_HDR_SIZE;
- 
- 		if (!ctx->requests++)
- 			ctx->request_start = get_timer(0);
--		payload = (void *)(ip + 1);
--		for (i = 2; i + 10 <= request_len; i++) {
--			if (!memcmp(payload + i, "timeout\0", 8))
--				ctx->advertised_timeout = dectoul((char *)payload + i + 8, NULL);
--		}
-+		strlcpy(ctx->filename, (char *)(ip + 1) + 2, sizeof(ctx->filename));
-+		ctx->blocksize = tftp_test_option((char *)(ip + 1), request_len, "blksize");
-+		ctx->windowsize = tftp_test_option((char *)(ip + 1), request_len, "windowsize");
-+		ctx->port = ntohs(ip->udp_dst);
-+		ctx->advertised_timeout = tftp_test_option((char *)(ip + 1), request_len, "timeout");
- 		if (ctx->probe == TFTP_PROBE_SILENT)
- 			return 0;
- 		if (ctx->probe == TFTP_PROBE_DATA) {
-@@ -123,13 +167,23 @@ static int tftp_test_tx_handler(struct udevice *dev, void *packet,
- 				"timeout\0" "1" : "timeout\0" "5";
- 			data_len = 10;
- 		}
-+		if (opcode == 2) {
-+			reply_opcode = 4;
-+			block = 0;
-+			data_len = 0;
++	if (autostart_env) {
++		saved_autostart = strdup(autostart_env);
++		if (!saved_autostart) {
++			ret = -ENOMEM;
++			goto out_free;
 +		}
-+	} else if (ntohs(ip->udp_dst) == 1234 && opcode == 3 &&
-+		   len >= ETHER_HDR_SIZE + IP_UDP_HDR_SIZE + 4) {
-+		reply_opcode = 4;
-+		block = get_unaligned_be16((u8 *)(ip + 1) + 2);
-+		data_len = 0;
++	}
++
++	/* Updates need the downloaded data, not the command's automatic boot. */
++	ret = env_set("autostart", "no");
++	if (ret)
++		goto out_free;
++
++	tftp_request_timeout = &timeout;
++	ret = tftpb_run(addr, fname);
++	tftp_request_timeout = saved;
++
++	if (env_set("autostart", saved_autostart))
++		restore_ret = -EINVAL;
++out_free:
++	free(saved_autostart);
++
++	return ret ?: restore_ret;
++}
++
+ #endif
+diff --git a/net/tftp.c b/net/tftp.c
+index 73b31b8357d..e70358a3963 100644
+--- a/net/tftp.c
++++ b/net/tftp.c
+@@ -47,21 +47,11 @@
+ 
+ static ulong timeout_ms = TIMEOUT;
+ static int timeout_count_max = (CONFIG_NET_RETRY_COUNT * 2);
++static ulong request_timeout_ms;
++static int request_timeout_count_max;
+ static ulong time_start;   /* Record time we started tftp */
+ static struct in6_addr tftp_remote_ip6;
+ 
+-/*
+- * These globals govern the timeout behavior when attempting a connection to a
+- * TFTP server. tftp_timeout_ms specifies the number of milliseconds to
+- * wait for the server to respond to initial connection. Second global,
+- * tftp_timeout_count_max, gives the number of such connection retries.
+- * tftp_timeout_count_max must be non-negative and tftp_timeout_ms must be
+- * positive. The globals are meant to be set (and restored) by code needing
+- * non-standard timeout behavior when initiating a TFTP transfer.
+- */
+-ulong tftp_timeout_ms = TIMEOUT;
+-int tftp_timeout_count_max = (CONFIG_NET_RETRY_COUNT * 2);
+-
+ enum {
+ 	TFTP_ERR_UNDEFINED           = 0,
+ 	TFTP_ERR_FILE_NOT_FOUND      = 1,
+@@ -527,7 +517,9 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 		break;
+ #endif
+ 
+-	case TFTP_OACK:
++	case TFTP_OACK: {
++		bool first_oack = tftp_state == STATE_SEND_RRQ;
++
+ 		/*
+ 		 * RFC 2347 makes every option name and value a NUL terminated
+ 		 * string, so a well-formed OACK always ends in a NUL. Checking
+@@ -590,6 +582,10 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 		}
+ 
+ 		tftp_next_ack = tftp_windowsize;
++		if (first_oack && tftp_state == STATE_OACK) {
++			timeout_count = 0;
++			net_set_timeout_handler(timeout_ms, tftp_timeout_handler);
++		}
+ 
+ #ifdef CMD_TFTPPUT
+ 		if (tftp_put_active && tftp_state == STATE_OACK) {
+@@ -600,6 +596,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ #endif
+ 		tftp_send(); /* Send ACK or first data block */
+ 		break;
++	}
+ 	case TFTP_DATA:
+ 		if (len < 2)
+ 			return;
+@@ -664,7 +661,6 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 
+ 		update_block_number();
+ 		tftp_prev_block = tftp_cur_block;
+-		timeout_count_max = tftp_timeout_count_max;
+ 		net_set_timeout_handler(timeout_ms, tftp_timeout_handler);
+ 
+ 		if (store_block(tftp_cur_block, pkt + 2, len)) {
+@@ -717,11 +713,15 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 
+ static void tftp_timeout_handler(void)
+ {
+-	if (++timeout_count > timeout_count_max) {
++	bool request = tftp_state == STATE_SEND_RRQ;
++	int max_retries = request ? request_timeout_count_max : timeout_count_max;
++	ulong msecs = request ? request_timeout_ms : timeout_ms;
++
++	if (++timeout_count > max_retries) {
+ 		restart("Retry count exceeded");
  	} else {
- 		return 0;
+ 		puts("T ");
+-		net_set_timeout_handler(timeout_ms, tftp_timeout_handler);
++		net_set_timeout_handler(msecs, tftp_timeout_handler);
+ 		if (tftp_state != STATE_RECV_WRQ)
+ 			tftp_send();
  	}
+@@ -773,8 +773,12 @@ static void sanitize_tftp_block_size_option(enum proto_t protocol)
+ 
+ void tftp_start(enum proto_t protocol)
+ {
++	const struct tftp_request_timeout *request = tftp_get_request_timeout();
+ 	__maybe_unused char *ep;             /* Environment pointer */
+ 
++	timeout_ms = TIMEOUT;
++	timeout_count_max = CONFIG_NET_RETRY_COUNT * 2;
++
+ 	if (saved_tftp_block_size_option) {
+ 		tftp_block_size_option = saved_tftp_block_size_option;
+ 		saved_tftp_block_size_option = 0;
+@@ -807,16 +811,22 @@ void tftp_start(enum proto_t protocol)
+ 
+ 		ep = env_get("tftptimeoutcountmax");
+ 		if (ep != NULL)
+-			tftp_timeout_count_max = simple_strtol(ep, NULL, 10);
++			timeout_count_max = simple_strtol(ep, NULL, 10);
+ 
+-		if (tftp_timeout_count_max < 0) {
++		if (timeout_count_max < 0) {
+ 			printf("TFTP timeout count max (%d ms) negative, set to 0\n",
+-			       tftp_timeout_count_max);
+-			tftp_timeout_count_max = 0;
++			       timeout_count_max);
++			timeout_count_max = 0;
+ 		}
+ 	}
+ 
+ 	sanitize_tftp_block_size_option(protocol);
++	request_timeout_ms = timeout_ms;
++	request_timeout_count_max = timeout_count_max;
++	if (protocol == TFTPGET && request) {
++		request_timeout_ms = request->msecs;
++		request_timeout_count_max = request->max_retries;
++	}
+ 
+ 	debug("TFTP blocksize = %i, TFTP windowsize = %d timeout = %ld ms\n",
+ 	      tftp_block_size_option, tftp_window_size_option, timeout_ms);
+@@ -920,9 +930,8 @@ void tftp_start(enum proto_t protocol)
+ 	}
+ 
+ 	time_start = get_timer(0);
+-	timeout_count_max = tftp_timeout_count_max;
+ 
+-	net_set_timeout_handler(timeout_ms, tftp_timeout_handler);
++	net_set_timeout_handler(request_timeout_ms, tftp_timeout_handler);
+ 	net_set_udp_handler(tftp_handler);
+ #ifdef CMD_TFTPPUT
+ 	net_set_icmp_handler(icmp_handler);
+@@ -966,7 +975,7 @@ void tftp_start_server(void)
+ 
+ 	puts("Loading: *\b");
+ 
+-	timeout_count_max = tftp_timeout_count_max;
++	timeout_count_max = CONFIG_NET_RETRY_COUNT * 2;
+ 	timeout_count = 0;
+ 	timeout_ms = TIMEOUT;
+ 	net_set_timeout_handler(timeout_ms, tftp_timeout_handler);
+diff --git a/test/dm/Makefile b/test/dm/Makefile
+index f35f45e084d..75e82216181 100644
+--- a/test/dm/Makefile
++++ b/test/dm/Makefile
+@@ -49,6 +49,9 @@ obj-$(CONFIG_ECDSA_VERIFY) += ecdsa.o
+ obj-$(CONFIG_DM_HASH) += hash.o
+ obj-$(CONFIG_EFI_MEDIA_SANDBOX) += efi_media.o
+ obj-$(CONFIG_DM_ETH) += eth.o
++ifeq ($(CONFIG_DM_ETH)$(CONFIG_CMD_TFTPBOOT),yy)
++obj-y += tftp.o
++endif
+ ifeq ($(CONFIG_NET_LWIP)$(CONFIG_PROT_UDP_LWIP),yy)
+ obj-y += lwip.o
+ endif
+diff --git a/test/dm/tftp.c b/test/dm/tftp.c
+new file mode 100644
+index 00000000000..eb178573312
+--- /dev/null
++++ b/test/dm/tftp.c
+@@ -0,0 +1,362 @@
++// SPDX-License-Identifier: GPL-2.0+
++/* Copyright 2026 James Hilliard <james.hilliard1@gmail.com> */
++
++#include <command.h>
++#include <console.h>
++#include <dm.h>
++#include <env.h>
++#include <env_internal.h>
++#include <image.h>
++#include <malloc.h>
++#include <mapmem.h>
++#include <net.h>
++#include <time.h>
++#include <asm/eth.h>
++#include <asm/unaligned.h>
++#include <dm/test.h>
++#include <test/ut.h>
++
++static const char tftp_test_data[] = "update data, not a bootable image";
++
++#define TFTP_TEST_ADDR 0x2000000
++
++enum tftp_test_probe {
++	TFTP_PROBE_NONE,
++	TFTP_PROBE_SILENT,
++	TFTP_PROBE_DATA,
++	TFTP_PROBE_OACK,
++};
++
++struct tftp_test_context {
++	bool fail;
++	bool autostart;
++	unsigned int requests;
++	unsigned int arp_requests;
++	unsigned int drop_arp;
++	struct in_addr arp_target;
++	bool abort_arp;
++	enum tftp_test_probe probe;
++	unsigned int probe_acks;
++	ulong request_start;
++	ulong ack_start;
++	ulong ack_delay;
++	unsigned int advertised_timeout;
++};
++
++/* Answer an RRQ with one short DATA block or a file-not-found error. */
++static int tftp_test_tx_handler(struct udevice *dev, void *packet,
++				unsigned int len)
++{
++	struct eth_sandbox_priv *priv = dev_get_priv(dev);
++	struct tftp_test_context *ctx = priv->priv;
++	struct ethernet_hdr *eth = packet, *reply_eth;
++	struct ip_udp_hdr *ip, *reply_ip;
++	const char *data = ctx->fail ? "not found" : tftp_test_data;
++	unsigned int data_len = strlen(data) + 1;
++	unsigned int reply_len, header_len = 4;
++	u16 opcode, reply_opcode = ctx->fail ? 5 : 3, block = 1;
++	bool partial = false;
++	u8 *payload;
++
++	if (len >= ETHER_HDR_SIZE + ARP_HDR_SIZE &&
++	    ntohs(eth->et_protlen) == PROT_ARP) {
++		const u8 *arp = (void *)(eth + 1);
++
++		/* Ignore gratuitous ARP: compare the sender and target IPv4 addresses. */
++		if (get_unaligned_be16(arp + 6) == 1 &&
++		    memcmp(arp + 14, arp + 24, 4)) {
++			memcpy(&ctx->arp_target, arp + 24, 4);
++			ctx->arp_requests++;
++			if (ctx->arp_requests <= ctx->drop_arp) {
++				if (ctx->abort_arp)
++					console_in_puts("\x03");
++				else if (IS_ENABLED(CONFIG_NET_LWIP))
++					/* Advance after the client has armed its RRQ timer. */
++					sandbox_eth_skip_timeout();
++				else
++					timer_test_add_offset(CONFIG_ARP_TIMEOUT + 1);
++				return 0;
++			}
++		}
++	}
++	if (!sandbox_eth_arp_req_to_reply(dev, packet, len))
++		return 0;
++	if (len < ETHER_HDR_SIZE + IP_UDP_HDR_SIZE + 2 ||
++	    ntohs(eth->et_protlen) != PROT_IP)
++		return 0;
++	ip = (void *)(eth + 1);
++	if (ip->ip_p != IPPROTO_UDP)
++		return 0;
++	opcode = get_unaligned_be16(ip + 1);
++	if (opcode == 4 && ctx->probe >= TFTP_PROBE_DATA) {
++		ctx->probe_acks++;
++		if (ctx->probe_acks == 1) {
++			ctx->ack_start = get_timer(0);
++			return 0;
++		}
++		if (ctx->probe_acks != 2)
++			return 0;
++		ctx->ack_delay = get_timer(ctx->ack_start);
++		block = ctx->probe == TFTP_PROBE_DATA ? 2 : 1;
++	} else if (opcode == 1 && ntohs(ip->udp_dst) == 69) {
++		unsigned int i, request_len = len - ETHER_HDR_SIZE - IP_UDP_HDR_SIZE;
++
++		if (!ctx->requests++)
++			ctx->request_start = get_timer(0);
++		payload = (void *)(ip + 1);
++		for (i = 2; i + 10 <= request_len; i++) {
++			if (!memcmp(payload + i, "timeout\0", 8))
++				ctx->advertised_timeout = dectoul((char *)payload + i + 8, NULL);
++		}
++		if (ctx->probe == TFTP_PROBE_SILENT)
++			return 0;
++		if (ctx->probe == TFTP_PROBE_DATA) {
++			partial = true;
++			data_len = 512;
++		} else if (ctx->probe == TFTP_PROBE_OACK) {
++			/* Consume an initial retry before switching timeout budgets. */
++			if (ctx->requests == 1)
++				return 0;
++			reply_opcode = 6;
++			header_len = 2;
++			data = IS_ENABLED(CONFIG_NET_TFTP_VARS) ?
++				"timeout\0" "1" : "timeout\0" "5";
++			data_len = 10;
++		}
++	} else {
++		return 0;
++	}
++	if (priv->recv_packets >= PKTBUFSRX)
++		return -ENOSPC;
++
 +	reply_len = ETHER_HDR_SIZE + IP_UDP_HDR_SIZE + header_len + data_len;
- 	if (priv->recv_packets >= PKTBUFSRX)
- 		return -ENOSPC;
- 
--	reply_len = ETHER_HDR_SIZE + IP_UDP_HDR_SIZE + header_len + data_len;
- 	ctx->autostart |= env_get_autostart();
- 	reply_eth = (void *)priv->recv_packet_buffer[priv->recv_packets];
- 	memcpy(reply_eth->et_dest, eth->et_src, ARP_HLEN);
-@@ -149,7 +203,7 @@ static int tftp_test_tx_handler(struct udevice *dev, void *packet,
- 	reply_ip->udp_len = htons(UDP_HDR_SIZE + header_len + data_len);
- 	reply_ip->ip_sum = compute_ip_checksum(reply_ip, IP_HDR_SIZE);
- 	payload = (void *)(reply_ip + 1);
--	put_unaligned_be16(reply_opcode, payload);
-+	put_unaligned_be16(ctx->fail ? 5 : reply_opcode, payload);
- 	if (header_len == 4)
- 		put_unaligned_be16(block, payload + 2);
- 	if (partial)
-@@ -257,11 +311,140 @@ static int tftp_test_probe_timeout(struct unit_test_state *uts,
- 	return 0;
- }
- 
-+static int tftp_test_filenames(struct unit_test_state *uts,
++	ctx->autostart |= env_get_autostart();
++	reply_eth = (void *)priv->recv_packet_buffer[priv->recv_packets];
++	memcpy(reply_eth->et_dest, eth->et_src, ARP_HLEN);
++	memcpy(reply_eth->et_src, priv->fake_host_hwaddr, ARP_HLEN);
++	reply_eth->et_protlen = htons(PROT_IP);
++
++	reply_ip = (void *)(reply_eth + 1);
++	memset(reply_ip, 0, IP_UDP_HDR_SIZE);
++	reply_ip->ip_hl_v = 0x45;
++	reply_ip->ip_len = htons(IP_UDP_HDR_SIZE + header_len + data_len);
++	reply_ip->ip_ttl = 64;
++	reply_ip->ip_p = IPPROTO_UDP;
++	reply_ip->ip_src = ip->ip_dst;
++	reply_ip->ip_dst = ip->ip_src;
++	reply_ip->udp_src = htons(1234);
++	reply_ip->udp_dst = ip->udp_src;
++	reply_ip->udp_len = htons(UDP_HDR_SIZE + header_len + data_len);
++	reply_ip->ip_sum = compute_ip_checksum(reply_ip, IP_HDR_SIZE);
++	payload = (void *)(reply_ip + 1);
++	put_unaligned_be16(reply_opcode, payload);
++	if (header_len == 4)
++		put_unaligned_be16(block, payload + 2);
++	if (partial)
++		memset(payload + header_len, 0xee, data_len);
++	else
++		memcpy(payload + header_len, data, data_len);
++	priv->recv_packet_length[priv->recv_packets++] = reply_len;
++
++	return 0;
++}
++
++static int tftp_test_probe_arp(struct unit_test_state *uts,
 +			       struct tftp_test_context *ctx)
 +{
-+	static const char * const files[] = {
-+		"dir:file", "dir:one:two:file", "1.1.2.2:path:file",
-+	};
-+	static const char * const expected[] = {
-+		"dir:file", "dir:one:two:file", "path:file",
-+	};
-+	char command[100];
-+	int i;
++	void *buffer = map_sysmem(TFTP_TEST_ADDR, sizeof(tftp_test_data));
++	ulong elapsed;
++	int i, ret, ctrlc_state;
 +
 +	ut_assertok(env_set("autostart", "no"));
-+	for (i = 0; i < ARRAY_SIZE(files); i++) {
++	ut_assertok(run_command("setenv gatewayip 1.1.2.1", 0));
++	for (i = 0; i < 4; i++) {
++		ut_assertok(run_command(i == 1 ? "setenv serverip 1.2.3.4" :
++				       "setenv serverip 1.1.2.2", 0));
 +		memset(ctx, 0, sizeof(*ctx));
-+		snprintf(command, sizeof(command), "tftpboot 2000000 %s", files[i]);
-+		ut_assertok(run_command(command, 0));
-+		ut_asserteq(1, ctx->requests);
-+		ut_asserteq_str(expected[i], ctx->filename);
-+		ut_assertok(env_set("bootfile", files[i]));
-+		ut_assertok(run_command("tftpboot 2000000", 0));
-+		ut_asserteq_str(expected[i], ctx->filename);
-+	}
-+	if (IS_ENABLED(CONFIG_NET_LWIP)) {
-+		/* Keep the lwIP numeric-port extension, including filename colons. */
-+		ut_assertok(run_command("tftpboot 2000000 1.1.2.2:1069:path:to:file", 0));
-+		ut_asserteq(1069, ctx->port);
-+		ut_asserteq_str("path:to:file", ctx->filename);
-+		ut_assertok(run_command("tftpboot 2000000 :1069:path:to:file", 0));
-+		ut_asserteq_str("path:to:file", ctx->filename);
-+		ut_assertok(run_command("tftpboot 2000000 1.1.2.2::path:file", 0));
-+		ut_asserteq(69, ctx->port);
-+		ut_asserteq_str("path:file", ctx->filename);
-+		memset(ctx, 0, sizeof(*ctx));
-+		ut_asserteq(CMD_RET_FAILURE,
-+			    run_command("tftpboot 2000000 1.1.2.2:65536:file", 0));
-+		ut_asserteq(0, ctx->requests);
-+	}
-+	return 0;
-+}
-+
-+#if IS_ENABLED(CONFIG_NET_LWIP)
-+static int tftp_test_options(struct unit_test_state *uts,
-+			     struct tftp_test_context *ctx)
-+{
-+	static const struct {
-+		const char *value;
-+		bool valid;
-+	} sizes[] = {
-+		{ NULL, true },
-+		{ "512", true },
-+		{ "4096", true },
-+		{ "65464", true },
-+		{ "1", false },
-+		{ "bad", false },
-+	};
-+	ulong rx_max = IP_REASSEMBLY ?
-+		min_t(ulong, 65464, IP_REASS_MAX_PBUFS * IP_FRAG_MTU_USABLE - 12) : 1468;
-+	bool vars = IS_ENABLED(CONFIG_NET_TFTP_VARS);
-+	ulong requested, expected;
-+	int i, put, ret;
-+
-+	ut_assertok(env_set("autostart", "no"));
-+	ut_assertok(env_set("tftpwindowsize", "4"));
-+	for (put = 0; put <= IS_ENABLED(CONFIG_CMD_TFTPPUT); put++) {
-+		for (i = 0; i < ARRAY_SIZE(sizes); i++) {
-+			memset(ctx, 0, sizeof(*ctx));
-+			ut_assertok(env_set("tftpblocksize", sizes[i].value));
-+			ret = run_command(put ? "tftpput 2000000 20 file" :
-+					  "tftpboot 2000000 file", 0);
-+			if (vars && !sizes[i].valid) {
-+				ut_asserteq(CMD_RET_FAILURE, ret);
-+				ut_asserteq(0, ctx->requests);
-+				continue;
-+			}
-+			ut_assertok(ret);
-+			requested = vars && sizes[i].value ?
-+				simple_strtoul(sizes[i].value, NULL, 10) : CONFIG_TFTP_BLOCKSIZE;
-+			expected = min(requested, put ? 1468UL : rx_max);
-+			/* The default block size does not need an on-wire option. */
-+			ut_asserteq(expected == 512 ? 0 : expected, ctx->blocksize);
-+			expected = vars ? 4 : CONFIG_TFTP_WINDOWSIZE;
-+			ut_asserteq(put || expected == 1 ? 0 : expected, ctx->windowsize);
++		ctx->drop_arp = i == 3 ? UINT_MAX : 1;
++		ctx->probe = i == 2 ? TFTP_PROBE_SILENT : TFTP_PROBE_NONE;
++		ret = tftpb_run_timeout(TFTP_TEST_ADDR, "update.bin", 100, 0);
++		elapsed = get_timer(ctx->request_start);
++		ut_assertnull(tftp_get_request_timeout());
++		ut_asserteq(i < 2 ? 0 : -ENOENT, ret);
++		ut_asserteq(i == 3 ? max(1, CONFIG_NET_RETRY_COUNT - 1) : 2,
++			    ctx->arp_requests);
++		ut_asserteq(i == 3 ? 0 : 1, ctx->requests);
++		ut_asserteq(htonl(i == 1 ? 0x01010201 : 0x01010202),
++			    ctx->arp_target.s_addr);
++		if (i < 2) {
++			ut_asserteq(sizeof(tftp_test_data), net_boot_file_size);
++			ut_asserteq_mem(tftp_test_data, buffer, sizeof(tftp_test_data));
++		} else if (i == 2) {
++			/* ARP retries must not consume the server's response budget. */
++			ut_assert(elapsed >= 100);
++			ut_assert(elapsed < 900);
 +		}
 +	}
-+	ut_assertok(env_set("tftpblocksize", NULL));
-+	ut_assertok(env_set("tftpwindowsize", "bad"));
++	/* Ctrl-C must also cancel the separate ARP wait. */
 +	memset(ctx, 0, sizeof(*ctx));
-+	ret = run_command("tftpboot 2000000 file", 0);
-+	ut_asserteq(vars ? CMD_RET_FAILURE : CMD_RET_SUCCESS, ret);
-+	ut_asserteq(vars ? 0 : 1, ctx->requests);
-+	ut_assertok(env_set("tftpwindowsize", NULL));
-+	return 0;
-+}
-+#endif
++	ctx->drop_arp = UINT_MAX;
++	ctx->abort_arp = true;
++	ctrlc_state = disable_ctrlc(0);
++	ret = tftpb_run_timeout(TFTP_TEST_ADDR, "update.bin", 100, 0);
++	clear_ctrlc();
++	disable_ctrlc(ctrlc_state);
++	ut_asserteq(-ENOENT, ret);
++	ut_asserteq(1, ctx->arp_requests);
++	ut_asserteq(0, ctx->requests);
++	ut_assertnull(tftp_get_request_timeout());
 +
-+static int tftp_test_protected_autostart(struct unit_test_state *uts,
-+					 struct tftp_test_context *ctx)
-+{
-+	char * const argv[] = { "tftpboot", "2000000", "update.bin" };
-+	int enabled, helper, ret;
-+
-+	for (enabled = 0; enabled < 2; enabled++) {
-+		ut_assertok(env_set("autostart", enabled ? "yes" : "no"));
-+		ut_assertok(env_set(".flags", "autostart:br"));
-+		for (helper = 0; helper < 3; helper++) {
-+			memset(ctx, 0, sizeof(*ctx));
-+			switch (helper) {
-+			case 0:
-+				ret = tftpb_run(TFTP_TEST_ADDR, "update.bin");
-+				break;
-+			case 1:
-+				ret = tftpb_run_timeout(TFTP_TEST_ADDR, "update.bin", 100, 0);
-+				break;
-+			default:
-+				ret = tftpb_run_argv(3, argv);
-+			}
-+			/* Do not override protection when suppression is required. */
-+			ut_asserteq(enabled, !!ret);
-+			ut_asserteq(!enabled, ctx->requests);
-+			ut_assert(!ctx->autostart);
-+			ut_asserteq_str(enabled ? "yes" : "no", env_get("autostart"));
-+		}
-+		ut_assertok(env_set(".flags", NULL));
-+	}
-+	return 0;
-+}
-+
- static int tftp_test_download(struct unit_test_state *uts,
- 			      struct tftp_test_context *ctx)
- {
- 	static const char * const autostart[] = { "yes", NULL, "no", "yes-please" };
- 	const char *timeout, *retries;
-+	char * const argv[] = { "tftpboot", "2000000", "update.bin" };
- 	void *buffer = map_sysmem(TFTP_TEST_ADDR, sizeof(tftp_test_data));
- 	int i, fail, ret;
- 
-@@ -277,22 +460,74 @@ static int tftp_test_download(struct unit_test_state *uts,
- 	ut_assertok(tftp_test_probe_arp(uts, ctx));
- 	ut_assertok(tftp_test_probe_timeout(uts, ctx));
- 
-+	ut_assertok(tftp_test_protected_autostart(uts, ctx));
-+
-+#if IS_ENABLED(CONFIG_NET_LWIP)
-+	ut_assertok(tftp_test_options(uts, ctx));
-+#endif
-+	ut_assertok(tftp_test_filenames(uts, ctx));
-+
-+	/* A previous DHCP/download must not override the next command's env. */
-+	ut_assertok(env_set("autostart", "no"));
-+	ut_assertok(env_set("loadaddr", "2000000"));
-+	for (i = 0; i < 3; i++) {
-+		strcpy(net_boot_file_name, "stale.bin");
-+		ut_assertok(env_set("bootfile", i == 2 ? NULL : "fresh.bin"));
-+		memset(ctx, 0, sizeof(*ctx));
-+		ut_assertok(run_command(i == 1 ? "tftpboot 2000000" : "tftpboot", 0));
-+		ut_asserteq_str(i == 2 ? "01010203.img" : "fresh.bin", ctx->filename);
-+		ut_asserteq(1, ctx->requests);
-+	}
-+	strcpy(net_boot_file_name, "stale.bin");
-+	ut_assertok(env_set("bootfile", "helper.bin"));
-+	ut_assertok(tftpb_run(TFTP_TEST_ADDR, NULL));
-+	ut_asserteq_str("helper.bin", ctx->filename);
-+
-+#if IS_ENABLED(CONFIG_NET_LWIP) && IS_ENABLED(CONFIG_NET_TFTP_VARS)
-+	/* Reject delays outside lwIP's wrap-safe timer range before an RRQ. */
-+	ut_assertok(env_set("autostart", "no"));
-+	for (i = 0; i < 3; i++) {
-+		static const char * const delays[] = {
-+			"1073741823", "1073741824", "4294967295",
-+		};
-+
-+		memset(ctx, 0, sizeof(*ctx));
-+		net_boot_file_size = 1234;
-+		ut_assertok(env_set("tftptimeout", delays[i]));
-+		ret = do_tftpb(NULL, 0, 3, argv);
-+		ut_asserteq(i ? CMD_RET_FAILURE : CMD_RET_SUCCESS, ret);
-+		ut_asserteq(i ? 0 : 1, ctx->requests);
-+		ut_asserteq(i ? 0 : sizeof(tftp_test_data), net_boot_file_size);
-+		ut_asserteq(-ENODEV, net_lwip_poll());
-+	}
-+	ut_assertok(env_set("tftptimeout", NULL));
-+#endif
-+
- 	for (i = 0; i < ARRAY_SIZE(autostart); i++) {
- 		timeout = i & 1 ? NULL : "7000";
- 		retries = i & 1 ? NULL : "09";
--		for (fail = 0; fail < 2; fail++) {
-+		for (fail = 0; fail < 6; fail++) {
- 			ut_assertok(env_set("autostart", autostart[i]));
- 			ut_assertok(env_set("tftptimeout", timeout));
- 			ut_assertok(env_set("tftptimeoutcountmax", retries));
- 			memset(buffer, 0, sizeof(tftp_test_data));
- 			memset(ctx, 0, sizeof(*ctx));
--			ctx->fail = fail;
-+			ctx->fail = fail & 1;
- 
--			ret = tftpb_run_timeout(TFTP_TEST_ADDR, "update.bin", 100, 0);
--			ut_asserteq(fail ? -ENOENT : 0, ret);
-+			switch (fail / 2) {
-+			case 0:
-+				ret = tftpb_run_timeout(TFTP_TEST_ADDR, "update.bin", 100, 0);
-+				break;
-+			case 1:
-+				ret = tftpb_run(TFTP_TEST_ADDR, "update.bin");
-+				break;
-+			default:
-+				ret = tftpb_run_argv(3, argv) ? -ENOENT : 0;
-+			}
-+			ut_asserteq(ctx->fail ? -ENOENT : 0, ret);
- 			ut_asserteq(1, ctx->requests);
- 			ut_assert(!ctx->autostart);
--			if (!fail) {
-+			if (!ctx->fail) {
- 				ut_asserteq(sizeof(tftp_test_data), net_boot_file_size);
- 				ut_asserteq_mem(tftp_test_data, buffer,
- 						sizeof(tftp_test_data));
-@@ -310,6 +545,40 @@ static int tftp_test_download(struct unit_test_state *uts,
- 			}
- 		}
- 	}
-+	if (IS_ENABLED(CONFIG_CMD_BOOTM)) {
-+		/* An empty successful download must not boot stale RAM contents. */
-+		memset(ctx, 0, sizeof(*ctx));
-+		ctx->empty = true;
-+		ut_assertok(env_set("autostart", "yes"));
-+		ut_assertok(do_tftpb(NULL, 0, 3, argv));
-+		ut_asserteq(1, ctx->requests);
-+		ut_asserteq(0, net_boot_file_size);
-+
-+		/*
-+		 * The same bytes are not bootable. A command must attempt boot
-+		 * and return its failure, unlike the download-only helpers above.
-+		 */
-+		memset(ctx, 0, sizeof(*ctx));
-+		ut_assertok(env_set("autostart", "yes"));
-+		ut_assert(do_tftpb(NULL, 0, 3, argv) != CMD_RET_SUCCESS);
-+		ut_asserteq(1, ctx->requests);
-+		ut_assert(ctx->autostart);
-+		ut_asserteq(sizeof(tftp_test_data), net_boot_file_size);
-+		ut_asserteq_str("yes", env_get("autostart"));
-+#if IS_ENABLED(CONFIG_NET_LWIP)
-+		ut_asserteq(-ENODEV, net_lwip_poll());
-+#endif
-+	}
-+#if IS_ENABLED(CONFIG_NET_LWIP) && IS_ENABLED(CONFIG_CMD_TFTPPUT)
-+	/* Uploading non-bootable bytes is not a request to boot their source. */
++	/* Failed or cancelled ARP must not leave a request or timer behind. */
 +	memset(ctx, 0, sizeof(*ctx));
-+	ut_assertok(env_set("autostart", "yes"));
-+	ut_assertok(run_command("tftpput 2000000 20 update.bin", 0));
++	ut_assertok(tftpb_run_timeout(TFTP_TEST_ADDR, "update.bin", 100, 0));
 +	ut_asserteq(1, ctx->requests);
-+	ut_assert(ctx->autostart);
-+	ut_asserteq_str("yes", env_get("autostart"));
-+	ut_asserteq(-ENODEV, net_lwip_poll());
-+#endif
- 	unmap_sysmem(buffer);
- 
- 	return 0;
-@@ -321,6 +590,8 @@ static int dm_test_tftp_download_only(struct unit_test_state *uts)
- 		"autostart", "tftptimeout", "tftptimeoutcountmax", "ethact",
- 		"ipaddr", "serverip", "netmask", "gatewayip", "netretry", "tftpsrcp",
- 		"tftpdstp", "tftpserverip", "fileaddr", "filesize",
-+		"bootaddr", "loadaddr", "bootfile", "ethrotate", ".flags",
-+		"tftpblocksize", "tftpwindowsize",
- 	};
- 	char saved_bootfile[sizeof(net_boot_file_name)];
- 	ulong saved_load_addr = image_load_addr;
++	unmap_sysmem(buffer);
++	return 0;
++}
++
++static int tftp_test_probe_timeout(struct unit_test_state *uts,
++				   struct tftp_test_context *ctx)
++{
++	ulong elapsed;
++	int i, ret;
++
++	ut_assertok(env_set("autostart", "no"));
++	ut_assertok(env_set("tftptimeout", "1000"));
++	ut_assertok(env_set("tftptimeoutcountmax", "1"));
++	for (i = 0; i < 4; i++) {
++		memset(ctx, 0, sizeof(*ctx));
++		ctx->probe = i < 2 ? TFTP_PROBE_SILENT :
++			     i == 2 ? TFTP_PROBE_DATA : TFTP_PROBE_OACK;
++		ret = tftpb_run_timeout(TFTP_TEST_ADDR, "update.bin", 100, i & 1 ? 2 : 0);
++		elapsed = get_timer(ctx->request_start);
++		ut_assertnull(tftp_get_request_timeout());
++		ut_asserteq(i < 2 ? -ENOENT : 0, ret);
++		ut_asserteq(i == 1 ? 3 : i == 3 ? 2 : 1, ctx->requests);
++		ut_asserteq(IS_ENABLED(CONFIG_NET_TFTP_VARS) ? 1 : 5, ctx->advertised_timeout);
++		if (i < 2) {
++			ut_assert(elapsed >= (i ? 300 : 100));
++			ut_assert(elapsed < 900);
++		} else {
++			ut_asserteq(3, ctx->probe_acks);
++			ut_assert(ctx->ack_delay >= 1000);
++		}
++	}
++	/* The next ordinary transfer must not inherit the short probe. */
++	memset(ctx, 0, sizeof(*ctx));
++	ctx->probe = TFTP_PROBE_OACK;
++	ut_assertok(tftpb_run(TFTP_TEST_ADDR, "update.bin"));
++	ut_assert(get_timer(ctx->request_start) >= 2000);
++	ut_asserteq(2, ctx->requests);
++	ut_asserteq(3, ctx->probe_acks);
++	ut_asserteq_str("1000", env_get("tftptimeout"));
++	ut_asserteq_str("1", env_get("tftptimeoutcountmax"));
++	ut_asserteq(-EINVAL, tftpb_run_timeout(TFTP_TEST_ADDR, "update.bin", 0, 0));
++	ut_asserteq(-EINVAL, tftpb_run_timeout(TFTP_TEST_ADDR, "update.bin", 100, -1));
++	ut_asserteq(-EINVAL, tftpb_run_timeout(TFTP_TEST_ADDR, "update.bin", 1073741824, 0));
++	return 0;
++}
++
++static int tftp_test_download(struct unit_test_state *uts,
++			      struct tftp_test_context *ctx)
++{
++	static const char * const autostart[] = { "yes", NULL, "no", "yes-please" };
++	const char *timeout, *retries;
++	void *buffer = map_sysmem(TFTP_TEST_ADDR, sizeof(tftp_test_data));
++	int i, fail, ret;
++
++	ut_assertok(env_set("ethact", "eth@10002000"));
++	/* Run the address callbacks used by the legacy stack as well. */
++	ut_assertok(run_command("setenv ipaddr 1.1.2.3", 0));
++	ut_assertok(run_command("setenv serverip 1.1.2.2", 0));
++	ut_assertok(run_command("setenv netmask 255.255.255.0", 0));
++	ut_assertok(env_set("tftpserverip", NULL));
++	ut_assertok(env_set("netretry", "no"));
++	ut_assertok(env_set("tftpsrcp", NULL));
++	ut_assertok(env_set("tftpdstp", NULL));
++	ut_assertok(tftp_test_probe_arp(uts, ctx));
++	ut_assertok(tftp_test_probe_timeout(uts, ctx));
++
++	for (i = 0; i < ARRAY_SIZE(autostart); i++) {
++		timeout = i & 1 ? NULL : "7000";
++		retries = i & 1 ? NULL : "09";
++		for (fail = 0; fail < 2; fail++) {
++			ut_assertok(env_set("autostart", autostart[i]));
++			ut_assertok(env_set("tftptimeout", timeout));
++			ut_assertok(env_set("tftptimeoutcountmax", retries));
++			memset(buffer, 0, sizeof(tftp_test_data));
++			memset(ctx, 0, sizeof(*ctx));
++			ctx->fail = fail;
++
++			ret = tftpb_run_timeout(TFTP_TEST_ADDR, "update.bin", 100, 0);
++			ut_asserteq(fail ? -ENOENT : 0, ret);
++			ut_asserteq(1, ctx->requests);
++			ut_assert(!ctx->autostart);
++			if (!fail) {
++				ut_asserteq(sizeof(tftp_test_data), net_boot_file_size);
++				ut_asserteq_mem(tftp_test_data, buffer,
++						sizeof(tftp_test_data));
++			}
++			if (autostart[i])
++				ut_asserteq_str(autostart[i], env_get("autostart"));
++			else
++				ut_assertnull(env_get("autostart"));
++			if (timeout) {
++				ut_asserteq_str(timeout, env_get("tftptimeout"));
++				ut_asserteq_str(retries, env_get("tftptimeoutcountmax"));
++			} else {
++				ut_assertnull(env_get("tftptimeout"));
++				ut_assertnull(env_get("tftptimeoutcountmax"));
++			}
++		}
++	}
++	unmap_sysmem(buffer);
++
++	return 0;
++}
++
++static int dm_test_tftp_download_only(struct unit_test_state *uts)
++{
++	static const char * const vars[] = {
++		"autostart", "tftptimeout", "tftptimeoutcountmax", "ethact",
++		"ipaddr", "serverip", "netmask", "gatewayip", "netretry", "tftpsrcp",
++		"tftpdstp", "tftpserverip", "fileaddr", "filesize",
++	};
++	char saved_bootfile[sizeof(net_boot_file_name)];
++	ulong saved_load_addr = image_load_addr;
++	char *saved[ARRAY_SIZE(vars)] = {};
++	struct tftp_test_context ctx = {};
++	const char *value;
++	int i, ret = -ENOMEM;
++
++	for (i = 0; i < ARRAY_SIZE(vars); i++) {
++		value = env_get(vars[i]);
++		if (value) {
++			saved[i] = strdup(value);
++			if (!saved[i])
++				goto out;
++		}
++	}
++	memcpy(saved_bootfile, net_boot_file_name, sizeof(saved_bootfile));
++
++	sandbox_eth_set_tx_handler(0, tftp_test_tx_handler);
++	sandbox_eth_set_priv(0, &ctx);
++	ret = tftp_test_download(uts, &ctx);
++	sandbox_eth_set_tx_handler(0, NULL);
++	sandbox_eth_set_priv(0, NULL);
++	image_load_addr = saved_load_addr;
++	memcpy(net_boot_file_name, saved_bootfile, sizeof(saved_bootfile));
++	for (i = 0; i < ARRAY_SIZE(vars); i++) {
++		char * const argv[] = { "setenv", (char *)vars[i], saved[i] };
++
++		if (env_do_env_set(0, saved[i] ? 3 : 2, argv, 0))
++			ret = -EINVAL;
++	}
++out:
++	for (i = 0; i < ARRAY_SIZE(vars); i++)
++		free(saved[i]);
++
++	return ret;
++}
++
++DM_TEST(dm_test_tftp_download_only, UTF_SCAN_FDT);
 
 -- 
 2.53.0
