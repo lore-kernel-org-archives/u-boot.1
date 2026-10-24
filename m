@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9BBC606A31A
-	for <u-boot@archiver.kernel.org>; Sat, 24 Oct 2026 22:36:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E987606A31A
+	for <u-boot@archiver.kernel.org>; Sat, 24 Oct 2026 22:36:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=jhJa67uU;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=T35R4Gai
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=OXmOyPsp;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=l2nxb8fx
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C705D6073E;
-	Sat, 24 Oct 2026 22:36:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EC7C960683;
+	Sat, 24 Oct 2026 22:36:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FDUc4keaV6uT; Sat, 24 Oct 2026 22:36:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 19E636065A
+ id nIvBjeKvn_kN; Sat, 24 Oct 2026 22:36:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B47186069D
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792881353;
-	b=GiOMnEIdjwDl0p3RbONiKkQEcloORniHNgfQNlOWP2Y/gGmGTtJ8+njD6UaDRpHUWWii
-	 XKQ6OoDsyiEJkmw+nEOFis1OdtDars74gk/jjWoSzXWh7ZcbNljtBH0euKkM5RVeyofvx
-	 C3kKF0FDvkAcgCK8zd3bT3IlcguhXG3C0uCSFlX3uOkKhCQBz8F0d+lMvIH+313g52sZg
-	 h2hMRrkq42kXCpAasJloKKToT5SgQLNGj1vWQM+wuAg3Jm4mLkcD6wgw/BBv07NOyGnUZ
-	 YKIgapXbYk4d/qKXsbh8Ts1FSPvfgMv/B3J/rKeKNq7HtQEJnSNX3UX97O7c5JWkuVg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792881354;
+	b=BGp3VVei66O7QrWMoVJsCxEMcVNhj+aR9jSJcMcmM49Umj5TvGCl0G7cNZQ79pYO1Uan
+	 ihkjEHcMZIxEEggrFi9KCr1lXuwGGNiESNUhDw9IWLZ8xhkQ1Hf4hAEaIONcOUZmEwuqw
+	 NqnpxXbXpTGmarXrtuKvfhbxdhuTPh+taE/oZmhMpnwNPDjoMOTQ090LsKHwk9F8Qjhg+
+	 R436AnfisbaQXCMUcsvEfF4QQ89ChTFNQnEb7LJ0HM/UToHmIsWKssSqHRKPmJQD1368p
+	 9B/DP5nv4OpOiRh0Z9bQABxGG6lLT72lYaXx5oJSXmp8cEx5NDsLWstP9MZ7QHiMGpg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792881353;
+	c=relaxed/relaxed; t=1792881354;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,140 +33,139 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=7o2ZHxngKMSuJwuOggzrozZCGd+93u8MYHHxyn/nkXQ=;
-	b=s4k8W7T3QSgTAFhL+/SGoZ+apsBfmJ1pC86ryysmjIyQADdfSWuBFjLDLoXFileUtbj9
-	 cYR6Vfm5F0IvbXnZ6llL8Vf6C9+qjKUbfsbHmtuH6m911TF3Jto/C1uzEpyz/LPlZzLGo
-	 dqbv8FShYoL9tN4WFFbAHsKZRX0ZzX4YgkVJe71W0TC5laHPKuE32OWsviMuYMqwKbTmQ
-	 UyQn3JpdexxuX1Wk16ZEgxmPu5n0WH1wApWdhUSwjpoFn7fpmUbNVnhGILyDVjZ2ze7hb
-	 1UvnzPgUTUr9wFvq+aY1DIYNP+OOgrYT/B6OA90JpthV/AhQOeas2Lm3xYYbIDpcCqw==
+	bh=nb1ehsyn7NK3z7/aozvlZrRYC0d6q1coVbHhbGGDHqw=;
+	b=FuG3n2FFAM0P68vr+6m4nwA5XqYOloTlCoaznCfYav6tCy2LS45FtAzxQP7A0a8SJZBc
+	 sUPULu0uxqjFGD6Euf7Ekdtb6zdAlQfoe4vJd/n2JMRT8kN7OSkiOxZ9/3T2cwW4lSh0k
+	 FqnDKZWuZnjbwQi2z/gDzuW55jPl0hAQ5EGT77CDpxlBIE02nBjDuVKiI6U+XnUh0JOaj
+	 JHkdRBAOHJ1DrlA1P4U4UsnJepZekDed/qdOWV6UQss3YfrMwvs0kN4KZPrjr8jd+FMBw
+	 yqkZTAXbLh5KLde7GkOuQfKpAspqLXLsvhXfw1SseIYJJbLWMnio8jRL6Nabr4OX4lg==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=T35R4Gai;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=l2nxb8fx;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792881353;
-	bh=7o2ZHxngKMSuJwuOggzrozZCGd+93u8MYHHxyn/nkXQ=;
+	d=lists.u-boot-project.org; s=default; t=1792881354;
+	bh=nb1ehsyn7NK3z7/aozvlZrRYC0d6q1coVbHhbGGDHqw=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jhJa67uUy4SE01ejOQj/zxBXfG9f0EbxXiGpT078ousL5s9luYJ3t2Xvrphwr8i/w
-	 /QA76Nc5sWqqlCiclcmU900UR4+D08A5ms96x/AX1nf2u2CDg2mvmh5xBI75Y/NW/O
-	 cbwqafuJ4FwFoJ9OG82E6QNk/qrQxGtRQejBI5N1xuuZ2CbeeomxNw/v4VWGfWAXh/
-	 Yc+6hiI1lSgaewCWi2C8yyQKhD3z3kiz7f6cvnrWF40+siXQjcBuHJnSGGXwEwQxb9
-	 6n7k6zgFKUwcJavmdJOlB3yTcMI4wBNqL2Q6x0J5FFFPWRhGPa5023aV5Tj4oa6cH7
-	 Oyp0JmFWNeKuw==
+	b=OXmOyPspyT2jchkfCKvOK5eHqCCRIY8HY7Y2hDoR2PN0bOzPVw4NzNQ+kJRFfieJ3
+	 E2soAvbX6OWGzTKZBBxMrWUZMiALLKr05MAt2WYhdA+ti8RFgJmkBxpuhNw5uOpKam
+	 qj9S7w9G/+UM7P7lSjD5gxi4xbUBhC64/zcMgI8Ww1Ncxs4g5rIbJE3dexksvKs7eP
+	 HEnh0mdLIKVHo1pFAkPzva0YxBX/2GU0DmhFo2vLaCCY9vffFVDcpPBLxcQZgN6Bl3
+	 lRWdS307yU8Ro8XpiIoJjQyL4WV6UNvVx/bAgp7zj9RZ9chgqzgLup7LjLs0CXWElC
+	 tHf18IxHO+6DQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 19E636065A;
-	Sat, 24 Oct 2026 22:35:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B47186069D;
+	Sat, 24 Oct 2026 22:35:54 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 042653D9
+ by lists1.osuosl.org (Postfix) with ESMTP id E5F073C4
  for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id DD70E606B3
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:47 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id E22AA606FD
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Tsyfa5jupRmz for <u-boot@lists.u-boot-project.org>;
- Sat, 24 Oct 2026 22:35:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E029C60626
+ id KewaeFzGZEfy for <u-boot@lists.u-boot-project.org>;
+ Sat, 24 Oct 2026 22:35:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 25CD160617
 Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c2e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792881333;
- b=S+mf73g7Cg28AelrK+38r+tGPDsCAk9f3+O5qiVP03eiuuuClpgLGP/5DX0/YpAD0yUY
- i1pdWpDDsAYrRzkz7bcoU3Z/Mebe5OCh8Vb9tMFzV/zSy/lb09Ps9DmXRJ99kkIwhm3vf
- unVha1K4i2MWIZy7eKtDMDZK8aBF3RHC86yYJcdcn5SRG1VlzbcB1jVapQU5LF9cu01uB
- NzJoNPiKnc64+A9qoOR87p0R03M8A2Xvw3XPJzJQc9442f2G+uRpVKrsFdgsOXtEGV2tS
- p4V9unrA5Es+Hra+or0CI0rfJ9y1dzogps8dN5g8aCpU9YRxnkW1bhOqwdep/7huXQg==
+ arc=none smtp.remote-ip="2001:4860:4864:20::2c"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792881335;
+ b=QahzXDfVpGsS4L8Ulj2wSa8yoyqjF4Xr+VlZ6I8c1l9L1YBdM63aCpA+L5DCpyi1GsSg
+ GNPm1EUAFgi68pC8FbIv+yxC4qL/xDR3k65160WCh1p5oicPpXBPTvQz3EF6/ODhgWYVa
+ MUN8QxJj3A9HP5AsKN+fwM3lwZee5VAlWqOica5yqiLRy7EL/NV5lDCKBVPO8tcJ9Xybn
+ agfYm7K/J+XExJyEdNVQH2f5/Q2PyLXzLQISx/77GSqufF8VS4G4fnLX2Bdh372R1Wun9
+ IqhxKvQww8pv0Fgv91zlSsMiAUoLeS4TD4qeNeZWvcWodl9In9uZp2FTqzW1xIrslJg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792881333;
+ c=relaxed/relaxed; t=1792881335;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=7o2ZHxngKMSuJwuOggzrozZCGd+93u8MYHHxyn/nkXQ=;
- b=XMCJDxf5RJkxaDbASuzRZCWMqL/fI78+xfRB3jnk6VAJxOECvG2csX6wgGsNcYwb8Zg+
- i3r7KsD+zyEVwFg9tUTxoxfxa/d2mgvnZHDwawi0JrunPQ0nE7MsmvOB+mPSm4mFTCeeF
- cgzT545CEkI1BbW+h6w3Wwh3cclcguAe8LhCUnkdOOyXnUzVUlzQmVWGvtr9GsmMbOr9F
- dX/kctfnE3SSC1wXzd1ZpKwsAqEwwKpCcoiBTkTeUQr5C6U+OgmC0/5IpmO07wH0cAPdI
- L74VKnW0zcF7wuWgA4ASdABNhLOu7JTiInKr5gGnH68Cgm08wFGrJU0mW+HfrCDVCfw==
+ bh=nb1ehsyn7NK3z7/aozvlZrRYC0d6q1coVbHhbGGDHqw=;
+ b=n4Q0/AAZ4YjCmHLXdFoGSy9SV/ZMdUDR1wff9VD6v54IaUvHbIgBIyfiFnVDZGjwDu7n
+ 0LFYOrqWbWqsZUx9luEcRCda1mpFZVJ3EgJcV2+C0x/whOwvzXI8YWdt0V+w3DYLESc4M
+ RPBdJitXdFEjHGlHuH58jKhxDy5TfJahzGiuLhBw0UaR9s0tu0bYvKTx99GE5Mwtpt3IE
+ 5h5SdkHkswyWZmqdb+X5n1YBqzt0wMXS81mAmuCCELWZrNyiKrwrKMAi9yifqn7yW8naw
+ 1UhL25fUAAzdnmBCn5oAM6+J0NClj44/9dbaU3gzEH1EMYhi0fI3noUmBQtYHNNNxpw==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=T35R4Gai; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c2e"
+ header.s=20251104 header.b=l2nxb8fx; 
+ arc=none smtp.remote-ip="2001:4860:4864:20::2c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2e; helo=mail-oo1-xc2e.google.com;
+ client-ip=2001:4860:4864:20::2c; helo=mail-oa1-x2c.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=T35R4Gai
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E029C60626
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:31 +0000 (UTC)
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-6d290b10a35so826689eaf.2
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 15:35:31 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=l2nxb8fx
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 25CD160617
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:34 +0000 (UTC)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-483a66818edso973844fac.0
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 15:35:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792881331; x=1793486131;
+ d=gmail.com; s=20251104; t=1792881334; x=1793486134;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=7o2ZHxngKMSuJwuOggzrozZCGd+93u8MYHHxyn/nkXQ=;
- b=T35R4Gaibiio/3nmx0LA7ADWuWF+RFm7wXIZn1/nhalEQ+Yh1mY5mMFUDq5T0hKcfR
- zuHjKUuxJXAkCDKFQpz0IXFmGI1vipXF3vgOzxBic9fXZ3smbMpowp3hMlVLZLK+bBrk
- RpmI8qD5PMgvqGYEop7pVWAwHpeedO/sa/xsCw6VvM0YL2YWqgD8DHY/0mhn1Yp3ob2N
- QEM7FJK7wrfyEWgpZENCcFA/kS80ihEw1DnOFZdQQ3aqtKXgE40/DlbOFqus4GYYJ5xR
- SuXfo5aoDv80ugBBO9kAIwecOjTU8wdpaw9uD/8Ebhyb/aTHddUJDnyPxB7QFqm0djZ+
- MSNw==
+ bh=nb1ehsyn7NK3z7/aozvlZrRYC0d6q1coVbHhbGGDHqw=;
+ b=l2nxb8fxE7/DyP+b61tQjk+XfCabjNUNWaPUj17JsEJ3tYxf8x+xKbmMEo13zaqu47
+ NfCaipc04vvifn7d+TmAlazxhYM9+ReU7WeeW44h2CfWzIzoccbW74lsOPM2r6mNpQhm
+ Fb2TmOeAhyhQRu4D/pamfqUk6fPnV1rNsKMX+G9TQtWvMIkaomHBY6spk6fRlKwA1yvJ
+ 5Y4dfEJIYdJsHfz7ZGiw57rMsyJnLvvrWxIfJGlqfPdFFuY5b8Eqj/cJJy0vonEIChFn
+ KPnXaQ9yS/Yz7BFPh95shi9NX61yEX9d3CmLLNU1C6Ivu+GGw7sGH2XaUqk2txY3Z027
+ umyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792881331; x=1793486131;
+ d=1e100.net; s=20260707; t=1792881334; x=1793486134;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=7o2ZHxngKMSuJwuOggzrozZCGd+93u8MYHHxyn/nkXQ=;
- b=k1G9eOz3GWS7UDijd7c7K3JQLfSf7Ef2UpKVKmN6Zs8BgU1cuOKAs65UErHBiKPeHM
- Ka6tEfVzk2fPts3s+I71z9XGJJQX1dXJ4gXCNOc7OW6Hno6MLU8ioEoJ6EKCEfYMtzU7
- 2Fm0geMiP0cBuwv3hrgRswlmUAWOIivb5SuHNJjUZf+K0I18F6dFe4BdgMqJm/Poebpm
- 6Eu9eOjOva06Pv6xfaGWbtNj6D8WBw+8ocCjCpI8TAvEF6FVqDw0dLeLP6rkDvVC7yDv
- WhSy00ihNZndVbgzVAXLl088J6q1gS34rfd7mCHzT3T0QpWGAHiR9iRBlixjY1bGDgYW
- uJaw==
-X-Gm-Message-State: AFq9FYIkxPLZZbBe7DlzsfeACl9gQ9z5whFDSRiPBUyNaHk9A/UI+cDX
- q4Ztn9Xy9uoxc9s5mEPxdYz9SJRzNFcRGbLcYhGzc7T9YlCPExgQ+VoLgyuBkTBK
-X-Gm-Gg: AYBFou2VaXqOkowrL5QwUUFPea+GyC9zdlaPaysDCLR8JexTTZKydCpZ0BGqJOF5Lgk
- R/kJvmITFA/UOAiYj+Im+bsrpuqt9/Wf03G6LvehW+L0Rsu5y5nyh4q/FkbfiXmzuZJC+DA424V
- Jd6ZwBWtb971TDkMv4GvHsHPh8TdImPa6W0kbDBxkU5MSgGCO7PNoEXi309vRwFjYnxPbWU+5bW
- 1OnPDFhe/kCOctzFHbmzipnzpm9Cd/+Qzxbd1huPjGvOzT05ysZoaSVDhQY52dpmZnP8baCDSj8
- tdjhZ1CKX2G51ICYGHq9uJbWP2MYsNlZq4JDGPf2t8out513yvhEL71Rw2XxBlmUB/gAOKPxMse
- q3N37ZFszz0/w1c/5PBFcI+DxL4U+Ay63rbdO4IQuzmW6M40pOSCQvzoBoAFAlCl/SeP7ImjlO3
- DNXoDvsBMWnQdvlAPTQbxfjDvsY3uqDRHjCsuG3R2K/wu++lmZeLdCMrWhdUFNpJfCRb98MBOGH
- Oty+MUBCV7NIZJ+J4YuTE/y2c9QVuSLg4ufxGNXtu+LNV12mEjWpggiPhWOcaH85YMDdAc82v5V
- FWFKzDfRwa67RWZ+a/HjrtskL5oZsVyKgDBmIJzHAFG4JHILy/Q+43PlFlrhICxV2FfEgb1ZdZC
- dcqXu8JrNVv4uYeqHDSdtpNs4DkHAfwgYkP+uQIvPmKLqpSIGq+VqGTn30tBhQNVraMZdc8ST7a
- he0Og=
-X-Received: by 2002:a05:6820:3383:10b0:6b7:8396:f3c3 with SMTP id
- 006d021491bc7-70ba0e24fb3mr996393eaf.37.1792881330649; 
- Sat, 24 Oct 2026 15:35:30 -0700 (PDT)
+ bh=nb1ehsyn7NK3z7/aozvlZrRYC0d6q1coVbHhbGGDHqw=;
+ b=twPUyH9LZry8LcLj+6iGTyBml3AZzc3quxE3RXRBNURm9ejutT16190bBbRA0Em3kV
+ oZUSrm3oRpCVWCL7dYURp3ZZQVKcuQDeyallMM7J9ybpJnbSJ2VZ5Eudwd4mJ0epR6kU
+ DEqUzCvm41qW1W5lYcCyWCx2UvvHeIdKtGjffPyOlF3rfL6fzpLEWscrK78BiBU0u4Eg
+ WIqe5HHZF77pWHaJCWcBDvu8Fwb9X9jHV5O3MOh7PfcfUckvfM5qelwfblaLSp6AcfNE
+ lZ5xyyu9VWUAN6ruJXDopcy67kgA2YQa5tuJX0y792HD3bwVDenCohK0h/IcDVF1opOc
+ VlDw==
+X-Gm-Message-State: AFq9FYLW3P2ISCfMlfhNlFfvR8dBy81mU8wIRxNnxD8OXWhT82oDPzhi
+ a0HEPFI6eXoHtFRacwAPLdQsphd+r1Jo4iE+BrdeujZXhv7YBvmnCkCy
+X-Gm-Gg: AYBFou1qI+QA5ie0LsJwB/jy+ByidFoTLaYuzUoI/1S0c974ew6Sag8ryML9ImpVoXu
+ zAgUF+PLCAbIWO/PeONCHIsEcYgLvnQp+lAQvs+HCwV3w2CaWaF6Y2OuafbZCIp7H4iPNg0Hocz
+ +n032EdpYXOSLsN36RpcO64pW30ietjvaBEIRJfnWx/SZZuGZ0EktNRaXe5fO5kiPWgjif2QauI
+ N957FlmKkVlcFAvoJYD5zm27idncZLIqkz3fSf3XQjbhnyIKyO2Of5OhGV/bTL6RyAlD05yVb/V
+ 8zZj6CXSTh1sQqE8Oodtby7SJldg2e5hB/8sT5veKrUZha3TmEaoMn4xYsYWDBJVTjArrg2IaTK
+ 9BJgtfyBHIkwBOPsKXPR6T6cZcb6wqc38CTsYNDkt9DLuukSA4dLeoyJN6ofmap6s07UvWQDDNT
+ ttNyFQEHCeMo4iH4RuO05N0x/oKTQp3cFNaMP2usLGVhzrwjSr1m6m13ZotipDqmO30j1GnUref
+ LLL2cWlCM9KWGqFX3NlXBSa8dkRB3lzam99txyTFLDkRTQtobZqGyC6aNYp31gbkIPHBGRi5y9n
+ dmratmzxsVm36XoSAt5offNhZwLYZObvoh8/PMlsfvVKla4qGJeyemOCBWgpPsvGHE45Dc++++5
+ ctWpdjmwx+aR8zZM5ERAXfgHDOhuHIJ/EBNcoUxIri3E0T4taPhntpyCv7WDU38mLv4CDj+Lenw
+ GA/og=
+X-Received: by 2002:a05:6870:9a14:b0:475:e066:7714 with SMTP id
+ 586e51a60fabf-4a83f47c04bmr1952508fac.27.1792881333813; 
+ Sat, 24 Oct 2026 15:35:33 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4a8430d8130sm1706457fac.5.2026.10.24.15.35.29
+ 586e51a60fabf-4a8430d8130sm1706457fac.5.2026.10.24.15.35.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 Oct 2026 15:35:30 -0700 (PDT)
+ Sat, 24 Oct 2026 15:35:33 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Sat, 24 Oct 2026 16:34:56 -0600
-Subject: [PATCH v2 09/16] net: keep internal TFTP and DHCP downloads from
- automatically booting
+Date: Sat, 24 Oct 2026 16:34:58 -0600
+Subject: [PATCH v2 11/16] cmd: bootvx: use stack-independent TFTP downloads
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261024-submit-lwip-tftp-combined-v1-v2-9-0f663f735ee8@gmail.com>
+Message-Id: <20261024-submit-lwip-tftp-combined-v1-v2-11-0f663f735ee8@gmail.com>
 References: <20261024-submit-lwip-tftp-combined-v1-v2-0-0f663f735ee8@gmail.com>
 In-Reply-To: <20261024-submit-lwip-tftp-combined-v1-v2-0-0f663f735ee8@gmail.com>
 To: Jerome Forissier <jerome.forissier@arm.com>
@@ -204,246 +203,111 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Internal consumers need to inspect or use the downloaded data before
-deciding what to boot. Suppress autostart around their network commands
-and restore its exact value on every return. Route the TFTP helper, DHCP
-helper, PXE file callbacks, EFI device-tree download and lwIP net_loop
-shim through the download-only path. Keep the argv form so legacy IPv6
-arguments are preserved.
+The TFTP path is compiled out with lwIP even though a common
+download-only helper is now available. It also parses the word tftp as
+a hexadecimal address, leaving the local boot address at zero after
+the transfer.
 
-Reuse the common protection from the automatic-update timeout helper
-instead of maintaining a separate autostart override. This protects
-script, EFI, PXE, update, DFU and bubt callers before command autostart
-is enabled for lwIP.
+Use tftpb_run() with loadaddr and keep automatic boot disabled during
+the download. Reject failed and empty transfers, then use the actual
+image load address for the VxWorks handoff. Reject tftp explicitly when
+the download command is not configured.
 
-Leave an already-disabled autostart value untouched, including a
-read-only setting. If autostart is enabled and cannot be suppressed,
-fail without starting the download.
+Exercise successful, failed and empty downloads in sandbox, stopping
+before the architecture-specific handoff by leaving bootaddr unset.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- boot/bootmeth_efi.c  |  3 +--
- boot/bootmeth_pxe.c  |  3 +--
- cmd/pxe.c            |  2 +-
- include/net-common.h | 17 ++++++++++++--
- net/net-common.c     | 64 +++++++++++++++++++++++++++++++---------------------
- 5 files changed, 56 insertions(+), 33 deletions(-)
+ cmd/elf.c      | 29 +++++++++++++++--------------
+ test/dm/tftp.c | 25 +++++++++++++++++++++++++
+ 2 files changed, 40 insertions(+), 14 deletions(-)
 
-diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index e187dc39912..b315f41d870 100644
---- a/boot/bootmeth_efi.c
-+++ b/boot/bootmeth_efi.c
-@@ -221,7 +221,6 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- {
- 	char file_addr[17], fname[256];
- 	char *tftp_argv[] = {"tftp", file_addr, fname, NULL};
--	struct cmd_tbl cmdtp = {};	/* dummy */
- 	const char *addr_str, *fdt_addr_str, *bootfile_name;
- 	int ret, arch, size;
- 	ulong addr, fdt_addr;
-@@ -289,7 +288,7 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- 	if (!bflow->fdt_fname)
- 		return log_msg_ret("fil", -ENOMEM);
- 
--	if (!do_tftpb(&cmdtp, 0, 3, tftp_argv)) {
-+	if (!tftpb_run_argv(3, tftp_argv)) {
- 		bflow->fdt_size = env_get_hex("filesize", 0);
- 		bflow->fdt_addr = fdt_addr;
- 	} else {
-diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
-index 7e999730e6a..27f254b9f93 100644
---- a/boot/bootmeth_pxe.c
-+++ b/boot/bootmeth_pxe.c
-@@ -102,7 +102,6 @@ static int extlinux_pxe_read_file(struct udevice *dev, struct bootflow *bflow,
- 				  enum bootflow_img_t type, ulong *sizep)
- {
- 	char *tftp_argv[] = {"tftp", NULL, NULL, NULL};
--	struct pxe_context *ctx = dev_get_priv(dev);
- 	char file_addr[17];
- 	ulong size;
- 	int ret;
-@@ -111,7 +110,7 @@ static int extlinux_pxe_read_file(struct udevice *dev, struct bootflow *bflow,
- 	tftp_argv[1] = file_addr;
- 	tftp_argv[2] = (void *)file_path;
- 
--	if (do_tftpb(ctx->cmdtp, 0, 3, tftp_argv))
-+	if (tftpb_run_argv(3, tftp_argv))
- 		return -ENOENT;
- 	ret = pxe_get_file_size(&size);
- 	if (ret)
-diff --git a/cmd/pxe.c b/cmd/pxe.c
-index 3deae5e6d47..9635c834eb4 100644
---- a/cmd/pxe.c
-+++ b/cmd/pxe.c
-@@ -42,7 +42,7 @@ static int do_get_tftp(struct pxe_context *ctx, const char *file_path,
- 		num_args = 3;
- 	}
- 
--	if (do_tftpb(ctx->cmdtp, 0, num_args, tftp_argv))
-+	if (tftpb_run_argv(num_args, tftp_argv))
- 		return -ENOENT;
- 
- 	ret = pxe_get_file_size(sizep);
-diff --git a/include/net-common.h b/include/net-common.h
-index 12c1689bf57..d5a95075ad7 100644
---- a/include/net-common.h
-+++ b/include/net-common.h
-@@ -504,7 +504,8 @@ int net_loop(enum proto_t protocol);
-  * dhcp_run() - Run DHCP on the current ethernet device
-  *
-  * This temporarily sets autoload and restores its exact original value,
-- * including NFS and an unset variable.
-+ * including NFS and an unset variable. Downloads never automatically boot;
-+ * the caller owns the resulting image. The autostart variable is restored.
-  *
-  * @addr: Address to load the file into (0 if @autoload is false)
-  * @fname: Filename of file to load (NULL if @autoload is false or to use the
-@@ -527,7 +528,7 @@ int dhcp_run(ulong addr, const char *fname, bool autoload);
- int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- 
- /**
-- * tftpb_run() - Run TFTP on the current ethernet device
-+ * tftpb_run() - Download via TFTP without automatically booting the image
-  *
-  * @addr: Address to load the file into
-  * @fname: Filename of file to load (NULL to use the default filename)
-@@ -535,6 +536,18 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
-  */
- int tftpb_run(ulong addr, const char *fname);
- 
-+/**
-+ * tftpb_run_argv() - Run TFTP arguments without automatically booting
-+ *
-+ * Preserves the exact autostart value on success and failure. This form also
-+ * supports the legacy command's optional IPv6 argument.
-+ *
-+ * @argc: Number of command arguments
-+ * @argv: Command arguments, including the command name
-+ * Return: command status (see enum command_ret_t)
-+ */
-+int tftpb_run_argv(int argc, char *const argv[]);
-+
- /**
-  * tftpb_run_timeout() - Download via TFTP with an initial server-probe timeout
-  *
-diff --git a/net/net-common.c b/net/net-common.c
-index c5d13a23b09..85d97cb660c 100644
---- a/net/net-common.c
-+++ b/net/net-common.c
-@@ -64,11 +64,40 @@ void net_sntp_set_rtc(u32 seconds)
- 	       tm.tm_hour, tm.tm_min, tm.tm_sec);
- }
- 
-+#if defined(CONFIG_CMD_DHCP) || defined(CONFIG_CMD_TFTPBOOT)
-+/* Internal downloads return data to their caller; only commands may boot it. */
-+static int netboot_run(int (*command)(struct cmd_tbl *, int, int, char *const []),
-+		       int argc, char *const argv[])
-+{
-+	struct cmd_tbl cmdtp = {};
-+	const char *value;
-+	char *saved;
-+	int ret, restore;
-+
-+	/* An already-disabled setting may be protected against writes. */
-+	if (!env_get_autostart())
-+		return command(&cmdtp, 0, argc, argv);
-+
-+	value = env_get("autostart");
-+	saved = strdup(value);
-+	if (!saved)
-+		return CMD_RET_FAILURE;
-+	if (env_set("autostart", "no")) {
-+		free(saved);
-+		return CMD_RET_FAILURE;
-+	}
-+	ret = command(&cmdtp, 0, argc, argv);
-+	restore = env_set("autostart", saved);
-+	free(saved);
-+
-+	return ret ?: (restore ? CMD_RET_FAILURE : CMD_RET_SUCCESS);
-+}
-+#endif /* defined(CONFIG_CMD_DHCP) || defined(CONFIG_CMD_TFTPBOOT) */
-+
- #if defined(CONFIG_CMD_DHCP)
- int dhcp_run(ulong addr, const char *fname, bool autoload)
- {
- 	char *dhcp_argv[] = {"dhcp", NULL, (char *)fname, NULL};
--	struct cmd_tbl cmdtp = {};	/* dummy */
- 	char file_addr[17];
- 	const char *autoload_env = env_get("autoload");
- 	char *saved_autoload = NULL;
-@@ -91,7 +120,7 @@ int dhcp_run(ulong addr, const char *fname, bool autoload)
- 		dhcp_argv[1] = file_addr;
- 	}
- 
--	result = do_dhcp(&cmdtp, 0, !autoload ? 1 : fname ? 3 : 2, dhcp_argv);
-+	result = netboot_run(do_dhcp, !autoload ? 1 : fname ? 3 : 2, dhcp_argv);
- 
- 	ret = env_set("autoload", saved_autoload);
- 	free(saved_autoload);
-@@ -113,17 +142,21 @@ const struct tftp_request_timeout *tftp_get_request_timeout(void)
- 	return tftp_request_timeout;
- }
- 
-+int tftpb_run_argv(int argc, char *const argv[])
-+{
-+	return netboot_run(do_tftpb, argc, argv);
-+}
-+
- int tftpb_run(ulong addr, const char *fname)
- {
- 	char *tftp_argv[] = {"tftpboot", NULL, (char *)fname, NULL};
--	struct cmd_tbl cmdtp = {};      /* dummy */
- 	char file_addr[17] = {0};
- 
- 	log_debug("addr=%lx, fname=%s\n", addr, fname);
- 	sprintf(file_addr, "%lx", addr);
- 	tftp_argv[1] = file_addr;
- 
--	int result = do_tftpb(&cmdtp, 0, fname ? 3 : 2, tftp_argv);
-+	int result = tftpb_run_argv(fname ? 3 : 2, tftp_argv);
- 
- 	if (result)
- 		return log_msg_ret("res", -ENOENT);
-@@ -136,37 +169,16 @@ int tftpb_run_timeout(ulong addr, const char *fname, ulong timeout_ms,
- {
- 	struct tftp_request_timeout timeout = { timeout_ms, max_retries };
- 	const struct tftp_request_timeout *saved = tftp_request_timeout;
--	const char *autostart_env = env_get("autostart");
--	char *saved_autostart = NULL;
--	int restore_ret = 0;
- 	int ret;
- 
- 	if (!timeout_ms || timeout_ms > U32_MAX / 4 || max_retries < 0)
- 		return -EINVAL;
- 
--	if (autostart_env) {
--		saved_autostart = strdup(autostart_env);
--		if (!saved_autostart) {
--			ret = -ENOMEM;
--			goto out_free;
--		}
+diff --git a/cmd/elf.c b/cmd/elf.c
+index 53ec193aaa6..a3cc051991b 100644
+--- a/cmd/elf.c
++++ b/cmd/elf.c
+@@ -130,23 +130,23 @@ int do_bootvx(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	 * Check the loadaddr variable.
+ 	 * If we don't know where the image is then we're done.
+ 	 */
+-	if (argc < 2)
+-		addr = image_load_addr;
+-	else
+-		addr = hextoul(argv[1], NULL);
+-
+-#if defined(CONFIG_CMD_NET) && !defined(CONFIG_NET_LWIP)
+-	/*
+-	 * Check to see if we need to tftp the image ourselves
+-	 * before starting
+-	 */
++	addr = image_load_addr;
+ 	if ((argc == 2) && (strcmp(argv[1], "tftp") == 0)) {
+-		if (net_loop(TFTPGET) <= 0)
++#if defined(CONFIG_CMD_TFTPBOOT)
++		/* VxWorks, not bootm(), owns the downloaded image. */
++		addr = env_get_hex("loadaddr", image_load_addr);
++		if (tftpb_run(addr, NULL) || !net_boot_file_size)
+ 			return 1;
++		addr = image_load_addr;
+ 		printf("Automatic boot of VxWorks image at address 0x%08lx ...\n",
+-			addr);
 -	}
--
--	/* Updates need the downloaded data, not the command's automatic boot. */
--	ret = env_set("autostart", "no");
--	if (ret)
--		goto out_free;
--
- 	tftp_request_timeout = &timeout;
- 	ret = tftpb_run(addr, fname);
- 	tftp_request_timeout = saved;
- 
--	if (env_set("autostart", saved_autostart))
--		restore_ret = -EINVAL;
--out_free:
--	free(saved_autostart);
--
--	return ret ?: restore_ret;
-+	return ret;
- }
- 
++				addr);
++#else
++		puts("TFTP support is disabled\n");
++		return CMD_RET_FAILURE;
  #endif
++	} else if (argc == 2) {
++		addr = hextoul(argv[1], NULL);
++	}
+ 
+ 	/*
+ 	 * This should equate to
+@@ -333,6 +333,7 @@ U_BOOT_CMD(
+ U_BOOT_CMD(
+ 	bootvx, 2, 0, do_bootvx,
+ 	"Boot vxWorks from an ELF image",
+-	" [address] - load address of vxWorks ELF image."
++	" [address] - load address of vxWorks ELF image.\n"
++	"bootvx tftp - download the image using TFTP before booting"
+ );
+ #endif
+diff --git a/test/dm/tftp.c b/test/dm/tftp.c
+index b70aa6f4722..45612e066e5 100644
+--- a/test/dm/tftp.c
++++ b/test/dm/tftp.c
+@@ -503,6 +503,31 @@ static int tftp_test_download(struct unit_test_state *uts,
+ 	ut_assertok(env_set("tftptimeout", NULL));
+ #endif
+ 
++#if IS_ENABLED(CONFIG_CMD_ELF_BOOTVX)
++	/* Stop before the VxWorks handoff by deliberately omitting bootaddr. */
++	ut_assertok(env_set("bootaddr", NULL));
++	ut_assertok(env_set("loadaddr", "2000000"));
++	ut_assertok(env_set("bootfile", "update.bin"));
++	*net_boot_file_name = '\0';
++	ut_assertok(env_set("autostart", "yes"));
++	for (i = 0; i < 3; i++) {
++		memset(ctx, 0, sizeof(*ctx));
++		ctx->fail = i == 1;
++		ctx->empty = i == 2;
++		image_load_addr = TFTP_TEST_ADDR + 4096;
++		net_boot_file_size = 1234;
++		ut_asserteq(CMD_RET_FAILURE, run_command("bootvx tftp", 0));
++		ut_asserteq(1, ctx->requests);
++		ut_assert(!ctx->autostart);
++		ut_asserteq_str("yes", env_get("autostart"));
++		ut_asserteq(i ? 0 : sizeof(tftp_test_data), net_boot_file_size);
++		if (!i) {
++			ut_asserteq(TFTP_TEST_ADDR, image_load_addr);
++			ut_asserteq_mem(tftp_test_data, buffer, sizeof(tftp_test_data));
++		}
++	}
++#endif
++
+ 	for (i = 0; i < ARRAY_SIZE(autostart); i++) {
+ 		timeout = i & 1 ? NULL : "7000";
+ 		retries = i & 1 ? NULL : "09";
 
 -- 
 2.53.0
