@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72F66606A31A
-	for <u-boot@archiver.kernel.org>; Sat, 24 Oct 2026 22:36:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9BBC606A31A
+	for <u-boot@archiver.kernel.org>; Sat, 24 Oct 2026 22:36:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Dult0Z45;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=DizuikLl
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=jhJa67uU;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=T35R4Gai
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4FAC46074C;
-	Sat, 24 Oct 2026 22:36:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C705D6073E;
+	Sat, 24 Oct 2026 22:36:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bD4Al0MWvtdz; Sat, 24 Oct 2026 22:36:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 781F6606F8
+ id FDUc4keaV6uT; Sat, 24 Oct 2026 22:36:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 19E636065A
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792881348;
-	b=RXPSLBD2TUa8SoavCG4X9FwUKP63bHDzI1cTCZ0a9+WXLx33poaQjJcNsiwpGy6C9aoB
-	 258iXPqiDe+7RO+bepdwUoZzzHqd8qV1KYcWQasMI3LDGwUjjVXj0dqZKiKtpxCCKD6Ry
-	 m/rg/B8V5eU+qRcl7CxY/WgWhu2+0APv5aNFjwrLIzR6vfVhX+pT+m7R2Xx+RnhRxDT3W
-	 TQ+9cM+Cssu8Yh3xEwW30USTIsh5muu4nO3psWiT432L249UttmH+qe/P5sWslyTp8EPB
-	 ZxqZGFyaZYUUYeiuA9BuVu8ofxRg11BhvtJgG8ieDDR5n3W+YFIRVr23gBOX9OEkb5Q==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792881353;
+	b=GiOMnEIdjwDl0p3RbONiKkQEcloORniHNgfQNlOWP2Y/gGmGTtJ8+njD6UaDRpHUWWii
+	 XKQ6OoDsyiEJkmw+nEOFis1OdtDars74gk/jjWoSzXWh7ZcbNljtBH0euKkM5RVeyofvx
+	 C3kKF0FDvkAcgCK8zd3bT3IlcguhXG3C0uCSFlX3uOkKhCQBz8F0d+lMvIH+313g52sZg
+	 h2hMRrkq42kXCpAasJloKKToT5SgQLNGj1vWQM+wuAg3Jm4mLkcD6wgw/BBv07NOyGnUZ
+	 YKIgapXbYk4d/qKXsbh8Ts1FSPvfgMv/B3J/rKeKNq7HtQEJnSNX3UX97O7c5JWkuVg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792881348;
+	c=relaxed/relaxed; t=1792881353;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,138 +33,140 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=pcAU4cqQ0eUhxXlx6PgKbcv6uEsirIhQjdLjR9MBzz4=;
-	b=DiaIO7f5gcy7M20Clkgx6eb6fs3FB4tLqdOHdquizEUhAL468QfHgwhlRTIdZAOZYb0n
-	 O3xmSR8m1czVSMalVBmHT9BfZRWomh4ssM3O54+2oGHECTrdKm9z6DW+T2hpADs/uz2Ej
-	 5k4RPsydzEJWKRKWMFdkuxSqmJDhRKrXLz/DN4DFuCRvm/dmpmTxgalNJ4NH+VeGgvPGb
-	 te++s9ImgkQGnME/nTF/nKo5iXNL0Y+1YZXHdPuXLIS3nH8DX+WCpPFXhm9QPPP4gE1nx
-	 fZ//0Jdm9d2+BJwCtrz1Cuo2K3H8AbfhuVwdIR4N+DyG2+4t+JwuMfMcsM0Cwhf+gIA==
+	bh=7o2ZHxngKMSuJwuOggzrozZCGd+93u8MYHHxyn/nkXQ=;
+	b=s4k8W7T3QSgTAFhL+/SGoZ+apsBfmJ1pC86ryysmjIyQADdfSWuBFjLDLoXFileUtbj9
+	 cYR6Vfm5F0IvbXnZ6llL8Vf6C9+qjKUbfsbHmtuH6m911TF3Jto/C1uzEpyz/LPlZzLGo
+	 dqbv8FShYoL9tN4WFFbAHsKZRX0ZzX4YgkVJe71W0TC5laHPKuE32OWsviMuYMqwKbTmQ
+	 UyQn3JpdexxuX1Wk16ZEgxmPu5n0WH1wApWdhUSwjpoFn7fpmUbNVnhGILyDVjZ2ze7hb
+	 1UvnzPgUTUr9wFvq+aY1DIYNP+OOgrYT/B6OA90JpthV/AhQOeas2Lm3xYYbIDpcCqw==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=T35R4Gai;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792881348;
-	bh=pcAU4cqQ0eUhxXlx6PgKbcv6uEsirIhQjdLjR9MBzz4=;
+	d=lists.u-boot-project.org; s=default; t=1792881353;
+	bh=7o2ZHxngKMSuJwuOggzrozZCGd+93u8MYHHxyn/nkXQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Dult0Z45kJKLae7qw4/eui1SH/uXugz3f71XR0Vn5LGe5+kK1MWlGOKk2tOFul9MA
-	 jKdbd4RUTgsc8pNCtoqhhzBMy/efZ8cd82TWZu3NXL4iPUVtVfpGbgBrI6yarmvYMM
-	 zlBsl9quIiFtvCA+/j3nCGAr8+ecnzTtyZ8qeXj1Aj9462L3y6NhOD2Yk6IbX7ahbg
-	 q3vyCKga+7rIV429FMWlko6YxkC59zHKHRVBGuKf+YkilOQ9NdkrLw9Z/4oJ9JMn8U
-	 o01GRnOIBk8WmOTs7FPZ9hZL2rVKoVfSLNzTFA/dW2lFQhWwlWyjJJbQWw+fqlqisW
-	 6ELeEC5uFZR4Q==
+	b=jhJa67uUy4SE01ejOQj/zxBXfG9f0EbxXiGpT078ousL5s9luYJ3t2Xvrphwr8i/w
+	 /QA76Nc5sWqqlCiclcmU900UR4+D08A5ms96x/AX1nf2u2CDg2mvmh5xBI75Y/NW/O
+	 cbwqafuJ4FwFoJ9OG82E6QNk/qrQxGtRQejBI5N1xuuZ2CbeeomxNw/v4VWGfWAXh/
+	 Yc+6hiI1lSgaewCWi2C8yyQKhD3z3kiz7f6cvnrWF40+siXQjcBuHJnSGGXwEwQxb9
+	 6n7k6zgFKUwcJavmdJOlB3yTcMI4wBNqL2Q6x0J5FFFPWRhGPa5023aV5Tj4oa6cH7
+	 Oyp0JmFWNeKuw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 781F6606F8;
-	Sat, 24 Oct 2026 22:35:48 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 8A6952F5
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 19E636065A;
+	Sat, 24 Oct 2026 22:35:52 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 042653D9
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7069640079
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:43 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id DD70E606B3
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gddPowHim9Cf for <u-boot@lists.u-boot-project.org>;
- Sat, 24 Oct 2026 22:35:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 0972A4006B
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2001:4860:4864:20::30"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792881342;
- b=Dy7fmwHngKnwvY4rxNUMgJ+TRJgdTynLj+a9ZwLXRh9fwcQ95wHo6C3VkOFQY6ddmLFY
- H9dGNXoT1VfofezpcUIbxNN67lpKr78+F4b765UlAdoujjQDvbFgXYzZ6Xrwfu9QA1saQ
- 0F0itbCl1Npx97Iu+htOjaDfzmsNen4/1+flfejDn3SeylSGtlO1Sb/OooImYR8a65qsV
- LVUqTbZNnKHguwtdvtAQDdh+h1xix1uzftukUCiaPd2gseUQyte23s8b3L8FCZzwtGm+r
- t+jLTof3EHCDYa4GbVLKFMzUTh4PSuJZrBxe1/vJTWcnCCY6EwYC7HZNX2wQs+dkbmA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Tsyfa5jupRmz for <u-boot@lists.u-boot-project.org>;
+ Sat, 24 Oct 2026 22:35:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E029C60626
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c2e"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792881333;
+ b=S+mf73g7Cg28AelrK+38r+tGPDsCAk9f3+O5qiVP03eiuuuClpgLGP/5DX0/YpAD0yUY
+ i1pdWpDDsAYrRzkz7bcoU3Z/Mebe5OCh8Vb9tMFzV/zSy/lb09Ps9DmXRJ99kkIwhm3vf
+ unVha1K4i2MWIZy7eKtDMDZK8aBF3RHC86yYJcdcn5SRG1VlzbcB1jVapQU5LF9cu01uB
+ NzJoNPiKnc64+A9qoOR87p0R03M8A2Xvw3XPJzJQc9442f2G+uRpVKrsFdgsOXtEGV2tS
+ p4V9unrA5Es+Hra+or0CI0rfJ9y1dzogps8dN5g8aCpU9YRxnkW1bhOqwdep/7huXQg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792881342;
+ c=relaxed/relaxed; t=1792881333;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=pcAU4cqQ0eUhxXlx6PgKbcv6uEsirIhQjdLjR9MBzz4=;
- b=REYLs1UAHOkGqZYlHHVjxTpjQ7iH7LLsnt92eZLzPe+72Umcmgj9vvWzjva6fz950Pv0
- iCD14dRqJRxSz3v8SL7JIzi7hehkdVVpB4/iHKZ59wsJfNPWmgrG2zecaAHQGvtBQl+xE
- 1QYn/NAtUmWAMlwv7X8xOSc32lKExaKklrp/8cc7zV/sUMiN+X2iCjlU6yvBj1QBhNLvK
- FmHAIn2Y+RaM9efWX0LTZUdXH9rAyY1YqJGaSNQ3taVzt3Ms1gJKjyKoDjd36aD+XqqZy
- tF2KLFFrBH0ItGRfgf77ngknBqIaEs2tcyc4T9gd8S+j0QBMlALEg214k9muQYHEBrQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=7o2ZHxngKMSuJwuOggzrozZCGd+93u8MYHHxyn/nkXQ=;
+ b=XMCJDxf5RJkxaDbASuzRZCWMqL/fI78+xfRB3jnk6VAJxOECvG2csX6wgGsNcYwb8Zg+
+ i3r7KsD+zyEVwFg9tUTxoxfxa/d2mgvnZHDwawi0JrunPQ0nE7MsmvOB+mPSm4mFTCeeF
+ cgzT545CEkI1BbW+h6w3Wwh3cclcguAe8LhCUnkdOOyXnUzVUlzQmVWGvtr9GsmMbOr9F
+ dX/kctfnE3SSC1wXzd1ZpKwsAqEwwKpCcoiBTkTeUQr5C6U+OgmC0/5IpmO07wH0cAPdI
+ L74VKnW0zcF7wuWgA4ASdABNhLOu7JTiInKr5gGnH68Cgm08wFGrJU0mW+HfrCDVCfw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=DizuikLl; 
- arc=none smtp.remote-ip="2001:4860:4864:20::30"
+ header.s=20251104 header.b=T35R4Gai; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c2e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::30; helo=mail-oa1-x30.google.com;
+ client-ip=2607:f8b0:4864:20::c2e; helo=mail-oo1-xc2e.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=DizuikLl
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0972A4006B
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:41 +0000 (UTC)
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-490d838b425so967406fac.3
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 15:35:41 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=T35R4Gai
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id E029C60626
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 22:35:31 +0000 (UTC)
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-6d290b10a35so826689eaf.2
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 15:35:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792881341; x=1793486141;
+ d=gmail.com; s=20251104; t=1792881331; x=1793486131;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=pcAU4cqQ0eUhxXlx6PgKbcv6uEsirIhQjdLjR9MBzz4=;
- b=DizuikLlFNL1Ri3OUtiTufSi1F07s99bT4kErg8yt6DcQs83HDew7eNU0lG6hUdmaJ
- +G56Om8PSiPpEhuW9qeTybgVLOFa91e7+iLlUShnnFjhSl/Cx1UujWTwjhpKYmJyZ3ko
- rApDuUAZ2mz68bG+R1FNTVKdn8Yv7SbnQxlW6GuwgLB+wOPHydUhtdMfy8xifa5TwHGg
- BCmYkUb3Un2FFbUjg6w8qvfaJL7lCMXum7ogPjMtZbrMhbdT93XqKsVs4fo/9hZtfOzk
- 66UmjlgZpRVnL13Lnxuz0wnVtRg66M90neHXtr0IsUVHgEKkvkH40KDylkbB6gTDVdtb
- Lnjg==
+ bh=7o2ZHxngKMSuJwuOggzrozZCGd+93u8MYHHxyn/nkXQ=;
+ b=T35R4Gaibiio/3nmx0LA7ADWuWF+RFm7wXIZn1/nhalEQ+Yh1mY5mMFUDq5T0hKcfR
+ zuHjKUuxJXAkCDKFQpz0IXFmGI1vipXF3vgOzxBic9fXZ3smbMpowp3hMlVLZLK+bBrk
+ RpmI8qD5PMgvqGYEop7pVWAwHpeedO/sa/xsCw6VvM0YL2YWqgD8DHY/0mhn1Yp3ob2N
+ QEM7FJK7wrfyEWgpZENCcFA/kS80ihEw1DnOFZdQQ3aqtKXgE40/DlbOFqus4GYYJ5xR
+ SuXfo5aoDv80ugBBO9kAIwecOjTU8wdpaw9uD/8Ebhyb/aTHddUJDnyPxB7QFqm0djZ+
+ MSNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792881341; x=1793486141;
+ d=1e100.net; s=20260707; t=1792881331; x=1793486131;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=pcAU4cqQ0eUhxXlx6PgKbcv6uEsirIhQjdLjR9MBzz4=;
- b=G8zeCMwVKCn0yOuJu+0nNU7MxK8fH8DfBUPTFB85u9Zw4BaWoRf+N0sOwGtOjcdYqr
- kalHPegAR86jFevOh0/fNeO1Ggbvru9lYGTkF2v2R0hq+8WEUhidfXIw5Fd8mZFKU5zi
- ZnHj5CAyW24EzXeAEhguYQ4gSqsK85iJSpOmt/3kAiHuhfNY9lapg3Hzj5ZtdFR2nTuh
- x4zm1EVyf4mOrZgVKxOAjwlUOEmHgn2SYmeQorYEcScHK05ZRbPc+v3WCUwU7IYIr9yQ
- vTpMTqmCSZotNJuwnULNJQ0DQsj2c2Up0SUomaT+UtbxrLUZzORrJD4j2UzqUCXHpnTa
- SEvA==
-X-Gm-Message-State: AFq9FYI0SI6Op2h7rjmnKCcCQaI+v2mAaHUuElZPXqr/4QkvcHuTl2bu
- Hljw45oRxjG5jICGnPJyVnSVFOC34OFDrkGmo6jhbVQnpADXX0nL453h
-X-Gm-Gg: AYBFou2VU5IIa6HvTNm4ptgsxA4KGnyt9QvAGp29zhRrp1k2rLtVSbHnZgqMjt+jciQ
- M7JE10zNUkApFbcXITRgOru1oSMVUGON068h7dSlWdV18L+bmFQVn8oj275iAQBpr3MpNyiVW3l
- ZXY0ufF6qXUDwqeLrnvq8RWquB/4GuRc+uUR3s2T0xYD4WKhI8hf32nCzWYbbJu1OO45kTwH92N
- BlpqMaK4KhRfa+aX940wXT1e7k1zNqteE6Kp+3gLzc9G6aE7eCYhM4xG5vZoes79hnq2IqxJMXu
- AFgf4hg8xvs3jcgicm2N5hDCPG8bVB6XLWmWuL0fcy01zKgx6K9vYsPoRsA5q/+PGbvSAtCmWHl
- 15SjP2dPnI1XUUfqtQdNL64dEhbLgfmxRmnym//GZvcmI3S2rmz+do56A+/mwqNXbZ7nLlow8w6
- sbFsYI5xPnPcm1wCuL7f3Hiv4B0HfsMMAfszc8MWJc1uKohKRvp+gfvWJGYUv/fIQqxWVnj8Bzp
- Zz6xRHJrdywZnHoZTtPJRias1l4FZizpuGI8QNWCGeqPtRK5LfAgcYjEL7JHUyJQi6hRoGdLveU
- S4p8xny5EgSP/uwZTxPH9HuJ0WpMcRjrqhVGr86UaRYMF1fcVupiYNYGxrGchwKRrzdTqh/1O3f
- LtO8oRvuEUzdGHs2i00RZNtq4n0re7Jop/YEzDBl26PiNDQ5l/O2HiOeIz5qgL1Ug8/ZFUxkT3r
- mYWYo=
-X-Received: by 2002:a05:6870:2106:b0:4a7:4452:bcb6 with SMTP id
- 586e51a60fabf-4a83f579d76mr1865867fac.38.1792881340714; 
- Sat, 24 Oct 2026 15:35:40 -0700 (PDT)
+ bh=7o2ZHxngKMSuJwuOggzrozZCGd+93u8MYHHxyn/nkXQ=;
+ b=k1G9eOz3GWS7UDijd7c7K3JQLfSf7Ef2UpKVKmN6Zs8BgU1cuOKAs65UErHBiKPeHM
+ Ka6tEfVzk2fPts3s+I71z9XGJJQX1dXJ4gXCNOc7OW6Hno6MLU8ioEoJ6EKCEfYMtzU7
+ 2Fm0geMiP0cBuwv3hrgRswlmUAWOIivb5SuHNJjUZf+K0I18F6dFe4BdgMqJm/Poebpm
+ 6Eu9eOjOva06Pv6xfaGWbtNj6D8WBw+8ocCjCpI8TAvEF6FVqDw0dLeLP6rkDvVC7yDv
+ WhSy00ihNZndVbgzVAXLl088J6q1gS34rfd7mCHzT3T0QpWGAHiR9iRBlixjY1bGDgYW
+ uJaw==
+X-Gm-Message-State: AFq9FYIkxPLZZbBe7DlzsfeACl9gQ9z5whFDSRiPBUyNaHk9A/UI+cDX
+ q4Ztn9Xy9uoxc9s5mEPxdYz9SJRzNFcRGbLcYhGzc7T9YlCPExgQ+VoLgyuBkTBK
+X-Gm-Gg: AYBFou2VaXqOkowrL5QwUUFPea+GyC9zdlaPaysDCLR8JexTTZKydCpZ0BGqJOF5Lgk
+ R/kJvmITFA/UOAiYj+Im+bsrpuqt9/Wf03G6LvehW+L0Rsu5y5nyh4q/FkbfiXmzuZJC+DA424V
+ Jd6ZwBWtb971TDkMv4GvHsHPh8TdImPa6W0kbDBxkU5MSgGCO7PNoEXi309vRwFjYnxPbWU+5bW
+ 1OnPDFhe/kCOctzFHbmzipnzpm9Cd/+Qzxbd1huPjGvOzT05ysZoaSVDhQY52dpmZnP8baCDSj8
+ tdjhZ1CKX2G51ICYGHq9uJbWP2MYsNlZq4JDGPf2t8out513yvhEL71Rw2XxBlmUB/gAOKPxMse
+ q3N37ZFszz0/w1c/5PBFcI+DxL4U+Ay63rbdO4IQuzmW6M40pOSCQvzoBoAFAlCl/SeP7ImjlO3
+ DNXoDvsBMWnQdvlAPTQbxfjDvsY3uqDRHjCsuG3R2K/wu++lmZeLdCMrWhdUFNpJfCRb98MBOGH
+ Oty+MUBCV7NIZJ+J4YuTE/y2c9QVuSLg4ufxGNXtu+LNV12mEjWpggiPhWOcaH85YMDdAc82v5V
+ FWFKzDfRwa67RWZ+a/HjrtskL5oZsVyKgDBmIJzHAFG4JHILy/Q+43PlFlrhICxV2FfEgb1ZdZC
+ dcqXu8JrNVv4uYeqHDSdtpNs4DkHAfwgYkP+uQIvPmKLqpSIGq+VqGTn30tBhQNVraMZdc8ST7a
+ he0Og=
+X-Received: by 2002:a05:6820:3383:10b0:6b7:8396:f3c3 with SMTP id
+ 006d021491bc7-70ba0e24fb3mr996393eaf.37.1792881330649; 
+ Sat, 24 Oct 2026 15:35:30 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4a8430d8130sm1706457fac.5.2026.10.24.15.35.39
+ 586e51a60fabf-4a8430d8130sm1706457fac.5.2026.10.24.15.35.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 Oct 2026 15:35:40 -0700 (PDT)
+ Sat, 24 Oct 2026 15:35:30 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Sat, 24 Oct 2026 16:35:02 -0600
-Subject: [PATCH v2 15/16] net: lwip: keep DHCP and BOOTP autoload retries
- with their caller
+Date: Sat, 24 Oct 2026 16:34:56 -0600
+Subject: [PATCH v2 09/16] net: keep internal TFTP and DHCP downloads from
+ automatically booting
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261024-submit-lwip-tftp-combined-v1-v2-15-0f663f735ee8@gmail.com>
+Message-Id: <20261024-submit-lwip-tftp-combined-v1-v2-9-0f663f735ee8@gmail.com>
 References: <20261024-submit-lwip-tftp-combined-v1-v2-0-0f663f735ee8@gmail.com>
 In-Reply-To: <20261024-submit-lwip-tftp-combined-v1-v2-0-0f663f735ee8@gmail.com>
 To: Jerome Forissier <jerome.forissier@arm.com>
@@ -202,513 +204,246 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Retire DHCP/BOOTP before TFTP borrows its runtime for one download
-attempt. Allow the address-configuration owner to refresh the interface
-from the environment after publishing the acquired configuration.
+Internal consumers need to inspect or use the downloaded data before
+deciding what to boot. Suppress autostart around their network commands
+and restore its exact value on every return. Route the TFTP helper, DHCP
+helper, PXE file callbacks, EFI device-tree download and lwIP net_loop
+shim through the download-only path. Keep the argv form so legacy IPv6
+arguments are preserved.
 
-A retryable download failure must repeat address acquisition and
-obtain fresh boot configuration on the selected interface. Share one
-network retry budget between acquisition and download, and preserve
-BOOTP_MAY_FAIL's scope as an address-acquisition policy.
+Reuse the common protection from the automatic-update timeout helper
+instead of maintaining a separate autostart override. This protects
+script, EFI, PXE, update, DFU and bubt callers before command autostart
+is enabled for lwIP.
 
-Perform autostart only after the parent's protocol callbacks, runtime
-attachment and option data have been released. Keep internal helpers
-download-only and refuse to restart another client's shared runtime.
-
-Exercise refreshed leases, servers and filenames, interface rotation,
-shared retry budgets and autostart cleanup in sandbox.
+Leave an already-disabled autostart value untouched, including a
+read-only setting. If autostart is enabled and cannot be suppressed,
+fail without starting the download.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- include/net-lwip.h   |  1 +
- net/lwip/dhcp.c      | 52 ++++++++++++++++++++----------
- net/lwip/net-lwip.c  | 17 +++++-----
- net/lwip/tftp.c      | 48 +++++++++++++++++++++-------
- test/dm/lwip.c       |  4 +++
- test/dm/lwip_bootp.c | 24 ++++++++++++++
- test/dm/lwip_dhcp.c  | 90 +++++++++++++++++++++++++++++++++++++++++++++++++++-
- 7 files changed, 199 insertions(+), 37 deletions(-)
+ boot/bootmeth_efi.c  |  3 +--
+ boot/bootmeth_pxe.c  |  3 +--
+ cmd/pxe.c            |  2 +-
+ include/net-common.h | 17 ++++++++++++--
+ net/net-common.c     | 64 +++++++++++++++++++++++++++++++---------------------
+ 5 files changed, 56 insertions(+), 33 deletions(-)
 
-diff --git a/include/net-lwip.h b/include/net-lwip.h
-index e67497bddec..8fd1c094dff 100644
---- a/include/net-lwip.h
-+++ b/include/net-lwip.h
-@@ -81,6 +81,7 @@ int net_lwip_restart(struct net_lwip_ctx *ctx);
- int net_lwip_refresh(struct net_lwip_ctx *ctx);
- int net_lwip_poll(void);
- int net_lwip_dns_resolve(char *name_or_ip, ip_addr_t *ip);
-+int net_lwip_tftp_download(struct net_lwip_ctx *net, int argc, char *const argv[]);
+diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+index e187dc39912..b315f41d870 100644
+--- a/boot/bootmeth_efi.c
++++ b/boot/bootmeth_efi.c
+@@ -221,7 +221,6 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
+ {
+ 	char file_addr[17], fname[256];
+ 	char *tftp_argv[] = {"tftp", file_addr, fname, NULL};
+-	struct cmd_tbl cmdtp = {};	/* dummy */
+ 	const char *addr_str, *fdt_addr_str, *bootfile_name;
+ 	int ret, arch, size;
+ 	ulong addr, fdt_addr;
+@@ -289,7 +288,7 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
+ 	if (!bflow->fdt_fname)
+ 		return log_msg_ret("fil", -ENOMEM);
  
- /**
-  * wget_validate_uri() - varidate the uri
-diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-index 1b92dd7b8a1..28c1064add8 100644
---- a/net/lwip/dhcp.c
-+++ b/net/lwip/dhcp.c
-@@ -6,6 +6,7 @@
- #include <efi_loader.h>
- #include <env.h>
- #include <hexdump.h>
-+#include <image.h>
- #include <log.h>
- #include <lwip-dhcp.h>
- #include <malloc.h>
-@@ -958,6 +959,8 @@ static int bootp_run(struct cmd_tbl *cmdtp, int flag, int argc,
- 	struct dhcp_options *options;
- 	const char *autoload;
- 	const char *filename = NULL;
-+	bool downloaded = false;
-+	bool acquisition_timeout;
- 	ulong addr;
- 	char *end;
- 	const char *hostname, *vendor;
-@@ -1027,25 +1030,46 @@ static int bootp_run(struct cmd_tbl *cmdtp, int flag, int argc,
- 			ret = bootp_loop(&net, !!filename, options);
- 		if (IS_ENABLED(CONFIG_CMD_DHCP) && !bootp)
- 			ret = dhcp_loop(&net, !!filename, options);
--		if (ret != -ETIMEDOUT)
--			break;
-+		/* Retire the address protocol before handing its runtime to TFTP. */
- 		if (IS_ENABLED(CONFIG_CMD_DHCP) && !bootp)
- 			dhcp_retire(&net);
--		if (IS_ENABLED(CONFIG_BOOTP_MAY_FAIL) &&
-+		acquisition_timeout = ret == -ETIMEDOUT;
-+		if (!ret) {
-+			autoload = env_get("autoload");
-+			if ((autoload && !strcmp(autoload, "NFS")) ||
-+			    env_get_yesno("autoload") == 0)
-+				break;
-+			if (!IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
-+				log_err("Cannot autoload with TFTP: command is disabled\n");
-+				ret = CMD_RET_FAILURE;
-+				break;
-+			}
-+			ret = net_lwip_refresh(&net);
-+			if (ret)
-+				break;
-+			if (IS_ENABLED(CONFIG_CMD_TFTPBOOT))
-+				ret = net_lwip_tftp_download(&net, argc, argv);
-+			if (ret != -EAGAIN) {
-+				downloaded = !ret;
-+				break;
-+			}
-+			puts("Starting again\n\n");
-+		} else if (!acquisition_timeout) {
-+			break;
-+		}
-+		/* BOOTP_MAY_FAIL limits address acquisition, not TFTP recovery. */
-+		if (acquisition_timeout && IS_ENABLED(CONFIG_BOOTP_MAY_FAIL) &&
- 		    (env_get_yesno("ethrotate") == 0 || net_restart_wrap))
- 			break;
- 		/* Other runtime clients must not lose their interface on retry. */
- 		ret = net_lwip_restart(&net);
--		if (ret || (IS_ENABLED(CONFIG_BOOTP_MAY_FAIL) && net_restart_wrap)) {
-+		if (ret || (acquisition_timeout && IS_ENABLED(CONFIG_BOOTP_MAY_FAIL) &&
-+			    net_restart_wrap)) {
- 			ret = CMD_RET_FAILURE;
- 			break;
- 		}
- 	}
--	/*
--	 * A download needs strict addressing, incompatible with the
--	 * address-less runtime attachment. Retire DHCP before handing off;
--	 * the BOOTP loop has already removed its receive callback.
--	 */
-+	/* No protocol callbacks may survive the shared runtime or option data. */
- 	if (IS_ENABLED(CONFIG_CMD_DHCP) && !bootp)
- 		dhcp_retire(&net);
- 	active_options = NULL;
-@@ -1054,6 +1078,8 @@ static int bootp_run(struct cmd_tbl *cmdtp, int flag, int argc,
+-	if (!do_tftpb(&cmdtp, 0, 3, tftp_argv)) {
++	if (!tftpb_run_argv(3, tftp_argv)) {
+ 		bflow->fdt_size = env_get_hex("filesize", 0);
+ 		bflow->fdt_addr = fdt_addr;
+ 	} else {
+diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
+index 7e999730e6a..27f254b9f93 100644
+--- a/boot/bootmeth_pxe.c
++++ b/boot/bootmeth_pxe.c
+@@ -102,7 +102,6 @@ static int extlinux_pxe_read_file(struct udevice *dev, struct bootflow *bflow,
+ 				  enum bootflow_img_t type, ulong *sizep)
+ {
+ 	char *tftp_argv[] = {"tftp", NULL, NULL, NULL};
+-	struct pxe_context *ctx = dev_get_priv(dev);
+ 	char file_addr[17];
+ 	ulong size;
+ 	int ret;
+@@ -111,7 +110,7 @@ static int extlinux_pxe_read_file(struct udevice *dev, struct bootflow *bflow,
+ 	tftp_argv[1] = file_addr;
+ 	tftp_argv[2] = (void *)file_path;
  
+-	if (do_tftpb(ctx->cmdtp, 0, 3, tftp_argv))
++	if (tftpb_run_argv(3, tftp_argv))
+ 		return -ENOENT;
+ 	ret = pxe_get_file_size(&size);
  	if (ret)
- 		return CMD_RET_FAILURE;
-+	if (downloaded)
-+		return net_boot_file_size ? bootm_maybe_autostart(cmdtp, argv[0]) : 0;
- 	autoload = env_get("autoload");
- 	if (autoload && !strcmp(autoload, "NFS")) {
- 		if (IS_ENABLED(CONFIG_CMD_NFS))
-@@ -1061,13 +1087,7 @@ static int bootp_run(struct cmd_tbl *cmdtp, int flag, int argc,
- 		log_err("Cannot autoload with NFS: command is disabled\n");
- 		return CMD_RET_FAILURE;
+diff --git a/cmd/pxe.c b/cmd/pxe.c
+index 3deae5e6d47..9635c834eb4 100644
+--- a/cmd/pxe.c
++++ b/cmd/pxe.c
+@@ -42,7 +42,7 @@ static int do_get_tftp(struct pxe_context *ctx, const char *file_path,
+ 		num_args = 3;
  	}
--	if (env_get_yesno("autoload") == 0)
--		return CMD_RET_SUCCESS;
--	if (IS_ENABLED(CONFIG_CMD_TFTPBOOT))
--		return do_tftpb(cmdtp, flag, argc, argv);
--	log_err("Cannot autoload with TFTP: command is disabled\n");
--
--	return CMD_RET_FAILURE;
-+	return CMD_RET_SUCCESS;
- }
  
- int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-index df11322ec3b..60fcf9b3225 100644
---- a/net/lwip/net-lwip.c
-+++ b/net/lwip/net-lwip.c
-@@ -553,25 +553,26 @@ int net_lwip_restart(struct net_lwip_ctx *ctx)
+-	if (do_tftpb(ctx->cmdtp, 0, num_args, tftp_argv))
++	if (tftpb_run_argv(num_args, tftp_argv))
+ 		return -ENOENT;
+ 
+ 	ret = pxe_get_file_size(sizep);
+diff --git a/include/net-common.h b/include/net-common.h
+index 12c1689bf57..d5a95075ad7 100644
+--- a/include/net-common.h
++++ b/include/net-common.h
+@@ -504,7 +504,8 @@ int net_loop(enum proto_t protocol);
+  * dhcp_run() - Run DHCP on the current ethernet device
+  *
+  * This temporarily sets autoload and restores its exact original value,
+- * including NFS and an unset variable.
++ * including NFS and an unset variable. Downloads never automatically boot;
++ * the caller owns the resulting image. The autostart variable is restored.
+  *
+  * @addr: Address to load the file into (0 if @autoload is false)
+  * @fname: Filename of file to load (NULL if @autoload is false or to use the
+@@ -527,7 +528,7 @@ int dhcp_run(ulong addr, const char *fname, bool autoload);
+ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
  
  /**
-  * net_lwip_refresh - Refresh environment addressing for the shared interface
-- * @ctx: Active environment-addressed client attachment
-+ * @ctx: Active client attachment
+- * tftpb_run() - Run TFTP on the current ethernet device
++ * tftpb_run() - Download via TFTP without automatically booting the image
   *
-- * Address-less clients take priority, so flexible-client refreshes are
-- * deferred until the last such client detaches. A refresh which would change
-- * the address while a strict client is attached fails with -EBUSY.
-+ * The address configuration owner may refresh after publishing its acquired
-+ * configuration and retiring DHCP/BOOTP, before starting an autoload transfer.
-+ * Flexible-client refreshes are deferred while that owner remains attached.
-+ * A refresh which would change the address while a strict client is attached
-+ * fails with -EBUSY.
-  *
-  * Return: 0 on success, or a negative error code.
+  * @addr: Address to load the file into
+  * @fname: Filename of file to load (NULL to use the default filename)
+@@ -535,6 +536,18 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
   */
- int net_lwip_refresh(struct net_lwip_ctx *ctx)
- {
- 	if (!ctx || ctx->netif != net_lwip_runtime.netif ||
--	    ctx->dev != net_lwip_runtime.dev ||
--	    ctx->addr_mode == NET_LWIP_ADDR_NONE)
-+	    ctx->dev != net_lwip_runtime.dev || !net_lwip_runtime.users)
- 		return -EINVAL;
- 
--	if (net_lwip_runtime.no_addr_users)
-+	if (net_lwip_runtime.no_addr_users && ctx->addr_mode != NET_LWIP_ADDR_NONE)
- 		return 0;
- 
--	return net_lwip_configure(ctx->addr_mode);
-+	return net_lwip_configure(NET_LWIP_ADDR_ENV_FLEXIBLE);
- }
- 
- /*
-diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-index 9e19857d19b..21c5e885a92 100644
---- a/net/lwip/tftp.c
-+++ b/net/lwip/tftp.c
-@@ -612,10 +612,11 @@ static void tftp_default_filename(struct net_lwip_ctx *net, char *fname,
- 	printf("*** Warning: no boot file name; using '%s'\n", fname);
- }
- 
--static int do_tftp(int argc, char *const argv[], enum tftp_operation operation)
-+static int do_tftp(int argc, char *const argv[], enum tftp_operation operation,
-+		   struct net_lwip_ctx *parent)
- {
- 	struct net_lwip_ctx local = {};
--	struct net_lwip_ctx *net = &local;
-+	struct net_lwip_ctx *net = parent ?: &local;
- 	u32 timeout_msecs = UBOOT_TFTP_TIMEOUT_MS;
- 	u32 max_retries = UBOOT_TFTP_MAX_RETRIES;
- 	int ret = CMD_RET_SUCCESS;
-@@ -785,12 +786,14 @@ static int do_tftp(int argc, char *const argv[], enum tftp_operation operation)
- 		goto out;
- 	}
- 
--	if (net_lwip_start(net, NET_LWIP_ADDR_ENV_STRICT)) {
--		ret = CMD_RET_FAILURE;
--		goto out;
-+	if (!parent) {
-+		if (net_lwip_start(net, NET_LWIP_ADDR_ENV_STRICT)) {
-+			ret = CMD_RET_FAILURE;
-+			goto out;
-+		}
-+		net_try_count = 1;
-+		net_restart_wrap = 0;
- 	}
--	net_try_count = 1;
--	net_restart_wrap = 0;
- 
- 	for (;;) {
- 		ret = tftp_check_ip(net);
-@@ -802,7 +805,8 @@ static int do_tftp(int argc, char *const argv[], enum tftp_operation operation)
- 		ret = tftp_loop(net, operation, laddr, size,
- 				fname && *fname ? fname : default_fname, srvip,
- 				port, srcport, timeout_msecs, max_retries);
--		if (ret != -EAGAIN)
-+		/* Autoload retries must reacquire the parent's boot configuration. */
-+		if (ret != -EAGAIN || parent)
- 			break;
- 		/* The failed transfer's PCB and timers are already gone. Never
- 		 * change interfaces underneath another shared-runtime client.
-@@ -814,18 +818,38 @@ static int do_tftp(int argc, char *const argv[], enum tftp_operation operation)
- 	}
- 	if (!ret && operation == TFTP_DOWNLOAD)
- 		image_load_addr = laddr;
--	ret = ret ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
-+	if (!parent)
-+		ret = ret ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
- out:
--	net_lwip_stop(net);
-+	if (!parent)
-+		net_lwip_stop(net);
- 	free(arg_copy);
- 	return ret;
- }
+ int tftpb_run(ulong addr, const char *fname);
  
 +/**
-+ * net_lwip_tftp_download() - Attempt autoload using the caller's runtime
-+ * @net: Active attachment with configured addressing and DHCP already retired
++ * tftpb_run_argv() - Run TFTP arguments without automatically booting
++ *
++ * Preserves the exact autostart value on success and failure. This form also
++ * supports the legacy command's optional IPv6 argument.
++ *
 + * @argc: Number of command arguments
-+ * @argv: BOOTP/DHCP command arguments, using the tftpboot argument syntax
-+ *
-+ * Keep runtime and retry ownership with BOOTP/DHCP. All TFTP callbacks and
-+ * timers are removed before returning. The caller handles autostart after
-+ * releasing its own resources.
-+ *
-+ * Return: 0 on success, -EAGAIN for a retryable transfer failure, or another
-+ * nonzero value for a terminal error.
++ * @argv: Command arguments, including the command name
++ * Return: command status (see enum command_ret_t)
 + */
-+int net_lwip_tftp_download(struct net_lwip_ctx *net, int argc, char *const argv[])
++int tftpb_run_argv(int argc, char *const argv[]);
++
+ /**
+  * tftpb_run_timeout() - Download via TFTP with an initial server-probe timeout
+  *
+diff --git a/net/net-common.c b/net/net-common.c
+index c5d13a23b09..85d97cb660c 100644
+--- a/net/net-common.c
++++ b/net/net-common.c
+@@ -64,11 +64,40 @@ void net_sntp_set_rtc(u32 seconds)
+ 	       tm.tm_hour, tm.tm_min, tm.tm_sec);
+ }
+ 
++#if defined(CONFIG_CMD_DHCP) || defined(CONFIG_CMD_TFTPBOOT)
++/* Internal downloads return data to their caller; only commands may boot it. */
++static int netboot_run(int (*command)(struct cmd_tbl *, int, int, char *const []),
++		       int argc, char *const argv[])
 +{
-+	return do_tftp(argc, argv, TFTP_DOWNLOAD, net);
++	struct cmd_tbl cmdtp = {};
++	const char *value;
++	char *saved;
++	int ret, restore;
++
++	/* An already-disabled setting may be protected against writes. */
++	if (!env_get_autostart())
++		return command(&cmdtp, 0, argc, argv);
++
++	value = env_get("autostart");
++	saved = strdup(value);
++	if (!saved)
++		return CMD_RET_FAILURE;
++	if (env_set("autostart", "no")) {
++		free(saved);
++		return CMD_RET_FAILURE;
++	}
++	ret = command(&cmdtp, 0, argc, argv);
++	restore = env_set("autostart", saved);
++	free(saved);
++
++	return ret ?: (restore ? CMD_RET_FAILURE : CMD_RET_SUCCESS);
++}
++#endif /* defined(CONFIG_CMD_DHCP) || defined(CONFIG_CMD_TFTPBOOT) */
++
+ #if defined(CONFIG_CMD_DHCP)
+ int dhcp_run(ulong addr, const char *fname, bool autoload)
+ {
+ 	char *dhcp_argv[] = {"dhcp", NULL, (char *)fname, NULL};
+-	struct cmd_tbl cmdtp = {};	/* dummy */
+ 	char file_addr[17];
+ 	const char *autoload_env = env_get("autoload");
+ 	char *saved_autoload = NULL;
+@@ -91,7 +120,7 @@ int dhcp_run(ulong addr, const char *fname, bool autoload)
+ 		dhcp_argv[1] = file_addr;
+ 	}
+ 
+-	result = do_dhcp(&cmdtp, 0, !autoload ? 1 : fname ? 3 : 2, dhcp_argv);
++	result = netboot_run(do_dhcp, !autoload ? 1 : fname ? 3 : 2, dhcp_argv);
+ 
+ 	ret = env_set("autoload", saved_autoload);
+ 	free(saved_autoload);
+@@ -113,17 +142,21 @@ const struct tftp_request_timeout *tftp_get_request_timeout(void)
+ 	return tftp_request_timeout;
+ }
+ 
++int tftpb_run_argv(int argc, char *const argv[])
++{
++	return netboot_run(do_tftpb, argc, argv);
 +}
 +
- int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ int tftpb_run(ulong addr, const char *fname)
  {
+ 	char *tftp_argv[] = {"tftpboot", NULL, (char *)fname, NULL};
+-	struct cmd_tbl cmdtp = {};      /* dummy */
+ 	char file_addr[17] = {0};
+ 
+ 	log_debug("addr=%lx, fname=%s\n", addr, fname);
+ 	sprintf(file_addr, "%lx", addr);
+ 	tftp_argv[1] = file_addr;
+ 
+-	int result = do_tftpb(&cmdtp, 0, fname ? 3 : 2, tftp_argv);
++	int result = tftpb_run_argv(fname ? 3 : 2, tftp_argv);
+ 
+ 	if (result)
+ 		return log_msg_ret("res", -ENOENT);
+@@ -136,37 +169,16 @@ int tftpb_run_timeout(ulong addr, const char *fname, ulong timeout_ms,
+ {
+ 	struct tftp_request_timeout timeout = { timeout_ms, max_retries };
+ 	const struct tftp_request_timeout *saved = tftp_request_timeout;
+-	const char *autostart_env = env_get("autostart");
+-	char *saved_autostart = NULL;
+-	int restore_ret = 0;
  	int ret;
  
--	ret = do_tftp(argc, argv, TFTP_DOWNLOAD);
-+	ret = do_tftp(argc, argv, TFTP_DOWNLOAD, NULL);
- 	if (ret || !net_boot_file_size)
- 		return ret;
- 	/* The transfer's callbacks and runtime attachment are already gone. */
-@@ -834,5 +858,5 @@ int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	if (!timeout_ms || timeout_ms > U32_MAX / 4 || max_retries < 0)
+ 		return -EINVAL;
  
- int do_tftpput(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
--	return do_tftp(argc, argv, TFTP_UPLOAD);
-+	return do_tftp(argc, argv, TFTP_UPLOAD, NULL);
+-	if (autostart_env) {
+-		saved_autostart = strdup(autostart_env);
+-		if (!saved_autostart) {
+-			ret = -ENOMEM;
+-			goto out_free;
+-		}
+-	}
+-
+-	/* Updates need the downloaded data, not the command's automatic boot. */
+-	ret = env_set("autostart", "no");
+-	if (ret)
+-		goto out_free;
+-
+ 	tftp_request_timeout = &timeout;
+ 	ret = tftpb_run(addr, fname);
+ 	tftp_request_timeout = saved;
+ 
+-	if (env_set("autostart", saved_autostart))
+-		restore_ret = -EINVAL;
+-out_free:
+-	free(saved_autostart);
+-
+-	return ret ?: restore_ret;
++	return ret;
  }
-diff --git a/test/dm/lwip.c b/test/dm/lwip.c
-index 8bb7e2bad9a..4dd4a562434 100644
---- a/test/dm/lwip.c
-+++ b/test/dm/lwip.c
-@@ -304,6 +304,10 @@ static int _dm_test_lwip_runtime(struct unit_test_state *uts,
- #if CONFIG_IS_ENABLED(PROT_DHCP_LWIP)
- 	ut_assertok(lwip_test_dhcp_stop(uts, no_addr_client->netif));
+ 
  #endif
-+	/* The configuration owner can publish its lease before autoload. */
-+	ut_assertok(net_lwip_refresh(no_addr_client));
-+	ip4addr_aton("1.1.2.4", &expected);
-+	ut_assert(ip4_addr_cmp(netif_ip4_addr(client_b->netif), &expected));
- 	net_lwip_stop(no_addr_client);
- 	ip4addr_aton("1.1.2.4", &expected);
- 	ut_assert(ip4_addr_cmp(netif_ip4_addr(client_b->netif), &expected));
-diff --git a/test/dm/lwip_bootp.c b/test/dm/lwip_bootp.c
-index 3f29e2691d2..c6f5876c085 100644
---- a/test/dm/lwip_bootp.c
-+++ b/test/dm/lwip_bootp.c
-@@ -44,6 +44,7 @@ struct bootp_test {
- 	unsigned int requests;
- 	unsigned int bind_after;
- 	unsigned int tftp;
-+	unsigned int transfer_failures;
- 	u32 tftp_server;
- 	u32 xid;
- 	u16 secs;
-@@ -268,6 +269,11 @@ static int bootp_tx(struct udevice *dev, void *packet, unsigned int len)
- 		data = (void *)(reply_ip + 1);
- 		put_unaligned_be16(test->transfer_fail ? 5 : 3, data);
- 		put_unaligned_be16(1, data + 2);
-+		if (test->transfer_failures) {
-+			put_unaligned_be16(5, data);
-+			put_unaligned_be16(3, data + 2);
-+			test->transfer_failures--;
-+		}
- 		data[4] = 'x';
- 		data[5] = 0;
- 		priv->recv_packet_length[priv->recv_packets++] =
-@@ -471,6 +477,24 @@ static int bootp_check(struct unit_test_state *uts, struct bootp_test *test)
- 	ut_asserteq(CMD_RET_FAILURE, do_bootp(NULL, 0, 3, argv));
- 	ut_assert(!test->port_busy);
- 	ut_assertnull(netif_default);
-+	if (IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
-+		ut_assertok(env_set("netretry", "once"));
-+		for (i = 0; i < 2; i++) {
-+			*test = (struct bootp_test){ .transfer_failures = 1 };
-+			ut_assertok(env_set("ethact", "eth@10002000"));
-+			ut_assertok(env_set("ethrotate", i ? NULL : "no"));
-+			ut_assertok(env_set("ipaddr5", NULL));
-+			ut_assertok(do_bootp(NULL, 0, 3, argv));
-+			ut_asserteq(2, test->requests);
-+			ut_asserteq(2, test->tftp);
-+			ut_asserteq_str("explicit.bin", test->filename);
-+			ut_asserteq_str(i ? "eth@10003000" : "eth@10002000", env_get("ethact"));
-+			ut_assert(!test->port_busy);
-+			ut_assertnull(netif_default);
-+		}
-+		ut_assertok(env_set("ethact", "eth@10002000"));
-+		ut_assertok(env_set("netretry", "no"));
-+	}
- 	/*
- 	 * Plain and RFC 1048 replies without siaddr retain the configured server,
- 	 * but must clear stale TFTP overrides before the download handoff.
-diff --git a/test/dm/lwip_dhcp.c b/test/dm/lwip_dhcp.c
-index 60b4d2a311e..d7e1360d2de 100644
---- a/test/dm/lwip_dhcp.c
-+++ b/test/dm/lwip_dhcp.c
-@@ -22,12 +22,18 @@ struct dhcp_handoff_test {
- 	bool timeout;
- 	bool dhcp_alive;
- 	bool rx_burst;
-+	bool refresh_offer;
-+	unsigned int discovers;
-+	unsigned int drop_acquisitions;
-+	unsigned int tftp_failures;
- 	unsigned int rx_packets;
- 	int rx_error;
- 	unsigned int tftp;
- 	unsigned int nfs;
- 	u32 boot_server;
- 	u32 nfs_server;
-+	u32 tftp_server;
-+	u32 tftp_local;
- 	char filename[128];
- };
- 
-@@ -44,6 +50,12 @@ static int dhcp_handoff_reply(struct udevice *dev, struct dhcp_msg *request)
- 
- 	if (type != DHCP_DISCOVER && type != DHCP_REQUEST)
- 		return 0;
-+	if (type == DHCP_DISCOVER)
-+		test->discovers++;
-+	if (net_try_count <= test->drop_acquisitions) {
-+		timer_test_add_offset(1000001);
-+		return 0;
-+	}
- 	if (test->timeout) {
- 		timer_test_add_offset(10001);
- 		return 0;
-@@ -67,6 +79,11 @@ static int dhcp_handoff_reply(struct udevice *dev, struct dhcp_msg *request)
- 	put_unaligned_be32(test->boot_server, &reply->siaddr);
- 	reply->cookie = htonl(DHCP_MAGIC_COOKIE);
- 	strlcpy((char *)reply->file, test->offer, sizeof(reply->file));
-+	if (test->refresh_offer && test->discovers > 1) {
-+		put_unaligned_be32(0x01010205, &reply->yiaddr);
-+		put_unaligned_be32(0x01010204, &reply->siaddr);
-+		strcpy((char *)reply->file, "second.bin");
-+	}
- 	pos = reply->options;
- 	*pos++ = DHCP_OPTION_MESSAGE_TYPE;
- 	*pos++ = 1;
-@@ -137,6 +154,8 @@ static int dhcp_handoff_tx(struct udevice *dev, void *packet, unsigned int len)
- 	    get_unaligned_be16(ip + 1) != 1)
- 		return 0;
- 	test->tftp++;
-+	test->tftp_server = ntohl(ip->ip_dst.s_addr);
-+	test->tftp_local = ntohl(ip->ip_src.s_addr);
- 	test->dhcp_alive |= !!netif_dhcp_data(netif_default);
- 	strlcpy(test->filename, (char *)(ip + 1) + 2, sizeof(test->filename));
- 	if (priv->recv_packets >= PKTBUFSRX)
-@@ -160,6 +179,11 @@ static int dhcp_handoff_tx(struct udevice *dev, void *packet, unsigned int len)
- 	data = (void *)(reply_ip + 1);
- 	put_unaligned_be16(test->fail ? 5 : 3, data);
- 	put_unaligned_be16(1, data + 2);
-+	if (test->tftp_failures) {
-+		put_unaligned_be16(5, data);
-+		put_unaligned_be16(3, data + 2);
-+		test->tftp_failures--;
-+	}
- 	data[4] = 'x';
- 	data[5] = 0;
- 	priv->recv_packet_length[priv->recv_packets++] =
-@@ -193,6 +217,64 @@ static void dhcp_handoff_free_pkt(struct udevice *dev, int len)
- 	       sizeof(arp->dipaddr));
- }
- 
-+static int dhcp_autoload_retries(struct unit_test_state *uts,
-+				 struct dhcp_handoff_test *test)
-+{
-+	char * const argv[] = { "dhcp", "2000000", "explicit.bin" };
-+	struct net_lwip_ctx other = {};
-+	int i, ret;
-+
-+	if (!IS_ENABLED(CONFIG_CMD_TFTPBOOT))
-+		return 0;
-+	ut_assertok(env_set("autoload", "yes"));
-+	ut_assertok(env_set("autostart", "no"));
-+	ut_assertok(env_set("netretry", "once"));
-+	for (i = 0; i < 3; i++) {
-+		*test = (struct dhcp_handoff_test){
-+			.offer = "first.bin", .refresh_offer = true, .tftp_failures = 1,
-+		};
-+		ut_assertok(env_set("ethact", "eth@10002000"));
-+		ut_assertok(env_set("ethrotate", i == 2 ? NULL : "no"));
-+		ut_assertok(env_set("ipaddr5", NULL));
-+		ut_assertok(env_set("serverip", "1.1.2.2"));
-+		ut_assertok(do_dhcp(NULL, 0, i == 1 ? 3 : 1, argv));
-+		ut_asserteq(2, test->discovers);
-+		ut_asserteq(2, test->tftp);
-+		ut_asserteq(0x01010205, test->tftp_local);
-+		ut_asserteq(IS_ENABLED(CONFIG_BOOTP_SERVERIP) ||
-+			    IS_ENABLED(CONFIG_BOOTP_PREFER_SERVERIP) ?
-+			    0x01010202 : 0x01010204, test->tftp_server);
-+		ut_asserteq_str(i == 1 ? "explicit.bin" : "second.bin", test->filename);
-+		ut_asserteq_str(i == 2 ? "eth@10003000" : "eth@10002000", env_get("ethact"));
-+		ut_assert(!test->dhcp_alive);
-+		ut_assertnull(netif_default);
-+	}
-+	/* An acquisition retry and a transfer retry share the same budget. */
-+	*test = (struct dhcp_handoff_test){
-+		.offer = "first.bin", .drop_acquisitions = 1, .tftp_failures = 1,
-+	};
-+	ut_assertok(env_set("ethact", "eth@10002000"));
-+	ut_asserteq(CMD_RET_FAILURE, do_dhcp(NULL, 0, 1, argv));
-+	ut_asserteq(1, test->tftp);
-+	ut_asserteq(0, test->tftp_failures);
-+	ut_assertnull(netif_default);
-+
-+	/* An autoload failure must not restart another client's runtime. */
-+	*test = (struct dhcp_handoff_test){ .offer = "first.bin", .tftp_failures = 1 };
-+	ut_assertok(env_set("ethact", "eth@10002000"));
-+	ut_assertok(net_lwip_start(&other, NET_LWIP_ADDR_ENV_FLEXIBLE));
-+	ret = do_dhcp(NULL, 0, 1, argv);
-+	i = other.netif == netif_default && !netif_dhcp_data(other.netif);
-+	net_lwip_stop(&other);
-+	ut_asserteq(CMD_RET_FAILURE, ret);
-+	ut_assert(i);
-+	ut_asserteq(1, test->discovers);
-+	ut_asserteq(1, test->tftp);
-+	ut_assertnull(netif_default);
-+	ut_assertok(env_set("netretry", "no"));
-+	return 0;
-+}
-+
- static int dhcp_handoff_check(struct unit_test_state *uts,
- 			      struct dhcp_handoff_test *test)
- {
-@@ -207,6 +289,7 @@ static int dhcp_handoff_check(struct unit_test_state *uts,
- 	ut_assertok(env_set("nfsserverip", NULL));
- 	ut_assertok(env_set("tftpdstp", NULL));
- 	ut_assertok(env_set("tftpsrcp", NULL));
-+	ut_assertok(dhcp_autoload_retries(uts, test));
- 	for (i = 0; i < 4; i++) {
- 		*test = (struct dhcp_handoff_test){ .offer = "offered.bin" };
- 		ut_assertok(env_set("autoload", i == 3 ? "no" : "yes"));
-@@ -320,7 +403,8 @@ static int dm_test_lwip_dhcp_handoff(struct unit_test_state *uts)
- 		"ethact", "ipaddr", "netmask", "gatewayip", "serverip",
- 		"tftpserverip", "nfsserverip", "autoload", "autostart", "bootfile",
- 		"loadaddr", "dnsip", "dnsip2", "ntpserverip", "filesize", "fileaddr",
--		"tftpdstp", "tftpsrcp",
-+		"tftpdstp", "tftpsrcp", "netretry", "ethrotate",
-+		"ipaddr5", "netmask5", "gatewayip5",
- 	};
- 	struct dhcp_handoff_test test = {};
- 	char bootfile[sizeof(net_boot_file_name)];
-@@ -341,10 +425,14 @@ static int dm_test_lwip_dhcp_handoff(struct unit_test_state *uts)
- 	sandbox_eth_set_tx_handler(0, dhcp_handoff_tx);
- 	sandbox_eth_set_free_pkt_handler(0, dhcp_handoff_free_pkt);
- 	sandbox_eth_set_priv(0, &test);
-+	sandbox_eth_set_tx_handler(1, dhcp_handoff_tx);
-+	sandbox_eth_set_priv(1, &test);
- 	ret = dhcp_handoff_check(uts, &test);
- 	sandbox_eth_set_tx_handler(0, NULL);
- 	sandbox_eth_set_free_pkt_handler(0, NULL);
- 	sandbox_eth_set_priv(0, NULL);
-+	sandbox_eth_set_tx_handler(1, NULL);
-+	sandbox_eth_set_priv(1, NULL);
- 	memcpy(net_boot_file_name, bootfile, sizeof(bootfile));
- 	image_load_addr = load_addr;
- 	for (i = 0; i < ARRAY_SIZE(vars); i++)
 
 -- 
 2.53.0
