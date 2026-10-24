@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 266E5606A31A
-	for <u-boot@archiver.kernel.org>; Sat, 24 Oct 2026 13:03:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FC7F606A31D
+	for <u-boot@archiver.kernel.org>; Sat, 24 Oct 2026 13:04:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=GhybcY28;
-	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=HPT442Oq
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=uqesiTV5;
+	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=TtKH68Sj
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 051AE817B5;
-	Sat, 24 Oct 2026 13:03:57 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0C08B817BA;
+	Sat, 24 Oct 2026 13:04:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id k-8DT0PcrAAu; Sat, 24 Oct 2026 13:03:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1A39F817BD
+ id XbCods5iW4EA; Sat, 24 Oct 2026 13:03:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D93AF8187F
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792847036;
-	b=pTqU6jOEov6w7q4UsM9qZdeinaJdKYXZZ9mpIHY1vhfuSxFI7vhQTwOQKyF4XPzLFe1w
-	 HZcKwj4ht8LbrerGGt/TUExGzF0WnDVhQ6pRgFjXUEA0iMeZarE0BxhB1sLuHBtGqlhD9
-	 po5RPPPOKsQ3asSWw7pusKT+qhXavqs8eAQHWns5jzMdcYgv5D4oVLHNjgIckw0CBcD15
-	 mA/LyYmb/jLXiLm249+hhNqHvc1ZK1hjODRTv+U/B/3224752StXzYVuSu61MHfvG7KTd
-	 Epynyu0ztzQ5bFEjJMbfe+tDIltttRX2UFAGP91O/hyTOmXZGaarOxGxq+caMnDJWIQ==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792847038;
+	b=mu7Cq9+XmkfD/n3eRiWSL6ETBw/gQxsAwiIU+Qlb00LUe+7TWLPftfAEsLrWoVTUNqSO
+	 jFOfHpooVQxFAHTfgGiESggTaaEdWWPmrUlIitgC9gzZvowD+rEY7NTzoIm1ofi2w+boD
+	 Xgpit3bh3DCFUmQHsXCjuEM8AZuSUc+SowrKVI2JlhEu3YBx2a2CLVL96jgackpJF1FUu
+	 c/Kp+uWLe2iSS5UoxqaVwjQ9IQMYzLuoikE8CJCPM144QpCGtZevWKioNTukW+SySoXKW
+	 KvbiPz+ggVIh9hNsQwUbQYZJjJtZioxw2OV0n39RNPwZTPty1ubsxIokP3JcD70IaeA==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792847036;
+	c=relaxed/relaxed; t=1792847038;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,153 +33,152 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=OIwfgy3MvmhH4o62ydZLyv09wnkWKM96Beeopge11/8=;
-	b=IdxUyWFTNmiS5rExuIgHWqiuVWKy/d2Hx9UkXpokG+qkB2YN3oZPEJSg7H5WizXd+4FT
-	 P7yt600MHOZZvlP/Y0zNhkdPIqJO9Lgp4VKuD5b/yswlX5UbCJc9QxXlYnEx8QNoHy5WD
-	 XsI+HbciuZ9MsoWhdOu2eJgalwAZ+ZcQkrs1FQyqy5wSaQqr8nnogRfYCUkUvchSayd+w
-	 /tp0TxFXmacRMsdG4CTBDSo7Ph5Zlflq4Q15n1hQlOvdceYS55nRlhqABmgvdzPkTXU7N
-	 txSsMxACYnXpTMl0/rCMRJEGYXXU6A1L/OjFQO9hu9g67uVpIrHkKBzS+uFPoxxWqrQ==
+	bh=ILIieaF9w2vGCm9cPTZMODZj7yK06jJBzxIIHYxqWDM=;
+	b=CZH8rvZDjTvJGpWtJjhyDAsC0/42SKlKyixy/Y5vO1KucCdeHdu2l0LNanirMeiniprc
+	 IjRmvTGDt+mwm3elSUm2aJD6hwPIgSM/ifPm26DA/tdoYLw5rxSQ7A5bDLrEvqoOUAvM7
+	 VDgrPx1chPNCc7fTgpfX5/FU8B2qv1J6MZBrJOW/uBVQ0tQluPpBB4PTybgmhcr8KgUAQ
+	 4IqCv2Hg3B8972VBMeD0Q3O1DteI3SdxYQF1Je4380EerrO8e4az0y3hNGMJetD3PtL2N
+	 fK+mddNooiFYZuMsqQLpDUGrKr5T6UYLiBnwy30jWHFNMMUq6fphVRzlWWGtLS/S7dg==
 ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
-	dmarc=pass header.from=chromium.org;
-	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=HPT442Oq;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792847036;
-	bh=OIwfgy3MvmhH4o62ydZLyv09wnkWKM96Beeopge11/8=;
+	d=lists.u-boot-project.org; s=default; t=1792847038;
+	bh=ILIieaF9w2vGCm9cPTZMODZj7yK06jJBzxIIHYxqWDM=;
 	h=In-Reply-To:References:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GhybcY28oxl/KRaCHjJcV8Ym/eCGC+8Cpkt4VeDRvg4b2FYagNAcruXJ9+aa37L1A
-	 0ogRYW6zmLQS31PR10K6GwDaZqR28S/hpxlq/vpayRuOVQNPrdXeneuZYZ2TKudZmj
-	 Ml37v21IyOQVGKX1tJFxVXUUPNuwa8RuqSL6+IL1QfJB144pZnYK3pxjOfcJpWroTw
-	 j7oxiILmdvq1T3O1DamfwmvtuKb5PPzB1iC+gQ3ouuB5aPafi27gu72A/7md2GCoVZ
-	 MXmpI1LKAgF+zkloIychMZvECgGFbegNUKH00uoTgOQkL9WjHHKnCFPZn5yF3/JzMJ
-	 J0iGI7XH6P9Gg==
+	b=uqesiTV5ivlyEXMv4KdlDRj/nv4XsDNUXCOXLGcju/3yQW9kxzIlybVolmqQHSQdX
+	 urQa20eXzBha7KFgzpXOvWeYHHwfDcWaYhRl/4iodf2ouv+8pZCpR/VXoXoQYgLwBq
+	 9d8NMY+f2GiIhJVPw3IZOrdhlTGBsVhu2bvHMatF5zKe6cpLY9CoeK3mt05YpD522X
+	 o2a/tEtWVWc9NMz58eJfJLJZPVqQkRU11FYgg9OW4NhaFMuGL3agRspJdFD32FGFxh
+	 MM0VCMBwmizmx8Qfr7bcNLFht/DZ3W5sNSQKdH9hvrO7d2BHWNrcG/RsisUSJTs81A
+	 jRmIdHnhf/j4w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1A39F817BD;
-	Sat, 24 Oct 2026 13:03:56 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 3A7EC765
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 07:00:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D93AF8187F;
+	Sat, 24 Oct 2026 13:03:57 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id D9C342C7
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 07:00:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 20DAD8127F
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 07:00:55 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id CB75560A59
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 07:00:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bbs5CGD6M96F for <u-boot@lists.u-boot-project.org>;
- Sat, 24 Oct 2026 07:00:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5B8528162E
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:20::636"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792825252;
- b=G34zCBnGvVMPYpSxX++R4asAYG2/lLYNVJ74OzluP8JUIo35ntJmHdU/uUMyrMXf9KRS
- bwbOPKHtFCRyj6chqDhkWz01PqMm2DaWKdu4Q6OVzRXscWz/pTCBho/qcAMMkdjpK8x3j
- RyiWyruLRzCT93Yulrnb8TikBRW0/DU9kV90ep7Ak1HvM3uH9rgC8i1nBn6JxP17DPsZZ
- uQj0nAcFwZ0F6GBBC02jMPSZ1JSwVqUCA0Zjd3xX+7FMPZkw7jEoKTTb+b9OCVa0aQMg6
- yM5u8n3dMSl2vxP1Q6uXWno23/5TWasc5vcaFFfHFVSvhU/qpAIWACV5KJdG1uQ8YJQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id QXctQD7Fau1J for <u-boot@lists.u-boot-project.org>;
+ Sat, 24 Oct 2026 07:00:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C622860A6F
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::536"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792825257;
+ b=UKEp5sMXzlWYjofyR8UUtEKp4V/CPiumyZaOvjLgwOKgsVuIbR1jFz+d84NkguFZrKs8
+ bR5oiTtjOQiL0K9OPfv3ou8Ck4n47l4dkifW5n0AQ/O411Ak8/XGS+3aNAlHHXQ3mdpgG
+ Q8XSKh56O23ezguBe8CeKBPoo0Ax+R4Y84NDtpOyzm9I9FiDDJ+xsh2cz22eoQZlsJ40E
+ eat3FoY5BVfbIXmK/wKt5/5taMmmMK8azEeDILDOo0Cu0k0AVWUCk0VV86nL8KeLG+F/e
+ IeZMH9tMZNOT+QT9bkrpAoPM8jDHLsWzKLu5pXxMZlDsWRd938JBq8js/wi0afQwFqQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792825252;
+ c=relaxed/relaxed; t=1792825257;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Received:MIME-Version:
  In-Reply-To:References:From:Date:X-Gm-Features:Message-ID:Subject:To:
  Cc:Content-Type;
- bh=OIwfgy3MvmhH4o62ydZLyv09wnkWKM96Beeopge11/8=;
- b=efHtZ4LdG7W2/g0/hfgoyhJOuo9u+RyCbson1/Z1PecTOBWUiiKi/oMXBe8pmaXhpi0D
- JPgK2VtgWOBKoH/oHGpr2+LY10Y6MCLrNvUED3mR3Ct4RVcKBjnaNg5VPpUkdZwPVIjfQ
- ueXvY3PalMjZz19MsMNnDEt96Q2mltjBMkqs4pAQklf1dJaDi+vE/LZ82kPvHzEL0ZO+o
- jYFbwcJF8DPYX4QMl4EfEwfk73Flrwxx80MS0A/C1tiZgFSkx9bdZ4OUQzvv2d6YwvTkL
- gKJOb6EBF1/SXKUbgKUGrJU6vNOVezWsDqnRBIZ7pA6pOmm6Th6R8LPTfesa5OfxDLA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+ bh=ILIieaF9w2vGCm9cPTZMODZj7yK06jJBzxIIHYxqWDM=;
+ b=fAiPzypmRKRLbt97lL4mCVoqzhW1kNH4xMiD/vRKnueHGlxf7793RVjYzAuYMHz1m+kk
+ 9IK8Z08/BIT7WyloP9szOCRlHnF+vvkiA5MbLouv2LPLuSc9DRocBNG4d4V74jAXECynf
+ 3OzlB1TS3a7Px7ZJpB3+bHMHdifA7/Dq7Kj1VZo4qbFRkKFTzaAEioeMuo8OXOJkjprIF
+ zORArT7ceI+Z9hW27SSqEsq6EG976+y/cG2MSxBlC+6x4f+rAgnCaHwxsfDN+2uxnYaAY
+ 3TIfw2DK/9QfrT+/ohuBHalo9wr5MxCbljYG+/TsrtaTdcIT7wsUzfA+/m+BZz87KiQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
  dmarc=pass header.from=chromium.org;
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=HPT442Oq; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::636"
+ header.s=google header.b=TtKH68Sj; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::536"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::636; helo=mail-ej1-x636.google.com;
+ client-ip=2a00:1450:4864:20::536; helo=mail-ed1-x536.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=HPT442Oq
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 5B8528162E
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 07:00:51 +0000 (UTC)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-c34bff61551so213516166b.2
- for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 00:00:51 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792825250; cv=none;
+ header.a=rsa-sha256 header.s=google header.b=TtKH68Sj
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C622860A6F
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 07:00:56 +0000 (UTC)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-6afafc89b48so2563552a12.2
+ for <u-boot@lists.u-boot-project.org>; Sat, 24 Oct 2026 00:00:56 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792825255; cv=none;
  d=google.com; s=arc-20260327;
- b=CUDTBLziws4DuSGW5eHgh2qECGL1kcJoK6f7+vwAZP1Er4Subs9ZX9Z+UacXCGTtnS
- dNkMbeFhOJLiOmIEJsr+fnBrYOislM8Fd4cLw+PNt8sLbtd4oeAFwl4U4Waz6d9uZf6F
- 9VhCZEmKTVr57fAtcmYbkJjXQwgbl49lINtzNF8Pszi1MBBo1qOXUX3pZgkWyINtKhoY
- zXULLjDTawGs3ggVoEpXPCgFB3w4djniecHVosZPofEjptkCE/6oU3RSIoqODUDxQ7aF
- mnlflIp2QJPDadtBwBkhasrpRh/J9aSBhiWyh09lXz1I/OTTp/TRJLrjPHR25jH5eXI3
- aSRg==
+ b=FLJe2Non4hfm0E0jtz/KI5LMCh/ThS8U/wXR/ZHK587cmnaPb4mrB/wKX1JYPD7p+f
+ VMl9YsCsFL2DochaH6bWJsQ5HCNcIXTp97rvhtm0qUWsbxO1VkmFAf+2j6jNe/CLm8uf
+ QyMW1VaZTiw+dJuGWdSaJAf5k4dvmCOx7ebUkJJu2xA8YUO16R8JzU69RCAmbaj9CrEX
+ qd+Sz6bh3Pk4CusbbsksqieC0iyfYSyKPIikA7XSur/WSW8g+pnSazTDK0ER1C7ia8G/
+ zISdjLqoSBZZwr3sXePbc8TjKXf1y2E1IQUTtBN9EFZSr7SxM/SOMQe1dZDk0QlyZMWa
+ Zffw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:references:in-reply-to
  :mime-version:dkim-signature;
- bh=OIwfgy3MvmhH4o62ydZLyv09wnkWKM96Beeopge11/8=;
+ bh=ILIieaF9w2vGCm9cPTZMODZj7yK06jJBzxIIHYxqWDM=;
  fh=K3qBHk2ExO+3ijmhm2JLE5PguYt4WNVvCbTK1y2ofoc=;
- b=F2sgXtOkLnoKncKeSY05vD21sNcR83veKGp/aL3gYx0ZqqDjr3nC3vKfeox5/HGob+
- ucKU2AOwdgEJhjzrnqAaRNpkLjrCmuW+kRfkDsDW8X/D9cEheNcQaVdV02Q3l/Sz4NWW
- +2bb3O77JPqE9rGsW0HaZw9OwVUVmqf0HkHDuB64nhrcVB5l8Ve6IUFibjEw38G+UdXa
- duWy0YhfZucGIVFlxYOk/Bn0q42fOcncOKQV/WN+mGKaXvkIqAGjsCdkm0yfgDp/4ZZm
- UUtxjf6MBaK6/LqhQhgkxYxPtcu5sdSrCAh7jjdYKWkaSeh8cyYhP79Ykk2NQvrifdFR
- 0HRQ==; darn=lists.u-boot-project.org
+ b=PcF9+GtHbKPmrz79fdj3QxOwyHipN0+OpmdjNQ/EJDF2SPSA3utxysPVKV6Vcd+P7g
+ luN7YXyG1RRzHGuFGs/WABSJiisnh5eB6gPGxDqNimjzgh6iYvFieG9Zt3izbwtwmBB/
+ 5uiUW+n6WJEP7X6rlrVR8LRs8XkYQLqx3EkxbuKdMS4xl5S+SgszKS/qXaSgnsggVb4+
+ Ban3LR0dlYBFcbGoEVFrjvlSbEvUjmDoTn8bLXwnd/+KfrYt3eZZ85YboRuY/F/pTJe/
+ ldDAlvMUQWIY2pL09iR51LBLJEILUItHmsI278woOoYn+6bpnT55QPTQeix8D7uwkZ9d
+ ogeA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1792825250; x=1793430050;
+ d=chromium.org; s=google; t=1792825255; x=1793430055;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:references
  :in-reply-to:mime-version:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=OIwfgy3MvmhH4o62ydZLyv09wnkWKM96Beeopge11/8=;
- b=HPT442Oq23dkC5c2jFSOyYZQBKfu6tGKCLHSoNFMSTflDvqX4APh1s4ePO5m46Gp+t
- PtC2+VAF7KswBqCtrotnTuT4Qb9gqi6KQwgxzYlqteX6pp0c0AsxRkuZgRJk2IQwKkL6
- AXjy3sZcNbSroLOXF3JtD3umu7w5AOtVDoX+I=
+ bh=ILIieaF9w2vGCm9cPTZMODZj7yK06jJBzxIIHYxqWDM=;
+ b=TtKH68SjhoGb9I1lh72/8E2VTy5UGzsmLsQB+ueb68DHUiojwVAFLwiBLQf0HNBPvI
+ SLzMjM5lFG9og5pmHyVHiuWG6u9Qsy1TpGFmLEuZdiOrhxBuAoD8k84nyAvsi0SkOEVT
+ o7osIsWn0KXiO0IW+QQHtBhBjbKhmSNZtX3I4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792825250; x=1793430050;
+ d=1e100.net; s=20260707; t=1792825255; x=1793430055;
  h=content-type:cc:to:subject:message-id:date:from:references
  :in-reply-to:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=OIwfgy3MvmhH4o62ydZLyv09wnkWKM96Beeopge11/8=;
- b=g5uW9s15ayrg1cyuenhLSWIeO4Je+ftB6Sy73+lVAg8JxX1MX4zBi/quYAJnoy9Vs7
- xLRxluMGWbEHsYVEgYPMEWliB6PswaU5oneTmUGB9Df8sfN93wnqFqVVpdEfRy7o72Uz
- Fzm9MPg57KAF1WoqzknuVY/8oy0H8YDRWrphzlwOtQ5lbnhxjLO3jF2Vdj8O2IgPSs9Y
- 0tTLUIpwOKF+3LQ71FpwyD8mvy7qp69pv0BT+Zf23Jmh/y4EtzvnqqiHV0aYhbVeKqmR
- QNUsmPPJE0gI081r8jh/kfwMgP4Oe6TWzRavnzaO5AcpKUKzkMK+mMmbPVvNubevL2Aq
- vKoQ==
-X-Gm-Message-State: AFq9FYIbhPo/SQ6kqKqZ7wEK/I/v5Kmn63niRIfxxvXM0kTGFGHq40bI
- y3XQdkrOdYnwHp5rfrWwQPXZuVnPZ6wcrkQ99iGgBb9SDJMLArGpuzjmHFHbX+Qo1KusP8OkVof
- g6tq+4XViNgVNKN53GRmhVTnUhhUqeLvHX79lITm2
-X-Gm-Gg: AYBFou08SoA6h9F/NhGgsF6oxIazeX0xNDr3pP/B3+zskpFD0aEtD5plJbZz/w6Nc43
- Noj8OBxkPF6NlP41+gAC5NlF0aEgTuVPQj/4vTm5wYZutfO0e2L8WRU4LBtpwnsJLpJAy+lEEpN
- vpCMaPU5xVQritlljaxzyOkpI78khUSWlxWUGUsf8MgLmWB4mKEg3//aef6xtJobcbFg3QoC5R9
- Hokvd1qCMD8VD1mLfeM8fVwEBMtAS6wFmt7PQ9Ka7mSG+JAf36RLAlEwmvxsbZL7e/nzYVtq603
- Hn39MjLw1/USa3Pe+dar0CTWQs3SI0yhmi1H3N3kz076adfNv10+Jx/tq6oP2cUXa0sr3t/6HvZ
- +jYXlPbbL6fKDcRl4q6JuxmdV9XfSaUWA44k=
-X-Received: by 2002:a17:907:d18:b0:c3f:c856:fb7a with SMTP id
- a640c23a62f3a-c46bdaf85d7mr125221566b.3.1792825249893; Sat, 24 Oct 2026
- 00:00:49 -0700 (PDT)
+ bh=ILIieaF9w2vGCm9cPTZMODZj7yK06jJBzxIIHYxqWDM=;
+ b=qeQ2Ignm6VOQZM46/mTA8hAY6vpXcwGN721iWarOvWgED7KkNkS3+KPx+F6xdEarnA
+ pA36qvg5NVoW+7Y9Cyl6YPEJlzrMmG6XxhG4lX0tb0W7xTeTXJqQuTEK5lugZ22xAEBe
+ ucTNx6jA/kHkkohd4pJiItWO93A/G3Zu/p+MsrCAdRk4rOkgxh9MS5Z9aBVYOTqG/4qn
+ aRDbubPRuaue0xcHJY+Go6OZ93fhgkcFW3C+5/EaOh046O+qMIMazqnASWGavnXRJcfY
+ 5n4DdN5mOAuNZL2lP8LqdNw2ygHSrOF61bNY25v9UZnIIsRSj0rCnfY9a9TF/veIAr0r
+ VjdQ==
+X-Gm-Message-State: AFq9FYJG1t/1M6MnU4XykjfiqSrsISkUQHxHEO+/sdsUhi0sCRhyNOr5
+ BrjSI6/ICH7a4DCZnCdiGAwxb6ZJh64DNXP2caVMgLQKsM90RyJQQ0gi5+M+eM7/S0RFrD1mGc7
+ K2gmXwhwgIU1s7y+QT9y1SpVfv37k1y2nTRuWJEXK
+X-Gm-Gg: AYBFou22dK+uJ99CD+Au87GXPeJbfZvtlkmXbV9ax/VgaUeSmtrXAsz8ERAyU2WUdKo
+ JNG2UD/eXMJd/jqdj8lLVrXt8GUKxwXnykauzz9VDyS1tUWCCa4e5E80T1DAvW1FQ5TQMZmzkbv
+ K+jJbV0st3utIffXRoXV5SNDfLRr4Ab2ibkR86plPynxmJhYWBOO9g3gqoSC4G/t2rZmUfJ5zim
+ JZJXKbv0qmgmkFZeAMCUmjYtK6khdtoAkd8OFognOteO+eptaMMg3LEBjQ3l5ISalSHjdAyK4jl
+ DVjQyy52iw00ade2QxKjoVyhiqy0IK7vYmEWcXW56WL35NR7HQPwWB6qpoHSKvJ/k4tRLnI+6Hd
+ wCueyJh6oK7n0jUyde1jM9XV8MAH2pz7wpQw=
+X-Received: by 2002:aa7:c587:0:b0:6aa:f1d2:ddb5 with SMTP id
+ 4fb4d7f45d1cf-6b44323fc46mr1147655a12.31.1792825254951; Sat, 24 Oct 2026
+ 00:00:54 -0700 (PDT)
 Received: from 415065739583 named unknown by gmailapi.google.com with
- HTTPREST; Sat, 24 Oct 2026 00:00:46 -0700
+ HTTPREST; Sat, 24 Oct 2026 00:00:53 -0700
 Received: from 415065739583 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 23 Oct 2026 12:16:38 +0000
+ HTTPREST; Fri, 23 Oct 2026 12:16:41 +0000
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20261020-spl-fit-compression-v3-18-6647aa23ade5@flipper.net>
+In-Reply-To: <20261020-spl-fit-compression-v3-21-6647aa23ade5@flipper.net>
 References: <20261020-spl-fit-compression-v3-0-6647aa23ade5@flipper.net>
- <20261020-spl-fit-compression-v3-18-6647aa23ade5@flipper.net>
+ <20261020-spl-fit-compression-v3-21-6647aa23ade5@flipper.net>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 24 Oct 2026 00:00:46 -0700
-X-Gm-Features: AclHuK_qDrxnqKIJr0oz1h7-M4hIkZyinFItcY0dpAKSk8KcWrkffFByxT1TKf4
-Message-ID: <CAFLszTgz=v0PJY9XDPVonQV=g71m08hvfbMaPyxYhSFsSskJ-w@mail.gmail.com>
-Subject: Re: [PATCH v3 18/23] binman: Allow choosing the compression level
+Date: Sat, 24 Oct 2026 00:00:53 -0700
+X-Gm-Features: AclHuK9w1QzG-FBCLcGnEyluQPNbtXcGnolMICVxOZBbcxixwg2CbWDgoIyYKwY
+Message-ID: <CAFLszTiP8u8dz2mDv9s3QOhn_63rPE4x_Gz5Sb_eahYb90ESMA@mail.gmail.com>
+Subject: Re: [PATCH v3 21/23] rockchip: Choose FIT payload compression via
+ Kconfig
 To: alchark@flipper.net
 Cc: u-boot@lists.u-boot-project.org, Sean Anderson <seanga2@gmail.com>, 
  Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
@@ -217,81 +216,63 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-16.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-11.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham autolearn_force=no
-	version=4.0.1
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 Hi Alexey,
 
 On 2026-10-20T16:40:47, Alexey Charkov <alchark@flipper.net> wrote:
-> binman: Allow choosing the compression level
+> rockchip: Choose FIT payload compression via Kconfig
 >
-> Every compression algorithm binman drives has a level, and the best one
-> to use depends on what the image is for: a payload sent over USB wants
-
-This says every algorithm has a level, but the next paragraph says
-lzma does not. Please can you change it to 'Most compression
-algorithms...' or similar?
-
-> the smallest it can get, one read from fast storage would rather not
-> wait for it. Today only the tool's own default is reachable.
+> The dtsi infers how to compress U-Boot proper from whichever SPL
+> decompressor happens to be enabled, so there is no way to ask for one in
+> particular, turning a decompressor on for something else silently
+> changes the image, and the conditional has to be updated with every new
+> algorithm.
 >
-> Add a 'compress-level' property, passed through as -<level>, which is how
-> all compressors want it except lzma: the LZMA SDK tool has no such option,
-> and is controlled by the -lc/-lp/-pb values binman already passes.
+> Take the selection from the generic choice instead, which covers every
+> algorithm SPL can unpack and carries a compression level. Declare the
+> capability under the same condition the dtsi already uses to decide
+> whether it emits a FIT at all.
 >
-> Have each tool declare the levels it takes, and reject anything outside
-> them with the node's path, whether or not the tool is installed. The tools
-> do not reliably refuse a bad level themselves: gzip, bzip2, xz and lzop
-> read -12 as -1 -2 and quietly compress at level 2, and a typo or a
-> leftover level after switching algorithms would otherwise just produce a
-> larger image with nothing to say why.
+> This defaults to no compression rather than following whichever
+> decompressor is enabled, which is a deliberate change: the setting is now
+> asked for rather than inferred. No in-tree Rockchip defconfig enables
+> SPL_GZIP or SPL_LZMA, so no board changes behaviour.
 >
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
+> The level is not offered for lzma, whose tool has no such knob and is
+> steered by its dictionary and context-bit settings instead.
+
+This describes the Kconfig from the previous patch, which already says
+it ('Offer the level only for algorithms whose tools take one').
+Nothing here affects lzma, since the dtsi only emits 'compress-level'
+when the symbol is non-zero. Please can you drop this paragraph?
+
+> [...]
 >
->  tools/binman/binman.rst                            | 21 ++++++
->  tools/binman/bintool.py                            | 20 +++++-
->  tools/binman/btool/btool_gzip.py                   |  2 +-
->  tools/binman/btool/bzip2.py                        |  3 +-
->  tools/binman/btool/lz4.py                          |  9 ++-
->  tools/binman/btool/lzma_alone.py                   |  5 +-
->  tools/binman/btool/lzop.py                         |  2 +-
->  tools/binman/btool/xz.py                           |  3 +-
->  tools/binman/btool/zstd.py                         |  3 +-
->  tools/binman/entry.py                              | 18 ++++-
->  tools/binman/etype/blob.py                         |  5 ++
->  tools/binman/ftest.py                              | 81 ++++++++++++++++++++++
->  tools/binman/test/entry/compress_level.dts         | 12 ++++
->  tools/binman/test/entry/compress_level_gzip.dts    | 12 ++++
->  tools/binman/test/entry/compress_level_lzma.dts    | 12 ++++
->  .../test/entry/compress_level_no_compress.dts      | 11 +++
->  tools/binman/test/entry/compress_level_range.dts   | 12 ++++
->  tools/binman/test/entry/compress_level_zero.dts    | 12 ++++
->  18 files changed, 230 insertions(+), 13 deletions(-)
+>  arch/arm/Kconfig                  |  1 +
+>  arch/arm/dts/rockchip-u-boot.dtsi | 16 ++++++----------
+>  2 files changed, 7 insertions(+), 10 deletions(-)
 
-> diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
-> @@ -1182,6 +1187,22 @@ The entry will then contain the compressed data, using the 'lz4' compression
-> +Where an algorithm offers a choice of how hard to try, 'compress-level' passes
-> +one through::
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> @@ -2128,6 +2128,7 @@ config ARCH_ROCKCHIP
+> +	select HAVE_SPL_FIT_COMPRESSION if ARM64 || SPL_OPTEE_IMAGE
 
-The existing paragraph just above still says lz4 is 'the only one that
-is supported'. That was already out of date, and now it contradicts
-your list of gzip, bzip2, lzo, xz and zstd a few lines down. Please
-can you fix that sentence while you are here?
+This copies the HAS_FIT condition at the top of rockchip-u-boot.dtsi:
 
-> diff --git a/tools/binman/etype/blob.py b/tools/binman/etype/blob.py
-> @@ -22,6 +22,11 @@ class Entry_blob(Entry):
-> +        - compress-level: How hard to compress, as the level number the
-> +            compression tool itself uses (e.g. 1 to 9 for gzip). Requires
-> +            'compress' and an algorithm which has levels, so not 'lzma'.
+    #if defined(CONFIG_SPL_FIT) && (defined(CONFIG_ARM64) ||
+defined(CONFIG_SPL_OPTEE_IMAGE))
 
-BTW the 'files' entry type copies its own 'files-compress' property
-into each generated blob subnode, but has no way to set a level. A
-'files-compress-level' would be good, perhaps as a follow-up.
+so the two have to be kept in step by hand. If someone later widens
+the dtsi condition (e.g. a 32-bit board with a FIT but no OP-TEE), the
+choice stays hidden and the payload is quietly left uncompressed. It
+would be worth having one symbol, e.g. a ROCKCHIP_SPL_FIT that is
+'def_bool SPL_FIT && (ARM64 || SPL_OPTEE_IMAGE)', which the select
+here hangs off and the dtsi tests directly. What do you think?
 
 Regards,
 Simon
