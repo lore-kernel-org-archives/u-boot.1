@@ -2,143 +2,142 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 977C5606A31F
-	for <u-boot@archiver.kernel.org>; Sun, 25 Oct 2026 13:30:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26D69606A31A
+	for <u-boot@archiver.kernel.org>; Sun, 25 Oct 2026 14:15:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=gEeTz6eV;
-	dkim=pass (2048-bit key, unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=RkmJdJt6
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=pgXElb89;
+	dkim=pass (2048-bit key, unprotected) header.d=disroot.org header.i=@disroot.org header.a=rsa-sha256 header.s=mail header.b=MCIICtmD
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3D3C681359;
-	Sun, 25 Oct 2026 13:30:28 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E71A780D9D;
+	Sun, 25 Oct 2026 14:15:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NCRq4D4BTSCg; Sun, 25 Oct 2026 13:30:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C6C47812BB
+ id hGQd7qkLohAP; Sun, 25 Oct 2026 14:15:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A633B80D92
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792935027;
-	b=O49F1uw6gTrNd6YbOGzbEsZJQVZw+onXHu8dIXVFECMZ2WVDS5FkZ9Bvl9iOhHXueHuI
-	 gdi1/mU1T30ulAv1h1JQJiwJVFaxfCDn0UG5QxanhN8Q5FzeKQaVqjkXMKj0Dtaukh9qO
-	 nco0TXL5zkqBRGJrZGc9tikU9IL5g5Rf58sD89XVFl72vqQ1tNAsG5GjSOOhF2pnsDgNP
-	 PZcSKUn2JjQXodDZgSfPcMa/qWh5zk65RSXaETmG8YHDk/rJkluvwTFljZSxExhaTvPQb
-	 dxqPl76xkI0yNem4HGOnPFrSH5qv98sC+38FwkLZWj8qXlc8V8Q/S8v/7dgp8P/Yzpg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792937732;
+	b=gVBvrFCNp7EfWdp1Mf266ANa/W6hWF3mbOyb64b0djgS5FrFhzm3tNvWJwlcyPlqpHl8
+	 IqPaLpWQ9CuUB4+ixxASZ8HH5o/hyE9ZpMktedqrGPAZgtLTA8nibfBGjdpIP87caVY0O
+	 XdPqKfPAucz7WDRL3JNQ1Tu0pMlG/4gVbw4d6/u91aPc0o5RB7HsXCqTtDXlo9rQERkU5
+	 MlgttyCyeBk/YP3Bk/bxVcGivCwmCnxQ8F0rwHWHaWsuNyrolIwP4SrXe8hmrweDf8zgC
+	 IMYvgZT9dgG29N/gOJ4w1PA2WSFcFjGkBC5kHFg/KwEQvLGNKUdaheYMmKGF9VJz0Pg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792935027;
+	c=relaxed/relaxed; t=1792937732;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=w8L8mGjph2J+dMq15OBxeLxRcP8AYE0/aFh/kHnaF6Q=;
-	b=qmJel52NsxtK/IjnkfctIvSklct259zfBVGeqoxwoMf5Jt/WqwQQVMfiErVSmusil2yG
-	 vIeEhvyhkRe73/BXUuoIU2wNZCFD2HFOKu5em6i+uo50tE0bPnWRAlqfk+Vrnj+C2MSlJ
-	 C3K3djdTLvDKBK6JwYi+ePxfw4p6TShyDheaNeQKdhJzhutrKiXYOKx3DIJsEZFedMyvF
-	 mK8fUUhZTu3U2MvaVlqOeNQJpeJWTLwmX6gkOw6D3OrkedMcP0k7Eza4C4EEIJEYuqPWU
-	 gXSH2khyV6Lr5RYyiIskFIir97Ntsrlhp6neuXxxYcB+ENjIc3v7W8WkjcoVQ4TlJ4g==
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 Received:X-Virus-Scanned:Received:DKIM-Signature:Mime-Version:
+	 Content-Transfer-Encoding:Content-Type:Date:Message-Id:Cc:Subject:
+	 From:To:References:In-Reply-To:X-Mailman-Approved-At:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=pFusJMjswqVfKwHj1/GrBOtkCieq6q2rc1uzpvgdcJI=;
+	b=pn4FM0Nxwf1nN1KcXsFwpL1/q6c2tvq9deO3dxmVMoI6oCGw4BkJ1TQ2yuwnUeLklQ+/
+	 YQApLCSeq+nvcm0E7LyMGkpwrW15oH9iL0uzpyNTah60qYVu3MveJ76/vNSYHRPpMAtHO
+	 41Au6t6YKTt+SMMk5Kp2RcZV4Az6Orc0wg1V69XDFhNBVkzY6eBKD4zeYicig4IZP3lKz
+	 SAT0DwO9T7iIYuYH37O2rCh20YtYCjMd7ahPlt5AFxkuG1whp5g231Pw3hD2/Bn1tq+Ew
+	 aRjLFP08f8M1JdCFU9dFk5xu9W6cDaAs6m19M9yBRnvfpaOkxJv1ji10VOiiRQ2PBGg==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792935026;
-	bh=w8L8mGjph2J+dMq15OBxeLxRcP8AYE0/aFh/kHnaF6Q=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1792937732;
+	bh=pFusJMjswqVfKwHj1/GrBOtkCieq6q2rc1uzpvgdcJI=;
+	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=gEeTz6eVXYmd9uwujqbuQ38n3L1q0QWHUELfuYvU5filCTlfI5Gumz3NoNo7SPRVI
-	 /PWBCbmmiv1MhDIBmu4IMeQX48oXy1mtV7l+DWAF8j2yD6GzAzXhgU3nlFdMk/zjHq
-	 +AcK4nqv1EV8E4kjXeZXwAhdccDlMTK+/kcLxksefQrHUOISh3tjMcUjqfdEbUf2Jo
-	 y/4b6yJjjhL9RbPx5yQ0amSYwspVP6sOp9wKuPpIMHwMlPECKNilxXgyUB2Hone5mK
-	 E5ItkZ+z2PJwLP6dQMyrG6yi1WRjI7wubWggnWRM/asTwWs6rVn43/cFY9Ec6IiFJO
-	 ygac3u0DeP/hA==
+	b=pgXElb8960H/wnr36Z1DgFwTIXLNak7fhAVSKYD3hx6+NmFgbgzcDD8ObNBH/yAGe
+	 4YA2A7pnF4De7PnrkW8XQb9V2nKKxJyi+yvsuDChAPcfl0VsanB6ZLKpN9KGFjFg5r
+	 pA4Gv/ou3hkTJLCKhLULq5nULjMcNxadNNKKQadug4I2laGFE9jzINE29iwsPCA3Hz
+	 XiOqAqLSb0mzYG0aXty6cyW38tnpIx/e3bREeQN/B2Dk5HcuQRDET3kldL/4DJN6IX
+	 P4jWfcxU2HubzOUOCdDbzJ1wUqhr1Ja/K+Oe91he3N3qgdfZakRCQIrhKMr2EZ6Xjl
+	 /oFGWRiwCH/rQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C6C47812BB;
-	Sun, 25 Oct 2026 13:30:26 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 87987380
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 13:30:25 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A633B80D92;
+	Sun, 25 Oct 2026 14:15:32 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id D17BE380
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 04:55:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 79AC7407D4
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 13:30:25 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id CEEEC6060D
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 04:55:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oc1rpGTwnPnd for <u-boot@lists.u-boot-project.org>;
- Sun, 25 Oct 2026 13:30:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 56D05407C7
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=116.202.128.144
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792935024;
- b=HcwL60MYDRKUw18eFQP5kYtfReMiGr/68LYIrHp2CkUS8xNa1wlDDZpXS2eAgYdtWi4W
- WQgHU1h+qFA5HZBEdWYVz5OCZfNUchDQ2Yx0662QjbCwtm81u1kyt14LuV84IBeuhgfcF
- zjbw2AJ/F4IDzaiQHceUPzKocyVGM8zUr+aHUDC+j2mMhW3jc7MDBVgkn2Nwrn3Zf+nVJ
- fF4MzfYV7HxntYiAV8DiNDOgwa5UZhziQL7Ke4TYfZ3lXvJLbuAQ+zHH2VdNVV/w1ZNq/
- nqxs7INvoDeu6tsPsx20PVEIUWuyNoKho0ShA7rqIEDD/wWqF6KOP4cebQc5ezuIwQA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id e6mJO0BrzxZ7 for <u-boot@lists.u-boot-project.org>;
+ Sun, 25 Oct 2026 04:55:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1CA6460607
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=178.21.23.139
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792904124;
+ b=f4OluNhDRGPx7+sXybPBePkcW/8+VbRknvpaH1/pmXr+ZXrHUEfG5suDwhBqqz95m/Yr
+ 22kXSvdECFu04rN/hORVVrqzAUH219/gfz0Ifv/PisLhbzr/2+rd6cD+RC8gQGsK0gAnK
+ eqsAKhZPvfBVTVkmFJLeA4//6r4cqTHYWL1LHxQvz513/oxWuu83h8E/qexICXu5dwsOT
+ 8ybOeXJdZp3z4IcI8h9p39HosfhV6bhJeI3qIuouL2+jyN5luw0X7bsMIFGDWrBQYTRMY
+ Fe8WJOg1K7KTwXfr8Ay0mcfk+buZtHFghdkwfN1LNNnazhtFK+FGG/L/xeegoDCJWxA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792935024;
- h=Received-SPF:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
- User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding;
- bh=w8L8mGjph2J+dMq15OBxeLxRcP8AYE0/aFh/kHnaF6Q=;
- b=i9xZVBitv5jH0zxjHC3AovSz8vTi0kantYvdzXeowcjSG6vImCvEwyWAI5B0tOi9sVTC
- ljzM4azNuu2+e0M2OApRC5jppMdbqZyiSyp+Gz+T7/2SuW45ffk7Tqru9LuJfj40INYuA
- TV+ikCnEf8p554dU1/xbyihSTKgklWuK8W8sTKgItGCfHuGV1oFigv9YQD+2rhf4VYO1p
- b2USAYkQQMkTAumExyAOtGlnEyX0vkvYdRfmo+GBYAtLk+x67FjkD1GCd02fl1mPaBAcF
- r1mNvAAAdSYp75A+XneSIZkGQQwWriZClhb+lreSwQScIu0cayezbzFbm1hhZq7no2w==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=freeshell.de;
- dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=RkmJdJt6; 
- arc=none smtp.remote-ip=116.202.128.144
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.202.128.144;
- helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=freeshell.de
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=RkmJdJt6
-Received: from freeshell.de (freeshell.de [116.202.128.144])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 56D05407C7
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 13:30:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1792934987;
- bh=w8L8mGjph2J+dMq15OBxeLxRcP8AYE0/aFh/kHnaF6Q=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=RkmJdJt6x4WqBM21HrPl7TN0+41lkhyHKNT/yjDj3Es8CLG81sYLfpXqIhQuXglCf
- /vINaW31vMbjDnbVSeIAG49OBUCCCj8IQIweHTcC+8KRAPtlDi11q8n+0z/B2pmyjZ
- xMkfXF2T2Y7DzGdzkf4wuXgJUraqMB0QvvfVIYfKZZOFslV5xerPJPrar1YYg9zhGa
- P3o4WKIu1r87dPsWygYYgTzWJazcag98GkwF5fDcZyFtf9GG419wsgdNlR1zXe2oAk
- Ufg1kp+FT6x7ddqXFp+9pJHBYY/nzZawTVZtIYzlFyD1XTrYMM9+sLji6f490LN7ie
- hQL1qSl0KGrJw==
-Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
- [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 8C595B2279BA;
- Sun, 25 Oct 2026 14:29:45 +0100 (CET)
-Message-ID: <0c4fb416-62e8-4ed1-b7f0-a8021092db59@freeshell.de>
-Date: Sun, 25 Oct 2026 06:29:43 -0700
+ c=relaxed/relaxed; t=1792904124;
+ h=X-Greylist:Received-SPF:Received:X-Virus-Scanned:Received:
+ DKIM-Signature:Mime-Version:Content-Transfer-Encoding:Content-Type:
+ Date:Message-Id:Cc:Subject:From:To:References:In-Reply-To;
+ bh=pFusJMjswqVfKwHj1/GrBOtkCieq6q2rc1uzpvgdcJI=;
+ b=XKeyfBA5nNFen7aWLE07khjoG3RTlfTX9X4z9kwJkuvluVbfxJoJ/1h74GzN6KYH0vxX
+ E25d2dJdjsSqbugdnEj8SwTaRAQecXZbTYcdscQE6bNp2c4OMaZ9W0otIVgG7Ug2EyqkG
+ w/JvqD1wJqwOpFmCmo0n+KSjDBScAOTHyLENGFrppSp1kmb0w/X0Iz6axrjZjyvIkshdk
+ TWZwXiz3iTFo7FO7LFPWcWFoQpOLFHXxm9c5Pwemv8Fe3WNO5/1XtQ3QU1LswWNkeTv+J
+ zfNo9TtP45NcKVU6Dx2NduVK8I/ChPvhwAhoDnrAvCJHfWYulBBf/4XXr/v6EjYZjFg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=disroot.org;
+ dkim=pass header.d=disroot.org header.i=@disroot.org header.a=rsa-sha256
+ header.s=mail header.b=MCIICtmD; 
+ arc=none smtp.remote-ip=178.21.23.139
+X-Greylist: delayed 509 seconds by postgrey-1.37 at util1.osuosl.org;
+ Sun, 25 Oct 2026 04:55:23 UTC
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=disroot.org header.i=@disroot.org header.a=rsa-sha256
+ header.s=mail header.b=MCIICtmD
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.21.23.139;
+ helo=layka.disroot.org; envelope-from=kauschluss@disroot.org;
+ receiver=<UNKNOWN> 
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 1CA6460607
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 04:55:22 +0000 (UTC)
+Received: from mail01.layka.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 81E0780B35;
+ Sun, 25 Oct 2026 05:46:50 +0100 (CET)
+X-Virus-Scanned: SPAM Filter at disroot.org
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Jl2QZ9qt_pMY; Sun, 25 Oct 2026 05:46:49 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1792903609; bh=RqWdCkcf6PsMhDwnEKNQrGF9kdkzJH8ICGvWUgrdGCY=;
+ h=Date:Cc:Subject:From:To:References:In-Reply-To;
+ b=MCIICtmDnSKRaYcZNWilOsXCGn13cGL+TK/ffijRXjjK3fZI+ENN1fhk3xlA0YrJZ
+ 1MBptYXxfqAkDAwI2fcuWbBQtj0mUyoxCN9Gl6LLwffvvPJPuqL/aQCHPQXwAToyPy
+ 4MaddI9IXNIis1IvC2LJf3QPPsA/htjkjSUtugqx+Xq9x4dE8uKJCK/+6wV5h1mkVz
+ CZY2Fvl/m8+hBtSsFHKM9fbVjKg8d7SBW/UNLFr9W02vhFe+WsTv3Dugs8xRIkNE/N
+ N3ZEHIRp1ZB1i3sF9svi3HBu7VOH+Q9VbS2NXvSo1OTIKeIaAqUPaO9E/qJQA5WyhX
+ iAwf9kP/3W7WA==
 X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: spi-nor: Indent SF: just like other boot time
- messages
-To: Marek Vasut <marex@nabladev.com>, Stefan Monnier <monnier@iro.umontreal.ca>
-Cc: Alexander Koch <akoch@initse.com>, David Lechner <dlechner@baylibre.com>, 
- Flaviu Nistor <flaviu.nistor@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Takahiro Kuwano <takahiro.kuwano@infineon.com>, Tom Rini
- <trini@konsulko.com>, Tudor Ambarus <tudor.ambarus@linaro.org>,
- Vignesh R <vigneshr@ti.com>, u-boot@lists.u-boot-project.org
-References: <20260611224544.210172-1-marex@nabladev.com>
- <jwv8q3ni16j.fsf-monnier+gmane.comp.boot-loaders.u-boot@gnu.org>
- <099f49b0-2704-4ceb-a730-92107bd09643@nabladev.com>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <099f49b0-2704-4ceb-a730-92107bd09643@nabladev.com>
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Date: Sun, 25 Oct 2026 10:16:43 +0530
+Message-Id: <DMDNA8TB98G2.1PF8QD3X90SVI@disroot.org>
+Cc: "Marek Vasut" <marek.vasut+renesas@mailbox.org>, "Ilias Apalodimas"
+ <ilias.apalodimas@linaro.org>, "Alexey Klimov" <alexey.klimov@linaro.org>,
+ "Heinrich Schuchardt" <xypron.glpk@gmx.de>, "Kaustabh Chakraborty"
+ <kauschluss@disroot.org>, "Minkyu Kang" <mk7.kang@samsung.com>,
+ <u-boot@lists.u-boot-project.org>
+Subject: Re: [PATCH] lmb: Enable LMB_LIMIT_DMA_BELOW_RAM_TOP for ARCH_EXYNOS9
+From: "Kaustabh Chakraborty" <kauschluss@disroot.org>
+To: "Sam Protsenko" <semen.protsenko@linaro.org>, "Tom Rini"
+ <trini@konsulko.com>
+References: <20261018043128.26916-1-semen.protsenko@linaro.org>
+In-Reply-To: <20261018043128.26916-1-semen.protsenko@linaro.org>
+X-Mailman-Approved-At: Sun, 25 Oct 2026 14:15:31 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,40 +147,120 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-7.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+On 2026-10-17 23:31 -05:00, Sam Protsenko wrote:
+> Since commit a3075db94d49 ("lmb: Reinstate access to memory above
+> ram_top") secondary CPUs cannot be brought online on the E850-96 board
+> in the Linux kernel:
+>
+>     smp: Bringing up secondary CPUs ...
+>     CPU1: failed to come online
+>     CPU1: failed in unknown state : 0x0
+>     CPU2: failed to come online
+>     CPU2: failed in unknown state : 0x0
+>     ...
+>
+> This is happening because EL3_MON (the Secure Monitor firmware, which
+> also implements PSCI) cannot handle 36-bit addresses in its CPU_ON PSCI
+> function implementation. The E850-96 board has two 2 GiB RAM banks: the
+> first one is mapped at 0x8000_0000, and the second one at 0x8_8000_0000.
+> The commit mentioned above changed the LMB behavior (in U-Boot) in a way
+> that the memory from the second RAM bank (which is mapped at 36-bit
+> addresses) is not reserved anymore. The change in 'bdinfo' output:
+>
+>     - reserved[4]    [0x8_8000_0000 - 0x8_ffff_ffff], 0x8000_0000 bytes
+>     + reserved[3]    [0x8_ffff_3000 - 0x8_ffff_ffff], 0xd000 bytes
+>
+> That in turn leads to the Linux kernel image being placed in the second
+> RAM bank with 36-bit addresses. The corresponding change in /proc/iomem:
+>
+>     -   f480_0000 -   f67e_ffff : Kernel code
+>     + 8_fa80_0000 - 8_fc7e_ffff : Kernel code
+>     -   f6b6_0000 -   f71a_ffff : Kernel data
+>     + 8_fcb6_0000 - 8_fd1a_ffff : Kernel data
+>
+> As evident from the Exynos850 device tree, it uses "psci" as a CPU
+> enable method. That means the kernel relies on PSCI firmware (which is
+> implemented as a part of EL3_MON firmware in case of Exynos850 SoC) to
+> bring up secondary CPU cores. So when bringing up secondary CPUs the
+> kernel makes an SMC call (for each secondary CPU) to execute CPU_ON PSCI
+> function (see PSCI spec [1]). The kernel passes an "entry point address"
+> to that SMC call, which is the address of the secondary_entry() function
+> in the kernel, which should be executed when PSCI returns to the kernel
+> from the SMC call:
+>
+>     static int cpu_psci_cpu_boot(unsigned int cpu)
+>     {
+>         phys_addr_t pa_secondary_entry =3D __pa_symbol(secondary_entry);
+>         int err =3D psci_ops.cpu_on(cpu_logical_map(cpu),
+>                                   pa_secondary_entry);
+>         ...
+>
+> The pa_secondary_entry is a 64-bit variable, which is perfectly fine
+> according to the PSCI spec. Unfortunately, in case when that address is
+> actually bigger than 32-bit value, the EL3_MON firmware doesn't execute
+> the function at that address -- that's the reason the secondary CPUs
+> don't come up. And as discussed above, the kernel image is now located
+> at a 36-bit address, which means the secondary_entry() function is at a
+> 36-bit address too:
+>
+>     - secondary_entry() address:   f67d_f5a8  // 32-bit address
+>     + secondary_entry() address: 8_fc7d_f5a8  // 36-bit address
+>
+> It seems like a bug in the EL3_MON firmware, e.g. it might truncate the
+> address to 32-bit by using a u32 variable (instead of u64) to store it
+> internally. So the right way to fix this issue would be to fix the
+> EL3_MON, but unfortunately it's closed source. So instead just enable
+> LMB_LIMIT_DMA_BELOW_RAM_TOP for ARCH_EXYNOS9 to limit the available
+> memory to the 32-bit boundary.
+>
+> Although this platform could benefit from having all memory available in
+> U-Boot (e.g. for transferring big images over TFTP), and it looks like
+> there are no hardware limitations on this platform too (DMA has 36-bit
+> support, etc.), limiting the available memory in U-Boot is still the
+> easiest way to workaround the EL3_MON problem, and 2 GiB is enough for
+> all use cases in U-Boot currently. And of course all 4 GiB of RAM is
+> available to use in Linux in any case, so it's not a bad tradeoff, and
+> in fact it just brings back the previous behavior (before the "Reinstate
+> access ..." patch).
+>
+> Enabling LMB_LIMIT_DMA_BELOW_RAM_TOP for the whole ARCH_EXYNOS9 family
+> also seems justified, as it's likely that all modern ARM64 Exynos chips
+> may share similar EL3_MON software, and thus possibly the same PSCI bug.
+> For example, a similar issue was mentioned in exynos-mobile related
+> patch [2], stating that after "Reinstate access ..." patch only CPU0 is
+> able to come online on some variants of the Samsung Galaxy J6 (based on
+> Exynos7870 SoC).
+>
+> This was tested on the E850-96 board:
+>
+>   1. Using 'bootefi' to boot the Linux kernel image
+>      - before this patch: the issue is reproducible
+>      - with this patch applied: the issue is not reproducible
+>   2. Using 'booti' to boot the Linux kernel image from 0x8_8000_0000
+>      - before this patch: the issue is reproducible
+>      - with this patch applied: the image can't be loaded there anymore
+>        ("Reading file would overwrite reserved memory"), as the second
+>        RAM bank is reserved in LMB again
+>   3. Using 'booti' to boot the Linux kernel image from 0x8000_0000
+>      - the issue is not reproducible
+>
+> [1] https://support.arm.com/documentation/den0022/fb/
+> [2] https://lore.kernel.org/u-boot/20260614-j6lte-lmb-v2-1-6046b54db536@d=
+isroot.org/
+>
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 
-On 10/24/26 11:05, Marek Vasut wrote:
-> On 10/24/26 5:14 PM, Stefan Monnier wrote:
->>> to the fixed indent:
->>>
->>> "
->>> DRAM:  3.5 GiB
->>> Core:  310 devices, 34 uclasses, devicetree: separate
->>> SF:    Detected w25q128jw with page size 256 Bytes, erase size 4 KiB,
->>> total 16 MiB
->>>      ^^^
->>
->> I'm probably not the targeted audience, but FWIW, I find the meaning of
->> "SF" non-obvious, so maybe instead of adding spaces, we could use those
->> 3 extra characters to come up with a slightly more
->> self-explanatory abbreviation?
-> SF is SPI Flash , it is used all over the code base.
+Acked-by: Kaustabh Chakraborty <kauschluss@disroot.org>
 
-I also find the meaning of "SF" non-obvious, and nothing better comes to
-mind to abbreviate it. You cannot get to "sf" command from "spi flash"
-or "flash" commands. If the probe message would say "SPI [NOR|NAND]
-Flash detected ...." or "SPI: [NOR|NAND] Flash detected ..." it would
-have the context needed, else I have to look up a part number or make a
-guess what that is about, remembering the first time I was confused
-about this. It could be easier, but I don't know if that's better.
+This is also an issue in Exynos 7870 platforms, so ARCH_EXYNOS7 also
+needs to be added.
 
-The indent change looks okay to me, a few bytes' increase, if there is
-no \t tabstop to reduce byte count and get the same effect.
-
--E
+I did send a patch to fix this using some hacks, but this seems to be
+the correct approach as various other platforms have also opted for it.
