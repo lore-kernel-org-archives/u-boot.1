@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB828606A31B
-	for <u-boot@archiver.kernel.org>; Sun, 25 Oct 2026 20:19:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B02EE606A322
+	for <u-boot@archiver.kernel.org>; Sun, 25 Oct 2026 20:19:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=v6G2krJ/;
-	dkim=pass (4096-bit key, unprotected) header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=rIbkFxL9
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bHvoLo9Z;
+	dkim=pass (4096-bit key, unprotected) header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=lUM8arMm
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 198BF60601;
-	Sun, 25 Oct 2026 20:19:05 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8048B80D64;
+	Sun, 25 Oct 2026 20:19:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id asOofwD1JQfo; Sun, 25 Oct 2026 20:19:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 24182605E0
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792959544;
-	b=PaqVEskFfnT6xGjGyet72dTQY9PUrQgKOQRydQqSwvOv1Z7SeXfcgAuF4YVddtXVjEY2
-	 eEgTEgHI+odEgw3DByRMB78vXwKEtj9gVt7+q6YWx2xsHPMreIbE6X5ywjWfbBeIF5xtK
-	 BXAIaMomIJkIDX+ZXxkpCqjzOjDqczH5i8ZvMPtlwhdf0aiQ13jJJ3B9EJJ/h2D/lVo5D
-	 frSnsCktuECpsqk3jXgWtI+NiRNaGi2gwI2KntwkYCiJUrKGIbE4KR/e10z+NKftywVAP
-	 BY20xhmrndx+rJk8khD0AOH9FWBhj+VAjxsCtaEV0TGTU5DM6iU7xIwtvmQNglxV4Yw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GPDDspuxmFBs; Sun, 25 Oct 2026 20:19:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4D90D80D5B
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792959546;
+	b=mps521W72ZU/KiHAn75zxGXuH85DkuDkYpslyp1chuoCKVI/4wwlIkK+Cs7oQZdRtvAw
+	 CBIUYlF2cPLv3vVxMupzfy74mVy8Ar8kTxEFLbOlNUW/tICRQcCTunDcA3EcnjT6xe47t
+	 j0psYWEV42/lH9kJ+wMHIjC+Fmaw503nPxgTanRn9ZUxxptiywDYNSYISTjZeRzJ277NF
+	 ZkAFLpTPexYPc4eSvFOYdGxHYYUhiOOESx+hRWhPPytV1xveMkUl6/b7GYe7e4xpuFokZ
+	 QsKK7/8gBlWMKuMnNbvSZpSSxrtKCNnAYrngA4kOm0RxCn8dPuTRKKIU8zCTksCIGjA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792959544;
+	c=relaxed/relaxed; t=1792959546;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,111 +31,110 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=n9ROf1Amubfta6wvZRtCxgwkRT6MRZT0vs2O3RlWbrM=;
-	b=MTg2tmLjtFiXQLElkoXbyjMncBjp+j2ToPi1GWfPPf38XfIAOrWvjzF6OXllSeBH+08a
-	 U0cbK7RcNghT0U+NDNbe+x9YyhxsitrTVgcCfzO76K7OEXkTHR1Nzt/GEVFgXg7izCwBR
-	 4qDva2pVurFDUjelcE4IO+jhgTULECfHC3jzGiWg5eQGoMhDso1iAGyWviE8aeFMF8RBS
-	 ilW3mxZzSIXixVoDaeCm90Qu2hcLnIj/xfH2eZEaXJwOf3lpXCXhluQqo3m/yEypgYY92
-	 l9pg1lhJEydMtCTBtza8IA0OwmOtVZP7RJAs01QnmKcdky3r07bQNRnHmgi2o85w6gw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	dmarc=pass header.from=canonical.com;
-	dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=rIbkFxL9;
+	bh=Wbz6isT/TDT/vAx1KjF+JUxSfNfzdWmQYYtCmsCl1ro=;
+	b=eAGP56ebRAvjS4J12NAtEgQEjQW7Ge0Irkznbt3HCz7LSKPBkulGE/hpiQ+Hs9Fn8XXa
+	 5nWL49qItUZMIoyMDUrNVfnqbahsR0uvBJsoxn5DgJSvEexGwsLWnccIK4D5oSx97lT39
+	 RgQysVp77oc9IgXgLhKn+NhP3I/g4dyZ1jNlVGAAyjQ2mL0SYwlhd29ypWVgW/AocsmoJ
+	 O6/+aET55HTUhFglXicJzvnTVeLcO4ZRvJaasjzZh1j1Upws92eniyoaySoTDSKiDoJDJ
+	 Y/dNsAvyUang9Ub44EmLxsVWN431j8c0Qjnc+cspi9hcO5YmLdDSZvHovxwbxBPUBOQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792959544;
-	bh=n9ROf1Amubfta6wvZRtCxgwkRT6MRZT0vs2O3RlWbrM=;
+	d=lists.u-boot-project.org; s=default; t=1792959546;
+	bh=Wbz6isT/TDT/vAx1KjF+JUxSfNfzdWmQYYtCmsCl1ro=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=v6G2krJ/lwe5Z1avRuTxMpe1aVEVEbzw7jPffNOi9p/VzoYPlGWKAQ3WZnEEE2Myv
-	 zZAHwTjwWS8eeJXT5t14+vPudc8JPhcN7IvhWUVWIxH7Q6oQ8DExXuXzmevJWiplHK
-	 9xneiiz3Gbfr3SibZ2trYfbYgENWIZqUthSUkVNP0rqgA/DdSl7SnP8iIA3wJa2L9K
-	 9h86bFH17++f2LmuPgYzHHlveXLi/pK1xVGcAiRAopkQi/h3LD1dlVtwECQbXnA9JM
-	 Pru1Vjj/rXO2bMY6sVh03DxJ/0yB/SAdHmILsOa7Has2QxHIb50A8odZ/l+8PkcBku
-	 ApUoJi5sx7BTQ==
+	b=bHvoLo9Z/GP7l3WuC4Cut+y5tE7XzKigrpWZE9L+Qh9ewlYa9PSYEKbfDVTYNCfUq
+	 EcGIV4AeCl3HdqUecu/EPVn7hAR1smrg+7ofP6WXA5YHNV38b8gJuBclu5I/7gjO0M
+	 eyemkNIjj4MnFgnkXM+nrT4PuBUE6AI1ZEPna7l2AlvtF3rXoVrmFjIFNIpnK/PjJB
+	 ETiSqicVV/742i5yN22mS9D7k+3UH0WRRaxL2OayvqFYdl1gS0NE0Vy39kUP4Cm6PH
+	 +jkI3zcoAYQ8XPUjdHwBLnqR4dCFiR9gJnfS/78OhmRuRybPdqLC6Zpy2hc4r3BoH9
+	 o1dH4x87MTKjQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 24182605E0;
-	Sun, 25 Oct 2026 20:19:04 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id DEBE5380
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 20:19:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4D90D80D5B;
+	Sun, 25 Oct 2026 20:19:06 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id B02984D1
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 20:19:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id C4AC4605E0
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 20:19:00 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 9603F40593
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 20:19:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MWGdkD2A1C8J for <u-boot@lists.u-boot-project.org>;
- Sun, 25 Oct 2026 20:18:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6373B605DF
-Authentication-Results: smtp3.osuosl.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cq-XOEtg1g4P for <u-boot@lists.u-boot-project.org>;
+ Sun, 25 Oct 2026 20:19:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 40D0140591
+Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=185.125.188.120
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792959539;
- b=iHw4Ldgkhqb75VL3P0NocFxv4BiiCjcM9ofRKa9jYt/qfzyIRf65/dbU2p+cHzfysfMn
- ARBCaXuAh5LGO8bAsYA5vuIG3Qx4VJJnpl1Jb97aL3si4+Yj+Zw/WFJvWiqPhBLhQqxFe
- IuYjHX1AJW4QwMJ9nKEmEqhCypyy2wVoGDD/d28KNaNPjT0WyWjJtqDE5IP9dunNxX0NK
- Na8fNlEweOmN0s3x246eBVJxdApTmo2T82YDGwuru6oMKaq8KUhZiaNW0D9GPMF9d3PCB
- oOdMn0pZ6bd1tny8luWJw8ICr1nCHA8ig9Gk3wVtX+h9dHZOUn85W9831Sdh3HWePUg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792959541;
+ b=UCXPTAoJXbUb8jVPij5aQWOA8ODAb5sykwu3cE4FAwhHaIs/FiuSMlDxepg1NcUjaiQu
+ ERprVRzGIgpSoWEfM4OqvDWCITv4JaqpoRV9mG27e+VgWhQts5qqnXbzbV3up+iqOd3xk
+ CBVslaZzNcGlROxqcvaOoXLLLp7GSXg/R7vVo1/zcXHonFfyohIMWxnTpSvA13h6goWyn
+ Vv0MtsOi4g0QbD1PseaK/el2DxzucO3kv4RvTOCcdmav8OdtChX9K9EDLkYtxbwaZwO1T
+ DtQmpXpgMFKQQzNb+whmdm1JoAS2BTwJ5MqHYaNIn+Za6I1NkV1v3YNHA+xpRiMvkzA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792959539;
+ c=relaxed/relaxed; t=1792959541;
  h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=n9ROf1Amubfta6wvZRtCxgwkRT6MRZT0vs2O3RlWbrM=;
- b=X3rculYrCw0evlTD4BWEJBFs4KnV1U9gJrsS9xoj2FjGH2rd4GTeCrks5OA1EiMTfhyV
- WpO9yHoM+gqrJLqgDT3cn0WWMWRNzx2yTSd6/dxtU90YFfaAkZHOO/DrLc9we8KLWRA2y
- ZLU4F1mtdTuUOV8fZKy+oYzWBebVfPJGOX4VJ8qX03u86UHkm0VbMvGzMWol8LRyuJcIN
- c7QLvCLBXw9ia/BNCWvP6ynykhJDLKA46EN07lkOyQI7qA2Sn9LDY2EZfB916wNT5+HIZ
- EKCdaEnD0EviaUlVYMDNNSL3Xd7HOxx6Mv8drm5XOqWcf+DLjUbSekhO4P4dJZKsWXQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=Wbz6isT/TDT/vAx1KjF+JUxSfNfzdWmQYYtCmsCl1ro=;
+ b=iiEUTJnhbDiBAX6RKlUCKA1WItqnJYi0uq/xlakxh/30qlrHDpjxSdGcsZRseCUMWV1V
+ hi/zW1N6i+ZDv3s8XeMs+oj0NYne+XG+PAxSPRhSh6Smlr9rTik1fOxSdB6pliazURxoH
+ OQvcn9fF9CklPrvUUCK5lHPgKTvdZ0k1UzT/urAPo7QfFof/zzBR/Gv+TX2/ZeDC/TOph
+ 0+tQKw38y2IdefYIND3Pe9chDeBIIxtqa2GXluyiM5aI/LVRR9Iig+EuGzKcb9VuEgsmk
+ Nuca9kY4J7z0vNRoJAOUYzy9mjuQrDgENP6pSFzPZ4tRGbZ7RWrFX52qH2ZPmNyEjhg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=canonical.com;
  dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
- header.s=20251003 header.b=rIbkFxL9; 
+ header.s=20251003 header.b=lUM8arMm; 
  arc=none smtp.remote-ip=185.125.188.120
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.120;
  helo=smtp-relay-canonical-0.canonical.com;
  envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (4096-bit key,
- unprotected) header.d=canonical.com header.i=@canonical.com
- header.a=rsa-sha256 header.s=20251003 header.b=rIbkFxL9
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=lUM8arMm
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6373B605DF
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 20:18:58 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 40D0140591
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 20:19:00 +0000 (UTC)
 Received: from LT03 (host-209-35-187-178.broadbandcancun.mx [209.35.187.178])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id E609542954; 
- Sun, 25 Oct 2026 20:18:54 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 8E34842A98; 
+ Sun, 25 Oct 2026 20:18:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1792959537;
- bh=n9ROf1Amubfta6wvZRtCxgwkRT6MRZT0vs2O3RlWbrM=;
+ s=20251003; t=1792959539;
+ bh=Wbz6isT/TDT/vAx1KjF+JUxSfNfzdWmQYYtCmsCl1ro=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=rIbkFxL9dKCnB8o7jdM8PzxGTjp8d/4x77ZFUL/udZL4sS2AbKwmOjDQ3upcj7bXT
- 1SAw1A5AmKhJV3IvCUlGR0099R516fUKW78P2NeGzwR9JlOeMtFp8unl3f7I1x703g
- ooNJXPHQj6z+Mf42DFJ5N4zm0nZHtKcjtPUyYTTCD84FpWMGRL/H7zLoc+9AW4W5KA
- U5Tk63sNsTmFrfB2h16KtOjhpJQCQKkLO+21Yq+KrIsg50o/wv+cF2tv1b7cWEO4wf
- 5GN2PqaQoa00QnzbtqcYLnEy0Xn8wF7MZDuRYMW9LJrjuoV2Ki4wq1ikXqQuEaUdOx
- FaCXPmjjO5VLCpzhpUOVK/J478r/tSZOzAMDEGIazwFc8hno1QSLLzc1gzPn98ELYE
- qZ1ozmskGB47XpMDH44KRGj/NOg7IGAa8DPyG1xZVs07kyRalVv1ZaVSF8DPRJAv0F
- 5yiqYtjj41agA4+z4biedWBAzoTyY3Q4ALSeQlO1ZoLAP3fKW/RU6AaugoaLvzV0Kx
- d5VK4RN418ekJ+NKcS5vzhhcUfVF67SIfdJ5Uc/n5Vo24GVx0Umq54tSan7cOPw+bd
- q5Cc+DDFzPa/2wMDb69H8/RTEwneRJ/g7kHlXGF7e357+2Z96jX2SmCu0hziIKegqg
- kg0sibPjlJnxUE6poCP/1ADI=
+ b=lUM8arMmFJeisMczruLEwE8TDnYn+TZIz2hx8fcZMopZWErjBDIAPLEqTW4AhH17X
+ hXxyhAcupq89nTlFlduz3FJKjQRE26N/0MCrQnTu0lQfmhc1r5LkRc2IyTNa0HMGvo
+ arniHoQ5teWw9ND9jKm8PQWo3slO/n4A4KxT1crApokn9T0umo46vHk2IFCDcvErNp
+ FadJFboms71+TkokKsyVk0lzkYa0LQSZ4/O7eujHBrosm8IOHODdeDyY2GbKJhrRZi
+ H8H/Xk8xFi/2ZTvkEohNuDVLHnRXQE5n30GuoFZlgDninPBClBoPh/5kCe95NcKxVK
+ iJRcvyRcRq2U3BevsHJ+bVuyCcF/LvBMNcTmdfCV437u7QQngFevS0UBoAP1LuLwYd
+ 09HWIfX4gLlJUXAwesXW7y4LlH1xnSrtWVi3Gg8bX+ypz6mA6dQ22XHqcXRb9lCURI
+ /gXhVsFYd5zxyLBVhN2frKs1yNDo/fN7TvzmgX+KJTWER2hSIr4Ojh12irKdCYNAFT
+ /w8ZTvPj5xYmw4afTJ9sREft8xEh0Ff7DJgnLkufeJsntuBdwKPgctwrqXT9WA95N/
+ qsushp0aLRcDruNC5Bv/ZhO5oJgWHz+5UG/9DBwVT6VmRzpPxyZVwVH8aI0huYr8Uv
+ /hUeL4I/ERGaKjOphnWorj5A=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  Tom Rini <trini@konsulko.com>, Randolph Sapp <rs@ti.com>,
  u-boot@lists.u-boot-project.org,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/3] efi_loader: implement EFI_DT_FIXUP_PROTOCOL v0.06
-Date: Sun, 25 Oct 2026 21:18:43 +0100
-Message-ID: <20261025201845.328650-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 2/3] efi_selftest: factor out a module with fdt helper
+ functions
+Date: Sun, 25 Oct 2026 21:18:44 +0100
+Message-ID: <20261025201845.328650-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261025201845.328650-1-heinrich.schuchardt@canonical.com>
 References: <20261025201845.328650-1-heinrich.schuchardt@canonical.com>
@@ -154,254 +153,509 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-19.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-As result of the discussion with Tianocore EDK II developers in  version
-v0.06 of the EFI_DT_FIXUP_PROTOCOL specification support for carving out
-device-tree reserved memory ranges was removed. A new GUID was provided
-for the reduced protocol.
-
-Implement the new version of the protocol as a wrapper around the old
-implementation. This keeps full backwards compatibility for existing
-users.
+* efi_st_f2h() - convert FDT value to host endianness
+* efi_st_fdt_find_node() - find a device-tree node
+* efi_st_fdt_get_property() - return location and length of an FDT property
+* efi_st_fdt_get_string() - return string value of a property of an FDT
+  node
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- include/efi_api.h              |   4 ++
- include/efi_dt_fixup.h         |  21 +++++++
- lib/efi_loader/efi_dt_fixup.c  | 102 +++++++++++++++++++++++++--------
- lib/efi_loader/efi_root_node.c |   2 +
- 4 files changed, 106 insertions(+), 23 deletions(-)
+ include/efi_selftest.h                 |  50 ++++++
+ lib/efi_selftest/Makefile              |   2 +-
+ lib/efi_selftest/efi_selftest_fdt.c    | 138 ++--------------
+ lib/efi_selftest/efi_selftest_fdtlib.c | 214 +++++++++++++++++++++++++
+ 4 files changed, 280 insertions(+), 124 deletions(-)
+ create mode 100644 lib/efi_selftest/efi_selftest_fdtlib.c
 
-diff --git a/include/efi_api.h b/include/efi_api.h
-index d4fdd50c49e..646581150b6 100644
---- a/include/efi_api.h
-+++ b/include/efi_api.h
-@@ -479,6 +479,10 @@ struct efi_runtime_services {
- 	EFI_GUID(0xe617d64c, 0xfe08, 0x46da, 0xf4, 0xdc, \
- 		 0xbb, 0xd5, 0x87, 0x0c, 0x73, 0x00)
- 
-+#define EFI_DT_FIXUP_PROTOCOL2_GUID \
-+	EFI_GUID(0x60ed6ba9, 0xdfef, 0x4799, 0xac, 0x7b, \
-+		 0x75, 0xe0, 0xf8, 0x33, 0x45, 0x6c)
-+
- #define EFI_TCG2_PROTOCOL_GUID \
- 	EFI_GUID(0x607f766c, 0x7455, 0x42be, 0x93, \
- 		 0x0b, 0xe4, 0xd7, 0x6d, 0xb2, 0x72, 0x0f)
-diff --git a/include/efi_dt_fixup.h b/include/efi_dt_fixup.h
-index 83382537d16..97865f8e88b 100644
---- a/include/efi_dt_fixup.h
-+++ b/include/efi_dt_fixup.h
-@@ -23,6 +23,12 @@
- 		    EFI_DT_RESERVE_MEMORY | \
- 		    EFI_DT_INSTALL_TABLE)
- 
-+/**
-+ * struct efi_dt_fixup_protocol - EFI_DT_FIXUP_PROTOCOL up to v0.05
-+ *
-+ * @revision:		protocol revision
-+ * @fixup:		fixup service function
-+ */
- struct efi_dt_fixup_protocol {
- 	u64 revision;
- 	efi_status_t (EFIAPI *fixup) (struct efi_dt_fixup_protocol *this,
-@@ -31,5 +37,20 @@ struct efi_dt_fixup_protocol {
- 				      u32 flags);
- };
- 
-+/**
-+ * struct efi_dt_fixup_protocol2 - EFI_DT_FIXUP_PROTOCOL since v0.06
-+ *
-+ * @revision:		protocol revision
-+ * @fixup:		fixup service function
-+ */
-+struct efi_dt_fixup_protocol2 {
-+	u64 revision;
-+	efi_status_t (EFIAPI *fixup) (struct efi_dt_fixup_protocol2 *this,
-+				      void *dtb,
-+				      efi_uintn_t *buffer_size);
-+};
-+
- extern struct efi_dt_fixup_protocol efi_dt_fixup_prot;
- extern const efi_guid_t efi_guid_dt_fixup_protocol;
-+extern struct efi_dt_fixup_protocol2 efi_dt_fixup_prot2;
-+extern const efi_guid_t efi_guid_dt_fixup_protocol2;
-diff --git a/lib/efi_loader/efi_dt_fixup.c b/lib/efi_loader/efi_dt_fixup.c
-index 333711b9957..ff42497b4fe 100644
---- a/lib/efi_loader/efi_dt_fixup.c
-+++ b/lib/efi_loader/efi_dt_fixup.c
-@@ -14,6 +14,7 @@
- #include <mapmem.h>
- 
- const efi_guid_t efi_guid_dt_fixup_protocol = EFI_DT_FIXUP_PROTOCOL_GUID;
-+const efi_guid_t efi_guid_dt_fixup_protocol2 = EFI_DT_FIXUP_PROTOCOL2_GUID;
- 
- /**
-  * efi_reserve_memory() - add reserved memory to memory map
-@@ -132,37 +133,30 @@ void efi_carve_out_dt_rsv(void *fdt)
- }
- 
- /**
-- * efi_dt_fixup() - fix up device tree
-+ * efi_dt_fixup_int() - fix up device tree
-  *
-- * This function implements the Fixup() service of the
-- * EFI Device Tree Fixup Protocol.
-+ * This function also implements legacy functionality for older
-+ * versions of the EFI_DT_FIXUP_PROTOCOL.
-  *
-- * @this:		instance of the protocol
-  * @dtb:		device tree provided by caller
-  * @buffer_size:	size of buffer for the device tree including free space
-  * @flags:		bit field designating action to be performed
-  * Return:		status code
+diff --git a/include/efi_selftest.h b/include/efi_selftest.h
+index 874f8b5efe7..7e84081b029 100644
+--- a/include/efi_selftest.h
++++ b/include/efi_selftest.h
+@@ -141,6 +141,56 @@ int efi_st_strcmp_16_8(const u16 *buf1, const unsigned char *buf2);
   */
--static efi_status_t __maybe_unused EFIAPI
--efi_dt_fixup(struct efi_dt_fixup_protocol *this, void *dtb,
--	     efi_uintn_t *buffer_size, u32 flags)
-+static efi_status_t
-+efi_dt_fixup_int(void *dtb, efi_uintn_t *buffer_size, u32 flags)
+ void *efi_st_get_config_table(const efi_guid_t *guid);
+ 
++/**
++ * efi_st_f2h() - convert FDT value to host endianness.
++ *
++ * UEFI code is always low endian. The FDT is big endian.
++ *
++ * @val:	FDT value
++ * Return:	converted value
++ */
++uint32_t efi_st_f2h(fdt32_t val);
++
++/**
++ * efi_st_fdt_find_node() - find a device-tree node
++ *
++ * The root node or one of its direct children can be retrieved.
++ *
++ * @fdt:	flat device-tree
++ * @node:	name of the node or NULL for the root node
++ * Return:	pointer to the first byte of the node, or NULL
++ */
++const void *efi_st_fdt_find_node(const void *fdt, const u16 *node);
++
++/**
++ * efi_st_fdt_get_property() - return location of an FDT property
++ *
++ * A property of the root node or one of its direct children can be retrieved.
++ *
++ * @fdt:	flat device-tree
++ * @property:	name of the property
++ * @node:	name of the node or NULL for root node
++ * @len:	length of the property
++ * Return:	location of the property value, or NULL
++ */
++const void *efi_st_fdt_get_property(const void *fdt, const u16 *property,
++				    const u16 *node, u32 *len);
++
++/**
++ * efi_st_fdt_get_string() - return string value of a property of an FDT node
++ *
++ * A string property of the root node or one of its direct children can be
++ * retrieved. The caller is responsible for calling FreePool() for the returned
++ * buffer.
++ *
++ * @fdt:	flat device-tree
++ * @property:	name of the property
++ * @node:	name of the node or NULL for root node
++ * Return:	allocated copy of the property string, or NULL
++ */
++char *efi_st_fdt_get_string(const void *fdt, const u16 *property,
++			    const u16 *node);
++
+ /**
+  * efi_st_get_key() - reads an Unicode character from the input device
+  *
+diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
+index 9882d9f2748..401e9e01281 100644
+--- a/lib/efi_selftest/Makefile
++++ b/lib/efi_selftest/Makefile
+@@ -69,7 +69,7 @@ obj-$(CONFIG_EFI_GET_TIME) += efi_selftest_rtc.o
+ obj-$(CONFIG_EFI_TCG2_PROTOCOL) += efi_selftest_tcg2.o
+ 
+ ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
+-obj-y += efi_selftest_fdt.o
++obj-y += efi_selftest_fdt.o efi_selftest_fdtlib.o
+ endif
+ 
+ ifeq ($(CONFIG_BLK)$(CONFIG_DOS_PARTITION),yy)
+diff --git a/lib/efi_selftest/efi_selftest_fdt.c b/lib/efi_selftest/efi_selftest_fdt.c
+index a4b0cef20e4..f73716a0513 100644
+--- a/lib/efi_selftest/efi_selftest_fdt.c
++++ b/lib/efi_selftest/efi_selftest_fdt.c
+@@ -25,123 +25,20 @@ static const efi_guid_t riscv_efi_boot_protocol_guid =
+ 				RISCV_EFI_BOOT_PROTOCOL_GUID;
+ 
+ /**
+- * f2h() - convert FDT value to host endianness.
++ * get_boot_hartid_fdt() - return boot-hartid property of the chosen node
+  *
+- * UEFI code is always low endian. The FDT is big endian.
+- *
+- * @val:	FDT value
+- * Return:	converted value
+- */
+-static uint32_t f2h(fdt32_t val)
+-{
+-	char *buf = (char *)&val;
+-	char i;
+-
+-	/* Swap the bytes */
+-	i = buf[0]; buf[0] = buf[3]; buf[3] = i;
+-	i = buf[1]; buf[1] = buf[2]; buf[2] = i;
+-
+-	return val;
+-}
+-
+-/**
+- * get_property() - return value of a property of an FDT node
+- *
+- * A property of the root node or one of its direct children can be
+- * retrieved.
+- *
+- * @property	name of the property
+- * @node	name of the node or NULL for root node
+- * Return:	value of the property
++ * Return:	location of the boot-hartid property, or NULL
+  */
+-static char *get_property(const u16 *property, const u16 *node)
++static const fdt32_t *get_boot_hartid_fdt(void)
  {
- 	efi_status_t ret;
- 	size_t required_size;
- 	size_t total_size;
- 	struct bootm_headers img = { 0 };
- 
--	EFI_ENTRY("%p, %p, %p, %d", this, dtb, buffer_size, flags);
-+	if (!dtb || !buffer_size || !flags || (flags & ~EFI_DT_ALL))
-+		return EFI_INVALID_PARAMETER;
-+
-+	if (fdt_check_header(dtb))
-+		return EFI_INVALID_PARAMETER;
- 
--	if (this != &efi_dt_fixup_prot || !dtb || !buffer_size ||
--	    !flags || (flags & ~EFI_DT_ALL)) {
--		ret = EFI_INVALID_PARAMETER;
--		goto out;
+-	struct fdt_header *header = (struct fdt_header *)fdt;
+-	const fdt32_t *end;
+-	const fdt32_t *pos;
+-	const char *strings;
+-	size_t level = 0;
+-	const char *nodelabel = NULL;
+-
+-	if (!header) {
+-		efi_st_error("Missing device tree\n");
+-		return NULL;
 -	}
--	if (fdt_check_header(dtb)) {
--		ret = EFI_INVALID_PARAMETER;
--		goto out;
++	const fdt32_t *prop;
++	u32 len;
+ 
+-	if (f2h(header->magic) != FDT_MAGIC) {
+-		efi_st_error("Wrong device tree magic\n");
++	prop = efi_st_fdt_get_property(fdt, u"boot-hartid", u"chosen", &len);
++	if (!prop || len != sizeof(*prop))
+ 		return NULL;
 -	}
- 	if (flags & EFI_DT_APPLY_FIXUPS) {
- 		/* Check size */
- 		required_size = fdt_off_dt_strings(dtb) +
-@@ -173,15 +167,13 @@ efi_dt_fixup(struct efi_dt_fixup_protocol *this, void *dtb,
- 			required_size = total_size;
- 		if (required_size > *buffer_size) {
- 			*buffer_size = required_size;
--			ret = EFI_BUFFER_TOO_SMALL;
--			goto out;
-+			return EFI_BUFFER_TOO_SMALL;
- 		}
+-
+-	pos = (fdt32_t *)(fdt + f2h(header->off_dt_struct));
+-	end = &pos[f2h(header->totalsize) >> 2];
+-	strings = fdt + f2h(header->off_dt_strings);
  
- 		fdt_set_totalsize(dtb, *buffer_size);
- 		if (image_setup_libfdt(&img, dtb, false)) {
- 			log_err("failed to process device tree\n");
--			ret = EFI_INVALID_PARAMETER;
--			goto out;
-+			return EFI_INVALID_PARAMETER;
- 		}
- 	}
- 	if (flags & EFI_DT_RESERVE_MEMORY)
-@@ -191,11 +183,70 @@ efi_dt_fixup(struct efi_dt_fixup_protocol *this, void *dtb,
- 		ret = efi_install_configuration_table(&efi_guid_fdt, dtb);
- 		if (ret != EFI_SUCCESS) {
- 			log_err("failed to install device tree\n");
--			goto out;
-+			return ret;
- 		}
- 	}
- 
--	ret = EFI_SUCCESS;
-+	return EFI_SUCCESS;
-+}
-+
-+/**
-+ * efi_dt_fixup() - fix up device tree
-+ *
-+ * This function implements the Fixup() service of the
-+ * EFI Device Tree Fixup Protocol up to revision 0.05.
-+ *
-+ * @this:		instance of the protocol
-+ * @dtb:		device tree provided by caller
-+ * @buffer_size:	size of buffer for the device tree including free space
-+ * @flags:		bit field designating action to be performed
-+ * Return:		status code
-+ */
-+static efi_status_t __maybe_unused EFIAPI
-+efi_dt_fixup(struct efi_dt_fixup_protocol *this, void *dtb,
-+	     efi_uintn_t *buffer_size, u32 flags)
-+{
-+	efi_status_t ret;
-+
-+	EFI_ENTRY("%p, %p, %p, %d", this, dtb, buffer_size, flags);
-+
-+	if (this != &efi_dt_fixup_prot) {
-+		ret = EFI_INVALID_PARAMETER;
-+		goto out;
-+	}
-+
-+	ret = efi_dt_fixup_int(dtb, buffer_size, flags);
-+
-+out:
-+	return EFI_EXIT(ret);
-+}
-+
-+/**
-+ * efi_dt_fixup2() - fix up device tree
-+ *
-+ * This function implements the Fixup() service of the
-+ * EFI Device Tree Fixup Protocol since revision v0.06.
-+ *
-+ * @this:		instance of the protocol
-+ * @dtb:		device tree provided by caller
-+ * @buffer_size:	size of buffer for the device tree including free space
-+ * Return:		status code
-+ */
-+static efi_status_t __maybe_unused EFIAPI
-+efi_dt_fixup2(struct efi_dt_fixup_protocol2 *this, void *dtb,
-+	      efi_uintn_t *buffer_size)
-+{
-+	efi_status_t ret;
-+
-+	EFI_ENTRY("%p, %p, %p", this, dtb, buffer_size);
-+
-+	if (this != &efi_dt_fixup_prot2) {
-+		ret = EFI_INVALID_PARAMETER;
-+		goto out;
-+	}
-+
-+	ret = efi_dt_fixup_int(dtb, buffer_size, EFI_DT_APPLY_FIXUPS);
-+
- out:
- 	return EFI_EXIT(ret);
+-	for (; pos < end;) {
+-		switch (f2h(pos[0])) {
+-		case FDT_BEGIN_NODE: {
+-			const char *c = (char *)&pos[1];
+-			size_t i;
+-
+-			if (level == 1)
+-				nodelabel = c;
+-			++level;
+-			for (i = 0; c[i]; ++i)
+-				;
+-			pos = &pos[2 + (i >> 2)];
+-			break;
+-		}
+-		case FDT_PROP: {
+-			struct fdt_property *prop = (struct fdt_property *)pos;
+-			const char *label = &strings[f2h(prop->nameoff)];
+-			efi_status_t ret;
+-
+-			/* Check if this is the property to be returned */
+-			if (!efi_st_strcmp_16_8(property, label) &&
+-			    ((level == 1 && !node) ||
+-			     (level == 2 && node &&
+-			      !efi_st_strcmp_16_8(node, nodelabel)))) {
+-				char *str;
+-				efi_uintn_t len = f2h(prop->len);
+-
+-				if (!len)
+-					return NULL;
+-				/*
+-				 * The string might not be 0 terminated.
+-				 * It is safer to make a copy.
+-				 */
+-				ret = boottime->allocate_pool(
+-					EFI_LOADER_DATA, len + 1,
+-					(void **)&str);
+-				if (ret != EFI_SUCCESS) {
+-					efi_st_error("AllocatePool failed\n");
+-					return NULL;
+-				}
+-				boottime->copy_mem(str, &pos[3], len);
+-				str[len] = 0;
+-
+-				return str;
+-			}
+-
+-			pos = &pos[3 + ((f2h(prop->len) + 3) >> 2)];
+-			break;
+-		}
+-		case FDT_NOP:
+-			++pos;
+-			break;
+-		case FDT_END_NODE:
+-			--level;
+-			++pos;
+-			break;
+-		case FDT_END:
+-			return NULL;
+-		default:
+-			efi_st_error("Invalid device tree token\n");
+-			return NULL;
+-		}
+-	}
+-	efi_st_error("Missing FDT_END token\n");
+-	return NULL;
++	return prop;
  }
-@@ -204,3 +255,8 @@ struct efi_dt_fixup_protocol efi_dt_fixup_prot = {
- 	.revision = EFI_DT_FIXUP_PROTOCOL_REVISION,
- 	.fixup = efi_dt_fixup
- };
+ 
+ /*
+@@ -206,7 +103,7 @@ static int execute(void)
+ 	char *str;
+ 	efi_status_t ret;
+ 
+-	str = get_property(u"compatible", NULL);
++	str = efi_st_fdt_get_string(fdt, u"compatible", NULL);
+ 	if (str) {
+ 		efi_st_printf("compatible: %s\n", str);
+ 		ret = boottime->free_pool(str);
+@@ -218,7 +115,7 @@ static int execute(void)
+ 		efi_st_error("Missing property 'compatible'\n");
+ 		return EFI_ST_FAILURE;
+ 	}
+-	str = get_property(u"serial-number", NULL);
++	str = efi_st_fdt_get_string(fdt, u"serial-number", NULL);
+ 	if (str) {
+ 		efi_st_printf("serial-number: %s\n", str);
+ 		ret = boottime->free_pool(str);
+@@ -228,29 +125,24 @@ static int execute(void)
+ 		}
+ 	}
+ 	if (IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB)) {
+-		str = get_property(u"kaslr-seed", u"chosen");
++		str = efi_st_fdt_get_string(fdt, u"kaslr-seed", u"chosen");
+ 		if (str) {
+ 			efi_st_error("kaslr-seed with measured fdt\n");
+ 			return EFI_ST_FAILURE;
+ 		}
+ 	}
+ 	if (IS_ENABLED(CONFIG_RISCV)) {
++		const fdt32_t *prop;
+ 		u32 fdt_hartid;
+ 
+-		str = get_property(u"boot-hartid", u"chosen");
+-		if (!str) {
++		prop = get_boot_hartid_fdt();
++		if (!prop) {
+ 			efi_st_error("boot-hartid missing in devicetree\n");
+ 			return EFI_ST_FAILURE;
+ 		}
+-		fdt_hartid = f2h(*(fdt32_t *)str);
++		fdt_hartid = efi_st_f2h(*prop);
+ 		efi_st_printf("boot-hartid: %u\n", fdt_hartid);
+ 
+-		ret = boottime->free_pool(str);
+-		if (ret != EFI_SUCCESS) {
+-			efi_st_error("FreePool failed\n");
+-			return EFI_ST_FAILURE;
+-		}
+-
+ 		if (IS_ENABLED(CONFIG_EFI_RISCV_BOOT_PROTOCOL)) {
+ 			efi_uintn_t efi_hartid;
+ 			int r;
+diff --git a/lib/efi_selftest/efi_selftest_fdtlib.c b/lib/efi_selftest/efi_selftest_fdtlib.c
+new file mode 100644
+index 00000000000..2d681eb7904
+--- /dev/null
++++ b/lib/efi_selftest/efi_selftest_fdtlib.c
+@@ -0,0 +1,214 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * efi_selftest_fdtlib
++ *
++ * Copyright (c) 2026 Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
++ */
 +
-+struct efi_dt_fixup_protocol2 efi_dt_fixup_prot2 = {
-+	.revision = EFI_DT_FIXUP_PROTOCOL_REVISION,
-+	.fixup = efi_dt_fixup2
-+};
-diff --git a/lib/efi_loader/efi_root_node.c b/lib/efi_loader/efi_root_node.c
-index e5246f65df2..9f3806655d2 100644
---- a/lib/efi_loader/efi_root_node.c
-+++ b/lib/efi_loader/efi_root_node.c
-@@ -68,6 +68,8 @@ efi_status_t efi_root_node_register(void)
- 		 /* Device-tree fix-up protocol */
- 		 &efi_guid_dt_fixup_protocol,
- 		 &efi_dt_fixup_prot,
-+		 &efi_guid_dt_fixup_protocol2,
-+		 &efi_dt_fixup_prot2,
- #endif
- #if IS_ENABLED(CONFIG_EFI_UNICODE_COLLATION_PROTOCOL2)
- 		 &efi_guid_unicode_collation_protocol2,
++#include <efi_selftest.h>
++#include <linux/libfdt.h>
++
++/**
++ * efi_st_f2h() - convert FDT value to host endianness.
++ *
++ * UEFI code is always low endian. The FDT is big endian.
++ *
++ * @val:	FDT value
++ * Return:	converted value
++ */
++uint32_t efi_st_f2h(fdt32_t val)
++{
++	char *buf = (char *)&val;
++	char i;
++
++	/* Swap the bytes */
++	i = buf[0]; buf[0] = buf[3]; buf[3] = i;
++	i = buf[1]; buf[1] = buf[2]; buf[2] = i;
++
++	return val;
++}
++
++/**
++ * next_fdt_node() - skip the name of an FDT node
++ *
++ * @pos:	position of an FDT_BEGIN_NODE token
++ * Return:	position of the next token after the FDT node name
++ */
++static const fdt32_t *next_fdt_node(const fdt32_t *pos)
++{
++	const char *c = (char *)&pos[1];
++	size_t i;
++
++	for (i = 0; c[i]; ++i)
++		;
++
++	return &pos[2 + (i >> 2)];
++}
++
++/**
++ * efi_st_fdt_find_node() - find a device-tree node
++ *
++ * The root node or one of its direct children can be retrieved.
++ *
++ * @fdt:	flat device-tree
++ * @node:	name of the node or NULL for the root node
++ * Return:	pointer to the first byte of the node, or NULL
++ */
++const void *efi_st_fdt_find_node(const void *fdt, const u16 *node)
++{
++	const char *fdt_pos = fdt;
++	const struct fdt_header *header = (struct fdt_header *)fdt;
++	const fdt32_t *end;
++	const fdt32_t *pos;
++	size_t level = 0;
++
++	if (!header) {
++		efi_st_error("Missing device tree\n");
++		return NULL;
++	}
++
++	if (efi_st_f2h(header->magic) != FDT_MAGIC) {
++		efi_st_error("Wrong device tree magic\n");
++		return NULL;
++	}
++
++	pos = (fdt32_t *)(fdt_pos + efi_st_f2h(header->off_dt_struct));
++	end = (fdt32_t *)(fdt_pos + efi_st_f2h(header->totalsize));
++
++	for (; pos < end;) {
++		switch (efi_st_f2h(pos[0])) {
++		case FDT_BEGIN_NODE: {
++			const char *c = (char *)&pos[1];
++			const fdt32_t *next = next_fdt_node(pos);
++
++			if ((!node && !level) ||
++			    (node && level == 1 &&
++			     !efi_st_strcmp_16_8(node, c)))
++				return pos;
++
++			++level;
++			pos = next;
++			break;
++		}
++		case FDT_PROP: {
++			struct fdt_property *prop = (struct fdt_property *)pos;
++
++			pos = &pos[3 + ((efi_st_f2h(prop->len) + 3) >> 2)];
++			break;
++		}
++		case FDT_NOP:
++			++pos;
++			break;
++		case FDT_END_NODE:
++			--level;
++			++pos;
++			break;
++		case FDT_END:
++			return NULL;
++		default:
++			efi_st_error("Invalid device tree token\n");
++			return NULL;
++		}
++	}
++	efi_st_error("Missing FDT_END token\n");
++	return NULL;
++}
++
++/**
++ * efi_st_fdt_get_property() - return location of an FDT property
++ *
++ * A property of the root node or one of its direct children can be retrieved.
++ *
++ * @fdt:	flat device-tree
++ * @property:	name of the property
++ * @node:	name of the node or NULL for root node
++ * @len:	length of the property
++ * Return:	location of the property value, or NULL
++ */
++const void *efi_st_fdt_get_property(const void *fdt, const u16 *property,
++				    const u16 *node, u32 *len)
++{
++	const char *fdt_pos = fdt;
++	struct fdt_header *header = (struct fdt_header *)fdt;
++	const fdt32_t *end;
++	const fdt32_t *pos;
++	const char *strings;
++
++	pos = efi_st_fdt_find_node(fdt, node);
++	if (!pos)
++		return NULL;
++
++	pos = next_fdt_node(pos);
++	end = (fdt32_t *)(fdt_pos + efi_st_f2h(header->totalsize));
++	strings = fdt_pos + efi_st_f2h(header->off_dt_strings);
++
++	for (; pos < end;) {
++		switch (efi_st_f2h(pos[0])) {
++		case FDT_PROP: {
++			struct fdt_property *prop = (struct fdt_property *)pos;
++			const char *label = &strings[efi_st_f2h(prop->nameoff)];
++
++			if (!efi_st_strcmp_16_8(property, label)) {
++				if (len)
++					*len = efi_st_f2h(prop->len);
++				return &pos[3];
++			}
++
++			pos = &pos[3 + ((efi_st_f2h(prop->len) + 3) >> 2)];
++			break;
++		}
++		case FDT_NOP:
++			++pos;
++			break;
++		case FDT_BEGIN_NODE:
++		case FDT_END_NODE:
++		case FDT_END:
++			return NULL;
++		default:
++			efi_st_error("Invalid device tree token\n");
++			return NULL;
++		}
++	}
++	efi_st_error("Missing FDT_END token\n");
++	return NULL;
++}
++
++/**
++ * efi_st_fdt_get_string() - return string value of a property of an FDT node
++ *
++ * A string property of the root node or one of its direct children can be
++ * retrieved. The caller is responsible for calling free() for the returned
++ * buffer.
++ *
++ * @fdt:	flat device-tree
++ * @property:	name of the property
++ * @node:	name of the node or NULL for root node
++ * Return:	allocated copy of the property string, or NULL
++ */
++char *efi_st_fdt_get_string(const void *fdt, const u16 *property,
++			    const u16 *node)
++{
++	const char *prop;
++	efi_status_t ret;
++	char *str;
++	u32 len;
++
++	prop = efi_st_fdt_get_property(fdt, property, node, &len);
++	if (!prop || !len)
++		return NULL;
++
++	/*
++	 * The string might not be 0 terminated.
++	 * It is safer to make a copy.
++	 */
++	ret = st_boottime->allocate_pool(EFI_LOADER_DATA, len + 1,
++					       (void **)&str);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("AllocatePool failed\n");
++		return NULL;
++	}
++	st_boottime->copy_mem(str, prop, len);
++	str[len] = 0;
++
++	return str;
++}
 -- 
 2.53.0
 
