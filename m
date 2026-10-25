@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 099CA60A2609
-	for <u-boot@archiver.kernel.org>; Sun, 25 Oct 2026 13:04:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EC1B60A2600
+	for <u-boot@archiver.kernel.org>; Sun, 25 Oct 2026 13:04:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=GOzTaI6g;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=JnUFgRxL
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=iuYW4M7U;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=TZ3iDdWW
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CF4F240C50;
-	Sun, 25 Oct 2026 13:04:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 31C9780E51;
+	Sun, 25 Oct 2026 13:04:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oW9MR0AGsri8; Sun, 25 Oct 2026 13:04:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D4747407E4
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792933474;
-	b=gUk8dcCfh2RlEYmK63N6myK5sspA5m4WIEW9DKQfz/OCdRsyANoXO+WUTBuKTAkFPLNk
-	 FtbU0ABanT3tLwFjUWecoCWgcRKswfHENuYAZ0vMtWFSQu9TckkbaSn4HkntU5XBSF8fx
-	 +UbpjG1c78TY3GbZjsLFMr9w/UEKAe+bBVSqb03/MhE3b5z4DFLlIH94XtPw06ve79SPo
-	 Wx3E8v03DNPYL/IoxGAgfffgOf3y47PYVAG2/O6bm8qnvJe0zFJs/BBYvKsJGHm7OZJJE
-	 CCVJOgXKpUcmkgG+sg/GonXDKlFNmpoA0oe5Ks6hBeBYrOO8PY/eam8n6xvqtQTZYEg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SiTjkQ1I2Um6; Sun, 25 Oct 2026 13:04:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 643F380E86
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792933479;
+	b=s8C3jlIPDXoSl01pPThQLFBEJf7VcMQNXJCgbH8TKYkGCIOqJRooPeUCO+7MftmxI+nl
+	 G/QgEyFE10DPwcBPSP7+jDoy7L8Zni7RvO/8dqyiRkbAlL9XvyYcz/2f/zlJyOfGeybRy
+	 jP2d7mhJtpbxiWMW9yKb9z18Wr3AVDGElBMXyf/1fTxbpgpPEouAI6yWw6ervqepeELGz
+	 1wR8hCegsWyjJa2HgkSNQqj/CPWN91av/esVE+7nYx2mK7e4jHkV3BAZK6oOU1ZRDg1oQ
+	 ZaTRUR8xkmcIKIYO5kVTZjKMy7qYLnZGbkODfn2k4PaKixJQSvoC1nTt8jqBSlSv5xw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792933474;
+	c=relaxed/relaxed; t=1792933479;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,129 +32,130 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=JBMpNZjZWaqq5YfKpZsQYpgcsNmUrxo64Xe4NKJhYSU=;
-	b=E7H6X24gSjC//PgizRTQ6e++uYOLhZR6kMb4viGmefVZL0Zb4JGi/603HZUKg6kwy71k
-	 rXfQc1O9hAdHcCAkPcX7Mc2IFOrsvQHp77fxznpKmHH0iryxiPJiPNHYLZBerWYsG3IJ0
-	 jV50GpKUI0KwMOLu1tXfFGVXnY82iVLvlS+/H8+q0219A4sj8TkCNeAEmVuyDXc0zRo99
-	 2uYWC8MojNX0HeVIQxCSMLJ7FYE9CoAVzEAFqic8IC7CMomg9ol6LbVf9tEeZjVwJrkU3
-	 Bf/XBE+Y7j6/s5uE1ZjKYMQvSq9qcUZgljesfnKWO0zz6T5Y8e6dcQ3GtEqtawmiOaA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=RvQexTKh1vNlYEodkuxtXEBEZ/QYzYtN8ucyIYR+1yA=;
+	b=WxeaAq69gMvPhMGc9gOSKKbuRyUiP45aordnZY56X6c44A7SAMunYIg8RrILJ2nJ+Os5
+	 EAKunE/fUC4H4fOUYyKh8CGrbE6rowrdPCfu0ZROftyNAm9RlMGRc1TrDMCkXqohcK/fP
+	 yz6hv0+5elnKqAyQTsAzNGubtanMa2MQ0JzUurKtdYUpZUv9bn0JDEXcJBXjAkY5L2cC7
+	 aJE6RXBOh2Pfhcyg5VHWoyW4i6VfummO7vGDIf9B1JkmQHIqF9Tg2aiizGbpZx9iteFRy
+	 MxIbGzQsZJlKhKpLBQOWIe17gJOtO84FEVtlUYEjNZuCfQccjD1bYi8NWRvKLDSB5Ag==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792933474;
-	bh=JBMpNZjZWaqq5YfKpZsQYpgcsNmUrxo64Xe4NKJhYSU=;
+	d=lists.u-boot-project.org; s=default; t=1792933479;
+	bh=RvQexTKh1vNlYEodkuxtXEBEZ/QYzYtN8ucyIYR+1yA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GOzTaI6gTPpJumR2OMZiLye6KzBJewiJeCaFYr5rybbVU4uqo5BEHX5/xOQc0VfuT
-	 YZ+YKjUMi3t5bR3wzY3/pZ8uB6sfPi0BQjmVK4FuAfcaFM2df3tipeyqpNIu2Ybmcj
-	 x5uJRPEJ7ON9boa3AcwuhR1fUmaPEEexg8y2eaRkYuMMjwODVvQTjf3WInSmwGc9rv
-	 ufOdOnyuywp72aa/xEZIsdRF+uc5uksA9fukyxNvaVtVuVEZeIQUYsDywDCRZmt3Fi
-	 qYVyXrn6hP67sRd6BlTbKPlDiZn6h/TuMo8n8JugsWczIHm/5oRw5is69iodpZeapL
-	 7JaLBGDiwNkkQ==
+	b=iuYW4M7URJobASc0i9HE9MA7smSFc6S3zJ54KoSTpsroUtQamqpLzrYe/I2P+x/8H
+	 +obgh2nera3qoEub7gD8SAfWXOEAMHafzKcUezI6F9YT0s4+caA2oBfCzTPhBd/9Z8
+	 E2vVIWeFp110X2r6YcxP8TML+E0z2WAZEVTqufk+1FzAotI2NsKtJIeB05tAsmKM51
+	 k2nmetnM12xs5yOmCAL+70fzFWaKmKsfYFQOTo8dn94S1Yr30PODFHFQ9d7x3yWI7/
+	 1H5GCP66eWMGlmvTVgB9ZPt4lt+ntIF739WEWZSGLJhbSWJqxb6L9HGK9J1fxuuiPq
+	 /l6uWoFDNwaJw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D4747407E4;
-	Sun, 25 Oct 2026 13:04:33 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 2B247356
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 13:04:32 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 643F380E86;
+	Sun, 25 Oct 2026 13:04:39 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 421594D1
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 13:04:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 112FB80E35
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 13:04:32 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 3EBD060F30
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 13:04:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id d61w_rgjew_W for <u-boot@lists.u-boot-project.org>;
- Sun, 25 Oct 2026 13:04:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D26CA811AB
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::329"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792933471;
- b=Ws7v46Vz6guAafpu4kfilONP+30Xd2DjaxMGFzgkW2ffMe79gLgdxx/zAYSHmthuP3ES
- MPTfCbV/jAu0aeklwSJGjmprAG6QhJmWSCn1VUsuZ2cRNSmc6yKlOr8hLHbQRF6D0MxrI
- pSH32sUCvYz0DDeZoNnRH7EulPx5z52uVlxaX+OQySjLnDsp0rOkVzDxEFHy01beGAWBQ
- ExWbCBtw1nmWN6JPaS4ReNOOUlL8mTMuP4RLpK0exiCMOCei3gkxsqrzHfMHJfoUal5/p
- MgtAeK/qQ15vzK3WZf4p7PYgI6kzZm+7wA629LjmsoIunQDygudDz3S36C/nrIgyeIg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id spdV8MeH_tbG for <u-boot@lists.u-boot-project.org>;
+ Sun, 25 Oct 2026 13:04:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4D15960F3F
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42f"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792933476;
+ b=kn2srebspCe9VxN6MqdkrnfSSYNkt5K63Qtrjo18sdHdugrh/kgOmEytJ4f3b504pb7d
+ /8vQY6pThRxEPSJkpKxcLi/Ih89X2n7P48vCziGOU+26n2ZA/qwlOz7afaYiguSPotTcC
+ nYIzWotiyO+jwVcjzpvMVXjXWcYvs54jvrpA5X4E6cGWBZHEwVRZmb8Qfzzj9yHQf+GXN
+ ZqbVwVs6944kTtAdpdvVwOIOS3eGiftfDAVLYBikr4/jt99DVjtTUG/8Swq48qacI0VqI
+ 5I0c4RgFh6OjYZ5WOZhAFuftotGJfT+ppWxiOUhC+Kg+kpF06XTTVfRt3p9zCH06Flw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792933471;
+ c=relaxed/relaxed; t=1792933476;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:In-Reply-To:References;
- bh=JBMpNZjZWaqq5YfKpZsQYpgcsNmUrxo64Xe4NKJhYSU=;
- b=QOiOygQNYap/2+bUmTUdr2DOsvY9pvim/5aWBpRe5BQsviZuUCQuT+grvFrvf3Kym4eD
- tyuog8GW6wEDlH3dCUAfzNJUv+B1oPCVvBrfCqUCQP58yqwQyb03QLJGL8EUnwBJ6nHPP
- hYb4O+2X5DFHenY62JGcGjxNUlEhJXa5IZpUOs3c3glUAFV+oQZ38V2IEC8V1I+2Gkndf
- 3xCmo7W6m0NlhPROoHhrLFA861bxNbcRD4FMw/KBYEy4meF7JIqEVgJslw8IzL4882T/T
- H4UUfc4ZOL6oXcAprojAK6rBjSpgGjKVeBb4HDyyjQD4YW7wBcYDuxJCXDHY8BCZ+nQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=RvQexTKh1vNlYEodkuxtXEBEZ/QYzYtN8ucyIYR+1yA=;
+ b=XTbbxYtwtBtUVqW4vPMUysAT9wdfi/niGPc6Iq3PcKRNxm/fAfygvjBlJfvgKYaG2dDd
+ PsqtAKiyNCOP470MAPalm2/7hKy7CCt/Y+biBth1LWYjmMlQLUMVIYxoJY3ZlmE16ifyQ
+ x3+t04jMxbpqPNilIe1dPv0Jh5lh7QSTwsfVSyw5cnGFuWgKPDtXmJPoD+zuILy2Ly0E/
+ X+stjAGyyvc2g1ujaK5qk2LmA+/uUTCprgU3DKQ9LiReU23THYR2n8a4COjuaQDSqnXuk
+ BPpIWiPFcxomOhLHZQ3axYikRKYmTv1vqo0IC91u5Es+uYZYa98y92GJL3ONq64SIMw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=JnUFgRxL; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::329"
+ header.s=20251104 header.b=TZ3iDdWW; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42f"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::329; helo=mail-wm1-x329.google.com;
+ client-ip=2a00:1450:4864:20::42f; helo=mail-wr1-x42f.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=JnUFgRxL
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D26CA811AB
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 13:04:30 +0000 (UTC)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4a207b02a2cso13869165e9.1
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 06:04:30 -0700 (PDT)
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=TZ3iDdWW
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4D15960F3F
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 13:04:35 +0000 (UTC)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-48b042c0759so1264935f8f.2
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 06:04:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792933468; x=1793538268;
+ d=gmail.com; s=20251104; t=1792933474; x=1793538274;
  darn=lists.u-boot-project.org; 
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=JBMpNZjZWaqq5YfKpZsQYpgcsNmUrxo64Xe4NKJhYSU=;
- b=JnUFgRxLK+9p4YNBFtY8VMRHWTGfSKUiXkzSrpoc1AZ1VNZDOWG1DZIF4JB7uAEZ/B
- QSVYWI6//TazYl96ZMIGwdbF8Efj4kfJAlfnXT2qcmNESf16QLd93Hotg38jP2m4/2lM
- cLs2YKCjkx77kGmapSVkrvVG4MvSjnhqEjKAkqrC+uh81aKTS0jcLzC1Pc/ByHPQDkcM
- EJxrV1gRld/yQyoDb07Ibh/iEGooVo/sSFlDs23C7XGE1KaBaIDSs3HtgIneWTiAElU6
- OKQG3V96hV9Xr72hRLDpV9+S54ri/G4BNdWA3XvWx4sW2GhrSGT8tdcxIHgrJqGs39oK
- Redg==
+ bh=RvQexTKh1vNlYEodkuxtXEBEZ/QYzYtN8ucyIYR+1yA=;
+ b=TZ3iDdWWnNE+3G//DGpr6QjkjbECxQk5P/l2FYqUl5M5UZvf5Zscm7oDP0Gqo39Huc
+ Zkra3yo66YQ+fs/hRZk0BfnIIkyvmNsp+yHW5jZ7TW+LY1ANrrUzCSH11H4h8pMUmdxj
+ NApilspTL2C6v68miuRRE4+rYmbnGwCmgdPoYPzaad7k5IviexzU28BdxTNRs5jCHrqt
+ mX1ib0VBy783KdDAS6jLcAYbVNXOc3dvKRUL206X3H/+EvIQmdFmiXeVEujX01yDglwo
+ As0BHHHNzMwF5MpSi6FSenK9AHs3KefQJHaQP1aHvVuRhNaB2qeGXZMAlc4WAfRZpy7u
+ AEQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792933468; x=1793538268;
+ d=1e100.net; s=20260707; t=1792933474; x=1793538274;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=JBMpNZjZWaqq5YfKpZsQYpgcsNmUrxo64Xe4NKJhYSU=;
- b=BpomJvjjTgQIx6byJYga4bjtSdrZesGkEiQcaqYrmVzL/3XOghf4X2rjU7bqmCrfdJ
- QYkZcxziAqL/R/G6V9KD9WN4eX3bDP7sjeR6hi6pjaR4+2gcMIvrPXY1I+VKIo+Nople
- moBPUmBvsZeZWi5tbO6QqaDBgTYMTsuBOIZFsf3qsNwYDhiCzRev7E5elojHftFH82Z7
- 0lONEypnfiRT/9YfotubAjy8yFxR0cJE06+hmTmPp+QoIOT9U4PQgPo9xF9dj6W6oPyP
- B1/KsKvzLeE3FqLQuR5kTLR6RMmucKzC4WPet28kRiEgZUtPSfxIdBo5MIgmUEUefCWI
- rQmA==
-X-Gm-Message-State: AFq9FYIjoDJJhN2Yty9AC85iXg6vzsnjQ1D4TAs5LsZCuUUwOnhwuZUT
- X0AqzcqSNjOvAKlQnrVhX1UHPy6TuEyJWgRhhaenZflKpLm7MwBeBt21tmvCpgG93sePBw==
-X-Gm-Gg: AYBFou2EsktPIMzAPdyWehRYtEtJvo0OXH8h6w57vaGnyxn51/ai3En5BlkkGJ0IZRa
- 6pVKm5f6LszyYoqjHnIXUrMAVX0agFvavT2ToqcYdw8Y9MNVgbnEsV5n/jYsWuc9sEt6Ocb5hHv
- iZ3uwtO489htB+Xx6nMtJZRnMKWsCh/UtZDNtWsmlLVh524COJRH+BFq93zb+/DVtI5g/P7xfsi
- /nJF0Ht7qDtUCI8IQ5DYtIdI6kJgqAi3Wn8UIXvcuawcW3ezrwwQMy6XgmKzUR1/CcH2fkcAV+A
- Cf/Z5UTE6L29sVRGFsFeIkaPTyuGFIvvwLbrxDlLdx14FT9+XKbepR7ml39/GtIMtce2iV/ZUY6
- 1uSum3IgSAuLangI90IbnCYZHGLBj/wH0NFWWxVpzOkknn9bOO6zwE6S3eHWRC3ElZcarxlB6LX
- UfF3pVlrErmqoANgsKbexeLJ7pD6dF4BkLiD18UJ9XUrinv2/lvlZFcJ8a/kHxVnfDKLHQOZkwG
- gyK6OXFARtOMRYzCKPK+lDsa336vUHt99TxYsZF7OLTyomUi/4cvG+lDw==
-X-Received: by 2002:a05:600d:18:b0:4a4:f48e:78fa with SMTP id
- 5b1f17b1804b1-4a4f48e7b2cmr31907665e9.12.1792933467902; 
- Sun, 25 Oct 2026 06:04:27 -0700 (PDT)
+ bh=RvQexTKh1vNlYEodkuxtXEBEZ/QYzYtN8ucyIYR+1yA=;
+ b=dbsf8GjbQSyt4b4zgn8iwTDE2bmjrcRxrbdkMCKbbrl95Wn6uT1rBtAIIdgtjZhQyM
+ bul3FOilo138lktpbr2L7rA2+4QLXrkEsZBKmkiL5G8Nbys/0UdqtCROaYT3NoxKaN5V
+ nuwJD/V9Z91UaofE1DuR3Lh6ohdxSrvdIP+yQxTRs7z/kPU+wA2qZ/FLZbOGJ2I3TjGX
+ CCdplv4DS/35s3TZzn9t/a1GrsoLt4C3E6cRM5CWrI82VeCX7EaHjnt9E5TBtZhiliqQ
+ 6LRYiKlaIkMawSp4oLOmEe06m4SmhPHYOn6xRolTgJxSIXHORfsNvgfmzm+bsI/836qH
+ 04Dg==
+X-Gm-Message-State: AFq9FYJxz9BY967/lnQM/d/XeOW2zdBOupGCfixqAYPAUAeilr12YhhJ
+ FJAlAsBtVyBQFJqtFI1W0m5r3MQYHgEjAyOc9AAuh3q4hRoXyMDPFiLF
+X-Gm-Gg: AYBFou2Cyl8HyDmmt8U0G0B7M0f88VWM7d5F76228ZbGTm6r4mQwrF/ChoqRP5trTxi
+ cyH+L44RJuXdnns/hF+hTRXkY/iWUTvVDnTc75ovs6ORPGgOYaNzXUXVjR4DqpGB5omcE2+AdzP
+ hArxu/Hput7xX2NgR90+ACdpQ6kA/QVAdGUX+ajRe53HifVLSxlZ7C0FHArUJ0tOTTtBvzgffiJ
+ IirXGFYeTkHdtwvj/kGA7zgqMtM3uSi+OAix+U3/nVLk0jRGJN5rmvk2lTAFJSWGXcWi7rtpAoi
+ tzFfdstC6KK8zhkqsBERJpRAm3TthKfx5QXZRn2XynUHeR5W+3hKkzTYFC+TKiPOOCF6bOVDaO/
+ YYEYFDkyhtq4Oy885T58MHWigzYeW1b0CCRlIX+HQ8wR79VEPH2gICwWUGEHk9ElCrWXyhzPC/z
+ o5aCvDEbmNaYMUDUvZ3lUlygqr5SgkzbUq9v6wnPXF+LFOP+w4hHY6nlcCbj5qEPJazLZ40HLHq
+ 6Zzpa2EAfGeq8dsGACvJtVBHeIiR/NDDKmmnmBOJrPR7PzWIi951iAqmg==
+X-Received: by 2002:a05:6000:2408:b0:48d:fbf4:895e with SMTP id
+ ffacd0b85a97d-48e3eb86626mr9209566f8f.11.1792933473933; 
+ Sun, 25 Oct 2026 06:04:33 -0700 (PDT)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a359f4f20dsm88262705e9.0.2026.10.25.06.04.27
+ ffacd0b85a97d-48e3ecd354asm9580467f8f.43.2026.10.25.06.04.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 25 Oct 2026 06:04:27 -0700 (PDT)
+ Sun, 25 Oct 2026 06:04:33 -0700 (PDT)
 From: Ana Bobillo <anabobillo3@gmail.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org, Tony Dinh <mibodhi@gmail.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH RESEND 4/6] fs: ext4: check block numbers before releasing them
-Date: Sun, 25 Oct 2026 13:04:26 +0000
-Message-ID: <f4179b61-421a-48c1-9d1c-2774214544ef@gmail.com>
+Subject: [PATCH RESEND 5/6] fs: ext4: fix the block group of an inode in the
+ write path
+Date: Sun, 25 Oct 2026 13:04:31 +0000
+Message-ID: <701a5402-c9c0-4bd7-b5fe-36d5747a467f@gmail.com>
 In-Reply-To: <dd4dce11-8583-4124-a8de-c8680536a08b@gmail.com>
 References: <dd4dce11-8583-4124-a8de-c8680536a08b@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -169,7 +170,7 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
@@ -177,313 +178,96 @@ X-Archived-By: <archiver.kernel.org>
 
 From: Ana Bobillo <anabobillo3@gmail.com>
 
-When ext4fs_write() replaces an existing file, ext4fs_delete_file()
-releases the file's blocks: the data blocks found by
-read_allocated_block() and, for a file using indirect blocks, the
-blocks listed in its indirect blocks. Each block number comes from the
-inode or from an indirect block on disk and is turned into a block
-group index used for fs->blk_bmaps[] and ext4fs_get_group_descriptor()
-without any check. A block number past the end of the filesystem
-makes ext4fs_reset_block_bmap() and ext4fs_bg_free_blocks_inc() write
-outside the bitmap array and the group descriptor table.
+Inode numbers start at 1, so the block group of inode n is
+(n - 1) / s_inodes_per_group, as ext4fs_read_inode() computes it. The
+write path computes n / s_inodes_per_group instead, in
+ext4fs_delete_file(), for the new and the parent inode in
+ext4fs_write(), and in ext4fs_get_new_inode_no(). For the last inode
+of a group this gives the next group: ext4fs_delete_file() then clears
+a bit in the byte before that group's inode bitmap and zeroes an inode
+in the wrong inode table, and for the last group of the filesystem
+the index is past the end of fs->inode_bmaps[] and the group
+descriptor table.
 
-Add ext4fs_blk_to_group(), which computes the block group as
-ext4fs_get_new_blk_no() does, but only for a block inside the
-filesystem, and use it wherever the delete path computes the block
-group of a block. Make the delete_*_indirect_block() helpers return an
-error, so that ext4fs_delete_file() stops rather than releasing blocks
-of a corrupt inode; their out-of-memory, read and journal errors,
-which used to be ignored, now stop the delete as well.
+The inode numbers given to ext4fs_delete_file() and taken as the
+parent inode come from directory entries on disk, so also check that
+they fall inside the filesystem before using them.
 
 Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
 ---
- fs/ext4/ext4_write.c | 137 ++++++++++++++++++++++++-------------------
- 1 file changed, 78 insertions(+), 59 deletions(-)
+ fs/ext4/ext4_common.c |  6 ++++--
+ fs/ext4/ext4_write.c  | 16 ++++++++++++----
+ 2 files changed, 16 insertions(+), 6 deletions(-)
 
+diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
+index cff112fb99b..beb64794a72 100644
+--- a/fs/ext4/ext4_common.c
++++ b/fs/ext4/ext4_common.c
+@@ -1156,8 +1156,10 @@ int ext4fs_get_new_inode_no(void)
+ 	} else {
+ restart:
+ 		fs->curr_inode_no++;
+-		/* get the blockbitmap index respective to blockno */
+-		ibmap_idx = fs->curr_inode_no / inodes_per_grp;
++		/* get the inode bitmap index respective to inode no */
++		ibmap_idx = (fs->curr_inode_no - 1) / inodes_per_grp;
++		if (ibmap_idx >= fs->no_blkgrp)
++			goto fail;
+ 		struct ext2_block_group *bgd =
+ 			ext4fs_get_group_descriptor(fs, ibmap_idx);
+ 		uint16_t bg_flags = ext4fs_bg_get_flags(bgd);
 diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-index 4e8fa434409..dc37ae1448d 100644
+index dc37ae1448d..6bae559849a 100644
 --- a/fs/ext4/ext4_write.c
 +++ b/fs/ext4/ext4_write.c
-@@ -140,32 +140,62 @@ fail:
- 	return -1;
- }
- 
--static void delete_single_indirect_block(struct ext2_inode *inode)
-+/**
-+ * ext4fs_blk_to_group() - get the block group of a block to be released
-+ *
-+ * The block numbers come from the inode being deleted and from its indirect
-+ * blocks, so check that they are inside the filesystem before they are used
-+ * to index the block bitmaps and group descriptors. The group is computed
-+ * as ext4fs_get_new_blk_no() does.
-+ *
-+ * @fs:		filesystem
-+ * @blknr:	block number
-+ * Return:	block group of @blknr, or -EINVAL if it is outside the filesystem
-+ */
-+static int ext4fs_blk_to_group(struct ext_filesystem *fs, uint64_t blknr)
-+{
-+	uint32_t blk_per_grp = le32_to_cpu(ext4fs_root->sblock.blocks_per_group);
-+	uint32_t bg_idx;
-+
-+	if (blknr <= le32_to_cpu(ext4fs_root->sblock.first_data_block) ||
-+	    blknr >= le32_to_cpu(ext4fs_root->sblock.total_blocks))
-+		goto err;
-+
-+	/* blknr is below total_blocks, so it fits in 32 bits */
-+	bg_idx = (uint32_t)blknr / blk_per_grp;
-+	if (fs->blksz == 1024 && !((uint32_t)blknr % blk_per_grp))
-+		bg_idx--;
-+	if (bg_idx >= fs->no_blkgrp)
-+		goto err;
-+
-+	return bg_idx;
-+err:
-+	printf("Invalid block number %llu\n", (unsigned long long)blknr);
-+	return -EINVAL;
-+}
-+
-+static int delete_single_indirect_block(struct ext2_inode *inode)
- {
- 	struct ext2_block_group *bgd = NULL;
- 	static int prev_bg_bmap_idx = -1;
- 	uint32_t blknr;
--	int remainder;
- 	int bg_idx;
- 	int status;
--	uint32_t blk_per_grp = le32_to_cpu(ext4fs_root->sblock.blocks_per_group);
-+	int ret = -1;
- 	struct ext_filesystem *fs = get_fs();
+@@ -485,6 +485,10 @@ static int ext4fs_delete_file(int inodeno)
  	char *journal_buffer = zalloc(fs->blksz);
- 	if (!journal_buffer) {
- 		printf("No memory\n");
--		return;
-+		return -ENOMEM;
+ 	if (!journal_buffer)
+ 		return -ENOMEM;
++	if (inodeno < 1 || (inodeno - 1) / inode_per_grp >= fs->no_blkgrp) {
++		printf("Invalid inode number %d\n", inodeno);
++		goto fail;
++	}
+ 	status = ext4fs_read_inode(ext4fs_root, inodeno, &inode);
+ 	if (status == 0)
+ 		goto fail;
+@@ -551,7 +555,7 @@ static int ext4fs_delete_file(int inodeno)
+ 	/* release inode */
+ 	/* from the inode no to blockno */
+ 	inodes_per_block = fs->blksz / fs->inodesz;
+-	ibmap_idx = inodeno / inode_per_grp;
++	ibmap_idx = (inodeno - 1) / inode_per_grp;
+ 
+ 	/* get the block no */
+ 	inodeno--;
+@@ -939,7 +943,9 @@ int ext4fs_write(const char *fname, const char *buffer,
+ 
+ 	inodes_per_block = fs->blksz / fs->inodesz;
+ 	parent_inodeno = ext4fs_get_parent_inode_num(fname, filename, F_FILE);
+-	if (parent_inodeno == -1)
++	if (parent_inodeno < 1 ||
++	    (parent_inodeno - 1) / le32_to_cpu(sblock->inodes_per_group) >=
++	    fs->no_blkgrp)
+ 		goto fail;
+ 	if (ext4fs_iget(parent_inodeno, g_parent_inode))
+ 		goto fail;
+@@ -1032,7 +1038,8 @@ int ext4fs_write(const char *fname, const char *buffer,
+ 	temp_ptr = zalloc(fs->blksz);
+ 	if (!temp_ptr)
+ 		goto fail;
+-	ibmap_idx = inodeno / le32_to_cpu(ext4fs_root->sblock.inodes_per_group);
++	ibmap_idx = (inodeno - 1) /
++		    le32_to_cpu(ext4fs_root->sblock.inodes_per_group);
+ 	inodeno--;
+ 	bgd = ext4fs_get_group_descriptor(fs, ibmap_idx);
+ 	itable_blkno = ext4fs_bg_get_inode_table_id(bgd, fs) +
+@@ -1053,7 +1060,8 @@ int ext4fs_write(const char *fname, const char *buffer,
+ 		/* FIXME: Deallocate data blocks */
+ 		goto fail;
  	}
- 
- 	/* deleting the single indirect block associated with inode */
- 	if (inode->b.blocks.indir_block != 0) {
- 		blknr = le32_to_cpu(inode->b.blocks.indir_block);
- 		debug("SIPB releasing %u\n", blknr);
--		bg_idx = blknr / blk_per_grp;
--		if (fs->blksz == 1024) {
--			remainder = blknr % blk_per_grp;
--			if (!remainder)
--				bg_idx--;
--		}
-+		bg_idx = ext4fs_blk_to_group(fs, blknr);
-+		if (bg_idx < 0)
-+			goto fail;
- 		ext4fs_reset_block_bmap(blknr, fs->blk_bmaps[bg_idx], bg_idx);
- 		/* get  block group descriptor table */
- 		bgd = ext4fs_get_group_descriptor(fs, bg_idx);
-@@ -184,19 +214,21 @@ static void delete_single_indirect_block(struct ext2_inode *inode)
- 			prev_bg_bmap_idx = bg_idx;
- 		}
- 	}
-+	ret = 0;
- fail:
- 	free(journal_buffer);
-+
-+	return ret;
- }
- 
--static void delete_double_indirect_block(struct ext2_inode *inode)
-+static int delete_double_indirect_block(struct ext2_inode *inode)
- {
- 	int i;
- 	short status;
- 	static int prev_bg_bmap_idx = -1;
- 	uint32_t blknr;
--	int remainder;
- 	int bg_idx;
--	uint32_t blk_per_grp = le32_to_cpu(ext4fs_root->sblock.blocks_per_group);
-+	int ret = -1;
- 	__le32 *di_buffer = NULL;
- 	void *dib_start_addr = NULL;
- 	struct ext2_block_group *bgd = NULL;
-@@ -204,7 +236,7 @@ static void delete_double_indirect_block(struct ext2_inode *inode)
- 	char *journal_buffer = zalloc(fs->blksz);
- 	if (!journal_buffer) {
- 		printf("No memory\n");
--		return;
-+		return -ENOMEM;
- 	}
- 
- 	if (inode->b.blocks.double_indir_block != 0) {
-@@ -222,12 +254,9 @@ static void delete_double_indirect_block(struct ext2_inode *inode)
- 				break;
- 
- 			debug("DICB releasing %u\n", *di_buffer);
--			bg_idx = le32_to_cpu(*di_buffer) / blk_per_grp;
--			if (fs->blksz == 1024) {
--				remainder = le32_to_cpu(*di_buffer) % blk_per_grp;
--				if (!remainder)
--					bg_idx--;
--			}
-+			bg_idx = ext4fs_blk_to_group(fs, le32_to_cpu(*di_buffer));
-+			if (bg_idx < 0)
-+				goto fail;
- 			/* get  block group descriptor table */
- 			bgd = ext4fs_get_group_descriptor(fs, bg_idx);
- 			ext4fs_reset_block_bmap(le32_to_cpu(*di_buffer),
-@@ -255,12 +284,9 @@ static void delete_double_indirect_block(struct ext2_inode *inode)
- 
- 		/* removing the parent double indirect block */
- 		blknr = le32_to_cpu(inode->b.blocks.double_indir_block);
--		bg_idx = blknr / blk_per_grp;
--		if (fs->blksz == 1024) {
--			remainder = blknr % blk_per_grp;
--			if (!remainder)
--				bg_idx--;
--		}
-+		bg_idx = ext4fs_blk_to_group(fs, blknr);
-+		if (bg_idx < 0)
-+			goto fail;
- 		/* get  block group descriptor table */
- 		bgd = ext4fs_get_group_descriptor(fs, bg_idx);
- 		ext4fs_reset_block_bmap(blknr, fs->blk_bmaps[bg_idx], bg_idx);
-@@ -280,20 +306,22 @@ static void delete_double_indirect_block(struct ext2_inode *inode)
- 		}
- 		debug("DIPB releasing %d\n", blknr);
- 	}
-+	ret = 0;
- fail:
- 	free(dib_start_addr);
- 	free(journal_buffer);
-+
-+	return ret;
- }
- 
--static void delete_triple_indirect_block(struct ext2_inode *inode)
-+static int delete_triple_indirect_block(struct ext2_inode *inode)
- {
- 	int i, j;
- 	short status;
- 	static int prev_bg_bmap_idx = -1;
- 	uint32_t blknr;
--	int remainder;
- 	int bg_idx;
--	uint32_t blk_per_grp = le32_to_cpu(ext4fs_root->sblock.blocks_per_group);
-+	int ret = -1;
- 	__le32 *tigp_buffer = NULL;
- 	void *tib_start_addr = NULL;
- 	__le32 *tip_buffer = NULL;
-@@ -303,7 +331,7 @@ static void delete_triple_indirect_block(struct ext2_inode *inode)
- 	char *journal_buffer = zalloc(fs->blksz);
- 	if (!journal_buffer) {
- 		printf("No memory\n");
--		return;
-+		return -ENOMEM;
- 	}
- 
- 	if (inode->b.blocks.triple_indir_block != 0) {
-@@ -331,12 +359,10 @@ static void delete_triple_indirect_block(struct ext2_inode *inode)
- 			for (j = 0; j < fs->blksz / sizeof(int); j++) {
- 				if (le32_to_cpu(*tip_buffer) == 0)
- 					break;
--				bg_idx = le32_to_cpu(*tip_buffer) / blk_per_grp;
--				if (fs->blksz == 1024) {
--					remainder = le32_to_cpu(*tip_buffer) % blk_per_grp;
--					if (!remainder)
--						bg_idx--;
--				}
-+				bg_idx = ext4fs_blk_to_group(fs,
-+							     le32_to_cpu(*tip_buffer));
-+				if (bg_idx < 0)
-+					goto fail;
- 
- 				ext4fs_reset_block_bmap(le32_to_cpu(*tip_buffer),
- 							fs->blk_bmaps[bg_idx],
-@@ -373,12 +399,9 @@ static void delete_triple_indirect_block(struct ext2_inode *inode)
- 			 * removing the grand parent blocks
- 			 * which is connected to inode
- 			 */
--			bg_idx = le32_to_cpu(*tigp_buffer) / blk_per_grp;
--			if (fs->blksz == 1024) {
--				remainder = le32_to_cpu(*tigp_buffer) % blk_per_grp;
--				if (!remainder)
--					bg_idx--;
--			}
-+			bg_idx = ext4fs_blk_to_group(fs, le32_to_cpu(*tigp_buffer));
-+			if (bg_idx < 0)
-+				goto fail;
- 			ext4fs_reset_block_bmap(le32_to_cpu(*tigp_buffer),
- 						fs->blk_bmaps[bg_idx], bg_idx);
- 
-@@ -408,12 +431,9 @@ static void delete_triple_indirect_block(struct ext2_inode *inode)
- 
- 		/* removing the grand parent triple indirect block */
- 		blknr = le32_to_cpu(inode->b.blocks.triple_indir_block);
--		bg_idx = blknr / blk_per_grp;
--		if (fs->blksz == 1024) {
--			remainder = blknr % blk_per_grp;
--			if (!remainder)
--				bg_idx--;
--		}
-+		bg_idx = ext4fs_blk_to_group(fs, blknr);
-+		if (bg_idx < 0)
-+			goto fail;
- 		ext4fs_reset_block_bmap(blknr, fs->blk_bmaps[bg_idx], bg_idx);
- 		/* get  block group descriptor table */
- 		bgd = ext4fs_get_group_descriptor(fs, bg_idx);
-@@ -433,10 +453,13 @@ static void delete_triple_indirect_block(struct ext2_inode *inode)
- 		}
- 		debug("tigp buffer itself releasing %d\n", blknr);
- 	}
-+	ret = 0;
- fail:
- 	free(tib_start_addr);
- 	free(tipb_start_addr);
- 	free(journal_buffer);
-+
-+	return ret;
- }
- 
- static int ext4fs_delete_file(int inodeno)
-@@ -444,7 +467,6 @@ static int ext4fs_delete_file(int inodeno)
- 	struct ext2_inode inode;
- 	short status;
- 	int i;
--	int remainder;
- 	long int blknr;
- 	int bg_idx;
- 	int ibmap_idx;
-@@ -456,7 +478,6 @@ static int ext4fs_delete_file(int inodeno)
- 	unsigned int inodes_per_block;
- 	uint32_t blkno;
- 	unsigned int blkoff;
--	uint32_t blk_per_grp = le32_to_cpu(ext4fs_root->sblock.blocks_per_group);
- 	uint32_t inode_per_grp = le32_to_cpu(ext4fs_root->sblock.inodes_per_group);
- 	struct ext2_inode *inode_buffer = NULL;
- 	struct ext2_block_group *bgd = NULL;
-@@ -489,9 +510,10 @@ static int ext4fs_delete_file(int inodeno)
- 				inode.b.blocks.dir_blocks;
- 		debug("del: dep=%d entries=%d\n", eh->eh_depth, eh->eh_entries);
- 	} else {
--		delete_single_indirect_block(&inode);
--		delete_double_indirect_block(&inode);
--		delete_triple_indirect_block(&inode);
-+		if (delete_single_indirect_block(&inode) ||
-+		    delete_double_indirect_block(&inode) ||
-+		    delete_triple_indirect_block(&inode))
-+			goto fail;
- 	}
- 
- 	/* release data blocks */
-@@ -501,12 +523,9 @@ static int ext4fs_delete_file(int inodeno)
- 			continue;
- 		if (blknr < 0)
- 			goto fail;
--		bg_idx = blknr / blk_per_grp;
--		if (fs->blksz == 1024) {
--			remainder = blknr % blk_per_grp;
--			if (!remainder)
--				bg_idx--;
--		}
-+		bg_idx = ext4fs_blk_to_group(fs, blknr);
-+		if (bg_idx < 0)
-+			goto fail;
- 		ext4fs_reset_block_bmap(blknr, fs->blk_bmaps[bg_idx],
- 					bg_idx);
- 		debug("EXT4 Block releasing %ld: %d\n", blknr, bg_idx);
+-	ibmap_idx = parent_inodeno / le32_to_cpu(ext4fs_root->sblock.inodes_per_group);
++	ibmap_idx = (parent_inodeno - 1) /
++		    le32_to_cpu(ext4fs_root->sblock.inodes_per_group);
+ 	parent_inodeno--;
+ 	bgd = ext4fs_get_group_descriptor(fs, ibmap_idx);
+ 	parent_itable_blkno = ext4fs_bg_get_inode_table_id(bgd, fs) +
