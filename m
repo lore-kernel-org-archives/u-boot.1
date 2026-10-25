@@ -1,142 +1,172 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26D69606A31A
-	for <u-boot@archiver.kernel.org>; Sun, 25 Oct 2026 14:15:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04C54606A31A
+	for <u-boot@archiver.kernel.org>; Sun, 25 Oct 2026 14:15:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=pgXElb89;
-	dkim=pass (2048-bit key, unprotected) header.d=disroot.org header.i=@disroot.org header.a=rsa-sha256 header.s=mail header.b=MCIICtmD
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DW1TDwIA;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=S53p2wtB
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E71A780D9D;
-	Sun, 25 Oct 2026 14:15:33 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C8CD940620;
+	Sun, 25 Oct 2026 14:15:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hGQd7qkLohAP; Sun, 25 Oct 2026 14:15:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A633B80D92
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792937732;
-	b=gVBvrFCNp7EfWdp1Mf266ANa/W6hWF3mbOyb64b0djgS5FrFhzm3tNvWJwlcyPlqpHl8
-	 IqPaLpWQ9CuUB4+ixxASZ8HH5o/hyE9ZpMktedqrGPAZgtLTA8nibfBGjdpIP87caVY0O
-	 XdPqKfPAucz7WDRL3JNQ1Tu0pMlG/4gVbw4d6/u91aPc0o5RB7HsXCqTtDXlo9rQERkU5
-	 MlgttyCyeBk/YP3Bk/bxVcGivCwmCnxQ8F0rwHWHaWsuNyrolIwP4SrXe8hmrweDf8zgC
-	 IMYvgZT9dgG29N/gOJ4w1PA2WSFcFjGkBC5kHFg/KwEQvLGNKUdaheYMmKGF9VJz0Pg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id G9oogz4cF7EA; Sun, 25 Oct 2026 14:15:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2A4AF40E34
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792937734;
+	b=MHVBzeT+8IHZZS60wT/mchAvqDAlXI71jPah9uBGmoeYB+2f032Kk3ds2L40ntdjc7wg
+	 4lYmn+MvRPcZsBPFzk0LgaQBSQIdYnoOTar/T03Q8fRFJIZzT4cX8iYDOnR65mYLBk9cm
+	 QerYRWmPhTaYBRz8CnGHBJFtBPcxLhOwVtubW0toaMT3ygZmIMAE8Lipv809nDH67kQyi
+	 CHzmc8RVubXZfwnpGHjG0xM9dj4537Ilys5+Tf1pOUzjvOCoSUptTIsGa8Kael5Wtr/1S
+	 Jrbx5y90khVtsb2cqxmynCc1xiKUtxKjPXzi2j8LqwmshllXNC8ymdWkZeNWmCrry4g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792937732;
+	c=relaxed/relaxed; t=1792937734;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
-	 Received:X-Virus-Scanned:Received:DKIM-Signature:Mime-Version:
-	 Content-Transfer-Encoding:Content-Type:Date:Message-Id:Cc:Subject:
-	 From:To:References:In-Reply-To:X-Mailman-Approved-At:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=pFusJMjswqVfKwHj1/GrBOtkCieq6q2rc1uzpvgdcJI=;
-	b=pn4FM0Nxwf1nN1KcXsFwpL1/q6c2tvq9deO3dxmVMoI6oCGw4BkJ1TQ2yuwnUeLklQ+/
-	 YQApLCSeq+nvcm0E7LyMGkpwrW15oH9iL0uzpyNTah60qYVu3MveJ76/vNSYHRPpMAtHO
-	 41Au6t6YKTt+SMMk5Kp2RcZV4Az6Orc0wg1V69XDFhNBVkzY6eBKD4zeYicig4IZP3lKz
-	 SAT0DwO9T7iIYuYH37O2rCh20YtYCjMd7ahPlt5AFxkuG1whp5g231Pw3hD2/Bn1tq+Ew
-	 aRjLFP08f8M1JdCFU9dFk5xu9W6cDaAs6m19M9yBRnvfpaOkxJv1ji10VOiiRQ2PBGg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=bG88ZnJQwapt9k1fFWYsKZCiYrHhFlkXT8DVl6EPuBM=;
+	b=NkBwQ1odHUkMAmD8cEKwLNWlZGq5V6qOzEF3AmBfZimDf5VPmRHqikHDe8g0B528xiXq
+	 m6TaKr8YqRm1iUHwoAlAXRDO4iSgLkuEt289o6VBYPpUK+/tszjqNSacgNqADgbnYaAP7
+	 IUYVA2DTPfd3JrCr4sNUiniKYxhBmM74WXsYUkwe9CvuU4y3QzWMkvG4DZhweuUm2nz+m
+	 /nmr/Dbw2g+1fRy3YQW5FyM92+rR63ikjEtxdyLVNJp5GHFFu3G0FoP+s7VptInTkv+pX
+	 lomuXesjfEq/r0JE9MuQivwixq5k22woByCjBmj9Uyi47Gbd77PvWucC2wdc+5N6r4A==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=S53p2wtB;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792937732;
-	bh=pFusJMjswqVfKwHj1/GrBOtkCieq6q2rc1uzpvgdcJI=;
-	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=pgXElb8960H/wnr36Z1DgFwTIXLNak7fhAVSKYD3hx6+NmFgbgzcDD8ObNBH/yAGe
-	 4YA2A7pnF4De7PnrkW8XQb9V2nKKxJyi+yvsuDChAPcfl0VsanB6ZLKpN9KGFjFg5r
-	 pA4Gv/ou3hkTJLCKhLULq5nULjMcNxadNNKKQadug4I2laGFE9jzINE29iwsPCA3Hz
-	 XiOqAqLSb0mzYG0aXty6cyW38tnpIx/e3bREeQN/B2Dk5HcuQRDET3kldL/4DJN6IX
-	 P4jWfcxU2HubzOUOCdDbzJ1wUqhr1Ja/K+Oe91he3N3qgdfZakRCQIrhKMr2EZ6Xjl
-	 /oFGWRiwCH/rQ==
+	d=lists.u-boot-project.org; s=default; t=1792937734;
+	bh=bG88ZnJQwapt9k1fFWYsKZCiYrHhFlkXT8DVl6EPuBM=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=DW1TDwIA9nPFmAfitsez8OVb5lo2JSwE68l1GeOCyJq8ATduFioxSVo8WjW3LPTbC
+	 HhpSinA5jV/pdRBI9ITj70l5F01fFmVUVpd0jB5mRYvUJQ9bu/BqhQbchbSh2mcSc3
+	 zD6vHkNOyylRfZTEBbhMGflB+5HnZ92pHijfB3+6hogbocqhNwE1a61e5Zk9ho5JrF
+	 TdaEk406IYxbo0zx0gHQkvdZgHWvY9TtO7+gFyzq/Dq25ggv1Q1R6Yk6lotTxPUEOV
+	 WlpGPvceql6PNtqHb2JKw4QbNHVShdek4MW7SOvGTOR7IRXKxwgWrwn4xlArzHv0Zj
+	 RBzQZOSO+e/Cw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A633B80D92;
-	Sun, 25 Oct 2026 14:15:32 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id D17BE380
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 04:55:25 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2A4AF40E34;
+	Sun, 25 Oct 2026 14:15:34 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0E1D52C7
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 10:26:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CEEEC6060D
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 04:55:25 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0B9834065B
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 10:26:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id e6mJO0BrzxZ7 for <u-boot@lists.u-boot-project.org>;
- Sun, 25 Oct 2026 04:55:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1CA6460607
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=178.21.23.139
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792904124;
- b=f4OluNhDRGPx7+sXybPBePkcW/8+VbRknvpaH1/pmXr+ZXrHUEfG5suDwhBqqz95m/Yr
- 22kXSvdECFu04rN/hORVVrqzAUH219/gfz0Ifv/PisLhbzr/2+rd6cD+RC8gQGsK0gAnK
- eqsAKhZPvfBVTVkmFJLeA4//6r4cqTHYWL1LHxQvz513/oxWuu83h8E/qexICXu5dwsOT
- 8ybOeXJdZp3z4IcI8h9p39HosfhV6bhJeI3qIuouL2+jyN5luw0X7bsMIFGDWrBQYTRMY
- Fe8WJOg1K7KTwXfr8Ay0mcfk+buZtHFghdkwfN1LNNnazhtFK+FGG/L/xeegoDCJWxA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Wpdf7--mB28g for <u-boot@lists.u-boot-project.org>;
+ Sun, 25 Oct 2026 10:26:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 4F8C34066A
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::1229"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792924004;
+ b=ZVnSy6cSnZzSMEPA0QCIcN1GtiCAXqIn1zIJgCs88N/MrO7TH4LTCSy51X19yKetpTJv
+ R8IwJasYSlB7Lg114DDlRlkzlbd4ZoN5PNadFZrhxkANoN6K1k+8EJ41MBnGiLIxhdKCp
+ 0PDqB7OyuOudM5Wi2Ptds3Mm9pwDIxR33gVbJLSIfwvrkUCGR39TghL89Sy6Kj25PLVNg
+ 1nQAeZMtw2DloiibH0+2twdRtaDxqI1EY1vt9KaJzZ6Chd59tyxk+W5UU1d3ZL7uHDIS0
+ Iu8GQeC1jiMvl0VgNkS6sUT7ynwnZJD31r71HAYtI5ImSJscms0poOlsfQ2vjKTTE2w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792904124;
- h=X-Greylist:Received-SPF:Received:X-Virus-Scanned:Received:
- DKIM-Signature:Mime-Version:Content-Transfer-Encoding:Content-Type:
- Date:Message-Id:Cc:Subject:From:To:References:In-Reply-To;
- bh=pFusJMjswqVfKwHj1/GrBOtkCieq6q2rc1uzpvgdcJI=;
- b=XKeyfBA5nNFen7aWLE07khjoG3RTlfTX9X4z9kwJkuvluVbfxJoJ/1h74GzN6KYH0vxX
- E25d2dJdjsSqbugdnEj8SwTaRAQecXZbTYcdscQE6bNp2c4OMaZ9W0otIVgG7Ug2EyqkG
- w/JvqD1wJqwOpFmCmo0n+KSjDBScAOTHyLENGFrppSp1kmb0w/X0Iz6axrjZjyvIkshdk
- TWZwXiz3iTFo7FO7LFPWcWFoQpOLFHXxm9c5Pwemv8Fe3WNO5/1XtQ3QU1LswWNkeTv+J
- zfNo9TtP45NcKVU6Dx2NduVK8I/ChPvhwAhoDnrAvCJHfWYulBBf/4XXr/v6EjYZjFg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=disroot.org;
- dkim=pass header.d=disroot.org header.i=@disroot.org header.a=rsa-sha256
- header.s=mail header.b=MCIICtmD; 
- arc=none smtp.remote-ip=178.21.23.139
-X-Greylist: delayed 509 seconds by postgrey-1.37 at util1.osuosl.org;
- Sun, 25 Oct 2026 04:55:23 UTC
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=disroot.org header.i=@disroot.org header.a=rsa-sha256
- header.s=mail header.b=MCIICtmD
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.21.23.139;
- helo=layka.disroot.org; envelope-from=kauschluss@disroot.org;
- receiver=<UNKNOWN> 
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1CA6460607
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 04:55:22 +0000 (UTC)
-Received: from mail01.layka.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 81E0780B35;
- Sun, 25 Oct 2026 05:46:50 +0100 (CET)
-X-Virus-Scanned: SPAM Filter at disroot.org
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Jl2QZ9qt_pMY; Sun, 25 Oct 2026 05:46:49 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1792903609; bh=RqWdCkcf6PsMhDwnEKNQrGF9kdkzJH8ICGvWUgrdGCY=;
- h=Date:Cc:Subject:From:To:References:In-Reply-To;
- b=MCIICtmDnSKRaYcZNWilOsXCGn13cGL+TK/ffijRXjjK3fZI+ENN1fhk3xlA0YrJZ
- 1MBptYXxfqAkDAwI2fcuWbBQtj0mUyoxCN9Gl6LLwffvvPJPuqL/aQCHPQXwAToyPy
- 4MaddI9IXNIis1IvC2LJf3QPPsA/htjkjSUtugqx+Xq9x4dE8uKJCK/+6wV5h1mkVz
- CZY2Fvl/m8+hBtSsFHKM9fbVjKg8d7SBW/UNLFr9W02vhFe+WsTv3Dugs8xRIkNE/N
- N3ZEHIRp1ZB1i3sF9svi3HBu7VOH+Q9VbS2NXvSo1OTIKeIaAqUPaO9E/qJQA5WyhX
- iAwf9kP/3W7WA==
+ c=relaxed/relaxed; t=1792924004;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
+ Content-Transfer-Encoding;
+ bh=bG88ZnJQwapt9k1fFWYsKZCiYrHhFlkXT8DVl6EPuBM=;
+ b=AlayQpsiuTWOUy+nw6swcpqRwyOaKvIJl4nNa/Kf+qUxydfuCjhXivvL/9TNP/6LIHyu
+ 9A3wp/WqeQqfK5K+I2Lu86H8/J+KKXlkvVZ2MPH4xp1AcFOl1vhQLMeQG8WE7Ozaf9brD
+ ggsisYZqwW8eJXCw4tKwpie4/huO9jvoJ+y217bL9x4cEXd88x74lIy8tz/at+5VWkORg
+ fN99JDYCtylXNY0homGiI8nwFk0uuBaP7rGotnlk8nbTG8bQOVTeQBYQZcYAwTbPpV2xa
+ kuIf1IAv8k5zI0xDxctac/qtP7YX+ArsOog60BEpsbMQSsVuctK2XXQNmhECumFC8Zg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=gmail.com;
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=S53p2wtB; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::1229"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::1229; helo=mail-dl1-x1229.google.com;
+ envelope-from=vikrantyadav4802@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=S53p2wtB
+Received: from mail-dl1-x1229.google.com (mail-dl1-x1229.google.com
+ [IPv6:2607:f8b0:4864:20::1229])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 4F8C34066A
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 10:26:43 +0000 (UTC)
+Received: by mail-dl1-x1229.google.com with SMTP id
+ a92af1059eb24-16079d54c17so1382664c88.0
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 03:26:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1792924003; x=1793528803;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=bG88ZnJQwapt9k1fFWYsKZCiYrHhFlkXT8DVl6EPuBM=;
+ b=S53p2wtBOm7d1Y+47vjgyeC8gmh5b+vLM66DiSoIq8GMAbC45AXXwbo+F/C+trfJ3h
+ IJ3vyfPW0KT99DCXSQCbwCNvzDs+fSLONQ7tFvn0nDFmOR2p36L5TqcpvpwZJMhKPVy8
+ Btzq8T6gf2UlbDwKiuSTkznwK9FAA6fIqrmjGNOyArLVMsIrcjNHpQr8b10LaBm5arN0
+ G5h0LT7yxiQ3N4WegcDpx/TAfv2ZC0anVdP0WUUJ7SmZEEDGr7pdHop7hTlM4dtRKcW9
+ ifH8WwQ7cEXIQgYVFHzHcOKEAlFWlj6BLFgLLJrSPjPGuCoB79gAAt/aOyljKAcSuuvF
+ be3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1792924003; x=1793528803;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=bG88ZnJQwapt9k1fFWYsKZCiYrHhFlkXT8DVl6EPuBM=;
+ b=lnN/TRpHVnSpXbMLiimfHKb6BDP726br9RDP3tQpbOpG3w6HRrOrVCxYsgWRuw4CCe
+ zhVcJGvs3OVKrMiHHSKzzhE/BoWxY/nxVhTj+U2C+mxqD0Ik7J9CNxIvpBc8a6rR+cGy
+ Vvpo9NyrRHMLPEFAMATm2DxjzQNe9Hj1jAw4+KDDghVwqXpX2RzUiYdp5f6aJvhqw27Z
+ H7xV3OcigsEvhUcJVp90z+152d/1h99k2i8861hJUnuaSkKNOM7/CH9EBPBwQyJ/xUcL
+ 7dyWaQsuT72rII7s1eCKCrHXxMKaoIn96tv6DnQPc0EIw/Kkr6hgUVl117P53EYznNRU
+ oV7Q==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBw0H/lwnI+/+HhbMQsH5AacyhCFe3oMjFtbXDqZoW1aeM2zLXGh0sBkIEl3wMlY4nYgPkj6NgI=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYLQyy17grFlf1CMZAdmkrfVjAkZWy/WSRAT5C4Gtt/vKgUXjY5w
+ vMCaIuwSBru4ySkXkpMVkmhvsNqY7ExtWZLGwUXHqR6aXGnjhz9AVz9H
+X-Gm-Gg: AYBFou3AZO5W31eEzINwg9lQpSoIvtxw6ejNieIJVEPS14RQNJL1Bg1M8SBF02x7jZA
+ RcakR1bJ8dByCaWr4sEYhj043/VYv54aXsu8V3BQeX45550WfAAIjWBUwQ1UkItv9No675fVGNh
+ HWYJzMSpUrdiY0TMJgt3Njuf2j3BFetu4SnQFDcZTs2lIR0Od9SBmdTtsxzhrGEG2WrEzA4z43v
+ 1I+qD4jnJxBiyuNzzrJOmQ53nTJJ65NVK5KOEFb+pqmM+BbbZgzZyrtOReTPLdMv1sMlWFuz0xi
+ ECQleniV5SWExEQ8LUHT4JfdMC029rm+7cyAfGPfqaWYK9KuSSNiF9S7+sVjkQTbMh/LaScuH9J
+ 1JiUpfGTK4vU5nIHpvtS1CaXvuLwrGGyx8rhr5QIhQJb7n8oMQB+UXm2SXR4qC361LtLs5WFke9
+ MHlAW8UwYT0qv+jGXYMSBZMqZZDz+y7vA7//uQSvTJwPqLXph103eHEJ7kUmGRbY+9SZu6eUsnV
+ +WJ8pdccjmnSv7xF/zwVx13hwFStMzDTzE6bl/PS6IZTh+QZwTSLi2NDRVgQVbFC7wdeQkwQ4ss
+ dAx0
+X-Received: by 2002:a05:7022:b883:b0:166:af48:a2ba with SMTP id
+ a92af1059eb24-1991b9e5d21mr5442911c88.0.1792924002629; 
+ Sun, 25 Oct 2026 03:26:42 -0700 (PDT)
+Received: from localhost.localdomain ([110.235.239.152])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-198a0f83cedsm18923825c88.13.2026.10.25.03.26.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 25 Oct 2026 03:26:42 -0700 (PDT)
+From: Vikrant Yadav <vikrantyadav4802@gmail.com>
+To: Christian Marangi <ansuelsmth@gmail.com>,
+	Tom Rini <trini@konsulko.com>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ u-boot@lists.u-boot-project.org, Vikrant Yadav <vikrantyadav4802@gmail.com>
+Subject: [PATCH 0/2] pinctrl: airoha: fix pinconf_get and pinmux_set
+Date: Sun, 25 Oct 2026 15:56:32 +0530
+Message-Id: <20261025102634.53851-1-vikrantyadav4802@gmail.com>
+X-Mailer: git-send-email 2.34.1
 X-Archived-By: <archiver.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Sun, 25 Oct 2026 10:16:43 +0530
-Message-Id: <DMDNA8TB98G2.1PF8QD3X90SVI@disroot.org>
-Cc: "Marek Vasut" <marek.vasut+renesas@mailbox.org>, "Ilias Apalodimas"
- <ilias.apalodimas@linaro.org>, "Alexey Klimov" <alexey.klimov@linaro.org>,
- "Heinrich Schuchardt" <xypron.glpk@gmx.de>, "Kaustabh Chakraborty"
- <kauschluss@disroot.org>, "Minkyu Kang" <mk7.kang@samsung.com>,
- <u-boot@lists.u-boot-project.org>
-Subject: Re: [PATCH] lmb: Enable LMB_LIMIT_DMA_BELOW_RAM_TOP for ARCH_EXYNOS9
-From: "Kaustabh Chakraborty" <kauschluss@disroot.org>
-To: "Sam Protsenko" <semen.protsenko@linaro.org>, "Tom Rini"
- <trini@konsulko.com>
-References: <20261018043128.26916-1-semen.protsenko@linaro.org>
-In-Reply-To: <20261018043128.26916-1-semen.protsenko@linaro.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 25 Oct 2026 14:15:31 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -148,119 +178,36 @@ List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 2026-10-17 23:31 -05:00, Sam Protsenko wrote:
-> Since commit a3075db94d49 ("lmb: Reinstate access to memory above
-> ram_top") secondary CPUs cannot be brought online on the E850-96 board
-> in the Linux kernel:
->
->     smp: Bringing up secondary CPUs ...
->     CPU1: failed to come online
->     CPU1: failed in unknown state : 0x0
->     CPU2: failed to come online
->     CPU2: failed in unknown state : 0x0
->     ...
->
-> This is happening because EL3_MON (the Secure Monitor firmware, which
-> also implements PSCI) cannot handle 36-bit addresses in its CPU_ON PSCI
-> function implementation. The E850-96 board has two 2 GiB RAM banks: the
-> first one is mapped at 0x8000_0000, and the second one at 0x8_8000_0000.
-> The commit mentioned above changed the LMB behavior (in U-Boot) in a way
-> that the memory from the second RAM bank (which is mapped at 36-bit
-> addresses) is not reserved anymore. The change in 'bdinfo' output:
->
->     - reserved[4]    [0x8_8000_0000 - 0x8_ffff_ffff], 0x8000_0000 bytes
->     + reserved[3]    [0x8_ffff_3000 - 0x8_ffff_ffff], 0xd000 bytes
->
-> That in turn leads to the Linux kernel image being placed in the second
-> RAM bank with 36-bit addresses. The corresponding change in /proc/iomem:
->
->     -   f480_0000 -   f67e_ffff : Kernel code
->     + 8_fa80_0000 - 8_fc7e_ffff : Kernel code
->     -   f6b6_0000 -   f71a_ffff : Kernel data
->     + 8_fcb6_0000 - 8_fd1a_ffff : Kernel data
->
-> As evident from the Exynos850 device tree, it uses "psci" as a CPU
-> enable method. That means the kernel relies on PSCI firmware (which is
-> implemented as a part of EL3_MON firmware in case of Exynos850 SoC) to
-> bring up secondary CPU cores. So when bringing up secondary CPUs the
-> kernel makes an SMC call (for each secondary CPU) to execute CPU_ON PSCI
-> function (see PSCI spec [1]). The kernel passes an "entry point address"
-> to that SMC call, which is the address of the secondary_entry() function
-> in the kernel, which should be executed when PSCI returns to the kernel
-> from the SMC call:
->
->     static int cpu_psci_cpu_boot(unsigned int cpu)
->     {
->         phys_addr_t pa_secondary_entry =3D __pa_symbol(secondary_entry);
->         int err =3D psci_ops.cpu_on(cpu_logical_map(cpu),
->                                   pa_secondary_entry);
->         ...
->
-> The pa_secondary_entry is a 64-bit variable, which is perfectly fine
-> according to the PSCI spec. Unfortunately, in case when that address is
-> actually bigger than 32-bit value, the EL3_MON firmware doesn't execute
-> the function at that address -- that's the reason the secondary CPUs
-> don't come up. And as discussed above, the kernel image is now located
-> at a 36-bit address, which means the secondary_entry() function is at a
-> 36-bit address too:
->
->     - secondary_entry() address:   f67d_f5a8  // 32-bit address
->     + secondary_entry() address: 8_fc7d_f5a8  // 36-bit address
->
-> It seems like a bug in the EL3_MON firmware, e.g. it might truncate the
-> address to 32-bit by using a u32 variable (instead of u64) to store it
-> internally. So the right way to fix this issue would be to fix the
-> EL3_MON, but unfortunately it's closed source. So instead just enable
-> LMB_LIMIT_DMA_BELOW_RAM_TOP for ARCH_EXYNOS9 to limit the available
-> memory to the 32-bit boundary.
->
-> Although this platform could benefit from having all memory available in
-> U-Boot (e.g. for transferring big images over TFTP), and it looks like
-> there are no hardware limitations on this platform too (DMA has 36-bit
-> support, etc.), limiting the available memory in U-Boot is still the
-> easiest way to workaround the EL3_MON problem, and 2 GiB is enough for
-> all use cases in U-Boot currently. And of course all 4 GiB of RAM is
-> available to use in Linux in any case, so it's not a bad tradeoff, and
-> in fact it just brings back the previous behavior (before the "Reinstate
-> access ..." patch).
->
-> Enabling LMB_LIMIT_DMA_BELOW_RAM_TOP for the whole ARCH_EXYNOS9 family
-> also seems justified, as it's likely that all modern ARM64 Exynos chips
-> may share similar EL3_MON software, and thus possibly the same PSCI bug.
-> For example, a similar issue was mentioned in exynos-mobile related
-> patch [2], stating that after "Reinstate access ..." patch only CPU0 is
-> able to come online on some variants of the Samsung Galaxy J6 (based on
-> Exynos7870 SoC).
->
-> This was tested on the E850-96 board:
->
->   1. Using 'bootefi' to boot the Linux kernel image
->      - before this patch: the issue is reproducible
->      - with this patch applied: the issue is not reproducible
->   2. Using 'booti' to boot the Linux kernel image from 0x8_8000_0000
->      - before this patch: the issue is reproducible
->      - with this patch applied: the image can't be loaded there anymore
->        ("Reading file would overwrite reserved memory"), as the second
->        RAM bank is reserved in LMB again
->   3. Using 'booti' to boot the Linux kernel image from 0x8000_0000
->      - the issue is not reproducible
->
-> [1] https://support.arm.com/documentation/den0022/fb/
-> [2] https://lore.kernel.org/u-boot/20260614-j6lte-lmb-v2-1-6046b54db536@d=
-isroot.org/
->
-> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+Two independent fixes for the Airoha pinctrl common code:
 
-Acked-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+1/2 airoha_pinconf_get() always failed when reading back a pull-up or
+    pull-down.
+2/2 airoha_pinmux_set() matched pin names against group names. It now
+    resolves the pin to a single-pin group of the requested function.
 
-This is also an issue in Exynos 7870 platforms, so ARCH_EXYNOS7 also
-needs to be added.
+Patch 2 changes what "pins =" accepts when combined with "function":
+multi-pin groups must now be selected with "groups =". The binding
+only documents "function" + "groups" for mux nodes, and no in-tree DT
+uses "function" at all: the Airoha DTs only have pinconf nodes
+(e.g. drive-open-drain on pcie_reset0/1), which do not go through
+pinmux_set().
 
-I did send a patch to fix this using some hacks, but this seems to be
-the correct approach as various other platforms have also opted for it.
+Both patches are compile-tested only, with an7581_evb_defconfig.
+
+Vikrant Yadav (2):
+  pinctrl: airoha: fix bias readback in airoha_pinconf_get()
+  pinctrl: airoha: fix pin lookup in airoha_pinmux_set()
+
+ drivers/pinctrl/airoha/pinctrl-airoha.c | 46 +++++++++++++++++++------
+ 1 file changed, 36 insertions(+), 10 deletions(-)
+
+-- 
+2.34.1
+
