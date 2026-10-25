@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D442A606A31B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEECC606A31A
 	for <u-boot@archiver.kernel.org>; Sun, 25 Oct 2026 19:31:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=F4Bjxamw;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=K0A+CmYn
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=rvFXhrPZ;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=L3B5mY0x
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 948D4405F8;
-	Sun, 25 Oct 2026 19:31:16 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8CDB880966;
+	Sun, 25 Oct 2026 19:31:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ArQt_pSBiJBX; Sun, 25 Oct 2026 19:31:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BB1D3405F3
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792956675;
-	b=Kc4IU3WyIuL2S6XHZGUitMrb0tNBuTle9pYr+o95yNuO8V04iC0lFjIb5+hn6hpLVn7E
-	 vG1aB3vfLkzkCEZMPWmNoprbmLElJhW+dxlh8qjhxUJZ78zrpvX95SERl95dPR3EmnwKy
-	 q5FhOhCxZDurD9+XaKA9g42t8wbVi4wCRcyKkl8FrnCtL3I0EOea5oDWHP287EcA2zW42
-	 18yr7/PAtKOM9P12JyJYLLL3Lt//EQ9Z/HtGaBvujBbEZUfay6xIubrQ/tpKYOArncnrn
-	 cSmIsT/fbXwXAT4OgFQp95u2QDQRykLGa7PidVd4zwOP6+KD5p8O6qk2exvYeelwzug==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5-M14T7K2ibu; Sun, 25 Oct 2026 19:31:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 253C08091C
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792956673;
+	b=aafvGbnzBNuTe+325sOYZe1rPSNcr8siiuA7oz7z1WO6yvqCSeRNOZteCck83oNhKy3A
+	 qvfaMfKtvbE6M6pSfOGsK18xEqdf8spAF7ertZ1etjf2eYfI1n3aGnJggTNTHdB4XPW+b
+	 Wj9KJ6hVhMumjgooLxGsYfhwgYeLELBZNwwKqPWQFFiQeFG4wnQR/d8zWH71ekXhsSfWf
+	 rtDfTBnRNfnAyz+uKxaFJrkqEm6e7z359hyvjHd/Fgr7KuYuR2AHlQ4out8IlkjHgMyhl
+	 jPC6YS5vTMVYAkMWtMKiKWODOobf1B2qodm0VWvMIo+V5Sx2I7G0PXcBbeYdwedChvA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792956675;
+	c=relaxed/relaxed; t=1792956673;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,138 +33,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=BlPdOqiySV5iWz33mCkcntVYGT9M5C8zZpAFp+k2pRI=;
-	b=BQjcXjIZrkvW6cIYh9NY+gGFaCXiPwSybDdXcDOH89nb51wfNSbGGvP60VlJaHRSv5GA
-	 FJetSAAhUEMNwSKtsj8Y3soTqmrLQZW2LO/NDd7QjvOETBmj6wAqph9q3KSJn83A0O4jH
-	 aOC4cicXbKeLd7uHV2Mw9zuwXge8oBSKNcQ2x22k2BqJt4ks1gkK2aaFQdBF7X01rZV6d
-	 7pdomEw9WaJABSS44hpeaQ/dMaSgF8XM9zLiZy+BHrcgG60qEoZ6RDoLyLLuSV4Qdu82u
-	 ax/j5MwGc2xI8WhKN0kShOAWkbH1kzkbFcGFVNeMXJVizHDvBhMr96RHffqvI66EN/A==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=JmzDmvfy1eOEB5+VQliFtJHBdkeeUPN+DyKS6s91F+M=;
+	b=ojo2sN/13G+L9Bfmq4nqJL1Nfyx1vC7OdU+k50R3AiREIGvD5MAFCvX0+eBoO0LAM76s
+	 nzOcbpFQMMDaYkbMEOPZA8dQCrEKdzdBEPqfs/Cr+6D3ThY/EPoc6AzmbK/kroEitrZiY
+	 xmlyJKx5NGQdbHxu3i8LA/V26DKpO9fVTQkGS3NlNyuQxe1KYr6lW5a3FIrLB1+W1hB9i
+	 b4vAvJHgF/S2dP6xK9tcjZzSxPdXCGAocYJL8VskpAm6Ef2pk4I2hYN4A7dM2N14gBJEI
+	 pUvKVbm9aGOvovSUkP0co5BW0NliF0Tu7t5VLxDM4JtvrHMs7+hsasZYRia2GHS9x0w==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792956675;
-	bh=BlPdOqiySV5iWz33mCkcntVYGT9M5C8zZpAFp+k2pRI=;
+	d=lists.u-boot-project.org; s=default; t=1792956673;
+	bh=JmzDmvfy1eOEB5+VQliFtJHBdkeeUPN+DyKS6s91F+M=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=F4BjxamwzX9zlKCwsy2DsdZLuKMOVxZV5m34Et5k4Z2VaeC/Fi0t0JErpKEKODk8a
-	 xx/hQ9W8SHVXx5hkp6x2UxIFxsS3Pl+YUW/4o2KuPrORdlP0aSn8Z9mdu9KzvjF1XL
-	 /TZfIxX8Aaq1zhiLuOL1trBPENraAeBn47OZT2buvhcRkM0z0ojh4Cbk+l1RvBC6Hs
-	 bU3/mcsICV6RIh0vlR4TfoW7xOjMbkfhJ2pWDDtWRxLPXJXkIUtFAAAxZfyyRrW7lf
-	 FEM+cc13kRNYckrJ8l9llSNZkOYjjLYw7DgR3RxKXQHCkkXT1KwBrYe4J+5IZb62mz
-	 7hZi9vTjuSAoQ==
+	b=rvFXhrPZxXhrv8IG7BYsjcLRtX7Iq7XSoFsk5q10J4hyirqLLQEXlis4pBNcWuEXg
+	 0leb6KuoPxkRsVao+5tAG8UJIwTWYsMzkT4k5oJqqhKIqCNdMQBwvDzpRHfqA3C8iN
+	 XSn6vsE4gZ8RTiEFpXOoxOsNz7ah7QiXfV0ddhcvbGEvqhhkVkcO2NJyVKheDgjb08
+	 VbtloG34+K+i1DEnQXzmUqTUKsfMiASLo/SbVPjScO6w8WkktOWSFFHgurB1oGuqJ5
+	 gExRPGNuAeinEeCPZ+gh5WWLhzUqTL6nFjbKLxTmoHdH2AvqYTWIYMlEV7ljlCA3m8
+	 b+QX9XS7DtJkw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BB1D3405F3;
-	Sun, 25 Oct 2026 19:31:15 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 1838579F
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 19:31:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 253C08091C;
+	Sun, 25 Oct 2026 19:31:13 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 895F23D9
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 19:31:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 0A29460601
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 19:31:11 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 865B64009C
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 19:31:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qeqVvvqdT6yq for <u-boot@lists.u-boot-project.org>;
- Sun, 25 Oct 2026 19:31:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 10D4F60600
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::330"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792956670;
- b=jQT+T9Pbv6L0AzfFOrQAspPQU+/EYvz/pV7bVhkX60Fw+NJ9YnD+pyBIFFTIe0VOE5ty
- YDWjnyKPHTykWTmH1r0dqkaVQPVusg+OyIriQdd7f4by/idiMPgL9qFXDfyfdZzqUbzb6
- eTGXkNxmZbwJWHge/KLxnhhIe/dmKkLewWLEpOB9nY4o3as0dONpEjPj6+DSqtgSvQva5
- yGd7MRXUSKfkh4OfzI+odGMCE8Cm1iV+yHYNLF5qmQXKU/Kfm8zqIbT+4vShc05+hhc+7
- 5JlGHi5qrRmYFeUwNTrZsQ4KQtiideHipn/Fzywf0CyDAJV7ElnpFatHvAw4tevJ1lQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xy1pYCUprBtF for <u-boot@lists.u-boot-project.org>;
+ Sun, 25 Oct 2026 19:31:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 514504008E
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::332"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792956669;
+ b=Rd4yG05MiewVmynhsIf6hNGFFlPLfKfNm9jrajYP3wD6rBtrpgw/MR0X85Eb0wYc16qv
+ pOzWUZ8axAX/r/+ez+eTh+kFYYz8XGIxs5vHIECQJbMXkqaDHPVXRgTy5cL67RvDRWmxt
+ tWmOQ4/ovjQHgdFwUWnReJFHmfYxYb/+2ue3ZQ7KFYNqn4HOaVeu0Sl58Cjw+/9e153aw
+ acH/fNTutDmyCz5946W3qy6j7uc+/wZF8JTVutNGlkWppvLqE4MVNhVguHJyfDHo5GKs4
+ Tf7fRLfY/DviqB/DGGu46I5FsGsvriWdD9QYjQ4Hk+79ENJcy5W2j7LYRDVyK0q4nug==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792956670;
+ c=relaxed/relaxed; t=1792956669;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Sender:From:Date:Subject:MIME-Version:Content-Type:
  Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
  X-Mailer;
- bh=BlPdOqiySV5iWz33mCkcntVYGT9M5C8zZpAFp+k2pRI=;
- b=BjsHqdPevKx5TqvM1YMZqANhycWXlTYI48r7H+rIrsQSdCA4LWnFSnI2Yl/AMvJ2223c
- aitvjj2St5H7R6AflbUSXoJ1ABYqjZ7rn6Ke1yJxu7d0BwNCq6t2FWuBmQ6LnzeBu1/dC
- J2SwuymWNq4zzf/Rnme8fv6C6o7U3OBs9iSKyZCaE3xsNOIiyl4ucpqdFa0cz2rQLITLJ
- U4QYctaqOQT58LDa804QPVNt6hCry9emCpb/2RtkosXdSldXrOAEO+oNYgiLP5UIi9Gyb
- RABWtHhDCHWxgktx6x0SPRags2sCcnA/7Ei0hZ6W1NRc6qQuJuK/J58lmtUdOGlxYjQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=JmzDmvfy1eOEB5+VQliFtJHBdkeeUPN+DyKS6s91F+M=;
+ b=EpX5/1Cw7bN11ZshVsN2OAfNpNHW8T9S6ItO5jyMKPsRv+T6vKyy6ff/i7rinFCvfQpV
+ nN1LyRWCrPS+3EBP89JvgVr9jTzWOKC4RBhy7oJTLN9LFmxEesuuMFTjjEAytmBsykP+0
+ 772zK3ex6p3cXs/ZgCMgQnOB23AuCIg0f0rktR1IP+vfKrNka5CWFyDySOnBd/+AftRfx
+ mDdkTDx7qh7lHY6xtN0dUrmh14gs1TVQODEqIcUlhyfCMT1+M/NAYTmN+nTVRsKQGeylF
+ vLSBlZK2QTiwSVXMrwPTq5jS1pV0MIft0OM2YIwmOVI3H7jzGl1B3st5ZcgTnJ4KEHg==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=K0A+CmYn; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::330"
+ header.s=20251104 header.b=L3B5mY0x; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::332"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
+ client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
  envelope-from=massimo.pegorer+oss@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=K0A+CmYn
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 10D4F60600
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=L3B5mY0x
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 514504008E
  for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 19:31:09 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4a2153c8525so13611125e9.3
- for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 12:31:09 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4a20bdaf39cso24228305e9.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 25 Oct 2026 12:31:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1792956668; x=1793561468;
+ d=gmail.com; s=20251104; t=1792956667; x=1793561467;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:sender:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=BlPdOqiySV5iWz33mCkcntVYGT9M5C8zZpAFp+k2pRI=;
- b=K0A+CmYnn6jy7/Y7GMwSx2dOD2VBMBzeJ6MabSQqq9bqUd4aRMDF0x28cRaj2iwTfU
- QJKSg8lSYo7ZrTB0hxxjh+KXlO7t4NK2NpoO7cFh/xnuf0fE1UJJYCQFdz6XvB54FqJ+
- cHCobQ088WpHwSV71EMuApl/4MCPLFYJIzmWHooFEv4bNBPG4n6SBs0QtNb/hgXjRt7c
- LaOxuesjkHzqrw3t1IN+yQzhNZdCQ7LlZCAh8AlH8EODdPccFsnswu49fajJNjZdjuhl
- 1hN978YlifVicGqNi/hoaIqFvVOI3cg2S3PCBMBzca2ONZlX/i9u5Pho85zR/OCYJtS3
- 6f1Q==
+ bh=JmzDmvfy1eOEB5+VQliFtJHBdkeeUPN+DyKS6s91F+M=;
+ b=L3B5mY0xxZ2+L29iJ1jHjb3JV3gIXuby8xypF2p1SgDTnfOGAP7N1eHlDWLZohHV13
+ dfcxuYwDePWKnnUGKoG7D/7F0pqM1hrlOZsz4R1DxNsAmM9TTEoVMkvP3qIMq/gIUCMU
+ aMclVShbpYT0f7N17c7Q0UYHN+n8tZ488Kv6CuMC6dldIRWD5P+q2WiQQzc5VO6dGyer
+ x4EkmK+5VslWKjDd3jKQyEiTHYPeJyvRdFgumElMS9k3m8MJaA6FY1EaUpy55YlldocT
+ aLoP42SbIpoIVSHgkp/nJEV+DSh2JNCz1W+wPFqHyH+9ZOyn+ojyGC4tapKbXPDcogXu
+ /BcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1792956668; x=1793561468;
+ d=1e100.net; s=20260707; t=1792956667; x=1793561467;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:sender:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=BlPdOqiySV5iWz33mCkcntVYGT9M5C8zZpAFp+k2pRI=;
- b=Quk10QWPamtEJta1Mj0WIfCJLy6ZrbZaS4nwCl0Mctx5Tf4QBJggDieqCLdQjpn78Z
- 6eIUSzwEFX3GDqYgtP+zifE4CXQQnyiSUxBkmD7WAIu5jBq24q+56Oio2UtI0L7ovtZu
- +3r7nJDg+JL8ugwGb9OAXXfXAU4uKX4+h1jp9K7doSSBjgU20mj2zukUardHBGWb5lNz
- sDBeewaLWzSzELPC7dvncCQJ/pIW9oh5OF+eY8Ww/xAMARUEGM9dUDnEhSJ7Y7CMRKQ1
- b8ZTEbb3DftXsAOAOAnLs3PmLOcEw2gNAfWjMssw9dNamfN+R4Y8t5vBr1Ts0PEaP591
- cfpw==
+ bh=JmzDmvfy1eOEB5+VQliFtJHBdkeeUPN+DyKS6s91F+M=;
+ b=GB7ViF64azeH/izYX0Sm9U+Qt04kClB0WLj/PBWk4fGwJQm9FniNoTYh0IqHzBHrQ3
+ 97jrDzTYF3xS479sqMpyQd2FgHpkfbZPe0JMyMPi3KURY1XPK7yrvDEWKX0st84fi4JE
+ aMANsEaZMUPgupwW2Bd88jIGvGJHsmVAkgBESHZqm3+BoC9pDCi7d+mF0Fx9k9JK8iSl
+ SwSwNxgI0rUV9NrlH0dJfxWiKhBxsROP+zRnvghi9Dzl55i14HAEZh1bLrRp2a6kC6xW
+ 3Mr2BxvMBuc6I5F2mn8lL8BpR5kRvx2Pkh2Zh4/YGaJaUjU8FE5/jWG+OxmZ98YMQ1Fc
+ ad8A==
 X-Forwarded-Encrypted: i=1;
- AKwUvBztDFoo0mY9t0vkhE5xrdIXSalqtMLrF7fkwKHRpW0zhwv19b5jO5PFg5wmA+AA39SLXtuOiaw=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJoCTDspyvQNRk5NDPMP+xa2I530IU3LX1S+e3px7tRH9vUxAJ5
- D7pchsrWT7TyaTv4zKAmFV+HXn4i0HWk8yOKAmRF5Nu9JaXNGGFPWiR10wMSUw==
-X-Gm-Gg: AYBFou1I4dXSVsrPfRqhtYd3rKAm/0Lp76nB1ul2SRVn2bH1i7YqJ27H/jbzfudy5q5
- 9+X/QWhu29X1ylU9HOhockLOM5It2CBFPRM42AFakrTSD5ZNqBMTisheWFCdBN+1zHPNlE9azMg
- O6xtVtvl/x2c7IKkzDB/XlvinZ52SZzPSxW3+sOIfDNmZfJwRkYdRKTvZqn3vcEVaACzTthJS+Q
- sZIDn3lDgD/i1RYEeJt6mp7pcO0LdR0L0/STToUD0lvEDEW0CvgYojS++MGtL+X5CpvXBshxqm0
- 102im+lCifGANx3ZDmygyiy7wuTkOVks+qfa2EJbnM9nrk+L/amgbv8PYFfli7AFxRkh6EZbORt
- mwDSOnM2nukc0kENnzPgIUkluK8jTh3QTDL8shI6lLt3fqBReti+0QzXewUfw8BDgRBPKt6sm25
- yLpmHIjwQEibUqEzCZCJE1gnoVKtTykNQjlDovF37Bj+W7kPVN0UYOwHeS29un242GQgGZS9DdJ
- /Oxvcw5fmgNPsivzvUE6BgH3zWanpqriR16YLfjykm5o9tboYDJJejk1v2iSis0gkQ=
-X-Received: by 2002:a05:600c:c09a:b0:4a4:3a2d:15da with SMTP id
- 5b1f17b1804b1-4a43a2d1805mr51966455e9.15.1792956667675; 
- Sun, 25 Oct 2026 12:31:07 -0700 (PDT)
+ AKwUvBxjmDPGPVIwm0r5GOFF2e1TQ97SO4cKfBUTv3APV1U51MgRgMWpoYekALMuRzRxBrf4eY1IUno=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYK6CWBpjYYzK+IwgbjclwR0ZNvRAEaOqjzsOm+4nfd5uBmLt5ch
+ BCz7V5e8Un5uh4sXtRvAPFpD5ydgkCFK5anr8t3Kv74WrU2tbCMLRrNGQxtmyA==
+X-Gm-Gg: AYBFou0lcAgYCYUwSfaTw4ys5LvheqTNZCp2jkeOQSqZ2jBnw+Us5qwplrshzZGmg8o
+ pWZhC/APUZsbdkwgH8N2CdKE14lY3mFJCzC1FrbDF42KS0u5RCMdNJ1vGh7Vnu8ntBCCAhceLdp
+ q5ZQiOw14/XalU+P2Snd5mMdzj3li8fAtU5rjU9R1eOHQgrWI01zNBhU9lb4TKplDWgtsOJUfwB
+ SQ6y5+aKP9eDf2IG+eU+TRNPLjkseIZxjqrCqAy1u4yDy71JjkqUyXk+Hs3KoomaPIbxyNdmn8b
+ CfH/kXZ9N8YQpjo4xEF/u5bo66KweuDlw3f38GMe3Kyue9VKi6ZkAj2TIlKor8I/tKvhVhloVQW
+ qQgwwWCcIWwKYmHoOHtC5EdKcfYNL0yoJv5zBX2I/lhlmJiag5wdjESRrkS3d7nYYPxjQsdAnzl
+ sP80cOCkRaZtA17j0vQY7JT0Vl36jUn1+C8riqOcTklRPWSYfZoKa8j/Hh4qeL97YCs3cCZjas/
+ 3rcYOYczZgO+6ZwbobLQ9pvrdDHOn6IQAAjvjHQqT4PpGcWTMCaXTk3xH1DMPtWsFc=
+X-Received: by 2002:a05:600c:3b93:b0:4a2:397:73fd with SMTP id
+ 5b1f17b1804b1-4a35ac96004mr96483095e9.12.1792956666997; 
+ Sun, 25 Oct 2026 12:31:06 -0700 (PDT)
 Received: from [127.0.1.1] ([151.51.254.197]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a35a0aa0bcsm176549365e9.4.2026.10.25.12.31.07
+ 5b1f17b1804b1-4a35a0aa0bcsm176549365e9.4.2026.10.25.12.31.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 25 Oct 2026 12:31:07 -0700 (PDT)
+ Sun, 25 Oct 2026 12:31:06 -0700 (PDT)
 Sender: Massimo Pegorer <massimo.pegorer@gmail.com>
 From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Date: Sun, 25 Oct 2026 20:30:49 +0100
-Subject: [PATCH v2 2/4] ram: rockchip: px30: allow multiple SDRAM types
- selection
+Date: Sun, 25 Oct 2026 20:30:48 +0100
+Subject: [PATCH v2 1/4] ram: rockchip: improve sdram type configs selection
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261025-ddr-multi-v2-2-b82ff9c860ba@gmail.com>
+Message-Id: <20261025-ddr-multi-v2-1-b82ff9c860ba@gmail.com>
 References: <20261025-ddr-multi-v2-0-b82ff9c860ba@gmail.com>
 In-Reply-To: <20261025-ddr-multi-v2-0-b82ff9c860ba@gmail.com>
 To: Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
@@ -184,104 +183,181 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Allow the inclusion of more than one SDRAM parameters set in the PX30
-sdram driver. The driver applies included sets in alphabetical order
-(DDR3, DDR4, LPDDR2, LPDDR3), stopping at the first one that makes
-SDRAM initialization function to complete with success. This order is
-debatable and not based on any specific reason.
+Not all the SDRAM types config options named in the Kconfig are
+supported by each of the Rockchip SoCs: improve clarity adding SoC
+dependencies to the options.
 
-Due to limited PX30 TPL maximum size, including support for more than
-one SDRAM type can require disabling some configuration options such
-as CONFIG_RAM_ROCKCHIP_DEBUG.
+Add a new RAM_ROCKCHIP_DDR3 option and remove PX30 and RV1126 sdram
+drivers fallback behaviour when no SDRAM type option is selected,
+raising a compile time error in this case, instead. The new option
+has a default true value if no other SDRAM option is true to avoid
+impacts on defconfigs.
+
+Moreover, these drivers support only one SDRAM type at a time: when
+more options are selected, avoid debatable preemption of one over the
+others, and raise a compile time error instead.
 
 Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
 ---
- drivers/ram/rockchip/sdram_px30.c | 40 +++++++++++++++++----------------------
- 1 file changed, 17 insertions(+), 23 deletions(-)
+ drivers/ram/rockchip/Kconfig        | 24 +++++++++++------
+ drivers/ram/rockchip/sdram_px30.c   | 17 +++++++++---
+ drivers/ram/rockchip/sdram_rv1126.c | 54 +++++++++++++++++++++----------------
+ 3 files changed, 60 insertions(+), 35 deletions(-)
 
+diff --git a/drivers/ram/rockchip/Kconfig b/drivers/ram/rockchip/Kconfig
+index d707d09c1c8..f51ae6a4542 100644
+--- a/drivers/ram/rockchip/Kconfig
++++ b/drivers/ram/rockchip/Kconfig
+@@ -24,28 +24,36 @@ config RAM_ROCKCHIP_DEBUG
+ 	  This is an option for developers to understand the ram drivers
+ 	  initialization, configurations and etc.
+ 
++config RAM_ROCKCHIP_DDR3
++	bool "DDR3 support for Rockchip SoCs"
++	depends on ROCKCHIP_PX30 || ROCKCHIP_RV1126
++	default y if !RAM_ROCKCHIP_DDR4 && !RAM_ROCKCHIP_LPDDR2 && \
++		!RAM_ROCKCHIP_LPDDR3 && !RAM_ROCKCHIP_LPDDR4
++	help
++	  Enable DDR3 sdram support on Rockchip SoCs.
++
+ config RAM_ROCKCHIP_DDR4
+ 	bool "DDR4 support for Rockchip SoCs"
++	depends on ROCKCHIP_PX30 || ROCKCHIP_RV1126
+ 	help
+-	  This enables DDR4 sdram support instead of the default DDR3 support
+-	  on Rockchip SoCs.
++	  Enable DDR4 sdram support on Rockchip SoCs.
+ 
+ config RAM_ROCKCHIP_LPDDR2
+ 	bool "LPDDR2 support for Rockchip SoCs"
++	depends on ROCKCHIP_PX30
+ 	help
+-	  This enables LPDDR2 sdram support instead of the default DDR3 support
+-	  on Rockchip SoCs.
++	  Enable LPDDR2 sdram support on Rockchip SoCs.
+ 
+ config RAM_ROCKCHIP_LPDDR3
+ 	bool "LPDDR3 support for Rockchip SoCs"
++	depends on ROCKCHIP_PX30
+ 	help
+-	  This enables LPDDR3 sdram support instead of the default DDR3 support
+-	  on Rockchip SoCs.
++	  Enable LPDDR3 sdram support on Rockchip SoCs.
+ 
+ config RAM_ROCKCHIP_LPDDR4
++	depends on ROCKCHIP_RK3399 || ROCKCHIP_RV1126
+ 	bool "LPDDR4 support for Rockchip SoCs"
+ 	help
+-	  This enables LPDDR4 sdram code support for the platforms based
+-	  on Rockchip SoCs.
++	  Enable LPDDR4 sdram support on Rockchip SoCs.
+ 
+ endif # RAM_ROCKCHIP
 diff --git a/drivers/ram/rockchip/sdram_px30.c b/drivers/ram/rockchip/sdram_px30.c
-index c7ff924b2c5..7f51b9c4f8f 100644
+index 37e62120504..c7ff924b2c5 100644
 --- a/drivers/ram/rockchip/sdram_px30.c
 +++ b/drivers/ram/rockchip/sdram_px30.c
-@@ -123,27 +123,24 @@ u32 addrmap[][8] = {
+@@ -123,15 +123,24 @@ u32 addrmap[][8] = {
  
  struct dram_info dram_info;
  
--#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR3) + \
--	IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4) + \
--	IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2) + \
--	IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3) > 1
--#error "This driver only supports one DRAM configuration at a time"
--#endif
--
++#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR3) + \
++	IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4) + \
++	IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2) + \
++	IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3) > 1
++#error "This driver only supports one DRAM configuration at a time"
++#endif
++
  struct px30_sdram_params sdram_configs[] = {
- #if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR3)
- #include	"sdram-px30-ddr3-detect-333.inc"
--#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4)
-+#endif
-+#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4)
+-#if defined(CONFIG_RAM_ROCKCHIP_DDR4)
++#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR3)
++#include	"sdram-px30-ddr3-detect-333.inc"
++#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4)
  #include	"sdram-px30-ddr4-detect-333.inc"
--#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2)
-+#endif
-+#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2)
+-#elif defined(CONFIG_RAM_ROCKCHIP_LPDDR2)
++#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2)
  #include	"sdram-px30-lpddr2-detect-333.inc"
--#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3)
-+#endif
-+#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3)
+-#elif defined(CONFIG_RAM_ROCKCHIP_LPDDR3)
++#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3)
  #include	"sdram-px30-lpddr3-detect-333.inc"
--#else
--#error "Please select suitable DRAM type CONFIG_RAM_ROCKCHIP option"
+ #else
+-#include	"sdram-px30-ddr3-detect-333.inc"
++#error "Please select suitable DRAM type CONFIG_RAM_ROCKCHIP option"
  #endif
  };
  
-+static_assert(ARRAY_SIZE(sdram_configs) > 0,
-+	      "Please select suitable DRAM type CONFIG_RAM_ROCKCHIP options");
+diff --git a/drivers/ram/rockchip/sdram_rv1126.c b/drivers/ram/rockchip/sdram_rv1126.c
+index b371f597d23..ddafb235af2 100644
+--- a/drivers/ram/rockchip/sdram_rv1126.c
++++ b/drivers/ram/rockchip/sdram_rv1126.c
+@@ -66,31 +66,39 @@ struct dram_info {
+ 
+ struct dram_info dram_info;
+ 
++#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR3) + \
++	IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4) + \
++	IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR4) > 1
++#error "This driver only supports one DRAM configuration at a time"
++#endif
 +
- struct ddr_phy_skew skew = {
- #include	"sdram-px30-ddr_skew.inc"
+ struct rv1126_sdram_params sdram_configs[] = {
+-#if defined(CONFIG_RAM_ROCKCHIP_LPDDR4)
+-# include	"sdram-rv1126-lpddr4-detect-328.inc"
+-# include	"sdram-rv1126-lpddr4-detect-396.inc"
+-# include	"sdram-rv1126-lpddr4-detect-528.inc"
+-# include	"sdram-rv1126-lpddr4-detect-664.inc"
+-# include	"sdram-rv1126-lpddr4-detect-784.inc"
+-# include	"sdram-rv1126-lpddr4-detect-924.inc"
+-# include	"sdram-rv1126-lpddr4-detect-1056.inc"
+-#elif defined(CONFIG_RAM_ROCKCHIP_DDR4)
+-# include	"sdram-rv1126-ddr4-detect-328.inc"
+-# include	"sdram-rv1126-ddr4-detect-396.inc"
+-# include	"sdram-rv1126-ddr4-detect-528.inc"
+-# include	"sdram-rv1126-ddr4-detect-664.inc"
+-# include	"sdram-rv1126-ddr4-detect-784.inc"
+-# include	"sdram-rv1126-ddr4-detect-924.inc"
+-# include	"sdram-rv1126-ddr4-detect-1056.inc"
++#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR3)
++#include	"sdram-rv1126-ddr3-detect-328.inc"
++#include	"sdram-rv1126-ddr3-detect-396.inc"
++#include	"sdram-rv1126-ddr3-detect-528.inc"
++#include	"sdram-rv1126-ddr3-detect-664.inc"
++#include	"sdram-rv1126-ddr3-detect-784.inc"
++#include	"sdram-rv1126-ddr3-detect-924.inc"
++#include	"sdram-rv1126-ddr3-detect-1056.inc"
++#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4)
++#include	"sdram-rv1126-ddr4-detect-328.inc"
++#include	"sdram-rv1126-ddr4-detect-396.inc"
++#include	"sdram-rv1126-ddr4-detect-528.inc"
++#include	"sdram-rv1126-ddr4-detect-664.inc"
++#include	"sdram-rv1126-ddr4-detect-784.inc"
++#include	"sdram-rv1126-ddr4-detect-924.inc"
++#include	"sdram-rv1126-ddr4-detect-1056.inc"
++#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR4)
++#include	"sdram-rv1126-lpddr4-detect-328.inc"
++#include	"sdram-rv1126-lpddr4-detect-396.inc"
++#include	"sdram-rv1126-lpddr4-detect-528.inc"
++#include	"sdram-rv1126-lpddr4-detect-664.inc"
++#include	"sdram-rv1126-lpddr4-detect-784.inc"
++#include	"sdram-rv1126-lpddr4-detect-924.inc"
++#include	"sdram-rv1126-lpddr4-detect-1056.inc"
+ #else
+-# include	"sdram-rv1126-ddr3-detect-328.inc"
+-# include	"sdram-rv1126-ddr3-detect-396.inc"
+-# include	"sdram-rv1126-ddr3-detect-528.inc"
+-# include	"sdram-rv1126-ddr3-detect-664.inc"
+-# include	"sdram-rv1126-ddr3-detect-784.inc"
+-# include	"sdram-rv1126-ddr3-detect-924.inc"
+-# include	"sdram-rv1126-ddr3-detect-1056.inc"
++#error "Please select suitable DRAM type CONFIG_RAM_ROCKCHIP option"
+ #endif
  };
-@@ -691,19 +688,11 @@ out:
- 	return ret;
- }
  
--struct px30_sdram_params
--		*get_default_sdram_config(void)
--{
--	sdram_configs[0].skew = &skew;
--
--	return &sdram_configs[0];
--}
--
- /* return: 0 = success, other = fail */
- int sdram_init(void)
- {
- 	struct px30_sdram_params *sdram_params;
--	int ret = 0;
-+	int ret = 1;
- 
- 	dram_info.phy = (void *)DDR_PHY_BASE_ADDR;
- 	dram_info.pctl = (void *)DDRC_BASE_ADDR;
-@@ -713,8 +702,13 @@ int sdram_init(void)
- 	dram_info.ddr_grf = (void *)DDR_GRF_BASE_ADDR;
- 	dram_info.pmugrf = (void *)PMUGRF_BASE_ADDR;
- 
--	sdram_params = get_default_sdram_config();
--	ret = sdram_init_detect(&dram_info, sdram_params);
-+	for (int i = 0; i < ARRAY_SIZE(sdram_configs); i++) {
-+		sdram_configs[i].skew = &skew;
-+		sdram_params = &sdram_configs[i];
-+		ret = sdram_init_detect(&dram_info, sdram_params);
-+		if (ret == 0)
-+			break;
-+	}
- 
- 	if (ret)
- 		goto error;
 
 -- 
 2.34.1
