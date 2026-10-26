@@ -2,133 +2,186 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95736606A31F
-	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 15:59:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 812C4606A31A
+	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 16:07:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=FV590ELV;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oxpiA4Ry
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=RF7gBZxo;
+	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=fYMTxf4/
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 680D64068D;
-	Mon, 26 Oct 2026 15:59:55 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 506FF406DE;
+	Mon, 26 Oct 2026 16:07:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2dlrWFDr192K; Mon, 26 Oct 2026 15:59:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 512F640647
+ id 9K2PanICSzG6; Mon, 26 Oct 2026 16:07:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 63D1A406B3
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793030394;
-	b=peRH5edDQmKZdNyvnf/sBvMe11pjv6huzWC96zWk2qYQ8dcxpzKnoLIx5Bc2mPbpZLFt
-	 PTWs9CE4w8kHL2B19zYCRIuHjfPUT2+KIrOju4xANGM2i4TB5EaOX0pfRHLz/Epb7wWJf
-	 DrovJqoCHEYP4/47vZ9eqn0Tk9nMvfLbSsHvFSimD3huUNfJ710zJE1WERJveXJz+spk+
-	 8D1QfoDuu5rr11auEuJvqU6i5lzG5BVM7HSwHSewoPqVrLoSdXGyggReBAmyhzVSjOhIW
-	 +gOsev6SkMnkSWY8jNx6hKVuS1vWGkMD5nVwOMrYezhi9BP6doLtwBe1TMX5EI+WjRg==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793030394;
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793030820;
+	b=PLZcRQgVdMhLv7fEkOpI6n+ZfXypTsbuxjoRICEpHdWHayf6ETisUMG4lHGJRpGZNa0S
+	 ObBfoMc70tGXo099HrP2LlhS7BHXtWgCqG3HmKNV9s18mKaRVddqeSmVReFq+Q2fE148L
+	 0YY16vs1G2UgseGGUTnZdPvvgRyeYy2Q5u08Q14SNtRFUPjaePfHF7KAcTSq8LwYFdZWJ
+	 Iaph4EsQp+Vn3lL4cH2jUqNdM2lXVQRJIQzg/ijOLqbpZFPC/kpXzI4kL3lC5RYOlpueX
+	 k1ndp/ULVjvjIFrZ8YWA+J6qQT5kaJY29Si4P7xLQJ/FVo6NYb3bKHDZnOF5whQJ5KA==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793030820;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
-	 MIME-Version:Content-Type:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=lvovhMEEyFHA4av/105WIetmQlX7gBeFwJKL/7XBFj4=;
-	b=L1su1Ic9slMsjcQsHJYNHa4idUZ7yUSaMDuYjGshu3ydvZFuEYgeg7jETvKcozA8d6zp
-	 N155uiG/YYCUIUTlZ5QJYqhkOjA51zyl8GyhZseXBqF6ble5jPAZ+8dblakXYiPQsNh/E
-	 JidrCQr69MBi7C/M1iERwWv/WEGJfCMnGCOfSgoTbAQiEbYDcptdGjI1Tgwoyem+VlB9L
-	 4T2t9EZSTulS4ennFsxRFEqPpOiBlQdz4Gihu/i7wSR05E/0/IUVxUk0mXROElbLPbQB4
-	 il/gZX/qCWcy7d1aCiJdoDU3iPG3LkxO3XRYLgL1PLhNgkthyzFURU5lvlLj9taCQYg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	dmarc=pass header.from=kernel.org;
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oxpiA4Ry;
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:Received:MIME-Version:In-Reply-To:References:From:
+	 Date:X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=F4tYpQoSybollSuN20YA45L1CQIuL8v/karSL0/aH+Y=;
+	b=d+4EWqDiamVTLaI1vte2TSoAQN+kfcfweK6YgiF8+S6SymRYGpKOWZtfqPwgYbJhOPh2
+	 k+sCIEyAUx6383HMXb/Sm6n9vwgfRMED5j7gaK+AVVcITpYCMnVTfmMIPfUK5GnKpkopx
+	 /VcpBdF7ZCmD08voumBXInVSO8mv+dnqZOgbauGw9Dad23S5gUXAh6os1ccVzqtYDrzDz
+	 unK+0LkxyOrVo5Vqf80wghTDrZ7YMBpFvhK9pNjMgvkclIXvYmMwFeSanc7h9slvlGJ82
+	 kERgMTxlmR1IXnIsG3JZT70aogN5K8Xj33xD2WFoqRVBB441617Vl5U1pI7pklTIjcg==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793030394;
-	bh=lvovhMEEyFHA4av/105WIetmQlX7gBeFwJKL/7XBFj4=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=FV590ELVz3a9sRSlOhT9YQ+WK55Er/TZ/VgXlWHO5+6o55MNCaNg/uAPEoe+peHjn
-	 uBBRixUksXFtovXOvdwpdcGYY19nDdrLjA6sK+cVaPz2LX0eyzeRP0/QZF2BVvrAQw
-	 ZjQ+/v7UFk4xVmQdc7aSnjicy2uIhTJRomvlZsd6hY8c6R5g4t8+Km0zP8MY+NEvb4
-	 TE2lHxm4JIjv1+1TCUcMmKQoRr5Zm8LGjeJF7TvKmABEi2u70VAA3zyNFrTlRyx6IT
-	 XReJwdMGXDKjRajMjyuzbx+sKxmlV7S6tLkSbyY3StKz3PiOxoLEha7CBuyly7wOc0
-	 LP5j6+3L15r/w==
+	d=lists.u-boot-project.org; s=default; t=1793030820;
+	bh=F4tYpQoSybollSuN20YA45L1CQIuL8v/karSL0/aH+Y=;
+	h=In-Reply-To:References:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=RF7gBZxoyvkoxVeNbujpEFeuFaIOEzChK82kjAh9VAFzq2oF3prCTcWDgOs3bDtZV
+	 bhFa9wBh+E6l2YwRbOlJWa96aN76tT62AwpbRScPsKyj67WfGcCFin5uGEjFUA5vZn
+	 rGAxfwNs38voF4KS+M2Vm0htYFV+KDNHPsKLm9zP2hz+x5sCjMdxhy0uqsgtFpaGaO
+	 Ej2rdfKms8U965uC6u/pNi4mxMkgC8Hadnf4KmdBnj0ELjzBTgh3hndFuf2KMe5mrs
+	 V+dci7oB8z9LhdIGZNPzCGXOVXqeBSYv/MjoTaO97cfKaVWrybiBNDKNTor5jnh84R
+	 Qoyq3pjadS9ng==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 512F640647;
-	Mon, 26 Oct 2026 15:59:54 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 51511235
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 15:59:53 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 63D1A406B3;
+	Mon, 26 Oct 2026 16:07:00 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6DE15235
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:06:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4EC5040647
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 15:59:53 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 53F1380E02
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:06:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Yb_lESDS49Ex for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 15:59:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 17E5E405BB
-Authentication-Results: smtp4.osuosl.org; arc=none
- smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793030392;
- b=gipjL4DuhMDwAfXrf4BaK/1doaxKIQ3Cqr1WNOV0OWeRAvsC6J7I4dVOXN03x2njWap2
- Cls8R3WileBk/7x2VK99Y9PKCeqSgwsJpuFJaRz9tEtSJMBiptd+gbaDp0rh0Lrzoee2g
- nryhSUhTTFgVaQSIS4DRelG8yDoVpOLgw+GWg1UmLPNxPaemcyPhH8h2nQss2GDrzn6d8
- 4KWNAi3nAhjfGrPJU0uyoYzytgbFl6fEo64JH8yBMyx6/1h2wqFpf2DGJZ8sQm5YmRwsL
- dV5nGjAIem/cvEOGQi2mb8TUEs5Uh9NGcRKmfxMmctpitVnqAkvnVGiTIkYImMbmodA==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793030392;
- h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
- Date:Message-ID:MIME-Version:Content-Type;
- bh=lvovhMEEyFHA4av/105WIetmQlX7gBeFwJKL/7XBFj4=;
- b=g44qXVrlyLHvPh6zrhApz2vMqqJAaav9j4BM+eAJG62Hy0Ez00NyOnJaeg7MrE7rexHl
- CDH4LQI0tiKzK4/MnTv1UyZGOP4VdbtawMcmw2cQfIknrtIeNkYLC2sDiV1aDpJCRuQBY
- EVJ5qZQz1X2CxkLZ57k5SKl3AoO1Dw0jKDwAdJTP4KfUvUA9n/Iau/5XbjuPLDlknH7hS
- PZh/amSa3eBIwHfF9mBIufmtKi2W+Rbvkq4Cjgt/earQSDiTgAIoIqDqes/DJmEh7nxD2
- NWz6Vm6IqKqsTRqpH3Er6kQISpe/l59OCGp8XpKEL5mYWmj8xX+R2jTLaimfp8YI67Q==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=kernel.org;
- dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=oxpiA4Ry; 
- arc=none smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Hq1Mn2hUCNe8 for <u-boot@lists.u-boot-project.org>;
+ Mon, 26 Oct 2026 16:06:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 945A880DDB
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::1030"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793030818;
+ b=cjhb82JEZ+MayOrQyJrBaHqGS827p8ZGnaMhH0C7qd9wabqhruq0PqNEAjqadLRRRQtQ
+ 9Rs91+K/gh0gNb8SeCRGgtqjP2N6TR1ep8MtOeGrcbWc+3yuAD5wphE6W3aHU1RV9fytb
+ pbTeos4MNGWVbTqxf3QDxH5MycI7wiKRj7xJ6gs1BkwdN3CSXXYOS9duJt1/TwdbX2Jsi
+ /QpeoHt8bv0woYIfMv/9eN9mFWxz4+3ua8pv9oqM5wmot7/8uA3CLxjgnVoS7cCkkDxQq
+ CNPp90/7m6cjPjzVBSc3+zVk1B3PTQ7MZq7N+rtYaGFtcy6VLPBD2WlhlvUNDaKBCbw==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793030818;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Received:MIME-Version:
+ In-Reply-To:References:From:Date:X-Gm-Features:Message-ID:Subject:To:
+ Cc:Content-Type;
+ bh=F4tYpQoSybollSuN20YA45L1CQIuL8v/karSL0/aH+Y=;
+ b=fT05g3Hht21JYX1ptp8GzBY+CnjCzen2uN38eY0A0dz6+PWBYr49n3CRBEUDxUSciEvn
+ vLlG2Q24I/ERtmJGzlR27IOsWxIga9/tlYTCfLX4DYAuVr0waRco5M85shMr1F3wJKf+4
+ sfOlRHeBN7EgFDw+IfYZ8z9+QJBVsotBh2kYdY5emvhj+ohSXfTIewp1WWR/LbXaZnccn
+ 9e75JeCKoYKTgBTbe5Bl+1GUFxkA6xnT1m8RX3H02ehMTIMh8v5XFoyIRBojLyiK14fmp
+ JSKxRd6GK2V4NVEnnY4FgPggtkQ7sz+joP+HRoSAc8Fm/V9hDoL8hc85FF+NpX8sq/w==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+ dmarc=pass header.from=chromium.org;
+ dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b="fYMTxf4/"; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1030"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
- envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=oxpiA4Ry
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 17E5E405BB
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 15:59:51 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 006246022B;
- Mon, 26 Oct 2026 15:59:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36B591F01825;
- Mon, 26 Oct 2026 15:59:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1793030389;
- bh=lvovhMEEyFHA4av/105WIetmQlX7gBeFwJKL/7XBFj4=;
- h=From:To:Cc:Subject:Date;
- b=oxpiA4Ry2EvY4FsKi/e0T/RFGe361mQ6L9giy4bvOOfS6CUD6uERJdD+d4aQVYTlb
- A6BajcpPGiogNoMbtNxzPsi+l4thy/ib8ECTayPtrKRXyKg44aKbfK5aRWKepGCNGx
- DvqWYGiGWi37HgTDrv77eSOZmg1G2eE6h6rNmUBhWAsx3wqF21cLBOhNTNIsUocbvn
- fOxTVAQBfpZzRAxsyeApQ/rAlVhXxgZu2l8LvBrAsDPtqn5gMG+uNfBMU2cwuLUsuq
- AUJdwfbUNhXHvZEj8xbOHDRrJdU02M+LYCuh03Ni9NPYJqg50NeCUUOzzOq+Dioo49
- c5NAJF7Yqj2Ag==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-Cc: Lukasz Majewski <lukma@nabladev.com>, Fabrice Gasnier
- <fabrice.gasnier@foss.st.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, Jan
- Kehren <jan.kehren@emteria.com>, Petr Hodina <petr.hodina@protonmail.com>
-Subject: Please pull u-boot-dfu-20261026 into main
-Date: Mon, 26 Oct 2026 16:59:47 +0100
-Message-ID: <xhkdbbj8g311o.fsf@mkorpers-koolstof.csb>
+ client-ip=2607:f8b0:4864:20::1030; helo=mail-pj1-x1030.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=fYMTxf4/
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 945A880DDB
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:06:58 +0000 (UTC)
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-3ab60ff4273so2620226a91.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 09:06:58 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1793030817; cv=none;
+ d=google.com; s=arc-20260327;
+ b=rB8ivZtMn1XQAuuDQABtXHiuEICF16Dl4Emmyh9QjwPIAy9hsg3QNVcfjCQQrq9ki+
+ XmyPZdq/zfxgeL6xsA1qWDY36Pc77XUBRpCZCRh2yimIUmlX2MD2kHyPfnlzwknFx/qm
+ bS677Oj/S3xg7ytpaZhAwkfIL7c0/NdAt7sdDBwfOZeZlmj+RYr2ML/bNmgVGmM+TO8p
+ xxe6KLQBm8/wc3xk+Nm4nazA68lMK98qxmTa6ItbBCQvERT9ALWDRvsowc7t55rBZLdJ
+ WxROaa8XdxYX5fSEwMi8dQc7FPWmzfgu+/EB7KbZj+95Ad63+9B67aqWOItpUdmvCFHG
+ BcwA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:references:in-reply-to
+ :mime-version:dkim-signature;
+ bh=F4tYpQoSybollSuN20YA45L1CQIuL8v/karSL0/aH+Y=;
+ fh=Vi46RdmyXd0SupGlsPtmZZi6NaJCBu3Vb80GVjkTlag=;
+ b=ERkyk1RzTIV3/Eke9DqjEWyX64xNPRvxxzuYBS5Uw3wSai4sYzXiJuR8AmPmqKaoIq
+ nqyA2toGzzPqMB2Vicb174F8Snht0UIiJX7bEtlrniCvGacOtmHviLV24l4vjhqPyjsf
+ FW96fXIu51fCsjm81x63aHl//MDusm0fszc6isn+Gi/7tbUgNNcPv+dKTebE7mr1WFOH
+ 0DKWTiTTQTu7RH4yoWmccNCCITxiovqkNhBKkL5yOCXN5NRGlXrengmLJWT7di+mjDz3
+ Bpnm+EYOK54jFXCcvVI7xG41ipNjgkXiX2S2DROTmUjyr86OxbO9AGHaFh5CvIE0OsWd
+ 58bA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1793030817; x=1793635617;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:references
+ :in-reply-to:mime-version:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=F4tYpQoSybollSuN20YA45L1CQIuL8v/karSL0/aH+Y=;
+ b=fYMTxf4/ppz9VXHnTFKrvj9DNxzybvP9c4jz13embf1ufw6PjO1STuoyc431cQvRCO
+ AbSTQ8IqO0zGIro6RN3tbPcHt8cEldDDoVYxu9Cm29r8PjQRLGx9VarUhrbr8Yi5WKP+
+ Dsc9QHm3/driUPaV75JYXFRT2vCGpl+Ws5amo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793030817; x=1793635617;
+ h=content-type:cc:to:subject:message-id:date:from:references
+ :in-reply-to:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=F4tYpQoSybollSuN20YA45L1CQIuL8v/karSL0/aH+Y=;
+ b=E/BmnrTOdKT8w9xSQ1GCrk9283dfgzx5BB+y55ABD88/7yo0l8WCc9YU42hHr1PtOR
+ MoALxrT+7oKBOydUQkeO4tt2gZQFJGHQttmlcdhXhqLT3YsSLoFF6VWpBtIlaIBiiX7Z
+ QZ9Qxly/Nc6O2UoXelXGhAqqZN7dD8uxqrUTgUrJjp6DjPACc5oj5cH3iwu63ubkSWBU
+ 7dVu9PSKxtJGB8CJAXFz31a2O7IR2ZmsX1ZCTVx3/akfKq19dTSHcilpp5wm0xaYO81d
+ VCu0tPoZfiPXtQwKJPiw06Q/1KcLxwW5aFieWcYoZyYIqQKhZqw35oYsxLNV7xRwCl0q
+ lEZA==
+X-Gm-Message-State: AFq9FYKR3MSbNgUsFHC+IBgDku50YrOzJCOWimq/uw1J55BHTtCZBPcm
+ SAxqvSuYLsPzPwrMj9W5jzLRJlevSuo3vt2U5CkbpMDsR+tqBK22guEutKjCV6BTLdnIPcRtWoa
+ rQU5prVnvjKS8+WDikqt7AHYbRBmI6xGHZQzzOF2w
+X-Gm-Gg: AYBFou3fJm1Zd4SMBTSXQwxf0BiVeW+n1HqTKkEUFkUlXUDMtW2d0bENAKe8jvsePeF
+ x3afGrH13jXXzUE9io2AZSkNqeP0v/AVViJPed1cmn1koZvVFOIrRAiovL1mkmVaDiqbfD1t6YF
+ sU4myNukEoR3B/Y+x0YLxZA0K0j3u7qUn3TtiZuKy8bpuZb7MXaT2CUrvWjLuRvBJZ70wxHuKMT
+ xHftzDrbscfUj+5BSXLkRaAhE70PUYYLdnhFHx6rzYJXZgaOAMLdRM2m+ISyUmB5jSuCotFb+gA
+ NRRBD92vAlUo5gzIrZ5vAXdlTLsiRCctvHmIWNL+gGJYXSN6kzARlZrjEbB+XR2EMiIE/GUJ8xB
+ k1XLb+fRb7gV40NwamlJFJDkuH+1HYVjY8TFR
+X-Received: by 2002:a17:90b:37c5:b0:3ac:85be:cd52 with SMTP id
+ 98e67ed59e1d1-3adeafd6820mr6544981a91.59.1793030817465; Mon, 26 Oct 2026
+ 09:06:57 -0700 (PDT)
+Received: from 415065739583 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 26 Oct 2026 09:06:53 -0700
+Received: from 415065739583 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 26 Oct 2026 15:41:04 +0000
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+In-Reply-To: <20261021-rinta-watchdog-gettimeout-v1-0-e7f3157b8bab@nokia.com>
+References: <20261021-rinta-watchdog-gettimeout-v1-0-e7f3157b8bab@nokia.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 26 Oct 2026 09:06:53 -0700
+X-Gm-Features: AclHuK_NDRtI4biAJPITVc-sm-Se344jt_aw92Q-hI1FVIHzGi3Irtc24ARAOfo
+Message-ID: <CAFLszTgNczZSGUh-hCEiZR5wQ0u6AYx+Jsvh-ZiWz5a1ZLwMwA@mail.gmail.com>
+Subject: Re: [PATCH 0/7] watchdog: add get_timeout operation
+To: juuso.rinta@nokia.com
+Cc: u-boot@lists.u-boot-project.org, Stefan Roese <stefan.roese@mailbox.org>, 
+ Tom Rini <trini@konsulko.com>, Yuri Zaporozhets <yuriz@vodafonemail.de>, 
+ Jonathan GUILLOT <jonathan@joggee.fr>, Jonas Karlman <jonas@kwiboo.se>,
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -138,133 +191,26 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-21.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-6.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,INCLUDES_PULL_REQUEST,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Tom,
+Hi Juuso,
 
-Here is a PR for main with the following:
+On 2026-10-21T08:08:13, Juuso Rinta <juuso.rinta@nokia.com> wrote:
 
-Android:
-* avb: Allow other storage mediums (virtio, usb, ...)
-* avb: Add lock/unlock support via OP-TEE TA
-* avb/boot_android: Fix TOCTOU in bootmeth_android
-* avb: Improve pytest suite on sandbox with dedicated mmc12 device
+> Add an optional get_timeout operation and a wdt_get_timeout() helper to
+> the watchdog uclass so drivers can report the timeout actually programmed
+> in hardware. The requested value passed to wdt_start() can differ after
+> clamping, discrete steps, or rounding (for example power-of-two periods).
 
-Fastboot:
-* Scale progress dots to video console width
-* Add flashing log/unlock/get_unlock_ability
+The real implementations (designware and max6370) have not been tried
+on hardware, so sandbox is the only coverage. At present it never
+reports a timeout that differs from the requested one, which is the
+case this series is for. See my comment on patch 6.
 
-Usb Gadget:
-* acm: Do not requeue failed RX requests
-* f_mass_storage: Improve CTRL-C responsiveness
-* dwc2_udc_otg: Bypass debounce filter on force session
-* dwc2_udc_otg: Fix mode initialization by waiting on debounce filters
-
-CI:
-* https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/pipelines/1732
-
-Thanks,
-Mattijs
-
-The following changes since commit fed92546960a92177d67c0b8d7b22385f50fed29:
-
-  Gitlab CI: sage: Update for labgrid 26.0 behavior (2026-10-12 11:13:40 -0600)
-
-are available in the Git repository at:
-
-  https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20261026
-
-for you to fetch changes up to 974861925ede465ecd780e000a98d64c32181abf:
-
-  test/py: avb: Fix find() logic when matching response strings (2026-10-26 10:33:58 +0100)
-
-----------------------------------------------------------------
-u-boot-dfu-20261026
-
-Android:
-* avb: Allow other storage mediums (virtio, usb, ...)
-* avb: Add lock/unlock support via OP-TEE TA
-* avb/boot_android: Fix TOCTOU in bootmeth_android
-* avb: Improve pytest suite on sandbox with dedicated mmc12 device
-
-Fastboot:
-* Scale progress dots to video console width
-* Add flashing log/unlock/get_unlock_ability
-
-Usb Gadget:
-* acm: Do not requeue failed RX requests
-* f_mass_storage: Improve CTRL-C responsiveness
-* dwc2_udc_otg: Bypass debounce filter on force session
-* dwc2_udc_otg: Fix mode initialization by waiting on debounce filters
-
-----------------------------------------------------------------
-Fabrice Gasnier (2):
-      usb: gadget: dwc2_udc_otg: bypass debounce filter
-      usb: gadget: dwc2_udc_otg: wait for mode when digital filter is active
-
-Igor Opaniuk (5):
-      cmd: avb: add read_pvalue_hex/write_pvalue_hex
-      cmd: avb: add lock/unlock commands
-      avb: verify the boot images in the buffers they are booted from
-      fastboot: add flashing lock/unlock/get_unlock_ability
-      doc: android/avb2: document the root key provisioning and lock state
-
-Jan Kehren (3):
-      avb: Drop the mmc naming from the block IO helpers
-      blk: Add a name-to-interface-type lookup
-      avb: Take a storage interface in the AVB operations
-
-Mattijs Korpershoek (10):
-      avb: Use map_to_sysmem() for flush_cache() address
-      test/py: android: Move android image creation to a dedicated file
-      test/py: android: Drop verbose printing and unused return
-      test/py: android: Use for loop to create the images / update disks
-      test/py: android: Add create_gpt_image() for image creation
-      test/py: android: Add setup_android_v{4,2}_image subfunctions
-      test/py: avb: Use format specifiers instead of str() for mmc_dev
-      test/py: avb: Move mmc device number to a pytest fixture
-      test/py: avb: Add sandbox AVB testing with dedicated mmc12 device
-      test/py: avb: Fix find() logic when matching response strings
-
-Nizat Mikayilli (1):
-      usb: gadget: acm: do not requeue failed RX requests
-
-Patrice Chotard (2):
-      usb: gadget: f_mass_storage: Remove useless rc variable
-      usb: gadget: f_mass_storage: Optimize CTRL-C responsiveness
-
-Petr Hodina (1):
-      fastboot: scale download progress dots to video console width
-
- arch/sandbox/dts/test.dts                   |   8 +
- boot/bootmeth_android.c                     |  75 +++++-
- cmd/avb.c                                   | 166 +++++++++++-
- common/Kconfig                              |   7 +-
- common/avb_verify.c                         | 272 ++++++++++++++-----
- doc/android/avb2.rst                        |  93 ++++++-
- drivers/block/blk-uclass.c                  |   4 +-
- drivers/block/blk_legacy.c                  |   7 +
- drivers/fastboot/Kconfig                    |  19 ++
- drivers/fastboot/fb_command.c               | 389 +++++++++++++++++++++++++++-
- drivers/fastboot/fb_getvar.c                |  22 ++
- drivers/usb/common/dwc2_core.c              |  45 ++++
- drivers/usb/common/dwc2_core.h              |   1 +
- drivers/usb/gadget/dwc2_udc_otg.c           |   8 +-
- drivers/usb/gadget/f_acm.c                  |   3 +
- drivers/usb/gadget/f_mass_storage.c         |  11 +-
- include/avb_verify.h                        |  77 +++++-
- include/blk.h                               |  11 +
- include/fastboot.h                          |  14 +
- test/py/tests/test_android/android_image.py | 116 +++++++++
- test/py/tests/test_android/test_abootimg.py |  77 ++++++
- test/py/tests/test_android/test_avb.py      | 109 ++++++--
- test/py/tests/test_ut.py                    | 129 +--------
- 23 files changed, 1386 insertions(+), 277 deletions(-)
- create mode 100644 test/py/tests/test_android/android_image.py
-
+Regards,
+Simon
