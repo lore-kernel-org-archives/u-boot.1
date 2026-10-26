@@ -1,133 +1,147 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18945606A31A
-	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 06:17:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04CAF606A31A
+	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 06:31:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=vVRf40Vo;
-	dkim=pass (2048-bit key, unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=g58YOvSg
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=NbnzPQaL;
+	dkim=pass (2048-bit key, unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=bmlYQzXl
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id ACD50405D6;
-	Mon, 26 Oct 2026 06:17:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D106960645;
+	Mon, 26 Oct 2026 06:31:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Nt_VLVBYRsvS; Mon, 26 Oct 2026 06:17:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B2660405CB
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792995441;
-	b=HmRwJ85tsdhANdUIj8EKsg/Rcf/rsZMYsmYHUNJbn42YC9cu+0unsfcBnS1CD2cO+hKO
-	 mBgi9qhpHC95goM0IEC9270O9tvSq5D3xbPdh176MUfYqO82v6lNVUHs0celdm/JYDJ+J
-	 4W/QwecXBEiTDct674PDMRfLzNxJOCSgCKuojBjAMKkO0ccpNuz/1WOLBdlP3Lp1ChQcX
-	 NjuR4faiQtvHPGAJEx0Y/lWzSi+UrJr94fC7SRiBrlGS8kcuxk7vQXB9qu/PfOXGnQrN2
-	 E81iHUXr8USfG4tfMSmx+gn+7mJ9o6FDa1hZlSwcW+8OgtwBfukY3kIKIuJGRXClLnw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2_MZMrI6UiV1; Mon, 26 Oct 2026 06:31:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C8CC260619
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1792996300;
+	b=IZea6X5HwbIoghF41qX9W3OoMDdeM0TpznPd3UGjUooqbTRq5h6yqZBPcS4uACvD5bZn
+	 XOJuS4S7vBOtE9ygGr7lcVfou9rAn2ZyNf05zT1xMhIyp/KR9W+yjPxyCDfQhBPt+xj81
+	 z87In0x6HFUV554ErqjLVimksliwRusjlZh+ldek3BhojQN97J/GPT7V3p5L+GCwsn5BI
+	 B3uXL/UQ4aVNaiZLBwNG3LsIO69Itt4DO3QkbPkHc48ilNFfzHRjcDfqRAbeEYuAFSldH
+	 X77zCWM2wDP+8CCzC/teX6sBuFfcGv/WCPXbFeHDuLS562HLUPF6Yi6Sja29ZxjQG+g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1792995441;
+	c=relaxed/relaxed; t=1792996300;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Content-Language:To:Cc:References:From:Subject:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=t64CHCYhHBlG1C6SjfqOgGaqiDLW9TdLz02lZFFfhd4=;
-	b=Mz4MRZYsVcqc8tZ8rHBHfceGcft4kvMNGrTLAz+B+/0ZX1d0QXOIA5TJU6LZ28jnIxDY
-	 mf3RN9xjDBHQBoYWbfzsA2M3dZeKYXjWz15gG0kOuxscTfAZBNAljSG0UIGAQNbVowCKh
-	 2qeHZdB+n6hrY/pn/FMNh2op0/akLf0PEPemE0hSkxH6SUqy1F2csK1AYd7EpmfhzAGPy
-	 YNJZPzgXfw/aA1fxIMLkxxmEgMxA2Jcs/L3yfV2/1mI46O75f9DR2Mfrc18x074uE0JVw
-	 ONYxfTQJhZg32dP82fylsJwG4iVPYLnQjs5L4y5InLr6q0s7mzaXxFLpucx9ltlrkzQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:
+	 Content-Language:From:To:Cc:References:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Last-TLS-Session-Version:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=iiWr+Og/VPzJstaRMYfqC4X67KyQexpSdre/QvwCyBI=;
+	b=dqfyO32Clnmi6KwRqvnVEHAYL3Im0BtotJpeDFhZfK0Wd76F+CN3Vqhw6BXotkzoGSfo
+	 ErlXp+bUeTX5IMV0vaAFIhDMhUl2MJvN+ItO8OK6ZwJHaDoaBpGQ/YXRPSW/Xynl7ydCN
+	 c7sRaVKpe+KNM6ENu7lJN3xWAVYYeOcm0P+QoXMiwuj5B2XK3gks2geE6hZDNWg6jPOeN
+	 XIi8VlbLtPWyOafiu2C3G5qhcve0ZkO+NVNOlLxKIi7Vvk+OCq6SMRzCs/fjaQOlaog8S
+	 7IHkfNqrzFv2eAdviwbO42oKPy3SXMbago0YekSuXN901SSzffJM/bV/qw/eT48+Kvg==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1792995441;
-	bh=t64CHCYhHBlG1C6SjfqOgGaqiDLW9TdLz02lZFFfhd4=;
-	h=Date:To:Cc:References:From:Subject:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1792996300;
+	bh=iiWr+Og/VPzJstaRMYfqC4X67KyQexpSdre/QvwCyBI=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vVRf40Vo0dRjF0LgxZhpz+QCBARZ8DzrkS6Ozn+BePShf70gnzEtvn1fyM40uZh7F
-	 wh6l14zIUQNnv5mMDgCI+TK656YIQgZQT/SI5C/D0iZ0xdUET79fTqMzuRhYlJIeYU
-	 rUGF+dFrKli5bCcnFUAvdPe9Fs//CSYe4WWgspZgXK+TJI9ciLWX3bvs9Y8kkEbExD
-	 yWuDkFwFOOV4+Du5Y9C+N7ygTquc/ICJU9kSrfvbQeINGH9pEWlYPEiWs3xV1TaUQr
-	 qdPgbm0J+KqN1mSpnuMiaaLOzOqYteIHizZN455IjwpQ0pD/tLyz2eTK6g3yJfqiNb
-	 xXVGHL4I16o3w==
+	b=NbnzPQaLkz50V15/MX8ZpZ62paCs3xHm35WvyQaJj7cWxuLkbItRsp3hu0J4uFKVL
+	 BB7p0feB7XybUDk9YstYVvw/vcjXEqb0hxqdMBaQFwv51ZjEucFI6GR4eShSbcFslF
+	 sMrpPik6Zz29noVpslaO8dUqzCn5ejifliuMEZdIO96pEdlRqSn1ZKFutX2lo8RdY7
+	 wSj9beGbVtXYZ4r6hJbJdy3sOFxPxr74zpnZTZudSjnSvg8hZ6lihOZohPaxtF0YWQ
+	 YXeRmI7CWYw6GGWmSWSegn41f5Nsny/8dtFXxTvCrZezC/MXTkQO4nuXVNkyis9BBR
+	 uEOAfYAV0faEg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B2660405CB;
-	Mon, 26 Oct 2026 06:17:21 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 188EB235
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 06:17:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C8CC260619;
+	Mon, 26 Oct 2026 06:31:40 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 95D88380
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 06:31:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 0ACA180D3C
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 06:17:21 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 93A95405D2
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 06:31:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id s8PkCErTOTqW for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 06:17:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 03EBF80CED
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=178.251.229.89
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792995440;
- b=LIv16rVHmB8IY8Z6GgPp+TDt0HFjXolz2EAatgD5ltcMlJnLaYTWh9Acvf2XtHlhpP+X
- SpTN7ppgvPH8s2TueZCzvV8OHJ/8VNnglN9NV7VRFhRWHQQ7r45Hsfn+SztLfrlTi4ARF
- JLGNIB/uzP8W+VdZn6jhczZdaCSSxxWmV7lXw49+Tq2J7slIf2z2CJQa/scXStgVxxSLo
- oZzW5kxP50GwbUezdPVwmsepZYtZahefFaNjEAggRXs13/u6Xx9i/2diUbU//+B8d0BIB
- 5r2JvpJCwIDOVheuSSVPLiLHQh0LJV/RfA/K+qbpoOQUDpUmQqvMtSI5eV9y9JDyneQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2jIKSwxbQ4Yy for <u-boot@lists.u-boot-project.org>;
+ Mon, 26 Oct 2026 06:31:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3B29F405CF
+Authentication-Results: smtp4.osuosl.org; arc=none
+ smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1792996298;
+ b=oqNuAEb+lK71k6nwoL0rU1zhIvWIvckgrp+E5a6mbX841lYMuLFwBHcfIXX9XmLgyKXL
+ +DrPJJMzjxGkMI/27F5xUIz7k3Rk253SRGqaf5FMPJ/b8P4cnho4Wqbj5NG+LAaZosp/C
+ YlHBdybnJXBwcXd1VQjvzXmGCn9KBbHJdJjKS6P8IyTxiaG7FwnwI/lrw4r/T6nphzQwb
+ KU/KtxaKJAA61AmFh2K6wB+5+ByWzB5Rb6tK+fHOySGJj0l760m7jSsNUlmeRARIsrXmz
+ 8ZjvxOD4Ceg5Fi5C6zsl/wA7h7GKLGsh/35Z/E6OOJ557sUdwSSwb/9Ob+QBGhuffgw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1792995440;
+ c=relaxed/relaxed; t=1792996298;
  h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
- User-Agent:Content-Language:To:Cc:References:From:Subject:In-Reply-To:
+ User-Agent:Subject:Content-Language:From:To:Cc:References:In-Reply-To:
  Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version;
- bh=t64CHCYhHBlG1C6SjfqOgGaqiDLW9TdLz02lZFFfhd4=;
- b=S+nNky4uRCNH69HIQGc2xE36hMcMSvHJ8+snk94C+zWb/8vmwmlKJDOHLDQAM+Pbut+b
- hWUusqZ1ERg/kmWT4OZslunulNtCtGZR7hNHjOtdOxWo1mnU0k1kLgcyoW7cLYNsCCcQv
- jzKTyIg6nZiGkibauAnoUc9Kxo48w7XjwEjO4jZxACP8468jVXwDd67fkHe1XlCBBT+2a
- RSoErgDPU65uESL74f8LPOMvzJaH6kwNZ7ZS7VrcmZObfzGsziOcaJiuVXplyqhbZ1mLM
- 29mIfvR8AZAgvabhPnnNkloPyA5h1084R4WyyLm77XoCqofF9S9gh+sQc/mloZ3bcKw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=iiWr+Og/VPzJstaRMYfqC4X67KyQexpSdre/QvwCyBI=;
+ b=AnHIuYaAfS9nJMEDWeJ++QJpTZWEyIm34kcrYAF8j5iGDD3Y7lQlgN4GD6iyUUB3+ZSV
+ viJmVP0zHfrJFP1xN7x8nsm+OmXYq4+fPMwaYuafiE+KnrDVTzu/lAWaR77eqedeGUdK+
+ dY14gMWccVIXh2h33UxSMesrsMq5LzoU2G8J61crqeeg68Hm9gm30ETqeeef4mOKuryuV
+ Q6eNihxhbAqeb3s53b+A9FqrK63YQsiuRhipSiwcK+bHhhHyo7OhtzxFJZOVX06x2lq5J
+ 2V+ejwy7ZDkTt2HOaWQjCkZnHQjmSXf7ROXMBIY3fOigzej6WlAU8j3V6uBJQUSREpQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=nabladev.com;
  dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
- header.s=dkim header.b=g58YOvSg; 
- arc=none smtp.remote-ip=178.251.229.89
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.251.229.89;
- helo=mx.nabladev.com; envelope-from=hs@nabladev.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.s=dkim header.b=bmlYQzXl; 
+ arc=none smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:f820:417:0:178:251:229:89; helo=mx.nabladev.com;
+ envelope-from=hs@nabladev.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
- header.s=dkim header.b=g58YOvSg
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 03EBF80CED
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 06:17:18 +0000 (UTC)
+ header.s=dkim header.b=bmlYQzXl
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3B29F405CF
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 06:31:37 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 527A710B05D; Mon, 26 Oct 2026 07:17:11 +0100 (CET)
+ with ESMTPSA id F3BDA1098D6; Mon, 26 Oct 2026 07:31:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1792995433;
+ s=dkim; t=1792996291;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=t64CHCYhHBlG1C6SjfqOgGaqiDLW9TdLz02lZFFfhd4=;
- b=g58YOvSgULBLvboy4UroW9Q3t9RPb7EJXEsRnWkpZqZh+4QGq+ricNy6teRxGU3M4/CQXC
- Un6lAG3+tF6p+SnwqHCHNScwWIq25vU0z00ChC3coQkaqrxeQlU1DRwMXDKWJgICrE/Fse
- zryU57M7RNjiBTiZSUJhzD9aPzUJ1IIUGSDCYcwxTBuBL7xMRc01w0ZSLA3np87AMuLkfa
- g+ixcsmQRQp+8hirXLhS8uVcnlGLhtSbyM+gqmfI4Yg0acGdm8kt3DfMx0OlPSuiK+14rO
- 8uNgCjebi25NlVcPUkOL4iqX99iSvP9Ghg5rdmDq+5dKXtvP3nGze5xksGHWhQ==
-Message-ID: <d0dbe72c-7531-9556-2ec0-f147d6c3160f@nabladev.com>
-Date: Mon, 26 Oct 2026 07:16:22 +0100
+ bh=iiWr+Og/VPzJstaRMYfqC4X67KyQexpSdre/QvwCyBI=;
+ b=bmlYQzXlEGF4b7DpALsjcpwjeS0ZRVgOVhwMnvPlFf9F/dbdI5+fHOdp/ZAP8Fy8kRlEK7
+ zbtaOV5+H3XT/c3i6dpiLgsMaRTC2yZsF1LF6hIi1BD627T36Gq4Ch4zxNuTYh5kvpzjNN
+ BzllCiQJHC9DgzZj6eQV0cn25RnoruPA0pLGmeNOJgYAnGKnlgkVhcugUMqQiup14shdfr
+ V4IWO1/cqVMs1y0fmDHuZ/RHYW3I3kZC2SM5/LAFr2ElZ2H8m6+SA6Rxej8erEct9zf4wl
+ 8azVKMzCwHQ/xEu1YzIpN4l51IRd7Zlr2MZNpRnTvmwE2WPE67hhk08Z583Q3A==
+Message-ID: <034e49fe-4cae-f04e-e1a3-aab1f5b6826a@nabladev.com>
+Date: Mon, 26 Oct 2026 07:30:39 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
+Subject: Re: [PATCH v2 4/5] sandbox: spi: let a slave point at the emulation
+ it needs
 Content-Language: en-US
-To: Altair Bueno Calvente <abueno@airzonecontrol.com>,
- "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
-Cc: "trini@konsulko.com" <trini@konsulko.com>
-References: <DB9PR10MB79301375ACA9877030AF8D87A4802@DB9PR10MB7930.EURPRD10.PROD.OUTLOOK.COM>
 From: Heiko Schocher <hs@nabladev.com>
-Subject: Re: [PATCH] fs: ubifs: resolve "." path components
-In-Reply-To: <DB9PR10MB79301375ACA9877030AF8D87A4802@DB9PR10MB7930.EURPRD10.PROD.OUTLOOK.COM>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.u-boot-project.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Vignesh R <vigneshr@ti.com>,
+ Johan Jonker <jbx6244@gmail.com>,
+ Takahiro Kuwano <takahiro.kuwano@infineon.com>,
+ Cole Munz <Munzzyy1@proton.me>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ "Bigler Stefan, Securiton, EES" <stefan.bigler@securiton.ch>
+References: <20261004040657.3156402-1-hs@nabladev.com>
+ <20261004040657.3156402-5-hs@nabladev.com>
+ <CAFLszThWnBLQVZvpDAdD_zD_xDPe0x8ed4peMXpfFF6a13=rrQ@mail.gmail.com>
+ <2a7285ce-bc12-043e-8fe6-674d41d1f275@nabladev.com>
+ <56382e4e-d25b-66bf-1463-5438588392a6@nabladev.com>
+ <43fbdd27-1367-02f5-9190-566c626cb256@nabladev.com>
+In-Reply-To: <43fbdd27-1367-02f5-9190-566c626cb256@nabladev.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -148,71 +162,178 @@ X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hello Altair,
+Hi Simon,
 
-On 25.09.26 14:57, Altair Bueno Calvente wrote:
-> ubifs_findfile() resolves each path component with ubifs_finddir(),
-> which only matches directory entries stored on flash. UBIFS stores no
-> "." entries, so any path with a "." component fails to resolve. Such
-> paths are reached through relative symlinks to the current directory,
-> e.g. OSTree's "boot -> ." at the root of a separate /boot volume, which
-> it creates so that its hardcoded /boot/... paths in uEnv.txt resolve:
-> loading /boot/loader/uEnv.txt then fails with "file not found".
+On 26.10.26 06:10, Heiko Schocher wrote:
+> Hello Simon,
 > 
-> Treat a "." component as the current directory without a lookup.
+> On 13.10.26 08:11, Heiko Schocher wrote:
+>> Hi Simon,
+>>
+>> On 13.10.26 03:22, Heiko Schocher wrote:
+>>> Hello Simon,
+>>>
+>>> On 09.10.26 09:08, Simon Glass wrote:
+>>>> Hi Heiko,
+>>>>
+>>>> On 2026-10-04T04:06:44, Heiko Schocher <hs@nabladev.com> wrote:
+>>>>> sandbox: spi: let a slave point at the emulation it needs
+>>>>>
+>>>>> sandbox_sf_bind_emul() binds the SPI NOR flash emulator for every slave
+>>>>> on the sandbox SPI bus, whatever that slave is, so a device of another
+>>>>> kind cannot be emulated and cannot be tested.
+>>>>>
+>>>>> As with I2C and PCI, a slave can point to an emulation node via a
+>>>>> sandbox,emul phandle. Its compatible selects the driver. Without the
+>>>>> property, the flash emulator remains bound to the slave node as before.
+>>>>>
+>>>>> Rename sandbox_sf_unbind_emul() to sandbox_spi_unbind_emul() while
+>>>>> here. It is no longer specific to SPI NOR, and the old name would
+>>>>> mislead every new caller.
+>>>>>
+>>>>> Signed-off-by: Heiko Schocher <hs@nabladev.com>
+>>>>>
+>>>>> drivers/mtd/spi/sandbox.c | 65 ++++++++++++++++++++++++++++++++++++++---------
+>>>>>   include/spi_flash.h       |  2 +-
+>>>>>   test/dm/sf.c              |  4 +--
+>>>>>   test/dm/spi.c             | 10 ++++----
+>>>>>   4 files changed, 61 insertions(+), 20 deletions(-)
+>>>>
+>>>>> diff --git a/drivers/mtd/spi/sandbox.c b/drivers/mtd/spi/sandbox.c
+>>>>> @@ -518,39 +520,78 @@ static const struct dm_spi_emul_ops sandbox_sf_emul_ops = {
+>>>>>   #ifdef CONFIG_SPI_FLASH
+>>>>> -int sandbox_sf_bind_emul(struct sandbox_state *state, int busnum, int cs,
+>>>>> -                      struct udevice *bus, ofnode node, const char *spec)
+>>>>> +/**
+>>>>> + * sandbox_spi_emul_lookup() - bind the emulator standing in for a slave
+>>>>
+>>>> The generic part (following the sandbox,emul phandle) now lives in the
+>>>> SPI NOR emulator, inside #ifdef CONFIG_SPI_FLASH, as does the only
+>>>> non-weak sandbox_spi_get_emul(). So emulating an SRAM, or anything
+>>>> else that is not flash, needs SPI_FLASH and SPI_FLASH_SANDBOX enabled.
+>>>> Please can you move the phandle lookup and sandbox_spi_get_emul() into
+>>>> drivers/spi/sandbox_spi.c, replacing the __weak version? The flash
+>>>> emulator can then supply just the fallback for nodes with no
+>>>> sandbox,emul property.
+>>>
+>>> I add this in a v3.
+>>>
+>>>>> diff --git a/drivers/mtd/spi/sandbox.c b/drivers/mtd/spi/sandbox.c
+>>>>> @@ -518,39 +520,78 @@ static const struct dm_spi_emul_ops sandbox_sf_emul_ops = {
+>>>>> +     if (!ofnode_parse_phandle_with_args(node, "sandbox,emul", NULL, 0, 0,
+>>>>> +                                         &args)) {
+>>>>> +             ret = lists_bind_fdt(bus, args.node, emulp, NULL, false);
+>>>>> +             if (ret)
+>>>>> +                     printf("Cannot bind emulator from node '%s' (err=%d)\n",
+>>>>> +                            ofnode_get_name(args.node), ret);
+>>>>> +
+>>>>> +             return ret;
+>>>>> +     }
+>>>>
+>>>> lists_bind_fdt() returns 0 and sets *emulp to NULL when no driver
+>>>> matches the compatible, e.g. with CONFIG_SPI_RAM_SANDBOX off. NULL is
+>>>> then stored in state->spi[][].emul, sandbox_spi_get_emul() succeeds,
+>>>> and sandbox_spi_xfer() gets -EINVAL from device_probe(NULL) with no
+>>>> hint about the cause. sandbox_spi_unbind_emul() would also pass NULL
+>>>> to device_remove(). Please check for a NULL device and return -ENOENT
+>>>> with a message naming the node.
+>>>
+>>> I add this in v3.
+>>>
+>>>>
+>>>>> diff --git a/drivers/mtd/spi/sandbox.c b/drivers/mtd/spi/sandbox.c
+>>>>> @@ -518,39 +520,78 @@ static const struct dm_spi_emul_ops sandbox_sf_emul_ops = {
+>>>>> +static int sandbox_spi_emul_lookup(struct udevice *bus, ofnode node,
+>>>>> +                                const char *spec, struct udevice **emulp)
+>>>>
+>>>> This binds a device rather than looking one up, so the name is
+>>>> misleading. Also, I2C and PCI do not bind on demand: their emulators
+>>>> are bound by the normal DT scan under an emulation parent node, then
+>>>> found with uclass_get_device_by_phandle(..., "sandbox,emul", ...). If
+>>>> SPI did the same, you could drop the lists_bind_fdt() call, and tests
+>>>> would no longer need to unbind the emulator by hand before devices are
+>>>> destroyed. Here the emulator node is a child of the slave, so it would
+>>>> also be bound twice if the SRAM driver (or the MTD uclass) ever
+>>>> scanned its children. What do you think?
+>>>
+>>> I take a look into it, but sounds correct.
+>>
+>> I think you are right about the shape.
+>>
+>> I will implement in v3 your other comments, and I think, that is a series
+>> of its own about the sandbox SPI infrastructure, and none of it is about
+>> the SRAM.
+>>
+>> I would send it after this one, with the SRAM as the second user, and drop
+>> the manual unbind from the tests there, where the change can be seen for what
+>> it is.
+>>
+>> If this is okay for you?
 > 
-> Assisted-by: Claude:claude-opus-5-5
-> Signed-off-by: Altair Bueno <abueno@airzonecontrol.com>
-> ---
->   fs/ubifs/ubifs.c | 10 ++++++++++
->   1 file changed, 10 insertions(+)
-
-Checkpatch warns with:
-
-   WARNING: Non-standard signature: Assisted-by:
-   #16:
-   Assisted-by: Claude:claude-opus-5-5
-
-   ERROR: Unrecognized email address: 'Claude:claude-opus-5-5'
-   #16:
-   Assisted-by: Claude:claude-opus-5-5
-
-   WARNING: From:/Signed-off-by: email name mismatch: 'From: Altair Bueno Calvente 
-<abueno@airzonecontrol.com>' != 'Signed-off-by: Altair Bueno <abueno@airzonecontrol.com>'
-
-May you meant "Co-developed-by" ?
-
-Please fix the name mismatch, thanks!
-
+> Gentle ping?
 > 
-> diff --git a/fs/ubifs/ubifs.c b/fs/ubifs/ubifs.c
-> index 6121fb0b1..fe6d0cd7a 100644
-> --- a/fs/ubifs/ubifs.c
-> +++ b/fs/ubifs/ubifs.c
-> @@ -543,6 +543,16 @@ static unsigned long ubifs_findfile(struct super_block *sb, char *filename)
->                    while (*next == '/')
->                          *(next++) = '\0';
->              }
-> +
-> +           if (!strcmp(name, ".")) {
-> +                 if (!next || *next == '\0') {
-> +                       kfree(buf);
-> +                       return root_inum;
-> +                 }
-> +                 name = next;
-> +                 continue;
-> +           }
-> +
->              ret = ubifs_finddir(sb, name, root_inum, &inum);
->              if (ret <= 0) {
->                    kfree(buf);
-> -- 
-> 2.43.0
+> I wait with v3 because Stefan was on holiday (added to cc), as Stefan can
+> test v3. If all work fine, I can send v3 ... currently state is without your
+> above comment...
+> 
+> Thanks!
 
-Reviewed-by: Heiko Schocher <hs@nabladev.com>
+Sorry for the email flood... just made a rebase of the patchset to
+current HEAD, and I found
+
+commit 3b748d780a37 ("sandbox: spi: Add SPI EEPROM emulator and DM test")
+
+and it seems to me, I do not need this patch anymore, am I correct?
+
+I try to make a rework of the patchset without this patch...
 
 bye,
 Heiko
+> 
+> bye,
+> Heiko
+>>
+>> Thanks!
+>>
+>> bye,
+>> Heiko
+>>>
+>>>>
+>>>>> diff --git a/drivers/mtd/spi/sandbox.c b/drivers/mtd/spi/sandbox.c
+>>>>> @@ -518,39 +520,78 @@ static const struct dm_spi_emul_ops sandbox_sf_emul_ops = {
+>>>>> +int sandbox_sf_bind_emul(struct sandbox_state *state, int busnum, int cs,
+>>>>> +                      struct udevice *bus, ofnode node, const char *spec)
+>>>>
+>>>> The unbind function is renamed because it is no longer specific to SPI
+>>>> NOR, but this one, which now binds any emulator too, keeps the 'sf'
+>>>> name. Please rename it to sandbox_spi_bind_emul() so the two stay
+>>>> consistent.
+>>>
+>>> Of course.
+>>>
+>>>>
+>>>>> diff --git a/include/spi_flash.h b/include/spi_flash.h
+>>>>> @@ -136,7 +136,7 @@ struct sandbox_state;
+>>>>> -void sandbox_sf_unbind_emul(struct sandbox_state *state, int busnum, int cs);
+>>>>> +void sandbox_spi_unbind_emul(struct sandbox_state *state, int busnum, int cs);
+>>>>
+>>>> If this is now a generic SPI helper, it should be declared in
+>>>> include/spi.h next to sandbox_spi_get_emul(), not in spi_flash.h under
+>>>> DM_SPI_FLASH.
+>>>
+>>> Indeed, move this in v3
+>>>
+>>> Thanks!
+>>>
+>>> bye,
+>>> Heiko
+>>>>
+>>>> Regards,
+>>>> Simon
+>>>>
+>>>
+>>
+> 
 
 -- 
 Nabla Software Engineering
