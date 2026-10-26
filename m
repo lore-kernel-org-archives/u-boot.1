@@ -2,132 +2,134 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0847606A31A
-	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 17:35:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E177606A325
+	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 17:35:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=xJyS9/BV;
-	dkim=pass (2048-bit key, unprotected) header.d=siemens.com header.i=cedric.hombourger@siemens.com header.a=rsa-sha256 header.s=fm2 header.b=PBVKH4Tx
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ukMvNXbv;
+	dkim=pass (2048-bit key, unprotected) header.d=siemens.com header.i=cedric.hombourger@siemens.com header.a=rsa-sha256 header.s=fm2 header.b=kWNZqN98
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BCE97407FB;
-	Mon, 26 Oct 2026 17:34:59 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DC1674082B;
+	Mon, 26 Oct 2026 17:35:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PW5Ew7HNn5qy; Mon, 26 Oct 2026 17:34:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 693C44081E
+ id DCHwuP9qOlmC; Mon, 26 Oct 2026 17:35:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5668D40830
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793036099;
-	b=AExbpmuIXh9kEdn/ntlCWq8nXceygHI/PJu3vjQCD3fK0T89VbYaAZYV3KLClJeBkTd0
-	 ZS3HTLVAzP8bib2jpK2DNEwFy3KJgmKlEHX8qkj5pomyCePNf9Gnl5jPWpMJTqpI8osQO
-	 YtJITIyTbdOhter3lQ1e0uZFLA6NT4SeVPR18nts4dS0EA5navHPMorPLnIW2djr5sK/O
-	 vOWn8j8jjGdmUFcASLpdLXShgE19Xfe5YPYVbv377dPTyzWXZFm08fRzhWZGYzKi3ODCC
-	 oabwB7LQTmK8SKm2tWrNz3eGBnjlhSYAl5Oln2QJNHmUBidnZRYOOTowoiQri7RL/Eg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793036102;
+	b=TVCtyow0GkqRQAjBxj1c8nf0D+Nb665W66mBG6tyElnR79AHUrpWIv/4l5jFV3uw6YrP
+	 DvjlyRke2hKR4tmrqkYMDA067GoVuZubrVD7EP1Mptn3uXUoyq0n6E+qMnOIRtGWL8q8i
+	 WBMkwCC2BeQ/8R01ik5ucJH3RomwrfrWVW1O2w1o4To/poxakUqYuise0D+z9ocan1LTS
+	 yZvdCEcBdPvMECJXsUwll3jT5hyg2ngI2YMDXImvIH+eiDsh/l7SeI524UiloBLDv25sT
+	 SL2IyEptzlLB3zMPLvwE/vITeXEOx6YIr9f7sEIIe99SD0j7FS5GSApn2VoaViCDwLQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793036099;
+	c=relaxed/relaxed; t=1793036102;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 DKIM-Signature:From:Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:
 	 X-Flowmailer-Platform:Feedback-ID:X-Mailman-Approved-At:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=065vaio2E7I+7WGIhrkQacP53VhnwT544YJYWaUphMA=;
-	b=LTzu0LjMmc0sQJ2ixE54qR7xsrY8/kTTk6IIMtMwSX/zCZnc2Cw9lko5eJSbtjEeKjC9
-	 8Dq2pjau0ud4bUcjtkRyZxRpY/Qov/0uhHpICsPz7Kn/xI3WuKEwPuj2pbNgjfDuhFTtg
-	 j+1zVH9KgWuYKuKtjTqUNp5XgdXtFOn4DuvCMoQjoMmQTRaWYABW2A0k+RtprMVtin28+
-	 AwO2TM2Q38rjlj8qM83RKDbh97nBpfRoRDfs5pxNLpcdcB/leA4cwTBGmy06uZnYjb5FA
-	 OV3+iPE1xVPXxOWObEc8owDpsiX8eLzZK/hWQx0EZrwSR4a2t3Kgus6kyPU7mMoJVwQ==
+	bh=5U1nK2HqZ3CGEq+CF0WjXHPI9DGRKd/RxXAnGFJrsGM=;
+	b=V/t1JrqdWS3rHsVw+yEg46sWn+0/bLqJmwxNeDT5Cyi54/IjbBv99J83CymDU3vJlCcl
+	 2X0ILiUzS17HQtBKyZZT34sY5pgMWTUXjKYRePoVjIY1A+84c/5Y01P8802o2AlCm9vpd
+	 +MhvhLc/nAK3Xk9Ihic0AMTg9gejsUEbIHDYnTCKgrXhYEgOHJaAL/FUzBKjtxXP1FIm1
+	 RzZc7C3f7GNx/PG0XvGLF+PnmsFvXuZcpO/qdT8KiBjk6ZNkeE2Tk750aMQ6flmEqF42z
+	 9AiJu4YD6vbDzxvbbtcq/jk53k7XOhzpjf8Y3qL/CMt2g+bvXQgSd9P/SI2gm28SVkg==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793036099;
-	bh=065vaio2E7I+7WGIhrkQacP53VhnwT544YJYWaUphMA=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=xJyS9/BVEvUDOXMhABalM40FqBCdcFYshbYTYMAM9hU7Gqt1RMzsUEniXDEshYiOs
-	 oPLhgmokyN9H0CamTPP5nzjf1vM202MfKH3RmUCccw8vfuSOjj4/SMX+9qtGOkefJ2
-	 gGx4BAP3PNwwQNu0s3JWt/YNWgrG2DZAv2ikuIsXSz7J5srD3z0Bs41cCggmVE8bsN
-	 L5gZAQnxM1G+lzXVhci6sknoHMjEvLqfkEpsJ8X4HQU7YcBGSfPUVtulLgTS2yYIxt
-	 zxBxbvBas+RVCDWiu5qe6G/sW5fQDG14rh40E52FV9MUWUF3j1cAYEUw4iLZSpUiKq
-	 z0Ut0YT4cDR2Q==
+	d=lists.u-boot-project.org; s=default; t=1793036102;
+	bh=5U1nK2HqZ3CGEq+CF0WjXHPI9DGRKd/RxXAnGFJrsGM=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=ukMvNXbvp1Oboz0xpj1E+n4zRnMTqD9haoYfqr/AA6dRSCei52UCOegjgcsHB4WWC
+	 SUKFMNqT7xO0cI2DDq/2jYngfZ/6NJvH5lk2sE5hmp0r1FCRY1mSYwCxat0OGqLLay
+	 dYHr9hyje3hgN+BfCxY1EppLwHPoqrfbhFGbMhemEVadcesPxHvxlS7ivO4cnZVYZb
+	 kWl1wr+XDHiXoEO39+ycd3CrKpzZz1UOkl3+mwdJwfudcBQJz3xs6c7f1qFwgVPQ/O
+	 hIJxJjVw7P0uWwY/AR7EP3iwvGKh3Tf6UlqAet7rGPaQ0EVy/+qp8XpYeiStTn5tqW
+	 /jOf5diFJRibA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 693C44081E;
-	Mon, 26 Oct 2026 17:34:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5668D40830;
+	Mon, 26 Oct 2026 17:35:01 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 58BC6D36
+ by lists1.osuosl.org (Postfix) with ESMTP id 672E0D37
  for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:38:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4A7424020B
+ by smtp2.osuosl.org (Postfix) with ESMTP id 648C6401AE
  for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:38:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GsGARXcUmL6H for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 16:38:07 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 6A2CF40223
+ id DPKd1YYqBV-M for <u-boot@lists.u-boot-project.org>;
+ Mon, 26 Oct 2026 16:38:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org E8A7F40205
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=185.136.65.226
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793032687;
- b=l7pN9Do0+uWInge1hOicA1qC1m0wYc9F5zyEsY+ROZBM67jx27ozuT1bFB6q4z3fQlGL
- q6jFBRq2x3LC4ZyT9nfbDEuESbrDvQdijxQQ37t1mfBbgs/1UOcbtKx+e666hoHo35Ppf
- oV6SQ5bu+PcchUGFAsALmfhXl7jdV7l943SuaJqRCVz1HsEERfHg7NCE8dK4PCP+sGoVb
- Qm7l01PGaRNEPjxcuyKFnACNoGQb1MhMgUzi3soLYZPAY/zNBsnoyoQQLmgfgs/2MvQsQ
- gNRdCIiBqfwyhHRQDkhfd+2G0NjcAJc8xgNVobKgLMIoKHv7O48BRcnWPy/SvX6wQKw==
+ arc=none smtp.remote-ip=185.136.64.227
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793032686;
+ b=ErsfXUBNsHl2bY6Jbmb29vtSxKzk4PVlcvg7g6lIPPyShqq7e5901U7cnz8xBi70zq/5
+ f7Zxci+wu+9AP03M/zEbwkifPGwKOYYTpyFa6IeIAKvAZlNBaWrAqQCetAOrJq66NGtbI
+ hGmPfPnGInY3zJz50wrU2xFvhOfIJB8EgoXF1y4qpTgK1Kxn17Z3Lz/XtbNWFfuU+Ge6J
+ vi2QzZvBRHtxfMiJJ/ICTEg/l/oJ3DyNuZBD+dxyO7ebPTR0vLDGJA5IhkuavmemLbaT/
+ 7lZTfDupfC2UHKILyvNDGX7uJKQIQ1INqhBu5VDEkthk5O/MrW/+Yncal/yLNxj5xOA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793032687;
- h=Received-SPF:Received:DKIM-Signature:From:Date:Subject:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Message-Id:References:
- In-Reply-To:To:Cc:X-Flowmailer-Platform:Feedback-ID;
- bh=065vaio2E7I+7WGIhrkQacP53VhnwT544YJYWaUphMA=;
- b=desh7uf4RZALnmA714t3E5BZWQaqPcZQ8iUyZJp2c0YqqS2ZeG5ezjiYgezMIlafzMob
- eFiladgFgdclJo8b1MrPKs5kKc2SdV3U3vL87rl2ZmgUyXZTtSZILct4mc8I0BzM+tHUN
- S3dEZxAB8d2hu3Aj38HKhadZGAo5Zrc9mEWq0xgtU05c8AiBNts7e24Namy6r8IOMYMkx
- x9TY9rtSEkcIGgHBWtnCNO7BqrBoSq2p6NCKlUt2q5T8AiXzjrCoT2FlkmMRsfQD8BIt2
- X5TtqOQm5WYJwXhV8CqdbLrq2B/QEYE63IWgbxJsuDh218Z3roB4ZpR08ywI5BwKyCg==
+ c=relaxed/relaxed; t=1793032686;
+ h=Received-SPF:Received:DKIM-Signature:From:Subject:Date:Message-Id:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+ X-Change-ID:To:Cc:X-Flowmailer-Platform:Feedback-ID;
+ bh=5U1nK2HqZ3CGEq+CF0WjXHPI9DGRKd/RxXAnGFJrsGM=;
+ b=VD6v3G8G0636v9lxyePK+db0qnYqd5YXHKaS52/KVzslt+p2dxMgdhJhQW0bIsYCrz+s
+ Izmial9yO2w1TvsQfDupdPTSeKjDy0SmkU3RTCEG+mqI8lWAH0iAngmEnaDeYti0Hvv45
+ RtGHcFE9uEaDtafdeQQZu0UfNJV3mViFVzkvhR6GaORpMDggSN4yA8jIL9e4TwnDEsXtq
+ TQtX06Qa9mz0RjqMp6c8M0dRxgkbXN+pRvWbPCr29BgbhmkbYF/1Nw0DDjKBxeSEiDM3k
+ dCYgCey6l1m4fC30bMU0HLA8TOYIJIaEt46FHBx8PxQmlY+ebr/LalhOSgY4VV78hDA==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=siemens.com;
  dkim=pass header.d=siemens.com header.i=cedric.hombourger@siemens.com
- header.a=rsa-sha256 header.s=fm2 header.b=PBVKH4Tx; 
- arc=none smtp.remote-ip=185.136.65.226
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.65.226;
- helo=mta-65-226.siemens.flowmailer.net;
- envelope-from=fm-1212295-2026102616380112718af1e3000207d1-wknts_@rts-flowmailer.siemens.com;
+ header.a=rsa-sha256 header.s=fm2 header.b=kWNZqN98; 
+ arc=none smtp.remote-ip=185.136.64.227
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.64.227;
+ helo=mta-64-227.siemens.flowmailer.net;
+ envelope-from=fm-1212295-2026102616380190525a8c7e0002074e-s_mkyn@rts-flowmailer.siemens.com;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=siemens.com header.i=cedric.hombourger@siemens.com
- header.a=rsa-sha256 header.s=fm2 header.b=PBVKH4Tx
-Received: from mta-65-226.siemens.flowmailer.net
- (mta-65-226.siemens.flowmailer.net [185.136.65.226])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6A2CF40223
+ header.a=rsa-sha256 header.s=fm2 header.b=kWNZqN98
+Received: from mta-64-227.siemens.flowmailer.net
+ (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E8A7F40205
  for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:38:04 +0000 (UTC)
-Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
- 2026102616380112718af1e3000207d1
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id
+ 2026102616380190525a8c7e0002074e
  for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 17:38:02 +0100
+ Mon, 26 Oct 2026 17:38:01 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=cedric.hombourger@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=065vaio2E7I+7WGIhrkQacP53VhnwT544YJYWaUphMA=;
- b=PBVKH4TxvI6NrV9QQd+3wnmHsOdkB0ui1yCZi5UsRLMIZzaU0VEXQTZlMq/0fg41R3/J5G
- NBWVhSdGFb4onnWJhoKKhqKPYdvLJNQpSqhJcr5nYz6X3iWTIXKEMRP843UJsQDVdZawgV54
- gSzqtr8Zk6Ma8e+DLjzbdOY4BNL5ExfKN61bf0WVlBLrjVZDEMfjCKDCGf00QKiLYaTrZvVz
- FOdA0YM8vvVSwP7eNGnk4Ph4BtnDR/Wuq8S1Sg3jLJ6mzPYO5L2lbcLZplBidWS4uBV+M8dE
- jlsDVuLUwwC3o/l+VrLXZhfrmM1jHhCC7DUDeAtdoP/imKKL4HOQVvQg==;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=5U1nK2HqZ3CGEq+CF0WjXHPI9DGRKd/RxXAnGFJrsGM=;
+ b=kWNZqN98NsdZATRGbQqD/Jkj0SDv8ajQreHpSrDe0WSINvRSyxUul9W2zB8PKqeuAFoGk+
+ qGci/gJp4pxh92/TqJAEsgxS86PbQk6ayxI120giqwO4ytO0jtpANCFTmgaMeu6QgRFMC2sG
+ 3lpSmXB7Qtmhyt863GoGtDVs8Y5MC3Td2rm4KuQom4K5y450pa57+r1pQ9hcD5rKval05pCp
+ 3ggkKQmbbnTv94X4lA5mXBwUNedJOFUt6iN0/JWPvQUpJWkRLCQwPXjpaVFNOiW6YIrgLUBF
+ uH5djUos113eTJ9qpzIMJ7v/PZxACJTcQal7GP7t+VprTMWKy2b4OM+A==;
 From: Cedric Hombourger <cedric.hombourger@siemens.com>
-Date: Mon, 26 Oct 2026 17:37:24 +0100
-Subject: [RFC PATCH v2 1/3] fs: fat: add a write that keeps the end of the file
+Subject: [RFC PATCH v2 0/3] fs: let EFI Write() keep the end of a FAT file
+Date: Mon, 26 Oct 2026 17:37:23 +0100
+Message-Id: <20261026-fat-fs-fixes-v2-0-41ae696cd353@siemens.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261026-fat-fs-fixes-v2-1-41ae696cd353@siemens.com>
-References: <20261026-fat-fs-fixes-v2-0-41ae696cd353@siemens.com>
-In-Reply-To: <20261026-fat-fs-fixes-v2-0-41ae696cd353@siemens.com>
+X-B4-Tracking: v=1; b=H4sIAMSB32oC/22OwQ6CQAxEf4X0bA2L6xI5+R+GA6xd6QHQLRIN4
+ d8tcDAmHnqYad7MTCAUmQSKZIJIIwv3nYpsl4Bvqu5GyFfVkKWZM3oYqgGDYOAXCfoj1dbaYMg
+ dQJF7pPWhxKXcdKTHU1OHzfyGasdP5IIVo4EFa1iGPr7XUWot3P/+0WCKznoXQu7qPJzOwtRSJ
+ 3vft1DO8/wB3jVJIeEAAAA=
+X-Change-ID: 20261026-fat-fs-fixes-c5eb444f1e63
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, 
  Cedric Hombourger <cedric.hombourger@siemens.com>, 
@@ -157,135 +159,118 @@ X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-A write at an offset that ends before the end of the file trims the
-file at that point. This was chosen on purpose in commit cb8af8af5ba0
-("fs: fat: support write with non-zero offset") to stay compatible with
-the interface of the fatwrite command, which replaces the whole file.
+This series stops the EFI file protocol Write() from cutting a FAT file
+at the end of the written range. It is an RFC, mainly for the naming and
+for the shape of the new interface.
 
-Callers that update a part of a file, like the EFI file protocol, need
-the data after the written range to stay.
+The problem
+-----------
 
-Move the body of file_fat_write_at() to a static function that takes a
-keep_tail flag. With the flag set, set_contents() does not free the
-clusters after the written range, and the size in the directory entry
-only grows. Keep file_fat_write_at() as a wrapper with the current
-behaviour and add file_fat_overwrite() for the new one.
+fs_write() with an offset trims the file at offset + len. This was chosen
+on purpose in commit cb8af8af5ba0 ("fs: fat: support write with non-zero
+offset") to stay compatible with the fatwrite command, which replaces a
+whole file. efi_file_write_int() uses fs_write(), so a write in the middle
+of a file through EFI_FILE_PROTOCOL.Write() loses the data after it.
+
+I found this with an EFI application that keeps a 256 MiB file on the
+ESP and updates it in small pieces. With U-Boot 2025.01 on qemu_arm64 the
+file went from 268435456 to 602112 bytes after one run. The code is the
+same in current master (used for this submission).
+
+What the specification and others do
+------------------------------------
+
+- UEFI 2.10, section 13.5.6, EFI_FILE_PROTOCOL.Write(): the data is
+  written at the current position, the file grows if required, and
+  partial writes only happen on a data error. Nothing allows a successful
+  Write() to drop data after the written range.
+- The UEFI SCT checks it: BBTestWriteBasicTestCheckpoint1 in edk2-test
+  writes 50 bytes at position 0 of a 200 byte file and expects the size to
+  stay 200. I did not run SCT on U-Boot. By reading it, this case fails
+  today (and its set-up needs SetInfo() to change the file size, which
+  U-Boot refuses).
+- EDK2's FAT driver (FatIFileAccess) only grows the file when a write goes
+  past the end.
+
+So U-Boot's behaviour is surprising for EFI applications, and I believe
+it is not conforming. I may be missing a reason for it, hence the RFC.
+
+The series
+----------
+
+1. fs: fat: add a write that keeps the end of the file. The body of
+   file_fat_write_at() moves to a static function with a keep_tail flag.
+   file_fat_write_at() keeps its behaviour as a wrapper.
+   file_fat_overwrite() is the new entry point.
+2. fs: add fs_overwrite(). It uses an optional overwrite() operation in
+   struct fstype_info. A filesystem without it falls back to write().
+3. efi_loader: use fs_overwrite() in Write().
+
+fs_write() and the fatwrite command do not change.
+
+Questions
+---------
+
+- Naming: fs_overwrite() is what I chose. fs_write_inplace(),
+  fs_write_keep_tail() and fs_update() were also considered. Please
+  suggest a better one.
+- exFAT has the same trim (exfat_fs_write() calls exfat_truncate() with
+  offset + size). ext4 refuses a non-zero offset and replaces the file at
+  offset 0. I did not touch them. Should exFAT get the same operation in
+  this series? A test for efi_selftest is not included yet.
+
+Cedric Hombourger (3):
+  fs: fat: add a write that keeps the end of the file
+  fs: add fs_overwrite() to write without trimming the file
+  efi_loader: do not trim files in Write()
+
+fs/fat/fat_write.c        | 32 ++++++++++++++++++++++++--------
+ fs/fs.c                   | 25 ++++++++++++++++++++++---
+ include/fat.h             |  2 ++
+ include/fs.h              | 16 ++++++++++++++++
+ lib/efi_loader/efi_file.c |  4 ++--
+ 5 files changed, 66 insertions(+), 13 deletions(-)
+
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Cedric Hombourger <cedric.hombourger@siemens.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Qu Wenruo <wqu@suse.com>
+Cc: Alexey Charkov <alchark@flipper.net>
+Cc: Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: Vincent Jardin <vjardin@free.fr>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
+-- 
+2.47.3
 
 Signed-off-by: Cedric Hombourger <cedric.hombourger@siemens.com>
 ---
- fs/fat/fat_write.c | 32 ++++++++++++++++++++++++--------
- include/fat.h      |  2 ++
- 2 files changed, 26 insertions(+), 8 deletions(-)
+Changes in v2:
+- EDITME: describe what is new in this series revision.
+- EDITME: use bulletpoints and terse descriptions.
+- Link to v1: https://lore.kernel.org/r/20261026-fat-fs-fixes-v1-0-64c6ff76b7f9@siemens.com
 
-diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
-index a1d28b4e305766b8fb8ee097fafab235faf8ad52..03cd6d368b01d7b4d08502e1783e85f61c39e323 100644
---- a/fs/fat/fat_write.c
-+++ b/fs/fat/fat_write.c
-@@ -925,10 +925,12 @@ static int check_overflow(fsdata *mydata, __u32 clustnum, loff_t size)
-  * the file associated with 'dentptr'
-  * Update the number of bytes written in *gotsize and return 0
-  * or return -1 on fatal errors.
-+ * Unless 'keep_tail' is set, a write that ends before the end of the file
-+ * truncates the file there.
-  */
- static int
- set_contents(fsdata *mydata, dir_entry *dentptr, loff_t pos, __u8 *buffer,
--	     loff_t maxsize, loff_t *gotsize)
-+	     loff_t maxsize, loff_t *gotsize, bool keep_tail)
- {
- 	unsigned int bytesperclust = mydata->clust_size * mydata->sect_size;
- 	__u32 curclust = START(dentptr);
-@@ -1045,7 +1047,7 @@ set_contents(fsdata *mydata, dir_entry *dentptr, loff_t pos, __u8 *buffer,
- 	if (filesize <= cur_pos) {
- 		/* no more write */
- 		newclust = get_fatent(mydata, endclust);
--		if (!IS_LAST_CLUST(newclust, mydata->fatsize)) {
-+		if (!keep_tail && !IS_LAST_CLUST(newclust, mydata->fatsize)) {
- 			/* truncate the rest */
- 			clear_fatent(mydata, newclust);
- 
-@@ -1469,8 +1471,8 @@ static int normalize_longname(char *l_filename, const char *filename)
- 	return 0;
- }
- 
--int file_fat_write_at(const char *filename, loff_t pos, void *buffer,
--		      loff_t size, loff_t *actwrite)
-+static int fat_write_at(const char *filename, loff_t pos, void *buffer,
-+			loff_t size, loff_t *actwrite, bool keep_tail)
- {
- 	dir_entry *retdent;
- 	fsdata datablock = { .fatbuf = NULL, };
-@@ -1535,7 +1537,8 @@ int file_fat_write_at(const char *filename, loff_t pos, void *buffer,
- 		}
- 
- 		/* Update file size in a directory entry */
--		retdent->size = cpu_to_le32(pos + size);
-+		if (!keep_tail || pos + size > FAT2CPU32(retdent->size))
-+			retdent->size = cpu_to_le32(pos + size);
- 		/* Update change date */
- 		dentry_set_time(retdent);
- 	} else {
-@@ -1552,7 +1555,8 @@ int file_fat_write_at(const char *filename, loff_t pos, void *buffer,
- 		retdent = itr->dent;
- 	}
- 
--	ret = set_contents(mydata, retdent, pos, buffer, size, actwrite);
-+	ret = set_contents(mydata, retdent, pos, buffer, size, actwrite,
-+			   keep_tail);
- 	if (ret < 0) {
- 		printf("Error: writing contents\n");
- 		ret = -EIO;
-@@ -1578,6 +1582,18 @@ exit:
- 	return ret;
- }
- 
-+int file_fat_write_at(const char *filename, loff_t pos, void *buffer,
-+		      loff_t size, loff_t *actwrite)
-+{
-+	return fat_write_at(filename, pos, buffer, size, actwrite, false);
-+}
-+
-+int file_fat_overwrite(const char *filename, void *buffer, loff_t offset,
-+		       loff_t maxsize, loff_t *actwrite)
-+{
-+	return fat_write_at(filename, offset, buffer, maxsize, actwrite, true);
-+}
-+
- int file_fat_write(const char *filename, void *buffer, loff_t offset,
- 		   loff_t maxsize, loff_t *actwrite)
- {
-@@ -1877,7 +1893,7 @@ int fat_mkdir(const char *dirname)
- 		set_start_cluster(mydata, &dotdent[1], itr->start_clust);
- 
- 	ret = set_contents(mydata, retdent, 0, (__u8 *)dotdent,
--			   bytesperclust, &actwrite);
-+			   bytesperclust, &actwrite, false);
- 	if (ret < 0) {
- 		printf("Error: writing contents\n");
- 		goto exit;
-@@ -1885,7 +1901,7 @@ int fat_mkdir(const char *dirname)
- 	/* Write twice for "." */
- 	set_start_cluster(mydata, &dotdent[0], START(retdent));
- 	ret = set_contents(mydata, retdent, 0, (__u8 *)dotdent,
--			   bytesperclust, &actwrite);
-+			   bytesperclust, &actwrite, false);
- 	if (ret < 0) {
- 		printf("Error: writing contents\n");
- 		goto exit;
-diff --git a/include/fat.h b/include/fat.h
-index 40da0370a4442edad872661408c856b7dac0787c..499e1924838049568466d8d4329c24ac4c26b087 100644
---- a/include/fat.h
-+++ b/include/fat.h
-@@ -225,6 +225,8 @@ int fat_register_device(struct blk_desc *dev_desc, int part_no);
- 
- int file_fat_write(const char *filename, void *buf, loff_t offset, loff_t len,
- 		   loff_t *actwrite);
-+int file_fat_overwrite(const char *filename, void *buf, loff_t offset,
-+		       loff_t len, loff_t *actwrite);
- int fat_read_file(const char *filename, void *buf, loff_t offset, loff_t len,
- 		  loff_t *actread);
- int fat_opendir(const char *filename, struct fs_dir_stream **dirsp);
+---
+Cedric Hombourger (3):
+      fs: fat: add a write that keeps the end of the file
+      fs: add fs_overwrite() to write without trimming the file
+      efi_loader: do not trim files in Write()
 
+ fs/fat/fat_write.c        | 32 ++++++++++++++++++++++++--------
+ fs/fs.c                   | 25 ++++++++++++++++++++++---
+ include/fat.h             |  2 ++
+ include/fs.h              | 16 ++++++++++++++++
+ lib/efi_loader/efi_file.c |  4 ++--
+ 5 files changed, 66 insertions(+), 13 deletions(-)
+---
+base-commit: 2203aabfa59826d04d9e2094c6b32c1029cd01f8
+change-id: 20261026-fat-fs-fixes-c5eb444f1e63
+prerequisite-change-id: 20261026-fat-fixes:v1
+
+Best regards,
 -- 
-2.47.3
+Cedric Hombourger <cedric.hombourger@siemens.com>
 
