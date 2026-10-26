@@ -1,139 +1,141 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8037A606A32C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3CD5606A328
 	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 21:31:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=a+bdNgr8;
-	dkim=pass (2048-bit key, unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=J9demun/
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=LdRdjOa7;
+	dkim=pass (2048-bit key, unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=pE46Jl3v
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5A58D80D5E;
-	Mon, 26 Oct 2026 21:31:36 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id ADE73605EF;
+	Mon, 26 Oct 2026 21:31:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JvvyYlkvkJ-B; Mon, 26 Oct 2026 21:31:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8D11180CD3
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793050295;
-	b=Xu88+f3WicnHdqh1xGss0fMN+oHYKR90PIxay4NMUGnMlrMMo44JSPXHDwgGDhsSE8Xx
-	 eVoFs4swDRDp5Jj+SSfwt2/rzm8GC/aCuixvM1floq6NT+O4ZKFWlYNqxJMopSHrMkd41
-	 SL6zRJDO8FaBGEKIXnAdHhMTgj//bpyqF5K5CD2v9BC7lRb791weIfTGET87zKPqh21wI
-	 QxAzubh1/oQtP1ovHUf6hJ7zf3+ox9OF1kB6jmQaokD0jyw5E6OVs2i918o+HJRX+3hq9
-	 mzOMsWfUaO0Jj2ajwy36BA82WCA2xEAbeVdjgFqC83pAuziBZKMyhgAFghSwpuY40+w==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fQmC0FSrG04b; Mon, 26 Oct 2026 21:31:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0D17960607
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793050294;
+	b=Bn8F/WAOgdvNRCdOSULwQ+S/rumvZClSm1Cqatx550nhxK9IB/QAYncpYPjTEbPjaFs5
+	 t5HaZv/7Xt302KUrEDAsxaIv/qgaiFOWVflbOLlCzb0HL4EYr9JnOUJ1mfWjDvGTq8V4r
+	 C8fuuDpqOiwNCYr1q0QBLiw8/NjgphAO8YNCHoqSrnKpv4J5y3I3WScuFQhmRrRZUe7bW
+	 ypkSIbC6Ck0moM7aTEEQMI5zlFl0rfMbi0JYuDM+2YzwGgWVK/oliWU0nWiuTrWstGH+V
+	 yib2F+d+ExOc1Zpgxhyne0JuD6pTGCQtTQzik2wRHYbFTInpD3bF5SpDvQvs18jro5w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793050295;
+	c=relaxed/relaxed; t=1793050294;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=MhwhPN6eY+k8B9cZpiAJ5epfRXQ0Ue9hQEKzJ/FAHq8=;
-	b=OtP5WGmr8NkscGZamhdDxEgeNFtRoapfkXqAR2S33XUaWX+/axA6bHlxsxrGM5xn8snB
-	 +Kh5+eT3jYSTngfVfMGlRBdzrZoyW/AB0OzNfM0Sumd9o7n079MJNeslUhDcy0jfEpkjd
-	 4SOX5Z5zhfkB/Y0coFw7Gu3NKLLpxcBgDWt0gG8WFx4rYN9AK2c6xUUpYS1njHRw6ui/G
-	 Hf7fWWzobfhn4KIV7d5uL99lc9DrU5rGXcU5F+BsukCaeRV0gFY1m8Sx2hzb9jLNREJyK
-	 tQa5slw3kKFg6u/f2iqKOHEhyvOnHlHkeZEFqjsO1m8HqEewYk8hRgX+gYfF+QECM8Q==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-MBO-RS-ID:X-MBO-RS-META:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=jn20dXGMuiV9UZfmzYFPx1X2Fc/wqR/d9h5Xs2gpM2k=;
+	b=mNOtCpLDhssLtx517WBaQzYD1CKC1ehsaEk8R3sema6g7bIoGHvIkLCo4G11bzmcFajQ
+	 iQ32zLsBpzwAup9it9JGMVx4xpFFuOaoRvgJlrtgwqv65qZEOQspYLzMhMEZMT+2Jqgjd
+	 uy88KifgFrqcniWa4vjLkQbGRMDDwkPqKXH+rUTdpk5pjluke0vAzkD5q805vEjCdkpSR
+	 aTm8mTlVn2XRPdER2eJDYYtfPTtreHb8I8RSWuSSZwVyUF1nkPioKhnTeWplC5gUahlBh
+	 OuHMFw1cIzESgQ4QQKw3ydnPhUXXeYqZrEuQeAYVY6QmWZqSvmwqxYjRH/A6RSDsX+A==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793050295;
-	bh=MhwhPN6eY+k8B9cZpiAJ5epfRXQ0Ue9hQEKzJ/FAHq8=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=a+bdNgr8+hnzf8miJZVX6NJ0yRdDg6/uzjrLrQtapOi005PRmblcjXJiPjxWSZ7pJ
-	 U476fm1SstmsVMnEB9aJsfwMO7jDsOW9Qg6HubZUDm5TF5I0UI/1Gua96RFxPxDEb2
-	 kd1Gs6e8Kn52tnuGz/a1avdJGZDZTs9KI1Gzh3LI7RenDEnLVMMFpYBXMH1jHgheO/
-	 DCTJHHs2SGHvEMWlD6oXyzQqq8Qt5KLfBzv40Jyp5+LsOtPKpkLC4vXykd+2gCzIt4
-	 uNMXikF0Bt1Flhj0xusBWziXVnXeZL7ZQD/agqE2EZWwhYoRU1A5GlEt50coIZY0vr
-	 9Ph9KZ22qj8Pw==
+	d=lists.u-boot-project.org; s=default; t=1793050294;
+	bh=jn20dXGMuiV9UZfmzYFPx1X2Fc/wqR/d9h5Xs2gpM2k=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=LdRdjOa7YFb3Qr6jcZ2z1jmuPEKF6G9p10+9GoTJg2R11hW5WVifnbIkLjdbyA0Mu
+	 HAtEGfsEjGzbC885OBBe8FaPiOMNaPaz6J9MBdunXoV2Gf/4dH+yrGQyh4c1u5qlEA
+	 +oqKxuH+xNhF6rVKdCtEe79Qr52yL9SbP+E4akT6nPWlDg3ahmJYvCf37NlxDBMcLf
+	 /Lk3oc7OgwnE4zhOto0Eb4AhOPUQYaj5SuLvClv3O2+zxBCJToXR09Spsy96nVnVn4
+	 OXc4XhNg5SU1aKNLTyWzmcAII/49gvrsw/KZTtPhaD5Dcdwh+OM/T4LikSspZYmq/i
+	 tqNr8Esfkyeag==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8D11180CD3;
-	Mon, 26 Oct 2026 21:31:35 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 95E314BC
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0D17960607;
+	Mon, 26 Oct 2026 21:31:34 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4A5E23421
  for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 21:31:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7C5CC40075
+ by smtp4.osuosl.org (Postfix) with ESMTP id 35D1340604
  for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 21:31:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mLoiZQUcnJyG for <u-boot@lists.u-boot-project.org>;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0As_lLELJxO7 for <u-boot@lists.u-boot-project.org>;
  Mon, 26 Oct 2026 21:31:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 2A92640062
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2001:67c:2050:0:465::101"
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3EE6040603
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=80.241.56.152
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793050287;
- b=GCGMBkObYke+HBtSos9OXvx1rTFKstunapalI/9wrvK9vukeia5mda22xtolhmnFVig9
- jQ8O//GV4QD1XP9LzHA8qkOZ0wkO8rixN8nJ5gjIoni7lnWJAKZYBJh52pxZTNZzIcxtW
- IGmi9d++4IDyGDy8jaHvSXUlk7U0WOGswjwSQCME7bJihwDVOdB/XiIKDg1zvzvq6vfvU
- vm4gqdP+G0r0u64YIHe4SUKBVTpq/2NyMNEziwGtis1N2v/YXHB1bHpQ7DftDXM5Z7Dss
- iwXYKrcnuseTI2KeCBAS0tvF1KAzBSdJOEoj7MstQ4bwdPYaPAl6DahyPokv4qJIMIw==
+ b=TU4z/hmGr71F/e6ba1XdKCuLoxXUF/8G31c2FH480fVi/a11qKXiCUD/IbXe1guof/MC
+ YzhMziqFvpbGKEiFmbnyVs/yQhLEc2MD7l7UH2cdfOt6+vh5u1BD1s8JPBwZinbocjNny
+ R5URheJ1oJvIZrgl5dunV/XrkcPHiL1v+QaR3cBBpnsCd4+/THl8ADpk/o515II/OuBMU
+ Vp/RcFJLXjkgyQu186B8TAKkufpl8D4x95OF6fWiHQIfoUtzhVUw/krfPKOAb217QURy+
+ jxvxIyWBPzUma8qevS5l/dvDMcbCXm2oDP7I5+jBdPSyuH8CMDbh/SGkKUcCWU6riGA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1793050287;
  h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
- Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
- X-MBO-RS-ID:X-MBO-RS-META;
- bh=MhwhPN6eY+k8B9cZpiAJ5epfRXQ0Ue9hQEKzJ/FAHq8=;
- b=jy7DcTXsqZV8tLw+b7jlc8DUmUOEmhJ5L8LGGWcZfegMIKHC7VX3Lql6gIKchtw/6AJh
- /BezJ1OBN9EmxOMQZUr2kcpri5JH7rGaKvYTwEQjA510ddcT7SKagFnttNXTEuUeUVZ90
- Dte0d9yhqGYlQd5xQ7aQVTHmMjbUTLmKEZplbFju7oNdhasNotdkcyDecp6+xsbWDcb99
- qn6TWBrKrxgAtadzD/ce4QSbU+rkyGhdJS4W+uWzZnbuSP2XQecpNYF5uxxXbgWoF6G6+
- j292ZEqmTSnsDtvW4rXUizLZmQ0iEqsxrIVCWaSCkwQL3VuHXxAcGrQejJeGqvCe5zQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+ Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META;
+ bh=jn20dXGMuiV9UZfmzYFPx1X2Fc/wqR/d9h5Xs2gpM2k=;
+ b=sc3cjqMrTIo/zBa/5iezfbqFU1DeolsjET+QeQVNAOZT7ro1cbJugbss0AoZDtzZEe7+
+ yNqvips7EhmCtmjjxRqdyBKF/EAbEzzPFiMCtop6mQG0TTEnvlGxlywjtGh2fyehw3J7U
+ /NjEh33gDWgvqbRVPsS4yFMAo28kFxsFvgQD/qoQPv8eccwotgMBANdIrz9/kvD8v8a3x
+ rH+DK3yXDOkZusreiKd0qrcQMK4TrZeDzaO6yu3tWl1Ur3sRb9hNTDwToFxbA+Lil3zk3
+ /7/lR+ylceJyAc6wKpRpxyyDWIgfsonR/O81aEoqTig2WUc6GIdIiiZ6cdUolDJR9Pw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=mailbox.org;
  dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b="J9demun/"; 
- arc=none smtp.remote-ip="2001:67c:2050:0:465::101"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::101; helo=mout-p-101.mailbox.org;
- envelope-from=marek.vasut+renesas@mailbox.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+ header.s=mail20150812 header.b=pE46Jl3v; 
+ arc=none smtp.remote-ip=80.241.56.152
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.152;
+ helo=mout-p-102.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=J9demun/
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2A92640062
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 21:31:25 +0000 (UTC)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=pE46Jl3v
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3EE6040603
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 21:31:26 +0000 (UTC)
 Received: from smtp2.mailbox.org (smtp2.mailbox.org
  [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4jD6JB1Ryhz8tdk;
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4jD6JB633bzKnD3;
  Mon, 26 Oct 2026 22:31:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1793050282;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=MhwhPN6eY+k8B9cZpiAJ5epfRXQ0Ue9hQEKzJ/FAHq8=;
- b=J9demun/YpbAFu3ZdJpkfIVT00jzXuJ5wWytoqAv+766ZTmpfE4L/cmYuKvI00rmWWotIU
- RXww4sT0E83J467dcYHELC8rmD6OfHmf7HPJwWaJ/fFxxEs8NKgavR5EJLzofk2VcuVK4l
- kfiHpV2neMqYoJmj3JUbCC+0ZcRWuScZ0VyOZvtlbyv/HwfA+tOTWQtPKnJ7MN1kyaMuJj
- Usff8196cLYrppJ/ho4Cmi0GWXsGRpzySxpVg3vFlLe25G8IA3tEhR8O/sy0S8JRD55GlD
- il6Hg99y4TtHVUPuq+1zC5oS/nsN4JHPCAti4RVgB4/peYjPsXAqly2/xmK5NA==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=jn20dXGMuiV9UZfmzYFPx1X2Fc/wqR/d9h5Xs2gpM2k=;
+ b=pE46Jl3vlWpGVNArjHnh7O8a/m+egby8xHenZqwMece+6wSe3b442RzVRl8gaaU+HsLtPC
+ Cba5ABl6k4uFsUM9oiTM2fYa5kROfTtMb7B4NVAa90J7ycdFthvXxfauFquCtFbiL3d6Qt
+ orRIl5FaiZyEyR/7DkGZ8fCf4dPosNGZ5oNUipNZ9OdJCeRfqbAgKUI2MkRMd+Xn8MT5ha
+ WyI+VGbj71t+7c4k8hceva2bATYz+rQRTswynKZHmPV6W+ZAkrnd4yAtR2kiTu1t8jKp5Z
+ m/PDbdL2/T4qwdlRqAym5qzX2yFNCDbcmxSMSzyXlz01G378StoBSkMgS3yMXw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/4] clk: renesas: Add Kconfig symbol for conditional build of
- full clock tables
-Date: Mon, 26 Oct 2026 22:30:16 +0100
-Message-ID: <20261026213111.453322-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 2/4] clk: renesas: Minimize R8A77951 H3 clock tables
+Date: Mon, 26 Oct 2026 22:30:17 +0100
+Message-ID: <20261026213111.453322-2-marek.vasut+renesas@mailbox.org>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261026213111.453322-1-marek.vasut+renesas@mailbox.org>
+References: <20261026213111.453322-1-marek.vasut+renesas@mailbox.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 7e0ba0d2e1f61115e2a
-X-MBO-RS-META: gui93dagp48gc44yacj49qeuqxse4ui8
+X-MBO-RS-ID: 2f6ec0755147a1d8f82
+X-MBO-RS-META: iruc3gctqurhha4onuyra8mgrgnk3y89
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -150,12 +152,18 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-By default the clock tables used by U-Boot are reduced to keep the
-size of the bootloader low. This option allows build of full clock
-tables the same way they are included in the Linux kernel. This
-includes clock entries for Audio, CAN, CANFD, DU, INTC, INTC-EX,
-MSIOF, PWM, SSI, for which there is no U-Boot driver. This option
-is disabled by default.
+Reduce the clock tables by ifdeffing out clock entries which are
+unlikely to be used by U-Boot. This helps reduce the size of the
+bootloader in the 3 kiB range. This includes conditional build
+of these clock entries:
+
+- Audio
+- CAN/CANFD
+- INTC/INTC-EX
+- MSIOF
+- PWM
+- SSI
+- VIN
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -163,30 +171,128 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org
 ---
- drivers/clk/renesas/Kconfig | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ drivers/clk/renesas/r8a7795-cpg-mssr.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/drivers/clk/renesas/Kconfig b/drivers/clk/renesas/Kconfig
-index 1893b6c4181..15462280c60 100644
---- a/drivers/clk/renesas/Kconfig
-+++ b/drivers/clk/renesas/Kconfig
-@@ -4,6 +4,16 @@ config CLK_RENESAS
- 	help
- 	  Enable support for clock present on Renesas SoCs.
+diff --git a/drivers/clk/renesas/r8a7795-cpg-mssr.c b/drivers/clk/renesas/r8a7795-cpg-mssr.c
+index 4225036a1a9..165ca911029 100644
+--- a/drivers/clk/renesas/r8a7795-cpg-mssr.c
++++ b/drivers/clk/renesas/r8a7795-cpg-mssr.c
+@@ -127,9 +127,11 @@ static struct cpg_core_clk r8a7795_core_clks[] __initdata = {
+ };
  
-+config CLK_RENESAS_FULL
-+	bool "Renesas clock drivers (full size)"
-+	depends on CLK_RENESAS
-+	help
-+	  By default the clock tables used by U-Boot are reduced to keep the
-+	  size of the bootloader low. Enable this option to use full clock
-+	  tables the same way they are included in the Linux kernel. This
-+	  includes clock entries for Audio, CAN, CANFD, DU, INTC, INTC-EX,
-+	  MSIOF, PWM, SSI, for which there is no U-Boot driver.
-+
- config CLK_RCAR
- 	bool "Renesas R-Car clock driver support"
- 	help
+ static struct mssr_mod_clk r8a7795_mod_clks[] __initdata = {
++#ifdef CONFIG_CLK_RENESAS_FULL
+ 	DEF_MOD("3dge",			 112,	R8A7795_CLK_ZG),
+ 	DEF_MOD("fdp1-1",		 118,	R8A7795_CLK_S0D1),
+ 	DEF_MOD("fdp1-0",		 119,	R8A7795_CLK_S0D1),
++#endif
+ 	DEF_MOD("tmu4",			 121,	R8A7795_CLK_S0D6),
+ 	DEF_MOD("tmu3",			 122,	R8A7795_CLK_S3D2),
+ 	DEF_MOD("tmu2",			 123,	R8A7795_CLK_S3D2),
+@@ -140,6 +142,7 @@ static struct mssr_mod_clk r8a7795_mod_clks[] __initdata = {
+ 	DEF_MOD("scif3",		 204,	R8A7795_CLK_S3D4),
+ 	DEF_MOD("scif1",		 206,	R8A7795_CLK_S3D4),
+ 	DEF_MOD("scif0",		 207,	R8A7795_CLK_S3D4),
++#ifdef CONFIG_CLK_RENESAS_FULL
+ 	DEF_MOD("msiof3",		 208,	R8A7795_CLK_MSO),
+ 	DEF_MOD("msiof2",		 209,	R8A7795_CLK_MSO),
+ 	DEF_MOD("msiof1",		 210,	R8A7795_CLK_MSO),
+@@ -147,6 +150,7 @@ static struct mssr_mod_clk r8a7795_mod_clks[] __initdata = {
+ 	DEF_MOD("sys-dmac2",		 217,	R8A7795_CLK_S3D1),
+ 	DEF_MOD("sys-dmac1",		 218,	R8A7795_CLK_S3D1),
+ 	DEF_MOD("sys-dmac0",		 219,	R8A7795_CLK_S0D3),
++#endif
+ 	DEF_MOD("sceg-pub",		 229,	R8A7795_CLK_CR),
+ 	DEF_MOD("cmt3",			 300,	R8A7795_CLK_R),
+ 	DEF_MOD("cmt2",			 301,	R8A7795_CLK_R),
+@@ -166,6 +170,7 @@ static struct mssr_mod_clk r8a7795_mod_clks[] __initdata = {
+ 	DEF_MOD("usb-dmac0",		 330,	R8A7795_CLK_S3D1),
+ 	DEF_MOD("usb-dmac1",		 331,	R8A7795_CLK_S3D1),
+ 	DEF_MOD("rwdt",			 402,	R8A7795_CLK_R),
++#ifdef CONFIG_CLK_RENESAS_FULL
+ 	DEF_MOD("intc-ex",		 407,	R8A7795_CLK_CP),
+ 	DEF_MOD("intc-ap",		 408,	R8A7795_CLK_S0D3),
+ 	DEF_MOD("audmac1",		 501,	R8A7795_CLK_S1D2),
+@@ -178,12 +183,14 @@ static struct mssr_mod_clk r8a7795_mod_clks[] __initdata = {
+ 	DEF_MOD("drif10",		 513,	R8A7795_CLK_S3D2),
+ 	DEF_MOD("drif01",		 514,	R8A7795_CLK_S3D2),
+ 	DEF_MOD("drif00",		 515,	R8A7795_CLK_S3D2),
++#endif
+ 	DEF_MOD("hscif4",		 516,	R8A7795_CLK_S3D1),
+ 	DEF_MOD("hscif3",		 517,	R8A7795_CLK_S3D1),
+ 	DEF_MOD("hscif2",		 518,	R8A7795_CLK_S3D1),
+ 	DEF_MOD("hscif1",		 519,	R8A7795_CLK_S3D1),
+ 	DEF_MOD("hscif0",		 520,	R8A7795_CLK_S3D1),
+ 	DEF_MOD("thermal",		 522,	R8A7795_CLK_CP),
++#ifdef CONFIG_CLK_RENESAS_FULL
+ 	DEF_MOD("pwm",			 523,	R8A7795_CLK_S0D12),
+ 	DEF_MOD("fcpvd2",		 601,	R8A7795_CLK_S0D2),
+ 	DEF_MOD("fcpvd1",		 602,	R8A7795_CLK_S0D2),
+@@ -202,12 +209,14 @@ static struct mssr_mod_clk r8a7795_mod_clks[] __initdata = {
+ 	DEF_MOD("vspbd",		 626,	R8A7795_CLK_S0D1),
+ 	DEF_MOD("vspi1",		 630,	R8A7795_CLK_S0D1),
+ 	DEF_MOD("vspi0",		 631,	R8A7795_CLK_S0D1),
++#endif
+ 	DEF_MOD("ehci3",		 700,	R8A7795_CLK_S3D2),
+ 	DEF_MOD("ehci2",		 701,	R8A7795_CLK_S3D2),
+ 	DEF_MOD("ehci1",		 702,	R8A7795_CLK_S3D2),
+ 	DEF_MOD("ehci0",		 703,	R8A7795_CLK_S3D2),
+ 	DEF_MOD("hsusb",		 704,	R8A7795_CLK_S3D2),
+ 	DEF_MOD("hsusb3",		 705,	R8A7795_CLK_S3D2),
++#ifdef CONFIG_CLK_RENESAS_FULL
+ 	DEF_MOD("cmm3",			 708,	R8A7795_CLK_S2D1),
+ 	DEF_MOD("cmm2",			 709,	R8A7795_CLK_S2D1),
+ 	DEF_MOD("cmm1",			 710,	R8A7795_CLK_S2D1),
+@@ -231,12 +240,15 @@ static struct mssr_mod_clk r8a7795_mod_clks[] __initdata = {
+ 	DEF_MOD("vin2",			 809,	R8A7795_CLK_S0D2),
+ 	DEF_MOD("vin1",			 810,	R8A7795_CLK_S0D2),
+ 	DEF_MOD("vin0",			 811,	R8A7795_CLK_S0D2),
++#endif
+ 	DEF_MOD("etheravb",		 812,	R8A7795_CLK_S0D6),
+ 	DEF_MOD("sata0",		 815,	R8A7795_CLK_S3D2),
++#ifdef CONFIG_CLK_RENESAS_FULL
+ 	DEF_MOD("imr3",			 820,	R8A7795_CLK_S0D2),
+ 	DEF_MOD("imr2",			 821,	R8A7795_CLK_S0D2),
+ 	DEF_MOD("imr1",			 822,	R8A7795_CLK_S0D2),
+ 	DEF_MOD("imr0",			 823,	R8A7795_CLK_S0D2),
++#endif
+ 	DEF_MOD("gpio7",		 905,	R8A7795_CLK_S3D4),
+ 	DEF_MOD("gpio6",		 906,	R8A7795_CLK_S3D4),
+ 	DEF_MOD("gpio5",		 907,	R8A7795_CLK_S3D4),
+@@ -245,19 +257,24 @@ static struct mssr_mod_clk r8a7795_mod_clks[] __initdata = {
+ 	DEF_MOD("gpio2",		 910,	R8A7795_CLK_S3D4),
+ 	DEF_MOD("gpio1",		 911,	R8A7795_CLK_S3D4),
+ 	DEF_MOD("gpio0",		 912,	R8A7795_CLK_S3D4),
++#ifdef CONFIG_CLK_RENESAS_FULL
+ 	DEF_MOD("can-fd",		 914,	R8A7795_CLK_S3D2),
+ 	DEF_MOD("can-if1",		 915,	R8A7795_CLK_S3D4),
+ 	DEF_MOD("can-if0",		 916,	R8A7795_CLK_S3D4),
++#endif
+ 	DEF_MOD("rpc-if",		 917,	R8A7795_CLK_RPCD2),
+ 	DEF_MOD("i2c6",			 918,	R8A7795_CLK_S0D6),
+ 	DEF_MOD("i2c5",			 919,	R8A7795_CLK_S0D6),
++#ifdef CONFIG_CLK_RENESAS_FULL
+ 	DEF_MOD("adg",			 922,	R8A7795_CLK_S0D4),
++#endif
+ 	DEF_MOD("i2c-dvfs",		 926,	R8A7795_CLK_CP),
+ 	DEF_MOD("i2c4",			 927,	R8A7795_CLK_S0D6),
+ 	DEF_MOD("i2c3",			 928,	R8A7795_CLK_S0D6),
+ 	DEF_MOD("i2c2",			 929,	R8A7795_CLK_S3D2),
+ 	DEF_MOD("i2c1",			 930,	R8A7795_CLK_S3D2),
+ 	DEF_MOD("i2c0",			 931,	R8A7795_CLK_S3D2),
++#ifdef CONFIG_CLK_RENESAS_FULL
+ 	DEF_MOD("ssi-all",		1005,	R8A7795_CLK_S3D4),
+ 	DEF_MOD("ssi9",			1006,	MOD_CLK_ID(1005)),
+ 	DEF_MOD("ssi8",			1007,	MOD_CLK_ID(1005)),
+@@ -284,6 +301,7 @@ static struct mssr_mod_clk r8a7795_mod_clks[] __initdata = {
+ 	DEF_MOD("scu-src2",		1029,	MOD_CLK_ID(1017)),
+ 	DEF_MOD("scu-src1",		1030,	MOD_CLK_ID(1017)),
+ 	DEF_MOD("scu-src0",		1031,	MOD_CLK_ID(1017)),
++#endif
+ };
+ 
+ /*
 -- 
 2.53.0
 
