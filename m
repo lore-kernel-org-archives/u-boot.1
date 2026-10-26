@@ -1,163 +1,234 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82D59606A325
-	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 18:36:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0593606A320
+	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 18:45:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=sfrIyj0E;
-	dkim=pass (2048-bit key, unprotected) header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256 header.s=mchp header.b=oaC22Zow
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Y3PvcbYa;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=gWGx/knF;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Do58Ze9O
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1444480DDF;
-	Mon, 26 Oct 2026 18:36:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C2028605D6;
+	Mon, 26 Oct 2026 18:45:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id K5IkxF2S7qtu; Mon, 26 Oct 2026 18:36:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7442E80D7C
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793039795;
-	b=IkKuvNaPR9XOvXtth19s7Jdcdo/POxBP9jcADi9jPS9NOnoEnfA4wZ3dQNufFngLAHIr
-	 H1f22OOFfZ2hO6tBhV38x7d10lcA2GfuGXwmCIKIursNtV4BNv4L4TwqwlAdCRIDtIF7l
-	 +VbXqnsq65fWBuj0CMS+OzwHGEYEYBPAbl+DzJxumOLSs8CdlsL7eI75wr0/gL0mF48NN
-	 7uchtcqiGLmrmSGTzSYEEyzKYs4Ge45Nad1L/qUMAsfH5QPAS5ap3z0+BZQo/Iq33ql5D
-	 NEq2rH+S8AdvhF82nX+9NiNomI1pOwrW4qOR6Qg0d42lwj5eHEnyjJZI8Qn+XrbaXOA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aW2TVqw8O8J7; Mon, 26 Oct 2026 18:45:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org ED375605E1
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793040308;
+	b=MKN1XXVS02FLC+Qzy0b8HX+KU8xcfC1U7Ve8zzTjZWsudd5bqhg2x43JiCto/aRgz/g1
+	 gKqQDKf32uaSLivQb2Xbwlw/2mJMDzjuIWA0qmFujOhteSwOi8aedBTyAWnExZ+AAP3+J
+	 DrIsM2cVVAE3gNBak828RiwKRFWRdvSxZwStmPovfZZiSGhXCB0U7youjmjmJT1/19YYc
+	 gZqVLiBdB4dGRSo4SGLGDv8zt8HzpvAZi6mGD+I4AxqXo0kvpBKgUssJMYgLrWtwj57m6
+	 HG3r3uT6KHwMNCfjoNMiFtqG01fYUv52wvwqvk1U0DLRVCqGIDTJCfUAstcaKF4VeZw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793039795;
+	c=relaxed/relaxed; t=1793040308;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:X-IronPort-AV:
-	 X-Amp-Result:Received:Received:Received:Date:From:To:CC:Subject:
-	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:
+	 X-Mailer:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=q4uVk2QRnplouttOH4rASQ4+xatn/zBgU8F7xj3lks0=;
-	b=efT9GqfDPx+nPjR4ayZ/wOEWbaB6c4rL0u0JqGgmGegHIf/9sQ/LR/JjzexO78yhF7MF
-	 HQu87PsgmUla9NoLt1vR6kvN1B7LEreDPAGsCBTwW5j2D3SutbJdxBDNW+7WDZIrGGaoh
-	 5xt50VdAfHDx9V4iq5pSUN3pwEIPfZ0t95eS69BwqfuAlVf8zHj/iagqjCUpy1yVyfywu
-	 /8n9jyfM/uT1L8Ra/+4dQBnY1yxnw2MBQt/xEucQgNThLBfanhoQB/1AkZqrxxgNsyoXo
-	 iScbHbxFRZUsr1XYNtIxp+FRk0bmHyMPBN9+nFUQr4twRx4InKwsT4sIxFuFsdc6BIw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=UFwCPt+ovbMPZHZukefvKOscBdH3ePxiw1lvSUaKcZA=;
+	b=hizhPS4eTyJhBx+a7XWif9HFn5xhXfw5URLpBhU5IXy8auTNerj7ynnSPU33yCsEevIr
+	 E3EROSzkc76bg8Rcpv5jtr9CMjGCRdZ+1Nu4eoCl15i7l9J1mLIUwJY+1LKQULrNMsx4i
+	 YBfGJL5KyosxbE5tD5r9FHS2SsHCbbRVHCnTs/PLjwKyGUcrKjshDvTT6lF50d3XQXZCn
+	 qzwQxYQhZ+tcGNILuJqHVmzbSjPMUmDJHUH3OtvAk7g6JaBiOd8Hjpfyd+pyfUjWQ1v0w
+	 sNfhSlFZAgJMMtt/G4ZDHbHTrhKTO9+uImDh2mKHjCub91XljDno2Piu1zZhQu4KNgw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793039795;
-	bh=q4uVk2QRnplouttOH4rASQ4+xatn/zBgU8F7xj3lks0=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=sfrIyj0Eaf0cwhVAjrPwXz71hL6VOsmu6lwZlbBZKxriwnpULLlT7IpaRy1E43lPv
-	 wxaYtMRSGjHe/yhE7ulalzpnx8tpGPf4GqkeiAzxApUuwv4f34aBkzn2BTCuqqiWLU
-	 ZJRt256r+GXL/eQdxyvtaHJ2Fz7K/X2UlSQeUwP1oxcuPsjbUuj3gqAvbsoq5TaMEp
-	 N5hV+u6hAgkzh8bQ6EYCArKIz3/D3rg80/SDjZ1PefXtisY9297VRwHbxrkpcpYXn4
-	 FQzTjHlSBzaDzSbv6sAWm2WLan+VVCViqzrS4Sm08VEC6K05KrLFcMaHegW0yw45km
-	 VkHUzj7iRKfxQ==
+	d=lists.u-boot-project.org; s=default; t=1793040308;
+	bh=UFwCPt+ovbMPZHZukefvKOscBdH3ePxiw1lvSUaKcZA=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Y3PvcbYae0/A+PzrWaLEDYhPcsK132DNB8VkTZ9c4GyZGj5fcdDAQdo2OIzcgIxgk
+	 fhQ3+VbcpcVlcgYimZvzBZ5KgxhbszZOwi7NONDb8yePxs0zShkR9YSDDEE3/+jUqC
+	 LWQ3Fsf9ajzlReB2yDzpVbwQEHfeDKO+zD2mkEZsawYVBQ0XYUEwxmeB7p+r11i/9l
+	 RKPwHrbwbWe3lHvk2wMPkO9jYk967qNCBFmqMhGww3wEQVG29VZfGTSatsPXj3D0lJ
+	 9Lhm5AmbxR8gKjGLS0j84Q73BxBl9LveJYznhuCc7qtztX7DOz0rzb5hOxyAvpSVIQ
+	 qg//ZGKpdW6Ng==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7442E80D7C;
-	Mon, 26 Oct 2026 18:36:35 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id E5B2E235
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 18:36:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id ED375605E1;
+	Mon, 26 Oct 2026 18:45:07 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1DC3D380
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 18:45:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D71384006F
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 18:36:33 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 038F140075
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 18:45:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id D1M0bSYY1dsR for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 18:36:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org EB80240062
+ id AdTArcaX19hN for <u-boot@lists.u-boot-project.org>;
+ Mon, 26 Oct 2026 18:45:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 16BCE4006F
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=68.232.154.123
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793039792;
- b=j1LFk7I4F7yuENr8D6+15qNaxAGynoYjTeQnjuEY9XxWf4yW4v8orwVjlDtw2ul69dNw
- K03sI+HHebsba4bGMk13FUwKVRXNdPBsCQ1suBh6KZ9plN4baDRtlSBDK9ycEMQdK4fNx
- ZygPBv5sAVLDAKICnvMIRJVS79QlPx4xxzkU2tkhe4vEbHBy75k/GfFrDPhYz/KmmkcEM
- Hm7pSc1zLLZynJa5LdZU5lwr48kUzfeuAXKjOnS2ledql1skOOJ99B0ol1RvfBmT68jWR
- qns6fa0OabfnVvICk3jXKy9LgbMFqxPgkGXUTZzqQKa6xzDwo97+etF2PVObBdZey6g==
+ arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793040305;
+ b=no7wGKK3cxB//e2j9Fp42T/n6G+HEyJCok4VHSASxvhqvLxchWrYo+OyFcOvGXx9Oi2u
+ 7aB0jo2yWi/YJWcgrpGIc/YTNugsWne5n4L7P8ecEk0sgNDB8o97yTEUSGl9G4sNDhq/U
+ bGLByXkzfIq5KLtXKOzagKVJeT25+javGUhL9qsBLelhtaJthIJOVouEMzU/Uri9z8ySH
+ 5xMvMEoWrVXffRC33EvwBlTdkrii3C8crb4NDlYKMMcl3g3wskJDl2krpuxm6nxV0Row/
+ rSWTvrmcLQL+ch6nrrt9D8e2yToZquowT4M56+yVJBgtgQIjBtvELnL/T83xuRRI6CA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793039792;
- h=Received-SPF:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
- X-IronPort-AV:X-Amp-Result:Received:Received:Received:Date:From:To:CC:
- Subject:Message-ID:References:MIME-Version:Content-Type:
- Content-Disposition:Content-Transfer-Encoding:In-Reply-To;
- bh=q4uVk2QRnplouttOH4rASQ4+xatn/zBgU8F7xj3lks0=;
- b=ZOCaE16Kos8Wx2HNTEhcejCvwjXqC9jd+VOLn12xTQJucsCFgAGAA33tbgwxiCRQXzL9
- LiVTBYoHYWmwk4EmRQeterrWugTQAf5Zr1siMEpPaJrER+SEBuoMMmvOIA/6yO5JDV/vY
- 0RPHeQYVXRWMchoKpVwB2o1fKUkJvDUCMlSPMtWCrhXF7QczsjjzFdtMxffkqFOlo1JCP
- tI1zuresov7y0S+zJDve26Jx4jYAGFzDg1Oilay2khzeF7vE+H7QbvNTJA6fCcgbfSTtA
- M3MrpUuULCn6dj1dQZXMbP+90WNLpaX0N+Vw9ChgQQhtKfkEC8QN1QXEjavkS12Y0ew==
+ c=relaxed/relaxed; t=1793040305;
+ h=Received-SPF:Received:DKIM-Signature:Received:Received:
+ DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+ X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
+ X-Change-ID:To:Cc:X-Mailer:X-Proofpoint-ORIG-GUID:
+ X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+ X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+ X-Proofpoint-Spam-Details;
+ bh=UFwCPt+ovbMPZHZukefvKOscBdH3ePxiw1lvSUaKcZA=;
+ b=tYqE5TdDu1aheYGLh1LfylzpJ8bYhz6XsmpLeuauS7bTXg03Ncb8R2rI6BC2g+gk5EcJ
+ YQkuseNoyVnuzoe6pt+FGKtpurjA0FX6i4wADAx9c14AXbMfGsRrymJcs3ro5R5Kk18Q9
+ Zu/11H1iyuR2mpK1VP20S/mNdOWWtKHCsgLxpI41kPtjAu/hBSQnu6ldsxexbf1eZIOea
+ aX6P69OYXseH8NiaOVENGwOZqmS+zB4LaZHrwS40Jk7M/ldJ3ZyeVTG6iMZhDNU0Gg2Ao
+ P0IdsWwaEVT6lyjsNWN/XcLWezKvvsvH0W5xf9l6c8DgP/2SqCESGXzdCfb44OE9t5Q==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=microchip.com;
- dkim=pass header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256
- header.s=mchp header.b=oaC22Zow; 
- arc=none smtp.remote-ip=68.232.154.123
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=68.232.154.123;
- helo=esa.microchip.iphmx.com;
- envelope-from=prvs=752c32f41=charles.perry@microchip.com; receiver=<UNKNOWN> 
+ dmarc=pass header.from=oss.qualcomm.com;
+ dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
+ header.s=qcppdkim1 header.b="gWGx/knF"; 
+ dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=Do58Ze9O; 
+ arc=none smtp.remote-ip=205.220.180.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
+ receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=microchip.com header.i=@microchip.com
- header.a=rsa-sha256 header.s=mchp header.b=oaC22Zow
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
- by smtp2.osuosl.org (Postfix) with ESMTPS id EB80240062
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 18:36:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1793039791; x=1824575791;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=UHuvsg2FRSqOgqUY7Q9OFsjQkTT9Tmt6BXtPG+IS3ig=;
- b=oaC22ZowK5hsubaLlVNDqkRd5f/z8vwtMYDv8NTdZpqXE333to/ttDVG
- ei5h3ZC4Yq0UJa6ZKUTj8pEwL/Aco6sxTlaco6EOTiGqHi6Exxsxb3rNn
- kwFHujSlRluLEUe8wHHllVJiZjAPMUVFhfTHB9ojY84cd37IQ4pP+ei+H
- H4iTvC+TIK5QQGl2S955qumXupwsO5e7ryCUrj9RUss8wlBjYZYk4Euck
- 7Vt1rL1FkTBP6vSB+nBo3FJheYhy4r4ASAHWQd1ivjvx8IvOMjLMXnleR
- UVKJemItM1u080qFDzlLNRfi3KOdRrEd+E05QhJNbM1EgCBe3j2Gtpg5f w==;
-X-CSE-ConnectionGUID: TRj8DJXDSZe+S84uV7mVuw==
-X-CSE-MsgGUID: W8huOn87QWKp3vPKCJ8Mkw==
-X-IronPort-AV: E=Sophos;i="6.27,179,1787036400"; d="scan'208";a="232650048"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 26 Oct 2026 11:36:29 -0700
-Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
- chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Mon, 26 Oct 2026 11:36:29 -0700
-Received: from MON-LT-C78453.mchp-main.com (10.10.85.11) by
- chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58 via Frontend Transport; Mon, 26 Oct 2026 11:36:27 -0700
-Date: Mon, 26 Oct 2026 14:36:26 -0400
-From: Charles Perry <charles.perry@microchip.com>
-To: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-CC: Charles Perry <charles.perry@microchip.com>,
- <u-boot@lists.u-boot-project.org>, Yao Zi <me@ziyao.cc>, Rahul Pathak
- <rahul@summations.net>, Anup Patel <anup@brainfault.org>, Paul Walmsley
- <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
- <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, Romain Caritey
- <romain.caritey@microchip.com>, Mame Maria Mbaye
- <MameMaria.Mbaye@microchip.com>, Tom Rini <trini@konsulko.com>, Rick Chen
- <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>, Michal Simek
- <michal.simek@amd.com>, Conor Dooley <conor@kernel.org>, Peng Fan
- <peng.fan@oss.nxp.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v4 3/8] firmware: rpmi: add support for shared memory
- transport
-Message-ID: <at-dqpf4wtGXenYL@MON-LT-C78453.mchp-main.com>
-References: <20261014-rpmi_v4-v4-0-d53d34a49780@microchip.com>
- <20261014-rpmi_v4-v4-3-d53d34a49780@microchip.com>
- <CAPxK-6fPNdwf7ZKhB0JjDGb-mqpZDuey9j0+AA6jk=6+G2wCrw@mail.gmail.com>
+ header.from=oss.qualcomm.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=gWGx/knF; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=Do58Ze9O
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 16BCE4006F
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 18:45:04 +0000 (UTC)
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69QEvZdN2544038
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 18:45:03 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=UFwCPt+ovbMPZHZukefvKO
+ scBdH3ePxiw1lvSUaKcZA=; b=gWGx/knFOtCyBBriPBOjxc5EcGe2/PcICfDMba
+ QlA7SmAV5mEYz9AR0cTkA29g7cyxib12dlfbzMu+cIxY5JJwvzm2ssKPK/5ZF5zK
+ 1HmKits3efoQrJuIaV84bCwM93vQtdjouTNFf6uvx4rAlkEZYKdG1Tra7z+k0SiR
+ qyQR60xzJ6tuuNOlxyCLdvmHOjFoGmOTy/It9XWwcpZpKtjXHLyiJ2A2L6ZppOJ3
+ eb5u5UfTRIsAwZUBRYHCG0RdlvrJPIb9s3ha/y4mvKl6OjOD2SFA9LbG+J8XeHFd
+ LfhESusW8Fs6WGzpPrr0XKjREPCCq+Q93dujrQfkHfDoW6sg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hj8sms17x-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 18:45:03 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-93f1f2fafeaso456812985a.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 11:45:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1793040297; x=1793645097;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=UFwCPt+ovbMPZHZukefvKOscBdH3ePxiw1lvSUaKcZA=;
+ b=Do58Ze9O5tt84Gukvnpb1Vsez141GQPQfN4q0SXOcuIOJk0g9CkwRWLsrM59u08nLq
+ K777w9HZip6uD3QAxt3mtjVVEMtz8+tIcT4yY99FvtTJduwQqy6Z2F35xOTOmUhuKnyp
+ JMwIU/t9EP348U4CuTKt04YLEHIlIuq9jA0ujusxS1770IdsEYFhu5Nb1ni3SRkWn5jL
+ cTWBbOt5lWmv2WZPSg2yuNRfQOpm2HuIRzs+twqUDQNbcWF0QY4xv/gbmbN2Gufafnu8
+ SayRE/F/EO05MOHB3limQoNFk/sGMptAZSkTJDxorxI03nXH7scyGradKD5+ZakMaTFJ
+ h4TQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793040297; x=1793645097;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=UFwCPt+ovbMPZHZukefvKOscBdH3ePxiw1lvSUaKcZA=;
+ b=LEoS/bZPVGl6MPsyJSGZmeJlOiW0juI5ajAK7wHEglQF9uz+8CXGhMyp6WqcXLSt+M
+ 8jJbgsIjdHHzxxclPQEq5qQnf0IqQIs41I/UDlTG3WkPDBcPbKXZdDs/6hWr16vBrqhp
+ EOS8uI69pBseE83qZFVmODX7ZDtQK7tdal5/KVeL45ChCGURj0IyUoWJpzfUJpdpBUqD
+ ON4BUmp9NlrE94PxzDUO6WFMXFyjyKNH9cN91L0SBbwYIWzBCBgtAv/2ZBodXpQNT/FC
+ FutViPraQ3B2E6OaS/DSWeVvlRf8ME2xvtKlsDS2CHsZeVKRoi/FGqZMFQfJMD7Y19O8
+ dAXA==
+X-Gm-Message-State: AFq9FYIp0RACBtNMbXbPb1QvoIFeXSXWIYGU7P7GDOa+XxbMdGI+6wAh
+ TS7ru6rCnc7vyLIrE8WA/85o0S7n4BaN57PTc3w6gQXMjVrdWWjHZWl9INdGopFTMJ0pea5etT5
+ BmtsOx56SNdWVRFW3Rz/oD0knkCGcNPVWco5n0t9jWuVRvRnDbjrLjCchAuTS5xeCGBeYCYU=
+X-Gm-Gg: AYBFou39qp7fHb/uZXxDgJKbdoZHQdeSpENdcYyO6i286ZkueFUtiF+Ow4zCOc1L3f2
+ MJsHKAw/16+mUsbEzBioNpebFgUJqJ3Wj2Fqo5m0W5EFuTC6MuFX1lNJSFCBsXW3ktu57dJgs+4
+ nJAYtHvXx7q3evhd8ONq//kN4ceSd+sAhy0q/AhbKuNnIUwZHcY5MaiJbr7mJtMaY83TVs8vZXl
+ 3yBbPXUmdfbxhmpBUTVOy1TYfQzB09JeXGDglFY7slck9fuvZoA8HVAVoZ23kQ3Q6mWQDImwrpf
+ xoumCJWn0bHkN2Wapxwjih6HeFdjC9Svbg+lKqBVSNj0fmZYXKi/VANJZIQSeavLEezNYP5+0ps
+ 8i1oMTyIE+f2mYG/vpJ8eFvpSQXi8rOz9k3iNBps=
+X-Received: by 2002:a05:620a:4116:b0:93e:e376:9b1d with SMTP id
+ af79cd13be357-940ef7d306emr1099405785a.9.1793040297401; 
+ Mon, 26 Oct 2026 11:44:57 -0700 (PDT)
+X-Received: by 2002:a05:620a:4116:b0:93e:e376:9b1d with SMTP id
+ af79cd13be357-940ef7d306emr1099400885a.9.1793040296766; 
+ Mon, 26 Oct 2026 11:44:56 -0700 (PDT)
+Received: from [127.0.1.1] (93-159-22-70.cgnat.inetia.pl. [93.159.22.70])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c46bd520838sm350543066b.31.2026.10.26.11.44.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 Oct 2026 11:44:55 -0700 (PDT)
+From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+Date: Mon, 26 Oct 2026 19:44:50 +0100
+Subject: [PATCH] board: qemu-arm: keep U-Boot below 4 GiB for 32-bit DMA
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAPxK-6fPNdwf7ZKhB0JjDGb-mqpZDuey9j0+AA6jk=6+G2wCrw@mail.gmail.com>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261026-upstream-u-boot_qemu_arm_b4-v1-1-223dd8060db0@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQ5AMBBA0avIrE1Cg4iriDQtg1lUmapIxN01F
+ n/xNv+BQMIUoMseELo4sN8SyjyDcTXbQshTMqhCNWUK4x5OIeMwovX+1Ae5qI04bSs09Tw21Fq
+ lbAHpsAvNfP/3fnjfD4BknW9tAAAA
+X-Change-ID: 20261026-upstream-u-boot_qemu_arm_b4-a5fc6e8b22b0
+To: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Tom Rini <trini@konsulko.com>, 
+ Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.u-boot-project.org
+X-Mailer: b4 0.14.3
+X-Proofpoint-ORIG-GUID: sTsVNypQTnCvV9dBLxsHQYvrNVnXM9Jk
+X-Authority-Analysis: v=2.4 cv=Sfti5fRu c=1 sm=1 tr=0 ts=6adf9faf cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=ySe+0nHqNG5yihRO1pIWsw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=Gb3j71dWSLDLRJht-i0A:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-GUID: sTsVNypQTnCvV9dBLxsHQYvrNVnXM9Jk
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI2MDA3NCBTYWx0ZWRfXwvGwjssZ8QeA
+ onCwdngkoV8yijtT7UI29uy9AcDQEQd7TKo9C9VEWNWIssVy3ylk58sdnMq9eiwhGK9MGJO/+vp
+ PrZmf1/WOc9FBYBuyGPd9QXIOj46zkA=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI2MDA3NCBTYWx0ZWRfXzmowvziyXQVJ
+ zTtt20sK5zzpPMzxe0J4XtOrgqDQc5xbLOVoYCAijY3Tk4HomoMnEBxMJMJ+caPm3Cb7ZDAQ1aZ
+ zTc3Dvk76urh/DNpmOnHT8DJ+xZzXLV9yjqcP5GzAD1SE3QDoIKJoCl2EhcaJPTtG0AdpypXllV
+ 6wwQKYaZizPFZBFemPjhF6DamwFwgOFFRApWJX6KDMTBfNY8+lKYNI9WnQLVycfYpCpSjuLh7EP
+ CLwbA43CwKeJnwp2qz74Jyqnb/ntRsezCOnZ72y6VwhO4AFhyf76ffI4sViyCJpIMYS+zoTkD5X
+ KMBfyZGITHn39hWaUOFilp163evmrN0qSOxxuyWKj4QwD3G5Sjf7h3QPnIGbesEF3fa62zpFgDn
+ M41FbSufRRnxlVdp8on7D9p9cDY4PSv4EB77WBIVUH/8UDc3f6uD3gJ9tvlzobyu2kMNMp1PnNZ
+ mAlFtODh0CwbZ/Z4MHQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-26_03,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 bulkscore=0 clxscore=1015 adultscore=0 priorityscore=1501
+ malwarescore=0 lowpriorityscore=0 impostorscore=0 spamscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610260074
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -167,502 +238,81 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-21.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Oct 26, 2026 at 12:46:31PM +0530, Subrahmanya Lingappa wrote:
-> Charles,
-> 
-> On Wed, Oct 14, 2026 at 7:47 PM Charles Perry
-> <charles.perry@microchip.com> wrote:
-> >
-> > Add support for transport of RPMI messages over shared memory as
-> > described in the RPMI spec [1]. This uses two or four ring buffers
-> > composed of a fixed number of "slots" to pass messages between the AP
-> > and the PuC. U-Boot is the Application processor (AP) and sends messages
-> > through the a2p-req queue and receives response though the p2a-ack
-> > queue. There is no support for platform microcontroller (PuC) initiated
-> > requests nor notifications.
-> >
-> > This transport can be used in M or S mode U-Boot, but in the S-mode
-> > case, one must make sure that the supervisor software isn't already
-> > using the AP side of the shared memory.
-> >
-> > [1]: https://github.com/riscv-non-isa/riscv-rpmi (chapter 2)
-> >
-> > Signed-off-by: Charles Perry <charles.perry@microchip.com>
-> > ---
-> > Changes in v4:
-> >  - Fix the default value of the doorbell from 0 to 1
-> >
-> > Changes in v3: None
-> >
-> > Changes in v2: (from Yao Zi review)
-> >  - Reorder headers
-> >  - Don't null check pointers before free()
-> > ---
-> >  drivers/firmware/rpmi/Kconfig      |   8 +
-> >  drivers/firmware/rpmi/Makefile     |   1 +
-> >  drivers/firmware/rpmi/rpmi-shmem.c | 473 +++++++++++++++++++++++++++++++++++++
-> >  include/rpmi_proto.h               |  23 ++
-> >  4 files changed, 505 insertions(+)
-> >
-> > diff --git a/drivers/firmware/rpmi/Kconfig b/drivers/firmware/rpmi/Kconfig
-> > index 708d931263ff..421a1fa9deba 100644
-> > --- a/drivers/firmware/rpmi/Kconfig
-> > +++ b/drivers/firmware/rpmi/Kconfig
-> > @@ -16,3 +16,11 @@ config RPMI_SBI_MPXY
-> >           (MPXY) extension of the supervisor binary interface (SBI). The
-> >           specification for the MPXY extension is available at:
-> >           https://github.com/riscv-non-isa/riscv-sbi-doc (chapter 20)
-> > +
-> > +config RPMI_SHMEM
-> > +       bool "RPMI over shared memory transport"
-> > +       depends on RPMI_FIRMWARE
-> > +       help
-> > +         Enable support for transport of RPMI messages over shared memory as
-> > +         described in chapter 2 of the RPMI specification, available at:
-> > +         https://github.com/riscv-non-isa/riscv-rpmi
-> > diff --git a/drivers/firmware/rpmi/Makefile b/drivers/firmware/rpmi/Makefile
-> > index 71c4aeaed910..4f4bcb929db4 100644
-> > --- a/drivers/firmware/rpmi/Makefile
-> > +++ b/drivers/firmware/rpmi/Makefile
-> > @@ -1,2 +1,3 @@
-> >  obj-y  += rpmi-uclass.o
-> >  obj-$(CONFIG_RPMI_SBI_MPXY) += rpmi-sbi-mpxy.o
-> > +obj-$(CONFIG_RPMI_SHMEM) += rpmi-shmem.o
-> > diff --git a/drivers/firmware/rpmi/rpmi-shmem.c b/drivers/firmware/rpmi/rpmi-shmem.c
-> > new file mode 100644
-> > index 000000000000..db9949e39c7e
-> > --- /dev/null
-> > +++ b/drivers/firmware/rpmi/rpmi-shmem.c
-> > @@ -0,0 +1,473 @@
-> > +// SPDX-License-Identifier: GPL-2.0
-> > +/*
-> > + * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
-> > + */
-> > +
-> > +#define LOG_CATEGORY UCLASS_RPMI
-> > +
-> > +#include <asm/barrier.h>
-> > +#include <asm/io.h>
-> > +#include <asm/types.h>
-> > +#include <dm.h>
-> > +#include <dm/device_compat.h>
-> > +#include <linux/delay.h>
-> > +#include <log.h>
-> > +#include <malloc.h>
-> > +#include <rpmi-uclass.h>
-> > +
-> > +#define RPMI_SLOT_SIZE_MIN 64
-> > +
-> > +enum rpmi_queue_idx {
-> > +       RPMI_QUEUE_IDX_A2P_REQ = 0,
-> > +       RPMI_QUEUE_IDX_P2A_ACK = 1,
-> > +       RPMI_QUEUE_IDX_P2A_REQ = 2,
-> > +       RPMI_QUEUE_IDX_A2P_ACK = 3,
-> > +       RPMI_QUEUE_IDX_MAX_COUNT = 4,
-> > +       RPMI_A2P_DOORBELL = 5,
-> > +};
-> > +
-> > +struct shmem_queue {
-> > +       u32 num_slot;
-> > +       __le32 *headptr;
-> > +       __le32 *tailptr;
-> > +       void *buffer;
-> > +};
-> > +
-> > +struct rpmi_shmem {
-> > +       struct udevice *dev;
-> > +       struct shmem_queue a2p_req;
-> > +       struct shmem_queue p2a_ack;
-> > +       int slot_size;
-> > +       int rx_timeout_ms;
-> > +       u32 token;
-> > +       void *doorbell;
-> > +       u32 doorbell_value;
-> > +       u32 spec_version;
-> > +       u32 impl_version;
-> > +       u32 impl_id;
-> > +};
-> > +
-> > +struct rpmi_shmem_chan_priv {
-> > +       struct rpmi_shmem *priv;
-> > +       u32 servicegroup_id;
-> > +       u32 servicegroup_version;
-> > +};
-> > +
-> > +static int rpmi_shmem_queue_idx(const char *name)
-> > +{
-> > +       static const struct {
-> > +               int id;
-> > +               const char *name;
-> > +       } id_names[] = {
-> > +               { RPMI_QUEUE_IDX_A2P_REQ, "a2p-req" },
-> > +               { RPMI_QUEUE_IDX_P2A_ACK, "p2a-ack" },
-> > +               { RPMI_QUEUE_IDX_P2A_REQ, "p2a-req" },
-> > +               { RPMI_QUEUE_IDX_A2P_ACK, "a2p-ack" },
-> > +               { RPMI_A2P_DOORBELL, "a2p-doorbell" },
-> > +       };
-> > +
-> > +       for (int i = 0; i < ARRAY_SIZE(id_names); i++) {
-> > +               if (strcmp(name, id_names[i].name) == 0)
-> > +                       return id_names[i].id;
-> > +       }
-> > +
-> > +       return -ENODEV;
-> > +}
-> > +
-> > +static bool rpmi_smq_queue_full(struct shmem_queue *qctx)
-> > +{
-> > +       return ((le32_to_cpu(*qctx->tailptr) + 1) % qctx->num_slot ==
-> > +               le32_to_cpu(*qctx->headptr));
-> > +}
-> > +
-> > +/* 31                                            0
-> > + * +---------------------+-----------------------+
-> > + * | FLAGS | SERVICE_ID  |   SERVICEGROUP_ID     |
-> > + * +---------------------+-----------------------+
-> > + * |        TOKEN        |     DATA LENGTH       |
-> > + * +---------------------+-----------------------+
-> > + * |                 DATA/PAYLOAD                |
-> > + * +---------------------------------------------+
-> > + */
-> > +struct rpmi_message_header {
-> > +       __le16 servicegroup_id;
-> > +       u8 service_id;
-> > +       u8 flags;
-> > +       __le16 datalen;
-> > +       __le16 token;
-> > +} __packed;
-> > +
-> > +static int rpmi_smq_rx(struct rpmi_shmem *priv, struct shmem_queue *qctx,
-> > +                      u32 service_group_id, u32 service_id, u16 token,
-> > +                      void *response, unsigned long max_response_len,
-> > +                      unsigned long *out_response_len)
-> > +{
-> > +       struct rpmi_message_header *msg;
-> > +       u32 dlen, headidx, tailidx;
-> > +       int rxretry = 0;
-> > +       void *src;
-> > +
-> > +       headidx = le32_to_cpu(*qctx->headptr);
-> > +
-> > +       /* Wait for the Rx message with matching token, discard any other
-> > +        * messages received in the mean time
-> > +        */
-> > +       while (true) {
-> > +               tailidx = le32_to_cpu(*qctx->tailptr);
-> > +
-> > +               if (headidx != tailidx) {
-> > +                       msg = (void *)qctx->buffer +
-> > +                             (headidx * priv->slot_size);
-> 
->  The transmit path uses `wmb()` before publishing the tail, but this receive
->  path consumes the slot immediately after observing the tail. Please add the
->  platform-appropriate acquire/read barrier before reading `msg` and document
->  the ordering requirement for this shared-memory mapping.
+U-Boot relocates itself and its heap to the top of RAM. On the QEMU
+virt machine that is fine with -m 3072 and below, where RAM ends at or
+under the 4 GiB boundary, but with more memory (e.g. -m 6144) U-Boot
+ends up around 7 GiB. Every buffer it then hands to a DMA engine that
+is limited to 32-bit addresses is unreachable by the device.
 
-I'll remove the wmb().
+The generic SDHCI driver is such a consumer: it transfers via 32-bit
+SDMA or 32-bit ADMA2 descriptors. With an emulated sdhci-pci eMMC on
+the virt machine and 6 GiB of RAM, card initialization data transfers
+fail silently, the MMC block device never probes, and bootstd finds no
+bootflow on the eMMC: autoboot drops to the prompt with an empty 'pci'
+listing as the only visible symptom (enumeration not yet run), while
+'dm tree' after a manual 'pci enum' shows the controller bound but the
+blk child never probed.
 
-There's no point in adding memory barriers since U-Boot is always running
-on a single processor. volatile* should be enough to ensure that
-reads/writes happen in order. However, I am missing volatile* from headptr
-and tailptr since I'm accessing those directly without going through
-readl/writel. I'll fix this one by adding the volatile*.
+Clamp the usable RAM top to 4 GiB like other boards with 32-bit DMA
+constraints do, so U-Boot and its buffers stay DMA-addressable however
+much memory the VM is given. The OS still sees and uses all of it.
 
-> 
-> > +                       if (le16_to_cpu(msg->token) == token)
-> > +                               break;
-> 
->  The response is accepted using only the token. This function already receives
->  `service_group_id` and `service_id`; please compare those fields with the
->  response header as well. The token counter starts again for a new driver
->  instance, while old replies can remain in the shared queue across a firmware
->  transition. An old reply for a different service carrying the same token could
->  otherwise satisfy this request.
+Fixes: f37770c7707b ("ARM: qemu-arm: Bump RAM size in AArch64 MMU table")
+Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+---
+A single fix for running U-Boot on the QEMU virt machine with more
+than 3 GiB of RAM: relocation then places U-Boot (and its DMA
+buffers) above the 32-bit boundary, which the generic SDHCI driver
+cannot address with SDMA or 32-bit ADMA2 descriptors, so an emulated
+sdhci-pci eMMC silently loses its block device and bootstd finds no
+bootflow on it. Clamp the usable RAM top to 4 GiB, as other boards
+with 32-bit DMA constraints do.
 
-Ok, good point.
+Found while bringing up an Android boot chain (TF-A + OP-TEE +
+U-Boot AVB + eMMC/RPMB) on qemu_arm64 and raising the VM memory
+from 3 GiB to 6 GiB.
+---
+ board/emulation/qemu-arm/qemu-arm.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-> 
-> > +
-> > +                       headidx = (headidx + 1) % qctx->num_slot;
-> > +               }
-> > +
-> > +               mdelay(1);
-> > +               rxretry += 1;
-> > +               if (rxretry > priv->rx_timeout_ms)
-> > +                       return -ETIMEDOUT;
-> > +       }
-> > +
-> > +       /* Extract data from the message */
-> > +       if (response) {
-> > +               dlen = le16_to_cpu(msg->datalen);
-> > +               if (dlen > max_response_len)
-> > +                       dlen = max_response_len;
-> > +               if (out_response_len)
-> > +                       *out_response_len = dlen;
-> > +               src = (void *)msg + sizeof(struct rpmi_message_header);
-> > +               memcpy(response, src, dlen);
->  `dlen` is bounded only by the caller's response buffer, not by the current
->  shared-memory slot. The current clock callers use response buffers smaller
->  than the slot payload, but this generic transport accepts arbitrary response
->  sizes. Please reject a `dlen` greater than
->  `slot_size - sizeof(struct rpmi_message_header)` before copying, so a malformed
->  response or future caller cannot make the read cross the slot boundary.
+diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
+index 38f0ec5f2fb..18daca4a16f 100644
+--- a/board/emulation/qemu-arm/qemu-arm.c
++++ b/board/emulation/qemu-arm/qemu-arm.c
+@@ -144,6 +144,20 @@ int dram_init_banksize(void)
+ 	return 0;
+ }
+ 
++phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
++{
++	/*
++	 * Keep U-Boot below 4 GiB when QEMU is given more RAM: the
++	 * generic SDHCI driver transfers via 32-bit SDMA or 32-bit
++	 * ADMA2 descriptors, so buffers (and U-Boot itself, after
++	 * relocation to the top of RAM) must stay DMA-addressable.
++	 */
++	if (gd->ram_base + gd->ram_size > SZ_4G)
++		return SZ_4G;
++
++	return gd->ram_base + gd->ram_size;
++}
++
+ int board_fdt_blob_setup(void **fdtp)
+ {
+ 	/* QEMU loads a generated DTB for us at the start of RAM. */
 
-Ok
+---
+base-commit: 8649a54d301a4d0ac526324c7a7ad2574939ff27
+change-id: 20261026-upstream-u-boot_qemu_arm_b4-a5fc6e8b22b0
 
-> 
-> > +       }
-> > +
-> > +       /* Update the head index */
-> > +       headidx = (headidx + 1) % qctx->num_slot;
-> > +       *qctx->headptr = cpu_to_le32(headidx);
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int rpmi_smq_tx(struct rpmi_shmem *priv, struct shmem_queue *qctx,
-> > +                      u32 service_group_id, u32 service_id,
-> > +                      enum rpmi_message_type type, u16 token,
-> > +                      const void *request, unsigned long request_len)
-> > +{
-> > +       struct rpmi_message_header header = { 0 };
-> > +       u32 tailidx;
-> > +       void *dst;
-> > +
-> > +       /* Tx sanity checks */
-> > +       if (request_len >
-> > +           (priv->slot_size - sizeof(struct rpmi_message_header)))
-> > +               return -EINVAL;
-> > +
-> > +       if (rpmi_smq_queue_full(qctx))
-> > +               return -ENOMEM;
-> > +
-> > +       tailidx = le32_to_cpu(*qctx->tailptr);
-> > +
-> > +       /* Prepare the header to be written into the slot */
-> > +       header.servicegroup_id = cpu_to_le16(service_group_id);
-> > +       header.service_id = service_id;
-> > +       header.flags = type;
-> > +       header.datalen = cpu_to_le16(request_len);
-> > +       header.token = cpu_to_le16(token);
-> > +
-> > +       /* Write header into the slot */
-> > +       dst = (char *)qctx->buffer + (tailidx * priv->slot_size);
-> > +       memcpy(dst, &header, sizeof(header));
-> > +       dst += sizeof(header);
-> > +
-> > +       /* Write data into the slot */
-> > +       if (request)
-> > +               memcpy(dst, request, request_len);
-> > +
-> > +       /* Make sure queue chanages are visible to PuC before updating tail */
-> > +       wmb();
-> > +
-> > +       /* Update the tail/write index */
-> > +       tailidx = (tailidx + 1) % qctx->num_slot;
-> > +       *qctx->tailptr = cpu_to_le32(tailidx);
-> > +
-> > +       /* Ring the RPMI doorbell if present */
-> > +       if (priv->doorbell)
-> > +               writel(priv->doorbell_value, priv->doorbell);
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int rpmi_shmem_request_priv(struct rpmi_shmem *priv, u32 servicegroup_id,
-> > +                                  u32 service_id, const void *request,
-> > +                                  unsigned long request_len, void *response,
-> > +                                  unsigned long max_response_len,
-> > +                                  unsigned long *out_response_len)
-> > +{
-> > +       enum rpmi_message_type type = response ? RPMI_MSG_NORMAL_REQUEST :
-> > +                                                RPMI_MSG_POSTED_REQUEST;
-> > +       int err;
-> > +
-> > +       if (!request && request_len)
-> > +               return -EINVAL;
-> > +
-> > +       err = rpmi_smq_tx(priv, &priv->a2p_req, servicegroup_id, service_id,
-> > +                         type, priv->token, request, request_len);
-> > +       if (err) {
-> > +               dev_err(priv->dev, "tx failed %i\n", err);
-> > +               goto out;
-> > +       }
-> > +
-> > +       if (response) {
-> > +               err = rpmi_smq_rx(priv, &priv->p2a_ack, servicegroup_id,
-> > +                                 service_id, priv->token, response,
-> > +                                 max_response_len, out_response_len);
-> > +               if (err) {
-> > +                       dev_err(priv->dev, "rx failed %i\n", err);
-> > +                       goto out;
-> > +               }
-> > +       }
-> > +
-> > +out:
-> > +       priv->token++;
-> > +       return err;
-> > +}
-> > +
-> > +static int rpmi_shmem_request(struct rpmi_chan *chan, u32 service_id,
-> > +                             const void *request, unsigned long request_len,
-> > +                             void *response, unsigned long max_response_len,
-> > +                             unsigned long *out_response_len)
-> > +{
-> > +       struct rpmi_shmem *priv = dev_get_priv(chan->dev);
-> > +       struct rpmi_shmem_chan_priv *chan_priv = chan->con_priv;
-> > +
-> > +       return rpmi_shmem_request_priv(priv, chan_priv->servicegroup_id,
-> > +                                      service_id, request, request_len,
-> > +                                      response, max_response_len,
-> > +                                      out_response_len);
-> > +}
-> > +
-> > +static int rpmi_shmem_get_attr(struct rpmi_chan *chan,
-> > +                              enum rpmi_attribute_id id, u32 *data)
-> > +{
-> > +       struct rpmi_shmem *priv = dev_get_priv(chan->dev);
-> > +       struct rpmi_shmem_chan_priv *chan_priv = chan->con_priv;
-> > +
-> > +       switch (id) {
-> > +       case RPMI_ATTR_SPEC_VERSION:
-> > +               *data = priv->spec_version;
-> > +               break;
-> > +       case RPMI_ATTR_MAX_MSG_DATA_SIZE:
-> > +               *data = priv->slot_size - sizeof(struct rpmi_message_header);
-> > +               break;
-> > +       case RPMI_ATTR_SERVICEGROUP_ID:
-> > +               *data = chan_priv->servicegroup_id;
-> > +               break;
-> > +       case RPMI_ATTR_SERVICEGROUP_VERSION:
-> > +               *data = chan_priv->servicegroup_version;
-> > +               break;
-> > +       case RPMI_ATTR_IMPL_ID:
-> > +               *data = priv->impl_id;
-> > +               break;
-> > +       case RPMI_ATTR_IMPL_VERSION:
-> > +               *data = priv->impl_version;
-> > +               break;
-> > +       default:
-> > +               return -EOPNOTSUPP;
-> > +       }
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int rpmi_shmem_base_service_req(struct rpmi_shmem *priv, u32 service_id,
-> > +                                      const u32 *arg_in, u32 *arg_out)
-> > +{
-> > +       int len = 0;
-> > +       u32 rx[2];
-> > +       u32 tx[1];
-> > +       int ret;
-> > +
-> > +       if (arg_in) {
-> > +               tx[0] = cpu_to_le32(*arg_in);
-> > +               len = sizeof(*arg_in);
-> > +       }
-> > +
-> > +       ret = rpmi_shmem_request_priv(priv, RPMI_SRVGRP_BASE, service_id, tx,
-> > +                                     len, rx, sizeof(rx), NULL);
-> > +       if (ret) {
-> > +               dev_err(priv->dev, "BASE service %i failed (%i)\n", service_id,
-> > +                       ret);
-> > +               return ret;
-> > +       }
-> > +
-> > +       if (rx[0]) {
-> > +               ret = rpmi_to_linux_error(le32_to_cpu(rx[0]));
-> > +               dev_err(priv->dev, "BASE service %i returned code %i\n",
-> > +                       service_id, ret);
-> > +               return ret;
-> > +       }
-> > +
-> > +       if (arg_out)
-> > +               *arg_out = le32_to_cpu(rx[1]);
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int rpmi_shmem_of_xlate(struct rpmi_chan *chan,
-> > +                              struct ofnode_phandle_args *args)
-> > +{
-> > +       if (args->args_count != 1)
-> > +               return -EINVAL;
-> > +
-> > +       // args[0] is the servicegroup id.
-> > +       chan->id = args->args[0];
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int rpmi_shmem_open(struct rpmi_chan *chan)
-> > +{
-> > +       struct rpmi_shmem *priv = dev_get_priv(chan->dev);
-> > +       u32 servicegroup_id, servicegroup_version;
-> > +       struct rpmi_shmem_chan_priv *chan_priv;
-> > +       int ret;
-> > +
-> > +       servicegroup_id = chan->id;
-> > +
-> > +       ret = rpmi_shmem_base_service_req(priv,
-> > +                                         RPMI_BASE_SRV_PROBE_SERVICE_GROUP,
-> > +                                         &servicegroup_id,
-> > +                                         &servicegroup_version);
-> > +       if (ret)
-> > +               return ret;
-> > +
-> > +       chan_priv = malloc(sizeof(*chan_priv));
-> > +       if (!chan_priv)
-> > +               return -ENOMEM;
-> > +
-> > +       chan->con_priv = chan_priv;
-> > +
-> > +       chan_priv->priv = priv;
-> > +       chan_priv->servicegroup_id = servicegroup_id;
-> > +       chan_priv->servicegroup_version = servicegroup_version;
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static void rpmi_shmem_close(struct rpmi_chan *chan)
-> > +{
-> > +       free(chan->con_priv);
-> > +}
-> > +
-> > +static int rpmi_shmem_probe(struct udevice *dev)
-> > +{
-> > +       struct rpmi_shmem *priv = dev_get_priv(dev);
-> > +       int i, ret, qidx, qcount, qslotcnt;
-> > +       struct shmem_queue *queue;
-> > +       u32 arg_in, arg_out;
-> > +       const char *qname;
-> > +       fdt_size_t qsize;
-> > +       void *start;
-> > +
-> > +       priv->dev = dev;
-> > +       priv->rx_timeout_ms = 20;
-> > +
-> > +       priv->slot_size = dev_read_u32_default(dev, "riscv,slot-size", 0);
-> > +       if (priv->slot_size < RPMI_SLOT_SIZE_MIN)
-> > +               return -EINVAL;
->  The probe enforces only the minimum slot size. RPMI also requires a power-of-
->  two slot size; validate that property before deriving queue pointers and slot
->  counts.
+Best regards,
+-- 
+Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 
-Ok
-
-Thanks,
-Charles
-
-> 
-> regards,
-> Subrahmanya
