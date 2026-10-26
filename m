@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A573D606A31A
-	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 23:46:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 474A2606A31A
+	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 23:46:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=uZ5PcwII;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=KJhCloEt
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=sS6qbPVS;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=AGywwr5Q
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7EAEC80C1C;
-	Mon, 26 Oct 2026 23:46:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 244AE40572;
+	Mon, 26 Oct 2026 23:46:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zqDxA1EWRoBr; Mon, 26 Oct 2026 23:46:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9A15D80BD3
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793058416;
-	b=jCpbns3AZln7gg+2RMgrJEoR5QKQsxFh7620HPPj5dDUION93pH9twvt9XXNJZP7qU6V
-	 tV3UdKnsczlxtcFK+IFPn6YHxgcPGHFMgAE++4TlRp74BPj7Smln+ipmiHfU6ZKF5WtgA
-	 n+7te89d69W0Zs+/8BqCp+GP7KcO62gAiqeTQjbTJK1+6YTBbeFVgyyBh92Y3GQPvsUm4
-	 xrl8iIbkpS+1hXYsBsjWqp+XHon3v8XBD2NjQy4nyNyZcIhbmNNk+QJ3TEFIbCl7p57Et
-	 gGlfYlImijOx/Lu0f1cTKFV/kN/wNOXsYjg3b5RZPrSG/EyLP0rw/w1S6ieMPcGyvkQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xlKyhwSxo_3U; Mon, 26 Oct 2026 23:46:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 502E040575
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793058418;
+	b=YNkvzCWYM+mI67BovRNuvi3H6hkPEetEZIJ5FfRgDkKnUC0UuVkgozuHd713HnYs7KtV
+	 ZI2d5KiHr3Z24g/mxho1DkJLJpWhB4PxDmObYnkjrqo6WXS3bqRcw2c5BZXa+hM437X89
+	 jDw2CGmRgFwUVGWEke2vmt1zIarzgy2GzlmvWhKfDVlFoc2lThknB6fD0gk2OF4DoXW2e
+	 nxVgFa0ezJQ0d/N9FVprfQzpi4N1JGwjElS4cvTntNSG7pjWlNVVI2Z1IwuhuAec/gmPE
+	 +X4F2qSICMjzYtRixsd60iGcDMdoQypZwbO7bJ8WJXSQee1gxKjivN4H6hYfOHUrN3Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793058416;
+	c=relaxed/relaxed; t=1793058418;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,137 +33,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=wKtbIninv2cJiCW+HliRpAzvc3fbs6zVxbR0Bd2K7Aw=;
-	b=I4Lnl7GxmrJHLQ0eLeJpfy5X3ZQj+iIXV7q97mH+Lr+0UXmJ8bFF2iLbK7uw71Qb/+vG
-	 gWkig3GWtPTHwFN9v2+KRgyMKRG8ctop9UPEFrdaGWw/Lt2PGJIXjaiPkoRPnY8JUnVt/
-	 dpd6dYQwtxvXpWgRG2nYw5TU9lrqRpkDXHLkI+w6olGZeUaB3pm5ogO36S0psflptazNy
-	 TX59A8ZUAK0yZFy4izuDtqlTB5TFuYeZ3Ufkf0/GX7pi+GAOqBx1KIrD7DR54u6xbevmY
-	 F/Ro4siiXo6YrVXgDKqc8q0iIpY5zXm3qEx6UVXUVhIc0qS8EEpf2b9wbPemwIg3vuQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=klI3T6jTJUfAGIKljAVcCzvk5mYgkUuhd1tjAlBdb8E=;
+	b=lIXDHjCV/gIwcSrXczYsztwX3mQ1jxuG5SOQpA4UwPYJjvGZv8NOVKUAT21KZ2NwvPGc
+	 fcnhRJbSF0uojET899xbr+AqjGLdDBgTJB6kG4RpDjBroiCjSKCQvisE/Ddon0kZmBZra
+	 5Ty2tJ4KJZR9iQ1RttO6LqKSkBwYEC5MUYMMcaMkOLa7H4slpb/Og2TMM6ssyRPqfay3p
+	 80dc3jPsomthjJ5fVDWbA5xTCRV/hgFsMuQIIcGF/lkHpaP0lQgOqGln/PZD+WDrvdF+J
+	 6/mXsYGcKFgSrFNTbCOfr9ipGWDxx3BXe6yRdWLqgX5eIbhD23wuFPeWMrCQ8iuejQw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793058416;
-	bh=wKtbIninv2cJiCW+HliRpAzvc3fbs6zVxbR0Bd2K7Aw=;
+	d=lists.u-boot-project.org; s=default; t=1793058418;
+	bh=klI3T6jTJUfAGIKljAVcCzvk5mYgkUuhd1tjAlBdb8E=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=uZ5PcwIICQmfC8cc+v2STb7hABSTza7t6NJu14JIFPhYLO7R20HGxF2sCNra2m94h
-	 s7Ur38CnOwEcMrAK8dgB8v53YG47pZFcT7jWV1AFu2ZPYMHG89P4Jv8oWE2WftKY1Y
-	 9m+aT+9M8eDJ9KjCawdiHcn6r6m212KAJAMYd4ja0KUPCAJ86jRfoH6+sblaOS/vUS
-	 4yMVTWdrRLndPD2UzgFQtTp8wLRk7ksSO0eRNlUBDQgQv8A5Bx6QGTtkqPtJA5GDRq
-	 eD06/8U8JD83Re0Vh//SoU9cm00J0ViwCASY3SM6ZPw+7sUKFFnekTuG26UgIcx0Nh
-	 i3mDQAXRAwvlQ==
+	b=sS6qbPVSUfK6peR2+qMIiwgNFjVTG8J3hnkmEEVHvrYizEcU8OSk7S72jXp7uzVa2
+	 o1msV9vZiPsztO0qGC+KZwP3NxkmR7b4Bm7BRpunajzTAYyRBmmrlZJubXDdXaEGY2
+	 vQCRHPUyJm7RZsS+HRw3VIQ5hdVfVy93fd8K/S5aAScR0x9kn7iyMNpC607QtdRT3O
+	 XLt30MA2cFJW931NTNyaJv9dbVUEjGbS3ALNdPgWJTc5dVhYdjQoXAsnPy4pJfBwHz
+	 ZGsN80/5jf+yFDf/mg4CrQ69+kIctAczAGQegle/NH/1IZEo1uZEmqQlfqEZxj1SXL
+	 lggOGLduMQqHQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9A15D80BD3;
-	Mon, 26 Oct 2026 23:46:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 502E040575;
+	Mon, 26 Oct 2026 23:46:58 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1E345356
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 23:46:49 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 547D93421
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 23:46:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0FE3C40205
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 23:46:49 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 4644040205
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 23:46:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VS6x2xTP4iCR for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 23:46:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 3F0F940062
+ id KWsJwqNDCAmU for <u-boot@lists.u-boot-project.org>;
+ Mon, 26 Oct 2026 23:46:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 7584B40062
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::336"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793058408;
- b=jWJnU0JhLNM0TQHhiaRx6GlogCy6V+4KGYiBj1CD9dDW9z+pFJ/UCO/u3RiKFzJjsyrK
- p3ao9qXI0qNoNp5JzDQk9gzn7k+62axgcD33ofWclyMa/cBElzDROJi3Pm6rgBxFdKZDm
- IpKIFHjA0Bz3AZog6q5W4/BhSeW6cTIolcXPAlH21dIJukKY8Lw6II3/nWWpymV1RxJlP
- gS0xwHpO70Ds0ngRff5BJcAFuTQChk/tXoJYC/OHJy9HV51fFvfFaIUrs3sFfIWKW2S4r
- NG5rl9fYG7vRYf2E32PMykrgJCVf6qr/zuQi9vRXHrMgRqH3iEuQalkHbT3dyhRfNCA==
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::334"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793058409;
+ b=Wox88/1exqpJr9oWf7aBgkxVwkdLapWjLxCkT+znusikGzuK9j9Qegw2ESgxkjf9kMfF
+ dfPijouIaeIlW2REUzVXQWGZz0NII9Gbj+CrAG5f6U2mR8dHxF1BJClHp2vA0FZKU23oG
+ NDybn3+SWKzHot30pu4oYFy7znrwVOqMwjwgfKePKSpWbXo/eEWgCj4tdGdc+TbObXsJV
+ 3GqOTbFN8dBpW+2xmjwrnluh+4Jis3H0Z6OO5NTNv+cht4ZJGLlyAtjhIyKP3jMp+IEyN
+ uE3D1zSOgHlkx25hnfoykLUOjL5NPiJ0+OgelJYRoqp5hay03FCb+88d5NhwF0lEiMQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793058408;
+ c=relaxed/relaxed; t=1793058409;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=wKtbIninv2cJiCW+HliRpAzvc3fbs6zVxbR0Bd2K7Aw=;
- b=e2dclNldH65simot8/RJs2BykuLYV7T9EjyS0knWczb8ZoWK4DJ0K9yeVwZWErg8s0a5
- xJAtvuGZe8tvSwBceNxmx9OkAWXEeXfqyqmuoIh1yYPHFDipn6MEVuRgrcKWXn2T+v6XX
- C70/Nuy8DwlIpYhRjbV7waub2FqGLivHmSnAWqBp40I7R3JT90Kz4q9Ow67b7vHRPqyh8
- 9v3i702IS34lgJEs9Fdfrc9bxUIQJ76UzORDVVVcdX2LjudwT/ddbEX/w1tc+aDw+VSIX
- C9enS8fRwTBAep8A3NGDm+ugYSdfVCrtGv2mwoxyyytRr+iZzrCBlno0ASW52Mwxh1A==
+ bh=klI3T6jTJUfAGIKljAVcCzvk5mYgkUuhd1tjAlBdb8E=;
+ b=IZij2AyZZi+CcooArjNV3tngcw+gpbPTAk87enH3Lf5N0nODzcmuZmklebiO5pZW9epF
+ MNgBtmaZ54XMLQuTzox93l5GKcjYJc1etN7H6rn8JpJaWkVaWMVqKaWsYeD0h8DZ1JxMI
+ FthVWJAHVXxA/qI9lg3Vodk/KW3mjrv01ziHcBZPaMzAPJieJiQae0BYNa1Vtq2VM6GPJ
+ 6FajfT+uLklELZGoXDLpGWnz2NvRIAxLaE2JpHmU0ScUtDtGWNPHFtYgsqx+5L0ghKLGa
+ lmOtdWd1VzvKH1iVGCz5ZNcqxH0chiXstivZfkG7/Bz63Isi3s0FzqwMHWdtVlDpfJA==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=KJhCloEt; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::336"
+ header.s=20251104 header.b=AGywwr5Q; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::334"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::336; helo=mail-ot1-x336.google.com;
+ client-ip=2607:f8b0:4864:20::334; helo=mail-ot1-x334.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=KJhCloEt
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 3F0F940062
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 23:46:47 +0000 (UTC)
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-823e4047037so2833966a34.2
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:46:47 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=AGywwr5Q
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7584B40062
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 23:46:48 +0000 (UTC)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-8451a619da7so2098291a34.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:46:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1793058407; x=1793663207;
+ d=gmail.com; s=20251104; t=1793058408; x=1793663208;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=wKtbIninv2cJiCW+HliRpAzvc3fbs6zVxbR0Bd2K7Aw=;
- b=KJhCloEtvq4BoXB96lyGmWdhLajxw3UrEkHttu0srksXPhRyfkoEwK0IMlMpVXcDEy
- cJjWHamiHWQNdzc3A+zud7tjK+qbuXbQokAu16VfDJWWnow4Um1k9MTZcwRqNwa15Bdz
- NQsBliE8eCFBskSvJGrIqp8kThE3U0CT7jndoIjuXn7Eg0xikUsPb8FnSb3pzq2j0pXd
- 4jFfwtiSYOht53OIo5JVgNuMZbeTNN8MeWljBYg/jcWNtoF+XthSl/f14feN02xCJPJG
- JetK2i30brNN3lQSrv2KhNWFWC86SW13hag3W6TNrtT1IM2lUPlKNiFPYkXNItdwHaiq
- 7uMg==
+ bh=klI3T6jTJUfAGIKljAVcCzvk5mYgkUuhd1tjAlBdb8E=;
+ b=AGywwr5QyPt+N70L/ziKwuqHPdcwdKHA2OQBJxAtmX8R068DKFq8JHdSCZPjmkK4vu
+ HOhXYQFeYMXE+Xnz083YcV/K/zhN9ZbomRdivQxfjQOf7PRunYqMUDmjzgGT9q5b6Da/
+ VJwDE0Rxn+B65KZ26MYqoToLsgePT+A7c64JiB0GslfWSL545zPoBb6DdcCt5yb3pz4W
+ fKAHDY3GlP4x2Rqf2gLKMkaqe7teaXPpezJhgt+ashBpqk0E3RT8U9flQIm84EoL88SG
+ pr0SxrbbCIbzaIzJoO3fb+d7m74fF/iSFd5OTYXUJUk4kHqCPSywbhw1xOhEf4yWPrhs
+ yn/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793058407; x=1793663207;
+ d=1e100.net; s=20260707; t=1793058408; x=1793663208;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=wKtbIninv2cJiCW+HliRpAzvc3fbs6zVxbR0Bd2K7Aw=;
- b=xFyQPH8aKtQMDau0JD/nendiwQiU9BEMdkioYEiYJvCr67GBxerK+r8B97bjxhU8GX
- eWr7ogwNnIL52x1mkffsiCMnIfNIo4uPQuUa5o4iZSzDbJGEvlliIddkjfagHBnADWdW
- Cqf90n8hAZx+bI/RUBTp5kW4S1LV2sB7MMK9D9D0Xf7wTRY1sAVb5JhZEME6HeDrF0QQ
- 5t5UUlPN3jqGCNSKBTb7JYN8AvjeY/H8kEWxL+Y9O1Fc8h969DZX07ZK+h9x3OTsskWS
- MfhCuCPiwY1fxDjlnb2QXyJMfJ5aAUe5O4CRN4yCznmNnZXW7gQPOoVAiZ1EstZRZfqR
- mB0g==
-X-Gm-Message-State: AFq9FYKrbjXdCy9WqlOkhJojGj8TUZ65lhSwNL5WACts8CA0LMM2tYQz
- C/XGVqZiRYUhZkfdnOgpNEtaBu0ipb51/GzGZ9nBpQb/AmpL0NAT1q82
-X-Gm-Gg: AYBFou2Dv1lbgZ/HWCMyPwhsfFxpQW5DlTIxHfKAEAVX1xEmlidfydzbybhmhCiyJL9
- JR3IhzMTax0h7YnhYeSFa5F8s8L61hk/JlmfzeySEfXysR7cAGtDB7TY76TPhhGf1lPmQJUfOP2
- +rw+IWmzhrk1KiC9tMNQCFbyUVe+JkPcw6mHndLZLBUd3wNsAQRqF6mnNaXz4LdOpAgd7+GJd6P
- NS1/hymNLF0avAUzhrv1W1dcPWmkK95KH/YIidIGfLiQj614S7M0+Syvts8J6pgwVMynugp7deI
- dYD+LyOxYiuOsrO7ZiJu4omtvpjaXqXdkn88VnRibrUugpduquaLxKg+VK0Zmy+/Yr2dVC9cGDb
- HLNzFbp5EG8pzxpnOUF1DbfI7LGz9uBxgb5WPB5FzH+TxklpkMzxGibs+aYXJupe5yfuwpOMiab
- /UbyQqdCd9iH5YWGjJFrSwsz+t27Dq3qsmremRd5VfzgR/+5R1/MlXaxk/oZd+AsizKmqdo0Cnl
- uym7LBGWN3PfX/5D4CtpVhlKihbLTXJExfAWwkPLeEJXYqdX6tsNmYySORLzCBBSTnT43HjH/sb
- TPbTZk5ns4XBoOjc2256Ya0f+VbURUUL4xAQWuMNPItA/E3oYNmnMW9vg4elybIJAK8MWScyL5r
- UbPPTi/1gV+OhO/FcTxF+EJweTqjysktEXjZ0GKGWwuYM5HuAbxpZG0gWGUTYxKUwq4wh3fOXQe
- JM1yc=
-X-Received: by 2002:a05:6830:2b22:b0:81b:ac9a:5681 with SMTP id
- 46e09a7af769-850ff682860mr7330853a34.29.1793058406745; 
- Mon, 26 Oct 2026 16:46:46 -0700 (PDT)
+ bh=klI3T6jTJUfAGIKljAVcCzvk5mYgkUuhd1tjAlBdb8E=;
+ b=SlxVWWvqgdrfqRdlh0y4ezB58mztTKTaP166GI9HAC1WRekY4Tq0p34hLkGW+0ADlA
+ A5pnB16IFh/cSRBIzkJ9ukdue1wo5uZVAohFH5yGq1V/AHsVdy4ALstuBq8q6/XR8YeA
+ O2vxzHknr/2HqHhC5pNCxAxzo6A90RS6aKjFT/v7vURkS9/BcOqriSAh6/VivxziOR/K
+ rlszueY3gPvFS9j4HsMjdEjtpDrtHG9ubuSOVIs37YM5ARl9smX9tY8r9VqSaTpX8dqe
+ MwNGVgK8XWgOQcyoa+zfgJniLGrlUlrfyfQf37WGk/5aIThTSYI3XY0OawYnhOgC1NrP
+ PvAw==
+X-Gm-Message-State: AFq9FYKGTNKt/yNWW1cYf+jPPNbppJ9knEDknO6XTphIJALsol0zlwCV
+ E0W+syKEc1PiX4wU8sDq7ESezX5ppOq1xSfXLQePLJs+f3MLaY1lBTYH
+X-Gm-Gg: AYBFou2ij6goNgLLjKVMN6iGoY728O1/iuWnmTM6LmxfZN9EIcHsjJ51ksdQNH0EsE1
+ vJZvXa57vajPfd8ukjAqfcfYXLm9Wyc1gt1gv3Qe5Wg3BISDhXexvkenXKDjehAtX4fBLrIwxf7
+ G5yfRnrqX8W1bM6iCp7Zi4/qdki+WfkTF0TwPjw1qbg2tvmh1H+GGYQJXWcZM5kVDEz6cbmusfN
+ BfgdPMQ2jOFTbY5MM54hm8ygwlHdx8RcWe0NB4F7g2B6SkWQc7H6+5Z17jhjwbKxgz8+q/xXGJx
+ OIjnVuS4FJQ23+svaoUCahY+OVArrBQddiF/mhkarFH1xs1iE92abfanP7jtoky7I4Ei/9kgkqX
+ yWWtqa84aNeXEz9ksnRtamuKc7IguHIoC+nW5NOKn8iLoAALaJgxTOPz1M59x8fH8L4DsMIUa3B
+ yIpUo2bfNZijmIZiiXXXuaZap09U1uc7XouoHkgwaaACSdsgUrbZwdvWzdgGMTNJIvT5SBznN0G
+ DOB2ynYe6xCHrQm8WDXzJmMZGDG11zxEosp0Z/TbjPPTN9TW6U6v9I1i3LDbUJ/+lsblERiZHzT
+ tgwiUP1yrFc+8A2O9oM2Zx4qZlm4KFtmsi8Uo4NTA761mIZ7+lYqOAjQAhhKW3NqDshUVeM8Xc+
+ OSkuT7Y13Zy9LsaNXjahBzpc1/iR6pdSNd5esvlAWfyNWdHXxx9AImZdHgNx2VjNRIARZ0M0Ln8
+ SO30KCkAybQH9zRPpweKsXaWMG
+X-Received: by 2002:a05:6830:43a2:b0:806:ab05:c1dd with SMTP id
+ 46e09a7af769-850fbd152cdmr7121487a34.4.1793058407945; 
+ Mon, 26 Oct 2026 16:46:47 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-850fc005bd7sm9509137a34.24.2026.10.26.16.46.45
+ 46e09a7af769-850fc005bd7sm9509137a34.24.2026.10.26.16.46.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Oct 2026 16:46:46 -0700 (PDT)
+ Mon, 26 Oct 2026 16:46:47 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Mon, 26 Oct 2026 17:46:38 -0600
-Subject: [PATCH 6/9] nvmem: add node-based cell lookup helpers
+Date: Mon, 26 Oct 2026 17:46:39 -0600
+Subject: [PATCH 7/9] misc: add Allwinner SID NVMEM provider
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261026-submit-xpowers-acx00-ephy-mainline-v1-v1-6-e22389e4076b@gmail.com>
+Message-Id: <20261026-submit-xpowers-acx00-ephy-mainline-v1-v1-7-e22389e4076b@gmail.com>
 References: <20261026-submit-xpowers-acx00-ephy-mainline-v1-v1-0-e22389e4076b@gmail.com>
 In-Reply-To: <20261026-submit-xpowers-acx00-ephy-mainline-v1-v1-0-e22389e4076b@gmail.com>
 To: u-boot@lists.u-boot-project.org
@@ -204,163 +204,191 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Some firmware-described consumers do not have a corresponding
-driver-model device. They still need to resolve named NVMEM cells from
-their own device-tree node.
+Linux device trees describe calibration and configuration values as
+cells in the Allwinner Security ID block. U-Boot has an NVMEM consumer
+API but no provider for the direct-read SID variants.
 
-Factor the existing index and name lookups through node-based
-helpers, while retaining the device-based interfaces as wrappers.
+Add a read-only misc driver for the A10, A20, A83T, D1, A64, H5
+and H6 register layouts so firmware consumers can use those standard
+nvmem-cells descriptions.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- drivers/misc/nvmem.c | 36 ++++++++++++++++++++++++------------
- include/nvmem.h      | 41 +++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 65 insertions(+), 12 deletions(-)
+ MAINTAINERS              |   1 +
+ drivers/misc/Kconfig     |  10 ++++
+ drivers/misc/Makefile    |   1 +
+ drivers/misc/sunxi_sid.c | 118 +++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 130 insertions(+)
 
-diff --git a/drivers/misc/nvmem.c b/drivers/misc/nvmem.c
-index 33e80858565..736b59bffec 100644
---- a/drivers/misc/nvmem.c
-+++ b/drivers/misc/nvmem.c
-@@ -95,8 +95,8 @@ static int nvmem_get_device(ofnode node, struct nvmem_cell *cell)
- 	return -ENODEV;
- }
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 95b1f3b5ab3..e724357419b 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -702,6 +702,7 @@ F:	arch/arm/include/asm/arch-sunxi/
+ F:	arch/arm/mach-sunxi/
+ F:	board/sunxi/
+ F:	drivers/clk/sunxi/
++F:	drivers/misc/sunxi_sid.c
+ F:	drivers/phy/allwinner/
+ F:	drivers/pinctrl/sunxi/
+ F:	drivers/video/sunxi/
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index 681d5f28ea4..6f6456120d0 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -51,6 +51,16 @@ config NVMEM
+ 	  up hardware configuration data such as MAC addresses and calibration
+ 	  settings.
  
--int nvmem_cell_get_by_index(struct udevice *dev, int index,
--			    struct nvmem_cell *cell)
-+int nvmem_cell_get_by_index_nodev(ofnode node, int index,
-+				  struct nvmem_cell *cell)
- {
- 	fdt_addr_t offset;
- 	fdt_size_t size = FDT_SIZE_T_NONE;
-@@ -104,10 +104,8 @@ int nvmem_cell_get_by_index(struct udevice *dev, int index,
- 	struct ofnode_phandle_args args;
- 	ofnode par;
- 
--	dev_dbg(dev, "%s: index=%d\n", __func__, index);
--
--	ret = dev_read_phandle_with_args(dev, "nvmem-cells", NULL, 0, index,
--					 &args);
-+	ret = ofnode_parse_phandle_with_args(node, "nvmem-cells", NULL, 0,
-+					     index, &args);
- 	if (ret)
- 		return ret;
- 
-@@ -131,16 +129,30 @@ int nvmem_cell_get_by_index(struct udevice *dev, int index,
- 	return 0;
- }
- 
--int nvmem_cell_get_by_name(struct udevice *dev, const char *name,
--			   struct nvmem_cell *cell)
-+int nvmem_cell_get_by_index(struct udevice *dev, int index,
-+			    struct nvmem_cell *cell)
- {
--	int index;
-+	dev_dbg(dev, "%s: index=%d\n", __func__, index);
- 
--	dev_dbg(dev, "%s, name=%s\n", __func__, name);
-+	return nvmem_cell_get_by_index_nodev(dev_ofnode(dev), index, cell);
-+}
++config SUNXI_SID
++	bool "Allwinner Security ID NVMEM support"
++	depends on ARCH_SUNXI
++	depends on MISC
++	select NVMEM
++	help
++	  Enable read-only access to the Security ID efuse area found in
++	  Allwinner SoCs. This allows consumers to use the standard nvmem-cells
++	  properties from Linux-compatible device trees.
 +
-+int nvmem_cell_get_by_name_nodev(ofnode node, const char *name,
-+				 struct nvmem_cell *cell)
-+{
-+	int index;
- 
--	index = dev_read_stringlist_search(dev, "nvmem-cell-names", name);
-+	index = ofnode_stringlist_search(node, "nvmem-cell-names", name);
- 	if (index < 0)
- 		return index;
- 
--	return nvmem_cell_get_by_index(dev, index, cell);
-+	return nvmem_cell_get_by_index_nodev(node, index, cell);
-+}
-+
-+int nvmem_cell_get_by_name(struct udevice *dev, const char *name,
-+			   struct nvmem_cell *cell)
-+{
-+	dev_dbg(dev, "%s, name=%s\n", __func__, name);
-+
-+	return nvmem_cell_get_by_name_nodev(dev_ofnode(dev), name, cell);
- }
-diff --git a/include/nvmem.h b/include/nvmem.h
-index e6a8a98828b..94205fc2763 100644
---- a/include/nvmem.h
-+++ b/include/nvmem.h
-@@ -6,6 +6,7 @@
- #ifndef NVMEM_H
- #define NVMEM_H
- 
-+#include <dm/ofnode.h>
- #include <linux/errno.h>
- 
- /**
-@@ -85,6 +86,20 @@ int nvmem_cell_write(struct nvmem_cell *cell, const void *buf, size_t size);
- int nvmem_cell_get_by_index(struct udevice *dev, int index,
- 			    struct nvmem_cell *cell);
- 
-+/**
-+ * nvmem_cell_get_by_index_nodev() - Get an NVMEM cell from an ofnode
-+ * @node: Device-tree node that uses the NVMEM cell
-+ * @index: Index of the cell in nvmem-cells
-+ * @cell: Cell to initialize
+ config SPL_NVMEM
+ 	bool "NVMEM support in SPL"
+ 	help
+diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+index f20c989ffc6..3ec2bc2b201 100644
+--- a/drivers/misc/Makefile
++++ b/drivers/misc/Makefile
+@@ -78,6 +78,7 @@ obj-$(CONFIG_SMSC_LPC47M) += smsc_lpc47m.o
+ obj-$(CONFIG_SMSC_SIO1007) += smsc_sio1007.o
+ obj-$(CONFIG_STM32MP_FUSE) += stm32mp_fuse.o
+ obj-$(CONFIG_STM32_RCC) += stm32_rcc.o
++obj-$(CONFIG_SUNXI_SID) += sunxi_sid.o
+ obj-$(CONFIG_SYS_DPAA_QBMAN) += fsl_portals.o
+ obj-$(CONFIG_TEGRA186_BPMP) += tegra186_bpmp.o
+ obj-$(CONFIG_TEGRA_CAR) += tegra_car.o
+diff --git a/drivers/misc/sunxi_sid.c b/drivers/misc/sunxi_sid.c
+new file mode 100644
+index 00000000000..86a1379d07e
+--- /dev/null
++++ b/drivers/misc/sunxi_sid.c
+@@ -0,0 +1,118 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Allwinner Security ID NVMEM provider
 + *
-+ * This is the node-based form of nvmem_cell_get_by_index(), for consumers
-+ * which do not have a corresponding driver-model device.
-+ *
-+ * Return: 0 on success or a negative error code on failure
++ * Copyright (C) 2026 James Hilliard <james.hilliard1@gmail.com>
 + */
-+int nvmem_cell_get_by_index_nodev(ofnode node, int index,
-+				  struct nvmem_cell *cell);
 +
- /**
-  * nvmem_cell_get_by_name() - Get an nvmem cell from a given device and name
-  * @dev: The device that uses the nvmem cell
-@@ -106,6 +121,20 @@ int nvmem_cell_get_by_index(struct udevice *dev, int index,
- int nvmem_cell_get_by_name(struct udevice *dev, const char *name,
- 			   struct nvmem_cell *cell);
- 
-+/**
-+ * nvmem_cell_get_by_name_nodev() - Get a named NVMEM cell from an ofnode
-+ * @node: Device-tree node that uses the NVMEM cell
-+ * @name: Name in the nvmem-cell-names property
-+ * @cell: Cell to initialize
-+ *
-+ * This is the node-based form of nvmem_cell_get_by_name(), for consumers
-+ * which do not have a corresponding driver-model device.
-+ *
-+ * Return: 0 on success or a negative error code on failure
-+ */
-+int nvmem_cell_get_by_name_nodev(ofnode node, const char *name,
-+				 struct nvmem_cell *cell);
++#include <dm.h>
++#include <dm/read.h>
++#include <misc.h>
++#include <asm/io.h>
 +
- #else /* CONFIG_NVMEM */
- 
- static inline int nvmem_cell_read(struct nvmem_cell *cell, void *buf, int size)
-@@ -125,12 +154,24 @@ static inline int nvmem_cell_get_by_index(struct udevice *dev, int index,
- 	return -ENOSYS;
- }
- 
-+static inline int nvmem_cell_get_by_index_nodev(ofnode node, int index,
-+						struct nvmem_cell *cell)
++struct sunxi_sid_data {
++	unsigned int value_offset;
++	unsigned int size;
++};
++
++struct sunxi_sid_priv {
++	const struct sunxi_sid_data *data;
++	u8 __iomem *base;
++};
++
++static int sunxi_sid_read(struct udevice *dev, int offset, void *buf, int size)
 +{
-+	return -ENOSYS;
++	struct sunxi_sid_priv *priv = dev_get_priv(dev);
++	u8 *out = buf;
++	int i;
++
++	if (offset < 0 || !buf || size < 0 || offset > priv->data->size ||
++	    size > priv->data->size - offset)
++		return -EINVAL;
++
++	for (i = 0; i < size; i++) {
++		unsigned int byte_offset = offset + i;
++		u32 value;
++
++		value = readl(priv->base + priv->data->value_offset +
++			      (byte_offset & ~3));
++		out[i] = value >> (8 * (byte_offset & 3));
++	}
++
++	return size;
 +}
 +
- static inline int nvmem_cell_get_by_name(struct udevice *dev, const char *name,
- 					 struct nvmem_cell *cell)
- {
- 	return -ENOSYS;
- }
- 
-+static inline int nvmem_cell_get_by_name_nodev(ofnode node, const char *name,
-+					       struct nvmem_cell *cell)
++static int sunxi_sid_probe(struct udevice *dev)
 +{
-+	return -ENOSYS;
++	struct sunxi_sid_priv *priv = dev_get_priv(dev);
++
++	priv->data = (const void *)dev_get_driver_data(dev);
++	priv->base = dev_read_addr_ptr(dev);
++	if (!priv->base)
++		return -EINVAL;
++
++	return 0;
 +}
 +
- #endif /* CONFIG_NVMEM */
- 
- #endif /* NVMEM_H */
++static const struct misc_ops sunxi_sid_ops = {
++	.read = sunxi_sid_read,
++};
++
++static const struct sunxi_sid_data sun4i_a10_sid_data = {
++	.size = 0x10,
++};
++
++static const struct sunxi_sid_data sun7i_a20_sid_data = {
++	.size = 0x200,
++};
++
++static const struct sunxi_sid_data sun50i_a64_sid_data = {
++	.value_offset = 0x200,
++	.size = 0x100,
++};
++
++static const struct sunxi_sid_data sun50i_h6_sid_data = {
++	.value_offset = 0x200,
++	.size = 0x200,
++};
++
++static const struct udevice_id sunxi_sid_ids[] = {
++	{
++		.compatible = "allwinner,sun4i-a10-sid",
++		.data = (ulong)&sun4i_a10_sid_data,
++	},
++	{
++		.compatible = "allwinner,sun7i-a20-sid",
++		.data = (ulong)&sun7i_a20_sid_data,
++	},
++	{
++		.compatible = "allwinner,sun8i-a83t-sid",
++		.data = (ulong)&sun50i_a64_sid_data,
++	},
++	{
++		.compatible = "allwinner,sun20i-d1-sid",
++		.data = (ulong)&sun50i_a64_sid_data,
++	},
++	{
++		.compatible = "allwinner,sun50i-a64-sid",
++		.data = (ulong)&sun50i_a64_sid_data,
++	},
++	{
++		.compatible = "allwinner,sun50i-h5-sid",
++		.data = (ulong)&sun50i_a64_sid_data,
++	},
++	{
++		.compatible = "allwinner,sun50i-h6-sid",
++		.data = (ulong)&sun50i_h6_sid_data,
++	},
++	{ }
++};
++
++U_BOOT_DRIVER(sunxi_sid) = {
++	.name = "sunxi_sid",
++	.id = UCLASS_MISC,
++	.of_match = sunxi_sid_ids,
++	.probe = sunxi_sid_probe,
++	.ops = &sunxi_sid_ops,
++	.priv_auto = sizeof(struct sunxi_sid_priv),
++};
 
 -- 
 2.53.0
