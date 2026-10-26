@@ -2,145 +2,251 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E177606A325
-	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 17:35:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DA4B606A31A
+	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 17:35:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ukMvNXbv;
-	dkim=pass (2048-bit key, unprotected) header.d=siemens.com header.i=cedric.hombourger@siemens.com header.a=rsa-sha256 header.s=fm2 header.b=kWNZqN98
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DyIug8XO;
+	dkim=pass (2048-bit key, unprotected) header.d=hitachienergy.com header.i=@hitachienergy.com header.a=rsa-sha256 header.s=selector1 header.b=cz5xLhPA
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DC1674082B;
-	Mon, 26 Oct 2026 17:35:03 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0093A4084A;
+	Mon, 26 Oct 2026 17:35:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DCHwuP9qOlmC; Mon, 26 Oct 2026 17:35:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5668D40830
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793036102;
-	b=TVCtyow0GkqRQAjBxj1c8nf0D+Nb665W66mBG6tyElnR79AHUrpWIv/4l5jFV3uw6YrP
-	 DvjlyRke2hKR4tmrqkYMDA067GoVuZubrVD7EP1Mptn3uXUoyq0n6E+qMnOIRtGWL8q8i
-	 WBMkwCC2BeQ/8R01ik5ucJH3RomwrfrWVW1O2w1o4To/poxakUqYuise0D+z9ocan1LTS
-	 yZvdCEcBdPvMECJXsUwll3jT5hyg2ngI2YMDXImvIH+eiDsh/l7SeI524UiloBLDv25sT
-	 SL2IyEptzlLB3zMPLvwE/vITeXEOx6YIr9f7sEIIe99SD0j7FS5GSApn2VoaViCDwLQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793036102;
+ id VWGuNEsZpq16; Mon, 26 Oct 2026 17:35:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 1FCE340800
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793036105;
+	b=CRgEFZFEl95pIM1rHWNFnjBDlCuSxo3f89QPfj6k9AmZT2U9M0bzQJ7KyDQRdlja0ABi
+	 QghPKQw6WbLQ0sFS8ZNVOjp3l04f6feBJi5dl0eNBl4j6oE2EbLpdMeeYsNg1NExxtCDc
+	 oPKlwXfbFKq+wal4FLigKAU89auqPVR/wYvCxRmLcE6BwpWj8onW7bXTrpLsQ5CKKIabB
+	 xH8Bp1LeeqQahnq/ZGoWX+9Ba7/xJNte2KBIDJIBSOp40pRfWqmmyLpn/JNx4A4wnennx
+	 OxoI1wzgSYWtiqFrJS1SDfopotQlNn1PHV9kL1XmZcKVyx4hrC/XpYkvmfu99eFL4gQ==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793036105;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:From:Subject:Date:Message-Id:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:
-	 X-Flowmailer-Platform:Feedback-ID:X-Mailman-Approved-At:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=5U1nK2HqZ3CGEq+CF0WjXHPI9DGRKd/RxXAnGFJrsGM=;
-	b=V/t1JrqdWS3rHsVw+yEg46sWn+0/bLqJmwxNeDT5Cyi54/IjbBv99J83CymDU3vJlCcl
-	 2X0ILiUzS17HQtBKyZZT34sY5pgMWTUXjKYRePoVjIY1A+84c/5Y01P8802o2AlCm9vpd
-	 +MhvhLc/nAK3Xk9Ihic0AMTg9gejsUEbIHDYnTCKgrXhYEgOHJaAL/FUzBKjtxXP1FIm1
-	 RzZc7C3f7GNx/PG0XvGLF+PnmsFvXuZcpO/qdT8KiBjk6ZNkeE2Tk750aMQ6flmEqF42z
-	 9AiJu4YD6vbDzxvbbtcq/jk53k7XOhzpjf8Y3qL/CMt2g+bvXQgSd9P/SI2gm28SVkg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:From:To:CC:Subject:Thread-Topic:
+	 Thread-Index:Date:Message-ID:References:In-Reply-To:Accept-Language:
+	 Content-Language:X-MS-Has-Attach:X-MS-TNEF-Correlator:msip_labels:
+	 x-ms-publictraffictype:x-ms-traffictypediagnostic:
+	 x-ms-office365-filtering-correlation-id:x-he-o365-outbound:
+	 x-ms-exchange-senderadcheck:x-ms-exchange-antispam-relay:
+	 x-microsoft-antispam:x-microsoft-antispam-message-info:
+	 x-forefront-antispam-report:
+	 x-ms-exchange-antispam-messagedata-chunkcount:
+	 x-ms-exchange-antispam-messagedata-0:Content-Type:
+	 Content-Transfer-Encoding:MIME-Version:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-AuthAs:X-MS-Exchange-CrossTenant-AuthSource:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-originalarrivaltime:
+	 X-MS-Exchange-CrossTenant-fromentityheader:
+	 X-MS-Exchange-CrossTenant-id:X-MS-Exchange-CrossTenant-mailboxtype:
+	 X-MS-Exchange-CrossTenant-userprincipalname:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=kRs9FLkfxe5jXt99QeWbKvk+8nyTcfuKhpZEMr7E7iM=;
+	b=S9SQfq0eDt5/DGPa2PUt70xQiieZtBHTPoYZu1wg0BKAo7jnk6fS1/JdflrfzAnUnBxJ
+	 1pirqvd3iuc49ghgaVAjPnc17h4bpMyauIqeYCIT43oR+icSKBxtPkBqv/OrzZINS/xEl
+	 Ow/i9N0oTa6DgSfMGh/qNLxPZROqsScgf/UnrddGz6z5n/n9ZrFpGq9vh8e/MbtnYhhlf
+	 /q1h2lgyGBh+rWH68P99c8LF1rNZL8eD4W/h5xn4ozKSEBgsJvjSZjRHW1rfYqZmP6e/P
+	 U4HmHfuIl7DA88xUNZm7TNOciKvCG1FCw6kwDiRaiPEcyg8Ja8RCYOF3fyu72ieR13g==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793036102;
-	bh=5U1nK2HqZ3CGEq+CF0WjXHPI9DGRKd/RxXAnGFJrsGM=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=ukMvNXbvp1Oboz0xpj1E+n4zRnMTqD9haoYfqr/AA6dRSCei52UCOegjgcsHB4WWC
-	 SUKFMNqT7xO0cI2DDq/2jYngfZ/6NJvH5lk2sE5hmp0r1FCRY1mSYwCxat0OGqLLay
-	 dYHr9hyje3hgN+BfCxY1EppLwHPoqrfbhFGbMhemEVadcesPxHvxlS7ivO4cnZVYZb
-	 kWl1wr+XDHiXoEO39+ycd3CrKpzZz1UOkl3+mwdJwfudcBQJz3xs6c7f1qFwgVPQ/O
-	 hIJxJjVw7P0uWwY/AR7EP3iwvGKh3Tf6UlqAet7rGPaQ0EVy/+qp8XpYeiStTn5tqW
-	 /jOf5diFJRibA==
+	d=lists.u-boot-project.org; s=default; t=1793036105;
+	bh=kRs9FLkfxe5jXt99QeWbKvk+8nyTcfuKhpZEMr7E7iM=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=DyIug8XOjxeQt0+bwNy+gAGJLqWcLBR3tKITDGgUolE0CQbv8X74NOB/8blO7GTpw
+	 1XPChqlkHpTtIhPJJn2Gpe7o0UA3jahXfbJ5eKRl4EAdUisgKJHHev/+X3joWYCsQx
+	 RcmY7YHFEgpEUVvbI5O8zbUfM3cGa6n2qhi2S6aFCjZnjN+pmmxg+WMVtDT4cuVqN7
+	 RpSV6C8bKYOYVCJlvoj7Q0OxAurerv616rk6scrM0UclyGBFfvPtqfoScHlwTBCzBw
+	 TuGMiov1HKTFnID/FkG6kO9XkHAg8ooQA5tgUKXHCrsAyH+H2j8i99JFxLopBIUfOs
+	 L0DEFoGOwU/nw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5668D40830;
-	Mon, 26 Oct 2026 17:35:01 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 672E0D37
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:38:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1FCE340800;
+	Mon, 26 Oct 2026 17:35:05 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 076D2380
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:39:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 648C6401AE
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:38:08 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id E19E040205
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:39:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DPKd1YYqBV-M for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 16:38:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org E8A7F40205
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=185.136.64.227
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793032686;
- b=ErsfXUBNsHl2bY6Jbmb29vtSxKzk4PVlcvg7g6lIPPyShqq7e5901U7cnz8xBi70zq/5
- f7Zxci+wu+9AP03M/zEbwkifPGwKOYYTpyFa6IeIAKvAZlNBaWrAqQCetAOrJq66NGtbI
- hGmPfPnGInY3zJz50wrU2xFvhOfIJB8EgoXF1y4qpTgK1Kxn17Z3Lz/XtbNWFfuU+Ge6J
- vi2QzZvBRHtxfMiJJ/ICTEg/l/oJ3DyNuZBD+dxyO7ebPTR0vLDGJA5IhkuavmemLbaT/
- 7lZTfDupfC2UHKILyvNDGX7uJKQIQ1INqhBu5VDEkthk5O/MrW/+Yncal/yLNxj5xOA==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793032686;
- h=Received-SPF:Received:DKIM-Signature:From:Subject:Date:Message-Id:
- MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
- X-Change-ID:To:Cc:X-Flowmailer-Platform:Feedback-ID;
- bh=5U1nK2HqZ3CGEq+CF0WjXHPI9DGRKd/RxXAnGFJrsGM=;
- b=VD6v3G8G0636v9lxyePK+db0qnYqd5YXHKaS52/KVzslt+p2dxMgdhJhQW0bIsYCrz+s
- Izmial9yO2w1TvsQfDupdPTSeKjDy0SmkU3RTCEG+mqI8lWAH0iAngmEnaDeYti0Hvv45
- RtGHcFE9uEaDtafdeQQZu0UfNJV3mViFVzkvhR6GaORpMDggSN4yA8jIL9e4TwnDEsXtq
- TQtX06Qa9mz0RjqMp6c8M0dRxgkbXN+pRvWbPCr29BgbhmkbYF/1Nw0DDjKBxeSEiDM3k
- dCYgCey6l1m4fC30bMU0HLA8TOYIJIaEt46FHBx8PxQmlY+ebr/LalhOSgY4VV78hDA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=siemens.com;
- dkim=pass header.d=siemens.com header.i=cedric.hombourger@siemens.com
- header.a=rsa-sha256 header.s=fm2 header.b=kWNZqN98; 
- arc=none smtp.remote-ip=185.136.64.227
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.64.227;
- helo=mta-64-227.siemens.flowmailer.net;
- envelope-from=fm-1212295-2026102616380190525a8c7e0002074e-s_mkyn@rts-flowmailer.siemens.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ id uyaCGrzZXg1e for <u-boot@lists.u-boot-project.org>;
+ Mon, 26 Oct 2026 16:39:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 44FD4401AE
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c201::6"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793032773;
+ b=MaancBhB+Ao9B1DKx39vx32bqZm01mq777xPsRW0MFxjQDQRrd05DkkU+IRPG0EycalR
+ Qh/n7RvSHot1mlZTEL1JANq3BXJOpwovIGDuLt9Jb4MjI8emnnAV4UHnhMfNmebga/D/f
+ 8qdA4gH3zw8vA58nQWym4m17ZCWakJ4iO2t6bprGtzV+j/HLvXfuPk3bxpnuYhS+3s0R+
+ E4TBqpRqUTSfRFw/DjqIXlUq3tSLylNJECu7y6kmhUdjGF1jVL/lQuHKnsVnf+Z5IUHR8
+ dlyOmWH7b10lzg7rFEwyoA0fcYv4DnXgeVnVIAbdYHMsfT2fBkRN8i5+2ObVuPGO5Fg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793032773;
+ h=Received-SPF:DKIM-Signature:Received:Received:From:To:CC:Subject:
+ Thread-Topic:Thread-Index:Date:Message-ID:References:In-Reply-To:
+ Accept-Language:Content-Language:X-MS-Has-Attach:X-MS-TNEF-Correlator:
+ msip_labels:x-ms-publictraffictype:x-ms-traffictypediagnostic:
+ x-ms-office365-filtering-correlation-id:x-he-o365-outbound:
+ x-ms-exchange-senderadcheck:x-ms-exchange-antispam-relay:
+ x-microsoft-antispam:x-microsoft-antispam-message-info:
+ x-forefront-antispam-report:
+ x-ms-exchange-antispam-messagedata-chunkcount:
+ x-ms-exchange-antispam-messagedata-0:Content-Type:
+ Content-Transfer-Encoding:MIME-Version:X-OriginatorOrg:
+ X-MS-Exchange-CrossTenant-AuthAs:X-MS-Exchange-CrossTenant-AuthSource:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-originalarrivaltime:
+ X-MS-Exchange-CrossTenant-fromentityheader:
+ X-MS-Exchange-CrossTenant-id:X-MS-Exchange-CrossTenant-mailboxtype:
+ X-MS-Exchange-CrossTenant-userprincipalname:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+ bh=kRs9FLkfxe5jXt99QeWbKvk+8nyTcfuKhpZEMr7E7iM=;
+ b=KIGjiQD/c263jK0lnHOXyX3YnoJYhglxqpWAWJ559k9DGK5Th6ASatJ6Vgd67Djjw8ae
+ C2D16KhYfaEfSMBAhXBxdkH8pDDooTj2vpHi6kRQOMEI/tLI0fwKaJAaL/xllolnMnpKu
+ 8s2ILxI6WvIXYwSDRSQEowQiaTkyp2v1Mnvw0Y/9CdOuJrWp+AR/iKNHm0yrHmWVCkLAE
+ NaORVjc6JFk5H00FUYP57W0IGLsWcOLgxq4tuzmuBSzbu/AeyOW5EIrtIcNaJME6B5zv0
+ k2ENp+9Mf/vEVZl38DXx8mhkpFPrv/xFMi1yV1wMnt5Ugb0/l7HRLHpmrhwn43F/HWA==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
+ dmarc=pass header.from=hitachienergy.com;
+ dkim=pass header.d=hitachienergy.com header.i=@hitachienergy.com
+ header.a=rsa-sha256 header.s=selector1 header.b=cz5xLhPA; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c201::6"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c201::6;
+ helo=am0pr02cu008.outbound.protection.outlook.com;
+ envelope-from=tomas.alvarez-vanoli@hitachienergy.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=hitachienergy.com
 Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=siemens.com header.i=cedric.hombourger@siemens.com
- header.a=rsa-sha256 header.s=fm2 header.b=kWNZqN98
-Received: from mta-64-227.siemens.flowmailer.net
- (mta-64-227.siemens.flowmailer.net [185.136.64.227])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E8A7F40205
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:38:04 +0000 (UTC)
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id
- 2026102616380190525a8c7e0002074e
- for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 17:38:01 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=cedric.hombourger@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=5U1nK2HqZ3CGEq+CF0WjXHPI9DGRKd/RxXAnGFJrsGM=;
- b=kWNZqN98NsdZATRGbQqD/Jkj0SDv8ajQreHpSrDe0WSINvRSyxUul9W2zB8PKqeuAFoGk+
- qGci/gJp4pxh92/TqJAEsgxS86PbQk6ayxI120giqwO4ytO0jtpANCFTmgaMeu6QgRFMC2sG
- 3lpSmXB7Qtmhyt863GoGtDVs8Y5MC3Td2rm4KuQom4K5y450pa57+r1pQ9hcD5rKval05pCp
- 3ggkKQmbbnTv94X4lA5mXBwUNedJOFUt6iN0/JWPvQUpJWkRLCQwPXjpaVFNOiW6YIrgLUBF
- uH5djUos113eTJ9qpzIMJ7v/PZxACJTcQal7GP7t+VprTMWKy2b4OM+A==;
-From: Cedric Hombourger <cedric.hombourger@siemens.com>
-Subject: [RFC PATCH v2 0/3] fs: let EFI Write() keep the end of a FAT file
-Date: Mon, 26 Oct 2026 17:37:23 +0100
-Message-Id: <20261026-fat-fs-fixes-v2-0-41ae696cd353@siemens.com>
+ unprotected) header.d=hitachienergy.com header.i=@hitachienergy.com
+ header.a=rsa-sha256 header.s=selector1 header.b=cz5xLhPA
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 44FD4401AE
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:39:31 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vZyc7aVH8ontIZ85YYaERjcy/rJcFK94Kpa1fdOqW3cZWOk4pyhtJiUyIPta/TV6fDCN/7p2E/093QGnK4GanJfwb9NJSV+7ysOD8wjujoSL+UE8VRMMxbaCzjQpclHMQzY7cEpRSJuEGckzaB+NrfQ/8f8Uq1tm5CKaqSjC1RVD5Hlqj311vx7psvfD703fxhvT75yRv8rVGGO9H3kQr64DStFhsOrv0oaRNrYk3FeGdBpIBYWWo5s/weVSBOQ77aTwMUSrXheU1l1cZcfI+1VrnQrnYFY7u53tslvLTCCq0Dp7qN3H82TkJfHIHKDr6ZWhEzSqI983EdU0svsgfw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kRs9FLkfxe5jXt99QeWbKvk+8nyTcfuKhpZEMr7E7iM=;
+ b=aC1Y0PEo/zULjKEE/fXxhZ3+cHR4pmyCwgFqrfcZ7v+GLM/KtEhiebnD5iDhsyI6D1pXfik0ur0M/pq5VxUqeuKnqX5S+qvadv51GsBR+gs307l25WawVvB3kjprfqhA3fXt9aUkd7nWBEhjbxDLPaQ67CodLEfc6j5tZYTr92eXxndahnHxL3nP3DZsFPZST6ckSAgNbbwPJ9kMzfK+NlfXZtwkaN39Ee32zQQ9G2JXL4w1ZKQRSNAvLwDbCplpoRd9RT+8g+oNF6K4PKOmqkVlRm0TyEtg1tqnDn2YhlR8YCMCaDwg2Th2qughl+2eDDWD2pe/+bPdX5xnDvDP/A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=hitachienergy.com; dmarc=pass action=none
+ header.from=hitachienergy.com; dkim=pass header.d=hitachienergy.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hitachienergy.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kRs9FLkfxe5jXt99QeWbKvk+8nyTcfuKhpZEMr7E7iM=;
+ b=cz5xLhPA4WIP2lL7HE2tA+h8jrazwBBs57kjLej6L6of/vVKBLKYi1iXYB1hyvJuadbpajL8LgEPMHrUXDHaOB5h2v7VNGQs3I0OW9zXzB6APCPYwsLDHAdz5w1zWD/klJR8TQywpiYu+vfFbdRWZ+F/P0Q+8FO6iTo//PFBtu/05TWFzWK1gXmIS5F4ID1DEv36vKATV6n4ctPdE5YNjOjlQwl4HlhnIrL2UHOLHodS9gobZeF35kHIgcDtVtFO01GIlLj8mivfvC0AxnNjepp0c41mOkL1ACw/4NNcvywtAk0afVNnrZm4h+4rhFk1cDnHGtFXT1hjRhbnx1949A==
+Received: from DB9PR06MB7849.eurprd06.prod.outlook.com (2603:10a6:10:291::22)
+ by GV1PR06MB9385.eurprd06.prod.outlook.com (2603:10a6:150:19f::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Mon, 26 Oct
+ 2026 16:39:21 +0000
+Received: from DB9PR06MB7849.eurprd06.prod.outlook.com
+ ([fe80::f0f5:da:c159:65ab]) by DB9PR06MB7849.eurprd06.prod.outlook.com
+ ([fe80::f0f5:da:c159:65ab%7]) with mapi id 15.21.0546.021; Mon, 26 Oct 2026
+ 16:39:21 +0000
+From: Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>
+To: Bradley Morgan <brads@mainlining.org>, Vincent Jardin <vjardin@free.fr>
+CC: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@oss.nxp.com>,
+ "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>, Sinan
+ Akman <sinan@writeme.com>, Bryan Brattlof <bb@ti.com>, Holger Brunck
+ <holger.brunck@hitachienergy.com>
+Subject: Re: [GIT PULL] Please pull fsl-qoriq-for-2027-01-rc1
+Thread-Topic: [GIT PULL] Please pull fsl-qoriq-for-2027-01-rc1
+Thread-Index: AQHdYfgxcd8Euf/YrEWQnfd/hXanv7cJoxWAgAXlIwCAAAu0gIAAUmqAgAAKiICAABa0AIAAAhgAgAAA4g4=
+Date: Mon, 26 Oct 2026 16:39:21 +0000
+Message-ID: <DB9PR06MB78490540DD8519B943F1B688C2612@DB9PR06MB7849.eurprd06.prod.outlook.com>
+References: <atm8jabAOY-wLeaB@nxa18884-linux-1.ap.freescale.net>
+ <C7012F65-D275-4D2D-AE1A-9340A5171FB9@mainlining.org>
+ <at8StA3lzLMDbcrR@L30177.local>
+ <6C364E68-4927-470F-BEEE-1F9AFF3FDCD0@mainlining.org>
+ <20261026142023.GA624796@bill-the-cat>
+ <50F741B3-1E13-4B3F-BF87-9DD7C45E1216@mainlining.org>
+ <at99iCtY7_bTF85U@l3017728.home>
+ <8961F479-747C-46A1-A6AD-DC55A25379B6@mainlining.org>
+In-Reply-To: <8961F479-747C-46A1-A6AD-DC55A25379B6@mainlining.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=hitachienergy.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB9PR06MB7849:EE_|GV1PR06MB9385:EE_
+x-ms-office365-filtering-correlation-id: d72d6be6-bafc-4363-6773-08df337faff5
+x-he-o365-outbound: HEO365Out
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|23010399003|1800799024|376014|18002099003|22082099003|261026140227099003|38070700021|56012099006|11063799006|5023799004|4143699003|261022105027099003|261021121427099003|10067099003|261022075727099003|261021135927099003|261026121527099003|41080700001|15866825006;
+x-microsoft-antispam-message-info: sDOGVj/fdQVx3R5f3ovDAlUThleMXGF4JVYzAtRE3YClWvVcxUKwX9FaRhKoStkL3MzOZzhcp8CGoQsV6iRv9MhPglt4zgG9Df9oa52JW9H2Caxeb+WSXSIxITqHxF0g9q57tmrgOYILViPOyQzsLYLcudcrZ20yMo4ZjRj25H2wfqJAkLAwDjV/LqVHLf71nx+iZodN8ZT1o+DeX+SxZ3rcPiWIuBS0vLpdcjTNbEeQnteStlYFW6LRt6bkkCv9Oq4Hq0Dnb7h81OVWWwGpsQKTXG3idq5d8FBWCHG36yvZg2A98X7GChQzvHdkJLx6mQwdRf1mk2MP6JyNU0m2fpZ8ipNEpxWvo0sEuX1DekI2ELJxPo6qh+0bxSg3SA7wri0xg+sQRwJHatvx7zdlbr7ABzPFtFVmqSRKqqMk5a1UaJViHMYQxm1i/DJRxM0VfL8v/bXpiOTe86CNMFDxr2erAY25ptIIRqMAtdV8vL8WLqTAWPRCzBCwM+GP0jKBsZIK8ZC3KOO6rgTZJhi2DjV0/jJA6Amoq76CiUiDmxsKpi8S5Y20rHmwJEIGMbJ2FPnjLg5l55Mr2z/1ohXkP82i/386HoTlaIPOuAW9imcOlhHz4cLTRCFsFE25niWmURk7xTrmqUSQI+NlhDwTLCAc+os9kERSRn39a2UHzopfUXA03AnFJVlgwxVqYnbeRHDTxD8AwZAFSxPuNl55q3osjFfuOaynXYVo6z+76gql3c0TzfLQk6wUvT+mnwVo9l/eTzX9VEKIrR5OSv8MSBCZFDgh9tmrVCYbOqX7cLQ=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR06MB7849.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(18002099003)(22082099003)(261026140227099003)(38070700021)(56012099006)(11063799006)(5023799004)(4143699003)(261022105027099003)(261021121427099003)(10067099003)(261022075727099003)(261021135927099003)(261026121527099003)(41080700001)(15866825006);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?fvO9/fEO/RDdLRilgtiwxrpVwPJq5VRLS2K1KphC1vFMoNDaxTXQC8Jadn?=
+ =?iso-8859-1?Q?kAqwvhi+LgEavls/C7eePKjUnh4xd3JkgDMLedwGCP3T0Htdn5SHqwskZE?=
+ =?iso-8859-1?Q?DFnvUR9s7NNd48FFdQd0xB0zV17RpS6dum2Anyy3I1b2tO/uMnH8FpRmtD?=
+ =?iso-8859-1?Q?BzRzu3pQ07JMpx/TTf+BXeQd7IwWLwWB8AA/9ihAnDzjnoCAdGbZF3sZno?=
+ =?iso-8859-1?Q?tnLI7H/Q9uEDBYb8F0DjlqRWq7d+IzeAlZDHE5kIVVYf/kDlKn2Xpvudc9?=
+ =?iso-8859-1?Q?Vevbl+SPQVPDn+HWDuAl0MtZwZc0G4Iq2oiMHbkuomsHw61d09PTHc9poz?=
+ =?iso-8859-1?Q?8dHJQtCQAckq60RJmyhJpEqP3n+cfUKlLISEwUTzbejwFtfpuNNEwFQqDd?=
+ =?iso-8859-1?Q?hSx3LuEDFyjstAkzRy+fc+nS5MW4m+l3zrVGXSufJABCA7LPBcf61s79vr?=
+ =?iso-8859-1?Q?3kn0fTSmD8iT+C8p93krVYFe+nsJVy8EifXH51KG3NbAmh0Lq612jbWayG?=
+ =?iso-8859-1?Q?6kr/tdWVJaBUpraCr06Ia2Q5fmRbZxvZWcrnbihl2b/knUXjqooh0byaN3?=
+ =?iso-8859-1?Q?46UFSQBCl4m2BwNuqliHma/XcEmnicc+4W/RflBSxfZTxjgV0XzeOFSt1F?=
+ =?iso-8859-1?Q?06DMwWFAj/S4SVreZz4hsf7nCdoKJH5Mil3ALoMby+eL6NO8ZsAYrGeOkr?=
+ =?iso-8859-1?Q?HA9pFIGnXiUaxG2s90vTlzkd2Ek3V40iHLepmgjvYyIuD0TPW8Ch1XnpTg?=
+ =?iso-8859-1?Q?sJLdVE3n6WCS6OseqllRwLdkUPO98ieqX42XX8uUR7TPUe4L3D7dqLvyvN?=
+ =?iso-8859-1?Q?qdMrkOUeRmgQCOTr0aQFPSAB3K4fL3aAgf3Q5XJvVrlibLIlbPm+Wbklnm?=
+ =?iso-8859-1?Q?qxgiUFicjaUBOx++AxyvxskRxDh3rN8qyYMXeDG2qyrzRlCkKph+z1Dy0A?=
+ =?iso-8859-1?Q?Clhpnw3FWJcVkW4Ke/VvoiF8lI/7kNaV2IHVw3bP4gmraGKkHTzPd50Y2c?=
+ =?iso-8859-1?Q?7iaORP6PTCdwUpYyeV0Wj4vZjO7LcjFNRMvy5zqNd2+7bWb8AA5k4G5q9n?=
+ =?iso-8859-1?Q?H7TtCNqCo74LT5LbPUbhkpTwIjVcdKhpJ7L5iMaQKYUoBhFDSlSdfuWo9W?=
+ =?iso-8859-1?Q?e7ahOTJ2+bqu3tbBhpv2DqB6XD5h4G24HNy7+DPGcV4QBM2pIGtTKELe2E?=
+ =?iso-8859-1?Q?nIh69Xr1mRuN2sw7rT8uWd+vmyHuLLM4i+5paKOFXSc7tcDgZdw0KdGqQP?=
+ =?iso-8859-1?Q?EDoyWZ175C4JJS/XSAosfUCcGzMQFMtZiivxb+WaT3ZoXWw/4Yw87sqol8?=
+ =?iso-8859-1?Q?rIM5AfttgsSbSTXQKbp954mCm5g2V+UgzZMXcLYUZ/VL///UrIYhDPjiwy?=
+ =?iso-8859-1?Q?le6uiIm7o13/jdlCJP/BN18qBD71cXsBDjVrnBOgA5GYTK2X5rYXqGmIj1?=
+ =?iso-8859-1?Q?wZoVH5HeWaMu9is2Dp5l5Mk179NASeWZQZj2u2jz49tEq1KSDlvWADcN7T?=
+ =?iso-8859-1?Q?g9+xZlTOIMmOF0pxJFlTYunhFnFS8e49Gkz3LS4SWket9UorJTtA+ettKB?=
+ =?iso-8859-1?Q?4appvfyk4RtzJLIfBKm4EhEBC7qNskYcxd/BwaZaIlk//GdaA9xp7Y3PG6?=
+ =?iso-8859-1?Q?mkHBFqYT1fB2cX0hSTEcs9R5D2P7eR+zQVq1tRlvt9KbIhAYgR5Tzv+RFE?=
+ =?iso-8859-1?Q?OQugIaUOmLyN/geNV7dame5PAMHXeI890hfN9t5Ouqcm4LfARinYT7S2ES?=
+ =?iso-8859-1?Q?f1hdf8pynVZYCjvueg5BK5gaFEq0MXng92Mk4ZeVvwbio4rfFCZpE71DZY?=
+ =?iso-8859-1?Q?oski+Fnlfolvf5xLSTXwElWPYVmEk1bhtg1s5j55s7r86yE1PUVd?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAMSB32oC/22OwQ6CQAxEf4X0bA2L6xI5+R+GA6xd6QHQLRIN4
- d8tcDAmHnqYad7MTCAUmQSKZIJIIwv3nYpsl4Bvqu5GyFfVkKWZM3oYqgGDYOAXCfoj1dbaYMg
- dQJF7pPWhxKXcdKTHU1OHzfyGasdP5IIVo4EFa1iGPr7XUWot3P/+0WCKznoXQu7qPJzOwtRSJ
- 3vft1DO8/wB3jVJIeEAAAA=
-X-Change-ID: 20261026-fat-fs-fixes-c5eb444f1e63
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, 
- Cedric Hombourger <cedric.hombourger@siemens.com>, 
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Qu Wenruo <wqu@suse.com>, Alexey Charkov <alchark@flipper.net>, 
- Kuan-Wei Chiu <visitorckw@gmail.com>, Vincent Jardin <vjardin@free.fr>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-1212295:519-21489:flowmailer
+X-OriginatorOrg: hitachienergy.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR06MB7849.eurprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d72d6be6-bafc-4363-6773-08df337faff5
+X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Oct 2026 16:39:21.5584 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 7831e6d9-dc6c-4cd1-9ec6-1dc2b4133195
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Odwaejv8hwtbn3QPapV4OWomvz3rwizORe3rFdir3Fihj/zYIGQrtVjY/uq/PLj+X1ZEFF1LpbznfGLVGxKEm8Db1kYpSmxYiu2BuND2n8TbTcxSwMVdI0WjGc/dPXBs
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR06MB9385
 X-Mailman-Approved-At: Mon, 26 Oct 2026 17:34:44 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -151,126 +257,133 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This series stops the EFI file protocol Write() from cutting a FAT file
-at the end of the written range. It is an RFC, mainly for the naming and
-for the shape of the new interface.
-
-The problem
------------
-
-fs_write() with an offset trims the file at offset + len. This was chosen
-on purpose in commit cb8af8af5ba0 ("fs: fat: support write with non-zero
-offset") to stay compatible with the fatwrite command, which replaces a
-whole file. efi_file_write_int() uses fs_write(), so a write in the middle
-of a file through EFI_FILE_PROTOCOL.Write() loses the data after it.
-
-I found this with an EFI application that keeps a 256 MiB file on the
-ESP and updates it in small pieces. With U-Boot 2025.01 on qemu_arm64 the
-file went from 268435456 to 602112 bytes after one run. The code is the
-same in current master (used for this submission).
-
-What the specification and others do
-------------------------------------
-
-- UEFI 2.10, section 13.5.6, EFI_FILE_PROTOCOL.Write(): the data is
-  written at the current position, the file grows if required, and
-  partial writes only happen on a data error. Nothing allows a successful
-  Write() to drop data after the written range.
-- The UEFI SCT checks it: BBTestWriteBasicTestCheckpoint1 in edk2-test
-  writes 50 bytes at position 0 of a 200 byte file and expects the size to
-  stay 200. I did not run SCT on U-Boot. By reading it, this case fails
-  today (and its set-up needs SetInfo() to change the file size, which
-  U-Boot refuses).
-- EDK2's FAT driver (FatIFileAccess) only grows the file when a write goes
-  past the end.
-
-So U-Boot's behaviour is surprising for EFI applications, and I believe
-it is not conforming. I may be missing a reason for it, hence the RFC.
-
-The series
-----------
-
-1. fs: fat: add a write that keeps the end of the file. The body of
-   file_fat_write_at() moves to a static function with a keep_tail flag.
-   file_fat_write_at() keeps its behaviour as a wrapper.
-   file_fat_overwrite() is the new entry point.
-2. fs: add fs_overwrite(). It uses an optional overwrite() operation in
-   struct fstype_info. A filesystem without it falls back to write().
-3. efi_loader: use fs_overwrite() in Write().
-
-fs_write() and the fatwrite command do not change.
-
-Questions
----------
-
-- Naming: fs_overwrite() is what I chose. fs_write_inplace(),
-  fs_write_keep_tail() and fs_update() were also considered. Please
-  suggest a better one.
-- exFAT has the same trim (exfat_fs_write() calls exfat_truncate() with
-  offset + size). ext4 refuses a non-zero offset and replaces the file at
-  offset 0. I did not touch them. Should exFAT get the same operation in
-  this series? A test for efi_selftest is not included yet.
-
-Cedric Hombourger (3):
-  fs: fat: add a write that keeps the end of the file
-  fs: add fs_overwrite() to write without trimming the file
-  efi_loader: do not trim files in Write()
-
-fs/fat/fat_write.c        | 32 ++++++++++++++++++++++++--------
- fs/fs.c                   | 25 ++++++++++++++++++++++---
- include/fat.h             |  2 ++
- include/fs.h              | 16 ++++++++++++++++
- lib/efi_loader/efi_file.c |  4 ++--
- 5 files changed, 66 insertions(+), 13 deletions(-)
-
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Cedric Hombourger <cedric.hombourger@siemens.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Qu Wenruo <wqu@suse.com>
-Cc: Alexey Charkov <alchark@flipper.net>
-Cc: Kuan-Wei Chiu <visitorckw@gmail.com>
-Cc: Vincent Jardin <vjardin@free.fr>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
--- 
-2.47.3
-
-Signed-off-by: Cedric Hombourger <cedric.hombourger@siemens.com>
----
-Changes in v2:
-- EDITME: describe what is new in this series revision.
-- EDITME: use bulletpoints and terse descriptions.
-- Link to v1: https://lore.kernel.org/r/20261026-fat-fs-fixes-v1-0-64c6ff76b7f9@siemens.com
-
----
-Cedric Hombourger (3):
-      fs: fat: add a write that keeps the end of the file
-      fs: add fs_overwrite() to write without trimming the file
-      efi_loader: do not trim files in Write()
-
- fs/fat/fat_write.c        | 32 ++++++++++++++++++++++++--------
- fs/fs.c                   | 25 ++++++++++++++++++++++---
- include/fat.h             |  2 ++
- include/fs.h              | 16 ++++++++++++++++
- lib/efi_loader/efi_file.c |  4 ++--
- 5 files changed, 66 insertions(+), 13 deletions(-)
----
-base-commit: 2203aabfa59826d04d9e2094c6b32c1029cd01f8
-change-id: 20261026-fat-fs-fixes-c5eb444f1e63
-prerequisite-change-id: 20261026-fat-fixes:v1
-
-Best regards,
--- 
-Cedric Hombourger <cedric.hombourger@siemens.com>
-
+>On 26 October 2026 16:19:20 GMT, Vincent Jardin <vjardin@free.fr> wrote:=
+=0A=
+>>Hi,=0A=
+>>=0A=
+>>> Isn't that a double edged sword?=0A=
+>>>=0A=
+>>> I mean, since PowerPC is SO inactive that like nobody will respond, and=
+=0A=
+>>> it'll be limbo limbo limbo, just to merge say 24 removals and a=0A=
+>>>=A0 maintainers patch, especially the maintainers patch, that has nothin=
+g=0A=
+>>to do with the removals and that'll get all stuck up with the removals I=
+=0A=
+>>think unless you have other plans, which is annoyance, because it is "oh=
+=0A=
+>>so inactive"=0A=
+>>>=0A=
+>>> And I also made a additional maintainers patch that IDK where it will=
+=0A=
+>>go!!=0A=
+>>> Either to my custodian tree (p,s: maintainers patch isn't merged yet!!)=
+=0A=
+>>>=0A=
+>>> Or to another tree, yeah, odd, hm?=0A=
+>>>=0A=
+>>> (Sorry, I had a small vent, :c)=0A=
+>>=0A=
+>>I would not drop PPCs so quickly ; there are still many systems running=
+=0A=
+>>PPCs=0A=
+>>even if folks are more in "don't touch things that work", I feel it'll=0A=
+>>change=0A=
+>>withint the upcoming months because of the scale of CVEs of those old=0A=
+>>systems=0A=
+>>and some new regulations in EU. Let's wait/watch, maybe one more year,=0A=
+>>before dropping.=0A=
+>>=0A=
+>>It seems long, but looking backward EU regulations will start to be=0A=
+>>effective only=0A=
+>>by end of 2027 and LLM -> explode of new CVEs are just starting...=0A=
+>>so the mindset of "don't touch, it works", it'll have to change.=0A=
+>=0A=
+>Yeah, I removed so many systems because it was 1: EOL, 2: Old, unmaintaine=
+d=0A=
+>rubbish (well, some of them)=0A=
+>=0A=
+>But my concern is the one patch that has nothing to do with it.=0A=
+>=0A=
+>26/26, the maintainers patch, I already got a tree and stuff, but I=0A=
+>wouldn't know if like it'll=0A=
+>=0A=
+>A: get merged when they merge your fixes=0A=
+>=0A=
+>Or=0A=
+>=0A=
+>B: Merge when the removals get merged :(=0A=
+>=0A=
+>I'd prefer A personally, because of the fact that the patch has nothing to=
+=0A=
+>do with it. If that makes sense.=0A=
+>=0A=
+>Id personally think a cleanup is more than due for this, I have millads=0A=
+>more cleanups to do when my maintainers patch gets merged, PowerPC as I=0A=
+>see it at the moment is in a slight disarray, well, it works, but it needs=
+=0A=
+>to be cleaned and organised a bit.=0A=
+>=0A=
+>Id say 19+ more patches would be required in order to make this actually=
+=0A=
+>clean ISH.=0A=
+>=0A=
+>Because for 1: power(8,9,10) isn't even implemented yet! What!?=0A=
+>=0A=
+>Well, I'm not sure about that being a priority because for 1: it can be=0A=
+>booted thru LPAR. Which, is odd. (Thanks IBM! :c)=0A=
+>=0A=
+>Personally, PowerPC needs a nice dustpan and brush across before it could=
+=0A=
+>be classed as an actually clean architecture subsystem!=0A=
+>=0A=
+>And god forbid the bugs. Somebody with a AI will be having a field day=0A=
+>covering their ears going "la la la la bugs", because I can see bugs all=
+=0A=
+>over the place!=0A=
+>=0A=
+>But thank god people still use ppc on u-boot, and for anybody reading this=
+=0A=
+>using u-boot on their PowerPC as we speak, thank you so much for using it,=
+=0A=
+>and me, as a maintainer(tm) and the whole community sends our unreserved=
+=0A=
+>thanks for your use of it.=0A=
+>=0A=
+>=0A=
+>=0A=
+>>=0A=
+>>my 2 cents,=0A=
+>>=A0 Vincent=0A=
+>=0A=
+>--- Thanks!=0A=
+=0A=
+=0A=
+Hi all,=0A=
+=0A=
+Just a data point from a user: we are using U-Boot on a T1040 (QorIQ /=0A=
+mpc85xx) in a product, and we intend to keep up with mainline as much as=0A=
+we can. We'd appreciate PowerPC support staying in tree, and we're happy=0A=
+to test patches on T1040 hardware and report back.=0A=
+We run u-boot in 32-bit mode (not sure if it is possible to use 64-bit) and=
+=0A=
+linux in 64-bit.=0A=
+I am in the process of bringing it up to our 2025.07 branch and potentially=
+=0A=
+mainlining as much as possible. We have some remnants of it under=0A=
+`board/keymile/kmcent2`.=0A=
+=0A=
+If any of the planned removals or cleanups touch T104x/QorIQ code or=0A=
+boards, please keep me and holger.brunck@hitachienergy.com on Cc.=0A=
+=0A=
+Thanks to everyone maintaining this.=0A=
+=0A=
+Best regards,=0A=
+Tomas=0A=
