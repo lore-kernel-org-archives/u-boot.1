@@ -1,157 +1,160 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E25C4606A31B
-	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 13:40:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D91E606A31B
+	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 13:40:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Yd4zTghl;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=HSqx7HRo
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=tnbOmguU;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=FvXa8ypz
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B4CB760624;
-	Mon, 26 Oct 2026 13:40:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id ED9AD4055E;
+	Mon, 26 Oct 2026 13:40:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id WBmupt7oQKYR; Mon, 26 Oct 2026 13:40:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8C16E60600
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793022019;
-	b=qm55ZF0HzU/GGMizgizh2qc0XvvC2z+3LDWGM+sRahpP/lu7hS1el9/KmapJWmtPyGZT
-	 vid9mLOLoNzcOCuLYMm/wtd2T0M6xN9J5Vht029uxQ9hQZhqYo/n7x2S39zqmr5TjIRMd
-	 4gvT6B4jHaLynMcgwMeyLOrkHBwbAWqkMajz/mIaqPHry0u+7ls4BDvzsSsWQFRB8+F0r
-	 BM1RituEeSkQXxE47OyuEaRCutX3921Ggd1ypHBHRzZ+/tINiQINUrjSYLZcDWypV6X5e
-	 mY6eFiUOsNdsAF+BfnJ6h4tnw1thUJcY/dcgqrrp9jV3p6kzqX0XHlDMT7MnKmlDyXA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bWlMAPqf6ht5; Mon, 26 Oct 2026 13:40:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 322134053E
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793022022;
+	b=JiE//+gfRtOrXZvxBwGdtIbaziNYmufdAjOYSpb8kziNaeHa0NklGxbiBSB90eu8wvzD
+	 rCvbqEN4snkHAjt/NE1gPAj/Y/2nQpoO6mFZ9PO3Ub7kTxDcKRNInekOGAeUJ4UEbZ/XB
+	 r2Q4SAJ0s9afmvxTevLpd82CZffr+k2cCgW7ClI8m+58MMFSFZgKhZRvqJlsgCdRhUVlO
+	 pSLaWj927l0NjEymUTHWxHdHd8V2gIVbEyMfC9n7MkDtbhbdXm7Mn2KEdufl6N44wZOy5
+	 eCB1XPjHyZ/HujmbzUtuvCEE076qbW/kK13EwIcHF69hWyDSN6Y1uKblJq2sfp2j3EA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793022019;
+	c=relaxed/relaxed; t=1793022022;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Subject:Date:
-	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=kVISLLKAv63NLfsas3cS9UwzVVG4tLOE8oPPaNS0UgQ=;
-	b=AXy0KYNB+5PDRd5vh8TtqpD3YW1g4tSv69Ts6+twqE2jGbSYtjAFfV7c7LMNbsOkF90u
-	 M9B8GFR1Uy2Fmd75vh0GgNp0HvIFWYVHt2EvI0yyYQ76tksF7CaMMU8CNtkVMww8XkxNv
-	 ReGvOibVhOYiOrPehmgYLnNqnSq/CIQspW0bbsS98TcvTEFx6I/d8i8IVipLx7d2dXca/
-	 6J1/mmdXXl9prf/HoQZIwnYAz6yKLdqMnWnjdyC1Zjc0AACWRGjDkTFOoS5jyGToQsWgV
-	 gAEHPRIbz1Z4aNJlKL3iSfVMKRGtMhZJxgwIR0VmFWiWLU0bl8jwT2COQ1JTkiCTM9w==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=49z1Af228wUJfE72u/4TpY9HRj2zeaMGbeN36e0kTe0=;
+	b=C219Q+/trGwdz7zKwy2Sd8qt64r1A8r7/kpzrDoKGNXXTA3aIIXkYdwpzBnKR64ab2tK
+	 4F3woxpXiRbCVhBo2I1bydn3oa1VcM4dWrQG+PjRDaWMHp8FrRuuaB6AYf/bMmqmpO5WA
+	 G/uRAw6Z4iWXi2dZtX8JH9vQhEuUZOmLVy0LV0GLqWPnxEtD9kbs5kP8AtZmSiIPxZk0a
+	 0I2QfkRMnDebPPJvpg6xLXCaNMZumKOl8wNN+KzQPSpIdPl9eXCmEznev8SzHkh5UjNmR
+	 tAM3Kdsls0lfVyHmzq7tWKEaxvoVSlLPgpaF4LdazCNZVaALCGRLFnEZ/dLQAagymNw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793022019;
-	bh=kVISLLKAv63NLfsas3cS9UwzVVG4tLOE8oPPaNS0UgQ=;
-	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Yd4zTghl+h4t7kzUEZd4Dx+BSXgU7W9MKMqj2Mh1WEV1mZV+nO2mlBRwP7wIAhBG7
-	 A1AVElMh1TViJaxcHdmP3FBC/P2cjRVZGHwu8w88zF/uz/h7zI0MXiBQ6HsYj0EVOU
-	 /fCxXbK33ZwI4iP0BYHoUnPGSpDRBkNklgLfg1oMTej8pc4yQC4IZVLh1E3aKQq7K6
-	 uLeccjCK6eMQleYC3yM9Gmr6Cd+7/OEAQ9qd0h+s7zqBA/c5ZmWXLzTyvnq5+BGMx7
-	 srEJGXsdF3QZBfsfI7LET7XzPY8mrqnk+QnO1JoVzeq8FiNtReyP6YyngRD1VPHFJd
-	 +4qZ0XriNyWIg==
+	d=lists.u-boot-project.org; s=default; t=1793022022;
+	bh=49z1Af228wUJfE72u/4TpY9HRj2zeaMGbeN36e0kTe0=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=tnbOmguUuo/Ka2ml57O6/QHKeBN1XnIFLFuI1lKyWpkWFf3YYr6owJHrdTyPMJYnm
+	 OBXnl00KXGvkHIgMZaTNE+ZfwyG/RjGyyn+xQKjWr6RummDIBK20EgDismZgaz1xZV
+	 X8Mdkg6JQjr7+TVZH8kGv+EfLVrqr3VcGcLhaDmsEJYD0t/lYbTsS8WICCyqZDMooR
+	 sJehvjifdIwC6JJT04IxxUy9/43xi5E2VJxiACJRpWeEs776LA3LrQyoIp7rbkFyZ9
+	 cCOn3EwPllc4beRM/4C30uMLVf/BkhNF40nMcDzf1uh1BkjslKuGUYnsRTjDqzgPAM
+	 nI98mmRlEJuMw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8C16E60600;
-	Mon, 26 Oct 2026 13:40:19 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id DF8ED356
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 13:40:18 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 322134053E;
+	Mon, 26 Oct 2026 13:40:22 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4E54C279
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 13:40:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C597180CB9
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 13:40:18 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 401A9400F6
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 13:40:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4o-lk0H3VLgx for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 13:40:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 86EDF80BC0
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::332"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793022017;
- b=grjjOTwd1P7sa6mqKAwMQGkVCxHjx+V8QjG2kUUMrjW+Eko1dNzRzuM7nuT1KcKE/CBv
- BFIxN64i2GDvLmYaCPCLagiD3GErMIHugeEmmadHeTxgFx41U3n489Y0skUM0xMCl7gba
- +zsJINjOFS1F898DwEFr9U8Og498sh50ZlPkecqnRTYgh3uyzKqPbgp8XhV1MDMO8nExz
- mqLKtYzuYLDneIUA4okEVMEnKJl/8ERl5CyUjncGaJ/GcLQbPnDmkJ7drsAYIgcW1/ddF
- kpGs+XfzwpDYwGXbKVmJuzTsLwa8yw43S/MSwTH96P2gXWNlkeBRr4ovtoVfsng2FQQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ArUFX2G3tjH8 for <u-boot@lists.u-boot-project.org>;
+ Mon, 26 Oct 2026 13:40:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5A22B40062
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::330"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793022019;
+ b=PL0vwZpzstBKikvdzZkGGXPBFhZkt1E60tG4C5CDxnjAmcO3ziZJwpNqp9+wf9NXCIMH
+ LO33hikveNgQ7OKpA6MlPQUE7Mn4RI/gH8BfQ6S4/tIJWzPJNnXQlV045PCBbxlEtZ1W3
+ m1DAST9N8Xp1ajIFy3uFoevUl9Ar0AxwbgiYTyQufkzQGs+URfNF76AhevLnJi0pUda+A
+ hKYF0/fEhhy70Q68eNlb7zWQevWbdDZLtWBKqx8rvHrPMNoSgrJQcjf0CB1Eq1FZGniYQ
+ blOsvnWL/69i6so9OJmrGb+1IG6qTyp99LPVTafM+CD4u45cPDFMBK9pIX9SCiaGM2g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793022017;
+ c=relaxed/relaxed; t=1793022019;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:To:Subject:Date:Message-ID:X-Mailer:MIME-Version:
- Content-Transfer-Encoding;
- bh=kVISLLKAv63NLfsas3cS9UwzVVG4tLOE8oPPaNS0UgQ=;
- b=GuZjvFquWQlSUbYp1vhA1H3c2bJTc4AaEq3epqR8E6W8NxHY0NGFM1QB4v9GQVPyc76O
- 6Yr2R/XtpkR2PC3/GQ/8B1lsiqWlx5NrLTkGIh3v+DYuZIFESuiO7Sl3DZXNUHDBlhMJq
- 8pY7jpWjOjNxKmexGSi3iQFGzzcncK/cvl0DLXeENnE3cZSEi9Mj7jJeX8RiULBGJrJSP
- 4zbSOOFzIsBbYVIzJmz/RCOQKk0xPazKiJJOiK6AidI7gfaGJpD9bE5LyTVv2P28j23yS
- KqIYu8ruMezQR7dkxHSNqvTw/SfwksPfYFa1waJV2MtB17DKyev92ZQxeyC+YDBVIAw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+ MIME-Version:Content-Transfer-Encoding;
+ bh=49z1Af228wUJfE72u/4TpY9HRj2zeaMGbeN36e0kTe0=;
+ b=RL5VATHCXnphKADEkLVXdR+491FQd5EVpRlq5xgtchBFUfmUVlG96632QU3Cwz7WkbSC
+ 7o1tijkfPEbIVnlJt8Gy2KF0auvilLKSKM25w6mo6+S5ruonQ7XVbej+d4GvG2FuLrr95
+ XT2XfdfHbWI9t3EnCFHNxe3Cb1gJ0qREHIttUr3ak44zGrJJMwJxHDuKkJQ5AIfyqn1ca
+ ZRDb8j1+tF9GURHK7rj9CfWS9FYkY4XIiyrMrHKvVU+egzm882xgWtjLOVZvVhsXhzj1+
+ ywTdj+fwIXNj52M8BWr/0AGzjUfYkCMDBVLVSBbsDlAUMgxBX70FZbOxczRGnQjQYvQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=HSqx7HRo; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::332"
+ header.s=20251104 header.b=FvXa8ypz; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::330"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
+ client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
  envelope-from=ansuelsmth@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=HSqx7HRo
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 86EDF80BC0
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 13:40:16 +0000 (UTC)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4a1df4c0966so19661735e9.1
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 06:40:16 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=FvXa8ypz
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5A22B40062
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 13:40:18 +0000 (UTC)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4a3517554f7so19461335e9.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 06:40:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1793022015; x=1793626815;
+ d=gmail.com; s=20251104; t=1793022017; x=1793626817;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=kVISLLKAv63NLfsas3cS9UwzVVG4tLOE8oPPaNS0UgQ=;
- b=HSqx7HRoxPgEyAiRyW3vE+ebSdZs0hJ4hBq025QAmTYnaenLNIFmjZfCeHKRJOhNOe
- FNH7tNYlYcial0Uid+HCxh6Jua/zZNHxFoVB4E/BbnvYeCxOYbn7683hSruzZA65Ci4a
- oRqPXpWoJCM4K7ORxwai3DFNA0KDQuFt7aIyCYB+F5zs4IE+d6scwOL/t857hHLNaJrQ
- BMLYjRAFB7gxxqI6j4tU85pgwb7gDAGOKnf1wKdxDBLyKsMPcHa3wKkLdhhUKhv7OEGG
- 7pReT7kI1DPUkGX+dDXC0Eud24ocFWexL6GpfnNy7pby6fxGWMiO5+XOeD+orD1/kE75
- gCnA==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=49z1Af228wUJfE72u/4TpY9HRj2zeaMGbeN36e0kTe0=;
+ b=FvXa8ypzN60wZ8Bx/A9NKLepk54U5oQiVayL5hTACAe9/E1A/W8p3NhQq4dmM20T1p
+ mC24OShobMKXIqzua+sTrTePcB373MGatFe0ld6gAy6y1+h215yiocfcGVfyu9gsiMVc
+ tD+iY8j8h4dHjMKWhOvDP+/XVSDFPAvQsYivI75NOSfVj1CKXgvvJy/8GUeg4jGfqSEv
+ QafvVF/uWTCKgeZ3SK5qtMjZft+LRMCjDEXGnnRQCyxrOcVOPOwjct/eqK8cOuIYX5wu
+ AIjUofekY/P6kX9h8RkMd5JtqTJ2tTaVRl8Ko8iEe8S1CSPXlR3boq1JYQYJRyVNpJNk
+ mnAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793022015; x=1793626815;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=kVISLLKAv63NLfsas3cS9UwzVVG4tLOE8oPPaNS0UgQ=;
- b=x9wfkKcv9mhVsZOfMnFev0Bt1tTXxRdND07aCZn2Lc1ZwtMKk/TMsjtOTVutxYVsoe
- fK/1CZpRceVHh39agsB1J2SEY6hBAJcrVGdajeUwmPlRFRZFsqOVZmaJzO1Bf/+rCGBB
- RDvsxaTfkaZhJCsvJVCnUvxLXwLs3Grznh0shfSsmwFH7Wud4sFQjgp2CBmK0CAdlGTc
- raRki8qK3r0+nrvsFGN2c5OR3ZQ0uvP2wR5Wuh1hJYLTAN63VOmaIYmonH0CfeiVVdn8
- wvicj7k8rMRzqqsJxZfOS+vHEjih0NsH4QVSIO+MInSGQ+Wn+nGCdShNw2a8/1sf7ac9
- sQww==
+ d=1e100.net; s=20260707; t=1793022017; x=1793626817;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=49z1Af228wUJfE72u/4TpY9HRj2zeaMGbeN36e0kTe0=;
+ b=WQFkgALuJFpcpeGnxNRPwcfem5OnHRTqOlTbIoR5EbLwQI4Rny5ZVZkkpp8XZN2ZrF
+ Agq3dziUfMvK82Cx1ERahFU3ZadD4J3ox68P5aVfwrvYIDJru+DO0PW+p92DRyMly3IF
+ 8OWr3l69fBlXNAQucg00x9HCWQvF0aNsv/YbA24PRUMFaMD94hGUWGqlSJeJIZfKepQ2
+ 6NFmJKRR7UbjKTNyevbC1JZIzPUZ38i5snTvOlmJNlRRJYtNXVKv17eC5YNM8JCh0vc8
+ fpCS2/k1N3qJ2RCGwOjQCbnjsPwT/TMXh+dK9eChe48Sf5K53DiiLZ2C5Zg+5AdmTMGw
+ 74BQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBz4QpkF/pRZxoVqwoypYmsLd01EKQopQyoDzLXozugHvOwYXcfpIbDcSoF53YcDpzPwTuznBvg=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIobqCFbmL8Gg2Lx+RIA35HrTBf4SeGq3PW45y08l0wt9/nDAES
- A1cDp+PCjUZwja9pzMnr89Brfuwli0FsHOklWTY33JFiMpN85KsT6fSY
-X-Gm-Gg: AYBFou01Q6DF0ZzcQ6J8OPXjB1swUXdvgEryr09MF6AonAy11o25Ssti3S21rnhdztl
- /hMPOrNNnBmOFjXhGzpkPhFzqikdH+BrQluZajn2u15xsddxkpFrmmZLozjpkeszuCfi9iI3J4E
- C1sQz1Dh1jrXzQvcBvhf3g1W8tl+ea0XPV/tGg99N79SVNj/Jp4YkAi2OvbmDYf6HddL2kwaBrX
- p0/VeJ2yIeEW2zDC/cY36kmGdW/VK882pUVipNj6uV44kCao9oXRhYwsOBriWp82w6rBybFnOQW
- 2kJtowWOiKs+xebCzqwlQGq5kpHhMKXBavok3IVNXu/fQ5nvuH7AJGKGB5eVhQoNzTf3KYnnFUa
- 4X6w/lskse65vnxgrPGfFa4NOP+7Mx6K5KFybaTXVJxtsBipiX+OLZnN6CUVIS7qeNACeo/QzMy
- mCIwqJ7QZnhSi8+WfPvYQ/vE6Vkf2xRJVFagMXBIzV/ZJaGvL95bxdbaXck4H5bkASd7As1J7z+
- ZB/ovXBRGelK0CtpD+NOrfC56j7PkWqSLiKUJJHY0vsRXWSxprYo5vtv4WU1DPRSPWsYFHh78e1
- /hwvr1Zz+5xAUsCaFTUzwPk1Tfi1GN4s5otFcByrrmBjpUiXRjIJIJrXBAzP
-X-Received: by 2002:a05:600c:4f05:b0:49e:65f2:db64 with SMTP id
- 5b1f17b1804b1-4a35ae71b30mr144107835e9.5.1793022014687; 
- Mon, 26 Oct 2026 06:40:14 -0700 (PDT)
+ AKwUvBzYM2qGh5d0jTd2ArqmQ1KlPtTmlsPy4nVWzcMPcdBwXcZpLGhRT/Lg7AN2C/Hc5Pg6KnwADqI=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYINSA+LagPbCvA0tkS38uj3LHcLXmlJ1HanIQ5XTxnyq+5X23PR
+ IPV1Cj2qzlEjBAZ35MUzu0zCaUkn0EdJ1pImww1FHnTY+uU08sYOp3Sx
+X-Gm-Gg: AYBFou07ggqFP+PWg6sriu/Q2Na++7/UmgFOKjeEVRCX1dY70gKK8786e58TLZVrCgV
+ qqSyresZduVcmWqSot5ScSq/UPBQb2Sd7UYXolhxS4FxKkjOCji1yiUkCZTIgw+euXd6zn6G9uO
+ 9eTHp3jeUvg7qp8+5eroFzpg2VutFgFABunVAaRB2BwB4g4m+zcwnkUuHzGDMw7FPt69zcQ+C66
+ p+w8Ymfbmy4X+VSVDj++0w2legW54SVA/hNfWcR1zGajSmrXxt2Q/iug1A1+FCY1coujQezKU9U
+ 4q2/DZeC9/+k1jWTOr1pAB7XE8DRLH6rxpocXBFrOiX1mo3af0Q16VYODrYfz7jkLRC0HWh7VLc
+ U57SMZhKttDw9bKiAbo3991/lL0fkU/N8UYvJtQ462Ve7Uh7PJUNWCKHXXKEq3HnrHsER6IV0l1
+ pixiRNkMzOfcWp0QkNGNVPv5VdLnK8JRrttm8uEf2rpIp3n6AO2k9rVM7Q6n3MKQTT3TksZhbEJ
+ JfqLvGX4kGZtjaDUUB5+IyMtsI6b6IepQsIPXawdTAiHOt7sujrVtkRUHmyLIAtKanaQxAVIXQw
+ KVr9VqNIzn1+XK2S+2cYulrw3SXzBTPI8txwSFi8Z1sUnfzPNUxWMxioY7SY
+X-Received: by 2002:a05:600c:1c10:b0:4a6:eca1:7d5c with SMTP id
+ 5b1f17b1804b1-4a6eca1801cmr40498425e9.32.1793022016595; 
+ Mon, 26 Oct 2026 06:40:16 -0700 (PDT)
 Received: from Ansuel-XPS24.localdomain (93-34-92-187.ip49.fastwebnet.it.
  [93.34.92.187]) by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4a35a2c0458sm194344375e9.11.2026.10.26.06.40.12
+ 5b1f17b1804b1-4a35a2c0458sm194344375e9.11.2026.10.26.06.40.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Oct 2026 06:40:14 -0700 (PDT)
+ Mon, 26 Oct 2026 06:40:16 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
@@ -175,11 +178,14 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Peng Fan <peng.fan@nxp.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
  Randolph Sapp <rs@ti.com>, Martin Schwan <m.schwan@phytec.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.u-boot-project.org
-Subject: [PATCH v10 0/8] misc: fs_loader: reorg and split to FS and FW loader
- + FIP loader
-Date: Mon, 26 Oct 2026 14:39:53 +0100
-Message-ID: <20261026134002.109025-1-ansuelsmth@gmail.com>
+Cc: Neha Malcom Francis <n-francis@ti.com>
+Subject: [PATCH v10 1/8] misc: fs_loader: fix ubifs not unmounted on
+ dev_get_priv error
+Date: Mon, 26 Oct 2026 14:39:54 +0100
+Message-ID: <20261026134002.109025-2-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261026134002.109025-1-ansuelsmth@gmail.com>
+References: <20261026134002.109025-1-ansuelsmth@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -194,180 +200,42 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This series mainly rework the FS loader to permit reading firmware from
-container that are not exactly a readable filesystem.
+When dev_get_priv errors out, the ubifs is not umounted (if used).
 
-Also splitting out the generic firmware loader infra from the
-filesystem-specific code will make adding new loader types easier.
+Correctly handle this handle condition and while at it also return -EINVAL
+instead of -ENOMEM as a better error since no memory is allocated but is
+actually an invalid scenario for fw_get_filesystem_firmware().
 
-One scenario is when a firmware is shipped in a FIP container as
-a generic blob with an UUID.
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+---
+ drivers/misc/fs_loader.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-FIP are mostly used on ARM in the context of ATF.
-In such context U-Boot is loaded as BL31 and the PHY firmware
-can't be stored in the FIT image for the kernel as U-Boot should
-not depend on the presence of the kernel to correctly enable PHY
-for Ethernet port.
-
-To handle such case the PHY firmware is stored in FIP with a
-predictable UUID.
-
-One example is with Airoha 8811H firmware where the FIP can
-have a blob with UUID "d39d2cf2-9bd0-3ca7-93e9-e71b4f9250b2".
-(generated from command "uuidgen -n @dns --md5 --name en8811h.bin")
-
-With these example DTS entry:
-
-fw_loader0: fip-loader {
-	bootph-all;
-	compatible = "u-boot,fip-loader";
-	phandlepart = <&mmc0 0>;
-	partoffset = <0x100>;
-};
-
-mdio {
-  en8811: ethernet-phy@f {
-    reg = <0xf>;
-    firmware-name = "d39d2cf2-9bd0-3ca7-93e9-e71b4f9250b2";
-    firmware-loader = <&fw_loader0>;
-  };
-};
-
-And PHY driver using the get_fw_loader_from_node() and the
-common request_firmware_into_buf() it's possible to
-load the PHY firmware transparently by just declaring
-the required entry in the DTS.
-
-get_fw_loader_from_node() is implemented to actual get the
-loader from DT. This was something that was already in mind
-from when the FS loader was implemented but then it was
-never implemented in favor of a single loader per device.
-
-The first patch is a minor fixup for something that probably
-won't ever happen.
-
-The second one is a good reworking of the FS and FW loader
-moving the internal struct to a dedicated header. (this is
-really to enforce what drivers should use and what
-driver should not mess with)
-
-Then there is the request_firmware_size() new OP to get only
-the size of the firmware. Useful for case where the firmware
-size is not always the same and change across different version.
-(the patter might be get size -> alloc buffer -> get firmware).
-
-Then the FIP loader as a basic parser of FIP. This only
-read the FIP header, loop all the entry and search for a
-matching UUID. If nothing is found then no firmware blob.
-Very simple implementation.
-
-This is being CI tested on [0]
-
-[0] https://github.com/u-boot/u-boot/pull/884
-
-Changes v10:
-- Add review tag by Simon
-- Use min_t for FIP driver
-- Prevent double mount of ubi
-Changes v9:
-- Drop FIP blob in favor of dynamic generation
-- Rename fs_loader to fw_loader
-- Add additional patch for offset validation
-- More use of lbaint_t
-- Handle reading 0 for UBI
-- Update MTD/UBI documentation and YAML conditions
-- Make generic_fw_loader_get_phandle_desc handling explicit
-Changes v8:
-- Address all the comments from Simon
-- Massively improve test coverage for both FS and FIP
-- Enable mmc node when needed for the tests
-- Change FIP implementation to follow FS one
-  (read up to buf size or end of entry size)
-  (complain when offset is bigger than size of entry)
-- Update related documentation for fw loader
-- Rebase on top of next
-Changes v7:
-- Add tests
-- Rebase on top of next
-- Fix compilation for vpl
-Changes v6:
-- Rework to generic FW loader UCLASS
-- Account for firmware offset in FIP loader
-- Add UBI example in documentation
-- Improve variables order
-Changes v5:
-- Fix unment dependency for config flag
-- Move request_firmware_size before FIP loader
-- Add documentation patch
-- Improve get_fw_loader_from_node() implementation
-- use min() instead of custom MIN()
-- Fix handling of some return value
-Changes v4:
-- Rebase on top of next
-Changes v3:
-- Add review tag where possible
-- Check blk_dread ret
-- Generalize mount_ubifs with generic_fw_loader_ubi_select
-- Fix some typo
-- Drop useless ubifs umount (nothing is mounted in FIP)
-Changes v2:
-- Better handle header include to fix compilation error
-  on some devices
-- Fix typo for ubifs fix commit
-
-Christian Marangi (8):
-  misc: fs_loader: fix ubifs not unmounted on dev_get_priv error
-  misc: fs_loader: reorganize and split to FS loader and FW UCLASS
-  misc: fw_loader: implement generic get_fw_loader_from_node()
-  misc: fs_loader: validate requested offset on reading file
-  misc: fw_loader: implement request_firmware_size() OP
-  doc: dtbinding: Update documentation for Generic Firmware loader
-  misc: fw_loader: introduce FIP loader driver
-  test: dm: Add test for FW Loader feature
-
- arch/sandbox/dts/test.dts                     |  38 ++
- configs/sandbox64_defconfig                   |   2 +
- configs/sandbox_defconfig                     |   2 +
- configs/sandbox_flattree_defconfig            |   2 +
- configs/sandbox_noinst_defconfig              |   1 +
- configs/sandbox_spl_defconfig                 |   2 +
- configs/sandbox_vpl_defconfig                 |   2 +
- ...irmware_loader.rst => firmware_loader.rst} |   6 +-
- doc/develop/driver-model/index.rst            |   2 +-
- doc/device-tree-bindings/misc/fs_loader.txt   |  48 --
- doc/device-tree-bindings/misc/fw_loader.yaml  | 112 ++++
- drivers/misc/Kconfig                          |  31 +
- drivers/misc/Makefile                         |   2 +-
- drivers/misc/fs_loader.c                      | 326 ----------
- drivers/misc/fw_loader/Makefile               |   5 +
- drivers/misc/fw_loader/fip_loader.c           | 558 ++++++++++++++++++
- drivers/misc/fw_loader/fs_loader.c            | 260 ++++++++
- drivers/misc/fw_loader/fw_loader-uclass.c     | 231 ++++++++
- drivers/misc/fw_loader/internal.h             | 100 ++++
- include/dm/uclass-id.h                        |   2 +-
- include/fs_loader.h                           |  47 +-
- include/fw_loader.h                           |  42 ++
- test/dm/Makefile                              |   1 +
- test/dm/fw_loader.c                           | 218 +++++++
- test/py/tests/test_ut.py                      |  58 ++
- 25 files changed, 1673 insertions(+), 425 deletions(-)
- rename doc/develop/driver-model/{fs_firmware_loader.rst => firmware_loader.rst} (95%)
- delete mode 100644 doc/device-tree-bindings/misc/fs_loader.txt
- create mode 100644 doc/device-tree-bindings/misc/fw_loader.yaml
- delete mode 100644 drivers/misc/fs_loader.c
- create mode 100644 drivers/misc/fw_loader/Makefile
- create mode 100644 drivers/misc/fw_loader/fip_loader.c
- create mode 100644 drivers/misc/fw_loader/fs_loader.c
- create mode 100644 drivers/misc/fw_loader/fw_loader-uclass.c
- create mode 100644 drivers/misc/fw_loader/internal.h
- create mode 100644 test/dm/fw_loader.c
-
+diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
+index 6af4c7f15e7b..cd4695b08eea 100644
+--- a/drivers/misc/fs_loader.c
++++ b/drivers/misc/fs_loader.c
+@@ -175,8 +175,10 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
+ 
+ 	struct firmware *firmwarep = dev_get_priv(dev);
+ 
+-	if (!firmwarep)
+-		return -ENOMEM;
++	if (!firmwarep) {
++		ret = -EINVAL;
++		goto out;
++	}
+ 
+ 	ret = fs_read(firmwarep->name, (ulong)map_to_sysmem(firmwarep->data),
+ 			firmwarep->offset, firmwarep->size, &actread);
 -- 
 2.55.0
 
