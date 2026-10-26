@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 474A2606A31A
-	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 23:46:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 164C9606A31A
+	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 23:47:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=sS6qbPVS;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=AGywwr5Q
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=C+0kht79;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=agrcqQob
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 244AE40572;
-	Mon, 26 Oct 2026 23:46:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E312B60706;
+	Mon, 26 Oct 2026 23:47:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xlKyhwSxo_3U; Mon, 26 Oct 2026 23:46:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 502E040575
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793058418;
-	b=YNkvzCWYM+mI67BovRNuvi3H6hkPEetEZIJ5FfRgDkKnUC0UuVkgozuHd713HnYs7KtV
-	 ZI2d5KiHr3Z24g/mxho1DkJLJpWhB4PxDmObYnkjrqo6WXS3bqRcw2c5BZXa+hM437X89
-	 jDw2CGmRgFwUVGWEke2vmt1zIarzgy2GzlmvWhKfDVlFoc2lThknB6fD0gk2OF4DoXW2e
-	 nxVgFa0ezJQ0d/N9FVprfQzpi4N1JGwjElS4cvTntNSG7pjWlNVVI2Z1IwuhuAec/gmPE
-	 +X4F2qSICMjzYtRixsd60iGcDMdoQypZwbO7bJ8WJXSQee1gxKjivN4H6hYfOHUrN3Q==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id utS-GRxxdl83; Mon, 26 Oct 2026 23:47:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E6ECB6061D
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793058420;
+	b=Y4xDtpMQYIrpOXVWtxXXc+JoA8FmQoz2mRF6qxkZhAj8rdKTxJIO/T4BIZnuPjQXEdfy
+	 irft9pHQWp7uKdw59ygRiHkKh3/m5c5druLY/oGudkLgrc/dLoOI9haQp/D3q4wbuwEpf
+	 jXbB/q85x92hG1hZmaI77JSOEVX7rPEG1JrSbBCkXDLNug8B/3mnIOJ+28WgOpgcLsA5t
+	 KEGTkMj/tlHPYZL8oFB+SBKL19c6UTSInmJzNpVkAvsPWqfjQl0mB8YW6mvoOpNPsJeaj
+	 47S6oymTtPoV6OWycEomKf9gbVHOP3jbJgZlxhwjYAQUhmwpmGUB/8ylMcgToHhzUaw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793058418;
+	c=relaxed/relaxed; t=1793058420;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,137 +33,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=klI3T6jTJUfAGIKljAVcCzvk5mYgkUuhd1tjAlBdb8E=;
-	b=lIXDHjCV/gIwcSrXczYsztwX3mQ1jxuG5SOQpA4UwPYJjvGZv8NOVKUAT21KZ2NwvPGc
-	 fcnhRJbSF0uojET899xbr+AqjGLdDBgTJB6kG4RpDjBroiCjSKCQvisE/Ddon0kZmBZra
-	 5Ty2tJ4KJZR9iQ1RttO6LqKSkBwYEC5MUYMMcaMkOLa7H4slpb/Og2TMM6ssyRPqfay3p
-	 80dc3jPsomthjJ5fVDWbA5xTCRV/hgFsMuQIIcGF/lkHpaP0lQgOqGln/PZD+WDrvdF+J
-	 6/mXsYGcKFgSrFNTbCOfr9ipGWDxx3BXe6yRdWLqgX5eIbhD23wuFPeWMrCQ8iuejQw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=v842iKKBTz+xpkXAKyRP5B6tbVUkmaxttCnuZA7PR6k=;
+	b=Da6+OTL489vkGovr4MbJ9usGxzqgjyD1p3qIhbCNF8pOdB8qOu74NOL/1mfo52wb4O4u
+	 bu15O9fcWgyDJ2eFGhjeV+DhGOH1Pe0dU8knNWLHM/sgHj/ZsCpGOqo3fxySIb+PprA9o
+	 yXJJaj4U058NYWXJjcfP1pd99/kNtz8utrm7Honly5IQqU1HYy6qeI8YNuQH3De2kzw6p
+	 pLpnTAQK53TeZ9/6V+DwZn37/frZvuGCXaDeRcHanXG126AAwZ1bHKQTZN8QgTot5Opfu
+	 MSpLU000tQb73dZ7cI2FUNGtGDa+mrZO/YKKhpKqnYo2U7MuLBfA5luliAHAsTDWNWQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793058418;
-	bh=klI3T6jTJUfAGIKljAVcCzvk5mYgkUuhd1tjAlBdb8E=;
+	d=lists.u-boot-project.org; s=default; t=1793058420;
+	bh=v842iKKBTz+xpkXAKyRP5B6tbVUkmaxttCnuZA7PR6k=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=sS6qbPVSUfK6peR2+qMIiwgNFjVTG8J3hnkmEEVHvrYizEcU8OSk7S72jXp7uzVa2
-	 o1msV9vZiPsztO0qGC+KZwP3NxkmR7b4Bm7BRpunajzTAYyRBmmrlZJubXDdXaEGY2
-	 vQCRHPUyJm7RZsS+HRw3VIQ5hdVfVy93fd8K/S5aAScR0x9kn7iyMNpC607QtdRT3O
-	 XLt30MA2cFJW931NTNyaJv9dbVUEjGbS3ALNdPgWJTc5dVhYdjQoXAsnPy4pJfBwHz
-	 ZGsN80/5jf+yFDf/mg4CrQ69+kIctAczAGQegle/NH/1IZEo1uZEmqQlfqEZxj1SXL
-	 lggOGLduMQqHQ==
+	b=C+0kht79uXHVjLCd/afmKFxipWla8Lspa9DuQm3a9M74EAKVeRtIL6PGrgjnxh9XC
+	 TZ2YhLNUICu4l9HlBXtmH32ZsDad7fSlLKDbQyUaFBUlbIKN2X6JuTPmmCSfVc1Sk2
+	 GtC0gEjKGSECtgiETx/3AOBboZ9+wGZcOQbJxWSkxUWwRGv246yFIz8J7uzM22Vvux
+	 pnlhYXTYL52LP5ng+upzvehOfxn4Pb7sJ769YLFgzynhh1ChEv/IBEyJkmXwesCjsI
+	 PByriOI8383k7wtP4SHhchBDynOTeMunYV8vn7jd75o4EJT2SuOqZTnQa3Xl0xyQoX
+	 FYtT0YJ06dMjg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 502E040575;
-	Mon, 26 Oct 2026 23:46:58 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E6ECB6061D;
+	Mon, 26 Oct 2026 23:46:59 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 547D93421
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 23:46:50 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id B323B356
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 23:46:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4644040205
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 23:46:50 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A4FC840205
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 23:46:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KWsJwqNDCAmU for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 23:46:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 7584B40062
+ id SEfyVI33Fnwh for <u-boot@lists.u-boot-project.org>;
+ Mon, 26 Oct 2026 23:46:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org A96F240062
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::334"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793058409;
- b=Wox88/1exqpJr9oWf7aBgkxVwkdLapWjLxCkT+znusikGzuK9j9Qegw2ESgxkjf9kMfF
- dfPijouIaeIlW2REUzVXQWGZz0NII9Gbj+CrAG5f6U2mR8dHxF1BJClHp2vA0FZKU23oG
- NDybn3+SWKzHot30pu4oYFy7znrwVOqMwjwgfKePKSpWbXo/eEWgCj4tdGdc+TbObXsJV
- 3GqOTbFN8dBpW+2xmjwrnluh+4Jis3H0Z6OO5NTNv+cht4ZJGLlyAtjhIyKP3jMp+IEyN
- uE3D1zSOgHlkx25hnfoykLUOjL5NPiJ0+OgelJYRoqp5hay03FCb+88d5NhwF0lEiMQ==
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::330"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793058410;
+ b=iFyHEyVZ0bRa/Kv8shyOr4g/SzikcUnz+PVzOG4u9fJ5IgAuEeA+ukge8qW8rc3Ir7c+
+ Ox6AdhuSc3t6sMqpe9wYhkKVD0u3b+iqilyzXI56zKuKtLNULF50WbbmyWbcvdZe7/jHh
+ YP9aVabURVDFMNsP37ZzK4dJL/PNAKh2u17AXesYAjL+RELOvsrlnCFYE+0gRvlDmxug0
+ +sS92TZoSBSHOWya6xwBpKiDqqya8AL9hvXfvXVmaHfvpZ+BtTzDXn7ReC+xz5k5kGUYa
+ sEXA3/qSo5Lc1jpAF7JH2bWjJyQtwVymv9PiZQNpuPFdOyjfKxqiV+hWSJks0trxpyA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793058409;
+ c=relaxed/relaxed; t=1793058410;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=klI3T6jTJUfAGIKljAVcCzvk5mYgkUuhd1tjAlBdb8E=;
- b=IZij2AyZZi+CcooArjNV3tngcw+gpbPTAk87enH3Lf5N0nODzcmuZmklebiO5pZW9epF
- MNgBtmaZ54XMLQuTzox93l5GKcjYJc1etN7H6rn8JpJaWkVaWMVqKaWsYeD0h8DZ1JxMI
- FthVWJAHVXxA/qI9lg3Vodk/KW3mjrv01ziHcBZPaMzAPJieJiQae0BYNa1Vtq2VM6GPJ
- 6FajfT+uLklELZGoXDLpGWnz2NvRIAxLaE2JpHmU0ScUtDtGWNPHFtYgsqx+5L0ghKLGa
- lmOtdWd1VzvKH1iVGCz5ZNcqxH0chiXstivZfkG7/Bz63Isi3s0FzqwMHWdtVlDpfJA==
+ bh=v842iKKBTz+xpkXAKyRP5B6tbVUkmaxttCnuZA7PR6k=;
+ b=gnEKfjxzty4u77w0qevXR0HMAvqwO+xs3qiPVR1+dVF7qEBQrDLS4kZY2FaN6CTVF7bI
+ K4CZHALWNws9K3ugr/C1U/78NT8gcSQlG6waizzGV1rEFs238NKbBVW8iKCgyymZq9o1V
+ 8IENhO+AiyZXtO1CwFP/Rs2XU9Uy2fTv+B2QIlf8BRHbYcPf8io2S8xuq3OXe6l9qNNYI
+ ShqQaZUYmW5BFwwA8Oy/yx4rE/tc7/U9JUQd9zD9oVOCAder3sRHr5KATXc7k/YG0N2fI
+ yOZExkpi+uR/HLzlubJTK9dpiVH55FHkWKAN++/2W4TQHwgCx6Wd+DpFBmrlUpanWZA==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=AGywwr5Q; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::334"
+ header.s=20251104 header.b=agrcqQob; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::330"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::334; helo=mail-ot1-x334.google.com;
+ client-ip=2607:f8b0:4864:20::330; helo=mail-ot1-x330.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20251104 header.b=AGywwr5Q
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7584B40062
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 23:46:48 +0000 (UTC)
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-8451a619da7so2098291a34.1
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:46:48 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20251104 header.b=agrcqQob
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A96F240062
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 23:46:50 +0000 (UTC)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-84e513874f8so2190776a34.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:46:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1793058408; x=1793663208;
+ d=gmail.com; s=20251104; t=1793058409; x=1793663209;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=klI3T6jTJUfAGIKljAVcCzvk5mYgkUuhd1tjAlBdb8E=;
- b=AGywwr5QyPt+N70L/ziKwuqHPdcwdKHA2OQBJxAtmX8R068DKFq8JHdSCZPjmkK4vu
- HOhXYQFeYMXE+Xnz083YcV/K/zhN9ZbomRdivQxfjQOf7PRunYqMUDmjzgGT9q5b6Da/
- VJwDE0Rxn+B65KZ26MYqoToLsgePT+A7c64JiB0GslfWSL545zPoBb6DdcCt5yb3pz4W
- fKAHDY3GlP4x2Rqf2gLKMkaqe7teaXPpezJhgt+ashBpqk0E3RT8U9flQIm84EoL88SG
- pr0SxrbbCIbzaIzJoO3fb+d7m74fF/iSFd5OTYXUJUk4kHqCPSywbhw1xOhEf4yWPrhs
- yn/A==
+ bh=v842iKKBTz+xpkXAKyRP5B6tbVUkmaxttCnuZA7PR6k=;
+ b=agrcqQobXnCK74XHryjcVgogjsy3LXGsNcAi+LwdcS8kH+2s+I17GoXQQQoeVveU9P
+ dXGsJhrdBnAEoHEBdat8TkoE/Nxm3ATbAV9JruuUAmK+BqWKIbBbQHYlheGs7L1Fpg4v
+ 3ZvYK1/IKlvyggLMQbmisR3rGOa+7HxiUxPCHat896RgTwieo3PR34yCUM6BdJhBAZuT
+ Kz9nCJEX4NrA5TpAPZTc6RGA3EXtnhXdArsb8cPhWedG8B/MYIgBMrcStThr+WH3CxMa
+ hFyBKUgEvHsTOaN0ybrqDzpbN/OFhmCFyjI2VQqf/S42GDIcb9r/g1xctx6629p4HqCZ
+ z9MQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793058408; x=1793663208;
+ d=1e100.net; s=20260707; t=1793058409; x=1793663209;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=klI3T6jTJUfAGIKljAVcCzvk5mYgkUuhd1tjAlBdb8E=;
- b=SlxVWWvqgdrfqRdlh0y4ezB58mztTKTaP166GI9HAC1WRekY4Tq0p34hLkGW+0ADlA
- A5pnB16IFh/cSRBIzkJ9ukdue1wo5uZVAohFH5yGq1V/AHsVdy4ALstuBq8q6/XR8YeA
- O2vxzHknr/2HqHhC5pNCxAxzo6A90RS6aKjFT/v7vURkS9/BcOqriSAh6/VivxziOR/K
- rlszueY3gPvFS9j4HsMjdEjtpDrtHG9ubuSOVIs37YM5ARl9smX9tY8r9VqSaTpX8dqe
- MwNGVgK8XWgOQcyoa+zfgJniLGrlUlrfyfQf37WGk/5aIThTSYI3XY0OawYnhOgC1NrP
- PvAw==
-X-Gm-Message-State: AFq9FYKGTNKt/yNWW1cYf+jPPNbppJ9knEDknO6XTphIJALsol0zlwCV
- E0W+syKEc1PiX4wU8sDq7ESezX5ppOq1xSfXLQePLJs+f3MLaY1lBTYH
-X-Gm-Gg: AYBFou2ij6goNgLLjKVMN6iGoY728O1/iuWnmTM6LmxfZN9EIcHsjJ51ksdQNH0EsE1
- vJZvXa57vajPfd8ukjAqfcfYXLm9Wyc1gt1gv3Qe5Wg3BISDhXexvkenXKDjehAtX4fBLrIwxf7
- G5yfRnrqX8W1bM6iCp7Zi4/qdki+WfkTF0TwPjw1qbg2tvmh1H+GGYQJXWcZM5kVDEz6cbmusfN
- BfgdPMQ2jOFTbY5MM54hm8ygwlHdx8RcWe0NB4F7g2B6SkWQc7H6+5Z17jhjwbKxgz8+q/xXGJx
- OIjnVuS4FJQ23+svaoUCahY+OVArrBQddiF/mhkarFH1xs1iE92abfanP7jtoky7I4Ei/9kgkqX
- yWWtqa84aNeXEz9ksnRtamuKc7IguHIoC+nW5NOKn8iLoAALaJgxTOPz1M59x8fH8L4DsMIUa3B
- yIpUo2bfNZijmIZiiXXXuaZap09U1uc7XouoHkgwaaACSdsgUrbZwdvWzdgGMTNJIvT5SBznN0G
- DOB2ynYe6xCHrQm8WDXzJmMZGDG11zxEosp0Z/TbjPPTN9TW6U6v9I1i3LDbUJ/+lsblERiZHzT
- tgwiUP1yrFc+8A2O9oM2Zx4qZlm4KFtmsi8Uo4NTA761mIZ7+lYqOAjQAhhKW3NqDshUVeM8Xc+
- OSkuT7Y13Zy9LsaNXjahBzpc1/iR6pdSNd5esvlAWfyNWdHXxx9AImZdHgNx2VjNRIARZ0M0Ln8
- SO30KCkAybQH9zRPpweKsXaWMG
-X-Received: by 2002:a05:6830:43a2:b0:806:ab05:c1dd with SMTP id
- 46e09a7af769-850fbd152cdmr7121487a34.4.1793058407945; 
- Mon, 26 Oct 2026 16:46:47 -0700 (PDT)
+ bh=v842iKKBTz+xpkXAKyRP5B6tbVUkmaxttCnuZA7PR6k=;
+ b=oe3N73kcTs2WcYHea2mTxIBcIsqKoCTOOaev58YGn6RdFSivv7wPiTDDHhm3eN56mR
+ g2UKT1NgtY/zOi5rjj07C2iBchjZAZ8XRd3XY6DqTAL6LLHcXBLCBERyCQHphTHvnuKU
+ Ydk5U8qrNvz+mFc9eMzOkhouTCxAgQru5Fp5VtzAoVEIXavpK3Lzl7uyDB2NfgwnuW8i
+ eAGWgC/QGFw4ZPkAQSZdqru+qSj/XgURXPloL3qdFlGX9j5+fPyycWWfk/fzP2k3uicz
+ sKlnuwgMR0DZqS69HIHBaPO6m3yRPEj0kpKxN8RelcFMF/CBf4FYV2HJC3oluKhUkLYL
+ YpWg==
+X-Gm-Message-State: AFq9FYI8MikBkwitNSa24SGc0W/+Jf0oBi2CUYGix1BClLFVLGcY4HAZ
+ 6XM9L6LilDQvui9vJBmjgtwpdmxhO/jKNJuesTgWJBKlVmNSZE+rIpED
+X-Gm-Gg: AYBFou1wpIsADFc9AYEXupIngEZQohkP8TSNijxjMBsE7Ub2E4bKHfme1QDudusXBcA
+ k1MrgIqcgCSaR+Uh+mB3mMDjzDmZC2k1D/2zxiOhWjxGYxsAXmXFxoZEUncml+8tXs93U0TRBl6
+ jvPtNQ0hqsCitJgS/dyVmK26182CJZa5R4NkshPX9AI2nmRbyGQoHuZb+sTA2xLkIXYLPHXWGtI
+ U3yRDVOkkWBDGfROwMGhWslX4La9DNPEIr4AF0WmJzVJ7Tu9Qf6ikCdz44jL/6fHB1za3YMAX4m
+ qLMBbXE5hTEtNF9K60OAtWIPS2OHJkZ5dkiqXQZRzBqMezk8oPxobuHiXBxOaPOCGEt9ZWYzfgG
+ fI6NDvT9iJ8vWM9eWk1GVhb2yTWsW+id7RS6opotzZa3pIEyWjeOWFbWUWqrTOFG5xHHXtEVams
+ 9CrY9aYWRcWGgLoogl4B3nlW6CEza+gIKnVMWeydpsMFt/zTdS+ddR3gPHlao/Uu9mV7Q4eiUsD
+ sR0QOoAT/JaObcsId7xcPYnAI6Mmmtdjc4BJNcHW2aceP66AkJWrt1uF8w1v6S/eudr+EmHa8Nn
+ GY9n7LJXMAP9QFpWt9dYYXg4/oVveXWV6OBaQjpArxc/QRN9g69ZIqb2+eNeF27FaaBm01SFGFZ
+ fxvEPpmymAba3Eaj5LU4JYYE9Clum8f2xpnKRA9NB+DYM3w+WSOsp2BLFR52N6KRuCWHokzNrgq
+ W3PR/5s0E3urBBR5ESsGyge4BQ
+X-Received: by 2002:a05:6830:2701:b0:822:a76e:95a3 with SMTP id
+ 46e09a7af769-850f8c295a6mr6264687a34.0.1793058409147; 
+ Mon, 26 Oct 2026 16:46:49 -0700 (PDT)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-850fc005bd7sm9509137a34.24.2026.10.26.16.46.46
+ 46e09a7af769-850fc005bd7sm9509137a34.24.2026.10.26.16.46.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Oct 2026 16:46:47 -0700 (PDT)
+ Mon, 26 Oct 2026 16:46:48 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Mon, 26 Oct 2026 17:46:39 -0600
-Subject: [PATCH 7/9] misc: add Allwinner SID NVMEM provider
+Date: Mon, 26 Oct 2026 17:46:40 -0600
+Subject: [PATCH 8/9] misc: add X-Powers AC200 register provider
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261026-submit-xpowers-acx00-ephy-mainline-v1-v1-7-e22389e4076b@gmail.com>
+Message-Id: <20261026-submit-xpowers-acx00-ephy-mainline-v1-v1-8-e22389e4076b@gmail.com>
 References: <20261026-submit-xpowers-acx00-ephy-mainline-v1-v1-0-e22389e4076b@gmail.com>
 In-Reply-To: <20261026-submit-xpowers-acx00-ephy-mainline-v1-v1-0-e22389e4076b@gmail.com>
 To: u-boot@lists.u-boot-project.org
@@ -204,191 +204,269 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Linux device trees describe calibration and configuration values as
-cells in the Allwinner Security ID block. U-Boot has an NVMEM consumer
-API but no provider for the direct-read SID variants.
+The AC200 companion IC exposes a paged, big-endian 16-bit I2C register
+interface shared by its functions. Its Ethernet PHY is described
+independently on MDIO and accesses the control registers through a
+phandle to this provider.
 
-Add a read-only misc driver for the A10, A20, A83T, D1, A64, H5
-and H6 register layouts so firmware consumers can use those standard
-nvmem-cells descriptions.
+Enable the required input clock, retain the vendor startup delay, and
+deassert the chip reset without resetting unrelated functions. Provide
+typed register accessors and report clock and I2C failures to consumers.
+Select the page on every access so direct I2C commands cannot invalidate
+a software page cache.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- MAINTAINERS              |   1 +
- drivers/misc/Kconfig     |  10 ++++
- drivers/misc/Makefile    |   1 +
- drivers/misc/sunxi_sid.c | 118 +++++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 130 insertions(+)
+ MAINTAINERS                  |   6 ++
+ drivers/misc/Kconfig         |   9 +++
+ drivers/misc/Makefile        |   1 +
+ drivers/misc/xpowers-ac200.c | 148 +++++++++++++++++++++++++++++++++++++++++++
+ include/xpowers-ac200.h      |  34 ++++++++++
+ 5 files changed, 198 insertions(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 95b1f3b5ab3..e724357419b 100644
+index e724357419b..a3a7a121066 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -702,6 +702,7 @@ F:	arch/arm/include/asm/arch-sunxi/
- F:	arch/arm/mach-sunxi/
- F:	board/sunxi/
- F:	drivers/clk/sunxi/
-+F:	drivers/misc/sunxi_sid.c
- F:	drivers/phy/allwinner/
- F:	drivers/pinctrl/sunxi/
- F:	drivers/video/sunxi/
+@@ -1918,6 +1918,12 @@ F:	include/xen.h
+ F:	lib/sscanf.c
+ F:	test/lib/sscanf.c
+ 
++X-POWERS AC200
++M:	James Hilliard <james.hilliard1@gmail.com>
++S:	Maintained
++F:	drivers/misc/xpowers-ac200.c
++F:	include/xpowers-ac200.h
++
+ XTENSA
+ M:	Max Filippov <jcmvbkbc@gmail.com>
+ S:	Maintained
 diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index 681d5f28ea4..6f6456120d0 100644
+index 6f6456120d0..d3b2cc12edd 100644
 --- a/drivers/misc/Kconfig
 +++ b/drivers/misc/Kconfig
-@@ -51,6 +51,16 @@ config NVMEM
- 	  up hardware configuration data such as MAC addresses and calibration
- 	  settings.
+@@ -746,6 +746,15 @@ config SL28CPLD
+ 	  the base driver which provides common access methods for the
+ 	  sub-drivers.
  
-+config SUNXI_SID
-+	bool "Allwinner Security ID NVMEM support"
-+	depends on ARCH_SUNXI
++config XPOWERS_AC200
++	bool "X-Powers AC200 register provider"
++	depends on DM_I2C && CLK
 +	depends on MISC
-+	select NVMEM
 +	help
-+	  Enable read-only access to the Security ID efuse area found in
-+	  Allwinner SoCs. This allows consumers to use the standard nvmem-cells
-+	  properties from Linux-compatible device trees.
++	  Enable the I2C register provider for the X-Powers AC200 mixed-signal
++	  companion IC. Function drivers use the exported accessors to reach
++	  the AC200 paged register map.
 +
- config SPL_NVMEM
- 	bool "NVMEM support in SPL"
- 	help
+ config SPL_SOCFPGA_DT_REG
+ 	bool "Enable register setting from device tree in SPL"
+ 	depends on SPL
 diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-index f20c989ffc6..3ec2bc2b201 100644
+index 3ec2bc2b201..128159c12ee 100644
 --- a/drivers/misc/Makefile
 +++ b/drivers/misc/Makefile
-@@ -78,6 +78,7 @@ obj-$(CONFIG_SMSC_LPC47M) += smsc_lpc47m.o
- obj-$(CONFIG_SMSC_SIO1007) += smsc_sio1007.o
- obj-$(CONFIG_STM32MP_FUSE) += stm32mp_fuse.o
- obj-$(CONFIG_STM32_RCC) += stm32_rcc.o
-+obj-$(CONFIG_SUNXI_SID) += sunxi_sid.o
- obj-$(CONFIG_SYS_DPAA_QBMAN) += fsl_portals.o
- obj-$(CONFIG_TEGRA186_BPMP) += tegra186_bpmp.o
- obj-$(CONFIG_TEGRA_CAR) += tegra_car.o
-diff --git a/drivers/misc/sunxi_sid.c b/drivers/misc/sunxi_sid.c
+@@ -87,6 +87,7 @@ obj-$(CONFIG_$(PHASE_)TURRIS_OMNIA_MCU) += turris_omnia_mcu.o
+ obj-$(CONFIG_TWL4030_LED) += twl4030_led.o
+ obj-$(CONFIG_VEXPRESS_CONFIG) += vexpress_config.o
+ obj-$(CONFIG_WINBOND_W83627) += winbond_w83627.o
++obj-$(CONFIG_XPOWERS_AC200) += xpowers-ac200.o
+ obj-$(CONFIG_JZ4780_EFUSE) += jz4780_efuse.o
+ obj-$(CONFIG_MICROCHIP_FLEXCOM) += microchip_flexcom.o
+ obj-$(CONFIG_MPFS_SYSCONTROLLER) += mpfs_syscontroller.o
+diff --git a/drivers/misc/xpowers-ac200.c b/drivers/misc/xpowers-ac200.c
 new file mode 100644
-index 00000000000..86a1379d07e
+index 00000000000..cfcc5ba4958
 --- /dev/null
-+++ b/drivers/misc/sunxi_sid.c
-@@ -0,0 +1,118 @@
++++ b/drivers/misc/xpowers-ac200.c
+@@ -0,0 +1,148 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Allwinner Security ID NVMEM provider
++ * X-Powers AC200 I2C register provider
 + *
++ * Copyright (C) 2019 Jernej Skrabec <jernej.skrabec@gmail.com>
 + * Copyright (C) 2026 James Hilliard <james.hilliard1@gmail.com>
 + */
 +
++#include <clk.h>
 +#include <dm.h>
-+#include <dm/read.h>
-+#include <misc.h>
-+#include <asm/io.h>
++#include <dm/device_compat.h>
++#include <i2c.h>
++#include <linux/bitfield.h>
++#include <linux/delay.h>
++#include <asm/unaligned.h>
++#include <xpowers-ac200.h>
 +
-+struct sunxi_sid_data {
-+	unsigned int value_offset;
-+	unsigned int size;
++#define AC200_SYS_CONTROL_REG			0x0002
++#define AC200_SYS_CONTROL_CHIP_RESET_DEASSERT	BIT(0)
++
++#define AC200_TWI_REG_ADDR_H			0xfe
++#define AC200_MAX_REG				0xa1f2
++
++struct ac200_priv {
++	struct clk clk;
 +};
 +
-+struct sunxi_sid_priv {
-+	const struct sunxi_sid_data *data;
-+	u8 __iomem *base;
-+};
-+
-+static int sunxi_sid_read(struct udevice *dev, int offset, void *buf, int size)
++static int ac200_select_page(struct udevice *dev, unsigned int page)
 +{
-+	struct sunxi_sid_priv *priv = dev_get_priv(dev);
-+	u8 *out = buf;
-+	int i;
++	u8 buf[2];
 +
-+	if (offset < 0 || !buf || size < 0 || offset > priv->data->size ||
-+	    size > priv->data->size - offset)
-+		return -EINVAL;
-+
-+	for (i = 0; i < size; i++) {
-+		unsigned int byte_offset = offset + i;
-+		u32 value;
-+
-+		value = readl(priv->base + priv->data->value_offset +
-+			      (byte_offset & ~3));
-+		out[i] = value >> (8 * (byte_offset & 3));
-+	}
-+
-+	return size;
++	/* Select explicitly: an I2C command can also change the hardware page. */
++	put_unaligned_be16(page, buf);
++	return dm_i2c_write(dev, AC200_TWI_REG_ADDR_H, buf, sizeof(buf));
 +}
 +
-+static int sunxi_sid_probe(struct udevice *dev)
++int ac200_read(struct udevice *dev, unsigned int reg, u16 *value)
 +{
-+	struct sunxi_sid_priv *priv = dev_get_priv(dev);
++	u8 buf[2];
++	int ret;
 +
-+	priv->data = (const void *)dev_get_driver_data(dev);
-+	priv->base = dev_read_addr_ptr(dev);
-+	if (!priv->base)
++	if (!value || reg > AC200_MAX_REG || reg & 1)
 +		return -EINVAL;
++
++	ret = ac200_select_page(dev, reg >> 8);
++	if (ret)
++		return ret;
++
++	ret = dm_i2c_read(dev, reg & 0xff, buf, sizeof(buf));
++	if (ret)
++		return ret;
++
++	*value = get_unaligned_be16(buf);
 +
 +	return 0;
 +}
 +
-+static const struct misc_ops sunxi_sid_ops = {
-+	.read = sunxi_sid_read,
-+};
++int ac200_write(struct udevice *dev, unsigned int reg, u16 value)
++{
++	u8 buf[2];
++	int ret;
 +
-+static const struct sunxi_sid_data sun4i_a10_sid_data = {
-+	.size = 0x10,
-+};
++	if (reg > AC200_MAX_REG || reg & 1)
++		return -EINVAL;
 +
-+static const struct sunxi_sid_data sun7i_a20_sid_data = {
-+	.size = 0x200,
-+};
++	ret = ac200_select_page(dev, reg >> 8);
++	if (ret)
++		return ret;
 +
-+static const struct sunxi_sid_data sun50i_a64_sid_data = {
-+	.value_offset = 0x200,
-+	.size = 0x100,
-+};
++	put_unaligned_be16(value, buf);
 +
-+static const struct sunxi_sid_data sun50i_h6_sid_data = {
-+	.value_offset = 0x200,
-+	.size = 0x200,
-+};
++	return dm_i2c_write(dev, reg & 0xff, buf, sizeof(buf));
++}
 +
-+static const struct udevice_id sunxi_sid_ids[] = {
-+	{
-+		.compatible = "allwinner,sun4i-a10-sid",
-+		.data = (ulong)&sun4i_a10_sid_data,
-+	},
-+	{
-+		.compatible = "allwinner,sun7i-a20-sid",
-+		.data = (ulong)&sun7i_a20_sid_data,
-+	},
-+	{
-+		.compatible = "allwinner,sun8i-a83t-sid",
-+		.data = (ulong)&sun50i_a64_sid_data,
-+	},
-+	{
-+		.compatible = "allwinner,sun20i-d1-sid",
-+		.data = (ulong)&sun50i_a64_sid_data,
-+	},
-+	{
-+		.compatible = "allwinner,sun50i-a64-sid",
-+		.data = (ulong)&sun50i_a64_sid_data,
-+	},
-+	{
-+		.compatible = "allwinner,sun50i-h5-sid",
-+		.data = (ulong)&sun50i_a64_sid_data,
-+	},
-+	{
-+		.compatible = "allwinner,sun50i-h6-sid",
-+		.data = (ulong)&sun50i_h6_sid_data,
-+	},
++int ac200_update_bits(struct udevice *dev, unsigned int reg, u16 mask,
++		      u16 value)
++{
++	u16 old;
++	int ret;
++
++	ret = ac200_read(dev, reg, &old);
++	if (ret)
++		return ret;
++
++	value = (old & ~mask) | (value & mask);
++	return old == value ? 0 : ac200_write(dev, reg, value);
++}
++
++ulong ac200_get_clock_rate(struct udevice *dev)
++{
++	struct ac200_priv *priv = dev_get_priv(dev);
++
++	return clk_get_rate(&priv->clk);
++}
++
++static int ac200_probe(struct udevice *dev)
++{
++	struct ac200_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	ret = clk_get_by_index(dev, 0, &priv->clk);
++	if (ret)
++		return ret;
++	ret = clk_enable(&priv->clk);
++	if (ret)
++		return ret;
++
++	/*
++	 * No minimum delay is documented. Match the vendor driver's delay
++	 * before its first register access after the input clock is enabled.
++	 */
++	mdelay(40);
++
++	/* Release reset without resetting other functions of the companion IC. */
++	ret = ac200_update_bits(dev, AC200_SYS_CONTROL_REG,
++				AC200_SYS_CONTROL_CHIP_RESET_DEASSERT,
++				AC200_SYS_CONTROL_CHIP_RESET_DEASSERT);
++	if (ret)
++		goto err_disable_clk;
++
++	return 0;
++
++err_disable_clk:
++	clk_disable(&priv->clk);
++
++	return ret;
++}
++
++static int ac200_remove(struct udevice *dev)
++{
++	struct ac200_priv *priv = dev_get_priv(dev);
++
++	return clk_disable(&priv->clk);
++}
++
++static const struct udevice_id ac200_ids[] = {
++	{ .compatible = "x-powers,ac200" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(sunxi_sid) = {
-+	.name = "sunxi_sid",
++U_BOOT_DRIVER(xpowers_ac200) = {
++	.name = "xpowers_ac200",
 +	.id = UCLASS_MISC,
-+	.of_match = sunxi_sid_ids,
-+	.probe = sunxi_sid_probe,
-+	.ops = &sunxi_sid_ops,
-+	.priv_auto = sizeof(struct sunxi_sid_priv),
++	.of_match = ac200_ids,
++	.probe = ac200_probe,
++	.remove = ac200_remove,
++	.priv_auto = sizeof(struct ac200_priv),
 +};
+diff --git a/include/xpowers-ac200.h b/include/xpowers-ac200.h
+new file mode 100644
+index 00000000000..6aa4bde6f59
+--- /dev/null
++++ b/include/xpowers-ac200.h
+@@ -0,0 +1,34 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++#ifndef __XPOWERS_AC200_H
++#define __XPOWERS_AC200_H
++
++#include <linux/errno.h>
++#include <linux/kconfig.h>
++#include <linux/types.h>
++
++struct udevice;
++
++#if IS_ENABLED(CONFIG_XPOWERS_AC200)
++int ac200_read(struct udevice *dev, unsigned int reg, u16 *value);
++int ac200_write(struct udevice *dev, unsigned int reg, u16 value);
++int ac200_update_bits(struct udevice *dev, unsigned int reg, u16 mask,
++		      u16 value);
++ulong ac200_get_clock_rate(struct udevice *dev);
++#else
++static inline int ac200_read(struct udevice *dev, unsigned int reg, u16 *value)
++{
++	return -ENOSYS;
++}
++
++static inline int ac200_write(struct udevice *dev, unsigned int reg, u16 value)
++{
++	return -ENOSYS;
++}
++
++static inline ulong ac200_get_clock_rate(struct udevice *dev)
++{
++	return -ENOSYS;
++}
++#endif
++
++#endif
 
 -- 
 2.53.0
