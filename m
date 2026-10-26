@@ -2,29 +2,29 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ECE76606A31F
-	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 22:55:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1E91606A31F
+	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 22:55:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=RfXSq6m3;
-	dkim=pass (2048-bit key, unprotected) header.d=freemyipod.org header.i=@freemyipod.org header.a=rsa-sha256 header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=djqWIzuI;
-	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh header.b=KxQIPtxy
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=MS1HD202;
+	dkim=pass (2048-bit key, unprotected) header.d=freemyipod.org header.i=@freemyipod.org header.a=rsa-sha256 header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=vzzEoxN0;
+	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh header.b=AnzNBwLe
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 04EAD40506;
-	Mon, 26 Oct 2026 22:55:16 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9F053405BD;
+	Mon, 26 Oct 2026 22:55:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jmb8KkayXA-v; Mon, 26 Oct 2026 22:55:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A3AEA40500
+ id z3V4QZ8vl9v0; Mon, 26 Oct 2026 22:55:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E02D640557
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793055313;
-	b=GvhHiKMVviG0UUfjD1KLNmkgZ+Y1pgyobdILNg6z+1O71lANPWReXW2xmt+2WcWEm3b1
-	 71Mim2e6AggZSRs/w0YvjlTO7i+wLPtTu0CcNn8qS4pJOUZVg5g8tJmxUfr0H62tOJ2Uc
-	 N+jq/9Tor9Rjvv62Dj/zUKlYWMZ1eKls6Vl3Cbu3Fz6w0UYkRJDEa3KeWO7Ps/eCLqgt8
-	 /oQ/lBPrXTRB0Jsi/WGac6DbVB/SCZu5ltUwC5vWW2bcxA+kTnybToEDCViRj+d/S0y9a
-	 JhOL2jwagWMkGaD4DdJm/KN/cTJl8UHQ//ErOccQoNnSCmQGhUbw2EZDzNN7loOhJYw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793055319;
+	b=MCXb8CesszJgDnjH/UzS4D2JByYIMgPtj75jRBC0TphVt54I4fqWnMPvazLtH4LWrHj+
+	 yjJpoODHeRCCnHH68jhnYWJvV61jkimTzj0v+FzIPvRO7ysvdpqndZULL5MioFB6tN/DZ
+	 WXpew7NUA4H9cWwUe30dM0lgNLUxhP1P1iRycBLqREbY/VPGj0G4FNCeBXS45ZMldEif5
+	 mfuEDb/saAvjIpTI+zmZPc6BTLBjVUyT+YMbFGfF06yW7VUo/Ta/lxCE5pwYrKzZ2ahge
+	 ZqYOZ+pTBnZZvlB5t8EhbH4eh+JC4McpoaBtt4qzFTUI7h38+H44fhyWK7uF84BkrfA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793055313;
+	c=relaxed/relaxed; t=1793055319;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -34,111 +34,114 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Feedback-ID:X-SES-Outgoing:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=h58D7hvWEwuoc/+KGiueKyw/ns1nCGlhrDyV34z6o/U=;
-	b=LuSlzOflHYpYKB1UJl3H93wbxWHIYU+JAKC+Go0MXA7y1H4+ef+yNOaFk4mib0WiqFeu
-	 FtG1UJ7R4CS5Glp6g+Jtdk7tttZ7az5zSgvSNwdB489ozKKoQ7Ol67syBiqGYpPxkTUpK
-	 gQV8XoSOfatMECifD1zrXMhwfjYrRFSGAjHWrab4E5QqCOkFjSfgh1DRo38YuK5XIApfQ
-	 foAX0Qy4HqQZVrO1f1CP42q3D/3enY/WOK0pgIC+fqjoU5xOAxCYJGvlxC7DOydZEI1Rf
-	 YY+YtrCF7gEmOdv4x4amlDU8p1hMP2J0nj0JQFpym9fK8Y1ILsz+9E9TGFDvNddHI7g==
+	bh=9eYITK9l5/mSJNVvVJBPXL5JUHUXDBlefHOkofm7Lag=;
+	b=Ia/qcF3efr8Z/6I9yyqpVYcMtPvYFZ2Afgpatu0RUm14A8nNLNGMe2r91FpfB12nBNOH
+	 WRMLoyZ6NYyfTSZn8UyvuCK1toxTqyU6GM0X1IESzdtmtLpgY3UikmwTqtbDEzJglDRPj
+	 sqm5EhHwkN6t7HgxTIV+imZy8n7oBx8z0oHdRsEBS78C0HqO8W2EosIACvEoRHjM7iLoq
+	 iylXfaIriDBcNN4IR6tuVahprDFe6q6bcFC90GenhPmknQJhT2c4p9KR0Fu4m1jVhSiz+
+	 9OHGjYmFt4dUuZD61p8pleR6z7iESyS6rIIgMLE17lvqzIwSs3RDf3DqlptNIV/E2Tg==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=freemyipod.org;
+	dkim=pass header.d=freemyipod.org header.i=@freemyipod.org header.a=rsa-sha256 header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=vzzEoxN0;
+	dkim=pass header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh header.b=AnzNBwLe;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793055313;
-	bh=h58D7hvWEwuoc/+KGiueKyw/ns1nCGlhrDyV34z6o/U=;
+	d=lists.u-boot-project.org; s=default; t=1793055319;
+	bh=9eYITK9l5/mSJNVvVJBPXL5JUHUXDBlefHOkofm7Lag=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=RfXSq6m3V2z0B31bP44MDmJ4TdGeChx3GLd0LFIo/+q087MXzgPeekLaOpAf5fpiI
-	 yhx/eIWZAMAdExbsmtYIEmOekc3R0iZKJux6Bi4WmJfW4Czz6R5KoxAf2FcS3PhHOw
-	 S6X+7EADAaVRQrRgzf6MAo5U6Y1eS3c2vcaf2kfj2ksWn0agFCeQWDFE7zs46LxkGp
-	 3O/+/ok4RvqahhY7qdx3K4UMnE1ZE0V9SjHrjOWH3ADyRsluAjtGm5yg+2as9SS3F0
-	 Sv3ajhkFHZ2qh/So7Vc95LLdzJ6vSvCG0mavTLCeBf70As/6AqsDBu0gmUQ5mRgjNm
-	 QGI5I5R6+dIjg==
+	b=MS1HD202ihCKL+/NIFJpRjZAHo2wOGu4U9cwN7Of/QXPkMMlFRt1oWG0mmpqS66rw
+	 CeQfC2MZvh/znm3mXlNXiTytNxqhAIG3pqUudXxs9qhyRxGCHtdz1u72KZ9Hufemm2
+	 9/PLNL2++99APRv8y75WH2RZnK2etkzJ6cV6dQYTJhpa+cbwrXVv8c0b0cEI2IINos
+	 nvzazgvmG6YVXVLEmXHEuM/ITgdxMsId2sjGBG/W+v9l4AerXuul2ccLKQ1rhjkGUO
+	 9MTjOjjmVRNDu1fSKeEevWkJF/Blyv4Nz5ph43qnBYcfvEXXa2IKIIU/04HjeCLuKm
+	 OrD4Lq/ELRowA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A3AEA40500;
-	Mon, 26 Oct 2026 22:55:13 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 4C75B2AC
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 22:55:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E02D640557;
+	Mon, 26 Oct 2026 22:55:18 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id DC9682AC
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 22:55:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3116F40205
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 22:55:08 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id DA8C9404F8
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 22:55:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BWxtHuiy4y9z for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 22:55:07 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 97DDE40075
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=69.169.224.8
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793055307;
- b=B2sLN8d3fPZmapGQOlf2NN7OLGhzymnoYeoZtTGw3ecKIKBRC2cuPjD+wd2ZqaAVCydc
- mRxn90QjxuWH64PaIthKaIVCqgi0nM+FEgKIdvDuXm+0NEExWeYTs10RmsxpR7N4YyXWT
- DautlK95pU8DRvvi77dVI0hPrLxt2cmU8KFuBHK5gHCM1YpBmnjz+QshtOtnjQ1yJDGSI
- JBP6kKb5iy82qSYE5yI1xMtKNB0PLtjaCaIKTSJ9nUkDkYTDWt27e/S/MPB+PHgGfqyk9
- 22x/5mUnahyApBL2DdwHt2UOPI6n4m5wzERoQ7303jiEwHuwGLgK1EHb9WqPeNEUjkQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id uaYUqwJPJK76 for <u-boot@lists.u-boot-project.org>;
+ Mon, 26 Oct 2026 22:55:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org DBCB540501
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=69.169.224.7
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793055309;
+ b=OCuyswg/JZ6OC7Azj7b+ncjQr4bFKdo5jRwJBHkXNnym2pOJo4lejYW01Zn4D2+b+2zJ
+ oJox4CiZfsk/Sf2VSccGUbAHLoAs8hHIYvj00/JE8ecDvZpiE+54PUURpi44CkTP56mkX
+ 3sabM12PRGLQGTiZjuMWTYi5kea+Ztm1dou2n6jZpjb+d2AqXTD6nRb0zx0xTBs8gJuT3
+ F1dkvUGsnt+ajuJa5vO1LMmcOEWIJbFXpBfO4C4X2G6EM0H2A1qt29q5FaTCTFBvp8U0X
+ 3hWNQJ62/7CFLq5J1/X05SVOxEO2jH/8s4G9jjoFKkmq4rMvtu8NgkW0+OeXwnPxY7w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793055307;
+ c=relaxed/relaxed; t=1793055309;
  h=Received-SPF:DKIM-Signature:DKIM-Signature:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:
  References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key:Feedback-ID:X-SES-Outgoing;
- bh=h58D7hvWEwuoc/+KGiueKyw/ns1nCGlhrDyV34z6o/U=;
- b=ZDdSeHj5XUuBUkqBysGo/BnI/0/J8wduVWSXyzE/w66C3Aox7sDnAzLhZjun1wihPpCX
- swCAsaVN5Y1Y/qVA8PZ+WK6C3iXSyDhmbjcD1JNuFdyubA7uRqk9IxTR/uFgFbsf4ddbJ
- gPl046vFL7Tke2wZy23fRXni6fYiYOeH/wb7wUBYiunXTzvS1WYfIV+TPwy/FH+bvkeIF
- TaIe+kjxCDzIEqaiTe1BwSp05vYHK5i5WrbUYDOnhemxdURJzfjXIv7o3DL+LOs9bBIui
- z5DFAFCBf32AIhZ0oklcUTFFTkb1KZxVQMcvti5D/hMUqtM6EwJJSX9SHz5c2glLQiQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=9eYITK9l5/mSJNVvVJBPXL5JUHUXDBlefHOkofm7Lag=;
+ b=bN4gQaBpf4ExTu3g9NY+c9PYy4ltsis4ek7pbxsd1hXA61UmLk3AtFj/wHUlyNpXBaNs
+ p39C1yqBdypyZEQvNd2yUKUThShhDo+foU/KYaDYrLyZHkndWQow7WersiM7C5xXt6H1H
+ qsqcAhBunD1/wUxcazbAOzZsP0ZLotz2udDf4kH8J2vQwmNL2QWl71IGEy/GSNdawzJwD
+ T1KtUcXBzQImnCdwbTVjStzUxvyWgQ9ehEI1Nq3L/XpY9+axqG2jktm5JnzdLx8Tn9VFt
+ vf3kNzxl9l2JtGe05rH/vpCbsz1oqZXCV0P2ZU3ZShfTwuOLIkAkIj8jpTjlNzQFMPg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=freemyipod.org;
  dkim=pass header.d=freemyipod.org header.i=@freemyipod.org header.a=rsa-sha256
- header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=djqWIzuI; 
+ header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=vzzEoxN0; 
  dkim=pass header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256
- header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh header.b=KxQIPtxy; 
- arc=none smtp.remote-ip=69.169.224.8
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=69.169.224.8;
- helo=b224-8.smtp-out.eu-central-1.amazonses.com;
- envelope-from=010701a17a6ca917-f82354d1-1e8e-41a8-b262-3561e8dbc69c-000000@ses.freemyipod.org;
+ header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh header.b=AnzNBwLe; 
+ arc=none smtp.remote-ip=69.169.224.7
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=69.169.224.7;
+ helo=b224-7.smtp-out.eu-central-1.amazonses.com;
+ envelope-from=010701a17a6cb39d-93410dc3-89cb-402c-afa3-3e65d7c4d0ab-000000@ses.freemyipod.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=freemyipod.org
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key, unprotected) header.d=freemyipod.org
  header.i=@freemyipod.org header.a=rsa-sha256
- header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=djqWIzuI; 
+ header.s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz header.b=vzzEoxN0; 
  dkim=pass (1024-bit key,
  unprotected) header.d=amazonses.com header.i=@amazonses.com
  header.a=rsa-sha256 header.s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh
- header.b=KxQIPtxy
-Received: from b224-8.smtp-out.eu-central-1.amazonses.com
- (b224-8.smtp-out.eu-central-1.amazonses.com [69.169.224.8])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 97DDE40075
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 22:55:05 +0000 (UTC)
+ header.b=AnzNBwLe
+Received: from b224-7.smtp-out.eu-central-1.amazonses.com
+ (b224-7.smtp-out.eu-central-1.amazonses.com [69.169.224.7])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id DBCB540501
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 22:55:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
- s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz; d=freemyipod.org; t=1793055304;
+ s=ylszqdgnz5tbs3ezxze3kdgo24hbgpsz; d=freemyipod.org; t=1793055306;
  h=From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc;
- bh=++k47lIWZevGZqhvvGbpmuvr6CKZlchttvt4+8HrnwA=;
- b=djqWIzuImLZW+UXBx1lHUVw/oV99i1Rgkp9BxDN28xAIfeQHBeCHmJF4PloieVhL
- juVE0DMySk9Yj5tNak4YEFtOrUwUMxXXkF3H927FoIKd10ImaqyNGH1fmLsv7Zak5ou
- O+mnRu7/eDZKZkITjFcewCbeeLlCGWVjgpw8Onr8MCbHIXn/uOvobw/QveTc/hQRpRw
- Rbb+4NM77DXhQOkptYyZ0iemtpOfEMc0oG+WmpeLtnQk+NyNBToYbvcPU5oMPcKGO9O
- 2xHocDLDFXjdPSjYr6y278UqRoO31p/H7w1HvWaRMgtd8fP4xTT56lWU1Kon+0zf+wq
- PQ/b4+/4ng==
+ bh=dxWXbM71ud6JYnFyRKoN2Ir/PZwlDqj6n6kiW7pdi9Q=;
+ b=vzzEoxN0OrQwvqnDNP/BMbPiFs8pldgJoOePqPmmogf1YOh236iBoxHFJ64RU1tT
+ 3y2p2OmOKEEA1F2PVe2uXFoam+13l3zJK1/mvSk8DccltbojdOSJW0B6L1OKwveQZyF
+ c/TJHbN16PHL+j/RwCxrCb6TcCHPPxkh+zG0lG4J5ZubCIXoTa8tK1exSsClvPl/+Pk
+ /Utm2LW6G6SDyc/689lrc9GFB63V2PEY9ERF+75WbKzef5mXM5JVXOqd37LKhSgh5Tm
+ +aflIuVLgP7GxZocHD9RxqyQxq945rCeyQYF3h56p01xfmLH8uYdHqt/CJNJDyCty1g
+ RHn+Uj6rKA==
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
- s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh; d=amazonses.com; t=1793055304;
+ s=qftdzk2dqsatjnlrq4r5brjbihpfcrsh; d=amazonses.com; t=1793055306;
  h=From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:Feedback-ID;
- bh=++k47lIWZevGZqhvvGbpmuvr6CKZlchttvt4+8HrnwA=;
- b=KxQIPtxyHljXt1OipbDUnZCv+bUxb4Yr4iCI6ukaU1+yKzLkMQtaE4OTqmrdoLkb
- FBoH40UL0BCdfCrOWxe42NwWERFIy3wfon9B9cXSYCkAXYpT4TZ2PkZA5Ox7O9I+6aP
- oBjhfhtYdjjCaFDu6qExIWRKT93W8LSMuBUWY310=
+ bh=dxWXbM71ud6JYnFyRKoN2Ir/PZwlDqj6n6kiW7pdi9Q=;
+ b=AnzNBwLes2v1QqjBTFBfXGCxgJOEWXZdC06aV//3NhYOAHhBBGBDfgCdgIYu32VH
+ g09jT3H+rOpcd/l/FZdHQIm2sH4JNSWfz4+cKi8wVLEMtqt3nY70YE/gG0e7OeYGCLz
+ GmfiQl934FJTMfAjzUG+f9dVq2oZKRrOm2jqaY48=
 From: Vencislav Atanasov <user890104@freemyipod.org>
-Date: Mon, 26 Oct 2026 22:55:03 +0000
-Subject: [PATCH v2 02/14] ARM1176: Add support for CONFIG_POSITION_INDEPENDENT
+Date: Mon, 26 Oct 2026 22:55:06 +0000
+Subject: [PATCH v2 06/14] usb: Add DWC2 HS OTG params for S5L87xx
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <010701a17a6ca917-f82354d1-1e8e-41a8-b262-3561e8dbc69c-000000@eu-central-1.amazonses.com>
+Message-ID: <010701a17a6cb39d-93410dc3-89cb-402c-afa3-3e65d7c4d0ab-000000@eu-central-1.amazonses.com>
 References: <20261027-s5l87xx-v2-v2-0-1de63803510b@freemyipod.org>
 In-Reply-To: <20261027-s5l87xx-v2-v2-0-1de63803510b@freemyipod.org>
 To: u-boot@lists.u-boot-project.org, Janne Grunau <j@jannau.net>
@@ -150,15 +153,15 @@ Cc: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>,
  Marek Vasut <marek.vasut+usb@mailbox.org>, 
  Vencislav Atanasov <user890104@freemyipod.org>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793055301; l=1864;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793055301; l=1388;
  i=user890104@freemyipod.org; s=20261004; h=from:subject:message-id;
- bh=++k47lIWZevGZqhvvGbpmuvr6CKZlchttvt4+8HrnwA=;
- b=hKtN8jBNuUDIQ3sLWphn7GDSfUNw5hGvkTHUTy+mZZ3kLEDhH+j5y3mWtXyN51e0kC5yI6JAD
- +N0eCiNQ7uUA7VUZYUyaFYtQUTFZbWAbp9Zu3rY+ci61GwipLNqKFeW
+ bh=dxWXbM71ud6JYnFyRKoN2Ir/PZwlDqj6n6kiW7pdi9Q=;
+ b=DcDB4/I7HzcxqmOL4LOEVP7fVY98TRGBMpWRCkIdFk1xejb0Y+iM67AR05D7ZAVk93nDSQQ5e
+ ryxTSWs5yAXDlFQ5EUzdo2x6R4661poUAFuCl4Kl4Qa5xFTLn4Rb5Cr
 X-Developer-Key: i=user890104@freemyipod.org; a=ed25519;
  pk=klj5EgxMkX+YF0tPboUEB9kwBfthBgHWLhDOkwnmUus=
 Feedback-ID: ::1.eu-central-1.GZFSN+SpSZlcZgoCjFtpLsnhzRcxifcxl4uaxXIRIUo=:AmazonSES
-X-SES-Outgoing: 2026.10.26-69.169.224.8
+X-SES-Outgoing: 2026.10.26-69.169.224.7
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -175,70 +178,44 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Copied from armv7/start.S. Tested on an ARM1176JZF-S SoC.
+The DWC2 core in S5L87xx needs a specific GUSBCFG.
 
 Signed-off-by: Vencislav Atanasov <user890104@freemyipod.org>
 ---
- arch/arm/cpu/arm1176/start.S | 42 ++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
+ drivers/usb/gadget/dwc2_udc_otg.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/arch/arm/cpu/arm1176/start.S b/arch/arm/cpu/arm1176/start.S
-index d3ab5928eee..7bdcb5fb97b 100644
---- a/arch/arm/cpu/arm1176/start.S
-+++ b/arch/arm/cpu/arm1176/start.S
-@@ -37,6 +37,41 @@ reset:
- 	b	save_boot_params
- .globl	save_boot_params_ret
- save_boot_params_ret:
-+#ifdef CONFIG_POSITION_INDEPENDENT
-+	/*
-+	 * Fix .rela.dyn relocations. This allows U-Boot to loaded to and
-+	 * executed at a different address than it was linked at.
-+	 */
-+pie_fixup:
-+	adr r0, reset   /* r0 <- Runtime value of reset label */
-+	ldr r1, =reset  /* r1 <- Linked value of reset label */
-+	subs	r4, r0, r1  /* r4 <- Runtime-vs-link offset */
-+	beq pie_fixup_done
-+
-+	adr r0, pie_fixup
-+	ldr r1, _rel_dyn_start_ofs
-+	add r2, r0, r1  /* r2 <- Runtime &__rel_dyn_start */
-+	ldr r1, _rel_dyn_end_ofs
-+	add r3, r0, r1  /* r3 <- Runtime &__rel_dyn_end */
-+
-+pie_fix_loop:
-+	ldr r0, [r2]	/* r0 <- Link location */
-+	ldr r1, [r2, #4]	/* r1 <- fixup */
-+	cmp r1, #23	 /* relative fixup? */
-+	bne pie_skip_reloc
-+
-+	/* relative fix: increase location by offset */
-+	add r0, r4
-+	ldr r1, [r0]
-+	add r1, r4
-+	str r1, [r0]
-+	str r0, [r2]
-+	add r2, #8
-+pie_skip_reloc:
-+	cmp r2, r3
-+	blo pie_fix_loop
-+pie_fixup_done:
-+#endif
+diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
+index 4dc049d64b1..ac36e5e2d87 100644
+--- a/drivers/usb/gadget/dwc2_udc_otg.c
++++ b/drivers/usb/gadget/dwc2_udc_otg.c
+@@ -1042,6 +1042,17 @@ static void dwc2_set_stm32mp1_hsotg_params(struct dwc2_plat_otg_data *p)
+ 		p->usb_gusbcfg |= 1 << 30; /* FDMOD: Force device mode */
+ }
  
- 	/*
- 	 * set the cpu to SVC32 mode
-@@ -115,3 +150,10 @@ c_runtime_cpu_setup:
- WEAK(save_boot_params)
- 	b	save_boot_params_ret	/* back to my caller */
- ENDPROC(save_boot_params)
++static void dwc2_set_s5l87xx_hsotg_params(struct dwc2_plat_otg_data *p)
++{
++	p->usb_gusbcfg =
++		0 << 15		/* PHY Low Power Clock sel*/
++		| 0x5 << 10	/* USB Turnaround time (5) */
++		| 1 << 9	/* [1:HNP enable]*/
++		| 1 << 8	/* [1:SRP enable]*/
++		| 0 << 6	/* 0: high speed utmi+, 1: full speed serial*/
++		| 1 << 3;	/* phy i/f  0:8bit, 1:16bit*/
++}
 +
-+#if CONFIG_POSITION_INDEPENDENT
-+_rel_dyn_start_ofs:
-+	.word   __rel_dyn_start - pie_fixup
-+_rel_dyn_end_ofs:
-+	.word   __rel_dyn_end - pie_fixup
-+#endif
+ static int dwc2_udc_otg_reset_init(struct udevice *dev,
+ 				   struct reset_ctl_bulk *resets)
+ {
+@@ -1205,6 +1216,8 @@ static const struct udevice_id dwc2_udc_otg_ids[] = {
+ 	{ .compatible = "brcm,bcm2835-usb" },
+ 	{ .compatible = "st,stm32mp15-hsotg",
+ 	  .data = (ulong)dwc2_set_stm32mp1_hsotg_params },
++	{ .compatible = "apple,s5l87xx-usb",
++	  .data = (ulong)dwc2_set_s5l87xx_hsotg_params },
+ 	{},
+ };
+ 
 
 -- 
 Git-157)
