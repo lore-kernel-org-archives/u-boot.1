@@ -1,163 +1,152 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7DA5606A31A
-	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 18:21:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B140B606A31A
+	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 18:25:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=jmxg4L2M;
-	dkim=pass (2048-bit key, unprotected) header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256 header.s=mchp header.b=zmv+JiUX
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=a+s5FHVR;
+	dkim=pass (2048-bit key, unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=upkCo8Nt
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BB47180EFF;
-	Mon, 26 Oct 2026 18:21:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8A2F24078F;
+	Mon, 26 Oct 2026 18:25:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ehusWHMXtUM0; Mon, 26 Oct 2026 18:21:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8B9B180DB1
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793038879;
-	b=XxieW3MXOZ4ymzG+vrIU3j6Xp+IaIlah+3QMZtUD7seh36T+aq63Gp3VOdOXfjx3GVmS
-	 V9Wdiu+IirtXODdI0TCifVOi8iYfzL/WPkUsE/S299FXcIe+sv1m1qEXhTi45i4Yax+x/
-	 fx5Vt2NzIJ6pDpNZ8zx+E+d9JAhXK7fVQ4yauTtUe78GsWrDD3ikjgUU/dwAMrAgZtMwQ
-	 EsbItYHh6utMKfKf5Fxh71sr9WXdjqXEpmKTVhdxlbKbD+xQbaNQOPyrQwn4WGxA/0SzT
-	 ql90+sNmqiK6W7WTjiDtw3sz66EBLr4eJsU0tZ7nq2VLakafVYWA8jcgLslm2+HSpCw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AsoWKgk_Y6Ls; Mon, 26 Oct 2026 18:25:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D38D4407BA
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793039147;
+	b=koCQWoamY6EPwNzgH9Uoq+ETru3f09pdUE7iXBG1QVer8f2B640edX2LgJVBjNJ3iCdv
+	 nDTtLlkTPdHlAX072wlgB75cIZipgrJ/B9g/KkeGf7YVOoyc9YucK8nAf3WWp8/QMW9mi
+	 0wKmaDSCEBkT211uVOmVv+xbhiCW/JpS6ScpUVcSx4rkg0NVg6jMbVAUfSn9y9A7cSsZk
+	 KKvTnJ/cBfFV6k9MRMnQmjZmcf2iTeTVo/fG+GgSf56g2BY5cuHtXFuW/7JsbVTKX+Zqc
+	 k/Vxuw25kBbCOVbeBzJw5vw4TbzhR/0Fmp9PwqjAFhmmwOyrV4jqI8J50bV9bng5H+A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793038879;
+	c=relaxed/relaxed; t=1793039147;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:X-IronPort-AV:
-	 X-Amp-Result:Received:Received:Received:Date:From:To:CC:Subject:
-	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=Dpc1VB301/t1jLcXXGkquRoEXgFbeHPHr3g00A/VOSU=;
-	b=YSj3z1rPPTENQd03E5dmOck2Ao34xAaLbThWObH199Hlr3Il6ocWiuv4zI1+iEJ07Asd
-	 eQXanBaidqYDCDnxmPT4syC8IcunBXBWOcmts66sBO0bGMSrPX2e/8q/yBNavlE9Mcvhd
-	 SfBOU0L/Laeq+oznZIf8Y1MAIT+Qd7mhEpN3hDt4AE6aR2B7QhJRmdTIRl+qp/6+85iD3
-	 EIlGEuk53cw+fCPQPrnF+gzO4wbILxb+gHndaRBq6CbDKPY/MrzzQkadfS0RYUDEFG29D
-	 HWZnt3M8cbyi6FvSyYhJNSHCgaVUvcDBHIuD4yykcYVD23VYxVaa/7ZsMteHmYm3JuA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+	 References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=OLzMLdn/TpW5HoGJPeEn/kn+WLb3QulsiWW2FD9iShQ=;
+	b=ooYGs5+o+aMWYlNZ+iVMH9e4a7z0I0hg4Zj0scID6uLcYiIynWtgM36xb2zY4rEwyiF9
+	 u3sobI2Ei66sQvK6gCyJufF9J0UTjUUWzuHajL2fyiQandDUAhMwYzvvZF8nWH+gpwxZq
+	 CUjebpvuzgkcIXUiSASS6S892h6tCIoQfZFnaLCrCtppU/TQWc+QhnvmbY7wAiZ9xoK/6
+	 GBelWCjxjPAmdrVIav73WwGljkuh57ca/nafFNNYtnoeHf5KUV7cYpd46vVze32AtqNJG
+	 kDy0yEhmD986Xv3GiI0Op1D8x4oJwwOCkYYqZHio7qbmF6DjcC+129QS7a89hJpnT5g==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=mailbox.org;
+	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=upkCo8Nt;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793038879;
-	bh=Dpc1VB301/t1jLcXXGkquRoEXgFbeHPHr3g00A/VOSU=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793039147;
+	bh=OLzMLdn/TpW5HoGJPeEn/kn+WLb3QulsiWW2FD9iShQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jmxg4L2M+wDJ28LA0IsNDV48+2IxZQHnrKW7/FBsLdMXnLsNyGfZuwspjpmsO3zyx
-	 VDyZ3uOqCmYirWA0IxSomACovp7WZGLpzyVkWKVbLcGzmWaml540spOzukSIOadz1F
-	 AEZMWxTIkHjbGDyfI4O6NJm6gOOWQjmQEe+xVxdpqMGNwOfA9d2Wp6x+wMgNvRWgQF
-	 Cocayfjz6Mq4Si0BIKzF+yBxWqlr48wrdVOdP1C9N6SU11AM0dgEQqfCVqs87sBIfI
-	 M2KaJtOIleZ13f6nkgVqOMPcDxSLx45baErMqKRQFFS7LF90N+Tjm0WYB8a5v6jZxH
-	 z0EaQcwQxeY4g==
+	b=a+s5FHVRiF35fL6vxABTuNR9d1t2589sEe/x4K13/w/VaONYM6SUWykB1/JnBgPkN
+	 yuErYJPXs3cwsmlI2vw6yxbJ8LRnfri0Ns3ZZ76gyJOuc2oKTQ7fV0wLCfuq8pZjNG
+	 /96qbJWM4XVUCZyq1rP/1MkcLLjuxsOa5tDw0FeV92WZAVOEIvdf3nMmBiS265Z8ZZ
+	 NesaXkeJFM9Phbk2YSTjz50z2v1Bcmqw+Vi/GXn8h95wd5EdqnYhFdUr/gvMVz1Cac
+	 2duMG/i2vBip5AwdWLYzzQauNscWPnw5Ip4qpE7arCGA3F55N67WzmRS66RzTqz2Y/
+	 IddaVsE5IaLJA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8B9B180DB1;
-	Mon, 26 Oct 2026 18:21:19 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 7A83E2AC
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 18:21:18 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D38D4407BA;
+	Mon, 26 Oct 2026 18:25:46 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 230D72F5
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 18:25:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 5FC1360607
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 18:21:18 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 14B74407BA
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 18:25:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id W4ZWHHN10beY for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 18:21:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2CF3660603
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=68.232.153.233
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793038877;
- b=eN+LhbeJl3MO+YUWS1nxBr4FnMVBOOZvSyBOhJabIK3y3BfNcjbmCD3EzyOAsEGo52sF
- CI4hwBlT/d7N4nzJAqZeQtIxfIPL32O7tnxQ3Wn8TUmMxHcr+036a70mYL4L32mS1s0sh
- zbx88sViID9GrucGMwGahd3okJa7bOZcL8NX/AWTpdiiGo2eXiJNP6fPxjszcKJzsrLMw
- H6RFrH6d4/HTKkOewdAO4t3ERYPwEW8n7GYBPbCmHIZp0+LjA4rJSmKFiyXdpWvOs0O81
- oe7hvDxSoehjhCtHofUOSXGofOxxbHSRMwNkrEeJpGYb4YB5QxgdQwsaCyCTDET5XGg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZSImf2qqKiwH for <u-boot@lists.u-boot-project.org>;
+ Mon, 26 Oct 2026 18:25:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A526A4078F
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2001:67c:2050:0:465::102"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793039144;
+ b=eaKN2OdI+MyMtx/dw7M7FgmmHF3zLOtxgH5cbdyJWYqF/4iJc2q4iqR11xoXe2bZqQcn
+ RLvz/XLTkQ56pLokaOkxgyRHVcnYWS4TOozpkl7TSERblUqlAxg6k/VyKry1wCf2V4Hnw
+ 3cjoKEa+H6VhtgzrgbyyfIk+YLXg2v06MccCuSo5OyWUiphKGtJjObHuzmfjyPQETVIvn
+ lAkX84vrqwi7q/zutkI4FrBEFv3ZOCFRzlwN6MmV3oOmRzaCpfRZmT3UThS8yp2D7WV8S
+ sIDKyHQSX8c3Yf5TgIiAKa1WqHCRoVm4Fsdp7/uzRD8O8NfVq80zE/t9KfZznjyFW/w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793038877;
- h=Received-SPF:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
- X-IronPort-AV:X-Amp-Result:Received:Received:Received:Date:From:To:CC:
- Subject:Message-ID:References:MIME-Version:Content-Type:
- Content-Disposition:Content-Transfer-Encoding:In-Reply-To;
- bh=Dpc1VB301/t1jLcXXGkquRoEXgFbeHPHr3g00A/VOSU=;
- b=GmAerw3UEiwzi+ajnv+z6kN4DxHlDx74G0/RpckGEsC9gQamVIAQPK1KD+UoMw1o+CKN
- TC+0oN8R3kxUpgMsxvqdDtVtQN6r54k67BvMXeR0ubwb7rInGybTMV8bg+TPhs0j8ZAGq
- 40nh46h38kOrQq3Yyp/lhGVpjOzYugpw1fOs/qVPhgkas7+QEiXDMdvKCy5wkvYPkofrP
- OPWX+6GNHPzqyO9pD/P9G/BWEX80J14PTbtOIhBJwy2sv+ZhI8A5xZhbC9+nLn1ZfAFFn
- Os2dAnCt07e4aPvrVYiSbYl1dkbkxoEY0qqZfv+sRYeFD+1Lt5vmLI44S7OlYxP1HBA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=microchip.com;
- dkim=pass header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256
- header.s=mchp header.b=zmv+JiUX; 
- arc=none smtp.remote-ip=68.232.153.233
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=68.232.153.233;
- helo=esa.microchip.iphmx.com;
- envelope-from=prvs=752c32f41=charles.perry@microchip.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=microchip.com header.i=@microchip.com
- header.a=rsa-sha256 header.s=mchp header.b=zmv+JiUX
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2CF3660603
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 18:21:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1793038883; x=1824574883;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=XwjRHSUlQaKgaOmDzh3QAo+kUhV67a3qUnces54K0rk=;
- b=zmv+JiUXvOaScSZPeyKk79z7wMEXCrHVfrWcIp4JpbLWzwj4Tdcx3Ufr
- x55smqljoebmXWBA5y8Go6rJfEbNLVxPY9IpxwVL/W5XtK8DGhQzgKW6l
- 9FrcWVwoSBr4T5C+047FrxUkerD0/zNWQGJqPZiK7DvyqMd5k7MheN4At
- zJARFts1hz/S+gc7R3CDLXrKNW+GcuQgxHsDpQuRjWYd/5BwT7gDnra/Y
- Bz2BXJIyo967eOyT7LaFZMZSBCHZdA2AggDsptxTmUyT1del0h92mhelu
- CtvGQicXWP4jXLBEMQFg0witHw2ti+O7qnuOxAoi1vhfWkAGFtWzozur3 Q==;
-X-CSE-ConnectionGUID: pdsba+dXQgyXsXEgcRep6A==
-X-CSE-MsgGUID: R4/oXp38S0Slw0xfbugyhg==
-X-IronPort-AV: E=Sophos;i="6.27,179,1787036400"; d="scan'208";a="76059740"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa1.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 26 Oct 2026 11:21:18 -0700
-Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Mon, 26 Oct 2026 11:21:11 -0700
-Received: from MON-LT-C78453.mchp-main.com (10.10.85.11) by
- chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58 via Frontend Transport; Mon, 26 Oct 2026 11:21:10 -0700
-Date: Mon, 26 Oct 2026 14:21:08 -0400
-From: Charles Perry <charles.perry@microchip.com>
-To: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-CC: Charles Perry <charles.perry@microchip.com>,
- <u-boot@lists.u-boot-project.org>, Yao Zi <me@ziyao.cc>, Rahul Pathak
- <rahul@summations.net>, Anup Patel <anup@brainfault.org>, Paul Walmsley
- <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
- <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, Romain Caritey
- <romain.caritey@microchip.com>, Mame Maria Mbaye
- <MameMaria.Mbaye@microchip.com>, Tom Rini <trini@konsulko.com>, Rick Chen
- <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>, Michal Simek
- <michal.simek@amd.com>, Conor Dooley <conor@kernel.org>, Peng Fan
- <peng.fan@oss.nxp.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v4 2/8] firmware: rpmi: add support for the SBI MPXY
- transport
-Message-ID: <at-aFP4vrscdO9K2@MON-LT-C78453.mchp-main.com>
-References: <20261014-rpmi_v4-v4-0-d53d34a49780@microchip.com>
- <20261014-rpmi_v4-v4-2-d53d34a49780@microchip.com>
- <CAPxK-6eEg4AdPOB70gBM6_tZt6y-CurTc44UYxydBqWAFNPepw@mail.gmail.com>
+ c=relaxed/relaxed; t=1793039144;
+ h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+ User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID;
+ bh=OLzMLdn/TpW5HoGJPeEn/kn+WLb3QulsiWW2FD9iShQ=;
+ b=AE6huAPe/+FtJoORh/EKhBzNzX+pk0lNt/0ri4ZJEKegnDVDmwgwCbhzx53+KlW+IudZ
+ j+QR0SvrcKGUfeJ9RXW75Hr6WOeOOpabVBLKHmf7Q5QxAkCy6BHdj8A9ILO+6BGqAtGOH
+ WBu/9lZoni2oQ9VZaXb0CtfHHBU2xMFJAUo96hCqOiSJtnkODjeve7D/Yi0FrZG7NtMdJ
+ 0MuS7lVsLWEBLDt4t0OXkkBg73p4Uk9htqi5bRi87qDe4eqveQoQj+mBwnvF+YFHLE342
+ 9wMgRB63Xfa0eSFtIWF4wAwRyjM5KSemPl6fFbXiVG9Z7NYsZ2IPoEv6sU9UsGG8y5Q==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=mailbox.org;
+ dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=upkCo8Nt; 
+ arc=none smtp.remote-ip="2001:67c:2050:0:465::102"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:67c:2050:0:465::102; helo=mout-p-102.mailbox.org;
+ envelope-from=marek.vasut@mailbox.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=upkCo8Nt
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A526A4078F
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 18:25:43 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4jD29v5lsFzKnBr;
+ Mon, 26 Oct 2026 19:25:39 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1793039139;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=OLzMLdn/TpW5HoGJPeEn/kn+WLb3QulsiWW2FD9iShQ=;
+ b=upkCo8NtZ9hP2QxlzgzBmXn7FQer41Qh+jlMJoSR0MGzERy1QD2TAjX9UXrYpjzbm6azuc
+ az5glFkIkWXLzvOiWB2aT+sB6hniPZC3pHovQuKIY5fQAyUSSAEBDAnwAjOS3goerozh37
+ wMQovA5lRqvYLyHupR3nw6k8R7ugI8E7NZ6cvQdB6SZ0PQeYUw1dg9CfF8dmdpDg219W93
+ lSe2RVzlrJNuDz6kLsWGk4ews04b8xjJTKUQd9IEDGod4P/CFGfQjA8YI1KSFTDNnqY0Tl
+ 3HG3e1fhgXyTo6t408f5xE7QXfcByj3nDFxxWczq7Jcv5YzKURClawWHuA4GkQ==
+Message-ID: <ac90ab9b-35b8-45ec-a932-3f74ac26d78e@mailbox.org>
+Date: Mon, 26 Oct 2026 14:19:45 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAPxK-6eEg4AdPOB70gBM6_tZt6y-CurTc44UYxydBqWAFNPepw@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] usb: onboard-hub: Add support for VIA Labs VL817
+To: Hung-Chun Tseng <alan.tseng.cs@gmail.com>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>, Yixun Lan <dlan@kernel.org>
+Cc: Tom Rini <trini@konsulko.com>, Huan Zhou <pericycle.cc@gmail.com>,
+ Eric Chung <eric.chung@riscstar.com>, Alexey Charkov <alchark@flipper.net>,
+ Guodong Xu <docular.xu@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>,
+ Zixian Zeng <sycamoremoon376@gmail.com>, u-boot-spacemit@groups.io,
+ u-boot@lists.u-boot-project.org
+References: <20261026092432.769146-1-alan.tseng.cs@gmail.com>
+ <20261026092432.769146-2-alan.tseng.cs@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20261026092432.769146-2-alan.tseng.cs@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 8priajp7tbs9okjb1e8e96eq5o5oxmo4
+X-MBO-RS-ID: 7c3933699cf355fd077
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -167,308 +156,49 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-21.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DATE_IN_PAST_03_06,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=ham
+	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Oct 26, 2026 at 12:38:51PM +0530, Subrahmanya Lingappa wrote:
-> Charles,
+On 10/26/26 10:24 AM, Hung-Chun Tseng wrote:
+> The VL817 is a USB 3.1 Gen 1 hub controller with one supply and a reset
+> pin. Use the same reset time as Linux.
 > 
-> On Wed, Oct 14, 2026 at 7:47 PM Charles Perry
-> <charles.perry@microchip.com> wrote:
-> >
-> > This adds an RPMI transport driver for the Supervisor Binary Interface
-> > (SBI) message proxy (MPXY) extension [1].
-> >
-> > This is for S-Mode U-Boot where some supervisor software (such as
-> > OpenSBI) runs in M-Mode and handles the low level communication with the
-> > PuC.
-> >
-> > [1]: https://github.com/riscv-non-isa/riscv-sbi-doc (chapter 20)
-> >
-> > Signed-off-by: Charles Perry <charles.perry@microchip.com>
-> > ---
-> > Changes in v4: None
-> > Changes in v3: None
-> >
-> > Changes in v2: (from Yao Zi review)
-> >  - Reorder headers
-> >  - Remove struct sbi_mpxy_rpmi_channel_attrs and struct
-> >    sbi_mpxy_channel_attrs for simpler u32 arrays
-> >  - Don't null check pointers before free()
-> > ---
-> >  arch/riscv/include/asm/sbi.h          |  57 +++++
-> >  drivers/firmware/rpmi/Kconfig         |   9 +
-> >  drivers/firmware/rpmi/Makefile        |   1 +
-> >  drivers/firmware/rpmi/rpmi-sbi-mpxy.c | 410 ++++++++++++++++++++++++++++++++++
-> >  4 files changed, 477 insertions(+)
-> >
-> > diff --git a/arch/riscv/include/asm/sbi.h b/arch/riscv/include/asm/sbi.h
-> > index 47124dbaac84..10e03257d8e6 100644
-> > --- a/arch/riscv/include/asm/sbi.h
-> > +++ b/arch/riscv/include/asm/sbi.h
-> > @@ -10,6 +10,7 @@
-> >  #define _ASM_RISCV_SBI_H
-> >
-> >  #include <linux/types.h>
-> > +#include <linux/errno.h>
-> >
-> >  enum sbi_ext_id {
-> >         SBI_EXT_0_1_SET_TIMER = 0x0,
-> > @@ -104,6 +105,17 @@ enum sbi_ext_dbcn_fid {
-> >         SBI_EXT_DBCN_CONSOLE_WRITE_BYTE,
-> >  };
-> >
-> > +enum sbi_ext_mpxy_fid {
-> > +       SBI_EXT_MPXY_GET_SHMEM_SIZE = 0,
-> > +       SBI_EXT_MPXY_SET_SHMEM,
-> > +       SBI_EXT_MPXY_GET_CHANNEL_IDS,
-> > +       SBI_EXT_MPXY_READ_ATTRS,
-> > +       SBI_EXT_MPXY_WRITE_ATTRS,
-> > +       SBI_EXT_MPXY_SEND_MSG_WITH_RESP,
-> > +       SBI_EXT_MPXY_SEND_MSG_WITHOUT_RESP,
-> > +       SBI_EXT_MPXY_GET_NOTIFICATION_EVENTS,
-> > +};
-> > +
-> >  #ifdef CONFIG_SBI_V01
-> >  #define SBI_EXT_SET_TIMER              SBI_EXT_0_1_SET_TIMER
-> >  #define SBI_FID_SET_TIMER              0
-> > @@ -132,6 +144,14 @@ enum sbi_ext_dbcn_fid {
-> >  #define SBI_SPEC_VERSION_MAJOR_MASK    0x7f
-> >  #define SBI_SPEC_VERSION_MINOR_MASK    0xffffff
-> >
-> > +static inline unsigned long sbi_mk_version(unsigned long major,
-> > +                                          unsigned long minor)
-> > +{
-> > +       return ((major & SBI_SPEC_VERSION_MAJOR_MASK)
-> > +               << SBI_SPEC_VERSION_MAJOR_SHIFT) |
-> > +              (minor & SBI_SPEC_VERSION_MINOR_MASK);
-> > +}
-> > +
-> >  /* SBI return error codes */
-> >  #define SBI_SUCCESS                    0
-> >  #define SBI_ERR_FAILURE                        -1
-> > @@ -139,6 +159,43 @@ enum sbi_ext_dbcn_fid {
-> >  #define SBI_ERR_INVALID_PARAM          -3
-> >  #define SBI_ERR_DENIED                 -4
-> >  #define SBI_ERR_INVALID_ADDRESS                -5
-> > +#define SBI_ERR_ALREADY_AVAILABLE      -6
-> > +#define SBI_ERR_ALREADY_STARTED                -7
-> > +#define SBI_ERR_ALREADY_STOPPED                -8
-> > +#define SBI_ERR_NO_SHMEM               -9
-> > +#define SBI_ERR_INVALID_STATE          -10
-> > +#define SBI_ERR_BAD_RANGE              -11
-> > +#define SBI_ERR_TIMEOUT                        -12
-> > +#define SBI_ERR_IO                     -13
-> > +#define SBI_ERR_DENIED_LOCKED          -14
-> > +
-> > +static inline int sbi_to_linux_error(int err)
-> > +{
-> > +       switch (err) {
-> > +       case SBI_SUCCESS:
-> > +               return 0;
-> > +       case SBI_ERR_DENIED:
-> > +       case SBI_ERR_DENIED_LOCKED:
-> > +               return -EPERM;
-> > +       case SBI_ERR_INVALID_PARAM:
-> > +       case SBI_ERR_INVALID_STATE:
-> > +               return -EINVAL;
-> > +       case SBI_ERR_BAD_RANGE:
-> > +               return -ERANGE;
-> > +       case SBI_ERR_INVALID_ADDRESS:
-> > +               return -EFAULT;
-> > +       case SBI_ERR_NO_SHMEM:
-> > +               return -ENOMEM;
-> > +       case SBI_ERR_TIMEOUT:
-> > +               return -ETIMEDOUT;
-> > +       case SBI_ERR_IO:
-> > +               return -EIO;
-> > +       case SBI_ERR_NOT_SUPPORTED:
-> > +       case SBI_ERR_FAILURE:
-> > +       default:
-> > +               return -EOPNOTSUPP;
-> > +       };
-> > +}
-> >
-> >  struct sbiret {
-> >         long error;
-> > diff --git a/drivers/firmware/rpmi/Kconfig b/drivers/firmware/rpmi/Kconfig
-> > index 54fd77ad8f48..708d931263ff 100644
-> > --- a/drivers/firmware/rpmi/Kconfig
-> > +++ b/drivers/firmware/rpmi/Kconfig
-> > @@ -7,3 +7,12 @@ config RPMI_FIRMWARE
-> >           protocol for communication between an Application Processor (AP) and a
-> >           platform microcontroller (PuC). The RPMI specification is available
-> >           at: https://github.com/riscv-non-isa/riscv-rpmi
-> > +
-> > +config RPMI_SBI_MPXY
-> > +       bool "RPMI over SBI MPXY transport"
-> > +       depends on RPMI_FIRMWARE && SBI
-> > +       help
-> > +         Enable support for transport of RPMI messages over the message proxy
-> > +         (MPXY) extension of the supervisor binary interface (SBI). The
-> > +         specification for the MPXY extension is available at:
-> > +         https://github.com/riscv-non-isa/riscv-sbi-doc (chapter 20)
-> > diff --git a/drivers/firmware/rpmi/Makefile b/drivers/firmware/rpmi/Makefile
-> > index d69c718d150e..71c4aeaed910 100644
-> > --- a/drivers/firmware/rpmi/Makefile
-> > +++ b/drivers/firmware/rpmi/Makefile
-> > @@ -1 +1,2 @@
-> >  obj-y  += rpmi-uclass.o
-> > +obj-$(CONFIG_RPMI_SBI_MPXY) += rpmi-sbi-mpxy.o
-> > diff --git a/drivers/firmware/rpmi/rpmi-sbi-mpxy.c b/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
-> > new file mode 100644
-> > index 000000000000..9ccca0eb59b2
-> > --- /dev/null
-> > +++ b/drivers/firmware/rpmi/rpmi-sbi-mpxy.c
-> > @@ -0,0 +1,410 @@
-> > +// SPDX-License-Identifier: GPL-2.0
-> > +/*
-> > + * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
-> > + */
-> > +
-> > +#define LOG_CATEGORY UCLASS_RPMI
-> > +
-> > +#include <asm/io.h>
-> > +#include <asm/sbi.h>
-> > +#include <asm/types.h>
-> > +#include <dm.h>
-> > +#include <dm/device_compat.h>
-> > +#include <linux/bitops.h>
-> > +#include <linux/kernel.h>
-> > +#include <log.h>
-> > +#include <malloc.h>
-> > +#include <rpmi-uclass.h>
-> > +#include <string.h>
-> > +
-> > +/* SBI MPXY channel IDs data in shared memory */
-> > +struct sbi_mpxy_channel_ids_data {
-> > +       /* Remaining number of channel ids */
-> > +       __le32 remaining;
-> > +       /* Returned channel ids in current function call */
-> > +       __le32 returned;
-> > +       /* Returned channel id array */
-> > +       __le32 channel_array[];
-> > +};
-> > +
-> > +enum sbi_mpxy_attribute_id {
-> > +       /* Standard channel attributes managed by MPXY framework */
-> > +       SBI_MPXY_ATTR_MSG_PROT_ID = 0x00000000,
-> > +       SBI_MPXY_ATTR_MSG_PROT_VER = 0x00000001,
-> > +       SBI_MPXY_ATTR_MSG_MAX_LEN = 0x00000002,
-> > +       SBI_MPXY_ATTR_MSG_SEND_TIMEOUT = 0x00000003,
-> > +       SBI_MPXY_ATTR_MSG_COMPLETION_TIMEOUT = 0x00000004,
-> > +       SBI_MPXY_ATTR_CHANNEL_CAPABILITY = 0x00000005,
-> > +       SBI_MPXY_ATTR_SSE_EVENT_ID = 0x00000006,
-> > +       SBI_MPXY_ATTR_MSI_CONTROL = 0x00000007,
-> > +       SBI_MPXY_ATTR_MSI_ADDR_LO = 0x00000008,
-> > +       SBI_MPXY_ATTR_MSI_ADDR_HI = 0x00000009,
-> > +       SBI_MPXY_ATTR_MSI_DATA = 0x0000000A,
-> > +       SBI_MPXY_ATTR_EVENTS_STATE_CONTROL = 0x0000000B,
-> > +       SBI_MPXY_ATTR_STD_ATTR_MAX_IDX,
-> > +       /*
-> > +        * Message protocol specific attributes, managed by
-> > +        * the message protocol specification.
-> > +        */
-> > +       SBI_MPXY_ATTR_MSGPROTO_ATTR_START = 0x80000000,
-> > +       SBI_MPXY_ATTR_MSGPROTO_ATTR_END = 0xffffffff
-> > +};
-> > +
-> > +/* SBI_MPXY_ATTR_CHANNEL_CAPABILITY bits */
-> > +#define SBI_MPXY_CHAN_CAP_MSI BIT(0)
-> > +#define SBI_MPXY_CHAN_CAP_SSE BIT(1)
-> > +#define SBI_MPXY_CHAN_CAP_EVENTS_STATE BIT(2)
-> > +#define SBI_MPXY_CHAN_CAP_SEND_WITH_RESP BIT(3)
-> > +#define SBI_MPXY_CHAN_CAP_SEND_WITHOUT_RESP BIT(4)
-> > +#define SBI_MPXY_CHAN_CAP_GET_NOTIFICATIONS BIT(5)
-> > +
-> > +/* RPMI message protocol specific MPXY attributes */
-> > +enum sbi_mpxy_rpmi_attribute_id {
-> > +       SBI_MPXY_RPMI_ATTR_SERVICEGROUP_ID,
-> > +       SBI_MPXY_RPMI_ATTR_SERVICEGROUP_VERSION,
-> > +       SBI_MPXY_RPMI_ATTR_IMPL_ID,
-> > +       SBI_MPXY_RPMI_ATTR_IMPL_VERSION,
-> > +       SBI_MPXY_RPMI_ATTR_MAX_ID
-> > +};
-> > +
-> > +/* Possible values of MSG_PROT_ID attribute as-per SBI v3.0 (or higher) */
-> > +enum sbi_mpxy_msgproto_id {
-> > +       SBI_MPXY_MSGPROTO_RPMI_ID = 0x0,
-> > +};
-> > +
-> > +struct sbi_mpxy_chan_desc {
-> > +       u32 id;
-> > +       u32 max_xfer_len;
-> > +       u32 attrs[SBI_MPXY_ATTR_STD_ATTR_MAX_IDX];
-> > +       u32 rpmi_attrs[SBI_MPXY_RPMI_ATTR_MAX_ID];
-> > +};
-> > +
-> > +struct rpmi_sbi_mpxy {
-> > +       struct udevice *dev;
-> > +       void *shmem;
-> > +       unsigned long shmem_size;
-> > +       u32 channel_count;
-> > +       struct sbi_mpxy_chan_desc *channel_descs;
-> > +};
-> > +
-> > +static int rpmi_sbi_mpxy_read_attrs(struct rpmi_sbi_mpxy *mpxy, u32 channel_id,
-> > +                                   u32 base_attrid, u32 attr_count,
-> > +                                   u32 *attrs_buf)
-> > +{
-> > +       struct sbiret sret;
-> > +       int i;
-> > +
-> > +       sret = sbi_ecall(SBI_EXT_MPXY, SBI_EXT_MPXY_READ_ATTRS, channel_id,
-> > +                        base_attrid, attr_count, 0, 0, 0);
-> > +       if (sret.error)
-> > +               return sbi_to_linux_error(sret.error);
-> > +
-> > +       for (i = 0; i < attr_count; i++)
-> > +               attrs_buf[i] = le32_to_cpu(((__le32 *)mpxy->shmem)[i]);
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int rpmi_sbi_mpxy_send_message(void *shmem, u32 mpxy_fid, u32 channel_id,
-> > +                                     u32 msg_id, const void *tx,
-> > +                                     unsigned long tx_len, void *rx,
-> > +                                     unsigned long max_rx_len,
-> > +                                     unsigned long *rx_len)
-> > +{
-> > +       unsigned long rx_bytes;
-> > +       struct sbiret sret;
-> > +
-> > +       if (tx)
-> > +               memcpy(shmem, tx, tx_len);
-> > +
-> > +       sret = sbi_ecall(SBI_EXT_MPXY, mpxy_fid, channel_id, msg_id, tx_len, 0,
-> > +                        0, 0);
-> > +
-> > +       if (rx && !sret.error) {
-> > +               rx_bytes = sret.value;
-> > +               if (rx_bytes > max_rx_len)
-> > +                       return -ENOSPC;
-> > +
-> > +               memcpy(rx, shmem, rx_bytes);
->  `rx_bytes` is checked against the caller's buffer, but not against the
->  allocated MPXY shared-memory region. Current callers pass bounded response
->  buffers, so this is defensive hardening rather than a demonstrated overflow
->  in the current clients; however, the helper itself accepts an arbitrary
->  `max_rx_len` and trusts the SBI return value. Please bound the response by
->  both the shared-memory allocation and the channel's maximum transfer length
->  before copying.
-
-Ok good point. I'll make this case return -EIO since this would be a bug in
-the SBI.
-
-Thanks,
-Charles
-
+> The Milk-V Jupiter and the Banana Pi BPI-F3 have one in front of all
+> their USB ports. Without this, U-Boot leaves the hub unpowered and in
+> reset, so no USB device is found.
 > 
-> Regards,
-> Subrahmanya
+> Signed-off-by: Hung-Chun Tseng <alan.tseng.cs@gmail.com>
+> ---
+>   common/usb_onboard_hub.c | 14 +++++++++++++-
+>   1 file changed, 13 insertions(+), 1 deletion(-)
 > 
+> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
+> index 0684f7bfd..0ed70a6ba 100644
+> --- a/common/usb_onboard_hub.c
+> +++ b/common/usb_onboard_hub.c
+> @@ -289,9 +289,21 @@ static const struct onboard_hub_data usbhx3_data = {
+>   	.supply_names = { "vdd-supply", "vdd2-supply" },
+>   };
+>   
+> +static const struct onboard_hub_data vialab_vl817_data = {
+> +	.reset_us = 10,
+> +	.num_supplies = 1,
+> +	.supply_names = { "vdd-supply" },
+> +};
+> +
+>   static const struct udevice_id usb_onboard_hub_ids[] = {
+>   	/* Use generic usbVID,PID dt-bindings (usb-device.yaml) */
+> -	{	.compatible = "usb3431,6241",	/* Corechips SL6341 USB 2.0 */
+> +	{	.compatible = "usb2109,2817",	/* VIA Labs VL817 USB 2.0 */
+> +		.data = (ulong)&vialab_vl817_data,
+> +	}, {
+> +		.compatible = "usb2109,817",	/* VIA Labs VL817 USB 3.0 */
+
+Please keep the list sorted.
+
+[...]
