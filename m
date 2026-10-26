@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E94AC606A31A
-	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 21:29:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B34D606A31A
+	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 21:29:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ctx257j+;
-	dkim=pass (2048-bit key, unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=cybIfiW9
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=pBfF/6sr;
+	dkim=pass (2048-bit key, unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=tSzvDLA8
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BA637606BE;
-	Mon, 26 Oct 2026 21:29:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 053F180CF0;
+	Mon, 26 Oct 2026 21:29:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id apGvdAFvKqjq; Mon, 26 Oct 2026 21:29:07 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org AE0A8605EC
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793050147;
-	b=b/JrGGjXKjwuWT4izqRvOw8swuKGuHl7tJZ8XLaRu9RssWuBUOPy1mfum0YBlkathakc
-	 Et3LOPPAtr1/2gOfhDcMWIi8ce7toO4l0E4ilbBBaGDjIiZkmAjwyJav5xAci3ym2En6c
-	 Pd08GS75CWkwKEnrkgcCJjyHbDs9WXiDqi+yfgAfkQOkyB8CkFdiXdkK1cjJcs/rUBR9f
-	 QX41wmU4qkrAwWtsvLfnRkql5dGatOFtCXh5svHrWo0hvpOzcu1yG0d6VU1pgRp+BFrQ1
-	 dJ2gBnFNfp3CuY5dkbRb7uTQbGnqA2keZn5dzk6WWfRtYULb0EWXpFS8gqHv3YMqsJw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DH4DcdVka0HK; Mon, 26 Oct 2026 21:29:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4500780A98
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793050149;
+	b=IM9M/Fe0xu16tehhVuHky9cuX6TTQeOHjq3SFV5cVzO2sFwynJUKXmdpGGw3G9hsGq1Q
+	 9B0YrHqIa9opj1O3gs5XdXkmkGqxfgz/e+QafND63ccd2OAKKa+87YCfAgg07ZohzG4ko
+	 QIF3XQXJtMhhWHYzWVQSVYdvwPo8hQnXSb1l5fQ9uaKKHj+nLzh60usVnHwGmp8ssqTdg
+	 On13Lb7/W6VdKkEBJsNEtIP2n5NIKALatUn7fNQNWALAUS61jI2IeDg94bAeDVhKST04w
+	 KjgMSNqFuZbBZVpyyI8/zPjH0tezie01NJOWuvWigvTgMVyA+TXPZQLet/W1FJZjEcQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793050147;
+	c=relaxed/relaxed; t=1793050149;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,84 +32,82 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MBO-RS-ID:X-MBO-RS-META:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=s5jXaTRzMStywT9Hc9z72oL/3X6oES0txrExXpjNReU=;
-	b=kdHdS2Cyxw858tpz65gM/LA0zMjIhsxw/45ZNRNIVBlnrvosr6cNZJDwmD5ZVcg9R2PE
-	 c/e76wk0xqzF1nDnTmpxTqBRApIlo7lTGRmizGFh19x6K1mSNqY4Ufq+muKSKuoW8z5Q5
-	 wkY1s/72WCamtR21tIdXWRKFMRdqC264fXXDJ1XKeqxjvhcOFUphDR6Oodpl/w+Tj5wXy
-	 SEK9nWFmapVUzGy/ohct2VEPnrIEB5jBYT1di/m5u1tflMmcSFK0t8Hs0u/wn89n26P+w
-	 dt/bWhN4iJS0X+SX44DBd8t/N4nK8Q2uka399yHsHDuTkIsNviKqHvUy3HnEdugcKSg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=slJNoAjkg56/Pdv9ozd7eKnpq+MNeJEShAFMGpAnhGQ=;
+	b=XLaCzqByXLsDM+CioVkaOJwTbTL6gi6O9/VzRoeq/uJoKszllL36k9/G3d9Ccr4WqiOW
+	 /8P9NnmNMg1mlV/4pyccEt5DRyqud2T/U0d1yvmD55y2s1nPXoY/x3z4R0Buna7vp+WmO
+	 I12W5VDomC89R8IxdL9PLs/5fu/l4uztbnpwKIkUyeceH3s2FZAN3YGO5X6ECuYCHlaBj
+	 C8b4pbfzbllz1ljsFpcWBIbR8Mf5BpCaYdv5fcQxbXG7KpAcuCPpDohM0uYZfRKPtxFPW
+	 KE6B//rksI1B5zICGPFY5vyYejxrOSYVCY+KjVEyC/RHaM+IuJSedKdkhVAWSs50Q0w==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793050147;
-	bh=s5jXaTRzMStywT9Hc9z72oL/3X6oES0txrExXpjNReU=;
+	d=lists.u-boot-project.org; s=default; t=1793050149;
+	bh=slJNoAjkg56/Pdv9ozd7eKnpq+MNeJEShAFMGpAnhGQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ctx257j+M7XJPlWunWeNpp89anrd2fe/CnzstMWwIc1wC7jdJrsukxbAKkyEJP8hY
-	 oL5mz+bV5206wPXbWHfgYNNEnOhf03XXesrOWwgQWdNIjE7pGV167mYrDYXPGuoWaj
-	 CVyLQcTSV0oPOc5aq2GkLOrSrB1/RzXZPJ6gzvOyjQAxvsqceQo2y4G6EE1BAwU9+f
-	 2J4cEIkAOQ8F+QJhWa4MgzFE8UkHY0vnS5M9GYMKXurftYzmoscNBiUPBEL1vEg3Re
-	 A/VyG+YAMF+e01f2UJs6utarNziCFJE9ColXKKZXdfm9kCHbjwjx0npH0DLXqET6pi
-	 /fBOghD+gmMhg==
+	b=pBfF/6srN8F1P+PX2yqfcFt0WW+fkrR4bfGHb5/dQmGm34nzH27sdK4Mq2Hvm5fjh
+	 LBaYUoX91jgxahxPS1uGdsXYEdnp+q7tet0+wH979sK2SUFL2fTHbgVOwG3Q6SOPrq
+	 yrXIcCmuWoMwiKhrU1H/vYcPXpeyOUJGkO9P5kBHYFbT9NOdeGH55lR58yHAnmqJLz
+	 pku/84n1AP6urN9MIPgMP6v16dt+snX7UH39WeTWNwunpUZ8X5XOPd1VB70byjQg/t
+	 avXbLyjKT3R17N803j5wivTj4qz5JmjKkqFUlL2zXsvrgxYhSPgWQpfPwePD58iYDm
+	 93zfXBzT2PyUQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AE0A8605EC;
-	Mon, 26 Oct 2026 21:29:07 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 8299A3421
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4500780A98;
+	Mon, 26 Oct 2026 21:29:09 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id EB825380
  for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 21:29:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6874080A90
+ by smtp4.osuosl.org (Postfix) with ESMTP id DD2B940556
  for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 21:29:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Qmqz9Cx7_Nt5 for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 21:29:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 289CD80A5A
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2001:67c:2050:0:465::202"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793050143;
- b=PQiLQKto9/dL01DnzZQLl5J6SjUlwvxcYeyriLCUNxTWxZVqSsTxJTNAywkLLwAoYp2i
- J0T9tKjuzzco7A2RW1/wDFTDQlh4A4XUhTtLe2jO5wmrmm6qP0NlqpCBTl79nBfPmkw3d
- UgeS6bcenuHU1+xKjtmBW+t1J2JmJHSFaJ/1Tfdif+zM9PXhxORuiO22A7rORf9ShwcjB
- ixhybJ2WZBVdeH0amUjrJzD7tAc0SSlmWNVqLg2sqHumd5W5Fie1FgO7B9VcIGN/lTEH7
- 4c3Gv/ne0D4oAvx7y8Krnj4VfEUUuupl0kQhdKRLCXUPtew1kamhXUNeyBfA6o8m3xA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xqSRRxqiXVwr for <u-boot@lists.u-boot-project.org>;
+ Mon, 26 Oct 2026 21:29:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 055A34053E
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=80.241.56.151
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793050144;
+ b=Slms5FGTa5SnajYXwGbsfo3O2yz+4JhfkAWjVK4ONaUPsnOtWKlaWrmZPkdcjuaZQOBw
+ Z91tmSVJH5wg2VClA9wObrg+pmU0ozBi098GdeZGRSO5luhOZgIuQvS1LnMLm2nw8CDn8
+ yCqbXnk9b7hS3wyg8BGcuaK9QW6psRE/1quvhk5AAyjtgeHVrZnvaeEI4x+MRxv6kRZ4y
+ sPEggoNKyW7YKUabpopIPwnEGLULR4nr94AHaQ0Lnkwpl0z7iUlZj3kBgv6ssBjgW0pgr
+ iaNGsg2I1a1sWHOOd2zQBBeRyGm4EEnHLeDVDrtCZ6Fx/JTwUfRK7BsMmZvjwsB8e5Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793050143;
+ c=relaxed/relaxed; t=1793050144;
  h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META;
- bh=s5jXaTRzMStywT9Hc9z72oL/3X6oES0txrExXpjNReU=;
- b=sxRm3RTKcNr1klWPdt+btP2c3mGod6vivqGt0WCceFi0J/Ojw1pdlk+X0EWuZE78DEoR
- TDzlj/p2VniKW7NISIfO/wGGycWbgcCDqyyXm1XDiU1plClncqfMYZ47rKwxGx+9XMgP7
- 5LxoUVwXVrfyGa8CTTJtqAP8WfBBUoMO2aK0k3kOX99Nq0sgkBwXouRiQ3la/mwaO+iF1
- CrnEEuOb+Q9dKNlGYHgKnHkQC3TeZirzvltCFx+CH+HfaeEWgWOo02f6eJPdXgEF87/EF
- khr7P8sEvFGNyJUyjYaIB+951DQbdPbyEKTIjqpLvc/2BUZPISSV+ZMiX3jlzi4AB2g==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=slJNoAjkg56/Pdv9ozd7eKnpq+MNeJEShAFMGpAnhGQ=;
+ b=Dxib70OL8fl0vEH1Y6UnpLORW6Jkq3JAu/9WofZfwQukpxgPjwAsSORf7yjbHAQqN1Ks
+ 3JqxEo96mBeyq/Ak+fMuNOTkdO+yVoVggGJnhxlKnqcjA7PYrrarWxlfl9CUExv0MH3Nc
+ VCmT75SMV6C2O5SEFlwi32WhHrWsiNwheJqvdZJDr3slRUfyKBVHAHe4Cw3xtvxw2VUVN
+ mBrnpcoxdMbKk+ldcLP+i3Yn9cGrFqCYFirK3RRD4MErAk7KT+8ew3PczgX9TmfNHrkqK
+ vhpM31Po0VgtEP5gcZADjSlVEJt0iFgZJjhSM+vIZK8wA5pBSQTzBsK+XlFDYqJEsHw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=mailbox.org;
  dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=cybIfiW9; 
- arc=none smtp.remote-ip="2001:67c:2050:0:465::202"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::202; helo=mout-p-202.mailbox.org;
- envelope-from=marek.vasut+renesas@mailbox.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+ header.s=mail20150812 header.b=tSzvDLA8; 
+ arc=none smtp.remote-ip=80.241.56.151
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.151;
+ helo=mout-p-101.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=cybIfiW9
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 289CD80A5A
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 21:29:02 +0000 (UTC)
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
+ header.a=rsa-sha256 header.s=mail20150812 header.b=tSzvDLA8
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 055A34053E
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 21:29:03 +0000 (UTC)
 Received: from smtp1.mailbox.org (smtp1.mailbox.org
  [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4jD6FR0PDMzMlNR;
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4jD6FR6P57z8t9v;
  Mon, 26 Oct 2026 22:28:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1793050139;
@@ -117,12 +115,12 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=s5jXaTRzMStywT9Hc9z72oL/3X6oES0txrExXpjNReU=;
- b=cybIfiW9zhAWOR8wkipbRy/k3oaNiyX2+dDmOMByJ7bv7KzUIYZVGT8eS+sg1xKYK6lejH
- zYp88IPFY3V0Xif6djL2sVVipAXU5GULO37k084yWe1+t2ZxH0comFfYaYh0rr6NdWAzsB
- 9WYmKFrT4QgrLSSkjACE/k/Ynmyhnj6yNqP8jKEdnbmU4t1lU7VJ7hpB4GPeT2O5LN/XV3
- NISK+/xxoYc3jDoVFW8o2SOMiJW3gfXp4WAU3KOflkwM1d4nEA0Yc61m0bv/U4rRTzADgQ
- H6qZQqX+hH7xRRI5X5A1szTWaC5ipQsxpL2meyeZB0vjbsyrNguQKG5RWtIVDw==
+ bh=slJNoAjkg56/Pdv9ozd7eKnpq+MNeJEShAFMGpAnhGQ=;
+ b=tSzvDLA8xFjnJ2JuYNsbWtO9DSpqg/RunRenaTT+HJEZ/OKRr6yF63Xx+KyddfXkbRR78F
+ Mky0bpFZRnvahW0fTrFqWk9rO1pPEBuxRcwyG6FBQlIGwDwYscio+CEZJZTjSEn0wcBNIb
+ OKJoa+2kecXpX8ZedCmZNBTzOm3eFmrGkLklKP0iHEFRk+1vj1wZRD6xfMsVpCxbIsUajt
+ zNGdA7nKU1EZCc9IwAI19Yt8W2W8LwqydAC5trzPXtdbW/QDjzDfA8sgTvLgHUDicSlJFt
+ BI1Ql+bDJCk48a7EBSXkJ9BkKZC7tjf0WBm1Z55Pqcv0Jnnyn+voAzETI+85tg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -132,18 +130,17 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Lukasz Majewski <lukma@nabladev.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/3] net: lwip: Split do_tftpb() into command line parser and
- loop
-Date: Mon, 26 Oct 2026 22:28:27 +0100
-Message-ID: <20261026212853.453191-2-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 3/3] common: update: Port DFU TFTP to LwIP
+Date: Mon, 26 Oct 2026 22:28:28 +0100
+Message-ID: <20261026212853.453191-3-marek.vasut+renesas@mailbox.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261026212853.453191-1-marek.vasut+renesas@mailbox.org>
 References: <20261026212853.453191-1-marek.vasut+renesas@mailbox.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: e035d25308a4db159c8
-X-MBO-RS-META: djqkuw5ssdutq15osdqx6f1b3jos1qrf
+X-MBO-RS-ID: 609006bc9488d1dc4fe
+X-MBO-RS-META: cr5qxso7gwrb6xdi6wpghhnatkkehghp
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -160,12 +157,14 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Split the do_tftpb() into do_tftpb() which is the command line interface
-and parser of various parameters passed on command line, and do_tftpb_raw()
-which is the core TFTP loop invocation. The purpose of do_tftpb_raw() is
-to be called from within U-Boot, namely from the DFU TFTP code, which is
-passing in custom load address, filename and timeout, and which uses the
-default server IP and ports from U-Boot environment.
+Make DFU TFTP compatible with LwIP by implementing a slightly different
+and simpler TFTP loading using do_tftpb_raw(). The loader supports all
+the functionality that was supported by legacy network stack, but has
+to implement CONFIG_UPDATE_TFTP_CNT_MAX manually.
+
+Tested on Renesas R-Car H3 Salvator-X(S) board using both:
+=> env set updatefile update.itb ; env set loadaddr 0x50000000 ; dfu tftp
+=> tftp 0x50000000 update.itb && dfu tftp 0x50000000
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -178,168 +177,75 @@ Cc: Quentin Schulz <quentin.schulz@cherry.de>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org
 ---
- include/net-common.h | 13 ++++++
- net/lwip/tftp.c      | 97 ++++++++++++++++++++++++--------------------
- 2 files changed, 65 insertions(+), 45 deletions(-)
+ common/update.c     | 27 +++++++++++++++++++++++++++
+ drivers/dfu/Kconfig |  2 --
+ 2 files changed, 27 insertions(+), 2 deletions(-)
 
-diff --git a/include/net-common.h b/include/net-common.h
-index f1f670dbd8b..ad777949dda 100644
---- a/include/net-common.h
-+++ b/include/net-common.h
-@@ -568,6 +568,19 @@ int do_sntp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
-  */
- int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- 
-+/**
-+ * do_tftpb_raw - Run the tftpboot from within U-Boot
-+ *
-+ * @laddr: Load address
-+ * @fname: File name to load
-+ * @server_ip: Optional server IP string, or NULL
-+ * @server_port: Optional server port string, or NULL
-+ * @timeout: Transfer timeout
-+ * Return: 0 if OK, -ve on error
-+ */
-+int do_tftpb_raw(ulong laddr, char *fname, char *server_ip, char *server_port,
-+		 unsigned long timeout);
+diff --git a/common/update.c b/common/update.c
+index 06e53cbd402..1c3ecf47a39 100644
+--- a/common/update.c
++++ b/common/update.c
+@@ -30,6 +30,8 @@ extern int tftp_timeout_count_max;
+ #include <mtd/cfi_flash.h>
+ static uchar *saved_prot_info;
+ #endif
 +
- /**
-  * wget_do_request() - sends a wget request
-  *
-diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-index 1d0e95d826b..a49d5a72852 100644
---- a/net/lwip/tftp.c
-+++ b/net/lwip/tftp.c
-@@ -428,9 +428,53 @@ out:
- 	return ret;
- }
- 
--int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+int do_tftpb_raw(ulong laddr, char *fname, char *server_ip, char *server_port,
-+		 unsigned long timeout)
++#if CONFIG_IS_ENABLED(NET_LEGACY)
+ static int update_load(char *filename, ulong msec_max, int cnt_max, ulong addr)
  {
- 	struct net_lwip_ctx net = {};
-+	u16 port = TFTP_PORT;
-+	ip_addr_t srvip;
-+	int ret;
+ 	int rv, ret;
+@@ -77,6 +79,31 @@ static int update_load(char *filename, ulong msec_max, int cnt_max, ulong addr)
+ 
+ 	return rv;
+ }
++#else
++static int update_load(char *filename, ulong msec_max, int cnt_max, ulong addr)
++{
++	/* save used globals and env variable */
++	char *saved_netretry = strdup(env_get("netretry"));
++	int i, ret;
 +
-+	if (!server_ip)
-+		server_ip = env_get("tftpserverip");
-+	if (!server_ip)
-+		server_ip = env_get("serverip");
-+	if (!server_ip) {
-+		log_err("error: tftpserverip/serverip has to be set\n");
-+		return -EINVAL;
++	/* we don't want to retry the connection if errors occur */
++	env_set("netretry", "no");
++
++	for (i = 0; i <= CONFIG_UPDATE_TFTP_CNT_MAX; i++) {
++		ret = do_tftpb_raw(addr, filename, NULL, NULL, CONFIG_UPDATE_TFTP_MSEC_MAX);
++		if (ret)
++			continue;
++
++		flush_cache(addr, net_boot_file_size);
++		break;
 +	}
 +
-+	if (server_port)
-+		port = dectoul(server_port, NULL);
-+
-+	if (!ipaddr_aton(server_ip, &srvip)) {
-+		log_err("error: ipaddr_aton\n");
-+		return -EINVAL;
-+	}
-+
-+	if (!fname) {
-+		log_err("error: no file name\n");
-+		return -EINVAL;
-+	}
-+
-+	if (!laddr) {
-+		log_err("error: no load address\n");
-+		return -EINVAL;
-+	}
-+
-+	if (net_lwip_start(&net, NET_LWIP_ADDR_ENV_STRICT))
-+		return -EINVAL;
-+
-+	ret = tftp_loop(&net, laddr, fname, srvip, port, timeout);
-+
-+	net_lwip_stop(&net);
++	env_set("netretry", saved_netretry);
++	free(saved_netretry);
 +
 +	return ret;
 +}
-+
-+int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
- 	int ret = CMD_RET_SUCCESS;
- 	char *arg = NULL;
- 	char *words[3] = { };
-@@ -438,8 +482,6 @@ int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	char *server_ip = NULL;
- 	char *server_port = NULL;
- 	char *end;
--	ip_addr_t srvip;
--	u16 port = TFTP_PORT;
- 	ulong laddr;
- 	ulong addr;
- 	int i;
-@@ -470,8 +512,7 @@ int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		arg = strdup(argv[2]);
- 		break;
- 	default:
--		ret = CMD_RET_USAGE;
--		goto out;
-+		return CMD_RET_USAGE;
- 	}
++#endif
  
- 	if (!arg)
-@@ -501,49 +542,15 @@ int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		}
- 	}
+ #ifdef CONFIG_MTD_NOR_FLASH
+ static int update_flash_protect(int prot, ulong addr_first, ulong addr_last)
+diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
+index eeae2fd65ad..224a229866b 100644
+--- a/drivers/dfu/Kconfig
++++ b/drivers/dfu/Kconfig
+@@ -11,7 +11,6 @@ config DFU_OVER_USB
  
--	if (!server_ip)
--		server_ip = env_get("tftpserverip");
--	if (!server_ip)
--		server_ip = env_get("serverip");
--	if (!server_ip) {
--		log_err("error: tftpserverip/serverip has to be set\n");
--		ret = CMD_RET_FAILURE;
--		goto out;
--	}
--
--	if (server_port)
--		port = dectoul(server_port, NULL);
--
--	if (!ipaddr_aton(server_ip, &srvip)) {
--		log_err("error: ipaddr_aton\n");
--		ret = CMD_RET_FAILURE;
--		goto out;
--	}
-+	ret = do_tftpb_raw(laddr, fname, server_ip, server_port, TFTP_TIMEOUT_MSECS);
+ config DFU_OVER_TFTP
+ 	bool
+-	depends on NET_LEGACY
  
--	if (!fname) {
--		log_err("error: no file name\n");
--		ret = CMD_RET_FAILURE;
--		goto out;
--	}
-+	if (arg != net_boot_file_name)
-+		free(arg);
- 
--	if (!laddr) {
--		log_err("error: no load address\n");
--		ret = CMD_RET_FAILURE;
--		goto out;
--	}
-+	if (ret)
-+		return ret;
- 
--	if (net_lwip_start(&net, NET_LWIP_ADDR_ENV_STRICT)) {
--		ret = CMD_RET_FAILURE;
--		goto out;
--	}
-+	image_load_addr = laddr;
- 
--	if (tftp_loop(&net, laddr, fname, srvip, port, TFTP_TIMEOUT_MSECS) < 0)
--		ret = CMD_RET_FAILURE;
--	else
--		image_load_addr = laddr;
--out:
--	net_lwip_stop(&net);
--	if (arg != net_boot_file_name)
--		free(arg);
- 	return ret;
- }
+ config DFU_WRITE_ALT
+ 	bool
+@@ -20,7 +19,6 @@ if DFU
+ config DFU_TFTP
+ 	bool "DFU via TFTP"
+ 	depends on NETDEVICES
+-	depends on !NET_LWIP
+ 	select UPDATE_COMMON
+ 	select DFU_OVER_TFTP
+ 	help
 -- 
 2.53.0
 
