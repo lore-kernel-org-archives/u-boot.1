@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EF62606A31A
-	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 16:07:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5820606A31A
+	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 16:07:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ASZxOKZu;
-	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=QGRpv5s7
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zOGYj7O4;
+	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=KWuvS4xM
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 22A8980E12;
-	Mon, 26 Oct 2026 16:07:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B8D1E4069C;
+	Mon, 26 Oct 2026 16:07:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DhahwwHuykiB; Mon, 26 Oct 2026 16:07:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0209580DDB
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793030833;
-	b=rMQruUn7//xHw8QkNoby+Dx/qqyABxu88cV+UrMi2bkBtMxOIIPZdFrl9rHYRBcHF7m7
-	 RLltHi7HOVzPRNhtJt5Po6g/GqiZFDmvPYzKBuMzoQsJoIHQWakA6wDBtC8KC58jgagZl
-	 T+wZxXlhkEpe6/N/YOMsZEwG0B3fGr5rNjm97TLo+WyrYM8LfRuvSshNyvvltjeZndsJ/
-	 1+zoTTBBsSfuJsQJ1cDiJAZ65xl152+2JkeJEIpGyZmtr83kC5jSv8UDtUIZZEHYc7qaS
-	 YxHwQXnkTmO0XLdBfCkzrDgAQEp9YdQu7h2JfdF6n2MVCwCm3rOo87WJw6zQejeFW3Q==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZYA1jzwbWN7G; Mon, 26 Oct 2026 16:07:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 14C64406E8
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793030839;
+	b=IG8rgn08hBJibbsxLt1qJFrghRGkhwLAA3tcWPCmzWoTSXTOwCL/4FoNPJKge75/qVFL
+	 Eypf7ZPWyuOkv8icnmF3om1wrfMSnQFIK0wnNIrHe0kvT3invmMAtdu5kixHkKbxVEvYA
+	 JHcK4CMQSdfY+OdRslDMH8EHUW1RieXyYnI+dglCpE4Seqd9HQAC4fGg3UNgst9BleEpf
+	 BdeNfaniXDoqC4PdxxpqqTXFpgbHO5gtDcSicKbMkWjo6/avl3QOURCdpjqNkSBLzUOqj
+	 jTQzvI0MCgEgM15U1qSWbwMtLcQFamfFseBLGLYoBGYZ5VAqS7aJRnEAcRTvgsO9+Yw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793030833;
+	c=relaxed/relaxed; t=1793030839;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,152 +32,153 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Date:X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=rYnr8nOdo/i4lhTNFq1rkYS2msOuoMfL4eU0c3n3FjA=;
-	b=Wwrk14pboiemuoMX677VR1kxB8UmTxL3miCimBdOy8KG2tX98cS7INYpM04OrN8jBoLL
-	 hnid6PB2G7Ku/9ekYB6sKAS5vvTAkwRmImWAHmmBI+a4ZaZgysZP5F8LVXa7LMv3CkdBl
-	 QghsXA1t5M7op41e31Lw6UlN1GBpjuLLs5g4mOfIqlAvsN8flbJVMcmGGqFa+IlHsWo2d
-	 FIBriFBiuqc/bRUooqdgH4EgwoJE9lMsZRPnl+5o3FsosDcIJ41sL8z7aPe0mAtj1v+mc
-	 /7iUYLPHLFw8skcD1ZMGeoJZI75Jq4wD9xRVh1KwlLGs/nYNsHiDry1SDOwxJvgcwrQ==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
+	bh=GfwG4n8gz2snVC/o1cZbhD/n54XLzw7zOPfHrHhel9E=;
+	b=ek0hRCeblpYveqz34zZPX4SubrfZoZzZtBQA5gt426E5NzH2L2hiBwhbFwq+pOFgmUzl
+	 ZG9GtXH8Irw20rvJr5c3MwDOGuyOCL6SwMCeCjlfFn/02d6M2vuk4ew++T6z3rcZ49/df
+	 SnlB1R+KcD0fA3bHG5tujxnusSjtoGy69/2CeqrP3nNnP+ojyUwKPVJpAOemWR6MOOsIv
+	 3Md/zSKt3dZUoqQ54m68jyCb3eQOnon72ROdP2Osi+S1qrdRTrWsj3OfvD2uZ+QrADbIL
+	 61dsCuHZR6jWB/KKy7KUMSxWAAnZN775dUDiONeNOE9ncg0vldVIrstWteH35xM0alA==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	dmarc=pass header.from=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=KWuvS4xM;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793030833;
-	bh=rYnr8nOdo/i4lhTNFq1rkYS2msOuoMfL4eU0c3n3FjA=;
+	d=lists.u-boot-project.org; s=default; t=1793030839;
+	bh=GfwG4n8gz2snVC/o1cZbhD/n54XLzw7zOPfHrHhel9E=;
 	h=In-Reply-To:References:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ASZxOKZua3YnyOih9wtiC+jg96ZPXfxo+wBObxbt5qmMJMv6CBjY13O9LvBSenwBh
-	 KqY+d57/dyZeis1QDkpcqYY2HJjGXe+3hfN27OLd8t7RjDbLxdcK+yGAHTkK55qGpU
-	 IQKyhXJnXqB6D7/dltJ7Pnglh4ZVgzIzhk9A3RZHq4vi0VPem8iALDuwG3giyLfohM
-	 cBa/vQoaVjeSb8yuPZjC+6r57irFt53bAbQvV1YKy/pbzRGWQzzPQgumz5MltSTo/7
-	 SqesaI4i+StERQ1K4U8vL49cqxfNdcjR6OpGlPmn1MFvnuiDzxcyzYd218rppCcizJ
-	 jN2FhYEKWXf1w==
+	b=zOGYj7O4yGTTD+zpeU17p7ENFZUsyla3VeR4z6uUOo5V6B5wq8uJ7c30tP/ltJVCZ
+	 WYFb9b+4oB1ECuA3BPMG82xK/M1OUTExn6ylep0Q4gdFLp0jg+7YcNHiXY+bYXc4p2
+	 K1z2wQNsdj2/05NPnf4t7gFsUxULb26epc01biI2Ue+EG84BSxGJyfMRExdZGAtfRp
+	 ElbiGZOD/29aZ79wabVg2YZ2pJ6K30oIuUdpsjzAgr709JfPnefmNCzEiRLR8GTrxn
+	 lLCoLlmhGMrzwbTP4UeMoFgtIoX8f16dN9yDSq4gjUjfreMYEVoRnso9+5kyI9VPVT
+	 6taOUjAXRO1/A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0209580DDB;
-	Mon, 26 Oct 2026 16:07:13 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id C9940235
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:07:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 14C64406E8;
+	Mon, 26 Oct 2026 16:07:19 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6E8712F5
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:07:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id AF87D60612
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:07:08 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 6C0F0406F9
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:07:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HkvZjqpiIFno for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 16:07:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C296760603
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::534"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793030827;
- b=pOSDNtJ+IKrm7X0uY7bUVzBUtSyLAfwJoPbM2fvwNr+7rjmQyKd+aNAIHCTAfD4ICNHu
- BOlSWpROz20HnwhRL9ZrAqXN79/ZYihtHpo1g+v0xdWtltgjlLsWGDEE5PvKzzOEE/hTZ
- R1pJ0dtHqyyT+omnGZAWVJCjUQ9uCb/gvrGXvKfzZleL/Vec3hWidDENL05UVHXXiY+8U
- j6lvIQ+3YJCaACchCtcpjgwTHrrmk7Njon2GhzCU4rXVTcMe/v8FxkW+qLCgrYRmNwh8S
- 4nqHAVQjJeVTOOSRvWFbkELVv33RUab6zjO6UZ7SZZ4jsdb5LoJ8lD++QdA4aDUpu4Q==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id z_3WDxRcyUKJ for <u-boot@lists.u-boot-project.org>;
+ Mon, 26 Oct 2026 16:07:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org DF33A406E8
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::1030"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793030837;
+ b=ZW3e6//OXb7N/kpQ0bs7HdZQ7NWXJcEn0j7NIWD14LfD6krq1ctLFT2uzF7tJIatYrjC
+ 2ePZ7Xfz5f4VJZtPRFJxanoqpq2WXuOulp4xH5fqEVqZDYMNkmTypdTDFt9sbl7TR4oQY
+ r4hi2qB7qWCzb+EksotCpx6eIIZIFpeZiSEw51CVervVFgqVjOQYst+4GxH1nsVKjYRUL
+ Ys54aFjNMz/BKzBQkvUmo3IvJ7dYI2K0K6eYsGEdM1C5mfrQi7YSdDBiC7uEtmlQCz7JT
+ ahZd48FQ2moNk4WfEMiSv6e8+CtIJaA0Mlbom0x+ymeBoD92k28x0nrzkICkYyuMjIQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793030827;
+ c=relaxed/relaxed; t=1793030837;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Received:MIME-Version:
  In-Reply-To:References:From:Date:X-Gm-Features:Message-ID:Subject:To:
  Cc:Content-Type;
- bh=rYnr8nOdo/i4lhTNFq1rkYS2msOuoMfL4eU0c3n3FjA=;
- b=rVNkcNHroUDAn7pkoPW4vGUvT15gccyMr6zynwSBF4g3f1sLZPOhAfudN4e6/B+UG7hg
- yl+ciI6MYs/vQlV9iBRGMSyaI9pSMeGQYJDeICM70tD9oXU8iOLSNx4Vk+gQtsHTNwevU
- 6xOFxe9JJG+1G5dbqxUcKIGbsuoQDEVYZS3TvRaPcWq+Yicspy/o9Cj+bwKJ5SF10Kygc
- kd+lBNtGPA2Ue5MHH+sD9WKfrWtb8rDdAHwkc4EtIsiwawRgWXK6iVTeAV0k9Mt1i0VXc
- I+9i0TupZA2AU9hEYDSy7yNhXEze1D/4VULdW1MMSIF6b1WpZGod+GblN2xwjM7PPmA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ bh=GfwG4n8gz2snVC/o1cZbhD/n54XLzw7zOPfHrHhel9E=;
+ b=JOv49vu9wNH2CDPSiLPdPH2yintzDKe4nvxVrfdrPLcHoUamMQ/hv5o1pX9M5+j7wBE5
+ XYS9DEMiXK2pyTmIL7nwWAE3Y3La3cZvfH4gzvfxwkqMlGjdcFTce4udCAyOGFg5jACNm
+ DlglgWdlYPWFNldblHwfV195qMNohGpIJfCAyCqNcqATE1nE0ydVO9fCuJvUKZeYhBGBv
+ vu7cdE5NLTuA5DB6nH11YOgNT3r6v1kGVABosR4V9pTuJrkW3f452N6NaadrqmNBIcOwW
+ 6CcHDgszXJzTiunwLOc/mBFS5d/8vw3lZN4DILPwm1kI/3Gt14eEMgoC7DIYjh3W3EA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
  dmarc=pass header.from=chromium.org;
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=QGRpv5s7; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::534"
+ header.s=google header.b=KWuvS4xM; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1030"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::534; helo=mail-pg1-x534.google.com;
+ client-ip=2607:f8b0:4864:20::1030; helo=mail-pj1-x1030.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=QGRpv5s7
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
- by smtp3.osuosl.org (Postfix) with ESMTPS id C296760603
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:07:07 +0000 (UTC)
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-cdab8873d9dso374469a12.1
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 09:07:07 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793030827; cv=none;
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=KWuvS4xM
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id DF33A406E8
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 16:07:16 +0000 (UTC)
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-3adc4590de4so2184943a91.2
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 09:07:16 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1793030836; cv=none;
  d=google.com; s=arc-20260327;
- b=bVZ8MC+zhFzNTc5quuE8uEvM5QG20gpz1rYdOFq41AyAW+5GPSSA9UnwEfsAoj8Tfx
- PFUt2fd8PNPH2E0/pssjH+XMNZZIm56Em/weIxbNhA2fdnYNLfL+WVlxOf7lyNB5ZQTK
- BXsqljtbhJti99kSiFLVCf88BUwxr41XpTj/aoSBqTZy7j6IS87lHSABv1+5utJIwQMF
- +vhzj0QAYwLNeikvJsJblFaEHt2700Ik4Q/aqq31364N4rrLDzVixjt+Go99ggyGbNv8
- nSxqOj8RMlaYibnO5ooSraJGpmYMfVa/QWJbgf+CmunpkBOq0oAeSjO+ndQMJoo4TCnn
- X+jQ==
+ b=a/eyx5twiGnGTi85wi8wZ3TikQ4cQLKIcIzsU6FPh0rnz8oJ8djm2jyWX/TyCqwKD3
+ 8D6ES6Sf+phMNMq8h+OvzNgJfTanIHqLR63rowPV1Hg6H8IirQAWxTajN27gZVtxz1D0
+ 5DXmYaP4rNketdIwd2aql2Hj99fQO8SHwdaoLLKEqoh7eTVPyo2WxN5gLBzS0v7QQd/K
+ HA/f5MuXL+QbrbDQEqlRg5DiQwfx0Lk2J0by1dQzCu0bgGBxJQuMKh6gmaSViIQq1bO+
+ hwJM4raiVGFu64a5fxap4r9dh1W46w1PwUcIXQKUWAjuvbrIN1ya+Zy4cpF9RNR3vwxv
+ 5oKg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:references:in-reply-to
  :mime-version:dkim-signature;
- bh=rYnr8nOdo/i4lhTNFq1rkYS2msOuoMfL4eU0c3n3FjA=;
+ bh=GfwG4n8gz2snVC/o1cZbhD/n54XLzw7zOPfHrHhel9E=;
  fh=Vi46RdmyXd0SupGlsPtmZZi6NaJCBu3Vb80GVjkTlag=;
- b=CBzeM916EJCgORACU23V6KqPhQ+IlSbRBSlHs9MtaRNB+qe+m0em8X00hklXDtDone
- vykx6NBPPdED5blQ+AlM9rSXV5+B6QcSlOb3L03IOBD749FceBMur+2fNKXQCHVkVFZi
- 4XV5PPIry7frOjILPGvujFucfE+5Z55x7+3tyxJ4z+apDfsnCR5XqTGDo3XlKOl91ZBr
- rWu0yarCyqcg8UAO/zrruYPIc3wiMpSCFatyXbyk5VWK6ifTVUlDMnmollLi58qG57iu
- FlDOfvu2ul1s8PWloxrSvN3osoiMOmo/YbZaJmFemd4R1z3UgEPb4YAQZAQCySYyma7M
- 1fUA==; darn=lists.u-boot-project.org
+ b=UOZlHV9WrL/5FML8jC6u6uynXhc3ByPFWyPzeNOLqAUX/IkVWvz/nH2HEkb22CBirH
+ x/OYabwyhlGwEdtTKzg/YsGaVKtaXmKPDZ/RhxKq2SSWt70z/wdJQ3lSDZCWFk6fnq3l
+ O7osa8qnZ8La8lmlsvu0V/aWH8d4tZBQO7WlhluobmevfPjBNgjuckBeFX91dFGhSisl
+ mG8RnSo7BCwAcDUNptybAaqDvxLUJUcGpqm5Hv4g8rZslVSEF4s8v9bHGoXwcOthU9sx
+ lLjKZNymFxxp/N2VQisbIH5k7x3uUtnu5K5Yl54NRsR18oCznP+Q5KG9pGZFBN7+me4n
+ qU8A==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1793030827; x=1793635627;
+ d=chromium.org; s=google; t=1793030836; x=1793635636;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:references
  :in-reply-to:mime-version:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=rYnr8nOdo/i4lhTNFq1rkYS2msOuoMfL4eU0c3n3FjA=;
- b=QGRpv5s7eHFMgOcId0lPvALC3fTBr8jGMmjEeKCa7PwZo+kYo+MiK1QwHpB24RXbhF
- KUdajp3h0YJF3AKvCfPUCTAHA6cxNLwGxMFI4felWJyxOKZGGS0Hp6JCD687GAglRIWl
- Fnysv3l4h172+19c2TZ7a9lhnEjtUdDE0LZcI=
+ bh=GfwG4n8gz2snVC/o1cZbhD/n54XLzw7zOPfHrHhel9E=;
+ b=KWuvS4xMCp2q6ycCHWhzbRgrvhONuVfGeerh/O1OoSFcqLy7bOrhPDAKQ343csAQ3w
+ d6pPbm4JfY+g2JOUUtn8LRSTehF2bvMkkwgwt2PzJYb/feZioDBACclUx0o9jG9XKQ11
+ YI3h35RG3GjSLJ0jYQ9jIpNaNuiTJ9TIi/Vi4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793030827; x=1793635627;
+ d=1e100.net; s=20260707; t=1793030836; x=1793635636;
  h=content-type:cc:to:subject:message-id:date:from:references
  :in-reply-to:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=rYnr8nOdo/i4lhTNFq1rkYS2msOuoMfL4eU0c3n3FjA=;
- b=XyM/VCyu6+wPxf7l9sjThfHjos9GtEyNN3u/T+G5v40+QsdZ7nTjZlZoS4E6E0qqBd
- QFBrjmI3ztC5Uaj2ROPklmKnpG0/XzSkrJbwH/0LUKWYH1SNtzLZnALM7wyjcR0shzA+
- qESY+4Iijk2cse0u/+YewywTbylLNOoZeETl0n1vGpQSQd4mz92o/2H+o28p2jl2PaUk
- 35aBEIhpna+4V0xCfzrSkPpLrMEGFFF9x/Q0IaMyrgv2KAKjWBWF6X6KRjUAdv3Mlnoi
- ZrUQfd1m1zG9MS1yEVHLOp9R13Sb9OmbwVR8wSGyIGjav+iV12CeQfPPkjl1UVGCpKWR
- DCTw==
-X-Gm-Message-State: AFq9FYLOrlEo8tVLzF9iyxErFftLxAwr+bfeILgYo6vAvUDvWOaKQ1ve
- FvBrjgzs95H8PRlJ4mnxKp1qQUylOC4O4VuKROKjzC92hmcAybb7Z/y2SSPoVa/r3SumIxIJiTs
- KKepWBrF48VsnV/Qs1CT9PB2i2S7EvddH4G4DT6jP
-X-Gm-Gg: AYBFou0JlMChpGveOy6wxwuqdVYEbwahHrV9i6gQ1Okfe3bDwCuFyDWrJf0old7q65+
- IFRQipt0CimVuK4DdyyPgEOn6QgS7yYiDjSFZ2uRJLLgkChB6kYzXXqXWWs0NyLG184YOXCNMPY
- D+m59kwOWi3Tn7CwtMn2KqOOTICpLrScmDjwxWN+pQy9+5mez03wgwLW17DPIVWaX7vI8A7gDZd
- uwquuPNwUPMRbc8aAhwV62hVzDna+AaflVZGq1WvzusogzqY2Jfpq5FFKfwn2WNkVsd+MOXF146
- 4x2p46nW+sPwjc5hFIbjlZYdz5Su310J3vlzgySZoFNwgE9uzW81f8UBAhOrQ+s86SyiTBqEq5G
- I8h+Qsz5/WHqUziNHz6iOImWDm0sFfZv1Cdw=
-X-Received: by 2002:a17:90b:53cf:b0:3ac:a11a:7c84 with SMTP id
- 98e67ed59e1d1-3adeb126f28mr5358434a91.65.1793030826622; Mon, 26 Oct 2026
- 09:07:06 -0700 (PDT)
+ bh=GfwG4n8gz2snVC/o1cZbhD/n54XLzw7zOPfHrHhel9E=;
+ b=kL6JQ0QVPaD9ihhDiS0FmSfk9Gozg+tVSl4LofnUjhvcDoluq2G+9oRuhuYwdpE30o
+ 8IaKeBsIN8nwnI34+yITmdyCXNBm2pNRCIsD9EYJlsL4aSytp9RG2GcWcOE6xRWQbpua
+ PbM4UeZI1gNFJfl4lMXtV6W1RM88fiKyD7yKv7hCxFaJ/kC1OrpBST2AlHLai4Ui7VBA
+ mvTFw1zOostlZYPq9GbPsYcKQMsKYuoX32KkFH+vetZFu0ExlNtkWQooswJipyU3raYM
+ D/ZwBpbnoKxvdY0Oa7xjRGvwYy/2LP9KTsCueBON+/PjgvV6Z4dNYAUEo4x/nWqLt5mQ
+ eSGA==
+X-Gm-Message-State: AFq9FYI0KxLV581HsO7Z2Dt42zgBaAruH0X8SlaFf2GAODq4qLmqAr6i
+ jRkyOnQorfsS8DeEUvjyrHnSZKEVyc7CP+LzyxADpk7iWd+dJKgUex8Z87/MOpaSCfjklpsKVWj
+ T0pUN6NMAurezv0qO4IZhCU4cBh4l9xNXTIYvWoad
+X-Gm-Gg: AYBFou2D5EjWpS8A2DxwrQ8cEGzKX/eM4Asvx9qirSJ/Mw3THNdmo4GgfFgbq4QgWSM
+ xPFrSyBZSYFyISbCfExuqsN1MqPGLSi7eY0m1xzpIqU1bWUZ2VGCB94GBJC1uIeSNPdvdkzhLuB
+ D9p0beTbH8SM5tvHh/5bhAXJu5/YMS8t07423N/9GFcbqTh6kSHMLLcb3r1nudSUgQAWtgKH4I2
+ EIaSUeMf4x3cRCvzkB0HIlcTyyO2OTSI8Rv3rCIGio/BYHG2zlM1hO6lzPURcwixW0pUXHKc0NR
+ BR3c3ddcCsY154Xk+TGJYTlXk+WlyfgIR3kc/5RknqyPJGDZM+bXii7QvobBoalMf4g4xBB2DGd
+ 7dnHCqFybKDyk2pG/iRy6jIzPmtPlmiKSflvSItq3uWBQAx9qM1xqHMUbbQ==
+X-Received: by 2002:a17:90b:5744:b0:3ab:be66:ddbe with SMTP id
+ 98e67ed59e1d1-3adead577e9mr6146500a91.28.1793030835959; Mon, 26 Oct 2026
+ 09:07:15 -0700 (PDT)
 Received: from 415065739583 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 26 Oct 2026 09:07:02 -0700
+ HTTPREST; Mon, 26 Oct 2026 09:07:11 -0700
 Received: from 415065739583 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 26 Oct 2026 08:41:08 -0700
+ HTTPREST; Mon, 26 Oct 2026 09:03:09 -0700
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20261021-rinta-watchdog-gettimeout-v1-2-e7f3157b8bab@nokia.com>
+In-Reply-To: <20261021-rinta-watchdog-gettimeout-v1-3-e7f3157b8bab@nokia.com>
 References: <20261021-rinta-watchdog-gettimeout-v1-0-e7f3157b8bab@nokia.com>
- <20261021-rinta-watchdog-gettimeout-v1-2-e7f3157b8bab@nokia.com>
+ <20261021-rinta-watchdog-gettimeout-v1-3-e7f3157b8bab@nokia.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 26 Oct 2026 09:07:02 -0700
-X-Gm-Features: AclHuK9Myn8kXberunBNonoiX5X7VD3rFRk2DtY63ecAI5fhf96xnkVCFzxzk-4
-Message-ID: <CAFLszThz5iM4Qn78NOyVedon2jrDUnKn=0hN++YcFd1759tnPQ@mail.gmail.com>
-Subject: Re: [PATCH 2/7] watchdog: warn if programmed timeout not longer than
- servicing interval
+Date: Mon, 26 Oct 2026 09:07:11 -0700
+X-Gm-Features: AclHuK9OjZUAENnLIZbmtkXtryLe4wJ9DaeFfV0W_MuNifXKxQcnPbFSqi5JMQE
+Message-ID: <CAFLszTgd1S5B_va1yhA5c0Nh3Gnv221eVxX2BwfBpeDOw5UxHg@mail.gmail.com>
+Subject: Re: [PATCH 3/7] cmd: wdt: add gettimeout command
 To: juuso.rinta@nokia.com
 Cc: u-boot@lists.u-boot-project.org, Stefan Roese <stefan.roese@mailbox.org>, 
  Tom Rini <trini@konsulko.com>, Yuri Zaporozhets <yuriz@vodafonemail.de>, 
@@ -193,60 +194,24 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-16.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-11.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 Hi Juuso,
 
 On 2026-10-21T08:08:13, Juuso Rinta <juuso.rinta@nokia.com> wrote:
-> watchdog: warn if programmed timeout not longer than servicing interval
->
-> When a driver supports the get_timeout operation, wdt_start() can print
-> a warning in cases where the programmed timeout is shorter than or equal
-> to the servicing interval.
+> diff --git a/doc/usage/cmd/wdt.rst b/doc/usage/cmd/wdt.rst
+> @@ -34,6 +35,9 @@ The 'wdt stop' command stops the current watchdog timer.
+> +The 'wdt gettimeout' command reports current watchdog device's programmed
+> +timeout value in milliseconds when supported by the driver.
 
-Please can you start with the motivation (the board resets
-unexpectedly because the watchdog expires before schedule() services
-it), then say what the patch does in the imperative, e.g. "Print a
-warning in wdt_start() when..."
-
-> diff --git a/drivers/watchdog/wdt-uclass.c b/drivers/watchdog/wdt-uclass.c
-> @@ -178,6 +180,12 @@ int wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
-> +		/* Warn if programmed timeout is not longer than servicing interval */
-> +		if (IS_ENABLED(CONFIG_WATCHDOG) && get_timeout_ret == 0 &&
-> +		    timeout_ms <= priv->reset_period)
-
-Why only warn when the driver implements get_timeout? Otherwise
-timeout_ms still holds the clamped value passed to ops->start(), which
-is the best value we have, and the problem is just as real. Dropping
-the 'get_timeout_ret == 0' condition would cover all drivers and
-remove the new variable. What do you think?
-
-> diff --git a/drivers/watchdog/wdt-uclass.c b/drivers/watchdog/wdt-uclass.c
-> @@ -178,6 +180,12 @@ int wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
-> +			printf("WDT:   timeout %llums is shorter than or equal to servicing interval %ldms\n",
-> +			       timeout_ms, priv->reset_period);
-
-The message doesn't say that anything is wrong. Something like "WDT:
-Warning: %llums timeout is not longer than %ldms servicing interval"
-is shorter and clearer. Also, reset_period is a ulong, so use %lu
-rather than %ld here. Please update the expected string in the test in
-patch 7 too.
-
->
-> Suggested by Stefan Roese on the series "watchdog: report effective timeout"
-> [https://lore.kernel.org/u-boot/20260823071511.687900-1-stefan.roese@mailbox.org/]
->
-> Suggested-by: Stefan Roese <stefan.roese@mailbox.org>
-> Signed-off-by: Juuso Rinta <juuso.rinta@nokia.com>
->
->  drivers/watchdog/wdt-uclass.c | 10 +++++++++-
->  1 file changed, 9 insertions(+), 1 deletion(-)
+It would be worth saying that the command fails if the watchdog is not
+running or the driver does not support it, since scripts may rely on
+the return value.
 
 Regards,
 Simon
