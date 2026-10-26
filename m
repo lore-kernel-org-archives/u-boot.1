@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C3E8606A31E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 12:19:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 803C4606A32E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Oct 2026 12:19:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=s//R5obN;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=d1CCFMfv
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=aryU1gJ6;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=bzxniZN2
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D203D80C11;
-	Mon, 26 Oct 2026 12:19:00 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D782740666;
+	Mon, 26 Oct 2026 12:19:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cIOzhRIoR6w3; Mon, 26 Oct 2026 12:18:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 494AF80A91
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793017139;
-	b=aRIlqOaVjP5bzmw4Mow9HXivsnBfHUlctdanwwYdKNw/sx4TpSJ89HCzYngHrsuxV2gj
-	 mAPGHDVmUe/heD6XtonpHWElD3408vBCSiYGtZY/tFRhyT9tWgqvJKHwdHXF61NvSYa7F
-	 3FvZSjJta/9xQu5/vDeDQMukNFaShEluLFbFXdnvA5JsMmRtaqforPP4MMPVXakiT3YR2
-	 eajFZmjAqNrU3xUIJLZc63cY+xXv0NMQFF9Vb2FPjRRsy2ZEiD3uoeoIw0gwgF07Zh/5O
-	 mB7Z0Oo3lUyUYzB93RUnIJoQotArky1Oe5Xsy6JwNAwW9LdalDYgzqr2BwqvyudcI0Q==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XqUNdNpbIGQa; Mon, 26 Oct 2026 12:19:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E8C8540580
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793017141;
+	b=RyYWYBmNsHc+1FTTHx55EEEpbgGkgDtnDoGb2ymgC7MmDqcopUA1CBKfI2ZQKP0frdrP
+	 5TjF+WQAAZl/hOyZ0A2W49/Pa5du2CqKOsCGYoZRcxrowod4o3yGyXQdjFzHrQo3zWCpo
+	 7R9jlsVw35Tt1W4VoajPcKb12Ufi1hikoW5dGJskDIjwADE+hKI8JtX48UEKUj9WSueN1
+	 3vX0A3R3DiUg7NjgO2LR3EdHVcqc2nLLeWSp0nNEe4v1Vn9OD/Z+s/10Ze6k9TJZFGLxv
+	 ubxhTHXceQmXpcf0hvVHaeD6e9YFV+59WQTEmrod9ZQ5tcrpbE/hAW+eq77UwFYIeJg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793017139;
+	c=relaxed/relaxed; t=1793017141;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,137 +33,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=ssgvAuDc72p1Rw2ab1alYH4XHKJ+huby9vbdR2/oEz0=;
-	b=qL/s2dajkd1Oyw5ENeo/mmH+TIOB6zwnbPDgLL/NbjYTYrJr1iDu5WNd8tWNNuxF/5yE
-	 y95oxSwff58PK3sS3KzQrfUzkGBLHLsTusQXV4WLFfFLK6bmF+AtiNN3LIu57K+0CyeoL
-	 mRcpO+XyzA98uP6R4aewYhoVntswAXj6ElGuUTuVxkcIxiNjqZ6LzZ6J5MIvkoI/+whbh
-	 rESrGFYP0/OhW77rUqnN0UNXvxBe1d6hqgytJY0Udi6hpLJxMFEimNZisT8ekYaH0Jt+C
-	 bDc/Eplb12J5fCcpo9gJcI18JdR9BI2GBAwS9ApzBa7BiRmfb4sgPKZZvNQ4bWMIEJQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=E8vrkaHMuVfp7AtQKUXrpTOpsnUpPAULVgTzWQifi8I=;
+	b=d1fYmP28SH7DDRzLCKWbUfmz1LRI/q34PnwcrL0/WRSQdWmblK8mVCBs18niXt56vG+h
+	 2fDeXszTNOFLgZoam7ReibZjxJAWUYCqk6LCAdLd4sQGnGUAgbhwVvgD0KS5Rh1iFVU9j
+	 u/PG5+pFD3xc39hiylxLi3SCz8cIYQcULv0wiXAo0kabuZTjRfdAttZF5hHmDqvyc+nDQ
+	 IMWhh4bu0iccFqxwmr+iYM6bZMLkFPm9oCwTWiS7IUp1JBaPhINij0dwvvkifXhJ4juXf
+	 spogss2yMYEXkAa43lrmJYTKcw9ebAUS/LgtZ5xakt5yQA6JE25SporaL5s3xrQ27tg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793017139;
-	bh=ssgvAuDc72p1Rw2ab1alYH4XHKJ+huby9vbdR2/oEz0=;
+	d=lists.u-boot-project.org; s=default; t=1793017141;
+	bh=E8vrkaHMuVfp7AtQKUXrpTOpsnUpPAULVgTzWQifi8I=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=s//R5obNvg5/j1Pzr0vbaYIXZ4GA8Kcj6mpfUEh39cTo7pAHTIdo+frB09Emi7V7m
-	 fRNIGmGbVv7lB1EuQgKQkEfItFL0dO0jFG8Yg6lciJbOZk7fE32kyHWi3CkHqlIJe9
-	 VsH2Ne7pdy5UElTFrdO/t5mQuvMBXCvdZbVcsVfOd6F742tZhgOyKVRGFe3u+BACfK
-	 8LHdprc1Nhf9JJtrclnOU+RoTMOfsmB13is3zPmPsLwRdq+Fxc8xQPS6JTmwevBGmK
-	 6TT8xxETyLJQ3lg0k7f7N4Hecu1e8Ujx7pQt5ICaqlnW7GMztUM+hyCywxOrDDvPL9
-	 cNnJCeO1fBN0g==
+	b=aryU1gJ6Z7QDfqrHac4pAgFInKSC3fMQsqthvTVqV57ZSePNzCqKbfg5yUKbUEdtt
+	 wQU/5Fmg//WMYzH3wdbnmhZHwVJH5rL/F7wyWJRoSWzrn3ZjT/WA5/lwVsHqNc7EHc
+	 oy6jAbBWCzrjE50KbM8Yy+pW1WMAMtuHhkNoWUYsSIxlmUVWRu2WU8QTBnm58PHIZm
+	 HJqkMbd0DG3mgwx5m5TERvDnCaD24BdOIl5FzfbKPGDQh9atD5ZW1Aa4LbNt9BPa39
+	 OAbddktH6314m29t8SV5gVDmombFXdpclVOphGm0bRkzS3ml2ONRWfzwh0MrBZYzIH
+	 jwd22Qfwx415w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 494AF80A91;
-	Mon, 26 Oct 2026 12:18:59 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id DCC9143
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 12:18:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E8C8540580;
+	Mon, 26 Oct 2026 12:19:00 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 60734356
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 12:18:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CE85D40072
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 12:18:56 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 4647E60604
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 12:18:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oTZUgmZnYntX for <u-boot@lists.u-boot-project.org>;
- Mon, 26 Oct 2026 12:18:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 3E79A40062
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::52d"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793017136;
- b=DNOGEukY9eSh3YOOForywIGqgcvP0fB2RcYStotm768MSECiiQxQvrVjhcrXBK9gXhsN
- +c138ZPjGXXDGxloeleF7P/P7SSyTsdJEAgVMy9SNSJb1RFLwWD8saTFzXp5WuR1y7TSz
- vg2JlT8/MwM5HlaCfiXv+1KPJtdEny4GM45+ESZbrE+gDugkLz7H+rHXaphd+m6xEYnL3
- ctCtRcZKQLQQwM/+9zWmKA0x25xnE1Xz+RchTz02Bad23AIKhGHSG1wZGXpBN4dKN4jul
- QZt7peintSwmdBERUBydJ8TeUiruL5KULpE/bSDkfG64gGsnfWGW/Ypk/nfUsDvovZA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wIYgr1Z0v5tS for <u-boot@lists.u-boot-project.org>;
+ Mon, 26 Oct 2026 12:18:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 31A85605D2
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::52f"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793017137;
+ b=LoUHub6tEvlgXzJcx9Vv3x8k2JV3H+fgyiVRPJnP+gQD8kO2c8r79/25NIuuv6nqr0zn
+ Zke7jtIgFNpCIXA1ebODxMJaxkEn15jlvagS/J6fUmicn7N9f5uFkFgIoS0HkyLuGPYzH
+ EXmCK54cidlUo+Jc0uBHciSqCACtkiU/hDvU0C6GTn/I8b1lkmo3wbbJDFtEOmnthhAfC
+ ijIFJcorGr9tOSIQr/bjhfmfa7LYIgM7WEaZVfAXIQWn/35ld15SQ17ync0vIdozjuykq
+ C5l53fXLnHFx9TpYAcfnubONUVFbHeN3Sppufj4sXtzBLN2mm3Rr1VuQhAoETH8Fllg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793017136;
+ c=relaxed/relaxed; t=1793017137;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
  MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
  References:In-Reply-To:To:Cc:X-Mailer;
- bh=ssgvAuDc72p1Rw2ab1alYH4XHKJ+huby9vbdR2/oEz0=;
- b=cvR4fm+VVHH/wz4BRFGnTPNAijAxeVIyJMYj3GGt+bzjpiJUEL6dGSXal9vDPY7GNalj
- 2Z22uBKY29zgKM3HaM5ZOwfxqPZ/I+1YIhUJHP9OAfpoPCxVgufRHMzwp+7Cml+vf51Tt
- MuIoz8BzPamMtz7SdPxQu1e9jkmIfi3pxAIjVsig9Ud/rW/8u2t+9+zU312GDKpJjmLUU
- xmize7qQJtPeoTEmv1WQQnlPrA3q+0Pkg47pGbUaamGsTTOi6JoPyvZR87Fmu18MJc+Ms
- xkYZp/0w4K4/ZsIPlTYsCyRpmRkHG2aRWusB8SBeEkUZHmJFp5XYG/xdpB/5kmLN/qQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=E8vrkaHMuVfp7AtQKUXrpTOpsnUpPAULVgTzWQifi8I=;
+ b=cd5Jyu4JvGXwcfY+g1YvjoqGnurunxeR+AdZWQMx/b5sF4Rl15/1mApfljhQyTzDPaUL
+ ZXPXNNkRzKfCoH1a6gF9lwM+tq7ZnAuuaY+TYO6zEswNizHjlBvY/bafz+G6SgV9afNsQ
+ IwaED5nG+cQ1Oe7j7h9ecPbnEikJD41XOoZtenpPJwKE4RgFZnJxt9kumA40luLHwV/JX
+ xauQwLAfegYWerR3C8El7cqzBcunLkPFrJDOZLhTdXVPlpCk1m4JbYY12IDlzRbhjGhcl
+ 510D2lDp/gnP4q25HJDXB6lteY9av8Gty8crI9+rC8x1NQ7dYMvoa5FiSsUBHjm9KoQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=none header.from=baylibre.com;
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=d1CCFMfv; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::52d"
+ header.s=google header.b=bzxniZN2; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::52f"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52d; helo=mail-ed1-x52d.google.com;
+ client-ip=2a00:1450:4864:20::52f; helo=mail-ed1-x52f.google.com;
  envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=d1CCFMfv
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 3E79A40062
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 12:18:54 +0000 (UTC)
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-6b1dae0febeso4106416a12.2
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 05:18:54 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=bzxniZN2
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 31A85605D2
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 12:18:56 +0000 (UTC)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-6b2237b596cso4447992a12.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 05:18:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1793017133; x=1793621933;
+ d=baylibre.com; s=google; t=1793017135; x=1793621935;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ssgvAuDc72p1Rw2ab1alYH4XHKJ+huby9vbdR2/oEz0=;
- b=d1CCFMfvZKxoqIV5o5RD1ZwFfBZgQdTVfLQxDzf/MtI8/C9eb1BDWjfYU6lIDUaAIf
- vnC9gsbhhBwAw/oe2VH0f2VdyZhoyeyHT/bNJQ2VwhpVgid/Po/tqntnuDbyOybvG0ZL
- sR5igJ3F10GrvyVyfiA3nQ9HXB51E0xHcioC1UjWfelyeBv65YTLJdkpO/ktYQgAaHNK
- SrAKWzxiJcZ1UAcoEkQ0U3M7fFthpiJ8OecqoxeCO9Nf41oClPmvH8EUwhBrfNvK0VlG
- 0eCbjL4BJ0tXToyYSErwa56qsUWDB7EdT8BqD7MhBB3bhR3LMNnhdvYKPRwb4yfyDCM3
- mXFg==
+ bh=E8vrkaHMuVfp7AtQKUXrpTOpsnUpPAULVgTzWQifi8I=;
+ b=bzxniZN23IxxKkJz1sginGP40wKLVgnN9NvyJzazXqmjcQHbxhWNvXRF5EPR8ac8mH
+ IeX6VxK4LC7ZY8c1CkgBmLhMAjiLgjYfZcYAn5UL1HmajxlrJegQIo2s8ZHOGhoHA43b
+ unyHhvg32LQlzTnJ0BwMaNkXbohSFOwTiwtb+5IFZREIEw5Zm0fj5tKCfoCjxfdHGNcC
+ vo5AfYLDdRz6RVl2Gtf0xun9kYuviQW5uO3bV759+eNiHoC/cpW3Z0i90SMs4Y8AI06p
+ FkkHk9/dA/6GrUIP2PLTwD0XFV7d8UBYxp15P8YrIhHVoxAE96T/fUWrGil0Pndw7vIE
+ HsEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793017133; x=1793621933;
+ d=1e100.net; s=20260707; t=1793017135; x=1793621935;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=ssgvAuDc72p1Rw2ab1alYH4XHKJ+huby9vbdR2/oEz0=;
- b=CH/fqDo8bYe96cM6YdD4vjft0Xj2S2nPD39ugcf4EUUpd4igrPtM5XsRSyawPmcDZr
- 1cdf2YfcGoQ27j3Mu0cvFyvmAjPEMIsezAyZf0zOW+hEO/2YyR1SJYNPFImMb/GWVqv3
- Esx9xP+KJspHXUROfSCj7M/ma+HB4o/Be2sS2yPVkaPMeAiWkbadAiu3ut50dNPHU1Zf
- D1SbasxAd71oT0QqJgwLralPJwUevgkTBbKSz5KR20iIIqxCcmW8BgiHYQEuQqKimqrG
- F8k3XwouXIgAhqdNGIgwGG/wEm1XnlQSD2LX81eOmOLlqhtSTLL3BGmJDVV6xc8odFyg
- UkKw==
-X-Gm-Message-State: AFq9FYIjC81kO6KRmRGfXIbUWQQMSBktjY/2HxkXuSLM50K4ioBSC9PG
- 40+KLorMNl9yW2aEAPtTNJW9i+JEQhJqQmKxizmEY/TIvEFQUV5jqNWfyV5W2h3poBw=
-X-Gm-Gg: AYBFou3SHvfEwWM6EvDvjxTc0hFsMesGYZsWXJRGlS/BPqgtmmVTyo/YBNZGdjIWmoj
- hzZFfmijVzSMe/ZpkRty2jvK7ftTcu60G9dCBJjZ2VIJGzLcgEv7eJCrdPf9cgVhQvWYXpur6N3
- tXBd8VYnxd4xXXg4iHqQHyyPriv6WMTTRuNiN8BdZ0VzPmh3PEjUWUvR47KoXpZF4b7aI9R9ZXN
- oulwRnAWfmsKAP6tLW8JOPTYXkw1ukwkm0WhCIk9qJlouIgHCYD5KKJeZ33+ls83OZYjc6cVGDB
- DNePdXjXOgiOpqKv4PlOx7dudTOZZYTCFQuFQvBCH68kRi8o/jNdWE+yO4LLEELse2yITyg5SaE
- tjgewOeF4QgHuKwqkVTzi5crvubO75BvV3K3nfsrmyeVcXumMRB/LsxiVZAfbsEOcRLJJLHp001
- xDL58iQGrzhgWDx0jdcR6K7a8K87SqOE9itK3m+NG1fqeQVOX/O6mYiKitrm5DFR7yxpoP3ej0k
- nFY6hACgZT5r7lv3U+YuhC7jhd6wQsE95RgZxPFYFosoq5A6FONAJoIscF3G/2jaCX6bKyjwqMT
- q4p0ZL9kWIETsAG3J3ziamoZtYaWtjiNuX3pG2TwkvcOlxPhdbrbFYaW92TZv/e7efUdYlcK
-X-Received: by 2002:a05:6402:15c9:b0:6b1:e474:e0e2 with SMTP id
- 4fb4d7f45d1cf-6b4430019d3mr5147079a12.43.1793017132752; 
- Mon, 26 Oct 2026 05:18:52 -0700 (PDT)
+ bh=E8vrkaHMuVfp7AtQKUXrpTOpsnUpPAULVgTzWQifi8I=;
+ b=yQA4VdUx3Y0PU03J6LfG+zmX+0mfzBGZduBnTHTHNkikxaOJj5iFofIb9OymR668tL
+ vTsn2OE6R8LWy1BK3LVjJro2ShfsFSkhbl7kFapN3n60k2T79qWUthnk3REoarZOLn0O
+ jV7qgmsJoodfjtfNq5oxI8WvcH/bNzG0Vv3qok9vItpemrnZ/lcQmgL3JqsE9hZsCnXV
+ kGRGXAGAenRM8bXle53vf2ZZZQDKRMm57+3ayFR7NFqIwXMJslf984VQc0+t2Qn0gAhy
+ 7Ygr78CgK/LPlCwJMJCaAK0ylHk/nyTj5GoQ0sI0Arer4T4TbAjsif1myp6pEMXQ2mro
+ dj0w==
+X-Gm-Message-State: AFq9FYJxcpJKvHBLHjamrA+FHZWNZQY3LAKtBVfgHxPaMzpW6dEznYfj
+ NR2W7YvozK0o4wzkLp+27NA6XkMqH+8YYOsL56zAzsbsfFTIiD4JRK6cxf6g2ua4AUE=
+X-Gm-Gg: AYBFou3m8Y9vc1VOG6S0Jq70yQShOHuU86STTb1qgVu3BoRU3SyvHuEvZtkRkg38dZz
+ 5X8yGcGEjYwx0lA1ztcsdiegTsqWq3sJpfrl0BnjEOeYkHc5Cu65nt7Yfimw5tckAwBzsNosufe
+ GH9sdzwaU78f/LaaRPUUlUi5ktYe9j7R0PuZBSXASNVmbZvQSy5i3KUIpyyOvFMOGyfhlS9IvNb
+ 5UVtdYwaacpwciNx0QI/pnlrvHbBf89ay4RfsseYjsR0FCig81FHDd4mBgQwgrRULIwOzwvRTsy
+ CAc1w4JOn7lCAOGlBDsrCFvjXDVjTnkuA9AQm+KlWPy/VyYgZu6wY187JIgpyIO0Ca5olOp8G1x
+ PNq4hK/DHvDGvGs5eU5dujoFtMQeWGH4+LOHSuwsGXxjkwqg0AhG6XulW1RYInLJk4rg17UzK7g
+ 0p1/BuGIwMKvsXtAGUZNaEtcRCvvDhuIaNZhhd9ttvhoqmYsbO1Mp6mBeQurXmRx8xl3EN2qLKM
+ 7tBVve74EWJr1EN1M85V4Kv3sC5zxu61yGtHvI1+CfYts2NLh+fkljiwf/nGngDDYN9xrNc5k/E
+ 9FIdwuZfsW7RpyTLD8xyeoR/1OhSzgiTA1J8RRdORG7omNgs6Q/zjINTetJH/JUHNq0ZsGos
+X-Received: by 2002:a05:6402:11cb:b0:6aa:f0e:a168 with SMTP id
+ 4fb4d7f45d1cf-6b442ffda20mr7642263a12.21.1793017134268; 
+ Mon, 26 Oct 2026 05:18:54 -0700 (PDT)
 Received: from macbook.homenet.telecomitalia.it
  (host-95-246-144-141.retail.telecomitalia.it. [95.246.144.141])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6b467e42f75sm1452800a12.23.2026.10.26.05.18.50
+ 4fb4d7f45d1cf-6b467e42f75sm1452800a12.23.2026.10.26.05.18.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Oct 2026 05:18:52 -0700 (PDT)
+ Mon, 26 Oct 2026 05:18:53 -0700 (PDT)
 From: Carlo Caione <ccaione@baylibre.com>
-Date: Mon, 26 Oct 2026 13:18:20 +0100
-Subject: [PATCH v3 1/5] boot: fit: tell callers when a devicetree buffer
- must be freed
+Date: Mon, 26 Oct 2026 13:18:21 +0100
+Subject: [PATCH v3 2/5] boot: fit: reject configurations with missing or
+ invalid overlays
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261026-ccaione-upstream-fdt-fit-v3-1-6c5d86c3007f@baylibre.com>
+Message-Id: <20261026-ccaione-upstream-fdt-fit-v3-2-6c5d86c3007f@baylibre.com>
 References: <20261026-ccaione-upstream-fdt-fit-v3-0-6c5d86c3007f@baylibre.com>
 In-Reply-To: <20261026-ccaione-upstream-fdt-fit-v3-0-6c5d86c3007f@baylibre.com>
 To: u-boot@lists.u-boot-project.org
@@ -192,241 +192,142 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The FIT devicetree loader can return either data inside the FIT or a
-newly allocated buffer. Callers which only need a temporary result
-cannot tell whether it is safe to free.
+An overlay listed in a FIT configuration is part of the requested
+devicetree, not an optional addition. Currently, a failed load or hash
+check can be ignored and boot continues with that overlay missing.
+For signed configurations, this also means using a combination that
+was not signed.
 
-Report when the returned buffer must be freed. This lets the new
-fdt fit command copy the result to its chosen address without leaking
-memory or freeing part of the original FIT. Also release temporary
-allocations when they are no longer needed, including on error.
+Reject the devicetree if any listed overlay cannot be loaded or
+verified. A missing image must be treated as an error too, rather
+than falling back to the default configuration's base devicetree.
+
+This also affects bootm, even when fdt fit is disabled. Boards which
+previously booted despite a broken overlay will now stop at the error.
+
+Add a bootm regression test covering a valid overlay, a corrupted
+overlay hash and a missing overlay image.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
- boot/image-fdt.c |  3 ++-
- boot/image-fit.c | 68 +++++++++++++++++++++++++++++++++++++++++++++-----------
- include/image.h  |  5 ++++-
- 3 files changed, 61 insertions(+), 15 deletions(-)
+ boot/image-fit.c          | 12 +++++-----
+ test/py/tests/test_fit.py | 60 +++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 66 insertions(+), 6 deletions(-)
 
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index 956a3d97c42..e65114ff835 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -468,7 +468,8 @@ static int select_fdt(struct bootm_headers *images, const char *select, u8 arch,
- 				fdt_noffset = boot_get_fdt_fit(images, fdt_addr,
- 							       &fit_uname_fdt,
- 							       &fit_uname_config,
--							       arch, &load, &len);
-+							       arch, &load, &len,
-+							       NULL);
- 
- 				if (fdt_noffset < 0)
- 					return -ENOENT;
 diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 60e47db5fb0..4f4e7b4e06a 100644
+index 4f4e7b4e06a..83e731402d6 100644
 --- a/boot/image-fit.c
 +++ b/boot/image-fit.c
-@@ -2242,10 +2242,13 @@ static inline int fit_image_load_storage(struct bootm_headers *images,
- }
+@@ -2675,7 +2675,7 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 	void *ovcopy = NULL;
+ 	void *base_buf = NULL;
+ 	ulong base_buf_size = 0;
+-	int i, err, noffset, ov_noffset;
++	int i, err, ov_noffset;
  #endif
  
--int fit_image_load(struct bootm_headers *images, ulong addr,
--		   const char **fit_unamep, const char **fit_uname_configp,
--		   int arch, int ph_type, int bootstage_id,
--		   enum fit_load_op load_op, ulong *datap, ulong *lenp)
-+/* Track load-time copies without changing the public fit_image_load() API. */
-+static int fit_image_load_alloc(struct bootm_headers *images, ulong addr,
-+				const char **fit_unamep,
-+				const char **fit_uname_configp,
-+				int arch, int ph_type, int bootstage_id,
-+				enum fit_load_op load_op, ulong *datap,
-+				ulong *lenp, bool *ownedp)
- {
- 	int image_type = image_ph_type(ph_type);
- 	int cfg_noffset, noffset;
-@@ -2255,6 +2258,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 	const void *fit;
- 	void *buf;
- 	void *loadbuf;
-+	bool load_owned = false;
- 	size_t size;
- 	int type_ok, os_ok;
- 	ulong load, load_end, data, len;
-@@ -2262,6 +2266,8 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 	const char *prop_name;
- 	int ret;
- 
-+	if (ownedp)
-+		*ownedp = false;
- 	fit = map_sysmem(addr, 0);
  	fit_uname = fit_unamep ? *fit_unamep : NULL;
- 	fit_uname_config = fit_uname_configp ? *fit_uname_configp : NULL;
-@@ -2487,6 +2493,9 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 		log_debug("decompressing image\n");
- 		if (load == data) {
- 			loadbuf = aligned_alloc(8, max_decomp_len);
-+			if (!loadbuf)
-+				return -ENOMEM;
-+			load_owned = true;
- 			load = map_to_sysmem(loadbuf);
+@@ -2752,9 +2752,8 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 	/* apply extra configs in FIT first, followed by args */
+ 	for (i = 1; ; i++) {
+ 		if (i < count) {
+-			noffset = fit_conf_get_prop_node_index(fit, cfg_noffset,
+-							       FIT_FDT_PROP, i);
+-			uname = fit_get_name(fit, noffset, NULL);
++			uname = fdt_stringlist_get(fit, cfg_noffset,
++						   FIT_FDT_PROP, i, NULL);
+ 			uconfig = NULL;
  		} else {
- 			loadbuf = map_sysmem(load, max_decomp_len);
-@@ -2494,13 +2503,17 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 		if (image_decomp(comp, load, data, image_type,
- 				loadbuf, buf, len, max_decomp_len, &load_end)) {
- 			printf("Error decompressing %s\n", prop_name);
--
-+			if (load_owned)
-+				free(loadbuf);
- 			return -ENOEXEC;
+ 			if (!next_config)
+@@ -2786,8 +2785,9 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 			BOOTSTAGE_ID_FIT_FDT_START,
+ 			FIT_LOAD_IGNORED, &ovload, &ovlen);
+ 		if (ov_noffset < 0) {
+-			printf("load of %s failed\n", uname);
+-			continue;
++			printf("load of %s failed\n", uname ? uname : uconfig);
++			fdt_noffset = ov_noffset;
++			goto out;
  		}
- 		len = load_end - load;
- 	} else if (load_op != FIT_LOAD_IGNORED && image_type == IH_TYPE_FLATDT &&
- 		   (load & 7)) {
- 		loadbuf = aligned_alloc(8, len);
-+		if (!loadbuf)
-+			return -ENOMEM;
-+		load_owned = true;
- 		load = map_to_sysmem(loadbuf);
- 		memcpy(loadbuf, buf, len);
- 	} else if (load != data) {
-@@ -2517,6 +2530,8 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 	if (load_op != FIT_LOAD_IGNORED && image_type == IH_TYPE_FLATDT &&
- 	    fdt_check_header(loadbuf)) {
- 		puts("Subimage data is not a FDT\n");
-+		if (load_owned)
-+			free(loadbuf);
- 		return -ENOEXEC;
- 	}
+ 		debug("%s loaded at 0x%08lx len=0x%08lx\n",
+ 				uname, ovload, ovlen);
+diff --git a/test/py/tests/test_fit.py b/test/py/tests/test_fit.py
+index 0edf875a9e1..3113209d911 100755
+--- a/test/py/tests/test_fit.py
++++ b/test/py/tests/test_fit.py
+@@ -397,6 +397,66 @@ class TestFitImage:
+         self.check_not_equal(params, 'ramdisk', 'ramdisk_out',
+                              'Ramdisk loaded but should not be')
  
-@@ -2526,6 +2541,8 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 
- 	*datap = load;
- 	*lenp = len;
-+	if (ownedp)
-+		*ownedp = load_owned;
- 	if (fit_unamep)
- 		*fit_unamep = (char *)fit_uname;
- 	if (fit_uname_configp)
-@@ -2535,6 +2552,16 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 	return noffset;
- }
- 
-+int fit_image_load(struct bootm_headers *images, ulong addr,
-+		   const char **fit_unamep, const char **fit_uname_configp,
-+		   int arch, int ph_type, int bootstage_id,
-+		   enum fit_load_op load_op, ulong *datap, ulong *lenp)
-+{
-+	return fit_image_load_alloc(images, addr, fit_unamep, fit_uname_configp,
-+				    arch, ph_type, bootstage_id, load_op, datap,
-+				    lenp, NULL);
-+}
++    @pytest.mark.buildconfigspec('cmd_bootm')
++    @pytest.mark.buildconfigspec('cmd_fdt')
++    @pytest.mark.buildconfigspec('of_libfdt_overlay')
++    @pytest.mark.requiredtool('fdtput')
++    @pytest.mark.parametrize('overlay_state', ['valid', 'bad-hash', 'missing'])
++    def test_fit_overlay_load(self, ubman, fsetup, overlay_state):
++        """bootm must not skip a listed overlay that fails to load or verify"""
++        overlay_dts = '''
++/dts-v1/;
++/plugin/;
 +
- int boot_get_setup_fit(struct bootm_headers *images, uint8_t arch,
- 		       ulong *setup_start, ulong *setup_len)
- {
-@@ -2631,7 +2658,7 @@ out:
- 
- int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
- 		     const char **fit_unamep, const char **fit_uname_configp,
--		     int arch, ulong *datap, ulong *lenp)
-+		     int arch, ulong *datap, ulong *lenp, bool *ownedp)
- {
- 	int fdt_noffset, cfg_noffset, count;
- 	const void *fit;
-@@ -2639,7 +2666,8 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
- 	const char *fit_uname_config = NULL;
- 	char *fit_uname_config_copy = NULL;
- 	char *next_config = NULL;
--	ulong load, len;
-+	ulong load = 0, len = 0;
-+	bool load_owned = false;
- #ifdef CONFIG_OF_LIBFDT_OVERLAY
- 	ulong ovload, ovlen, ovcopylen, need;
- 	const char *uconfig;
-@@ -2651,6 +2679,8 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
- #endif
- 
- 	fit_uname = fit_unamep ? *fit_unamep : NULL;
-+	if (ownedp)
-+		*ownedp = false;
- 
- 	if (fit_uname_configp && *fit_uname_configp) {
- 		fit_uname_config_copy = strdup(*fit_uname_configp);
-@@ -2664,11 +2694,11 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
- 			fit_uname_config = fit_uname_config_copy;
- 	}
- 
--	fdt_noffset = fit_image_load(images,
--		addr, &fit_uname, &fit_uname_config,
--		arch, IH_TYPE_FLATDT,
--		BOOTSTAGE_ID_FIT_FDT_START,
--		FIT_LOAD_OPTIONAL, &load, &len);
-+	fdt_noffset = fit_image_load_alloc(images, addr, &fit_uname,
-+					   &fit_uname_config, arch, IH_TYPE_FLATDT,
-+					   BOOTSTAGE_ID_FIT_FDT_START,
-+					   FIT_LOAD_OPTIONAL, &load, &len,
-+					   &load_owned);
- 
- 	if (fdt_noffset < 0)
- 		goto out;
-@@ -2699,6 +2729,10 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
- 	err = boot_get_fdt_fit_into_buffer(map_sysmem(load, len), len,
- 					   CONFIG_SYS_FDT_PAD, 0, &base_buf,
- 					   &base_buf_size);
-+	if (load_owned) {
-+		free(map_sysmem(load, len));
-+		load_owned = false;
-+	}
- 	if (err < 0) {
- 		if (err != -ENOMEM)
- 			printf("Required FDT copy for applying DTOs failed: %s\n",
-@@ -2809,9 +2843,17 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
- 
- out:
- #ifdef CONFIG_OF_LIBFDT_OVERLAY
--	if (fdt_noffset >= 0 && base_buf)
-+	if (fdt_noffset >= 0 && base_buf) {
- 		load = map_to_sysmem(base_buf);
-+		load_owned = true;
-+	}
- #endif
-+	if (fdt_noffset < 0 && load_owned) {
-+		free(map_sysmem(load, len));
-+		load_owned = false;
-+	}
-+	if (ownedp)
-+		*ownedp = load_owned;
- 	if (datap)
- 		*datap = load;
- 	if (lenp)
-diff --git a/include/image.h b/include/image.h
-index d991b4c2bc3..4ef5344c718 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -721,12 +721,15 @@ int boot_get_setup_fit(struct bootm_headers *images, uint8_t arch,
-  * @param arch		Expected architecture (IH_ARCH_...)
-  * @param datap		Returns address of loaded image
-  * @param lenp		Returns length of loaded image
-+ * @param ownedp	Returns true if the loaded image is separately allocated
-+ *			and must be freed by the caller; may be NULL if the caller
-+ *			does not need this information
-  *
-  * Return: node offset of base image, or -ve error code on error
-  */
- int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
- 		     const char **fit_unamep, const char **fit_uname_configp,
--		     int arch, ulong *datap, ulong *lenp);
-+		     int arch, ulong *datap, ulong *lenp, bool *ownedp);
- 
- /**
-  * fit_image_load() - load an image from a FIT
++&{/} {
++        test-overlay = "applied";
++};
++'''
++        overlay_image = '''
++                overlay-1 {
++                        data = /incbin/("%(overlay)s");
++                        type = "flat_dt";
++                        arch = "sandbox";
++                        compression = "none";
++                        hash-1 {
++                                algo = "sha256";
++                        };
++                };
++'''
++        params = dict(fsetup, overlay=fit_util.make_dtb(
++            ubman, overlay_dts, 'bootm-overlay'))
++        its = BASE_ITS.replace('        images {',
++                               '        images {' + overlay_image)
++        its = its.replace('fdt = "fdt-1";', 'fdt = "fdt-1", "overlay-1";')
++        fit = fit_util.make_fit(ubman, params['mkimage'], its, params,
++                                basename=f'bootm-overlay-{overlay_state}.fit')
++        if overlay_state == 'bad-hash':
++            utils.run_and_log(ubman, [
++                'fdtput', '-t', 'x', fit, '/images/overlay-1/hash-1',
++                'value', *(['0'] * 8)])
++        elif overlay_state == 'missing':
++            utils.run_and_log(ubman, ['fdtput', '-r', fit, '/images/overlay-1'])
++
++        try:
++            ubman.run_command('setenv verify yes')
++            output = ubman.run_command(
++                f'host load hostfs 0 {params["fit_addr"]:x} {fit}')
++            assert 'bytes read' in output
++            output = ubman.run_command(
++                f'bootm start {params["fit_addr"]:x}#conf-1; echo rc=$?')
++            if overlay_state == 'valid':
++                assert output.rstrip().endswith('rc=0'), output
++                assert 'test-overlay = "applied"' in ubman.run_command(
++                    'fdt print / test-overlay')
++            else:
++                assert output.rstrip().endswith('rc=1'), output
++                assert 'load of overlay-1 failed' in output
++                assert 'Booting using the fdt blob' not in output
++                if overlay_state == 'bad-hash':
++                    assert 'Bad hash value' in output
++        finally:
++            ubman.restart_uboot()
++
+     def test_fit_kernel_fdt_ramdisk_load(self, ubman, fsetup):
+         """Test loading a FIT image with kernel, FDT, and ramdisk"""
+         cmds, params, _ = self.prepare(
 
 -- 
 2.56.0
