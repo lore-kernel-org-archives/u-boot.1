@@ -2,138 +2,169 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ECADE606A31A
-	for <u-boot@archiver.kernel.org>; Tue, 27 Oct 2026 00:26:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1412E606A31A
+	for <u-boot@archiver.kernel.org>; Tue, 27 Oct 2026 00:34:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Wq7uaQN1;
-	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=bOjcfgqS;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=ge0fwdai
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=iQoudohd;
+	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=pMKQL5Lm
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BEB2C40572;
-	Tue, 27 Oct 2026 00:26:00 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7685A40575;
+	Tue, 27 Oct 2026 00:34:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 71L_CoYg9wWD; Tue, 27 Oct 2026 00:25:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9DC524056C
+ id IONJFVKeZWx5; Tue, 27 Oct 2026 00:34:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 635E34056C
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793060759;
-	b=V/syrEJr41GrcLW1q/v7V4Lhbdzc3jKVjTB1UtZAgA8Ao+Y9dPyP6yIo2CFCtBMZLE54
-	 1NaHWrCG0q6IEf9OPdrgEHXoUhMqvuYN0JI+eENw24JWLVka271GovLPqoIPJQTSpub1g
-	 83Xuw21vLUBz6o3Zx3ECgMFZswMJtIybdNkjbzjbI+rjCoFsVLrZvAnPcI3kpD8wbiGiy
-	 sAX27+gjuJWbsBrZLBZn1CPKgios6NJcnGx5fvul8fau0zhST7nPQK8dd+r4Axk0tyF1W
-	 4mHm4J3WY5OFPdzr5r3G4x4VdGT5wtaakpUqRghc3TWQfa2JOdZTTMG0NrDlEur5h9Q==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793061292;
+	b=sqczCQgNHeSuNKN9fXn8e4gUYUSs36HywyH6EWpr4zXezUdv1HnHHIr04BUxoAag7j+H
+	 XhJapDsJHuHVgj5dxk48SEm8NcE0kFdwJGbXQJaMPgPWKo4toSSQA0R7Tr2XYNy6J8lg/
+	 pHO5wmiRKAbjxEAUJyBqdzkRIUbzUJr3j+n6B8kqZxUm7Q1oYQP/6EJc2IAS3L0ZH58rU
+	 4+MROYaqyDwGbEKbK8hM8TKZ8FbkeM5zhtLKQwgdDgPaxOdR0xO5/XTq9mSZEFTAnb+ex
+	 GvjRkJhLoc8YdBDotz/0StUy7JRBjWhKyXCphvqcIvkyzErbkhNrnItQEGh14CwhmbA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793060759;
+	c=relaxed/relaxed; t=1793061292;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:DKIM-Signature:Date:From:To:CC:Subject:In-Reply-To:
-	 References:Message-ID:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=0pR0INajTOqgCE/OAl0EqIXMJQqWzUQpenXQJ72vlF4=;
-	b=Fips865bxSk3/8FW/8Z6gYe6Sg97avXdPle1HRdeU4kdArUuJ4y0sUcALUJ+LhNz50rR
-	 5ufX2OGYOCp0PqPbJWHySdk6PycExxFzcfajde3874RwrINiYLu6mIcQ3yaqnjuJ9BgSX
-	 g29kmrcuyRbIxhSAT0JX9VTl0GpCICfAPhI0O5gJjgGRq3ECiz5L7Rf4rXq1yO4bCRPzK
-	 jdb5KGAiCyQTDia5wAYKC+e9nb/XhUSPMM4LElDcJMth9e+1sA/F3h1QDY2pFd01AHMbv
-	 Uos0lERNNsoeVSuH/LS3JhhqZG37obucRXn/WZEneAS8/8nAyhGqndhn4cxeJVvDftg==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=8pT8EFwZA6sMCK1bDqgXej1Emv/MGAQQjY+xbt7CAwA=;
+	b=Z51NEOw1647LZXrlVBdJCJ9nXlhRY1HoSvqkMumLKARepiY6TaLNNvp8tp69va/VugPI
+	 XZFYO3xCxEHzGEFCDC3y/Z9Q+AwkBViza542jVQINyAF+VYlu/V3AK7wAEoc0I1h20mks
+	 5L6WVVuxm2ZpVJgbvmOTOqVQudfndZO4A2WAo6k6s6lp24Oc/IE+V5U5jEkzbyOa1rVMh
+	 U2bSx1IPlWS50J7qE/etRmI0lOYxAzRFjDd8FGkOzmUszAmfoizoSaPX2mr+xegUlHp1c
+	 je1Dscft8p31ucmBzSR6Sg25AZHuCaZzsHAeS7IBRcyd64oewvQWUSlkiTaGCuBD0Zw==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793060759;
-	bh=0pR0INajTOqgCE/OAl0EqIXMJQqWzUQpenXQJ72vlF4=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793061292;
+	bh=8pT8EFwZA6sMCK1bDqgXej1Emv/MGAQQjY+xbt7CAwA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Wq7uaQN1kwVzp7+6he8sJxJwNNA7yJQKbDgB69EhXM+l0o//ts5aXLTiwOkJzgEGF
-	 SmlvtlULOFPHpolxvabtkQpwA1ojJIa5o7JhOgf/qNRDQfABnpn2fKAXeLLkVFyVY4
-	 8alesWTJw0P+LPL5ZUeybCJoHcNQcSBAwjPw1xsTeVJJPMyCgocdecSsA3u5j568zi
-	 aL+sdbQNOO7MOoCyk14G5R6n8SM2z1wX/KWfDDdJ8yITwXmuWctQA/6Zs1RAQZ6DpM
-	 A6xAjLWTGR0wwOcDs507FUyDX0svboWGe94+qthO3C6U+jZ/LrFAY+0srmEhu5A9J+
-	 QOqeXvzqvDEjQ==
+	b=iQoudohdZqGAjS68E0FWZn85jv4oZ6SLBZ4sDfXSJ/UH2BnCWim1vDKhZ1Ma0bepD
+	 BoDtv5TpMT6LqqnNsFhb0pM/AJpIZku/SE0u2uJ1lPJBzE7MQFUMr8Lu9ZiCYTnUw4
+	 g6C8v/wBfkP3EAU8+RgBFzcqQZDqifM8cOzHspOh1treap2EVQK7OuF2GD2WNdtDuy
+	 rlNWbBYyXYyEK00BODOT1bml3uIXYrKjO2akFEKpR17Yp3UwaaRhoCYoJ6QNJd8olR
+	 KXfy8WqsnwSttcevEk3PoXvEZnpalBS7Yjiy8yLE/SgPPrnuvnaDuwWS4d2sdyxJWO
+	 G/IYObRotdCkA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9DC524056C;
-	Tue, 27 Oct 2026 00:25:59 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 635E34056C;
+	Tue, 27 Oct 2026 00:34:52 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id C986FB91
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 00:25:58 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 908AA2F5
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 00:34:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id AF36F60607
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 00:25:58 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 767FB605F9
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 00:34:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BNBAuwVgbgnj for <u-boot@lists.u-boot-project.org>;
- Tue, 27 Oct 2026 00:25:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 751B8605EA
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793060757;
- b=DQTpHVwv3uZdjC77hL9uJ1Cido5bhAy1d/Fo4sRrLqqBRBcSA6101N6qUdwDXRO1I2ng
- Myhg/iv6KpmwlDqESWG2VTouD1O066SIdN9BJLOfLBcfSo1byQdpAxM3psAJn2SF/1O5g
- NsGJ4gweIbcYRXELbPFHBFS3RxlG7aufOlvbqrljju2MtLrTccgLFhBmTm2Y8ZULvq4YN
- J8twc0v5RkG2PHSBeogDSSljJS6hDsImr4LHkToEjmF9lRaEMbLkQpXykjxWQ9pSqXtK8
- pvvmeQGSRLz/NA0s5NElZrEdKD7Y+qVL/Fz1W8+HlVmVHTvhSSkPuL7jLDgsk0H4NtQ==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793060757;
- h=Received-SPF:DKIM-Signature:DKIM-Signature:Date:From:To:CC:Subject:
- In-Reply-To:References:Message-ID:MIME-Version:Content-Type:
- Content-Transfer-Encoding;
- bh=0pR0INajTOqgCE/OAl0EqIXMJQqWzUQpenXQJ72vlF4=;
- b=Zz+agG0iK0XqcT2xzRk54QdzwjBNRITVs9WIHLwMQip73UJ4Xfkugeiz3sV4DyssPwJJ
- I6O8InyHH+ZeWHqx5tF0Mq9Bi6Kpd6wdJ83CqOtFG/t/VhxRRFNA604Gg33yPN/z5BCKP
- 8zMw5kp8ON9PNMVYfzgFQbtRCYEGxSm7cRlf4HwyZWl388J0VIpKR9kQG0rWMdltbU2Bs
- or4uda5HBoDRXuZqeEvRTSd22HWIXw9fw3vfI2yI1r7Wr41LB/ztMro90vOCnoZUmRE19
- 5JL8dcNGJLw6LJgILwev0zWIX/rh9z/SUFZ42+XIKUapIo5HvU5bdkKM6vIWdaQpvmw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=mainlining.org;
- dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256
- header.s=202507r header.b=bOjcfgqS; 
- dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=ge0fwdai; 
- arc=none smtp.remote-ip=5.75.144.95
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=5.75.144.95;
- helo=mail.mainlining.org; envelope-from=brads@mainlining.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=mainlining.org
+ id IQDtRDL6C36J for <u-boot@lists.u-boot-project.org>;
+ Tue, 27 Oct 2026 00:34:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 432FA605EB
 Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=mainlining.org
- header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r
- header.b=bOjcfgqS; 
- dkim=pass header.d=mainlining.org header.i=@mainlining.org
- header.a=ed25519-sha256 header.s=202507e header.b=ge0fwdai
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 751B8605EA
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 00:25:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
- c=relaxed/relaxed; 
- h=Message-ID:Subject:To:From:Date; t=1793060749; bh=0pR0INajTOqgCE/OAl0EqIX
- MJQqWzUQpenXQJ72vlF4=; b=bOjcfgqSi1Oym0Ofqif8owor7B/fcSjzeXLZOehi80q6syrc4K
- oOQp9pLc28uXz9ZIQ4nc1DmsiC6Az9y3q0To5xl9dqwgGood+hTzunMhs1yJZcToII7RLv1tAA5
- rS3ch46VJwx+xYIefLFpNlVBrCKfOGkH2+b+SM0Ttrr5WXzwmFh1dDBZFhiM0b3z2uVdC10+qgI
- KfIspfH1uVttCr6p40sLrYYsKxKF/05P/bIjkkXcVscWxx8P2g1/2sKqpa9n8yL2qxZ0VV45jrk
- swwRGw0QxSpKBnS2fx1cEdqHlZW0GUFqk8lr3InA6k4NbfJd8T2nbAE58Rd9A0inZug==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
- c=relaxed/relaxed; 
- h=Message-ID:Subject:To:From:Date; t=1793060749; bh=0pR0INajTOqgCE/OAl0EqIX
- MJQqWzUQpenXQJ72vlF4=; b=ge0fwdaiki5A/uTXZRlgng9aZ2FBg28dUdPJzBf8Tl+F/0rbvo
- W2TlO8o5hmcBFTfXzH8Vv8KguXfVKf6n4iBQ==;
-Date: Tue, 27 Oct 2026 00:25:48 +0000
-From: Bradley Morgan <brads@mainlining.org>
-To: Tom Rini <trini@konsulko.com>
-CC: Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>,
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::a"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793061289;
+ b=aZ1P20OT6b08EOk0O+4kaH1racTv043TsxfFskAQNLjPj8xMPxXKlj6HGo9xAW2k220G
+ 3AOgoy8fUOuSM8Sg1OXuM2W9RhgsnlIT3ZYrZj7YT8kMFDtKv1+iJ7aFkTyT2mGIQLwH1
+ GVk2Z0LB8tde3W1NCDzc8UtW6jQSoavUqkg6FAFS4fF+rqkrZeHO6t+bQeiLqwUudwea0
+ 3CC5V6JvhwaxWy4TpfJzhOzgJo/hGkLKOAL195LJbi1w5iwVxku+AaVVO229H6DVv7d2F
+ pT3k45ozHhIIhq1+U2V3LNoAPhSRoLiAR619Hn1JxdrV1GPtPdahqf1IotsFXzVTxFA==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793061289;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+ Content-Type:Content-Disposition:In-Reply-To:X-Clacks-Overhead;
+ bh=8pT8EFwZA6sMCK1bDqgXej1Emv/MGAQQjY+xbt7CAwA=;
+ b=hlBpNRbTYcS0nqmdYTwN+zRmoNsD1spRWti1T9iabpUIo5ko+XLYz2V7G+m2o2hUVplU
+ U/BuzNEhfNzwz2MlhxtXTdlaOjSMCrlJrc306W6/1+H7FMR0o5VXZm+i6epAmQHhwiem8
+ ytXMQmVVlPxKck4xA3CQUpSTbAtWlWfXOKXPpDXM/TtFFS5CbUdU4XLc846Q+1V0wtafN
+ oe7QxjOpEB19oYVQFXYc7dyfymRWvhDXXKEfb/o2qQLPrUyoIIFFUSL2eBw8H7FX8x297
+ rUrqwuUNGi/Ml74scjk7IroX7yp5cIyKkizQj1d/f/SCEO+/MfU2RYvJBU4AOby4x4Q==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=konsulko.com;
+ dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=pMKQL5Lm; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:31::a"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:31::a;
+ helo=mail-oo2-x0a.google.com; envelope-from=trini@konsulko.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=pMKQL5Lm
+Received: from mail-oo2-x0a.google.com (mail-oo2-x0a.google.com
+ [IPv6:2607:f8b0:4864:31::a])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 432FA605EB
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 00:34:48 +0000 (UTC)
+Received: by mail-oo2-x0a.google.com with SMTP id
+ 46e09a7af769-820ff812cd8so661357a34.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 17:34:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1793061288; x=1793666088;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=8pT8EFwZA6sMCK1bDqgXej1Emv/MGAQQjY+xbt7CAwA=;
+ b=pMKQL5LmeFSboXbOCRtpkBoiFFOKBbq6waLrrweWKDKdgV4BNu5XR/7O4R4xIWybES
+ wZMDnSYDkSslD/FRyLSWYWCttUkkxvQPKnfS4ohFzewdgD7334YxVLnmk7QU+2BTDjWl
+ iX7QuQvRJ4qjoiq6OGbfiJ95kNSLXJQzIu03Q=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793061288; x=1793666088;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=8pT8EFwZA6sMCK1bDqgXej1Emv/MGAQQjY+xbt7CAwA=;
+ b=YM8F0ThtpCo8Vvnw0DJbjOA8r1tPf3baBdnToH3AApBkAU0SFe4PygqXtR3aTNIRAr
+ Q+yKXJeyz4rf7iVlOLTm8Mb7gcD45twu4CcwIlho0URZjypVznYF4KnORmtZSKXzUfNU
+ yst/QJoTbKIXZF6so5zXbNRAlHp3avnLsqGggoPldYK/Z1E18hJ3nQgPZr9u1i79haue
+ 85So3YU7nYj3hEsJ9HrSR0xuRLk9LzsSnO/DLZYWxEXbCGL9BOpbfFOcev8MoarcY/ss
+ kPsRauVf3qy5DwnrevdzsLyYPHB2NkUE7FLYtbXRppUWj1L5fRz6vL++pTmLxzspkv2N
+ gWrQ==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxtTn8zlzJxlWblgclKSudm4mHncAwwBx5VCIuTgdkKifvf/54txNVc7BidPNKVZqiLfKD8FTc=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJJ+NIWoFxTLjPkx/5vXSTmCDmdU1xFHKfGFwVKoMnJ8/lOwIW/
+ ZRMw9XueTWC7AgcP8IAA5fBrckBA7jPINpYQdyEr6jQam1JzqFrseWjd4mL2W8kvYng=
+X-Gm-Gg: AYBFou382AmpV+lyESpwTdW7QvoptaV52sn6ts8JAOvseP66dQSDGwvZVCdtPeSkgyz
+ aphJfthfdw44HkBvJ9DdDgLF0p5/xd5sxHzhI0CUV5J6ACEUKVZL+wdVp9HMmiMOd7io6nXagaM
+ mgoK/JH5d/aZ3z05H4ak4ji+i6O6XJO5U0H+7o9lq/3iWgtwbpGQGh+6PuI9nJgPSdTRBrNPnVl
+ Fhu/yRXABUL6MqLewkOjBUBH1AMUklx9PE2l0ob6BGqegfEWkOR2XMV2uiOPbhh+X2PUlAybDIc
+ gx1D1tQgJNBsR29iQKx7Efuccpirz9hH+mcj3SbVtWsIK1VjDfD69f8vE2rYBLs5NK9HbFFv4II
+ xjyAZvnvVxnE7fMi67SqxapMg5HBj2XwJWBfuBsT2lwwh+RpLrD/PfH9XkzNx8Inb5OapstdKmo
+ lwymYiJLG0j/Q+iJqsZZRqs39zSL0pxUHik/+Wty6Dzgpv2jwY2flXoTK6MfVbn2QBm30U8BWFx
+ V182V5228uj068n8NyyoV55YvTngjaYM1Jy0V3wi0G8Zju1bnNrOT9wnGj0khQ4rEfoy36ppH4D
+ JzmBtjc0wzNA9gV5IaU2mwJ2cGBRBFqOpTA45U+xDvWXdMjvzbTIbCnJjSS8vF+M9VT2aZ7NXo0
+ M8HFoW4/vPGU9wRvqEM2+brA+caPXiPYUbfvGDCWdW4z4Ouf68XHuzNJjAg==
+X-Received: by 2002:a05:6820:80a:b0:6f5:217:b0a2 with SMTP id
+ 006d021491bc7-70ba0b5eac4mr4317278eaf.12.1793061287836; 
+ Mon, 26 Oct 2026 17:34:47 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-850fb0749cfsm9923646a34.9.2026.10.26.17.34.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 Oct 2026 17:34:46 -0700 (PDT)
+Date: Mon, 26 Oct 2026 18:34:44 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Bradley Morgan <brads@mainlining.org>
+Cc: Tomas Alvarez Vanoli <tomas.alvarez-vanoli@hitachienergy.com>,
  Vincent Jardin <vjardin@free.fr>, Peng Fan <peng.fan@oss.nxp.com>,
  "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>,
  Sinan Akman <sinan@writeme.com>, Bryan Brattlof <bb@ti.com>,
  Holger Brunck <holger.brunck@hitachienergy.com>
 Subject: Re: [GIT PULL] Please pull fsl-qoriq-for-2027-01-rc1
-In-Reply-To: <20261027001923.GM646438@bill-the-cat>
-References: <9A4733E5-6C6F-41B3-B181-18531264976E@mainlining.org>
- <DB9PR06MB78493ACFF21592386826CA93C2612@DB9PR06MB7849.eurprd06.prod.outlook.com>
- <0CEEE153-769E-4B60-9CAA-3FEF80E4A659@mainlining.org>
+Message-ID: <20261027003444.GO646438@bill-the-cat>
+References: <0CEEE153-769E-4B60-9CAA-3FEF80E4A659@mainlining.org>
  <DC081BDC-A313-4635-B013-88FCABE9C4FE@mainlining.org>
  <20261026172332.GE646438@bill-the-cat>
  <73CBF7FF-A606-4531-BDD9-33DB5FDBE774@mainlining.org>
@@ -142,12 +173,14 @@ References: <9A4733E5-6C6F-41B3-B181-18531264976E@mainlining.org>
  <20261026211952.GL646438@bill-the-cat>
  <49FFC097-8DAD-4424-BAED-823C55BA3524@mainlining.org>
  <20261027001923.GM646438@bill-the-cat>
-Message-ID: <B40E19A5-99C4-49F6-AF13-D0BE0D682404@mainlining.org>
+ <B40E19A5-99C4-49F6-AF13-D0BE0D682404@mainlining.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="iwbze1eC283OwFqi"
+Content-Disposition: inline
+In-Reply-To: <B40E19A5-99C4-49F6-AF13-D0BE0D682404@mainlining.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -164,147 +197,175 @@ X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 27 October 2026 00:19:23 GMT, Tom Rini <trini@konsulko.com> wrote:
->On Mon, Oct 26, 2026 at 09:27:05PM +0000, Bradley Morgan wrote:
->> On 26 October 2026 21:19:52 GMT, Tom Rini <trini@konsulko.com> wrote:
->> >On Mon, Oct 26, 2026 at 09:14:37PM +0000, Bradley Morgan wrote:
->> >> On 26 October 2026 18:30:10 GMT, Tom Rini <trini@konsulko.com> wrote:
->> >> >On Mon, Oct 26, 2026 at 05:27:05PM +0000, Bradley Morgan wrote:
->> >> >> On 26 October 2026 17:23:32 GMT, Tom Rini <trini@konsulko.com>
->wrote:
->> >> >> >On Mon, Oct 26, 2026 at 05:00:19PM +0000, Bradley Morgan wrote:
->> >> >> >> On 26 October 2026 16:58:47 GMT, Bradley Morgan
->> >> ><brads@mainlining.org>
->> >> >> >> wrote:
->> >> >> >> >On 26 October 2026 16:55:09 GMT, Tomas Alvarez Vanoli
->> >> >> >> ><tomas.alvarez-vanoli@hitachienergy.com> wrote:
->> >> >> >> >>>>
->> >> >> >> >>>>Hi all,
->> >> >> >> >>>>
->> >> >> >> >>>>Just a data point from a user: we are using U-Boot on a
->T1040
->> >> >(QorIQ
->> >> >> >/
->> >> >> >> >>>>mpc85xx) in a product, and we intend to keep up with
->mainline
->> >as
->> >> >> >much
->> >> >> >> >as
->> >> >> >> >>>>we can. We'd appreciate PowerPC support staying in tree,
->and
->> >> >we're
->> >> >> >> >happy
->> >> >> >> >>>>to test patches on T1040 hardware and report back.
->> >> >> >> >>>>We run u-boot in 32-bit mode (not sure if it is possible to
->> >use
->> >> >> >64-bit)
->> >> >> >> >>>>and
->> >> >> >> >>>>linux in 64-bit.
->> >> >> >> >>>>I am in the process of bringing it up to our 2025.07 branch
->> >and
->> >> >> >> >>>>potentially
->> >> >> >> >>>>mainlining as much as possible. We have some remnants of it
->> >under
->> >> >> >> >>>>`board/keymile/kmcent2`.
->> >> >> >> >>>
->> >> >> >> >>>Would T1042D4RDB affect you?
->> >> >> >> >>
->> >> >> >> >>Not directly from what I see in the code, as long as the
->shared
->> >> >code
->> >> >> >with
->> >> >> >> >>ARCH_T1040 is kept. Sorry for the false alarm, just wanted to
->> >> >report
->> >> >> >that
->> >> >> >> >>there are dozens of us using powerpc :)
->> >> >> >> >
->> >> >> >> >What you could do if you would like is to test the whole
->series
->> >to
->> >> >see
->> >> >> >if
->> >> >> >> >it unaffected you.
->> >> >> >> >
->> >> >> >> >
->> >> >> >> >Btw tom I had a idea: you merge Vincent's bug fix and my
->> >maintainers
->> >> >> >> >patch,you make a PowerPC custodian tree, and I handle the
->series
->> >and
->> >> >> >the
->> >> >> >> >naks and stuff and the comments.
->> >> >> >> 
->> >> >> >> and btw yes I'll make the pr with the finished patches so you
->can
->> >> >merge
->> >> >> >> them cleanly
->> >> >> >
->> >> >> >Trees are relatively cheap, but I'm not sure we need another one
->> >either
->> >> >> >for the subset of formerly-Freescale and not-QorIQ PowerPC parts.
->> >Since
->> >> >> >I added you to the fsl-qoriq tree, you can also just pick up the
->> >> >> >outstanding fixes and your maintainer patches (and leave dropping
->> >stuff
->> >> >> >for now, as this series shows today we're just getting people
->having
->> >a
->> >> >> >chance to see and reply to this stuff) and send me a PR. Thanks.
->> >> >> 
->> >> >> Hi, sorry, I didn't clarify enough, so I had a chat for some
->people
->> >from
->> >> >> the open src firmware slack, yes?
->> >> >> 
->> >> >> And here is their answer 
->> >> >> 
->> >> >> "Ah, Peng Fan maintains the FSL QoriQ tree:
->> >> >> https://git.u-boot-project.org/u-boot/custodians/u-boot-fsl-qoriq
->> >> >> 
->> >> >> That is the vendor one though.
->> >> >> So yea, I'd go with a general PowerPC tree.
->> >> >> 
->> >> >> Also because QoriQ is both Arm and PPC series. :sweat_smile:"
->> >> >> 
->> >> >> And even my slopper suggests the tree, for sanity purposes :D
->> >> >
->> >> >Fine, trees are still cheap. There's u-boot-ppc now. But please keep
->in
->> >> >mind everything else I said, thanks.
->> >> 
->> >> Thx. 
->> >> 
->> >> Question: will you merge the maintainers patch on this PR, so I can
->> >focus on my add-on maintainers patch and the removals?
->> >
->> >Lets hold off on the removals a bit more, as I was saying.
->> 
->> That's not what I meant
->> 
->> I meant, you'd merge ONLY the maintainers patch in this PR
->> 
->> Then, I'll go and take up the removals, and give it say, a couple weeks
->to
->> let it marinade, and give it responses THEN submit a PR with the
->removals
->> in it. Then happy days.
->> 
->> 
->> Or I could also take the maintainers patch with me too...
->
->Yes, please pick up the maintainers patches and if I follow what's in
->Peng's queue right, there are a few other powerpc fixes out there.
->
 
-Not in this PR, maybe any on lore that stands out?
+--iwbze1eC283OwFqi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-lx2160a is ARM
+On Tue, Oct 27, 2026 at 12:25:48AM +0000, Bradley Morgan wrote:
+> On 27 October 2026 00:19:23 GMT, Tom Rini <trini@konsulko.com> wrote:
+> >On Mon, Oct 26, 2026 at 09:27:05PM +0000, Bradley Morgan wrote:
+> >> On 26 October 2026 21:19:52 GMT, Tom Rini <trini@konsulko.com> wrote:
+> >> >On Mon, Oct 26, 2026 at 09:14:37PM +0000, Bradley Morgan wrote:
+> >> >> On 26 October 2026 18:30:10 GMT, Tom Rini <trini@konsulko.com> wrot=
+e:
+> >> >> >On Mon, Oct 26, 2026 at 05:27:05PM +0000, Bradley Morgan wrote:
+> >> >> >> On 26 October 2026 17:23:32 GMT, Tom Rini <trini@konsulko.com>
+> >wrote:
+> >> >> >> >On Mon, Oct 26, 2026 at 05:00:19PM +0000, Bradley Morgan wrote:
+> >> >> >> >> On 26 October 2026 16:58:47 GMT, Bradley Morgan
+> >> >> ><brads@mainlining.org>
+> >> >> >> >> wrote:
+> >> >> >> >> >On 26 October 2026 16:55:09 GMT, Tomas Alvarez Vanoli
+> >> >> >> >> ><tomas.alvarez-vanoli@hitachienergy.com> wrote:
+> >> >> >> >> >>>>
+> >> >> >> >> >>>>Hi all,
+> >> >> >> >> >>>>
+> >> >> >> >> >>>>Just a data point from a user: we are using U-Boot on a
+> >T1040
+> >> >> >(QorIQ
+> >> >> >> >/
+> >> >> >> >> >>>>mpc85xx) in a product, and we intend to keep up with
+> >mainline
+> >> >as
+> >> >> >> >much
+> >> >> >> >> >as
+> >> >> >> >> >>>>we can. We'd appreciate PowerPC support staying in tree,
+> >and
+> >> >> >we're
+> >> >> >> >> >happy
+> >> >> >> >> >>>>to test patches on T1040 hardware and report back.
+> >> >> >> >> >>>>We run u-boot in 32-bit mode (not sure if it is possible =
+to
+> >> >use
+> >> >> >> >64-bit)
+> >> >> >> >> >>>>and
+> >> >> >> >> >>>>linux in 64-bit.
+> >> >> >> >> >>>>I am in the process of bringing it up to our 2025.07 bran=
+ch
+> >> >and
+> >> >> >> >> >>>>potentially
+> >> >> >> >> >>>>mainlining as much as possible. We have some remnants of =
+it
+> >> >under
+> >> >> >> >> >>>>`board/keymile/kmcent2`.
+> >> >> >> >> >>>
+> >> >> >> >> >>>Would T1042D4RDB affect you?
+> >> >> >> >> >>
+> >> >> >> >> >>Not directly from what I see in the code, as long as the
+> >shared
+> >> >> >code
+> >> >> >> >with
+> >> >> >> >> >>ARCH_T1040 is kept. Sorry for the false alarm, just wanted =
+to
+> >> >> >report
+> >> >> >> >that
+> >> >> >> >> >>there are dozens of us using powerpc :)
+> >> >> >> >> >
+> >> >> >> >> >What you could do if you would like is to test the whole
+> >series
+> >> >to
+> >> >> >see
+> >> >> >> >if
+> >> >> >> >> >it unaffected you.
+> >> >> >> >> >
+> >> >> >> >> >
+> >> >> >> >> >Btw tom I had a idea: you merge Vincent's bug fix and my
+> >> >maintainers
+> >> >> >> >> >patch,you make a PowerPC custodian tree, and I handle the
+> >series
+> >> >and
+> >> >> >> >the
+> >> >> >> >> >naks and stuff and the comments.
+> >> >> >> >>=20
+> >> >> >> >> and btw yes I'll make the pr with the finished patches so you
+> >can
+> >> >> >merge
+> >> >> >> >> them cleanly
+> >> >> >> >
+> >> >> >> >Trees are relatively cheap, but I'm not sure we need another one
+> >> >either
+> >> >> >> >for the subset of formerly-Freescale and not-QorIQ PowerPC part=
+s.
+> >> >Since
+> >> >> >> >I added you to the fsl-qoriq tree, you can also just pick up the
+> >> >> >> >outstanding fixes and your maintainer patches (and leave droppi=
+ng
+> >> >stuff
+> >> >> >> >for now, as this series shows today we're just getting people
+> >having
+> >> >a
+> >> >> >> >chance to see and reply to this stuff) and send me a PR. Thanks.
+> >> >> >>=20
+> >> >> >> Hi, sorry, I didn't clarify enough, so I had a chat for some
+> >people
+> >> >from
+> >> >> >> the open src firmware slack, yes?
+> >> >> >>=20
+> >> >> >> And here is their answer=20
+> >> >> >>=20
+> >> >> >> "Ah, Peng Fan maintains the FSL QoriQ tree:
+> >> >> >> https://git.u-boot-project.org/u-boot/custodians/u-boot-fsl-qoriq
+> >> >> >>=20
+> >> >> >> That is the vendor one though.
+> >> >> >> So yea, I'd go with a general PowerPC tree.
+> >> >> >>=20
+> >> >> >> Also because QoriQ is both Arm and PPC series. :sweat_smile:"
+> >> >> >>=20
+> >> >> >> And even my slopper suggests the tree, for sanity purposes :D
+> >> >> >
+> >> >> >Fine, trees are still cheap. There's u-boot-ppc now. But please ke=
+ep
+> >in
+> >> >> >mind everything else I said, thanks.
+> >> >>=20
+> >> >> Thx.=20
+> >> >>=20
+> >> >> Question: will you merge the maintainers patch on this PR, so I can
+> >> >focus on my add-on maintainers patch and the removals?
+> >> >
+> >> >Lets hold off on the removals a bit more, as I was saying.
+> >>=20
+> >> That's not what I meant
+> >>=20
+> >> I meant, you'd merge ONLY the maintainers patch in this PR
+> >>=20
+> >> Then, I'll go and take up the removals, and give it say, a couple weeks
+> >to
+> >> let it marinade, and give it responses THEN submit a PR with the
+> >removals
+> >> in it. Then happy days.
+> >>=20
+> >>=20
+> >> Or I could also take the maintainers patch with me too...
+> >
+> >Yes, please pick up the maintainers patches and if I follow what's in
+> >Peng's queue right, there are a few other powerpc fixes out there.
+> >
+>=20
+> Not in this PR, maybe any on lore that stands out?
+>=20
+> lx2160a is ARM
+>=20
+> nbxv3 is arm too.
+>=20
+> I'll look harder (maybe I'm wrong) soon
 
-nbxv3 is arm too.
+Maybe I'm just mis-remembering, thanks.
 
-I'll look harder (maybe I'm wrong) soon
+--=20
+Tom
 
->
+--iwbze1eC283OwFqi
+Content-Type: application/pgp-signature; name="signature.asc"
 
---- Thanks!
-https://lore.kernel.org/all/EE579805-42F2-4C58-B752-F28779EEB717@grrlz.net/
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCat/xpAAKCRAr4qD1Cr/k
+ColOAQDzjrkgP+xVxUVkDRomk8M4D3OAzq5TeEzHtmwGjSW07gD9FucOao7qChFM
+rlQFNavUna/rW7sUcHCdooV0dqHGDgI=
+=lEPW
+-----END PGP SIGNATURE-----
+
+--iwbze1eC283OwFqi--
