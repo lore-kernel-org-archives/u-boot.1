@@ -2,188 +2,187 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 661A8606A31B
-	for <u-boot@archiver.kernel.org>; Tue, 27 Oct 2026 09:06:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8677A606A31B
+	for <u-boot@archiver.kernel.org>; Tue, 27 Oct 2026 09:15:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=eJI4mkhN;
-	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=LeWji2bM
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=rR4b/Vf/;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=ELwQFQTP
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6CC1E40703;
-	Tue, 27 Oct 2026 09:06:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 46F1B40587;
+	Tue, 27 Oct 2026 09:15:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XPhOtpa7Z-vM; Tue, 27 Oct 2026 09:06:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2A0B2406FD
+ id SUtVYzgQxZDm; Tue, 27 Oct 2026 09:15:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 44F4040497
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793091980;
-	b=qFWu43vPOKggBPY7DALN1dK4Hos0VWuxnLe3r6qbCDWFAqif+yeavABB7gax3SI6L/Xp
-	 yRBYdkhIelKjTZ6LzMgqjZmgnd+AbQ1sXrCflpZCfES35XRVZQDx9QNfpxyhtSBMi1oaH
-	 hHmWGWm7Udg4RLr0s3l79CSoNursnobc4SIj3cCIrsfLnZLU/ratEeCmzsfr9kWiC4Bd1
-	 61JCRntPRSCVH+pmOTJ1IsKUM/ckZxs2lEfRPBzFEKTKU3TRM/PAcf3d5Yqy9kKxPMid0
-	 eXyYB65/RywWv6LTCJZvov/T+AqOYou3smRtIXoXdYvZW7TyUIGmo+g7J+fK5AhBZfw==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793091980;
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793092525;
+	b=fSboVLqZtGvJPOY9GUIyXrjSGntmqga1U/y6J0qP5Y2OlOUwL00gOQqDzLcH6WT8nZzC
+	 1ZDcGNC9VdNcLxP/iJ5++0csqQLToHdUPVqZUl+iE3K5KZakpd374FqySgAN0Vh/ObE36
+	 bjGXlxn+yV+51sZ/MN5+0ZwpDMlUMNt7cjimfFQZzDhqd1q6Gy0SQzOb90SL4M6rrYwAT
+	 IB+dQ+m/LjImMC6mPhfK/+ZM7wMtyLx79SQcVJBUgnqgMS8POIm+XuY8pOJoJPTb97X3q
+	 N8OeNvZDUa4bJwfDU95i7nhKNKTCk3SYZkHP10yurT3D9/q1Id7qa+2jr1PMxvW0bww==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793092525;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=rQRf52NOgGzhKI60PDjQDZZggK/UMjld+CEmIqeEGEQ=;
-	b=pzosXfBpV2dTBUu9lbYcSbluEyvTRr/wo1t4L6/KQwn5sjrVGGprpwkwPnQFjYQ1JvqX
-	 0fzA4ifYeHW9zEBmGnGDa6HuBDF+lLNSbvsFzUa1VQxtjER9ej6gZFT1Db3ozvZo6PSPK
-	 cfGhWifd1rQpwlLfP1av0L7QzOPDWA6PPecqgBAM1W+zkxYChkm2BtyxKjn+Ojs47ZkqW
-	 882RLDMerkOBTF+YszQCMEoAPCCRMBd9sm4f8EaZXFHL8rMqDKiSIbBxZw8SmPN2dgrTL
-	 S1Ut2FytAaTLBob7gZnnNtWXdj8EprjK7tAMQ/f6uIVncAjzgQAWHEEll3WDOW9D68A==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:Autocrypt:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=ukB/Xq/heFT2BLjI2kZadvx33fVKBoEk2qZoOKNOkPY=;
+	b=RK/BCb28K5Gsy/JIQGEfAkze0LNURMCROSgEK9ltdCw6RuC91ocVwvJH62bvWH/2b/PA
+	 ERiDC9awHySY7cerjXXqqv2uNPHxrtYwD8RqUaOHY+Sr+CNMO2a6eIXoyLl+HG5wkQReE
+	 Wvm6jmdsV8yXwr1H1WE4JBfnoixOM3WNTpHA24W5qfWvFggvFwM2evTUg38qXMIH0n+MN
+	 2YwCtLNckz0tFx5Ejk+KGgYWPwVfTzuuL7neZ/bvcXS8pnIQIsdTzqp+RF5N3z2/a+biK
+	 PfeKDzuX1r6fYljPmYMq3xWJ2G+CMKAgTjgMi2py8KsaQ0aZ+2poHJHDH3NvgXEaTng==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793091980;
-	bh=rQRf52NOgGzhKI60PDjQDZZggK/UMjld+CEmIqeEGEQ=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793092525;
+	bh=ukB/Xq/heFT2BLjI2kZadvx33fVKBoEk2qZoOKNOkPY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=eJI4mkhNFfas/HjimhfS8Y3FTJjhvBJFG/lbBiXGLe4WhLxROJUdOg5eiuUnyKdrz
-	 tKpZbLt2jl+i6PZYVV++rJ10gMElDK3ax57/VTU5LlawYztOwtfNRNt/bFRQlH1AD6
-	 K2vlEsen5r8nYRGKOZPZPRzUxoeYiKhHuehRKQeqsNNvCPKFjX7HbtxM3qXnnI0QWU
-	 opHtmqQU4F2OkkspetuPaBYdSdvPWBdi8tkyJUDtArb2nQzor1l0qTZLG3oRG0cECz
-	 ZcAQusUwDNzu+NAk52u+NsIQAnKuutE/A0H0k/TDalhGZYjcGO33ZbgX0qGIGR1jsG
-	 vK0rJr1RwQOIQ==
+	b=rR4b/Vf/ZxLJ8FhgXZL1uP4Od0gri0ryh0KEYvsna9JCFlnrQ5uNv6hYczMxi+UoI
+	 w1w0nehwZISqRTnAGt/0nbSXakkMdNrJLA11SJRzh8xWqkRUfZp/DAwTH0oAf5xCqr
+	 DDFQ+5GQo8/3+gXxiCGlMwLdQ50dZ8UZesh3R/ZJ1Q3FcaE+2t+61gkzJmy2hrv9DE
+	 wHVrPjfkWknzAqnTXF1ksNFVR4yrtYzzMsl9AuWI8/Olqal0qylzaBYQ9fk7dKmiZb
+	 EVCjYE0meq3wi+GKRaTTsh+iQh/ZIAfpgY4IlAcKh+lmHnN+cpyX6ZQljI00xHRFmq
+	 1dNHBBlGxq/4A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2A0B2406FD;
-	Tue, 27 Oct 2026 09:06:20 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 0C6791DE
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 09:06:19 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 44F4040497;
+	Tue, 27 Oct 2026 09:15:25 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 72DF6380
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 09:15:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E648F605EB
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 09:06:18 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 589FC80CCC
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 09:15:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yWMNxVSpIoIm for <u-boot@lists.u-boot-project.org>;
- Tue, 27 Oct 2026 09:06:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 9E84E605E6
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:20::52b"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793091978;
- b=V5t2iWqGMF1hMHjqpi7pJKkUYvRYDkWGwDCM70IB6dbaJyz8sqyZZlWRajYMz4r/lgV/
- SzbWEuUKdHVq8nBvweLX/csw20VcM0qNQMoqzShj0kCBExJWiezhAKfuWICSRymOy1nqf
- 4RSytygRP6LpKLIi0jUWLI+6itVxkCJldQaZlCGwJ0zExKSTFmXELuwI1VhxLm8MqEA2C
- lM8ABvVBajCwZcFkIFMybD2gU8yZ7r+O80lzdbkv6nv+Dwr2zPRxaNx4Pk+LjOUdlYW3c
- ZYywDeWN7s5t4Pb99tS7prvBrqwbOMtPR6rmnN7HAZyEiWxBNZjtpe9qsvKPImnJ1zw==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793091978;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2IMBheQlPGv1 for <u-boot@lists.u-boot-project.org>;
+ Tue, 27 Oct 2026 09:15:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D161880C23
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::430"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793092522;
+ b=HNmBv7lpgjlcbSWEarDJUGlOnlvjQZyKh8d6G/9hBhYHVcxr+ev6+siPGdzTDKLKxCcI
+ XbQXXrSazuLxbA4i6aaMogwuOhftnjghh2tnqQ9rKVO4Lvh44T5wulbjc6X5xnNNqVBf+
+ rWQFmaY+Zr0SlJsE/Jeo+M8JoQAEhEELTuxTZ5gXPPRnsI8/r9TNZers96OSpJtMlnxFc
+ nud7HzbgJGucmbXJA8FU/UuXl6ojwl+ANedwmuD+CJHOHSzrYSvhtNbXfVS7E1y8iM0wH
+ TtHAj/bpfQZvsZVCCy8boQ8f74DethK59JqEBBU/CnfjkRf/93SnXXLNjj93Zk/ec5w==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793092522;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
- MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
- Message-ID:Subject:To:Cc:Content-Type;
- bh=rQRf52NOgGzhKI60PDjQDZZggK/UMjld+CEmIqeEGEQ=;
- b=Sz19Fp/b5rGtq6q+sr1cnEPOFIiefg1Ry30TKFvBonkMr0wLehsUWWJSsdk7OrPUZJ+o
- yno/jss4mRo929luNp6I8fmQIwsjza8dYvo3Q6NjpkoiHg2BE/0eJiuJZIQdiOX/TByH5
- /QPgRL3EwASUgmBeui6vNBM5EgBYC50Ufh24fttoLBUCo8m7/nJxVWuNDoE1yUd1LppJk
- Kp5C29udGdFf96kSbEQhVqc6FvGhjTJ2x7KUxKJ8cCmRjtUGGSIFgoJm0yB/+Co+i04v1
- Atq+LuzxYLRYxEolyEvIQ1o9u5gqs2EH6CpYrUDW97jwoip0YAInauCxZdLL65vnNkw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
- dmarc=pass header.from=chromium.org;
- dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=LeWji2bM; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::52b"
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+ Content-Language:From:Autocrypt:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding;
+ bh=ukB/Xq/heFT2BLjI2kZadvx33fVKBoEk2qZoOKNOkPY=;
+ b=FxYmTSaVoifUKX/Uke+Mb7PXEVFrTYucgRNvCm+VDmNx09+C8x0yS2KYhiwea8ST/UGz
+ fPIET/x3TSHAcovc2fapkSPNn9x+yxpN6rxc30KEiYz2GpSy75HRVv8UY+ZIT3h46VFFJ
+ UANjBHXXsDbYK7EgAfNj2FXBLPFiAMlSCMy0G7nIrue9zdx0RVAjECFwcg8k/1pFEKqFG
+ 6Ty1lPiDu/Rr05AT8LJVV9pdB0m1WLg3FKmHt6gWajfInnp1/nQXUbyVrhLy/mF+7pKgT
+ 2LwTmzdrJlU6LN4xve1B/gR9bEVsfBLmv+Z8Smw6t0hf8rM0LxoeSE2oSmKtyXAEYoQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=none header.from=baylibre.com;
+ dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=ELwQFQTP; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::430"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::52b; helo=mail-ed1-x52b.google.com;
- envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=LeWji2bM
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 9E84E605E6
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 09:06:15 +0000 (UTC)
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-6b1d8944cb0so6231701a12.3
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 02:06:15 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793091973; cv=none;
- d=google.com; s=arc-20260327;
- b=T6Gh/h5ZmWNdWM5q4O4vPAADRa91/v2nhbHSBA4z2qW0F+2L/EipkzKHKHfJeAsypd
- 2FepfUe60MkIQLKkZlGccixKJXmqjGP10Y4Q5heUBmx7+P09x5H6HJPAZcwXpaXaKTwk
- NZEeraqVpqZADYB1Hwfyu5Rn1nbObYUOHS4TIPaFGmGPgt9pYbY7wwitq/QpWo6WlVnR
- d4Qa/xAkrBgAiBy0b+NV9Wj3Eb3djyszKFDvi4UIyP/PJ/REQQdOGw9TpArnrB+RuiLk
- 8I+LqYvLQ4QUXp1LnV9kIBkaJ8SIHDMRiBqyrQh/0mSVqxFpNXQs5g9wK5/eVjxN4I/8
- EHXg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=rQRf52NOgGzhKI60PDjQDZZggK/UMjld+CEmIqeEGEQ=;
- fh=ls4SFlRKNwV7wgpdQmcbq/w0K6quP8xF4he2T5GRmYk=;
- b=e5Gu6sigZcIcmfiBP4n4NLeYeYUdaKqcs4oB2dmz4XcpsH8cp/l5LaUObBhBx73hQw
- v/Eteg8JgwVVPK+QQuqAtzFLyjzEUjMqo9xCaNCaZQqjvLLuIIuVMH3v3M3oRkU93e52
- +kE2hoP6ivQPH3dfFKrIhEZLNT94A3+kC0VoqvSg/4ND9PA39mN1HEJ8F5b2YmfrFc9H
- 8KgFLJBDfxi6pBE1QrE+DvvHL3iC64PQwAjW1zUHc8p2rUTpMUcD4pttfobhlfLj5UVs
- 30/NJl0M5q1bv/9d+NNHOoWlQH6GEdcXStJjFsrs0vrTXNpFJCJ223EiOWEqgxIn+Gfi
- +oow==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2a00:1450:4864:20::430; helo=mail-wr1-x430.google.com;
+ envelope-from=clegoffic@baylibre.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=ELwQFQTP
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D161880C23
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 09:15:19 +0000 (UTC)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-48c4d99c32bso2713855f8f.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 02:15:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1793091973; x=1793696773;
+ d=baylibre.com; s=google; t=1793092518; x=1793697318;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=rQRf52NOgGzhKI60PDjQDZZggK/UMjld+CEmIqeEGEQ=;
- b=LeWji2bM65zzYgqyDeXtExStzAPAuVvFFWG3glRVom0ZVzE+Hayqp+J5ShCR2sXzO7
- Yi9CO6ku2Bl/Lj3Rq5t6+l3WY/29Y/H7nifarmrdGtu44INrdGKGQdJllRs8ojjFQ0OM
- uBLYf23NyoATbyuRaFV6I8p0SLKV9GOAL1rIQ=
+ h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=ukB/Xq/heFT2BLjI2kZadvx33fVKBoEk2qZoOKNOkPY=;
+ b=ELwQFQTPcNm5PKKOkBCcFG54FgK/0d79bd8xBwbv0HZ+wTXk01WJA9tNNqaG+3ydQV
+ hO8NkB42BTGeshU0uOaDvoh4mXP/jtgayY4vys6wWhS8qCRzov8Vglf3YRy7t5OOioGN
+ iwFAOkMGIN4pqcNPCDiLZF3uJSDVsR5pbiHEtfPPlh5kQHyO7ipec8YErHz/hpFXKzF1
+ 7FiMFncyk/lbPEsHKTFOa7hjF/nyC6sgJuGLC6YD14yEdUNyKUeaeNSKKgyM97WwRPJf
+ tlrfX166/HaoDhxOKsK0WRwJecLmy9Ih5aflkKPGmjix80tO6Be0UN2kMhPEahAsubb+
+ 5v7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793091973; x=1793696773;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=rQRf52NOgGzhKI60PDjQDZZggK/UMjld+CEmIqeEGEQ=;
- b=zEk65UXJCAyTiX+xZo/DXOPPu4BmXmWxxSWndbuhgLwUxjg/8lDVuWfjCWpzht2YWO
- TE1jorpAYPwQvY5opMB3eGsndqi1otNLiAExHSgQQV3RD0dkGN1kF/IF0wxrE1YZ3rFi
- UCTJV9yvk97jJRsn1J5HGsWXbG2YP+0ojtx+Vkw6ECwozOWCef+VSO00mqQqqYJZ71Ba
- e74Dx9qMMwYyxeY7r4cgT3pFpEkCiVHx+NnYY8ZXmaiiJq46yn95rgBaZySK8KITTbA4
- Er19s/MsGyCTuZm2/Tb6kFRW8yX2kCqpLGtqw5/4ecJT+hr8lA94T1fuPiNQUe3PTvoG
- 5x5Q==
+ d=1e100.net; s=20260707; t=1793092518; x=1793697318;
+ h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=ukB/Xq/heFT2BLjI2kZadvx33fVKBoEk2qZoOKNOkPY=;
+ b=Gin2C9Tm9X6Up/x+NTHCxxeYR2+VGTuO4YXWGVj4Ym091vYibvHdFLJOK1Wxv6ZTB9
+ Cr+bqTApeLY3h+/YivBWIN4ApHOG0RUgY+fY849IGn7wjsT0/gm3Ex01ubBZ19J2yxUH
+ vfCDNpL63ZKb1LcPLWHLrlIpINdEARLrKRIo0F/2+Vv6HjY10ggkPHb2B8AWxmjOaBRc
+ eynhoK8LVfAQ8zIfRimvMh6asRDS9+VnZ6dwAooKYpdl8UhXXqyFQh3e3LVxTRvLH4HY
+ /vOBtnAJqIxyMqvOdYBXpaQ4attqSU2G6ikIf4f2m9DtDklHnmgN87uQNLlj1kwP/wi5
+ op5A==
 X-Forwarded-Encrypted: i=1;
- AKwUvBye8blbTc0AUtQ/+bK6YAccLzdedQk1rfu/St5jcJl0VESkzW6QMZ/ScZ1qCQfP1+MeW78r0Zo=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYLK3z5WY99uzaelJhcrbwQcHT0pnPfe3qaoizqQ6dohQlOKFJTR
- I6iDQrykYNr+LoeV9tqbjE9DlL1xl78Yh6BtG4lxsF2Mzuv9+FvRIcSrTaTJVF0Fd4Uapp/0VoO
- hGc23XEmXATwGtct2K/NQKLcfdDxYaVWBUzf9/MSmSWXbtXEMokkQXA==
-X-Gm-Gg: AYBFou2RS8sdB7h9QujQDhbmnd621lBoZCRnUebm5QtZGOb34pIaIJ44JD6+rCyDSXW
- IhzOQHWF5bC/aP54fACv0tTadgEA+uNgU+aYvdisdc6RVzCpfOs71xHTY9J143a9XpuPrFCfMYi
- 2k4ZQiKSx1NZfzES4ACq+GQaXATpIFkuyEdKLT0V2RuvavBO74Hkl/NUF42eejT23eOLI4LlbYu
- jMeeZ9CRQSTMiqilQHLRyYa4ixLc8VhDoZG7RTGh2TQUjLic4LYceeyaZymy1R8+ovT69uOE6Jo
- U4qEbg5m+O4gJBRdE2KCnkOZ0wIXLAUkFtBQgnquArcFYZyDQB4zpQBFdMY42t7uRMUti+UVxmZ
- 0ryiy6ZJvxa2BdXdA3F/Q2QdlUsAH0tgPSXs=
-X-Received: by 2002:a05:6402:428c:b0:6b1:ef5a:6720 with SMTP id
- 4fb4d7f45d1cf-6b442fcfc70mr9816705a12.16.1793091973042; Tue, 27 Oct 2026
- 02:06:13 -0700 (PDT)
+ AKwUvByhHJKIQQD1U99X2nkwu0wFCvsFw5MevNYle5i32+QgIDPry+l7VWki8Cws2qNHZ8u2bcKPr14=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJu+Afi3To7w9j3IfCC+Tt/pJD4ADmK84y84syioib8TQKUmmYz
+ FnUgGeeTJUtRhCxB9AqoHlA1F4c3mp01XKBFBm4SibQXwIKBJ1R9xwrcKQAZXrxox1I=
+X-Gm-Gg: AYBFou0AlMKEJD83Oqe7ystyrV+1YggFnTU+I7LNb2AiUyYbpWlQFCp4tAjJPw5Vfam
+ BIEx7uyoBv9t2R0/gZww3iOMWDu8hX86KusfI5658Nk5Xur2oA2as+ict2r1/R2KANYyWeaR9hM
+ zxmnS/47Cx28TfpVLRKkWwViezfUivSBvfX7LH+kzdn6nAP+RzP/QyzC3xs5ZyAvoTM3xBgjZBg
+ HUdeIXZFwc4i23QJxMKe2GVq2aT+IhdMynfY9M2TG8ij7eJDAnaq2Hg/ICP/rTcuz9Z9Q44Tan7
+ oR9AiHOjlA1atXseaTVRt+S/EeRFlxyLSTlEwVCojwTUmyl3g/ely2NzlNj/Vl0qt6/qYssXQ0a
+ b2VPZhLqTn0ACeD1lhUWEVPUuohpujpophD8/TQVsiAVtqLz8L7oL7Ad6M78xFYr7KrabC6cVPH
+ gRNMvq8Ho5rRPOXKB8d1//+KDRcsBre++yHmdmQRtHW20m0IDsW7I913fpXzh2cgVVISXCE7PwS
+ 71w6lzBIzHPufVo8HKWOOQ3Ba/lA65Yu+X6vYRu1a9JFp3X/PUS8jRx4sdNGYwRKNl5YtlBi4rE
+ xLYqraS3
+X-Received: by 2002:a05:6000:40dc:b0:48e:c84:5be6 with SMTP id
+ ffacd0b85a97d-48e3eb99ff9mr17170317f8f.14.1793092517272; 
+ Tue, 27 Oct 2026 02:15:17 -0700 (PDT)
+Received: from [192.168.1.62] (140.30.66.37.rev.sfr.net. [37.66.30.140])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48e3ece5e4asm21121491f8f.59.2026.10.27.02.15.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 27 Oct 2026 02:15:16 -0700 (PDT)
+Message-ID: <4c9fc2c7-c131-4e6e-908d-0a7e8e6ffb17@baylibre.com>
+Date: Tue, 27 Oct 2026 10:15:16 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20260804105721.2402406-1-jonas@kwiboo.se>
- <CAFLszTjBiTtKmjgknvXGFBrphh6kpBzRg8iroWjFQ0EDvuXTyQ@mail.gmail.com>
- <c00fd65c-338a-428f-bf4e-eb28e463d914@kwiboo.se>
- <CAFLszTjKMRjF7hmEt6_bbnsRpi9Q=NHidRQC8zv4ToUEpqBarA@mail.gmail.com>
- <582f30f6-7d5f-4dd5-a8c6-60d027806786@0leil.net>
-In-Reply-To: <582f30f6-7d5f-4dd5-a8c6-60d027806786@0leil.net>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 27 Oct 2026 09:06:00 +0000
-X-Gm-Features: AclHuK9cwtCj4TvnsO9H6nkYTgd1orPrdsM3i5RHAnDGtWkIm3kWw0W7235if4Y
-Message-ID: <CAFLszTj=yHHYYojiX7TGAiFZun7qWsu7zO6awfLdWwYF8HkQmg@mail.gmail.com>
-Subject: Re: [PATCH 0/9] rockchip: Remove unneeded syscon driver for RK35xx
-To: Quentin Schulz <u-boot@0leil.net>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
- Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] board: renesas: gen5-cm33: Start the generic counter
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.u-boot-project.org
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+References: <20261026-clegoffic-gen5-generic-counter-v1-1-4297803e85e9@baylibre.com>
+ <bfbc69c2-32fb-4d2d-858d-a4ed36ccf592@mailbox.org>
+Content-Language: en-US, fr
+From: =?UTF-8?Q?Cl=C3=A9ment_Le_Goffic?= <clegoffic@baylibre.com>
+Autocrypt: addr=clegoffic@baylibre.com; keydata=
+ xjMEafx9bxYJKwYBBAHaRw8BAQdAtc85GIwDXLz0rh9thWXC80Lji0otVDVncXT4qaS4j1fN
+ K0Nsw6ltZW50IExlIEdvZmZpYyA8Y2xlZ29mZmljQGJheWxpYnJlLmNvbT7ClgQTFgoAPhYh
+ BJjMiHuM4ZUwFqUPr36EW4KtCh6TBQJp/H1vAhsDBQkJZgGABQsJCAcCBhUKCQgLAgQWAgMB
+ Ah4BAheAAAoJEH6EW4KtCh6Tt+sA/jVC35rY1npFlOy7YnncTdrID8Qf855JA78IzXgvzpGp
+ AP9FkuuT80m66PP3DvgYX9kVnG17mSDKO0+v2W18v6ZgCM44BGn8fW8SCisGAQQBl1UBBQEB
+ B0DMwF4u//aQyzsFlO8rPJ/cqsAuPH80IeIA3HOEo5mlVgMBCAfCfgQYFgoAJhYhBJjMiHuM
+ 4ZUwFqUPr36EW4KtCh6TBQJp/H1vAhsMBQkJZgGAAAoJEH6EW4KtCh6TdSgBAMDS0MiWCivt
+ LjzZc9bs+P/xdXywUjDKq3lpQGJ6vZ0GAP9vI6DnN7vwVK6jt6/+0aBGkog5Ura9+WwRFEdM
+ vLfPDQ==
+In-Reply-To: <bfbc69c2-32fb-4d2d-858d-a4ed36ccf592@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -193,111 +192,122 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-6.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS
-	autolearn=no autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Quentin,
+Hi Marek,
 
-On Thu, 8 Oct 2026 at 23:53, Quentin Schulz <u-boot@0leil.net> wrote:
->
-> Hi Simon,
->
-> On 8/7/26 9:46 PM, Simon Glass wrote:
-> > Hi Jonas,
-> >
-> > On Tue, 4 Aug 2026 at 13:57, Jonas Karlman <jonas@kwiboo.se> wrote:
-> >>
-> >> Hi Simon,
-> >>
-> >> On 8/4/2026 9:19 PM, Simon Glass wrote:
-> >>> Hi Jonas,
-> >>>
-> >>> On Tue, 4 Aug 2026 at 04:57, Jonas Karlman <jonas@kwiboo.se> wrote:
-> >>>>
-> >>>> This series takes the initial steps required to try and remove use of
-> >>>> syscon_get_first_range() or syscon_get_regmap_by_driver_data() to get
-> >>>> GRF base addresses at runtime for the Rockchip platform.
-> >>>>
-> >>>> The GRF base addresses are fixed and known at compile time, yet drivers
-> >>>> keep trying to resolve them at runtime delaying some operations by
-> >>>> several ms.
-> >>>
-> >>> I suppose all addresses are known at compile-time, if you have a
-> >>> single device tree. I have always hoped that we might end up with a
-> >>> generic U-Boot for rockchip.
-> >>
-> >> I do not understand how removing these unneeded syscon drivers and
-> >> helpers would stop such goals or make that any harder. From my point of
-> >> view, they are currently making such things harder and only adds extra
-> >> code, runtime and energy waste. E.g. around 227 ms was wasted resolving
-> >> fixed known base addresses for RK3399 last time I measured it, see [1].
-> >>
-> >> Most drivers or any SoC specific code is already identified using a
-> >> compatible that is SoC specific, i.e. the RAM or CLK drivers are matched
-> >> using a SoC specific compatible and seeing how all GRF variants are
-> >> unique there will always need to be SoC specific code to handle the GRFs
-> >> base address and reg offsets.
-> >>
-> >> And for drivers that are more dynamic in nature the DT typically have a
-> >> phandle to the GRF syscon node anyway, so getting it from the phandle
-> >> will be a better option and closer matches how Linux handles similar
-> >> references.
-> >>
-> >> The biggest current blocker for a more generic U-Boot proper on Rockchip
-> >> platform is rockchip_get_cru() and how it currently makes it impossible
-> >> to support multiple SoCs in one build due to how it is used in the
-> >> sysreset driver. Fortunately, I have a pending series that also cleans
-> >> up the unneeded rockchip_get_cru/clk() related helpers.
-> >>
-> >>>
-> >>> I wonder if there is another way to do this, perhaps reading the
-> >>> address once and caching it?
-> >>
-> >> I really do not see the need for that; it would only make things more
-> >> complex than it really needs to be. We should use constants where
-> >> appropriate, e.g. soc specific drivers/code and use generic phandle
-> >> lookups elsewhere.
-> >>
-> >> At least that is my end goal with this and pending follow-up series.
-> >
-> > Long delay while I took some time to look at this area in detail.
-> >
-> > Pre-relocation is an area which I sort-of glossed over with the driver
-> > model implementation. There was talk about keeping the pre-relocation
-> > devices around rather than recreating them. We also looked at
-> > providing post-relocation devices access to the pre-relocation info.
-> > Over the years we have had discussions about having 'simple' versions
-> > of drivers (that don't go through driver model and perhaps don't use
-> > device tree) but no one has made the effort to implement this.
-> >
-> > Anyway, after a few days of hacking I've come up with some
-> > improvements to the existing code, at the cost of about 500 bytes of
-> > size increase. It works by using slightly better algorithms for four
-> > key functions - fdt_parent_offset(), __of_translate_address(),
-> > ofnode_pre_reloc() and lists_bind_fdt(). The result is saving on
-> > firefly-rk3399 of 230ms, about what you are getting. Note that I have
-> > made no attempt to enable the relevant options in TPL/SPL (it only
-> > saves another 13ms), so your work is mostly complimentary.
-> >
-> > The key difference is that this should help all boards, not just
-> > Rockchip, plus it still uses DT for everything. Tom doesn't want me to
-> > send patches at present but I did write up a post about it as a way of
-> > providing the comparison. [2]
-> >
->
-> Please refrain from pointing contributors to patches that are
-> written/assisted by AI/LLMs as those aren't currently welcome in the
-> project.
+Thanks for the review,
 
-Do you have any update on the VBE series I sent? [3] It was written
-before the AI era. I believe it was originally sent 18 months ago. It
-is the final thing to get VBE running on a real board in mainline.
+On 10/26/26 11:18 PM, Marek Vasut wrote:
+> On 10/26/26 4:36 PM, Clément Le Goffic wrote:
+>> The generic counter shared by the Cortex-A720AE and Cortex-R52 cores is
+>> stopped at reset. With U-Boot as the first stage on the RSIP-M, nothing
+>> starts it before the Cortex-R52 cores are released, so their timers never
+>> advance and a timed wait such as a Zephyr k_sleep() blocks forever.
+>>
+>> Program the counter frequency and enable it before any other
+>> initialization, through the RSIP-M alias of the counter frame.
+> 
+> Why is U-Boot on RSIP supposed to be doing this, why is Zephyr on the 
+> CR52 not doing it when it needs that counter ?
 
-Regards,
-Simon
+In the Renesas SDK it is the Gen5_IPL that start it. U-boot replaces 
+that stage.
+ From the manual "Set bit 0 in CNTCR to 1 to start the Generic Counter 
+when the CPU is placed in the secure mode."
+By default R52 is in secure mode but this can change by changing AxPROT[1].
+This mean a zephyr running on a R52 not in secure mode can't start it.
+> Does anything on the RSIP or CA720 depend on this counter ?
 
-[3] https://patchwork.ozlabs.org/project/uboot/list/?series=506457&state=*
+RSIP-M: no
+A720: components after BL31 depends on it and actually it is already 
+started by TFA BL31 here [1].
+When you don't boot BL31 it is not started. It is in that case that we 
+had an issue.
+> What is the problem you really observe ?
+As said in the commit message a Zephyr k_sleep() blocks forever when it 
+is not started.
+
+>> Assisted-by: Claude:claude-opus-5-5
+>> Signed-off-by: Clément Le Goffic <clegoffic@baylibre.com>
+>> ---
+>> Start the generic counter from the RSIP-M U-Boot on R-Car X5H.
+> 
+> What is this ^ sentence doing here below --- ?
+
+That's where b4 land the cover letter for single patch.
+This part is ignored when the patch is applied.
+>> ---
+>>   board/renesas/common/gen5-cm33.c         | 14 ++++++++++++++
+>>   configs/r8a78000_ironhide_cm33_defconfig |  2 +-
+>>   2 files changed, 15 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/board/renesas/common/gen5-cm33.c b/board/renesas/common/ 
+>> gen5-cm33.c
+>> index f532daa16d5d..1837283c2bef 100644
+>> --- a/board/renesas/common/gen5-cm33.c
+>> +++ b/board/renesas/common/gen5-cm33.c
+>> @@ -58,6 +58,10 @@ DECLARE_GLOBAL_DATA_PTR;
+>>   #define RSIP_CTL_PROT0PS            (RSIP_CTL_BASE + 0x844)
+>>   #define RSIP_CTL_PROT0PS_ERR            BIT(0)
+>> +#define CNTCR_BASE                0xbc000000
+>> +#define CNTCR_EN                BIT(0)
+>> +#define CNTFID0                    (CNTCR_BASE + 0x20)
+>> +
+>>   #define SYSSS_BASE                0xc1320000
+>>   #define SYSSS_MODE1                (SYSSS_BASE + 0x1010)
+>>   #define SYSSS_MODE1_MASK            GENMASK(11, 0)
+>> @@ -1280,11 +1284,21 @@ static void gic720ae_init(void)
+>>           writel(1, GIC720AE_GICR_VIEWR(i));    /* View 1 */
+>>   }
+>> +/**
+>> + * generic_counter_start() - Start the generic counter shared by all 
+>> cores
+>> + */
+>> +static void generic_counter_start(void)
+>> +{
+>> +    writel(CONFIG_SYS_CLK_FREQ, CNTFID0);
+>> +    setbits_le32(CNTCR_BASE, CNTCR_EN);
+>> +}
+>> +
+>>   /**
+>>    * mach_cpu_init() - Initialize hardware and start other cores
+>>    */
+>>   int mach_cpu_init(void)
+>>   {
+>> +    generic_counter_start();
+>>       mfis_unprotect();
+>>       pfc_set_avs_pinmux();
+>>       mdlc_mpg_start();
+>> diff --git a/configs/r8a78000_ironhide_cm33_defconfig b/configs/ 
+>> r8a78000_ironhide_cm33_defconfig
+>> index 3f09a7c25568..37d700096ff3 100644
+>> --- a/configs/r8a78000_ironhide_cm33_defconfig
+>> +++ b/configs/r8a78000_ironhide_cm33_defconfig
+>> @@ -65,7 +65,7 @@ CONFIG_SIMPLE_BUS_CORRECT_RANGE=y
+>>   CONFIG_SKIP_RELOCATE=y
+>>   CONFIG_SYS_BARGSIZE=2048
+>>   CONFIG_SYS_BOOT_GET_CMDLINE=y
+>> -CONFIG_SYS_CLK_FREQ=16666666
+>> +CONFIG_SYS_CLK_FREQ=1066666667
+> Why did the frequency change ? (that really has to be explained in the 
+> commit message)
+
+Manual: "The generic timer counts up by H'10 every clock edge of 
+SASYNCD1_RT_MAIN clock continuously."
+SASYNCD1_RT_MAIN = 66.666667 MHz
+66.666667 MHz × 16 = 1066.666667 MHz -> 1066666667
+I'll modify the commit message.
+
+[1]: 
+https://elixir.bootlin.com/arm-trusted-firmware/v2.15.0/source/plat/renesas/rcar_gen5/bl31_plat_setup.c#L171
+
+Best regards,
+Clément
+
+
