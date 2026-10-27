@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40B23606A31F
-	for <u-boot@archiver.kernel.org>; Tue, 27 Oct 2026 10:05:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 313F5606A31B
+	for <u-boot@archiver.kernel.org>; Tue, 27 Oct 2026 10:05:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XEZ/yDZ4;
-	dkim=pass (2048-bit key, unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b=D6bafY6x
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=K3vVgc/o;
+	dkim=pass (2048-bit key, unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b=j0GOYfmP
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1569E6075D;
-	Tue, 27 Oct 2026 10:05:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0A948406FD;
+	Tue, 27 Oct 2026 10:05:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id phfAVlsO5ELd; Tue, 27 Oct 2026 10:05:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 618A360748
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793095556;
-	b=DhiNlQ+pIi+uMuRipZ6Nr3cmGEUEOleNk+cZGxyPIKOCEyLlBRKRnE5SBUi+4HM3EMaV
-	 Tic8PI7ZYQ7NY2kYHxATAkDC7EmCXlIXTHwiWBHtFoeg8xVBgq7RsJIIiuoRfk+tKVRb5
-	 CkC5sTgT7e79XrxYHWyFel7sq+TlH2a8YpI/4tBpL2iG5hjcSHkQFVfiVOPuefoI2UZ1h
-	 1O59MUlzO9vwWH+ca+u8QOFcnjeOOF09BYsPmQgFeZ/SKCzH3igqyW5L7FrDfM+iAQ2+Q
-	 RSbmUDzK+/HgtfVs8jdiIx/tUmGDGuTr9Rx08ffWU6DD+aJc+LkK2xjAXhHk/YF3M6w==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id iWL6rMJKDh0o; Tue, 27 Oct 2026 10:05:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 20C5B40689
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793095558;
+	b=nupH+p6CrGn8kT6wcJFfmQ8/xeoOj3yYY2hTmQ5xmTfo8bi/clKmJcvn9MTLkMEFBOPt
+	 +YyCMZPuNTNFmp4kaaZmPPncTTMc03bv9XVQpuMezBvWao/m+uKKCPldgaf4cKbEKNAST
+	 j09U7XlQpFQEoVK6i2G4HZ2c6OO1XBL8Jp8QTMEHosgrMdgQMUsnlGS8WKWO/9i7NlXXT
+	 NtE+TDmOpjujqg/Aviz2jSF95eGofkCUVYvldLBycpnALmSd01Gv0O993SHx2FFmf84k0
+	 cDd5aasdq0zcwicQ4afsV0zeomEW16S8qGTBZVMxmPKuWNoawcAVSwCl5rFv+YbpFtw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793095556;
+	c=relaxed/relaxed; t=1793095558;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -32,95 +32,95 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Virus-Scanned:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=USQpRa9U8sBoxlpzviFYR5d/RKuSHxCYPdYfBiqiGKM=;
-	b=hNKWf6/GwMTo0M+T/JRJGAeMA2lOFz7R3Ij96DTozNLM+YqNhi1qWKbZAzcuX+oe3LYk
-	 uw+pAOW4QMBTS82yE57QIRiARWVWTv+abWuKuxy2XA6eifcPL62/7+GtVY5oKpvAaJ1EU
-	 NlwbY1Lkoq3aXx9+KOTfRbYiLzvTgg+Lwa4bmtfk5w96ku7Rbj18mjwEWq4+rlI8tE1ej
-	 lkjhgBTly8bn94yEytVFEA7BnON+pVwi5vGH+chG2KPuWzsxj7HMItrkQuC0CPZKS5T8T
-	 QJxReIzsXpXX5fJfUbzf8aOCidxR8abig3X05vaNIQAjERVxNjb4CRlRyLTmTlLk6RA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=B6u7PxDrZzsJ2CzopRbygGjEc7d9dbqqRFDhWgtzv0Q=;
+	b=NYdxOm5eFmUC1bGXYqOnFcOcLk0npyCHz4f+eqMY+Hjf7ab1ihYaye5v7zDD3X4D4pBC
+	 e9jyxCUJXv1UeG6INehoQ7pnyVIGabUGQYoIcwYQesqPGcR6/U16o5ubsm1P1aDGi7q6s
+	 RaQu5d5TeInNsVM5klzZvZtESLPwi1hIs98ltD2/at7KayDssDvafQ7Lcxg9J4YyGI3Mk
+	 5nWYKqjGyVz/nmYQhcxI+7GVMZ+1WjQwLH8ZYqV+UodoLivbPL9f3+Sz22U0cf5aEgkpH
+	 vCUqSb5BpH8Whghs1ZYfVrvRbTRQQ8t+snT99MgQvvYZPg5Km0pTAvnZ0Ky/FuWcabA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793095556;
-	bh=USQpRa9U8sBoxlpzviFYR5d/RKuSHxCYPdYfBiqiGKM=;
+	d=lists.u-boot-project.org; s=default; t=1793095558;
+	bh=B6u7PxDrZzsJ2CzopRbygGjEc7d9dbqqRFDhWgtzv0Q=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=XEZ/yDZ4e8O4Dj9O0KhhNE6cIjszwDHCKpgEKGHUHsrZHbTK6Z3f2goQvPw8L7aMT
-	 CNR5ZhO64Ih9dwRvxAzBULKgQsyfAwpJO5woIgBmsmY2/ClnxbPQDAfUjpeR0GTFKH
-	 eMShnmoU8bUkWnmAns0dqjc5QCDdQDoBkuKMDCahDgR6B7Y7DM+EmjwtfYUjQ1nH70
-	 wfXclD/SLairTBKvO6r/i1CiwJ4CvVV4bHfCbkZUEMpW1YeONCnzO5+c3r7LzlKpt+
-	 JqzkIqGOE8kxv+BA56FR92G3EPkEQIj6rNeKEL7tKI3wUrjCqr8PtPG0y0grK/gnak
-	 c5H/J3VYl9Rwg==
+	b=K3vVgc/oZ1A734OR6Y0w+s6n+f5KaeVMXB8N3mW7LnbmcZvC8/R/Kk27FKJMCGCR0
+	 POK04IA+4K7T4IKJb1VmqDldMmdA9XXO6PSPInUVGXbJQJnj+UXwCMYl5jhisBYgAz
+	 GF0hVEJi8jGJl/aWlrYU0sigzplQEsH+2kb7mIJoKc/jXZjW0Rn1fAgrjl8919wfRo
+	 DNoSgAPEVL9dNhnvp6FDIlz83QEYWLJEiqgSPkxe9Yn+HCiGGuRoRJchwiGeNQdvFB
+	 HvjWp8WmQvQg2rniYplcb1QXvwwqDFFmuFAaCunJWUT3J9ou9OLAlPx+zCS/Q6oQxl
+	 CFXyQ07A0v3cg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 618A360748;
-	Tue, 27 Oct 2026 10:05:56 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 0D2B4235
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 10:05:53 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 20C5B40689;
+	Tue, 27 Oct 2026 10:05:58 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id D4DC872
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 10:05:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0ACAA4063A
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 10:05:53 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id C72B080D58
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 10:05:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PtMf1GfeOWr0 for <u-boot@lists.u-boot-project.org>;
- Tue, 27 Oct 2026 10:05:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0A20740636
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=188.40.3.216
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793095552;
- b=WVEq3qfy+0A+y2GdXF9LWHc5TUC3hIjnd6daiMBJ28XbGq/s0yEa5diDeHZY8YSKy8nr
- EivKrPtMAzuetDryXFzzEKSWFym3nNn7PHU6CVrr2QtbKKGOtJWwbBHSJHZpui6X5r/ci
- Rnr4G1PCYh6HV6Rd/kgT1G5UQSK7U1LKbJnc9uoF/9qg4PmtHccyeLuvGn6iq63LooSiC
- WRUpKOuvStMM8rYxAHEMVZNxwA2VI5v5hwd2Sks2ixXk4+SMZafnUVMlxssqAP48Z6PuN
- 95y+HTwW9VqvVL7BBRK/3j2gndTs5Yq4+TWXw4Z+WTjqF6/RtLenkCk6Vm5HPl4ix7A==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jfD0c7xOEN7b for <u-boot@lists.u-boot-project.org>;
+ Tue, 27 Oct 2026 10:05:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org F172F809F5
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=188.40.3.216
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793095554;
+ b=LJva+FdbTxBLdfmNzsUBOG4dtufqvXMpvGlZVd1dtT7ZMCLyi3nrUw41wnBnf7sb6Ate
+ LnwuF7pKOJYV1UVCHAGhRU4DaovkGTMkob27r8lw77VItMUWZI9MxZprxtSKUNGMjuXGv
+ kST3y9a+VNJW4c3WiSo9ybuTmQyV9N6fg/szYWf6KnWoAKV3M/JcrxE/t+zMrHGowTWmM
+ 4dA3Rf0eubYHjmvJReCyGIhQTdsqWN799uGJ+8ujEiumP4nnM9Vhg0dccGdk7zNsxtyVN
+ S4zU+rnFNSRzzy/kCqp8kYPiCNOUC/fXGIxNJIqcCWThUpoVINJKpP0X0L7Z/EKxYcg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793095552;
+ c=relaxed/relaxed; t=1793095554;
  h=Received-SPF:DKIM-Signature:Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-Virus-Scanned;
- bh=USQpRa9U8sBoxlpzviFYR5d/RKuSHxCYPdYfBiqiGKM=;
- b=MrOJZv5m1RI/q187IB5LuPyXTAIOJWpKMCYOXdllqZKEbeLBkrHDYwAR3i0+EaWei7aS
- x/vQPHxnlkjkuq2JArFpKJmMdbSDdYZ1bGZCe4izxdpc21PAhN5r9nIwW9It0qqFd7ys6
- xwJg+vtbhtKUlM05kbgNlmuxb6esGVgcQx568yNx81ASgsE9TfAt43HutgpD19jnaHZ1n
- dhgReJ1ba1T41hAhHDurrfo1kS7SqSxYCTjy6Kk/HbIjpN6yXyFP7fzgkdcwrO3trtLfO
- 2hlyaGm7Q70YBpAzsiYqX1/MOJIPgMlTJJozcMz9oXiaxSJ3bl/zlNJaLjL8iD5Ha7A==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=B6u7PxDrZzsJ2CzopRbygGjEc7d9dbqqRFDhWgtzv0Q=;
+ b=pvh6c5aHXZ2eXGmKAyTXy4yYmhZbpScQ9WdusbIdSqyU497FlJ32JqInzLJw7nPIRA5B
+ ugm/+DZ6H7o0JY8toeSbB3qkC1I3e+2KQEqRlN1Z1aZ4zub9jXeUR8UOCxYKPsyQwR7kR
+ NU7/8SNfaAE7gIbpCjecvIM3vgmLyPndVYY1h5sfTeg9Wv50dvgq1DvpCVh+3BCC9ux6u
+ 9GAwMmK4CCqm9al+0J30DSuKzaSfb5oZYaCfcJsvfDwNyU0rPiCkNy+/S3rkKkAficO4r
+ zR3uofd/oFm90YlUOKu1Uhs7NAonpSBm290axJdqk/SlQEFNmaHXps/Ffwvh0i6LHjw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=ew.tq-group.com;
  dkim=pass header.d=ew.tq-group.com header.i=@ew.tq-group.com
- header.a=rsa-sha256 header.s=default2602 header.b=D6bafY6x; 
+ header.a=rsa-sha256 header.s=default2602 header.b=j0GOYfmP; 
  arc=none smtp.remote-ip=188.40.3.216
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=188.40.3.216;
  helo=www537.your-server.de; envelope-from=nora.schiffer@ew.tq-group.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com
- header.a=rsa-sha256 header.s=default2602 header.b=D6bafY6x
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=ew.tq-group.com header.i=@ew.tq-group.com
+ header.a=rsa-sha256 header.s=default2602 header.b=j0GOYfmP
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 0A20740636
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 10:05:51 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id F172F809F5
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 10:05:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=USQpRa9U8sBoxlpzviFYR5d/RKuSHxCYPdYfBiqiGKM=; b=D6bafY6xyTyqnZ3wUQHdidYelO
- ejEb7WldvjZB5nmUpF7UP7g/GAzhDSO1Nfv0wk7Be39sit/gMMg6acswWBu7FfkWzrxVpyD+I8zFL
- ZFPBuHpju/IyDIZTpHBhEl3qs/HvjTD2bB7wPam9srp7Y27yMsamGy4d4LUAZEycgApFv8KeA8kTA
- cC96gLRGAw8ZPA+tHQUauMpI/4qVMHbCKwEorcd2GuLUsoxVyoMc//XdjseWccVI2oEMDRSql/iAz
- IvlbWHw2iSKBcLbzJb47ZbG2ibKP4SuZOqKSnijyaEXhDIHmf63IzOQ2yJ6+ZInXooJGWbLnyT12r
- GGJgw7PA==;
+ bh=B6u7PxDrZzsJ2CzopRbygGjEc7d9dbqqRFDhWgtzv0Q=; b=j0GOYfmPUM3cImgnNq7VBCQlXp
+ s+OmDrVGDNAUxLrJOwd1vGQwdmysA+DBizT6mdxVLb9n2I4XJDBYMu7AUZWd7cFsi8cjh7oipyWl2
+ aI3cc7NkkWIWlFcg5c3bF7brMCGaWlhLaXBmIsYfHB70RqKuX9IIOPziPy6Sems9ZZ9PZkCDWmU7u
+ 406ThJoYOsgeMfEpFZ45BF11Qi6yhwgGXI7so/mso2rTIXL4bLddX5fBeZqB7dxcK2JrJkCOomJmg
+ 4r3DqHoaA1TiEcsk/XaQmYNjGArZRoH134mNgN6iL9U5eFNnu5QQgDezxzf8HxwE9GHAVtkPDrYSq
+ 0LthD1/w==;
 Received: from sslproxy01.your-server.de ([78.46.139.224])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <nora.schiffer@ew.tq-group.com>)
- id 1xLe3v-000C0I-25; Tue, 27 Oct 2026 11:05:47 +0100
+ id 1xLe3y-000C10-28; Tue, 27 Oct 2026 11:05:50 +0100
 Received: from localhost ([127.0.0.1])
  by sslproxy01.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <nora.schiffer@ew.tq-group.com>)
- id 1xLdfI-00022y-1j; Tue, 27 Oct 2026 10:40:20 +0100
+ id 1xLdfG-00022y-2J; Tue, 27 Oct 2026 10:40:18 +0100
 From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
 To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  Marek Vasut <marex@nabladev.com>, Peng Fan <peng.fan@nxp.com>,
@@ -128,10 +128,10 @@ To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
 Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@ew.tq-group.com,
  u-boot@lists.u-boot-project.org,
  Nora Schiffer <nora.schiffer@ew.tq-group.com>
-Subject: [PATCH 16/16] configs: tqma7: enable PHY and power domain support for
- USB HSIC
-Date: Tue, 27 Oct 2026 10:39:13 +0100
-Message-ID: <c217043cbe6d3ad91e09f6af49575f034402ef8e.1793091394.git.nora.schiffer@ew.tq-group.com>
+Subject: [PATCH 11/16] usb: ehci-mx6: add support for power-active-high
+ property
+Date: Tue, 27 Oct 2026 10:39:08 +0100
+Message-ID: <0bbbbf7c0043510fd6c10f0ab8d94c68c8ca762e.1793091394.git.nora.schiffer@ew.tq-group.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <cover.1793091394.git.nora.schiffer@ew.tq-group.com>
 References: <cover.1793091394.git.nora.schiffer@ew.tq-group.com>
@@ -155,49 +155,88 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Allow the USB hub to work instead of hanging the whole board when
-attempting to configure the USB controller for HSIC.
-
-The obsolete CONFIG_MXC_USB_OTG_HACTIVE setting is removed; it was
-unused by the MBa7, as all VBUS enable signals are controlled as
-regulators.
+Support the same property used by the Linux kernel, obsoleting the
+CONFIG_MXC_USB_OTG_HACTIVE Kconfig symbol.
 
 Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
 ---
- configs/tqma7_common.config | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ drivers/usb/host/ehci-mx6.c | 21 +++++++++++----------
+ 1 file changed, 11 insertions(+), 10 deletions(-)
 
-diff --git a/configs/tqma7_common.config b/configs/tqma7_common.config
-index 9b055849ad1..03ece307974 100644
---- a/configs/tqma7_common.config
-+++ b/configs/tqma7_common.config
-@@ -98,13 +98,18 @@ CONFIG_PHY_GIGE=y
- CONFIG_FEC_MXC=y
- CONFIG_RGMII=y
- CONFIG_MII=y
-+CONFIG_PHY=y
-+CONFIG_NOP_PHY=y
- CONFIG_PINCTRL=y
- CONFIG_PINCTRL_IMX7=y
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_IMX_GPCV2_POWER_DOMAIN=y
- CONFIG_DM_PMIC=y
- CONFIG_DM_PMIC_PFUZE100=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_PFUZE100=y
- CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_ANATOP=y
- CONFIG_DM_RTC=y
- CONFIG_RTC_DS1307=y
- CONFIG_CONS_INDEX=5
-@@ -114,7 +119,6 @@ CONFIG_SYSRESET=y
- CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_IMX_THERMAL=y
- CONFIG_USB_EHCI_HCD=y
--CONFIG_MXC_USB_OTG_HACTIVE=y
- # CONFIG_WATCHDOG_AUTOSTART is not set
- CONFIG_IMX_WATCHDOG=y
- CONFIG_CC_OPTIMIZE_LIBS_FOR_SPEED=y
+diff --git a/drivers/usb/host/ehci-mx6.c b/drivers/usb/host/ehci-mx6.c
+index 84e2328a767..eae18e22c57 100644
+--- a/drivers/usb/host/ehci-mx6.c
++++ b/drivers/usb/host/ehci-mx6.c
+@@ -264,7 +264,7 @@ int usb_phy_mode(int port)
+ #endif
+ 
+ /* Should be done in the a imx-usbmisc driver */
+-static void usb_oc_config(struct usbnc_regs *usbnc, int index)
++static void usb_oc_config(struct usbnc_regs *usbnc, int index, bool active_high)
+ {
+ 	void __iomem *ctrl;
+ 
+@@ -274,12 +274,10 @@ static void usb_oc_config(struct usbnc_regs *usbnc, int index)
+ 	ctrl = (void __iomem *)(&usbnc->ctrl[index]);
+ 	setbits_le32(ctrl, UCTRL_OVER_CUR_POL | UCTRL_OVER_CUR_DIS);
+ 
+-	/* Set power polarity to high active */
+-#ifdef CONFIG_MXC_USB_OTG_HACTIVE
+-	setbits_le32(ctrl, UCTRL_PWR_POL);
+-#else
+-	clrbits_le32(ctrl, UCTRL_PWR_POL);
+-#endif
++	if (IS_ENABLED(CONFIG_MXC_USB_OTG_HACTIVE) || active_high)
++		setbits_le32(ctrl, UCTRL_PWR_POL);
++	else
++		clrbits_le32(ctrl, UCTRL_PWR_POL);
+ }
+ 
+ #if !CONFIG_IS_ENABLED(DM_USB)
+@@ -383,7 +381,7 @@ int ehci_hcd_init(int index, enum usb_init_type init,
+ 	usb_power_config_mx7ulp(usbphy);
+ #endif
+ 
+-	usb_oc_config(usbnc, index);
++	usb_oc_config(usbnc, index, false);
+ 
+ #if defined(CONFIG_MX6) || defined(CONFIG_MX7ULP) || defined(CONFIG_IMXRT)
+ 	if (index < ARRAY_SIZE(phy_bases)) {
+@@ -431,6 +429,7 @@ struct ehci_mx6_priv_data {
+ 	enum usb_phy_interface phy_type;
+ 	void __iomem *misc_addr;
+ 	int portnr;
++	bool pwr_active_high;
+ #if !defined(CONFIG_PHY)
+ 	void __iomem *phy_addr;
+ 	void __iomem *anatop_addr;
+@@ -472,7 +471,7 @@ static int mx6_init_after_reset(struct ehci_ctrl *dev)
+ #endif
+ 
+ 	usb_misc_config_mx7(priv->misc_addr);
+-	usb_oc_config(priv->misc_addr, priv->portnr);
++	usb_oc_config(priv->misc_addr, priv->portnr, priv->pwr_active_high);
+ 
+ #if CONFIG_IS_ENABLED(DM_REGULATOR)
+ 	if (priv->vbus_supply) {
+@@ -690,6 +689,8 @@ static int ehci_usb_probe(struct udevice *dev)
+ 		debug("%s: No vbus supply\n", dev->name);
+ #endif
+ 
++	priv->pwr_active_high = dev_read_bool(dev, "power-active-high");
++
+ #if !defined(CONFIG_PHY)
+ 	usb_power_config_mx6(priv->anatop_addr, priv->portnr);
+ 	usb_power_config_mx7ulp(priv->phy_addr);
+@@ -705,7 +706,7 @@ static int ehci_usb_probe(struct udevice *dev)
+ #endif
+ 
+ 	usb_misc_config_mx7(priv->misc_addr);
+-	usb_oc_config(priv->misc_addr, priv->portnr);
++	usb_oc_config(priv->misc_addr, priv->portnr, priv->pwr_active_high);
+ 
+ 	if (priv->init_type == USB_INIT_HOST) {
+ 		setbits_le32(&ehci->usbmode, CM_HOST);
 -- 
 2.55.0
 
