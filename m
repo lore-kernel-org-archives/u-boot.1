@@ -1,189 +1,187 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A83F606A7F5
-	for <u-boot@archiver.kernel.org>; Tue, 27 Oct 2026 11:46:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1818606A323
+	for <u-boot@archiver.kernel.org>; Tue, 27 Oct 2026 11:47:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=KzB1qWRV;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Lgw1QUMr
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=g+SrR2hy;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=fIoxG741
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 118E280D7F;
-	Tue, 27 Oct 2026 11:46:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2A9566075A;
+	Tue, 27 Oct 2026 11:47:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YwC_qnz8XuvS; Tue, 27 Oct 2026 11:46:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 274C280D59
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793101598;
-	b=UjDBjRflzxHUXgv5DEiSwX5vdVuoSBZG6w+C9YdAVarAGttdOuUPphwE3PPSv7LjBF6Q
-	 GhLK42+C9fN8EkwE+vOXHmEJLuTPqORVlDQgWYxGMbqhvVy2sSjfdpTBWZ+3DMQWbZ09i
-	 1z20AndJ3GCtj2JzcRYZXcxF4m8BwsxZjdOrNvBvVdoeK8Dv6uP//6iXRneLxeEGWSsGm
-	 puR+mMPrLq8HXbH99Fi/eYvKT4ysu3xD+hM+cw0NA8E5HM3Z8y+f680eTaDGxHPciBezh
-	 l8eKCh+RcPNS8ia3qJta3iYfZ5V0Z3F1ftJkJ0meLwzufE0rHPoXTsqqqQtJfr0/Low==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5iiwwJJnb-Cu; Tue, 27 Oct 2026 11:47:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 69AA360748
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793101675;
+	b=PkpheXUfl3mtFtWjoP4SK7VULogFcalBx1bLylmFVw9fnu/n9N/IYincVzz6DgxtNVJm
+	 4C9iTWpI/u+TusqZCP2WldbbANAcObCCM1lzjaV6400Xb5ymWSIM5jJLoOH7yOTZrCk4c
+	 YAY21aW49A/S9IJ+wxYKMCCVytPekB9Jq87ooI5f2rV4gpsqwCtfzX3RUPJK54wlPX9w1
+	 0uYmYPfSbWGesDkut9YT6+5UcuAJD6i0D68ObZHeBgemibiV9O77LVgOyZxyeN+i2tdE+
+	 gIpchlHVRVL6k+ZKgBxDbEqmaxi28qelKMhP1yFp0ggfY/xNsw/qewv4O1wZp34/alw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793101598;
+	c=relaxed/relaxed; t=1793101675;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=1q7ixz2WYxKZO8p/Oo/SBydB6gJR+ynFf2Q+v6Y+Ta8=;
-	b=MjP2tPQ8HcUg4oPlonmpiBYtmF/GXTbxL6drUjIWSHdrrpe8hcST9bIOGooK7kbypxZQ
-	 Bmo0pmxvPBarMi+Nq6NVBexD/qlW2TV3ME90eO8cG95ULbB//vLSHsQ9KyrUlhnBxZp8Y
-	 CzftluYmA6eg7MwG88rXqV14cm60XbFgbZUalkN3Ku4JMwsSeSN44q7twBMI+43ZCr13e
-	 nWyZq0vJ7JpVpmvWzp6R0D/DpaH3I4q777K+opfUyw8jotb9eKN7fMrztMSWq+vvnCeyK
-	 1ojWafAQYRCY2KTdCzlELBahqjcPbnZb2p4qBHpLbmNuO4s8daN45tstXjNfou7TEcw==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=uYNyBQPZZNhX9bMWWeYhAXn2hUMBFRBFv36OG1vhn6Q=;
+	b=SQAEsbVJ/Z7YiqhuVTON3Z1U+ITK0Ylrg/Yq/HQMnxInBrEZKnkb6GQ+5RBcKaPkK2g4
+	 6FUH7vfS5XG0veDAlBuuJd1soToNzYEpeW6AnRPazUwxeLN8KMNCfp0K/LYpZhyCJsZkt
+	 4s/k6tY5Y7a9OpXAocLd3P8IYXu6MVh/meEOoqM8eAMV0ZxKaeAbUblKhM/1JeNYkAzW3
+	 i93JP31gD8d/QEmHdaOmlx6ilnwEHFXMs5qPqDyRlvgsdZTLDrToReUzvEN+eHX8rmMzQ
+	 D8EVOgYXkMPwtfCC4EUYMFDujVd2xOkhkRThwMDf82DQKEv7Wfzc0P0cqxL0DOlh3lQ==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
+	dmarc=pass header.from=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=fIoxG741;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793101598;
-	bh=1q7ixz2WYxKZO8p/Oo/SBydB6gJR+ynFf2Q+v6Y+Ta8=;
+	d=lists.u-boot-project.org; s=default; t=1793101675;
+	bh=uYNyBQPZZNhX9bMWWeYhAXn2hUMBFRBFv36OG1vhn6Q=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=KzB1qWRVZM1sPcHbci+5+l9wJvs8S3di5NVcIyKwmWjn6f7wMLv7oV/VnzXWCSXoz
-	 268+pPGvY5gZfYcQ5brMzgzros+J14J+o/XlCc9+nLklhQyn6QA7AgHfVf9LRf8zgg
-	 /YMi+o4PeBdqqBNIsGo1z7hveOXFP3zhY8S+UKEt8uBbfQlqevJU/yOc6oPh3/Vt6Z
-	 Mypk1eBKPlropTKXLZBuyFcheEsd68emPCKgHJfJAllx83Tt73cyJppJUm+Ymbrb+G
-	 HjY7qwNrZij3q2qrc1pYitRFHtd2JPBmpixsfoGaCzn9zfEXRJWsPj/HyZ9+iLROPw
-	 m9briI0i15+XQ==
+	b=g+SrR2hyAisC7oaJMTLjdbxw6VL94enLeS5MWRr+Vfng/VK1qpek8Al+1UeHdYmZB
+	 SEyK1qbxsehso6TLzj0ALJwQmSodKivUBMVsi1AelARIzQ+fcRL5RXtPGzO61uQ19i
+	 G0P9ojF3vfVEB9hI3dH2mWVBRA0zoN49DRYcaSiQi0+bRUx1PKtLzqxPR7GDGOdm2W
+	 s9mFAm75xB/vXHh6PTDeo8ojcRszlUaQsdaO1Cd3718UhEU+hRTkNcZT5TJn7yn+81
+	 oi2E9rtMZgunnwaQAsuVAY+PFTjZGxYN0SPyKd38mhJSOgcOyuMUkK27fXNMkqk3IC
+	 4O640Q8a/nBpQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 274C280D59;
-	Tue, 27 Oct 2026 11:46:38 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 6CBF9235
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 11:46:36 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 69AA360748;
+	Tue, 27 Oct 2026 11:47:55 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id B458A1DE
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 11:47:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 527FA60711
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 11:46:36 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id A5F6F60748
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 11:47:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CpVpNPapwpwO for <u-boot@lists.u-boot-project.org>;
- Tue, 27 Oct 2026 11:46:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2336A60708
+ id YvuSX7Tvk6zD for <u-boot@lists.u-boot-project.org>;
+ Tue, 27 Oct 2026 11:47:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A836560711
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::112d"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793101595;
- b=PtKolupxT+8mPLIn1EMjw/l4lqZOVwjTqsI8GZ6WkqXlFrCL2pnClERJ1QXW26eGTxtM
- OWRnQB0l/u/Zaiuv5erM5fNMhrC+7vyDAUEfwqHUSRgayiluPwwyfek5Hqb6rt9SPYsic
- i9jPWHzEWcX2gDD7b+l42uYy6SClDsJLxPAON51X96opBmLmbDrPhIbzQ6FnDka3Jv3vP
- vo+qJ9fRrwPjgNq0UvyKgDPB7mZaloGurvzZazzaWkeVCc62mVUSZWYD26LdCBP5B3YYN
- kyQcpByM9dVUoKG/5WO/2dUnWmzZkIedRWW+ID2UwughnDREkqlGBowe+JIyBIZCvXg==
+ smtp.remote-ip="2607:f8b0:4864:20::1131"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793101673;
+ b=BgWIHNjOzRElbKQitn3Z21QddsWCLfyNK3iJMLYSBm464xZ0Kj+7ZeqJjaWPb0W84hT8
+ Nux0bxnfd2UMLQMYLCOq2P2GeQj19z40v/nR400djcrpPhd7JjhzIQm1R5mS7Mvr7694Z
+ Iq+2OEtRxcKJb6DcEg7u+nbhYSxJ6qBnRSObAIQywsXzC+YxQcxnSBRY7nEAbaAbdsL9a
+ W+wV+SS7YzDBHngpqnmZOiJ/UMsf3FTcWSIdMSZ/0vsuVfR875dc/TJfc2Zf3NspH2jSj
+ Ywx8EYbTOiePmrj2PGTNRDRt3IEpQuQtxgBZ6RS/wh7aVhyGzeOmsRFWp1cZ83QoDMg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793101595;
+ c=relaxed/relaxed; t=1793101673;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
  In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type:Content-Transfer-Encoding;
- bh=1q7ixz2WYxKZO8p/Oo/SBydB6gJR+ynFf2Q+v6Y+Ta8=;
- b=lCaprUzjXl3uoTVrJf58kEMz1RE0WN5EWX+b/nWR0FAlrv3MtX4Pssrcldv6VE4ZyAi4
- U59o6Vz6nr3vnziQGGbSLHRJOlo5XiV1K5AkdUkiAull9Qai8NYIEnlVbNPasyUmIjhOM
- sGvbTlj3rj2VteZ4R2085axIhHg6NXiZ7I+NoItWfBjItri7gGDVsN4ks+B3XNew4kWvT
- JaFePlRjf0s0jkuwe5Azahx0HSDL5JbRuj4YqQQMQB1RDYBzaN/Q8YQ0dH89DxtOd/mA3
- rFwb7Ay7RGHwMFq9a1nM1zgMVhdXbwYFJYgKF9UiZqS0QBqApETl0zeeRTXjRs758Lw==
+ Content-Type;
+ bh=uYNyBQPZZNhX9bMWWeYhAXn2hUMBFRBFv36OG1vhn6Q=;
+ b=ZDk3Ye3JqElYadyUB0rS5ixKyKCM2SI4LHpt3BuNoI0ix4GD7DA+7uLxLXvLDo+1meHW
+ alzqULXefITHSyEZedAa1HEOGVIib8I+1cUYcccZ1dmXzEoDziTLBs2/1AZ41xEGM6K4Z
+ 8ii09bpCPVcVDDiV0ZRhMVC1lOlPG8WKgMVvkNnXF/s6iTUE/i6ivDBlD5s5XpfvD34KH
+ 0Oo1ZuZI5Hql12NTWsQ36M3oZo5AiH0SDCBx9z1X0YgiQMr627uFDY0zZ1TON3NvFBMc4
+ lJxl8m3NPC4uTYcoFK5Oah8Cix5McWjtrWGi5IIMgz0gJpZmJiqXgNdpKKsk0k408bQ==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
  dmarc=pass header.from=linaro.org;
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=Lgw1QUMr; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::112d"
+ header.s=google header.b=fIoxG741; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1131"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::112d; helo=mail-yw1-x112d.google.com;
+ client-ip=2607:f8b0:4864:20::1131; helo=mail-yw1-x1131.google.com;
  envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=Lgw1QUMr
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2336A60708
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 11:46:33 +0000 (UTC)
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-8ab38a051aaso38651387b3.3
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 04:46:33 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793101593; cv=none;
+ header.s=google header.b=fIoxG741
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A836560711
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 11:47:52 +0000 (UTC)
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-8b06c0794cfso34273247b3.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 04:47:52 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1793101671; cv=none;
  d=google.com; s=arc-20260327;
- b=D4fkLTMg3bA8RuA8+aSgVxUuUYOZxW5W+gn3i05GQDpQxdasXDCofW0F7TuPcN9kJU
- FV19QnF0jo4AJbCUo3pg8VAGHYU2TgyHLgwZQh3jyLzzlSjfDfDiakSfJzvvRrk4+leZ
- 94Zn95NVgXrFUG5Dj1A1Ar4R07QVboe9ur2XjXDTMunqEQuTXZE0BXxkw+eBaRvf5F33
- kxRj2keaL+TvKnKgu0CHVJuCyLP2EIvVVaUW7iTpz3ggZPw7Ux85A+i/64o8r2Y9SiqS
- R8kZCQ+ObWVgBQAmzziCg8BbPB8lT+JUpJMV8vYnJfK7PuygJgH5i1rLR9Kqf+uLbvB/
- hvJQ==
+ b=pyoYqKBLt6EU23544Q9JzI5YuRS8kYGZWz5NMUco7rXZzxeCUgIvqwmLbJFf/5dYhi
+ WMnDDJ7cjfm4QahukAAyFmnjXJDwsSVYNwZNxMJNY1x27mm25OzO90U9HwEtpW7nirRq
+ JRnms3ejOfjnQ100OdiAHSBke1viKnuZLzSVVVizUwX+hQkLKYNuZ1oF9xFgocgZngUj
+ CubYir65CbNVGFCR0+Du97fDYBxWlmKtS8Odj9XiAR/lYDElKVPdcou1zT5gBYWpy4gt
+ fY9jutP+9rB7klKLD0+qLGP+VwEOoUzX/rRA98yioMeq9cXQ/cuS+7awl4g5O97btplo
+ YTQQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=1q7ixz2WYxKZO8p/Oo/SBydB6gJR+ynFf2Q+v6Y+Ta8=;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=uYNyBQPZZNhX9bMWWeYhAXn2hUMBFRBFv36OG1vhn6Q=;
  fh=dBPtYC1TZ/qisQKccqrPk+ZU1k6U81Ut+AAudAfs85g=;
- b=r9QYFYe47jmTOCECT7AU6V635j5/zV2bLXIWNuboNn/OHV1W5+XltP4s2bKdbhgEA8
- KQH7SyaMJAcRZXW6wMgkzv7Z6LYKJgEYkuMTeplZhoWrtjtRN5tLl6b+LpZ/TXQ4RaTW
- P6fBwnmjMNx/vAwEnj3blEHcoG+J9I/4nAjJhrZBzXOsiFUTwdaKuJyTLn9sn/oU9H4S
- GhA7+IakpQBva2V/Ph+MbjkImV3dZTjewtTInxAdLvqqIaEU4Wmqb+UkXu1i8f9AyyH3
- NPoRnynX43APSW2LV8ioKETqnFFa2+mUUL1TGQN8yBGyUF06wIr7Y/RteL+lgvRXR5xV
- 0FOQ==; darn=lists.u-boot-project.org
+ b=Yo6DYDOetkhLUE4/HR9TC14F+x6rfzs+AZNYhakKpNRwXKC9/u3Yb6R61W/c1VPYko
+ SDa6Z83T3SQmARHBuyVyB+apD2jgIctHY80Fy8WD2Us5RIJ5m+wFUjzYInuZh/5zPepw
+ s1HRPnuBUhiAakLb9DgYrJe5lriLuRsApLIBo2LHSc+RYgxIYtRQT8DrpU3UZQvM0+hb
+ EtnVpjSpX1aDT3MgUVTL5uNWb6bnVmZousmePw6kRZv1Vk1t12MO9lfZgBbJ9F0ILaf9
+ TjZznJQYSHmyZvAb5FdSn/Wou4/AykVDGqI04fylxQtlt+CbaggRBTYH43Smj2bx4blg
+ HZZA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793101593; x=1793706393;
+ d=linaro.org; s=google; t=1793101671; x=1793706471;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=1q7ixz2WYxKZO8p/Oo/SBydB6gJR+ynFf2Q+v6Y+Ta8=;
- b=Lgw1QUMrbOULhv8+MkGAnLNAZ0fB8h3ut78h26+PnNszCRoTvAcK7g30QmwwbhW5zA
- gzHiyWwrhSgeBzMI/OQtWx+IG5x3F4HALKeT/oxOe7o70gGrvO/et8zNgVqzEgcWfn3A
- eFJ+zWaI3TdH07ozQzAtxb9KESLAoMSV7GNnEAi8YjoOMxZgNjwz/uj5HJ5ty2PEozlT
- PcZ6LubHAi1fL2yAE28ml3YdByqVtLc4qmg7fh4nGzVfkzaDBC4AzuytE/RQVfmyT9E4
- mi8bLBdxjgpBzR73vBRSgVhyjsZX/WWq+s8iFLTIHP3+8X1iKNisM3qha4mwTffK2UjA
- a/kg==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=uYNyBQPZZNhX9bMWWeYhAXn2hUMBFRBFv36OG1vhn6Q=;
+ b=fIoxG741dWH37M/J1JPdK+9antYJCAUNj4GT2e9ReRjBOCpupQ8I/b8IF/xNy3DKUX
+ 3DeEB4fURvD0/NRkMNIobSCKD+cMCWwBsQuVEE+S1QbUpt242Ryeuz9jvgDvgadIKiwx
+ pm56SExL0n4f0bTqEpPkj4uKWeZ0OIKWS0JhEfnaaTizesWNljcgs5t++oWMHSoavdVj
+ eRr1hP6xdj1gCpNQQ5ncmoLhJVlju4lq5UVcaoPk0VVYZ4zXu6a+Atsi2GW2PM77/JWE
+ 6k8fYwwUKUijkwQ+D6yaTwgkikglJG/yjLfgO+u3ZcjYjuY6Isdj3Gzl7LA/jLsSpwWd
+ +BOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793101593; x=1793706393;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=1q7ixz2WYxKZO8p/Oo/SBydB6gJR+ynFf2Q+v6Y+Ta8=;
- b=Vgj6NvMWzs34RvwjfVs5wjNUJePPI3BIWl3tpOD2aEFj8OmQj6gMN09dhI4zzAkTOJ
- wfE6OeFEJEKt9iH3WMToP0u9SjQlKPhEMWOJZ2pErIkVz1avyNID5o9yNxgX8CnzHcHO
- YG4EwVG2ABeA/Z4a/zZwRcQhANRAFiKEWcGRj6lcTopb9Q9cTc8hkJDiMGz5KY+DJtPx
- LfT/pcCVVis1P/jtdvqI4ZRQqiC2hxFSr9Mss24Eydpx/j3iRZfZgiXQboAVrF/00MNT
- b/yikq+StOi9tjk6LBfx8e9Bosa38LC7jG8dVpNxwFV88ek1jdo0Qp74tLvNYDYSFyKI
- OyOw==
-X-Gm-Message-State: AFq9FYJcuIZaqWx8qYj3hTZY/2CmvQ3Od3vJss+C3oc8xsoPDn5GZwgE
- fgLWUnZpoo5xvFJwquMRQ738V2PJWTj8pVRu7E+xiPyPlczhQCd4ttHAxFMozOKBUyA1K+2YAnL
- Mu50Kdk41ki5ObXisJEyYhV5K9zGp64m7vkaZu3BQtw==
-X-Gm-Gg: AYBFou1KU3+8tN6mHN6Ns6hlcI2QgChBx3T2sfqolDK8bN2B4fuiwD1FI+NLJ8FIcEv
- z7oIEMM7ZJlkQnCp9AAUJ7Z4kErebQaeh+wd84DvED7WOI9eV6gSPwyOCngg6WoQ5tLJ6oKkdty
- yPViGMQFxjTKhy2s9K/ZHNFqQvVZUCGHE+WR7hiW83bnuc17jwPgpfjFSwmDaHVmbr4ZR7UU5vj
- 1KTUg7V7YClBR1YjAUz7fG0m77gAAbMYUvR63JEVQ16Ypq2ZK7qFO93R3Phf8wnXKuJTX128HoQ
- hWB59dhAwXgUOHB9iTG/pxGwvLxCOFoF4M2BncsUb/UOvlFn8AG4iY5+zzb+EHhgrCpcZYZNH7R
- FJHWamXrdA1x4Gw88CWcMBOJRX+9ocSx9A/Y3ffvwH7IICtOM9oVU/D8y1FheyhhLxIxsnhw/p5
- wbw8leT/ibzm7ZgGt502epi9Ow4FRjQJF+hHRmE332zr0bnHrkLy8ZJwojq0Ax19xZxC0Gnyy6C
- DxJekPaVjSMqNTv+yDuz/ac8B2DAjLy3oYIzV9yCLtm9KRYYz/ZDd99JjuB7A2f9tWxQskctOCF
- s3fguPA0K2qbSnGRUN1KpfE9RK4zDmGWUWQgBubd/jL2jisZ/68d24lXCJQQ+I9G6P3Oi5KsDvu
- 9dYiPqMTFtV/ze7HSBoMeQrPl3ZO+fdJL3sFQQnIr8SBD5B8/SVb2c6C5+vlhj0gvXIFXP9NSsi
- qG+HPJksNkhgTHUHWnHwySnDo5Of/g1+r7JAQ=
-X-Received: by 2002:a05:690c:a003:b0:897:73ed:dd25 with SMTP id
- 00721157ae682-8b166bcc34dmr56613237b3.27.1793101592578; Tue, 27 Oct 2026
- 04:46:32 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1793101671; x=1793706471;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=uYNyBQPZZNhX9bMWWeYhAXn2hUMBFRBFv36OG1vhn6Q=;
+ b=UQi22xKslY5oStwkLFBSWNh5vM+Yd4hAxlq/hyLA7cN7HGFy9LjpaveofqirzDVarl
+ H1L9SAiEENd+zHxgE6bCsRewZ0lHEZfm0XEJNHGW+xWnWnDfYTCjkkCf/O8xuXGNf98X
+ dISNqqHUSCeEo10so664a28pGJ5Me6Pgj6YR/C76rFBifGlu/TUsPGx4bJY7DFzeLmqe
+ aecXuhSNuzLXb7RQUZmd/n6CHg3jIPqPo2WGz+7gjkjQqmWtBu/OYv4sXq2ySV0wmq+N
+ RZk5MTEBpEFbldCT2v2kb+E4GqWB5LAvtgQheq5n2HE/wRFdv4uj1H0PcbL3sY6KKmmp
+ IT8g==
+X-Gm-Message-State: AFq9FYICVz/g0YRY/6Dx5iB3IzcjnbvbzqkydvOVO6DVuBiXDexplY0C
+ dqsRTOl9WquIkT9Tp/lXmyqyE2xvPnX5cij20UY/c2/MaETguheeZHahnV/nq2ICAmgfVrAXXi7
+ KWsWfjd/wX5h7/3n9ywgsTYuKDLw+zwZcStsCjtUZNw==
+X-Gm-Gg: AYBFou3aN25biyLle2w31sxvce1YfUPftUqHOKjt4B3yAUVb1Y//5gGjxxvZ05n+cRN
+ LwJLSlNsgZZUUW+7Mx6mnRJ47Obt4UQ4p7bG24L3TmGAFTkUmrrHtQeOTqKmg05QLheHAJynanh
+ uDEZj7KiDOI66MpOHJNDguvZb/DAhKS+QK7wcJPZI5EK0QeGcvzuvkbdFvDjcZsigwnnd0lwMp4
+ i/0Xt8JmYyt1gKAs2/oaeGZ53Mo1RpaI4j/R1vekD7eX8d88fQOoRS278DD2X2VKvnUYH2bfe3f
+ QeNoGs2h8wDQAs54wt8JPJwlXah+rtLSaRWPp/IJAmohn4XIXpXDt/Qgt+5rP0U3eQkGtQ0JWWf
+ uXd5LaRVW3UQm32EmF298I4EzktkoMqGI86f1ZX0/K2j439D3xpKqNqkpKSo8tgvQIh86XyyTiY
+ C/1k7GUVOf6yGZ4KgHvMFN/+iwz8sobdwTY9zOUGrA2nvT2eofOBV20c/fh8TeHqvSSmZDLjult
+ XvKg5Ix9hCV4Tz+/drb7pc7QpQWjeCh00jenZYqQT64UEKtqPVtpkCcb/zm6kHnIDnQTxNBgqYf
+ fX5l7NgPamd+NEwZxh3DzPAVNcgs9UafvUG/tgGPpJpPGhWBBQf55VJfWoZh7nGbSenFGjwpmCx
+ RWB9DMW64+W0QgDK6bo22NiRECU+CUybSFsBmH5mE6Y3lCOvmbhVJsyWHmus/SccV72q6cgpXG0
+ fY4pruIn8/lUKynMwbSQUA0UXHaHTuPiTckTzBEKsFTIzwqjit5gaEOovNmg==
+X-Received: by 2002:a05:690c:c4e9:b0:8b0:a30a:7f25 with SMTP id
+ 00721157ae682-8b166b8ea33mr71993857b3.12.1793101670699; Tue, 27 Oct 2026
+ 04:47:50 -0700 (PDT)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 References: <cover.1792001844.git.harsimransingh.tungal@arm.com>
- <c927a9789a43f0903237040cced800e077bea7c5.1792001844.git.harsimransingh.tungal@arm.com>
-In-Reply-To: <c927a9789a43f0903237040cced800e077bea7c5.1792001844.git.harsimransingh.tungal@arm.com>
+ <ee4b6c97e1063c2836397c6025003920bcf25e7f.1792001844.git.harsimransingh.tungal@arm.com>
+In-Reply-To: <ee4b6c97e1063c2836397c6025003920bcf25e7f.1792001844.git.harsimransingh.tungal@arm.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 27 Oct 2026 13:45:56 +0200
-X-Gm-Features: AclHuK_Hkgbz6HDHaN_zNfwgzCa0R96Dj0n8KqFUQGf3gUM9bMTImhPYY388jYw
-Message-ID: <CAC_iWj+yDFHL7AWT+z0caOWMPFWut7CkOX_2vJM5HW3xrU0-ow@mail.gmail.com>
-Subject: Re: [PATCH v6 13/22] efi_loader: enable TEE runtime SetVariable()
- over FF-A
+Date: Tue, 27 Oct 2026 13:47:14 +0200
+X-Gm-Features: AclHuK_V1jMX9eUpyM5b1iSvo_om0yvTcKt93jS3hH5XLy80Rr5S9rBaiM7VZYg
+Message-ID: <CAC_iWj+Os=yp9Y=oNf4n0RKCkLd23ahR-tOB4pc4hkr4j_WVYQ@mail.gmail.com>
+Subject: Re: [PATCH v6 17/22] charset: mark u16_strsize() as __efi_runtime
 To: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 Cc: u-boot@lists.u-boot-project.org, 
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -191,7 +189,6 @@ Cc: u-boot@lists.u-boot-project.org,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
  Devaraj Ranganna <Devaraj.Ranganna@arm.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -201,180 +198,57 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Harsimran,
+On Wed, 14 Oct 2026 at 21:23, Harsimran Singh Tungal
+<harsimransingh.tungal@arm.com> wrote:
+>
+> Mark u16_strsize() as __efi_runtime so it can be called from the EFI
+> runtime variable paths added for FF-A/MM communication after
+> ExitBootServices().
 
-[...]
-
-> +       efi_status_t ret, mm_communicate_ret =3D EFI_SUCCESS;
-> +       struct var_check_property var_property;
-> +       struct smm_variable_access *var_acc;
-> +       efi_uintn_t payload_size;
-> +       efi_uintn_t name_size;
-> +       u8 *comm_buf =3D NULL;
-> +       bool ro;
-> +
-> +       if (!variable_name || variable_name[0] =3D=3D 0 || !guid)
-> +               return EFI_INVALID_PARAMETER;
-> +
-> +       if (data_size > 0 && !data)
-> +               return EFI_INVALID_PARAMETER;
-> +
-> +       /* Check payload size */
-> +       name_size =3D u16_strsize(variable_name);
-> +       payload_size =3D MM_VARIABLE_ACCESS_HEADER_SIZE + name_size + dat=
-a_size;
-> +       if (payload_size > max_payload_size)
-> +               return EFI_INVALID_PARAMETER;
-> +
-> +       ro =3D !!(attributes & EFI_VARIABLE_READ_ONLY);
-> +       attributes &=3D EFI_VARIABLE_MASK;
-> +
-> +       ret =3D get_property_int(variable_name, name_size, guid,
-> +                              &var_property);
-> +       if (ret !=3D EFI_SUCCESS)
-> +               return ret;
-> +
-> +       if (var_property.property & VAR_CHECK_VARIABLE_PROPERTY_READ_ONLY=
-)
-> +               return EFI_WRITE_PROTECTED;
-> +
-> +       comm_buf =3D setup_mm_hdr((void **)&var_acc, payload_size,
-> +                               SMM_VARIABLE_FUNCTION_SET_VARIABLE, &ret)=
-;
-> +       if (!comm_buf)
-> +               return ret;
-> +
-> +       /* Fill in contents */
-> +       efi_memcpy_runtime(&var_acc->guid, guid, sizeof(*guid));
-> +       var_acc->data_size =3D data_size;
-> +       var_acc->name_size =3D name_size;
-> +       var_acc->attr =3D attributes;
-> +       efi_memcpy_runtime(var_acc->name, variable_name, name_size);
-> +       efi_memcpy_runtime((u8 *)var_acc->name + name_size, data, data_si=
-ze);
-> +
-> +       /* Communicate */
-> +       ret =3D mm_communicate(comm_buf, payload_size);
-> +       if (ret !=3D EFI_SUCCESS)
-> +               mm_communicate_ret =3D ret;
-> +
-> +       if (ro && !(var_property.property & VAR_CHECK_VARIABLE_PROPERTY_R=
-EAD_ONLY)) {
-> +               var_property.revision =3D VAR_CHECK_VARIABLE_PROPERTY_REV=
-ISION;
-> +               var_property.property |=3D VAR_CHECK_VARIABLE_PROPERTY_RE=
-AD_ONLY;
-> +               var_property.attributes =3D attributes;
-> +               var_property.minsize =3D 1;
-> +               var_property.maxsize =3D data_size;
-> +               ret =3D set_property_int(variable_name, name_size, guid, =
-&var_property);
-> +       }
-> +
-> +       return (mm_communicate_ret =3D=3D EFI_SUCCESS) ? ret : mm_communi=
-cate_ret;
-> +}
-> +
-> +/**
-> + * efi_query_variable_info() - get information about EFI variables
-> + *
-> + * This function implements the QueryVariableInfo() runtime service.
-> + *
-> + * See the Unified Extensible Firmware Interface (UEFI) specification fo=
-r
-> + * details.
-> + *
-> + * @attributes:                         bitmask to select variables to b=
-e
-> + *                                      queried
-> + * @maximum_variable_storage_size:      maximum size of storage area for=
- the
-> + *                                      selected variable types
-> + * @remaining_variable_storage_size:    remaining size of storage are fo=
-r the
-> + *                                      selected variable types
-> + * @maximum_variable_size:              maximum size of a variable of th=
-e
-> + *                                      selected type
-> + * Return:                              status code
-> + */
-> +efi_status_t EFIAPI __efi_runtime
-> +efi_query_variable_info_runtime(u32 attributes, u64 *max_variable_storag=
-e_size,
-> +                               u64 *remain_variable_storage_size,
-> +                               u64 *max_variable_size)
-> +{
-> +       return EFI_UNSUPPORTED;
-
-This will lead to a compile time error
-lib/efi_loader/efi_variable_tee.c:1179:1: error: redefinition of
-=E2=80=98efi_query_variable_info_runtime=E2=80=99
- 1179 | efi_query_variable_info_runtime(u32 attributes, u64
-*max_variable_storage_size,
-      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-lib/efi_loader/efi_variable_tee.c:1074:1: note: previous definition of
-=E2=80=98efi_query_variable_info_runtime=E2=80=99 with type =E2=80=98efi_st=
-atus_t(u32,  u64 *,
-u64 *, u64 *)=E2=80=99 {aka =E2=80=98long unsigned int(unsigned int,  long =
-long
-unsigned int *, long long unsigned int *, long long unsigned int *)=E2=80=
-=99}
- 1074 | efi_query_variable_info_runtime(u32 attributes, u64
-*max_variable_storage_size,
-      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Is what I am getting locally.
-
-Each patch needs to apply individually without breakage/errors.
+This commit needs to move earlier in the chain, before you swap any of
+the runtime function assignments otherwise linux will crash during
+boot.
 
 Cheers
 /Ilias
-> +}
-> +
-> +/**
-> + * efi_set_variable_runtime() - runtime implementation of SetVariable()
-> + *
-> + * This function implements the SetVariable() runtime service for OP-TEE
-> + * without FF-A runtime transport.
-> + *
-> + * @variable_name:      name of the variable
-> + * @guid:               vendor GUID
-> + * @attributes:         attributes of the variable
-> + * @data_size:          size of the buffer with the variable value
-> + * @data:               buffer with the variable value
-> + * Return:              status code
-> + */
-> +static efi_status_t __efi_runtime EFIAPI
->  efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *guid,
->                          u32 attributes, efi_uintn_t data_size,
->                          const void *data)
-> @@ -1124,12 +1233,16 @@ void efi_variables_boot_exit_notify(void)
->         free(var_buf);
 >
->         /* Update runtime service table */
-> +       if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
-> +               efi_runtime_services.set_variable =3D efi_set_variable_ff=
-a_runtime;
-> +       } else {
-> +               efi_runtime_services.set_variable =3D efi_set_variable_ru=
-ntime;
-> +       }
->         efi_runtime_services.query_variable_info =3D
->                         efi_query_variable_info_runtime;
->         efi_runtime_services.get_variable =3D efi_get_variable_runtime;
->         efi_runtime_services.get_next_variable_name =3D
->                         efi_get_next_variable_name_runtime;
-> -       efi_runtime_services.set_variable =3D efi_set_variable_runtime;
->         efi_update_table_header_crc32(&efi_runtime_services.hdr);
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 >
->         /* Record that ExitBootServices() has been called */
+> ---
+> Changelog:
+> ===============
+>
+> v2:
+>
+> Simon:
+>
+> - Split the `u16_strsize()` runtime annotation to a separate patch
+> ---
+>  lib/charset.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/lib/charset.c b/lib/charset.c
+> index 182c92a50c4..738ad1352de 100644
+> --- a/lib/charset.c
+> +++ b/lib/charset.c
+> @@ -407,7 +407,7 @@ size_t __efi_runtime u16_strnlen(const u16 *in, size_t count)
+>         return i;
+>  }
+>
+> -size_t u16_strsize(const void *in)
+> +size_t __efi_runtime u16_strsize(const void *in)
+>  {
+>         return (u16_strlen(in) + 1) * sizeof(u16);
+>  }
 > --
 > 2.43.0
 >
