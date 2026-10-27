@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77F13606A31A
-	for <u-boot@archiver.kernel.org>; Tue, 27 Oct 2026 06:49:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1239606A31A
+	for <u-boot@archiver.kernel.org>; Tue, 27 Oct 2026 06:50:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=eGoyGt+v;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=FOYDpxgF
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=SyVzlHw/;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=CCzVRo5N
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C6DB280B7D;
-	Tue, 27 Oct 2026 06:49:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AF6ED40422;
+	Tue, 27 Oct 2026 06:50:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2niyXv8CntSc; Tue, 27 Oct 2026 06:49:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org EE5DD80AF1
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793083792;
-	b=RqjOcgL8+Hqfm3zzNNt4d0W7708qDGQ8GqDpcemscCmrxH8fvz+DZrn//abHl/35Ze+/
-	 SAbRCtd2/U435XvpXkYsi/QpaqNYv3nIhTL14un6LRpAEb/KRw2bXeE9BNfv6mduHc2on
-	 g5VwqcIFhT0egdxp35+S4pdmlNhowbObqS/bObxDfI9YxTmkk7fQHzXSzxXGA91HBvycp
-	 bzxba87iVuDd8BFYuNtV9WH91ebLMbU51lxwxUzBWGi5M1MPoHsIuQn5uZgdJwg3Frwaj
-	 1GVyYinVYPzlB1M/L+R7keqq8RP8hDGFNWeBq4f+AhSZ+z/WxEc+JnHBN5e+5x+lwBQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KAWHqtvrSoYq; Tue, 27 Oct 2026 06:50:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 04857404EE
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793083810;
+	b=NZvLt2NL3pd57RqsIxbCNQLOyX4UjLbCYFeNArLvMko1Z9yOW7BxomYfWQfO2TZVk9BR
+	 d/X7Bwz+EMLRp8Q12yzXq1IiXHMD5IMhh7VcQXKUAnLMyrJvj/rYwLvkwNj+maGXZm3B+
+	 +sVA5Q7Ba45o4C+koByth5PRAeZQ+piaJw6jsjDLeJZOV2y8+dcVrzhTzs+NcpD9jmk9t
+	 0NJTS2OuIijuea4/DVNuei5Sgb6FRF3y4oXNNifl2JAf5Rqjb58TU47riNsojRL1nyWM3
+	 YpnswFwkkslp+PuR8nEFeJUyfugkvqTsXVmCYvrgQZcuTL27+DtcCW9at9DVB/8ytvQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793083792;
+	c=relaxed/relaxed; t=1793083810;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,142 +32,143 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=xrMsMYQdYJICss8592XAgIhyaKNsRHOy9MhR5kNjZcg=;
-	b=Sw8Ex8vInFh3UXznWYp06z9D3VfHNyZFfIAoWuQLTq25/k8CfBDesTvE7kHa5gaw0wUg
-	 EwDRWGT2D9OvOiTOFs5Ip6/7Q4rw77vZJZi1n8njjYFeBIp5fcLNNha+WVwPuNTjpuOQS
-	 8lkb9dP03+4F7EgIXaqOA/fGNTN+yEZo781OOVDx2bOWWFraaTlUu5GFYX6sEzwcn8eFe
-	 NubqJAXHvzUUXhQeGo2ms6+a3Rf5dpKY+ctx/RQA4ZJSSYY4hiII16h7Wt1hPNDYh/KuG
-	 1dGGAmcjEcUeSPJril9vBB/mQ3T3tlCTQJJwDLeYFwZfqZPa58kdjCJamEGwiWZRoug==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=RQbsFZib9ViJsdmgpUeWmSmjViiPX+6t17wufyFxaBw=;
+	b=nPg9vWjWnwN6p+be1PG1DC/7za8JgtwveWdbvN4/AJbkNkhAi3wgte+rRIQFmXZ2AfYb
+	 PKNLWN9EmGqzk3EmU/kn5Al5ehVOANuM6237dCOTXwlqAFJLb1M6lda5q0R8TKH7olQ++
+	 Pbk4l7p6gaGkeMubP0uWoImIFXgSQCuEUD8YROy8W0s4d1/MjlH86zb4owYi/dwQSpqSV
+	 +lpNUkPnSKc/3ufdgrIg+wEyU4N77Dnt1OoQ1ZJKXftzz12RbJvzDwNGXS9yXTm0ztDuo
+	 r0fr0JI6fQmP86ktkkXF6UgRGRUh6fVodBW11yI2xFOH31KYfhdwb4dC2RR7CPrDzBw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793083792;
-	bh=xrMsMYQdYJICss8592XAgIhyaKNsRHOy9MhR5kNjZcg=;
+	d=lists.u-boot-project.org; s=default; t=1793083810;
+	bh=RQbsFZib9ViJsdmgpUeWmSmjViiPX+6t17wufyFxaBw=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=eGoyGt+vXVCpcailutcSVZxtFndJZOoyDCMXesUfZIQaj0HVIo70UkRc+176jragh
-	 JFqGl0DlO2LzSfvA4eCLLlHrWtWvTdgmIdwUZDqtaeEmFufr83stHNzQXsv/+zh0dx
-	 UViAZVgQeD8UcX9ejxpGjVKI0MVtCTmTBxKXnQPeismfxlEgTwlOn7RirV+jeIj1U/
-	 4GVUN4cF5hEnL8SxvKLQ8bWwm8yRVw8GhHK3lmIKNapl9jPdM3ViC7GLo2WQYqwoW3
-	 R+nQoOVwU2qesxP9BcXrGDe86oYd+KJDu3FJa3UaMJ1BfDC+za1KB7GCwNRIqLTEaF
-	 vmUXLPLfrho/w==
+	b=SyVzlHw/jKR8fCbvFSc9RA6F1G0maNkwkt+MU2zEQw3q2i3Gj9HR815Dlv8pO+fpz
+	 iIaN30ZguTyVHmzh48q1AWu5tekpCIfH2ZNiNGQ52bbmoTiVz/PQ5RM4mq1dVXGd7t
+	 0atUY0fCcfHvfYL6raHE5xyvC1Jj1Qrqsvg98Lr1xnyN26N4kSzRXKrOV+5G8lV1FH
+	 HHCTdcXL4yUbe22FaNgP+QGuZqB0vXsYwhJGD7RfXJXnixGzNFplw4GsGtlsKZ0uIJ
+	 Yg+R38aEUDQTHlo8QGzxZ20OvN2GQcJ3IcH2V0/iebQ0H8jA5Futp1N3HMjzcdDzl2
+	 njgEJ17GY0bBA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EE5DD80AF1;
-	Tue, 27 Oct 2026 06:49:51 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 2CE14356
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 06:49:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 04857404EE;
+	Tue, 27 Oct 2026 06:50:10 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id A7EA24BC
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 06:50:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 1F1E940589
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 06:49:51 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 99E5D400A8
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 06:50:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id H0p9gySb8Mz6 for <u-boot@lists.u-boot-project.org>;
- Tue, 27 Oct 2026 06:49:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6CF3740587
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id nvuj6prCbXk0 for <u-boot@lists.u-boot-project.org>;
+ Tue, 27 Oct 2026 06:50:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 0DB2B40062
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip="2607:f8b0:4864:20::52f"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793083790;
- b=KHhMP1Wf6RctRFq6NQhereum6nIOjEBDkdkCkv84hC78Sse19rGzJgKkbg7HDQ7Wvb/3
- Qwy1D8NGgwzLgZgdXqb6jcLI8pb06BziUPPZN/4CnfidT6QeYQIUrmugXhDjzJKeilMVZ
- tq8s5b7k1klDxy6OE29KfhNWhTTp9dxjAzDY1nQQAreox7sGbTqduYLkVFV1Uver+v3fk
- b96/py8xoEw3gR4JIfkZIw42kFZ3EhJO2UmcBZF7JEqFHVLck9DkhLrlObsxZFJi6PmBj
- IBTOwaaa7v838eafCkkp2CPz2+DNn/wumqCzlulgbsAt2qjuyDV6d4oMgBmPnR+ckNQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793083807;
+ b=NT7//DfYSiEaOLc+1IP/uxsPHa/Gs731lpdXq7X+L2fTB4P73Ma4gm/BRQMyLILVzLFg
+ 5D6fUoCTo/UlXBdGT3t+kL96+gwhMG6TPxGyJdYKvqK3dfJuvvgi8ngymFyNn6tPKgbar
+ K1YKUnLV7bzKCRGkf5EhpdeK3zIAFVvPwPz1QagT7OikxXXSy+8pvqKIu3H/xwq/2w+Pv
+ 867tIvG3GNmAn/XxyD3ISiP3grw2uzmTvY5vf0ctBOTp6enDqaAb3p32IYHm1Mk2vJ7gF
+ 1n4JukwQiplwrsFm0EvZMyog2TlEAYMieIXghNABGHSXE+tXn87w4JQGQdoe79NscUg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793083790;
+ c=relaxed/relaxed; t=1793083807;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
  Subject:Message-ID:References:MIME-Version:Content-Type:
  Content-Disposition:In-Reply-To;
- bh=xrMsMYQdYJICss8592XAgIhyaKNsRHOy9MhR5kNjZcg=;
- b=KzBQg/1UHbv9GqE+Rfp3BFnpY/uxMelihyKwBOiYkJryMnqYVnAkxlWCVHRoRh/fMpjp
- F7BTislEvrxhyZu3iNeOl2A9AFqaUs/dGLfnQDDcohwMjJu+o3yZmbmLKpmhoPwUJ6IWD
- DHyazsgLNx2jvakl9KapGxCVRFHZ9nntA98zdmvZO3xrn2d2u7IDQzjyL+k/n5HhpdmY7
- klG+e/Bex9oOQearN0Nm7T2Mb4RPsZBovMJ2s5Qs2E3cK/Cm0Tu729a8ILE2ZUIXg687f
- 07/MoGUe8k0rr2oK5x7DHKAVgIK7J2MqmkYL1sujUg4GE+ssp8/boQ9CY7As2Nic72g==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=RQbsFZib9ViJsdmgpUeWmSmjViiPX+6t17wufyFxaBw=;
+ b=VnDsRggMeXutCLgCmu7EW2y6T5Lm0CVvYUg5COtufAJmpcQ5M0u85N6iud//rHYvRnyh
+ fK9w/BN2DnKcVNkt9DVmbXjfbLRcGDanpPxES1IciaCazLlEA5rO4ab2AHrQNf6wLDTJE
+ Lrv3U3T8bLlxDhgODYYyjxHg7RPM8pmeKFSZojcQZD+YZy8AgXmkR2v/I0qm0WO5vRKWA
+ 77nPJ4aYN3ioO2r2xWRduplMtxgwhok8pLgZewWKo+UbZzp/I9v1taHs9QRCzDoZnRV4f
+ eJqo58TYWHcHkFp94mGcGNN0bMyjiJQlVEgPz6CqCqKQG8MlVpm4mbNQ36p0qxAOscw==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=FOYDpxgF; 
+ header.s=20251104 header.b=CCzVRo5N; 
  arc=none smtp.remote-ip="2607:f8b0:4864:20::52f"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2607:f8b0:4864:20::52f; helo=mail-pg1-x52f.google.com;
  envelope-from=visitorckw@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20251104 header.b=FOYDpxgF
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20251104 header.b=CCzVRo5N
 Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
  [IPv6:2607:f8b0:4864:20::52f])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6CF3740587
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 06:49:49 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0DB2B40062
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 06:50:06 +0000 (UTC)
 Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-cd61cef87f1so1258678a12.0
- for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 23:49:49 -0700 (PDT)
+ 41be03b00d2f7-cc52c1b8286so298245a12.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 23:50:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1793083789; x=1793688589;
+ d=gmail.com; s=20251104; t=1793083806; x=1793688606;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=xrMsMYQdYJICss8592XAgIhyaKNsRHOy9MhR5kNjZcg=;
- b=FOYDpxgFByNY8JQEQhEa4NhhFruYgpSkG5qjTSL8M05+ztCB6B0zvJ/Y0fU2hMT6Zr
- op13uGhuSh7+SbXUT/WkMd8p2D71xa7L/SnaMj9gUx+cUWr5E74PJGDUH42bwXIz6Us3
- 57gGGaSDpFJkwIHGNvVuH+xvYhBEDvD0sFrbQYxoZS7/m6hslWBQjXjGCA0/bUo+pYGT
- zp9v6K3sYJC+QOYROtt3MbQMmJWNWgDlkqJZRvsnSBhUDD/Ns3JTIezDdaib3/19CPgq
- t9v9VpKULrUM1uc5ruuiAs9Ze5gMTjUMFW4Vy2X1nbJYAxTzMWnH0e9pTnaYk7exI/Xz
- jLOA==
+ bh=RQbsFZib9ViJsdmgpUeWmSmjViiPX+6t17wufyFxaBw=;
+ b=CCzVRo5NAdMcZgrtQX1u0GR/3Wl/47HDNR841pCu6YQjzFkuSDo32MpWjiX/n+q7p9
+ 1m1RQTp7OwFa9h16mQF+Vd11e2sTaxaCqw2ZTQs9VD6NGgFqFVcG5xbzUVdU0qDxn651
+ 0D3OYpOUEmHJoFvKdaa1FhyyWrqicZeYmSddz5ALqL4MdJJtAcFIbY+hNYT+iWpeQBz+
+ xKN39XoyU/Cd4ZC90PJ/Ty40TSK376eIEKinxGb1x9ZwJ5F4qMGHCOSeHVB4bZvVYmKE
+ z0c9AHiYjh7n0vDq0FbQ9csxY2Ce4RPTtUCXkVrwtsqqX7E2TlPw2MwwJv8Rsfp8fuOU
+ jSwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793083789; x=1793688589;
+ d=1e100.net; s=20260707; t=1793083806; x=1793688606;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=xrMsMYQdYJICss8592XAgIhyaKNsRHOy9MhR5kNjZcg=;
- b=os9olTxBE83OqdxDIef3hTgirH6CUamfsVAMfFRKUs0NnjCe+vzpUasw7aKnJ3/QBM
- lUEL/8IpIxO4LzHAg+X3jAJnam1LWwAl+QWQt8lGvB2AmzzLB0Obe1sdRGTHTUzli0KR
- yDv0PukEo9rhuvckMovgmNYyJI94Gx/xAJ3b+rUkeH4eAnAyHpqmeRFhJvJpt9v4tozJ
- gLhoa4q5mbXUmj8AMkVu2f6TzSVubbhQkwTLgt99lOi++1ylO5I3eKU3xNr9MOD0sz8f
- OOB6iy5bidfJXEFYFsvdbAYCT0ekJFgcxJJJLGpztVyOvLvQMVyz69eiXj0moQ5wV+O5
- RS7g==
-X-Gm-Message-State: AFq9FYI9kG1YXLHN4lNa59O8W8gOkv/EWYehJ7T1/P5muBakUsRGsvBT
- JJTtO+z1PMvEJvdNu5J7mPU6bS6ZDuv2QcrMNH+6ebPwUbUNFRvj5lfa5hFCyQ==
-X-Gm-Gg: AYBFou01mATtGjlrj5A0ey8LUk7cjgfpIAoiefNKNkvWCMnhUq91o++PhiPTd5Hsk7e
- gq7qIqQrxy+4YUutnRl1pUG3DTCuXoS8G3aU8x7KYuQVShAuLCXs+YfbBArXYXPAwYGbCX5Dx9S
- V0yLJyWNixtt9zYLBUv0M5QRz8iDie0yHFCiQbKP5IPFYdtjtO+K1m1HTYOhayzHo7N2HpNSviX
- odY/M2+DUdiuCyP2HaK2ftaRpYGf6dRPCXMaLVRv2W9kTdoJJ5z6QjbtXnyzLpelfxGQwdfae8G
- B3+lG9ZwymVKvj6+u2wav8k04auPzkJlv4KMXSofwh1xyWQntsHUEWDAihSWG5Ql7cYBUIE8qvP
- kkyhWsiWpnKxHuR5Nnaeaj7pmrpXlSBAvDynMr+ivlA4QNItKaZFCpi44nIgpw6+Dw657ff0wFj
- V1UCGKw0IlA+GG2G2+bDiiOI+ZXLW4PpF6MlUs0eGulzi9c9PvxyZfU177eqwwvDr4ZnoIvzphc
- 7ou9EE1nlEhzPgnyGGUjGhkifF+UbJx8VzKI9cvP0InMlH8Md//v6QnUyj+QQW3FrEtzP3HaOKd
- pxnV83qzi6t0XM5M8TAqIApkecpHZ/b5VHs=
-X-Received: by 2002:a17:90b:4fc9:b0:3a4:9dd7:296f with SMTP id
- 98e67ed59e1d1-3adeb0fb875mr6843535a91.40.1793083789238; 
- Mon, 26 Oct 2026 23:49:49 -0700 (PDT)
+ bh=RQbsFZib9ViJsdmgpUeWmSmjViiPX+6t17wufyFxaBw=;
+ b=WDCWIWrTXGXhwhTbyf3dAWttKvVJWp+v7nw0GuDfPnGdbxO2dzu88Y8Md311G16Iqc
+ V4OXA6qD1rhCf/wmfdPI8fnVl+4n5mVGNjBL5a9zwH3hWhdlxtpJQLcsKKjpBqytUcKA
+ a+ThtuBu+VNfgHVSQ+KFgUGK9UKEcaONjXX2NOxCJZHxiBJMFYwHILwsifXrOrefh3Zu
+ sbZ6HREPvB6tVLNfF43cj1fmLVZxXICYFUk13ExTGUM/EbvmMSmMCEBVmy/9yuIuIXx8
+ bDRJ133SjOGoKcjCOkxNtk6rhYF/+QolOTJyhwUAkQWTIqMos75W8DCoKHBJVuLAI1pt
+ 1qZQ==
+X-Gm-Message-State: AFq9FYJAVguT+d7SIKfOiUrPTzrxTTiDEQGbMncTJMt5l569kKjtCxgX
+ 63MfU8BRaOeztmZZk+IKSR/P9EaBcStABOfNnrVE8xCPIvZW2GVD6Hve
+X-Gm-Gg: AYBFou3qJOeuH4zS897xiSqbvI/NV2jx0NxBnAPax2gP2MT9IaCeQoAuUWh2IMlOME2
+ gzPsRDKFHYw1DhVFujps5E9+Upu+V+U8SegOY7Fc7YFx/pUEoejAS6ubVRfgjb/0qTVcaHWhG7f
+ wfLF/QiJ1kLT1ImGutxNMLlDOO49PdkVTg8YB4A1FHQlFQC9gThBdP3Kw15aF26OMSzeaXSpYkt
+ 5wrrR8HRYdAiHe3BZQ1G6ywbNStvCul37QTAq3Zj8ueD8SK2tOo/AsbAKVu94A7x79ohH37aP24
+ S0xkIn8FdaqASI4sL85s2RSZV6GY9T+v/u+GEIE66mjbptSEocnFfHizqPvKtQZchSCcx7A2BUY
+ wA54zgOmaXebYvkb59HhJl2+87pvSxEmmxTKUIHlTRn+BpdO+OKigh7xbdPlgUgWoUFmiFCqk9e
+ phfCLSchGfDRiXn7nHWq8RT19/mkZssiNX1hKYYAGgAgXOTK/0jSXKiq9+xqRYq7iMS2zkiZ9Hl
+ tBZNKgkD1srYUW5sZbtbiTD49GK5Qqe1iSti/HbCmBXSM8I4DE5GOZ5Kyu6hW65NPRWvHEzcRnD
+ sIJAthDZC9af2A==
+X-Received: by 2002:a05:6a21:2c03:b0:3e1:1fb0:fc84 with SMTP id
+ adf61e73a8af0-3e8eae7c930mr1135409637.45.1793083805943; 
+ Mon, 26 Oct 2026 23:50:05 -0700 (PDT)
 Received: from google.com ([2a00:79e0:2039:4:1f3b:75d3:73bb:cec])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ae406361e2sm2264785a91.8.2026.10.26.23.49.47
+ 41be03b00d2f7-cd8ccc21274sm2254420a12.8.2026.10.26.23.50.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Oct 2026 23:49:48 -0700 (PDT)
-Date: Tue, 27 Oct 2026 14:49:45 +0800
+ Mon, 26 Oct 2026 23:50:05 -0700 (PDT)
+Date: Tue, 27 Oct 2026 14:50:02 +0800
 From: Kuan-Wei Chiu <visitorckw@gmail.com>
 To: Bin Meng <bin.meng@processmission.com>
 Cc: U-Boot Mailing List <u-boot@lists.u-boot-project.org>,
- Bin Meng <bmeng.cn@gmail.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 4/8] virtio: Release virtqueues after device reset
-Message-ID: <auBJicrbloG1woFp@google.com>
+ Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 5/8] virtio: 9p: Reset the device before releasing its
+ queues
+Message-ID: <auBJmtCpS64F0-8M@google.com>
 References: <20261015111328.1269775-1-bin.meng@processmission.com>
- <20261015111328.1269775-5-bin.meng@processmission.com>
+ <20261015111328.1269775-6-bin.meng@processmission.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261015111328.1269775-5-bin.meng@processmission.com>
+In-Reply-To: <20261015111328.1269775-6-bin.meng@processmission.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -185,13 +186,13 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Thu, Oct 15, 2026 at 07:13:19PM +0800, Bin Meng wrote:
-> NET, BLK and RNG remove their devices through virtio_reset(). Only the
-> modern PCI transport currently frees its virtqueues during reset, so
-> MMIO and legacy PCI retain queue allocations across remove and reprobe.
+On Thu, Oct 15, 2026 at 07:13:20PM +0800, Bin Meng wrote:
+> The 9P remove callback frees virtqueues while the device can still
+> access them, then resets the device. Outstanding requests can therefore
+> race with freeing the ring memory.
 > 
-> Wait for reset completion and release queues in the common helper.
-> Keep transport reset callbacks limited to resetting hardware only.
+> Use the common reset helper, which waits for the device to stop before
+> releasing its queues.
 > 
 > Signed-off-by: Bin Meng <bin.meng@processmission.com>
 
@@ -202,105 +203,34 @@ Kuan-Wei
 
 > ---
 > 
->  drivers/virtio/virtio-uclass.c     | 18 +++++++++++++++++-
->  drivers/virtio/virtio_pci_modern.c | 12 +-----------
->  include/virtio.h                   |  7 ++++++-
->  3 files changed, 24 insertions(+), 13 deletions(-)
+>  drivers/virtio/virtio_9p.c | 8 +-------
+>  1 file changed, 1 insertion(+), 7 deletions(-)
 > 
-> diff --git a/drivers/virtio/virtio-uclass.c b/drivers/virtio/virtio-uclass.c
-> index c163b2fd7d5..978ef0d1ce7 100644
-> --- a/drivers/virtio/virtio-uclass.c
-> +++ b/drivers/virtio/virtio-uclass.c
-> @@ -25,6 +25,7 @@
->  #include <virtio.h>
->  #include <dm/lists.h>
->  #include <linux/bug.h>
-> +#include <linux/delay.h>
->  
->  static const char *const virtio_drv_name[VIRTIO_ID_MAX_NUM] = {
->  	[VIRTIO_ID_NET]		= VIRTIO_NET_DRV_NAME,
-> @@ -85,10 +86,25 @@ int virtio_set_status(struct udevice *vdev, u8 status)
->  int virtio_reset(struct udevice *vdev)
->  {
->  	struct dm_virtio_ops *ops;
-> +	u8 status;
-> +	int ret;
->  
->  	ops = virtio_get_ops(vdev->parent);
->  
-> -	return ops->reset(vdev->parent);
-> +	ret = ops->reset(vdev->parent);
-> +	if (ret)
-> +		return ret;
-> +
-> +	/* Wait for the device to stop accessing the queues before freeing them */
-> +	do {
-> +		ret = ops->get_status(vdev->parent, &status);
-> +		if (ret)
-> +			return ret;
-> +		if (status)
-> +			udelay(1000);
-> +	} while (status);
-> +
-> +	return ops->del_vqs(vdev->parent);
+> diff --git a/drivers/virtio/virtio_9p.c b/drivers/virtio/virtio_9p.c
+> index fb2eb0c7223..d0fb39a1de5 100644
+> --- a/drivers/virtio/virtio_9p.c
+> +++ b/drivers/virtio/virtio_9p.c
+> @@ -102,19 +102,13 @@ static int virtio_9p_probe(struct udevice *dev)
+>  	return 0;
 >  }
 >  
->  int virtio_get_features(struct udevice *vdev, u64 *features)
-> diff --git a/drivers/virtio/virtio_pci_modern.c b/drivers/virtio/virtio_pci_modern.c
-> index d309f9a9dc1..abc0163fa82 100644
-> --- a/drivers/virtio/virtio_pci_modern.c
-> +++ b/drivers/virtio/virtio_pci_modern.c
-> @@ -14,7 +14,6 @@
->  #include <dm/device.h>
->  #include <linux/bug.h>
->  #include <linux/compat.h>
-> -#include <linux/delay.h>
->  #include <linux/err.h>
->  #include <linux/io.h>
->  #include "virtio_pci.h"
-> @@ -350,16 +349,7 @@ static int virtio_pci_reset(struct udevice *udev)
->  	/* 0 status means a reset */
->  	iowrite8(0, &priv->common->device_status);
->  
-> -	/*
-> -	 * After writing 0 to device_status, the driver MUST wait for a read
-> -	 * of device_status to return 0 before reinitializing the device.
-> -	 * This will flush out the status write, and flush in device writes,
-> -	 * including MSI-X interrupts, if any.
-> -	 */
-> -	while (ioread8(&priv->common->device_status))
-> -		udelay(1000);
+> -static int virtio_9p_remove(struct udevice *dev)
+> -{
+> -	virtio_del_vqs(dev);
+> -	return virtio_reset(dev);
+> -}
 > -
-> -	return virtio_pci_del_vqs(udev);
-> +	return 0;
->  }
->  
->  static int virtio_pci_notify(struct udevice *udev, struct virtqueue *vq)
-> diff --git a/include/virtio.h b/include/virtio.h
-> index b981eead5d7..30e5005e9ad 100644
-> --- a/include/virtio.h
-> +++ b/include/virtio.h
-> @@ -160,6 +160,9 @@ struct dm_virtio_ops {
->  	/**
->  	 * reset() - reset the device
->  	 *
-> +	 * The uclass waits for the status to become zero and frees the
-> +	 * virtqueues after this operation succeeds.
-> +	 *
->  	 * @vdev:	the real virtio device
->  	 * @return 0 if OK, -ve on error
->  	 */
-> @@ -288,7 +291,9 @@ int virtio_get_status(struct udevice *vdev, u8 *status);
->  int virtio_set_status(struct udevice *vdev, u8 status);
->  
->  /**
-> - * virtio_reset() - reset the device
-> + * virtio_reset() - reset the device and free its virtqueues
-> + *
-> + * Wait for the device status to become zero before freeing the virtqueues.
->   *
->   * @vdev:	the real virtio device
->   * Return: 0 if OK, -ve on error
+>  U_BOOT_DRIVER(virtio_9p) = {
+>  	.name       = VIRTIO_9P_DRV_NAME,
+>  	.id         = UCLASS_9P,
+>  	.ops        = &virtio_9p_ops,
+>  	.bind       = virtio_9p_bind,
+>  	.probe      = virtio_9p_probe,
+> -	.remove     = virtio_9p_remove,
+> +	.remove     = virtio_reset,
+>  	.priv_auto  = sizeof(struct virtio_9p_priv),
+>  	.flags      = DM_FLAG_ACTIVE_DMA,
+>  };
 > -- 
 > 2.53.0
 > 
