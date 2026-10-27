@@ -1,281 +1,190 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78B09606A322
-	for <u-boot@archiver.kernel.org>; Tue, 27 Oct 2026 03:29:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBD9A606A31A
+	for <u-boot@archiver.kernel.org>; Tue, 27 Oct 2026 04:37:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Ad5YfSzr;
-	dkim=pass (2048-bit key, unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256 header.s=selector2 header.b=DO+MwBiu
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=AhdpiEU/;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=jzHtSqvh
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3BC2340578;
-	Tue, 27 Oct 2026 03:29:08 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3BDA56065A;
+	Tue, 27 Oct 2026 04:37:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AGrtXYAu9vL0; Tue, 27 Oct 2026 03:29:07 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 79EF040411
-Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793071747;
-	b=A2RbmjKrw2lVlR+nCgp89en7gEMjZSyhnSHaafpGQDAiHw/qdr1nLN/rbIMfJyFZILom
-	 ZdrJ6tcPdFTVid1qX+BsSYHQQNEFzEaSSDuH5CFmm4u5vomAxJuIfRR20Nn+yaal21D4H
-	 H5MZkpa6W1+HOxHy1hj7ivIka6QG3OMFnEiJi6JLK1PjC93EAHEL+o77lNntf/78SC087
-	 Mrd8h1I8ZkWYxVTyeKOIrkgXBBqmkE3gvH0TYWNQNDjg3YNvZHgR+PJypX1c32thN+idR
-	 abzU4iEPu4awJ0a29/BNrXwZGa+nB4eiftj4RTQUGirudQyRr2HRx3dy2i+4lQP4sng==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NELyrcSVas34; Tue, 27 Oct 2026 04:37:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0F80B60603
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793075854;
+	b=PDghMq0XJcmcAACvAPg+gwW7oWsndvE36TEDn3TtajxMa74gwExM4p+WCi+D4X4f6rye
+	 ePVbVS+olAMRskiRiVxTMr6bbkNxuDhHVCb1kfCCZXdeTVUY3pTDEv6/l50cj2zB/Er2i
+	 z0dLiUxfcILwZjet11h6iYFYtzmRHkazjckoFOri4nxQTT1CF11noMCa3bNJ+D9lCQc67
+	 jz9Q7pOn4RpZFyXjIm417qC5j1LNXnxpiAr4zumkGcjrRB0WevqSvt8DMoeEm6JTk71sz
+	 ssdxU3xoH4HBmg4KKga2ctJxXzMpsIcfM0uugMLdLtGnfjScu8hvowjauynw4/jGETQ==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793071747;
+	c=relaxed/relaxed; t=1793075854;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Comment:Received:Received:
-	 Received:DKIM-Signature:Received:Received:From:To:CC:Subject:
-	 Thread-Topic:Thread-Index:Date:Message-ID:References:In-Reply-To:
-	 Accept-Language:Content-Language:X-MS-Has-Attach:X-MS-TNEF-Correlator:
-	 msip_labels:x-ms-publictraffictype:x-ms-traffictypediagnostic:
-	 x-ms-office365-filtering-correlation-id:
-	 x-ms-exchange-atpmessageproperties:x-ms-exchange-senderadcheck:
-	 x-ms-exchange-antispam-relay:x-microsoft-antispam:
-	 x-microsoft-antispam-message-info:x-forefront-antispam-report:
-	 x-ms-exchange-antispam-messagedata-chunkcount:
-	 x-ms-exchange-antispam-messagedata-0:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-AuthAs:X-MS-Exchange-CrossTenant-AuthSource:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-originalarrivaltime:
-	 X-MS-Exchange-CrossTenant-fromentityheader:
-	 X-MS-Exchange-CrossTenant-id:X-MS-Exchange-CrossTenant-mailboxtype:
-	 X-MS-Exchange-CrossTenant-userprincipalname:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-Virus-Scanned:
-	 X-Virus-Status:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=JNyKajrfhH0Mza1wHMDLU7o5lZmd/RIeHXMQrRvEols=;
-	b=LrADrkP0h10lXt18w0i/TQH3RKNt+jIsjvxGpX/CzvZ0cZykzrvy/5ZAGAe2NgXUUh0m
-	 A/uIauf54wJ6TPIu/nA3ok1b0td198NY2Axxze8CyagbNSQpqHJVwgHvK+6A/Ar7XqZpb
-	 TldPuUc5kwPcUcEcPDr8a/ByKkHXDYrnH7Vok4Ba2s2B0LZeobxMqckTPHWH7H/V/C0YC
-	 wZh9Sn0kB7Y1HATX+I8WeimPuNYm+A+ORorW/uGJ2Sq4hhM2QS6CFINeM8tt58QZvDAB/
-	 9lNZbYkbOwH+fwG8Bd4CyLrb0yr/CsAmP2XUwsctQl1EK6Ov6DMUekeKSXd2dPLTWkw==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
-	arc=fail smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=ix6oepBdSOnDlTmqvq5nLffYb6atfx/6y7RgSV87AWo=;
+	b=YMYlXF/ZAHSssxcFPOcn0Oahp13e45AzFn2mNb8tvcmM011yX8ynygB2y7Mc+0sb09NM
+	 NinJMU5ArvYfBJhScC562CcBuUB/RxXqZkLN8EOyI3jnIKBNiYV6DBOK/mbgzLXQLit1b
+	 flTT91/m8ULu4bEvpnzHYlVCJdt5XXd4LMcyqaP4wYlWXSVto/p3S0bD+a6EF75a6zYaB
+	 V5MreU/V3wxfNmpH2R+TNljEjYAzmOXGl0PCfxIj0kjq435sbcQudqdNUu9z2hwqSl0mk
+	 DTI01IiU0K/2f7ebVCl+bE7vJaVCtFyJyJMJw33T5ESVLCRhG+q0du0XmeOyaWvMUJA==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=jzHtSqvh;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793071747;
-	bh=JNyKajrfhH0Mza1wHMDLU7o5lZmd/RIeHXMQrRvEols=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793075854;
+	bh=ix6oepBdSOnDlTmqvq5nLffYb6atfx/6y7RgSV87AWo=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Ad5YfSzr37EAT8YG73CcMMF0IMuDtrL25/azVJolifI8Q1uv5oL5uYgj5NqVH26nK
-	 fk5ataTeDxIF4khKoel5DgGB9npMLZMxMpQmCQyk4YXcy7BGxWeqWHTYPEOiBHLmCA
-	 K4Y1Uys+g1aSWLkRm2sQMRgf1SyD4B81ZRp/GQicMr+o8R46vE/E5sisF3aOJWGLvc
-	 /SVAT7ggPdtlZ85SX4aOxn4d84O0P24txvpZc1UIVU/W2nysYBG5JbW7uvkgU8XJ0X
-	 qMh1cqhio/qt8VgeFFQ3uzZ+N8i7ynAJhIE7lTLnPP+bEKU13wVcc2WepKlGSLrCw7
-	 7wVEoExoRmfIw==
+	b=AhdpiEU/sNt/ntI5sfrMMuBSsHTvjG+ogXppD4J8OPtAC28TWUV4QvR5RjGnY1dyx
+	 Zh1axD1e7rKiqDC6M2EH1AhtA5e5UClqJK52q36dCNqBO8gcuVXx8PNk2A+tbL+Oba
+	 J86Z628SOg2nSlyJx+I/voDhlazCL5RuZLh3vogUcKVvV3hYgoSbGZzh6IrXYlh/fh
+	 3RTEREPgIG99V4CklPLT+VKSNCqElrNSnnAm3qxYQhraK9lTb9nGxIve4coZEyQgwW
+	 L+c9gD9azwMQs+WvQmHPdUjYZNG/J3aqNJaV8BsStRgqwM2d0Lv/6k5axzXd523Or1
+	 kYMk6igEXScsA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 79EF040411;
-	Tue, 27 Oct 2026 03:29:07 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id B1330356
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 03:29:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0F80B60603;
+	Tue, 27 Oct 2026 04:37:34 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4019F120
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 03:06:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A2B734006F
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 03:29:05 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 26638605EF
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 03:06:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kiB9ofD-TN4p for <u-boot@lists.u-boot-project.org>;
- Tue, 27 Oct 2026 03:29:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 0CFDD40062
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=85.214.62.61
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793071744;
- b=IRC93K3ZxLgm3hhdOcFyEUFmzpdGSGkA9fQkViH53UIQZImpYdH/IFEVEtAdEURCQxAT
- JwXkaQ6ZmcFsMaAD5hhKm51pn7kNrW4S9ZQIVQmpZK3S8xcZpgmc5H7qcShrrUV0lR7Xo
- crH4KHu8XSmp4TBB+F3AaNrTiN8NUoxsbYPf/Vt+xGVR/h/0/80iT0m4OBjVgB/ROWmJn
- f6fg660BHzk52ZDR0F4lLrGO/8E/+ZPUhG0nZHju8fhb5IUGCtmTR4+b8CPhneJHzVCNO
- IN1GD6vQCkb6DhQNdifYu8aXA6QU69Le1rXKBTM07fd77Au4F4q78M/2ay1J1mzCgVw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8KQYkIdIxHPm for <u-boot@lists.u-boot-project.org>;
+ Tue, 27 Oct 2026 03:06:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0A21A605EA
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::836"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793070408;
+ b=aPrJQgf0m8V4lgnha557yksz8nou8R8O35t4BuHHpQTblqzVqyJ8phD1+B2djNEKbA7D
+ WV12UfOrXEk3HxmXKvg1wkwRkpE0LXNhgzjMUKtsVASjTiFC0mpMDmCnYX4QlJi2128jM
+ V49vlpk/KvbUePD2L03/ArXnYAlGvVL6JjCTuiCDl7TQTcWQysARBNJg4g+2jL1/8j94I
+ vy3Wc802/XQfeAezizH6p8iebNwhvMFXPYJmfdEgwUDxLPclg5soHZ8F2GCH4D3L/4qrw
+ 6/fIlmEWwdqb+nfrbexIdw9efMxCGvHms4aNKEVr6yoWisNb0UvX1AfyCYBt5NRfRqQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793071744;
- h=X-Comment:Received:X-Spam-Checker-Version:X-Spam-Level:X-Spam-Status:
- Received:DKIM-Signature:Received:Received:From:To:CC:Subject:
- Thread-Topic:Thread-Index:Date:Message-ID:References:In-Reply-To:
- Accept-Language:Content-Language:X-MS-Has-Attach:X-MS-TNEF-Correlator:
- msip_labels:x-ms-publictraffictype:x-ms-traffictypediagnostic:
- x-ms-office365-filtering-correlation-id:
- x-ms-exchange-atpmessageproperties:x-ms-exchange-senderadcheck:
- x-ms-exchange-antispam-relay:x-microsoft-antispam:
- x-microsoft-antispam-message-info:x-forefront-antispam-report:
- x-ms-exchange-antispam-messagedata-chunkcount:
- x-ms-exchange-antispam-messagedata-0:Content-Type:
- Content-Transfer-Encoding:MIME-Version:X-OriginatorOrg:
- X-MS-Exchange-CrossTenant-AuthAs:X-MS-Exchange-CrossTenant-AuthSource:
- X-MS-Exchange-CrossTenant-Network-Message-Id:
- X-MS-Exchange-CrossTenant-originalarrivaltime:
- X-MS-Exchange-CrossTenant-fromentityheader:
- X-MS-Exchange-CrossTenant-id:X-MS-Exchange-CrossTenant-mailboxtype:
- X-MS-Exchange-CrossTenant-userprincipalname:
- X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-Virus-Scanned:
- X-Virus-Status;
- bh=JNyKajrfhH0Mza1wHMDLU7o5lZmd/RIeHXMQrRvEols=;
- b=nC0+uAkAF/lM7Zq7qoKzMcDxdJ0/KkIKaK18itP94eoDGiw/wrvl4Eota8M7tSwdGqUN
- FZMVJvg7kJLBujNZyxojkNIcFGA9Hx2Fg62A4rReLdNASotvjxnAlrBXbRM5ATMXmmh7x
- 22vQAV4DoZkffROej4gLdnJ0HpFTQbjSN6ZSlrClr6y5c4MzkWzXPsATI/+2UNvvxe0YS
- GYjL5u1wv5eC6x+DgwW39G4IDb4V1XzrjaFSw0yQtwIixZyPsZjjVTdZ2bk6TcSq7+dbb
- KbrHFdswvasKXryhKk4ID8Dg+ddhHDEFtztu/Fsb80P4pM4bARejtypUN/hGm2hKnIQ==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
- dmarc=pass header.from=altera.com;
- spf=fail smtp.mailfrom=altera.com;
- dkim=pass header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=DO+MwBiu; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=85.214.62.61
-X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=alif.zakuan.yuslaimi@altera.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: smtp2.osuosl.org; spf=fail smtp.mailfrom=altera.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=DO+MwBiu
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0CFDD40062
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 03:29:01 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F558840D8; Tue, 27 Oct 2026 04:28:58 +0100 (CET)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D350883108
- for <u-boot@lists.denx.de>; Tue, 27 Oct 2026 04:28:50 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yr3ldKKaVYgqZkPObcYFHkiLJVRECtiDqQckrReZW/BOJiIFxMfABIXS7F3NVsNwKiSSVmRCqQsJ2a7LIIMda1KBqedsgYtVcjxHBtby/J8G8c6eaU98pfeZqK3AWgpQ86liZbAQ7nQV7floBdsNqf+co5ZkLe/GfPyQNYCOBHXBXx+1XqLfMpsOx+UssEY/KccBRH2GYF5p5cFvQ6K2ho5yf2G4mxsDk8PmkcFsCcVJqQ8UYUICC0mZcDnNit3kxYz6DIaBKfsZJK+HYB6tmqJ4Kpaosky1WmCf7Giu4y0cwNuujKEfCD2Hyix43RIFUuGC+JGXyHzmTYjvDWaJhQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JNyKajrfhH0Mza1wHMDLU7o5lZmd/RIeHXMQrRvEols=;
- b=LiT6H0dkmV6X6yqp9cYw5MJ+hoSdh+UsSd6N68z6ln2MQPM1gVijEx0WvtCnufr0hC40/9XnEpQHYJgftkmfmMf//qA7Z+3KJA9MyICpFhvQgCBOWGraSlR+N2ITKtkIrqJnmAnqYorp/1nyHsmVKuus8LJY4bW6lwuNI2cOTcRAjBOAWpbQV8gYsD06mlplNJNv4kltUCCSqLnYbXCi4FLvbFGkhoeXVMePJGJ+GsPc5v7A5D3Kdpta54cLggMxrlmaIMBQvVTDvtAUU5vgoxILvc6Y7mjyxPM/4c+t73qGyYXk5cWq8wNNkbrqBh/v7asNV7JF0xvqYNdHbhItZQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JNyKajrfhH0Mza1wHMDLU7o5lZmd/RIeHXMQrRvEols=;
- b=DO+MwBiuhJguO8jvxJcS1jkj1SoRFrSpw+nyeUxSq7iGWIEMVzG9gW7MDqwtEFWzaqPjHD5/vqhEWUPZ/QbFj7iP61Z415wquxjPD/Ggy+EcsPu7atRr4gkHJCAgzV+8iRvJm4A+Briv7AHem6ienbpzZ0RyxfBhpCEwS7FLzVloYv3wgoEl4a2l/LyIUXqk/tDQ+M1x16jE6jWL0t2rgH9BiOxpQDUsONU6wXTbBFbNbjvrznNIseH0wzYfseBT5Qe2NgAewtTb1l+OqM6aU44jAlXEBEhyf5uqDYk0Br4lvalec0152nbmz5GqDHDO4STz2FALhB+ElM8mCqv3fQ==
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
- by DS0PR03MB182899.namprd03.prod.outlook.com (2603:10b6:8:4eb::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Tue, 27 Oct
- 2026 03:28:47 +0000
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::f6cf:4203:1cbc:cd21]) by PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::f6cf:4203:1cbc:cd21%4]) with mapi id 15.21.0522.013; Tue, 27 Oct 2026
- 03:28:46 +0000
-From: "YUSLAIMI, ALIF ZAKUAN" <alif.zakuan.yuslaimi@altera.com>
-To: "Chee, Tien Fong" <tien.fong.chee@altera.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>, Simon Goldschmidt
- <simon.k.r.goldschmidt@gmail.com>, Peng Fan <peng.fan@nxp.com>, David Lechner
- <dlechner@baylibre.com>, Johan Jonker <jbx6244@gmail.com>, Markus
- Schneider-Pargmann <msp@baylibre.com>, Will <btdai@terasic.com.cn>, "Teoh,
- Shi Lin" <shi.lin.teoh@altera.com>
-Subject: RE: [PATCH] arm: dts: socfpga: Add Terasic DE-25 Standard Board
- Support
-Thread-Topic: [PATCH] arm: dts: socfpga: Add Terasic DE-25 Standard Board
- Support
-Thread-Index: AQHdH8/VgudXmWPh906hU2wqqF9cWLb8AI8AgBVFwqA=
-Date: Tue, 27 Oct 2026 03:28:46 +0000
-Message-ID: <PH7PR03MB7063ED09D25C3DB523439C5BAD602@PH7PR03MB7063.namprd03.prod.outlook.com>
-References: <20260730030205.25260-1-alif.zakuan.yuslaimi@altera.com>
- <ee230408-175f-4683-b498-998affadeda9@altera.com>
-In-Reply-To: <ee230408-175f-4683-b498-998affadeda9@altera.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_Enabled=True;
- MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_SiteId=fbd72e03-d4a5-4110-adce-614d51f2077a;
- MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_SetDate=2026-10-27T03:26:36.0000000Z;
- MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_Name=Confidential;
- MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_ContentBits=3;
- MSIP_Label_43f0520e-0011-44d3-b6f7-0e705cf4078b_Method=Standard
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PH7PR03MB7063:EE_|DS0PR03MB182899:EE_
-x-ms-office365-filtering-correlation-id: 2d25d3bb-cd45-4f10-ff94-08df33da68d2
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|23010399003|366016|1800799024|7416014|376014|261009223027099003|261022105027099003|261022113327099003|261021123027099003|261021121427099003|10067099003|56012099006|261026121527099003|3023799007|22082099003|55112099003|18002099003|4143699003|11063799006|261026140227099003|38070700021;
-x-microsoft-antispam-message-info: veIie7hwGlOQYVBrUCpBFgkGvy4c7FSd3R7iG1fpYz9BgzEMN3w9mb/3kRNNez/CfQfQPVojys3XqTGReq9TkCMM1LTWNthb79JoVnrDcwrYiVCYh/mEdvem+Uii598/p67mFClhZXo/WsOr/GtvyF1fbK4r6+xrMTN9DEBJFUwrUvZNJy8ZL1+Zv2cCLEPtdk1pA7J2pGypk9CZKHC33sjCCqcaWj1PGsyB5TrQ6+NOBJl9+4IIPcSSg9ENOWwmrTsHuNCwagx2QII2IhRwsbcMHYUo35HuMXLUyTOiaodBVfFkUx9e85CzBUAOrphLIW+UdqbCyPsY3zoqtVgf35KqG+10helDow9S/JnrsB3Hcdz7jbI9DIYsj/hwQdGjLxfUVJU5pR2e7J1o+R6Ci5yRErJJNX+onHCm6Uv9oVirkr1nKaisU7OD3gSVBvFD4eitKlYtMGtWl8XIGr25uR01fZfaHs3bGEL4cybAAPQPMOpGcGZzFj9zVYUW1FNA2DToLcylvKwOm7Kktv8dxG4EadaSnH2mHq8uVXLPOqK4HWOMD23Us3cQ10fJj0s3c+612f2byd/2n+svxOg4zSCSEkZzOVkMtesHzUMef6HmJndVvOGwskzc3/f2N0nR0lhQeoKDwsXwQ3ztCWmKsv5m41HvWjOwjJAqIFi+Scw=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(366016)(1800799024)(7416014)(376014)(261009223027099003)(261022105027099003)(261022113327099003)(261021123027099003)(261021121427099003)(10067099003)(56012099006)(261026121527099003)(3023799007)(22082099003)(55112099003)(18002099003)(4143699003)(11063799006)(261026140227099003)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?dTZLVVBQY1ptRW5xak5iajNtNGRvTGZHL3lQbXhwZ0RGdDcwUnNpU1RlNEla?=
- =?utf-8?B?OUlULytoS2o0SXl1VGM2dEpxY2ZJSXBhcnM1UHBLbDB2VDVKVlZUNDJBTlh5?=
- =?utf-8?B?UlpyVXlUTlVUbWM5YmlJc00zWVpiMHpncTdNWnAydS9JWGxSek53UkI4a3JE?=
- =?utf-8?B?RVBWMUZNTDN5N3BxM3VSeEY5R1pyTGVYWWtqbmZZZG0wOGRZdStlallBTFlr?=
- =?utf-8?B?VCthZ1pnZytEdXFVc3JrU2RraThTMnBROUpPTEplWlBRcVFPVzNGTkJ3WUFj?=
- =?utf-8?B?WC9PZFlHNmFiWDlDQ2E4VXl4eWJwRVpHVDNvMldlVkZXLzJ0cXptMW1wMkRC?=
- =?utf-8?B?V1UvTGg2Z20vRnFTUXB2bEdRaG1YRjNuWGFoRkMwU1NTNnJLdGVEQ3NjbU5P?=
- =?utf-8?B?OXloZmVRNGExYnNTMnBFUUdSNmJoeXRwaEQycGI1bm5aR1VqR3FNTnVEcmVu?=
- =?utf-8?B?bW5wZUhsWGVTUWUxQ0xtNStrQ0t0cGZNdkUvbXV1QXZVbUNHeWJFN2NJVkdK?=
- =?utf-8?B?ck43dXNWRVByVzNaNTY0VVdyZm1rNkZaT1pYTklacVRVb3N0bXZNTHBHdE9y?=
- =?utf-8?B?Zy94R1NCejlQTnd2dExrOGY0MlphVlprVmdqNnJwMGVOejZyUVY3TnFkRFFI?=
- =?utf-8?B?ZitTRnVCczhXWVVyUWNkU09tMGVkRU85S0hUQ0tSSlJvN0x6NlFiWnl2RkE1?=
- =?utf-8?B?RjR2MEtYbXpPU3Y3K1JkM2NSSTVOSU05WVgyTTljRjZlRjVib3BmL0plcGtH?=
- =?utf-8?B?b2VUaDNHVHpXSDdsZHB5ZGo2MVdJemNNaG81NVVodFZvNjE4TnU3L2VtemRs?=
- =?utf-8?B?N0xpallZandORlZ0Ymc2clpDS29ydTlqeTByUmVaQU1uOEIyRzBtUTEzYlow?=
- =?utf-8?B?STlScEtmWEV5RE5yU0RLZVRiWWVpK05SSUdDYmhjTW0ySDBEakRsNUxOTm9J?=
- =?utf-8?B?VG9GaTVpR3RYSGlaTlhjbFUwMThrcjhWaE5iRmdFSHVIdTF5Ujg5eGxrMWhC?=
- =?utf-8?B?eXhRLzhIUk8zaEtleFpnRTlRTUZ3Ym9iZFVyU1dCQkxLY29OWWFscFRpb3ps?=
- =?utf-8?B?RmkyMDhzQTlwaDVWVE4zVnBtN0JSRzBiRXhNSzh5ejkzOEhhc2tPQW1Zc2tj?=
- =?utf-8?B?TEp4dkJXbWMrR2xCK3cxTW9IZHVMM0VPUVRId2VVWVRRTGdhV2RMaHBnVDVU?=
- =?utf-8?B?WEl1a2x2em44c2J1QlVzOWgyYmFtcWFwTGU3d2UxY2JFQXBVcUdGVGlpUlpj?=
- =?utf-8?B?QU90dXZ5YTVlZGFkdk5oVFpmNlBMdTl2dDFVbFUrQVdnQ25ONTNGZmVDSFJo?=
- =?utf-8?B?Lzc3TE9Na2d2ODB3SlBsTi9CdlcvQ1k2ek01Z2RacEpGWFFTelQ3Z1hoaWxj?=
- =?utf-8?B?clVYMWdBRHoySm8xMmc3ekJyNUNzWU1UdFZRNmF6cEFmV3dhNVJlK1ZkYUdl?=
- =?utf-8?B?YlZGd0N0dW5ReFhBZmd3dHI1TDR0ZUNHUDRlU1JjaG5pa1lvTXh1dFV6YVhu?=
- =?utf-8?B?TldzWE1CcndScFdRWldrUWVMVkZ6R3g2T2Rpb1ZaUVQyZVJjSkN1cTBWdG5i?=
- =?utf-8?B?TUZMYzhyZmZ3QTV2NkNCM0w1a2FCYmU1eEU2TzV4NVVCTWZjNUNFVERFSDV3?=
- =?utf-8?B?K08xak5OeFBzdGoybVpibGFFbGg0OFVtanE2VzNpTDNSL0FPWWdaZzVRMVlL?=
- =?utf-8?B?M1lzNVpOL2RlU1dQV3BWZ1ZRRFA4enFucnZjU21idE84S0M3SVdtRDBHc2Vo?=
- =?utf-8?B?UkVFQzFTV0xtNjJUaDFCYWIyNTdmUG9QUlFTZGdzMkRvK2ZvMWZ0QVpna2Jq?=
- =?utf-8?B?V3VZZ09CbEx3WnIrMVVGb0hRTVFyYzFWTGJLaGk1a1hSdEg4WVI2VTlPb3Uw?=
- =?utf-8?B?Vm8za0xVU21WMDFrRTNWZks2bENwM2cyd2Noam4rbXpCWFJDWnhERllURVg4?=
- =?utf-8?B?RDB1ZTdvTmgrS2UydjYzV3phUXNQRmlYSlV6RXhmeDZSeGoybW5qOWUxbWxS?=
- =?utf-8?B?Y2RhK2txQWVGNis4T2ZGWVdDR1QxYks2cENTVFFTQkxYRDV4d3RuVjN5OExj?=
- =?utf-8?B?VHBiVk8rOVRwcWFJQmJTZnArV3RIb01MS3piUElzYlRIaW80ZmV1NHQrREp6?=
- =?utf-8?B?Y0VvY3lDM0h4U3FYS2ZSRzVTLzNtS09hbXR6Q1I3QkhMZVUrd1ZnWEpuckRq?=
- =?utf-8?B?SVZDRUxhQTR3bVpiaEppREowSDh2SDE3NXNra1FIdGhBTVNvWW5ad2JZcUJ2?=
- =?utf-8?B?M0hxRTR1MjI1MStwYmY5SURGKzZGQTd2Zm9PbVMwQWl2OWZDeUY3VGptZ0tu?=
- =?utf-8?B?NklNTU4vNUxJOW9lU1ZFVjVVbE9NMzhRcXJ4dCtWVE9vcmhkbWtpQjBWVnFQ?=
- =?utf-8?Q?WLf8Hu1zJil5zb5k=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ c=relaxed/relaxed; t=1793070408;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+ In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+ Content-Type:Content-Transfer-Encoding;
+ bh=ix6oepBdSOnDlTmqvq5nLffYb6atfx/6y7RgSV87AWo=;
+ b=fF50jD7w6ueDPLUHy5VGEKKnjummsLvkoXybkyb+ktNi11yksroAKDrcBlgGpFW7vlhy
+ ajdEyur9DfpUYiv6rHK4Bz18krpiTSoW12VGs5OKBYgiFpFtuBRWb4LM4OzCOU+UFCuDT
+ u5PfigtLfSQWzqYVeDn69zkHQaI2RNs/H/JzmHlCsOE1VBtZTlCuwf9GcC7USaf6WxoDz
+ YHrvGmMSwq5mqpGp0IIp3YjEhQcbHLMtPHQiJLsv1HOhEa6EZ1cJ94QmpGPEJvn7k/IiU
+ WW8+lcwc2Vhucb+3t2Nf7orJjPsIwsmaq1OuTuz0i9j7AAI0hHuIpvK1Dv1mAaVFaZw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ dmarc=pass header.from=gmail.com;
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=jzHtSqvh; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::836"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::836; helo=mail-qt1-x836.google.com;
+ envelope-from=terryzhou05@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20251104 header.b=jzHtSqvh
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0A21A605EA
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 03:06:47 +0000 (UTC)
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-5361e313e63so35351361cf.3
+ for <u-boot@lists.u-boot-project.org>; Mon, 26 Oct 2026 20:06:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1793070406; cv=none;
+ d=google.com; s=arc-20260327;
+ b=kUypua87LJ6aj57Te3FbG6t4IRXvV2TBR+b0VAeFHxPp9pPywBP9dxwZiOQeI+Hu1y
+ DEEaWQSPOxmdA4AeflAFziBiDVqjyQoLXGyGnyVPNaXGLxASHfnjLd4LrTFJqtO0nWmB
+ ItlPilYgJXH4+3xiOSSXD7BP7KRSuqapcZugmU38EILeWxYWco/c+g83x9QuuS3m5p2j
+ TBZU1QJtsh6xzP4eXgu5Xa5EIWGkGbh5nl6kiZFzpxay0R6vSh9c44kVeY3mrA6D+/MZ
+ EVu3qMfLnWooJdaQjR0pzJ0mtBKc2k+nZXNEL/vbosDVLmDnZ/PtOosxgqjoMhL9tE0E
+ 7k5Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=ix6oepBdSOnDlTmqvq5nLffYb6atfx/6y7RgSV87AWo=;
+ fh=nOTuJrYEKMwu0YQqcaYcu2VeTxn+oBYYYXmrSbSfILQ=;
+ b=DSCqcbdNUFaD+nl3i9V9n18aTmaac3x2bYot7aaQClGerV5UCyFzeEbuVYSH6rgz6R
+ JZ8WnYx8gD0+WDErCc/C0Wy3A8EMalx/KWeUIhsimjDsA03GG4vQN+O0iX+4WDOrxWQJ
+ ST1bZHg9+YrpdXr7IktMMrS3C3SOeQzxrFcDlteVOetmrHlpM5gS/Sr5oTYzRbdeeJj3
+ ojvNdioe1ouRoYeDYwl+i05MV2hdOJSVkYIVM7OwH7Vm6nOdzWRGwT3FtJjilhjn75hD
+ 3wDxMxebbdCDZQQzbv8Qn6zHxo0QBnjxC51oF4AnU39qi9rHCl+wk7kTMv9hnrObR68c
+ GD/w==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1793070406; x=1793675206;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=ix6oepBdSOnDlTmqvq5nLffYb6atfx/6y7RgSV87AWo=;
+ b=jzHtSqvhXn/gV393F2K+akqIsB61IFtL1Cyv2L3VxwtCotV9ynT5VbAC5r1qnKLwqH
+ P9p3+aD6VXCx9Mc5Fpn2FOjltAQHnW6TV3RIFLZgmvjFkMP3BxRfOI2uwlWL4NdaDnNg
+ 3oW+0vNQczUbCj/mqmYksFJr5rhARo1N+dHRXq2v329WPbIW9hcQaOPRIm6fnzc9aSTP
+ FI1HxW965kbjH9E/9QDO1+xZrLsjzg8m3HE51AWsCOsQG8jUGbLI5HpZpv9+gYmc/ToP
+ DwWwAz0bTDoOkabVHrS0DRBrZ+GGoZB0JxQ77pvKNAIlWUgijtGhuz3tYNUIoJ+557VZ
+ 92Jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793070406; x=1793675206;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=ix6oepBdSOnDlTmqvq5nLffYb6atfx/6y7RgSV87AWo=;
+ b=g8IfJNgV/RoP0G5g4nIymxv73RMa02m5ibWjiBsYbw1t0C5jRcaf4Kn2VQUqusMfjh
+ eSb2P0ymZgkx9ldG1IgvL2BL1fAokaTyH/iebeSCQrIDTBVky7/WEWE7a6CMpckd8e3j
+ BK/I4IPRwMfNKhNump0lwYoO8pAGAAfJdlxOqjpyCw1zMFIqBeaEqOpFfIrnGoOi9vLf
+ pIBpss4+bYdTuIDHY3qjcDx8kWNMPgAVTZngwVzMcqPkQPx6YpoeQDPW4U75u/sgRG4S
+ eVEV5iyyr9Put9EZkljE/ZF9xRgWSUri4qegxuLw8HqVtd1nHDHfl3qeVWB/TNC+lNix
+ OZNA==
+X-Gm-Message-State: AFq9FYIt5/aXvjGkFMSn36J+GQ/VehVQC0IVUtl3UYMRhSqbmS38l8hC
+ K59z583XyM2hfmF5X1NPVOztAs+vpGSsk3eKG+YTscc/BaipriuME2ZChWMks1vRXIeh7z+k/3d
+ ZXObdz21JiFhHdd7ZYZFELi1teWPcnZg=
+X-Gm-Gg: AYBFou0Oep+2tgNkPMAcs/klm532gIW3f5wPJUOGuPE3y+79udViRQppmY2lz8y+bt7
+ 3nmhZa5QmihefxkwtCrIMsa2SxDwyUsWyqZrR7uxkOQ3VY9S1p8QeGpBpQLT6D6/cikMP4rV7pX
+ yRptIj0gf9CogNJwDxIQFn9EUocuN4qLn6N6H1mQH/NtBZCUqY+c9o5WJYWrCNqTPgmT/6q5Z2b
+ W1VkXF1fHegqZrNX6cpxEZ0Dgbdb7WeVNuWGSo8YV39ozTxB2Pp2JvLy3Pspybf5MIbjnF0hpP5
+ ummQZJ4igx6AvZIzfK8uRmatkUitWyAK3N9UwYKeMqbve7/9TpPkcRoEf2/KFAwjSqkVTFLQNRI
+ +rHV7lbcLAAMzg06nqdewhvKfr2FZoy8sCXaR
+X-Received: by 2002:a05:622a:5cc:b0:536:2816:dff6 with SMTP id
+ d75a77b69052e-5383b5d6447mr131889331cf.60.1793070406425; Mon, 26 Oct 2026
+ 20:06:46 -0700 (PDT)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2d25d3bb-cd45-4f10-ff94-08df33da68d2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Oct 2026 03:28:46.4164 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: r+lNbA7MD75YIsGhbo2a1hkFHEhDj2rIOKzrnBwK+2TGHW4W4b0AgYVtTA/rGHHF3rb5XxUNTPKhmntMsO0x3LjXGn92PZx3qds+B2xeb+M=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR03MB182899
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+References: <CAMPWMbrVO9-ZVYQu6Y0GSA37OXzTrg+nyZObyxQJKtJvBErmQw@mail.gmail.com>
+ <20261026142950.GB624796@bill-the-cat>
+In-Reply-To: <20261026142950.GB624796@bill-the-cat>
+From: terry zhou <terryzhou05@gmail.com>
+Date: Tue, 27 Oct 2026 11:06:35 +0800
+X-Gm-Features: AclHuK9J41ohFEVpk5e8ULEcUiPmx8HZx_PFVP673_sPGFRn4OsvtRJqcTg3QII
+Message-ID: <CAMPWMbp4EBpAz0bfAVeRcMqBxJW8VMvchbP-qOzufws2hn-P5A@mail.gmail.com>
+Subject: Re: [PATCH] net: preserve the driver error in eth_init()
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org, jerome.forissier@arm.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Tue, 27 Oct 2026 04:37:32 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -285,59 +194,89 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_FAIL,SPF_HELO_NONE autolearn=ham
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-SGkgVGllbiBGb25nLA0KDQoNCkFsdGVyYSBDb25maWRlbnRpYWwNCj4gLS0tLS1PcmlnaW5hbCBN
-ZXNzYWdlLS0tLS0NCj4gRnJvbTogQ2hlZSwgVGllbiBGb25nIDx0aWVuLmZvbmcuY2hlZUBhbHRl
-cmEuY29tPg0KPiBTZW50OiBUdWVzZGF5LCBPY3RvYmVyIDEzLCAyMDI2IDEwOjM1IFBNDQo+IFRv
-OiBZVVNMQUlNSSwgQUxJRiBaQUtVQU4gPGFsaWYuemFrdWFuLnl1c2xhaW1pQGFsdGVyYS5jb20+
-OyB1LQ0KPiBib290QGxpc3RzLmRlbnguZGUNCj4gQ2M6IFRvbSBSaW5pIDx0cmluaUBrb25zdWxr
-by5jb20+OyBJbGlhcyBBcGFsb2RpbWFzDQo+IDxpbGlhcy5hcGFsb2RpbWFzQGxpbmFyby5vcmc+
-OyBNYXJlayBWYXN1dCA8bWFyZXhAZGVueC5kZT47IFNpbW9uDQo+IEdvbGRzY2htaWR0IDxzaW1v
-bi5rLnIuZ29sZHNjaG1pZHRAZ21haWwuY29tPjsgUGVuZyBGYW4NCj4gPHBlbmcuZmFuQG54cC5j
-b20+OyBEYXZpZCBMZWNobmVyIDxkbGVjaG5lckBiYXlsaWJyZS5jb20+OyBKb2hhbiBKb25rZXIN
-Cj4gPGpieDYyNDRAZ21haWwuY29tPjsgTWFya3VzIFNjaG5laWRlci1QYXJnbWFubiA8bXNwQGJh
-eWxpYnJlLmNvbT47DQo+IFdpbGwgPGJ0ZGFpQHRlcmFzaWMuY29tLmNuPjsgVGVvaCwgU2hpIExp
-biA8c2hpLmxpbi50ZW9oQGFsdGVyYS5jb20+DQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0hdIGFybTog
-ZHRzOiBzb2NmcGdhOiBBZGQgVGVyYXNpYyBERS0yNSBTdGFuZGFyZCBCb2FyZA0KPiBTdXBwb3J0
-DQo+DQo+IEhpIFl1c2xhaW1pLA0KPg0KPiBPbiBUaHUsIDMwIEp1bCAyMDI2IDExOjAyOjA1ICsw
-ODAwLCBBbGlmIFpha3VhbiBZdXNsYWltaQ0KPiA8YWxpZi56YWt1YW4ueXVzbGFpbWlAYWx0ZXJh
-LmNvbT4gd3JvdGU6DQo+DQo+ID4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL2R0cy9zb2NmcGdhX2Fn
-aWxleDVfZGUyNXMtdS1ib290LmR0c2kNCj4gPiBiL2FyY2gvYXJtL2R0cy9zb2NmcGdhX2FnaWxl
-eDVfZGUyNXMtdS1ib290LmR0c2kNCj4gPiBAQCAtMCwwICs2NSw2IEBADQo+ID4gKyAgICAqLw0K
-PiA+ICsNCj4gPiArICAgbWVtb3J5IHsNCj4gPiArICAgICAgICAgICByZWcgPSA8MHgwIDB4ODAw
-MDAwMDAgMHgwIDB4NDAwMDAwMDA+Ow0KPg0KPiBIYXJkY29kZWQgMSBHaUIgRFJBTSBkaXZlcmdl
-cyBmcm9tIFNvQ0RLL05hbm8gaGFuZG9mZiBwYXR0ZXJuDQo+DQo+IFBsZWFzZSBjaXRlIFRlcmFz
-aWMgREUtMjUgU3RhbmRhcmQgRFJBTSBzaXplIGV2aWRlbmNlLCBvciBkcm9wIHRoZSByZWcNCj4g
-b3ZlcnJpZGUgaWYgaGFuZG9mZiBhbHdheXMgZmlsbHMgaXQNCj4NCg0KTm90ZWQsIHYyIHdpbGwg
-ZHJvcCB0aGUgb3ZlcnJpZGUgYW5kIHJlbHkgb24gaGFuZG9mZiBmb3IgRFJBTSBzaXplIGZvbGxv
-d2luZyBERTI1IE5hbm8NCg0KPiA+ICsgICB9Ow0KPiA+ICsNCj4NCj4gWy4uLl0NCj4NCj4gPiBk
-aWZmIC0tZ2l0IGEvYXJjaC9hcm0vZHRzL3NvY2ZwZ2FfYWdpbGV4NV9kZTI1cy11LWJvb3QuZHRz
-aQ0KPiA+IGIvYXJjaC9hcm0vZHRzL3NvY2ZwZ2FfYWdpbGV4NV9kZTI1cy11LWJvb3QuZHRzaQ0K
-PiA+IEBAIC0wLDAgKzE4OCw1IEBADQo+ID4gKyAgIHN0YXR1cyA9ICJva2F5IjsNCj4gPiArICAg
-LyogUEhZIGRlbGF5cyBpcyBjb25maWd1cmVkIHZpYSBza2V3IHByb3BlcnRpZXMgKi8NCj4gPiAr
-ICAgcGh5LW1vZGUgPSAicmdtaWkiOw0KPiA+ICsgICBwaHktaGFuZGxlID0gPCZlbWFjMF9waHkw
-PjsNCj4NCj4gUEhZIG1vZGUgcmdtaWkgdnMgc2libGluZyBOYW5vIHJnbWlpLWlkDQo+DQo+IFBs
-ZWFzZSBjaXRlIHRoZSBUZXJhc2ljIExpbnV4IERUIC8gYm9hcmQgbm90ZSBzbyByZXZpZXdlcnMg
-ZG8gbm90IHRyZWF0IHRoZQ0KPiBOYW5vIGRlbHRhIGFzIGEgbWlzcw0KDQpJIHdpbGwgc3VibWl0
-IHYyIHdpdGggcmdtaWktaWQgZm9sbG93aW5nIEQyNSBOYW5vDQoNCj4NCj4gPiArDQo+DQo+IFsu
-Li5dDQo+DQo+ID4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL2R0cy9zb2NmcGdhX2FnaWxleDVfZGUy
-NXMuZHRzDQo+ID4gYi9hcmNoL2FybS9kdHMvc29jZnBnYV9hZ2lsZXg1X2RlMjVzLmR0cw0KPiA+
-IEBAIC0wLDAgKzEsMyBAQA0KPiA+ICsvLyBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogICAgIEdQ
-TC0yLjANCj4gPiArLyoNCj4gPiArICogQ29weXJpZ2h0IChDKSAyMDI2IEFsdGVyYSBDb3Jwb3Jh
-dGlvbiA8d3d3LmFsdGVyYS5jb20+DQo+DQo+IGNoZWNrcGF0Y2ggTUFJTlRBSU5FUlMgd2Fybmlu
-ZyBvbiBuZXcgZmlsZXMNCj4NCj4gUGxlYXNlIG5vIGhhcmQgcmVxdWlyZW1lbnQ7IG9wdGlvbmFs
-IE1BSU5UQUlORVJTIEY6IGxpbmVzIGlmIG1hdGNoaW5nIE5hbm8NCj4gc2VyaWVzIGRpc3Bvc2l0
-aW9uDQo+DQoNCldpbGwga2VlcCBNQUlOVEFJTkVSUyB1bnRvdWNoZWQgYXMgdGhlIG5ldyBmaWxl
-cGF0aHMgYXJlIGFscmVhZHkgY292ZXJlZA0KDQo+IFsuLi5dDQo+DQo+IFNvbGlkIEFnaWxleDUg
-Ym9hcmQtYWRkIGFsaWduZWQgd2l0aCBTb0NESyBwYXR0ZXJucy4gQ29uZmlybSBoYXJkY29kZWQg
-MQ0KPiBHaUIgRFJBTSB2cyBoYW5kb2ZmIGFuZCBicmllZmx5IGNpdGUgVGVyYXNpYyBMaW51eCBE
-VCBmb3IgcmdtaWkgdnMgTmFubyByZ21paS0NCj4gaWQuDQo+DQo+IEJlc3QgcmVnYXJkcywNCj4g
-VGllbiBGb25nDQoNClRoYW5rIHlvdSBmb3IgeW91ciB0aW1lIHJldmlld2luZyB0aGlzIHBhdGNo
-LiBJIHdpbGwgc3VibWl0IHYyIHRvIGFkZHJlc3MgdGhlIGNvbW1lbnRzLg0KDQpXYXJtIHJlZ2Fy
-ZHMsDQpBbGlmDQo=
+Hi Tom=EF=BC=9A
+
+Yes, I checked that the base commit includes ff448fa9a1b8.
+I re-tested its change with and without my fix using downstream
+SDK U-Boot on VS640 and SL2610, rather than running the exact mainline
+base on hardware since these boards are not supported in mainline yet,
+
+We are now adding SL2610 into U-Boot, below is the first patch from
+Richard GENOUD <richard.genoud@bootlin.com>.
+But only few interfaces are ready in it:
+https://lore.kernel.org/all/afb22430-4cb1-42e8-9b22-5fc57eaf7625@bootlin.co=
+m/
+
+ff448fa9a1b8 sets eth_errno when device_active() is false. In the
+failures I reproduced, however, the device is active and the driver's
+start() callback fails. eth_start_udev() returns that error without
+updating eth_errno, which remains zero.
+
+With ff448fa9a1b8 alone, the diagnostics showed:
+  VS640:  start_ret=3D-5,   eth_errno=3D0, active=3D1
+  SL2610: start_ret=3D-110, eth_errno=3D0, active=3D1
+
+In both cases, eth_init() overwrote the error with zero, and DHCP
+continued with 17 BOOTP attempts before timing out. With my patch
+added, DHCP failed at initialization without entering the BOOTP retry
+loop.
+
+Thanks,
+Terry
+
+
+On Mon, Oct 26, 2026 at 10:29=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
+>
+> On Mon, Oct 26, 2026 at 10:11:37AM +0100, Terry Zhou (Synaptics) wrote:
+>
+> > eth_init() overwrites the error from eth_start_udev() with eth_errno,
+> > which may still be zero after a successful device probe. This can
+> > report success even when no Ethernet device could be started, causing
+> > DHCP to enter the BOOTP retry loop instead of failing immediately.
+> >
+> > Preserve the return value from eth_start_udev() so that callers can
+> > detect the initialization failure.
+> >
+> > Signed-off-by: Terry Zhou (Synaptics) <terryzhou05@gmail.com>
+> > ---
+> > Validated using downstream SDK U-Boot on Synaptics VS640 and SL2610
+> > Without the fix, driver startup errors are followed by BOOTP retries.
+> > With the fix, DHCP fails without entering the BOOTP retry loop.
+> > DHCP succeeds with the cable connected.
+> >
+> >  net/eth-uclass.c | 4 +---
+> >  1 file changed, 1 insertion(+), 3 deletions(-)
+> >
+> > diff --git a/net/eth-uclass.c b/net/eth-uclass.c
+> > index 07ec59b97f0..18efbfeda71 100644
+> > --- a/net/eth-uclass.c
+> > +++ b/net/eth-uclass.c
+> > @@ -349,9 +349,7 @@ int eth_init(void)
+> >                       debug("Trying %s\n", current->name);
+> >
+> >                       ret =3D eth_start_udev(current);
+> > -                     if (ret < 0)
+> > -                             ret =3D eth_errno;
+> > -                     else
+> > +                     if (!ret)
+> >                               break;
+> >
+> >                       debug("FAIL\n");
+> >
+> > base-commit: 8649a54d301a4d0ac526324c7a7ad2574939ff27
+>
+> Did you re-validate this on your base-commit? The base-commit is after
+> ff448fa9a1b8 ("u-boot: fix error check in eth init") which I believe
+> evolved from a patch that looked like the above at first. Thanks.
+>
+> --
+> Tom
