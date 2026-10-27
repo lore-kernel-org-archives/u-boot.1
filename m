@@ -2,179 +2,150 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57BC0606A31A
-	for <u-boot@archiver.kernel.org>; Tue, 27 Oct 2026 18:23:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD718606A31A
+	for <u-boot@archiver.kernel.org>; Tue, 27 Oct 2026 18:23:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=tE+CV/w7;
-	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=a7i6YlVQ
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=TSmPc1I4;
+	dkim=pass (2048-bit key, unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=vL1nDX47
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 79AE2606D7;
-	Tue, 27 Oct 2026 18:23:11 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BD7FC60806;
+	Tue, 27 Oct 2026 18:23:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PTnw8eWhCkf3; Tue, 27 Oct 2026 18:23:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 641F260699
+ id 7bJa08QBWG-l; Tue, 27 Oct 2026 18:23:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 693F7607EA
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793125390;
-	b=QsDdkA1wAAoHv0cfPHyGPUwlSWTV3ofC0TL9u7J0uhZM8WD4E87ZFWcrsprqxHokj/a4
-	 l1IHHDanH33gRPcAsnnwFPd/vl3A3JQQA8uniXX3n5PDeY24B5A22B6AvRaLlS/UsHY68
-	 Q+ch9RX3j5gIrWWmGkCMNQWnzDtv/yI9cL9mOZ+mDgkwy+e3+cZht9aLjfWP/gwbsH/Fi
-	 brAGTWT/lWCMvG5kjSDqSVR5QMpUZHCUr+M3eoHWCtQi17i3INw22lQopYQxi1ipHqcMh
-	 sK+5H2s//Z4d58H8hrF4zM/IpUXcVIYkazfd9xU++Eme2lzBRbt4j3Y3z+TdI320bbg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793125393;
+	b=ReQ4HGBnXIKqCgZ5mbi4e+v/qffVZJsTPT582FlOWrKE+5hG6twMCqERdo/5lBd5Roc2
+	 ZiZGMp4Fus0oGQ72YsOgsDEXtwm37GpKNmG8IClM58KAtywLYy9mxBkM8cXx2eVELTWNu
+	 v14jqL26vAEuYuXD1vjF9iX/udeUhB8ROGNXuogV1JjkLGyd0PKM/vw6xskKRuRM/4WPp
+	 cO4S9cdthjAiEQ2/sL+odLOZKyyvLYBb2jNBF1T/56z/PN+6beQWICQG00Je32oMjIG6q
+	 e9Yj2Gk3R0neVBQjU9kHkHrofsFG9wYswKgObeLW9vdRZVdPcl4iaOirOr2HQpMPdZA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793125390;
+	c=relaxed/relaxed; t=1793125393;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=d2ysAuHwxTgEv64sw94oBBUPFcHtjnlzzFewRK+8PY4=;
-	b=OSyOEuuoWRIrls2jNA6AdIf+y+wwz0KGKqp3IKud68WPIkB1IRG49CR7VYCBc575UTPF
-	 5gjjsVohYCNCeCdt51VgIoNvgczuWUuk9L+gffCY+5IPHdkAIKtsBGWgg4SRKShbhFGMP
-	 7CGYD0baup/SU/cWQseweWgjqGhNqMVAmoyyuz1rnqhqbBTB8j0FcfimJMTNQdGrt/qHE
-	 4Z9pdMNVomD4KtmcWJ4Yq9A+JUJO3SqPwfEdayuEIQNJIN0laKzj9+2fB2Jda3UZ1V9jI
-	 /NzU7Gh+KvErwNgmAMbW+84DpXyLWZ9yTa1DVmwTkbu9n9QCZ+/tJH+U/ZX0uCOeoEw==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
+	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
+	 X-Report-Abuse:X-Report-Abuse-To:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=jrVlmj67fkXtzypl8nt+oEIw8gnrMKwqlB+5Dn9DyA4=;
+	b=THL/80jJ1gD0bRWe/YDs4GhHDCVD261n56Ipj5gBonILLl5VoN8q81fYJ8FtT1J5NDri
+	 5B0gNrqVh7dpeWp0hkPdQwiK/PkBOm93EXNcc6hCeSKRvqq6k0HdimX70I52lCO6l7tGN
+	 E8kVamNbsiMLEJTUDSf7Ki8L82h0jGwiubeyeWsybpPR89rjnqh9dmZ7iNcsd01Ga8I7n
+	 FvvwQkh0qmYVmndPXLTzCSsD7Bjw6XORG1yhvzkTlL+TQxifovOscPZoO2X9lfK7h+UtI
+	 yUkGVs6575qXwts+4FGo8TmVEm/kCoCoij8LawN2ForaIBqipPMnlLTtyfqaDoXWH5A==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793125390;
-	bh=d2ysAuHwxTgEv64sw94oBBUPFcHtjnlzzFewRK+8PY4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793125393;
+	bh=jrVlmj67fkXtzypl8nt+oEIw8gnrMKwqlB+5Dn9DyA4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=tE+CV/w7emt2lsutXgT4GbxSzdNPaMmoTNenxzHakTU0BV97hrS6l5uGne8OxESJL
-	 Ydgb10IgCwUPIRGH0qakvd6iwH7ba4YSie9GqvjefAss7Rv8RH3ObgAs2XMWgfUYsx
-	 zde5OAy8pWTGtHSnF+G9gUjvRhLita+fIrunh23m5i4S/da1LAU8i7bsTl6kxldqgH
-	 tbVinRbHSBrnytCz4clQWivK7FPGo7MSS8ut0RGYr6R1XqRqCcL3gaxRGa2kpfoa/G
-	 wvGVyvxfEzJiv6KKo7eIuMMBIxpXSTJssEILQQaAoceMckL+EX4ERLsME0CLuIxCFC
-	 4zboxEx/ajv8A==
+	b=TSmPc1I4h1POqiy+A48PtAUZQoNvOPiALfShg0XG2zWhO9uNeoYf4exeoOu3VpZGF
+	 uHn+GIczECNNbSSnMuO/RysSEovQ4aiT7wMFvPLqG3VNO3G+w/QR3OIzCKOEH8S7+V
+	 CGytwDQCp62NCn1oOUXoRwebMkRuWdOTku1USgK2VT/AYUpy4LHHjRdI5RkQBHayTC
+	 mu9m4jAz+CXylGHJWLRghdVGyCkBupSWR1hDfnceuZlNcv2khrJXX1Jsjue+DFk4FP
+	 4AMYkf27T9sPaN+Ck9pBYV0cutUTYFQJsLqJydZF/orkYq1WVwevvWv+ZQYYirlhYh
+	 UBtCsNAvYuJaA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 641F260699;
-	Tue, 27 Oct 2026 18:23:10 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 693F7607EA;
+	Tue, 27 Oct 2026 18:23:13 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 2B71F4D1
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 18:23:09 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id B04084D1
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 18:23:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1D0194016B
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 18:23:09 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 964F34016B
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 18:23:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id U_GbWf0zGOW9 for <u-boot@lists.u-boot-project.org>;
- Tue, 27 Oct 2026 18:23:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 245B04006F
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:31::b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793125388;
- b=b2dPetC0fxwI0M995byU31bzD0pE4ffGu7qd83kM1hbDydbTswZVCGocUd+0ZNA0pfj9
- SoZvfRODQw3pmeBmEKJ+PrEGxE9skGDBly0e1JemuELsAlOj70uKmcno92/wawDb8van5
- XFgSWq+9lxgq7qWjCpeM7TzZ1m48F16ueyuFh5n2+4+aex6hsDxOqgHaUxdZQK5fhLU2A
- 2PLTwcNXkFFo0zo7hdpok+dt8BUqskjWdyMdybo2aNOlGCwuU0SrgX4G8+GmQ23glVjZF
- rM/G7XVfjdi+U4qZn5bgGKgm+U+sqM2I+veRZ6YNotOu0DqV4HauaoGMU/xgqFWSUQw==
+ id rWU12GmBqNAh for <u-boot@lists.u-boot-project.org>;
+ Tue, 27 Oct 2026 18:23:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 575964006F
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=121.127.44.66
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793125390;
+ b=W0bCKM5JgsR8dutqraKCh2GWgl1GRMDToV4QUTtoyNlyo8lyJscCsP/shwQajOUHDPtT
+ +AXitdOF+6rX3DXpniiL4v2O42VeEKyItJCsNT57RG+zNjmRnWmX7pp9T+Lo78qHShnL5
+ 7SsRaUfuEIxjCF301QwJId6A2GB/1VJbJzZMs2lM8GkdE/J1Y+dHHBtK/U3CsZ4DSfjS7
+ I0R3tMzJ1UfK0RVrJumMxJf+My/QbBh+9a1CqDdrLt+5IKgfehgLt7bJq5XS7K0J2FcEg
+ yTnz6/X5Gbqv9qg2wyTUSgulJuMtpEUHG/t7P9eSlDACDwTDD42z3ExmnB2ety+Jc3g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793125388;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
- Content-Type:Content-Disposition:In-Reply-To:X-Clacks-Overhead;
- bh=d2ysAuHwxTgEv64sw94oBBUPFcHtjnlzzFewRK+8PY4=;
- b=ZjMpFKsZCvEjBEHV/k33S3GNzI/AymTeZSEMbmautvWH5tvBcs2aUYbkrbbBAQuJlxPO
- XZwyjlIwXGAlwcLN1dGnowzWZ0ssbbizSn8dqqvbw6fFT8mcyEcflHn5jV6KgRPa66NJe
- CfY45L9i+L+Vo7QhQcmR9697pZIpdBMWFfFU+4R8wsmQwEtxKHIQytne6HyAJo3QwC0UH
- TvH9sbXLFTxgn24FAQAM7tK5AX1PGoQM3+MO8jkeWUpUhwAyUY6eEmMpX7br6YEaYG6mX
- enQq0YaBD7NGCjvKnAst/YPt/92JWbpxJ+pqIFnynXJaO0P7gnNCnHDa4UiZ+GNn7pA==
+ c=relaxed/relaxed; t=1793125390;
+ h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
+ X-Forward-Email-Sender:X-Forward-Email-Version:
+ X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
+ X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
+ Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding;
+ bh=jrVlmj67fkXtzypl8nt+oEIw8gnrMKwqlB+5Dn9DyA4=;
+ b=Duisi6eo2kU9l7vCydbn/dwS5dOdfB0KSWPGFl+cAGEzMamj5VUFMFtvsehKxQtWNefN
+ oxtdIynyMXY6YXxXygK2jXNNA7QyK8SUJYJMsM9CWd3Sxnbs+sNM23t5eN26m0gfHO7Qh
+ ADx/1enRPODp5Av57Tw8U+R+whhBpiIv440dXJfzwRf++6wD0R0wh8fh3ybb966Ha6fD6
+ U0JwiQl02DSDGl9OczAR8DifYS3xXa9whlk68GACkVXyOdcWk6/gzL5SGCXnpc8SCCCO4
+ pPCczNcAkzvVZvcP6WwK3oPjVYcUJYFj9LN1d/DnTm2bseu3SfKmVOZ6WCzqoGrOKFw==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=konsulko.com;
- dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=a7i6YlVQ; 
- arc=none smtp.remote-ip="2607:f8b0:4864:31::b"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2607:f8b0:4864:31::b;
- helo=mail-oo2-x0b.google.com; envelope-from=trini@konsulko.com;
+ dmarc=pass header.from=kwiboo.se;
+ dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=vL1nDX47; 
+ arc=none smtp.remote-ip=121.127.44.66
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=248a=is=kwiboo.se=jonas@fe-bounces.kwiboo.se;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=a7i6YlVQ
-Received: from mail-oo2-x0b.google.com (mail-oo2-x0b.google.com
- [IPv6:2607:f8b0:4864:31::b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 245B04006F
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 18:23:07 +0000 (UTC)
-Received: by mail-oo2-x0b.google.com with SMTP id
- 46e09a7af769-82757b1535eso60307a34.0
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 11:23:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1793125386; x=1793730186;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=d2ysAuHwxTgEv64sw94oBBUPFcHtjnlzzFewRK+8PY4=;
- b=a7i6YlVQbZKpi6f9JGwEkgx2PoJKgizCCgqvW96z7BRb+nnW2In+wAkRsqKwjLBIXG
- scQtptjMBbNPHlf2lo2DaX8fkuNbXdfMBDzmDltEVIvH+2cirfpFYUYXUizMUf05qURO
- 4G5iu4GzLyoTfS7PlZ1UzBqH0ABtb5BHAD2GI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793125386; x=1793730186;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=d2ysAuHwxTgEv64sw94oBBUPFcHtjnlzzFewRK+8PY4=;
- b=MLSKc5CDN2ZW1uGkUyHMTQFAqNSRH3b17HI8p/o8weeYmtRUZbQVfnjXFyrX+D9zIW
- azmbqKVuFUzS5uzsQEpuhYamBnuTVbI/Kglr0S9jTMMX9tHKt7Kb+N0cZuMMO0f0h01s
- T7BssMb5Suy2+spMvk0iCNcCKjewDXiHF274PuLAqCoAWSsCein3907MI+7w39qCwG0b
- NNz+/KtcM5+ZX736RoJqkmvfYFStwpq9hEAMs85uan7IiVewfLQV6CiH9nE2qs52Qjz7
- QooTrkOYNJLR8maPYcg7jt71CjwZ76fCNB0gsx09J/mHn5jSxoRG7xJMW6TFGfzNapkX
- h+KA==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxz4HlVRsXm0t+qhqq8jbtDRxgl5/qTXliLCBcpQaOYwotEPS/fHRnO5N7NH3IPCFEsG/CI0TA=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYLxEUksuT6VlnWopJjULqz9ZrKEPnvkJW+KqAim+ub2AZjmRYDU
- Mrsng+XKnbvIcVbbgiXkTDCBI0jpr4HJPfu3t8kRv9JBoVUTLdY2FwWXyZdjIiLWiR0=
-X-Gm-Gg: AYBFou2YgVqn+Djk1ubUE3iqdiPBQxhING4oqkWTqAG6mePAgGbmIDUChMhSvpwthot
- fEoZ3vEyt69ss1v36qdfe8celTEp/hY36HNSgKWvoSSRHo2o5MBY3fuGr8emItWhU5XvmQTQznw
- dZYBoUu8lq/Eq7i4be+LVWT3ma3NUw4Njq8mGhxKPnI2VLgejhoRQje9vC/i0Ea/jlcpUTxZxMb
- pJknbeDwQzGmN5r06GpUv4rYUQ1XRx2RSEhzrAzELUEn7V8O/ier4F3TX4kUQ/MPkesoe1AGhWi
- mW+zzqIpqL6xYZfwGd6O1d7ABSN3LsARy8klTVAr0Zqok9sj01k4oPe7xvYn+LrwDoPGxQ2u1C/
- qzTI0rikiQhvMVc8icudbKqBh8dIfOQii95uRPpR91kVsZs6DJtit1XF4xixqVchwIhQnFmLO6i
- 15a7Q7gnsAeSsotgRcI/cvpM0zs2vm87v4w6VdkZCTstxOpOBcKLtdQPIoG1QDQ0hfSjpuUBHa5
- GM0BNE+UKntVASfmt03Gu18oy3L78pyAeP8m0sKwooUWsHeJmY4j1NVLyINcQsqF43gPvyiThmZ
- qDKDL2c5osJcOsf0eXe98LjqZGTBh8LclVUTD5jqWxudolczKjopoaGsfIRX13cpRk3rx0cLMKS
- P0D49J7GbTcKwqfnJy0ieyVTd1mgPpBP+XngigmiDeP6xCv5DZhe3Y5JUPkzO1EndoQpQeHNVCR
- wVJZk=
-X-Received: by 2002:a05:6820:6fc3:b0:6d8:462d:2759 with SMTP id
- 006d021491bc7-70ba0ff3d29mr4973367eaf.90.1793125386367; 
- Tue, 27 Oct 2026 11:23:06 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-70b9df06f1asm10677723eaf.5.2026.10.27.11.23.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Oct 2026 11:23:05 -0700 (PDT)
-Date: Tue, 27 Oct 2026 12:23:03 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Eddie Kovsky <ekovsky@redhat.com>
-Cc: Tobias Olausson <tobias@eub.se>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
- Enric Balletbo i Serra <eballetb@redhat.com>,
- a.fatoum@pengutronix.de, mark.kettenis@xs4all.nl,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH v4] Add support for OpenSSL Provider API
-Message-ID: <20261027182303.GA2414934@bill-the-cat>
-References: <20260429180247.83091-1-ekovsky@redhat.com>
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=vL1nDX47
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 575964006F
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 18:23:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1793125387;
+ bh=jrVlmj67fkXtzypl8nt+oEIw8gnrMKwqlB+5Dn9DyA4=;
+ b=vL1nDX479WSrFK3RSw5BgAQsAmaJe0qC97ttoAndjOGNNBj7znkj+ByIXdCqVUbF3oFRRY6FO
+ PaVRd6VSEHUwKvAv09gl9PPWIHQP3a1z4sO3Tyv69CLFMYgkJ5Qk19hZogoeeOjw06KTgrqVxHZ
+ TMFai6uEUpB8RrccpERTLn3nO9948812g0tbstkfd0PK7hCPG70xdDJW8FF39Z7q6+bcUlNQr5j
+ 5c6fVv4k4sjIAKskN2Uzgeige0tAoqP4qf1QmEdWIrmMqOxgDGp+BRBiFvpr0FxqOytjQgxFfAZ
+ 2wUx78G+rD1k/VPD5BgWhSXVRgItexxVelVi+Sj4C0wQ==
+X-Forward-Email-ID: 6ae0ec09c9e603e316fbc047
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.66
+X-Forward-Email-Version: 2.18.11
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <a0787d5d-0973-4235-bd34-ff3596b00bc1@kwiboo.se>
+Date: Tue, 27 Oct 2026 19:23:00 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yvYGoVFsDgfL5cFZ"
-Content-Disposition: inline
-In-Reply-To: <20260429180247.83091-1-ekovsky@redhat.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] rockchip: mkimage: Update init code size limit for
+ RK3328
+To: Quentin Schulz <u-boot@0leil.net>, Chaoyi Chen <chaoyi.chen@rock-chips.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.u-boot-project.org, Kever Yang <kever.yang@rock-chips.com>
+References: <20261004195853.59863-1-jonas@kwiboo.se>
+ <20261004195853.59863-3-jonas@kwiboo.se>
+ <dc849a75-9166-41af-9ba5-abe8a63be884@0leil.net>
+ <c59af0e7-a265-4521-8258-01296de5fcf1@kwiboo.se>
+ <d3ec0007-47bc-4e0b-b652-1bc1ba160003@0leil.net>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <d3ec0007-47bc-4e0b-b652-1bc1ba160003@0leil.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -184,73 +155,124 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-7.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
+	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Hi Quentin,
 
---yvYGoVFsDgfL5cFZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 10/27/2026 6:42 PM, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 10/16/26 11:25 PM, Jonas Karlman wrote:
+>> Hi Quentin,
+>>
+>> On 10/16/2026 12:31 PM, Quentin Schulz wrote:
+>>> Hi Jonas,
+>>>
+>>> On 10/4/26 9:58 PM, Jonas Karlman wrote:
+>>>> The RK3328 has 36 KiB SRAM at [0xff090000, 0xff099000). With 4 KiB of
+>>>> the initial SRAM typically reserved for BootROM during early boot.
+>>>>
+>>>> BootROM will load init code of up to 32 KiB (0x8000 bytes) to address
+>>>> 0xff091000 in SRAM, before jumping to it.
+>>>>
+>>>> BootROM typically jumps to init code with following registers:
+>>>>
+>>>>     x0: 00000000 ff091004
+>>>>     x1: 00000000 32334b52
+>>>>     x2: 00000000 ff520000
+>>>>     x3: 00000000 ff500000
+>>>>
+>>>>     sp: 00000000 ff090f50
+>>>>
+>>>> mkimage is enforcing a 30 KiB init code size limit for RK3328.
+>>>> However, the BootRAM can load up to 32 KiB of init code.
+>>
+>> s/BootRAM/BootROM/
+>>
+>>>>
+>>>> Change the init code size limit to 32 KiB using the <size> - <reserved>
+>>>> pattern to closer match the actual limit of BootROM on RK3328.
+>>>>
+>>>
+>>> Downstream still uses 0x8000 - 0x800 so unless someone from Rockchip
+>>> confirms this is safe, I would rather not modify what we have today.
+>>
+>> Maybe my commit message was unclear, but I have runtime confirmed that
+>> BootROM is capable of loading binary code up to 32 KiB from SD-card and
+>> eMMC and the code was fully functional even when padded so _reset was
+>> placed at the very end of binary, in the last and lost 2 KiB.
+>>
+>> Most likely the mkimage size limit was used to impose limitations for
+>> stack and malloc area, very similar to the issue with PX30/RK3326.
+>>
+>> Runtime test consisted of running a minimal <2 KiB TPL binary that only
+>> initialized DEBUG UART and dumped passed x0-x6/r0-r6 and stack pointer.
+>> The binary used no malloc area, its stack was pointed to PMU SRAM or at
+>> half of BootROM reserved stack area, and the binary was .space padded to
+>> push code to very end of the loaded binary.
+>>
+> 
+> How can you be sure that we aren't corrupting the BootROM stack? Between 
+> TPL and SPL we actually go back to BootROM so code from there run for 
+> sure after TPL has run.
 
-On Wed, Apr 29, 2026 at 12:02:45PM -0600, Eddie Kovsky wrote:
+We cannot be 100% sure, however as stated in the commit message, the
+BootROM stack is located in the initial 4 KiB of SRAM, [0xff090000,
+0xff091000), and its stack-pointer is typically at 0xff090f50 when
+entering into the init code, i.e. it matches the pattern used for all
+other Rockchip SoCs where the BootROM stack is located before the init
+code load address.
 
-> The Engine API has been deprecated since the release of OpenSSL 3.0. End
-> users have been advised to migrate to the new Provider interface.
-> Several distributions have already removed support for engines, which is
-> preventing U-Boot from being compiled in those environments.
->=20
-> Add support for the Provider API while continuing to support the existing
-> Engine API on distros shipping older releases of OpenSSL.
->=20
-> This is based on similar work contributed by Jan Stancek updating Linux
-> to use the Provider interface.
->=20
->     commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
->     Author: Jan Stancek <jstancek@redhat.com>
->     Date:   Fri Sep 20 19:52:48 2024 +0300
->=20
->         sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR >=
-=3D 3
->=20
-> The changes have been tested with the FIT signature verification vboot
-> tests on Fedora 42 and Debian 13. All 30 tests pass with both the legacy
-> Engine library installed and with the Provider API.
->=20
-> Tested-by Enric Balletbo i Serra <eballetb@redhat.com>
-> Tested-by Mark Kettenis <mark.kettenis@xs4all.nl>
-> Signed-off-by: Eddie Kovsky <ekovsky@redhat.com>
-> ---
-> Changes in v4:
-> - Add comment that @engine pointer is null when using pkcs11 provider
-> - Remove extra line break
-> - Add pkcs11-provider package to build dependencies
-> v3: https://lore.kernel.org/u-boot/20260120164524.253188-1-ekovsky@redhat=
-=2Ecom/
+The issue with RK3328 is likely that some datasheets/TRMs mentioned
+32 KiB of SRAM in some places and the correct 36 KiB in others. Right
+now, we reserve initial 4 KiB for BootROM, allow 30 KiB for init code
+and for no reason restrict use of the last 2 KiB of SRAM.
 
-Hey folks. So I think at this point we're still expecting a v5, and that
-should be able to be merged, yes? If so, is there some update on status
-there, or some way the rest of the community can help out? I think this
-is something that will really need to be sorted out for the v2027.01
-release or a lot more projects are going to start having problems
-building U-Boot. Thanks!
+The limits imposed by mkimage should not care about what the init code
+does, it should only impose real HW limits and not make assumption on
+what U-Boot TPL is doing. Let's say I created a custom binary that takes
+up entire load address to end of SRAM and can safely run, right now
+mkimage cannot be used for such binary due to this self-imposed limit,
+for all other Rockchip SoCs such binary would be accepted by mkimage.
 
---=20
-Tom
+Any limits e.g. due to use of TPL stack, malloc area or back to BootROM
+feature is specific to the U-Boot TPL binary and should be limited using
+TPL_MAX_SIZE or similar, not by the init code size limit of mkimage.
 
---yvYGoVFsDgfL5cFZ
-Content-Type: application/pgp-signature; name="signature.asc"
+> 
+>> I did similar runtime tests on all rk3288/rk33xx/rk35xx/rv11xx SoCs I
+>> have access to and all current limits in rkcommon.c beside PX30 and
+>> RK3328 matches the runtime limitations.
+>>
+>> On RK3288 (96 KiB SRAM) we can even load a binary up to full 96 KiB,
+>> however from SD-card, only current limit of 32 KiB worked.
+>>
+>> Please reconsider and/or hopefully Kever is able to confirm my findings.
+>>
+> 
+> I'm not sure we'll get to see Kever much anymore and I don't know who 
+> exactly we should be asking. I've been told Chaoyi Chen might be a good 
+> point of contact now, so trying this here.
+> 
+> @Chaoyi, can you confirm we can use 32KiB of SRAM on RK3328? See 
+> https://lore.kernel.org/u-boot/20261004195853.59863-3-jonas@kwiboo.se/t/#u 
+> for the whole context.
 
------BEGIN PGP SIGNATURE-----
+Would be nice to get a confirmation, however my runtime testing should
+already help prove that we can load and run a 32 KiB binary on this SoC,
+and that the limit imposed by mkimage is correct for all other SoCs I
+could run same test on: rk3228, rk3288, rk3308, rk3326 (after patch 1),
+rk3399, all rk35xx variants, rv1106, rv1103b and rv1126b.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCauDr/AAKCRAr4qD1Cr/k
-Ch2xAQDB6ZRS9U/ffTeLVtaz3FyeicPYyHeEbZMjSYqd7nhEmgEA2vxlYhLBHT40
-r9E9N5Eq51eSohjp0vzpFkU8Nrbp+gY=
-=dDAT
------END PGP SIGNATURE-----
+Regards,
+Jonas
 
---yvYGoVFsDgfL5cFZ--
+> 
+> Cheers,
+> Quentin
+
