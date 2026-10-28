@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93E3D606A31A
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 05:51:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32B3B606A31A
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 05:51:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=PywS5/bY;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=U/70zjZb
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=mQOMSLxD;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=VVkVQJ78
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6B034606FD;
-	Wed, 28 Oct 2026 05:51:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0D89380DEA;
+	Wed, 28 Oct 2026 05:51:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QCU12NQZ2wdM; Wed, 28 Oct 2026 05:51:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 9F01A6070C
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793166670;
-	b=YgzwKnqUFf9l8rfllZiqJXI2/CM36fLyXD98STqYOz8/3038JB6g1udpfniCfwEMGSCl
-	 69Nejzj+EBGL9DCyswc0t0gjd2S7EW2PcynKBlaK7s4BVW7gWNqsr9W9nJ9X8WNEAd0QV
-	 Mjb4kYiHQU7OJc5Mfl0o1mX2pzxrqSR9TNvJuX/JJtZOoZiM1hEgrRVmlptg18MDD3t8b
-	 GeRDN1plAx0i7jcMC8QlIv/UrwV5w3rfUdhDm5OTlwHuPa/txYAzWhhxjvmsKib9tfnZb
-	 qKL956VQtEs2NO3wULL52ZcrAOliZz2yLoeE4liginNpXZrGGF0BSnhH1uGW2TDIu0Q==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9AHTB9d3dG39; Wed, 28 Oct 2026 05:51:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 499AE80DE2
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793166675;
+	b=qAc3v3oq5YiLiFRriKeL9u3yQo6+D4QI9uNyrHuvmG1ZmO2Pz5D5yEuhWJ4kjBqtE/sN
+	 xwZ810q0CzXp/oOsOjyqbMC/tE32011g8O9LFcnROfzHgOdvj0qlHfP8POcbh2YF38Hhx
+	 rAUg2+yhZz9uBy011tmCgNH+YP683lFub9/+QEpIWlOnx53Fg0AOei4sGwqUfi9/gfv8K
+	 SilUqsbsQyuaR6FbCP4p0G59wt4lqV6iyMa2sWyX+MwzOTGjamlYXQg38ItkC7HQ/oLFf
+	 WWaDY1ghLgtDAZMJjg2NnkizoChoLiq0iv3gpjACCQyS6/7J4KuI+g5yZnqn+eIpBPQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793166670;
+	c=relaxed/relaxed; t=1793166675;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,135 +32,137 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=7WflYm9xHsz9buV6uiMkbPkQmxcB+CcC1RfU5Y2E9iM=;
-	b=NrjVSQpQ0f7qJpKmBnI+xKWklBLbgSjyh5g9RaSSlRJh1riQfAzZ5g3vs2STEqwzr5mU
-	 RKQQGqLbJNU9i+13A4ST6iHSWiZAx+SVw88zG/rvZi3hFsoXjrhy59VzckS/g7z85H05D
-	 V/ZPgHkiDlapCdXygIAY3olznngWdti7KMjQaDtcwcUZBNANJXWTpbWAMeCPsfjn2NOmW
-	 fc0r5j83077GVR3geJH2lFwP6HzuAY2gQgd7Uvm01ICsHPZ/VHNYr+G5Xkm7nGFxd4dV9
-	 OUDEGycDkmJiAMrpmc/UG6xiIQpQMGRCTKZtyJaY+eUnA8TfNYsAqRs2o4q/Gkccj9Q==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="U/70zjZb";
+	bh=fdbJe9zhToHKQ1oNxKm9Z0yncffPq+u+AsFuKPhZ6Zk=;
+	b=fDLGFV5b4aBOFtWXIEwtExtwLvS9RekSIBcFtXpwg3kqrWLMnrtPpQHzKXOGso5Tgtgi
+	 8n9yCdvZyu/EaHOcYgMPpsvczR68GbcBxQH4D0rgO8uiIupZFDL6MnYcAPLhCjYoGoBHM
+	 rgQNfBFdFnIYPPg6pwHl6ifmLMzW7rK0PBh4tuuPA2RPYLCCaWqF21+lbX1HPweCjgLMQ
+	 jpRJaf63/e/hx3iXH3jV4X4QPeDoottVP3domVONIECJd10XDvjPcax26wdYRxur5UhiL
+	 jTN/SYn6gD0lBsqIVhczZ5CkMbWq3O0SuyY8O8TRImDOcRwEXB+oHLK2sEJDpev2/cg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793166670;
-	bh=7WflYm9xHsz9buV6uiMkbPkQmxcB+CcC1RfU5Y2E9iM=;
+	d=lists.u-boot-project.org; s=default; t=1793166675;
+	bh=fdbJe9zhToHKQ1oNxKm9Z0yncffPq+u+AsFuKPhZ6Zk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=PywS5/bYlHtzm/GAhKSDejsxuXEph5yus5CgYC8iu2WwUg7zZ4jyYiqxz5gRDnR70
-	 BxzX+iv/wUgxgxfIZGoLQ6AAgKVoNIyr2PXeK0/cE1q8KJ1ihwPf/kyQOZmfV7/s9J
-	 vhfCDkDeD06osPDSCBebYF8AEOHav2xx/3VYzZ/lvR9BY6pwTpirEEdiTeXF5CS9jt
-	 6Wk8FELc0DqUMuphqhED/bGSoDoAluTDCgLuihLtSfYnMle1f2c/xNiU7+1W/n+Xrd
-	 mfs/ucFYnxmTV7xc0RaM32IOSowHksQnOB0d0ugNL7CbkuG5XZTUxxKPSchGSz9Pus
-	 iU3j5PBQYp/LA==
+	b=mQOMSLxDiVBEU4UGdZDjG5dq4U4Mare2sIMDd9240XD3u4FvtZYko7W4qs6GjI+FD
+	 PALVKFH7tP1zFfmoulBRDF5kVM18+VXE9EJseAO9H/wLD+2Den74WCmtyPyEkRfMkU
+	 6B6aC3t8vymt1lVLd7Ksu4eAlcTOVV+pTLgwUDwoCfqbxO7gRVq/W+mGcwAJBtdvbD
+	 XqMps7LSjhVXfCjcNT4sIr+7GMutYcJsdsC7BQ72sogPfLMEFd3Mv4xcNMQrf6dmgY
+	 vxKPaR9A/qR9rUv08FItG+FOl7k6/SRau0FmTvqFhgkNtIalO+sA5f5cAezLX3tEVf
+	 +eDTTx+Tgurvw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9F01A6070C;
-	Wed, 28 Oct 2026 05:51:10 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id E9603473
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 499AE80DE2;
+	Wed, 28 Oct 2026 05:51:15 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 17072473
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CF4856070C
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:08 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id F0CB7401BE
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id i7gnaT9fxV35 for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 05:51:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org EE5B1606FD
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793166668;
- b=illZsAG8KL/LyRLMlD4IVBfJ4/Hg6uy38dBQIzPrM8ZTWjb43gkx+lKgEMzvYAbxBclB
- BFYIGv9DLfXHbVMUrUWmvA6aazkzK5Huf3qDLdTovqZSlgtMc1XXdJumxGLUfORS9kUoh
- Isd/qkjmCEYkv3ym20zO623fj4PQUM9WB5mpRBpJBF7qyh6KTnd4PiwZ9zCHiar0kAm9y
- 3q1pfHPtSLfj+oSrK/wkinSjTAhTdqcTjMn8mQ2zwmLCLUYawdj7uY0bKOcs3/Hk1uGDu
- 0HbHPsdQWH4xHsYbhOHkX1TTs+E5NU/FhdIeq+Mx4ICGsQT54IGNB1/FTIrEdPYZGAw==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LAKaN3JbBs4S for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 05:51:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org ED0094006F
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::330"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793166670;
+ b=VYIpOyI9Oa7Sbk6g/1hWANtlS0CrhXMAOq2Mnd5+TzrFfl7CLwQe6rfdKjn4bRVJ/kv9
+ LjGj+ivw73viM4V3gwThOyQKmV1bk5AgjSFf6w0C4efCAFNPKSeErtw5e7j3RoXnSJYkk
+ z2l/aLv9y54wMBRVE8jawvCOfsejqskQ5LIHO0thYjhfLeyxy4/SnMQvr+Wy8ciFDadgE
+ 57qBR0i1Ogtx2KWCCCT9/4ECz1ov3S9LuCnfF0X+mDehqEGcQbUgeqq4HgXqJtxQZVnyz
+ iBd/4oHeoDmtbukHlyzawkimArWyv1X7djnlZU4/XjyxXzmyhrvJKuju1BKA0l/VqWQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793166668;
+ c=relaxed/relaxed; t=1793166670;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:In-Reply-To:References;
- bh=7WflYm9xHsz9buV6uiMkbPkQmxcB+CcC1RfU5Y2E9iM=;
- b=Q9lgDQzATQbhNnftPKQQucBaK+Dt3YcYUTn8ck1VUgihYJBTu2VOfHbDrQZTp+MzXOFt
- pBZgtI8RQte6nP29NaQFfXyM+p4AhznPbA+/s9gTg5xJ6p0r0LuVKHrFs9XCVgkcstueF
- wWksybkNgU4q8zQsnbE2/C17mULAy3bw1enNxE4T1b9yaPrGJUBFrONW2+d8sl+MNXavt
- /r2foitMfF1b6lpkYiNq7RkVdVHtSZ1760Y5JmgNrLy2RkjGIfwMnqApR0+gCTCTeHpsI
- 0dxgPsjJR5K6e3ZhWSYv61GLQTka4F0Ub1wOAjzABfqXWvHtndNThl8Tu68U7mPxzfg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=fdbJe9zhToHKQ1oNxKm9Z0yncffPq+u+AsFuKPhZ6Zk=;
+ b=Zrwr9bQDl+wv3WhePzrm5sYshk3h/ErvN+wMEAqsUpZhSpZwz3JUOTM+OkxabMmIuer6
+ Vx/VEtEumGGDfYrpIuwlmfRW9esJCKoSL+EazeEOQq9CT4gybuD102HNPasUoCgHIPe1f
+ 6Tg0T2Zp/K7aLGI5Ng6/i75GV37Lvtz+wbM34RxvtrXlw24SVJX8SohCb3MjQrJI4XCZu
+ wucDZYkuqnLDTS+Cz80RKKdMfy6G/lheRYnwwkSI+qB6aS84NGQc3EUznB8rJePjZLUJf
+ XDXkMxBbD4sqW2ilEqiLdrGZ5iXlqnDpnKmcxHNXwMNesZfGGLIn+kajwoWuGF1+cXw==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b="U/70zjZb"; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
+ header.s=20260707 header.b=VVkVQJ78; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::330"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42c; helo=mail-wr1-x42c.google.com;
+ client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=U/70zjZb
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- by smtp3.osuosl.org (Postfix) with ESMTPS id EE5B1606FD
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:07 +0000 (UTC)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-48bbb06e746so243293f8f.3
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 22:51:07 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20260707 header.b=VVkVQJ78
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id ED0094006F
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:09 +0000 (UTC)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4a208d93758so5351345e9.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 22:51:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793166665; x=1793771465;
+ d=gmail.com; s=20260707; t=1793166668; x=1793771468;
  darn=lists.u-boot-project.org; 
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=7WflYm9xHsz9buV6uiMkbPkQmxcB+CcC1RfU5Y2E9iM=;
- b=U/70zjZbyr/R+wAIdoNzib4WtI3OFecVFDEUo5nJzCU34lT2Ae7oRuBXb3AUHt+D8v
- WXJL4JM8RbqZSkHa8B8jwXplJETrdW5MPfaezdJYel9fNgZEthPIwBX8IaUE1w3PX+LA
- Qm8PUvWk2Fqsj/dZ/bP5+E9C/jopmtFtutvAtE9SMT9bfUA6Ns8qp71cGmOyxpX5Rmqv
- ChTgi8pLJ9GegkClM9ZI24oPsr0TPJec0KBiUkkWcYHZ8U1IJaEIiqEUNE7zWMlv4PZu
- uueyCWPoQ26//RoEpJb6runS4OoSBpADSXRMkAsWbOZzcBQniDk243xCkIfu+0HsJQSs
- fLeg==
+ bh=fdbJe9zhToHKQ1oNxKm9Z0yncffPq+u+AsFuKPhZ6Zk=;
+ b=VVkVQJ78/9KM97mUyW/CmIHkxcaZsi4yX8mFe8Uue+3+9GIT7YbJUWvHQaCzEhFMdw
+ b3ZjIkNFrIuiHwc6lAA+ln9gGBA+RLulcW/4vAVKjQr/rsXMVRSGGwNcuSZ2goBr+2y9
+ Yjje25ecucBuc6XH4L/U9HmVpigvmZywiCBmlfkISurzbP6E8UaWXf7LxjCuQKvYFHq5
+ tNyviTZAYBIw/rFwoGT4fII/xzB6F629uTK0SKJA9NMBLhcLYcFzr3mOoiOMUuMK5LWm
+ xAVxWGGKElRrA2IhnAUH2Bfhrk0ybQrIpJHDAgxbyYFGvkHRCt4ALUsduPp4RotuMlei
+ ei/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793166665; x=1793771465;
+ d=1e100.net; s=20260707; t=1793166668; x=1793771468;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=7WflYm9xHsz9buV6uiMkbPkQmxcB+CcC1RfU5Y2E9iM=;
- b=hhPEyj7qItpIP3mhRG7pQFg8dZONVTlXtb9dRldaQmTCyEkxeXJ4a3W13LD+QEEHdA
- XdI6Et535NTgipmnLGWfT1dLqQefdWCz7jodTqIji7127/CBjWekkriwikxUIwrZBLzP
- SReKFaqSKkciS10WTFtnRUvIulkCgxuq9z5dBd0n6NaYDXt/AWhEVyqDZUKQ84vgdC5s
- 3sjY/i/9d7KDyN25zMzj5cjQ5ilMplps6wWeDR5VSlB6JctwY+/5SEw2Ee4Eb6tK3pn8
- uW9BPheqZdDyk24oi8mz8s5ZtatPoauW347CNgaDjOcBdJvv3et56q8w32pdGHN7FIKZ
- gWjA==
-X-Gm-Message-State: AFq9FYK1wF+4m4usCn1KkvYxQWvpLdZJ8ajDIEovQWqV3eh7ooOUrwdx
- 0syakcusZ08ryWSewxrKjp8A5Usc5LnsQsBLOfaVSvPMjRrfKjDahX8sKJE6noAt6u0=
-X-Gm-Gg: AYBFou3rlTvmf6eZ3f3wPfzbRM3hbD7p5V66ti+LgVWAxL7ZOaJKbsCJNTZ1YaK1tSE
- H0BSFgsaQUpHPVFJkFnGc8yhbW3G0U3KGhC7yQ7ap4XkLdbDJUFYzBmvRQCxBTb7cdgnshsPLtk
- p9zEPw2BLxibJ+ytU3mAY2mNNCSNq9XUqI6WcOQGDpENRZBbYqdDMq/5N4LfiNboTfQr0BXXmT8
- WlN5g5nrbRNOMnx9/B1+MS9JHn4LDdp14zLuKSkGwk7dsoMP6rKo2DQKQcaByZOmi7hxSOPqxKG
- 3ip9Ig46/2QzL3XeyX8vtxZU90zya2Q+QTTvf+9wjNnmj2RmuOTEMv7xo98UuTZwKKbn0kVDIOF
- irhHM4ZScCnr7c2jzYyaxg8AWV26QE2yjIbI1iVH6DZoPyh++AcjGHOS2l4bD+NmGIlch5gsEbB
- nmp6GWvu4am+O3I2gPHEoE3aCtpKREAAFrr5xJ1B1Zo6s/78t+TFMygnznGiZhHQrQ4BMLgIVQ/
- 9T7wIXrUA17Q+O5fq4cE8tk1dmdc5PmRasCyRmB2SOh7UivDcc6GMte78kZoTD76DRVuNtwScV8
- 3GiEja22WQ98Il4Aro6/D/fB8bSrElZt6ow6jGMWuxe48enK/Qi3
-X-Received: by 2002:a05:6000:4715:b0:48d:f383:2356 with SMTP id
- ffacd0b85a97d-48e5d5d16afmr2977237f8f.53.1793166665541; 
- Tue, 27 Oct 2026 22:51:05 -0700 (PDT)
+ bh=fdbJe9zhToHKQ1oNxKm9Z0yncffPq+u+AsFuKPhZ6Zk=;
+ b=zBg0N2r4tR8GNBcOZHMr+8tV6AipahzJDm4R0NxILmlOu2r6iERp5VR/VTAfUu2eAg
+ KvBnHjalA1JTrOdpaewKIHI8A8XLSmpw0HKgJTEa0uYCzQky7lgye+amwk/euR1gfOKM
+ Q2P9DCOxkMUgwSGk4ruOUxH5LOizNmDk0O6iKqEMVzn1N0ahDG+4Jqeq791rVi8Do0vY
+ 4WLDs4Un5G/JGFY2svCxvr9CRNom7EoPlbSwwMCcQm6pHZA/VIbhhKXHQvEy1Oc+XTQR
+ oCjmk/QWPJCrFZIJiSnDBHIpustMQFq+9vvF2lJQ+KEENUtuecj2TB9ixP7eGefmWahh
+ 81CQ==
+X-Gm-Message-State: AFq9FYK0olH+aD3gNTvzWRwikziUhETGKVx453TiBpaWc5X9wP6w3EPc
+ UbaHWLrZOyTV1z2K2CskSZe65SbwmexAKu/7cAV9+XaOFvW9s+vRTNZa
+X-Gm-Gg: AYBFou0p5ejxBA0c5TkmcV9cgX5trPF+7yte2LKzN3GCvEzC/1Mr5XyD4u/wS2mjrre
+ 3tllPru1f7ITZf9llDjclNQrgR1XPoABBRW5TZIcbjA1+eSUElrFd3J0ixQkZJJKK1SmX8m5hM+
+ WdLwvhjqk0C93M2+B1LbbjFhmHlYIlqlhoM1xgOpFKqC9Cdpp3ndYCw6OGToI6wTswkWcQU1BRZ
+ OnFqITilUiT9pt1EKy9YcRe/QXDxo5wBsLuC5Ht5EGCj+VM+lbfmqQA3Gj57Y5txamatOGUeKvg
+ 1gbE46RD0eT9mIeXbjJT5l3+cLm7dR7Ebxg0nh/scI/gm4bdA71hsixtHsYWQ0cgwc6nGo4245m
+ 5/jgUXC9X6p+HrV7Y/gkhlCdH1Uj0iJuLB337/L0murcn8Go4qr6eJv+3bO7EMmpnQ0QYmQ9puE
+ B6ABajeAUMUpZuunN1kh0Hq96eHrNHSJo9LEHantjfNGR+3ZyfQifc1ZaOXXqN1keQyHQTKpsfy
+ vmIrsBQSkTnWW8YQAZsB+Z1ra/eO1asvsxne9R4yz01kSpVqrB+7wPLIGu1M2jLeO84N9oc6eYH
+ /tiHLldL+7kIJD7lVHR6PyDMzeEV39R/Im7106KN30vDLLS+UVu6
+X-Received: by 2002:a05:6000:420d:b0:48e:2948:6fe3 with SMTP id
+ ffacd0b85a97d-48e5d2f9907mr3734858f8f.39.1793166667469; 
+ Tue, 27 Oct 2026 22:51:07 -0700 (PDT)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3ebcb958sm26620479f8f.21.2026.10.27.22.51.04
+ ffacd0b85a97d-48e412cc164sm24838750f8f.7.2026.10.27.22.51.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Oct 2026 22:51:04 -0700 (PDT)
+ Tue, 27 Oct 2026 22:51:07 -0700 (PDT)
 From: Ana Bobillo <anabobillo3@gmail.com>
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org, Tony Dinh <mibodhi@gmail.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 3/6] fs: ext4: refuse to write with an unsupported block
- group layout
-Date: Wed, 28 Oct 2026 05:51:03 +0000
-Message-ID: <207132f4-2374-41a8-b626-ff37980f5cb3@gmail.com>
-In-Reply-To: <78892543-03de-412e-831f-de840765be59@gmail.com>
-References: <78892543-03de-412e-831f-de840765be59@gmail.com>
+Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Alexey Charkov <alchark@flipper.net>,
+ Javier Martinez Canillas <javierm@redhat.com>
+Subject: [PATCH v2 02/12] block: Add blk_valid_blksz() to check a block size
+Date: Wed, 28 Oct 2026 05:51:06 +0000
+Message-ID: <6043b488-de34-4505-8951-74f58cadc062@gmail.com>
+In-Reply-To: <01ba3f81-06b7-428b-9224-bd887c35e1c3@gmail.com>
+References: <01ba3f81-06b7-428b-9224-bd887c35e1c3@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -181,65 +183,112 @@ X-Archived-By: <archiver.kernel.org>
 
 From: Ana Bobillo <anabobillo3@gmail.com>
 
-ext4fs_init() divides by s_blocks_per_group from the superblock to
-count the block groups, so a value of zero crashes the write path at
-once. The bitmap code of the write path also assumes one bitmap
-block's worth of blocks per group: ext4fs_set_block_bmap() and
-ext4fs_reset_block_bmap() find the bits of group n at n * blocksize
-bytes into its bitmap, and ext4fs_get_new_blk_no() numbers the blocks
-of group n from n * blocksize * 8. With any other s_blocks_per_group
-the groups after the first are indexed outside their bitmap buffers.
-s_inodes_per_group likewise cannot exceed the bits of one bitmap block.
+A block driver sets blksz and log2blksz from what the device reports: the
+READ CAPACITY reply of a USB stick or a SCSI disk, the LBA format of an
+NVMe namespace, the sector size of a Xen backend. Apart from the virtio
+block driver and the host command, none of these drivers checks the
+value, yet the partition and filesystem code relies on it:
 
-mke2fs uses that layout unless it is told otherwise; it lowers
-s_blocks_per_group for 64 KiB blocks, with -g, or when many inodes are
-asked for. Check the layout at the start of ext4fs_init(), before the
-journal is replayed, and refuse to write to a filesystem of more than
-one group laid out any other way, instead of dividing by zero or
-indexing outside the bitmap buffers. A filesystem of a single group
-is still written to, as before.
+- part_get_info_extended() and print_partition_extended() read one block
+  into a buffer of blksz bytes and parse the partition table at offset
+  0x1be, past the end of a block smaller than 512 bytes
+- fs_devread() converts bytes to blocks with shifts by log2blksz, masks
+  by blksz - 1 and divisions by blksz, which only agree when blksz is a
+  power of two; with any other value it reads more bytes into the
+  caller's buffer than the caller asked for
+- buffers of blksz bytes go on the stack, so a block size in the
+  gigabytes overruns it
+
+Add blk_valid_blksz(), which accepts a power of two from 512 bytes up to
+BLK_MAX_BLKSZ (64KiB, the largest logical block size Linux accepts), so
+that the block drivers can check what their devices report. Use it in
+the virtio block driver and the host command, which then also refuse a
+block size above 64KiB.
+
+The next patches check the block size in the USB storage, SCSI, IDE and
+NVMe drivers, and the last one in blk_post_probe() for every block
+device.
 
 Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 Changes in v2:
-- Use printf() rather than log_err(), as the rest of the driver does
+- Split out of v1 patch 1: the helper comes first, and blk_post_probe()
+  checks the block size only at the end of the series (Simon)
+- Use is_power_of_2() and leave the linux/log2.h includes alone (Simon)
 
- fs/ext4/ext4_write.c | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+ cmd/host.c                  |  5 +++--
+ drivers/virtio/virtio_blk.c |  2 +-
+ include/blk.h               | 21 +++++++++++++++++++++
+ 3 files changed, 25 insertions(+), 3 deletions(-)
 
-diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
-index 2fba2197c19..5f185387030 100644
---- a/fs/ext4/ext4_write.c
-+++ b/fs/ext4/ext4_write.c
-@@ -605,11 +605,30 @@ int ext4fs_init(void)
- 	int i;
- 	uint32_t real_free_blocks = 0;
- 	struct ext_filesystem *fs = get_fs();
-+	struct ext2_sblock *sblock = &ext4fs_root->sblock;
-+	uint32_t blk_per_grp = le32_to_cpu(sblock->blocks_per_group);
-+	uint32_t inode_per_grp = le32_to_cpu(sblock->inodes_per_group);
+diff --git a/cmd/host.c b/cmd/host.c
+index 51f2b1e3f6e..7a94ea1fa27 100644
+--- a/cmd/host.c
++++ b/cmd/host.c
+@@ -67,8 +67,9 @@ static int do_host_bind(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	file = argv[1];
+ 	if (argc > 2) {
+ 		blksz = dectoul(argv[2], NULL);
+-		if (blksz < DEFAULT_BLKSZ || !is_power_of_2(blksz)) {
+-			printf("blksz must be >= 512 and power of 2\n");
++		if (!blk_valid_blksz(blksz)) {
++			printf("blksz must be a power of 2 from %d to %d\n",
++			       DEFAULT_BLKSZ, BLK_MAX_BLKSZ);
+ 			return CMD_RET_FAILURE;
+ 		}
+ 	}
+diff --git a/drivers/virtio/virtio_blk.c b/drivers/virtio/virtio_blk.c
+index 404d9140cb2..ddc42a8543b 100644
+--- a/drivers/virtio/virtio_blk.c
++++ b/drivers/virtio/virtio_blk.c
+@@ -263,7 +263,7 @@ static int virtio_blk_probe(struct udevice *dev)
+ 	if (virtio_has_feature(dev, VIRTIO_BLK_F_BLK_SIZE)) {
+ 		virtio_cread(dev, struct virtio_blk_config, blk_size, &blk_size);
+ 		desc->blksz = blk_size;
+-		if (!is_power_of_2(blk_size) || desc->blksz < 512)
++		if (!blk_valid_blksz(blk_size))
+ 			return -EIO;
+ 	} else {
+ 		desc->blksz = 512;
+diff --git a/include/blk.h b/include/blk.h
+index 5ef9129b3e6..07e0448f65e 100644
+--- a/include/blk.h
++++ b/include/blk.h
+@@ -10,6 +10,8 @@
+ #include <bouncebuf.h>
+ #include <dm/uclass-id.h>
+ #include <efi.h>
++#include <linux/log2.h>
++#include <linux/sizes.h>
  
- 	/* populate fs */
- 	fs->blksz = EXT2_BLOCK_SIZE(ext4fs_root);
- 	fs->sect_perblk = fs->blksz >> fs->dev_desc->log2blksz;
+ #ifdef CONFIG_SYS_64BIT_LBA
+ typedef uint64_t lbaint_t;
+@@ -22,9 +24,28 @@ typedef ulong lbaint_t;
+ #define LBAFU "%" LBAFlength "u"
  
-+	/*
-+	 * The bitmap code finds the bitmap bits of group n at n * blocksize
-+	 * bytes, so every group must hold one bitmap block's worth of
-+	 * blocks, unless there is only one group. Check this before the
-+	 * journal is replayed, so that nothing is written to a filesystem
-+	 * that is refused.
-+	 */
-+	if (!blk_per_grp || blk_per_grp > fs->blksz * 8 ||
-+	    (blk_per_grp != fs->blksz * 8 &&
-+	     le32_to_cpu(sblock->total_blocks) -
-+	     le32_to_cpu(sblock->first_data_block) > blk_per_grp) ||
-+	    !inode_per_grp || inode_per_grp > fs->blksz * 8) {
-+		printf("Unsupported block group layout, not writing\n");
-+		return -EINVAL;
-+	}
+ #define DEFAULT_BLKSZ		512
++/* Largest block size supported, as in Linux */
++#define BLK_MAX_BLKSZ		SZ_64K
+ 
+ struct udevice;
+ 
++/**
++ * blk_valid_blksz() - Check that a block size is supported
++ *
++ * The block, partition and filesystem code size buffers by the block size,
++ * expect a block to hold at least a 512-byte boot sector and convert between
++ * bytes and blocks with log2(block size), so a device is only usable with a
++ * block size that is a power of two from DEFAULT_BLKSZ to BLK_MAX_BLKSZ.
++ *
++ * @blksz: Block size in bytes
++ * Return: true if @blksz is supported, false if not
++ */
++static inline bool blk_valid_blksz(unsigned long blksz)
++{
++	return blksz >= DEFAULT_BLKSZ && blksz <= BLK_MAX_BLKSZ &&
++	       is_power_of_2(blksz);
++}
 +
- 	/* get the superblock */
- 	fs->sb = zalloc(SUPERBLOCK_SIZE);
- 	if (!fs->sb)
+ static inline bool blk_enabled(void)
+ {
+ 	return CONFIG_IS_ENABLED(BLK) || IS_ENABLED(CONFIG_SPL_LEGACY_BLOCK);
