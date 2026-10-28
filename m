@@ -1,141 +1,249 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B7C9606A31A
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 11:26:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE0DE606A31E
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 11:39:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=WrWmp6T6;
-	dkim=pass (2048-bit key, unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=Gd/8cDOt
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ur1G9ePN;
+	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=SUvO45KJ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 522AA40607;
-	Wed, 28 Oct 2026 11:26:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9188880B08;
+	Wed, 28 Oct 2026 11:39:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ScWWAi_GCkat; Wed, 28 Oct 2026 11:26:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org CCDFA405B3
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793186768;
-	b=oiltFWmdZvz9K6WbPYlRCc6xf5G1IC3pndyT1REfu8xllc1rU1Q8CJgMRfVsc9pOw1gu
-	 XchsrRdBsWp4vLTvP+3jOj5wK13iqyVfNDtGaLHoGyaSlQPdeMnNgWwtnku1+/1E7VKlC
-	 SAG5now5bRp9Npw6n3EUxUxQb1Sp/6TZU8xTqlOLX1CGMrCebavj6b8JB7yA/oYghXov/
-	 lrxMCEnVO9uUcmUNPzMq9InutU3QaIgr9SilmvIiyVu+xk+3sFx/j729xvXYTSFzx1IOA
-	 eERbVivKFgttYgXbuMEffsZH2U5WFoj7KAZ3IknuiMBbSxBUkXCJ8wJSxPRkHJxU/bw==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793186768;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pUI4SlE30z84; Wed, 28 Oct 2026 11:39:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 91D0880BE9
+Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793187589;
+	b=iQ1o/c8KqcqbalxEDpA7um5EMGuZaCH1O/0P6PKhD8ByapUYyezWg5wBvgHEmz6CrxNa
+	 CaADLe0r/VnNeIRNznQUViCpLuObAyWzODfw0k4mcbtS4Qgx2SRS4p1r8V6dyJFucAHFW
+	 cuYBYAUE9cyzSiKrgB27QHthqphfmQ6OM1OgjcTiGf6Co/w+fBKBKxZDnz8GW1RPlNFAR
+	 qbrJFT35hFG6YaYLWvezKT0o71fwxpH3KMTt1jAPDboRRXWoV3lH14nUjT2hT8BydllZ2
+	 2Q4ZEeyA89xfxrzekwOIwMUI+20BFayYM1RV55yEvOQa6UAmN+w0H8jqGIPivNnI4NA==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793187589;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=rLMiP1W1XMuIXzqtl+ss2ATOytxYrxYC8n2fNX2/oTk=;
-	b=DJNYpj0IBXW8HCp+pwJZUbiwJ2Oq8SI9xgQ5tAA7tR9fwmmKGbfjxGrWQiGjQaMbAaQp
-	 K1mnG18azCbpq7I1z5HayWYI/ZyKUHThBXbkouoGDOr7DyzSc7iMVlVgJ7bJu12aN+11E
-	 5Gj2YkZqE9yDej5SA91YSEf/PwCX9rnXlz613O/n4QJNnLNqNfY/ijdmIYqtzuh2q5hgI
-	 ybEYoMtys2Y5ymE3pnbhum7ZZH4yAGpUmA2HhVHhKtJYD0sqiWjyLga6gFnpIC7qe9ecH
-	 0ZNokew6OwH/BGs0oygbrnvhMQIXyFKhqc9WlrxnNZhsA2796AgaM2Mjq5RMPN8RN4w==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=rD68qEbngRi3vv3mCWVo4SUn66adw1yHPz6LJFZdt98=;
+	b=Q/atE4/dLvxqkKZoi1QCPmRWT+47zJXww7siuKBJkwj4Fsq5Hgoqug4/6EAN6YVFqdSI
+	 joUFswkTMx3Y3UVsTimnKCyq1+DW21eG2VCUBUF43g6a9pirOeZVKR8qxSzIY5sHL4Vft
+	 RD4X7E6mZ4kCYOlKP804PYdLFjc5gjq3afb9vQS/jkxqMEw9scV5S2kwyuVbAm5F+9OP9
+	 5MBuMjD7QuJBZaItoi01AIM61skP0LIylhQx++njOkE/y2beH1zmdRZAPfH23ogomCBP6
+	 k23i8qOR1oy4VIwALaFHv5ZN/vZVov1Zg1qHfLH6J7CFOP4ALEKfDRAh8DxHGwNRvsQ==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
+	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793186767;
-	bh=rLMiP1W1XMuIXzqtl+ss2ATOytxYrxYC8n2fNX2/oTk=;
+	d=lists.u-boot-project.org; s=default; t=1793187589;
+	bh=rD68qEbngRi3vv3mCWVo4SUn66adw1yHPz6LJFZdt98=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=WrWmp6T6GPK+VzI4D6RE2zBwmNCEByH4nJgeSSVRg2+oOEvNChWGCUg4iVTeHGSCt
-	 I5gnxnqvXokK79BlNUOChvw2TW8XXgWOX33nP3ZNDXNwcNHgjS+Yld3ahNU/q8WBMk
-	 2xu61mSMNvyMLQUsl7f2/lhNI+Zrv94d2Y9LubqUiL0DJ9IKv8xHutdPGQozyJgzHW
-	 /ITOG6IwvZqSpDR1Qu8rx8631Sug0HfdVCUu0SbSGBsF/WQQw1LnLO5JtDFlbWhaDa
-	 u+V0vnacXkhY+4+02eY2pHC043ilzHxCEiTbhNSWWXzi0Zc236d2n6aYzzue/b2Viy
-	 +pEZTOODptT6w==
+	b=ur1G9ePNKL/+K/IoT9iKAQNxeiOPgMKU7Gewt1EzwwGdZTQaGWNiBscuGgvd+nzBU
+	 ABV9RIm+HKaUZAstL+h9uslWmTrP3TOzT9ujQzC9r+dxQ0aALEVqZSmnyX1N4ea1kY
+	 CwsNfQvg0N2xsIABAeMEVSZg2kUNkjVK7dearLdF1eWc+Ua4S0L7V2QMix++CzLIlB
+	 GIodAgFWx6x0BnUu/ETdoknbbgPeU06oc01/+VnKTFDnA4kkayyBePw2xCkLe3q5j3
+	 ja6L+HPtZJxGOpXSiprpIfj8KII7n6GtA9jbM26d1UmDS3tU3Ls4l9YV2cHDUfW6vr
+	 4bQfIRytGBxeg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CCDFA405B3;
-	Wed, 28 Oct 2026 11:26:07 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 4697C2E5
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 11:26:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 91D0880BE9;
+	Wed, 28 Oct 2026 11:39:49 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id A8381235
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 11:39:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2C0E040087
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 11:26:06 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8DEEB605DF
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 11:39:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id N0hXqv7f3UmT for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 11:26:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org C56CC4006F
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=45.157.188.8
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793186764;
- b=lIwXLmgOOGRVqLnE9O61oCXmOURt2IX4PuC7MA5+WC9DjqSwb1lCDAYJnQto3BzCY9qI
- Hph6wh7o5YyLzVtvCJuqVF8qIgh6N3X6sTxEdXmnC3yWVCDdzOnNswpkkaiMVikwNShn3
- Aj/2KL8xoTiOpsoWS46W+3P3tNIykKtZEY/ZMJlzQ6263v3qE+EdUOKYd3cnXnrtcimw+
- jcYOWnB80+mQN2NwE4VVctvYA9M2yG+9BKVjsF/DnfMFW+hcXcDO1RQBzEvxvn/Y+EEwb
- UKgfb2YfjNYIcsPFF9PKq2jv6RZw5fioSgC9pwxp7BqBZgP5WWd3eQWvtqEIB6iH6fw==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793186764;
- h=Received-SPF:Received:DKIM-Signature:Received:Message-ID:Date:
- MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
- From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- X-Infomaniak-Routing;
- bh=rLMiP1W1XMuIXzqtl+ss2ATOytxYrxYC8n2fNX2/oTk=;
- b=DZv9t2zEWLmN6uH8p2u49Hb5F/sPejkM8vcEYHhZjU5Rnm5TGqa8SkP6jPI7hektsFV1
- X2SO77N4pN7ytL88g2aQHNcJ8nOiRQx/9wtTJxHZ+i7YH87a6sOXuFpU5fdnTtfUrYeuC
- YVLr+69P8U9oe6LGodjnZuPefxKI7Ce/Hs+IIPlhRFUnsI0Hdss887e8m3NSYalWtSN9f
- Y9KFZIY/A31N7R+LjXsjh3o4RLL6XzK88poZIGqlZOxua+ij/MB36kIN99KaWMF2os+FE
- 47spkVXDazTYkwpwq3vMyTnE8SRg8xpd6NE00OKWYIFuC7mUOjaZX/pQfCmiplxOpCg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=0leil.net;
- dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b="Gd/8cDOt"; 
- arc=none smtp.remote-ip=45.157.188.8
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=45.157.188.8;
- helo=smtp-bc08.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=Gd/8cDOt
-Received: from smtp-bc08.mail.infomaniak.ch (smtp-bc08.mail.infomaniak.ch
- [45.157.188.8])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C56CC4006F
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 11:26:02 +0000 (UTC)
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown
- [IPv6:2001:1600:4:17::246c])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jF4ml3lWCzTkc;
- Wed, 28 Oct 2026 12:25:59 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1793186759;
- bh=rLMiP1W1XMuIXzqtl+ss2ATOytxYrxYC8n2fNX2/oTk=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Gd/8cDOtAFRWpBIaxEWwsOOBjr8FnhwiN97Me1raNu+buUjrUcoa6DouYywLJDCt5
- w/UHTk8kbIHhiBo4WkGpEHFGB2TruiJxnUYODinDTWUoakK3IxY4dA2uKCvIRSVpx5
- qOVgDG53N/qDGrEZQ9iE1DR9HkDGqoaiy+aGN4XTx2idtrUWGqWz5UthFsxvThGDt7
- /sp1NqL1mjEIDRLfUEl5Sms/syJ9FeDDCPD2+KHZydiSkodqi7Ncyr0i2TuAkRG1Gz
- 4QcAYuYfh4L0tAJFiDX8w2ONON8+Dig9eed71zsBHaon6PUUTiMeANzFZL/nBd8SHR
- WASu4CE3Jv6wg==
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4jF4mk116hzlY; Wed, 28 Oct 2026 12:25:58 +0100 (CET)
-Message-ID: <b102efbe-548b-42b5-bdba-c744449db9e6@0leil.net>
-Date: Wed, 28 Oct 2026 12:25:57 +0100
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id w1KIzKbbJTBe for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 11:39:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 794FC605D4
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c201::1"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793187587;
+ b=fAxHueaqM3PhGbq+IQG2uYc2hwzd2fbhmpEoQ4VQHHZYJOx4DOIZMX8Wz0PWaXiqn8sY
+ bK8Q0CxQBwAqFO2pOYtdafXjvVJ5Y3YTJyqIj+xfaSUgqD+UdSxq44FasXDbYU6qX8rTO
+ Bal6e1oM7bkLybYPZcomvtn+pEeAw+47k0PkuAMGKdJXxT5Eb9YVej4G87FykhyJ8W9PM
+ Cfp7E0/pnWaSniYfSbBbG3iSho1hHd1pW9EBUL5oCwTKorrgVARi5Bge1OR1l6qAVXyQS
+ FvA7gH1SWfJDxMBM4EsNiSqRwEMDUwQRUvkpUON0gqcNc8atrUJzEdANbnYNJ8/lC2w==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793187587;
+ h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
+ User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+ X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+ X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+ X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+ X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+ X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+ X-MS-Exchange-CrossTenant-UserPrincipalName:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+ bh=rD68qEbngRi3vv3mCWVo4SUn66adw1yHPz6LJFZdt98=;
+ b=GfH2XzHWbfzjwnBTwoM5oL+qrpZHg+CRPcJ1Ni0wIZNsVxCge5oM/ZShHfvuaoj+5/bc
+ eyVNMZIkqSrjcRbVYY66lQ8IFPlF+f8khxeZBi9CzhSF5clu2sr60LhyzYei3Tornh/RY
+ z0Bz9gMKWq+FYoy8M0N3kY/Aq7qqFhtYJ98y9av6BWQaFqyrxN69wonzjO1wFOWRxNUKV
+ t10n4qJ5li92oPyiUVC9OSBXCcqMQBXwLNsSkmNo1EC4Yr5xN7Huo3Y2h5+j+I0OpSdAW
+ /H/mRi9JOm70OFVL26Ec+o1zZe2p77MvwZzcCBA31SgjpIwzG43954swaO8pKN9lpYQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ dmarc=pass header.from=cherry.de;
+ dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=SUvO45KJ; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c201::1"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c201::1;
+ helo=am0pr83cu005.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=SUvO45KJ
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 794FC605D4
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 11:39:45 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=M735yKlMG6uFDmo6augUV7YmOOJMSSUc+fv/8ETM73P00nh+PLHpDFmwPt+V3QPkoBPvW39fALJbZZR7wF27MW8HzNZvpBAf3zoYzpt8DVk8XPiJ/q9d6fhsXFHF/jp5aVsg+tYFEuCz3Zwgo7XdJ5gqOifbDfvq+7nBaDysq+nKFzL+Gg6cxcTRVrw5aX9w4Y80PRXiPE48yMOcRgs7LHWMTG6idD4X/gPiQY8VfYh9ZjDE+ihwEPWpmZzH+Rc+7uaWLSs25SOvPEbRuJJjkHDR7KY8NaJsptCVMzUXl4tqLls+Iq2tli1akhcgjuORhwmAn0Ij2C1+0n1/xU/dkQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rD68qEbngRi3vv3mCWVo4SUn66adw1yHPz6LJFZdt98=;
+ b=N6ZwJUe0+dEdVhoiGSWc76/evM5B8Y7xAFivEGkLlyeDmQ5heITjWhnDzgwo4HUbHG4C2lDSROvIz1otWsp1iHcfwVKXslwTk/lU3KC+9vhJR2YaGMPW8F4mkfmH07PGF36Cf7y2o1+1wW1NqUs18vGWDGpom43DJKShbrepOOIKTGt7UJwmvaKq+wrsDNhK2bBbk2x4ADajyluZwGk+61uhDNh/R7kPSf4ZiEGoAFhRh2uQNoD3gv8bzGbNoqbHwzdijLQbOFVXDSxVP4aICdeKvr0uenS+bcJiuoajxxmOe5Juikvh7A4dklF2VNWmU1xYEZkmYQwLGbMjqQ94wg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rD68qEbngRi3vv3mCWVo4SUn66adw1yHPz6LJFZdt98=;
+ b=SUvO45KJ2R/xt5r4261nQfxLiiOsCjyUH39xBs372WKQ0oJS7kg26dw7nwoqSa1IarG6uOPQNyJ5mf4EpPr6oNUv59RROpxN7KwHCgQqrcbKffx43a9ymlbmBXtp35TbN9XMpwTzAayoFMHLyUjWL6mrWCVIDYToBYIFzZqdsq0=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by FRWPR04MB11102.eurprd04.prod.outlook.com (2603:10a6:d10:174::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Wed, 28 Oct
+ 2026 11:39:40 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0546.021; Wed, 28 Oct 2026
+ 11:39:40 +0000
+Message-ID: <7e71bdce-7244-41a7-9675-f2598e26d3e9@cherry.de>
+Date: Wed, 28 Oct 2026 12:39:38 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] rockchip: mkimage: Update init code size limit for
+ RK3328
+To: Chaoyi Chen <chaoyi.chen@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>
+Cc: fen.chen@rock-chips.com, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.u-boot-project.org
+References: <20261004195853.59863-1-jonas@kwiboo.se>
+ <20261004195853.59863-3-jonas@kwiboo.se>
+ <dc849a75-9166-41af-9ba5-abe8a63be884@0leil.net>
+ <c59af0e7-a265-4521-8258-01296de5fcf1@kwiboo.se>
+ <d3ec0007-47bc-4e0b-b652-1bc1ba160003@0leil.net>
+ <814b5780-35b7-42eb-b240-134ea9115104@rock-chips.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <814b5780-35b7-42eb-b240-134ea9115104@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR4P281CA0445.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:c6::18) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] board: rockchip: Add Kobol Helios64
-To: iav@iav.lv, Kever Yang <kever.yang@rock-chips.com>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.u-boot-project.org
-References: <20261021-b4-helios64-v1-1-74afe8aa6d72@iav.lv>
-Content-Language: en-US
-From: Quentin Schulz <u-boot@0leil.net>
-In-Reply-To: <20261021-b4-helios64-v1-1-74afe8aa6d72@iav.lv>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|FRWPR04MB11102:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6df97d98-ad6d-4e7f-b4f3-08df34e826c9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|23010399003|1800799024|376014|261009223027099003|261022115727099003|261022075727099003|261021121427099003|261022105027099003|10067099003|56012099006|261026140227099003|6133799003|18002099003|22082099003|261026121527099003|11063799006|5023799004|4143699003;
+X-Microsoft-Antispam-Message-Info: epfUp3VgCKslmvyOYFdxYabZlTqCZKDmJenIhNTULAbSdTK4guLJR04dRMliyHQHX6FN/FACH7YBljHSzx96TNDS7P3iy2kkpzNz9Fd1JRRTMn9uZwDs6oDz86xeMD4Ly5P5Fmt/HIhNi2XG3sYKH7UMVQPOyjoqErWh6Ah7RrYSYS+iM5udG+xi1yNReuVZgbwqkYHRszZBNsVix+rWbdHbvzeaGAbTEfBbfaFPnciCX67RWWse3JOCuJ9CIb+XADCtanhk2lBnuesu0yMGxb5DwnJZsYwA0EQzlCulYJlnQBZ04/q/o39ZRQKtiS4z8jApn4oP6k2uo6o/fJFRBttPZmOpImvRzRN2vdwBfHnjuMSZAz3PZnsgc71KOmdpW0yIqv97z2eMv4hdO42wzK+9JgcFJ7L8qra2jCuEMMqmMAVl77jTGWzZA4bX21NauYLiwEffWFNyDVvn5L5Cjvf3/hGcqeEpnQTjeUze/ebrsHqMb+N5Ldcwd4wPgtzxMWaIOHyo7s3BHaHgPAY3sqcnDE07eT/bzL2qZQaIZc19bp+YxU+tcbjfdlRgQj7qnV8IBDgy+Vih8C0xQn8HSFl89qIka7XIcyZJXMCSpxGmZ0G1gd3UsHXo0zhnwjR6
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(261009223027099003)(261022115727099003)(261022075727099003)(261021121427099003)(261022105027099003)(10067099003)(56012099006)(261026140227099003)(6133799003)(18002099003)(22082099003)(261026121527099003)(11063799006)(5023799004)(4143699003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NFNHSlU4V0h6b01Gbk9MYTZUZUR5eGQ1dElvdllxUWkxSGpzclpIeEJ2Wjlm?=
+ =?utf-8?B?em8vWlVEQXFMZ1l5WDFYTmQ4Qi9BQzBtTGs4ZnZIbGxIODZaYjI1MGp6UzJs?=
+ =?utf-8?B?anhPWjJKb2MyY25RZXRsc3dWSUFZTDFRR3pVU1ZQYllFRFdaZ2cvTlVuWTVx?=
+ =?utf-8?B?dUlSNlMwOFZxNk5Eai95RzYrK0tHMEZQUnpMOUpPSDBnTGx0SFM5WmxWSXdW?=
+ =?utf-8?B?akhmRWY3UWJFSzBIL0RyTEVOMGU1WWZxSW15L054akFmRW9TNk5PMU1XRUY4?=
+ =?utf-8?B?ZUFhSk1KSDJNTzdvQUlvb09nMFVvRnJGaG5sUDhnb0VWVVhvOGNiNitLZjkz?=
+ =?utf-8?B?SHM5YUJqdTZYcmlhd1ZxZW1UaHVITWR3akg3VWw3dm1hMG94OCtFSnBxWFJI?=
+ =?utf-8?B?WCsyM3VMK1U3UkxLcWxmdGg4WkNwTTh6aGR1YkxHOEtMTGNCcXU2ZDRaOFhR?=
+ =?utf-8?B?c2p3R3lDbFVBeDRPTGIxTlg2WDM4MXdkQUpuSU5sbU5iUzdieUxlWHdYOWQ5?=
+ =?utf-8?B?VnZxSUxjQUhYdnZBVUdTV2N3RXVWUXhCMGNxcTgvTno1YjRDcUJ1VzBzTHV0?=
+ =?utf-8?B?czg0dDlJOHdyTHhFcm4vV2x4Z2FJdlRkZGpqd3hNUk9PSU84N0lQRUpxYUxy?=
+ =?utf-8?B?aWhuUDJOcXFFbDRQd1M4ckJQekZZMTkxNXhmdDBJN2FKK0krZ2xEa1FEVjg1?=
+ =?utf-8?B?Yjh2cXI0aGJjbk1FRmdYZFdKckQ5eWpneDMrVjNtYkszS2tqODdZMVdUaHdG?=
+ =?utf-8?B?V2tranNEMHVGT001Q3ZlYlpoUzRXM3ZHM09HL0NhNkI4dmxzSGdMK2hVS3No?=
+ =?utf-8?B?c3l0ZkRrK3BlTTJFYU02N3lIWFV3MmpjS0c1TERlRml2UkhsQkVhNXJpVEdP?=
+ =?utf-8?B?U2IwbExrR1pUUjB4RjVPUUVGU0NHbXJnOXY1ZzFmQ2xraFRzMUZlSzBKS2hS?=
+ =?utf-8?B?K1h1UHJ4U2cvUmhLRHNsd3ZTQ0MwOThPS0ZlVGYray9WbHdHTU52ZHY1ejda?=
+ =?utf-8?B?UlVPTUFjTS9KOERTck9GcXN5YlM5bjVUM2tqZDU1d2twdTZFSWpONksrTmVF?=
+ =?utf-8?B?bWxjYUVCNElneWtjbExzdDhZeGFKd0ZSckhtNTJVMlBjcnNhMlk1OFhXY0Fx?=
+ =?utf-8?B?Y3FlbkFLanhQN0pxbUVhT3hmUktuNUpsdXFFY1hlTE85MzBJOFZreENVMElU?=
+ =?utf-8?B?T0wxTnNmWHo4ZmhsWEpmMTY3Wk5PcXhza3JPVGptL0YzZU44U1h0aVQvY3Fh?=
+ =?utf-8?B?QjRvTUd6M3hVemxnSWNWVmFjeE1uNnBUQXVvSS9ROGRpWXhGeXdvWGJTdENP?=
+ =?utf-8?B?NzJJTnR5c2QyVW1WT2lHTFRJU0xiWlRsVXAyNHJ0VG9pUzJQN1hFNlpXRlJQ?=
+ =?utf-8?B?OWhjeEZPYTF1V2E3dkg3WWxPZFNKajRMZkdOL0VjSjBiM2pWYlRIdHd6UkVW?=
+ =?utf-8?B?T050Ym5odTJGeXV6U2ZHRU0rVlBzblhFdGovNzQ3c3ZDOHRlaUpRSFY2c2da?=
+ =?utf-8?B?b1YrQ1I3NHVNU2JHemxQN0VpOU12YnIzLytrNy8zRlFmeGdxUlhCQkh3TW1N?=
+ =?utf-8?B?QkpRYVBSeWhlT1F0WEVwVXVVRnJZZEV2TkJlbTZrUVdEY3lIMk96aHJVQWZo?=
+ =?utf-8?B?SnNLTUpTQ2hhRHJZQWVZcGs4SWdWYlJleW5vZUR2TzZzTmxVUEhmSEFaZE5Y?=
+ =?utf-8?B?VGJabFRrRkkvekJwY1dEL2llVW94a25lWUhZMGVBZmdxWGtJeE90L09BYlNG?=
+ =?utf-8?B?RXlwdnhuUk4zVUF6Y2ZQandGWVlFb2JEN3IyanRQWXNRdEFNU2I1azJIY3lJ?=
+ =?utf-8?B?RDAwSU9TM1FnZUpLUnRGZUcyRFpRLzd0a3NOYnJEK0ZmcUViOUV2bTkxOFJQ?=
+ =?utf-8?B?OVhyU0JabFZMSGwwL244L2hsNXdldXJYWUNFRFpxK2hGZUE0YzRKcVY1R2xE?=
+ =?utf-8?B?TDJKVGhOOVM1K1ZNR3N6VXo3SmlJNXFLQkpyUCticFJRaS9zVWtYaWpjakVk?=
+ =?utf-8?B?SUxrUmZUaVpYelJYdTZ1a1hEWElpRkZKZG9EeFdPRXZ1RnlaY0VyemhKSFVC?=
+ =?utf-8?B?ck9RYXNVSEJMYWJiRTVHMk9MUzJlRlArMlJYZ0d1RlJ6dEhNUUdIMHdCbTU4?=
+ =?utf-8?B?N203cEFqaFEzN0tFOTBoZytYS3hocU9icmlSUC9RVjNTam5RM251dzMrUVcz?=
+ =?utf-8?B?YzdjaG5CVmhVRmE1dWQ2eEpsNTZyVklWL1krVUVWV21oZkZiK2ZxZmd2UFJu?=
+ =?utf-8?B?WFM0MmdUNDd6WWhZTTlReEZKMzB3MGU0OXpHK1lxaDc5cXc5YXJ0bjYweFRo?=
+ =?utf-8?B?Mm9ZekxjQmUvVzd6b2YvK045QU82dTYwUDJWRVRvanI1TWdja1JUZz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6df97d98-ad6d-4e7f-b4f3-08df34e826c9
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2026 11:39:39.9399 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jf5NZLhOOs9mZEkT2DTyvI0EpbnySYzhSt9nxSoNSpEF4D88FM4YooWr2Q9+HNmD8s9BptHAt3T3CN4V4T7nanPZRZKlZwEg8g2CLAiOcos=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRWPR04MB11102
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -145,245 +253,114 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-22.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Igor,
+Hi Chaoyi,
 
-On 10/21/26 3:04 AM, Igor Velkov via B4 Relay wrote:
-> From: Igor Velkov <iav@iav.lv>
+On 10/28/26 9:41 AM, Chaoyi Chen wrote:
+> Hi Quentin,
 > 
-> Add support for the Kobol Helios64, an RK3399 NAS board with 4 GiB of
-> LPDDR4, eMMC, SD card, SPI NOR flash, a 1 GbE RTL8211F PHY, a 2.5 GbE
-> RTL8156 on USB and a JMB585 SATA controller on PCIe.
+> On 10/28/2026 1:42 AM, Quentin Schulz wrote:
+>> Hi Jonas,
+>>
+>> On 10/16/26 11:25 PM, Jonas Karlman wrote:
+>>> Hi Quentin,
+>>>
+>>> On 10/16/2026 12:31 PM, Quentin Schulz wrote:
+>>>> Hi Jonas,
+>>>>
+>>>> On 10/4/26 9:58 PM, Jonas Karlman wrote:
+>>>>> The RK3328 has 36 KiB SRAM at [0xff090000, 0xff099000). With 4 KiB of
+>>>>> the initial SRAM typically reserved for BootROM during early boot.
+>>>>>
+>>>>> BootROM will load init code of up to 32 KiB (0x8000 bytes) to address
+>>>>> 0xff091000 in SRAM, before jumping to it.
+>>>>>
+>>>>> BootROM typically jumps to init code with following registers:
+>>>>>
+>>>>>      x0: 00000000 ff091004
+>>>>>      x1: 00000000 32334b52
+>>>>>      x2: 00000000 ff520000
+>>>>>      x3: 00000000 ff500000
+>>>>>
+>>>>>      sp: 00000000 ff090f50
+>>>>>
+>>>>> mkimage is enforcing a 30 KiB init code size limit for RK3328.
+>>>>> However, the BootRAM can load up to 32 KiB of init code.
+>>>
+>>> s/BootRAM/BootROM/
+>>>
+>>>>>
+>>>>> Change the init code size limit to 32 KiB using the <size> - <reserved>
+>>>>> pattern to closer match the actual limit of BootROM on RK3328.
+>>>>>
+>>>>
+>>>> Downstream still uses 0x8000 - 0x800 so unless someone from Rockchip
+>>>> confirms this is safe, I would rather not modify what we have today.
+>>>
+>>> Maybe my commit message was unclear, but I have runtime confirmed that
+>>> BootROM is capable of loading binary code up to 32 KiB from SD-card and
+>>> eMMC and the code was fully functional even when padded so _reset was
+>>> placed at the very end of binary, in the last and lost 2 KiB.
+>>>
+>>> Most likely the mkimage size limit was used to impose limitations for
+>>> stack and malloc area, very similar to the issue with PX30/RK3326.
+>>>
+>>> Runtime test consisted of running a minimal <2 KiB TPL binary that only
+>>> initialized DEBUG UART and dumped passed x0-x6/r0-r6 and stack pointer.
+>>> The binary used no malloc area, its stack was pointed to PMU SRAM or at
+>>> half of BootROM reserved stack area, and the binary was .space padded to
+>>> push code to very end of the loaded binary.
+>>>
+>>
+>> How can you be sure that we aren't corrupting the BootROM stack? Between TPL and SPL we actually go back to BootROM so code from there run for sure after TPL has run.
+>>
+>>> I did similar runtime tests on all rk3288/rk33xx/rk35xx/rv11xx SoCs I
+>>> have access to and all current limits in rkcommon.c beside PX30 and
+>>> RK3328 matches the runtime limitations.
+>>>
+>>> On RK3288 (96 KiB SRAM) we can even load a binary up to full 96 KiB,
+>>> however from SD-card, only current limit of 32 KiB worked.
+>>>
+>>> Please reconsider and/or hopefully Kever is able to confirm my findings.
+>>>
+>>
+>> I'm not sure we'll get to see Kever much anymore and I don't know who exactly we should be asking. I've been told Chaoyi Chen might be a good point of contact now, so trying this here.
+>>
+>> @Chaoyi, can you confirm we can use 32KiB of SRAM on RK3328? See https://lore.kernel.org/u-boot/20261004195853.59863-3-jonas@kwiboo.se/t/#u for the whole context.
+>>
 > 
-> The board uses the upstream device tree. The -u-boot.dtsi adds the
-> LPDDR4 timings for the open-source TPL and the vdd_log PWM regulator
-> and the vdd_center RK808 buck, which the upstream device tree does not
-> describe yet, and sets both rails to 950 mV. RockPro64 sets vdd_center
-> the same way, see commit f210cbc1f3d4 ("arm: dts: rk3399-rockpro64:
-> slightly increase center voltage").
+> I'm not quite sure whether I caught what you meant. And I guess you
+> want to know the stack and data ranges used by the RK3288 Bootrom?
 > 
-> Without the vdd_log and vdd_center nodes, Linux 7.3 reset or hung about
-> 2.3 s into the boot in 2 of 2 cold boots. With both rails at 950 mV,
-> 20 cold boots of Linux 7.3 showed no memory errors.
+> If that is the case, then the RK3288 BootROM will use the 0–4KB space
+> for the stack and data, while the remaining SRAM stores the init code.
 > 
-> Features tested on a Helios64:
-> - eMMC boot (TF-A v2.13.0 BL31, open-source TPL)
-> - GMAC Ethernet (DHCP, TFTP)
-> - USB 3 host
-> 
-> Not working yet: PCIe (pcie_rockchip fails to request ep-gpios).
-> SD card and SPI flash boot are untested.
-> 
-> Signed-off-by: Igor Velkov <iav@iav.lv>
-> ---
-> No MAINTAINERS entry on purpose: I cannot commit to maintaining the
-> board. It falls under ARM ROCKCHIP via "N: rk3", and
-> buildman --maintainer-check passes.
 
-Can we have you as a reviewer at least, so that any patch modifying 
-either of the first two helios64-specific patches are sent to you and 
-you can review/test them? Is this something you'd be ok with?
+With the SRAM being 36KiB according to the RK3328 v1.2 datasheet and 
+your comment above, we should be able to use 32KiB for the init code as 
+stated by Jonas in this patch.
+However, Rockchip's downstream U-Boot limits the size to 30KiB (0x8000 - 
+0x800), c.f. 
+https://github.com/rockchip-linux/u-boot/blob/1c535d65b8509f388d09e49fb6961f49fda35a1d/tools/rkcommon.c#L143. 
+I was thus asking for confirmation because we are about to diverge from 
+Rockchip's downstream U-Boot and I don't like to do this, especially for 
+things we (non-Rockchip people) cannot know if it's not documented.
 
-> ---
->   arch/arm/dts/rk3399-kobol-helios64-u-boot.dtsi | 56 +++++++++++++++++
->   configs/helios64-rk3399_defconfig              | 84 ++++++++++++++++++++++++++
->   doc/board/rockchip/rockchip.rst                |  1 +
->   3 files changed, 141 insertions(+)
-> 
-> diff --git a/arch/arm/dts/rk3399-kobol-helios64-u-boot.dtsi b/arch/arm/dts/rk3399-kobol-helios64-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..0f8e9353066
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3399-kobol-helios64-u-boot.dtsi
-> @@ -0,0 +1,56 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +#include "rk3399-u-boot.dtsi"
-> +#include "rk3399-sdram-lpddr4-100.dtsi"
-> +
-> +/ {
-> +	vdd_log: regulator-vdd-log {
-> +		compatible = "pwm-regulator";
-> +		pwms = <&pwm2 0 25000 1>;
-> +		pwm-supply = <&vcc5v0_sys>;
-> +		regulator-name = "vdd_log";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <830000>;
-> +		regulator-max-microvolt = <1400000>;
-> +		regulator-init-microvolt = <950000>;
-> +	};
-> +};
-> +
-> +&pwm2 {
-> +	status = "okay";
-> +};
-> +
-> +&rk808 {
-> +	regulators {
-> +		vdd_center: DCDC_REG1 {
-> +			regulator-name = "vdd_center";
-> +			regulator-always-on;
-> +			regulator-boot-on;
-> +			regulator-min-microvolt = <950000>;
-> +			regulator-max-microvolt = <950000>;
-> +		};
-> +	};
-> +};
-> +
+My understanding with your answer is that Jonas's patch to increase the 
+max init code size from 30KiB to 32KiB is fine, and I will therefore 
+merge this patch. Please shout in the next few days if that is 
+incorrect, so I don't merge it.
 
-Please work with the Linux kernel to get the vdd_log and vdd_center 
-parts reviewed and merged there. Then we can have support for the 
-Helios64 in here once merged there and available in devicetree-rebasing 
-(https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/).
+Thanks Chaoyi for the prompt answer, much appreciated!
 
-> +&gpio0 {
-> +	bootph-pre-ram;
-> +};
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-ddr-1_8v;
-> +};
-> +
-> +&sdmmc0_pwr_h {
-> +	bootph-pre-ram;
-> +};
-> +
-> +&spiflash {
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
-> +};
-> +
-> +&vcc3v0_sd {
-> +	bootph-pre-ram;
-> +};
-> diff --git a/configs/helios64-rk3399_defconfig b/configs/helios64-rk3399_defconfig
-> new file mode 100644
-> index 00000000000..16cddc71e0d
-> --- /dev/null
-> +++ b/configs/helios64-rk3399_defconfig
-> @@ -0,0 +1,84 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_SPL_GPIO=y
-> +CONFIG_NR_DRAM_BANKS=1
-> +CONFIG_SF_DEFAULT_SPEED=25000000
-> +CONFIG_ENV_OFFSET=0x3F8000
-
-This is already the default (except it's a lowercase f by default, hence 
-why it appears in the defconfig), please simply write it lowercase so 
-it's using the default value.
-
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3399-kobol-helios64"
-> +CONFIG_DM_RESET=y
-> +CONFIG_ROCKCHIP_RK3399=y
-> +CONFIG_ROCKCHIP_SPI_IMAGE=y
-
-You said SPI flash boot wasn't tested, maybe don't generate an image 
-that we don't know is valid?
-
-> +CONFIG_TARGET_EVB_RK3399=y
-> +CONFIG_SYS_LOAD_ADDR=0x800800
-> +CONFIG_SF_DEFAULT_BUS=1
-> +CONFIG_DEBUG_UART_BASE=0xFF1A0000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> +CONFIG_SPL_SPI=y
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-kobol-helios64.dtb"
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_SPI_LOAD=y
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
-
-Considering you didn't test SPI flash boot, I would say this is not a 
-good idea. Is the offset used by the Helios64 original support known? We 
-should aim to reuse it if specified, so we don't break existing setups 
-if they want to upgrade to upstream.
-
-> +CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-
-Are you using the Rockchip bl31 blob as TF-A or upstream? This symbol is 
-only required for the Rockchip blob.
-
-> +CONFIG_TPL=y
-> +CONFIG_CMD_BOOTZ=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_POWEROFF=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_TIME=y
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-
-Please remove clock-names from this here, I prefer we only keep a list 
-of things that could be problematic in SPL DTB, and clock-names is not 
-one of those (I believe at least).
-
-> +CONFIG_ENV_IS_IN_MMC=y
-> +CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SCSI_AHCI=y
-> +CONFIG_AHCI_PCI=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-> +CONFIG_SPI_FLASH_WINBOND=y
-> +CONFIG_DM_ETH_PHY=y
-> +CONFIG_ETH_DESIGNWARE=y
-> +CONFIG_GMAC_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_TYPEC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_PWM=y
-> +CONFIG_SPL_DM_REGULATOR_FIXED=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_RAM_ROCKCHIP_LPDDR4=y
-> +CONFIG_SCSI=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SPI=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_HOST_ETHER=y
-> +CONFIG_USB_ETHER_ASIX=y
-> +CONFIG_USB_ETHER_ASIX88179=y
-> +CONFIG_USB_ETHER_MCS7830=y
-> +CONFIG_USB_ETHER_RTL8152=y
-> +CONFIG_USB_ETHER_SMSC95XX=y
-
-Are there really that many USB Ethernet adapters on the board? From 
-https://wiki.kobol.io/helios64/img/hardware/helios64_block_diagram.png 
-there seems to be an RTL8156. Is it properly supported by any of the 
-above drivers (maybe CONFIG_USB_ETHER_RTL8152?)? Did you test both 
-Ethernet ports in U-Boot?
+Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
 
 Cheers,
 Quentin
