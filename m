@@ -1,135 +1,144 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ECDD606A31C
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 18:47:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24F41606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 18:51:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Mf/quR4n;
-	dkim=pass (2048-bit key, unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=Lqt8pe/1
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=rxBtQnAP;
+	dkim=pass (2048-bit key, unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=dgUR0yOY
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1167081109;
-	Wed, 28 Oct 2026 18:47:10 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DF8AD409BF;
+	Wed, 28 Oct 2026 18:51:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nKcL8MuAfwrN; Wed, 28 Oct 2026 18:47:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 58B9D81329
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793213229;
-	b=HtNYOXu49l15muj7XZmneQ2XjhXdd+8XMHB3bBRp3SdDp/dMUPmytDhFlhaUyhR/P5n3
-	 wSaOWbCTqoI97Qjrk6JDK/nNq+QLy9bvLDL0RkpVnMbLb4A+8pi2xA3R2TEgpSbQ4fS8x
-	 rcUKQOVAlsas8becBJstl5MFUhtzh+nVlKqYDPx7lFgncTQ6R+QtrhtlaMszSGprHQ6mL
-	 nQOEwhbIxX9ye19ICVU82ZzKDR4MyhJENTGy09tDn+9qZrK4EEECozOmTvsArhYGUzOIk
-	 aGabV5IDd94PUo62YTjbGgEbxrfjxPxClyEaicCjckshxC9fIh8zeC9m2zd+m8IGfig==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8ssQCEcLqklt; Wed, 28 Oct 2026 18:51:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B2C2B409C0
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793213465;
+	b=HsLQqzmKeAM35708diEYPfYndAH9QefVphz+vCitoEz4BX5pdzUUkzunF1V7S8W18Zwu
+	 Wp+q/fAau7AONHWr5BynJc/y11+PQRT6wOPVdZ7scDKsfo0n+/7NSVcRyzophuTtgbM45
+	 n+alS9MtNBYREHZ+iP4BjRWMtyVhAuJEAtz9wB2GeXojqVArMfNt+nZKAsoeaXYeMjhvY
+	 2RyS567vy43w75egAREK37IIUwtSVs0dwnS4rq1ePHPhjefltTTYnVuylHvzaAWixKUcc
+	 wGeHcLDUSmhN62ooyjWJVXtPNPodEB3pQckbUdpEOeS1gkGI66cFB5nXbpy/6S80yXg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793213229;
+	c=relaxed/relaxed; t=1793213465;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=6H/SdWVLTsUkiWbtzINRbPL3qVq1vyz++W68xeAF35A=;
-	b=N4ikFB9JZXkPjOJDVDgoJSwWDjCyVE8flOx6l/y+8XxuD3u3IvSNZTy43VtN268jnnZi
-	 jFPmqn3H+KhGdlc0SUcgQLa2rVsADwvT2PDsbTBMXWWA1ZpCV/Gc75HNMtM5zFmqB1m1r
-	 PuOOrh8GELWF4vxd/5NMzlv2rg0dNW5LsDG7OrLqYieOL0yvHwQBGYzLfjAyksALmgF0Z
-	 0nUtBoTVsASiuwtFPM84lDUL1iNffTvqOVLPkKakm8xhMMyVQkZHC6ngwtN41EZlLRTXi
-	 ZIh09T2mWPOlbPQS+2rkogHFPh9jq0YPT1QDkSRNzJqn3XmZEmdGOAA0jWzT/yMSgPg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	dmarc=pass header.from=freeshell.de;
-	dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b="Lqt8pe/1";
+	bh=IK4aDyrsM5FQoqvsjwXPtvAGhN4ISjNMiMwXTQq1LjU=;
+	b=XU0u1U/+gx1LmpFx4ppa6sTzdiWHKOX7c7ACXUTaq64DyRJVZlg9TIkPI/VrFTMS+vOo
+	 PI/M8t/6BKeJts09Jg28cSMelcDjOZcMk4lp1HvuWQ5Ms8cgLIhpH6jjhXoTrs5nTx1Qt
+	 T0dvqHBWCedRjrjeniJYj8OspSAeDcC2zHa/OFLKsKduhg+7uYFHykYmWUMjp/k0ewIXg
+	 f/WTHaOtrmSk9k9UnuKeZmFocNTF1Sm1pYoVQXp8qWM6xrMKX8MFYQehaBylGoJPG3hLG
+	 J4051Luva0LIKQSxpixJunOtOkbThXDnOYpC2u1TNA6fYXDNdTWcEhQC4R9zsmwJihA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793213229;
-	bh=6H/SdWVLTsUkiWbtzINRbPL3qVq1vyz++W68xeAF35A=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793213465;
+	bh=IK4aDyrsM5FQoqvsjwXPtvAGhN4ISjNMiMwXTQq1LjU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Mf/quR4nHRDUHEaqzTBjmznohJ1Ok8YhRwvf2lcYdka2zUS3K7BZmV8p+PMQN14cM
-	 uYkhdYW67zH1uM1t2IJVojhOGOcfb0JaM4H50sLwQxN2IW68qzsmSZ0RsduDTrAEe4
-	 8fXdyXePmkkPrWrlfE/hKorOqy2DzDkDqtSJTi+bCw++ADroLyj1JFNvOgCn+HInvU
-	 MjGQfxQ0o95kxuzVSQRqX3HlK0qIDyFNvie01StILHEyfLk1Q0S7/ZV2DjHsR9yIjO
-	 DBl8uPFQ454ZcHiEVfhCFNadmYlyOHhXi0d2n+tOtQBbIwxEbTF9CEMgreXP9c+1oI
-	 +7IOZEulDrm0g==
+	b=rxBtQnAP7fQJo1PcD2JKfjFx0BGRmcqUUzkwEYHV/uKiga1b7pv+KVB/XRHtk7qYe
+	 JVLYjk6/q8OKxlhHp0e4AJLSDzqqzoDzxzmtvdpIJPiV61iBdiSlN8norqL6pKT8jp
+	 mBbtE+162AalpzFCTmusXTfCL8ZMU+wAIRBu/bdFzxNMrtxJuK8O6av4vKnwTMBLw7
+	 t2ZB8Zx1Z4DtHbqmP2bcseAIH3Q7ZVy5CxnMNhRXLyqEjstVzesZR2YwwFfipRZ1nh
+	 ISCwF63Oahrhc6/MeciSDZmsPiB+9pAF6vSiVNdjNbXub4/zgd185k1AwIHHXypjLA
+	 isZBCLwC8rNZA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 58B9D81329;
-	Wed, 28 Oct 2026 18:47:09 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 2478F362
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:47:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B2C2B409C0;
+	Wed, 28 Oct 2026 18:51:05 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2BFD0529
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:51:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 095DC81109
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:47:07 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1DE6880DBF
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:51:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YLscHAy6CK04 for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 18:47:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2F9A581329
+ id Ud2Rwtrl75HS for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 18:51:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4940580D66
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=116.202.128.144
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793213226;
- b=YWM3SO7KaNb8Ulu+os0BfXc3tvq5GN9EOV3LSDO9DzQ/koB5TE6tDzKmEqfEZFmVTQ9N
- fGnZNM9zI7igDbm60Fs31L3OFRKBXt6dNEUD27shhPOzfSYiTTkvPgCt9PNQJZ9vz0EmJ
- v+zLcZ0NHKgKk3+YZJU4jCrTVMCJL/6hWEwZElTFX0BxNJV3TrLV4zda++52x3NN/NY55
- BbxMW1NSuSWbGn1DEDr88OjfPP2zU+jvvTjDEd1DYn/NGeJs4ctjHfdc1LK/9U7s9DbeP
- QwRNrJnrFlWqgWo8fLPMq6IPo3VrwRu8YkCnwlnweBy/3ykLQHJ9HGIMP7RBHNZxYdw==
+ arc=none smtp.remote-ip="2001:1600:19:38e0::42aa"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793213463;
+ b=erpgcjCOshNLqLtMt93Utf7xeoDkmXN8SzETpj3FpA/ykc0MfzlrgjYgHWYQY2tsLgaA
+ HAuoGivtmsxcSOkRwkg2OpeBhLNsb2zMKVBqos3u1JCXg0DmIHHeVyVE1nYxu5Md5MwM5
+ ms1ssE/aq1d+0Nc2aTCfFVpzu5oHOT6jVfIhxgiFTp5gdcZnCUlKU+StN4AT9NbQHi/Xh
+ Sz0JbIHrHxbbTaibfT4b8vASOr5/1xPuLdVdLS0bxx1va9n+d63BtAxdMipcZVX787tJB
+ iZx7/EojJFjxh50+K2F+yr7clhh0yjY+weh+7hUjNsvuZ4YXjwzVIUYsBY51aUvjoXA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793213226;
- h=Received-SPF:DKIM-Signature:Received:From:To:Cc:Subject:Date:
- Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding;
- bh=6H/SdWVLTsUkiWbtzINRbPL3qVq1vyz++W68xeAF35A=;
- b=QWHNBCC/vtvdA84oitBLy6EkAn0dp45e6GI5TfGsrJd7NL4+YPr/WFcO5MNTjs8N+vE2
- tiU1ro1x3cZm2NFtFJctfj+l1SA01E7eIU8+dtcWbOTa+rbcJuiYao4txabVncIArYL0g
- 1TS1kOAhT4x5vPbQVNcjA43aP1sSwlVMClguljQ4hcIT/9tAzh1B9pdp68UILgc5C46M0
- r3gLRfNexCTBnQOZ0N7xpgr7Ct4wCj8rYapSgC/bcl4vBCVTYndbnqnuBxyDm9lUHnohZ
- 4xte3s3tt6x1AIK3Yqp9+VA14DibkiIhHT5bebLhFr62t9WA9Dne7hb843p6FY+vARw==
+ c=relaxed/relaxed; t=1793213463;
+ h=Received-SPF:Received:DKIM-Signature:Received:Message-ID:Date:
+ MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+ From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+ X-Infomaniak-Routing;
+ bh=IK4aDyrsM5FQoqvsjwXPtvAGhN4ISjNMiMwXTQq1LjU=;
+ b=JeWKZKNNpEF9fyGzInMlcZxoh6U+ir9nP+D2f9vsMgQYhb0KL8V8X1na+1uaaXgedwS2
+ 1xTnsy0reuGxqaWgPxo/FJIUm60sJTOTxtRgJJR0rAqE8Xj/rtyMD3BvQKMi4X2Ti3qmz
+ 3O1riWUpWjyv7v6lxRc19XrzBGgHzaHsFF+4t1n2bI73tr7sq6hBHzcgeM/60b4bnP9pV
+ Kf1lK8tWFifAi63aqNCcEYHVCdrobNxCFpcAldckhIeq8QNjyRZom5zhJUB1arEC6KM8O
+ +NWpDGzRLBXsJsQ0oQYBlmAfdIhWo4JEJ4XDRFF+MfL5i3/Aq7B8Ob3NfvOAg/7a1Yw==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=pass header.from=freeshell.de;
- dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b="Lqt8pe/1"; 
- arc=none smtp.remote-ip=116.202.128.144
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.202.128.144;
- helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=freeshell.de
+ dmarc=pass header.from=0leil.net;
+ dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
+ header.s=20231125 header.b=dgUR0yOY; 
+ arc=none smtp.remote-ip="2001:1600:19:38e0::42aa"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:1600:19:38e0::42aa; helo=smtp-42aa.mail.infomaniak.ch;
+ envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=freeshell.de header.i=@freeshell.de
- header.a=rsa-sha256 header.s=s2025 header.b=Lqt8pe/1
-Received: from freeshell.de (freeshell.de [116.202.128.144])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2F9A581329
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:47:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1793213170;
- bh=6H/SdWVLTsUkiWbtzINRbPL3qVq1vyz++W68xeAF35A=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Lqt8pe/1a2l9WiSRmgobLqLqbD8Tr62n5ddamcij7wy/a6TLfH88CSdiCXBE/e4dT
- b9m2Ou4XyWSKXid72xRiVU3ol2lL2br7sMiWHucv7vcS2O1p3IA83I6pjnMjtbDctO
- E1hpIWiTq/T1RqTrVIEr/lxhhZj3f2KZohEyFVx9mGdWeQz15K+IRKPmhCYVRU1+db
- 7oJg4UDWQ3VHQu/lvdrHlmHsLb6e9GG5R3SDVC/TKYvmNuyTeWjrfvI21YXEorqhxB
- yvYe2SM8R3zRHPANco16uHRvu49c57lhXRCUubO2/0jL+WZPt7k36wd056THreb2jt
- Lb1pZnrFkOi0w==
-Received: from hay.lan (unknown [IPv6:2605:59ca:364f:d400:6ecf:39ff:fe00:8375])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 1E048B22050E;
- Wed, 28 Oct 2026 19:46:08 +0100 (CET)
-From: E Shattow <e@freeshell.de>
-To: u-boot@lists.u-boot-project.org, Yixun Lan <dlan@kernel.org>,
- Tom Rini <trini@konsulko.com>
-Cc: E Shattow <e@freeshell.de>
-Subject: [PATCH v1 3/3] configs: spacemit: k3: enable CONFIG_BOOTSTD_FULL
-Date: Wed, 28 Oct 2026 11:45:07 -0700
-Message-ID: <20261028184526.1887640-4-e@freeshell.de>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261028184526.1887640-1-e@freeshell.de>
-References: <20261028184526.1887640-1-e@freeshell.de>
+ dmarc=pass (p=reject dis=none) header.from=0leil.net
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
+ header.s=20231125 header.b=dgUR0yOY
+Received: from smtp-42aa.mail.infomaniak.ch (smtp-42aa.mail.infomaniak.ch
+ [IPv6:2001:1600:19:38e0::42aa])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 4940580D66
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:51:00 +0000 (UTC)
+Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
+ [10.7.10.108])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jFGfB3QL3z1Rtr
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 19:50:58 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
+ s=20231125; t=1793213458;
+ bh=IK4aDyrsM5FQoqvsjwXPtvAGhN4ISjNMiMwXTQq1LjU=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=dgUR0yOY2AO6b8jwzxQLD38ebcdiWJe/Jl/Ge+phI9mgU8IrEdl7ogxh1gIqcOChZ
+ t3F9sIEW/rBOjTgX+sHljCdcyyQt42V19PKOsxVIFpNWDSH6ieEfYfo9mFu8nVV858
+ ZGvMrMMRmLJURJ/EHi2+lc90Tmy9Ob5CE6ovyY/cIA8CUXdSNvMAveExMBBhcPBxcB
+ Ho8Nej93djLtfVI+uP26zocULxTTe9T1vw2OhF1zRV6YdQzJocbSA99P5Ajkranaop
+ pKVdJPC0SO0KZwbpm2wQJnV3CP9qSzduXuV4ipguj0Y3WlxCNtsw1xGDFznEn+bPlv
+ b56oy95ftuVMQ==
+Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4jFGf92NbnzRMr; Wed, 28 Oct 2026 19:50:57 +0100 (CET)
+Message-ID: <7d5ab66d-1b25-451d-be99-979f0324b6d5@0leil.net>
+Date: Wed, 28 Oct 2026 19:50:56 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] board: rockchip: Add Kobol Helios64
+To: Igor Velkov <iav@iav.lv>, Kever Yang <kever.yang@rock-chips.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.u-boot-project.org
+References: <20261021-b4-helios64-v1-1-74afe8aa6d72@iav.lv>
+ <b102efbe-548b-42b5-bdba-c744449db9e6@0leil.net>
+ <20261028-h64-uboot-v1-review-reply@iav.lv>
+Content-Language: en-US
+From: Quentin Schulz <u-boot@0leil.net>
+In-Reply-To: <20261028-h64-uboot-v1-review-reply@iav.lv>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -139,70 +148,67 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-7.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Define minimal env variables for boot in spacemit-k3.h with fdtfile
-as the CFG_EXTRA_ENV_SETTINGS sentinel, and enable CONFIG_BOOTSTD_FULL
+Hi Igor,
 
-Signed-off-by: E Shattow <e@freeshell.de>
----
- configs/spacemit_k3_defconfig | 9 +--------
- include/configs/spacemit-k3.h | 6 ++++++
- 2 files changed, 7 insertions(+), 8 deletions(-)
+On 10/28/26 7:45 PM, Igor Velkov wrote:
+> Hi Quentin,
+> 
+> On 10/28/26 1:25 PM, Quentin Schulz wrote:
+>> Can we have you as a reviewer at least, so that any patch modifying
+>> either of the first two helios64-specific patches are sent to you and
+>> you can review/test them? Is this something you'd be ok with?
+> 
+> Yes, as R:. I can't review schematics or drivers, but I'll boot-test
+> helios64 changes on my board.
+> 
+>> Please work with the Linux kernel to get the vdd_log and vdd_center
+>> parts reviewed and merged there.
+> 
+> Sent on 21.10:
+> https://lore.kernel.org/r/20261021-helios64-vdd-log-center-v1-1-4cafd110e0e5@iav.lv
+> I'll send v2 once it lands in devicetree-rebasing.
+> 
 
-diff --git a/configs/spacemit_k3_defconfig b/configs/spacemit_k3_defconfig
-index f49442951c8f..9bf582564d07 100644
---- a/configs/spacemit_k3_defconfig
-+++ b/configs/spacemit_k3_defconfig
-@@ -19,25 +19,18 @@ CONFIG_RISCV_SMODE=y
- CONFIG_RISCV_ISA_ZICBOM=y
- CONFIG_STACK_SIZE=0x100000
- CONFIG_FIT=y
--CONFIG_SUPPORT_RAW_INITRD=y
-+CONFIG_BOOTSTD_FULL=y
- CONFIG_SYS_CBSIZE=256
- CONFIG_SYS_PBSIZE=276
- # CONFIG_BOARD_INIT is not set
--CONFIG_HUSH_PARSER=y
- CONFIG_CMD_TLV_EEPROM=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MTD=y
--CONFIG_CMD_DHCP=y
- CONFIG_CMD_DNS=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
- CONFIG_CMD_WGET=y
--CONFIG_CMD_PXE=y
- CONFIG_CMD_PMIC=y
- CONFIG_CMD_REGULATOR=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_FS_GENERIC=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_MTDIDS_DEFAULT="nor0=d420c000.spi"
- CONFIG_MTDPARTS_DEFAULT="d420c000.spi:128k(bootinfo),512k(fsbl),64k(env),1024k(esos),384k(opensbi),-(uboot)"
-diff --git a/include/configs/spacemit-k3.h b/include/configs/spacemit-k3.h
-index 9dd545e2a3b2..39d10059926e 100644
---- a/include/configs/spacemit-k3.h
-+++ b/include/configs/spacemit-k3.h
-@@ -6,6 +6,12 @@
- #ifndef __SPACEMIT_K3_H
- #define __SPACEMIT_K3_H
- 
-+#define CFG_EXTRA_ENV_SETTINGS \
-+	"ramdisk_addr_r=0x130000000\0" \
-+	"fdt_addr_r=0x138000000\0" \
-+	"kernel_addr_r=0x140000000\0" \
-+	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"
-+
- #define CFG_SYS_NS16550_IER	0x40
- 
- #define RISCV_SMODE_TIMER_FREQ	24000000
--- 
-2.53.0
+Ah, should have checked myself. Thanks for working on this proactively!
 
+>> This is already the default (except it's a lowercase f by default, hence
+>> why it appears in the defconfig), please simply write it lowercase so
+>> it's using the default value.
+> 
+> Done, the line is gone.
+> 
+>> You said SPI flash boot wasn't tested, maybe don't generate an image
+>> that we don't know is valid?
+> 
+> Tested now: SPL loads U-Boot from SPI, then Linux over TFTP, 6 of 6 boots.
+> 
+>> Is the offset used by the Helios64 original support known?
+> 
+> Kobol's U-Boot used 0x80000, which also boots here. I'd keep 0xE0000 like
+> the other RK3399 boards: an update rewrites TPL/SPL as well, so the old
+> offset doesn't matter.
+> 
+
+Technically, you could flash TPL/SPL and not proper and maybe still 
+reach U-Boot proper (so new TPL/SPL + old U-Boot) or vice-versa. Using a 
+different offset means you need to make sure both gets updated in 
+lockstep. This is also not powerfail-safe (imagine a power cut between 
+updating TPL/SPL and proper (or vice-versa), then you would have a 
+bricked device. RK3399 Puma has a different offset as well, due to 
+historical reasons.
+
+Up to you in the end, but I guess it makes things easier if users don't 
+need to figure out where to flash stuff (well, except if they use 
+u-boot-rockchip-spi.bin at the actual expected offset).
+
+Ack for the rest.
+
+Cheers,
+Quentin
