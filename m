@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E671606A31D
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 05:51:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C387606A31A
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 05:52:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=nLRg08pm;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=PByCb3SW
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=MHqzf/nL;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Xt/l6lK3
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6987180F61;
-	Wed, 28 Oct 2026 05:51:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7AF7980DBC;
+	Wed, 28 Oct 2026 05:52:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id juRFSSPlM_WW; Wed, 28 Oct 2026 05:51:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 40E7C80DDD
+ id R-qrxQneriTI; Wed, 28 Oct 2026 05:52:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C0D5080DCD
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793166717;
-	b=HE4j8j5nfPKE587vG6Os3qqXjr7IU8ZCHW1/BulrXnExMmdgkLGqR9+TPdQyn6byVOi0
-	 TAZXVZBbDlmV2nB3CO8xvNHqXSPHkNY3ID92Uyytxyc4DmzKmo5FoQU8r5O2of5AePRuD
-	 e7QTiVDDm11LN/S+SgeAy8tpdSAI4a9ehcOdRJS0cLLHwF7+Idp8KEdDFHZMBOK9hKsII
-	 Mdre3DdbYuUXIji5vS6hpdONxTGr/PILxZLQ2OmzL9GceJoN0daxsSmVnaiKRPQYiuoue
-	 YkUlFd/Bf9rQG1QCigUmMld0NxtPe8gN8Zxz4Cu44esyV6xADYjtmIYrpRv5v3nD2QQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793166723;
+	b=l8mBgJYaG/COEV02D+MbRDyc/qDo5QwZIMuvzUIEpqaoEGhjIXlACSx6ia0qYzIOsig5
+	 hIGga7ZQ/F8En7xlB9sF8qtI4xG+N83bJ0cRHb3ksn40Q4UH53foz6v3NEjzMhf2jAgZb
+	 ur0w76F3lWoiEXdt6gBn09edtmViHmdm4JzA+JjCS94qCfvSOE0xbLo8oci0iC7JWn++1
+	 RT5WvXDdZjeYpK2yH/YmHG3H+bDFOOiWERteRTfWYHv6XhUhY2ZWwzBp8xJtqObp5t6/r
+	 rh3GCuum7Hg8jG7YU0wQzKsbWiCs//icAYeZa4Qhgg6NtqeQvuHpVxg+dzzm6++yP3Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793166717;
+	c=relaxed/relaxed; t=1793166723;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,123 +32,125 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=coObINQQcBv3AoF10OouBl8ccqZsMHDH3PZ6OmZ2Yww=;
-	b=fa5Dcg0hdOzEjAAkkqf/+tu8+Y/G7GtrSqHvxuySB8ixqlKLnghaaizZEnuGKO5oe94D
-	 u44JyMExafuvXmb/3HWUHKwxQQEN0Wapg///R52rHucwqFjy1cKixtGEokAOPY60UWg4S
-	 mxl4mcu+PneZ4gs+Ud8gNY5VYLIJOe+vOlRu/75+XOr1QUNEflROwqDLlUIYv1s6J1UaP
-	 ubgdBBjj8Ou7Qh4Y5YNSrQIhgnmLElWyGoCEuXQ7H23b3uKeiIhP3dDmahgCsnt5wI+ZL
-	 jP8MsXzcKPm1OgZ0O9qIEpaCHq5EC86J2nQFBN/IxBeZt8OJv9r7ca3HRbpeY0wtJhA==
+	bh=obJJ7mAwVaE7N4fjk2sNs/SEvc8DL1EMh/aCRe6lnso=;
+	b=kPq/BsgGb9rMGvJES1mSdjgA7SVIbWoqMKDVlcHwITYGJhO9jY+70QTSATkUvdrxdmkG
+	 51iZ8IMp2OjCYgzL8vNMWm++137/B/ebw3IKQBf1xrnBFgqfd07YesSEYB9nnQxrfe3Tv
+	 gNZwMSCgQ4KlO/O3XHt9XKr8jMiiSXfnXsWGmWiwpdI2zQdDSMwAN6g3xqM4cwgHpAcBN
+	 hZm+ge4/nCTfGzks5DtQVyL2bXx/D17DI8GERu5mDEkK3Cm1rls0kAfJFsepuevY7yUVw
+	 T+93zFS4xEcypVsz36YPh0xbgiDzSJd+glx60xMt29qe+Zfv3njy7Mmuf4dKCz32Asg==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="Xt/l6lK3";
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793166717;
-	bh=coObINQQcBv3AoF10OouBl8ccqZsMHDH3PZ6OmZ2Yww=;
+	d=lists.u-boot-project.org; s=default; t=1793166723;
+	bh=obJJ7mAwVaE7N4fjk2sNs/SEvc8DL1EMh/aCRe6lnso=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nLRg08pmMRGiSw6bLshFWikb5wzQv6CqD0z+0hsw/3TXqnCfD+dAMk1PAg9S/CduT
-	 ezDGmwk0mq2aZaMgQWdMeW94jrBsR9mhU7JaHosWThGotVG7i619lW/uM6lJX9KRSE
-	 yNUoW6rbZuaHnj4CAJieKg7kL5cx+6aOHZIRt+JEP8JNCSNWCLPJn0JkO5RyLi8Ikl
-	 Q+3rYNFlJwTPT2uCBVf3DAWbvbcf+UQ9Dp+mSySJGg2608zpdhw8ak3vrU/gPMf3Wu
-	 NzenZiOpgcRAyyi/skYwB4MHvL4WATQ/gDewS0WWwL4vi+8A4/E7aNs5pgSZ5pEEWK
-	 Yff1/+lxsJPsg==
+	b=MHqzf/nLsaPWAW8oMwc/T9gWOBOSvnIDmrr60IBIEzC6f0ltkDBz9F6nc00HSZAJ8
+	 pudcVAXug4m3sQmGny4NQiAgN8qP18Du7YttbrL4kgDqD6IR2J+3qJxx45c7bXwGW8
+	 xwPXLc87cMAC9AeTn31E1VrlOE0U60ZUZ9wTQFeyPItvlsyfJntWN74wDGUbMJVauA
+	 JntmCcBHX86YicSllyQPE8EdZzJL8S7t0c9IIlQcxKS5cADdGvK9F7PjoSomBDZIzf
+	 g/Vxw3ijNkeiyAq5JbPpGQ9SdgylD1v048jiiTgVTNdEL2MqIq/1WHmTyPz5A6Q9o3
+	 GJbgO/G0CKkEw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 40E7C80DDD;
-	Wed, 28 Oct 2026 05:51:57 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id B69F3D1
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C0D5080DCD;
+	Wed, 28 Oct 2026 05:52:03 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7F650D1
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:52:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B43754016B
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:55 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 70EB180DB3
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:52:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2dvx_wnDenN9 for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 05:51:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 6198F4006F
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793166714;
- b=nQrTeivuSyRYk/F1ZzLVt1NChfIo5tB9Wt1Owq1e4sCY2t9MvIQz1uAXcqlZaV31l2cv
- Bs6hGlhCxKMuowj7JehN8WYrR//oPDM1SYpS5RuXIqnKresBF22uY/OPl8l59eFn9GJ0P
- MPjSz/GW2lA5/TpqWhmXEdqeBuvKKbd3mq5GAX2DX1RymguanCnlRigOst+SKRRYOX239
- mtuI9KUAZb6gBaEJpdDqRo7FJ9ZyuonpgGFz7hnpBWkTo2Nam7tv2GyHDQesgyefs6ER1
- yV7xVCPI3e/hVo0Ws4aHqHXqIxodafyKRmLaj5AjFQgn+duDrLqCpVf7/YRaQELMTxA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5-kMy1QvCXht for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 05:52:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8209680E21
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::434"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793166721;
+ b=NY2LiSbeAY0ERBkSX3W/UZHVLzmOHNTOYxlA+I24ydxK8+IA4KvoQuo8hdt50rraz6ts
+ vKtpvWaePjJhGbThw91ckHaWxpnAt/eP9Lryn34TfnPVrIt1zgaLVT8Ty7zylKUXeb1O5
+ b1/h7Dly0LLkHLR4mj7mQyE/Rbvd7HNb+NAA6mN5u4T/iCLI+Io8n3Xpd4TB5IYiyxuYq
+ qUJK9qm8S9WL/sz7TITAn9td1s0MSVMNPmPDBDaHGTFL7F+THdblJEkRt3BvI8wOhJYKd
+ 1U3iaDKGsXhrDe+H9MtMUBMXi4V2r+ThIrxnMGRXSoGemfg55Jkgwg/0kF3p/yD74Pg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793166714;
+ c=relaxed/relaxed; t=1793166721;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:In-Reply-To:References;
- bh=coObINQQcBv3AoF10OouBl8ccqZsMHDH3PZ6OmZ2Yww=;
- b=EXuRfNZW5Su/yW4IjzsId1iT7XEifW2qwc23o+g4g3xsonmb2WCdonHn9XNBRKaBiFon
- gB18YChgeXf5G1XwW/Q7LCniKIrhBvlN5bmz6lT1rZ7xYYQHLdkeRtDqSEYJaC+UZP6Vb
- jQLqn+H96Zc78fiI+hQHMH7skcmd3UtBwFndH4pOsFwhRGTBpnrO/JXxHZMryYP9MbIMT
- H1dqzg8b6lougwbvNaa9T4Rmmi4AURcb6FzXhd5C0dX8PUZGDQbGm0zCnvuJhenMonmDm
- njEwOySRvL4yf1Oa5Bwj2Jh39w4f2O8bmgef9OD6bWdHcyCtPu0OxUjH1FxNi1vUMww==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=obJJ7mAwVaE7N4fjk2sNs/SEvc8DL1EMh/aCRe6lnso=;
+ b=l1XvMJTLuVwvdZzB+w+tRp7v1eJVXKKIbQ5LNivMZrEQwRyl7wjkbDtVGIbzMqE1XvzB
+ sRkNzde2MChG4P6k8XYnjSx1oRB8ukdbVQUx5VAAXJwz7AHqccaI0z397kptx6cuTJGN4
+ 9pWFiHNNxAWUweeDXVe0wAXS2xyvi741w3dROHlvAw+GTQodJLFvrxm6nGe8skdoLY29M
+ 9HVr2JCYjpcQSTTuMSOB+bKmqI8+fkLq8f+CjT4UzopV+mB+YBDIj0PmTdUDL32ewbhVH
+ dRzKPX7MtDrZ3UlUlxQwe2zJlupeRQ34teskZp8L0Y5v703edUDlflXXPmhSUOSC8dw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=PByCb3SW; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
+ header.s=20260707 header.b="Xt/l6lK3"; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::434"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42c; helo=mail-wr1-x42c.google.com;
+ client-ip=2a00:1450:4864:20::434; helo=mail-wr1-x434.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=PByCb3SW
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6198F4006F
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:54 +0000 (UTC)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-48c4d870d54so344426f8f.2
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 22:51:53 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20260707 header.b=Xt/l6lK3
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8209680E21
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:52:00 +0000 (UTC)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-48c4649b35bso458377f8f.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 22:52:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793166712; x=1793771512;
+ d=gmail.com; s=20260707; t=1793166718; x=1793771518;
  darn=lists.u-boot-project.org; 
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=coObINQQcBv3AoF10OouBl8ccqZsMHDH3PZ6OmZ2Yww=;
- b=PByCb3SWuC5hsHUatlLXk9/oqJvubRWZxpmKSueX48DPpfjYgDX8jFTkd7jf3+yPbi
- GUPrVI2m0nQDuIlASrEk1PeVqmjdSsI62cYGxtNQinfVFztpxG6853mPOf/PEZKlV1I2
- G3cpxK2s8fJ+Ud0OIKhe8RXpBMtQURXoPKOskoe2hSuaAywW+vUWU5SJIi8uING4t4Xc
- XMvTnhG/brnutYddX5qOmwD0mF0ADpPKoHxRjRLH+odbuEicW2I0J3emY+mOFn3Yhrzm
- dsQcdO6XOlYiqCD1txvTOXYP/jshuoAL9MraLTy3sQ7dFivkmBrdmsAEV0aXYrh5+N6w
- IO3w==
+ bh=obJJ7mAwVaE7N4fjk2sNs/SEvc8DL1EMh/aCRe6lnso=;
+ b=Xt/l6lK3vWC3DPxE93Vq22SIJQUAigK1UpaXWgt3mTE9BcmujBNd4Sdvu7MnT3PQov
+ KbucbJgBopN7nB48aLV8KY3Z3x8dD1EchEf9mqoJ3qpKKmzTYBQBllqtsJu53KjoQwzm
+ JE/RDiuVg9lAOtVo1UJKq1wXK/qrOGcRSOX+9kZIAxDtNzh1Mtvai5TBzZ/50fTMIkoo
+ QFMPXzIlYaUf4UuRNJY9ojv6ytYn4yibeCEUaiU/VuPMF1D9qZcFxb+D5M0NiQm1cZ34
+ OOhw9GtYw9imOEgEjQd4cBGBYhgIhg2jkGTYOjaD/WYRhpwuH7i9NbaSgYws8S5EIK77
+ BLdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793166712; x=1793771512;
+ d=1e100.net; s=20260707; t=1793166718; x=1793771518;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=coObINQQcBv3AoF10OouBl8ccqZsMHDH3PZ6OmZ2Yww=;
- b=JOKnaQo4zCBjaR4E8tyA9ZqdxprRbjtHoPIuLGjzD0xXidBgrp3v9xAapBNEUjcYoI
- Htd4V3Kb0Z9aqVYQA1GQrRmqYWgjLwww1sxrGjINBtjq8X+rjcSTLqse4Y5GowXrMeDz
- EXKRMyyy6LYM4MurE5+BBmAQdNHVx2e99vwRXfn3oWRKQN0/+aq6C6SEukPsQKUJkcd8
- NscE7M7ahCmox2hT+ZgZGLuXvzNk4nvpN2WRWWiy9PtPetpTRCiKW8ptLXNvjji/85Ox
- GTxDt8iyrt0GL2+cE8HtSupRItk2/b7QreVikZn6cFOP5lAvWzPl0B8lPaLY8m95OGum
- 1/4Q==
-X-Gm-Message-State: AFq9FYJJ5D/WwgjSRKV7tRa7q5UWFIqp0KfCRmLRmJ/Hnj6psncP3Qs7
- u1+VaAOuX5mNmF6aUjCrxCxjxjgynr/i5ZrXvR3BN0z6RdAhZ9lKirMf
-X-Gm-Gg: AYBFou1/xEPGoAtGQENGz70ELVKXdfzxJssVawm9YpIny7do6ndFf3gmhaxTGGVc2av
- 7oQkOiUOBobrSLgktjr7MzQYOlJMk3eZSgd/Rn2hbNpcn+2mvb8URmp0kSSjhatN9oHW/q6Zc10
- 69cSwq8FqHObe8Xquy3hNMSmxqS2mKOaIrVX1xNawmP4wJwPvFuIu3zDqxGHkIhCIqvAe1IYvx5
- xkjZW0ry0zAh/AIYnIforZczFEZGTlZeDeSeZeVQ6721ygTMs3mHoEwdNa+Y44zRJEDJjX6RKS/
- Iz3ZkyECxAwhws4vVe6Y+bJz/yk7FJZ+BetwYlt6Jy5AwRjz1tgVdjnXppEHxA9YVW9YHagmwAR
- wNOaHPFk4q1Qu70544Cl8CTTAP13GjTSpICrOI5UTtSCzOaHZDGNLERURySfVlEvaFeq5YwtaZG
- mHDkSr0A2lfv26YQ1N44uxpIR5fLnhgzMw8aw049vTZVw6Eg2UewJCu2gxtpXdFCnQN1fH1qXRT
- nG/nr0StsQ5nvhxJE+euWEwTcxz7ApUG/11cKYKTSsMV9t9DXO7NZBlmgSEnMpuPRCQDBo/ci6T
- 8n7vw0L3bJuUAatkytFL1N81R8GQ3Gl3ve8mYSqtKJw6a9o+A8Gi
-X-Received: by 2002:adf:fc8e:0:b0:48d:faf4:54a8 with SMTP id
- ffacd0b85a97d-48e5d58f76fmr2433440f8f.11.1793166712134; 
- Tue, 27 Oct 2026 22:51:52 -0700 (PDT)
+ bh=obJJ7mAwVaE7N4fjk2sNs/SEvc8DL1EMh/aCRe6lnso=;
+ b=ZB4AD1MC4nasU83mq0Gg0mJUWSegT091fcVvRcrH7uW8zCrZkxttjkd7+umK1X52tK
+ FeWa9kPqzI8eWn7f8tb1q6MX0BC16N4VKSi3bo5yYfaJ5rs06K3EEwpO/A+3+Ser8T9b
+ ZyKv5bxkK8d0+4kQ75YIZkXZgQzeD2KFiHXy77mPDomDnyg5GXAD6rPzdf9aKHoQYSe5
+ CGFmQcQuWsUtpJ19myG/j68U9nDFFBY5Nxz7xD/Kw6PbtivO/El8dT2D2OvMM88z+hS7
+ bbmpmGBOhl8YLg2iB+aQuZ4/XUg68UNX/3nI1uUpbNfLooanyzXN+Brc8/q24kLHv+bd
+ rTVg==
+X-Gm-Message-State: AFq9FYJtOt04eBRC/43ofxhDMMFGYLd/IfpHbgexXQPMtomfbPNsh3+q
+ aYtWPfMUMS4uKdY+wDTsyO1dTGukxVFqKIuB+3JO+4QHb6rQl5+uphAB
+X-Gm-Gg: AYBFou0TUEPg7R3YqCgL1xwh8yNQhulNwwEEMV9duzSLXrmKcwx4JOjuz94WrwhGZhL
+ +lvLPiVPDArLK5Lbd/szI3P7l0Cy89crM+kiulUWqAAUKpC4Q7XcvDXRhaNjYYfa3DiRy1/VZUM
+ sSa6StjVnChDDjxl9uj5WCSRbac+N2F8EbvRwt8euAtJ0moFKV3frSHnLlCwYzmII5AtCUtQdlH
+ QqPXWUHfxJw8UdpWbVDWD8sF4V5Rr+yu+9b9NF7zC2jrQ4K713JzMOFtFdeL9xjr87jS8/Ej0f7
+ 4asy2tZeT0C0rlJ+Y1XPLxwtnPGfxFhZzYjzfyLGhzW24XAvAZbPywZ1+5ltNNQM94OV6GGsTdV
+ DDcLM2pl6wmw34joWzqU0iKIo2E4r3OAl/rJm9qca1nvL9w322/ZrAPVMjZwXSkr60+04BZIu6L
+ qJmYp1qWdi3HITKd9PD+P1TKQui49kJbaG7St/kMmyxzu0P9gNFyff1h+F/iLR7uRtVrSf4d04z
+ 8XExsAxPuES/ZHoH/mXI5k+T8KeZSvlAiFy8frMgyq0daxQJRl0JA8qWiftnNQm9aeGdSiHpNjA
+ at+lr4b4T4JSFKnY+BY36xNqC67cEYM=
+X-Received: by 2002:a05:6000:240f:b0:48e:60bf:4177 with SMTP id
+ ffacd0b85a97d-48e60bf43demr331322f8f.9.1793166718190; 
+ Tue, 27 Oct 2026 22:51:58 -0700 (PDT)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3ebcb9cesm27667902f8f.27.2026.10.27.22.51.51
+ ffacd0b85a97d-48e3eb8f25fsm25620305f8f.2.2026.10.27.22.51.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Oct 2026 22:51:51 -0700 (PDT)
+ Tue, 27 Oct 2026 22:51:57 -0700 (PDT)
 From: Ana Bobillo <anabobillo3@gmail.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
@@ -158,10 +160,10 @@ Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Alexey Charkov <alchark@flipper.net>,
  Javier Martinez Canillas <javierm@redhat.com>
-Subject: [PATCH v2 09/12] disk: part_efi: Check the header and entry sizes of
- a GPT
-Date: Wed, 28 Oct 2026 05:51:50 +0000
-Message-ID: <7a66f202-37b4-425c-9c12-9ccb10d68c2f@gmail.com>
+Subject: [PATCH v2 10/12] disk: part_dos: Walk the extended partition tables
+ in a bounded loop
+Date: Wed, 28 Oct 2026 05:51:56 +0000
+Message-ID: <a8d9f8b4-c900-4706-8d4a-8c07da7d8cec@gmail.com>
 In-Reply-To: <01ba3f81-06b7-428b-9224-bd887c35e1c3@gmail.com>
 References: <01ba3f81-06b7-428b-9224-bd887c35e1c3@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -173,344 +175,599 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_GMAIL_RCVD,
-	FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 X-Archived-By: <archiver.kernel.org>
 
 From: Ana Bobillo <anabobillo3@gmail.com>
 
-validate_gpt_header() computes the CRC of a GPT header over header_size
-bytes, as the header gives it, and nothing checks the size of the
-partition entries before they are used:
+part_get_info_extended() and print_partition_extended() follow the
+links from one extended partition table to the next by recursing, and
+stop at MAX_EXT_PARTS partitions, the limit added for CVE-2019-13103.
+But a link adds no partition: an extended partition table holding only
+a link back to itself does not advance part_num, so the recursion goes
+on until the stack runs out, whenever a logical partition of the device
+is looked up. Even within the limit, every level keeps a buffer of one
+block on the stack, so a long chain of tables on a device with large
+blocks needs megabytes of stack.
 
-- the header is read into a buffer of one block, on the stack behind
-  part_get_info(), part_print_efi(), gpt_repair_headers() and the gpt
-  command, so a header_size larger than the block size makes the CRC
-  read past the end of that buffer
-- alloc_read_gpt_entries() allocates and reads
-  num_partition_entries * sizeof_partition_entry bytes, computed in 32
-  bits, but the entries are then used as an array of
-  num_partition_entries gpt_entry structures: with a smaller entry size,
-  or a product that wraps, part_get_gpt_pte() and part_print_efi() read
-  past the end of the allocation. On a 32-bit board, rounding a product
-  close to 4GiB up to whole blocks also wraps, to a tiny allocation that
-  the entries are then read into.
+Follow the links in a loop instead, reusing the one buffer, with the
+code that finds the next link in a helper, dos_next_table(), which both
+functions use. As Linux does in parse_extended(), stop after
+MAX_EXT_EMPTY (16) tables in a row that hold no partition: tables
+linking back to each other are then given up after a few reads. Also
+stop after MAX_EXT_TABLES tables in all, as many as MAX_EXT_PARTS
+partitions need when each table holds one, so that no walk reads more
+than that. A chain that also holds tables without a partition then
+reads fewer than MAX_EXT_PARTS partitions; partitioning tools write one
+logical partition per table.
 
-As Linux does in is_gpt_valid(), refuse a header whose header_size is
-smaller than the header or larger than the block it is read from, one
-whose sizeof_partition_entry is not sizeof(gpt_entry), and one whose
-entry array is larger than 4MiB (KMALLOC_MAX_SIZE in Linux with 4KiB
-pages, 32768 entries). Larger entries are allowed by the UEFI
-specification, but U-Boot has never read them correctly, and Linux does
-not accept them either.
+print_partition_extended() follows every link of a table, where
+part_get_info_extended() follows only the first, so it can list
+partitions that cannot be looked up, under numbers that clash, and its
+walk is not a chain but a tree. Follow only the first link there too.
 
-The header size is checked before the CRC is computed over it. All the
-checks are in validate_gpt_header(), so they also apply to the header
-that is_valid_gpt_buf() checks when fastboot is sent a GPT. That path
-still takes partition_entry_lba from the header without checking it
-against the size of the download, which is left for a follow-up.
-
-Add a test that gives the primary header of a GPT on a blkmap device
-each of these sizes, with CRCs to match, and checks that it is refused
-and that the backup header is used instead.
+Add tests with a table holding only a link between two logical
+partitions and then a table that links only to itself, and with 15 and
+16 such tables in a row before a logical partition.
 
 Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
 ---
 Changes in v2:
-- Include linux/sizes.h, rather than rely on blk.h for SZ_4M (Simon)
-- Don't word the commit message as if the fastboot path were fully
-  covered: its partition_entry_lba is left for a follow-up (Simon)
-- Check the header allocation with ut_assertnonnull() in the test, so
-  that ut_assertok() never sees a known -ENOMEM (as Coverity CID 661179
-  reports for lib_test_gpt_blkmap())
+- Use a for loop rather than a backward goto, and move the code that
+  follows a link into a helper used by both functions (Simon)
+- Also stop after 16 tables in a row without a partition, as Linux does,
+  so that the table in the test costs about 20 reads per lookup at probe
+  rather than 256 (Simon)
+- Tidy the style of the lines the loop re-indents
+- Use the present tense in the commit message (Simon)
+- Call part_init() in the test rather than setting part_type (Simon)
+- Add a table holding only a link to the test, and a test of the limit
+  of 16 tables in a row without a partition
 
- disk/part_efi.c     |  47 +++++++++++--
- test/lib/part_efi.c | 163 ++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 205 insertions(+), 5 deletions(-)
+ disk/part_dos.c | 289 +++++++++++++++++++++++++++---------------------
+ test/dm/part.c  | 175 +++++++++++++++++++++++++++++
+ 2 files changed, 340 insertions(+), 124 deletions(-)
 
-diff --git a/disk/part_efi.c b/disk/part_efi.c
-index d8751297fbe..85945634915 100644
---- a/disk/part_efi.c
-+++ b/disk/part_efi.c
-@@ -28,8 +28,15 @@
- #include <linux/compiler.h>
- #include <linux/ctype.h>
- #include <linux/printk.h>
-+#include <linux/sizes.h>
- #include <u-boot/crc.h>
+diff --git a/disk/part_dos.c b/disk/part_dos.c
+index 4b560fde1fb..bc40d9d2829 100644
+--- a/disk/part_dos.c
++++ b/disk/part_dos.c
+@@ -28,6 +28,18 @@
+  * to use large numbers of partitions */
+ #define MAX_EXT_PARTS 256
  
 +/*
-+ * Largest partition entry array accepted, as in Linux (KMALLOC_MAX_SIZE with
-+ * 4KiB pages): 32768 entries, far more than any tool writes
++ * A link to the next extended partition table adds no partition, so tables
++ * linking back to each other do not advance part_num. As Linux does in
++ * parse_extended(), stop after MAX_EXT_EMPTY tables in a row that hold no
++ * partition, so that such a loop ends after a few reads. Also stop after
++ * MAX_EXT_TABLES tables in all, as many as MAX_EXT_PARTS partitions need,
++ * so that tables with and without partitions in turn cannot make a walk
++ * read more.
 + */
-+#define GPT_ENTRIES_MAX_SIZE	SZ_4M
++#define MAX_EXT_EMPTY	16
++#define MAX_EXT_TABLES	MAX_EXT_PARTS
 +
- /* GUID for basic data partitons */
- #if CONFIG_IS_ENABLED(EFI_PARTITION)
- static const efi_guid_t partition_basic_data_guid = PARTITION_BASIC_DATA_GUID;
-@@ -89,10 +96,11 @@ static int get_bootable(gpt_entry *p)
- }
- 
- static int validate_gpt_header(gpt_header *gpt_h, lbaint_t lba,
--		lbaint_t lastlba)
-+		lbaint_t lastlba, unsigned long blksz)
+ static inline int is_extended(int part_type)
  {
- 	uint32_t crc32_backup = 0;
- 	uint32_t calc_crc32;
-+	u32 header_size, entry_size, num_entries;
- 
- 	/* Check the GPT header signature */
- 	if (le64_to_cpu(gpt_h->signature) != GPT_HEADER_SIGNATURE_UBOOT) {
-@@ -103,12 +111,22 @@ static int validate_gpt_header(gpt_header *gpt_h, lbaint_t lba,
- 		return -1;
- 	}
- 
-+	/*
-+	 * The CRC covers header_size bytes, so the header has to fit in the
-+	 * one block that was read into gpt_h
-+	 */
-+	header_size = le32_to_cpu(gpt_h->header_size);
-+	if (header_size < sizeof(gpt_header) || header_size > blksz) {
-+		log_debug("GPT: header_size incorrect: %u not in %zu..%lu\n",
-+			  header_size, sizeof(gpt_header), blksz);
-+		return -1;
-+	}
-+
- 	/* Check the GUID Partition Table CRC */
- 	memcpy(&crc32_backup, &gpt_h->header_crc32, sizeof(crc32_backup));
- 	memset(&gpt_h->header_crc32, 0, sizeof(gpt_h->header_crc32));
- 
--	calc_crc32 = efi_crc32((const unsigned char *)gpt_h,
--		le32_to_cpu(gpt_h->header_size));
-+	calc_crc32 = efi_crc32((const unsigned char *)gpt_h, header_size);
- 
- 	memcpy(&gpt_h->header_crc32, &crc32_backup, sizeof(crc32_backup));
- 
-@@ -143,6 +161,24 @@ static int validate_gpt_header(gpt_header *gpt_h, lbaint_t lba,
- 		return -1;
- 	}
- 
-+	/*
-+	 * The partition entries are used as an array of gpt_entry, read into
-+	 * a buffer whose size is the product of these two fields, worked out
-+	 * in 32 bits and then rounded up to whole blocks
-+	 */
-+	entry_size = le32_to_cpu(gpt_h->sizeof_partition_entry);
-+	if (entry_size != sizeof(gpt_entry)) {
-+		log_debug("GPT: sizeof_partition_entry incorrect: %u != %zu\n",
-+			  entry_size, sizeof(gpt_entry));
-+		return -1;
-+	}
-+	num_entries = le32_to_cpu(gpt_h->num_partition_entries);
-+	if (num_entries > GPT_ENTRIES_MAX_SIZE / entry_size) {
-+		log_debug("GPT: num_partition_entries too large: %u\n",
-+			  num_entries);
-+		return -1;
-+	}
-+
- 	debug("GPT: first_usable_lba: %llX last_usable_lba: %llX last lba: "
- 	      LBAF "\n", le64_to_cpu(gpt_h->first_usable_lba),
- 	      le64_to_cpu(gpt_h->last_usable_lba), lastlba);
-@@ -925,7 +961,7 @@ int is_valid_gpt_buf(struct blk_desc *desc, void *buf)
- 	/* determine start of GPT Header in the buffer */
- 	gpt_h = buf + (GPT_PRIMARY_PARTITION_TABLE_LBA * desc->blksz);
- 	if (validate_gpt_header(gpt_h, GPT_PRIMARY_PARTITION_TABLE_LBA,
--				desc->lba))
-+				desc->lba, desc->blksz))
- 		return -1;
- 
- 	/* determine start of GPT Entries in the buffer */
-@@ -1095,7 +1131,8 @@ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
- 		return 2;
- 	}
- 
--	if (validate_gpt_header(pgpt_head, (lbaint_t)lba, desc->lba))
-+	if (validate_gpt_header(pgpt_head, (lbaint_t)lba, desc->lba,
-+				desc->blksz))
- 		return 0;
- 
- 	if (desc->sig_type == SIG_TYPE_NONE) {
-diff --git a/test/lib/part_efi.c b/test/lib/part_efi.c
-index 82153fdabfd..42de9109360 100644
---- a/test/lib/part_efi.c
-+++ b/test/lib/part_efi.c
-@@ -12,6 +12,7 @@
- #include <part.h>
- #include <part_efi.h>
- #include <asm/byteorder.h>
-+#include <u-boot/crc.h>
- #include <test/lib.h>
- #include <test/test.h>
- #include <test/ut.h>
-@@ -280,4 +281,166 @@ static int lib_test_gpt_blkmap(struct unit_test_state *uts)
+     return (part_type == DOS_PART_TYPE_EXTENDED ||
+@@ -126,6 +138,42 @@ static int part_test_dos(struct blk_desc *desc)
+ 	return 0;
  }
- LIB_TEST(lib_test_gpt_blkmap, 0);
  
 +/**
-+ * gpt_sizes_check() - check the size fields of a GPT header one by one
++ * dos_next_table() - Follow the link from a partition table to the next one
 + *
-+ * Give the primary header of a good table each set of sizes in turn, with
-+ * both CRCs recomputed over what those sizes cover, as a crafted disk would
-+ * have them. Only the checks on the sizes themselves can then refuse it.
++ * Only the first link of a table is followed: fdisk numbers the logical
++ * partitions along that chain.
 + *
-+ * @uts:	test state
-+ * @dev:	blkmap device with nothing mapped yet
-+ * @lba:	size of the device in blocks
-+ * @buf:	memory to back the device with, @lba blocks of DEFAULT_BLKSZ
-+ * @hdr:	two blocks of memory, to rewrite the header in
-+ * Return: 0 if OK, other value on error
++ * @buffer:		Partition table just read
++ * @ext_part_sector:	Sector of that table (0 for the MBR), updated to the
++ *			sector of the next table
++ * @relative:		Start of the extended partition, which the links of
++ *			its tables are relative to, set from the link in the
++ *			MBR
++ * Return:		true if the table links to a next one, false if not
 + */
-+static int gpt_sizes_check(struct unit_test_state *uts, struct udevice *dev,
-+			   lbaint_t lba, void *buf, gpt_header *hdr)
++static bool dos_next_table(unsigned char *buffer, lbaint_t *ext_part_sector,
++			   lbaint_t *relative)
 +{
-+	static const struct {
-+		u32 header_size;
-+		u32 num_entries;
-+		u32 entry_size;
-+		int ret;
-+	} cases[] = {
-+		{ sizeof(gpt_header), GPT_ENTRY_NUMBERS, sizeof(gpt_entry), 0 },
-+		/* the reserved rest of the block may be part of the header */
-+		{ DEFAULT_BLKSZ, GPT_ENTRY_NUMBERS, sizeof(gpt_entry), 0 },
-+		/* a header longer than the block it is read from */
-+		{ DEFAULT_BLKSZ + 1, GPT_ENTRY_NUMBERS, sizeof(gpt_entry), -1 },
-+		{ sizeof(gpt_header) - 1, GPT_ENTRY_NUMBERS, sizeof(gpt_entry),
-+		  -1 },
-+		/* entries are only ever read as a gpt_entry array */
-+		{ sizeof(gpt_header), GPT_ENTRY_NUMBERS, sizeof(gpt_entry) / 2,
-+		  -1 },
-+		{ sizeof(gpt_header), GPT_ENTRY_NUMBERS, sizeof(gpt_entry) * 2,
-+		  -1 },
-+		/* an array whose size comes to a single entry in 32 bits */
-+		{ sizeof(gpt_header), U32_MAX / sizeof(gpt_entry) + 2,
-+		  sizeof(gpt_entry), -1 },
-+	};
++	dos_partition_t *pt;
++	int i;
 +
-+	char str_disk_guid[UUID_STR_LEN + 1] =
-+		"8d60b397-1bb6-4d33-80ee-b1587d24c2f8";
-+	const unsigned long blksz = DEFAULT_BLKSZ;
-+	struct disk_partition parts[1], info;
-+	struct blk_desc *desc;
-+	struct udevice *blk;
-+	gpt_entry *gpt_pte;
-+	void *entries;
-+	int i, ret;
++	pt = (dos_partition_t *)(buffer + DOS_PART_TBL_OFFSET);
++	for (i = 0; i < 4; i++, pt++) {
++		if (is_extended(pt->sys_ind)) {
++			lbaint_t lba_start = get_unaligned_le32(&pt->start_sect) +
++					     *relative;
 +
-+	ut_assertok(blkmap_map_mem(dev, 0, lba, buf));
-+	ut_assertok(blk_get_from_parent(dev, &blk));
-+	desc = dev_get_uclass_plat(blk);
-+
-+	memset(parts, '\0', sizeof(parts));
-+	strcpy((char *)parts[0].name, "first");
-+	parts[0].size = 0x100;
-+	disk_partition_set_uuid(&parts[0],
-+				"a2a0d0eb-e5b9-3344-87c0-68b6b72699c7");
-+	ut_assertok(gpt_restore(desc, str_disk_guid, parts, 1));
-+
-+	for (i = 0; i < ARRAY_SIZE(cases); i++) {
-+		u32 header_size = cases[i].header_size;
-+		u32 array_size;
-+
-+		/* start from the primary header as it is on the disk */
-+		memset(hdr, '\0', 2 * blksz);
-+		ut_asserteq(1, blk_dread(desc, GPT_PRIMARY_PARTITION_TABLE_LBA,
-+					 1, hdr));
-+
-+		hdr->header_size = cpu_to_le32(header_size);
-+		hdr->num_partition_entries = cpu_to_le32(cases[i].num_entries);
-+		hdr->sizeof_partition_entry = cpu_to_le32(cases[i].entry_size);
-+
-+		/* the array CRC covers the size as the parser works it out */
-+		array_size = cases[i].num_entries * cases[i].entry_size;
-+		entries = buf + le64_to_cpu(hdr->partition_entry_lba) * blksz;
-+		hdr->partition_entry_array_crc32 =
-+			cpu_to_le32(crc32(0, entries, array_size));
-+		hdr->header_crc32 = 0;
-+		hdr->header_crc32 = cpu_to_le32(crc32(0, (void *)hdr,
-+						      header_size));
-+		ut_asserteq(1, blk_dwrite(desc, GPT_PRIMARY_PARTITION_TABLE_LBA,
-+					  1, hdr));
-+
-+		/*
-+		 * Read it back into a buffer as large as the one above, so
-+		 * that a header longer than its block is refused by the size
-+		 * check rather than by a CRC over whatever follows the buffer
-+		 */
-+		memset(hdr, '\0', 2 * blksz);
-+		gpt_pte = NULL;
-+		ret = gpt_verify_headers(desc, hdr, &gpt_pte);
-+		free(gpt_pte);
-+		ut_assertf(ret == cases[i].ret,
-+			   "case %d: header %u, %u entries of %u: %d\n", i,
-+			   header_size, cases[i].num_entries,
-+			   cases[i].entry_size, ret);
-+
-+		/*
-+		 * fastboot checks a GPT it is sent in memory the same way.
-+		 * There a header longer than its block is also refused by its
-+		 * CRC, which then takes in the first entry that follows it.
-+		 */
-+		ut_asserteq(cases[i].ret, is_valid_gpt_buf(desc, buf));
-+
-+		/* either way the disk still reads, from the backup if needed */
-+		desc->part_type = PART_TYPE_UNKNOWN;
-+		part_init(desc);
-+		ut_asserteq(PART_TYPE_EFI, desc->part_type);
-+		ut_assertok(part_get_info(desc, 1, &info));
-+		ut_asserteq_str((char *)parts[0].name, (char *)info.name);
-+		ut_asserteq_64(parts[0].size, info.size);
++			if (!*ext_part_sector)
++				*relative = lba_start;
++			*ext_part_sector = lba_start;
++			return true;
++		}
 +	}
 +
-+	return 0;
++	return false;
++}
++
+ /*  Print a partition that is relative to its Extended partition table
+  */
+ static void print_partition_extended(struct blk_desc *desc,
+@@ -135,65 +183,61 @@ static void print_partition_extended(struct blk_desc *desc,
+ {
+ 	ALLOC_CACHE_ALIGN_BUFFER(unsigned char, buffer, desc->blksz);
+ 	dos_partition_t *pt;
++	int tables, empty = 0;
+ 	int i;
+ 
+-	/* set a maximum recursion level */
+-	if (part_num > MAX_EXT_PARTS)
+-	{
+-		printf("** Nested DOS partitions detected, stopping **\n");
+-		return;
+-    }
+-
+-	if (blk_dread(desc, ext_part_sector, 1, (ulong *)buffer) != 1) {
+-		printf ("** Can't read partition table on %d:" LBAFU " **\n",
+-			desc->devnum, ext_part_sector);
+-		return;
+-	}
+-	i=test_block_type(buffer);
+-	if (i != DOS_MBR) {
+-		printf ("bad MBR sector signature 0x%02x%02x\n",
+-			buffer[DOS_PART_MAGIC_OFFSET],
+-			buffer[DOS_PART_MAGIC_OFFSET + 1]);
+-		return;
+-	}
+-
+-	if (!ext_part_sector)
+-		disksig = get_unaligned_le32(&buffer[DOS_PART_DISKSIG_OFFSET]);
++	for (tables = 0; ; tables++) {
++		int prev_num = part_num;
+ 
+-	/* Print all primary/logical partitions */
+-	pt = (dos_partition_t *) (buffer + DOS_PART_TBL_OFFSET);
+-	for (i = 0; i < 4; i++, pt++) {
+-		/*
+-		 * fdisk does not show the extended partitions that
+-		 * are not in the MBR
+-		 */
+-
+-		if ((pt->sys_ind != 0) &&
+-		    (ext_part_sector == 0 || !is_extended (pt->sys_ind)) ) {
+-			print_one_part(pt, ext_part_sector, part_num, disksig);
++		/* bound the walk */
++		if (part_num > MAX_EXT_PARTS || tables >= MAX_EXT_TABLES ||
++		    empty >= MAX_EXT_EMPTY) {
++			printf("** Nested DOS partitions detected, stopping **\n");
++			return;
+ 		}
+ 
+-		/* Reverse engr the fdisk part# assignment rule! */
+-		if ((ext_part_sector == 0) ||
+-		    (pt->sys_ind != 0 && !is_extended (pt->sys_ind)) ) {
+-			part_num++;
++		if (blk_dread(desc, ext_part_sector, 1, (ulong *)buffer) != 1) {
++			printf("** Can't read partition table on %d:" LBAFU " **\n",
++			       desc->devnum, ext_part_sector);
++			return;
++		}
++		i = test_block_type(buffer);
++		if (i != DOS_MBR) {
++			printf("bad MBR sector signature 0x%02x%02x\n",
++			       buffer[DOS_PART_MAGIC_OFFSET],
++			       buffer[DOS_PART_MAGIC_OFFSET + 1]);
++			return;
+ 		}
+-	}
+ 
+-	/* Follows the extended partitions */
+-	pt = (dos_partition_t *) (buffer + DOS_PART_TBL_OFFSET);
+-	for (i = 0; i < 4; i++, pt++) {
+-		if (is_extended (pt->sys_ind)) {
+-			lbaint_t lba_start
+-				= get_unaligned_le32 (&pt->start_sect) + relative;
++		if (!ext_part_sector)
++			disksig = get_unaligned_le32(&buffer[DOS_PART_DISKSIG_OFFSET]);
++
++		/* Print all primary/logical partitions */
++		pt = (dos_partition_t *)(buffer + DOS_PART_TBL_OFFSET);
++		for (i = 0; i < 4; i++, pt++) {
++			/*
++			 * fdisk does not show the extended partitions that
++			 * are not in the MBR
++			 */
++
++			if ((pt->sys_ind != 0) &&
++			    (ext_part_sector == 0 || !is_extended(pt->sys_ind))) {
++				print_one_part(pt, ext_part_sector, part_num,
++					       disksig);
++			}
+ 
+-			print_partition_extended(desc, lba_start,
+-						 !ext_part_sector ? lba_start :
+-						 relative, part_num, disksig);
++			/* Reverse engr the fdisk part# assignment rule! */
++			if ((ext_part_sector == 0) ||
++			    (pt->sys_ind != 0 && !is_extended(pt->sys_ind))) {
++				part_num++;
++			}
+ 		}
+-	}
++		empty = part_num > prev_num ? 0 : empty + 1;
+ 
+-	return;
++		/* Follows the extended partitions */
++		if (!dos_next_table(buffer, &ext_part_sector, &relative))
++			break;
++	}
+ }
+ 
+ /**
+@@ -220,93 +264,90 @@ static int part_get_info_extended(struct blk_desc *desc,
+ 	ALLOC_CACHE_ALIGN_BUFFER(unsigned char, buffer, desc->blksz);
+ 	struct disk_partition wdinfo = { 0 };
+ 	dos_partition_t *pt;
++	int tables, empty = 0;
+ 	int i, ret;
+ 	int dos_type;
+ 
+-	/* set a maximum recursion level */
+-	if (part_num > MAX_EXT_PARTS)
+-	{
+-		printf("** Nested DOS partitions detected, stopping **\n");
+-		return -1;
+-    }
++	for (tables = 0; ; tables++) {
++		int prev_num = part_num;
+ 
+-	if (blk_dread(desc, ext_part_sector, 1, (ulong *)buffer) != 1) {
+-		printf ("** Can't read partition table on %d:" LBAFU " **\n",
+-			desc->devnum, ext_part_sector);
+-		return -1;
+-	}
+-	if (buffer[DOS_PART_MAGIC_OFFSET] != 0x55 ||
+-		buffer[DOS_PART_MAGIC_OFFSET + 1] != 0xaa) {
+-		printf ("bad MBR sector signature 0x%02x%02x\n",
+-			buffer[DOS_PART_MAGIC_OFFSET],
+-			buffer[DOS_PART_MAGIC_OFFSET + 1]);
+-		return -1;
+-	}
++		/* bound the walk */
++		if (part_num > MAX_EXT_PARTS || tables >= MAX_EXT_TABLES ||
++		    empty >= MAX_EXT_EMPTY) {
++			printf("** Nested DOS partitions detected, stopping **\n");
++			return -1;
++		}
+ 
+-	if (CONFIG_IS_ENABLED(PARTITION_UUIDS) && !ext_part_sector)
+-		disksig = get_unaligned_le32(&buffer[DOS_PART_DISKSIG_OFFSET]);
++		if (blk_dread(desc, ext_part_sector, 1, (ulong *)buffer) != 1) {
++			printf("** Can't read partition table on %d:" LBAFU " **\n",
++			       desc->devnum, ext_part_sector);
++			return -1;
++		}
++		if (buffer[DOS_PART_MAGIC_OFFSET] != 0x55 ||
++		    buffer[DOS_PART_MAGIC_OFFSET + 1] != 0xaa) {
++			printf("bad MBR sector signature 0x%02x%02x\n",
++			       buffer[DOS_PART_MAGIC_OFFSET],
++			       buffer[DOS_PART_MAGIC_OFFSET + 1]);
++			return -1;
++		}
+ 
+-	if (info) {
+-		ret = part_get_info_whole_disk(desc, &wdinfo);
+-		if (ret)
+-			return ret;
+-	}
++		if (CONFIG_IS_ENABLED(PARTITION_UUIDS) && !ext_part_sector)
++			disksig = get_unaligned_le32(&buffer[DOS_PART_DISKSIG_OFFSET]);
+ 
+-	/* Print all primary/logical partitions */
+-	pt = (dos_partition_t *) (buffer + DOS_PART_TBL_OFFSET);
+-	for (i = 0; i < 4; i++, pt++) {
+-		/*
+-		 * fdisk does not show the extended partitions that
+-		 * are not in the MBR
+-		 */
+-		if (((pt->boot_ind & ~0x80) == 0) &&
+-		    (pt->sys_ind != 0) &&
+-		    (part_num == which_part) &&
+-		    (ext_part_sector == 0 || is_extended(pt->sys_ind) == 0)) {
+-			if (info) {
+-				if (wdinfo.blksz > DOS_PART_DEFAULT_SECTOR)
+-					info->blksz = wdinfo.blksz;
+-				else
+-					info->blksz = DOS_PART_DEFAULT_SECTOR;
+-				info->start = (lbaint_t)(ext_part_sector +
+-							 get_unaligned_le32(&pt->start_sect));
+-				info->size  = (lbaint_t)get_unaligned_le32(&pt->nr_sects);
+-				part_set_generic_name(desc, part_num,
+-						      (char *)info->name);
+-				snprintf(info->type, sizeof(info->type), "0x%x", pt->sys_ind);
+-				info->bootable = get_bootable(pt);
+-				if (CONFIG_IS_ENABLED(PARTITION_UUIDS)) {
+-					char str[12];
+-
+-					sprintf(str, "%08x-%02x", disksig, part_num);
+-					disk_partition_set_uuid(info, str);
++		if (info) {
++			ret = part_get_info_whole_disk(desc, &wdinfo);
++			if (ret)
++				return ret;
++		}
++
++		/* Print all primary/logical partitions */
++		pt = (dos_partition_t *)(buffer + DOS_PART_TBL_OFFSET);
++		for (i = 0; i < 4; i++, pt++) {
++			/*
++			 * fdisk does not show the extended partitions that
++			 * are not in the MBR
++			 */
++			if (((pt->boot_ind & ~0x80) == 0) &&
++			    (pt->sys_ind != 0) &&
++			    (part_num == which_part) &&
++			    (ext_part_sector == 0 || is_extended(pt->sys_ind) == 0)) {
++				if (info) {
++					if (wdinfo.blksz > DOS_PART_DEFAULT_SECTOR)
++						info->blksz = wdinfo.blksz;
++					else
++						info->blksz = DOS_PART_DEFAULT_SECTOR;
++					info->start = ext_part_sector +
++						get_unaligned_le32(&pt->start_sect);
++					info->size = get_unaligned_le32(&pt->nr_sects);
++					part_set_generic_name(desc, part_num,
++							      (char *)info->name);
++					snprintf(info->type, sizeof(info->type),
++						 "0x%x", pt->sys_ind);
++					info->bootable = get_bootable(pt);
++					if (CONFIG_IS_ENABLED(PARTITION_UUIDS)) {
++						char str[12];
++
++						sprintf(str, "%08x-%02x", disksig, part_num);
++						disk_partition_set_uuid(info, str);
++					}
++					info->sys_ind = pt->sys_ind;
+ 				}
+-				info->sys_ind = pt->sys_ind;
++				if (mbr)
++					memcpy(mbr, pt, sizeof(*mbr));
++				return 0;
+ 			}
+-			if (mbr)
+-				memcpy(mbr, pt, sizeof(*mbr));
+-			return 0;
+-		}
+ 
+-		/* Reverse engr the fdisk part# assignment rule! */
+-		if ((ext_part_sector == 0) ||
+-		    (pt->sys_ind != 0 && !is_extended (pt->sys_ind)) ) {
+-			part_num++;
++			/* Reverse engr the fdisk part# assignment rule! */
++			if ((ext_part_sector == 0) ||
++			    (pt->sys_ind != 0 && !is_extended(pt->sys_ind))) {
++				part_num++;
++			}
+ 		}
+-	}
++		empty = part_num > prev_num ? 0 : empty + 1;
+ 
+-	/* Follows the extended partitions */
+-	pt = (dos_partition_t *) (buffer + DOS_PART_TBL_OFFSET);
+-	for (i = 0; i < 4; i++, pt++) {
+-		if (is_extended (pt->sys_ind)) {
+-			lbaint_t lba_start
+-				= get_unaligned_le32 (&pt->start_sect) + relative;
+-
+-			return part_get_info_extended(desc, lba_start,
+-				 ext_part_sector == 0 ? lba_start : relative,
+-						      part_num, which_part, info,
+-						      mbr, disksig);
+-		}
++		/* Follows the extended partitions */
++		if (!dos_next_table(buffer, &ext_part_sector, &relative))
++			break;
+ 	}
+ 
+ 	/* Check for DOS PBR if no partition is found */
+diff --git a/test/dm/part.c b/test/dm/part.c
+index ad37d7f406f..4938d962144 100644
+--- a/test/dm/part.c
++++ b/test/dm/part.c
+@@ -3,10 +3,13 @@
+  * Copyright (C) 2020 Sean Anderson <sean.anderson@seco.com>
+  */
+ 
++#include <blk.h>
+ #include <dm.h>
+ #include <env.h>
++#include <memalign.h>
+ #include <mmc.h>
+ #include <part.h>
++#include <part_dos.h>
+ #include <part_efi.h>
+ #include <dm/test.h>
+ #include <test/ut.h>
+@@ -248,3 +251,175 @@ static int dm_test_part_get_info_by_uuid(struct unit_test_state *uts)
+ 	return 0;
+ }
+ DM_TEST(dm_test_part_get_info_by_uuid, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++
++/**
++ * dos_set_entry() - fill in one entry of a DOS partition table
++ *
++ * @pt:		entry to fill in
++ * @sys_ind:	partition type
++ * @start:	first sector, relative to what the table type says
++ * @size:	number of sectors
++ */
++static void dos_set_entry(dos_partition_t *pt, u8 sys_ind, u32 start,
++			  u32 size)
++{
++	memset(pt, '\0', sizeof(*pt));
++	pt->sys_ind = sys_ind;
++	pt->start_sect = cpu_to_le32(start);
++	pt->nr_sects = cpu_to_le32(size);
++}
++
++/**
++ * dos_write_table() - write a DOS partition table to a sector
++ *
++ * @desc:	block device to write to, with 512-byte blocks
++ * @lba:	sector to write the table to
++ * @pt:		the four entries of the table
++ * Return: 0 if OK, -EIO if the sector could not be written
++ */
++static int dos_write_table(struct blk_desc *desc, lbaint_t lba,
++			   const dos_partition_t pt[4])
++{
++	ALLOC_CACHE_ALIGN_BUFFER(u8, buf, 512);
++
++	memset(buf, '\0', 512);
++	memcpy(buf + DOS_PART_TBL_OFFSET, pt, 4 * sizeof(*pt));
++	buf[DOS_PART_MAGIC_OFFSET] = 0x55;
++	buf[DOS_PART_MAGIC_OFFSET + 1] = 0xaa;
++
++	return blk_dwrite(desc, lba, 1, buf) == 1 ? 0 : -EIO;
 +}
 +
 +/*
-+ * A GPT header gives its own size and the size of its partition entries, and
-+ * its CRCs cover only what those say, so a CRC does not show that either size
-+ * is one the parser can use. Check that a primary header with a size the
-+ * parser cannot use is refused, CRCs or not, and that the backup is used.
++ * A link from one extended partition table to the next adds no partition,
++ * so a walk through tables that link to each other in a loop finds no more
++ * partitions as it goes. Check that it ends anyway, both when looking for a
++ * partition and when listing them, and that a table holding only a link is
++ * still followed.
 + */
-+static int lib_test_gpt_sizes(struct unit_test_state *uts)
++static int dm_test_part_dos_ext_loop(struct unit_test_state *uts)
 +{
-+	const unsigned long blksz = DEFAULT_BLKSZ;
-+	const lbaint_t lba = 0x400;
-+	struct udevice *dev;
-+	gpt_header *hdr;
-+	int ret, err;
-+	void *buf;
++	struct disk_partition info;
++	dos_partition_t pt[4];
++	struct blk_desc *desc;
 +
-+	buf = memalign(ARCH_DMA_MINALIGN, lba * blksz);
-+	ut_assertnonnull(buf);
-+	memset(buf, '\0', lba * blksz);
++	ut_asserteq(2, blk_get_device_by_str("mmc", "2", &desc));
++	ut_asserteq(512, desc->blksz);
 +
-+	hdr = malloc_cache_aligned(2 * blksz);
-+	if (!hdr) {
-+		free(buf);
-+		ut_assertnonnull(hdr);
-+	}
-+	ret = blkmap_create(GPT_TEST_LABEL, &dev);
-+	if (ret) {
-+		free(hdr);
-+		free(buf);
-+		ut_assertok(ret);
-+	}
++	/* an MBR with one extended partition, from sector 2 */
++	memset(pt, '\0', sizeof(pt));
++	dos_set_entry(&pt[0], DOS_PART_TYPE_EXTENDED, 2, 100);
++	ut_assertok(dos_write_table(desc, 0, pt));
 +
-+	/* clean up here, as lib_test_gpt_blkmap() explains */
-+	ret = gpt_sizes_check(uts, dev, lba, buf, hdr);
-+	err = blkmap_destroy(dev);
-+	free(hdr);
-+	free(buf);
-+	if (ret)
-+		return ret;
-+	ut_assertok(err);
++	/*
++	 * logical partition 5 in a table of its own, then a table holding only
++	 * a link, then logical partition 6; a link is relative to the extended
++	 * partition, a partition to its own table
++	 */
++	dos_set_entry(&pt[0], 0x83, 1, 4);
++	dos_set_entry(&pt[1], DOS_PART_TYPE_EXTENDED, 10, 10);
++	ut_assertok(dos_write_table(desc, 2, pt));
++	memset(pt, '\0', sizeof(pt));
++	dos_set_entry(&pt[0], DOS_PART_TYPE_EXTENDED, 20, 10);
++	ut_assertok(dos_write_table(desc, 12, pt));
++	dos_set_entry(&pt[0], 0x83, 1, 4);
++	dos_set_entry(&pt[1], DOS_PART_TYPE_EXTENDED, 30, 10);
++	ut_assertok(dos_write_table(desc, 22, pt));
++
++	/* then a table with no partition, only a link back to itself */
++	memset(pt, '\0', sizeof(pt));
++	dos_set_entry(&pt[0], DOS_PART_TYPE_EXTENDED, 30, 10);
++	ut_assertok(dos_write_table(desc, 32, pt));
++
++	ut_assertok(part_get_info_by_type(desc, 5, PART_TYPE_DOS, &info));
++	ut_asserteq(3, info.start);
++	ut_asserteq(4, info.size);
++	ut_assertok(part_get_info_by_type(desc, 6, PART_TYPE_DOS, &info));
++	ut_asserteq(23, info.start);
++	ut_asserteq(4, info.size);
++
++	/* there is no partition 7, and looking for it has to end */
++	ut_asserteq(-ENOENT,
++		    part_get_info_by_type(desc, 7, PART_TYPE_DOS, &info));
++	ut_assert_nextline("** Nested DOS partitions detected, stopping **");
++	ut_assert_console_end();
++
++	/* and so does listing them, once the table is detected as DOS */
++	part_init(desc);
++	ut_asserteq(PART_TYPE_DOS, desc->part_type);
++	part_print(desc);
++	ut_assert_skip_to_line("%3d\t%-10d\t%-10d\t%08x-%02x\t%02x", 6, 23, 4,
++			       0, 6, 0x83);
++	ut_assert_nextline("** Nested DOS partitions detected, stopping **");
++	ut_assert_console_end();
 +
 +	return 0;
 +}
-+LIB_TEST(lib_test_gpt_sizes, 0);
++DM_TEST(dm_test_part_dos_ext_loop, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_CONSOLE);
 +
- #endif /* BLKMAP */
++/**
++ * dos_write_chain() - write a chain of extended partition tables
++ *
++ * The MBR holds an extended partition from sector 2, whose first table
++ * holds logical partition 5 and a link, then come @empty tables holding only
++ * a link, and then a table holding logical partition 6.
++ *
++ * @desc:	block device to write to, with 512-byte blocks
++ * @empty:	number of tables holding only a link
++ * Return: sector where partition 6 starts, or -EIO on error
++ */
++static int dos_write_chain(struct blk_desc *desc, int empty)
++{
++	dos_partition_t pt[4];
++	int i;
++
++	memset(pt, '\0', sizeof(pt));
++	dos_set_entry(&pt[0], DOS_PART_TYPE_EXTENDED, 2, 1000);
++	if (dos_write_table(desc, 0, pt))
++		return -EIO;
++
++	/* table n is at sector 2 + 10 * n, its link 10 * (n + 1) */
++	for (i = 0; i <= empty + 1; i++) {
++		memset(pt, '\0', sizeof(pt));
++		if (i == 0 || i == empty + 1)
++			dos_set_entry(&pt[0], 0x83, 1, 4);
++		if (i <= empty)
++			dos_set_entry(&pt[1], DOS_PART_TYPE_EXTENDED,
++				      10 * (i + 1), 10);
++		if (dos_write_table(desc, 2 + 10 * i, pt))
++			return -EIO;
++	}
++
++	return 2 + 10 * (empty + 1) + 1;
++}
++
++/*
++ * Check that a walk through the extended partition tables follows up to 15
++ * tables in a row holding no partition, as a damaged but valid chain may
++ * have, but gives up at the 16th
++ */
++static int dm_test_part_dos_ext_empty(struct unit_test_state *uts)
++{
++	struct disk_partition info;
++	struct blk_desc *desc;
++	int start;
++
++	ut_asserteq(2, blk_get_device_by_str("mmc", "2", &desc));
++	ut_asserteq(512, desc->blksz);
++
++	start = dos_write_chain(desc, 15);
++	ut_assert(start > 0);
++	ut_assertok(part_get_info_by_type(desc, 6, PART_TYPE_DOS, &info));
++	ut_asserteq(start, info.start);
++	ut_assert_console_end();
++
++	ut_assert(dos_write_chain(desc, 16) > 0);
++	ut_assertok(part_get_info_by_type(desc, 5, PART_TYPE_DOS, &info));
++	ut_asserteq(-ENOENT,
++		    part_get_info_by_type(desc, 6, PART_TYPE_DOS, &info));
++	ut_assert_nextline("** Nested DOS partitions detected, stopping **");
++	ut_assert_console_end();
++
++	return 0;
++}
++DM_TEST(dm_test_part_dos_ext_empty, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_CONSOLE);
