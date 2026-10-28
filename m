@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F037606A31A
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 18:46:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ECDD606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 18:47:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bVbrFUT+;
-	dkim=pass (2048-bit key, unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=oQRaH6Yq
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Mf/quR4n;
+	dkim=pass (2048-bit key, unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=Lqt8pe/1
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5BBE8403B5;
-	Wed, 28 Oct 2026 18:46:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1167081109;
+	Wed, 28 Oct 2026 18:47:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id n4YPKf2nUs0C; Wed, 28 Oct 2026 18:46:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A1B9A40217
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793213214;
-	b=rbjO6wQ6aTzhvA7oEUDEeynL5HAdKsBaI0slAftuor74Q1G3jNq2AfS32eUcdejj890p
-	 ytEVcP0hMytLOtSsK7ccU1jGB5g6lk7fj0K4Iyn5I46MxXfMOntqMbJ95WJ25cJSdjkDX
-	 KjFrdlKvrSPPoEpEumtW7NQa6j1hTsRiwRjaba138KIeUqMcwPeaCV/Urgzxpw/P5bH8X
-	 5xIGREL8gquZz8DvGfUCJY57h54iTo/1NEOreD6gBhPB8sU6QSIywI3Ouuljy4SVIgnI/
-	 RBnBbeXSb4UTSlZ63do9xVWcS/tqCP7w6N0C4oHuaP9k8KvDLibioLADQSackThvMmg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id nKcL8MuAfwrN; Wed, 28 Oct 2026 18:47:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 58B9D81329
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793213229;
+	b=HtNYOXu49l15muj7XZmneQ2XjhXdd+8XMHB3bBRp3SdDp/dMUPmytDhFlhaUyhR/P5n3
+	 wSaOWbCTqoI97Qjrk6JDK/nNq+QLy9bvLDL0RkpVnMbLb4A+8pi2xA3R2TEgpSbQ4fS8x
+	 rcUKQOVAlsas8becBJstl5MFUhtzh+nVlKqYDPx7lFgncTQ6R+QtrhtlaMszSGprHQ6mL
+	 nQOEwhbIxX9ye19ICVU82ZzKDR4MyhJENTGy09tDn+9qZrK4EEECozOmTvsArhYGUzOIk
+	 aGabV5IDd94PUo62YTjbGgEbxrfjxPxClyEaicCjckshxC9fIh8zeC9m2zd+m8IGfig==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793213214;
+	c=relaxed/relaxed; t=1793213229;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -31,99 +31,99 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=3b1Yc8NAM2aBtvL+k983e1DfG+deB0YM47VSlBI8FZE=;
-	b=H5i3319XGOmz/NU1q5DsFs0Ruav61lD6M1/S7O3E0GX/TKXVKLjMybrJxIj6GS09LjYn
-	 kD3dowbtMGVAG8tCn+CX8qtY0XpM8rtmbpKLzeGpHWO/8lkHP5m7d51Be3R0+26khJFT+
-	 t2rrdphEQPhICO6KY9hObAIVHj1eB7tm4g45cO2ufT7PlC7socpaumVf+F6vLLi01FfJw
-	 cfn3/CGBjXmniurWUtiMGDIJuB/NHqwCrGCn2YmxIlkPBRfWMdZt6h92r1Iu7I9S2ZCqo
-	 5xBId8Q6HcweFD6Uk3ya5oEm0IAYQD8GMK2V247MA3QdKzIoH/I3Qz5PNJAPXb3JAbg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=6H/SdWVLTsUkiWbtzINRbPL3qVq1vyz++W68xeAF35A=;
+	b=N4ikFB9JZXkPjOJDVDgoJSwWDjCyVE8flOx6l/y+8XxuD3u3IvSNZTy43VtN268jnnZi
+	 jFPmqn3H+KhGdlc0SUcgQLa2rVsADwvT2PDsbTBMXWWA1ZpCV/Gc75HNMtM5zFmqB1m1r
+	 PuOOrh8GELWF4vxd/5NMzlv2rg0dNW5LsDG7OrLqYieOL0yvHwQBGYzLfjAyksALmgF0Z
+	 0nUtBoTVsASiuwtFPM84lDUL1iNffTvqOVLPkKakm8xhMMyVQkZHC6ngwtN41EZlLRTXi
+	 ZIh09T2mWPOlbPQS+2rkogHFPh9jq0YPT1QDkSRNzJqn3XmZEmdGOAA0jWzT/yMSgPg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=freeshell.de;
+	dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b="Lqt8pe/1";
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793213214;
-	bh=3b1Yc8NAM2aBtvL+k983e1DfG+deB0YM47VSlBI8FZE=;
+	d=lists.u-boot-project.org; s=default; t=1793213229;
+	bh=6H/SdWVLTsUkiWbtzINRbPL3qVq1vyz++W68xeAF35A=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bVbrFUT+fCHvu7pfQoxCCUdLyQxH4q2kYls8SfjxSGsfCOtOBJJNtEZi0bsCMfmVH
-	 lJUIoJy1lLssReLeAR3FhUZyW+l32IE8+v1zgbPx6S76pco3q+HYfg98Ej1l6YqiNg
-	 vZl8K2QZvEr/AHtVL1KsZxfrHji8vDsnG838HIE94HSZUzg9xdrJ7y/E9h6+Td+Ik0
-	 9TZtnCe7wV/L/fu5NGUNjTwD9tFJJB7qEGzuOrM9EaXevfxVBxUMjzh9u88bE0Laqt
-	 YeN5xamAWKIQvQZlad7vDtR1hbmmONHbFerbiDoAYFPtAbhrO3CgrF1ptzqzonmkx/
-	 hG652NIAguugw==
+	b=Mf/quR4nHRDUHEaqzTBjmznohJ1Ok8YhRwvf2lcYdka2zUS3K7BZmV8p+PMQN14cM
+	 uYkhdYW67zH1uM1t2IJVojhOGOcfb0JaM4H50sLwQxN2IW68qzsmSZ0RsduDTrAEe4
+	 8fXdyXePmkkPrWrlfE/hKorOqy2DzDkDqtSJTi+bCw++ADroLyj1JFNvOgCn+HInvU
+	 MjGQfxQ0o95kxuzVSQRqX3HlK0qIDyFNvie01StILHEyfLk1Q0S7/ZV2DjHsR9yIjO
+	 DBl8uPFQ454ZcHiEVfhCFNadmYlyOHhXi0d2n+tOtQBbIwxEbTF9CEMgreXP9c+1oI
+	 +7IOZEulDrm0g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A1B9A40217;
-	Wed, 28 Oct 2026 18:46:54 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 2318B356
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:46:53 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 58B9D81329;
+	Wed, 28 Oct 2026 18:47:09 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2478F362
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:47:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 155C5608A4
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:46:53 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 095DC81109
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:47:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id u4kizofHNqlV for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 18:46:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 18090607A6
-Authentication-Results: smtp3.osuosl.org;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YLscHAy6CK04 for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 18:47:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2F9A581329
+Authentication-Results: smtp1.osuosl.org;
  arc=none smtp.remote-ip=116.202.128.144
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793213212;
- b=ltqi316WzpUuAee3i/z2fqOJ4vwWyTqMwVg8+gNJ3WACh1ihLT/Qw9K0S9cPqG982QJe
- QG6XtwJTe8Scp1JKR8Sh+noGIK6iYnO3B+cO4CkguikLFnAOHuyDnzKRvZuhZRrmY+QKV
- R9uL42NFlMryU4Mf+04iE20X3PjrSXuSI6rsCMIwsje7DruGqAQH/HaWmJHoFMZQ7ZX0n
- w1N84Zftj8Pkz1wP8DlUr/6FO5ENGcAr5ZGtDmc+9WNBpv3DoPhGmyor8zr84wt+QC1tU
- cwzP2bIVDXcI0w0O/CsPxhYz3kert2trmtsZiIgYdbjCH6ZwW2PEXpQ/UdOB6cMk6SQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793213226;
+ b=YWM3SO7KaNb8Ulu+os0BfXc3tvq5GN9EOV3LSDO9DzQ/koB5TE6tDzKmEqfEZFmVTQ9N
+ fGnZNM9zI7igDbm60Fs31L3OFRKBXt6dNEUD27shhPOzfSYiTTkvPgCt9PNQJZ9vz0EmJ
+ v+zLcZ0NHKgKk3+YZJU4jCrTVMCJL/6hWEwZElTFX0BxNJV3TrLV4zda++52x3NN/NY55
+ BbxMW1NSuSWbGn1DEDr88OjfPP2zU+jvvTjDEd1DYn/NGeJs4ctjHfdc1LK/9U7s9DbeP
+ QwRNrJnrFlWqgWo8fLPMq6IPo3VrwRu8YkCnwlnweBy/3ykLQHJ9HGIMP7RBHNZxYdw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793213212;
+ c=relaxed/relaxed; t=1793213226;
  h=Received-SPF:DKIM-Signature:Received:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=3b1Yc8NAM2aBtvL+k983e1DfG+deB0YM47VSlBI8FZE=;
- b=TVgqOt8hKftyDQVq7H0MlMH6IlRzKDnTvFyma7B5ZwSsLiL/C1II6wwl0t0+lwaiR16G
- XVOnE06h0xvQu0nASBjMj/U7W/k2pJpsqBljZhfUlbtK//p+h9rpYC9iyJLLYvGBWIx/i
- ZM/H/lY/bFGbsp79PQWaFtmjK01FMKCd5VCzC9WOWbFwlq/0M0KAMtZeIBP66uVPJvPc4
- gVQxG6yRUaCJ/914cD1v9iJGxvI6De5HOnhGEIoPyEAVmEO1x0np1zLz81fJOAgLzf5Se
- XDhU5h6ufvx3pk/+1B7Hkp6fbrKLV+28F41D5qvyMMgKsNDXljskTs3l+vAiE/uaJ6w==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=6H/SdWVLTsUkiWbtzINRbPL3qVq1vyz++W68xeAF35A=;
+ b=QWHNBCC/vtvdA84oitBLy6EkAn0dp45e6GI5TfGsrJd7NL4+YPr/WFcO5MNTjs8N+vE2
+ tiU1ro1x3cZm2NFtFJctfj+l1SA01E7eIU8+dtcWbOTa+rbcJuiYao4txabVncIArYL0g
+ 1TS1kOAhT4x5vPbQVNcjA43aP1sSwlVMClguljQ4hcIT/9tAzh1B9pdp68UILgc5C46M0
+ r3gLRfNexCTBnQOZ0N7xpgr7Ct4wCj8rYapSgC/bcl4vBCVTYndbnqnuBxyDm9lUHnohZ
+ 4xte3s3tt6x1AIK3Yqp9+VA14DibkiIhHT5bebLhFr62t9WA9Dne7hb843p6FY+vARw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=freeshell.de;
  dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=oQRaH6Yq; 
+ header.s=s2025 header.b="Lqt8pe/1"; 
  arc=none smtp.remote-ip=116.202.128.144
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.202.128.144;
  helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=freeshell.de
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=oQRaH6Yq
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=freeshell.de header.i=@freeshell.de
+ header.a=rsa-sha256 header.s=s2025 header.b=Lqt8pe/1
 Received: from freeshell.de (freeshell.de [116.202.128.144])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 18090607A6
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:46:51 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2F9A581329
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:47:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1793213164;
- bh=3b1Yc8NAM2aBtvL+k983e1DfG+deB0YM47VSlBI8FZE=;
+ s=s2025; t=1793213170;
+ bh=6H/SdWVLTsUkiWbtzINRbPL3qVq1vyz++W68xeAF35A=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=oQRaH6Yq8hkI/F9mSY3bvCqlXkje79ietOSO2GHPFs2C4eEDRv9tEZeroUKBHJBCX
- KOwJfWQQxJ2ez8P6Eqif44Jb7ZW1HbSwsfSHJy9g0nnGvRJqYSV2pYCKwKEi1QTFhN
- BTsNli8sdrMbV/opDBQpU2iWllUvuDrU2uQAEc65a6d8gIRVWa8A901lCUpRkgNqDg
- f2Ayr+nAfTj+yek+WEomUudcT6zylNuAwhFMgPqAy0OhMFVMrfIE4gG5nmd7G8X1Eh
- OnxGK/OZqEP4TI+zab/h8l+5dRV3ddoW/AaRMu8mY/dpvqVMVREAibD6axnX4mlRJx
- 7vN+t8s0Aim0w==
+ b=Lqt8pe/1a2l9WiSRmgobLqLqbD8Tr62n5ddamcij7wy/a6TLfH88CSdiCXBE/e4dT
+ b9m2Ou4XyWSKXid72xRiVU3ol2lL2br7sMiWHucv7vcS2O1p3IA83I6pjnMjtbDctO
+ E1hpIWiTq/T1RqTrVIEr/lxhhZj3f2KZohEyFVx9mGdWeQz15K+IRKPmhCYVRU1+db
+ 7oJg4UDWQ3VHQu/lvdrHlmHsLb6e9GG5R3SDVC/TKYvmNuyTeWjrfvI21YXEorqhxB
+ yvYe2SM8R3zRHPANco16uHRvu49c57lhXRCUubO2/0jL+WZPt7k36wd056THreb2jt
+ Lb1pZnrFkOi0w==
 Received: from hay.lan (unknown [IPv6:2605:59ca:364f:d400:6ecf:39ff:fe00:8375])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id D1B1AB22057D;
- Wed, 28 Oct 2026 19:46:02 +0100 (CET)
+ by freeshell.de (Postfix) with ESMTPSA id 1E048B22050E;
+ Wed, 28 Oct 2026 19:46:08 +0100 (CET)
 From: E Shattow <e@freeshell.de>
 To: u-boot@lists.u-boot-project.org, Yixun Lan <dlan@kernel.org>,
- Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>,
- Yao Zi <me@ziyao.cc>, Tom Rini <trini@konsulko.com>
+ Tom Rini <trini@konsulko.com>
 Cc: E Shattow <e@freeshell.de>
-Subject: [PATCH v1 2/3] riscv: dts: spacemit: k3: adopt override to drop
- M-level IMSIC guest props
-Date: Wed, 28 Oct 2026 11:45:06 -0700
-Message-ID: <20261028184526.1887640-3-e@freeshell.de>
+Subject: [PATCH v1 3/3] configs: spacemit: k3: enable CONFIG_BOOTSTD_FULL
+Date: Wed, 28 Oct 2026 11:45:07 -0700
+Message-ID: <20261028184526.1887640-4-e@freeshell.de>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261028184526.1887640-1-e@freeshell.de>
 References: <20261028184526.1887640-1-e@freeshell.de>
@@ -146,36 +146,63 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Adopt Linux next-for-v7.4 01e2f07c44fc ("riscv: dts: spacemit: k3: Drop
-guest properties from M-level IMSIC"). Resolves OpenSBI failure:
+Define minimal env variables for boot in spacemit-k3.h with fdtfile
+as the CFG_EXTRA_ENV_SETTINGS sentinel, and enable CONFIG_BOOTSTD_FULL
 
-  fdt_driver_init_by_offset: interrupt-controller@f1000000 (riscv,imsics)
-   init failed: -3
-  init_coldboot: irqchip init failed (error -3)
-
-Reported-by: Yixun Lan <dlan@kernel.org>
 Signed-off-by: E Shattow <e@freeshell.de>
 ---
- arch/riscv/dts/spacemit-k3-u-boot.dtsi | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ configs/spacemit_k3_defconfig | 9 +--------
+ include/configs/spacemit-k3.h | 6 ++++++
+ 2 files changed, 7 insertions(+), 8 deletions(-)
 
-diff --git a/arch/riscv/dts/spacemit-k3-u-boot.dtsi b/arch/riscv/dts/spacemit-k3-u-boot.dtsi
-index 278b36acc79f..721e2d3cbb61 100644
---- a/arch/riscv/dts/spacemit-k3-u-boot.dtsi
-+++ b/arch/riscv/dts/spacemit-k3-u-boot.dtsi
-@@ -7,4 +7,12 @@
- &mimsic { status = "okay"; };
- &maplic { status = "okay"; };
+diff --git a/configs/spacemit_k3_defconfig b/configs/spacemit_k3_defconfig
+index f49442951c8f..9bf582564d07 100644
+--- a/configs/spacemit_k3_defconfig
++++ b/configs/spacemit_k3_defconfig
+@@ -19,25 +19,18 @@ CONFIG_RISCV_SMODE=y
+ CONFIG_RISCV_ISA_ZICBOM=y
+ CONFIG_STACK_SIZE=0x100000
+ CONFIG_FIT=y
+-CONFIG_SUPPORT_RAW_INITRD=y
++CONFIG_BOOTSTD_FULL=y
+ CONFIG_SYS_CBSIZE=256
+ CONFIG_SYS_PBSIZE=276
+ # CONFIG_BOARD_INIT is not set
+-CONFIG_HUSH_PARSER=y
+ CONFIG_CMD_TLV_EEPROM=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MTD=y
+-CONFIG_CMD_DHCP=y
+ CONFIG_CMD_DNS=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+ CONFIG_CMD_WGET=y
+-CONFIG_CMD_PXE=y
+ CONFIG_CMD_PMIC=y
+ CONFIG_CMD_REGULATOR=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_FS_GENERIC=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_MTDIDS_DEFAULT="nor0=d420c000.spi"
+ CONFIG_MTDPARTS_DEFAULT="d420c000.spi:128k(bootinfo),512k(fsbl),64k(env),1024k(esos),384k(opensbi),-(uboot)"
+diff --git a/include/configs/spacemit-k3.h b/include/configs/spacemit-k3.h
+index 9dd545e2a3b2..39d10059926e 100644
+--- a/include/configs/spacemit-k3.h
++++ b/include/configs/spacemit-k3.h
+@@ -6,6 +6,12 @@
+ #ifndef __SPACEMIT_K3_H
+ #define __SPACEMIT_K3_H
  
-+/* Linux next-for-v7.4 01e2f07c44fc
-+ * ("riscv: dts: spacemit: k3: Drop guest properties from M-level IMSIC")
-+ */
-+&mimsic {
-+	/delete-property/ riscv,guest-index-bits;
-+	/delete-property/ riscv,num-guest-ids;
-+};
++#define CFG_EXTRA_ENV_SETTINGS \
++	"ramdisk_addr_r=0x130000000\0" \
++	"fdt_addr_r=0x138000000\0" \
++	"kernel_addr_r=0x140000000\0" \
++	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"
 +
- #include "spacemit-k3-binman.dtsi"
+ #define CFG_SYS_NS16550_IER	0x40
+ 
+ #define RISCV_SMODE_TIMER_FREQ	24000000
 -- 
 2.53.0
 
