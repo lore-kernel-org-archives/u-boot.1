@@ -2,28 +2,28 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7B49606A31A
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 14:46:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFAAE606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 14:46:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=r9YuPUeQ;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=JprMSUvV
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=KRQeX37p;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=I3YTUiZe
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 76ABC40792;
-	Wed, 28 Oct 2026 14:46:53 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AED3140661;
+	Wed, 28 Oct 2026 14:46:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LaEYoGJ8Kx7I; Wed, 28 Oct 2026 14:46:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0BA0D405F3
+ id GTnQlZKlljoO; Wed, 28 Oct 2026 14:46:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E1E1040775
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793198807;
-	b=n8rumxM4ACLhZ60Mz9Nd+vD0pn1zmMIRYvcsVz7iSRfgzbtgrQfalvGRoGdxI+Pn74tN
-	 wWDN6nGaLzbCa7iBNMgi2AM7Fn6t53Au5wgUNXGzmR30YjcnDe+ZtINChKraIL4J7D7fk
-	 loT6WSqlQvPH49zVgJMw2gQ5goNMlCcwSg3+GNaYCwUJVWNMQbE/0SQ9jmC+iLVw68T4q
-	 23aqnY5iF1n+YrSsCq4EX2t8m5YyjqgpJy3P81sUqkx8MdMWl6wvbG3QhX36zbAOgCdwn
-	 +tDM90SC+rrZxvuYwtPUiOPzkXkvzoN0fKBUDa4noU5KWSq7zNZMG66rURHm+GoJu7A==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793198812;
+	b=Yh313BPmSu3B3+bOmCkl1z61OrtgE2K9KJoAzHIEf5tyLkr+QxlPalXIzhDJUFXbjtTy
+	 gAHXpyaBkhaluq11ERHRRSN3imGCnj/JzC95nPl4kkTdJLtcmZ6oV/KJeZd/RBzgZAAAb
+	 lDHe3hA4XkoTcaF1f1X/K+ShkwWGnOAZgD2aZKUNHwHB8UhrsK5Fv+FXV0qrtZQ5PS03L
+	 jEiGtASvSzSyI5E3gwhupR0qYbPmyxELVKDOzh5mGgzgEVVFhdw9G2xo6eIqEko0CEEUJ
+	 5vS/J73UDBLQA14BEuMgRGOcNMO3TOXOVzYcy47xlqJbP98ZhsW0ZQ/4Py3bPqaoxzg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793198807;
+	c=relaxed/relaxed; t=1793198812;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,128 +33,128 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=J3aLEXFX5LZDIODOauS+VXAuyQa9qG0uRrY7YCrZ1LA=;
-	b=EEkLfVq1pzYfNbKTVzLhfjreO3OkfDvdg1yzxaS3pg4mrocvvriUDHUSUQZ0KaR9Gc18
-	 MikMFttHQ7OBM6b6XWJAVKrNI86Ns0z1WZxBLbM+K4aFdHP/PYpDZaEbwNDNCadBbCyOd
-	 jT9G02dEvpH6utqLjiyLwiyIAHDFzJyWLs4Br2H4LzhF+Shp2HBWosFxOEcpZ7gm82gxl
-	 +LsQGatvWUwgwFU+nPzgtCE3K8Ul7Nmg11bOe6v00ub/e7PlruCyqYbWOuXe7uWrX41ob
-	 lYQRX6Ua9yLxbXs2841GWv/PcNWNEtQ4mR7yw8on+0TrQrDo38fm2QdhZHsEVO5gNEQ==
+	bh=KIN/XnsxwIzwg6XVbpWnahXG+uDa/x6O0NG5+8sOIkM=;
+	b=dQDhe9XjpzJJFARy59lxkOME9F4M1y/xGq6vECu5GVxQOdG79kVza5Jc8Q3iBzU4DakW
+	 3HHysXh+YlTTmBUWrqw412/PfxlLJiI4w536z49RH0LUw91n1RZlk08J/kMFSfARursnA
+	 YWtpru7fOjoc2NVg+PoBaKQytDCL2rcYSSKIUoJkVEO5z8Di6J2Jq1cBJyMThzXgb30rT
+	 0t34ugQmtyNiPbj5jLoI1It6S3O2zP2jl70Fb6wjTqMOQe8DTEgnT1J/vmn2ePggF63vP
+	 4hnrFJOXMpiZyR7mQsPJx3UYMxcnJMhy6+fEwSABlhrtMYcnv59wpO766MupyDxuaXw==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793198807;
-	bh=J3aLEXFX5LZDIODOauS+VXAuyQa9qG0uRrY7YCrZ1LA=;
+	d=lists.u-boot-project.org; s=default; t=1793198812;
+	bh=KIN/XnsxwIzwg6XVbpWnahXG+uDa/x6O0NG5+8sOIkM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=r9YuPUeQanUQfUzX9ood5WGCSCdar9B3TCcCswSBZLXxVB5Zt/70lNiWogLvplACv
-	 XjM2kqW9hATQmO8ozZv1SRgAUJqhMgdXdmnIJJPgV+drJ4o5ZgubSmEqrSBBlUYetR
-	 1jkWy7kvLG5FowkjcxKHAN4wSe3rFVcK9Kco93KAvECsloDCNYLPBu+yhzT0CN67Ux
-	 sk7GQyVpp7phDc2fXOoBkUutfVEwnforN8tuEFAARBQF9Rcyf+gYktR+ZJTf43NFtR
-	 JkpGQPFEUUiHt2jqIDPgdAwCtii2wILeJ2Qmt9e8E+59zH5GpULCb0PQ1H54llEBeU
-	 Bw9eTXf4OYlUA==
+	b=KRQeX37pbuxRjyR5PUDZK5njNvHjmuZAVHq6vd2jx+xFx7VXld3Sp3wtU/V4eOyfA
+	 3ZZdMQ3uQO8fud/ljrKskF7E1KYmGg6FTTxBWiorzui3bXZKjyW3rWscI65CgyjMzA
+	 k8+09guvfNZstL2BKP18HM/gqZYc6mCM3ddp0vDw8Cft6Wyb0Jnkm8+vZXR/m79LvH
+	 hAC+pfGkw2aAvOP+ckMmWp3YlW8Ecj02WS2LyvPEtcntZG6MZlXlzwyMkerY3ac6aF
+	 fZuxWGWAnHvcrlRFlgm5qlqrl2bnkXT8PGt2vrQcjuF77MytNfRMfd111dUIMUqFDB
+	 NMbyZbMq60SDQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0BA0D405F3;
-	Wed, 28 Oct 2026 14:46:47 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 08FD0380
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:11:50 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E1E1040775;
+	Wed, 28 Oct 2026 14:46:51 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 35B5A529
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:12:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 0663680C26
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:11:50 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1B67980BE2
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:12:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5T6V6vkM_-Pj for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 14:11:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D13C480BCD
+ id q29eLbGIZxvx for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 14:12:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 81CBA80BDB
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::630"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793196709;
- b=sllpiE12KuAG89MiHAXya6UpF+rM9BopSRpdglWDWKxziVip0i75PRPDpX0jH50g0NwM
- Bl/8fED6GjXshelgcj+x5McM265NeanyEfols03rzNqKYzapc4cS9xJVOCdgMI9afIYw6
- c+J4nxK3EBXoMsRDZcOWO9WR3yTBakk8NsBSpUJYHi6NYNAPHtZRR0NxHQI3Z4EByr4NR
- TrZ6jGOww3+CBaCteOPrwT8Tjk6fMqXx2H9QDLWg4HahGk4WDWMwPV7Y0uXbmAEAGFTHH
- ZTEhiICCPzSBuG8b1kDtmYkFZzlj6eBKkYQ/ig9BJUXUupYH0xvdjqqaAb9oeAULbWw==
+ arc=none smtp.remote-ip="2a00:1450:4864:20::534"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793196747;
+ b=sYXGqFdeHywqkbAThSeI/K5se/P85bAxIpSujxK4pVwndv+0ek4yV7HkfjBqXM7QV1sJ
+ jrAMBbj3e/YtQgaUWi/kFGumPFp62iDC69dD7fafvhyTs5D/5Z6nc5IhqNP3M1oZGyaVZ
+ bSGXs8PSp6Rgt6O+YcntPnyvJCPD9UwLY619XVxF9zi+NiGIJsQA3QgkvQ7hHmZfo2gzG
+ Gb6gO8Xm/QsfSglSGQxpqcc7SUsaG3lIYXXnPX5rIYkIJuSg8kkXCckpD5d8tGChuX+ip
+ R1j0EFdSZKIC226/enhzlvUD9IpW0vUVCDnJFsf5aonOSjcLMBqDvfCs5RlReoMO0Ug==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793196709;
+ c=relaxed/relaxed; t=1793196747;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=J3aLEXFX5LZDIODOauS+VXAuyQa9qG0uRrY7YCrZ1LA=;
- b=YooqX/cXRvd19LlHXOhjRtzmpUiVpLkpvD6jIowMaS2BZIRNlCIt2EZDDL8VQJXE6nOo
- y2h9kKCfFT1ihX9wxxhzIgCYBAy8On9PvNZJ+rgDBAz7TFeS5XICGsnp8V030l4gX9DBi
- Wmar6GO0vE3HU5rMMb1WAN047tCmMC0ppGkJqeMNT4kaPrZlwbioll5RTtNaZGs2wjprj
- wf/TM5ScCr5gcngHXkx6CMUEgGmcqc58nXhui8Gs/i9Uati1VsmsXgpiJJm84VCJubYEE
- tCjaZV78E2apAiB/+PxKOBX9zNxY0lrGup6pY8QOMbAEOUbfkeAfeeqraSBHfOS2I1Q==
+ bh=KIN/XnsxwIzwg6XVbpWnahXG+uDa/x6O0NG5+8sOIkM=;
+ b=V7xlGN/9X5UrktB4DluRMxvreO+rInGudJUB/Dc7Km9eXOq1poldMtEOKySuxjr0daUY
+ 3lGj055kLL8vlXZsKtVodbSGleM+cYk1IpzaHkMQbhzQX6EM1haM87k6a3eohF2mNMzcG
+ pA5BjfBinha8xznVfc3n1UOILWM+1Xd0AjwboXVUMQpHljFV171WmFEjZvIv4ESJx+wyY
+ MMi6szqblsid5zugdLFKpCNlVONaXjoBK7kamisqSNDJj7Bj3wvI7CAnyzR5pf3OSRaX+
+ W9Bw23kEtulVytSnbGXJ35UiGJS4GyuCiL0tAO6a4gDRXSn5Nd6/haxX24O7vx9ljfg==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=linaro.org;
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=JprMSUvV; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::630"
+ header.s=google header.b=I3YTUiZe; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::534"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::630; helo=mail-ej1-x630.google.com;
+ client-ip=2a00:1450:4864:20::534; helo=mail-ed1-x534.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=JprMSUvV
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D13C480BCD
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:11:48 +0000 (UTC)
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-c40db84b4b5so12830166b.1
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 07:11:48 -0700 (PDT)
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=I3YTUiZe
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 81CBA80BDB
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:12:25 +0000 (UTC)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-6b4563855deso202915a12.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 07:12:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793196706; x=1793801506;
+ d=linaro.org; s=google; t=1793196744; x=1793801544;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=J3aLEXFX5LZDIODOauS+VXAuyQa9qG0uRrY7YCrZ1LA=;
- b=JprMSUvVB5q107A0iolIuVzK99kFelpPfPx9EURj8HBfPavH2bhn/nF7Dgkf51tS6H
- MKbaBoJ+noO7WmbC9XkXcCNiZZx6I7Yjn9ziPXAOj4OkJQclQf2PNvgT+E7JE/hhEyHZ
- p1/+8IJYQI2PaHwBurN+SpoBVJv7ctlhrIoCE1IT+qggzLG4XJVCx+/o7QzKqetEQIR7
- cM8fZbeaT96jGTLnDZkVNwtZXDhVhbF+mDuZBXX5JLBiBKb6icVTIyfeCjlAtS9jGM9Y
- 9FEh0nJOy+Rx4Q/yexNeGkcLMRNwsimSqyDTMjTvguA34UF6AK2+5yiwgchi+YOkBq4o
- U5XQ==
+ bh=KIN/XnsxwIzwg6XVbpWnahXG+uDa/x6O0NG5+8sOIkM=;
+ b=I3YTUiZeOCzWa/3h3trSQWOfdarNmkbumyefFs/lxBM4XFBmVwposx+wkGBvb/mJto
+ HtmzGtloRFpHiRxBU2GtGuAeqHsyqdJcVQUe55pJqXKyiSVT6ocXOBziFtaXHZCzn+g+
+ 4zE8vCLNiFhqKsNaSXunlIhYGoHaUMisEOTaCDQoQJ0Yfk1PrBFGeprItoG2uIJ3DeG3
+ /tNwhqIyyJ+te1705mUazxVQqNABbTr3jfI/BvyNf6busMhVcwpPCBtUShiJz00Zo7C5
+ JZpI1llPYEziaHd98GSTi/U3E7aF5fY39KMTwRgxMgvTOflwVhiqKcnPSxzJ9UJC8aw7
+ mZHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793196706; x=1793801506;
+ d=1e100.net; s=20260707; t=1793196744; x=1793801544;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=J3aLEXFX5LZDIODOauS+VXAuyQa9qG0uRrY7YCrZ1LA=;
- b=dZtn6NykkqwjYyNAi9nu/BIUSVx8hBxNU7AGNASq9NOKvyRR6DLPR/Bui0zkdhbIhS
- tG/nt5Q06gueRQW1NRKg2ikE1caGAygMjy6odOcf6LrJoGINTXHhvA5vn7VvTEvf+sUX
- eK3WveWKGEk2xgOEQSW2T5LWlXqy28bfBeTYc/kYRefcfQ93ZhJdG6BQGvFD1oC0Vr4a
- OFyRptP2qbrekLSTCMyNhz8nI+y6DwdGrwfbK7KYgteuFWTZwZjMeCuxiG8tp0tVe2+C
- cxc1fegiJbGfkE+0/pWfAXrMA2Cjlz1ysBys7PiBxEFw41Tq0h2i7Ea98vsDdlCfb6r2
- CETA==
-X-Gm-Message-State: AFq9FYKaP7a8YSBz3k9cZiXuEZVQQ7jWgGMyPbXVgmUTSqCbf2B76dbH
- bNOibxXB5crl0M/CNgSMAOYjhsWlfYodGvC6inseBW4uLGrbRuelSAsT9lk3DfdJyoKanVsThmq
- SCSfk
-X-Gm-Gg: AYBFou0Q02TPNxSznmUWr5jxqaqmQZPXHDSeUaiDD3YYxoYWs/KpjQOl3SpvKxL6UUo
- SJbWFWGgkEeksbgNHnkxz0BpnQ0TBsV+iZ4WdtM/Tq9s7DIf5vxjiCXSLQXVYE9JpGYo8KOzhaa
- xVIMhwAPgo22TXsRlqhLZNQ83UUi5aZXlJ8RPSzXvmzgVhjFm2M8dqMCCLOZAQlw/sosRJwntHL
- TNI06JpJCY0Rcc4mvNtdwygYPGw/M/YkfSrT7VUKvQk5AU4qLKjcGE2IlyFVp3UlRs0rdBmR82L
- RwzD35E4L4der+qkchBP7kfRro96HdcBf5N9tZPnSaXUXZ0NF3EGvS5LECS+SMUpN6UJVTD0Ou2
- Fp68ywwX5syqw8gpXmH3nTmmkv47oK/uvMcFPcTjDrkZ2d1yc67v1UrEovto+sZwnOQCbg+iv2s
- 9z2/DpjaZiCS7zhd2kB7vtS5m7OdOrKT/VNhAHRihr+bvU+qbrzOZNwDx62YQF0rGlSFNYF9dey
- C04FUxxSddU+3Eu0F8HxI/GcAfxsZrac7gBEnSpfDq6dswD6Enn8zm7RNU37T3Nm1RDR5HVDwXU
- 2pRKLKo5MZQCQeUL/at340RH6UHsEz0287JzDSWaTc5vWPGbyIcW1IrN1vphOHzyGaP1743cJoP
- PPhIwtTqr1Npc9qagxe2F/QxAIwxxd3o=
-X-Received: by 2002:a17:906:66d5:b0:c49:9a88:75f6 with SMTP id
- a640c23a62f3a-c49bdedd106mr234860666b.2.1793196706208; 
- Wed, 28 Oct 2026 07:11:46 -0700 (PDT)
+ bh=KIN/XnsxwIzwg6XVbpWnahXG+uDa/x6O0NG5+8sOIkM=;
+ b=H9b5HfYhm/PInaBVYX9VPr5BR1W/sChDL2RA2YzO0Jr11QlM3va4HDglmrFQOo1Voq
+ GnNE0eCd9reaM9xVg7h1idjQNaMHkqTshx8Zmd35MQPz192BbyRVoffuPz8woF6ZXC1G
+ tqH4c95beA+si95D1cPAxXK2EDWSevsG3gVXOnmPOulfLi0ruCsXANSMRYX0mWWojB0G
+ ZrDefJxAHIwljtCrpg7Eh5uChQNKLS5mqcRvFciUwnKNKN0hx/eSXHGvA4ZOyJvcqFEi
+ MUR/1As9G6X5n9pjpRxuzpKv3kcExPukb7when3jLiiUxZdiyHyrX+GqhLOA76pJwfCr
+ I2Pw==
+X-Gm-Message-State: AFq9FYKhqqoibv2qfXdq5FVTXH3IgGfhRFAfJVahPtojTtLftD3HtR94
+ AElQYLxehJZhTlMSMIciwacvc9fR+zg8IrINlLatE0KOBPoMxlcqr/fSw777FlkZWWeliVpR5ZX
+ fqEs8
+X-Gm-Gg: AYBFou3ulioy5ihtURnDR5t0xEYmV0BrR+xGiYo+7gwlM6LZoPNTBkY7eUF5v0kQETm
+ lkatvGGN8n8Q2O0wVb5QqaoFAVzrYnA8RPlUZYYUWxIhoVp5OdTieXliSogfy8idNTYyLw1DMsm
+ QnFCawIumw4fyW8kqJ7z3AkOvI7Rk6NnR6Bpv2M4yJoJ/H/LNAoWMQMdHOUFGYqY081F1FBrqvW
+ njEYqE1L6EHSrJzDumSQDADFks3txgBXdxwZGXoj6R7O3e0kdK06L2GEx/PLi5KMyfYkM2tXuDK
+ Q/KJnRDD9VK0MKxRXkvlfUrxeeFP12L35t1SBbcS+1BURjza+WT3j8/ADrJGRUEwUX8rpOag4Hk
+ RIRTtZoqP+GzIaTkfFhACS8jMF5Benzj+ShtLGvo5GeOb7eIRrxznl+Aycs/LgLaRqSSYXomGPb
+ j/lOfeGotpL6t4f+au5KewpkHynNWA31wrcHRZbbtDXiwvh8V481hARPdCpvO+hWNnO+8k2oVaM
+ 7TamcpgP6iXasznK0xT7BEBSt/ejqT3rO7JcIexJmKSQMQ4OCF0AxDmUi2Zs4yLHDidUdDWqg9w
+ qgjslsIBraS0fNfLG6uTbVbJXDeWBu4f9qQOBM6pTnh4G53A6dm24Nnz6/JKxJ/BD5pjUDOepiD
+ y1jiPfj20pQ==
+X-Received: by 2002:a17:906:18e9:b0:c41:3963:6f1f with SMTP id
+ a640c23a62f3a-c49bdeae450mr226074866b.4.1793196743800; 
+ Wed, 28 Oct 2026 07:12:23 -0700 (PDT)
 Received: from monster.taild06a60.ts.net (c-85-229-7-191.bbcust.telenor.se.
  [85.229.7.191]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c46bd64a02csm611738166b.44.2026.10.28.07.11.45
+ a640c23a62f3a-c46bd4ea351sm606060666b.28.2026.10.28.07.12.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Oct 2026 07:11:45 -0700 (PDT)
+ Wed, 28 Oct 2026 07:12:23 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
@@ -162,9 +162,9 @@ Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  jerome.forissier@arm.com, mkorpershoek@kernel.org, sjg@chromium.org,
  Jens Wiklander <jens.wiklander@linaro.org>,
  Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH v10 28/63] usb: dwc3: import from kernel v5.3
-Date: Wed, 28 Oct 2026 15:08:54 +0100
-Message-ID: <20261028140930.3025368-29-anders.roxell@linaro.org>
+Subject: [PATCH v10 31/63] usb: dwc3: import from kernel v5.6
+Date: Wed, 28 Oct 2026 15:08:57 +0100
+Message-ID: <20261028140930.3025368-32-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261028140930.3025368-1-anders.roxell@linaro.org>
 References: <20261028140930.3025368-1-anders.roxell@linaro.org>
@@ -183,14 +183,14 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Jens Wiklander <jens.wiklander@linaro.org>
 
-Sync Linux kernel dwc3 changes from v5.2 to v5.3.
+Sync Linux kernel dwc3 changes from v5.5 to v5.6.
 
 The following files are preserved across the import:
 Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
@@ -205,210 +205,396 @@ dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
 Note that this is a raw import and doesn't build.
 A fixup commit at the end of the series fixes that.
 
-List of commits: git log --oneline v5.2..v5.3
+List of commits: git log --oneline v5.5..v5.6
 Commits imported:
-332694f8a4f7 Revert "usb:gadget Separated decoding functions from dwc3 driver."
-3db1b636c07e usb:gadget Separated decoding functions from dwc3 driver.
-aa23ce847dda usb: dwc3: remove unused @lock member of dwc3_ep struct
-729dcffd1ed3 usb: dwc3: gadget: Add support for disabling U1 and U2 entries
-dc1b5d9aed17 usb: dwc3: Fix core validation in probe, move after clocks are enabled
+dad2aff3e827 usb: dwc3: gadget: Update chain bit correctly when using sg list
+42cd5ffe46c1 usb: dwc3: debug: fix string position formatting mixup with ret and len
+5ee858975b13 usb: dwc3: gadget: Check for IOC/LST bit in TRB->ctrl fields
+cf2f8b63f7f1 usb: dwc3: gadget: Remove END_TRANSFER delay
+da10bcdd6f70 usb: dwc3: gadget: Delay starting transfer
+c58d8bfc77a2 usb: dwc3: gadget: Check END_TRANSFER completion
+09ed259fac62 usb: dwc3: turn off VBUS when leaving host mode
+2e708fa3b898 usb: dwc3: gadget: Clear DCTL.ULSTCHNGREQ before set
+1b6009ea88ec usb: dwc3: gadget: Set link state to RX_Detect on disconnect
+5b738211fb59 usb: dwc3: gadget: Don't send unintended link state change
 
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 ---
- drivers/usb/dwc3/core.c   | 16 +++++++++++-----
- drivers/usb/dwc3/core.h   |  6 ++++--
- drivers/usb/dwc3/ep0.c    |  9 ++++++++-
- drivers/usb/dwc3/gadget.c | 22 ++++++++++++++++++++--
- drivers/usb/dwc3/gadget.h |  6 ++++++
- 5 files changed, 49 insertions(+), 10 deletions(-)
+ drivers/usb/dwc3/core.c   |  3 ++
+ drivers/usb/dwc3/core.h   |  2 ++
+ drivers/usb/dwc3/debug.h  | 39 +++++++++-------------
+ drivers/usb/dwc3/ep0.c    |  4 ++-
+ drivers/usb/dwc3/gadget.c | 68 +++++++++++++++++++++++++--------------
+ drivers/usb/dwc3/gadget.h | 14 ++++++++
+ 6 files changed, 80 insertions(+), 50 deletions(-)
 
 diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index 4aff1d8dbc4f..c9bb93a2c81e 100644
+index f561c6c9e8a9..1d85c42b9c67 100644
 --- a/drivers/usb/dwc3/core.c
 +++ b/drivers/usb/dwc3/core.c
-@@ -1282,6 +1282,10 @@ static void dwc3_get_properties(struct dwc3 *dwc)
- 				"snps,dis_u2_susphy_quirk");
- 	dwc->dis_enblslpm_quirk = device_property_read_bool(dev,
- 				"snps,dis_enblslpm_quirk");
-+	dwc->dis_u1_entry_quirk = device_property_read_bool(dev,
-+				"snps,dis-u1-entry-quirk");
-+	dwc->dis_u2_entry_quirk = device_property_read_bool(dev,
-+				"snps,dis-u2-entry-quirk");
- 	dwc->dis_rxdet_inp3_quirk = device_property_read_bool(dev,
- 				"snps,dis_rxdet_inp3_quirk");
- 	dwc->dis_u2_freeclk_exists_quirk = device_property_read_bool(dev,
-@@ -1423,11 +1427,6 @@ static int dwc3_probe(struct platform_device *pdev)
- 	dwc->regs	= regs;
- 	dwc->regs_size	= resource_size(&dwc_res);
- 
--	if (!dwc3_core_is_valid(dwc)) {
--		dev_err(dwc->dev, "this is not a DesignWare USB3 DRD Core\n");
--		return -ENODEV;
--	}
--
- 	dwc3_get_properties(dwc);
- 
- 	dwc->reset = devm_reset_control_get_optional_shared(dev, NULL);
-@@ -1460,6 +1459,12 @@ static int dwc3_probe(struct platform_device *pdev)
- 	if (ret)
- 		goto unprepare_clks;
- 
-+	if (!dwc3_core_is_valid(dwc)) {
-+		dev_err(dwc->dev, "this is not a DesignWare USB3 DRD Core\n");
-+		ret = -ENODEV;
-+		goto disable_clks;
-+	}
-+
- 	platform_set_drvdata(pdev, dwc);
- 	dwc3_cache_hwparams(dwc);
- 
-@@ -1525,6 +1530,7 @@ err1:
- 	pm_runtime_put_sync(&pdev->dev);
- 	pm_runtime_disable(&pdev->dev);
- 
-+disable_clks:
- 	clk_bulk_disable(dwc->num_clks, dwc->clks);
- unprepare_clks:
- 	clk_bulk_unprepare(dwc->num_clks, dwc->clks);
-diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-index f19cbeb01087..3dd783b889cb 100644
---- a/drivers/usb/dwc3/core.h
-+++ b/drivers/usb/dwc3/core.h
-@@ -649,7 +649,6 @@ struct dwc3_event_buffer {
-  * @cancelled_list: list of cancelled requests for this endpoint
-  * @pending_list: list of pending requests for this endpoint
-  * @started_list: list of started requests on this endpoint
-- * @lock: spinlock for endpoint request queue traversal
-  * @regs: pointer to first endpoint register
-  * @trb_pool: array of transaction buffers
-  * @trb_pool_dma: dma address of @trb_pool
-@@ -677,7 +676,6 @@ struct dwc3_ep {
- 	struct list_head	pending_list;
- 	struct list_head	started_list;
- 
--	spinlock_t		lock;
- 	void __iomem		*regs;
- 
- 	struct dwc3_trb		*trb_pool;
-@@ -1014,6 +1012,8 @@ struct dwc3_scratchpad_array {
-  * @dis_u2_susphy_quirk: set if we disable usb2 suspend phy
-  * @dis_enblslpm_quirk: set if we clear enblslpm in GUSB2PHYCFG,
-  *                      disabling the suspend signal to the PHY.
-+ * @dis_u1_entry_quirk: set if link entering into U1 state needs to be disabled.
-+ * @dis_u2_entry_quirk: set if link entering into U2 state needs to be disabled.
-  * @dis_rxdet_inp3_quirk: set if we disable Rx.Detect in P3
-  * @dis_u2_freeclk_exists_quirk : set if we clear u2_freeclk_exists
-  *			in GUSB2PHYCFG, specify that USB2 PHY doesn't
-@@ -1205,6 +1205,8 @@ struct dwc3 {
- 	unsigned		dis_u3_susphy_quirk:1;
- 	unsigned		dis_u2_susphy_quirk:1;
- 	unsigned		dis_enblslpm_quirk:1;
-+	unsigned		dis_u1_entry_quirk:1;
-+	unsigned		dis_u2_entry_quirk:1;
- 	unsigned		dis_rxdet_inp3_quirk:1;
- 	unsigned		dis_u2_freeclk_exists_quirk:1;
- 	unsigned		dis_del_phy_power_chg_quirk:1;
-diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
-index 8efde178eef4..3996b9c4ff8d 100644
---- a/drivers/usb/dwc3/ep0.c
-+++ b/drivers/usb/dwc3/ep0.c
-@@ -379,6 +379,8 @@ static int dwc3_ep0_handle_u1(struct dwc3 *dwc, enum usb_device_state state,
- 	if ((dwc->speed != DWC3_DSTS_SUPERSPEED) &&
- 			(dwc->speed != DWC3_DSTS_SUPERSPEED_PLUS))
- 		return -EINVAL;
-+	if (set && dwc->dis_u1_entry_quirk)
-+		return -EINVAL;
- 
- 	reg = dwc3_readl(dwc->regs, DWC3_DCTL);
- 	if (set)
-@@ -401,6 +403,8 @@ static int dwc3_ep0_handle_u2(struct dwc3 *dwc, enum usb_device_state state,
- 	if ((dwc->speed != DWC3_DSTS_SUPERSPEED) &&
- 			(dwc->speed != DWC3_DSTS_SUPERSPEED_PLUS))
- 		return -EINVAL;
-+	if (set && dwc->dis_u2_entry_quirk)
-+		return -EINVAL;
- 
- 	reg = dwc3_readl(dwc->regs, DWC3_DCTL);
- 	if (set)
-@@ -626,7 +630,10 @@ static int dwc3_ep0_set_config(struct dwc3 *dwc, struct usb_ctrlrequest *ctrl)
- 			 * nothing is pending from application.
- 			 */
- 			reg = dwc3_readl(dwc->regs, DWC3_DCTL);
--			reg |= (DWC3_DCTL_ACCEPTU1ENA | DWC3_DCTL_ACCEPTU2ENA);
-+			if (!dwc->dis_u1_entry_quirk)
-+				reg |= DWC3_DCTL_ACCEPTU1ENA;
-+			if (!dwc->dis_u2_entry_quirk)
-+				reg |= DWC3_DCTL_ACCEPTU2ENA;
- 			dwc3_writel(dwc->regs, DWC3_DCTL, reg);
- 		}
+@@ -1246,6 +1246,9 @@ static void dwc3_core_exit_mode(struct dwc3 *dwc)
+ 		/* do nothing */
  		break;
-diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index d67655384eb2..173f5329d3d9 100644
---- a/drivers/usb/dwc3/gadget.c
-+++ b/drivers/usb/dwc3/gadget.c
-@@ -2073,6 +2073,25 @@ out:
- 	return 0;
+ 	}
++
++	/* de-assert DRVVBUS for HOST and OTG mode */
++	dwc3_set_prtcap(dwc, DWC3_GCTL_PRTCAP_DEVICE);
  }
  
-+static void dwc3_gadget_config_params(struct usb_gadget *g,
-+				      struct usb_dcd_config_params *params)
-+{
-+	struct dwc3		*dwc = gadget_to_dwc(g);
-+
-+	/* U1 Device exit Latency */
-+	if (dwc->dis_u1_entry_quirk)
-+		params->bU1devExitLat = 0;
-+	else
-+		params->bU1devExitLat = DWC3_DEFAULT_U1_DEV_EXIT_LAT;
-+
-+	/* U2 Device exit Latency */
-+	if (dwc->dis_u2_entry_quirk)
-+		params->bU2DevExitLat = 0;
-+	else
-+		params->bU2DevExitLat =
-+				cpu_to_le16(DWC3_DEFAULT_U2_DEV_EXIT_LAT);
-+}
-+
- static void dwc3_gadget_set_speed(struct usb_gadget *g,
- 				  enum usb_device_speed speed)
- {
-@@ -2142,6 +2161,7 @@ static const struct usb_gadget_ops dwc3_gadget_ops = {
- 	.udc_start		= dwc3_gadget_start,
- 	.udc_stop		= dwc3_gadget_stop,
- 	.udc_set_speed		= dwc3_gadget_set_speed,
-+	.get_config_params	= dwc3_gadget_config_params,
- };
+ static void dwc3_get_properties(struct dwc3 *dwc)
+diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
+index 1c8b349379af..77c4a9abe365 100644
+--- a/drivers/usb/dwc3/core.h
++++ b/drivers/usb/dwc3/core.h
+@@ -688,7 +688,9 @@ struct dwc3_ep {
+ #define DWC3_EP_STALL		BIT(1)
+ #define DWC3_EP_WEDGE		BIT(2)
+ #define DWC3_EP_TRANSFER_STARTED BIT(3)
++#define DWC3_EP_END_TRANSFER_PENDING BIT(4)
+ #define DWC3_EP_PENDING_REQUEST	BIT(5)
++#define DWC3_EP_DELAY_START	BIT(6)
  
- /* -------------------------------------------------------------------------- */
-@@ -2251,8 +2271,6 @@ static int dwc3_gadget_init_endpoint(struct dwc3 *dwc, u8 epnum)
- 		dep->endpoint.comp_desc = NULL;
+ 	/* This last one is specific to EP0 */
+ #define DWC3_EP0_DIR_IN		BIT(31)
+diff --git a/drivers/usb/dwc3/debug.h b/drivers/usb/dwc3/debug.h
+index e56beb9d1e36..4a13ceaf4093 100644
+--- a/drivers/usb/dwc3/debug.h
++++ b/drivers/usb/dwc3/debug.h
+@@ -256,86 +256,77 @@ static inline const char *dwc3_ep_event_string(char *str, size_t size,
+ 	u8 epnum = event->endpoint_number;
+ 	size_t len;
+ 	int status;
+-	int ret;
+ 
+-	ret = snprintf(str, size, "ep%d%s: ", epnum >> 1,
++	len = scnprintf(str, size, "ep%d%s: ", epnum >> 1,
+ 			(epnum & 1) ? "in" : "out");
+-	if (ret < 0)
+-		return "UNKNOWN";
+ 
+ 	status = event->status;
+ 
+ 	switch (event->endpoint_event) {
+ 	case DWC3_DEPEVT_XFERCOMPLETE:
+-		len = strlen(str);
+-		snprintf(str + len, size - len, "Transfer Complete (%c%c%c)",
++		len += scnprintf(str + len, size - len,
++				"Transfer Complete (%c%c%c)",
+ 				status & DEPEVT_STATUS_SHORT ? 'S' : 's',
+ 				status & DEPEVT_STATUS_IOC ? 'I' : 'i',
+ 				status & DEPEVT_STATUS_LST ? 'L' : 'l');
+ 
+-		len = strlen(str);
+-
+ 		if (epnum <= 1)
+-			snprintf(str + len, size - len, " [%s]",
++			scnprintf(str + len, size - len, " [%s]",
+ 					dwc3_ep0_state_string(ep0state));
+ 		break;
+ 	case DWC3_DEPEVT_XFERINPROGRESS:
+-		len = strlen(str);
+-
+-		snprintf(str + len, size - len, "Transfer In Progress [%d] (%c%c%c)",
++		scnprintf(str + len, size - len,
++				"Transfer In Progress [%d] (%c%c%c)",
+ 				event->parameters,
+ 				status & DEPEVT_STATUS_SHORT ? 'S' : 's',
+ 				status & DEPEVT_STATUS_IOC ? 'I' : 'i',
+ 				status & DEPEVT_STATUS_LST ? 'M' : 'm');
+ 		break;
+ 	case DWC3_DEPEVT_XFERNOTREADY:
+-		len = strlen(str);
+-
+-		snprintf(str + len, size - len, "Transfer Not Ready [%d]%s",
++		len += scnprintf(str + len, size - len,
++				"Transfer Not Ready [%d]%s",
+ 				event->parameters,
+ 				status & DEPEVT_STATUS_TRANSFER_ACTIVE ?
+ 				" (Active)" : " (Not Active)");
+ 
+-		len = strlen(str);
+-
+ 		/* Control Endpoints */
+ 		if (epnum <= 1) {
+ 			int phase = DEPEVT_STATUS_CONTROL_PHASE(event->status);
+ 
+ 			switch (phase) {
+ 			case DEPEVT_STATUS_CONTROL_DATA:
+-				snprintf(str + ret, size - ret,
++				scnprintf(str + len, size - len,
+ 						" [Data Phase]");
+ 				break;
+ 			case DEPEVT_STATUS_CONTROL_STATUS:
+-				snprintf(str + ret, size - ret,
++				scnprintf(str + len, size - len,
+ 						" [Status Phase]");
+ 			}
+ 		}
+ 		break;
+ 	case DWC3_DEPEVT_RXTXFIFOEVT:
+-		snprintf(str + ret, size - ret, "FIFO");
++		scnprintf(str + len, size - len, "FIFO");
+ 		break;
+ 	case DWC3_DEPEVT_STREAMEVT:
+ 		status = event->status;
+ 
+ 		switch (status) {
+ 		case DEPEVT_STREAMEVT_FOUND:
+-			snprintf(str + ret, size - ret, " Stream %d Found",
++			scnprintf(str + len, size - len, " Stream %d Found",
+ 					event->parameters);
+ 			break;
+ 		case DEPEVT_STREAMEVT_NOTFOUND:
+ 		default:
+-			snprintf(str + ret, size - ret, " Stream Not Found");
++			scnprintf(str + len, size - len, " Stream Not Found");
+ 			break;
+ 		}
+ 
+ 		break;
+ 	case DWC3_DEPEVT_EPCMDCMPLT:
+-		snprintf(str + ret, size - ret, "Endpoint Command Complete");
++		scnprintf(str + len, size - len, "Endpoint Command Complete");
+ 		break;
+ 	default:
+-		snprintf(str, size, "UNKNOWN");
++		scnprintf(str + len, size - len, "UNKNOWN");
  	}
  
--	spin_lock_init(&dep->lock);
+ 	return str;
+diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
+index fd1b100d2927..6dee4dabc0a4 100644
+--- a/drivers/usb/dwc3/ep0.c
++++ b/drivers/usb/dwc3/ep0.c
+@@ -1136,8 +1136,10 @@ void dwc3_ep0_interrupt(struct dwc3 *dwc,
+ 	case DWC3_DEPEVT_EPCMDCMPLT:
+ 		cmd = DEPEVT_PARAMETER_CMD(event->parameters);
+ 
+-		if (cmd == DWC3_DEPCMD_ENDTRANSFER)
++		if (cmd == DWC3_DEPCMD_ENDTRANSFER) {
++			dep->flags &= ~DWC3_EP_END_TRANSFER_PENDING;
+ 			dep->flags &= ~DWC3_EP_TRANSFER_STARTED;
++		}
+ 		break;
+ 	}
+ }
+diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+index 154f3f3e8cff..1e00bf2d65a2 100644
+--- a/drivers/usb/dwc3/gadget.c
++++ b/drivers/usb/dwc3/gadget.c
+@@ -57,7 +57,7 @@ int dwc3_gadget_set_test_mode(struct dwc3 *dwc, int mode)
+ 		return -EINVAL;
+ 	}
+ 
+-	dwc3_writel(dwc->regs, DWC3_DCTL, reg);
++	dwc3_gadget_dctl_write_safe(dwc, reg);
+ 
+ 	return 0;
+ }
+@@ -111,6 +111,9 @@ int dwc3_gadget_set_link_state(struct dwc3 *dwc, enum dwc3_link_state state)
+ 	reg = dwc3_readl(dwc->regs, DWC3_DCTL);
+ 	reg &= ~DWC3_DCTL_ULSTCHNGREQ_MASK;
+ 
++	/* set no action before sending new link state change */
++	dwc3_writel(dwc->regs, DWC3_DCTL, reg);
++
+ 	/* set requested state */
+ 	reg |= DWC3_DCTL_ULSTCHNGREQ(state);
+ 	dwc3_writel(dwc->regs, DWC3_DCTL, reg);
+@@ -1068,7 +1071,14 @@ static void dwc3_prepare_one_trb_sg(struct dwc3_ep *dep,
+ 		unsigned int rem = length % maxp;
+ 		unsigned chain = true;
+ 
+-		if (sg_is_last(s))
++		/*
++		 * IOMMU driver is coalescing the list of sgs which shares a
++		 * page boundary into one and giving it to USB driver. With
++		 * this the number of sgs mapped is not equal to the number of
++		 * sgs passed. So mark the chain bit to false if it isthe last
++		 * mapped sg.
++		 */
++		if (i == remaining - 1)
+ 			chain = false;
+ 
+ 		if (rem && usb_endpoint_dir_out(dep->endpoint.desc) && !chain) {
+@@ -1447,6 +1457,12 @@ static int __dwc3_gadget_ep_queue(struct dwc3_ep *dep, struct dwc3_request *req)
+ 	list_add_tail(&req->list, &dep->pending_list);
+ 	req->status = DWC3_REQUEST_STATUS_QUEUED;
+ 
++	/* Start the transfer only after the END_TRANSFER is completed */
++	if (dep->flags & DWC3_EP_END_TRANSFER_PENDING) {
++		dep->flags |= DWC3_EP_DELAY_START;
++		return 0;
++	}
++
+ 	/*
+ 	 * NOTICE: Isochronous endpoints should NEVER be prestarted. We must
+ 	 * wait for a XferNotReady event so we will know what's the current
+@@ -1828,7 +1844,7 @@ static int dwc3_gadget_run_stop(struct dwc3 *dwc, int is_on, int suspend)
+ 		dwc->pullups_connected = false;
+ 	}
+ 
+-	dwc3_writel(dwc->regs, DWC3_DCTL, reg);
++	dwc3_gadget_dctl_write_safe(dwc, reg);
+ 
+ 	do {
+ 		reg = dwc3_readl(dwc->regs, DWC3_DSTS);
+@@ -2420,7 +2436,8 @@ static int dwc3_gadget_ep_reclaim_completed_trb(struct dwc3_ep *dep,
+ 	if (event->status & DEPEVT_STATUS_SHORT && !chain)
+ 		return 1;
+ 
+-	if (event->status & DEPEVT_STATUS_IOC)
++	if ((trb->ctrl & DWC3_TRB_CTRL_IOC) ||
++	    (trb->ctrl & DWC3_TRB_CTRL_LST))
+ 		return 1;
+ 
+ 	return 0;
+@@ -2625,8 +2642,14 @@ static void dwc3_endpoint_interrupt(struct dwc3 *dwc,
+ 		cmd = DEPEVT_PARAMETER_CMD(event->parameters);
+ 
+ 		if (cmd == DWC3_DEPCMD_ENDTRANSFER) {
++			dep->flags &= ~DWC3_EP_END_TRANSFER_PENDING;
+ 			dep->flags &= ~DWC3_EP_TRANSFER_STARTED;
+ 			dwc3_gadget_ep_cleanup_cancelled_requests(dep);
++			if ((dep->flags & DWC3_EP_DELAY_START) &&
++			    !usb_endpoint_xfer_isoc(dep->endpoint.desc))
++				__dwc3_gadget_kick_transfer(dep);
++
++			dep->flags &= ~DWC3_EP_DELAY_START;
+ 		}
+ 		break;
+ 	case DWC3_DEPEVT_STREAMEVT:
+@@ -2678,12 +2701,12 @@ static void dwc3_reset_gadget(struct dwc3 *dwc)
+ static void dwc3_stop_active_transfer(struct dwc3_ep *dep, bool force,
+ 	bool interrupt)
+ {
+-	struct dwc3 *dwc = dep->dwc;
+ 	struct dwc3_gadget_ep_cmd_params params;
+ 	u32 cmd;
+ 	int ret;
+ 
+-	if (!(dep->flags & DWC3_EP_TRANSFER_STARTED))
++	if (!(dep->flags & DWC3_EP_TRANSFER_STARTED) ||
++	    (dep->flags & DWC3_EP_END_TRANSFER_PENDING))
+ 		return;
+ 
+ 	/*
+@@ -2693,16 +2716,13 @@ static void dwc3_stop_active_transfer(struct dwc3_ep *dep, bool force,
+ 	 * much trouble synchronizing between us and gadget driver.
+ 	 *
+ 	 * We have discussed this with the IP Provider and it was
+-	 * suggested to giveback all requests here, but give HW some
+-	 * extra time to synchronize with the interconnect. We're using
+-	 * an arbitrary 100us delay for that.
++	 * suggested to giveback all requests here.
+ 	 *
+ 	 * Note also that a similar handling was tested by Synopsys
+ 	 * (thanks a lot Paul) and nothing bad has come out of it.
+-	 * In short, what we're doing is:
+-	 *
+-	 * - Issue EndTransfer WITH CMDIOC bit set
+-	 * - Wait 100us
++	 * In short, what we're doing is issuing EndTransfer with
++	 * CMDIOC bit set and delay kicking transfer until the
++	 * EndTransfer command had completed.
+ 	 *
+ 	 * As of IP version 3.10a of the DWC_usb3 IP, the controller
+ 	 * supports a mode to work around the above limitation. The
+@@ -2711,8 +2731,7 @@ static void dwc3_stop_active_transfer(struct dwc3_ep *dep, bool force,
+ 	 * by writing GUCTL2[14]. This polling is already done in the
+ 	 * dwc3_send_gadget_ep_cmd() function so if the mode is
+ 	 * enabled, the EndTransfer command will have completed upon
+-	 * returning from this function and we don't need to delay for
+-	 * 100us.
++	 * returning from this function.
+ 	 *
+ 	 * This mode is NOT available on the DWC_usb31 IP.
+ 	 */
+@@ -2728,9 +2747,8 @@ static void dwc3_stop_active_transfer(struct dwc3_ep *dep, bool force,
+ 
+ 	if (!interrupt)
+ 		dep->flags &= ~DWC3_EP_TRANSFER_STARTED;
 -
- 	if (num == 0)
- 		ret = dwc3_gadget_init_control_endpoint(dep);
- 	else if (direction)
+-	if (dwc3_is_usb31(dwc) || dwc->revision < DWC3_REVISION_310A)
+-		udelay(100);
++	else
++		dep->flags |= DWC3_EP_END_TRANSFER_PENDING;
+ }
+ 
+ static void dwc3_clear_stall_all_ep(struct dwc3 *dwc)
+@@ -2759,12 +2777,12 @@ static void dwc3_gadget_disconnect_interrupt(struct dwc3 *dwc)
+ {
+ 	int			reg;
+ 
++	dwc3_gadget_set_link_state(dwc, DWC3_LINK_STATE_RX_DET);
++
+ 	reg = dwc3_readl(dwc->regs, DWC3_DCTL);
+ 	reg &= ~DWC3_DCTL_INITU1ENA;
+-	dwc3_writel(dwc->regs, DWC3_DCTL, reg);
+-
+ 	reg &= ~DWC3_DCTL_INITU2ENA;
+-	dwc3_writel(dwc->regs, DWC3_DCTL, reg);
++	dwc3_gadget_dctl_write_safe(dwc, reg);
+ 
+ 	dwc3_disconnect_gadget(dwc);
+ 
+@@ -2816,7 +2834,7 @@ static void dwc3_gadget_reset_interrupt(struct dwc3 *dwc)
+ 
+ 	reg = dwc3_readl(dwc->regs, DWC3_DCTL);
+ 	reg &= ~DWC3_DCTL_TSTCTRL_MASK;
+-	dwc3_writel(dwc->regs, DWC3_DCTL, reg);
++	dwc3_gadget_dctl_write_safe(dwc, reg);
+ 	dwc->test_mode = false;
+ 	dwc3_clear_stall_all_ep(dwc);
+ 
+@@ -2920,11 +2938,11 @@ static void dwc3_gadget_conndone_interrupt(struct dwc3 *dwc)
+ 		if (dwc->has_lpm_erratum && dwc->revision >= DWC3_REVISION_240A)
+ 			reg |= DWC3_DCTL_NYET_THRES(dwc->lpm_nyet_threshold);
+ 
+-		dwc3_writel(dwc->regs, DWC3_DCTL, reg);
++		dwc3_gadget_dctl_write_safe(dwc, reg);
+ 	} else {
+ 		reg = dwc3_readl(dwc->regs, DWC3_DCTL);
+ 		reg &= ~DWC3_DCTL_HIRD_THRES_MASK;
+-		dwc3_writel(dwc->regs, DWC3_DCTL, reg);
++		dwc3_gadget_dctl_write_safe(dwc, reg);
+ 	}
+ 
+ 	dep = dwc->eps[0];
+@@ -3033,7 +3051,7 @@ static void dwc3_gadget_linksts_change_interrupt(struct dwc3 *dwc,
+ 
+ 				reg &= ~u1u2;
+ 
+-				dwc3_writel(dwc->regs, DWC3_DCTL, reg);
++				dwc3_gadget_dctl_write_safe(dwc, reg);
+ 				break;
+ 			default:
+ 				/* do nothing */
 diff --git a/drivers/usb/dwc3/gadget.h b/drivers/usb/dwc3/gadget.h
-index 3ed738e86ea7..5faf4d1249e0 100644
+index 5faf4d1249e0..fbc7d8013f0b 100644
 --- a/drivers/usb/dwc3/gadget.h
 +++ b/drivers/usb/dwc3/gadget.h
-@@ -48,6 +48,12 @@ struct dwc3;
- /* DEPXFERCFG parameter 0 */
- #define DWC3_DEPXFERCFG_NUM_XFER_RES(n)	((n) & 0xffff)
+@@ -127,4 +127,18 @@ static inline void dwc3_gadget_ep_get_transfer_index(struct dwc3_ep *dep)
+ 	dep->resource_index = DWC3_DEPCMD_GET_RSC_IDX(res_id);
+ }
  
-+/* U1 Device exit Latency */
-+#define DWC3_DEFAULT_U1_DEV_EXIT_LAT	0x0A	/* Less then 10 microsec */
++/**
++ * dwc3_gadget_dctl_write_safe - write to DCTL safe from link state change
++ * @dwc: pointer to our context structure
++ * @value: value to write to DCTL
++ *
++ * Use this function when doing read-modify-write to DCTL. It will not
++ * send link state change request.
++ */
++static inline void dwc3_gadget_dctl_write_safe(struct dwc3 *dwc, u32 value)
++{
++	value &= ~DWC3_DCTL_ULSTCHNGREQ_MASK;
++	dwc3_writel(dwc->regs, DWC3_DCTL, value);
++}
 +
-+/* U2 Device exit Latency */
-+#define DWC3_DEFAULT_U2_DEV_EXIT_LAT	0x1FF	/* Less then 511 microsec */
-+
- /* -------------------------------------------------------------------------- */
- 
- #define to_dwc3_request(r)	(container_of(r, struct dwc3_request, request))
+ #endif /* __DRIVERS_USB_DWC3_GADGET_H */
 -- 
 2.53.0
 
