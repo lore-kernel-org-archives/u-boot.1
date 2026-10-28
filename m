@@ -1,166 +1,240 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C460606A31C
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 13:36:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34AD2606A31A
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 13:36:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=K7Yb3X2N;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=kbHqeNOj
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=P+1vruJx;
+	dkim=pass (2048-bit key, unprotected) header.d=processmission.com header.i=@processmission.com header.a=rsa-sha256 header.s=selector1 header.b=fXTtqV7V
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4D9DA80BF7;
-	Wed, 28 Oct 2026 13:36:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0631C40520;
+	Wed, 28 Oct 2026 13:36:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Z4h-l5JfGv6V; Wed, 28 Oct 2026 13:36:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 06F0C80C81
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793194583;
-	b=lLhdo79msuHzSM6BLeiTBRHllQ13n3vAgfc0Sah81AXGO8o+o2DphcvxLtMTv5MIqzIR
-	 b+GibVGRIoyw/jFl6E8Uy+CQD0UlMF50kOp9sjreNZKj7jL/+nhnuuqXFR4b920tITxRI
-	 Wx5IZQGgtXL6Ijdpcba6cFV3umybgQqEtPk3QU/tk1l9eML6g8XY6kuA/MiFOjIkYQ/ud
-	 ecZuhGrwfojYUOIBdj1ReYnGHTyQCsUWpoIMLztvj/MkjxwzawOo6GeqxksNwiGuueNha
-	 oJWFAjjZl9+JA74vgJWBUdMj+wEabbXeLDjxs2IESTsa0pPgdLWA3EiIzcp9ohWfG5Q==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793194583;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Q_mZzhu27h7l; Wed, 28 Oct 2026 13:36:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A22FE4057D
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793194584;
+	b=ZUfKVXzEscSbu6LAXOE0IBAjeD2l4dJOYh5J9OgaMadGfMyDkTq3iGGXNtLIUMiP21aA
+	 9sXSmber7FjG8t4MZd7BXguauIKCkMgJc5rk31OSVF71MmIF8Pl3K162xtPWmjJp7qnFm
+	 JpRZiIa59lbQZ1wJNPYTb47HieTS2LEJWCOZYPzkOZJwxJ0kKWqTo75LN1BaRw8SqXgDd
+	 iVQEMnzOYrz2kMGri4+1k5gIKpsTVfIs3mgHDwnWeBbQynnt+sI/l+malVBGVJan2obZ9
+	 fdxRUUiRpDnNNlxh3jsQR373XvFlKZYqE+aAvcWXT5GFibcgV0Z8rk7zlRqpSxUAa/Q==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793194584;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=QzUw852Uxk6wqtS8ynj6fqKSb9Yr8PLQ8nGdM632FOI=;
-	b=c44eJoUXvSrseGcXcV8B876O+dgc3I4rWvnG53Ord0bAXZrNKYImdaFhwZl6gzcib4wK
-	 l+e2Zu9pauHrnkFhGNEbSx/jph70+DSX2B6bvicF2/fCnat5CiS53pnwZ1wR+Deg6oYk+
-	 pQliwNQ5mt36eIbEX+AEneiGILTg+vvqFCLW9GY4ZD3gms7KhnU1njSRf8xpS5H2PdhVN
-	 H3pqJ6u0FrcCR1+EzRmvQvbvMm+We5A9eCphpYfQhETmtK5QYAN4iDFUMj7UQQtXWD4kH
-	 2UeUzDUuOaGPQ/KmW0lRkdRBRkUKp7eBTJMHJBdHIiD3/Vze/f1pNHktuO9c9dbfsdA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:Content-Transfer-Encoding:Content-Type:X-ClientProxiedBy:
+	 MIME-Version:X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=D0Scgz90qPg7RYr5xMXn/Pqx8g88ozFqMog+si7tWyg=;
+	b=ehvXz0tbQ2I1ISysXLdy4jHn83euiTCpHzdakG1LMIP+I/k5gJywjYsKMC/YQgxZYUka
+	 A5Hk+5ArJ+fLqp4HaVxaZyEz3fMr+KHf4Zd+CnGZd/d65L3GvfQ6YRuBfvSHpvXNjhS9Y
+	 qU2z6ANJ6TdsdVtjGAdukzDEuYOQ7B5Fh7OdKBleH36V9BaGLg0F6N3V7LOhP1O17pAO+
+	 B3cXzs5jY8Y91OzLjD0FnFqBPyjbukP6aBY1eLyjKFhoHae9oXhUqmRsfE6OIvHjLAJro
+	 6ib2oizPyUdtvqRaZysXNfWBCmLl/3vb/FkWoynxvdSkhI/IXNen2AnvGKpnE3VU/Xg==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793194583;
-	bh=QzUw852Uxk6wqtS8ynj6fqKSb9Yr8PLQ8nGdM632FOI=;
+	d=lists.u-boot-project.org; s=default; t=1793194584;
+	bh=D0Scgz90qPg7RYr5xMXn/Pqx8g88ozFqMog+si7tWyg=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=K7Yb3X2N8BxFqOTnReGcePQ+R1eEp0XSJTai03ri4koi2caVqoZaOmGuOTfnIzyQB
-	 HdSh3xWeV2vOhUVSA3l6yMl/Ljxi9Eb4j+qhiDytcA2xYVS1S9CMbcLA+Y1f1DUMY/
-	 1/YK61geuCCMzPESL6jZKEbHF0yDeqKTm60iiYXdMyJZH+9MYke88NTnqadwe7Ie6j
-	 qqnBzsmiHi8rbkvB9swhl6DpzdS+kMdAYWXOFEgUSkufoRxzDDp0u/e0UPNF1qGSw0
-	 p2ZLNL6/e5za7sAAbXMtQ3L4XB7//egPGNYatI0nYfXpp77h2I6ilQQqWjgaAAZFbv
-	 I5mvPaTDKu9lw==
+	b=P+1vruJxmvlJoKhOtcnRDNCUSmw5hS314Op+6jt79Spadh4NRzHuXlCoHwYlEpgGJ
+	 /CGH8JO6PG57MFOhTwltzvAp604ce26ux/pnqKxmrMZ8Eu0oNjthtNSRgymlZc7Pbe
+	 gfAkORYk7P2WSy0nTnrdJ0iyTFRVapGCFZktTUWt11iQAZc13oMUXsY1J1qTZBoQ5P
+	 P3gcCJxg+o6R/bnaCmFaV9ZFcncLDTWiRXW2Q5hobWkgEY2PNh1WkSYAYGrNCjwt11
+	 DvhOq2pw7ej8lunEQxTC0C8eF9VVHkOKbB2RTxjGUT4yPeyMoAZugXt5kXfdcATkg4
+	 HW3Q+fKisw19g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 06F0C80C81;
-	Wed, 28 Oct 2026 13:36:23 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 3E3DF972
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:05:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A22FE4057D;
+	Wed, 28 Oct 2026 13:36:24 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2849D4D1
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:42:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 24468401C8
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:05:12 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0E1214016B
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:42:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id h9HZcvYoUFEj for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 05:05:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 20F75400F5
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::122f"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793163911;
- b=HX80fUhp50mX3VExfqkfY9zPc4IRf8cdYTtVsF8vxAsn6/QXPisQfvSa3J7ThuTdyuux
- xW/df1WiH3Y7vT00GH02P7qmNZGkjeWE3USdZCDwwUlACs27YzX4wi/SbjevUsROaMhlX
- GdNqX8FjmNtNsA90IrOfIHCHOvMtwSNLzbfLiiZAvxv/PPgnU8l4rR4XmH1ZD33LpbLdJ
- UXQi0N8qNsZX7s1KpYXiU+mk3dQ4IWwkf0M0lbcXhOrXHHAHm+LIDa+Mlzqv1j+SgT5Wl
- 8mUlLIkcfqJdVasVO4E/EXIlKrC5foMrp6uRXNoK0Dyh2vIH5sK/Hw+4O+f0Ibl4Kgg==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793163911;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding;
- bh=QzUw852Uxk6wqtS8ynj6fqKSb9Yr8PLQ8nGdM632FOI=;
- b=XaV+GA0RHk2ziy6FU9Wa2rZ9O4+RJupQvrcUJiYOkA0gyvmg7O7dVSfCnCa5H5dXQ17X
- UMF5OtD7LzjzwrZGlD7SjDZcCX7Tj9HCNpurT8zf+HJ/L8Jat+lK+qKgn1/hTrGb/zEG7
- 8C9HTZlsJqXE0aCRQMaHsyiAE+98MN2FCpPevZWxuHc8LbZk9vyixC/++ASgiTIRKqJJz
- z1SLSv6vuqN+MAGS1bqSAv9jcjjW5DsQ+eWhfQilGZggd1LhBhZ7HUVyxxQ96nKekl8U2
- hXePskeggo6VAtKDaCKEatG09klX8PuiqIlVppfkqlrjf82FCZ6LNiKZ6iht9IMk5HQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=kbHqeNOj; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::122f"
+ id HE6WczFDh7Jx for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 05:42:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 14C644006F
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c406::3"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793166128;
+ b=ooW5mjD6uZTCO97Mkec6Nm6YgN1AeoqnVX+5R5hDbepl+BAzbBMuLl9/svqF1GcAeuJF
+ lO3+0vC7S+b4zlKOjEXiMxvIiN8U2kUMDZGYRehdT4ITc66JVZwz/sZWs/xJVe2wKXohb
+ SzPOwLqe+hM2FPE/t/sT3EuCCBbC+o36S2w1qcDaehXQSZlPvvTUJ71ghlDBqypkbYuzK
+ r1rh/FIOhRXee3NldvQq1dlfWm8DXVE2O+R/8Y3RP592lI/9otvmFIQ173fA5COstAqWY
+ hS+ozH5uLqlu1N1Q2s0SdL8K4XhhweGEwAW+Yqm/Sp78vSM5uwQKijFAuCrZVaXDVkA==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793166128;
+ h=Received-SPF:DKIM-Signature:Received:Received:From:To:Cc:Subject:
+ Date:Message-ID:X-Mailer:Content-Transfer-Encoding:Content-Type:
+ X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
+ X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+ X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+ X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+ X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+ X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+ X-MS-Exchange-CrossTenant-UserPrincipalName:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+ bh=D0Scgz90qPg7RYr5xMXn/Pqx8g88ozFqMog+si7tWyg=;
+ b=rWoznZ2fcPZ/rvHBWP4Qn7HPYOi7PikgqrDIER9aSqCuQb0R//NZ7jumD6G5+mwjNqdM
+ /lT4XcOwV4fznDDT2fPlES8haqwbfaCJP5vf0sP4X0vp9KDydBXglNxhNcS/ZNUvO3NbK
+ 0JvmAnvYMdYrfjMH8PrbmqsIP+xV205S5nSrYU61ytNG0f64bPwVkLKH+vuhuwpuntixH
+ cV9s9MSVgzkciY3ccgTPib2oTMOZVwk574vbgU6WuC9CfFFoX1Rxh7b825ZJ8O5JAbmwn
+ CW3DrF5ST9jhDeJG126kqLgQCRS9d+1JH9CBbSbz7HduM+h1Vj/+0VcQ2HGQY4Ar4Vg==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
+ dmarc=pass header.from=processmission.com;
+ dkim=pass header.d=processmission.com header.i=@processmission.com
+ header.a=rsa-sha256 header.s=selector1 header.b=fXTtqV7V; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c406::3"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::122f; helo=mail-dl1-x122f.google.com;
- envelope-from=nguyenanhgiau1008@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=kbHqeNOj
-Received: from mail-dl1-x122f.google.com (mail-dl1-x122f.google.com
- [IPv6:2607:f8b0:4864:20::122f])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 20F75400F5
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:05:10 +0000 (UTC)
-Received: by mail-dl1-x122f.google.com with SMTP id
- a92af1059eb24-170135e43c7so796493c88.0
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 22:05:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793163910; x=1793768710;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=QzUw852Uxk6wqtS8ynj6fqKSb9Yr8PLQ8nGdM632FOI=;
- b=kbHqeNOjr/zrGFmZjq6aClwgyTp/SR6K2kGrk2izx1+9/t6bkbIGkg77UGICQ6zTSl
- 3KeGs/od7T3oEN1oDVcQEQVcNLLqWxnmIc9RPnJPQpcex8TgPb+DLAbh3h6sXTNKo46F
- XENa8rH8obYB1w9blbfXctuq61eYDYAacq5s452tJZUoAlDa3uVZg/i15pZUxVbFsX+i
- 1MTeA58j/TP4nTM4NqTINmoz5n58z4r3gr3smdqMRkk3VvKoJiAaLxQdZhd0lha609kn
- i3MPimCEPdzin+MwnpWbUXuTGJDN53xEPkSPesrXw2OQCdliotOOnaqGZN7laxAKdScs
- 50aQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793163910; x=1793768710;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=QzUw852Uxk6wqtS8ynj6fqKSb9Yr8PLQ8nGdM632FOI=;
- b=QGJeR7qvTpdH3QlXZ9Q8J/JfEAQLs9t8/ZKfM58wLd6ls14Hh16sZpJ9gAOv7z0wLT
- hY5rBrEdM84CjwzQDWyCJ5J3ymYA1eZPsy3VLaFoX9BjE6SA5B4WZVMb6KeEL2drzHM2
- Dt5AfwWGPJvcggt1NuVTbniHD1RSmmQjeGjrdjNxIyVVAhzQjyov4ra66tK5qqZSV5+K
- BV5kmaG95r68KYvGWHx1NnIs2fR1ZC9oW2vLCDYSRUBsiFyjF3sVmHkb/SJNig7Ilk24
- NKXZv7sWgtdZiX8vX3UW6Cc8V+Xb8lOEWHNjCh26E7iNAn1EXoP/zuf1B26geaHpuRAe
- FtKQ==
-X-Gm-Message-State: AFq9FYJPi/Ee+KfEFO9BsTetE4R/8a4ZHcQjk+4gTuKW/QyRxsuih8di
- xQHmdo/z4yZiag5FHrgcctmH/KWlICtqgtbm1Ex1aqwqopl9XZLkDuG2aUxoP+mLqQg=
-X-Gm-Gg: AYBFou1E8s6dQUNu3zPKgEX3+/Wf8a6bCko0hsEqJY2inl8PaF1g7FEyuvCoKyG3iRR
- Nmd3oPExRmvOrs91qs2pR0OQ56YkzJ8RyPAGlkXNzOcOZJP4jIeQLShdJnCVdq2fFYUIk5+m9V+
- Nk24laV3ZD7nUiQMAgo1V//A7x/C0hk1MZi1uO87FR3ev5Yf3DyYg6OTrI3tUzy20leimtjyLIy
- HwoqLzcxsuy7HjudLmc8Cs/iksPdisNBP0EHhSa3I8ikakkztLP7r+dOxmUEseEoQbmbHfUsQAb
- y272S/OBo+/tfYwNI55ltPHEtf3dhwuIaLZHH5b2bgzpk6TreEc35nSmBUVHaB44b0msJjorWvj
- JzxFi2rEASX6pWwWNhucNucAt6BKwhVi6qaw1uOYhNbxYVQN4eqkSO+viz9l5o00W1q96Rt/iAD
- X0uMdsxM3SQLaYE5PWGc/F3/Mdzeg9n87uRRwibxOPLlxBLnHbw6ZwJpyZB2nxG1wJc/yy4Altg
- miVQBD8yDCGBa0eLI1qTfAR6pz+NL+Lst63rJjVDIsfTnwuEwOoXCCoJIh87FqCwwKyN+grU4ey
- xRP7kDg7zChDFh05g9L7+G07YQZwE23xL1lBvAtHxI+Eo67wMAMyh9oHsKIW
-X-Received: by 2002:a05:7022:ff41:b0:19c:dd9b:d09e with SMTP id
- a92af1059eb24-1a6cced508dmr2516617c88.23.1793163909797; 
- Tue, 27 Oct 2026 22:05:09 -0700 (PDT)
-Received: from R3700x.lan ([2405:4803:217b:bca0:5d93:2973:6540:69d1])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1a75f7fb28csm2437149c88.18.2026.10.27.22.05.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Oct 2026 22:05:09 -0700 (PDT)
-From: Giau Nguyen <nguyenanhgiau1008@gmail.com>
-To: u-boot@lists.u-boot-project.org
-Cc: hs@nabladev.com, mbrugger@suse.com, pbrobinson@gmail.com,
- trini@konsulko.com, Giau Nguyen <nguyenanhgiau1008@gmail.com>
-Subject: [PATCH] i2c: bcm283x: Refactor driver to support BCM2711 (Raspberry
- Pi 4)
-Date: Wed, 28 Oct 2026 12:04:41 +0700
-Message-Id: <20261028050441.380764-1-nguyenanhgiau1008@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ client-ip=2a01:111:f403:c406::3;
+ helo=os8pr02cu002.outbound.protection.outlook.com;
+ envelope-from=bin.meng@processmission.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=processmission.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=processmission.com header.i=@processmission.com
+ header.a=rsa-sha256 header.s=selector1 header.b=fXTtqV7V
+Received: from OS8PR02CU002.outbound.protection.outlook.com
+ (mail-japanwestazlp170120003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c406::3])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 14C644006F
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:42:07 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SWf1tkFPhZrQUU/Mu52au8wWo9fnSXuGndGz5uC4vKw3NsX8swUUStp0gscR40YF1u7SdHmMGVKy7FMVtUbYko9GTMsrhxc4s8DIBEKKr4EsC4Ig6LVIwyS75Se3bpYgU6ZFebjXq8e9d2CU47IH+qbPxzs9I+DnKHBoiK36udDdhBFSRFR616rWI94K+LkZh85nSwTC/7ws1Rgc82U5NNn8xTCUoke6Z9LOkDE8kqrQpBD0ei6p0QJJWvfsM0hUobZGtx5moPw0CvVTu+yLjQ6zT8rQNCcOJv4CmBElqE1/0mWZmRbcQMX4PxJFxgjb/H0pRb0MWqzYRziz/EThnw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=D0Scgz90qPg7RYr5xMXn/Pqx8g88ozFqMog+si7tWyg=;
+ b=H4hA450efBDI4gwvp5jc3pgNnoKBF37NKULWHyUvJXnWL/fFxQ25CM/H5ro+2EvOXjHzCIDwhmLKvrk8k8snmIE6BvvbndMW43bSCIb6g9ZwhzWnTdu0FjNP1I0zFUe56RHAGRgKvbLaF+Ki1Qad0YLD9qDvLtpRthHb6IjnW3fCktHC7GWl+3OuZor4q/sohEin4uNE4q08C7W7/vME4CIihuEl/SwtOSQOtDC74Wt+MDUAcliycRXy54x7KzguyN7oEnXyrP4dyiJQ11s8Krx8+ZmiRRHPnaSbJ8L8PxM8QDhxwSPtVmNbFH95O2WVDO3oLJ+CJiGY4ISVz0vLSw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=processmission.com; dmarc=pass action=none
+ header.from=processmission.com; dkim=pass header.d=processmission.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=D0Scgz90qPg7RYr5xMXn/Pqx8g88ozFqMog+si7tWyg=;
+ b=fXTtqV7VlvNaSn9hpsR8rHcPCpKr4dvzsEoxYBXPdGUrMZKtGvFCvbgyPL/cKu5d/Aq6gGSXwH7ygVubJLDRv1qhjVcSlj+KjuMahKosgRaXjXBl64HibRZHCzSe2lddxaeAZygRSPVB+2R+0ZdqzD9mypDYycY9jFOlp+LX57OdSDJDy4UYJrGYgsGp61zXE7oob+qV6+kgVq5hNQVfX3+29iMX6B2ZZeDCzfnOx1G7g5nHXvb92n1PkLpiorK+D8NBwkHeRr7DfHxe7yCE+uDMOLbBpANbXw3YEHUY8tiGHs/j48EAO8s4QzqmP8KCh5N8Lpy+jLfLlEuPMxlb+w==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=processmission.com;
+Received: from KL1PR02MB6257.apcprd02.prod.outlook.com (2603:1096:820:da::11)
+ by SEZPR02MB7537.apcprd02.prod.outlook.com (2603:1096:101:1f7::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Wed, 28 Oct
+ 2026 05:42:01 +0000
+Received: from KL1PR02MB6257.apcprd02.prod.outlook.com
+ ([fe80::ecf9:e832:8196:215]) by KL1PR02MB6257.apcprd02.prod.outlook.com
+ ([fe80::ecf9:e832:8196:215%6]) with mapi id 15.21.0546.021; Wed, 28 Oct 2026
+ 05:42:00 +0000
+From: Bin Meng <bin.meng@processmission.com>
+To: U-Boot Mailing List <u-boot@lists.u-boot-project.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Johannes Krottmayer <krotti83@proton.me>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Marek Vasut <marex@nabladev.com>,
+ Michal Simek <michal.simek@amd.com>, QEMU <qemu-devel@nongnu.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Yao Zi <me@ziyao.cc>
+Subject: [PATCH v3 1/2] qemu: arm: Rename QEMU arm* defconfig files
+Date: Wed, 28 Oct 2026 13:41:38 +0800
+Message-ID: <20261028054141.2933271-1-bin.meng@processmission.com>
+X-Mailer: git-send-email 2.53.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TYCPR01CA0136.jpnprd01.prod.outlook.com
+ (2603:1096:400:2b7::6) To KL1PR02MB6257.apcprd02.prod.outlook.com
+ (2603:1096:820:da::11)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: KL1PR02MB6257:EE_|SEZPR02MB7537:EE_
+X-MS-Office365-Filtering-Correlation-Id: 846433e0-e979-4f3d-2fc2-08df34b62fac
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|23010399003|1800799024|7416014|376014|6133799003|18002099003|261026140227099003|13003099007|3023799007|261021123027099003|261021121427099003|10067099003|261022105027099003|261009223027099003|261026121527099003|56012099006;
+X-Microsoft-Antispam-Message-Info: dmzY6alr9W3QegnNTZhMrojA8D1Ffq2q6tL3iMvaz0rLkjciqb9ghVuJ4gDuUeZzdQLqoghrCiFajZGJTH2RIJRD+50Si/CfHPKv8DovIhBqb4PPzMN9Gp7IXBNuEd6A2guaczX1FZIxrXIpkosiHZVLPjZMmqArzViCd8L1h8OfhTSQytgs8q5o2c9I2A1T0miO72Wqoo6vaN2CB8D+LmpD8k4fUIfhh4ap1nG1M7NPvCa3byWYZVZ3JFticvtzTHkFpA5yJi0uXxWjMd4A/SwXGr3PL7wYU3zVt68mZw267QnqZi5O4+y9CP5aRTd4OqFfFbE/7punTLvfLcLekFHSkDqiF0RXkfHIJkBiXHgn84O1QNS/SxuVeH2Z0pyEKiDdVnr3L8XF9QhtmghOqu0UMhZI6+SA+cHlQMYWJqhzM7hovFgxtIQR3V9DQWCjLuVv+eUdzigus+yJdNsVycZ2XBRXIcIlKLvyH5z1KO7KmeWyAQRt3alGmtXVH+BdBpS4vI+A/Voq2CgRF7rb9ktEp9ev/WgsHGvs3x3lItskZfD6CSLE5Q4L+AwWZVZ2zTUFy2tvmWSV8CoAjH9b92OHkwtiL02rB0cVN7Z8zc+LxWU2pofBtYCI73t1T78r
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:KL1PR02MB6257.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(23010399003)(1800799024)(7416014)(376014)(6133799003)(18002099003)(261026140227099003)(13003099007)(3023799007)(261021123027099003)(261021121427099003)(10067099003)(261022105027099003)(261009223027099003)(261026121527099003)(56012099006);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?EhpiH5Kww7uwxJR5u8Ni8fNf+4BK0Wy3uFrUtFklA1jHrfExiufKo+zCCEWI?=
+ =?us-ascii?Q?k4YO/3tNW79MG9ka9rm6HzR4jeyWxZT3Nit5daneu7StSXGdjsPJdOF2PC/X?=
+ =?us-ascii?Q?FCaR13ZkJ/bA0pUZ2VLBWSIGSD+l+CKf4n695EEFWoHp0Z0PELyXIy2T0ztl?=
+ =?us-ascii?Q?CTqhe/+e+lQ0d7gq0CLYFdO2v2fSwinrmkkgS095cJpKKALS+5wMi6WTBeoZ?=
+ =?us-ascii?Q?kJNZMXKkCLFPis+U71AtF6loqrL1FzHJHzG8Lm5S6tpzKnTbn+E0jQztmDGm?=
+ =?us-ascii?Q?fLiSt4iEGWFW1lgS6Z/UJWVZIbTGw0ACZhb68RON7n1cqRcdt5mZZ4yEUJxQ?=
+ =?us-ascii?Q?U691xbNCgm2GkiA8g07t30AWhVvu7Ja9y3McgRT4EiP31h5xl2eOlvtmWCC6?=
+ =?us-ascii?Q?urYqw6TzQmTcB8fcXo1iz3jNtmHnlqi2bliac0CIJCvJnSH3gxUduX02YHvX?=
+ =?us-ascii?Q?GsCWJxP6rudRRIDW9X0qySrwneCZ9tgyde92KtIc0TiqvEZGSfClbbeQm6u6?=
+ =?us-ascii?Q?VG/wCQ9t0p9EUgDutZoKbW2ExlTI801eoTFovtWbWe2yDPK2k9LXKiPrMaRo?=
+ =?us-ascii?Q?E6jJfyT4FhUX18voSO0O6kUlpdzDYwulpIvM8mclfnX8YwLoLRjtVVcakC5J?=
+ =?us-ascii?Q?K2JqcCZRgGeOxGzZuG215DYBgFSmpBmVomyzMAPVrH9oHjWh4sDMuvO5O5pM?=
+ =?us-ascii?Q?s6CPsmPWJr5icNcH30hBeeSkSxaHjtIhBh4E/3T/5kNilnxDCVyFFDIV9BaA?=
+ =?us-ascii?Q?7NRpEKVPkCwV+8cG93BjdGksP/GwKm/azAI07XwvEaIXQpisq/keCCAG/ior?=
+ =?us-ascii?Q?CHLgg4jtDmICLWDohPwh2hdHMd99usN9am4t9KTugyG1Nl1XSBidZyr73Qsi?=
+ =?us-ascii?Q?AY7BKfgWbQwtJLJ1KvNFwGzprSVU7CtRpEKEvqehAuP0/UDXl7/4Qrb65Cb1?=
+ =?us-ascii?Q?azmhfYIC0Cu1r2m2O2whDEnA/MxxYb0vw9AdZo3VxM8SDqsEvrqP7ErhJBfr?=
+ =?us-ascii?Q?BDPFluEqP2ALQ9zog/w0iCTLaDaj9L8GPm2PL+/fGHRF0mq3kOecx9mRaB9Y?=
+ =?us-ascii?Q?DzqA9SSwc0iOMqchidj0ojim/KOnMmAVYl8FPiSetZBs4+TI0+5ndmESmbwx?=
+ =?us-ascii?Q?03tRz14rzap1RPCeHoDXir3nmLBHIgYzBUhsh+aonbLDmWrFYYL1KV7EGFTI?=
+ =?us-ascii?Q?0H3Ov+IHlPGulndiMnU7c3C+ZUZPpp73BXlzmsncgXg2mGUWA26NUVQXJpsE?=
+ =?us-ascii?Q?Xt1Szl+HvIgCNoJJRCYK0cixdS2iDuzxK2NvNrEh77JIvo0Gy5yo7TxXPvDq?=
+ =?us-ascii?Q?bgJHDq7zT4DeQ4zFKx2L2BTKSYp4ki5/GaIc1in3ztksju9FRXqj74WjgG/1?=
+ =?us-ascii?Q?514s/04JQTwUBEPpzvD1yKkJ9pvIZwurts7gbpv9a/nckfu/kPVj+ddrcDdR?=
+ =?us-ascii?Q?1xJlzdC5XCvVh5RC91CxwdKF7AWE4PrJTzIhcw68UC4vg//sBB9/vK2+QNQk?=
+ =?us-ascii?Q?DTLV530iHcKrMN1kcr3gXT6M3fx/VKDQuYGsSKVQrQF/QHN7mPqyDXVuIwAn?=
+ =?us-ascii?Q?OODdJExSzwKDqEeY3hmSNHsoMJzOEb9glsQZaw2g2rqS85dySL0hHiIKSnZT?=
+ =?us-ascii?Q?uqkpCb8MQEfxlWvtnmX9rnPwa9OZiyIbN6965TT+zzuOW52z/csBl8bD2Knb?=
+ =?us-ascii?Q?xoTIpc1l5ujg4bYM5x8Uw2lhWhMq/mhTASj50bETtvwCQXIqBA0hwU+wIdML?=
+ =?us-ascii?Q?WI1Ittk55uPcGnfacPqGVYxMfZ7jSPs=3D?=
+X-OriginatorOrg: processmission.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 846433e0-e979-4f3d-2fc2-08df34b62fac
+X-MS-Exchange-CrossTenant-AuthSource: KL1PR02MB6257.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2026 05:42:00.1379 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: OlZrTzXOKoVD1reVUOrdYjGb3tryw1gou7vb+ODvpUmVPZWzX/Mq8SFweSSOYrr4aLVn1cKFa0h7B5PG8i2GJ26M5Izdkkp4eB1qZtLyE/o=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR02MB7537
 X-Mailman-Approved-At: Wed, 28 Oct 2026 13:36:21 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -171,496 +245,338 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The existing bcm283x I2C driver relies on a hardcoded clock rate
-which breaks I2C communication on the BCM2711 (Raspberry Pi 4),
-where the VPU core clock is dynamically scaled by the firmware.
+From: Bin Meng <bmeng.cn@gmail.com>
 
-This patch completely refactors the driver (based on Linux kernel's
-i2c-bcm2835.c) to bring it up to standard:
-- Queries the actual core clock via BCM2835 Mailbox property tags.
-- Calculates the CDIV divider dynamically based on the firmware clock.
-- Adds the "brcm,bcm2711-i2c" compatible string.
-- Improves FIFO drain/fill and hardware timeout polling.
+Other QEMU defconfig files use a hyphen between "qemu" and the
+architecture name, but ARM uses an underscore. Rename the ARM
+defconfigs for consistency.
 
-Signed-off-by: Giau Nguyen <nguyenanhgiau1008@gmail.com>
+Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Bin Meng <bin.meng@processmission.com>
 ---
- MAINTAINERS               |   1 +
- drivers/i2c/Kconfig       |  10 +
- drivers/i2c/Makefile      |   1 +
- drivers/i2c/i2c-bcm2835.c | 411 ++++++++++++++++++++++++++++++++++++++
- 4 files changed, 423 insertions(+)
- create mode 100644 drivers/i2c/i2c-bcm2835.c
 
+Changes in v3:
+- Rebase on current mainline and keep the removed ARM devicetree deleted
+
+Changes in v2:
+- Add missing Azure and GitLab CI changes
+
+ .azure-pipelines.yml                          | 24 +++++++++----------
+ .gitlab-ci.yml                                | 24 +++++++++----------
+ MAINTAINERS                                   |  2 +-
+ arch/arm/dts/qemu-arm64.dts                   |  2 +-
+ board/emulation/qemu-arm/MAINTAINERS          |  2 +-
+ ...pi_defconfig => qemu-arm64_acpi_defconfig} |  2 +-
+ ...u_arm64_defconfig => qemu-arm64_defconfig} |  0
+ ...ip_defconfig => qemu-arm64_lwip_defconfig} |  2 +-
+ ...{qemu_arm_defconfig => qemu-arm_defconfig} |  0
+ doc/board/emulation/qemu-arm.rst              |  8 +++----
+ doc/develop/driver-model/virtio.rst           |  6 ++---
+ doc/develop/uefi/uefi.rst                     |  2 +-
+ tools/docker/Dockerfile                       |  8 +++----
+ 13 files changed, 41 insertions(+), 41 deletions(-)
+ rename configs/{qemu_arm64_acpi_defconfig => qemu-arm64_acpi_defconfig} (54%)
+ rename configs/{qemu_arm64_defconfig => qemu-arm64_defconfig} (100%)
+ rename configs/{qemu_arm64_lwip_defconfig => qemu-arm64_lwip_defconfig} (83%)
+ rename configs/{qemu_arm_defconfig => qemu-arm_defconfig} (100%)
+
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index 556828f42fe..071fcae104f 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -253,9 +253,9 @@ stages:
+           cd \${WORK_DIR}
+           git config --global --add safe.directory \${WORK_DIR}
+           git clone --depth=1 https://git.u-boot-project.org/u-boot/u-boot-test-hooks /tmp/uboot-test-hooks
+-          # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with NET_LWIP enabled.
+-          # The test config and the boardenv file from qemu_arm64 can be re-used so create symlinks
+-          ln -s conf.qemu_arm64 /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
++          # qemu-arm64_lwip_defconfig is the same as qemu-arm64 but with NET_LWIP enabled
++          # The test config and the boardenv file from qemu-arm64 can be re-used so create symlinks
++          ln -s conf.qemu-arm64 /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu-arm64_lwip_na
+           ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
+           ln -s travis-ci /tmp/uboot-test-hooks/bin/\`hostname\`
+           ln -s travis-ci /tmp/uboot-test-hooks/py/\`hostname\`
+@@ -474,21 +474,21 @@ stages:
+           TEST_PY_BD: "integratorcp_cm926ejs"
+           TEST_PY_ID: "--id qemu"
+           TEST_PY_TEST_SPEC: "not sleep"
+-        qemu_arm:
+-          TEST_PY_BD: "qemu_arm"
++        qemu-arm:
++          TEST_PY_BD: "qemu-arm"
+           TEST_PY_TEST_SPEC: "not sleep"
+-        qemu_arm64:
+-          TEST_PY_BD: "qemu_arm64"
++        qemu-arm64:
++          TEST_PY_BD: "qemu-arm64"
+           TEST_PY_TEST_SPEC: "not sleep"
+           OVERRIDE: "-a CONFIG_SEMIHOSTING=y"
+-        qemu_arm64_lwip:
+-          TEST_PY_BD: "qemu_arm64_lwip"
++        qemu-arm64_lwip:
++          TEST_PY_BD: "qemu-arm64_lwip"
+           TEST_PY_TEST_SPEC: "test_net_dhcp or test_net_ping or test_net_tftpboot"
+-        qemu_arm64_tfa_fw_handoff:
+-          TEST_PY_BD: "qemu_arm64"
++        qemu-arm64_tfa_fw_handoff:
++          TEST_PY_BD: "qemu-arm64"
+           TEST_PY_ID: "--id fw_handoff_tfa_optee"
+           TEST_PY_TEST_SPEC: "test_fw_handoff"
+-        qemu_arm_sbsa_ref:
++        qemu-arm_sbsa_ref:
+           TEST_PY_BD: "qemu-arm-sbsa"
+           TEST_PY_TEST_SPEC: "not sleep"
+         qemu_m68k:
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 0338f20b8a2..905523e3e27 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -37,9 +37,9 @@ stages:
+     # Clone uboot-test-hooks
+     - git config --global --add safe.directory "${CI_PROJECT_DIR}"
+     - git clone --depth=1 https://git.u-boot-project.org/u-boot/u-boot-test-hooks /tmp/uboot-test-hooks
+-    # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with NET_LWIP enabled.
+-    # The test config and the boardenv file from qemu_arm64 can be re-used so create symlinks
+-    - ln -s conf.qemu_arm64 /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
++    # qemu-arm64_lwip_defconfig is the same as qemu-arm64 but with NET_LWIP enabled
++    # The test config and the boardenv file from qemu-arm64 can be re-used so create symlinks
++    - ln -s conf.qemu-arm64 /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu-arm64_lwip_na
+     - ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
+     - ln -s travis-ci /tmp/uboot-test-hooks/bin/`hostname`
+     - ln -s travis-ci /tmp/uboot-test-hooks/py/`hostname`
+@@ -386,33 +386,33 @@ integratorcp_cm926ejs test.py:
+     TEST_PY_ID: "--id qemu"
+   <<: *buildman_and_testpy_dfn
+ 
+-qemu_arm test.py:
++qemu-arm test.py:
+   variables:
+-    TEST_PY_BD: "qemu_arm"
++    TEST_PY_BD: "qemu-arm"
+     TEST_PY_TEST_SPEC: "not sleep"
+   <<: *buildman_and_testpy_dfn
+ 
+-qemu_arm64 test.py:
++qemu-arm64 test.py:
+   variables:
+-    TEST_PY_BD: "qemu_arm64"
++    TEST_PY_BD: "qemu-arm64"
+     TEST_PY_TEST_SPEC: "not sleep"
+     OVERRIDE: "-a CONFIG_SEMIHOSTING=y"
+   <<: *buildman_and_testpy_dfn
+ 
+-qemu_arm64_lwip test.py:
++qemu-arm64_lwip test.py:
+   variables:
+-    TEST_PY_BD: "qemu_arm64_lwip"
++    TEST_PY_BD: "qemu-arm64_lwip"
+     TEST_PY_TEST_SPEC: "test_net_dhcp or test_net_ping or test_net_tftpboot"
+   <<: *buildman_and_testpy_dfn
+ 
+-qemu_arm64_tfa_fw_handoff test.py:
++qemu-arm64_tfa_fw_handoff test.py:
+   variables:
+-    TEST_PY_BD: "qemu_arm64"
++    TEST_PY_BD: "qemu-arm64"
+     TEST_PY_ID: "--id fw_handoff_tfa_optee"
+     TEST_PY_TEST_SPEC: "test_fw_handoff"
+   <<: *buildman_and_testpy_dfn
+ 
+-qemu_arm_sbsa test.py:
++qemu-arm_sbsa test.py:
+   variables:
+     TEST_PY_BD: "qemu-arm-sbsa"
+     TEST_PY_TEST_SPEC: "not sleep"
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 8c6c0c2a4bc..3260024a736 100644
+index d273603ac64..96203466579 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -215,6 +215,7 @@ F:	arch/arm/dts/bcm283*
- F:	arch/arm/mach-bcm283x/
- F:	board/raspberrypi/
- F:	drivers/gpio/bcm2835_gpio.c
-+F:	drivers/i2c/i2c-bcm2835.c
- F:	drivers/mmc/bcm2835_sdhci.c
- F:	drivers/mmc/bcm2835_sdhost.c
- F:	drivers/serial/serial_bcm283x_mu.c
-diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
-index 52067fa7c1f..19bd60ecdac 100644
---- a/drivers/i2c/Kconfig
-+++ b/drivers/i2c/Kconfig
-@@ -782,6 +782,16 @@ config SYS_I2C_XILINX_XIIC
- 	help
- 	  Support for Xilinx AXI I2C controller.
+@@ -1330,7 +1330,7 @@ M:	Jerome Forissier <jerome.forissier@arm.com>
+ S:	Maintained
+ T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-net.git
+ F:	cmd/lwip/
+-F:	configs/qemu_arm64_lwip_defconfig
++F:	configs/qemu-arm64_lwip_defconfig
+ F:	include/net-lwip.h
+ F:	lib/lwip/Makefile
+ F:	lib/lwip/u-boot/
+diff --git a/arch/arm/dts/qemu-arm64.dts b/arch/arm/dts/qemu-arm64.dts
+index 95fcf53ed74..382d131f47f 100644
+--- a/arch/arm/dts/qemu-arm64.dts
++++ b/arch/arm/dts/qemu-arm64.dts
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+ OR MIT
+ /*
+- * Empty device tree for qemu_arm64
++ * Empty device tree for qemu-arm64
  
-+config SYS_I2C_BCM2835
-+	bool "BCM2835 I2C controller"
-+	depends on DM_I2C
-+	help
-+	  Enable support for the Broadcom BCM2835/BCM2711 I2C controller.
-+	  This driver provides standard I2C support for Raspberry Pi
-+	  devices, including the newer Raspberry Pi 4. It dynamically
-+	  calculates the clock divider based on the VPU core clock
-+	  queried via the firmware mailbox.
-+
- config SYS_I2C_IHS
-         bool "gdsys IHS I2C driver"
-         depends on DM_I2C
-diff --git a/drivers/i2c/Makefile b/drivers/i2c/Makefile
-index bebd728e7da..e2c252cf16c 100644
---- a/drivers/i2c/Makefile
-+++ b/drivers/i2c/Makefile
-@@ -55,6 +55,7 @@ obj-$(CONFIG_SYS_I2C_UNIPHIER) += i2c-uniphier.o
- obj-$(CONFIG_SYS_I2C_UNIPHIER_F) += i2c-uniphier-f.o
- obj-$(CONFIG_SYS_I2C_VERSATILE) += i2c-versatile.o
- obj-$(CONFIG_SYS_I2C_XILINX_XIIC) += xilinx_xiic.o
-+obj-$(CONFIG_SYS_I2C_BCM2835) += i2c-bcm2835.o
- obj-$(CONFIG_TEGRA186_BPMP_I2C) += tegra186_bpmp_i2c.o
+  * Copyright 2021 Google LLC
+  */
+diff --git a/board/emulation/qemu-arm/MAINTAINERS b/board/emulation/qemu-arm/MAINTAINERS
+index 538769f8040..b2b1fce75cf 100644
+--- a/board/emulation/qemu-arm/MAINTAINERS
++++ b/board/emulation/qemu-arm/MAINTAINERS
+@@ -5,5 +5,5 @@ F:	board/emulation/qemu-arm/
+ F:	board/emulation/common/
+ F:	include/configs/qemu-arm.h
+ F:	include/configs/qemu-sbsa.h
+-F:	configs/qemu_arm*
++F:	configs/qemu-arm*
+ F:	configs/qemu-arm-sbsa_defconfig
+diff --git a/configs/qemu_arm64_acpi_defconfig b/configs/qemu-arm64_acpi_defconfig
+similarity index 54%
+rename from configs/qemu_arm64_acpi_defconfig
+rename to configs/qemu-arm64_acpi_defconfig
+index f85f2913530..ef4c9f156c5 100644
+--- a/configs/qemu_arm64_acpi_defconfig
++++ b/configs/qemu-arm64_acpi_defconfig
+@@ -1,2 +1,2 @@
+-#include <configs/qemu_arm64_defconfig>
++#include <configs/qemu-arm64_defconfig>
+ #include <board/emulation/configs/acpi.config>
+diff --git a/configs/qemu_arm64_defconfig b/configs/qemu-arm64_defconfig
+similarity index 100%
+rename from configs/qemu_arm64_defconfig
+rename to configs/qemu-arm64_defconfig
+diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu-arm64_lwip_defconfig
+similarity index 83%
+rename from configs/qemu_arm64_lwip_defconfig
+rename to configs/qemu-arm64_lwip_defconfig
+index 06ed5a131db..5b1ddb2af03 100644
+--- a/configs/qemu_arm64_lwip_defconfig
++++ b/configs/qemu-arm64_lwip_defconfig
+@@ -1,4 +1,4 @@
+-#include <configs/qemu_arm64_defconfig>
++#include <configs/qemu-arm64_defconfig>
  
- obj-$(CONFIG_$(XPL_)I2C_MUX) += muxes/
-diff --git a/drivers/i2c/i2c-bcm2835.c b/drivers/i2c/i2c-bcm2835.c
-new file mode 100644
-index 00000000000..93d19cb8e5a
---- /dev/null
-+++ b/drivers/i2c/i2c-bcm2835.c
-@@ -0,0 +1,411 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * BCM2835 I2C controller driver
-+ * (C) Copyright 2026
-+ *
-+ * Author: Giau Nguyen <nguyenanhgiau1008@gmail.com>
-+ * Based on Linux driver: drivers/i2c/busses/i2c-bcm2835.c
-+ * Assisted by AI
-+ */
-+
-+#include <log.h>
-+#include <asm/io.h>
-+#include <asm/arch/mbox.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <i2c.h>
-+#include <memalign.h>
-+#include <time.h>
-+#include <linux/bitops.h>
-+#include <linux/delay.h>
-+#include <linux/err.h>
-+#include <linux/types.h>
-+
-+#define BCM2835_I2C_C		0x0
-+#define BCM2835_I2C_S		0x4
-+#define BCM2835_I2C_DLEN	0x8
-+#define BCM2835_I2C_A		0xc
-+#define BCM2835_I2C_FIFO	0x10
-+#define BCM2835_I2C_DIV		0x14
-+#define BCM2835_I2C_DEL		0x18
-+/*
-+ * 16-bit field for the number of SCL cycles to wait after rising SCL
-+ * before deciding the slave is not responding. 0 disables the
-+ * timeout detection.
-+ */
-+#define BCM2835_I2C_CLKT	0x1c
-+
-+#define BCM2835_I2C_C_READ	BIT(0)
-+#define BCM2835_I2C_C_CLEAR	BIT(4) /* bits 4 and 5 both clear */
-+#define BCM2835_I2C_C_ST	BIT(7)
-+#define BCM2835_I2C_C_INTD	BIT(8)
-+#define BCM2835_I2C_C_INTT	BIT(9)
-+#define BCM2835_I2C_C_INTR	BIT(10)
-+#define BCM2835_I2C_C_I2CEN	BIT(15)
-+
-+#define BCM2835_I2C_S_TA	BIT(0)
-+#define BCM2835_I2C_S_DONE	BIT(1)
-+#define BCM2835_I2C_S_TXW	BIT(2)
-+#define BCM2835_I2C_S_RXR	BIT(3)
-+#define BCM2835_I2C_S_TXD	BIT(4)
-+#define BCM2835_I2C_S_RXD	BIT(5)
-+#define BCM2835_I2C_S_TXE	BIT(6)
-+#define BCM2835_I2C_S_RXF	BIT(7)
-+#define BCM2835_I2C_S_ERR	BIT(8)
-+#define BCM2835_I2C_S_CLKT	BIT(9)
-+#define BCM2835_I2C_S_LEN	BIT(10) /* Fake bit for SW error reporting */
-+
-+#define BCM2835_I2C_FEDL_SHIFT	16
-+#define BCM2835_I2C_REDL_SHIFT	0
-+
-+#define BCM2835_I2C_CDIV_MIN	0x0002
-+#define BCM2835_I2C_CDIV_MAX	0xFFFE
-+
-+#define BCM2835_I2C_CLKT_TOUT_MS 35
-+#define BCM2835_I2C_XFER_TIMEOUT_MS 1000
-+
-+struct bcm2835_i2c_priv {
-+	void __iomem *regs;
-+	ulong input_rate;
-+	size_t msg_buf_remaining;
-+	u8 *msg_buf;
-+	struct i2c_msg *curr_msg;
-+	int msg_err;
-+	int num_msgs;
-+};
-+
-+struct bcm2835_i2c_clock_msg {
-+	struct bcm2835_mbox_hdr hdr;
-+	struct bcm2835_mbox_tag_get_clock_rate get_clock_rate;
-+	u32 end_tag;
-+};
-+
-+static int bcm2835_i2c_get_input_rate(ulong *rate)
-+{
-+	ALLOC_CACHE_ALIGN_BUFFER(struct bcm2835_i2c_clock_msg, msg, 1);
-+	int ret;
-+
-+	BCM2835_MBOX_INIT_HDR(msg);
-+	BCM2835_MBOX_INIT_TAG(&msg->get_clock_rate, GET_CLOCK_RATE);
-+	msg->get_clock_rate.body.req.clock_id = BCM2835_MBOX_CLOCK_ID_CORE;
-+
-+	ret = bcm2835_mbox_call_prop(BCM2835_MBOX_PROP_CHAN, &msg->hdr);
-+	if (ret)
-+		return ret;
-+
-+	*rate = msg->get_clock_rate.body.resp.rate_hz;
-+	return *rate ? 0 : -EINVAL;
-+}
-+
-+static inline void bcm2835_i2c_writel(struct bcm2835_i2c_priv *i2c_dev,
-+				      u32 reg, u32 val)
-+{
-+	writel(val, i2c_dev->regs + reg);
-+}
-+
-+static inline u32 bcm2835_i2c_readl(struct bcm2835_i2c_priv *i2c_dev, u32 reg)
-+{
-+	return readl(i2c_dev->regs + reg);
-+}
-+
-+static void bcm2835_fill_txfifo(struct bcm2835_i2c_priv *i2c_dev)
-+{
-+	u32 val;
-+
-+	while (i2c_dev->msg_buf_remaining) {
-+		val = bcm2835_i2c_readl(i2c_dev, BCM2835_I2C_S);
-+		if (!(val & BCM2835_I2C_S_TXD))
-+			break;
-+		bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_FIFO,
-+				   *i2c_dev->msg_buf);
-+		i2c_dev->msg_buf++;
-+		i2c_dev->msg_buf_remaining--;
-+	}
-+}
-+
-+static void bcm2835_drain_rxfifo(struct bcm2835_i2c_priv *i2c_dev)
-+{
-+	u32 val;
-+
-+	while (i2c_dev->msg_buf_remaining) {
-+		val = bcm2835_i2c_readl(i2c_dev, BCM2835_I2C_S);
-+		if (!(val & BCM2835_I2C_S_RXD))
-+			break;
-+		*i2c_dev->msg_buf = bcm2835_i2c_readl(i2c_dev,
-+						      BCM2835_I2C_FIFO);
-+		i2c_dev->msg_buf++;
-+		i2c_dev->msg_buf_remaining--;
-+	}
-+}
-+
-+static int bcm2835_i2c_calc_divider(unsigned long rate,
-+				unsigned long parent_rate)
-+{
-+	int divider = DIV_ROUND_UP(parent_rate, rate);
-+
-+	/*
-+	 * Per the datasheet, the register is always interpreted as an even
-+	 * number, by rounding down. In other words, the LSB is ignored. So,
-+	 * if the LSB is set, increment the divider to avoid any issue.
-+	 */
-+	if (divider & 1)
-+		divider++;
-+	if ((divider < BCM2835_I2C_CDIV_MIN) ||
-+	    (divider > BCM2835_I2C_CDIV_MAX))
-+		return -EINVAL;
-+
-+	return divider;
-+}
-+
-+static int bcm2835_i2c_set_rate(struct udevice *bus, unsigned int rate)
-+{
-+	struct bcm2835_i2c_priv *i2c_dev = dev_get_priv(bus);
-+	ulong parent_rate = i2c_dev->input_rate;
-+	u32 redl, fedl;
-+	u32 clk_tout;
-+	int divider;
-+
-+	if (!rate || !parent_rate)
-+		return -EINVAL;
-+
-+	divider = bcm2835_i2c_calc_divider(rate, parent_rate);
-+	if (divider < 0)
-+		return divider;
-+
-+	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_DIV, divider);
-+
-+	/*
-+	 * Number of core clocks to wait after falling edge before
-+	 * outputting the next data bit.  Note that both FEDL and REDL
-+	 * can't be greater than CDIV/2.
-+	 */
-+	fedl = max_t(u32, divider / 16, 1);
-+
-+	/*
-+	 * Number of core clocks to wait after rising edge before
-+	 * sampling the next incoming data bit.
-+	 */
-+	redl = max_t(u32, divider / 4, 1);
-+
-+	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_DEL,
-+			   (fedl << BCM2835_I2C_FEDL_SHIFT) |
-+			   (redl << BCM2835_I2C_REDL_SHIFT));
-+
-+	/*
-+	 * Set the clock stretch timeout.
-+	 */
-+	if (rate > 0xffff * 1000 / BCM2835_I2C_CLKT_TOUT_MS)
-+		clk_tout = 0xffff;
-+	else
-+		clk_tout = BCM2835_I2C_CLKT_TOUT_MS * rate / 1000;
-+
-+	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_CLKT, clk_tout);
-+
-+	return 0;
-+}
-+
-+static void bcm2835_i2c_start_transfer(struct bcm2835_i2c_priv *i2c_dev)
-+{
-+	u32 c = BCM2835_I2C_C_ST | BCM2835_I2C_C_I2CEN;
-+	struct i2c_msg *msg = i2c_dev->curr_msg;
-+	bool last_msg = (i2c_dev->num_msgs == 1);
-+
-+	if (!i2c_dev->num_msgs)
-+		return;
-+
-+	i2c_dev->num_msgs--;
-+	i2c_dev->msg_buf = msg->buf;
-+	i2c_dev->msg_buf_remaining = msg->len;
-+
-+	if (msg->flags & I2C_M_RD)
-+		c |= BCM2835_I2C_C_READ;
-+	else
-+		c |= BCM2835_I2C_C_INTT;
-+
-+	if (last_msg)
-+		c |= BCM2835_I2C_C_INTD;
-+
-+	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_A, msg->addr);
-+	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_DLEN, msg->len);
-+	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_C, c);
-+}
-+
-+static void bcm2835_i2c_finish_transfer(struct bcm2835_i2c_priv *i2c_dev)
-+{
-+	i2c_dev->curr_msg = NULL;
-+	i2c_dev->num_msgs = 0;
-+
-+	i2c_dev->msg_buf = NULL;
-+	i2c_dev->msg_buf_remaining = 0;
-+}
-+
-+static int bcm2835_i2c_xfer(struct udevice *dev, struct i2c_msg *msgs, int count)
-+{
-+	struct bcm2835_i2c_priv *i2c_dev = dev_get_priv(dev);
-+	bool ignore_nak = false;
-+	bool done = false;
-+	ulong start;
-+	int i;
-+	u32 val, err;
-+	int ret = 0;
-+
-+	if (!msgs || count <= 0)
-+		return -EINVAL;
-+
-+	for (i = 0; i < count; i++) {
-+		if (msgs[i].flags & I2C_M_TEN)
-+			return -EOPNOTSUPP;
-+		if (msgs[i].flags & I2C_M_RD) {
-+			if (i < count - 1) {
-+				dev_err(dev, "read message must be last\n");
-+				return -EOPNOTSUPP;
-+			}
-+		}
-+		if (msgs[i].len > 0xffff)
-+			return -EINVAL;
-+		if (msgs[i].flags & I2C_M_IGNORE_NAK)
-+			ignore_nak = true;
-+	}
-+
-+	/* Clear stale status and FIFO state before starting a new transaction. */
-+	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_C, BCM2835_I2C_C_CLEAR);
-+	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_S,
-+			   BCM2835_I2C_S_CLKT | BCM2835_I2C_S_ERR |
-+			   BCM2835_I2C_S_DONE);
-+
-+	i2c_dev->curr_msg = msgs;
-+	i2c_dev->num_msgs = count;
-+	i2c_dev->msg_err = 0;
-+
-+	bcm2835_i2c_start_transfer(i2c_dev);
-+	start = get_timer(0);
-+	while (get_timer(start) < BCM2835_I2C_XFER_TIMEOUT_MS) {
-+		val = bcm2835_i2c_readl(i2c_dev, BCM2835_I2C_S);
-+
-+		err = val & (BCM2835_I2C_S_CLKT | BCM2835_I2C_S_ERR);
-+		if (err && !(val & BCM2835_I2C_S_TA))
-+			i2c_dev->msg_err = err;
-+
-+		if (val & BCM2835_I2C_S_DONE) {
-+			if (!i2c_dev->curr_msg) {
-+				dev_err(dev, "unexpected completion status\n");
-+			} else if (i2c_dev->curr_msg->flags & I2C_M_RD) {
-+				bcm2835_drain_rxfifo(i2c_dev);
-+				val = bcm2835_i2c_readl(i2c_dev, BCM2835_I2C_S);
-+			}
-+
-+			if ((val & BCM2835_I2C_S_RXD) ||
-+			    i2c_dev->msg_buf_remaining)
-+				i2c_dev->msg_err = BCM2835_I2C_S_LEN;
-+			done = true;
-+			break;
-+		}
-+
-+		if (val & BCM2835_I2C_S_TXW) {
-+			if (!i2c_dev->msg_buf_remaining) {
-+				i2c_dev->msg_err = val | BCM2835_I2C_S_LEN;
-+				break;
-+			}
-+
-+			bcm2835_fill_txfifo(i2c_dev);
-+
-+			if (i2c_dev->num_msgs > 0 && !i2c_dev->msg_buf_remaining) {
-+				i2c_dev->curr_msg++;
-+				bcm2835_i2c_start_transfer(i2c_dev);
-+			}
-+		}
-+
-+		if (val & BCM2835_I2C_S_RXR) {
-+			if (!i2c_dev->msg_buf_remaining) {
-+				i2c_dev->msg_err = val | BCM2835_I2C_S_LEN;
-+				break;
-+			}
-+
-+			bcm2835_drain_rxfifo(i2c_dev);
-+		}
-+		udelay(1);
-+	}
-+
-+	if (!done) {
-+		val = bcm2835_i2c_readl(i2c_dev, BCM2835_I2C_S);
-+		dev_err(dev, "transfer timeout: status=%08x remaining=%zu\n",
-+			val, i2c_dev->msg_buf_remaining);
-+		ret = -ETIMEDOUT;
-+	}
-+
-+	/* Always abort/reset the controller and clear W1C status bits. */
-+	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_C, BCM2835_I2C_C_CLEAR);
-+	bcm2835_i2c_writel(i2c_dev, BCM2835_I2C_S, BCM2835_I2C_S_CLKT |
-+			   BCM2835_I2C_S_ERR | BCM2835_I2C_S_DONE);
-+
-+	bcm2835_i2c_finish_transfer(i2c_dev);
-+	if (ret)
-+		return ret;
-+
-+	if (ignore_nak)
-+		i2c_dev->msg_err &= ~BCM2835_I2C_S_ERR;
-+
-+	if (!i2c_dev->msg_err)
-+		return 0;
-+
-+	if (i2c_dev->msg_err & BCM2835_I2C_S_ERR)
-+		return -EREMOTEIO;
-+
-+	return -EIO;
-+}
-+
-+static const struct dm_i2c_ops bcm2835_i2c_ops = {
-+	.xfer          = bcm2835_i2c_xfer,
-+	.set_bus_speed = bcm2835_i2c_set_rate,
-+};
-+
-+static const struct udevice_id bcm2835_i2c_ids[] = {
-+	{.compatible = "brcm,bcm2711-i2c"},
-+	{.compatible = "brcm,bcm2835-i2c"},
-+	{}
-+};
-+
-+static int bcm2835_i2c_probe(struct udevice *bus)
-+{
-+	struct bcm2835_i2c_priv *priv = dev_get_priv(bus);
-+	unsigned int bus_clk_rate;
-+	int ret;
-+
-+	priv->regs = dev_read_addr_ptr(bus);
-+	if (!priv->regs) {
-+		printf("bcm2835_i2c: cannot get base address\n");
-+		return -EINVAL;
-+	}
-+
-+	ret = bcm2835_i2c_get_input_rate(&priv->input_rate);
-+	if (ret)
-+		return ret;
-+
-+	bus_clk_rate = dev_read_u32_default(bus, "clock-frequency",
-+					   I2C_SPEED_STANDARD_RATE);
-+	ret = bcm2835_i2c_set_rate(bus, bus_clk_rate);
-+	if (ret)
-+		return ret;
-+
-+	/* clear FIFO + status */
-+	bcm2835_i2c_writel(priv,
-+			   BCM2835_I2C_C,
-+			   BCM2835_I2C_C_CLEAR);
-+
-+	bcm2835_i2c_writel(priv,
-+			   BCM2835_I2C_S,
-+			   BCM2835_I2C_S_CLKT |
-+			   BCM2835_I2C_S_ERR |
-+			   BCM2835_I2C_S_DONE);
-+
-+	return 0;
-+}
-+
-+U_BOOT_DRIVER(bcm2835_i2c) = {
-+	.name       = "bcm2835_i2c",
-+	.id         = UCLASS_I2C,
-+	.of_match   = bcm2835_i2c_ids,
-+	.probe      = bcm2835_i2c_probe,
-+	.priv_auto  = sizeof(struct bcm2835_i2c_priv),
-+	.ops        = &bcm2835_i2c_ops,
-+};
+ CONFIG_ARM=y
+ CONFIG_ARCH_QEMU=y
+diff --git a/configs/qemu_arm_defconfig b/configs/qemu-arm_defconfig
+similarity index 100%
+rename from configs/qemu_arm_defconfig
+rename to configs/qemu-arm_defconfig
+diff --git a/doc/board/emulation/qemu-arm.rst b/doc/board/emulation/qemu-arm.rst
+index 9e993ca9783..d575bc64ff6 100644
+--- a/doc/board/emulation/qemu-arm.rst
++++ b/doc/board/emulation/qemu-arm.rst
+@@ -32,7 +32,7 @@ U-Boot
+ 
+ - For AArch64::
+ 
+-    make qemu_arm64_defconfig
++    make qemu-arm64_defconfig
+     make
+ 
+ On successful build 'u-boot.bin' should be created. It's necessary in the following
+@@ -100,12 +100,12 @@ Set the CROSS_COMPILE environment variable as usual, and run:
+ 
+ - For ARM::
+ 
+-    make qemu_arm_defconfig
++    make qemu-arm_defconfig
+     make
+ 
+ - For AArch64::
+ 
+-    make qemu_arm64_defconfig
++    make qemu-arm64_defconfig
+     make
+ 
+ Running U-Boot (secure)
+@@ -182,7 +182,7 @@ Booting distros
+ ---------------
+ 
+ It is possible to install and boot a standard Linux distribution using
+-qemu_arm64 by setting up a root disk::
++qemu-arm64 by setting up a root disk::
+ 
+     qemu-img create root.img 20G
+ 
+diff --git a/doc/develop/driver-model/virtio.rst b/doc/develop/driver-model/virtio.rst
+index e5da9f4301c..90a12fb3003 100644
+--- a/doc/develop/driver-model/virtio.rst
++++ b/doc/develop/driver-model/virtio.rst
+@@ -32,8 +32,8 @@ network and block device, the most two commonly used devices, are supported.
+ 
+ The following QEMU targets are supported.
+ 
+-  - qemu_arm_defconfig
+-  - qemu_arm64_defconfig
++  - qemu-arm_defconfig
++  - qemu-arm64_defconfig
+   - qemu-arm-sbsa_defconfig
+   - qemu-riscv32_defconfig
+   - qemu-riscv64_defconfig
+@@ -51,7 +51,7 @@ variable being properly set to a working toolchain for ARM:
+ 
+ .. code-block:: bash
+ 
+-  $ make qemu_arm_defconfig
++  $ make qemu-arm_defconfig
+   $ make
+ 
+ You can even create a QEMU ARM target with VirtIO devices showing up on both
+diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+index 94ddf690440..c2bad4cdd5f 100644
+--- a/doc/develop/uefi/uefi.rst
++++ b/doc/develop/uefi/uefi.rst
+@@ -713,7 +713,7 @@ HTTP(s) Boot can be activated by specifying::
+ 
+ For QEMU targets there's a Kconfig that supports this by default::
+ 
+-    make qemu_arm64_lwip_defconfig
++    make qemu-arm64_lwip_defconfig
+ 
+ The commands and functionality are similar to the legacy stack, with the notable
+ exception of not having to define an "httpserverip" if you are trying to resolve
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index 187320c26d5..8680ea257e5 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -251,7 +251,7 @@ RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
+ 	make -j$(nproc) all install && \
+ 	rm -rf /tmp/qemu
+ 
+-# Build OP-TEE for qemu_arm64
++# Build OP-TEE for qemu-arm64
+ RUN git clone --depth=1 https://github.com/OP-TEE/optee_os.git /tmp/optee_os \
+ 	-b 4.7.0 && \
+ 	cd /tmp/optee_os/ && \
+@@ -264,7 +264,7 @@ RUN git clone --depth=1 https://github.com/OP-TEE/optee_os.git /tmp/optee_os \
+ 		CFG_REE_FS=n CFG_CORE_ARM64_PA_BITS=48  \
+ 		CFG_TEE_CORE_LOG_LEVEL=2
+ 
+-# Build fiptool, bl1 and fip for fvp and qemu_arm64
++# Build fiptool, bl1 and fip for fvp and qemu-arm64
+ RUN git clone --depth=1 -b mbedtls-3.6 https://github.com/ARMmbed/mbedtls.git /tmp/mbedtls
+ RUN git clone --depth=1 https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git /tmp/tf-a \
+ 	-b v2.13.0 && \
+@@ -294,9 +294,9 @@ RUN git clone --depth=1 https://git.trustedfirmware.org/TF-A/trusted-firmware-a.
+ 		MBOOT_EL_HASH_ALG=sha256 \
+ 		MBEDTLS_DIR=/tmp/mbedtls \
+ 		-j$(nproc) all fip && \
+-	mkdir -p /opt/tf-a/qemu_arm64_fw_handoff_tfa_optee && \
++	mkdir -p /opt/tf-a/qemu-arm64_fw_handoff_tfa_optee && \
+ 	cp build/qemu/release/fip.bin build/qemu/release/bl1.bin \
+-		/opt/tf-a/qemu_arm64_fw_handoff_tfa_optee/ && \
++		/opt/tf-a/qemu-arm64_fw_handoff_tfa_optee/ && \
+ 	make CROSS_COMPILE=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
+ 		PLAT=sun50i_a64 -j$(nproc) all && \
+ 	mkdir -p /opt/tf-a/pine64_plus && \
+---
+base-commit: c267fa81d42b5a5bd1055d3858f74496faa6082f
+branch: qemu-arm
+
 -- 
-2.34.1
+2.53.0
 
