@@ -1,168 +1,175 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64ABE606A31D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E229606A31A
 	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 14:45:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=hiUclQWw;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=J3hPHyQ/
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=EbV16iUw;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=doPuEFyM
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2702E80DBC;
-	Wed, 28 Oct 2026 14:45:53 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 76EF24051D;
+	Wed, 28 Oct 2026 14:45:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id N0iDFWK6mt0u; Wed, 28 Oct 2026 14:45:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6303F80DD1
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793198751;
-	b=irwrvsdiC6aw2901oxvA7JK0FS3fFO4B+eN+XuLcNDpdeZXQRe0KsDa+W69LIWUoBGFi
-	 jA8Zw1H8bppxvBD6SwCLJxVDA/zPP7/ua9RhlaxF7h/ws7FyAZRSs5pVjOhQIUguvWHFM
-	 Tp7dGxVn23wCN2Ml9EAcf2ipt2pLX5UStF2iY8KGJfZOYUUwLsBYgYaR1FNbIpDBDyjkX
-	 y+0hR9WVyAsdzmJ36on/rgFQIWP76JMl01ms+YgWNPVyiofOqxThyoshMExQBuF/y2pNp
-	 9a8dgZ83/Q373VKsktKUXNgvwyOdbkxpDc0pfq1lghnjjYXl3hopZXoalVbzHHsro8A==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FTsZ1UAJAKTY; Wed, 28 Oct 2026 14:45:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9C2EF40568
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793198754;
+	b=ao3NCqzq7EFM1FemEQf3D+7Y7Mmm5TJ4kLJXM9Sc2NvaM8HyPnjzPhX/iEfUPkM5idkN
+	 hd4rwH8ZNLCA3Ir9O5K+KcRO+N/uTLYSGADBwI6AC0w2NYJhkdx0l2En7LjG4PR0srBko
+	 kDIf0tA8J0kxGGtAcesMzAeMWFqnEvTs7e44m6VUKl4ZKyMx6fAFsIcMGSqNKv0MMLiyR
+	 v/CkiKhAEVJJl9Ee6NoQ17NuQ8sOZ1m/qHhiUkenvI8JFVHyrK9xCvjbh71uLcKBl9RDj
+	 S92is7GGAbjuFmWmUkm3/9hoXbK1qwZbOiBY8qeHK7r1t6uInDWyUJRpFlJikwul9Bg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793198751;
+	c=relaxed/relaxed; t=1793198754;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=MxzMMGvpFsLOAzZaacMK4dHOp0DGhZ0DFykOadKAyeU=;
-	b=F7HY9VcBWmrmv3jf1QIzINC9y2sv7xfVDnG4xNjDN1UhgGzjLZ5Y5zTeOzKoHDzDl9H4
-	 c3P6/PhANVmtsbHH/7y4PD1c6+A06Gd9kM5o+me40/iWQlXbZ4eYJgA8VOOvmj5novAqD
-	 TfaMrEMo7j8ELvQIsFZbDXuyWyap3Y7mVElLD+ZT9lOcSS6MjHcT+HAv0AQVaS6rtPHi8
-	 vx+xT/tkNVelzo26npaw8ROl7BH/QBuJu29u7SXv476IjkED4j8VCLw+O1xVpSQgzWhX8
-	 CmvA9b+2awR9YrCvAPp81rUPCZU8kOW+AaCBX1+cDrFq4jEC2G/DkQ3ZDubbZoHi7nQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="J3hPHyQ/";
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=EPnDN5mqPRCP4fFRs5P7OsCYt7+b0rC3dsviOcNl7JQ=;
+	b=GGYXtPQAPUHrbXvnMIfW6+dH57f75KEIQBsYhAtj/xLDpTPFk1CbtowYC8Z6GPw9Do9N
+	 D0j7tB+Q4dJNiP+/7MDM9J4Yq5OvCiSRi7ihXJCYky2Sy2hS/U74seNv6v0zu58ir+u5O
+	 atu0Cc8a4mrElagT/hAC412W1CIiUy/VdU5ydCbewZ3Yj8Tw+Ufrecrm3IpqlVogmOMU/
+	 lCq4suY5KLNyTuFEewEGA/u4IL+COwFM2OPXWoBp6wBA3iBoK1ISl1GtWScex09UhWqir
+	 c+22ZKa71QHL97wtX80NLfv5TsJeHcJM7Pzimc2RJt8lwbm5v2Dw5XzfB6fcoePPcbA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793198751;
-	bh=MxzMMGvpFsLOAzZaacMK4dHOp0DGhZ0DFykOadKAyeU=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=hiUclQWw1P4d/qPSYCu2dA8WyAd6E+lY48HmO4r+NogDKLxGRmHr6OzLMANzaHFoL
-	 X5/ep1dCkjakqIngdFX1DAS2Ximo9omSuFz5CHt90YyZItw/Ig9VnBb56WF4SIfMMd
-	 xtZdqC0lrxccmcfiZWyK9Cf2difdVmiHQPfEpQGkuBQGlZxfidgd6jS/ibawoxMNME
-	 4SXDQyTAfbBs17WIZ6xiqyihXx/0N/ghrrL3E9OBnsSbjx1RE1BbGqR1SEIINLjsjA
-	 1R4Ui8VLnR/Wr8AegfFD4BAkTqvgCYkTACjM1mb/s5ltOWXOL5di2Xwzoe8mK8KD+y
-	 YX/VY8oy3m7Lw==
+	d=lists.u-boot-project.org; s=default; t=1793198754;
+	bh=EPnDN5mqPRCP4fFRs5P7OsCYt7+b0rC3dsviOcNl7JQ=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=EbV16iUwtckzX3Jlg5Esviv8hCGysa5gl+++tbj7KmFK5WWThLjuscP+ilBqJ+mNc
+	 t1J12B/ogNQwHu2AB+JiO5IZbGumJHTGYmQkvFQ8MkrMrH8rId+Pcsxut8hztLYh+1
+	 /hiNRjqIraZ+pq8fh/amK5sxNmWYC3s9uaD3x0WBKcyGQCmB4nB6MkbxUIP1jwkoT2
+	 cFUqKOJrDqX80l7bEs2RdYsRw1x8Bn2RtVNwtS+tk/V2M55F0zVh9IqlVn1c/Eu2C7
+	 Yi+YoWQtWKLceSie/1eUgSeAySy9lpJ8fnc654zUdMpyoP9JZsOrl6+FNK0RXgelnc
+	 tr3/KAhoG2Akw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6303F80DD1;
-	Wed, 28 Oct 2026 14:45:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9C2EF40568;
+	Wed, 28 Oct 2026 14:45:54 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 4B651972
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:09:51 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id EEBF6356
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:09:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 3BC2E80BCD
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:09:51 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id D506E80BE2
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:09:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4vyokSwZSfMq for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 14:09:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C9B9480BA6
+ id Zg_ngIRsO_U5 for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 14:09:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B58C580BA6
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::636"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793196590;
- b=s9tHpbq3xzrAooUDk08Gq6dvauZcHXEsbPuqAazZDCT7I6/p9LPVsBo+QWFxnTYNQ3xA
- f8+p3fazLcMjHF5P+bbG20PezKlOCzdlMaxeysqw/cI711UMIPZwcvPIha0rHnnqMQXUZ
- 1zCG5a/bsWYep/9F810nE3k0imGegkpbxtuZG+LaTHNMHO+HL7qdr+fVnEP5gohH0Lh7D
- qd6fcSrNe4PSiCbT5NclYenzRyfk5j8MuKtGuZjq9mieBxVfIC18NkEbNqCpgAVPPbZHj
- iRKtvDaVu00VlCdRzlbPCRMAd/iRp79x+ZElaeG27aSBx6ef+O1vtG0G896Hml9dxOg==
+ arc=none smtp.remote-ip="2a00:1450:4864:20::62a"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793196593;
+ b=GXk4uIPp8M5qnZLHESGULIWCJdq40WhyZeuNY7BqW2WsslYuwyRacEjFIoS5ZVS0taaB
+ DS4us6G/52ztdOUcF1Yydy96D1cfuYNIsWVSwbFC59t0S+R+5+0v1pfyVP6bTRhueT22o
+ qe/HCuR2XzPD8NGLx9FcYmtBj+MTnUT2TBCE1lDvXvMyFSbGUTacufTL8nJ2v+DlMZwKp
+ qzGvAzBtztYqh6OsxEzeVYGTs2rCzIiqmsKCofS0sUl9EyM0ZkCPJsF/Sodv8dw0Is+PY
+ D+JIXFZ+VyDo6e6hw+Bea/GXGQoCpfQyXt+lxS93EQlA1oomV6cmf/5JkfzdvbxN3ZA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793196590;
+ c=relaxed/relaxed; t=1793196593;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
- bh=MxzMMGvpFsLOAzZaacMK4dHOp0DGhZ0DFykOadKAyeU=;
- b=SJfEqC8I3fbVFEUCXTKd2036a3BegEEyvCU5KVRVAfE+7LzvL+Cq4RQfB6dW6RM5bueY
- NzxSQOMQBnwU0O6dZDvyPreYh2eZ2GSBHAQDPy2gFE4uulq5RtDvPtj37kzoMcdK3/SMK
- V3Wi6gMuRCK4L/T9mXspIlml0SUd/iY0/maNTsl9oqhMCp/fR8zmssr8ZxdeCgdjerCeN
- dLlzUbJVR7m+5+4EFn0CbuWKNA7Y6zYEVAQVXiV5ehhRfMPItyE4NgBhRoNRHpfEvlU7P
- bx1RLDpAmuSrTXsfC7eCpJyS1Ptxt7y9VFS89lpSgVeFRqbxS9r7+VPyfxh2ZUQp2Ag==
+ Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+ Content-Transfer-Encoding;
+ bh=EPnDN5mqPRCP4fFRs5P7OsCYt7+b0rC3dsviOcNl7JQ=;
+ b=KUPcwf9J2HnS8HgyF3mZS+tNMcV+TTpAJlkHXaapv6pRbct7XA4vUBpqz0DGQGebgxvd
+ t9kInwcfWMWm+pMhRM2/d8RjIdPqz2WNOYoj0C3KvgtVjoTFx4lv/ry2OZZcQGxuqHImM
+ xJCowN5X3MJz5vpgcNYR0fh/v6dHAejZkt8bHat09QUDN9X+24+f5fzi5AmGXYe6SrYIn
+ c1xVC9QQ5I0OCc2sbg/zNgUKpk6zCvAQBR1qUC09P1zM+lNjnYqOAjrByi1J+rag7YtCU
+ WBlfo1tVXSqNqYi0bgalM/KHzZxjCI+jUkubY7bKIAdDrgmB65sfQjLWZuQzqEy98MA==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=linaro.org;
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b="J3hPHyQ/"; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::636"
+ header.s=google header.b=doPuEFyM; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::62a"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::636; helo=mail-ej1-x636.google.com;
+ client-ip=2a00:1450:4864:20::62a; helo=mail-ej1-x62a.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=J3hPHyQ/
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- by smtp1.osuosl.org (Postfix) with ESMTPS id C9B9480BA6
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:09:48 +0000 (UTC)
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-c4015fb0b42so10355466b.2
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 07:09:48 -0700 (PDT)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
+ header.a=rsa-sha256 header.s=google header.b=doPuEFyM
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B58C580BA6
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:09:50 +0000 (UTC)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-c40aa03a96fso11125366b.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 07:09:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793196587; x=1793801387;
+ d=linaro.org; s=google; t=1793196588; x=1793801388;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=MxzMMGvpFsLOAzZaacMK4dHOp0DGhZ0DFykOadKAyeU=;
- b=J3hPHyQ/ENIs2aZE+w3YhqzwKyoAPApZFaObFnZfaS2JF4Etd5nlKZ5qqocZKCa6rf
- n4ov627D3XtQHOE5OR9JCPPaa10WyApYChxAbSb1tt7n7rexJugzP2Vk6LzVviSwPuiJ
- 7S//y6TSL4depFL71uUMB0LEFt7n9doWr0UhTb/ce398oe16wXB8/p8uwpg1ivKWSDSj
- avGkD6DI2yTd/yIEChNCGG13iBdPT7MxrmhH3w48nGrUWOxCgT88Sv88PN22qQ+anTLM
- a87nQhikckwJoG4IFtyqg8Q5StLSl4XQJLjAUgyVojo/TBVVAUW8Ag5/+eO3+ECoDJW+
- 0tTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793196587; x=1793801387;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=MxzMMGvpFsLOAzZaacMK4dHOp0DGhZ0DFykOadKAyeU=;
- b=dVwkkoTbC59I40FHU3tVvLtwZ6H5K0EX65iFJjN1y5ZyKVy0OqFg1MSdwtwCN1Per5
- XTODeQ2MOoa3ojZLyaxpgtnba8cT+5wnnd3+22GPEV6YNeqqJ+4Yz8XEM4/WWG7wEeHv
- Mi+WRPcOyVpdK7OsQ9GSwjcOQxt8Q0SjFJ38vM5QfN0SHKriRHM0tPfqdnGmbkeMPJZM
- Wm2PeFxlwbE4vTntn2gwsgkHhFQy4ZSkaEMlEOorM698H8XxNASPHtCgUxi91/ah4Nc9
- frBza0t/RmPr4OUp8a4WHLGpEYAPgwO15NugWNIPY80rV5GADOPcOFvXaeEOJO1fh9tZ
- eDYg==
-X-Gm-Message-State: AFq9FYJfcj7JM3Eav8l0GwlrvuLDrhSmIZ8tCx9g4Hae+b8GKqPaQGWG
- F1R8lKiBSGpThdRbh7yUFOZo6YIVWz3KifxrPRHNR+4zHDNOtNMPEnAnQSOOt5GEJAG4LFWV2V4
- EY045
-X-Gm-Gg: AYBFou2dU9V33TMCNl0iRm1pvSZ5Nl7/2IQmZ0UPLWqerwFd83UCw71NcD4Upq8uvp7
- XfNkl0TaKnQNtmboP+KuAWWWtQMaDJoCrbf6NBnGaIft+wKdCxWGg/RGWagLG2j66Mh3AuwnLmg
- vi5o+ouKRzcSjTJSSbXBDVseXpjmB/9hXDkDeBU8oPRbR/SLMaOIEhBcMCs5h82A0Z/EPaZ0K1z
- y0XdUrRGo88MsQCurb2xT961VYMtWdfUoDzhfNpLO6vxP78zPBCbcB1bY5LEGwqj4RWAZ5AAift
- 8C/CqL7yFe2dbzMjQgWJbBLI1gVhcxVxYLvRAElgpgyqqskjOzyxTjfSDLP08+JovfWvxkN1/mI
- dEYlWu0XStEGrt+Hn0Qms+mavpROUMCSexqjxT49dXPoOjWlRJWQ3KNgm3993K4F0hP6mSRmIQ/
- 6/G7v65ICr9LB47OGjDcSf21RfZLFpVHmEzs9GXOt2BHxBU8Eo3Q6NXdRfk+HoI3KRtBldBJO3X
- NnwsLVx/5CCSZQp7BZNOgNtTQsLK1Ka9eaB+d78gPSqlbUY1Vll68gE/RnMMwtJtYf3zWWfGOaZ
- o6mWbqkGThJw20uVHHcfNJYJOmicMEROqInXDLDhrPAE96eu/i4j2N4TNcKb2NJpso3uOgZWzFf
- B+xO8hghmbAc=
-X-Received: by 2002:a17:906:b30c:b0:c3f:98d4:dfda with SMTP id
- a640c23a62f3a-c49bde860a4mr225419566b.3.1793196586878; 
- Wed, 28 Oct 2026 07:09:46 -0700 (PDT)
+ bh=EPnDN5mqPRCP4fFRs5P7OsCYt7+b0rC3dsviOcNl7JQ=;
+ b=doPuEFyMtClj7u9TCmS12GGqQOOFkmW6xWxE96b98dU5pATn/s4kfnixMk4CEt+Ebk
+ 9unNt4l8mQ+0t6FvGTQdYBNFz6XVaecYtK2TdtQQWCgLGFhNjFAy3W9cyDFsjhOHuSbp
+ Pv7fheu2vogHT7iRf85KUFcrQkotGXsgZstZU1zLbQD5osEZsLQkEikNvfnmZQKKSNPo
+ MWydOJHZGRnf6v3e8EiyWVgEw1k5bftKDtW6InYEQ4bN1UiIQhn5gYE7prpkNyLU/VzF
+ PAjXizn+gRd0Wwhj0tlLlLkDyHnux/SWhuWiS523/Kt6aw8wAl7ltflUQEueV1CVVbtO
+ phWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793196588; x=1793801388;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=EPnDN5mqPRCP4fFRs5P7OsCYt7+b0rC3dsviOcNl7JQ=;
+ b=mg1bIOF0ATBJpj1TRdzklcY50lg0CtIO0JzstLjXmN66UL2SgDFGdGsClq85CvI10U
+ Rcqr5UcZ9p0RhOgyIRi0PdNxl1zDAiJymf0GffqTG+bA8M0Eq7sjMJxNt6I1RNZuJCmh
+ J93P0+mJRfHwi4ch1V+pYBpVVWzasP9MqSypLVy2bkA0a9lLRLw7665sZDLabYCvmx66
+ WQy7RhgEVSxO5LLvrwsYGFJ1GniNfDpn9i7eBpeNxm3HuHq8zWnXoZ2DlhJx99guT5Cu
+ DYiSnlz9HwegSRVMBigxiyaqOKM/QburNFLmLWkzuwrvnMt6kXvRph/8qfmmHFi0wud1
+ LPmQ==
+X-Gm-Message-State: AFq9FYLPQ90YVCKrMHuwLRrgcybmUEDGkwUjzRJrfUQH3Resc+znfrND
+ 50t/QpqE5zU1VRZs5+LN5Eies3pTEyOm4raMD3eTzWz8rdXaFXSKKpftc1ON7mijt4hoFgoYmO9
+ Rq3RB
+X-Gm-Gg: AYBFou0tb7LwUVKTPXZiIN1cEKh8SnyIQdHpx4MEt0FA56zXBpoJBmR35KKdz0QG0EV
+ IKb+TFkH0fCN4N5x2Mm907NB/M6oJAdUQyWy+6fCr79B39GkzhV7mFaMEswkq2Ow7E7tEpnZLRJ
+ 3D2yqPb8XT59ktbGYqoT0W8/+hg7E+TN4SkKBiCWDLuvqunQ52h7cPup6Ww1V1DFMJLIDHNf5Y0
+ IP7ucnja0DVIyhPRCPiq4GEHPyMZbTrTyVUi0DTDz4i6cmcwT7s7PiMa+IoGyvJ/1BiaLls7XE3
+ j31o2/FFteVPj4aVyLA7CEgZPKdS3zfve98w2nEHqlbLcu7jVxBOv7otCZOzaxrFRofgAbEulq7
+ rZUaz4vtqoMWrtfhM4wbsMDoY36yNk9OcZrQZwIj8y7INTUukUhseu4pFu1IuVrPwSBZpu3+7qZ
+ oC198NFXLTttQDmLWsO7gZgjhyFeUcQNX7sf1chqaHTBt80ZhSCVra9dOjSBH/iUVY5gpBxGK+h
+ pSmPcne7KycVkt9Gvb0tBIfocaNhDxDcC+Jz5D2W8JqDFDhSIcAixYAzIEE2BJIkz6r6fQfuKRl
+ DDtLKu/oXSZtZulbTfLnbYpW6znlpL79aM29JhmMkPrvsXnkxOlOY/LPAMPSJuQ/Exh3lVgJd+9
+ DyOPevRAqJm54PZ275Px71/VVbfuSXHY=
+X-Received: by 2002:a17:907:180b:b0:c25:2ded:ad36 with SMTP id
+ a640c23a62f3a-c49bda65ea2mr307574766b.0.1793196588131; 
+ Wed, 28 Oct 2026 07:09:48 -0700 (PDT)
 Received: from monster.taild06a60.ts.net (c-85-229-7-191.bbcust.telenor.se.
  [85.229.7.191]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c46bd790afasm607807266b.68.2026.10.28.07.09.45
+ a640c23a62f3a-c46bd790afasm607807266b.68.2026.10.28.07.09.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Oct 2026 07:09:46 -0700 (PDT)
+ Wed, 28 Oct 2026 07:09:47 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  michal.simek@amd.com, lukma@nabladev.com, alchark@flipper.net,
  jerome.forissier@arm.com, mkorpershoek@kernel.org, sjg@chromium.org,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
  Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH v10 00/63] usb: dwc3: part 1, reset and import from Linux v6.16
-Date: Wed, 28 Oct 2026 15:08:26 +0100
-Message-ID: <20261028140930.3025368-1-anders.roxell@linaro.org>
+Subject: [PATCH v10 01/63] usb: host: re-import xhci-ext-caps.h from kernel
+ v6.16
+Date: Wed, 28 Oct 2026 15:08:27 +0100
+Message-ID: <20261028140930.3025368-2-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261028140930.3025368-1-anders.roxell@linaro.org>
+References: <20261028140930.3025368-1-anders.roxell@linaro.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -178,156 +185,189 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi,
+From: Jerome Forissier <jerome.forissier@linaro.org>
 
-This is part one of two. It resets the DWC3 driver and imports it up to
-Linux v6.16. Part two [2] follows right after this one and makes the
-tree build and work again.
+Import drivers/usb/host/xhci-ext-caps.h from Linux v6.16. The file
+is needed by the updated DWC3 code.
 
-Part one on its own breaks the build for every board that enables DWC3,
-and USB gadget stops working. That is expected. The two parts have to go
-in together.
-
-Part two lists the boards that were tested on hardware, with both parts
-applied.
-
-The driver was forked from the kernel v3.19-rc1 eleven years ago, in
-commit 85d5e7075f33 ("usb: dwc3: add dwc3 folder from linux kernel to
-u-boot"). After that almost no kernel changes came back to U-Boot.
-
-Part one is three steps:
-
-1. Re-import xhci-ext-caps.h from v6.16. Marek asked for this one to come
-   first, since the dwc3 imports build on it.
-
-2. Restore drivers/usb/dwc3 to the v3.19-rc1 import. U-Boot only files
-   like dwc3-generic.c and samsung_usb_phy.c stay.
-
-3. Import the dwc3 directory once per major kernel version, from v3.19
-   up to v6.16. Each commit is a raw snapshot from that kernel. The last
-   two patches re-import epautoconf.c and udc-core.c the same way.
-
-The import commits are raw kernel snapshots. This is on purpose. It
-makes it easy to see what comes from which kernel version, and to
-compare each import with the matching kernel release. The commit
-messages say this too.
-
-The branch has both parts [1].
-
-[1] https://github.com/roxell/u-boot/tree/usb_dwc3_sync_v10
-[2] part two, subject: [PATCH v10 00/30] usb: dwc3: part 2, make the
-    resynced code work
-[3] v7 part one: https://lore.kernel.org/u-boot/20260824152734.159794-1-anders.roxell@linaro.org/
-[4] Marek on v9 part two: https://lore.kernel.org/u-boot/4b24f045-7fa1-4be0-8993-2bd441a7e716@mailbox.org/
-
-v7 -> v10:
-- Skipped v8 and v9, so both parts have the same version.
-- Rebased on 8649a54d301a, since v7 did not apply anymore. The restore
-  commit conflicted on dwc3-am62.c after commit 83abf9120071 ("usb:
-  dwc3-am62: check dev_remap_addr_index() for NULL"). It still deletes
-  the file, and part two brings the fix back.
-- The restore commit keeps samsung_usb_phy.c now, instead of a patch in
-  part two that brought it back. It is U-Boot code and was never part
-  of the kernel import. Marek asked for this [4]. I kept Mattijs'
-  Reviewed-by, since the commit only deletes one file less.
-- The other 62 patches are unchanged.
-
-Older changes are listed in v7 [3].
-
-Cheers,
-Anders
-
-Jens Wiklander (60):
-  usb: dwc3: restore to original v3.19-rc1 kernel import
-  usb: dwc3: import from kernel v3.19
-  usb: dwc3: import from kernel v4.0
-  usb: dwc3: import from kernel v4.1
-  usb: dwc3: import from kernel v4.2
-  usb: dwc3: import from kernel v4.3
-  usb: dwc3: import from kernel v4.4
-  usb: dwc3: import from kernel v4.5
-  usb: dwc3: import from kernel v4.6
-  usb: dwc3: import from kernel v4.7
-  usb: dwc3: import from kernel v4.8
-  usb: dwc3: import from kernel v4.9
-  usb: dwc3: import from kernel v4.10
-  usb: dwc3: import from kernel v4.11
-  usb: dwc3: import from kernel v4.12
-  usb: dwc3: import from kernel v4.13
-  usb: dwc3: import from kernel v4.14
-  usb: dwc3: import from kernel v4.15
-  usb: dwc3: import from kernel v4.16
-  usb: dwc3: import from kernel v4.17
-  usb: dwc3: import from kernel v4.18
-  usb: dwc3: import from kernel v4.19
-  usb: dwc3: import from kernel v4.20
-  usb: dwc3: import from kernel v5.0
-  usb: dwc3: import from kernel v5.1
-  usb: dwc3: import from kernel v5.2
-  usb: dwc3: import from kernel v5.3
-  usb: dwc3: import from kernel v5.4
-  usb: dwc3: import from kernel v5.5
-  usb: dwc3: import from kernel v5.6
-  usb: dwc3: import from kernel v5.7
-  usb: dwc3: import from kernel v5.8
-  usb: dwc3: import from kernel v5.9
-  usb: dwc3: import from kernel v5.10
-  usb: dwc3: import from kernel v5.11
-  usb: dwc3: import from kernel v5.12
-  usb: dwc3: import from kernel v5.13
-  usb: dwc3: import from kernel v5.14
-  usb: dwc3: import from kernel v5.15
-  usb: dwc3: import from kernel v5.16
-  usb: dwc3: import from kernel v5.17
-  usb: dwc3: import from kernel v5.18
-  usb: dwc3: import from kernel v5.19
-  usb: dwc3: import from kernel v6.0
-  usb: dwc3: import from kernel v6.1
-  usb: dwc3: import from kernel v6.2
-  usb: dwc3: import from kernel v6.3
-  usb: dwc3: import from kernel v6.4
-  usb: dwc3: import from kernel v6.5
-  usb: dwc3: import from kernel v6.6
-  usb: dwc3: import from kernel v6.7
-  usb: dwc3: import from kernel v6.8
-  usb: dwc3: import from kernel v6.9
-  usb: dwc3: import from kernel v6.10
-  usb: dwc3: import from kernel v6.11
-  usb: dwc3: import from kernel v6.12
-  usb: dwc3: import from kernel v6.13
-  usb: dwc3: import from kernel v6.14
-  usb: dwc3: import from kernel v6.15
-  usb: dwc3: import from kernel v6.16
-
-Jerome Forissier (3):
-  usb: host: re-import xhci-ext-caps.h from kernel v6.16
-  usb: gadget: re-import epautoconf.c from kernel v6.16
-  usb: udc: re-import udc-core.c from kernel v6.16
-
- drivers/usb/dwc3/core.c           | 2961 +++++++++++++-----
- drivers/usb/dwc3/core.h           | 1087 +++++--
- drivers/usb/dwc3/debug.h          |  432 +++
- drivers/usb/dwc3/dwc3-am62.c      |  424 ++-
- drivers/usb/dwc3/ep0.c            |  763 +++--
- drivers/usb/dwc3/gadget.c         | 4776 +++++++++++++++++++++--------
- drivers/usb/dwc3/gadget.h         |  114 +-
- drivers/usb/dwc3/glue.h           |   36 +
- drivers/usb/dwc3/io.h             |   51 +-
- drivers/usb/dwc3/linux-compat.h   |   16 -
- drivers/usb/gadget/epautoconf.c   |  292 +-
- drivers/usb/gadget/udc/udc-core.c | 1890 ++++++++++--
- drivers/usb/host/xhci-ext-caps.h  |  158 +
- 13 files changed, 9864 insertions(+), 3136 deletions(-)
- create mode 100644 drivers/usb/dwc3/debug.h
- create mode 100644 drivers/usb/dwc3/glue.h
- delete mode 100644 drivers/usb/dwc3/linux-compat.h
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+---
+ drivers/usb/host/xhci-ext-caps.h | 158 +++++++++++++++++++++++++++++++
+ 1 file changed, 158 insertions(+)
  create mode 100644 drivers/usb/host/xhci-ext-caps.h
 
+diff --git a/drivers/usb/host/xhci-ext-caps.h b/drivers/usb/host/xhci-ext-caps.h
+new file mode 100644
+index 000000000000..c93bcf4f4f7d
+--- /dev/null
++++ b/drivers/usb/host/xhci-ext-caps.h
+@@ -0,0 +1,158 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/* Imported from Linux v6.16 */
++/*
++ * xHCI host controller driver
++ *
++ * Copyright (C) 2008 Intel Corp.
++ *
++ * Author: Sarah Sharp
++ * Some code borrowed from the Linux EHCI driver.
++ */
++
++/* HC should halt within 16 ms, but use 32 ms as some hosts take longer */
++#define XHCI_MAX_HALT_USEC	(32 * 1000)
++/* HC not running - set to 1 when run/stop bit is cleared. */
++#define XHCI_STS_HALT		(1<<0)
++
++/* HCCPARAMS offset from PCI base address */
++#define XHCI_HCC_PARAMS_OFFSET	0x10
++/* HCCPARAMS contains the first extended capability pointer */
++#define XHCI_HCC_EXT_CAPS(p)	(((p)>>16)&0xffff)
++
++/* Command and Status registers offset from the Operational Registers address */
++#define XHCI_CMD_OFFSET		0x00
++#define XHCI_STS_OFFSET		0x04
++
++#define XHCI_MAX_EXT_CAPS		50
++
++/* Capability Register */
++/* bits 7:0 - how long is the Capabilities register */
++#define XHCI_HC_LENGTH(p)	(((p)>>00)&0x00ff)
++
++/* Extended capability register fields */
++#define XHCI_EXT_CAPS_ID(p)	(((p)>>0)&0xff)
++#define XHCI_EXT_CAPS_NEXT(p)	(((p)>>8)&0xff)
++#define	XHCI_EXT_CAPS_VAL(p)	((p)>>16)
++/* Extended capability IDs - ID 0 reserved */
++#define XHCI_EXT_CAPS_LEGACY	1
++#define XHCI_EXT_CAPS_PROTOCOL	2
++#define XHCI_EXT_CAPS_PM	3
++#define XHCI_EXT_CAPS_VIRT	4
++#define XHCI_EXT_CAPS_ROUTE	5
++/* IDs 6-9 reserved */
++#define XHCI_EXT_CAPS_DEBUG	10
++/* Vendor caps */
++#define XHCI_EXT_CAPS_VENDOR_INTEL	192
++#define XHCI_EXT_CAPS_INTEL_SPR_SHADOW	206
++/* USB Legacy Support Capability - section 7.1.1 */
++#define XHCI_HC_BIOS_OWNED	(1 << 16)
++#define XHCI_HC_OS_OWNED	(1 << 24)
++
++/* USB Legacy Support Capability - section 7.1.1 */
++/* Add this offset, plus the value of xECP in HCCPARAMS to the base address */
++#define XHCI_LEGACY_SUPPORT_OFFSET	(0x00)
++
++/* USB Legacy Support Control and Status Register  - section 7.1.2 */
++/* Add this offset, plus the value of xECP in HCCPARAMS to the base address */
++#define XHCI_LEGACY_CONTROL_OFFSET	(0x04)
++/* bits 1:3, 5:12, and 17:19 need to be preserved; bits 21:28 should be zero */
++#define	XHCI_LEGACY_DISABLE_SMI		((0x7 << 1) + (0xff << 5) + (0x7 << 17))
++#define XHCI_LEGACY_SMI_EVENTS		(0x7 << 29)
++
++/* USB 2.0 xHCI 0.96 L1C capability - section 7.2.2.1.3.2 */
++#define XHCI_L1C               (1 << 16)
++
++/* USB 2.0 xHCI 1.0 hardware LMP capability - section 7.2.2.1.3.2 */
++#define XHCI_HLC               (1 << 19)
++#define XHCI_BLC               (1 << 20)
++
++/* Intel SPR shadow capability */
++#define XHCI_INTEL_SPR_ESS_PORT_OFFSET  0x8ac4	/* SuperSpeed port control */
++#define XHCI_INTEL_SPR_TUNEN	BIT(4)		/* Tunnel mode enabled */
++
++/* command register values to disable interrupts and halt the HC */
++/* start/stop HC execution - do not write unless HC is halted*/
++#define XHCI_CMD_RUN		(1 << 0)
++/* Event Interrupt Enable - get irq when EINT bit is set in USBSTS register */
++#define XHCI_CMD_EIE		(1 << 2)
++/* Host System Error Interrupt Enable - get irq when HSEIE bit set in USBSTS */
++#define XHCI_CMD_HSEIE		(1 << 3)
++/* Enable Wrap Event - '1' means xHC generates an event when MFINDEX wraps. */
++#define XHCI_CMD_EWE		(1 << 10)
++
++#define XHCI_IRQS		(XHCI_CMD_EIE | XHCI_CMD_HSEIE | XHCI_CMD_EWE)
++
++/* true: Controller Not Ready to accept doorbell or op reg writes after reset */
++#define XHCI_STS_CNR		(1 << 11)
++
++/**
++ * struct xhci_protocol_caps
++ * @revision:		major revision, minor revision, capability ID,
++ *			and next capability pointer.
++ * @name_string:	Four ASCII characters to say which spec this xHC
++ *			follows, typically "USB ".
++ * @port_info:		Port offset, count, and protocol-defined information.
++ */
++struct xhci_protocol_caps {
++	u32	revision;
++	u32	name_string;
++	u32	port_info;
++};
++
++#define	XHCI_EXT_PORT_MAJOR(x)	(((x) >> 24) & 0xff)
++#define	XHCI_EXT_PORT_MINOR(x)	(((x) >> 16) & 0xff)
++#define	XHCI_EXT_PORT_PSIC(x)	(((x) >> 28) & 0x0f)
++#define	XHCI_EXT_PORT_OFF(x)	((x) & 0xff)
++#define	XHCI_EXT_PORT_COUNT(x)	(((x) >> 8) & 0xff)
++
++#define	XHCI_EXT_PORT_PSIV(x)	(((x) >> 0) & 0x0f)
++#define	XHCI_EXT_PORT_PSIE(x)	(((x) >> 4) & 0x03)
++#define	XHCI_EXT_PORT_PLT(x)	(((x) >> 6) & 0x03)
++#define	XHCI_EXT_PORT_PFD(x)	(((x) >> 8) & 0x01)
++#define	XHCI_EXT_PORT_LP(x)	(((x) >> 14) & 0x03)
++#define	XHCI_EXT_PORT_PSIM(x)	(((x) >> 16) & 0xffff)
++
++#include <linux/io.h>
++
++/**
++ * Find the offset of the extended capabilities with capability ID id.
++ *
++ * @base	PCI MMIO registers base address.
++ * @start	address at which to start looking, (0 or HCC_PARAMS to start at
++ *		beginning of list)
++ * @id		Extended capability ID to search for, or 0 for the next
++ *		capability
++ *
++ * Returns the offset of the next matching extended capability structure.
++ * Some capabilities can occur several times, e.g., the XHCI_EXT_CAPS_PROTOCOL,
++ * and this provides a way to find them all.
++ */
++
++static inline int xhci_find_next_ext_cap(void __iomem *base, u32 start, int id)
++{
++	u32 val;
++	u32 next;
++	u32 offset;
++
++	offset = start;
++	if (!start || start == XHCI_HCC_PARAMS_OFFSET) {
++		val = readl(base + XHCI_HCC_PARAMS_OFFSET);
++		if (val == ~0)
++			return 0;
++		offset = XHCI_HCC_EXT_CAPS(val) << 2;
++		if (!offset)
++			return 0;
++	}
++	do {
++		val = readl(base + offset);
++		if (val == ~0)
++			return 0;
++		if (offset != start && (id == 0 || XHCI_EXT_CAPS_ID(val) == id))
++			return offset;
++
++		next = XHCI_EXT_CAPS_NEXT(val);
++		offset += next << 2;
++	} while (next);
++
++	return 0;
++}
 -- 
 2.53.0
 
