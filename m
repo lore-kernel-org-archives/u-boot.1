@@ -2,172 +2,173 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1820606A31D
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 21:40:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86527606A31D
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 21:40:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=H4YxCy3L;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=AKm2BwTF
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ugJEnp5J;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=kc12ITZU
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BD72240A3D;
-	Wed, 28 Oct 2026 21:40:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 21E6040A34;
+	Wed, 28 Oct 2026 21:40:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FUfWgomQU_mA; Wed, 28 Oct 2026 21:40:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org EE2BB40A2C
+ id poolkU9OqizX; Wed, 28 Oct 2026 21:40:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7CC8240A41
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793223601;
-	b=awrpWtL6CN4dTBdQew8BEtKHhpBStX7tLcpe5mmwVSEtbPz6VetZS5sWwzucD17WyBeE
-	 AwFxxyjlgZru/8EyufJQvCJ+REIB6zOjLwyuNT6ikIbC/ftNznG+KMaxQw+4DVYlvWBwd
-	 NsuvTfDy2DLEW8OWC3kvJg9oBekCLc9P6/6TZM8sYO1ufKiobw8sZsVVAIk6suZ+Mvf50
-	 ZotkAsZRojvgKEC7WHSp4A04KVnnIKwGMhGBVOGbk+FOYKtERFVuD2TCFblXec4zEtlhR
-	 6uH1p8dkzaoiLbqXnbu7l6XC/LJQGmVCE5mpJmTPYO9+xQr/vh/iwDLLF1T5VJAMIvw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793223602;
+	b=E0n7dNo7T/pyiG0tka2u/CiaH7vH1xcWO8xhx3lA208Ji/Uhn2+rqlGhKMmGXw53BdAt
+	 n1zdcGKGyDsh6XDpFW//83Ean3YROE8qy2y3VDYEFruYkK+BNtk2nTguhawNsnuUmho6A
+	 wnHRPTdP1olcM4l/5rXcynsruoVq1PC+dh4krlyRNQc3soE34uNetBxCOlceZuPLPStoc
+	 7tYZXu1Gy25b1FS3yY0w8PGIPtGH1hm2g8VRIjfJROCH1tSGghkfQP1mTVEfBm0CLWNWw
+	 gIje9tfDkH5+Aw5kpAAbwNh16QHKkdYGRjftq9OwdY/949V7i6fMMV3IdLqIo0NvQOw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793223601;
+	c=relaxed/relaxed; t=1793223602;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=Q9bkPp7TXQ3e8j5H8y0JWzVAVupNOts+nj0dKcoRTWA=;
-	b=PfpE/Fi8LQCb5/Z8Imm8vOSI4A2VoWym+ZFn5UutO+ljbX+OuYcjPKy1gpQGECBaOotl
-	 07nFd8wOK2jubqjctYTt+1YfM3NIY5z/pEzk/4Oe2EbCaLlgCDg0tTDcRVKWLpdJ2M30K
-	 bkX+gJOHJt7RWT+2ne2yt0HBaWzknUWcdYCH84zHIIXhDZvz7JIQXY2wUgyOQwTs8i4VJ
-	 eykzQP6STUmX5RoSEqFja1/4JrNfSg3eJQ7b0IOiIWAXOLCeEu6lqP8hB4rzBpJrCmF08
-	 EWdSYzGqlSGlvzeuiTXm1i1N2qPPrW41RfC4ADXT1xCgZ5ygwhLkUXaOTfd3aA85ILg==
+	bh=CyvHiXaQTt2s9pPiKzfyD3MwRkN47N0JcbkzM/WCHsk=;
+	b=dn7cqZWSwyc7LshaNeq4OHkcgFYrXJH2owkf3WDUFuHXIzVme3wT3daZHcJu9odJGSjp
+	 vs9PZA3vQfJt8rcw4NS325Sdq6BPsEYGeT9092j9pwC2b43xEC3P00abq2V7pVI5DhMil
+	 Kmefd2YdN2U2noq8S1OmY0xbMGYrGThiDdHxcMdSuiPuQfrrQBhSvnuQuirRgibu6Sihn
+	 1leCMano9Wl+qLu9xDASLM4PAGKCOiWLNzEkPCx0aF1/Tsx7EgnVZQ8lE3AWaUaiOeePr
+	 yKfmxAH0hT3XAGN2LuyilprMjS9ZadIjpNDOfDO/V+hVbk001uBcYxqe0tHaldMQy5Q==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793223601;
-	bh=Q9bkPp7TXQ3e8j5H8y0JWzVAVupNOts+nj0dKcoRTWA=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793223602;
+	bh=CyvHiXaQTt2s9pPiKzfyD3MwRkN47N0JcbkzM/WCHsk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=H4YxCy3LPD+/HCyvxZ9bmAXlz0SW2XeX60Mm9zDh6M4WkCerfaetpEmkU3cIglL5s
-	 59kXIs6Qi3uUoR5LRsqbkNL+gwZA8OK5CRgtlyBplt3MovyVQgmVBmnw4aXYtg7cEV
-	 Ett0611+/AwdC2E/DKdaBur+BY+DSH70/QPKrtkar/WjPb5i4aKgKbV9NQfZ6QCwGH
-	 mr/wrrTuPO6J1OUGypWTlckwrONRpV2v/NlYoGf3VOm5Hko8lQPbjTKZhnnpRKxxwL
-	 Y8GriIQYfeG5ERMeId25MXMSJH8FjSkAhbzHKBfwr16KVsmS2UVR4GzCH2N48un1ez
-	 tOSCj5dqEMsTg==
+	b=ugJEnp5J5rt76fFgG1Jfn/enzAi6tu5UFGSBh54O80Uo6PZowU/5rbiws/JiaTDrM
+	 hzca4GO8lJDCNOda/0vpU6jZ6SYBng172Txh+UQ4BImwYi9mkRVKT2i4O+z9O/z8h4
+	 KmN8ubvoSALeNmMLDjSu3IBpOMsdzyXhhoRSY1T+oIq9AVgw7bWTSCuVNebPxmTX+/
+	 l0wgjahMblUoK6mX8offtfGNRuuRIkCq0ZPd/xn8mTfTbKkE5Q5or6p/KcDi9Rp6sC
+	 Zop5EhWlyuAbFdBLTtf6sjfwtHh+PNR3SMNs/b5s2Dn5pP3t5xlbVf8s+G0KjKaO+j
+	 3y++a8SdpExHA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id EE2BB40A2C;
-	Wed, 28 Oct 2026 21:40:00 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id CBAD6362
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:31:59 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7CC8240A41;
+	Wed, 28 Oct 2026 21:40:02 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id B121D235
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:51:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id BD42440725
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:31:59 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 96DDF80BEA
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:51:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YYtfLDGkasZr for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 18:31:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 9D531407E4
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::233"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793212319;
- b=T4FVhEPIqVG7NCHyRMHg0One6UAPhSTu2lpdp+sO1u/yIsJtFvmYsaYyd5V9aJwO5jdA
- siGwIO5tO1b0vq1yFEdBMrPnqM/dxmIZTiHsh4f3J5r/Hvu12iA81rGf7hP6x1pVwkgcr
- hqYximlqJTDy+s1zsRslOoXoG1ZIF3+UFFHJFwVaAH4aJR4ZaqdoizS86kjYrcAu5dKUg
- IAmfGQdmhucxOodIM6G8/Gdk7jOx9J/+BRMr26AWwEjwprKiCBwDifqzVldmUHqsW5acs
- dQ2+JYQLdy6Ex6GjQ1avSg1y5mwFxxNieJbvZdavj6b0xBthIdWpLPF/mO9xgyZCSSQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oIOtSsMG-qqj for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 18:51:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9CF2B80DBF
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::12d"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793213483;
+ b=YbeVvhQNZ/gbrE5ZQrwB3gyhIP6J9t6QlLY2EsHcMjIRy0dhUnfCxKxyOrPFvjsVexEB
+ IVDP0IYQ49so9HecolcByDqZzhmk6XUhFyo3LuUBNkFdPVHeMgUQJVjot5ysb2UX9Hbi7
+ ZV9rUh7b+JulAgmd6wd5KrblPF3jYjqcEJWqXPbg6KGComBsiDtJrOYqfVsmNZfMQ/WVq
+ 8JWf34XyLFRTVmdKK7HlUU0HUWsOeu29UK+tnQzFSrhJX6Exu/hI2kf1NbWnM/Ge7nNmR
+ TtThx80dC0FmTl0DnBo0IFkspxSVe2z/KbWxw/x5VIEy/qseMxMDbW9Z7aXaEDquRuQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793212319;
+ c=relaxed/relaxed; t=1793213483;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding;
- bh=Q9bkPp7TXQ3e8j5H8y0JWzVAVupNOts+nj0dKcoRTWA=;
- b=HyxrYAZF82H95XTdEpivXL5rye9Cci62oeRrBJ3zMcoDdyqSLrpfmuev2kGPK6sGidny
- BfS6O0m/6wpy8c/xZrW/X++eX4C+S7FhpEh9vhWRnaOk/R2CGX09f2fMv1Dau/Fg5AcjH
- t7pNSDlzVWpNKM7ZbETRuRDRyMiJFnTWFPClVrorB2K0LFSg8x8EX4Juq7SieigtvFvnO
- NArqzMIxsC6KRw4j/j9IpdTLRy7Sqctr3nF6FqQnRfr2+RLoFVKPv54P0W2JRH9sM7Z4f
- Qpv3YUe0Sn9ZDPKC9airGo9BXR6dcJUELgFlur6fw7oJ+FUjbwWQk4HdQKRRgn2lfJA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+ Subject:Message-ID:References:MIME-Version:Content-Type:
+ Content-Disposition:In-Reply-To;
+ bh=CyvHiXaQTt2s9pPiKzfyD3MwRkN47N0JcbkzM/WCHsk=;
+ b=CuRHeFo77o87K60T7LgHFxvjENPer8KFyD96o7meurNrdPI8ckt1nSz1WPZXxyLv8LsK
+ LU9Ff+NXP+HzbB0BqwZajfwKiZrQYySpZsa/0cWYU+sghBxIdVuviw9k+clMjGS36r+9p
+ 5cqFAVqIjlTAvquCEdDME5v4x2kGiEk0fVXJdO0oXNizHuA4ZdqCWTWR4gmO/ecz5Sm2v
+ iwFtivvupIqIPmYZNu+t4ayTtDz3C2fbMlw8ee2dZHYAx3oUnila7bWKJaqc4uZO61yDm
+ 8/i/l1M+tgbnetwTuv8gQhrDA7b5bxzHW0VK2oHYW2RT2zFpni+XBT/FOyFFuIGdXAw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=AKm2BwTF; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::233"
+ header.s=20260707 header.b=kc12ITZU; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::12d"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::233; helo=mail-lj1-x233.google.com;
+ client-ip=2a00:1450:4864:20::12d; helo=mail-lf1-x12d.google.com;
  envelope-from=maxin.john@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=AKm2BwTF
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9D531407E4
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:31:58 +0000 (UTC)
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-3a75f960be4so10410771fa.2
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 11:31:58 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20260707 header.b=kc12ITZU
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 9CF2B80DBF
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:51:22 +0000 (UTC)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-5bfc2ae6e9dso1056390e87.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 11:51:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793212316; x=1793817116;
+ d=gmail.com; s=20260707; t=1793213480; x=1793818280;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Q9bkPp7TXQ3e8j5H8y0JWzVAVupNOts+nj0dKcoRTWA=;
- b=AKm2BwTFWKn6vvzj4tLqzN/4yLg5OpfnLfc5qE3KiiNAUSpC0jaIq+rec+hAl4dujT
- SDZKzN+XT4pc/oe4MG3tJFm94iOpjESJIkdGY5VhDoloLg0R1qTiACVKTAkCjq/zfrvS
- G7vsAR82By0dpMDR1jPFle0lxcS00JknTTV9vdWApuiGwiD38jaNYknf++vqFrgAeyhi
- +VN/Qa79jKtijFqkgapVXAGLqsilhD50bxKz4Y/DmAbDnMqRsRhut99YmNUQmCef0ZQ4
- 1NrZBL5/E4IGJeUiOiygQjSCMXvi5KIOMEzbbrHAR1032y9kmLvkcjQPG9Nec3R2m2vT
- C9jA==
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=CyvHiXaQTt2s9pPiKzfyD3MwRkN47N0JcbkzM/WCHsk=;
+ b=kc12ITZUCsa0OAI6DIgE/TJLpFE/dq1XAmX8Jvr4Hc/SrTFN3fbBpTRhjHTyG3JD3V
+ uJu0+Hf2ITWquDimtoNwzIuu7fLBsXKEEizdveEmYbwTyW+HOmltT9THHLRpl0mdXR1s
+ ZELpnt5WLgjBNLHEB3zHSTGZGDG099nHp9thGYPO5ckO2xlc3DW4YmrC1uK+m3sQkz3q
+ z+aTlCw3KCCX52Yj78UWwdQAXTrWbe09j242kgF7VZ8W+FjZTSeV4ULdF8hJeowM1liG
+ MVz5y5waGhRssZjvgbYPOMl/hYGYsP9HVnJKkN5tgXFRkCcnkfI4zbqJPm2ZEM+RuzEq
+ DPCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793212316; x=1793817116;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=Q9bkPp7TXQ3e8j5H8y0JWzVAVupNOts+nj0dKcoRTWA=;
- b=qzbndKc4/IHWZ1K6TjrVL7q2gJk5YxT11oMwCLTTErXXLsDb8N4Ff30tU0VwU0znEE
- turHXMmHcan92UWw/8BNomWqCgagDJ/S1Ako85X+mS4u49he2besisYoSvE33FtTJ5nO
- myV7PRULIQb5QDg+T3uv9n0Pgfz5tqMj6VO9y/hZH5WbE3UA5XiwnAENTsjjJ5dD7BN0
- cBbo1AQdcbk9FX9JSz1p9uEdu3uEIelbebdLhCRRu7sQshvQuFBC1JLvdHhDfx5EhlIi
- gEoKsdA4gujXlw38+sxaRfiz9dsOtfYvhpLUkbglSTyorxhOgf7hnwcS0IxERQDZwZ5t
- DkMA==
-X-Gm-Message-State: AFq9FYIQdY1liRgWAKnltFFhtoS9gtLZK6jRpuFuNMrX4NzbMljNU8wQ
- 7xkkDQBaSp+WCVA0xk03f4+PLAzP96HXNuVLSWJ2dzMgFX2ckHtBqqXv
-X-Gm-Gg: AYBFou2m/QlIunE98CCcqeuCzLy6Uf06KUexGagY7Ee/6CxcMLudEkgYEmAHZYAGp7h
- w7OeJQwMPCwA6by7gidrnf16Io6jDo8ijJaPXJHQzNMV3f2gDekBBfaqlufKy3pDJJO8/HZUEU3
- XANB3DUQ6Cx+1Z7767urU+Rx9+Rufe+81L/cBrfzTju8DHAGoiwZukdO9QCWzn7eiq8h/Rbns29
- 1nLaWxSYj9wBKLpdpOKJ5Y/VuKaD/XCOSpGiC0WGDa/+AJtLZjjnASR+2+U6zzmS1AKb1UYMDS5
- pIFhH2lq7e2+JSI2U2klt5UldyujxD8ZRwfqr8ByN2VKABa6CBpo1RRrZFqEvNagmnALS3p28dc
- s3pENVT6UfIv6aPFvmLxX7N+phAS/iljTKgQ7I2ogG2sGH/ZUVDFPNH6mtefqLSvXwNQZ7izij2
- qauH0fzu3x/HPj/PG1YQts/QXFbiTZiYweiT8cUFDUTJCsj5t2r7c1/FFZJUcWa44b8TBi07Ivt
- 25yWa27mRuakXKPwLq75pp2qDoAtu2J4JjanbKiD4oYvXH2EVh5xzJhmg7mu8wRSp8OcmHN0XBe
- Emnt55KpEs9XVmhhXTRyXwq7MpNXXW46hBCdS1O8fEh2UoV23PD47ATu3wTZqWypXR0RSvuAS/N
- G0g==
-X-Received: by 2002:a05:651c:2101:b0:3ab:ac4c:186d with SMTP id
- 38308e7fff4ca-3ac9cf5fbe8mr6760901fa.13.1793212315674; 
- Wed, 28 Oct 2026 11:31:55 -0700 (PDT)
-Received: from Thor.lan (nb6bp2luucgh1ubvhqb-1.v6.elisa-laajakaista.fi.
+ d=1e100.net; s=20260707; t=1793213480; x=1793818280;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=CyvHiXaQTt2s9pPiKzfyD3MwRkN47N0JcbkzM/WCHsk=;
+ b=K59reSFXY6Qn0xHgNarYJ9UpDwiUZrsPPFuWO4g7+ABXYOyrIxbimtwuieYuQ5+tZU
+ 147fha0Q5cYY83m2bx4QBM1t7IMkKSYNfXOfacGYTlMANis6fb10s3+qd0vz74x3jDxg
+ lZgmWFAbksyxBzzHAeAJNVnUfsrd0ym7Kc5bjNWRpuy2F3+FDU+nryAyxuuncUyP1uvj
+ e7SogiaVSDxQnsl4hlUSo9rBg+dPW6UuAR5NiNA5JyqulLiwVvixmrqqGWQWHBboN7jS
+ nSqIOUhr67bsAtb7oyTxS34PkyyFmNUvl8QBGYEXGGrdVqgvzK3klvINJJMO4d0p4fzg
+ d+jw==
+X-Gm-Message-State: AFq9FYJHrkh8t6RcTyjva8Trz+S7+jTCKQYcZ+u008MkmaLdyBmwsXs3
+ /zEhrrjNnp7mKLtitadiHOprggfIWs7k0LW1JnSPRes7lThQ0/fQqVI6
+X-Gm-Gg: AYBFou0zDtNQLSfVrG8Gzv4R59rG8gyosilSnXi5a6+neg5zlkCtXjJuO1TOdeB06l8
+ E6rOZO4q9i5PmKGyMJ0+KVW1A2ykEyaX7AegSwdyYEMQaiTg5knBsy3Vfon86P1ji6SfQJ+I63Q
+ Aomp3TdxNH6QLT5R/OI/Gsa+vdogUxf1EY83Ig6V4MH5e8X3pW3F+XQWwCXVKhmA5I1UMqVyxS0
+ e6ozfsbINRi36RtHzl0vEFCDkKuID0gpYrmSSlWiMd18wKWG185BivwYOnJXUvdc78wDMFV3d5k
+ uHbJWSiAAg/99A/aeEI8tgGsIT/qGvA72wh6p6zFhPVnOQ6W9NmLImjXeJJze6/w24tKwpr+U/h
+ onVCp4ZKhRVICiI0tHZzlueFE5nzyF4vjPCRQAgkbWTIzvFo+2BwlR2AQUhSS4fycHHfG3uHtLz
+ NZPauI490RBVgZ+0ZAmlCebquoLraNXT9bVr8RUUGSO7/jC+iz4XQmP7K7/TGTLLAuIQ6lDHtB3
+ h1ZaUWqA17FClPM6fBrmW/wjptw/v5bSg+e+q+cPRP9qCHlfznVK1Sy19LlJOUnE+LHJfIdEL2L
+ YAvWKp7JY7xt7rNL6rQF3+UUHyUdZgR85UrJVeGUBSLx9VFC/0dLBH+yQdW3TOQG9AGkQNATqSq
+ 2n7e4
+X-Received: by 2002:a05:6512:12cf:b0:5bc:a9f9:b641 with SMTP id
+ 2adb3069b0e04-5bfcadb6d3amr1178670e87.67.1793213479754; 
+ Wed, 28 Oct 2026 11:51:19 -0700 (PDT)
+Received: from Thor.home (nb6bp2luucgh1ubvhqb-1.v6.elisa-laajakaista.fi.
  [2001:99a:a58:9b00:9119:221d:45f0:de83])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-3ac70a11442sm33252271fa.28.2026.10.28.11.31.54
+ 2adb3069b0e04-5bfca5a9366sm782069e87.62.2026.10.28.11.51.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Oct 2026 11:31:55 -0700 (PDT)
-From: "Maxin B. John" <maxin.john@gmail.com>
-To: sjg@chromium.org
-Cc: u-boot@lists.u-boot-project.org,
-	trini@konsulko.com
-Subject: [PATCH v2] cmd: binop: validate inputs and fix heap overrun
-Date: Wed, 28 Oct 2026 20:31:54 +0200
-Message-ID: <20261028183154.823513-1-maxin.john@gmail.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <CAFLszTgxvQ9z8R=nr8COaFvHKS+cwEnmHjjG7ihhVBxfiBtunA@mail.gmail.com>
-References: <CAFLszTgxvQ9z8R=nr8COaFvHKS+cwEnmHjjG7ihhVBxfiBtunA@mail.gmail.com>
+ Wed, 28 Oct 2026 11:51:18 -0700 (PDT)
+Date: Wed, 28 Oct 2026 20:51:16 +0200
+From: Maxin John <maxin.john@gmail.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com
+Subject: Re: [PATCH] cmd: binop: validate inputs and fix heap overflow
+Message-ID: <auJEJCE1Fxlg7JIV@Thor.home>
+References: <20261027151229.642110-1-maxin.john@gmail.com>
+ <CAFLszTgxvQ9z8R=nr8COaFvHKS+cwEnmHjjG7ihhVBxfiBtunA@mail.gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgxvQ9z8R=nr8COaFvHKS+cwEnmHjjG7ihhVBxfiBtunA@mail.gmail.com>
 X-Mailman-Approved-At: Wed, 28 Oct 2026 21:39:59 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -178,220 +179,86 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The binop command never checked the parsed count, hex strings or the
-return value of hextoul(). A hex string longer than the count would
-overrun the heap buffer and corrupt memory. Bad input was accepted
-silently and the command still returned success.
+Hi Simon,
 
-Require the count to be a non-zero decimal number. Reject hex strings
-that have an odd number of digits, contain non-hex characters or are
-longer than count bytes, reporting the offending env var value where
-there is one. Check every allocation. Return a failure code when
-something goes wrong.
+Thanks for the review.
 
-Make the file-local helpers static while changing their signatures.
+On Wed, Oct 28, 2026 at 12:49:53AM -0700, Simon Glass wrote:
+> Hi Maxin,
+> 
+> On 2026-10-27T15:12:29, Maxin B. John <maxin.john@gmail.com> wrote:
+> > cmd: binop: validate inputs and fix heap overflow
+> >
+> > The binop command never checked the parsed count, hex strings or the
+> > return value of hextoul(). A hex string longer than the count would
+> > overrun the heap buffer and corrupt memory. Bad input was accepted
+> > silently and the command still returned success.
+> >
+> > Fix the count check. Reject hex strings that are malformed or too long.
+> 
+> The existing code has no count check, so this adds one. Please can you
+> say what is now accepted, e.g. 'Require the count to be a non-zero
+> number'.
 
-Signed-off-by: Maxin B. John <maxin.john@gmail.com>
----
-Changes in v2:
-  - Explain what count is now accepted in the commit message
-  - Make the env/mem helpers static
-  - Print a separate error, showing the value, when an env var holds an
-    invalid or too-long hex string
----
- cmd/binop.c | 93 ++++++++++++++++++++++++++++++++++++-----------------
- 1 file changed, 63 insertions(+), 30 deletions(-)
+Agree. v2 says: "Require the count to be a non-zero decimal number.
+Reject hex strings that have an odd number of digits, contain non-hex
+characters or are longer than count bytes."
+ 
+> > Check every allocation and return a failure code when something goes
+> > wrong.
+> >
+> > Signed-off-by: Maxin B. John <maxin.john@gmail.com>
+> >
+> >  cmd/binop.c | 87 ++++++++++++++++++++++++++++++++++++++++---------------------
+> >  1 file changed, 57 insertions(+), 30 deletions(-)
+> 
+> > diff --git a/cmd/binop.c b/cmd/binop.c
+> > @@ -14,13 +15,15 @@ enum {
+> > -void write_to_env_var(char *varname, u8 *result, ulong len)
+> > +int write_to_env_var(char *varname, u8 *result, ulong len)
+> 
+> These four helpers are only used in this file and have no prototypes.
+> Since you are changing their signatures anyway, please can you make
+> them static, as you did with read_src()?
 
-diff --git a/cmd/binop.c b/cmd/binop.c
-index 10d91b5dbf2e..ee1ad671f3c6 100644
---- a/cmd/binop.c
-+++ b/cmd/binop.c
-@@ -2,6 +2,7 @@
+Updated in v2.
  
- #include <command.h>
- #include <env.h>
-+#include <errno.h>
- #include <hexdump.h>
- #include <malloc.h>
- #include <mapmem.h>
-@@ -14,13 +15,15 @@ enum {
- 	OP_ID_OR,
- };
- 
--void write_to_env_var(char *varname, u8 *result, ulong len)
-+static int write_to_env_var(char *varname, u8 *result, ulong len)
- {
- 	char *str_output;
- 	char *str_ptr;
--	int i;
-+	int i, ret;
- 
- 	str_output = malloc(len * 2 + 1);
-+	if (!str_output)
-+		return -ENOMEM;
- 	str_ptr = str_output;
- 
- 	for (i = 0; i < len; i++) {
-@@ -28,40 +31,76 @@ void write_to_env_var(char *varname, u8 *result, ulong len)
- 		str_ptr += 2;
- 	}
- 	*str_ptr = '\0';
--	env_set(varname, str_output);
--
-+	ret = env_set(varname, str_output);
- 	free(str_output);
-+
-+	return ret;
- }
- 
--void read_from_env_var(char *varname, u8 *result)
-+static int read_from_env_var(char *varname, u8 *result, ulong len)
- {
- 	char *str_value;
-+	size_t slen;
-+	bool is_env;
- 
- 	str_value = env_get(varname);
--	if (str_value)
--		hex2bin(result, str_value, strlen(str_value) / 2);
--	else
--		hex2bin(result, varname, strlen(varname) / 2);
-+	is_env = !!str_value;
-+	if (!is_env)
-+		str_value = varname;
-+
-+	/* Shorter hex strings leave the (zeroed) tail of result untouched */
-+	slen = strlen(str_value);
-+	if ((slen & 1) || slen / 2 > len || hex2bin(result, str_value, slen / 2)) {
-+		if (is_env)
-+			printf("Error: env var '%s' value '%s' is not a hex string of up to %lu bytes\n",
-+			       varname, str_value, len);
-+		else
-+			printf("Error: '%s' is not an env var or hex string of up to %lu bytes\n",
-+			       varname, len);
-+		return -EINVAL;
-+	}
-+
-+	return 0;
- }
- 
--void read_from_mem(ulong addr, u8 *result, ulong len)
-+static int read_from_mem(char *varname, u8 *result, ulong len)
- {
-+	ulong addr;
- 	u8 *src;
- 
-+	if (strict_strtoul(varname, 16, &addr)) {
-+		printf("Error: invalid address '%s'\n", varname);
-+		return -EINVAL;
-+	}
- 	src = map_sysmem(addr, len);
- 	memcpy(result, src, len);
- 	unmap_sysmem(src);
-+
-+	return 0;
- }
- 
--void write_to_mem(char *varname, u8 *result, ulong len)
-+static int write_to_mem(char *varname, u8 *result, ulong len)
- {
- 	ulong addr;
- 	u8 *buf;
- 
--	addr = hextoul(varname, NULL);
-+	if (strict_strtoul(varname, 16, &addr)) {
-+		printf("Error: invalid address '%s'\n", varname);
-+		return -EINVAL;
-+	}
- 	buf = map_sysmem(addr, len);
- 	memcpy(buf, result, len);
- 	unmap_sysmem(buf);
-+
-+	return 0;
-+}
-+
-+static int read_src(char *arg, u8 *result, ulong len)
-+{
-+	if (*arg == '*')
-+		return read_from_mem(arg + 1, result, len); /* Skip asterisk */
-+
-+	return read_from_env_var(arg, result, len);
- }
- 
- static int do_binop(struct cmd_tbl *cmdtp, int flag, int argc,
-@@ -70,7 +109,7 @@ static int do_binop(struct cmd_tbl *cmdtp, int flag, int argc,
- 	ulong len;
- 	u8 *result, *src1, *src2;
- 	char *oparg, *lenarg, *src1arg, *src2arg, *destarg;
--	int i, op;
-+	int i, op, ret = CMD_RET_FAILURE;
- 
- 	if (argc < 5)
- 		return CMD_RET_USAGE;
-@@ -89,22 +128,15 @@ static int do_binop(struct cmd_tbl *cmdtp, int flag, int argc,
- 	else
- 		return CMD_RET_USAGE;
- 
--	len = dectoul(lenarg, NULL);
--
--	src1 = malloc(len);
--	src2 = malloc(len);
--
--	if (*src1arg == '*')
--		read_from_mem(hextoul(src1arg + 1, NULL), src1, len);
--	else
--		read_from_env_var(src1arg, src1);
--
--	if (*src2arg == '*')
--		read_from_mem(hextoul(src2arg + 1, NULL), src2, len);
--	else
--		read_from_env_var(src2arg, src2);
-+	if (strict_strtoul(lenarg, 10, &len) || !len)
-+		return CMD_RET_USAGE;
- 
-+	src1 = calloc(1, len);
-+	src2 = calloc(1, len);
- 	result = malloc(len);
-+	if (!src1 || !src2 || !result ||
-+	    read_src(src1arg, src1, len) || read_src(src2arg, src2, len))
-+		goto exit;
- 
- 	switch (op) {
- 	case OP_ID_XOR:
-@@ -129,21 +161,22 @@ static int do_binop(struct cmd_tbl *cmdtp, int flag, int argc,
- 		}
- 		puts("\n");
- 
-+		ret = CMD_RET_SUCCESS;
- 		goto exit;
- 	}
- 
- 	destarg = argv[5];
- 
- 	if (*destarg == '*')
--		write_to_mem(destarg + 1, result, len); /* Skip asterisk */
-+		ret = write_to_mem(destarg + 1, result, len); /* Skip asterisk */
- 	else
--		write_to_env_var(destarg, result, len);
-+		ret = write_to_env_var(destarg, result, len);
- exit:
- 	free(result);
- 	free(src2);
- 	free(src1);
- 
--	return 0;
-+	return ret ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
- }
- 
- U_BOOT_CMD(
--- 
-2.47.3
+> > diff --git a/cmd/binop.c b/cmd/binop.c
+> > @@ -28,40 +31,70 @@ void write_to_env_var(char *varname, u8 *result, ulong len)
+> > +	if ((slen & 1) || slen / 2 > len || hex2bin(result, str_value, slen / 2)) {
+> > +		printf("Error: '%s' is not an env var or hex string of up to %lu bytes\n",
+> > +		       varname, len);
+> 
+> If 'varname' is an env var whose value is too long or not valid hex,
+> this message says it is not an env var, which is confusing. It would
+> be better to print a different message in that case, or at least show
+> the value that failed to parse.
 
+Good catch. v2 prints a separate message for that case, including the
+value. Kept the existing message for arguments that are neither env
+var nor valid hex. 
+
+> > diff --git a/cmd/binop.c b/cmd/binop.c
+> > @@ -89,22 +122,15 @@ static int do_binop(struct cmd_tbl *cmdtp, int flag, int argc,
+> > +	if (strict_strtoul(lenarg, 10, &len) || !len)
+> > +		return CMD_RET_USAGE;
+> 
+> There are no tests for binop at present. A test in test/cmd/ covering
+> the overflow case and the new error paths would be good, perhaps as a
+> follow-up.
+
+Yes, I will send that as a follow-up.
+ 
+> Regards,
+> Simon
+
+Thanks & Regards,
+Maxin
