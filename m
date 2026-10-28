@@ -2,134 +2,150 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C074606A31E
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 22:50:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9848D606A31A
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 22:53:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Hy4uDRsr;
-	dkim=pass (2048-bit key, unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=MCnkevwa
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=kz8auSwP;
+	dkim=pass (2048-bit key, unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=wJCCTpJZ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 23AF56070C;
-	Wed, 28 Oct 2026 22:50:32 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6757960766;
+	Wed, 28 Oct 2026 22:53:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ud15xusV0jPr; Wed, 28 Oct 2026 22:50:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org CEA1B6070D
+ id begz_X68CimQ; Wed, 28 Oct 2026 22:53:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6B98C6073B
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793227831;
-	b=e9+E0NxPfRekakC8A/RihUMoQpGkmdrHCibBnWYqvBbAktXhsEK93T2t3zMZQYjVtw8W
-	 z1x9kg6Z5ap4UmphNOfuAqEJoarQxEWI+HK27UIdh6fjWVL9BdH9sDiO5epUoE/VpBXrt
-	 fAlbwd0ujkAz+XhAeYVjbJ49pZ2bv4qKXZ0p17XfsyP5qSzxgpsxHjkb+Hu3RkE/NmtIy
-	 E/p7S3j7V8Cmp41uLQDP90RZwZ+Wyp+0QMLvSQjMAvmg48gzCqzK6X8mEtKiJWYYXmQrd
-	 R0BZ1avTFpPa1HKpYQU3YNfH/qJtCfGdZg4kxuFaFh7kUdYZf7xkGeAEQojl18G+0xw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793228023;
+	b=LVAnlgs05Sd3Xdrs+wKhj1GR0fzyI85VbW7M/x0uvNtbwHIG880+sC+X+K5ITQ8P/J+0
+	 z78k+a4wKFqtK4NgcW/TZeMfFF1DAncPZyzbT1D32Pn50+eIX2tN90eS6SKqyRO6puoti
+	 5km2E4l5sv1q5kKCPnwixNajg48FVS/B62+Yi6GwSyli7QwZSvA80GsreWklTn6McIDxC
+	 9H4B0dr82oCSlQxDlmNrKIOAmtr5DSg6dsJBQqbiOGumxGAwsH/wLNSx+saJ5VA4iTk89
+	 8vP0cXaDkuuXe9+I34EJd7B2awmdN+sq7WwzzSt89seI2tpcvxMJhn1gPNgt46T08oQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793227831;
+	c=relaxed/relaxed; t=1793228023;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:From:
-	 Subject:To:Cc:References:Content-Language:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
+	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
+	 X-Report-Abuse:X-Report-Abuse-To:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=jopaZLmHLi76kzusApIzUm3H2qggmVV1CIgiW5ZA+3Y=;
-	b=tCIRWo4fAabaIcXudYvvpyuYZr+2BAtMaEVWcU5UIO4ekTZkMH47dZT9O+4JAsksV+/X
-	 aL+biY4L1g1Ow+UfNLiiau/gRVp+sLo91e/aFQcRe+Wu+kGEC91md9WGPkpC6l1v3dFQS
-	 Xtisv37lrvgFNwIK/BLKQ4LCHNAt0MfVR/CUOh7Y/Pjm79yBGA96rc5nTmByvpfmjOMbv
-	 YiLASQNfobUfjiLvLPedeDoEl7QXRSVADSWF9XH1T1Ke/MSR+qQZ+tCzTgFvyshQL8pYz
-	 UkGno25N/CvcnUl7WdhdKGNJtD4g/vyfXIIMVxKDQZCKIseIf70Oh6sKIIYhWA0XiHw==
+	bh=socwaKbqdKR7unT0OyBn6q/NivZm90t7MS4rD3EVz+w=;
+	b=YTX0cR+QN8DvrE1IZ081m7LqcZx0yfHnyAAsccQRAeBS7eNPU86+yanc49VtkaMfwBIp
+	 /D75gyku76J5F0ns8wxvu3YzEVwq6TE3BG6Dss7zOaPFhKPGweRHM5fzx8cBM7eJ0mGQ5
+	 IGUW+acP0AzhnAPvrp86fWtyWsn/QkA5kZWEtmyYG9AckMROAWKzn9TcgJe0OP+4j376e
+	 EYfzEbPxN7fNG+7WqLTwHsR69GS7Cd3iaaRrugFgzZaz7FKMjocAaMDP6BTeaLN+ceUPs
+	 aTXwHlLvZTSm9yRFiZNsNaeLgFt7yGTPk21oFC27LD5lzdCIiecEvwq+lj/TPC5YivA==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793227830;
-	bh=jopaZLmHLi76kzusApIzUm3H2qggmVV1CIgiW5ZA+3Y=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793228023;
+	bh=socwaKbqdKR7unT0OyBn6q/NivZm90t7MS4rD3EVz+w=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Hy4uDRsr9av20KhanVayUcN1PmyzuuvcNHr3fFjvGrGVBalIQxD69hb3fBSHYpCHf
-	 Qi6Udm9d9n8kH5EK3fWxpjhAvoLcpXIVJaicpKzvaWmNOQiYSuAsSlCcw+UagHgKTx
-	 aB8io3PQrDMUvxWvYTl23f62ZUdMs75ldJvs78O/OZDGrgh7+ABRWCm28otE+aCR8o
-	 r37xEQGaFXsg6pUtuPcrZaf19ha4qkK7XQMfI8LOvkWeu/7fOfHWpNSi1JjwTaHuGl
-	 7mJP/xISfyhGzFoPjy5JFxSU8zbO/aqehOQDYrHhUhEEqhc85v9erTX7QuHI/lnq3e
-	 6WCQ51CyC+Egg==
+	b=kz8auSwPULN5Sm8Do3LSX3jBhwUlQI+iiO90N+zloytbiuZJYt8zczvliQNJm5T16
+	 53mfimRVqoHUWdx8yQnc3n4fynZAB5Km7+h3LiHiFZbm0bzlquwiXWGDJZZiRFr542
+	 H4FXKZPbC70nTYyYCyFQHDYSxxmytFRaKudEI+kFCg1kKXWaYslN5ZreN8vYKvZ/+O
+	 PD3kf4cbw31dAj1J59afuFE4fq3i30Pj1tQdfBc309wjH2yDeg/Hw0XCY9UINmhU3P
+	 vpZW5zTwJXYoE3NhfdTpOOCU47HS0ZwkrFvuJoVPh7xgiNMgr22FomtpHzlW95zacA
+	 8jPCgDkdTsuHw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CEA1B6070D;
-	Wed, 28 Oct 2026 22:50:30 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 4E9C02E5
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 22:50:29 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6B98C6073B;
+	Wed, 28 Oct 2026 22:53:43 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7B5822A8
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 22:53:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3452D400B5
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 22:50:29 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 62163408C4
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 22:53:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5es1QF3KgNMW for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 22:50:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 1163A4004A
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=116.202.128.144
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793227827;
- b=WbSBf9tdJBU9vl+jvY4KTPOejX8gTjc67V4px6v9WyDwB2FBVcVjozpOtNUOUpNjO8PK
- 18o+pQtzje2YfrKZomOD8T+jIEtqSEnRAa0anlKuNIR8pyLUYDYMFgZOd4zV6QrxDtryg
- Dn0XBEfpiMtRALibbkUpyPt/jfPNdpExyXNOFaz94oSS162m3ncVa5FR4QVCrI76gCKRn
- NTlWrUWp+pFqcCsvlvGCQI/Nb0HogP3zl8SRot932lvFrN3oFxTQEimfVHA0KFq/iyXwR
- jyj55c9vK+wg7bPcnp/gsgHuhLPscRcm7pVZ9x9VzCqXoQA8AesGZTK9BpBE5jvGjYQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vdl8dMkKeq2F for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 22:53:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 57E4B408C6
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip=149.28.215.223
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793228021;
+ b=rYAK7me7xe06Lr4AE9FmXv+jUp4egHEc6blKRhFj74Ajo+Bj7Pr7iNecBlO2587d4Q+r
+ Z7KW78brlwL8vkjZLVgdjL0d6/cFF9m5mLKSm/y5qwPPiyQatc9B2NpEa9KYBCl6d3oJr
+ yU7gJ50xoNxCXwzm5RpjWHl8fb83AOSOzvv0CM3x21X3c+pZrTgwtoe93ILj4BYheDWu9
+ a2iIbhS88rFVCeJ6ZGYOaQ16hl3QqQ5b5u4lKo+Jb6fNVCwAoW5AlTiOICPOFkIZwDLnT
+ Nj5+eObVsmVywq4OzYdQdMgxkBH/HLK/w78Uga3jC4t2xvbnCQMEreLggy1DbyJMGkQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793227827;
- h=Received-SPF:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
- User-Agent:From:Subject:To:Cc:References:Content-Language:In-Reply-To:
- Content-Type:Content-Transfer-Encoding;
- bh=jopaZLmHLi76kzusApIzUm3H2qggmVV1CIgiW5ZA+3Y=;
- b=j/u0rsYQHEgvFaRNrFq+MQEubyfl8cTlpgsIpoE9/ZiOa2b3Zpk1FdQ0mZjxI3VgA1dW
- Yh6Ra6JiwbCK2AasYfxlQS1Hucr1cjmxCRv8FwQp20OXyOi3fzHMlUAOJgCsuChEwVf3I
- Et5a/1YvJzEI/qox3K3BkDyIto1WqsusBG7OMxydPDeDINIK7vmH8DoJEhu9hGtt5p3xI
- wO+ELqEHbY3P2rHN0E/Uea/5rPVebydl3KS/LhFxcMHGw1hFYflFmJXTEc1tj6QRllytu
- dMTlW9IqGm3Q8zSCH1wtnS2giN5k8Ujihu7ykWsGwkH09RzjtwDkUzL4gaAHdiQjTOQ==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=freeshell.de;
- dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=MCnkevwa; 
- arc=none smtp.remote-ip=116.202.128.144
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.202.128.144;
- helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=freeshell.de
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=MCnkevwa
-Received: from freeshell.de (freeshell.de [116.202.128.144])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1163A4004A
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 22:50:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1793227814;
- bh=jopaZLmHLi76kzusApIzUm3H2qggmVV1CIgiW5ZA+3Y=;
- h=Date:From:Subject:To:Cc:References:In-Reply-To:From;
- b=MCnkevwavu3Q8lev0UWUaveWF1UbXeH4A1ab1TAmHdeATcIiHNmK3dshCyhdWU64S
- S7Iuft4LSduOQsFgEdPRtOoC8wvD7JqbQqPWKzBKHBWaQFdKQz/HYDRzBiQK+dPlHJ
- By+bKVKJZeo7MWUOEjpgIwB53+IkHfexenagelC9SgeFtbiX1nd8wHM8a/YUhwtR99
- xxlAbDNKhIERJTTsoeBbAkq2o/+9S1Vu7huXdDwRVnqJ2Fmhy2u6fIh1BUnfzz35BC
- BQxG0e9p+lnPOI6phLKSPThBvOEpyYQcA4vQApsfppqYk41qMAkw4kbZFyp09CQ0lZ
- W2yYn0PvM+SXA==
-Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
- [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 82699B220343;
- Wed, 28 Oct 2026 23:50:13 +0100 (CET)
-Message-ID: <bbb802bf-3569-4555-a323-fdcd30dc927c@freeshell.de>
-Date: Wed, 28 Oct 2026 15:50:04 -0700
+ c=relaxed/relaxed; t=1793228021;
+ h=Received-SPF:DKIM-Signature:X-Forward-Email-ID:
+ X-Forward-Email-Sender:X-Forward-Email-Version:
+ X-Forward-Email-Website:X-Complaints-To:X-Report-Abuse:
+ X-Report-Abuse-To:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
+ Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding;
+ bh=socwaKbqdKR7unT0OyBn6q/NivZm90t7MS4rD3EVz+w=;
+ b=HZiM2tUByR3I+1azNJSaZYV6Q9OdwWUGm80at1670/i8X7wiyKYl+QGJw6r8LFWRC8p7
+ ZP8atkkqZIrALRc45TXjk2yx307AF5DmXU/Y9i1HE1BQVQsMz6BKygT/Tha4knms2HtLo
+ ECARvZZivwRI66OyJghpdQCxl2IfnYm477nUgI2bCx5Th6YUuJ0tHygGOMROB7I8NRyD3
+ 6QYU/4izQa9Ei0Z9TMoWaPZenTDtAm/SveJYPEsEEqFPERGfmpKbf0sx8wlCi/CyusAe0
+ C888FFmgEoF62KHb91xNmsZrex/3Zyv78gSMM5e3NI3h4Vnik7RSf32FlTlcYClEdmQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=kwiboo.se;
+ dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=wJCCTpJZ; 
+ arc=none smtp.remote-ip=149.28.215.223
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=149.28.215.223;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=340e=it=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=wJCCTpJZ
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 57E4B408C6
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 22:53:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1793228017;
+ bh=socwaKbqdKR7unT0OyBn6q/NivZm90t7MS4rD3EVz+w=;
+ b=wJCCTpJZ5EF0c0INtOzMufXeDs22om5wYe5ub5zhh+FwkroFn7P/jjpzQG+70enaPV/TvblYn
+ JGMn4IQmAFbhbHbLq0Ic4rB7P4sQn1HM9xcTgVNH02zBPFs7/CtcdE+1YTrHhawSVSqCGxjOjNH
+ u4j4KSVJDjpgWE3LDFRNzaOuaoNe/76J/qeSfNiAsikBPIQpttwzKpUnLkRQrXitEg20rlkTF6M
+ 5me6Om8aJ6b11+Tc9sZQx+9lreiHs1wp/t/TDLxBso1YvmgKvhF9vSShhdZvcH+unzFHkYtUBY3
+ ejPtClu89sWtzBd8BGaPezjbuwsetsb6GlYInyu993MA==
+X-Forward-Email-ID: 6ae27ce8f7a872489c113089
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.18.12
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <c5cf9db7-7d54-47b7-8cc0-2b677d17fbfc@kwiboo.se>
+Date: Wed, 28 Oct 2026 23:53:23 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: E Shattow <e@freeshell.de>
-Subject: Re: [PATCH] doc: develop/sending_patches: add tips for series
-To: Ralph Siemsen <ralph.siemsen@linaro.org>, u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Simon Glass <sjg@chromium.org>, Neil Armstrong <neil.armstrong@linaro.org>
-References: <20261028-doc-sending-patches-v1-1-66b0f1b276de@linaro.org>
+Subject: Re: [PATCH v3 1/5] clk: rockchip: rk3568: Ungate PCIE30PHY_REF clocks
+ when PCI is enabled
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Lukasz Majewski <lukma@nabladev.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+References: <20261015224222.1582607-1-jonas@kwiboo.se>
+ <20261015224222.1582607-2-jonas@kwiboo.se>
+ <16574e5d-6d1f-4419-8519-b1cc356797a3@0leil.net>
+ <6a5e35fb-2bfb-4551-a9a4-2f51a1cbdaad@kwiboo.se>
+ <179e0a6f-0dd9-48f1-a79a-3611ddb30cd8@cherry.de>
 Content-Language: en-US
-In-Reply-To: <20261028-doc-sending-patches-v1-1-66b0f1b276de@linaro.org>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <179e0a6f-0dd9-48f1-a79a-3611ddb30cd8@cherry.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -141,85 +157,172 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Ralph,
+Hi Quentin,
 
-On 10/28/26 12:13, Ralph Siemsen wrote:
-> Related patches can be grouped into a "patch series". Add some tips on
-> how to decide how much belongs into a "patch series".
+On 10/28/2026 7:23 PM, Quentin Schulz wrote:
+> Hi Jonas,
 > 
-> Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
-> ---
->  doc/develop/sending_patches.rst | 32 ++++++++++++++++++++++++++++++++
->  1 file changed, 32 insertions(+)
+> On 10/28/26 5:57 PM, Jonas Karlman wrote:
+>> Hi Quentin,
+>>
+>> On 10/28/2026 1:41 PM, Quentin Schulz wrote:
+>>> Hi Jonas,
+>>>
+>>> On 10/16/26 12:42 AM, Jonas Karlman wrote:
+>>>> The CLK_PCIE30PHY_REF_M and CLK_PCIE30PHY_REF_N clocks are by default
+>>>> gated coming out from system reset. The probe() ops of the PMUCRU driver
+>>>
+>>> Are they? I don't have an RK3568 board so cannot test this, but the TRM
+>>> says the bitfields are 0 at reset with "When high, disable clock", so I
+>>> am not sure what exactly this is for (except after a reboot where the
+>>> Linux kernel has disabled the PCIe clocks maybe?).
+>>
+>> I guess the TRM is incorrect, because as I mention in my commit message
+>> these clocks comes gated out from system reset, or I would never have
+>> phrased the commit message as such.
+>>
 > 
-> diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
-> index b4f82eb18e1..b6c2a865928 100644
-> --- a/doc/develop/sending_patches.rst
-> +++ b/doc/develop/sending_patches.rst
-> @@ -184,6 +184,38 @@ General Patch Submission Rules
->    cases, you did something wrong if your patch exceeds this limit. Think again
->    if you should not split it into separate logical parts.
->  
-> +Tips for creating patch series
-> +------------------------------
-> +
-> +A series of related patches can be sent as a "patch series", as described
-> +above. Individual patches should be small and self contained. Likewise,
-> +this also applies to each "patch series". Keep the following in mind:
-> +
-> +* large series are harder to review. Maintainers are busy and may postpone
-> +  large reviews, whereas smaller reviews can be "squeezed in" more easily
-> +
-> +* tools like ``b4`` and ``patman`` will collect reviewers for each patch,
-> +  but then send the entire series to all reviewers found. This is not ideal
-> +  since it floods maintainers with patches they might not care about.
-> +
-> +A better approach is to break up a large series into smaller sub-series,
-> +for example by subsystem (clock, pinctrl, reset, etc.). This allows better
-> +targeting of only the relevant reviewers for each sub-series.
-> +
-> +Of course there are sometimes cases where a large patch series is okay:
-> +
-> +* when the changes are all in a specific area: for example when fixing a bug
-> +  in a driver, but also doing some refactoring or cleanup in the same code
-> +
-> +* when there are unavoidable dependencies between patches: keeping them
-> +  together avoids having to explain how multiple series are dependent
-> +
-> +In a nutshell, the goal should be to break up changes into smaller pieces,
-> +so the change can be more easily understood by reviewers. Combining multiple
-> +patches into a series makes sense as a way of grouping related changes, but
-> +if this results in a very large number of reviewers (eg. 25 or more) then
-> +the series should probably be split into smaller sub pieces.
-> +
->  Attributing Code, Copyrights, Signing
->  -------------------------------------
->  
-> 
-> ---
-> base-commit: 03e45557e1f38a39a0c80fe30483130ff376cf92
-> change-id: 20261028-doc-sending-patches-d3a464feff98
-> 
-> Best regards,
-> --  
-> Ralph Siemsen <ralph.siemsen@linaro.org>
-> 
+> Well, it could also be inferred from the fact Rockchip enabled it in the 
+> CRU driver unconditionally. So I wanted to make sure it was indeed 
+> checked rather than simply inferred. Thank you for the confirmation.
 
-I would substitute "nutshell" and "squeezed in" with something less
-likely to confuse non-native English language contributors; ("In
-summary, the goal...") ("reviews of a focused feature or concepts
-supporting one idea is less demanding of a busy maintainer than a
-collection of many smaller unrelated changes with no common idea").
+I would most likely have phrased the message very differently if the out
+of system reset state was not tested, or at least mention that it would
+have been a refactor based on current code if that was the case.
 
-with that, however you want to proceed it is already an improvement to
-have the question illustrated of "what should I think about when
-organizing a patch set?"
+My expectation (and practice) are that when something is definitively
+worded in commit message it has been verified to be true, else there is
+a note and/or the wording is much more relaxed.
 
-Reviewed-by: E Shattow <e@freeshell.de>
+> 
+>> See below runtime log on a Radxa ROCK 3B (from power off state):
+>>
+>>    DDR 5c7dbc4d49 kwin.chen 26/05/21-10:58:25,fwver: v1.26
+>>    [...]
+>>    out
+>>    PRE: pmu_clkgate_con[2]=6000
+>>    POST: pmu_clkgate_con[2]=6000
+>>    
+>>    U-Boot SPL 2027.01-rc1-00097-gec7e6bacaadc-dirty (Oct 28 2026 - 16:35:51 +0000)
+>>    Trying to boot from RAM
+>>    [...]
+>>    U-Boot 2027.01-rc1-00097-gec7e6bacaadc-dirty (Oct 28 2026 - 16:35:51 +0000)
+>>    
+>>    Model: Radxa ROCK 3B
+>>    SoC:   RK3568
+>>    DRAM:  8 GiB (total 7.7 GiB)
+>>    PRE: pmu_clkgate_con[2]=6000
+>>    POST: pmu_clkgate_con[2]=0
+>>
+>> Using following code in probe() ops:
+>>
+>> 	printf("PRE: pmu_clkgate_con[2]=%x\n", readl(&priv->pmucru->pmu_clkgate_con[2]));
+>>
+>> 	/* Ungate PCIe30phy refclk_m and refclk_n */
+>> 	if (CONFIG_IS_ENABLED(PCI))
+>> 		rk_clrreg(&priv->pmucru->pmu_clkgate_con[2], 0x3 << 13);
+>>
+>> 	printf("POST: pmu_clkgate_con[2]=%x\n", readl(&priv->pmucru->pmu_clkgate_con[2]));
+>>
+>> I guess theoretically it could be the DDR init blob that gates the
+>> refclks, however running bare minimal TPL on same board show same:
+>>
+>>    U-Boot TPL 2026.10-01297-g83bfcb8d6e91-dirty (Oct 28 2026 - 16:45:25)
+>>    x0: 00000000 fdcc0098
+>>    x1: 00000000 00000008
+>>    x2: 00000000 fdcc1000
+>>    x3: 00000000 00000006
+>>    x4: 00000000 00000050
+>>    x5: 00000000 00000000
+>>    x6: 00000000 00020002
+>>    sp: 00000000 fdcc0f30
+>>    BOOTSOURCE_ID fdcc0010: 0000000a
+>>    PMU_CRU fdd00000: 00004064
+>>    PMU_CRU fdd00004: 000014c1
+>>    PMU_CRU fdd0000c: 00000007
+>>    PMU_CRU fdd00010: 00007f00
+>>    PMU_CRU fdd00040: 00002063
+>>    PMU_CRU fdd00044: 00001481
+>>    PMU_CRU fdd0004c: 00000007
+>>    PMU_CRU fdd00050: 00007f00
+>>    PMU_CRU fdd00100: 00000080
+>>    PMU_CRU fdd00108: 00000001
+>>    PMU_CRU fdd0010c: 00000001
+>>    PMU_CRU fdd00110: 00000800
+>>    PMU_CRU fdd00118: 00000001
+>>    PMU_CRU fdd0011c: 00000009
+>>    PMU_CRU fdd00120: 0000050f
+>>    PMU_CRU fdd00124: 00008bbb
+>>    PMU_CRU fdd00188: 00006000  (pmu_clkgate_con[2])
+>>    PMU_CRU fdd00240: 00040020
+>>    DRAM init failed
+>>
+>> Above should hopefully make it clear that the reset value in TRM is
+>> likely incorrect ;-)
+>>
+> 
+> Wouldn't be the first nor the last time this happens :)
+> 
+>>>
+>>>> unconditionally ungate these clocks to help ensure PCIe works in U-Boot
+>>>> proper.
+>>>>
+>>>> Change to only ungate these clocks when the PCI Kconfig option is
+>>>> enabled for current boot phase to delay the ungate as late as possible.
+>>>>
+>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>>> ---
+>>>> Changes in v3:
+>>>> - New optional patch to help delay the ungate of PCIe ref clocks until
+>>>>     U-Boot proper
+>>>>
+>>>> This patch is strictly not needed, however it seems very unnecessary to
+>>>> ungate PCIe ref clocks in SPL when PCIe typically only is used in proper.
+>>>>
+>>>
+>>> Considering the kernel seems (I had a cursory look) to be able to
+>>> control those clocks and have them handled via the pcie node, it seems
+>>> fine to me to possibly not have the clock enabled by U-Boot (e.g. with
+>>> U-Boot proper or xPL not enabling PCI).
+>>>
+>>> So, I'm fine with the content of the patch, not the commit log. Can you
+>>> please confirm that they are indeed not at 0 when reset (and/or that we
+>>> do this to be safe when doing reboots) and rework the commit log?
+>>
+>> As mentioned above, the commit message has been correct from start, so
+>> please be explicit about what you think is unclear and needs to change.
+>>
+> 
+> You could have just said that it doesn't match the TRM, that would have 
+> told me that it was checked IRL.
+
+I did not even notice that the reset state in TRM was different, all my
+changes are typically confirmed using runtime testing ;-)
+
+> 
+> I can reword the first sentence to
+> 
+> The CLK_PCIE30PHY_REF_M and CLK_PCIE30PHY_REF_N clocks are by default
+> gated coming out from system reset unlike stated in the TRM.
+> 
+> when applying, does that work for you?
+
+Sure, please feel free to make any change you see fit to any of my
+patches :-)
+
+Regards,
+Jonas
+
+> 
+> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> 
+> Thanks!
+> Quentin
+
