@@ -1,198 +1,145 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55B3A606A31E
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 09:32:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E48D606A32D
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 09:57:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=b/f69Er5;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=mLSZRg1Q
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=fJv/Io6k;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=G6CitNSg
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1D876404FF;
-	Wed, 28 Oct 2026 09:32:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 03CD580DE8;
+	Wed, 28 Oct 2026 09:57:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id e3jd4MkcdPjD; Wed, 28 Oct 2026 09:32:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 58ECD40540
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793179949;
-	b=iiceGEu1MBBijIUrVcQA1sJb7CNCjI58O6Mt5/8YPysY2jtce50DlSMroygIL+sjwPor
-	 fSoerCU0v6KOq6NREY6GTyCQFKNzTcJb5WZ0ryk8RicBfy/jtsFh0MEZK8d2I6qm75XFn
-	 e35CSB5+H6RMqKItGAqXK091MdStwOAXHfPEHK3S0zEKN+Le8qjqMiOXdY9+BEqUjeNCu
-	 sQddOxCpdlNtomwlZNrtJpjL7d+s6IBp3YdJnYcWZmqUN3Wwg4aF/vaYJ1fdTS6nrFhve
-	 k/4B8x4OqS9D8qRE7/pKOqpPyYtqAk3ce9a8LSYduCs6cKo0KCJ60b8MRqaJS0AjT1A==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793179949;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5WeaglxJqQvc; Wed, 28 Oct 2026 09:57:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2D4E980DE9
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793181423;
+	b=BOneJK+O/4WnmEtXWdNSs+eEjvFVeiV2ITACpMQUR/G364OHUbCt+W+PHTLT1MxN+Lcd
+	 vnPSl6t18d8rKTMbPnX667vxdEwTQhBxqs/oJ/AJ+EPs+5qVWhkl76ezLzLC5PNkP8dmU
+	 YTsng2PEG9KdyViLl0FokUpMWHU7BuzmiuT/hSOeXZxgGD6Q+qZ2f8zmgAqfqXWmjMjPd
+	 nu/20rFsPp0ePxQ9hosj21LRClpV9JujiRE7NQ+HZtj+avMH8SCD3Ys9dvbaAhoXrXqRk
+	 ZS2VQEB73b2yWhtWc3jdEQwNRFf8PZ8iNCzpQpbY4uYtd6C8KOg1/BmV5E1XwhlcxGQ==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793181423;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Received:From:
-	 In-Reply-To:References:MIME-Version:Date:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=sTCi0VbMG5yaLHPpwYuZWavCoWrVghnUoOPEeEUQIio=;
-	b=gAObWA4NwA76EHGOwVX64wL7NIhf8MkGIb6zKL21K2jZ3HwxBR3drxtsb3nsKU+OBoYb
-	 esbTT+qFTHHh8oXBA/54ATtIF+/g39DRaMhU3rD+Kb8PqIDEgUcwRHabd46gWL3FrCtw1
-	 /RwheicB8K+jpKjvD+Cbchy/qzAnUlUUQM7nKLb50v0h1JxwBwF9dHiBAnMExHxMAvTCF
-	 yXbM5vXLGNcDMJO/V9oC+5S9PjrVvvtcSm+GGfWebcd7hCgcTKlKcDCsl4YXI66TTOnoD
-	 ZUgMTU01P9fNAWkMQR7DntRDGKaJkkJTLiM7unwre7xo58tkMAna3VvXCC8khz6mcgg==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	 Received:DKIM-Signature:From:To:Cc:Subject:In-Reply-To:References:
+	 Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=qFQKtzj6jdSST+G6dHGhhDDYPB2k41X82O6nPDz1eWU=;
+	b=NkdfSA5gFapmsHgjZm9gEyteaqwmhftBfX0kD+fk6LUsRtdroyzzMg17kvpIEYZa92L4
+	 OLdvgNbYosQG0zLm267GOKelSg1WqKAf7j5vTmxX8ogEz4Mi0YVx4yJE0Gn+0cLD/wFR3
+	 uri7dVA15L0EtL6FUSvSnkX5CElbhXXZYhqwaOWnzSr666dl2Hqf995AjhQXtR15vYaxk
+	 2NuABrCKRJAQN8xoCjlLYIWg0RZ6SnNA5wSLt8Y1CI6DNSNow9OAKHISHRNrSLpStm4+1
+	 4r+ngPXNkG1Pv4P02BTmkPh8ZbB/zNZsLN0zTa7EMUcGXvj1Teg9P0EP5D6l8spB0sg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793179949;
-	bh=sTCi0VbMG5yaLHPpwYuZWavCoWrVghnUoOPEeEUQIio=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793181423;
+	bh=qFQKtzj6jdSST+G6dHGhhDDYPB2k41X82O6nPDz1eWU=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=b/f69Er5XSW8iABrMFTiBaXE1MRCl7pRPXJd/ieBDfm5PidRy3s7kWZ3S/Xx3FCUZ
-	 oAFRekLF5d0SP8+N9MIxkfq7LbKxandtqGS/197+pPPwmX0p8PLwFqSmC2uRnGP/Kp
-	 hCau6SScKB8uigcSLrPjWRd+gPNSASiv08l5lm+valuov3UgyV2eYnVU8JdvW9QoV8
-	 7QOfDCjeys2XtcztdFUsbvSiZsy6TyLeNPgnU+6CRmTeCHblEtqdLeNO1lUjnjDdi5
-	 BUR9bLfYE5MGz9NteuB4gk7f8dLMRPLtKQc1TGIikCvvk2yBkrRnqlUUStWmUBuLiV
-	 phwQwnwrxBgLA==
+	b=fJv/Io6k+VlnbzaPZ6C+dctv/MgqsvCnTDb5W0juVpgw24igdTLxFRAF0ca4EgSo/
+	 i1360sT4owqVsT+SdpaLxMB/RvttfNjPu375XqVH8a7B5r/LFK8X2UOrAca72kMHrV
+	 QqdYHVMnfv3vM5FuJyJT8Um0pjKitpZHiVTKvw63xGmqKkEWgv2p++zvvt1pv2e/Ht
+	 kbnZIO5fMpVdVT9iphtbqNa9ImHCoftOrhgqSgzST5q3AvI2X5ZZYsZHRYeTat0twI
+	 hWY9nLhO1Bguq80C5HI0UpDJ69hKs5Cuvl0q0IWkMmFKDqFAkkgfb4GCc9YqLKHBYj
+	 1S0oINma0rmVg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 58ECD40540;
-	Wed, 28 Oct 2026 09:32:29 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 95851529
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 09:32:27 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2D4E980DE9;
+	Wed, 28 Oct 2026 09:57:03 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3B7BD1DE
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 09:57:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 7BC6660665
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 09:32:27 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 21FC1404C9
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 09:57:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qKVdjAT-F9yS for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 09:32:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A8C2A605F1
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::22d"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793179946;
- b=WiKu3dYZ8CwhInbGTS/bmZ//B1hGXGqkSdkHo2G67OV+LZnVm79cJ2ndygHcMdzwQf5s
- nbAnJ3dG06vfGv5WsfUztDmoklkBKecVco/ouzk5hqlDyngx2wOScYKvFTMTOsW/4GEqf
- wNAMIPJjXmtJIRa3GsS18FxAYGnwlrcBsswDRf+Q3VWH1YliLixd0AkWaMXyw3dSyuhy2
- UR2TxVrQV5YWu6kYsJauixi8JLVKEk4JkgqXHjHnqGdc73pm2ilVTB+St5Y5fM4HAWETQ
- GYdSR3SYnrhR5gZERVU3yVzJJQ1+1/+LBww9avBckhhOSVqhPUa1bsbciG0ZV/DnNAg==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793179946;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Received:From:In-Reply-To:References:MIME-Version:Date:X-Gm-Features:
- Message-ID:Subject:To:Cc:Content-Type;
- bh=sTCi0VbMG5yaLHPpwYuZWavCoWrVghnUoOPEeEUQIio=;
- b=Ut/NWEgDRNb0V583Oz1pnR6KIh/KuWSNnyyXg+ehfw8aoHgyIQr1haK2H9hmWB3Y/GDD
- GTufSubEBBsnHiJ47HNa04yJO81uM92T1JyIDf6SPJa8RCtxAD/QGesWFWUXfJoH9yE+W
- FcNbzyZLe8YjbLmC4TQOIPCdh7V5qFcNkxTcErUtyxl41lY+Eo5z1Nxe7zpM+lHvtBvWZ
- 0xTEzbZu6AnxLzSXNq0zZYh4o5ImZbmfDLJulKQDQ/aHy8Zar/kKm6VbiCKNLrXBfW6Ou
- czpt4FHjTJzW41M1vkU67TiVLyH3L8Omu7PR9jW+9lJydaNSWNYWCaANOIxtYZNeBRQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=mLSZRg1Q; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::22d"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id hImUCIvvyMHj for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 09:57:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 522DD404C1
+Authentication-Results: smtp4.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793181420;
+ b=mOVPQUa+PukvullVH4FfCT8jaEN3zR9tidCN6Js1JlrBC0qOTp1Vf+IwEAWl5L1BqsVg
+ tlgm2Olxp/lyPt7ltAvM9I/HY0SichFKv2Lc9p9fIlj5cAagz8tWDuPW8YcWVEOIOze63
+ EuY0EwxBro4D14A1cuSAKBES/WMQL4iCh4nVg3NZADiJI20UF+wmRZU3t80AEfYv5BiCt
+ p4hOVdCjR1LYZUMJWhlQnZRs4ayq2/732Uc2A5PxU5f4Tmi2pJ5BhOugoonGyPLUODjPR
+ 3qSv5qu68RNOZUHjQ/Wp1BqXl3IaE/Xfhk0DGCflk769OaCYFdeiHdP6/KSiywTnyRg==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793181420;
+ h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
+ In-Reply-To:References:Date:Message-ID:MIME-Version:Content-Type:
+ Content-Transfer-Encoding;
+ bh=qFQKtzj6jdSST+G6dHGhhDDYPB2k41X82O6nPDz1eWU=;
+ b=hd/3H9YI9u1rxI77EDQVITY8qU+JeT6Z/8/AftwKfgCEFiS54Y2e2AlWwcRYUgH5WF8q
+ paPRv+1mixpOiCG9TmsBwMt4x2x5HoxVQz1JyDxFiFvTTlpUu5NxsV8226C215Kucy2ze
+ 733DlGRGRskc4Gjoi+kBZaAXYwCAW/ZlyzQankxnWHiwcm38xHgmOt4X8LMPlM87gEEaZ
+ NuIyZywzwGYIG794H5dmOqxgjueHopPB6k/Km7zZVf3GGNo4hgcwxZKdHljxCTV5TPjot
+ UjvRYf4kgXTL+XMUhZ9VEGxO5hOPvgiBQqkTgDGQhZtwa3OW5ky51bW2hI4AotzVtyQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=kernel.org;
+ dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=G6CitNSg; 
+ arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::22d; helo=mail-oi1-x22d.google.com;
- envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=mLSZRg1Q
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A8C2A605F1
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 09:32:26 +0000 (UTC)
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-4b21f71613fso528211b6e.2
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 02:32:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793179945; cv=none;
- d=google.com; s=arc-20260327;
- b=VTPmUYfKBRfQpDe92+8Fxyoa3NVOAChqCDx/6669XrmmBg+8ZjKxBW727GXAlFqFfv
- cEZX1xO8Mg8gpSgmKTogU9VZbjgqcvUH0INOIkh2GZhQn47ti2uaMM6mxKWTOIddZ1c/
- Y3z/3CEWdMjoQo/2aaAVkMm7f9Zkj97eT5cO6WCxtD/S4AoCsBM43MxBVciKvSkA1EiT
- C48ZWorYdPHdXg19rat6NwHkE+XlZBxNslN+GeuZg+RRXh/4Ysnw3gAd5uXPcoNiUu7W
- an++bpMDbTNl51r627SrXVs62Y6BA//ugttLv9bSSWGTHvL1ugoKARwgtb2KlGioTMSB
- L+1g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
- :from:dkim-signature;
- bh=sTCi0VbMG5yaLHPpwYuZWavCoWrVghnUoOPEeEUQIio=;
- fh=jBId5TlJaU87/tZVwYmZd5HkQU5k+P5ZrkyisAc1cAw=;
- b=CQkgBogOwvsRN5KiDECRsjA+ZoMWV3upURKjM49netSfarZmB6HnptvHwV4XsWiaZt
- e3EWXpZ5vcEDquVUzMmNgxqsABtOH2/nhwRt5a4WkeX5Cd7XeTKWSUctd9us37OlZrax
- CXWgV7gMA3RkroDn3CHIFHJJU6YxdK9tGKrMXB4/4kr1sUfYR+tyXbchf2u792GAVAaS
- 918yOxS/2V0m58kJ+GN6h2JWX4c5R1NTDVwhRLIf3ZFP3tAt4CyH3bbbIFna33jPTx7s
- crmKdTzRbBwnyiHj7MurYeaYyyK1q6rBmfOFQhHNj+54y5pvnK4/Zvbv7RbHTXvCskz4
- q4Hw==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793179945; x=1793784745;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:mime-version:references
- :in-reply-to:from:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=sTCi0VbMG5yaLHPpwYuZWavCoWrVghnUoOPEeEUQIio=;
- b=mLSZRg1QcKcOlJTVZAkBebuifBtCLPzazlMiqzFmVP4vtdMrn/8RtRRjjpWCPcGId5
- po3GXaug0MsyLI2wRe4mGB3wn43Hx9OM/LbkMgxjOibJm8EEjAEDEWPwZ/wSWFpc1eC3
- K8RrEkmUOkPXmIOGE9X4AgrIoyKF9fWx5PsKvEjYLNZYVFMNG5JEqSUs/EiW3TKg7bPw
- Dt2o8nShIv0jmZQ4yG6DfBGtw1lPdG1aGtmdTG3hm1caxKGNwLhiXzjcoSsVRpoLdBmQ
- Sq+xeZg9KpmcPsFvfnjSzi/DJFG0Cv8zA0XpOr4rwuvlCtimTZ+SCRiaZJRTUAwLvYv4
- iubQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793179945; x=1793784745;
- h=content-type:cc:to:subject:message-id:date:mime-version:references
- :in-reply-to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=sTCi0VbMG5yaLHPpwYuZWavCoWrVghnUoOPEeEUQIio=;
- b=nw3ONk/3qdF5tLOUDCsSOkBsiVnHr3RAZpT6fgcYQXkmsVR2MIXeK7lwHxOWSOE6U3
- 83voHM3QXJNkV+aWkRVH2b0NX+xwyYTmYTkC9TlmNxCfH3XHg/IMk4mv7hFVcEMX5yQV
- lasLYK8hFR6tluMNvuAufOjjSwPxsSd0gGd6ca8NvjDjvo1sIJn6IJaQ85nmGmzBSGNw
- NdCkKjx4WNZjp+m3jBia5nNj00Rnsrl+D67wl1Y0s7fu7KxTAwQis2C4AwNVex+xqvtR
- 5uBf9g1/IPgc16hfdoV9EcJ+6CdGY5FmhpHROB4y762d8LJUvKtDxjHTovqayi2DvBZy
- mgDw==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxfb2kq3fF8uiscicDT6IvhS2YuhhaqCzhq52M3RpMlw3Odmi6gdZuaohSqGOXXQAjo41pKPMA=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYLgndfX8gDion0vf8vbUACf0z6UaKjDGxo7aNFk3MaHcrZBVuSd
- d2jpO11eCRg2PnhsBzcTI34gyr0jzzD1K4j0Hiw5RfooXenTFcvL3/Pj6ovrmpFdglCFYRwEF1i
- ceVxZpkPROKcJFdwNjoLZULkKwo50msY=
-X-Gm-Gg: AYBFou0Zi4aFfpl2Buin9/+nB2Q1aCoYpH+lM7QIbpbvR65DVBX3XZuB3q0spLZONfi
- 7Uz82ePiEnzU4VJ6CFqw8zi4bZNJ1NB3zDo/A08sfjHjT4zjMY9ze1PTZRaTy5FBnLCx/3Drr3N
- 7rv4ZGFKGGbCW68K0P3Bz6GZlxAOB0d89KqKQWhdlpZ+X28kCteg/TDsVuv9cHl+Lk6FpWnzl+O
- qSNxsDgQGmjgWkfNGtRd2ERi0Ar4yPw1ZwFLFkh1bB+16IzUeXTxzqFDbd+dZ6qDBCMOcTWRyF+
- UgOTUdWQ/Ezm6/x4Ne9EA550FDHBkESQoIqKEcO60mqUaVJyhMrTWvC3IommTjxV1ua8cNqN3+I
- nwEiDeanf4vWtN2r6NMxrOLE7FpX32fYImpBI5Q==
-X-Received: by 2002:a05:6808:bd6:b0:4f1:6c9c:78d3 with SMTP id
- 5614622812f47-563a264b4d3mr795945b6e.26.1793179945059; Wed, 28 Oct 2026
- 02:32:25 -0700 (PDT)
-Received: from 1077388689865 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 28 Oct 2026 02:32:24 -0700
-Received: from 1077388689865 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 28 Oct 2026 02:32:24 -0700
-From: Ana Bobillo <anabobillo3@gmail.com>
-In-Reply-To: <CAFLszTiprHQ7o0DFL2fZPZ5OK4zb6LB9jNAtuT5SU5uuMGuXJQ@mail.gmail.com>
-References: <01ba3f81-06b7-428b-9224-bd887c35e1c3@gmail.com>
- <8dcede4f-fba2-4635-b8e6-93fb35ae07ce@gmail.com>
- <CAFLszTiprHQ7o0DFL2fZPZ5OK4zb6LB9jNAtuT5SU5uuMGuXJQ@mail.gmail.com>
+ client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=G6CitNSg
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 522DD404C1
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 09:56:59 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id BEA4943B10;
+ Wed, 28 Oct 2026 09:56:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2B6251F01828;
+ Wed, 28 Oct 2026 09:56:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1793181418;
+ bh=qFQKtzj6jdSST+G6dHGhhDDYPB2k41X82O6nPDz1eWU=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=G6CitNSgx+5nb4tEErm6AifNiiX39VZA3CQSUfRe3FW+q9HbuIeoaYFGTMTVtDq+a
+ yjMRaWPYjctbBFr7pw936LrnmgZkragT7NSalKQNN2BaGa86/nJcsLhxkHmaXuXPHi
+ 8h//n3BUQFGy7l7XpJYrIWUxdzbERU0TB+SfUJXbib5KsjOmTSdEKwlQ+OqbsBgov/
+ gdukLLbzAIudmyPHTTz7onT/RIh6UCOoqj2t/p+5vwv6CC2clN6JiILGTuSx5hVPt6
+ iNzSU10pVoX6R9gcSUwz5s/rZIdkMa1nVZI++jk04b47kBTf6fWvjjjL060vWz2aVU
+ CDL8GQ+57TUZg==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+Cc: Cole Munz <Munzzyy1@proton.me>, Pranav Sanwal <pranav.sanwal@amd.com>,
+ Pranav Rajendran <pranavkasthuri@gmail.com>, Aristo Chen
+ <aristo.chen@canonical.com>, Alexey Charkov <alchark@flipper.net>, Carlo
+ Caione <ccaione@baylibre.com>, Julien Stephan <jstephan@baylibre.com>,
+ Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>, Heinrich
+ Schuchardt
+ <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Samuel Holland <samuel@sholland.org>, Petr Hodina
+ <petr.hodina@protonmail.com>, Eric Chung <eric.chung@riscstar.com>,
+ =?utf-8?Q?Jo=C3=A3o?=
+ Loureiro <joaofl@gmail.com>, Siu Ming Tong <smtong@axiado.com>
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+In-Reply-To: <20261027012709.GA2177077@bill-the-cat>
+References: <20261027012709.GA2177077@bill-the-cat>
+Date: Wed, 28 Oct 2026 10:56:56 +0100
+Message-ID: <xhkdb8q3i2lnb.fsf@mkorpers-koolstof.csb>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Date: Wed, 28 Oct 2026 02:32:24 -0700
-X-Gm-Features: AclHuK84Fo201mo44vUEHuIMrf9MJFQ71cz1x9bOo_Wwg8p29I41epyLLfZy1Js
-Message-ID: <CAJnxHsj8eWu17cgJv=giyCWv2HeWBSsHZiSkyDEkYmG-Oi+eOg@mail.gmail.com>
-Subject: Re: [PATCH v2 12/12] efi_loader: Measure the GPT the partition driver
- uses
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Marek Vasut <marek.vasut+usb@mailbox.org>, Bin Meng <bmeng.cn@gmail.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Charkov <alchark@flipper.net>, 
- Javier Martinez Canillas <javierm@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -202,79 +149,192 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-2.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_PASS autolearn=no autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Simon,
+Hi Tom,
 
-On Wed, 28 Oct 2026 at 08:57, Simon Glass <sjg@chromium.org> wrote:
-> The commit message is very long for the change. Please can you trim it
-> to the problem (the GPT measured is not the one the partitions came
-> from, and its sizes are not checked) and the fix? The EDK2 comparison
-> and the test-case details could be a sentence each.
+On Mon, Oct 26, 2026 at 19:27, Tom Rini <trini@konsulko.com> wrote:
 
-OK, I'll cut it down to that in v3.
-
->> +int part_get_gpt_primary(struct blk_desc *desc, gpt_header *gpt_h,
->> +			 gpt_entry **gpt_pte)
+> Here's the latest report. Since it says 20 out of 25, I downloaded a
+> report as well and the 5 not listed here are:
 >
-> The name is a bit confusing, since the GPT may come from the backup.
-> Something like part_get_gpt() or gpt_get_used() would fit better, with
-> the header comment saying that a backup header is turned into a
-> primary one. What do you think?
-
-Yes, part_get_gpt() reads better, and sits well next to
-part_get_gpt_pte(). I'll rename it, and say in the header comment when
-a backup header is turned into a primary one and when it is not (below).
-
->> +	if (le64_to_cpu(gpt_h->my_lba) != GPT_PRIMARY_PARTITION_TABLE_LBA)
->> +		restore_primary_gpt_header(gpt_h, desc);
+> CID 470520, Uninitialized scalar variable, lib/zstd/decompress/zstd_decom=
+press.c, ZSTD_errorFrameSizeInfo
+> CID 470520: (#1 of 1): Uninitialized scalar variable (UNINIT)
+> 2. uninit_use: Using uninitialized value frameSizeInfo. Field frameSizeIn=
+fo.nbBlocks is uninitialized.
+> 700    return frameSizeInfo;
 >
-> This comment does not hold for the ChromeOS 'IGNOREME' case. There
-> is_gpt_valid() returns 2, which gpt_repair_headers() treats as valid,
-> so it never rebuilds the primary header. The measured header is then
-> one that no 'gpt repair' would ever write. Since the primary header is
-> deliberately ignored, I wonder if measuring the backup header as it is
-> would be more honest. Either way, please can you correct the comment,
-> and the matching claim in the commit message?
-
-You're right, I missed that case, and I agree: with IGNOREME the backup
-GPT is the one the disk is meant to be used with, and 'gpt repair'
-leaves it that way, so the backup header should be measured as it is.
-
-In v3 part_get_gpt() calls is_gpt_valid() on each header itself, in the
-same order as find_valid_gpt(), so that it can tell the two cases apart:
-
-- primary GPT not valid: the backup header is turned into the primary
-  header that gpt_repair_headers() writes from it, so PCR 5 is the same
-  as after a 'gpt repair', as discussed with Ilias on v1
-- primary header marked IGNOREME: the backup header is given as it is
-
-I'll correct the comment and the commit message to match, and add an
-IGNOREME case to the tests (lib_test_gpt_sizes and the PCR 5 test).
-
->> +		log_warning("No valid GPT read, not measured\n");
+> CID 661171, Untrusted pointer read, cmd/gpio.c, do_gpio
+> CID 661171: (#1 of 1): Untrusted pointer read (TAINTED_SCALAR)
+> 16. tainted_data: Using tainted variable offset as an index to pointer uc=
+_priv->name.
+>       Ensure that tainted values are properly sanitized, by checking that=
+ their values are within a permissible range.
+> 238                printf("gpio: pin %s (gpio %u) already claimed by '%s'=
+\n",
+> 239                       str_gpio, gpio, uc_priv->name[offset]);
 >
-> It would be worth including the device name in the warning, so the
-> user can tell which disk it refers to.
+> CID 661172, Overflowed constant, test/boot/fit_cipher.c, fit_cipher_test_=
+oversized_unciphered_size
+>         info.size_unciphered =3D sizeof(cipher) + 1;
+>       2. function_return: Function image_aes_decrypt(&info, cipher, 32UL,=
+ &data, &size) returns -22.
+>       3. known_value_assign: ret =3D image_aes_decrypt(&info, cipher, 32U=
+L, &data, &size), its value is now -22.
+>  65        ret =3D image_aes_decrypt(&info, cipher, sizeof(cipher), &data=
+, &size);
+>=20=20=20=20=20=20
+> CID 661172: (#1 of 1): Overflowed constant (INTEGER_OVERFLOW)
+> 4. overflow_const: Expression _val2, where ret is known to be equal to -2=
+2, overflows the type of _val2, which is type unsigned int.
+>  66        ut_asserteq(-EINVAL, ret);
+>
+> CID 661173, String not null terminated, boot/bootmeth_bls.c,bls_boot
+>=20=20=20
+> CID 661173: (#1 of 1): String not null terminated (STRING_NULL)
+> 7. string_null: Passing unterminated string label->name to parse_label_ke=
+ys, which expects a null-terminated string.[show details]
+> 309        ret =3D parse_label_keys(&body, &scratch, label, true);
+> 310        if (ret < 0)
+>
+> CID 661174, Unchecked return value from library, drivers/fastboot/fb_usb.=
+c, fastboot_usb_run
+> CID 661174: (#1 of 1): Unchecked return value from library (CHECKED_RETUR=
+N)
+> 7. check_return: Calling getchar() without checking return value. This li=
+brary function may fail and return an error code. [Note: The source code im=
+plementation of the function has been overridden by a builtin model.]
+> 48                                getchar();
 
-Will do.
+It's harmless to ignore the return code of getchar() here. In this code
+path, we want the fastboot session to be aborted on *any* key press.
 
-> BTW now that validate_gpt_header() ensures sizeof_partition_entry
-> equals sizeof(gpt_entry), the two loops below could just index
-> entry[i] directly. They also use num_partition_entries and
-> sizeof_partition_entry without le32_to_cpu(), which could be tidied up
-> in a follow-up.
+The tstc() call just before the getchar() ensures that a character is
+available.
 
-Good point. As there will be a v3 anyway, I'll add that as a small
-patch of its own after this one, so that this one stays about the fix.
+To me, we can mark this as a 'false positive' in Coverity.
 
-I'll wait a few days for comments on the rest of the series before
-sending v3.
+>
+> And I can provide more details on those specific issues if someone is
+> looking at them and doesn't otherwise spot a problem.
+>
+> ---------- Forwarded message ---------
+> From: <scan-admin@coverity.com>
+> Date: Mon, Oct 26, 2026 at 6:53=E2=80=AFPM
+> Subject: New Defects reported by Coverity Scan for Das U-Boot
+> To: <tom.rini@gmail.com>
+>
+>
+> Hi,
+>
+> Please find the latest report on new defect(s) introduced to *Das U-Boot*
+> found with Coverity Scan.
+>
+>    - *New Defects Found:* 25
+>    - 13 defect(s), reported by Coverity Scan earlier, were marked fixed in
+>    the recent build analyzed by Coverity Scan.
+>    - *Defects Shown:* Showing 20 of 25 defect(s)
+>
+> Defect Details
+
+[...]
+
+> _________________________________________________________________________=
+____________________
+> *** CID 661187:           (TAINTED_SCALAR)
+> /drivers/fastboot/fb_command.c: 952             in flashing_unlock_allowe=
+d()
+> 946     		sha256_update(&ctx, buf, cnt * info.blksz);
+> 947     		last =3D buf[cnt * info.blksz - 1];
+> 948     	}
+> 949     	sha256_finish(&ctx, digest);
+> 950     	allowed =3D !memcmp(stored, digest, SHA256_SUM_LEN) && last;
+> 951     out:
+>>>>     CID 661187:           (TAINTED_SCALAR)
+>>>>     Passing tainted expression "*buf" to "dlfree", which uses it as an=
+ offset.
+> 952     	free(buf);
+
+False positive: buf is allocated by malloc_cache_aligned() of a known size
+(FLASHING_FRP_CHUNK * info.blksz)
+
+The data read by blk_dread is never bigger than the buffer size since we
+have a cnt check just before.
+
+> 953
+> 954     	return allowed;
+> 955     }
+> 956
+> 957     /**
+> /drivers/fastboot/fb_command.c: 940             in flashing_unlock_allowe=
+d()
+> 934
+> 935     	sha256_starts(&ctx);
+> 936     	for (blk =3D 0; blk < info.size; blk +=3D cnt) {
+> 937     		cnt =3D info.size - blk;
+> 938     		if (cnt > FLASHING_FRP_CHUNK)
+> 939     			cnt =3D FLASHING_FRP_CHUNK;
+>>>>     CID 661187:           (TAINTED_SCALAR)
+>>>>     Passing tainted expression "*buf" to "blk_dread", which uses it as=
+ an offset.
+
+False positive, same explanation as before. buf is used as destination
+buffer but has a known size allocated by malloc_cache_aligned()
+
+> 940     		if (blk_dread(desc, info.start + blk, cnt, buf) !=3D cnt)
+> 941     			goto out;
+> 942     		if (!blk) {
+> 943     			memcpy(stored, buf, SHA256_SUM_LEN);
+> 944     			memset(buf, 0, SHA256_SUM_LEN);
+> 945     		}
+> /drivers/fastboot/fb_command.c: 952             in flashing_unlock_allowe=
+d()
+> 946     		sha256_update(&ctx, buf, cnt * info.blksz);
+> 947     		last =3D buf[cnt * info.blksz - 1];
+> 948     	}
+> 949     	sha256_finish(&ctx, digest);
+> 950     	allowed =3D !memcmp(stored, digest, SHA256_SUM_LEN) && last;
+> 951     out:
+>>>>     CID 661187:           (TAINTED_SCALAR)
+>>>>     Passing tainted expression "*buf" to "dlfree", which uses it as an=
+ offset.
+> 952     	free(buf);
+
+False positive, same as previous one.
+
+
+> 953
+> 954     	return allowed;
+> 955     }
+> 956
+> 957     /**
+> /drivers/fastboot/fb_command.c: 940             in flashing_unlock_allowe=
+d()
+> 934
+> 935     	sha256_starts(&ctx);
+> 936     	for (blk =3D 0; blk < info.size; blk +=3D cnt) {
+> 937     		cnt =3D info.size - blk;
+> 938     		if (cnt > FLASHING_FRP_CHUNK)
+> 939     			cnt =3D FLASHING_FRP_CHUNK;
+>>>>     CID 661187:           (TAINTED_SCALAR)
+>>>>     Passing tainted expression "*buf" to "blk_dread", which uses it as=
+ an offset.
+
+False positive, same as previous one.
+
+> 940     		if (blk_dread(desc, info.start + blk, cnt, buf) !=3D cnt)
+> 941     			goto out;
+> 942     		if (!blk) {
+> 943     			memcpy(stored, buf, SHA256_SUM_LEN);
+> 944     			memset(buf, 0, SHA256_SUM_LEN);
+
+[...]
 
 Thanks,
-Ana
+Mattijs
