@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97C5E606A31A
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 05:51:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E671606A31D
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 05:51:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=p5aPCWEi;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=kNKcQZOC
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=nLRg08pm;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=PByCb3SW
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 73FAE60780;
-	Wed, 28 Oct 2026 05:51:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6987180F61;
+	Wed, 28 Oct 2026 05:51:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NzUbXBBTv1YL; Wed, 28 Oct 2026 05:51:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8EBA56073C
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793166710;
-	b=mFzxUX2WXLe58uu1sYZIvYQ1FbXQmHMJO5Zc/+doS/b1xziwfKkM4IjBRnnVcUO2IJoA
-	 tU2PazLWiabpF/a8dQm1OUDE8e4Qi7ve4TY1u+DRIARP7+dp5LaW+5vOK/3kvPnAQT9dJ
-	 6frh5ahkNamYf2c0bBnhIDcAoo7+dkRHuH/ZeKbOTA2B5NWDQIq9Rg2eGXnR3eJRyTsqh
-	 bWIy1tfQ5aMSlHDXUDg9ifAaRmYIDQfj5eMCt0r5uzIfB+NgqJ1s/N4sXCybxHCly9YU1
-	 TjKv8206AGdNFshMDQxZWwjUyQ14WgQH0f/FzdL90nm7vqbPRolZYiEysZeb07m15rQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id juRFSSPlM_WW; Wed, 28 Oct 2026 05:51:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 40E7C80DDD
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793166717;
+	b=HE4j8j5nfPKE587vG6Os3qqXjr7IU8ZCHW1/BulrXnExMmdgkLGqR9+TPdQyn6byVOi0
+	 TAZXVZBbDlmV2nB3CO8xvNHqXSPHkNY3ID92Uyytxyc4DmzKmo5FoQU8r5O2of5AePRuD
+	 e7QTiVDDm11LN/S+SgeAy8tpdSAI4a9ehcOdRJS0cLLHwF7+Idp8KEdDFHZMBOK9hKsII
+	 Mdre3DdbYuUXIji5vS6hpdONxTGr/PILxZLQ2OmzL9GceJoN0daxsSmVnaiKRPQYiuoue
+	 YkUlFd/Bf9rQG1QCigUmMld0NxtPe8gN8Zxz4Cu44esyV6xADYjtmIYrpRv5v3nD2QQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793166710;
+	c=relaxed/relaxed; t=1793166717;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,123 +32,123 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=bSpPbcJszOo8ok1JhORSxVwhS+IaxOmBC5Gg+HOl9IU=;
-	b=eCGNg3ru7jEE2v/Y74x6uuiUUopkTNMVrwntzvBYVKITZ9ADdYfbP2s8xcGKYTWIoj24
-	 OZMapbGtQJBQQAjU7r5axnJTY0twRESjudoOdWHqcDCqPpSMYQL3RCKgSxxsikFaB6Kkc
-	 fU3xWPWluH5h0svE17qze5cJ/lEsu+P1wqj+CcBAYuUq8GAZtKdAaFDx16nEOecdHIIMF
-	 PxwTJf/vOZKl0CyeVCIPcyN4icEbtpLU8fZY5q2Yul1+3MMPnXh4X/jDNYG5jL7z660CG
-	 /JOd5MxeEgN/DSkkViFaiFJjBQq+JvOZOhpwY7YgL339SNkd3vY3oGwVscweV4sS3xg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=coObINQQcBv3AoF10OouBl8ccqZsMHDH3PZ6OmZ2Yww=;
+	b=fa5Dcg0hdOzEjAAkkqf/+tu8+Y/G7GtrSqHvxuySB8ixqlKLnghaaizZEnuGKO5oe94D
+	 u44JyMExafuvXmb/3HWUHKwxQQEN0Wapg///R52rHucwqFjy1cKixtGEokAOPY60UWg4S
+	 mxl4mcu+PneZ4gs+Ud8gNY5VYLIJOe+vOlRu/75+XOr1QUNEflROwqDLlUIYv1s6J1UaP
+	 ubgdBBjj8Ou7Qh4Y5YNSrQIhgnmLElWyGoCEuXQ7H23b3uKeiIhP3dDmahgCsnt5wI+ZL
+	 jP8MsXzcKPm1OgZ0O9qIEpaCHq5EC86J2nQFBN/IxBeZt8OJv9r7ca3HRbpeY0wtJhA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793166710;
-	bh=bSpPbcJszOo8ok1JhORSxVwhS+IaxOmBC5Gg+HOl9IU=;
+	d=lists.u-boot-project.org; s=default; t=1793166717;
+	bh=coObINQQcBv3AoF10OouBl8ccqZsMHDH3PZ6OmZ2Yww=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=p5aPCWEiysrCgAI1Tg/tnHr+t7AWC4g1XpIw+FO4U8BsLqk0ttNgKtmT6HsCx4vnp
-	 mcB46wV9ymm8rvL64w6tqOFkLOOxfuamY4CSSPYne+T1U/FBnHfRgxKOpK92VQVBhF
-	 J8pL21Oetui75yYwmattoG0GoGoexM06cN+htyUg53vhp+PaviRvBARpcX8+peBTuZ
-	 Jv5s+5tLKcy9H/X7JfJzB8wtshY2Wc+ySWHG5ZWJgVomzCxdDgg25Cp+sT+dj8NQLO
-	 Dg5Hk2JZ2nTQh3wY/dUHnFBD2eDH6ccXpVzUElzcasihlUIwkr+QUJ4P1Yw8wfxM7X
-	 l3E38LCh16ytA==
+	b=nLRg08pmMRGiSw6bLshFWikb5wzQv6CqD0z+0hsw/3TXqnCfD+dAMk1PAg9S/CduT
+	 ezDGmwk0mq2aZaMgQWdMeW94jrBsR9mhU7JaHosWThGotVG7i619lW/uM6lJX9KRSE
+	 yNUoW6rbZuaHnj4CAJieKg7kL5cx+6aOHZIRt+JEP8JNCSNWCLPJn0JkO5RyLi8Ikl
+	 Q+3rYNFlJwTPT2uCBVf3DAWbvbcf+UQ9Dp+mSySJGg2608zpdhw8ak3vrU/gPMf3Wu
+	 NzenZiOpgcRAyyi/skYwB4MHvL4WATQ/gDewS0WWwL4vi+8A4/E7aNs5pgSZ5pEEWK
+	 Yff1/+lxsJPsg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8EBA56073C;
-	Wed, 28 Oct 2026 05:51:50 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 873472E5
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:49 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 40E7C80DDD;
+	Wed, 28 Oct 2026 05:51:57 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id B69F3D1
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 7810680FB4
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:49 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id B43754016B
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kg7R9RWet-LN for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 05:51:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6949580DB3
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793166708;
- b=I27xjyjIP2Sz2KgZdelN0zY5gSZDzU3FpxYOZea2PZ8fjhw6nd6Pt3xRPW109xvinYy0
- 3ZcbJHerpsotbKI+GPjVHzfuBLh2VHgj3DhS3B46vHdS7RaC3ODIL2dOz0CPixJN2wzbQ
- ATtKpuYhTuN0+n3b9pL1qRzXNH59vcv5kfyL5JJWFS+ZFGZiX9zp0hrBzK9LllF3ylFHG
- eA8/lOAl2O94oSR3pcAFcomLnNDbhyP0/jOfagIHzMpP9WcEbG9A4NDNfX2Wo7jazvj1w
- 2Xbu+WllELfoBedkKL7Dd9L2vB/vntS0SD8pqDIusV4voLA3A9t/NVzozQz4sWfVVjw==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2dvx_wnDenN9 for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 05:51:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 6198F4006F
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793166714;
+ b=nQrTeivuSyRYk/F1ZzLVt1NChfIo5tB9Wt1Owq1e4sCY2t9MvIQz1uAXcqlZaV31l2cv
+ Bs6hGlhCxKMuowj7JehN8WYrR//oPDM1SYpS5RuXIqnKresBF22uY/OPl8l59eFn9GJ0P
+ MPjSz/GW2lA5/TpqWhmXEdqeBuvKKbd3mq5GAX2DX1RymguanCnlRigOst+SKRRYOX239
+ mtuI9KUAZb6gBaEJpdDqRo7FJ9ZyuonpgGFz7hnpBWkTo2Nam7tv2GyHDQesgyefs6ER1
+ yV7xVCPI3e/hVo0Ws4aHqHXqIxodafyKRmLaj5AjFQgn+duDrLqCpVf7/YRaQELMTxA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793166708;
+ c=relaxed/relaxed; t=1793166714;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:In-Reply-To:References;
- bh=bSpPbcJszOo8ok1JhORSxVwhS+IaxOmBC5Gg+HOl9IU=;
- b=cOK6WH82kj6uEI7p56zUdLcv9uTKAsXCDyg8n18s83yG0qhn8vlkCWtCvO8aXglaSEfK
- JWy4412w8AxcwHc9My6QVO/ZZH/nLN2N8G9QE9yEy4zjDlQoNaPrkk3gTVIF/yobT4fwr
- /OoBkRIScZaBzXidBYvrXDnJ3uQrnAQgyqczSMitClGl+giehQ6s8FIYz+cXwCKrIsCU+
- zQws62WxTNoNy/q75aykNIulHMmJ3I9VO1NcsMrMaHo4dqj1oMGQssuzkS0uJ6K2SNhLO
- M+FXLt51ZqFdHpzKV2l1wWHRIyG3t9H3AIZasUGTJOOFfifWezDckr/goTi83Gglvkg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=coObINQQcBv3AoF10OouBl8ccqZsMHDH3PZ6OmZ2Yww=;
+ b=EXuRfNZW5Su/yW4IjzsId1iT7XEifW2qwc23o+g4g3xsonmb2WCdonHn9XNBRKaBiFon
+ gB18YChgeXf5G1XwW/Q7LCniKIrhBvlN5bmz6lT1rZ7xYYQHLdkeRtDqSEYJaC+UZP6Vb
+ jQLqn+H96Zc78fiI+hQHMH7skcmd3UtBwFndH4pOsFwhRGTBpnrO/JXxHZMryYP9MbIMT
+ H1dqzg8b6lougwbvNaa9T4Rmmi4AURcb6FzXhd5C0dX8PUZGDQbGm0zCnvuJhenMonmDm
+ njEwOySRvL4yf1Oa5Bwj2Jh39w4f2O8bmgef9OD6bWdHcyCtPu0OxUjH1FxNi1vUMww==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=kNKcQZOC; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::32b"
+ header.s=20260707 header.b=PByCb3SW; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32b; helo=mail-wm1-x32b.google.com;
+ client-ip=2a00:1450:4864:20::42c; helo=mail-wr1-x42c.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=kNKcQZOC
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6949580DB3
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:48 +0000 (UTC)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4a5087a5348so4820725e9.0
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 22:51:48 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20260707 header.b=PByCb3SW
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6198F4006F
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:54 +0000 (UTC)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-48c4d870d54so344426f8f.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 22:51:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793166706; x=1793771506;
+ d=gmail.com; s=20260707; t=1793166712; x=1793771512;
  darn=lists.u-boot-project.org; 
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=bSpPbcJszOo8ok1JhORSxVwhS+IaxOmBC5Gg+HOl9IU=;
- b=kNKcQZOCFX4B5CV4m2ladJQqXnNnNEJuaJN7EcopsoIwgl9jC56drG9GLZ/phsZAVI
- QO6Oy4YwCxCv1NwQH1VE7xZvDDBP643VKLjRZR3DP9Dff6HhhK42eNQ02IaOai+23m6G
- FmTjynXucbThl0ZRebA8hYbfg5JUWKO76ZQ7z2BuPqxycjLlVjTgYpqBWug7lOzKZiLt
- dFggExMP5jeyQ2l3ei7OhJBrkFggpTlWYzQeqtBgR/1/FTj3p1Oz6irEkGvuFZEeyza7
- 8qFrWhAESg+s67ALjDQSm0QgbN2LoIbikPA8gQFZJlcuAY3w03HgcreA5xG+udwIT4yD
- GbCQ==
+ bh=coObINQQcBv3AoF10OouBl8ccqZsMHDH3PZ6OmZ2Yww=;
+ b=PByCb3SWuC5hsHUatlLXk9/oqJvubRWZxpmKSueX48DPpfjYgDX8jFTkd7jf3+yPbi
+ GUPrVI2m0nQDuIlASrEk1PeVqmjdSsI62cYGxtNQinfVFztpxG6853mPOf/PEZKlV1I2
+ G3cpxK2s8fJ+Ud0OIKhe8RXpBMtQURXoPKOskoe2hSuaAywW+vUWU5SJIi8uING4t4Xc
+ XMvTnhG/brnutYddX5qOmwD0mF0ADpPKoHxRjRLH+odbuEicW2I0J3emY+mOFn3Yhrzm
+ dsQcdO6XOlYiqCD1txvTOXYP/jshuoAL9MraLTy3sQ7dFivkmBrdmsAEV0aXYrh5+N6w
+ IO3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793166706; x=1793771506;
+ d=1e100.net; s=20260707; t=1793166712; x=1793771512;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=bSpPbcJszOo8ok1JhORSxVwhS+IaxOmBC5Gg+HOl9IU=;
- b=gAjyOKFyii3klW5QMIDGv2bJboI/xhMe7G9SIaaZyveH95l9f4X1pZEomkByjndB9B
- 8HAmUjLp25Ygj2tDHuPWUXszLrTmlGZukdm/ekOqRXDamqYiDLbJAIYpKR3BM5QUxtLZ
- uMw1LbcBOOx/V0sJc9Ets4XvXdrTIyizRq120KlecN1dupxroH2IYPk5L/jcw1s90dn3
- mFP+6LUDJv7/0f8XUBY0HX0fucxiyx2FlBn3HnfIoVxm40oJHPPi6rpnKYiJvVaPTwQb
- M9BlKe4TszQ/Q/6ci4VfrnV2/AywMWWLiDWmeHwgMIfH6fyR+TDwAEUcSefdqDzOUqib
- ZFnw==
-X-Gm-Message-State: AFq9FYLSCOOebOFKN6e8+P3mHQS2BPAnK637JAIgBRBce7mG8Sq4KDNd
- a+Fu7PmtWzXkr/8r89PisJQsP/7c5/DutyebZ7zUkcRAz0iJ+CMPbk3JJnS9kfWX1XQ=
-X-Gm-Gg: AYBFou079klD+E0THERS0hrN9HmJJeK6uHO+4AxdIvFwgQuVrrHuL7hoW0XZkTWG11E
- hag0dhQX3b2NaGDWc8lGGNOni5s1V1sSz8yuzQrSGrWzOokuwmW5vIn/2mvjpHf0yqEo54aboGP
- Se+JqUAz4m44gv0zWmZ/JYgSpdAKtwKM7m9XGn/IQpEVmFJWKjP5GXH0otsx6+Lhw0RlMBjYYfx
- wBVuH1oZPWpQLrmhO8lVkmeA7kCB6szhr0QgN4vo65Gg44CY3zCnCSCWDK39qOLQpM+4Sn/S/e+
- q+ptqCWSp3AFe/NHu0NovmHPvsqTYLWBPPY/RiTN6X2bpQaod/Ya3aBs7O/zvfBClB2Xle9l8bA
- jiucVUL/E11lJVyw6kgVq759yURlhYmTvH7Xxh9lwsItTYF0El6wkd0hVcRuBbuW5WxRkKrfFId
- 9E/FcXiGNOYKfevS+4M2IPTFkNIuVtuF98sL+VHNu3zpe23faRfzq4dAPL/pZr8hPNJRIbg1Ve9
- eXQZFaDQVuEurUBDoBE1wZMXLj4tGherPSPrTAHc+QdTB8KQTm+1MLyPGshLCdCc50bTLmGvxV3
- WGqz24kiMDik5pZ9A+xD6D4bveJ4VqE=
-X-Received: by 2002:a05:600c:1d1a:b0:4a1:f90d:6f4c with SMTP id
- 5b1f17b1804b1-4a966c41c98mr22109635e9.7.1793166706244; 
- Tue, 27 Oct 2026 22:51:46 -0700 (PDT)
+ bh=coObINQQcBv3AoF10OouBl8ccqZsMHDH3PZ6OmZ2Yww=;
+ b=JOKnaQo4zCBjaR4E8tyA9ZqdxprRbjtHoPIuLGjzD0xXidBgrp3v9xAapBNEUjcYoI
+ Htd4V3Kb0Z9aqVYQA1GQrRmqYWgjLwww1sxrGjINBtjq8X+rjcSTLqse4Y5GowXrMeDz
+ EXKRMyyy6LYM4MurE5+BBmAQdNHVx2e99vwRXfn3oWRKQN0/+aq6C6SEukPsQKUJkcd8
+ NscE7M7ahCmox2hT+ZgZGLuXvzNk4nvpN2WRWWiy9PtPetpTRCiKW8ptLXNvjji/85Ox
+ GTxDt8iyrt0GL2+cE8HtSupRItk2/b7QreVikZn6cFOP5lAvWzPl0B8lPaLY8m95OGum
+ 1/4Q==
+X-Gm-Message-State: AFq9FYJJ5D/WwgjSRKV7tRa7q5UWFIqp0KfCRmLRmJ/Hnj6psncP3Qs7
+ u1+VaAOuX5mNmF6aUjCrxCxjxjgynr/i5ZrXvR3BN0z6RdAhZ9lKirMf
+X-Gm-Gg: AYBFou1/xEPGoAtGQENGz70ELVKXdfzxJssVawm9YpIny7do6ndFf3gmhaxTGGVc2av
+ 7oQkOiUOBobrSLgktjr7MzQYOlJMk3eZSgd/Rn2hbNpcn+2mvb8URmp0kSSjhatN9oHW/q6Zc10
+ 69cSwq8FqHObe8Xquy3hNMSmxqS2mKOaIrVX1xNawmP4wJwPvFuIu3zDqxGHkIhCIqvAe1IYvx5
+ xkjZW0ry0zAh/AIYnIforZczFEZGTlZeDeSeZeVQ6721ygTMs3mHoEwdNa+Y44zRJEDJjX6RKS/
+ Iz3ZkyECxAwhws4vVe6Y+bJz/yk7FJZ+BetwYlt6Jy5AwRjz1tgVdjnXppEHxA9YVW9YHagmwAR
+ wNOaHPFk4q1Qu70544Cl8CTTAP13GjTSpICrOI5UTtSCzOaHZDGNLERURySfVlEvaFeq5YwtaZG
+ mHDkSr0A2lfv26YQ1N44uxpIR5fLnhgzMw8aw049vTZVw6Eg2UewJCu2gxtpXdFCnQN1fH1qXRT
+ nG/nr0StsQ5nvhxJE+euWEwTcxz7ApUG/11cKYKTSsMV9t9DXO7NZBlmgSEnMpuPRCQDBo/ci6T
+ 8n7vw0L3bJuUAatkytFL1N81R8GQ3Gl3ve8mYSqtKJw6a9o+A8Gi
+X-Received: by 2002:adf:fc8e:0:b0:48d:faf4:54a8 with SMTP id
+ ffacd0b85a97d-48e5d58f76fmr2433440f8f.11.1793166712134; 
+ Tue, 27 Oct 2026 22:51:52 -0700 (PDT)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a976010ca7sm20521375e9.1.2026.10.27.22.51.45
+ ffacd0b85a97d-48e3ebcb9cesm27667902f8f.27.2026.10.27.22.51.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Oct 2026 22:51:45 -0700 (PDT)
+ Tue, 27 Oct 2026 22:51:51 -0700 (PDT)
 From: Ana Bobillo <anabobillo3@gmail.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
@@ -158,9 +158,10 @@ Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Alexey Charkov <alchark@flipper.net>,
  Javier Martinez Canillas <javierm@redhat.com>
-Subject: [PATCH v2 08/12] block: Refuse a device with an unsupported block size
-Date: Wed, 28 Oct 2026 05:51:44 +0000
-Message-ID: <3a36c968-146d-4471-84c0-6673337aa4a2@gmail.com>
+Subject: [PATCH v2 09/12] disk: part_efi: Check the header and entry sizes of
+ a GPT
+Date: Wed, 28 Oct 2026 05:51:50 +0000
+Message-ID: <7a66f202-37b4-425c-9c12-9ccb10d68c2f@gmail.com>
 In-Reply-To: <01ba3f81-06b7-428b-9224-bd887c35e1c3@gmail.com>
 References: <01ba3f81-06b7-428b-9224-bd887c35e1c3@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -172,141 +173,344 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_GMAIL_RCVD,
+	FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 X-Archived-By: <archiver.kernel.org>
 
 From: Ana Bobillo <anabobillo3@gmail.com>
 
-blk_post_probe() scans a block device for partitions with the block size
-its driver set from what the device reports, and nothing checks it in
-between. The USB storage, SCSI, IDE, NVMe and virtio block drivers and the
-host command now check it where they read it, but other drivers do not,
-such as the Xen PV block driver, and the partition and filesystem code
-relies on it, as the patch adding blk_valid_blksz() describes.
+validate_gpt_header() computes the CRC of a GPT header over header_size
+bytes, as the header gives it, and nothing checks the size of the
+partition entries before they are used:
 
-Refuse to probe a block device whose block size blk_valid_blksz()
-rejects, or whose log2blksz does not match its blksz, before its
-partitions are scanned. This covers every block driver in one place
-when its device is probed.
+- the header is read into a buffer of one block, on the stack behind
+  part_get_info(), part_print_efi(), gpt_repair_headers() and the gpt
+  command, so a header_size larger than the block size makes the CRC
+  read past the end of that buffer
+- alloc_read_gpt_entries() allocates and reads
+  num_partition_entries * sizeof_partition_entry bytes, computed in 32
+  bits, but the entries are then used as an array of
+  num_partition_entries gpt_entry structures: with a smaller entry size,
+  or a product that wraps, part_get_gpt_pte() and part_print_efi() read
+  past the end of the allocation. On a 32-bit board, rounding a product
+  close to 4GiB up to whole blocks also wraps, to a tiny allocation that
+  the entries are then read into.
 
-The check does not depend on PARTITIONS, since the filesystem code and
-raw reads rely on the block size too. It is left out of SPL and TPL,
-though: there it adds some 180 bytes, which takes the SPL of imx28_btt3
-and popmetal-rk3288 over their size limits, and its message needs a
-putc() that the SPL of evb-rk3036 does not have. In SPL the USB storage,
-SCSI, IDE, NVMe and virtio block drivers still check the block size
-where they read it.
+As Linux does in is_gpt_valid(), refuse a header whose header_size is
+smaller than the header or larger than the block it is read from, one
+whose sizeof_partition_entry is not sizeof(gpt_entry), and one whose
+entry array is larger than 4MiB (KMALLOC_MAX_SIZE in Linux with 4KiB
+pages, 32768 entries). Larger entries are allowed by the UEFI
+specification, but U-Boot has never read them correctly, and Linux does
+not accept them either.
 
-A device with neither a size nor a block size, which is how the SCSI
-code leaves a removable drive without a medium, is still probed, but
-outside SPL and TPL its partitions are no longer scanned: part_test_dos()
-could otherwise parse 512 bytes of a zero-sized buffer.
+The header size is checked before the CRC is computed over it. All the
+checks are in validate_gpt_header(), so they also apply to the header
+that is_valid_gpt_buf() checks when fastboot is sent a GPT. That path
+still takes partition_entry_lba from the header without checking it
+against the size of the download, which is left for a follow-up.
+
+Add a test that gives the primary header of a GPT on a blkmap device
+each of these sizes, with CRCs to match, and checks that it is refused
+and that the backup header is used instead.
 
 Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
 ---
 Changes in v2:
-- Split out of v1 patch 1 and moved after the driver patches, so that
-  each step is bisectable (Simon)
-- Leave the check out of SPL and TPL, and say why in the commit message,
-  along with why it is outside the PARTITIONS condition (Simon). On the
-  code size: in SPL the v1 check and its message added 184 bytes to
-  imx28_btt3, taking it over its SPL size limit, and 176 bytes to
-  popmetal-rk3288, over its limit too, and the SPL of evb-rk3036 no
-  longer linked (its tiny printf has no putc()). With the check left
-  out, the SPL of these boards is the same size as without the series
+- Include linux/sizes.h, rather than rely on blk.h for SZ_4M (Simon)
+- Don't word the commit message as if the fastboot path were fully
+  covered: its partition_entry_lba is left for a follow-up (Simon)
+- Check the header allocation with ut_assertnonnull() in the test, so
+  that ut_assertok() never sees a known -ENOMEM (as Coverity CID 661179
+  reports for lib_test_gpt_blkmap())
 
- drivers/block/blk-uclass.c | 15 ++++++++++++++
- test/dm/blk.c              | 41 ++++++++++++++++++++++++++++++++++++++
- 2 files changed, 56 insertions(+)
+ disk/part_efi.c     |  47 +++++++++++--
+ test/lib/part_efi.c | 163 ++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 205 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
-index 37d87be3a57..0c45a57f75f 100644
---- a/drivers/block/blk-uclass.c
-+++ b/drivers/block/blk-uclass.c
-@@ -828,6 +828,21 @@ static int part_create_block_devices(struct udevice *blk_dev)
+diff --git a/disk/part_efi.c b/disk/part_efi.c
+index d8751297fbe..85945634915 100644
+--- a/disk/part_efi.c
++++ b/disk/part_efi.c
+@@ -28,8 +28,15 @@
+ #include <linux/compiler.h>
+ #include <linux/ctype.h>
+ #include <linux/printk.h>
++#include <linux/sizes.h>
+ #include <u-boot/crc.h>
  
- static int blk_post_probe(struct udevice *dev)
++/*
++ * Largest partition entry array accepted, as in Linux (KMALLOC_MAX_SIZE with
++ * 4KiB pages): 32768 entries, far more than any tool writes
++ */
++#define GPT_ENTRIES_MAX_SIZE	SZ_4M
++
+ /* GUID for basic data partitons */
+ #if CONFIG_IS_ENABLED(EFI_PARTITION)
+ static const efi_guid_t partition_basic_data_guid = PARTITION_BASIC_DATA_GUID;
+@@ -89,10 +96,11 @@ static int get_bootable(gpt_entry *p)
+ }
+ 
+ static int validate_gpt_header(gpt_header *gpt_h, lbaint_t lba,
+-		lbaint_t lastlba)
++		lbaint_t lastlba, unsigned long blksz)
  {
-+	if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
-+		struct blk_desc *desc = dev_get_uclass_plat(dev);
-+
-+		/* A removable device without a medium has no size yet */
-+		if (!desc->blksz && !desc->lba)
-+			return 0;
-+
-+		if (!blk_valid_blksz(desc->blksz) ||
-+		    desc->log2blksz != LOG2(desc->blksz)) {
-+			log_err("%s: unsupported block size %lu (log2 %d)\n",
-+				dev->name, desc->blksz, desc->log2blksz);
-+			return -EINVAL;
-+		}
+ 	uint32_t crc32_backup = 0;
+ 	uint32_t calc_crc32;
++	u32 header_size, entry_size, num_entries;
+ 
+ 	/* Check the GPT header signature */
+ 	if (le64_to_cpu(gpt_h->signature) != GPT_HEADER_SIGNATURE_UBOOT) {
+@@ -103,12 +111,22 @@ static int validate_gpt_header(gpt_header *gpt_h, lbaint_t lba,
+ 		return -1;
+ 	}
+ 
++	/*
++	 * The CRC covers header_size bytes, so the header has to fit in the
++	 * one block that was read into gpt_h
++	 */
++	header_size = le32_to_cpu(gpt_h->header_size);
++	if (header_size < sizeof(gpt_header) || header_size > blksz) {
++		log_debug("GPT: header_size incorrect: %u not in %zu..%lu\n",
++			  header_size, sizeof(gpt_header), blksz);
++		return -1;
 +	}
 +
- 	if (CONFIG_IS_ENABLED(PARTITIONS) && blk_enabled()) {
- 		struct blk_desc *desc = dev_get_uclass_plat(dev);
+ 	/* Check the GUID Partition Table CRC */
+ 	memcpy(&crc32_backup, &gpt_h->header_crc32, sizeof(crc32_backup));
+ 	memset(&gpt_h->header_crc32, 0, sizeof(gpt_h->header_crc32));
  
-diff --git a/test/dm/blk.c b/test/dm/blk.c
-index f67869107da..80441f723c7 100644
---- a/test/dm/blk.c
-+++ b/test/dm/blk.c
-@@ -9,6 +9,7 @@
- #include <sandbox_host.h>
- #include <usb.h>
- #include <asm/state.h>
-+#include <dm/device-internal.h>
- #include <dm/test.h>
+-	calc_crc32 = efi_crc32((const unsigned char *)gpt_h,
+-		le32_to_cpu(gpt_h->header_size));
++	calc_crc32 = efi_crc32((const unsigned char *)gpt_h, header_size);
+ 
+ 	memcpy(&gpt_h->header_crc32, &crc32_backup, sizeof(crc32_backup));
+ 
+@@ -143,6 +161,24 @@ static int validate_gpt_header(gpt_header *gpt_h, lbaint_t lba,
+ 		return -1;
+ 	}
+ 
++	/*
++	 * The partition entries are used as an array of gpt_entry, read into
++	 * a buffer whose size is the product of these two fields, worked out
++	 * in 32 bits and then rounded up to whole blocks
++	 */
++	entry_size = le32_to_cpu(gpt_h->sizeof_partition_entry);
++	if (entry_size != sizeof(gpt_entry)) {
++		log_debug("GPT: sizeof_partition_entry incorrect: %u != %zu\n",
++			  entry_size, sizeof(gpt_entry));
++		return -1;
++	}
++	num_entries = le32_to_cpu(gpt_h->num_partition_entries);
++	if (num_entries > GPT_ENTRIES_MAX_SIZE / entry_size) {
++		log_debug("GPT: num_partition_entries too large: %u\n",
++			  num_entries);
++		return -1;
++	}
++
+ 	debug("GPT: first_usable_lba: %llX last_usable_lba: %llX last lba: "
+ 	      LBAF "\n", le64_to_cpu(gpt_h->first_usable_lba),
+ 	      le64_to_cpu(gpt_h->last_usable_lba), lastlba);
+@@ -925,7 +961,7 @@ int is_valid_gpt_buf(struct blk_desc *desc, void *buf)
+ 	/* determine start of GPT Header in the buffer */
+ 	gpt_h = buf + (GPT_PRIMARY_PARTITION_TABLE_LBA * desc->blksz);
+ 	if (validate_gpt_header(gpt_h, GPT_PRIMARY_PARTITION_TABLE_LBA,
+-				desc->lba))
++				desc->lba, desc->blksz))
+ 		return -1;
+ 
+ 	/* determine start of GPT Entries in the buffer */
+@@ -1095,7 +1131,8 @@ static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
+ 		return 2;
+ 	}
+ 
+-	if (validate_gpt_header(pgpt_head, (lbaint_t)lba, desc->lba))
++	if (validate_gpt_header(pgpt_head, (lbaint_t)lba, desc->lba,
++				desc->blksz))
+ 		return 0;
+ 
+ 	if (desc->sig_type == SIG_TYPE_NONE) {
+diff --git a/test/lib/part_efi.c b/test/lib/part_efi.c
+index 82153fdabfd..42de9109360 100644
+--- a/test/lib/part_efi.c
++++ b/test/lib/part_efi.c
+@@ -12,6 +12,7 @@
+ #include <part.h>
+ #include <part_efi.h>
+ #include <asm/byteorder.h>
++#include <u-boot/crc.h>
+ #include <test/lib.h>
  #include <test/test.h>
  #include <test/ut.h>
-@@ -113,6 +114,46 @@ static int dm_test_blk_find(struct unit_test_state *uts)
+@@ -280,4 +281,166 @@ static int lib_test_gpt_blkmap(struct unit_test_state *uts)
  }
- DM_TEST(dm_test_blk_find, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+ LIB_TEST(lib_test_gpt_blkmap, 0);
  
-+/* Test that a block device with an unsupported block size is refused */
-+static int dm_test_blk_blksz(struct unit_test_state *uts)
++/**
++ * gpt_sizes_check() - check the size fields of a GPT header one by one
++ *
++ * Give the primary header of a good table each set of sizes in turn, with
++ * both CRCs recomputed over what those sizes cover, as a crafted disk would
++ * have them. Only the checks on the sizes themselves can then refuse it.
++ *
++ * @uts:	test state
++ * @dev:	blkmap device with nothing mapped yet
++ * @lba:	size of the device in blocks
++ * @buf:	memory to back the device with, @lba blocks of DEFAULT_BLKSZ
++ * @hdr:	two blocks of memory, to rewrite the header in
++ * Return: 0 if OK, other value on error
++ */
++static int gpt_sizes_check(struct unit_test_state *uts, struct udevice *dev,
++			   lbaint_t lba, void *buf, gpt_header *hdr)
 +{
-+	static const ulong good[] = { DEFAULT_BLKSZ, SZ_4K, BLK_MAX_BLKSZ };
-+	static const ulong bad[] = { 256, 520, 3 * DEFAULT_BLKSZ,
-+				     2 * BLK_MAX_BLKSZ };
-+	struct udevice *blk, *dev;
++	static const struct {
++		u32 header_size;
++		u32 num_entries;
++		u32 entry_size;
++		int ret;
++	} cases[] = {
++		{ sizeof(gpt_header), GPT_ENTRY_NUMBERS, sizeof(gpt_entry), 0 },
++		/* the reserved rest of the block may be part of the header */
++		{ DEFAULT_BLKSZ, GPT_ENTRY_NUMBERS, sizeof(gpt_entry), 0 },
++		/* a header longer than the block it is read from */
++		{ DEFAULT_BLKSZ + 1, GPT_ENTRY_NUMBERS, sizeof(gpt_entry), -1 },
++		{ sizeof(gpt_header) - 1, GPT_ENTRY_NUMBERS, sizeof(gpt_entry),
++		  -1 },
++		/* entries are only ever read as a gpt_entry array */
++		{ sizeof(gpt_header), GPT_ENTRY_NUMBERS, sizeof(gpt_entry) / 2,
++		  -1 },
++		{ sizeof(gpt_header), GPT_ENTRY_NUMBERS, sizeof(gpt_entry) * 2,
++		  -1 },
++		/* an array whose size comes to a single entry in 32 bits */
++		{ sizeof(gpt_header), U32_MAX / sizeof(gpt_entry) + 2,
++		  sizeof(gpt_entry), -1 },
++	};
++
++	char str_disk_guid[UUID_STR_LEN + 1] =
++		"8d60b397-1bb6-4d33-80ee-b1587d24c2f8";
++	const unsigned long blksz = DEFAULT_BLKSZ;
++	struct disk_partition parts[1], info;
 +	struct blk_desc *desc;
-+	char label[10];
-+	int i;
++	struct udevice *blk;
++	gpt_entry *gpt_pte;
++	void *entries;
++	int i, ret;
 +
-+	for (i = 0; i < ARRAY_SIZE(good); i++) {
-+		snprintf(label, sizeof(label), "good%d", i);
-+		ut_assertok(host_create_device(label, false, good[i], &dev));
-+		ut_assertok(blk_get_from_parent(dev, &blk));
-+		desc = dev_get_uclass_plat(blk);
-+		ut_asserteq(good[i], desc->blksz);
-+	}
-+
-+	for (i = 0; i < ARRAY_SIZE(bad); i++) {
-+		snprintf(label, sizeof(label), "bad%d", i);
-+		ut_assertok(host_create_device(label, false, bad[i], &dev));
-+		ut_asserteq(-EINVAL, blk_get_from_parent(dev, &blk));
-+	}
-+
-+	/* A device without a medium has no block size yet */
-+	ut_assertok(host_create_device("none", false, 0, &dev));
++	ut_assertok(blkmap_map_mem(dev, 0, lba, buf));
 +	ut_assertok(blk_get_from_parent(dev, &blk));
-+
-+	/* The block size and its log2 must agree */
-+	ut_assertok(host_create_device("log2", false, DEFAULT_BLKSZ, &dev));
-+	ut_assertok(blk_find_from_parent(dev, &blk));
 +	desc = dev_get_uclass_plat(blk);
-+	desc->log2blksz = 10;
-+	ut_asserteq(-EINVAL, device_probe(blk));
++
++	memset(parts, '\0', sizeof(parts));
++	strcpy((char *)parts[0].name, "first");
++	parts[0].size = 0x100;
++	disk_partition_set_uuid(&parts[0],
++				"a2a0d0eb-e5b9-3344-87c0-68b6b72699c7");
++	ut_assertok(gpt_restore(desc, str_disk_guid, parts, 1));
++
++	for (i = 0; i < ARRAY_SIZE(cases); i++) {
++		u32 header_size = cases[i].header_size;
++		u32 array_size;
++
++		/* start from the primary header as it is on the disk */
++		memset(hdr, '\0', 2 * blksz);
++		ut_asserteq(1, blk_dread(desc, GPT_PRIMARY_PARTITION_TABLE_LBA,
++					 1, hdr));
++
++		hdr->header_size = cpu_to_le32(header_size);
++		hdr->num_partition_entries = cpu_to_le32(cases[i].num_entries);
++		hdr->sizeof_partition_entry = cpu_to_le32(cases[i].entry_size);
++
++		/* the array CRC covers the size as the parser works it out */
++		array_size = cases[i].num_entries * cases[i].entry_size;
++		entries = buf + le64_to_cpu(hdr->partition_entry_lba) * blksz;
++		hdr->partition_entry_array_crc32 =
++			cpu_to_le32(crc32(0, entries, array_size));
++		hdr->header_crc32 = 0;
++		hdr->header_crc32 = cpu_to_le32(crc32(0, (void *)hdr,
++						      header_size));
++		ut_asserteq(1, blk_dwrite(desc, GPT_PRIMARY_PARTITION_TABLE_LBA,
++					  1, hdr));
++
++		/*
++		 * Read it back into a buffer as large as the one above, so
++		 * that a header longer than its block is refused by the size
++		 * check rather than by a CRC over whatever follows the buffer
++		 */
++		memset(hdr, '\0', 2 * blksz);
++		gpt_pte = NULL;
++		ret = gpt_verify_headers(desc, hdr, &gpt_pte);
++		free(gpt_pte);
++		ut_assertf(ret == cases[i].ret,
++			   "case %d: header %u, %u entries of %u: %d\n", i,
++			   header_size, cases[i].num_entries,
++			   cases[i].entry_size, ret);
++
++		/*
++		 * fastboot checks a GPT it is sent in memory the same way.
++		 * There a header longer than its block is also refused by its
++		 * CRC, which then takes in the first entry that follows it.
++		 */
++		ut_asserteq(cases[i].ret, is_valid_gpt_buf(desc, buf));
++
++		/* either way the disk still reads, from the backup if needed */
++		desc->part_type = PART_TYPE_UNKNOWN;
++		part_init(desc);
++		ut_asserteq(PART_TYPE_EFI, desc->part_type);
++		ut_assertok(part_get_info(desc, 1, &info));
++		ut_asserteq_str((char *)parts[0].name, (char *)info.name);
++		ut_asserteq_64(parts[0].size, info.size);
++	}
 +
 +	return 0;
 +}
-+DM_TEST(dm_test_blk_blksz, UTF_SCAN_PDATA | UTF_SCAN_FDT);
 +
- /* Test that block device numbering works as expected */
- static int dm_test_blk_devnum(struct unit_test_state *uts)
- {
++/*
++ * A GPT header gives its own size and the size of its partition entries, and
++ * its CRCs cover only what those say, so a CRC does not show that either size
++ * is one the parser can use. Check that a primary header with a size the
++ * parser cannot use is refused, CRCs or not, and that the backup is used.
++ */
++static int lib_test_gpt_sizes(struct unit_test_state *uts)
++{
++	const unsigned long blksz = DEFAULT_BLKSZ;
++	const lbaint_t lba = 0x400;
++	struct udevice *dev;
++	gpt_header *hdr;
++	int ret, err;
++	void *buf;
++
++	buf = memalign(ARCH_DMA_MINALIGN, lba * blksz);
++	ut_assertnonnull(buf);
++	memset(buf, '\0', lba * blksz);
++
++	hdr = malloc_cache_aligned(2 * blksz);
++	if (!hdr) {
++		free(buf);
++		ut_assertnonnull(hdr);
++	}
++	ret = blkmap_create(GPT_TEST_LABEL, &dev);
++	if (ret) {
++		free(hdr);
++		free(buf);
++		ut_assertok(ret);
++	}
++
++	/* clean up here, as lib_test_gpt_blkmap() explains */
++	ret = gpt_sizes_check(uts, dev, lba, buf, hdr);
++	err = blkmap_destroy(dev);
++	free(hdr);
++	free(buf);
++	if (ret)
++		return ret;
++	ut_assertok(err);
++
++	return 0;
++}
++LIB_TEST(lib_test_gpt_sizes, 0);
++
+ #endif /* BLKMAP */
