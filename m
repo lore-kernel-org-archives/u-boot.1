@@ -1,142 +1,184 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74A65606A323
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 07:02:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35239606A31A
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 07:35:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bSN3iOyD
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=sYOH0GlH;
+	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=JsPwj3IY
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4FA4E60790;
-	Wed, 28 Oct 2026 07:02:51 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rZcRZNI5Q-sd; Wed, 28 Oct 2026 07:02:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 89486606E1
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793170970;
-	b=Z9QRJWePYYkR1iCI4TXY2Tyd5jsy6Gs+4wWwpFfl1uTKpgxCreSdtbYfnUgqN3UQAbUF
-	 Dh9qhBYOJ00RG4a9mOfrTCoLiUIDbXBUXp8uYj2Zn+r5qb9l/DzPyAs8FJQ2prfzGG5vD
-	 c79Cm3HZ9mTRjcUIhJwoDlaoGYtlHGb0DeSClja1/QVXBIIXZpra48Mk2iQumhCGkGAWC
-	 Ji/+efGXuwK9EBrJpePqVPaZunahLnyOG7TwBflTy9O1TgteetRdrGEdhPrOejkIUIB47
-	 us96YJ2iRVXP/+EEftpTBVbTU/v/jZvBABfevLmnerhxOd/kjXBpfTOXw+GGGvsZ5Eg==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793170970;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:Received:Received:From:To:CC:Subject:Date:Message-ID:
-	 X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:Content-Type:X-Originating-IP:
-	 X-ClientProxiedBy:X-DKIM-Results:X-DNSRBL:X-SPAM-SOURCE-CHECK:X-MAIL:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=e30CGAV5AuzPOYfBnOB+ipDK9TGAkHLCBGNQTwXLLPw=;
-	b=IEAP+Q6TDHn9tanBLLrBLjp688jiAao7XS9O1bIewV4qZWGcS8t0IoyOhBmayU9xpTxg
-	 faM3RICgLRuvKphuwmbeGBPuFVStnpiMPGKHUP4fnQ7GeWccoMh97g5rPWGlF/Sjclxvl
-	 EvaZDQ0xHj6k0GGru6USiM/jf6Cc5aKMtiaMEOkFpiMsZaUi+AeII++ZeRjUr93seRY/p
-	 CTk58tiC6zhLNovrPoA2EpEJg20HvcE0gnj9EkYtJwC8oFR8yNXl71s3ftumJ01OsCSEk
-	 2Fcv5ODwXhxG/YKZbICrTDhyAFGKH0Ti2N2oeHcTS34sDUAxHWZhibMrZ2qWOCxZipA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793170970;
-	bh=e30CGAV5AuzPOYfBnOB+ipDK9TGAkHLCBGNQTwXLLPw=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=bSN3iOyDt4kbn33UH0SRsOSAmv+o2VqysAq6+5vn/y9M2nmFF72/b84T8CjTfc6af
-	 hc6kjuSRV6YaAJfoSoOSeig5wtWHqzfUP9tdsLJCBl3zNS4EIQV6/FaisolDVreYq4
-	 EBh7px0/tLU0rWTrp18NFJPt427lzzwi5stXpfGRMWFrJ2N22VBmQvYuaCSjd16PXT
-	 kGgfwU8TMXOGCUpK8I6NJue//QYuFy5xKn9N4vpMyhfK/w+5gEHNHq6pNftKGvS4EW
-	 IdtOPW4YP6DeyE36ZxgcwRKOg9FqAMsAdQxE2xtaVOU3yMKxeFWvTy4uuy5YOitmYA
-	 Gx7e2iRaxrwtQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 89486606E1;
-	Wed, 28 Oct 2026 07:02:50 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id F25E79C6
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 07:02:47 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E15834058A
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 07:02:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 070F6405A6;
+	Wed, 28 Oct 2026 07:35:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Zi3NoKEfu69L for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 07:02:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9A77D4059E
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=220.128.198.184
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793170966;
- b=Z38VP/K4iocm5H98cEEChicfyrL7U2PbHa0mkizQ4xrR0h4x5hMg5L7A9l+ScjyP0P1h
- +07dHe+AOV6tbOuEB8xWSPgJr2fhT9wb9frY2/ZrepIRtHisXxyvClHVLF+x38vmn3HOO
- RX4GC71fPRy0CymwP6LlyZ1m7rEvlqx4QDXWpCTJHgFRzclVrYhcfvteawn2cbRRcDp2d
- umns1uZ1g0l6q64ZpnFnsGnU/LQhE9W9RIY8x67mEg4SThqWWMkxKoagpLE1GiNBMiWBz
- zTd4c4XcZZFm+66n7/GpqAj3UeOk5cmlwbe0zZXTvhOqEbgDcYhPtcD6bNKeoqpLWuQ==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793170966;
- h=Received-SPF:Received:Received:Received:Received:From:To:CC:Subject:
- Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding:Content-Type:X-Originating-IP:
- X-ClientProxiedBy:X-DKIM-Results:X-DNSRBL:X-SPAM-SOURCE-CHECK:X-MAIL;
- bh=e30CGAV5AuzPOYfBnOB+ipDK9TGAkHLCBGNQTwXLLPw=;
- b=cDJzhsVOoWgV2MVaU7j5zA3fHtC/EqaQZ0otUyWAEB1aEUU1uCp0PcDDTHdNBzpREQA7
- xE8x3hlGFlXCaBwaau8WZ80SlkuL1OGqk8LiQ/P1oasUmvFMMZQjrU+OHtSZ/KmmIqfxj
- wdu+hNU70+hxw4K3s2rQXck4RSIil7oDRb3JrkysP7YRfbaPuOZtGFmR3tp9Na+Le2skl
- kP5j6QdIEGf6luzb9STyu4a9ST/zc7gO1cWnE/D1Y/WvDqB+T2/X6k8cZ355qAlt27lg0
- cd/d7z/AB6+Omd/jHJEGqjENCBuc9KFRemcLsFdri+jWxre2ttPe7Q/0t2lD9N/BQAw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=andestech.com;
- arc=none smtp.remote-ip=220.128.198.184
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=220.128.198.184;
- helo=atcsqr.andestech.com; envelope-from=randolph@andestech.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=andestech.com
-Received: from Atcsqr.andestech.com (atcsqr.andestech.com [220.128.198.184])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9A77D4059E
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 07:02:46 +0000 (UTC)
-Received: from Atcsqr.andestech.com (localhost [127.0.0.2] (may be forged))
- by Atcsqr.andestech.com with ESMTP id 69S6iBZp035107
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:44:11 +0800 (+08)
- (envelope-from randolph@andestech.com)
-Received: from mail.andestech.com (atcpcs54.andestech.com [10.0.1.154])
- by Atcsqr.andestech.com with ESMTPS id 69S6hcUd034822
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 28 Oct 2026 14:43:38 +0800 (+08)
- (envelope-from randolph@andestech.com)
-Received: from ATCPCS34.andestech.com (10.0.1.134) by atcpcs54.andestech.com
- (10.0.1.154) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.56; Wed, 28 Oct
- 2026 14:43:38 +0800
-Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS34.andestech.com
- (10.0.1.134) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 28 Oct
- 2026 14:43:38 +0800
-From: Randolph Lin <randolph@andestech.com>
-To: <u-boot@lists.u-boot-project.org>, Leo Liang <leo.liang@sifive.com>, "Tom
- Rini" <trini@konsulko.com>
-CC: Randolph Lin <randolph.sklin@gmail.com>, Tim Ouyang <tim609@andestech.com>,
- Randolph Lin <randolph@andestech.com>
-Subject: [PATCH 4/4] riscv: andes: probe the L2 cache device in U-Boot proper
-Date: Wed, 28 Oct 2026 14:43:29 +0800
-Message-ID: <20261028064329.1986824-5-randolph@andestech.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261028064329.1986824-1-randolph@andestech.com>
-References: <20261028064329.1986824-1-randolph@andestech.com>
+ id QZpBBoOR7QnD; Wed, 28 Oct 2026 07:35:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2C4FE4050E
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793172932;
+	b=iIyNJP4x08uxyMJ63XUYGQk5P8JX086XZZRjoTG6x3ELxLmA2kMYGDx2vXYv+AMjR9I4
+	 J0ZrFVBhuaEMdc4i9H7f4xrnuZhiX5EUzq2m/mOmk/MgU2QMIv83wh8YoOYLJa1XY8oTl
+	 miFGSTn/gtnbXEUC/eOoKz8vWGpQWZd8nfiwnQkXhR9LNxLKqiZd+o8jZ+veRe54Nq0Rb
+	 qP8BQjKMVuphYcf0kTDew/vHP84rkqkBOXlHNTywGgkoVovUTheMZVjT37OVSB2bxTIMa
+	 WMXNzQeE8FbycN2pCTjVuHCxR+4LqlmBolY7SFSo+BvcFE6DJR1K1Mmz/P1Gr0KqA2w==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793172932;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:Received:MIME-Version:In-Reply-To:References:From:
+	 Date:X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=6EPCQhS50BwkH2ZYFlVIlulQ2kl1WFl+4uAAt1Wy9Vg=;
+	b=SIMguVddjnNPz1ldpmOzpDSNbQ8ZAZohGwnuLwhyooDyuwAYZlFh6nTPNAud0lGqlRXp
+	 5hS9GVpIlqpcPa9KDlESnAb/aRBkydDx785hp4YgBuD03kblLuGDNYh9wvw2WtQO9/+DJ
+	 Vk9wfJDDM0gC2KOkQoxZ7IW0w3dDIxPOxhZViN0YqiM2AVk73H/LuZLTxRQU54airb7AY
+	 Vre58l7QIWSoj/5zn+TjSvmc9ynP5mogUo6uhZCQo0seqsYaETMtvq+YsIcnm2S1LRoNJ
+	 7FDPeQbjI1XraHY7iuhHVkuCMcxCNF61VlDp4c6LZRPt74SdVwHNtfQSeEcRrBc8SRw==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1793172932;
+	bh=6EPCQhS50BwkH2ZYFlVIlulQ2kl1WFl+4uAAt1Wy9Vg=;
+	h=In-Reply-To:References:From:Date:Subject:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=sYOH0GlHspYCHbMLxoqpOSI/D/bphm7T+Si1lOKtCPNb5RxahmBhgPcJUoQa0dhiu
+	 bWx0YBhytQ94GN9eFwPyH9A06mqV/0uqcPgkMn/KU4egD5VMD6hDUo03wNj7QeIFxH
+	 egQlh2nz/fRI48wn9UGbKbN/9PRn1Ho6m/iGQCQPK7uxjgWAerCcGhTKst1SJDEALE
+	 MMji+cRq/MGahrQ9SjFcxMM04wxER7Vnq3cVklkqZKBNajqhuRcxXHUXjsKpaXr9d2
+	 oVu8krLwpBDNFWcKTlLa/mhCNHjUOgxXePnWzt7/hWSsZAM431bS7r814mwU1Yll9u
+	 fWyU1iVdbvtVA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2C4FE4050E;
+	Wed, 28 Oct 2026 07:35:32 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 49D994BC
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 07:35:31 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3BB09400BB
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 07:35:31 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DN2cJAfR7cbU for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 07:35:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 037374009D
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::52a"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793172930;
+ b=kNY79KqTvT+lxbQjWvG8APpLC0uWbJassQ00XXLTB5ZPaTR9ifSZcvLYnaGOWiJThSs1
+ rtNzelA1W8S4/aH3d1Ios62ndEByhwpPINAQx+p8LpP1FZmaapnd8ODP/XpdaOGsKkug0
+ JT5B8b+lYsOVRttAD1DUB1Ri/ldFVDyIWtCtW3mOThhz2BmBAILiiaSixyTzcU1T9dxoI
+ wrxXH03TkG013qY7EDobYTqd0ZOojORGYQebD7oc2Kl+Kv9vDNWWuevzZefbdEGhH8UYA
+ TKferQAdopcHFzfNWeThXsShT1+fL43IgNHHfFFirfl23MK7vrXDGnHPS13TYw/LAqg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793172930;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Received:MIME-Version:
+ In-Reply-To:References:From:Date:X-Gm-Features:Message-ID:Subject:To:
+ Cc:Content-Type;
+ bh=6EPCQhS50BwkH2ZYFlVIlulQ2kl1WFl+4uAAt1Wy9Vg=;
+ b=EwVkKjzRa3QD+PuROi6KLhfDfhs9U1SsRXhX4Ap83JquiL+69i5g0pcWeFMA3iG3CY+g
+ U4cytmpQxvCe6J8jAVyqa7CRa4uTcNzUPstZ40b059d/CRwtgiIMu5JpTaQtVlw7A2MV1
+ GZjyEAQXP6BuxjeCpwZBwR8qKJ6gOF9qbrD4HQdFVE8dM3O1WGHg9laNMYsWd1DogeZH5
+ HciZProleEC+16qx1B5B6ypBDsnUOEgDQw1xrP+Ran1HAoJa3LO6/bg/bROTA/ZcmgiiW
+ lewMXNJpydMaremLj3A+iykBlPUbhCBaNIoX+tzix/z3KckmAUvVk1yzaaTiLV11NgQ==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
+ dmarc=pass header.from=chromium.org;
+ dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=JsPwj3IY; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::52a"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::52a; helo=mail-ed1-x52a.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=JsPwj3IY
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 037374009D
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 07:35:28 +0000 (UTC)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-6b3dd83e779so1345296a12.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 00:35:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1793172926; cv=none;
+ d=google.com; s=arc-20260327;
+ b=jfnWwlf9uzBXmAh97JJP5PZTBicRZcKvknRYwnm7OE5bGeIRQMs7IcWM92VT+gMcMc
+ Zi5qafsGjX3ULaXTnwSjUom+ViXVJBHFFQT6JfZYxg54NFb/WGBLzVXO3NrxEEO+FU9R
+ t0zDT6n5RM+X06iSqRA3WWxNd15CMJEGwEkmu0scSSlpNzUhYWO5fNyFAW/O5aKgWyB+
+ McS+20da1Hix/fFGZGo8q6S0KqQMLaW/jCv7wb2KWrBV2qfl7GlE0mX+de+J8LtQipfw
+ vdE32Ah07PLQpDa7QiwNtTtctENwB5GXzGrJKnUiIy010SEkmjAp/yKZUxn+5PRl3Ig8
+ 1Jhw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=cc:to:subject:message-id:date:from:references:in-reply-to
+ :mime-version:dkim-signature;
+ bh=6EPCQhS50BwkH2ZYFlVIlulQ2kl1WFl+4uAAt1Wy9Vg=;
+ fh=dVMR6IDxkWEApxAxo2AIdeWCyeXoM4BYi8+eN0Q7DXc=;
+ b=QC4/Owe1drTnbpu15Ovagvy9kP+sls4/4gsQiosfjlLCItd13L6Sph/Y8CT7fGgL0a
+ jkBq13JEzWcJUqaNpPvKCoxemzARPHDUQWZ4ENVITKmdRYVrBfgYCvatXb93xm49yPYI
+ +Q2S9FyQuarkoGcJ9aUGMtUps9KEPz8nMhXxnt5DHCK3CSE004XkiSRMa3WNfJfrsDAN
+ rYJ8VEmsUnnR0wXEjnIxWwLLDLdZe2nLRo0hQVNowUKGv9bsUatTY0CyD8wvJOdBo38Q
+ rsdxDxgcb4mR9RkWKrh2VLpoVWUFjw5Gipij/BcRAPn65LlvVWkNfRJRciqzL3VBSADm
+ qDMA==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1793172926; x=1793777726;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:references
+ :in-reply-to:mime-version:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=6EPCQhS50BwkH2ZYFlVIlulQ2kl1WFl+4uAAt1Wy9Vg=;
+ b=JsPwj3IYrqhBUGU2iDuLkrdZj+oFG0hT3HcuNxqEQ4hbAbGSf9F/r/1AvDpU3JcaJb
+ M/VqF/O9FMs6Y55HHVnJdZ/IxFHSyCpkHI6dwr60ClVkB/7hsMPIjavB0OhcYAlHBpFv
+ 5U40sRPBl5WdKbr/xgqJzGWi5kcF8VsSUbUKs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793172926; x=1793777726;
+ h=content-type:cc:to:subject:message-id:date:from:references
+ :in-reply-to:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=6EPCQhS50BwkH2ZYFlVIlulQ2kl1WFl+4uAAt1Wy9Vg=;
+ b=w7mPOLX2nROnk1TVY6ROUHJ2CWlYT5x9q8eyOWgFBAbsZ75R+fsobH8FlSiyh2CF36
+ lPrB+ogsfBZPYehw/dxqlMysOSItZVamKX4YUiO2rR+UfDoi2TJ3xV2YWg9ga8bE/poX
+ DeSPzVsz2kSyh7gPQ5UGxvnh58wqkxTALo/luAUj8W62jufkepVlnM0VtJm3NxbnpfbB
+ 0TYNuRfstEyQz8V+KYcmlIs8SzuW8EqSnUGay1LqTXLlR8QVU4ZMlsjW2kjhm7BM0cZ2
+ ySGOL7wuytasVG7FK39+HxEfHKfSQ+ASLjW1X/EJcdptZrdfObbdnDCimXdIXoSiel5T
+ YcyQ==
+X-Gm-Message-State: AFq9FYJMwNuIJg5QCbE+UhX7XRSIyDSCeQsdaYe/fVDnZb8rpZ2eYqJF
+ AkN2S1Kk4H4Q2NmZ5NAJkYFt62Ijm/J5eTMkiWhGMj0l6R0eZwhzOrRMs3+/PJ58vNwiSR6HNtY
+ Uj8DgjqA+fWZXTqd4bD8VahQhFAlFPI29SqyTOavMM3ZnSw2k5lgkkg==
+X-Gm-Gg: AYBFou0XHmMt3Fzj69BHTnGcxENNCT3CMraP9uKb4xQOsI8XGnYBTaaCcu+iPJEV/tl
+ Yyx3Zz0XBHge7etvB7nSOPbWWLqmUTth9d5qPAKEV1CY91ZtxtzSlQlZsrrJIgMXRo+RoRDUe06
+ RP/amtG35YohJsBwoaKJgECixp0PhjbBn9ljqnW6uDW+sIPAYiFJ+Y3mml5mReyrFbrECmlQ0cT
+ Gbk8Va35qSHI3J6oYDcjW4HyOKs0CaEufOf2c+Ss4mL2nth3DJ4H3LZK+8EoebNQNE0GVwqyvaU
+ LTCtT5gwDmXajQl4EW8dYukljj3Qh4rw/jSZBjCAShnnq0gv3oYmyxt4Z0DU2+FgQlAAGsd9jhY
+ gjiYS22oy0aH0IseTX1Za3ym8s9Zc4G8QsQk=
+X-Received: by 2002:a05:6402:1e8c:b0:6aa:a33a:2762 with SMTP id
+ 4fb4d7f45d1cf-6b49caee1famr900070a12.2.1793172926547; Wed, 28 Oct 2026
+ 00:35:26 -0700 (PDT)
+Received: from 415065739583 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 28 Oct 2026 00:35:25 -0700
+Received: from 415065739583 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 28 Oct 2026 00:33:00 -0700
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs54.andestech.com; dkim=none;
-X-DNSRBL: 
-X-SPAM-SOURCE-CHECK: pass
-X-MAIL: Atcsqr.andestech.com 69S6iBZp035107
+In-Reply-To: <20261027131837.177854-1-odeschamps.mail@gmail.com>
+References: <20261027131837.177854-1-odeschamps.mail@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 28 Oct 2026 00:35:25 -0700
+X-Gm-Features: AclHuK93lXk-D4ypvSi9yieoD1_nC2w2Pvd-QNvnpcVcRV753fkOmi4fSGYENvI
+Message-ID: <CAFLszTjw=Z9oX=bdBNqK5YR_8VZy1ObF6ivgjZfni918nT4kOg@mail.gmail.com>
+Subject: Re: [PATCH] lib: date: reject out-of-range month in rtc_calc_weekday()
+To: odeschamps.mail@gmail.com
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,64 +188,58 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-In U-Boot proper, enable_caches() runs from initr_caches(), before
-initr_dm() sets up driver model again, so it cannot find the L2 cache
-device and flush_dcache_all() never reaches L2. Without the I/O
-coherence port (IOCP), DMA masters do not snoop the CPU caches and
-can then read stale data from memory.
+Hi Oscar,
 
-Call enable_caches() again from an EVT_DM_POST_INIT_R spy, unless
-SYS_DCACHE_OFF is set. In S-mode, U-Boot proper then drives the L2
-controller itself, as the Linux ax45mp_cache driver does, and
-"dcache off" and "dcache on" turn L2 off and on. In M-mode U-Boot
-proper, L2 is now enabled, as enable_caches() intends.
+On 2026-10-27T13:18:37, Oscar Deschamps <odeschamps.mail@gmail.com> wrote:
+> lib: date: reject out-of-range month in rtc_calc_weekday()
+>
+> rtc_calc_weekday() indexes the 12-entry month_offset[] array with
+> tm->tm_mon - 1 but never checks that tm_mon is in 1..12. A caller that
+> derives the month from untrusted data can pass a larger value, causing an
+> out-of-bounds read of month_offset[].
+>
+> fs/fat reaches this with on-disk data: fat_readdir() calls fat2rtc() on
+> each directory entry's cdate/date/adate fields, and fat2rtc() does
+>
+>     tm->tm_mon = (date & 0x1e0) >> 5;
+>
+> The month is a 4-bit field, so it can be 0..15. A directory-entry date
+> word with a month of 13..15 (which a compliant filesystem never writes,
+> but a crafted or corrupted image can contain) makes rtc_calc_weekday()
+> read past month_offset[]. This happens while merely listing a FAT volume
+> (fatls / ls), i.e. on attacker-controlled media before it is validated.
 
-Assisted-by: Claude:claude-opus-5-5
-Signed-off-by: Randolph Lin <randolph@andestech.com>
----
- arch/riscv/cpu/andes/cache.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+Month 0 is more common and needs no crafted image. The creation and
+access dates are optional in FAT and many implementations leave them
+as zero, so a zero date word gives tm_mon = 0 and reads
+month_offset[-1] on an ordinary volume. Please can you mention this,
+since the patch fixes it too. Also, fat_readdir() only calls fat2rtc()
+when EFI_LOADER is enabled, so it would be worth saying that.
 
-diff --git a/arch/riscv/cpu/andes/cache.c b/arch/riscv/cpu/andes/cache.c
-index 30d766da8f9..9a1ca950e11 100644
---- a/arch/riscv/cpu/andes/cache.c
-+++ b/arch/riscv/cpu/andes/cache.c
-@@ -10,6 +10,7 @@
- #include <cpu_func.h>
- #include <dm.h>
- #include <dm/uclass-internal.h>
-+#include <event.h>
- #include <asm/arch-andes/csr.h>
- 
- #ifdef CONFIG_ANDES_L2_CACHE
-@@ -30,6 +31,20 @@ void enable_caches(void)
- 	}
- }
- 
-+/*
-+ * In U-Boot proper, enable_caches() runs before driver model is set up
-+ * again after relocation and cannot find the L2 cache device. Run it
-+ * again once driver model is ready.
-+ */
-+static int andes_l2_init_r(void)
-+{
-+	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
-+		enable_caches();
-+
-+	return 0;
-+}
-+EVENT_SPY_SIMPLE(EVT_DM_POST_INIT_R, andes_l2_init_r);
-+
- static void cache_ops(int (*ops)(struct udevice *dev))
- {
- 	struct udevice *dev = NULL;
--- 
-2.34.1
+> Found with a libFuzzer harness over the FAT parser (test/fuzz/fat.c).
 
+There is no test/fuzz/fat.c in the tree - are you planning to send the
+harness too? A small unit test for rtc_calc_weekday() with months 0
+and 13 would be good, perhaps as a follow-up.
+
+>
+> The impact is limited to an out-of-bounds read (a wrong weekday, or on a
+> sanitizer build an abort); there is no write. Reject an out-of-range
+> [...]
+>
+>  lib/date.c | 2 ++
+>  1 file changed, 2 insertions(+)
+
+In any case:
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
