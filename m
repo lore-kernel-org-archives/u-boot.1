@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4788E606A31A
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 05:50:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FCD1606A31A
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 05:50:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=CqRYPahF;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=SZm72Aor
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=RsmB3tNk;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=lhhgKCUP
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 22B0E605E0;
-	Wed, 28 Oct 2026 05:50:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 09D8680D1C;
+	Wed, 28 Oct 2026 05:50:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xQYx0jcSN8AI; Wed, 28 Oct 2026 05:50:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 670B66065C
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793166618;
-	b=RZ4fY4nDfXmVrkqdOo8KrMaL/Jkwce847o+RdASMm2CaHRvRweb5RML9SUkoGkKmaolK
-	 Ba+HVi65P+sZ39me0Lj7XZwAP+RWrapd6OCGj4SD9ONRHtuP0GZaDoKZKYjsHtyvJzPKA
-	 6TfyHdusc0N5v73/mJu5quVvi1plIxPZuJlCyPt/ohlj/bA+yeqUuI4AhDbg4gGsG7ctI
-	 mIJTJutkeZm/9VTar8Ewg8u5SdaVSdQ8b0UPN0cspB0FgN45fPc09VmFUTGpEYxxILiMV
-	 NbMCQiLuMhS2DH66HaHN1LJjEB0Q0A33aPN49y/E1jLtXscCy+g5An7X1ll3amchR6Q==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id EyvXG7mzPipL; Wed, 28 Oct 2026 05:50:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0790C80D00
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793166625;
+	b=SA1JSHJqQzS18NFO+a0eToWe/YNPaJfTvBBCVMhIKi6mb12/aH2eURZPijC3vQs4bieP
+	 HNRhzjedsgUlfGXyRkOQltzcYUhc00XjriiWacyzPlszNPf/+t0mGI4GNi67hCGbCA3tj
+	 4TgyFhlvr9Oc1U/i8rIwywf4j23fOkW06eqRh5PlUe9NBveXRtGee/LjZUtlVzqMmGzzI
+	 Ir5Wj7pFBqg4vmV3E3zk23j5uk3FaurBdvDCa5IG1tZrTw8lTEldRojM+tOqXokKqWdgV
+	 10KAb9ZBwIMD/c3F2VNADrvqz0dxkQDked1lu3ZVrU8IP+XNrPXaCAZSapJgwKCk5wQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793166618;
+	c=relaxed/relaxed; t=1793166625;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,131 +32,133 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=FmZNAOvii68txnuIyVvjtInO4pygO8caxjk2Bu9y0No=;
-	b=Bs5r+2QPHxsy5g26GXPZfA5RbARC8GJJxxqLRk5V8KFhDR4OIC5CQT61FiMKlNWo/j+/
-	 YNKT2pWk3/jHak2kBn9fSYhL+2rL376BuGJMwo0gdkGhr0YeVBhvDSf9A1MjPNPhHAEh2
-	 FplLeeM+Gc5UZj4+O4zn1zuns0eQzDTWzCh/sSAIbuMxMEPaGkgX5MAkbwimBnUy6v3VZ
-	 R2PB6+LvagRngNiJaeTIIdzULLSK8HYITena7snR9U5EuARhG/NJLDX6snOeoHSnjI7dp
-	 1NoFpb04kOXCjje92K7en+ZGK8ry9JPS+uM0WQ+kirdPrDH2oCejtYQY5YCyMVrPhSQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=hZagqb4Ij8K6inDBhMtzdGj57P75L7k5W2HMPjLaFLQ=;
+	b=afmJr15/Jo+HMZHLgSa9lz8zh48KhqqnT0B3bE2+qUscLQ2XPjPsv0MZ8QyG/YjNMikJ
+	 J5aQe9i8/vfVpsXmK0wS4yA+dzg94jm/9ck3dyIaHhSIQcVwU+BIeNrWo/96sOuDSxTII
+	 BNJeVBMAOtisfemXy0CxBy5+r/FjFvYWw2qKc9JlruxN9DPg3gAq6P+ykTFQfx3zP4lAP
+	 Fld7IxOVII0QFoXnerPGNCIgr9UwIlKU/cLhiHjzGYoe21AfQurmdbVJ5j+Ynl22ukJNq
+	 SJNY9V1l1TGjnO/DvpLSSHThMlKEpkrQF5dFjc9yq3Ddq0jn22owhe/WOxx1XXsjacQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=lhhgKCUP;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793166618;
-	bh=FmZNAOvii68txnuIyVvjtInO4pygO8caxjk2Bu9y0No=;
+	d=lists.u-boot-project.org; s=default; t=1793166625;
+	bh=hZagqb4Ij8K6inDBhMtzdGj57P75L7k5W2HMPjLaFLQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=CqRYPahFZMFKjXq2cUx+Qi8saizlLvoSVVmEV0xa292dbUtrzMorGdmKRstww3Q/7
-	 3ZGJX4b9KrOXDB9o0AiGXJnCG2TUeVB1hfhr9FTp+g3P4V/9Ig35ngvFSgdgJYkLn8
-	 07YHaxr3p8tLzyI079Mm8vmhGxu8qyBPHsmQQ2dpOMWaQGgCYJmDCgY1Q8g+p4RnDO
-	 LETYWqqVPWcx7jfIHsAnsopYwfiPclcivgDrpVMsznoN0bs4UOFUGTxGz1/QyGzXW1
-	 3Y1jmcG8CqzkmznDxps0e97ARbH/334I//gyxFPMZG6S2eaqCIRIsGkfLzMitoWt34
-	 PMqt1sL9q1XXA==
+	b=RsmB3tNktLIvdKFlIH4moeC7CAM+CBrlzfw6mXjEjNUNxmSNMmwijm+56tAMaQJQv
+	 usLeDJU8ACsHuZfBJWbkMOgYe0zIr4WBDeOOmdgwbx/uSdYaBPi8DR873ci85jn4Y3
+	 qDw+Sn+orgZRWP6c3K6CV0GRIwXGcgot57I/AUHAbr1ciC224iMjk39/9QGswA7vrb
+	 0Xa149uuYDuLSQn1Scy9fx/heT1icK3cIoTe7TcWeB+lVPD5eB2irFkUF0sYi3Xwkk
+	 Wr6bfGkTZHNk2bXzp8lUme50FlQBFhIQEfScxiR5vnGByPpzipgTePG2gtB8jT1I1V
+	 fiTzebwxgfyRA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 670B66065C;
-	Wed, 28 Oct 2026 05:50:18 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 4E25A4D1
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:50:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0790C80D00;
+	Wed, 28 Oct 2026 05:50:25 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id B45662E5
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:50:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3470040576
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:50:17 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id A643D80D00
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:50:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4RgUv5aV1-56 for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 05:50:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 512D940574
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::329"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793166616;
- b=GZ/imOVoCRo3Yj2PpxVrciC/HglVEUq3UVMObU1EPy+O3ZBF7TxJG2f84cSFkuMiHs5t
- leU4r/J0aCC6+qHLzA/rz3CzpjmyngxmmXjDOaAgW759zuepeSaHke/biOZPanGluOA+Y
- nmag2fKl/0giCdxQ+NEWmR/bi44XcNu4vIDZnGas6PdD6IaXOQnnjWoaSlC/ak5EyyjWG
- MiJHG5xyobwnpmd2KncArYSjx9whcCDaFZJBkrtN3ffpQfLqtv0MbqKRrZdlx6Y6qSTfQ
- cH4yLqb5H4ovMp8r5/1koJ9jb8blHG1NAuWF/6EoF9k9CCs8Yt+XONMPJ/+XRAPNeGg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id XsWWQIiEo6-D for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 05:50:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8641980CCA
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793166622;
+ b=S+4IpcLmlPtWDIzC4J6KQce1Jbnx/KxyotZTndKTml+DCVLbYnMxX73S/Hi0P6xeb5WH
+ SR6FJblJNB0joIaht20EA0L6nvzj7lhixQwflwlRaBWrcpYj6FQ8xPhDFM0OGy9LZVFyH
+ d4Cxyq9LnGv8ol0olW3py/anLP05+BEQ7Sf+aeDMhNyBkqeshIJaXjoE5wW+QvLHmwdKd
+ eW7JndHy7Ywd6ss3S2ymRU6Jemt2n9KbThJaEaR8kRh4A3t57VBuN1/UXGKWDsgLWh7uo
+ AUioeFuDKtyLse+xh8mDF+RC+fVwdFG6vw/v2n1a2x8uS7AXsGIUQuOKje6Png3G7fA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793166616;
+ c=relaxed/relaxed; t=1793166622;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:In-Reply-To:References;
- bh=FmZNAOvii68txnuIyVvjtInO4pygO8caxjk2Bu9y0No=;
- b=Te878sXTJVrOVDkpxvPUHEfR/rQaCwR6TjyDLwamdcxYMbLBVGTwa5dVYMVx+2GRbZGs
- /wN0WY4u0H4vGN4Bbxg/fFueuMlTbldJMSaxHcw7seC1HQdUWOtz4VOqYqPqk6BEhGKUB
- 0Kc0DGgJCGWrdElL8WKhn7iekCV+VD2T3ghIncqogQSVc7BeUJQUqWTkTByp/fcvxcGEs
- f2fDf8PkBeeVOAzhhi+dgvBbl8QOg+nCU2c5AkwycPTpc5JScgf/1KfGxbGzY7mew3bdo
- S/I7oJPtHRzpUclTxpXv5dFRA1Xng+ULAQYME7ubRlNDTNBStIBv4PZnD0GRn5Kip6g==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=hZagqb4Ij8K6inDBhMtzdGj57P75L7k5W2HMPjLaFLQ=;
+ b=RF40r9NZbRRYkT/DHxfvHuv+LgOd1haUHMEZRHAyHNdHBYs1Hce9IHyzd2YsIIbtQG65
+ OGZpSuQ4nD1wI/1+z7M9s+hKNDqRlS5kRxMAVJ6ompATrN7uIChucuPKCEwygWmUkqbmY
+ NShis43IhihqVvEfuXmQmHviDUu7uP6lJ1Z00fGVTzhKn8TuBzNJRq+AfoH5kTesPCzer
+ Sd2+J+4lnhHxOJ630KpE1jP4cn8VrOXG9kZqwqT74kgBjsf6uGt/rLP922JKLA6V9xE70
+ rUyLc4q/mKRCm1ghXZsoyqpOWZeobkRWjxZXWzwVMtV2F2+tIPslTGx59UAGGGKL88g==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=SZm72Aor; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::329"
+ header.s=20260707 header.b=lhhgKCUP; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::329; helo=mail-wm1-x329.google.com;
+ client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=SZm72Aor
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 512D940574
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:50:15 +0000 (UTC)
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4a5720b0a57so9475545e9.0
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 22:50:15 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20260707 header.b=lhhgKCUP
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8641980CCA
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:50:22 +0000 (UTC)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4a20a37703bso4037995e9.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 22:50:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793166614; x=1793771414;
+ d=gmail.com; s=20260707; t=1793166620; x=1793771420;
  darn=lists.u-boot-project.org; 
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=FmZNAOvii68txnuIyVvjtInO4pygO8caxjk2Bu9y0No=;
- b=SZm72AorN+JaGqZ99dvfWroHLNSwoFCM+1MJKIGge0YQ0iQyW7o/puT5OjcPpuVix0
- tIYqraOngs1VXKBeDgydmZ39LJFWGtY0XlCTplJ41E6qxmcqV/Sl8HKwFu19OnL517Uw
- xF/SB4B+Dai0NUXFFSDD6RiHbgr+suqIEWJjgd8+FL758zlVxrybZ+fZ1ua5UDiPE6UC
- 3H6SqlDNe2zB1AfxmYzCYPrTOgFTZH9UtTd9X+/uny4GtVw/wg/J4oJ7vKvcVYBiaZEm
- IArlHcrRssH2xxFPhyUHUVraxvkXI4I54jED5UgicjIhWaYX048JYc+svXIt+Dg9aWWc
- z2+w==
+ bh=hZagqb4Ij8K6inDBhMtzdGj57P75L7k5W2HMPjLaFLQ=;
+ b=lhhgKCUPCnSs4gXGtGGV/mCulEv73ByjhD0XlDRaNsgD1EHTDatDm+Q668DmvH4dyz
+ RgDxqv6vbO72bf0xZVk8rj0spEktPDY2R3VO6IK5UFAb0r5XeEMusVGXK1+dU2AMh5yr
+ ECRLU6ItY8+xFHX+f94N1nX1wZsZUwG7pm6VUJvcy2v3iZsSh4FDIs4p1x/FT+RpOj0k
+ oI8AUNUSl8mcD6Axb6dI+b8BKgro5pg/BFzmA8KnuNMGrniK8IRm7bVVq183GcUmI+lj
+ 8hxy5Upeqpk81KZuyF654qKbKafNuhl74i7EzgcJDzj/yM7bUMmIhkyeqZLWWZo+CbJr
+ Traw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793166614; x=1793771414;
+ d=1e100.net; s=20260707; t=1793166620; x=1793771420;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=FmZNAOvii68txnuIyVvjtInO4pygO8caxjk2Bu9y0No=;
- b=J1UCpPg7f+XFT3WipWMfC9yJga4SvSBHm0AHF1bVxoV/cDAo1IWVZ2LEdh0qBzf5+j
- SJPQeq39fC2XBz4SnuDirG+AOYkdXvv267XbG3Wju9sR0yWWXZGndgMG76QCHl5+fEZe
- csv8XiZTppf9aMa4UuNJFTHw+0tQ2FfRjdBjsTkymIeMfqoLW4oY/Sco6IM44/hiXF6Z
- 85A2MYPW7/mcEYiUy3KKtoOiTDwjhxnGuBki58RwMGqqHuHDTuD5ykh9nYOa0OLXZDF1
- 06Y4V14l0kyG2I96uGzp0keyxUQN3VqS0xAk4vdKG8t6Mh1p3lhwGPngVZLsROnZ/IcX
- iXLw==
-X-Gm-Message-State: AFq9FYJCdWFhCLbFGqasj85+hpcD08njCWdBpfhX6ounmCiI7/QsxViq
- iOQCCKzJg67s+v0tTk0O5+1cysxEUIb89HlU24jv/OzVifDN2+1CfS4Kv5PyubVEnm8=
-X-Gm-Gg: AYBFou0zsgPuMra5w760Eb9uH4hK3WFpqR1DfLEMxzmTrnipMYPuzaiiHR8yzNwLaSe
- n4qPiBmXbMxpCz7fHcjGKmyQCVKaXvzuDAuk5OxAbdFt8jchldMVwbDsL80jWDa+2dPNwic5EvL
- hEphq0nsVFR4cofWIdtT4Cmd33Pob6Vrt6u+aHrAYREnYygeqY8mD1qGEh2dZCYGUeE12cFnDFM
- MffuytqGAMyNkpgH9hQGznBlIEYKZH2vUaRFGgPXQm2YpCZXaoKHa189JWvv1fn3m2XAk5Hoou6
- XKwpJ5Fo5rNzEH+VDlWjwHWJsFKwh7vi4FdpJgcoCXE+q86pFMXPJeb28P7Ced+piBtz+JuFEGa
- /Pd4WXQ+EsI7NXMJalHPAr3srVlh8/f0qFwWY8Iq73ZKQ3pvfRsTTbn3cs3CZ9y0XnPfUgrm6lD
- C1I3LXLNwUMNNR/wM5tFMP0Xnn8gGEpoEZhQZirz7/nZlhiRoUSagbxhbrbC8J25377KVnPm11a
- 8qEaRKrfymEG+Xd9GcgMJ0C2RKHU8bd+kBNFDd11bRtgc0c6qPYmJlZBgJ/QcFZO82KPc/AMVPJ
- tFIk2j9+FyIBHAmQhL7c97e8ggkAQF6Wmy5Wql4ucgzwQK6/KdFQ
-X-Received: by 2002:a05:600c:3d05:b0:4a2:1104:7ca7 with SMTP id
- 5b1f17b1804b1-4a7c523da32mr117848975e9.11.1793166613992; 
- Tue, 27 Oct 2026 22:50:13 -0700 (PDT)
+ bh=hZagqb4Ij8K6inDBhMtzdGj57P75L7k5W2HMPjLaFLQ=;
+ b=jcE5a3gH2w+a+WKUMm0MXDs8OdcCNq0IHBPN4fSzn2pYVckCAqMqGsN66SobQfc/L+
+ dHgAIfcD1mYVjbx2JActG5KsWDMy+YXOmNhNMWWEdJLiZ0w8I5yaQfnP3RFp/GZ6hkTX
+ e6/IMFL0xpRlvDvBfIKLLkMt2mCRFhy5pLw9t+NDSSS57ZHKSq5028aYBYOeA2Hnjck5
+ VXEYR+/LGzrcqrQUe7FpvBzYQ2x8VgbNP81cC+nN2BJUEZYcx841PnaZmYrswtk98+2+
+ VZw/6KcCKK4vcnHPhJUTsFR76O5UYJgnP0kJSzh/idfjn7e+Q/1BkQfnXvdsR3EBksb2
+ uJLg==
+X-Gm-Message-State: AFq9FYLqdw29hO/ftDqv8N4oXlbIpy4Qgsp4KSLHc5FrXSRgr8Fe3Atq
+ RHnzJa9XxXOZeTo+xmczdb5pOpUr3U4+jkfuXmjPpCDxKE5THuRGCyGm4Xv3047ds9w=
+X-Gm-Gg: AYBFou3NvxTrE1ZHV/1wdQuy+HNQ9v6zdif6XVOgbXkGiQnYhUSJ5X4Yo+k9jH/pcha
+ 785gx2M4D/GE+q1vyICYpnndBslvkOH6ku3GFk3ms5s8hcUnMoebYf8O9aK6LAK/QDlCtvhcgp8
+ BL356KIny3/4DXhLsSRmYodK9Y773tVVxf21g56jfwCMgLKflsGZ2/QPAqIKpBZhTfCBZ+AzZV8
+ o1h4h5SQTXWh4aIk7PHUVAm2LT4tTPkTdGwCpIHgrNacqL/4NPTR8qXY176IyXZVQ6oDN/CLmyJ
+ RypTl66U5vSCQqQg+EMq2RYqmkAWYakFx10l+htKimx4H24IC7VXRpF5bARgucPngj/lvUUEmBa
+ DvyPdGOSedOy2wRCv2d0FvvNBYQOvnnJ96cYt7T3v0VGK9hHeKfEgCplVmdb52nxviFcgOPH4bo
+ GLue64kdd9KC1djTAjyRSVgjYXaym+hsaOpoO1AmayU+0WtVBKaxJPOLfRxX+gc3gfgpON2pYZi
+ Dy3isGrOpv2WEHohuz3pfrTmneoy53CnoG3D+yMkvSOu9oONTGuAAKAlH0qdo7OCa7JoE4nm7IL
+ x84s/9p5UhN6i2ziMg9RhmJSpNjT4dw=
+X-Received: by 2002:a05:600c:530d:b0:49e:7c8c:361d with SMTP id
+ 5b1f17b1804b1-4a966774cbemr20798645e9.22.1793166619889; 
+ Tue, 27 Oct 2026 22:50:19 -0700 (PDT)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3ebcb902sm27643079f8f.24.2026.10.27.22.50.13
+ 5b1f17b1804b1-4a97cebfa16sm29784095e9.13.2026.10.27.22.50.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Oct 2026 22:50:13 -0700 (PDT)
+ Tue, 27 Oct 2026 22:50:19 -0700 (PDT)
 From: Ana Bobillo <anabobillo3@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 5/7] efi_loader: firmware: check the FMP payload header size
-Date: Wed, 28 Oct 2026 05:50:12 +0000
-Message-ID: <7d28c891-2928-4a30-b2ea-a0aa9d1093d7@gmail.com>
+Subject: [PATCH v2 6/7] test: lib: add tests for the capsule size checks
+Date: Wed, 28 Oct 2026 05:50:18 +0000
+Message-ID: <0129c381-c806-4921-a002-b3f85e79c5c5@gmail.com>
 In-Reply-To: <ab256ba2-8572-4cda-b7da-45b2c0368beb@gmail.com>
 References: <ab256ba2-8572-4cda-b7da-45b2c0368beb@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -179,72 +181,258 @@ X-Archived-By: <archiver.kernel.org>
 
 From: Ana Bobillo <anabobillo3@gmail.com>
 
-efi_firmware_get_fw_version() reads an FMP payload header at the start
-of an image without checking that the image holds one, and skips it by
-its header_size without checking that against the image size. A
-header_size larger than the image makes the image size wrap around
-before the image is written.
+Add unit tests that pass malformed FMP capsules to efi_update_capsule()
+and an image with a certificate longer than itself to
+efi_capsule_authenticate(), and check that they are rejected:
 
-Only look for the header in an image large enough to hold it, and
-reject a header_size smaller than the header or larger than the image.
+- a capsule header running past the end of the capsule;
+- a capsule ending inside the FMP capsule header;
+- an item offset list running past the end of the capsule;
+- an item offset that wraps around when the image header size is added;
+- an image or vendor code larger than the rest of the capsule;
+- a certificate longer than the image.
 
-With CONFIG_EFI_CAPSULE_AUTHENTICATE the header is part of the signed
-image, so there this is hardening.
+Each capsule is built inside a larger zeroed buffer, so that without the
+checks the code reads the bytes around it and returns another status
+(for the certificate, a wrapped image size) instead of faulting.
 
-Fixes: 675b62e12f9d ("efi_loader: Add logic to parse EDKII specific fmp payload header")
 Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
 ---
- lib/efi_loader/efi_firmware.c | 20 ++++++++++++++++----
- 1 file changed, 16 insertions(+), 4 deletions(-)
+Changes in v2:
+- Test a capsule header running past the end of the capsule
 
-diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index 84de95f5c23..4a5249e5d4a 100644
---- a/lib/efi_loader/efi_firmware.c
-+++ b/lib/efi_loader/efi_firmware.c
-@@ -499,22 +499,32 @@ efi_status_t efi_firmware_set_fmp_state_var(struct fmp_state *state, u8 image_in
-  * Parse the FMP payload header and fill the fmp_state structure.
-  * If no FMP payload header is found, fmp_state structure is not updated.
-  *
-+ * Return:		EFI_SUCCESS, or EFI_INVALID_PARAMETER for a bad header_size
-  */
--static void efi_firmware_get_fw_version(const void **p_image,
--					efi_uintn_t *p_image_size,
--					struct fmp_state *state)
-+static efi_status_t efi_firmware_get_fw_version(const void **p_image,
-+						efi_uintn_t *p_image_size,
-+						struct fmp_state *state)
- {
- 	const struct fmp_payload_header *header;
- 	u32 fmp_hdr_signature = FMP_PAYLOAD_HDR_SIGNATURE;
- 
-+	if (*p_image_size < sizeof(*header))
-+		return EFI_SUCCESS;
+ test/lib/Makefile      |   1 +
+ test/lib/efi_capsule.c | 212 +++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 213 insertions(+)
+ create mode 100644 test/lib/efi_capsule.c
+
+diff --git a/test/lib/Makefile b/test/lib/Makefile
+index 9fc4a1a9b5d..0fb6c6eabde 100644
+--- a/test/lib/Makefile
++++ b/test/lib/Makefile
+@@ -10,6 +10,7 @@ obj-y += abuf.o
+ obj-y += alist.o
+ obj-$(CONFIG_ECDSA_VERIFY_MBEDTLS) += ecdsa.o
+ obj-$(CONFIG_EFI_LOADER) += efi_device_path.o efi_memory.o
++obj-$(CONFIG_EFI_CAPSULE_FIRMWARE) += efi_capsule.o
+ obj-$(CONFIG_EFI_SECURE_BOOT) += efi_image_region.o
+ ifdef CONFIG_RISCV
+ obj-$(CONFIG_USE_PRIVATE_LIBGCC) += test_clz.o
+diff --git a/test/lib/efi_capsule.c b/test/lib/efi_capsule.c
+new file mode 100644
+index 00000000000..c99b4827110
+--- /dev/null
++++ b/test/lib/efi_capsule.c
+@@ -0,0 +1,212 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Test the size checks of capsule updates
++ *
++ * Copyright (c) 2026 Ana Bobillo <anabobillo3@gmail.com>
++ */
 +
- 	header = *p_image;
- 	if (header->signature == fmp_hdr_signature) {
-+		if (header->header_size < sizeof(*header) ||
-+		    header->header_size > *p_image_size)
-+			return EFI_INVALID_PARAMETER;
++#include <efi_loader.h>
++#include <pe.h>
++#include <test/lib.h>
++#include <test/test.h>
++#include <test/ut.h>
 +
- 		/* FMP header is inserted above the capsule payload */
- 		state->fw_version = header->fw_version;
- 
- 		*p_image += header->header_size;
- 		*p_image_size -= header->header_size;
- 	}
++static const efi_guid_t fmp_capsule_guid =
++	EFI_FIRMWARE_MANAGEMENT_CAPSULE_ID_GUID;
 +
-+	return EFI_SUCCESS;
- }
- 
- /**
-@@ -543,7 +553,9 @@ efi_status_t efi_firmware_verify_image(const void **p_image,
- 	if (ret != EFI_SUCCESS)
- 		return ret;
- 
--	efi_firmware_get_fw_version(p_image, p_image_size, state);
-+	ret = efi_firmware_get_fw_version(p_image, p_image_size, state);
-+	if (ret != EFI_SUCCESS)
-+		return ret;
- 
- 	image_type_id = efi_firmware_get_image_type_id(image_index);
- 	if (!image_type_id)
++/*
++ * Capsules are built in the middle of this buffer, so that the bytes
++ * before and after a capsule are zero and can be read without a fault
++ * if a size check is missing.
++ */
++static u8 buf[1024] __aligned(8);
++
++/**
++ * fmp_capsule_init() - set up an FMP capsule in the middle of buf
++ *
++ * @fmp_size:	size of the FMP capsule following the capsule header
++ * Return:	capsule header
++ */
++static struct efi_capsule_header *fmp_capsule_init(size_t fmp_size)
++{
++	struct efi_capsule_header *capsule = (void *)buf + 256;
++
++	memset(buf, 0, sizeof(buf));
++	guidcpy(&capsule->capsule_guid, &fmp_capsule_guid);
++	capsule->header_size = sizeof(*capsule);
++	capsule->capsule_image_size = sizeof(*capsule) + fmp_size;
++
++	return capsule;
++}
++
++/**
++ * update_capsule() - pass one capsule to UpdateCapsule()
++ *
++ * @capsule:	capsule header
++ * Return:	status code
++ */
++static efi_status_t update_capsule(struct efi_capsule_header *capsule)
++{
++	return EFI_CALL(efi_update_capsule(&capsule, 1, 0));
++}
++
++/* efi_capsule_update_firmware() must check the capsule header size */
++static int lib_test_efi_capsule_update_header_size(struct unit_test_state *uts)
++{
++	struct efi_capsule_header *capsule;
++	struct efi_firmware_management_capsule_header *fmp;
++
++	ut_asserteq_64(EFI_SUCCESS, efi_init_obj_list());
++
++	/* The header ends past the end of the capsule */
++	capsule = fmp_capsule_init(sizeof(*fmp));
++	capsule->header_size = capsule->capsule_image_size + 4;
++	fmp = (void *)capsule + capsule->header_size;
++	fmp->version = 1;
++	ut_asserteq_64(EFI_INVALID_PARAMETER, update_capsule(capsule));
++
++	return 0;
++}
++LIB_TEST(lib_test_efi_capsule_update_header_size, 0);
++
++/* efi_capsule_update_firmware() must check the FMP capsule header size */
++static int lib_test_efi_capsule_update_fmp_header(struct unit_test_state *uts)
++{
++	struct efi_capsule_header *capsule;
++	struct efi_firmware_management_capsule_header *fmp;
++
++	/* The FWU checks reject a capsule before it is parsed */
++	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE))
++		return -EAGAIN;
++
++	ut_asserteq_64(EFI_SUCCESS, efi_init_obj_list());
++
++	/* The capsule ends after the version field */
++	capsule = fmp_capsule_init(sizeof(fmp->version));
++	fmp = (void *)capsule + capsule->header_size;
++	fmp->version = 1;
++	ut_asserteq_64(EFI_INVALID_PARAMETER, update_capsule(capsule));
++
++	return 0;
++}
++LIB_TEST(lib_test_efi_capsule_update_fmp_header, 0);
++
++/* efi_capsule_update_firmware() must check the item offset list size */
++static int lib_test_efi_capsule_update_item_list(struct unit_test_state *uts)
++{
++	struct efi_capsule_header *capsule;
++	struct efi_firmware_management_capsule_header *fmp;
++
++	/* The FWU checks reject a capsule before it is parsed */
++	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE))
++		return -EAGAIN;
++
++	ut_asserteq_64(EFI_SUCCESS, efi_init_obj_list());
++
++	/* Room for eight item offsets, but nine items */
++	capsule = fmp_capsule_init(sizeof(*fmp) + 8 * sizeof(u64));
++	fmp = (void *)capsule + capsule->header_size;
++	fmp->version = 1;
++	fmp->embedded_driver_count = 8;
++	fmp->payload_item_count = 1;
++	/* The ninth item offset lies past the end of the capsule */
++	fmp->item_offset_list[8] = sizeof(*fmp);
++	ut_asserteq_64(EFI_INVALID_PARAMETER, update_capsule(capsule));
++
++	return 0;
++}
++LIB_TEST(lib_test_efi_capsule_update_item_list, 0);
++
++/* efi_capsule_update_firmware() must check an item offset without overflow */
++static int lib_test_efi_capsule_update_item_offset(struct unit_test_state *uts)
++{
++	struct efi_capsule_header *capsule;
++	struct efi_firmware_management_capsule_header *fmp;
++	struct efi_firmware_management_capsule_image_header *image;
++
++	/* The FWU checks reject a capsule before it is parsed */
++	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE))
++		return -EAGAIN;
++
++	ut_asserteq_64(EFI_SUCCESS, efi_init_obj_list());
++
++	capsule = fmp_capsule_init(sizeof(*fmp) + sizeof(u64) +
++				   sizeof(*image) + 16);
++	fmp = (void *)capsule + capsule->header_size;
++	fmp->version = 1;
++	fmp->payload_item_count = 1;
++	/* Offset plus image header size wraps around to zero */
++	fmp->item_offset_list[0] = -(u64)sizeof(*image);
++	ut_asserteq_64(EFI_INVALID_PARAMETER, update_capsule(capsule));
++
++	return 0;
++}
++LIB_TEST(lib_test_efi_capsule_update_item_offset, 0);
++
++/* efi_capsule_update_firmware() must check the image and vendor code sizes */
++static int lib_test_efi_capsule_update_image_size(struct unit_test_state *uts)
++{
++	struct efi_capsule_header *capsule;
++	struct efi_firmware_management_capsule_header *fmp;
++	struct efi_firmware_management_capsule_image_header *image;
++
++	/* The FWU checks reject a capsule before it is parsed */
++	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE))
++		return -EAGAIN;
++
++	ut_asserteq_64(EFI_SUCCESS, efi_init_obj_list());
++
++	capsule = fmp_capsule_init(sizeof(*fmp) + sizeof(u64) +
++				   sizeof(*image) + 16);
++	fmp = (void *)capsule + capsule->header_size;
++	fmp->version = 1;
++	fmp->payload_item_count = 1;
++	fmp->item_offset_list[0] = sizeof(*fmp) + sizeof(u64);
++	image = (void *)fmp + fmp->item_offset_list[0];
++	image->version = 3;
++
++	/* The image is larger than the capsule */
++	image->update_image_size = 17;
++	ut_asserteq_64(EFI_INVALID_PARAMETER, update_capsule(capsule));
++
++	/* The vendor code does not fit after the image */
++	image->update_image_size = 16;
++	image->update_vendor_code_size = 1;
++	ut_asserteq_64(EFI_INVALID_PARAMETER, update_capsule(capsule));
++
++	/* Both fit: there is no FMP driver for the zero image type */
++	image->update_vendor_code_size = 0;
++	ut_asserteq_64(EFI_UNSUPPORTED, update_capsule(capsule));
++
++	return 0;
++}
++LIB_TEST(lib_test_efi_capsule_update_image_size, 0);
++
++/* efi_remove_auth_hdr() must check the certificate length */
++static int lib_test_efi_remove_auth_hdr_length(struct unit_test_state *uts)
++{
++	struct efi_firmware_image_authentication *auth;
++	efi_uintn_t capsule_size = 64;
++	efi_uintn_t image_size;
++	void *image;
++
++	if (!IS_ENABLED(CONFIG_EFI_CAPSULE_AUTHENTICATE))
++		return -EAGAIN;
++
++	memset(buf, 0, sizeof(buf));
++	auth = (void *)buf;
++	/* The certificate is longer than the capsule */
++	auth->auth_info.hdr.dwLength = 256;
++	auth->auth_info.hdr.wRevision = WIN_CERT_REVISION_2_0;
++	auth->auth_info.hdr.wCertificateType = WIN_CERT_TYPE_EFI_GUID;
++	guidcpy(&auth->auth_info.cert_type, &efi_guid_cert_type_pkcs7);
++
++	ut_asserteq_64(EFI_SECURITY_VIOLATION,
++		       efi_capsule_authenticate(buf, capsule_size, &image,
++						&image_size));
++	/* The image size must not have wrapped around */
++	ut_asserteq_64(capsule_size, image_size);
++
++	return 0;
++}
++LIB_TEST(lib_test_efi_remove_auth_hdr_length, 0);
