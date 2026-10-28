@@ -1,165 +1,160 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C84CB606A31A
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 05:50:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6F3A606A31A
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 05:50:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=L8/XZSwg;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=YggMNe7d
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zNM56Bio;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=jjaoHOp+
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9A87D80D6A;
-	Wed, 28 Oct 2026 05:50:31 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 738FE606BE;
+	Wed, 28 Oct 2026 05:50:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8qF_hfSIB-hB; Wed, 28 Oct 2026 05:50:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A716580D0B
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793166630;
-	b=pqkLbT84jzhPj4jNC8l/D6NuDr0U9kFIlSXUlLcSh/h1fapmWrCEKFTDTfNo5dLLx3jc
-	 UkzAzMlF/xs3aYfbbYAWOvra9AcJKfXTZLHHFPpOrdCvV7+tEamFJfESgav3ZJ1s/Zdfy
-	 9tKA8s1VWgxFcG0Nv4f2ysJcf1xwqPMe0FSqjOtys+/C5Co9/j1z49YZl+lkJetxeXMJi
-	 QJZwlT+E7WRzG6uAY+jV7yYnIY2Kv/V0Hvl8tZ8qu8ZrDTp1/KVmA14xr2r73LFIcKPCW
-	 QjCEsQi0GbWGqD70vWvlXawgCNC20Kb5NLvfITA0PjTD5wqiyQbaTRikhaLMFJjnW2A==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tZ08rwy-ak6h; Wed, 28 Oct 2026 05:50:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 52BD560673
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793166654;
+	b=Tcpk7R8PrPTprxrGVMFp45H4ctKx4XLaoqFEXdwNRlXCxMIDcZhFr8UekgwGFmZRiIL4
+	 KCz9HKA0avAgI0kszj/GIv9i4UU/Pj2tpeE80LB98p1sHON21jRt3esemNiZA3L48upYK
+	 Y9PsEgxlxmcSV/x9AQcZT5M4OE69NFdt6Y5WdU/MzMj06oxfYTGmJkiBEcynBN8ia+4AF
+	 JOZBtfkbfxz3LBwZBBjhgGIQw+1HLtsk4/ucxLxrQM7EVht+A7KI01EDzP0hhguAaQf70
+	 4ACZEucCrRc/DSp6ij/Qd43pRQcOUdqHDlBLi05u5699HYGFnhG+VF7eG6EMZG1fQow==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793166630;
+	c=relaxed/relaxed; t=1793166654;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:In-Reply-To:
-	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=SQI87JWKp9aSSOK19jIjp3QrdN7UJLktzHD/HvPOOFw=;
-	b=TLpF1LPrg1/pn6q2o4zbcSdloVFof+2q/OIETQe8oC82vp9Muhk4zyMCid3xH/t2NTyx
-	 n/7lCL0OCca/KUQscvIpzwWZhklk+m/XEymgB2jBpizxQ+PAAhzUPf60gH51ZYzw7L9BR
-	 d3dPesCod6ic5aj43iGBG7mdPU+4JtU5eQPwTakHADg/IhWpyrzN3/pxOvLje5drB8dDr
-	 XT/vDEmHOn7CUaPOYpN+rr3JT7nMf1ShMJoLw6BZlN4/Se0WXeWnNkhu6FiNkO06E/H3U
-	 mAn3u51JlpPYKoVzf6BSiOWIe6dGjfFQWlweaIdDaG6YqLs2u3bu/+gItw4GCKEIVLg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=mhdx6nIFlZ2oaCNoATWdwBwdYVlnvOWkqIe3JtHEFhw=;
+	b=AD8SFDSj+PkX1XMC5d65Xus+/QUYit5mlki7iW9bDfhY4ipA8GVScFVTBRlD684pv+wu
+	 edpfJbk8ZQ0oE72JWkXqdv0vs5yp+BNH9Apy83uWkaD9IMYZQAmwKGKt19LPO6Jk6IhOC
+	 sVrB4GeLkqtV993Km3eHaWwI/4cCWMjLaMW6eJNbP2ZW38WX/oW4b4N3HERHM+7ySt08R
+	 JJkYHhy2Sv/h4i/sYQ2z9HoiFneHQgdXaJY0PJpOy5KTBUBHOAlCYCrL6ft0FKWE49l4U
+	 oFbHEUECXVoSMWj3orpTonD5cmOmB9OyzV93XwyACguWIwI5A5io02awaJDIidC/Jqw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=jjaoHOp+;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793166630;
-	bh=SQI87JWKp9aSSOK19jIjp3QrdN7UJLktzHD/HvPOOFw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=L8/XZSwg9NoYq4/YbsBu48bkB0aeBxp9Fzh4WhJN1Pjv+81pO0XOKkHpWjIkDxIL3
-	 ipuY+6JOpiXKnUukFFIgAAugcsiefUQQcu3Vtsxevgy02Ub+CK5KpDixgQ+C7c5X2G
-	 HqGfnBTgF0gu/uXmXF6EUeqNbCxvxQCdib0Jc5uPZimuBL4bhjjcxv7o29wHXZVKSb
-	 7r6K7ahkFyQBCXmYMwip80k6wAhw7EgYGtwEybhhk0WUISIrPc+PB8RpuxY/3/7E80
-	 zWd/HIRvywOgmCqHw13zfroKCHdIQJ6gqr3gjbFGIkhXW4MC569bjCfahkH2o+vVSx
-	 ycsQ8H5rVXWfw==
+	d=lists.u-boot-project.org; s=default; t=1793166654;
+	bh=mhdx6nIFlZ2oaCNoATWdwBwdYVlnvOWkqIe3JtHEFhw=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=zNM56BioJrQUTbZS0bvLaYuZLBlj//l1LKFJuNZmpJ2L50Z0sfLhlYuMxHanTsG3s
+	 TCaF49ucbaP6XntdHqb3dHlkEWz9EBCWFkeebVHOqvd8ekWMaAsWiw3NTI+tECPF8E
+	 /x8nIe7jIIV/Dq+dV1WFTVfUXhBlELMXNWoyR6trKL/5znRglYt7TAKlqefbjrjph7
+	 EMYUMZ4AOANUoVmc4c61MpSDhxvoCiqgHbBDlUqlN6BnErix8MNI20Eruqmj8KPVTP
+	 m5ZtLENL8qXMnN3pZILRkGrvuz4M6LZ7yEjintdWRX5dmQGGuPN+8C3qW5vcN9AFUd
+	 ILdEbzmW5i/Ww==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A716580D0B;
-	Wed, 28 Oct 2026 05:50:30 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 0DD042E5
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:50:29 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 52BD560673;
+	Wed, 28 Oct 2026 05:50:54 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id CAC0D473
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:50:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id F383D40576
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:50:28 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id BCB9160678
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:50:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 85S606QKpJTh for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 05:50:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D9E8D40574
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::433"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793166628;
- b=sx0EFr2KBrg7Lx/pfX/f94zwUqWDhZqsoem7LoUJNsRFgMjfoQYajqV9P/F88uAQs8kg
- 6CFujZ/zRlWfPJ6z4jtuLm9jGHmo6Z2U1pA488Ns8ePdVGAYRWggDi7pfrgZDCfgDVORe
- OQbP0Ekj8UlaTAGvBf4tgjUQkw6k7dvxJlwE/0BrhO0iEQHTZg8qB8GL9UYUNeWJUqKaY
- Tl37cUSwV4oPrkfFieVvg+ZqP9z4YxGmTzu/bzXvwxNaAzCcJDzIJ3o8xzHGPbwuXrKd+
- qnRoMeCfBLFT0srlj9TvzNB4suavI2Zlf/vcxk3iR36haADNANEEMTA7QzwZRozu6wQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id h-jWNO0A8EDM for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 05:50:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A18B66065C
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793166652;
+ b=IntmTf2mCmVmEBfzaKHKJVAGWv8kz8PTFeR6KQdVOOfyiFAtEHyYnRdlPiWc5cHO36zk
+ VRhkCFKbrcRXJaOHFwqzovQ8UhV1ELmyvsLg2WhyBf0U+/+ALQWHRe0K9pkkza9Z/PoX6
+ 7WknNjwI9Gj1UkG8mzl5k0pPK+WnPUG0RrG2571knvtKYnR3mdz+jHhspTBy4aL8XTK6i
+ uCTg9Mqs69/NeAYGTX2fdPx1NYoZmQaDTaf63wz1hlKgBBae8645SFrEIb63FVJ10ASgS
+ IJLsDyVbVCJDKAu4LVpchNP9/c+IWkDd9RV6jk/GGaYk1awTyr3oTKRCNyeEF665i5w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793166628;
+ c=relaxed/relaxed; t=1793166652;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:In-Reply-To:References;
- bh=SQI87JWKp9aSSOK19jIjp3QrdN7UJLktzHD/HvPOOFw=;
- b=JzniEf5AJPR059kKi033Y6ZHgNnzc4um/P5k34988tK8a0J5z+7ucyNy2JhnWYw8zuK1
- QZoZm1N3ytCyqEniLT8Mdx4Y0cm9fapk1c9yw7PBBd4K9RPa3kwVQiaqR70sBPFcJPURs
- NOILO6l62pOlIne9MpCEHvy8xDLEWdPORO70OFayDmToAd/D6ZSTujfhG15KcHDisL470
- x+EOFEiL11iEipf8uotu7nVQNVv2NMB7r6mhjQQKVk2GON7behw305xPLFaWcnSv51vhQ
- RBIgsgp4BA8nAn1FYJhS9QyVyJuTsUOabzA/1Bnc0/JFiKaY4SvwWoQ0Q9SPSPwrBmg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ Date:Message-ID;
+ bh=mhdx6nIFlZ2oaCNoATWdwBwdYVlnvOWkqIe3JtHEFhw=;
+ b=AiRDp8rTmQCBgbu2vAP5ZtYMqoN/hkXS+hoJ2fIAPIstjUDAEIIfVBfzQwbj6eR7g/6I
+ 4vvs1Ffudig40DET1Wbhdl1GbtFxRoxy/2l1PukH/83V5NWXVTzO9BQMnf7zg6hpcmivE
+ EOXpCVQ7/Fp3X0ubXXGi6W9soqZ+NDUpYUzXRNUP00g4G8Z890rkBpZ5MYDhmw4vUYM00
+ tt7tzZh1X/Yjv1IPTXJj+2zp2VOE/EYtxPTS9jFB7lm9D2xyrXKNcjNybBguAw2wO+oPC
+ v+9JCGlMOVvFeuikY+qWIuS8dbuLFyYlRGckOx945CfueFTW4O4FWXOYHWBx1x/XYuA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=YggMNe7d; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::433"
+ header.s=20260707 header.b=jjaoHOp+; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::433; helo=mail-wr1-x433.google.com;
+ client-ip=2a00:1450:4864:20::42c; helo=mail-wr1-x42c.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=YggMNe7d
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D9E8D40574
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:50:27 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-48c45111bebso244599f8f.0
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 22:50:27 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20260707 header.b=jjaoHOp+
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A18B66065C
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:50:51 +0000 (UTC)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-48c4649b35bso457893f8f.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 22:50:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793166626; x=1793771426;
+ d=gmail.com; s=20260707; t=1793166649; x=1793771449;
  darn=lists.u-boot-project.org; 
- h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=SQI87JWKp9aSSOK19jIjp3QrdN7UJLktzHD/HvPOOFw=;
- b=YggMNe7dzANPUKsxhtg/OyePv43Rxtc/jR4hDw2r2GVdp7oMYpu/NryVu3U2C6LipI
- Z+xqxvYC6TZNRVQ8ScyjaOtKDoECb3q7fULe/mihodYswh5u63Obn5sKDLLbaRv1iFSN
- RNyi8LRHRio+O54xSLDy7t/AKToPKljD/V3b+9pzvvaTo+bs6lPfvGAnfykqtpNLtKC6
- mCkBYI/1OO5yVTsZod5dAgm2+6B3YAEkItV56LhsWrlFJwypBqx3I3u/necsLXLE/9+S
- WQUI8q4D9ttMtPmncu3Z4TOj1ESpXSRFRZ/9BQ5gGUZk7gSBvLsnAiWjQg2iXOSqhXaR
- OU2Q==
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=mhdx6nIFlZ2oaCNoATWdwBwdYVlnvOWkqIe3JtHEFhw=;
+ b=jjaoHOp+J2ZN4qt6+wY+jKhIf9sN3LLavfvAHrfBF9Fm3hXdkS9WOzk2ePPGeK0a2Z
+ ZIJR2MYcFikODZfNh5RGpMMKDRjbB2qs8GoMjmckrizgDmX2ZrjqYHQTeJUn/okTd5B5
+ F+p1sjQq3UJlAEmImDygJ0InvQMrn5A1g3Yrq0BXXa40pzlhU6S2Nj0b45Mp5FGrJjB3
+ +5jHA4XiJO/R+WBAV0GuVnr6aZ237j97hrI68hrH4FkiCweeJ3aWZu+wU8Icq+ku9Fhy
+ Tb+KQDRSTbPEQLB8jmgQVeaXIDrH/jLN7v91qjGPUE+lt8LSPXK0BQ8K9fbiiLnrcprJ
+ nN4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793166626; x=1793771426;
- h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=SQI87JWKp9aSSOK19jIjp3QrdN7UJLktzHD/HvPOOFw=;
- b=U3Yut27WGHiQbcyIrZzEQqEpEZFJW+yyrIFccz/fJsCth5GGkNircH6uq8UtC1V3P/
- PMkTqW5Wtl4yWISH9+c9YylB8IR2rq86CXsWyfMrYwYMxXJ3SArT521QAmFmHWPS7/R7
- wVC8mqKL9qORLsW/amzsZkZf3agWOXHhZ5GNwB72eZKrb0YgkuqjWUb8BYwoV0TPEA6e
- iklP639QEg8NYE9+R3iYH/ffgK90CHoI9KmRYAuFBM1yWVZspKGjHwlRecQJc7g8ii9P
- D6shW/OvyWRyVffIUfH/eEhoLEZ+iY4quwhldmJEbCMyE4yJUzdhqpdnEtq7tt8WGOq1
- APTQ==
-X-Gm-Message-State: AFq9FYIoU0lQmA5N7DK6D7xW0mI6QxginykFA4T9JXwReArESNXoN9FY
- 6ikW5UJ9xnTxnkNirSL4jOZNmEPDhS+Xs1XO+teGozWo9nvAKbUqCx+kZc57G1qq5MM=
-X-Gm-Gg: AYBFou0EAcdowrY/DGWthPAZUIOk1ZJD6bIDGpbOC/ZyaBKFKsv4cLN29cRwGH7lbiQ
- ffsXnb3JPPw+JyAJb78g5mMKYQf4xUwyvdZ8ulm1u18sHM1LSuDQTZMPo83MSDBRiXPNIgJjwDf
- AxBfYE/Z78A1TGeclDbptoT9dkDLN2z+g8mRZSikza43Pn580Qs6H9R1hMbXFnagNs4QiaemlP0
- Xhkv2HhMryKXQtvSTeFsSkpztrlnB1qSpYkfDXi8ztWnRspBr+jOr7bfFxU4DLliXT638eqI1MO
- uorA8a6ERzMhRKtl9UNuIdrbtO/cplEHiDMUCUAFpgLfjEt2NHu8og0oX90rALzEDlVY+3ZjAXp
- 9ZxTu2e9YCbZduNUs1QlYIG2dq1hJVAzf/0h2bCJMKZA14xj/EJ3Dkq+PyZZBHBsaVKlYSScmoP
- 157gBPcUunU9uKOsw2cqexmqJWiwcBr5J9UODkQF3w/frULVxAu5OS8v9cYZlt8OFpZMPqhD96K
- 6GHXiorQiQPApn4X5GGpfk0SFLTm+0kwjvVqT6X7A7MqFMTQr9sgiV1kJ8VuZp2YpXvS9ug4G7e
- Lv+HcF3e9efWIQgTuEK2/cygTj97/5I=
-X-Received: by 2002:a05:6000:26ce:b0:48e:412:3829 with SMTP id
- ffacd0b85a97d-48e5d2e6cddmr3182687f8f.15.1793166625520; 
- Tue, 27 Oct 2026 22:50:25 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1793166649; x=1793771449;
+ h=message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=mhdx6nIFlZ2oaCNoATWdwBwdYVlnvOWkqIe3JtHEFhw=;
+ b=yGJlp2t1hmgemyFCU5iY/Ma9zxyAxjnqXeP2IFvksrwh9RxdjlxEGFYWyA0e1px23p
+ RcbAIXe/DQeYcjAQaYpu/37glDK5fumChpspazK6qbaLacL8HA4XhLyJV7ZeGMRMol/5
+ Q6X2cG7phn0a7I4MUdjIK06TNnVN7p1zibeQv/yb9usyJI8QGqO1pTx8JSXaeDNExd2i
+ IKwuimv8/AyWuRB6Iactzr/dqeHdUDz95TmEbUgWP/KNhSzFi7J99eyaWhs8HvIFFd3P
+ B82QHdS3XPJgP9ERsEErA0H7Y8fy5J3v7u+LFfYUvbKll4dHqv2ts4rcKyk3/IjRKpBL
+ PZIg==
+X-Gm-Message-State: AFq9FYIXMW1s8Zl6EsSjaQwA9C2GK9aE/MdzIGbt3W5i4ve0UuDLcNdn
+ 864hhWVEJczPXRoa85ctIKiauFD5jm8TnR/KWg2j8FEvEktqzKL5Rzci
+X-Gm-Gg: AYBFou1FRkfKMC0xcdBIPe+3qJCxNp8X9mvmuQ9j1OMENxT0w19U+kq8vOV6dExI/ei
+ I90+wr9ff/RfiMe19drs+cvLhS/+FUZ/0sA5esjtZyUEa59/jKQY1IEssBGn/tbXh26l8lm2JM1
+ Is+TePOACQUV4P3mgx6uP4+csCk9IrGjQgAAZC4rqupzK+dTTNM8hEMPZC+JkbnOfK+DCB9/UMb
+ yIufUCgH0ErKiXVsvGDuZol3I28+FPnI9DTUhI0bmFd0cFBlY3I8YY51oclfjzq/q1J2cP7LIVr
+ 0N+s8ym+edHszwV5se2GB0hhT0tts3OcW4hAL2rPgzjJTWbmSBcAdLBC4Q2acE3C21porhvwNBk
+ l6PAvwHgZVRMpP6Lq/5eY6JK+9vpZgSdLwHW9/DyT9+61g3pP+kIxVUT6LivQE+d8exvA3tcTDf
+ yLGmhWL0GfeuI8qyswJMuEggk4reR6Fjhn7vbu0tg+7NXDX7paklYQyqn6ur01cdu5o3xC6IWUv
+ PVkb4YwK17QtOZEvt7iwjkyQqkretKaE2/LSalbxrXlaXFzAr3MggUBeSUCQPP8UEXBMzbxIVfL
+ cc5jKaeym5JuQgYE4Nmn7b8YCGlbt/g=
+X-Received: by 2002:a05:6000:2284:b0:48b:f08:8159 with SMTP id
+ ffacd0b85a97d-48e5d46820amr3530840f8f.40.1793166649163; 
+ Tue, 27 Oct 2026 22:50:49 -0700 (PDT)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3eb40733sm20664147f8f.0.2026.10.27.22.50.25
+ ffacd0b85a97d-48e3ecd8ddasm28747478f8f.48.2026.10.27.22.50.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Oct 2026 22:50:25 -0700 (PDT)
+ Tue, 27 Oct 2026 22:50:48 -0700 (PDT)
 From: Ana Bobillo <anabobillo3@gmail.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 7/7] test: py: efi_capsule: test truncated capsules and FMP
- payload headers
-Date: Wed, 28 Oct 2026 05:50:24 +0000
-Message-ID: <a1a13d0b-d94a-4c4f-bec3-effe46e7e3ed@gmail.com>
-In-Reply-To: <ab256ba2-8572-4cda-b7da-45b2c0368beb@gmail.com>
-References: <ab256ba2-8572-4cda-b7da-45b2c0368beb@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org, Tony Dinh <mibodhi@gmail.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 0/6] fs: ext4: check on-disk indices before using them
+Date: Wed, 28 Oct 2026 05:50:47 +0000
+Message-ID: <78892543-03de-412e-831f-de840765be59@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -171,205 +166,93 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 X-Archived-By: <archiver.kernel.org>
 
-From: Ana Bobillo <anabobillo3@gmail.com>
+The ext4 driver takes several indices from the filesystem image and uses
+them without checking them against the structures they index. A corrupt
+or crafted image can then make ext4load read past an extent tree node, or
+make ext4write (and saveenv with the environment on ext4) write outside
+the block bitmaps, the inode bitmaps and the group descriptor table when
+it replaces an existing file.
 
-Add capsule on disk tests for the checks that need a capsule file or a
-signed capsule:
+This series checks each of those indices where it is read:
 
-- a capsule file shorter than the capsule header;
-- signed capsules whose FMP payload header has a header_size smaller
-  than the header or larger than the image.
+1. extent tree nodes: entry count against the node's capacity, and the
+   depth, as Linux does
+2. the triple indirect lookup compares the cached block with the wrong
+   index, read past the end of its buffer
+3. the write path refuses block group layouts its bitmap code cannot
+   handle, including zero blocks per group, which divides by zero
+4. block numbers released by the delete path must lie inside the
+   filesystem, and a failed read of an indirect block stops the delete
+5. the block group of an inode is (n - 1) / inodes_per_group in the write
+   path too, and inode numbers from directory entries are checked as
+   Linux checks them
+6. tests in test/py for each of the above
 
-None of them may update the firmware, and each file is removed.
+With sandbox_defconfig and CONFIG_ASAN, the new tests pass with the
+series applied. On master the corrupt extent header is not rejected, the
+looping extent tree hangs ext4load, ext4fs_init() divides by zero, ASan
+reports segfaults in ext4fs_reset_block_bmap() and in
+ext4fs_reset_inode_bmap(), the journal's inode is deleted, and replacing
+the file in the last inode of a group fails with "no inode left to
+assign". The triple indirect test passes on master too: there the wrong
+compare reads past the buffer but seldom changes which block is read, so
+the test checks that blocks reached through the later entries of the
+triple indirect block still read back correctly. The existing ext4 and
+env tests still pass, and repeatedly overwriting files on clean images,
+with and without extents, with 1 KiB and 4 KiB blocks, keeps the images
+clean for e2fsck.
 
-Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
----
+Tom asked for the results of a CI run. This series, exactly as posted
+here, went through U-Boot's Azure pipeline on a pull request opened only
+for CI, together with three other series of mine that touch other files
+(block device block sizes, USB Ethernet rx headers and EFI capsule
+sizes), on top of v2027.01-rc1. Every job passed:
+https://github.com/u-boot/u-boot/pull/1064
+https://dev.azure.com/u-boot/u-boot/_build/results?buildId=13698
+
+Simon suggested that ext4fs_get_new_blk_no() could use
+ext4fs_blk_to_group() too. I would rather do that as a follow-up: there,
+running past the last group means that the filesystem is full, not that
+a block number is corrupt, so it needs a quiet check rather than the
+helper's error message.
+
 Changes in v2:
-- New patch: capsule on disk tests for patches 1 and 5 (Heinrich)
+- Add Simon's Reviewed-by tags to patches 1 to 3
+- Use printf() for every error message, as the rest of the driver does
+- Patch 4: compute the block group from the first data block, as Linux
+  does; check the reads of the indirect blocks; return -EIO for read and
+  journal errors
+- Patch 5: add ext4fs_inode_to_group() and use it for every inode bitmap
+  index; reject reserved inodes other than the root
+- Patch 6: clean up after a failing test; use f-strings; add tests for
+  patch 1's depth check, patch 2, the last inode of a group and the
+  journal's inode
+- Rebase on main
 
- arch/sandbox/dts/sandbox_capsule.dtsi         | 52 +++++++++++++++++
- .../test_capsule_firmware_raw.py              | 34 +++++++++++
- .../test_capsule_firmware_signed_raw.py       | 56 +++++++++++++++++++
- 3 files changed, 142 insertions(+)
+Link to v1: https://patchwork.ozlabs.org/project/uboot/list/?series=529698
 
-diff --git a/arch/sandbox/dts/sandbox_capsule.dtsi b/arch/sandbox/dts/sandbox_capsule.dtsi
-index 34d29916b30..f7418f9794a 100644
---- a/arch/sandbox/dts/sandbox_capsule.dtsi
-+++ b/arch/sandbox/dts/sandbox_capsule.dtsi
-@@ -166,4 +166,56 @@
- 			};
- 		};
- 	};
-+
-+	capsule12 {
-+		filename = "Test116";
-+		efi-capsule {
-+			image-index = <0x1>;
-+			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
-+			private-key = CAPSULE_PRIV_KEY;
-+			public-key-cert = CAPSULE_PUB_KEY;
-+			monotonic-count = <0x1>;
-+
-+			/* FMP payload header, header_size 0: smaller than the header */
-+			payload-header {
-+				type = "text";
-+				text = "MSS1";
-+			};
-+
-+			payload-header-rest {
-+				type = "fill";
-+				size = <12>;
-+			};
-+
-+			text {
-+				text = "u-boot:New";
-+			};
-+		};
-+	};
-+
-+	capsule13 {
-+		filename = "Test117";
-+		efi-capsule {
-+			image-index = <0x1>;
-+			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
-+			private-key = CAPSULE_PRIV_KEY;
-+			public-key-cert = CAPSULE_PUB_KEY;
-+			monotonic-count = <0x1>;
-+
-+			/* FMP payload header, header_size 64: larger than the image */
-+			payload-header {
-+				type = "text";
-+				text = "MSS1\x40";
-+			};
-+
-+			payload-header-rest {
-+				type = "fill";
-+				size = <11>;
-+			};
-+
-+			text {
-+				text = "u-boot:New";
-+			};
-+		};
-+	};
- };
-diff --git a/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py b/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
-index b8cb483b380..a79a975c67e 100644
---- a/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
-+++ b/test/py/tests/test_efi_capsule/test_capsule_firmware_raw.py
-@@ -7,6 +7,7 @@ This test verifies capsule-on-disk firmware update for raw images
- """
- 
- import pytest
-+from capsule_defs import CAPSULE_DATA_DIR, CAPSULE_INSTALL_DIR
- from capsule_common import (
-     capsule_setup,
-     init_content,
-@@ -238,3 +239,36 @@ class TestEfiCapsuleFirmwareRaw:
-             check_file_removed(ubman, disk_img, capsule_files)
- 
-             verify_content(ubman, '100000', 'u-boot:Old')
-+
-+    def test_efi_capsule_fw6(
-+            self, u_boot_config, ubman, efi_capsule_data):
-+        """ Test Case 6
-+        Update U-Boot on SPI Flash with a capsule file shorter than
-+        the capsule header
-+        No update should happen
-+        0x100000-0x150000: U-Boot binary (but dummy)
-+        """
-+        disk_img = efi_capsule_data
-+        capsule_files = ['Test01']
-+        with ubman.log.section('Test Case 6-a, before reboot'):
-+            capsule_setup(ubman, disk_img, '0x0000000000000004')
-+            init_content(ubman, '100000', 'u-boot.bin.old', 'Old')
-+            # place only the first 16 bytes of the capsule file
-+            ubman.run_command_list([
-+                f'fatload host 0:1 4000000 {CAPSULE_DATA_DIR}/Test01',
-+                f'fatwrite host 0:1 4000000 {CAPSULE_INSTALL_DIR}/Test01 10'])
-+
-+        capsule_early = u_boot_config.buildconfig.get(
-+            'config_efi_capsule_on_disk_early')
-+
-+        # reboot
-+        ubman.restart_uboot(expect_reset = capsule_early)
-+
-+        with ubman.log.section('Test Case 6-b, after reboot'):
-+            if not capsule_early:
-+                exec_manual_update(ubman, disk_img, capsule_files)
-+
-+            # deleted anyway
-+            check_file_removed(ubman, disk_img, capsule_files)
-+
-+            verify_content(ubman, '100000', 'u-boot:Old')
-diff --git a/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_raw.py b/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_raw.py
-index a500c499bb9..6e4cca9bfe6 100644
---- a/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_raw.py
-+++ b/test/py/tests/test_efi_capsule/test_capsule_firmware_signed_raw.py
-@@ -190,3 +190,59 @@ class TestEfiCapsuleFirmwareSignedRaw():
-             check_file_removed(ubman, disk_img, capsule_files)
- 
-             verify_content(ubman, '100000', 'u-boot:Old')
-+
-+    def test_efi_capsule_auth6(
-+            self, u_boot_config, ubman, efi_capsule_data):
-+        """Test Case 6 - Update U-Boot on SPI Flash, raw image format
-+        0x100000-0x150000: U-Boot binary (but dummy)
-+
-+        If the capsule is properly signed but the header_size of the
-+        FMP payload header in its image is smaller than the header,
-+        the firmware should not be updated.
-+        """
-+        disk_img = efi_capsule_data
-+        capsule_files = ['Test116']
-+        with ubman.log.section('Test Case 6-a, before reboot'):
-+            capsule_setup(ubman, disk_img, '0x0000000000000004')
-+            init_content(ubman, '100000', 'u-boot.bin.old', 'Old')
-+            place_capsule_file(ubman, capsule_files)
-+
-+        do_reboot_dtb_specified(u_boot_config, ubman, 'test_sig.dtb')
-+
-+        capsule_early = u_boot_config.buildconfig.get(
-+            'config_efi_capsule_on_disk_early')
-+        with ubman.log.section('Test Case 6-b, after reboot'):
-+            if not capsule_early:
-+                exec_manual_update(ubman, disk_img, capsule_files)
-+
-+            check_file_removed(ubman, disk_img, capsule_files)
-+
-+            verify_content(ubman, '100000', 'u-boot:Old')
-+
-+    def test_efi_capsule_auth7(
-+            self, u_boot_config, ubman, efi_capsule_data):
-+        """Test Case 7 - Update U-Boot on SPI Flash, raw image format
-+        0x100000-0x150000: U-Boot binary (but dummy)
-+
-+        If the capsule is properly signed but the header_size of the
-+        FMP payload header in its image is larger than the image,
-+        the firmware should not be updated.
-+        """
-+        disk_img = efi_capsule_data
-+        capsule_files = ['Test117']
-+        with ubman.log.section('Test Case 7-a, before reboot'):
-+            capsule_setup(ubman, disk_img, '0x0000000000000004')
-+            init_content(ubman, '100000', 'u-boot.bin.old', 'Old')
-+            place_capsule_file(ubman, capsule_files)
-+
-+        do_reboot_dtb_specified(u_boot_config, ubman, 'test_sig.dtb')
-+
-+        capsule_early = u_boot_config.buildconfig.get(
-+            'config_efi_capsule_on_disk_early')
-+        with ubman.log.section('Test Case 7-b, after reboot'):
-+            if not capsule_early:
-+                exec_manual_update(ubman, disk_img, capsule_files)
-+
-+            check_file_removed(ubman, disk_img, capsule_files)
-+
-+            verify_content(ubman, '100000', 'u-boot:Old')
+Ana Bobillo (6):
+  fs: ext4: check extent tree nodes before walking them
+  fs: ext4: fix the triple indirect cache check in
+    read_allocated_block()
+  fs: ext4: refuse to write with an unsupported block group layout
+  fs: ext4: check block numbers before releasing them
+  fs: ext4: fix the block group of an inode in the write path
+  test: fs: ext4: add tests for corrupt on-disk indices
+
+ fs/ext4/ext4_common.c                 | 132 ++++++++++-
+ fs/ext4/ext4_common.h                 |   2 +
+ fs/ext4/ext4_write.c                  | 151 ++++++++-----
+ include/ext4fs.h                      |   1 +
+ scripts/pylint.base                   |   1 +
+ test/py/tests/test_fs/test_ext_oob.py | 310 ++++++++++++++++++++++++++
+ 6 files changed, 530 insertions(+), 67 deletions(-)
+ create mode 100644 test/py/tests/test_fs/test_ext_oob.py
+
