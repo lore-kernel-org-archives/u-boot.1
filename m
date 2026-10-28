@@ -1,199 +1,148 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 654D7606A322
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 13:58:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08EF7606A31F
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 14:17:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=AObCcx4K;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=OTZqXb0u
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=p66JzgaO;
+	dkim=pass (2048-bit key, unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=etsPaAN5
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3D12D80F38;
-	Wed, 28 Oct 2026 13:58:13 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eCqVBKFWZJCg; Wed, 28 Oct 2026 13:58:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6D24580E18
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793195892;
-	b=d5tFM84/5yI8ybbPU0xkx4ONHfCfE1vZzGrvZKXqFGDb2mgcGK6w9jYQTcT6Ay8AtsuZ
-	 Bf20HP8gliiCv4VuA2THx0qwTWUTZbZVgeUbkhWQ+QKkA+g23ro9kDjhoCntFE4BvwM4W
-	 8H6gco4RDa1duPHcj/uib7a8ajaY/hEc4HJ/U0wyrRWovSnxccQBRHLoYOfLRfmsR/stC
-	 Q784EcawXE8CVVSGYTQKUFfN7pqHgEQ9iu2YWqSwdPsy+iyZiTIG2nDtEQC+NnXeie5Rq
-	 NDPmiVavA67xHtHq1dKYSBuqr21Vdqk60+Wqw19BTbAwozGgdhevL5X0fqdblr94XuA==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793195892;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Comment:Received:Received:
-	 Received:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding:
-	 X-Virus-Scanned:X-Virus-Status:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=QkIp7q+9iMN+5Bk/WBrp2ka5V8FiGjY4FBJxfsSFWT0=;
-	b=Yu7rQuljpe+oPYV7SVFP8pVewrYLKe96PMyyfLQ33EWPbGq826XSX4/NAV++DTtZojQG
-	 m35HUVDrBJhx5rnl3Tr1yk/4L3DEhOSqNDFCCXn3y/4Js6sVh+2Jsy5kdFnZbQZFFMq8q
-	 StzNYLNd3edlfL2SiayMOMA85XmZJyGV82jK2YA4f8hCxXqIMYEwwOaGB37xeSJAPLTSo
-	 XsyE1oLIJgdxpFL2QWvFy1mV1vDGYzPTmvAg5HCEHd6cyFQP8mwjR2XrMAz+h+bVrpzt9
-	 0Qu6xvTF422HXBFp9l4E0K8S7WdhyWEbtubdt43sTYA5x0DNuJupq9mPAysu1FDFVYQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	arc=fail smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793195892;
-	bh=QkIp7q+9iMN+5Bk/WBrp2ka5V8FiGjY4FBJxfsSFWT0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=AObCcx4KB11BiAkBR2BRR38iQfYkmumc8PmDBBJyfm3b1xdSLe4UGkXJzFAlTZl49
-	 DmigTyDRHfpdkcumaFw22e/rhmo7gbGCC5msTJWlndf59ZSIScCT5EPRYS6CtMHC+L
-	 +J2x7TECWQr6fU0u4K14wWwoCEWWRziWcawLTnPX0YEg7NlGNWwwIPytnAr0fK4ItW
-	 0ANALeaUUwk1PqGZ76/rjKVaUx0G9RW9kczFqMt1DeEl+WSZZWLuXZjXGF82lMb4J+
-	 13h5dMFiEg6sBdsAxi/zZzMh2N94U6Def1GrqWglPQ9o06FrlQuvxhRKdYmHPC6iRR
-	 toDQ0c6OaNT5A==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6D24580E18;
-	Wed, 28 Oct 2026 13:58:12 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 46171972
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 13:58:10 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2C61F6060A
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 13:58:10 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D33BB6060B;
+	Wed, 28 Oct 2026 14:17:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iGcWkYAQaDc3 for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 13:58:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 79936605CE
-Authentication-Results: smtp3.osuosl.org; arc=none
- smtp.remote-ip="2a01:238:438b:c500:173d:9f52:ddab:ee01"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793195889;
- b=fJiJWRg4sxyld7p6lK88ENwom+rpU1RqvaGq+xJ4QhAcSKSXyxMYLFvweIdgjkLlyy9t
- EZefgfZ/qWhvFu2RpWMyuMouXMT7GAdKWljKB/VFpSzoL8BzylqHATjxdMqqkwbzphcBE
- vRjHZqNwTGoL6YReSutXiVi5Ve9duJdTPk80dbJgQrPTXW4SHsPT8w68se01YhP6X+mJt
- xH4jKX/ViJExBwQpk9BTsOWStcyaxRiRzJSVNsjGL9BOMfxgXkPQoG/A6/5cMeyTDKP25
- Gt2uqH522HfltQdl69hgyDFZH4TpyPKHvLdIULx/Y/QGc79ItxCqi9PA5as/HfYDXHQ==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793195889;
- h=X-Comment:Received:X-Spam-Checker-Version:X-Spam-Level:X-Spam-Status:
- Received:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
- Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- X-Virus-Scanned:X-Virus-Status;
- bh=QkIp7q+9iMN+5Bk/WBrp2ka5V8FiGjY4FBJxfsSFWT0=;
- b=PDHeF3rREKwdUCRIV1CJIw136SZwbQ4d6fGKkpXdZy39bS6l2lHZ41qwvh9Li+Zv7Dio
- toDOz+C3RBvauwiVdgMVpP7cUj6Yfbw64XvMf2Plq7GHwxJTtI95tg7PN0HKCzBSxuP6B
- Embqhttqx8exjzOhjTW9MoQbcWRg3hlFO03NWVnxFpddimQEXpvl8owT1esLJUIe3rH4g
- LhUifNf0o+yP0jc2iBciyKij+QoqvlCtVbLAXgXwrPMsNjTJZHa3TuRNBadfH13o/PHim
- Tn/3lx7JxHmtBo02VIuvpc6dxIt+eyjgaKlljFIAz0e76VcKeuKgOtPNLTxL48x0eTA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=linaro.org;
- spf=fail smtp.mailfrom=linaro.org;
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=OTZqXb0u; 
- arc=none smtp.remote-ip="2a01:238:438b:c500:173d:9f52:ddab:ee01"
-X-Comment: SPF check N/A for local connections -
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=casey.connolly@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org; spf=fail smtp.mailfrom=linaro.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=OTZqXb0u
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 79936605CE
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 13:58:07 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D974847F2; Wed, 28 Oct 2026 14:58:06 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D645839DF
- for <u-boot@lists.denx.de>; Wed, 28 Oct 2026 14:57:53 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4a1fbd52ab6so8057495e9.0
- for <u-boot@lists.denx.de>; Wed, 28 Oct 2026 06:57:53 -0700 (PDT)
+ id Ol1tdmGr7JSi; Wed, 28 Oct 2026 14:17:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C1B31605EB
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793197039;
+	b=oCbE1dIOTOp8mBEaweWNIcScvwi70ajcG3g9/55jozqTtbbl4rareQ/YMJ6JXGAhqQP8
+	 +YhKnzq9Yvbb4JPA3qlDZuZw9Fbrb9uJd6ax2dtoXM7sH9zKYkUxeEdN19gPZDQK48UCj
+	 P0Ce5Am5VhIYFeoe5RjQhDdzbAIn3skV+o35rL2tmzk2WP8j7n7ehobeswBFCxpaFYGnY
+	 /EgBjMMWQ20nPFkIiWWUH/GeOQ84fDsF5tJf5e6J3ot01FgY61OCfMDvYwUDLHuYSmlP/
+	 8gnoL791P2devhe+TPbju+Tfr6y356lNh3mEh6UALxFIHAFKFCGv2Z/AVkeesPtQxWA==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793197039;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=qNvbJiOksVVi3k1IONB0asNbg2eUtda9xcr6TNiFwtc=;
+	b=WW/UNZ6YWmQ80R8n8xsoMyw7sh+1eXuyufy+mZdhODcbPMUR2HUdUaalO9cwXP3BVic9
+	 +H34TtMQuOy5OZDdG7Ny2gZAmag4gTnOq0vKYUHjA3teH73ZQKC1hRcrF+Qrywwx8ZlF/
+	 Aq64lNg8+8dNM60Sk4dzLEjbNOwn5bJayQYagPsHvStvcCbH2C4P3u+c8PyxHErbKlYCx
+	 fI4zkcqz/Z1CrYqgJFYeOUr7eKP2cUsE2SD3C2sgQwU3TqQ5+xWb02GUNdw+2CFPa6N0x
+	 xoZ3/M1oh8BU/S/innvrBSLPlCQ0Z7oC9Zyzd8BCMCCOd0+RdLBa9cUwE58pcW2Xp/w==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793195873; x=1793800673; darn=lists.denx.de;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=QkIp7q+9iMN+5Bk/WBrp2ka5V8FiGjY4FBJxfsSFWT0=;
- b=OTZqXb0uIIrqHwjd56I5X/3DBCJ8r6553KR5I5nBYYjVRhJvIgUj0e8k7z4NYE/19e
- V1Sbf0LHliEAD4l/4Vvz10HLq8W4wS+/rG776/dT8ViZ7n0GKMijC8kn2oKTUGDeUr4B
- GOWlIsRcM746YE9hJri/U8NUOjwBE0DvZu8SNfNIzOvRx0Mm2eVJ/ZQNtCineUjFsyEG
- lEHhSq8f5lPg6U5lZsCYWQiYbpU1dLxSxrViT+piWHndgs4z/H/v27+PdxDB66lM6n3g
- uN+XxOrvQDAZnPLoIFexhCbmHapRXRJ8HTnzO8bX2pbaa73kNc6NOOT+Zd0Pp0u6N2Rv
- To6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793195873; x=1793800673;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=QkIp7q+9iMN+5Bk/WBrp2ka5V8FiGjY4FBJxfsSFWT0=;
- b=BpS2DzvRfVDajktO95Ze6ZFE5H/vtAdkMHtvcBoqrXndhM+sj1yh+vWWRqdeRpEBgK
- PJ68oyZ20yJQn9meD5xLmOfMZ8UHY0VSNzdTfqz8+PAuszy9lXuNsHXWwLUImtCQv3RY
- 7zmU6Tz8J4D3NGH8fTANtPZuK7hneh+MPII0it/y2QKUT9GJB2H1ObtO+fImZhJ8OvEw
- ghxwbNEskRYc5WJ6vsUsRG4okhcwd6KqU4atCmVeqVBWdEhYd5rBABj16YtMPLi57Bfz
- Amk2+0/ITyRAdP0cTzXmQPbW1xXDlbPNcuaUQ2NO/vOD+40RySDVvL37vCmZIJQLIuEn
- KpDw==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxggxJqYeeRaEqZf2ebXpPv2h0KeR1EpDz8+s3NfrHQReGHKxRF2r62L2L2/KhW76nVxBUUX00=@lists.denx.de
-X-Gm-Message-State: AFq9FYLAg2QBaN9OS9QSRExvt38Q8QXz+x+sIo4PbOxEteWYu0H6dpF0
- hFJSCW+DuIRlkGaFlpQ+FK0ixo6M+NaofhEkZ2oTqJUrjGjB9o62DGcL5e0+Tq5tqbM=
-X-Gm-Gg: AYBFou0khdjpHVQrJ3mTS6fedWp17FE1gNS7aZBeVQYOIpjhZjM4KtRQPfsvm0bsbvI
- g8pNME9Qmz6QOn1HbQh/h8vr0WFjcmKT5vtg3ufNG0Wh6+pxwmuwkvor4miCeAZrCnjklw7Eewb
- VQ/mudoFT3G2cNUdUdFmqaIA4Wc5FbMVU+oIu8Sj2Z/ogCKDJXa3jVQ25ibPB/iZ+ebxPrv591X
- O9X1KKRWABylPtqtkQncYmUyMbn59AKJ3qcEjCqGFs8ZJougDObsrRyw753vGbqJE0q0TQ7LtTz
- k0eMUum53M2bdJ0Rzcz+G5ZWq8WBHeK0bGkn1MZXB7rkG4PQ1z30WkU6M+7s3820SiYyB9yqJUy
- OdU2ipYUxe14qwE4x8zCo6BpDgn4fNLVd97rL2i8AuSSEB+F4qQr3Nr2NW5Zf7KE6kO+baDNhec
- Zgy1Yz6liP/vx3SrYcDgfrUBoiDj3ACo11rHU5Qy/Ivuz6438AfZALqPjoZQaIM+hOVG9egSneE
- by+lthLfYhqTppFQ4e7Co74+YM9uEzG0r4I6dlydGbGfx4TWbVjTB4gk7Y48SfYPZxb2ehdoHo/
- DKmos5vnVR3uMcmHuwayJeAMzki0EZBnLP6N2Vkja2ZqTSSjqv2kwI/3nnc/XPdgsu4o
-X-Received: by 2002:a05:600c:3541:b0:4a7:9025:5c3b with SMTP id
- 5b1f17b1804b1-4a966f20483mr54246175e9.19.1793195872635; 
- Wed, 28 Oct 2026 06:57:52 -0700 (PDT)
-Received: from [192.168.1.37] (p5b29ef1e.dip0.t-ipconnect.de. [91.41.239.30])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a977edc20csm41532615e9.3.2026.10.28.06.57.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 Oct 2026 06:57:51 -0700 (PDT)
-Message-ID: <6834cd24-218b-4801-991f-613666c3d4f8@linaro.org>
-Date: Wed, 28 Oct 2026 14:57:51 +0100
+	d=lists.u-boot-project.org; s=default; t=1793197039;
+	bh=qNvbJiOksVVi3k1IONB0asNbg2eUtda9xcr6TNiFwtc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=p66JzgaO3pL0DOo1UCJKWY6BvKd0E+0MjlLsVuN0a4GHQS1a0pAIIQ6LnFYz2qWYb
+	 CAyhi98na71QMIuEB+P+zdJhk3zDmY9fwcCPX4xQVC4j0WDGcBNYIwEhH6ZO27+3Hz
+	 wdTWLqINYX4n1qWm9oWOwE/KymETKAm3FKuOhnbIT7ATYvBFJAT4J6PoooldhpVdZD
+	 u3nVB9ZS6ybKFF3gb8DqXM+qXxQba30/acS1j/URDCjkyJpr6WhBSmgEvwaJvR43XW
+	 7QmeePSr09cgsOi0CuiVLD7uzET/6Y5HW7yShsGVRPE1e4Otm+cd8WFRciYjUWkjTF
+	 PeGC3rXmxto3g==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id C1B31605EB;
+	Wed, 28 Oct 2026 14:17:19 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9CE924D1
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:17:18 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 82BB140557
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:17:18 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fgSx2g_n-UU2 for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 14:17:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BA6FA40550
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2001:1600:19:7ff8::42ae"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793197037;
+ b=R3kdVSQZdtoCDwnPABi0R3iWEkPSNKdlDTesyPAeKcqkksB8iXiubnTsLnofEBJeRyVc
+ +gz/K9fQ8AdXe5Fj4ybcwaaHfXI5GqBjipHDn3gQve1kQagNUueQopPrefOWAka5CtbyX
+ DmB7rtaPx0ZEH400YZHpmFPKf3P6fXc+/j0FldTRUMntX0d+VAKJGoEIh6bm6xgZRSqml
+ wWxsL1Qe9JlRuMxw2gFjrsWjOx3UiMt2Uls8AP51zY+cpar3EX3nAsrFpeGzrHGdkrWLW
+ qsueWvlQFLTdXSBYnrNw2A6q3Va31AeGAf2YY4ZUopSj8QhqDuQfAjTg3e8FvJREloQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793197037;
+ h=Received-SPF:Received:DKIM-Signature:Received:Message-ID:Date:
+ MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+ From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+ X-Infomaniak-Routing;
+ bh=qNvbJiOksVVi3k1IONB0asNbg2eUtda9xcr6TNiFwtc=;
+ b=IeAVSwkp7Nl/VEWijLlCpYp00ypflIgN/a6fZd9B+ZwJnDjFWJ/X40iqNHpK97iZOfnQ
+ vy4/p6eMSGwXASP8GwQMw1rdnndbNQVBlCDJtQmNFj9BgCqBGdJug6eGyX5mUVb+ma3R/
+ 6z/NOKK/GIPa4n6iFCnEiFB09UO3xMc3eXsGnrwUmBN5XqQwzAx/LETscZoFVv9TQpFeb
+ vVvpYqoEQEsdKkEtQtKPZL7aEc7ziMOZlfHUGYncxfewoivzkK2ugQUM3yinurtlovK9/
+ yUUn2uTIGgcJCaogliTHqJmfl71+6aPk5Vr+zX7hSvnn1dbP9FYOBMHVZujfEgBUbqg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=0leil.net;
+ dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
+ header.s=20231125 header.b=etsPaAN5; 
+ arc=none smtp.remote-ip="2001:1600:19:7ff8::42ae"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:1600:19:7ff8::42ae; helo=smtp-42ae.mail.infomaniak.ch;
+ envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=0leil.net
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
+ header.a=rsa-sha256 header.s=20231125 header.b=etsPaAN5
+Received: from smtp-42ae.mail.infomaniak.ch (smtp-42ae.mail.infomaniak.ch
+ [IPv6:2001:1600:19:7ff8::42ae])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id BA6FA40550
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:17:15 +0000 (UTC)
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jF8ZJ4fB9z1XF5;
+ Wed, 28 Oct 2026 15:17:12 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
+ s=20231125; t=1793197032;
+ bh=qNvbJiOksVVi3k1IONB0asNbg2eUtda9xcr6TNiFwtc=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=etsPaAN5p+hTByaqz8QWTIXiSJqU6ImERxEyOVv6K5eqbHIHTan5s47v831G5YtV5
+ detwJdBefJ7FF5LtL5SsqAddcIaZQSgFcjJtAlEYur1/wciWbyCBpDrdnQ4S5Rdbz4
+ +V9OL800Zz826f119mp1i5JgUesScwbuigp7Qzo2BXnCaqbFxNhzeZOZtM2d4Sq79+
+ iZwJ8jApd0n5IhSSbNL9U7my7BUY9lEOwa6fDUHlKpYkAJaijYA0nxq7B91lLeuHED
+ v7kpB5Vv1ouHFWpOSGsOPGdQQdMJgPTGc3+COy0VN89YYNCaha/nkfZ+nqEO/Ct8NY
+ BUArhsRVFOdWw==
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4jF8ZH2cG5zJVj; Wed, 28 Oct 2026 15:17:11 +0100 (CET)
+Message-ID: <42cd0d81-9f1a-4e2a-b906-0ba3a2c11004@0leil.net>
+Date: Wed, 28 Oct 2026 15:17:10 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] serial: msm_geni: validate RX FIFO data with IRQ
- status flags
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
- <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Stephen Boyd <swboyd@chromium.org>
-References: <20260707-uart-v2-0-d38277b6c4ce@oss.qualcomm.com>
- <20260707-uart-v2-2-d38277b6c4ce@oss.qualcomm.com>
-From: Casey Connolly <casey.connolly@linaro.org>
+Subject: Re: [PATCH 2/2] rng: rockchip_rng: Enable clocks when reading data
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
+References: <20261004211349.62883-1-jonas@kwiboo.se>
+ <20261004211349.62883-3-jonas@kwiboo.se>
+ <71957510-7b09-4d52-a45a-76cba3d8675e@0leil.net>
+ <1f744efc-0c74-4669-b02b-7619eed61402@kwiboo.se>
 Content-Language: en-US
-In-Reply-To: <20260707-uart-v2-2-d38277b6c4ce@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+From: Quentin Schulz <u-boot@0leil.net>
+In-Reply-To: <1f744efc-0c74-4669-b02b-7619eed61402@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -210,77 +159,156 @@ X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Balaji,
+Hi Jonas,
 
-On 07/07/2026 11:52, Balaji Selvanathan wrote:
-> Add IRQ status validation to distinguish legitimate UART data from
-> electrical noise in the RX FIFO.
+On 10/16/26 11:03 PM, Jonas Karlman wrote:
+> Hi Quentin,
 > 
-> When the UART cable is disconnected, the floating RX line can pick up
-> noise that the GENI hardware interprets as valid data and places in
-> the FIFO. So, check the RX IRQ status register for RX watermark or last
-> flags before reporting pending data.
-
-Went to test this on Lanai and it seems to be broken on sm8650, TX works
-but RX never reads. Picking up the other patch.
-
-Please check this and rebase it, you can also drop the fifo_status
-intermediate variable.
-
-Thanks,
-
+> On 10/16/2026 1:11 PM, Quentin Schulz wrote:
+>> Hi Jonas,
+>>
+>> On 10/4/26 11:13 PM, Jonas Karlman wrote:
+>>> The vendor TF-A blobs for RK3562 leave the TRNG and RK RNG clocks gated
+>>> when returning to U-Boot proper.
+>>>
+>>> Try to enable clocks while reading or otherwise accessing TRNG/RKRNG
+>>> regs to ensure random data can successfully be read on affected SoCs.
+>>>
+>>> This is not expected to have any impact on SoCs using a clock driver
+>>> with unimplemented enable/disable ops.
+>>>
+>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>> ---
+>> [...]
+>>> @@ -306,6 +308,10 @@ static int rockchip_rng_read(struct udevice *dev, void *data, size_t len)
+>>>    	if (!pdata->soc_data || !pdata->soc_data->rk_rng_read)
+>>>    		return -EINVAL;
+>>>    
+>>> +	ret = clk_enable_bulk(&pdata->clks);
+>>> +	if (ret && ret != -ENOENT)
+>>
+>> Because I was confused that clk_enable_bulk() could return -ENOENT,
+>> maybe add a comment stating this is to catch clock drivers that
+>> implement a .enable() callback and return -ENOENT for unsupported
+>> clocks? RK3399 and PX30 seem to be the only one doing that on Rockchip.
+>> Same comment for rockchip_rng_probe().
 > 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-> ---
-> Changes in v2:
-> - No changes
-> ---
->  drivers/serial/serial_msm_geni.c | 28 +++++++++++++++++++++-------
->  1 file changed, 21 insertions(+), 7 deletions(-)
+> Correct, this is because existing .enable() ops may return -ENOENT for
+> unsupported clocks, for pending SoC support in my rk3562 branch the
+> clock drivers instead may return -ENOSYS for unsupported clocks.
 > 
-> diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
-> index a580dee8c8a..07d38178759 100644
-> --- a/drivers/serial/serial_msm_geni.c
-> +++ b/drivers/serial/serial_msm_geni.c
-> @@ -483,15 +483,29 @@ static int msm_serial_getc(struct udevice *dev)
->  static int msm_serial_pending(struct udevice *dev, bool input)
->  {
->  	struct msm_serial_data *priv = dev_get_priv(dev);
-> +	u32 fifo_status;
-> +	u32 s_irq_status;
-> +	int word_count;
->  
-> -	if (input)
-> -		return readl(priv->base + SE_GENI_RX_FIFO_STATUS) &
-> -			   RX_FIFO_WC_MSK;
-> -	else
-> -		return readl(priv->base + SE_GENI_TX_FIFO_STATUS) &
-> -			   TX_FIFO_WC_MSK;
-> +	if (input) {
-> +		fifo_status = readl(priv->base + SE_GENI_RX_FIFO_STATUS);
-> +		word_count = fifo_status & RX_FIFO_WC_MSK;
->  
-> -	return 0;
-> +		if (word_count > 0) {
-> +			/* Validate RX FIFO data with IRQ status */
-> +			s_irq_status = readl(priv->base + SE_GENI_S_IRQ_STATUS);
-> +
-> +			if (!(s_irq_status & (S_RX_FIFO_WATERMARK_EN | S_RX_FIFO_LAST_EN)))
-> +				return 0;
-> +		}
-> +
-> +		return word_count;
-> +	} else {
-> +		fifo_status = readl(priv->base + SE_GENI_TX_FIFO_STATUS);
-> +		word_count = fifo_status & TX_FIFO_WC_MSK;
-> +
-> +		return word_count;
-> +	}
->  }
->  
->  static const struct dm_serial_ops msm_serial_ops = {
+> I could possible add a patch that changes existing clock drivers to
+> instead return -ENOSYS, then this check would be unnecessary. I will
+> otherwise add a small comment here for a v2.
 > 
 
--- 
-// Casey (she/her)
+We probably should document the expected negative values for specific 
+errors so drivers know what to actually report instead of just picking 
+one. This is something we should fix at the clock subsystem level.
 
+I'm honestly confused by clk_enable and clk_enable_bulk having a 
+different behavior for a clock that isn't supported by the clock driver 
+(or if the driver doesn't have an .enable ops). clk_enable will return 
+-ENOSYS on .enable ops being NULL, but clk_enable_bulk will happily eat 
+the return code and return 0 if that's the case. clk_enable will return 
+whatever the return code of the .enable ops is, even if it's -ENOSYS, 
+but clk_enable_bulk will happily eat -ENOSYS and return 0. Same for the 
+clk_disable, clk_disable_bulk.
+
+But considering the above, yes, maybe returning ENOSYS in the Rockchip 
+CRU drivers is the better option and I would not have much to say 
+against the patch anymore (except that the clock subsystem seems really 
+inconsistent and confusing, to me).
+
+>> I'm also not entirely sure this is proper, shouldn't we rather implement
+>> support for the clocks instead of just saying "it's fine, don't worry"?
+>> I think only RK3399 would be impacted (as only RK3399 and PX30 clock
+>> drivers implement an .enable, and PX30 DTS doesn't have clocks
+>> specified), with missing support for HCLK_M_CRYPTO[01],
+>> HCLK_S_CRYPTO[01], and SCLK_CRYPTO[01].
+> 
+> We typically do not need to have enable/disable support in Rockchip
+> clock drivers, only for clocks that is disabled out of system reset, or
+> as in the mentioned case, because TF-A on RK3562 disables these clocks
+> before returning to U-Boot proper. Also we first should/need to have
+> proper clk enable_count handling before we try to add new enable/disable
+> ops for Rockchip clock drivers or we can very easily disable clocks that
+> are needed by multiple devices.
+> 
+
+Yeah but this means we need to duplicate this work-around in all 
+consumers of Rockchip CRU clocks, so they know how to handle enable for 
+a clock that isn't supported by the driver. This doesn't scale.
+
+>> While looking at it, I also saw that there are resets in the node, maybe
+>> something we'll need to control in the future too?
+> 
+> Out of all RK SoCs I have been testing 'rng' command on, only the RK3562
+> is having any kind of issue, and only because vendor TF-A blob
+> explicitly disable the clocks used for crypto/rng block.
+> 
+> A different hack/workaround would be to ungate the affected clocks in
+> RK3562 clock driver probe(), but that is something I rather avoid.
+> 
+>>
+>>> +		return ret;
+>>> +
+>>>    	for (i = 0; i < len / RK_HW_RNG_MAX; i++, buf += RK_HW_RNG_MAX) {
+>>>    		ret = pdata->soc_data->rk_rng_read(dev, buf, RK_HW_RNG_MAX);
+>>>    		if (ret)
+>>> @@ -317,6 +323,7 @@ static int rockchip_rng_read(struct udevice *dev, void *data, size_t len)
+>>>    						   len % RK_HW_RNG_MAX);
+>>>    
+>>>    exit:
+>>> +	clk_disable_bulk(&pdata->clks);
+>>>    	return ret;
+>>>    }
+>>>    
+>>> @@ -336,12 +343,22 @@ static int rockchip_rng_of_to_plat(struct udevice *dev)
+>>>    static int rockchip_rng_probe(struct udevice *dev)
+>>>    {
+>>>    	struct rk_rng_plat *pdata = dev_get_priv(dev);
+>>> -	int ret = 0;
+>>> +	int ret;
+>>> +
+>>> +	ret = clk_get_bulk(dev, &pdata->clks);
+>>> +	if (ret && ret != -ENOENT && ret != -ENOSYS)
+>>
+>> I think what you want is clk_bulk_get_optional() from the Linux kernel,
+>> so please implement that in U-Boot. We have it for reset, clk (not for
+>> bulk yet) and gpio, so this is the right way to go.
+> 
+> Hum, in U-Boot we have clk_get_bulk() and Linux have clk_bulk_get() with
+> different set of parameters, so adding one more non-conformant clock
+> function to U-Boot is not a can of worms I am willing to open ;-)
+> 
+
+Instead, we duplicate this logic across all drivers. See
+
+drivers/phy/qcom/phy-qcom-usb-hs-28nm.c
+drivers/phy/qcom/phy-qcom-usb-ss.c
+drivers/reset/reset-uniphier.c
+drivers/usb/dwc3/dwc3-generic.c
+drivers/usb/host/dwc2.c
+drivers/usb/host/ehci-msm.c
+drivers/usb/host/xhci-dwc3.c
+drivers/core/simple-pm-bus.c
+
+for examples of optional clk_get_bulk() and
+
+drivers/serial/ns16550.c
+drivers/serial/serial_esp32.c
+drivers/serial/serial_mt7620.c
+drivers/serial/serial_omap.c
+
+for examples of optional clk_get_by_index(). I don't find this to be a 
+good idea. Especially as it makes reading the code quite difficult to 
+follow.But since other drivers already do this, I cannot reasonably 
+expect you to fix this now, so... fine :)
+
+Please switch the existing .enable ops to return -ENOSYS on unsupported 
+clocks for Rockchip drivers and update clk_enable_bulk() in the 
+rockchip_rng driver to only check for a negative ret.
+
+Cheers,
+Quentin
