@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9FADE606A31C
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 14:46:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6948B606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 14:46:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XDvXq8eF;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=g++Rhake
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ysY2VCGe;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=yGwrPmHm
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7F2D4405D2;
-	Wed, 28 Oct 2026 14:46:13 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3E7E880FB3;
+	Wed, 28 Oct 2026 14:46:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5X0_Rp_2KGdN; Wed, 28 Oct 2026 14:46:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3A716405E6
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793198772;
-	b=ATgi0UBpoYOPDPtZxgEoADOCfTOXQNdWH+D45WNF/kJk8coVDOKk3SIOEE+Opz+F3318
-	 dCYC4am8izQNIfcyrDRTuh96pcBTqL1puEujuhcBvjA+zIsZrA9oQbPyxX3lTfaj/rTyJ
-	 zEoqS8Q1FsIesEMLAn00PeFVNQq26O6xeNeljTGNZlk9236HnpPScvBQR7LYXYBaoqrYn
-	 +TeSW3G+lnssL7am3mlppQ9NTWOAPTALiv1sH193YhC+UuLPlyirYLHTUPGaTdjcWKPSh
-	 pamoiVdVSx9U8gdXfyYhwQFsRTbtXaQVqpC9F9FuSgzpIoHkBoE0boiLl3dSAgNbfow==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id h7P7gHbKYwSg; Wed, 28 Oct 2026 14:46:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org F1BD680F38
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793198766;
+	b=UO8BB9ri4/cgO1pEJ1Yg5rW2xLtH1QOZHmiV2BqtXBauA4Dzh4Vu7OF9dfvuAzHbaXsl
+	 iylAjjR8yp4Lhi0CTrPDWbLm9EvFQJaJ+H0koeW5QwUG5//0veTKc53vbxSDHhAJdqUeu
+	 XnjCSr7tGv/8GDFb5BiaYMMos9SAx4AcPiAApDkotlGhO7VykOVa9KUoDADMc+IZAubg7
+	 yHyWqnEpV4vrbKzdJd2N4yrzKZEI/MWk/YRo14ubNBwl9pT4SO3i4lBvOFvQp0EG7xBJS
+	 IJEgQdB0O6+E6mPckxGJFjv9pzjd1xctZbnF9t9HdheKmTqxsQ2PN9oET9Ax2wenxpw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793198772;
+	c=relaxed/relaxed; t=1793198766;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,128 +33,128 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=T/TQHJVqyqNkgzJtT2kYZ7dmRO5Av+sI0L4cTFBOr1A=;
-	b=M/+h2kyEAc+QfVk/HrhjdjrPGt/mYneTuYVs5tRP5telxOx0qi3+VPM8w+RMAlxOAvbc
-	 aiYWC457uYh36Rb/6iTRv9ILCKbGB9qMmRp99tNB1nnwO1Pgk6A0hyLIwfNDKR4izyeFx
-	 ow9tfPpTrTlKjCFkaUZrzGQ2M8jmft8yuads9FCeOVP5+1OKJArN7kDc9foIOrG+84hE6
-	 bHeGSPTKIuoQcnIJAxvdmULG830zYlU1By8Ha8LCiwTZH9t2FFZsii88jJWBGTcUUx+vr
-	 NXkZfm2mt1WN7tIfKXzDguo0qyfQstf8teHwm6gF+cj4QFyK2v5Od6GvYESZ5OLQ7bw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=Bh+B/TmbyVAU3hRTvK0yiCDIWusj8xwi9ldHyrw+DXA=;
+	b=eFAlV0lj1CTF9E2AHfmjJpSrB+WMewajfXHg7SgLsX/K8X6jKXTRNsVzQMDN5oTrG7a5
+	 oXgNftTQ220bv2XeTnsuuJIO7TRHMORR8Wq3xAZ5iZjzrFOJzvEjmnZMsF4n1GKAH+Xe/
+	 btV4d9ta3KQFcLYWTIoW6MtJFuwnw4+sNHaS/G2GgoWj4XmvusyhwaxtkdjJpgboPf2V0
+	 OXjgRZZaSBmNZCOQAcmL5l7tlEWfOdN6UwvocgWTdBG+hBMnDqC7yO+Te9T014PIMm+Gr
+	 3a7sLgeVd6SRr3fR0CctyqKacMoWhIjV/P1fA/fm2cAV6BH2wE3duy0p/RgSXBPMxbA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793198772;
-	bh=T/TQHJVqyqNkgzJtT2kYZ7dmRO5Av+sI0L4cTFBOr1A=;
+	d=lists.u-boot-project.org; s=default; t=1793198766;
+	bh=Bh+B/TmbyVAU3hRTvK0yiCDIWusj8xwi9ldHyrw+DXA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=XDvXq8eFSurfUTSfpe5EoDSLrszF8H8ZRQyG4vxPwRujrK6QG+8z5pK/7nXXSVN2y
-	 izJX1xGziAJ/x8/gntH9kcpykJM95+SYnnzRk0kKDM+Khf4+rUMan1e65bGq2pgKNa
-	 TK7hxX8XshBiPrLkjWQhKFydzLQqr3zrPmYMB0xfoUNFOVS2w7oU0MdoUAcdv4xXSB
-	 CnTPDpFj9impJggfABWYq39T/JpHb81Wn1+ChlLcZ1E3Dl8fdGVmug2FiaQlJ1yf8+
-	 NyEC6x9yp30vF9lXd3hBgmg8IeUUVOM8QHpjatF6ILrdyvc7+F/THSsJu08x2CyR1d
-	 IPX3tJ1ZBQ6AQ==
+	b=ysY2VCGegvLhj3jRdZj3TtrJzCvk0d6Zp1y8Fz/La3VfPxscq8fpDeTIl4Km0o7Si
+	 cbHcv5n8PEzljs2sMvT5uYgqDxLLDHwlN9xVfFQF2y2ib4Sq3CBYwOV1hHdMgPlMer
+	 NESeXqkG9XsyqbiqWIRWqh6Mhh0nsrxw03nyIq1a2q6owUQdrsh0niU2NEi9NsPdIR
+	 OinSKLGGebPtWjuxD92nrBkoC10ZlpL7ky9Ahgvpzj40aMCaurgGgylEcGNvJrZT5a
+	 hpbJMqawEV97xBUUrXbhOxxKXfTU8Qu0oM4nCfaVnm7f0r1RxrUQk05iTIg1UH5LWn
+	 zYzSv1AP5a+iw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3A716405E6;
-	Wed, 28 Oct 2026 14:46:12 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id E086D9F8
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:10:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F1BD680F38;
+	Wed, 28 Oct 2026 14:46:05 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 39E0A4D1
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:09:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C63ED80BDB
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:10:55 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2003E6060A
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:09:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3fH6U5vJkrlh for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 14:10:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 51F7D80BA6
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::629"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793196654;
- b=EhFW9RDgngYEnlQ2XQbbu1cqxSfp9l5EGEKr8KaRMexKXJMRxXr1gprjprUCqeSeWiYM
- pkHMfRWKn+B2qWDSblAcdV2w1N6miZwN1OhTwPqYNRravAMI1Fbx23bZE8GZ9nMz3F05i
- Tg7obQz8T0bXTzr91MJjqpmvEgsPLvp2vLg4+eodUf8qJ+P+fNHYok6Pnt0IninL7WeDz
- U/cvgIisk0kziHVzRKxG35BSmBn0ZDQPyr/HPzGJnowYETyD+hI4Aoymbsi4VhiK+YrAW
- 1JrE2ZmmF4MqSwp4FZ6SldmVKoV1DKD4ezn6wxzdAl9e35Rr6g/qLkAWhTGg4VkHT9w==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NqV8cuzEKtk2 for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 14:09:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org BC180605F1
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::62e"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793196596;
+ b=fxrFBG3/MUb/9ckgz7WmFGf8OwRvMsBOgKR2NnjDSpvo42ccoEEAHwocdJ+DEucjRUn0
+ e5ANKSHc9WeuB/Tp0b82nxGe07yvOfQjM5GUQZvbkK1jcxtB5yLSQXeSVmIDIJK81xPXx
+ n40Lbzhp9/cCewvudjFEBU1qAh+Q5dHWMzIUdNRCAbrGVYrMzsah/USK+dbs8vHkr0RAG
+ qL8vjBTg0jzW63cB8eun2ong8LB77p6zsoStHH+CYNqJi8G9KrejX6pIDEX7raLeAZG11
+ fk0r6DcrlqzYJ1/dbuMbM88CDTZcxwPb/+nXo/HKLUhtHAXZaIWi+RTnKnnc+jfGmAw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793196654;
+ c=relaxed/relaxed; t=1793196596;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=T/TQHJVqyqNkgzJtT2kYZ7dmRO5Av+sI0L4cTFBOr1A=;
- b=JnavC0lAebx+yjTSqu9fFNVPtQ6lJ+gxRDAkLQIS/JOQteVJZgAHbjog0RkQXOrgSp3p
- blOQ6A27ylB8QZVEUYu3iv1nMz1I+HElKWutDUSdm3HpmdQ0bmW/vNCsIrupKl9bMyUtN
- t635OuqmwfiyJcNdpe30AxdG9WAGmDELPxduA4Fng6Xtr6VUjI+onnCUjrELYc5eF2Frz
- edrcfarftKrNS1lfmWoMyK2GJkD41acHCL+ZVVDj93gZzB08GzxmUNR35l31V1PJsuEdj
- h5MdBk5BKXzn3AzLmE2O3O1EaoN9cDVadcBB/qk+bEVfJY5E3u5Aki9bvtTbbKGiHoQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=Bh+B/TmbyVAU3hRTvK0yiCDIWusj8xwi9ldHyrw+DXA=;
+ b=JWqFC7Ys9qCanfizDRI6mwTGedGVt2dmbGVmuJj9PsO4bkbHJiteMorrWsZiwqavDMvo
+ Zg/fRm0HCZzqX+UxM3XxLKJc+C2GoN5Wuy3dog3TMtFI4F6JOl7rhwi4TmWn+QTbrMHOi
+ GpRAXeSlrHqvO/XB3FkmtvD/AxRr1M+5JLePq0wriggAsIxK8b3nRZQv6dOtjyT7I835n
+ nrz8HDYe4xCxuZxFKGfEXJAX1hjAQyIXbBQ4pljNCB273JEPSsa1gpuwDyEVkI4XY2Kwp
+ vJ1uIfkdEX9snhQSnnkfAG1LbbqvOgVN9IbPpbm3jk72aoMRsPK4TXSCvT49qIOxR2g==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=linaro.org;
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=g++Rhake; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::629"
+ header.s=google header.b=yGwrPmHm; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::62e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::629; helo=mail-ej1-x629.google.com;
+ client-ip=2a00:1450:4864:20::62e; helo=mail-ej1-x62e.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=g++Rhake
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 51F7D80BA6
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:10:53 +0000 (UTC)
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-c40f5077425so11702766b.1
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 07:10:53 -0700 (PDT)
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
+ header.a=rsa-sha256 header.s=google header.b=yGwrPmHm
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id BC180605F1
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:09:55 +0000 (UTC)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-c41d20c016fso10141766b.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 07:09:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793196652; x=1793801452;
+ d=linaro.org; s=google; t=1793196593; x=1793801393;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=T/TQHJVqyqNkgzJtT2kYZ7dmRO5Av+sI0L4cTFBOr1A=;
- b=g++RhakeOYD7fK/7ixdR1uUZF8QX2QCWWVNzs9XKNMCL2A40f5IbNHLGkYVkhv2Kn4
- dGKZyknYD8iAM8vcsUPlePF1UDFLlVM44+mcC9jIRj44TFv4pTjxq1KTLr5rFym3C0mD
- ErrMWiofWC6WLbaCR2BRVgHtZyVIRplYGDJW+UM5o0oX0iQBj4UZx6BDj1SI4oH2lc11
- HDo7vDdtC3LAjWNItMQSeqcvNWaImFzfO4Egtw6tf/AxFKzBLyQs3bK0h3BwhClnXyTF
- vtQGCGXuFNZ9x8r7xrY5Lw6P0IjNdB6oevth4a65KKa8wFGss5UzGQ0WrqCrGyz5Rgs+
- XXmA==
+ bh=Bh+B/TmbyVAU3hRTvK0yiCDIWusj8xwi9ldHyrw+DXA=;
+ b=yGwrPmHmtH/ZuT0FnN5Rcyui489o64ryn05Grw/UfnpXTR400VuNHoEAgc2ZNhw3WZ
+ I3ZfIVFXXdoSJNSYmQhVkI1bIuOm3Mn6o0qe2Ww010oA2jnTv9H7Ee6sNVRYVkq4/Rov
+ 35BUTC7wM5NVlXbfnS9/K1FKYEcZAFokaxBJn/n566VX7YegHunEAjNROPc77XTRFymx
+ CMkO+99qvoapkC7J0vl47xJJZptq88fK8oO3XbZPrE9yLdpPcwWd1s7mvUCvQTvnCqbo
+ d0Peyk/zCu1ZNIFwfprQ/ZQXmgaThd2cdZfhpcGmeYxmU+WF2OpfPsk0olkyxp/BXnhV
+ rOhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793196652; x=1793801452;
+ d=1e100.net; s=20260707; t=1793196593; x=1793801393;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=T/TQHJVqyqNkgzJtT2kYZ7dmRO5Av+sI0L4cTFBOr1A=;
- b=tPih7z80ej8cIT4576MVuy/UQgcw/Pib0AZ1g3RKXDwgRMA+lMV6DmoU0LU40aFbtJ
- fW+WnVSZYS73DNOL4Nz22Qb51iZcBYTSGTezy4G7Zl1w1bR1lbFF6+ivxTDB9nXWcOW6
- 4hjRitmyWrzu3jQDso2OgAPcmsnLfkNTtlHcjg+aR8l8mYf2t2AjbGhNx1a18Eee4idv
- Szhz+Xr1MbTFk/xrJ9fVkUBNvNYiQZ0KGcNh/qHaxolbAIdW9gtXUrnCiL7hfR6vmoNJ
- zMnIuNLrKpdmhHK4RVgoXJzKS0j9u5E4f+ux3XPhP/dYIfFnmdB9BolC+Xui7ArG0vVe
- Wcgw==
-X-Gm-Message-State: AFq9FYJJ2l+NsgsTTYF+sz7cppisvZyPM9Nb/A4lCD/Kj23EFAMxlJvv
- k3d5ZvTuQvT+Etnyc6IyHhFZBs7SWYZx8zBtlMya4mYOlQeM3+N0sG7jPJdYInJiJZ1HKRfajdG
- fZGrb
-X-Gm-Gg: AYBFou192hNWAxvNO0rWkoDIku2YvsyjGzz6wHPmL5FREcq3s1WYe2gH8WHdK9WuwoK
- bTN/DyFFaOXGORrU1LAeXUxhJ/7YJ9SWQTZYmedi0cHt1U+svuLUsEyWdDLDe6rJpkVN+kYoxPU
- kSv8rQrGmxd0LtLKXLniAQnJn1L7Naqeh9W7B9idRdoToieP6sOQzl8OUk7yQF4MeSjTS6J+2bz
- nN7ETCLYq0q6HBaWpYhLJgBGMgBP4co7A5CuM7PGcMVYn+9Xtheyyxb6oyMYz+szW9Sw3x/DpHK
- GygglfbEYqgHAnRy1qjpRPztccO9VdXglhFuxokVWL66bD4+y0P8Jh+8f3XrxvEs1xgLUtxzBTb
- yBENVdECofnJnJIHqeMunB1/GIJC14PchLFW2uA9A6fnBobFR/EM05BNuFoMa5+dkhuIHkoYXUh
- 537pFeG9meQO3N0u3gAc2m4xYs6KONnKJGvYTQw5UNiTUXsOm93Rbk2NZ3wAMHEXeiXv0j6b8qb
- 8hcpGBRqoVuaPxgYZDVUyq4kTvdeW2mSI1Fr1JwfCAYunCqV57MgZmqDqR0uJ76eH2RIiCGyXMP
- l8fAXLDsZO/G2OFHtakWnNnn5p2kjiy6XfAshG2aya3lmam9xWT21en9IwX21u4+rO6LAuZd7BL
- H5Rvy3x8tqQ==
-X-Received: by 2002:a17:906:584:b0:c41:8e21:4d62 with SMTP id
- a640c23a62f3a-c49bdd71afdmr213155666b.1.1793196651596; 
- Wed, 28 Oct 2026 07:10:51 -0700 (PDT)
+ bh=Bh+B/TmbyVAU3hRTvK0yiCDIWusj8xwi9ldHyrw+DXA=;
+ b=fnAh0KqnUStvRdiNpGPPR282/Cd6S+iYhmAYVx1jI4X5Z61irxwOpTr2rzbXmiS6IO
+ L7yeIRHzjbX3gRdIzYj8w6mtDOOjX8lC5Gkpo07aUuIQIKG+TIpECqv1wUBiw3BIUjMk
+ A8b2JpyJeqD78IVkGgP4quWvOYGBqF86io77Md6TL5LZoWJEoXHEoHvWqmO+NgJLAmkO
+ f7ZUICBM/uPsxNNznCoCUAs523m89qMW98jfzFKC7Oxf9VRx1Xs1mk3k4NEdRpi6UlaO
+ Kt6r5juAcZMXiDSBhoCZ/GJ+vBcj9WNSAwraSokP4Amu4hA8r+XFl/o1aY9VbyEfri/1
+ jPKw==
+X-Gm-Message-State: AFq9FYKAYUvGt18USYvK/76zIbgmmJ73+CFTB/lDPe9PBE36nx2+adYE
+ ELFBp6lmE+QAId8YShXXXXnwDtuTSHG1YKhau8+RKtsAfoAka7iRyVyIEYpwOxZ692Cx4T2V2RP
+ 1M87f
+X-Gm-Gg: AYBFou1Vv6FeoGwxGpYq82o6eXUn83ZrxymTAqLqxl7ZGmUrduCCMy6uXxYH4Vk2kJg
+ 8atZ2uRM8hpAllDQwaZiXqbxpDDeJOZK3URHHIBz6Gbz5xVotsgb7kUYQAjYDo6Bq29SOxJaQh7
+ Ht7FwEV1CFIT+Qrpwl4Nls3zeDKQGr+4FZFvXultLePe0o6bqMRIBzYZKyghzh7otkkIhDfkiJ1
+ ZJFTxZmB0hL67k9dvItKkHhuXb7Ez0usw2J60Lr7d2hzT8VUJC0sYsq0aPKcBxPAOFn5YB5gR0U
+ tb20lh6H3TFkgfZaLxTFtpn4PjUu3KnN0uITFCT6YTMziv/l50pCOGKtGnrL42+n9y0Oysny/fb
+ oCNt2PLxXfIbqPRmfhdPC1rBi64NsEsVqMpdTdEL8d6Sz5h0d9qmeFLf83q56tFLudEijiMZVem
+ qde5WS3367owdYMgnJ8S4YYERnN5hpB6NuDzliyOGLiU8R7GrqQBzRPQfEwnp5+uOgu41a6M38a
+ P4YKhKXKGQ2TzYeRTfdrd7CxKo5v+gb1CQwpoqlSxs+5xQnzce30MpPKXda1fOnXZUQWeE1UpMc
+ oZ3iU/xrW997S//MHuRJwuSgL7VsYQi+N81Kus36Mszrnx/WQ6I2a271ujavv59Rhhy4mkwYPkB
+ gL27oy6CMwQ==
+X-Received: by 2002:a17:907:9543:b0:c2e:8801:9139 with SMTP id
+ a640c23a62f3a-c49bdd5a5a5mr215114966b.1.1793196593043; 
+ Wed, 28 Oct 2026 07:09:53 -0700 (PDT)
 Received: from monster.taild06a60.ts.net (c-85-229-7-191.bbcust.telenor.se.
  [85.229.7.191]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c46bd64f8c4sm617944566b.47.2026.10.28.07.10.50
+ a640c23a62f3a-c46bd790afasm607807266b.68.2026.10.28.07.09.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Oct 2026 07:10:51 -0700 (PDT)
+ Wed, 28 Oct 2026 07:09:52 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
@@ -162,9 +162,9 @@ Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  jerome.forissier@arm.com, mkorpershoek@kernel.org, sjg@chromium.org,
  Jens Wiklander <jens.wiklander@linaro.org>,
  Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH v10 10/63] usb: dwc3: import from kernel v4.6
-Date: Wed, 28 Oct 2026 15:08:36 +0100
-Message-ID: <20261028140930.3025368-11-anders.roxell@linaro.org>
+Subject: [PATCH v10 06/63] usb: dwc3: import from kernel v4.2
+Date: Wed, 28 Oct 2026 15:08:32 +0100
+Message-ID: <20261028140930.3025368-7-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261028140930.3025368-1-anders.roxell@linaro.org>
 References: <20261028140930.3025368-1-anders.roxell@linaro.org>
@@ -190,7 +190,7 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Jens Wiklander <jens.wiklander@linaro.org>
 
-Sync Linux kernel dwc3 changes from v4.5 to v4.6.
+Sync Linux kernel dwc3 changes from v4.1 to v4.2.
 
 The following files are preserved across the import:
 Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
@@ -205,405 +205,392 @@ dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
 Note that this is a raw import and doesn't build.
 A fixup commit at the end of the series fixes that.
 
-List of commits: git log --oneline v4.5..v4.6
+List of commits: git log --oneline v4.1..v4.2
 Commits imported:
-9772b47a4c29 usb: dwc3: gadget: Fix suspend/resume during device mode
-5c4ad318de3b usb: dwc3: core: fix PHY handling during suspend
-e901aa159dac usb: dwc3: gadget: fix endpoint renaming
-ad14d4e0308a usb: dwc3: gadget: release spin lock during gadget resume
-f59dcab17629 usb: dwc3: core: improve reset sequence
-77966eb85e6d usb: dwc3: Validate the maximum_speed parameter
-7580862b3e80 usb: dwc3: Enable SuperSpeedPlus
-2c7f1bd9127a usb: dwc3: Update maximum_speed for SuperSpeedPlus
-ee5cd41c9117 usb: dwc3: Update speed checks for SuperSpeedPlus
-1f38f88a24c8 usb: dwc3: Update register fields for SuperSpeedPlus
-c4137a9c841e usb: dwc3: DWC_usb31 controller check
+aebda6187181 usb: dwc3: Reset the transfer resource index on SET_INTERFACE
+43cacb03aabe usb: dwc3: core: avoid NULL pointer dereference
+e18b7975c885 usb: dwc3: gadget: don't clear EP_BUSY too early
+76e838c9f776 usb: dwc3: gadget: return error if command sent to DEPCMD register fails
+891b1dc02295 usb: dwc3: gadget: return error if command sent to DGCMD register fails
+88bc9d194ff6 usb: dwc3: add ULPI interface support
+3e10a2ce98d1 usb: dwc3: add hsphy_interface property
+45bb7de213d8 usb: dwc3: setup phys earlier
+c5cc74e8c12b usb: dwc3: soft reset to it's own function
+2917e7181589 usb: dwc3: cache hwparams earlier
+6c89cce0476f usb: dwc3: store driver data earlier
+f699b94789a6 usb: dwc3: ULPI or UTMI+ select
+b5699eeee68f usb: dwc3: USB2 PHY register access bits
 
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 ---
- drivers/usb/dwc3/core.c   | 102 +++++++++++++++++++++++++-------------
- drivers/usb/dwc3/core.h   |  11 +++-
- drivers/usb/dwc3/ep0.c    |   9 ++--
- drivers/usb/dwc3/gadget.c |  47 ++++++++++++++----
- 4 files changed, 119 insertions(+), 50 deletions(-)
+ drivers/usb/dwc3/core.c          | 110 ++++++++++++++++++++++++-------
+ drivers/usb/dwc3/core.h          |  26 ++++++++
+ drivers/usb/dwc3/ep0.c           |   4 ++
+ drivers/usb/dwc3/gadget.c        |  10 ++-
+ drivers/usb/dwc3/platform_data.h |   2 +
+ 5 files changed, 126 insertions(+), 26 deletions(-)
 
 diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index de5e01f41bc2..34277ced26bd 100644
+index 2bbab3d86fff..ff5773c66b84 100644
 --- a/drivers/usb/dwc3/core.c
 +++ b/drivers/usb/dwc3/core.c
-@@ -67,23 +67,9 @@ void dwc3_set_mode(struct dwc3 *dwc, u32 mode)
- static int dwc3_core_soft_reset(struct dwc3 *dwc)
- {
- 	u32		reg;
-+	int		retries = 1000;
- 	int		ret;
+@@ -116,6 +116,33 @@ static int dwc3_core_soft_reset(struct dwc3 *dwc)
+ 	return 0;
+ }
  
--	/* Before Resetting PHY, put Core in Reset */
--	reg = dwc3_readl(dwc->regs, DWC3_GCTL);
--	reg |= DWC3_GCTL_CORESOFTRESET;
--	dwc3_writel(dwc->regs, DWC3_GCTL, reg);
--
--	/* Assert USB3 PHY reset */
--	reg = dwc3_readl(dwc->regs, DWC3_GUSB3PIPECTL(0));
--	reg |= DWC3_GUSB3PIPECTL_PHYSOFTRST;
--	dwc3_writel(dwc->regs, DWC3_GUSB3PIPECTL(0), reg);
--
--	/* Assert USB2 PHY reset */
--	reg = dwc3_readl(dwc->regs, DWC3_GUSB2PHYCFG(0));
--	reg |= DWC3_GUSB2PHYCFG_PHYSOFTRST;
--	dwc3_writel(dwc->regs, DWC3_GUSB2PHYCFG(0), reg);
--
- 	usb_phy_init(dwc->usb2_phy);
- 	usb_phy_init(dwc->usb3_phy);
- 	ret = phy_init(dwc->usb2_generic_phy);
-@@ -95,26 +81,28 @@ static int dwc3_core_soft_reset(struct dwc3 *dwc)
- 		phy_exit(dwc->usb2_generic_phy);
- 		return ret;
- 	}
--	mdelay(100);
- 
--	/* Clear USB3 PHY reset */
--	reg = dwc3_readl(dwc->regs, DWC3_GUSB3PIPECTL(0));
--	reg &= ~DWC3_GUSB3PIPECTL_PHYSOFTRST;
--	dwc3_writel(dwc->regs, DWC3_GUSB3PIPECTL(0), reg);
-+	/*
-+	 * We're resetting only the device side because, if we're in host mode,
-+	 * XHCI driver will reset the host block. If dwc3 was configured for
-+	 * host-only mode, then we can return early.
-+	 */
-+	if (dwc->dr_mode == USB_DR_MODE_HOST)
-+		return 0;
- 
--	/* Clear USB2 PHY reset */
--	reg = dwc3_readl(dwc->regs, DWC3_GUSB2PHYCFG(0));
--	reg &= ~DWC3_GUSB2PHYCFG_PHYSOFTRST;
--	dwc3_writel(dwc->regs, DWC3_GUSB2PHYCFG(0), reg);
-+	reg = dwc3_readl(dwc->regs, DWC3_DCTL);
-+	reg |= DWC3_DCTL_CSFTRST;
-+	dwc3_writel(dwc->regs, DWC3_DCTL, reg);
- 
--	mdelay(100);
++/**
++ * dwc3_soft_reset - Issue soft reset
++ * @dwc: Pointer to our controller context structure
++ */
++static int dwc3_soft_reset(struct dwc3 *dwc)
++{
++	unsigned long timeout;
++	u32 reg;
++
++	timeout = jiffies + msecs_to_jiffies(500);
++	dwc3_writel(dwc->regs, DWC3_DCTL, DWC3_DCTL_CSFTRST);
 +	do {
 +		reg = dwc3_readl(dwc->regs, DWC3_DCTL);
 +		if (!(reg & DWC3_DCTL_CSFTRST))
-+			return 0;
++			break;
++
++		if (time_after(jiffies, timeout)) {
++			dev_err(dwc->dev, "Reset Timed Out\n");
++			return -ETIMEDOUT;
++		}
++
++		cpu_relax();
++	} while (true);
++
++	return 0;
++}
++
+ /**
+  * dwc3_free_one_event_buffer - Frees one event buffer
+  * @dwc: Pointer to our controller context structure
+@@ -367,10 +394,15 @@ static void dwc3_cache_hwparams(struct dwc3 *dwc)
+ /**
+  * dwc3_phy_setup - Configure USB PHY Interface of DWC3 Core
+  * @dwc: Pointer to our controller context structure
++ *
++ * Returns 0 on success. The USB PHY interfaces are configured but not
++ * initialized. The PHY interfaces and the PHYs get initialized together with
++ * the core in dwc3_core_init.
+  */
+-static void dwc3_phy_setup(struct dwc3 *dwc)
++static int dwc3_phy_setup(struct dwc3 *dwc)
+ {
+ 	u32 reg;
++	int ret;
  
--	/* After PHYs are stable we can take Core out of reset state */
--	reg = dwc3_readl(dwc->regs, DWC3_GCTL);
--	reg &= ~DWC3_GCTL_CORESOFTRESET;
--	dwc3_writel(dwc->regs, DWC3_GCTL, reg);
+ 	reg = dwc3_readl(dwc->regs, DWC3_GUSB3PIPECTL(0));
+ 
+@@ -409,10 +441,43 @@ static void dwc3_phy_setup(struct dwc3 *dwc)
+ 
+ 	dwc3_writel(dwc->regs, DWC3_GUSB3PIPECTL(0), reg);
+ 
+-	mdelay(100);
+-
+ 	reg = dwc3_readl(dwc->regs, DWC3_GUSB2PHYCFG(0));
+ 
++	/* Select the HS PHY interface */
++	switch (DWC3_GHWPARAMS3_HSPHY_IFC(dwc->hwparams.hwparams3)) {
++	case DWC3_GHWPARAMS3_HSPHY_IFC_UTMI_ULPI:
++		if (dwc->hsphy_interface &&
++				!strncmp(dwc->hsphy_interface, "utmi", 4)) {
++			reg &= ~DWC3_GUSB2PHYCFG_ULPI_UTMI;
++			break;
++		} else if (dwc->hsphy_interface &&
++				!strncmp(dwc->hsphy_interface, "ulpi", 4)) {
++			reg |= DWC3_GUSB2PHYCFG_ULPI_UTMI;
++			dwc3_writel(dwc->regs, DWC3_GUSB2PHYCFG(0), reg);
++		} else {
++			dev_warn(dwc->dev, "HSPHY Interface not defined\n");
++
++			/* Relying on default value. */
++			if (!(reg & DWC3_GUSB2PHYCFG_ULPI_UTMI))
++				break;
++		}
++		/* FALLTHROUGH */
++	case DWC3_GHWPARAMS3_HSPHY_IFC_ULPI:
++		/* Making sure the interface and PHY are operational */
++		ret = dwc3_soft_reset(dwc);
++		if (ret)
++			return ret;
++
 +		udelay(1);
-+	} while (--retries);
++
++		ret = dwc3_ulpi_init(dwc);
++		if (ret)
++			return ret;
++		/* FALLTHROUGH */
++	default:
++		break;
++	}
++
+ 	/*
+ 	 * Above 1.94a, it is recommended to set DWC3_GUSB2PHYCFG_SUSPHY to
+ 	 * '0' during coreConsultant configuration. So default value will
+@@ -427,7 +492,7 @@ static void dwc3_phy_setup(struct dwc3 *dwc)
  
--	return 0;
-+	return -ETIMEDOUT;
+ 	dwc3_writel(dwc->regs, DWC3_GUSB2PHYCFG(0), reg);
+ 
+-	mdelay(100);
++	return 0;
  }
  
  /**
-@@ -962,10 +950,6 @@ static int dwc3_probe(struct platform_device *pdev)
- 		fladj = pdata->fladj_value;
+@@ -438,7 +503,6 @@ static void dwc3_phy_setup(struct dwc3 *dwc)
+  */
+ static int dwc3_core_init(struct dwc3 *dwc)
+ {
+-	unsigned long		timeout;
+ 	u32			hwparams4 = dwc->hwparams.hwparams4;
+ 	u32			reg;
+ 	int			ret;
+@@ -466,21 +530,9 @@ static int dwc3_core_init(struct dwc3 *dwc)
  	}
  
--	/* default to superspeed if no maximum_speed passed */
--	if (dwc->maximum_speed == USB_SPEED_UNKNOWN)
--		dwc->maximum_speed = USB_SPEED_SUPER;
+ 	/* issue device SoftReset too */
+-	timeout = jiffies + msecs_to_jiffies(500);
+-	dwc3_writel(dwc->regs, DWC3_DCTL, DWC3_DCTL_CSFTRST);
+-	do {
+-		reg = dwc3_readl(dwc->regs, DWC3_DCTL);
+-		if (!(reg & DWC3_DCTL_CSFTRST))
+-			break;
 -
- 	dwc->lpm_nyet_threshold = lpm_nyet_threshold;
- 	dwc->tx_de_emphasis = tx_de_emphasis;
+-		if (time_after(jiffies, timeout)) {
+-			dev_err(dwc->dev, "Reset Timed Out\n");
+-			ret = -ETIMEDOUT;
+-			goto err0;
+-		}
+-
+-		cpu_relax();
+-	} while (true);
++	ret = dwc3_soft_reset(dwc);
++	if (ret)
++		goto err0;
  
-@@ -1016,6 +1000,33 @@ static int dwc3_probe(struct platform_device *pdev)
+ 	ret = dwc3_core_soft_reset(dwc);
+ 	if (ret)
+@@ -555,8 +607,6 @@ static int dwc3_core_init(struct dwc3 *dwc)
+ 
+ 	dwc3_writel(dwc->regs, DWC3_GCTL, reg);
+ 
+-	dwc3_phy_setup(dwc);
+-
+ 	ret = dwc3_alloc_scratch_buffers(dwc);
+ 	if (ret)
  		goto err1;
+@@ -836,6 +886,8 @@ static int dwc3_probe(struct platform_device *pdev)
+ 				"snps,tx_de_emphasis_quirk");
+ 		of_property_read_u8(node, "snps,tx_de_emphasis",
+ 				&tx_de_emphasis);
++		of_property_read_string(node, "snps,hsphy_interface",
++					&dwc->hsphy_interface);
+ 	} else if (pdata) {
+ 		dwc->maximum_speed = pdata->maximum_speed;
+ 		dwc->has_lpm_erratum = pdata->has_lpm_erratum;
+@@ -863,6 +915,8 @@ static int dwc3_probe(struct platform_device *pdev)
+ 		dwc->tx_de_emphasis_quirk = pdata->tx_de_emphasis_quirk;
+ 		if (pdata->tx_de_emphasis)
+ 			tx_de_emphasis = pdata->tx_de_emphasis;
++
++		dwc->hsphy_interface = pdata->hsphy_interface;
  	}
  
-+	/* Check the maximum_speed parameter */
-+	switch (dwc->maximum_speed) {
-+	case USB_SPEED_LOW:
-+	case USB_SPEED_FULL:
-+	case USB_SPEED_HIGH:
-+	case USB_SPEED_SUPER:
-+	case USB_SPEED_SUPER_PLUS:
-+		break;
-+	default:
-+		dev_err(dev, "invalid maximum_speed parameter %d\n",
-+			dwc->maximum_speed);
-+		/* fall through */
-+	case USB_SPEED_UNKNOWN:
-+		/* default to superspeed */
-+		dwc->maximum_speed = USB_SPEED_SUPER;
-+
-+		/*
-+		 * default to superspeed plus if we are capable.
-+		 */
-+		if (dwc3_is_usb31(dwc) &&
-+		    (DWC3_GHWPARAMS3_SSPHY_IFC(dwc->hwparams.hwparams3) ==
-+		     DWC3_GHWPARAMS3_SSPHY_IFC_GEN2))
-+			dwc->maximum_speed = USB_SPEED_SUPER_PLUS;
-+
-+		break;
-+	}
-+
- 	/* Adjust Frame Length */
- 	dwc3_frame_length_adjustment(dwc, fladj);
+ 	/* default to superspeed if no maximum_speed passed */
+@@ -875,12 +929,18 @@ static int dwc3_probe(struct platform_device *pdev)
+ 	dwc->hird_threshold = hird_threshold
+ 		| (dwc->is_utmi_l1_suspend << 4);
  
-@@ -1139,6 +1150,11 @@ static int dwc3_suspend(struct device *dev)
- 	phy_exit(dwc->usb2_generic_phy);
- 	phy_exit(dwc->usb3_generic_phy);
- 
-+	usb_phy_set_suspend(dwc->usb2_phy, 1);
-+	usb_phy_set_suspend(dwc->usb3_phy, 1);
-+	WARN_ON(phy_power_off(dwc->usb2_generic_phy) < 0);
-+	WARN_ON(phy_power_off(dwc->usb3_generic_phy) < 0);
++	platform_set_drvdata(pdev, dwc);
++	dwc3_cache_hwparams(dwc);
 +
- 	pinctrl_pm_select_sleep_state(dev);
- 
- 	return 0;
-@@ -1152,11 +1168,21 @@ static int dwc3_resume(struct device *dev)
- 
- 	pinctrl_pm_select_default_state(dev);
- 
-+	usb_phy_set_suspend(dwc->usb2_phy, 0);
-+	usb_phy_set_suspend(dwc->usb3_phy, 0);
-+	ret = phy_power_on(dwc->usb2_generic_phy);
-+	if (ret < 0)
-+		return ret;
++	ret = dwc3_phy_setup(dwc);
++	if (ret)
++		goto err0;
 +
-+	ret = phy_power_on(dwc->usb3_generic_phy);
-+	if (ret < 0)
-+		goto err_usb2phy_power;
-+
- 	usb_phy_init(dwc->usb3_phy);
- 	usb_phy_init(dwc->usb2_phy);
- 	ret = phy_init(dwc->usb2_generic_phy);
- 	if (ret < 0)
--		return ret;
-+		goto err_usb3phy_power;
+ 	ret = dwc3_core_get_phy(dwc);
+ 	if (ret)
+ 		goto err0;
  
- 	ret = phy_init(dwc->usb3_generic_phy);
- 	if (ret < 0)
-@@ -1189,6 +1215,12 @@ static int dwc3_resume(struct device *dev)
- err_usb2phy_init:
- 	phy_exit(dwc->usb2_generic_phy);
+ 	spin_lock_init(&dwc->lock);
+-	platform_set_drvdata(pdev, dwc);
  
-+err_usb3phy_power:
-+	phy_power_off(dwc->usb3_generic_phy);
-+
-+err_usb2phy_power:
-+	phy_power_off(dwc->usb2_generic_phy);
-+
- 	return ret;
- }
+ 	if (!dev->dma_mask) {
+ 		dev->dma_mask = dev->parent->dma_mask;
+@@ -892,8 +952,6 @@ static int dwc3_probe(struct platform_device *pdev)
+ 	pm_runtime_get_sync(dev);
+ 	pm_runtime_forbid(dev);
  
+-	dwc3_cache_hwparams(dwc);
+-
+ 	ret = dwc3_alloc_event_buffers(dwc, DWC3_EVENT_BUFFERS_SIZE);
+ 	if (ret) {
+ 		dev_err(dwc->dev, "failed to allocate event buffers\n");
+@@ -964,6 +1022,7 @@ err2:
+ 
+ err1:
+ 	dwc3_free_event_buffers(dwc);
++	dwc3_ulpi_exit(dwc);
+ 
+ err0:
+ 	/*
+@@ -999,6 +1058,7 @@ static int dwc3_remove(struct platform_device *pdev)
+ 	phy_power_off(dwc->usb3_generic_phy);
+ 
+ 	dwc3_core_exit(dwc);
++	dwc3_ulpi_exit(dwc);
+ 
+ 	pm_runtime_put_sync(&pdev->dev);
+ 	pm_runtime_disable(&pdev->dev);
 diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-index e4f8b90d9627..6254b2ff9080 100644
+index c0eafa6fd403..044778884585 100644
 --- a/drivers/usb/dwc3/core.h
 +++ b/drivers/usb/dwc3/core.h
-@@ -223,7 +223,8 @@
- /* Global HWPARAMS3 Register */
- #define DWC3_GHWPARAMS3_SSPHY_IFC(n)		((n) & 3)
- #define DWC3_GHWPARAMS3_SSPHY_IFC_DIS		0
--#define DWC3_GHWPARAMS3_SSPHY_IFC_ENA		1
-+#define DWC3_GHWPARAMS3_SSPHY_IFC_GEN1		1
-+#define DWC3_GHWPARAMS3_SSPHY_IFC_GEN2		2 /* DWC_usb31 only */
- #define DWC3_GHWPARAMS3_HSPHY_IFC(n)		(((n) & (3 << 2)) >> 2)
- #define DWC3_GHWPARAMS3_HSPHY_IFC_DIS		0
- #define DWC3_GHWPARAMS3_HSPHY_IFC_UTMI		1
-@@ -249,6 +250,7 @@
- #define DWC3_DCFG_DEVADDR_MASK	DWC3_DCFG_DEVADDR(0x7f)
+@@ -30,6 +30,7 @@
+ #include <linux/usb/ch9.h>
+ #include <linux/usb/gadget.h>
+ #include <linux/usb/otg.h>
++#include <linux/ulpi/interface.h>
  
- #define DWC3_DCFG_SPEED_MASK	(7 << 0)
-+#define DWC3_DCFG_SUPERSPEED_PLUS (5 << 0)  /* DWC_usb31 only */
- #define DWC3_DCFG_SUPERSPEED	(4 << 0)
- #define DWC3_DCFG_HIGHSPEED	(0 << 0)
- #define DWC3_DCFG_FULLSPEED2	(1 << 0)
-@@ -339,6 +341,7 @@
+ #include <linux/phy/phy.h>
  
- #define DWC3_DSTS_CONNECTSPD		(7 << 0)
- 
-+#define DWC3_DSTS_SUPERSPEED_PLUS	(5 << 0) /* DWC_usb31 only */
- #define DWC3_DSTS_SUPERSPEED		(4 << 0)
- #define DWC3_DSTS_HIGHSPEED		(0 << 0)
- #define DWC3_DSTS_FULLSPEED2		(1 << 0)
-@@ -1024,6 +1027,12 @@ struct dwc3_gadget_ep_cmd_params {
- void dwc3_set_mode(struct dwc3 *dwc, u32 mode);
- int dwc3_gadget_resize_tx_fifos(struct dwc3 *dwc);
- 
-+/* check whether we are on the DWC_usb31 core */
-+static inline bool dwc3_is_usb31(struct dwc3 *dwc)
-+{
-+	return !!(dwc->revision & DWC3_REVISION_IS_DWC31);
-+}
+@@ -173,6 +174,15 @@
+ /* Global USB2 PHY Configuration Register */
+ #define DWC3_GUSB2PHYCFG_PHYSOFTRST	(1 << 31)
+ #define DWC3_GUSB2PHYCFG_SUSPHY		(1 << 6)
++#define DWC3_GUSB2PHYCFG_ULPI_UTMI	(1 << 4)
 +
- #if IS_ENABLED(CONFIG_USB_DWC3_HOST) || IS_ENABLED(CONFIG_USB_DWC3_DUAL_ROLE)
- int dwc3_host_init(struct dwc3 *dwc);
- void dwc3_host_exit(struct dwc3 *dwc);
++/* Global USB2 PHY Vendor Control Register */
++#define DWC3_GUSB2PHYACC_NEWREGREQ	(1 << 25)
++#define DWC3_GUSB2PHYACC_BUSY		(1 << 23)
++#define DWC3_GUSB2PHYACC_WRITE		(1 << 22)
++#define DWC3_GUSB2PHYACC_ADDR(n)	(n << 16)
++#define DWC3_GUSB2PHYACC_EXTEND_ADDR(n)	(n << 8)
++#define DWC3_GUSB2PHYACC_DATA(n)	(n & 0xff)
+ 
+ /* Global USB3 PIPE Control Register */
+ #define DWC3_GUSB3PIPECTL_PHYSOFTRST	(1 << 31)
+@@ -652,6 +662,7 @@ struct dwc3_scratchpad_array {
+  * @usb3_phy: pointer to USB3 PHY
+  * @usb2_generic_phy: pointer to USB2 PHY
+  * @usb3_generic_phy: pointer to USB3 PHY
++ * @ulpi: pointer to ulpi interface
+  * @dcfg: saved contents of DCFG register
+  * @gctl: saved contents of GCTL register
+  * @isoch_delay: wValue from Set Isochronous Delay request;
+@@ -673,6 +684,7 @@ struct dwc3_scratchpad_array {
+  * @test_mode_nr: test feature selector
+  * @lpm_nyet_threshold: LPM NYET response threshold
+  * @hird_threshold: HIRD threshold
++ * @hsphy_interface: "utmi" or "ulpi"
+  * @delayed_status: true when gadget driver asks for delayed status
+  * @ep0_bounced: true when we used bounce buffer
+  * @ep0_expect_in: true when we expect a DATA IN transfer
+@@ -739,6 +751,8 @@ struct dwc3 {
+ 	struct phy		*usb2_generic_phy;
+ 	struct phy		*usb3_generic_phy;
+ 
++	struct ulpi		*ulpi;
++
+ 	void __iomem		*regs;
+ 	size_t			regs_size;
+ 
+@@ -800,6 +814,8 @@ struct dwc3 {
+ 	u8			lpm_nyet_threshold;
+ 	u8			hird_threshold;
+ 
++	const char		*hsphy_interface;
++
+ 	unsigned		delayed_status:1;
+ 	unsigned		ep0_bounced:1;
+ 	unsigned		ep0_expect_in:1;
+@@ -1035,4 +1051,14 @@ static inline int dwc3_gadget_resume(struct dwc3 *dwc)
+ }
+ #endif /* !IS_ENABLED(CONFIG_USB_DWC3_HOST) */
+ 
++#if IS_ENABLED(CONFIG_USB_DWC3_ULPI)
++int dwc3_ulpi_init(struct dwc3 *dwc);
++void dwc3_ulpi_exit(struct dwc3 *dwc);
++#else
++static inline int dwc3_ulpi_init(struct dwc3 *dwc)
++{ return 0; }
++static inline void dwc3_ulpi_exit(struct dwc3 *dwc)
++{ }
++#endif
++
+ #endif /* __DRIVERS_USB_DWC3_CORE_H */
 diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
-index 8d6b75c2f53b..eca2e6d8e041 100644
+index 2ef3c8d6a9db..69e769c35cf5 100644
 --- a/drivers/usb/dwc3/ep0.c
 +++ b/drivers/usb/dwc3/ep0.c
-@@ -356,7 +356,8 @@ static int dwc3_ep0_handle_status(struct dwc3 *dwc,
- 		 */
- 		usb_status |= dwc->gadget.is_selfpowered;
- 
--		if (dwc->speed == DWC3_DSTS_SUPERSPEED) {
-+		if ((dwc->speed == DWC3_DSTS_SUPERSPEED) ||
-+		    (dwc->speed == DWC3_DSTS_SUPERSPEED_PLUS)) {
- 			reg = dwc3_readl(dwc->regs, DWC3_DCTL);
- 			if (reg & DWC3_DCTL_INITU1ENA)
- 				usb_status |= 1 << USB_DEV_STAT_U1_ENABLED;
-@@ -426,7 +427,8 @@ static int dwc3_ep0_handle_feature(struct dwc3 *dwc,
- 		case USB_DEVICE_U1_ENABLE:
- 			if (state != USB_STATE_CONFIGURED)
- 				return -EINVAL;
--			if (dwc->speed != DWC3_DSTS_SUPERSPEED)
-+			if ((dwc->speed != DWC3_DSTS_SUPERSPEED) &&
-+			    (dwc->speed != DWC3_DSTS_SUPERSPEED_PLUS))
- 				return -EINVAL;
- 
- 			reg = dwc3_readl(dwc->regs, DWC3_DCTL);
-@@ -440,7 +442,8 @@ static int dwc3_ep0_handle_feature(struct dwc3 *dwc,
- 		case USB_DEVICE_U2_ENABLE:
- 			if (state != USB_STATE_CONFIGURED)
- 				return -EINVAL;
--			if (dwc->speed != DWC3_DSTS_SUPERSPEED)
-+			if ((dwc->speed != DWC3_DSTS_SUPERSPEED) &&
-+			    (dwc->speed != DWC3_DSTS_SUPERSPEED_PLUS))
- 				return -EINVAL;
- 
- 			reg = dwc3_readl(dwc->regs, DWC3_DCTL);
+@@ -727,6 +727,10 @@ static int dwc3_ep0_std_request(struct dwc3 *dwc, struct usb_ctrlrequest *ctrl)
+ 		dwc3_trace(trace_dwc3_ep0, "USB_REQ_SET_ISOCH_DELAY");
+ 		ret = dwc3_ep0_set_isoch_delay(dwc, ctrl);
+ 		break;
++	case USB_REQ_SET_INTERFACE:
++		dwc3_trace(trace_dwc3_ep0, "USB_REQ_SET_INTERFACE");
++		dwc->start_config_issued = false;
++		/* Fall through */
+ 	default:
+ 		dwc3_trace(trace_dwc3_ep0, "Forwarding to gadget driver");
+ 		ret = dwc3_ep0_delegate_req(dwc, ctrl);
 diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index 2363bad45af8..8e4a1b195e9b 100644
+index 8946c32047e9..333a7c0078fc 100644
 --- a/drivers/usb/dwc3/gadget.c
 +++ b/drivers/usb/dwc3/gadget.c
-@@ -463,7 +463,7 @@ static int dwc3_gadget_set_ep_config(struct dwc3 *dwc, struct dwc3_ep *dep,
- 		| DWC3_DEPCFG_MAX_PACKET_SIZE(usb_endpoint_maxp(desc));
- 
- 	/* Burst size is only needed in SuperSpeed mode */
--	if (dwc->gadget.speed == USB_SPEED_SUPER) {
-+	if (dwc->gadget.speed >= USB_SPEED_SUPER) {
- 		u32 burst = dep->endpoint.maxburst - 1;
- 
- 		params.param0 |= DWC3_DEPCFG_BURST_SIZE(burst);
-@@ -568,7 +568,7 @@ static int __dwc3_gadget_ep_enable(struct dwc3_ep *dep,
- 		dwc3_writel(dwc->regs, DWC3_DALEPENA, reg);
- 
- 		if (!usb_endpoint_xfer_isoc(desc))
--			return 0;
-+			goto out;
- 
- 		/* Link TRB for ISOC. The HWO bit is never reset */
- 		trb_st_hw = &dep->trb_pool[0];
-@@ -582,9 +582,10 @@ static int __dwc3_gadget_ep_enable(struct dwc3_ep *dep,
- 		trb_link->ctrl |= DWC3_TRB_CTRL_HWO;
- 	}
- 
-+out:
- 	switch (usb_endpoint_type(desc)) {
- 	case USB_ENDPOINT_XFER_CONTROL:
--		strlcat(dep->name, "-control", sizeof(dep->name));
-+		/* don't change name */
- 		break;
- 	case USB_ENDPOINT_XFER_ISOC:
- 		strlcat(dep->name, "-isoc", sizeof(dep->name));
-@@ -1441,7 +1442,8 @@ static int dwc3_gadget_wakeup(struct usb_gadget *g)
- 	reg = dwc3_readl(dwc->regs, DWC3_DSTS);
- 
- 	speed = reg & DWC3_DSTS_CONNECTSPD;
--	if (speed == DWC3_DSTS_SUPERSPEED) {
-+	if ((speed == DWC3_DSTS_SUPERSPEED) ||
-+	    (speed == DWC3_DSTS_SUPERSPEED_PLUS)) {
- 		dwc3_trace(trace_dwc3_gadget, "no wakeup on SuperSpeed\n");
- 		ret = -EINVAL;
- 		goto out;
-@@ -1666,10 +1668,16 @@ static int dwc3_gadget_start(struct usb_gadget *g,
- 		case USB_SPEED_HIGH:
- 			reg |= DWC3_DSTS_HIGHSPEED;
- 			break;
--		case USB_SPEED_SUPER:	/* FALLTHROUGH */
--		case USB_SPEED_UNKNOWN:	/* FALTHROUGH */
-+		case USB_SPEED_SUPER_PLUS:
-+			reg |= DWC3_DSTS_SUPERSPEED_PLUS;
-+			break;
- 		default:
--			reg |= DWC3_DSTS_SUPERSPEED;
-+			dev_err(dwc->dev, "invalid dwc->maximum_speed (%d)\n",
-+				dwc->maximum_speed);
-+			/* fall through */
-+		case USB_SPEED_SUPER:
-+			reg |= DWC3_DCFG_SUPERSPEED;
-+			break;
+@@ -291,6 +291,8 @@ int dwc3_send_gadget_generic_command(struct dwc3 *dwc, unsigned cmd, u32 param)
+ 			dwc3_trace(trace_dwc3_gadget,
+ 					"Command Complete --> %d",
+ 					DWC3_DGCMD_STATUS(reg));
++			if (DWC3_DGCMD_STATUS(reg))
++				return -EINVAL;
+ 			return 0;
  		}
- 	}
- 	dwc3_writel(dwc->regs, DWC3_DCFG, reg);
-@@ -2340,7 +2348,8 @@ static void dwc3_update_ram_clk_sel(struct dwc3 *dwc, u32 speed)
- 	 * this. Maybe it becomes part of the power saving plan.
- 	 */
  
--	if (speed != DWC3_DSTS_SUPERSPEED)
-+	if ((speed != DWC3_DSTS_SUPERSPEED) &&
-+	    (speed != DWC3_DSTS_SUPERSPEED_PLUS))
- 		return;
+@@ -328,6 +330,8 @@ int dwc3_send_gadget_ep_cmd(struct dwc3 *dwc, unsigned ep,
+ 			dwc3_trace(trace_dwc3_gadget,
+ 					"Command Complete --> %d",
+ 					DWC3_DEPCMD_STATUS(reg));
++			if (DWC3_DEPCMD_STATUS(reg))
++				return -EINVAL;
+ 			return 0;
+ 		}
+ 
+@@ -1902,12 +1906,16 @@ static void dwc3_endpoint_transfer_complete(struct dwc3 *dwc,
+ {
+ 	unsigned		status = 0;
+ 	int			clean_busy;
++	u32			is_xfer_complete;
++
++	is_xfer_complete = (event->endpoint_event == DWC3_DEPEVT_XFERCOMPLETE);
+ 
+ 	if (event->status & DEPEVT_STATUS_BUSERR)
+ 		status = -ECONNRESET;
+ 
+ 	clean_busy = dwc3_cleanup_done_reqs(dwc, dep, event, status);
+-	if (clean_busy)
++	if (clean_busy && (is_xfer_complete ||
++				usb_endpoint_xfer_isoc(dep->endpoint.desc)))
+ 		dep->flags &= ~DWC3_EP_BUSY;
  
  	/*
-@@ -2369,6 +2378,11 @@ static void dwc3_gadget_conndone_interrupt(struct dwc3 *dwc)
- 	dwc3_update_ram_clk_sel(dwc, speed);
+diff --git a/drivers/usb/dwc3/platform_data.h b/drivers/usb/dwc3/platform_data.h
+index a2bd464be828..d3614ecbb9ca 100644
+--- a/drivers/usb/dwc3/platform_data.h
++++ b/drivers/usb/dwc3/platform_data.h
+@@ -45,4 +45,6 @@ struct dwc3_platform_data {
  
- 	switch (speed) {
-+	case DWC3_DCFG_SUPERSPEED_PLUS:
-+		dwc3_gadget_ep0_desc.wMaxPacketSize = cpu_to_le16(512);
-+		dwc->gadget.ep0->maxpacket = 512;
-+		dwc->gadget.speed = USB_SPEED_SUPER_PLUS;
-+		break;
- 	case DWC3_DCFG_SUPERSPEED:
- 		/*
- 		 * WORKAROUND: DWC3 revisions <1.90a have an issue which
-@@ -2410,8 +2424,9 @@ static void dwc3_gadget_conndone_interrupt(struct dwc3 *dwc)
- 
- 	/* Enable USB2 LPM Capability */
- 
--	if ((dwc->revision > DWC3_REVISION_194A)
--			&& (speed != DWC3_DCFG_SUPERSPEED)) {
-+	if ((dwc->revision > DWC3_REVISION_194A) &&
-+	    (speed != DWC3_DCFG_SUPERSPEED) &&
-+	    (speed != DWC3_DCFG_SUPERSPEED_PLUS)) {
- 		reg = dwc3_readl(dwc->regs, DWC3_DCFG);
- 		reg |= DWC3_DCFG_LPM_CAP;
- 		dwc3_writel(dwc->regs, DWC3_DCFG, reg);
-@@ -2473,7 +2488,11 @@ static void dwc3_gadget_wakeup_interrupt(struct dwc3 *dwc)
- 	 * implemented.
- 	 */
- 
--	dwc->gadget_driver->resume(&dwc->gadget);
-+	if (dwc->gadget_driver && dwc->gadget_driver->resume) {
-+		spin_unlock(&dwc->lock);
-+		dwc->gadget_driver->resume(&dwc->gadget);
-+		spin_lock(&dwc->lock);
-+	}
- }
- 
- static void dwc3_gadget_linksts_change_interrupt(struct dwc3 *dwc,
-@@ -2917,6 +2936,9 @@ void dwc3_gadget_exit(struct dwc3 *dwc)
- 
- int dwc3_gadget_suspend(struct dwc3 *dwc)
- {
-+	if (!dwc->gadget_driver)
-+		return 0;
+ 	unsigned tx_de_emphasis_quirk:1;
+ 	unsigned tx_de_emphasis:2;
 +
- 	if (dwc->pullups_connected) {
- 		dwc3_gadget_disable_irq(dwc);
- 		dwc3_gadget_run_stop(dwc, true, true);
-@@ -2935,6 +2957,9 @@ int dwc3_gadget_resume(struct dwc3 *dwc)
- 	struct dwc3_ep		*dep;
- 	int			ret;
- 
-+	if (!dwc->gadget_driver)
-+		return 0;
-+
- 	/* Start with SuperSpeed Default */
- 	dwc3_gadget_ep0_desc.wMaxPacketSize = cpu_to_le16(512);
- 
++	const char *hsphy_interface;
+ };
 -- 
 2.53.0
 
