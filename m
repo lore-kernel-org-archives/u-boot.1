@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E783606A31C
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 14:47:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BEF8606A31E
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 14:47:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=SUax26gw;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=EzY45mcN
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=MeU2eJo2;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=bEZFId6Z
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5C06581215;
-	Wed, 28 Oct 2026 14:47:49 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 374634075F;
+	Wed, 28 Oct 2026 14:47:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8N0cBtsR77wP; Wed, 28 Oct 2026 14:47:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org AB36B810D8
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793198814;
-	b=eDNECKe3PFV8gHSn+WaU5Pozq10KXAkflbvjRp9tlf8FxaPlgxauQxt/NK4CIAlV3kG7
-	 awrhuJKmiUM1Rh8qr4B97QOX9pN3Z5brPJsT5xsd0/Ax8Jn9sr/k7GKvFeoxo+BmQ1xqq
-	 LDNIZpDSMyzlnNV0lvqY1KugV5xx9LqSisM4wl8p/X4s0qxLhaJip/lGedO1Bw1ZMTUTe
-	 0UkBhLs4yggAq8/GMho9+LQ46RQsMOlKrNYnhwhllQ3oPbWQDcQ+vXXoUZNwM54N1Y3+G
-	 A76FGTlU9jRmLxU7d5O962fIdmueutmCYFUo+qzFduUiM/E3Mj8Y14uYuUDh+7hCBRQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id nEwFWcxGHwer; Wed, 28 Oct 2026 14:47:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org CC0B8407F3
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793198869;
+	b=luYSfiaJmxZEUh/iPP/cHuU2gvVZ5aCKuPUGBljMCRVIo3pE6BTbr+OlOzvqGjJpGTRg
+	 lNRW5g43RH9WOhxtPW8KCNK3CFxpXNMTjjLZpaswKcqnzg0EuYsLEzg6BURjjyC6hSCMz
+	 k153zOiSUsSSHJMG11mDOG5vxsCszatJKODMm3RdyPslbAoBqBUXynrW5XqbPpoq6jtEi
+	 rFfjrTez3WkhI6W6suK/2SXGT/2pbfjPLyCTC7mMzbMQdzHbsbXEbpX7X5kYNLrKpSH9o
+	 8tqCGI/Qb3o1jLnJ/Vi2f8czYbUsT5Di7lQOiWISRRTES8FmR+ID4YBfJYmb9424eCg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793198814;
+	c=relaxed/relaxed; t=1793198869;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,128 +33,128 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=23pfFLqJWnB3No+/wCGklZnciLzFWFIzD7FXqwFrMDk=;
-	b=NkwOy9M12OB4hA3gT8OhLxj57JWeVJOJj98Ko4XnKT55J5jymbolFCcueU5O+Jjt9bIY
-	 gYtAzj38Xr1MKmZcgrIt7jbxZgXTAEdBo2b7la8RSElNlILZ7EmWCaPPRGOUmob/b4YmQ
-	 M7G764SLuKsJYgvwUuDVW7/eNZPugHI8qirsKNn6m9kqKKF55yIkhMAIrQmnWwu5DsNrY
-	 lEjNOmvIkUShRraztg9wYjzo6OF8yU0i1+hlXKFVEXDaDQWE5T/3hAU8xNAdO1YuGHgoi
-	 1p2gaKErirrL1TZUshFCbi+Aozg3HETkAKUIe+h7Zp9GluZUDk8GNxUX2aCsZrSOWXw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=Joolsl9I0RM147Yq5P0/o2a5p9AUCYnMyf5z3iKQ+lc=;
+	b=qcbaciMNOloZRoxZggC7UkjujSFYDObWzUIXDIaTKbiz1cO5tM7UyhFnxR0uBf01TK08
+	 dpyiAhs8Om0iC5LyvqXDylxNR26jOZxsUaQOKsuOOhSgfAmRJQ6GXALLpsCyo4G+sPQos
+	 KLkEPdo1fE7UsYWCrRCjHNaj87iVag33zfOvEk2Wh71q7k2rnD0Bz5Vlb4J0CNyJ9yN50
+	 j0yJmOoi8xYxuLMUKeD5Rre8Pwf20vfR8FF9G3MV8HhhM9XPUPLEivTo9/7a9hbf3q0xU
+	 hWKRtqiLxWbKg/xsbUbkZvK1fv+I+O3oa2Gnn7cg5lVf5PdtttBr9IzVY8MPcdnxD5w==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793198814;
-	bh=23pfFLqJWnB3No+/wCGklZnciLzFWFIzD7FXqwFrMDk=;
+	d=lists.u-boot-project.org; s=default; t=1793198868;
+	bh=Joolsl9I0RM147Yq5P0/o2a5p9AUCYnMyf5z3iKQ+lc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=SUax26gwKnz51YGmUUWI04wkCd+vF5Pu+bcTjxAvDTTXl5xenEfFZBIxoTaU3oMis
-	 7dArS/GJLn+V6zZA0K4HYIZ2wNndJ/55tG4XgJGKq/uYviWqMBfMf0iYrTqy/4Tv1r
-	 ug9La/OysTLLFwYs/Ab7IO02j89ybd+hBeUNfn/cU0/MqrmUDX1NAtxgVzpVf3MpjU
-	 1C8vqE964cxP8WHVRulMLYXbtGrrGk0dSdFEJYFwqIFJj+dtSfPcTIH1zRJq8iHJHl
-	 +8ea04Rg6FrVY1z0rq93/SbjbO/gKz8uldxGNeQcpc/Qtzd6Uq5mxq8LW92q/Tkgyo
-	 pHeCDS1Zlr/cw==
+	b=MeU2eJo2SX0fQ3DQ+TBXQlg2w+C6FJZETrcq5DHlFODZrxGAycgwYlSaZBGTd/8tX
+	 8YQVRYbuC3aet2bOpIb5WppEGiynF9Hjm6TMKS5Z//tGuK29zPnLqKjEjot7hBqj4Z
+	 LKWXa9gW0b9/D0HkzYTc2Ixc5Lbj4iUhSFUYXxGfsGMduSG37FqGi8+45/5BE9iPQx
+	 KHi0NiySvJNTSM5fjeWux7w0cWbSQAlRFjDA4Ewo9DAuaPNGqRNG98cKhZCsoaLOvK
+	 WKPhx4sgyDCUcWMee7S5ByFTdOZIsLCot6sIBo6mn+8OgD43O221ceUp9GGWutYCka
+	 HCXcT1s6wclFQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id AB36B810D8;
-	Wed, 28 Oct 2026 14:46:54 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id ECA21235
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:12:28 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id CC0B8407F3;
+	Wed, 28 Oct 2026 14:47:48 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8A95B356
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:14:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id DEAD4605F1
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:12:28 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 70EB8605EA
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:14:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hK52PR2rU0Bi for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 14:12:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 86220605EA
+ id 5N4ystelESVM for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 14:14:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 06E56605EB
 Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::62f"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793196748;
- b=KGbsjECA43YEnW7VSMYzBiUdJC5wg9OlJcL4uK3q/9m5nvLGmYpKakq3um/CEwqBmpNc
- jsLOARNkb0KEGOapYQJ+Y5eucU/Frqjky7MLowIIxTJrQ5YyMMts+EzkpuOCARUEJe4GW
- D24SXdUXmlmdlVUrvlFFawwm9Tw43ZT3RoQn3dAbi1b5x8XV0xMxxhZtNl95oVWbWVn6F
- mgbNn3YBAWVZhuUXsJnOLWHq0+BmUAjLCNW3djcGdv6MAKTWotu13ui6OlEC2DnzBSLuC
- VEkgFKJ1sMDF/fF/uIieqEHg71oiCr1dTaJyRWgQh2CYzhet9eFX+f0VwgIJKoWTlGw==
+ arc=none smtp.remote-ip="2a00:1450:4864:20::62e"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793196887;
+ b=BAmXTYKWMAttwijTHch2rSpA/SC7HGypJc1AHBL3BjCX8Hyn3/fvUUFl4CKbTSWtZS5A
+ cRp18ooVP7LByUSj1BdQqEDnAWeSfl/ZUrnusG54pdqh9r0+sqntrITqcVc47fUQhdS/T
+ 8FoLcxWXVY/PP9HUYpFl0HNxtN1PZij8oC8/1BiFaPcSX3P6MP8uWa6tSfTb6MSqAThql
+ K64xZrngDSxDSSJpXTx7byKYcbSn+iCqeB+p2WAjyh6KOyGcDDWRbNhOSiN7jg8IiXDNS
+ +qC6ZBPc0k4nGzmw4jJDFbxazXeQcA95eGI/F6C5f9usx9Sd1MtICHOXPGi92ciYPVA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793196748;
+ c=relaxed/relaxed; t=1793196887;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=23pfFLqJWnB3No+/wCGklZnciLzFWFIzD7FXqwFrMDk=;
- b=CYdlVN+C5MreTjNqjmnrQnoQajTh5wWRUPBFo5H/4SLHR93pYq32No6T8TRNrJKSigoP
- cSNf3p3i4dfjhK/3SyTKCvoXUXGuB+9C3s8oUEmO8dWUd/MO+dCaX1Yc3E9K6zmXJBmOh
- bTh/5wpyVhdBahsKczsO9DBHrOyAo/Hq26mhTQAf8PpsYf0/cXP0rNGArNUrDDyjUe2ih
- Ds1ZAdbfgIZZgqUuKfNTD62nBac5w628nGnJNz1JXvY8W1KGLjXa1ezhok2+D9Jd7X71D
- Ok9+IEUuWgf5i8j4+LQf8vr40yImz1B3DPBDwSNjvVKPceDhck+FLlmB9eeJ4raJDkA==
+ bh=Joolsl9I0RM147Yq5P0/o2a5p9AUCYnMyf5z3iKQ+lc=;
+ b=awyKxrLuf3kTB2FxWMLkHYxmw1a7Tfi2w7GpNxVHA27iNPOwi8HgiTTyNFw2DwBU78NZ
+ 536B5UDs682Z6i7ecbtZmq0sD/XAovQms27nes8vxqBmVHMFBfQlfIEblBi86GI1d7D/t
+ 1TcNJ4R32t16/4TNR+7e80Cvf9Mm1pXLKV5VlvrEOqi4gquSNjMdSOXS5aXavKdKrDPT9
+ ctgqIGRvetGbzywdveIS2+hycj2KF6xyVRXEGhWlJzSLs9P36aPJM9ZSGrZbZvwRt0MN8
+ kxXCBN9/UH+RKDKZCHXIynz/QQTrihNhCAaBeVKE4E2Q25INzLr8v4ZtVyEFTFTqDmA==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=linaro.org;
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=EzY45mcN; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::62f"
+ header.s=google header.b=bEZFId6Z; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::62e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62f; helo=mail-ej1-x62f.google.com;
+ client-ip=2a00:1450:4864:20::62e; helo=mail-ej1-x62e.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=EzY45mcN
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 86220605EA
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:12:26 +0000 (UTC)
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-c499e0e43a9so13373066b.3
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 07:12:26 -0700 (PDT)
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
+ header.a=rsa-sha256 header.s=google header.b=bEZFId6Z
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 06E56605EB
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 14:14:46 +0000 (UTC)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-c499b5be0f1so11829666b.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 07:14:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793196745; x=1793801545;
+ d=linaro.org; s=google; t=1793196885; x=1793801685;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=23pfFLqJWnB3No+/wCGklZnciLzFWFIzD7FXqwFrMDk=;
- b=EzY45mcNgiyCsBul11JCc5CB+hM2p3pBao3J22Ne4rrvsZhd7ggBfy5Vm53B1+ycXv
- 1A/zs317vE4jlwBlvUm0aORNektuQCRvL2up7Ej4U62IXgjctzyFyFAsszHxa1mCbj5h
- JZX7D/A1NK4BPRjgd4obGhUYlxaIq+nvyF4S/wz4Sqz5i3oqhjNmYlVdg2eOi0q2RyqB
- o2bydFERaZLJYYzLRyPfvEZ1nuFqs1uZWt0UvxM4LOpI33cKeaTcpqcltP1bQdsVjSLr
- eURPstjIFxCOz1spRNU5s/e/ibhDXYemFVzKyU5fXvGirCw0/kzU3WOWqYEHv9mnrhTV
- xSwQ==
+ bh=Joolsl9I0RM147Yq5P0/o2a5p9AUCYnMyf5z3iKQ+lc=;
+ b=bEZFId6Z2Q/LQLEVnD6gTi1m5+0XjWyGvJmkjIK9QaYowa/BdsAVzn9Ec1WETFg5lW
+ 4S5X+ZBwQg49XLwqrmTxE2Z1Wsg8qVX+lVuaFe1MzpZKfq9wWQeZuKAGQW7YXeFE3CGx
+ jNYmzLp+K4f6aaUQFsvqQ/TykCUapI5S8+DZn5dPnHdM4rlnehhKV2B6zdgme0zjOxJm
+ hvxr5b1EsMmt1H/wnGSssSLZa222OjtX9eJYbOQb1+uvGe/hI0tyVq/2j6MUZPa6a4Sz
+ 6MH+qcmjMnRZ+PadC/tN9kzHCFJlDWmSBy6qn+Q8rcEL+8p04zYM5wAzyh8HyJCykgFM
+ XgYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793196745; x=1793801545;
+ d=1e100.net; s=20260707; t=1793196885; x=1793801685;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=23pfFLqJWnB3No+/wCGklZnciLzFWFIzD7FXqwFrMDk=;
- b=FEcnr5NepqStmktWu+yaB6Noo8boSKgg4Q2PnxcrQ/bgcf51C/tQRKoGfIHJcXxlSj
- vDHy8RVcuaEtFPhxU1JJcZ5N9HzKKJc7K+1EoKkI2dcnC3+t90zW39baHbb6Xu0i9z7a
- RPje6I2GuwYw40EAe6l379oouyDlN6Icv0gs+aZHFjAjIDEYSfKQ39FvD3C2SoDkOVc4
- jveMlrT1G/mjXI4Xll3XdyCVZPc+Qa+t5QiYpwI+o7/5Z6j/D1cwB4IXMLvIxsyjS/oM
- 6UhJHkq9xAt7tk6dT8nxLh+KoBegdgcZ7Lzsi1RjNMC50XFJ7z9scR7Msxmgn6K6DIkM
- 9SYA==
-X-Gm-Message-State: AFq9FYIDiQGTyaatw5Ejmicr2KxwfB4GghMxXAneHiczyBM3BqMdWrsO
- hN7fIEGYzDNFXX6eyumnkNMZ4NzgJwdGaZvOvlEa/K0kgS4dTPKays6fRY0orJmOJIGE5acWU6O
- YL4co
-X-Gm-Gg: AYBFou2GVNQK2/kadMX1EH4PRPeimkhmJqYg4GtlJjR8+kgDHPSIBDWBCqr9s9sIMKV
- 4g+yZSdjLMg66M8Qdid25u0qDGZuRf3ApQIgDXNJ03mFewIBZwaXBd8+1HPVLcexs2jFBnGOylR
- BkamnbumA1iXwzK/M2ywRJGp0JAiZBm6+V0Bxk+jhTLAjSf8WT0wtzMTmADvYXzmOLfCGLMDYl5
- chKM5Oxma7GLat5cfn9qFWa2jumu7pmC/vh+EJ60taLRsRjCOYZ4rK/LP7sDIcsVYA7wSZTT9oa
- JvpXvTPqbNoHOreiia9D+TGGkuhXGH8Y9QbX1c3UJvmmBMi4RbF8d/6ocOELbP1aCoPHRtSDVdz
- naJ5Tnb/NLussO4o0m4q7YxRzdZGr6FcUS6qZAzj5LCLBJ6oxJvfxinnmnWykQPhqbxZhLvblSx
- r7NZYNX1UdQuEn+2ZT0c0YeG5g6QtTKnkF8loJqx7bw4tWWtcrHSgOSZyZLC6tKKRYcoyP3pMiH
- hQaw7L6P1iudCvtaj/4sGF0i041gY2Mx1Ol4U0jttBnzaMP04UJzDS6Ijudz7Mq5mHuSLHxhi6k
- gqvYaYiK8IM3z2cPs4qd3CRiofbd1zkAA43/eEvi7EokCO6mdMfSHAAix/UlxSmHmlz0XiE8GXm
- YvwcD3/3N+A==
-X-Received: by 2002:a17:906:5192:10b0:c40:5ee3:8694 with SMTP id
- a640c23a62f3a-c49bdee7e16mr261532466b.4.1793196744873; 
- Wed, 28 Oct 2026 07:12:24 -0700 (PDT)
+ bh=Joolsl9I0RM147Yq5P0/o2a5p9AUCYnMyf5z3iKQ+lc=;
+ b=rc1GVU7+7G7cr8w6ptc0vxGzQM0QcQS9VLErHehCrYqdh7ZlM4CpXySnvgpeSG/jTN
+ azPBjkOqEhs1aBJ+jKiPAFIT8Hno0o09qm9G/TF5JqGBSw4vPnK9zIaV5bMYpa2U+LE7
+ Mi3LTtWZx/P9+deajGSPRmrGruhGY7ipJ1KF0Np9/ofw6G1q040CrHkIQuCiSLwrJugk
+ xnYxXZVVD/jp73e0uz9k+2p/S1yltq2fm6L3Kel21x3DRs8aIgcwap3go03zLaaAmkgx
+ 3Z7u3nJ93eEyjYHSjft7csSowqc1sdYOioT1Ga+t/Fu0j9pE8ThH/nF/U3eh9RbAY7uk
+ vAmw==
+X-Gm-Message-State: AFq9FYKbA4ONzn7iHzH39z1CMfFRmPhuh7Rh7WmsIi0y3mwWgCAYKQGT
+ cJmZgwc8qPGsrVXc7D2nj1EJrGH3jjO7VqIAX+Xz0BQmTlMD8Qkc3xkhquCpucFebsyjcwCjN4U
+ WItXu
+X-Gm-Gg: AYBFou1ZTz94qXfSEvKNCnBHSYVCOdvbC+lNFyJOtdATV8wEGPTgZpGZWZcClOiH9H2
+ AK05A4VcK288UDFpONvorHD+g5vlQiejlAadyCBQBE192xeR5mjXJ1fB4sMcuVg9Npo2DHUzybW
+ e+Ik5lNMeVGuMfLz/HAlw8RW2NtpRq/n3CPDMyiJuTm7D+XBljTYH8ZkeWOw/rkte3mMq/NvhBo
+ gKqkrovaQA8RD2dcP0qBqK7mhzsZtVDjJLvxgynqa1MiuljbrqYcolOqUy4NmU1V9BJ5g2QbwsK
+ XcbyI6zw5oSQtYiYaeGcB5AdaAB32/ZPMXktG0wWT+Y7EjgYZ+R3UzmfxhlR8n8pohQ2ho+PtBq
+ k3l7JjACJkPuj+ZdhxeEwPc6CpZyxx/U07K+/DZnBDdnH5UbS1esfhBobQWJO75xMxZoCbt9QP4
+ bu61Q+97mCxuheiri5XHEf+8YAan370mOGD4/3pM4Pt+0jwgjomT7aJMVIIcSmGSOFysLD0Nqvo
+ I8vUdOIlzCBFu32cO8LoMgW+tGt8+Ws3MK+KppeS3tfgLI/YFXoLPzhS7BUK1A9H9vJPePm9ky1
+ NOynUnySimFW1+gE7g3Kmt0xPQ1CC1E08QHNvS89FAtbSi8I+0TRnAIwR4r70NbazxWpbf+s5lR
+ djfsGY8MfQQ==
+X-Received: by 2002:a17:907:d645:b0:c34:db91:aa1e with SMTP id
+ a640c23a62f3a-c49bdfbbe19mr310838866b.4.1793196884565; 
+ Wed, 28 Oct 2026 07:14:44 -0700 (PDT)
 Received: from monster.taild06a60.ts.net (c-85-229-7-191.bbcust.telenor.se.
  [85.229.7.191]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c46bd4ea351sm606060666b.28.2026.10.28.07.12.23
+ a640c23a62f3a-c46bd524266sm630210266b.38.2026.10.28.07.14.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Oct 2026 07:12:24 -0700 (PDT)
+ Wed, 28 Oct 2026 07:14:44 -0700 (PDT)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
@@ -162,9 +162,9 @@ Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  jerome.forissier@arm.com, mkorpershoek@kernel.org, sjg@chromium.org,
  Jens Wiklander <jens.wiklander@linaro.org>,
  Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH v10 32/63] usb: dwc3: import from kernel v5.7
-Date: Wed, 28 Oct 2026 15:08:58 +0100
-Message-ID: <20261028140930.3025368-33-anders.roxell@linaro.org>
+Subject: [PATCH v10 61/63] usb: dwc3: import from kernel v6.16
+Date: Wed, 28 Oct 2026 15:09:27 +0100
+Message-ID: <20261028140930.3025368-62-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261028140930.3025368-1-anders.roxell@linaro.org>
 References: <20261028140930.3025368-1-anders.roxell@linaro.org>
@@ -183,14 +183,14 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Jens Wiklander <jens.wiklander@linaro.org>
 
-Sync Linux kernel dwc3 changes from v5.6 to v5.7.
+Sync Linux kernel dwc3 changes from v6.15 to v6.16.
 
 The following files are preserved across the import:
 Makefile Kconfig dwc3-meson-g12a.c dwc3-meson-gxl.c dwc3-omap.c
@@ -205,363 +205,542 @@ dwc3-rtk.c dwc3-st.c dwc3-xilinx.c host.c trace.c trace.h ulpi.c
 Note that this is a raw import and doesn't build.
 A fixup commit at the end of the series fixes that.
 
-List of commits: git log --oneline v5.6..v5.7
+List of commits: git log --oneline v6.15..v6.16
 Commits imported:
-00e21763f2c8 dwc3: Remove check for HWO flag in dwc3_gadget_ep_reclaim_trb_sg()
-49e0590e3a60 usb: dwc3: gadget: Fix request completion check
-d0550cd20e52 usb: dwc3: gadget: Do link recovery for SS and SSP
-d94ea5319813 usb: dwc3: gadget: Properly set maxpacket limit
-586f4335700f usb: dwc3: Fix GTXFIFOSIZ.TXFDEP macro name
-0227cc84c444 usb: dwc3: core: don't do suspend for device mode if already suspended
-4a1d042af420 usb: dwc3: Rework resets initialization to be more flexible
-0d3a97083e0c usb: dwc3: Rework clock initialization to be more flexible
-98ed256a4dba usb: dwc3: Add support for role-switch-default-mode binding
-8a0a13799744 usb: dwc3: Registering a role switch in the DRD code.
-7ba6b09fda5e usb: dwc3: core: add support for disabling SS instances in park mode
-2dedea035ae8 usb: dwc3: gadget: Wrap around when skip TRBs
-a114c4ca64bd usb: dwc3: gadget: Don't clear flags before transfer ended
+80e083943775 usb: dwc3: gadget: Fix TRB reclaim logic for short transfers and ZLPs
+630a1dec3b0e usb: dwc3: Abort suspend on soft disconnect failure
+170940f7e685 usb: dwc3: core: Don't touch resets and clocks
+613a2e655d4d usb: dwc3: core: Expose core driver as library
+850e634006f4 usb: dwc3: core: Avoid redundant system suspend/resume callbacks
+8da7644493b4 usb: dwc3: Specify maximum number of XHCI interrupters
 
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 ---
- drivers/usb/dwc3/core.c   | 29 ++++++-------
- drivers/usb/dwc3/core.h   | 18 ++++++++-
- drivers/usb/dwc3/gadget.c | 85 ++++++++++++++++++++++-----------------
- 3 files changed, 78 insertions(+), 54 deletions(-)
+ drivers/usb/dwc3/core.c   | 206 ++++++++++++++++++++++++++++----------
+ drivers/usb/dwc3/core.h   |   2 +
+ drivers/usb/dwc3/gadget.c |  24 ++---
+ drivers/usb/dwc3/glue.h   |  36 +++++++
+ 4 files changed, 199 insertions(+), 69 deletions(-)
+ create mode 100644 drivers/usb/dwc3/glue.h
 
 diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index 1d85c42b9c67..edc17155cb2b 100644
+index 66a08b527165..8002c23a5a02 100644
 --- a/drivers/usb/dwc3/core.c
 +++ b/drivers/usb/dwc3/core.c
-@@ -289,12 +289,6 @@ done:
+@@ -26,6 +26,7 @@
+ #include <linux/of_graph.h>
+ #include <linux/acpi.h>
+ #include <linux/pinctrl/consumer.h>
++#include <linux/pinctrl/devinfo.h>
+ #include <linux/reset.h>
+ #include <linux/bitfield.h>
+ 
+@@ -36,6 +37,7 @@
+ 
+ #include "core.h"
+ #include "gadget.h"
++#include "glue.h"
+ #include "io.h"
+ 
+ #include "debug.h"
+@@ -1699,6 +1701,7 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+ 	u8			tx_thr_num_pkt_prd = 0;
+ 	u8			tx_max_burst_prd = 0;
+ 	u8			tx_fifo_resize_max_num;
++	u16			num_hc_interrupters;
+ 
+ 	/* default to highest possible threshold */
+ 	lpm_nyet_threshold = 0xf;
+@@ -1719,6 +1722,9 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+ 	 */
+ 	tx_fifo_resize_max_num = 6;
+ 
++	/* default to a single XHCI interrupter */
++	num_hc_interrupters = 1;
++
+ 	dwc->maximum_speed = usb_get_maximum_speed(dev);
+ 	dwc->max_ssp_rate = usb_get_maximum_ssp_rate(dev);
+ 	dwc->dr_mode = usb_get_dr_mode(dev);
+@@ -1765,6 +1771,12 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+ 				&tx_thr_num_pkt_prd);
+ 	device_property_read_u8(dev, "snps,tx-max-burst-prd",
+ 				&tx_max_burst_prd);
++	device_property_read_u16(dev, "num-hc-interrupters",
++				 &num_hc_interrupters);
++	/* DWC3 core allowed to have a max of 8 interrupters */
++	if (num_hc_interrupters > 8)
++		num_hc_interrupters = 8;
++
+ 	dwc->do_fifo_resize = device_property_read_bool(dev,
+ 							"tx-fifo-resize");
+ 	if (dwc->do_fifo_resize)
+@@ -1851,6 +1863,8 @@ static void dwc3_get_properties(struct dwc3 *dwc)
+ 	dwc->tx_max_burst_prd = tx_max_burst_prd;
+ 
+ 	dwc->tx_fifo_resize_max_num = tx_fifo_resize_max_num;
++
++	dwc->num_hc_interrupters = num_hc_interrupters;
+ }
+ 
+ /* check whether the core supports IMOD */
+@@ -2148,27 +2162,16 @@ static struct power_supply *dwc3_get_usb_power_supply(struct dwc3 *dwc)
+ 	return usb_psy;
+ }
+ 
+-static int dwc3_probe(struct platform_device *pdev)
++int dwc3_core_probe(const struct dwc3_probe_data *data)
+ {
+-	struct device		*dev = &pdev->dev;
+-	struct resource		*res, dwc_res;
++	struct dwc3		*dwc = data->dwc;
++	struct device		*dev = dwc->dev;
++	struct resource		dwc_res;
+ 	unsigned int		hw_mode;
+ 	void __iomem		*regs;
+-	struct dwc3		*dwc;
++	struct resource		*res = data->res;
+ 	int			ret;
+ 
+-	dwc = devm_kzalloc(dev, sizeof(*dwc), GFP_KERNEL);
+-	if (!dwc)
+-		return -ENOMEM;
+-
+-	dwc->dev = dev;
+-
+-	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+-	if (!res) {
+-		dev_err(dev, "missing memory resource\n");
+-		return -ENODEV;
+-	}
+-
+ 	dwc->xhci_resources[0].start = res->start;
+ 	dwc->xhci_resources[0].end = dwc->xhci_resources[0].start +
+ 					DWC3_XHCI_REGS_END;
+@@ -2208,15 +2211,17 @@ static int dwc3_probe(struct platform_device *pdev)
+ 	if (IS_ERR(dwc->usb_psy))
+ 		return dev_err_probe(dev, PTR_ERR(dwc->usb_psy), "couldn't get usb power supply\n");
+ 
+-	dwc->reset = devm_reset_control_array_get_optional_shared(dev);
+-	if (IS_ERR(dwc->reset)) {
+-		ret = PTR_ERR(dwc->reset);
+-		goto err_put_psy;
+-	}
++	if (!data->ignore_clocks_and_resets) {
++		dwc->reset = devm_reset_control_array_get_optional_shared(dev);
++		if (IS_ERR(dwc->reset)) {
++			ret = PTR_ERR(dwc->reset);
++			goto err_put_psy;
++		}
+ 
+-	ret = dwc3_get_clocks(dwc);
+-	if (ret)
+-		goto err_put_psy;
++		ret = dwc3_get_clocks(dwc);
++		if (ret)
++			goto err_put_psy;
++	}
+ 
+ 	ret = reset_control_deassert(dwc->reset);
+ 	if (ret)
+@@ -2232,7 +2237,7 @@ static int dwc3_probe(struct platform_device *pdev)
+ 		goto err_disable_clks;
+ 	}
+ 
+-	platform_set_drvdata(pdev, dwc);
++	dev_set_drvdata(dev, dwc);
+ 	dwc3_cache_hwparams(dwc);
+ 
+ 	if (!dwc->sysdev_is_parent &&
+@@ -2327,12 +2332,35 @@ err_put_psy:
+ 
+ 	return ret;
+ }
++EXPORT_SYMBOL_GPL(dwc3_core_probe);
+ 
+-static void dwc3_remove(struct platform_device *pdev)
++static int dwc3_probe(struct platform_device *pdev)
+ {
+-	struct dwc3	*dwc = platform_get_drvdata(pdev);
++	struct dwc3_probe_data probe_data = {};
++	struct resource *res;
++	struct dwc3 *dwc;
++
++	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
++	if (!res) {
++		dev_err(&pdev->dev, "missing memory resource\n");
++		return -ENODEV;
++	}
++
++	dwc = devm_kzalloc(&pdev->dev, sizeof(*dwc), GFP_KERNEL);
++	if (!dwc)
++		return -ENOMEM;
+ 
+-	pm_runtime_get_sync(&pdev->dev);
++	dwc->dev = &pdev->dev;
++
++	probe_data.dwc = dwc;
++	probe_data.res = res;
++
++	return dwc3_core_probe(&probe_data);
++}
++
++void dwc3_core_remove(struct dwc3 *dwc)
++{
++	pm_runtime_get_sync(dwc->dev);
+ 
+ 	dwc3_core_exit_mode(dwc);
+ 	dwc3_debugfs_exit(dwc);
+@@ -2340,22 +2368,28 @@ static void dwc3_remove(struct platform_device *pdev)
+ 	dwc3_core_exit(dwc);
+ 	dwc3_ulpi_exit(dwc);
+ 
+-	pm_runtime_allow(&pdev->dev);
+-	pm_runtime_disable(&pdev->dev);
+-	pm_runtime_dont_use_autosuspend(&pdev->dev);
+-	pm_runtime_put_noidle(&pdev->dev);
++	pm_runtime_allow(dwc->dev);
++	pm_runtime_disable(dwc->dev);
++	pm_runtime_dont_use_autosuspend(dwc->dev);
++	pm_runtime_put_noidle(dwc->dev);
+ 	/*
+ 	 * HACK: Clear the driver data, which is currently accessed by parent
+ 	 * glue drivers, before allowing the parent to suspend.
+ 	 */
+-	platform_set_drvdata(pdev, NULL);
+-	pm_runtime_set_suspended(&pdev->dev);
++	dev_set_drvdata(dwc->dev, NULL);
++	pm_runtime_set_suspended(dwc->dev);
+ 
+ 	dwc3_free_event_buffers(dwc);
+ 
+ 	if (dwc->usb_psy)
+ 		power_supply_put(dwc->usb_psy);
+ }
++EXPORT_SYMBOL_GPL(dwc3_core_remove);
++
++static void dwc3_remove(struct platform_device *pdev)
++{
++	dwc3_core_remove(platform_get_drvdata(pdev));
++}
+ 
+ #ifdef CONFIG_PM
+ static int dwc3_core_init_for_resume(struct dwc3 *dwc)
+@@ -2388,6 +2422,7 @@ static int dwc3_suspend_common(struct dwc3 *dwc, pm_message_t msg)
+ {
+ 	u32 reg;
+ 	int i;
++	int ret;
+ 
+ 	if (!pm_runtime_suspended(dwc->dev) && !PMSG_IS_AUTO(msg)) {
+ 		dwc->susphy_state = (dwc3_readl(dwc->regs, DWC3_GUSB2PHYCFG(0)) &
+@@ -2406,7 +2441,9 @@ static int dwc3_suspend_common(struct dwc3 *dwc, pm_message_t msg)
+ 	case DWC3_GCTL_PRTCAP_DEVICE:
+ 		if (pm_runtime_suspended(dwc->dev))
+ 			break;
+-		dwc3_gadget_suspend(dwc);
++		ret = dwc3_gadget_suspend(dwc);
++		if (ret)
++			return ret;
+ 		synchronize_irq(dwc->irq_gadget);
+ 		dwc3_core_exit(dwc);
+ 		break;
+@@ -2441,7 +2478,9 @@ static int dwc3_suspend_common(struct dwc3 *dwc, pm_message_t msg)
+ 			break;
+ 
+ 		if (dwc->current_otg_role == DWC3_OTG_ROLE_DEVICE) {
+-			dwc3_gadget_suspend(dwc);
++			ret = dwc3_gadget_suspend(dwc);
++			if (ret)
++				return ret;
+ 			synchronize_irq(dwc->irq_gadget);
+ 		}
+ 
+@@ -2544,9 +2583,8 @@ static int dwc3_runtime_checks(struct dwc3 *dwc)
  	return 0;
  }
  
--static const struct clk_bulk_data dwc3_core_clks[] = {
--	{ .id = "ref" },
--	{ .id = "bus_early" },
--	{ .id = "suspend" },
--};
--
- /*
-  * dwc3_frame_length_adjustment - Adjusts frame length if required
-  * @dwc3: Pointer to our controller context structure
-@@ -1029,6 +1023,9 @@ static int dwc3_core_init(struct dwc3 *dwc)
- 		if (dwc->dis_tx_ipgap_linecheck_quirk)
- 			reg |= DWC3_GUCTL1_TX_IPGAP_LINECHECK_DIS;
+-static int dwc3_runtime_suspend(struct device *dev)
++int dwc3_runtime_suspend(struct dwc3 *dwc)
+ {
+-	struct dwc3     *dwc = dev_get_drvdata(dev);
+ 	int		ret;
  
-+		if (dwc->parkmode_disable_ss_quirk)
-+			reg |= DWC3_GUCTL1_PARKMODE_DISABLE_SS;
-+
- 		dwc3_writel(dwc->regs, DWC3_GUCTL1, reg);
- 	}
+ 	if (dwc3_runtime_checks(dwc))
+@@ -2558,10 +2596,11 @@ static int dwc3_runtime_suspend(struct device *dev)
  
-@@ -1342,6 +1339,8 @@ static void dwc3_get_properties(struct dwc3 *dwc)
- 				"snps,dis-del-phy-power-chg-quirk");
- 	dwc->dis_tx_ipgap_linecheck_quirk = device_property_read_bool(dev,
- 				"snps,dis-tx-ipgap-linecheck-quirk");
-+	dwc->parkmode_disable_ss_quirk = device_property_read_bool(dev,
-+				"snps,parkmode-disable-ss-quirk");
+ 	return 0;
+ }
++EXPORT_SYMBOL_GPL(dwc3_runtime_suspend);
  
- 	dwc->tx_de_emphasis_quirk = device_property_read_bool(dev,
- 				"snps,tx_de_emphasis_quirk");
-@@ -1441,11 +1440,6 @@ static int dwc3_probe(struct platform_device *pdev)
- 	if (!dwc)
- 		return -ENOMEM;
+-static int dwc3_runtime_resume(struct device *dev)
++int dwc3_runtime_resume(struct dwc3 *dwc)
+ {
+-	struct dwc3     *dwc = dev_get_drvdata(dev);
++	struct device *dev = dwc->dev;
+ 	int		ret;
  
--	dwc->clks = devm_kmemdup(dev, dwc3_core_clks, sizeof(dwc3_core_clks),
--				 GFP_KERNEL);
--	if (!dwc->clks)
--		return -ENOMEM;
--
- 	dwc->dev = dev;
+ 	ret = dwc3_resume_common(dwc, PMSG_AUTO_RESUME);
+@@ -2571,7 +2610,7 @@ static int dwc3_runtime_resume(struct device *dev)
+ 	switch (dwc->current_dr_role) {
+ 	case DWC3_GCTL_PRTCAP_DEVICE:
+ 		if (dwc->pending_events) {
+-			pm_runtime_put(dwc->dev);
++			pm_runtime_put(dev);
+ 			dwc->pending_events = false;
+ 			enable_irq(dwc->irq_gadget);
+ 		}
+@@ -2586,10 +2625,11 @@ static int dwc3_runtime_resume(struct device *dev)
  
- 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
-@@ -1476,22 +1470,23 @@ static int dwc3_probe(struct platform_device *pdev)
+ 	return 0;
+ }
++EXPORT_SYMBOL_GPL(dwc3_runtime_resume);
  
- 	dwc3_get_properties(dwc);
- 
--	dwc->reset = devm_reset_control_get_optional_shared(dev, NULL);
-+	dwc->reset = devm_reset_control_array_get(dev, true, true);
- 	if (IS_ERR(dwc->reset))
- 		return PTR_ERR(dwc->reset);
- 
- 	if (dev->of_node) {
--		dwc->num_clks = ARRAY_SIZE(dwc3_core_clks);
--
--		ret = devm_clk_bulk_get(dev, dwc->num_clks, dwc->clks);
-+		ret = devm_clk_bulk_get_all(dev, &dwc->clks);
- 		if (ret == -EPROBE_DEFER)
- 			return ret;
- 		/*
- 		 * Clocks are optional, but new DT platforms should support all
- 		 * clocks as required by the DT-binding.
- 		 */
--		if (ret)
-+		if (ret < 0)
- 			dwc->num_clks = 0;
-+		else
-+			dwc->num_clks = ret;
-+
- 	}
- 
- 	ret = reset_control_deassert(dwc->reset);
-@@ -1637,6 +1632,8 @@ static int dwc3_suspend_common(struct dwc3 *dwc, pm_message_t msg)
+-static int dwc3_runtime_idle(struct device *dev)
++int dwc3_runtime_idle(struct dwc3 *dwc)
+ {
+-	struct dwc3     *dwc = dev_get_drvdata(dev);
++	struct device *dev = dwc->dev;
  
  	switch (dwc->current_dr_role) {
  	case DWC3_GCTL_PRTCAP_DEVICE:
-+		if (pm_runtime_suspended(dwc->dev))
-+			break;
- 		spin_lock_irqsave(&dwc->lock, flags);
- 		dwc3_gadget_suspend(dwc);
- 		spin_unlock_irqrestore(&dwc->lock, flags);
-diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-index 77c4a9abe365..4c171a8e215f 100644
---- a/drivers/usb/dwc3/core.h
-+++ b/drivers/usb/dwc3/core.h
-@@ -25,6 +25,7 @@
- #include <linux/usb/ch9.h>
- #include <linux/usb/gadget.h>
- #include <linux/usb/otg.h>
-+#include <linux/usb/role.h>
- #include <linux/ulpi/interface.h>
+@@ -2607,12 +2647,28 @@ static int dwc3_runtime_idle(struct device *dev)
  
- #include <linux/phy/phy.h>
-@@ -249,6 +250,7 @@
- #define DWC3_GUCTL_HSTINAUTORETRY	BIT(14)
- 
- /* Global User Control 1 Register */
-+#define DWC3_GUCTL1_PARKMODE_DISABLE_SS	BIT(17)
- #define DWC3_GUCTL1_TX_IPGAP_LINECHECK_DIS	BIT(28)
- #define DWC3_GUCTL1_DEV_L1_EXIT_BY_HW	BIT(24)
- 
-@@ -305,10 +307,14 @@
- 
- /* Global TX Fifo Size Register */
- #define DWC31_GTXFIFOSIZ_TXFRAMNUM	BIT(15)		/* DWC_usb31 only */
--#define DWC31_GTXFIFOSIZ_TXFDEF(n)	((n) & 0x7fff)	/* DWC_usb31 only */
--#define DWC3_GTXFIFOSIZ_TXFDEF(n)	((n) & 0xffff)
-+#define DWC31_GTXFIFOSIZ_TXFDEP(n)	((n) & 0x7fff)	/* DWC_usb31 only */
-+#define DWC3_GTXFIFOSIZ_TXFDEP(n)	((n) & 0xffff)
- #define DWC3_GTXFIFOSIZ_TXFSTADDR(n)	((n) & 0xffff0000)
- 
-+/* Global RX Fifo Size Register */
-+#define DWC31_GRXFIFOSIZ_RXFDEP(n)	((n) & 0x7fff)	/* DWC_usb31 only */
-+#define DWC3_GRXFIFOSIZ_RXFDEP(n)	((n) & 0xffff)
+ 	return 0;
+ }
++EXPORT_SYMBOL_GPL(dwc3_runtime_idle);
 +
- /* Global Event Size Registers */
- #define DWC3_GEVNTSIZ_INTMASK		BIT(31)
- #define DWC3_GEVNTSIZ_SIZE(n)		((n) & 0xffff)
-@@ -953,6 +959,9 @@ struct dwc3_scratchpad_array {
-  * @hsphy_mode: UTMI phy mode, one of following:
-  *		- USBPHY_INTERFACE_MODE_UTMI
-  *		- USBPHY_INTERFACE_MODE_UTMIW
-+ * @role_sw: usb_role_switch handle
-+ * @role_switch_default_mode: default operation mode of controller while
-+ *			usb role is USB_ROLE_NONE.
-  * @usb2_phy: pointer to USB2 PHY
-  * @usb3_phy: pointer to USB3 PHY
-  * @usb2_generic_phy: pointer to USB2 PHY
-@@ -1024,6 +1033,8 @@ struct dwc3_scratchpad_array {
-  *			change quirk.
-  * @dis_tx_ipgap_linecheck_quirk: set if we disable u2mac linestate
-  *			check during HS transmit.
-+ * @parkmode_disable_ss_quirk: set if we need to disable all SuperSpeed
-+ *			instances in park mode.
-  * @tx_de_emphasis_quirk: set if we enable Tx de-emphasis quirk
-  * @tx_de_emphasis: Tx de-emphasis value
-  * 	0	- -6dB de-emphasis
-@@ -1086,6 +1097,8 @@ struct dwc3 {
- 	struct extcon_dev	*edev;
- 	struct notifier_block	edev_nb;
- 	enum usb_phy_interface	hsphy_mode;
-+	struct usb_role_switch	*role_sw;
-+	enum usb_dr_mode	role_switch_default_mode;
++static int dwc3_plat_runtime_suspend(struct device *dev)
++{
++	return dwc3_runtime_suspend(dev_get_drvdata(dev));
++}
++
++static int dwc3_plat_runtime_resume(struct device *dev)
++{
++	return dwc3_runtime_resume(dev_get_drvdata(dev));
++}
++
++static int dwc3_plat_runtime_idle(struct device *dev)
++{
++	return dwc3_runtime_idle(dev_get_drvdata(dev));
++}
+ #endif /* CONFIG_PM */
  
- 	u32			fladj;
- 	u32			irq_gadget;
-@@ -1215,6 +1228,7 @@ struct dwc3 {
- 	unsigned		dis_u2_freeclk_exists_quirk:1;
- 	unsigned		dis_del_phy_power_chg_quirk:1;
- 	unsigned		dis_tx_ipgap_linecheck_quirk:1;
-+	unsigned		parkmode_disable_ss_quirk:1;
+ #ifdef CONFIG_PM_SLEEP
+-static int dwc3_suspend(struct device *dev)
++int dwc3_pm_suspend(struct dwc3 *dwc)
+ {
+-	struct dwc3	*dwc = dev_get_drvdata(dev);
++	struct device *dev = dwc->dev;
+ 	int		ret;
  
- 	unsigned		tx_de_emphasis_quirk:1;
- 	unsigned		tx_de_emphasis:2;
-diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index 1e00bf2d65a2..585cb3deea7a 100644
---- a/drivers/usb/dwc3/gadget.c
-+++ b/drivers/usb/dwc3/gadget.c
-@@ -1521,7 +1521,7 @@ static void dwc3_gadget_ep_skip_trbs(struct dwc3_ep *dep, struct dwc3_request *r
- 	for (i = 0; i < req->num_trbs; i++) {
- 		struct dwc3_trb *trb;
+ 	ret = dwc3_suspend_common(dwc, PMSG_SUSPEND);
+@@ -2623,10 +2679,11 @@ static int dwc3_suspend(struct device *dev)
  
--		trb = req->trb + i;
-+		trb = &dep->trb_pool[dep->trb_dequeue];
- 		trb->ctrl &= ~DWC3_TRB_CTRL_HWO;
- 		dwc3_ep_inc_deq(dep);
+ 	return 0;
+ }
++EXPORT_SYMBOL_GPL(dwc3_pm_suspend);
+ 
+-static int dwc3_resume(struct device *dev)
++int dwc3_pm_resume(struct dwc3 *dwc)
+ {
+-	struct dwc3	*dwc = dev_get_drvdata(dev);
++	struct device *dev = dwc->dev;
+ 	int		ret = 0;
+ 
+ 	pinctrl_pm_select_default_state(dev);
+@@ -2645,10 +2702,10 @@ out:
+ 
+ 	return ret;
+ }
++EXPORT_SYMBOL_GPL(dwc3_pm_resume);
+ 
+-static void dwc3_complete(struct device *dev)
++void dwc3_pm_complete(struct dwc3 *dwc)
+ {
+-	struct dwc3	*dwc = dev_get_drvdata(dev);
+ 	u32		reg;
+ 
+ 	if (dwc->current_dr_role == DWC3_GCTL_PRTCAP_HOST &&
+@@ -2658,21 +2715,60 @@ static void dwc3_complete(struct device *dev)
+ 		dwc3_writel(dwc->regs, DWC3_GUCTL3, reg);
  	}
-@@ -1728,7 +1728,6 @@ static int __dwc3_gadget_wakeup(struct dwc3 *dwc)
- 	u32			reg;
- 
- 	u8			link_state;
--	u8			speed;
- 
- 	/*
- 	 * According to the Databook Remote wakeup request should
-@@ -1738,16 +1737,13 @@ static int __dwc3_gadget_wakeup(struct dwc3 *dwc)
- 	 */
- 	reg = dwc3_readl(dwc->regs, DWC3_DSTS);
- 
--	speed = reg & DWC3_DSTS_CONNECTSPD;
--	if ((speed == DWC3_DSTS_SUPERSPEED) ||
--	    (speed == DWC3_DSTS_SUPERSPEED_PLUS))
--		return 0;
--
- 	link_state = DWC3_DSTS_USBLNKST(reg);
- 
- 	switch (link_state) {
-+	case DWC3_LINK_STATE_RESET:
- 	case DWC3_LINK_STATE_RX_DET:	/* in HS, means Early Suspend */
- 	case DWC3_LINK_STATE_U3:	/* in HS, means SUSPEND */
-+	case DWC3_LINK_STATE_RESUME:
- 		break;
- 	default:
- 		return -EINVAL;
-@@ -2227,7 +2223,6 @@ static int dwc3_gadget_init_in_endpoint(struct dwc3_ep *dep)
- {
- 	struct dwc3 *dwc = dep->dwc;
- 	int mdwidth;
--	int kbytes;
- 	int size;
- 
- 	mdwidth = DWC3_MDWIDTH(dwc->hwparams.hwparams0);
-@@ -2236,24 +2231,24 @@ static int dwc3_gadget_init_in_endpoint(struct dwc3_ep *dep)
- 
- 	size = dwc3_readl(dwc->regs, DWC3_GTXFIFOSIZ(dep->number >> 1));
- 	if (dwc3_is_usb31(dwc))
--		size = DWC31_GTXFIFOSIZ_TXFDEF(size);
-+		size = DWC31_GTXFIFOSIZ_TXFDEP(size);
- 	else
--		size = DWC3_GTXFIFOSIZ_TXFDEF(size);
-+		size = DWC3_GTXFIFOSIZ_TXFDEP(size);
- 
- 	/* FIFO Depth is in MDWDITH bytes. Multiply */
- 	size *= mdwidth;
- 
--	kbytes = size / 1024;
--	if (kbytes == 0)
--		kbytes = 1;
--
- 	/*
--	 * FIFO sizes account an extra MDWIDTH * (kbytes + 1) bytes for
--	 * internal overhead. We don't really know how these are used,
--	 * but documentation say it exists.
-+	 * To meet performance requirement, a minimum TxFIFO size of 3x
-+	 * MaxPacketSize is recommended for endpoints that support burst and a
-+	 * minimum TxFIFO size of 2x MaxPacketSize for endpoints that don't
-+	 * support burst. Use those numbers and we can calculate the max packet
-+	 * limit as below.
- 	 */
--	size -= mdwidth * (kbytes + 1);
--	size /= kbytes;
-+	if (dwc->maximum_speed >= USB_SPEED_SUPER)
-+		size /= 3;
-+	else
-+		size /= 2;
- 
- 	usb_ep_set_maxpacket_limit(&dep->endpoint, size);
- 
-@@ -2271,8 +2266,39 @@ static int dwc3_gadget_init_in_endpoint(struct dwc3_ep *dep)
- static int dwc3_gadget_init_out_endpoint(struct dwc3_ep *dep)
- {
- 	struct dwc3 *dwc = dep->dwc;
-+	int mdwidth;
-+	int size;
+ }
++EXPORT_SYMBOL_GPL(dwc3_pm_complete);
 +
-+	mdwidth = DWC3_MDWIDTH(dwc->hwparams.hwparams0);
- 
--	usb_ep_set_maxpacket_limit(&dep->endpoint, 1024);
-+	/* MDWIDTH is represented in bits, convert to bytes */
-+	mdwidth /= 8;
-+
-+	/* All OUT endpoints share a single RxFIFO space */
-+	size = dwc3_readl(dwc->regs, DWC3_GRXFIFOSIZ(0));
-+	if (dwc3_is_usb31(dwc))
-+		size = DWC31_GRXFIFOSIZ_RXFDEP(size);
-+	else
-+		size = DWC3_GRXFIFOSIZ_RXFDEP(size);
-+
-+	/* FIFO depth is in MDWDITH bytes */
-+	size *= mdwidth;
++int dwc3_pm_prepare(struct dwc3 *dwc)
++{
++	struct device *dev = dwc->dev;
 +
 +	/*
-+	 * To meet performance requirement, a minimum recommended RxFIFO size
-+	 * is defined as follow:
-+	 * RxFIFO size >= (3 x MaxPacketSize) +
-+	 * (3 x 8 bytes setup packets size) + (16 bytes clock crossing margin)
-+	 *
-+	 * Then calculate the max packet limit as below.
++	 * Indicate to the PM core that it may safely leave the device in
++	 * runtime suspend if runtime-suspended already in device mode.
 +	 */
-+	size -= (3 * 8) + 16;
-+	if (size < 0)
-+		size = 0;
-+	else
-+		size /= 3;
++	if (dwc->current_dr_role == DWC3_GCTL_PRTCAP_DEVICE &&
++	    pm_runtime_suspended(dev) &&
++	    !dev_pinctrl(dev))
++		return 1;
 +
-+	usb_ep_set_maxpacket_limit(&dep->endpoint, size);
- 	dep->endpoint.max_streams = 15;
- 	dep->endpoint.ops = &dwc3_gadget_ep_ops;
- 	list_add_tail(&dep->endpoint.ep_list,
-@@ -2457,9 +2483,6 @@ static int dwc3_gadget_ep_reclaim_trb_sg(struct dwc3_ep *dep,
- 	for_each_sg(sg, s, pending, i) {
- 		trb = &dep->trb_pool[dep->trb_dequeue];
++	return 0;
++}
++EXPORT_SYMBOL_GPL(dwc3_pm_prepare);
++
++static int dwc3_plat_suspend(struct device *dev)
++{
++	return dwc3_pm_suspend(dev_get_drvdata(dev));
++}
++
++static int dwc3_plat_resume(struct device *dev)
++{
++	return dwc3_pm_resume(dev_get_drvdata(dev));
++}
++
++static void dwc3_plat_complete(struct device *dev)
++{
++	dwc3_pm_complete(dev_get_drvdata(dev));
++}
++
++static int dwc3_plat_prepare(struct device *dev)
++{
++	return dwc3_pm_prepare(dev_get_drvdata(dev));
++}
+ #else
+-#define dwc3_complete NULL
++#define dwc3_plat_complete NULL
++#define dwc3_plat_prepare NULL
+ #endif /* CONFIG_PM_SLEEP */
  
--		if (trb->ctrl & DWC3_TRB_CTRL_HWO)
--			break;
+ static const struct dev_pm_ops dwc3_dev_pm_ops = {
+-	SET_SYSTEM_SLEEP_PM_OPS(dwc3_suspend, dwc3_resume)
+-	.complete = dwc3_complete,
 -
- 		req->sg = sg_next(s);
- 		req->num_pending_sgs--;
++	SET_SYSTEM_SLEEP_PM_OPS(dwc3_plat_suspend, dwc3_plat_resume)
++	.complete = dwc3_plat_complete,
++	.prepare = dwc3_plat_prepare,
+ 	/*
+ 	 * Runtime suspend halts the controller on disconnection. It relies on
+ 	 * platforms with custom connection notification to start the controller
+ 	 * again.
+ 	 */
+-	SET_RUNTIME_PM_OPS(dwc3_runtime_suspend, dwc3_runtime_resume,
+-			dwc3_runtime_idle)
++	SET_RUNTIME_PM_OPS(dwc3_plat_runtime_suspend, dwc3_plat_runtime_resume,
++			   dwc3_plat_runtime_idle)
+ };
  
-@@ -2484,14 +2507,7 @@ static int dwc3_gadget_ep_reclaim_trb_linear(struct dwc3_ep *dep,
+ #ifdef CONFIG_OF
+diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
+index 27eae4cf223d..d5b985fa12f4 100644
+--- a/drivers/usb/dwc3/core.h
++++ b/drivers/usb/dwc3/core.h
+@@ -1083,6 +1083,7 @@ struct dwc3_scratchpad_array {
+  * @tx_max_burst_prd: max periodic ESS transmit burst size
+  * @tx_fifo_resize_max_num: max number of fifos allocated during txfifo resize
+  * @clear_stall_protocol: endpoint number that requires a delayed status phase
++ * @num_hc_interrupters: number of host controller interrupters
+  * @hsphy_interface: "utmi" or "ulpi"
+  * @connected: true when we're connected to a host, false otherwise
+  * @softconnect: true when gadget connect is called, false when disconnect runs
+@@ -1333,6 +1334,7 @@ struct dwc3 {
+ 	u8			tx_max_burst_prd;
+ 	u8			tx_fifo_resize_max_num;
+ 	u8			clear_stall_protocol;
++	u16			num_hc_interrupters;
  
- static bool dwc3_gadget_ep_request_completed(struct dwc3_request *req)
- {
--	/*
--	 * For OUT direction, host may send less than the setup
--	 * length. Return true for all OUT requests.
--	 */
--	if (!req->direction)
--		return true;
--
--	return req->request.actual == req->request.length;
-+	return req->num_pending_sgs == 0;
- }
+ 	const char		*hsphy_interface;
  
- static int dwc3_gadget_ep_cleanup_completed_request(struct dwc3_ep *dep,
-@@ -2515,8 +2531,7 @@ static int dwc3_gadget_ep_cleanup_completed_request(struct dwc3_ep *dep,
- 
- 	req->request.actual = req->request.length - req->remaining;
- 
--	if (!dwc3_gadget_ep_request_completed(req) ||
--			req->num_pending_sgs) {
-+	if (!dwc3_gadget_ep_request_completed(req)) {
- 		__dwc3_gadget_kick_transfer(dep);
- 		goto out;
- 	}
-@@ -2570,10 +2585,8 @@ static void dwc3_gadget_endpoint_transfer_in_progress(struct dwc3_ep *dep,
- 
- 	dwc3_gadget_ep_cleanup_completed_requests(dep, event, status);
- 
--	if (stop) {
-+	if (stop)
- 		dwc3_stop_active_transfer(dep, true, true);
--		dep->flags = DWC3_EP_ENABLED;
--	}
+diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+index 321361288935..74968f93d4a3 100644
+--- a/drivers/usb/dwc3/gadget.c
++++ b/drivers/usb/dwc3/gadget.c
+@@ -3516,7 +3516,7 @@ static int dwc3_gadget_ep_reclaim_completed_trb(struct dwc3_ep *dep,
+ 	 * We're going to do that here to avoid problems of HW trying
+ 	 * to use bogus TRBs for transfers.
+ 	 */
+-	if (chain && (trb->ctrl & DWC3_TRB_CTRL_HWO))
++	if (trb->ctrl & DWC3_TRB_CTRL_HWO)
+ 		trb->ctrl &= ~DWC3_TRB_CTRL_HWO;
  
  	/*
- 	 * WORKAROUND: This is the 2nd half of U1/U2 -> U0 workaround.
+@@ -4821,26 +4821,22 @@ int dwc3_gadget_suspend(struct dwc3 *dwc)
+ 	int ret;
+ 
+ 	ret = dwc3_gadget_soft_disconnect(dwc);
+-	if (ret)
+-		goto err;
+-
+-	spin_lock_irqsave(&dwc->lock, flags);
+-	if (dwc->gadget_driver)
+-		dwc3_disconnect_gadget(dwc);
+-	spin_unlock_irqrestore(&dwc->lock, flags);
+-
+-	return 0;
+-
+-err:
+ 	/*
+ 	 * Attempt to reset the controller's state. Likely no
+ 	 * communication can be established until the host
+ 	 * performs a port reset.
+ 	 */
+-	if (dwc->softconnect)
++	if (ret && dwc->softconnect) {
+ 		dwc3_gadget_soft_connect(dwc);
++		return -EAGAIN;
++	}
+ 
+-	return ret;
++	spin_lock_irqsave(&dwc->lock, flags);
++	if (dwc->gadget_driver)
++		dwc3_disconnect_gadget(dwc);
++	spin_unlock_irqrestore(&dwc->lock, flags);
++
++	return 0;
+ }
+ 
+ int dwc3_gadget_resume(struct dwc3 *dwc)
+diff --git a/drivers/usb/dwc3/glue.h b/drivers/usb/dwc3/glue.h
+new file mode 100644
+index 000000000000..2efd00e763be
+--- /dev/null
++++ b/drivers/usb/dwc3/glue.h
+@@ -0,0 +1,36 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * glue.h - DesignWare USB3 DRD glue header
++ */
++
++#ifndef __DRIVERS_USB_DWC3_GLUE_H
++#define __DRIVERS_USB_DWC3_GLUE_H
++
++#include <linux/types.h>
++#include "core.h"
++
++/**
++ * dwc3_probe_data: Initialization parameters passed to dwc3_core_probe()
++ * @dwc: Reference to dwc3 context structure
++ * @res: resource for the DWC3 core mmio region
++ * @ignore_clocks_and_resets: clocks and resets defined for the device should
++ *		be ignored by the DWC3 core, as they are managed by the glue
++ */
++struct dwc3_probe_data {
++	struct dwc3 *dwc;
++	struct resource *res;
++	bool ignore_clocks_and_resets;
++};
++
++int dwc3_core_probe(const struct dwc3_probe_data *data);
++void dwc3_core_remove(struct dwc3 *dwc);
++
++int dwc3_runtime_suspend(struct dwc3 *dwc);
++int dwc3_runtime_resume(struct dwc3 *dwc);
++int dwc3_runtime_idle(struct dwc3 *dwc);
++int dwc3_pm_suspend(struct dwc3 *dwc);
++int dwc3_pm_resume(struct dwc3 *dwc);
++void dwc3_pm_complete(struct dwc3 *dwc);
++int dwc3_pm_prepare(struct dwc3 *dwc);
++
++#endif
 -- 
 2.53.0
 
