@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06911606A31A
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 06:13:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DE5D606A31A
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 06:14:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=FmsEe8mU;
-	dkim=pass (2048-bit key, unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=gc7MvEvC
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=um69awfO;
+	dkim=pass (2048-bit key, unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=VWBcVZ3C
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CA9F180DC4;
-	Wed, 28 Oct 2026 06:13:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6A62180E7F;
+	Wed, 28 Oct 2026 06:14:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dZzuPTmOz8FI; Wed, 28 Oct 2026 06:13:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D722080815
+ id ccJl0RiXHYwq; Wed, 28 Oct 2026 06:14:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8360480E79
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793168036;
-	b=nY9hB1Wz8T1cJutkG3/qwq+iiwZh0sXdcOAbfECXGtpTuAczfbskypWHCh4Rka/E13Tx
-	 r2ehW+UlwiYJ7KC4i16lHl03VYOHf5zo/DdYdWEd/rzH7JAxFf6JA07dQxXfjvDWwdkZW
-	 S2LroU33GtQgiwSvuF5YnJaUK3iJt21A+3KoxJGSsLtLahNN8BOPmXKb5M0Kbnn0EXuXE
-	 Tx1fdw9SW4tDmVauMo882U27NnpRUebjHBjtVZjgnqqOrgKAnkW1SQwJ8TCu3TTVBIOrA
-	 0J/7Y9CkgH9kSF/1mdDK69HuW8Q+lPcnb2U1m8Ar38T7S2XHzKHCpALwr0AKKkRIUEg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793168043;
+	b=bZYxeSVITo8i+q0M1f6bJ30PZI42nVBFT1fiyBRSbD+j/Y2tdOZ0hlW5jEasUI1Te3Lc
+	 GQ30NQUsqmpfi4WCBTPBrEWlRjlRYR3bvilKerna7Uoc/gKWgwXERanlaTv+WnkLGBJ1G
+	 aNfV9zb8BwoAM2SyMzU/DxXegngcbr1ziwiSYBJLxYRqgBl+qo6xJg/KNjxiSPaVkmwFg
+	 UHJXvO8O/FbZxOpau3B3jHGNbtmOgQkyuGHZhnSf0P8zsIC3Uio5eY0pVlOS/qPesA8HK
+	 MiWLr9R5TqsRj7hYjZ8PlDNvslINhVAxsYwsnkUQc6Gq2P5l/kDcZFOL/pRvA255CTA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793168036;
+	c=relaxed/relaxed; t=1793168043;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,107 +32,99 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Last-TLS-Session-Version:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=Cn93WHUJgLQrVqzf3QhBJLSPKxNqJ1kspitS8Ty+PmM=;
-	b=s7PwDxAkZq75NBfHY4fDSLVR6NZCDEu+UZ+lA3MSRem1286hynsQBCjKMxtYEXWRIpwP
-	 DS+Kr7KyfQjfdppsETBMMrwhA+gmi3aMrOzFkMGY1UALAefvceOyeZRcKrjeIgmay4loD
-	 QlxiCZPhh7rfC+OxlA1YYQK1fGrX5YomnNsHw43lfJUlTWFowFuuJMK9pBjRzq+0jiOIX
-	 qrqldsXMEgZa7b2qB7n5VCjygsecPeh/3njjIBfe7vJ9L4130l9bAy3Sn1OWNYYj9JXpk
-	 7gkQdnJOASh1yMqCtnX957/XaMPQvoPbyB+lZYfkLXbMzy6H9Adlu3g4SDevs1dNXQg==
+	bh=0pHOcIIPuoXgddGXsUTU6UqmiuiYIBleeTnS7b+Efb4=;
+	b=lPQbo7j7NPH+lrRN9bl2HUq6MkrVhN5JdjVfoetZmcbKQsDX0mREJvJ116l/Aiu6m3iS
+	 UZDoWBy/jKYlwbzyHAu/ulG2KvkZmZsjQMS00Ee7yrTZmM5tX7yHLgHhzFIHgA0+rS1CU
+	 GQqF71PwZlLZ1ncJ7sX59w8GMRdwHxyUOVoW7NVaYZN/tOuP84qCVpcJpA9dXM0lDbk7h
+	 Yuv249dY39OT6QCdKqK+ivikUKZfXKonkQjmDSJKljDwEhP7twQxesZ634tOGW59537D4
+	 bX72dAOTBeH00Kt969/p7rvKSbKfmQwuysqePPAtHeuwvNQkE0kKFeTxVISbjrYe2Uw==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	dmarc=pass header.from=nabladev.com;
-	dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=gc7MvEvC;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793168036;
-	bh=Cn93WHUJgLQrVqzf3QhBJLSPKxNqJ1kspitS8Ty+PmM=;
+	d=lists.u-boot-project.org; s=default; t=1793168043;
+	bh=0pHOcIIPuoXgddGXsUTU6UqmiuiYIBleeTnS7b+Efb4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=FmsEe8mUa++BuIk+rLF8uvsIQj+uqQ4ykerwGlE7aanReq4QokH3KRYtgOmR2HHdh
-	 IYlvyv/+2UFkhrXW+yPG00EMtviA2yf4TEEYmzDN1WHoDOBYVSmQHHz8vqZS2EyVM+
-	 tVNMdn1PrKWiGzXe1kQw8ra5QpcpmwKB/Kdoa8ThJzT1XG7CgTDtgB2g/cTbrUwYHk
-	 u7TKF+NkPixuvyr+FMaL8BEElIbLsh9aJxjnVJR1LRr6Z/OpHY3/66SUlwo4LVOKU3
-	 ywhKyE/Fi2kNownstsN+MMHa475pfNGCujWaq5HQP7QacECNesQ8rmg6TpOUSRHB2o
-	 kK/xqVqEFSyUQ==
+	b=um69awfOVZCsQCBg1sAHUAl1oepsK7bKJ5s/2v0I3zmMmfKB1pb+hSDBYHsAoE/OX
+	 u0438qupNEindDEyk+fqYyRaIgeip02zA8TUdzyFmJZDARLAkurEKtNv+Chh78jThe
+	 4zLTJbnBpsEgFvBv0k1QX8vSzZbZBCc8ydE6bDoMBVaVX/lLDArd5uE9A3Ro3nEQFB
+	 bWGv33tfqYkaxrQea0azOf74GvZimWYKIo2bm38aSXFuq1fDGp+ro59T4WKVJPALP2
+	 Gtc69wQN6xsNDer5pcfCZFbDCXAMqw40lbB3CSe8qR8NZaxFE9tolzp1KyNGGBeSyx
+	 LAJkD5k4QdHRA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D722080815;
-	Wed, 28 Oct 2026 06:13:55 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id E915B2E5
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 06:13:53 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8360480E79;
+	Wed, 28 Oct 2026 06:14:03 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 52A36D1
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 06:14:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D978080815
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 06:13:53 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 449BC606DE
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 06:14:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ug2PzgNFBUZ2 for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 06:13:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DC6AE80760
-Authentication-Results: smtp1.osuosl.org; arc=none
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Ct_6X7L_RSVI for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 06:14:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 26BA3605AF
+Authentication-Results: smtp3.osuosl.org; arc=none
  smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793168033;
- b=USlrHqnr/K1QMnqTHEEfSfdMi2WbRpUAsrD+CTlrYQU9cNHEknNuyPnFWvmOBIyWVSbU
- DOsWXkpEnLhNvj8eupd9V4Lwct6PLTEeEkFMcqbuzfip+jlTP2CRZuVQIV3+qg2wd46eV
- ukocRlvJzk6CCRaxxUTwFX/1QHyU2fOFqGOB3K5nUp+8k2B+YsRR+oiwYefEWfE4RwrfH
- ywAiKvVQuvEaVXsdQWnQG/tosTCnC/GrKd4jA1fHJz3MMinIqSgsSYnTTuS04KGSMIXkJ
- JO/Qp68G2vYdd1r0nIKvZP7Vg+IDVFI0ZCmbW8TBs/wjCAT79v/+cH6pDQsoqy6bQXQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793168040;
+ b=VIuau5qZ2I3Q/e4ah0Nq3SWDidtCLBpAH2o5PAKYQSUIgwb6Peoza9//vcgyxHX8XWTM
+ wtOzz9/MStaloT2pqgjTMekNQK0hxHPYrpLGysPUH2iRq6F8Z2tedjtQtgtdU4Wmyg0wJ
+ Q4eSOPgUYdANnUvmDopzF+8M+3PNwzdn82aV3Pd8eG7aJACnQ06SOPRoJf7flOOZmtXj4
+ wstmlKGjAbKTCo3Xnt7QCHnmoB0T8l2O3rRgoSTNtP/T/8aMDsaogsPQmBHl6LDC2T7Gg
+ eimV6Y2MQVpX3lO9P0QHDzv9GwGJonjBYOBP0HI3UuBnr/CUSXV9h6ZwEs1fNTl880A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793168033;
+ c=relaxed/relaxed; t=1793168040;
  h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-Last-TLS-Session-Version;
- bh=Cn93WHUJgLQrVqzf3QhBJLSPKxNqJ1kspitS8Ty+PmM=;
- b=dpl8HlPT2wzb78ufOAM83Ve7Tq6s+4MLtYa1DpfEWwR8OOsMs2nc/G7XulqX59B0KdSP
- 07KU43dWTucimeF3OX1/RArCchjmacCPiaxVNj0pNliqRPeAwhEzMEQmAu0Ocix22AbQ0
- x6JqQJeHYNMBw+CEIW4y1B3PFj0VLYErASgpGxVN2LbeJ8d5QeF99p6Yz+kZmXMMsLDJz
- y6NKWVij15SURwd/XChet1o2+G4jOypWi8nY6QZmzyNpCmQWAQJuslHh1EVKR0B94oIIk
- WV2zGPNVf3RRcbkDF7C0Vfqj/MJbRgGsg8hfGUyZ679+Ii4DOdIoPdE9OSgf7bh/Hcg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=0pHOcIIPuoXgddGXsUTU6UqmiuiYIBleeTnS7b+Efb4=;
+ b=U0OeIF9bqViXHBqVYxDCmfGDe2I8ycV90kHh5zOqNdYo5B7gUuHPRI4plSVSXBAP9TTV
+ f3JOKQk6XCb3L0xsPieY3Q/fzFMgRY1Rl20vXcOddwOJAHUEZEha9XgrHTymNr41hjT5O
+ SA3YyFB2jNAtO5O9EB+3Es06U7uD27j0nMm9vc7QvU9ShLJ3O8jmor284BExlW0SMywas
+ ro+P427JCKbh8I/OvJlkow+kdylNzFdGN0VHX25SHrsA6qTRD0NznMfpxeAOYpFJACFo+
+ d7QwdMUB6pKabxEJMbpNa1gCwJvlzl1u/DjRxx7lxhtXNv0jMFMQxty8sOnGjN8iSdg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=nabladev.com;
  dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
- header.s=dkim header.b=gc7MvEvC; 
+ header.s=dkim header.b=VWBcVZ3C; 
  arc=none smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a00:f820:417:0:178:251:229:89; helo=mx.nabladev.com;
  envelope-from=hs@nabladev.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=nabladev.com header.i=@nabladev.com
- header.a=rsa-sha256 header.s=dkim header.b=gc7MvEvC
+ header.a=rsa-sha256 header.s=dkim header.b=VWBcVZ3C
 Received: from mx.nabladev.com (mx.nabladev.com
  [IPv6:2a00:f820:417:0:178:251:229:89])
- by smtp1.osuosl.org (Postfix) with ESMTPS id DC6AE80760
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 06:13:52 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 26BA3605AF
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 06:13:59 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 86F7910BA4D; Wed, 28 Oct 2026 07:13:46 +0100 (CET)
+ with ESMTPSA id 7DEBB10BB08; Wed, 28 Oct 2026 07:13:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1793168027; h=from:subject:date:message-id:to:cc:mime-version:
+ s=dkim; t=1793168031; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=Cn93WHUJgLQrVqzf3QhBJLSPKxNqJ1kspitS8Ty+PmM=;
- b=gc7MvEvC5LDQNHfFNNK8ZCPLdmOZ0I5jGymZvJ/Q1DxZldU0WyNTGpzhsmvX/Xqj84b7/A
- Mnk+3Ab6jLzycwPuG/kK8SFG6KQ2lIa24aehEz19/wUamdKbLf612h1TaOZy+SrlsNwMHf
- O9w1f/Ow3+xBAO3uWNp9PTkHhgZC4viywZMfPvlkOFgkifKD40Lv45stczVYqqrGENBM44
- r6JPDIwuJhAsGAgP00gV2SB5V4NMNMoZNSg08xWDpUZEZiLh1vC/VaAyP5NDmhgzht/H4U
- gMKRe5fbXx3uMZj7I1QWmEXBcFbTen8i1y5+0E0lgmz3jFtEgNqy6kHwhfBLNQ==
+ bh=0pHOcIIPuoXgddGXsUTU6UqmiuiYIBleeTnS7b+Efb4=;
+ b=VWBcVZ3CPcsvyCalsYCzVh5gpqWbUqP7DiEeS/8DBpEuqnftzEe5mAx3nKwKJD6tZKM40k
+ G2eEIJcG6gU12esusG8kfx8AarAANfdCxQnmSzIwn/900BKDVTQ3/gdToIWU/CMgQeAAZT
+ o5m44qzUriJoLDeJdmBW0JU+afkHjlanU6U7NomQMoy6aoYkK5evplvYIpfT/im+vhXYHe
+ GPYrdWdb8EUR03G8HKbcQVKj8TZlcge9wal7YAYncADJbZzYKZmgUqnKWoIA4HBEk5VC6I
+ 1MSBi8jpL9UAun08JFuDL92TB4lSoeMu7Tpo2EWSWTszwcVjtd4QYwV+ea5M/g==
 From: Heiko Schocher <hs@nabladev.com>
 To: U-Boot Mailing List <u-boot@lists.u-boot-project.org>
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Johan Jonker <jbx6244@gmail.com>, Vignesh R <vigneshr@ti.com>,
  Takahiro Kuwano <takahiro.kuwano@infineon.com>,
  Simon Glass <sjg@chromium.org>, Heiko Schocher <hs@nabladev.com>,
- Marek Vasut <marex@nabladev.com>,
- Mehmet Fide <mehmet.fide@screeningeagle.com>,
- Michal Simek <michal.simek@amd.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rv@rasmusvillemoes.dk>,
- Romain Caritey <romain.caritey@microchip.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 6/7] cmd: mtd: get through a device that has no erase size
-Date: Wed, 28 Oct 2026 07:11:40 +0100
-Message-ID: <20261028061231.39152-7-hs@nabladev.com>
+ Stefan Bigler <stefan.bigler@securiton.ch>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 7/7] mtd: mchp23k256: move the transfers to spi-mem
+Date: Wed, 28 Oct 2026 07:11:41 +0100
+Message-ID: <20261028061231.39152-8-hs@nabladev.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261028061231.39152-1-hs@nabladev.com>
 References: <20261028061231.39152-1-hs@nabladev.com>
@@ -156,177 +148,238 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-mtd_is_aligned_with_block_size() divides by mtd->erasesize, which a
-device of type MTD_RAM does not have, so "mtd read", "mtd write",
-"mtd dump" and "mtd erase" all end in a division by zero.
+A read or a write of the whole array goes out as one transfer, which
+fails on a controller that limits the transfer size or only offers
+spi-mem operations. spi-mem answers both, as spi_mem_adjust_op_size()
+cuts an operation to what the controller takes and spi_mem_exec_op()
+claims the bus per operation, so the driver needs no explicit bus
+claim.
 
-Take a missing erase size as "nothing to align to", and refuse an erase
-on the condition mtd_erase() refuses on, before the line announcing it
-divides through mtd_div_by_eb().
-
-The test sits in test/cmd/ as the mtd command walks a global list that
-outlives the device tree a driver model test replaces.
+The test sets a transfer size smaller than the data length, forcing
+the loop to process multiple chunks.
 
 Signed-off-by: Heiko Schocher <hs@nabladev.com>
 ---
 checkpatch asks for a blank line after the test function, before the
-CMD_TEST() that registers it. But in test/cmd/ all over is without a
+DM_TEST() that registers it. But in test/dm/ all over is without a
 blank line, so ignore this warning.
 
 Changes in v3:
-- New patch. Patch 1 only covers mtd_erase(), the mtd command divides by
-  the erase size before it ever gets there.
+- New patch. Simon pointed out that a single spi_xfer() over the whole
+  array fails where the SPI NAND driver would work
 
- MAINTAINERS       |  1 +
- cmd/mtd.c         | 14 +++++++++
- test/cmd/Makefile |  3 ++
- test/cmd/mtd.c    | 79 +++++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 97 insertions(+)
- create mode 100644 test/cmd/mtd.c
+ drivers/mtd/devices/Kconfig      |  1 +
+ drivers/mtd/devices/mchp23k256.c | 88 ++++++++++++++++++++------------
+ test/dm/mchp23k256.c             | 44 ++++++++++++++++
+ 3 files changed, 99 insertions(+), 34 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index f3fe3597d6e..83d040b3e75 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1668,6 +1668,7 @@ M:	Heiko Schocher <hs@nabladev.com>
- S:	Maintained
- F:	drivers/mtd/devices/mchp23k256.c
- F:	drivers/mtd/devices/mchp23k256_sandbox.c
-+F:	test/cmd/mtd.c
- F:	test/dm/mchp23k256.c
+diff --git a/drivers/mtd/devices/Kconfig b/drivers/mtd/devices/Kconfig
+index 0ba17618f1b..3f0ee428712 100644
+--- a/drivers/mtd/devices/Kconfig
++++ b/drivers/mtd/devices/Kconfig
+@@ -3,6 +3,7 @@
+ config MTD_MCHP23K256
+ 	bool "Microchip 23K256 and 23LCV1024 SPI SRAM"
+ 	depends on DM_SPI && DM_MTD
++	select SPI_MEM
+ 	help
+ 	  Enable support for the Microchip 23K256 and 23LCV1024 serial SRAMs,
+ 	  a 32 KiB and a 128 KiB SRAM on an SPI bus, the latter with battery
+diff --git a/drivers/mtd/devices/mchp23k256.c b/drivers/mtd/devices/mchp23k256.c
+index 624fb9e65e1..06c422dfe58 100644
+--- a/drivers/mtd/devices/mchp23k256.c
++++ b/drivers/mtd/devices/mchp23k256.c
+@@ -10,6 +10,7 @@
+ #include <dm.h>
+ #include <dm/device_compat.h>
+ #include <spi.h>
++#include <spi-mem.h>
+ #include <vsprintf.h>
+ #include <linux/bitops.h>
+ #include <linux/mtd/mtd.h>
+@@ -23,9 +24,6 @@
+ /* MODE register, bits 7:6 select byte, page or sequential operation */
+ #define MCHP23K256_MODE_SEQ		BIT(6)
  
- SPI-NOR
-diff --git a/cmd/mtd.c b/cmd/mtd.c
-index ed827accfb5..1f3a9ad0779 100644
---- a/cmd/mtd.c
-+++ b/cmd/mtd.c
-@@ -53,6 +53,10 @@ static bool mtd_is_aligned_with_min_io_size(struct mtd_info *mtd, u64 size)
+-/* The widest address of the supported parts, in bytes */
+-#define MCHP23K256_ADDR_MAX		3
+-
+ /**
+  * struct mchp23_caps - what one supported device looks like
+  *
+@@ -50,8 +48,10 @@ struct mchp23k256_priv {
+ /**
+  * mchp23k256_command() - run one read or write command over the whole length
+  *
+- * Sequential operation was selected during probe, so the device serves a
+- * transfer of any length from a single command and the bus is claimed once.
++ * Sequential operation was selected during probe, so the device serves
++ * a transfer of any length from a single command. spi_mem_exec_op()
++ * claims the bus for each operation, so the driver never calls
++ * spi_claim_bus() itself.
+  *
+  * @dev:	the SRAM device
+  * @opcode:	MCHP23K256_CMD_READ or MCHP23K256_CMD_WRITE
+@@ -67,26 +67,52 @@ static int mchp23k256_command(struct udevice *dev, u8 opcode, u32 offset,
+ 	const struct mchp23_caps *caps =
+ 		(const struct mchp23_caps *)dev_get_driver_data(dev);
+ 	struct spi_slave *spi = dev_get_parent_priv(dev);
+-	u8 cmd[1 + MCHP23K256_ADDR_MAX];
+-	uint i;
++	struct spi_mem_op op = SPI_MEM_OP(SPI_MEM_OP_CMD(opcode, 1),
++					  SPI_MEM_OP_ADDR(caps->addr_width,
++							  offset, 1),
++					  SPI_MEM_OP_NO_DUMMY,
++					  SPI_MEM_OP_DATA_IN(0, NULL, 1));
++	const u8 *out = data_out;
++	u8 *in = data_in;
+ 	int ret;
  
- static bool mtd_is_aligned_with_block_size(struct mtd_info *mtd, u64 size)
- {
-+	/* A device with no erase blocks, a RAM say, has nothing to align to */
-+	if (!mtd->erasesize)
-+		return true;
+-	cmd[0] = opcode;
+-	for (i = 0; i < caps->addr_width; i++)
+-		cmd[1 + i] = offset >> (8 * (caps->addr_width - i - 1));
+-
+-	ret = spi_claim_bus(spi);
+-	if (ret) {
+-		dev_dbg(dev, "failed to claim SPI bus: %d\n", ret);
+-		return ret;
++	if (!in)
++		op.data.dir = SPI_MEM_DATA_OUT;
 +
- 	return !do_div(size, mtd->erasesize);
++	while (len) {
++		op.data.nbytes = len;
++		if (in)
++			op.data.buf.in = in;
++		else
++			op.data.buf.out = out;
++
++		/*
++		 * A controller may move less than asked for in one operation,
++		 * which is what the loop is for. The device takes the address
++		 * of every operation, so the pieces need no order.
++		 */
++		ret = spi_mem_adjust_op_size(spi, &op);
++		if (ret) {
++			dev_dbg(dev, "cannot size the operation: %d\n", ret);
++			return ret;
++		}
++
++		ret = spi_mem_exec_op(spi, &op);
++		if (ret) {
++			dev_dbg(dev, "operation at 0x%llx failed: %d\n",
++				op.addr.val, ret);
++			return ret;
++		}
++
++		op.addr.val += op.data.nbytes;
++		len -= op.data.nbytes;
++		if (in)
++			in += op.data.nbytes;
++		else
++			out += op.data.nbytes;
+ 	}
+ 
+-	ret = spi_write_then_read(spi, cmd, 1 + caps->addr_width, data_out,
+-				  data_in, len);
+-
+-	spi_release_bus(spi);
+-
+-	return ret;
++	return 0;
  }
  
-@@ -642,6 +646,16 @@ static int do_mtd_erase(struct cmd_tbl *cmdtp, int flag, int argc,
- 	if (IS_ERR_OR_NULL(mtd))
- 		return CMD_RET_FAILURE;
+ static int mchp23k256_read(struct mtd_info *mtd, loff_t from, size_t len,
+@@ -126,21 +152,15 @@ static int mchp23k256_probe(struct udevice *dev)
+ 	struct mtd_info *mtd = dev_get_uclass_priv(dev);
+ 	struct mchp23k256_priv *priv = dev_get_priv(dev);
+ 	struct spi_slave *spi = dev_get_parent_priv(dev);
+-	u8 cmd[2];
++	u8 mode = MCHP23K256_MODE_SEQ;
++	struct spi_mem_op op =
++		SPI_MEM_OP(SPI_MEM_OP_CMD(MCHP23K256_CMD_WRITE_STATUS, 1),
++			   SPI_MEM_OP_NO_ADDR,
++			   SPI_MEM_OP_NO_DUMMY,
++			   SPI_MEM_OP_DATA_OUT(sizeof(mode), &mode, 1));
+ 	int ret;
  
-+	/*
-+	 * The same condition mtd_erase() refuses on. Every step below works
-+	 * in units of the erase size, so there is nothing to do here either.
-+	 */
-+	if (!mtd->erasesize || !mtd->_erase) {
-+		printf("%s cannot erase\n", mtd->name);
-+		ret = CMD_RET_FAILURE;
-+		goto out_put_mtd;
-+	}
+-	ret = spi_claim_bus(spi);
+-	if (ret) {
+-		dev_dbg(dev, "failed to claim SPI bus: %d\n", ret);
+-		return ret;
+-	}
+-
+-	cmd[0] = MCHP23K256_CMD_WRITE_STATUS;
+-	cmd[1] = MCHP23K256_MODE_SEQ;
+-	ret = spi_write_then_read(spi, cmd, sizeof(cmd), NULL, NULL, 0);
+-
+-	spi_release_bus(spi);
+-
++	ret = spi_mem_exec_op(spi, &op);
+ 	if (ret) {
+ 		dev_dbg(dev, "failed to select sequential operation: %d\n",
+ 			ret);
+diff --git a/test/dm/mchp23k256.c b/test/dm/mchp23k256.c
+index cab8dbee547..a359deaca2f 100644
+--- a/test/dm/mchp23k256.c
++++ b/test/dm/mchp23k256.c
+@@ -35,6 +35,9 @@
+ #define MCHP23_ONE_ADDR		0x100
+ #define MCHP23_ONE_DATA_LEN	4
+ 
++/* What a controller with a limited transfer size would move in one go */
++#define MCHP23_CHUNK		16
 +
- 	scrub = strstr(argv[0], ".dontskipbad");
+ /*
+  * The second partition in the test device tree. Its offset is not aligned
+  * to any erase block size, which does not matter for a device without
+@@ -178,6 +181,47 @@ static int dm_test_mchp23k256_small(struct unit_test_state *uts)
+ }
+ DM_TEST(dm_test_mchp23k256_small, UTF_SCAN_PDATA | UTF_SCAN_FDT);
  
- 	argc -= 2;
-diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-index e734933d5f7..4afd83d836f 100644
---- a/test/cmd/Makefile
-+++ b/test/cmd/Makefile
-@@ -28,6 +28,9 @@ obj-$(CONFIG_CMD_LOADM) += loadm.o
- obj-$(CONFIG_CMD_MEMINFO) += meminfo.o
- obj-$(CONFIG_CMD_MEMORY) += mem_copy.o
- obj-$(CONFIG_CMD_MEM_SEARCH) += mem_search.o
-+ifdef CONFIG_CMD_MTD
-+obj-$(CONFIG_MTD_MCHP23K256_SANDBOX) += mtd.o
-+endif
- obj-$(CONFIG_CMD_PART) += part.o
- ifdef CONFIG_CMD_PCI
- obj-$(CONFIG_CMD_PCI_MPS) += pci_mps.o
-diff --git a/test/cmd/mtd.c b/test/cmd/mtd.c
-new file mode 100644
-index 00000000000..a17377bc570
---- /dev/null
-+++ b/test/cmd/mtd.c
-@@ -0,0 +1,79 @@
-+// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Test for the mtd command on a device without an erase size
-+ *
-+ * Copyright (C) 2026 Heiko Schocher, Nabla Software Engineering <hs@nabladev.com>
++ * A controller that transfers less data than requested must not cause
++ * data loss, which is why the driver loops until all data is transferred.
 + */
-+
-+#include <command.h>
-+#include <console.h>
-+#include <dm.h>
-+#include <mapmem.h>
-+#include <mtd.h>
-+#include <dm/test.h>
-+#include <linux/mtd/mtd.h>
-+#include <test/cmd.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+
-+/* The SPI SRAM of the test device tree, an MTD device of type MTD_RAM */
-+#define MTD_RAM_PATH	"/spi@1/sram@0"
-+
-+#define MTD_RAM_SRC	0x0
-+#define MTD_RAM_DST	0x100
-+
-+/* Neither offset nor length is a multiple of any usual erase block */
-+#define MTD_RAM_OFFSET	0x1f
-+#define MTD_RAM_LEN	0x64
-+
-+static int cmd_test_mtd_ram(struct unit_test_state *uts)
++static int dm_test_mchp23k256_chunks(struct unit_test_state *uts)
 +{
++	u8 src[MCHP23_LEN], dst[MCHP23_LEN];
++	struct spi_slave *slave;
 +	struct udevice *dev;
 +	struct mtd_info *mtd;
-+	u8 *out, *in;
++	size_t retlen;
 +	int i;
 +
 +	ut_assertok(uclass_get_device_by_ofnode(UCLASS_MTD,
-+						ofnode_path(MTD_RAM_PATH),
++						ofnode_path(MCHP23_PATH),
 +						&dev));
 +	mtd = dev_get_uclass_priv(dev);
-+	ut_asserteq(0, mtd->erasesize);
 +
-+	/*
-+	 * The first MTD command probes all devices, so output from other
-+	 * drivers during probing is irrelevant to this test.
-+	 */
-+	ut_assertok(run_command("mtd list", 0));
-+	console_record_reset();
++	/* Stand in for a controller that cannot do the whole transfer */
++	slave = dev_get_parent_priv(dev);
++	slave->max_write_size = MCHP23_CHUNK;
++	slave->max_read_size = MCHP23_CHUNK;
 +
-+	out = map_sysmem(MTD_RAM_SRC, MTD_RAM_LEN);
-+	in = map_sysmem(MTD_RAM_DST, MTD_RAM_LEN);
-+	for (i = 0; i < MTD_RAM_LEN; i++)
-+		out[i] = 0x5a + i;
-+	memset(in, 0, MTD_RAM_LEN);
++	for (i = 0; i < MCHP23_LEN; i++)
++		src[i] = 0xc0 + i;
 +
-+	ut_assertok(run_commandf("mtd write %s 0x%x 0x%x 0x%x", mtd->name,
-+				 MTD_RAM_SRC, MTD_RAM_OFFSET, MTD_RAM_LEN));
-+	ut_assert_nextline("Writing %d byte(s) at offset 0x%08x", MTD_RAM_LEN,
-+			   MTD_RAM_OFFSET);
-+	ut_assert_console_end();
++	ut_assertok(mtd_write(mtd, MCHP23_OFFSET, MCHP23_LEN, &retlen, src));
++	ut_asserteq(MCHP23_LEN, retlen);
 +
-+	ut_assertok(run_commandf("mtd read %s 0x%x 0x%x 0x%x", mtd->name,
-+				 MTD_RAM_DST, MTD_RAM_OFFSET, MTD_RAM_LEN));
-+	ut_assert_nextline("Reading %d byte(s) at offset 0x%08x", MTD_RAM_LEN,
-+			   MTD_RAM_OFFSET);
-+	ut_assert_console_end();
-+	ut_asserteq_mem(out, in, MTD_RAM_LEN);
++	memset(dst, 0, MCHP23_LEN);
++	ut_assertok(mtd_read(mtd, MCHP23_OFFSET, MCHP23_LEN, &retlen, dst));
++	ut_asserteq(MCHP23_LEN, retlen);
++	ut_asserteq_mem(src, dst, MCHP23_LEN);
 +
-+	/* The erase has to be refused, not divided by the missing block size */
-+	ut_asserteq(1, run_commandf("mtd erase %s 0x%x 0x%x", mtd->name,
-+				    MTD_RAM_OFFSET, MTD_RAM_LEN));
-+	ut_assert_nextline("%s cannot erase", mtd->name);
-+	ut_assert_console_end();
-+
-+	unmap_sysmem(in);
-+	unmap_sysmem(out);
++	slave->max_write_size = 0;
++	slave->max_read_size = 0;
 +
 +	return 0;
 +}
-+CMD_TEST(cmd_test_mtd_ram, UTF_CONSOLE);
++DM_TEST(dm_test_mchp23k256_chunks, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++
+ static int dm_test_mchp23k256_part(struct unit_test_state *uts)
+ {
+ 	struct mtd_info *mtd, *part;
 -- 
 2.55.0
 
