@@ -1,128 +1,132 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51D9B606A31A
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 18:46:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6249606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 18:46:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=uRVCLDy1;
-	dkim=pass (2048-bit key, unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=goT6z28U
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=p5M2cJEa;
+	dkim=pass (2048-bit key, unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=NZMIg1tP
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 22F8A811A4;
-	Wed, 28 Oct 2026 18:46:07 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 80CD060AE8;
+	Wed, 28 Oct 2026 18:46:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aEdJtA1SVZIh; Wed, 28 Oct 2026 18:46:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 42BC581F2D
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793213166;
-	b=W/c6vHmufD6K7kurnXj64XsnfE+unArK4Hk5Zx5zwuFwEj3vE91xFUW8AK9NXhyj7K9X
-	 elR8KL4r23Fvnd3mJI/Yi3w5yEOl+YjDveiTc2+IurVXwrKb7hizST4pOMTVk0EEI46T0
-	 +Mc+ueAJiAPwV4YZpLmh2Y6B91o+Z1TWSFKG2IiDvXirad9yCfCY2a20vic6RCiIUsULn
-	 Jo9o8Z73eIn3NkrvwL/cBLrHt5Ss47HGV/hXHf7w7bI0hirdMFqX9onfpNWBUO7MSgSk7
-	 M9ORkkZAbZNySNNxOtMtOK2YEoLuzdrHJLc09di8hB2eGEiIuhwh3+xZbhI3PE6kEeQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0DEMXKYL6Rjk; Wed, 28 Oct 2026 18:46:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 27F1A60793
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793213195;
+	b=Wjcg/w+4UYVlrrMEomkNPwE9LvKLXq9cavxCXKkX11c1JNd9XDFwg9AmIpqvLKBQYSMF
+	 r6Bd8SnnZi4Knc7ezan4lxaN8RbA+DcSYr3b2BWIo4qrXmQQk0w5NP7eknfjzma/bhK+A
+	 wUzD6BQyMSW+/OZLrZO9SB/aAsgf4xtuL3NOU0uLdNfJCGi8jQUJhDjPu44Gy9oQ6fN8w
+	 8YGY02qyjwo3hj/C0VSzbABMDop6bC53CNU4sIj6cAsAnj7YeChmkl3WFWiwZ7DkKpaCR
+	 1VPNeg2lhQvYdoigU80JN6h90+Iw/tIbuftWoVjBKSzAK1NkBgyMpn/IfK34FgYQzdQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793213166;
+	c=relaxed/relaxed; t=1793213195;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
 	 DKIM-Signature:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=BFRbuzdPwuyg5MZ2NcTELWvFDJdmbKfl+M/9DavFmGg=;
-	b=AMmZj2/BU2nOXcWKGmGvzuQZQ5s1ibHb0H39A9PgNz4IUc9e4NCWd4TiD48T6p0lywbZ
-	 UjeRZEYZ3IC/0tTq0DqLGvqgzHSq0Ji8Oa9O1YDpHkp0/CJDFUDUwPr6ZWfp4X+jrGMav
-	 vvjBi+hUTPIisjdTozEtWQXZdKIdMDOwB398Xu7fx36luuUSlbVVeeKl2vpveEUGENzjc
-	 HMbSSGdmPAIqVTKY56iUsxCOLSafmCqHCVgePRod1qFWFYWxQjoVbmV7+va3cyVrvK7tJ
-	 2WFA3XfsYYdegR4B/V29ezCFTOICdc94aQTTfCumnoZEaqKMDbQ4j+mLoG6uE+lM/jg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	dmarc=pass header.from=freeshell.de;
-	dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=goT6z28U;
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=83bdxkhBti15mRZzfLvPuVwuiw+1yrx2AUV5QQM5/VM=;
+	b=lZxgahpy84ZBa5Knj7yj8YwR45mCUyKkxJBQVwkTVpk/nBff31empnjG7xKBdtzM63yI
+	 EFh2/lUay6zfan/A79pcvVY3mglOhoNpRLOvR/QTQiY+RBFu1sC3hHStwxUoKjrVrrIPn
+	 vPhTOcoDHN6TXvSV2LzWMpfnoKiIxFsOXq+2pZbtHRspudY5PbVOytiEFLnwnPeCzduUD
+	 I60RjzNU/OpPG3vS72H/5zrAQf/6HWxIchws8/IxydFm3OYlFBgCdBeMC79ub9+F4tZgz
+	 vZS8NOkmgqBHDqKCpoTP4s2pvnDdpF8AKiJtMY0d6Kj25V4P3667LJUlkMyuUCeiiRA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793213166;
-	bh=BFRbuzdPwuyg5MZ2NcTELWvFDJdmbKfl+M/9DavFmGg=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=uRVCLDy1KF/CuRMIvnUpvpJQrZliIKoH91OxvzzLJZ74Em5mvQTVXAzaAceAu5jy3
-	 9tlrLuxxzxcJ5N0ugAyF2K+E8iQ/UapLHegerKtX+iY8xqLUmYtnP/SFNZ0Iw41Ee+
-	 sHOs3p0q1xk4VucQengqhuRIpmqOAKjiHkuNqlDeg5CXySGIgHNTNAeqLoKGPUwY+W
-	 cZBwBQbawtxW3DSRnqoxHcuRCFD5FW69r8y/rVrNdkjB337L3GyKSGo2R6V+CinZ0+
-	 Xc2GdYo8KLI1Ef04FZNxQ7WlM/LcTuEV7Ybgr9dC8BFvWlPnzKAOWm2QYlH3pqjDnc
-	 wZo1kS+zOqTdg==
+	d=lists.u-boot-project.org; s=default; t=1793213195;
+	bh=83bdxkhBti15mRZzfLvPuVwuiw+1yrx2AUV5QQM5/VM=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=p5M2cJEa4hbWEWsR8ihhFruHSypIDt4qphR8cwjso9r+gTqX5V1GzWiQJ8MxIQIDs
+	 4iOJ5eYsMM0YXZ15569dfyBkqnAdAf52OJ+XGVfL/iERSYbCSwTp11Sev6GKRhtuhj
+	 /KxhW97JTPryEeUw/ghlH2Jc3gXxciAH4Mww/LHCrmwopwm++sPqa11gIa0cXyQFkx
+	 3mscdg0NnNKm31o4HbpMgRzoAu98W4hILY1cN16utEgEkIp6OX3oUj5ZCQamBz2Bw5
+	 R3rHf6QytwlO+jIlC8RIkY0MPR1Nt/hXWN7kyL6kzVH2ewZBNbxMUguH+AA+jQ63yX
+	 OW/xC1vQaw+cA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 42BC581F2D;
-	Wed, 28 Oct 2026 18:46:06 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 98E93362
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:46:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 27F1A60793;
+	Wed, 28 Oct 2026 18:46:35 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4AD55356
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:46:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 95F1681F28
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:46:05 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 3CC944031F
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:46:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HhgkUqbiyCHn for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 18:46:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BBF72811A4
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=116.202.128.144
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793213164;
- b=HNOsO35Y95kjiBsS+54pP2pdNeTmCD+Xi0sukoIZC2tvsPBxjP7AerXGaLBYaseFEagG
- HkUtUIeIj5F85lr2i5SUg6E1cL9gXLU1PbWI5mI7wozqeRQhxVqk3mCkNrkO3QAfI3UrT
- 7/8tNW60qCWyTvi/zK5Y+UsuObjDODDZbG6cqga2JJ6nugDUWF6i9TdQIf9uqeJnSI3Hr
- ekmoiM1zdU1yzfty7NYGJ5RAkYerGiBJ4zpm3SlNycP9gtZEgsqpbi9IaihxM43akCirD
- k7HgD2te1NVKLU8p5+7EGG23K2oizmaIPE18LkrVSKRXylGchaDCEU4uTmfVGz43xwQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id s0I5Q6H4gPAg for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 18:46:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6DBDF4020B
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793213192;
+ b=A9AKzx56SSNXzaKogZj9DMCHkJA1dQUd3Vc8Dv+FaSH1R7d267zoW3/b+tcsPWRnKXPA
+ CWLVDu73mOWKC2A5CKT4qJZNWV5jJBPQ7b66FJRVAepRno0FWF34PFK9jVbBCDjIo4Pr3
+ GCU/Xkw+jj3+TnmBLAhRMCkFG8wejFqCpNEzmunrgdah33Gm2BGOnlMONuhSi0jn6H03E
+ WHfrb2XpM1mcVRel/4QJqFYp1WBkO1eKMYPKeSiCk9/eLBbbWdm4GD6exWh65pB1tZHlg
+ ydCLcrpcqNzjIK4v54ByuxSZjIE/WWmPfAKJB3cPjpfFILYqjrSzttMcPIGK1d1TfVA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793213164;
+ c=relaxed/relaxed; t=1793213192;
  h=Received-SPF:DKIM-Signature:Received:From:To:Cc:Subject:Date:
- Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
- bh=BFRbuzdPwuyg5MZ2NcTELWvFDJdmbKfl+M/9DavFmGg=;
- b=kdtGPsjVypap81zPOd9A73rufDDG8m5WE7OC01n1Lq4dnVDz+MsA/VXH2u2ZNmGPjjLz
- SEftcuOZXywQmyXzrIPzTKzrFa3DOqf5F29LS3VyyH8mcqOHF2O1t82VCYEevu3NoUskW
- YvU1C1Pdbb1ZNvmKlhuzjPo0hwyrHyqLcOfVy/Am8uFxhgdEGchVpxL6EUKxJobG50k3K
- 6zzVkyp43GOiZ/wQYI2urQiXJEmAriO4YbmoTSwPTypFFwQLo6HLpNMjXQOYgY6qxCZ/n
- x9kqCi26x608oCrNwwzUDDeyX0wnolPcYum8iIN8ThxnLl+LAg2e0pqmINT2bJtpkeQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+ Content-Transfer-Encoding;
+ bh=83bdxkhBti15mRZzfLvPuVwuiw+1yrx2AUV5QQM5/VM=;
+ b=A1KFm8thIm0ZBBLRnuvPbCid3XjALaOteWwi7qaYs1GTS4xl4HYdzaBIFen0oNmBeR4B
+ VEiAETFSvEKk/K72/mGaOYgVkHQ5MnSGtoItpKRAv/2jZkdtoZa7B8CTsJ1gN7dVDchJ/
+ B6/Hg61/Lh827d70bD6bFwoZ+ICmnuuALaI/og7/LWNo8uITVEHS9kyxxsZ0N/gGZcn4T
+ pzbZx3KxPXxgC+IXOQrGn9CHZBT3Y6MUGjICVumMRW38KZN1SbKV7wS4eLBJ3pu0PB16A
+ sJhqDOVwE10+b1iEf3+nFoecrjDTS8FECNe1otok6AvCSPFenJ3ePevPd0iqofATO0Q==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=freeshell.de;
  dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=goT6z28U; 
- arc=none smtp.remote-ip=116.202.128.144
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.202.128.144;
+ header.s=s2025 header.b=NZMIg1tP; 
+ arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:4f8:231:482b::2;
  helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=freeshell.de
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
- header.s=s2025 header.b=goT6z28U
-Received: from freeshell.de (freeshell.de [116.202.128.144])
- by smtp1.osuosl.org (Postfix) with ESMTPS id BBF72811A4
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:46:03 +0000 (UTC)
+ header.s=s2025 header.b=NZMIg1tP
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6DBDF4020B
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 18:46:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1793213148;
- bh=BFRbuzdPwuyg5MZ2NcTELWvFDJdmbKfl+M/9DavFmGg=;
- h=From:To:Cc:Subject:Date:From;
- b=goT6z28U3IxF1BGp1RaJSVekm+CsnglQdBXlojb62J4jS8XlG2GvKO2LnPG0tzZzQ
- y2uJ8thqJzxmczgKwPFzrrzFaRtqmhnRYh7rtmkm9oabLB5dvl2zwQTSl17YoMUSlz
- Zp+UGf2UhYTQZyHttnTK5pjzNTzAc5jywtTvMnRJXYt2iVOHvmlhp81cw1t/Mjo9Y3
- /ZeJS8EZidZg+hqDMtpTbnFAbxk/6pXb85id2e9OkSLxaCQ27Tr0BKtuavXG6J/oSd
- Dn1o3dL8cQe8879TpZpa7C0SGKG0VQSQl2kVnEPOWue7xWHrdhwx40lwWCRHm25o0B
- 4zfy0TnpXPccQ==
+ s=s2025; t=1793213158;
+ bh=83bdxkhBti15mRZzfLvPuVwuiw+1yrx2AUV5QQM5/VM=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=NZMIg1tP2glp+TUINQCEonDxivimpS9OK7jqvp8Zpo7/70SMIH6m9PUhtyFx8Rier
+ EUW9itugEF9ki97GAoJjt5PLqMY5Z94Nm+UDDxCZMFtHAeyWxS+FbZkmqM+RkCDAog
+ a6fapMtK2oEXhM3DRNxL7t4s6XtaIwHxlgOHlieQ7EsRRU2XUPYpaC2WM5KFXXcVi7
+ s0OR0wIkwh/QfaTsrnvba+ObmWRWL/I51aII6uQeiumlN5w3CBu7Lq5buSHbSunOGp
+ PhjP6hbkPCbUOpSdb1owf6VSusWyrnHa6LjcYsoZ+PGQ6vQx81LELQY7dGB8lAMIu+
+ WJewPKI4SVppA==
 Received: from hay.lan (unknown [IPv6:2605:59ca:364f:d400:6ecf:39ff:fe00:8375])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id EBB0EB220530;
- Wed, 28 Oct 2026 19:45:47 +0100 (CET)
+ by freeshell.de (Postfix) with ESMTPSA id 004A9B2202E7;
+ Wed, 28 Oct 2026 19:45:56 +0100 (CET)
 From: E Shattow <e@freeshell.de>
-To: u-boot@lists.u-boot-project.org,
-	Yixun Lan <dlan@kernel.org>
+To: u-boot@lists.u-boot-project.org, Yixun Lan <dlan@kernel.org>,
+ Tim Ouyang <tim609@andestech.com>, Leo Liang <leo.liang@sifive.com>,
+ Yao Zi <me@ziyao.cc>, Tom Rini <trini@konsulko.com>
 Cc: E Shattow <e@freeshell.de>
-Subject: [PATCH v1 0/3] Spacemit K3 enable Linux boot
-Date: Wed, 28 Oct 2026 11:45:04 -0700
-Message-ID: <20261028184526.1887640-1-e@freeshell.de>
+Subject: [PATCH v1 1/3] riscv: dts: spacemit: k3: override reserved status of
+ mimsic and maplic
+Date: Wed, 28 Oct 2026 11:45:05 -0700
+Message-ID: <20261028184526.1887640-2-e@freeshell.de>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261028184526.1887640-1-e@freeshell.de>
+References: <20261028184526.1887640-1-e@freeshell.de>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -135,39 +139,35 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Adopt some fixes needed for Linux v7.2.10+ boot and enable
-BOOTSTD_FULL together with minimal env addr variable defaults.
+Linux boot stalls when probing peripherals unless OpenSBI has the
+enabled mimsic and maplic nodes. Override these nodes so Linux can boot.
 
-Build and test only with vendor BSP k3-br-v1.0.10 having reduced
-configuration to avoid a memory resource conflict. The vendor BSP SPL
-in its default configuration attempts to load opensbi separately from
-u-boot main app, and also attempts to load an embedded controller OS
-image, neither of which is useful for mainline opensbi, mainline
-Linux, and mainline U-Boot. Instructions and supplemental patches for
-the reduced vendor BSP build are co-dependent on this series; a
-follow-up will be posted with details after this series is sent.
+Reported-by: Yixun Lan <dlan@kernel.org>
+Signed-off-by: E Shattow <e@freeshell.de>
+---
+ arch/riscv/dts/spacemit-k3-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-E Shattow (3):
-  riscv: dts: spacemit: k3: override reserved status of mimsic and
-    maplic
-  riscv: dts: spacemit: k3: adopt override to drop M-level IMSIC guest
-    props
-  configs: spacemit: k3: enable CONFIG_BOOTSTD_FULL
-
- arch/riscv/dts/spacemit-k3-u-boot.dtsi | 12 ++++++++++++
- configs/spacemit_k3_defconfig          |  9 +--------
- include/configs/spacemit-k3.h          |  6 ++++++
- 3 files changed, 19 insertions(+), 8 deletions(-)
-
-
-base-commit: 03e45557e1f38a39a0c80fe30483130ff376cf92
+diff --git a/arch/riscv/dts/spacemit-k3-u-boot.dtsi b/arch/riscv/dts/spacemit-k3-u-boot.dtsi
+index 352e85e7de87..278b36acc79f 100644
+--- a/arch/riscv/dts/spacemit-k3-u-boot.dtsi
++++ b/arch/riscv/dts/spacemit-k3-u-boot.dtsi
+@@ -3,4 +3,8 @@
+  * Copyright (C) 2026 Yixun Lan <dlan@kernel.org>
+  */
+ 
++/* Override reserved status of mimsic and maplic for OpenSBI */
++&mimsic { status = "okay"; };
++&maplic { status = "okay"; };
++
+ #include "spacemit-k3-binman.dtsi"
 -- 
 2.53.0
 
