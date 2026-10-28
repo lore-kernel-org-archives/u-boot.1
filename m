@@ -1,157 +1,146 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33D43606A321
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 10:31:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95FC6606A31A
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 10:40:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=KYT3Z3mG;
-	dkim=pass (2048-bit key, unprotected) header.d=embetrix.com header.i=@embetrix.com header.a=rsa-sha256 header.s=rsa1 header.b=uV75ywZG;
-	dkim=pass header.d=embetrix.com header.i=@embetrix.com header.a=ed25519-sha256 header.s=ed1 header.b=2c8Po9vJ
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=rA7OZd7d;
+	dkim=pass (2048-bit key, unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b=cO1CYLGM
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0ED4480F55;
-	Wed, 28 Oct 2026 10:31:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5651060600;
+	Wed, 28 Oct 2026 10:40:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nzNEZNC-0lsk; Wed, 28 Oct 2026 10:31:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2825580E2A
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793183509;
-	b=msnMdHcT8Fi6jXfBXXwU36AS+Vo7ZHfR4h5JCoJ3kPEs1mMs/2gU3NXAJDyEE0hphrxp
-	 gl4m8tZmYfFF6KdYHKBR4LYjpLlPfqoKWJkfqcppWTDnOs7+wzs/hnQARFo6rQrfm0M56
-	 ORXcZh8ss1AGqYa2n2XtgY6sHtBeeF6CZI86Nnnh4x0bCe8zPprYYQ9nOc1XcdTfhwJaU
-	 H+mvXh+kR5D1kS5ZOrhWacY6BDkFxFkzgfFuEgoAc4GEVq+lgaGUZc5YppO9hTgM6oY4G
-	 z5/Kzaa1BGQryWU0WkPN32mXPXWEqTLGxeHE5jNj1/P6g0XEPS1iY1ooR01HM4sGi6Q==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id t-LGVPz07AHm; Wed, 28 Oct 2026 10:40:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 63D3C605EA
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793184036;
+	b=lOjIfGNZsO9Mt/f3K+NJ7tUWoveyRp5+4vnL28gjJL3qy/xqgQ1wdEroUl8iQ0KpS8AS
+	 uiCvU2JR9uaGeB34IY+YPBZCKD0iWc1TJbq+nIRnJpBslykcTHBlUSB/2lQ+x/dU/xDbB
+	 hjUhuvhQVzQg5iVjN8fQnv/kwvbS7KsmrDHwXuqvK03c1LlOguEtFY27w3vGivGTYlzYq
+	 snpObFYunqREejtL/jmOhW3+zkuh+81+cBwclM5+LJuZZVWlD/Lzy07M3qFMeo5C4baZ7
+	 1ffzPjxuNoMuJVE7STgc2OUSPStqxX1r5GRkmI7EFurSx7BFmOnVLMYN4ERtHFq1NGw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793183509;
+	c=relaxed/relaxed; t=1793184036;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:DKIM-Signature:X-HalOne-ID:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 DKIM-Signature:Received:Received:Message-ID:Subject:From:To:Cc:Date:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:
+	 User-Agent:MIME-Version:X-Virus-Scanned:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=Ro/2ln5hO9tSsvGSqR6s0afsiG3xVW0VuHa04bz1uA0=;
-	b=dzHevFBgYsV98ExtG8WLWdUMmIttYkqcXY2Z1uO21zTew/Q5WF/xriCiDJWl07YGxCWq
-	 uSN7LEvpJbQyzQ+zBI+QZsrB8SQfdk3pJokL9dwYenaxwlR3zVRr06dKflG2LIXCi0VtS
-	 kUOBqc2mwScfy+QawR5vrIZnIk0TIx30iZWIRdZwHlII+uzSIcg36zHsJ7GtFeuIF4yPh
-	 3HBmkkKLfn7j+tUUvRf0emVCpTObAU4wHvYJj545TZ4ZbT2rFoLqsSg71f/1OQQB9sB55
-	 LdJ6n9CAaedPnvbL+1UrLzwzy8o3QJMa4UAlfxCBFBDn6ZYqDutPj21cCAwWYxexJ+A==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	dmarc=none header.from=embetrix.com;
-	dkim=pass header.d=embetrix.com header.i=@embetrix.com header.a=rsa-sha256 header.s=rsa1 header.b=uV75ywZG;
-	dkim=pass header.d=embetrix.com header.i=@embetrix.com header.a=ed25519-sha256 header.s=ed1 header.b=2c8Po9vJ;
+	bh=zZwI8cbfeRo4mVNIaKAMEB6tPK+6Df5AU8X4FjC1cvc=;
+	b=jvByWFQS+WMRjzRE0jGDs/M/r3sZaaIHpsIEs8MDCEjjit+1DnL/ol+BgYyR56YcN7TB
+	 NkaXJTU3aCYso929+AM8BZEaGe4NA5A/vQJ/3A7wRs/lnn08a1ZlaF+uNkiVxI2LwBwpV
+	 BrNaRQfTwEqY88knzIqrJGaUzAjT+nS43ALla4h1e3MG3NOY7hx3lxiFrXdXK8kpoONmY
+	 PLzetHVqaakmv1NS0m3/W4AEMgUM+3k5ZQMlapIYw9AXDRxXXvJnlXclY6ec6k7Xe+Q/v
+	 xTQdLqHGMKw2a5M2MomS/hEjB7MjVvJSDaDaWgY0RUBNGwE4Ez5gI7YQauzPHCu5f9Q==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793183509;
-	bh=Ro/2ln5hO9tSsvGSqR6s0afsiG3xVW0VuHa04bz1uA0=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793184036;
+	bh=zZwI8cbfeRo4mVNIaKAMEB6tPK+6Df5AU8X4FjC1cvc=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=KYT3Z3mGT5ZEOf7D8JFRTaj5AvfpArPkWMQAZQGLLx4/egNUqcz8nvApN0Yrn1/fN
-	 ehZDbMMTGkkWdVJagB7CbLcPphJSri0IxMJxXwLqnzcl8b/RW71qN7cYG0Vy7BihXP
-	 zwkytCc0XXqyY+uSlfgg0GjuMEs9u7IAx7LtPSknHi0FJzDYfCi00u4akZ/xeYkWm1
-	 nPYzy5Dk2tUYghCJ1kSHP5/nCo9pxEK5ocIPNC53uGsb0tgw6SXH/MQCFT9Ot3+uIn
-	 oyx5KZKTg3SQv7J74ijiEw1J6ZOE1GcW+1vIaqTqOg1QgpuVJ2OZ7gmMLxU5F0jFYs
-	 mmHuH81POnoIw==
+	b=rA7OZd7d0AwO+oekQGnelidiLmX6MO8pPqJU8TS+rBI1jcfD2DU2FSZbcMV5/CYcT
+	 dZ41sBA/ujsXwhX2QHIrokW3L4TCC/S2saFtRlpZF2eIrKdK2LI1mjdb3WwUTwK+dv
+	 LssDJxHqMpGRjE/uuR6/wseML2Ia9UOzjYz0Gk3M88/riJl/RyFLvFAjf85ZKxFvCO
+	 WPfs6JUrpaueszJIWodKLLRYGk+lhLvZdjBYNrrQNbtJeCw0+Hri3u9crRre9Tz+pp
+	 EPonK24umEz7HzLa0PQd8pLxIbZPQRLADFJvsQltMsIa5+QMWA40wozDBZ0fQ2GdmA
+	 /RRlbQLwUuP6A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2825580E2A;
-	Wed, 28 Oct 2026 10:31:49 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id CD360356
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 10:31:34 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 63D3C605EA;
+	Wed, 28 Oct 2026 10:40:36 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2E332356
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 10:40:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id AF20880CCC
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 10:31:34 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1ED3240574
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 10:40:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VqU0qmje7pyq for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 10:31:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3ACD380DDC
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a02:2350:5:505::1"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793183494;
- b=I5m/fU6LbDnoHCDPlD+QLzAeHFXD+/jFrBiVBrbwAb2GjEOtLoUaiKdaEc9YC5xh1cwE
- S/5alkZWiW90bvt82R6V8NNtqVSg5vjVOFpMmd/AKU9VUAY2sx3wo/0p/l1Mj1KaWBW90
- FFfEk01OcNIiIGSsspo3EAX7+qIlv/nJvrVs7t1PFRX8utWnrtJY0JVZBYME6VHpKExoJ
- lZyfzb5pk5WnEGoIFOyM8H7nWR/Y45cC8lAYpqqkbJ1Ylz808hJ614BxJIwwnig8O1yxY
- GdveGne2UnRCQBtnMuzfqUKScCdNQmHtO11yuXhcYCsC5qZSBNK77Zj1vI4HALOSYZA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id HPVXFrEw4unm for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 10:40:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C996D4047C
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=188.40.3.216
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793184034;
+ b=FQEl8tCEIm4hmKD5w7CUB5ivTkkkqwUgn6xQ3SXOozN9Pi+u9P4nm537y5qQBX2S+XmZ
+ b7mWehqio8xivb1xyxsfxFmeok4vjMwLRaVI5MwuiRyDfdoxwebsTSl8rDEhJbMgdM6Ai
+ DLRfXaQxJ6+fDoZEueU2/EawB7bRAi/a+f3EqoCkquInsG9TWIVxeuwPTPLxvUlvFUo7a
+ CSYKoCR+ctlzxkVSUBgOYgFbdy8BNY+TsJdbmWNToqv0ElSyZAYhxS31ppMFbRtfm7g8C
+ t2Yl5Iy1vDVJB/qHTtr3S8Gu4p5c2ACiXVVIAbX8lvGhg6pCtQHigBQ9+U3vAvvURHg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793183494;
- h=Received-SPF:DKIM-Signature:DKIM-Signature:X-HalOne-ID:Received:From:
- To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
- MIME-Version:Content-Transfer-Encoding;
- bh=Ro/2ln5hO9tSsvGSqR6s0afsiG3xVW0VuHa04bz1uA0=;
- b=FIbL+VOa3Wb6LOOc74stp+B4l9qcmNDvSpd5ifkNcOmc6Ch1/e5sH1TqcORdvGVIY9Wv
- JPQXREKRPabd7HM0hvgNtR+Bc5FH7s4VAY8e0YNEWh3bhWuuDRaxWpKxeehhjd7bDebc7
- kzum2xhP5CHtAyC7pvAuZnxLM0qANCIxp6Ozm2AN+8zf8B30rAuiyI+pawhMZu/NQqbQ8
- lELk1BT5lidTuiWflrpYilUs9DkL3grgTiHnaxXGtjVj8Z8ANAoN0uLG6rQJPKp6rycYn
- rUx0AUauCwiHIXxhNotNbM2mY6NKqi8PTgg/t8sMWcpV/0fZlqozpc31s5MAVb609yw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=none header.from=embetrix.com;
- dkim=pass header.d=embetrix.com header.i=@embetrix.com header.a=rsa-sha256
- header.s=rsa1 header.b=uV75ywZG; 
- dkim=pass header.d=embetrix.com header.i=@embetrix.com header.a=ed25519-sha256
- header.s=ed1 header.b=2c8Po9vJ; 
- arc=none smtp.remote-ip="2a02:2350:5:505::1"
-Received-SPF: Pass (sender SPF authorized) identity=helo;
- client-ip=2a02:2350:5:505::1;
- helo=mailrelay-egress18.pub.mailoutpod2-cph3.one.com;
- envelope-from=ayoub.zaki@embetrix.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=none (p=none dis=none) header.from=embetrix.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=embetrix.com
- header.i=@embetrix.com header.a=rsa-sha256 header.s=rsa1 header.b=uV75ywZG; 
- dkim=pass header.d=embetrix.com header.i=@embetrix.com header.a=ed25519-sha256
- header.s=ed1 header.b=2c8Po9vJ
-Received: from mailrelay-egress18.pub.mailoutpod2-cph3.one.com
- (mailrelay-egress18.pub.mailoutpod2-cph3.one.com [IPv6:2a02:2350:5:505::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3ACD380DDC
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 10:31:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1793183489;
- x=1793788289; d=embetrix.com; s=rsa1;
- h=content-transfer-encoding:mime-version:references:in-reply-to:message-id:date:
- subject:cc:to:from:from;
- bh=Ro/2ln5hO9tSsvGSqR6s0afsiG3xVW0VuHa04bz1uA0=;
- b=uV75ywZGGZAFGiiFyBtOutthp0/bHhRO7TAs5Jf1Z6dNQGMMLM1LgMpyP27gdlT7C81h0W4sbkFQr
- 87PEx2yczS/nUvBu8FcBsrvsO7w9ZvlIygvwjYoqcpgv4K9MF5xtm486iG4MVsNr6Byj1/f0tGSuWV
- T/CB+kjv2t5PMjTtl7z+qoJppm+NldzYcXOxPN8f2ijs1PTsm8zSgWZo4AJCMn8za61pRjgaCt5BHN
- 3dh1b+H6ov5CfjbbQgg7U63GkCueggBgthF/3HeyrEQTlXka+4dseimnpLcF+wgf0igeUkiRQx94jv
- LN7j69zx1JLH3dtwNGSAK0TOB16CEmA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1793183489;
- x=1793788289; d=embetrix.com; s=ed1;
- h=content-transfer-encoding:mime-version:references:in-reply-to:message-id:date:
- subject:cc:to:from:from;
- bh=Ro/2ln5hO9tSsvGSqR6s0afsiG3xVW0VuHa04bz1uA0=;
- b=2c8Po9vJKh6TL+FpWy3f2XjlIUZTdg8d3sfhi7TY4H3DSzgXXwmNYe/fTU5jntxpkBnqn6HPIQZf2
- iDEpkwiDw==
-X-HalOne-ID: bb23e4a9-d2ba-11f1-9e47-5b5978544972
-Received: from xps-13.fritz.box
- (dynamic-2a02-3102-8c10-1ae0-c98b-5300-3c35-71e4.310.pool.telefonica.de
- [2a02:3102:8c10:1ae0:c98b:5300:3c35:71e4])
- by mailrelay4.pub.mailoutpod3-cph3.one.com (Halon) with ESMTPSA
- id bb23e4a9-d2ba-11f1-9e47-5b5978544972;
- Wed, 28 Oct 2026 10:31:28 +0000 (UTC)
-From: Ayoub Zaki <ayoub.zaki@embetrix.com>
-To: u-boot@lists.u-boot-project.org
-Cc: sjg@chromium.org, Tom Rini <trini@konsulko.com>,
- Ayoub Zaki <ayoub.zaki@embetrix.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut@mailbox.org>
-Subject: [PATCH v2 6/6] test: fit: Cover private key filename fallbacks
-Date: Wed, 28 Oct 2026 11:31:02 +0100
-Message-ID: <20261028103102.414657-7-ayoub.zaki@embetrix.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261028103102.414657-1-ayoub.zaki@embetrix.com>
-References: <20261028103102.414657-1-ayoub.zaki@embetrix.com>
+ c=relaxed/relaxed; t=1793184034;
+ h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Subject:
+ From:To:Cc:Date:In-Reply-To:References:Content-Type:
+ Content-Transfer-Encoding:User-Agent:MIME-Version:X-Virus-Scanned;
+ bh=zZwI8cbfeRo4mVNIaKAMEB6tPK+6Df5AU8X4FjC1cvc=;
+ b=CSRgR2iGixSWRhdFCCZ/YITttOyDaO29EHC4Lth61d7yydeA8EumA1wYYryHGcySY5ph
+ xbn53fBH9P/TCli2UxR/SY3G76tnKfN0k/V2s6r2HUt04OQ7cXRCfX3zWTBDhjHIulBvm
+ mg16GCLBjMcQ66ELzWNz/BtfFfi8XxNduuV+5pEzEvMBfLbkAwU03Nwx7bOm+Y+0R+EoN
+ F2IF2yaVWT3Ah09MCvHZomsO1XJRtmIUSdm8wajssAzWLjrZJh0q2vBXOElVXIO14ywOu
+ 46CDmxG85r5v0pQzplD/eqd5eX12QbSflRJ/K82Fd/1jJycgtBM6VVFNYAMm56na6YQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=ew.tq-group.com;
+ dkim=pass header.d=ew.tq-group.com header.i=@ew.tq-group.com
+ header.a=rsa-sha256 header.s=default2602 header.b=cO1CYLGM; 
+ arc=none smtp.remote-ip=188.40.3.216
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=188.40.3.216;
+ helo=www537.your-server.de; envelope-from=nora.schiffer@ew.tq-group.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=ew.tq-group.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com
+ header.a=rsa-sha256 header.s=default2602 header.b=cO1CYLGM
+Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C996D4047C
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 10:40:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ew.tq-group.com; s=default2602; h=MIME-Version:Content-Transfer-Encoding:
+ Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=zZwI8cbfeRo4mVNIaKAMEB6tPK+6Df5AU8X4FjC1cvc=; b=cO1CYLGM+zteyDBTH8vdlK6Fhx
+ 1U+U9UoYTbxqL/glJqaW04I16mAx56pT5FwUsdbqZPM7/pzG4xp79vji1r6jN/DFxSeTpBg1utdgF
+ TRJWD1xaD+ntoKhsRkoiULnkPRaz67mTvHEwHgJTZ+EWlKsaRhUQV+fNVYKqSUl4KUBDUG0yDMsMO
+ 4Mwe9XRA8wHm7YAoeVV2AoYYlKLYoTL114GT/oikrgTwAct4J1/FbxmVSeXmAd5aAVP3/55sqiAEp
+ xLD6LNXkpDF90lRBGPEXv08g1AurQqbCNjGK9RHvJuR1Bo2f5pcNIVYkpM826Xuf8WmMtW1JSXzb8
+ 9VvYPhkg==;
+Received: from sslproxy07.your-server.de ([78.47.199.104])
+ by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96.2) (envelope-from <nora.schiffer@ew.tq-group.com>)
+ id 1xM151-000L4k-0e; Wed, 28 Oct 2026 11:40:27 +0100
+Received: from localhost ([127.0.0.1])
+ by sslproxy07.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96) (envelope-from <nora.schiffer@ew.tq-group.com>)
+ id 1xM150-000Jdz-2J; Wed, 28 Oct 2026 11:40:26 +0100
+Message-ID: <b94621f8cc783f5f1e97578ad7bed3405862574f.camel@ew.tq-group.com>
+Subject: Re: [PATCH 09/16] usb: ehci-mx6: set up i.MX7D misc registers
+ regardless of CONFIG_PHY setting
+From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+To: Marek Vasut <marex@nabladev.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@ew.tq-group.com, 
+ u-boot@lists.u-boot-project.org, Stefano Babic <sbabic@nabladev.com>, Fabio
+ Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>,  Tom Rini <trini@konsulko.com>
+Date: Wed, 28 Oct 2026 11:40:25 +0100
+In-Reply-To: <a829d462-e139-4905-b2c7-f8140a6cb2f2@nabladev.com>
+References: <cover.1793091394.git.nora.schiffer@ew.tq-group.com>
+ <bd8f810425b7d3f8d1d78fc699b232da5a7ea60a.1793091394.git.nora.schiffer@ew.tq-group.com>
+ <a829d462-e139-4905-b2c7-f8140a6cb2f2@nabladev.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.56.2-9 
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Virus-Scanned: Clear (ClamAV 1.4.6/28167/Wed Oct 28 07:24:17 2026)
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -161,160 +150,38 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Test RSA and ECDSA signing with each suffix alone. Test both suffixes
-with different keys to check which key is selected. Verify each image
-signature against the expected public key.
+On Tue, 2026-10-27 at 18:24 +0100, Marek Vasut wrote:
+> On 10/27/26 10:39 AM, Nora Schiffer wrote:
+> > While a separate usbmisc driver could be added, no such driver currentl=
+y
+> > exists, and it would not necessarily be part of the PHY subsystem. Rath=
+er
+> > than making the misc setup conditional on CONFIG_PHY, make it depend on
+> > the existence of a fsl,usbmisc property. This will allow enabling
+> > CONFIG_PHY on the i.MX7D for the NOP PHY driver's power domain support.
+> >=20
+> > Also update the code that reads the usbmisc address to use the modern
+> > ofnode API and fix the portnr to be determined from the usbmisc phandle
+> > arg instead of the alias seqno.
+> It seems this patch does multiple things, can you please split it up ?
 
-Check that an invalid or unreadable preferred key prevents fallback.
-Check that an unreadable fallback key makes mkimage fail. Check that
-missing-key errors name both attempted paths.
+Okay, I can split this into two parts:
 
-Check that explicit -G paths do not fall back to another suffix.
-Missing keys remain optional.
+- Make the setup independent of CONFIG_PHY
+- Use address/portnr from ofnode
 
-Signed-off-by: Ayoub Zaki <ayoub.zaki@embetrix.com>
----
-Changes in v2:
-- New patch covering RSA and ECDSA key lookup and signature verification.
 
- test/py/tests/test_fit_key_fallback.py | 121 +++++++++++++++++++++++++
- 1 file changed, 121 insertions(+)
- create mode 100644 test/py/tests/test_fit_key_fallback.py
-
-diff --git a/test/py/tests/test_fit_key_fallback.py b/test/py/tests/test_fit_key_fallback.py
-new file mode 100644
-index 00000000000..b7031340324
---- /dev/null
-+++ b/test/py/tests/test_fit_key_fallback.py
-@@ -0,0 +1,121 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (c) 2026 Ayoub Zaki <ayoub.zaki@embetrix.com>
-+
-+"""Test FIT private key lookup and verify the selected signing key."""
-+
-+import os
-+from pathlib import Path
-+import subprocess
-+
-+import pytest
-+import utils
-+from Cryptodome.Hash import SHA256
-+from Cryptodome.PublicKey import ECC, RSA
-+from Cryptodome.Signature import DSS, pkcs1_15
-+
-+
-+@pytest.fixture(scope='module', params=['rsa2048', 'ecdsa256'])
-+def signing_keys(request):
-+    """Generate distinct preferred and alternate keys for each algorithm."""
-+    algo = request.param
-+    if algo == 'rsa2048':
-+        return algo, '.key', '.pem', RSA.generate(2048), RSA.generate(2048)
-+    return (algo, '.pem', '.key', ECC.generate(curve='P-256'),
-+            ECC.generate(curve='P-256'))
-+
-+
-+@pytest.mark.buildconfigspec('fit_signature')
-+@pytest.mark.requiredtool('dtc')
-+@pytest.mark.requiredtool('fdtget')
-+@pytest.mark.requiredtool('fdtput')
-+@pytest.mark.parametrize('case', [
-+    'preferred', 'fallback', 'both', 'invalid', 'unreadable',
-+    'fallback-unreadable', 'missing', 'explicit', 'explicit-missing',
-+])
-+def test_fit_key_fallback(ubman, tmp_path, signing_keys, case):
-+    """Only absent preferred keys permit fallback; -G uses the exact path."""
-+    algo, preferred_ext, fallback_ext, key, other_key = signing_keys
-+    preferred = tmp_path / f'dev{preferred_ext}'
-+    fallback = tmp_path / f'dev{fallback_ext}'
-+
-+    def write_key(path, private_key):
-+        pem = private_key.export_key(format='PEM')
-+        path.write_bytes(pem.encode() if isinstance(pem, str) else pem)
-+
-+    if case in ('preferred', 'both', 'unreadable'):
-+        write_key(preferred, key)
-+    if case == 'both':
-+        write_key(fallback, other_key)
-+    elif case != 'preferred' and case != 'missing':
-+        write_key(fallback, key)
-+    if case in ('invalid', 'explicit'):
-+        preferred.write_text('Not a PEM private key\n')
-+    if case in ('unreadable', 'fallback-unreadable'):
-+        unreadable = preferred if case == 'unreadable' else fallback
-+        unreadable.chmod(0)
-+        if os.access(unreadable, os.R_OK):
-+            pytest.skip('Cannot make key unreadable with this user')
-+
-+    mkimage = str(Path(ubman.config.build_dir) / 'tools/mkimage')
-+    datadir = Path(ubman.config.source_dir) / 'test/py/tests/vboot'
-+    fit = str(tmp_path / 'test.fit')
-+    (tmp_path / 'test-kernel.bin').write_bytes(bytes(500))
-+    utils.run_and_log(ubman, ['dtc', '-O', 'dtb', '-o',
-+                             str(tmp_path / 'sandbox-kernel.dtb'),
-+                             str(datadir / 'sandbox-kernel.dts')])
-+    utils.run_and_log(ubman, [mkimage, '-D', f'-I dts -O dtb -i {tmp_path}',
-+                             '-f', str(datadir / 'sign-images-sha256.its'),
-+                             fit])
-+    nodes = ['/images/kernel', '/images/fdt-1']
-+    for node in nodes:
-+        utils.run_and_log(ubman, ['fdtput', '-ts', fit, f'{node}/signature',
-+                                 'algo', f'sha256,{algo}'])
-+
-+    if case == 'explicit':
-+        key_args = ['-G', str(fallback)]
-+    elif case == 'explicit-missing':
-+        key_args = ['-G', str(preferred)]
-+    else:
-+        key_args = ['-k', str(tmp_path)]
-+    cmd = [mkimage, '-F', fit] + key_args
-+    result = subprocess.run(cmd, capture_output=True, text=True)
-+    output = result.stdout + result.stderr
-+    ubman.log.info(output)
-+
-+    if case in ('invalid', 'unreadable', 'fallback-unreadable'):
-+        assert result.returncode != 0, output
-+        if case == 'unreadable':
-+            assert str(preferred) in output
-+            assert str(fallback) not in output
-+        elif case == 'fallback-unreadable':
-+            assert str(preferred) in output
-+            assert str(fallback) in output
-+        return
-+
-+    assert result.returncode == 0, output
-+    if case in ('missing', 'explicit-missing'):
-+        assert str(preferred) in output
-+        if case == 'missing':
-+            assert str(fallback) in output
-+        else:
-+            assert str(fallback) not in output
-+        for node in nodes:
-+            props = utils.run_and_log(ubman, ['fdtget', '-p', fit,
-+                                             f'{node}/signature'])
-+            assert 'value' not in props.split()
-+        return
-+
-+    def read_binary(node, prop):
-+        values = utils.run_and_log(ubman, ['fdtget', '-t', 'bx', fit,
-+                                          node, prop])
-+        return bytes(int(value, 16) for value in values.split())
-+
-+    # Distinct keys in the 'both' case prove that the preferred key was used.
-+    public_key = key.public_key()
-+    for node in nodes:
-+        digest = SHA256.new(read_binary(node, 'data'))
-+        signature = read_binary(f'{node}/signature', 'value')
-+        if algo == 'rsa2048':
-+            pkcs1_15.new(public_key).verify(digest, signature)
-+        else:
-+            DSS.new(public_key, 'fips-186-3').verify(digest, signature)
--- 
-2.53.0
-
+--=20
+TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, Germ=
+any
+Amtsgericht M=C3=BCnchen, HRB 105018
+Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan Sch=
+neider
+https://www.tq-group.com/
