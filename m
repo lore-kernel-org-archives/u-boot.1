@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D048606A327
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7534606A321
 	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 03:07:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=NdQRJOsE;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=A5Ut8xq7
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Z/Rt38nc;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=H9ubqp1P
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3BFC34057A;
-	Wed, 28 Oct 2026 03:07:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AB9BE80C76;
+	Wed, 28 Oct 2026 03:07:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id E4wV8m8ytFpc; Wed, 28 Oct 2026 03:07:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2144840568
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793156845;
-	b=taUjEtecb9S3PShxnm9UCQkUqbIg7fvqHvNgFQm9NtqqT9uAinLdzd2We/xAOPR+37KA
-	 5/ppl3L31iPqayNWBAyDp72Sk3+hJrR48WLGu8InlpRIn1P65PAABV+giHoxiiHZ8J0h7
-	 XPQVJcoToxMBD59aLkYs+96TZptT/WjuSOQiFWze6ZnKEmMt1rHlhHzqCEVLgjYC1XVad
-	 UOYsTplkHtkEdrQbYUp0UCURWoW3qCGlPE5X/TAbAzJcSYosl695XwrviKHpnFTwhXEqZ
-	 ApAnOzk8E8fMtZdh4IfH8EEfJucCyanKg6IeDxn4/Aj5aZnTrUN5YckiqJlM5+nuFng==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id msKR5czY_WUq; Wed, 28 Oct 2026 03:07:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org ECC3380CE8
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793156847;
+	b=iIivcLBesRRMrnOPVUq7JkxOqtGf+eKTrZjWjp1MHT9DuJqs06JPnW7iMI9F49fT4GLH
+	 qtwFnNuOt4/u61Q26BcI8ql1tQ7kIJoof4pef2za24S093SWiehxYHpMV40gE2o+I03/z
+	 PSwW/EDid7wbbDX7h2tjPRaE0wgl7kGOca8B9igTxS3J77NCtEQ1nBAu5yORAsNGr/LlU
+	 pCIBlj5KBvePHFyUAefJC/7wlbFYacKUsNaGygdV3F9WdHswaj1XvHe6PvNifjRKiinTK
+	 V5FSWfGUOnYnD0kqHJcUN6l7iUJ1cbi5DOY18Fto1u249esdS5D+x4CWuUTSClogyZw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793156845;
+	c=relaxed/relaxed; t=1793156847;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,136 +32,139 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=ANigT+yl+SZ/NJijzSdvgLFoRArkYIMpJa36inXlQYQ=;
-	b=aCmu4rG/IASC/AKnYv0h4FlpqamNADegmA8iA44uPrOn7cLfCsMheii2C80slH0IdLPP
-	 3u2yfq0ZMdM+fbbxhmIHjL0hFaKZKu+0CqRpi9QQWhMbwC88zCoPkrPAFR+89nFPvKPE2
-	 RiXueDa0o1LBN/q9b9w8CXd1b8qiQ+uNr26/KB2Nkjsp/QovOllOGt2fXi0c4sRZcNzNs
-	 FyBsJI5+2YhL4BGCKktz/808+MtAMPMS1+00lIxZKldEE0Hh1rlWL/Y6B+b+tTONB/jnt
-	 vOMfXgNT/JYrISD3STG61usV89Sc0fXsPUVGJxaiy/uj0FkBAYe6NnVXl5KKljnqpOw==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=NYU+Hqv6g5WU/N+HQF5HveyR4PShGWf3Pkjqw6D5zV0=;
+	b=iVGMb2C1ixW2c1hbiu4FERvC7YDjdxwXyHPRBpsny5l6YNRrndRpoQF+9ofhjXQbQQu3
+	 kYfCrbXsPzfEaakCJiz8icQHhAM3zpyDHBIa9Ht/4J53uc5YTfPrJGs4JjhH7bJJC9eKz
+	 k2UN8eQdSHzU6aHmU/8s6yH/psvfpCbSHJ8JTZ8pbKqHim1ZfumbhfYqOh5qBHvBawmr3
+	 Gn9IZl3jtkZcZJJU7gBOhwGM6OJA9zFTZWMfSXSnYwJ02+nbi3av13juzvzrQoH7DyhEd
+	 3rsV6i9YHPiDzqO2lxIcpDIPOkCfl/v/tLgKmyulBYQZ0DttZoxwwmNNNw6/4gjeu9A==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=H9ubqp1P;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793156845;
-	bh=ANigT+yl+SZ/NJijzSdvgLFoRArkYIMpJa36inXlQYQ=;
+	d=lists.u-boot-project.org; s=default; t=1793156847;
+	bh=NYU+Hqv6g5WU/N+HQF5HveyR4PShGWf3Pkjqw6D5zV0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=NdQRJOsEGITlqXnb1GiUKZ0bFgJwRQuhZGEC1Pd43vDZ6hIml6WSKzpz/gnl0iZW/
-	 Y2eddOwDPNl6mLu2hcYi2CnMLwnM0peptg0yFfghf/jaWDHDK5XW9if/P0CwCUcFaL
-	 P57UVS1dL8DsrOnbDAwCDwXQ+RWOYI6o98pel6pS0+0b1M20QeHwlrfrSOX1W1ajaG
-	 wyienkVRJy9zpQHS0uT7g+ZIxIdf+0W6/+cM241RJONApCGdK7rwNfZqEybgTsC4Gc
-	 BjZgiXeN01lXgiAd6hHpwB6bPU2+Pslks0hShN/XTbfpPb2BhiEUMIN3YYfEPALoTj
-	 36DDQ5U2xdWpg==
+	b=Z/Rt38ncOeZaGqdF+7FctdkAonacuo24GHfziZGo/9JUZR4OBnBMEc0ETwHSEJhpa
+	 afnC8nOD5+kZ+m2ePW+ETENv+TqFcYuD5LIm3sOoxCHp/V3hntrnL5k1bYfrTS8rbb
+	 KbEND7GVdywt553f2r2jklJ2Q24sN4z+Eq1x4D5acS1sHEVujITWzKoWkKKkT3bW8l
+	 XT1DIluiKG/DSaqgfO0QqhOLv2LM3lxazMpv/Z81iVXjqMQJ31Sd3We8Lm02xDqGAH
+	 zQrhgM8/aPSMQ3LIQiE308LZjKnznm3F5PhRfo5sRsXaZIHy/IyusQfEFfpSYgx+Qs
+	 eL0a2z31O9mwg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2144840568;
-	Wed, 28 Oct 2026 03:07:25 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id E6A814BC
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 03:07:21 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id ECC3380CE8;
+	Wed, 28 Oct 2026 03:07:26 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id EE330473
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 03:07:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D5A756060B
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 03:07:21 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id DBCA280CE8
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 03:07:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RsI7tJP3IvM4 for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 03:07:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DBE0D605DF
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::102d"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793156841;
- b=XgxA4K+YbHW9ZKO1F3z3+9HLaVL2vVYFN2ERUvuWGpXiU4nh7tpqy+nUnCLmY+O7zZb+
- tGnzPqngYpp50q79b3we9FGOSFkaQjmZ4ADhM/zDk6mPlln7HXxctbyPo/AZLIBhsyy3H
- 8X4ZN4lL+gu1fKTdvGZKzSgeDdDYu075UQZeX7JaRXzOw8KGEXICuv2E1IP/XUSoANeQ7
- RG9dHg7a3tj5EAB1fo0sc2V/LGBC+/+CYWTgqaxqPexgHCZHlv+EBQxDSoYYXSFOyuoZy
- I0U2bvbNBj/o2o2djwqYepxosFaeGvM6axeX/A7ay9dzFBrlZ/3sJ/6HbwFcshYPR1A==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id wEP8MMfoVz2X for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 03:07:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org EB40F80CBC
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::52e"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793156843;
+ b=IXnk7jOt3O+f9nqFiYUyTe6Z9eogYYJBy/BrpaKz569Y4wYM9YUWu3iCuhlBLtsIBw3c
+ QNpLpn083o6GsJ9tbgLoPoXO/NNn9zJW7j6C5ZRWArekkrb8fGU6S97kn9rkCEAu4/495
+ r/m08kmSEX17ILCdQ4qO6C/Bb2VcjCBVidYZw7Y5IA1P+g7Lhww0tt589XwYflMAAQOEY
+ iUmjpZHQtCcWT/5NQ/SL7ITAiDT4qS7/70cId7TZg3mtFWP22r2KNBOQO76rWCbQhk1Cg
+ bQd+2D0cgcHztX6Pf/e9JSXyZgMH6PWANfIOsBT6YmQHJ9qyPIkJIPeYPzhD1S5j3nA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793156841;
+ c=relaxed/relaxed; t=1793156843;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=ANigT+yl+SZ/NJijzSdvgLFoRArkYIMpJa36inXlQYQ=;
- b=BW7wJP8DOzuVzsdBnlerFHFFYwVt2edwjk2/cR24yoz6VdxJHXQXcra8AczNCyO5Mo7r
- KiGJUS+HhB7D+pW6vejEPnLoLSg1kpXjIdxP3EsgT69eCI09fB4V5ZryylJyc5mkH1guQ
- 01OH1UaKZN9s7qLHFUSS4OXOgKYDuMCYXJNEc6omIBHatXoJkQJnshEeWwXWCNd8l5JDv
- gM1BZth9/PNBf8ES/ZWQ7OsnDxp/+ZQ2y/cjbE/qQSZ+yYrJk7g7Pw0qjudn3WrzYFFdR
- /wHAHhw1yz3ou7dOxIF1BQokGk26/jj1cmuPBrjBVodb88AYhR9MbOf5dv7eWmliOqQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=NYU+Hqv6g5WU/N+HQF5HveyR4PShGWf3Pkjqw6D5zV0=;
+ b=cFODQEVMnU6Fs+k8JkDIiI/EcWQmGIJgBoklgh8BHEM3WRMfpdB4vyLn0vsBXe0S+8kG
+ TfPSBk3G/ZSBW9mnOTy4mp37W6pDHasP3yChHTIwQaZGqAmDlJConJcEMFFZbh/wN15cV
+ uh/WPPQyslAX8xCDPh89b0lfYW422IizZsIj1JOro+vTcrK7tEjfMCXrRCikwoFLbF9ck
+ msQPM6QaScp7qumgDN05dYaqF4cf11fmTphEb88skO9DyVOAqeu2s1u8zm7yGoRHAMNhh
+ xlWHGGhZpucoKxQvsiR4T3UK6mAczjHpwwCgYEzujZjuFpaFpg1FSqlBSn8DKRLgxZg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=A5Ut8xq7; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::102d"
+ header.s=20260707 header.b=H9ubqp1P; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::52e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::102d; helo=mail-pj1-x102d.google.com;
+ client-ip=2607:f8b0:4864:20::52e; helo=mail-pg1-x52e.google.com;
  envelope-from=alan.tseng.cs@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=A5Ut8xq7
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
- by smtp3.osuosl.org (Postfix) with ESMTPS id DBE0D605DF
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 03:07:20 +0000 (UTC)
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-3ab2cb8d577so442661a91.1
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 20:07:20 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20260707 header.b=H9ubqp1P
+Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
+ [IPv6:2607:f8b0:4864:20::52e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id EB40F80CBC
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 03:07:22 +0000 (UTC)
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-cdab9e9761cso305527a12.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 20:07:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793156840; x=1793761640;
+ d=gmail.com; s=20260707; t=1793156842; x=1793761642;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=ANigT+yl+SZ/NJijzSdvgLFoRArkYIMpJa36inXlQYQ=;
- b=A5Ut8xq7ttHow1iKcon2F3+KyN0pFp8YddYKCtj7ecCAE659/GCVzKZroKatc9k3bD
- 344J1UGJhCK904eWp9ilFSbWNJcTo/uF7CPiMAFyzyZeHdpaY05cg7SohFPeF0+05f/p
- Nx7t71ppOXxX89Wp4pZYWhnKa76ZtEWbTb10/eSUrX4hGJc2ankkAfoBXhdllPgobnwt
- vhY7NQu+cCIBVKQ4P38HG1YjdypatX2upzKvh/bzuB6wPKG2TKBUu7hydTK4BfPGIfJI
- hRlI77trON5ThQc1uirMS7HYqdsiExMMo75ERl9VJGF1WojlXwwYspFFw1aprh9zLE8H
- FpdA==
+ bh=NYU+Hqv6g5WU/N+HQF5HveyR4PShGWf3Pkjqw6D5zV0=;
+ b=H9ubqp1P28vB0rJZTnO/sB04DJ5RVbzXPU45wlrkU1UOBXymz3UdWfbIs3vSwT866q
+ A1VfjavnBOgZ5LOAbIBrpKO9KPlEwGbwvHvaxqp7Tbpr0WI1E9PDZt+IlAAw8hfK+dxQ
+ SJyM6OLLpfUKD8V3WKavP/2KM6zYDDVRPWhx5ZMR4UtStKxataNAK6mUaePXunM0e6jK
+ xCpLtiiermYVY1yQN28VEgWBFGbIH4gSGsWRx3KT5AgYtcO84F9C/Umza+Sp/3bx86RY
+ L6xQXql9kCf6t6fG3+6p49LhvZorqqx2RoGG1DFUb6CBUqzO/QTrPL1M2pW8bo0g3c6C
+ Crlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793156840; x=1793761640;
+ d=1e100.net; s=20260707; t=1793156842; x=1793761642;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=ANigT+yl+SZ/NJijzSdvgLFoRArkYIMpJa36inXlQYQ=;
- b=jxLbUXkZI98HOmQLXuRasY9HQJ+uuzOsTw0iQ9CLxAwKppL4eY/DPimJ4YyTVwmJp7
- O0uHXGY0j6r5GeQ6uVm6Dv5qnfx8f3gN5Q2JRURo0E0rC98Pj3igrf+q4QXHawamDp+4
- j0m49Gr5opp4eYgE8LijchKWmHTz1woaNvR+OD/eESGlXh8jQzwlk6r2jwNVSprlL6qJ
- iT2Qw9H7Ag6FRmWo5ig3hivmJcOLbhMuHGYkzNCdrJIgp/SRXC6TuigK9sldq3xGMGP1
- cgW2GIhLlmvdhBpaIr+/ijjL3scIr6rSUP2sru6LyGlL77QPXicj1vfGpoUVBUvtHJ9j
- 7T2Q==
-X-Gm-Message-State: AFq9FYInzVSzvbbeujR6tZfk6VJKnrHWF2OXsde+BkImGsME0lxrqtsy
- kzfcJFrELMehe/Xb8O7y7xCL3qhNswC4wv0sOgpTOGhH1fbxK22qxOaqPxbN6yBx
-X-Gm-Gg: AYBFou3LSaHfKhZJimMGuupV1DsCXUz/03E05SILoVyo4OcygyfUjJ1w65K+X0f9lNK
- iibWuO1Mxjt2M88l0BLZab1K7qzY9iv+BfMf3dqKxyKS5VuZkkSQsg+BqzjejK+XSTRh2QeVYwx
- cYB8WGRbYGhVwvnu5FN+j38OkUv6PPlpN2kzhjMNwhgWnXE1KCjiNBeI1+TkvmDXrQjCYgk3I8A
- Z6Xq3eHU3dhiiwynJDyZdoS8sAILDl8r6Sx9qK1ZXCf0So6Te9XNQuSSyAaVjWC2IjipFQNP7HY
- U7QkNyOKcVW+H2PvKgbc+2xGSy1oVbXwVZhsQV6HSp4q/DBly1eho4192hhadIpJofe+sTlaayp
- S07uv0UbmLHZjO9GzzwEGDuGg6MAPr3wuO0jm4TpVhTI3k8k+rU940iGDogtD4nO15QM10HoBIK
- zwp5S/wPlWnkuhSXTfPFBQBqHPZ863ZsT86rgmB2+XIOnGrMkMYNNZ0avr4bxjhUFHw/LHlB3Db
- tHn2Ys0A193ewaXi0u84XmxZBUQX2y5A//JhqeFXWTUROOvyO05e17dBx0Hv6xELY4d+rwSu5gk
- 7l0533RX2LS3/G3j4NgsG/h4COJbFP4wbq1/ylQ5KjsEEAaAomdp0pTEgyBCIORTYCopGBz3TGL
- zs8kG8zcXxUV/7XmdQQYyL0ougV4/0GQsq/rodHIkljuMatj+jCgGhpEIR4gBuTctysQXmIMiQn
- mxQoNpHkw3CxeoYSNaKLdQMSKnAbK4vg==
-X-Received: by 2002:a17:90b:288c:b0:3ac:9f24:44be with SMTP id
- 98e67ed59e1d1-3ae580a02e2mr838418a91.29.1793156839919; 
- Tue, 27 Oct 2026 20:07:19 -0700 (PDT)
+ bh=NYU+Hqv6g5WU/N+HQF5HveyR4PShGWf3Pkjqw6D5zV0=;
+ b=SXGCT8+mEd5HfQRv0dR2wAGxexT90Rs91qoVw/FjQQ+womOZjDZ/r4aiZBs+ZDf2FH
+ e9B58WTQlTvsMV4TOJk2OyLuvw7OrF0vIwQh8GOznejp8ZzbQbRqBHz9ZjHnX+uOelXv
+ mJG0ZpeablqbVrX97b1lmWQ3WO8G8M5MEXuB+VdIZbak4rLHsrkUDJZ7De+Wp75WljkN
+ 3Z3vcj5VyEWZYVGY1u6z61byTeDmMcRW0z5GyvrdGGQ6JgLpJhIFlow2b3LEtQdbZ/f/
+ zeptBu3FtNf0mp6GzOGgSghPHJQgxiAjOP8yEo9qcdYhMKjeQDePFXFYa68MN+AeQMUS
+ YDYQ==
+X-Gm-Message-State: AFq9FYIkGYekOGzI9obUhTjfAUjNZ1NwxHakBq4+A987CyvBklyPhiIx
+ SVtI7PMDWh3ZkxPhPmoNP08sz+opEApmrMv+8zgFL8HREegrjcO9U9Ls7crQrw1Q
+X-Gm-Gg: AYBFou0W2aB7kiRqywKWkI9PIH9OGfJY7plBiypseZKO+BUab8783g6fLC0VVgvePCg
+ J5wi1dauHfmeb5pTvGJ0k1E18Ms3p/PZZcgpBx1A/1DhQbsDhFfu6gf7sWNn973146udtEXyh1s
+ eH/ZQsbxmKwHO/c5wAlxp/2z98iU3GZu+fjhs42WScCWop1DqJj57m1TBqBXtf5iy/VWb3cNsWF
+ f0ZFCBi10mvEf/agX9+ABgMjHGWga5Ryb3DMsLVjHRyzd7xLd766HFVaQj1+qSzRGRYu84CBCw9
+ xYSezsbunR0sDumo+eFiWcti2yhDazINDqczvzIf2J3B+gcS493pecYI5Z3ddS2TSTUYNiqcAyF
+ YMlmSxGPn1JMnvoY61ENA7rR1lXTI8KFrdlS3VuFR7smdcT97E6RmRRfb52XG0P8tyYExbDwHtJ
+ CWBnuQ/K/k3J8fc1Ah8F1jwMXf1tbv/vJHNoMs+SeyCVczdrDfmi4K8lbxiEHbKgdebvBqry0ER
+ fJbGoXYOnSVWY+CvrB93y4Qa0OXl3Wl3EAZaUSrYg/P5CK6UdqnmmTK9rkEDRis1xtpgMVA90qT
+ tnCmQ7B1ff5CnOtWXLdeGgsZynuPCyJbYHJZSFxbwX0XO34wvIYP8cyxMvw3teBK3Hg/ghsg16a
+ 2sLDpRoRV7pnFuOVUjrUuUw68osi/MGj3bqFjB89uUO05DOezxFSxKI9MENR/vS/bI9LChlXY5h
+ hMzF/1hMps
+X-Received: by 2002:a17:90b:53ce:b0:3ac:8fff:5a1b with SMTP id
+ 98e67ed59e1d1-3ae582348f6mr793779a91.34.1793156841976; 
+ Tue, 27 Oct 2026 20:07:21 -0700 (PDT)
 Received: from alanhc-14700.tailb22ec2.ts.net
  (180-177-138-120.dynamic.kbronet.com.tw. [180.177.138.120])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ae5a48c2c5sm828615a91.4.2026.10.27.20.07.18
+ 98e67ed59e1d1-3ae5a48c2c5sm828615a91.4.2026.10.27.20.07.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Oct 2026 20:07:19 -0700 (PDT)
+ Tue, 27 Oct 2026 20:07:21 -0700 (PDT)
 From: Hung-Chun Tseng <alan.tseng.cs@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: bmeng.cn@gmail.com, trini@konsulko.com, visitorckw@gmail.com,
- sjg@chromium.org, xypron.glpk@gmx.de
-Subject: [PATCH v5 1/5] virtio: rtc: Add virtio RTC driver
-Date: Wed, 28 Oct 2026 11:07:10 +0800
-Message-ID: <20261028030714.1608977-2-alan.tseng.cs@gmail.com>
+ sjg@chromium.org, xypron.glpk@gmx.de,
+ Bin Meng <bin.meng@processmission.com>
+Subject: [PATCH v5 2/5] doc: virtio: List the supported device types
+Date: Wed, 28 Oct 2026 11:07:11 +0800
+Message-ID: <20261028030714.1608977-3-alan.tseng.cs@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261028030714.1608977-1-alan.tseng.cs@gmail.com>
 References: <20261028030714.1608977-1-alan.tseng.cs@gmail.com>
@@ -185,373 +188,74 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-QEMU provides a virtio RTC device (virtio-rtc-pci, virtio-rtc-device)
-since v11.1.0, but U-Boot has no driver for it.
+The list of supported device types still only named network and block
+devices. Turn it into a bulleted list, which is easier to extend, and
+add the entropy, 9P and RTC devices. Also note that the virtio RTC
+device needs QEMU v11.1.0 or later.
 
-The virtqueue must not be used before the virtio uclass sets DRIVER_OK,
-which happens after probe(), so the clock is looked up on the first read.
-
-Like Linux, the driver prefers a VIRTIO_RTC_CLOCK_UTC_SMEARED clock, as
-it never steps on leap seconds. QEMU master reports such a clock since
-"virtio-rtc: Report smeared UTC clock type", but v11.1 reports
-VIRTIO_RTC_CLOCK_UTC, so the driver falls back to another UTC clock
-rather than leave U-Boot without an RTC there.
-
-The set of clocks never changes, so if none of them is UTC, the driver
-remembers it and fails later reads at once.
+The Development Flow section repeated the old list; point it to the one
+at the top instead.
 
 Signed-off-by: Hung-Chun Tseng <alan.tseng.cs@gmail.com>
+Reviewed-by: Bin Meng <bin.meng@processmission.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Kuan-Wei Chiu <visitorckw@gmail.com>
 ---
-(no changes since v4)
-
-Changes in v4:
-- Cut the commit message down to why the driver works as it does
+Changes in v5:
+- Point the Development Flow section to the list of supported devices
+  instead of saying only network and block devices are supported
   (Kuan-Wei)
-- Say that QEMU master now reports a smeared UTC clock and that the
-  fallback is for v11.1 (Kuan-Wei)
-- Drop the comment on giving up after a failed request, which is plain
-  error handling (Kuan-Wei)
+- Keep the Reviewed-by tags of Bin and Simon, as only one sentence
+  changed
 
 Changes in v3:
-- Give up on a request after one second instead of polling forever
-  (Kuan-Wei)
-- Remember that no clock is UTC, so that later reads fail at once
-  (Simon)
-- Expand the VIRTIO_RTC help text (Simon)
-- Drop __packed from the message structs, which are naturally aligned
-  (Kuan-Wei)
-- Prefer a VIRTIO_RTC_CLOCK_UTC_SMEARED clock as Linux does, fall back
-  to the first other UTC clock, and explain why in the commit message
-  (Kuan-Wei)
-- Stop looking for a clock as soon as a request fails, as Linux does
-  (Kuan-Wei)
-- Mention in the commit message that sandbox tests follow (Simon)
+- Retitle from "doc: virtio: Mention the RTC device", as the patch
+  lists other devices too (Kuan-Wei)
+- Turn the list of devices into a bulleted list (Kuan-Wei)
+- Keep the Reviewed-by tags of Bin and Simon, as only the layout changed
 
-Changes in v2:
-- Look for the UTC clock on the first virtio_rtc_get() instead of in
-  probe(), as the virtqueue must not be used before DRIVER_OK (Bin)
+ doc/develop/driver-model/virtio.rst | 15 +++++++++++----
+ 1 file changed, 11 insertions(+), 4 deletions(-)
 
- drivers/virtio/Kconfig         |  11 ++
- drivers/virtio/Makefile        |   1 +
- drivers/virtio/virtio-uclass.c |   1 +
- drivers/virtio/virtio_rtc.c    | 244 +++++++++++++++++++++++++++++++++
- include/virtio.h               |   4 +-
- 5 files changed, 260 insertions(+), 1 deletion(-)
- create mode 100644 drivers/virtio/virtio_rtc.c
-
-diff --git a/drivers/virtio/Kconfig b/drivers/virtio/Kconfig
-index 55b444280..48ab669f3 100644
---- a/drivers/virtio/Kconfig
-+++ b/drivers/virtio/Kconfig
-@@ -84,4 +84,15 @@ config VIRTIO_9P
- 	help
- 	  This enables the 9P transport driver over virtio.
- 	  It can be used with QEMU based targets.
-+
-+config VIRTIO_RTC
-+	bool "virtio RTC driver"
-+	depends on DM_RTC
-+	depends on VIRTIO
-+	default y
-+	help
-+	  This enables the virtio RTC driver, which reads the UTC clock
-+	  exposed by a virtio RTC device. QEMU v11.1.0 or later provides
-+	  it as virtio-rtc-pci and virtio-rtc-device. The clocks are
-+	  read-only, so the time cannot be set.
- endmenu
-diff --git a/drivers/virtio/Makefile b/drivers/virtio/Makefile
-index 6e7bcfc8e..ddb5ce4eb 100644
---- a/drivers/virtio/Makefile
-+++ b/drivers/virtio/Makefile
-@@ -12,3 +12,4 @@ obj-$(CONFIG_VIRTIO_NET) += virtio_net.o
- obj-$(CONFIG_VIRTIO_BLK) += virtio_blk.o
- obj-$(CONFIG_VIRTIO_RNG) += virtio_rng.o
- obj-$(CONFIG_VIRTIO_9P) += virtio_9p.o
-+obj-$(CONFIG_VIRTIO_RTC) += virtio_rtc.o
-diff --git a/drivers/virtio/virtio-uclass.c b/drivers/virtio/virtio-uclass.c
-index c163b2fd7..c6cf55922 100644
---- a/drivers/virtio/virtio-uclass.c
-+++ b/drivers/virtio/virtio-uclass.c
-@@ -31,6 +31,7 @@ static const char *const virtio_drv_name[VIRTIO_ID_MAX_NUM] = {
- 	[VIRTIO_ID_BLOCK]	= VIRTIO_BLK_DRV_NAME,
- 	[VIRTIO_ID_RNG]		= VIRTIO_RNG_DRV_NAME,
- 	[VIRTIO_ID_9P]		= VIRTIO_9P_DRV_NAME,
-+	[VIRTIO_ID_CLOCK]	= VIRTIO_RTC_DRV_NAME,
- };
+diff --git a/doc/develop/driver-model/virtio.rst b/doc/develop/driver-model/virtio.rst
+index e5da9f430..30df0e944 100644
+--- a/doc/develop/driver-model/virtio.rst
++++ b/doc/develop/driver-model/virtio.rst
+@@ -28,7 +28,13 @@ queues configuration and buffer transfers are nearly identical. Both MMIO
+ and PCI transport options are supported in U-Boot.
  
- int virtio_get_config(struct udevice *vdev, unsigned int offset,
-diff --git a/drivers/virtio/virtio_rtc.c b/drivers/virtio/virtio_rtc.c
-new file mode 100644
-index 000000000..f164c75e0
---- /dev/null
-+++ b/drivers/virtio/virtio_rtc.c
-@@ -0,0 +1,244 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2026, Hung-Chun Tseng <alan.tseng.cs@gmail.com>
-+ *
-+ * Driver for the virtio RTC device (virtio device ID 17). The device
-+ * exposes one or more read-only clocks through a request virtqueue; this
-+ * driver reads a UTC clock, preferring one which smears leap seconds, and
-+ * reports it through the RTC uclass.
-+ */
+ The VirtIO spec defines a lots of VirtIO device types, however at present only
+-network and block device, the most two commonly used devices, are supported.
++the following devices are supported.
 +
-+#include <div64.h>
-+#include <dm.h>
-+#include <log.h>
-+#include <rtc.h>
-+#include <time.h>
-+#include <virtio_types.h>
-+#include <virtio.h>
-+#include <virtio_ring.h>
-+#include <linux/types.h>
-+
-+#define VIRTIO_RTC_TIMEOUT_MS		1000
-+
-+#define VIRTIO_RTC_REQ_READ		0x0001
-+#define VIRTIO_RTC_REQ_CFG		0x1000
-+#define VIRTIO_RTC_REQ_CLOCK_CAP	0x1001
-+
-+#define VIRTIO_RTC_S_OK			0
-+
-+#define VIRTIO_RTC_CLOCK_UTC			0
-+#define VIRTIO_RTC_CLOCK_UTC_SMEARED		3
-+#define VIRTIO_RTC_CLOCK_UTC_MAYBE_SMEARED	4
-+
-+struct virtio_rtc_req_head {
-+	__le16 msg_type;
-+	u8 reserved[6];
-+};
-+
-+struct virtio_rtc_resp_head {
-+	u8 status;
-+	u8 reserved[7];
-+};
-+
-+/* Request for VIRTIO_RTC_REQ_READ and VIRTIO_RTC_REQ_CLOCK_CAP */
-+struct virtio_rtc_req_clock {
-+	struct virtio_rtc_req_head head;
-+	__le16 clock_id;
-+	u8 reserved[6];
-+};
-+
-+struct virtio_rtc_resp_read {
-+	struct virtio_rtc_resp_head head;
-+	__le64 clock_reading;
-+};
-+
-+struct virtio_rtc_resp_cfg {
-+	struct virtio_rtc_resp_head head;
-+	__le16 num_clocks;
-+	u8 reserved[6];
-+};
-+
-+struct virtio_rtc_resp_clock_cap {
-+	struct virtio_rtc_resp_head head;
-+	u8 type;
-+	u8 leap_second_smearing;
-+	u8 flags;
-+	u8 reserved[5];
-+};
-+
-+struct virtio_rtc_priv {
-+	struct virtqueue *vq;
-+	u16 clock_id;
-+	bool clock_found;
-+	bool no_utc_clock;
-+};
-+
-+static int virtio_rtc_xfer(struct udevice *dev, void *req, size_t req_len,
-+			   void *resp, size_t resp_len)
-+{
-+	struct virtio_rtc_priv *priv = dev_get_priv(dev);
-+	struct virtio_rtc_resp_head *head = resp;
-+	struct virtio_sg req_sg = { req, req_len };
-+	struct virtio_sg resp_sg = { resp, resp_len };
-+	struct virtio_sg *sgs[] = { &req_sg, &resp_sg };
-+	unsigned int len;
-+	ulong start;
-+	int ret;
-+
-+	ret = virtqueue_add(priv->vq, sgs, 1, 1);
-+	if (ret)
-+		return ret;
-+
-+	virtqueue_kick(priv->vq);
-+
-+	start = get_timer(0);
-+	while (!virtqueue_get_buf(priv->vq, &len)) {
-+		if (get_timer(start) > VIRTIO_RTC_TIMEOUT_MS)
-+			return -ETIMEDOUT;
-+	}
-+
-+	if (len < sizeof(*head) || head->status != VIRTIO_RTC_S_OK)
-+		return -EIO;
-+
-+	if (len < resp_len)
-+		return -EPROTO;
-+
-+	return 0;
-+}
-+
-+static bool virtio_rtc_is_utc(u8 type)
-+{
-+	return type == VIRTIO_RTC_CLOCK_UTC ||
-+	       type == VIRTIO_RTC_CLOCK_UTC_SMEARED ||
-+	       type == VIRTIO_RTC_CLOCK_UTC_MAYBE_SMEARED;
-+}
-+
-+static int virtio_rtc_find_utc_clock(struct udevice *dev)
-+{
-+	struct virtio_rtc_priv *priv = dev_get_priv(dev);
-+	struct virtio_rtc_req_head cfg_req = {
-+		.msg_type = cpu_to_le16(VIRTIO_RTC_REQ_CFG),
-+	};
-+	struct virtio_rtc_resp_cfg cfg = {};
-+	u16 num_clocks, id, utc_id = 0;
-+	bool utc_found = false;
-+	int ret;
-+
-+	ret = virtio_rtc_xfer(dev, &cfg_req, sizeof(cfg_req), &cfg, sizeof(cfg));
-+	if (ret)
-+		return ret;
-+
-+	num_clocks = le16_to_cpu(cfg.num_clocks);
-+	for (id = 0; id < num_clocks; id++) {
-+		struct virtio_rtc_req_clock req = {
-+			.head.msg_type = cpu_to_le16(VIRTIO_RTC_REQ_CLOCK_CAP),
-+			.clock_id = cpu_to_le16(id),
-+		};
-+		struct virtio_rtc_resp_clock_cap cap = {};
-+
-+		ret = virtio_rtc_xfer(dev, &req, sizeof(req), &cap, sizeof(cap));
-+		if (ret)
-+			return ret;
-+
-+		/*
-+		 * Like Linux, prefer a clock which smears leap seconds, but fall
-+		 * back to another UTC clock, which is all that QEMU v11.1 has.
-+		 */
-+		if (cap.type == VIRTIO_RTC_CLOCK_UTC_SMEARED) {
-+			utc_id = id;
-+			utc_found = true;
-+			break;
-+		}
-+
-+		if (!utc_found && virtio_rtc_is_utc(cap.type)) {
-+			utc_id = id;
-+			utc_found = true;
-+		}
-+	}
-+
-+	/* The set of clocks is fixed, so remember that none of them is UTC */
-+	if (!utc_found) {
-+		priv->no_utc_clock = true;
-+		return -ENODEV;
-+	}
-+
-+	priv->clock_id = utc_id;
-+	priv->clock_found = true;
-+
-+	return 0;
-+}
-+
-+static int virtio_rtc_get(struct udevice *dev, struct rtc_time *time)
-+{
-+	struct virtio_rtc_priv *priv = dev_get_priv(dev);
-+	struct virtio_rtc_req_clock req = {
-+		.head.msg_type = cpu_to_le16(VIRTIO_RTC_REQ_READ),
-+	};
-+	struct virtio_rtc_resp_read resp = {};
-+	u64 now;
-+	int ret;
-+
-+	/*
-+	 * The virtqueue must not be used before DRIVER_OK, which the virtio
-+	 * uclass sets only after probe(), so look for the clock on first use.
-+	 */
-+	if (priv->no_utc_clock)
-+		return -ENODEV;
-+
-+	if (!priv->clock_found) {
-+		ret = virtio_rtc_find_utc_clock(dev);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	req.clock_id = cpu_to_le16(priv->clock_id);
-+
-+	ret = virtio_rtc_xfer(dev, &req, sizeof(req), &resp, sizeof(resp));
-+	if (ret)
-+		return ret;
-+
-+	now = le64_to_cpu(resp.clock_reading);
-+	do_div(now, 1000000000U);
-+	rtc_to_tm(now, time);
-+
-+	return 0;
-+}
-+
-+static int virtio_rtc_bind(struct udevice *dev)
-+{
-+	struct virtio_dev_priv *uc_priv = dev_get_uclass_priv(dev->parent);
-+
-+	/* The alarm feature is not supported */
-+	virtio_driver_features_init(uc_priv, NULL, 0, NULL, 0);
-+
-+	return 0;
-+}
-+
-+static int virtio_rtc_probe(struct udevice *dev)
-+{
-+	struct virtio_rtc_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = virtio_find_vqs(dev, 1, &priv->vq);
-+	if (ret < 0) {
-+		debug("%s: virtio_find_vqs failed\n", __func__);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct rtc_ops virtio_rtc_ops = {
-+	.get	= virtio_rtc_get,
-+};
-+
-+U_BOOT_DRIVER(virtio_rtc) = {
-+	.name	= VIRTIO_RTC_DRV_NAME,
-+	.id	= UCLASS_RTC,
-+	.bind	= virtio_rtc_bind,
-+	.probe	= virtio_rtc_probe,
-+	.remove	= virtio_reset,
-+	.ops	= &virtio_rtc_ops,
-+	.priv_auto	= sizeof(struct virtio_rtc_priv),
-+	.flags	= DM_FLAG_ACTIVE_DMA,
-+};
-diff --git a/include/virtio.h b/include/virtio.h
-index b981eead5..95069a2de 100644
---- a/include/virtio.h
-+++ b/include/virtio.h
-@@ -32,12 +32,14 @@
- #define VIRTIO_ID_BLOCK		2 /* virtio block */
- #define VIRTIO_ID_RNG		4 /* virtio rng */
- #define VIRTIO_ID_9P		9 /* virtio 9p */
--#define VIRTIO_ID_MAX_NUM	10
-+#define VIRTIO_ID_CLOCK		17 /* virtio clock/timer (rtc) */
-+#define VIRTIO_ID_MAX_NUM	18
++  - network
++  - block
++  - entropy (rng)
++  - 9P transport
++  - RTC
  
- #define VIRTIO_NET_DRV_NAME	"virtio-net"
- #define VIRTIO_BLK_DRV_NAME	"virtio-blk"
- #define VIRTIO_RNG_DRV_NAME	"virtio-rng"
- #define VIRTIO_9P_DRV_NAME	"virtio-9p"
-+#define VIRTIO_RTC_DRV_NAME	"virtio-rtc"
+ The following QEMU targets are supported.
  
- /* Feature bits for virtio 9P */
- #define VIRTIO_9P_MOUNT_TAG	0
+@@ -72,6 +78,8 @@ Requirements
+ ------------
+ It is required that QEMU v2.5.0+ should be used to test U-Boot VirtIO support
+ on QEMU ARM and x86, and v2.12.0+ on QEMU RISC-V.
++The VirtIO RTC device (``-device virtio-rtc-pci`` or
++``-device virtio-rtc-device``) requires QEMU v11.1.0+.
+ 
+ Testing
+ -------
+@@ -246,9 +254,8 @@ So it's easy to tell which device these functions are operating on.
+ 
+ Development Flow
+ ----------------
+-At present only VirtIO network card (device ID 1) and block device (device
+-ID 2) are supported. If you want to develop new driver for new devices,
+-please follow the guideline below.
++The supported devices are listed at the top of this document. If you want
++to develop new driver for new devices, please follow the guideline below.
+ 
+ 1. add new device ID in virtio.h
+ 
 -- 
 2.43.0
 
