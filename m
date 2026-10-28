@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5489C606A31A
-	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 05:51:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E54EE606A31F
+	for <u-boot@archiver.kernel.org>; Wed, 28 Oct 2026 05:51:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Nq0A/FKx;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=a4/6cQRB
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zFaFhWNU;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Dly2RsKh
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2E07A606E3;
-	Wed, 28 Oct 2026 05:51:29 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C420660770;
+	Wed, 28 Oct 2026 05:51:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8Piwtkbs-8lc; Wed, 28 Oct 2026 05:51:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5A8316073C
+ id zuxiC9IiyJyL; Wed, 28 Oct 2026 05:51:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 07BAA60780
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793166688;
-	b=Tl/zWJZ3C6gS3q6lDxHttvpYXdY7d+Ue3sKRApS3mARjD9fBVh9+GVUV42AK/Lo/gw3g
-	 Wx2YgYWonr7QR0e42hSym7TuwjMq/bM8rwM8G4gmjswWQT5aB41MfceMNxAAY93G1syJb
-	 +XoPc+h2w6LHbmWr3DUKPZ8B+t2caPX/m/j5RzY3HKZQ68KpLhEGeP+pD/F2V+0QUcDud
-	 Z5QZFeEuY8qBeU6Wr0B7U9WPYzBDyNSI3LMq+98cfeV7the4y2kdZ5ieT5VQ+pW4VXbPa
-	 O1nv9vfU6Psakqh7s527efpR7WzhXyz3MWpQbq74MzYuKQm/vedeeRf9zdKF3j/7eCw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793166693;
+	b=fiQElVZK123/ujs7Q8e+GYv7wX9iU0rSv8pGgmRGd6Az+WpYqRxmoNEs1irw9rh5d1uE
+	 8UxYyialwOOuOur064HcFEGQWjYwhm8UuIFAfT0YDdGFEIYxjKbtMRAkhvydpvJclgRSL
+	 9WvcCVWJGC11dIc1qr3GONmC2XotND7wLTOZ058oRM0c17ggG/kP8wklbZtnN3wXOIeFW
+	 b7FauBLuiFP6XetMtmSrSNpVB03KXlFVBQ7c+SklgBNiiHFadoQqISkY6y/lepRgsKzRQ
+	 7EHebkDuhmK/99AhmOHD5WWlsVOgyCrwOqNkyZjy2qkT74Zg1dtcoeXwDiRHqrbwuug==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793166688;
+	c=relaxed/relaxed; t=1793166693;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,123 +32,123 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=CLqDoJETTCsFbH97C4T8gg34GorZNHo3nOXwJg+EXfY=;
-	b=hL/cj2UZTa1g844a70/b2O9oQU/j5tuMKa0xmue+tFcLmj9YsLZndIyLX1x4iLBD458c
-	 A+W0Xn2peZBtKsmSLf+f44BWPjVtGfdve+diBud8LP8qpnS/FWTU7CAQkoKW4ErOzNBBk
-	 agspbQ/C/Fj6lwrMfSvN33qak1qcusAYURfftRGagBDzA6Lm4NGSLLL1UUzHyL/Ukeib0
-	 1ixQbzL+E/GoSvBWBGyY/39+iCuIO+ZC0uxOFcxeffx/ZNeCMtSmqDWuJzJkQ5sTM424A
-	 83sglXOvI1iUPLCl9TAWbHZ2qrsoSIXxCCwLIfwliRcd/Z8y99xHqG8FD+C6dFXT5JQ==
+	bh=Kf9XcCSwunCmnaeK+Ksz+ENpRslBewBwq6NWwAIQnFQ=;
+	b=RDX9CpAqrcH4sNDQzR5bjsKn6hQQW6K8FnsUAAnEwaOXDiTHAlGEPHvjTNKj8DHeXjjA
+	 sujqm7owSoMngk9qky78hiOAcjZ/Fm/t11fvhDAFhQBqMGTJsbfi6UnKAyrVnNjjCHmir
+	 II6ZiwfSkJjHpvpY6xsEimjmmk7eKQFitf/xIsEr8GeqgNVQubPJ0DNT2aONRFa1S+mp9
+	 xzGBDXl4ii08adKcUptCFWa446d1U8JQRccFQVYCGlPSNal67gBH3osWjqs2Pw/2bM7X9
+	 o+8R8Qshm+LgcSEaiSazHsktIck5ol+lGsZD+ZFMUsGPO+/Ufd33/pExTef47ejgjfw==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793166688;
-	bh=CLqDoJETTCsFbH97C4T8gg34GorZNHo3nOXwJg+EXfY=;
+	d=lists.u-boot-project.org; s=default; t=1793166693;
+	bh=Kf9XcCSwunCmnaeK+Ksz+ENpRslBewBwq6NWwAIQnFQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Nq0A/FKx/b8NjFNBML+9oZrYrh1M8nnpDwddM1gPsnCAmCbnK/aNq5u7hCcagOF+8
-	 ISJ5wVwafQzQvFsawpaskAfZUKQEteocYxkHA/EJOEvAxORwipC1aa/fsIsitb8+++
-	 lLrDd+7gaxg6BSHu4eGPL2wZhYpr0Q/cV+OjZ36pc5b0oPO2OcOFS+8HYIHnWtLX6d
-	 ErwRSAnLjKwJh0z9bI5wYBmv0RDHMIH2/RyOTagGQBLNgvdi2RrJJdfmqfUQb8bqiT
-	 NiVkbxCAOcVl/+JfWxm7c+MuH6F3HAMDXdHIGEQiAhc1PluCm3p/GIGQvJAISjbvIO
-	 t0IdlDa2AafVw==
+	b=zFaFhWNUc/WafX1HICZqACV4/G3191R2X/+3hFDNCkR+2j13//tHbJyERkXlrakUe
+	 uM4m3vKq+Du7M04HMT9s1IK1kDWSmXOGLkw8tOoqWV3LL/y0+d4yGX7MEBQ87LQoGL
+	 OFK/b7Qs6N9ZuI10Pto66/Jeh8/mEDbZ8L+Gd85mlg/aWJjIIkce2chqMZfxN7US2f
+	 MYEigC3kMYnq72Qma5nAM5oZJNJfthOBv6NYLdPwf0I1pHvlu94pn2hxvoXqtt3zwz
+	 b0rhP1mwjUfVxMUihap/yHTGQWyCN4AUosdbRgpsk41/tupaw6oMIjM2G/r7RM5E4j
+	 Ay8lWSOpt1r+w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5A8316073C;
-	Wed, 28 Oct 2026 05:51:28 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 9E59BD1
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:25 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 07BAA60780;
+	Wed, 28 Oct 2026 05:51:33 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id AF962473
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 8ED6080EBE
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:25 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 95D674006F
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id h4uJFNyirIkA for <u-boot@lists.u-boot-project.org>;
- Wed, 28 Oct 2026 05:51:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8AE7F80F0C
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42e"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793166683;
- b=hGDrQuQMSxfevYZCqJZInzhjM1Srr9vI5yB9uHEOARjKqIWOq9l8RJISKZjaKQg1W1WH
- WK/KTFFX5qOq4g7dr7CRY9SZ+vMi/PzYIKcIseVZCwDqf7qC0xuOi3AzRCmqPXAVDSWop
- 7YCMYICFsIgx8jQi2BNGEoKZglaeddfhsZ280GyQz/mlCsckBN0N2HosEATwavjxLJnAM
- ALbSr5eqWHm/4H/zZzJJGGVkqP/IzexbX2qDAgo/UHD+ICQpq0mt2GBAWNGN9tQ0Y0y1F
- hJgV8La96D7qWSRrqClA103QpZVvaN4n/cAxXZ3/uVBdcdnfMCq1/rr+x3RcvI/X3nQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9yKeZN7vP8d7 for <u-boot@lists.u-boot-project.org>;
+ Wed, 28 Oct 2026 05:51:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 92C164016B
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32d"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793166690;
+ b=bOzbBXRJam499fngO7waay3nMPGF/j6NW5sCAa8PD8vQ98aDTqWyjhiqKN/Moy9KrDCP
+ IJR7tOMaBdGyjPr7suyfrhabwgVLGg1Cq5KAmuMIVhPrVM3w6SHjqWGAk6eLJlUE8t2do
+ NoyGbghrpFiPbQmrqgrMKk78Xk1kTh9P4qslgyEx/iUqkiKVkwKiI7T0PpEU3VGK24K7O
+ qiULAstQ61GHdSjd6CVMm+kM0XHFUhX63tR1fY4JsStheNh/1nJJ2wIat8foTIcT3D+vQ
+ TYq4PvQGvP0330G/3liwyMwYdJc27tANDWnqtnxOJLe6QTRJYKH1lhgOlubT8MRA5hQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793166683;
+ c=relaxed/relaxed; t=1793166690;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:In-Reply-To:References;
- bh=CLqDoJETTCsFbH97C4T8gg34GorZNHo3nOXwJg+EXfY=;
- b=tJJNfs9pBHBcbX34G25PFbEkb3d703WF3SNofLI7MUxK1efQ6M89ACziuABwsOWpzYc2
- z2nI3DYEexEEPC1gzNhRabucnZFCxCw1lA4FHAKRzupMEDgb90CdyeHqmgvYJ3gH+3ONw
- NWBiXMfyaG4MazrCWnG3/4lQncd5LmijlDoQmNAkwQpgA44XP7aZ4+kzXYYgyZtDyVAcV
- V4bFQq4dOtw595II8jj17suIBx7YZle7m3nS81Wu49H3z5IcPdg1/DwbIaPIEFyqSBnnx
- 0eK+V4uz+Vk4ZRs3GJolY7G/qS6rPyHwlKmjpQ72Tptne7GPxREpv7Jb1btvd8c8VZw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=Kf9XcCSwunCmnaeK+Ksz+ENpRslBewBwq6NWwAIQnFQ=;
+ b=dFSy7Rjok2bwWxO7jdzy91yleqy2BJTm3TklW9JElmrEHRPUSVcaf2+FL9AmdKTvPLS2
+ aSdT0sU4nc20+8tgP0PAHAzIFKkvcHYER7Tx3y2ChnBItZnX/8NDr8PMe8oFtWPp67rog
+ geFX9UaEYjLI5otzKnbSytvuvIy1Ofw9+xejlhiIUtA/HuLdhAPxuAC/jTFFeiRn9dciS
+ ehs57G1DAzwXlkDYBdI0BVOkS3MjwNeKqGw0Z7TPJyXaNrpWHfzMKH9ubvP4fGYwJGrFa
+ qJqd/x7oYHPYglZRmLMOjXC3f7nYVrLm6A+ljWyVb+UxbnDuFdD8LoCGppZLPyXcZTQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b="a4/6cQRB"; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::42e"
+ header.s=20260707 header.b=Dly2RsKh; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32d"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42e; helo=mail-wr1-x42e.google.com;
+ client-ip=2a00:1450:4864:20::32d; helo=mail-wm1-x32d.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=a4/6cQRB
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8AE7F80F0C
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:23 +0000 (UTC)
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-48e10a70540so311075f8f.1
- for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 22:51:23 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20260707 header.b=Dly2RsKh
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 92C164016B
+ for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 05:51:29 +0000 (UTC)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4a20bde60a0so4240695e9.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 27 Oct 2026 22:51:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793166681; x=1793771481;
+ d=gmail.com; s=20260707; t=1793166687; x=1793771487;
  darn=lists.u-boot-project.org; 
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=CLqDoJETTCsFbH97C4T8gg34GorZNHo3nOXwJg+EXfY=;
- b=a4/6cQRBgOOtOjjvhAATSBeBfJo9dfh720mghgiy5LFB77pMHcYAcLTgFlx/kl1cQ+
- M3Sl6xsLuNqFI+MHksMd3Cps+2l+iHhz/opesu+0Wj8klv6NAZMhlXugeynpd5+F8Loz
- SDjOZY1+CuPAkU+Q3Qvr0C6Zj5IbAwMWmmXXb7SMn3J5AVlDo6sZoxrPWVQzfi/46Rvj
- CfocB3sztzJH9nd2NACSJPckcZS0qaOchWzvxg82Y3Pmb6Wq9TMfikjg980DoQT0A3fZ
- pnd8evajbhYn7wlgF4emETZibuEfWWGNjj77NOlNJ9HMIt5MApMWH1UD3+FxcRr/+FWE
- WFdw==
+ bh=Kf9XcCSwunCmnaeK+Ksz+ENpRslBewBwq6NWwAIQnFQ=;
+ b=Dly2RsKhtx0fSkmg2CO6+Vk3Ha7dOWiZA+DoQ+gm/oNCxy1BIRCZj9/G1MJZWQnQbF
+ bHT/Lq9f0nWvjNmWat4bAGKL1Y4wQrfbP0o0BQZqRqKgKJ9Ev6M1JSCUePl5j7thxxjR
+ XOqHX1kdKuKK2kdw6mJUZzErbQtFJZxK9GgVtwycgFYTG/wZVR6zaTo3xK5whbNYZsjt
+ w3+zxSmY2mVhvlfL0ooV9hKu9beAChGg8pDSnpK022aePjMPwEzK9KZsABqx5mlBdTIl
+ JmDmLjUYJP8EPKjzbL9SXAgOHl1DGSjQqRPy/Km4NQLEie9RYUmJUgKpfi1KWw6ARLWc
+ /BkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793166681; x=1793771481;
+ d=1e100.net; s=20260707; t=1793166687; x=1793771487;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=CLqDoJETTCsFbH97C4T8gg34GorZNHo3nOXwJg+EXfY=;
- b=g4RvURU1iPwbEzr7650/GdfP/ZgPFhDh6uIDHk6+Y2oFk1LIkvEPmnneQzQPDULlwQ
- cjGUkspugoPifnsXJYR/sV/sJQAm9tadpSl5BZ0XZswYi8htwA//zl6f13I9m8rfjKzn
- p7sTKS/z22Gf291FGNJH0qUB9zfMLsGo46VmD7s4t6vOFFl4YrM/rMb/IlgqN9NCGOEu
- qEr45gzKpx783kRQSYbUitMwYlOo1o9RUZucG27FucCYd56OJxOZmq7PcxfQk60vIeBR
- jeaQYgGcwZEnFmloQwfw+Ojux/fsvy6s40scV6vZD38ZPOU0GEhkRTHLm/4xCO4uSrav
- h4lA==
-X-Gm-Message-State: AFq9FYKrNnuyu6Rnk/MlqGODAtAPdczhI+h+vXCWiZoGJ63hag2ZSLOk
- Y7hkjGI8OtGLTGRctqm7I6zPQh9IvzUn3cZb67QoSH56/IxFCyKe52E2
-X-Gm-Gg: AYBFou0WOtwiRh5sYs5jiambX+/2Q7nFHouaR4e3yP7NdivKm3PS6W06Q/5OnUapMre
- LiO0zmmoWE520AfKAkGvGb8T1fV5VcuhAtqt2hQ7ZXe5bHamyBXH1bZXpy1FLGyUuTM701cqh5Y
- C78CfuQm8iQEqW5vBHFIU/exJn+F23tLJ16JPp+Nn/CPxv6zJpG7th7X8Z7nyyKnpoL8LQveuhn
- 9z6uWrMzYX/EKGIRDqh7qZrVVa76INJh7ixF/tGaC8n+TqMEZ/RxU7sUQOodxB0e3xdNFmIv/hN
- O7vjq3GmHDqxIjDedDH+/OWWIwFGrZ5O+maZGxwFem5IpQ19Mi3xyg1djy4W0D9bX1t50xR6iTn
- aPidx9YhKscqXXFPOe6eWjIOa0J0obRKIf4hEo6AqFvlrdAKNUW7ZpI5aRLqfyN8bBNhu51J1Mm
- Bm2gCKLFrKdsFPPjbFgJsmEQNHVARQ/FyNfTLLKJvtR86zobuRnZa+2YzUeIQ50d9KIjNo63zAE
- n9+Q/kGHfkSRJVOVFj+RX6gyoVbLiswxiPBmpjWqF0RoDqHC6ewiuSoDw9f3sGSOu9HdLnox2kM
- YQxNbT9D+ipaWkOykFO9dEJec5L9K2s=
-X-Received: by 2002:a05:6000:2d09:b0:48e:d88:55f5 with SMTP id
- ffacd0b85a97d-48e5d5c8a9bmr2384483f8f.30.1793166681304; 
- Tue, 27 Oct 2026 22:51:21 -0700 (PDT)
+ bh=Kf9XcCSwunCmnaeK+Ksz+ENpRslBewBwq6NWwAIQnFQ=;
+ b=wHd7eZNSkTxIf5jNM2BHQ7U/R6xQrNkiCCrvEA5KIQS+5SPuBfCRzkAKk8Ce5/E/At
+ H3o/W+gnL/lMjCVOGs9G58PcLGSd1JK+hWpeZ4gWZHPQZDSeeP232BewSEMSlr1yzaA4
+ aNmetyae5ZKa7lVkkEOjHYNW61wb1Efv86DlgzStrCa1SXI/oS8DvYDTE8W0/Fx6a82f
+ A/b0bDndhgmlom2LrpRPN9g18x/zrcdEr9xGT3eKUfbZXNNvFyDRccTpRnFIm2c8vDHo
+ 1Cl2yGxU/H8t2ms/DMRbanjigXqAFS8na/PwaH1Fhrusb0yHUdHVn77fNB/7h81IkNtW
+ ofuw==
+X-Gm-Message-State: AFq9FYLV0M422W7tfIiVFGzgzlUUHWNaUq1fN+h9v75AprSQlY4F8GXc
+ mQT/ZzXNMX07sRWpHaralk5ibogLHTBjNzNWJmFt1ve/eZVm0Nd6OTnZ
+X-Gm-Gg: AYBFou0JLXvyfoUJgN8+i+KhmGwsJvHimHT6w2OixWu7IYG3qrGFrn374GQUyamLsdY
+ 7qVOIVSNgspcdQlTNWldltLdi/TxHR9cKdV6VMaSGlbjlyOKSCOgJE7dhEaYwTYyUp4mCLVqpqY
+ nyQE4t8VcrPUARmzd8oar5TUs5hMSUeQxpi1+WhiqVkxLVW/XHUgvKUrYsCTxHm9NHLT56vRC7b
+ XwvNwiD7C+E4PiTCr1s1B+8NY4p5jMpq8f9rV32rDwGo0KfcYAsSsOVtn5AgpiUsHWiBjoo4tYA
+ PoGBebjWfuYNPOS/RXhNhoWRkIFpcKJlvvBnC+uoHVT4UD9zxszWeQnW7JLUR7cCEYWmyikkkH6
+ UIQv6SBQvXdFlkATFI0L5SuYpKxwAhjjAimvS+SCMcY4ILtoIECBV0RUgzE8G2a1Rvgs9tqumf/
+ Mm30ceWBM4GCsIZPDXwWQOHW26DRKysIwOoaFWWzeqE9EJOGGqfd1LKFjm+0IosGczpm50LJxlM
+ 1N6MmxnKw0dENlqHYUuuZrFCn8448EvjoOvf3cSbbtfh/BddhAFI6wd/aqdhLTI3s963Nzgscv0
+ 8IiNkzGmJHe1+51kWpi463vOABWaqtw=
+X-Received: by 2002:a05:600c:3115:b0:4a2:1a:a128 with SMTP id
+ 5b1f17b1804b1-4a966774f69mr22342535e9.19.1793166687375; 
+ Tue, 27 Oct 2026 22:51:27 -0700 (PDT)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3ebc39a8sm27523681f8f.11.2026.10.27.22.51.20
+ 5b1f17b1804b1-4a97c9f150fsm17713115e9.10.2026.10.27.22.51.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Oct 2026 22:51:20 -0700 (PDT)
+ Tue, 27 Oct 2026 22:51:26 -0700 (PDT)
 From: Ana Bobillo <anabobillo3@gmail.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
@@ -158,10 +158,9 @@ Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Alexey Charkov <alchark@flipper.net>,
  Javier Martinez Canillas <javierm@redhat.com>
-Subject: [PATCH v2 04/12] usb: storage: Refuse a block size the block layer
- cannot use
-Date: Wed, 28 Oct 2026 05:51:19 +0000
-Message-ID: <7f6c3461-f084-4682-8638-212ab29c69b9@gmail.com>
+Subject: [PATCH v2 05/12] scsi: Refuse a block size the block layer cannot use
+Date: Wed, 28 Oct 2026 05:51:25 +0000
+Message-ID: <36f00691-4368-4420-bec3-379c4bcb5d6a@gmail.com>
 In-Reply-To: <01ba3f81-06b7-428b-9224-bd887c35e1c3@gmail.com>
 References: <01ba3f81-06b7-428b-9224-bd887c35e1c3@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -184,106 +183,110 @@ X-Archived-By: <archiver.kernel.org>
 
 From: Ana Bobillo <anabobillo3@gmail.com>
 
-usb_stor_get_info() takes the block size from the READ CAPACITY reply of
-the device as it is. Once blk_post_probe() refuses a block size that
-blk_valid_blksz() rejects, at the end of this series, such a device would
-fail to probe there, and usb_stor_probe_device() would stop, skipping the
-other LUNs of the device.
+scsi_detect_dev() takes the block size from the READ CAPACITY reply of
+the device as it is. do_scsi_scan_one() then hands it to
+blk_create_devicef() as an int, which drops the upper bits of the
+unsigned long, so the block layer may not even see the value the device
+reported.
 
-Check the block size where it is read, and treat a LUN reporting one
-that blk_valid_blksz() rejects as unusable, as for a LUN that is not
-ready, saying which LUN is skipped. This also covers the legacy (non-BLK)
-path, which calls part_init() itself.
+Check the block size where it is read, so that no block device is
+created for a disk reporting one that blk_valid_blksz() rejects.
 
-Add a test where the sandbox flash stick reports an unsupported block
+Add a test where the sandbox SCSI disk reports an unsupported block
 size.
 
 Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-Changes in v2:
-- Move the READ CAPACITY fallback fix to a patch of its own (Simon)
-- Name the LUN in the message (Simon)
-- Check for that message in the test, with UTF_CONSOLE (Simon)
+(no changes since v1)
 
- arch/sandbox/include/asm/test.h  | 10 +++++++
- common/usb_storage.c             |  5 ++++
- drivers/usb/emul/sandbox_flash.c |  8 +++++
- test/dm/usb.c                    | 51 ++++++++++++++++++++++++++++++++
- 4 files changed, 74 insertions(+)
+ arch/sandbox/include/asm/test.h | 10 +++++++++
+ drivers/scsi/sandbox_scsi.c     |  8 +++++++
+ drivers/scsi/scsi.c             |  4 ++++
+ test/dm/scsi.c                  | 37 +++++++++++++++++++++++++++++++++
+ 4 files changed, 59 insertions(+)
 
 diff --git a/arch/sandbox/include/asm/test.h b/arch/sandbox/include/asm/test.h
-index 0438790028b..e5590d01a92 100644
+index e5590d01a92..76e2f11b059 100644
 --- a/arch/sandbox/include/asm/test.h
 +++ b/arch/sandbox/include/asm/test.h
-@@ -123,6 +123,16 @@ long sandbox_i2c_rtc_get_set_base_time(struct udevice *dev, long base_time);
- 
- int sandbox_usb_keyb_add_string(struct udevice *dev, const char *str);
+@@ -133,6 +133,16 @@ int sandbox_usb_keyb_add_string(struct udevice *dev, const char *str);
+  */
+ void sandbox_flash_set_block_size(struct udevice *dev, int block_size);
  
 +/**
-+ * sandbox_flash_set_block_size() - Set the block size a flash stick reports
++ * sandbox_scsi_set_block_size() - Set the block size a SCSI disk reports
 + *
-+ * @dev:	USB flash-stick emulator
++ * @dev:	Sandbox SCSI controller
 + * @block_size:	Block size in bytes
 + *
-+ * The host reads it when it next probes the stick's mass-storage device.
++ * The host reads it when it next scans the bus.
 + */
-+void sandbox_flash_set_block_size(struct udevice *dev, int block_size);
++void sandbox_scsi_set_block_size(struct udevice *dev, int block_size);
 +
  /**
   * sandbox_osd_get_mem() - get the internal memory of a sandbox OSD
   *
-diff --git a/common/usb_storage.c b/common/usb_storage.c
-index f7c96195b59..6bada2b309b 100644
---- a/common/usb_storage.c
-+++ b/common/usb_storage.c
-@@ -1513,6 +1513,11 @@ int usb_stor_get_info(struct usb_device *dev, struct us_data *ss,
- 	blksz = be32_to_cpu(cap[1]);
- 
- 	debug("Capacity = 0x%08x, blocksz = 0x%08x\n", capacity, blksz);
-+	if (!blk_valid_blksz(blksz)) {
-+		printf("LUN %d: unsupported block size %u, skipping\n",
-+		       dev_desc->lun, blksz);
-+		return 0;
-+	}
- 	dev_desc->lba = capacity;
- 	dev_desc->blksz = blksz;
- 	dev_desc->log2blksz = LOG2(dev_desc->blksz);
-diff --git a/drivers/usb/emul/sandbox_flash.c b/drivers/usb/emul/sandbox_flash.c
-index b5176bb30ce..02e0901050f 100644
---- a/drivers/usb/emul/sandbox_flash.c
-+++ b/drivers/usb/emul/sandbox_flash.c
-@@ -13,6 +13,7 @@
+diff --git a/drivers/scsi/sandbox_scsi.c b/drivers/scsi/sandbox_scsi.c
+index 5f0b01d86d5..34fc7cda915 100644
+--- a/drivers/scsi/sandbox_scsi.c
++++ b/drivers/scsi/sandbox_scsi.c
+@@ -14,6 +14,7 @@
+ #include <malloc.h>
  #include <scsi.h>
  #include <scsi_emul.h>
- #include <usb.h>
 +#include <asm/test.h>
  
- /*
-  * This driver emulates a flash stick using the UFI command specification and
-@@ -357,6 +358,13 @@ static int sandbox_flash_probe(struct udevice *dev)
+ enum {
+ 	SANDBOX_SCSI_BLOCK_LEN		= 512,
+@@ -118,6 +119,13 @@ static int sandbox_scsi_probe(struct udevice *dev)
  	return 0;
  }
  
-+void sandbox_flash_set_block_size(struct udevice *dev, int block_size)
++void sandbox_scsi_set_block_size(struct udevice *dev, int block_size)
 +{
-+	struct sandbox_flash_priv *priv = dev_get_priv(dev);
++	struct sandbox_scsi_priv *priv = dev_get_priv(dev);
 +
 +	priv->eminfo.block_size = block_size;
 +}
 +
- static int sandbox_flash_remove(struct udevice *dev)
+ static int sandbox_scsi_remove(struct udevice *dev)
  {
- 	struct sandbox_flash_priv *priv = dev_get_priv(dev);
-diff --git a/test/dm/usb.c b/test/dm/usb.c
-index fa894c1096e..79a85b11910 100644
---- a/test/dm/usb.c
-+++ b/test/dm/usb.c
-@@ -84,6 +84,57 @@ static int dm_test_usb_flash(struct unit_test_state *uts)
+ 	struct sandbox_scsi_priv *priv = dev_get_priv(dev);
+diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
+index 50e7d749921..a732db726ac 100644
+--- a/drivers/scsi/scsi.c
++++ b/drivers/scsi/scsi.c
+@@ -543,6 +543,10 @@ static int scsi_detect_dev(struct udevice *dev, int target, int lun,
+ 		scsi_print_error(pccb);
+ 		return -EINVAL;
+ 	}
++	if (!blk_valid_blksz(blksz)) {
++		printf("Unsupported block size %lu\n", blksz);
++		return -EINVAL;
++	}
+ 	dev_desc->lba = capacity;
+ 	dev_desc->blksz = blksz;
+ 	dev_desc->log2blksz = LOG2(dev_desc->blksz);
+diff --git a/test/dm/scsi.c b/test/dm/scsi.c
+index 66859c991df..7617ee54893 100644
+--- a/test/dm/scsi.c
++++ b/test/dm/scsi.c
+@@ -6,6 +6,7 @@
+ #include <dm.h>
+ #include <part.h>
+ #include <scsi.h>
++#include <asm/test.h>
+ #include <dm/test.h>
+ #include <test/test.h>
+ #include <test/ut.h>
+@@ -36,3 +37,39 @@ static int dm_test_scsi_base(struct unit_test_state *uts)
+ 	return 0;
  }
- DM_TEST(dm_test_usb_flash, UTF_SCAN_PDATA | UTF_SCAN_FDT);
- 
-+/* Test that a flash stick reporting an unsupported block size is refused */
-+static int dm_test_usb_flash_blksz(struct unit_test_state *uts)
+ DM_TEST(dm_test_scsi_base, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++
++/* Test that a disk reporting an unsupported block size is refused */
++static int dm_test_scsi_blksz(struct unit_test_state *uts)
 +{
 +	static const struct {
 +		int blksz;
@@ -294,45 +297,26 @@ index fa894c1096e..79a85b11910 100644
 +		{ 2 * BLK_MAX_BLKSZ, false },
 +		{ SZ_4K, true },
 +	};
-+	struct udevice *dev, *emul, *blk;
++	struct udevice *dev, *blk;
 +	struct blk_desc *desc;
 +	int i, ret;
 +
-+	state_set_skip_delays(true);
-+	ut_assertok(usb_init());
-+	ut_assertok(uclass_get_device(UCLASS_MASS_STORAGE, 0, &dev));
-+	ut_assertok(uclass_get_device_by_name(UCLASS_USB_EMUL, "flash-stick@0",
-+					      &emul));
++	ut_assertok(uclass_first_device_err(UCLASS_SCSI, &dev));
 +
 +	for (i = 0; i < ARRAY_SIZE(cases); i++) {
-+		/* Probe the stick again, so that it reads the block size */
-+		console_record_reset();
-+		sandbox_flash_set_block_size(emul, cases[i].blksz);
-+		ut_assertok(device_remove(dev, DM_REMOVE_NORMAL));
-+		ut_assertok(device_chld_unbind(dev, NULL));
-+		ut_assertok(device_probe(dev));
++		sandbox_scsi_set_block_size(dev, cases[i].blksz);
++		ut_assertok(scsi_scan(false));
 +
 +		ret = device_find_first_child_by_uclass(dev, UCLASS_BLK, &blk);
 +		if (!cases[i].ok) {
-+			/* usb_stor_get_info() refuses the LUN */
-+			ut_assert_nextline("LUN 0: unsupported block size %d, skipping",
-+					   cases[i].blksz);
-+			ut_assert_console_end();
 +			ut_asserteq(-ENODEV, ret);
 +			continue;
 +		}
-+		ut_assert_console_end();
 +		ut_assertok(ret);
 +		desc = dev_get_uclass_plat(blk);
 +		ut_asserteq(cases[i].blksz, desc->blksz);
 +	}
 +
-+	ut_assertok(usb_stop());
-+
 +	return 0;
 +}
-+DM_TEST(dm_test_usb_flash_blksz, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_CONSOLE);
-+
- /* test that we can handle multiple storage devices */
- static int dm_test_usb_multi(struct unit_test_state *uts)
- {
++DM_TEST(dm_test_scsi_blksz, UTF_SCAN_PDATA | UTF_SCAN_FDT);
