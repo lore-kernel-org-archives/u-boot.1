@@ -1,168 +1,293 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DA4E606A327
-	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 06:07:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE6E0606A31C
+	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 06:07:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=sUwuPvaF;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=abp5zYnT
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=oVWCeBbq;
+	dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=gYP4x51W;
+	dkim=pass (1024-bit key, unprotected) header.d=ticloud.onmicrosoft.com header.i=@ticloud.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-ticloud-onmicrosoft-com header.b=XP24tT0u
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 146CD606D9;
-	Thu, 29 Oct 2026 06:07:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 82260407A2;
+	Thu, 29 Oct 2026 06:07:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id P3ubwc857kqA; Thu, 29 Oct 2026 06:07:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D3E2D60697
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793254033;
-	b=SoWe+sPZhjwkbXn6hNJH0OL7O4FvwPjjc0BiXpl5iAJ4ES2duTdlj9lMsdAWUw2+ecFy
-	 5fZBQGGqgL585Tzuk9Q4i1aUYCuo+sbXRN/epybGhW30z5/3GLLkgptHpPog9YpMEp826
-	 ITRbNFwlRSU/ghpzQNe7SgHqVg+hZLxkchcChdlXDBVjpOI4eusWYD+/zaQSXwHexrbih
-	 i0NwLnCs2pGib6hDgwOmoaOk9yRfVMx13svrl5rVDGqH0uqklq5ldVN1eOCzoUlR+ABTi
-	 mVBtU8sgz00L64D5foadt9Y0LG6Ar7xUAYf9Ue1SFaoSe9HG8qVXrxCyzPu3krk4tRA==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793254033;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KhpZkug2YQ5F; Thu, 29 Oct 2026 06:07:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A15044076A
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793254037;
+	b=da1TLG7MbbX/QmKD3M+/xPweI23YmrkWdWPKZlwLDt7Pl+PnzUZa88AYzahAptcsOel0
+	 FeyKK72qHf0pQr0SaMRJCorofuzvAaVKHVnx+KQD2oReQVzJyVC3jxK9UVXXpaVXzhCp9
+	 7LAysoC81hYhFI8+aGUwCIeTkcm84y+DtcgeLxr4orJyNeZN6E8flwTEV3NvtGK6RikGB
+	 2b2T7nAVBzPnWtc1NMHh61JP+LtFJhgkAkhXfz2nD/sMOmtHjdG/8J0oGIP0d7sLsEmI5
+	 m4aAMYaI6Z3VihBLPTUpCOSCizascUohiJZK7ANB1XqJUZZpmK1nEaUyWq1XJ9AoNyw==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793254037;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:In-Reply-To:References:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=IY3D5rAX1dvYhFcqkHcjt8FtaZpqVpzYfXuA9bmD54M=;
-	b=HQ3HbwDvUq1xNboEjvNgeLHEzbodR8AK7MHY0LRTuKx4DAsSXO4zyC/kwbd23YgsmUVP
-	 Q0LlWCqEA6Mi+ch0Ue1fXeLnc5hKOgS7Su07E7WR7YH0WEkL5hE4skU3W289zDD8R3CJg
-	 tYVCdN5bmgTUyqHXgsd1sk8r7GfApULVMowUF5RXIijgcfAEpA8fb0GcHjqfpZ6XdEtsD
-	 wR1/xDjbJvANB0j8SvO4zCmVk9ksSSFUlGw7Kqenqp8Y/V6reDMJnYZHqaUg5LScUsgjn
-	 HXUkq52V0uqQXFEZoFEnT7cMaKjluLEX4qg9OXRSdXluWzdUriZetd7ArlIx56Z1twQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=abp5zYnT;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:Received:DKIM-Signature:Received:Received:
+	 X-MS-Exchange-Authentication-Results:Received-SPF:Received:Received:
+	 Received:Received:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:CC:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-EOPAttributedMessage:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
+	 X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-Id:
+	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=xAnjEavPaGEqqNG3+MINemnc5Issjt1Sh/157HBTtCE=;
+	b=W9IoH0fK9SYI2FaO7fHXjmg4ewqj1hfNbx/sjMTOPPmG37Gm/iWBJiv638p+OnAIW2+m
+	 BOEVp5OWlkdZe9nuSUDqlgTcuxkHGAMs5UlJI/MTj6k/zQJ1TbMSLgHukko2++1eBM8Bx
+	 U//l5tRErz0+XWSyLf0QhM1UyDb9GnXZDHx4hfkXcy6BrlsGmv50XR0+/c0D75WUrdE8v
+	 JCLwuZEkf0PCvPwM5E2IUsevGbUwK71G8r59BhIJSJQ5nWo4XAPJvaWvMAv8Gs5Rhq7Yx
+	 PrNxIPqN3s5CUVTAJNiVfcc7z31WHMc6LOhHflnFt5JWBt/UVsWFvRLQ2LH39yn5B9Q==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793254032;
-	bh=IY3D5rAX1dvYhFcqkHcjt8FtaZpqVpzYfXuA9bmD54M=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793254037;
+	bh=xAnjEavPaGEqqNG3+MINemnc5Issjt1Sh/157HBTtCE=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=sUwuPvaFxB3bKQ14Vis6Y5YLoPRKM8b536rKDIVo2umTNg9VCtjeCYAxaZhJK7w6a
-	 SqJEKh5IQPaBLeJaJzBQnnFVGw2py2uB/sXY7UWW0XSTSueEvZVRy7/Mj7E3o4pUOS
-	 dZqPgTnCpPDervin1Z6l95MjWMkMym+L9ugFroO8A+xllwCVGYBQHT55V98OlYplCY
-	 znxz9DDR5bZVhombKfZRE6ibDP/DSnjK5TVXrgV5rp3QRheagwoQKaP67Pb2vrmdGL
-	 iqrQx7rMOiN3K8qXPh/SlV2Nx+IFLGsO+KPE+Oqp1nRs1EjqKnrBSTu+dq46OQ4FNY
-	 lHXoRPRyhMyWQ==
+	b=oVWCeBbqYmKHkS1gkB7tZbe3r2TWGyedHnsjXqZxLewnD8ZIMEWqFOLMsl0wSk+/N
+	 IumNkPAmCKBRgw0Ke9MQGfUn/50MeSRAJ91qR6Qu+XcuhcVUC8q40PmM+o+vhcQLn1
+	 a9HPlZ9OME7ojJmcHyaN1fdurky0ZZnO0Tq11HpjlbRvFIxSMFKouab2UJYDi7sxaY
+	 VvaekHNvgzlqaNam425xzG+DKSWmOhz09aFqaZC7ILsoV18Oo7EE9FL+EFWe2sxmCa
+	 DJ88NoIHocTKESIIz/vBDitrGBw2I0/+qyNg2DMdH7MpSHBs49zx7ZrQ/lUxcCn1h1
+	 UK54MAQ+4vtcw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D3E2D60697;
-	Thu, 29 Oct 2026 06:07:12 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id A62C1472
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 06:07:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A15044076A;
+	Thu, 29 Oct 2026 06:07:17 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id CFAF0120
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 06:07:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8C42960697
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 06:07:11 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id C169F4032C
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 06:07:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PPxzVP3ZD9mF for <u-boot@lists.u-boot-project.org>;
- Thu, 29 Oct 2026 06:07:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3E3C86068D
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::334"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793254030;
- b=KhdcSPqrD7yFBu09BfMAo7fgGb847a3wU05aPos8gmQhI2Xx2G41IG2IpyiCGX5DFiFt
- 8hN94EhAd2IrpLL3RWZ7WRfdVJ81be2fsJddM/LArXQtvlKb1QxggMTW7ozpfsqvrg+u+
- 1psist88gv0GQFxG9V/3EO69Swbm7cEXx/4zLep1LGIfMUeVUqg95OzD3MfFYNQzTtfHq
- F8J16NwFVSpYwQOAnvYjEzzKCNJ8tUGYRgrxXxB68n2QENLP+Wydpj+4VS1tJrQ9HTPLm
- QuQou8a7u+UBhwgnxou3ao6nslfJa1edby0KzlsxgwXpBfIZW5Exl96SUorseqgh+0Q==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793254030;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References;
- bh=IY3D5rAX1dvYhFcqkHcjt8FtaZpqVpzYfXuA9bmD54M=;
- b=AhfnGEeF3PeGHHLsBtXlFC8Qrmv33OYZKx6fpOWaBnMJcGnb+Ia93AW2n+FP3dGlLsy7
- 5CUC9q8BmbO8T3/T9myeuhaQBAYy/1yKd8QkSNBpKqRAyrPUoU9zpC7ypx3BaJwU3Mqhm
- +Qrg75FqEadcyBR9J9vdnaOf9lxz33dAC7sEEAGBvuVWZHjujvpKnNPt6lKcV4X3fqdiW
- 0UDawMjBmcLJyPb3lChO7l8HdkeFt/jl830axc75ew7N7Hd0KoE7azD8X9fGskJMc0xzP
- Q9WMv/N6HiOJwrw7Rt0DlN9UxIJ7MNMA0DbY0KHlyYWB2wOwLaNlVoKNKyORGvsKf0Q==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=abp5zYnT; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::334"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::334; helo=mail-wm1-x334.google.com;
- envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=abp5zYnT
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 3E3C86068D
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 06:07:09 +0000 (UTC)
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4a5177d78c7so16766225e9.2
- for <u-boot@lists.u-boot-project.org>; Wed, 28 Oct 2026 23:07:09 -0700 (PDT)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 81tEnByhufpv for <u-boot@lists.u-boot-project.org>;
+ Thu, 29 Oct 2026 06:07:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 6681040176
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=148.163.150.75
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793254035;
+ b=DbhAN3aSRHLMshxnyOWuYzkuUJ/5CJYjpIBXVrcx1+hi4hj8rhXcHZj63YXPAQTF5IRm
+ Erp/lOakZVOq+Fn13SX/9ifJSTN6mTHSvA+/g+U+nNChpPvKnZ+5/1z+nch4gZVMUP9mg
+ KITz6LmZxCL+mQTK7NkPcAVvmfFvbZYiCoKKNi7ypMgwDLXR6q2kPotbZNnHy/J+EMoYV
+ O5NUs9ABmcF5cnEitGPZWpJJrG5NTGg8E8zr2wQLd+JR4DCTsvr3aDBebvzejH/0Fc9mn
+ 41oiFpWE/HomnUfEiiBqdYFZMtGwS50MSeCMEzT5eDZrlJQucHqFqnVbI3QH+f8VS8g==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793254035;
+ h=Received-SPF:Received:DKIM-Signature:Received:DKIM-Signature:
+ Received:Received:X-MS-Exchange-Authentication-Results:Received-SPF:
+ Received:Received:Received:Received:Received:Message-ID:Date:
+ MIME-Version:User-Agent:Subject:To:CC:References:Content-Language:
+ From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+ X-EOPAttributedMessage:X-MS-PublicTrafficType:
+ X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+ X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+ X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+ X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+ X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
+ X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-Id:
+ X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+ X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped:
+ X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+ X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Authority-Analysis:
+ X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+ bh=xAnjEavPaGEqqNG3+MINemnc5Issjt1Sh/157HBTtCE=;
+ b=QwxL/ORZrJf1Gf5yFLJ+tMeFC1walQfGLyVzANYyN4tx7yFnZajjKeW76zWDasAjA/MB
+ QZpWcjpCnEOZWqTJq5fHQKNrXdEqpcGO13O7wfP6/7zFqKNg6LDuDZAckj59h9/Jy+QCR
+ V039Cyv6siaFuKpk8q/v3bzAPDMNcB+t1CS/W3hPf3bco1dYokWGGeqHr3XMh2t5MkCH1
+ csk8SqhloXqh3r9zo3wWvEB1NLBpKB8gFsaHOvJ2JwJK3d08ebmePoFHSUYSX/vFOPzMp
+ aF4MXTgMFHCq4QwUi07Z0g0hCFQVi1jvmdHS9MFj9bgyP4DSL4Uj8TrPOjBs5hvGZdg==
+ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
+ dmarc=pass header.from=ti.com;
+ dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256
+ header.s=proofpoint-05-2026 header.b=gYP4x51W; 
+ dkim=pass header.d=ticloud.onmicrosoft.com header.i=@ticloud.onmicrosoft.com
+ header.a=rsa-sha256 header.s=selector1-ticloud-onmicrosoft-com
+ header.b=XP24tT0u; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=148.163.150.75
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.150.75;
+ helo=mx0a-0002e601.pphosted.com; envelope-from=s-jain1@ti.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
+ header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=gYP4x51W; 
+ dkim=pass (1024-bit key) header.d=ticloud.onmicrosoft.com
+ header.i=@ticloud.onmicrosoft.com header.a=rsa-sha256
+ header.s=selector1-ticloud-onmicrosoft-com header.b=XP24tT0u
+Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com
+ [148.163.150.75])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6681040176
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 06:07:10 +0000 (UTC)
+Received: from pps.filterd (m0380145.ppops.net [127.0.0.1])
+ by m0380145.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 69T5HsNM1716506;
+ Thu, 29 Oct 2026 01:07:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=
+ proofpoint-05-2026; bh=xAnjEavPaGEqqNG3+MINemnc5Issjt1Sh/157HBTt
+ CE=; b=gYP4x51Wym5h++u5g1YmOBp1WEkkTRb7XZzUMRncmpGSZ14RMIJqqLiOC
+ JKXvDyHhJFFWHfT5JCvfT/O0KurHnSL9FaDf74rcFPfEVypmRgdCfmPin5Sgyrd4
+ Fh0xOFv/yBqZ0Lzncea8aUHyu5q7m9J3J/xu4suUd2szbogZDUB9OOVZdjx4fJ+V
+ zbEQE7AKs9v6ytrxdIqPNytmXNEG+5+vYyx0bdR+nDse9xhVEm3FfBj0ZxMOh6Et
+ GZds2ay+5YqJWCEzrIeSIv2hDC1ckAwmTLpJDFpHmD5Q7SmXCrfrxfrIlN0t8aTn
+ +0oi7HEKw2QF+cUmaN1se2+bno0bg==
+Received: from dm1pr04cu001.outbound.protection.outlook.com
+ (mail-centralusazon11010006.outbound.protection.outlook.com [52.101.61.6])
+ by m0380145.ppops.net (PPS) with ESMTPS id 4hkurv1yj8-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Thu, 29 Oct 2026 01:07:09 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=T88E0AJE1KGjwATDdhy9XVwtUCvYY4yOY5f//ynGeD5ZljocHtIhwaseXoxWlqcgGDHw8Ob2loAev4S+udyKZdE3n8u8T9FGm7M7i5GCXD2+w5ZX9M+Ix2R+NXgvze2Ox8iIY8fZDp3cbxFbz3J5Vt+zq2WD1sz1/ef08feUr8x8mN18GVrP3VM+Qj2WnKMiSWMeF3N8fDF6RWPuvOfN38O6z6jzlZCT7dRYV0GKdxlqLnFrKDro6Ss6D01spjHFNVwS0K+IbsvLbuu+pfh1fkVYu28Pv07jneS6jJno6xL5IIBs0KY8FzRX/J4Ek7VsFFr9GJV8DHZGyUzQ2Ye1YA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xAnjEavPaGEqqNG3+MINemnc5Issjt1Sh/157HBTtCE=;
+ b=Nrua7gefR+QS4gzH0OcpUt6EOPZYRK/yQ9LJ7mbKiRz9f4wel5HGRSrsMFuPcSopO8UJcvZHNrsUJqT7FG/XnPloPQrztyxl7h+w7qEU2SD4YndhW8cySue7u68Qt2q/38Bb/npAGT0ya5Ap+yrDn2OuVQ5So/OtjzLZhpeaQLYFGXSPqjygY5e1eHG5k8THofzAsPeLOjnyzqhsWR9Q9Ae1pGDr5ovQbL14267a5SpNrVxLHW9AjeA1E4+bTdxBagVmXdlDaxhOqvGo1AHIxXjPt12dIE+Ezj5UQ5L5Ht054yLdYEGmY1MzuBwfUYDV7s/EmfrfvpdQ2idPMySwJA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=chromium.org smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793254028; x=1793858828;
- darn=lists.u-boot-project.org; 
- h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=IY3D5rAX1dvYhFcqkHcjt8FtaZpqVpzYfXuA9bmD54M=;
- b=abp5zYnTZp9lrBix7wz8zNsPc47cCRXXxYfT2PCFIKZ1vuwE4YaOFm7qkLKsv9GmR2
- NPvAQu3EWxzAM1TPM4yAy6fE+In37ot/9bwzei1pbvV02g4+qlAHZ2ymcvqUKPgUZYhu
- XXg2RngupxwTctmd3mZ3W2S/gj1urVp8QmwWWaT/yZ5sJ8MCK7ARlkIC0WJRbph1BPBr
- r8HVIBDRZ/4sJiXtbHN9uaPT0bzk+Y0UsXUDzQPU0THKFqaLJb1d8L6dB7iXnM4i0Hl8
- XV4VpD544Ujf0dioR0M0XNDicKFBQ0W2tpRhfnyCoq76oqLLp1Rsl4iFk/NLP+W0q1JV
- pqNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793254028; x=1793858828;
- h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=IY3D5rAX1dvYhFcqkHcjt8FtaZpqVpzYfXuA9bmD54M=;
- b=BLTK1Eqh4yDyNgwrP1gNGWUu4qlPgC8a4Ea1LJlL/UXhB6rPZe/J4GQ1gEwEC4DTiB
- P+jMmBKaxY5TXlSbAAZNbpmQmTyYc3FgZ4We6V2DF09Eu+iv1yNePmn1X5dNuh+3BFit
- v5GAc1x69bA3BXnxBYqTLGJrSul0uUm+SLTbpHXrtBBOjwHaxeqp3sv3KeMIHDcd7ODv
- zoNzHHBYafClYUy06NyqyjxQYlMn4WKaND/pRmwG8V2Pr8AK7Ui/2c7L2OY3NmkTa7EH
- ya2/fcuXcC2yZjsSFxvK2CCo8ZqoNbKTzbNZJxyq8hvEKho87Fsvhk8EpFEUAgJW5gJ7
- oGBQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwkTS8SITMEYK/S4YFEhSyhZi340DCv7PSaKXyUz/lEKFXEY3R53CmMrhUnDuhZqUHaLKCc+Dk=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYLfG5l7wFqz1fmWKEePptYqm3JJXoxVELqIdZy1fhOw32m7rFzt
- iqGGSZ40yZ1tXc5GdM3POYHotmp5uX0q0/BE2v4T2JxhAik78AdV4y/W6NWp8vpo
-X-Gm-Gg: AYBFou3NfT+geY7QkgzeTNvJUPKmjGdY1EmaZ1pRFCN5babJx667fxNlGMgjRYcdaN2
- r3NhZlleRB23ohtUdjkW1LO2vM2QoSA5oRlMZHOOOirzan1EJeJHlkQYlMGolOmaTZ/zZ5lU4Aa
- PUEfXCsAInQuogi2R1Pfln5JNuhkcEbH04Vk4Gcsua5Mreddy8HTGdUKvJ2YFqeTWyWb66ef+ZG
- aO5QnfFEyCjXRQMqwwm0dzUofwFO1tBtD3/BwDdZvt7Z3PWuDvDuQmAYu68SsHzSCu2kRrCAI4j
- YofQI+SzZBe5x/sl+kAkVqwm3xDT4O+IcMpq/vg7DXVNnXnaNHohsGDBFxiNc49p2cD277Z8X6Z
- zAjoly3X8F7szFQy+d5SmB3vyEHsJxbnIsOW00z/g29n9kO4UPBN911SySmB7SQclfZOPbaMnOV
- 2vxtgtJP7YrZdMdi/ioiutpT1X6JJOoWrgv44cngHgnRnC6t4nY4NLXMP1fVDXpvVy4r95pXrH1
- ry00jdWukUoGheiGEG9cRnm8SXuzIPMSw0uyPXtpLgJHyHhTzSsaSkTRLJoANRnuZH0YGFKfM4r
- Mp6AYHaUfjlwDasTS6/Fg81e2HisOmcEKcEvFGhU2xl6oMms94IVBw==
-X-Received: by 2002:a05:600c:34cc:b0:49f:e8bf:8f9b with SMTP id
- 5b1f17b1804b1-4a963ffd2b9mr109673585e9.4.1793254027348; 
- Wed, 28 Oct 2026 23:07:07 -0700 (PDT)
-Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3ecdd5b3sm32315829f8f.53.2026.10.28.23.07.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 Oct 2026 23:07:06 -0700 (PDT)
-From: Ana Bobillo <anabobillo3@gmail.com>
-To: Marek Vasut <marek.vasut+usb@mailbox.org>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.u-boot-project.org
-Subject: [PATCH RESEND 4/4] test: dm: Add tests for the USB Ethernet rx header
- checks
-Date: Thu, 29 Oct 2026 06:07:05 +0000
-Message-ID: <81f03167-12d5-4bb3-b2ae-03633a399f9d@gmail.com>
-In-Reply-To: <f9afa215-645f-400f-8743-eaeca3f6a2f5@gmail.com>
-References: <f9afa215-645f-400f-8743-eaeca3f6a2f5@gmail.com>
+ d=ticloud.onmicrosoft.com; s=selector1-ticloud-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xAnjEavPaGEqqNG3+MINemnc5Issjt1Sh/157HBTtCE=;
+ b=XP24tT0uRZsYh51jWLDrK6acPTENS68BCCvSeuqGZHq27l0Uza6Tq/vrLIHFk6ScT0+L+oYE+zBN9P3HI4VfZvSUsji3ct6fTzCDZkYqJbVMdoU/hvXLSiSPdSO8BGXkfmW7WA4R4OpslhXOG+vZkN/Q2TlqY+krcApWwP+6KR0=
+Received: from CH2PR18CA0044.namprd18.prod.outlook.com (2603:10b6:610:55::24)
+ by DS0PR10MB8032.namprd10.prod.outlook.com (2603:10b6:8:1ff::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Thu, 29 Oct
+ 2026 06:06:30 +0000
+Received: from CH01EPF000BE948.namprd02.prod.outlook.com
+ (2603:10b6:610:55:cafe::f) by CH2PR18CA0044.outlook.office365.com
+ (2603:10b6:610:55::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.19 via Frontend Transport; Thu,
+ 29 Oct 2026 06:06:30 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 198.47.21.195) smtp.mailfrom=ti.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ CH01EPF000BE948.mail.protection.outlook.com (10.167.244.196) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.569.4 via Frontend Transport; Thu, 29 Oct 2026 06:06:28 +0000
+Received: from DFLE211.ent.ti.com (10.64.6.69) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 29 Oct
+ 2026 01:05:49 -0500
+Received: from DFLE209.ent.ti.com (10.64.6.67) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Thu, 29 Oct
+ 2026 01:05:49 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE209.ent.ti.com
+ (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
+ Transport; Thu, 29 Oct 2026 01:05:49 -0500
+Received: from [172.24.17.19] (ltpw0bk3xf.dhcp.ti.com [172.24.17.19])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 69T65lme1334950;
+ Thu, 29 Oct 2026 01:05:47 -0500
+Message-ID: <4eec69a0-a2b3-417e-9cf9-2dbcfbdc8ffd@ti.com>
+Date: Thu, 29 Oct 2026 11:35:46 +0530
+X-Archived-By: <archiver.kernel.org>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 0/2] Add i2c ignore NAK support
+To: Heiko Schocher <hs@nabladev.com>
+CC: <u-boot@lists.u-boot-project.org>, Simon Glass <sjg@chromium.org>
+References: <20261026-rfc_i2c_nak_suppress-v1-0-bc01e8393b9a@ti.com>
+ <CAFLszTg_ob1mTz9=Nh0BHM-yZDDoyYTu4STzHgk5tWALyZ5yZw@mail.gmail.com>
+ <4d4a46e9-e75b-4bc2-a0c6-88a0bbc13b3b@ti.com>
+ <d8a62180-3baa-27b9-d98e-08665b00ec1c@nabladev.com>
+Content-Language: en-US
+From: Swamil Jain <s-jain1@ti.com>
+In-Reply-To: <d8a62180-3baa-27b9-d98e-08665b00ec1c@nabladev.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH01EPF000BE948:EE_|DS0PR10MB8032:EE_
+X-MS-Office365-Filtering-Correlation-Id: ab6ffba7-a044-4ac1-0c8b-08df3582c585
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|23010399003|36860700016|82310400026|10067099003|261028144727099003|261026140227099003|261022105027099003|4143699003|261026121527099003|56012099006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: rnpLG33HsoSCGbXkpeuCrMklHDRhIxOY1/qxRvNwvYH9iWjD8nVwpCw6aAMkjKsN7MZVrwY7RVc23El88sqgyM+NIZPIhbwTeTAySfPqyJeYEMwlHLjCHLjOKeZIVfamtqjfJ0tI7ClPWW6YWuczF3YHmGwAXgK3LfbRDFgbV/gjDphDUdobCLS1sBwYdb7c+AVBhcqUyojc8u5NvAlqfAUzi8Yymqkp6MYY2iv0sSgWC4PkE+FWe/Z26b2byR7oVwGXBt5Vx2SdOdPtyF7OIdrfzmaT88eEzN07OpIBztbx9JgbCs9WjE/kB7C55tZVWnv7gBIPRNcvkQziN+ZMFRVE2YJLGCFj3MX/ltotCBB08cJieNNedEvN8FRgilshHQH5QuoMVp5uRh1WQqLdKmRa7ZhEwU4cDF6XEO52gsGCvqTLOKJkvEsUID6qSthtKVT7WC3imJXrDwBYougq0g5yHoq9cAgopMLAJHF4jB0XDaQxVJBIijDk6u4k7ZGGcX+n+COZ6kN7Eevrwa8uRtUTWc6/1nq3PzbaP0iKd1x2QsGM7lSqx+eT2e2PGLvcJdNwegn4LqgDxtpNBx2d3Vtkfojg7o5OZQ7wjNqyhUl9Mje8k8ZjSiuvewWqz5af0b1c93VnymX2bTNqOI8sWOp/GjT8Xj8WQs5vFe3yQrQxmDOoLCrAqpAbhdqxqJOxVKjpnL5uIuzVdbaxaWcsrQ==
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(23010399003)(36860700016)(82310400026)(10067099003)(261028144727099003)(261026140227099003)(261022105027099003)(4143699003)(261026121527099003)(56012099006)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: SuO4f5n8E/gq9dZmBExcUcIdoY2tu77LyZFjMxE1EiDMOkF4H7EjPT/GwFj80F6T9BEwO0P+rTEjv21OciZBjErAF/kGIBrljKjjRV6lva1aUnc22tbevG6fb8J7ydB4fvrHGz2yO/iXvjBlFcOyJi5pyEZmMKpAWbHp8gmdr79Um7oC7wS/zbJFm/HFdz6QQf8Mig+Ut+2VLbm01OCx3ktMRGaTTj3fUqd03+c5O+yFfjRpk/fkgtzFuzuJ+GodpfjAeEky2n7A80/zXkyKb8DQqc9zwIDb9YjhBwlE1C1UaWbm7D11lGT+woepFwsh3byi4ud+uGQCqg4HLV91H5fqSaSROEtUm3Fs2Bs7AJz6ka4ALoLvXkyQSJV2IjOxBYd8vM/+O/onvSeYVAyFJVxERDb1zzDhh/JdkrwLinsvYI8DX1clZfU80qo0H6e4
+X-Exchange-RoutingPolicyChecked: PU9I9rc3x0/YdJhEuSNuLy2OB1vmb8MMvj2tjvPpBo/aONqGLcSlYEktEoPISbd+AkOxtUbJRUQtdFtgm0k/mFQeuSLQQ1F+hqhX7P3prZUYs+AL2VfI4On3SzLMuI1uxc98qnSXdnfH8OWovlH2wyIjaUdc0aLZTB3waCmh7ykllRA+cUwPLTe4xhYEXsPdwN4lk29ucx50lRLe9ZuAmvotKKME9qo89wYP+LwXsrFVzzUuIWAsQldhg+g+Xqr+FTOVhDQ7C/UP0eVRItasplagQTsMa03MgtBR7ZLLVhUZHlhVZgsidmTtS68DLEPcfGWEiYQASusu8wDX7QH2JA==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Oct 2026 06:06:28.4801 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ab6ffba7-a044-4ac1-0c8b-08df3582c585
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH01EPF000BE948.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB8032
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI5MDAyMiBTYWx0ZWRfX0K9x8EPoFF3U
+ Z2+eCRri5R3Bb1PNXX0sfY63Bpoaq5GEBb03h6mt5Q5hPYYpU0eYm0ImG4HKD65mHPZGxQwUPGj
+ GAee5/BlTikywGomckHZ7R0M5t9rPhaMaPWpr62rs1EWJvHElZGCL8XwQbGNc6vQRi0FbuiXgCA
+ xp9RFnafL+YkAscAo1XCLEtPG1N1NcQ0bWJJPcJUW1/nEImQlo+H0sRo82o+70BdPBx3s9UKd5e
+ j9qDkgwdUhahSyMd0i9UABTSKXs69zoG4EqkNiV9JD4YeFmJNI5/O7MeVYszkJxiYyEdNtH4HSm
+ FUdiWO3gVCGQ+OTHz3MYaN3zXlJ8haiDiVi05MZjZUVdd5+Qf6MPKC561WvKUe5v+4Hj/LyY8QN
+ kfhmMyB2K7DbwJy/eMGCYC04mEBca2thdS1wRN8jCuZw9Qx1S8Krmr/CJnFrO2iyiWnYU4962bP
+ 6gsmrXbEDkyeY+yTCVg==
+X-Proofpoint-ORIG-GUID: kC31D_53JPngvCMQYlYIecV0Wd0-f36W
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI5MDAyMiBTYWx0ZWRfX6ahIiDLFS2oa
+ w5IcP9ofaPUAQ6hxNylI8u6q9nH1Z0gysqaLBLUFsTrvToyjQYLezmOavNs+TeDyErhMjuqxbPI
+ Kt1oiauNQwocd0TaLfLvCKdtBazK0Yw=
+X-Proofpoint-GUID: kC31D_53JPngvCMQYlYIecV0Wd0-f36W
+X-Authority-Analysis: v=2.4 cv=epNKXYpX c=1 sm=1 tr=0 ts=6ae2e28d cx=c_pps
+ a=h5F5dVrtafxD4HcxutFXpg==:117 a=tJyPKKxUohctrY4NYmUjkA==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
+ a=AlMIdn_sM9wA:10 a=VkNPw1HP01LnGYTKEx00:22 a=Z8NIEmU8O1QQgoT56wFK:22
+ a=gO1vWkAQAl3rybz1DQOp:22 a=sozttTNsAAAA:8 a=u0YkFWZAeWwYbTr9klsA:9
+ a=QEXdDO2ut3YA:10
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-29_02,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 malwarescore=0 phishscore=0 lowpriorityscore=0 bulkscore=0
+ suspectscore=0 spamscore=0 clxscore=1015 adultscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610290022
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -172,440 +297,75 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	KHOP_DYNAMIC,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
-X-Archived-By: <archiver.kernel.org>
 
-From: Ana Bobillo <anabobillo3@gmail.com>
 
-Add DM tests that bind the r8152, ax88179, lan75xx and lan78xx drivers
-without probing them and hand their recv() and free_pkt() prepared
-transfers in the receive buffer: well-formed ones, which must come back
-as the packets they hold, and ones whose header or lengths run past the
-transfer, which must be dropped.
 
-Enable CONFIG_USB_HOST_ETHER and these drivers in sandbox_defconfig so
-that they are built and tested under sandbox.
+On 27-10-2026 13:15, Heiko Schocher wrote:
+> Hello Swamil,
+> 
+> On 27.10.26 08:04, Swamil Jain wrote:
+>> Hi Simon,
+>>
+>> On 10/26/26 21:40, Simon Glass wrote:
+>>> Hi Swamil,
+>>>
+>>> On 2026-10-26T07:16:33, Swamil Jain <s-jain1@ti.com> wrote:
+>>>
+>>>> Some i2c peripherals do not require or wait for i2c ACK, so the series
+>>>> adds a flag(DM_I2C_CHIP_IGNORE_NAK) to ignore negative acknowledgment
+>>>> (NAK).
+>>>
+>>>>
+>>>> Our usecase is SII9022A[1] hdmi-bridge, while reading the EDID block
+>>>> the bridge doesn't send ACK (mentioned in programmer's guide[2], pg 
+>>>> 22).
+>>>
+>>> Thanks for looking at this. Are you plannning to send a SII9022A driver?
+>>
+>> Working on the sii9022a driver.
+>>
+>>>
+>>> I've commented on the design on patch 1. It would also be worth
+>>> checking how Linux handles this for sii902x, since that driver reads
+>>> EDID through the bridge too.
+>>>
+>>
+>> Tried following the programmer's guide but will check how linux handles
+>> the EDID read for sii902x.
+>>
+>>> If the generic flag does stay, please can you add a sandbox test in
+>>> test/dm/i2c.c, like the existing tests for the DM_I2C_CHIP_RD_ADDRESS
+>>> and DM_I2C_CHIP_WR_ADDRESS flags.
+>>
+>> As per your feedback on the patches will try not to use the generic 
+>> flag and handle the case within the driver itself. Will re-spin the 
+>> series
+>> with sii902x driver as well.
+> 
+> @Simon: Thanks for the review!
+> 
+> please try to not drop me from cc, thanks!
 
-Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
----
- configs/sandbox_defconfig |   5 +
- test/dm/Makefile          |   1 +
- test/dm/usb_eth.c         | 375 ++++++++++++++++++++++++++++++++++++++
- 3 files changed, 381 insertions(+)
- create mode 100644 test/dm/usb_eth.c
+Sorry Heiko, will keep you in loop for future discussions.
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index a3fa5246082..1d409891580 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -359,6 +359,11 @@ CONFIG_USB=y
- CONFIG_DM_USB_GADGET=y
- CONFIG_USB_EMUL=y
- CONFIG_USB_KEYBOARD=y
-+CONFIG_USB_HOST_ETHER=y
-+CONFIG_USB_ETHER_ASIX88179=y
-+CONFIG_USB_ETHER_LAN75XX=y
-+CONFIG_USB_ETHER_LAN78XX=y
-+CONFIG_USB_ETHER_RTL8152=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_USB_ETHER=y
-diff --git a/test/dm/Makefile b/test/dm/Makefile
-index 1b3a20aa932..e22cbf2c2ba 100644
---- a/test/dm/Makefile
-+++ b/test/dm/Makefile
-@@ -150,6 +150,7 @@ obj-$(CONFIG_TEE) += tee.o
- obj-$(CONFIG_TIMER) += timer.o
- obj-$(CONFIG_TPM_V2) += tpm.o
- obj-$(CONFIG_DM_USB) += usb.o
-+obj-$(CONFIG_USB_HOST_ETHER) += usb_eth.o
- obj-$(CONFIG_VIDEO_SANDBOX_SDL) += video.o
- ifeq ($(CONFIG_VIRTIO_SANDBOX),y)
- obj-y += virtio.o
-diff --git a/test/dm/usb_eth.c b/test/dm/usb_eth.c
-new file mode 100644
-index 00000000000..2f8903b71b6
---- /dev/null
-+++ b/test/dm/usb_eth.c
-@@ -0,0 +1,375 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Tests for the receive header checks of the USB Ethernet drivers
-+ *
-+ * Each driver is bound without being probed, so that no USB device sits
-+ * behind it, and its recv() is handed a prepared transfer in the receive
-+ * buffer.
-+ */
-+
-+#include <dm.h>
-+#include <net.h>
-+#include <usb_ether.h>
-+#include <asm/unaligned.h>
-+#include <dm/device-internal.h>
-+#include <dm/root.h>
-+#include <dm/test.h>
-+#include <test/ut.h>
-+#include "../../drivers/usb/eth/lan7x.h"
-+#include "../../drivers/usb/eth/r8152.h"
-+
-+static u8 rxbuf[256] __maybe_unused;
-+
-+/*
-+ * Bind @drv to a new device and present the first @len bytes of rxbuf to it
-+ * as a received transfer. device_of_to_plat() allocates the private data
-+ * without probing the device; @ueth_offset is where the driver keeps its
-+ * struct ueth_data in there.
-+ */
-+static int __maybe_unused usb_eth_test_bind(struct unit_test_state *uts,
-+					    struct driver *drv,
-+					    size_t ueth_offset, int len,
-+					    struct udevice **devp,
-+					    struct ueth_data **uethp)
-+{
-+	struct ueth_data *ueth;
-+
-+	ut_assertok(device_bind(dm_root(), drv, drv->name, NULL, ofnode_null(),
-+				devp));
-+	ut_assertok(device_of_to_plat(*devp));
-+	ueth = dev_get_priv(*devp) + ueth_offset;
-+	ueth->rxbuf = rxbuf;
-+	ueth->rxsize = sizeof(rxbuf);
-+	ueth->rxlen = len;
-+	ueth->rxptr = 0;
-+	*uethp = ueth;
-+
-+	return 0;
-+}
-+
-+static int __maybe_unused usb_eth_test_recv(struct udevice *dev,
-+					    uchar **packetp)
-+{
-+	return eth_get_ops(dev)->recv(dev, 0, packetp);
-+}
-+
-+static int __maybe_unused usb_eth_test_free_pkt(struct udevice *dev,
-+						uchar *packet, int len)
-+{
-+	return eth_get_ops(dev)->free_pkt(dev, packet, len);
-+}
-+
-+#if IS_ENABLED(CONFIG_USB_ETHER_RTL8152)
-+static int r8152_test_bind(struct unit_test_state *uts, int len,
-+			   struct udevice **devp, struct ueth_data **uethp)
-+{
-+	return usb_eth_test_bind(uts, DM_DRIVER_GET(r8152_eth),
-+				 offsetof(struct r8152, ueth), len, devp,
-+				 uethp);
-+}
-+
-+/* r8152_eth_recv() returns each packet of an aggregated transfer */
-+static int dm_test_r8152_eth_recv(struct unit_test_state *uts)
-+{
-+	struct ueth_data *ueth;
-+	struct udevice *dev;
-+	uchar *packet;
-+
-+	/* A packet of 60 bytes, then one of 42 at the next 8-byte boundary */
-+	memset(rxbuf, 0, sizeof(rxbuf));
-+	put_unaligned_le32(60 + CRC_SIZE, rxbuf);
-+	put_unaligned_le32(42 + CRC_SIZE, rxbuf + 88);
-+	ut_assertok(r8152_test_bind(uts, 88 + sizeof(struct rx_desc) + 42 +
-+				    CRC_SIZE, &dev, &ueth));
-+
-+	ut_asserteq(60, usb_eth_test_recv(dev, &packet));
-+	ut_asserteq_ptr(rxbuf + sizeof(struct rx_desc), packet);
-+	ut_assertok(usb_eth_test_free_pkt(dev, packet, 60));
-+	ut_asserteq(42, usb_eth_test_recv(dev, &packet));
-+	ut_asserteq_ptr(rxbuf + 88 + sizeof(struct rx_desc), packet);
-+	ut_assertok(usb_eth_test_free_pkt(dev, packet, 42));
-+	ut_asserteq(-EAGAIN, usb_eth_test_recv(dev, &packet));
-+
-+	ut_assertok(device_unbind(dev));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_r8152_eth_recv, 0);
-+
-+/* r8152_eth_recv() rejects a transfer too short for the rx descriptor */
-+static int dm_test_r8152_eth_recv_short(struct unit_test_state *uts)
-+{
-+	struct ueth_data *ueth;
-+	struct udevice *dev;
-+	uchar *packet;
-+
-+	memset(rxbuf, 0, sizeof(rxbuf));
-+	put_unaligned_le32(CRC_SIZE + 2, rxbuf);
-+	ut_assertok(r8152_test_bind(uts, 8, &dev, &ueth));
-+
-+	ut_asserteq(-ENOSPC, usb_eth_test_recv(dev, &packet));
-+	ut_asserteq(0, ueth->rxlen);
-+
-+	ut_assertok(device_unbind(dev));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_r8152_eth_recv_short, 0);
-+
-+/* r8152_eth_recv() rejects a descriptor length shorter than the CRC */
-+static int dm_test_r8152_eth_recv_crc(struct unit_test_state *uts)
-+{
-+	struct ueth_data *ueth;
-+	struct udevice *dev;
-+	uchar *packet;
-+
-+	memset(rxbuf, 0, sizeof(rxbuf));
-+	put_unaligned_le32(CRC_SIZE - 2, rxbuf);
-+	ut_assertok(r8152_test_bind(uts, sizeof(struct rx_desc) + 64, &dev,
-+				    &ueth));
-+
-+	ut_asserteq(-ENOSPC, usb_eth_test_recv(dev, &packet));
-+	ut_asserteq(0, ueth->rxlen);
-+
-+	ut_assertok(device_unbind(dev));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_r8152_eth_recv_crc, 0);
-+#endif
-+
-+#if IS_ENABLED(CONFIG_USB_ETHER_ASIX88179)
-+/*
-+ * struct asix_private is local to the driver; its struct ueth_data comes
-+ * first
-+ */
-+static int ax88179_test_bind(struct unit_test_state *uts, int len,
-+			     struct udevice **devp, struct ueth_data **uethp)
-+{
-+	return usb_eth_test_bind(uts, DM_DRIVER_GET(ax88179_eth), 0, len, devp,
-+				 uethp);
-+}
-+
-+/*
-+ * Prepare a transfer of 64 bytes of packet data, two packet headers, the
-+ * first giving @pkt_len, and the rx header giving @pkt_cnt of them
-+ */
-+static int ax88179_test_rx(int pkt_cnt, int pkt_len)
-+{
-+	const int hdr_off = 64;
-+
-+	memset(rxbuf, 0, sizeof(rxbuf));
-+	put_unaligned_le32(pkt_len << 16, rxbuf + hdr_off);
-+	put_unaligned_le32(hdr_off << 16 | pkt_cnt, rxbuf + hdr_off + 8);
-+
-+	return hdr_off + 12;
-+}
-+
-+/* ax88179_eth_recv() returns each packet of the transfer */
-+static int dm_test_ax88179_eth_recv(struct unit_test_state *uts)
-+{
-+	struct ueth_data *ueth;
-+	struct udevice *dev;
-+	uchar *packet;
-+	int len;
-+
-+	/* A packet of 22 bytes padded to 24, then one of 40 up to the headers */
-+	len = ax88179_test_rx(2, 22);
-+	put_unaligned_le32(40 << 16, rxbuf + 68);
-+	ut_assertok(ax88179_test_bind(uts, len, &dev, &ueth));
-+
-+	ut_asserteq(22, usb_eth_test_recv(dev, &packet));
-+	ut_asserteq_ptr(rxbuf + 2, packet);
-+	ut_assertok(usb_eth_test_free_pkt(dev, packet, 22));
-+	ut_asserteq(40, usb_eth_test_recv(dev, &packet));
-+	ut_asserteq_ptr(rxbuf + 24 + 2, packet);
-+	ut_assertok(usb_eth_test_free_pkt(dev, packet, 40));
-+	ut_asserteq(0, ueth->rxlen);
-+
-+	ut_assertok(device_unbind(dev));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_ax88179_eth_recv, 0);
-+
-+/* ax88179_eth_recv() rejects packet headers running past the rx header */
-+static int dm_test_ax88179_eth_recv_pkt_cnt(struct unit_test_state *uts)
-+{
-+	struct ueth_data *ueth;
-+	struct udevice *dev;
-+	uchar *packet;
-+	int len;
-+
-+	len = ax88179_test_rx(3, 22);
-+	ut_assertok(ax88179_test_bind(uts, len, &dev, &ueth));
-+
-+	ut_asserteq(-EIO, usb_eth_test_recv(dev, &packet));
-+	ut_asserteq(0, ueth->rxlen);
-+
-+	ut_assertok(device_unbind(dev));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_ax88179_eth_recv_pkt_cnt, 0);
-+
-+/* ax88179_eth_recv() rejects a packet running past the packet headers */
-+static int dm_test_ax88179_eth_recv_pkt_len(struct unit_test_state *uts)
-+{
-+	struct ueth_data *ueth;
-+	struct udevice *dev;
-+	uchar *packet;
-+	int len;
-+
-+	len = ax88179_test_rx(1, 65);
-+	ut_assertok(ax88179_test_bind(uts, len, &dev, &ueth));
-+
-+	ut_asserteq(-EIO, usb_eth_test_recv(dev, &packet));
-+	ut_asserteq(0, ueth->rxlen);
-+
-+	ut_assertok(device_unbind(dev));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_ax88179_eth_recv_pkt_len, 0);
-+#endif
-+
-+#if IS_ENABLED(CONFIG_USB_ETHER_LAN75XX) || IS_ENABLED(CONFIG_USB_ETHER_LAN78XX)
-+static int lan7x_test_bind(struct unit_test_state *uts, struct driver *drv,
-+			   u32 chipid, int len, struct udevice **devp,
-+			   struct ueth_data **uethp)
-+{
-+	struct lan7x_private *priv;
-+
-+	ut_assertok(usb_eth_test_bind(uts, drv,
-+				      offsetof(struct lan7x_private, ueth), len,
-+				      devp, uethp));
-+	priv = dev_get_priv(*devp);
-+	priv->chipid = chipid;
-+
-+	return 0;
-+}
-+#endif
-+
-+#if IS_ENABLED(CONFIG_USB_ETHER_LAN78XX)
-+static int lan78xx_test_bind(struct unit_test_state *uts, int len,
-+			     struct udevice **devp, struct ueth_data **uethp)
-+{
-+	return lan7x_test_bind(uts, DM_DRIVER_GET(lan78xx_eth),
-+			       ID_REV_CHIP_ID_7800, len, devp, uethp);
-+}
-+
-+/* lan7x_eth_recv() returns the frame behind command A, B and C */
-+static int dm_test_lan7x_eth_recv(struct unit_test_state *uts)
-+{
-+	struct ueth_data *ueth;
-+	struct udevice *dev;
-+	uchar *packet;
-+
-+	memset(rxbuf, 0, sizeof(rxbuf));
-+	put_unaligned_le32(60, rxbuf);
-+	ut_assertok(lan78xx_test_bind(uts, 10 + 60, &dev, &ueth));
-+
-+	ut_asserteq(60, usb_eth_test_recv(dev, &packet));
-+	ut_asserteq_ptr(rxbuf + 10, packet);
-+
-+	ut_assertok(device_unbind(dev));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_lan7x_eth_recv, 0);
-+
-+/* lan7x_eth_recv() rejects a transfer too short for command A, B and C */
-+static int dm_test_lan7x_eth_recv_short(struct unit_test_state *uts)
-+{
-+	struct ueth_data *ueth;
-+	struct udevice *dev;
-+	uchar *packet;
-+
-+	memset(rxbuf, 0, sizeof(rxbuf));
-+	put_unaligned_le32(2, rxbuf);
-+	ut_assertok(lan78xx_test_bind(uts, 6, &dev, &ueth));
-+
-+	ut_asserteq(-EINVAL, usb_eth_test_recv(dev, &packet));
-+	ut_asserteq(0, ueth->rxlen);
-+
-+	ut_assertok(device_unbind(dev));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_lan7x_eth_recv_short, 0);
-+
-+/* lan7x_eth_recv() rejects a frame running past the transfer */
-+static int dm_test_lan7x_eth_recv_len(struct unit_test_state *uts)
-+{
-+	struct ueth_data *ueth;
-+	struct udevice *dev;
-+	uchar *packet;
-+
-+	memset(rxbuf, 0, sizeof(rxbuf));
-+	put_unaligned_le32(64, rxbuf);
-+	ut_assertok(lan78xx_test_bind(uts, 4 + 64, &dev, &ueth));
-+
-+	ut_asserteq(-EINVAL, usb_eth_test_recv(dev, &packet));
-+	ut_asserteq(0, ueth->rxlen);
-+
-+	ut_assertok(device_unbind(dev));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_lan7x_eth_recv_len, 0);
-+
-+/* lan7x_free_pkt() steps over the header, the frame and its padding */
-+static int dm_test_lan7x_free_pkt(struct unit_test_state *uts)
-+{
-+	struct ueth_data *ueth;
-+	struct udevice *dev;
-+	uchar *packet;
-+
-+	/* A frame of 61 bytes, then one of 60 at the next 4-byte boundary */
-+	memset(rxbuf, 0, sizeof(rxbuf));
-+	put_unaligned_le32(61, rxbuf);
-+	put_unaligned_le32(60, rxbuf + 72);
-+	ut_assertok(lan78xx_test_bind(uts, 72 + 10 + 60, &dev, &ueth));
-+
-+	ut_asserteq(61, usb_eth_test_recv(dev, &packet));
-+	ut_assertok(usb_eth_test_free_pkt(dev, packet, 61));
-+	ut_asserteq(60, usb_eth_test_recv(dev, &packet));
-+	ut_asserteq_ptr(rxbuf + 72 + 10, packet);
-+	ut_assertok(usb_eth_test_free_pkt(dev, packet, 60));
-+	ut_asserteq(0, ueth->rxlen);
-+	ut_asserteq(-EAGAIN, usb_eth_test_recv(dev, &packet));
-+
-+	ut_assertok(device_unbind(dev));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_lan7x_free_pkt, 0);
-+#endif
-+
-+#if IS_ENABLED(CONFIG_USB_ETHER_LAN75XX)
-+/*
-+ * lan7x_eth_recv() returns the LAN75xx frame behind command A, B and the
-+ * padding, which its length counts
-+ */
-+static int dm_test_lan7x_eth_recv_lan75xx(struct unit_test_state *uts)
-+{
-+	struct ueth_data *ueth;
-+	struct udevice *dev;
-+	uchar *packet;
-+
-+	memset(rxbuf, 0, sizeof(rxbuf));
-+	put_unaligned_le32(2 + 60, rxbuf);
-+	ut_assertok(lan7x_test_bind(uts, DM_DRIVER_GET(lan75xx_eth),
-+				    ID_REV_CHIP_ID_7500, 10 + 60, &dev, &ueth));
-+
-+	ut_asserteq(60, usb_eth_test_recv(dev, &packet));
-+	ut_asserteq_ptr(rxbuf + 10, packet);
-+	ut_assertok(usb_eth_test_free_pkt(dev, packet, 60));
-+	ut_asserteq(0, ueth->rxlen);
-+
-+	ut_assertok(device_unbind(dev));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_lan7x_eth_recv_lan75xx, 0);
-+#endif
+Regards,
+Swamil.
+
+> 
+> bye,
+> Heiko
+>>
+>> Regards,
+>> Swamil.
+>>>
+>>> Regards,
+>>> Simon
+>>
+> 
+
