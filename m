@@ -2,187 +2,143 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A475606A31A
-	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 09:25:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BE5C606A31C
+	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 09:31:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=hdSRUfx5;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=RJqqPWX8
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Px3DYrtJ;
+	dkim=pass (2048-bit key, unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=QKqDnZc6
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E111180F7A;
-	Thu, 29 Oct 2026 09:25:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2BABF80F7F;
+	Thu, 29 Oct 2026 09:31:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yfttWfMAmkMT; Thu, 29 Oct 2026 09:25:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 47E4C80E78
+ id BU1tmkUDJ8sv; Thu, 29 Oct 2026 09:31:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org CB8E880F24
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793265944;
-	b=YG60cwF6DjeE1HmsDLk5kbr85fwDEzzl7PlcF4G7Q2eaylYFytWa33cL+EAZKnEcHVsp
-	 zZKY9tFDCzeykRwdlFMJL/lns4zde1Yd7B4lHCQ/CGaX7XA8/Eq3ehzU7cS0xJ8lqLQIs
-	 dVS00DgzU5PJawUh+ALbwsaz5L5/9D8SFpuoJ021f06b3KVO1IVCXIxF5DC+Twk2hQzH3
-	 8qAqDdjCGMYQN7czJIea7UB530xpG9GNXyc1/i3jjmhwyUjTwvrnyViAb2uTbqvRnwqb9
-	 wQgwX1BhaAhnbe/xnz3B4WQIR8G7E8FZji5cTjZDyjnIu/M2lODnA5reIOUlcARJAXw==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793265944;
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793266262;
+	b=bP4M7kq0P0AmFUQYDTkV4uLMmbdJaa28tMjx58db74jAEIhr1cHNJUGNWKALU2c139Y6
+	 BXhmYBEcvlUCWdjG6H7fgw3doR7KMjf41gbJDIm8zuoPvxNd5DSGwB5rd254JF/oZ0TNc
+	 j31Z2t89tyfzZun6HXMJMOKyesKR73/lGp5CN+AF6/LaXOAkA2dc7RJDaaPuZo8p8SPmQ
+	 tfsI37mYAAorivuBaq4Z4iCy7ZYEIfIZAtNIy/crm4jlDN9hfTgIGlfvVxoHCl5Skt1tY
+	 UvM9erGmsulUqjfSy8nYZBeX4JbpiLedxArrrjHRJgYagIhRoKWuDyo8XBJ1x5JYBvw==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793266262;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Infomaniak-Routing:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=y7mb/0rjfez8iCgWE/F0Pi/ul942LvSx2kEBbnqR0JI=;
-	b=SN0JLx3iOqIIh6OccjLtX/CDeEQZUjSTfnrlpNQc36uROWCKO7WaW85SdzUgjkBfhZNY
-	 RmLLQ8icGko0PPNhiOlknEzNt0OIYmZSGl9qDGtfs90MtTpn4zlDPNEY8lYjCO9V8c/7E
-	 tIfFhFkWb7SetNRgE3k1ZlKbRwm3fL85rTfdAtgHTZKTZOBWSmMt6NL4yTICzGsKFhzKF
-	 30AX5j7yQN4YCUDrStvCW65Idg33BbXgabxxNhbuwEs7Fx6YGRn0KzcDOzq0Nnf1/5ORD
-	 EAwAeEfKUsbo8WsKMPlTtU1ZdiIjsp3AySdKKFexkP5Tp6tTawaR+532oW6fRRwXP6g==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=RJqqPWX8;
+	bh=HYSBDmJwqYVgsBzS2kfFtUyKOYUdo/AZGBJo435PppI=;
+	b=B8FNApcEe1WLfjbKVez8X5gwRuMCHObw6lm+jlEUrizQQ0/qBY4oKSvgWXF2W6cOTcQr
+	 8NkQO2TAM9iEXbkLNJWRvA+QAGXuiNzccR7LG+hx0BmSqxc05AGnHe1i1uephgj+d7h5s
+	 R8t3CvMwYmClLThRIoOAoSo7COSPRrYk61PyR8wS822/YGGMwFNHVS8QlFnxhLE9ppHMN
+	 Bu8MuxjsAXGKKhH4YIPKvpip9HZ5QU1fqEUDy+iHutLkwfwVIeaw68Hwld3AqEuN0ZJBY
+	 9qbiUt/PkjkxFSFvdJgHaHDfpeAUY9IVtNtkRXMFWQxzqB4/lcq3qiKZ0U2CfgSAUPw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793265944;
-	bh=y7mb/0rjfez8iCgWE/F0Pi/ul942LvSx2kEBbnqR0JI=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=hdSRUfx5RNTtl5ywM0QJwIaowvs5yGBQZrAHf8xhWGO12Rdla300g1p5mPo3PgxE0
-	 WKO5zmMncqU6jmVoUDq8u2RUaYXITuERgSOCKgA50yoBQ54qM0zs1jk1/gzKVL/JSx
-	 FimkJPLAVnPd/3JodLXU0R2FMjmKvmO8j4FXm1LeIo34vYD2Fu69dojnWt0pNMOeFw
-	 2H3OzsEYDWqQ7l687v9FaNCpOZgHbJuk3jo2rd1mwzkdGC5jLhwkVsALxdMMVIVFNA
-	 qsIv1SpQyQzg2N4mhYjtB3bcwZp1iEOTleA9K8TKsJOUBJn33YO67DYeYa8kUyvTVv
-	 z3XIrq6kgIWhg==
+	d=lists.u-boot-project.org; s=default; t=1793266261;
+	bh=HYSBDmJwqYVgsBzS2kfFtUyKOYUdo/AZGBJo435PppI=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Px3DYrtJ5FoGggPf7PHnvGZIT8x/l7IuguNE2lomwy2gtwDgaUQXZ6n0N8BLaz2PU
+	 8eec1yBs4kvqrNuq9kT6kWzES9nJuJA8/4oK0bnhsi+Y1u98JhPOGD1wfsXTZIAOai
+	 VIIqaITxJKO1uPsm0B/sORxqnj/RjkZYh3tFs5XUZi3BJRlFB7mBIkh2U+I4oR3mlF
+	 jAJQo0j/tQ8xIR9SL/fJiX9QuBGcEdRTzKt4WDHQwFZLUwK3EoRI3xRoKl4Oc5dW5Q
+	 x/aaXgcdRd756ks6Gi/JFR3ZTXrNpMs9O+onUSWIaaQdhCG0cFhk4O/hmwiwlQwmgh
+	 0utVnOyvU31ug==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 47E4C80E78;
-	Thu, 29 Oct 2026 09:25:44 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id E9D2A4BC
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 09:25:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CB8E880F24;
+	Thu, 29 Oct 2026 09:31:01 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id EADCC356
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 09:30:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id DAFDB80E78
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 09:25:42 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id DD0AB4032E
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 09:30:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id i80KkuJSVLkI for <u-boot@lists.u-boot-project.org>;
- Thu, 29 Oct 2026 09:25:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1D91D80E34
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:20::235"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793265941;
- b=eCNgBg1kw2bQiY7bcyVc/jPMbxUjK7rSOyKiCI+lggHY651vOtWc0FxyX4kl7rgZsNT3
- 6qCSWOrJp2SEsfPsnT3v9LuzG391yTMxZ0F7HyS0+7a1JDhBpcPMACvAfVKitLFYLo0mf
- edFgIbfkYAFbYMn0Ks4iCN8uhbQgBTtnoaDgVKpUZwJmfB4JMwRMiMuwU6xpalZCmRYVf
- LcS9a1DcQcu8JffeJ4DxVLgaLT/vVm9duvTLRRMQ4etQABqkagXnRXcelvDqLjDFeJsAP
- cIGc2bv+a9HvY5v/dTbRBqvjDLedcWtbVIZokO5Z3rtZI9XlZHY4SNsf5QlXbUvIeqg==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793265941;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
- In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type;
- bh=y7mb/0rjfez8iCgWE/F0Pi/ul942LvSx2kEBbnqR0JI=;
- b=J0ETGNpMgIFYRIu4VRun8JkitC/Ly2TFLlAmrADLql7nzLDL0e+2DYY4mMK1gMTQNG7N
- u7hvY00XJ4zPuhYMi5Yjqw45gvHbjja4CiPfz3/KoLzJNjz0jLf8vojDraz+zeFlgSrHF
- exX48rD+l7SyLT3LsEUH0Ot+yGAkl9Hf+HvD6mINMmZtrR3YWQUQd3e4TwmAxGJoIGvFE
- 8QWDAORDhNxXVSe8WNFTEby4Ih0eNEJ7M6rzSHfFZfP3C0WPvD9ejwKdvBrBrPhvXICmG
- iU0wcf4CbLTye6pRBGd+yQ3b9ULwqRVZlD1bgqbEndltRE+m9rJfzUv1xdTUVL1yNkg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=RJqqPWX8; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::235"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::235; helo=mail-lj1-x235.google.com;
- envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=RJqqPWX8
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 1D91D80E34
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 09:25:40 +0000 (UTC)
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-3ac97e45a79so13940661fa.3
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 02:25:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793265938; cv=none;
- d=google.com; s=arc-20260327;
- b=ckI3424Z9Vr2wVmozsp4xv0vMe0AfPv1An79q7K2Xwdj3RIoXhklDLGO44Eud93C1v
- rHfcqMKIANXCtRUlwZQxhVXDiNMavC90vjEbjnL8EhYlCaxhpI6kB5JEQ/JwpN8zPudP
- IXSQjBnvJpKbCOAEEj9uTZhNXxQ+oVS7UOY8/tNTqojEKGDZt6pxPg6t9XsPqWX4Gq7o
- V1gxLB1pQSUqbB0ETimw+2p9pc0RNchDYjo79P/0ksUqoYzlMJKHnfrS5VHqsbIa/s/f
- nc2R1TN2paX3AS8nnKKvHp9oDCoy2hUN/TvsbJSIzf+JAiEsctneG+BBzDbDB8YQsR7o
- CR1Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=y7mb/0rjfez8iCgWE/F0Pi/ul942LvSx2kEBbnqR0JI=;
- fh=PrVR0M/BKk1EN2cyk13baNjzK0Djxgb/yD8irO2S578=;
- b=gS4U6N3zNrYaqKIs8Sm+eTILEmrO41s7K2FlV0PCnuYrdg+hzMxzUTS0KHt/lcOxQC
- SlaVghwDCgeEA4K1pLMYCx6gNDtALtxTByvKKhgYtmgf4ntf59JcTuNFT2q2bxdA5rYr
- sv88BVbEwNF0xl3kQhb/pnQE56Tonsjtui989vjssuetxc0jSkfmTHsiPTEMG4/IclKW
- L/JdUTJP8N8T6i1o3M+TXhhM/s9h/k1nL/gxySwz8edR7AByABQ6TYUFMbfTO434kpAa
- jpEBob1H4H80jXphu4QTrN04GMD2efA3Gylmd1vKnBTw9jd96/ov0jEOrovObKaNJwAb
- eV7Q==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793265938; x=1793870738;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=y7mb/0rjfez8iCgWE/F0Pi/ul942LvSx2kEBbnqR0JI=;
- b=RJqqPWX8ZG3XnAKaf7veRGCV9dQ/FCQhzyLcTiGV+/Vc0SxZIpXARDvqq2ZCjHDMxv
- WnkwH9w4HQZr97apeG+lsyKcqdAQw9TdyDYAr6mIZ+viW9AvxKjQhrcYNXQzth0JTvyc
- 41WgI8J2fU3GrpMElIRd6bDCVcIxBGMECQOL9oTBnIoaEQGpGp2ZiX/O2uj2N5jDvR5O
- HqQsxE90Ijg4lbHzjlPYouFzOFcnpUL7l9xns+TTuWxUjZJHVU9gjDlyXeqINJfTfLcD
- 0lLGgKEoZZKa+8lFi39LeI4Nx5AcoyfWsGl/TaEvc2jtwUgHPRv5FshXt/tNcvV2Nlsc
- iW5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793265938; x=1793870738;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=y7mb/0rjfez8iCgWE/F0Pi/ul942LvSx2kEBbnqR0JI=;
- b=RLHS3YPhpArhnwcGxRGBLNl8/fr0xXqx10jPHvDE4dDzWhwnwz7L0K/USZ0bnpMAzc
- mmgACVjdHM1QOhXcy+0trdwyBs1dyYsZS/lliJEtK0e6GgEHyR51HvxfTNln22g9qMhC
- MYU8qYiwR5VgK1Mdc9rXXlI4SPeb+8B0BpLWL50GkTz7DfsE4mlbmuMgppx7KkoTmuJ4
- BI/iCOfOmHWv2vyK3cN5mwousnao8mtwBbwJYu+7TnQvIsa2RNCz74px+vAmcWwvbKOs
- Q3wXLgVjWqQepvMYLsovmutx90IRdL51KpNtiE3Q517L3fhKCgAF0E7xc6p204S8gUNp
- J+4g==
-X-Gm-Message-State: AFq9FYJLJUkp+o1M0TsOi/tIwOZs62GBJ+EqZPUghnffjZ8sQ7z9JbiF
- 7SfE75FjoabzC5//ouwMsM/PCdc6wVIkXH0x3lSA4yuQGkDfIrrXnvx4+tWDU0D0FQMasrZQIva
- VE2oJp8PSWVZhE4/6CXGGOkjyeBX4RWU=
-X-Gm-Gg: AYBFou0zVXYYOip23hacIC/grX4bKJgCtcWNCmQJVtMxTA2LdPcgnFn3eXRcqcLG5l5
- sDjN44gpTG2JYh+9a/spzg+c3aONqdi99K12nqz3jz0cSqLme77o1epE9qe3y/hTp9pCPzGqohr
- 9xG/sHjmG4c93zEUEVqXybY0p5aMAM+44pCRfm8G/2TStXEx16DVADj3jl7cu7tpce8sRLnLdnh
- RGtrWAqJBpM/WgC5Q7UZQ9jWJx5wBl2lSc50L8uDEx5xeOFMpG0++HqOKD2uEXQ3T4k5G/Yfmot
- c2jyE/otD8GFoYsMY1S28MQmrv3o1TVDeZxwD993UTk8UOsnvoSTcI+095x7NnL4g9m60ZJimhb
- bUs0EIxEyhzjE8EDk93lxdTGkDkx4sev9GtdE8eJyn9E+0AGokTALy76f9lDedukup105fj7koz
- oRFo05AwkGdpKgR4t36Gh7HAcgttY3pyWDGBlQhoZLODTDqFHvKBaD1QvJJGDtUtstWoieCbAw6
- HB5g1nZqyGaUIyenxhr5Cmh9FnLrSGnMUA=
-X-Received: by 2002:a2e:a556:0:b0:3a9:811d:3a58 with SMTP id
- 38308e7fff4ca-3ac9cf24d6dmr10998961fa.14.1793265937903; Thu, 29 Oct 2026
- 02:25:37 -0700 (PDT)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0k72PBPWCJgN for <u-boot@lists.u-boot-project.org>;
+ Thu, 29 Oct 2026 09:30:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5028C40024
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=84.16.66.172
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793266259;
+ b=LEIfl7slJ3KpA+/VMN1JOOD3aBg0A2Uaub/kVS4vNDEHIYzQwrwv/bW6E39EEqAz9Bl3
+ fTmgxznpMcLne70jAg6OM88Z8AEgn1XxVyQ1fCh/EQTpx+JnLAbxykrSLFAoQUayvxH6p
+ zA8sVpf2/ycCIw3lwLRnc+SgNy5L8m1ZGdRTIm7EPtx3hHAilu3lAo93wlJQqJh79aYhq
+ ydNLcJRZJlhJLhVpo2DnNoEiE/6EVBdfJ5fneY85wD92BkFaXpeQuII9aW8ZhM8DlQCAx
+ lW+xXRE0J8PEzzSmhuclqVC2guhds4rAVqAKWm3wOwe/KmAj3SsBcna5DkfoA/UsmpQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793266259;
+ h=X-Greylist:Received-SPF:Received:DKIM-Signature:Received:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+ X-Infomaniak-Routing;
+ bh=HYSBDmJwqYVgsBzS2kfFtUyKOYUdo/AZGBJo435PppI=;
+ b=JFF2M4qhLQbrZDIlMBhkneys3wqOGChv8TflE5LG45DvQbv7sjGfxzoMZmyCpa0Mby68
+ 8eryUGMyFtd4SD3fQhTupYVW5qAlnh4h8yK1wrsQIHrK8B5en9XGsLP8U6hhprsxal5bI
+ 7eMsO0nusqCmGGQdvCYLWhdu1DWVq47GqpE3XDe3+nTwp3BZ65kKSoO2nbRuJKf/oh0Mm
+ jmp2gsr2xstm7dU79OtDySuJotvl1F+JqU++vr1W8KW1Rpd2giI3JMiR6DS/3uh8YXHzy
+ map74vLtYi2m+/uzGf82O1N9V6Fz9ncj32pSCZH48ANxOtzID7jqzuaNcSTAYP3Vwaw==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ dmarc=pass header.from=0leil.net;
+ dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
+ header.s=20231125 header.b=QKqDnZc6; 
+ arc=none smtp.remote-ip=84.16.66.172
+X-Greylist: delayed 337 seconds by postgrey-1.37 at util1.osuosl.org;
+ Thu, 29 Oct 2026 09:30:58 UTC
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=0leil.net
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
+ header.s=20231125 header.b=QKqDnZc6
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=84.16.66.172;
+ helo=smtp-42ac.mail.infomaniak.ch; envelope-from=foss+uboot@0leil.net;
+ receiver=<UNKNOWN> 
+Received: from smtp-42ac.mail.infomaniak.ch (smtp-42ac.mail.infomaniak.ch
+ [84.16.66.172])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5028C40024
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 09:30:57 +0000 (UTC)
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:4:17::246b])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jFf9W4kCsz2fk9;
+ Thu, 29 Oct 2026 10:30:55 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
+ s=20231125; t=1793266255;
+ bh=HYSBDmJwqYVgsBzS2kfFtUyKOYUdo/AZGBJo435PppI=;
+ h=From:Date:Subject:To:Cc:From;
+ b=QKqDnZc611QCq5I3/cF9GYSFF5a3E+bcTi0O2TBklW2zpz4PvRC7KuSOEkvOXRavv
+ WIZzYACkNcjsTU2i15wbB7Z1GYOXTqwEinMsI8xKzOJgox+xAWhSpY8JSeLAoWEC2K
+ TMr7EG5XoE/SZC27oQa0FKhw3+yuuFwzaZd0/HSHtYWAD4ikUjowCpen5TZgY2pSNZ
+ Lm363AYrjZeFQ2OGcig61KjHqr1qVu8WodD0WC8vLgbstGCJSvRVX1+eZJWboogkJ1
+ 9c9/VqVqldvTOjSejeoRBUUn2nAWOgFysMUCN1PEjXCESNV816vAtNZyRSMzmLm5ze
+ xHqEq470mAg1A==
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4jFf9V4952zxgV; Thu, 29 Oct 2026 10:30:54 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Thu, 29 Oct 2026 10:30:45 +0100
+Subject: [PATCH] doc: imx: mxs: remove link to Denx's mirror for elftosb
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261028100259.2491887-1-akashn@marvell.com>
-In-Reply-To: <20261028100259.2491887-1-akashn@marvell.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 29 Oct 2026 09:25:23 +0000
-X-Gm-Features: AclHuK824RkeAlFCA6RjKwB83C6WHoW2e2J2iCeIXi8HmgsJmGXGy_hUX24QsAc
-Message-ID: <CALeDE9MH_tPQi+vHBis3jQVAUuCQLRU7a_GXPt_gOzYz1Y7k=A@mail.gmail.com>
-Subject: Re: [PATCH RFC 0/2] net: pcs: Add generic PCS interface and Synopsys
- DW XPCS driver
-To: Akash Nair <akashn@marvell.com>
-Cc: u-boot@lists.u-boot-project.org, trini@konsulko.com, 
- jerome.forissier@arm.com, rkannoth@marvell.com, naveenm@marvell.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261029-denx-de-elftosb-v1-1-4e07964ae377@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMwQqDMBCE4VeRPRuIS622ryIeahx1RaJktQjiu
+ zfay8B3mP8gRRAovZODAr6iMvuILE3IDR/fw0gbTWz5mVl+mRZ+j2MwdeusjXlYlzMXllE6iq8
+ loJP9Llb137o1I9x6Zeg8fz+smTNzAAAA
+X-Change-ID: 20261029-denx-de-elftosb-40c522702e8c
+To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Fabio Estevam <festevam@gmail.com>, u-boot@lists.u-boot-project.org
+Cc: Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.17-dev
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -192,386 +148,46 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-1.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_GMAIL_RCVD,
-	FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Akash,
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-> This RFC adds an interface for Ethernet PCS (Physical Coding
-> Sublayer) devices and a driver for the Synopsys DesignWare Ethernet
-> PCS (DW XPCS) that implements it. I would like feedback on the
-> interface and on how the driver is structured before I post the MAC
-> driver that uses it.
+Commit 904c31fe9f08 ("imx: mxs: Fix location for the elftosb tool")
+update the wget command but forgot to remove the FTP link right before
+that paragraph, fix this oversight.
 
-I would typically expect a driver, even if explicitly labelled not
-ready for merge, to enable people to see how this would work.
+Fixes: 904c31fe9f08 ("imx: mxs: Fix location for the elftosb tool")
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+ doc/imx/common/mxs.txt | 4 ----
+ 1 file changed, 4 deletions(-)
 
-> Background
-> ----------
-> On SoCs with a DW XPCS between the MAC and the SerDes, the MAC driver
-> has to configure the PCS and read back its link and auto-negotiation
-> state to bring up 1000BASE-KX, 10GBASE-R and 10GBASE-KR links in
-> U-Boot, for example for network boot.
->
-> U-Boot has no reusable driver for this IP.
+diff --git a/doc/imx/common/mxs.txt b/doc/imx/common/mxs.txt
+index 372062c0eaf4..a177d75affe5 100644
+--- a/doc/imx/common/mxs.txt
++++ b/doc/imx/common/mxs.txt
+@@ -48,10 +48,6 @@ NOTE: The "elftosb" tool distributed by Freescale Semiconductor is no
+       otherwise continue to section 2). The installation procedure of
+       the "elftosb" is outlined below:
+ 
+-Firstly, obtain the elftosb archive from the following location:
+-
+-	ftp://ftp.denx.de/pub/tools/elftosb-10.12.01.tar.gz
+-
+ We use a $VER variable here to denote the current version. At the time of
+ writing of this document, that is "10.12.01". To obtain the file from command
+ line, use:
 
-Do you happen to know if there's other drivers in U-Boot currently
-that are poking the PCS interfaces directly? Not asking you to convert
-them, more just wondering if it's been hacked up elsewhere.
+---
+base-commit: 03e45557e1f38a39a0c80fe30483130ff376cf92
+change-id: 20261029-denx-de-elftosb-40c522702e8c
 
-> What is in the series
-> ---------------------
->   1/2 net: pcs: Add generic PCS interface
->   2/2 net: pcs: Add Synopsys DesignWare XPCS driver
+Best regards,
+--  
+Quentin Schulz <quentin.schulz@cherry.de>
 
-Is the DW driver based on the proposed Linux driver for this? [1]
-
-> Patch 1 adds include/pcs.h. Patch 2 adds the driver in
-> drivers/net/pcs/ with its Kconfig and Makefile, and hooks them into
-> drivers/net.
->
-> Architecture
-> ------------
->   +--------------------+
->   | MAC driver         |  (follow-up patch, not in this series)
->   +---------+----------+
->             | pcs_set_config()  pcs_get_state()  pcs_disable()
->             v
->   +--------------------+
->   | include/pcs.h      |  patch 1: struct pcs_ops, pcs_config,
->   |                    |           pcs_state
->   +---------+----------+
->             | ops of the PCS device
->             v
->   +--------------------+
->   | pcs-xpcs.c         |  patch 2: UCLASS_MISC, "snps,dw-xpcs"
->   | indirect window:   |  page register + register offset
->   +---------+----------+
->             | MMIO  reg-names = "indirect", reg-io-width = <4>
->             v
->   +--------------------+       +--------------+
->   | DW XPCS            |<----->| PMA / SerDes |<--> link partner
->   +--------------------+       +--------------+
->    1000BASE-KX: C37 AN   10GBASE-R: no AN   10GBASE-KR: C73 AN
->
-> Interface (patch 1)
-> -------------------
-> include/pcs.h defines struct pcs_ops with three operations, and an
-> inline wrapper for each one. A wrapper returns -ENOSYS if the driver
-> does not provide the operation.
->
->   pcs_set_config()  select the interface mode, the auto-negotiation
->                     type (none, Clause 37 or Clause 73) and the
->                     speed, using struct pcs_config
->   pcs_get_state()   report link, auto-negotiation complete and speed,
->                     using struct pcs_state
->   pcs_disable()     stop auto-negotiation and power the PCS down
->
-> Semantics:
->   - set_config() can be called again later, including after
->     pcs_disable(). If it fails, the PCS is left unconfigured.
->   - get_state() reports the speed as soon as the PCS is configured,
->     not when the link comes up. A powered down or unconfigured PCS
->     reports link, an_complete and speed as 0.
->   - A negative return from get_state() is an error, for example a
->     failed Clause 73 negotiation.
->   - Calling pcs_disable() again has no effect.
->
-> Driver (patch 2)
-> ----------------
-> drivers/net/pcs/pcs-xpcs.c is a driver model driver for the
-> "snps,dw-xpcs" compatible. It is a UCLASS_MISC device and is enabled
-> with PCS_XPCS, which depends on MISC.
->
-> The XPCS registers are Clause 45 registers in the PMA/PMD, PCS, AN and
-> vendor MMDs. They are reached through the memory mapped indirect
-> window: the driver writes the page number of the register to the page
-> register of the window, then accesses the register at its offset in
-> the page. The selected page is cached to avoid redundant writes.
->
-> At probe the driver waits for the PCS to come out of reset and checks
-> the Clause 45 device ID. It does not configure a mode. The MAC driver
-> does that with pcs_set_config(). The driver checks the whole request
-> before it touches the hardware, so a bad request does not leave the
-> PCS half configured. It then stops auto-negotiation, programs the
-> mode, power cycles the PCS to latch it, and starts auto-negotiation if
-> the mode uses it.
->
-> Supported modes:
->   1000BASE-KX  Clause 37 auto-negotiation
->   10GBASE-R    fixed speed, no auto-negotiation
->   10GBASE-KR   Clause 73 auto-negotiation
->
-> pcs_set_config() accepts only these combinations. Anything else is
-> rejected before the hardware is touched, with -EOPNOTSUPP for a wrong
-> auto-negotiation type and -EINVAL for a wrong speed or interface.
->
->   iface         an_mode        speed_mbps
->   1000BASE-KX   PCS_AN_C37     0 or 1000
->   10GBASE-R     PCS_AN_FORCED  10000 (required)
->   10GBASE-KR    PCS_AN_C73     0 or 10000
->
-> Auto-negotiation completion is polled from pcs_get_state(). The link
-> status bit is latched low, so it is read twice and the second value is
-> reported. For Clause 73, pcs_get_state() returns an error if the link
-> partner cannot do 10GBASE-KR or uses Next Pages.
->
-> Devicetree
-> ----------
-> The driver uses the existing "snps,dw-xpcs" binding from dts/upstream
-> (Bindings/net/pcs/snps,dw-xpcs.yaml), so no binding change is needed.
-> Only part of the binding is implemented. reg-names must be "indirect",
-> the window must be at least 1 KiB, and reg-io-width must be <4>. The
-> binding default of 2 is rejected, so the property cannot be left out.
-> The clocks and the interrupt are not used. The driver does not enable
-> clocks, so they must already be running when it probes. The gen*-PMA
-> compatibles are not matched.
->
-> Example node:
->
->   pcs@1f05d000 {
->           compatible = "snps,dw-xpcs";
->           reg = <0x1f05d000 0x1000>;
->           reg-names = "indirect";
->           reg-io-width = <4>;
->   };
->
-> Origin of the code
-> ------------------
-> Some parts of the driver are influenced by the Linux XPCS driver
-> (drivers/net/pcs/pcs-xpcs*.c).
->
-> Design choices
-> --------------
-> UCLASS_MISC: a PCS is a UCLASS_MISC device and the MAC driver is
-> expected to get it by phandle. This is what the Airoha PCS driver and
-> airoha_eth do today. A dedicated UCLASS_PCS would be cleaner, but I
-> left it out of this series on purpose to keep the scope small.
-
-Can you explain why you chose to depend on UCLASS_MISC for the
-functionality other than scope? It seems like
-Hi Akash,
-
-> This RFC adds an interface for Ethernet PCS (Physical Coding
-> Sublayer) devices and a driver for the Synopsys DesignWare Ethernet
-> PCS (DW XPCS) that implements it. I would like feedback on the
-> interface and on how the driver is structured before I post the MAC
-> driver that uses it.
-
-I would typically expect a driver, even if explicitly labelled not
-ready for merge, to enable people to see how this would work.
-
-> Background
-> ----------
-> On SoCs with a DW XPCS between the MAC and the SerDes, the MAC driver
-> has to configure the PCS and read back its link and auto-negotiation
-> state to bring up 1000BASE-KX, 10GBASE-R and 10GBASE-KR links in
-> U-Boot, for example for network boot.
->
-> U-Boot has no reusable driver for this IP.
-
-Do you happen to know if there's other drivers in U-Boot currently
-that are poking the PCS interfaces directly? Not asking you to convert
-them, more just wondering if it's been hacked up elsewhere.
-
-> What is in the series
-> ---------------------
->   1/2 net: pcs: Add generic PCS interface
->   2/2 net: pcs: Add Synopsys DesignWare XPCS driver
-
-Is the DW driver based on the proposed Linux driver for this? [1]
-
-> Patch 1 adds include/pcs.h. Patch 2 adds the driver in
-> drivers/net/pcs/ with its Kconfig and Makefile, and hooks them into
-> drivers/net.
->
-> Architecture
-> ------------
->   +--------------------+
->   | MAC driver         |  (follow-up patch, not in this series)
->   +---------+----------+
->             | pcs_set_config()  pcs_get_state()  pcs_disable()
->             v
->   +--------------------+
->   | include/pcs.h      |  patch 1: struct pcs_ops, pcs_config,
->   |                    |           pcs_state
->   +---------+----------+
->             | ops of the PCS device
->             v
->   +--------------------+
->   | pcs-xpcs.c         |  patch 2: UCLASS_MISC, "snps,dw-xpcs"
->   | indirect window:   |  page register + register offset
->   +---------+----------+
->             | MMIO  reg-names = "indirect", reg-io-width = <4>
->             v
->   +--------------------+       +--------------+
->   | DW XPCS            |<----->| PMA / SerDes |<--> link partner
->   +--------------------+       +--------------+
->    1000BASE-KX: C37 AN   10GBASE-R: no AN   10GBASE-KR: C73 AN
->
-> Interface (patch 1)
-> -------------------
-> include/pcs.h defines struct pcs_ops with three operations, and an
-> inline wrapper for each one. A wrapper returns -ENOSYS if the driver
-> does not provide the operation.
->
->   pcs_set_config()  select the interface mode, the auto-negotiation
->                     type (none, Clause 37 or Clause 73) and the
->                     speed, using struct pcs_config
->   pcs_get_state()   report link, auto-negotiation complete and speed,
->                     using struct pcs_state
->   pcs_disable()     stop auto-negotiation and power the PCS down
->
-> Semantics:
->   - set_config() can be called again later, including after
->     pcs_disable(). If it fails, the PCS is left unconfigured.
->   - get_state() reports the speed as soon as the PCS is configured,
->     not when the link comes up. A powered down or unconfigured PCS
->     reports link, an_complete and speed as 0.
->   - A negative return from get_state() is an error, for example a
->     failed Clause 73 negotiation.
->   - Calling pcs_disable() again has no effect.
->
-> Driver (patch 2)
-> ----------------
-> drivers/net/pcs/pcs-xpcs.c is a driver model driver for the
-> "snps,dw-xpcs" compatible. It is a UCLASS_MISC device and is enabled
-> with PCS_XPCS, which depends on MISC.
->
-> The XPCS registers are Clause 45 registers in the PMA/PMD, PCS, AN and
-> vendor MMDs. They are reached through the memory mapped indirect
-> window: the driver writes the page number of the register to the page
-> register of the window, then accesses the register at its offset in
-> the page. The selected page is cached to avoid redundant writes.
->
-> At probe the driver waits for the PCS to come out of reset and checks
-> the Clause 45 device ID. It does not configure a mode. The MAC driver
-> does that with pcs_set_config(). The driver checks the whole request
-> before it touches the hardware, so a bad request does not leave the
-> PCS half configured. It then stops auto-negotiation, programs the
-> mode, power cycles the PCS to latch it, and starts auto-negotiation if
-> the mode uses it.
->
-> Supported modes:
->   1000BASE-KX  Clause 37 auto-negotiation
->   10GBASE-R    fixed speed, no auto-negotiation
->   10GBASE-KR   Clause 73 auto-negotiation
->
-> pcs_set_config() accepts only these combinations. Anything else is
-> rejected before the hardware is touched, with -EOPNOTSUPP for a wrong
-> auto-negotiation type and -EINVAL for a wrong speed or interface.
->
->   iface         an_mode        speed_mbps
->   1000BASE-KX   PCS_AN_C37     0 or 1000
->   10GBASE-R     PCS_AN_FORCED  10000 (required)
->   10GBASE-KR    PCS_AN_C73     0 or 10000
->
-> Auto-negotiation completion is polled from pcs_get_state(). The link
-> status bit is latched low, so it is read twice and the second value is
-> reported. For Clause 73, pcs_get_state() returns an error if the link
-> partner cannot do 10GBASE-KR or uses Next Pages.
->
-> Devicetree
-> ----------
-> The driver uses the existing "snps,dw-xpcs" binding from dts/upstream
-> (Bindings/net/pcs/snps,dw-xpcs.yaml), so no binding change is needed.
-> Only part of the binding is implemented. reg-names must be "indirect",
-> the window must be at least 1 KiB, and reg-io-width must be <4>. The
-> binding default of 2 is rejected, so the property cannot be left out.
-> The clocks and the interrupt are not used. The driver does not enable
-> clocks, so they must already be running when it probes. The gen*-PMA
-> compatibles are not matched.
->
-> Example node:
->
->   pcs@1f05d000 {
->           compatible = "snps,dw-xpcs";
->           reg = <0x1f05d000 0x1000>;
->           reg-names = "indirect";
->           reg-io-width = <4>;
->   };
->
-> Origin of the code
-> ------------------
-> Some parts of the driver are influenced by the Linux XPCS driver
-> (drivers/net/pcs/pcs-xpcs*.c).
->
-> Design choices
-> --------------
-> UCLASS_MISC: a PCS is a UCLASS_MISC device and the MAC driver is
-> expected to get it by phandle. This is what the Airoha PCS driver and
-> airoha_eth do today. A dedicated UCLASS_PCS would be cleaner, but I
-> left it out of this series on purpose to keep the scope small.
-
-Can you explain why you chose to depend on UCLASS_MISC for the
-functionality other than scope? I think I would sooner see a
-UCLASS_PCS now rather than a lot of driver duplicated work that will
-need to be fixed later. Maybe work with the Airoha maintainer to
-convert that driver as an example, the Airoha support is quite new.
-
-> No in-tree user yet: the MAC driver that calls this interface will
-> follow as a separate patch in about a month. Until then PCS_XPCS is
-> not selected by anything and not enabled in any defconfig. This is
-> why this is an RFC.
->
-> Questions for reviewers
-> -----------------------
->  1. Is UCLASS_MISC with the ops in include/pcs.h acceptable as a
->     starting point?
-
-I would sooner we go straight to UCLASS_PCS, it might be a bit more
-work now, but will be less maintenance overall.
-
->  2. Are struct pcs_config and struct pcs_state enough for other PCS
->     drivers, or is something missing?
-
-I would like to see what other drivers poke the PCS stuff in tree as I
-doubt this is just Airoha.
-
->  3. Auto-negotiation completion is polled from get_state() and the
->     interrupt is not used. Is that fine for U-Boot?
-
-I suspect it's probably fine, does get state use the event loop interface?
-
-> Testing
-> -------
-> Not tested on hardware yet.
-> Build tested with CONFIG_PCS_XPCS=y on qemu_arm64.
-> checkpatch.pl --strict reports no errors.
-
-I would like to see actual tests as part of the patch series.
-
-> Not done
-
-Are you intending to do this list below? It's not clear.
-
-> --------
->  - Interface modes other than the three above. More modes are planned
->    once this is approved.
-
-Please outline where you expect those to go, it helps provide context
-to the actual reviewers rather than telling a small part of the story,
-it also may show that a PCS uclass is more appropriate than using
-misc.
-
->  - Clause 73 Next Pages: a link partner that uses them is rejected
->  - Register access over MDIO and the "direct" mapping
->  - Clocks and the interrupt from the binding
->  - PMA/SerDes initialisation: not done by this driver, it must be set
->    up before pcs_set_config() is called
-
-How is that done? How is it documented? Again the sample driver would
-likely show this.
-
->  - SPDX tags and a MAINTAINERS entry (checkpatch warnings)
->  - Sandbox emulation and a dm test
->  - A dedicated UCLASS_PCS
-
-Peter
-
-[1] https://lwn.net/Articles/1099457/
