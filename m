@@ -1,185 +1,183 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6DFE4606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 22:18:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6F69606A31C
+	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 22:35:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=xobnr+O3;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=sWZ+2UFn
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=LiIlxwlK;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=SS7NTWJw
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3F9E740609;
-	Thu, 29 Oct 2026 22:18:51 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7766B81095;
+	Thu, 29 Oct 2026 22:35:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5ApNHZA4UIKe; Thu, 29 Oct 2026 22:18:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 302D840735
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793312330;
-	b=KaTCm3PGMG9HS9MgSKnI28efyKtGFC2veEx6Gi7yXGpg9bvmKhWeolD900PQQDwHdEB0
-	 jAfnzk6Jz6g8fmQTVBaEBA9GuVCGZjNnTLr7yt8mhMU7lF3ZfwRLDcuqQgzxD00cM+83l
-	 V9sOmv3/jfT+klBdouQ9S2gw2SUmbxWyl+/k+PpcGwBVBqugIPSxZ4A9FjOX0aSO4YaLs
-	 9BMHiKqPzXkcbyy7A7dQBpcjqtPzDCNgOwreMb2FHcrw65/jENBpTJ78Xy+DP6AWtmJcP
-	 bUH/3V0JSVjM0akEhUU8CTsT0TV1UemsXgL6nwRL5exMFsHv8yb+b//daZ/dlk0w7Ig==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793312330;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ohfMsntCUxsh; Thu, 29 Oct 2026 22:35:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4EDFC81082
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793313342;
+	b=A2eRMqo/jJdKtzRd8xZcq02Vkd5h+YA3KfoeU6/5Se99IYQh37vve0cDAb05s/DfvVzF
+	 ViZAc/s33SAdtqK0m9CyEYa/95cWKI35P+rFF7tq5IUjjB896gDx5Wo68VKfwDym2Vx5o
+	 s5GEqSqJyjg8Ywbe7RS/wYx/jSzT+CN0Y0EonG8ZvEQ2c8MTao6Pse177N57GBWl0Rfb4
+	 cSt+dRTOebmZfddOxcfONpd4uyRidENF8D7N1gMCu4PmB53soBMkubOnV5piE+Wj0I4Fv
+	 y6xtF/HJf3oVUzf37UPhU/6xsg8xMfQnu6MT3NhxHa3MiTnUfVS0CyXKzHV+CvsBP4Q==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793313342;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=U8JRJf0QLBCGYE5PyHXN4+b7U+wmrB6urN+r1j1G92A=;
-	b=aZGzlfG5O+dgArengRwzlLixfcbMjxf9aKktns1h1Rrf8K1WO/kTRQIOsf4J/Jl8VExp
-	 wPA/RZczHdk+WWO/eC1lDlCxasCEHAsqp9F7XbibcMdjp29StAvvSpGB40uM//rsDSYTg
-	 F4ui4eZwa+3nBiy1KLnXojLtTrXmeiWA4hmREGO0nbUaFyXeLFwJua2hXHqucu5ORv/QY
-	 AIcMhmxFbravozHsjnJTL7krNeqgbKu/WPVNFHe9Ww+YcDN6ZrGDkSXfgkPca6ZPlWURd
-	 lHuk3ftCbqbE9UTBy1FkvcoJgJ6HcLbexIp3O4OA3D+1mFt+eYJ0ZywSqM0rxqTW0Tw==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=dnDAJZA0y0VNqxS1TI4MunjNHuyp+Y0UcpZbMl/twQE=;
+	b=l7xwU0YzmdimTeXgOOHYEcvsI4Z0/HMvMxef0DhGRk2O5/0xskABDGB5G1rLtGVRx58p
+	 mvX1PWBCSJtNIsaCE7Bpono3Jkh0fqT5NHDv6Xeb+7q3pXE9c+HaDKBrytY5sJkofs82N
+	 eJd6C87e+mfDnTfJ0DQvyueZU56mvrSKeBLhKHKRDAQ18I1sU7KoW3DCu56Eyvsaz15cl
+	 BW3WmC//f3S5jIwtAo39vB3AhuqVBnakDMXxHAMzjtZWzvOaQi93zDYJr3hAsSvFSFuqx
+	 z4ZtCksKRt0B1yW8+aSytIkS7TRXjhr5DYNIy1DvpWMDiHlm3V5X2r+gRF6Jbbg1gJA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793312330;
-	bh=U8JRJf0QLBCGYE5PyHXN4+b7U+wmrB6urN+r1j1G92A=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793313342;
+	bh=dnDAJZA0y0VNqxS1TI4MunjNHuyp+Y0UcpZbMl/twQE=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xobnr+O38vbXG35Ib1qycxyG5DvhxQiZF7J0b1uSiHs12gAKt+VAIqerp/WqrtRML
-	 L2+xcOSmXcvm34AgWa+PqFvkJYS7dW3lxcah7opzanbn7tjWE3tTx2uyx8eWVmRU2i
-	 VLrEAN16qjMZnjwmRPEcYmzS2lIyQQmC4tDKR2HIjujx11VTd9Z0RR9cEYsUklHAje
-	 POCSR/u7d/Jnw0ELIDLz6rVITbk+eB8WuR7MV3HRFuQVeautyU3i4HEjpTuyN366+c
-	 4fPkD1m5R4kizWC+pDCdnzvPWwX+r/vFj+Wn3J/rnuIntc+O5uuuhfW3b6JnE1dn62
-	 Xal0QfBqGf4+Q==
+	b=LiIlxwlKC8Xckgy4JBCQ7XayqYFxruzAqOLaRjiDUUJ8b9VpULbtVi2Vwldj6dFd5
+	 +h1r8zP12Eb4FfZse7EoHN6Iqmpv6l7HcABjszFHXP3M3L6z15I2v1purEhJqE4s13
+	 lijZ7rREGTHQfYqlcexpv9jmiV+8btzC9DXfLBu+Gm0rOkDJrXlSrjTjQS8sm5v+Px
+	 sxb/krQDF1PsNRacEfj9wMYnPnECd0VuJJnLxRs+Nv8zAWub4GDfdVB9IXLJsaBLNX
+	 8lDsGmyFfHB2nF5i1EhYnL5OF4MKfB1QTAimPYJjluAGm0gh0bcsU8T6e+To9mpG4h
+	 BdrpHEmkaUvjg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 302D840735;
-	Thu, 29 Oct 2026 22:18:50 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 74FCA712
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 22:18:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4EDFC81082;
+	Thu, 29 Oct 2026 22:35:42 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6A65B362
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 22:35:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 6677560A79
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 22:18:48 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 4F1BB40A82
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 22:35:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TjVZPoOwpDVq for <u-boot@lists.u-boot-project.org>;
- Thu, 29 Oct 2026 22:18:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1BFC8605CE
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a00:1450:4864:20::633"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793312327;
- b=hpm3/vlCdZ8LN5HOcOjwlH0xxrnQtLRXFRsYo0STelHXzhCFLJNYwEStDiu1o1GgOBXD
- rxaVnkjzb2Q1iZ7CK/5fFs9qMBHK12zSrKqH5OXCNmlustiqluHtQEhQLQFUUkswsz/Eh
- tTAVovonPnlOUvQ4drjHp1z0KQVM/g1DnkgZkmyde+xloY5ItoIc047QqO0TmQs3o7GB7
- zwaXp48m2JSQ1p/lk46lMSm1ONqtrAatbKJE+S3qq+jqgbkUi0PFfeI3DMEUgFxrvs0xD
- MXYA0rllOryHntzESvGL28OlLl8Lz0Y+goAGqGceDmFO7uQQKbfXPUmPhFZZCS2x6HQ==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793312327;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TLObnkc6kMU5 for <u-boot@lists.u-boot-project.org>;
+ Thu, 29 Oct 2026 22:35:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9121440A80
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::329"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793313339;
+ b=SXB8BOOz6jiFkTlOHIipgyn5Pb/OIYuMpUAxDsAZsqASz/bNQ8AQbvwatPyViK49kBbt
+ UVWbdFJt8R1E3LMBjgt9fKvHOAB3eUw8ZxsS3CAr7L82obCL0oSOpcLky4xteeHGlEzKt
+ 0RFO3R9AUO2ERyD+0Y2z2lB92/wT2hV2BEAhVW2gIqsd8Q9cxKtJ1QQulV/0iUQJWr6nF
+ TVuSz/7S9a/GAEJNzz3d34JWTrIOIwQSnwhIdnXbfyPkSx7VOKAMgcUbSVMniXQcN2fSe
+ a2ODOkzUMm3wIpxsNdXQJ7oOOmCmpwx5xAvxFwmkjcvW7JuqjjLHuJaH6C7doDhQpMQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793313339;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
- In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type;
- bh=U8JRJf0QLBCGYE5PyHXN4+b7U+wmrB6urN+r1j1G92A=;
- b=EfNkq85tsMc/9JuPHq4IMwcuAhCtP6CSFtV5VOJJJh6f4+x2fZfeRsLaIM1y501XjEJ7
- fQcUvL8INnsNUeazybAVbp15NzslqtfMQb1E/tkVPskzH8mteffbOjcbXaXOZWDslqfuz
- c0iwF2VhQZs+1lyowLcA4G8wzfmok7ALXUaTlS6zyoN5tps86EZAv06DhKYvVX8qN32Sk
- SZs1YQxJGkXn7fkkqALOFhs/GuezK8Jo98DtOc38/EhTOcPTzgL0mrfH5ermkmQ9aaAWF
- 2iBYL1nv7aWh2dq8zhJJrkNFJYMgAzE/gOhe/twkegAiSciieaW/nPOtkeFNC3Waxdg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=sWZ+2UFn; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::633"
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+ MIME-Version:Content-Transfer-Encoding;
+ bh=dnDAJZA0y0VNqxS1TI4MunjNHuyp+Y0UcpZbMl/twQE=;
+ b=FImh1ABL1njLvzK+ePZzxKnDYMEEiqoI634e65/GvrZqnw8pll8xahZg6Doxf/V0SzXF
+ mvujahriW+vkaCQdzlWX3Ue7KEQv/9gR6Mcss/UJpRzZ/hF51oWh+92rl4vNt+Drti9th
+ 0taQ96d/UeBbbomLtqSfrvqUeHzRQyS5xbyJKWamsRkHmXmz1ce9UBKhWATrsnFILZ3y/
+ WgSlHeXduC+qlFibwRdNK75zujIUWCaE68paNSfIBQB+Kj5Tq3PTUck8wmUDxTPxHBdY6
+ garyKPsV0Fe214JCT/Hp7e4yz1jyRzLHtD2CakoO6y7awwv9TVM+1MHjNggMGcXEIKg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=linaro.org;
+ dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=SS7NTWJw; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::329"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::633; helo=mail-ej1-x633.google.com;
- envelope-from=massimo.pegorer@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=sWZ+2UFn
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1BFC8605CE
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 22:18:46 +0000 (UTC)
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-c4c9abc1824so3865166b.1
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 15:18:46 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793312324; cv=none;
- d=google.com; s=arc-20260327;
- b=JIpIu0Qo6Su36GwMJ4mi7zOybt9435Is6+i/7oeq1fFmYOsDIoK0MNl+XOWYwv2JGE
- 5fGgEOvlmLdn6E8kP1JMjjre+BGSa7R2yPSjYWJyfaZN7/ISLckp00xz3O4FIltFYdwF
- rD+MKaiNXdFNlAUpzGsV4VqMidRK6oE7H6H8tqV7vxVqmRwCIpWlr1t62OThSf1UfMqR
- bpsUeaMCqvHhq1l0216GXtIiWun9L6eFojWSZfF4CXq1UaxGRIm2MWGcrH+LOQ3R+dBs
- oAaRWeXPJ8w3lAzZ+DCXG5B5lvQ6PV+9S/kPSQhtUSNdfYvE8tN2YjQLiqsRt2n+MIeO
- up4A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=U8JRJf0QLBCGYE5PyHXN4+b7U+wmrB6urN+r1j1G92A=;
- fh=C4kIP6po4JFkF1jCFAnzjPS4M6EVoapB9Afmj8XncJM=;
- b=F+bC5ka6Nfn6fXTNa99AwvwLznTesQ3JbaMSm+iJEq+Pc/tR4tkSaD0psXKzNOEA18
- RU8RPWOOtKWkrKg0EC+XeBNTDV9e4tL8Wh3ubq53qkOMfGd1cxheYFcCKc1nTBMtD0JC
- n+VwgMf+4pk0M36tx9xYLPaCZjdeIQnt2OsAO/GV05DF3VNUu2a04oqM2azBIBtviqvs
- opdQ4hnllOVCLxVuTjK3ofVssb5qdrpnbaInJw2Nx/yXZvsi1mCiVNwE87Ml+FZPsr1U
- mzJZeiVyB+8ROYp4PyHJLkqZtbbn6K7HQMVhsWob8Mp7bFA9nEdC7eIRBYY/I4AxhJjE
- mt0w==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2a00:1450:4864:20::329; helo=mail-wm1-x329.google.com;
+ envelope-from=casey.connolly@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=SS7NTWJw
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9121440A80
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 22:35:38 +0000 (UTC)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4a3517554f7so497045e9.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 15:35:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793312324; x=1793917124;
+ d=linaro.org; s=google; t=1793313336; x=1793918136;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=U8JRJf0QLBCGYE5PyHXN4+b7U+wmrB6urN+r1j1G92A=;
- b=sWZ+2UFnWo6CSQ34VEt0WanpCnRChTmbg93sXydctr/o+XbSUAKb8RYzHWTWDKhyjn
- tR6NVoEoR39Qvq7xuRDLqtha46eP5BJ/4sN3S8uW8wWDQNfZc4OIzMbI8h/wITxFRwWR
- t/NGl91YeEwbMwLfVwITTc3xxftQDyuqQ+s5jfi2N49Gk4VPDabaU50ifXOsam03TdP7
- pUkO13fpOkeNH1wo50r5GWuEb0Ju+q9680APxVIDBKh5I77iF4MhSU16vt5X6Ts0clFk
- LbKC7MXt6x1vhd6Bx/7Y/VDSB9fnukEIPXBo9DZcTmfw0+4sHIBShGXe3FFhb+Dn7ICT
- Pflw==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=dnDAJZA0y0VNqxS1TI4MunjNHuyp+Y0UcpZbMl/twQE=;
+ b=SS7NTWJw4b4F4Z++3KwXFWW/TGdMQGqafbyInkbCtFimd6VDVLCG63UgdAH04XTUwW
+ kvp6Ns6/iyyUSmKuIp+GE+pVv6A8fhEnsD23KpBwxnBHmOj7w4KMhLOBzPPRG2YhsLjy
+ lQKLP9VQWw5g46PStMid4rHr3xZKQUD4l08zcMNI9qh91J5kTy5YKvxjplL3FI0VJEw2
+ sbg9GlcKeGIdoe2/d6Ke1BqEx+rJQ4GA3UwxI1lfpGzxw1K2N4WqhD+XA00X1op1H8GC
+ k55rlDj0njMGOUSVtbhbTkmZpgjeDdrqJlN1IyonJXxu/gwe18nmUcBxcSYQajCoZpom
+ S5dQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793312324; x=1793917124;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=U8JRJf0QLBCGYE5PyHXN4+b7U+wmrB6urN+r1j1G92A=;
- b=Hr39Zw1mwa24OkoQidtBabsKEqvCJQG26DhDUMMMQox7T+40QJZStC8F+CNYJv4KM5
- gldpGZw+YqFiWbfD9BA5o3n2nqpnCcr8wo6ce1UoqF1OIx5sSPo1+XPQ4qtjP8A7ATPI
- u89fJzG/8ZgZ0Z2hJVlWtMnL1StVtjIH3yzSYP4fGZ9pyjjLygJHnofdCOK/sN4b6Euo
- 8zpcojQoDE81f23/Gm22/BecYNXUX2IKp9Y3FJYbYQoIGgGJ6RehMICRgIaX3UVo9mdj
- J2uREL0jrPW1uodqq62myV398LglCVCKFIFecrHERY/gSfOdVJy0UmWtlQJLJ4s0uuaS
- 2uAQ==
-X-Gm-Message-State: AFq9FYIDmmgfpial+pZe7l8ruy3FHrc41HxEMTCsyRBO8usO8RpYm+jW
- HYmnKSAcf/ahvWH6x31sym+FgybMf3zUu3/ip2LJ0yksOotQoIS7m99CuVbL+PY+aPTQDICVRni
- fAZCWZ/wQD5X4a5CTePHrnxwbkr18qxw=
-X-Gm-Gg: AYBFou2unlSe0267uIRtmTmObXwoz8iZh4cOozurD2CH6BZQTOKdxV6c8vrvpO0xSG/
- CA4/+/XaAuG0lewp9z4H/q6fGrXzBH3YQZ/R6dOnG9Y7aqOmW9EptDiL3YRn9TTKVKERwGuz4p6
- 9NUCYLLHVFXQP/OLBrCZq7DglXq+7f+4uHdyiGK7EPLE1+/XMTQLJAtcy4EO/imJTTVAjmTtSnJ
- ERcr9ppaEaQDawei5TJy9+xVhVRFTPOAO33WzSTE7Lg2VMUZchR25zVZB0fo9ffP3NJCNk1Ps4p
- gv+DdESK2MVU4Erir4n0FcKJ39flECmWkSabLzoEisrF+ODtvS6fXL/Kd0N7br65uf7H7zc/0Nm
- FOZaroXh7n3+l8Y6B0tR8qotjkjHWmB+GaYxqADJW/v1yWxPMUL7xiLB55Yo=
-X-Received: by 2002:a17:907:d406:b0:c29:f5d8:9c6b with SMTP id
- a640c23a62f3a-c4ca7aa01ebmr38440166b.26.1793312324454; Thu, 29 Oct 2026
- 15:18:44 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1793313336; x=1793918136;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=dnDAJZA0y0VNqxS1TI4MunjNHuyp+Y0UcpZbMl/twQE=;
+ b=qKBb0eWc0B3dateJO3/+Kn9ERcOguXTzzKPHrc7K1UWxJC7aa2JO2EqIUH74ZkU/8k
+ kVnPJupQBVehIvjOuVVbmo+oRX45zkJq7yYl7TItndexldX7/CZOXwETx+iPkHZpCdoj
+ 0ptXJRi7MEFANdmNGOSvPK6pchjGTtFfbGKM17wjrsNGtlkiTs62nK5LUcGiLV7j8HuS
+ +Czp7qZQpzZRKEkzYUbWsAK1E5EjNRelAPIDcUawydymR9q1veZCoshXvZm9/nL5e5Nl
+ MFpbXtvUuYQBuMrMG8pAmc3jxjgjkYph5cKsHvGzWowEFbuZPBREN6bQJok40Itgct+A
+ OK8A==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzxk63qIF0HYG7wVcFFxl8gJnHPDp21OUGt9V7485tehvmqQGiiVBdzkS77Gei34ZZ1crcPPio=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYKOZvG/HOWM4hAmsOIhQPO6rFT1kknCZyanFNy/Ob+TnX//Tg4a
+ ugTYbqv/EH2LUyduTa9xPHn7hjjebIRy7Nbkf0xFJCTA6NiBx8Gg+CEo6cjW03SYulI=
+X-Gm-Gg: AYBFou3ToLKRKL7t5z0XNizEDBZmNb/6XHFN8XQQTtteeVkMQvRCNEj9a0FDJOuC5Gh
+ CLa322TyJFlSe7tH6fPnPS+gUA1RpMQZp6qczYsGPrI4JwnSifOcG4Elqkl8F8XXFer/gWUSRux
+ 2ITuvPRbn1c/pl9GIhBO3Qd2Rk4Vhg2+fCflkfVWhD7++le/9cWAIGZyVzgCYHpIQ3bIjEMXzNp
+ rMrE6Ki2fYyF2Hnbu6/WlB6eRtX50oNLYR7BZRegJetNPz1J/8x/aO7g4FNmzgURDyMkA3jA/Kb
+ VRpHe9c2IGVxKuDOfgd4MVwxiqzirIL3ktj4bGFCTI0GjZHGKohMnmSjqZBx3zNCIKGbjlINbc9
+ 0iMaE0Gc03Xs5IS90+3FEU6h0xWTgG+WyYGCzdBz5oUntWgXlPxpFqUY9Dp/HjHm9nn917gpVLy
+ 45EcWFuWMOE4RHrBQI87J1poFWW+d4BKBuyA5ob0xxTcsUZI2OkQJBKX+bUl5llKnc0hrFORYoO
+ CDA+xiGTR5borcvxWlRQeppvh9xJ5OH/HwgDTrSBOsRNj6KFtZ5KoMwEWu4YAKf5Yg0Ypgu/dxg
+ FN4DGVrQ5P9WnW+Lrp2ZkcR6YLKygc1agQynYZGkPjyz6Gf9BeljUkvJjGJi/liGN/KMosSNqEG
+ 4VmQ=
+X-Received: by 2002:a05:6000:1785:b0:48d:f14a:9182 with SMTP id
+ ffacd0b85a97d-48e6e2e7536mr1797677f8f.20.1793313336236; 
+ Thu, 29 Oct 2026 15:35:36 -0700 (PDT)
+Received: from lion.tail248178.ts.net (p5b29ef1e.dip0.t-ipconnect.de.
+ [91.41.239.30]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48e712cc3e5sm107144f8f.39.2026.10.29.15.35.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Oct 2026 15:35:35 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
+ u-boot-qcom@groups.io
+Cc: Sumit Garg <sumit.garg@kernel.org>, neil.armstrong@linaro.org,
+ Alexey Minnekhanov <alexeymin@minlexx.ru>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ David Heidelberg <david@ixit.cz>, Francois Berder <fberder@outlook.fr>,
+ Han Gao <gaohan@iscas.ac.cn>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+ Naveen Kumar Chaudhary <naveen.osdev@gmail.com>,
+ Petr Hodina <petr.hodina@protonmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>
+Subject: [PULL] Please pull qcom-main
+Date: Thu, 29 Oct 2026 23:33:44 +0100
+Message-ID: <20261029223529.3031661-1-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: 20261029003217.GE2677024@bill-the-cat
+References: 
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261018-master-main-v1-0-e07455d232bd@gmail.com>
- <20261018-master-main-v1-1-e07455d232bd@gmail.com>
- <6f3b7c32-05be-4f59-99ab-37978fac5bf9@0leil.net>
-In-Reply-To: <6f3b7c32-05be-4f59-99ab-37978fac5bf9@0leil.net>
-From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Date: Thu, 29 Oct 2026 23:18:33 +0100
-X-Gm-Features: AclHuK_R2M2MFabrethbq5wjk4dc4u3tzhN2bmC288oxNDZn07EvpQBHIPclKRE
-Message-ID: <CAC928HZt+qymeZhCbrFWGLaqdaz91-jC8L_fMk0fo=R95S_Hig@mail.gmail.com>
-Subject: Re: [PATCH 1/2] doc: Replace master with main as primary branch name
-To: Quentin Schulz <u-boot@0leil.net>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -189,109 +187,179 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,INCLUDES_PULL_REQUEST,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Il giorno mar 27 ott 2026 alle ore 19:00 Quentin Schulz ha scritto:
->
-> Hi Massimo,
->
-> On 10/18/26 5:59 PM, Massimo Pegorer wrote:
-> > The primary branch name is main, not master anymore. Update references
-> > still naming it master in the documentation, replacing master with main.
-> >
-> > Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-> > ---
-> >   doc/CONTRIBUTE.rst              |  6 +++---
-> >   doc/develop/sending_patches.rst | 12 ++++++------
-> >   tools/buildman/buildman.rst     |  8 ++++----
-> >   3 files changed, 13 insertions(+), 13 deletions(-)
-> >
-> > diff --git a/doc/CONTRIBUTE.rst b/doc/CONTRIBUTE.rst
-> > index e0394515702..b012648e3f2 100644
-> > --- a/doc/CONTRIBUTE.rst
-> > +++ b/doc/CONTRIBUTE.rst
-> > @@ -73,11 +73,11 @@ considered as reasonable amount of time.
-> >   Development Branches
-> >   --------------------
-> >
-> > -The U-Boot developers use two main branches for developing the code. The master
-> > +The U-Boot developers use two primary branches for developing the code. The main
-> >   branch is used for the current development cycle, while there is also a next
-> >   branch intended to land changes for the next release early to enable wider
-> > -testing of larger code changes. The next branch is merged to master shortly
-> > -after the tagging of a new major release.
-> > +testing of larger code changes. The next branch is merged to main shortly after
-> > +the tagging of a new major release.
-> >
->
-> I think this paragraph would benefit from highlighting the main and next
-> word with double tick quotes like we do later in this diff in the next
-> file. Can be done in a follow-up patch though.
+Hi Tom,
 
-Added in v2.
+Resend without broken MMC patches
 
->
-> >   Similar to Linux there is a three week merge window post release after which a
-> >   release candidate is tagged. There's typically a new release candidate every
-> > diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
-> > index b4f82eb18e1..8b8a70da4bb 100644
-> > --- a/doc/develop/sending_patches.rst
-> > +++ b/doc/develop/sending_patches.rst
-> > @@ -36,7 +36,7 @@ configuration file and ``scripts/get_maintainer.pl``.
-> >   .. code-block:: bash
-> >
-> >      b4 prep -n mmc-fixes
-> > -   git rebase -i origin/master
-> > +   git rebase -i origin/main
-> >      b4 prep --edit-cover
-> >      b4 prep --auto-to-cc
-> >
-> > @@ -65,7 +65,7 @@ fold them into your commits before resending the updated series.
-> >   .. code-block:: bash
-> >
-> >      b4 trailers -u
-> > -   git rebase -i origin/master
-> > +   git rebase -i origin/main
-> >      b4 send
-> >
-> >   Using patman
-> > @@ -132,11 +132,11 @@ General Patch Submission Rules
-> >   * Send your patches as plain text messages: no HTML, no MIME, no links, no
-> >     compression, no attachments. Just plain text. The best way to generate
-> >     patches is by using the ``git format-patch`` command. For a patch that is
-> > -  fixing a bug or regression of some sort, please use the ``master`` branch of
-> > +  fixing a bug or regression of some sort, please use the ``main`` branch of
-> >     the mainline U-Boot git repository located at
-> >     https://git.u-boot-project.org/u-boot/u-boot.git as reference. For new features, if
-> >     the ``next`` branch has been opened (which happens with the release of
-> > -  ``-rc2``) that branch should be used, otherwise ``master`` is acceptable.
-> > +  ``-rc2``) that branch should be used, otherwise ``main`` is acceptable.
-> >
-> >   * Make sure that your mailer does not mangle the patch by automatic changes
-> >     like wrapping of longer lines etc.
-> > @@ -452,8 +452,8 @@ today. Not all states are used by all custodians.
-> >     it will be accepted for mainline.
-> >
-> >   * Awaiting Upstream: A custodian may have applied this to the ``next`` branch
-> > -  and has not merged yet to master, or has queued the patch up to be submitted
-> > -  to be merged, but has not yet.
-> > +  and has not merged yet to ``main`` one, or has queued the patch up to be
->
-> Spurious "one" here?
+Sorry this missed -rc1.
 
-Removed in v2.
+The larger changes will follow (likely for -next unless there's some
+folks are particularly keen to get in?).
 
-Thanks. Regards.
-Massimo
+* Add scsi_scan_new(), handle scsi scan in mach-snapdragon without relying on preboot
+* Small docs cleanup
+* SDM845 rpmh regulator and USB3 PHY support
+* Support for switching to EL2 (replacing gunyah) via SMC call
+* GENI UART minor RX fixes
+* GENI minicore support (GENI QUPs which don't require firmware)
+* Added proper support for various GDSC reset flags
+* SDM845 pinctrl/clk fixes
+* QMP USB phy orientation support
+* Fix SMEM memory map not including some carveouts
 
->
-> Looks good to me otherwise.
->
-> Cheers,
-> Quentin
+* ufetch: fixed LBA size wrapping on 32-bit systems
+
+The following changes since commit 03e45557e1f38a39a0c80fe30483130ff376cf92:
+
+  Merge patch series "boot: image-fdt: fix reservation errors above ram_top" (2026-10-27 12:29:11 -0600)
+
+are available in the Git repository at:
+
+  https://git.u-boot-project.org/u-boot/custodians/u-boot-snapdragon.git qcom-main
+
+for you to fetch changes up to 9e9d03456f5eb55d919207d395e4685fdb704380:
+
+  clk: qcom: sdm845: add GCC_QUPV3_WRAP0_S4_CLK case (2026-10-29 19:33:15 +0100)
+
+----------------------------------------------------------------
+Alexey Minnekhanov (4):
+      clk/qcom: Print more details about stuck GDSC
+      clk/qcom: Import GDSC flags from Linux
+      clk/qcom: Add newly added GDSC flags to all qcom clk drivers
+      clk/qcom: Treat different GDSCs differently
+
+Aswin Murugan (7):
+      scsi: Add scsi_scan_new() to scan only new devices
+      mach-snapdragon: rescan only newly added SCSI devices for capsule update
+      mach-snapdragon: Add early EL2 hypervisor switch support
+      configs: qualcomm: Add Gunyah exit config fragment
+      configs: qcom_qcs9100: Enable Gunyah exit support
+      mmc: msm_sdhci: fix max-frequency read into wrong-sized variable
+      mach-snapdragon: smem: Use available_length for RAM partition v2+
+
+Balaji Selvanathan (12):
+      mach-snapdragon: scan SCSI devices in board_late_init()
+      board: qualcomm: drop preboot from the default environment
+      qcom: qcs615: disable SCSI and use MMC for fastboot
+      qcom: qcs615: store environment in eMMC logfs partition
+      doc: qcom: dragonwing: Improve build and installation documentation
+      serial: msm_geni: fix RX FIFO init with proper cancel sequence
+      clk: qcom: Add shared RPMH clock driver for SM8550/SM8650/SA8775P
+      clk: qcom: qcs8300: Extend GCC clock driver to full gate/RCG coverage
+      pinctrl: qcom: Add QCS8300 pinctrl driver
+      configs: qcom_qcs8300: Switch to monaco-evk DT and enable new drivers
+      configs: rename qcom_qcs8300_defconfig to qcom_monaco_defconfig
+      clk: qcom: sc7280: enable shared RPMH clock driver
+
+Balaji Selvanathan via U-Boot (1):
+      phy: qcom: qmp-combo: honor USB-C orientation for port select
+
+Casey Connolly (3):
+      gpio: qcom_spmi_gpio: fix bias-pull-down
+      gpio: qcom_spmi_gpio: add pmk8350/pm8350c
+      dts: qcom: remove hardcoded memory maps
+
+David Heidelberg (4):
+      phy: qcom: qmp-combo: select PCS register offsets per version
+      phy: qcom: qmp-combo: add SDM845 support
+      power: regulator: qcom-rpmh: add PM8998 support
+      configs: qcom: enable QMP USB3-DP combo PHY
+
+Francois Berder (1):
+      clk: qcom: Fix invalid usage of dev_read_addr
+
+Han Gao (1):
+      cmd: ufetch: avoid truncating storage sizes on 32-bit systems
+
+Manivannan Sadhasivam (1):
+      configs: qcm6490_defconfig: Enable SCSI as the Fastboot flash block interface
+
+Naveen Kumar Chaudhary (2):
+      serial: msm_geni: remove unreachable dead code in pending()
+      serial: msm_geni: fix clock rate return type truncation
+
+Petr Hodina (3):
+      gpio: qcom_spmi_gpio: add qcom,pm8150l-gpio
+      pinctrl: qcom: sdm845: select the mux value per pin
+      clk: qcom: sdm845: add GCC_QUPV3_WRAP0_S4_CLK case
+
+Varadarajan Narayanan via U-Boot (1):
+      misc: qcom_geni: Add minicore support
+
+ arch/arm/dts/ipq5424-rdp466-u-boot.dtsi            |   6 -
+ arch/arm/dts/ipq9574-rdp433-u-boot.dtsi            |   9 -
+ arch/arm/dts/qcs615-ride-u-boot.dtsi               |  14 -
+ arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi           |  23 -
+ arch/arm/dts/qcs8300-ride-u-boot.dtsi              |  19 -
+ arch/arm/dts/qcs9100-ride-r3-u-boot.dtsi           |  20 -
+ arch/arm/mach-snapdragon/Kconfig                   |   8 +
+ arch/arm/mach-snapdragon/board.c                   |  10 +
+ arch/arm/mach-snapdragon/capsule_update.c          |  12 +-
+ arch/arm/mach-snapdragon/dram.c                    |   3 +-
+ arch/arm/mach-snapdragon/include/mach/boot0.h      |   2 +
+ .../include/mach/gunyah_exit_boot0.h               |  36 ++
+ arch/arm/mach-snapdragon/mem_map.c                 |   4 +
+ board/qualcomm/default.env                         |   1 -
+ board/qualcomm/exit-gunyah.config                  |   4 +
+ cmd/ufetch.c                                       |   4 +-
+ configs/qcm6490_defconfig                          |   4 +
+ configs/qcom_defconfig                             |   1 +
+ ...com_qcs8300_defconfig => qcom_monaco_defconfig} |   4 +-
+ configs/qcom_qcs615_defconfig                      |  12 +
+ configs/qcom_qcs9100_defconfig                     |   1 +
+ doc/board/qualcomm/dragonwing.rst                  |  75 ++-
+ doc/board/qualcomm/iq8.rst                         |   6 +-
+ drivers/clk/clk-stub.c                             |   4 -
+ drivers/clk/qcom/Kconfig                           |  13 +
+ drivers/clk/qcom/Makefile                          |   1 +
+ drivers/clk/qcom/clock-milos.c                     |   6 +-
+ drivers/clk/qcom/clock-qcom.c                      |  62 ++-
+ drivers/clk/qcom/clock-qcom.h                      |  20 +
+ drivers/clk/qcom/clock-qcs8300.c                   | 547 ++++++++++++++++++++-
+ drivers/clk/qcom/clock-rpmh.c                      |  62 +++
+ drivers/clk/qcom/clock-sa8775p.c                   |   4 +-
+ drivers/clk/qcom/clock-sc7280.c                    |   8 +-
+ drivers/clk/qcom/clock-sdm845.c                    |  52 +-
+ drivers/clk/qcom/clock-sm6125.c                    |   8 +-
+ drivers/clk/qcom/clock-sm6350.c                    |   4 +-
+ drivers/clk/qcom/clock-sm8150.c                    |  14 +-
+ drivers/clk/qcom/clock-sm8550.c                    |  16 +-
+ drivers/clk/qcom/clock-sm8650.c                    |  16 +-
+ drivers/clk/qcom/clock-x1e80100.c                  |  54 +-
+ drivers/gpio/qcom_spmi_gpio.c                      |  10 +-
+ drivers/misc/Kconfig                               |   6 +
+ drivers/misc/Makefile                              |   1 +
+ drivers/misc/qcom_geni-minicore.c                  | 103 ++++
+ drivers/misc/qcom_geni.c                           |  85 +++-
+ drivers/mmc/msm_sdhci.c                            |   3 +-
+ drivers/phy/qcom/phy-qcom-qmp-combo.c              | 203 +++++++-
+ drivers/pinctrl/qcom/Kconfig                       |   8 +
+ drivers/pinctrl/qcom/Makefile                      |   1 +
+ drivers/pinctrl/qcom/pinctrl-qcs8300.c             | 468 ++++++++++++++++++
+ drivers/pinctrl/qcom/pinctrl-sdm845.c              |  45 +-
+ drivers/power/regulator/qcom-rpmh-regulator.c      | 137 ++++++
+ drivers/scsi/scsi.c                                |  27 +
+ drivers/serial/serial_msm_geni.c                   |  70 ++-
+ include/scsi.h                                     |   8 +
+ include/soc/qcom/geni-se.h                         |   5 +
+ include/soc/qcom/minicore.h                        |  25 +
+ 57 files changed, 2076 insertions(+), 298 deletions(-)
+ delete mode 100644 arch/arm/dts/qcs615-ride-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/qcs8300-ride-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/qcs9100-ride-r3-u-boot.dtsi
+ create mode 100644 arch/arm/mach-snapdragon/include/mach/gunyah_exit_boot0.h
+ create mode 100644 board/qualcomm/exit-gunyah.config
+ rename configs/{qcom_qcs8300_defconfig => qcom_monaco_defconfig} (83%)
+ create mode 100644 drivers/clk/qcom/clock-rpmh.c
+ create mode 100644 drivers/misc/qcom_geni-minicore.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-qcs8300.c
+ create mode 100644 include/soc/qcom/minicore.h
