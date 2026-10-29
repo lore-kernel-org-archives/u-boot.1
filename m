@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7858A606A31D
-	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 16:23:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4250D606A31E
+	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 16:23:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=m4gtSIg5;
-	dkim=pass (2048-bit key, unprotected) header.d=fris.de header.i=@fris.de header.a=rsa-sha256 header.s=mail header.b=2GTqFc3+
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=JCvGLmsb;
+	dkim=pass (2048-bit key, unprotected) header.d=fris.de header.i=@fris.de header.a=rsa-sha256 header.s=mail header.b=3uyWkbUp
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4C0C8606BB;
-	Thu, 29 Oct 2026 16:23:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1B20E81067;
+	Thu, 29 Oct 2026 16:23:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hrXcZftW4N91; Thu, 29 Oct 2026 16:23:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8508E6071F
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793291024;
-	b=tR9vYv6McZxrs8LP6284srqcp06fOpxFRhuyiQhInIaKqUkWE+SiUyfp6It0FrsSBm19
-	 WICFuVyfosti8xU62stTbNjn3bLyF0MAYPo7lu6xjiMTY3G49cA1CFheE29fskPGaABvM
-	 6EsU9+AFpLQGeNpLul2F7Zp5ieoB7eBL2ZmHh2+YmcWFPYSvUT7jx77m4r2YTCupXwAXj
-	 Snen1d2FVhMmbCZSSfkebeM3JohTRi7vxJWfNVmjX+ujWHfMofgKZifDEFLmM0iFyodYu
-	 wenKTa+99JdiLWpXtzbUoxpd3Mbjhj+AddrGOPflaTD6StTGigCcvS0xxRdnKqXEfWQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jcMOtY7beaVq; Thu, 29 Oct 2026 16:23:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 40E9481008
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793291026;
+	b=YCdEYJislDZgk8oMmipaiJ0g0N2DhpdoFmAW2L67Qt+K9pWQvQMSrMWgo3+WewFDkrHQ
+	 wj5c58OsUYylU6hRSu2/yDOTXMX+nWEcG/qsHEX7YzXks/HldapvVPly1u1GVkOFwep5f
+	 k7l7iqkvuJwLcLkbvZsvmLW1svApZlPsqO8jSpIDAyD00rZlI406qxsmEahufJcAMGeNu
+	 1isml1nhz9ZskCCIp28O18o/j3Bfe88GW7NfHM7A7r0WSl/BSfltkuI264knD8WpzKEyT
+	 jcYFAxZbrO0QVssvUY7VXN0c2GG2vVJQga8/Cd7khugVb/nzPlkxRta6dpy8WW07wqw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793291024;
+	c=relaxed/relaxed; t=1793291026;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:From:
@@ -32,96 +32,96 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Developer-Signature:X-Developer-Key:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=5eHKodIrjO3JFqbbg+l1psjirv2E002AOFznxvF/EOs=;
-	b=FInbODNEDXWEC8YcIf81dQw9aqTzEaqO+9Q2Ee09c04Mq+sNtP4sBkYRLaiVsIIbMcOn
-	 Nm+ctEvrQ/momTxzfhNr4Q9WAtnJvl+qKSDr+pvkBYg+TjBjtZRKahE/DQUH1eofaL1no
-	 /6CJkk73urz7pIENieJs4zezvAKwveJBuhy/y/UYC2o9uTOvf6l9X+Q3aVf18dCOjIkUI
-	 ZlyFGUuX+kPidSSMaSP01GVxvnHVxdTZhshnLOK+lX24yLKXy0v9JsDssB7mJAFry37eP
-	 8AUtE1yKwTFoz5tws51ytfZ0ZmqyeaKVM4WMSgM97h1XW5rU4x0OQEjPiLMDUTMferg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=Wnz96JMdK+GVers+ILfKyvHCza4+SlF+PUeXR6e+IaQ=;
+	b=irSx7gMqy7m3w9E6CbCDaKxFmd89z6EDeQ2eWFqiEh/7hy/0pNM9YIXxD1vCoMZsVK9V
+	 H4v/+s11+RmXWcaJmTePugQ8egLPIU3kTpPAxg8/G+C9I/qb+V2kTcRQm2qAyAqro0CBk
+	 ISbCXHj82YFfN+ChBl1v13tv+1z/isq6TX2rzji3PqLM+e3k4eEmkC3N5/5SU3gAU5t3s
+	 8J6ihaQSI1IPOna9t9G1Wfu8Cpa/w0aQ/LTPqzPRr7u3zu1JICpqy3Sq+gfSGJxvli5w8
+	 s72Mc0sQXGi6oAonI5KoAaaGeEQKUY5EC+VYw4S4K1+ozb+zI1omUwlJ8kbMKSR0eqQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793291024;
-	bh=5eHKodIrjO3JFqbbg+l1psjirv2E002AOFznxvF/EOs=;
+	d=lists.u-boot-project.org; s=default; t=1793291026;
+	bh=Wnz96JMdK+GVers+ILfKyvHCza4+SlF+PUeXR6e+IaQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=m4gtSIg5B5V1wKKjTijhWEqvCMc/78h9CyAzpXbHTaqsilk+bw79Mb1GPU4aqX3iZ
-	 shNKtLI036y6YJkY9EqJuXq/bjUXi7YIxlG6yRc/e6lgnCqwW+xNzJcW2dxp46Q6l6
-	 O6xTUAa/PA+InLftSUkFAkRRQiamhQko9f9eoqy5fmNI6ZCLbNhLQ0NNoSETg/otKm
-	 iDVYx+xd0i76Y+PxkxSVPLwKCStC7YEmap8qCLtgN83FJkDz3bW2L/i5oHw16mqG3d
-	 6cq7QcfJf9HUT8yfzgKARSZxw+Yq2YiOlH55NxXyyZMGlHElDpSnG4IzulF4wi/EDb
-	 v+R/C0sZA8hEQ==
+	b=JCvGLmsblebKUaEBsp1yvO/hLICa1TxpH9BGxFQYx1wv1oiwk8hGsU62w9BtxlUam
+	 gq2boGvALylFwkfBHX5V771JjwejJFWp0N0E867q1b7UhQAun3ESYqgMldOQgH44NF
+	 ntdcbMT9VsGcZXEicPYZv3+72oaO3B76qZOLZOIo+42RDCW8hzbcwLW3R4GXundPPQ
+	 aB9riPgvNJUT28qU2EVf4QI8sHq42D6bntv/Ap0hhhxro3NA1bMGPAmMUzg4xpAyCI
+	 AMO0E6ZnPJXgVsLWCT/8bwcc3Rmffi3PATUFCRXSF9SHf8y+tiYkP9kc+Yin8F7PQ5
+	 Cosaq1U/RJJ/Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8508E6071F;
-	Thu, 29 Oct 2026 16:23:44 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 060D22E5
+	by smtp1.osuosl.org (Postfix) with ESMTP id 40E9481008;
+	Thu, 29 Oct 2026 16:23:46 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4518B362
  for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 16:23:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E01F740243
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 16:23:31 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 3731040764
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 16:23:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id L2ALrz-FKGmJ for <u-boot@lists.u-boot-project.org>;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id T8DjjWoRkdIU for <u-boot@lists.u-boot-project.org>;
  Thu, 29 Oct 2026 16:23:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 1927540012
-Authentication-Results: smtp2.osuosl.org;
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6B52740744
+Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=116.203.77.234
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793291011;
- b=nWIohK1iktSIzBIb3lURSwidIdcWKCJxquSe4bcjhRfhj+RKoeET5ErgN7P3+j6OCdhN
- Epd10AhsewvFMzpRGQfcNO2Hv0ivtY/5fx72DRzWRegC1Or8GPWurTNrQSnk2tE35bCcb
- jaE5wJGXBnjeFeWeV02fhv4qZ6o45iLtBIhAOn+k8cgfevWX6+uH1Jyt/FmWsZ8+OTImx
- YIelNwF+gO3PoQHQMgKwohMYqxYF9odEzv1Y4i0iFNZHTNNjkcNQ7RPYlsyMUmV/uIeUv
- ZSQch6OcqGXFQP57LTrL1qWGncTj9GVHoOdmLCHkOdwfVB5KvXGIQtVqxIddKeUyRpA==
+ b=LmFRMYyo75I3cJix2Zbldf+ST8KA9gWr/iwC2ZBmTdtsQ3APn13Uyesf+zMQVLgWn9Hi
+ h7XirE1RgC4GiKCuJSPDJkiOZyc14D1Dmw1ode4x7y7qBGQnpa4E/mtESTkDkqvD5lguW
+ f/CA6lbzSTXjfU/N8PjtHDK86hC+nE7sVCb78Khc8CD1tqRXvLBFeRT56XVILLN0iQOZK
+ CNYYJhc/F+DAwNN5vb9zzZ5l1ZkUKSdFkUnsZHmMniPTWRgdYHdnvF90mniJKD9XOxIxY
+ OddUPhYIbpGHOQBJHAzGmWbY1bkb7xasmStkUNXaSXeuiQ0xVAPC/ZqWV4BzuON5Rsw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1793291011;
  h=Received-SPF:From:DKIM-Signature:Date:Subject:MIME-Version:
  Content-Type:Content-Transfer-Encoding:Message-Id:References:
  In-Reply-To:To:Cc:X-Developer-Signature:X-Developer-Key;
- bh=5eHKodIrjO3JFqbbg+l1psjirv2E002AOFznxvF/EOs=;
- b=pnZs7ECMRuqyiGRJHV0FgZs5Dcvyp3GIikRWOKE+ry6bBFToAZOFqVzQyjdicFdo9j8Y
- CpoHPJa+u2Wlpb3xH35cz9sIOX4q9AwRC5fWHx7L3YT659jq/af4fFVXVEdHyCJHBPol/
- OXfT+8+iEnOsobZveAF4ADETpPjoVkiTKFex4RyXEyeXEfj4sXoGO0ARf87jBIOzwBb9B
- S5tE+MNEgq3wiEe+oS0D30QLwjbnRqq4gJZClUjo5ZBusTxqz0DHN+A3z6BprVmhGRRbM
- nPTfMGLzeqxZGIGonT7Vk1k94EttKvmeG6QV5Rr4cBKJFOxohJyyA7qPud9eta76OyA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ bh=Wnz96JMdK+GVers+ILfKyvHCza4+SlF+PUeXR6e+IaQ=;
+ b=TfMzt2BymlY7sWDuSQKfg7cccb5/1Ksn6LtYHdndwjiepYpB5ATlkgjpW/39FKdTJeBe
+ Xw37oQrqfkjZGV4CXW6gb/bYmJzsjp0bVmJCUN+vkWuIzfjDnba6gOz9yp9z3wYL26hfX
+ tT5NRkDi7/CHx3fN1ETvsG3+8Rxgsiq1i9DzDl2Din5JvQ0OAKevjCGYnXG5IAjm5kJt9
+ DKUTTR04WrZLV9PNhDHmsvbJnpuFoHC/+7RyEzDxct9GpzEof2qS8ryefCivA+kdOlHUt
+ OGdiIbkci3JKQiiiafQ2zZM6DNWHQNe9baPdEgSuKidqlGmybqOAUCe6gsYeNbPQnEw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=fris.de;
  dkim=pass header.d=fris.de header.i=@fris.de header.a=rsa-sha256 header.s=mail
- header.b=2GTqFc3+; 
+ header.b=3uyWkbUp; 
  arc=none smtp.remote-ip=116.203.77.234
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.203.77.234;
  helo=mail.fris.de; envelope-from=frieder@fris.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=fris.de
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=fris.de header.i=@fris.de
- header.a=rsa-sha256 header.s=mail header.b=2GTqFc3+
+ header.a=rsa-sha256 header.s=mail header.b=3uyWkbUp
 Received: from mail.fris.de (mail.fris.de [116.203.77.234])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1927540012
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6B52740744
  for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 16:23:31 +0000 (UTC)
 From: Frieder Schrempf <frieder@fris.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=mail;
- t=1793291007;
+ t=1793291006;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=5eHKodIrjO3JFqbbg+l1psjirv2E002AOFznxvF/EOs=;
- b=2GTqFc3+WePVuzMXdYzj6PpH9mrcTahRchc0ATYFGBwv1S+Bx0Xahf0i5K9vrXcNY+uGki
- EHdWSFnjIwn6dvhxOoP72UxSpGSVIFFvYzvW2n4/9QES36OpSm+e6JfG0jzA3sD/dqVMHb
- a+juVNg7pSWFuNsouPSvP/5FpGDBXTJT3fxUNTBonjWeZZVXimbgJngRR1ybrUndZ19mnU
- UNdQULRwPohETqdGQcv3XsgSk9hXQm6paGH8uf1Mw/V7X1aHCVrPk0cGfsVNCYqGoAs6EC
- Iu3gX2C7IKlpdLD2MEJGVqo1BIfGWluSDNNuzc74usBvwzF38+6nb0spb7Hmwg==
-Date: Thu, 29 Oct 2026 17:23:15 +0100
-Subject: [PATCH 09/10] test: boot: Test the RAUC partition name check
+ bh=Wnz96JMdK+GVers+ILfKyvHCza4+SlF+PUeXR6e+IaQ=;
+ b=3uyWkbUphkQD6TJLprBqeE9dRuHlD9AFH1ASpLKB3xQytc5thCHMLgobZM3AfwNH1IG+ju
+ xrBHCMztj9D5gMO7pil7sw/0IlgwpNtFLhOXLxCQxUc/K6h8AGQCgq5AwPv1ViBJcCvwc+
+ GN6TkVidGu000ztJA+RFGN+OrVY7NlD42D7kY6j3wOHLHLHaMH/CAU9l5E6sOtuQm7mXqr
+ GGnw1j3fOK7MNnfK6mBBVRHHy9wpZAHMGyE+TOVO0zIOPnMQjWXen5h3LaIxgp3ZZNrpY1
+ oMS1bzr6pw8K70730tsdm3jlvR2bI9VYJju0ahFM+1De/oRVhvU92Uk+JNeWEg==
+Date: Thu, 29 Oct 2026 17:23:14 +0100
+Subject: [PATCH 08/10] test: fs_helper: Support GPT in DiskHelper
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261029-main-v1-9-b5a878627107@kontron.de>
+Message-Id: <20261029-main-v1-8-b5a878627107@kontron.de>
 References: <20261029-main-v1-0-b5a878627107@kontron.de>
 In-Reply-To: <20261029-main-v1-0-b5a878627107@kontron.de>
 To: Martin Schwan <m.schwan@phytec.de>, u-boot@lists.u-boot-project.org
@@ -134,13 +134,13 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Michal Simek <michal.simek@amd.com>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
  Frieder Schrempf <frieder.schrempf@kontron.de>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5377;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4188;
  i=frieder.schrempf@kontron.de; h=from:subject:message-id;
- bh=l716XbHebDMluzOxRT19ySoWQ9cgI+Ov/iY99UjnkZ0=;
- b=owGbwMvMwCWWWSatKlDTJMZ4Wi2JIetx0a9f694w7Bdt5JXyXjk5UMVI+aHOot9tCZplrMqdP
- mH+aw50lLIwiHExyIopskjxW7y2NYv1kT9WHQUzh5UJZAgDF6cATOR6JCPDh3VpXuvns6d+Ov3q
- cQp7/pf3hs/Yy43Y9AIjv2/5OjtwPSPD5G+/Y/3X77jP8XbCZs85SuU/Xa70qbEfUP3WU7bhk84
- NDgA=
+ bh=ZKaNCyxPkU2zTIaMaitAzt/ifPtQaB+3D/rIwYbL/vc=;
+ b=owGbwMvMwCWWWSatKlDTJMZ4Wi2JIetx0a9SlnSfbYkFnteTTgc5JjilS21zPxq35HlFSUPR/
+ kSVzoyOUhYGMS4GWTFFFil+i9e2ZrE+8seqo2DmsDKBDGHg4hSAiZytY2S4XTzz1NTNcYv+OYht
+ 9xcJvXnnveOp+Vd+sO/Vv5p7Za2dPMM/3arn1awnav+06kjsmHcvfs7Hv3yv3uiFc5mvOFu2Zao
+ XPwA=
 X-Developer-Key: i=frieder.schrempf@kontron.de; a=openpgp;
  fpr=1A0F38EB3D365D4C1FC67B5A69761B25107C8216
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -161,155 +161,106 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
-Set CONFIG_BOOTMETH_RAUC_PART_NAMES on sandbox and give the
-partitions of the RAUC test image (mmc10) matching names. As only GPT
-has partition names, DiskHelper now creates the image with GPT instead
-of MBR. The existing test passes with or without the option, as the
-names match.
+DiskHelper can only create disk images with an MBR partition table, so
+tests that need partition names cannot use it.
 
-Add a second image (mmc13) with the same layout but other names, and
-a test that the RAUC bootmeth finds no bootflow on it. The test is
-skipped if the option is empty. It needs an #ifdef, since the string
-option does not exist without BOOTMETH_RAUC and IS_ENABLED() cannot
-check a string.
+Add a gpt option to create a GPT partition table instead, and a name
+argument to add_fs() to name a partition. With GPT, the 'bootable' flag
+is set as the LegacyBIOSBootable attribute, which U-Boot reads as
+bootable, and 1MB is reserved at the end of the disk for the backup
+GPT.
 
 Assisted-by: LLM
 Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 ---
- arch/sandbox/dts/test.dts |  8 ++++++++
- configs/sandbox_defconfig |  1 +
- test/boot/bootflow.c      | 27 +++++++++++++++++++++++++++
- test/py/tests/test_ut.py  | 26 +++++++++++++++++---------
- 4 files changed, 53 insertions(+), 9 deletions(-)
+ test/py/tests/fs_helper.py | 36 +++++++++++++++++++++++++++---------
+ 1 file changed, 27 insertions(+), 9 deletions(-)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 02a9ca29b79..c64769c543f 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -51,6 +51,7 @@
- 		mmc10 = "/mmc10";
- 		mmc11 = "/mmc11";
- 		mmc12 = "/mmc12";
-+		mmc13 = "/mmc13";
- 		pci0 = &pci0;
- 		pci1 = &pci1;
- 		pci2 = &pci2;
-@@ -1406,6 +1407,13 @@
- 		filename = "mmc12.img";
- 	};
+diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
+index e3824b2c1fd..d6e0f5e65d7 100644
+--- a/test/py/tests/fs_helper.py
++++ b/test/py/tests/fs_helper.py
+@@ -124,7 +124,13 @@ class DiskHelper:
+     VFAT  = 0xc
+     EXT4  = 0x83
  
-+	/* This is used for RAUC boot tests, with other partition names */
-+	mmc13 {
-+		status = "disabled";
-+		compatible = "sandbox,mmc";
-+		filename = "mmc13.img";
-+	};
+-    def __init__(self, config, devnum, prefix, cur_dir=False):
++    # GPT partition-type GUIDs for the above codes
++    GPT_TYPES = {
++        VFAT: 'EBD0A0A2-B9E5-4433-87C0-68B6B72699C7',
++        EXT4: '0FC63DAF-8483-4772-8E79-3D69D8477DE4',
++    }
 +
- 	pch {
- 		compatible = "sandbox,pch";
- 	};
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index a3fa5246082..b952622b403 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -28,6 +28,7 @@ CONFIG_FIT_VERBOSE=y
- CONFIG_BOOTMETH_ANDROID=y
- CONFIG_BOOTMETH_BLS=y
- CONFIG_BOOTMETH_RAUC=y
-+CONFIG_BOOTMETH_RAUC_PART_NAMES="boot_a,root_a boot_b,root_b"
- CONFIG_UPL=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_MEASURED_BOOT=y
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index d2d4edb0add..e0a3c8a28b1 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -1824,6 +1824,33 @@ static int bootflow_bls_prefix(struct unit_test_state *uts)
- }
- BOOTSTD_TEST(bootflow_bls_prefix, UTF_CONSOLE | UTF_DM | UTF_SCAN_FDT);
++    def __init__(self, config, devnum, prefix, cur_dir=False, gpt=False):
+         """Set up a new disk image
  
-+static int bootflow_rauc_part_names_check(struct unit_test_state *uts)
-+{
-+	ut_assertok(run_command("bootflow scan", 0));
-+	ut_assert_nextline("No bootflows found; try again with -l");
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("bootflow list", 0));
-+	ut_assert_skip_to_line("(0 bootflows, 0 valid)");
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+
-+/* Test that the RAUC bootmeth ignores a device with other partition names */
-+static int bootflow_rauc_part_names(struct unit_test_state *uts)
-+{
-+	if (!CONFIG_IS_ENABLED(BOOTMETH_RAUC))
-+		return -EAGAIN;
-+#ifdef CONFIG_BOOTMETH_RAUC_PART_NAMES
-+	if (!CONFIG_BOOTMETH_RAUC_PART_NAMES[0])
-+		return -EAGAIN;
-+#endif
-+
-+	return bootflow_rauc_run(uts, "mmc13", bootflow_rauc_part_names_check);
-+}
-+BOOTSTD_TEST(bootflow_rauc_part_names, UTF_CONSOLE | UTF_DM | UTF_SCAN_FDT);
-+
- /* Check 'bootflow scan' provides a list of images */
- static int bootstd_images(struct unit_test_state *uts)
- {
-diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index a33f188d984..a1a00c5a716 100644
---- a/test/py/tests/test_ut.py
-+++ b/test/py/tests/test_ut.py
-@@ -583,10 +583,15 @@ def setup_efi_image(ubman):
-     fsh.cleanup()
+         Args:
+@@ -133,37 +139,49 @@ class DiskHelper:
+             prefix (str): Prefix string of volume's file name
+             cur_dir (bool): True to put the file in the current directory,
+                 instead of the persistent-data directory
++            gpt (bool): True to use a GPT partition table, instead of MBR
+         """
+         self.fs_list = []
++        self.gpt = gpt
+         self.fname = os.path.join('' if cur_dir else config.persistent_data_dir,
+                                   f'{prefix}{devnum}.img')
  
+-    def add_fs(self, fs_img, part_type, bootable=False):
++    def add_fs(self, fs_img, part_type, bootable=False, name=None):
+         """Add a new filesystem
  
--def setup_rauc_image(ubman):
--    """Create a 40MB disk image with an A/B RAUC system on it"""
--    mmc_dev = 10
-+def setup_rauc_image(ubman, mmc_dev, part_names):
-+    """Create a disk image with an A/B RAUC system on it
+         Args:
+             fs_img (FsHelper): Filesystem to add
+             part_type (DiskHelper.FAT or DiskHelper.EXT4): Partition type
+             bootable (bool): True to set the 'bootable' flat
++            name (str): Partition name, only supported with GPT
+         """
+-        self.fs_list.append([fs_img, part_type, bootable])
++        if name and not self.gpt:
++            raise ValueError('Partition names need a GPT partition table')
++        self.fs_list.append([fs_img, part_type, bootable, name])
  
-+    Args:
-+        ubman (ConsoleBase): Console to use
-+        mmc_dev (int): MMC device number, e.g. 10
-+        part_names (tuple of str): GPT names of the boot A, root A, boot B
-+            and root B partitions
-+    """
-     boot = FsHelper(ubman.config, 'fat32', 8, 'rauc_boot')
-     boot.setup()
+     def create(self):
+         """Create the disk image
  
-@@ -606,11 +611,12 @@ def setup_rauc_image(ubman):
-     root = FsHelper(ubman.config, 'ext4', 10, 'rauc_root')
-     root.mk_fs()
+         Create an image with a partition table and the filesystems
+         """
+-        spec = ''
++        spec = 'label: gpt' if self.gpt else ''
+         pos = 1   # Reserve 1MB for the partition table itself
+-        for fsi, part_type, bootable in self.fs_list:
++        for fsi, part_type, bootable, name in self.fs_list:
+             if spec:
+                 spec += '\n'
+-            spec += f'type={part_type:x}, size={fsi.size_mb}M, start={pos}M'
++            if self.gpt:
++                spec += f'type={self.GPT_TYPES[part_type]}'
++            else:
++                spec += f'type={part_type:x}'
++            spec += f', size={fsi.size_mb}M, start={pos}M'
+             if bootable:
+-                spec += ', bootable'
++                spec += ', attrs=LegacyBIOSBootable' if self.gpt else ', bootable'
++            if name:
++                spec += f', name={name}'
+             pos += fsi.size_mb
  
--    img = DiskHelper(ubman.config, mmc_dev, 'mmc', True)
--    img.add_fs(boot, DiskHelper.VFAT, bootable=True)
--    img.add_fs(root, DiskHelper.EXT4)
--    img.add_fs(boot, DiskHelper.VFAT, bootable=True)
--    img.add_fs(root, DiskHelper.EXT4)
-+    boot_a, root_a, boot_b, root_b = part_names
-+    img = DiskHelper(ubman.config, mmc_dev, 'mmc', True, gpt=True)
-+    img.add_fs(boot, DiskHelper.VFAT, bootable=True, name=boot_a)
-+    img.add_fs(root, DiskHelper.EXT4, name=root_a)
-+    img.add_fs(boot, DiskHelper.VFAT, bootable=True, name=boot_b)
-+    img.add_fs(root, DiskHelper.EXT4, name=root_b)
-     img.create()
-     boot.cleanup()
-     root.cleanup()
-@@ -626,7 +632,9 @@ def test_ut_dm_init_bootstd(ubman):
-     setup_cros_image(ubman)
-     setup_android_image(ubman)
-     setup_efi_image(ubman)
--    setup_rauc_image(ubman)
-+    # The names of mmc10 match CONFIG_BOOTMETH_RAUC_PART_NAMES in sandbox
-+    setup_rauc_image(ubman, 10, ('boot_a', 'root_a', 'boot_b', 'root_b'))
-+    setup_rauc_image(ubman, 13, ('boot', 'rootfs', 'boot2', 'rootfs2'))
-     setup_bls_prefix_image(ubman)
+-        img_size = pos
++        # Reserve 1MB at the end for the backup GPT
++        img_size = pos + 1 if self.gpt else pos
+         try:
+             check_call(f'qemu-img create {self.fname} {img_size}M', shell=True)
+             check_call(f'printf "{spec}" | sfdisk {self.fname}', shell=True)
+@@ -172,7 +190,7 @@ class DiskHelper:
+             raise
  
-     # Restart so that the new mmc1.img is picked up
+         pos = 1   # Reserve 1MB for the partition table itself
+-        for fsi, part_type, bootable in self.fs_list:
++        for fsi, _, _, _ in self.fs_list:
+             check_call(
+                 f'dd if={fsi.fs_img} of={self.fname} bs=1M seek={pos} conv=notrunc',
+                 shell=True)
 
 -- 
 2.56.0
