@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F398F606A31A
-	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 17:36:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A343606A31A
+	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 17:36:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zEmv2tJT;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=AOGKRGZX
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=I+1DgmGQ;
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=l0fVh0hq
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1970E80FA7;
-	Thu, 29 Oct 2026 17:36:03 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D475A60710;
+	Thu, 29 Oct 2026 17:36:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0W6z9jSnLRkX; Thu, 29 Oct 2026 17:36:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3381D8104C
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793295362;
-	b=ny+iMljUhdsVQn9I2aE5/bQzanJqhuRT/IR9jSqf4AJUVSHnr2VXlcgYMIKnllkfBrLX
-	 yOPUwY31pDpfEcOzKvFRt7/bJYT2BX/9i3VTIFNtVX/F3loVH5JmQ/VuTn9hUA6uYEyi1
-	 U3RX+iEzHmtcQdHY3N9/njW9r6TotdMjYVzLxdE7ZXGONWW9bZ1MyCqXVHLr7BzEuTSsg
-	 u06DaITSonWOeRL5jX1+bxtLjSXHIw1DzbjQuBssX6W7dADwY9AajDidFO/OvhqDnpTON
-	 Cw5ydIfove5QVcB6wCrQY1K1G4dTgegw/2uSAaw74DX2gICLFzxu4gfH51IL9OFaoiw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 14LS8uln0ZtO; Thu, 29 Oct 2026 17:36:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 057A160A6F
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793295365;
+	b=oXfczUU3WK6M8Ml9tJJ1cd2zOEF0yrdAzZF8hvmk00WP4ZuHRBrbKqXDC1stKkUmY/ec
+	 NrS1PfX6T1oJurLjU6f12SEyfMCg+9ukuoPGmzF8D/sqG2j/vdgc719u9O85HB1fHioWq
+	 /J4VT13RoQ32aY/FT7aCoHPGNl9yGHvre4mKv4Cv0jZBO9LIZcY/wXVQoEZIw2poBt6NE
+	 YdaG2uu1Mpe/i7WuLaG7LR6Kf54WtkPXE2+CQm1Vz9OV40L7TkIIcej9WBKsvHMgf1N4j
+	 U7VTLvTNiVyrk6+IwcjAXHo4w9g/Ulim/DAHw/4MyTO8nuBIMM3NU0MnJKX+XB3WADw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793295362;
+	c=relaxed/relaxed; t=1793295365;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,103 +33,104 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Last-TLS-Session-Version:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=ZwGk2aYiA/yovwpWe6+IEwRWIZ4A1qzeV0YqKSUgnP8=;
-	b=Vi728POjfs3IXqw1Dc6U6eUICpyx+KUmE08p1dOnhyiEBVr2YqJ0kveXhkrhUIebdkSC
-	 x/Jj4GYQ+3WiJEGy4iNHdpktsUvZWO1BWC8Ex7S9girPB0+tMKJcEQa1k+PXFt7bc2pZz
-	 4HPzSg9SetdiylHn3/HN9jw3Apf06v4PBnfKRj3fc3pCLFkBK0FpAKtsYlmijxgYUCYx7
-	 BTS7/wIoL23wwJWi+ojl/8M9d1AmvRJby27kik5XltHCIDR8xpUkVostMFZmcxan3XUJm
-	 it9BOp2t7nGgrFS80bTf4+QPxtmzirR87VGen5cr/6SQxgqopgeqV9q5xzQBJ/BRXXg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=I/hHLdLVruU4T/9De7LO2UGrRMmiSpoqGZgB1pdHd5g=;
+	b=CKRWUyxTyyLddr9NH65OohCLtjn1DbU39PTt3bgmphB6ZoVplZfvRr7YIvl0LHQRlpLI
+	 gFFfaOIj6WgpBfNChnEuluCUu4sK6E2aveuZJJabBGRhrywLQ/K4Wsj+AXypNYzGMAy0T
+	 /7sFdUz6dngouW4SmJI35DQzhavcwnKOJBi2agcSY8yDwDFLT6Yc+QjS8ohMQwD3v3KvH
+	 dXOI67N92wOL0+EVHPhWSnO9aLQDJlIfFvhdhpSMBjwrG57qDdHjExb7T8MFlTGoQ5U1u
+	 M4WtLLis0cbyYJkwXDZrzP7Tc7EtfejngrkGUwzkApomDC2KTNn0xbKsfDEfK2jthew==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793295362;
-	bh=ZwGk2aYiA/yovwpWe6+IEwRWIZ4A1qzeV0YqKSUgnP8=;
+	d=lists.u-boot-project.org; s=default; t=1793295365;
+	bh=I/hHLdLVruU4T/9De7LO2UGrRMmiSpoqGZgB1pdHd5g=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=zEmv2tJTawOrCW2wBXIst0A8RXJ21dRnpForUlV8kVNn4RBHssZOMbxc8v6YXf3S/
-	 7GKdBHlUaJ6xionlO6BasqeyLoFnk8CBrwz+fN2+5wCM06yO5nxezCdszPfp3nRF9q
-	 IbAAP6QLen/qy3cS/pCLrygn/b9/PoLbNMpFVgIf+Oga4QwTUR5XlkDy6ECp/g4Wyn
-	 Vr4OuP69CyRFX/jDb5KxQyDToy3+XNOL7Zg9fj1Rsay1gsA4/41jEIi7XTZq06eIHM
-	 4bKVOC3z+kFm0meAeFezbZ/Ch+9vZMjG6SonM3KQsz+rqUzGNTmwZ/QwgJHcGq8Nit
-	 cGTvxJYMZHKwg==
+	b=I+1DgmGQ1YGa3NZ8VShjETLNrqJbQosyHSZ0FsZor1xS2NeTUzGW9hz+hCx4J+pLX
+	 bcdBJcXzyxsEhmCW+OzdEL1SO2Pdnpbgbc0HHSKTOaLguCJmI/mnsAcI7Wk5fbCCfE
+	 sG0nJpSlyvMByr4SApd2pcqqq8uBCM6oaZBjA2fV4iBURPUBLnnKsTc+LP15pK0lfF
+	 cMVdHFfVrXoOG/aaKpc9f4vB1a5PqC0DRYmgJNmIlmD3JO4dtIm9Uq9Q71uEuv7vNx
+	 kOjH4ePWAhpzx8RgnTcAXkst1JVoR726nTm7AKyeDZn+YndXH2n38tu/BHT8kM3BZI
+	 drAOcXyO0qDgA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3381D8104C;
-	Thu, 29 Oct 2026 17:36:02 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 5F9C13A7
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 17:35:58 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 057A160A6F;
+	Thu, 29 Oct 2026 17:36:05 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 823512FE
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 17:36:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 521A160A6F
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 17:35:58 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6650E80AE8
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 17:36:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wOidM3fPvMBD for <u-boot@lists.u-boot-project.org>;
- Thu, 29 Oct 2026 17:35:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D47DC60710
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=185.246.85.4
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793295357;
- b=LNhmnLYF61KC9o3hJyHc3eY5dfHD/z/4sRPn/vUlBeRjEH+NqJcz6eRK5R5HQPYFqL/Q
- fMwDf7+suOuQWSpgjQHAQVIppkA5zo8Rk8DUQtCpKWnNSOriDB9JDKEZi1NQQgmCZFMZS
- pDHOA18G/ooRcGYMM4QHzOdeiFrHiZQr9EAOxjBFdt6oARIyYqkBxLi7GKWorkryrOatN
- OnQwcbCPdDaJ3V5WshjSPUI8AU3rcjiDXn1TEMeGsiTnjCUWuTSeAiJgMwASdYkZBGSYu
- FIh2cVCjZJCdkoz6HkN7ea4tSfUZlMIFNMF7GqhmnF8Rk0UyYKOB/BR1JPwZjfTC/3Q==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GwNBAijIPBom for <u-boot@lists.u-boot-project.org>;
+ Thu, 29 Oct 2026 17:36:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 33CF780FA7
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip=185.171.202.116
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793295360;
+ b=Hmx0W1TkKD4iiUVPyG8NSJITaUmIcr3IDu2xna86Oh9uur92LwMyenSWBffUNkzTzNIN
+ 97V1i6rUiu7exUXfFKmnkbBBliuonJg5ijOm1q4NGvg1Yvy8JmK5jzCNrQoMWgfYOU+lX
+ YBtLZ4fHllBiBwLwYlRiMiNEl/5lDgqwhsFHJhgM5bdczXZDrX8FOOsz31bWs98MgM2s4
+ 3EZlXHs/sFwn9/L1Qnvv3fpPtEA1tINvWuE2BcoXechPbyP02BmpS8bd7t9A5Gl4ECxZl
+ eojxEfJg2UICcaZu/TNjgxsWJfG4mRwB7HIT3U9wbvAOD01KcWnRSmm8VqhkmJqIfkQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793295357;
+ c=relaxed/relaxed; t=1793295360;
  h=Received-SPF:Received:Received:Received:DKIM-Signature:From:Date:
  Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Developer-Signature:X-Developer-Key:X-Last-TLS-Session-Version;
- bh=ZwGk2aYiA/yovwpWe6+IEwRWIZ4A1qzeV0YqKSUgnP8=;
- b=rcdsKQq1NYbwac4jC7bVZ3sG8TJDE8C20nNoEQ3dknBXil3k4yqBq+/3ez18gfIQuMPP
- Yzj1ZvgSmrrEISl1FV6S13zRGYbYAvpY53w74fbH+kqAJqP2C8UrgTODPDuGAOcUrPTuM
- BJdvVUmF5ka1LcqFyCyMwsxtSqNDgiERKlHKSUtTl+GIQsU8w8f53BwyBGIz/+hyvr7Ze
- 654lRGghzrp9TFtQb+MYgoFQfITYt57HMYr/ETPKKj9DcYOg7TO5dFkZzQXaF39buSSTE
- SNqGtM+mzI7KegfskiZsCL1j3ebyQyg6LlZw25nLsUK1F6YWZP7YzqcPKsh8DSa9N5Q==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=I/hHLdLVruU4T/9De7LO2UGrRMmiSpoqGZgB1pdHd5g=;
+ b=WBnUA6+yJIGd0oDNqOPI2yJFIZlsHM8ALJBhB0kvW6nGdDQFchGRnChNrt8o7qDpdRbG
+ bv3a9Q93EO5zs3bj2XzJh1i6NGUuM1QWlBsw2s8Ku/HDldqzJO1QRL+XjGf4gcJavPxCW
+ 3DwQRKo/xedAD7YydZLALxJ9fmVEC0OYh12kNaySa5fVYbwvyH6BjdJ+iaZAyplHUfi09
+ XkD0PGtqboTRj6xgZ0WQZKEvl0/X5B7oWmkl7Gya6LBB16fJpWY8BNfH3U0LfMVMxuzjo
+ 49g2rO4exYKv2QG517LDxjgJNWFJNEBZYwbcPya+IPzm+W1xhOzZ0quEpxbrOT5HSAw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=bootlin.com;
  dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=AOGKRGZX; 
- arc=none smtp.remote-ip=185.246.85.4
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.85.4;
- helo=smtpout-03.galae.net; envelope-from=jeremie.dautheribes@bootlin.com;
+ header.s=dkim header.b=l0fVh0hq; 
+ arc=none smtp.remote-ip=185.171.202.116
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.171.202.116;
+ helo=smtpout-04.galae.net; envelope-from=jeremie.dautheribes@bootlin.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=AOGKRGZX
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D47DC60710
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 17:35:55 +0000 (UTC)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com
+ header.a=rsa-sha256 header.s=dkim header.b=l0fVh0hq
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 33CF780FA7
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 17:35:59 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 0FC364E4139E;
- Thu, 29 Oct 2026 17:35:54 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 4C671C49F4A;
+ Thu, 29 Oct 2026 17:36:59 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id CF7E76076A;
- Thu, 29 Oct 2026 17:35:53 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id D33556076A;
+ Thu, 29 Oct 2026 17:35:56 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 2B92110328F94; Thu, 29 Oct 2026 18:35:49 +0100 (CET)
+ with ESMTPSA id 72B1710329107; Thu, 29 Oct 2026 18:35:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1793295352; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1793295355; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=ZwGk2aYiA/yovwpWe6+IEwRWIZ4A1qzeV0YqKSUgnP8=;
- b=AOGKRGZX1zWW//uzrBkdzIFAMot3GrIv3kdKDl9PONGHmTF82v9ypWp9kQm0SV7VnNc99K
- KrmQtceF6BwjzxW+lV1nqkAVE5c6EqbZCqOpSBP+zcYWEC6Vf2dMRS2nXfh5MZ49LX3Ixa
- 89vyWLpYcuBt9VWeOA0b1HpAqKKrFsnJrI6Bf1Q+7OotRkifJyEQLt1HqIv91hw1mh6Hil
- bVq9AgWwvYjk6FBKR9L2cMk5OSHTPHf26jOjv9/ATHzGUNfVltal/qzOo/XAzduC8u/hnW
- Z+cCefH4kLYPVxMeEL/NrWjVIaWVeohsE6x6Vh0d3kRbBmwEmP/4zz1OuP+zzg==
+ bh=I/hHLdLVruU4T/9De7LO2UGrRMmiSpoqGZgB1pdHd5g=;
+ b=l0fVh0hqBu14TCc5eAxibn0FMEPNudp5TUXugVWfHPzO5W42toU8LE4laEdUANC3uVvJa8
+ xNsZ3oBe9M8F9v4XDtad1owDQF+8ZVSxlv2YQ7IIXdN0Ztwf7ev6/xfMdPf1FtDwoEL8/K
+ wZuEwEBnm7bPNXabTaAa9GI2JejZ0Di8tAHXhjTsSufBjHzPhI6LPZ9A0iiaEnGDZXcc8s
+ IAELalSmml70PTc/0KgzkfrvN2zSIN9b2ybrssrt1z+BvDEoBsxeHlKHTfbmi16lyhGLfy
+ NLI+R35HI/rFrRluWFkQpziZehklaqWdaP9SkB85b2BVqKk8LfRYtV70Q/Kw3w==
 From: =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
  <jeremie.dautheribes@bootlin.com>
-Date: Thu, 29 Oct 2026 18:35:24 +0100
-Subject: [PATCH v6 1/9] binman: add nxp_imxcst base etype for i.MX CST signing
+Date: Thu, 29 Oct 2026 18:35:25 +0100
+Subject: [PATCH v6 2/9] binman: nxp_imx8mcst: use the nxp_imxcst base etype
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20261029-imx93-secureboot-v6-1-27b9c987e25f@bootlin.com>
+Message-Id: <20261029-imx93-secureboot-v6-2-27b9c987e25f@bootlin.com>
 References: <20261029-imx93-secureboot-v6-0-27b9c987e25f@bootlin.com>
 In-Reply-To: <20261029-imx93-secureboot-v6-0-27b9c987e25f@bootlin.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
@@ -155,21 +156,21 @@ Cc: =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes_=28Schneider_Electric=29?=
  Lei Xu <lei.xu@nxp.com>, Joseph Guo <qijian.guo@nxp.com>, 
  Vincent Jardin <vjardin@free.fr>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5024;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4904;
  i=jeremie.dautheribes@bootlin.com; h=from:subject:message-id;
- bh=XwFllsQrZOT0Dt8CRvbGYDUApheLC5hhSSQC+zuTYwE=;
- b=owEBbQKS/ZANAwAKASsAXqAbWo8DAcsmYgBq44PsDJtI37gijCZX1Siwinzd3XwC3er8/m+0C
- deqKRTmsteJAjMEAAEKAB0WIQT7FK2Qhtu4QpBIBAkrAF6gG1qPAwUCauOD7AAKCRArAF6gG1qP
- A4c2EAC5KLS51B6vt/yGO/74BRyMCQ1O4LFDO6FLRSIPPcOKo59rPl9oyA/r7xEcu+hFx9pWUKW
- UzrQKUPyKzij4ql3UBZ//pp0vYNMwVtQAXJ/snuBj6oQO/vRgpz+3/X4VnKc5Djjq55WA5tAX/W
- Wtb/Q8j/ZC3fKOwmEoBIRwoZ4Qg9XaNXKDUuFsRZbx4MLo/PSplRSkF7Ysbp79T3bgjf4C3785C
- fzlBj37uOPiCgqFsnG5AczAMHKgki9VRx9rAisGVWGb3luCArfaoUFu74FoRlrEcim8T3zHkJGg
- vbp8EU0oM5W8Z4Wc+mSgKxrEb8iSfDkuiazIt3ozrMPCq3lly7qSuitkfvzupTKhBtrJXwe16O5
- vHAMTtG1v+iiFIGNltJ0UynyJr4XHVAl0CN2Zueve7G+b3U7McdSTkdEWQQIOhqAOfHN8q8gMqy
- tl60FrZNOeEQM4ssSV0v1ODO1eWTa+2eo3oeK9z1L/BueJzEp7pANfcwjBFQH47uRtDg+dMSaNi
- KXC/BC6w+nYb90/1ny/1joGdSwMqupHHqJi8rk+hAxdYoqoY3m9jNO6PmLg8QnrKWQWNC9XpOXk
- cXQSjVF27BMPSFiH1JyO+vm6H6YiUFAHXrc5XmP1a/Hjqpm8OxEOKwahfNKEY0EjLwfbRglmOZ6
- 8tWQVnt/464xP4Q==
+ bh=HoqKvtME/qqv85vtLJuiBC+BxG2vqjCvYzhE9tfOZVY=;
+ b=owEBbQKS/ZANAwAKASsAXqAbWo8DAcsmYgBq44PsKsx6XZ6wvHojgD6TBLWypWQYAv9aC7WF8
+ o35vkyzfdaJAjMEAAEKAB0WIQT7FK2Qhtu4QpBIBAkrAF6gG1qPAwUCauOD7AAKCRArAF6gG1qP
+ AybCD/90A5iFi+kCDQ4PiftNg5bIJnhyeCmm1TyEOJkhKuC23rGMFq71MulHG+vuRBxpevrGCUU
+ Kmrmjr8e8qab+1olvW7zLLkcRzX/4326fCgsQ497H1WPlvenJ94SOd/mqFTJsbSBapwjqgGAeex
+ WbZwz7A6jwZ6FEbh2v6c3fdk4ZlUdR05GcDksTmXFAuiquIgOnkEhNIDsbAMjafQr+eSyXiYK10
+ RT/gjrjpg6962IVs4Nw5p5xFCavWSOnWnQaaLHEUeGlc7AFTq8QK/Hgm5DRt1Z/+4r60lZjcEt+
+ 1FHRpk4CKjp9Je1PKweohkhsyXIeCz0Tjma82W9WUGZYbB1qa0yVt8+HgeHZlv2S0DadnFPNlmR
+ QESTxAwK31XSeITHPbT4sh+LD3WpEjbT5FlzOrFk7q7wNrAkaTGMsnx2YWI+7Q82Vpi2cbaybpk
+ +VLJbLFphDqO4EizsZOSFJvDVWCOi7uh40fPPdt0SEgfkPuRsAk3EnzgPAI+WscQpA20aqJnB1D
+ xy8yVGXD+wU3G4eMLOTwbWXlMmzBrnTW2tHfqgoBzPvjdKIlh89WEb9V0xi1T2PUm21jyRGsg6p
+ mn/c3v9gavIux0rU4hJdZJUjdvLTm7t5V+rjAGEJcX0iNAcOkdUWohCk1nAQRVdGL5uAtZM5KcW
+ i4hEdTIDJ0QmSmA==
 X-Developer-Key: i=jeremie.dautheribes@bootlin.com; a=openpgp;
  fpr=FB14AD9086DBB842904804092B005EA01B5A8F03
 X-Last-TLS-Session-Version: TLSv1.3
@@ -189,148 +190,126 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add a common etype which provides the shared functionality for signing
-i.MX images with the NXP Code Signing Tool (CST). This includes the SRK
-table property handling, the CST bintool registration, and helpers for
-writing the input data and configuration files and for running cst.
-
-The nxp_imx8mcst etype and the upcoming nxp_imx93cst etype will be
-converted to use this common base in the following commits.
-
-No functional changes.
+Use the new nxp_imxcst base etype and remove duplicated code.
+This should not have any functional impact.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Jérémie Dautheribes (Schneider Electric) <jeremie.dautheribes@bootlin.com>
 ---
- tools/binman/etype/nxp_imxcst.py | 120 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 120 insertions(+)
+ tools/binman/etype/nxp_imx8mcst.py | 60 +++++++-------------------------------
+ 1 file changed, 10 insertions(+), 50 deletions(-)
 
-diff --git a/tools/binman/etype/nxp_imxcst.py b/tools/binman/etype/nxp_imxcst.py
-new file mode 100644
-index 00000000000..718537fda40
---- /dev/null
-+++ b/tools/binman/etype/nxp_imxcst.py
-@@ -0,0 +1,120 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2026 (C) Bootlin
-+# Author: Jérémie Dautheribes <jeremie.dautheribes@bootlin.com>
-+#
-+# Derived from nxp_imx8mcst.py
-+# Copyright 2023-2024 Marek Vasut <marex@denx.de>
+diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
+index 29a7451678d..3f81b9f83c6 100644
+--- a/tools/binman/etype/nxp_imx8mcst.py
++++ b/tools/binman/etype/nxp_imx8mcst.py
+@@ -7,16 +7,10 @@
+ # input configuration file and input data to be signed.
+ #
+ 
+-import configparser
+ import os
+ import struct
+ 
+-from collections import OrderedDict
+-
+-from binman.entry import Entry
+-from binman.etype.mkimage import Entry_mkimage
+-from binman.etype.section import Entry_section
+-from binman import elf
++from binman.etype.nxp_imxcst import Entry_nxp_imxcst
+ from dtoc import fdt_util
+ from u_boot_pylib import tools
+ 
+@@ -61,7 +55,8 @@ CSF_CONFIG_TEMPLATE = f'''
+   Blocks = 0x1234 0x78 0xabcd "data.bin"
+ '''
+ 
+-class Entry_nxp_imx8mcst(Entry_mkimage):
 +
-+# Entry-type module for NXP i.MX Code Signing Tool (CST) base class
-+#
-+
-+import configparser
-+import os
-+
-+from binman.etype.mkimage import Entry_mkimage
-+from binman.etype.section import Entry_section
-+from dtoc import fdt_util
-+from u_boot_pylib import tools
-+
-+
-+class Entry_nxp_imxcst(Entry_mkimage):
-+    """NXP i.MX CST .cfg file generator and cst invoker base class
-+
-+    Properties / Entry arguments:
-+        - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
-+    """
-+
-+    def __init__(self, section, etype, node):
-+        super().__init__(section, etype, node)
-+        self.cst = None
-+        self.srk_table = None
-+
-+    def ReadNode(self):
-+        super().ReadNode()
-+        self.srk_table = os.getenv(
-+            'SRK_TABLE', fdt_util.GetString(self._node, 'nxp,srk-table',
-+                                            'SRK_1_2_3_4_table.bin'))
-+
-+    def SetImagePos(self, image_pos):
-+        # Customized SoC specific SetImagePos which skips the mkimage etype
-+        # implementation and removes the 0x48 offset introduced there. That
-+        # offset is only used for uImage/fitImage, which is not the case in
-+        # here.
-+        upto = 0x00
-+        for entry in super().GetEntries().values():
-+            entry.SetOffsetSize(upto, None)
-+
-+            # Give up if any entries lack a size
-+            if entry.size is None:
-+                return
-+            upto += entry.size
-+
-+        Entry_section.SetImagePos(self, image_pos)
-+
-+    def AddBintools(self, btools):
-+        super().AddBintools(btools)
-+        self.cst = self.AddBintool(btools, 'cst')
-+
-+    def write_input_data(self, data, uniq):
-+        """Write input data to a temporary file for CST
-+
-+        Args:
-+            data: Data to write
-+            uniq: Unique string for naming output files
-+
-+        Returns:
-+            str: Path to the written file
-+        """
-+        output_dname = tools.get_output_filename(f'nxp.cst-input-data.{uniq}')
-+        tools.write_file(output_dname, data)
-+        return output_dname
-+
-+    def get_config(self, template):
-+        """Get a ConfigParser loaded with the given template
-+
-+        Args:
-+            template: Configuration template string
-+
-+        Returns:
-+            ConfigParser instance
-+        """
-+        config = configparser.ConfigParser()
-+        # Do not make key names lowercase
-+        config.optionxform = str
-+        config.read_string(template)
-+        return config
-+
-+    def write_config(self, config, uniq):
-+        """Write ConfigParser object to a temporary file for CST
-+
-+        Args:
-+            config: ConfigParser instance
-+            uniq: Unique string for naming output files
-+
-+        Returns:
-+            str: Path to the written configuration file
-+        """
-+        cfg_fname = tools.get_output_filename(f'nxp.csf-config-txt.{uniq}')
-+        with open(cfg_fname, 'w') as cfgf:
-+            config.write(cfgf)
-+        return cfg_fname
-+
-+    def run_cst(self, cfg_fname, uniq, backend=None):
-+        """Run CST tool with given configuration file
-+
-+        Args:
-+            cfg_fname: Filename of the CST configuration file
-+            uniq: Unique string for naming output files
-+            backend: Optional backend (e.g. 'ssl' or 'pkcs11')
-+
-+        Returns:
-+            bytes: Output data from CST, or None if bintool is missing
-+        """
-+        output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
-+        args = ['-i', cfg_fname, '-o', output_fname]
-+        if backend:
-+            args.extend(['-b', backend])
-+        if self.cst.run_cmd(*args) is not None:
-+            return tools.read_file(output_fname)
-+        self.record_missing_bintool(self.cst)
-+        return None
++class Entry_nxp_imx8mcst(Entry_nxp_imxcst):
+     """NXP i.MX8M CST .cfg file generator and cst invoker
+ 
+     Properties / Entry arguments:
+@@ -82,9 +77,6 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+     def ReadNode(self):
+         super().ReadNode()
+         self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
+-        self.srk_table = os.getenv(
+-            'SRK_TABLE', fdt_util.GetString(self._node, 'nxp,srk-table',
+-                                            'SRK_1_2_3_4_table.bin'))
+         self.fast_auth = fdt_util.GetBool(self._node, 'nxp,fast-auth')
+         if not self.fast_auth:
+             self.csf_crt = os.getenv(
+@@ -158,17 +150,11 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+             return data
+ 
+         # Write out customized data to be signed
+-        output_dname = tools.get_output_filename(f'nxp.cst-input-data.{uniq}')
+-        tools.write_file(output_dname, data)
++        output_dname = self.write_input_data(data, uniq)
+ 
+         # Generate CST configuration file used to sign payload
+-        cfg_fname = tools.get_output_filename(f'nxp.csf-config-txt.{uniq}')
+-        config = configparser.ConfigParser()
+-        # Do not make key names lowercase
+-        config.optionxform = str
+-        # Load configuration template and modify keys of interest
+-        config.read_string(CSF_CONFIG_TEMPLATE)
+-        config['Install SRK']['File']  = f'"{self.srk_table}"'
++        config = self.get_config(CSF_CONFIG_TEMPLATE)
++        config['Install SRK']['File'] = f'"{self.srk_table}"'
+         if not self.fast_auth:
+             config.remove_section('Install NOCAK')
+             config['Install CSFK']['File'] = f'"{self.csf_crt}"'
+@@ -184,8 +170,7 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+ 
+         if not self.unlock:
+             config.remove_section('Unlock')
+-        with open(cfg_fname, 'w') as cfgf:
+-            config.write(cfgf)
++        cfg_fname = self.write_config(config, uniq)
+ 
+         # SSL is the default backend, PKCS11 backend is optional
+         if self.backend == "pkcs11":
+@@ -193,34 +178,9 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
+         else:
+             cst_backend = "ssl"
+ 
+-        output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
+-        args = ['-i', cfg_fname, '-o', output_fname, '-b', cst_backend]
+-        if self.cst.run_cmd(*args) is not None:
+-            outdata = tools.read_file(output_fname)
++        outdata = self.run_cst(cfg_fname, uniq, cst_backend)
++        if outdata is not None:
+             # fixme: 0x2000 should be CONFIG_CSF_SIZE
+             outdata += tools.get_bytes(0, 0x2000 - 0x20 - len(outdata))
+             return data + outdata
+-        else:
+-            # Bintool is missing; just use the input data as the output
+-            self.record_missing_bintool(self.cst)
+-            return data
+-
+-    def SetImagePos(self, image_pos):
+-        # Customized SoC specific SetImagePos which skips the mkimage etype
+-        # implementation and removes the 0x48 offset introduced there. That
+-        # offset is only used for uImage/fitImage, which is not the case in
+-        # here.
+-        upto = 0x00
+-        for entry in super().GetEntries().values():
+-            entry.SetOffsetSize(upto, None)
+-
+-            # Give up if any entries lack a size
+-            if entry.size is None:
+-                return
+-            upto += entry.size
+-
+-        Entry_section.SetImagePos(self, image_pos)
+-
+-    def AddBintools(self, btools):
+-        super().AddBintools(btools)
+-        self.cst = self.AddBintool(btools, 'cst')
++        return data
 
 -- 
 2.56.0
