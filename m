@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25C17606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 05:08:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80D7F606A31A
+	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 05:08:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Ja/yhxXj;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=B6ZgQ5+j
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=VwZShfya;
+	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=NuxcH1x3
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E490780F86;
-	Thu, 29 Oct 2026 05:08:33 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5A55340775;
+	Thu, 29 Oct 2026 05:08:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id x65oiBFYnYk4; Thu, 29 Oct 2026 05:08:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BEA7880F81
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793250512;
-	b=ZEa+YKkYJmhs3ngyC2LirDE6gwzxIfzo+hxQtZfHRBq43cdhlhjNDnReP0eu4kUfUNMx
-	 bT6Bh/XKCbp+A76C7iwe+xWOmdori/9SyXKv549IO17Qo9XfOojyqwa0yJf5/V7wh9UXf
-	 Nr4tp8F/GSEVE92YlYdhFerfRcGxbU+TKlL/S1nB3KNlpHTkA/fcDbSTAxDZ/rkCByPlO
-	 478m41xbQvnNerz6v4FO+8/SEK7ypg05dihEdjN+6MZJUzpNeLW54SXHOiHi8UskWULWV
-	 nuyTfp09Kt41bq4N61dsBQaSCxlr/dg6t/0fQ8Q7Dbugvfwc56OkamHToC/GR2qb73g==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id NbkMI_bl5MOt; Thu, 29 Oct 2026 05:08:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9F08B40756
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793250514;
+	b=SVXKkEb7y3rwA3nlHtcc6ntrE8niSt37mK0DjBNSixR/GsnsvrwCT4JYowBZpmRUVJ1z
+	 vZXJouZaSpGQ5zeuSJENyW3xEtCv+UJgArMG80WhOHr4Pfx364OI+1Lho1AClC+TD7l67
+	 Gz7b5voHFy+3uP/cGQB09oo+l8df9A3i/u09dYgvI9zkoo6u7GSu5n1cYdapNvARb0s4o
+	 maXT0sci7JZiTgiplpbpNqdiivDV8DAOBeXdz9TWeWiSonU1Q+d5KpM3TrTEglcqcTKNS
+	 tULcx2QwDY/d/Tz58MfXxKtsuqqMDvge4Jhj9o5bxbzZTFhbjHc+dB2JFRpJq4AlJxA==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793250512;
+	c=relaxed/relaxed; t=1793250514;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -32,106 +32,105 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-ZohoMailClient:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=UNtHOpM/Ts/uX4+79n/o+GajIk93EldsGW8P1GKx8Ak=;
-	b=EF8NyIrrylZHiW4Sb8yJOX3ESFKnyA/jrwRES8N+xlNkn29Vw4HaJdRx04eLhSEKWAqb
-	 VNo1hOvTG4/oXhhFMErbm0T7O4Dogs8Ge/jOP/1AEl6hyFpOXsXeFT3sqb6lv3kr+QvqL
-	 eD+eNou1NKvtuYpzjyalIwkZ8WHOqdT4HELn9FWGUm4Jc3Zci3V7uaw0l6zaqq/GxPmud
-	 Uz6xZsZotGSbdFgLHVGGMtl9DNzjyqZ50XZBCjNISm6eQr4VpDreRtlHVXzy3DD6ETVfE
-	 soHIvSbmF5iCLgZ3jZsnxbmBq+y1VoCE2Z6v0WWmf4dU76ZKme36cn1ThIjDrU2EY0A==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
-	dmarc=pass header.from=ziyao.cc;
-	dkim=pass header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=B6ZgQ5+j;
+	bh=sbgF7+Pns7F77tVPpxMJ37RO9bTDAekap75eVx9+MzQ=;
+	b=HpaCE+M3uJr4oQ6tjq2pyCPruEDJeqUSXxy5peH7o4jBG4yC+HzBTm+Ic2POa8lXSfNq
+	 mdfEf+GtuFTHGv4NfKpsN9eiQMM/EE3+6qBLvPldwjMMuk1x3RBQVrUVzhdPPRC3/EJ+x
+	 tuf9y7DnCEBwrrbibFoOpnbQ9Eaf9WEi7IEJ3xOmH7y7Qoe9nXagbM8ml7HP1jhxesTCQ
+	 PdefneSPmUuOQWDOyDJfDWHfXpq5Zn0k587mTZgWCXOCIgW6PWhjgYCa3pGR8S535l4T+
+	 eVhpMroCpjtsHmAVA6kdw9n50rehQRofElTJSOfMJZvbB7WFUaH73LFWXFgHH4POjfg==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793250512;
-	bh=UNtHOpM/Ts/uX4+79n/o+GajIk93EldsGW8P1GKx8Ak=;
+	d=lists.u-boot-project.org; s=default; t=1793250514;
+	bh=sbgF7+Pns7F77tVPpxMJ37RO9bTDAekap75eVx9+MzQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Ja/yhxXjm3zenfnx5eV+5KBC4hCVFp5ecL2Oc40fh3yB/VVXDHW49VMCLHkdbBb81
-	 KTa0K4yiz4wCHtiaXevdvp9JTq7SCal/4yuDAONLUTaPbR5WggU2D7XBVpIFNX6bcB
-	 hJMcQ10IDtzJHJksok1zruXeVP+KmwTAKx1a30CnJrJj7QJuUtrbpJpx2Cha72u8oA
-	 5Po5rkmviSqPcHb+SiRUrAe915gGSxVb9FK8PQXtcLfO2swUjxHhzjci/5YUdL/IaM
-	 ETwbaWQQaFvmqnaeWFSC49tOHhp/xBnQYW1lmc2oN+nGMhOfFSJbkqVEtZoZJieceb
-	 R+p5qzn+SdErw==
+	b=VwZShfyaIrdJA06qe8jvv19OaB7iYCWNnetxS2TTsU0/FVPau37h0ZIeutiOHPMvk
+	 /93UxPlULttn4TqdBd6ucI+RiiJeDJCN1wajGq06MNAf9jPLDaSlPF6eAA/mV9O/Kx
+	 6o7QpFl4ddneGeds2TgMwgp+jB1GR7N/2apXb6Cv9A7STL+DyeGN93oOu3f4zsfj54
+	 Ly6S2w6LXMzmxoJGcIcPMYcWOK6qTrqBTrASTiSTykmPGSOeZ2ef2JYp0Qj2GIJmfK
+	 8FK1g1FJLWjuRQdO7N/4Rxs/72pmnbWwd4RtGrSTvlgyhisGAGCZBMzrr3ep7hrRuw
+	 WStK8OE6OjF7w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BEA7880F81;
-	Thu, 29 Oct 2026 05:08:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9F08B40756;
+	Thu, 29 Oct 2026 05:08:34 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 68259235
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 05:08:25 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id B48B5380
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 05:08:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 59C7980F66
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 05:08:25 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id A686980971
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 05:08:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ay9DG51_uoHm for <u-boot@lists.u-boot-project.org>;
- Thu, 29 Oct 2026 05:08:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 24DDE809B5
+ id sIoka2lYU_Fg for <u-boot@lists.u-boot-project.org>;
+ Thu, 29 Oct 2026 05:08:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DB5E280F75
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.180.15
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793250504;
- b=XtM40veH9OiaKBLYxk0NZmXc4SALzz75neUPih3QzTWWReDIxMTyRXmk/dY2W6oCiMzO
- DbPDIAJiv/v/twAOKLrJZ4X4zzXDhGbBzBNbX6trJTjTT+YJ7lazEqJ8iuOeEK3gi2nTs
- MqmaloOCBlp9bFASgp3LfLzn6tB3g4UnzaMqUD+0tRaioVeRJxzOsVzJ09n8ByhNr8nYf
- 5rg1sJ/72hccCO80ZBD0toZBiH0kaP3PucJ+HC8DH+TmOmdNd9TW2+fo8ejcBMg7jdWzD
- rhG7nwfA72+zSp6WyNmF3gl0Isd0YVoSs2tT48ug7/GJZO1NfH+/hxPSlm1OOcNu1zA==
+ smtp.remote-ip=165.173.182.15
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793250508;
+ b=lFm6Xp1SMHl6fIbrhBDRskGs6LyZt4zHOVgo1qTkAhaSrzdeA2W6OQPb9pMgk8HvuiXm
+ XwVvjm6qaVWzfcLctyFAsaXoMuwNW2e5iug2rX7jatv9o+4pfxz0LZxvgm6wTOG7w5TZy
+ Y4MDn2GTIMWSMNVxmY+YHEz31Tc1wKKITGLsn9GRnyE89ghSYygC7J4Q7JqxYf+eFcEms
+ N/04Fry+GIhfOmuhj8bzEx+CICqCXN4wOf5/dR5P3SvOPTQGtd8qljd1HiY4RaHp+2gTp
+ BhgOCZQMANskYSVX8s/AM19r+GIrtV8+w0pH4Wrwlbq4u9ID7/H1bdD7C/C5GoKY6zA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793250504;
+ c=relaxed/relaxed; t=1793250508;
  h=Received-SPF:DKIM-Signature:Received:From:To:Cc:Subject:Date:
  Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding:X-ZohoMailClient;
- bh=UNtHOpM/Ts/uX4+79n/o+GajIk93EldsGW8P1GKx8Ak=;
- b=XJ2vglEAYaBhTWpEHEeIWtZnbRcRdOydWgKEmaNbOPxfImgNDmNlGwN4T0fNQDuGIJT8
- fCO/2AIoZhyx27/0neBx4oxdN3SVD30kuDHn5s5/v0izA6SftWF7feU52/mvV2THf9Q0h
- wo3c+kxZKbT5IDw9kIfEV01grZC+C/PzptF75ZexF00GOzZps/dk5U+Zg4JFoSIR+Hw95
- cwVTguj6Z6O7lEpeB8h+wHFL6Z/eQ3R00r9NoQ+uLqX2RIN9qV82xE/YAmSB9tgEyb7bE
- V5X/1zEMG8+ePOHu8xsn8VAzHWf5yeOFGvbYBUDrnFN1G4c/fyAD0lMYEQRVJ8Uc33g==
+ bh=sbgF7+Pns7F77tVPpxMJ37RO9bTDAekap75eVx9+MzQ=;
+ b=U/8zgxvef8VPE3Zar+kdYg5gUwYCv4y6cALlNRI93vqrisO+nk258Scs/ib+GCAr2Ieu
+ gylqkUeL/WI6Pf7baXzlS3eBQn7Q+OX6Sojb3YYUlTnYDgGZw2g3VEyxFNFBpbtn/7rmw
+ HjTt0A1kODd4t8aIM8yxzSUq+Y0cnYTgSrk0gOB4L0PcLHuBlVNVqdATzdg/itMybqamq
+ 8MxlCg9EeHnRTt7P+hhT/gfsSMYFdRUe4XeCOZ0LFFF5aJscNq6LYJ7AoOCPN3/UQzn1v
+ kgjjhte73paNXGwnsnOI8+Xnl3pLtYfsKM8+4tJcditgR01Jnn+StXNAmjWTnrZM5vQ==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
  dmarc=pass header.from=ziyao.cc;
  dkim=pass header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=B6ZgQ5+j; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
- helo=sender6-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
+ header.s=zmail header.b=NuxcH1x3; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.182.15
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.15;
+ helo=sender5-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=B6ZgQ5+j
-Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
- [165.173.180.15])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 24DDE809B5
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 05:08:23 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1793250497; cv=none; 
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc
+ header.a=rsa-sha256 header.s=zmail header.b=NuxcH1x3
+Received: from sender5-op-o15.zoho.com (sender5-op-o15.zoho.com
+ [165.173.182.15])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id DB5E280F75
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 05:08:26 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1793250499; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=OEyxUTR3XQWvenDqPKWFpfb2pCaq3CWftwH3vIV+zes3IHtT1F/KokF3ywlYsVre6ypMfyjhmIAkmC+k74hE0KbdhiGnRx7Mr7ldvI6+OLg19ymr7n4MyDadFBcTPnni1Esarg1Ab6PAY2A91eRwQ9H/NRGmrL3tWRcUHgfXw7Q=
+ b=es9tRNH8OeQdN0TIQFdwebeRVAEjpBQM4uOJ41i8pmwm3et1cUb5H5DMuZHkScXF3iqtJ2eXJMxt3VIYI9TORrao8kFuceJ3XO9fxkFM59iFTwV1A0vQfUvTbmVp7o+oK0lfNtbEVEWiwHdtAzUW2DB7kKJTMckBiEJ+E1hg0wQ=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1793250497;
+ s=zohoarc; t=1793250499;
  h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=UNtHOpM/Ts/uX4+79n/o+GajIk93EldsGW8P1GKx8Ak=; 
- b=Ry3WCKJHUoAbEfUydEb5TyntAEzl1K5S2+M6fsOAT48Obbsav/9zQLeE5+1i5QQl0OZNSmV1imVBooZ0PGjfvoTN8uQPs4G9qKjBwEd+cFXQu5fdamrr9EYAJBN4fcJ0eHMavA/EL8MCvOaMIQhG4++u+kPu2lcpjnucyA5nyVs=
+ bh=sbgF7+Pns7F77tVPpxMJ37RO9bTDAekap75eVx9+MzQ=; 
+ b=UlguwfpNvMbabrMzA3NR0ZwbGZqlm+EFQ00zSqfi9xrNu1JuZbELXOSx7MGCQ7wgm+JDW0v1ffK8nx+R9VisvCYG5Oheh0VBgg+kLjhL630rXP2Kzcesucy2knrrMm6UfHM4BTtrQ98kQDZ3VFM8kNgrc+Fqpj9wam16E+V5Vcs=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
 DKIM-Signature: a=rsa-sha256;
- b=B6ZgQ5+j8bV0k3TQ1xH5zWG/nQ8phurTtptlcqmWIpGQz3XL7e1tejkY/XJC7uDkb5/pC98cGpp3je6GdR3udMdS+gnTcMT9LqvCWYSokRpgrMf/hx5y042o0CIstggqJIQh42GfKs61qMfmNpsSmq9A2zopccp7Dsg8DKH9OM0=;
+ b=NuxcH1x3+SldKZxWoerdp3S0GYLNKvyib5pD6Wn9LXIGLZ9/joGEsuXVscCorrgsGuoo5EYgOq4K0Fa10JCF1BaQV7/m7cCEayaHeuEo7+WpTfF0l8OvLwOT0Yvc4ifnMCC/D38J0tyUj08wB9p7nPm/d75iMKVcGdHL/sgf2HA=;
  c=relaxed/relaxed; s=zmail; d=ziyao.cc; v=1;
- bh=UNtHOpM/Ts/uX4+79n/o+GajIk93EldsGW8P1GKx8Ak=;
+ bh=sbgF7+Pns7F77tVPpxMJ37RO9bTDAekap75eVx9+MzQ=;
  h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1793250495791552.8151467287227;
- Wed, 28 Oct 2026 22:08:15 -0700 (PDT)
+Received: by smtp.zohomail.com with SMTPS id 1793250497779608.8881312852566;
+ Wed, 28 Oct 2026 22:08:17 -0700 (PDT)
 From: Yao Zi <me@ziyao.cc>
 To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  u-boot@lists.u-boot-project.org
-Cc: Yao Zi <me@ziyao.cc>
-Subject: [PATCH v6 03/20] image: Take entry point as an output of booti_setup
-Date: Thu, 29 Oct 2026 05:07:20 +0000
-Message-ID: <20261029050738.1107663-4-me@ziyao.cc>
+Cc: Yao Zi <me@ziyao.cc>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH v6 04/20] elf: Define LoongArch bits
+Date: Thu, 29 Oct 2026 05:07:21 +0000
+Message-ID: <20261029050738.1107663-5-me@ziyao.cc>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261029050738.1107663-1-me@ziyao.cc>
 References: <20261029050738.1107663-1-me@ziyao.cc>
@@ -157,209 +156,60 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
 
-For LoongArch, the start of the image is not the entry point. Refactor
-the code base to allow entry point to be supplied by booti_setup().
-Also update the kerneldoc comment for booti_setup() to reflect the
-latest argument lists.
+They all come from glibc's elf.h
 
-Link: https://www.kernel.org/doc/html/v7.2/arch/loongarch/booting.html#header-of-linux-loongarch-kernel-images
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Signed-off-by: Yao Zi <me@ziyao.cc>
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changed from v5
-- Re-title, change "setup_boot" to "booti_setup"
+No changes since v5
 
-No changes since v4
+Changed since v4
+- Add back the accidentally-removed EM_NUM
 
-Changed from v3
-- Collect Tom's review tags
+No changes since v3
 
 Changed from v2
-- Improve commit message, attach a link to documentation of LoongArch
-  kernel image format
-- Update kerneldoc comment for booti_setup()
+- Collect tags
+- Drop a redundant blank line between /* Version */ comment and
+  EM_LOONGARCH definition
 
 Changed from v1
-- Correct type of "entry" argument for RISC-V and sandbox
+- Re-title to "elf: Define LoongArch bits" (with the semicolon)
+- No function changes involved
 ---
- arch/arm/lib/image.c     | 3 ++-
- arch/riscv/lib/image.c   | 4 +++-
- arch/sandbox/lib/bootm.c | 2 +-
- boot/bootm.c             | 5 +++--
- cmd/booti.c              | 5 +++--
- common/spl/spl.c         | 9 +++++----
- include/image.h          | 7 ++++---
- 7 files changed, 21 insertions(+), 14 deletions(-)
+ include/elf.h | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/lib/image.c b/arch/arm/lib/image.c
-index 2268661de93a..62c28b8310a5 100644
---- a/arch/arm/lib/image.c
-+++ b/arch/arm/lib/image.c
-@@ -29,7 +29,7 @@ struct Image_header {
- };
+diff --git a/include/elf.h b/include/elf.h
+index b88e6cf4032b..23157f5d6b4c 100644
+--- a/include/elf.h
++++ b/include/elf.h
+@@ -225,7 +225,8 @@ typedef struct {
+ #define EM_MN10300	89		/* Matsushita MN10200 */
+ #define EM_MN10200	90		/* Matsushita MN10200 */
+ #define EM_PJ		91		/* picoJava */
+-#define EM_NUM		92		/* number of machine types */
++#define EM_LOONGARCH	258		/* LoongArch */
++#define EM_NUM		259
  
- int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
--		bool force_reloc)
-+		ulong *entry, bool force_reloc)
- {
- 	struct Image_header *ih;
- 	uint64_t dst;
-@@ -72,6 +72,7 @@ int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
- 		dst = gd->dram[0].start;
+ /* Version */
+ #define EV_NONE		0		/* Invalid */
+@@ -705,6 +706,12 @@ unsigned long elf_hash(const unsigned char *name);
+ #define R_RISCV_64		2
+ #define R_RISCV_RELATIVE	3
  
- 	*relocated_addr = ALIGN(dst, SZ_2M) + text_offset;
-+	*entry = *relocated_addr;
- 
- 	unmap_sysmem(ih);
- 
-diff --git a/arch/riscv/lib/image.c b/arch/riscv/lib/image.c
-index a82f48e9a505..300be365ddfd 100644
---- a/arch/riscv/lib/image.c
-+++ b/arch/riscv/lib/image.c
-@@ -33,7 +33,7 @@ struct linux_image_h {
- };
- 
- int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
--		bool force_reloc)
-+		ulong *entry, bool force_reloc)
- {
- 	struct linux_image_h *lhdr;
- 
-@@ -56,6 +56,8 @@ int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
- 		*relocated_addr = image;
- 	}
- 
-+	*entry = *relocated_addr;
++/* LoongArch Relocations */
++#define R_LARCH_NONE				0
++#define R_LARCH_32				1
++#define R_LARCH_64				2
++#define R_LARCH_RELATIVE			3
 +
- 	unmap_sysmem(lhdr);
- 
- 	return 0;
-diff --git a/arch/sandbox/lib/bootm.c b/arch/sandbox/lib/bootm.c
-index 7a5f6f7d36ed..1a41c7c2735b 100644
---- a/arch/sandbox/lib/bootm.c
-+++ b/arch/sandbox/lib/bootm.c
-@@ -84,7 +84,7 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
- 
- /* used for testing 'booti' command */
- int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
--		bool force_reloc)
-+		ulong *entry, bool force_reloc)
- {
- 	log_err("Booting is not supported on the sandbox.\n");
- 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index b2214ad9c4c3..f91036cd9b31 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -888,9 +888,10 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 	    images->os.os == IH_OS_LINUX) {
- 		ulong relocated_addr;
- 		ulong image_size;
-+		ulong entry;
- 		int ret;
- 
--		ret = booti_setup(load, &relocated_addr, &image_size, false);
-+		ret = booti_setup(load, &relocated_addr, &image_size, &entry, false);
- 		if (ret) {
- 			printf("Failed to prep arm64 kernel (err=%d)\n", ret);
- 			return BOOTM_ERR_RESET;
-@@ -904,7 +905,7 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 			memmove((void *)relocated_addr, load_buf, image_size);
- 		}
- 
--		images->ep = relocated_addr;
-+		images->ep = entry;
- 		images->os.start = relocated_addr;
- 		images->os.end = relocated_addr + image_size;
- 	}
-diff --git a/cmd/booti.c b/cmd/booti.c
-index e6f67d6e1368..24c55ff92a27 100644
---- a/cmd/booti.c
-+++ b/cmd/booti.c
-@@ -27,6 +27,7 @@ static int booti_start(struct bootm_info *bmi)
- 	ulong ld;
- 	ulong relocated_addr;
- 	ulong image_size;
-+	ulong entry;
- 	uint8_t *temp;
- 	ulong dest;
- 	ulong dest_end;
-@@ -74,7 +75,7 @@ static int booti_start(struct bootm_info *bmi)
- 	}
- 	unmap_sysmem((void *)ld);
- 
--	ret = booti_setup(ld, &relocated_addr, &image_size, false);
-+	ret = booti_setup(ld, &relocated_addr, &image_size, &entry, false);
- 	if (ret)
- 		return 1;
- 
-@@ -85,7 +86,7 @@ static int booti_start(struct bootm_info *bmi)
- 		memmove((void *)relocated_addr, (void *)ld, image_size);
- 	}
- 
--	images->ep = relocated_addr;
-+	images->ep = entry;
- 	images->os.start = relocated_addr;
- 	images->os.end = relocated_addr + image_size;
- 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 6c9a1a1cbcc3..3856aafbca9a 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -115,7 +115,8 @@ int __weak bootz_setup(ulong image, ulong *start, ulong *end)
- 	 return 1;
- }
- 
--int __weak booti_setup(ulong image, ulong *relocated_addr, ulong *size, bool force_reloc)
-+int __weak booti_setup(ulong image, ulong *relocated_addr, ulong *size,
-+		       ulong *entry, bool force_reloc)
- {
- 	 return 1;
- }
-@@ -342,13 +343,13 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
- 	}
- 
- 	if (IS_ENABLED(CONFIG_SPL_OS_BOOT) && IS_ENABLED(CONFIG_SPL_BOOTI)) {
--		ulong start, size;
-+		ulong start, size, entry;
- 
--		if (!booti_setup((ulong)header, &start, &size, 0)) {
-+		if (!booti_setup((ulong)header, &start, &size, &entry, 0)) {
- 			spl_image->name = "Linux";
- 			spl_image->os = IH_OS_LINUX;
- 			spl_image->load_addr = start;
--			spl_image->entry_point = start;
-+			spl_image->entry_point = entry;
- 			spl_image->size = size;
- 			debug(PHASE_PROMPT
- 			      "payload Image, load addr: 0x%lx size: %d\n",
-diff --git a/include/image.h b/include/image.h
-index 5248ca98d411..09cae96b2a8d 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1128,16 +1128,17 @@ int image_setup_linux(struct bootm_headers *images);
- int bootz_setup(ulong image, ulong *start, ulong *end);
- 
- /**
-- * Return the correct start address and size of a Linux aarch64 Image.
-+ * Return the correct start address and size of a Linux Image.
-  *
-  * @image: Address of image
-- * @start: Returns start address of image
-+ * @relocated_addr: Returns start address of image
-  * @size : Returns size image
-+ * @entry: Returns entry point of image
-  * @force_reloc: Ignore image->ep field, always place image to RAM start
-  * Return: 0 if OK, 1 if the image was not recognised
-  */
- int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
--		bool force_reloc);
-+		ulong *entry, bool force_reloc);
- 
- /*******************************************************************/
- /* New uImage format specific code (prefixed with fit_) */
+ #ifndef __ASSEMBLY__
+ unsigned long bootelf_exec(ulong (*entry)(int, char * const[]),
+ 			   int argc, char *const argv[]);
 -- 
 2.56.0
 
