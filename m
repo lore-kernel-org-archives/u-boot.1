@@ -2,134 +2,131 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01B09606A332
-	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 10:05:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B603606A327
+	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 10:05:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=tmr4yeon;
-	dkim=temperror header.d=siemens.com header.i=ludwig.nussel@siemens.com header.a=rsa-sha256 header.s=fm2 header.b=dGUOWqW2
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=HY5sMraV;
+	dkim=pass (2048-bit key, unprotected) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.a=rsa-sha256 header.s=fm2 header.b=kqyqcs1j
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A0E364053D;
-	Thu, 29 Oct 2026 10:05:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B6ABD40735;
+	Thu, 29 Oct 2026 10:05:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id m0CVMFDhyzkz; Thu, 29 Oct 2026 10:05:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C57F240543
+ id emjQ5yO-p4cz; Thu, 29 Oct 2026 10:05:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0950C40775
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793268307;
-	b=a4meb8hYdMZBcsuWZTdRPKx9He5crs0uE+TLtCz4K2o5EMLi+KcmJQsJflWiDwdbI5T3
-	 yShrIlk4ojCYZFLFJDFJxTEBDS9uW+aWeh1hFgbYuakWrEXATPTENuRKmAOPLUzE0r3/K
-	 PIJlDlfVSnUQOW6UzbhYdKrz+AStnbwYxC8tXvoN+4Qp1SvP0FoUQxME/4aRpdS0LGanx
-	 oJfHHrtQKIzUX/9Fi/6sNwGhG4ZJSzoaA6nKxzROkBQjw6/d4VqsmZH5v0wmCR3vznwV5
-	 ouNEEXSojv4jnDVBYk01Zjghyi47AbA8k+gaOBJ14uLii006s1bkv+jxxy6ZKCWdSRQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793268311;
+	b=kTXkzjwzNjzfgT+YMrd4XKVTmZHSh5COnkce9pVHq+/3mathDCbIzujIBEFyJocGKLad
+	 U/v8uV9yaorHJRRQyUY7Css2AxuTl4Rt/w5zWmvSRGZ2U4L0nj0M53mtfUNxeQW4QVrsu
+	 QnckjICJUdd2hBodGoMSly+1LSWVLBbVz/nUuL6HnqlgKXGckl5pM1AvLO49hosLKm/pG
+	 qAjoKj63YP+MLAvGTfwkJzmAJUx0N4j9dT7E1b+vY9B1p57aI9WpHijfbIQiEC/Opll/q
+	 lymC49LU7cChUSFKPMxcc6da7JmRYxFabc1vSSppgKzE2GcU4mAMhLkjC4WyIjS6Svw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793268307;
+	c=relaxed/relaxed; t=1793268311;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:MIME-Version:
-	 Content-Transfer-Encoding:X-Flowmailer-Platform:Feedback-ID:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=q+N4SkT0W5c+4pZl8gwKMBq22A4PPKYhhqjmV46cBRE=;
-	b=h7IV5WpxMxnhmgpEPNef5y+uAHLR36aM7TRmkEhq8R1t0bJzcdTDx3qSTKI46FUjzgyh
-	 PjNF7ZWg6I1dud4t/YuaqMnVj+ryE1kTRnYboQvk+A4eZAB3J3cM/PZ5g5CaRzcFy6rxi
-	 z82jXisyzQKo25bn1Nd3ybIFvzPpz12DquBvSGjIw/fqPuHo11sP8Klcgea7X6FHtLfaC
-	 mX6NU8P+H6thuq5wx+9FlVpYAa5Y+8UY1JWtYHBXEozCkfVQWYY1UjU27Oh/J/EJ3QtSK
-	 Ce8GgEmVLqOShiJ6iSKm5jjPPnuT5TTRFjlcPOYi2viKOMrAzGHKQY0W8oJM+qN6e9w==
+	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:In-Reply-To:
+	 References:MIME-Version:Content-Transfer-Encoding:
+	 X-Flowmailer-Platform:Feedback-ID:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=/mjSAG7FfxXr94Nc/5mjzDI9tmaoX7hWq0Fdk8OcwXg=;
+	b=lqwkSf5ysnS0Se2bemi4xPgX8sh+HwRSuubuH5/irfhIJHPaNP6nLlWEnYRQiJuPe10P
+	 HrkTOj+wWLOVKWaZOchKhINz/yLXci+m9bz5G7wRnWAqI47jnDoXggsY1gKqfFjZ5ir9d
+	 uNRFU8wXx3OV4O2bmCyqFcxpiDrjmA+TUqUtQJdPbjH5/rVP94THThekORoffbOEvnVxh
+	 W7Gb1ujHPNUB0ZhkmsuVsTmyHWwmMiB7V58Wn6op4bzzkwbUnqVzZEX2UTmvH0XV7vVRW
+	 /ctfKJmHVeDSGctlDjoQfKHng5lubJd8xK9cfvrkSGEzFpL93c4qOdom+GObz9BACsA==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793268307;
-	bh=q+N4SkT0W5c+4pZl8gwKMBq22A4PPKYhhqjmV46cBRE=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=tmr4yeonY5xZqgRpsqCps41VZ1hcakC0tGPvmvSbcup7RYOLFvLLg55fFBxqxVaAD
-	 34lhugWerdbcm+avAAVwgY55CLtiS/grBPgLeYP6g+XIT6wpcF+0AeLw1bBJrk1prs
-	 cwhpvJPogJAcXo8fPJZSvxe2CmXeOuxVOnxctxVtpgWFIUfr2PwfIl1wdI0tSm5SLv
-	 hGhc1mHRAdYI4qpEgk3EQ+t4l3Ka5C0EhR19JSTQLz9CrJ7POeVSYwEXPkmK09AhGb
-	 3PKgGlyTUHjOgVo/MvlEVSY0YObnf9Xkzh3P19G32MMR/tuUul182+mMLwMqdH6wC9
-	 mex/6qRwMWeiQ==
+	d=lists.u-boot-project.org; s=default; t=1793268311;
+	bh=/mjSAG7FfxXr94Nc/5mjzDI9tmaoX7hWq0Fdk8OcwXg=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=HY5sMraV0vYNrQ8G59WSGTbnKMw2ixsITuR3AXLh6CK7IUhDHhk5SZSPxADzR6EIA
+	 kOUNy3WkWv3SNf75zwBZdhkKCy8RNfKCMWtJo9jaoKh8e2lfYHJJZrvU0jBDC86X7d
+	 cJL7JL8YMyvbRBC1nYqVUoXSptvIqUzhMG0BlGr7VkFvuDoS75m+VmCJwPci8w0W+P
+	 FKiJcOrVHpwz9EXylC7E9nhPBdrNLhhVTZZdIMGASM7Dfc3EufidpVEOiv0015Jpax
+	 nW8zsszokWGc5fryt9Z8xfAi++KpbywbXd1koye5DDSmxWw1uODVQgMgb8PphpUXT/
+	 zYG2Bugoo0Kaw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C57F240543;
-	Thu, 29 Oct 2026 10:05:07 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 8729A972
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0950C40775;
+	Thu, 29 Oct 2026 10:05:11 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id CA9C4380
  for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 10:05:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 78A73606D9
+ by smtp3.osuosl.org (Postfix) with ESMTP id BC8EA60677
  for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 10:05:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EE84Md5LKnIz for <u-boot@lists.u-boot-project.org>;
- Thu, 29 Oct 2026 10:05:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5EB5860677
+ id ldY0YNrUJcB7 for <u-boot@lists.u-boot-project.org>;
+ Thu, 29 Oct 2026 10:05:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DB69A6069F
 Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip=185.136.64.228
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793268305;
- b=beD4KE/Hnlam41MjCoqvY8rREa1XK4uTh9KB1e8RJzG8NlEE6mxaGdLx34BW8qLWg3Ip
- 1mXkccB21xfho8GG4rn1EdOI9GWbF4F4zXQQbY5Dj0Kt9tIKgdJCXDX3NkmeY5o+NZVxX
- zr2Mme49rjgaxolgZV0ztuE3InCrXfUPE3TcduukqFT6qOzLewA6PtU4g3NPKLFqOysut
- w8jGqWr6kWfzabIaXdtzp/ZAxX1eQpdIoOrKkYd5md2JOrR4zZ9XHvNoTArECxGVINK00
- jFL8zxp/VuzgyXqoyQeiJr2GDWmXo65i3SoFVmf/g3SDjaGJPQXl3fPj7D/hJnfqoPQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793268306;
+ b=Hx+HymmFKrz8HP672PjqeW2NcNKKbdnce86DiG1Wgpyn5zuZl4vDD7bR4KNBtkQudprr
+ 7XwaifOelXFV8ysqeiO/Lw/93BHpVydvHb+AjvQUKWJWNPwQ50PvYB3cQdY6O+rLV2hkb
+ 1YOMFPiornyHMOT/7r4Q6QmEGyhDF72qP+70HfBKzMsgLKZKJh+SbQLLK/hrWhmc8B4hK
+ H7QZlUy3VPZNynoHkoE1gVLYjQ8QapMjv8EuKT4eL6eel2m3PAow8c/xeMRMFHWHyBfEp
+ 8HmF1sEA+wbZRQdkYpRWSkRykLrA4QhUrzt00xfKqzTqjXkBnjcoqHCRFOjcdu9z3hg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793268305;
+ c=relaxed/relaxed; t=1793268306;
  h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
- Message-ID:MIME-Version:Content-Transfer-Encoding:
- X-Flowmailer-Platform:Feedback-ID;
- bh=q+N4SkT0W5c+4pZl8gwKMBq22A4PPKYhhqjmV46cBRE=;
- b=QLTAA2CrnwGg8LJ3bx2O0Xl3FS2c5rwEWZdb9JL2BYfXtZJ8JNBET9RyXkZOPSQH7n9n
- Z5CGbIOHqO29zqmIOkXqLAjM/yRUn3A2DivK5Xomo5PJAEgBNbruuulTYjVvYS/Gnv928
- s33UHVEDCgo6KdOHMRfc1Bm79bNqCVVYzABEt7oiq1oTPSc2e/dMQOElV27WW3QLbko6l
- Ov1CI7R9UKRgLNxcYGzDIQEwwuHt/ISObh6mKYnezX8R1KvG6ZdeyDJUkXEqO3BFcwDKq
- bleARMG5ZoUyi01LauFXuoEDhoQGfk0rdCs84JvbmPGxVtpBTDvXzCgxV3VxU++iviQ==
+ Message-ID:In-Reply-To:References:MIME-Version:
+ Content-Transfer-Encoding:X-Flowmailer-Platform:Feedback-ID;
+ bh=/mjSAG7FfxXr94Nc/5mjzDI9tmaoX7hWq0Fdk8OcwXg=;
+ b=GUStbSou6PNXFWYo646oxYx55fHuzyh/FcK1IKmbzAcIOVRRfnM5mxaisrQUnRK3wiWk
+ gIL6FisUdJ1ArMehT+5pmQoWTYsD/U0HQWDvl62DHbdrMlaH57fGXVmzHDwGYj6POPDZJ
+ TfmburKDWWXRBqUWmnQ3XHVKk9nbJGEAOkBpYM1FAoGxStx8/wRRopjer58IHEF8VSCTD
+ ibHW4Z+HR5QWv5K3+wzXaGId1dfQ1Wd71L/34ru7DgVx3Zo35DNWwODXrOurEGxjUAlS1
+ x73rc+JnXBOY/zIGqQOEtFvZ4q+Hjrx++kGpc1Ian9/IQfd1dl5BtTwZhgAUFnqa/2A==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=siemens.com;
  dkim=pass header.d=siemens.com header.i=ludwig.nussel@siemens.com
- header.a=rsa-sha256 header.s=fm2 header.b=dGUOWqW2; 
+ header.a=rsa-sha256 header.s=fm2 header.b=kqyqcs1j; 
  arc=none smtp.remote-ip=185.136.64.228
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.136.64.228;
  helo=mta-64-228.siemens.flowmailer.net;
- envelope-from=fm-1328817-20261029100459e97c7b378300020716-lhcxp5@rts-flowmailer.siemens.com;
+ envelope-from=fm-1328817-20261029100459b8e59d98b3000207fa-ygeujt@rts-flowmailer.siemens.com;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=siemens.com header.i=ludwig.nussel@siemens.com
- header.a=rsa-sha256 header.s=fm2 header.b=dGUOWqW2
+ header.a=rsa-sha256 header.s=fm2 header.b=kqyqcs1j
 Received: from mta-64-228.siemens.flowmailer.net
  (mta-64-228.siemens.flowmailer.net [185.136.64.228])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 5EB5860677
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 10:05:02 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id DB69A6069F
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 10:05:04 +0000 (UTC)
 Received: by mta-64-228.siemens.flowmailer.net with ESMTPSA id
- 20261029100459e97c7b378300020716
+ 20261029100459b8e59d98b3000207fa
  for <u-boot@lists.u-boot-project.org>;
- Thu, 29 Oct 2026 11:04:59 +0100
+ Thu, 29 Oct 2026 11:05:00 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
  d=siemens.com; i=ludwig.nussel@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=q+N4SkT0W5c+4pZl8gwKMBq22A4PPKYhhqjmV46cBRE=;
- b=dGUOWqW2Bp3aaDUmDr3N404q3ftjSuiBtP6Pa309xiM954oTiVDyE01eCzV80rst2p+95d
- BQEmcZSbkkloKtqyYV78xS5I81mcrXoKDofSkx+eQH8mNtzayElzRqwlvt+/VbApjK2f4MHj
- dQB1G/18qUM4kZFj9RCIl3+2K3WrrHCgWuMGoUvZzFeY/5JVXauzOoiesqH372Am577SLKSq
- jiMWIj0nkXDooiKDNNv+nJ5GBKHMDmXo2H34yoVgmanIkGhM9nOW3ARdh5DNHhqjo/PmIShS
- sk4U6F4qe+hm8Hb9swsWdpqYBc2idhpJ7lkeHlQPigRK6Mf9WPlSngiw==;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=/mjSAG7FfxXr94Nc/5mjzDI9tmaoX7hWq0Fdk8OcwXg=;
+ b=kqyqcs1j81lW7jDunz+9t+qtizxzeQba37hZu59kou3uE2DDRTivREwmp9hegxF4NuLkJj
+ ZiKc7hg0jf4EW5ZhgPkxSWpLLjMpb6lWyyFM0LbgmBadom/MyRaVKTFuM4uapEzfesY8S4Fe
+ VUIv2BMumJVxNpDdVBWevSYPiBlzxkUmHWMB7o9YQ+l+Ps7UZxQNlcElVeA87AJWJBFP99lr
+ 9VbDERDDMAo3Q5PWEFc4+oN9vT92qYJje6ZPzTTG1f8VF1lG/tqAn1HTSPkdr6fTs+vOnUmg
+ dx8ODhR0X5Bgka0R24kZtBTgS3cQy/IEbWRfyVHIT7dRjFlquuEs2vcw==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.u-boot-project.org
-Cc: Ludwig Nussel <ludwig.nussel@siemens.com>,
- Alexey Charkov <alchark@flipper.net>, Anton Ivanov <anton@binarly.io>,
- Aristo Chen <aristo.chen@canonical.com>,
- Daniel Golle <daniel@makrotopia.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- James Hilliard <james.hilliard1@gmail.com>,
- Johan Jonker <jbx6244@gmail.com>,
- Mehmet Fide <mehmet.fide@screeningeagle.com>, Randolph Sapp <rs@ti.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v11 0/6] Improve FIT signature handling
-Date: Thu, 29 Oct 2026 11:03:51 +0100
-Message-ID: <20261029100455.31820-1-ludwig.nussel@siemens.com>
+Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v11 1/6] mkimage: define log_err and log_info
+Date: Thu, 29 Oct 2026 11:03:52 +0100
+Message-ID: <20261029110356.v11.1.2405ba52fddd2e9ff1bbc24585e1e3140f660637@changeid>
+In-Reply-To: <20261029100455.31820-1-ludwig.nussel@siemens.com>
+References: <20261029100455.31820-1-ludwig.nussel@siemens.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -146,104 +143,66 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=ham autolearn_force=no
-	version=4.0.1
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This patch series tries to improve dealing with FIT
-(configuration-)signatures a bit:
-  - (optionally) enforce signatures so we can't accidentally boot
-    unsigned fit images. Quite an easy oversight, esp when qemu
-    previously didn't even use the built in DT.
-  - make iminfo verify configuration signatures, not just image hashes
+Define log_err and log_info centrally in mkimage.h so any file used in
+this context benefits from it.
 
-- I've dropped the qemu dt merging code for now as it conflicts with the
-  changes introduced in commit 68e65953400. Requires further discussion.
+This patch is in preparation for a change in image-fit-sig.c in the
+next patch.
 
-Verification run: https://github.com/u-boot/u-boot/pull/1054
+Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Changes in v11:
-- rebased on next (ed869863c7e)
-- removed qemu signature merging code
+---
 
-Changes in v10:
-- fix description referring to CONFIG_FIT_REQUIRE_CONFIG_SIGS
-- rebased on next (0a61439db5e)
-
-Changes in v9:
-- restore debug message instead of errro
-
-Changes in v7:
-- mention CONFIG_FIT_REQUIRE_CONFIG_SIGS in documentation
-
-Changes in v6:
-- move 'ret' declaration to top of block
-- Add missing return value documentation to run_fit_commands()
-- use f-strings for the refactored code
-- drop not needed length check for command list
-- remove superfluous blank line
-
-Changes in v5:
-- refactor ubman.config.buildconfig access
-- reword commit message to mention disabling of pre-load global
-  signature test
-- rely on inline dummy for fit_all_configurations_verify
-- use CONFIG_IS_ENABLED(FIT_SIGNATURE) to guard fit_all_configurations_verify
-- print warning if /configurations node is missing
-- print "OK\n" in fit_all_image_verify()
-- new patch
-- use helper function shared with bootm
-- introduce assert_fit()
+(no changes since v4)
 
 Changes in v4:
 - fix and reword comment
-- reword Kconfig help text
-- rename option to FIT_REQUIRE_CONFIG_SIGS
-- introduce SPL_FIT_REQUIRE_CONFIG_SIGS
-- test CONFIG_FIT_REQUIRE_CONFIG_SIGS in test_vboot
-- set CONFIG_FIT_REQUIRE_CONFIG_SIGS in sandbox_defconfig
-- fix documentation to use kdoc style
-- test iminfo in test_vboot
 
 Changes in v3:
 - make log_err use stdout too
-- clarify error message when no keys were found
-- change printfs to log_err
-- reword Kconfig
-- keep FIT_SIGNATURE_REQUIRED off by default
-- use log_err instead of printf in fit_config_verify_required_keys()
-- don't make iminfo fail unless FIT_SIGNATURE_REQUIRED is set
-- update fit_all_configurations_verify documentation
-- stub fit_all_configurations_verify unless FIT_SIGNATURES
 
-Changes in v2:
-- introduce FIT_SIGNATURE_REQUIRED
-- document fit_all_configurations_verify()
+ boot/image-pre-load.c | 3 ---
+ tools/mkimage.h       | 6 ++++++
+ 2 files changed, 6 insertions(+), 3 deletions(-)
 
-Ludwig Nussel (6):
-  mkimage: define log_err and log_info
-  image-fit-sig: Optionally require signatures
-  test: vboot: handle CONFIG_FIT_REQUIRE_CONFIG_SIGS in test_vboot
-  iminfo: also verify signatures
-  test: vboot: refactor run_bootm
-  test: vboot: add iminfo checks
-
- boot/Kconfig                     |  22 ++++
- boot/image-fit-sig.c             |  19 ++--
- boot/image-fit.c                 |  55 +++++++++-
- boot/image-pre-load.c            |   3 -
- cmd/bootm.c                      |  10 ++
- configs/sandbox_noinst_defconfig |   2 +
- doc/usage/fit/signature.rst      |  13 ++-
- include/image.h                  |   8 ++
- test/py/tests/test_vboot.py      | 171 ++++++++++++++++++++++++-------
- tools/mkimage.h                  |   6 ++
- 10 files changed, 259 insertions(+), 50 deletions(-)
-
+diff --git a/boot/image-pre-load.c b/boot/image-pre-load.c
+index 2f851ebb28c..cd319ddb777 100644
+--- a/boot/image-pre-load.c
++++ b/boot/image-pre-load.c
+@@ -35,9 +35,6 @@ ulong image_load_offset;
+  */
+ static struct image_sig_info *host_info;
+ 
+-#define log_info(fmt, args...)	printf(fmt, ##args)
+-#define log_err(fmt, args...)	printf(fmt, ##args)
+-
+ void image_pre_load_sig_set_info(struct image_sig_info *info)
+ {
+ 	host_info = info;
+diff --git a/tools/mkimage.h b/tools/mkimage.h
+index 5d6bcc9301a..d8d292a8098 100644
+--- a/tools/mkimage.h
++++ b/tools/mkimage.h
+@@ -31,6 +31,12 @@
+ #endif /* MKIMAGE_DEBUG */
+ 
+ #define log_debug(fmt, args...)	debug(fmt, ##args)
++#define log_info(fmt, args...)	printf(fmt, ##args)
++/*
++ * Use stdout rather than stderr so error messages stay
++ * interleaved with normal output in the order produced.
++ */
++#define log_err(fmt, args...)	printf(fmt, ##args)
+ 
+ static inline void *map_sysmem(ulong paddr, unsigned long len)
+ {
 -- 
 2.43.0
 
-base-commit: ed869863c7e2aca50d57a05d843830dd843138c4
-branch: us-qemu-signatures11
