@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93587606A31E
-	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 17:14:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4AD0606A31C
+	for <u-boot@archiver.kernel.org>; Thu, 29 Oct 2026 17:21:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=smNNiKBX;
-	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=s95uDlYk
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=J5LfYuzz;
+	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=O9J/z/aY
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5AA3E80E13;
-	Thu, 29 Oct 2026 17:14:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 11C7280FA6;
+	Thu, 29 Oct 2026 17:21:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tyT1d5dmiMjG; Thu, 29 Oct 2026 17:14:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A43B180F6E
+ id eL_33travdQe; Thu, 29 Oct 2026 17:21:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0F01A80F88
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793294081;
-	b=ljReVsq0DHwo0cYl6NSFtEYo7i1JBIhlGFMeefPY9P6TqiwA7MSMP1kl3cguvzX2N3sM
-	 76Hju+hFalaelhi9QYpYjbIPG/gozOVKkAvEhiHHKDSBlXd4S+UcMW6U0O/fF5t3bfNUW
-	 IHBp0jKSCvNYe0li2BWk5kYYRe1fjsULJDRsIjFF1vzvh5soVf6BGB46cz02wRH4YH0Gm
-	 W1UPppt3T5xObV+FsIlQdrv7SeOnjjwlvDdHqd5qOYVfB/An8ULKKQ1Gn7LdQua1Ao9CJ
-	 cSAtCQ7vRhlpOpxny1Su97dBWGDJRd6BBGxg7esABwQ8PvtWBd7j1gvUHw68US3gE2w==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793294472;
+	b=HjjqjNqMnsormwC5147/7lZ4fbNmvGo/KLTleqk5FAFK6NWV78ORH3vfqzhc458d6xhT
+	 z+pfw9NpVtAkfyxG2wKdz9jmlHkcdwH2SDHbs+VscUK3hwYFXpSCpg7tUWk7iiZ/4Uo0T
+	 HXuwg1v+EPR2aVgQO3DAT2iCnp4ov1WlnxiHY1l4xDm5AFgBPGZRa4Kr9UzRp/pwa2F2C
+	 KR9DANqWnKM0gamGNarsqB//tkSJvrnUZ1P5U1mBUJft5s2vHPqJ4EKe7X1Ym3xgaKM/a
+	 GGBp+xK8reeSz0MikQhKtTb+eU+Zx7RZKa+Wfxb7r8DHj1eRHL0Mifb7cdtS8BSPa1w==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793294081;
+	c=relaxed/relaxed; t=1793294472;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,130 +33,131 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=7RTc1dEm5cbr7blNGSpuykRryen48bY6ic5cAqoXCjQ=;
-	b=HJvz59i2LaUsxwFVdfoJkEoHmrLjCirLPACvewxSyiL9A7gAD+qB/6ZXEDsp31xQKQNN
-	 RZgSalK5JnbAkqPRRTqfHt1chmlvcKJ/sEOguQXF48V/HC0sl9P75hy1TxkkgVtHoDXft
-	 V1h0S+XkUIG32K8/S3LNYq+Nc3QFjHqC2L72UsdA43WAmfUCoocMMgPb4VKUFrk9hBrps
-	 duL/Dbe+dyp8H5A7z2H7HTt1IUY6gmHWj+9hxlZObN0Jhg1h+hxYwQEMbMU7rJo0S23SW
-	 T83bcKGsRZDBdkyntdTNIhl9KBZ4S0tLp/+WQaXotICksIXikJjRU8qn6F+XwyHgXCQ==
+	bh=vsHf//O8RQccaEe18l/eIWF7jqdp/knoDt5cWMVCVik=;
+	b=RcI5yYvtpMUtslaufaJUrTikpFEcFlzzcHrjbMEI38bbvq9NXxs6BWDnXftqz4Oavfh4
+	 hB49mEYXe8L7/o8Cee+pUX19xxvlSYmEsL007pDHCqTowgFtX//1tsOAS/9RRR17kALHh
+	 b6Xv3DNB6ba5NAYJ1in2SzeF9t3E2E4DCIAKIWAFH+91eYwo35lugaprdFL08Y3WD7KSv
+	 G9V66xqMwduP7eRC5sYJGQ1M0DVcihAgUIj9l1y+qJwnPs4ChgkswzedyIpcZwUjpwwIr
+	 tPhBLtUCDyQBIznAxVHT7uARdmX5Xt/R8FOUPU80doqrZKUqIooiuDnYW/ymcDtIAxg==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=konsulko.com;
+	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b="O9J/z/aY";
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793294081;
-	bh=7RTc1dEm5cbr7blNGSpuykRryen48bY6ic5cAqoXCjQ=;
+	d=lists.u-boot-project.org; s=default; t=1793294472;
+	bh=vsHf//O8RQccaEe18l/eIWF7jqdp/knoDt5cWMVCVik=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=smNNiKBX9sfyTqZxfeZadDc3skaYFjslJswscKmps9KMMFZYBbbmLWPZLsw+SKdNj
-	 Fe+b1oBVTjSythknniM7AeKiz2GY+2++yzQvFF2MUIdgxS8bV0oijOUKMvHpSDvq+E
-	 eS3J9wTJOuRMsYH7ukurm+PD/ebuzw1Vw4Q4p9ic9KqM/dz4atcdutyoD1H/cNxeuU
-	 gGVO4ptTFs5RBSorsQa8y3yGivQ27y+ZXoz/ExUVjY04t5yQHRRcmGfQNZm6XQe3K4
-	 JW/ZcZV8W1bP9bzBd0WOukSSh8m705cJXQHOh/qzNRvbfVUF6kZFgY9Ps1PtZ4+6Cq
-	 AoOOwulE01J4w==
+	b=J5LfYuzzNepoFjTQkfsGnQzsgZQb/x1X6MKgMAIsue/z7BFP9lIHH9KydNs1e9yXe
+	 Odo5KkjEXO5ZQ+LSYUQrlPemWYWyPKKrsXkfBNMgTt06rNidsK0RHouBd8Ao5D9UPB
+	 Mq7VhKBayPQgEeNaxN0K3gc7iSdyEets/6Oj7k7yiWsalhmCw73KXHcOLkjlGlLiya
+	 Mg7Dt+8IbAsjRMyH2+x8EHt6LIniHwZYVrZvEo12WN8MSeRwKw6aJJr+7TgSGO95p8
+	 sPDiQVFGH5JDYtowwDBRV+d04DO1X7YmSCaXObLduMaGVAeuC7TXjdu8BvELNwRUdH
+	 f+kKDtZ5NdMMA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A43B180F6E;
-	Thu, 29 Oct 2026 17:14:41 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id EF2AE972
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 17:14:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0F01A80F88;
+	Thu, 29 Oct 2026 17:21:12 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 48B182FE
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 17:21:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D54C340A59
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 17:14:40 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3A73B80F7B
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 17:21:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id i9NJkXoplWYe for <u-boot@lists.u-boot-project.org>;
- Thu, 29 Oct 2026 17:14:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 29D6F40A58
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2001:4860:4864:20::2a"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793294080;
- b=g2kxk91whd5tl+vVEwktfZ0VUkKebgvUaTTVdM74LZaPA6DTA3kkHa8hkVV7bAheYTaO
- TOYMJol3Ble2+M/brlAukmuqjrssaICL9xrN8cXVqEXp2/qvRZ8cHLu/iiI+GHkdKA63u
- 4NtHZsdA0klefsiu7Dexij1iErXo2jtm8HrRA2Ln3nKBUW6zZt+4ZZG4baY/wtKg51H32
- MghAu14SkFhBMXnrSYwg4qYgPd0SaXo9Rv+jrVDOMY6jmLHACjYn0QCd4g1a4sMrm3bks
- Yvy1zvnsET+OuXaGJ7vbrUFII8cAYyM+PQz7y1MdQOfMbvKGeXG+MON3to5zJZRKErg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5gsZAxk60nEB for <u-boot@lists.u-boot-project.org>;
+ Thu, 29 Oct 2026 17:21:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6429F80F6E
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::22c"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793294470;
+ b=nL8aqAfK0y8mWpN78WRpPrFsow/BMxe4FSD/yTgu6hfuEvEBmSGGzHvqOEq2RMrDaF6l
+ S6msMablSUAuLFMvUu2m9KUFDj8Ie8ey+kjL6ALd5AJvwZU0xmviTT6fGzqoisEGPLsyY
+ HA10E/HBuBCE/ILqKD5I70Av/lBsKcxU52KL0UVs2QW8RqtwOV40aiA7ly+5c2M9mv7lv
+ kx0dRTDZ/sRolbQgB9wxjcqIS7lRskw6Qhuxsa17km4kQFPGPTrXSVI11jEjMkWNQFKHg
+ x7afk9EDSI+6PqwfuiuCpMhsowZL2iQfOTkgD75xdff3DRM1N2bSEToliLjHmQwTUhQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793294080;
+ c=relaxed/relaxed; t=1793294470;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
  Content-Type:Content-Disposition:In-Reply-To:X-Clacks-Overhead;
- bh=7RTc1dEm5cbr7blNGSpuykRryen48bY6ic5cAqoXCjQ=;
- b=beb7TP83h33SVSC+nq6FLg9VvwBGHea1j3on6Cc8e56QvuA5pt00j5aEy/sbTQei8jdE
- i1y/gjk1FeYmNp9TmtGRKcEVUdNWieAzRU4qE13+nIDoFkcZ8SbB8CZNyiE0fpv1rLYFm
- 4G1hYV7Vmjh7T+HdQyYwMVFMkw9XblIXjjpDa5DsILPtjPsed+PPANwO98131Zzui5E5s
- FXxwz9qn3G5UwQ6I3CBRG3A3ZBEAZZHpd9Msra2SXGcHRhvVXk48RMhelO0S1hGujVCJQ
- L/wGXOe8UJHcUOIPxD5QOn7LBfJ/udABq5i2nkC7ZPI0bQkxLX7xIVgV6vCNex9kU1w==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=vsHf//O8RQccaEe18l/eIWF7jqdp/knoDt5cWMVCVik=;
+ b=oxTGi1SZ1xofdRIW3IcqmsdENZeJxr7FNMDqOsWz50uY5H7xaE33ODFQ4Z44NRWrVNgi
+ RaHUoTvqDT7FCjPrejhkbuqMTrlVJeh4RZJajZrW2JlKdbQmfAvXzjn6pedcBpYXrHIgX
+ ZWovRFGuJ3wNSQbQuMHGRmQHXzlGY0jRpEZas2Fm9P+BXd/9x3AAzqlxnNq94WhY+gb0Q
+ 4JmeDYNmqAIM0ew+Dmj9DgfbI3JRBTWCl47CMvhRTdKDgyopspTwHUxXiEbuRCauaXnYK
+ YW/Vzzn9DJiWTWMFcVFPVjxzF4Uth2VN3fkzOd/zLDqNza/ZwL01grJioIZOxhjBd6w==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=konsulko.com;
  dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=s95uDlYk; 
- arc=none smtp.remote-ip="2001:4860:4864:20::2a"
+ header.s=google header.b="O9J/z/aY"; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::22c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::2a; helo=mail-oa1-x2a.google.com;
+ client-ip=2607:f8b0:4864:20::22c; helo=mail-oi1-x22c.google.com;
  envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=s95uDlYk
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 29D6F40A58
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 17:14:39 +0000 (UTC)
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-483c607ccb4so1314024fac.0
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 10:14:39 -0700 (PDT)
+ header.s=google header.b=O9J/z/aY
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6429F80F6E
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 17:21:09 +0000 (UTC)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-5326cdde017so766978b6e.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 10:21:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1793294078; x=1793898878;
+ d=konsulko.com; s=google; t=1793294469; x=1793899269;
  darn=lists.u-boot-project.org; 
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=7RTc1dEm5cbr7blNGSpuykRryen48bY6ic5cAqoXCjQ=;
- b=s95uDlYkDF901mn2nO9iLvWW29g2kTXLXcl2e0oK+eyWxn/UBfjgN8M6bP7SMK+yKg
- AS+mjp8omlevR2U54gMov7GuEMgA7gUteozwsR4NtHrSrpEuSf9b69zXGjdymeCcgsr4
- swR+fFv/0lh5fRtQ4x6NVEa1zlL0OsKBC8VTo=
+ bh=vsHf//O8RQccaEe18l/eIWF7jqdp/knoDt5cWMVCVik=;
+ b=O9J/z/aYLEFM4G5Ym7TJtUPV2eFqB28tbopJwhrLhCkThDMXZfGVHd7NR6MeNRbh/9
+ cgJlJBQE5nQcuho54EYpipJ5657ToE4p4LhkEEZZHG9JxaJwxKuD+n5UNVldfNWRscXl
+ D3gXeni4ByWE4u8KCcjp2Puf7jW8Tv5SAoeqA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793294078; x=1793898878;
+ d=1e100.net; s=20260707; t=1793294469; x=1793899269;
  h=in-reply-to:content-disposition:content-type:mime-version
  :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=7RTc1dEm5cbr7blNGSpuykRryen48bY6ic5cAqoXCjQ=;
- b=agsf1+UXAwyIN9Wyc/hMtZUBjSFNhN+VClchBnpg2vTqUhOM0CgY/9zKTraNxBwxUU
- B86TvPnWqNy/6tj2N3gFOKmF87DvD/43p1LMqVN8CVO6h9a4n80l/r5SYy13Ts6SfMtj
- BmgahKIuLf5schHsJE52g12Mxgx30bZLFK1xizW25TTyJlY4MxOGaBrkDpagSb4HjnxS
- zxrSg5GBVApFVIAhT4ET9x3bIBFPr0s/85+KJaX5uYXWs4b6udz4beHxuzqKW2HjVMox
- x0fHjwmDNdcWy0Bbd+OKcI7ECUxkTQ2NiCLUpd8aYorKHiXmxLkjOiyStLx4f3O8wOUp
- qslg==
+ bh=vsHf//O8RQccaEe18l/eIWF7jqdp/knoDt5cWMVCVik=;
+ b=tgi3Z2ikcqDuonRAODB1UVkSnvgoGBu4nmWD6wWoWSMC+k7SQ8b5RB8J3zeQnhgdIC
+ IzNAS9eM3VkMnkdUGcex5fBD/VT/oN/QJi/3TrYKzGT0pffQ82dqgL6GjkDKIhYqzEkK
+ YHKF+IqkLi/rI6x7cnWw2DwHSBn6X75OBsfvUK+XLX5zi6OnytEeH7v0Ks74GiiTCOl2
+ V6VIUU6j1xZw+u/w+M6TBqocKDZWENEOpRAAlPx0Pi4tu2956RgCUthKtRbXqVik50CY
+ zGxPU+9syiBsSZWSSjvAs3QuSwXAMm6QsgiQ95kw+cJv28KbLbtAo3CnzBpyZNFXQIII
+ 9yVg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwlGhh89gxfFoBgr24IJGZvQWzKpy7pe41UM0hl1EWPMm8UvxuN7Kw7PGn6dHw6epx31dOJZ4M=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJrZitO43y5skU+L4wGcOodXd7i1uXuHWsPKqqC+gLcFzzUrr20
- 0xToh0vDcawGyQLS5djhQ93PhUxMWlQF9Q4QIhJxSbwQQvhA/RanPu3KeQYafYsa9XXvJVnYz4j
- gz8ZgkhRpEFgO
-X-Gm-Gg: AYBFou340H3XUTE7G+bEImbfqv+xaC4xtpgFsOJP4nWNt3sRp5boLByR/KgR+jCMIL7
- lA0Z7C0Czy/tP5QlICR/WYg699yMSem3szYNofEy0aZltAvlALU/YLgOHswA/pVnimPqMmg+4TH
- xWhDJ3onihDahCX/wgbrcGf2KxsQEpBsZTJfB9cthEZuh4CkAgE7Mg1R90aiNvb1lbi4C/Q7Ka6
- DaIAYgwjzVTLcy59+SFuVk5wMeOByxbFhBXIlv/9/4CwdKjrGMcGxMmy42hm5P0NZDeFbIKIxDk
- nbtekXE9bRjj2Iz6wdhRzGC9StqK19UmjebAD37aP0Kt99FAkXDb+g/kmP7MgBVl0kzXhqkJV7X
- h8GYgpfHuhYXlQjN+H6qCyozcL1hM10OIhlnsS4ybAluX4FIhux2KECtxnYajEfccimX2bgW1gd
- gQJyyMH2q8sHD10PImU/MPpT5vP9BtkluECrYost3r1eVoEL8Qym9c3UQ1Ly7myqk3/Y1P8CHSO
- Rzzrz0EVlARWIcACGuL14qJFVTh8Ty5Q8X6yPNSWANM8wgBZmsfnuIr6i5BY0OJE6HeUdlc1N35
- NkdhLfsYrjjC/SYOlRtvBFh3Rkd6xTld1DB54wsyYrCmVNUOlnuJpKLWiPJQevbSauZOS3pQe5q
- gVSbgWxf8b8loru2kXCyzyDXXxqUQfcG6Ecnx/DRNaQQly24Xj2In5J1VvpBarA/pPzNk0ikp+s
- Y8XRo3OCvoO9nqqEoXc3YrtcRpdv4ztfYUFXX1cblNJa0QrSb4RcRM
-X-Received: by 2002:a05:6870:8242:b0:494:9268:70ca with SMTP id
- 586e51a60fabf-4a8bb691443mr4808436fac.43.1793294078581; 
- Thu, 29 Oct 2026 10:14:38 -0700 (PDT)
+ AKwUvBxliwgwksLYLalA+GzyRYVX6/decHk3u8gdK3WVmiESX/SJj8QzcN1dHi6R8oxeXxBm8JdxeUc=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJT0jpcqbS70TSkYXCubNtBRZXqZU3hRzMstWuOPR4atxOimdh9
+ hA3FbToALvUFepXOA/1IJ6JRqfu168Z1YWoOwPPjpko/CMAjLhRIWzIGCKWE4yNLuZE=
+X-Gm-Gg: AYBFou0rXtLEnVLSpX6dlgYiu/KHmRb8Am3ZPjpoFqDUfgV7hxQ3fQ7rm87/qr9SNrl
+ GNNtkyOizzvjd9haErYX3fkxfDm5vr6KUsyIvJ4jOmiOPDZiQHTSeao6m/mD15vxluuwpY2Nl/c
+ yL6klrORTTkFr30ehMtJiL4Rc4apZ7cCP2uNZpYpKEMgwY4Wbp7CjXsysTp5IdWohbDJCXRS+hI
+ jorzRo/YZ7lonLAnZ4IGJUjuJ7MfvmiXrP+jokjfTAZlB1+U/P82JxfhH5wg7NBw3ZjIRbiuslx
+ 65ZDxxzGssmSwoeI96Wtpp1hydYzq7hQ5mfJ+ymDHUeRftYsjyLWTF+JnpTmJ+vmrh/g6i4u1X3
+ sdlHPqJj8W0tAPPHAeEY6DK2tLptNbaVVg+rZXRn2CX+E9/SXxuigiTsNlzsnV6ZH1a1xGM9zri
+ UT9BlQjI5j0PvtyrrQvRjCLQORnB8+7AknPacf902BBB5qSSNdMnkWFyXCBPDdP+Z2wWKl726VP
+ 7QTZQLuok0K1exMVAt9i/e1QEkCkIdNWO9FZC+k8CiBZf77bxeagOpo1i+j/HcPKxWeoAxe5/lQ
+ e5kM/joqbzQ3XOqYgVTDFcZtHc3REcfcyL1RUQ4cgTBWnDXrQOs1bs45sq8f4bfIQ3R6e4yWNMk
+ /oS82f8e6OcZCAnXs0bRm2bdx60mG4PxzyLRY9Idl4y0A0Ue+zqdcaxtPxLkAbuqDX/2gdYP2iB
+ tpX5h0Vm8sRR/6uCmO2+mOVDxLINZ801w=
+X-Received: by 2002:a05:6808:1489:b0:540:5827:6d96 with SMTP id
+ 5614622812f47-5638267e67fmr4672254b6e.31.1793294468944; 
+ Thu, 29 Oct 2026 10:21:08 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
  [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4a904856efesm10668fac.6.2026.10.29.10.14.37
+ 586e51a60fabf-4a9049b27b7sm12478fac.13.2026.10.29.10.21.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Oct 2026 10:14:38 -0700 (PDT)
-Date: Thu, 29 Oct 2026 11:14:35 -0600
+ Thu, 29 Oct 2026 10:21:08 -0700 (PDT)
+Date: Thu, 29 Oct 2026 11:21:04 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Abhilash V <abhilash.v@oss.qualcomm.com>
 Cc: ilias.apalodimas@linaro.org, aswin.murugan@oss.qualcomm.com,
@@ -167,17 +168,17 @@ Cc: ilias.apalodimas@linaro.org, aswin.murugan@oss.qualcomm.com,
  varadarajan.narayanan@oss.qualcomm.com, nikroks@mainlining.org,
  balaji.selvanathan@oss.qualcomm.com, nathbappai@gmail.com,
  jbx6244@gmail.com, u-boot@lists.u-boot-project.org, u-boot-qcom@groups.io
-Subject: Re: [PATCH v5 09/13] arm: qcom: enable MMU and cache setup for
- Shikra SPL
-Message-ID: <20261029171435.GA3011578@bill-the-cat>
+Subject: Re: [PATCH v5 13/13] clk: qcom: build only selected clock drivers in
+ SPL
+Message-ID: <20261029172104.GB3011578@bill-the-cat>
 References: <20261029105746.3487456-1-abhilash.v@oss.qualcomm.com>
- <20261029105746.3487456-10-abhilash.v@oss.qualcomm.com>
+ <20261029105746.3487456-14-abhilash.v@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="k0kTrwpUIJx/tq+4"
+ protocol="application/pgp-signature"; boundary="z0mku3Y8KzcuX15/"
 Content-Disposition: inline
-In-Reply-To: <20261029105746.3487456-10-abhilash.v@oss.qualcomm.com>
+In-Reply-To: <20261029105746.3487456-14-abhilash.v@oss.qualcomm.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -188,64 +189,120 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 
---k0kTrwpUIJx/tq+4
+--z0mku3Y8KzcuX15/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 29, 2026 at 03:57:42AM -0700, Abhilash V wrote:
-
-> Use Shikra fixed pre-DDR memory map when enabling caches in
-> SPL. Allocate page tables from the early malloc-F heap and
-> select the board map through a common Qualcomm hook.
+On Thu, Oct 29, 2026 at 03:57:46AM -0700, Abhilash V wrote:
+> From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+>=20
+> Make Qualcomm clock-driver selection phase-aware so SPL builds only the
+> drivers it needs, reducing the SPL image size.
 >=20
 > Signed-off-by: Abhilash V <abhilash.v@oss.qualcomm.com>
-[snip]
-> +/*
-> + * SPL platforms whose pre-DRAM address map differs from the common Qual=
-comm
-> + * map may override this hook.
-> + */
-> +struct mm_region *__weak qcom_spl_mem_map(void)
-> +{
-> +	return NULL;
-> +}
-[snip]
-> @@ -192,7 +208,11 @@ void enable_caches(void)
+> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+> ---
+>  drivers/clk/qcom/Kconfig  | 208 ++++++++++++++++++++++++++++++++++++++
+>  drivers/clk/qcom/Makefile |  48 ++++-----
+>  2 files changed, 232 insertions(+), 24 deletions(-)
+>=20
+> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+> index aff3f5418a0..899f44cb8dc 100644
+> --- a/drivers/clk/qcom/Kconfig
+> +++ b/drivers/clk/qcom/Kconfig
+> @@ -5,6 +5,11 @@ config CLK_QCOM
+>  	depends on CLK && DM_RESET && POWER_DOMAIN
+>  	def_bool n
 > =20
->  	gd->arch.tlb_fillptr =3D tlb_addr;
-> =20
-> -	build_mem_map();
-> +	spl_mem_map =3D qcom_spl_mem_map();
-> +	if (spl_mem_map)
-> +		mem_map =3D spl_mem_map;
-> +	else
-> +		build_mem_map();
+> +config SPL_CLK_QCOM
+> +	bool
+> +	depends on SPL_CLK && SPL_DM_RESET && SPL_POWER_DOMAIN
+> +	def_bool n
 
-This is kind of odd. Which pre-requisite series brings this in? I wonder
-if a better abstraction would help, and if this is still the right way
-to go, the weak part should come in then.
+Are you sure you need the def_bool n? I see you're copying CLK_QCOM but
+I don't think that's needed either.
+
+> +
+>  menu "Qualcomm clock drivers"
+> =20
+>  config CLK_QCOM_APQ8016
+> @@ -15,6 +20,14 @@ config CLK_QCOM_APQ8016
+>  	  on the Snapdragon APQ8016 SoC. This driver supports the clocks
+>  	  and resets exposed by the GCC hardware block.
+> =20
+> +config SPL_CLK_QCOM_APQ8016
+> +	bool "Qualcomm APQ8016 GCC in SPL"
+> +	depends on SPL_CLK
+> +	select SPL_CLK_QCOM
+> +	help
+> +	  SPL variant of CLK_QCOM_APQ8016.
+> +	  See the help of CLK_QCOM_APQ8016 for details.
+> +
+>  config CLK_QCOM_APQ8096
+>  	bool "Qualcomm APQ8096 GCC"
+>  	select CLK_QCOM
+> @@ -23,6 +36,14 @@ config CLK_QCOM_APQ8096
+>  	  on the Snapdragon APQ8096 SoC. This driver supports the clocks
+>  	  and resets exposed by the GCC hardware block.
+> =20
+> +config SPL_CLK_QCOM_APQ8096
+> +	bool "Qualcomm APQ8096 GCC in SPL"
+> +	depends on SPL_CLK
+> +	select SPL_CLK_QCOM
+> +	help
+> +	  SPL variant of CLK_QCOM_APQ8096.
+> +	  See the help of CLK_QCOM_APQ8096 for details.
+> +
+>  config CLK_QCOM_IPQ4019
+>  	bool "Qualcomm IPQ4019 GCC"
+>  	select CLK_QCOM
+> @@ -206,6 +227,193 @@ config CLK_QCOM_X1E80100
+>  	  on the Snapdragon X1E80100 SoC. This driver supports the clocks
+>  	  and resets exposed by the GCC hardware block.
+> =20
+> +config SPL_CLK_QCOM_IPQ4019
+> +	bool "Qualcomm IPQ4019 GCC in SPL"
+> +	depends on SPL_CLK
+> +	select SPL_CLK_QCOM
+> +	help
+> +	  Enable the Qualcomm IPQ4019 Global Clock Controller in SPL.
+> +	  This includes only the clock driver needed during early boot.
+> +
+> +config SPL_CLK_QCOM_IPQ5210
+> +	bool "Qualcomm IPQ5210 GCC in SPL"
+> +	depends on SPL_CLK
+> +	select SPL_CLK_QCOM
+> +	help
+> +	  Enable the Qualcomm IPQ5210 Global Clock Controller in SPL.
+> +	  This includes only the clock driver needed during early boot.
+
+For readability you should keep these interspersed with the non-SPL
+variant. And since there's such a backlog, the right thing to have done
+would be to update what we have in drivers/clk/qcom/{Makefile,Kconfig}
+to have SPL variants, and then add each as you go. So lets step back and
+do that.
 
 --=20
 Tom
 
---k0kTrwpUIJx/tq+4
+--z0mku3Y8KzcuX15/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCauN+9wAKCRAr4qD1Cr/k
-CsRJAQCvMPZBV1crexe9NK9r75S8fLuZ+58gwfZ4t1HUjoTn+gD9FmbIINyNcqOH
-O07b+Ev1mG+e9BU33D+hSn6/QJXjggI=
-=fO/2
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCauOAgAAKCRAr4qD1Cr/k
+CnbjAQC0UGde+hyNOaXRh5V8zPZ4zbnbCpIs8yyeBPUKso+YEAD/U71RBJlgqT7k
+VDzrM7mKHTXv69HcTyTXgwneWAFCNwk=
+=xY4I
 -----END PGP SIGNATURE-----
 
---k0kTrwpUIJx/tq+4--
+--z0mku3Y8KzcuX15/--
