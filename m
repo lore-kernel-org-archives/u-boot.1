@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2A21606A31A
-	for <u-boot@archiver.kernel.org>; Fri, 30 Oct 2026 06:13:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 013BA606A31C
+	for <u-boot@archiver.kernel.org>; Fri, 30 Oct 2026 06:14:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DqicWAuq;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=YPC3HvhE
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XBrePcm+;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=tR3H9Z70
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8CFC060AA4;
-	Fri, 30 Oct 2026 06:13:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D02D860AC0;
+	Fri, 30 Oct 2026 06:14:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eRBFc6JqR_cQ; Fri, 30 Oct 2026 06:13:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5092760A70
+ id 1SjdCJbKuWub; Fri, 30 Oct 2026 06:14:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 11A4860ABD
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793340838;
-	b=NGOvZ/bzSpDBccxQwTpt86ACosUdXFRhz9/JBUWID+IgaDmLjcOXqIG4vDKB70fNEf+w
-	 Pb+sWoeltrkNfsyuefGN7hw+bl8METNRcpDJvXtbknd10ujKQfv7ljtLLWqJ+vjq8fzZT
-	 BKwo/jMVbADniFgsoQb9SQwrLqBYgINs++WH/y91SO3oScW9MV3xouldRVTcD2U8cdXR2
-	 iXQRj2Zf16+PAdmu6LUGymDPvBwwWIZ1VpKM+7eUDmVNMfHzqii3tpGGJDKJRmxB4Pyer
-	 XdXhPA5aFjN6BF2f9Mlr8iQhyS/J9z4xO5979vf1dad2bAwoMKov2joY0FNtHvxh9sQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793340843;
+	b=MoRTbTvVQLXAf1/k5vbrJDa1ztGqwOPLrdQ0oLfX1LDqPxA1o5jZS5Xn8ma1DKo09Uqp
+	 +j7GpSMZNBWhSEOW+XL4DWGwNx0FDGJBOJo+OSx+QU218KvUW5VGE0F05Vv6zt2K8qlOL
+	 iPys2LN95aayz+4uJcHo8Imq/PSLLDq63EQmLw2MxePVyFWL8DHtMuhzLz+aTZvduEJu4
+	 7EUkB/VV5VuZW/tGVsJKEzpBr1rDWbt0g3/5G1Tx6yuJ+9Tlnd7DVEw2VYbfl62BUI9GD
+	 1Ki01ZqiihLVUGZLjp09ViBWfXs9GrYTnAgOjxk7BWY8Twzhnz3CZtDKr66sKlMXC7Q==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793340838;
+	c=relaxed/relaxed; t=1793340843;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,132 +32,131 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=gTY8bNTbPDejt8C1rN15t3fSDthbvanWxJv7+kLNmtY=;
-	b=rjkp8Of6iCyBecYpP1W/8SPMpFgFREuLPNbuLjxtDEW9qa7pF1KinTjyNTuE0nZYcjVX
-	 56VydEOJ2EgYbY82Hypz1DpO3R+QnDWpYNOq0XdclWVNZQiUob25QUIXnKMqKCZaYLU4M
-	 XneDglFVQzXIT+PtWAKHyV2JWIqvBENXh0WTkZtqsR6d17c1gaz6IveUQDAJv+Yxntk1R
-	 3CFtGqrWhZsEaHa2Q/pLR1FRjRWfaRvdCkvtrDbaK27W3MwTpg85Px8XUfza4H04Cnsbu
-	 U3d2WR0gCiI81g5G7+GeOBE7nDP7VMXqro5XpxFJ/CeWkYmozwwUQFs6o+3lLBycTtA==
+	bh=X5MDk7d8nfyhqkyeqaTZfQIbcdOocsJYfRHP5hoOZ40=;
+	b=OWX2q6MHIxZD8Bzzf+aViS3bsXGCgZ5ooxzRuhivVYF2z0W+W2DdmhwOZXo15we/WmfU
+	 V4mM0Y7VtJvIna6/QKbCgdWyDZFZhxmWBE8wP6fy78l+l2xV0QaMQ8Ix3wyal5ownfTGn
+	 00PFmBFwFMBo9B/DK/vWLsdvyzlm+8w6tcg2azA9M5iIzI6nbGwFXL4shcVEasQzg8Bs7
+	 jj7xTVpCmxbhNIXeaQKg00CHVYgsJoLqR1OCufAQMkZE9sOaG4dLDVAZEcBbXFhY0Jxov
+	 an6kvKyZSdBAdY6MXq5xZ50eq2XCp6Zl/ou8TwtQwILSY7ZqSYUGfD/fJXbkCboIYog==
 ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793340838;
-	bh=gTY8bNTbPDejt8C1rN15t3fSDthbvanWxJv7+kLNmtY=;
+	d=lists.u-boot-project.org; s=default; t=1793340843;
+	bh=X5MDk7d8nfyhqkyeqaTZfQIbcdOocsJYfRHP5hoOZ40=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=DqicWAuqsAiypYUPY3l4J7P0MdINLUcgF7IdE/UT24qal/uUWmiuqHvV54GffdKAo
-	 CaP3vMlMwzvpzMYpxWpQZVKz3CQAc1ZhX4+iNcqSlek0b+Yw8jnocxEFCpMn+h/Ij9
-	 Gh4ufyCaehCVVxBzumS5oDvHz+z6HjKO5dzqUW3cc9w6IDi++b6bLlo64k9I5BZs1P
-	 Yq3Rb9qMXEj50vVs0TNC4yaQKXXUjDwUeK/Yq1moNIqtVdyW8LeI1Q0VsAxhi6TQnc
-	 EUfQybIaL3/bVFswNM7Bt2TuCqYarKcIuokKdOTOUQNfZ6b333kEyHm1NBGLDXmeke
-	 xohECCJ8r5RRA==
+	b=XBrePcm+mipQGS3vukIV13vmuBB2sBqe1lwZ4Ja2m3BJhQPH4txadUQuaZmLdHZZA
+	 JuQftjW6Buc4SzioJVsBJL15bwSJpu/m5u08m9Cd/YXeps50CPd3kzZzVTGxyFcgAA
+	 FXCs9VGsYEvc3eIk4cpHVKlukJzoBQYnbFhp61lGJaR/Y1iDE86WS8VDmfz/tO0JGk
+	 2RB9qfaik6k5aJ3RLftlM2kV8vvx+4xTRxQIN/EcTbdQEpkHUdYS86FxOaH5pG4hBf
+	 izgygjR82LnEBvr8JqmY+q01gCbqtwVQaMBRq1jZrWYvHF0cEbQE2FGvKHk0ry/OHd
+	 k9WyclfwO45hg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5092760A70;
-	Fri, 30 Oct 2026 06:13:58 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id DBAC1712
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 06:13:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 11A4860ABD;
+	Fri, 30 Oct 2026 06:14:03 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 752402C7
+ for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 06:14:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C0F6380DE8
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 06:13:56 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 72AE64051A
+ for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 06:14:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Pv9Y0xW3RBaI for <u-boot@lists.u-boot-project.org>;
- Fri, 30 Oct 2026 06:13:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5536A80D3E
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::435"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793340835;
- b=B7FH+m/Pn5+2TjW3BEE1nMQ5Fc1UmsvrmsU/z/U+Zg4uXrM8M5EYB+XNrFTHVFWTIU46
- g+MCkdvD90Bo5aReuFiQLSZYVeJ9jLkwnq5OzIa+htznBgcDrko6A2lH10trojhhvERIO
- RSzyxYTQDNcB/0JyinxWzJWVwoOMAUcuEOVp3HyFcG2H8UvtsFQ/wLtjXt9zb9iee/GMf
- xt4565RZ+PjCuQucfY2sNMCLOMlW6kc0BsEMTUZEZC/iPAlNN1/Dkm+uOd6ZSmT8Lb6oB
- 75gAf+kD8REqPCazNzAm2Ce5uNUsZhZJHxEcdKf1k6w+J6i/ZETMxOBIbzIZTVAxjhQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rS-xUfIAIfXf for <u-boot@lists.u-boot-project.org>;
+ Fri, 30 Oct 2026 06:14:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 8D6F2402F6
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::336"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793340841;
+ b=EwaQNR2tHMG6HYdflDMhp9I1YKoMYthyxAd8tkdiX0HV6anvlUoeHuEqxQD+GP0z2Wwi
+ f7qG68TjSNSXxPRXsQYhYndiJnUuFWIbrkw49VSz3r7tSZXp2hORpDraqAkB8OXfoqMrB
+ tR9mt0MigUsET0jLNoR3QVdhUH2hkPJ4ZnBTfbREzKaa1AKCjfT5RUcGpVkFTjTAGgxnY
+ 3YgcYJ+rcTejdWUBcmz/nu6d1t5216ccUGEXTPZpnPbC1BcobrS0rnisldaneFsIUOpbv
+ xDv+seAWGXS93upHmMbUqKs9OlMXinJnAZMl9CAgBt3tVq5BSqe1gde+gOiO39GT1NA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793340835;
+ c=relaxed/relaxed; t=1793340841;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:In-Reply-To:References;
- bh=gTY8bNTbPDejt8C1rN15t3fSDthbvanWxJv7+kLNmtY=;
- b=qAO8jqh+usGFTk3CnOSPL/dBqy8HXHyD7VJUcqi+IHP02ZormPXfEcahVKQVqjwrRNvR
- DYoHjEpiPsBCPIG14hpbUPnRaTx61J5TRxHL8hGKoOW17MqeQs5OJG34u93aJrFHwugn2
- upnanj1HsKI6APLwyf3jYM79GVX4RBslmQeTxGY4jEL/20vL3dqyJs+aN3PKm145mH3JW
- JlPa3X4LYMCN2/D3bA8y7WgAPzTkCWhrtW/kTqIeYuM1D3ECcBdR4NgSTLSF8q6cJjNff
- EiVcALDwBOHwfuVYAjc3i9dJ7PdSWHb5Kfstyrdma89OQxWYh2VzOsUfiCbWd45Mtdw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=X5MDk7d8nfyhqkyeqaTZfQIbcdOocsJYfRHP5hoOZ40=;
+ b=lbfA0pFGKCQHhN1NRU9y+x5LIWkXeqvAZiR+Lj0Ymbl31Kyo6MA+3VUE03FybVVeV5Bo
+ jw9oKGRUPwe+svIFu2vW7MwRi54J5mdNwYiFnPnBI1c8pALONQZ8zBWrJcU/gnDa883B1
+ NvYzcAyP3zn1UDuusf5F2Bv5fQHxbX84lYAAFBlRXWjTg7H7J+m+F+65AWHpzIXYIiYZR
+ szHhfCgIa3vDEskU/7OefBT8eog24OQy0XlNNHzBOTSgd1UmNv5RX81Qlt2TPH8HMzNt2
+ eFJc6+k+Lsh2vn/cmIcf1LmDj0PTfYvok6bDdrG/VMhL94XvB1erWPlfYldAJD+roxw==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=YPC3HvhE; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::435"
+ header.s=20260707 header.b=tR3H9Z70; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::336"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::435; helo=mail-wr1-x435.google.com;
+ client-ip=2a00:1450:4864:20::336; helo=mail-wm1-x336.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=YPC3HvhE
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 5536A80D3E
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 06:13:54 +0000 (UTC)
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-48e00eee27dso134636f8f.0
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 23:13:54 -0700 (PDT)
+ header.a=rsa-sha256 header.s=20260707 header.b=tR3H9Z70
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 8D6F2402F6
+ for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 06:14:00 +0000 (UTC)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4a35ac4475dso1677205e9.2
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 23:14:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793340833; x=1793945633;
+ d=gmail.com; s=20260707; t=1793340838; x=1793945638;
  darn=lists.u-boot-project.org; 
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=gTY8bNTbPDejt8C1rN15t3fSDthbvanWxJv7+kLNmtY=;
- b=YPC3HvhEtiODg3W3oFGYrSjVmfvAY4VmwP6D665gl1uTfn084nhi6256f5l7WAHux3
- 3ml+iQMAMTEep9LEcp/rdUyEvQO2gR3wNjZlg1wX0Khvje2EQ2KyByZcYi+vGeWgugtK
- 2NLFcm1/MnqX1qJVfZ8EsosGMb8T+Hm32SrwIaEoAXZGrVILY/NgqJRJwvm8GPH4xkU1
- GeVEr/cuwnkqjyDYLpxTCl0PNLNRSjADaZjtb6tzRZnLrQRkmPNvYxHsX755U/tErgyj
- UceqD7UkSUnczENae/3L4Ra6BYGRdzcY2U+t5uqFmnlsLT4T6sNJRLQp1gA9y9QISsOs
- b0PA==
+ bh=X5MDk7d8nfyhqkyeqaTZfQIbcdOocsJYfRHP5hoOZ40=;
+ b=tR3H9Z70aRDgWzx9k+D/zFSX8LATeT7x7aHQdoqbFQylML/U4lcFRYZnqsNBP5TvjA
+ Jxq78dp+FXLZNuueoBL8HmzMzQtcrVCqhu55PF7jq3OXHWTY3GkN548s9Eo4cK5gLtsS
+ uSoaQBD1Nv7WwtIhaJehC64QkM/8+d1DdqjypfaAhr9EXCc82nzAYMg2jhtQ3BJp6HHP
+ UtRcuX7CTHlNm0QoCgXTcCkQ+9etCQ8RDH/D+iT6y31V2G+VfGlicqxERAbRhq+Qg6XW
+ IgxDq7LFPOSGz4oSG9mDEmgSTw0Y8IUax4TvHacaIsbhgeVtzmGoJcBglPrwuyo1yXDg
+ /AOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793340833; x=1793945633;
+ d=1e100.net; s=20260707; t=1793340838; x=1793945638;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=gTY8bNTbPDejt8C1rN15t3fSDthbvanWxJv7+kLNmtY=;
- b=Y9DpizUH6EhRPotopAhShFv+qeOxrWquqLuM/7MRq2UNbT0NlTIRliN91pSiS74tJW
- +nJL6yuC31FS+j5RDxgwkb9nY5uS2ib038Vpkn5EyxYCh0EaPzyPlyoGJZBdeXr26qVy
- ALPv7qyEqk/YP0f39G/mA282rS+YOcxpnSzLNUHwoRaMqp94pa3j0ei1BdgsW/OtyDqA
- VgVDk2+30t/2O90Zph0SNjLK+5Fsxy761NcH7FbreloqBE4w8Fv4n0blNlnRlOqL7b+n
- 0jfh6BMbq0S8Pd5Sim2wi6aOMID3B+2riwK0oL6hIYY5kXkqsXgj63c6Bn/Bl2lq8sei
- uTlQ==
-X-Gm-Message-State: AFq9FYKz6Ca3WE6Wgz8nB0V5ELszijcY0Qtlo0/7CLVd1z+7JQ5n9GT1
- QDzu7E8FmyaB41gV8XibH7z43pyGYlaNzn03zwb2QrQoH3NnpcvyQGixu8m5aK9a3wc=
-X-Gm-Gg: AYBFou2n8Yf5ywch4FiqcwIWqqkfJuEpn2jiie2eEiIbDj+QW38psiqJnnRyRQJYUUF
- pSYrxSumqsquNQnFNxRa+rfwfVtgWFcUEgMsdHXKruCKe+EfWUuG82iCFRndTZ1zFMx37ojhvyp
- oXkqyQU7CuysKMC4PDzWOrSr2ovTHaMCw34OlSQ1lxJhQaayCxsIhGRILAHxKf2SiNYkvJgAwCY
- g6PNgwYyjNWJ+DTsx8mQ3ekb6HFGU9LiqVHHjaIdLPRp0/3IFv5pZenD2a2RMqxJ0OTPknmLAuG
- nkMalzMS7IDnH7qdRehYT6ziEJ1ACmyKB4ZQAaDa9WvNUqD+mEIQlj3mYXN6dGq/UutJvU4zPz7
- apRj222vNOTsQ3rPR95cYPzbFd5w57gFBv0vNXN/LSGQEcctZQdWHIiwhxy/FpCk/f7KpnHUVGH
- gnL4/MbLsRpCgm93fJ0ZAmAm2CfGZJ4EIlD4+nOuZcA23HQ5ZeOq+N3XQ3WCoEaz5rF5DnSvqQ1
- 6kHYJJOSllf45w00lvAfJ97B2bceGwFe1BLZEWTP/n4sOoQ6QDgWPMySI83sBV+9YpMbwDwijD0
- xMHyPzO1F7EfbVctqHd1PiJ1G8D38RU=
-X-Received: by 2002:a05:6000:46c8:b0:48e:4c82:a286 with SMTP id
- ffacd0b85a97d-48e6e2fa53dmr1922633f8f.10.1793340832599; 
- Thu, 29 Oct 2026 23:13:52 -0700 (PDT)
+ bh=X5MDk7d8nfyhqkyeqaTZfQIbcdOocsJYfRHP5hoOZ40=;
+ b=q8FVDYWSZM0K3/9gLVzM/BqqU4hpjYt4DRTimw70FnIg60Yin0mNGfs267RtEbKIAO
+ dcGNbslwz9CrDfAaFMIkWd3inP1kYBsnfU71vKG6/egO2v+pZrAmH3koMB3rlUpAYdNg
+ kgosTLVKRoxiSZV9iqXllAcPLfwNQEFbgb3aPZDwSmvQXCIMKX7oMVgfDYnztndRGuUq
+ Hr02h/s6dOjeHXKt/fd1ot52aZgESIm/3o4gW6j+1Gjyksz8LHGdogc7PiXMdpXdnPyH
+ eKbZupPicwLG5Mv0IMze9CM+b+NfmhHNGqXIPOdhYWB5GCswOqoCA3S992Uwnnepv57c
+ eqUw==
+X-Gm-Message-State: AFq9FYK6nCVknfsH6TP1x3gcvR2RylCFvUefQQ3guGoK3miZn2eRmpuE
+ PUZyHAFlfmqIMS/sU1MMBEYHkyZNY55EqZBinBkzNMQ6m0XCKmvWjgSCyW1PqzccO5o=
+X-Gm-Gg: AYBFou0Ane7NyErZmo44vETrl/GPh+9KrfmT6vnf5QRbqKTj1ydU7Yp9CBXDCxMT4jc
+ 9HPfYI+HWLe7kFB1E9r8rTfswAwN8N4yjpbutqip9p5+l1KSL0GtCQRGpuDoGN6c0vwLJ9B8P41
+ t7d6q1u6AjnGvKmqYs7HzilGEXrIH5kcCWn6valNZxBZUYHNhDeO0lOqDGlFw+hG8HtADTnUYYT
+ rz5yPclGYmVh8cGn8Ma9N7CkhDXsF8l6W/TM5ClkZPHTKSL15uS2Qb4lNqXBWO8i9uxuTOaKz2g
+ 6dOkw5YbMSkLe3JPX5ugCYQe1HGc6MNaXAgK6UzVBQLK3NaBsBEKFxsgPbel0qs7VFs8k3Qf3HR
+ Rpoec+gm3JXPFXk8dEfYbiz06vxfu2k1cHKPzB7Deu/AUZy9cv0sj4hxQu+K8fIBeIy/PBoUfAA
+ xXlj/CUY+AFkMY2/JJ78jc2an9p5MySSmZjEWRdzqTwYErw3gI9mvc03lfDYXjLle6ygdJxR6G5
+ YRUfsbsXciC96Bk8C4KA2bpO1lDyC3WDUmXuNqJdazTaWA9psMlydtOkxf0n8FTOthvnO0cNOW7
+ 0Sg0AepMIY+jq91FBMbOE907nJgID51rkKo3rMyiDdYE1e4S3wXwiQ==
+X-Received: by 2002:a05:600c:6989:b0:4a7:6425:c274 with SMTP id
+ 5b1f17b1804b1-4ac150b38d0mr23475255e9.2.1793340838313; 
+ Thu, 29 Oct 2026 23:13:58 -0700 (PDT)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e71b77f06sm1386379f8f.21.2026.10.29.23.13.52
+ ffacd0b85a97d-48e71b728f9sm1374848f8f.10.2026.10.29.23.13.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Oct 2026 23:13:52 -0700 (PDT)
+ Thu, 29 Oct 2026 23:13:57 -0700 (PDT)
 From: Ana Bobillo <anabobillo3@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 02/10] efi_loader: check the PE image ranges in
- efi_image_parse()
-Date: Fri, 30 Oct 2026 06:13:51 +0000
-Message-ID: <fd7c9742-f369-4877-9a14-665b6b8afc2b@gmail.com>
+Subject: [PATCH 03/10] efi_loader: reject a PE section whose end wraps around
+Date: Fri, 30 Oct 2026 06:13:56 +0000
+Message-ID: <5b986292-b889-4e1e-9e0f-9012ea225366@gmail.com>
 In-Reply-To: <633dddd6-ee22-4cd6-a8b6-cb7df0650fae@gmail.com>
 References: <633dddd6-ee22-4cd6-a8b6-cb7df0650fae@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -180,395 +179,50 @@ X-Archived-By: <archiver.kernel.org>
 
 From: Ana Bobillo <anabobillo3@gmail.com>
 
-efi_image_parse() collects the regions of an image to be hashed for
-Secure Boot and for TCG2 measurements. It takes the header size, the
-section table, each section's raw data and the certificate table from
-the image without checking them against the image size:
+efi_load_pe() computes the end of each section as the sum of its
+VirtualAddress and its size, both u32, so the sum wraps around before it
+is widened to unsigned long. A section near 4 GiB then yields a small
+virt_size, and the memset() and memcpy() of the section write far past
+the allocated image.
 
-- SizeOfHeaders and each section's PointerToRawData and SizeOfRawData
-  are added as regions even when they run past the end of the image,
-  which is then read out of bounds when the regions are hashed;
-- the section table is read wherever SizeOfOptionalHeader and
-  NumberOfSections put it;
-- the end of the certificate table is computed in 32 bits, so a large
-  offset wraps around and passes the check;
-- errors of efi_image_region_add() are ignored.
+Relative virtual addresses are 32 bit, so reject a section whose end
+does not fit into 32 bits. barebox, whose EFI loader is based on this
+file, fixed the same in b6598389d46d ("efi: loader: fix integer overflow
+in PE virt_size calculation").
 
-All of this happens before the signature is verified.
+This runs before the image is rejected when Secure Boot fails to verify
+it.
 
-Call efi_check_pe() first, check each offset and size against the image
-size without wrapping, add regions only through a checked helper and fail
-on its errors, and require the file alignment to be a power of two. The
-padding of a section to the file alignment is hashed only as far as the
-image goes, so an image whose last section is not padded is still
-accepted. Check the certificate table against the size of
-WIN_CERTIFICATE, not of a pointer to it.
-
-barebox, whose EFI loader is based on this file, added the same checks in
-4ec1f7166778 ("efi: validate PE parser input ranges"); this is a port to
-U-Boot. Unlike there, an optional header with fewer than 16 data
-directories is still accepted if it holds the certificate table entry it
-declares: U-Boot's own EFI applications have six.
-
-Fixes: 4540dabdcaca ("efi_loader: image_loader: support image authentication")
+Fixes: cb149c66342c ("efi_loader: Add PE image loader")
 Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
 ---
- lib/efi_loader/efi_image_loader.c | 268 +++++++++++++++++++++---------
- 1 file changed, 190 insertions(+), 78 deletions(-)
+ lib/efi_loader/efi_image_loader.c | 15 +++++++++++++--
+ 1 file changed, 13 insertions(+), 2 deletions(-)
 
 diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
-index e31493d5135..35cf3cd268f 100644
+index 35cf3cd268f..b15a662e5d6 100644
 --- a/lib/efi_loader/efi_image_loader.c
 +++ b/lib/efi_loader/efi_image_loader.c
-@@ -393,6 +393,69 @@ void *efi_prepare_aligned_image(void *efi, u64 *efi_size)
- 	}
- }
+@@ -1062,9 +1062,20 @@ efi_status_t efi_load_pe(struct efi_loaded_image_obj *handle,
+ 	/* Calculate upper virtual address boundary */
+ 	for (i = num_sections - 1; i >= 0; i--) {
+ 		IMAGE_SECTION_HEADER *sec = &sections[i];
++		u32 end;
  
-+/**
-+ * pe_range_ok() - check that a range lies within the image
-+ * @len:	size of the image
-+ * @off:	offset of the range from the start of the image
-+ * @size:	size of the range
-+ *
-+ * Return:	true if [@off, @off + @size) lies within [0, @len)
-+ */
-+static bool pe_range_ok(size_t len, size_t off, size_t size)
-+{
-+	return off <= len && size <= len - off;
-+}
-+
-+/**
-+ * pe_align_size() - round up a section size to the file alignment
-+ * @size:	size of the raw data of a section
-+ * @align:	file alignment, a power of two
-+ * @aligned:	on return @size rounded up to @align
-+ *
-+ * Return:	true on success, false if @align is not a power of two or
-+ *		the rounded size overflows
-+ */
-+static bool pe_align_size(u32 size, u32 align, size_t *aligned)
-+{
-+	size_t val = size;
-+
-+	if (!align || (align & (align - 1)))
-+		return false;
-+
-+	if (__builtin_add_overflow(val, (size_t)align - 1, &val))
-+		return false;
-+
-+	*aligned = val & ~((size_t)align - 1);
-+
-+	return true;
-+}
-+
-+/**
-+ * efi_image_region_add_checked() - add a region of an image
-+ * @regs:	pointer to array of regions
-+ * @efi:	pointer to the image
-+ * @len:	size of the image
-+ * @start:	offset of the region in the image
-+ * @size:	size of the region
-+ * @nocheck:	flag against overlapped regions
-+ *
-+ * Add the region [@start, @start + @size[ of the image to @regs if it lies
-+ * within the image.
-+ *
-+ * Return:	status code
-+ */
-+static efi_status_t efi_image_region_add_checked(struct efi_image_regions *regs,
-+						 const void *efi, size_t len,
-+						 size_t start, size_t size,
-+						 int nocheck)
-+{
-+	if (!pe_range_ok(len, start, size))
-+		return EFI_INVALID_PARAMETER;
-+
-+	return efi_image_region_add(regs, efi + start, efi + start + size,
-+				    nocheck);
-+}
-+
- /**
-  * efi_image_parse() - parse a PE image
-  * @efi:	Pointer to image
-@@ -401,8 +464,8 @@ void *efi_prepare_aligned_image(void *efi, u64 *efi_size)
-  * @auth:	Pointer to a pointer to authentication data in PE
-  * @auth_len:	Size of @auth
-  *
-- * Parse image binary in PE32(+) format, assuming that sanity of PE image
-- * has been checked by a caller.
-+ * Parse image binary in PE32(+) format. Each offset and size taken from the
-+ * image is checked against @len before it is used.
-  * On success, an address of authentication data in @efi and its size will
-  * be returned in @auth and @auth_len, respectively.
-  *
-@@ -411,97 +474,135 @@ void *efi_prepare_aligned_image(void *efi, u64 *efi_size)
- bool efi_image_parse(void *efi, size_t len, struct efi_image_regions **regp,
- 		     WIN_CERTIFICATE **auth, size_t *auth_len)
- {
--	struct efi_image_regions *regs;
--	IMAGE_DOS_HEADER *dos;
-+	struct efi_image_regions *regs = NULL;
- 	IMAGE_NT_HEADERS32 *nt;
--	IMAGE_SECTION_HEADER *sections, **sorted;
-+	IMAGE_SECTION_HEADER *sections, **sorted = NULL;
- 	int num_regions, num_sections, i;
- 	int ctidx = IMAGE_DIRECTORY_ENTRY_SECURITY;
--	u32 align, size, authsz, authoff;
--	size_t bytes_hashed;
-+	u32 align, authsz, authoff, header_size, num_dirs;
-+	size_t bytes_hashed, opt_off, opt_size, min_opt_size;
-+	size_t csum_off, subsys_off, dir_off, dir_end;
-+	size_t sections_off, sections_size;
- 
--	dos = (void *)efi;
--	nt = (void *)(efi + dos->e_lfanew);
- 	authoff = 0;
- 	authsz = 0;
- 
- 	/*
--	 * Count maximum number of regions to be digested.
--	 * We don't have to have an exact number here.
--	 * See efi_image_region_add()'s in parsing below.
-+	 * efi_check_pe() checks the DOS and PE signatures and that the image
-+	 * is large enough to hold a 64bit NT header, which is longer than a
-+	 * 32bit one. Every optional header field and data directory entry
-+	 * read below therefore lies within the image.
- 	 */
--	num_regions = 3; /* for header */
--	num_regions += nt->FileHeader.NumberOfSections;
--	num_regions++; /* for extra */
--
--	regs = calloc(sizeof(*regs) + sizeof(struct image_region) * num_regions,
--		      1);
--	if (!regs)
--		goto err;
--	regs->max = num_regions;
-+	if (efi_check_pe(efi, len, (void **)&nt) != EFI_SUCCESS)
-+		return false;
-+	opt_off = (u8 *)&nt->OptionalHeader - (u8 *)efi;
-+	opt_size = nt->FileHeader.SizeOfOptionalHeader;
- 
--	/*
--	 * Collect data regions for hash calculation
--	 * 1. File headers
--	 */
- 	if (nt->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR64_MAGIC) {
- 		IMAGE_NT_HEADERS64 *nt64 = (void *)nt;
- 		IMAGE_OPTIONAL_HEADER64 *opt = &nt64->OptionalHeader;
- 
--		/* Skip CheckSum */
--		efi_image_region_add(regs, efi, &opt->CheckSum, 0);
--		if (nt64->OptionalHeader.NumberOfRvaAndSizes <= ctidx) {
--			efi_image_region_add(regs,
--					     &opt->Subsystem,
--					     efi + opt->SizeOfHeaders, 0);
--		} else {
--			/* Skip Certificates Table */
--			efi_image_region_add(regs,
--					     &opt->Subsystem,
--					     &opt->DataDirectory[ctidx], 0);
--			efi_image_region_add(regs,
--					     &opt->DataDirectory[ctidx] + 1,
--					     efi + opt->SizeOfHeaders, 0);
--
-+		min_opt_size = offsetof(IMAGE_OPTIONAL_HEADER64, DataDirectory);
-+		csum_off = opt_off + offsetof(IMAGE_OPTIONAL_HEADER64,
-+					      CheckSum);
-+		subsys_off = opt_off + offsetof(IMAGE_OPTIONAL_HEADER64,
-+						Subsystem);
-+		dir_off = opt_off + offsetof(IMAGE_OPTIONAL_HEADER64,
-+					     DataDirectory[ctidx]);
-+		header_size = opt->SizeOfHeaders;
-+		align = opt->FileAlignment;
-+		num_dirs = opt->NumberOfRvaAndSizes;
-+		if (num_dirs > ctidx) {
- 			authoff = opt->DataDirectory[ctidx].VirtualAddress;
- 			authsz = opt->DataDirectory[ctidx].Size;
- 		}
--
--		bytes_hashed = opt->SizeOfHeaders;
--		align = opt->FileAlignment;
- 	} else if (nt->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR32_MAGIC) {
- 		IMAGE_OPTIONAL_HEADER32 *opt = &nt->OptionalHeader;
- 
--		/* Skip CheckSum */
--		efi_image_region_add(regs, efi, &opt->CheckSum, 0);
--		if (nt->OptionalHeader.NumberOfRvaAndSizes <= ctidx) {
--			efi_image_region_add(regs,
--					     &opt->Subsystem,
--					     efi + opt->SizeOfHeaders, 0);
--		} else {
--			/* Skip Certificates Table */
--			efi_image_region_add(regs, &opt->Subsystem,
--					     &opt->DataDirectory[ctidx], 0);
--			efi_image_region_add(regs,
--					     &opt->DataDirectory[ctidx] + 1,
--					     efi + opt->SizeOfHeaders, 0);
--
-+		min_opt_size = offsetof(IMAGE_OPTIONAL_HEADER32, DataDirectory);
-+		csum_off = opt_off + offsetof(IMAGE_OPTIONAL_HEADER32,
-+					      CheckSum);
-+		subsys_off = opt_off + offsetof(IMAGE_OPTIONAL_HEADER32,
-+						Subsystem);
-+		dir_off = opt_off + offsetof(IMAGE_OPTIONAL_HEADER32,
-+					     DataDirectory[ctidx]);
-+		header_size = opt->SizeOfHeaders;
-+		align = opt->FileAlignment;
-+		num_dirs = opt->NumberOfRvaAndSizes;
-+		if (num_dirs > ctidx) {
- 			authoff = opt->DataDirectory[ctidx].VirtualAddress;
- 			authsz = opt->DataDirectory[ctidx].Size;
- 		}
--
--		bytes_hashed = opt->SizeOfHeaders;
--		align = opt->FileAlignment;
- 	} else {
- 		log_err("%s: Invalid optional header magic %x\n", __func__,
- 			nt->OptionalHeader.Magic);
-+		return false;
-+	}
-+	dir_end = dir_off + sizeof(IMAGE_DATA_DIRECTORY);
-+
-+	/*
-+	 * The optional header must hold the fields used here, and the
-+	 * certificate table entry when there is one. The section table
-+	 * follows the optional header; it and the whole header area
-+	 * (SizeOfHeaders) must lie within the image, as must the certificate
-+	 * table.
-+	 */
-+	num_sections = nt->FileHeader.NumberOfSections;
-+	sections_off = opt_off + opt_size;
-+	sections_size = (size_t)num_sections * sizeof(IMAGE_SECTION_HEADER);
-+	if (opt_size < min_opt_size ||
-+	    (num_dirs > ctidx && sections_off < dir_end) ||
-+	    !pe_range_ok(len, sections_off, sections_size) ||
-+	    !pe_range_ok(len, 0, header_size) ||
-+	    header_size < sections_off + sections_size) {
-+		log_err("%s: Invalid PE headers\n", __func__);
-+		return false;
-+	}
-+	if (authsz && !pe_range_ok(len, authoff, authsz)) {
-+		log_err("%s: Size for auth too large: %u\n", __func__, authsz);
-+		return false;
-+	}
-+
-+	/*
-+	 * Count maximum number of regions to be digested.
-+	 * We don't have to have an exact number here.
-+	 * See efi_image_region_add()'s in parsing below.
-+	 */
-+	num_regions = 3; /* for header */
-+	num_regions += num_sections;
-+	num_regions++; /* for extra */
-+
-+	regs = calloc(sizeof(*regs) + sizeof(struct image_region) * num_regions,
-+		      1);
-+	if (!regs)
- 		goto err;
-+	regs->max = num_regions;
-+
-+	/*
-+	 * Collect data regions for hash calculation
-+	 * 1. File headers
-+	 */
-+	/* Skip CheckSum */
-+	if (efi_image_region_add_checked(regs, efi, len, 0, csum_off, 0))
-+		goto err;
-+	if (num_dirs <= ctidx) {
-+		if (efi_image_region_add_checked(regs, efi, len, subsys_off,
-+						 header_size - subsys_off, 0))
-+			goto err;
-+	} else {
-+		/* Skip Certificates Table */
-+		if (efi_image_region_add_checked(regs, efi, len, subsys_off,
-+						 dir_off - subsys_off, 0))
-+			goto err;
-+		if (efi_image_region_add_checked(regs, efi, len, dir_end,
-+						 header_size - dir_end, 0))
-+			goto err;
- 	}
- 
-+	bytes_hashed = header_size;
-+
- 	/* 2. Sections */
--	num_sections = nt->FileHeader.NumberOfSections;
--	sections = (void *)((uint8_t *)&nt->OptionalHeader +
--			    nt->FileHeader.SizeOfOptionalHeader);
-+	sections = (void *)((uint8_t *)efi + sections_off);
- 	sorted = calloc(sizeof(IMAGE_SECTION_HEADER *), num_sections);
- 	if (!sorted) {
- 		log_err("%s: Out of memory\n", __func__);
-@@ -516,14 +617,26 @@ bool efi_image_parse(void *efi, size_t len, struct efi_image_regions **regp,
- 	qsort(sorted, num_sections, sizeof(sorted[0]), cmp_pe_section);
- 
- 	for (i = 0; i < num_sections; i++) {
-+		size_t size;
-+
- 		if (!sorted[i]->SizeOfRawData)
- 			continue;
- 
--		size = (sorted[i]->SizeOfRawData + align - 1) & ~(align - 1);
--		efi_image_region_add(regs, efi + sorted[i]->PointerToRawData,
--				     efi + sorted[i]->PointerToRawData + size,
--				     0);
--		log_debug("section[%d](%s): raw: 0x%x-0x%x, virt: %x-%x\n",
-+		if (!pe_range_ok(len, sorted[i]->PointerToRawData,
-+				 sorted[i]->SizeOfRawData) ||
-+		    !pe_align_size(sorted[i]->SizeOfRawData, align, &size)) {
-+			log_err("%s: Invalid section %d\n", __func__, i);
-+			goto err;
+-		virt_size = max_t(unsigned long, virt_size,
+-				  sec->VirtualAddress + section_size(sec));
++		/*
++		 * Relative virtual addresses are 32 bit. A section whose end
++		 * wraps around would make virt_size too small for the memset()
++		 * and memcpy() below.
++		 */
++		if (__builtin_add_overflow(sec->VirtualAddress,
++					   section_size(sec), &end)) {
++			log_err("Section %d virtual address overflow\n", i);
++			return EFI_LOAD_ERROR;
 +		}
-+		/* The padding to the file alignment ends with the image */
-+		size = min(size, len - sorted[i]->PointerToRawData);
-+		if (efi_image_region_add_checked(regs, efi, len,
-+						 sorted[i]->PointerToRawData,
-+						 size, 0)) {
-+			log_err("%s: Invalid section %d\n", __func__, i);
-+			goto err;
-+		}
-+		log_debug("section[%d](%s): raw: 0x%x-0x%zx, virt: %x-%x\n",
- 			  i, sorted[i]->Name,
- 			  sorted[i]->PointerToRawData,
- 			  sorted[i]->PointerToRawData + size,
-@@ -534,25 +647,23 @@ bool efi_image_parse(void *efi, size_t len, struct efi_image_regions **regp,
- 		bytes_hashed += size;
- 	}
- 	free(sorted);
-+	sorted = NULL;
- 
- 	/* 3. Extra data excluding Certificates Table */
--	if (bytes_hashed + authsz < len) {
-+	if (bytes_hashed < len && authsz < len - bytes_hashed) {
- 		log_debug("extra data for hash: %zu\n",
- 			  len - (bytes_hashed + authsz));
--		efi_image_region_add(regs, efi + bytes_hashed,
--				     efi + len - authsz, 0);
-+		if (efi_image_region_add_checked(regs, efi, len, bytes_hashed,
-+						 len - bytes_hashed - authsz,
-+						 0))
-+			goto err;
++
++		virt_size = max_t(unsigned long, virt_size, end);
  	}
  
- 	/* Return Certificates Table */
- 	if (authsz) {
--		if (len < authoff + authsz) {
--			log_err("%s: Size for auth too large: %u >= %zu\n",
--				__func__, authsz, len - authoff);
--			goto err;
--		}
--		if (authsz < sizeof(*auth)) {
-+		if (authsz < sizeof(**auth)) {
- 			log_err("%s: Size for auth too small: %u < %zu\n",
--				__func__, authsz, sizeof(*auth));
-+				__func__, authsz, sizeof(**auth));
- 			goto err;
- 		}
- 		*auth = efi + authoff;
-@@ -569,6 +680,7 @@ bool efi_image_parse(void *efi, size_t len, struct efi_image_regions **regp,
- 	return true;
- 
- err:
-+	free(sorted);
- 	free(regs);
- 
- 	return false;
+ 	/* Read 32/64bit specific header bits */
