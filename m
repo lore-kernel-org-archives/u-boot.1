@@ -2,257 +2,244 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6CDBD606A31A
-	for <u-boot@archiver.kernel.org>; Fri, 30 Oct 2026 12:00:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1995606A333
+	for <u-boot@archiver.kernel.org>; Fri, 30 Oct 2026 12:14:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=r8s96XpH;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=osBkPclG;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VOIUHz3O
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=SM3UkGgH;
+	dkim=pass (2048-bit key, unprotected) header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256 header.s=s31663417 header.b=jcQpkE0Y
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 357A2607B4;
-	Fri, 30 Oct 2026 12:00:32 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AB1A6607A0;
+	Fri, 30 Oct 2026 12:14:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MpVlAmJRn-eZ; Fri, 30 Oct 2026 12:00:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3DAE760AB3
+ id xteAyBt5OpD2; Fri, 30 Oct 2026 12:14:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DFBDA60633
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793361623;
-	b=mKCGnyA1KYEl/6jxiE3vi47QVCZRjT9dCP/fY3Y/oA/MTffv4tYUN0ilRwg0riZbg6E2
-	 6sROSBhddEG4LwRIKdwxN67AwUiPktElrU+XvhChjIU3DGmoIi6M3WTx+/UsexhGinamV
-	 vuCtiBLk/jQVxs9lF+/MaPKUj7rDjHYeeNYEED5A6jC7+MVaS4zl4Zc5rl1/qPeiIAvPJ
-	 E1o4ziIEkprnC9TSo5wXnezOzYN+NZfU/Z40UTcFcghuD6teaJea3krDpZmUfqsNxz+a8
-	 yXar3r2UhRvN1fILSe3d0HgQ+krUVfyPiTFvjkD7W3t6CzJKAJy7sPdtvRtcMpMN80w==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793361623;
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793362485;
+	b=oo7Sh4tz7Z/0V6jt8bMiwrgq3PyybLelFjcxqK9gK9rwafbBh471KWlfcRM8IQtwt5+j
+	 Ux4U72tVjWgz5koR6RMToqr4C9l06k5PJ6Ef4BR5haACWRtOTkXvlyBdg2a0eRjoymKIG
+	 /UXhhqX7i9HWcF1smO0oZr6U103wSDT5MAZw4HDfDKSRwjh2+vs2Tpj5uI5aEBuwtdg0y
+	 He/dbSO4SoNRZepRRjz7znFjE23Usg9sDdwpAMNOK62cfQq3ETEsUPQRePQnhHTpzEoGn
+	 O1bX0F/0MPdGn5d5q8s/LPAz8ZfAkLQZh/FNIEVaAkF8nsPAvIill6IWNkWJYGuZQQg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793362485;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Received:DKIM-Signature:
-	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:MIME-Version:References:In-Reply-To:
-	 From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=+U5wLsiKEhukhvsvW+ZMr5joHXabdTcVYSyq8Mo+RIM=;
-	b=ceGNL9UWS2QNaQ2916/+DUCo2T2vnLg7tJ1icv1woC35Ln4uSzCyzTobf6vRW0TJr6np
-	 H4WpHKOVKfx88nOfJdqn4L+GLJuusgmI6pFRWNAwrHGmiFxsraKPpMZZes+A4AGzdEzAR
-	 dYCoqW5OKw9/eMsAt0h6TNeF6lgA7W+Y++IFi1x9cPew11pv37VcFIzY8FwKTaIoZacbs
-	 k+PCF5RcGe6Sv4zug1OnOyQprLitg576r2m584TZz+tr43SNPtKH9Eb3j36YdGtnGraFm
-	 qJeLDdHRLTZ+m/ZO6j2XxIaR+yovGVdetAMqg8OnN8uhnoQzSeNgbRJ9Vu1EbL4eAwA==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:X-UI-Sender-Class:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-Provags-ID:
+	 UI-OutboundReport:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=43GgOipTg7hjORhGafPJk3ZVRT4K8MB/+KS2EFNYZ88=;
+	b=BgGuHCTsb1Fx8FPBzAsypkuKQeD2C/tGaJLBzqdrt2skbr0odjHR7yAtPMM66UlZY4J+
+	 urGaiUQqceAj2iRe+ADRqupvt+SczRlOwT4CGWqpabv+yO9qCNo3kLaFGYtbscPFK2ZWd
+	 dvV3nBoyUTEQVBdspnl8x8Q1PdyMiSoK49W0zPdHzKzNbo4slaf+AS5NEbeGrccoWlGTe
+	 98y+AFvRLiLHLl8E0CYS1lguuuoqTh0/ZlrmiayTko56Au7ojK1T5TqaTo+zFuC3sRfMp
+	 bxPXXHf2B8uGPVAKD3bJATZ8+atRU633gxOgLIb5rE6vs19OYyad3yBVE+NZsSzetIQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793361623;
-	bh=+U5wLsiKEhukhvsvW+ZMr5joHXabdTcVYSyq8Mo+RIM=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793362485;
+	bh=43GgOipTg7hjORhGafPJk3ZVRT4K8MB/+KS2EFNYZ88=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=r8s96XpHLWEsVeiWC/iv9+3Rx1pKmmVa60iRaFSYorn7Kt9wgm7ut5wtawyTS0k1O
-	 Dg++mVsJObuIPpTRX4fAcejQMe7OEKzTD1fC4vVtJufViBh+diDC6/6ugUX5G49/yn
-	 fzfWfD5TSJiMLn1Ii5b1fyI4Ll7HQ8uGcpzZAKOKjVcSZew3JHF003JN9e5y3vymUL
-	 tv6RpM4y53S/jKty1wJL/SC4Q4O48KJA4d91mQB+lnFbECaxD9Tb33Qf8Uh3gs9Wdu
-	 A1HLOtYSGGmNhCRVWunz3Rglrg1rwJztMBW2eQ5VwqiT8dihqj7Fv3S4ZhxzFY94Y2
-	 yDIWkfuAzhhIA==
+	b=SM3UkGgHi0nsuPI+J5h2ArHCiS5RAshuD8qocpNYkgWgFmHu+q2WqvG0Bsp3gfc+G
+	 BvULib5VHXsTdnCFTk9SuvP8rdw8CAbUhqWaMRcshA8hkMfTCeKHvUppZZVllyamrP
+	 hqC8O7Yv7FTXJ4K/tUB62hyXmDkAQgdD41M8/Rk80ZXvSitDLSn1FGxFZ+MDZddGAh
+	 dD54QGknL7X31ZSgsa4WvA4hlvhlQJqNN+b0w9qT4pTL+/deM3kORkMm6GEMEWdsXb
+	 BOQ/fD0QNpVqkQhqp9QqlSEn7O8trf0Xk2ZbzBy+wko1vxvlQRMguXEmSz6x1zOSY6
+	 WrK+kaJyWvhrg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3DAE760AB3;
-	Fri, 30 Oct 2026 12:00:23 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id A95B1362
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 12:00:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DFBDA60633;
+	Fri, 30 Oct 2026 12:14:44 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 56283D38
+ for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 12:14:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8F01940A90
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 12:00:21 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 47592810F5
+ for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 12:14:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Vr7yUVHaVOKg for <u-boot@lists.u-boot-project.org>;
- Fri, 30 Oct 2026 12:00:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E4E2E40A5B
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=205.220.168.131
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793361620;
- b=Gkzeer2nXv03B3FoKD/F5y5USF1WsFG720lOGow/wGXZEgj+XyGumYeMds/oiYBC7Grc
- pLtXtkAHFC34QUTOE3Gjca1EL5L6Aml0PcBMQgcGaXFwzhe1dWW18wOouvtBzL8o4UGF8
- e5ymFzzTkJdsDQEBGHR1+VFT5NnvpW2y0/xiuFvSl0avUVzJtaZxEpFA0w9rHa49UW15u
- JVF3Aac7mgwKXZl9Lsv/7Onlg4N02n0Hl0CIaek3CCpcE1Pxjt8PXy7FpsXh4HdLK+tFu
- XCjBTd8e8xNW+ALHIFpPOn38n36l6WseuKfdna9GUzC0ozBVUb13izh5H3zXwA7QR6g==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793361620;
- h=Received-SPF:Received:DKIM-Signature:Received:Received:
- DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
- X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
- References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
- Cc:Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
- X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
- X-Proofpoint-Spam-Info:X-Authority-Analysis:
- X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
- bh=+U5wLsiKEhukhvsvW+ZMr5joHXabdTcVYSyq8Mo+RIM=;
- b=hlqHD32A371X6jbl9Ppfk+mVRiKSQn5XfVv/WN9fRCjas+/Cmj+U4Qhg3BTj4kAAd8Rb
- PNsQuLTyvLYW937BLN1DsbU1bxIjZQ+W/Dl6YKooMMCO89EmJZJkIzJ6RRuAin7OPrq09
- ZizHutjU5Yaho8AqwYCQENlYhfAmUQQ89X772aiao9enH9N8VdCPSqZ7TFPkGPEVPCD/J
- TFLGsyEt/UBSk27CelaPUfXnAM5UOx5fZunQbQN2NNMyy7RhS42Q8L7CRlH5xFaH+rFE7
- SVrkpJqbBvIZOl5snyLx73OvryaGBQhDBtB4MkUusPM0bq5+9nd9Fu9fSyEpYxce7Wg==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
- dmarc=pass header.from=oss.qualcomm.com;
- dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b=osBkPclG; 
- dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=VOIUHz3O; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
- helo=mx0a-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=osBkPclG; dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=VOIUHz3O
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id E4E2E40A5B
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 12:00:18 +0000 (UTC)
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69UBG8H44144767
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 12:00:18 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- +U5wLsiKEhukhvsvW+ZMr5joHXabdTcVYSyq8Mo+RIM=; b=osBkPclGvAAN97bz
- M58psfQml/F6nfMqjNE6CARABFR+h3HsL0Xkgjb2bYRpYZ20SCim9+V1gEcKxtmK
- JSDO5g0OT+RigsmUkIeq2oEErro9pe2k0B4uCJ0hxvUtCztLzk5t37mxU2/lSV+e
- qTSHwM7SCBFRaVVYkJFZJ4V841Pay8UJvOyhJKuCfGO/Gq5aBkRECL1JaASGEW6W
- ucq6F44E/+G9Pa84nxMY1DZppL3qCog2lpjME4DS7WtqugmcUIjrvKE7E0sMMyJa
- nfX97lydBUdYfn7jn7fd1AdZOuauL5uoxBIuPEa6NyrYgXg7P1jEYIzzZ7s7A5n9
- 9rH6pQ==
-Received: from mail-yx1-f69.google.com (mail-yx1-f69.google.com
- [74.125.224.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hme752v3y-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 12:00:17 +0000 (GMT)
-Received: by mail-yx1-f69.google.com with SMTP id
- 956f58d0204a3-67686ccd1b6so881700d50.2
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 05:00:17 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793361617; cv=none;
- d=google.com; s=arc-20260327;
- b=E4HHcd4oHn+SMvFb89Uljzo8/QTIedQXcBO44Aa4iFL1gS5CAcGslQWTjeWtSDhY0G
- CocIG1f2cs5zHME2D+ZhRFgBRozDsVA2xNoE9NVByFn9cXpmh02kVXmUEGFSoxEskyig
- lPIJbfhSAXq4UU62tEPfkpTHp4GwoxT5WaW+NGuxVsg9c7mQEyayfO+5S+22mMXnFEcA
- WSrZp4tofHvNZyD2iNUBHPDIUaEmbDI8MrHpbINY3qabx1mM/fJcpcxlwcJr2Ljo7Y4t
- 8o5ox+Q6X/KOPJVHshcIISSxwvYzANywkS2OwmkSW48mW95sBF2St7R12klmJ0Kv6Nbr
- fyAA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=+U5wLsiKEhukhvsvW+ZMr5joHXabdTcVYSyq8Mo+RIM=;
- fh=mWuTgIrLpLrZUttAhX2qxyrfyx/IOjbS3niidjxKZ+o=;
- b=TgZqanK7R0dZclI5Vd6uSDdfqrOe9tl5jtSRvyXIuW6DkQ4PaZlzoBXnge6h47VDd8
- Xq4V+8aX1rzex4h2ErRExXVS0iAdR2YpBnVGfxZf4TDkZZa+2r1G/uGMT6bMbFJRmvLc
- 9UVXZLVfEDbPq8QDa+gaRHa8PDEdn9udOU42Lp3O046XbvJpJ2zv0lY5V+VxfX1CA2+7
- xNTWa+7P3zznuA0vb2cRuscEkCkCKiBssVWKwDwAm87o/OTWsdp79h3X9VkLEqY1p4n0
- 41IJ/xzVV/NohLz3RNmr6pDRrTI88n7Cv/lCOqfbqFqA/VnNHeJRPp4jsuJpfkzmj/Vk
- 4n1w==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793361617; x=1793966417;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=+U5wLsiKEhukhvsvW+ZMr5joHXabdTcVYSyq8Mo+RIM=;
- b=VOIUHz3OOn0cYca4xM0WtcBJeozdl2/D8qFHhpfmn91nbSZZKVx+i6vw0Y2iiDo1iw
- C4X0jUeY9LgxvwzAdr2oFCrq+wuMkHcyVrkXqSGz0itGK2OJzgZa41Qf4xqX6+4UmBhC
- ApCS06GassvukHwebjFyfgszF3QpjpJXfa8ddsvr0AOUjmlYM9h0/5vxYNulBB9Ust84
- 9LJPgOuQbUE8Gw03usRcucnIR8JKDMgyJHd8W5b+6IbnftdXjBtEJRyt2859jl3iF7Wc
- 2tAnOszVoeBoZr9sYTAYElehJoD+XG9JwpJjZZxmuxg2cMZ8uf5hOmo/se/s85Mh3yfd
- MGDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793361617; x=1793966417;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=+U5wLsiKEhukhvsvW+ZMr5joHXabdTcVYSyq8Mo+RIM=;
- b=d9/oCnGRla+1txIbWjiNO7JQseGMeMbOt0CtV4RygGdgXFvi6mrn0975HMpxuOZ3wr
- eTN7OjknM4JAnNCFPRLh71qFSZlGRkhBG7JNAEdA0kWQfjIznay1GdDZRQe5mD+9+XxQ
- g4KkXeQcABzdXS5ecEkt2AcXnnlcWcwnnZuRfIm84tAY2lmue3KG9qKOSAIAIKS1W3K4
- qYYEQsQ/rKg9HjionZmG/miy4efN5v5WLwpH8kBhgCcRa2NeUxATTl+fnJ+3VXfFvRup
- lroWpzKIBOOHxcDPGKP3SbVok7zSLCzJULcqoBGapMkWbUHwK30ZeCmly9+ppio4Pxwi
- mhxA==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwh8P18Kt3v/KntyuNMmCZPpW4QiaZ3vK6WQsuwN+ShqGQMFksDsy6JL3KdiAwOGqQRvbwuhBs=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYLsPEyUXZEhpQfdixX5Ldvg0XYIGc1ZsgZ3hxIqBMv17oNuZAZ4
- NHhZCMwXb+c8ytYv8c+1F3NkEFCrLNY0f8aFTzPavNpBamoT7fvw86fAQHMtwsLYHkWZ5EaG91D
- y/D1j+qTqXdHgNDLlIyxDEi/Wvi5tn67WqHLqzCBgvUDScWlsgqXvvKqWD7vVWxnAQj6jtylve3
- c0WqPthvtRAE5nDC2SRQFaqD/v5kO84uqJSaL6+/JI99B04g==
-X-Gm-Gg: AYBFou28sThJ4f8n3NzZQ/D5DirPXiRuOp8eMUyCVOX/vAcI985aEAaxgmlRfQpQ4TS
- W2X6YHWSHfroStZVt0KHEmG7skPZeLvzP0z5rSM/BWV7nJW6COISrKKyxOmR2FgNHf2Y4AnATqz
- Ym6PgFhwBvrPetfv/m9p8MG02sMUguNhP7QDeOq/pBZv5GqdL6BnkYKPg=
-X-Received: by 2002:a05:690e:4397:b0:671:5b28:13aa with SMTP id
- 956f58d0204a3-67ba506e741mr943231d50.70.1793361616342; 
- Fri, 30 Oct 2026 05:00:16 -0700 (PDT)
-X-Received: by 2002:a05:690e:4397:b0:671:5b28:13aa with SMTP id
- 956f58d0204a3-67ba506e741mr943214d50.70.1793361615616; Fri, 30 Oct 2026
- 05:00:15 -0700 (PDT)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OkFfqiVyLWCB for <u-boot@lists.u-boot-project.org>;
+ Fri, 30 Oct 2026 12:14:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0FFE68108A
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=212.227.17.20
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793362482;
+ b=S9NR+PDy1L4p5JWiurlLU5eYPDSeRndhqt6CaJV1T9UkY6MiRI9hYXIgMxACom1JQvEb
+ 1F+qa6lnUvBs5fwLF9h+OkNSlO1LGh31f3FVe0+RQg5skYTMXX6iEk/p5ic7dNjspIxqb
+ 5WuqfwA9JOqBgvr5vC3skdXqpO2xH/+FXnqKSf+RMzWYR+bGBJK+S4/fpWVTlhU/Pc4Bl
+ JnCe6aP5WWAYuL7dMS7FogPMiIw73DWsOsJyQct9tKNSlSbw4bEGXLlu15s1nk7QpKkM0
+ TqLhVXcTApKY8hBNGhNP7+8z0ig4+b++erS7aDwx+bvpHPeIKRdiz4PesJTvTRn9pfg==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793362482;
+ h=Received-SPF:DKIM-Signature:X-UI-Sender-Class:Received:Message-ID:
+ Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+ Content-Language:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:X-Provags-ID:X-Spam-Flag:UI-OutboundReport;
+ bh=43GgOipTg7hjORhGafPJk3ZVRT4K8MB/+KS2EFNYZ88=;
+ b=YKyl9J+CngJqUGi29MbChPxv0VxOkc6Pyxl6lI89a3IfJh7nzfbj2q/gt2DFPWI77CLp
+ bdT8Cfj8q/7zvEByPadjRorGjkCdov7RKhTjCkxUB72HAvZPysLDYgmE8aJR+D0FgD9c/
+ +R1Bg1xOmRF1Rd4nDrSFDYOmvL+CUh3MqzQS40WxhFDMePmOamRyfJNEfQocfBN+MfKYL
+ WgztFAMMf0GIbkYM7yG3B3lpwpvbfZj15nzt2Eg6Wqx6Mc55uyf/BefgUZIqySMDi056X
+ DFZDwrm9YY1eyzA1mucu3UTAkhS13D9pt5YVUwG2OmqBuEsaGa370YJ6T1CR5JwfPrA==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=pass header.from=gmx.de;
+ dkim=pass header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256
+ header.s=s31663417 header.b=jcQpkE0Y; 
+ arc=none smtp.remote-ip=212.227.17.20
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.17.20;
+ helo=mout.gmx.net; envelope-from=xypron.glpk@gmx.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256
+ header.s=s31663417 header.b=jcQpkE0Y
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0FFE68108A
+ for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 12:14:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1793362477; x=1793967277; i=xypron.glpk@gmx.de;
+ bh=43GgOipTg7hjORhGafPJk3ZVRT4K8MB/+KS2EFNYZ88=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=jcQpkE0YJ1lRXCjEd3Dw+3J0WwpREdeCpMAsgSMbRGjc1hVw+B1Zx08FY9BAe6xu
+ LQkABl6YeVwKh9Q5mmOr6JjtBkAasGVsG3ouG3iNgssSHG8BJ0UMSEK17JbjtWYcl
+ RlAbNKnKRW/QswrJjq/TAR5DgmFaygBBRT72hIc+IaLrQsapmeP08lQD70x8Pgm9X
+ ogzhEfGLwbWFFasYRVpUGWqYKp8Qq2V5eo/TRFi+4kQ4wPXTJKEEO5OAs8iWAcEyq
+ UPsbi+qi11uli2KIshYVZ3/eAGM43HOTEnPz0BBHG5x20F48KKOsmtt8EIKc3P+DY
+ 3LKlVKbwwm1yW0VEig==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N7R1J-1wSvLt3rwr-010J5J; Fri, 30
+ Oct 2026 13:14:37 +0100
+Message-ID: <35841cbc-a276-48ab-b5dd-1ee44340eb62@gmx.de>
+Date: Fri, 30 Oct 2026 13:14:33 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261021160916.3894471-1-aswin.murugan@oss.qualcomm.com>
- <20261021160916.3894471-6-aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <20261021160916.3894471-6-aswin.murugan@oss.qualcomm.com>
-From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Fri, 30 Oct 2026 13:00:04 +0100
-X-Gm-Features: AclHuK8pMmIU0yr1peAPbRJtE-5yJE4caG5t1Pl1MRt-Aon3nqc3-I3cUWNEChM
-Message-ID: <CAPzfCAaQ9Z1MWKBCFp-s67PY1M0cZJF-HPW779KCXKpSKmuziA@mail.gmail.com>
-Subject: Re: [PATCH v4 05/12] phy: qcom: add QMP USB3 PHY driver for Shikra
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, trini@konsulko.com, lukma@nabladev.com,
- marek.vasut+usb@mailbox.org, Michael.Srba@seznam.cz,
- william.bright@imd-tec.com, luca.weiss@fairphone.com,
- nikroks@mainlining.org, nathbappai@gmail.com, macpaul.lin@mediatek.com,
- jbx6244@gmail.com, dlechner@baylibre.com,
- balaji.selvanathan@oss.qualcomm.com,
- varadarajan.narayanan@oss.qualcomm.com, u-boot-qcom@groups.io,
- u-boot@lists.u-boot-project.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 02/10] efi_loader: check the PE image ranges in
+ efi_image_parse()
+To: Ana Bobillo <anabobillo3@gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+References: <633dddd6-ee22-4cd6-a8b6-cb7df0650fae@gmail.com>
+ <fd7c9742-f369-4877-9a14-665b6b8afc2b@gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <fd7c9742-f369-4877-9a14-665b6b8afc2b@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-GUID: 90bmEwfAi4P3lomJ-X-Uyzhydoil7YKV
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMwMDA0NyBTYWx0ZWRfX2vdhY6JRs1bw
- ITc3qTwyAFsQrL/vi9RkkH3qWThJ2Q8Y0MDX32fOq+EeruFcdwgF3CzhWXhPQ+pCahnDH5LbBrY
- z3n7wATVnvIw0tzTCcb9BM/PS1VUApOvoX3UK/43ACoo6kKeeTlfhy3AFXsJtOq3dWyJBIlhTHv
- p4r5w7JXUJTrQx1QY5RibTxG3Ep0Qt51Vo3wDJfQmf11q9xKNfQZmm1Npqz38tagi1X3pS7O9oY
- w4ygJgXL/nahB+dyQV9+UUka5mAc+P3wvQ76KIXGO0JXXenK2juFm39W5v1chBAEomkd9EdJngB
- N85avpeUkY0uQdBvqGtVQ7d7kUMZHls8f4rGfmNStfJvl5lMbm1xl7+Q2lq7d04rUSgT3ZkPQeS
- cyrmpNlde70bTuAdmKG1BxuZq4M+QxZYwLL+FiI4VKx//WG7wtxmSUp5GQ/nAct7OQpoL9xx6uN
- Wg2XyqMLddg74kDAb8w==
-X-Proofpoint-ORIG-GUID: 90bmEwfAi4P3lomJ-X-Uyzhydoil7YKV
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMwMDA0NyBTYWx0ZWRfXz6jm8pGVNQmw
- HSe9oSAqScOo7XhqNKD8dmcjB63JrVIipwf1X983od7We3c9iDyaYyf0KPx+CvWoLK/1NMQ3q2Z
- mkpbv7rnIweSnkoMc6FtSgmmihIGsAQ=
-X-Authority-Analysis: v=2.4 cv=KdtHIgYD c=1 sm=1 tr=0 ts=6ae486d1 cx=c_pps
- a=J+5FMm3BkXb42VdG8aMU9w==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8 a=ctUv7CzhD7QUSdI4vLUA:9
- a=QEXdDO2ut3YA:10 a=Epx66wHExT0cjJnnR-oj:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-30_04,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 clxscore=1015 spamscore=0 phishscore=0
- suspectscore=0 priorityscore=1501 malwarescore=0 adultscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610300047
+X-Provags-ID: V03:K1:gduU/pidPimeHXzWXV6k0PkKFy0uwKSVRIZfaS1yvQdp08+8bKi
+ sOqe2MpALYnSUoJkPRAeJvIbNFw5nb1vm3u4gCcpjVIo903hrdkfyUpaXwL3GvnztD7aUJA
+ dydjK+Z5IijMiR9+VLuUacvu9WPbz6OgxkAuo2WaYghlCeR9Tu96EHyaZ9Cq0Saku94FW/3
+ tlk5OyiHjF69S8mxxTfiA==
+UI-OutboundReport: notjunk:1;M01:P0:Ei+1Ejlrg2M=;/JTQUZNd6AIxlZKSJhMQW6M16Ur
+ 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
+ ZCjIN
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -262,635 +249,468 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-19.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Aswin,
+On 10/30/26 07:13, Ana Bobillo wrote:
+> From: Ana Bobillo <anabobillo3@gmail.com>
+>=20
+> efi_image_parse() collects the regions of an image to be hashed for
+> Secure Boot and for TCG2 measurements. It takes the header size, the
+> section table, each section's raw data and the certificate table from
+> the image without checking them against the image size:
+>=20
+> - SizeOfHeaders and each section's PointerToRawData and SizeOfRawData
+>    are added as regions even when they run past the end of the image,
+>    which is then read out of bounds when the regions are hashed;
+> - the section table is read wherever SizeOfOptionalHeader and
+>    NumberOfSections put it;
+> - the end of the certificate table is computed in 32 bits, so a large
+>    offset wraps around and passes the check;
+> - errors of efi_image_region_add() are ignored.
+>=20
+> All of this happens before the signature is verified.
+>=20
+> Call efi_check_pe() first, check each offset and size against the image
+> size without wrapping, add regions only through a checked helper and fai=
+l
+> on its errors, and require the file alignment to be a power of two. The
+> padding of a section to the file alignment is hashed only as far as the
+> image goes, so an image whose last section is not padded is still
+> accepted. Check the certificate table against the size of
+> WIN_CERTIFICATE, not of a pointer to it.
+>=20
+> barebox, whose EFI loader is based on this file, added the same checks i=
+n
+> 4ec1f7166778 ("efi: validate PE parser input ranges"); this is a port to
+> U-Boot. Unlike there, an optional header with fewer than 16 data
+> directories is still accepted if it holds the certificate table entry it
+> declares: U-Boot's own EFI applications have six.
 
-On Wed, Oct 21, 2026 at 6:10=E2=80=AFPM Aswin Murugan
-<aswin.murugan@oss.qualcomm.com> wrote:
->
-> Shikra USB3 QMP PHY uses a single-PHY DT binding (#phy-cells =3D <0>),
-> which is not supported by the existing QMP combo PHY driver.
->
-> Add a dedicated USB3-only QMP PHY driver for Shikra, porting the PHY
-> initialization sequence and configuration tables from Linux
-> drivers/phy/qualcomm/phy-qcom-qmp-usbc.c. The driver is selected
-> through PHY_QCOM_QMP_USB3_LEGACY and enables USB3 PHY bring-up on
-> Shikra platforms.
->
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-I don't have Shikra board, but tested this on Agatti (Uno Q), which is
-same SoC family (Bruin):
+The PECOFF specification does not require any table. Six are needed if=20
+you have a .reloc section which some non-compliant software assumes.=20
+Aren't you describing a bug in barebox?
 
-Tested-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+read_header() in=20
+https://github.com/rhboot/shim/blob/e794a714339b1277abe9f890fc98de6e415681=
+b0/pe-relocate.c#L376=20
+has rather strict tests for PE files. It might be worthwhile to compare=20
+their checks with ours.
+
+>=20
+> Fixes: 4540dabdcaca ("efi_loader: image_loader: support image authentica=
+tion")
+> Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
 > ---
->  drivers/phy/qcom/Kconfig                    |   7 +
->  drivers/phy/qcom/Makefile                   |   1 +
->  drivers/phy/qcom/phy-qcom-qmp-usb3-legacy.c | 534 ++++++++++++++++++++
->  3 files changed, 542 insertions(+)
->  create mode 100644 drivers/phy/qcom/phy-qcom-qmp-usb3-legacy.c
->
-> diff --git a/drivers/phy/qcom/Kconfig b/drivers/phy/qcom/Kconfig
-> index 1fdadaccb12..ffb523fffbb 100644
-> --- a/drivers/phy/qcom/Kconfig
-> +++ b/drivers/phy/qcom/Kconfig
-> @@ -32,6 +32,13 @@ config PHY_QCOM_QMP_UFS
->         help
->           Enable this to support the UFS QMP PHY on various Qualcomm chip=
-sets.
->
-> +config PHY_QCOM_QMP_USB3_LEGACY
-> +       bool "Qualcomm QMP USB3-only legacy PHY driver"
-> +       depends on PHY && ARCH_SNAPDRAGON
-> +       help
-> +         Enable this to support the legacy USB3-only QMP PHY (v3) found =
-on
-> +         older Qualcomm chipsets such as QCM2290/QCS615 and derivatives.
-> +
->  config PHY_QCOM_QUSB2
->         bool "Qualcomm USB QUSB2 PHY driver"
->         depends on PHY && ARCH_SNAPDRAGON
-> diff --git a/drivers/phy/qcom/Makefile b/drivers/phy/qcom/Makefile
-> index 714013dc572..dfad1f1e56a 100644
-> --- a/drivers/phy/qcom/Makefile
-> +++ b/drivers/phy/qcom/Makefile
-> @@ -3,6 +3,7 @@ obj-$(CONFIG_MSM8916_USB_PHY) +=3D msm8916-usbh-phy.o
->  obj-$(CONFIG_PHY_QCOM_QMP_COMBO) +=3D phy-qcom-qmp-combo.o
->  obj-$(CONFIG_PHY_QCOM_QMP_PCIE) +=3D phy-qcom-qmp-pcie.o
->  obj-$(CONFIG_PHY_QCOM_QMP_UFS) +=3D phy-qcom-qmp-ufs.o
-> +obj-$(CONFIG_PHY_QCOM_QMP_USB3_LEGACY) +=3D phy-qcom-qmp-usb3-legacy.o
->  obj-$(CONFIG_PHY_QCOM_QUSB2) +=3D phy-qcom-qusb2.o
->  obj-$(CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2) +=3D phy-qcom-snps-femto-v2.o
->  obj-$(CONFIG_PHY_QCOM_SNPS_EUSB2) +=3D phy-qcom-snps-eusb2.o
-> diff --git a/drivers/phy/qcom/phy-qcom-qmp-usb3-legacy.c b/drivers/phy/qc=
-om/phy-qcom-qmp-usb3-legacy.c
-> new file mode 100644
-> index 00000000000..d1aad6e7952
-> --- /dev/null
-> +++ b/drivers/phy/qcom/phy-qcom-qmp-usb3-legacy.c
-> @@ -0,0 +1,534 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+>   lib/efi_loader/efi_image_loader.c | 268 +++++++++++++++++++++---------
+>   1 file changed, 190 insertions(+), 78 deletions(-)
+>=20
+> diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_imag=
+e_loader.c
+> index e31493d5135..35cf3cd268f 100644
+> --- a/lib/efi_loader/efi_image_loader.c
+> +++ b/lib/efi_loader/efi_image_loader.c
+> @@ -393,6 +393,69 @@ void *efi_prepare_aligned_image(void *efi, u64 *efi=
+_size)
+>   	}
+>   }
+>  =20
+> +/**
+> + * pe_range_ok() - check that a range lies within the image
+> + * @len:	size of the image
+> + * @off:	offset of the range from the start of the image
+> + * @size:	size of the range
+> + *
+> + * Return:	true if [@off, @off + @size) lies within [0, @len)
 > + */
-> +
-> +#include <clk.h>
-> +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <dm/devres.h>
-> +#include <dm/uclass.h>
-> +#include <generic-phy.h>
-> +#include <reset.h>
-> +#include <power/regulator.h>
-> +#include <usb/tcpm.h>
-> +#include <asm/io.h>
-> +#include <linux/bitops.h>
-> +#include <linux/compat.h>
-> +#include <linux/delay.h>
-> +#include <linux/iopoll.h>
-> +#include <linux/err.h>
-> +
-> +#include "phy-qcom-qmp-common.h"
-> +
-> +#include "phy-qcom-qmp.h"
-> +#include "phy-qcom-qmp-pcs-misc-v3.h"
-> +
-> +/* QPHY_V3_PCS_MISC_TYPEC_CTRL-equivalent bit, legacy USB3-only PHY */
-> +#define SW_PORTSELECT_MUX                      BIT(1)
-> +#define SW_PORTSELECT_VAL                      BIT(0)
-> +
-> +#define PHY_INIT_COMPLETE_TIMEOUT              10000
-> +
-> +#define RESET_SETTLE_DELAY_US                  10
-> +
-> +struct qmp_usb3_legacy_offsets {
-> +       u16 serdes;
-> +       u16 tx;
-> +       u16 rx;
-> +       u16 tx2;
-> +       u16 rx2;
-> +       u16 pcs;
-> +       u16 pcs_misc;
-> +};
-> +
-> +static const struct qmp_usb3_legacy_offsets qmp_usb3_legacy_offsets_qcm2=
-290 =3D {
-> +       .serdes         =3D 0x000,
-> +       .tx             =3D 0x200,
-> +       .rx             =3D 0x400,
-> +       .tx2            =3D 0x600,
-> +       .rx2            =3D 0x800,
-> +       .pcs_misc       =3D 0xa00,
-> +       .pcs            =3D 0xc00,
-> +};
-> +
-> +static const struct qmp_phy_init_tbl qcm2290_usb3_serdes_tbl[] =3D {
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_SYSCLK_EN_SEL, 0x14),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_BIAS_EN_CLKBUFLR_EN, 0x08),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_CLK_SELECT, 0x30),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_SYS_CLK_CTRL, 0x06),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_RESETSM_CNTRL, 0x00),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_RESETSM_CNTRL2, 0x08),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_BG_TRIM, 0x0f),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_SVS_MODE_CLK_SEL, 0x01),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_HSCLK_SEL, 0x00),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_DEC_START_MODE0, 0x82),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_DIV_FRAC_START1_MODE0, 0x55),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_DIV_FRAC_START2_MODE0, 0x55),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_DIV_FRAC_START3_MODE0, 0x03),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_CP_CTRL_MODE0, 0x0b),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_PLL_RCTRL_MODE0, 0x16),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_PLL_CCTRL_MODE0, 0x28),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_INTEGLOOP_GAIN0_MODE0, 0x80),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_INTEGLOOP_GAIN1_MODE0, 0x00),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_CORECLK_DIV, 0x0a),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_LOCK_CMP1_MODE0, 0x15),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_LOCK_CMP2_MODE0, 0x34),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_LOCK_CMP3_MODE0, 0x00),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_LOCK_CMP_EN, 0x00),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_CORE_CLK_EN, 0x00),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_LOCK_CMP_CFG, 0x00),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_VCO_TUNE_MAP, 0x00),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_BG_TIMER, 0x0a),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_SSC_EN_CENTER, 0x01),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_SSC_PER1, 0x31),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_SSC_PER2, 0x01),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_SSC_ADJ_PER1, 0x00),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_SSC_ADJ_PER2, 0x00),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_SSC_STEP_SIZE1, 0xde),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_SSC_STEP_SIZE2, 0x07),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_PLL_IVCO, 0x0f),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_CMN_CONFIG, 0x06),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_INTEGLOOP_INITVAL, 0x80),
-> +       QMP_PHY_INIT_CFG(QSERDES_COM_BIAS_EN_CTRL_BY_PSM, 0x01),
-> +};
-> +
-> +static const struct qmp_phy_init_tbl qcm2290_usb3_tx_tbl[] =3D {
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_TX_HIGHZ_DRVR_EN, 0x10),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_TX_RCV_DETECT_LVL_2, 0x12),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_TX_LANE_MODE_1, 0xc6),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_TX_RES_CODE_LANE_OFFSET_TX, 0x00),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_TX_RES_CODE_LANE_OFFSET_RX, 0x00),
-> +};
-> +
-> +static const struct qmp_phy_init_tbl qcm2290_usb3_rx_tbl[] =3D {
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_UCDR_FASTLOCK_FO_GAIN, 0x0b),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_UCDR_PI_CONTROLS, 0x80),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_UCDR_FASTLOCK_COUNT_LOW, 0x00),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_UCDR_FASTLOCK_COUNT_HIGH, 0x00),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_UCDR_FO_GAIN, 0x0a),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_UCDR_SO_GAIN, 0x06),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_UCDR_SO_SATURATION_AND_ENABLE, 0x7=
-5),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_RX_EQU_ADAPTOR_CNTRL2, 0x02),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_RX_EQU_ADAPTOR_CNTRL3, 0x4e),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_RX_EQU_ADAPTOR_CNTRL4, 0x18),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_RX_EQ_OFFSET_ADAPTOR_CNTRL1, 0x77)=
-,
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_RX_OFFSET_ADAPTOR_CNTRL2, 0x80),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_VGA_CAL_CNTRL2, 0x0a),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_SIGDET_CNTRL, 0x03),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_SIGDET_DEGLITCH_CNTRL, 0x16),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_SIGDET_ENABLES, 0x00),
-> +       QMP_PHY_INIT_CFG(QSERDES_V3_RX_RX_MODE_00, 0x00),
-> +};
-> +
-> +static const struct qmp_phy_init_tbl qcm2290_usb3_pcs_tbl[] =3D {
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_TXMGN_V0, 0x9f),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_TXDEEMPH_M6DB_V0, 0x17),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_TXDEEMPH_M3P5DB_V0, 0x0f),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_FLL_CNTRL2, 0x83),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_FLL_CNTRL1, 0x02),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_FLL_CNT_VAL_L, 0x09),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_FLL_CNT_VAL_H_TOL, 0xa2),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_FLL_MAN_CODE, 0x85),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_LOCK_DETECT_CONFIG1, 0xd1),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_LOCK_DETECT_CONFIG2, 0x1f),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_LOCK_DETECT_CONFIG3, 0x47),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_RXEQTRAINING_WAIT_TIME, 0x75),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_RXEQTRAINING_RUN_TIME, 0x13),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_LFPS_TX_ECSTART_EQTLOCK, 0x86),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_PWRUP_RESET_DLY_TIME_AUXCLK, 0x04),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_TSYNC_RSYNC_TIME, 0x44),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_RCVR_DTCT_DLY_P1U2_L, 0xe7),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_RCVR_DTCT_DLY_P1U2_H, 0x03),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_RCVR_DTCT_DLY_U3_L, 0x40),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_RCVR_DTCT_DLY_U3_H, 0x00),
-> +       QMP_PHY_INIT_CFG(QPHY_V3_PCS_RX_SIGDET_LVL, 0x88),
-> +};
-> +
-> +/* Per-compatible config; add a new instance here to support another SoC=
- */
-> +struct qmp_usb3_legacy_cfg {
-> +       const struct qmp_usb3_legacy_offsets *offsets;
-> +
-> +       const struct qmp_phy_init_tbl *serdes_tbl;
-> +       int serdes_tbl_num;
-> +       const struct qmp_phy_init_tbl *tx_tbl;
-> +       int tx_tbl_num;
-> +       const struct qmp_phy_init_tbl *rx_tbl;
-> +       int rx_tbl_num;
-> +       const struct qmp_phy_init_tbl *pcs_tbl;
-> +       int pcs_tbl_num;
-> +
-> +       /* clock names fetched by clk_get_by_name(); "pipe" is fetched se=
-parately */
-> +       const char * const *clk_list;
-> +       int num_clks;
-> +
-> +       const char * const *vreg_list;
-> +       int num_vregs;
-> +};
-> +
-> +static const char * const shikra_usb3_clk_l[] =3D {
-> +       "cfg_ahb", "ref", "com_aux",
-> +};
-> +
-> +static const struct qmp_usb3_legacy_cfg shikra_usb3phy_cfg =3D {
-> +       .offsets        =3D &qmp_usb3_legacy_offsets_qcm2290,
-> +       .serdes_tbl     =3D qcm2290_usb3_serdes_tbl,
-> +       .serdes_tbl_num =3D ARRAY_SIZE(qcm2290_usb3_serdes_tbl),
-> +       .tx_tbl         =3D qcm2290_usb3_tx_tbl,
-> +       .tx_tbl_num     =3D ARRAY_SIZE(qcm2290_usb3_tx_tbl),
-> +       .rx_tbl         =3D qcm2290_usb3_rx_tbl,
-> +       .rx_tbl_num     =3D ARRAY_SIZE(qcm2290_usb3_rx_tbl),
-> +       .pcs_tbl        =3D qcm2290_usb3_pcs_tbl,
-> +       .pcs_tbl_num    =3D ARRAY_SIZE(qcm2290_usb3_pcs_tbl),
-> +       .clk_list       =3D shikra_usb3_clk_l,
-> +       .num_clks       =3D ARRAY_SIZE(shikra_usb3_clk_l),
-> +       .vreg_list      =3D NULL,
-> +       .num_vregs      =3D 0,
-> +};
-> +
-> +static const char * const talos_usb3_clk_l[] =3D {
-> +       "aux", "ref", "cfg_ahb",
-> +};
-> +
-> +static const char * const talos_usb3_vreg_l[] =3D {
-> +       "vdda-phy-supply", "vdda-pll-supply",
-> +};
-> +
-> +static const struct qmp_usb3_legacy_cfg talos_usb3phy_cfg =3D {
-> +       .offsets        =3D &qmp_usb3_legacy_offsets_qcm2290,
-> +       .serdes_tbl     =3D qcm2290_usb3_serdes_tbl,
-> +       .serdes_tbl_num =3D ARRAY_SIZE(qcm2290_usb3_serdes_tbl),
-> +       .tx_tbl         =3D qcm2290_usb3_tx_tbl,
-> +       .tx_tbl_num     =3D ARRAY_SIZE(qcm2290_usb3_tx_tbl),
-> +       .rx_tbl         =3D qcm2290_usb3_rx_tbl,
-> +       .rx_tbl_num     =3D ARRAY_SIZE(qcm2290_usb3_rx_tbl),
-> +       .pcs_tbl        =3D qcm2290_usb3_pcs_tbl,
-> +       .pcs_tbl_num    =3D ARRAY_SIZE(qcm2290_usb3_pcs_tbl),
-> +       .clk_list       =3D talos_usb3_clk_l,
-> +       .num_clks       =3D ARRAY_SIZE(talos_usb3_clk_l),
-> +       .vreg_list      =3D talos_usb3_vreg_l,
-> +       .num_vregs      =3D ARRAY_SIZE(talos_usb3_vreg_l),
-> +};
-> +
-> +struct qmp_usb3_legacy {
-> +       struct udevice *dev;
-> +       void __iomem *serdes;
-> +       void __iomem *tx;
-> +       void __iomem *rx;
-> +       void __iomem *tx2;
-> +       void __iomem *rx2;
-> +       void __iomem *pcs;
-> +       void __iomem *pcs_misc;
-> +       struct clk *clks;
-> +       struct clk pipe_clk;
-> +       int num_clks;
-> +       struct reset_ctl_bulk resets;
-> +       struct udevice **vregs;
-> +       int num_vregs;
-> +       const struct qmp_usb3_legacy_cfg *cfg;
-> +};
-> +
-> +static inline void qphy_setbits(void __iomem *base, u32 offset, u32 val)
+> +static bool pe_range_ok(size_t len, size_t off, size_t size)
 > +{
-> +       u32 reg;
-> +
-> +       reg =3D readl(base + offset);
-> +       reg |=3D val;
-> +       writel(reg, base + offset);
-> +       readl(base + offset);
+> +	return off <=3D len && size <=3D len - off;
 > +}
 > +
-> +static inline void qphy_clrbits(void __iomem *base, u32 offset, u32 val)
+> +/**
+> + * pe_align_size() - round up a section size to the file alignment
+> + * @size:	size of the raw data of a section
+> + * @align:	file alignment, a power of two
+> + * @aligned:	on return @size rounded up to @align
+> + *
+> + * Return:	true on success, false if @align is not a power of two or
+> + *		the rounded size overflows
+> + */
+> +static bool pe_align_size(u32 size, u32 align, size_t *aligned)
 > +{
-> +       u32 reg;
+> +	size_t val =3D size;
 > +
-> +       reg =3D readl(base + offset);
-> +       reg &=3D ~val;
-> +       writel(reg, base + offset);
-> +       readl(base + offset);
+> +	if (!align || (align & (align - 1)))
+> +		return false;
+
+FileAlignment and SectionAlignment should be checked once before the=20
+loop calling this function instead of checking the same value multiple=20
+times.
+
+> +
+> +	if (__builtin_add_overflow(val, (size_t)align - 1, &val))
+> +		return false;
+
+We are already checking for overflows in pe_range_ok(). Why use=20
+__builtin_add_overflow()?
+
+> +
+> +	*aligned =3D val & ~((size_t)align - 1);
+
+This whole function can be replaced by using the ALIGN() macro.
+
+> +
+> +	return true;
 > +}
 > +
-> +/* Quiesce the PHY; shared by power_off() and power_on()'s error path */
-> +static void qmp_usb3_legacy_quiesce(struct qmp_usb3_legacy *qmp)
+> +/**
+> + * efi_image_region_add_checked() - add a region of an image
+> + * @regs:	pointer to array of regions
+> + * @efi:	pointer to the image
+> + * @len:	size of the image
+> + * @start:	offset of the region in the image
+> + * @size:	size of the region
+> + * @nocheck:	flag against overlapped regions
+> + *
+> + * Add the region [@start, @start + @size[ of the image to @regs if it =
+lies
+> + * within the image.
+> + *
+> + * Return:	status code
+> + */
+> +static efi_status_t efi_image_region_add_checked(struct efi_image_regio=
+ns *regs,
+> +						 const void *efi, size_t len,
+> +						 size_t start, size_t size,
+> +						 int nocheck)
 > +{
-> +       qphy_clrbits(qmp->pcs, QPHY_V3_PCS_START_CONTROL, SERDES_START | =
-PCS_START);
-> +       qphy_setbits(qmp->pcs, QPHY_V3_PCS_SW_RESET, SW_RESET);
-> +       qphy_clrbits(qmp->pcs, QPHY_V3_PCS_POWER_DOWN_CONTROL, SW_PWRDN);
+> +	if (!pe_range_ok(len, start, size))
+> +		return EFI_INVALID_PARAMETER;
+> +
+> +	return efi_image_region_add(regs, efi + start, efi + start + size,
+> +				    nocheck);
 > +}
 > +
-> +/* Fixed orientation by default; use TCPM orientation if available */
-> +static u32 qmp_usb3_legacy_get_portselect(struct qmp_usb3_legacy *qmp)
-> +{
-> +       u32 val =3D SW_PORTSELECT_MUX;
+>   /**
+>    * efi_image_parse() - parse a PE image
+>    * @efi:	Pointer to image
+> @@ -401,8 +464,8 @@ void *efi_prepare_aligned_image(void *efi, u64 *efi_=
+size)
+>    * @auth:	Pointer to a pointer to authentication data in PE
+>    * @auth_len:	Size of @auth
+>    *
+> - * Parse image binary in PE32(+) format, assuming that sanity of PE ima=
+ge
+> - * has been checked by a caller.
+> + * Parse image binary in PE32(+) format. Each offset and size taken fro=
+m the
+> + * image is checked against @len before it is used.
+>    * On success, an address of authentication data in @efi and its size =
+will
+>    * be returned in @auth and @auth_len, respectively.
+>    *
+> @@ -411,97 +474,135 @@ void *efi_prepare_aligned_image(void *efi, u64 *e=
+fi_size)
+>   bool efi_image_parse(void *efi, size_t len, struct efi_image_regions *=
+*regp,
+>   		     WIN_CERTIFICATE **auth, size_t *auth_len)
+>   {
+> -	struct efi_image_regions *regs;
+> -	IMAGE_DOS_HEADER *dos;
+> +	struct efi_image_regions *regs =3D NULL;
+>   	IMAGE_NT_HEADERS32 *nt;
+> -	IMAGE_SECTION_HEADER *sections, **sorted;
+> +	IMAGE_SECTION_HEADER *sections, **sorted =3D NULL;
+>   	int num_regions, num_sections, i;
+>   	int ctidx =3D IMAGE_DIRECTORY_ENTRY_SECURITY;
+> -	u32 align, size, authsz, authoff;
+> -	size_t bytes_hashed;
+> +	u32 align, authsz, authoff, header_size, num_dirs;
+> +	size_t bytes_hashed, opt_off, opt_size, min_opt_size;
+> +	size_t csum_off, subsys_off, dir_off, dir_end;
+> +	size_t sections_off, sections_size;
+>  =20
+> -	dos =3D (void *)efi;
+> -	nt =3D (void *)(efi + dos->e_lfanew);
+>   	authoff =3D 0;
+>   	authsz =3D 0;
+>  =20
+>   	/*
+> -	 * Count maximum number of regions to be digested.
+> -	 * We don't have to have an exact number here.
+> -	 * See efi_image_region_add()'s in parsing below.
+> +	 * efi_check_pe() checks the DOS and PE signatures and that the image
+> +	 * is large enough to hold a 64bit NT header, which is longer than a
+> +	 * 32bit one. Every optional header field and data directory entry
+> +	 * read below therefore lies within the image.
+>   	 */
+> -	num_regions =3D 3; /* for header */
+> -	num_regions +=3D nt->FileHeader.NumberOfSections;
+> -	num_regions++; /* for extra */
+> -
+> -	regs =3D calloc(sizeof(*regs) + sizeof(struct image_region) * num_regi=
+ons,
+> -		      1);
+> -	if (!regs)
+> -		goto err;
+> -	regs->max =3D num_regions;
+> +	if (efi_check_pe(efi, len, (void **)&nt) !=3D EFI_SUCCESS)
+> +		return false;
+> +	opt_off =3D (u8 *)&nt->OptionalHeader - (u8 *)efi;
+> +	opt_size =3D nt->FileHeader.SizeOfOptionalHeader;
+>  =20
+> -	/*
+> -	 * Collect data regions for hash calculation
+> -	 * 1. File headers
+> -	 */
+>   	if (nt->OptionalHeader.Magic =3D=3D IMAGE_NT_OPTIONAL_HDR64_MAGIC) {
+>   		IMAGE_NT_HEADERS64 *nt64 =3D (void *)nt;
+>   		IMAGE_OPTIONAL_HEADER64 *opt =3D &nt64->OptionalHeader;
+>  =20
+> -		/* Skip CheckSum */
+> -		efi_image_region_add(regs, efi, &opt->CheckSum, 0);
+> -		if (nt64->OptionalHeader.NumberOfRvaAndSizes <=3D ctidx) {
+> -			efi_image_region_add(regs,
+> -					     &opt->Subsystem,
+> -					     efi + opt->SizeOfHeaders, 0);
+> -		} else {
+> -			/* Skip Certificates Table */
+> -			efi_image_region_add(regs,
+> -					     &opt->Subsystem,
+> -					     &opt->DataDirectory[ctidx], 0);
+> -			efi_image_region_add(regs,
+> -					     &opt->DataDirectory[ctidx] + 1,
+> -					     efi + opt->SizeOfHeaders, 0);
+> -
+> +		min_opt_size =3D offsetof(IMAGE_OPTIONAL_HEADER64, DataDirectory);
+> +		csum_off =3D opt_off + offsetof(IMAGE_OPTIONAL_HEADER64,
+> +					      CheckSum);
+> +		subsys_off =3D opt_off + offsetof(IMAGE_OPTIONAL_HEADER64,
+> +						Subsystem);
+> +		dir_off =3D opt_off + offsetof(IMAGE_OPTIONAL_HEADER64,
+> +					     DataDirectory[ctidx]);
+> +		header_size =3D opt->SizeOfHeaders;
+> +		align =3D opt->FileAlignment;
+> +		num_dirs =3D opt->NumberOfRvaAndSizes;
+> +		if (num_dirs > ctidx) {
+>   			authoff =3D opt->DataDirectory[ctidx].VirtualAddress;
+>   			authsz =3D opt->DataDirectory[ctidx].Size;
+>   		}
+> -
+> -		bytes_hashed =3D opt->SizeOfHeaders;
+> -		align =3D opt->FileAlignment;
+>   	} else if (nt->OptionalHeader.Magic =3D=3D IMAGE_NT_OPTIONAL_HDR32_MA=
+GIC) {
+>   		IMAGE_OPTIONAL_HEADER32 *opt =3D &nt->OptionalHeader;
+>  =20
+> -		/* Skip CheckSum */
+> -		efi_image_region_add(regs, efi, &opt->CheckSum, 0);
+> -		if (nt->OptionalHeader.NumberOfRvaAndSizes <=3D ctidx) {
+> -			efi_image_region_add(regs,
+> -					     &opt->Subsystem,
+> -					     efi + opt->SizeOfHeaders, 0);
+> -		} else {
+> -			/* Skip Certificates Table */
+> -			efi_image_region_add(regs, &opt->Subsystem,
+> -					     &opt->DataDirectory[ctidx], 0);
+> -			efi_image_region_add(regs,
+> -					     &opt->DataDirectory[ctidx] + 1,
+> -					     efi + opt->SizeOfHeaders, 0);
+> -
+> +		min_opt_size =3D offsetof(IMAGE_OPTIONAL_HEADER32, DataDirectory);
+> +		csum_off =3D opt_off + offsetof(IMAGE_OPTIONAL_HEADER32,
+> +					      CheckSum);
+> +		subsys_off =3D opt_off + offsetof(IMAGE_OPTIONAL_HEADER32,
+> +						Subsystem);
+> +		dir_off =3D opt_off + offsetof(IMAGE_OPTIONAL_HEADER32,
+> +					     DataDirectory[ctidx]);
+> +		header_size =3D opt->SizeOfHeaders;
+> +		align =3D opt->FileAlignment;
+> +		num_dirs =3D opt->NumberOfRvaAndSizes;
+> +		if (num_dirs > ctidx) {
+>   			authoff =3D opt->DataDirectory[ctidx].VirtualAddress;
+>   			authsz =3D opt->DataDirectory[ctidx].Size;
+>   		}
+> -
+> -		bytes_hashed =3D opt->SizeOfHeaders;
+> -		align =3D opt->FileAlignment;
+>   	} else {
+>   		log_err("%s: Invalid optional header magic %x\n", __func__,
+>   			nt->OptionalHeader.Magic);
+> +		return false;
+> +	}
+> +	dir_end =3D dir_off + sizeof(IMAGE_DATA_DIRECTORY);
 > +
-> +       if (IS_ENABLED(CONFIG_TYPEC_TCPM)) {
-> +               struct udevice *tcpm_dev;
-> +               enum typec_orientation orientation;
-> +               int ret;
+> +	/*
+> +	 * The optional header must hold the fields used here, and the
+> +	 * certificate table entry when there is one. The section table
+> +	 * follows the optional header; it and the whole header area
+> +	 * (SizeOfHeaders) must lie within the image, as must the certificate
+> +	 * table.
+> +	 */
+> +	num_sections =3D nt->FileHeader.NumberOfSections;
+> +	sections_off =3D opt_off + opt_size;
+> +	sections_size =3D (size_t)num_sections * sizeof(IMAGE_SECTION_HEADER);
+> +	if (opt_size < min_opt_size ||
+> +	    (num_dirs > ctidx && sections_off < dir_end) ||
+> +	    !pe_range_ok(len, sections_off, sections_size) ||
+> +	    !pe_range_ok(len, 0, header_size) ||
+> +	    header_size < sections_off + sections_size) {
+> +		log_err("%s: Invalid PE headers\n", __func__);
+> +		return false;
+> +	}
+> +	if (authsz && !pe_range_ok(len, authoff, authsz)) {
+> +		log_err("%s: Size for auth too large: %u\n", __func__, authsz);
+> +		return false;
+> +	}
 > +
-> +               ret =3D uclass_first_device_check(UCLASS_TCPM, &tcpm_dev)=
-;
-> +               if (!ret && tcpm_dev) {
-> +                       orientation =3D tcpm_get_orientation(tcpm_dev);
-> +                       if (orientation =3D=3D TYPEC_ORIENTATION_REVERSE)
-> +                               val |=3D SW_PORTSELECT_VAL;
-> +               }
-> +       }
+> +	/*
+> +	 * Count maximum number of regions to be digested.
+> +	 * We don't have to have an exact number here.
+> +	 * See efi_image_region_add()'s in parsing below.
+> +	 */
+> +	num_regions =3D 3; /* for header */
+> +	num_regions +=3D num_sections;
+> +	num_regions++; /* for extra */
+
+Please, avoid this increment by starting at 4.
+
 > +
-> +       return val;
-> +}
+> +	regs =3D calloc(sizeof(*regs) + sizeof(struct image_region) * num_regi=
+ons,
+> +		      1);
+> +	if (!regs)
+>   		goto err;
+> +	regs->max =3D num_regions;
 > +
-> +static int qmp_usb3_legacy_power_on(struct phy *phy)
-> +{
-> +       struct qmp_usb3_legacy *qmp =3D dev_get_priv(phy->dev);
-> +       const struct qmp_usb3_legacy_cfg *cfg =3D qmp->cfg;
-> +       void __iomem *status;
-> +       u32 val;
-> +       int ret;
+> +	/*
+> +	 * Collect data regions for hash calculation
+> +	 * 1. File headers
+> +	 */
+> +	/* Skip CheckSum */
+> +	if (efi_image_region_add_checked(regs, efi, len, 0, csum_off, 0))
+> +		goto err;
+> +	if (num_dirs <=3D ctidx) {
+> +		if (efi_image_region_add_checked(regs, efi, len, subsys_off,
+> +						 header_size - subsys_off, 0))
+> +			goto err;
+> +	} else {
+> +		/* Skip Certificates Table */
+> +		if (efi_image_region_add_checked(regs, efi, len, subsys_off,
+> +						 dir_off - subsys_off, 0))
+> +			goto err;
+> +		if (efi_image_region_add_checked(regs, efi, len, dir_end,
+> +						 header_size - dir_end, 0))
+> +			goto err;
+>   	}
+>  =20
+> +	bytes_hashed =3D header_size;
 > +
-> +       qphy_setbits(qmp->pcs, QPHY_V3_PCS_POWER_DOWN_CONTROL, SW_PWRDN);
+>   	/* 2. Sections */
+> -	num_sections =3D nt->FileHeader.NumberOfSections;
+> -	sections =3D (void *)((uint8_t *)&nt->OptionalHeader +
+> -			    nt->FileHeader.SizeOfOptionalHeader);
+> +	sections =3D (void *)((uint8_t *)efi + sections_off);
+>   	sorted =3D calloc(sizeof(IMAGE_SECTION_HEADER *), num_sections);
+>   	if (!sorted) {
+>   		log_err("%s: Out of memory\n", __func__);
+> @@ -516,14 +617,26 @@ bool efi_image_parse(void *efi, size_t len, struct=
+ efi_image_regions **regp,
+>   	qsort(sorted, num_sections, sizeof(sorted[0]), cmp_pe_section);
+>  =20
+>   	for (i =3D 0; i < num_sections; i++) {
+> +		size_t size;
 > +
-> +       writel(qmp_usb3_legacy_get_portselect(qmp), qmp->pcs_misc);
-> +
-> +       qmp_configure(qmp->dev, qmp->serdes, cfg->serdes_tbl, cfg->serdes=
-_tbl_num);
-> +
-> +       ret =3D clk_enable(&qmp->pipe_clk);
-> +       if (ret) {
-> +               dev_err(qmp->dev, "pipe_clk enable failed err=3D%d\n", re=
-t);
-> +               return ret;
-> +       }
-> +
-> +       qmp_configure_lane(qmp->dev, qmp->tx, cfg->tx_tbl, cfg->tx_tbl_nu=
-m, 1);
-> +       qmp_configure_lane(qmp->dev, qmp->rx, cfg->rx_tbl, cfg->rx_tbl_nu=
-m, 1);
-> +
-> +       qmp_configure_lane(qmp->dev, qmp->tx2, cfg->tx_tbl, cfg->tx_tbl_n=
-um, 2);
-> +       qmp_configure_lane(qmp->dev, qmp->rx2, cfg->rx_tbl, cfg->rx_tbl_n=
-um, 2);
-> +
-> +       qmp_configure(qmp->dev, qmp->pcs, cfg->pcs_tbl, cfg->pcs_tbl_num)=
-;
-> +
-> +       qphy_clrbits(qmp->pcs, QPHY_V3_PCS_SW_RESET, SW_RESET);
-> +
-> +       qphy_setbits(qmp->pcs, QPHY_V3_PCS_START_CONTROL, SERDES_START | =
-PCS_START);
-> +
-> +       status =3D qmp->pcs + QPHY_V3_PCS_PCS_STATUS;
-> +       ret =3D readl_poll_timeout(status, val, !(val & PHYSTATUS),
-> +                                PHY_INIT_COMPLETE_TIMEOUT);
-> +       if (ret) {
-> +               dev_err(qmp->dev, "phy initialization timed-out\n");
-> +               clk_disable(&qmp->pipe_clk);
-> +               qmp_usb3_legacy_quiesce(qmp);
-> +               return ret;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static int qmp_usb3_legacy_power_off(struct phy *phy)
-> +{
-> +       struct qmp_usb3_legacy *qmp =3D dev_get_priv(phy->dev);
-> +
-> +       clk_disable(&qmp->pipe_clk);
-> +       qmp_usb3_legacy_quiesce(qmp);
-> +
-> +       return 0;
-> +}
-> +
-> +static void qmp_usb3_legacy_clk_disable_upto(struct qmp_usb3_legacy *qmp=
-, int upto)
-> +{
-> +       int i;
-> +
-> +       for (i =3D 0; i < upto; i++)
-> +               clk_disable(&qmp->clks[i]);
-> +}
-> +
-> +static int qmp_usb3_legacy_clk_init(struct qmp_usb3_legacy *qmp)
-> +{
-> +       const struct qmp_usb3_legacy_cfg *cfg =3D qmp->cfg;
-> +       struct udevice *dev =3D qmp->dev;
-> +       int num =3D cfg->num_clks;
-> +       int i, ret;
-> +
-> +       qmp->clks =3D devm_kcalloc(dev, num, sizeof(*qmp->clks), GFP_KERN=
-EL);
-> +       if (!qmp->clks)
-> +               return -ENOMEM;
-> +
-> +       qmp->num_clks =3D 0;
-> +
-> +       for (i =3D 0; i < num; i++) {
-> +               ret =3D clk_get_by_name(dev, cfg->clk_list[i], &qmp->clks=
-[i]);
-> +               if (ret) {
-> +                       dev_err(dev, "failed to get %s clock: %d\n",
-> +                               cfg->clk_list[i], ret);
-> +                       qmp_usb3_legacy_clk_disable_upto(qmp, i);
-> +                       return ret;
-> +               }
-> +
-> +               ret =3D clk_enable(&qmp->clks[i]);
-> +               if (ret) {
-> +                       dev_err(dev, "failed to enable %s clock: %d\n",
-> +                               cfg->clk_list[i], ret);
-> +                       qmp_usb3_legacy_clk_disable_upto(qmp, i);
-> +                       return ret;
-> +               }
-> +       }
-> +       qmp->num_clks =3D num;
-> +
-> +       ret =3D clk_get_by_name(dev, "pipe", &qmp->pipe_clk);
-> +       if (ret) {
-> +               dev_err(dev, "failed to get pipe clock: %d\n", ret);
-> +               qmp_usb3_legacy_clk_disable_upto(qmp, qmp->num_clks);
-> +               return ret;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static int qmp_usb3_legacy_vreg_init(struct qmp_usb3_legacy *qmp)
-> +{
-> +       const struct qmp_usb3_legacy_cfg *cfg =3D qmp->cfg;
-> +       struct udevice *dev =3D qmp->dev;
-> +       int i, ret;
-> +
-> +       qmp->num_vregs =3D 0;
-> +
-> +       if (!cfg->num_vregs)
-> +               return 0;
-> +
-> +       qmp->vregs =3D devm_kcalloc(dev, cfg->num_vregs, sizeof(*qmp->vre=
-gs), GFP_KERNEL);
-> +       if (!qmp->vregs)
-> +               return -ENOMEM;
-> +
-> +       for (i =3D 0; i < cfg->num_vregs; i++) {
-> +               ret =3D device_get_supply_regulator(dev, cfg->vreg_list[i=
-], &qmp->vregs[i]);
-> +               if (ret) {
-> +                       dev_err(dev, "failed to get regulator %s: %d\n",
-> +                               cfg->vreg_list[i], ret);
-> +                       return ret;
-> +               }
-> +       }
-> +
-> +       qmp->num_vregs =3D cfg->num_vregs;
-> +       return 0;
-> +}
-> +
-> +static int qmp_usb3_legacy_vreg_enable(struct qmp_usb3_legacy *qmp)
-> +{
-> +       int i, ret;
-> +
-> +       for (i =3D 0; i < qmp->num_vregs; i++) {
-> +               ret =3D regulator_set_enable(qmp->vregs[i], true);
-> +               if (ret) {
-> +                       dev_err(qmp->dev, "failed to enable regulator %d:=
- %d\n", i, ret);
-> +                       while (--i >=3D 0)
-> +                               regulator_set_enable(qmp->vregs[i], false=
-);
-> +                       return ret;
-> +               }
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static void qmp_usb3_legacy_vreg_disable(struct qmp_usb3_legacy *qmp)
-> +{
-> +       int i;
-> +
-> +       for (i =3D qmp->num_vregs - 1; i >=3D 0; i--)
-> +               regulator_set_enable(qmp->vregs[i], false);
-> +}
-> +
-> +static int qmp_usb3_legacy_parse_dt(struct qmp_usb3_legacy *qmp)
-> +{
-> +       const struct qmp_usb3_legacy_cfg *cfg =3D qmp->cfg;
-> +       const struct qmp_usb3_legacy_offsets *offs =3D cfg->offsets;
-> +       struct udevice *dev =3D qmp->dev;
-> +       void __iomem *base;
-> +       int ret;
-> +
-> +       base =3D (void __iomem *)dev_read_addr(dev);
-> +       if (IS_ERR(base))
-> +               return PTR_ERR(base);
-> +
-> +       qmp->serdes =3D base + offs->serdes;
-> +       qmp->tx =3D base + offs->tx;
-> +       qmp->rx =3D base + offs->rx;
-> +       qmp->tx2 =3D base + offs->tx2;
-> +       qmp->rx2 =3D base + offs->rx2;
-> +       qmp->pcs =3D base + offs->pcs;
-> +       qmp->pcs_misc =3D base + offs->pcs_misc;
-> +
-> +       ret =3D qmp_usb3_legacy_vreg_init(qmp);
-> +       if (ret)
-> +               return ret;
-> +
-> +       ret =3D qmp_usb3_legacy_vreg_enable(qmp);
-> +       if (ret)
-> +               return ret;
-> +
-> +       ret =3D reset_get_bulk(dev, &qmp->resets);
-> +       if (ret) {
-> +               dev_err(dev, "failed to get resets: %d\n", ret);
-> +               goto err_disable_vregs;
-> +       }
-> +
-> +       ret =3D reset_assert_bulk(&qmp->resets);
-> +       if (ret) {
-> +               dev_err(dev, "failed to assert resets: %d\n", ret);
-> +               goto err_disable_vregs;
-> +       }
-> +
-> +       udelay(RESET_SETTLE_DELAY_US);
-> +
-> +       ret =3D reset_deassert_bulk(&qmp->resets);
-> +       if (ret) {
-> +               dev_err(dev, "failed to deassert resets: %d\n", ret);
-> +               goto err_assert_resets;
-> +       }
-> +
-> +       ret =3D qmp_usb3_legacy_clk_init(qmp);
-> +       if (ret)
-> +               goto err_assert_resets;
-> +
-> +       return 0;
-> +
-> +err_assert_resets:
-> +       reset_assert_bulk(&qmp->resets);
-> +err_disable_vregs:
-> +       qmp_usb3_legacy_vreg_disable(qmp);
-> +
-> +       return ret;
-> +}
-> +
-> +static int qmp_usb3_legacy_probe(struct udevice *dev)
-> +{
-> +       struct qmp_usb3_legacy *qmp =3D dev_get_priv(dev);
-> +
-> +       qmp->dev =3D dev;
-> +       qmp->cfg =3D (const struct qmp_usb3_legacy_cfg *)dev_get_driver_d=
-ata(dev);
-> +       if (!qmp->cfg) {
-> +               dev_err(dev, "failed to get PHY configuration\n");
-> +               return -EINVAL;
-> +       }
-> +
-> +       return qmp_usb3_legacy_parse_dt(qmp);
-> +}
-> +
-> +static struct phy_ops qmp_usb3_legacy_ops =3D {
-> +       .power_on =3D qmp_usb3_legacy_power_on,
-> +       .power_off =3D qmp_usb3_legacy_power_off,
-> +};
-> +
-> +static const struct udevice_id qmp_usb3_legacy_ids[] =3D {
-> +       {
-> +               .compatible =3D "qcom,shikra-qmp-usb3-phy",
-> +               .data =3D (ulong)&shikra_usb3phy_cfg,
-> +       },
-> +       { }
-> +};
-> +
-> +U_BOOT_DRIVER(qcom_qmp_usb3_legacy_phy) =3D {
-> +       .name =3D "qcom-qmp-usb3-legacy-phy",
-> +       .id =3D UCLASS_PHY,
-> +       .of_match =3D qmp_usb3_legacy_ids,
-> +       .ops =3D &qmp_usb3_legacy_ops,
-> +       .probe =3D qmp_usb3_legacy_probe,
-> +       .priv_auto =3D sizeof(struct qmp_usb3_legacy),
-> +};
-> --
-> 2.34.1
->
+>   		if (!sorted[i]->SizeOfRawData)
+>   			continue;
+>  =20
+> -		size =3D (sorted[i]->SizeOfRawData + align - 1) & ~(align - 1);
+> -		efi_image_region_add(regs, efi + sorted[i]->PointerToRawData,
+> -				     efi + sorted[i]->PointerToRawData + size,
+> -				     0);
+> -		log_debug("section[%d](%s): raw: 0x%x-0x%x, virt: %x-%x\n",
+> +		if (!pe_range_ok(len, sorted[i]->PointerToRawData,
+> +				 sorted[i]->SizeOfRawData) ||
+> +		    !pe_align_size(sorted[i]->SizeOfRawData, align, &size)) {
+
+The PECOFF specification defines a default of 512 for the FileAlignment.=
+=20
+That is the value you should use if FileAlignment =3D=3D 0.
+
+> +			log_err("%s: Invalid section %d\n", __func__, i);
+> +			goto err;
+> +		}
+> +		/* The padding to the file alignment ends with the image */
+> +		size =3D min(size, len - sorted[i]->PointerToRawData);
+> +		if (efi_image_region_add_checked(regs, efi, len,
+> +						 sorted[i]->PointerToRawData,
+> +						 size, 0)) {
+> +			log_err("%s: Invalid section %d\n", __func__, i);
+> +			goto err;
+> +		}
+> +		log_debug("section[%d](%s): raw: 0x%x-0x%zx, virt: %x-%x\n",
+>   			  i, sorted[i]->Name,
+>   			  sorted[i]->PointerToRawData,
+>   			  sorted[i]->PointerToRawData + size,
+> @@ -534,25 +647,23 @@ bool efi_image_parse(void *efi, size_t len, struct=
+ efi_image_regions **regp,
+>   		bytes_hashed +=3D size;
+>   	}
+>   	free(sorted);
+> +	sorted =3D NULL;
+>  =20
+>   	/* 3. Extra data excluding Certificates Table */
+> -	if (bytes_hashed + authsz < len) {
+> +	if (bytes_hashed < len && authsz < len - bytes_hashed) {
+>   		log_debug("extra data for hash: %zu\n",
+>   			  len - (bytes_hashed + authsz));
+> -		efi_image_region_add(regs, efi + bytes_hashed,
+> -				     efi + len - authsz, 0);
+> +		if (efi_image_region_add_checked(regs, efi, len, bytes_hashed,
+> +						 len - bytes_hashed - authsz,
+> +						 0))
+> +			goto err;
+>   	}
+>  =20
+>   	/* Return Certificates Table */
+>   	if (authsz) {
+> -		if (len < authoff + authsz) {
+> -			log_err("%s: Size for auth too large: %u >=3D %zu\n",
+> -				__func__, authsz, len - authoff);
+> -			goto err;
+> -		}
+> -		if (authsz < sizeof(*auth)) {
+> +		if (authsz < sizeof(**auth)) {
+>   			log_err("%s: Size for auth too small: %u < %zu\n",
+> -				__func__, authsz, sizeof(*auth));
+> +				__func__, authsz, sizeof(**auth));
+>   			goto err;
+>   		}
+>   		*auth =3D efi + authoff;
+> @@ -569,6 +680,7 @@ bool efi_image_parse(void *efi, size_t len, struct e=
+fi_image_regions **regp,
+>   	return true;
+>  =20
+>   err:
+> +	free(sorted);
+
+Here you are closing a memory leak. But this issue is not described in=20
+the commit message.
+
+Ideally for each issue there would be a separate patch. But at least=20
+mention it in the commit message.
+
+Best regards
+
+Heinrich
+
+>   	free(regs);
+>  =20
+>   	return false;
+
