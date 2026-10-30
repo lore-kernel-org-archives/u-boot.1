@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D64C4606A31C
-	for <u-boot@archiver.kernel.org>; Fri, 30 Oct 2026 17:05:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76B4F606A31A
+	for <u-boot@archiver.kernel.org>; Fri, 30 Oct 2026 17:06:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Ey2AZv+2;
-	dkim=pass (1024-bit key, unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=k7vxAGAn
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Ote256Bf;
+	dkim=pass (1024-bit key, unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=Cez4hUj9
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 755C781673;
-	Fri, 30 Oct 2026 17:05:18 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5174440DCC;
+	Fri, 30 Oct 2026 17:06:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2rE-LdGy_yRF; Fri, 30 Oct 2026 17:05:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 73BA281309
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793379917;
-	b=FmJxMMOAO+3eceylmRij8t8NrgF8pDssiTIxOApSJXVKNl/taw9iFlqNMnegzcELqTNV
-	 JbRYnX2nyn7xckn9zsGQ9ijZc0YvhpdLcvwjOLdKoQ2VAep3/EFLAddPTSrbcO8YdD7YM
-	 7IW7p0sE3zEPT7fG0TBhmdirT+TPt2E/lkT/YkJsyKCe6fRxyDDCpA1rM73EGLXKf9HKv
-	 9GqB5gimqFe52ctteX/70Y1KkFMMzEC0RCED8ht0NIQ+19w7+rp4OtilPxjBsp6+olBJU
-	 DimBAe9qSch42keDKlMyvzLGsmCXigmTR7DoSqxhCxu412NoI0PHgt8pUWViUfecjrw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6C3GM3aAOEm7; Fri, 30 Oct 2026 17:06:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9781B40DCD
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793379986;
+	b=iDJi9OZEYmV4Knl1GCpyiNgBNVPHmbMqt3Kxxv71QNEHCg+YYSZ8X8ZriOR3p0EV7qCg
+	 inW8e2Hg3hPwGg28JUorfJW4h6Ota2TlMtw2AJkmgi6ASW+oF4WaktV4ivKLgkPJwmTv3
+	 PUkEdqFzQvbnhi6Us5w1POwa6+iECiUdfeZNuSr8vDQtU3ZQnlG+ziw5ns+E6ihGNZVRy
+	 n3lAJKlsk3z9knS3YtiHLkWXJNE+XwJre0uFSYkV7glztcWxO/2pYuNtzMn+oAMH8YsRp
+	 Elhcuhy/JDhjw2wE2et0RyWOA0H3WEEcQhkeAhDmgT4hZXw1MFVlnTGVEhYPEt+Pvnw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793379917;
+	c=relaxed/relaxed; t=1793379986;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,139 +32,140 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=EPAAuCB0S3W/e2ML7p7PUAK+RLkEZogpuGdl8EvfImw=;
-	b=nMhm+sQvVNUfHoBcGrL4kf+Wyht0t317h1s/pug7t1vAkcRLwl6Iy7m7DDpE+WaVmBQ5
-	 p1cTWGEfhzoS2P3o6uUZXiML/oyTJG3A9XXhxAaqnZ6UeRoSq9OBKyiU/Gm82ZFxHiGcV
-	 0z0cY0+SrxXtw7GU1TtqKRJSk5m14hXjFElm8v6a7LpgKZL67JsjusyCdRfEuLPER3QHB
-	 qED15Rm42d+AMLvP+mKGROEp1g3xKO8S6Qq/10FYptjhiraYAlpmFQkuiyeOKhlUAkP6I
-	 U4ZyntNsUr1jB9sNEn6wjUGqckpkO2mOL12uTs3XBw1+2SvmqciAlM4XordGicwDOhw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=ntO9Anww0hvdzdwe8PLw/sR7kz56P9KPRrEl72UF0yo=;
+	b=D9o6Fbq1dStj883dQdJcuAzhm0SVgbwp5d2ai7Q/kEGlx9I3WUMKS0Ge71DLHXTt4xlj
+	 6IRQsUzvzAYm8mtK8F3TteIZ732gK6JS5HXNgLN/b3JbA4iP14EyIjwWSMuqScMEhykEa
+	 TqtbZ757xpBlsTTdiNmSX7nP0wZvS+RX+APPFLc3vdujDWK1lKTeqp8zAW7x4FdG/gkFi
+	 5WLHqIy69Id9d176YNISLF5mnssWG5+EUnycJlV3o1pW8/pBDr7gFZUrIv9xhCI+AKJaP
+	 WHPopHC0OFwm3DjTdb1yCZ2q6ttTYwePErFZal99tLdEZs0Ym7rvXSSeNmvEZvyFXHg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793379917;
-	bh=EPAAuCB0S3W/e2ML7p7PUAK+RLkEZogpuGdl8EvfImw=;
+	d=lists.u-boot-project.org; s=default; t=1793379986;
+	bh=ntO9Anww0hvdzdwe8PLw/sR7kz56P9KPRrEl72UF0yo=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=Ey2AZv+2po9KYYNTBToWgE+71rMNDTyu7SbjpK37W0ZXjBSKw97bJZYH2aVBeU+o0
-	 nFC+Ru/h7RZelBXyPKhPVrP/+Qzbkwpa0njAzvpFO8P17XPRqncydMG5HTFfrQqZmp
-	 1xrOXX9h3ju7YsoriQY5KMEApmzzIGOBeQuEpKS85bX+tUBAPKWP0LuGvlD4qtwxKH
-	 vXeP8n1u8GAqNkOMb768qao8BLWfOXxwkU2wcdvoUBmqm4n4uvbRMvp7JzccKau+Cx
-	 2lUJHn9WBQLeB+KQ4nXk7W5UU3SFMKOAGuixAi8gJ61pjWIEuH4GPgPD4bobYYGr+J
-	 9lDLMqm1Zz6+w==
+	b=Ote256Bf55dh3IdVIsMr2mk9QgcE7/joKXB38rSPon2200Cj3XzWEApOPSk2RdJin
+	 0qR+CZuboUwZM+evfLa8PAGRu6mBU1CnIXnk4pMBidK+k4KJZai8DRWsvsDeH6bNQg
+	 G50SeLPt2fR737Bkm//DAjs8gBe/QNmIkxiPiHPysTWF8jyx6xk8riIAhclRa86Pn8
+	 lVF4MCHvMZpcCCIdqCGoKfTpzG45bmVrJHYsQTPA2td8XY5RP4vMULDf5f2IulVnmI
+	 UnrOqH+zhKKRtLlcCXBHZzwDGhCJqito9fXmKGaW45WIfzcDvbPW71/bJIbRk34RJ6
+	 v2+Y9i/RrzzzQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 73BA281309;
-	Fri, 30 Oct 2026 17:05:17 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id A201F235
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 17:05:15 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9781B40DCD;
+	Fri, 30 Oct 2026 17:06:26 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3B3DE362
+ for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 17:06:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 93C2C60625
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 17:05:15 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 215B94055A
+ for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 17:06:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eVcGkmMXcGHE for <u-boot@lists.u-boot-project.org>;
- Fri, 30 Oct 2026 17:05:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4DE1B60ACF
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::332"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793379914;
- b=grY2cgg1tfb1+E3PG00lMLTaG6JZZTbQSoH8iife+vaTorUUfPPLHMrixIKsMAalAC9N
- iD4Pg11vm6OjINJ5/QENJ63N33CSWyEWuNpCZcyhf+TZQSiRKq/aizYzq7NcEMYik8+Av
- WTaZDtq/PiGgVbIjUKVn+dMCJASBZubj9aER0RQleF+MRDJQ+jPWuMVkOgKHCZ/UdkTd4
- 34Dm6OlRwoLeHW8KkDbCVDWZi/8dcFEm3uzw389bP6GQrrNjm9BSdAATbhyPWme5d1wTi
- y67BvzRQbgFkb19CjUAiBha8FnGoN/W2vOtZ9eWTePUX/QhZkHuwxoJnzKe5NR+/47A==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WxUvzA6jomnd for <u-boot@lists.u-boot-project.org>;
+ Fri, 30 Oct 2026 17:06:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 2B341400AF
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32c"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793379984;
+ b=napq6W79vYMLMSUH3j6Nz6gV2hGlgqGK2ujM+69RFuyyDjfOxRmqNl8IVmZEOq9i4xvW
+ oUazu3zIgfjbkSNJ+gVyQnWdoBgv4JD/e4udvR7oaESO9MgnpseKzR3B7Ag1H4jWvIQAh
+ JCsHmcAHFKH8iF5oAkUd9DzZYEBpbZ6zAFM6SLF1ATtvnxEl/XB5IrdkO/k337/G8jbLf
+ ekNRDCcJKNO2owy5bSuBfI7ljcQ2WuJ6vLEo67qmP+Fl9PMtw6lMj5W0M2FKj/DSnrOKh
+ iPTjIMp8YjRanAkjMxsJiy+WwSeQkHaAtu6dWtGvzdSEKoljR6BUQFeqw4i9nN4O0Ig==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793379914;
+ c=relaxed/relaxed; t=1793379984;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
  Content-Transfer-Encoding;
- bh=EPAAuCB0S3W/e2ML7p7PUAK+RLkEZogpuGdl8EvfImw=;
- b=W6wXVPWVa4KABMrxU/HD2FHptGCkHUpcA3RKWAA+SnCVqBXlBpfoqq8Yex2U0PvjlmMH
- CzEfXCqBUL/LPVW4VGSoVcauLZs6oFxF89vGxHzBdTiGKFuIxTU8JjuwfDnjnPg+WSbvH
- 6Cc25eIAUNAw4UbL0qvo64Fm3WS9h1NeeZ1ad9KIHQ75djqF/nclUYPI2C51/1yhQDcDA
- aC95RraIwwX+tNfrkfwrqKsmjHyYIwqRAwKp8s3RkuSqSuCKwNVWfzj9/jFoQ57d+Y4vc
- Jg+VxSsBkd8ciNLkmGcqguPRHAOJfi95PjCE1UKiXmKh+6Fz9ra4GCj39XVvusXM6Wg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=ntO9Anww0hvdzdwe8PLw/sR7kz56P9KPRrEl72UF0yo=;
+ b=f1UdN5sTNftHD9a9wbFa1faUOKHZe8ilfuRVsiwB4mIWZ7IgH4ONXCKtjwL+GxQiP8Hk
+ 75tp3SsVp8aElhcR9WPcTUxxYIKXkTeSxiJxze9k+eKgM/W2p79uBHGN4NglY91V2/x6D
+ 86MDXkIgON4D6aO/FCVgJDRugsEwzU6ZruV3ynqfVDmjvuewdKHMVGLdVymc1Vo5Eohy6
+ 2GZRMLBJO4nlnc3NVWgVTiiaqotdJ5saVdC9SGxB0vtRg9uLpRDVmwsv9rTi0U4EMVuJN
+ bGzJpnrO5nKegERvpYFm+LvbJW6T5fVS0wxGTqtSO95Onhe8dbCHqCJFwpdMBeorbqg==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=amarulasolutions.com;
  dkim=pass header.d=amarulasolutions.com header.i=@amarulasolutions.com
- header.a=rsa-sha256 header.s=google header.b=k7vxAGAn; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::332"
+ header.a=rsa-sha256 header.s=google header.b=Cez4hUj9; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
+ client-ip=2a00:1450:4864:20::32c; helo=mail-wm1-x32c.google.com;
  envelope-from=dario.binacchi@amarulasolutions.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com
- header.a=rsa-sha256 header.s=google header.b=k7vxAGAn
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4DE1B60ACF
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 17:05:13 +0000 (UTC)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4a2167bd087so8069665e9.3
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 10:05:13 -0700 (PDT)
+ header.a=rsa-sha256 header.s=google header.b=Cez4hUj9
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2B341400AF
+ for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 17:06:23 +0000 (UTC)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4a2167bd087so8080025e9.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 10:06:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1793379912; x=1793984712;
+ d=amarulasolutions.com; s=google; t=1793379982; x=1793984782;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=EPAAuCB0S3W/e2ML7p7PUAK+RLkEZogpuGdl8EvfImw=;
- b=k7vxAGAnj4u6FPqvMZ9Gqk2ptrJ5nd5lWRtqsTUCArUmfZvDjqa1urEq0xH+uTsF9g
- Occnl6rwbhYzZ32fZPvtuarkoziBZbeMOAM9Fb216fTMkjOqpG4MDv/YWR+H++U62KVF
- ciVRyojcdUAvFLnPJC8sQorWUrOnID+29+mD0=
+ bh=ntO9Anww0hvdzdwe8PLw/sR7kz56P9KPRrEl72UF0yo=;
+ b=Cez4hUj91D1cRbmQHlwxNPWqCBDYFu7egi97+DD40G2XHBwqtrgHOpJRX7cHbRsIzw
+ pHxnmFV+bleKkqRKV4jw1vCaqnQ3JKhUFvdty+eZ9nYfFn8vIo8xoq5ChBIwWF3TKN4E
+ SL18njsWUXqlBLqiBvlAm5aHdafC2eb6svgKA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793379912; x=1793984712;
+ d=1e100.net; s=20260707; t=1793379982; x=1793984782;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=EPAAuCB0S3W/e2ML7p7PUAK+RLkEZogpuGdl8EvfImw=;
- b=jl7ucVGMMtwn+XOatqH1mD0A6FEWCaVF6y7NBhJB0TiShWdE2G2Uha/FcN4yIDRHDD
- 6ZLWSWuaxhgHwvJ5govFUso5/1enysSa8t2x999UdnBVtgZYPO4f/ndKKfKxarJ+VeLb
- RchQeoqJywR5nR26Xwt2xourHOYMgxqz91U4fL5UZt6mFypL9PIIEbCkv+knVIDGzNhz
- 5+5ksL6fJ8pYlNNt67zWIfHhMTPl8CCQyWwmgSDRwII5h6IfJGue/PhRy7C5iC1zWy3N
- +GEVek87HdY9eWqe6k0Q71mJ6sTcdGy15Tu7w7hu4B/FCAcmvw+xV8GmsUgX/GAZR8lf
- 4NJg==
+ bh=ntO9Anww0hvdzdwe8PLw/sR7kz56P9KPRrEl72UF0yo=;
+ b=Paqz1s7FmFczSeRj9RmJ/626CTsCzIGWiTMYlxcOeRUSD/B5OajxZuZz5AVjPPHyB5
+ quDdi0dnbAIM/Hqxw5B/1vUtmptYjCsweG69aaOK9OgdKnbuKcSx/TXfXGc07UZltOZP
+ VBRCWwJRx0X/yiXH5D5MBczQKhtSFBHT7iHzev/LOaSbTCT1mJK4vtaW//5M0KudkBiF
+ 0Wr242nAJJMV+BnpqWdDl7C+rchY+DLa0dmjuLM2zeFhl/870yMNsDvRZ6HeOx1LUh0f
+ BISVgWoeRPUE4BCpl+QIR6zNr4EEk7tf3A8fUcF+lD4SnequAqdz88mBNP/ua3XWK112
+ v+LQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzo7VZnCvXXPfCJ/jzJyB5jKnF5ZaS3bhOB5o8dn+/hBRo11JTmbw4N3OJFQNA2wc4bZ7K7iKM=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIYPEu/yWieJufITEG8XO8WmG37x1Xce6/gCAiJ9Wbotf62DJ9O
- 6Z+shcdsjVvqT2Akmts+ksq/t1BcewRww47t1ZmLxOwSEAW4u4jgclbo32aobE/GhDk=
-X-Gm-Gg: AYBFou0WAQtneDqWd8ldxnggONSMLCxR0aI6VIbxZI+dyOVQwtju7r+vlM0Ry1EbGK3
- cYqv3bMm0zkuqhIBHYU6l1jwfk7fXYfMS5EtHGMb4ZoFpbaYApn6AohBFedfmSyeozDphGlkiQP
- ZWesaJtDDCzJcSzcMyzscGkaQAaqSZkx0svurMhG4D/n+51u102gcqvEBI/YKSfGJJko2OeYBfI
- cmeDgsuaNeVAQVWSxxvgXOUvexEBti6we4X/EH7IlJyV80gsfJjoSwFiHS7Cr/MGodBN22wyqKm
- k59Z2n9vtysv0UZMUYVVlv/2qjmTThlJNGb6wGSCYgllt7iwBh4Cvk8XR2EkNxu5aRlxO+eJgjY
- Vcsg1iqNHYVE4Psz8sqUHWj1rn/CfZDAdlyBNfofgkhFKTyDNzvmaVdck8d9rNgNDDNe7Kh6fHa
- uf22E1VZgBF0G6T6+0VuR7FjNii2PUiPxucgHsEJN486X4iu0OeNG9oUtSEecgaFtheY2h3BOWy
- d2/vBgKjzdm38g9JXrnS4p7ZAkiJLPInJOMKmV8xlieDus4TU+t8jOdjOzsosEk5SocD/RJIG5l
- Snwt/1FBGRvS62ddN6kwtizp3aBDcM5Xy1OifAwPfJ0TiP96nFJ+edVp4hbViojT+//VG3hA/R7
- jUxUJDABdJpEGKFfCY7j0EUOHof6mlmZ2UUjg057FIx2uXSMnHX1oVCH/AEbxpfea4bwMbdABF7
- F2VtR3JNxLuPCCQyVv3WzN8XCJlg==
-X-Received: by 2002:a05:600c:46d1:b0:4a1:825a:56fd with SMTP id
- 5b1f17b1804b1-4ac18a88fa6mr67955625e9.32.1793379911728; 
- Fri, 30 Oct 2026 10:05:11 -0700 (PDT)
+ AKwUvBxt6sZFOvVbGFU2pL150uIuVV/vjIUKuVfkuj4EeL7xG/NZNep0ipjXs7/aVxbuMBiLAC10m4I=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYLZSdyQQB+S/p4yO8g7hyutgFQKhmVcHSDIMRyxT9xpfX0tLfAd
+ xQ6tU2R7Ts4i3jkItpwcBaKHq3TqQrIopX8pNDAhSMtPC7MpJ0144LUCfYtx6FRa7LU=
+X-Gm-Gg: AYBFou1K53cboqIkKykChTdYBg4h64b4l8HB+FdAbeojliUJA+UtNbUvTG131utcwWI
+ N3rylEJ47TW2zhd86m6Gh8pnZ3GsEe0Lz0DcX7dSCcBITEAjYj9y7ix/ne9pYTtXOekpLPj7wzu
+ wecnJKBRImR6j5cTy7vlWLWETrDBnU+ij1XNFdwGHyK+7N39Uxfh+bWPbbFS/deXxdGxlR5LWgf
+ e2fuvbeiyRy3KFOt78UO1tHziECmI4R0/qPU6pqiDOEwY7G0xAHlIOcMpN3lSQp0EW3RoA2xugW
+ 0R9IOCQ7+30jT9/3RkcSsaq5vcXQnDOyx/oPw76Eu1GvLB+BmVQ3WRkl7vjSNLx76HEqWL9Eplf
+ TsbqefOnhlzG3to20M37hwfYVqtcg9WMXnXtgL5kOD+v7Yt3wh1nj7Ec4M62y1HOLDbPTE5qBdk
+ SUL/275jnMAFYNpLbn1dbkyYrc8j6k/WQl35a5JltMxYUg9UcBS3JUJ8pKpC1JUE9ALmZ7/rC7u
+ fR60j9w+LYj3Pvjuu7ySz/Z+l+DoH5eF282gsxr1mQpWwpEM8MP8ZcpPGOe5YTkEkNFbMkqRPFG
+ ERJ2F7hscP8MJJQBjpprqqfurv4Nj9v/oSBrP/JnYFIYwRbDzZUDin9mIz7y0CjcrK7QsliW/q3
+ j2TtWw4K3LfRYYrwlu44OJCfF5RInrOiRcV9dGe+nQ6zF0MvNWnS8/o5Gs+4wf+S3nS/XhwXKIQ
+ 7nSJsY3m/aTOC1XMSyYNpZq6iOlfWdMHug78lJS5OjWYLN9WU=
+X-Received: by 2002:a05:600c:871a:b0:4a7:d9b1:b684 with SMTP id
+ 5b1f17b1804b1-4ac14ec7947mr61713645e9.2.1793379981733; 
+ Fri, 30 Oct 2026 10:06:21 -0700 (PDT)
 Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
  (host-79-14-29-58.business.telecomitalia.it. [79.14.29.58])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4aa81b7fe80sm166602025e9.11.2026.10.30.10.05.10
+ 5b1f17b1804b1-4ab69b54742sm188053075e9.15.2026.10.30.10.06.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Oct 2026 10:05:11 -0700 (PDT)
+ Fri, 30 Oct 2026 10:06:21 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: linux-amarula@amarulasolutions.com, michael@amarulasolutions.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Fabio Estevam <festevam@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marex@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.u-boot-project.org
-Subject: [PATCH] imx: fdt: drop the cooling devices of the disabled cores
-Date: Fri, 30 Oct 2026 18:05:05 +0100
-Message-ID: <20261030170508.2819620-1-dario.binacchi@amarulasolutions.com>
+Subject: [PATCH] net: dwc_eth_qos: Support external RMII reference clock on
+ i.MX8M Plus
+Date: Fri, 30 Oct 2026 18:06:11 +0100
+Message-ID: <20261030170618.2820085-1-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
@@ -180,124 +181,57 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On i.MX8M Plus the cpu-thermal and soc-thermal cooling maps also list
-the GPU and NPU, but disable_thermal_cpu_nodes() only truncates the
-cpu-thermal one, dropping them, and leaves soc-thermal referencing the
-deleted cores of the Dual variant:
+In RMII mode the IOMUXC GPR[1] setup always selects the internally
+generated reference clock, ignoring the snps,rmii_refclk_ext property.
+On boards where the 50 MHz clock comes from an external source, the PHY
+auto-negotiation times out:
 
-    OF: /thermal-zones/soc-thermal/cooling-maps/map0: could not find phandle 17
+    Waiting for PHY auto negotiation to complete...... TIMEOUT !
+    phy_startup() failed: -110
 
-Remove from the cpu-thermal and soc-thermal cooling maps only the
-entries of the deleted nodes.
+Set ENET_QOS_CLK_TX_CLK_SEL only if snps,rmii_refclk_ext is missing, as
+Linux does.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 
 ---
 
- arch/arm/mach-imx/fdt.c | 58 ++++++++++++++++++++++-------------------
- 1 file changed, 31 insertions(+), 27 deletions(-)
+ arch/arm/mach-imx/imx8m/clock_imx8mm.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-imx/fdt.c b/arch/arm/mach-imx/fdt.c
-index 1ef267184634..f732eec2025f 100644
---- a/arch/arm/mach-imx/fdt.c
-+++ b/arch/arm/mach-imx/fdt.c
-@@ -9,49 +9,53 @@
- #include <malloc.h>
+diff --git a/arch/arm/mach-imx/imx8m/clock_imx8mm.c b/arch/arm/mach-imx/imx8m/clock_imx8mm.c
+index b7b3702041ee..065a946f2855 100644
+--- a/arch/arm/mach-imx/imx8m/clock_imx8mm.c
++++ b/arch/arm/mach-imx/imx8m/clock_imx8mm.c
+@@ -10,6 +10,7 @@
  #include <asm/arch/sys_proto.h>
- 
--static void disable_thermal_cpu_nodes(void *blob, u32 num_disabled_cores, u32 max_cores)
-+static void disable_thermal_cpu_nodes(void *blob)
- {
- 	static const char * const thermal_path[] = {
--		"/thermal-zones/cpu-thermal/cooling-maps/map0"
-+		"/thermal-zones/cpu-thermal/cooling-maps/map0",
-+		"/thermal-zones/soc-thermal/cooling-maps/map0"
- 	};
- 
--	int nodeoff, cnt, i, ret, j;
--	u32 num_le32 = max_cores * 3;
--	u32 *cooling_dev = (u32 *)malloc(num_le32 * sizeof(__le32));
--
--	if (!cooling_dev) {
--		printf("failed to alloc cooling dev\n");
--		return;
--	}
-+	int nodeoff, len, i, ret, j, k;
-+	const fdt32_t *prop;
-+	fdt32_t *cooling_dev;
- 
- 	for (i = 0; i < ARRAY_SIZE(thermal_path); i++) {
- 		nodeoff = fdt_path_offset(blob, thermal_path[i]);
- 		if (nodeoff < 0)
- 			continue; /* Not found, skip it */
- 
--		cnt = fdtdec_get_int_array_count(blob, nodeoff, "cooling-device",
--						 cooling_dev, num_le32);
--		if (cnt < 0)
-+		prop = fdt_getprop(blob, nodeoff, "cooling-device", &len);
-+		if (!prop || len % (3 * sizeof(fdt32_t)))
- 			continue;
- 
--		if (cnt != num_le32)
--			printf("Warning: %s, cooling-device count %d\n", thermal_path[i], cnt);
-+		cooling_dev = malloc(len);
-+		if (!cooling_dev) {
-+			printf("failed to alloc cooling dev\n");
-+			return;
-+		}
- 
--		for (j = 0; j < cnt; j++)
--			cooling_dev[j] = cpu_to_fdt32(cooling_dev[j]);
-+		/* Drop the entries referring to a deleted node */
-+		for (j = 0, k = 0; j < len / sizeof(fdt32_t); j += 3) {
-+			if (fdt_node_offset_by_phandle(blob, fdt32_to_cpu(prop[j])) < 0)
-+				continue;
-+			cooling_dev[k++] = prop[j];
-+			cooling_dev[k++] = prop[j + 1];
-+			cooling_dev[k++] = prop[j + 2];
-+		}
- 
--		ret = fdt_setprop(blob, nodeoff, "cooling-device", cooling_dev,
--				  sizeof(__le32) * (num_le32 - num_disabled_cores * 3));
--		if (ret < 0) {
--			printf("Warning: %s, cooling-device setprop failed %d\n",
--			       thermal_path[i], ret);
--			continue;
-+		if (k * sizeof(fdt32_t) != len) {
-+			ret = fdt_setprop(blob, nodeoff, "cooling-device", cooling_dev,
-+					  k * sizeof(fdt32_t));
-+			if (ret < 0)
-+				printf("Warning: %s, cooling-device setprop failed %d\n",
-+				       thermal_path[i], ret);
-+			else
-+				printf("Update node %s, cooling-device prop\n", thermal_path[i]);
- 		}
- 
--		printf("Update node %s, cooling-device prop\n", thermal_path[i]);
-+		free(cooling_dev);
- 	}
--
--	free(cooling_dev);
- }
- 
- int disable_cpu_nodes(void *blob, const char * const *nodes_path, u32 num_disabled_cores,
-@@ -82,7 +86,7 @@ int disable_cpu_nodes(void *blob, const char * const *nodes_path, u32 num_disabl
- 		}
- 	}
- 
--	disable_thermal_cpu_nodes(blob, num_disabled_cores, max_cores);
-+	disable_thermal_cpu_nodes(blob);
- 
- 	return 0;
- }
+ #include <asm/io.h>
+ #include <div64.h>
++#include <dm/read.h>
+ #include <errno.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+@@ -852,9 +853,11 @@ static int imx8mp_eqos_interface_init(struct udevice *dev,
+ 		break;
+ 	case PHY_INTERFACE_MODE_RMII:
+ 		setbits_le32(&gpr->gpr[1],
+-			     IOMUXC_GPR_GPR1_GPR_ENET_QOS_CLK_TX_CLK_SEL |
+ 			     IOMUXC_GPR_GPR1_GPR_ENET_QOS_CLK_GEN_EN |
+ 			     IOMUXC_GPR_GPR1_GPR_ENET_QOS_INTF_SEL_RMII);
++		if (!dev_read_bool(dev, "snps,rmii_refclk_ext"))
++			setbits_le32(&gpr->gpr[1],
++				     IOMUXC_GPR_GPR1_GPR_ENET_QOS_CLK_TX_CLK_SEL);
+ 		break;
+ 	case PHY_INTERFACE_MODE_RGMII:
+ 	case PHY_INTERFACE_MODE_RGMII_ID:
 ---
 base-commit: 3973f3c4d24df75ca90d7c0a9f03e5e5c9b48f32
-branch: imx-fdt-cooling-maps-minimal
+branch: imx8mp-eqos-rmii-refclk-ext
 
 -- 
 2.43.0
