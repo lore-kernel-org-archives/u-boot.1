@@ -1,159 +1,166 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8BEC0606A31A
-	for <u-boot@archiver.kernel.org>; Fri, 30 Oct 2026 06:13:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7092C606A31A
+	for <u-boot@archiver.kernel.org>; Fri, 30 Oct 2026 06:13:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Ff7ZEWG+;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qKMGFpFR
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=gEo41cCx;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=iE/rFDQz
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 568FD60A9D;
-	Fri, 30 Oct 2026 06:13:43 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1DEFE40AAE;
+	Fri, 30 Oct 2026 06:13:52 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Z5lcRBP7Bcuu; Fri, 30 Oct 2026 06:13:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4E22F60A70
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793340822;
-	b=ESxST67hsAikU6vhmHJV7joVHbFvTK6IabAe+KQpnRkvPYaB6qRGgxS33ruSgplK8wJo
-	 l7Gxyg1yqFaQvPI2dJnnnH0pepAOF9A15KrLNOACXFZPz+p8i69tM6CbQLnlGAHi3MfnU
-	 0SDZ+XX1c+jWw2PSw45Pv8VlXhxisHKniETrK4Tnpm/xAS8/TX0yfnDQw1UyXEC5Imp9A
-	 hL1QDkW1QRcn7SujKHh8wGMUWCGf+LLVn9sbVF4GyINDYarjoaH9ANfa/Nu139jvjjw8V
-	 AJ/swUEVDc93wocRmffKI9SsqsaZd1PuDzPJ9kVGNaL5UEQuDtcbn9LqUsXD4+fc0/w==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2-Y3tNjyYZLR; Fri, 30 Oct 2026 06:13:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5D6094072F
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793340831;
+	b=mFFqrZhRm+KksHh87RmtcoCLLkJ2lZOCs/pez1B+0jqkJChyR8B4EdLF+gnsS0vx2fBQ
+	 HzrQ9CdPiu8JbZ2P5HfGTcaV8LIFt6yh9rmx9FvlxIdnpgO/mycQVFgpOUNQ7SZrkYsEM
+	 k/giYh8jhNLagNCnVwg/DN6bjuZR4ttEKMzil+FXBiaf5X2wro3NUnQ/AaGy5kEnvjsiv
+	 DkmJD6fJ7Q55+mdR1vNUD6kq56gKXlwEANYeKrl6OnSgmklOMLRAG/p9E/M1GtvMdzflX
+	 RZrI8ORDlF4iNcWovyKixwAMs9nMMj5vTX6heGjsaDUGIpP8TwCne7NObK24YFp56Lg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793340822;
+	c=relaxed/relaxed; t=1793340831;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=d6A8Yje0EI2WkXcgibN2CZdtD+nT4D9AgV+9BTSJKHA=;
-	b=fQeRP8WMjgvvQZuehN/G+RwlRjfM0h2+sUXttMoMhdm/WsbWNDFtixAvMOGXsBapJCDD
-	 3qIote8Hu3q62blwz7U1fmRYpnkxkOpUwgmOztjsWXInp8yIwlOuO4mVpOPVgq+taQqlI
-	 glF2IUO1QYpwTtK/ULoK7bz9L0ORE0B6q7XGKy5YCugvsMe7iDAzEsurYXsjgvxRwwfjf
-	 3XofOMF+XHs5RlVgEmb8Mk73oQMhyTX4WvXTa2W5kO9rTv9ImxpHuNrGYS2z3Y6+nRGpc
-	 KpTXnf0EKxqVpQJ+v+rCWLhiv8ADDd6jeYP1toNoxa/Dnu3oChRnJi/dilY4ntV4KeA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:In-Reply-To:
+	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=GqE9hm8kc73UDc8cB5FJ8a8T8qU+vHUnG0s9sykywXs=;
+	b=F94HYXP3uEhqJDQDArrIM/0D4Mrj5LBTua48x6o1/bLYFg1xuOmr8dagPj1hMucTJvtV
+	 CcceSjytvfB2QvVVag2Z5G42v20sRL9L4wtQhnhlvB1nIOuLiaKd42xnssTaMTJeTSa4o
+	 6IXtpyx41kbgbm3A/x4zUdoeOrTdiCyGcwx/oxJZ9JaDFCFeq0ZCgtIcbO2mGMbKDfgvM
+	 1mHa6Wp6XMTLqJmGE1W8lpvCRwX4BwGVNdF7ApyhGdp75LuQXvunX6KUN/lGN97AjXlqK
+	 5RY+iA4zWzYzzDbYnrCBfEIERAyoVDsGKeigSdR1Oxyqhm+ydENJAB5ycofQjVh5dZA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="iE/rFDQz";
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793340822;
-	bh=d6A8Yje0EI2WkXcgibN2CZdtD+nT4D9AgV+9BTSJKHA=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Ff7ZEWG+a/vT32qX9CDUsPYsH9oNU+v0G2pk8MiQEsEtcyqqNmqzy+8+jAvztk4F4
-	 F9+xSN+YzKeIn7uN1tgStWweRu8dKGGPauZZtb1SwAVgqkxNlxskxnJGxIM69eo26W
-	 WZ/51Z8jApCZHIMOFKNnoTC9Xp1eY22ITKBbGkqL5P7DpJj/VADisDO0uIOwsjNEDc
-	 k3JUw5GD/kRbr+wbeyqg5jcW08AGkF7x6/8BM+DpRW0q9vvrH7dr/TLX7dgkOtpKhf
-	 g6YX9lnCnaT3VEUgB2a8Cm5tgbaJ4rpogijYwE7iTVwJl1mUBx838QVw9SJYWZMO8/
-	 CyXzPVcRy8hMw==
+	d=lists.u-boot-project.org; s=default; t=1793340831;
+	bh=GqE9hm8kc73UDc8cB5FJ8a8T8qU+vHUnG0s9sykywXs=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=gEo41cCxdyG8rWGCEq0f0EhKGGoC8FKUhjc0trScHXbqBXgpdDZ9XPTMoE60GxJNg
+	 aM/olFchAJ0jDlpIgQjj+bnCpdE9Y6ZyET5ezLuQ9pRBUDQwGX/10xdvgxetP/ynhO
+	 U+MnRL2yCGqHg2C2IcJWBeEVSUVonaoc+eDrGe269n2ljOe18kByQoR0Wjd1lFTN6M
+	 XMJIBmbClq1PLahbeVju0pZe4Y9fkreeeaHHTMa/98axlHYVK7qYxlRM6UuxV47J+/
+	 B+uJ4eCcVcrOeS2st6kYR+Mh0riXZ2VpiAdaB2TMeSUviRTxlGIlAUoA6wNsczxp2S
+	 emezXkjnVVM7A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4E22F60A70;
-	Fri, 30 Oct 2026 06:13:42 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id C8237712
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 06:13:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5D6094072F;
+	Fri, 30 Oct 2026 06:13:51 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 63CE1712
+ for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 06:13:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B9DDD4051A
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 06:13:40 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 53EA94072F
+ for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 06:13:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id CaJnPFYDH4zX for <u-boot@lists.u-boot-project.org>;
- Fri, 30 Oct 2026 06:13:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 7484A402F6
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::330"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793340819;
- b=r9oEzwvQ6rvMB6NGn2PLs1tcdorzik4abiQkZFigBzv6CfO3sX1XZnwEisSpKjaM8pMl
- YKY/QKx0StXbgAC/YLFSJOnBqu0cSoJVjQG6hQxtefuMA763OKnELE6mCXtao0FpazBbr
- XvomrhGHRSkB8DjMWWqDCW+zU+FVN+XPrnPpMG3J/HV/rZQCc1qq+ryj5ap7qZ9WPeT5p
- mfPek4yvPO4HUhE/Kho/IAY3DQkeBuT7loyESl8S85j2lpPA3NtPFSL9jbGkz+Kzbu5Gt
- Au4M0ZC/qphuaJOwrKkDAnNKrZreMw5KgrP6e6QHApQuk+g1DlxguOq1s/4kSDeuchQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UPqy81xAXwGY for <u-boot@lists.u-boot-project.org>;
+ Fri, 30 Oct 2026 06:13:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 470D3406EE
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::434"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793340829;
+ b=o5PWYmw+zepNnsH9FMLOyI2ANmgdLKQuDd6iNgi2SMxiEVp6+aiLEo0uI8O5ggCZcBbo
+ M6eZuha++B8nYzQeXuAJ94MvR4ThPAFHxK6PrToC5bnNOUFkdydiPkNVouVqDAKF/CL4W
+ 5HYUVJNwsnG+MFKvzzN/p7UHL4ZJLU1CygfX9uHfCcLoQaIyYXgQ4Z1ammz1savOdrk//
+ rFoJhlvJ9TjEflphMf1VBSdrtlVrIBe3TkPnOz0c9ArmnIDh20LXigbi6/EJbiQUqIDnE
+ 2ykI087xcYS3uSRhvywJoGUd4yyFYopg4y763a0eJ2LNgZJxpyuS03sIGbBtCJugIdA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793340819;
+ c=relaxed/relaxed; t=1793340829;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID;
- bh=d6A8Yje0EI2WkXcgibN2CZdtD+nT4D9AgV+9BTSJKHA=;
- b=gTZ9lIiBOsCdPHoF4hjSyPcW3sirzOwOobt/EtJt6RNOzLUvVf9MMhPTRc4K4BcWlW6I
- G3vfucXJU0meXGmdtBEkqD/VHXLws8oX4xKQQNzfemyPW7ujQhwuXlVJ3G/iDk1Jk/SYg
- 4GS8qav8T9e/zS2n9GvbpUmT+YV2FP8VcXFhG98SwyG8WUwo9xnfxEtHjpJFSW6iIga4T
- tjWOpKxyLKk7eHEMufy6UkQ0UsXG/gVeTww+6j7pZcldlq5UE0jHNh4xNIotbqRvWw3TQ
- WS8HrX4SF+zvEfBni5z+O/rZSpPuryq0K5TsCe1XTVdhHj4DHunw09xqO1uVeDf1WNg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ Date:Message-ID:In-Reply-To:References;
+ bh=GqE9hm8kc73UDc8cB5FJ8a8T8qU+vHUnG0s9sykywXs=;
+ b=QXXQpfzUWWZPeFRoXRe2PY8KoKlzns4vUvPCE5c7HMGuIIwzYlpXXUt87oI/QXClfmGC
+ we43NLRczG9XNxVe+LuJL66c0Y5BFxcYe3ZrCC65HihiB8yyeY+aziD/Ct4o4YO5jfgBu
+ sO3w9q5Y0bOGOIDpfanvHZZEpJpXP0RUK/grWN0D/mpiq6F52n39njX1ji6LwTWvoTT3F
+ nR1tAFWNsXZ5M18dPMQC8OwGwyCZTqvjfC2SiBO3KxP84t21okV4G2FhvUCXRa3VZv+mm
+ d+91NnXu4UzmHpdMgW40RsAG1TTzoQfmhN8UYWKGy0u/AOVdv91Z4wHrC7rGsB6oQgg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=qKMGFpFR; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::330"
+ header.s=20260707 header.b="iE/rFDQz"; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::434"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
+ client-ip=2a00:1450:4864:20::434; helo=mail-wr1-x434.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=qKMGFpFR
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7484A402F6
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 06:13:38 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4a2d6cf958bso936005e9.1
- for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 23:13:38 -0700 (PDT)
+ header.s=20260707 header.b=iE/rFDQz
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 470D3406EE
+ for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 06:13:48 +0000 (UTC)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-48dfc0421d9so256636f8f.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 29 Oct 2026 23:13:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793340817; x=1793945617;
+ d=gmail.com; s=20260707; t=1793340827; x=1793945627;
  darn=lists.u-boot-project.org; 
- h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=d6A8Yje0EI2WkXcgibN2CZdtD+nT4D9AgV+9BTSJKHA=;
- b=qKMGFpFR7EGCHqwfr7S8Xi26V3r5UkvT6IjyagesnfcjdIteGSn1LCFBLZZObMFIyy
- 9JVsKguJnxXmC7KFjtJLadqL7Gm7R0Vp4sytE/WsM8+jM0SlgPjqFIfv1nea6griipwF
- 1NXzrvIwhPl8XoWrO2xZKR2NGxW0eEm2gZZgOfa7XHM2dwGe0HmYqE+pluk93QEhVR9G
- L1pSqIpS3hbPhY7sBeAU8TPa2bhUwJLank12WIvqsFz5AKrSx3KKbBo7ET4ucLG4a/f7
- b2q5U5slpELNxBs1QvjY7yLA8/ihiZQtbnl/3pL3Aa0OPaqY6R0YuZJiLX7Xne1A8Rz+
- iVvw==
+ h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=GqE9hm8kc73UDc8cB5FJ8a8T8qU+vHUnG0s9sykywXs=;
+ b=iE/rFDQzaNCyRcBd64N1pTUllA+kOST9BsOX3nhm3kQ4PiYWPfSFT2DHiWsGeH9taE
+ ERtAKZkdipmIdWeI31kni+S71JSiH+qMZ7Yrmq9zTvQ2IHjLrsS1lgFalNNJFMl3BC0L
+ PRvrEm86Y3YpJ1KhxtVKZCVBcC+r3IyeSwPUbnFcAoEMnqJMziKmEAODPNO9UEbvxN9q
+ yWOb+hqYt+A2RnW5hXtqlDlosMJ++wAHQsJbzxfZAr54bWUVopmJnjCY+r5GEIdh4TFg
+ NbhCJJbX4lShR6VUojWrF+gXehOmcPiIS8yzA7CFi5zrm/vLltZRJjBLYx8FZJwKsfVo
+ rq8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793340817; x=1793945617;
- h=message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=d6A8Yje0EI2WkXcgibN2CZdtD+nT4D9AgV+9BTSJKHA=;
- b=JMovJhxyVM8aBdzuZqcEJjpbwysYyND8ApsQvDL2kf8QCLmrHxBwtc00DjDY3N5/jh
- 1WMCu+C8paeeHbHaFbdQpLFmp4sQ8vr71kXWYjQalw9iP5IgAEi29sGq8lsoumnjj2l1
- QA9bzzJ6xFf1DPOMEzdf8UYviJyZKqn+3w/ZxbKvqar3fHG7BGvMMmTzKjEi4lGfcm37
- Tq1ac2uPs5GJH3tlNAeU8EZaZLdRfW3a0Etaj0LnskOPHqyAEiAsxkGiE6R6iWFQae8Q
- Clp5aYI+HuiDwJ0Nbr80UKfiUnwB6462fQfGo3GUBksfmQPBgH7f56bHCGVkYkgw2h5g
- A2mg==
-X-Gm-Message-State: AFq9FYKJNcMB5xW4r0b/tA7a4W2UqFlsKxtPCRUWc72kmBTJiTjh5I24
- GesmFajBkjlvdvUq2iS0IwBDYPvjg12cNysXr9om9Fs+7kwFDsMhANnByGHAkC6uCMU=
-X-Gm-Gg: AYBFou2yyTOURS0DQD+qpAk1VBWTMcVt/qYh4F/2F48CDTlTC+l/Vdp86T+0VrLWUdI
- bWDWps1bs3vq66kzRYgrOJDf2MOeRifVKdx2q5CIZDMKJIBCZpMsgi+qAGtUlcq7VjVmP120E8v
- M+VSlGXrYP+dWSpbaoSWecstay0wVtjXbNe3xpgsXYPgtyP/WE6+YZhj5hZGro1ulSZwJowsLWX
- 8GzCe+dWXr/BlLe7NOBz+z8aw3FczxqkQP0PjroeSLGH30LejzW/P92jJXyqHWJ60RlVQoA/shm
- roN5wzV+hqsp/pGOIRmOmS0MyGh7TdHt2Ye28AaVu0H90xk4Kk09JBdRDInv/qdIiSrlFzkxz6g
- yyaa81sCvvxNT6t5Vjd3PNmkq6vx0wW5gGkF5+7Pb28tue4jjPkWISqDOofjku81d5Ba+LCZwcq
- dtN5+Kh1BKsCh//Fe9XelbseallsrnOThHOKUGVBZneGcGQXKNLAF+B78ruf0wDwlmp+hkNM442
- JEhMN4wxGUXnM2wfIubI03HucSng7/cqwxztvU1LqhQb2upMuXZNL5Bgofy78pcHOWDd6II1c1o
- 9Y4Q74OXjIijFwu5Ppd02gbsQASlHZ4=
-X-Received: by 2002:a05:600c:138c:b0:49f:ce78:3562 with SMTP id
- 5b1f17b1804b1-4ac1765d3e8mr23181195e9.19.1793340816497; 
- Thu, 29 Oct 2026 23:13:36 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1793340827; x=1793945627;
+ h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=GqE9hm8kc73UDc8cB5FJ8a8T8qU+vHUnG0s9sykywXs=;
+ b=pSPNAw3CXkDTEhh1iLw55S1oMX9Jw3t5CP5NzZuWfwDVoc5A/h9ai7u95FiS69w8ex
+ 4VGqkZBpMikDX8VoTOTdT7A/kYCgJ9BWctvs18XQ4BvsQiQmjL3sa4Z60FNtEsHmnBUq
+ jQsAOBQyWtnsQlHtnKqTy/MysDqsT5c1tcTOrQoSPw+mjUtyENPmQ3guusE213aSiqvX
+ iX4S8tRrdho/zJp7H2h7oZxIjLVSg4g2dxaGA2PutAvqtElhmbmsD9OfiWvelwrLWFD8
+ vODOAnHcrvmVHRdE+eDxRsH9wkC9TrbYiHoj2+S0zxNkwczv0w7Nwsz4WBb9XiwRlTKa
+ I+/Q==
+X-Gm-Message-State: AFq9FYJNiFo0d8LAjYKlPVWqIkl3AIwE400s1vyB5j6nkGkHcgbw1Rc9
+ 4ZNVkyY+EEpxqH9oM8NTvhMQAZOe/VOaAQrkfM4HeOazcjkK9Yak+PxmXclbT+e1yiE=
+X-Gm-Gg: AYBFou3xpYvsr2Q04wBwetY0cPVqkRuaIlSp7ZofnBjX4y42yfzPfFIFYEdau4tKfOf
+ WPBXeq5LLjts0CCCmqNjPxHfPN6Iz/hcJKxLMQ3+fPt6obUGrsvIf8xSdDXn0Z/92jw5GNw8Uoq
+ XXNf4KwjZ40GNLLJpd4x7u+WpDz4zIg+z5TUcZL5LDUSGDC2PKSu6N0DGPOwriG9tNkB3ynwWNP
+ V8pX6SExjqZTyGdNc5yD6zVm4XHj6DB8veZhUptRw6IgbUZS8nEqIaYEdi/6lotkydvktJIEbOw
+ 5CFBF6KHS05qGnYo62o3o3Uw8O3HZc4aTDtPB5nt6rBHfWWhbUQLDKWOzrLa92Cy9bxzrjYK0RL
+ LjX92MKgiV4Akwly7IXHYdSpIgc3gY8o+WK5DeTQYBkbGkG8zELelCBrQD/dOeWQs8TFQMDWjYw
+ fRwxJFqVFh/NAfAX96lwNHda8JzCXqk/QEEc5f/15bcXBhSHBsU6tPhLUe+fwRFacwahh2mpIY0
+ bnevKCLgg2iAc21ftbK8XnGdJa7umwZh+9bKKK/w+5DwzZOCfvgfBSGN6bXxVYIbNYYQRHH9qta
+ 0h8i0M/UglWXOxOnVdBO8E4kfKp0KeA=
+X-Received: by 2002:a05:6000:4711:b0:48b:123e:2f5c with SMTP id
+ ffacd0b85a97d-48e6e5018cfmr3055955f8f.29.1793340826681; 
+ Thu, 29 Oct 2026 23:13:46 -0700 (PDT)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4abf60f1076sm39647695e9.6.2026.10.29.23.13.35
+ ffacd0b85a97d-48e71b723fcsm1464961f8f.14.2026.10.29.23.13.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Oct 2026 23:13:36 -0700 (PDT)
+ Thu, 29 Oct 2026 23:13:46 -0700 (PDT)
 From: Ana Bobillo <anabobillo3@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 00/10] efi_loader: check PE images before using them
-Date: Fri, 30 Oct 2026 06:13:34 +0000
-Message-ID: <633dddd6-ee22-4cd6-a8b6-cb7df0650fae@gmail.com>
+Subject: [PATCH 01/10] efi_loader: check the NT header size in efi_check_pe()
+Date: Fri, 30 Oct 2026 06:13:45 +0000
+Message-ID: <b0084d2f-a136-4032-96ed-c4a03e392259@gmail.com>
+In-Reply-To: <633dddd6-ee22-4cd6-a8b6-cb7df0650fae@gmail.com>
+References: <633dddd6-ee22-4cd6-a8b6-cb7df0650fae@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -165,73 +172,41 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 X-Archived-By: <archiver.kernel.org>
 
-U-Boot takes the offsets and sizes of a PE/COFF image from its headers
-and uses them before it knows whether the image may run. With Secure
-Boot on, efi_load_pe() authenticates the image first but goes on
-copying and relocating it when authentication fails, and only then
-returns EFI_SECURITY_VIOLATION; efi_image_parse(), which collects the
-regions to hash, runs before the signature is checked, and so does the
-walk of the certificate table. TCG2 measured boot parses every image as
-well. So an image that will be refused, or one that is only measured,
-can make U-Boot read or write outside its buffers, or hang.
+From: Ana Bobillo <anabobillo3@gmail.com>
 
-This series checks those fields against the image where they are read,
-along the lines of EDK2's PeCoffLoaderLib and DxeImageVerificationLib:
+efi_check_pe() is meant to check that the image holds a 64bit NT header,
+which is longer than a 32bit one, as its comment says. Since commit
+5dad05a0e61d ("efi_loader: carve out efi_check_pe()") it checks for a
+32bit one only, so the callers read the optional header fields and data
+directories of a PE32+ image past the end of a truncated image. The
+addition of e_lfanew can also wrap around on 32bit systems.
 
-- patch 1 has efi_check_pe() check for a 64bit NT header again, as its
-  comment says;
-- patch 2 checks the headers, the sections and the certificate table in
-  efi_image_parse(), and fails on errors of efi_image_region_add();
-- patches 3-5 have efi_load_pe() reject, before allocating the image, a
-  section whose end wraps around, section data past the end of the file
-  and headers that do not fit into the image;
-- patch 6 checks the relocation table against the image;
-- patch 7 rejects a certificate table holding a certificate shorter than
-  its header, which made the walk loop forever, or longer than the rest
-  of the table;
-- patch 8 refuses to load an image whose TCG2 measurement failed, as
-  EDK2 does, instead of starting it unmeasured;
-- patches 9 and 10 add unit tests and a Secure Boot test.
+Check for the size of the 64bit NT header again, without wrapping.
 
-barebox, whose EFI loader is based on this file, made several of the
-same changes this year; patches 2, 3 and 4 follow them and say so.
+Fixes: 5dad05a0e61d ("efi_loader: carve out efi_check_pe()")
+Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
+---
+ lib/efi_loader/efi_image_loader.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Valid images are unaffected: the unit tests check PE32 and PE32+ images
-with 16, 6 or 5 data directories and an unpadded last section, the EFI
-selftests and the Secure Boot tests pass, and each patch builds on its
-own. Tested on sandbox.
-
-CI: Azure build 13710 passed, all jobs, with this series on
-https://github.com/u-boot/u-boot/pull/1064, a CI-only pull request,
-merged with main 03e45557e1f:
-https://dev.azure.com/u-boot/u-boot/_build/results?buildId=13710
-
-Ana Bobillo (10):
-  efi_loader: check the NT header size in efi_check_pe()
-  efi_loader: check the PE image ranges in efi_image_parse()
-  efi_loader: reject a PE section whose end wraps around
-  efi_loader: check PE section raw data against the image size
-  efi_loader: check that the PE headers fit into the loaded image
-  efi_loader: check the relocation table against the image size
-  efi_loader: check certificate lengths in efi_image_authenticate()
-  efi_loader: do not load an image that cannot be measured
-  test: lib: add tests for the PE image checks
-  test: py: test invalid certificate lengths in signed images
-
- lib/efi_loader/efi_image_loader.c             | 368 +++++++++++----
- test/lib/Makefile                             |   2 +-
- test/lib/efi_image_loader.c                   | 442 ++++++++++++++++++
- test/py/tests/test_efi_secboot/conftest.py    |  31 ++
- test/py/tests/test_efi_secboot/test_signed.py |  36 ++
- 5 files changed, 781 insertions(+), 98 deletions(-)
- create mode 100644 test/lib/efi_image_loader.c
-
-
-base-commit: 03e45557e1f38a39a0c80fe30483130ff376cf92
+diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
+index f9a2d2df405..e31493d5135 100644
+--- a/lib/efi_loader/efi_image_loader.c
++++ b/lib/efi_loader/efi_image_loader.c
+@@ -849,7 +849,8 @@ efi_status_t efi_check_pe(void *buffer, size_t size, void **nt_header)
+ 	 * least one section header follows we only need to check for the length
+ 	 * of the 64bit header which is longer than the 32bit header.
+ 	 */
+-	if (size < dos->e_lfanew + sizeof(IMAGE_NT_HEADERS32))
++	if (dos->e_lfanew > size ||
++	    size - dos->e_lfanew < sizeof(IMAGE_NT_HEADERS64))
+ 		return EFI_INVALID_PARAMETER;
+ 	nt = (IMAGE_NT_HEADERS32 *)((u8 *)buffer + dos->e_lfanew);
+ 
