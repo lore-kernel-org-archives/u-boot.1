@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDAEB606A31A
-	for <u-boot@archiver.kernel.org>; Sat, 31 Oct 2026 06:17:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C161F606A31A
+	for <u-boot@archiver.kernel.org>; Sat, 31 Oct 2026 06:17:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ayucR/3v;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=esSjNm4/
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Vqa77lYJ;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Ug5kOEFr
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9963940B0B;
-	Sat, 31 Oct 2026 06:17:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0C1B060ABF;
+	Sat, 31 Oct 2026 06:17:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1676zp64lLKb; Sat, 31 Oct 2026 06:17:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E739C40B0A
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793427420;
-	b=lidnfiIc1ZGJBjug4C4KuenGL2kKf/GhmGlR4UDzCajLbemPRujwa4Ma+GH9v9pGqzXY
-	 /eO90y7LQ+CHuD/iQZTqIPURYFFpglKy+drW/v6TxJhCACSWjUzqZRsrBC+RitmPxEARz
-	 WEZAB1ugm09CFr16ZF7DSfmtz6Cy8+WhFxpBjuf0X6NWbYxPOkJsCT7ZpixuxlaQsgMrH
-	 vgnUUvn7A80adbGdLHFrufrh5mtUoDLLMcO5FtmAX8vLBUqknIxOrbV3igTOvQvoMigfq
-	 2WvjUsNimYUInJm90G0P6Yf+LwhMLU8JHZ343vGy5lIKxdZkItUFFwMIP/xIY9dtZPA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rSPMKm_ICNzO; Sat, 31 Oct 2026 06:17:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 05AA260A88
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793427426;
+	b=SNyGRWT1FkZMxKpZPxut5iVlIQd6bTVyD06Vbh1hihnsuztaa4uluW/I6dLA6DP6e7Q+
+	 lHCR2vL807jFmV4g16OIiDW2Fash0UnAj3Jwu1JXUrT/SIHTbIdeVfbfDi1eE74rBW0e8
+	 UjLPFgTpTJQamvOkYgfeCF33I6akbKOaQu1awOi/hzORo6bvsb28Ee/uQG4Nf+MdXymUc
+	 IZmG2f43FVdUjv7MJzi9Q5aPsDUZQLHtScNJfZ1owY9KtVUxavFlhHnNJmSpmp0SVIYjj
+	 vUS91QAayGwlvU5p7QkXvPk+hUu4XqSNyzt5cX5uI69wA7HOiCEXPZh0+ieI968TxEQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793427420;
+	c=relaxed/relaxed; t=1793427426;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,130 +32,130 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=1sNU8kHnPvR0o6JZF1oO93s2+fN5yV//dXwl/65c0uU=;
-	b=iJpPOnUEBVaolkksg+p1TuySdc10KBE9TE3soVJgDkSdybcuvD5tFcXBmnX4F5TdingH
-	 NoQcjDYJ7HcVSvOofT/3byB5/nY1YHJpJnaShlB06x0B7ScdRDJ3g5udjfKPvBnLyhY4p
-	 Lr5LLuPHJgilJ2Wh8uSVYk/SV2/+QHqtPFFiAvjgjNymDy8icT4rdXgtHxO/tV3ds+7EM
-	 XdcMg4SYsTpbUXiJK97wmVTxPhagbpQQKkiAVpxa00f67XYiuoVJTqmEI713nB7CGAReW
-	 Kk2FdP40jTz/BF+NvEWql3RbRHKbSjGpIvXmXPpPPX29iciuDTpDyPHqsgey26DQfWA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=TpTINUNJ/1MniOZjEy8gAi2OnKbYUjWuU1R6NdZlpHw=;
+	b=nLE+WMw016L0U1/sO+uT1D2M4hwGP51GnlUN8SXrmtS/rGMXvIY4ObGaC1NZQRVPhnxn
+	 JNvSWrNuQEGuLh7SmkqjMT4J0E9tQAYWXg+3Fn8OpUDcNHlkafjP+d8wFPiU34pXcXXzj
+	 aRevICFChLMiGDA2bQG4k/7OQ30obkPq+Wsz56ZUKp5E9LApM5OqnaymPkak0fkOJ5/vI
+	 x+Qf1ILpLrwZCzMK4oM3ad1y7z6dfh3PrATrDuVZzmGYRPmeJyEMXMqV1poeAUPJjSkzt
+	 OTVc156HIY8Mbyqx3Fkc9LhhhZBRuSC7+8dc0GmJ2ndyR3WRpXTgVa12Ey8hcnJsC2w==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793427420;
-	bh=1sNU8kHnPvR0o6JZF1oO93s2+fN5yV//dXwl/65c0uU=;
+	d=lists.u-boot-project.org; s=default; t=1793427426;
+	bh=TpTINUNJ/1MniOZjEy8gAi2OnKbYUjWuU1R6NdZlpHw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ayucR/3vkQ4wNwlmp1V7U7WhvE0Iy9Z/i+8/mlgejBx+yRSzdq7rFXxiwnTjjYu3W
-	 Wyi4Xs7mMY/4TqfMofWRoytyfsDDie+obxbuY/zW84GilrKq3EoDPP416ELU4hhgW6
-	 72BZ4B7DKMUok1DuroRpbaspqZFYgwxDZ57UID5KNLF/Jv3h6xgh6U39Kx7kF90JRH
-	 Fa+UF9SSYr5Yvt422F+qxecXbl6J1fUMS20SSZSDDKueUG35qBgPc1npb9A2VcZSUC
-	 pbiqiMuFE6UP/pLPWq/+69O0j/2a0V89fQ8YWs4T7ewAiM8dkwin4+r66a4QkPfWmJ
-	 N88P8EQLvhxww==
+	b=Vqa77lYJyiEbCZuZu69o1wzy6L6v1z80QnH1iEoITpipQkCktxc3Xg2kuL+R5YCil
+	 W2gdG/Z13YsYSfOn9wk0lEo0xM/j4QB3AR955VcUzjuOaKv5c6b32NqWU8JWxh4ptu
+	 rsse52B8od0MxjlvH1jN2ZWEskUXkrL5raXv51kSf2nDSgxlaCrO1X4yH/9NSVP0hq
+	 xXPFqb85qPvRX+MiNjq/fWzEC4bNlGJqmiCvQ4HjkUXulqPSv5ZcUDP7y3lfAB4mp5
+	 pAogYBK1AsAuxIgpcyweScXZ9OHi8ZsoGjQ/+H2DgPOAvXhhZhMbp6K4fJiVS2RKcq
+	 PvXwrzE3MhTzQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E739C40B0A;
-	Sat, 31 Oct 2026 06:16:59 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id A0B9E235
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 06:16:58 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 05AA260A88;
+	Sat, 31 Oct 2026 06:17:06 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4DD1B235
+ for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 06:17:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 864AB8116F
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 06:16:58 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4B64E8112F
+ for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 06:17:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id imss6KCpaRzm for <u-boot@lists.u-boot-project.org>;
- Sat, 31 Oct 2026 06:16:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org AE1B18116E
+ id 8I6vqaWUphVf for <u-boot@lists.u-boot-project.org>;
+ Sat, 31 Oct 2026 06:17:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3D32B81150
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793427418;
- b=qaGEYBJETvFYyRWaPD26wzhLaFZmWZhVvqbae8vnG2udfr2DXK3eUK4TCr5dgUuLtn+q
- XWaHya8e6ZdE+1RDej/pKhxHPjhhjdoO85W9uNJMWKk8Ma5olWX17mC7vQBFMe5NIow2O
- 1Ym9ePoOnIHvKbthqX+TDNHPS2P5CuhkZm8moNwvZQlrMPn32xid9c0Hgp0FvNbcG4Hse
- Y+4s4xXF9V+B5LeioS7ahvzTywKk8/0nRM/WS7+YnEqXMbs4xvJ4oE2mWOIyynbEPFmT2
- l9XbMpLym/3n0x6FzIuwaxEkkuNSjqnLxXVerBPAg8MMPaTCRte6eLjkNAqr21s1dPg==
+ arc=none smtp.remote-ip="2a00:1450:4864:20::335"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793427424;
+ b=Ws1i2pd5RucKTkjcXitUqTHDhh/vQY7k26aOd1/G+Nzd76wIRPUg8E8jTVHGtMPqGttr
+ xXrPSQrwFMOrnAsTsoP4ZEbkoYIjmG/lQPUruBTVdg35yOjmiGx8ZcMLgpaLmw0omNUCg
+ 6DSe/xCvVKcG98j41zc2Wh/sFvIHFsZ4jB0VjiBCEoV1jhhWJ2FNQPNs81D/E6bUZnCjr
+ zFgJoiQkNQS6OYGupeIpAOL7c5E9sIL6xpwEY7NqDcKbrck9H9+3J5JJk0jeNb7nRHfxa
+ UvBYefVjbQ0qgnBRXayHoLPjhx/Dyj/lOJap2ZeQRmuxv3h8BYST7+ljYKhWVqzpGeg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793427418;
+ c=relaxed/relaxed; t=1793427424;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:In-Reply-To:References;
- bh=1sNU8kHnPvR0o6JZF1oO93s2+fN5yV//dXwl/65c0uU=;
- b=hGC9sEp/PXwFS7D99EjZPUCvR6mbjMQbBRnZEmBo3HphyB98fNs3SrrSquG6nRm+r+ul
- VquNUmXLwAbz9pPPE8w8nYm82MeOowH1qtFz1flTeBpGrJLe+tkpLQBVPtnevX9PBfsgz
- 0UTYYHLmJNnfCLKbUtHAn3150AFDBdMn8n9sngURfqXUgHY4Lb0H4b/ACDYaCNrU3Q69e
- tK+W5N05dQU7PvPoqiEVwMdSLkZBzTyRwyya/D3Rus5nr7hZ9JBiwKStV1y0vGNDebjpu
- nhB+8YqTs9rMI0LrCz27Qg32mcst2QoaQqCNYAG2bu035Frm3CLFa3UaEddCLIbykwQ==
+ bh=TpTINUNJ/1MniOZjEy8gAi2OnKbYUjWuU1R6NdZlpHw=;
+ b=oXPCi1/GAFnWAaF4s5T4+y8esoz+38qVAxUI7autxeeDdpbfblydi9iBxszS2YECAjB3
+ wd0gJwTodC/g3C9sSNmA3z9fRbyq+ct3dyeJVrzi6lLF6Pe1Ps9EOzdF6vKiai0QnMued
+ M/e+8/zT8t3ubatylld5hmWbjXiPvxuKzDJV+KzaZMr4rhk9001Fgpx3c6xe+28JsQVPn
+ 3kf7rl3UmPTzVmt+JJGqLWgqO2f9RmEr+V9lkWtovFZC5x8bqVYo8a5PmdVmFXvt3MJMb
+ YWHZSjZ/KK/15/hJdfQKjt2gIZbcxIKPMiJc725LbdhcbnnWqZGj6EGbe57ty2jmXhw==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b="esSjNm4/"; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::32b"
+ header.s=20260707 header.b=Ug5kOEFr; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::335"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32b; helo=mail-wm1-x32b.google.com;
+ client-ip=2a00:1450:4864:20::335; helo=mail-wm1-x335.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=esSjNm4/
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- by smtp1.osuosl.org (Postfix) with ESMTPS id AE1B18116E
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 06:16:57 +0000 (UTC)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4a215e64962so13803255e9.1
- for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 23:16:57 -0700 (PDT)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20260707 header.b=Ug5kOEFr
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3D32B81150
+ for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 06:17:03 +0000 (UTC)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4a2167bd087so10949175e9.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 30 Oct 2026 23:17:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793427415; x=1794032215;
+ d=gmail.com; s=20260707; t=1793427422; x=1794032222;
  darn=lists.u-boot-project.org; 
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=1sNU8kHnPvR0o6JZF1oO93s2+fN5yV//dXwl/65c0uU=;
- b=esSjNm4/oR2a1yd+D0ne6tUQJwqCT79Dh5YbqUx2736aw5H8rhVyCulz8v3a4Y4F4a
- Jrj1mefFPaJAK8SEA0AWt2ZihMT+E8GmB62/MD1CjkQK4L6Ph80ZEgzFVqknYVzxUicJ
- bWWxoVe5JrAGtiRPToC9O62EnYevG9PukZUEezHpIdvkCn0nwW/eD/ob3CRS5SldU6l+
- Dk8o70rO/cFrUQ6Xpp2+fjoSdfLck/Q/MU8a+1nPYXHpN4SUuHChb56A+asgM4VFUK4f
- 0OJf39slvO7XnPQ8p/EFNRz2OjnQaQBsi6q67j0Fh96ARyYJA1E/JfIznUDExy2fX4iG
- 7FsQ==
+ bh=TpTINUNJ/1MniOZjEy8gAi2OnKbYUjWuU1R6NdZlpHw=;
+ b=Ug5kOEFriMEmafilj9VSQUj6vSoAU5InRVpvBCCJjeXhLC54eMasuniKi7EnO/JMfV
+ ZAw3vZzmQjjnXN/NPK7qKEiM51/OBQBpKGmfwDZdGTHGkshlhw93tweXyEWN9ai9iEq1
+ N5uQQGnxmDRaee6jclgDX7VNZKEdG4k1HxJYn/zETI3lsKht3Z97lXaPQ9aITZo+y+es
+ CRKU9TVZRfju+OJOzcQY7381mHtGFyFEjXFwYNxpFnvcwsERC/RgimsGCYHjs8OaUN8p
+ EPIEhwxs6Je8nmo3RKL9yCOLYC9yn4dRRBqtzsG/B9fJb6P0W/1Z72gZO+heF4ybCirn
+ Ydgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793427415; x=1794032215;
+ d=1e100.net; s=20260707; t=1793427422; x=1794032222;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=1sNU8kHnPvR0o6JZF1oO93s2+fN5yV//dXwl/65c0uU=;
- b=UNg4n6vWny66OLermjy02WOPBiFm2s5lBD1nW3NZf/HYQ+uLAuu5zrXifeNedReVA/
- 9LrvBCCFUVeyJ4oQXxK5Yy6+/wlE+zeLOVuM09D9k2YYy8nRBhTCMWk20kz+g941CWaw
- vfvKG4aWUTGXuS2k6trCRcp3xHjo1d8WqrBCjIsYJP0fBflSJTHpVImpw2dWmJKeEKaQ
- ncFN0uyz3KcaEe8MQtXJGtk/sIyypDeC0qlpvMBVeVX9zKQ9MBlXXVeXsx6XNJa5iJhy
- 1DQU9a3YexXGCLuqi3xvcIs3l0PQrkW5s1ZxWviwNJdAR00agDy4a2XP0nvmiyLlaIeR
- +4Aw==
-X-Gm-Message-State: AFq9FYICT5SZpzmRXxhsNk+QG0qu1rHnWGi+Def0uQlT6RlAzgeT94eO
- x/CUvb9jnXsFkerXpyF+TZaQfHNdIRkfUPjOmpYNN9Bn2BISXSPf0suM
-X-Gm-Gg: AYBFou2vqhvHwo6EFDEaZczdSHUISweQrUCZGVBM6bY78g+UK7r4WqlFo8Ut477cVVg
- 4XY+m2j3UaPtjdU2EQapCoKZcFLmOTFfeBf9xPJ3lFXSgC4YOdyPkSQ0mI+s6DDURwqD6wyGASe
- +lRPKVW30+LnFyxO4E0i709ehBQemQm+7prPn4pSsDvAObDA/0Ywf1WJMxrdBdIxMTz+6eRbyLX
- VYpg89+x3x3dIYJtlet9/KEV1KCUT82m9YU+jUjEEHdNG7b52ijIPLUliCb0UXv98JokLFc1E6q
- VtbU682Bj+4O+Oq1adD6T7cLUr21unhrV9SNmWGRRCP4WBtgf55T4/Z+qr3CCc32HRVD+eMMU7h
- 9Jz+8UOxw6pARpyGGMYsn2tIpqF5IDpnloM4AJp5ovQpI4HYrbH1d+r0vH5nWSJ/QEZO8JtlhiI
- Cr5ShJX4VEZpk3Wve/gSP8XCDuxSmsA46mzujhoK9qMGh1Vbw0OklvQ7DXObawe3PiB13jgdqij
- tUeMJ0FrYlgX5rkGTB51Nn9laB3zRfhL/66d4fgGpbKGID2zNuwDf8Hxa6SzQbcPbWMWg1J6OSn
- F35Py/iTyvj3yyd6Siuq0ZymjsOcbd+UKWiuC3snDhyqaHVuTf30
-X-Received: by 2002:a05:600c:c088:b0:4ac:da92:2bd4 with SMTP id
- 5b1f17b1804b1-4acda922e24mr49016025e9.1.1793427415454; 
- Fri, 30 Oct 2026 23:16:55 -0700 (PDT)
+ bh=TpTINUNJ/1MniOZjEy8gAi2OnKbYUjWuU1R6NdZlpHw=;
+ b=0BbCHKryE3iBCUY4nAN/ZSXjrhQ01cRSBeb2lxu25TpTAxTql141K7gobLzWvHQeRj
+ lxpYbrFRhbbjhCDPzfrW+V9gsBgUVmNoCab0yR6MGncucd66Rws8aS9xE2FoCrLsG39w
+ 3xV7cAZxBSkdp9RiXjqmDpKTVMzSjuXLlhOkfRT7kBVQ8H2RQ1j1vOjLFPUAWNhMVJkt
+ yGJczOE98/G1M7C9aC3bbqcQ2AaZobLA+FjOjkt+Nf+dqTdpOugpRozwpZ/DGDjoL86C
+ DgAgJDFd4DRJQD/QV2JaVhb79au3qmnz5BPp/7jbYQBzdjNVGBMNO1F5+LCG8psSwT0p
+ OS0A==
+X-Gm-Message-State: AFq9FYLfq6fIy+PUSSuktZuKRMYmTcWlaZt6b6fdVAz5xFr/ctBs3SaT
+ gUGBYwvF8sb26b03/McArc5CVOMgfdXxoVxXyOjEcU2Gw8mTPLIUzwKGFtnSz2cC
+X-Gm-Gg: AYBFou3mkkib9HEntpyZ6rp8Z3USHN8+48J1qwjo7WbAKivYHv7cbuPu1n35djgS06X
+ cTcuSj4UFD7mR3iZF256a4r47panIhMWr7boFoAybl/NCiwE0+DpSYJQu6FxkzK2ad/jKZtHtXn
+ 3p5Q+VR4bG8fJTyYdSRxRL8mOgV0nxEzQP7j5IWaTKdJRJDXPK5ds0j0TtXB3lCJ0XUo0aEay9f
+ JWBTs7OFqbqofRjM5JmZATw3eK0V6/KYw+ufJ002LD4/WxhEnZKde5PiQ6PbBfhjUsXeAoukChr
+ IE8L6n61roFDft0Q+CAUG5P5agPKJooYoRNoC69+oeYbV3NV8vnM/MwEZMBMfTxBH4kpoH97KMN
+ ZquuSLfXMGgqewo7vHiBDN8ZkKYAOLDyVBG/xqLhD78fl571U0y6m9CkUUUEL0wCw+LI3Mm3N0Q
+ 8q5Tdg+IHUR7zeNVpVcBd+MgFkeC/pnKA53mmo0cbdZdu0hz+mzh9lgPPAJq5RDlFpLThQ4JZgl
+ pOSaBCal5JtzbTVmKaZjfFdC1BbvwHRN2yVCgcPah+cFUQCbzEoNjQz4DgBuauC6PN0/yU3YRFi
+ rOkl3qcaiUb7PMkhHpqsRc7YfnvX2GftxoY8GxS4wLHsE3Yr8Z4e
+X-Received: by 2002:a05:600c:4454:b0:4a5:1cf1:b7bd with SMTP id
+ 5b1f17b1804b1-4ac1794032cmr98743295e9.16.1793427421871; 
+ Fri, 30 Oct 2026 23:17:01 -0700 (PDT)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4abf5b286a0sm90360675e9.4.2026.10.30.23.16.54
+ ffacd0b85a97d-48e71b79059sm7379678f8f.30.2026.10.30.23.17.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 30 Oct 2026 23:16:54 -0700 (PDT)
+ Fri, 30 Oct 2026 23:17:00 -0700 (PDT)
 From: Ana Bobillo <anabobillo3@gmail.com>
 To: Marek Vasut <marek.vasut+usb@mailbox.org>
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH 1/6] usb: raise USB_MAXCHILDREN to 31
-Date: Sat, 31 Oct 2026 06:16:53 +0000
-Message-ID: <a37483d4-31d4-49ee-b0f0-a96110055873@gmail.com>
+Subject: [PATCH 2/6] usb: hub: don't use more ports than USB_MAXCHILDREN
+Date: Sat, 31 Oct 2026 06:16:59 +0000
+Message-ID: <ab3eb3aa-6f0f-4540-884c-30906d0676b5@gmail.com>
 In-Reply-To: <57123e9b-629d-49d3-b500-095503129ed2@gmail.com>
 References: <57123e9b-629d-49d3-b500-095503129ed2@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -170,7 +170,7 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
@@ -178,38 +178,184 @@ X-Archived-By: <archiver.kernel.org>
 
 From: Ana Bobillo <anabobillo3@gmail.com>
 
-A hub's per-port state is sized by USB_MAXCHILDREN: the DeviceRemovable
-and PortPowerCtrlMask bitmaps and overcurrent_count[] in struct
-usb_hub_device, and children[] in struct usb_device without driver
-model. At 8 this is below the port count of many root hubs. An xHCI root
-hub reports every USB 2 and USB 3 port of its controller (HCS_MAX_PORTS),
-more than 8 on many PC chipsets, and usb_scan_port() then counts
-over-current events past the end of overcurrent_count[] for the higher
-ports.
+usb_hub_configure() takes the port count from the hub descriptor's
+bNbrPorts, which a hub may set to anything up to 255. The port bitmaps
+it then copies (DeviceRemovable, PortPowerCtrlMask), overcurrent_count[]
+and, without driver model, children[] only have room for USB_MAXCHILDREN
+ports. On a hub that claims more, the bitmap copies run past their
+arrays and the port scan indexes past the other two.
 
-Use 31, as Linux does: the port bitmaps, with their bit for the hub
-itself, then fill four bytes. A following patch keeps
-usb_hub_configure() from using more ports than this.
+Only use the first USB_MAXCHILDREN ports of such a hub. Linux refuses
+the hub instead, but its xHCI driver first limits the root hub to the
+ports the hub code supports, while ours passes the controller's port
+count through. Limiting the ports keeps such a root hub working.
 
-This grows struct usb_hub_device by 96 bytes and, without driver model,
-children[] by 23 pointers: about 4.4 KiB more BSS on a 32-bit board
-without driver model (USB_MAX_DEVICE devices, USB_MAX_HUB hubs).
+Make the sandbox hub emulator refuse requests for ports it doesn't have,
+rather than index past its port state, and add a test with a hub that
+reports one port more than USB_MAXCHILDREN.
 
 Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
 ---
- include/usb.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ common/usb_hub.c               | 21 ++++++++++++----
+ drivers/usb/emul/sandbox_hub.c | 29 +++++++++++++++++++---
+ test/dm/usb.c                  | 44 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 86 insertions(+), 8 deletions(-)
 
-diff --git a/include/usb.h b/include/usb.h
-index dab23753f0c..76a3efa49d3 100644
---- a/include/usb.h
-+++ b/include/usb.h
-@@ -38,7 +38,7 @@ extern bool usb_started; /* flag for the started/stopped USB status */
- #define USB_MAXCONFIG			8
- #define USB_MAXINTERFACES		8
- #define USB_MAXENDPOINTS		16
--#define USB_MAXCHILDREN			8	/* This is arbitrary */
-+#define USB_MAXCHILDREN			31	/* As Linux: the port bitmaps fit 4 bytes */
- #define USB_MAX_HUB			16
+diff --git a/common/usb_hub.c b/common/usb_hub.c
+index 6a4bcec00bc..6bfe3784a97 100644
+--- a/common/usb_hub.c
++++ b/common/usb_hub.c
+@@ -658,6 +658,20 @@ static int usb_hub_configure(struct usb_device *dev)
+ 	put_unaligned(le16_to_cpu(get_unaligned(
+ 			&descriptor->wHubCharacteristics)),
+ 			&hub->desc.wHubCharacteristics);
++
++	/*
++	 * The port bitmaps below and overcurrent_count[] (and children[]
++	 * without driver model) hold USB_MAXCHILDREN ports, so don't use
++	 * more than that.
++	 */
++	dev->maxchild = descriptor->bNbrPorts;
++	if (dev->maxchild > USB_MAXCHILDREN) {
++		printf("Hub has %d ports, only using %d\n", dev->maxchild,
++		       USB_MAXCHILDREN);
++		dev->maxchild = USB_MAXCHILDREN;
++	}
++	debug("%d ports detected\n", dev->maxchild);
++
+ 	/* set the bitmap */
+ 	bitmap = (unsigned char *)&hub->desc.u.hs.DeviceRemovable[0];
+ 	/* devices not removable by default */
+@@ -665,17 +679,14 @@ static int usb_hub_configure(struct usb_device *dev)
+ 	bitmap = (unsigned char *)&hub->desc.u.hs.PortPowerCtrlMask[0];
+ 	memset(bitmap, 0xff, (USB_MAXCHILDREN+1+7)/8); /* PowerMask = 1B */
  
- #define USB_CNTL_TIMEOUT 100 /* 100ms timeout */
+-	for (i = 0; i < ((hub->desc.bNbrPorts + 1 + 7)/8); i++)
++	for (i = 0; i < ((dev->maxchild + 1 + 7) / 8); i++)
+ 		hub->desc.u.hs.DeviceRemovable[i] =
+ 			descriptor->u.hs.DeviceRemovable[i];
+ 
+-	for (i = 0; i < ((hub->desc.bNbrPorts + 1 + 7)/8); i++)
++	for (i = 0; i < ((dev->maxchild + 1 + 7) / 8); i++)
+ 		hub->desc.u.hs.PortPowerCtrlMask[i] =
+ 			descriptor->u.hs.PortPowerCtrlMask[i];
+ 
+-	dev->maxchild = descriptor->bNbrPorts;
+-	debug("%d ports detected\n", dev->maxchild);
+-
+ 	hubCharacteristics = get_unaligned(&hub->desc.wHubCharacteristics);
+ 	switch (hubCharacteristics & HUB_CHAR_LPSM) {
+ 	case 0x00:
+diff --git a/drivers/usb/emul/sandbox_hub.c b/drivers/usb/emul/sandbox_hub.c
+index 3b3e59f978f..066898f005e 100644
+--- a/drivers/usb/emul/sandbox_hub.c
++++ b/drivers/usb/emul/sandbox_hub.c
+@@ -198,6 +198,23 @@ static int clrset_post_state(struct udevice *hub, int port, int clear, int set)
+ 	return ret;
+ }
+ 
++/**
++ * hub_port() - Get the port that a port request is for
++ *
++ * @setup:	Request
++ * Return: port number (numbered from 0), or -EINVAL if the hub doesn't have
++ * the port
++ */
++static int hub_port(struct devrequest *setup)
++{
++	int port = (setup->index & 0xff) - 1;
++
++	if (port < 0 || port >= SANDBOX_NUM_PORTS)
++		return -EINVAL;
++
++	return port;
++}
++
+ static int sandbox_hub_submit_control_msg(struct udevice *bus,
+ 					  struct usb_device *udev,
+ 					  unsigned long pipe,
+@@ -228,7 +245,9 @@ static int sandbox_hub_submit_control_msg(struct udevice *bus,
+ 				struct usb_port_status *portsts = buffer;
+ 				int port;
+ 
+-				port = (setup->index & USB_HUB_PORT_MASK) - 1;
++				port = hub_port(setup);
++				if (port < 0)
++					return port;
+ 				portsts->wPortStatus = priv->status[port];
+ 				portsts->wPortChange = priv->change[port];
+ 				udev->status = 0;
+@@ -247,7 +266,9 @@ static int sandbox_hub_submit_control_msg(struct udevice *bus,
+ 			case USB_REQ_SET_FEATURE: {
+ 				int port;
+ 
+-				port = (setup->index & USB_HUB_PORT_MASK) - 1;
++				port = hub_port(setup);
++				if (port < 0)
++					return port;
+ 				debug("set feature port=%x, feature=%x\n",
+ 				      port, setup->value);
+ 				if (setup->value < USB_PORT_FEAT_C_CONNECTION) {
+@@ -261,7 +282,9 @@ static int sandbox_hub_submit_control_msg(struct udevice *bus,
+ 			case USB_REQ_CLEAR_FEATURE: {
+ 				int port;
+ 
+-				port = (setup->index & USB_HUB_PORT_MASK) - 1;
++				port = hub_port(setup);
++				if (port < 0)
++					return port;
+ 				debug("clear feature port=%x, feature=%x\n",
+ 				      port, setup->value);
+ 				if (setup->value < USB_PORT_FEAT_C_CONNECTION) {
+diff --git a/test/dm/usb.c b/test/dm/usb.c
+index fa894c1096e..7f803f9fe01 100644
+--- a/test/dm/usb.c
++++ b/test/dm/usb.c
+@@ -456,3 +456,47 @@ static int dm_test_usb_keyb(struct unit_test_state *uts)
+ 	return 0;
+ }
+ DM_TEST(dm_test_usb_keyb, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++
++/* test that a hub reporting more ports than we can track is limited */
++static int dm_test_usb_hub_ports(struct unit_test_state *uts)
++{
++	static struct usb_hub_descriptor hub_desc;
++	static void *desc_list[8];
++	struct usb_generic_descriptor **ptr;
++	struct usb_dev_plat *plat;
++	struct udevice *emul, *hub, *dev;
++	struct usb_device *udev;
++	int i;
++
++	/* Have the hub emulator report more ports than USB_MAXCHILDREN */
++	ut_assertok(uclass_find_device_by_name(UCLASS_USB_EMUL, "hub-emul",
++					       &emul));
++	plat = dev_get_parent_plat(emul);
++	for (i = 0, ptr = plat->desc_list; *ptr; i++, ptr++) {
++		ut_assert(i < ARRAY_SIZE(desc_list) - 1);
++		desc_list[i] = *ptr;
++		if ((*ptr)->bDescriptorType == USB_DT_HUB) {
++			memcpy(&hub_desc, *ptr, sizeof(hub_desc));
++			hub_desc.bNbrPorts = USB_MAXCHILDREN + 1;
++			desc_list[i] = &hub_desc;
++		}
++	}
++	desc_list[i] = NULL;
++	plat->desc_list = (struct usb_generic_descriptor **)desc_list;
++
++	state_set_skip_delays(true);
++	ut_assertok(usb_init());
++	ut_assertok(uclass_find_device_by_name(UCLASS_USB_HUB, "hub", &hub));
++	udev = dev_get_parent_priv(hub);
++	ut_assertnonnull(udev);
++	ut_asserteq(USB_MAXCHILDREN, udev->maxchild);
++
++	/* The devices on its first ports are still there */
++	ut_assertok(uclass_get_device(UCLASS_MASS_STORAGE, 0, &dev));
++	ut_assertok(uclass_get_device(UCLASS_MASS_STORAGE, 1, &dev));
++	ut_assertok(uclass_get_device(UCLASS_MASS_STORAGE, 2, &dev));
++	ut_assertok(usb_stop());
++
++	return 0;
++}
++DM_TEST(dm_test_usb_hub_ports, UTF_SCAN_PDATA | UTF_SCAN_FDT);
