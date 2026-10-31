@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE657606A31C
-	for <u-boot@archiver.kernel.org>; Sat, 31 Oct 2026 14:12:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B124D606A31A
+	for <u-boot@archiver.kernel.org>; Sat, 31 Oct 2026 14:12:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=BUfFo/4m;
-	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=lKpOAaxg
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=z79lWX/x;
+	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=R6oF+uw/
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8C14480FA1;
-	Sat, 31 Oct 2026 14:12:22 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8C1C140AE1;
+	Sat, 31 Oct 2026 14:12:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QqQwZZodRmfE; Sat, 31 Oct 2026 14:12:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BB04580F4A
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793455941;
-	b=BTl9z1Uu4yS2aRBZb72cmMGcChzaKvhIilxtQDk+5W8s3z0Y9NifRaIoMHe54KxUGMlk
-	 +B6MI0RJ1/7NbPakaEImaTzzfubRPTT6tPs0a5wNSOCG6FZJTPgBEYjgFRLWNulbBU6cT
-	 bBeCKT2/8EbN7gknIlCssc738h4gLVGZsV64daPHHaQ4fVjKYLFPJKrtgysy+8HaLwcB5
-	 /q8fXNMou2Olz5p1LC4pvZN9BP+Gm2jyU8QNGP8D3UUFc07ipKP7B3hbGTZ2mVExg5bUp
-	 i88ldJ7lbQJjm/GzCilB138buUMn1WEkgp4z8BHboPj6QFxmTcMzxtLdgLujE6Iya6Q==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mgiMSRzjIKui; Sat, 31 Oct 2026 14:12:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org AD97C40AEB
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793455946;
+	b=Lr0u9/bfu8mLi/qk6ZSSJs3gGIYy2A/XLq5TdRBv2LPkmridID0jelDovR9Jb4AVQUb+
+	 gxMPGaHJrXEtSHxmhtmSN1ATWGIM/S3iXyPRYGB5V0lbKDdhAQO+0ebO7QvsFE3J9nAyO
+	 sp7KY1iH2BrP21REosoKStSxUbvsVWpWYhyIBuPwxnrBoLi/fOVJhfvdjuXI7whRmMA8J
+	 o2DuuInf/p3lmmRathiTD0pK5w/2kcHFxEpc7HuH/TsIIKcYv7PUhsb3Gf4+zeJb2OfIn
+	 gWtJPrS8chSzMPnBS/qe6EEjSS8CvQQp4v+Y3Jw0Mik0Zj74dtAO9okXTn7v7H4RXZg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793455941;
+	c=relaxed/relaxed; t=1793455946;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,154 +33,154 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Cc:Content-Type:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=Qn5/phTMP9jocV4KdMQCBv9OO0Bvehs4NUefI5kn1HU=;
-	b=JukrEOdtVE4XNOF6wMp3NN+lzIayIxQe4SRcq0/0H3jwuyXhfe5iW+yFOBhKWXIbSzxF
-	 5ACt3PG8DsDzt5P8ZNuSAcFdOReIJx3a5kXwPZf8YfHUyUcr3ZqhQ/U4tGlpXraYThE/p
-	 EDPuitPwQpdQiDWsuJbsC9p6e5HtknTwfh5NYGOlepLVeVjLZnvYtXeavB5V5l5784PL3
-	 v8xmFHCO8oTNe76LMuqWjU3cUU2+AtELL3twhSl9KI+D9iWCrNI2wfdYTf6YkgDVkKYu7
-	 VaAX8vfNug7ChGRExYYhMOahshJInSlteLXrkTazeRIOWIjIlh3xNE8fo8Wf/kzdeOw==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
+	bh=gXiLYw5XTFTl2hkVauZsCzMPeNLfG87t8nqFx0Snvg4=;
+	b=H2CalTiGsSIZ4tBRh4+4WEA6NOLibo3LhBIwKpQ1K+T9tETh3/zc2g55krMKCJ5N5824
+	 5QPQRbAbs/jT5O5WMkj0QN9nSSX/76yZX9fugO8/FIOYwBB6m82qP7AcUgp+q1AMLlrvi
+	 EyY3SzOHI5z+RuUPA0AK2wdprTQQkhqGolKy/SibVlKEGytUg5Ie7HhktlPdBj9URcz20
+	 7SdfzpWa4TYEb4q6HIl6DsbjXL2YVS7pCWenfe/BJF1oIfvOR2bDPf1wVONe4ZuWR4Jpu
+	 2mmoWa0zUJNyl2CzU1gmpi0gLJ4UeZt/6JtmieiXx3ex2+KwqB/mODgP/T13S4GutXg==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793455941;
-	bh=Qn5/phTMP9jocV4KdMQCBv9OO0Bvehs4NUefI5kn1HU=;
+	d=lists.u-boot-project.org; s=default; t=1793455946;
+	bh=gXiLYw5XTFTl2hkVauZsCzMPeNLfG87t8nqFx0Snvg4=;
 	h=In-Reply-To:References:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=BUfFo/4m9+txFO+ynQ6Rfm7tVEf6wgtX4ryA+uyEM+IaraB/bx1eo+EJrMXPm92Tr
-	 PnBbB20IkWPyLLV1d/Vvnt/2mcza0KEf8U9tLEeY0gmwwYp/7Ee3jPVDcJfIKFrneO
-	 abiUMU2VtB1TkqWQ9eOvcrbJziKKyHrPDQZYp8k5BtoycBIcPkOkpcoCr524zv95iT
-	 boL5x+XCR8S79QP7z+Y8h0ConPqykEe6UVjmo9eP9p5Nfyq0HXBbAzxyHu61vRk4/r
-	 pt6g03wOCE1pntwaTqV0uEM3Dw6ufMDDJk+orWEmAYPKworca/UgL2WBxmNy4UrwBb
-	 bJSylaTfCt3JQ==
+	b=z79lWX/xZ1hEA5hU/v8kc/AGlK4+iavv5ySKFFYVQvMLhXuzpb1sWTQtCOnVOgxX/
+	 KDvztujU1IW1QD2IcaG28x2GGYCFiKwewLS/TfUrsxKYk+avYgocOKrqXgvvwT3KPc
+	 otTwli+qIn6UjsdCurwJvKVXLirNHkYM0ts6tVKN1eMOyca2RTkV6p1/auR817e8ae
+	 lJRx8t+UszFa0w0lTYkRvMdLiUiyI0vtvd1Uv44kHaDDG4FI65hA8Yc2+g+SqXuQ9e
+	 XT5kT197tVc+HZZek7IOPiBJB4lTufKnM5zoYhvFuPXtVxsH/+V626guTitZiHbxny
+	 fbgY2ftAUPKrg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BB04580F4A;
-	Sat, 31 Oct 2026 14:12:21 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 6B040411
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 14:12:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AD97C40AEB;
+	Sat, 31 Oct 2026 14:12:26 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5DB791DE
+ for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 14:12:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 5089A6060C
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 14:12:20 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1150080F1D
+ for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 14:12:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zyW3-5QniIJx for <u-boot@lists.u-boot-project.org>;
- Sat, 31 Oct 2026 14:12:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 80685605E4
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::1029"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793455939;
- b=YXIJ++C5mGOkrcPMfaGY/B/ygJS1PQ+jKllnrTwlaj08b/s2diiI7HjKo3MS0y63aZxk
- 7jHFJmLNhfxLPtw6iqirD5F0WdtTINmX86u7aK+JHAuPxijTfgnpod8kKuCf7M53dhFJ7
- so+VWpi1f+arzmP2pl5yIRBO5810K5P5mjy/u0k662Hkf2j3KH3c0nebZb1tX9tfyMLH7
- v/2jFTPYmHwRPaHZ2FUhQWO9C6AlPySR/WJBECbfs2IMLJ0/zp8BcH+pkZr9BkFU4PCTq
- ROb7Fh3O3evzbEGzgSD+6c+BbPMMbCn2dR7iMK1W8FnhAKLOPIs1y5JxeAFcIhhj9+w==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3yvIQ1bmYuWf for <u-boot@lists.u-boot-project.org>;
+ Sat, 31 Oct 2026 14:12:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3C232810A8
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::1033"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793455944;
+ b=BNl+h9ZMVTtWvpEqrxQ6efb2ENY2Jn7rHae11UruH8aGb6HMkDqSKXaEa0EjhR0nEPLY
+ hAtnyUFjjzjaQMEk8N6i3JxtpRPrkCTHodA/jOKMhN44O8lbreRUVml8fhtKWQCOq7aG8
+ 5yqL1lOiBIekzAk5yw5X/2I3V2g68I4goOIT/23NoQsFGB4LRCLpN1PS35ebbDixO3758
+ NEyYmsNCK0Bco4xkaJkML5r7UQKdSAFAZNcRILbQirG9G85TcmlPcU+NFZWpeNzIJU0RR
+ 8/VAAo1WwcIzILwBR0gNv4jRcAITzyr/6zkPfBs/6PvvGvZYCHA1YQ8WHAYThf4vJ4g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793455939;
+ c=relaxed/relaxed; t=1793455944;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  Received:MIME-Version:In-Reply-To:References:From:Date:X-Gm-Features:
  Message-ID:Subject:To:Cc:Content-Type;
- bh=Qn5/phTMP9jocV4KdMQCBv9OO0Bvehs4NUefI5kn1HU=;
- b=jT3UPiewhDOgrdmSP+xZsg8rPprhceGAQrsXiIu9lLzD4D+Jd7monUVqn9+yZ6n2bz4v
- mBO1ENBNNw9VuXnaFUeM3jqNk5EcctE6VNFniuWVRlZOrh2AW8FyNl5sDzIxJP+j1/W9T
- HuMK7uOxu6c6FE/vCMtKgQisYqyYM1CgzwqPcV9PPAzAPLdRyGIyiTrCYuTPDv30m6zlq
- S4z5f2QXoGGjAMJa/CLSfVYXbN6R5LF7C6+O+VH+Q19EruR7xqtgwySPpiNlXEE4sxaP3
- vkCYxeY/+rrUC3pt1jYp3AK8RmO8QzjcjRUatBoEPkbzE5E913FLwjOxBppJzgd2raA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ bh=gXiLYw5XTFTl2hkVauZsCzMPeNLfG87t8nqFx0Snvg4=;
+ b=jdnJLhybYCNhCpWh+QlI9+afHR0LTbIz0KrQtnecH7lKSnQCAuBnT9ljfaecwtOE0fgv
+ tUNU3Hct4uqTXsOL72zJZucUSb3FBxlF+jFbeh+sm13vFZgEXXZ4LDBN17qm46Gq5NwfQ
+ HNIhAN0x1P4pCVaBgVGFyCYz1ZaPeaxLmiI7LnPf5eJq5GfDP/AaCnjZ5uF39ziOw9HUs
+ g5JN7+/VT3cbsfoTY2nBzPstEk8bPM3rrmaaIrez24PGASMQaA1FPTs6jfBvrsm6y9SG2
+ xQs7fZviipLZFt8TXGn+TdItVMJ+aI0FhkakwX3lPgVS7r9xvlWwOPwkyyVthEq94rQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
  dmarc=pass header.from=chromium.org;
  dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=lKpOAaxg; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1029"
+ header.s=google header.b="R6oF+uw/"; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1033"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1029; helo=mail-pj1-x1029.google.com;
+ client-ip=2607:f8b0:4864:20::1033; helo=mail-pj1-x1033.google.com;
  envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
- header.s=google header.b=lKpOAaxg
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 80685605E4
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 14:12:19 +0000 (UTC)
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-3ac7c7b3a90so747937a91.3
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 07:12:19 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793455939; cv=none;
+ header.s=google header.b=R6oF+uw/
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3C232810A8
+ for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 14:12:23 +0000 (UTC)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-3ae1d0caaedso741783a91.2
+ for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 07:12:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1793455943; cv=none;
  d=google.com; s=arc-20260327;
- b=gYKMEyy/AcDOYcn4L4ZjMJVL01w3NDBkg9ZjpOYc/Jf/nRxNbisXgE5KY5LPXLU6w+
- GN+sOaIRk7zn9eBx2VyvMdgdO9cQe/RNUGxIvlaWz458o0HebGBo14HY6NJHJ+A+pBOD
- 24MTJiT0kFrlNUX4MiYMdt0Iajnc8DAVvXUNqgj2E7Lo9K8JeLJwmcGQ0Ms03S1ST8jY
- L9/vsmXLa3/4QIsEze4//+DSm3yrK8RZ/0km946NTyOIwZ0GDsQ2XSZptu8UL6TtoX1r
- /HUIJuGz578kC+AuvEyGcTONGTlpefonWHmFRJuJrRXWvhTdSXaDsMxt3N69PUqdhYb7
- 02oA==
+ b=q5TKwW4X9ZqFV8H/wK7bsIMJ3z9TzswTSEMBa6L+8gbFG9bBJ5+bYmyBPzxbzvQN+e
+ jw9+ZbkNhcZwkBsbvvsihVp93oFwDnBr3r8j9SbvGv8ylg426J0mgVHTNYb129UZ0QcZ
+ KuJE16EsQnA80jRpOQHuhCtXqCN0hXhAKj5gREIwT0imzkHKapN2SDIxJOp9XLuLTjWy
+ rxe5wXdxb31p1oE/dM3WOPw5MxOq3bgVc9byJF2ra8aL8IOe/pVg5dZOXZ9X1aMtdhWS
+ fEnCUfwzsLQVw7RDDZcs4ov2LJmyNHTvVgvkCj0a/e733TTegKBdJO6FSfnGGAGQP2hG
+ a2DA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:references:in-reply-to
  :mime-version:dkim-signature;
- bh=Qn5/phTMP9jocV4KdMQCBv9OO0Bvehs4NUefI5kn1HU=;
- fh=zP70F2aREQ/p2xCbpzFaiLIfLKNYTbybyQZzpsnkvWM=;
- b=kTbVAYmrQ/cV+oR6Z6dRSkePKoC3/EfkylPQW5UTAyoEVYMxusuFv6pzd9AlfhnO9n
- XuHBVEddCZxfaZI7IkNk2//tovBY7skM8DHE851vrm4VuRwUgqOAqFcNsPN5cltr8r5S
- eE2JORjclA3AmoMq0gjVgwutS1QfSB2wuWGNrpC5enljXAPy++DI+iIi9FexO7nJOSRk
- Tpzts3OVCUE3tjjGt4AKoIz6JeOrjlcN02twH6yKYKzZ4+EF6FPJgdDxAuwxirjgazPl
- DCY0BnIO9b7H5Q96sUs3kAHDwUENTw8ipJsEewxteonkO/ym74Esd5ORdjSVlnzrLbAt
- 6MLQ==; darn=lists.u-boot-project.org
+ bh=gXiLYw5XTFTl2hkVauZsCzMPeNLfG87t8nqFx0Snvg4=;
+ fh=XXKk4iRAMsSvYqlTSnM6V0hzlPKJVUv/9VaOgnEIjRw=;
+ b=TKhBls+DHKycbTYVW+VL8fgAm1iQa6QUdxjqEnJK3s6l+NIZF4itkIXireEQtPMBbg
+ tbOPEWZ32zI3xDULxitpOhpEXKDCEAs1iHgyU+cSWu10ZZflO/CFOLLqZceyGl3ZTgcu
+ NDEw6MxLQFCq7kZYPzYEqgY0xVyqDIzWit+Co3OJ0E+kKejfadmQeBvAkfcFr7kKfc+x
+ +UgPzk+FtXIuCXkXWgg2EVgFRWCL72OTU3gwA+ClBuGi874slSxGq8HyiCuIe53Mo9hY
+ BtirP5gEgLY1VMPjvLqEyfE/MXJeZ8OhhTZtdkLVbAJB4h/qa3hXsPkOfBCY5T0wk8wf
+ Ha1A==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1793455939; x=1794060739;
+ d=chromium.org; s=google; t=1793455943; x=1794060743;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:references
  :in-reply-to:mime-version:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=Qn5/phTMP9jocV4KdMQCBv9OO0Bvehs4NUefI5kn1HU=;
- b=lKpOAaxgGQejwL5e+hZF8+fDszIOiKS0B4NxJ25C2CjEZAcPZmrJq8NZHq0jPJx3+Y
- p/f9DzeBRWUcPAyjnEe3m6KtVZBw/8UR4PPMbYUsWrQ/HxMwcyrlviKf1STm4BI2VtIs
- EsLEqLOmFkkowGGD4V0CxNJYK9362iLUyjqx0=
+ bh=gXiLYw5XTFTl2hkVauZsCzMPeNLfG87t8nqFx0Snvg4=;
+ b=R6oF+uw/oKeJvk3ZYs8NSJcA4FdX4Yad1JNjOhBIlPEQ+ZPhK6Vk4EB927kZhe/Kdz
+ H3Jb4B37Wj7+ljzZ2Ul3N0YcSvoR0JLjbgnS/IqcD09g7BBP85myw0VhXTUDLZiT/sOp
+ hw0UfjE1z8nn1jFvIEJo/LIhm0KSak5MVQHxA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793455939; x=1794060739;
+ d=1e100.net; s=20260707; t=1793455943; x=1794060743;
  h=content-type:cc:to:subject:message-id:date:from:references
  :in-reply-to:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=Qn5/phTMP9jocV4KdMQCBv9OO0Bvehs4NUefI5kn1HU=;
- b=rpH8sodM48Z9wyVw15i6p10dpgQ+lOgEGAWp25zf6VJN4SXO6BLyc4n8bcNfQVwdpT
- a3fqix72xoOVGEAYGa4HJ7ZySlLwbNlxctO0WSIzQFdWM/lJlsDVlVdX/xmwWVQ8sJjz
- +TChDAPbTdLPRubYfeImuE/Yisg0BqR85dc/rkTVzuJy3evmRnVgOy/wJbwitv0ouZLD
- a2lmG2GuF5f2ISZiFkKYproXH939fIlpk+UTxz77icLxuTV+KUwKmNyGYseEPn7jVfHf
- VXY6V5JPkOcVcf3WxQAoFErrzeQDJLjvHppA042T6W6c8I1T4ybTaL7skxo1x15TEj2L
- QG+Q==
+ bh=gXiLYw5XTFTl2hkVauZsCzMPeNLfG87t8nqFx0Snvg4=;
+ b=oocc40QRrR5SE8bol+Ktr5ahO+O8nfmHZ5VVxsyayvLE08Hwnlgrqrewa3swiLkuoU
+ 6ILSaOhAYRQE9gJgDguGEIQMy3xeNpBmEXsTBhwnHvEPg73HInBzdEy/DqvUgNlp0zGx
+ eJEYAXbuimZCThSAqegkbNrFjTZurx1G2GQJHEnQe0IlmePYoNRm4IXbNcyEeIpa1v0X
+ b0d8tbG7OCb60vF99VrqGy+GlBBpebJ2fi39CMpe2Q46BkDdZCTpLy/dAnaSOYFy3IoT
+ OCILDe6hyr9tnMDdrgWdYmvgAfGxBPuxnJjjzARrVza5ySNnqdEtI3ULSlmcQ0NA11Xv
+ yaLg==
 X-Forwarded-Encrypted: i=1;
- AKwUvByasHUPFXjKllD014bceyLJVrHGwj9jykhZyqKDMn9+itXRG1rvUFcqscv9DDWcxO6LD1vuE0g=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYIW9NcCyk89G9YArb+Gr2q3c8WNKx0SGlGJWxTV5UrnLWGF1kjR
- zq4iMI6i9boILdWbIcFhbXByxMShsSS8QcoeHzY92U6sq8uCuXFH5JjB60LTpoBQGVGn9NukGzS
- xCswRXjTkWOh3H+AB9zQEDBG9v/LIObgYDG/mVJHfxj8TehduFW4=
-X-Gm-Gg: AYBFou1oNc9oRD+vftiACR/e8E8YvKbJJe3eedzKVMvhc9BcCCfWc54dTh/XlN6sIXf
- NNGaDuNVi7YmprbAcolT9tZ5/ucKL/IezWitzKR2VJ83KYKP1IEYd2kKuFoy9trfK1xZ+aBd0iH
- QpunjabqBMpTZ7ppTE0EsyisxPMGxBS8WVDlmiossAmritWoHR88Zq51emxVJSavlskvLadhHUX
- hfbR31Rm0JeBXRKcGN5zSB7G9k6BvpD+Ex5QrARMdaLEo3mGPXNKt8+Xhz4sbmvTSVvWPBYcpAR
- qdEbnpWIyWdwX59hUD2OvRNy8JQ62zy6kzNeQdJDunpNsu8d6IAIS3SVY9AXmldEyIvwZW+DbyP
- 7ly3vO7QfIhFrPXBUP3fu9FU2nU3XpQNUQ0hSe9+W4C6tnRDXo5JTtVijYGBtIimcJNz/GMWj/q
- dy9tz/HKHxoYNvmNhJIQ==
-X-Received: by 2002:a17:90b:1dc3:b0:3a0:b312:1fbe with SMTP id
- 98e67ed59e1d1-3ae897cfe51mr4184443a91.23.1793455938678; Sat, 31 Oct 2026
- 07:12:18 -0700 (PDT)
+ AKwUvBzpjDzeETmU2aardnzNopgCH5ZwV/JDHnttgba5wMcL4KA0S8dhwwo189AL66l3ONYPPXP5MOM=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYJhVq1eGsVZ1DDsrZTDiW6GcFHx5WFmvl5e+cbY69UfmQjLFnuh
+ BxSOEPcnRmHDHTPa73DyWjattz7oFi8HO/6mVmqE+t8GIGwVj4ld7EXzu1sMGMGUbJNZoCTI1eH
+ BzV0P6IUcvQydQlOg09omcPldJ5NANt/KxovXNLY6
+X-Gm-Gg: AYBFou0JN4i+2qxi3DMQR/jrvPUWZ0UciXJDvdCuz2rFSuOIGsAOhECWxIXdGgN6wv/
+ m9p+Ts1C9bgM8+a++7tL46wZ5/ONBOTN/gTMFJlU9ZDxVseAwQcHDGPV93RzQo8iOprgUr/fauZ
+ zIWeQoepCXwL+9MI+zz/vR3UlMmhEJIBgKj/4/5nrBT27fPLurjfg2V1fw8O0/gJ71SFVJ42BGZ
+ w6cSJiCHLQzqghXVgCVq2zwZH1kfa7/lsC0inieidgvV8te10IIF9WOcuMKS7tl52EtnvQfyiil
+ rS/7GW3JQZq/XNDlq/lMJyq0W1BHq8G/w1vPBTvtw6UZIqarr2Tz00htvnDvehCHQzUtoBy5i3B
+ It6VRrJYeSiJSRU6L16ANZ0J/MFxwlsz6egu5a/ASTq7/aYk8Alda122RoxBsgcU+4kfggdTb
+X-Received: by 2002:a17:90a:f6d4:b0:3ac:b197:1a37 with SMTP id
+ 98e67ed59e1d1-3ae895362cfmr3376436a91.3.1793455942954; Sat, 31 Oct 2026
+ 07:12:22 -0700 (PDT)
 Received: from 415065739583 named unknown by gmailapi.google.com with
- HTTPREST; Sat, 31 Oct 2026 07:12:03 -0700
+ HTTPREST; Sat, 31 Oct 2026 07:12:14 -0700
 Received: from 415065739583 named unknown by gmailapi.google.com with
- HTTPREST; Sat, 31 Oct 2026 10:09:48 -0400
+ HTTPREST; Sat, 31 Oct 2026 10:10:40 -0400
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20261029201348.730274-3-ekovsky@redhat.com>
+In-Reply-To: <20261029201348.730274-4-ekovsky@redhat.com>
 References: <20261029201348.730274-1-ekovsky@redhat.com>
- <20261029201348.730274-3-ekovsky@redhat.com>
+ <20261029201348.730274-4-ekovsky@redhat.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 31 Oct 2026 07:12:03 -0700
-X-Gm-Features: AclHuK_jiaCzlrWJy40hfm3fyXMVtuynZc7aYXJC0f7JTxyWWymjnRKFTLyo6oM
-Message-ID: <CAFLszTiO0jXX4jzLBJzufy18d+BU=zbk3qefesrdcegkSvLVZQ@mail.gmail.com>
-Subject: Re: [PATCH v5 2/3] Add pkcs11-provider package to build dependencies
+Date: Sat, 31 Oct 2026 07:12:14 -0700
+X-Gm-Features: AclHuK8AL1b8-qr0LLXEEh2LVRC7upUC3WFHF4ghwaDkDTniviyicrnoXJka0gY
+Message-ID: <CAFLszTj_VWJB+v3168+qqZNzOncYdLUdb6waRP_k776kqa0M+g@mail.gmail.com>
+Subject: Re: [PATCH v5 3/3] rsa: load a pkcs11 token key through OSSL_STORE in
+ the provider path
 To: ekovsky@redhat.com
 Cc: Tom Rini <trini@konsulko.com>, Tobias Olausson <tobias@eub.se>, 
  Paul HENRYS <paul.henrys_ext@softathome.com>, Simon Glass <sjg@chromium.org>, 
@@ -209,60 +209,95 @@ X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Eddie,
+Hi Johannes,
 
 On 2026-10-29T20:13:40+11:00, Eddie Kovsky <ekovsky@redhat.com> wrote:
-> Add pkcs11-provider package to build dependencies
+> rsa: load a pkcs11 token key through OSSL_STORE in the provider path
 >
-> This package is needed to use PKCS11 with OpenSSL >= 3.0.
+> The OpenSSL Provider API support routes FIT signing-key loading through
+> OSSL_STORE on OpenSSL >= 3 (USE_PKCS11_PROVIDER), but only for key files:
+> rsa_pem_get_priv_key() fopen()s the path before OSSL_STORE_open(), so a pkcs11:
+> token URI fails with -ENOENT. The legacy engine path that handled tokens is
+> compiled out on OpenSSL >= 3, so FIT signing with a token key silently produces
+> an unsigned FIT (a configuration signature node with no value or
+> hashed-strings).
 
-As I mentioned on patch 1, rsa_pem_get_priv_key() now loads the pkcs11
-provider even for a plain .key file, and calls errx() if that fails.
-So on any OpenSSL 3 host without pkcs11-provider, all FIT signing in
-mkimage fails, the vboot tests included. Is that why this package is
-being added to the Docker image?
+So as I understand it, this describes a regression from patch 1, so
+token signing is broken from patch 1 until this patch. Please can you
+fold this into patch 1, or put it before it, so the series stays
+bisectable?
 
-If so, I don't think it is right. Linux sign-file only loads the
-pkcs11 provider when the key name starts with 'pkcs11:'. If patch 1
-does the same, only the token path (patch 3) needs pkcs11-provider,
-and this patch becomes optional tooling rather than a fix to keep CI
-working.
+> Load a pkcs11: key URI in the provider path directly through OSSL_STORE and the
+> pkcs11 provider: skip the fopen, append ";type=private" if absent. The PIN
+> travels in the URI (pin-value=); MKIMAGE_SIGN_PIN is unaffected.
 
-If it really must be required, this patch needs to come before patch 1
-so the series stays bisectable, and the commit message should explain
-why.
+The patch also changes rsa_pem_get_pub_key() (used by -K), so please
+mention the public-key side too.
 
-> diff --git a/doc/build/gcc.rst b/doc/build/gcc.rst
-> @@ -28,8 +28,8 @@ Depending on the build targets further packages maybe needed
-> -      libgnutls28-dev libguestfs-tools libncurses-dev \
-> -      libpython3-dev libsdl2-dev libssl-dev lz4 lzma lzma-alone openssl \
-> +      libgnutls28-dev libguestfs-tools libncurses-dev libpython3-dev \
-> +      libsdl2-dev libssl-dev lz4 lzma lzma-alone openssl pkcs11-provider \
-
-This is a runtime dependency for signing with a hardware token, not a
-build dependency. I think it fits better in
-doc/usage/fit/signature.rst, which still only says that libp11 / the
-pkcs11 engine is needed. Please can you update that section to cover
-the provider for OpenSSL >= 3?
-
-> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> @@ -122,6 +122,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
->  	openssl \
->  	picocom \
->  	parted \
-> +	pkcs11-provider \
-
-The image is based on noble, which ships OpenSSL 3.0. After patch 1
-the engine path is compiled out there, so libengine-pkcs11-openssl
-seems to be unused. It would be worth dropping it here unless
-something else still needs it.
+'MKIMAGE_SIGN_PIN is unaffected' reads as if the variable still works.
+With the provider, rsa_engine_init() is compiled out, so the variable
+is ignored and the PIN has to go on the command line, where it shows
+up in the process list and build logs. doc/usage/fit/signature.rst
+still documents MKIMAGE_SIGN_PIN and the engine key-id rules. Please
+can you update it to describe how this works with the provider?
 
 >
+> Load a pkcs11: key URI in the provider path directly through OSSL_STORE and the
+> pkcs11 provider: skip the fopen, append ";type=private" if absent. The PIN
+> travels in the URI (pin-value=); MKIMAGE_SIGN_PIN is unaffected.
+>
+> Assisted-by: Claude:claude-opus-4-8
+> Signed-off-by: Johannes Schneider <johannes.schneider@leica-geosystems.com>
+> Co-developed-by: Eddie Kovsky <ekovsky@redhat.com>
 > Signed-off-by: Eddie Kovsky <ekovsky@redhat.com>
 >
->  doc/build/gcc.rst       | 4 ++--
->  tools/docker/Dockerfile | 1 +
->  2 files changed, 3 insertions(+), 2 deletions(-)
+>  lib/rsa/rsa-sign.c | 92 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 92 insertions(+)
+
+> diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
+> @@ -92,6 +92,52 @@ static int rsa_pem_get_pub_key(const char *keydir, const char *name, EVP_PKEY **
+> +	if (keydir && !strncmp(keydir, "pkcs11:", 7)) {
+> +		char uri[1200];
+> +		OSSL_STORE_CTX *p11_store;
+> +		EVP_PKEY *p11_key = NULL;
+> +
+> +		if (strstr(keydir, "type="))
+> +			snprintf(uri, sizeof(uri), "%s", keydir);
+> +		else
+> +			snprintf(uri, sizeof(uri), "%s;type=public", keydir);
+
+This ignores 'name' (the key-name-hint). When keydir has no 'object='
+or 'id=', the engine path appends ';object=<key-name-hint>', as
+signature.rst documents. With this patch, the documented usage (-k
+pkcs11:token=... with key-name-hint set in the .its) loads the first
+key OpenSSL finds on the token. On a token with several keys that is
+likely the wrong one, and the image is signed with no error. Please
+can you build the URI the same way as rsa_engine_get_pub_key() and
+rsa_engine_get_priv_key() do?
+
+It would also be worth handling a keydir without the 'pkcs11:' prefix
+when -N pkcs11 is given. At present that case falls through to fopen()
+and gets -ENOENT. image-host.c treats that as an allowed missing key,
+which gives the same unsigned FIT that the commit message describes.
+
+> diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
+> @@ -237,6 +283,52 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
+> +#ifdef USE_PKCS11_PROVIDER
+> +	/*
+> +	 * A pkcs11: token URI is not a file: load it via OSSL_STORE + the pkcs11
+> +	 * provider instead of fopen (PIN in the URI, pin-value=).
+> +	 */
+> +	if (keydir && !strncmp(keydir, "pkcs11:", 7)) {
+> +		char uri[1200];
+> +		OSSL_STORE_CTX *p11_store;
+> +		EVP_PKEY *p11_key = NULL;
+
+This block is a copy of the public-key one, apart from 'type=' and the
+OSSL_STORE_INFO type. Patch 1 also has an OSSL_STORE_open()/load loop
+for files a few lines below. Please can you put this in a helper and
+use it in all three places? That would also keep the provider-loading
+order consistent: here 'default' is loaded before 'pkcs11', but patch
+1 loads them the other way round.
 
 Regards,
 Simon
