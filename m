@@ -2,184 +2,145 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5034606A31E
-	for <u-boot@archiver.kernel.org>; Sat, 31 Oct 2026 14:33:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5020F606A31D
+	for <u-boot@archiver.kernel.org>; Sat, 31 Oct 2026 14:46:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=TVsn3sjr;
-	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=KmkH2jh3
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=iIuaLiNQ;
+	dkim=pass (2048-bit key, unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=ZDRziRB0
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F2ECD40A95;
-	Sat, 31 Oct 2026 14:33:25 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2818340641;
+	Sat, 31 Oct 2026 14:46:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZC0CrBdxM40q; Sat, 31 Oct 2026 14:33:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2823D40A91
+ id PlXju9wvb5i6; Sat, 31 Oct 2026 14:46:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6B2474064C
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793457205;
-	b=kYo2EAOAqWLR/3tK67wRf8ak+bJmg9l0WDinkN/SSsSW3dmTK3MwwmucSWpKi2/XQDVt
-	 6he/cofsol38Zjkl9Mu2hcOxQiFi1j57r0ZGp0Yb76agsnOV8enouzav4dqGdmYAlocNU
-	 Rt0CS4aaFsvANUMNeWWU0LOlmHQvKkjVUsYxpwQ9bt7GzmLWDFPidFOBCMfbqufxpdiYO
-	 4/jyKlzjJW4CVeyQHZxltCBc0YB20TSgOssnDrSEGTRFBo04pKa78CKUP2GXd//LWfWFZ
-	 fOFc+rMv89O2pidR5Zo5WWW7cpzzp1+qcw0CrVNUA8dEB6WsmclExStwMGQM/XTeZ1Q==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793457978;
+	b=HXy1tfZ3PNQgJlP+q3VyfK7w6a1hVrDDpmYOqY2f6yBqJcJoPNenfCXJEeSACFAg9XKM
+	 dnhNPPnEFPe/N6bRN1auRvctuBUY0kbD4oLn12srTT2yU/PxM47YVmlDjNYl8DeAO3efb
+	 bAsocaNMfvjLBNq4tgg4u1hq5y8s+kfZpjaWjKXphHieYbxamtPoq25cbmue0ya42o4vN
+	 rI6X76/hgOYQld4ukV9Zh9WLh5y+RevoQ77m0EGrx9Xd3wMr0na559RQXT7dy+zkGAAqy
+	 JDw4jd4svFvZNLKvD3Bci1UrzaPzKxrNQjwKdZG7d7dw7gFPgzxTy27DhB6cjMAEzTg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793457205;
+	c=relaxed/relaxed; t=1793457978;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
+	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+	 References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Last-TLS-Session-Version:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=OVPq9I2CBktoYEpa8m39AeiZZZMrI0xwANam329xdfQ=;
-	b=Sorp3ukb99yJi55O8KG3mLbQGEO2KPMWodBQ+Kl71Pv3EkT/wATpHRIPLzVO2et/NxBP
-	 gj6MDDutn6ut/s2KQo9kshoZB756H/IORE4Gy054gtl2HRrFRo8M8E44uC0X6thT4M+xG
-	 0YAfOhl+GZtNSscDlaBDrQAUCwOiq07kLuqcJxD9IXAsaHKF5snyt92hue2KPIqflD399
-	 SZmCjPNWNHUtp/Jv1/jwIMPN2xdpVxWuK49fXtOd+3dAAepQM+9VJftxUTsCCWCY4t5G0
-	 cfhBEIgzJbBEtoiQdhQ5f8+ZjEkZlEzWgQA+ZUG15ztq+sPzJcF268NJ5f2LloyU+mg==
+	bh=WWqRsxjbKkAq7G64QxKc8xfh2YmRI9+e8K496IxICgc=;
+	b=lJ1MOF3oMcnYC+02nqE5gjI0/FdoMbJW7QEuAiORKbh+ASVOn6pxfFLuJUtIda52FIun
+	 DQdpKCpHKUMFCj6vO3+mZxb27PzNdEKTLRLkgA1zxKSD1eY2mVgeXEdP03/S0NMgwn5AB
+	 NY++j5iLDIbZx/ZLK9jd9a0drZaUHKGj8L1LmOA+dQCrafshm1o3eP/gtlWotHEx+wP9s
+	 rfmxUdWnP8Vi2qK6XzoKUS1J04SVbdwGva32zEFq2PFQTgHcoqihEjS4MWh4RJkRVxJ6U
+	 bpLiuDd9Km+/8XvQ27Z8Fp366T7SPdY33suAdYSLmD2TOR9NkC+lVkVBF8rLdSdgnpA==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793457205;
-	bh=OVPq9I2CBktoYEpa8m39AeiZZZMrI0xwANam329xdfQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793457978;
+	bh=WWqRsxjbKkAq7G64QxKc8xfh2YmRI9+e8K496IxICgc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=TVsn3sjr5oDzaiVYdnxaCuHqNXAVhoD4SplfOld12tyB6KWxqLMUGNM/cd3J5UpVe
-	 bsQLese+rI8VTcwnycpXQRUb1frLso/tU3pK6zoMJv2bUg68ZLIUERoHNFClDZXXSC
-	 bhrYFLK2dQ9ILVeZBPLR9ZhNPHW4pBjG53tlQdbENbpqS85dwFYUprFsGILgXvgnws
-	 mLQ/A2b7Qw6VLxEvw/GH50aUtCwWD2dXycm1o3LVHEUGQ6XrX1gtfGjc2rQQ7BwHFf
-	 sQISWke+OelbbWJDrNj9rw1+oLJ5G9h/tVCPflGqcSeCTRQmGX7DkmJ/xBJ3RCp9Td
-	 h/VXxOud9d8tg==
+	b=iIuaLiNQrcfP4+Uc02tXThuddGMtIA/KGEq3PxKwWWGLtQS4WRqdG1UQDGTyDO6ku
+	 4F54opprAtyO5CyHUIrtqQBSwftVIXVZC480kD9qMs1a86qpLseHVk4HekN9yDYfEt
+	 5gnn4h7slqj19zEkkDVqcwBSKYelEt3jW5oHgbpmp2GFJuB5toLaD/5fuuKjhI/rgq
+	 8ns2qxMhka9Q8kUmr2+e7DYLLOWBDU0kvPtyUQioYlg9sIiNJuCwI3BQUWXf/sCKWF
+	 HWLW3Xf2Z8Y5zBEqDWn9N6k+QvHRaOw24gswKJ1G329hMX6T3MkcjRvvu9d7gVRN5o
+	 mshFQ4ldK41+A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2823D40A91;
-	Sat, 31 Oct 2026 14:33:25 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 3C53F476
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 14:33:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6B2474064C;
+	Sat, 31 Oct 2026 14:46:18 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3A4FD156
+ for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 14:46:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 221E880FD8
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 14:33:24 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 3789A60617
+ for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 14:46:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Zx45epfTlkUD for <u-boot@lists.u-boot-project.org>;
- Sat, 31 Oct 2026 14:33:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3EF0580E3F
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::32b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793457203;
- b=FMR0hTULZsijTX3H++FWbSC6rKN3LZji9W3ySDm7sCyGy1hfUIgG9uSsK/1AaZ95Z7OL
- imqgZD1cOBJ7eZRfWoAl3O13cG9Vjoi3rPMnjusWSZ+2ImSEDDUE22yMRl0gJi5MLPgWs
- zsk9R8hUKSxbOM0HdC/z4EVAmBpIAcRv4VEiMY57sHGUEh72yWjkwcchLxC04+KLh7IcL
- bmY+F/m/0RuUKXJS6x5LtMZP2zt8ApoIor75huMAmdZsuOtU3/weYKqkuqIuOiI4fNJTg
- u5EBDhywOgo1sD5PnLRw6mkZv+yuFxjwNXPGRy484P8jcc1RuDkw26FrFyjHhzEkyzQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id c1vBGuI_8-bu for <u-boot@lists.u-boot-project.org>;
+ Sat, 31 Oct 2026 14:46:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4C891605E9
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=178.251.229.89
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793457976;
+ b=Fz6qRRMwXlDRx0u+X/20vnOdxeR5TITc3hov5gFjCixuwMN95t5rkV9IPL8ztGyyzNUQ
+ LeUaX0qbcxlrzagcs9STH4kNx6wHMFWXETTSODDBrymZ2WO7tY0xusLKEUU1bWHmriR8a
+ mKGlt8Zc3jGroqLExvXQwGNyVljHNcTAR+vYG+G+xFERZZWu3LED2xYa/7gpVLgyppsAm
+ UyhcCDbhLcbtr4LrEAS1se4B/3I+JRYSVJQjH3u7Wmfov3v4ucVbKWe3iq6tqpPhQp3LM
+ PHeetGJ42MhEOtYwljnqtvLCHioX+vRMcUPMd3HH3INrd4erWNKZS3HRMBFK9A2Vf9g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793457203;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
- Content-Type:Content-Disposition:In-Reply-To:X-Clacks-Overhead;
- bh=OVPq9I2CBktoYEpa8m39AeiZZZMrI0xwANam329xdfQ=;
- b=elmaG0PNmcI/8wRbLui9BHLVueplrYAzpH1EB8rngPs6qxdoGzM4uGyU7wcCvEj4xdKr
- u5b1ej60OX6PV3ZKMGrBClN4C0EmdYrwTGziUr4pVI8by8NSdrj63h1M6jT0kL42WAdQ0
- hWjo6cAZ7ISzP7Cw6RRiCJLVDXVmUeWFSvIms7NemVAFV5NcKkxH5W4WHh1+aHLpPGslD
- brWcRXFSmzOjqERBDFHnWMIbhonyn+msCwAHWL1JuMPuU8QRaTugwLaDphBThu03DbiXr
- Un2ZDVLwy8bGIw5ssRkZ9TZdLewpIx1aDBudlrKXNs1LtKL7fu2NhjGdkk/BrjiVx3g==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=pass header.from=konsulko.com;
- dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=KmkH2jh3; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::32b"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32b; helo=mail-ot1-x32b.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=KmkH2jh3
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3EF0580E3F
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 14:33:22 +0000 (UTC)
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-845f3fa7f38so706129a34.3
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 07:33:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1793457201; x=1794062001;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=OVPq9I2CBktoYEpa8m39AeiZZZMrI0xwANam329xdfQ=;
- b=KmkH2jh3pMP592rIISaP0AaFIyJWuLEL7gO2vRPBbE0CsnnVYTIWPAbDCHFVuF81FN
- PDdxNTWgiYYEgMTibBXoN2S1h5FYWB1Q4d37H2JwwLQew7H5kW4+tvsTvkySVKS0QQzT
- ADgqfB9vV0P6o321fRrxziapMx0aO4xU7P25A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793457201; x=1794062001;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=OVPq9I2CBktoYEpa8m39AeiZZZMrI0xwANam329xdfQ=;
- b=iy+Dku6K2Qw8sfj5jTJbCjsGAD9/HB3bU0wFjB88JebKEAgJnp1EkFwNJgLhl4f68q
- XHOmVxQUC6vy9t54U+rN4kHXZtjb4XKFH6K6H16LKzD+L4+OWIVDyf3QPfalDuzaUpXB
- nQzfVZSw8LGPH4a9Y7T02TPQ1cX+ty5x76L0dIMTw5RxrZrtNY1iCEX4kDvOmAHd39LA
- 3IO5VxY6w6LyHeJ6QVHdHPW58DmsPEBVmvNeg0Uh3xvOd6hVpR+TdR+yCh8aAwnGeV+Z
- SLEVeX3YBvjsnnX7RW9OkEz7q9Ck2y5Nz72k44AFDd/5sTJ1JCTb0hD4liHlvDbEJEBH
- GE8Q==
-X-Forwarded-Encrypted: i=1;
- AKwUvByxx6c0SIhjijSnbNSZF2jpufGc06Bmu3PgB1CYkWKhKXOjuQZfAX8gg9UB7JZbxZvBmKGtSvY=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYLfxfpm1Eq86QmVDKIXQOXwgTxgMHurAajaqY9PsW7buPRgHV0d
- GNmnvWbZHWvpfY/Mjs/1xtp+4wyVdojDdObkYyRNo0VfTawuRn8+9wvu0CJuhIRW4Ws=
-X-Gm-Gg: AYBFou0rPaJ5Y3q2EUMX3xy0M/KOhxzdsAyooWi3Z59O7RpM4ZihWqE0Hd3e4J7XXbV
- TiH9qY5Nf716DidPkhlndLZW1oDkQSsF7b0XgAL6f1lKDd18D8HZT7xptHL/P2GknM/xk8uBjop
- tEIVBzBv3VKeJWVsNQI0049DW7giy/OduHKnIiJYT1yvSMNh3mnLuxPO/ztmLhJrRMuTfcQzhy+
- 5pHd3V6I0Q34qxGcAUuCRKgMLxMARLIMoslLngZ2AEpi/ox0BQGPWrxPpZI6Q9VB0bK5Skm3UcT
- +3XrzSuDBlvjjW8zTZM2+x4RcKZ3bZQYnoZSHePJiXc7d0bbtK64bynhmCcsYN7UTD/XmWFOE0D
- WHCTKv78MQzCt1slyv64yZlM7+3wtW0PQosqz2J3qBu+9EiW7worWm+YRbZh7DD9sBS61rJMf1N
- Y149ZEq0RFZjItd40s8w434NXlwDtWb8lmAdDcWHTCmuHyZajbr9a9LfrSvmbR4VKX16jKMvez5
- xPKcK4vu2/Isia99MItsvT2YraBElbBYVjShZXNffT5P79qFa0GjYCWnAAwRItmI9SFm6QEsbjA
- QI3H+r+nkckHzcLF2e1Di0TMHQ0zFhYg2b8j3YX8Wr7khvNZ2N1/7k0o0WNuZyu3A0vqcfmRMfX
- ehRVoCFtX/FvbwFeg+bHPaxheK8ub0ZHhjkE37p5/3LPs7WV8d8CljFVPx4NpMSViN2QAFPpNG2
- IlE5+xqTxe8/Kxi5AFeH9XswjPUt5xtCs=
-X-Received: by 2002:a05:6830:82f5:b0:81c:292f:97a3 with SMTP id
- 46e09a7af769-85d365207a8mr3403865a34.5.1793457201493; 
- Sat, 31 Oct 2026 07:33:21 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-85d3545b847sm4467018a34.7.2026.10.31.07.33.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 31 Oct 2026 07:33:20 -0700 (PDT)
-Date: Sat, 31 Oct 2026 08:33:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: frieder@fris.de, Martin Schwan <m.schwan@phytec.de>,
- u-boot@lists.u-boot-project.org, Aristo Chen <aristo.chen@canonical.com>,
- Alexey Charkov <alchark@flipper.net>, Daniel Golle <daniel@makrotopia.org>,
- Johan Jonker <jbx6244@gmail.com>, Francesco Valla <francesco@valla.it>,
- "Lucien.Jheng" <lucienzx159@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Frieder Schrempf <frieder.schrempf@kontron.de>
-Subject: Re: [PATCH 03/10] bootstd: rauc: Fix overflow of the BOOT_x_LEFT
- name buffer
-Message-ID: <20261031143318.GP3309461@bill-the-cat>
-References: <20261029-main-v1-0-b5a878627107@kontron.de>
- <20261029-main-v1-3-b5a878627107@kontron.de>
- <CAFLszTgDO26qJUY+3cw1J+mPaofueYyEGUe=BVWmDH30RgA5ow@mail.gmail.com>
+ c=relaxed/relaxed; t=1793457976;
+ h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+ User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version;
+ bh=WWqRsxjbKkAq7G64QxKc8xfh2YmRI9+e8K496IxICgc=;
+ b=jexAewNsvvN6TXnY0BxyDFSIx9X0eIpTpIZK/XJR8aCfjD/W7pt0wPxj0pSgO3S1BjGe
+ Jm4y4XfsssNTDgzQgOUoP4ORs/pqp3SXCvk9qWDt3vCfpNhnUYQFNwbdLnjWHkWg63vPd
+ mz6xl7FKRFwagpdEeb4GWC7B1ELsWOur2A7xi0M7LDKJ9rMGKHVEmxZOOrbfVk1rillaW
+ IAtTww3esUODmtJck1JqgCOyGXEL2iQjkTyZrslTEbKdFIf5cmjnnjPxmQcZnc9cHnDT/
+ x1XLMQ+flXERHmKpCj+anmvFO7MCV4XncPFgU1rozaU4KiE2rcLzfMC3S4Di3hm/yXw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=nabladev.com;
+ dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=ZDRziRB0; 
+ arc=none smtp.remote-ip=178.251.229.89
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.251.229.89;
+ helo=mx.nabladev.com; envelope-from=marex@nabladev.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=ZDRziRB0
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4C891605E9
+ for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 14:46:15 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 9B03810C1F1; Sat, 31 Oct 2026 15:46:07 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1793457969;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=WWqRsxjbKkAq7G64QxKc8xfh2YmRI9+e8K496IxICgc=;
+ b=ZDRziRB0XPQjpsghQSRbA8EXpia//TtL5bNPYhxmyqYwfv0bQn5tWDKfiMiGzhjvNWP7ei
+ GVnHMhqwuxtCSE8lc89vwtjmGsF93l1Hm0iAo+BHaramJYaJB7va4prU9u51DO7ByJcat/
+ eMltQJlfJ1UqHEU7u0sLWm/xFYJ4S/Obqipm+Uu33P+jgzCTdngr+OA9K53fEg8cMW+VqD
+ XWB5YPqamvwOgaVT6cnoT9phlYTuh9U72NqX07+dXGKqx3h99DCu5invaYkWkoEfKgYHtq
+ Q6bduZsl6TSW+tsUH8TZc5kQLpH1Pxcs12zg7pXboyK2vBGAqoqs2s5PTckz8w==
+Message-ID: <5aab9a5e-dbb6-4ab9-a740-c2fb62e3094b@nabladev.com>
+Date: Sat, 31 Oct 2026 15:46:06 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="o0Bn19F0nZ2IJoo2"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgDO26qJUY+3cw1J+mPaofueYyEGUe=BVWmDH30RgA5ow@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] usb: stop generic OHCI and EHCI at OS handoff
+To: Tom Rini <trini@konsulko.com>
+Cc: khaliforce <kforce@gmail.com>, Romain Beauxis <romain.beauxis@gmail.com>, 
+ u-boot@lists.u-boot-project.org, Neil Armstrong <neil.armstrong@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+References: <3ae0a18e-0fa5-477d-bf5e-89072b9634ba@linaro.org>
+ <20261006155833.68374-1-kforce@gmail.com>
+ <20261006161015.GB1356209@bill-the-cat>
+ <e4661500-74e4-4bed-b09a-a54d24eb6062@nabladev.com>
+ <20261011220316.GJ769217@bill-the-cat>
+ <489e6811-cb25-4085-8077-427100154182@nabladev.com>
+ <20261011223137.GK769217@bill-the-cat>
+ <c532672f-8ff7-4e80-8f78-0140bdcbd434@nabladev.com>
+ <20261016000442.GG259661@bill-the-cat>
+ <adb76f1c-cac1-4cee-9428-563e67c50d5c@nabladev.com>
+ <20261031141832.GO3309461@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <20261031141832.GO3309461@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -189,80 +150,46 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-
---o0Bn19F0nZ2IJoo2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Sat, Oct 31, 2026 at 07:05:55AM -0700, Simon Glass wrote:
-> Hi Frieder,
->=20
-> On 2026-10-29T16:23:07+11:00, Frieder Schrempf <frieder@fris.de> wrote:
-> > bootstd: rauc: Fix overflow of the BOOT_x_LEFT name buffer
-> >
-> > The name of the BOOT_x_LEFT variable of a slot is written into a stack
-> > buffer of BOOT_LEFT_LEN bytes with sprintf(). BOOT_LEFT_LEN leaves room
-> > for a slot name of 32 characters, but not for the terminating NUL, and
-> > longer names are not limited at all.
-> >
-> > When booting, the slot names come from BOOT_ORDER in the environment,
-> > which is only checked against the configured slots when the bootflow is
-> > read. Setting BOOT_ORDER to a long name between 'bootflow scan' and
-> > 'bootflow boot' therefore overflows the buffer in find_active_slot().
-> >
-> > Make room for the NUL, and write the name with snprintf() in a helper
-> > that fails with -E2BIG if it does not fit.
-> >
-> > Fixes: 7e5c2c782fb9 ("bootstd: Add implementation for bootmeth rauc")
-> > Assisted-by: LLM
-> > Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
-> >
-> >  boot/bootmeth_rauc.c | 34 +++++++++++++++++++++++++++-------
-> >  1 file changed, 27 insertions(+), 7 deletions(-)
->=20
-> > diff --git a/boot/bootmeth_rauc.c b/boot/bootmeth_rauc.c
-> > @@ -167,7 +176,10 @@ static int distro_rauc_read_bootflow(struct udevic=
-e *dev, struct bootflow *bflow
-> > -		sprintf(boot_left, "BOOT_%s_LEFT", default_boot_order_list[i]);
-> > +		if (boot_left_name(boot_left, default_boot_order_list[i])) {
-> > +			str_free_list(default_boot_order_list);
-> > +			return log_msg_ret("env", -E2BIG);
-> > +		}
->=20
-> This is a build-time configuration error: a slot name longer than 32
-> characters in CONFIG_BOOTMETH_RAUC_BOOT_ORDER now quietly produces no
-> bootflow, and the log_msg_ret() output only appears with
-> CONFIG_LOG_ERROR_RETURN enabled. Please can you add a log_err() here,
-> as you do for the missing partition names in patch 6, and mention the
-> 32-character limit in the BOOTMETH_RAUC_BOOT_ORDER help? Also, the
-> other callers pass on the helper's return value, so it would be worth
-> returning 'ret' rather than repeating -E2BIG here.
->=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-
-I've asked you before to not give both substantive changes and a
-reviewed-by tag.
-
---=20
-Tom
-
---o0Bn19F0nZ2IJoo2
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCauX8KgAKCRAr4qD1Cr/k
-CuLUAQCz0nio/vebzZuH0mjjHXG9K7GsS7WfolS0JTQw5BSJyAEAwsNCqCcaLyIJ
-j/1jU+bdyHLfANNTHAkqADVEVKPtzgw=
-=fFnH
------END PGP SIGNATURE-----
-
---o0Bn19F0nZ2IJoo2--
+On 10/31/26 3:18 PM, Tom Rini wrote:
+> On Sat, Oct 31, 2026 at 07:38:46AM +0100, Marek Vasut wrote:
+>> On 10/16/26 2:04 AM, Tom Rini wrote:
+>>> On Thu, Oct 15, 2026 at 11:17:28PM +0200, Marek Vasut wrote:
+>>>> On 10/12/26 12:31 AM, Tom Rini wrote:
+>>>>
+>>>> [...]
+>>>>
+>>>>>>> I believe the answer there is that we have flags to handle this problem
+>>>>>>> generically rather than hard-coding a call in every arch's
+>>>>>>> boot_prep_linux or similar like we had to with the old USB gadget stack.
+>>>>>> This is shutting down host, not gadget. And I believe usb_stop() is
+>>>>>> necessary to correctly shut down the devices on the USB bus, while the
+>>>>>> DM_FLAG_ACTIVE_DMA flag is necessary to shut down the controller, so both
+>>>>>> are needed.
+>>>>>
+>>>>> Host or gadget isn't the point here, it's that we used to hard-code the
+>>>>> stop function call for the non-DM driver and now we have driver model
+>>>>> and flags. Everything should be able to properly unwind with flags being
+>>>>> set.
+>>>> So what needs to be tested is whether the flags are enough to properly stop
+>>>> devices downstream of the controller, or whether we need something more,
+>>>> possibly equivalent of "usb stop" in the USB uclass pre_remove callback or
+>>>> some such thing.
+>>>
+>>> What more testing do we need at this point to see what
+>>> DM-related-unwinding that usb_stop does that isn't also covered by
+>>> adding this flag to the controllers that are missing it?
+>> Plug two or more hubs into each other and then into the controller, then
+>> connect at least one USB stick into each hub, start booting and see if those
+>> devices get removed in the correct order (stick furthest from the controller
+>> first, nearest stick one before last, controller last). This is my concern
+>> here.
+> 
+> Thanks for elaborating.
+Sure. Sorry for the delay.
