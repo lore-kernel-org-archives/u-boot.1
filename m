@@ -1,166 +1,118 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA800606A31A
-	for <u-boot@archiver.kernel.org>; Sat, 31 Oct 2026 10:36:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35AD5606A31A
+	for <u-boot@archiver.kernel.org>; Sat, 31 Oct 2026 11:09:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Hexlukeu;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=NJO7mHPH
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=gSYDxSgs
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6C212810D0;
-	Sat, 31 Oct 2026 10:36:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 90BC440A95;
+	Sat, 31 Oct 2026 11:09:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wAgkGDI-KnBd; Sat, 31 Oct 2026 10:36:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9DFBA810BB
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793442973;
-	b=aoeojC+pSR1FhYzFOWMNu01F/CEoKoDTX9P9RiQGzRZL0VubnzzvTzENz3wSQkyyZdkC
-	 CgR3S0NWBL8+q3+wUmxVWqlDscNngt3EPy3HN0pfXGdeA+vuNSh+XRiq17AyttIl7rnZu
-	 yPNTbvm3qnLxuUDJMqK5YUqnaqzaGctBd0fbzd8uHryRvCOsM0nPzKlS8c9tPtgIuixw7
-	 qILVwGOE1cq3P64F7UHR+QC5fX2WkzJsQt3kvfUMiHgqbRVKlTM3SpAV+vlAmX6adzCi8
-	 n0Lc1RcaywE30N8KOA/cHWapdLXXvYnFdXpMlVYTXYNeM1VgqMg84Y3CLHERJwuHcnw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vhiqgS5goPaa; Sat, 31 Oct 2026 11:09:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8C62C40A6B
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793444984;
+	b=SjlJZxJLRIRyP3EZ4zI/zTpj02Edqgu0WkxFqi/RItsfsTubzVtcf2qO6DmcBQxe7XMO
+	 Jl1mpzaCyeWqdeY49BW2jFWC7F8Mo4ox5c7/54LrGfsvm/62Vb33IdCt5bW1EkXRuco77
+	 PzB8jFer9sacZfssB2jRTfxj/pNLWl2NOymVEasla0SPrQ+FO+IIr2VMyNV64fw4/M/Ey
+	 ro1Z64SEsCG6Dkc0gaxYWIHPf5+mOzTrzwe24upj6HGAEAAsDTAe/BbUReDN9fr12j8NX
+	 nnuEjWUrVhViHoFHhPOeoBUvmPO1rVGou9ACceXDJEILce1g6+S2UhPvw91sp0DfZcA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793442973;
+	c=relaxed/relaxed; t=1793444984;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=8+LZej+01KSDbnUMbhnaxjo478tN0HKOFtNw92VfyoA=;
-	b=piRoVBUcAr4xGudsf+VjAZ5uGGC6YYu6Kd/LEQpXo4uIErKKbAfb5GDV01DZdwK+POU6
-	 y1lXaeDd0PWTk2K6V7XmrHZ6XvZmgaw9WS1lNoqwkmuuPdl+iKKXmrfIAp28dyT6VNQnw
-	 2c2EowalaSC3J3IOFA1unwf1hdn9fK6w3GiNvaOXdVqZoyViH6WP9EzhJvG/iaPX9r0FM
-	 JgZRPzAuMeWO9o1Rtt0r5KfNKXsT4SiD6wa0fkqOdc/aL+Pun/BAOcz963bu3UDOYcJC7
-	 RESbaweeIUuQwam+KkbA/CVxpmxQyI0Hjjuhw/cgNsR4+6f61le15Vtv47VqZfgFAHA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:Date:
+	 From:To:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=h4xf8VqnYcXjbML5ampUuqnhttd1zofj6VwWWrm8lQk=;
+	b=ldAk6jL9D6HFNKGQEj9m/r1RYBJ4hKO9EYWsR8ZR3e3tFdq4w6i33tdXC7JwMQ5Xf730
+	 Bi6FyZw7LtDweCRDu7Fup13doDTfQ5Z0lz74ubmvUuIW4G5n4uDIWPiJeyVO8LeEn8Oyo
+	 hXrYeOqIesXOobqsRVHMf9LDWKNm8ItTYRVnUE2hWzUGR5LVYsV5lhFbXbjejilj9021/
+	 tRVSw1ElsyeIm1LN0RmpFFrJVcekkf6NARfZ4emDTcJ4UroD2/Vwb3u74RNmgZoSLe+OX
+	 ViRJIhY2dpHKGGlPssU5puYFZ7wxen/EPnwvYzXKIXzWkPZFLv23IIA4lETxYuKlG+g==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=none header.from=makrotopia.org;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793442973;
-	bh=8+LZej+01KSDbnUMbhnaxjo478tN0HKOFtNw92VfyoA=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	d=lists.u-boot-project.org; s=default; t=1793444984;
+	bh=h4xf8VqnYcXjbML5ampUuqnhttd1zofj6VwWWrm8lQk=;
+	h=Date:From:To:Subject:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=Hexlukeu2qGBdsti7TZXM6LvNKdr4lSabfxNvjcwyCPqjVKnj+1I6XI4kRz/xZR8L
-	 QUdRI2F9RikVycL+I1X7zvhf8fvTl1vVtAQAqbcbXWdnffHNfS4Yvyr/99YZFf92CS
-	 19XBOiNvZE8LVeGvpr6CETllkBsW5XOcfnraXMnL4CAypKFj8YcI0uohydnrJWBw/w
-	 OTC5CPkoAR7apy6IrxVKmtGwddKUpVBXBp7ASCEyFku/7fX4nIOxUBYiaOyDeywPbN
-	 Vo951KQROUlJeCMXvBISZixDXT04oznQQbbvy+4eNLxgsGlReC5s+ABSFI/SVBgwB6
-	 i59lTocrMCXOg==
+	b=gSYDxSgsiv2cRvuEYCtEqFZTgvgR34o+A+XlWHwgiH1idSEuWMk/Qv7ysMnjXhmuP
+	 ZmE0PiVpNzaCQsC5dRsOq9cknNB4Xa1/OKH3Mrdjf1kluQcW7q6cyKIalTSKXTVB5M
+	 9P/yEuZHrl7u4kdrt2O/UnQG9amuNUWFSCBWM/3U4avHW6IKMQ/XBNdpxX8es5iMdM
+	 jIOHLeyOq+jea/QNWVNVtrBlzXkb5y2dNCJq+kgVCjEP3U2MP9GZsFPOBSISqvQtqV
+	 8jfqqGu0ES6+5d8212l9tExV3nsdcKZPyNUTaGUG9npxeL6sm5bUSIvMRVEhC9hh/n
+	 2QSBWYwX5oJIg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9DFBA810BB;
-	Sat, 31 Oct 2026 10:36:13 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 18B5B362
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 10:36:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8C62C40A6B;
+	Sat, 31 Oct 2026 11:09:44 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 261D9156
+ for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 11:09:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 097E040057
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 10:36:12 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0BB6D40A6B
+ for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 11:09:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uIX9iMFO3PsL for <u-boot@lists.u-boot-project.org>;
- Sat, 31 Oct 2026 10:36:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org E00694004D
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::22b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793442971;
- b=CUqK7ClgZGkFoxPLgylXs+o25IebWlnPhjh2fdbOsbWyyUNr+rCOssDKC1At4nkvivut
- NdQ7bDozgxH9Z0QbcK/h++x8hxRSd4XLp3IxWRI4h0dldKNyvPfCZ/NZZw8tIGFvZsl/q
- NHaFsCGFaXeN7n7eVRi8Mv9yOMpdrxQHGiGw/3Egedb/rYnIoIf2kYktN6hKdK1f4bS1P
- CJ5g6itDZG5ZjKOjKzgVY3NqrOnel+HU8d0sJCwZWBcwaeILLOBJIgiBXD1OUkuAFlw5L
- fNKjhBu2huUpLraiTHeiSbPJyo4Yjhd/mNCcADTrB3wafFwnAAGiGzFltC9fOLuSJXg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id m3G7ezbtrqf4 for <u-boot@lists.u-boot-project.org>;
+ Sat, 31 Oct 2026 11:09:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 81F6B40928
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a07:2ec0:3002::65"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793444981;
+ b=NNDbkRf3BNaC4r/nj1HGNZajithSm1ws2d3bOERBflcbVFYQ6eMG71hPOPU+Uz/KyBHf
+ pQZoACPvpIUEaEITSQrk7ZzQ3iPmWSbUgMl4WZkLEKEy7Rx4g0BJTEge0lJ3ttC+bbn+e
+ t8WsWWSnKyROyB4qN2RYlIQ82VkUIScRhb4RTCZCMJZ+4icljaxtmBzJTOROfbw8a3ZaC
+ cF1zFii87ac1GeRDIgfcdfqWJbdXtJi61yJaD7iQsVrZ+kWbMeUM/PdnsOqMfIDyyoEew
+ hNUOxotvemJ6Q1ctWDA4I/WmJuP1W04lvMAc6LbPs3gucZwpJ6dsVLDwoWw0bohQ+6Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793442971;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
- bh=8+LZej+01KSDbnUMbhnaxjo478tN0HKOFtNw92VfyoA=;
- b=te0Yy/O4FGE3EnGZ4yW9V+LtvDN/02zgiSKNgFEChhw/bd14cJB7C69PFCYmEa8Xg6S2
- XDWzhqaGfxe48bJrjGWklnXYhHkDsZYx3xYEvENIhBqZ5cfAau3yIOu9at61zORq33vYL
- WNQq1AR8EW2GBtDif+gOmFhgsVTX0wRdAD1QhpbKNdiAOIFa3cDdHeHi/EMzeEgkUoD2/
- u+3rggWVFQCm/B1XflSWjeFHMeqhb16L3WHCUyvQXVUKOAMx0wSeqPubmvHpcKxYY40DL
- eS4vM66G122wF0SmNx90ebBd3YspAOTAUeXQmDeZM7n8txzGym6uF+hDZ+cJC4L27Gw==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=NJO7mHPH; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::22b"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::22b; helo=mail-lj1-x22b.google.com;
- envelope-from=maxin.john@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=NJO7mHPH
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E00694004D
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 10:36:10 +0000 (UTC)
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-3ab4354db11so13472491fa.1
- for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 03:36:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793442968; x=1794047768;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=8+LZej+01KSDbnUMbhnaxjo478tN0HKOFtNw92VfyoA=;
- b=NJO7mHPH/UQ/ttEZHxd17ABzrcLX4D2IbMhfru5efMw1+Bfex+j1wHHQCB2YlKd6k4
- 1vVonxiZELG3ioiM1uLFsRKgRun0buN458xm8QaWsDo9CC3zlGI/dxEZX2G8YMdzxCQS
- U81EGLBV0/tS4SH9XA8BFlciySiUA3iVIIABsqMEBmJpsNbCFN5WIyKt8d4OyJoKDDbi
- aUf7PUwVrKmj1QR2I7tXkkw6KAiqY0XxoIGxazhLK2rloTCDXMKZ+JKDUHEiDEdkeZCb
- liaQzLquz5OrC0aEP+lU6CCoJ0PIScc12+ipRJYdJLNAT2OEfRFH2nm5SVmfCzZ6GX/b
- bZkQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793442968; x=1794047768;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=8+LZej+01KSDbnUMbhnaxjo478tN0HKOFtNw92VfyoA=;
- b=YMpJV5c3Uvjq8qWysetTnW35DHY5QkKk4/1o7zuHcBA7zqiNM/N9nvyIzyrQqYbg8A
- fuFiixeSDb7g/fvKEadcdkJ1aM0EzfkKxK+O3dCt2tIo9Dv0K/v5GvPKzyP2Mo+3o8Qf
- J/T01l1UXply1sTYsXkke2cjkhB9U9RAB4hiO0JoeS6lQw4tsFwJPrAWcXkhlmwAjskQ
- YVXuv7FLeTsd4caR/spQ6e4buZqsUiDK76xoEDM/wxJyhSOS/WU8nh2ABVxLynBRlkth
- OcBGqvzuZSgIMMCuywYWGXHskESOBFNCaCGiNt4Qc2K72YlwXhPPbRE1QhCBsK1d+U3S
- gHyA==
-X-Gm-Message-State: AFq9FYL5BcSGfxnutmbTLotL0aGlSsfp275gZYRMFOzviIAxi/7c9gcN
- ZU7IHgs1hUr0B/9vRwlo8kf/i0r2AT3CtfMsDSNl6A0ohxKMAPINhKFe8GRYzQ==
-X-Gm-Gg: AYBFou2oJvnrwPNLByTLMeTkY6/lOi2MZO4Alq7VEwSsql9rIFcAOVRdIYEybFZJbey
- KBTkNhbYOwvScC7SErjPB9P5I4KWn+nT1sqGjmGglkZIlAcc9DIJiLZItwExOhoz9Y9fUSbESN8
- ZX9wVC9nujycZKfLnN75h1jhJ1HYpfGUJqdeiQY3TTb3kZALTTm/0OZw75B/ZwXfy8K+t2DZ3RM
- s2qjIVLj7TQfeN9z+8HxFBdZoE94mKbkK7IDVv0iU94Ou45ptsCFJSROTJtAcz+Pn9pjvc3+pz8
- wUYZ1GVhkMYdv6QOeUtxv+eAPfcmwFxi8gfiN0tcGbCSXlpi3Bv4bUu4KWiDEbemtrQvKNhlr4U
- gF11Qkv4QvmAUnSRKN7qTkEtbk4jPvq4Gae0RFSabvFyhUAZp+GFPraqTVItOUlfHCiIYVxoKEI
- 6tU2HQ/VE4LlD+yAsivrs442YeYYdZDhcr5d5AVILh+EfClnZCRgb1FiZGY+L2fxIm7cEkqYoJE
- v7GmMtD0puB/OnbEFNRLXDUTrESMSVctlCX5nx36F6JbGdeN6Oo9L+31MSzjsB8M0aXezHzbVh1
- uol8lEgtDJpa8C6PkzR/2BZ8I6NC7P1/cbafHH3ZlQ7dc0wihn2DiLaxI3dQhS1V8yPmIlpiWfv
- QpQ==
-X-Received: by 2002:a2e:8a88:0:b0:3a5:e792:2dc8 with SMTP id
- 38308e7fff4ca-3acb7ad2a7emr9596841fa.16.1793442967746; 
- Sat, 31 Oct 2026 03:36:07 -0700 (PDT)
-Received: from Thor.lan (nb6bp2luucgh1ubvhqb-1.v6.elisa-laajakaista.fi.
- [2001:99a:a58:9b00:9119:221d:45f0:de83])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5bfe072d025sm542425e87.38.2026.10.31.03.36.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 31 Oct 2026 03:36:05 -0700 (PDT)
-From: "Maxin B. John" <maxin.john@gmail.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>
-Subject: [PATCH] doc: cmd: add documentation for binop
-Date: Sat, 31 Oct 2026 12:35:59 +0200
-Message-ID: <20261031103603.1807331-1-maxin.john@gmail.com>
-X-Mailer: git-send-email 2.47.3
+ c=relaxed/relaxed; t=1793444981;
+ h=Received-SPF:Received:Date:From:To:Subject:Message-ID:MIME-Version:
+ Content-Type:Content-Disposition;
+ bh=h4xf8VqnYcXjbML5ampUuqnhttd1zofj6VwWWrm8lQk=;
+ b=T44DpELm15YDBsDyuckgl8FTzOvNm0nzniYvZwrFzbBezqtm78t16JbzIOup8Jv/p3tm
+ KhwQ3+UwlcoPanaVO7ufZkGHMMw476KmyjZni/bJXwosvtHahhmcOm3gk3GGn9pm1vfYd
+ 1eLcKJYOFZqvD8aISd/x+bHzdTG6sjH2D1nY0c/y680qm2YyF0P1wyUuzkeoU4/NScLiX
+ grigoRZ0p8mn+zW75W4iOfJ2GE/BrSzFjNq3fTuepzknRX1Wf6avT4ZTvbsWzNzZrwrhw
+ JMD4juXySIxJqK1xitJnp5WSKn3oPIIupKKI+LZNVD23CWM/vFgQIfNoVDCVCw93Pww==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=none header.from=makrotopia.org;
+ arc=none smtp.remote-ip="2a07:2ec0:3002::65"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a07:2ec0:3002::65;
+ helo=pidgin.makrotopia.org; envelope-from=daniel@makrotopia.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=none (p=none dis=none)
+ header.from=makrotopia.org
+Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
+ [IPv6:2a07:2ec0:3002::65])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 81F6B40928
+ for <u-boot@lists.u-boot-project.org>; Sat, 31 Oct 2026 11:09:40 +0000 (UTC)
+Received: from local by pidgin.makrotopia.org with esmtpsa
+ (TLS1.3:TLS_AES_256_GCM_SHA384:256:X25519MLKEM768) (Exim 4.100.1)
+ (envelope-from <daniel@makrotopia.org>) id 1xN6uh-000000003Kx-0P4K;
+ Sat, 31 Oct 2026 11:09:32 +0000
+Date: Sat, 31 Oct 2026 11:09:30 +0000
+From: Daniel Golle <daniel@makrotopia.org>
+To: Tom Rini <trini@konsulko.com>, Daniel Golle <daniel@makrotopia.org>,
+ Simon Glass <sjg@chromium.org>, Aristo Chen <aristo.chen@canonical.com>,
+ Vincent Jardin <vjardin@free.fr>, Anton Ivanov <anton@binarly.io>,
+ Randolph Sapp <rs@ti.com>, Anders Roxell <anders.roxell@linaro.org>,
+ u-boot@lists.u-boot-project.org, openwrt-devel@lists.openwrt.org
+Subject: [PATCH v3 00/11] imagemap: structural and cosmetic review follow-ups
+Message-ID: <cover.1793384548.git.daniel@makrotopia.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -170,131 +122,121 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-14.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_GMAIL_RCVD,
-	FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add documentation for the binop command.
+The clean-up half of the v1 review of the imagemap series
+(cover.1787272661.git.daniel@makrotopia.org). It applies on top of
+"imagemap: fixes from the v1 review", which carries the correctness
+changes and which several of these patches touch the same lines as.
 
-Signed-off-by: Maxin B. John <maxin.john@gmail.com>
+Patches 1 to 4 are self-contained tidy-ups without any functional
+changes: the suite list put back in alphabetical order, a derived size
+for the header probe in place of a bare 64, a corrected rationale on the
+imagemap_lookup() guard, and test locals hoisted out of an anonymous
+block and a mid-block declaration.
+
+Patches 5 and 6 correct the documentation: the imagemap_create()
+signature, which callers a reader can actually reach, bootmeth_openwrt
+described as a future consumer, the index entry sorted, and the section
+on phase gating that the commit adding the file claimed was there.
+
+Patches 7 to 10 are the structural ones which do introduce functional
+changes: imagemap devices are named after the partition they cover and
+hold a name driver model owns, so two mappings on one block device stay
+distinct. bootm_start() sets the imagemap itself, keeping the invariant
+in one function. The data-position and totalsize-alignment sequence is
+shared between fit_image_get_data() and the storage path, which also
+gives the latter the range check it lacked and settles the two spellings
+of the alignment. Finally the two imagemap pointers compile only when
+CONFIG_IMAGEMAP is on, reached through accessors that fold away when it
+is off.
+
+Patch 11 adds a new unit test Simon had asked for in his review.
+
+The sandbox defconfig symbol ordering and the FIT_VERITY_NODENAME
+rename that the v1 review also asked for are already in the tree, so
+they are not separate patches in this posting.
+
+One review point is not addressed here. Moving the imagemap out of the
+global images struct and into an explicit parameter of
+fit_image_get_data() means changing that function and fit_image_verify(),
+both public, and their callers under arch/arm, arch/x86, arch/arm/mach-k3,
+cmd/, common/ and tools/. It is also a design question rather than a
+cleanup: the transparency of the verification path is exactly what lets
+imagemap hook in without touching the FIT code. I would rather agree the
+shape first than guess at it, so it is left out and proposed separately.
+
+Tested on sandbox as for the first series: every commit builds, "ut
+imagemap" passes 14/14 under "ut -r3", host tools build, the
+documentation builds with no warnings, and a full test.py run matches
+unmodified next. Built with CONFIG_IMAGEMAP=n as well, which patch 10
+exists to keep working.
+
+Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- doc/usage/cmd/binop.rst | 103 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 103 insertions(+)
- create mode 100644 doc/usage/cmd/binop.rst
+v3:
+ - Patch 11: the region pointer is declared const, which fixes the
+   build failure Tom reported on v2
+   (20261030175906.GA3333978@bill-the-cat), and the three buffer
+   sizes become macros so the guard array has a constant size.
+ - Patches 1 to 10: no changes.
+v2:
+ - Note that the series applies on top of "imagemap: fixes from the
+   v1 review", which carries the correctness changes.
+ - The sandbox defconfig symbol ordering and the FIT_VERITY_NODENAME
+   rename that the v1 review also asked for are already in the tree, so
+   the cover no longer counts them as patches in this series; they were
+   not dropped between postings.
+ - Patch 3: the guard rationale now says "same width" instead of
+   "same rank"; on ILP32 loff_t outranks ulong and the subtraction
+   stays signed, and it is the LP64 unsigned conversion that makes
+   the guard essential.
+ - Patch 7: the named path duplicates the caller's name directly
+   instead of copying it through a fixed-size buffer that truncated
+   it.
+ - Patch 9: the helper is renamed fit_image_get_ext_data_offset() to
+   match its siblings, fit_image_get_data() folds the embedded case
+   into an early return, and the message explains the dropped
+   signed-value guard.
+ - Patch 10: adds bootm_info_set_imagemap(), keeps the bootm_info_*
+   guards in step with bootm_imagemap(), keeps the device in a local
+   in the storage path, and shares the release between the OS-GO and
+   error paths in a helper.
+ - Patch 11: the scenario comment no longer names the reviewer, the
+   bare 64 and 256 become named constants, and the pointer
+   comparison drops its casts.
+ - Patches 1, 2, 4, 5, 6 and 8: no changes.
 
-diff --git a/doc/usage/cmd/binop.rst b/doc/usage/cmd/binop.rst
-new file mode 100644
-index 000000000000..e14b799ea7f2
---- /dev/null
-+++ b/doc/usage/cmd/binop.rst
-@@ -0,0 +1,103 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+.. index::
-+   single: binop (command)
-+
-+binop command
-+=============
-+
-+Synopsis
-+--------
-+
-+::
-+
-+    binop op count src1 src2 [dest]
-+
-+Description
-+-----------
-+
-+The binop command applies a bitwise binary operation to two byte arrays of
-+count bytes. Bytes are processed independently; no endian or word-size
-+conversion is performed. The result is written to dest or, if dest is
-+omitted, printed to the console.
-+
-+op
-+    Operation to perform:
-+
-+    * ``xor`` - set each bit where the operands differ
-+    * ``or`` - set each bit that is set in either operand
-+    * ``and`` - set each bit that is set in both operands
-+
-+count
-+    Number of bytes to process, specified in decimal. Must be
-+    greater than zero.
-+
-+src1, src2
-+    Input operands. Each operand is either:
-+
-+    - an environment variable name, whose value is parsed as a hex string
-+    - a hex string, if no environment variable with that name exists
-+    - a memory address prefixed with '*', in which case count bytes are
-+      read from that address
-+
-+    An existing environment variable takes precedence over interpreting
-+    the argument as a hex string. Prefixing an argument with ``*``
-+    explicitly selects memory access. Hex strings must contain an even
-+    number of hexadecimal digits and may not describe more than count
-+    bytes. Shorter values are zero-padded at the end.
-+
-+dest
-+    Optional destination. If prefixed with '*', the result is written to
-+    that memory address. Otherwise dest is the name of an environment
-+    variable which receives the result as a lowercase hex string with two
-+    hex digits per byte. If dest is omitted, the result is printed as hex
-+    bytes separated by spaces, 16 bytes per line.
-+
-+Addresses are parsed as hexadecimal numbers. The caller is responsible
-+for ensuring that the specified memory is accessible and, for
-+destinations, writable.
-+
-+Invalid counts, operators, addresses or hex strings are rejected and the
-+destination is left unchanged.
-+
-+Examples
-+--------
-+
-+XOR two hex strings and store the result in an environment variable::
-+
-+    => binop xor 4 01020304 ffffffff binop_out
-+    => printenv binop_out
-+    binop_out=fefdfcfb
-+
-+AND two hex strings::
-+
-+    => binop and 4 0f0f0f0f 00ff00ff binop_out
-+    => printenv binop_out
-+    binop_out=000f000f
-+
-+Read an operand from an environment variable. The short value is
-+zero-padded::
-+
-+    => setenv binop_a 0102
-+    => binop or 4 binop_a 03 binop_out
-+    => printenv binop_out
-+    binop_out=03020000
-+
-+Print the result to the console::
-+
-+    => binop xor 2 0102 0304
-+    02 06
-+
-+Read from and write to memory (addresses are hexadecimal)::
-+
-+    => binop xor 4 *0x80000000 01010101 *0x80000010
-+
-+Configuration
-+-------------
-+
-+The binop command is available if CONFIG_CMD_BINOP=y.
-+
-+Return value
-+------------
-+
-+The return value $? is 0 on success and 1 on failure.
+Daniel Golle (11):
+  test: cmd_ut: keep the suite list alphabetical
+  boot: bootm: derive the header probe size
+  boot: imagemap: correct the lookup guard rationale
+  test: boot: imagemap: declare locals at the top
+  doc: imagemap: describe the API and phase gating
+  doc: develop: sort the imagemap index entry
+  boot: imagemap: name the device after its partition
+  boot: bootm: set the imagemap from bootm_start()
+  boot: fit: share the external-data offset calculation
+  boot: build the imagemap pointers only when enabled
+  test: boot: imagemap: caller-owned region not resized
+
+ boot/bootm.c             |  55 ++++++------
+ boot/image-fit.c         | 175 +++++++++++++++++++++------------------
+ boot/imagemap.c          |  37 +++++++--
+ doc/develop/imagemap.rst |  30 +++++--
+ doc/develop/index.rst    |   2 +-
+ include/bootm.h          |  31 +++++++
+ include/image.h          |  31 +++++++
+ test/boot/imagemap.c     | 123 +++++++++++++++++++++++----
+ test/cmd_ut.c            |   4 +-
+ 9 files changed, 353 insertions(+), 135 deletions(-)
+
+
+base-commit: e36b675ebc4c41f1f4187c46d363d581c371d538
 -- 
-2.47.3
-
+2.56.0
