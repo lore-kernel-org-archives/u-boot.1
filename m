@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3C39606A324
-	for <u-boot@archiver.kernel.org>; Sun,  1 Nov 2026 11:18:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C038C606A324
+	for <u-boot@archiver.kernel.org>; Sun,  1 Nov 2026 11:33:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=IzpBYz1m;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=UhQKP4cq
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XgJqIjrz;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=ndt5zO2f
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0A87C80F3A;
-	Sun,  1 Nov 2026 11:18:13 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1D42D40603;
+	Sun,  1 Nov 2026 11:33:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id k9XJaFfC3Ody; Sun,  1 Nov 2026 11:18:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1339180F26
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793531892;
-	b=ANaMXideIFAWmf6hSArHVhucFVAtA6qalGjnJUleqdR64FfphNtFYcXMXK7UR17INGoh
-	 QmQNZrRv/2P1Httw7NW4oTxhMNF1O3z1A/Kl8Uq9LYk4C6Y24tq0cyhDPB2BxssSW5y5L
-	 jAj0e7QDSQpVwqpJcU1AqCRmOxcbaLPzBeaVNUxzEnhuyfoY0o0PLGRtZDh931vFLMS8M
-	 nvTZBnzdtluzGRxIHZbT3KhwhZVKSfAZcBxx4z7MjASlSI/5Biq6ZhV2al5ntYFbRabAS
-	 hl5pefB5+YrTYrl/uenRZ+7fnbZiWjPRv91a8APKD8ra+1sbPonFXP3kOCGMRLaR5tA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mAt3kgUtidsU; Sun,  1 Nov 2026 11:33:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3A92A405FB
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793532832;
+	b=evadiNvytfMRP2KtG+B7coHrLbOW5ad0QJq6HMmyvU7vAoPoiHhnCuly5DKEL9fSiCVc
+	 AEQeUrjp1YS8/xUIsym8FxoA7a3BwT4ZSIU12SRO/WV45c3cJF84tFSkPW4W6CaTOA3Pc
+	 NYfuUwsTozgvKie8Xz79xSNSUZyS/rUwEgY3RtdvzMFzRh0sVgDpPhx2EwdO3rwrT9mQ9
+	 mhO9TtjpQYRKqiPg/IL9ChbT76NJ4hgQKyJaxDCsjmZQzaBWR0W8BJKF7ZxZcACA4p6XC
+	 xihfbZj3vzITkHyx3y0yay4M4al7R9uFGo83S8Ga+ghth0AVZoDE3ryeUXSVrdbVmbg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793531892;
+	c=relaxed/relaxed; t=1793532832;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,159 +32,158 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=zTIHCZD6hFFeLnykJnuZ5E+jX78LK/ZT/tw8q4nyVcA=;
-	b=bOOYL36QlAo3VwosFPOKBNMAlnD/cVfh++hggmGGNZhm51fBM90BVHdpXhODODY5rGt4
-	 O/AEdngRA8yySG06kFXe5+YZ1WOAeLOvChqDpg/NnlIniaNoHmBdNJHHupRMeAZIkI2kK
-	 eErQVO9W5F6FtaRBtzF8yPhFqEuasDdAbf0v6Ia4lSDf/gYwxzwsvJg9Q9ItXBCBm8XgU
-	 Q7TrVYJVlCDH6VfzM3KjZyURLBaUkTin5P+tIMNArkSUAMaOvAh+Z/G8f7vmtc/yz+4cH
-	 cYj+KhhH0TBkCMHmkhvJ4KOUaJDc30YOu2Qq+VWnbBOJmy2QGQ321+oO2AMu4u/PIOQ==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
-	dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=UhQKP4cq;
+	bh=SFatMKQceOkp8+zZyxqdf2FXnnXT+HLwQkfmF8hviho=;
+	b=hVLVuzPDiDO7tQ7P6Jyg/JVFXyxqXPj6M/8UBCR0jzy5eB8dnhzNs7H55nyfCZoTsjVd
+	 UlgUluIw1Uj/HDpYrhvWc+xzYl7Urt0nDBnSTgF6CayHumynSmfHhB/YD2XLxCiutrxdH
+	 vdMT7OaMzH4p9InnZ+KKR3ZlZZIkNzBmBehXep0jSJssIzN52/fiWeofUf32jB0CaCQGC
+	 IxamJIoLiQdnRMh/SGX2mywc3OqTkPf0D4iFTyWkwFEBu396/2xmJVG2/hbtyQR5MixVe
+	 bzuSaKGYHlSCD9IMF/W3H6knOeKFX13av5c0K50oVrEJdHoc9lRSglraVXHdDbiwQlw==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793531892;
-	bh=zTIHCZD6hFFeLnykJnuZ5E+jX78LK/ZT/tw8q4nyVcA=;
+	d=lists.u-boot-project.org; s=default; t=1793532832;
+	bh=SFatMKQceOkp8+zZyxqdf2FXnnXT+HLwQkfmF8hviho=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=IzpBYz1mVHN3YiLwcxJA8EUICqrSRB+5Xh9gimaht5HSuJ9C3zhTvB2bmsjw/5HvB
-	 f99kKQ3wRkvItoIm4xOVaN7bH/whcK+eS8DBf3qZpxasux0s9N9WwW0A3eqhyxK5EL
-	 tjxJ5jdm88PLDpBpNIOVtJoDkkReE1CK5UpXdTjUuKnhJ7rfjZbsSpLflcuHycUz5i
-	 mFtzseAYGE5pFnHTQkn2fZkIkyUGTHrvIeOdQgMKqlc8YAwonewq9s4LTEfLAo8QtI
-	 9/TAXQGvf54s1Ky7yTQLsTqAUxI4gEVqPuv387KHtnwO4iFUb0WbJUGGK3HcZw45Pd
-	 rx4U3R+SG6BcA==
+	b=XgJqIjrz13DF84tIvhB1cxCb2VQibpqSmDpQ4ns9p86n0vBzAKguksHdzKajCZ9Fi
+	 1SwsKmrLWGvUcpavKQ1ugrmdtkLbd4IiSJAleGOXL/ROPCN0IhYNc+Abu0UJ0AQtGB
+	 UozHr85LqArMzyE77XuJE0TbNoi7stuhFWLzZb83HYUEHiLz3MjBm1Kaw3O2aAsOQH
+	 5xeb0aiqyMBObck9relh+ClfSId5K2DFUsrS+/wTWGA5LH4LN4ZktgxdwN5WxMf5SK
+	 CePk/OKulvF/LMrFZZaej208YBlYDr9ixOI0RgUagnziOInpXOsGlRTPvQdjItTqOR
+	 B5OV5MWSHkhLw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1339180F26;
-	Sun,  1 Nov 2026 11:18:12 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 6582E4BC
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 11:18:10 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3A92A405FB;
+	Sun,  1 Nov 2026 11:33:52 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id CE4264BC
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 11:33:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6293A80E3F
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 11:18:10 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id BFC6660623
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 11:33:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KeTqVAK3hDPz for <u-boot@lists.u-boot-project.org>;
- Sun,  1 Nov 2026 11:18:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 28C4880F26
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::1134"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793531889;
- b=UhTeZwq5bse1zk+jbgHO/ceHlnT1IXvqAqXSer4LzofkKWyptvz7G9I/QzFKFBlwWKuo
- 4ONo0znHCoWz/7wzDBQmn+mEFlDdwhoZjwkVjEzT1D4YdKYFbi6pBIzkDntrxVyYbB9xr
- zCwsFYtdTpLWghxuA1nWuU24Rv5FLiHXQsiazBNZ13IYAn3+wY57UbWCcVXdznWgN3g6H
- Ogw+CCYB//yBi6HWQmgf0EaMlE91ozHXtRXwqPocbfPQZI5ub44/6ZyiLAdwTPok+3O1r
- LUu9WsZsO/jsC3SrwNdb9CGng0daYVXJGUCHE+F6t7vChuH9ZBJZoR610YoXUegMmyw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4qPgThsN94H5 for <u-boot@lists.u-boot-project.org>;
+ Sun,  1 Nov 2026 11:33:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A856260602
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::112f"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793532830;
+ b=gAOKSTe6agrc8EPeU88+2HMyasOIu4WcWXOdds2nzqnH2Ktl1grV+f3sgxRPfr1EfTX7
+ bg4uxI+wXL5NLftoYZjuxz+pXnrOSzP3h6LMCY4qSXfR99pVfpskwWmOoa/pBAUOu1j7x
+ tIR9zLV1loGg13nlwrw51yqYnwlaGHwnP6QnuurKF4TLsAE68OtIXeSshytJTfbo4MWw6
+ ZUhOMuOxOGzhVsiy7kql9u9lrqEzu/TfCQKeglWU0MT46VaIoimmk0sWukbYuKpXVSgOc
+ 9WDcOZDj20IlvgCBK22cpyzAbjsy0hEoIkD10vuHlDgpN3Al/+83td6qIHsmetzl+Wg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793531889;
+ c=relaxed/relaxed; t=1793532830;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
  In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
  Content-Type;
- bh=zTIHCZD6hFFeLnykJnuZ5E+jX78LK/ZT/tw8q4nyVcA=;
- b=PoELMZdw98K4LVkjW//ZcvuPXNrqDtJ6HNoqtyk7nwXu4QUUbH1nH7GyTZc4ZB1eslBI
- +FyCfMMKqvkLKs8IpyUxWWM1rYleA2T6c9thQ669fCnj+dV88Kyo0Zd3q1YqxSE6ghNkA
- DPajvfuZ3Zfe9S2ABfcuYn91tVDyQA0V6LZXcVvDvRyMBD3XIJLfamahzPDpAJ4dxCru9
- +csO0lmZRveOSDO7BRTYe39/8S82Io80OXcxKaI+zSs2UJV6Y/zqEF+ItlgY5+ccqglYg
- T+zAwhtSlOgvMJ+SMofhKlexVA4pD+6K5Gh/FgNCYh575DVZrDmZIhzBihmreJmZv9g==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+ bh=SFatMKQceOkp8+zZyxqdf2FXnnXT+HLwQkfmF8hviho=;
+ b=VJr8mJPAT3GitFCwoG4bsZyMXPIDWddhMsUp8aomXZ1mPLxff++KTl5h3RK58TAdbunp
+ T8O06LXPTv8scgAzSWYQTkQgwWOI9D451QeVhZh25AXb4TRn2T21e2Fkx563bSErFppXI
+ 7/vYzwxko0sqA3A0KJj+MIwN+fGw20MvEPz7CH7COyGrXM5tDZ2VXqJiZxtJPs1yTOxOb
+ J+mZWHQCAtKcTvfeX+kdeIGgrOx250UWnSVbs647XuKi0FI3hP63cEq2xJ4AFsuRRHzSg
+ 4MKReGuqiFj/uPuq5IwXkl5KIUbxDRFac+fozJiCO2c8r+MvZF6qF7fw6wPFKzwenlw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
  dmarc=pass header.from=linaro.org;
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=UhQKP4cq; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1134"
+ header.s=google header.b=ndt5zO2f; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::112f"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1134; helo=mail-yw1-x1134.google.com;
+ client-ip=2607:f8b0:4864:20::112f; helo=mail-yw1-x112f.google.com;
  envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=UhQKP4cq
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 28C4880F26
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 11:18:08 +0000 (UTC)
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-8b0f59a5fdaso17735307b3.3
- for <u-boot@lists.u-boot-project.org>; Sun, 01 Nov 2026 03:18:08 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1793531887; cv=none;
+ header.s=google header.b=ndt5zO2f
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A856260602
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 11:33:49 +0000 (UTC)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-8b0a921ee46so17412097b3.2
+ for <u-boot@lists.u-boot-project.org>; Sun, 01 Nov 2026 03:33:49 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1793532828; cv=none;
  d=google.com; s=arc-20260327;
- b=hOUMoCtRsHP+LLDjQEYhVR0b8jTJa2QLA8/km0MFIVoZHVXQ6yq4iY5We5yzi7RSy5
- rov4sGh9mPOUTwd1IH51JdoGxrNyu7LUlOpzmqV5/FUrpGaUDpSFZOPhoymbSqsKgsn2
- 0r3K92ZzzmZABDbaWaNfk/K8pC2y5NeTjWimxCqClJc/5PbAnTKlDYJM/uTxP32o5IVh
- Qtee17+v4nTfw/+xHxv+rNPF4OnwQcYtumVFt/9fgGHD7VoGhhLAhlc3ukNbwgPPqmrv
- MGpw0/D+ujWTM11zL6icnr5gXmiMAswHz1raw83KSXTOV/GfBXv8hUO2j4i8CnBd9K3Q
- rf8A==
+ b=J4+ne/HM/b+sEniBKwPgSODYOm4I6vVWZtQQT2Xkr1t/f8VvbhSxUWMKbje/rFvRIS
+ a/0v55B50YLQYLDDL2K1f4qJYkOoDInWFyxg8HS+wXY76p39L63opIXaB5n7Tu76oomc
+ i3TONCyF+kdLLD21CTG+arvvO4StLkq+R6LaYe6Qbr7B404+wfC0aTvBec/ssPx+1D/L
+ PzYNUqkDN400wur1b4rM9UC/GP3s9sgXS8IxUM9LAG4UAVRGEkMknITQ3AI5Dzget3ph
+ pqiuZd76KImbWLWDNw6HPDPjDsX7WL/2ThOY3bl/eblpkVCIXOkewicV06Bp3gF6ahkE
+ /DXQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=zTIHCZD6hFFeLnykJnuZ5E+jX78LK/ZT/tw8q4nyVcA=;
- fh=W8/f/M9jxjUraLqdVrNjjZeASRCwT0Jex7TG+FXiP8w=;
- b=iVKaNa5Y3mkSJ+781gjW2jooF+5ucLx9L1ClrSQkdY/lQzaoGpYM5FOASZ6d8IfEJf
- h92RIg4k/1EQVafaXE5kaNGr22yn/izDLruphHthMbymVa/7QrBP8bAXmDYf6SCV1f56
- 9gLtCRuOveKTUv6xXo4J+pzbEyRq304OxB4scGgpLDsiVAbxAZNiJCohz0UoJB4V4cQt
- WINNQ3OoPHFnp4AON8+H5oobrMN2+Q2O4olHvssn5+ZnSobe/gT1z26rHnXgPyR1JZw7
- d/Gtsh1qg6XZoKwZpDhsbg6rz9iCqe/82uvn/MLG8zXIl4mtfvO/Gqn1+idaEyYAtrnU
- 6WbA==; darn=lists.u-boot-project.org
+ bh=SFatMKQceOkp8+zZyxqdf2FXnnXT+HLwQkfmF8hviho=;
+ fh=7QWwyUnPAQm5WNln6yz2UnPVMLv30rqCuNC8nkM6bR0=;
+ b=K/LYmOx//6Jkp031rjJMPIrHcmeOASA7/Tjmr7ZYSn8WKh6i8s1A0rwBr+vTXuoBzu
+ D02wFwWK3wKdyS7WGozB/H4imKVoifY5dIjsQfG00f/Xvnx27PpDEXU0BGELBDGw0CKL
+ epOdl+CkyXiNtK0/iI+R1HwNBJHDzxmYMjKETaqZIXfpr8v7511zbS2n7d9XFn+yP3f9
+ HZBsqC7S0mzo2uzhK0wTXTQmC7Qc4xZ/7OnH99TVrHr75Dt9L14u3MoRX98nWRHF2yc1
+ ++I92Qboo1pn/m4q/IyylXq4dN9FyxR3N/inPh7+V43/jOGKwaaWXX68jSUwJuZ0tN4x
+ zkuw==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793531887; x=1794136687;
+ d=linaro.org; s=google; t=1793532828; x=1794137628;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=zTIHCZD6hFFeLnykJnuZ5E+jX78LK/ZT/tw8q4nyVcA=;
- b=UhQKP4cqLXBun2FRgvK3NleMuHodgYF18Mv+Ji9X94GRhnS3ClB+RpJPG+niBsH2hF
- 82Gf91dISC6BLklHix/hyzJcKP3gBN+UvqqPC9vuqGQusQ8iJe8aAEBzsrQEEjR8pOiH
- xsXCEJdRr/AhTo/9Y9oSsQmXkTt6d0FftGwwQ9WLau62OzPZRLdFcaZBGjSzvBgR+o1+
- sCs16zPDEtkG1oJkJHoUgttDnRiiEFar3qphBwRU4VSBxc8jfwNKonjrbc+buRUqjXLJ
- UKWcPPdiiuugYP9nHEaxoCt/EClpgn8uudDTOh26IOHLbxyGjWNfcUFn11Z7x7EF93SV
- qmiA==
+ :content-type; bh=SFatMKQceOkp8+zZyxqdf2FXnnXT+HLwQkfmF8hviho=;
+ b=ndt5zO2fFU3UPUCLA3HUQgZdZSdAwYpdDty3FQ+uvjNEkveMT+bhNVLrGq0L+dyH+7
+ sc6+T8S/trvPCge2jD/M4SvwCAKNUroZruAW2qEdcAaTDJF8bAbZS16ChDC41NWbdVnz
+ uIs5jaf/xT6pPsbbkWFoYSiRgR74si1E3IXhmc6YPVit0AnlnroNGipqXe+AZYwixDKU
+ MceWo/gSgeFqVApnFqN7Q2cigTxAj2Fk5UIzbFf0owevgVEKbR3z2YvdkqHjLbAqxf3S
+ mrVKlUuD18urcVsQqqXJEqOX+ZVw5o6D1oTsI7bfC5U4kT8kGDQFezSilNshZH5tAqsl
+ layQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793531887; x=1794136687;
+ d=1e100.net; s=20260707; t=1793532828; x=1794137628;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=zTIHCZD6hFFeLnykJnuZ5E+jX78LK/ZT/tw8q4nyVcA=;
- b=cT5a06d7/z3pj6WQg8lShuu02icq9wTTNI7J6vDix9qGoqpmuhNj6Kod0jBIGeK1sM
- KLhBr0d9nyTacfd+sHzfBFVk1smb+oC7u5nhqBA4ik2ynQ/7EPmeLyOUMxOBMX98R2jv
- ThaBxqKu69xl1aGAVZme2lL+ep8Z23WIvBhZqTOkr13a7uuDbfbePRPM/bPoWTs4cWIV
- z4ssF7NSJrk7HFFbgmIYNbLz2Sov9I3FDuPktLo9NnDBlxbOs/ckPL8P1yXV7H0BWZSh
- AOiET5lGw2MiaVUIGmWs5/NN+l0fKSQCVWQ/R5hYwUMIBsuz6lXaj2aPqsYpaaqfRk3i
- kLbQ==
-X-Gm-Message-State: APuU4Z+PYCYVexJZpwpZuuvwjRzxj2Uak1kZQrX0ef3YfQT+xa/3/qwt
- tZUD8T8dF4i+EBq2gqWYlL4ur8IadZMobmz+xaiUhVX2FIePisdAs6ocRYYnPW9pdQoIRARR1a3
- UvB+V7nJixXBdcwdyzuL4voBD2FtjC44PDfGQ94hj6OlZHPcGYndfxwwm5w==
-X-Gm-Gg: AYBFou3pLi8El/y4ehiUm2SWIA+cnhNBjdFz4wHoLrwVHo2yTzrIUwWqPp7b8Siz0UY
- 0WiwwzPB6dQa+rtSeCs66uNoaDclWqu7egJivGXlLIhNjeGbaqxYzGV6YFQzX86Udo/DEN1weMY
- SSGUnF5VhlS3JgZ+gdbClUS82cST3R2V0yCVlc4juhgWXLm6CN5u28t9hFlUHzTxrabFUVbqc9I
- PiNsSK1SGZcgdh3vVsrcbN4LKBGd0FBoLYdk2LE2Np0OeH6Bv+KJSs7EOTsEhPcluFZVViWKDBQ
- tjJl8SdDRSOMsiWGiME/YWk+0NKzPrWwLizsskLGJcdS0Z5i+fT3te2aMGGBLtF80bjxqEVYOGV
- LUh8TNaoYeldZ1dP/A8C/4FVpJQbX5ZBD76yLItdETzohPvugw0umLycFL+l3Tfl2i7ej12hPf0
- pNI+lWeUamzfy2lfm44FwlH2oLuNMO82ii/usg3m2fLMny5KxSRdsiwfYiZqiO0m+NQXTuetL5V
- G/b0acpqu5SyrcknOGFqc4Zd4ldbCxz3CqNQnLaC7/rsTMvwsxLPH4LTtvOVD1asYIXpwE1dGQv
- KvjRKBfCnEwdkunKXpJgO2Hh2BXfZdo92a1GMbpand8+1Q1+BAnn9bV9hJ8CZrJaaSf3SieTHXB
- W5q+x/j93Z1PAeMfcdj8HYp4Kc/pPa/UVk4UnG26nKQsa/WFu2lo9IJH1ycv+4hZh95oCY1ncbn
- pPXnu7wInmawl43qdhCK1Y7hbyAdZGG0DgR+E=
-X-Received: by 2002:a05:690c:68a:b0:8b0:aba3:a3e2 with SMTP id
- 00721157ae682-8b2b671ae36mr52178127b3.37.1793531887189; Sun, 01 Nov 2026
- 03:18:07 -0800 (PST)
+ bh=SFatMKQceOkp8+zZyxqdf2FXnnXT+HLwQkfmF8hviho=;
+ b=LS7bKwYo72zbqe1FuOCxVqVc6z2uruvTmGNJDQ6dOj9rC9DpuHv0u2ssMqPcK0waqN
+ gUkIK+yzSCSucyDRu5x58O2w+tgw3b/U2I1F2uIP7yRlXmASoZNQF2C7/y1uUgadJ3sc
+ tJIzZe7UojvfPIZiPY0NYsR8PPBi7qFaarCEpNvF5HfW9/H+1Bj4k+aU1Z3NfliTO44T
+ 7k+xGy+JHj1tMDQtl1NhgX/vBX7sYgmZXamLJIonIdXdEptPPE954jjicT49QuUJMEPu
+ qInooSMARA9//bAAgnby7uXldFZ+M7eNJg079n1eEINK2U/EdOsqzzvyx2EKf+yZZ59i
+ I6sQ==
+X-Gm-Message-State: APuU4Z/RABcThySSZXMQbEpupt8+9z0SpwOqyMcwhvZURzhfl6KJK+ut
+ Jn6lq60/vHwDPwZyErotUyKYoVWxuvVDaDQXss3tWHz0VHtOj8ggqfiibi5Qx7XBTQFNHjC2qDC
+ nNw0hv/+Zy/RYggcdhqPCGjIHgAfGxroceCLCo1Il+A==
+X-Gm-Gg: AYBFou3mwsnqPWlZnkeKKHZivf70zs9nX86wAB13Mgquj7ZlJ5rwSZkZ80jz0j0/FPA
+ A+SO+dmFYayPIjaH4UBLemDEKxu2w9lpwiKsOavmak0Dw7BPo5LCiCKKyxaN2sRDX767fhGf936
+ ZbHNY+ZFUQlRnAnva3IWHibnUOy7svVDhft2xOY0Z+HzfN+dWd1QIDhkYPUfpcXp8sAIEzhxUoL
+ f/+fqP3LZvoWdbcq/lWhkcmQwurfjAzUWo5THKdTvTM6vM5nQZ4CO0joXksTCf9YSDGhUivwiYG
+ SDWPYj8xyVD3+A8GO5BVb6RY6tLqmbFY4O+NVCn1mbLxd5y4BdOv4sZ28qDtC08MF44BC8SRp4y
+ s87Iaiu0M1ORNqR8pWhwmtg8x6aSoS8GcvlbGFhdneyfRtquTeWrnXgLMMFYYULXG3fXyITo8Nv
+ OSapjW9fC0rrYjQozolvDbVOH9DSug5qDyY9JoLVYdRSFgUitW7ecITBEbxAfg6OO6auwMwNZkH
+ SyReIC3N2L9bfGhMyCpODxgvyFg3AYixd+bickAAyVIc26xcYHSBtOyHtc8SyQeDrI+eNQR/5Og
+ qVXagtRomktedur798S/umE6WRrNrRlVaBqtOCkt1Vg1ejpgHoTUo8iRlE2KnczXMymldiiZOL9
+ McNG9/0Uedgn3g/QpTsYwle5tz7VB/QP8XeTGmHeW5AUCsnqme7iwm7HwJlhIjMzLQWDB/lRevP
+ fg/vU5cFWfB8DMyYnORE2L01C0bBbxj+sOX6U=
+X-Received: by 2002:a05:690c:8f:b0:8b1:86ae:8ff6 with SMTP id
+ 00721157ae682-8b2b658c773mr39724577b3.15.1793532827675; Sun, 01 Nov 2026
+ 03:33:47 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261029-upstream-optee_rpmb_b4-v4-0-e2e4c5330d37@oss.qualcomm.com>
- <20261029-upstream-optee_rpmb_b4-v4-1-e2e4c5330d37@oss.qualcomm.com>
-In-Reply-To: <20261029-upstream-optee_rpmb_b4-v4-1-e2e4c5330d37@oss.qualcomm.com>
+References: <20261029150906.1558380-1-tkirchner@emlix.com>
+ <20261029150906.1558380-4-tkirchner@emlix.com>
+In-Reply-To: <20261029150906.1558380-4-tkirchner@emlix.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 1 Nov 2026 13:17:31 +0200
-X-Gm-Features: AclHuK-j6IldxhcLFvB7CK9BXEYSQ8U6PLEtUv7J_YOEg4xH3imueTOZuqcjdjE
-Message-ID: <CAC_iWjJDzJVM_5MfXhbmGEPpqQLXRV+Nbt=zSn2mxkGkz33ARQ@mail.gmail.com>
-Subject: Re: [PATCH v4 1/2] optee: rpmb: select the RPMB partition per request
-To: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Cc: u-boot@lists.u-boot-project.org, Jens Wiklander <jenswi@kernel.org>, 
- Tom Rini <trini@konsulko.com>, Jan Kiszka <jan.kiszka@siemens.com>
+Date: Sun, 1 Nov 2026 13:33:11 +0200
+X-Gm-Features: AclHuK9dYFsg5nWcCwAqPhjs0FkHTBWX_ARn5v3Oyo2-8MGLXm6EiL6snP7YvQc
+Message-ID: <CAC_iWj+KMC-9UR6o6jWpOku19OpF4kPGQ939uiOfa65XJYbd=Q@mail.gmail.com>
+Subject: Re: [PATCH 3/5] tpm: detect active banks with algorithms unknown to
+ U-Boot
+To: Tycho Kirchner <tkirchner@emlix.com>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Raymond Mao <raymondmaoca@gmail.com>, Eddie James <eajames@linux.ibm.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -195,181 +194,90 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Igor,
-
-On Thu, 29 Oct 2026 at 17:45, Igor Opaniuk
-<igor.opaniuk@oss.qualcomm.com> wrote:
+On Thu, 29 Oct 2026 at 17:09, Tycho Kirchner <tkirchner@emlix.com> wrote:
 >
-> The supplicant switched the eMMC to the RPMB hardware partition when the
-> device was first used and only switched back when the OP-TEE session was
-> released.
->  Between two RPMB requests other users of the same device switch
-> it back to the user area: libavb does so for every partition read while
-> verifying a chain, and the Android bootmeth reads boot/vendor_boot right
-> after verification.
-
-I am not sure I understand the bug here.  do_call_with_arg() calls
-optee_suppl_rpmb_release() everytime we return from optee which calls
-release_mmc(). Jan introduced a nested call on that that would explain
-the bug?
-
+> tpm2_scan_masks() detects active banks with unsupported algorithms by
+> comparing bitmasks taken from hash_algo_list. Algorithms which are not
+> listed there at all, e.g. SHA3, have no bitmask, so active banks using
+> them are never detected and never deactivated. Measured boot then fails
+> later on when the digest for such a bank cannot be created:
 >
-> With RPMB left selected those reads hit the RPMB partition, and the next
-> RPMB frames were routed to whatever partition the other user left
-> selected, which ends in status timeouts and I/O errors (seen with
-> the AVB TA on QEMU's emulated eMMC).
+>   tcg2_create_digest: unsupported algorithm 28
 >
-> Select the RPMB partition around every data request and restore the
-> previously selected partition afterwards.
+> Track active unsupported banks with a separate flag instead. Also return
+> an error if no supported bank would remain active: nothing could be
+> measured with such an allocation, and TPMs may refuse it anyway, as
+> observed with our model.
 >
-> Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
+> Fixes: b6228b2e785d ("tpm: add wrapper and helper APIs for PCR allocate")
+> Signed-off-by: Tycho Kirchner <tkirchner@emlix.com>
 > ---
->  drivers/tee/optee/rpmb_emmc.c | 88 +++++++++++++++++++++++++------------------
->  1 file changed, 52 insertions(+), 36 deletions(-)
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+>  lib/tpm-v2.c | 21 +++++++++++++++++++--
+>  1 file changed, 19 insertions(+), 2 deletions(-)
 >
-> diff --git a/drivers/tee/optee/rpmb_emmc.c b/drivers/tee/optee/rpmb_emmc.c
-> index 7ae6045511b..d4abc48f764 100644
-> --- a/drivers/tee/optee/rpmb_emmc.c
-> +++ b/drivers/tee/optee/rpmb_emmc.c
-> @@ -42,51 +42,55 @@ struct rpmb_dev_info {
+> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+> index 43ca54621d8..b727c645d73 100644
+> --- a/lib/tpm-v2.c
+> +++ b/lib/tpm-v2.c
+> @@ -66,6 +66,7 @@ int tpm2_scan_masks(struct udevice *dev, u32 log_active, u32 *mask)
+>         struct tpml_pcr_selection pcrs;
+>         u32 active = 0;
+>         u32 supported = 0;
+> +       bool unsupported_active = false;
+>         int rc, i;
 >
->  static void release_mmc(struct optee_private *priv)
->  {
-> -       int rc;
-> -
->         if (!priv->rpmb_mmc)
->                 return;
+>         *mask = 0;
+> @@ -87,8 +88,19 @@ int tpm2_scan_masks(struct udevice *dev, u32 log_active, u32 *mask)
+>                 if (tpm2_algorithm_supported(sel->hash))
+>                         supported |= hash_mask;
 >
-> -       rc = blk_select_hwpart_devnum(UCLASS_MMC, priv->rpmb_dev_id,
-> -                                     priv->rpmb_original_part);
-> -       if (rc)
-> -               debug("%s: blk_select_hwpart_devnum() failed: %d\n",
-> -                     __func__, rc);
-> -
->         priv->rpmb_mmc = NULL;
->  }
->
-> +/*
-> + * The RPMB hardware partition is selected for the duration of a single
-> + * request only. Between two requests other users of the same eMMC, for
-> + * instance libavb reading the user area while verifying a chain of
-> + * partitions, switch the device back to the user area. Keeping RPMB
-> + * selected across requests would make those reads, and the following RPMB
-> + * frames, hit the wrong partition. get_mmc() therefore selects the RPMB
-> + * partition on every call, and restore_part() puts the previous one back
-> + * once the frames have been routed.
-> + */
->  static struct mmc *get_mmc(struct optee_private *priv, int dev_id)
->  {
->         struct mmc *mmc;
->         int rc;
->
-> -       if (priv->rpmb_mmc && priv->rpmb_dev_id == dev_id)
-> -               return priv->rpmb_mmc;
-> +       if (!priv->rpmb_mmc || priv->rpmb_dev_id != dev_id) {
-> +               release_mmc(priv);
->
-> -       release_mmc(priv);
-> +               mmc = find_mmc_device(dev_id);
-> +               if (!mmc) {
-> +                       debug("Cannot find RPMB device\n");
-> +                       return NULL;
+> -               if (tpm2_is_active_bank(sel))
+> +               if (tpm2_is_active_bank(sel)) {
+>                         active |= hash_mask;
+> +                       /*
+> +                        * Algorithms unknown to U-Boot have no hash_mask, so
+> +                        * track unsupported active banks separately
+> +                        */
+> +                       if (!tpm2_algorithm_supported(sel->hash)) {
+> +                               unsupported_active = true;
+> +                               if (!hash_mask)
+> +                                       log_warning("TPM active algorithm 0x%x unknown to U-Boot\n",
+> +                                                   sel->hash);
+> +                       }
 > +               }
-> +               if (mmc_init(mmc)) {
-> +                       log(LOGC_BOARD, LOGL_ERR, "%s:MMC device %d init failed\n",
-> +                           __func__, dev_id);
-> +                       return NULL;
-> +               }
-> +               if (!(mmc->version & MMC_VERSION_MMC)) {
-> +                       debug("Device id %d is not an eMMC device\n", dev_id);
-> +                       return NULL;
-> +               }
-> +               if (mmc->version < MMC_VERSION_4_41) {
-> +                       debug("Device id %d: RPMB not supported before version 4.41\n",
-> +                             dev_id);
-> +                       return NULL;
-> +               }
->
-> -       mmc = find_mmc_device(dev_id);
-> -       if (!mmc) {
-> -               debug("Cannot find RPMB device\n");
-> -               return NULL;
-> -       }
-> -       if (mmc_init(mmc)) {
-> -               log(LOGC_BOARD, LOGL_ERR, "%s:MMC device %d init failed\n", __func__, dev_id);
-> -               return NULL;
-> -       }
-> -       if (!(mmc->version & MMC_VERSION_MMC)) {
-> -               debug("Device id %d is not an eMMC device\n", dev_id);
-> -               return NULL;
-> -       }
-> -       if (mmc->version < MMC_VERSION_4_41) {
-> -               debug("Device id %d: RPMB not supported before version 4.41\n",
-> -                     dev_id);
-> -               return NULL;
-> +               priv->rpmb_mmc = mmc;
-> +               priv->rpmb_dev_id = dev_id;
 >         }
 >
-> -       priv->rpmb_original_part = mmc_get_blk_desc(mmc)->hwpart;
-> -
-> +       priv->rpmb_original_part = mmc_get_blk_desc(priv->rpmb_mmc)->hwpart;
->         rc = blk_select_hwpart_devnum(UCLASS_MMC, dev_id, MMC_PART_RPMB);
->         if (rc) {
->                 debug("Device id %d: cannot select RPMB partition: %d\n",
-> @@ -94,9 +98,18 @@ static struct mmc *get_mmc(struct optee_private *priv, int dev_id)
->                 return NULL;
+>         /* All eventlog algorithm(s) must be supported */
+> @@ -104,13 +116,18 @@ int tpm2_scan_masks(struct udevice *dev, u32 log_active, u32 *mask)
 >         }
 >
-> -       priv->rpmb_mmc = mmc;
-> -       priv->rpmb_dev_id = dev_id;
-> -       return mmc;
-> +       return priv->rpmb_mmc;
-> +}
+>         /* Any active algorithm(s) which are not supported must be removed */
+> -       if (active & ~supported) {
+> +       if (unsupported_active) {
+>                 log_warning("TPM active algorithm(s) unsupported by u-boot\n");
+>                 tpm2_print_selected_algorithm_name(active & ~supported);
+>                 if (*mask)
+>                         *mask = active & supported & *mask;
+>                 else
+>                         *mask = active & supported;
 > +
-> +static void restore_part(struct optee_private *priv)
-> +{
-> +       int rc;
-> +
-> +       rc = blk_select_hwpart_devnum(UCLASS_MMC, priv->rpmb_dev_id,
-> +                                     priv->rpmb_original_part);
-> +       if (rc)
-> +               debug("%s: blk_select_hwpart_devnum() failed: %d\n",
-> +                     __func__, rc);
->  }
+> +               if (!*mask) {
+> +                       log_err("No supported TPM algorithm would remain active\n");
+> +                       rc = -EOPNOTSUPP;
+> +               }
+>         }
 >
->  static u32 rpmb_get_dev_info(u16 dev_id, struct rpmb_dev_info *info)
-> @@ -130,6 +143,7 @@ static u32 rpmb_process_request(struct optee_private *priv, void *req,
->  {
->         struct rpmb_req *sreq = req;
->         struct mmc *mmc;
-> +       int rc;
->
->         if (req_size < sizeof(*sreq))
->                 return TEE_ERROR_BAD_PARAMETERS;
-> @@ -139,9 +153,11 @@ static u32 rpmb_process_request(struct optee_private *priv, void *req,
->                 mmc = get_mmc(priv, sreq->dev_id);
->                 if (!mmc)
->                         return TEE_ERROR_ITEM_NOT_FOUND;
-> -               if (mmc_rpmb_route_frames(mmc, RPMB_REQ_DATA(req),
-> -                                         req_size - sizeof(struct rpmb_req),
-> -                                         rsp, rsp_size))
-> +               rc = mmc_rpmb_route_frames(mmc, RPMB_REQ_DATA(req),
-> +                                          req_size - sizeof(struct rpmb_req),
-> +                                          rsp, rsp_size);
-> +               restore_part(priv);
-> +               if (rc)
->                         return TEE_ERROR_BAD_PARAMETERS;
->                 return TEE_SUCCESS;
->
->
+>         return rc;
 > --
-> 2.53.0
+> 2.47.3
 >
