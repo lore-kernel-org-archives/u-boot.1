@@ -2,147 +2,204 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFDDD606A327
-	for <u-boot@archiver.kernel.org>; Sun,  1 Nov 2026 17:31:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B71DF606A324
+	for <u-boot@archiver.kernel.org>; Sun,  1 Nov 2026 19:20:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=AVT4/Rlf;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=docomonet.jp header.i=@docomonet.jp header.a=rsa-sha256 header.s=20240125 header.b=SxzGZHES
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Nk+mKHfp;
+	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=IphYvMpH
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B231280D88;
-	Sun,  1 Nov 2026 17:31:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 71D0C80DBB;
+	Sun,  1 Nov 2026 19:20:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uIyz4A0h9IQs; Sun,  1 Nov 2026 17:31:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6238980D80
+ id zoFZl1QAgE0N; Sun,  1 Nov 2026 19:20:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 37ED480DAB
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793554269;
-	b=Y35AAl7AJibL+I5CgDvPdLvEVOmtg0+SWmbZMdSCmIcYuHh+AZ3dSZadvB3Zmc+SipXB
-	 Z1u8LnGtx+hlgShAKJt/dFeoKv5Am1QYRCk9rGRxjjHNIfhC2kL9pxi+Ux5sFbf3JCtfW
-	 ApoOtFS9r3IVKaiQeQ2cvi5q59YvVv5sjid5T5PILe3hIt/OieXXhuQtFGInbCGWmmiib
-	 r7gOpWowG5BUaQjQWBgkNJGvfQejjySm/OvqefllNbCLXqYWMywAkWLTefM7qAcyj9H69
-	 RbfnlqqlXgkLIubzMfVq7Vi/Mk8THXpC4dWMpfYjmWLBKX+JTrTupN6Yazk70lv+FoA==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793554269;
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793560837;
+	b=hXJhzg7VLrn7iOqSyZuZt4SPZt9G/9hvRSfemKYfMMLr0zYOiURaGk8nUJaVp4+W8/Xe
+	 /0NmQ4RkSluYE3Y1lNVJc7vy9nctN2cCz2zvFV7j/83pS7MR8mxTN/x4DBKYxtokCQlfm
+	 iVFpbkSCAm4aBocBWw/2ja6BTbxFn7UOWavdIXd/EjZMIMtCzKp7YN/9UdQyrYjVs391z
+	 6HjwZzAAaGLsm8ruiU7CTiM9h/O/qUkCfSX13+SzwUJ/VXVqrtM/TIBLBn3SXrldr1p6X
+	 PHoqJAvcjXFLfx8anOiGzOPV1YTGGPBwoeNC29Gu0LJ+9bYmtlvHQKSAgm/4/rlOCWw==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793560837;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Received:Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
+	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=BfXS7x8lhZHLo18jQCvJ9K386orDegFjuz20QERtBZw=;
-	b=qJYJxe9r+xgpz6mbik5RHIITp++ChFkYDufqNGoq5xpTgcJlOXSWG4xV1Ulutc0lmJcf
-	 nSBC2l27LMx/N76yZTO7t5AzFxUygs7XF7IbLj0ZRZMD/7up+OQx5YFRJGJgb6n5JMxe6
-	 lJPr89xI/Csd2bknTd+n+vejJYpB3OcE8lQ+ckmz0sZKKjmLwcE1knTBYmCEGO2ZRn7K5
-	 LKx+3CsTIvAu5K3ZZoMNC6i1bKSNYYh63OGWOHy01rQwlPPlFSZ5GXoD8O76F9eiBJ82c
-	 1QhpJWOsAgbILrwK6PqfShV3KJwqFxFp9G5J2dBK47Cjj3x6UT9GNvsPAEDQ/SHHn9g==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=J0MDSvU3Ta2iIbF97NutAP7edGN8vRnzN7PCTV5V/Ik=;
+	b=VE41H/TTHih7Crkb2TkP7z4HodNStUSO3iL/kto10TGr4tfyhqOL0GPXE0hIkx7Y4yWt
+	 iF/V2qF57jIA7E1NIyxp+muVfoLTZaoFtFELFatZnUsew1tyT5R0YrRAVw4C8FzOffVSq
+	 mL6DcSEGwC34lvdAVZnf53v6bEdNimFyGAeNyTMSk54AZEcYxF/2dSSsN2x6bByKxPRq8
+	 Q1Cxe5r57aREuKM1DDKpO1aq8WTmKlFhYskXkzr3j8cwRbm7rMl5PWtA6CytVgzFo1db9
+	 qVDI5whhpjUib8ySxIOiuLUb0vK1blDtwyg47+LpcVKJsdnLgQ9rMx4Vrjah8YL5ehA==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
+	dmarc=pass header.from=chromium.org;
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=IphYvMpH;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793554269;
-	bh=BfXS7x8lhZHLo18jQCvJ9K386orDegFjuz20QERtBZw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793560837;
+	bh=J0MDSvU3Ta2iIbF97NutAP7edGN8vRnzN7PCTV5V/Ik=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=AVT4/RlfgjnsOlyfHBXoTskBhgp9QP00UiIJTRKQmDo597qynlbMiDso670RQvi5N
-	 LqcX3ccY2HRb7Q6LjjrhFsyez7r+LezeGdjGWi1GrTjXzT9Rku3oqELV6WrM0WBeQP
-	 hOttFUqoaHP75vJYgTnQ/sT+HF0Qqbo7RZY1e6Lkz1WcmUrUPx90G4YP362nrUzFlt
-	 huARc3xwdbdsVYroYPV1ZfW7MKfTuzbiXXcdW6kQV1HFsrT9FxiBERVZil58JUpPMG
-	 SNsnwjN+oEYM3X9MTxbvW/bG4NKlUiiSJnRvOdnijoPaj+n2UXqI0ovGC/c7QHkFji
-	 21zT4sR9ZQ/TQ==
+	b=Nk+mKHfpivJ5+hyjRRMQWVAlY02b1zEXsERFrdPygyht1LU3vK1mYWIm4WbwTgjKl
+	 0MDJAN0tyYcf/GvKUAlPqsnm+inGlipPEmjU4Vq70jwsi6d249zM8KYVdUrqIe1cSR
+	 CwGM6vHICA35c+f0sO2gO442FCIOjFf7Di7qlhPoK4JDBIkCi4DLk8V02CzbwCeeG3
+	 yzW/1GLHzlWeOVBpWWpT10JwqG1IjV2Giep8EbAQBL9aMo2dumFc/m+as+tv8hca8X
+	 A4xhC4mphz3ENo73wH0rhVjZvm/gnZAazLd6OcbHe575EhczB/Wr7Y4jdKVS24+J+m
+	 VPbS1tsGnndZg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6238980D80;
-	Sun,  1 Nov 2026 17:31:09 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id E67363A7
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 17:31:07 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 37ED480DAB;
+	Sun,  1 Nov 2026 19:20:37 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0D8C14B7
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 19:20:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D7D576065A
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 17:31:07 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id EFD3780DAB
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 19:20:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lS4m9qgab7yD for <u-boot@lists.u-boot-project.org>;
- Sun,  1 Nov 2026 17:31:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C1821605DE
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=153.128.190.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793554266;
- b=HwQ9QS7kjV3zAfKrD+J4XugBMGTsSiJnoN54kCDzEd8TxZ4++qXc1jRdqFk1Mg8VqQx2
- goo+fJngJklN00jLAGphH8NKxutnt9Ph0965Bp4pGmdxb/4NKFT+5+tGJU24txXLGP1hz
- Fyqimqr4dZaf0E/Wv2+WYxzz0Zg+A4pOrLGCWyS5ZR2HJSkWEIb4XeSIUqTBvlU/DUNUP
- 7TL0nxWa90yfbF5t2dj8WzzLGbzdkNH6sgQWoRFXDW6BEfHWscNhFqFn6aHVBw1qb/uWZ
- IqVyrHAssdM1nwIbnsO2OtnQ9E2lFPtpzOkFaXys6OR2UG/kGRzhqpFdm5TefoYg+og==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793554266;
- h=Received-SPF:Received:Received:DKIM-Signature:Received:Received:
- Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:
- References:MIME-Version:Content-Transfer-Encoding;
- bh=BfXS7x8lhZHLo18jQCvJ9K386orDegFjuz20QERtBZw=;
- b=Kd3jjqUJfyx9HL1UI2S1euhPOC0JbbV6zP5h39lbm0VtxfRkhq3MYfeYwiMaTVW+FuTR
- bhG6Usl80nnaHNaYpCK3GK6WSxW6u2P4YwBeG+sAMvW6BnYycOpxGarR+2WmPah5ZNzK8
- nFWm94SwINCatC1rPcyVK0eFidjLI8nD+SnY3jzZqBaLgVxoEP8uQRH8v+sk1OlKWFngd
- Sx1Vnab43j7dalalBjmtEQ/fmrZYvmRVPjES2jetZr8aKeDhfndN92C8JrnSDtbmr37KD
- IltH1IftWunTxYJnXYEXNdIQE/FSu63zznC+S3xPIKRl8JK5mW9FamVCB157ZbrvcOA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=docomonet.jp;
- dkim=pass header.d=docomonet.jp header.i=@docomonet.jp header.a=rsa-sha256
- header.s=20240125 header.b=SxzGZHES; 
- arc=none smtp.remote-ip=153.128.190.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=153.128.190.131;
- helo=ocn-dfr-mts-113c2.ocn.ad.jp; envelope-from=y-asai.0816@docomonet.jp;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=docomonet.jp
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=docomonet.jp header.i=@docomonet.jp header.a=rsa-sha256
- header.s=20240125 header.b=SxzGZHES
-Received: from ocn-dfr-mts-113c2.ocn.ad.jp (ocn-dfr-mts-113c2.ocn.ad.jp
- [153.128.190.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id C1821605DE
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 17:31:05 +0000 (UTC)
-Received: from ocn-ckd-mts-116c40.ocn.ad.jp (ocn-ckd-mts-116c40.ocn.ad.jp
- [122.28.98.105])
- by ocn-dfr-mts-113c2.ocn.ad.jp (Postfix) with ESMTP id 64AF51C000087
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 02:31:02 +0900 (JST)
-Received: from ocn-spm-mts-107c1.ocn.ad.jp (ocn-spm-mts-107c1.ocn.ad.jp
- [153.128.190.238])
- by ocn-ckd-mts-116c40.ocn.ad.jp (Postfix) with ESMTP id 22D1B64000BF4;
- Mon,  2 Nov 2026 02:30:56 +0900 (JST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=docomonet.jp;
- s=20240125; t=1793554256;
- bh=tVOGFXe/BXC5uRtCq8HFoYZuVcy22tILInLE71i/U4w=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=SxzGZHES8HvDcN77wnkoZJoxb06PM+uCMZI+lG93gwS2xwgjezb/Le3AJFWedgdr0
- PW4BAWHlQtkPah1AlpX58vHI91SViXKHZIJQf5erVeZN2faR5awWru+p3hzq70V/M8
- vW/Jd8wz8o6G6DTQNqFRIPQuZeWvmJL/JklIBQAQ=
-Received: from ocn-vc-mts-111c1.ocn.ad.jp ([153.149.236.164])
- by ocn-spm-mts-107c1 with ngmta
- id 9f740bd2-18e3fc17dd5d2489; Mon, 02 Nov 2026 02:30:56 +0900
-Received: from ocn-sdpx-mts-113c1.ocn.ad.jp ([153.128.117.211])
- by ocn-vc-mts-111c1 with ngmta
- id 4bc49240-18e3fc17ca03adf3; Mon, 02 Nov 2026 02:30:55 +0900
-Received: from X870E-AORUS-MASTER.kkp-group.com (p3688129-ipoe.ipoe.ocn.ne.jp
- [153.238.101.128])
- by ocn-sdpx-mts-113c1.ocn.ad.jp (Postfix) with ESMTPA;
- Mon,  2 Nov 2026 02:30:55 +0900 (JST)
-From: Shigeaki Asai <y-asai.0816@docomonet.jp>
-To: Kever Yang <kever.yang@rock-chips.com>, Quentin Schulz <u-boot@0leil.net>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.u-boot-project.org, Shigeaki Asai <y-asai.0816@docomonet.jp>
-Subject: [PATCH 2/2] ram: rk3399: Select LPDDR4 tRFCab from MR8 density
-Date: Mon,  2 Nov 2026 02:30:43 +0900
-Message-ID: <20261101173043.755222-3-y-asai.0816@docomonet.jp>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261101173043.755222-1-y-asai.0816@docomonet.jp>
-References: <20261101173043.755222-1-y-asai.0816@docomonet.jp>
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ndBynf0FqV1K for <u-boot@lists.u-boot-project.org>;
+ Sun,  1 Nov 2026 19:20:35 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 71F4F80DA9
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::532"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793560834;
+ b=ENBMPoHCErN7SU9zTtcPTr5C2RJtZAozlp35z1anUEjA0GMRT0JXGkTX78EGClR5aOwB
+ cDXHDk0eCKkfIo27c1ZKWjbkKdodyKzq6CJTkegxWwSDGwJ1FHlcq7k8Fm/4xCQ5O4ETY
+ gp9acJvbwEhe8sCXybScShCRTc3BYgbl3FtOGynHk19JgCb3OKNk9qXS9+1GF3TnQE3Ys
+ mmp8kPXDY7sP/SzTWyA1TIOsDkCLY9lbL/SL6BWXLaXuYnAbJwWsNOzS7ZUWuf1t47Kbt
+ pXIPB2nCOpuG0QBYYi8+N8tIf5XlEy3YriAdT7RnmNmGrqYj+MeY6HP3RencJ46bLwg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793560834;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+ MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+ Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+ bh=J0MDSvU3Ta2iIbF97NutAP7edGN8vRnzN7PCTV5V/Ik=;
+ b=BznBecnm9d51XsHcN9H/7SXlSHtBpX7aHv43WDRjoooR8++GsgPMrtIWNLPsarQ7I+0E
+ UJWN5iE2t9nTn83Lw7e9YY02qIRKGjWqYc5QV9BXxOodE0fyEpSw4UNQAzoFor1GRcpUp
+ f67XeEqm9aLleDk7Ev46neGMI0mUQJVmlS5VvQjZO0yqiMo2DSodBrjSSPWNPcqgGpFVl
+ 6IcFiCgQRpkzw715gCzZbBrJ6zLIEc3M+cuc41X29NqHoD3foLZNF3XPvldrX+d1QvzTA
+ IlW5U2pXi6viaSS+QgwQRCOIxlw+aplCKiYTAUjZ2ZYFE3Y+KYfAakqJgbMOWEmM1TA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+ dmarc=pass header.from=chromium.org;
+ dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=IphYvMpH; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a00:1450:4864:20::532"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::532; helo=mail-ed1-x532.google.com;
+ envelope-from=sjg@chromium.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256
+ header.s=google header.b=IphYvMpH
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 71F4F80DA9
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 19:20:32 +0000 (UTC)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-6ae305e3bd9so4047234a12.0
+ for <u-boot@lists.u-boot-project.org>; Sun, 01 Nov 2026 11:20:32 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1793560831; cv=none;
+ d=google.com; s=arc-20260327;
+ b=g+qq0hF7MHptiYkFEujH2mzAzG/hZ6hlWrN4ZH5xj918E+TZGZ1XO2xwIraxksBGet
+ cH0OiZqcAw739NE//C5ewDg5Uf8yJqBRywx/IhA6qOlfhmvRn5LLKAfrdSJGq8XmQ2Li
+ Vvdwe3HDGZ7ZfdjwP5PQ71S2yFvgN5SmxKE+3xXi6jjrSnwjCtgL37V8Fk+fJKJRteBs
+ /UsGMOTuxe6fxkiGMCY15LxaVqHIRD7BUyisccDY5SI4NjalelQbDQ004jJ8KLN4nhdB
+ CpKhFeDSdCVJddBAaUbEeElHkBfDxmBmueMQnhvFqqTe03Dh82WA2s5QUL8S8tyLgI1V
+ X1hA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=J0MDSvU3Ta2iIbF97NutAP7edGN8vRnzN7PCTV5V/Ik=;
+ fh=he5Y2ESEtJyljeJTBy+SFvtPCDe41kUfpXWzNzSp7tk=;
+ b=KydOdb4KhCIALr6lNqWOdnsGntH4oLIAotT2CgmufxokFjzeCMYfvV4mMk4sxmySnn
+ SDIPuSV78SYjp2UxHQwAB7FHVv6O8WUIeieS751y8drLpR+fvvFzoUJKwUtyqXaLlTBd
+ ePG0jQA4Yce4eyKDAUrodi/M3EnHpBISukNm4Ms1bShY2J5f9Uw8kK6A2F2aWd1iv2ny
+ L/WQygeJq9Ddos3mnqKUB8wzg4cIZTjCsCfWqqfrdUgFedgfPMOa9hrLHiGhwm0dKbhz
+ 5wH4Ep80Bu6Irvxd2+4AYCbjF5rlNHvzdwhhR/iCUcqHYiGIHY4B0NUusfHdn2/W/DMA
+ FQQw==; darn=lists.u-boot-project.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1793560831; x=1794165631;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=J0MDSvU3Ta2iIbF97NutAP7edGN8vRnzN7PCTV5V/Ik=;
+ b=IphYvMpHaJPC58gk8EYGNG76Ew4cV/ZRE4jMVDvWALyBvY7+uViO5P9UwHX82Euosi
+ ozqn3s3HOiv5sjvTywBglDH6bENHabwHd7W034iIxh0BU5QPJR1YB3OiLv+D0NZAdoPy
+ L2/mDGK8+RXEyhoh7LGyqPLLHHchadyReEAHs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793560831; x=1794165631;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=J0MDSvU3Ta2iIbF97NutAP7edGN8vRnzN7PCTV5V/Ik=;
+ b=cdvhj6DxrDdFPPIDu04jJ24YTSe8ilsvl62kevRJ3ki6Fcxphrij1BL8yZy0WIK1g5
+ jOUJrM8l8UIHnC/CoMs77y/fQpxaOwKBiEr0GuELLIxCT90Ity95850p7M3bX2lCn4YB
+ vZD1tytyjAxIxi6d0FmCui1OszmySs/Kxt6PwGM7EcWfK/a+Jjh/NQoNE58Us9XT1UTg
+ 3ARF08OE7Uw+OiwEVLMe57fP9iLfT/oqwXkAe376ut1Tb8SnbKhLxIQFlHFkBltavOjR
+ Rn1aD5oLeOLLhBEbZak/gwryJir0SWXNHTjxkGbrWjsrL/e83o14MDz/i2KiGXCTfn1M
+ Whxg==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBzur0Bd8OG6Ofn+zq4BTyMFpSkd5srpU8T2otBioc2gUy3HM6jf1o7Utqv1zGTzkf6rC4OfyCw=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/VddHdhGRsq0AtDM5/0P4iMpMIbrbu5VUiP7LM7eV3qUENWwf3
+ HEHgnRu2uYAGkpw81KWvMAxrYzgDVdYgv+vdsnXlx2awM+NkGfaCuLFKqrxvBXIt/mYxJOj0f8c
+ FHno8SnhFNqz4lpn2rzupaCIUrIJ4H9vVmlYZmdMm
+X-Gm-Gg: AYBFou0pMyLMYX1ZGfLIVUqUlZorF5IV1cgA1QSst55kytYsL3H6trBoZedBYRSZPQT
+ CkCoZzwNRIDyPOKqjE9+j0im9I9J6QRseWEkW7S4+mjhKtWj+OTu5BG/WqEN6QBHmvZc0fKBMDw
+ jw7T1wDoHBB9LT+iaJiB1gZUCzA9wfxw2NfSmLLb90GjbqO8xpK50v05UE+1onuvGrG2X+CXWpa
+ 6bvT12Zlxj4i9H53asY0TH/xkCUgfo5kQ+dqy9H5PkgGEnYTMlFs5lbWtNXPXDKpuGi/smFFbhO
+ Rp24KJL8oYB+1SAZ10gYzyFmFrHFp89Twy+DHyTdCwsEHNadGiJMDLMojULvJLvZLcwc+zVk0yF
+ qzOpAerF5PDdDsZis0LX0HDZWTlw+jPvAtjOciOpwrIP7XYaxptwHuUDTOjOVIRZJXMTBduu8XF
+ VZzyZ6+bQXSnsubF32MbE=
+X-Received: by 2002:a05:6402:1d51:b0:6ab:7700:9371 with SMTP id
+ 4fb4d7f45d1cf-6b4d468b63cmr5388048a12.25.1793560830938; Sun, 01 Nov 2026
+ 11:20:30 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260923114940.349985-1-ludwig.nussel@siemens.com>
+ <CAFLszTiM+-BsYPjaw7aD7xfzU+3kK-BO9mkYKrtXpjPOv4SjcA@mail.gmail.com>
+ <11fb0589-8ef2-4870-8490-077389ce9e53@siemens.com>
+ <20261012144457.GB3722450@bill-the-cat>
+ <44849c78-b187-4a20-bf2c-0eebaf8a2e9b@siemens.com>
+ <20261013150127.GA4042005@bill-the-cat>
+ <CAFLszThDcdt14Chi=UeO0i-gpzUvXMQR1Dd8c1ZVVk6Xgtvidg@mail.gmail.com>
+ <20261019181943.GD720525@bill-the-cat>
+ <CAFLszTgb2oQ0ffsZqcsTtD78ObQRJDFvC4awtAGozAMWrdMKiA@mail.gmail.com>
+ <20261031141225.GM3309461@bill-the-cat>
+In-Reply-To: <20261031141225.GM3309461@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 1 Nov 2026 19:20:17 +0000
+X-Gm-Features: AclHuK-0s2pMBT3vfA81phtg_03MOqRmv_aTXJsemGiaW1JAWo4oIYcZ4bz-ieg
+Message-ID: <CAFLszTg7oERVvfm=Enqb+_1MGQsfoee71L4S-=BogYXS1VLvyQ@mail.gmail.com>
+Subject: Re: [PATCH v10 0/7] Improve FIT signature handling
+To: Tom Rini <trini@konsulko.com>
+Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, u-boot@lists.u-boot-project.org,
+ Alexey Charkov <alchark@flipper.net>, Anton Ivanov <anton@binarly.io>, 
+ Aristo Chen <aristo.chen@canonical.com>, Daniel Golle <daniel@makrotopia.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ James Hilliard <james.hilliard1@gmail.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Mehmet Fide <mehmet.fide@screeningeagle.com>,
+ Raymond Mao <raymondmaoca@gmail.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -152,115 +209,133 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The default LPDDR4 tRFCab is 380ns, which is valid for all densities
-but longer than necessary for smaller devices, and increases the time
-the DRAM is unavailable during refresh.
+Hi Tom,
 
-Once the DRAM is initialized, read the density from MR8 for each
-channel and reprogram tRFCab with the JEDEC value for that density,
-together with tXSR and tXSNR (tRFCab + 7.5ns). This is done for all
-three frequency sets in both the CTL and the PI, before switching to
-the final frequency.
+On Sat, 31 Oct 2026 at 08:12, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sat, Oct 31, 2026 at 08:54:54AM +0000, Simon Glass wrote:
+> > Hi,
+> >
+> > On Mon, 19 Oct 2026 at 19:19, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Mon, Oct 19, 2026 at 08:57:41AM -0400, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > > But then we would need to provide the whole device tree, yes? I t=
+hink
+> > > > > this ends up being a tricky case because we're on QEMU for this. =
+We're
+> > > > > just checking the signatures on later loaded FIT images. Maybe th=
+e
+> > > > > series that adds SPL to QEMU could be helpful here, since we do h=
+ave a
+> > > > > normal path there for applying an overlay to a device tree, I wou=
+ld
+> > > > > swear...
+> > > >
+> > > > Agreed, a whole DT is the wrong direction here: U-Boot cannot know
+> > > > QEMU's runtime shape (memory, CPUs, devices from -device) so it mus=
+t
+> > > > keep using QEMU's DT at runtime.
+> > > >
+> > > > The merge code in patch 1 is already doing the right thing in
+> > > > principle: take a small built-in DT that only carries the signature
+> > > > nodes and merge it into QEMU's live DT. The remaining gap is just t=
+hat
+> > > > OF_OMIT_DTB=3Dy means no built-in DT ever reaches the binary, so th=
+e
+> > > > merge is a no-op by default.
+> > > >
+> > > > So I think the fix is to arrange for a tiny signature-only DT (e.g.
+> > > > generated by binman from the keys, like the normal vboot flow) to b=
+e
+> > > > embedded when FIT_SIGNATURE is on, and leave OF_HAS_PRIOR_STAGE alo=
+ne.
+> > > > An overlay fragment would work equally well and is probably cleaner=
+,
+> > > > since the intent really is 'apply these extra nodes on top of what =
+the
+> > > > prior stage gave us'. A test under test/py/tests covering the merge=
+,
+> > > > perhaps using sandbox or the SPL-on-QEMU path, would catch future
+> > > > regressions where the merge silently early-exits again.
+> > >
+> > > So as I kinda thought, we're in a funny spot here, because it's QEMU.
+> > > And so yes, going the overlay fragment path sounds like the right way
+> > > forward because that also should match what real hardware would look
+> > > like (we're given the tree by some prior stage and need to augment it=
+).
+> > > We might need a little re-tweaking of the Kconfig logic (some new fla=
+g
+> > > to say we need to build overlays, and not fall back to "and now we tr=
+y
+> > > and build a dtb for the board") is probably required.
+> > >
+> > > > I can't help mention (again) that this would all be a lot simpler w=
+ith:
+> > > >
+> > > > https://patchew.org/QEMU/20250405191352.2597585-1-sjg@chromium.org/
+> > > >
+> > > > ...if we were able to explain how U-Boot's use of the devicetree
+> > > > includes configuration information.
+> > >https://patchew.org/QEMU/20210926183410.256484-1-sjg@chromium.org/
+> > > And I can't help mention (again) how unhelpful it is to bring up idea=
+s
+> > > that were rejected for good reason.
+> >
+> > This prompted me to take another look at the thread from 5 years ago
+> > [1] - it's been a long time! The objection in the end was basically
+> > this:
+> >
+> > 'My take is that this is u-boot doing weird custom things with the DTB
+> > that aren't "describe the hardware". You should be able to boot u-boot
+> > by putting those custom DTB extra things in a separate blob and having
+> > u-boot combine that with the actual DTB when it starts.'
+> >
+> > So this series is responding to that. I have heard a similar opinion
+> > from a few others too, but that doesn't mean it is correct, or even
+> > then, that projects should not try to accomodate each other's
+> > differences. At bottom it comes back to the 'just describe the
+> > hardware and refuse everything else' thing which comes up from time to
+> > time, but that is not how U-Boot works. For good reason!
+> >
+> > Perhaps more bindings in dt-schema would help? I see that bootph is
+> > pretty common in Linux now. Would adding verified boot's public-key
+> > schema to dt-schema would make sense?
+> >
+> > One point raised in that thread was that allowing users to modify the
+> > FDT using the QEMU cmdline is a recipe for breakages and user
+> > confusion. That seems like a reasonable concern to me, although of
+> > course in practice it isn't any different from having U-Boot do the
+> > merge.
+>
+> I wish that when you're told No, you would accept that and move on, and
+> stop bringing up or just implementing stuff that's been rejected. U-Boot
+> doesn't "need" something when you immediately follow up and note that
+> the problem can be solved in a way that doesn't change upstream, either.
+> Looking at that thread again, yes, you're wrong. My current reaction is
+> that if you had gone with adding overlay support, which you explicitly
+> call out not doing, maybe that would have been accepted and would have
+> solved this problem.
 
-Tested on ROCK 4C+ (MT53E512M32D2NP) and ROCK 4SE (MT53E512M32D4NQ).
-Both report MR8=0x10 and use 280ns.
+I don=E2=80=99t think the thread supports that. Peter=E2=80=99s objection w=
+as not to
+the format but to QEMU merging anything guest-specific into its DT. He
+asked for the guest to do the combining instead. An overlay option
+would have been the same thing, since the merge in my patch was
+libfdt=E2=80=99s overlay_apply_node()
 
-This patch was written with the help of Claude (claude-opus-5-5).
+This series performs the combining in U-Boot, albeit with the
+OF_OMIT_DTB problem, which should be soluble.
 
-Signed-off-by: Shigeaki Asai <y-asai.0816@docomonet.jp>
----
- drivers/ram/rockchip/sdram_rk3399.c | 64 +++++++++++++++++++++++++++++
- 1 file changed, 64 insertions(+)
-
-diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
-index 6fa8f268770..fc3c673aff9 100644
---- a/drivers/ram/rockchip/sdram_rk3399.c
-+++ b/drivers/ram/rockchip/sdram_rk3399.c
-@@ -2565,6 +2565,37 @@ static int lpddr4_set_rate(struct dram_info *dram,
- 
- 	return 0;
- }
-+
-+/*
-+ * tRFCab (JEDEC LPDDR4) by density per channel, indexed by MR8 OP[5:2]:
-+ * 2Gb, 3Gb, 4Gb, 6Gb, 8Gb, 12Gb, 16Gb per channel.
-+ */
-+static const u16 lpddr4_trfc_ns[] = { 130, 180, 180, 280, 280, 380, 380 };
-+
-+/*
-+ * Program tRFCab and tXSR/tXSNR (tRFCab + 7.5ns) for the three frequency
-+ * sets. mhz[] holds the rate of CTL F0, F1 and F2; the PI uses the
-+ * reverse order for F0 and F2.
-+ */
-+static void lpddr4_set_trfc(u32 *denali_ctl, u32 *denali_pi, u32 trfc_ns,
-+			    const u32 mhz[3])
-+{
-+	u32 f, trfc, txsr;
-+
-+	for (f = 0; f < 3; f++) {
-+		trfc = DIV_ROUND_UP(trfc_ns * mhz[f], 1000);
-+		txsr = DIV_ROUND_UP((trfc_ns * 2 + 15) * mhz[f], 2000);
-+
-+		/* CTL TRFC_Fx [9:0] */
-+		clrsetbits_le32(&denali_ctl[48 + f], 0x3ff, trfc);
-+		/* CTL TXSR_Fx [31:16] */
-+		clrsetbits_le32(&denali_ctl[59 + f], 0xffff << 16, txsr << 16);
-+		/* CTL TXSNR_Fx [15:0] */
-+		clrsetbits_le32(&denali_ctl[60 + f], 0xffff, txsr);
-+		/* PI_TRFC_Fx [9:0] */
-+		clrsetbits_le32(&denali_pi[46 + 2 - f], 0x3ff, trfc);
-+	}
-+}
- #endif /* CONFIG_RAM_ROCKCHIP_LPDDR4 */
- 
- /* CS0,n=1
-@@ -2964,6 +2995,39 @@ static int sdram_init(struct dram_info *dram,
- 	}
- 
- #if defined(CONFIG_RAM_ROCKCHIP_LPDDR4)
-+	/*
-+	 * The parameters start with the longest tRFCab (380ns). Now that the
-+	 * devices are initialised, read the density from MR8 and use the
-+	 * tRFCab it requires.
-+	 */
-+	if (dramtype == LPDDR4) {
-+		const u32 mhz[3] = {
-+			dfs_cfgs_lpddr4[0].base.ddr_freq / MHz,
-+			dfs_cfgs_lpddr4[1].base.ddr_freq / MHz,
-+			ddr_freq,
-+		};
-+
-+		for (channel = 0; channel < 2; channel++) {
-+			const struct chan_info *chan = &dram->chan[channel];
-+			u32 mr8 = 0, density;
-+
-+			if (!params->ch[channel].cap_info.rank)
-+				continue;
-+
-+			read_mr(chan->pctl, 1, 8, &mr8);
-+			density = (mr8 >> 2) & 0xf;
-+			if (density >= ARRAY_SIZE(lpddr4_trfc_ns))
-+				continue;
-+
-+			lpddr4_set_trfc(chan->pctl->denali_ctl,
-+					chan->pi->denali_pi,
-+					lpddr4_trfc_ns[density], mhz);
-+			if (IS_ENABLED(CONFIG_RAM_ROCKCHIP_DEBUG))
-+				printf("%s: ch%d MR8=0x%02x tRFCab %uns\n", __func__,
-+				       channel, mr8, lpddr4_trfc_ns[density]);
-+		}
-+	}
-+
- 	/* LPDDR4 needs to be trained at 400MHz */
- 	lpddr4_set_rate(dram, params, 0);
- 	params->base.ddr_freq = dfs_cfgs_lpddr4[0].base.ddr_freq / MHz;
--- 
-2.43.0
-
+Regards,
+Simon
