@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7964606A324
-	for <u-boot@archiver.kernel.org>; Sun,  1 Nov 2026 21:05:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5ACA4606A324
+	for <u-boot@archiver.kernel.org>; Sun,  1 Nov 2026 21:05:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bUsjP0SG;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=i0D7N2Ne
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=VfUqODA5;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=yrnJomhL
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8509C405F1;
-	Sun,  1 Nov 2026 21:05:42 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2FB9460623;
+	Sun,  1 Nov 2026 21:05:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eb1enp57QWDz; Sun,  1 Nov 2026 21:05:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 76B21405DC
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793567140;
-	b=BWuSgnGgYxZP3kRBQiqH07sXEwsJQ9jHNm2CdFkh2ysnLUuKCkY7unUpYlVOl3w4bt4N
-	 QgwwVtKwPmFUbdXpvzByona0SIftro1ogAs97+bvffUIsj1VwvVj0KL2+DGBzqpleyHWW
-	 yC5VeOx4mjtoJtjOrG052AHALNgzvCtcsLpolwPqtDW5V8pugwENkD9Ce4i67H8u5+R36
-	 WrVn9IAgelxB6/J7SS6aOfJoakbTM0Y3/jgcwyDwgQeehC6rvQVsoAeOyP3DB02fnVRkW
-	 3LSPtHEWMJEOCPmEAfqNQ6FQs4b8Q9vRqhaV52MrORBaVFMUuuc36ebhSigAfFTjZBg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1a3qPtKBU0et; Sun,  1 Nov 2026 21:05:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0DBAB60684
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793567145;
+	b=dpbGAi/PNSxjPZzEGJ7hwgiSRKalYarYx56pdmYxp9KhfWAWbMCMNuwFXKlTREZPCFCo
+	 mIwBqlcun3hRKMhgkFByI61gn5ZPhgD7ramaVePXAUy+3YeX24DaF35RjPiFuLnUrWmEe
+	 4UrdX5WqJi9zkHjoeG0G36Syc5ptirgMNLoHgRlBCkaJrMcY2yXjcV+s8P0qqLSKJMVoe
+	 39J1AWnCG9DSNyzhqCpdbMw79nY0qaFMG1359xUja4+YangpK5myCls+EaATIDnVwq7u6
+	 tG3ZA90YgltuoNcfNi3HBBErT//dKTZmtEEzpyf24nx1dCxvqEO6MLH+M3sRBIeFfCA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793567140;
+	c=relaxed/relaxed; t=1793567145;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,127 +32,126 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=04zKGySTpsJdL8EcXMvcqNDU1v7fNCU+wg8EicgpypM=;
-	b=JTT+lGGNBNlKsZ1E5V8F1UHMLC8+lz9eFh0GJ2xq4thk1OsteHqiWjKdv04RAfg65sLp
-	 BsH351EGMggVoX31JltgqLcpk4ZiyRyt0vGFN0u4n0e6RwLLD3UDIwBjrGaianurUrUrE
-	 tOvSmr7Q3hZf3UCQOGm1lRdkqJ+FQL1sRvzXEz5eHSPMbSoeh25q9E79bJrfpSo+PyOrn
-	 Ff+UbzRKJu0ovyzhshsE8P6oht0gQgfhYq0jrOd7kULr8GI7nmvP2YgippbjjJ75t1oj4
-	 zuw9L2fDAofx5QBffebM4taPqLrASYohpfmG9o9NXaQZ1xOdj4mu7Anh4H7zf0wFcUQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=rW9jApSx6mY1TtyDqTks3Yd2vuKPcLVrzWPu5ggBFfU=;
+	b=nA6JQOPfKRWBM5GRkhCNNLeunUOTxQ4Td7n6RA9RpjKd7Tp9W1IksOIvT99cj4tjhqK1
+	 vSjJiuV/dV5KB+8ym38sSHhvOJkP5y3dR1I4V1Df+Kh8fz+YiCAm2W88nqJ5SPgk+6tAq
+	 djoZ7XfDFTLislNunD6BdJ53hHlZYm02+R+Y9IMPnY31/AjuLkwO3HdruSwreRSxqGLOI
+	 b993Ph42TqRhf7kcMXFf/XUnvs3Bx7O6cHNTrpz0SwFdEv4SzWmhsqRgCjNEQGNLEkPBH
+	 jpMSqcb6BrOmqO0JC+Ddj9xjw3ktyfOTWbXRLOAIGYYHm7Ak+WuGULjRq6aQJrrWO9g==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793567140;
-	bh=04zKGySTpsJdL8EcXMvcqNDU1v7fNCU+wg8EicgpypM=;
+	d=lists.u-boot-project.org; s=default; t=1793567145;
+	bh=rW9jApSx6mY1TtyDqTks3Yd2vuKPcLVrzWPu5ggBFfU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bUsjP0SGHkBBNJlGrOyvokdQQDgSSDwYfPB3K5XMS5iSpnpqGawsy040APBo1VRT/
-	 pX2lQK3aQhpYCAoFEePnuDoShK+uP+HZkrTiCTRSXumj3hWUJq//V/NUv7SNDCvptm
-	 u7XtlIEvWs4GZmJNW/pQIVKQAuuURu9cYE+pIaW2iy6gNQgayVRazsJ39AjjIxecu2
-	 HHJn0LFV73st/tvcf+ZSyGpW5u2/iksele3Ea46kOUsQPIhv42HOfexzlTaXH3wt3+
-	 w4rYt3KTu+k7gC44pMm6d120O+usx2fY0WFdzFbACq0T32eWmlJvsPTCmwTrIft4mQ
-	 w1j47AGQiQhhA==
+	b=VfUqODA5jVNznFQn0Rt8df+Ca5886yTtOTN8Xn3DsAq8fIlkP23p/DP6WUlRNNIY6
+	 azNzn6LjgyOITtCu8A2qQbEUt8M2oOlJnMiMpjZ/qRohfFkdX1Qn/YjLYdsibyeLZK
+	 7pUidS0e46McRNHPDNE7RpeUCXB/aZ8NsUDeRterNY0J1wfuxjfVxMhT5R7HAbeBW+
+	 B6Tebst6y7t0RdTK/cEZNvbDmgiVlOH65ZGqoFujFMkB68m6exztFR07NE00AbFHYr
+	 avYQjQbME2xmV0PbMnDKHx3XtiCdmQVELTmIjmshDsJ0pdNven3fdZYgKCLUG03Vg2
+	 RgWzpUqlWnCrQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 76B21405DC;
-	Sun,  1 Nov 2026 21:05:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0DBAB60684;
+	Sun,  1 Nov 2026 21:05:45 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id F41B7435
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 21:05:38 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 67EE134D
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 21:05:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E62D280DB0
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 21:05:38 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4E61A80D7D
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 21:05:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pb8SD7-4BNhz for <u-boot@lists.u-boot-project.org>;
- Sun,  1 Nov 2026 21:05:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D0E8980DB2
+ id FrOG4EDQDMcO for <u-boot@lists.u-boot-project.org>;
+ Sun,  1 Nov 2026 21:05:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0758380DB2
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::22a"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793567137;
- b=X/GLpfDN4uHUxB8ZnucTuBRmT+TRqlAtBZhX+1eI2jpydEYNp6zF+GOXh2Yn1mPTNi0I
- K2CtWgds9UzeaukDOiioW26kLfAxlr4jV09WZFHgyjHXts8efbjRntlMrEYeyjgC7qZT1
- bgN/+7Gk8gEf7FNPDKrA5HH2cHfHc9ZzKeKw4B3r291RDtYS0Rrvmkue+NhHb1srxRpPy
- cZTohyo9kf1d7MPlrL5JeEd4xUBnW2LZas2pHO7Cd6tUc7UTG+Lz+qKLouuz3ZaYIkHQc
- zQEPLKFYJQ1ttcQTd/MBptixy/nQFcEUomh1b29Ku/gBDKnQAH48JdeUCTu3K41ZF7w==
+ arc=none smtp.remote-ip="2a00:1450:4864:20::22b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793567142;
+ b=Lk5z1B2uQ/2Tckh1e7i5werwLrsNXVvYNCyWIKJIU9Go+02Q48V2YhI2tokrFl/Kqt3r
+ AIULCFd60GHmsN8H5S0gOcNnAg1pO5r5YOv5vRonAQvL0DSCN/0107spj9aPWiY8YPVHb
+ YDhrRZvGgq3OGLcX1ctYTpV+j6XAV0ZYoFokiXnH0PE+uY3F/WuAiaMxkH6SazDV4POn4
+ zZqdO5cQ3AdPMCkY7hRTVDIaj5mxjTCLwe5HXd5JhH/RpkaniLq10+1uae4lHFqjo5FX/
+ H7JJbu/S2vrOvs8EEa0KAEFGruArBCjjOTfDH/OXgdhLuyJgYAwxa9zrqGyKvb2BC+g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793567137;
+ c=relaxed/relaxed; t=1793567142;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
  Content-Transfer-Encoding;
- bh=04zKGySTpsJdL8EcXMvcqNDU1v7fNCU+wg8EicgpypM=;
- b=lOPVAYeQ+T1OIdxSl6OpR0YMU6WnaktBANPMZgpcw0aaAFU0dTqMQ4TBUVcDZuRVZvVM
- Ol9KXc2NDEE4Xu+pYCKPZrubD6CtsEaiq8q0fxunUbXOW3gUJZGyrLKFG4WBF5JGRG66E
- xxJDTA9Ves5+sWCyBy/fgQb06u+he7zscBC1JvDr/uUoinpJDGfujsFZfRiv/0O7yCGHQ
- prZIt7Q4RrBhO37jiZ0yDwE2GU3TthYeSDIGfPfAv+XRGAYiG+pAoc+R6LskZtX3aNOLa
- ydrUxEGvFUiAb4EJh81yU56fYnriRo7pmXZ7J4rLnoT3ZiadFrlksJDz3hzD51Jgbow==
+ bh=rW9jApSx6mY1TtyDqTks3Yd2vuKPcLVrzWPu5ggBFfU=;
+ b=J5dB1jJPt8rtkZsQM082isxxC1q7r09dCLt/6Ns6hgyrN65t7Zh6acWk3/3FI0R/c6MC
+ jHYO7gueujNHo0WC6AnH/tonWjOKPPr1AJvVbv5qgMDa4p4LiXkny9HuWR5B3B/AVSa7x
+ Uu3KbPIbRg3ZcLxcAehbm9PdgKn684mmi76x/Zr+WdzUHpV3wZvPnx5a7L2ntLYippP2/
+ nxWXq5oZcdZMF9AQu5BXi9LlRzf4fr7rgBx0WoJPZiQh5kIBGIR5uSPCO06hevrUViBsv
+ QnC/fa76bws5WiK9p1HJdsYLcdsw18VO0Kwxl2V2OLJsKdFZBcw5gbcjCOT8LG0Rirg==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=i0D7N2Ne; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::22a"
+ header.s=20260707 header.b=yrnJomhL; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::22b"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::22a; helo=mail-lj1-x22a.google.com;
+ client-ip=2a00:1450:4864:20::22b; helo=mail-lj1-x22b.google.com;
  envelope-from=indrek.kruusa@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=i0D7N2Ne
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D0E8980DB2
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 21:05:36 +0000 (UTC)
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-3ac99992373so18429431fa.3
- for <u-boot@lists.u-boot-project.org>; Sun, 01 Nov 2026 13:05:36 -0800 (PST)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20260707 header.b=yrnJomhL
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0758380DB2
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 21:05:41 +0000 (UTC)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-3ac65e845a8so27489271fa.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 01 Nov 2026 13:05:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793567134; x=1794171934;
+ d=gmail.com; s=20260707; t=1793567139; x=1794171939;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=04zKGySTpsJdL8EcXMvcqNDU1v7fNCU+wg8EicgpypM=;
- b=i0D7N2Nedq45SrSVnMRTPgLJgkwWK01ANan5dqw8pSvLawN8yREaxN1iksoWKhhFRW
- MS5VNHLyJB81hIXVD7yLPvWXbi4K8vMTFwI4h2yblbgeZLRp6d4gjcItcycovqnQw1D1
- MCyC4DNSPqqMAr5VC1ar3MswYJ47ALivt2J/VIjTwfKSu3ghm43L3tS1ACJczcWrOaXP
- +ziC06POXQnfViM8j0O/44LgLopREy0T26FZEXzWTiEDgakHgw3ofGlwcNLGbF2PX4+5
- LuPZjiqwuOSbEPgKvSou4BHhTR//9CIafmqHxKzjtYFJ0X/DZicb8GYuZ4wXHuBKybJE
- rjjQ==
+ bh=rW9jApSx6mY1TtyDqTks3Yd2vuKPcLVrzWPu5ggBFfU=;
+ b=yrnJomhLWOADx7X6ryKrcfU2oO7ttvY9meXfmIYzrhWgFpPNH2r5+BS7/Hhy3zMQh+
+ U+rbmKaXQhJogYm4Pas8x0iOCRJFVabmoIE5HjQt+Fhy6iqvDzFu7mrXpekTDy6Vz3VD
+ Ky+8QS9YIi8dRWn/cbXvSVP52Q7plBHX8SNvB6r4BT9S6zATdPaEOyJTFMTC298qaVqZ
+ JDTXK46PXlvakBg9vVOwEoJ4D7t8Kfa6WXUHVWpvDZVMXFBg/wfWk/xKKS0+iUVTze7q
+ H3YR+Pi3no0o4lsa8p0LXMgSTmXH+gJMNJ/TzcLg71dI9oTaOqqxXWypflL/4GwvJ60A
+ z8zQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793567134; x=1794171934;
+ d=1e100.net; s=20260707; t=1793567139; x=1794171939;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=04zKGySTpsJdL8EcXMvcqNDU1v7fNCU+wg8EicgpypM=;
- b=Crf6MpA3dZqHrC0Fglm9ndaKicaF1k2msig/PtlGe4l2mAmVh5gEpH60WxoH72ZSS/
- CDhyntnrdCR8zH2OnF4bAYtwp5DJ9NaIpRt6EtPAKNjx2r2fBHIUTXEdfS5BVBI4EXcX
- xGLqpb6Vq7TZy+10HWtUY4GDMXGJzMJbvADTPbew5p+YVFr6n0HgKxUb3yy5Rq5TZreL
- DPw4nTjciFVzblJNXmkSMw/1X+MYcl8tbpMX1lQhzY9R/zQ90z3UfYg+R5s0od0P3gc6
- f/WSPbiTqF6HS1v7zWcdffxTTHbcl1rmiF7yOZyrq+lo2jGfU24pzzQc7QN2gID8ashu
- KLHA==
-X-Gm-Message-State: APuU4Z/ISUMxzIiuC4C/aVaqs72s+xpBlMkQccHFG99e8pLpU21SI1bZ
- S1X78r+Qozr9p731e9Q3q0H3GWpechGOvSv6V2u8ZeFZaLJ5zlfkWtIosH9425HA
-X-Gm-Gg: AYBFou0uORl1jKr7Pey6GJnzkdhg1cQ8rUR50mGpugj2dCKRG0V5MDSHaW43EpD21Mn
- evkihd/sID6mlzyfLU24L9LlmeUUhr3aiSckM3YW+bDISKKyKirDja2GGJJnAXr+VG7DxfA8NV4
- +VT3P1PGEi8rlZoX+oBGIKmQRIWWoMkNtu9uSvLqmuUDACqQTd8wS2ni4PPU/o3/csnwwB1Sz6S
- 5R2eiEe+4nBhCP0xFIjOtnh/dWzFsvstrLmwPPhp/Pe3qhzSe789fFiFw7FL1Ps50o21ghZmsX7
- Tf2xhYIhL7Q8+yJxB02Q/JaM560wea1iV62ims0lwEtpIUa65THYTq9HCeJeUHkQGRruVY7GmwS
- lWRhFrLOeytwlhtIFG85qmWVfuZriaWOiJF6Iw/kb52zxKUEijLb+HthqoqQwVeXT+hY4Itl70u
- qgL/6b4HkV3cZ5tUMjSbiajp6pgex8BPIHHkVQwKEczh2pDJjVlk2AJb7ZTo/HPupac/qqUntyv
- 6xY/gYOJjsnL2Rdi0v8YFrS0SprPHNkV+/oxao2ku9fnXIdwCn7XuHMawcHeO1Ay2KXkc2klooj
- WeB/ufgMRdi6PoE49i3FYp2Xlm89VqNA3Tg98DJBtMYB6bFHPRnpj6HfTto4s3LrB/c/ugJdY+9
- hLwCc90HdjhYD
-X-Received: by 2002:a05:651c:43c7:20b0:3ac:d178:4f97 with SMTP id
- 38308e7fff4ca-3acd178522dmr7641fa.14.1793567133579; 
- Sun, 01 Nov 2026 13:05:33 -0800 (PST)
+ bh=rW9jApSx6mY1TtyDqTks3Yd2vuKPcLVrzWPu5ggBFfU=;
+ b=rcOaLxyV9+faLx2PPuW93LnCMWF79Pk1aDLPlMGRwWw463tgxUmvn5QKL9HWbx4VLM
+ YJIvYqJRBHrHaKsqCvODRRdIBYGoq1G1YjG/eYBcJsQff0Qan76scPspV2uHfailI4P1
+ FkVJN1ysaJ4CzaOVH1ZY1LfIMJO06Zj06dxbm8U/cnx+tJtdElaJeRYJlIbIO9XGK3+o
+ 5KO91bivmPnHJZXhzjhkk3QscsPudvVvlppAKWAauvR36cO8TnXOjOFsdVBgfKgyVw26
+ F2VMb9yJ1Hein9tZbRStJ7YHUuUpyE1dYYQuCtH7cSqtYiz7Stmt9f/CThF7WnUnHn7X
+ oyUA==
+X-Gm-Message-State: APuU4Z9rL0eOFuKCEpIz2RzyVOTXzuxp97RvdqEJOtfnvt3Emac1jvRf
+ ce3Ec3LSbM6xgxVGRKi1GC15zV1X2rmZ+eXCRQ1uPQvyoyLpgBCgzstyrsd2tWyv
+X-Gm-Gg: AYBFou0R+rdyhVILys16IT9cx+RwSZGov3k/YwEIW10jYri5yzUnASJ4aycbzrz7I+A
+ l3FuFUhclx64BnWIDZztePldU6w0SkdsmSYa8JyoLf7vHisJd7FXs0C77GBv9esTlk5yXQveA8O
+ pxMqoXC4FUuNXZtKelihzY03QYVjds4yIwpUtG1nTxBgaeMNY9G4fyYiZfETGk88rV7xTy/qYGo
+ Xb0KTGOlQLwFHj/ToqksIjaiY3JgrZZkrRBPlZRDxrnYTu1F9x9KJX+IT846c0ChlkaRoWp4Y0P
+ Fj8XbzHHn5XA6dVc9JlRiksBBc5PaIKSkKcER03nIpFjIFrWOLNun8qy57GZWBJ3yUlW6dhWCFJ
+ /Gff+l5kwoFCzCL21guqT1Z2vEOejcvRwxHQjpkLGIQu040mQz092icn8k5qv33Mk24Cm/O9iaX
+ hJ016dQywhPFkr58yQJLUPCCpihfaCLXp8L8J/mNFi0yGAF+cxkohtmF00wU58rYzcCYr/WvMdN
+ T75iDnxm4bNX5GzWBYXhmeN8AVR1ozzNKWxQfvYmVe1Mz/Ll11cs3U2LCONb6FwN1fqysgl1PoX
+ 00LysZU3hAPzz53p/F4HNw1Se+8+2bQY8cEsPkrvE36Fn7Xj3+un+X9FNgoIj6imje4=
+X-Received: by 2002:a05:651c:1474:b0:3aa:e5df:f852 with SMTP id
+ 38308e7fff4ca-3acb7abba3fmr16001521fa.14.1793567138870; 
+ Sun, 01 Nov 2026 13:05:38 -0800 (PST)
 Received: from ik5070.localdomain (82-131-69-225.ip.elisa.ee. [82.131.69.225])
  by smtp.googlemail.com with ESMTPSA id
- 38308e7fff4ca-3acbbee0094sm19882441fa.20.2026.11.01.13.05.29
+ 38308e7fff4ca-3acbbee0094sm19882441fa.20.2026.11.01.13.05.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Nov 2026 13:05:31 -0800 (PST)
+ Sun, 01 Nov 2026 13:05:36 -0800 (PST)
 From: Indrek Kruusa <indrek.kruusa@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Andre Przywara <andre.przywara@arm.com>, Tim Ouyang <tim609@andestech.com>,
@@ -162,9 +161,10 @@ Cc: Andre Przywara <andre.przywara@arm.com>, Tim Ouyang <tim609@andestech.com>,
  Stefan Roese <stefan.roese@mailbox.org>,
  Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>,
  Indrek Kruusa <indrek.kruusa@gmail.com>
-Subject: [PATCH 03/10] board: sun20i: add common support for the D1/D1s boards
-Date: Sun,  1 Nov 2026 23:04:42 +0200
-Message-ID: <20261101210449.1235102-4-indrek.kruusa@gmail.com>
+Subject: [PATCH 04/10] sunxi: dram: fix integer-pointer conversions in the D1
+ DRAM driver
+Date: Sun,  1 Nov 2026 23:04:43 +0200
+Message-ID: <20261101210449.1235102-5-indrek.kruusa@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261101210449.1235102-1-indrek.kruusa@gmail.com>
 References: <20261101210449.1235102-1-indrek.kruusa@gmail.com>
@@ -180,876 +180,915 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,UNWANTED_LANGUAGE_BODY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add the board code used by all D1/D1s(F133) boards:
+Fix readl()/writel() address types for GCC 15+
 
-- TARGET_SUN20I, board init and CPU probing
-- sunxi eGON/TOC0 SPL header: boot source, FEL mode, SPL size
-- SPL DRAM probing and the /memory fixup
-- FIT DT name matching
-- environment placement for MMC/SPI boot media
-- the u-boot-sunxi-with-spl.bin image
-- a MAINTAINERS section for the new board and CPU files
+Use typed base address macros and cast remaining register addresses
+to void __iomem * to satisfy GCC 15's stricter type checking.
 
-CONFIG_ARCH_SUNXI is never set on these RISC-V parts, so extend the SPL
-image rule in scripts/Makefile.xpl to match TARGET_SUN20I as well.
-
-The board code, the devicetree overlay and include/configs/sun20i.h come
-from Samuel Holland's d1-wip tree [1]. The board code in turn derives from
-the ARM sunxi board code, so its copyright notices are kept.
-
-[1] https://github.com/smaeul/u-boot/tree/d1-wip
+No functional change.
 
 Signed-off-by: Indrek Kruusa <indrek.kruusa@gmail.com>
 ---
- MAINTAINERS                       |   8 +
- arch/riscv/Kconfig                |  13 ++
- arch/riscv/dts/sun20i-u-boot.dtsi |  86 +++++++++
- board/sun20i/Kconfig              | 173 +++++++++++++++++
- board/sun20i/Makefile             |   4 +
- board/sun20i/board.c              | 309 ++++++++++++++++++++++++++++++
- board/sun20i/spl.c                | 142 ++++++++++++++
- include/configs/sun20i.h          |  11 ++
- scripts/Makefile.xpl              |   2 +-
- 9 files changed, 747 insertions(+), 1 deletion(-)
- create mode 100644 arch/riscv/dts/sun20i-u-boot.dtsi
- create mode 100644 board/sun20i/Kconfig
- create mode 100644 board/sun20i/Makefile
- create mode 100644 board/sun20i/board.c
- create mode 100644 board/sun20i/spl.c
- create mode 100644 include/configs/sun20i.h
+ drivers/ram/sunxi/dram_sun20i_d1.c | 383 ++++++++++++++++-------------
+ 1 file changed, 209 insertions(+), 174 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 95b1f3b5ab3..587d4a30377 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1543,6 +1543,14 @@ F:	drivers/net/dwmac_thead.c
- F:	drivers/pinctrl/pinctrl-th1520.c
- F:	drivers/ram/thead/th1520_ddr.c
+diff --git a/drivers/ram/sunxi/dram_sun20i_d1.c b/drivers/ram/sunxi/dram_sun20i_d1.c
+index 79cf0a51e47..68697fb2fa9 100644
+--- a/drivers/ram/sunxi/dram_sun20i_d1.c
++++ b/drivers/ram/sunxi/dram_sun20i_d1.c
+@@ -12,6 +12,7 @@
+  * [1] https://github.com/szemzoa/awboot.git
+  */
  
-+RISC-V ALLWINNER SUN20I (D1)
-+M:	Indrek Kruusa <indrek.kruusa@gmail.com>
-+S:	Maintained
-+F:	arch/riscv/cpu/sun20i/
-+F:	arch/riscv/include/asm/arch-sun20i/
-+F:	board/sun20i/
-+F:	include/configs/sun20i.h
-+
- RNG
- M:	Sughosh Ganu <sughosh.ganu@arm.com>
- R:	Heinrich Schuchardt <xypron.glpk@gmx.de>
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index 14c8ca817fb..02304d9f66c 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -60,6 +60,18 @@ config TARGET_STARFIVE_VISIONFIVE2
- 	bool "Support StarFive VisionFive2 Board"
- 	select BOARD_LATE_INIT
++#include <asm/arch/cpu.h>
+ #include <asm/io.h>
+ #include <config.h>
+ #ifdef CONFIG_RAM
+@@ -22,19 +23,25 @@
  
-+config TARGET_SUN20I
-+	bool "Support Allwinner D1/D1s(F133) boards"
-+	select GENERIC_RISCV
-+	select SPECIFY_CONSOLE_INDEX
-+	select SUN20I
-+	select PINCTRL_SUN20I_D1
-+	select CLK_SUN20I_D1
-+	select SUNXI_NEW_PINCTRL
-+	help
-+	  Selecting this option also enables the NCAT2 drivers, which are
-+	  shared across several Allwinner RISC-V and ARM SoCs.
-+
- config TARGET_TH1520_LPI4A
- 	bool "Support Sipeed's TH1520 Lichee PI 4A Board"
- 	select SYS_CACHE_SHIFT_6
-@@ -129,6 +141,7 @@ source "board/sophgo/licheerv_nano/Kconfig"
- source "board/spacemit/k1/Kconfig"
- source "board/spacemit/k3/Kconfig"
- source "board/starfive/visionfive2/Kconfig"
-+source "board/sun20i/Kconfig"
- source "board/thead/th1520_lpi4a/Kconfig"
- source "board/xilinx/mbv/Kconfig"
+ #include "dram_sun20i_d1.h"
  
-diff --git a/arch/riscv/dts/sun20i-u-boot.dtsi b/arch/riscv/dts/sun20i-u-boot.dtsi
-new file mode 100644
-index 00000000000..8f9959e6467
---- /dev/null
-+++ b/arch/riscv/dts/sun20i-u-boot.dtsi
-@@ -0,0 +1,86 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "binman.dtsi"
-+
-+/ {
-+	cpus {
-+		bootph-all;
-+	};
-+
-+	soc {
-+		bootph-all;
-+	};
-+};
-+
-+&binman {
-+	/*
-+	 * "u-boot-sunxi-with-spl" is the shared Allwinner sunxi boot image
-+	 * (eGON SPL + U-Boot FIT). It is common to the ARM sunxi and the
-+	 * RISC-V sun20i SoCs, so it keeps the "sunxi" name even on RISC-V.
-+	 */
-+	u-boot-sunxi-with-spl {
-+		filename = "u-boot-sunxi-with-spl.bin";
-+		pad-byte = <0xff>;
-+
-+		blob@0 {
-+			/*
-+			 * This value matches SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
-+			 * and SYS_SPI_U_BOOT_OFFS if those are defined.
-+			 */
-+			min-size = <0x8000>;
-+			filename = "spl/sunxi-spl.bin";
-+		};
-+
-+		blob@1 {
-+			filename = "u-boot.itb";
-+		};
-+	};
-+};
-+
-+&ccu {
-+	bootph-all;
-+};
-+
-+&cpu0 {
-+	bootph-all;
-+};
-+
-+&dcxo {
-+	bootph-all;
-+};
-+
-+&mbus {
-+	bootph-all;
-+};
-+
-+&mmc0 {
-+	bootph-all;
-+};
-+
-+&mmc0_pins {
-+	bootph-all;
-+};
-+
-+&pio {
-+	bootph-all;
-+
-+	uart0-pb8-pins {
-+		bootph-all;
-+	};
-+
-+	uart3-pb-pins {
-+		bootph-all;
-+	};
-+};
-+
-+&rtc {
-+	bootph-all;
-+};
-+
-+&uart0 {
-+	bootph-all;
-+};
-+
-+&uart3 {
-+	bootph-all;
-+};
-diff --git a/board/sun20i/Kconfig b/board/sun20i/Kconfig
-new file mode 100644
-index 00000000000..55eb50abf34
---- /dev/null
-+++ b/board/sun20i/Kconfig
-@@ -0,0 +1,173 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+
-+if TARGET_SUN20I
-+
-+config SYS_BOARD
-+	default "sun20i"
-+
-+config SYS_CPU
-+	default "sun20i"
-+
-+config SYS_SOC
-+	default "sun20i"
-+
-+config SYS_CONFIG_NAME
-+	default "sun20i"
-+
-+config IDENT_STRING
-+	default " Allwinner D1"
-+
-+config SYS_CLK_FREQ
-+	default 1008000000
-+
-+config SYS_LOAD_ADDR
-+	default 0x42000000
-+
-+config TEXT_BASE
-+	default 0x42e00000
-+
-+config HAS_CUSTOM_SYS_INIT_SP_ADDR
-+	default y
-+
-+config CUSTOM_SYS_INIT_SP_ADDR
-+	default 0x43e00000
-+
-+config SUNXI_SRAM_ADDRESS
-+	hex
-+	default 0x20000
-+
-+config SUNXI_MINIMUM_DRAM_MB
-+	int
-+	default 64
-+	help
-+	  Minimum DRAM size expected on the board.
-+
-+config DRAM_CLK
-+	int "DRAM clock speed"
-+	default 792
-+
-+config DRAM_ZQ
-+	int "DRAM ZQ value"
-+	default 8092667
-+
-+config PRE_CON_BUF_ADDR
-+	default 0x43000000
-+
-+config MISC_INIT_R
-+	default y
-+
-+config SPL_MAX_SIZE
-+	default 0x27fa0
-+
-+config SPL_PAD_TO
-+	default 0x0
-+
-+config SPL_BSS_START_ADDR
-+	default 0x43f80000
-+
-+config SPL_TEXT_BASE
-+	default 0x20060
-+
-+config SPL_SHARES_INIT_SP_ADDR
-+	default n
-+
-+config SPL_HAVE_INIT_STACK
-+	default y
-+
-+config SPL_STACK
-+	default 0x48000
-+
-+config SPL_STACK_R_ADDR
-+	default 0x43e00000
-+
-+config SPL_OPENSBI_LOAD_ADDR
-+	default 0x40000000
-+
-+config SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR
-+	default 0x40
-+
-+config SPL_SYS_MMCSD_RAW_MODE
-+	default y
-+
-+config SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET
-+	default 0x10
-+
-+config SYS_SPI_U_BOOT_OFFS
-+	default 0x8000
-+
-+config MMC_SUNXI_SLOT_EXTRA
-+	int "mmc extra slot number"
-+	default -1
-+	help
-+	  D1 builds always enable mmc0. Some boards also have a second SD card
-+	  slot or eMMC on mmc1 - mmc3. Setting this to 1, 2, or 3 enables
-+	  support for this.
-+
-+config SPL_IMAGE_TYPE
-+	string
-+	default "sunxi_egon"
-+
-+config BOARD_SPECIFIC_OPTIONS
-+	def_bool y
-+	select BINMAN
-+	select CLK
-+	select CMD_GPIO if GPIO
-+	select CMD_MMC if MMC
-+	select CMD_USB if DISTRO_DEFAULTS && USB_HOST
-+	select DM
-+	select DM_GPIO if GPIO
-+	select DM_I2C if I2C
-+	select DM_MMC if MMC
-+	select DM_SERIAL if SERIAL
-+	select DM_SPI if SPI
-+	select DM_SPI_FLASH if SPI && MTD
-+	select ENV_RELOC_GD_ENV_ADDR
-+	select OF_BOARD_SETUP
-+	select OF_UPSTREAM
-+	select PINCTRL
-+	select RAM if SPL_DM
-+	select SPL_CLK if SPL_DM
-+	select SPL_DM if SPL
-+	select SPL_DM_SPI if SPL_DM && SPL_SPI
-+	select SPL_DM_SPI_FLASH if SPL_DM && SPL_SPI
-+	select SPL_OF_CONTROL if SPL_DM
-+	select SPL_PINCONF if SPL_DM
-+	select SPL_PINCTRL if SPL_DM
-+	select SPL_RAM if SPL_DM
-+	select SPL_SEPARATE_BSS if SPL
-+	select SUNXI_GPIO if GPIO
-+	select SUPPORT_SPL
-+	select SYS_NS16550 if SERIAL
-+	select USB if DISTRO_DEFAULTS
-+	select USB_KEYBOARD if DISTRO_DEFAULTS && USB_HOST
-+	select USB_STORAGE if DISTRO_DEFAULTS && USB_HOST
-+	select USE_PREBOOT
-+	imply CMD_DM
-+	imply CMD_GPT
-+	imply DISTRO_DEFAULTS
-+	imply DM_REGULATOR
-+	imply DM_REGULATOR_FIXED
-+	imply FAT_WRITE
-+	imply FIT
-+	imply MMC
-+	imply OF_LIBFDT_OVERLAY
-+	imply PRE_CONSOLE_BUFFER
-+	imply SPL
-+	imply SPL_GPIO
-+	imply SPL_LIBCOMMON_SUPPORT
-+	imply SPL_LIBGENERIC_SUPPORT
-+	imply SPL_LOAD_FIT
-+	imply SPL_MMC if MMC
-+	imply SPL_POWER
-+	imply SPL_SERIAL
-+	imply SYSRESET
-+	imply SYSRESET_SBI
-+	imply SYSRESET_WATCHDOG
-+	imply SYSRESET_WATCHDOG_AUTO
-+	imply USB_EHCI_GENERIC
-+	imply USB_EHCI_HCD
-+	imply USB_OHCI_GENERIC
-+	imply USB_OHCI_HCD
-+	imply WDT
-+
-+endif
-diff --git a/board/sun20i/Makefile b/board/sun20i/Makefile
-new file mode 100644
-index 00000000000..af4006368b2
---- /dev/null
-+++ b/board/sun20i/Makefile
-@@ -0,0 +1,4 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+
-+obj-y	+= board.o
-+obj-$(CONFIG_SPL_BUILD) += spl.o
-diff --git a/board/sun20i/board.c b/board/sun20i/board.c
-new file mode 100644
-index 00000000000..e32cc817838
---- /dev/null
-+++ b/board/sun20i/board.c
-@@ -0,0 +1,309 @@
-+// SPDX-License-Identifier: GPL-2.0+
+-#ifndef SUNXI_SID_BASE
+-#define SUNXI_SID_BASE	0x3006200
+-#endif
 +/*
-+ * (C) Copyright 2012-2013 Henrik Nordstrom <henrik@henriknordstrom.net>
-+ * (C) Copyright 2013 Luke Kenneth Casson Leighton <lkcl@lkcl.net>
-+ *
-+ * (C) Copyright 2007-2011
-+ * Allwinner Technology Co., Ltd. <www.allwinnertech.com>
-+ * Tom Cubie <tangliang@allwinnertech.com>
-+ *
-+ * (C) Copyright 2026 Indrek Kruusa <indrek.kruusa@gmail.com>
-+ *
-+ * Board initialization, environment and boot source detection for
-+ * Allwinner D1(s) RISC-V SoC.
++ * Typed views of the register block bases: GCC 15 and later reject the plain
++ * integers this file used to pass to readl() and writel(). The CCU and SID
++ * bases come from the arch header, which has them for the ARM build of this
++ * driver as well; the DRAM controller and PHY blocks are private to it.
 + */
-+
-+#include <asm/csr.h>
-+#include <asm/global_data.h>
-+#include <asm/io.h>
-+#include <asm/arch/thead_csr.h>
-+#include <cpu.h>
-+#include <dm.h>
-+#include <env.h>
-+#include <env_internal.h>
-+#include <fdt_support.h>
-+#include <init.h>
-+#include <spl.h>
-+#include <sunxi_image.h>
-+
-+int board_init(void)
-+{
-+	/* https://lore.kernel.org/u-boot/31587574-4cd1-02da-9761-0134ac82b94b@sholland.org/ */
-+	return cpu_probe_all();
-+}
-+
-+#define SPL_ADDR		CONFIG_SUNXI_SRAM_ADDRESS
-+
-+/* The low 8-bits of the 'boot_media' field in the SPL header */
-+#define SUNXI_BOOTED_FROM_MMC0	0
-+#define SUNXI_BOOTED_FROM_MMC2	2
-+#define SUNXI_BOOTED_FROM_SPI	3
-+#define SUNXI_BOOTED_FROM_MMC0_HIGH	0x10
-+#define SUNXI_BOOTED_FROM_MMC2_HIGH	0x12
-+
-+#define SUNXI_INVALID_BOOT_SOURCE	-1
-+
-+static int sunxi_egon_valid(struct boot_file_head *egon_head)
-+{
-+	return !memcmp(egon_head->magic, BOOT0_MAGIC, 8); /* eGON.BT0 */
-+}
-+
-+static int sunxi_toc0_valid(struct toc0_main_info *toc0_info)
-+{
-+	return !memcmp(toc0_info->name, TOC0_MAIN_INFO_NAME, 8); /* TOC0.GLH */
-+}
-+
-+static int sunxi_get_boot_source(void)
-+{
-+	struct boot_file_head *egon_head = (void *)SPL_ADDR;
-+	struct toc0_main_info *toc0_info = (void *)SPL_ADDR;
-+
-+	if (sunxi_egon_valid(egon_head))
-+		return readb(&egon_head->boot_media);
-+	if (sunxi_toc0_valid(toc0_info))
-+		return readb(&toc0_info->platform[0]);
-+
-+	/* Not a valid image, so we must have been booted via FEL. */
-+	return SUNXI_INVALID_BOOT_SOURCE;
-+}
-+
-+/* The sunxi internal BROM will try to load an external bootloader
-+ * from mmc0, mmc2, or SPI flash.
-+ */
-+uint32_t sunxi_get_boot_device(void)
-+{
-+	int boot_source = sunxi_get_boot_source();
-+
-+	/*
-+	 * When booting from the SD card or NAND memory, the "eGON.BT0"
-+	 * signature is expected to be found in memory at the address 0x0004
-+	 * (see the "mksunxiboot" tool, which generates this header).
-+	 *
-+	 * When booting in the FEL mode over USB, this signature is patched in
-+	 * memory and replaced with something else by the 'fel' tool. This other
-+	 * signature is selected in such a way, that it can't be present in a
-+	 * valid bootable SD card image (because the BROM would refuse to
-+	 * execute the SPL in this case).
-+	 *
-+	 * This checks for the signature and if it is not found returns to
-+	 * the FEL code in the BROM to wait and receive the main u-boot
-+	 * binary over USB. If it is found, it determines where SPL was
-+	 * read from.
-+	 */
-+	switch (boot_source) {
-+	case SUNXI_INVALID_BOOT_SOURCE:
-+		return BOOT_DEVICE_BOARD;
-+	case SUNXI_BOOTED_FROM_MMC0:
-+	case SUNXI_BOOTED_FROM_MMC0_HIGH:
-+		return BOOT_DEVICE_MMC1;
-+	case SUNXI_BOOTED_FROM_MMC2:
-+	case SUNXI_BOOTED_FROM_MMC2_HIGH:
-+		return BOOT_DEVICE_MMC2;
-+	case SUNXI_BOOTED_FROM_SPI:
-+		return BOOT_DEVICE_SPI;
-+	}
-+
-+	panic("Unknown boot source %d\n", boot_source);
-+	return -1;		/* Never reached */
-+}
-+
-+uint32_t sunxi_get_spl_size(void)
-+{
-+	struct boot_file_head *egon_head = (void *)SPL_ADDR;
-+	struct toc0_main_info *toc0_info = (void *)SPL_ADDR;
-+
-+	if (sunxi_egon_valid(egon_head))
-+		return readl(&egon_head->length);
-+	if (sunxi_toc0_valid(toc0_info))
-+		return readl(&toc0_info->length);
-+
-+	/* Not a valid image, so use the default U-Boot offset. */
-+	return 0;
-+}
-+
-+/*
-+ * The eGON SPL image can be located at 8KB or at 128KB into an SD card or
-+ * an eMMC device. The boot source has bit 4 set in the latter case.
-+ * By adding 120KB to the normal offset when booting from a "high" location
-+ * we can support both cases.
-+ * Also U-Boot proper is located at least 32KB after the SPL, but will
-+ * immediately follow the SPL if that is bigger than that.
-+ */
-+unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
-+						 unsigned long raw_sect)
-+{
-+	unsigned long spl_size = sunxi_get_spl_size();
-+	unsigned long sector;
-+
-+	sector = max(raw_sect, spl_size / 512);
-+
-+	switch (sunxi_get_boot_source()) {
-+	case SUNXI_BOOTED_FROM_MMC0_HIGH:
-+	case SUNXI_BOOTED_FROM_MMC2_HIGH:
-+		sector += (128 - 8) * 2;
-+		break;
-+	}
-+
-+	debug("SPL size = %lu, sector = %lu\n", spl_size, sector);
-+
-+	return sector;
-+}
-+
-+u32 spl_boot_device(void)
-+{
-+	return sunxi_get_boot_device();
-+}
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+/*
-+ * Try to use the environment from the boot source first.
-+ * For MMC, this means a FAT partition on the boot device (SD or eMMC).
-+ * If the raw MMC environment is also enabled, this is tried next.
-+ * SPI flash falls back to FAT (on SD card).
-+ */
-+enum env_location env_get_location(enum env_operation op, int prio)
-+{
-+	if (prio > 1)
-+		return ENVL_UNKNOWN;
-+
-+	/* NOWHERE is exclusive, no other option can be defined. */
-+	if (IS_ENABLED(CONFIG_ENV_IS_NOWHERE))
-+		return ENVL_NOWHERE;
-+
-+	switch (sunxi_get_boot_device()) {
-+	case BOOT_DEVICE_MMC1:
-+	case BOOT_DEVICE_MMC2:
-+		if (prio == 0 && IS_ENABLED(CONFIG_ENV_IS_IN_FAT))
-+			return ENVL_FAT;
-+		if (IS_ENABLED(CONFIG_ENV_IS_IN_MMC))
-+			return ENVL_MMC;
-+		break;
-+	case BOOT_DEVICE_SPI:
-+		if (prio == 0 && IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH))
-+			return ENVL_SPI_FLASH;
-+		if (IS_ENABLED(CONFIG_ENV_IS_IN_FAT))
-+			return ENVL_FAT;
-+		break;
-+	case BOOT_DEVICE_BOARD:
-+		break;
-+	default:
-+		break;
-+	}
-+
-+	/*
-+	 * If we come here for the first time, we *must* return a valid
-+	 * environment location other than ENVL_UNKNOWN, or the setup sequence
-+	 * in board_f() will silently hang. This is arguably a bug in
-+	 * env_init(), but for now pick one environment for which we know for
-+	 * sure to have a driver for. For all defconfigs this is either FAT
-+	 * or UBI, or NOWHERE, which is already handled above.
-+	 */
-+	if (prio == 0) {
-+		if (IS_ENABLED(CONFIG_ENV_IS_IN_FAT))
-+			return ENVL_FAT;
-+		if (IS_ENABLED(CONFIG_ENV_IS_IN_UBI))
-+			return ENVL_UBI;
-+	}
-+
-+	return ENVL_UNKNOWN;
-+}
-+
-+static struct boot_file_head *get_spl_header(u8 req_version)
-+{
-+	struct boot_file_head *spl = (void *)(ulong)SPL_ADDR;
-+	u8 spl_header_version = spl->spl_signature[3];
-+
-+	/* Is there really the SPL header (still) there? */
-+	if (memcmp(spl->spl_signature, SPL_SIGNATURE, 3) != 0)
-+		return NULL;
-+
-+	if (spl_header_version < req_version) {
-+		printf("sunxi SPL version mismatch: expected %u, got %u\n",
-+		       req_version, spl_header_version);
-+		return NULL;
-+	}
-+
-+	return spl;
-+}
-+
-+const char *get_spl_dt_name(void)
-+{
-+	struct boot_file_head *spl = get_spl_header(SPL_DT_HEADER_VERSION);
-+
-+	/* Check if there is a DT name stored in the SPL header. */
-+	if (spl && spl->dt_name_offset)
-+		return (char *)spl + spl->dt_name_offset;
-+
-+	return NULL;
-+}
-+
-+/*
-+ * Check the SPL header for the "sunxi" variant. If found: parse values
-+ * that might have been passed by the loader ("fel" utility), and update
-+ * the environment accordingly.
-+ */
-+static void parse_spl_header(const uint32_t spl_addr)
-+{
-+	struct boot_file_head *spl = get_spl_header(SPL_ENV_HEADER_VERSION);
-+
-+	if (!spl)
-+		return;
-+
-+	if (!spl->fel_script_address)
-+		return;
-+
-+	if (spl->fel_uEnv_length != 0) {
-+		/*
-+		 * data is expected in uEnv.txt compatible format, so "env
-+		 * import -t" the string(s) at fel_script_address right away.
-+		 */
-+		himport_r(&env_htab, (char *)(uintptr_t)spl->fel_script_address,
-+			  spl->fel_uEnv_length, '\n', H_NOCLEAR, 0, 0, NULL);
-+		return;
-+	}
-+	/* otherwise assume .scr format (mkimage-type script) */
-+	env_set_hex("fel_scriptaddr", spl->fel_script_address);
-+}
-+
-+int misc_init_r(void)
-+{
-+	const char *spl_dt_name;
-+	uint boot;
-+
-+	env_set("fel_booted", NULL);
-+	env_set("fel_scriptaddr", NULL);
-+	env_set("mmc_bootdev", NULL);
-+
-+	boot = sunxi_get_boot_device();
-+	/* determine if we are running in FEL mode */
-+	if (boot == BOOT_DEVICE_BOARD) {
-+		env_set("fel_booted", "1");
-+		parse_spl_header(SPL_ADDR);
-+	} else if (boot == BOOT_DEVICE_MMC1) {
-+		env_set("mmc_bootdev", "0");
-+	}
-+
-+	/* Set fdtfile to match the FIT configuration chosen in SPL. */
-+	spl_dt_name = get_spl_dt_name();
-+	if (spl_dt_name) {
-+		char str[64];
-+
-+		snprintf(str, sizeof(str), "%s.dtb", spl_dt_name);
-+		env_set("fdtfile", str);
-+	}
-+
-+	return 0;
-+}
-+
-+int ft_board_setup(void *blob, struct bd_info *bd)
-+{
-+	/*
-+	 * The OS tree may be a different blob from the control tree the
-+	 * SPL fixed up, and the DRAM size is only known at runtime.
-+	 */
-+	u64 start = gd->ram_base;
-+	u64 size = gd->ram_size;
-+
-+	return fdt_fixup_memory_banks(blob, &start, &size, 1);
-+}
-diff --git a/board/sun20i/spl.c b/board/sun20i/spl.c
-new file mode 100644
-index 00000000000..7ca85f2c3f8
---- /dev/null
-+++ b/board/sun20i/spl.c
-@@ -0,0 +1,142 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2007-2011
-+ * Allwinner Technology Co., Ltd. <www.allwinnertech.com>
-+ * Tom Cubie <tangliang@allwinnertech.com>
-+ * (C) Copyright 2012-2013 Henrik Nordstrom <henrik@henriknordstrom.net>
-+ * (C) Copyright 2013 Luke Kenneth Casson Leighton <lkcl@lkcl.net>
-+ *
-+ * (C) Copyright 2026 Indrek Kruusa <indrek.kruusa@gmail.com>
-+ *
-+ * SPL board initialization for Allwinner D1(s) RISC-V SoC.
-+ */
-+
-+#include <fdt_support.h>
-+#include <image.h>
-+#include <ram.h>
-+#include <spl.h>
-+#include <sunxi_image.h>
-+#include <asm/cache.h>
-+#include <asm/csr.h>
-+#include <asm/arch/thead_csr.h>
-+#include <cpu.h>
-+#include <cpu_func.h>
-+#include <dm.h>
-+#include <init.h>
-+
-+extern const char *get_spl_dt_name(void);
-+
-+int spl_board_init_f(void)
-+{
-+	int ret;
-+	struct udevice *dev;
-+
-+	ret = cpu_probe_all();
-+	if (ret)
-+		debug("CPU init failed: %d\n", ret);
-+
-+	/* DDR init */
-+	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
-+	if (ret) {
-+		debug("DRAM init failed: %d\n", ret);
-+		return ret;
-+	}
-+
-+	/*
-+	 * The C906 leaves reset with both caches disabled (MHCR.IE and
-+	 * MHCR.DE are 0) and nothing else in the boot chain turns them on.
-+	 * Enable them here, i.e. only once DRAM is usable: with the D-cache
-+	 * on, the DRAM controller's training tests observe their own cached
-+	 * writes and fail.
-+	 *
-+	 * The SYS_{I,D}CACHE_OFF options still win: the T-Head cache
-+	 * maintenance library (SYS_CACHE_THEAD_CMO) is only built when the
-+	 * D-cache may be on, so enabling the D-cache here regardless would
-+	 * leave such a build without working range flushes.
-+	 */
-+	if (!CONFIG_IS_ENABLED(SYS_ICACHE_OFF))
-+		icache_enable();
-+	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
-+		dcache_enable();
-+
-+	/*
-+	 * MXSTATUS.MAEE makes the MMU take the memory type from PTE[63:59]
-+	 * instead of ignoring those bits.  With it clear every mapping is
-+	 * cached, so the OS cannot mark its DMA memory non-cacheable, and this
-+	 * SoC has no Zicbom to fall back on: drivers then read stale
-+	 * descriptors (OHCI reports "frame counter not updating").  The C906
-+	 * does not leave the bit set, so set it once DRAM is up, as the vendor
-+	 * SPL does.
-+	 */
-+	csr_set(CSR_MXSTATUS, MXSTATUS_MAEE);
-+
-+	return 0;
-+}
-+
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
-+{
-+	struct ram_info info;
-+	struct udevice *dev;
-+	int ret;
-+
-+	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
-+	if (ret)
-+		panic("No RAM device");
-+
-+	ret = ram_get_info(dev, &info);
-+	if (ret)
-+		panic("No RAM info");
-+
-+	ret = fdt_fixup_memory(spl_image->fdt_addr, info.base, info.size);
-+	if (ret)
-+		panic("Failed to update DTB");
-+
-+	/*
-+	 * The D-cache is enabled by now, so the image we just loaded and the
-+	 * DTB we just patched may still be dirty in it. The next stage is
-+	 * fetched through the I-cache, which does not see dirty D-cache
-+	 * lines, so push everything out before handing over.
-+	 */
-+	flush_dcache_all();
-+}
-+
-+#ifdef CONFIG_SPL_LOAD_FIT
-+static void set_spl_dt_name(const char *name)
-+{
-+	struct boot_file_head *spl = (void *)(ulong)CONFIG_SUNXI_SRAM_ADDRESS;
-+
-+	/* Promote the header version for U-Boot proper, if needed. */
-+	if (spl->spl_signature[3] < SPL_DT_HEADER_VERSION)
-+		spl->spl_signature[3] = SPL_DT_HEADER_VERSION;
-+
-+	strcpy((char *)&spl->string_pool, name);
-+	spl->dt_name_offset = offsetof(struct boot_file_head, string_pool);
-+}
-+
-+int board_fit_config_name_match(const char *name)
-+{
-+	const char *best_dt_name = get_spl_dt_name();
-+	int ret;
-+
-+#ifdef CONFIG_DEFAULT_DEVICE_TREE
-+	if (!best_dt_name)
-+		best_dt_name = CONFIG_DEFAULT_DEVICE_TREE;
-+#endif
-+
-+	if (!best_dt_name) {
-+		/* No DT name was provided, so accept the first config. */
-+		return 0;
-+	}
-+
-+	ret = strcmp(name, best_dt_name);
-+
-+	/*
-+	 * If one of the FIT configurations matches the most accurate DT name,
-+	 * update the SPL header to provide that DT name to U-Boot proper.
-+	 */
-+	if (ret == 0)
-+		set_spl_dt_name(best_dt_name);
-+
-+	return ret;
-+}
-+#endif
-diff --git a/include/configs/sun20i.h b/include/configs/sun20i.h
-new file mode 100644
-index 00000000000..e8ef1b6c4ac
---- /dev/null
-+++ b/include/configs/sun20i.h
-@@ -0,0 +1,11 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Placeholder wrapper to allow addressing Allwinner D1 (and later) sun20i
-+ * CPU based devices separately. Please do not add anything in here.
-+ */
-+#ifndef __CONFIG_H
-+#define __CONFIG_H
-+
-+#include <configs/sunxi-common.h>
-+
-+#endif /* __CONFIG_H */
-diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
-index 77746ec07cd..33b7aac61b4 100644
---- a/scripts/Makefile.xpl
-+++ b/scripts/Makefile.xpl
-@@ -275,7 +275,7 @@ endif
++#define SUNXI_CCM_BASE_PTR		((void __iomem *)SUNXI_CCM_BASE)
++#define SUNXI_SID_BASE_PTR		((void __iomem *)SUNXI_SID_BASE)
++
++#define SUNXI_DRAM_COM_BASE_PTR		((u8 __iomem *)0x3102000)
++#define SUNXI_DRAM_COM_BASE2_PTR	((u8 __iomem *)0x3202000)
++#define SUNXI_DRAM_PHY_BASE_PTR		((u8 __iomem *)0x3103000)
  
- INPUTS-$(CONFIG_ARCH_SOCFPGA_SOC64) += $(obj)/u-boot-spl-dtb.hex
+-#ifndef SUNXI_CCM_BASE
+-#define SUNXI_CCM_BASE	0x2001000
+-#endif
  
--ifdef CONFIG_ARCH_SUNXI
-+ifneq ($(CONFIG_ARCH_SUNXI)$(CONFIG_TARGET_SUN20I),)
- INPUTS-y	+= $(obj)/sunxi-spl.bin
+ static void sid_read_ldoB_cal(const dram_para_t *para)
+ {
+ 	uint32_t reg;
  
- ifdef CONFIG_NAND_SUNXI
+-	reg = (readl(SUNXI_SID_BASE + 0x1c) & 0xff00) >> 8;
++	reg = (readl(SUNXI_SID_BASE_PTR + 0x1c) & 0xff00) >> 8;
+ 
+ 	if (reg == 0)
+ 		return;
+@@ -51,12 +58,12 @@ static void sid_read_ldoB_cal(const dram_para_t *para)
+ 		break;
+ 	}
+ 
+-	clrsetbits_le32(0x3000150, 0xff00, reg << 8);
++	clrsetbits_le32((void __iomem *)0x3000150, 0xff00, reg << 8);
+ }
+ 
+ static uint32_t sid_read_soc_chipid(void)
+ {
+-	return readl(SUNXI_SID_BASE + 0x00) & 0xffff;
++	return readl(SUNXI_SID_BASE_PTR + 0x00) & 0xffff;
+ }
+ 
+ static void dram_voltage_set(const dram_para_t *para)
+@@ -75,7 +82,7 @@ static void dram_voltage_set(const dram_para_t *para)
+ 		break;
+ 	}
+ 
+-	clrsetbits_le32(0x3000150, 0x20ff00, vol << 8);
++	clrsetbits_le32((void __iomem *)0x3000150, 0x20ff00, vol << 8);
+ 
+ 	udelay(1);
+ 
+@@ -84,70 +91,79 @@ static void dram_voltage_set(const dram_para_t *para)
+ 
+ static void dram_enable_all_master(void)
+ {
+-	writel(~0, 0x3102020);
+-	writel(0xff, 0x3102024);
+-	writel(0xffff, 0x3102028);
++	writel(~0, SUNXI_DRAM_COM_BASE_PTR + 0x20);
++	writel(0xff, SUNXI_DRAM_COM_BASE_PTR + 0x24);
++	writel(0xffff, SUNXI_DRAM_COM_BASE_PTR + 0x28);
+ 	udelay(10);
+ }
+ 
+ static void dram_disable_all_master(void)
+ {
+-	writel(1, 0x3102020);
+-	writel(0, 0x3102024);
+-	writel(0, 0x3102028);
++	writel(1, SUNXI_DRAM_COM_BASE_PTR + 0x20);
++	writel(0, SUNXI_DRAM_COM_BASE_PTR + 0x24);
++	writel(0, SUNXI_DRAM_COM_BASE_PTR + 0x28);
+ 	udelay(10);
+ }
+ 
+ static void eye_delay_compensation(const dram_para_t *para)
+ {
+ 	uint32_t delay;
+-	unsigned long ptr;
++	u8 __iomem *ptr;
+ 
+ 	// DATn0IOCR, n =  0...7
+ 	delay = (para->dram_tpr11 & 0xf) << 9;
+ 	delay |= (para->dram_tpr12 & 0xf) << 1;
+-	for (ptr = 0x3103310; ptr < 0x3103334; ptr += 4)
++	for (ptr = SUNXI_DRAM_PHY_BASE_PTR + 0x310;
++	     ptr < SUNXI_DRAM_PHY_BASE_PTR + 0x334; ptr += 4)
+ 		setbits_le32(ptr, delay);
+ 
+ 	// DATn1IOCR, n =  0...7
+ 	delay = (para->dram_tpr11 & 0xf0) << 5;
+ 	delay |= (para->dram_tpr12 & 0xf0) >> 3;
+-	for (ptr = 0x3103390; ptr != 0x31033b4; ptr += 4)
++	for (ptr = SUNXI_DRAM_PHY_BASE_PTR + 0x390;
++	     ptr != SUNXI_DRAM_PHY_BASE_PTR + 0x3b4; ptr += 4)
+ 		setbits_le32(ptr, delay);
+ 
+ 	// PGCR0: assert AC loopback FIFO reset
+-	clrbits_le32(0x3103100, 0x04000000);
++	clrbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x100, 0x04000000);
+ 
+ 	// ??
+ 
+ 	delay = (para->dram_tpr11 & 0xf0000) >> 7;
+ 	delay |= (para->dram_tpr12 & 0xf0000) >> 15;
+-	setbits_le32(0x3103334, delay);
+-	setbits_le32(0x3103338, delay);
++	setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x334, delay);
++	setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x338, delay);
+ 
+ 	delay = (para->dram_tpr11 & 0xf00000) >> 11;
+ 	delay |= (para->dram_tpr12 & 0xf00000) >> 19;
+-	setbits_le32(0x31033b4, delay);
+-	setbits_le32(0x31033b8, delay);
++	setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x3b4, delay);
++	setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x3b8, delay);
+ 
+-	setbits_le32(0x310333c, (para->dram_tpr11 & 0xf0000) << 9);
+-	setbits_le32(0x31033bc, (para->dram_tpr11 & 0xf00000) << 5);
++	setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x33c,
++		     (para->dram_tpr11 & 0xf0000) << 9);
++	setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x3bc,
++		     (para->dram_tpr11 & 0xf00000) << 5);
+ 
+ 	// PGCR0: release AC loopback FIFO reset
+-	setbits_le32(0x3103100, BIT(26));
++	setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x100, BIT(26));
+ 
+ 	udelay(1);
+ 
+ 	delay = (para->dram_tpr10 & 0xf0) << 4;
+-	for (ptr = 0x3103240; ptr != 0x310327c; ptr += 4)
++	for (ptr = SUNXI_DRAM_PHY_BASE_PTR + 0x240;
++	     ptr != SUNXI_DRAM_PHY_BASE_PTR + 0x27c; ptr += 4)
+ 		setbits_le32(ptr, delay);
+-	for (ptr = 0x3103228; ptr != 0x3103240; ptr += 4)
++	for (ptr = SUNXI_DRAM_PHY_BASE_PTR + 0x228;
++	     ptr != SUNXI_DRAM_PHY_BASE_PTR + 0x240; ptr += 4)
+ 		setbits_le32(ptr, delay);
+ 
+-	setbits_le32(0x3103218, (para->dram_tpr10 & 0x0f) << 8);
+-	setbits_le32(0x310321c, (para->dram_tpr10 & 0x0f) << 8);
++	setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x218,
++		     (para->dram_tpr10 & 0x0f) << 8);
++	setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x21c,
++		     (para->dram_tpr10 & 0x0f) << 8);
+ 
+-	setbits_le32(0x3103280, (para->dram_tpr10 & 0xf00) >> 4);
++	setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x280,
++		     (para->dram_tpr10 & 0xf00) >> 4);
+ }
+ 
+ /*
+@@ -447,40 +463,42 @@ static void mctl_set_timing_params(const dram_para_t *para,
+ 	}
+ 
+ 	/* Set mode registers */
+-	writel(mr0, 0x3103030);
+-	writel(mr1, 0x3103034);
+-	writel(mr2, 0x3103038);
+-	writel(mr3, 0x310303c);
++	writel(mr0, SUNXI_DRAM_PHY_BASE_PTR + 0x30);
++	writel(mr1, SUNXI_DRAM_PHY_BASE_PTR + 0x34);
++	writel(mr2, SUNXI_DRAM_PHY_BASE_PTR + 0x38);
++	writel(mr3, SUNXI_DRAM_PHY_BASE_PTR + 0x3c);
+ 	/* TODO: dram_odt_en is either 0x0 or 0x1, so right shift looks weird */
+-	writel((para->dram_odt_en >> 4) & 0x3, 0x310302c);
++	writel((para->dram_odt_en >> 4) & 0x3, SUNXI_DRAM_PHY_BASE_PTR + 0x2c);
+ 
+ 	/* Set dram timing DRAMTMG0 - DRAMTMG5 */
+ 	writel((twtp << 24) | (tfaw << 16) | (trasmax << 8) | (tras << 0),
+-		0x3103058);
++	       SUNXI_DRAM_PHY_BASE_PTR + 0x58);
+ 	writel((txp << 16) | (trtp << 8) | (trc << 0),
+-		0x310305c);
++	       SUNXI_DRAM_PHY_BASE_PTR + 0x5c);
+ 	writel((tcwl << 24) | (tcl << 16) | (trd2wr << 8) | (twr2rd << 0),
+-		0x3103060);
++	       SUNXI_DRAM_PHY_BASE_PTR + 0x60);
+ 	writel((tmrw << 16) | (tmrd << 12) | (tmod << 0),
+-		0x3103064);
++	       SUNXI_DRAM_PHY_BASE_PTR + 0x64);
+ 	writel((trcd << 24) | (tccd << 16) | (trrd << 8) | (trp << 0),
+-		0x3103068);
++	       SUNXI_DRAM_PHY_BASE_PTR + 0x68);
+ 	writel((tcksrx << 24) | (tcksrx << 16) | (tckesr << 8) | (tcke << 0),
+-		0x310306c);
++	       SUNXI_DRAM_PHY_BASE_PTR + 0x6c);
+ 
+ 	/* Set dual rank timing */
+-	clrsetbits_le32(0x3103078, 0xf000ffff,
++	clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x78, 0xf000ffff,
+ 			(CONFIG_DRAM_CLK < 800) ? 0xf0006610 : 0xf0007610);
+ 
+ 	/* Set phy interface time PITMG0, PTR3, PTR4 */
+ 	writel((0x2 << 24) | (t_rdata_en << 16) | BIT(8) | (wr_latency << 0),
+-		0x3103080);
+-	writel(((tdinit0 << 0) | (tdinit1 << 20)), 0x3103050);
+-	writel(((tdinit2 << 0) | (tdinit3 << 20)), 0x3103054);
++	       SUNXI_DRAM_PHY_BASE_PTR + 0x80);
++	writel(((tdinit0 << 0) | (tdinit1 << 20)),
++	       SUNXI_DRAM_PHY_BASE_PTR + 0x50);
++	writel(((tdinit2 << 0) | (tdinit3 << 20)),
++	       SUNXI_DRAM_PHY_BASE_PTR + 0x54);
+ 
+ 	/* Set refresh timing and mode */
+-	writel((trefi << 16) | (trfc << 0), 0x3103090);
+-	writel((trefi << 15) & 0x0fff0000, 0x3103094);
++	writel((trefi << 16) | (trfc << 0), SUNXI_DRAM_PHY_BASE_PTR + 0x90);
++	writel((trefi << 15) & 0x0fff0000, SUNXI_DRAM_PHY_BASE_PTR + 0x94);
+ }
+ 
+ // Purpose of this routine seems to be to initialize the PLL driving
+@@ -499,26 +517,26 @@ static int ccu_set_pll_ddr_clk(int index, const dram_para_t *para,
+ 	// set VCO clock divider
+ 	n = (clk * 2) / 24;
+ 
+-	val = readl(SUNXI_CCM_BASE + 0x10);
++	val = readl(SUNXI_CCM_BASE_PTR + 0x10);
+ 	val &= ~0x0007ff03;			// clear dividers
+ 	val |= (n - 1) << 8;			// set PLL division
+ 	val |= BIT(31) | BIT(30);		// enable PLL and LDO
+-	writel(val | BIT(29), SUNXI_CCM_BASE + 0x10);
++	writel(val | BIT(29), SUNXI_CCM_BASE_PTR + 0x10);
+ 
+ 	// wait for PLL to lock
+-	while ((readl(SUNXI_CCM_BASE + 0x10) & BIT(28)) == 0)
++	while ((readl(SUNXI_CCM_BASE_PTR + 0x10) & BIT(28)) == 0)
+ 		;
+ 
+ 	udelay(20);
+ 
+ 	// enable PLL output
+-	setbits_le32(SUNXI_CCM_BASE + 0x0, BIT(27));
++	setbits_le32(SUNXI_CCM_BASE_PTR + 0x0, BIT(27));
+ 
+ 	// turn clock gate on
+-	val = readl(SUNXI_CCM_BASE + 0x800);
++	val = readl(SUNXI_CCM_BASE_PTR + 0x800);
+ 	val &= ~0x03000303;		// select DDR clk source, n=1, m=1
+ 	val |= BIT(31);			// turn clock on
+-	writel(val, SUNXI_CCM_BASE + 0x800);
++	writel(val, SUNXI_CCM_BASE_PTR + 0x800);
+ 
+ 	return n * 24;
+ }
+@@ -527,11 +545,11 @@ static int ccu_set_pll_ddr_clk(int index, const dram_para_t *para,
+ static void mctl_sys_init(const dram_para_t *para, const dram_config_t *config)
+ {
+ 	// assert MBUS reset
+-	clrbits_le32(SUNXI_CCM_BASE + 0x540, BIT(30));
++	clrbits_le32(SUNXI_CCM_BASE_PTR + 0x540, BIT(30));
+ 
+ 	// turn off sdram clock gate, assert sdram reset
+-	clrbits_le32(SUNXI_CCM_BASE + 0x80c, 0x10001);
+-	clrsetbits_le32(SUNXI_CCM_BASE + 0x800, BIT(31) | BIT(30), BIT(27));
++	clrbits_le32(SUNXI_CCM_BASE_PTR + 0x80c, 0x10001);
++	clrsetbits_le32(SUNXI_CCM_BASE_PTR + 0x800, BIT(31) | BIT(30), BIT(27));
+ 	udelay(10);
+ 
+ 	// set ddr pll clock
+@@ -540,23 +558,23 @@ static void mctl_sys_init(const dram_para_t *para, const dram_config_t *config)
+ 	dram_disable_all_master();
+ 
+ 	// release sdram reset
+-	setbits_le32(SUNXI_CCM_BASE + 0x80c, BIT(16));
++	setbits_le32(SUNXI_CCM_BASE_PTR + 0x80c, BIT(16));
+ 
+ 	// release MBUS reset
+-	setbits_le32(SUNXI_CCM_BASE + 0x540, BIT(30));
+-	setbits_le32(SUNXI_CCM_BASE + 0x800, BIT(30));
++	setbits_le32(SUNXI_CCM_BASE_PTR + 0x540, BIT(30));
++	setbits_le32(SUNXI_CCM_BASE_PTR + 0x800, BIT(30));
+ 
+ 	udelay(5);
+ 
+ 	// turn on sdram clock gate
+-	setbits_le32(SUNXI_CCM_BASE + 0x80c, BIT(0));
++	setbits_le32(SUNXI_CCM_BASE_PTR + 0x80c, BIT(0));
+ 
+ 	// turn dram clock gate on, trigger sdr clock update
+-	setbits_le32(SUNXI_CCM_BASE + 0x800, BIT(31) | BIT(27));
++	setbits_le32(SUNXI_CCM_BASE_PTR + 0x800, BIT(31) | BIT(27));
+ 	udelay(5);
+ 
+ 	// mCTL clock enable
+-	writel(0x8000, 0x310300c);
++	writel(0x8000, SUNXI_DRAM_PHY_BASE_PTR + 0xc);
+ 	udelay(10);
+ }
+ 
+@@ -567,14 +585,14 @@ static void mctl_sys_init(const dram_para_t *para, const dram_config_t *config)
+ static void mctl_com_init(const dram_para_t *para, const dram_config_t *config)
+ {
+ 	uint32_t val, width;
+-	unsigned long ptr;
++	u8 __iomem *ptr;
+ 	int i;
+ 
+ 	// purpose ??
+-	clrsetbits_le32(0x3102008, 0x3f00, 0x2000);
++	clrsetbits_le32(SUNXI_DRAM_COM_BASE_PTR + 0x8, 0x3f00, 0x2000);
+ 
+ 	// set SDRAM type and word width
+-	val  = readl(0x3102000) & ~0x00fff000;
++	val  = readl(SUNXI_DRAM_COM_BASE_PTR) & ~0x00fff000;
+ 	val |= (para->dram_type & 0x7) << 16;		// DRAM type
+ 	val |= (~config->dram_para2 & 0x1) << 12;		// DQ width
+ 	val |= BIT(22);					// ??
+@@ -585,7 +603,7 @@ static void mctl_com_init(const dram_para_t *para, const dram_config_t *config)
+ 		if (config->dram_tpr13 & BIT(5))
+ 			val |= BIT(19);
+ 	}
+-	writel(val, 0x3102000);
++	writel(val, SUNXI_DRAM_COM_BASE_PTR);
+ 
+ 	// init rank / bank / row for single/dual or two different ranks
+ 	if ((config->dram_para2 & BIT(8)) &&
+@@ -594,7 +612,7 @@ static void mctl_com_init(const dram_para_t *para, const dram_config_t *config)
+ 	else
+ 		width = 16;
+ 
+-	ptr = 0x3102000;
++	ptr = SUNXI_DRAM_COM_BASE_PTR;
+ 	for (i = 0; i < width; i += 16) {
+ 		val = readl(ptr) & 0xfffff000;
+ 
+@@ -615,17 +633,19 @@ static void mctl_com_init(const dram_para_t *para, const dram_config_t *config)
+ 	}
+ 
+ 	// set ODTMAP based on number of ranks in use
+-	val = (readl(0x3102000) & 0x1) ? 0x303 : 0x201;
+-	writel(val, 0x3103120);
++	val = (readl(SUNXI_DRAM_COM_BASE_PTR) & 0x1) ? 0x303 : 0x201;
++	writel(val, SUNXI_DRAM_PHY_BASE_PTR + 0x120);
+ 
+ 	// set mctl reg 3c4 to zero when using half DQ
+ 	if (config->dram_para2 & BIT(0))
+-		writel(0, 0x31033c4);
++		writel(0, SUNXI_DRAM_PHY_BASE_PTR + 0x3c4);
+ 
+ 	// purpose ??
+ 	if (para->dram_tpr4) {
+-                setbits_le32(0x3102000, (para->dram_tpr4 & 0x3) << 25);
+-                setbits_le32(0x3102004, (para->dram_tpr4 & 0x7fc) << 10);
++		setbits_le32(SUNXI_DRAM_COM_BASE_PTR,
++			     (para->dram_tpr4 & 0x3) << 25);
++		setbits_le32(SUNXI_DRAM_COM_BASE_PTR + 0x4,
++			     (para->dram_tpr4 & 0x7fc) << 10);
+ 	}
+ }
+ 
+@@ -666,7 +686,7 @@ static void mctl_phy_ac_remapping(const dram_para_t *para,
+ 	    para->dram_type != SUNXI_DRAM_TYPE_DDR3)
+ 		return;
+ 
+-	fuse = (readl(SUNXI_SID_BASE + 0x28) & 0xf00) >> 8;
++	fuse = (readl(SUNXI_SID_BASE_PTR + 0x28) & 0xf00) >> 8;
+ 	debug("DDR efuse: 0x%x\n", fuse);
+ 	debug("SoC Chip ID: 0x%08x\n", sid_read_soc_chipid());
+ 
+@@ -697,23 +717,23 @@ static void mctl_phy_ac_remapping(const dram_para_t *para,
+ 
+ 	val = (cfg[4] << 25) | (cfg[3] << 20) | (cfg[2] << 15) |
+ 	      (cfg[1] << 10) | (cfg[0] << 5);
+-	writel(val, 0x3102500);
++	writel(val, SUNXI_DRAM_COM_BASE_PTR + 0x500);
+ 
+ 	val = (cfg[10] << 25) | (cfg[9] << 20) | (cfg[8] << 15) |
+ 	      (cfg[ 7] << 10) | (cfg[6] <<  5) | cfg[5];
+-	writel(val, 0x3102504);
++	writel(val, SUNXI_DRAM_COM_BASE_PTR + 0x504);
+ 
+ 	val = (cfg[15] << 20) | (cfg[14] << 15) | (cfg[13] << 10) |
+ 	      (cfg[12] <<  5) | cfg[11];
+-	writel(val, 0x3102508);
++	writel(val, SUNXI_DRAM_COM_BASE_PTR + 0x508);
+ 
+ 	val = (cfg[21] << 25) | (cfg[20] << 20) | (cfg[19] << 15) |
+ 	      (cfg[18] << 10) | (cfg[17] <<  5) | cfg[16];
+-	writel(val, 0x310250c);
++	writel(val, SUNXI_DRAM_COM_BASE_PTR + 0x50c);
+ 
+ 	val = (cfg[4] << 25) | (cfg[3] << 20) | (cfg[2] << 15) |
+ 	      (cfg[1] << 10) | (cfg[0] <<  5) | 1;
+-	writel(val, 0x3102500);
++	writel(val, SUNXI_DRAM_COM_BASE_PTR + 0x500);
+ }
+ 
+ // Init the controller channel. The key part is placing commands in the main
+@@ -728,10 +748,11 @@ static unsigned int mctl_channel_init(unsigned int ch_index,
+ 	dqs_gating_mode = (config->dram_tpr13 & 0xc) >> 2;
+ 
+ 	// set DDR clock to half of CPU clock
+-	clrsetbits_le32(0x310200c, 0xfff, (para->dram_clk / 2) - 1);
++	clrsetbits_le32(SUNXI_DRAM_COM_BASE_PTR + 0xc,
++			0xfff, (para->dram_clk / 2) - 1);
+ 
+ 	// MRCTRL0 nibble 3 undocumented
+-	clrsetbits_le32(0x3103108, 0xf00, 0x300);
++	clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x108, 0xf00, 0x300);
+ 
+ 	if (para->dram_odt_en)
+ 		val = 0;
+@@ -740,144 +761,149 @@ static unsigned int mctl_channel_init(unsigned int ch_index,
+ 
+ 	// DX0GCR0
+ 	if (para->dram_clk > 672)
+-		clrsetbits_le32(0x3103344, 0xf63e, val);
++		clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x344, 0xf63e, val);
+ 	else
+-		clrsetbits_le32(0x3103344, 0xf03e, val);
++		clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x344, 0xf03e, val);
+ 
+ 	// DX1GCR0
+ 	if (para->dram_clk > 672) {
+-                setbits_le32(0x3103344, 0x400);
+-		clrsetbits_le32(0x31033c4, 0xf63e, val);
++		setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x344, 0x400);
++		clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x3c4, 0xf63e, val);
+ 	} else {
+-		clrsetbits_le32(0x31033c4, 0xf03e, val);
++		clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x3c4, 0xf03e, val);
+ 	}
+ 
+ 	// 0x3103208 undocumented
+-	setbits_le32(0x3103208, BIT(1));
++	setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x208, BIT(1));
+ 
+ 	eye_delay_compensation(para);
+ 
+ 	// set PLL SSCG ?
+-	val = readl(0x3103108);
++	val = readl(SUNXI_DRAM_PHY_BASE_PTR + 0x108);
+ 	if (dqs_gating_mode == 1) {
+-		clrsetbits_le32(0x3103108, 0xc0, 0);
+-		clrbits_le32(0x31030bc, 0x107);
++		clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x108, 0xc0, 0);
++		clrbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0xbc, 0x107);
+ 	} else if (dqs_gating_mode == 2) {
+-		clrsetbits_le32(0x3103108, 0xc0, 0x80);
++		clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x108, 0xc0, 0x80);
+ 
+-		clrsetbits_le32(0x31030bc, 0x107,
++		clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0xbc, 0x107,
+ 				(((config->dram_tpr13 >> 16) & 0x1f) - 2) | 0x100);
+-		clrsetbits_le32(0x310311c, BIT(31), BIT(27));
++		clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x11c,
++				BIT(31), BIT(27));
+ 	} else {
+-		clrbits_le32(0x3103108, 0x40);
++		clrbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x108, 0x40);
+ 		udelay(10);
+-		setbits_le32(0x3103108, 0xc0);
++		setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x108, 0xc0);
+ 	}
+ 
+ 	if (para->dram_type == SUNXI_DRAM_TYPE_LPDDR2 ||
+ 	    para->dram_type == SUNXI_DRAM_TYPE_LPDDR3) {
+ 		if (dqs_gating_mode == 1)
+-			clrsetbits_le32(0x310311c, 0x080000c0, 0x80000000);
++			clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x11c,
++					0x080000c0, 0x80000000);
+ 		else
+-			clrsetbits_le32(0x310311c, 0x77000000, 0x22000000);
++			clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x11c,
++					0x77000000, 0x22000000);
+ 	}
+ 
+-	clrsetbits_le32(0x31030c0, 0x0fffffff,
++	clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0xc0, 0x0fffffff,
+ 			(config->dram_para2 & BIT(12)) ? 0x03000001 : 0x01000007);
+ 
+-	if (readl(0x70005d4) & BIT(16)) {
+-		clrbits_le32(0x7010250, 0x2);
++	if (readl((void __iomem *)0x70005d4) & BIT(16)) {
++		clrbits_le32((void __iomem *)0x7010250, 0x2);
+ 		udelay(10);
+ 	}
+ 
+ 	// Set ZQ config
+-	clrsetbits_le32(0x3103140, 0x3ffffff,
++	clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x140, 0x3ffffff,
+ 			(para->dram_zq & 0x00ffffff) | BIT(25));
+ 
+ 	// Initialise DRAM controller
+ 	if (dqs_gating_mode == 1) {
+-		//writel(0x52, 0x3103000); // prep PHY reset + PLL init + z-cal
+-		writel(0x53, 0x3103000); // Go
++		//writel(0x52, SUNXI_DRAM_PHY_BASE_PTR); // prep PHY reset + PLL init + z-cal
++		writel(0x53, SUNXI_DRAM_PHY_BASE_PTR); // Go
+ 
+-		while ((readl(0x3103010) & 0x1) == 0) {
++		while ((readl(SUNXI_DRAM_PHY_BASE_PTR + 0x10) & 0x1) == 0) {
+ 		} // wait for IDONE
+ 		udelay(10);
+ 
+ 		// 0x520 = prep DQS gating + DRAM init + d-cal
+ 		if (para->dram_type == SUNXI_DRAM_TYPE_DDR3)
+-			writel(0x5a0, 0x3103000);		// + DRAM reset
++			writel(0x5a0, SUNXI_DRAM_PHY_BASE_PTR); // + DRAM reset
+ 		else
+-			writel(0x520, 0x3103000);
++			writel(0x520, SUNXI_DRAM_PHY_BASE_PTR);
+ 	} else {
+-		if ((readl(0x70005d4) & (1 << 16)) == 0) {
++		if ((readl((void __iomem *)0x70005d4) & (1 << 16)) == 0) {
+ 			// prep DRAM init + PHY reset + d-cal + PLL init + z-cal
+ 			if (para->dram_type == SUNXI_DRAM_TYPE_DDR3)
+-				writel(0x1f2, 0x3103000);	// + DRAM reset
++				writel(0x1f2, SUNXI_DRAM_PHY_BASE_PTR); // + DRAM reset
+ 			else
+-				writel(0x172, 0x3103000);
++				writel(0x172, SUNXI_DRAM_PHY_BASE_PTR);
+ 		} else {
+ 			// prep PHY reset + d-cal + z-cal
+-			writel(0x62, 0x3103000);
++			writel(0x62, SUNXI_DRAM_PHY_BASE_PTR);
+ 		}
+ 	}
+ 
+-	setbits_le32(0x3103000, 0x1);		 // GO
++	setbits_le32(SUNXI_DRAM_PHY_BASE_PTR, 0x1);		 // GO
+ 
+ 	udelay(10);
+-	while ((readl(0x3103010) & 0x1) == 0) {
++	while ((readl(SUNXI_DRAM_PHY_BASE_PTR + 0x10) & 0x1) == 0) {
+ 	} // wait for IDONE
+ 
+-	if (readl(0x70005d4) & BIT(16)) {
+-		clrsetbits_le32(0x310310c, 0x06000000, 0x04000000);
++	if (readl((void __iomem *)0x70005d4) & BIT(16)) {
++		clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x10c,
++				0x06000000, 0x04000000);
+ 		udelay(10);
+ 
+-		setbits_le32(0x3103004, 0x1);
++		setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x4, 0x1);
+ 
+-		while ((readl(0x3103018) & 0x7) != 0x3) {
++		while ((readl(SUNXI_DRAM_PHY_BASE_PTR + 0x18) & 0x7) != 0x3) {
+ 		}
+ 
+-		clrbits_le32(0x7010250, 0x1);
++		clrbits_le32((void __iomem *)0x7010250, 0x1);
+ 		udelay(10);
+ 
+-		clrbits_le32(0x3103004, 0x1);
++		clrbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x4, 0x1);
+ 
+-		while ((readl(0x3103018) & 0x7) != 0x1) {
++		while ((readl(SUNXI_DRAM_PHY_BASE_PTR + 0x18) & 0x7) != 0x1) {
+ 		}
+ 
+ 		udelay(15);
+ 
+ 		if (dqs_gating_mode == 1) {
+-			clrbits_le32(0x3103108, 0xc0);
+-			clrsetbits_le32(0x310310c, 0x06000000, 0x02000000);
++			clrbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x108, 0xc0);
++			clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x10c,
++					0x06000000, 0x02000000);
+ 			udelay(1);
+-			writel(0x401, 0x3103000);
++			writel(0x401, SUNXI_DRAM_PHY_BASE_PTR);
+ 
+-			while ((readl(0x3103010) & 0x1) == 0) {
++			while ((readl(SUNXI_DRAM_PHY_BASE_PTR + 0x10) & 0x1) == 0) {
+ 			}
+ 		}
+ 	}
+ 
+ 	// Check for training error
+-	if (readl(0x3103010) & BIT(20)) {
++	if (readl(SUNXI_DRAM_PHY_BASE_PTR + 0x10) & BIT(20)) {
+ 		printf("ZQ calibration error, check external 240 ohm resistor\n");
+ 		return 0;
+ 	}
+ 
+ 	// STATR = Zynq STAT? Wait for status 'normal'?
+-	while ((readl(0x3103018) & 0x1) == 0) {
++	while ((readl(SUNXI_DRAM_PHY_BASE_PTR + 0x18) & 0x1) == 0) {
+ 	}
+ 
+-	setbits_le32(0x310308c, BIT(31));
++	setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x8c, BIT(31));
+ 	udelay(10);
+-	clrbits_le32(0x310308c, BIT(31));
++	clrbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x8c, BIT(31));
+ 	udelay(10);
+-	setbits_le32(0x3102014, BIT(31));
++	setbits_le32(SUNXI_DRAM_COM_BASE_PTR + 0x14, BIT(31));
+ 	udelay(10);
+ 
+-	clrbits_le32(0x310310c, 0x06000000);
++	clrbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x10c, 0x06000000);
+ 
+ 	if (dqs_gating_mode == 1)
+-		clrsetbits_le32(0x310311c, 0xc0, 0x40);
++		clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x11c, 0xc0, 0x40);
+ 
+ 	return 1;
+ }
+@@ -904,12 +930,12 @@ static unsigned int DRAMC_get_dram_size(void)
+ 	uint32_t val;
+ 	unsigned int size;
+ 
+-	val = readl(0x3102000);		/* MC_WORK_MODE0 */
++	val = readl(SUNXI_DRAM_COM_BASE_PTR);		/* MC_WORK_MODE0 */
+ 	size = calculate_rank_size(val);
+ 	if ((val & 0x3) == 0)		/* single rank? */
+ 		return size;
+ 
+-	val = readl(0x3102004);		/* MC_WORK_MODE1 */
++	val = readl(SUNXI_DRAM_COM_BASE_PTR + 0x4); /* MC_WORK_MODE1 */
+ 	if ((val & 0x3) == 0)		/* two identical ranks? */
+ 		return size * 2;
+ 
+@@ -928,14 +954,14 @@ static int dqs_gate_detect(dram_config_t *config)
+ {
+ 	uint32_t dx0, dx1;
+ 
+-	if ((readl(0x3103010) & BIT(22)) == 0) {
++	if ((readl(SUNXI_DRAM_PHY_BASE_PTR + 0x10) & BIT(22)) == 0) {
+ 		config->dram_para2 = (config->dram_para2 & ~0xf) | BIT(12);
+ 		debug("dual rank and full DQ\n");
+ 
+ 		return 1;
+ 	}
+ 
+-	dx0 = (readl(0x3103348) & 0x3000000) >> 24;
++	dx0 = (readl(SUNXI_DRAM_PHY_BASE_PTR + 0x348) & 0x3000000) >> 24;
+ 	if (dx0 == 0) {
+ 		config->dram_para2 = (config->dram_para2 & ~0xf) | 0x1001;
+ 		debug("dual rank and half DQ\n");
+@@ -944,7 +970,7 @@ static int dqs_gate_detect(dram_config_t *config)
+ 	}
+ 
+ 	if (dx0 == 2) {
+-		dx1 = (readl(0x31033c8) & 0x3000000) >> 24;
++		dx1 = (readl(SUNXI_DRAM_PHY_BASE_PTR + 0x3c8) & 0x3000000) >> 24;
+ 		if (dx1 == 2) {
+ 			config->dram_para2 = config->dram_para2 & ~0xf00f;
+ 			debug("single rank and full DQ\n");
+@@ -974,20 +1000,20 @@ static int dramc_simple_wr_test(unsigned int mem_mb, int len)
+ 
+ 	addr = (unsigned int *)CFG_SYS_SDRAM_BASE;
+ 	for (i = 0; i != len; i++, addr++) {
+-		writel(patt1 + i, (unsigned long)addr);
+-		writel(patt2 + i, (unsigned long)(addr + offs));
++		writel(patt1 + i, (void __iomem *)addr);
++		writel(patt2 + i, (void __iomem *)(addr + offs));
+ 	}
+ 
+ 	addr = (unsigned int *)CFG_SYS_SDRAM_BASE;
+ 	for (i = 0; i != len; i++) {
+-		v1 = readl((unsigned long)(addr + i));
++		v1 = readl((void __iomem *)(addr + i));
+ 		v2 = patt1 + i;
+ 		if (v1 != v2) {
+ 			printf("DRAM: simple test FAIL\n");
+ 			printf("%x != %x at address %p\n", v1, v2, addr + i);
+ 			return 1;
+ 		}
+-		v1 = readl((unsigned long)(addr + offs + i));
++		v1 = readl((void __iomem *)(addr + offs + i));
+ 		v2 = patt2 + i;
+ 		if (v1 != v2) {
+ 			printf("DRAM: simple test FAIL\n");
+@@ -1002,16 +1028,19 @@ static int dramc_simple_wr_test(unsigned int mem_mb, int len)
+ 
+ // Set the Vref mode for the controller
+ //
+-static void mctl_vrefzq_init(const dram_para_t *para, const dram_config_t *config)
++static void mctl_vrefzq_init(const dram_para_t *para,
++			     const dram_config_t *config)
+ {
+ 	if (config->dram_tpr13 & BIT(17))
+ 		return;
+ 
+-	clrsetbits_le32(0x3103110, 0x7f7f7f7f, para->dram_tpr5);
++	clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x110,
++			0x7f7f7f7f, para->dram_tpr5);
+ 
+ 	// IOCVR1
+ 	if ((config->dram_tpr13 & BIT(16)) == 0)
+-		clrsetbits_le32(0x3103114, 0x7f, para->dram_tpr6 & 0x7f);
++		clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x114,
++				0x7f, para->dram_tpr6 & 0x7f);
+ }
+ 
+ // Perform an init of the controller. This is actually done 3 times. The first
+@@ -1058,7 +1087,8 @@ static int auto_scan_dram_size(const dram_para_t *para, dram_config_t *config)
+ {
+ 	unsigned int rval, i, j, rank, maxrank, offs;
+ 	unsigned int shft;
+-	unsigned long ptr, mc_work_mode, chk;
++	unsigned long ptr, chk;
++	u8 __iomem *mc_work_mode;
+ 
+ 	if (mctl_core_init(para, config) == 0) {
+ 		printf("DRAM initialisation error : 0\n");
+@@ -1066,12 +1096,12 @@ static int auto_scan_dram_size(const dram_para_t *para, dram_config_t *config)
+ 	}
+ 
+ 	maxrank	= (config->dram_para2 & 0xf000) ? 2 : 1;
+-	mc_work_mode = 0x3102000;
++	mc_work_mode = SUNXI_DRAM_COM_BASE_PTR;
+ 	offs = 0;
+ 
+ 	/* write test pattern */
+ 	for (i = 0, ptr = CFG_SYS_SDRAM_BASE; i < 64; i++, ptr += 4)
+-		writel(get_payload(i & 0x1, ptr), ptr);
++		writel(get_payload(i & 0x1, ptr), (void __iomem *)ptr);
+ 
+ 	for (rank = 0; rank < maxrank;) {
+ 		/* set row mode */
+@@ -1083,7 +1113,7 @@ static int auto_scan_dram_size(const dram_para_t *para, dram_config_t *config)
+ 			chk = CFG_SYS_SDRAM_BASE + (1U << (i + 11));
+ 			ptr = CFG_SYS_SDRAM_BASE;
+ 			for (j = 0; j < 64; j++) {
+-				if (readl(chk) != get_payload(j & 0x1, ptr))
++				if (readl((void __iomem *)chk) != get_payload(j & 0x1, ptr))
+ 					break;
+ 				ptr += 4;
+ 				chk += 4;
+@@ -1103,7 +1133,7 @@ static int auto_scan_dram_size(const dram_para_t *para, dram_config_t *config)
+ 		config->dram_para1 = rval;
+ 
+ 		if (rank == 1)		/* Set bank mode for rank0 */
+-			clrsetbits_le32(0x3102000, 0xffc, 0x6a4);
++			clrsetbits_le32(SUNXI_DRAM_COM_BASE_PTR, 0xffc, 0x6a4);
+ 
+ 		/* Set bank mode for current rank */
+ 		clrsetbits_le32(mc_work_mode, 0xffc, 0x6a4);
+@@ -1113,7 +1143,7 @@ static int auto_scan_dram_size(const dram_para_t *para, dram_config_t *config)
+ 		chk = CFG_SYS_SDRAM_BASE + (1U << 22);
+ 		ptr = CFG_SYS_SDRAM_BASE;
+ 		for (i = 0, j = 0; i < 64; i++) {
+-			if (readl(chk) != get_payload(i & 1, ptr)) {
++			if (readl((void __iomem *)chk) != get_payload(i & 1, ptr)) {
+ 				j = 1;
+ 				break;
+ 			}
+@@ -1131,7 +1161,7 @@ static int auto_scan_dram_size(const dram_para_t *para, dram_config_t *config)
+ 		config->dram_para1 = rval;
+ 
+ 		if (rank == 1)		/* Set page mode for rank0 */
+-			clrsetbits_le32(0x3102000, 0xffc, 0xaa0);
++			clrsetbits_le32(SUNXI_DRAM_COM_BASE_PTR, 0xffc, 0xaa0);
+ 
+ 		/* Set page mode for current rank */
+ 		clrsetbits_le32(mc_work_mode, 0xffc, 0xaa0);
+@@ -1142,7 +1172,7 @@ static int auto_scan_dram_size(const dram_para_t *para, dram_config_t *config)
+ 			chk = CFG_SYS_SDRAM_BASE + (1U << i);
+ 			ptr = CFG_SYS_SDRAM_BASE;
+ 			for (j = 0; j < 64; j++) {
+-				if (readl(chk) != get_payload(j & 1, ptr))
++				if (readl((void __iomem *)chk) != get_payload(j & 1, ptr))
+ 					break;
+ 				ptr += 4;
+ 				chk += 4;
+@@ -1168,10 +1198,12 @@ static int auto_scan_dram_size(const dram_para_t *para, dram_config_t *config)
+ 		if (rank != maxrank) {
+ 			if (rank == 1) {
+ 				/* MC_WORK_MODE */
+-				clrsetbits_le32(0x3202000, 0xffc, 0x6f0);
++				clrsetbits_le32(SUNXI_DRAM_COM_BASE2_PTR,
++						0xffc, 0x6f0);
+ 
+ 				/* MC_WORK_MODE2 */
+-				clrsetbits_le32(0x3202004, 0xffc, 0x6f0);
++				clrsetbits_le32(SUNXI_DRAM_COM_BASE2_PTR + 0x4,
++						0xffc, 0x6f0);
+ 			}
+ 			/* store rank1 config in upper half of para1 */
+ 			offs += 16;
+@@ -1212,7 +1244,7 @@ static int auto_scan_dram_rank_width(const dram_para_t *para,
+ 
+ 	mctl_core_init(para, config);
+ 
+-	if (readl(0x3103010) & BIT(20))
++	if (readl(SUNXI_DRAM_PHY_BASE_PTR + 0x10) & BIT(20))
+ 		return 0;
+ 
+ 	if (dqs_gate_detect(config) == 0)
+@@ -1271,18 +1303,18 @@ static int init_DRAM(int type, const dram_para_t *para)
+ 	/* Test ZQ status */
+ 	if (config.dram_tpr13 & BIT(16)) {
+ 		debug("DRAM only have internal ZQ\n");
+-		setbits_le32(0x3000160, BIT(8));
+-		writel(0, 0x3000168);
++		setbits_le32((void __iomem *)0x3000160, BIT(8));
++		writel(0, (void __iomem *)0x3000168);
+ 		udelay(10);
+ 	} else {
+-		clrbits_le32(0x3000160, 0x3);
+-		writel(config.dram_tpr13 & BIT(16), 0x7010254);
++		clrbits_le32((void __iomem *)0x3000160, 0x3);
++		writel(config.dram_tpr13 & BIT(16), (void __iomem *)0x7010254);
+ 		udelay(10);
+-		clrsetbits_le32(0x3000160, 0x108, BIT(1));
++		clrsetbits_le32((void __iomem *)0x3000160, 0x108, BIT(1));
+ 		udelay(10);
+-		setbits_le32(0x3000160, BIT(0));
++		setbits_le32((void __iomem *)0x3000160, BIT(0));
+ 		udelay(20);
+-		debug("ZQ value = 0x%x\n", readl(0x300016c));
++		debug("ZQ value = 0x%x\n", readl((void __iomem *)0x300016c));
+ 	}
+ 
+ 	dram_voltage_set(para);
+@@ -1325,41 +1357,44 @@ static int init_DRAM(int type, const dram_para_t *para)
+ 		rc = para->dram_tpr8;
+ 		if (rc == 0)
+ 			rc = 0x10000200;
+-		writel(rc, 0x31030a0);
+-		writel(0x40a, 0x310309c);
+-		setbits_le32(0x3103004, BIT(0));
++		writel(rc, SUNXI_DRAM_PHY_BASE_PTR + 0xa0);
++		writel(0x40a, SUNXI_DRAM_PHY_BASE_PTR + 0x9c);
++		setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x4, BIT(0));
+ 		debug("Enable Auto SR\n");
+ 	} else {
+-		clrbits_le32(0x31030a0, 0xffff);
+-		clrbits_le32(0x3103004, 0x1);
++		clrbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0xa0, 0xffff);
++		clrbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x4, 0x1);
+ 	}
+ 
+ 	/* Purpose ?? */
+ 	if (config.dram_tpr13 & BIT(9)) {
+-		clrsetbits_le32(0x3103100, 0xf000, 0x5000);
++		clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x100,
++				0xf000, 0x5000);
+ 	} else {
+ 		if (para->dram_type != SUNXI_DRAM_TYPE_LPDDR2)
+-			clrbits_le32(0x3103100, 0xf000);
++			clrbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x100, 0xf000);
+ 	}
+ 
+-	setbits_le32(0x3103140, BIT(31));
++	setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x140, BIT(31));
+ 
+ 	/* CHECK: is that really writing to a different register? */
+ 	if (config.dram_tpr13 & BIT(8))
+-		writel(readl(0x3103140) | 0x300, 0x31030b8);
++		writel(readl(SUNXI_DRAM_PHY_BASE_PTR + 0x140) | 0x300,
++		       SUNXI_DRAM_PHY_BASE_PTR + 0xb8);
+ 
+ 	if (config.dram_tpr13 & BIT(16))
+-		clrbits_le32(0x3103108, BIT(13));
++		clrbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x108, BIT(13));
+ 	else
+-		setbits_le32(0x3103108, BIT(13));
++		setbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x108, BIT(13));
+ 
+ 	/* Purpose ?? */
+ 	if (para->dram_type == SUNXI_DRAM_TYPE_LPDDR3)
+-		clrsetbits_le32(0x310307c, 0xf0000, 0x1000);
++		clrsetbits_le32(SUNXI_DRAM_PHY_BASE_PTR + 0x7c,
++				0xf0000, 0x1000);
+ 
+ 	dram_enable_all_master();
+ 	if (config.dram_tpr13 & BIT(28)) {
+-		if ((readl(0x70005d4) & BIT(16)) ||
++		if ((readl((void __iomem *)0x70005d4) & BIT(16)) ||
+ 		    dramc_simple_wr_test(mem_size_mb, 4096))
+ 			return 0;
+ 	}
 -- 
 2.43.0
 
