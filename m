@@ -1,185 +1,182 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFF43606A324
-	for <u-boot@archiver.kernel.org>; Sun,  1 Nov 2026 05:53:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F1FE606A324
+	for <u-boot@archiver.kernel.org>; Sun,  1 Nov 2026 05:53:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ue3ARR/F;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FdpH63PC
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Z80kqIra;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jXVwLmcW
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 19C92807E5;
-	Sun,  1 Nov 2026 05:53:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 76287607B0;
+	Sun,  1 Nov 2026 05:53:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fUEXXFhPQvkZ; Sun,  1 Nov 2026 05:53:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C6FF680986
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793512416;
-	b=B2HAvAr3kQen8Cj1oEuYiP31/CarDiPqC2NvaD0vL8d/SUljCfszoZXphOkUegn5+WRx
-	 XqqX4dMbrH2Xq3nMKDUzzjW54E6APltBLuN+Fwny4Ja+jjcRoYlvtQojAYNH3MJXrUhu4
-	 4NjMmsp/c3eoTGkYSPwhbXJ2KChrYhxbIkU4xkI1/rVjoVIt/YRuK0OtnIhHRHvM/5+tZ
-	 3xJAzgt46PIySPBwTOJeaznlok1OUenfFsdEVrnOuWx04LrX+f8WACpZ1mvlj+ZiQj2gf
-	 YtRA3NUWGBtFvrZId2DDtiz490fyr8G2mwF8GcVLXlLuzMPffY3LqdHTIoJIX4uxQ+g==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 91uPVxXpsIGW; Sun,  1 Nov 2026 05:53:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 696C360619
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793512418;
+	b=N+GeLdcFiI4YLwDbZPgt51VyEL1dL4RxflD5AlEdOjl4d0SGm06hDObvMZMB0/HeyDbQ
+	 qelIhUPHL3qvpZHLb7AfCBeYown+Vagl7xMn3naRfr6L/v3upalZludvgHdhg7TxU6SBO
+	 nEdWwJPWXtthEgKubF2XxfFZ85WoEVW6YT6epuGgoZwp+i8u4nwEguUmDbBSkcoKDjWC5
+	 wFhXSJ3dyrFfn1rzX/fzbnS0/d+U9UhiS3m32zRrynYOEHpN5jyeX2/iMuUKejj8HquZW
+	 8JQswVmZPAOndqsnxlyjcwoGObPS9w0hhnxx7H4a+BBQawgFysM75Ss4VKTAB5CIv1A==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793512416;
+	c=relaxed/relaxed; t=1793512418;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Content-Transfer-Encoding:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=Ds2oBKA6OMLkxQNUdxz7F0NwV1E49jfeYYCnAjm+X8E=;
-	b=ExCaEU7mT+FX76yv+RHmv04CGRZj7C6EqAG8at4Z563Jmha2U5kd3zUgoJF5ehAXaQch
-	 ZADb48Nqb0qH+aTk8no5U8tzVMfOw5jFKDsV0YwdhzS0ARTmGdN0LoA8+j3MKumqZKIfD
-	 xfAt/yPb41+CHN82dYSba4+3oB9bWsj/ql848HQrPOM9UEvt4KyZw0ZwxKyNNO5mcXfPG
-	 3gw8Kbxyq8F1Xjv4KTj8oA6EkX4x+j009jSlZE97CxIPy4HCNPjhvTAULr/2XAjl3WFVx
-	 0AgCmo55k98738SXdRjdvUQx0QmkX/ae5KhurV2w1hoBa6i7OyXN2RrFZjBBtkUpLAw==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
-	dmarc=pass header.from=kernel.org;
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FdpH63PC;
+	 Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:Errors-To;
+	bh=A8WoFxCFyn7W/wMS/Mg3ZAhA/wHN2M0bismAZClHpPg=;
+	b=HMG2+F+bVtNTqhr8EL3kavNCR0I03wLEHKa4JbmIYd2/0dGaaI/4uknxNGyZi+2r+zcs
+	 iZqXX2FRf6NJX/N/HR9e2zTVC4NiDaqMdOAPBbRXMEJFLWBEafmy1d7J58CVwUvJAdWBI
+	 pAd2NncuUS5kYsLWEUde8aAILW5iZ0BV31rSF2KuORlvZLeBP6IqoClGLBqKHNoqV+9g+
+	 Rz1XpdL/ldPESou3Rp7eXLyPLhyo64GSfBkZN2jttgwdgqdgJ3a5KOpg0eIUqpPGJstwR
+	 jzkYmUP99S/RPf5v/sVWmf1YZfuNA6QZS5OmyyGwK1+uKPx4yNisDMdzszdcZM9akEw==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793512416;
-	bh=Ds2oBKA6OMLkxQNUdxz7F0NwV1E49jfeYYCnAjm+X8E=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=ue3ARR/FzLwqZgsiB/9u2XjNs12KkypdJILzsyBsLFJmJtRbkqyS6iS2gRzF/Ev2B
-	 +mdH8fRcZhzGoJ/hi2gxel5WqcITrT9QlY7sGUe683H2av2KsMRsHbBnP3/JYR1GP5
-	 pcufuwLRqfCcaIhpP7TRqer6O2wxNHqN1LZfh4iEfiqdzI593CF6pPHqbZged+sdJr
-	 5ztjUfE1xV6MNxkuOr9QXyKB5GBur63iO6/lV0u7N6abcmx4l6wkITaLFsm3qz9nH7
-	 X6BpgIT0WQVSWGfcEABU0ajjhDx0NwZeO+9FAhZsVY/3+sXh3RR86XeIMMZkTUFtZf
-	 bCl0nw+xUY7KQ==
+	d=lists.u-boot-project.org; s=default; t=1793512418;
+	bh=A8WoFxCFyn7W/wMS/Mg3ZAhA/wHN2M0bismAZClHpPg=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=Z80kqIraTIZKcYtHPrBF+eE34AX/eH47dQS0N3mtsCyp0sKIjY1f0/A/5zbST2xKR
+	 MqEm56JRULStYt7dEtXFuphxtbsq7qk5iHScomEggCWIFu6DBEA7TZL2vBHTnESqgF
+	 ZvZU3s4XQgJGGMrYUoYjcMvCAJvKaHoX9QZncEp4QzG5G8/sbZKvw4+gPhNnoS97oK
+	 xJKSQknbVwKGFZ4YGblZVKjaFn3Ef74TBe8TUY9bM1dvW3Ml+fH58RoxJkap8xs/56
+	 TmgU/zZeXSkJDf1HQPMzs88OUY269Jn2P3ZYN8BaDHjXHpu67xig+REQNBLRXoIf8s
+	 lzvAN4A9ul8zw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C6FF680986;
-	Sun,  1 Nov 2026 05:53:35 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id C2D1432A
+	by smtp3.osuosl.org (Postfix) with ESMTP id 696C360619;
+	Sun,  1 Nov 2026 05:53:38 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id E459032A
  for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 05:53:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B49D98107C
+ by smtp4.osuosl.org (Postfix) with ESMTP id D632840647
  for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 05:53:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JvrvH8FOLQUr for <u-boot@lists.u-boot-project.org>;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id D4_2a8hR6yJL for <u-boot@lists.u-boot-project.org>;
  Sun,  1 Nov 2026 05:53:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B55E58102A
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D028740753
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793512410;
- b=g4PnPtlVrNeMo/gX3FXCJrCvdQrxOM3aOwC3dGJewfPPv38ttAGD0bPYDDyljaOQjaNk
- tWhhN5XzN0VtGYBqi6ycoqAG9fcuSBEOuo0UV7FI3eXGXklPgkHkavhOUp+WIh0Og503c
- 0sB5K2xqzGErLlKbfjIysnx4aVX52agmbSnTtC6cs0iZ2pCXWR9Xl6acA+q3hOxOLQTRU
- 12malz4vLTtUsJ3K+mE64nKSKk8ynzgx+pmdRB70WbiFHFeH/IEVmVrfcCcrGAIBbU/aB
- oG5zbky7VXtOkhyHgjTUs4FfAtPE7V/TnfVZhaI8bEFfVoYv8jRQTbzy8Ns/43OeUxg==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793512411;
+ b=TzHg1Wmn87jI8fkyN8s4xB+eadNe/LUbm/tmBnP8YgbjnSm5aCY3a1uRVfJOiROfFUaT
+ 76zh9lx2cEb6U/TRSAAaoB49gCcvX22jzbULDqO0Ge67OE5JsPYUIRXzJtUoCpWwi887/
+ SZrBYAB3xzhyYTTtR+nW8IpXRh17zT4V+PG5KSSTKoCg+z7KliMl8HqL+DA1NfmN+5Ugb
+ B4rv3zsrureRehN8mcIFu0ajTQcZB6VcuAiFCEp5giEK5ydTmXv7+Pm70hiR3pPJUpXJb
+ 96tjmfhkCr2uKTyHWYxWhJcITRanLKq9HsKcgrEYKg1akklu3N5QK4JF0xm1p098EUA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793512410;
- h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
- Subject:MIME-Version:Content-Type:Message-Id:References:In-Reply-To:
- To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
- X-Endpoint-Received:X-Original-From:Reply-To:
- Content-Transfer-Encoding;
- bh=Ds2oBKA6OMLkxQNUdxz7F0NwV1E49jfeYYCnAjm+X8E=;
- b=qPzTLe4Rg/MKkBcM44/1oepby8D2WMFFo4u/tXPGYJv3Z/zvF2OXxxyqazcEJ0xT/2pD
- znDkNxNcU71vS9RdFUjAYMFJYEKyfSZl6AD58y8Gva7DoxxInfF9yrjQ+bLet7ZeV7h11
- SH4/dxZb1FPvyItsWu9Ln9nrrSbXWOs2zs3m3Bxe8UGnQJRkEA7SuhgBu+AyLaMZ4vTQC
- CbLuMR/ajj9zwXyMQdub96JuTA0HGXg/eOoJK3LFXl90UZ7DwcRIzrTkzQv0s9utlMEZZ
- /rqjTlaufzvXpC7UCGBztgnxAkDVAr2l5T2sNtjBloQoWM3Z9RyTPTAMlez3hCJSSlw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+ c=relaxed/relaxed; t=1793512411;
+ h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Subject:
+ Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ X-B4-Tracking:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+ X-Endpoint-Received:X-Original-From:Reply-To;
+ bh=A8WoFxCFyn7W/wMS/Mg3ZAhA/wHN2M0bismAZClHpPg=;
+ b=l7ItZKR22QepqAyZ16wncdfxUadU9eu0Q/7lklJTsWZvgcJfr5xvmidqOGOMJlje3oEt
+ z2G+hcVkf4WLETUQhizpyKKNmpFg0vjwKtFkYX/lDsXHH38N1oygdqrrg8GDDUJCAy/t1
+ /lC53+//3MQzJ3AGQ+Qdnu9RSE6Isf2iydGenYyR8W9HjfsvsiVja+dSWE5kvx/5q9Zju
+ H1ms1e8QtTfhrk946LRnovxSRyjzYER/TJ62LvIId4s++lNM3c2B8MddDXCiQXR0ma15D
+ clo/nzZ5msagzdci/bQ+LexveiHaVrJapld6qMXWFgUgEzC+qFFXCqm2ztILLMHPFZw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=FdpH63PC; 
+ header.s=k20260515 header.b=jXVwLmcW; 
  arc=pass header.oldest-pass=0 smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
  envelope-from=devnull+iav.iav.lv@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=FdpH63PC
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20260515 header.b=jXVwLmcW
 Received: from tor.source.kernel.org (tor.source.kernel.org
  [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp1.osuosl.org (Postfix) with ESMTPS id B55E58102A
+ by smtp4.osuosl.org (Postfix) with ESMTPS id D028740753
  for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 05:53:30 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 38652605D4;
- Sun,  1 Nov 2026 05:53:29 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 69F3D60054;
+ Sun,  1 Nov 2026 05:53:28 +0000 (UTC)
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
  t=1793512408;
- b=HBRZH8MkVic3jCydKBKxXQL+/u8tRMZCnZK8mn2kuP1ZVfH08mD8SjnRW5AhOWdO9uDh
- NI8qrsmnr3+UsfPj4nwq02Y+/6XTsC/PFk0kmtx94vEMXqy3hLqzIMT78BguEcZAjo5fy
- Lg9d1iUD+fjlusu2U4gmEv/XI1yZY/a+6+raT3FfGhjqbcYJChGLQczXD45ydZ1tqyIDn
- ogVKoDf3EaJLhTE2Tt7zTmyzSS5WU0solHiAh2SkaGhhG8nDEWk/nI9yLLeHwFqosXJuc
- KhDxSRAELIVkdoTm7R6F2HRfWtorgTLNbe65DloUM49z3OrXszyqWimWXTllThBZLRg==
+ b=YtYm/9W7uANuGYe4n1Yac0Z29fasUP2Dh0hzcFVW19+49G2Ahmvck6pMbwLgeMB3+Zty
+ cIsS1qrQFMZ7zM2SfVRaFGGy8H3G2gbxDiJsRR7jT857nZU22ivQ00Jc0gjneXHbcSsXn
+ DMJDeHfKf7Oq89RogAkBxj5T2/egHhaY+g2eNLtsDtUWMA9dyQC3azTF5jtWdxLpOymNF
+ V9Jc6EpkU+DkJrxAn2lzI/OTq2IXUuSEiJ+YO/AoaWBG490So7KgjfZ4216pH8++v+gf/
+ dM0uKMtYsytr7Mq2UtPV/mf6IGrWOgrZiYuBro3CAqnMJy8FwaYUTQ2l8z1lcbDb6Ww==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
  c=relaxed/relaxed; t=1793512408;
- h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
- Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+ h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:X-B4-Tracking:To:Cc:X-Mailer:
  X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
- X-Original-From:Reply-To:Content-Transfer-Encoding;
- bh=Ds2oBKA6OMLkxQNUdxz7F0NwV1E49jfeYYCnAjm+X8E=;
- b=a5plgn3d+KXr3pbwJQfnWDX2HaM+Y3t1Pwq4WuGxE1ieMwbpf5BR+pt5Ui0xLOIdJks5
- SZASvkodqt+2WK5HVdSw/fcBz/w83Cj8PB/8XQPEpLi42CStGs2Hl3r2zOcjHondowg25
- YI8ufXt0pd26/F/3ne9Llu+OEyAWPoK7jgl6BOm9b24t/EJNZpo+gufqJ6JBSJ7wesgfF
- fRJPYsLiCGjcOwjfCq3UPwPVQa1KDZZxe+WMlQvmWDemgvs6dXq+puwT0sCXZZTMo3ddr
- liKLZj8D32XlGqpT/2IPQONWpfgjLexpJcx+bbFSGDyYuVYPSKfSABdavabBCHiqDzw==
+ X-Original-From:Reply-To;
+ bh=A8WoFxCFyn7W/wMS/Mg3ZAhA/wHN2M0bismAZClHpPg=;
+ b=z0XN82E+phPW7jFqf/iY3yr1p68NS200sDJzxyoznZarg/BraW+QSVOJEOT5yYWZ9nDm
+ cHHZVP1KUNHLF/YQlkc6J7BaAttKl45kwMCnATmaErm7zNv/m/RKLWQfZskefNJQNVTFA
+ EpExx3cjYMMgbis8npljZiJhW/RtX1h4E0nRHS2N/RzX8ISX+TOaspwWsd999NiLAfMOH
+ NQAVc6tHhJ2c0mEzdOazBV8Q8WxfGT3R/+t4pFRqm5not5bwYOojEq8VQTxtZiGWrQxx4
+ 7Rn6xq50VyIe5APUTkUEi0LNajZzC0IsTth3zrFBEo13vo/q7IdnNZIW4CVU6wxnqAQ==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
  arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
  (No client certificate requested)
- by smtp.kernel.org (Postfix) with ESMTPS id B0A661F00919;
+ by smtp.kernel.org (Postfix) with ESMTPS id A22B21F000C1;
  Sun,  1 Nov 2026 05:53:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
  s=k20260515; t=1793512408;
- bh=Ds2oBKA6OMLkxQNUdxz7F0NwV1E49jfeYYCnAjm+X8E=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
- b=FdpH63PCeauJILBX9Mfe1n1dSpJW7lHHfxsLB8h2qXhtCzvdlYWC0ZUm5TQQctOE6
- m03R+xMBkMeVDe9gbP6MWApLLLSXO1r94XlmhCtUXsPN8FwAGNuk3JXedniMgcki2n
- tOgpwkNHgRgKIVgD+ONwImg4UNcfYCLPOD4YvwXlI6aTsr0xTAroznkzQvw9iWhO1u
- ZFp64yk+VKjGBjmFLNMBrRzdj4ArtvnKyEW0M+bAipSqG8mMIDWKVrs7HbxFG71kro
- Yy7/SWoc/uDTmabJHqDDn68mwvSi0+Dio8mjgxaC361bXcFiRrzClD8fFZpMw/S/5+
- 1UHyqhEJLsV+A==
+ bh=A8WoFxCFyn7W/wMS/Mg3ZAhA/wHN2M0bismAZClHpPg=;
+ h=From:Subject:Date:To:Cc:Reply-To;
+ b=jXVwLmcW8EZfgRjK8I68+407fhuvb5vcgrpX9zWR6S42NWXnykbLQbfyGh7vlAG5j
+ Fqrt8s8cl+kSflBFwYde8tiYSJyzG6Wj+JSWsnWerbsmwwJBHZtExPgFzxTPyDIPGF
+ smF0dQyl9u1UuD06q1gQig5kbQ7v2PqyPN2lrlA4mN6TgaXqUUNzzvY9DVzvCfBJTy
+ EaOWT/cA8DAVt1dYuy1VTyHOJHeppd5fYjv7p9aXYev9Ezuii9/UlcUUIW/dIVlMsl
+ HY+GpD0oirPRpEu/cj8jinj+zZKxITlUXlC3ZZT0iYL5vviACQcetUJ9BHbrE6yuMB
+ El81tJOsV3YeQ==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
- by lkml.kernel.org (Postfix) with ESMTP id 40EF5460B9;
+ by lkml.kernel.org (Postfix) with ESMTP id 27701460B5;
  Sun,  1 Nov 2026 05:53:27 +0000 (UTC)
 From: Igor Velkov via B4 Relay <devnull+iav.iav.lv@kernel.org>
-Date: Sun, 01 Nov 2026 07:53:24 +0200
-Subject: [PATCH 2/4] net: lwip: wget: hand the payload to an optional sink
+Subject: [PATCH 0/4] cmd: lwip: wget: write the download to a block device
+Date: Sun, 01 Nov 2026 07:53:22 +0200
+Message-Id: <20261101-b4-wget-blk-r4-v1-0-e27a009e4043@iav.lv>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261101-b4-wget-blk-r4-v1-2-e27a009e4043@iav.lv>
-References: <20261101-b4-wget-blk-r4-v1-0-e27a009e4043@iav.lv>
-In-Reply-To: <20261101-b4-wget-blk-r4-v1-0-e27a009e4043@iav.lv>
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIANLT5moC/x3MQQqAIBBA0avIrBvIlJCuEi00RxuKCo0KorsnL
+ d/i/wcyJaYMnXgg0cmZt7VAVgLGya6RkH0xNHXTSllLdBqvSAe6Zcak0SgVjFVeaU1Qoj1R4Ps
+ f9sP7fh0vZSpgAAAA
 To: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Adriano Cordova <adrianox@gmail.com>, u-boot@lists.u-boot-project.org, 
  Igor Velkov <iav@iav.lv>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6395; i=iav@iav.lv;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3141; i=iav@iav.lv;
  h=from:subject:message-id;
- bh=lCIJ4dMzfcMD6q4KqvwuhsLovHe/rjJNuwpcPbY7Jfk=;
- b=owGbwMvMwCVmNH1q96v4SmbG02pJDFnPLl9x4EteI91onbLZ94mEx7PT0oqeVfsjbl+xTtpX7
- uu0hUW+o5SFQYyLQVZMkWXCIY1bGUuu/vX3MH8AM4eVCWQIAxenAEwkJ5rhDy+Dn/Ocyl8yQmt2
- O8RwfWqOKPyU1JiYO/uo/cw6t2Nuaxn+x6l/zKx7vF9J/C8H+3Ne+XWOrltusjzdee+RpnDMHQM
- 7JgA=
+ bh=T1UUImtRC3lpa4FcpFhwynJT5smSm8vUcSpCUZ1Vj7Q=;
+ b=owGbwMvMwCVmNH1q96v4SmbG02pJDFnPLl+WySy6XRfAvtT9HNvJxAmKbw261Ly2yFpeeiIQs
+ e/V+c9SHaUsDGJcDLJiiiwTDmncylhy9a+/h/kDmDmsTCBDGLg4BWAi2nmMDLemsmuszp3A98ts
+ Zt6pwodMiZ3Npxi/8LapPD7+6ynLOXVGhufV0XN+fDfdLeK9YeqziJ8xh75w9nrd71KN2NbOH/G
+ ohQ8A
 X-Developer-Key: i=iav@iav.lv; a=openpgp;
  fpr=90C228DA68A4D5FD4F4837E03297958BEA5F7903
 X-Endpoint-Received: by B4 Relay for iav@iav.lv/default with auth_id=1060
 X-Original-From: Igor Velkov <iav@iav.lv>
-Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -190,206 +187,83 @@ List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Reply-To: iav@iav.lv
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-17.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,NUMERIC_HTTP_ADDR,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Igor Velkov <iav@iav.lv>
+wget can write a disk image only after the whole file is in RAM. This
+series lets lwIP wget write the download to a block device while it
+arrives:
 
-wget copies every received block to memory, so a download cannot be
-larger than the free RAM. Writing a disk image to a block device while
-it arrives needs the blocks one by one instead.
+  => wget -o mmc 1 -b 400000 http://192.168.1.65/armbian.img
 
-Add a sink callback to struct wget_http_info. When a client sets it,
-store_block() passes each block to the sink and copies nothing, and
-wget does not set fileaddr. altcp_recved() follows the sink, so the
-TCP window reopens only after the sink has taken the data.
+The target is a whole device, a hardware partition, a partition by
+number or name, and an optional byte offset into it.
 
-lwIP hands the body to the receive callback whatever the HTTP status.
-With a sink, wget checks the status in the headers callback and refuses
-the body of any reply other than 200, then reports the server error.
+Patch 1 fixes the buffer size check for a reply without Content-Length;
+patch 4 sets that check to the target size, and without the fix such a
+reply would be refused. Patch 2 lets a wget client take the data
+through a callback, patch 3 adds the block device writer, and patch 4
+adds the options to the command.
+
+Tested:
+- ROCK Pi 4A: a 1862270976-byte image to the SD card in 3 min 16 s to
+  3 min 35 s with a 4 MiB buffer; the first 1862270976 bytes of the
+  card have the sha256 of the image, and the card boots. A
+  2936012800-byte image, past the Content-Length limit below, took
+  4 min 18 s and checks and boots the same way.
+- QEMU arm64, virtio-blk: a 404 writes nothing; a file larger than the
+  target is refused before any write with Content-Length, and at the
+  end of the target without it.
+- sandbox: ut lib lib_test_sink_blk; every patch builds on sandbox and
+  sandbox64_lwip.
+
+Notes:
+- lwIP's http_client.c reads Content-Length through an int, so from
+  2 GiB on the length is unknown and a file that does not fit fails
+  only at the end of the target.
+- EFI HTTP, the other user of check_buffer_size, retries with the
+  reported length when it exceeds the buffer (efi_net.c:1715), so a
+  reply without Content-Length still ends in a 4 GiB allocation there;
+  patch 1 does not change that.
+- checkpatch asks for IS_ENABLED() at "#if defined(CONFIG_WGET_STREAM)"
+  in cmd/lwip/wget.c; that #if picks lines of the help string, as the
+  WGET_CACERT ones next to it do.
+
+gzip and zstd input follow in a separate series on top of this one.
 
 Signed-off-by: Igor Velkov <iav@iav.lv>
 ---
- include/net-common.h |  6 +++++
- net/lwip/wget.c      | 76 ++++++++++++++++++++++++++++++++++++++++++++--------
- 2 files changed, 71 insertions(+), 11 deletions(-)
+Igor Velkov (4):
+      net: lwip: wget: accept a reply without Content-Length in the size check
+      net: lwip: wget: hand the payload to an optional sink
+      lib: add a stream sink for block devices
+      cmd: lwip: wget: write the download to a block device
 
-diff --git a/include/net-common.h b/include/net-common.h
-index f1f670dbd8b..75640d4ba41 100644
---- a/include/net-common.h
-+++ b/include/net-common.h
-@@ -623,6 +623,10 @@ enum wget_http_method {
-  * @hdr_cont_len:	content length according to headers. Filled by wget
-  * @headers:		buffer for headers. Filled by wget.
-  * @silent:		do not print anything to the console. Filled by client.
-+ * @sink:		if set, receives the payload piece by piece, and wget
-+ *			writes nothing to the destination address; a negative
-+ *			return aborts the transfer. lwIP only. Filled by client.
-+ * @sink_priv:		first argument of @sink. Filled by client.
-  */
- struct wget_http_info {
- 	enum wget_http_method method;
-@@ -634,6 +638,8 @@ struct wget_http_info {
- 	u32 hdr_cont_len;
- 	char *headers;
- 	bool silent;
-+	int (*sink)(void *priv, const void *buf, size_t len);
-+	void *sink_priv;
- };
- 
- extern struct wget_http_info default_wget_info;
-diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-index 615ea035a28..5d275d28a81 100644
---- a/net/lwip/wget.c
-+++ b/net/lwip/wget.c
-@@ -41,6 +41,8 @@ struct wget_ctx {
- 	ulong hash_count;
- 	enum done_state done;
- 	bool aborted;
-+	/* status that made headers_done refuse the body, for the message */
-+	u32 bad_status;
- };
- 
- static void wget_lwip_fill_info(struct pbuf *hdr, u16_t hdr_len, u32_t hdr_cont_len)
-@@ -141,25 +143,19 @@ static int parse_url(char *url, char *host, u16 *port, char **path,
- }
- 
- /**
-- * store_block() - copy received data
-+ * copy_block() - copy received data to memory
-  *
-- * This function is called by the receive callback to copy a block of data
-- * into its final location (ctx->daddr). Before doing so, it checks if the copy
-- * is allowed.
-+ * This function copies a block of data into its final location (ctx->daddr).
-+ * Before doing so, it checks if the copy is allowed.
-  *
-  * @ctx: the context for the current transfer
-  * @src: the data received from the TCP stack
-  * @len: the length of the data
-  */
--static int store_block(struct wget_ctx *ctx, void *src, u16_t len)
-+static int copy_block(struct wget_ctx *ctx, void *src, u16_t len)
- {
- 	ulong store_addr = ctx->daddr;
- 	uchar *ptr;
--	ulong pos;
--
--	/* Avoid overflow */
--	if (wget_info->buffer_size && wget_info->buffer_size < ctx->size + len)
--		return -1;
- 
- 	if (CONFIG_IS_ENABLED(LMB) && wget_info->set_bootdev) {
- 		if (store_addr + len < store_addr ||
-@@ -176,6 +172,35 @@ static int store_block(struct wget_ctx *ctx, void *src, u16_t len)
- 	memcpy(ptr, src, len);
- 	unmap_sysmem(ptr);
- 
-+	return 0;
-+}
-+
-+/**
-+ * store_block() - store received data
-+ *
-+ * The receive callback calls this function to pass a block of data to the
-+ * client's sink or, without one, to copy it to memory.
-+ *
-+ * @ctx: the context for the current transfer
-+ * @src: the data received from the TCP stack
-+ * @len: the length of the data
-+ */
-+static int store_block(struct wget_ctx *ctx, void *src, u16_t len)
-+{
-+	ulong pos;
-+	int ret;
-+
-+	/* Avoid overflow */
-+	if (wget_info->buffer_size && wget_info->buffer_size < ctx->size + len)
-+		return -1;
-+
-+	if (wget_info->sink)
-+		ret = wget_info->sink(wget_info->sink_priv, src, len);
-+	else
-+		ret = copy_block(ctx, src, len);
-+	if (ret < 0)
-+		return -1;
-+
- 	ctx->daddr += len;
- 	ctx->size += len;
- 
-@@ -235,6 +260,11 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
- 		ctx->done = FAILURE;
- 		return;
- 	}
-+	if (ctx->bad_status) {
-+		log_err("\nHTTP server error %d\n", ctx->bad_status);
-+		ctx->done = FAILURE;
-+		return;
-+	}
- 
- 	if (httpc_result != HTTPC_RESULT_OK) {
- 		log_err("\nHTTP client error %d\n", httpc_result);
-@@ -270,7 +300,8 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
- 				rx_content_len);
- 	wget_lwip_set_file_size(rx_content_len);
- 	if (env_set_hex("filesize", rx_content_len) ||
--	    env_set_hex("fileaddr", ctx->saved_daddr)) {
-+	    (!wget_info->sink &&
-+	     env_set_hex("fileaddr", ctx->saved_daddr))) {
- 		log_err("Could not set filesize or fileaddr\n");
- 		ctx->done = FAILURE;
- 		return;
-@@ -279,13 +310,35 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
- 	ctx->done = SUCCESS;
- }
- 
-+/* Status code from the "HTTP/1.x NNN ..." line, or 0 if there is none */
-+static u32 http_status(struct pbuf *hdr)
-+{
-+	char line[16];
-+	u16_t n;
-+
-+	n = pbuf_copy_partial(hdr, line, sizeof(line) - 1, 0);
-+	line[n] = '\0';
-+	if (n < 12 || strncmp(line, "HTTP/", 5))
-+		return 0;
-+
-+	return simple_strtoul(line + 9, NULL, 10);
-+}
-+
- static err_t httpc_headers_done_cb(httpc_state_t *connection, void *arg, struct pbuf *hdr,
- 				   u16_t hdr_len, u32_t content_len)
- {
- 	struct wget_ctx *ctx = arg;
-+	u32 status;
- 
- 	wget_lwip_fill_info(hdr, hdr_len, content_len);
- 
-+	/* the body of an error page must not reach a sink */
-+	status = http_status(hdr);
-+	if (wget_info->sink && status != 200) {
-+		ctx->bad_status = status;
-+		return ERR_VAL;
-+	}
-+
- 	/* lwIP passes U32_MAX when the reply has no usable Content-Length */
- 	if (wget_info->check_buffer_size && content_len != U32_MAX &&
- 	    (ulong)content_len > wget_info->buffer_size)
-@@ -423,6 +476,7 @@ int wget_do_request(ulong dst_addr, char *uri)
- 	ctx.content_len = 0;
- 	ctx.hash_count = 0;
- 	ctx.aborted = false;
-+	ctx.bad_status = 0;
- 
- 	ret = parse_url(uri, ctx.server_name, &ctx.port, &ctx.path, &is_https);
- 	if (ret)
+ cmd/Kconfig                      |   9 ++
+ cmd/lwip/wget.c                  | 107 +++++++++++++++++++++-
+ configs/sandbox64_lwip_defconfig |   1 +
+ configs/sandbox_defconfig        |   1 +
+ doc/usage/cmd/wget.rst           |  43 ++++++++-
+ include/net-common.h             |   6 ++
+ include/stream_sink.h            |  75 ++++++++++++++++
+ lib/Kconfig                      |   8 ++
+ lib/Makefile                     |   1 +
+ lib/stream_sink.c                | 189 +++++++++++++++++++++++++++++++++++++++
+ net/lwip/wget.c                  |  89 +++++++++++++++---
+ test/lib/Makefile                |   3 +
+ test/lib/stream_sink.c           | 137 ++++++++++++++++++++++++++++
+ 13 files changed, 655 insertions(+), 14 deletions(-)
+---
+base-commit: 3401e006432abcbf7d73d7210f10df157f990ed3
+change-id: 20261101-b4-wget-blk-r4-833f8a3d344e
 
+Best regards,
 -- 
-2.43.0
+Igor Velkov <iav@iav.lv>
 
 
