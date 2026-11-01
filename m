@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C038C606A324
-	for <u-boot@archiver.kernel.org>; Sun,  1 Nov 2026 11:33:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FF3F606A324
+	for <u-boot@archiver.kernel.org>; Sun,  1 Nov 2026 11:53:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XgJqIjrz;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=ndt5zO2f
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=V1aGrqrY;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=i4m+NOoD
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1D42D40603;
-	Sun,  1 Nov 2026 11:33:53 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2AA2A80FA0;
+	Sun,  1 Nov 2026 11:53:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mAt3kgUtidsU; Sun,  1 Nov 2026 11:33:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3A92A405FB
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793532832;
-	b=evadiNvytfMRP2KtG+B7coHrLbOW5ad0QJq6HMmyvU7vAoPoiHhnCuly5DKEL9fSiCVc
-	 AEQeUrjp1YS8/xUIsym8FxoA7a3BwT4ZSIU12SRO/WV45c3cJF84tFSkPW4W6CaTOA3Pc
-	 NYfuUwsTozgvKie8Xz79xSNSUZyS/rUwEgY3RtdvzMFzRh0sVgDpPhx2EwdO3rwrT9mQ9
-	 mhO9TtjpQYRKqiPg/IL9ChbT76NJ4hgQKyJaxDCsjmZQzaBWR0W8BJKF7ZxZcACA4p6XC
-	 xihfbZj3vzITkHyx3y0yay4M4al7R9uFGo83S8Ga+ghth0AVZoDE3ryeUXSVrdbVmbg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TpmNefXIQWXv; Sun,  1 Nov 2026 11:53:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6209580FA3
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793533993;
+	b=o5nqA+aHlhfTr/kD1bJfOrGRsRl8gs/qZx5WyvW/xBsgPwPbOKAY4WrH0zN6nq8A4v7V
+	 eNKuj+HEV2unD4d1lGJA+wDMo9XhN9MALNohDB4LeilbiwEe2PeF1q3/iqXK6uklae0SQ
+	 37GAW5k+lKPTyVSp4BBGuKmTVJ8w18SYgwRKOEchxilSmsEIqmk1tRkhlerc2WyO6DiDq
+	 NhmYscjdNpdBnV0aYBM9dM61U82/Ix/6cYIIH6IM0FuXgp078ymAeEArZIhISC3jeF4sM
+	 Q5yI6DeiMkwtU8+/3PDdTU+J4i9mwyblu/RN16JuPG6ggXs0bHgtktmWEkigCox8amg==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793532832;
+	c=relaxed/relaxed; t=1793533993;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,155 +32,154 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=SFatMKQceOkp8+zZyxqdf2FXnnXT+HLwQkfmF8hviho=;
-	b=hVLVuzPDiDO7tQ7P6Jyg/JVFXyxqXPj6M/8UBCR0jzy5eB8dnhzNs7H55nyfCZoTsjVd
-	 UlgUluIw1Uj/HDpYrhvWc+xzYl7Urt0nDBnSTgF6CayHumynSmfHhB/YD2XLxCiutrxdH
-	 vdMT7OaMzH4p9InnZ+KKR3ZlZZIkNzBmBehXep0jSJssIzN52/fiWeofUf32jB0CaCQGC
-	 IxamJIoLiQdnRMh/SGX2mywc3OqTkPf0D4iFTyWkwFEBu396/2xmJVG2/hbtyQR5MixVe
-	 bzuSaKGYHlSCD9IMF/W3H6knOeKFX13av5c0K50oVrEJdHoc9lRSglraVXHdDbiwQlw==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
+	bh=NR95k8bLvy8kZ+NltoEGyYjndBr3KQTpomy0PkegGR8=;
+	b=HDQ9InpU+10jRhQkC52I7NLpoKMAN5zAJF9yDyavDS9rimKbkxrcUbVX5st3Aow9oULs
+	 xilvFUIl/VIxrPcGTgavp0Sbhbu2mc/kDCpT5hjchPZzsJXgriOcpzbzHF04UQQCL+fJl
+	 npC+2BlGI8FXvMrn+wc2TZEIWYH4rwyJOy0P+rG40mPUy/Uxmansfkk3zbGKv68ns6Arc
+	 tgAY+wyvMWoJ2hAvNADb6fOlrYHuZM75Xrwzq8Y7/DX6hj63O1Kr3eeGNz2PYfLZ/Zb7k
+	 lJvLy3ynFjPzCIx82IXP5/vtvc3WAT2vhsNqtmqGufHRZIBAKH2FwJYdKQ+cQ+KrZ0w==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793532832;
-	bh=SFatMKQceOkp8+zZyxqdf2FXnnXT+HLwQkfmF8hviho=;
+	d=lists.u-boot-project.org; s=default; t=1793533993;
+	bh=NR95k8bLvy8kZ+NltoEGyYjndBr3KQTpomy0PkegGR8=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=XgJqIjrz13DF84tIvhB1cxCb2VQibpqSmDpQ4ns9p86n0vBzAKguksHdzKajCZ9Fi
-	 1SwsKmrLWGvUcpavKQ1ugrmdtkLbd4IiSJAleGOXL/ROPCN0IhYNc+Abu0UJ0AQtGB
-	 UozHr85LqArMzyE77XuJE0TbNoi7stuhFWLzZb83HYUEHiLz3MjBm1Kaw3O2aAsOQH
-	 5xeb0aiqyMBObck9relh+ClfSId5K2DFUsrS+/wTWGA5LH4LN4ZktgxdwN5WxMf5SK
-	 CePk/OKulvF/LMrFZZaej208YBlYDr9ixOI0RgUagnziOInpXOsGlRTPvQdjItTqOR
-	 B5OV5MWSHkhLw==
+	b=V1aGrqrYuZdE0TgtyzkBTwD90dIzayknjT9T843b5Vc1pY2aNwTHVZBli6IFsd64R
+	 2+6pP6KYQAlOyNPpMfkdrkkCHVZVhrB5Q3plG0GouL6rJ4Wap1S8tYi92Bo3YmA6uL
+	 Y1ZMYDBJgoNuJrZG4DO9qQrnt2oR3VAYknSCQMU3TU/fbqSsrEv4S3gyV7vceIscop
+	 TRZnVU9AbzuBWC4xhrYnkQ3+J5Hmivp5YED1gDhwcmUXexvCFojTjmKtKMaDLEevzt
+	 4/Kl2sZR/uRf7v8rypisjyIB7IkqfhvtmFtgx5hQ/DP7F4yl5MOzQGaokBEghyDDdw
+	 Xh4mZeHNBU2Gw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3A92A405FB;
-	Sun,  1 Nov 2026 11:33:52 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id CE4264BC
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 11:33:50 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6209580FA3;
+	Sun,  1 Nov 2026 11:53:13 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2B514323
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 11:53:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id BFC6660623
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 11:33:50 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1103E40602
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 11:53:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4qPgThsN94H5 for <u-boot@lists.u-boot-project.org>;
- Sun,  1 Nov 2026 11:33:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A856260602
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::112f"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793532830;
- b=gAOKSTe6agrc8EPeU88+2HMyasOIu4WcWXOdds2nzqnH2Ktl1grV+f3sgxRPfr1EfTX7
- bg4uxI+wXL5NLftoYZjuxz+pXnrOSzP3h6LMCY4qSXfR99pVfpskwWmOoa/pBAUOu1j7x
- tIR9zLV1loGg13nlwrw51yqYnwlaGHwnP6QnuurKF4TLsAE68OtIXeSshytJTfbo4MWw6
- ZUhOMuOxOGzhVsiy7kql9u9lrqEzu/TfCQKeglWU0MT46VaIoimmk0sWukbYuKpXVSgOc
- 9WDcOZDj20IlvgCBK22cpyzAbjsy0hEoIkD10vuHlDgpN3Al/+83td6qIHsmetzl+Wg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id El57cEo1lFJe for <u-boot@lists.u-boot-project.org>;
+ Sun,  1 Nov 2026 11:53:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 85947405B8
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::1133"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793533991;
+ b=oBw8HcEbp4rLKGfYUeHMEOHwwzCIEzEgOoGIA0XkjJO62WljReG1m0ghfbiSAHXApN+6
+ cg4rkBO7t0VJA05vLm0y/9bAJNVoFBM4G/Vr2q3xyXW18fM0e94WxcvolCBW/OU0kp0QI
+ uq99/bQQvDSDXcv92BGFsBVx/tMd53ydqF2vRDpdt6GVSwDVS3jimql/ljwkslbJqpiAS
+ lZb6E5jJiZXeq4IaV4gauzj5huLFYtEVZJ8qd2lUzrr9SCSs1MwHXRMlmYIvlBRc5AuIn
+ q5shYUz+cm4WX+gKGqpvPFiPnElFnoOmM4kjEz0C2HFNA1Kmd9lCNmjJ5/CAugJ273A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793532830;
+ c=relaxed/relaxed; t=1793533991;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
  In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
  Content-Type;
- bh=SFatMKQceOkp8+zZyxqdf2FXnnXT+HLwQkfmF8hviho=;
- b=VJr8mJPAT3GitFCwoG4bsZyMXPIDWddhMsUp8aomXZ1mPLxff++KTl5h3RK58TAdbunp
- T8O06LXPTv8scgAzSWYQTkQgwWOI9D451QeVhZh25AXb4TRn2T21e2Fkx563bSErFppXI
- 7/vYzwxko0sqA3A0KJj+MIwN+fGw20MvEPz7CH7COyGrXM5tDZ2VXqJiZxtJPs1yTOxOb
- J+mZWHQCAtKcTvfeX+kdeIGgrOx250UWnSVbs647XuKi0FI3hP63cEq2xJ4AFsuRRHzSg
- 4MKReGuqiFj/uPuq5IwXkl5KIUbxDRFac+fozJiCO2c8r+MvZF6qF7fw6wPFKzwenlw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ bh=NR95k8bLvy8kZ+NltoEGyYjndBr3KQTpomy0PkegGR8=;
+ b=LqY1+NBQFiSNDBdnpo+JE47tLKnnDvFT3RFu2l9Rokvm0cba9bsAkzCR1NfOoF151ghf
+ AG2z062D15DElyXtG5aB4UOubz3y9GEmRrYPiR66LWvSmN24F0mdx71ZEgUUGb5OboH+W
+ VT8+kPHsUP7iTHaGo1LqwqWPgTD7cqGCME5Z6FvkVhpVmBa9SvLJhaDRktCiS2sTxyjKH
+ j0qGx682j6noZcj1EiELWVTwjtByhyiIEAqAiE129WOu1NZqh3URwbl2+b/oNXCkXfHn4
+ 3J9mEvyOrSSDPGg9ekm9lTndmzruveEP1tMGQX/h2Pk6VbN6WLJGKjzM9MgdRQSARhw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
  dmarc=pass header.from=linaro.org;
  dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=ndt5zO2f; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::112f"
+ header.s=google header.b=i4m+NOoD; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1133"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::112f; helo=mail-yw1-x112f.google.com;
+ client-ip=2607:f8b0:4864:20::1133; helo=mail-yw1-x1133.google.com;
  envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=ndt5zO2f
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A856260602
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 11:33:49 +0000 (UTC)
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-8b0a921ee46so17412097b3.2
- for <u-boot@lists.u-boot-project.org>; Sun, 01 Nov 2026 03:33:49 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1793532828; cv=none;
+ header.s=google header.b=i4m+NOoD
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 85947405B8
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 11:53:10 +0000 (UTC)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-8b0e21048f8so17390877b3.0
+ for <u-boot@lists.u-boot-project.org>; Sun, 01 Nov 2026 03:53:10 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1793533989; cv=none;
  d=google.com; s=arc-20260327;
- b=J4+ne/HM/b+sEniBKwPgSODYOm4I6vVWZtQQT2Xkr1t/f8VvbhSxUWMKbje/rFvRIS
- a/0v55B50YLQYLDDL2K1f4qJYkOoDInWFyxg8HS+wXY76p39L63opIXaB5n7Tu76oomc
- i3TONCyF+kdLLD21CTG+arvvO4StLkq+R6LaYe6Qbr7B404+wfC0aTvBec/ssPx+1D/L
- PzYNUqkDN400wur1b4rM9UC/GP3s9sgXS8IxUM9LAG4UAVRGEkMknITQ3AI5Dzget3ph
- pqiuZd76KImbWLWDNw6HPDPjDsX7WL/2ThOY3bl/eblpkVCIXOkewicV06Bp3gF6ahkE
- /DXQ==
+ b=KLDIZ74V/w7pA5M8jPdbi65SmXZz4kF2Vnp0o18Y//VPGllG2DxanrvKIJ5Brnengz
+ y1o4jXJ1cC3dU7PDDi7jSYG3l2nVhSQs/sQrIHtCs8DB2kXeLM2lKy9ctBs4cW1uE6Xz
+ GOKrBxyGAA36oe4i8R8TFdiytusyg+g4wV7/QDh2nccgiQA2KrBinPSyiRGB5SvLwfeL
+ 2zvS6p0l7u3EQEcto3Jpyg7izLvCYgPVcOdA7Z1GcmXGMiDkBW548yMagl0eCnKziA2g
+ Z3dqmrLkdRZViMegOA9ni+bXbcFyCV+zUUDz3dXZKBMuY5UVY87mXIPIAJLWl2/NLN4k
+ TXeQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=SFatMKQceOkp8+zZyxqdf2FXnnXT+HLwQkfmF8hviho=;
+ bh=NR95k8bLvy8kZ+NltoEGyYjndBr3KQTpomy0PkegGR8=;
  fh=7QWwyUnPAQm5WNln6yz2UnPVMLv30rqCuNC8nkM6bR0=;
- b=K/LYmOx//6Jkp031rjJMPIrHcmeOASA7/Tjmr7ZYSn8WKh6i8s1A0rwBr+vTXuoBzu
- D02wFwWK3wKdyS7WGozB/H4imKVoifY5dIjsQfG00f/Xvnx27PpDEXU0BGELBDGw0CKL
- epOdl+CkyXiNtK0/iI+R1HwNBJHDzxmYMjKETaqZIXfpr8v7511zbS2n7d9XFn+yP3f9
- HZBsqC7S0mzo2uzhK0wTXTQmC7Qc4xZ/7OnH99TVrHr75Dt9L14u3MoRX98nWRHF2yc1
- ++I92Qboo1pn/m4q/IyylXq4dN9FyxR3N/inPh7+V43/jOGKwaaWXX68jSUwJuZ0tN4x
- zkuw==; darn=lists.u-boot-project.org
+ b=OoZriXVqsQi63gXP5FVhVMm3VoXxFG3ccBIEBdYTl7u/sQAN0Ib/GPcbFF787q3Ymb
+ xBGI02d5v7alKow3HkNuCGYFOl81A8+9HA5AcbtROSI2ynb5nSXju6SMq3g3n8/bpLr3
+ /NrEX9KmoX2WHNxlZJsBGhafVX98vyoaDtPOFQ+tP2zjYSBFCDm1GWL55h7CLFPiU5Do
+ +NeWXHFylxtI6nIyNXmX5oIOUOchw/NeQvlaftgd8ZqbRBnWKHtbMvADD5pHq5EY7rOy
+ 9zrjcUMvHWnFaJ8NpliLa4tSYwkoG+AJzcuOu83gomiAV6VREOwbBdizl20oSsac1aH+
+ iKwg==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793532828; x=1794137628;
+ d=linaro.org; s=google; t=1793533989; x=1794138789;
  darn=lists.u-boot-project.org; 
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=SFatMKQceOkp8+zZyxqdf2FXnnXT+HLwQkfmF8hviho=;
- b=ndt5zO2fFU3UPUCLA3HUQgZdZSdAwYpdDty3FQ+uvjNEkveMT+bhNVLrGq0L+dyH+7
- sc6+T8S/trvPCge2jD/M4SvwCAKNUroZruAW2qEdcAaTDJF8bAbZS16ChDC41NWbdVnz
- uIs5jaf/xT6pPsbbkWFoYSiRgR74si1E3IXhmc6YPVit0AnlnroNGipqXe+AZYwixDKU
- MceWo/gSgeFqVApnFqN7Q2cigTxAj2Fk5UIzbFf0owevgVEKbR3z2YvdkqHjLbAqxf3S
- mrVKlUuD18urcVsQqqXJEqOX+ZVw5o6D1oTsI7bfC5U4kT8kGDQFezSilNshZH5tAqsl
- layQ==
+ :content-type; bh=NR95k8bLvy8kZ+NltoEGyYjndBr3KQTpomy0PkegGR8=;
+ b=i4m+NOoD2odxIqRpWiDXuZ1HKBV8S6eJzheF70rhbJsPi1vLng9rFzdw3xd0NcSqQJ
+ BaCY03VP3c+PmTuGyCX8AoLUkgA45NurpkWibezIMqCQ438YhDzNRr3P7sfuIsnwnY/l
+ Dmk2480kN7UrxOjfOSJZq/psPj2GQvhzi+jDPqx1Qg34OZxzAELJkxk7fsanyPtmlB2q
+ gg026AzThXt3YAZ2/Pr6jvFIsWx8xeQu6MP+Kzy8/uRRe5gwUmNanX8whzB7/nj8Pevm
+ Q+X2MXeh4eVClOMcjoDv/8MW+8xRMlSdPqFQuhfhe5Jmfm9CGeZEe5fzmupJIbXl+Ytn
+ 0v9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793532828; x=1794137628;
+ d=1e100.net; s=20260707; t=1793533989; x=1794138789;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=SFatMKQceOkp8+zZyxqdf2FXnnXT+HLwQkfmF8hviho=;
- b=LS7bKwYo72zbqe1FuOCxVqVc6z2uruvTmGNJDQ6dOj9rC9DpuHv0u2ssMqPcK0waqN
- gUkIK+yzSCSucyDRu5x58O2w+tgw3b/U2I1F2uIP7yRlXmASoZNQF2C7/y1uUgadJ3sc
- tJIzZe7UojvfPIZiPY0NYsR8PPBi7qFaarCEpNvF5HfW9/H+1Bj4k+aU1Z3NfliTO44T
- 7k+xGy+JHj1tMDQtl1NhgX/vBX7sYgmZXamLJIonIdXdEptPPE954jjicT49QuUJMEPu
- qInooSMARA9//bAAgnby7uXldFZ+M7eNJg079n1eEINK2U/EdOsqzzvyx2EKf+yZZ59i
- I6sQ==
-X-Gm-Message-State: APuU4Z/RABcThySSZXMQbEpupt8+9z0SpwOqyMcwhvZURzhfl6KJK+ut
- Jn6lq60/vHwDPwZyErotUyKYoVWxuvVDaDQXss3tWHz0VHtOj8ggqfiibi5Qx7XBTQFNHjC2qDC
- nNw0hv/+Zy/RYggcdhqPCGjIHgAfGxroceCLCo1Il+A==
-X-Gm-Gg: AYBFou3mwsnqPWlZnkeKKHZivf70zs9nX86wAB13Mgquj7ZlJ5rwSZkZ80jz0j0/FPA
- A+SO+dmFYayPIjaH4UBLemDEKxu2w9lpwiKsOavmak0Dw7BPo5LCiCKKyxaN2sRDX767fhGf936
- ZbHNY+ZFUQlRnAnva3IWHibnUOy7svVDhft2xOY0Z+HzfN+dWd1QIDhkYPUfpcXp8sAIEzhxUoL
- f/+fqP3LZvoWdbcq/lWhkcmQwurfjAzUWo5THKdTvTM6vM5nQZ4CO0joXksTCf9YSDGhUivwiYG
- SDWPYj8xyVD3+A8GO5BVb6RY6tLqmbFY4O+NVCn1mbLxd5y4BdOv4sZ28qDtC08MF44BC8SRp4y
- s87Iaiu0M1ORNqR8pWhwmtg8x6aSoS8GcvlbGFhdneyfRtquTeWrnXgLMMFYYULXG3fXyITo8Nv
- OSapjW9fC0rrYjQozolvDbVOH9DSug5qDyY9JoLVYdRSFgUitW7ecITBEbxAfg6OO6auwMwNZkH
- SyReIC3N2L9bfGhMyCpODxgvyFg3AYixd+bickAAyVIc26xcYHSBtOyHtc8SyQeDrI+eNQR/5Og
- qVXagtRomktedur798S/umE6WRrNrRlVaBqtOCkt1Vg1ejpgHoTUo8iRlE2KnczXMymldiiZOL9
- McNG9/0Uedgn3g/QpTsYwle5tz7VB/QP8XeTGmHeW5AUCsnqme7iwm7HwJlhIjMzLQWDB/lRevP
- fg/vU5cFWfB8DMyYnORE2L01C0bBbxj+sOX6U=
-X-Received: by 2002:a05:690c:8f:b0:8b1:86ae:8ff6 with SMTP id
- 00721157ae682-8b2b658c773mr39724577b3.15.1793532827675; Sun, 01 Nov 2026
- 03:33:47 -0800 (PST)
+ bh=NR95k8bLvy8kZ+NltoEGyYjndBr3KQTpomy0PkegGR8=;
+ b=13WWV9LHoXMNw7GL+WvhW5HTrWPc/6lItdLDtiQY9ghgGzIxHlTI24LA5+gmKEPXN3
+ qpNlBPiJeiNjVRBBEJO2HJNCu817qU5DfpcTbVIzKwrP1wW9ZAMjoiWYMcxMQrPlMyV8
+ uqaRpE5D7GxCqqmUtd40lkuHdC0U1rxfR7yAg7fiIGmbZ0Bokw2MoT5TSrW34C/4Gdle
+ aFcJUhI69o+LX06ZC2/43VZULnVUzP/bplndpkcBM9YigaRkx02YTDjsgFy1s75Tt302
+ EA2COIPPLPJNshR8U1Vc1yqXza05X5juA0LrLIecCrOE6j2EzrHhjYXtS4MVHP72uGuH
+ sGDA==
+X-Gm-Message-State: APuU4Z/M0tGUEJCLlKqTSPPE33UKdoI8y6ukpgR/1pbbEnRh5rxhojAg
+ aGDkK6CSSK0h+SyuEjfoXZCoArPyBSu6bvkU/s6ruLfht6gaMRKN120RGTxoqQ+p096tKXb7Y++
+ LUkLqXFqK1qX8S1ALWGHrHgfef+aUr5RCNTpzZEcrkg==
+X-Gm-Gg: AYBFou0Kpfx6Xanev/NvH8N9iQkQ/wHl0KfoR/aFDuQb/H/RrgttakAMTciL1oGhEjo
+ OgigDyMOQDd0I3+bNAyjh+pKmVy7SldSCA1reRhZ6GWiYWjQ8pBA/QTszfI1TX30K2yfY0Iyf0A
+ kaWFQ8k8cnJJ6r+g2XFJY/5Y/XiW++vgyMCiLUIbrlEsf3aFhtEfi2ajfRR50ocx6O9fPjyPMKS
+ vjS5ypfz8u/nffdbFLBqco1wBW4+H9H6P+N8F1UAJK2l3nj5/bxZDPrWkoKet62O8kNZpexSweI
+ 1FVuK6tKGxhuN/K41w9PcnhPc7T00GkAQ3qLg8LwJNCBxVfPP+Qx5Bqb1XzJwYgVAD6ecg+4VPl
+ IDzUWsky8+pWPwkhvnyy3ry0bfTYVFy8EmRpwTnLIOLRQgIxzIGXeAN5rJs2t4KGoW+4KhMKvNQ
+ DqHGyVBFOi3pNhsKmKEVk1i3lRUPan7mcl2+TDrQoy+874LVVYLnVUxstfuByuhtt+f5IVhRM0M
+ tbSOaAUV+utVVRNYuBBCGux3FDRt/DLoAbQaiL/0p4kj2kQv5VuV5aNBrN4QxpkJ/4/bOv7BwcD
+ 2MyEuuGS7Eh/P5UPlmmXPVjehfLAezM/+Rg8ExsCXHYpi2rnjvDP36rd8Cj5C1lUyluUeNnJz3/
+ 6jf3jB/4PMSEYIzhXIlzMxuRGanw9OQbzGHktsFIG/rUnsh+PGj95wtYf4nijYKYCpE9B/MeG51
+ iyEuepoJ2WOJ84ln2Fz6fRoV1MaiU/1DGDRck=
+X-Received: by 2002:a05:690c:288:b0:8ae:87e7:9ab8 with SMTP id
+ 00721157ae682-8b2b683c2damr49746037b3.67.1793533988643; Sun, 01 Nov 2026
+ 03:53:08 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 References: <20261029150906.1558380-1-tkirchner@emlix.com>
- <20261029150906.1558380-4-tkirchner@emlix.com>
-In-Reply-To: <20261029150906.1558380-4-tkirchner@emlix.com>
+ <20261029150906.1558380-6-tkirchner@emlix.com>
+In-Reply-To: <20261029150906.1558380-6-tkirchner@emlix.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 1 Nov 2026 13:33:11 +0200
-X-Gm-Features: AclHuK9dYFsg5nWcCwAqPhjs0FkHTBWX_ARn5v3Oyo2-8MGLXm6EiL6snP7YvQc
-Message-ID: <CAC_iWj+KMC-9UR6o6jWpOku19OpF4kPGQ939uiOfa65XJYbd=Q@mail.gmail.com>
-Subject: Re: [PATCH 3/5] tpm: detect active banks with algorithms unknown to
- U-Boot
+Date: Sun, 1 Nov 2026 13:52:31 +0200
+X-Gm-Features: AclHuK-2oj0_YztwH7Ji4WVhI06k3i4FQ4xuD9AWBv0_b9yCW_N4zpS7iFHtziE
+Message-ID: <CAC_iWjLX_3RAzxeCy7HQHEy+fZS4Jm-J_E6wnv_QG5+DWpX+GQ@mail.gmail.com>
+Subject: Re: [PATCH 5/5] tpm: deactivate unsupported banks in tpm2_auto_start()
 To: Tycho Kirchner <tkirchner@emlix.com>
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
  Raymond Mao <raymondmaoca@gmail.com>, Eddie James <eajames@linux.ibm.com>
@@ -194,90 +193,77 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Hi Tycho,
+
 On Thu, 29 Oct 2026 at 17:09, Tycho Kirchner <tkirchner@emlix.com> wrote:
 >
-> tpm2_scan_masks() detects active banks with unsupported algorithms by
-> comparing bitmasks taken from hash_algo_list. Algorithms which are not
-> listed there at all, e.g. SHA3, have no bitmask, so active banks using
-> them are never detected and never deactivated. Measured boot then fails
-> later on when the digest for such a bank cannot be created:
+> With CONFIG_TPM_PCR_ALLOCATE, active banks with unsupported algorithms
+> are only deactivated by tcg2_log_prepare_buffer() or, as a fallback,
+> when a PCR is extended. Users of the TPM which do not go through
+> tcg2_measurement_init() therefore only notice the unsupported banks
+> when measuring, e.g.
+
+Yes, but users that will call measurement_init etc will have
+initialized the TPM.
+The PCR code exists because some users want to use the TPM only as an RNG.
+
+IIRC we can't get rid of the EFI call, because it's there to configure
+algos that where handed over to us from a previous stage loader that
+only handed us an EventLog. Can't we fet rid of it in pcr_extend
+though? Also if you do get rid of, this needs to go in tpm_init()
+instead of autostart
+
+Cheers
+/Ilias
+
+
 >
 >   tcg2_create_digest: unsupported algorithm 28
+>   Cannot extend PCRs if all the TPM enabled algorithms are not supported
 >
-> Track active unsupported banks with a separate flag instead. Also return
-> an error if no supported bank would remain active: nothing could be
-> measured with such an allocation, and TPMs may refuse it anyway, as
-> observed with our model.
+> Deactivate them in tpm2_auto_start() already, before anything gets
+> measured. If this fails, e.g. because the TPM refuses the allocation or
+> no supported bank would remain active, return an error. The rationale
+> is that with CONFIG_TPM_PCR_ALLOCATE enabled, U-Boot is expected to
+> manage the banks, so fail early instead of at the first PCR extend.
+> This is in line with the TPM_PCR_ALLOCATE help text, which does not
+> specify at which point during boot the allocation takes place.
 >
-> Fixes: b6228b2e785d ("tpm: add wrapper and helper APIs for PCR allocate")
 > Signed-off-by: Tycho Kirchner <tkirchner@emlix.com>
 > ---
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
->  lib/tpm-v2.c | 21 +++++++++++++++++++--
->  1 file changed, 19 insertions(+), 2 deletions(-)
+>  lib/tpm-v2.c | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
 >
 > diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> index 43ca54621d8..b727c645d73 100644
+> index 18ec9eb960d..bd049fed748 100644
 > --- a/lib/tpm-v2.c
 > +++ b/lib/tpm-v2.c
-> @@ -66,6 +66,7 @@ int tpm2_scan_masks(struct udevice *dev, u32 log_active, u32 *mask)
->         struct tpml_pcr_selection pcrs;
->         u32 active = 0;
->         u32 supported = 0;
-> +       bool unsupported_active = false;
->         int rc, i;
+> @@ -232,6 +232,18 @@ u32 tpm2_auto_start(struct udevice *dev)
+>         if (rc)
+>                 return rc;
 >
->         *mask = 0;
-> @@ -87,8 +88,19 @@ int tpm2_scan_masks(struct udevice *dev, u32 log_active, u32 *mask)
->                 if (tpm2_algorithm_supported(sel->hash))
->                         supported |= hash_mask;
->
-> -               if (tpm2_is_active_bank(sel))
-> +               if (tpm2_is_active_bank(sel)) {
->                         active |= hash_mask;
-> +                       /*
-> +                        * Algorithms unknown to U-Boot have no hash_mask, so
-> +                        * track unsupported active banks separately
-> +                        */
-> +                       if (!tpm2_algorithm_supported(sel->hash)) {
-> +                               unsupported_active = true;
-> +                               if (!hash_mask)
-> +                                       log_warning("TPM active algorithm 0x%x unknown to U-Boot\n",
-> +                                                   sel->hash);
-> +                       }
+> +       /*
+> +        * Early deactivate active banks with unsupported algorithms. On success,
+> +        * this resets the board.
+> +        */
+> +       if (IS_ENABLED(CONFIG_TPM_PCR_ALLOCATE)) {
+> +               rc = tpm2_activate_banks(dev, 0);
+> +               if (rc) {
+> +                       log_err("TPM: failed to deactivate unsupported banks\n");
+> +                       return rc;
 > +               }
->         }
->
->         /* All eventlog algorithm(s) must be supported */
-> @@ -104,13 +116,18 @@ int tpm2_scan_masks(struct udevice *dev, u32 log_active, u32 *mask)
->         }
->
->         /* Any active algorithm(s) which are not supported must be removed */
-> -       if (active & ~supported) {
-> +       if (unsupported_active) {
->                 log_warning("TPM active algorithm(s) unsupported by u-boot\n");
->                 tpm2_print_selected_algorithm_name(active & ~supported);
->                 if (*mask)
->                         *mask = active & supported & *mask;
->                 else
->                         *mask = active & supported;
+> +       }
 > +
-> +               if (!*mask) {
-> +                       log_err("No supported TPM algorithm would remain active\n");
-> +                       rc = -EOPNOTSUPP;
-> +               }
->         }
+>         return tpm2_update_active_banks(dev);
+>  }
 >
->         return rc;
 > --
 > 2.47.3
 >
