@@ -2,131 +2,133 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61CB4606A324
-	for <u-boot@archiver.kernel.org>; Sun,  1 Nov 2026 21:32:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3449606A330
+	for <u-boot@archiver.kernel.org>; Sun,  1 Nov 2026 23:28:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=eiVR2Vz5;
-	dkim=pass (2048-bit key, unprotected) header.d=free.fr header.i=@free.fr header.a=rsa-sha256 header.s=smtp-20201208 header.b=We+E6ceN
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Q7gQoPKW;
+	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=MYGyZTa/
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3FC8440533;
-	Sun,  1 Nov 2026 21:32:28 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 09ADA405CE;
+	Sun,  1 Nov 2026 23:28:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0Nu8fAp87BMU; Sun,  1 Nov 2026 21:32:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 76C504054B
+ id eaCWDkBQYYh4; Sun,  1 Nov 2026 23:28:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 04E76405C8
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793568747;
-	b=az5yJH+s+zI5X7KwNhcVEc7mNuMgcdLkuxfQbGmrVipsIAgUNrXp9PiDAkm28iwB5b+i
-	 wHUBYolFAztlNcKh8QfbV/+9P0C6lEbRkWiZkJup2+2TvK5gY8OUXKtL47MYf6GJypAwU
-	 6Gj9NyOvgAIpDY5KjEClNh899RPTsQPFNBdsrTNmHiRTocV5RdRLdhBPrgbU5gkm+7Mwz
-	 0x4sjmogT8Vs5URbn/5rLjZ2rzkA0X7gXM/lCMEkgsnvasVxopmelJm+vP5JUwTVr3HsJ
-	 53Z1WuhA9L5pIvS8sD7kD9K4wZrRFdfdmuXBkwzNny/LvjHQYu7pSvaIx0E/QlBbRmQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793575690;
+	b=s8j30qd4eTBtRVFuQkzL2T9Zf+O4erGXENswl2E+lsHVu2H9vOqBIaeqthBi/XSFo3V9
+	 0fgWhpRjvR6HD/oGxja2wNclM4+R7anp/0RYdw6gvpDz7h6Jgmm6rrGFeKK68J8rThlB+
+	 ZvJ4LWSr2PQvbY+Ib+4AkMwJgUdrrLplq1YD5ZpOycY43TAFy3XdEcde37JJ+pTO8OWcp
+	 D+zrj3BKrmA2uVq6a5UtGkOSXj+f1osbzXxlfoXs9kehS7w17E4ncME9tFLl148Un9DoD
+	 vieColkVgc9eY9xxMuo5qPczUKH5a2tIAMgdWwwjCUreoWkCB9MtEMRECKMdtlAQ0Qw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793568747;
+	c=relaxed/relaxed; t=1793575690;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=ACa2o5a44V3JmvX1AUhBq63xxVb5nLFunepkQ3CIWKw=;
-	b=YRCmjdaWP+IwSv4SuZsDG+fsC2wdAZtd9ED2U+bunhvWvvdCFlZbvka45ftEivyBCF06
-	 RQcQxW3bWqxIRLKF1DuS9cozVzn4W5ZJrIHw+zA0hjfqCdptZtzaZwrj/8NuX4vGg3PWy
-	 aYrZGrbkPjPYPbF3bTr83PJsL1dwiMqDUmGTYdNiF5phFsZV2R+LalITTaAU44IjCW0hW
-	 ELT4KIraRTJe7T9wkFCGI0CKmhjM4LxHv0E1q38UnMSzqjLTRD0qheoxbY608wnlM8DEA
-	 M3acTIEuecvXK3esVoa26GcCAIF5mTOv9ISCJKWl6k6GUXtPfl42UBffZt5iV9PR/mw==
+	 Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 In-Reply-To:References:Organization:X-Mailer:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=48KTX7AOk3CwsQ9KAtrOhGtQw23p2+Fmh0gxH55n1D8=;
+	b=aeRY5VcBIBZ4i1VK9OTBtykgS7kMymuWIrGo7lUVzBwT5MRTLXrvYHO+7vNB6RyCx3Lx
+	 q+B+tnxLJNAs1ryXGChDSTERoE8QA/nNad4LaC4e8A7hc5LrRKkqvQmzgsoNbSlimk+C1
+	 vsR7Qig/pe9TPZdDCCRoEn82T7X0G17dFnaCDKOBTl11VFMddwhVuLhMP16W1Ej1EufVD
+	 WiyYG/fo0mQPZ5pGpKvUR4nfszcvG+nAzq7r5o1JcIQQ+2jGk/wiDw/yg7PEYvVdeeJBM
+	 FHrxD0fm6blcNyJDfPl4vDkfG2VwE+79Y5byNyARI/eV+Jx7E2Z2em247eYQdP8SioQ==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793568747;
-	bh=ACa2o5a44V3JmvX1AUhBq63xxVb5nLFunepkQ3CIWKw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793575690;
+	bh=48KTX7AOk3CwsQ9KAtrOhGtQw23p2+Fmh0gxH55n1D8=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=eiVR2Vz5WKfrXoAOiZjlIxVICycw0/vbybHLoba4Km0Wm/kZ5dLCOk51tsHzLwz8X
-	 nQjty0hSn2PrVD1AlNvnM8ZOSdZsummV56AU9B9TGMyyJr/KdD3Mmb7azz3GEg/LI+
-	 /HxPwKQFUh8PL0ad6IKZcNfRHYwngprP/HKePg/3b3S/F4fd4bT8n/NLG293HOuGkZ
-	 vwsDfpyrwDd7DrvqA2YcZPL2GK1EWYQMEu4JxF4TMW1VplkL6O/xQ0B2mnmF6oUiGW
-	 gL7i/w0K6B4wJ2OIfCAsX5KCzfTR8g4+69Jsq7eTbKPqtigLYHhBRkBjmGgUDUSps4
-	 Dt9ndx690c/OQ==
+	b=Q7gQoPKW+j6NcxS220mE/NJUSJm9dxmDRClaCrtnEmdSPs8ATnN6qVQbBuYAWA4fm
+	 WA6gtwrqY724kzQZCOZDB6Y0y6Gqp9xH1tMORXGhZ0o0V3sZcc/bv4LUpz9wns21yn
+	 2U5+AULeHH64fvBgwKePfV8MH+FT4OG3FhU2pQZhXy2BKUXrd7xv2D4kFA8g3w7Tsj
+	 uAICAqcWVq3rvIgdETC1KcAsT7VmuEmWOiqsGOnzEcWCru9JtJWwxgKVVsZwPVOpuQ
+	 lxFHbcUEouymS+O+RyKXU2kHXysxHFEmj/r4gima88ODDaXmlm7jW9oqWBelG+vxb4
+	 xzW9Zg5y9GcWg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 76C504054B;
-	Sun,  1 Nov 2026 21:32:27 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 9D7F02AC
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 21:32:25 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 04E76405C8;
+	Sun,  1 Nov 2026 23:28:10 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id B0D754BC
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 23:28:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8EE1860612
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 21:32:25 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id A28916061B
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 23:28:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Sv57LIRrkPgW for <u-boot@lists.u-boot-project.org>;
- Sun,  1 Nov 2026 21:32:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C423B60606
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=212.27.42.1
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793568745;
- b=ggBROZgxKzIfw4+JS3wvX0hqDvuXKlz08ym2TPJLKtQsz/7q+WIzXPyqc4w6b51lzJw6
- 9esqyHIQBQEVnUUfnE/3Zg8fR7i5e2cB/0DMsD11RUBJePMB5hNWDvnpbG+imA26zQ9Nw
- mfuNkAISgWFkjib0Szh2XDcI6uR51PeCW0FCXe1SdSPUwMsEiGEy8Ooj31YqtG5jjjSjK
- hKBQQK6DrgK6oF9bjjGvAaH6hA/7qBFTFPdk+eRiOmGjmocadZwKcQjxgC/tGqb1D2uMq
- y8UeXaA4eEGvYnZzp1OZ8PMRfe3PuFT7VOlKujIQPe5TyzB7I8e7ntl9DeSKfimhGCA==
+ id xiOfl-pn06ce for <u-boot@lists.u-boot-project.org>;
+ Sun,  1 Nov 2026 23:28:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0472060619
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=217.140.110.172
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793575687;
+ b=qF0PEBd1NhYuP602du+lvyGNFFFVeKplU7WWSpzln2LF3GlThQw6Z26YLS0KqSKBvYHD
+ woqFubWgxdh3mmDdyFDzfCTI4YXAcOTGBfY3lfGa28vXR1asgHViPcn4FN8JkRoPb2nu9
+ IH7858hMpE4RnrKNUpxpNbCWJzQ9g1EAvFCiZSSFuEOoFUY7UBtDw4CUGySLoIfdXa0eL
+ g8pJfMk1OkfYRbcOs0lRt1IV8pBirte/JKf2y8EevmxCOvoYfioLxWKpyNGR+U38NKLAB
+ xmSlmi7jjDu2DeL1qSnqlRznTJqMMd/Er17gIgJkDkC97y1KHgp/I298tjMmb8ihUxA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793568745;
- h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
- Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding;
- bh=ACa2o5a44V3JmvX1AUhBq63xxVb5nLFunepkQ3CIWKw=;
- b=lcSjGqIc/Eyl4npacbB79KRHwzx6D809ZlZ1tqwXCkLc9eiPV/iI4951EL3LNQZMNh9d
- HRl1jGn83iXjYB38GGHN/YpGl/+oV2yq2b3uc+py4dXcDlDaXD6F8VGjR2lXJzjoNr9hp
- Ax7E9mUsHg6RxvgWac5VT1sYfSpJYQDUFK4TXjwhnJ6dl/N0SQLDmtYalSBLdizWk9l2k
- 8oLYRpy7q/NRz+WAQt2nQnM86ReXTs3bRU8v1SgD0QWqKo+/wbB656qUvwPVnTO+YDB39
- 34Y9n8Cvjlk4A+aL6MLBv29uXhU9zkq+S7ArotpKpJK9AQWFUdk3hje5MG99xpXKI/A==
+ c=relaxed/relaxed; t=1793575687;
+ h=Received-SPF:Received:Received:DKIM-Signature:Date:From:To:Cc:
+ Subject:Message-ID:In-Reply-To:References:Organization:X-Mailer:
+ MIME-Version:Content-Type:Content-Transfer-Encoding;
+ bh=48KTX7AOk3CwsQ9KAtrOhGtQw23p2+Fmh0gxH55n1D8=;
+ b=tZf8tdfSI/zu6EY5HxFQC6dL5r6uZiO0wBaoo3oWLEoVDJ0Yzm/VFks0hqlFQXMzyZjt
+ LcefhagO8+mSN4rr5BrbC0LbokmeTECdUlvG84ZxdekJHYNkx/yFKhxPg7Vs+sFWkcHUK
+ cFZLI/xcFvAcrAPNu8/RMRCYzZARHJt01ZFBn0kFu09JsjsJ91rzrFeB/7PtAo3kGiabf
+ JBK+/lIjji9ABrooURzRfRH0I/mISqGVqbHkunbCtOw5lvEF6117BR8CItH2kZ7xEfZyS
+ amF79eo1OhASPSlItyJeRgo/gNaX7nE48yXOrlmrKt2TKVNNXnjFTi/aQJQZcaO5e3g==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=free.fr;
- dkim=pass header.d=free.fr header.i=@free.fr header.a=rsa-sha256
- header.s=smtp-20201208 header.b=We+E6ceN; 
- arc=none smtp.remote-ip=212.27.42.1
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.1;
- helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
+ dmarc=pass header.from=arm.com;
+ dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
+ header.b="MYGyZTa/"; 
+ arc=none smtp.remote-ip=217.140.110.172
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
+ helo=foss.arm.com; envelope-from=andre.przywara@arm.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr
- header.a=rsa-sha256 header.s=smtp-20201208 header.b=We+E6ceN
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
- by smtp3.osuosl.org (Postfix) with ESMTPS id C423B60606
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 21:32:24 +0000 (UTC)
-Received: from localhost.localdomain (unknown [91.160.0.144])
- (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id EDA71B00539;
- Sun,  1 Nov 2026 22:32:17 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1793568742;
- bh=XYZ09vk/8lwnYBA6vBHMih4fIKW8RR1ma7H6pgGp+b8=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=We+E6ceNNXi1DJUIRJSAsAA7Oat0QRbmVNV6jS0QoyLD/orRXP+IbHvaEs11m2Li9
- Tl6hpb12wdd/FdRH9Eb+oAYAmBKeCwYw3siR/9xA2G9I9sXjMWxqtsEToDYxwqyhk1
- SO5NgJMiOZk97noU2X/CFsYa50TvzJgjTUZ9LGJGzh4GyhenGNZZZKprmkiP9gSP4L
- 3A/M44R+5OjKhnfpTweaSV2fPNtURJT3qOU2sqpxyHQ+esNTkqna1F5G1RSu68ZyIe
- 15p8ybJO/7/6qx2nOFpc1MvVw3rQRYTp4ysj1m/C23uQW5A3kSUZvHp13fSBNJAaQs
- H/pxTqAXL3eaQ==
-From: Vincent Jardin <vjardin@free.fr>
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Vladimir Oltean <vladimir.oltean@nxp.com>,
- Peng Fan <peng.fan@nxp.com>, Vincent Jardin <vjardin@free.fr>
-Subject: [PATCH v2 4/4] board: nbxv3: get carrier from the NOR overlay
-Date: Sun,  1 Nov 2026 22:31:10 +0100
-Message-ID: <20261101213111.483600-5-vjardin@free.fr>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261101213111.483600-1-vjardin@free.fr>
-References: <20261101213111.483600-1-vjardin@free.fr>
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256
+ header.s=foss header.b=MYGyZTa/
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0472060619
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 23:28:05 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D75FD27DC;
+ Sun,  1 Nov 2026 15:28:01 -0800 (PST)
+Received: from ryzen.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E7C6F3F673;
+ Sun,  1 Nov 2026 15:28:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1793575685; bh=D556Mg6DU91sCjI4OWrht3raBRx6hYTUVI7DCziiSsg=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=MYGyZTa/ghHRuWyaJ/bQ5O1mw7QLq1QeHoqW+TtUxq3ms0NLREi01IfuXgSRAT6M5
+ A05Qrwen4ygSaWMQ542mAvAndN+pJGCLfqWkf9DSfgeHeONIuPOVR/l+TpCiksQTkQ
+ cYhge2kGeWJzEeGIvp7lFr+T+EUrfGWfYC4EerJU=
+Date: Mon, 2 Nov 2026 00:27:55 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jernej Skrabec <jernej.skrabec@gmail.com>
+Cc: trini@konsulko.com, ilias.apalodimas@linaro.org,
+ u-boot@lists.u-boot-project.org, linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH] sunxi: dram: only probe DRAM inside the addressable range
+Message-ID: <20261102002755.59df587e@ryzen.lan>
+In-Reply-To: <20261026173235.95831-1-jernej.skrabec@gmail.com>
+References: <20261026173235.95831-1-jernej.skrabec@gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -136,130 +138,57 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-15.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_SANE_2 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-For boards without GPIO neither EEPROM identification, ${carrier} can come
-from a NOR segment, an overlay, imported by ${cfg_import}.
+On Mon, 26 Oct 2026 18:32:35 +0100
+Jernej Skrabec <jernej.skrabec@gmail.com> wrote:
 
-The selection priority list becomes:
-  1. the saved environment (saveenv)
-  2. the NOR overlay, imported by ${cfg_import} when the environment
-     defines it, for boards without GPIO or EEPROM identification
-  3. the RCW build stamp
-  4. NBXV3_CARRIER_DEFAULT, the build's default (fallback).
+Hi Jernej,
 
-The NOR overlay is an environment image of ${cfg_nor_size} bytes
-(CRC32 + data, as made by "mkenvimage -s 0x1000") that sets
-carrier=<name>.
+> The non-power-of-2 size check probes the memory cell at 3/4 of the
+> detected size. On SoCs whose DRAM window is smaller than the detected
+> size, like H6 with 4 GiB chips and a 3 GiB window, that address lies
+> outside the window and the access hangs the SPL. Such boards cannot be
+> odd-sized anyway, since the usable size is capped to the window later,
+> so only run the check when the probed address is addressable.
 
-Signed-off-by: Vincent Jardin <vjardin@free.fr>
+Many thanks for the heads up, and the fix!
+I can confirm that it's indeed a problem, and that the change fixes it:
+tested on a 3GB Eachlink H6 Mini box.
+I added one line to the comment above, to give some clue about the
+reason for that added line (beyond just the commit message).
 
----
+> Fixes: c47b63673736 ("sunxi: dram: detect non-power-of-2 sized DRAM chips")
 
-Changes in v2:
-- new patch
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
 
- board/nxp/lx2160a/nbxv3/carrier.c | 24 ++++++++++++++++++++++--
- doc/board/nxp/nbxv3.rst           | 28 ++++++++++++++++++++++++++--
- 2 files changed, 48 insertions(+), 4 deletions(-)
+Queued for 2027.01.
 
-diff --git a/board/nxp/lx2160a/nbxv3/carrier.c b/board/nxp/lx2160a/nbxv3/carrier.c
-index 26b079a1d3a..daa6fce639d 100644
---- a/board/nxp/lx2160a/nbxv3/carrier.c
-+++ b/board/nxp/lx2160a/nbxv3/carrier.c
-@@ -18,10 +18,12 @@
-  * ${carrier} comes, first match wins, from:
-  *   1. the environment, e.g. a saved one:
-  *        setenv carrier nbv32 && saveenv && reset
-- *   2. the RCW build stamp in DCFG SCRATCHRW13, see below
-- *   3. NBXV3_CARRIER_DEFAULT
-+ *   2. the NOR overlay, imported by ${cfg_import}
-+ *   3. the RCW build stamp in DCFG SCRATCHRW13, see below
-+ *   4. NBXV3_CARRIER_DEFAULT
-  */
- 
-+#include <command.h>
- #include <env.h>
- #include <hwconfig.h>
- #include <malloc.h>
-@@ -114,6 +116,15 @@ static void nbxv3_carrier_disable_mc(void)
- 	printf("Carrier:       bring-up RCW (no SerDes IO), MC not started\n");
- }
- 
-+static void nbxv3_carrier_import_overlay(void)
-+{
-+	if (!env_get("cfg_import"))
-+		return;
-+
-+	if (run_command("run cfg_import", 0))
-+		debug("Carrier:       no usable overlay at ${cfg_nor_offset}\n");
-+}
-+
- void nbxv3_carrier_env_init(void)
- {
- 	const char *carrier = env_get("carrier");
-@@ -130,6 +141,15 @@ void nbxv3_carrier_env_init(void)
- 		return;
- 	}
- 
-+	nbxv3_carrier_import_overlay();
-+
-+	carrier = env_get("carrier");
-+	if (carrier && *carrier) {
-+		printf("Carrier:       %s (from the NOR overlay at %s)\n",
-+		       carrier, env_get("cfg_nor_offset"));
-+		return;
-+	}
-+
- 	carrier = nbxv3_carrier_detect(digit);
- 	if (carrier) {
- 		origin = "RCW build stamp";
-diff --git a/doc/board/nxp/nbxv3.rst b/doc/board/nxp/nbxv3.rst
-index 0e3578b5742..4806f9eada1 100644
---- a/doc/board/nxp/nbxv3.rst
-+++ b/doc/board/nxp/nbxv3.rst
-@@ -86,9 +86,33 @@ FIT image at NOR offset 0x1000000::
- 
-      => setenv carrier nbv32 && saveenv && reset
- 
--2. the RCW build stamp, see below,
-+2. the NOR overlay, imported by ``${cfg_import}`` when the environment
-+   defines it, for boards without GPIO or EEPROM identification,
- 
--3. ``nbv30``, the built-in default.
-+3. the RCW build stamp, see below,
-+
-+4. ``nbv30``, the built-in default.
-+
-+NOR overlay
-+^^^^^^^^^^^
-+
-+The NOR overlay is an environment image of ``${cfg_nor_size}`` bytes
-+with ``carrier=<name>``.
-+It is outside the environment slot, so wiping the
-+saved environment keeps the board identity.
-+
-+``${cfg_import}``, ``${cfg_nor_offset}`` and ``${cfg_nor_size}`` are
-+defined by the board's default environment
-+(CONFIG_ENV_USE_DEFAULT_ENV_TEXT_FILE + CONFIG_ENV_DEFAULT_ENV_TEXT_FILE),
-+or by a saved one.
-+
-+::
-+
-+  cfg_nor_offset=0x520000
-+  cfg_nor_size=0x1000
-+  cfg_import=sf probe 3:0 && \
-+    sf read ${loadaddr} ${cfg_nor_offset} ${cfg_nor_size} && \
-+    env import -c ${loadaddr} ${cfg_nor_size}
- 
- RCW build stamp
- ^^^^^^^^^^^^^^^
--- 
-2.43.0
+Cheers,
+Andre
+
+> Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+> ---
+>  arch/arm/mach-sunxi/dram_dw_helpers.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-sunxi/dram_dw_helpers.c b/arch/arm/mach-sunxi/dram_dw_helpers.c
+> index d2af2d57fded..ae13dd154536 100644
+> --- a/arch/arm/mach-sunxi/dram_dw_helpers.c
+> +++ b/arch/arm/mach-sunxi/dram_dw_helpers.c
+> @@ -155,7 +155,8 @@ unsigned long mctl_calc_size(const struct dram_config *config)
+>  	 * or 3GB. They are detected as the larger power-of-2 (2GB and 4GB),
+>  	 * so test the last quarter for being able to store values.
+>  	 */
+> -	if (!mctl_check_memory(CFG_SYS_SDRAM_BASE + size / 4 * 3)) {
+> +	if (size / 4 * 3 < CONFIG_SUNXI_DRAM_MAX_SIZE &&
+> +	    !mctl_check_memory(CFG_SYS_SDRAM_BASE + size / 4 * 3)) {
+>  		if (mctl_check_memory(CFG_SYS_SDRAM_BASE + size / 4 * 3 - 64)) {
+>  			size = (size / 4) * 3;
+>  			debug("capping memory at %ld MB\n", size >> 20);
 
