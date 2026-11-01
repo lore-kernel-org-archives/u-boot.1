@@ -2,133 +2,169 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36928606A324
-	for <u-boot@archiver.kernel.org>; Sun,  1 Nov 2026 20:12:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4123606A324
+	for <u-boot@archiver.kernel.org>; Sun,  1 Nov 2026 21:05:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=R/nFi/WW;
-	dkim=pass (2048-bit key, unprotected) header.d=free.fr header.i=@free.fr header.a=rsa-sha256 header.s=smtp-20201208 header.b=nZoIiy0e
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=aH3ExKva;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=CwDBgUMI
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0DD82405E6;
-	Sun,  1 Nov 2026 20:12:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 88C09405AB;
+	Sun,  1 Nov 2026 21:05:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kkoBuToTBwyN; Sun,  1 Nov 2026 20:12:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org DD264405D8
+ id XpHE2AVxEVtm; Sun,  1 Nov 2026 21:05:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5374C4053C
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793563966;
-	b=ctlzLddtIFX323H6RXVfa01I93VT9P4ce/dMGFfiVy8kNWN/RlbqCyXi3sQ3VA5AnHjk
-	 sG+JyaAiYStwpn+epnnGUCbZr4SFKZvxlMT2BuhRewYDnelYIZi+qCe/48ciy7tomlv4a
-	 m7RuQg4dLRG7LOzYjCNE1EOG4sAmK5IHXrKyUHfgMf1t1mHFctMz3QJzJvAGXPb9+3Z1l
-	 KhBiS2mxwCBUB+ogDcEAx3yfTA7Q3x1AQwt8kDCb0iipL8qaFP1uv97zrFFG3BqOiT+xs
-	 aqzldup1HHgymXmk1kYzouYjywNgceCrYhBvYf3+Gh0wVAUhkg2rRQYIIK5kHY0kAFw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793567122;
+	b=KJ1CQkRdub7uYnqt0UFX90DBFSOeyQFbYHaVSNXHCMqShsCLQ3QXT36AtpFo27pD7oh8
+	 crTYUlDUn1V2lW3wZcdTs55cMSsHwGF6OvPUBNEUzSM74v86IXru8P6onn7QphOOsTrkW
+	 r1UWMt6RhYIqC2CxJ7sJ5w3Dk9715ndFLLfZX7fTEpYDgJovFLv+bzfLpgIUsevg4kFFz
+	 dhVDvPSxGxwc/tqvvzsIIrWWYbx1F4/+KWXg5pVpF9Ef5K/fn4vBe2ptdZN5ZMkO3/vUc
+	 h1xqbv2RIzexRmfFMKPG77kMaU2z7EVo8LOaQuK7BbLxrKLmm7Gx9nu0MT+h4O7czdw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793563966;
+	c=relaxed/relaxed; t=1793567122;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=YNVUEsda2Eua9N8rwKmryR+w9UuN2EX4k2CR6iJm2RM=;
-	b=CI9lTWuggquAh06AyJpNYlX1CzBr4enngHJM+KDAfhy9GMgL57Hfa7INLJw/4dKrlcad
-	 5cY4M6Y6+BolUpBGx2eGOp63OeoVh2JWIvThrVmOwx9lsr8yd5V8Dj4syQvJmcbQfLUs9
-	 KV4BjE/zpdLhyrplsVOfcE3hN5+noIq8efO3OIULQul97JTScn+tbnuoK5jwpCQMVRDXW
-	 KO18kxlPZWc2G2dHrm0PeNXLHv0BDFD9fLmY2sDSxLgjtRNfiPntbhOJwnsZAjuIzZscD
-	 NX9PtpP/SFL2dSD+9UTj3SyQ2HkQ/847cq28BxIR1FwF7bEYkgZ8tECc5tyPKeJZieg==
+	bh=zrxInYZQCy+8ml9niUGKKSK9xagOCjzwDhBCA/3T7nU=;
+	b=l861flh1scsGW5g1/S4tTAT+FBIolu36YZgj7y1aGqNlUdCO/HC56yA/X7OoP2hdtrQ9
+	 k2MwE+WJfGaMCNV5U8K/d1nl9kpjjtGPIEbIVhYc5oqpWkluIpcggxuHFTsDAvc2vpbln
+	 IYkqp1saNxR0QuVO7ff9zbFo5mLsBpsdWw6ZVk2nm+rACO3Btb9Gg4xZ3LAJ/no8Fxunq
+	 Q/rEGZXTAPhDAe61BW3PrfI0IARMLUuWWonzrH3BmF2W8OeZslg2RB+N4td+/CCVBXL5u
+	 4V+UvOAzj7l0FNHXnEyHHOhnkIbd9MeJaQHtY7vGL7c/vduCx3MDI8SJ+HxyvHja8+g==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793563966;
-	bh=YNVUEsda2Eua9N8rwKmryR+w9UuN2EX4k2CR6iJm2RM=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=R/nFi/WWP9E9E3uD/VPXwBwNEP3UyXSgglF86gNFkNNSs8Fr22H5SufUKV/W3BWfJ
-	 n3jzIXhBMOoWCrnEBvduKU0Oa0C6AJekQKHCM/49y7DoJAIfNX0Y3oAFVUcNwGIcGn
-	 h3LHYMihu2/t342k7d1j91NwDGjRjdQSvRGSWJ/L8FPwv8JzrWTr+U3m+mzZOUo5gu
-	 Gp9LERQ7//pkHoVyMUuUOsHOB70MuySHLcH0TKQUEr5dbogJKuauMr1vdAKS6awZCE
-	 F1+QAI8jvuHy5sG7H19X/ongFVaGoGnxgdvyxXEHkH8IrJOoduQIjtqqDYtFq8gXFE
-	 K9hTCqM6Er1yQ==
+	d=lists.u-boot-project.org; s=default; t=1793567122;
+	bh=zrxInYZQCy+8ml9niUGKKSK9xagOCjzwDhBCA/3T7nU=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=aH3ExKvaUJhNa9hKMzwiN+hkNqPgSPZXoXRhUW2F7LVvdx8KE/ZEEU0XoA6eKHspk
+	 nODjD7nYU2h989EMlwr50KyPpb3R/hpbJISyReAcAM5WMqIeDrkpSP91jclBBGTsrv
+	 iNLPjwGuBQMgUSYzg53TkKPlt11K4ZY+fm6sWcHI/cSc+ZjzeZMEN1/fC5iMyAH4M5
+	 sqNKlDMJ1Lg5ITGEsGt+wbZca2L+5Fwpo9h4n8F4pj97XQzgXM5+JasmT0tvXoIo8H
+	 LzsRYwF2EvFRKTImcct1DS6UPAQ5AfusZd6D0TDbgtfDgy8VjYE5MYe6BnH6dw3U0b
+	 UeHTz5DsCs0IA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DD264405D8;
-	Sun,  1 Nov 2026 20:12:45 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 863313A7
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 20:12:44 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5374C4053C;
+	Sun,  1 Nov 2026 21:05:22 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 536E1323
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 21:05:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6C33980DB8
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 20:12:44 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 4581C400A8
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 21:05:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hOtMkE1S-2N1 for <u-boot@lists.u-boot-project.org>;
- Sun,  1 Nov 2026 20:12:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6A07F80DB2
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=212.27.42.1
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793563962;
- b=JwWN9S4hgizfU3+Nq+xbvAQvq9kq5HR69yxEVJ10CYfDjrFasZUvIH4cZk2AeOUPVs0u
- JKpLmS8p1uIrg0ExaZWcWG+T4gPstbDzUR/ZiOh6TPa0M1PcxIk2nhAzZ38P9YY8WZJEi
- PR07uJ71mE3Eug8R2PqdmVQgszdPv3J6YGZRKL1GnOPPu4r3KsLf3QA4xwdLXlT6KY6yZ
- iMeewkR/lhYOCO3wZv+mu74OoQFAPD/I3DVKhTZoE9EREHYliJJ5MeMoRVgEtLTbusZYB
- dPJV1ICvnDZR6RRJOu9Wh1Pn/f0i4ELH3tjr8r0Il+yOOMsEClhK0HY1XnY2Z77KTgQ==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id rDZJzEjs5fRM for <u-boot@lists.u-boot-project.org>;
+ Sun,  1 Nov 2026 21:05:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org C80D240042
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::229"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793567120;
+ b=HrnQF6H6JPK+yQjs11TqYwjEhGS9u7pq0Hvf5K5zPNmmo0VuFy8nmo3IKB5EnWVecJOr
+ CXw6z74eRl8uPvuvhCa96QVgx/4TceuMjH1s2oG9uMjWmBtb5mKk2ruBox/UdeGZPmpGH
+ pIdpa/WBhSJd/+DsXTLgs6FK3/rsQh8ZO3wL35aw5i9kbLvgn26pRgl5pVisPeetws0hb
+ lZ0mtpd2p8u5+o0PVqriY9/bEOtFpyxJS6MczfxZ+UtaAzIs4gm3ass0xTOcdsaNeSzPc
+ fePBYv8Lr0ozDb28tH4mHKuEHKfRSytYmMORxNh8Qs7/dZOV7DctbdcbOpos0wxfFsA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793563962;
- h=Received-SPF:Received:DKIM-Signature:From:To:Cc:Subject:Date:
- Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:Content-Type:
- Content-Transfer-Encoding;
- bh=YNVUEsda2Eua9N8rwKmryR+w9UuN2EX4k2CR6iJm2RM=;
- b=p9YfRNvStCFRPXxVhBgy8kPXn1FAw7ik8BLQb1sc9qloeZd2Fsm9rzf5iLP4cfhL8siG
- zDK5DfYSfaiGTQPNFjSQIK169h18VUhAXBBr4fDAEYvK/+erPu0CLolQkGmHq9JrA0EcA
- WHg3mhs8GStl/MGOasL9Ein4OIFE+Rfi0sucJIWDn46275pEUxYXsLM+IgXZhFMEEar1g
- vkB3uVkLvaXWCccd49UbpRi++PQtWMAQ3kQ5p/3gUqqZx9KBgfCkB7A0wBpACHUXHzJqV
- kWJy7Ep2lDTzHuQPJoLbfk8QshjYnFrVQA+K5D96ZQ2wB7UQ17eVegaHZ8fzTDC7Y6g==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
- dmarc=pass header.from=free.fr;
- dkim=pass header.d=free.fr header.i=@free.fr header.a=rsa-sha256
- header.s=smtp-20201208 header.b=nZoIiy0e; 
- arc=none smtp.remote-ip=212.27.42.1
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.1;
- helo=smtp1-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr
- header.a=rsa-sha256 header.s=smtp-20201208 header.b=nZoIiy0e
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6A07F80DB2
- for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 20:12:40 +0000 (UTC)
-Received: from localhost.localdomain (unknown [91.160.0.144])
- (Authenticated sender: vjardin@free.fr)
- by smtp1-g21.free.fr (Postfix) with ESMTPSA id 439E9B0054C;
- Sun,  1 Nov 2026 21:12:34 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1793563959;
- bh=k/SYTJxUM3GsgX8UGrX+K7AuiaPz8aJWZfD0npk+T74=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=nZoIiy0eCMo+yc7tHrdZrklXwDL+C7p8ZdrRVgVq1dwvLA001SwJ0QjkuxDPJi484
- 6VjnS2MKbSuOO1tIBQx1DdzLewqraEJ0/Gukh/YdMSRTmmVRXM0zZnCEOK/t97ufrO
- GEGInanhe7iuW+fER74j7nGTUipbyiWvurRvC0XiRPZhjPXtHDIx31eV/NaulzWply
- 1D9AGlodhbApfTzKvVT2A/gCO+Y6vpXduTcubQBTQ+L0JW//pH3KlEmKeY7c2IAmUj
- gQSzAd8QiUp3BzitbN3eDuuePpQyUrm1tFT2HsrU/5xYs65xcu862DX6eo6TbyUfQE
- oIjkQ5eMlcCMw==
-From: Vincent Jardin <vjardin@free.fr>
+ c=relaxed/relaxed; t=1793567120;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+ Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+ bh=zrxInYZQCy+8ml9niUGKKSK9xagOCjzwDhBCA/3T7nU=;
+ b=mzKaSsaUSa78KuKujKS6zO7q5BuRanD7D0Kj3QZcI24Tej0iUTyscZQRmVONiqaAruHl
+ qPaXMCJUkMoVpY0i86ytcSrcHZYeE/lw8FVAi44k4eSdqoG/w5/N/RbDnXJPVN7UTCfxE
+ zuEk0znciSBNca17kDL2QPa8aZ04PFPPSGppUVn+LLW6eQZT9VH8SRSNpNEqCNnbWvBJQ
+ aIn8t53dJ14SRkdA81XjoFosiUPieI3hl1WX3memz34Aihws1vxPdjUkGcA1Q7DfENF05
+ PfNuNRDBqDcP4o/tekrmez+kF55FnDXEtI8zZo7dAoMtMNz3RIOcnOU2dg1bZvRgyOg==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ dmarc=pass header.from=gmail.com;
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=CwDBgUMI; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::229"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::229; helo=mail-lj1-x229.google.com;
+ envelope-from=indrek.kruusa@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=CwDBgUMI
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C80D240042
+ for <u-boot@lists.u-boot-project.org>; Sun,  1 Nov 2026 21:05:19 +0000 (UTC)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-3a9e87ba696so17212421fa.0
+ for <u-boot@lists.u-boot-project.org>; Sun, 01 Nov 2026 13:05:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1793567117; x=1794171917;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=zrxInYZQCy+8ml9niUGKKSK9xagOCjzwDhBCA/3T7nU=;
+ b=CwDBgUMI6P3t0Et46Osw34rotD8vTN1YfulpNiPkcVw65olBMgQSnfX3iKjPpfcb1Y
+ lWaI6WGQToQkAyCgiuTJlJ9dMuUChjSgkZQO0DmP/zlZVClnoJ5pZOB50JPX1P49VRp9
+ OYIMUmjWCOMP2y96n/M9UTwhBOr4R3b99EmQ8orRm50C06IbkvKqWRcIu3/K4lLcfRU+
+ beVfmE676Ncn1q/LdvGXx/yEXJAr+i19281iXSrymGiZcq1bGn2KmU0XXfFb6vSvHIub
+ 8UFH3OQ3By+n0FoaJkKr4g+wUJSuz6o/Y6nYNwOuQhs4Xq+E4FQYsbP08AYFUMH2ahiR
+ AZCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793567117; x=1794171917;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=zrxInYZQCy+8ml9niUGKKSK9xagOCjzwDhBCA/3T7nU=;
+ b=MuOSqL9yGK7hLZdyqUyUC1+9+LEvYBX/hruaViBh6vuW5qjVKCZTeAgejnNmTCu+R3
+ Up3WC406bmueS2etS1xYfxueTX+1SZ3g07x0ZYHNkQVEvVkxBUlP2NmmTIfxRsv6V8lX
+ xYIprTTspXlz+yFvWFY+EtFOVh8nbLRDSdqf5ZAjAO4/YAOvwAyHepJzMOMlGUa8UHmq
+ KoP5V7Jozr51uEW5TJALoJLjQU3IirKiKB4NwV12UXllbqTCGokRbn5qatkGgNI+ZGvL
+ t0wac52278UahNUBvnu7Ugz7rr68rHcs/F1dqcnmSWOJcrxr6q7jA9wgRpXNi/8IVodX
+ 6P0Q==
+X-Gm-Message-State: APuU4Z+zK1k1ILWoMDeSGU866NFLqG6nuEx08fr6ZjnaTczolTUZd5Gi
+ rhp/XnurBO9CI82S3wPsSIFLpU4e3N7rsyVB7KxC0fLUjTrWPAQOn37x7jlC1zXY
+X-Gm-Gg: AYBFou3Jivh9RNBF5v1E2qpIuUHE3QSVi7CbIt+3VKC1N8wmhRx3In+Jz8fsBEo5YB+
+ 8pINYQpaXyiBHRfiESY87jz/eg/07PNfSJ7YMbGnQMkxOcTT3ZOVujoy+1eY/IfmMFxCWMtW/3V
+ h7MYKc/Ksa8WUgDB8aPykYCtuZ3lc3y5bYfWGPQ2jLsv3k+RSKVImmJTi1BPo1RQD51z04dHEDP
+ FlOxl+X5GXVs4J7R2IYR7fvOrqfgbC/V5caNDZQtwFNsNjfGUOH9RGC9iu9Kd2/1cyGQvOOaCBO
+ uaTcYITFOnt9AafnDnWoiSO/vda3d7l2QBPO+UTaSlok0s5OAlJ7TZpkocpMaGlorYP4wU0R6Z9
+ 5rSP7uuokqtxohZ5OX42DXRL8qvdT5WsvFd9GADK1FCLiAKYaY1emFCWrw4o1LiAkZfFmJEC9gM
+ eQFyuH5oAUYJWbQvmy9i3XwJJVuRcU7ZOW+mcFep2uw9iy627rG9b3PFY1u4oBpx3pfJgYj3fSq
+ cXZ5TH/pz7Vu3WVICMG7fp2d16W/OnQayjohbrn9itr0pRHHtjrCqcjNW45Lai97+lWr8vPHN8v
+ K4gazt2dY0+S9c8EOJbCu0GfFZsdHDcnbIed+2xqU4dca2xHJzcc/3h+V7NCZUMUcjw=
+X-Received: by 2002:a05:651c:2122:b0:3ac:974c:64f3 with SMTP id
+ 38308e7fff4ca-3acb7b20239mr21128711fa.22.1793567116512; 
+ Sun, 01 Nov 2026 13:05:16 -0800 (PST)
+Received: from ik5070.localdomain (82-131-69-225.ip.elisa.ee. [82.131.69.225])
+ by smtp.googlemail.com with ESMTPSA id
+ 38308e7fff4ca-3acbbee0094sm19882441fa.20.2026.11.01.13.05.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 01 Nov 2026 13:05:14 -0800 (PST)
+From: Indrek Kruusa <indrek.kruusa@gmail.com>
 To: u-boot@lists.u-boot-project.org
-Cc: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Vladimir Oltean <vladimir.oltean@nxp.com>, Vincent Jardin <vjardin@free.fr>
-Subject: [PATCH v1 2/2] doc: board: nxp: convert the Layerscape SoC README to
- RST
-Date: Sun,  1 Nov 2026 21:11:20 +0100
-Message-ID: <20261101201126.426751-3-vjardin@free.fr>
+Cc: Andre Przywara <andre.przywara@arm.com>, Tim Ouyang <tim609@andestech.com>,
+ Leo Liang <leo.liang@sifive.com>, Yao Zi <me@ziyao.cc>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Lukasz Majewski <lukma@nabladev.com>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Samuel Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>,
+ Indrek Kruusa <indrek.kruusa@gmail.com>
+Subject: [PATCH 00/10] riscv: sun20i: add support for the Allwinner
+ D1/D1s(F133) SoCs and boards
+Date: Sun,  1 Nov 2026 23:04:39 +0200
+Message-ID: <20261101210449.1235102-1-indrek.kruusa@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261101201126.426751-1-vjardin@free.fr>
-References: <20261101201126.426751-1-vjardin@free.fr>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -139,1234 +175,205 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-20.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Convert arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc to
-doc/board/nxp/layerscape.rst.
+Building upon the work of Samuel Holland [1], this series introduces support
+for the Allwinner D1/D1s(F133) RISC-V SoCs and two development boards:
 
-The text is not modified.
+- Sipeed Lichee RV Dock (D1 SoC)
+- MangoPi MQ (RISC-V version with D1s/F133-A SoC)
 
-Suggested-by: Tom Rini <trini@konsulko.com>
-Link: https://lore.kernel.org/u-boot/20260928191412.GN858934@bill-the-cat/
-Signed-off-by: Vincent Jardin <vjardin@free.fr>
----
+The main difference from Samuel's work is how the boards are wired into the
+tree. The original design aimed at one cross-architecture configuration which
+covers ARM sun8i and RISC-V sun20i parts from Allwinner. This series does not
+do that. The D1/D1s get their own configuration instead:
 
- MAINTAINERS                                   |   1 +
- .../cpu/armv8/fsl-layerscape/doc/README.soc   | 444 ---------------
- board/nxp/ls1012afrdm/README                  |   2 +-
- board/nxp/ls1012aqds/README                   |   2 +-
- board/nxp/ls1012ardb/README                   |   2 +-
- board/nxp/ls1028a/README                      |   2 +-
- board/nxp/ls1043aqds/README                   |   2 +-
- board/nxp/ls1043ardb/README                   |   2 +-
- board/nxp/ls1046afrwy/README                  |   2 +-
- board/nxp/ls1046aqds/README                   |   2 +-
- board/nxp/ls1088a/README                      |   2 +-
- board/nxp/ls2080aqds/README                   |   2 +-
- board/nxp/ls2080ardb/README                   |   2 +-
- board/nxp/lx2160a/README                      |   4 +-
- doc/board/nxp/index.rst                       |   1 +
- doc/board/nxp/layerscape.rst                  | 517 ++++++++++++++++++
- doc/board/nxp/ls1046ardb.rst                  |   2 +-
- doc/board/nxp/nbxv3.rst                       |   2 +-
- 18 files changed, 534 insertions(+), 459 deletions(-)
- delete mode 100644 arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc
- create mode 100644 doc/board/nxp/layerscape.rst
+  - arch/riscv/cpu/sun20i/ and board/sun20i/ hold the RISC-V side
+  - SUN20I is a SoC-family symbol, TARGET_SUN20I the board target
+  - the shared sunxi drivers accept SUN20I next to ARCH_SUNXI, so they are
+    shared as before -- only the Kconfig condition changes
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 7774562a3d0..59bb5fa2897 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1081,6 +1081,7 @@ M:	Peng Fan <peng.fan@nxp.com>
- S:	Maintained
- T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-fsl-qoriq.git
- F:	doc/board/nxp/hwconfig.rst
-+F:	doc/board/nxp/layerscape.rst
- F:	drivers/watchdog/sp805_wdt.c
- F:	drivers/watchdog/sbsa_gwdt.c
- 
-diff --git a/arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc b/arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc
-deleted file mode 100644
-index e226cc22467..00000000000
---- a/arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc
-+++ /dev/null
-@@ -1,444 +0,0 @@
--SoC overview
--
--	1. LS1043A
--	2. LS1088A
--	3. LS2080A
--	4. LS1012A
--	5. LS1046A
--	6. LS2088A
--	7. LS2081A
--	8. LX2160A
--	9. LS1028A
--	10. LX2162A
--
--LS1043A
-----------
--The LS1043A integrated multicore processor combines four ARM Cortex-A53
--processor cores with datapath acceleration optimized for L2/3 packet
--processing, single pass security offload and robust traffic management
--and quality of service.
--
--The LS1043A SoC includes the following function and features:
-- - Four 64-bit ARM Cortex-A53 CPUs
-- - 1 MB unified L2 Cache
-- - One 32-bit DDR3L/DDR4 SDRAM memory controllers with ECC and interleaving
--   support
-- - Data Path Acceleration Architecture (DPAA) incorporating acceleration the
--   the following functions:
--   - Packet parsing, classification, and distribution (FMan)
--   - Queue management for scheduling, packet sequencing, and congestion
--     management (QMan)
--   - Hardware buffer management for buffer allocation and de-allocation (BMan)
--   - Cryptography acceleration (SEC)
-- - Ethernet interfaces by FMan
--   - Up to 1 x 10GBase-R supporting 10G interface
--   - Up to 1 x QSGMII
--   - Up to 4 x SGMII supporting 1000Mbps
--   - Up to 2 x SGMII supporting 2500Mbps
--   - Up to 2 x RGMII supporting 1000Mbps
-- - High-speed peripheral interfaces
--   - Three PCIe 2.0 controllers, one supporting x4 operation
--   - One serial ATA (SATA 3.0) controllers
-- - Additional peripheral interfaces
--   - Three high-speed USB 3.0 controllers with integrated PHY
--   - Enhanced secure digital host controller (eSDXC/eMMC)
--   - Quad Serial Peripheral Interface (QSPI) Controller
--   - Serial peripheral interface (SPI) controller
--   - Four I2C controllers
--   - Two DUARTs
--   - Integrated flash controller supporting NAND and NOR flash
-- - QorIQ platform's trust architecture 2.1
--
--LS1088A
----------
--The QorIQ LS1088A processor is built on the Layerscape
--architecture combining eight ARM A53 processor cores
--with advanced, high-performance datapath acceleration
--and networks, peripheral interfaces required for
--networking, wireless infrastructure, and general-purpose
--embedded applications.
--
--LS1088A is compliant with the Layerscape Chassis Generation 3.
--
--Features summary:
-- - 8 32-bit / 64-bit ARM v8 Cortex-A53 CPUs
-- - Cores are in 2 cluster of 4-cores each
-- - 1MB L2 - Cache per cluster
-- - Cache coherent interconnect (CCI-400)
-- - 1 64-bit DDR4 SDRAM memory controller with ECC
-- - Data path acceleration architecture 2.0 (DPAA2)
-- - 4-Lane 10GHz SerDes comprising of WRIOP
-- - 4-Lane 10GHz SerDes comprising of PCI, SATA, uQE(TDM/HLDC/UART)
-- - Ethernet interfaces: SGMIIs, RGMIIs, QSGMIIs, XFIs
-- - QSPI, SPI, IFC2.0 supporting NAND, NOR flash
-- - 3 PCIe3.0 , 1 SATA3.0, 2 USB3.0, 1 SDXC, 2 DUARTs etc
-- - 2 DUARTs
-- - 4 I2C, GPIO
-- - Thermal monitor unit(TMU)
-- - 4 Flextimers and 1 generic timer
-- - Support for hardware virtualization and partitioning enforcement
-- - QorIQ platform's trust architecture 3.0
-- - Service processor (SP) provides pre-boot initialization and secure-boot
--   capabilities
--
--LS2080A
----------
--The LS2080A integrated multicore processor combines eight ARM Cortex-A57
--processor cores with high-performance data path acceleration logic and network
--and peripheral bus interfaces required for networking, telecom/datacom,
--wireless infrastructure, and mil/aerospace applications.
--
--The LS2080A SoC includes the following function and features:
--
-- - Eight 64-bit ARM Cortex-A57 CPUs
-- - 1 MB platform cache with ECC
-- - Two 64-bit DDR4 SDRAM memory controllers with ECC and interleaving support
-- - One secondary 32-bit DDR4 SDRAM memory controller, intended for use by
--  the AIOP
-- - Data path acceleration architecture (DPAA2) incorporating acceleration for
-- the following functions:
--   - Packet parsing, classification, and distribution (WRIOP)
--   - Queue and Hardware buffer management for scheduling, packet sequencing, and
--     congestion management, buffer allocation and de-allocation (QBMan)
--   - Cryptography acceleration (SEC) at up to 10 Gbps
--   - RegEx pattern matching acceleration (PME) at up to 10 Gbps
--   - Decompression/compression acceleration (DCE) at up to 20 Gbps
--   - Accelerated I/O processing (AIOP) at up to 20 Gbps
--   - QDMA engine
-- - 16 SerDes lanes at up to 10.3125 GHz
-- - Ethernet interfaces
--   - Up to eight 10 Gbps Ethernet MACs
--   - Up to eight 1 / 2.5 Gbps Ethernet MACs
-- - High-speed peripheral interfaces
--   - Four PCIe 3.0 controllers, one supporting SR-IOV
-- - Additional peripheral interfaces
--   - Two serial ATA (SATA 3.0) controllers
--   - Two high-speed USB 3.0 controllers with integrated PHY
--   - Enhanced secure digital host controller (eSDXC/eMMC)
--   - Serial peripheral interface (SPI) controller
--   - Quad Serial Peripheral Interface (QSPI) Controller
--   - Four I2C controllers
--   - Two DUARTs
--   - Integrated flash controller (IFC 2.0) supporting NAND and NOR flash
-- - Support for hardware virtualization and partitioning enforcement
-- - QorIQ platform's trust architecture 3.0
-- - Service processor (SP) provides pre-boot initialization and secure-boot
--  capabilities
--
--LS1012A
----------
--The LS1012A features an advanced 64-bit ARM v8 Cortex-
--A53 processor, with 32 KB of parity protected L1-I cache,
--32 KB of ECC protected L1-D cache, as well as 256 KB of
--ECC protected L2 cache.
--
--The LS1012A SoC includes the following function and features:
-- - One 64-bit ARM v8 Cortex-A53 core with the following capabilities:
-- - ARM v8 cryptography extensions
-- - One 16-bit DDR3L SDRAM memory controller, Up to 1.0 GT/s, Supports
--    16-/8-bit operation (no ECC support)
-- - ARM core-link CCI-400 cache coherent interconnect
-- - Packet Forwarding Engine (PFE)
-- - Cryptography acceleration (SEC)
-- - Ethernet interfaces supported by PFE:
-- - One Configurable x3 SerDes:
--    Two Serdes PLLs supported for usage by any SerDes data lane
--    Support for up to 6 GBaud operation
-- - High-speed peripheral interfaces:
--     - One PCI Express Gen2 controller, supporting x1 operation
--     - One serial ATA (SATA Gen 3.0) controller
--     - One USB 3.0/2.0 controller with integrated PHY
--     - One USB 2.0 controller with ULPI interface. .
-- - Additional peripheral interfaces:
--    - One quad serial peripheral interface (QuadSPI) controller
--    - One serial peripheral interface (SPI) controller
--    - Two enhanced secure digital host controllers
--    - Two I2C controllers
--    - One 16550 compliant DUART (two UART interfaces)
--    - Two general purpose IOs (GPIO)
--    - Two FlexTimers
--    - Five synchronous audio interfaces (SAI)
--    - Pre-boot loader (PBL) provides pre-boot initialization and RCW loading
--    - Single-source clocking solution enabling generation of core, platform,
--    DDR, SerDes, and USB clocks from a single external crystal and internal
--    crystaloscillator
--    - Thermal monitor unit (TMU) with +/- 3C accuracy
--    - Two WatchDog timers
--    - ARM generic timer
-- - QorIQ platform's trust architecture 2.1
--
--LS1046A
----------
--The LS1046A integrated multicore processor combines four ARM Cortex-A72
--processor cores with datapath acceleration optimized for L2/3 packet
--processing, single pass security offload and robust traffic management
--and quality of service.
--
--The LS1046A SoC includes the following function and features:
-- - Four 64-bit ARM Cortex-A72 CPUs
-- - 2 MB unified L2 Cache
-- - One 64-bit DDR4 SDRAM memory controllers with ECC and interleaving
--   support
-- - Data Path Acceleration Architecture (DPAA) incorporating acceleration the
--   the following functions:
--   - Packet parsing, classification, and distribution (FMan)
--   - Queue management for scheduling, packet sequencing, and congestion
--     management (QMan)
--   - Hardware buffer management for buffer allocation and de-allocation (BMan)
--   - Cryptography acceleration (SEC)
-- - Two Configurable x4 SerDes
--   - Two PLLs per four-lane SerDes
--   - Support for 10G operation
-- - Ethernet interfaces by FMan
--   - Up to 2 x 10GBase-R supporting 10G interface (MAC 9, 10)
--   - Up to 1 x QSGMII (MAC 5, 6, 10, 1)
--   - Up to 4 x SGMII supporting 1000Mbps (MAC 5, 6, 9, 10)
--   - Up to 3 x SGMII supporting 2500Mbps (MAC 5, 9, 10)
--   - Up to 2 x RGMII supporting 1000Mbps (MAC 3, 4)
-- - High-speed peripheral interfaces
--   - Three PCIe 3.0 controllers, one supporting x4 operation
--   - One serial ATA (SATA 3.0) controllers
-- - Additional peripheral interfaces
--   - Three high-speed USB 3.0 controllers with integrated PHY
--   - Enhanced secure digital host controller (eSDXC/eMMC)
--   - Quad Serial Peripheral Interface (QSPI) Controller
--   - Serial peripheral interface (SPI) controller
--   - Four I2C controllers
--   - Two DUARTs
--   - Integrated flash controller (IFC) supporting NAND and NOR flash
-- - QorIQ platform's trust architecture 2.1
--
--LS2088A
----------
--The LS2088A integrated multicore processor combines eight ARM Cortex-A72
--processor cores with high-performance data path acceleration logic and network
--and peripheral bus interfaces required for networking, telecom/datacom,
--wireless infrastructure, and mil/aerospace applications.
--
--The LS2088A SoC includes the following function and features:
--
-- - Eight 64-bit ARM Cortex-A72 CPUs
-- - 1 MB platform cache with ECC
-- - Two 64-bit DDR4 SDRAM memory controllers with ECC and interleaving support
-- - One secondary 32-bit DDR4 SDRAM memory controller, intended for use by
--   the AIOP
-- - Data path acceleration architecture (DPAA2) incorporating acceleration for
--   the following functions:
--   - Packet parsing, classification, and distribution (WRIOP)
--   - Queue and Hardware buffer management for scheduling, packet sequencing, and
--     congestion management, buffer allocation and de-allocation (QBMan)
--   - Cryptography acceleration (SEC) at up to 10 Gbps
--   - RegEx pattern matching acceleration (PME) at up to 10 Gbps
--   - Decompression/compression acceleration (DCE) at up to 20 Gbps
--   - Accelerated I/O processing (AIOP) at up to 20 Gbps
--   - QDMA engine
-- - 16 SerDes lanes at up to 10.3125 GHz
-- - Ethernet interfaces
--   - Up to eight 10 Gbps Ethernet MACs
--   - Up to eight 1 / 2.5 Gbps Ethernet MACs
-- - High-speed peripheral interfaces
--   - Four PCIe 3.0 controllers, one supporting SR-IOV
-- - Additional peripheral interfaces
--   - Two serial ATA (SATA 3.0) controllers
--   - Two high-speed USB 3.0 controllers with integrated PHY
--   - Enhanced secure digital host controller (eSDXC/eMMC)
--   - Serial peripheral interface (SPI) controller
--   - Quad Serial Peripheral Interface (QSPI) Controller
--   - Four I2C controllers
--   - Two DUARTs
--   - Integrated flash controller (IFC 2.0) supporting NAND and NOR flash
-- - Support for hardware virtualization and partitioning enforcement
-- - QorIQ platform's trust architecture 3.0
-- - Service processor (SP) provides pre-boot initialization and secure-boot
-- capabilities
--
--LS2088A SoC has 3 more similar SoC personalities
--1)LS2048A, few difference w.r.t. LS2088A:
--       a) Four 64-bit ARM v8 Cortex-A72 CPUs
--
--2)LS2084A, few difference w.r.t. LS2088A:
--       a) No AIOP
--       b) No 32-bit DDR3 SDRAM memory
--       c) 5 * 1/10G + 5 *1G WRIOP
--       d) No L2 switch
--
--3)LS2044A, few difference w.r.t. LS2084A:
--       a) Four 64-bit ARM v8 Cortex-A72 CPUs
--
--LS2081A
----------
--LS2081A is 40-pin derivative of LS2084A.
--So feature-wise it is same as LS2084A.
--Refer to LS2084A(LS2088A) section above for details.
--
--It has one more similar SoC personality
--1)LS2041A, few difference w.r.t. LS2081A:
--       a) Four 64-bit ARM v8 Cortex-A72 CPUs
--
--LX2160A
----------
--The QorIQ LX2160A processor is built in the 16FFC process on
--the Layerscape architecture combining sixteen ARM A72 processor
--cores with advanced, high-performance datapath acceleration and
--network, peripheral interfaces required for networking, wireless
--infrastructure, storage, and general-purpose embedded applications.
--
--LX2160A is compliant with the Layerscape Chassis Generation 3.2.
--
--The LX2160A SoC includes the following function and features:
--  Sixteen 32-bit / 64-bit ARM v8 A72 CPUs
--  Cache Coherent Interconnect Fabric (CCN508 aka “Eliot”)
--  Two 64-bit 3.2GT/s DDR4 SDRAM memory controllers with ECC.
--  Data path acceleration architecture (DPAA2)
--  24 Serdes lanes at up to 25 GHz
--  Ethernet interfaces
--  Single WRIOP tile supporting 130Gbps using 18 MACs
--  Support for 10G-SXGMII (aka USXGMII).
--  Support for SGMII (and 1000Base-KX)
--  Support for 10GBase-R (and 10GBase-KR)
--  Support for CAUI4 (100G); CAUI2 (50G) and 25G-AUI(25G).
--  Support for XLAUI (and 40GBase-KR4) for 40G.
--  Support for two RGMII parallel interfaces.
--  Energy efficient Ethernet support (802.3az)
--  IEEE 1588 support.
--  High-speed peripheral interfaces
--	Two PCIe Gen 4.0 8-lane controllers supporting SR-IOV,
--	Four PCIe Gen 4.0 4-lane controllers.
--	Four serial ATA (SATA 3.0) controllers.
--	Two USB 3.0 controllers with integrated PHY
--	Two Enhanced secure digital host controllers
--	Two Controller Area Network (CAN) modules
--	Flexible Serial peripheral interface (FlexSPI) controller.
--	Three Serial peripheral interface (SPI) controllers.
--	Eight I2C Controllers.
--	Four PL011 UARTs supporting two 4-pin UART ports or four 2-pin UART ports.
--	General Purpose IO (GPIO)
--  Support for hardware virtualization and partitioning (ARM MMU-500)
--  Support for GIC (ARM GIC-500)
--  QorIQ platform Trust Architecture 3.0
--  One Secure WatchDog timer and one Non-Secure Watchdog timer.
--  ARM Generic Timer
--  Two Flextimers
--  Debug supporting run control, data acquisition, high-speed trace,
--  performance/event monitoring
--  Thermal Monitor Unit (TMU) with +/- 2C accuracy
--  Support for Voltage ID (VID) for yield improvement
--
--LX2160A SoC has 2 more similar SoC personalities
--1)LX2120A, few difference w.r.t. LX2160A:
--       a) Twelve 64-bit ARM v8 Cortex-A72 CPUs
--
--2)LX2080A, few difference w.r.t. LX2160A:
--       a) Eight 64-bit ARM v8 Cortex-A72 CPUs
--
--SerDes 1 lane grouping
--  SRDS_PRTCL_S1 is latched at reset. U-Boot can still configure SD1 before
--  the MC starts:
--  1x100GE + 4x25G, 2x40GE, 1x40GE + 4x10G or 1x100GE + 4x10G.
--  See 'serdes1' in doc/board/nxp/hwconfig.rst, and the 'lx2160_serdes status'
--  command.
--
--
--LS1028A
----------
--The QorIQ LS1028A processor integrates two 64-bit Arm Cortex-A72 cores with
--a GPU and LCD controller, as well as two TSN-enabled Ethernet controllers and
--a TSNenabled 4-port switch.
--
--The high performance Cortex-A72 cores, performing above 16,000 CoreMarks,
--combined with 2.5 Gbit Ethernet, PCI express Gen 3.0, SATA 3.0, USB 3.0 and
--Octal/Quad SPI interfaces provide capabilities for a number of industrial and
--embedded applications. The device provides excellent integration with the
--new Time-Sensitive Networking standard, and enables a number of
--TSN applications.
--
--The LS1028A SoC includes the following function and features:
-- - Two 64-bit ARM v8 A72 CPUs
-- - Cache Coherent interconnect (CCI-400)
-- - One 32-bit DDR3L/DDR4 SDRAM memory controller with ECC
-- - eDP/Displayport interface
-- - Graphics processing unit
-- - One Configurable x4 SerDes
-- - Ethernet interfaces
--   - Non-switched: One Ethernet MAC supporting 2.5G, 1G, 100M, 10M, one
--   ethernet MAC supporting 1G, 100M, 10M.
--   - Switched: TSN IP to support four 2.5/1G interfaces.
--   - None of the MACs support MACSEC
--   - Support for RGMII, SGMII (and 1000Base-KX), SGMII 2.5x, QSGMII
--   - Support for 10G-SXGMII and 10G-QXGMII.
--   - Energy efficient Ethernet support (802.3az)
--   - IEEE 1588 support
--  - High-speed peripheral interfaces
--    - Two PCIe 3.0 controllers, one supporting x4 operation
--    - One serial ATA (SATA 3.0) controller
--  - Additional peripheral interfaces
--    - Two high-speed USB 2.0/3.0 controllers with integrated PHY each
--      supporting host or device modes
--    - Two Enhanced secure digital host controllers (SD/SDIO/eMMC)
--    - Two Serial peripheral interface (SPI) controllers
--    - Eight I2C controllers
--    - Two UART controllers
--    - Additional six Industrual UARTs (LPUART).
--    - One FlexSPI controller
--    - General Purpose IO (GPIO)
--    - Two CAN-FD interfaces
--    - Eight Flextimers with PWM I/O
--  - Support for hardware virtualization and partitioning enforcement
--  - Layerscape Trust Architecture
--  - Service Processor (SP) provides pre-boot initialization and secure-boot
--    capabilities
--
--LX2162A
----------
--The QorIQ LX2162A processor is built on the Layerscape architecture
--combining sixteen ARM A72 processor cores with advanced, high-performance
--datapath acceleration and network, peripheral interfaces required for
--networking, wireless infrastructure, storage, and general-purpose embedded
--applications.
--
--LX2162A is compliant with the Layerscape Chassis Generation 3.2.
--
--The LX2162A SoC includes the following function and features:
--  Sixteen 32-bit / 64-bit ARM v8 A72 CPUs
--  Cache Coherent Interconnect Fabric (CCN508)
--  One 64-bit 2.9GT/s DDR4 SDRAM memory controllers with ECC.
--  Data path acceleration architecture (DPAA2)
--  12 Serdes lanes at up to 25 GHz
--  Ethernet interfaces
--  Support for 10G-SXGMII (aka USXGMII).
--  Support for SGMII (and 1000Base-KX)
--  Support for 10GBase-R (and 10GBase-KR)
--  Support for CAUI2 (50G) and 25G-AUI(25G).
--  Support for XLAUI (and 40GBase-KR4) for 40G.
--  Support for two RGMII parallel interfaces.
--  Energy efficient Ethernet support (802.3az)
--  IEEE 1588 support.
--  High-speed peripheral interfaces
--	One PCIe Gen 3.0 8-lane controllers supporting SR-IOV,
--	Two PCIe Gen 3.0 4-lane controllers.
--	Four serial ATA (SATA 3.0) controllers.
--	One USB 3.0 controllers with integrated PHY
--	Two Enhanced secure digital host controllers
--	Two Controller Area Network (CAN) modules
--	Flexible Serial peripheral interface (FlexSPI) controller.
--	Three Serial peripheral interface (SPI) controllers.
--	Eight I2C Controllers.
--	Four PL011 UARTs supporting two 4-pin UART ports or four 2-pin UART ports.
--	General Purpose IO (GPIO)
--  Support for hardware virtualization and partitioning (ARM MMU-500)
--  Support for GIC (ARM GIC-500)
--  QorIQ platform Trust Architecture 3.0
--  One Secure WatchDog timer and one Non-Secure Watchdog timer.
--  ARM Generic Timer
--  Two Flextimers
--  Debug supporting run control, data acquisition, high-speed trace,
--  performance/event monitoring
--  Thermal Monitor Unit (TMU) with +/- 2C accuracy
--  Support for Voltage ID (VID) for yield improvement
--
--LX2162A SoC has 2 more similar SoC personalities
--1)LX2122A, few difference w.r.t. LX2162A:
--       a) Twelve 64-bit ARM v8 Cortex-A72 CPUs
--
--2)LX2082A, few difference w.r.t. LX2162A:
--       a) Eight 64-bit ARM v8 Cortex-A72 CPUs
-diff --git a/board/nxp/ls1012afrdm/README b/board/nxp/ls1012afrdm/README
-index e60ed606ec1..0d17f7b9abb 100644
---- a/board/nxp/ls1012afrdm/README
-+++ b/board/nxp/ls1012afrdm/README
-@@ -7,7 +7,7 @@ high-bandwidth DDR3L memory and a full complement of high-speed SerDes ports.
- 
- LS1012A SoC Overview
- --------------------
--Please refer arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc for LS2080A
-+Please refer doc/board/nxp/layerscape.rst for LS2080A
- SoC overview.
- 
-  LS1012AFRDM board Overview
-diff --git a/board/nxp/ls1012aqds/README b/board/nxp/ls1012aqds/README
-index e9b80cad506..2dc4269aa01 100644
---- a/board/nxp/ls1012aqds/README
-+++ b/board/nxp/ls1012aqds/README
-@@ -8,7 +8,7 @@ a full complement of high-speed SerDes ports.
- 
- LS1012A SoC Overview
- --------------------
--Please refer arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc for LS1012A
-+Please refer doc/board/nxp/layerscape.rst for LS1012A
- SoC overview.
- 
- LS1012AQDS board Overview
-diff --git a/board/nxp/ls1012ardb/README b/board/nxp/ls1012ardb/README
-index 26b0485a7f8..785d0d406b8 100644
---- a/board/nxp/ls1012ardb/README
-+++ b/board/nxp/ls1012ardb/README
-@@ -8,7 +8,7 @@ a full complement of high-speed SerDes ports.
- 
- LS1012A SoC Overview
- --------------------
--Please refer arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc for LS2080A
-+Please refer doc/board/nxp/layerscape.rst for LS2080A
- SoC overview.
- 
- LS1012ARDB board Overview
-diff --git a/board/nxp/ls1028a/README b/board/nxp/ls1028a/README
-index 323881faa50..946764c1b1e 100644
---- a/board/nxp/ls1028a/README
-+++ b/board/nxp/ls1028a/README
-@@ -6,7 +6,7 @@ derivatives.
- 
- LS1028A SoC Overview
- --------------------------------------
--Please refer arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc
-+Please refer doc/board/nxp/layerscape.rst
- 
- RDB Default Switch Settings (1: ON; 0: OFF)
- -------------------------------------------
-diff --git a/board/nxp/ls1043aqds/README b/board/nxp/ls1043aqds/README
-index f5aa51da87e..7363d4996a2 100644
---- a/board/nxp/ls1043aqds/README
-+++ b/board/nxp/ls1043aqds/README
-@@ -8,7 +8,7 @@ debugging environment.
- 
- LS1043A SoC Overview
- --------------------
--Please refer arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc for LS1043A
-+Please refer doc/board/nxp/layerscape.rst for LS1043A
- SoC overview.
- 
-  LS1043AQDS board Overview
-diff --git a/board/nxp/ls1043ardb/README b/board/nxp/ls1043ardb/README
-index 66ee578e99d..40baf0ae83b 100644
---- a/board/nxp/ls1043ardb/README
-+++ b/board/nxp/ls1043ardb/README
-@@ -8,7 +8,7 @@ debugging environment. The LS1043A RDB is lead-free and RoHS-compliant.
- 
- LS1043A SoC Overview
- --------------------
--Please refer arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc for LS1043A
-+Please refer doc/board/nxp/layerscape.rst for LS1043A
- SoC overview.
- 
-  LS1043ARDB board Overview
-diff --git a/board/nxp/ls1046afrwy/README b/board/nxp/ls1046afrwy/README
-index 2c7c797a879..89d52d4c117 100644
---- a/board/nxp/ls1046afrwy/README
-+++ b/board/nxp/ls1046afrwy/README
-@@ -8,7 +8,7 @@ debugging environment. The FRWY-LS1046A  is lead-free and RoHS-compliant.
- 
- LS1046A SoC Overview
- --------------------
--Please refer arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc for LS1046A
-+Please refer doc/board/nxp/layerscape.rst for LS1046A
- SoC overview.
- 
-  FRWY-LS1046A board Overview
-diff --git a/board/nxp/ls1046aqds/README b/board/nxp/ls1046aqds/README
-index cb694735a46..bf2c2b088e9 100644
---- a/board/nxp/ls1046aqds/README
-+++ b/board/nxp/ls1046aqds/README
-@@ -8,7 +8,7 @@ debugging environment.
- 
- LS1046A SoC Overview
- --------------------
--Please refer arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc for LS1046A
-+Please refer doc/board/nxp/layerscape.rst for LS1046A
- SoC overview.
- 
-  LS1046AQDS board Overview
-diff --git a/board/nxp/ls1088a/README b/board/nxp/ls1088a/README
-index 5315909defc..00366ba405e 100644
---- a/board/nxp/ls1088a/README
-+++ b/board/nxp/ls1088a/README
-@@ -7,7 +7,7 @@ derivatives.
- 
- LS1088A SoC Overview
- --------------------------------------
--Please refer arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc
-+Please refer doc/board/nxp/layerscape.rst
- 
- RDB Default Switch Settings (1: ON; 0: OFF)
- -------------------------------------------
-diff --git a/board/nxp/ls2080aqds/README b/board/nxp/ls2080aqds/README
-index a4cb1a6cac4..2fbd9640573 100644
---- a/board/nxp/ls2080aqds/README
-+++ b/board/nxp/ls2080aqds/README
-@@ -8,7 +8,7 @@ processor series, with a complete debugging environment.
- 
- LS2080A, LS2088A SoC Overview
- --------------------
--Please refer arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc for LS2080A,
-+Please refer doc/board/nxp/layerscape.rst for LS2080A,
- LS2088A SoC overview.
- 
-  LS2080AQDS board Overview
-diff --git a/board/nxp/ls2080ardb/README b/board/nxp/ls2080ardb/README
-index 4c1c36ea3a5..553250b5e09 100644
---- a/board/nxp/ls2080ardb/README
-+++ b/board/nxp/ls2080ardb/README
-@@ -10,7 +10,7 @@ Layerscape Architecture processor.More details in below sections
- 
- LS2080A, LS2088A, LS2081A SoC Overview
- --------------------------------------
--Please refer arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc for LS2080A,
-+Please refer doc/board/nxp/layerscape.rst for LS2080A,
- LS2081A, LS2088A SoC overview.
- 
-  LS2080ARDB board Overview
-diff --git a/board/nxp/lx2160a/README b/board/nxp/lx2160a/README
-index 7bca98dd3d7..f77937d8503 100644
---- a/board/nxp/lx2160a/README
-+++ b/board/nxp/lx2160a/README
-@@ -6,7 +6,7 @@ Layerscape Architecture processor and its personalities.
- 
- LX2160A SoC Overview
- --------------------------------------
--For details, please refer arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc
-+For details, please refer doc/board/nxp/layerscape.rst
- 
- LX2160ARDB board Overview
- ----------------------
-@@ -197,7 +197,7 @@ SERDES3	|CARDS
- 
- LX2162A SoC Overview
- --------------------------------------
--For details, please refer arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc
-+For details, please refer doc/board/nxp/layerscape.rst
- 
- LX2162AQDS board Overview
- ----------------------
-diff --git a/doc/board/nxp/index.rst b/doc/board/nxp/index.rst
-index 4458ee0fd87..f61256e2103 100644
---- a/doc/board/nxp/index.rst
-+++ b/doc/board/nxp/index.rst
-@@ -27,6 +27,7 @@ NXP Semiconductors
-    imxrt1020-evk
-    imxrt1050-evk
-    imxrt1170-evk
-+   layerscape
-    ls1046ardb
-    mx6sabreauto
-    mx6sabresd
-diff --git a/doc/board/nxp/layerscape.rst b/doc/board/nxp/layerscape.rst
-new file mode 100644
-index 00000000000..ecc023b328c
---- /dev/null
-+++ b/doc/board/nxp/layerscape.rst
-@@ -0,0 +1,517 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+SoC overview
-+============
-+
-+1. LS1043A
-+2. LS1088A
-+3. LS2080A
-+4. LS1012A
-+5. LS1046A
-+6. LS2088A
-+7. LS2081A
-+8. LX2160A
-+9. LS1028A
-+10. LX2162A
-+
-+LS1043A
-+-------
-+
-+The LS1043A integrated multicore processor combines four ARM Cortex-A53
-+processor cores with datapath acceleration optimized for L2/3 packet
-+processing, single pass security offload and robust traffic management
-+and quality of service.
-+
-+The LS1043A SoC includes the following function and features:
-+
-+- Four 64-bit ARM Cortex-A53 CPUs
-+- 1 MB unified L2 Cache
-+- One 32-bit DDR3L/DDR4 SDRAM memory controllers with ECC and interleaving
-+  support
-+- Data Path Acceleration Architecture (DPAA) incorporating acceleration the
-+  the following functions:
-+
-+  - Packet parsing, classification, and distribution (FMan)
-+  - Queue management for scheduling, packet sequencing, and congestion
-+    management (QMan)
-+  - Hardware buffer management for buffer allocation and de-allocation (BMan)
-+  - Cryptography acceleration (SEC)
-+
-+- Ethernet interfaces by FMan
-+
-+  - Up to 1 x 10GBase-R supporting 10G interface
-+  - Up to 1 x QSGMII
-+  - Up to 4 x SGMII supporting 1000Mbps
-+  - Up to 2 x SGMII supporting 2500Mbps
-+  - Up to 2 x RGMII supporting 1000Mbps
-+
-+- High-speed peripheral interfaces
-+
-+  - Three PCIe 2.0 controllers, one supporting x4 operation
-+  - One serial ATA (SATA 3.0) controllers
-+
-+- Additional peripheral interfaces
-+
-+  - Three high-speed USB 3.0 controllers with integrated PHY
-+  - Enhanced secure digital host controller (eSDXC/eMMC)
-+  - Quad Serial Peripheral Interface (QSPI) Controller
-+  - Serial peripheral interface (SPI) controller
-+  - Four I2C controllers
-+  - Two DUARTs
-+  - Integrated flash controller supporting NAND and NOR flash
-+
-+- QorIQ platform's trust architecture 2.1
-+
-+LS1088A
-+-------
-+
-+The QorIQ LS1088A processor is built on the Layerscape
-+architecture combining eight ARM A53 processor cores
-+with advanced, high-performance datapath acceleration
-+and networks, peripheral interfaces required for
-+networking, wireless infrastructure, and general-purpose
-+embedded applications.
-+
-+LS1088A is compliant with the Layerscape Chassis Generation 3.
-+
-+Features summary:
-+
-+- 8 32-bit / 64-bit ARM v8 Cortex-A53 CPUs
-+- Cores are in 2 cluster of 4-cores each
-+- 1MB L2 - Cache per cluster
-+- Cache coherent interconnect (CCI-400)
-+- 1 64-bit DDR4 SDRAM memory controller with ECC
-+- Data path acceleration architecture 2.0 (DPAA2)
-+- 4-Lane 10GHz SerDes comprising of WRIOP
-+- 4-Lane 10GHz SerDes comprising of PCI, SATA, uQE(TDM/HLDC/UART)
-+- Ethernet interfaces: SGMIIs, RGMIIs, QSGMIIs, XFIs
-+- QSPI, SPI, IFC2.0 supporting NAND, NOR flash
-+- 3 PCIe3.0 , 1 SATA3.0, 2 USB3.0, 1 SDXC, 2 DUARTs etc
-+- 2 DUARTs
-+- 4 I2C, GPIO
-+- Thermal monitor unit(TMU)
-+- 4 Flextimers and 1 generic timer
-+- Support for hardware virtualization and partitioning enforcement
-+- QorIQ platform's trust architecture 3.0
-+- Service processor (SP) provides pre-boot initialization and secure-boot
-+  capabilities
-+
-+LS2080A
-+-------
-+
-+The LS2080A integrated multicore processor combines eight ARM Cortex-A57
-+processor cores with high-performance data path acceleration logic and network
-+and peripheral bus interfaces required for networking, telecom/datacom,
-+wireless infrastructure, and mil/aerospace applications.
-+
-+The LS2080A SoC includes the following function and features:
-+
-+- Eight 64-bit ARM Cortex-A57 CPUs
-+- 1 MB platform cache with ECC
-+- Two 64-bit DDR4 SDRAM memory controllers with ECC and interleaving support
-+- One secondary 32-bit DDR4 SDRAM memory controller, intended for use by
-+  the AIOP
-+- Data path acceleration architecture (DPAA2) incorporating acceleration for
-+  the following functions:
-+
-+  - Packet parsing, classification, and distribution (WRIOP)
-+  - Queue and Hardware buffer management for scheduling, packet sequencing, and
-+    congestion management, buffer allocation and de-allocation (QBMan)
-+  - Cryptography acceleration (SEC) at up to 10 Gbps
-+  - RegEx pattern matching acceleration (PME) at up to 10 Gbps
-+  - Decompression/compression acceleration (DCE) at up to 20 Gbps
-+  - Accelerated I/O processing (AIOP) at up to 20 Gbps
-+  - QDMA engine
-+
-+- 16 SerDes lanes at up to 10.3125 GHz
-+- Ethernet interfaces
-+
-+  - Up to eight 10 Gbps Ethernet MACs
-+  - Up to eight 1 / 2.5 Gbps Ethernet MACs
-+
-+- High-speed peripheral interfaces
-+
-+  - Four PCIe 3.0 controllers, one supporting SR-IOV
-+
-+- Additional peripheral interfaces
-+
-+  - Two serial ATA (SATA 3.0) controllers
-+  - Two high-speed USB 3.0 controllers with integrated PHY
-+  - Enhanced secure digital host controller (eSDXC/eMMC)
-+  - Serial peripheral interface (SPI) controller
-+  - Quad Serial Peripheral Interface (QSPI) Controller
-+  - Four I2C controllers
-+  - Two DUARTs
-+  - Integrated flash controller (IFC 2.0) supporting NAND and NOR flash
-+
-+- Support for hardware virtualization and partitioning enforcement
-+- QorIQ platform's trust architecture 3.0
-+- Service processor (SP) provides pre-boot initialization and secure-boot
-+  capabilities
-+
-+LS1012A
-+-------
-+
-+The LS1012A features an advanced 64-bit ARM v8 Cortex-
-+A53 processor, with 32 KB of parity protected L1-I cache,
-+32 KB of ECC protected L1-D cache, as well as 256 KB of
-+ECC protected L2 cache.
-+
-+The LS1012A SoC includes the following function and features:
-+
-+- One 64-bit ARM v8 Cortex-A53 core with the following capabilities:
-+- ARM v8 cryptography extensions
-+- One 16-bit DDR3L SDRAM memory controller, Up to 1.0 GT/s, Supports
-+  16-/8-bit operation (no ECC support)
-+- ARM core-link CCI-400 cache coherent interconnect
-+- Packet Forwarding Engine (PFE)
-+- Cryptography acceleration (SEC)
-+- Ethernet interfaces supported by PFE:
-+- One Configurable x3 SerDes:
-+
-+  - Two Serdes PLLs supported for usage by any SerDes data lane
-+  - Support for up to 6 GBaud operation
-+
-+- High-speed peripheral interfaces:
-+
-+  - One PCI Express Gen2 controller, supporting x1 operation
-+  - One serial ATA (SATA Gen 3.0) controller
-+  - One USB 3.0/2.0 controller with integrated PHY
-+  - One USB 2.0 controller with ULPI interface. .
-+
-+- Additional peripheral interfaces:
-+
-+  - One quad serial peripheral interface (QuadSPI) controller
-+  - One serial peripheral interface (SPI) controller
-+  - Two enhanced secure digital host controllers
-+  - Two I2C controllers
-+  - One 16550 compliant DUART (two UART interfaces)
-+  - Two general purpose IOs (GPIO)
-+  - Two FlexTimers
-+  - Five synchronous audio interfaces (SAI)
-+  - Pre-boot loader (PBL) provides pre-boot initialization and RCW loading
-+  - Single-source clocking solution enabling generation of core, platform,
-+    DDR, SerDes, and USB clocks from a single external crystal and internal
-+    crystaloscillator
-+  - Thermal monitor unit (TMU) with +/- 3C accuracy
-+  - Two WatchDog timers
-+  - ARM generic timer
-+
-+- QorIQ platform's trust architecture 2.1
-+
-+LS1046A
-+-------
-+
-+The LS1046A integrated multicore processor combines four ARM Cortex-A72
-+processor cores with datapath acceleration optimized for L2/3 packet
-+processing, single pass security offload and robust traffic management
-+and quality of service.
-+
-+The LS1046A SoC includes the following function and features:
-+
-+- Four 64-bit ARM Cortex-A72 CPUs
-+- 2 MB unified L2 Cache
-+- One 64-bit DDR4 SDRAM memory controllers with ECC and interleaving
-+  support
-+- Data Path Acceleration Architecture (DPAA) incorporating acceleration the
-+  the following functions:
-+
-+  - Packet parsing, classification, and distribution (FMan)
-+  - Queue management for scheduling, packet sequencing, and congestion
-+    management (QMan)
-+  - Hardware buffer management for buffer allocation and de-allocation (BMan)
-+  - Cryptography acceleration (SEC)
-+
-+- Two Configurable x4 SerDes
-+
-+  - Two PLLs per four-lane SerDes
-+  - Support for 10G operation
-+
-+- Ethernet interfaces by FMan
-+
-+  - Up to 2 x 10GBase-R supporting 10G interface (MAC 9, 10)
-+  - Up to 1 x QSGMII (MAC 5, 6, 10, 1)
-+  - Up to 4 x SGMII supporting 1000Mbps (MAC 5, 6, 9, 10)
-+  - Up to 3 x SGMII supporting 2500Mbps (MAC 5, 9, 10)
-+  - Up to 2 x RGMII supporting 1000Mbps (MAC 3, 4)
-+
-+- High-speed peripheral interfaces
-+
-+  - Three PCIe 3.0 controllers, one supporting x4 operation
-+  - One serial ATA (SATA 3.0) controllers
-+
-+- Additional peripheral interfaces
-+
-+  - Three high-speed USB 3.0 controllers with integrated PHY
-+  - Enhanced secure digital host controller (eSDXC/eMMC)
-+  - Quad Serial Peripheral Interface (QSPI) Controller
-+  - Serial peripheral interface (SPI) controller
-+  - Four I2C controllers
-+  - Two DUARTs
-+  - Integrated flash controller (IFC) supporting NAND and NOR flash
-+
-+- QorIQ platform's trust architecture 2.1
-+
-+LS2088A
-+-------
-+
-+The LS2088A integrated multicore processor combines eight ARM Cortex-A72
-+processor cores with high-performance data path acceleration logic and network
-+and peripheral bus interfaces required for networking, telecom/datacom,
-+wireless infrastructure, and mil/aerospace applications.
-+
-+The LS2088A SoC includes the following function and features:
-+
-+- Eight 64-bit ARM Cortex-A72 CPUs
-+- 1 MB platform cache with ECC
-+- Two 64-bit DDR4 SDRAM memory controllers with ECC and interleaving support
-+- One secondary 32-bit DDR4 SDRAM memory controller, intended for use by
-+  the AIOP
-+- Data path acceleration architecture (DPAA2) incorporating acceleration for
-+  the following functions:
-+
-+  - Packet parsing, classification, and distribution (WRIOP)
-+  - Queue and Hardware buffer management for scheduling, packet sequencing, and
-+    congestion management, buffer allocation and de-allocation (QBMan)
-+  - Cryptography acceleration (SEC) at up to 10 Gbps
-+  - RegEx pattern matching acceleration (PME) at up to 10 Gbps
-+  - Decompression/compression acceleration (DCE) at up to 20 Gbps
-+  - Accelerated I/O processing (AIOP) at up to 20 Gbps
-+  - QDMA engine
-+
-+- 16 SerDes lanes at up to 10.3125 GHz
-+- Ethernet interfaces
-+
-+  - Up to eight 10 Gbps Ethernet MACs
-+  - Up to eight 1 / 2.5 Gbps Ethernet MACs
-+
-+- High-speed peripheral interfaces
-+
-+  - Four PCIe 3.0 controllers, one supporting SR-IOV
-+
-+- Additional peripheral interfaces
-+
-+  - Two serial ATA (SATA 3.0) controllers
-+  - Two high-speed USB 3.0 controllers with integrated PHY
-+  - Enhanced secure digital host controller (eSDXC/eMMC)
-+  - Serial peripheral interface (SPI) controller
-+  - Quad Serial Peripheral Interface (QSPI) Controller
-+  - Four I2C controllers
-+  - Two DUARTs
-+  - Integrated flash controller (IFC 2.0) supporting NAND and NOR flash
-+
-+- Support for hardware virtualization and partitioning enforcement
-+- QorIQ platform's trust architecture 3.0
-+- Service processor (SP) provides pre-boot initialization and secure-boot
-+  capabilities
-+
-+LS2088A SoC has 3 more similar SoC personalities
-+
-+1)LS2048A, few difference w.r.t. LS2088A:
-+       a) Four 64-bit ARM v8 Cortex-A72 CPUs
-+
-+2)LS2084A, few difference w.r.t. LS2088A:
-+       a) No AIOP
-+       b) No 32-bit DDR3 SDRAM memory
-+       c) 5 * 1/10G + 5 \*1G WRIOP
-+       d) No L2 switch
-+
-+3)LS2044A, few difference w.r.t. LS2084A:
-+       a) Four 64-bit ARM v8 Cortex-A72 CPUs
-+
-+LS2081A
-+-------
-+
-+LS2081A is 40-pin derivative of LS2084A.
-+So feature-wise it is same as LS2084A.
-+Refer to LS2084A(LS2088A) section above for details.
-+
-+It has one more similar SoC personality
-+
-+1)LS2041A, few difference w.r.t. LS2081A:
-+       a) Four 64-bit ARM v8 Cortex-A72 CPUs
-+
-+LX2160A
-+-------
-+
-+The QorIQ LX2160A processor is built in the 16FFC process on
-+the Layerscape architecture combining sixteen ARM A72 processor
-+cores with advanced, high-performance datapath acceleration and
-+network, peripheral interfaces required for networking, wireless
-+infrastructure, storage, and general-purpose embedded applications.
-+
-+LX2160A is compliant with the Layerscape Chassis Generation 3.2.
-+
-+The LX2160A SoC includes the following function and features:
-+
-+- Sixteen 32-bit / 64-bit ARM v8 A72 CPUs
-+- Cache Coherent Interconnect Fabric (CCN508 aka “Eliot”)
-+- Two 64-bit 3.2GT/s DDR4 SDRAM memory controllers with ECC.
-+- Data path acceleration architecture (DPAA2)
-+- 24 Serdes lanes at up to 25 GHz
-+- Ethernet interfaces
-+- Single WRIOP tile supporting 130Gbps using 18 MACs
-+- Support for 10G-SXGMII (aka USXGMII).
-+- Support for SGMII (and 1000Base-KX)
-+- Support for 10GBase-R (and 10GBase-KR)
-+- Support for CAUI4 (100G); CAUI2 (50G) and 25G-AUI(25G).
-+- Support for XLAUI (and 40GBase-KR4) for 40G.
-+- Support for two RGMII parallel interfaces.
-+- Energy efficient Ethernet support (802.3az)
-+- IEEE 1588 support.
-+- High-speed peripheral interfaces
-+
-+  - Two PCIe Gen 4.0 8-lane controllers supporting SR-IOV,
-+  - Four PCIe Gen 4.0 4-lane controllers.
-+  - Four serial ATA (SATA 3.0) controllers.
-+  - Two USB 3.0 controllers with integrated PHY
-+  - Two Enhanced secure digital host controllers
-+  - Two Controller Area Network (CAN) modules
-+  - Flexible Serial peripheral interface (FlexSPI) controller.
-+  - Three Serial peripheral interface (SPI) controllers.
-+  - Eight I2C Controllers.
-+  - Four PL011 UARTs supporting two 4-pin UART ports or four 2-pin UART ports.
-+  - General Purpose IO (GPIO)
-+
-+- Support for hardware virtualization and partitioning (ARM MMU-500)
-+- Support for GIC (ARM GIC-500)
-+- QorIQ platform Trust Architecture 3.0
-+- One Secure WatchDog timer and one Non-Secure Watchdog timer.
-+- ARM Generic Timer
-+- Two Flextimers
-+- Debug supporting run control, data acquisition, high-speed trace,
-+  performance/event monitoring
-+- Thermal Monitor Unit (TMU) with +/- 2C accuracy
-+- Support for Voltage ID (VID) for yield improvement
-+
-+LX2160A SoC has 2 more similar SoC personalities
-+
-+1)LX2120A, few difference w.r.t. LX2160A:
-+       a) Twelve 64-bit ARM v8 Cortex-A72 CPUs
-+
-+2)LX2080A, few difference w.r.t. LX2160A:
-+       a) Eight 64-bit ARM v8 Cortex-A72 CPUs
-+
-+SerDes 1 lane grouping
-+  SRDS_PRTCL_S1 is latched at reset. U-Boot can still configure SD1 before
-+  the MC starts:
-+  1x100GE + 4x25G, 2x40GE, 1x40GE + 4x10G or 1x100GE + 4x10G.
-+  See 'serdes1' in doc/board/nxp/hwconfig.rst, and the 'lx2160_serdes status'
-+  command.
-+
-+LS1028A
-+-------
-+
-+The QorIQ LS1028A processor integrates two 64-bit Arm Cortex-A72 cores with
-+a GPU and LCD controller, as well as two TSN-enabled Ethernet controllers and
-+a TSNenabled 4-port switch.
-+
-+The high performance Cortex-A72 cores, performing above 16,000 CoreMarks,
-+combined with 2.5 Gbit Ethernet, PCI express Gen 3.0, SATA 3.0, USB 3.0 and
-+Octal/Quad SPI interfaces provide capabilities for a number of industrial and
-+embedded applications. The device provides excellent integration with the
-+new Time-Sensitive Networking standard, and enables a number of
-+TSN applications.
-+
-+The LS1028A SoC includes the following function and features:
-+
-+- Two 64-bit ARM v8 A72 CPUs
-+- Cache Coherent interconnect (CCI-400)
-+- One 32-bit DDR3L/DDR4 SDRAM memory controller with ECC
-+- eDP/Displayport interface
-+- Graphics processing unit
-+- One Configurable x4 SerDes
-+- Ethernet interfaces
-+
-+  - Non-switched: One Ethernet MAC supporting 2.5G, 1G, 100M, 10M, one
-+    ethernet MAC supporting 1G, 100M, 10M.
-+  - Switched: TSN IP to support four 2.5/1G interfaces.
-+  - None of the MACs support MACSEC
-+  - Support for RGMII, SGMII (and 1000Base-KX), SGMII 2.5x, QSGMII
-+  - Support for 10G-SXGMII and 10G-QXGMII.
-+  - Energy efficient Ethernet support (802.3az)
-+  - IEEE 1588 support
-+
-+- High-speed peripheral interfaces
-+
-+  - Two PCIe 3.0 controllers, one supporting x4 operation
-+  - One serial ATA (SATA 3.0) controller
-+
-+- Additional peripheral interfaces
-+
-+  - Two high-speed USB 2.0/3.0 controllers with integrated PHY each
-+    supporting host or device modes
-+  - Two Enhanced secure digital host controllers (SD/SDIO/eMMC)
-+  - Two Serial peripheral interface (SPI) controllers
-+  - Eight I2C controllers
-+  - Two UART controllers
-+  - Additional six Industrual UARTs (LPUART).
-+  - One FlexSPI controller
-+  - General Purpose IO (GPIO)
-+  - Two CAN-FD interfaces
-+  - Eight Flextimers with PWM I/O
-+
-+- Support for hardware virtualization and partitioning enforcement
-+- Layerscape Trust Architecture
-+- Service Processor (SP) provides pre-boot initialization and secure-boot
-+  capabilities
-+
-+LX2162A
-+-------
-+
-+The QorIQ LX2162A processor is built on the Layerscape architecture
-+combining sixteen ARM A72 processor cores with advanced, high-performance
-+datapath acceleration and network, peripheral interfaces required for
-+networking, wireless infrastructure, storage, and general-purpose embedded
-+applications.
-+
-+LX2162A is compliant with the Layerscape Chassis Generation 3.2.
-+
-+The LX2162A SoC includes the following function and features:
-+
-+- Sixteen 32-bit / 64-bit ARM v8 A72 CPUs
-+- Cache Coherent Interconnect Fabric (CCN508)
-+- One 64-bit 2.9GT/s DDR4 SDRAM memory controllers with ECC.
-+- Data path acceleration architecture (DPAA2)
-+- 12 Serdes lanes at up to 25 GHz
-+- Ethernet interfaces
-+- Support for 10G-SXGMII (aka USXGMII).
-+- Support for SGMII (and 1000Base-KX)
-+- Support for 10GBase-R (and 10GBase-KR)
-+- Support for CAUI2 (50G) and 25G-AUI(25G).
-+- Support for XLAUI (and 40GBase-KR4) for 40G.
-+- Support for two RGMII parallel interfaces.
-+- Energy efficient Ethernet support (802.3az)
-+- IEEE 1588 support.
-+- High-speed peripheral interfaces
-+
-+  - One PCIe Gen 3.0 8-lane controllers supporting SR-IOV,
-+  - Two PCIe Gen 3.0 4-lane controllers.
-+  - Four serial ATA (SATA 3.0) controllers.
-+  - One USB 3.0 controllers with integrated PHY
-+  - Two Enhanced secure digital host controllers
-+  - Two Controller Area Network (CAN) modules
-+  - Flexible Serial peripheral interface (FlexSPI) controller.
-+  - Three Serial peripheral interface (SPI) controllers.
-+  - Eight I2C Controllers.
-+  - Four PL011 UARTs supporting two 4-pin UART ports or four 2-pin UART ports.
-+  - General Purpose IO (GPIO)
-+
-+- Support for hardware virtualization and partitioning (ARM MMU-500)
-+- Support for GIC (ARM GIC-500)
-+- QorIQ platform Trust Architecture 3.0
-+- One Secure WatchDog timer and one Non-Secure Watchdog timer.
-+- ARM Generic Timer
-+- Two Flextimers
-+- Debug supporting run control, data acquisition, high-speed trace,
-+  performance/event monitoring
-+- Thermal Monitor Unit (TMU) with +/- 2C accuracy
-+- Support for Voltage ID (VID) for yield improvement
-+
-+LX2162A SoC has 2 more similar SoC personalities
-+
-+1)LX2122A, few difference w.r.t. LX2162A:
-+       a) Twelve 64-bit ARM v8 Cortex-A72 CPUs
-+
-+2)LX2082A, few difference w.r.t. LX2162A:
-+       a) Eight 64-bit ARM v8 Cortex-A72 CPUs
-diff --git a/doc/board/nxp/ls1046ardb.rst b/doc/board/nxp/ls1046ardb.rst
-index 8c0bc82dde7..01654d11257 100644
---- a/doc/board/nxp/ls1046ardb.rst
-+++ b/doc/board/nxp/ls1046ardb.rst
-@@ -11,7 +11,7 @@ debugging environment. The LS1046A RDB is lead-free and RoHS-compliant.
- 
- LS1046A SoC Overview
- --------------------
--Please refer arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc for LS1046A
-+Please refer doc/board/nxp/layerscape.rst for LS1046A
- SoC overview.
- 
- LS1046ARDB board Overview
-diff --git a/doc/board/nxp/nbxv3.rst b/doc/board/nxp/nbxv3.rst
-index 98d5cf9e17d..7b4972f6340 100644
---- a/doc/board/nxp/nbxv3.rst
-+++ b/doc/board/nxp/nbxv3.rst
-@@ -20,7 +20,7 @@ bools under ``if TARGET_NBXV3`` in ``board/nxp/lx2160a/Kconfig``.
- LX2160A SoC overview
- --------------------
- 
--Please refer to arch/arm/cpu/armv8/fsl-layerscape/doc/README.soc for the
-+Please refer to doc/board/nxp/layerscape.rst for the
- LX2160A SoC overview.
- 
- CPU Module overview
+Keeping the two sides apart has a cost: a few things exist twice.
+SUNXI_GEN_NCAT2 is declared in both arch trees, because the shared drivers
+test it and no Kconfig file is sourced by both. clock_get_pll6() is a C
+function for ARM (clock_sun50i_h6.c) and an inline for RISC-V
+(arch-sun20i/clock.h), decoding the same NCAT2 registers. The MMC mod-clock
+bits, the CCU offsets and parts of board/sunxi/board.c are repeated the same
+way.
+
+For the sake of simplicity the image names stay "sunxi"
+(u-boot-sunxi-with-spl.bin, inner sunxi-spl.bin) because that is the shared
+Allwinner eGON boot format.
+
+Both defconfigs build, and both boards boot from the SD card to a userspace
+login. The images were built with custom Buildroot configuration, using
+gcc 16.2.0, binutils 2.46.1 and Linux 7.3.0.
+
+One caveat -- reboot does not work yet; it needs fixes outside U-Boot, on the
+firmware/OS side.
+
+AI/LLM tools were used as development assistants throughout this work.
+Their use included debugging DRAM initialization and probing issues,
+assisting with code development, reviewing code, helping with testing and
+validation, and reviewing and refining commit messages.
+
+PS. The boards use CONFIG_NS16550_CLK_ENABLE, which comes from a patch
+originally posted by khaliforce <kforce@gmail.com> and merged as commit
+70f51e1e2ea5 ("serial: ns16550: make probe clock enabling optional") by
+Samuel Holland; v2027.01-rc1 already contains it.
+
+[1] https://github.com/smaeul/u-boot/tree/d1-wip
+
+
+The patches (on tag v2027.01-rc1)
+---------------------------------
+
+1/10 riscv: cpu: add Allwinner D1/D1s(F133) CPU support
+     Add the C906 support for the D1/D1s(F133) SoCs:
+
+     - T-Head cache operations from the custom cache instructions
+     - harts_early_init() programming MXSTATUS, MHCR and MHINT
+     - cleanup_before_linux() disabling interrupts and flushing the caches
+     - dram_init() from the device tree memory nodes
+     - the T-Head CSR, CCU clock and memory map headers
+     - SUN20I Kconfig (cache line size, T-Head CMO support)
+
+2/10 sunxi: allow the sunxi drivers to be built for sun20i
+     Accept SUN20I next to ARCH_SUNXI for the RAM, clock, pinctrl, GPIO, MMC,
+     reset and watchdog drivers, and keep WATCHDOG_AUTOSTART off for it.
+
+     Declare SUNXI_GEN_NCAT2 here as well - the ARM sunxi Kconfig is not read
+     by a RISC-V build - and add the MMC base addresses to arch-sun20i/cpu.h
+     so sunxi_mmc.c builds.
+
+3/10 board: sun20i: add common support for the D1/D1s boards
+     Add the board code used by all D1/D1s(F133) boards:
+
+     - TARGET_SUN20I, board init and CPU probing
+     - sunxi eGON/TOC0 SPL header: boot source, FEL mode, SPL size
+     - SPL DRAM probing and the /memory fixup
+     - FIT DT name matching
+     - environment placement for MMC/SPI boot media
+     - the u-boot-sunxi-with-spl.bin image
+     - a MAINTAINERS section for the new board and CPU files
+
+     CONFIG_ARCH_SUNXI is never set on these RISC-V parts, so extend the SPL
+     image rule in scripts/Makefile.xpl to match TARGET_SUN20I as well.
+
+     The board code, the devicetree overlay and include/configs/sun20i.h come
+     from Samuel Holland's d1-wip tree [1]. The board code in turn derives from
+     the ARM sunxi board code, so its copyright notices are kept.
+
+     [1] https://github.com/smaeul/u-boot/tree/d1-wip
+
+4/10 sunxi: dram: fix integer-pointer conversions in the D1 DRAM driver
+     Fix readl()/writel() address types for GCC 15+
+
+     Use typed base address macros and cast remaining register addresses
+     to void __iomem * to satisfy GCC 15's stricter type checking.
+
+     No functional change.
+
+5/10 sunxi: dram: count the banks on address bit 11, not A22
+     The bank test looks for the BA2 alias at address bit 22, but in the mode
+     the probe programs BA2 is bit 11. A four bank part therefore always
+     reports eight banks, turning 64MB into 128MB.
+
+     On a MangoPi MQ with F133-A the probe now reports 4 banks, 13 rows and 2KB
+     pages - the vendor's dram_para1 = 0xd2. Boot tested on a Lichee RV Dock
+     too, where a D1 with external 512MB DDR3 is detected correctly.
+
+6/10 sunxi: dram: no AC remapping on the co-packaged DRAM parts
+     The PHY AC remapping tables compensate for the drive strength of the
+     DRAM chips connected to the SoC. This compensation must be skipped
+     when the DRAM is integrated on-die.
+
+7/10 sunxi: dram: let the board set the MR1 mode register
+     The DRAM mode register 1 value belongs to the DRAM part, and the parts in
+     use differ: 0x02 for the DDR2 die co-packaged with the D1s and F133-A,
+     against the 0x42 that the boards with external DDR3 have booted with so
+     far.
+
+     Expose it next to the other vendor DRAM settings, keeping 0x42 as the
+     default so nothing changes for the existing users.
+
+8/10 sunxi: mmc: handle D1 PLL6 clock rate correctly
+     Apply the existing MMC clock /2 compensation to SUN20I,
+     as already done for SUN8I_R528.
+
+9/10 configs: add the Lichee RV Dock defconfig
+     Sipeed Lichee RV Dock: D1, 512 MB DDR3.
+
+10/10 configs: add the MangoPi MQ D1s(F133) defconfig
+     MangoPi MQ D1s(F133), 64 MB co-packaged DDR2.
+
+
+ MAINTAINERS                                   |  10 +
+ arch/riscv/Kconfig                            |  14 +
+ arch/riscv/cpu/sun20i/Kconfig                 |  17 +
+ arch/riscv/cpu/sun20i/Makefile                |   5 +
+ arch/riscv/cpu/sun20i/cache.c                 |  88 ++++
+ arch/riscv/cpu/sun20i/cpu.c                   |  44 ++
+ arch/riscv/cpu/sun20i/dram.c                  |  21 +
+ arch/riscv/dts/sun20i-u-boot.dtsi             |  86 ++++
+ arch/riscv/include/asm/arch-sun20i/clock.h    |  71 +++
+ arch/riscv/include/asm/arch-sun20i/cpu.h      |  22 +
+ .../riscv/include/asm/arch-sun20i/thead_csr.h |  29 ++
+ board/sun20i/Kconfig                          | 173 ++++++++
+ board/sun20i/Makefile                         |   4 +
+ board/sun20i/board.c                          | 309 +++++++++++++
+ board/sun20i/spl.c                            | 142 ++++++
+ configs/lichee_rv_dock_defconfig              |  14 +
+ configs/mangopi_mq_d1s_defconfig              |  20 +
+ drivers/clk/sunxi/Kconfig                     |   2 +-
+ drivers/gpio/Kconfig                          |   2 +-
+ drivers/mmc/Kconfig                           |   2 +-
+ drivers/mmc/sunxi_mmc.c                       |   3 +-
+ drivers/pinctrl/sunxi/Kconfig                 |   2 +-
+ drivers/ram/sunxi/Kconfig                     |   8 +-
+ drivers/ram/sunxi/dram_sun20i_d1.c            | 417 ++++++++++--------
+ drivers/reset/Kconfig                         |   2 +-
+ drivers/watchdog/Kconfig                      |   3 +-
+ include/configs/sun20i.h                      |  11 +
+ scripts/Makefile.xpl                          |   2 +-
+ 28 files changed, 1329 insertions(+), 194 deletions(-)
+ create mode 100644 arch/riscv/cpu/sun20i/Kconfig
+ create mode 100644 arch/riscv/cpu/sun20i/Makefile
+ create mode 100644 arch/riscv/cpu/sun20i/cache.c
+ create mode 100644 arch/riscv/cpu/sun20i/cpu.c
+ create mode 100644 arch/riscv/cpu/sun20i/dram.c
+ create mode 100644 arch/riscv/dts/sun20i-u-boot.dtsi
+ create mode 100644 arch/riscv/include/asm/arch-sun20i/clock.h
+ create mode 100644 arch/riscv/include/asm/arch-sun20i/cpu.h
+ create mode 100644 arch/riscv/include/asm/arch-sun20i/thead_csr.h
+ create mode 100644 board/sun20i/Kconfig
+ create mode 100644 board/sun20i/Makefile
+ create mode 100644 board/sun20i/board.c
+ create mode 100644 board/sun20i/spl.c
+ create mode 100644 configs/lichee_rv_dock_defconfig
+ create mode 100644 configs/mangopi_mq_d1s_defconfig
+ create mode 100644 include/configs/sun20i.h
+
+Cc
+--
+
+  Tom Rini <trini@konsulko.com>               (U-Boot maintainer)
+  Andre Przywara <andre.przywara@arm.com>     (sunxi custodian)
+  Tim Ouyang <tim609@andestech.com>           (RISC-V)
+  Leo Liang <leo.liang@sifive.com>            (RISC-V)
+  Yao Zi <me@ziyao.cc>                        (RISC-V reviewer)
+  Peng Fan <peng.fan@nxp.com>                 (MMC)
+  Jaehoon Chung <jh80.chung@samsung.com>      (MMC)
+  Lukasz Majewski <lukma@nabladev.com>        (CLOCK)
+  Stefan Roese <stefan.roese@mailbox.org>     (WATCHDOG)
+  Samuel Holland <samuel@sholland.org>        (original d1-wip author)
+
 -- 
-2.43.0
+2.51.0
 
