@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 162FB606A326
-	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 21:01:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E5BA606A326
+	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 21:19:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ClVsokwc;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Nz/jdC9n
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=B4ZJ3oFB;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qw+yvY0+
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5A16B6077A;
-	Mon,  2 Nov 2026 21:01:01 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5AE8860642;
+	Mon,  2 Nov 2026 21:19:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id A-K6z1V0naEr; Mon,  2 Nov 2026 21:01:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 397D7606A3
+ id WgVTlFbXnILE; Mon,  2 Nov 2026 21:19:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 802BD6060B
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793653260;
-	b=cFRVOFqa3N05RQ8iTJvDFQamf4Z/wTM+GC2gMthQms+merTVE50AWidiKX5jumHKjp35
-	 FKvCNsAO3ZD3QQusjkCkwC+3dKgzw+k/YiwscEnqtV7JRQmE0o7r5KbMULrcl4rI2pl/R
-	 QWI1eMcc11GNc3hQbnhkzVwC6VBBUl1qDODfEjhmOSLrs/W3ueVgpELGHXdSZyqMDGsK/
-	 kzxmmj2a+Xxj5WXLYgwIp4crqaIHCFnDpELW9Sfu14CmpDg5VbKWDUlVhNu5MdHYzWJdu
-	 L9wvBiLMcnCzYSUz4TOGv8HbcNm+wvUK7fHEKxiXDJVc2Fzf1Tm/e8PHGbGLagUxjPg==
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793654370;
+	b=C/rXN1qMim3wAyj5iBkZugWWjDaCmGnalj2U85/rbcIqeuEBPR7y0Qas25lpNpnPg1T3
+	 nfd6XKozk4IspLKt4Ndr9b/3jUEnbKRT3joFrjkuRUBP/WTCj8MVMc7jF6FwVijHV8uOd
+	 5SV7Ufyfe+CLGvwbI0bB93de49NeRLTYs4x6nOlRY6uty0vK2g/OeD9gz7zMXUizpQ2/Z
+	 Pb3z+A+Uq6JX1xwo05aAO9TiPOmXIAyP9IJsGs4a07xQ+QD3MZSyVKLSbe2cHPAi7SQfx
+	 p+rnwEG1mwM2rTjBtx4sD6do31bKJovnHMYh7MwmWrdGf9L18hoOC9Fx2QAo+obzNzw==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793653260;
+	c=relaxed/relaxed; t=1793654370;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,161 +33,159 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=v8Zmj7qiUmzk90RE024dNa4UCntt5y6Am4RE9sKmu+8=;
-	b=dAAYiAC15MDdNjuO/x5JzdAPpYGEKeZ77gewdd4x5inKnJk3AFMM90RqaqnbaQLhHed8
-	 VwZ3o2riYCEOgW9pEMSk8eluwmBJgxlcJgqDHDFVn4kOvZuHJiXqM/QB3ZfVAOHASTeZX
-	 YqD6rjftAyzXCJ+yF/lu0zakLt9jb28P2OTqZuTP831ia1hyU9F832+88LaxexV0NJGRO
-	 SlT8E//JtGPQFM9j7+SRntGixFuR08OuuSuXjW1H+XtBbH6KhqICU7orZjF46LBlR/Fln
-	 UUtyLmDkIb0vAqCadS3oIAbHi7eJnbKP48pumOvfssZ5ugZ74/ysy5jZsSWvSE5cuqg==
+	bh=dLyxCag23u7xSJdSU5zN/+6Q1pkJ1IVLj/S6M72X9/w=;
+	b=JXWRADG5168kHF261SXtVtkPRcfVRvFPaFa7IBdbSZQoPNhfHq8fnqlz11Kre7k+kVCn
+	 E8/WFHYdVdhyh5tIWOPiRvB7FF8FR0hridoBfr99ZSl8VeGyAC0+AcyEhRS+PuY72njVY
+	 acr/O7ui9cbqB6Vw6GF9efq7rOdGJow7zm5OScjp8UsSi+rkE9ArMrLhQkhDK+XCl14rJ
+	 Xt6+epSoIcyGuZOz9kDmZWfwOB/z51BDDf+7LywIAnb8YOrJtNMGF1zqYdmNTIEdyVayv
+	 kwmetlLX9i1zU0GiZlIcANPtdJfzACHscqc8uFBTWkIMvIoPLQyYcDC+R3ImzglIUfw==
 ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qw+yvY0+;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793653260;
-	bh=v8Zmj7qiUmzk90RE024dNa4UCntt5y6Am4RE9sKmu+8=;
+	d=lists.u-boot-project.org; s=default; t=1793654370;
+	bh=dLyxCag23u7xSJdSU5zN/+6Q1pkJ1IVLj/S6M72X9/w=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ClVsokwcMG4mCZfHduGnBxN0W4Uvvx2TV4IXVLkxJGoOyhnJMasDvAKNnnpcKnqhN
-	 PM4jXkIiMLroyWBPg6L8RFiICvFDWR7rHriv6tikBYCyt/yiaHOLPDPlRqflUDl3Db
-	 Ddhl7HHFmqskNtQXpjqtW81X26xk8xFSZO97XOFqsi2cskNxlFAySYpFpu4VAzxk5J
-	 wnrFBHcDAAGfwrcf5MD3nLWo9L2xUyyDGRHIBKGgpqhgn/Nf395RYC8n0dNJXb3NBK
-	 2GJK5zTMU6pNmP2iXglJlg2fvVGSKtg2zPYnUJvxJ0flxsGOEXfyD0ZYdH5nZVP3Ir
-	 YwfaFyMUsCbzw==
+	b=B4ZJ3oFB5hjJFP04hkaGrPznlIUc04sfiDkrXvZoNnCtPK1NJO4DxhkWFZvwGSnJ6
+	 TTa7gB3LfjAs4ifqbA3Vw7OGPXWGvYAI/8zl/x78cxxvkSQhHwL3KMfit9ByRCB7Wr
+	 Xl/EouSK6WyHEIH9op0qPYhJri8KZdeHLy99cUpOzFLttyVA7KgBKQSWSnVzg38KbY
+	 qlyRVbLVR4dq1+gHzXOJCkqmNGpnwFYrAUddQvrC9uE27h7ny8NjPQS1mz/golO/5K
+	 QeShMb3xb3k6CDFN3D7Be6kjRCEVhCdPUgx8FZtWVOepfao/UgklXnkg+Q/ZXVNaYm
+	 jfF3QIF+YSJAg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 397D7606A3;
-	Mon,  2 Nov 2026 21:01:00 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0026E356
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 21:00:58 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 802BD6060B;
+	Mon,  2 Nov 2026 21:19:30 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id CB8FC323
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 21:19:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D93D280D62
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 21:00:58 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id B15606060B
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 21:19:28 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Cw8ZRjUU6iCU for <u-boot@lists.u-boot-project.org>;
- Mon,  2 Nov 2026 21:00:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 84A8C80974
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::1134"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793653258;
- b=NYH6nOEkZyDBcJbmXlWN+kcE1+vZ945aiJ8QG5B2OCJfx1FvQfZAnD21R1x3GyOtbkZV
- SXL25R7WVYv0N6jK1NosqU06Mfa6fsTJIryL1DhqEGX4SHNAE4ru/0szHqh0FQjBZ6+F6
- adEHk/WHKv9M5+64ankcyWVNdTSmzTvS8RdnQmw+LKCRLGYfhQBXr8vNtkunAeeutUaQU
- aFZmyh5IExeYdz6YJhwJ7h4aVU/BGIIptZPHCCCqFu2R9ChSdnV1lN6vio1SEp2gEQp/a
- mtcccVFGYk7LgAIKN/XfkwRn8rmJYcPuyiQX/wToc/XkQl6vRCRDxuy6/O1WsL8IXVw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2XvclkiVis7m for <u-boot@lists.u-boot-project.org>;
+ Mon,  2 Nov 2026 21:19:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DF3E46060A
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2001:4860:4864:20::2d"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793654368;
+ b=VElo6s9rwUmOD6AGhukdP/u8aHB5cW0QnstyDhmB233uYXTXuAlSleQzWSqH3raLE45r
+ OzP0/1NJCOvKRi42DfRZjUWWvdYgmRq2Yszo1hDNPKa5bGPtQo0YxqJtY/iX/IaT4x/Qk
+ zphtFu+rbYiy/0Dt5UxLxwk2Ans90JlYgolYDM6pZZZJqJJFw3UPN8TQeKOSTtoTTiXwt
+ +xVZ+WguGLozwHTm6VbSkNXTruzqbNTCxPXhMxbrgtdwAoWHnYM4pl13RPDDeeefCzyJx
+ SikQ8MtyeJfldaz+XXeHjeMplIo3iRWVWmLeVf8iyFmJNB8CejpABe9D8NNZ+bWViHw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793653258;
+ c=relaxed/relaxed; t=1793654368;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
  In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
  Content-Type:Content-Transfer-Encoding;
- bh=v8Zmj7qiUmzk90RE024dNa4UCntt5y6Am4RE9sKmu+8=;
- b=tdb+TbbMqYJ6V0Kj6La4QNuD77NJPzG/jFBGJpSLRpzNUFmoAlwr2UZLoVn8mCIg6P7g
- sxzhrsnGWxxpjLJ5ceqRWZ2UFzXpnSAa1nJJpR/fV51FbsO0azeWdRIynGRS88uSx1s1u
- zC3r1IAQoLNHK3eck2z2hRLFyS+AdfoyxQAW8duTCzVo5ScMwfXrk11cWKatg2eAQnE3j
- ZavxbyqSx9nFZgr3bd6T0dDyXdkrVO+FHwdWhLmeheocuK/BtakLmhTb/kRYJU7s4979I
- joHDkiMFyDVZyReMdZsVqO05xSGTVf36wkgr2qc8ZgVKEbmuLgysPgnNz3GF3Y42vSg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
- dmarc=pass header.from=linaro.org;
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b="Nz/jdC9n"; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1134"
+ bh=dLyxCag23u7xSJdSU5zN/+6Q1pkJ1IVLj/S6M72X9/w=;
+ b=mGwDLOLbMtC3+rxWITQ7iAM5rX9hy9QotbslqIl35Rp+ZHwTRMqE9jWCilSY6gO3blvN
+ 8xbQoFdW6zezaShZ9ca7iQwpqstfx83xcgUFIpxbRDX0dMpRJhC0Aus8FuZaagfxQitx+
+ ZjRKQqt/jmGqy+wfYzSNDZL1RM2fUTyPtbzOyf9Pz0tnPru1ijjEi2oxmD2b0NPevo5JG
+ 3GRjrca4bwzvb7/1vB2x5q05FqpA+07qzibgN1HFpMYzpWZglmnG7bpCuugQIgR7OJPSr
+ sJdUgKu3hEFNrmJ5MJvadyKHPAJRTkBuFoNCTnHGsL4jcJPA0axswZ3JrbPpREBH+dA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ dmarc=pass header.from=gmail.com;
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=qw+yvY0+; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2001:4860:4864:20::2d"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1134; helo=mail-yw1-x1134.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=Nz/jdC9n
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 84A8C80974
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 21:00:56 +0000 (UTC)
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-8b10ac6ab7bso29770307b3.1
- for <u-boot@lists.u-boot-project.org>; Mon, 02 Nov 2026 13:00:56 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1793653255; cv=none;
+ client-ip=2001:4860:4864:20::2d; helo=mail-oa1-x2d.google.com;
+ envelope-from=maxin.john@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=qw+yvY0+
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id DF3E46060A
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 21:19:27 +0000 (UTC)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-48ed188ee81so1773059fac.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 02 Nov 2026 13:19:27 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1793654366; cv=none;
  d=google.com; s=arc-20260327;
- b=QVYuCVwZ5YbS6RxdFQ+cSFi2tXKsUzH7vecKZp/3eO+EeTvVSpsQ6NKOKWPpsBkZQc
- ZlWhlVXRfoxl3XOvs7dCMqnaN1TQhKfeOeo2zAKDfNFqiGZxv/ESYOEvYbHBDDiicQav
- kLhx3GvPFAiLjUYDNzakPF8Hl4MoFYRtHFPHZfbyRt9xAUZEUwjQuhHQS2GNHjrOV2mr
- 80G7kGViEW3wYJyXRvB9+pbK4JgFmrW73NshlVZv0A3ZCNjFl1tbuJi+TyMSQ8bjhfh7
- AKKh0jGML3S9yb15BnKQu1LwMePXd+vwM0n3DINubCrH2gWj9+A8ptgI/cSqQLUlx8nU
- UBuw==
+ b=SLIQa6vIwOT36/RZEiCJAViYKBjrZyMvSi/9zsebW7/gKGSh34AOwCflAB14apoKbp
+ CiZiYBkIjoMgImnIjn5wrPxuSvjyejPu+hlZfgLB43esiiGbCxHe3suXNou0tu1U0AqD
+ IM7y5UJMYRo2n42IILxqi6O4qGg5WQdXNcSCqq6ss/FzagVAzvso4Z5hfA18ZpjpPllL
+ CKabPzJwzUcWCQUU8CtTcj0Tsd7qlblgn87GXyj1RQcfp/SCIiFWy0EuwIdKslEqpxqX
+ muX3q+2PEHJBYk1fwO/h9ttnudWGTqOpDYYhYo/8PlQGm15smz8BbI3Cxw8+BFVA9DkW
+ t53g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20260327; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=v8Zmj7qiUmzk90RE024dNa4UCntt5y6Am4RE9sKmu+8=;
- fh=7QWwyUnPAQm5WNln6yz2UnPVMLv30rqCuNC8nkM6bR0=;
- b=KCZtjm/Or4/4cJ5b7VueFahqSONlELJdk0Jz9UOtkTQflsljb7EV3mWsD+STZ5JEeZ
- WXgqI7fRgUYmEC1eMnxphDjwZUtiiahhn03zafmWdjjDQRz3JGr/69AMWq/tRG6pLyfL
- mIDNFMRudevfKsYudVKQpVBlqzX0IA8/HsygUffZkLZHspmEd5C650K4tjeYCQVAF0MS
- XbkRr7XzN8rw3NC39dy6BmEldzrCQnD/9+2M/+NVoqJnsz/3/soV+4xjXt8B+MkROdMH
- CaUftZFBrYq1d2exiZVdOwZL5WoEMD5RVwiw/lW+WmKjEKuUXGyF6AJBv+GXnjqH1O1k
- E3EA==; darn=lists.u-boot-project.org
+ bh=dLyxCag23u7xSJdSU5zN/+6Q1pkJ1IVLj/S6M72X9/w=;
+ fh=lDezZ0s84rBnfYz79nzyXVc8ZhijTkHaeBuZe9Bti5Q=;
+ b=B57qTghwBqezJcSU+zh0kaW9OxzOlKnr88Eef6W7gB39OHZP5BfwHDqlcVrsqXc7U2
+ Dcsfhi4ROyNsYEL5VfN1M0LTxHHTm0rxVU6EesCcqhw6VaOGIeiKUSck79LeQlZwXLx6
+ 9FbTRbyK5zLut6d09nLixBO4VeYea3VbrefwBxamv7DpYiEGa/HF65+OOFlqnL1ks/+f
+ nxCvbHg+r4AREOL7/DzWH6+QKRj/GuVWcPdo12DkIQq5w5kvLAjkaCGsUsFiROpzj7fg
+ 4p9YfpCFT8kreQHt5y8WuVMdpeJ41mSrk/Xqjg/v7adB/OLwcQAysMRxGraidccS91Zm
+ UfhA==; darn=lists.u-boot-project.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793653255; x=1794258055;
+ d=gmail.com; s=20260707; t=1793654366; x=1794259166;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=v8Zmj7qiUmzk90RE024dNa4UCntt5y6Am4RE9sKmu+8=;
- b=Nz/jdC9nJcoYJqQuNPexZM0rJYeuRO5kumpDkD0gT13OJY65xuIGZdfOP8Xn1Xe62t
- 5iI7SSNdc2T0lW9DEG7BUxDdhoXdRUc9ZpdFc36fbbpFCSGU235nEEKxjQaFhH0cbgYj
- IJXsKHNTh0wlkRxUVEIArc1+qVDZwykP+e5YrXTfxlpJsj8CC/C59Go2qdCD04bfRDyT
- Qku2cx4rB4ZGQFwgZ9K9Zh92VDvrl/QhFfg+r+Yv5m+q591W2v79jT/LMhA5bduiKhgb
- yigoaXaMeGqbjrici9bAqtpQjUAGpetI5Rnxnlebx5vn9olDR0wEGEvmIknkTmlmfDxL
- daBA==
+ bh=dLyxCag23u7xSJdSU5zN/+6Q1pkJ1IVLj/S6M72X9/w=;
+ b=qw+yvY0+CngD0lHibBbu6qpx1jqLk5v4PF/nFHYbcUJkl65h9hfNcsQ5rg/UyMmzVr
+ cDMPizshtdiGZRG7L6fDwfC+D0f+KihMZJNbtLwroq2i7yD77PT3upT02ZpLeZgtrzc6
+ I3A4ZbFbieVVzZ58mdH+MGJnDUMhpa02DIAmuEPkCS54/nxvzzGRw8EWxrnJp10iAzva
+ lXYg8uGc8SBAC/pp1wi65NnOS3O1PpnuYov9G7bWoNakG6kU9DB6QRFjq+okwuFXkDIL
+ GHAz9h9HtYj9TU1to8k2RDRU/LimAFCOBn1CmK5q+FpWKD3pkG+NnOoDX6VZ6ck/rn3X
+ FcFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793653255; x=1794258055;
+ d=1e100.net; s=20260707; t=1793654366; x=1794259166;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=v8Zmj7qiUmzk90RE024dNa4UCntt5y6Am4RE9sKmu+8=;
- b=Kw3wc6zQ8yaAG0RgV0DIk1ThvoHMe1p62xONiv4QBQ6fbMsvCeLhc9QSs8USvOPqXr
- GO+n3M0fB9Chn0u99atjPi7RemxdQBGuzb1f1mjPEh/kzN4SczjDhFABdQXX+Y4KwygO
- 9U2sSzRILNG7VfEpH6l5/i7E4ZSdnFngvVUJIYV+pXBnw/5KdTSWXC5H120n6O4prxMH
- S0ZmnfrZQPBWAbPBl7eCUTs0hI+EFdTvGPibrOiSdU5EqLk2LkuKcAA0jm859cFIwc44
- wzTkg/R+YGo4LA+3dEacukm2jmKhDCNxAv4n5UpjLJyWmFk/TwYDF3OFMvZ0Beu8KiCt
- clDA==
-X-Gm-Message-State: APuU4Z/BF8sbJDWIHS+FFY1Rz2yZ76y4q93dSc9DRjyf2xibQXQWwvn0
- KZO2oDjVF0trPya1Plh3FBAWUjEwhCEc8PmoAv9EenFrJkf4SZxWXQ4pfIGMz0tRerTlw3DnLod
- RRJOaU/P57/zXfdXxjcseZajXXxdD/4OtH2dw4EymDQ==
-X-Gm-Gg: AYBFou1+T4PZewAT/tYvpH737OCvrQjLFXtpPMg7w0L1QSygn8eIWdWWh4eeHmJ0IZP
- rgVL7GmiLYM+P6Q4K4aakmRx3AJlQLPwExSKoY75L9FN3oSOX8NfQn6vRf/Hc7mbQ5bAAygw2Yk
- CDsEZShKNEli0x6f45iVafqIQmySdor9SANNEZlJkLWC+Og3giGOGY7JKdsAfgS790VIxtcez3e
- 0FTf4fMvt2GUP4B8ja96us5lVhwdtQIrRZdDu/CG8Fn9/Nm8bakzcXduaw3ZC2pHqDz6ZVSMbFl
- mPg/wdzrKj8wc4rC5Xb0f2YYvY4THTJq1NrmrzTHzlQY/kQoewcZ7R/IHqUjEhb4rFshyaH0THK
- CZ+ZvPj2F+0dBR1ES2PxpO8GLIPVN+exQi++UKlxrEx30xX5vCZ7aHTReBEliHZtMY6rpb/neYK
- +fbB3MODtiUovysVe0JqfFq3DuebkCukWIZDKrtUjVOQdgHlwbfB1Dkp6OSoArt3wbmTk3GmwzM
- cFZGp98UNmp19ssxKN+yctX1AbbNg9gWLnJUqzrkxblvkaKOWgJdWxKntqNG0gFoZCJG4YnwDnO
- 5aZ0T7V19FNUs7Ki50ERKxBb/46mi+vrjQZUWm8zykSU3cFyVCU6yTACBXoSXPoheNYF1nZuoF7
- AZtOHhPRVrtqCKX2OYFSh4n1ZOA9iGBkjWVYArlHbBh+tSSUznLorBcsjqOVFp+WF4mVkAq4hzm
- 3wb8my6NMy8t4nALCzhAOwvHXuFDZC2VxhX58=
-X-Received: by 2002:a05:690c:660c:b0:8b1:58f8:9137 with SMTP id
- 00721157ae682-8b2b67a7b9bmr58950987b3.57.1793653255294; Mon, 02 Nov 2026
- 13:00:55 -0800 (PST)
+ bh=dLyxCag23u7xSJdSU5zN/+6Q1pkJ1IVLj/S6M72X9/w=;
+ b=lRJaTMGJblqiUTBW0pK1re635yXWJA1zWjLXibEx0VoIV2zjGZNo2uYeRMNHP/j8OS
+ NtgKTBTExWslMlAtzgETIOkxLDYEquZJy1s7EVbOlVNaM3ncvkv9fcru+izWVehftIJj
+ mQBgc/5VGFV/PnPEBhv/IA5w40tXqHfQkNNBhYQt1r/1Qzvu+ABBkrikidF0ozW+cSx4
+ F948hLxDZPh/ETStD77942zbECiL/T6aDvma/+3irnd10VOE2OTrh+A6OPg9WCzmKq0G
+ iNzD82b8+T0zVy+Ct9JtbvpaH2cNY/ONIq073Eg+lZlV1ymu6CiAG4uhFiWtlktRBfXW
+ sGMg==
+X-Gm-Message-State: AFq9FYJNSJEwMl4197Op3ebo8gq/RuojkBZvvTowVxg9QGAT65I/DFH6
+ QcYGZiTYWeC/+7tL1eqEqomE+xVd10f4GvAqpiofJyd2GyYIycu1n6w+4V3XNvkXbgCqbEAQBnN
+ lmHhwEBMIV172l2xVDH65J7tSu795rPg=
+X-Gm-Gg: AYBFou0k/zUhGHoJ3NUFreGe3R53kS+z//GcXp+Awh9+vIb/BBMArtKAunR18CNexgG
+ lsARbcWeus3WllvqIE+Bd1UNI3pRN1DbMzw4MxKti14gPKjFS0naV1r6/lM3VY5qW+8QtcRfHew
+ MTN4BBnw/ZtAH8S9XlcrktzkqnmX5oYEX0LXeM+Lgbzm6hkzz8cO+S+MXzkW8mwLSON8hb4GhTt
+ nQbjjLNK/06zDpel3oTj8zo2Lapmy+nEqoEb2Zt8taflGdGbd0v9gQzLaiLzIpTHKh2mXjH+/w1
+ Rp0FlrVqf58dM48tDVtChtx7w2wnJV8X+MTZxRCbddCEiA/uXAZr9nNSjd982xHM66E1QDFvwRG
+ VPiE+pd6adisUh6y5F3+YJlgfiHwiAAvSKlTETz23hGz5Frxz2BerBZvF+FzDOtjWgrKJ
+X-Received: by 2002:a05:6870:bacd:b0:4a2:4e0c:593d with SMTP id
+ 586e51a60fabf-4a907705590mr6985074fac.31.1793654366251; Mon, 02 Nov 2026
+ 13:19:26 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261029150906.1558380-1-tkirchner@emlix.com>
- <20261029150906.1558380-6-tkirchner@emlix.com>
- <CAC_iWjLX_3RAzxeCy7HQHEy+fZS4Jm-J_E6wnv_QG5+DWpX+GQ@mail.gmail.com>
- <64f49638-bcf8-45ca-bf88-2e96e2d8d68c@emlix.com>
-In-Reply-To: <64f49638-bcf8-45ca-bf88-2e96e2d8d68c@emlix.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 2 Nov 2026 23:00:18 +0200
-X-Gm-Features: AclHuK-q7r1rhlc_OKWvUFPylEoQe8lufVfx271W0XFnFxlWSTEvUiULmeTBtOU
-Message-ID: <CAC_iWjLwGpmX3jfeo2h=ERDuYZo-a5scgBejzV_euCgazHimQA@mail.gmail.com>
-Subject: Re: [PATCH 5/5] tpm: deactivate unsupported banks in tpm2_auto_start()
-To: Tycho Kirchner <tkirchner@emlix.com>
+References: <20261029173443.1495866-1-maxin.john@gmail.com>
+ <20261029173443.1495866-3-maxin.john@gmail.com>
+ <CAFLszTjZ1XXUYvNoUrBo4ny+dFKP=0=q_xcOobs3D0Lsqdi0AA@mail.gmail.com>
+In-Reply-To: <CAFLszTjZ1XXUYvNoUrBo4ny+dFKP=0=q_xcOobs3D0Lsqdi0AA@mail.gmail.com>
+From: Maxin John <maxin.john@gmail.com>
+Date: Mon, 2 Nov 2026 23:19:14 +0200
+X-Gm-Features: AclHuK8xpXfWa6x5C0n_3VoaDpYTi24U4pN32ObtGJ50QvLvNLZ_qrezgnaSZ0U
+Message-ID: <CAMhs6YzVkpL7JsGmqsVLm4nw9dsUgyrWJGWemjjS7OeDZR9RQA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] test: cmd: add tests for the binop command
+To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Raymond Mao <raymondmaoca@gmail.com>, Eddie James <eajames@linux.ibm.com>
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Rasmus Villemoes <rv@rasmusvillemoes.dk>,
+ Mehmet Fide <mehmet.fide@screeningeagle.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -199,140 +197,89 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, 2 Nov 2026 at 12:35, Tycho Kirchner <tkirchner@emlix.com> wrote:
->
-> Hi Ilias,
->
-> Thanks for the review!
+Hi Simon,
 
-yw
+On Sat, Oct 31, 2026 at 4:02=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Maxin,
+>
+> On 2026-10-29T17:34:37+11:00, Maxin John <maxin.john@gmail.com> wrote:
+> > test: cmd: add tests for the binop command
+> >
+> > binop has had no tests so far. Add some, so that bugs like the heap
+> > overrun are caught in CI.
+> >
+> > Each operation (xor, or, and) is run on hex strings, env vars or
+> > memory, with the result going to an env var, memory or the console.
+> >
+> > The tests also check that:
+> > - short inputs are zero-padded
+> > - console output wraps after 16 bytes
+> > - bad counts, operators, addresses or hex strings are rejected
+> >   without touching the destination
+> >
+> > There is also a test for the heap overrun.
+> >
+> > Signed-off-by: Maxin B. John <maxin.john@gmail.com>
+> >
+> >  test/cmd/Makefile |   1 +
+> >  test/cmd/binop.c  | 192 ++++++++++++++++++++++++++++++++++++++++++++++=
+++++++++
+> >  2 files changed, 193 insertions(+)
+>
+> > diff --git a/test/cmd/binop.c b/test/cmd/binop.c
+> > @@ -0,0 +1,192 @@
+> > +     /* Output wraps after 16 bytes */
+> > +     ut_assertok(run_command("binop xor 17 000102030405060708090a0b0c0=
+d0e0f10 00",
+> > +                             0));
+> > +     ut_assert_nextline("00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e =
+0f ");
+> > +     ut_assert_nextline("10 ");
+> > +     ut_assert_console_end();
+>
+> Please can you add a case with a count of exactly 16? With the current
+> loop, i =3D=3D 15 outputs a newline and the final puts('\n') outputs
+> another, so the user sees a blank line after the data. If that is
+> intended, a test should pin it down. Otherwise it is worth fixing in
+> the binop clean-up patch, since this is the edge case most likely to
+> go wrong.
 
->
-> Am 01.11.26 um 12:52 schrieb Ilias Apalodimas:
-> > Yes, but users that will call measurement_init etc will have
-> > initialized the TPM.
-> > The PCR code exists because some users want to use the TPM only as an R=
-NG.
->
-> My use case is a custom measurement implementation on top of
-> lib/tpm-v2.c, which cannot use the tcg2_* functions. So
-> tcg2_log_prepare_buffer() never runs for us, and nothing makes sure
-> the unsupported banks are deactivated. I think the low-level API
-> together with CONFIG_TPM_PCR_ALLOCATE should be able to handle this.
+Thanks for the review. I have addressed this in v3 of binop clean-up patch.
+Also added a test for exactly 16 bytes to check the extra newline.
 
-Yep, I like where this is going.
+> > diff --git a/test/cmd/binop.c b/test/cmd/binop.c
+> > @@ -0,0 +1,192 @@
+> > +static int cmd_test_binop_invalid(struct unit_test_state *uts)
+> > +{
+> > +     /* Failed operations must not change binop_out */
+> > +     ut_assertok(env_set("binop_out", "deadbeef"));
+> > +
+> > +     /* Literal hex string: too long, odd length, not hex */
+> > +     ut_asserteq(1, run_command("binop xor 2 010203 01 binop_out", 0))=
+;
+>
+> run_command() returns 1 for every failure, including a usage error, so
+> these checks cannot tell which validation rejected the input. For
+> example, if '*nope' were later accepted as address 0 and the command
+> failed for some other reason, the test would still pass. It would be
+> worth making this a UTF_CONSOLE test and checking the error message
+> (or the usage text) after each command, as other tests in test/cmd do.
+> What do you think?
 
->
-> Regarding RNG-only users: TPM_PCR_ALLOCATE depends on MEASURED_BOOT ||
-> EFI_TCG2_PROTOCOL and is off by default. Its help text states that
-> U-Boot sends a PCR allocate and reboots, without specifying at which
-> point during boot. So a board enabling it opts in to that reboot. With
-> MEASURED_BOOT, the first measurement resets the board anyway (with
-> patches 1-4). With only EFI_TCG2_PROTOCOL, the reset currently happens
-> once the EFI subsystem is initialised; boards which boot without EFI do
-> not get it today, but arguably should, if they enabled
-> TPM_PCR_ALLOCATE.
+You are right. Updated the binop tests in v2 based on this suggestion.
 
-Yes they should.
+> Regards,
+> Simon
 
->
-> > IIRC we can't get rid of the EFI call, because it's there to configure
-> > algos that where handed over to us from a previous stage loader that
-> > only handed us an EventLog.
->
-> Agreed, that call needs to stay, since only there the banks can be
-> aligned with the event log.
->
-> > Can't we fet rid of it in pcr_extend though?
->
-> I would rather keep it as a fallback: callers may use tpm2_startup()
-> directly instead of tpm_auto_start(), e.g. custom board code or
-> "tpm2 startup" followed by "tpm2 pcr_extend" on the command line. For
-> them, the check in tpm2_pcr_extend() is the only place where active
-> unsupported banks are caught. With patch 4, it only deactivates the
-> unsupported banks, and only with CONFIG_TPM_PCR_ALLOCATE.
-
-Yes that's what I was implying, but I wasn't very clear. Is there a
-reason we can't move it to tpm2_startup()? tpm_auto_start() is calling
-it anyway unless it's already initialized.
-
-Cheers
-/Ilias
-
->
-> Thanks,
-> Tycho
->
->
->
-> >>
-> >>   tcg2_create_digest: unsupported algorithm 28
-> >>   Cannot extend PCRs if all the TPM enabled algorithms are not support=
-ed
-> >>
-> >> Deactivate them in tpm2_auto_start() already, before anything gets
-> >> measured. If this fails, e.g. because the TPM refuses the allocation o=
-r
-> >> no supported bank would remain active, return an error. The rationale
-> >> is that with CONFIG_TPM_PCR_ALLOCATE enabled, U-Boot is expected to
-> >> manage the banks, so fail early instead of at the first PCR extend.
-> >> This is in line with the TPM_PCR_ALLOCATE help text, which does not
-> >> specify at which point during boot the allocation takes place.
-> >>
-> >> Signed-off-by: Tycho Kirchner <tkirchner@emlix.com>
-> >> ---
-> >>  lib/tpm-v2.c | 12 ++++++++++++
-> >>  1 file changed, 12 insertions(+)
-> >>
-> >> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> >> index 18ec9eb960d..bd049fed748 100644
-> >> --- a/lib/tpm-v2.c
-> >> +++ b/lib/tpm-v2.c
-> >> @@ -232,6 +232,18 @@ u32 tpm2_auto_start(struct udevice *dev)
-> >>         if (rc)
-> >>                 return rc;
-> >>
-> >> +       /*
-> >> +        * Early deactivate active banks with unsupported algorithms. =
-On success,
-> >> +        * this resets the board.
-> >> +        */
-> >> +       if (IS_ENABLED(CONFIG_TPM_PCR_ALLOCATE)) {
-> >> +               rc =3D tpm2_activate_banks(dev, 0);
-> >> +               if (rc) {
-> >> +                       log_err("TPM: failed to deactivate unsupported=
- banks\n");
-> >> +                       return rc;
-> >> +               }
-> >> +       }
-> >> +
-> >>         return tpm2_update_active_banks(dev);
-> >>  }
-> >>
-> >> --
-> >> 2.47.3
-> >>
->
-> --
-> M.Sc. Tycho Kirchner
->
-> emlix GmbH
-> Headquarters: Berliner Str. 12, 37073 G=C3=B6ttingen, Germany
-> Phone +49 (0)551 30664-0, e-mail info@emlix.com
-> District Court of G=C3=B6ttingen, Registry Number HR B 3160
-> Managing Directors: Heike Jordan, Dr. Uwe Kracke
-> VAT ID No. DE 205 198 055
-> Office Berlin: Panoramastr. 1, 10178 Berlin, Germany
-> Office Bonn: Bachstr. 6, 53115 Bonn, Germany
-> Office M=C3=BCnchen: Am Knie 16, 81241 M=C3=BCnchen, Germany
-> http://www.emlix.com
->
-> emlix - your embedded Linux partner
->
+Thanks & Regards,
+Maxin
