@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3266E60716E8
-	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 16:21:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0101606ABA6
+	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 16:21:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=pS7uDQ4q;
-	dkim=pass (2048-bit key, unprotected) header.d=fris.de header.i=@fris.de header.a=rsa-sha256 header.s=mail header.b=jh6+mdH2
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=O0u8Vt9Q;
+	dkim=pass (2048-bit key, unprotected) header.d=fris.de header.i=@fris.de header.a=rsa-sha256 header.s=mail header.b=jo+rVVNB
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0E0288112A;
-	Mon,  2 Nov 2026 16:21:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BC72781137;
+	Mon,  2 Nov 2026 16:21:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bk1lX6ad1NGr; Mon,  2 Nov 2026 16:21:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3AAC281137
+ id IQKgCjqQTKua; Mon,  2 Nov 2026 16:21:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4FB238117B
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793636468;
-	b=BNdF8N812JAMQN0R5IG9b4TEkYydNcVFk1fPyW8qGVujwYr7zGfAXiObHIaJeADIzDR3
-	 VGF2CcPx91qf5CAYnxjTia16tabF519cm18sGVLnT5WvNLBJBbOjutSmMxsCgccAjAMaV
-	 WX4KQFIUazo6YDNRPUeE91dVScXXWfb5zQ3L6xPWL7PqLfmHGajdSesVQNpnX+MyIGtA8
-	 L452KvGS2y9iT36IL9E77WpVkMWwW8ELoUEDgal3ZoYlted3KSsIZT9EldTzcciGJYSfq
-	 AxCwN3MAHGu7ZjPln9jV9DT10vv/AQ97ppkh+tHoNr1QkljSUOQagYQOawq2pA0YJKA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793636470;
+	b=ev0zWgCIvZ6nFIIOVAi/f9K7RozQXx9V1vU6FWFkLHkIAOGKMTkCci+xZuaRuFu2tvb/
+	 3WTi9FvxEN4PNzAP379zxd5iYQWs56cBEs/KPwnex1oiAjyRQL+NHuQ5lwLzepvRV/Vup
+	 jTfyjpHbcXfgfcRJmzLxBYWWndK3DyqY3PG0R3bZuxHmFERXlTaNRnRia2I8rLSxka1RX
+	 jme1aQqhxf5mnOsMHG92XlAOaCBO3PziCVYmqqhNUUTt1uY+FPMRzJr7XWTX3lJZW5qbB
+	 7g6toAHF855A+F+ycUisKFDmETPjQFT1ocVLp+PRUCaUvcl3XLkPLHBSHxOYIQWA7fg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793636468;
+	c=relaxed/relaxed; t=1793636470;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:From:
@@ -32,65 +32,65 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Developer-Signature:X-Developer-Key:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=iCsvyfEZy+pbqhIztsmcS3wuoU7O8wgk7Fl93oYTCus=;
-	b=KKIPXMN7JzfxKa1WNEN/KXl6lsdv4T5fSf6rvSrC/8LQfHjwJHliIYtC5l2FGvCpRazO
-	 71p0S0kN2ZaJ3+Vd3/8IR6du7JZw1jrmWcCP/HNUaPX75bmKA9uuJso13v767XGiR3hyz
-	 msf7e6i/J+Ghhf2QWfMHp/gy4o55JOqQ/9sGjGN1TqqHkGYCV2E6iTcarfgGj2FlQSy62
-	 G2yKgwnxf9I0Le4HrLXze/98oZVGGUOmf0siBVaN/qSSpfq7Fxv22nTmu1Q1n7L2d9l0X
-	 sBDuwcu5xXRyzAJulwXdiSBr+OXuXleyaIBnHuFFsS8JqX9/gJ/tMDDrhGJE070QPBQ==
+	bh=3eEmlsjqJC9EMKNW4hUmlWv6dvi2JQaKcwqBS9fBjqc=;
+	b=kzMCEUuw7QSnx+3bzmc9PZweyRI7H1tZJSVsYazsXpY4qbqv7XjCmReoAzCJBafTjXed
+	 R38X6F/07CtnJXCIYhgsh+lImVPyyXhH9osC3OLzQCd4JGHme7mjir36sOGdfWPmdrKZg
+	 jOQnXUYBHic0hO8lowpBrLDebzK3VYcaDaFhZ+Q7bhIJrZRHSEoPZI8OLyGycIDMW7CPI
+	 I6HEeN5u1902QQ1oucyXosN4b1933uG53UDeutx11ltDIBGMcJWuQ9Pgzu7WgOHwEL+pT
+	 K0nDZQjzp/Yc4J5rrY2L3nnhlgI6bAhC11eotcCcHY6uLLgcXtmfRqERCJGG/15pIHw==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793636468;
-	bh=iCsvyfEZy+pbqhIztsmcS3wuoU7O8wgk7Fl93oYTCus=;
+	d=lists.u-boot-project.org; s=default; t=1793636470;
+	bh=3eEmlsjqJC9EMKNW4hUmlWv6dvi2JQaKcwqBS9fBjqc=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=pS7uDQ4qJ9NpZfZZvNCyZ6e1h7rrYZ3puXMuvfwFPwzzO9C2TyLWfkVM6LUUZnPHO
-	 SxT/COkeMwDe+SxVzSaT0Z3MXkXoFtjdU2/Bh74VTb4/IIhops9s/yIv926bldKfUA
-	 mbF9D6rPZl0a/puONdoANfF91oKQ6DBqv1MEz7kWYU2bCzf0IlCwteqFJ2moXMwpeK
-	 uNbxjjN5BDV5sbsDa6MDeRFTptO73EKf/fSvydqn3h63GcoqC0Wu7fn7M3npptwEk5
-	 0IjcshA71tJWG2Q710KG9bYAPKXiiW9kxybF3hRoy9l5fgxIqUqfivpjf1jFNpovJR
-	 ZUnNqPFaJ0byQ==
+	b=O0u8Vt9QxbhY1rRxCS8q+MKMmvlaqmf0D5fCoZAJeHuYIvrXv2bwTwuTaSBs2bXyB
+	 eVYZwKQzE8cnC030aF/LmNdWvSjBIKI5xiqldtm/jCkPgLITCKESL+S4DRD+YxtarR
+	 gjqfNekF94V05HVHHE6lO86WtLCyxcsSbyYZVUsXZp44tgxQtJBN/D4ehWskSJ5NjS
+	 NG+3PEixRBJfidePsvyNKYbrbSVPP1qOMNkvfUDuQDIKF59Bwk8T15AybXn/rtEssa
+	 lVl/Lwgk4GMIruUh43SJl+x0QrBCGSmFg28DU8Gc3SZkwlAfdAKWiQ87vNHF7N/jnJ
+	 0ycCvbYfcTb6g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3AAC281137;
-	Mon,  2 Nov 2026 16:21:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4FB238117B;
+	Mon,  2 Nov 2026 16:21:10 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 5E1FFEF4
+ by lists1.osuosl.org (Postfix) with ESMTP id 88AAE2A8
  for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 16:20:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 4F59A607F3
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6E9A46060D
  for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 16:20:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VOsHutkwftQL for <u-boot@lists.u-boot-project.org>;
+ id b_PkhhLnKfvd for <u-boot@lists.u-boot-project.org>;
  Mon,  2 Nov 2026 16:20:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1A51A6060D
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 536FF607EC
 Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip=116.203.77.234
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793636454;
- b=lFJyHY8YWhda/nWgUFfduQQreGbEbGTYReybOnLf9qM4NdPJeKJvVAqy6yEIdAvy2Qct
- gu05nqnQsqielnOlHNdKrpYmSbRZAd7sVVomKM0gc2CxOHQgH2NhE2EPzUW+L/KK+vUor
- bhraXEr9N3+Y5Z87uVDeCeVzlxIVME53ugo79U54ZISZKY0/+/PcPgK6lICwkEunQZp+E
- sp0CsUWDN3k/UbM8XT6FCgZYWMFpYglpb/N5p8MlQpuYXpvWahqOSDRTepqYi4pcC6bkX
- ThBCjKwz0W7V55H/8DBm663AyWgI3EHbQt4IByOV5hP6Jl5Bv7/HGGdRypJ2mwEDuvQ==
+ b=hvpAgFD5wfCDtwwmU142xf7Lt/ns1LS1ZW/h7uDRxtQg6XYydar0QIYsLBYq1S3lKwK0
+ 6Ad7EolJwRZ/iIV24Saz2jfXLGuYPGXp95TrbOg4LRsrwhTv0/ZqQt1+4uxm+r9HIuR8s
+ 6XHa0lDH572wcYfZdxRxgcEuetkwQjXVDlf6p0t85Lu4biBhGHsYtEesOue/YxOOgayJP
+ PIR9jJWzDzxPoWDEPhH1+qMcybMfdJmMTZCqleuwvnOfuCfqqksuGb14wH0d7v2FZthDa
+ SZJCMIVvmO0M3rb4ZPYF93bsqlR9skJ95nsWjfeIBn7NUZRdvp9/rn8cZcsj3yX6bJw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1793636454;
  h=Received-SPF:From:DKIM-Signature:Date:Subject:MIME-Version:
  Content-Type:Content-Transfer-Encoding:Message-Id:References:
  In-Reply-To:To:Cc:X-Developer-Signature:X-Developer-Key;
- bh=iCsvyfEZy+pbqhIztsmcS3wuoU7O8wgk7Fl93oYTCus=;
- b=cLlm71Sj/qhOHWpOUn+EPwvqWfkaFExOodrcROWFoGQMjs/kQ+b8iyNc6EVdmJPqJp+n
- +TgQIgNilbxupDtm2mrdLGO5/+szn7b/rqttcs+1dPEbTF6UDKD4eyHcIb2Ts74IgEr9I
- JCiDbzkdOQ42qWbzOJf9hYxGzVfIgSJpkntVtPvLxaXCHeY7VArKRz49n0XBO/qOpzCpR
- IlfX3V9ys1G9XVVmg5IYLKAaZXREaTjfDcruuHlYg2AB4g6f3ESXMHiEIR9Lg+lbe9VoX
- MglF2gNKh2/cChVpvUSVIngoFWmOSn60ffwW867prZTGrtx2oEdVyDMP4+X7jHCrxFQ==
+ bh=3eEmlsjqJC9EMKNW4hUmlWv6dvi2JQaKcwqBS9fBjqc=;
+ b=kOm129TGnrMVGxm7gaW84VuTrVvcL1cG0vDy+dbQyPNslIx7wn75QiytgqinPsUrwBqC
+ vWJtZGYEsfwZNr6Y1c2zUwwS1cMZXN2SF14Wov9kqbO5s5Rm3Ff6rXT9k51K+agGL/fkP
+ 085Qvpp85JpMTct/wGSIEZRnQ9gic5ou+9TR2OqAWqF+p2iDYZpQyhvKIntm+3dccmVru
+ ytJVVZ+fyd1D1kJiAt2wWlRKV/774VRMQb6qC1HRueRHNTmR563D/n9CjlzI5IbZQDtxf
+ 7cPiEznp8Hj/VH/uX6ypFZOXDOa9k9BzGo/M2msuSEgsKmN1A+UYgjFSvhq2XzgXgPQ==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=fris.de;
  dkim=pass header.d=fris.de header.i=@fris.de header.a=rsa-sha256 header.s=mail
- header.b=jh6+mdH2; 
+ header.b=jo+rVVNB; 
  arc=none smtp.remote-ip=116.203.77.234
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.203.77.234;
  helo=mail.fris.de; envelope-from=frieder@fris.de; receiver=<UNKNOWN> 
@@ -98,31 +98,31 @@ Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=fris.de
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=fris.de header.i=@fris.de
- header.a=rsa-sha256 header.s=mail header.b=jh6+mdH2
+ header.a=rsa-sha256 header.s=mail header.b=jo+rVVNB
 Received: from mail.fris.de (mail.fris.de [116.203.77.234])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1A51A6060D
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 16:20:53 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 536FF607EC
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 16:20:54 +0000 (UTC)
 From: Frieder Schrempf <frieder@fris.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=mail;
- t=1793636448;
+ t=1793636449;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=iCsvyfEZy+pbqhIztsmcS3wuoU7O8wgk7Fl93oYTCus=;
- b=jh6+mdH2Bw5zxahaByU4OgVSHxXMX6V4UU+DzMH9xqUb0nDbOXGyzHu3xo+oruYHYJE6X5
- SIPYmE9loimeGEBA685fDO0i+aQjCp7mmNhIiH+tEqyiNK1r+9N05BvBPE5ZJWc/cnbFzk
- 1326DJHx3mSNDXccvvmzZKjtcljV2jAWkiWyea85/6BybkjvkL5mxHxLm6u9ucUhPKz7/6
- Dax4wx/fdbowsITLG01FpUqfwYEFcuzbdtAy1JtrVlkboEYybD7EMqIO8SYZ707ZSyUBuv
- 1uJmtVLUDKP5eNvVsKrjZnjfnNjdl/dyF+4CD9ktH8clge5D77Ski8z8xZ7Tdw==
-Date: Mon, 02 Nov 2026 17:20:22 +0100
-Subject: [PATCH v2 05/12] test: boot: Restore the bootdev order if the RAUC
- test fails
+ bh=3eEmlsjqJC9EMKNW4hUmlWv6dvi2JQaKcwqBS9fBjqc=;
+ b=jo+rVVNBfLmH87L/PqOvSJo0MCC31PU471oaoftR8DU+/lRtCVbbixSaPeVMhgr8+A1Dcz
+ o+Y8lbNokWzqUORbWXAFnqnm5e05MqNL6KbR7Si0T61LKoWekFV/MWBKLNrNU2sMEGgmwk
+ c2JAJLXm7J1S4axSFkkca329TjnDoCuVFqQ6r9ETXPUq/aHs2lRIKi0us5SmPP0/26uqmx
+ W2Kq/syoCbxDm4fi/0b30ADvOoE7uQgaERGCvN/nWLC+Sa2+yGRuTGnB5OXxA1+RMytEI6
+ HH0dVu7yjyLexl4AjOaZ+rXDP75yElJwanJBHItv9OemAQZLw+6q/xVeRPHaKA==
+Date: Mon, 02 Nov 2026 17:20:26 +0100
+Subject: [PATCH v2 09/12] bootstd: rauc: Optionally boot with a built-in
+ command
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261102-main-v2-5-4537bcb19d66@kontron.de>
+Message-Id: <20261102-main-v2-9-4537bcb19d66@kontron.de>
 References: <20261102-main-v2-0-4537bcb19d66@kontron.de>
 In-Reply-To: <20261102-main-v2-0-4537bcb19d66@kontron.de>
 To: Martin Schwan <m.schwan@phytec.de>, u-boot@lists.u-boot-project.org
@@ -136,13 +136,13 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Michal Simek <michal.simek@amd.com>, Francesco Valla <francesco@valla.it>, 
  "Lucien.Jheng" <lucienzx159@gmail.com>, 
  Casey Connolly <casey.connolly@linaro.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3746;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6415;
  i=frieder.schrempf@kontron.de; h=from:subject:message-id;
- bh=i8Ax2Fak3b7D8e86dKjr/OVV8FPOHzNzRHbEz3WLrzk=;
- b=owGbwMvMwCWWWSatKlDTJMZ4Wi2JIevFjtgz3jO5c3UD9nik7A9esHuifcFf35dC62Jj7k3lu
- Dpfe2pCRykLgxgXg6yYIosUv8VrW7NYH/lj1VEwc1iZQIYwcHEKwET2cTMydE759n15866PLhPs
- H235UnXHfJ7cvfQtQpMPr3ZN/rAofwMjw/0qxtUzvyuZnN+YsaAp0fpXo3HNv3n+q5o+XDhqvfT
- /NAYA
+ bh=zQ4zUcaeAroh9nnrW01Gy9j722vjAvRm4GUryD0HOaE=;
+ b=owGbwMvMwCWWWSatKlDTJMZ4Wi2JIevFjrjZbCYhMvcDf59Prm9NmeI7o1eu7cVjCeED7M3zX
+ KKXipl0lLIwiHExyIopskjxW7y2NYv1kT9WHQUzh5UJZAgDF6cATKRgFyPD/XVB1qcd65aKKSwN
+ euDwWuXCw6zlSYvrtvB67ksX3lniychwZBpL6smt84t/WoWc3LNxzbUNJkqrtJZPn3ygq75ksvZ
+ UVgA=
 X-Developer-Key: i=frieder.schrempf@kontron.de; a=openpgp;
  fpr=1A0F38EB3D365D4C1FC67B5A69761B25107C8216
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -163,116 +163,164 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
-bootflow_rauc() points std->bootdev_order at a static array and only
-restores the original order at its end. If an assertion fails, the
-test returns early with the static array still in place, and removing
-bootstd then hands it to free(). This trips the dlmalloc checks and
-aborts sandbox, so the failure of the flat-tree run is never reported
-and no further test runs.
+The RAUC bootmeth boots a slot by running boot.scr or boot.scr.uimg
+from its boot partition. Nothing authenticates this partition, so with
+verified boot, whoever can write it can run any U-Boot command, for
+example booting an unsigned kernel or changing the kernel command line.
+Signing the script does not close this reliably as source skips all
+checks if the environment sets verify=no, which RAUC systems must keep
+writable for BOOT_ORDER and BOOT_x_LEFT, and it accepts a FIT script
+without configurations, whose signature is then only checked against
+keys required for images, not configurations.
 
-Move the setup into bootflow_rauc_run(), which restores the order
-after running the checks, whether they pass or not.
+Add CONFIG_BOOTMETH_RAUC_BOOTCMD to set a command built into U-Boot
+that boots the slot instead. It sees the same environment variables as
+the boot script. The boot partition then contains nothing that U-Boot
+executes.
 
-Fixes: 36add050eea4 ("test: boot: Add test for bootmeth_rauc")
+The option is empty by default, which keeps loading the boot script.
+As for the partitions, the bootmeth keeps the command in its platform
+data, so that tests can set it at runtime.
+
 Assisted-by: LLM
 Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 Changes in v2:
-- Add Reviewed-by tag from Simon
+- Keep the command in the platform data of the bootmeth, so that tests
+  can change it at runtime, and always build the boot script code
+  (Simon)
 ---
- test/boot/bootflow.c | 48 +++++++++++++++++++++++++++++++++++-------------
- 1 file changed, 35 insertions(+), 13 deletions(-)
+ boot/Kconfig                 | 16 ++++++++++++++++
+ boot/bootmeth_rauc.c         | 23 ++++++++++++++++-------
+ doc/develop/bootstd/rauc.rst |  8 ++++++++
+ include/bootmeth_rauc.h      |  3 +++
+ 4 files changed, 43 insertions(+), 7 deletions(-)
 
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index d478fd575be..d2d4edb0add 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -1619,23 +1619,31 @@ static int bootflow_efi(struct unit_test_state *uts)
- }
- BOOTSTD_TEST(bootflow_efi, UTF_CONSOLE);
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 072108db64a..27640817068 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -976,6 +976,22 @@ config BOOTMETH_RAUC_PARTITIONS
+ 	  partition names, this also rejects MBR devices. A value consisting
+ 	  only of digits is always taken as an index.
  
--/* Test RAUC bootmeth */
--static int bootflow_rauc(struct unit_test_state *uts)
-+/**
-+ * bootflow_rauc_run() - Run RAUC bootmeth checks on an mmc bootdev
-+ *
-+ * This binds @mmc_dev and the RAUC bootmeth and makes them the only bootdev
-+ * and bootmeth used, then runs @check. The bootdev order is restored even if
-+ * @check fails, since bootstd frees it when it is removed.
-+ *
-+ * @uts: Unit test state
-+ * @mmc_dev: MMC device to use, e.g. "mmc10"
-+ * @check: Checks to run with the RAUC bootmeth
-+ * Returns 0 on success, -ve on failure
-+ */
-+static int bootflow_rauc_run(struct unit_test_state *uts, const char *mmc_dev,
-+			     int (*check)(struct unit_test_state *uts))
- {
--	const char *mmc_dev = "mmc10";
-+	static const char *order[] = {NULL, NULL};
- 	struct bootstd_priv *std;
- 	struct udevice *bootstd;
--	static const char *order[] = {NULL, NULL};
- 	const char **old_order;
--	ulong mem_start;
- 	ofnode root;
- 	ofnode node;
-+	int ret;
- 
- 	order[0] = mmc_dev;
- 
--	if (!CONFIG_IS_ENABLED(BOOTMETH_RAUC))
--		return -EAGAIN;
--
- 	/* Enable the requested mmc node since we need a different bootflow */
- 	root = oftree_root(oftree_default());
- 	node = ofnode_find_subnode(root, mmc_dev);
-@@ -1646,13 +1654,21 @@ static int bootflow_rauc(struct unit_test_state *uts)
- 	ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
- 	ut_assertok(device_bind(bootstd, DM_DRIVER_REF(bootmeth_rauc),
- 				"rauc", 0, ofnode_null(), NULL));
-+	ut_assertok(bootmeth_set_order("rauc"));
- 
--	/* Change the device and bootmeth order */
-+	/* Change the device order, and restore it also if a check fails */
- 	std = dev_get_priv(bootstd);
- 	old_order = std->bootdev_order;
- 	std->bootdev_order = order;
-+	ret = check(uts);
-+	std->bootdev_order = old_order;
- 
--	ut_assertok(bootmeth_set_order("rauc"));
-+	return ret;
-+}
++config BOOTMETH_RAUC_BOOTCMD
++	string "RAUC built-in boot command"
++	default ""
++	help
++	  Sets a command to boot the selected slot, for example
++	  "run distro_boot_rauc". It is run instead of loading a boot script
++	  from the slot's boot partition, and can use the same environment
++	  variables as the boot script, such as distro_bootpart and raucargs.
 +
-+static int bootflow_rauc_check(struct unit_test_state *uts)
-+{
-+	ulong mem_start;
++	  As the command is built into U-Boot, the boot partition does not
++	  need to contain anything U-Boot executes, which helps with verified
++	  boot. If the command runs an environment variable, that variable must
++	  not be writable at runtime then, see ENV_WRITEABLE_LIST.
++
++	  Leave this empty to load the boot script.
++
+ config BOOTMETH_RAUC_DEFAULT_TRIES
+ 	int "RAUC slot default tries"
+ 	default 3
+diff --git a/boot/bootmeth_rauc.c b/boot/bootmeth_rauc.c
+index acf9413591b..4f4927d5cd1 100644
+--- a/boot/bootmeth_rauc.c
++++ b/boot/bootmeth_rauc.c
+@@ -527,6 +527,7 @@ static const struct distro_rauc_slot *find_active_slot(struct distro_rauc_priv *
  
- 	/* Run scan and list */
- 	ut_assertok(run_command("bootflow scan", 0));
-@@ -1705,11 +1721,17 @@ static int bootflow_rauc(struct unit_test_state *uts)
+ static int distro_rauc_boot(struct udevice *dev, struct bootflow *bflow)
+ {
++	const struct distro_rauc_plat *rplat = dev_get_plat(dev);
+ 	struct blk_desc *desc;
+ 	struct distro_rauc_priv *priv;
+ 	const struct distro_rauc_slot *slot;
+@@ -575,10 +576,12 @@ static int distro_rauc_boot(struct udevice *dev, struct bootflow *bflow)
+ 	if (ret)
+ 		return log_msg_ret("env", ret);
  
- 	ut_assertok(env_set("BOOT_ORDER", "A B"));
+-	/* Load distro boot script */
+-	ret = distro_rauc_load_boot_script(bflow, slot);
+-	if (ret)
+-		return log_msg_ret("load", ret);
++	/* Load distro boot script, unless a built-in command boots the slot */
++	if (!*rplat->bootcmd) {
++		ret = distro_rauc_load_boot_script(bflow, slot);
++		if (ret)
++			return log_msg_ret("load", ret);
++	}
  
--	/* Restore the order used by the device tree */
--	std->bootdev_order = old_order;
--
+ 	log_info("INFO: Booting slot %s, %lu of %d tries left\n",
+ 		 slot->name, active_slot_tries, CONFIG_BOOTMETH_RAUC_DEFAULT_TRIES);
+@@ -599,9 +602,14 @@ static int distro_rauc_boot(struct udevice *dev, struct bootflow *bflow)
+ 	}
+ 	str_free_list(boot_order_list);
+ 
+-	/* Run distro boot script */
+-	addr = map_to_sysmem(bflow->buf);
+-	ret = cmd_source_script(addr, NULL, NULL);
++	if (*rplat->bootcmd) {
++		/* Run built-in boot command */
++		ret = run_command(rplat->bootcmd, 0);
++	} else {
++		/* Run distro boot script */
++		addr = map_to_sysmem(bflow->buf);
++		ret = cmd_source_script(addr, NULL, NULL);
++	}
+ 	if (ret)
+ 		return log_msg_ret("boot", ret);
+ 
+@@ -619,6 +627,7 @@ static int distro_rauc_bootmeth_bind(struct udevice *dev)
+ 	plat->desc = "RAUC distro boot from MMC";
+ 	plat->flags = BOOTMETHF_ANY_PART;
+ 	rplat->partitions = CONFIG_BOOTMETH_RAUC_PARTITIONS;
++	rplat->bootcmd = CONFIG_BOOTMETH_RAUC_BOOTCMD;
+ 
  	return 0;
  }
-+
-+/* Test RAUC bootmeth */
-+static int bootflow_rauc(struct unit_test_state *uts)
-+{
-+	if (!CONFIG_IS_ENABLED(BOOTMETH_RAUC))
-+		return -EAGAIN;
-+
-+	return bootflow_rauc_run(uts, "mmc10", bootflow_rauc_check);
-+}
- BOOTSTD_TEST(bootflow_rauc, UTF_CONSOLE | UTF_DM | UTF_SCAN_FDT);
+diff --git a/doc/develop/bootstd/rauc.rst b/doc/develop/bootstd/rauc.rst
+index eee8d103fb9..247ae474f0f 100644
+--- a/doc/develop/bootstd/rauc.rst
++++ b/doc/develop/bootstd/rauc.rst
+@@ -44,6 +44,13 @@ The boot script must be located in each boot partition. The bootmeth searches
+ for ``boot.scr`` first, then ``boot.scr.uimg`` if not found. It will search in
+ all directories of the bootstd list of prefixes (``"/", "/boot"`` by default).
  
- /*
++Alternatively, ``CONFIG_BOOTMETH_RAUC_BOOTCMD`` sets a command built into
++U-Boot, for example ``run distro_boot_rauc``, which boots the slot instead of a
++boot script. The boot partitions then need no boot script, and the bootmeth
++executes nothing from them. For verified boot, the command must load only
++signed images, and any environment variable it runs must not be writable at
++runtime (see ``CONFIG_ENV_WRITEABLE_LIST``).
++
+ When the bootflow is booted, the bootmeth sets these environment variables:
+ 
+ devtype
+@@ -63,6 +70,7 @@ raucargs
+     kernel command line arguments needed for RAUC to detect the currently booted
+     slot
+ 
++The boot script or the boot command can use these variables to boot the slot.
+ The script file must be a FIT or a legacy uImage. It is loaded into memory and
+ executed.
+ 
+diff --git a/include/bootmeth_rauc.h b/include/bootmeth_rauc.h
+index 0faeab192d4..88b17f10235 100644
+--- a/include/bootmeth_rauc.h
++++ b/include/bootmeth_rauc.h
+@@ -14,9 +14,12 @@
+  *
+  * @partitions: Boot and root partitions of each slot, given by number or
+  *	by name, see CONFIG_BOOTMETH_RAUC_PARTITIONS
++ * @bootcmd: Command to boot the selected slot, see
++ *	CONFIG_BOOTMETH_RAUC_BOOTCMD. Empty to run the boot script instead
+  */
+ struct distro_rauc_plat {
+ 	const char *partitions;
++	const char *bootcmd;
+ };
+ 
+ #endif
 
 -- 
 2.56.0
