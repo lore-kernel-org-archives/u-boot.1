@@ -1,162 +1,132 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35E6E606A324
-	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 13:10:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F5E3606A324
+	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 13:10:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=fZglIuNY;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=infineon.com header.i=@infineon.com header.a=rsa-sha256 header.s=IFXMAIL header.b=LAW9Q1aU
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=oKJy1aD2
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 07A5F80F3C;
-	Mon,  2 Nov 2026 13:10:42 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 06D41406A5;
+	Mon,  2 Nov 2026 13:10:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3JL4N42V-ba9; Mon,  2 Nov 2026 13:10:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 12EBA80F47
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793625041;
-	b=EfkgKFJRFpSCf6Sb1G25IL2Q/6DKQy6FEndZEZe3zE1nvx67WKRs4ZA9NwL49RSTyuUt
-	 xIe4PArb8bvPlsX/h4zKt+AQzVHzFZo4vZJo0MieXibmO5QRPXrbDG/MhJ1FwqpJUoQEd
-	 eFSTYXz6R1z9SimHOqpEqMx3rakKrppkbviurzNz8mPQUOnQtDaywNHDzfkVolIeyTvcp
-	 PWYJNWZiPnqxI2k871yfnJF7c+cfFJYkvS2M8eB+HSATpFSOapIrHWJaOtBT3oGb4jwMf
-	 a52vpYRlXwEyatxNBant2pXe0tLnjigOG1oRNJFjoQzYgZKbTom+bkuRWBV4d/ZfGiA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5ZJFl0lLW_5j; Mon,  2 Nov 2026 13:10:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9566E406C7
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793625038;
+	b=Z/GpTg2GNJstpj5ruHXjmvUd3u/+87g0vaHqWAzi1SOly4SHKGf1gU8EQjtLXMFCciW0
+	 lN05kTaL7J52uQaF0AvbMBCocdQSwXK1eSaVRVk3cjeCve2W6TYFm3ogN61ORjrES1egz
+	 BCouB5bS4F5UhXNOv73xGTrj5U+rEKF9P+DXyVAaVypeCA5UtlJYHLG3XBuaIPNYUU7Rd
+	 OxJH1IJ5X+P8dAoCknM+CowYfh9hwZM2pPtqRsX/moGyrPgsBI/qhqJhLwT3bL886G0A6
+	 bLq8z8XJcqvl57nRZSh29msET9G3zkD3B0SrZb4sVDaN8cp+iKk+6eySq82MFa0GhfQ==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793625041;
+	c=relaxed/relaxed; t=1793625038;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
-	 DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:X-IronPort-AV:
-	 X-IronPort-AV:X-Amp-Result:Received:Received:Received:Received:From:
-	 To:CC:Subject:Thread-Topic:Thread-Index:Date:Message-ID:References:
-	 In-Reply-To:Accept-Language:Content-Language:X-MS-Has-Attach:
-	 X-MS-TNEF-Correlator:x-originating-ip:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version:X-Mailman-Approved-At:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-ID:X-B4-Tracking:X-Change-ID:To:CC:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=BP86DzfjSFpRJ26+c/FOi0QIzvx/jJRszoVeiTDjMlg=;
-	b=RHCtmcF+ObqG1Ygxo+0wBHlVxq2wv4Yo5uRwBXPSPONiOfwSyfHvRfIo+y1UloilcKaV
-	 RYyJ+fWJtl3Ie3ccgEfMXK+JR7skKn+TiwCEW5c5vs1VGMQHC4tARif5m+If3cM+UdRa8
-	 RD/mpW2PRGqQ2BJg+RsWZPquyU6cIaMSWFDj4PxnSJ8hfXg0hZjqOxHeA6xbNUikaY6Tf
-	 YeN0zMwYiHYvcZd+zc9LaPU3sMR1hu+7aQ/4BrNeMIXIanV2l2Ok2jniV4C3Y6cJqcOAb
-	 4FgKPu2Tqt52pk/DBzIC9M1SxhWd6xnu7CRFcJ3oZc2Ok8e+525V2B+Z57zH6KEEqNw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=Q6NG5Q3EKrG+OXNwPQt1zo+B4dnZtz0m2HraeHJMJRg=;
+	b=JNjGRLWrDTlOm/A0iF0mNKciF1QXfwan2Z4S/kFKj3AkiFTqyoS1kHMMqgvXOL/EBSxG
+	 YdZPFbN5nK/3rdjofH5DUXrMOaHW2HUs5jpXbttDC1LpQG9S4BEWtklGXK8tdps8NtxPm
+	 JXtnE2KoOonK2DDgYIXMFh3baTiaiwZMBJlqwZ4pFK6SH6BB53NfL8tS+leLqNrqIcjUa
+	 lCCaCcuEP2Z/gXmXm70o7TRCkqPqyOmOHs6MA8npXPM0KTKgK+y8jtak9xbOnt6NO9lht
+	 Fm3zNIn7b8Bd34kKDnkNMRZFqPcx6RPXLVWPsnv0CPP7Pw8nJsAQAF5H2iFyuUxNWQQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793625041;
-	bh=BP86DzfjSFpRJ26+c/FOi0QIzvx/jJRszoVeiTDjMlg=;
-	h=From:To:CC:Subject:Date:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=fZglIuNYgBPF8T8b8NRvGhaiMioIdyVDs3t8kctzZwpxNJRGr9LLFyor6hgbEhAk+
-	 GdN2zl/Og5CmGcYPLTwCAl8QThsdhHt/lUcKsttsgxizigHkcHTD8l1gof2P33SXBK
-	 DpQZjyD6bzRD6VCtZjRJESGAZFtqay6c8Ny/1OmkolstwCJrPc5gjYHFAkPTs8ibKP
-	 De22QC7lTNWMlYLk85/YYubwBwzccPdq1Jlp8YdDTQVQM3sdA/k7pjMJV1z+XtbfpQ
-	 X/c/9EfW7GjXDPtEPefHQ6OcuQoJO/nbFY5UUVoFs/v+31iA4JSF3DOeNLkLHv/ou2
-	 sLNJSRGot/7SQ==
+	d=lists.u-boot-project.org; s=default; t=1793625038;
+	bh=Q6NG5Q3EKrG+OXNwPQt1zo+B4dnZtz0m2HraeHJMJRg=;
+	h=From:Date:Subject:To:CC:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=oKJy1aD2ozSZvzvVzdJw93++eeCAPUzwkwDV2bJKmqDELGbKnOFYriCXNwNQwi6SI
+	 yHPhtqKjwAcdAWh0HKmpCUlPno9IGu63iBmVFbozCS0nQVVyO31bsL3twrS+XpKjKm
+	 2czbZcHaqociSNRkHBYYe6g9uuZ4G//lJ21Uf1u7vSKe1c9U4Pz+It3EJAImujAHWz
+	 i22eeRkae+27kOIS0GPr2q3hWNf6vcI6MHPQAP1xrgRgG639G4YOplZUZgmwH+nEbB
+	 NBcNIRAD1jCV3gG60l/o/nzXdS81LlOuHWhymVQxOpNHdjUvCM2bcgzy/kC5quEpVb
+	 G2zsCRsJDtCFA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 12EBA80F47;
-	Mon,  2 Nov 2026 13:10:41 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 11064323
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 09:21:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9566E406C7;
+	Mon,  2 Nov 2026 13:10:38 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 58F09411
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 09:01:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id EB003400C8
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 09:21:44 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3F2FD80F4D
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 09:01:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wodC2WExO6xv for <u-boot@lists.u-boot-project.org>;
- Mon,  2 Nov 2026 09:21:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org F148E400A8
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=217.10.52.204
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793611304;
- b=XrHyMCKPEN7D65UMq6/ADN0uzMIetW18kmhH/6mYYTyLSxVLWOOVKQuWmcqOH6SivTc4
- u4YEuBkpr78le6vJoQMo5/45SSHkL3tqXRPI1J/dAC7ivQQ5LZtjWUUzzJKaNjMm9Gbbz
- jGMrLJJEk8jeB1CldFtiExSHy0WRJQIsN+PeBaPGNnbBWXmhldB5cyTNnOrJ/llLGeuwF
- TsrGOB0orxy2p+Pqxqpt80L8XwKtY/48iu9/gKgjFrPcvoKy4P0QBlpF/vLajFNPb4hYl
- y6QuCq9SgAEuUBBuE6GiaCM+30BwaXS8i5+MiroK+7EET3vN1CM8UdT6+36DsQZN6Ng==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ALaLWJtO5oof for <u-boot@lists.u-boot-project.org>;
+ Mon,  2 Nov 2026 09:01:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B235680F47
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=211.20.114.72
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793610085;
+ b=Kp5RRnl1twTqxbfPsc5ziGTlBLeX5DMJpmGF4fGi1KJuwNoLcpvIE7KHFGeswjfooCGf
+ LJKKV367erZsQl3QPqmBUgMEL0Ebp7e+Z2zTM8b4PrZDe9FG3P2lcj0kBCFmb8RGN+t0/
+ qEMaPcEJCLa7aye06oFCTYs0EDOCjv0+USmf4mLRbEy3l/G43uw9VBX7O3EN1K5k6czhN
+ b5Rnxt+4TH0xuIJNO3aunhOt5drMHvKsXBSVffzeqgumKFA7m8MvnkCUq7br0f3P0Q20N
+ OItm8koyQxl+hPXEOaDaQblUVN+9E4/5MT5bIvohXhMVrjUH2Yr6KuONPGIfTEkMP2g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793611304;
- h=X-Greylist:Received-SPF:DKIM-Signature:X-CSE-ConnectionGUID:
- X-CSE-MsgGUID:X-IronPort-AV:X-IronPort-AV:X-Amp-Result:Received:
- Received:Received:Received:From:To:CC:Subject:Thread-Topic:
- Thread-Index:Date:Message-ID:References:In-Reply-To:Accept-Language:
- Content-Language:X-MS-Has-Attach:X-MS-TNEF-Correlator:
- x-originating-ip:Content-Type:Content-Transfer-Encoding:MIME-Version;
- bh=BP86DzfjSFpRJ26+c/FOi0QIzvx/jJRszoVeiTDjMlg=;
- b=b/svz03/+fMtueV6Wb2pG/E8DRxgs17ITGxLPsKArkxCH6ltC9tsCdP6jf92Oe107GbH
- +w7ewEhTEhciS2Ed0rID27Muecba3rzejfCRz9/PH2ogs610t7X3hUWGs9zehlYym3Wr8
- 8AP0mgWgoyWROlqSEcevRQY5s1iXomrcKGhzUtwQ7+1MXIYIHtUWPm+5Gvt7egF6WrJhU
- WHp0Z9YWYMzqAW+X0TN/htrpAXmo1yTjf5up003j4QQw+GtAutnOSmkrJbuX1i634tlzU
- J32LgysCrs4qOlFcvmwgut+KPR0a4zZyn0yrxX2hVuQLT7WGUXy1MTGJLwSlmnNOT7A==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=infineon.com;
- dkim=pass header.d=infineon.com header.i=@infineon.com header.a=rsa-sha256
- header.s=IFXMAIL header.b=LAW9Q1aU; 
- arc=none smtp.remote-ip=217.10.52.204
-X-Greylist: delayed 304 seconds by postgrey-1.37 at util1.osuosl.org;
- Mon, 02 Nov 2026 09:21:42 UTC
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=infineon.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=infineon.com header.i=@infineon.com header.a=rsa-sha256
- header.s=IFXMAIL header.b=LAW9Q1aU
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.10.52.204;
- helo=smtp9.infineon.com; envelope-from=takahiro.kuwano@infineon.com;
+ c=relaxed/relaxed; t=1793610085;
+ h=Received-SPF:Received:Received:From:Date:Subject:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Message-ID:X-B4-Tracking:
+ X-Change-ID:To:CC:X-Mailer:X-Developer-Signature:X-Developer-Key;
+ bh=Q6NG5Q3EKrG+OXNwPQt1zo+B4dnZtz0m2HraeHJMJRg=;
+ b=ArShwk1Qu624Kvlw6Lb3xlFt+Igvoklq1x6SZ1uEj49VcDA3toKKO2u8PNYgfxBGmlgb
+ MjwwmIddYy2CSPhYagPbTWlkYKM9RIkJg5Tm2WewkbZvK3ULR76w7+aRfWc4hDBqdaY3t
+ VVcmX5uPGFD2jKL5GnTPUGq1fhsQL0YTRqXPgJjq7ZqIU6YWLo4+fsXVWR+ItDVco+O1L
+ pAygB7+PyXRTOjXvcZlRnPcHfFTs3ixt2NdRQBY4PhkK/jvQbMJXS/2uskYBwSID/2ZRI
+ IHHNJcqyFIuSMAxXJbVsPRDcRtCD5xKoMM/UAV09haYkVdIMu0rSeBlOeN1fMawMqRQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=pass header.from=aspeedtech.com;
+ arc=none smtp.remote-ip=211.20.114.72
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=211.20.114.72;
+ helo=twmbx01.aspeedtech.com; envelope-from=ryan_chen@aspeedtech.com;
  receiver=<UNKNOWN> 
-Received: from smtp9.infineon.com (smtp9.infineon.com [217.10.52.204])
- by smtp2.osuosl.org (Postfix) with ESMTPS id F148E400A8
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 09:21:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
- t=1793611304; x=1825147304;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=h3SPVtdIpqscjZv35y1pSiEz6s2LGBDairTK1i/nxgE=;
- b=LAW9Q1aUj85bCXJrA7nM8AYZVVif4BOq/f3ygCLdqG6i8aGZjytePkUz
- zLRuye59wf5+ehfv/Y/tyEDZGo3XQWw9NnRHu2LUlxUErUpY5PxQa8tES
- n1tPbBrvgFpjMDmBAxvWYpMNdxvOwTGCNDH0End1WRZigBDPEQJBaSQtP E=;
-X-CSE-ConnectionGUID: xugVgjOKRk6V6nyv/KUcsA==
-X-CSE-MsgGUID: tBC7ufDfStaa9cf5Nq1hbg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11953"; a="116077566"
-X-IronPort-AV: E=Sophos;i="6.27,191,1787004000"; d="scan'208";a="116077566"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO MUCSE803.infineon.com) ([172.23.29.29])
- by smtp9.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Nov 2026 10:12:34 +0100
-Received: from MUCSE820.infineon.com (172.23.29.46) by MUCSE803.infineon.com
- (172.23.29.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.56; Mon, 2 Nov
- 2026 10:12:34 +0100
-Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE820.infineon.com
- (172.23.29.46) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.56; Mon, 2 Nov
- 2026 10:12:33 +0100
-Received: from MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be]) by
- MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be%12]) with mapi id
- 15.02.2562.056; Mon, 2 Nov 2026 10:12:33 +0100
-From: <Takahiro.Kuwano@infineon.com>
-To: <marek.vasut+renesas@mailbox.org>, <u-boot@lists.u-boot-project.org>
-CC: <kenichi.nagai.ry@renesas.com>, <trini@konsulko.com>, <vigneshr@ti.com>,
- <vjardin@free.fr>, <yuya.hamamachi.sx@renesas.com>
-Subject: RE: [PATCH] mtd: spi-nor-ids: Add support for Winbond W77T51NW
-Thread-Topic: [PATCH] mtd: spi-nor-ids: Add support for Winbond W77T51NW
-Thread-Index: AQHdZVCX6cZLGgwujECbVyfAKfZWurcah+rw
-Date: Mon, 2 Nov 2026 09:12:33 +0000
-Message-ID: <896390bd13f4439297a31492e1a3dda5@infineon.com>
-References: <20261026134745.81217-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20261026134745.81217-1-marek.vasut+renesas@mailbox.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=aspeedtech.com
+Received: from twmbx01.aspeedtech.com (mail.aspeedtech.com [211.20.114.72])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B235680F47
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 09:01:23 +0000 (UTC)
+Received: from TWMBX01.aspeed.com (192.168.0.62) by TWMBX01.aspeed.com
+ (192.168.0.62) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1748.10; Mon, 2 Nov
+ 2026 17:01:21 +0800
+Received: from [127.0.1.1] (192.168.10.13) by TWMBX01.aspeed.com
+ (192.168.0.62) with Microsoft SMTP Server id 15.2.1748.10 via Frontend
+ Transport; Mon, 2 Nov 2026 17:01:21 +0800
+From: Ryan Chen <ryan_chen@aspeedtech.com>
+Date: Mon, 2 Nov 2026 17:01:21 +0800
+Subject: [PATCH] clk: ast2700: bind the generic syscon to the SCU node
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20261102-clk_syscon-v1-1-197c255ccb95@aspeedtech.com>
+X-B4-Tracking: v=1; b=H4sIAGBR6GoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzNDQwMj3eSc7PjiyuLk/DxdyyTjZEMzkyQzc8NkJaCGgqLUtMwKsGHRsbW
+ 1AHtRAHFcAAAA
+X-Change-ID: 20261102-clk_syscon-9b3c164b671c
+To: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, 
+ <u-boot@lists.u-boot-project.org>, Ryan Chen <ryan_chen@aspeedtech.com>
+CC: Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Lukasz Majewski <lukma@nabladev.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793610081; l=2173;
+ i=ryan_chen@aspeedtech.com; s=20251126; h=from:subject:message-id;
+ bh=kEst36ulcGNo8BuQTHX2hdHReU/m7Czdvj0Ml4x0nws=;
+ b=XSholZjtScLTKKeg/jYTiRPLesSQA4Ox8rspWHc/XTZNr4o65bs30onBj7e0aGp2V5jyAkPNq
+ Db+nTktlxXWAQ8drQPHw4bZQr8J4LLRtyrSS51/iHBQhNRFRE47diXC
+X-Developer-Key: i=ryan_chen@aspeedtech.com; a=ed25519;
+ pk=Xe73xY6tcnkuRjjbVAB/oU30KdB3FvG4nuJuILj7ZVc=
 X-Mailman-Approved-At: Mon, 02 Nov 2026 13:10:33 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -167,65 +137,72 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi,
+The clock driver binds to the SCU node, which is also a "syscon",
+"simple-mfd" node, so the generic syscon driver never binds to it.
+The SCU then has no syscon device and its child nodes, for example the
+pin controllers, are never bound: every pinctrl-0 is silently ignored.
 
-> From: Kenichi Nagai <kenichi.nagai.ry@renesas.com>
->=20
-> Add IDs for Winbond W77T51NW, 512M-bit Secure Serial Flash Memory
-> with Post-Quantum Cryptography, SPI, Quad, Octal and DTR . For
-> details please see vendor page:
->=20
-> https://www.winbond.com/hq/product/code-storage-flash/trustme-secure/w77t=
--nw/
->=20
-Please use Link: tag.
-Unfortunately, datasheet isn't publicly available...
-Is it possible to add board information you tested?
+Bind the generic syscon driver to the SCU node from the clock driver
+and select SYSCON for the AST2700.
 
-> Signed-off-by: Kenichi Nagai <kenichi.nagai.ry@renesas.com>
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Kenichi Nagai <kenichi.nagai.ry@renesas.com>
-> Cc: Takahiro Kuwano <takahiro.kuwano@infineon.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Vignesh R <vigneshr@ti.com>
-> Cc: Vincent Jardin <vjardin@free.fr>
-> Cc: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
-> Cc: u-boot@lists.u-boot-project.org
-> ---
->  drivers/mtd/spi/spi-nor-ids.c | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.=
-c
-> index 67486d7a945..fce22300b61 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -670,6 +670,7 @@ const struct flash_info spi_nor_ids[] =3D {
->         { INFO("w25q01nw-im", 0xef8021, 0, 64 * 1024, 2048, SECT_4K | SPI=
-_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
->         { INFO("w25q02nw-im", 0xef8022, 0, 64 * 1024, 4096, SECT_4K | SPI=
-_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
->         { INFO("w77q51nw", 0xef8a1a, 0, 64 * 1024, 1024, SECT_4K | SPI_NO=
-R_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-> +       { INFO("w77t51nw", 0xef8e1a, 0, 64 * 1024, 1024, SECT_4K | SPI_NO=
-R_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+Fixes: 0758fddb3729 ("clk: ast2700: add clock driver support")
+Signed-off-by: Ryan Chen <ryan_chen@aspeedtech.com>
+---
+Tested on the AST2700 EVB: the pin controllers and their MDIO/RGMII
+states are bound and applied.
+---
+ arch/arm/mach-aspeed/Kconfig     |  1 +
+ drivers/clk/aspeed/clk_ast2700.c | 12 ++++++++++++
+ 2 files changed, 13 insertions(+)
 
-It would be helpful to see how it differs from the existing w77q51nw.
+diff --git a/arch/arm/mach-aspeed/Kconfig b/arch/arm/mach-aspeed/Kconfig
+index f4b038ebd9e..0413d817259 100644
+--- a/arch/arm/mach-aspeed/Kconfig
++++ b/arch/arm/mach-aspeed/Kconfig
+@@ -39,6 +39,7 @@ config ASPEED_AST2600
+ config ASPEED_AST2700
+ 	bool "Support Aspeed AST2700 SoC"
+ 	select ARM64
++	select SYSCON
+ 	select SYS_ARCH_TIMER
+ 	help
+ 	  Support for the Aspeed AST2700, an arm64 (Cortex-A35) Baseboard
+diff --git a/drivers/clk/aspeed/clk_ast2700.c b/drivers/clk/aspeed/clk_ast2700.c
+index ca76abef48f..78ea30b0bd7 100644
+--- a/drivers/clk/aspeed/clk_ast2700.c
++++ b/drivers/clk/aspeed/clk_ast2700.c
+@@ -918,6 +918,18 @@ static int ast2700_clk_bind(struct udevice *dev)
+ 			debug("Warning: failed to bind reset controller: ret = %d\n", ret);
+ 	}
+ 
++	/* Bind the generic syscon driver to the same ofnode so that the
++	 * SCU child nodes, such as the pinctrl and its pin configuration
++	 * states, are bound before any consumer device probes and selects
++	 * its default pinctrl state.
++	 */
++	if (CONFIG_IS_ENABLED(SYSCON)) {
++		ret = device_bind_driver_to_node(dev, "syscon", "syscon",
++						 dev_ofnode(dev), NULL);
++		if (ret)
++			debug("Warning: failed to bind syscon: ret = %d\n", ret);
++	}
++
+ 	return 0;
+ }
+ 
 
->  #endif
->  #ifdef CONFIG_SPI_FLASH_XMC
->         /* XMC (Wuhan Xinxin Semiconductor Manufacturing Corp.) */
-> --
-> 2.53.0
+---
+base-commit: 3401e006432abcbf7d73d7210f10df157f990ed3
+change-id: 20261102-clk_syscon-9b3c164b671c
 
-Thanks,
-Takahiro
+Best regards,
+-- 
+Ryan Chen <ryan_chen@aspeedtech.com>
 
