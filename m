@@ -1,173 +1,143 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E03C3606A327
-	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 03:05:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B8A5606A331
+	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 04:32:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ETWEr2eh;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=PgZxlazr
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=saxZfbOA;
+	dkim=pass (2048-bit key, unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=UVDdwAcW
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AAB8160705;
-	Mon,  2 Nov 2026 03:05:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7A23C80D99;
+	Mon,  2 Nov 2026 04:32:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0yDA8VObduh2; Mon,  2 Nov 2026 03:05:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org CA3A860769
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793588703;
-	b=ceRUPdrl5cc3s6WlVk62ZdjIbhHcmTnisvQ+M9RKG9dv4LlPPwX3iYA5nNge7SO/sDya
-	 wAE47nVDq/tDTCXiUQQevg0hHF4PaMCsxx0tBpB+Gm+BnxxN9u4XfQalpls/vvWF57Dve
-	 /nbbqLKzqn4NnN6VbHfuraQPJKkDhn6IIY2acSKdLhNMvkWE8LCOr0ltLCTgFKUDNTtUQ
-	 ntepjKAJcHgSDa8goYEd6QiJAuV6yPtZbDPlloMc4JCgY8KOp2zg0N7E6pmSx5g4VW8Xs
-	 QBqsBdeU6UjBjGm0yXHfOwzGIP6zVvPEGUVGgi3QoQ3mghMudfm/ZO1eMs9TO4gMIBw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id y7TlpUVLO-eE; Mon,  2 Nov 2026 04:32:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7F2EC80D92
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793593954;
+	b=bfEKO+jgPE9rZ+KY0+P0zygXPscKKCtC1AFWDmvEHC2B1zs9QjTzCaWoP2Eff2l4prZN
+	 7STohHNrDy3VVimdv9DhPpHVXLlYnHAKNmuXCyY/yhW92UHfs1duiEGHYWBaVOmSIh/9Q
+	 jTbW/tp8qA1T0fadxXgDc1C406ROpS4+SYC0JCX1JSWyWaTvmn8Pefwh3PX9dqS4iAKLT
+	 eWn7Yc1oqhhC5aBizQ/hCZpGkbU1PFYSMniJcSFUL349nZPk+NwAE8tZu8vVv2mAujiyC
+	 4Fh0KZjIYDjZBaSJnzn34eN4BtLaAb/6aYA9/wCbXb1fVhI3Vtcxoczb67tXri0g3Kw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793588703;
+	c=relaxed/relaxed; t=1793593954;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=b1kLaL0pMKNK6dZKHhBr+W57+LUnRECBn06H0tS/2V0=;
-	b=BolIGUrKhUQXYK/J0D3AoKWflBvz6wevQ4PP9kpmrO+Fu3gvaS6wOVGndgBEpedhbLjK
-	 kIGP9+RLyqwR9FXoG4rrv9NItgPHEvYQ2dh6eYIfwQmBlAeBE9j0BkIgyTLVCzQawBKjg
-	 62FCjuAOB3OiLcZgmY4oe33M/oYJGwE/xPGr2+c6vjcoY5bhPNLgK48wR/5wC+RmeTKs2
-	 f2DfPAXVrSqb9zxNtJZJSc1IttieHoAq3jiwuLWYCqj8G94Ous6yRwFGQ9BoJaooGSm8u
-	 MLep1KngLvrBjsKrNJMazg+IYxV3Zvfh4TS1oxe6G7QfexcER5YEuF2fB4QXVp2RaCQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:
+	 Content-Language:To:Cc:References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Last-TLS-Session-Version:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=D34Q5w5pJ1kdbjbWSvqE0sBBpR38YHc5Vcbqu6fjevc=;
+	b=nVfJnLFYFdp9r8J75OtnCU3xiBQoau5IACbypjkvly4rk8lw72IK+T5ciPzdyxpbm1lE
+	 FcDNWyqMT+8xim1yMnFSRFbGRt2okvYr9W92JWDdlkoKcoyX7D/SmeXohx41taWUNrluD
+	 ijHK+17vLMWofUwG3oqLZjsMaCMsCL9IbYhrFgKWqHkf9dXLVjqIPIuRZvYpIySfiD3ZF
+	 wxI/edr67WjS+h4VJCIdc9Qs+yWKY4lc48jFdv3ZXS0D766eZjacaivPbGn5pwTsUhnk4
+	 M2wCKB+50LKUJVH7HxNwyqQeTr7il5ZvpGU9jKG1ry7FdXcGoejfGq5wBG+JhYQVqiw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	dmarc=pass header.from=nabladev.com;
+	dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=UVDdwAcW;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793588703;
-	bh=b1kLaL0pMKNK6dZKHhBr+W57+LUnRECBn06H0tS/2V0=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793593954;
+	bh=D34Q5w5pJ1kdbjbWSvqE0sBBpR38YHc5Vcbqu6fjevc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ETWEr2ehbBTIlvptW/00NT++0Q5cXnpm2RBDc8G2Jrm5PSUdnCoiWtF3N1al8t9M5
-	 L7H1PMoM6tzS35EfspNXJx1SNjpMvGFvNBjSsWsfGcNV5onBAJR7pAuFxl+oOpZAuO
-	 RN10C6TOcEoO2q6G3alhJWjTJnZX4olACebO07XjTucjNrL7ME1rkHli7BVtkXCwlJ
-	 ap1ZHCe4iENzLgv7uiNXQEDKe4cRHbCkokaXZuTZpon7Q84gflmSEQg7at+fGWfqUe
-	 U0zOapRPe4NABG82Ko2CcLYrIByFs333DhoQkMC7T8dBJXV5cC4O5lNUjj6hMc5ZsA
-	 cJ4C6stgD3Mxw==
+	b=saxZfbOAFsNOTCBlkzmaj2vUOpprIGexW0PFIjG1xq0NiK1T/0MkEWbtWZDtm896B
+	 JndwaOkqBsU/ZgddueRfc1V4XV4486uOFqx6WQs4wpGA9PEDns5q9x/YEFGMLc5mV0
+	 Fm/Ssxi83UW4VyzsLSuBvAQDgiH9KkHvo4NvIMNSWHCG8bpedgR3nf621hIfgqkdkA
+	 U5bXntYzn8czTTc71qcaGCECbdDj4aUujKLYe88Z1jrBkBwFnUn3VIOvIhDJZdoxu3
+	 DQsHrgiyNb4i1v/xVOamDs9trgRORbYlSOSKWH0oXxxAkg6EXANofkgf9sw1UIy6ha
+	 NOc540E6DEMXw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CA3A860769;
-	Mon,  2 Nov 2026 03:05:02 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id A97A1323
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 03:04:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7F2EC80D92;
+	Mon,  2 Nov 2026 04:32:34 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 350E2156
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 04:32:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8F38A405E2
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 03:04:59 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 266F380D92
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 04:32:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 3020duwyCVOM for <u-boot@lists.u-boot-project.org>;
- Mon,  2 Nov 2026 03:04:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E8E3440508
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::52b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793588699;
- b=rRPxI8ozWFTXQ7Zahpw0hKR/WA6sDURzdb7DRhpklH4SmFEjgaDYjPyAdmqO93qcbPZV
- 7N/FEoWeDzEZgg6G32gHAZfxOds2M5IA0lyoe07ti6nxS7lPGeJcPp6tjpVB75uSlYpUh
- EVviR39SdivU6/ySh6y4wUS+TYLS2C2Q4PqLr41HG3eGKiLealn3K0jyFoMOyTy+4qyZ4
- FUotM0RcEFwpEt3Olw6z6cAnzHRfhgawfBVLlkYhKv60G2YWi6G69B8TosSPO60QaLYaN
- 3KD5kklTFxOeDlM+M9zreyM3OKFydCa+m5cMLWJGpbi8xhkJqiTglqCEMj5Na3WluJA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 2U27L5-Fl3E9 for <u-boot@lists.u-boot-project.org>;
+ Mon,  2 Nov 2026 04:32:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E97AC80D74
+Authentication-Results: smtp1.osuosl.org; arc=none
+ smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793593952;
+ b=ZcijD2xs6e9vDfkwvcsySRHY9Rqn2LNo92YwYDoHYPrDQpC8O6tiqJSfsrLqWBlfpXH2
+ zn+0v7gwTHDrTVaT8u36QVcI+E9GfCYBC4hiz0xSnrCBw6zubjZ+Ri9gzNl6fyl1wml/f
+ TraSVIZiZwLzEoLafirPpO9pzzcOIavQ+TIN5UJ4T3hOqQIeSW0AsmGqXBNOV7eswrtFu
+ LRpRmOL1TfWQ88FvIul8r/LPxfxPZWXEGj40rex45KsYC8Jvx6NSEwKucTZzOjQPTGp8W
+ y704PqktPas3t99HpyrFCcPDDDi5oDiy9xvTzZrJtOIxc7AXHTAeFyMp8EojQ355/eg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793588699;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding;
- bh=b1kLaL0pMKNK6dZKHhBr+W57+LUnRECBn06H0tS/2V0=;
- b=bp1QjserrWZvaX6FcIcLDnnpci7zuVHEYv8bvf8A+i+dGJnJZCBGReKO3SS4T8rtAG3y
- +HB+ry9xtWexlkQ1jvQceSVOvEHHg2I0DSXYaLq1WgLg0gK1hVZwdkYEY/ir2MlF4fVi8
- oNEiGyNVryIouCUkYG+VSmBGw+PMF3pdMPMv385Atw8M+iIJLx8LLRF1boF5VpsG0OaLU
- dD6TILe7r9Q389WKBR27+S6Z2DW5NH9xeSX1sniP21DGiIHolxqYWx27spJz1nClQb20u
- LMhAtx1eOkZ7xWIGHdLtuMcGg184L4jmBA68aEjnJT2yexJAb21pKP6/Q0mZiukVLEg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=PgZxlazr; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::52b"
+ c=relaxed/relaxed; t=1793593952;
+ h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+ User-Agent:Subject:Content-Language:To:Cc:References:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version;
+ bh=D34Q5w5pJ1kdbjbWSvqE0sBBpR38YHc5Vcbqu6fjevc=;
+ b=iJqHZqqEdux72/k9HRUaliIMriA0YeQ+XERj2C89nnNBDs9heF72YG/nGTG5V6GTml4Y
+ vfB+kzU/0C+sRwnWwKaKJJRroFUhJo9iJlmKVIGx9Wd4ujNlWSmW17HWXsI+UAtR1+dc/
+ 6uIxaLwmS00j1Er2PJHrMfDcXYzr9dqFbAB8W5ed2XR5Y+W+aDFZn341wxwDVI/2zOtdt
+ QXA+kpbwd+xmGooKA0ktqfB7TuopnWWa99qQFLM33q4aNUGE7/fA0Reft5wnbh8Hf7tDE
+ +AcIYoPR9PYmxhgCYD+Ti6fEIz84AWTQFMaAHfWrC2J5x6d6KAohAuH0YkFyZPLWakg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=pass header.from=nabladev.com;
+ dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=UVDdwAcW; 
+ arc=none smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::52b; helo=mail-pg1-x52b.google.com;
- envelope-from=alan.tseng.cs@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=PgZxlazr
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
- by smtp4.osuosl.org (Postfix) with ESMTPS id E8E3440508
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 03:04:58 +0000 (UTC)
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-cdb15cd8558so397593a12.2
- for <u-boot@lists.u-boot-project.org>; Sun, 01 Nov 2026 19:04:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793588698; x=1794193498;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=b1kLaL0pMKNK6dZKHhBr+W57+LUnRECBn06H0tS/2V0=;
- b=PgZxlazrzIfdqx6BqQcJ10Sgo5+mEJSv0D+angaVYy3gPvGcv3RD2ljG4qv199d8Z1
- OQqoyV3fxtSJJIy6d8/v5rqSGPlcbvwyUp9uzlZnNtZ9I8M61y1/eDbEaLAf9AvIE76d
- 1lbdz/58BiudEUHv+K2YR4iDHdcBISgTvYvBunrbnHwljXL4EL0oZMZUauB05FGDkBB5
- YvuCE2u4zPmuxihHWLwBb4dKJZvljgB3LNAzCIvhEWlPAAZ8G86LRrG58fHRqUMD7/Xz
- 6mbcM6zuC/3X7Cc64s6T08dM0N3MGc/7G6OHGsyqpxUfvdAwXjKWrG/R8H6cBdnioKSX
- CtHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793588698; x=1794193498;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=b1kLaL0pMKNK6dZKHhBr+W57+LUnRECBn06H0tS/2V0=;
- b=EWJk3mESNATaDfgbpTBabw3FD8jzWgk9ZF2wa4M7MYdvRf910IYwg+QHxvAxXdGCHV
- DCGyVmF8KS0D3NkCIyOLnXEIbeQ7myFpNto07qbyosLxTEiaS4uKTQNOwZ7fUsIeq/dA
- QLmTLDLDJBHekyBQHJwQ9JAzPlMCSMzeoiAgGtk9/KCn3kCpSu125Ovblu+X8LdDtY9D
- unhGfdnz0KVi7IfqfzhSXzbNgEFKMskDgJ4cRRast9d8rIGUR+y+0+lEFrhV+VAKD+qj
- 1ILkZc+96XGFyW2fESMQmo2WIJV8yUczC+FfURlrB3exdSo/tDhg8rd8Lfef7LjyH6QE
- vFOg==
-X-Gm-Message-State: APuU4Z9f+d19cPvGFZ/7w/G/N0MSXVFR1zbkF0fU/X9XFLks7BwkOg9f
- THFUHOeUqftKzf4LS/XeXEBF51aF2KHEa3mpxQk1goCErCSFJpr9BRRC95R3a5Ek
-X-Gm-Gg: AYBFou0LJiUBUMsgFTr22bq/wtk2V48Hmp4osq1W3OhtB7CjNt9TVwaGtWzo3IGhOHH
- haggdlHt+yMwzLmFeC9rBygJdEcU94UYbAhsMK4SiDWs01dk6yQvp+Gt5t0n521meHsIwhwz3Vm
- AAnJC2e17FHfx3yDi3YQk5UxST2TgAbaUbMFt8uLKGSW4mGbHgJFbokhg+sBSowD0syiJdee5iY
- 4O9k90dywAVith2VQXE8KwHwPEgW7QPxv7DoEq+MEVdWsDd8pH55kmksRvfSGGMIttXLp3nhi0V
- kH5ZnWxzDQEnmCL02DGfj4BPO6VaeDOjIAV7sXJaajHEdwcOtoC5N65+AdDJG+nrsjMvt6W4qpn
- x3Z+I6f1zK3tuEQDtQpKwWanVw/wXEwVBrYUrtTnFhmO/WP7EPS2MfzrkIroTiBkM7yTI+/5HZ4
- SDKZbRAFBm+Xi/8r0WxttDNfitRQmAX68tW3cKuVncIvN0O24iWM9sezJX2GnCYQkgYk+YGmXJg
- 0Q6w3Q5lS68WYHJLIRCCgZqK+FMu0zF+5854E5y9Xd1WYp1fUm4MXin1SaKSL48/ruu8sOWUb07
- Wn3pF2kfwubx12qbdJiJ5cdsLuy92zDuLKE4UPUIw8ds7lGOgqwt/2bIaVbavV5Obwbkds+slB2
- lA53VK5QB9An694mGMDMsOXRBWbK/fNAVGDWsDcW+mYntOUCpy5+/XYh2PUKXu1mBqrAfhfXrpD
- sNWIBo9PPw
-X-Received: by 2002:a17:90b:51cf:b0:3ad:818f:3da2 with SMTP id
- 98e67ed59e1d1-3ae8982cc41mr6161869a91.63.1793588698016; 
- Sun, 01 Nov 2026 19:04:58 -0800 (PST)
-Received: from alanhc-14700.tailb22ec2.ts.net
- (180-177-138-120.dynamic.kbronet.com.tw. [180.177.138.120])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ae845432e4sm11995159a91.3.2026.11.01.19.04.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Nov 2026 19:04:57 -0800 (PST)
-From: Hung-Chun Tseng <alan.tseng.cs@gmail.com>
-To: u-boot@lists.u-boot-project.org
-Cc: bmeng.cn@gmail.com, trini@konsulko.com, visitorckw@gmail.com,
- sjg@chromium.org, xypron.glpk@gmx.de
-Subject: [PATCH v6 6/6] doc: virtio: Explain how to reach the virtio RTC
-Date: Mon,  2 Nov 2026 11:04:42 +0800
-Message-ID: <80c59fb264f9f2c8b325bd792f0a20c172394e59.1793588058.git.alan.tseng.cs@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1793588058.git.alan.tseng.cs@gmail.com>
-References: <cover.1793588058.git.alan.tseng.cs@gmail.com>
+ client-ip=2a00:f820:417:0:178:251:229:89; helo=mx.nabladev.com;
+ envelope-from=hs@nabladev.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=UVDdwAcW
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E97AC80D74
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 04:32:31 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id CCC8E10C335; Mon, 02 Nov 2026 05:32:22 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1793593945;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=D34Q5w5pJ1kdbjbWSvqE0sBBpR38YHc5Vcbqu6fjevc=;
+ b=UVDdwAcW82t4pzf42deYD0KCAT0ArLF28G1W2ZbnRl8xHbpyKMelYUYOmVZxA+L1CxZ5rX
+ G5UHjGe2UpIo6/htQ2hR+hHVuTiPWtF2bq44baYZvNdYSWHodGyPBl6lh9f3d3ufcDiPwx
+ lsbhrGF2JGVEG41qed59hiKTY991tYdWqhlAKjwgdueFl91Zy/uiTzaBb7oAEhn5Pec2AI
+ GrozKDcpet1RZG9sUdKh3N3ha+10SOCgiYhYZWWmXQ7cvVcU7zZs7u4vrjN3jPTEpIw0Sl
+ Yit943SqTaxDpRaRWFEV8s07W5TmayXPHG01HOvf8xobwwCDHpAQbQD+kWmGMw==
+Message-ID: <8200f6ac-ffb0-7645-a205-f55e93bdd53b@nabladev.com>
+Date: Mon, 2 Nov 2026 05:32:14 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH RFC 0/2] Add i2c ignore NAK support
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+Cc: Swamil Jain <s-jain1@ti.com>, u-boot@lists.u-boot-project.org
+References: <20261026-rfc_i2c_nak_suppress-v1-0-bc01e8393b9a@ti.com>
+ <CAFLszTg_ob1mTz9=Nh0BHM-yZDDoyYTu4STzHgk5tWALyZ5yZw@mail.gmail.com>
+ <4d4a46e9-e75b-4bc2-a0c6-88a0bbc13b3b@ti.com>
+ <d8a62180-3baa-27b9-d98e-08665b00ec1c@nabladev.com>
+ <CAFLszThBeJy7wHdQRZO_tXw7_2=szSyCK=9LJ9TB-_sZX2OzEA@mail.gmail.com>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <CAFLszThBeJy7wHdQRZO_tXw7_2=szSyCK=9LJ9TB-_sZX2OzEA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -177,54 +147,85 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-14.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,NICE_REPLY_A,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The date command only uses RTC sequence 0. On the QEMU ARM, RISC-V and
-x86 machines that is the PL031, Goldfish or MC146818 RTC, so date never
-reads the virtio RTC unless that driver is disabled. rtc dev does not
-help, as rtc read reads raw registers, which the virtio RTC does not
-have.
+Hi Simon,
 
-Give the virtio RTC its own section and say this there, along with the
-QEMU version it needs and that x86 needs DM_RTC.
+On 01.11.26 14:11, Simon Glass wrote:
+> Hi Heiko,
+> 
+> On Tue, 27 Oct 2026 at 07:46, Heiko Schocher <hs@nabladev.com> wrote:
+>>
+>> Hello Swamil,
+>>
+>> On 27.10.26 08:04, Swamil Jain wrote:
+>>> Hi Simon,
+>>>
+>>> On 10/26/26 21:40, Simon Glass wrote:
+>>>> Hi Swamil,
+>>>>
+>>>> On 2026-10-26T07:16:33, Swamil Jain <s-jain1@ti.com> wrote:
+>>>>
+>>>>> Some i2c peripherals do not require or wait for i2c ACK, so the series
+>>>>> adds a flag(DM_I2C_CHIP_IGNORE_NAK) to ignore negative acknowledgment
+>>>>> (NAK).
+>>>>
+>>>>>
+>>>>> Our usecase is SII9022A[1] hdmi-bridge, while reading the EDID block
+>>>>> the bridge doesn't send ACK (mentioned in programmer's guide[2], pg 22).
+>>>>
+>>>> Thanks for looking at this. Are you plannning to send a SII9022A driver?
+>>>
+>>> Working on the sii9022a driver.
+>>>
+>>>>
+>>>> I've commented on the design on patch 1. It would also be worth
+>>>> checking how Linux handles this for sii902x, since that driver reads
+>>>> EDID through the bridge too.
+>>>>
+>>>
+>>> Tried following the programmer's guide but will check how linux handles
+>>> the EDID read for sii902x.
+>>>
+>>>> If the generic flag does stay, please can you add a sandbox test in
+>>>> test/dm/i2c.c, like the existing tests for the DM_I2C_CHIP_RD_ADDRESS
+>>>> and DM_I2C_CHIP_WR_ADDRESS flags.
+>>>
+>>> As per your feedback on the patches will try not to use the generic flag and handle the case within
+>>> the driver itself. Will re-spin the series
+>>> with sii902x driver as well.
+>>
+>> @Simon: Thanks for the review!
+>>
+>> please try to not drop me from cc, thanks!
+> 
+> Oddly this patch had CC: instead of Cc: so it didn't work. Apparently
+> this rewrite is somthing that Microsoft does? But looking at the spec
+> it has been allowed for a long time.
 
-Suggested-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Hung-Chun Tseng <alan.tseng.cs@gmail.com>
----
- doc/develop/driver-model/virtio.rst | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
+Oh!
 
-diff --git a/doc/develop/driver-model/virtio.rst b/doc/develop/driver-model/virtio.rst
-index 30df0e944..b9f05f3ae 100644
---- a/doc/develop/driver-model/virtio.rst
-+++ b/doc/develop/driver-model/virtio.rst
-@@ -78,8 +78,19 @@ Requirements
- ------------
- It is required that QEMU v2.5.0+ should be used to test U-Boot VirtIO support
- on QEMU ARM and x86, and v2.12.0+ on QEMU RISC-V.
-+
-+VirtIO RTC
-+----------
- The VirtIO RTC device (``-device virtio-rtc-pci`` or
--``-device virtio-rtc-device``) requires QEMU v11.1.0+.
-+``-device virtio-rtc-device``) requires QEMU v11.1.0+. The driver needs
-+``CONFIG_DM_RTC``, which QEMU x86 does not enable by default.
-+
-+The ``date`` command only uses RTC sequence 0. The QEMU ARM, RISC-V and x86
-+machines also have a PL031, Goldfish or MC146818 RTC, which gets sequence 0,
-+so ``date`` reads the VirtIO RTC only if ``CONFIG_RTC_PL031``,
-+``CONFIG_RTC_GOLDFISH`` or ``CONFIG_RTC_MC146818`` is disabled.
-+``dm uclass rtc`` shows the sequence numbers. ``rtc dev`` does not help, as
-+``rtc read`` reads raw registers, which the VirtIO RTC does not have.
- 
- Testing
- -------
+> Anyway I have updated patman to support CC in
+> https://github.com/deinde-dev/patman/pull/226 so it should not happen
+> again.
+
+Many thanks!
+
+bye,
+Heiko
+> 
+> Regards,
+> Simon
+> 
+
 -- 
-2.43.0
-
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
