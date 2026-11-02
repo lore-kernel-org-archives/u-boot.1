@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 777D9608441A
-	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 16:21:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1EE4606ABA6
+	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 16:21:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=wOtlBaaR;
-	dkim=pass (2048-bit key, unprotected) header.d=fris.de header.i=@fris.de header.a=rsa-sha256 header.s=mail header.b=gw50eTSP
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Jb4fcFvA;
+	dkim=pass (2048-bit key, unprotected) header.d=fris.de header.i=@fris.de header.a=rsa-sha256 header.s=mail header.b=iaFVIMdK
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 501718119C;
-	Mon,  2 Nov 2026 16:21:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BEEE281197;
+	Mon,  2 Nov 2026 16:21:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id D07XN8W15mtT; Mon,  2 Nov 2026 16:21:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6199881195
+ id Tvd4DLbxMqFm; Mon,  2 Nov 2026 16:21:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6696C81154
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793636474;
-	b=hcU+YPmBVtSONK/TSKkOpKRjMsVVqGPAXL7wah9FmMnKbFOOi+qWlGtGagdnt4FxX90v
-	 Q2GFQteesWMUM58RNEhiAF0kJDRRcpAD08sG9Jd/jG6qX7AMlzHO8u55sNVKLx5pjTbti
-	 FCtKGY/N4F29IZiUATTvxqhqkJ/dXMEuBd0moPC7gXl+pbnZOB/N3ZIoDHygcaqXcyKkl
-	 viw8mbxC4W7yzkBFAvsX1uACIf43wsWJIOR4uIeEkVGZj2OxYBDYdAVoIV/bD4Lz2GaJL
-	 2SpD8s1PKvDV4JlRgYuf6MEbQn4AkRu2mCkFXftzwZSekPiGoBYdj5vfuhM7jSW2pSw==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793636476;
+	b=AT0k/LxvyHuAdjIsYwAuGPJCTZJRThNoOiGbFj/IZ7MjAhQmVZpZjg3tuOcL5zhiZK2k
+	 q+aozb85Km1l9TJOg92dzLKgin9ZbFLFF4OL++KkC9SVlcwo7c3MyLOLpKbf8By38j0bS
+	 OO1YfVnmBh4NBxXF8X3tJ0LEGR7YuLUVgMWWrdAACWsVWwj6oWPNmEIjLnIMw1YwLCFrp
+	 8Hnyc1+PS8yH3LRwTDfuJceMF46J6u1WyhVypq7TiG9gpxjtegVuJIVfRtcJALLHs52f4
+	 uLnzeMcF2BNkaZX9eya9Rk2rhX+bUP9MRgAs/pQuSMzjJFhHbt0RcQVlfSqroPS3X4g==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793636474;
+	c=relaxed/relaxed; t=1793636476;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:From:
@@ -32,65 +32,65 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Developer-Signature:X-Developer-Key:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=hU//vBEb+OQqoCsy/+/Mdg40GLiF0ZcNrSL9gtXfWG0=;
-	b=BcfBr3AqkgWx0+me3B0VnLwuH42HrV1vmZ9xeQ/gnz04Vz+VTBqvIQV+aaCo4OBWaRJH
-	 2pknSPQQ8l0e/uhs/2ZQ5WbTqPYOw3OkeNzDU9gpcNgH4soaMc5ZF/wfwE+oOqKLYDM0g
-	 yIMUx5aWHteZPyGgA4dbeKjiwSXyFuO/CIOwzEK4P//XVyVBpD2JAghWcK1Wo0KCurQy4
-	 4l9iJNahvWh2eBDgl90KXSFdXYcNNWzM9eQ6A6l93cOU3z7cphn1WXBIxYDULCY2QWy1s
-	 Zm6eZkttYeoQ65PRop7I0Qt54ao25qPMtFIVPQkWhpL+LantHojI14MhqYrdCAf7nXQ==
+	bh=uIuD1MQ7ho09IWfqJC5fLmzB/Z6wGHWKwdTSqfBJX/A=;
+	b=ADE0X2S+nsOxU00NGOShF6LyevxLXn6kubJdAikTC/KDCT8xix8pzfO98iPOb/scusJP
+	 STF8W4qios09W+fV/yUv5jQ9xhFu9sR0666PgOzv02KfwVu/gZuvemybIcCoJusLG80Tg
+	 dCcIYzAvQkXKuFr37uIrB+l3eZ6ifAFkISsLIGoGVBEE5JJE1eJkzfQjH/BFcLgdCyAcq
+	 AQkucEf30PY2rJ2raVW92vEU59ePik6+pbkggVk8C/6PUy04K03ChGfs8yloE419jEmbG
+	 0qRltUp4j3NszLYIowhD/IG4yolXC+qPN+m8KuryaFtasRh54D61mVapYUkj+kTJ34A==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793636474;
-	bh=hU//vBEb+OQqoCsy/+/Mdg40GLiF0ZcNrSL9gtXfWG0=;
+	d=lists.u-boot-project.org; s=default; t=1793636476;
+	bh=uIuD1MQ7ho09IWfqJC5fLmzB/Z6wGHWKwdTSqfBJX/A=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=wOtlBaaR0VgzXeO5gWUdHqtcwO93ONpr4ntTv6OHc5cq7ypQswD1u1YGYei4ZIhKf
-	 syi9bkH/BtcbtkV/M7EdYXdzg+LERfqgzV8t3hsC+lVqWiy8mkUHfM5yefsocU7DUo
-	 1HlTk7re7BwCHgITjOfxTxu04QFikYyJ0Au+5xn71IhBDOFXKBJr0zyM4JpDCOSjDR
-	 tgV8qYYvfv6lI9WkFroBG1w9BIvicYzOWUPaYEaVQEnKXf4Ic4jQcJ284r3NM6GtX8
-	 05FetTXgxdQihceDj8lF8OKEVGos0aUFjTNmNLBRAFYwHfQ8wUgZb5j9dGgD0ooc7L
-	 +ybVwaXHMZidw==
+	b=Jb4fcFvANzOo9xLnbhVrYUVTxW0UWeIdtxP44kekIU2lVof2NO/bx4ww0O1dn9965
+	 5S5f9Z183K0gK9kxLHP075fUZ836zIefuQ9dY7RctzyYdS8+g5fuiCAvv2TOue4bn9
+	 o31OFPQxE+5F8rIlaR0yndXFzzVmG5FuKIShIi2cKM3n79pQwmVda6B84zsPhrwvIZ
+	 IlfOJDOueAZU1OmX2cLQ8g9lCeV3kpHN+KtnTVMIgBWcB5T4jwd2+mRPyFdQXiarQG
+	 ap6m2cf947rgG6y7UjVJh4CJbn+RFr5qJlRS52so2GdkJkO3bFrdldTNd9gsIoSqOC
+	 M05d0Gno/tlTg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6199881195;
-	Mon,  2 Nov 2026 16:21:14 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6696C81154;
+	Mon,  2 Nov 2026 16:21:16 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 3E7AED3A
+ by lists1.osuosl.org (Postfix) with ESMTP id 49B5C2A8
  for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 16:20:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 24D9C4018C
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2D7034009E
  for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 16:20:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id stYaa46rc00r for <u-boot@lists.u-boot-project.org>;
+ id yGf_U2yoLPxk for <u-boot@lists.u-boot-project.org>;
  Mon,  2 Nov 2026 16:20:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5AB5C4009E
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 593824007E
 Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip=116.203.77.234
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793636455;
- b=ljdP8tFvYeQTUA5KStVRk9X7axCOR2eUFcR5FZXvlIeIzveuYkXWY8jChzGsPoaMMJks
- K0YO5Zr3wtoNtEjgoS/mwFRaGP71g2EI4xy2AjuQWwhfUF+dWiqe3k3RKoHnO/oEAyvtq
- MgfMJzMnEFNqaeOSIOTsbvQRmguUmZfeRFPAAt+c4YvNhr2tlAssWUdZvHrM+vSlT01JB
- yny/hi4wiaxfZaQ+0TWLhBZomXwXk4teSMUmbDai67S7vez7UYIODCux+Ngtnu1eIzCXu
- JO41Ma1ykc3kVOl5xpCFTh9sOI0HwiAkeempZu5dsn9Y/i9DBZVC0EcAC1EGjmqR9MQ==
+ b=A9uovNemlmebL5h10pulYCw2NBDQnD1FnA2K6z3g5OCa/5bKSSOgdwjCnTHSJYiqiXAR
+ /N2dH19CHD6JrzKhgf9Kx6O+jn0RtU5EryXGnuLMlckXEJY3JRWICGEr2fdyg4N6Bw5B7
+ jMv2QaoJA8NK3hoYkVRkxLsTXfCxmup9NTtRSdW3qtu6jUde2PdSVlxZP72WrTYzfNVRi
+ +sRIEkhWlv3BBqTlfuIDDeLKOPMoH5kBHfvTSzi/HRoRhlE2QFAEUWTPBG/WA2ao+/C54
+ v3P5Q9KE1xeU3Z/h0AiQKHu/n5S/uJYX0eSdTwiND53E3r1bY7Q4dGrSlScda1mkWmA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1793636455;
  h=Received-SPF:From:DKIM-Signature:Date:Subject:MIME-Version:
  Content-Type:Content-Transfer-Encoding:Message-Id:References:
  In-Reply-To:To:Cc:X-Developer-Signature:X-Developer-Key;
- bh=hU//vBEb+OQqoCsy/+/Mdg40GLiF0ZcNrSL9gtXfWG0=;
- b=K3II9LkuXXb1u3aeCasDcfnLUMhPzZ87iyfjPXBAzc6PXxrQo6adymlucxRlALCvV3PI
- lRlXGx3YekFwxypgQaT2FeO884pmHcXRSf0cTaE/10JKG5/lic+v3AGHZGBOMCB8qThdh
- aMFZCX+YIyqKpO+Q7cqVRTJCVTqWP3cQkJi9OB85+M31VIVX40d7FFXOfL7P8WzvqiEE/
- g+ZFuuEUl1pFJs+OfKOVzc6axSh6geMC7/tjXaOu8h7Z7Ca5msatHxvvTtH1mJTxcGygC
- MMe1ji9o9+sZX74mMOsBIpY2Tvos16uyTtRErhMtl3H3N6YLxWVRzznlzrBoWWPkS3Q==
+ bh=uIuD1MQ7ho09IWfqJC5fLmzB/Z6wGHWKwdTSqfBJX/A=;
+ b=P00O9ZgV692XNm79TOvSsIQCKuHg2RrxrUCTOTg+ct4S98ZjI8jraU730LRyyVNYO5ut
+ h/r4DSs8fpqXtktoIngthRn8uufraCZoEfsGuQ8rAzk0nNn/GjvIx3fW4Wuvr2PNYG1FP
+ m7iJ6jRxhngEKHVWFCuPNztSqoDQNH03+QT1WiGR5ZTaJXTqGX5rZjcrGOdemQagqNYKE
+ tY++PWUk9eQvxgv6FYDaKbAdjvZF5zKLn8VoLjgr8DqfZbxF4XicrXq36Qg+Z2OX89BI8
+ CskMlLBtINOyWN6A+9jHNx+Eh9flqvrFtusSv4dYa52frMxOU85GJL8+xOfcErpd2dA==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=fris.de;
  dkim=pass header.d=fris.de header.i=@fris.de header.a=rsa-sha256 header.s=mail
- header.b=gw50eTSP; 
+ header.b=iaFVIMdK; 
  arc=none smtp.remote-ip=116.203.77.234
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=116.203.77.234;
  helo=mail.fris.de; envelope-from=frieder@fris.de; receiver=<UNKNOWN> 
@@ -98,30 +98,31 @@ Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=fris.de
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=fris.de header.i=@fris.de
- header.a=rsa-sha256 header.s=mail header.b=gw50eTSP
+ header.a=rsa-sha256 header.s=mail header.b=iaFVIMdK
 Received: from mail.fris.de (mail.fris.de [116.203.77.234])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5AB5C4009E
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 593824007E
  for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 16:20:54 +0000 (UTC)
 From: Frieder Schrempf <frieder@fris.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=mail;
- t=1793636450;
+ t=1793636449;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=hU//vBEb+OQqoCsy/+/Mdg40GLiF0ZcNrSL9gtXfWG0=;
- b=gw50eTSP2AUms3yf1EavsS310DSReuAoWPz02+TFJNH2pl5KEW+rXTFx63tiIa+LehAzNU
- dRDxOWh9r3KQzRJOt4ichd6ULuHoIbNgY5t6jHR7/hUc2wjlIM0kj5RD8+t4zrMI0k2dTF
- yOCJ5N4wUPVuDNcdxqjDnr0Rc/65R9lAkM4/xtk7jV2hFHyCqZcdLZROFfmybdxrbzX2nC
- v0oknO+FsdWYAi3JsL8i7wsiJrC+0Z8pyYRLWG+AiSnXI2lzHI7K2wRzGnlZ7qVx0aoNmx
- PYCLDRTGFmp9jdlBhxLwM6824wJ21WgTfd4885UGcNUuHjA+Tnxha6WNqyziIg==
-Date: Mon, 02 Nov 2026 17:20:29 +0100
-Subject: [PATCH v2 12/12] test: boot: Test the RAUC built-in boot command
+ bh=uIuD1MQ7ho09IWfqJC5fLmzB/Z6wGHWKwdTSqfBJX/A=;
+ b=iaFVIMdK4xGad4qZFQw8UiOLgwfW8TGPCOs6JnYdaRaM8kx4ItRq6uM1T9HymM5O9fsZWI
+ 1QX2Hw4ITH6AOHHxLKy5bvYqWlBf7PlbS1kOOz+IKFz64sgwtfx885frXDJenQp6GahW/u
+ eQ62WFvHUvYXs71ZTP2Lee/vR9ig2FStb55aGMtuy/5D2twOgWGJMHKqM6qJMicUSl7FvO
+ 0Y0tLriLviA1l8hXX5/J4r14UdTcBBYWUDSBX3g1KPzmuyYM/H7lYGk3iZIAoZ9UyojJgY
+ LRTFpDWFxSNP/vRZbL3zcO3LicUeiT0CPyJhNOb3J20AqbusmS+HmqV4Ie9Wvw==
+Date: Mon, 02 Nov 2026 17:20:24 +0100
+Subject: [PATCH v2 07/12] bootstd: rauc: Only set the RAUC variables for a
+ RAUC device
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261102-main-v2-12-4537bcb19d66@kontron.de>
+Message-Id: <20261102-main-v2-7-4537bcb19d66@kontron.de>
 References: <20261102-main-v2-0-4537bcb19d66@kontron.de>
 In-Reply-To: <20261102-main-v2-0-4537bcb19d66@kontron.de>
 To: Martin Schwan <m.schwan@phytec.de>, u-boot@lists.u-boot-project.org
@@ -135,13 +136,13 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Michal Simek <michal.simek@amd.com>, Francesco Valla <francesco@valla.it>, 
  "Lucien.Jheng" <lucienzx159@gmail.com>, 
  Casey Connolly <casey.connolly@linaro.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3972;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4021;
  i=frieder.schrempf@kontron.de; h=from:subject:message-id;
- bh=VCK1QHe1JRq/WmFIulzQU4FetiPfYDF9UPsHWS23pmk=;
- b=owGbwMvMwCWWWSatKlDTJMZ4Wi2JIevFjridq8T2vOHbOPF2dvDti2ebTnZ/8lp6U+HtL/24D
- Xevr2Z+0lHKwiDGxSArpsgixW/x2tYs1kf+WHUUzBxWJpAhDFycAjARZzaGf1blM5St/9UfiGIQ
- UNd7UZl+79irdKnTaavd7x8Ldv/6PJWRoatw+c7bOVqhnn7iea5qqQuufuy8xqosVWxZt1DINEO
- BFQA=
+ bh=fvI2LQD6t+MYQn7E/Tvv0TGJCS0kQ5NyFPer2IStn4Y=;
+ b=owGbwMvMwCWWWSatKlDTJMZ4Wi2JIevFjtiq9b8DHj3+HuFwJ7VoT1swX+jLyhn/1mg/uzz90
+ //j235/6ihlYRDjYpAVU2SR4rd4bWsW6yN/rDoKZg4rE8gQBi5OAZhIMycjw6Pyc8aW2w+lm+yx
+ TbOfNu+086Mz7H9LSv/oyWXcu+d8wZiR4bLuIYbGeWc63zlqykQt6DvfVKVefTlsauGFj1eMhG7
+ uYAMA
 X-Developer-Key: i=frieder.schrempf@kontron.de; a=openpgp;
  fpr=1A0F38EB3D365D4C1FC67B5A69761B25107C8216
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -162,105 +163,123 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
-Add a test that sets a built-in boot command in the platform data of
-the RAUC bootmeth, which runs a test variable, and boots the RAUC
-bootflow on mmc10 with it. It checks that the command sees the slot's
-partitions and raucargs, that the boot script is not loaded, that slot
-B is booted once slot A has no tries left, and that a failing command
-uses up a try.
+distro_rauc_read_bootflow() sets BOOT_ORDER and the BOOT_x_LEFT
+variables to their default values before it looks at the partitions of
+the device. Every MMC device that is scanned therefore adds them to the
+environment, also if it has no RAUC system on it, and the next saveenv
+stores them, for example when another bootmeth saves the environment.
+
+Set the default values only once the partitions of the slots have been
+found on the device. Until then, use the default boot order if
+BOOT_ORDER is not set.
 
 Assisted-by: LLM
 Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 ---
 Changes in v2:
-- Set the command in the platform data of the bootmeth instead of in
-  sandbox_defconfig, and drop the #ifdef (Simon)
-- Move CONFIG_ENV_FAT_DEVICE_AND_PART and the environment handling to
-  patch 6
-- Also check that the boot script is not loaded
+- New patch (Simon)
 ---
- test/boot/bootflow.c | 61 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 61 insertions(+)
+ boot/bootmeth_rauc.c | 57 +++++++++++++++++++++++++++++++++++-----------------
+ 1 file changed, 39 insertions(+), 18 deletions(-)
 
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 0c22ad58521..2278453ca4d 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -1664,6 +1664,7 @@ static int bootflow_rauc_run(struct unit_test_state *uts, const char *mmc_dev,
- 	ut_assertok(bootmeth_set_order("rauc"));
- 	rplat = dev_get_plat(dev);
- 	rplat->partitions = "1,2 3,4";
-+	rplat->bootcmd = "";
+diff --git a/boot/bootmeth_rauc.c b/boot/bootmeth_rauc.c
+index 52d5be388cc..a32f19303a5 100644
+--- a/boot/bootmeth_rauc.c
++++ b/boot/bootmeth_rauc.c
+@@ -121,7 +121,10 @@ static int distro_rauc_scan_parts(struct bootflow *bflow)
+ 	if (!priv || !priv->slots)
+ 		return log_msg_ret("priv", -EINVAL);
  
- 	/* Change the device order, and restore it also if a check fails */
- 	std = dev_get_priv(bootstd);
-@@ -1924,6 +1925,66 @@ static int bootflow_rauc_part_names_mbr(struct unit_test_state *uts)
++	/* BOOT_ORDER is only set once a device has been found */
+ 	boot_order = env_get("BOOT_ORDER");
++	if (!boot_order)
++		boot_order = CONFIG_BOOTMETH_RAUC_BOOT_ORDER;
+ 	boot_order_list = str_to_list(boot_order);
+ 	for (i = 0; boot_order_list[i]; i++) {
+ 		const struct distro_rauc_slot *slot;
+@@ -150,32 +153,27 @@ static int distro_rauc_scan_parts(struct bootflow *bflow)
+ 	return -1;
  }
- BOOTSTD_TEST(bootflow_rauc_part_names_mbr, UTF_CONSOLE | UTF_DM | UTF_SCAN_FDT);
  
-+/* Scan and boot the RAUC bootflow, as a successful boot command frees it */
-+static int bootflow_rauc_scan_boot(struct unit_test_state *uts)
-+{
-+	ut_assertok(run_command("bootflow scan", 0));
-+	ut_assertok(run_command("bootflow select 0", 0));
-+
-+	return bootflow_rauc_boot(uts);
-+}
-+
-+static int bootflow_rauc_bootcmd_check(struct unit_test_state *uts,
-+				       struct distro_rauc_plat *rplat)
-+{
-+	/* Start with the default tries, also when running a second time */
-+	ut_assertok(env_set("BOOT_A_LEFT", NULL));
-+	ut_assertok(env_set("BOOT_B_LEFT", NULL));
-+	ut_assertok(env_set("rauc_test_boot",
-+			    "echo rauc boot: ${raucargs} ${distro_bootpart} ${distro_rootpart}"));
-+	rplat->bootcmd = "run rauc_test_boot";
-+
-+	/* The command returns instead of booting, so the boot fails */
-+	ut_assertok(bootflow_rauc_scan_boot(uts));
-+	ut_assert_skip_to_line("rauc boot: rauc.slot=A 1 2");
-+	ut_assert_nextline("Boot failed (err=-14)");
-+	ut_assert_console_end();
-+	ut_asserteq_str("2", env_get("BOOT_A_LEFT"));
-+
-+	/* The boot script is not loaded */
-+	ut_assertok(run_command("bootstd images", 0));
-+	ut_assert_skip_to_line("(0 images)");
-+	ut_assert_console_end();
-+
-+	/* Slot B is booted once slot A has no tries left */
-+	ut_assertok(env_set("BOOT_A_LEFT", "0"));
-+	ut_assertok(bootflow_rauc_scan_boot(uts));
-+	ut_assert_skip_to_line("rauc boot: rauc.slot=B 3 4");
-+	ut_assert_nextline("Boot failed (err=-14)");
-+	ut_assert_console_end();
-+	ut_asserteq_str("2", env_get("BOOT_B_LEFT"));
-+
-+	/* A failing command uses up a try as well */
-+	ut_assertok(env_set("rauc_test_boot", "false"));
-+	ut_assertok(bootflow_rauc_scan_boot(uts));
-+	ut_assert_skip_to_line("Boot failed (err=1)");
-+	ut_assert_console_end();
-+	ut_asserteq_str("1", env_get("BOOT_B_LEFT"));
-+
-+	ut_assertok(env_set("BOOT_A_LEFT", NULL));
-+	ut_assertok(env_set("BOOT_B_LEFT", NULL));
-+	ut_assertok(env_set("rauc_test_boot", NULL));
-+
+-static int distro_rauc_read_bootflow(struct udevice *dev, struct bootflow *bflow)
++/**
++ * distro_rauc_set_defaults() - Set the RAUC variables that do not exist yet
++ *
++ * This sets BOOT_ORDER and the BOOT_x_LEFT variable of each slot to their
++ * default values, unless they exist already.
++ *
++ * Return: 0 if OK, -ve on error
++ */
++static int distro_rauc_set_defaults(void)
+ {
+-	struct distro_rauc_priv *priv = NULL;
+-	int ret = 0;
+-	char *slot;
+-	int i;
+-	char *partitions = NULL;
+-	char *partitions_cursor;
+-	char *boot_order = NULL;
+-	const char *default_boot_order;
+ 	const char **default_boot_order_list;
+-	char *boot_order_copy;
+-	char *boot_order_cursor;
+ 	char boot_left[BOOT_LEFT_LEN];
+-	char *parts;
++	int ret;
++	int i;
+ 
+-	/* Get RAUC variables or set their default values */
+-	boot_order = env_get("BOOT_ORDER");
+-	if (!boot_order) {
++	if (!env_get("BOOT_ORDER")) {
+ 		log_debug("BOOT_ORDER did not exist yet, setting default value\n");
+ 		if (env_set("BOOT_ORDER", CONFIG_BOOTMETH_RAUC_BOOT_ORDER))
+ 			return log_msg_ret("env", -EPERM);
+-		boot_order = CONFIG_BOOTMETH_RAUC_BOOT_ORDER;
+ 	}
+-	default_boot_order = CONFIG_BOOTMETH_RAUC_BOOT_ORDER;
+-	default_boot_order_list = str_to_list(default_boot_order);
++	default_boot_order_list = str_to_list(CONFIG_BOOTMETH_RAUC_BOOT_ORDER);
+ 	for (i = 0; default_boot_order_list[i]; i++) {
+ 		ret = boot_left_name(boot_left, default_boot_order_list[i]);
+ 		if (ret) {
+@@ -195,6 +193,24 @@ static int distro_rauc_read_bootflow(struct udevice *dev, struct bootflow *bflow
+ 	}
+ 	str_free_list(default_boot_order_list);
+ 
 +	return 0;
 +}
 +
-+/* Test booting a slot with the built-in boot command of the RAUC bootmeth */
-+static int bootflow_rauc_bootcmd(struct unit_test_state *uts)
++static int distro_rauc_read_bootflow(struct udevice *dev, struct bootflow *bflow)
 +{
-+	return bootflow_rauc_run_env_fat(uts, bootflow_rauc_bootcmd_check);
-+}
-+BOOTSTD_TEST(bootflow_rauc_bootcmd, UTF_CONSOLE | UTF_DM | UTF_SCAN_FDT);
++	struct distro_rauc_priv *priv = NULL;
++	int ret = 0;
++	char *slot;
++	int i;
++	char *partitions = NULL;
++	char *partitions_cursor;
++	const char *default_boot_order;
++	char *boot_order_copy;
++	char *boot_order_cursor;
++	char *parts;
 +
- /*
-  * Test the BLS bootmeth against entries that live below a '/boot/' prefix,
-  * so that they are only found via the second bootstd prefix. The Fedora
++	default_boot_order = CONFIG_BOOTMETH_RAUC_BOOT_ORDER;
++
+ 	priv = calloc(1, sizeof(struct distro_rauc_priv));
+ 	if (!priv)
+ 		return log_msg_ret("buf", -ENOMEM);
+@@ -257,6 +273,11 @@ static int distro_rauc_read_bootflow(struct udevice *dev, struct bootflow *bflow
+ 	if (ret < 0)
+ 		goto rauc_read_bootflow_err;
+ 
++	/* Only touch the environment for a device with a RAUC system */
++	ret = distro_rauc_set_defaults();
++	if (ret)
++		goto rauc_read_bootflow_err;
++
+ 	bflow->state = BOOTFLOWST_READY;
+ 
+ 	free(boot_order_copy);
 
 -- 
 2.56.0
