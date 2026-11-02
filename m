@@ -2,164 +2,171 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A9F6606A324
-	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 05:32:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51CC8606A324
+	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 05:32:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=yRVlr2R2;
-	dkim=pass (2048-bit key, unprotected) header.d=elliotjb.com header.i=@elliotjb.com header.a=rsa-sha256 header.s=default header.b=RTvHWra6
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=mNb7rtci;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=x5RZhlfW
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CF94D405CF;
-	Mon,  2 Nov 2026 05:32:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 408BD405EF;
+	Mon,  2 Nov 2026 05:32:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bWn8gJnEs65k; Mon,  2 Nov 2026 05:32:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 09B3740547
-Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793597551;
-	b=cZYlGa7h1cZhcws+X/DPdvjuTVl3VeQSsiIGS1oPL54AS97mDOlucB6LRc5lpyvXN8Fz
-	 GcIrrYRE9AUXeqttg2l7Pwwkomi3WWoKg5bqkxhTVLxCNf2nqjbUHpS3gdOJGBae2OXSg
-	 //IUBtLxJ69x6f/zKdORRsOV4Ny8SSft8+xpVmmxi6Ia9bpU4EqmudUZ38s+w4FnrbF+D
-	 tbBu02RZ171MNe7cwxVF5N2rZu3SI4EeVDQhFUlp9PoEdVK2+EhNMae+sE63wuji/AQ/J
-	 qffUAu/bxpgidquBUanHTfEkc+SJGYgxCqlqyEz9U/3NOGj093taOpncHae8qtc/nvg==
+ id XVf8gHInAppa; Mon,  2 Nov 2026 05:32:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org F13EA405F1
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793597553;
+	b=syx3klKlm3bq4xKWNbiRXgOCAHX8Xs8lQ1bvvVFXmlE9+vnESqQdzVx5VzFACMsDdU5n
+	 swfA6QqWvF6JyEjOJrHrZ8BwIOAl1JU8VwmZg8rth+9IMp3uzQmTgYyvru9mXP2jy/P1C
+	 M8C6W0ltsLotGClEGbLzvTLMhCpcic0tYhB3BKzVM9ueAj/trNlAomipUj1EZSruDCu39
+	 PaYy51Zip3KIi+rYKqmri3TP1U0vmglRvLp1Ykk6bpf7I+57BwkRwFglrot9v8/7Vb4Rw
+	 J3a+Cx9Qf6YT2vWaks/Z8bDQe831ByMMSK8LuxxWNiQuiR7jtED4XWE/1JyRDkrUzrw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793597551;
+	c=relaxed/relaxed; t=1793597553;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Comment:Received:Received:
-	 Received:Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To:X-Envelope-From:X-Virus-Scanned:
-	 X-Virus-Status:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=cEAWRsSBb12HUI3zHFfpJxVAGL1P0yFzkgy0CN6iaO0=;
-	b=S3Op3fET6U0NUGeraBdfhd9vztSVTsDGTZPNIhsQK51sDN2UmZ7dV10PEVbcTygGR1dL
-	 d59943V8WNRUiKvgudaGSqsYem/1DyxXvb8D9ciurjtDy3VBt6ly6+nxw4HkCt/nTsNTY
-	 fUs8yJaBOEtB3sB7A6dbZhsJppdNn188U0BD7P+s2rwHIZcvZC1vlpuDsN7Kv07+uBqGr
-	 Joluks1LdzWbfXizHGwjyJpb2gRjzIOEf2t+NmjCxRhd6NFenDTOf0KfJROqjmhUR4n4H
-	 Uk8Mzh4VFvGvaJAY/MLIFi1yOrZH46p79zqPuULnkvR2QPZ7XtbOzn4ih/p4vkycDWQ==
+	bh=E2MLuBv+u9bTV/dCBgLtfuifzjW1PP2q7IzjY8DpXdg=;
+	b=jC7gj0wEmNiI3Ug78/22Kst3ZV8Osw8oE+8MFfS5I2UsOH5TOnj+HC60ez6UipIrDMkb
+	 oD0f8heRK9NxBfY6U5zjgmuCnlvnIkrGN3NJhFdHe0jpZDuJBCVb7z8ypDYpnx1HEG8np
+	 tP6XSVDFJW7YCaU63+5LK2xhEZUuNX886ae5XKbcfJSA4gY9nfpkIyLReax4014RUHzd+
+	 +xlhyxFBshj+WLTUdKTqOp9rvhKg9Xs8QpplpNzoAZkAHwc+VIxwsHkxildDYEmHT9tEF
+	 E5bWkhwQdiGx8yqomPoiE24pbcAmIn+7F5OE0ZfrhF/HsQQA1lV+7B88M29alD57BaA==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	arc=fail smtp.remote-ip=140.211.166.142
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793597551;
-	bh=cEAWRsSBb12HUI3zHFfpJxVAGL1P0yFzkgy0CN6iaO0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=yRVlr2R2WI4Rvc9YGBfubBW9SbBoSDPvGdCKLg2DaBgM7B9GZCxc8xDY9Y6HBycej
-	 T31lrfMFGLW6mosPthasXbImWlIYQK3rcHsiapZIHE5rNqXEHyOO2DIaDGMRSRXCUY
-	 NfvTcecrf+VDhGl+pBLGo9B6WR+V1+zyceKB8H8RJnFqBmpw9W+l8iBcPjLMQwCBF0
-	 OJY7dlY8dmxFoiSqVeoMla/d3DpkQZ4wZs3mljr7sPXG5mB5DZbSBDxhBctx765Lfn
-	 ZvXeGgkwectdPFSv7lkl1DY3sPpvpIsd1zAF44K+owd38uGje0McVqGP08Dr9uckso
-	 ir7vMTuqSSvZQ==
+	d=lists.u-boot-project.org; s=default; t=1793597553;
+	bh=E2MLuBv+u9bTV/dCBgLtfuifzjW1PP2q7IzjY8DpXdg=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=mNb7rtciHN9toAhYjNITbah1ojUNFiiOSDeswJyHpQmsww7lGXf/NA4LrrsYrAiXw
+	 M/II+vCJoQfSw4VsvhwxoRVkK0mivL+IX8kv4/3oXooPy3+mDkQ67wXDaHqsBJQ0N7
+	 Aktp2AkYkwqj05W8pakKAHc2MuRb+Cbvbkye5bS4c85mkutH1KlHzivfcEQ8AL/Irp
+	 EtxSCIMHv5D/UcWgo0kjvWZ3keVrEDpNTyFzMdELtdzK/0fyaRqav0Qojrkl93IK2B
+	 nKK+g9s2FMkxywuzx2OkMUewUdzn9oMHcCXKOLxQeI+27F50Of2X+syQixhVLVFiqK
+	 5ek3OPmQ12zrg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 09B3740547;
-	Mon,  2 Nov 2026 05:32:31 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id EEC42323
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 00:18:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F13EA405F1;
+	Mon,  2 Nov 2026 05:32:32 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 15797362
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 02:55:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E05116064A
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 00:18:45 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 11E1680D87
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 02:55:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FhbFYf6PYXFr for <u-boot@lists.u-boot-project.org>;
- Mon,  2 Nov 2026 00:18:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 02B3860619
-Authentication-Results: smtp3.osuosl.org; arc=none
- smtp.remote-ip="2a01:238:438b:c500:173d:9f52:ddab:ee01"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793578725;
- b=D0mIwVWfFnapoLn02FyYz4prMcqCYBqyLvMh1Sn2JCRJBXB5DofHVPeEaUaSdNK4WcgR
- NLjPd1TpsO+jYLrimvKd6rh4V0ozu6G5j/9bXEFN6ghLLTqHXA89K28omqEJJZFQXhWeL
- HgHZxVfzwd1KpxX/ygVALZmdUa3Ne6KnHzmULBfgWTqL0IrqtFtn9jas/KHtEnae3uMMD
- JSnQVMRESwX5BYcUFiDXc+/GYjHPxV7IZE3OSYaq/CPk46xSMw8QIMPllyotcICl/q4oM
- R9vOlLCqDDTgIA9YPuft4iq9GWqzRf3GLElMOcFcm/zzfbw7+3GVbED5l4L1WZUndtw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id S4weA9FmHN7V for <u-boot@lists.u-boot-project.org>;
+ Mon,  2 Nov 2026 02:55:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3C46380D66
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::72b"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793588153;
+ b=Y/cln6paYtZiDRUIsdM4qE3lPlKblEB+32k5CsQRQImHhCc7R+UH2dg7bGExR9z0WWKQ
+ dF6uE8cdgCHsqIjP0SgOs7asfR4QfmfiKJWAxMk3HhXzuTOJa4y+SRHscVc/O2LhF5KVa
+ 376i+WsIwdwb40anAfGeoSkUdxpuUh3S8LHHC/N/6sPvQ76xEKI4Cc2O+22ZbuRTM0iF4
+ hPUuftVjl8TMHyaxz8qMKs/wlFq0HWZ8bX6H/qVlLq3qTNzgrTbiJnYk+ze4ixUU0rcN/
+ X5jv4bUpA3fFS+O2xq8juwDx8mBX2rtuTKfZoJRc97Qw7MbaptFFfZ7DSJs7V8jwh4A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793578725;
- h=X-Comment:Received:X-Spam-Checker-Version:X-Spam-Level:X-Spam-Status:
- Received:Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
- References:MIME-Version:Content-Type:Content-Disposition:
- Content-Transfer-Encoding:In-Reply-To:X-Envelope-From:X-Virus-Scanned:
- X-Virus-Status;
- bh=cEAWRsSBb12HUI3zHFfpJxVAGL1P0yFzkgy0CN6iaO0=;
- b=HmOr5HBCab8NQOtN++7LC+VQJYhMrl6gQN6DPqaM6UdYhDTcFPAttd2DFhLM9LhLULo4
- iPUJHC4sVjggmeyCjOlq4JwgkIU5K+Yiel7nKOxv/ZR4JoJyUGCfmFg5s7YQUqI58JikN
- kD3fvwT/GpbrPG6GqtMdf+h0UWAwRHQkz74/8zXv8H3M0LOIrGjM61syeuvX3gBV64gsA
- CdVOouRdq2ked5p6x1TiFu/pBwPctU0oH+H2QRWXuBUIFkb+9VcJm72VBcrr8jdOBdpzW
- 46135pORRrjhCgxMUCYZDX0ilsncKEkEcllJK3lzDx8CfPjGBKb7GVPiz4q9ZJsiRnQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=none header.from=elliotjb.com;
- spf=fail smtp.mailfrom=elliotjb.com;
- dkim=pass header.d=elliotjb.com header.i=@elliotjb.com header.a=rsa-sha256
- header.s=default header.b=RTvHWra6; 
- arc=none smtp.remote-ip="2a01:238:438b:c500:173d:9f52:ddab:ee01"
-X-Comment: SPF check N/A for local connections -
- client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
- envelope-from=elliotjb@elliotjb.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none) header.from=elliotjb.com
-Authentication-Results: smtp3.osuosl.org; spf=fail smtp.mailfrom=elliotjb.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=elliotjb.com header.i=@elliotjb.com header.a=rsa-sha256
- header.s=default header.b=RTvHWra6
-Received: from phobos.denx.de (phobos.denx.de
- [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 02B3860619
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 00:18:43 +0000 (UTC)
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1567F83E76; Mon,  2 Nov 2026 01:18:41 +0100 (CET)
-Received: from out-93wp-a34.jellyfish.systems (out-93wp-a34.jellyfish.systems
- [104.207.68.34])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 967A983108
- for <u-boot@lists.denx.de>; Mon,  2 Nov 2026 01:18:33 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=elliotjb.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=elliotjb@elliotjb.com
-Received: from mail.privateemail.com (unknown [104.30.160.129])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mail.privateemail.com (Postfix) with ESMTPSA id 4jHsjs6wqlz2x9J;
- Mon, 02 Nov 2026 00:18:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elliotjb.com;
- s=default; t=1793578692;
- bh=cEAWRsSBb12HUI3zHFfpJxVAGL1P0yFzkgy0CN6iaO0=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=RTvHWra65rYG6aKI7MnVuP2SSnb3cR2xAs2TKWCMTc7gbsSIiepFitgyEqm5fVGv5
- 1kyWzoKMBPpNWNHi22B+W64g77442OM4xztQuWGpXXIDwF+PsKQptepYG1m1uMpAqa
- Ftu76/LJEewFmW8ToSU9N22Ujkn8ySYi+F2mD9BaI8OpWZaZrSdbhcEhRCk+QVkO2d
- mATUC4sOlJ53cppiJ/z9ahV6IW0kfkzlOzXxRio/+V2HG5y9HQtEWxiAW6UhtynLXu
- 34w3RyWtbJHcwnHdS0JgjwSP6jx2nSx5nPZsddZYll6Rhsmp0I1nnHlY48fTbMqr5Q
- 9yovUbkCktFMw==
-Date: Sun, 1 Nov 2026 16:18:08 -0800
-From: Elliot Berman <elliotjb@elliotjb.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Elliot Berman <elliotjb@elliotjb.com>, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Alexander Graf <agraf@csgraf.de>, 
- Kuan-Wei Chiu <visitorckw@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Max Filippov <jcmvbkbc@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
-Subject: Re: [PATCH v3 4/5] docs: emulation: Add qemu-x86 documentation for
- running as flash binary
-Message-ID: <aufWIbYhzVtFXpXF@eberman-5690-nixos.corp.anduril.com>
-References: <20261016-qemu-x86-pflash-v3-0-068014a671f3@elliotjb.com>
- <20261016-qemu-x86-pflash-v3-4-068014a671f3@elliotjb.com>
- <CAEUhbmUVmnQB=osPuc1CfDPRU37WTEAYJiw5sTb5EgZkem-XrA@mail.gmail.com>
+ c=relaxed/relaxed; t=1793588153;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+ From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+ Content-Transfer-Encoding;
+ bh=E2MLuBv+u9bTV/dCBgLtfuifzjW1PP2q7IzjY8DpXdg=;
+ b=eB2zZVylvxJnSB2sUfO57hfU7nNzubsEaOYlSLKmjm4gih8TIORRTFGvn3uuIKqEHASj
+ QBLnVwlzyPTwQ77mJjzAArSe0WldygJsiaBtjIN7HqcilI54L9luHhiK+YDZYJgXMAC6D
+ SlkwU6uLh2BRvFc6YT+uff3Ljs8FbcMViWkFyBtlGblROABInMsW2QzAv/Xxa6V6KneRH
+ nzAH1bhmG3jDoxuDFtGNasMc7n3nrjgW2I4HNgTF2eIfQ1gxTheSultqOF3hYVHErlrgO
+ OuCYjeSsl6fnPwQWkbH7IoKrTkzRga0NClaiFhKT4cn+kcSg5WnKCj6YFxQxnN7sMsg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=pass header.from=gmail.com;
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=x5RZhlfW; 
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::72b"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::72b; helo=mail-qk1-x72b.google.com;
+ envelope-from=oss.patchbox@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20260707 header.b=x5RZhlfW
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3C46380D66
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 02:55:52 +0000 (UTC)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-93f2b8cf037so221665085a.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 01 Nov 2026 18:55:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1793588151; x=1794192951;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=E2MLuBv+u9bTV/dCBgLtfuifzjW1PP2q7IzjY8DpXdg=;
+ b=x5RZhlfWZZ+p7nHxmx2/PSXtU0Y+iBW3TkNTRRlM/JjmKLs+GsFlvizoR/LzJ36R8C
+ AW7b+J5RlrV+XweOuXf1LA75em7Z66wQdVLSYtbJF+A9zuMSPwNg6zSFBRrckg6cX/ls
+ 6d7V0qtZp4era4DIxFkXWDYys1NDtB1NndZ4coz0foakZJKt71YDfx5S9AHb6Ili5639
+ 8hYHKaiPQaP1L+cgSNh6qvS5nOvVYW9JbeU9/k5veBV8k3TRz5B+6yB2FIS+vRby3TSh
+ omLOgiSx8KlwM9cYLPLGymuj05NM7HpO8OjFyX5seWGU8Xybk4NQxaNmogwVMJrPSygw
+ SPLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793588151; x=1794192951;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=E2MLuBv+u9bTV/dCBgLtfuifzjW1PP2q7IzjY8DpXdg=;
+ b=ffoYTHf1aE+9t3B2LjixvqMrChaHIQO+fDrFuSh/HC+oU413z5Qv2+U6rWmY7wuHQ3
+ uD24Lme4y8j42f9cfLuPgqUkfzSXr32F3A3lhAAnrbSotj3CrXubXLLdeXmvrtPjLoBO
+ UAWMM++Jxolm7urLsmRWCp8czo2jLPqaK0JQfznADaaY1PIpHq2S63MgUt6er9UFHkHm
+ NF+rAV8maX2yeYWVbVuJGMiTkXaz/L0Xae/N4iwy8zKGHmVb8qi8iy5U4+qz1lBgnA+n
+ uY+kilZLRxFHJ8+O6JwN/UEgzqygfrassGPpeHc3Wu8y469XxOqqWTEAIasyeQ2H+3z7
+ 7X+Q==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBwV/lP/UQfoBB09Y4X5ZQN94Qo3JmO0EjRDhD+rnq1kpcij7JIIUhYex7Xpb5yh13nPrkP1f4U=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYLQZEeH5Lwoba6271ugG2PxRmXjUtGP5f4RZsfIQKyvspBOuByW
+ YgkI6auFJbSVzij9UkyFMbeaol/P9MxTgg70vkn7d0exrAXFD//ZT4a+
+X-Gm-Gg: AYBFou2FRN2Lfy+2BvhLU78mNF29CvFIVRn2SmQH3YCTM90Ks0bJhqH8qztMjYAX6I3
+ 9PFqaC3ILe1h7qpDKezEjhpXCUY/vwd17svGC7mT36P90wZr34/kjtXdBvlBFsyVtSmKzMtsTfU
+ M5rXX1gO9F8Bw/+ZXFY+W2IGd8WoMT3IxiYkFAdCKWVeonfuhFDHq9s+tgecSzD6pMaNpby+/rR
+ oMgDIKpqnxOifRAhmIhgIluk1BzQv9A4RjvkO0M652+MH3G1pC3NKhvpGlmzHMuSVyYTduy9W4P
+ vqfQ+HHM0Yqs16h+oiclm2/+yFunwCmGtaurGUcVnQJHCNa1EVw06J5gcViPhq8AMMt+zMmDPbz
+ 53KciO/Swa/SzsJPwT01IVWGWQJiemKVd1XP9eyEbdBhdB9tNgtL07axBx2tZyYFQosN8iVlheH
+ s2x8BLTXnQzYUvqQ/y9ZjixxIhGa0qxhmV+xE95vLSQhff8AVD6zNUonX3qdIOCdaYXPXktGYA8
+ OJ6f3ug2U9MLSI8OcBGf32sw4TUP/LPBpuXRnKUxvUHpRf+2xm/P+guO7fjHBvTqOkys7PuOUjQ
+ 6csnIhqViZ2jOfj8M1PaYoB2LIK9fgL82tnl+6mDyyU81/GhMZfxAaim7rn+e38Apk4fTZkozA=
+ =
+X-Received: by 2002:a05:620a:3954:b0:93f:35fc:5266 with SMTP id
+ af79cd13be357-94421744be3mr1501369585a.44.1793588151451; 
+ Sun, 01 Nov 2026 18:55:51 -0800 (PST)
+Received: from i4-gl-tmk5904.ad.psu.edu ([130.203.156.186])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-9442584f028sm725948485a.17.2026.11.01.18.55.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 01 Nov 2026 18:55:50 -0800 (PST)
+From: Yuho Choi <oss.patchbox@gmail.com>
+To: Vignesh R <vigneshr@ti.com>
+Cc: Takahiro Kuwano <takahiro.kuwano@infineon.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.u-boot-project.org
+Subject: [PATCH] sf: dataflash: Don't free the SPI slave in the probe error
+ path
+Date: Sun,  1 Nov 2026 21:55:42 -0500
+Message-ID: <20261102025549.257639-1-oss.patchbox@gmail.com>
+X-Mailer: git-send-email 2.43.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAEUhbmUVmnQB=osPuc1CfDPRU37WTEAYJiw5sTb5EgZkem-XrA@mail.gmail.com>
-X-Envelope-From: elliotjb@elliotjb.com
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
 X-Mailman-Approved-At: Mon, 02 Nov 2026 05:32:29 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -170,89 +177,79 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-16.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, Oct 28, 2026 at 08:55:26AM +0800, Bin Meng wrote:
-> On Sat, Oct 17, 2026 at 5:19 AM Elliot Berman <elliotjb@elliotjb.com> wrote:
-> >
-> > Provide guidance for testing capsule updates on x86/x86_64.
-> >
-> > Signed-off-by: Elliot Berman <elliotjb@elliotjb.com>
-> > ---
-> >  doc/board/emulation/qemu-x86.rst | 39 +++++++++++++++++++++++++++++++++++++--
-> >  1 file changed, 37 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/doc/board/emulation/qemu-x86.rst b/doc/board/emulation/qemu-x86.rst
-> > index c604e42990e..d40cc500994 100644
-> > --- a/doc/board/emulation/qemu-x86.rst
-> > +++ b/doc/board/emulation/qemu-x86.rst
-> > @@ -113,17 +113,52 @@ sure the specified CPU supports 64-bit like '-cpu core2duo'. Conversely
-> >  '-cpu pentium' won't work for obvious reasons that the processor only
-> >  supports 32-bit.
-> >
-> > +Running as flash binary
-> > +-----------------------
-> > +
-> > +Running U-Boot from emulated flash lets QEMU write a new image back to the ROM.
-> > +This allows EFI capsule updates to be tested. To create a U-Boot binary that can
-> > +accept capsule updates, build qemu-x86_64_defconfig or qemu-x86_defconfig with::
-> > +
-> > +   CONFIG_EFI_CAPSULE_ON_DISK=y
-> > +   CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-> 
-> On x86, the linking of u-boot.rom failed due to address overlap (with
-> gcc 15.2 on Ubuntu 26.04)
-> 
->   LD      u-boot
-> /usr/bin/x86_64-linux-gnu-ld.bfd: section .rel.dyn VMA wraps around
-> address space
-> /usr/bin/x86_64-linux-gnu-ld.bfd: section .start16 LMA
-> [fffff800,fffff86f] overlaps section .rel.dyn LMA [fffdfd78,00000c37]
-> make: *** [Makefile:2131: u-boot] Err
-> 
+When the legacy status byte reports a density code that is not handled,
+spi_dataflash_probe() calls spi_free_slave() and then spi_release_bus()
+on the same slave.
 
-I wasn't able to reproduce this on commit ee9fc27f2a2 ("cmd: mdio: check argc for extended mode") using gcc 15.2 from NixOS.
+spi_free_slave() calls device_remove() on slave->dev, which is the
+device being probed. device_probe() has already set DM_FLAG_ACTIVATED
+at this point, so with DM_DEVICE_REMOVE=y (the default in U-Boot
+proper) the device is removed and device_free() frees its parent
+private data, which is the struct spi_slave. spi_release_bus() then
+reads slave->dev from freed memory and passes it to
+dm_spi_release_bus().
 
-> > +
-> > +See :ref:`uefi_capsule_update_ref` for the full set of capsule options and the
-> > +general update procedure.
-> > +
-> > +Instead of the '-bios' option, attach u-boot.rom as writable pflash with
-> > +readonly=false. For 64-bit U-Boot::
-> > +
-> > +   $ qemu-system-x86_64 -nographic \
-> > +     -drive if=pflash,format=raw,file=path/to/u-boot.rom,readonly=off
-> > +
-> > +For 32-bit U-Boot::
-> > +
-> > +   $ qemu-system-i386 -nographic \
-> > +     -drive if=pflash,format=raw,file=path/to/u-boot.rom,readonly=off
-> > +
-> > +Generate a capsule with mkeficapsule::
-> > +
-> > +   $ mkeficapsule --index 1 --guid 5bb9ce0d-a389-456f-83a8-2bdfb8ad01a1 \
-> > +       u-boot.rom uboot.capsule    # qemu-x86_64
-> 
-> Please use u-boot.capsule as the file name.
-> 
-> With gcc 15.2 on Ubuntu 26.04, the generated x86_64 uboot.capsule is
-> about 2.1MiB, which slightly exceeds the SYS_MALLOC_LEN.
-> 
-> as the malloc(file_size) in efi_capsule_read_file() reads the whole
-> file at once by allocating the size of the capsule file.
-> 
+This happens when the JEDEC ID read does not return the Atmel
+manufacturer ID and the density code in the status byte matches none
+of the supported legacy parts, e.g. 0x10 (AT45DB1282), which the driver
+does not support.
 
-Ah, thanks! I've mostly been testing by applying capsules using
-EFI_RUNTIME_UPDATE_CAPSULE support. I think the straightforward thing to
-do is use `efi_alloc_pool()` instead of `malloc()`. With this, we'll be
-able to allocate more than SYS_MALLOC_LEN and able to apply capsule
-updates from disk. I'll send this out in the next version.
+The struct spi_slave is owned by the device, and device_probe() already
+frees it when the probe fails. Drop the spi_free_slave() call so that
+the error path only releases the bus. The add_dataflash() error check
+used the same label. add_dataflash() always returns 0 at present, but
+point it at err_jedec_probe as well so that the label can go.
 
-Thanks,
-Elliot
+Fixes: 11b93228a7c5 ("sf: dataflash: Fix add_dataflash return logic")
+Assisted-by: LLM
+Signed-off-by: Yuho Choi <oss.patchbox@gmail.com>
+---
+Tested on sandbox only, with a test-only change (not part of this
+patch) that adds an "atmel,at45" node and forces jedec_probe() to
+return NULL and the status byte to 0x10. Without this patch, gdb shows
+device_free() freeing the struct spi_slave before spi_release_bus()
+reads slave->dev; with it, spi_release_bus() runs first and the struct
+is freed once, by device_probe(). Not tested on hardware.
+
+ drivers/mtd/spi/sf_dataflash.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/mtd/spi/sf_dataflash.c b/drivers/mtd/spi/sf_dataflash.c
+index 9094e008f60..3651a585f7a 100644
+--- a/drivers/mtd/spi/sf_dataflash.c
++++ b/drivers/mtd/spi/sf_dataflash.c
+@@ -647,7 +647,7 @@ static int spi_dataflash_probe(struct udevice *dev)
+ 				info->pagesize, info->pageoffset,
+ 				(info->flags & SUP_POW2PS) ? 'd' : 'c');
+ 		if (status < 0)
+-			goto err_status;
++			goto err_jedec_probe;
+ 		else
+ 			return status;
+ 	}
+@@ -696,13 +696,11 @@ static int spi_dataflash_probe(struct udevice *dev)
+ 	default:
+ 		printf("dataflash: unsupported device (%x)\n", status & 0x3c);
+ 		status = -ENODEV;
+-		goto err_status;
++		goto err_jedec_probe;
+ 	}
+ 
+ 	return status;
+ 
+-err_status:
+-	spi_free_slave(spi);
+ err_jedec_probe:
+ 	spi_release_bus(spi);
+ 	return status;
+-- 
+2.43.0
 
