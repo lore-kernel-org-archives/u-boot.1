@@ -2,203 +2,205 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38E6B606A326
-	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 05:52:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D13AA606A324
+	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 05:52:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bXz22PwI;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=j/1dEebb;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bY70n/R+
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bBN9Ax/Y;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VieMl3ac;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TJP/mPpI
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F3C9940693;
-	Mon,  2 Nov 2026 05:52:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A42F4406E2;
+	Mon,  2 Nov 2026 05:52:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mcK8mem6M5Rs; Mon,  2 Nov 2026 05:52:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 1A0AD405ED
+ id HFSIdamZNDOC; Mon,  2 Nov 2026 05:52:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C12E2406C2
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793598756;
-	b=FFksNi82zGo3qUj1fcLqK0CW/ECMvbmSb7gfBcNEw/nHRyJkTc1r/eUnTyZ7qwybHaSW
-	 JSzILgnhcdT0suExzhmlKNYW4z5OjWKKdWOGpDwaqwmcvo+3W8mY9qiJ4o3O2TbFRjMtI
-	 zB0BLsg1APwkLaqJudW+mRt68pAmnEUpMwcO3bBayjP9EvAh+HKFC4ZzYKfD6Pn9nqLG0
-	 ALLxGae5wgKeN7p93Nz5dyVT0UwBAFcESk6MfyOWGwgW8B/D7i8CRBzFN7sbPh0URJG/i
-	 yS0aY3anDonyoD7Ojli0VOwiT7+ZJ2+EKJky+LawvYvhb0MwGxBxZfRRteWsVt5rCrA==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793598760;
+	b=QxrVX/7brgNM6s0TaAOnyYxvnhvmPtwgQ6tuXPUDe/3GEEzydQxrENv4UAAgRAnlnCBH
+	 fHSUSNhyopQvOVOWLt9Zu+6thWk2RepBmfBAJEv/aVQrqrMDdxziSGA9AfCg46pDJEEEE
+	 ELG9/YKI/zom41NrnPflwV8N/heN6oiuyC1uXFwKKnZlLNppeWLz1dEntaRU3l7c+ON6E
+	 1vIiSLnff3scJFi0xE+/kMegPjMprYKGx4r+PDch4ycRHzzWBvPyz2NmOVKesaUsXGHvA
+	 +vh9cQA2yTVk0o+gLZfE4bmoro9XlFonwu4+ddIyCE2DSL3rzjU0BISxqRZTHjy1UPw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793598756;
+	c=relaxed/relaxed; t=1793598760;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:Received:Received:DKIM-Signature:
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:To:Cc:X-Mailer:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=hNqixf2OBM/WK4ayNFlj47umGz0vK2TYZks2HNrjOV4=;
-	b=PAfr/gxjy87aLNKefxrPBbwTOzBjltcgHgtBKeUCe0M5NyMlPkYdLPwKmaOBAWF2lRjN
-	 1AU6z2Xo3njAWrnMPgAI1B9Gon2i1usGoQwZB62YWCi0N0vOiiR0vzcMdXeiGKd4/D/5L
-	 9KFbVPpTCcddBxyk2edA9l1/krIepbpYtY50fNDVu6Rapd+3Dh+4nQneSaFBiEMUdWtFh
-	 ydo9VDcozD6Pkr7xl7+ZhEQbiLP3/6Qz62BZxJTs/o2AC3Ri9F6Pwgo1LVuNv7rN1W1wW
-	 PTBAaTjXXAB0PidX+jXbQNzzquyVrQga0fDnL9/TfL4yB6c0/HBPJfO7gxEE2yItoYw==
+	 X-Gm-Gg:X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-Spam-Details-Enc:
+	 X-Authority-Analysis:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=uHuPpXbWUarYKkHmWMWYXThH2ErRJoj3FkMrz5Xow64=;
+	b=BnJkjp8VtBDq/+EtKe3fifnz25P6EdyvaC7GetoqG1Bd033lBRkOykKaUiRtY4/6X3RB
+	 9IL8Vc7apbVd/RM2Y5boaE/7I7rTLu7gEZ8qLCHAGtbLvYU9Lg9FwEMLUiBo7osJylf8+
+	 jt6/JWyaESGkustfsndZ2qGMvyBdVcLiIXUYp6dmAEfwFVK/42JTy3iub4nxXgPKI5K7O
+	 viNspqbI3UF0TwSUCxDh/u2ClVFJNxI2WrMkot5uG2FyKzCEetAjpvorzo7Mvtby2vcsw
+	 j1/+biJLoffCjdPr5J+VovL3kgQTtDt0IhVTOzb2yYpxOkzJ9QM56Zg1tKhsVrFPXYw==
 ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="j/1dEebb";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="bY70n/R+";
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793598756;
-	bh=hNqixf2OBM/WK4ayNFlj47umGz0vK2TYZks2HNrjOV4=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=bXz22PwI9/loIpcrmnfc6ii9C20i7pZ6DHvSdrBtFI+4ynoZN1mU4wz7rZH7Z/u/6
-	 GDCdWWtuTeaLlAFdPX+2uMWGsiE3F+2C8dpWWKUM3jbgYTdR4YsuPzkcg1c/5LiI1P
-	 dOHJOix8JmDr0tswPjY70+yor+KISF2iDRmQUh5BrQsOKxiQYwcqCtoVZyeoy571Hp
-	 H6Qx1hpO+tTzeBoRVkk9x21VGdPK+V85mt1QsJoKhnZQj7XVkTjlHGixhewSFjnmL5
-	 BkDIDbVQQSic2mRCn8RNTVSGLFkiCwx/JdJW6LqTlGfO4tkPopPd/OW3tt61e2QQJ3
-	 xc46uxq+RY9gQ==
+	d=lists.u-boot-project.org; s=default; t=1793598759;
+	bh=uHuPpXbWUarYKkHmWMWYXThH2ErRJoj3FkMrz5Xow64=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=bBN9Ax/Yx2YY/ptWlKyRgtyNo8Fdt/pYwa1R4StUEd7BeKGaM7F+N6mxn5HTq5fzX
+	 n7JTKHv8p7LWhWBbICgTE6R4nSo9TuvF/NQ2rGeWkR+ToZvBF2ysJcp6lzHuvwI2Uk
+	 yuLQUgKiATXkkq0WcFwtPNmPrqnRyQfuBb0vKv8ftCod4dSK/A/wYUfG8DHEKTUjop
+	 0OwCQYxmmG/K50pDWmhAbLIOAIgCoIXBRhRJHaz38BruoShcLW0szIxYxp5PzS11hH
+	 HTMtgogLLKpMe0m+5FFSVqYCqDCRYSTiZ0rRss8UFCX+t0j58io0ZKVBG18F01b/eJ
+	 Y/Qq1CwNwR7MA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1A0AD405ED;
-	Mon,  2 Nov 2026 05:52:36 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id F207B2A8
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 05:52:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C12E2406C2;
+	Mon,  2 Nov 2026 05:52:39 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8BFF7435
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 05:52:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E3199405ED
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 05:52:34 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7D3D240112
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 05:52:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JOmz9y-rvZX3 for <u-boot@lists.u-boot-project.org>;
- Mon,  2 Nov 2026 05:52:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 02F6A405C6
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VAP6RInrwyXo for <u-boot@lists.u-boot-project.org>;
+ Mon,  2 Nov 2026 05:52:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org CCBFE400C8
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip=205.220.168.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793598754;
- b=leXMgFb07xg9YJDCjLTmH0gk+E0MF+nyReuugMkiSZ2woPtqXeqUWs3suKHwxDjdVhxH
- tt8cHhiR46+a7HuVz6+gXj3VBqbbFJpLqGXfEL2/uVWJvsdyjsJAJsQFxGQJ0TXQH5S3K
- to8uQG1fGLC2N7F4UBPt6/1dMJm0s9bUwHNq2zC4YFoqr4pLIGJPEOmvtTQ5PQfMzvCBN
- bKc8vy6s52MCX4LeAvpekMA1mHwYpzRdxjExW1Ju0b1nkRQQCeln09GCIM1mHDEIEdzgO
- bNaK310YLVMDygjnchOCzAqroqR4VXMazMOtBXEj/KxR1s/iaV+Ehb6xDFuXnjHYo8g==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793598758;
+ b=UtktshDVPkF32D8gEyMMBSetllaVOiUw1S3Fnz2GDz+0UdVPIocUmhFn08/SM8+8RPK/
+ svali98EDJl0ixkWzrgc9HQYKPjfczUPi01VapIdqboFMjE99WTz5MzyELavCQyy5GPGI
+ MgSwW6mgo3am79ifa4BzNL6mcJpM3qbz+2E4QuVMOyE1I1fWCwl+P9vVAbWu5mcoHY0Uu
+ 5JfS98gLAhu5HNOwn57aU29OXwdZa/Fx1gw1f4WzQTw4ek+14ky9ue5Hkrmy+FZF1Wcq+
+ xgaHONy5uw9HPGCOPUQl3LHEHj2BxfD1lvdYZLkP9oXpODfViB0RcC6R+5xLlfvrozQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793598754;
+ c=relaxed/relaxed; t=1793598758;
  h=Received-SPF:Received:DKIM-Signature:Received:Received:
  DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
- X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
- Subject:Date:Message-Id:MIME-Version:Content-Type:
- Content-Transfer-Encoding:To:Cc:X-Mailer:X-Proofpoint-ORIG-GUID:
- X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
- X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
- X-Proofpoint-Spam-Details;
- bh=hNqixf2OBM/WK4ayNFlj47umGz0vK2TYZks2HNrjOV4=;
- b=PdIF4Vow4Z/cnawqPvXtErIN9zDAGbX5fRTB0rBV9F4hsMeg7D+dO0KXDPU4LpWoP2x6
- egaewr9gkp5V0tDZDG2YA5/rj9xeIb/kjx5d+r5SOfOVQ9jFb+mo6SkfTZ+y4rkmL122c
- f6RCdPZwda3WNMkclS2ELpOyYx7dY/uOicoan2i0hkuUsF/thuOL8feigNv2xQATmEX8G
- weIkYkNGLn/ERm3zgf/4T3LCjeAcY1ktXJ/a4Hr7ZAd9TOSXBOphHLa/gmmKmjrzgbBJL
- 8K6gIGOcoX0v5cFYoDBXeNuWSAHfKHeH/E0gCaUgaePopM+Po4jldBb0sBFsvTLFa9g==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+ X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+ X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+ X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+ bh=uHuPpXbWUarYKkHmWMWYXThH2ErRJoj3FkMrz5Xow64=;
+ b=G1JdIiz2sk/Xefyn0UJ/nVvSSiQJeJYe4H66cirRmWfu/IgFoO965ffBfpJ7JUorC4Eo
+ 2FoGwRYJmF+aG71lnHDxaG/5qgxBGF/GZlGfd1GpLx/XtiB5CIq3MZhG9nGYfbZN8buvM
+ dQLRD+oSK5pzdy1/zN9nJZ73VCpSnlesBf2id5NpaQSqOD84VG0QjTXUjzrTU1S44ImPb
+ qabXJND3VJLX7Yo8tsd/Qi83D3Mhfl2yxIEJz4gC8gEFroJIQEx33I8pItsgyF+OjcMSg
+ ieljCf33ivI4I9nxw4FervMvXuyfrgO9xTM0rAXvLcnTowyXAEfUM9+UEz+vykXlKyQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=oss.qualcomm.com;
  dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256
- header.s=qcppdkim1 header.b="j/1dEebb"; 
+ header.s=qcppdkim1 header.b=VieMl3ac; 
  dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b="bY70n/R+"; 
+ header.a=rsa-sha256 header.s=google header.b="TJP/mPpI"; 
  arc=none smtp.remote-ip=205.220.168.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
  helo=mx0a-0031df01.pphosted.com;
  envelope-from=varadarajan.narayanan@oss.qualcomm.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=j/1dEebb; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=VieMl3ac; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=bY70n/R+
+ header.a=rsa-sha256 header.s=google header.b=TJP/mPpI
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 02F6A405C6
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 05:52:33 +0000 (UTC)
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id CCBFE400C8
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 05:52:37 +0000 (UTC)
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A24wCx91262393
- for <u-boot@lists.u-boot-project.org>; Mon, 2 Nov 2026 05:52:33 GMT
+ 6A23vUXH2192519
+ for <u-boot@lists.u-boot-project.org>; Mon, 2 Nov 2026 05:52:37 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=qcppdkim1; bh=hNqixf2OBM/WK4ayNFlj47
- umGz0vK2TYZks2HNrjOV4=; b=j/1dEebbz/9kTda6yhc7n1kfesaA8W0264Vu6O
- YGvtxToNeJq2skARWlravyts8kQapWX1yNaIePwv4LJplP4buJGrhP7ma+iceiH0
- VjLhHuHQUHWjmMCBAeDmktEWgAgovJfvSWLhkjOfLAA3VWWSnEDFqjIlIhcIPcvz
- wyLUBg022V4GGhe7lB8cqytrFBTTooewiNJoxKyGUZGWGX3jFvNfkZovivwReRPm
- VweJTjhUhlglGQ4BJgVejTlTyDInROJZrf6106A22qe9HPyEL9qsr36Z7GyGZ3RE
- tL+9kEiL6L176KTJUBnnNVOolEvUV8HvBKrsoonA0qwLZ3Jw==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
- [74.125.82.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hpky4g4xm-1
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ uHuPpXbWUarYKkHmWMWYXThH2ErRJoj3FkMrz5Xow64=; b=VieMl3acgq0O+ZZL
+ 6k1/i3UztvzEscy9juoqQmvYbtiPYkdRCBZtnAz4wTie343k7sefWJrB8YXbni9I
+ sHsB+G6AEUdPnS32X/oBG1U/HSYxQXRwff66WPt1DOyxx29FVdAI8B/3uKbv/wi2
+ nsMU5JkSJqnFSce0u5qoPtmIQ0QgAHRkzIk3K2gIXlllnuVGgZY1Rk7pamX+P0Fs
+ 0WPS3Oq9kAujQ5Os9xa3FUV0WAwG8fWI446cM4j3RlwnrdkGSJRZ9hfkuAeohOas
+ GvYcuet0cHGtTZ77OWT4ndb5Z1V4xYuLpqzswpUk0Fg6V1mLcHD5p3R1DHcJkgwV
+ WsWDEg==
+Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn93en6pw-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Mon, 02 Nov 2026 05:52:33 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id
- 5a478bee46e88-36a223755e4so11530804eec.0
- for <u-boot@lists.u-boot-project.org>; Sun, 01 Nov 2026 21:52:33 -0800 (PST)
+ for <u-boot@lists.u-boot-project.org>; Mon, 02 Nov 2026 05:52:36 +0000 (GMT)
+Received: by mail-dl1-f72.google.com with SMTP id
+ a92af1059eb24-1383723dfddso3741781c88.0
+ for <u-boot@lists.u-boot-project.org>; Sun, 01 Nov 2026 21:52:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793598753; x=1794203553;
+ d=oss.qualcomm.com; s=google; t=1793598756; x=1794203556;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=hNqixf2OBM/WK4ayNFlj47umGz0vK2TYZks2HNrjOV4=;
- b=bY70n/R+bcykWZYLMzQK6Y602iAgO95tsF3whUFjZNUVatOOMYKG4VebVxFt4sfLgS
- UMMRONijz/sbS3QRDBkH8Fx23jXUkpADTsDx8968IamYLAKi15sgryA1LtO8XYA9fld8
- /lZHupexB5nxnHxx6z5RdaniLeHYFH8/5/v3PL38e+At5rMRVwo8EOVSRGPzJtY2XNal
- vWYmG9TLh3JYooKd4PeQ2XhHU42N1apH/pwqnnHYZ369C+Wzo8JdScj9+rQUYc/LcPWS
- 1GPQp66RIXVdrro3M31v9n3xaSPhJWQHmbghPh0UbDRmYsXUBcAY2t2UfMQp+LQsKT0x
- mG0Q==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=uHuPpXbWUarYKkHmWMWYXThH2ErRJoj3FkMrz5Xow64=;
+ b=TJP/mPpICTlLZ9jnwz2siSezAtmzXezH2kDc6lGmwZXMqcugNiqbkEcTnWg7Kto6Zj
+ TFXrxwQe4QG6p9CUwLZKb/aM7cBoyjhp+bFvQTx8X7m1dszxrh93XMvj95IMNYAnOwLh
+ Mt1TWnPuTo15s7uSR4YrSmdwiAg1GKpLgLnAz5LBTBb15RRd8WhSb4cDxjYW9Qt47qul
+ oiwkd2cnjbyalYgZG+hPDTplSI+jBlElGZjPhsGYNIQzRi8OZ+7PbzJmdqTKG7AWnGLO
+ kwuxwg1dHsQRYboS1G+774Rh+VSSC9fCv85tOUw1E9H57HQzs3RB9Qb5LPeER4ISlxqy
+ Kfog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793598753; x=1794203553;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=hNqixf2OBM/WK4ayNFlj47umGz0vK2TYZks2HNrjOV4=;
- b=zCMlLcrg3Wg8tQjMK43B/g6rflDYDUsfgc4WKHjy+BflVx4sWWiVUFJFn1U+XS3cig
- zeCmy7UrNufDQDh5gvIydukCEis2WEROkQ6uBSnCBuwMPRa30WW5p6mOiDfWqTZ82kHo
- MjQWnhWs3kb0IoDx3ucx4hlwnn8rsCEeWikUB2uVI1tIBLdtAxH+kfZcXsjdVa2xFnZL
- UjmzXJSIAOafZRgsxIKN65AelHTMcExvDBJ10lVGPlSNAKqSpevuFgssuQ57ADHUk91j
- Ijd3rTFfnPpmeUJubb62+k+3ZJKmmYPl+PEVQX2irqWDd94PSvLqAktkJGJJXFXPwQsv
- jwig==
+ d=1e100.net; s=20260707; t=1793598756; x=1794203556;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=uHuPpXbWUarYKkHmWMWYXThH2ErRJoj3FkMrz5Xow64=;
+ b=DWHv7yxlyI9LDS983EPw47ZpUuQvcg+7Uq6QnxYze4auOyHf1DxjhWo8nfVsSt5rPi
+ rVuBWVssviQZzW75uolJEO8IZAQ8IYpqBpj10SY0BxiDCH5e0zup1u7YnXELaypgNuDO
+ kowfRjzIzueQzT5q8TfxvAVBibLYsm8Ne+z5fa2gkLgUTOLP4h+dQed4q7AIREHJjmhJ
+ 9M09gMHCpeMPlGzpzWCy/xJMsr/Q2yf56QwguhVbs8ZupoquQn5nYYDG1iuqVWe2ffiu
+ 12Cu5j8TuXc+PSp4Qe9iqWserNxt5JScDjESGukeDxXxzYdoFXnBMXt2zPa8buIqvgxu
+ sgnQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwGXpwpoIIgnVGIImSAW8C8846EcZ65I/sZh7+AUA8P3e531rydVWu5UKjhGT1IjP8ydUfCdW8=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z92T3+ehWTX0HNK+14weTxGl/aXC8NS2UXF8EAWYywEp3PY/YBZ
- 4P5vvw4jv8tA/tvTvlea7/1bcgFhas4+I3BwBD9oLpTGt+KXLDTMUIwVSTDTYqSsWjS3TBt9OW0
- ZjWTtrHtpm62ee4epR1BL6Mstjs0aJug4ONQXl4BmphacxY/NZtXE/AN+csWmaERHFOJ9SSU=
-X-Gm-Gg: AYBFou0Qdoqj5rWA4aLvlOkY7L2UNl4CILwtWL6gQ+ntI6L7a92zd5+ftYPq3WZNZnD
- +GKOZIBLGpc0LZA6moKwLoQR2huQIDqJU/Fl+BSxrZYMZfAuO93zKAwxjOeAs8ceLWxULPdpbbf
- URpfl9LWiskP3SdVa4k8JqdyhVwDFUkz5IMUkrlpT8+wo+2jzV+4r2SnosyKPrXVGziV6KIbN4o
- cwtlf94HhZHODL5wSVgQLyDmIgHFDdev6c/peTS9K1mhVnK4Ezb1VX/IYLrVOpoxofgdNKkK0rJ
- Sf8D3ngtMVwBr3GuVNRJedLtaW86g9zR4U0058W/t2nsUKPh45WsyBrrwYwedcSnEVkh04yTJNg
- QiICz/h4/wbrYBDg8zs2oDYE2G83U7MoRSXmxyEQlK2bgmjW1c6h1IcpbrDK1MC/VvaZYqNieZu
- CW8WYzOSdUcKcFXKB/sdZMPi+y9A3MCX9zoV0o0RWpk+erH+GYHoKo0/+Vrf2x/IxHK7SldngE3
- dL5qA==
-X-Received: by 2002:a05:7301:7e16:b0:361:fd60:3cd2 with SMTP id
- 5a478bee46e88-36a4232bee6mr13632518eec.10.1793598752519; 
- Sun, 01 Nov 2026 21:52:32 -0800 (PST)
-X-Received: by 2002:a05:7301:7e16:b0:361:fd60:3cd2 with SMTP id
- 5a478bee46e88-36a4232bee6mr13632478eec.10.1793598751825; 
- Sun, 01 Nov 2026 21:52:31 -0800 (PST)
+ AKwUvBytvaixXjSFBzWTR5ebN98FBWDqHxDE+EW1Kt8kt+lKnPrm9iCvE+PL+BGNJppD3LFMEdWTCyg=@lists.u-boot-project.org
+X-Gm-Message-State: AFq9FYKQQGY3xXrrQ048vZdDEsufm74j5Z0A+w1h+uW/ZcWEU5Pkduib
+ SUgL5+5H6XEIlO4u0PjGDoPSAoc5GQsXQIVQcd4S7sLTBMZjNx0AZsMcnxXPZGBUIV7Zda2WKW+
+ Y5kepFBhylYwJ3Wk/85ljhHakUAKKDVG21lmAUniFKimyAUokWeUK00J5EMA5DFxvXWjPUUA=
+X-Gm-Gg: AYBFou0WNhtUSMBrs/hbdh0EUTkzHFQs0JvJWf5fC7A/2/cVrstEwMqtQQjM/zuwRg2
+ qwkhvkXLmhiieKvKUlcdNbj/qtRMqvF4ZOLukjKlk4CmPkvtaYttf7il1X87xfqw5nb1nykIXng
+ FtTpWtntKQFw+4ahHtTOJytgNVCQriw+3QU5747IvklXNNUWpqrdPkJplOq5OavCmlkFPER2CNE
+ Ivm4fUWJfJClVKhnqb3Ap//n8F8EVE0W6rHSaPR3xtwj+RD0TKh4ssiyD7IQMekc/UnlDnEnvla
+ uhN6FonaS3Z/QEkHLWBCxArSfn4prowj83AYxsPbcabP4HjBceJF5LWlIipl4w7OtkvRhPfc+Os
+ a2DRDGmL8e+WOPz5VFImhzLtmcLCwT1m6MW91ka0HhA5QJl7AscKNepwnVM1aMxGMPpdLSAy2OD
+ V6a9TSXiaqtVnLbCUSlEZaScDwN4bynjLxOtubW78PI35JsSmCUy9OaFzPpu8quCgmGbzxqnsHm
+ EdxSw==
+X-Received: by 2002:a05:701b:42c3:20b0:1b2:366a:e7d1 with SMTP id
+ a92af1059eb24-1b2366ae854mr1044008c88.32.1793598755980; 
+ Sun, 01 Nov 2026 21:52:35 -0800 (PST)
+X-Received: by 2002:a05:701b:42c3:20b0:1b2:366a:e7d1 with SMTP id
+ a92af1059eb24-1b2366ae854mr1043976c88.32.1793598755298; 
+ Sun, 01 Nov 2026 21:52:35 -0800 (PST)
 Received: from hu-varada-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-36a428af1dfsm35456366eec.7.2026.11.01.21.52.28
+ 5a478bee46e88-36a428af1dfsm35456366eec.7.2026.11.01.21.52.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Nov 2026 21:52:31 -0800 (PST)
+ Sun, 01 Nov 2026 21:52:34 -0800 (PST)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Subject: [PATCH RESEND v3 0/4] tools: qcom: mkmbn: Updates to support ipq5210
-Date: Mon, 02 Nov 2026 11:22:25 +0530
-Message-Id: <20261102-ipq5210-v3-0-aacf3930848b@oss.qualcomm.com>
+Date: Mon, 02 Nov 2026 11:22:26 +0530
+Subject: [PATCH RESEND v3 1/4] tools: qcom: mkmbn: Fix ipq5424 MBN version
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20261102-ipq5210-v3-1-aacf3930848b@oss.qualcomm.com>
+References: <20261102-ipq5210-v3-0-aacf3930848b@oss.qualcomm.com>
+In-Reply-To: <20261102-ipq5210-v3-0-aacf3930848b@oss.qualcomm.com>
 To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
  u-boot@lists.u-boot-project.org
 Cc: Casey Connolly <casey.connolly@linaro.org>,
@@ -206,31 +208,31 @@ Cc: Casey Connolly <casey.connolly@linaro.org>,
  Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
  Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Proofpoint-ORIG-GUID: 3LrjMeZO7dLHbbmOOMpgGsbHlkhS1U_n
-X-Proofpoint-GUID: 3LrjMeZO7dLHbbmOOMpgGsbHlkhS1U_n
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDAyMyBTYWx0ZWRfX7+4lOJwByh2F
- C6YpXDxUst5DYCnwsSOb2tztH8AKOl2m44WzfDg8rV63g4lY2vCn2V7tlGOTbmgTG55Vt2adVwH
- opBqYq4DvNO6Rl9x8dkcHwhb8Ub6Oec=
-X-Authority-Analysis: v=2.4 cv=QoHLTlyd c=1 sm=1 tr=0 ts=6ae82521 cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDAyMyBTYWx0ZWRfX6yBDnn/M57Q7
+ CiKDcu2vOEw9gIxCwqlwLfzcG34c7mMqzMUWauaAbM7XjB7BgTRZEdERD4hznSjEP9Yx6C2TkjA
+ h3fLC8npfgrrkVVSdmAH4ME69nQLcYl95m6jzUWa24ZwDDKIbxLmt62K3E+1eJj93J7IPBznJqU
+ kwpUjTWy4zEtdYCBsrruz1M8V3MEKBtkL+VfX44AYjdRwN8VaHbKh357hvgZ6br0zgBAyXKSb54
+ eGcn6hQllqLAX8/pe9F9/rEA2OcsaHIIqBSOZAzBAM/4oqd1tuZMStN2+h3pKEK8rHwFH/gRj7P
+ weqGa8rfUXXscbSvyxLN6noKmR5MBXdi7D51jH5O8cRHz9oDRwvaVbFGYLZ4aH1+U7QC4IM+GLJ
+ LGaUNsRbogV4zFYvc+4kT4+vBshRNQJor4wu91I7+20di/0YfkhzKfImav0eGGdTInc7mlNtWaO
+ 4Q2k5Iuy1XqMyUPFBVA==
+X-Authority-Analysis: v=2.4 cv=FciiV5+6 c=1 sm=1 tr=0 ts=6ae82524 cx=c_pps
+ a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=p580P5g6mWtK41y3Ph8A:9
- a=QEXdDO2ut3YA:10 a=PxkB5W3o20Ba91AHUih5:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDAyMyBTYWx0ZWRfX6RCmyMgOXnJI
- WHqukqKXjl/q3yaCVMfIFqFYe0+ltg3BZfj0euFnpU9PwxN/gARaaDXKvaEZWoI5D6QSyfRz2qk
- 1/9DZO7ZypB0pOtu/ZneI3yZenmFdTMz1vjIfYTCwWMqLXHF28iyEhrhrW+jxmCxf/MnKbGtjrQ
- KqGhuY9HmpWuvtSnLx0bgq/6u03J3IYSM3TxuwxvFwbOoKyyCZjqNaYJgrEYCoVXM0kEvV+/kDT
- CUFAV2hdq+uleGDV8wXAY+gXW9nyRIrfxnFTPdPe7E29tfzGJbugdkN0vEB9Yae+7bu7MD4BvyV
- d0nJXw8C7cmnOJv4K11uMjfvxwlETfaXCm5LqjWPWEltSjRtVKYuhqg7cAMBTXcEKn6Uk9qXEt5
- DIz06OcKpoVCJX+4L1tTITvoPvNljUvCLvz7ECOorMgmll4hg+SNW8IllJ6Qv/oaNg8nXccZaSD
- OIGOrHPpzvSMceZRHzQ==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=5oOYJkjiZhHqBJ3UFLIA:9 a=QEXdDO2ut3YA:10
+ a=vBUdepa8ALXHeOFLBtFW:22
+X-Proofpoint-ORIG-GUID: Uc0NTEzJfTnXNHhyfrkH3vUyL8xoXeOv
+X-Proofpoint-GUID: Uc0NTEzJfTnXNHhyfrkH3vUyL8xoXeOv
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDAyMyBTYWx0ZWRfX+BlxeGSgZ1IZ
+ oZ5jrQmFKUVkU/DyyJCTvkUcgJ1fqpizaVeIzJMVj4deJTGmMYQzeebCuKAuzi2YFwMqUX1E4dk
+ XL/RIF4ssLO+xYSDoB+yc6856qzIIVI=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-02_02,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 lowpriorityscore=0 adultscore=0 spamscore=0 bulkscore=0
- suspectscore=0 impostorscore=0 clxscore=1015 priorityscore=1501 phishscore=0
+ clxscore=1015 bulkscore=0 impostorscore=0 suspectscore=0 malwarescore=0
+ lowpriorityscore=0 priorityscore=1501 phishscore=0 adultscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611020023
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -249,53 +251,28 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-As part of adding Qualcomm ipq5210 SoC U-Boot SPL & U-Boot proper support,
-the mkmbn script has to be upgraded to create images that can be used
-in the ipq5210 SoC.
-
-These changes are to address the feedback in the 'Qualcomm IPQ5210 SoC
-bringup' series [1] to use mkbn.
-
-1 - https://lore.kernel.org/u-boot/78ff6a8d-5c63-4bc2-bf1e-6b71b8f9c6cf@linaro.org/
-
-While at it, fix the MBN version number for ipq5424.
+Since ipq5424 uses MBN version 7, update the ipq5424 entry in the 'boards'
+table accordingly.
 
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-
 ---
-Changes in v3:
-- Fix review comments
-	- Add CONFIG_QCOM_GENERATE_MBN to qcom_sm8550_defconfig
-	- Remove load address from MbnData and for all entries in boards table
-	- Remove '--melf' option and modify the 'bin' argument to take
-	  multiple files for combining into multi-elf.
-- '--melf' was actually not removed in v2, but included in revision
-  history. Apologies for the mistake.
-- Link to v2: https://lore.kernel.org/r/20260910-ipq5210-v2-0-d209f7dc0fc5@oss.qualcomm.com
+ tools/qcom/mkmbn/mkmbn.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-v2:
-- Remove 'load address' from MbnData and get it from .config
-- Add qcom_sm8550_defconfig
-- Use 4K alignment for padding the MBN images
-- Remove '--melfs' option and make them positional
-Link for v1: https://lore.kernel.org/u-boot/20260714-ipq5210-v1-0-0b98251aabbd@oss.qualcomm.com/
+diff --git a/tools/qcom/mkmbn/mkmbn.py b/tools/qcom/mkmbn/mkmbn.py
+index e4484b539b0..8d2078acc30 100755
+--- a/tools/qcom/mkmbn/mkmbn.py
++++ b/tools/qcom/mkmbn/mkmbn.py
+@@ -85,7 +85,7 @@ boards: dict[bytes, MbnData] = {
+     b"qcom,sm8550\0": MbnData(0xA7000000, 7, SwId.uefi),  # C8550
+     b"qcom,sm8650\0": MbnData(0xA7000000, 7, SwId.uefi),  # SM8650
+     b"qcom,qcs615\0": MbnData(0x9FC00000, 6, SwId.uefi),  # Dragonwing IQ6
+-    b"qcom,ipq5424\0": MbnData(0x8a380000, 6, SwId.aboot),
++    b"qcom,ipq5424\0": MbnData(0x8a380000, 7, SwId.aboot),
+     b"qcom,ipq9574\0": MbnData(0x4A240000, 6, SwId.aboot),
+ 
+     # msm8916/apq8016 has an "aboot" partition but the process is the same
 
----
-Varadarajan Narayanan (4):
-      tools: qcom: mkmbn: Fix ipq5424 MBN version
-      configs: add qcom_sm8550_defconfig and debug fragment
-      tools: qcom: mkmbn: Add support for ipq5210
-      tools: qcom: mkmbn: Add support to create multi-elf
-
- board/qualcomm/config.mk      |  2 +-
- configs/qcom_sm8550_defconfig | 16 ++++++++
- tools/qcom/mkmbn/mkmbn.py     | 85 +++++++++++++++++++++++++++++--------------
- 3 files changed, 74 insertions(+), 29 deletions(-)
----
-base-commit: 914dd2f5d18a3a89e4ddb6d1d97b2743618ae5ee
-change-id: 20260714-ipq5210-52e1da5af9fc
-
-Best regards,
 -- 
-Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+2.34.1
 
