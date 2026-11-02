@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64A8B606A324
-	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 07:04:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EAD40606A324
+	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 07:04:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=fnoI6n07;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=zI8Hwyab
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=kYKwK6Uq;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=iCqtWVXt
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2F59A80E30;
-	Mon,  2 Nov 2026 07:04:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B666A80E20;
+	Mon,  2 Nov 2026 07:04:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BqNlb-RNTa4Y; Mon,  2 Nov 2026 07:04:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 16DF780E0D
+ id n9qFanf26tI4; Mon,  2 Nov 2026 07:04:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C836480E24
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793603049;
-	b=gCJmOGdrEeY183INmdtnN+MQ2tRcvy8DBx9Qmty2xXfm3pAZ4p+vDyekMYM7SGYRwJOz
-	 HEV7equYYgNUdK5M0qUiq2rzOCPON9C7KSBGXsU5KMrzD5sDPwk9svehibqEN3qoZNMom
-	 AM6Nui+EALEx6zAHVNG07Vcuv7ukgLiDTgjmgN/npBOmza1MR4whLmlS/S/P28QjSkmDo
-	 r603QREZb+HGkuVLVurhgYjMTbf4KXLQAcnykwAwq8Bw2+O20gyZIfyf0/18WKztUefxx
-	 tsPO8V2IIcriFPt5N+/kC7HA595IfPk2h2iWtmUEJRAfFlqBteJpZVbib4El3W1XgIQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793603054;
+	b=E0mYLnjJgyOMR3Y805T2Vein79T70E8IgdpNkHAJ4Mz/BzCx41DNY/WO5DN2GEWHvHCu
+	 +w64ouGnhYWCsFr0VxDgmwRRYsdfVRo3cowb8fZQlDYjV6ak+gX7yuuflyCuHFPYDfsdD
+	 g7+iO3ELkMp9uuP9ow8FWUgYq0IaMMZoYltyit3pbZ2hYq3kTc73QSRYcYr0WM7Cypll1
+	 VYaQHlW6YwZR9Vk53LGIqAIz2IGdcabEvHgTNpXe2xbn16LE8IqTuocDI/LY2CMVpwke1
+	 VhZ5H1R4LHgIFnp4TI1kqbJxp0x0a3HgJx8gtF9K5B6PLm2UzF1945jgTJzjQya3Qgw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793603049;
+	c=relaxed/relaxed; t=1793603054;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,131 +32,130 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=Wvl1iSeTz2kGgbbww9Jsh0A6MWreu4l+mQhEirNTwnk=;
-	b=HUOZn0gk4be/d89I4HfI3pr4ot4iGU5mrSNQeczMqUzPGYLSGVIawDZYilYXhJ775vVn
-	 7l2UdBAj5NIL0Yu7eMAiW/tiZe5AtvJmBNJOpec9/0aTClz0fpkWJX+CnbO72Jqt2px6W
-	 fzuV5GcQM28+N1unOeu/gFWKTA2lotKXIeLbG/ldPW0Z9d2dRedp3cWhItLmI47bQkI5j
-	 AuUqRMv9Fma72t08bTp/4v9vcVANfhwXavBHXRuMw3FfD6qEzfrkTISgH/8YSf8il7M8J
-	 KOth3l62LJdPRaQFTuA5JcOxlTClv69sGJwgH+OLRgOrFm2qDKfuy9EfF3QiQx6Tsmg==
+	bh=tOx5/rEkpcKHPCwyknJVWDqT6YP/7lP9YME4UQgC3TM=;
+	b=ncqz54WXyN8QVBdUe7M2FLXsM+5By5dGo9pitjsnpxhBAOC02/l62THNWhaXu53YBD1y
+	 B6k7BMLst7x0ykqn0gAgNwFcgIl4Wf6yIQAP/nJRTDFFCjDUStcSwERTlRR3GTymqvA0D
+	 OD3q3haYFZqLl89RgShBUvZ/zEm/Sur6l28mGldVEYFkglMZhCxFLHFuXdpPhXXvs9qph
+	 qGM2fwNamqDgYVGA3U+U7FLZ3SpWq3Kd4hGvK1yRen+8kM6q4njD8VlohVA3oHdnHMs27
+	 VaZ76gtPW/km+NYlVHdZv/K0sdwwA0wDYuzaZ6YyE/pyrmNYMcQdTk+X+dnZrhzZjeQ==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793603049;
-	bh=Wvl1iSeTz2kGgbbww9Jsh0A6MWreu4l+mQhEirNTwnk=;
+	d=lists.u-boot-project.org; s=default; t=1793603053;
+	bh=tOx5/rEkpcKHPCwyknJVWDqT6YP/7lP9YME4UQgC3TM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fnoI6n07szpDILajkVPw6tQTPO9+szRnpk+qfHaiorGIzEquCKiXDbn9xJkEl/gc9
-	 ZtiVe68r5TdvucWDp3zID03okIPK/OOWaG4aCA/FqkaPMOZj2hpc81T3wjlwzEvDsr
-	 CkUVUwVJxAeCchSfGQ8CSkkLqAPP2qppZFvgFQXCsgyOBklaCMiEqqPInCnD7uanGr
-	 2cm8JyvCEyBtE4hfK9EVOY6nDVsnpZeBJcJK+BggUDRkZBFDvouIfZJmwJmMw8Bqmi
-	 2ZVeX1ajYyNDPyqFzC1YkLrvXXtlqiq3oi9CFuYc0rk1VDCBjJKpYtcL+yD+9ElTgl
-	 sJOUMlSqW+BbA==
+	b=kYKwK6Uqd1ZGRbBMcvu2HItUI1mtvgJkZPpyTP2LcbYFutPdxqLkP66a2Q84CbS8s
+	 5R7jxP1X+CmPnm8bvSPo4rmZ2m1tC80hmZIzlANMFUugcDlsP7/dHtSUXQkQfuNp6u
+	 97TuW5XMXh+WJA4jzdlS7G3Mi9g9y0ELYFAPHOB7HS6Ez1UygnhgllK6b8W+XV3sUs
+	 2dChKX/tvp1H7V2EEXDvOEXpTnc+yxLcCeUdNJIYRvod9a/WqKLiAu0dkeDc0y8fyn
+	 ygOOHl5iWJc9wdgZkW4bB7dQ1WzJeTM4IS1BSQFUWRVEYzaGqB4yJ8e8RnPOA6sS2c
+	 X/YIuj9Jhwsvw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 16DF780E0D;
-	Mon,  2 Nov 2026 07:04:09 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id E4CF9356
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 07:04:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C836480E24;
+	Mon,  2 Nov 2026 07:04:13 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7AFB9435
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 07:04:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C99EE40558
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 07:04:06 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 786646073E
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 07:04:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Lxou6s_IZ-H2 for <u-boot@lists.u-boot-project.org>;
- Mon,  2 Nov 2026 07:04:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7E78B4053E
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32a"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793603046;
- b=Vw360tWSoydxMjLaMksG/jtFpSf7wiABP1q3cpNxIPfOwrDRcgl3gOIHbBxyc0KgmxQZ
- Hyn5NQaUBDNNAzji+iDxM5FXEIsGUwl27g4P1IhOnSaz3djtwJkzHJr3gmXN++1nPYRXT
- vk90wgmbWtKOo4WxTdg7JzYT3khjLOasFd5h1Ys82FxTS+jzvIMavNeDC724wa3ClGd/G
- I7y2+PVRO21W5lspIXQjxG9DYfys7KnauliMkj4nLBEUmjlzJmMbfpf2+D6oYUtBj6yFz
- jbol+MAjHuUemuwxSewn6JlP0r2LfyV/q2jx+/XG/k3YEBuF+bO5/rQ/60DzeRm0wPQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id RsOHfcszHBmq for <u-boot@lists.u-boot-project.org>;
+ Mon,  2 Nov 2026 07:04:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 535F5605F8
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42e"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793603051;
+ b=LP9JMHJXBjOUmFOO88dnjuUbLqnIo9se1XPkiIqaTa6b9W56EmE0OP9u6CtCNf1tE3h4
+ yjML8IucKH0zbyDWFp/bzetDBkSkt3a3VlehJpmx2tLyuYcU1W0BdcIDQ2FAQZ8BcCGB4
+ tmg4aLuQj2r7ZaJdBV/ef8UakKlB/H1jlXOzL5apUyn+60fs8Qop5/BF7NUaTFh5vMG5I
+ n7N5kjfX03ZIGw/crYMXoq8ZG6an2PYV1QpiohpGtXySDOQ6kK6c4oz7zxIEBCG9F7tJk
+ /GeVAUuuER72bJsja3aJ/xhCWZCd2MJT02iWZEuRbBYV1nYYID28Bf5iklx7A4Mfe5Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793603046;
+ c=relaxed/relaxed; t=1793603051;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:In-Reply-To:References;
- bh=Wvl1iSeTz2kGgbbww9Jsh0A6MWreu4l+mQhEirNTwnk=;
- b=Ke11rB4zeeCOb3Kt20AvoNVlY+km24kuAYyAI8eSVJGT9P0FyncM9OOO16rTvBVECi0c
- GIYUryO2RuUGgVYlvx4R94ol963irHVrGcMfH0Ru28VDuel2ss85422n3jBIVbwms4q61
- 6QwxkCeeTH4ojQVr1RxmmUbUw3a5zNYwRPGqfOEAo9XHz6TZK5rthnL1nWDFguGxb6wXy
- yA4bOOoT8ebuutzwdaFvMCpI3doZMMKio6yp9rCaJgtfmEUpaKbyA+ruOTiyNvutgnOKI
- NFXPgLaEinpSuhvg2DmcOU5PYfzwRuXxh2xzFoaeYvyMmSJsfEGSrbxlXyuHh5GzAzg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=tOx5/rEkpcKHPCwyknJVWDqT6YP/7lP9YME4UQgC3TM=;
+ b=VL4tcftXaQpiJelmUJi8/WaxG6nx7kKQ+kqGlPssnwOtv42NP0l+ey0vLL54f9t6pWqI
+ RCLaBA5DvnLdElZnDlryDSEkEWAs2FGoAldJsa/SKa4dHURW7GOhP+/eIo9AA3OOfwM4N
+ q2emx+mnvgy/HE0T2b0lVwf9W/fKjV3QQw2fWGbNMJOMUiKjOuedAkEGClq0f84rVJ+Ag
+ syz5rmb42PeLQfYlRXwrp+cdefj9zCV/WSLemCY4OX1b7AzfVj0hf/La6qD/o6z7L56Iv
+ 7Ei4hVeH32T9uUNcctrSmZvcbAkqpKTvXb/Cs/X0YosgFDwj1MM4aMqQoLTueMWaBzQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=zI8Hwyab; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::32a"
+ header.s=20260707 header.b=iCqtWVXt; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32a; helo=mail-wm1-x32a.google.com;
+ client-ip=2a00:1450:4864:20::42e; helo=mail-wr1-x42e.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=zI8Hwyab
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7E78B4053E
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 07:04:04 +0000 (UTC)
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4a218c463d1so16852945e9.0
- for <u-boot@lists.u-boot-project.org>; Sun, 01 Nov 2026 23:04:04 -0800 (PST)
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20260707 header.b=iCqtWVXt
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 535F5605F8
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 07:04:10 +0000 (UTC)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-48df4e9d2d4so1274918f8f.3
+ for <u-boot@lists.u-boot-project.org>; Sun, 01 Nov 2026 23:04:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793603043; x=1794207843;
+ d=gmail.com; s=20260707; t=1793603049; x=1794207849;
  darn=lists.u-boot-project.org; 
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=Wvl1iSeTz2kGgbbww9Jsh0A6MWreu4l+mQhEirNTwnk=;
- b=zI8HwyabZJ4QnuztXztjwCu/8/tnprgqO7AvwH3htAkPgL17pNx/UQ8g4hGsn5Pi7M
- SueR3XbFb09rFgc40C1r+zMJRuaTTm7Tgekv0F2QI1ZW8YgOtED6vm5QeVWmMM03BScV
- J43U7q5Q+JKgX96mqe8xcynSVrx7bGKjhLa98R4bKCfsq5aicczohBqvgH4q+56zbcpQ
- pKPzE1sLvNQfCFEdK4fUWHjuZPfmxM0Wj5eYN+pjhyHN7t09CTBzPSYxdN8TAowfejRJ
- /TaaU4XMuF9XeWwHUE6+jPnzKA0j0OmXlz4y7LXXnd5K7io7llP0z2W6fgVSnHGM3M1E
- 0UWQ==
+ bh=tOx5/rEkpcKHPCwyknJVWDqT6YP/7lP9YME4UQgC3TM=;
+ b=iCqtWVXtyMLWYSCuvojIMZbSOFjXi3VLD34ylPJ3CSEptrPVW4xzSqlh/5ZJm8z1EM
+ GQQxs7nEy0zw4ikbFnyCl0LPmPtJy/roDp43fTKYDNbG6YeMD+dmaRTc93Meyw2FWv23
+ ta59b0PVIeYEbOhwjp53dQxcC2JSrI5sKozcx6dVQ4iy+XFhiSDrna79UAF/AjfMOJfS
+ OIi0+gvRaB8Bm/QAZPnbkvfAWuxhwc1ITaRLpr1eE2bo4pao1lLB9fRnANXhG9WhBtlX
+ W5kaYIlOPiDbuUNmMjb5gw5q1MlAXaMxPgEOLs+kBH5AxctcVldXDtIzHsqHCTWePxfU
+ uPTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793603043; x=1794207843;
+ d=1e100.net; s=20260707; t=1793603049; x=1794207849;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Wvl1iSeTz2kGgbbww9Jsh0A6MWreu4l+mQhEirNTwnk=;
- b=VjSdyNK3cIA7+Eu5nPpOZXjvKZw1j7yxNEqyQdZ5MuGPsM3TMzC8tJu5dxueYqdMMB
- NyraBb1C7gq3ySYPIUYsPDrO0L6glHllCvm3TLLQZSQiABxRt34iXGNsJF9DBlhlBcl6
- lPBc4k7PmuIaUONsQFPgQgSmGOkcUe8TgTk/ad0HhJhIQnZ1MQWQfWX8Gz9fSNOXYfcn
- 3lEkG27kR2zOkeUgmp90X09jnMgu7emohBAmC9ObVBCh+1RXmz9gWTJiFxAccs7iFKoS
- TLiR5cK6V3fTCQTcZ85hSvJJO3mmuIf8UoMFPXkUp0KeSSfZaQnXEYQucnGqLSxVpQQ1
- u83Q==
-X-Gm-Message-State: AFq9FYII/jK7e4Oxu95fycH2KyRck+vwmBf/Y4FC3ImOF2m+6V+7ARb/
- GFWwaBesjB/JUJFNFfRgvKLkkRNE6OppvfP65jGRLbs3sp0nXvBtscJplUYxKx1bzQM=
-X-Gm-Gg: AYBFou3UHdcXnaPltcVRCZfaEt0qPDM5N4weGlsv/YrX4Dv79cuybbe7y/1jdT8nH3I
- xzYptr9lWDQthkjW/IeOb4xKGYPgM9dOOju4+qynrjFm318NC9AU2uXNS+Hb2tIuFyGi6nmQvL9
- kVZ/PL26JyzpCwWhpdmfVLukIDJj65S4FoN/KSp24WWF5/zTNdV8O0YjryZGW+vuCHW6lObnd+3
- 2ljPqVuFlHGOOYBBxQWFnctLN/j2pYs2MQMGhbyU8mjbjJ/tsBcLZ4lzOEXNJSduCeqkcOzBORU
- F8QzmrBlAjM2+ZLjrNLK3yA7cBHcjYRn0hv8RyMGK2ibPMwNq9tzHNrphkgIz3DcJCTIPvdnk5m
- 3nB2EszkTmOTtkNztPERjT2Ap1hXCW3UESfrtneAi7cVM63lPKwZAio+XSXtLBwuOCF5UYOgUd9
- D0ghD++iI90fuD/EpqaZB4UMvEgZpJb30JJ+E/AC1pC7WoVzludgBrVNYvwTi2U3W000ih73Cdm
- UwCBEd3kVZNhfDzyRrrMixxNKP1kAQPPsXOR+bQ9nDRTqCYVJD7e3qHeK8A9bW6QZst3VQacGSC
- L8znW1tHpffdMFCaTl6PVEuJ+2kdvLy9uHA9qmYvZlsR5Dw4ZqiS
-X-Received: by 2002:a05:600c:a41:b0:4a0:1c0e:b057 with SMTP id
- 5b1f17b1804b1-4ac150b2136mr195764275e9.4.1793603042827; 
- Sun, 01 Nov 2026 23:04:02 -0800 (PST)
+ bh=tOx5/rEkpcKHPCwyknJVWDqT6YP/7lP9YME4UQgC3TM=;
+ b=KCCcKoGPxEGcif6dHWieMT3DGRJFJwAHFuF70GHJGGEm1Yb2YeaU+i714ZvTNpNSgo
+ 7fZN/wI6EW0/QKHdzTE0FL1x9L2a1tGwxrTLbq8eiKlJlbwy+wfSV3X/X39y66TZgKZq
+ IwodV/GXTpG+Vp95Z2J8seYuY0IjRL1Qc0zQfhkUbyiJ7BiQSKNAle7goCKJAAl9aPMk
+ C+QpRMRtT1la64agK8unP6DOTcTJFRL2r+1wm7OU6cuNNFsHN0mFSTsT08IqJH3vOb7+
+ vaCCbB+lFE9f7OKj43jeyFfZsvWwVhiP+MHxE60BHnCphuLeA4bV6VdVlbvHj3HByRSs
+ bYtw==
+X-Gm-Message-State: APuU4Z8VM8i2jX6IJwWD7EwJ6jW5YMFvbzbztCfv8JBthHZ2QjhXjmeu
+ ZPW28RTPCelzfZOxGlV0fGSviLCQ07eGL1rKhwJFZxlJi+5aVPMLRU+J5NPDVHJXCBY=
+X-Gm-Gg: AYBFou3oicKPDWNESJQ+zx3KyqMDJhC9sMap4fKHnzK2mou1k/Mz1MQ0U9LTCkn3van
+ +BJGOy0hL8b78RieNre7GcDbNQOeYiKpF7XQl0N+ArN6TgWG8OixCDDA9TMNmZ1wNOejg+tlPlq
+ Ql9ow1xWh4/gwoXyRhoYayWk7ykg3g2fEr7Hh46RJhBkM6uDKhL3oZuZJnCxn91Y0KdFvKNjJav
+ nxe1sWHdN5oFLSW7e2zYjdH/o3YjNeMYa6OVdgfxaKAwR03a82iolGWKwBAyFHVO8U6WMEbHMnh
+ fQ3xPUlJwV//nFQmeoeiVaCP/IHBKRFuYBSvvId0q27hpg2MpPXtKWMchin7h33mcVqEWpEdROj
+ 4NP83SPDsyxVb8FxJhvLUIJ62l+6z+h1wakKhqX0vhG2Y3iA0grHEb3ysOy9DDYnWilW/2JSfub
+ 856IltYnoJLox/1MIRLEe5QTdzvAn49pj1p7JBWNh1VPWhavVfpARHtHXrLqjimquwejRJ+E/0+
+ WJdwGmL54vwReQ/bMrOKiIkMJSYsfVG5bXLaZook2mhqwV0UFa4OT/KlUI/cZ0uhwIA2NGSNXGZ
+ 2Iz83jhHBCacj2vYh93lxr6zp1yOGaA=
+X-Received: by 2002:a05:6000:46d3:b0:48e:5d8a:d1fc with SMTP id
+ ffacd0b85a97d-48e6e2f8170mr12970222f8f.31.1793603048726; 
+ Sun, 01 Nov 2026 23:04:08 -0800 (PST)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4abf5b289f7sm251960035e9.5.2026.11.01.23.04.02
+ ffacd0b85a97d-48e71b723fcsm18797194f8f.14.2026.11.01.23.04.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 01 Nov 2026 23:04:02 -0800 (PST)
+ Sun, 01 Nov 2026 23:04:08 -0800 (PST)
 From: Ana Bobillo <anabobillo3@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH 3/4] bootstd: cros: Check where the preamble puts the
- bootloader
-Date: Mon, 02 Nov 2026 07:04:01 +0000
-Message-ID: <44540f89-7b47-47b8-9c47-2d82c10d1b98@gmail.com>
+Subject: [PATCH 4/4] x86: zimage: Bound the kernel version string to the image
+Date: Mon, 02 Nov 2026 07:04:06 +0000
+Message-ID: <46c92c78-32fb-4f14-8466-c6dddedbfc36@gmail.com>
 In-Reply-To: <a601d668-436a-4aa7-bb10-950a89d324ed@gmail.com>
 References: <a601d668-436a-4aa7-bb10-950a89d324ed@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -179,170 +178,139 @@ X-Archived-By: <archiver.kernel.org>
 
 From: Ana Bobillo <anabobillo3@gmail.com>
 
-cros_read_info() reads the kernel command line, the x86 setup block and
-the bootloader into a buffer of bootloader_size + 8KB bytes, from an
-offset worked out from bootloader_address - body_load_address. All three
-fields come from the kernel preamble on disk and nothing checks them, so:
+zimage_get_kernel_version() finds the version string at an offset of up
+to 64KB from the kernel base, taken from the kernel_version field of the
+setup header, and then scans it up to its nul terminator. It works out a
+256-byte limit for the scan but never checks it, and it does not know how
+much of the image is there to read.
 
-- on 32-bit machines, bootloader_size + 8KB can wrap, leaving the buffer
-  too small for the command line and setup block, which cros_read_buf()
-  reads from it
-- cros_read_kernel() later points the x86 setup block at an offset into
-  the kernel body worked out from the same fields, which can be outside
-  the body
+This matters for the ChromiumOS bootmeth, which reads the kernel setup
+data from disk into a buffer of bootloader_size + 8KB bytes and passes a
+kernel base 24KB into that buffer. With a bootloader of less than 16KB,
+the kernel base is already past the end of the buffer, and the header
+fields come from the disk.
 
-Reject the partition unless the command line and setup block lie in the
-kernel body before the bootloader, and the bootloader ends within the
-body, as the ChromiumOS kernel layout has it.
+Pass zimage_get_kernel_version() the number of bytes it may read at the
+kernel base, and stop the scan at the 256-byte limit. The zboot code
+passes the size of the setup code, which holds the string according to
+the boot protocol, and the ChromiumOS bootmeth passes what is left of its
+buffer.
 
-cros_read_info() can now fail before it sets priv->info_buf, which
-cros_read_bootflow() frees on failure. Since priv comes from malloc(),
-that frees whatever the heap left there, as a read error already could.
-Allocate priv with calloc() so that the pointer is NULL until it is set.
+A version string longer than 255 characters is no longer shown; Linux's
+are around 100.
 
-Extend the ChromiumOS test image with two kernel partitions whose
-bootloader is too near the start of the body or ends past the end of the
-body. Neither may produce a bootflow.
-
+Fixes: 7c79eddbec32 ("x86: zimage: Sanity-check the kernel version before printing it")
 Fixes: f861b1ee70aa ("bootstd: cros: Add a function to read info from partition")
-Fixes: 71f634b822ae ("bootstd: cros: Allow detection of any kernel partition")
 Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
 ---
- boot/bootmeth_cros.c     | 24 +++++++++++++++++++++++-
- test/boot/bootflow.c     |  7 ++++---
- test/py/tests/test_ut.py | 22 +++++++++++++++++-----
- 3 files changed, 44 insertions(+), 9 deletions(-)
+ arch/x86/lib/zimage.c | 27 ++++++++++++++++++---------
+ boot/bootmeth_cros.c  |  7 ++++++-
+ include/bootm.h       |  6 ++++--
+ 3 files changed, 28 insertions(+), 12 deletions(-)
 
+diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
+index a5f2231aa52..53c8e0429e4 100644
+--- a/arch/x86/lib/zimage.c
++++ b/arch/x86/lib/zimage.c
+@@ -145,11 +145,12 @@ static int setup_device_tree(struct setup_header *hdr, const void *fdt_blob)
+ }
+ 
+ const char *zimage_get_kernel_version(struct boot_params *params,
+-				      void *kernel_base)
++				      void *kernel_base, ulong size)
+ {
+ 	struct setup_header *hdr = &params->hdr;
+-	int bootproto;
+ 	const char *s, *end;
++	ulong offset;
++	int bootproto;
+ 
+ 	bootproto = get_boot_protocol(hdr, false);
+ 	log_debug("bootproto %x, hdr->setup_sects %x\n", bootproto,
+@@ -157,16 +158,23 @@ const char *zimage_get_kernel_version(struct boot_params *params,
+ 	if (bootproto < 0x0200 || hdr->setup_sects < 15)
+ 		return NULL;
+ 
+-	/* sanity-check the kernel version in case it is missing */
++	/* the offset comes from the image, so check it is within @size */
++	offset = hdr->kernel_version + 0x200;
+ 	log_debug("hdr->kernel_version %x, str at %p\n", hdr->kernel_version,
+-		  kernel_base + hdr->kernel_version + 0x200);
+-	for (s = kernel_base + hdr->kernel_version + 0x200, end = s + 0x100; *s;
+-	     s++) {
++		  kernel_base + offset);
++	if (offset >= size)
++		return NULL;
++
++	/* sanity-check the kernel version in case it is missing */
++	end = kernel_base + min(size, offset + 0x100);
++	for (s = kernel_base + offset; s < end && *s; s++) {
+ 		if (!isprint(*s))
+ 			return NULL;
+ 	}
++	if (s == end)
++		return NULL;
+ 
+-	return kernel_base + hdr->kernel_version + 0x200;
++	return kernel_base + offset;
+ }
+ 
+ struct boot_params *load_zimage(char *image, unsigned long kernel_size,
+@@ -206,7 +214,7 @@ struct boot_params *load_zimage(char *image, unsigned long kernel_size,
+ 	log_debug("Using boot protocol version %x.%02x\n",
+ 		  (bootproto & 0xff00) >> 8, bootproto & 0xff);
+ 
+-	version = zimage_get_kernel_version(params, image);
++	version = zimage_get_kernel_version(params, image, setup_size);
+ 	if (version)
+ 		printf("Linux kernel version %s\n", version);
+ 	else
+@@ -577,7 +585,8 @@ void zimage_dump(struct boot_params *base_ptr, bool show_cmdline)
+ 	print_num("Start sys seg", hdr->start_sys_seg);
+ 	print_num("Kernel version", hdr->kernel_version);
+ 	version = zimage_get_kernel_version(base_ptr,
+-					    (void *)state.bzimage_addr);
++					    (void *)state.bzimage_addr,
++					    (hdr->setup_sects + 1) * 512);
+ 	if (version)
+ 		printf("   @%p: %s\n", version, version);
+ 	print_num("Type of loader", hdr->type_of_loader);
 diff --git a/boot/bootmeth_cros.c b/boot/bootmeth_cros.c
-index 685d5335e86..805680f71ad 100644
+index 805680f71ad..006f30c0bb4 100644
 --- a/boot/bootmeth_cros.c
 +++ b/boot/bootmeth_cros.c
-@@ -272,6 +272,7 @@ static int cros_read_info(struct bootflow *bflow, const char *uuid,
- 	struct udevice *blk = bflow->blk;
- 	struct blk_desc *desc = dev_get_uclass_plat(blk);
- 	ulong offset, size, before_base;
-+	u64 bl_offset;
- 	void *buf;
- 	int ret;
+@@ -225,9 +225,14 @@ static int cros_read_buf(struct bootflow *bflow, void *buf, ulong size,
  
-@@ -285,6 +286,27 @@ static int cros_read_info(struct bootflow *bflow, const char *uuid,
- 		  (ulong)preamble->bootloader_address,
- 		  (ulong)preamble->bootloader_size);
+ #ifdef CONFIG_X86
+ 	const char *version;
++	ulong kern_size = 0;
  
-+	/*
-+	 * The command line and setup block come just before the bootloader,
-+	 * all within the kernel body. These fields come from the disk and
-+	 * cannot be trusted, so check that the regions are where they should be
-+	 */
-+	if (preamble->bootloader_address < preamble->body_load_address) {
-+		log_debug("- invalid bootloader address\n");
-+		return log_msg_ret("bla", -ERANGE);
-+	}
-+	bl_offset = preamble->bootloader_address -
-+		preamble->body_load_address;
-+	if (bl_offset < -CMDLINE_OFFSET ||
-+	    bl_offset > preamble->body_signature.data_size ||
-+	    preamble->bootloader_size >
-+	    preamble->body_signature.data_size - bl_offset) {
-+		log_debug("- invalid bootloader offset %llx size %x\n",
-+			  (unsigned long long)bl_offset,
-+			  preamble->bootloader_size);
-+		return log_msg_ret("bls", -ERANGE);
-+	}
-+
- 	priv->body_size = preamble->body_signature.data_size;
- 	priv->body_load_address = preamble->body_load_address;
- 	priv->bootloader_address = preamble->bootloader_address;
-@@ -406,7 +428,7 @@ static int cros_read_bootflow(struct udevice *dev, struct bootflow *bflow)
- 		return log_msg_ret("bod", -ERANGE);
- 	}
++	/* The kernel base may lie beyond the end of the buffer */
++	if (size > before_base + X86_KERNEL_OFFSET)
++		kern_size = size - before_base - X86_KERNEL_OFFSET;
+ 	version = zimage_get_kernel_version(map_sysmem(setup, 0),
+-					    map_sysmem(kern_base, 0));
++					    map_sysmem(kern_base, 0),
++					    kern_size);
+ 	log_debug("version %s\n", version);
+ 	if (version)
+ 		bflow->name = strdup(version);
+diff --git a/include/bootm.h b/include/bootm.h
+index d1aac3d44df..5b202cf2d97 100644
+--- a/include/bootm.h
++++ b/include/bootm.h
+@@ -299,10 +299,12 @@ int zboot_run(ulong addr, ulong size, ulong initrd, ulong initrd_size,
+  *
+  * @params: boot_params pointer
+  * @kernel_base: base address of kernel
+- * Return: Kernel version as a NUL-terminated string
++ * @size: Number of bytes at @kernel_base which may be read
++ * Return: Kernel version as a NUL-terminated string, or NULL if there is no
++ *	valid version string within @size bytes of @kernel_base
+  */
+ const char *zimage_get_kernel_version(struct boot_params *params,
+-				      void *kernel_base);
++				      void *kernel_base, ulong size);
  
--	priv = malloc(sizeof(struct cros_priv));
-+	priv = calloc(1, sizeof(struct cros_priv));
- 	if (!priv) {
- 		free(hdr);
- 		return log_msg_ret("buf", -ENOMEM);
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index f24d79a34d9..e5b3e1fc665 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -1488,9 +1488,10 @@ static int bootflow_cros(struct unit_test_state *uts)
- {
- 	/*
- 	 * mmc5 has valid kernels in partitions 2 and 4 and corrupt kernel
--	 * metadata in partitions 6, 13, 14 and 15 (oversized keyblock,
--	 * undersized body offset, wrapped body offset, undersized keyblock),
--	 * none of which may produce a bootflow
-+	 * metadata in partitions 6, 13, 14, 15, 16 and 17 (oversized keyblock,
-+	 * undersized body offset, wrapped body offset, undersized keyblock,
-+	 * bootloader too near the start of the body, bootloader past the end
-+	 * of the body), none of which may produce a bootflow
- 	 */
- 	ut_assertok(scan_mmc_bootdev(uts, "mmc5", true));
- 	ut_assertok(run_command("bootflow list", 0));
-diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index a33f188d984..5e3b02bb100 100644
---- a/test/py/tests/test_ut.py
-+++ b/test/py/tests/test_ut.py
-@@ -408,6 +408,8 @@ def setup_cros_image(ubman):
-         {'num': 0xd, 'label':'KERN_D', 'type': uuid_kern, 'size': '1'},
-         {'num': 0xe, 'label':'KERN_E', 'type': uuid_kern, 'size': '1'},
-         {'num': 0xf, 'label':'KERN_F', 'type': uuid_kern, 'size': '1'},
-+        {'num': 0x10, 'label':'KERN_G', 'type': uuid_kern, 'size': '1'},
-+        {'num': 0x11, 'label':'KERN_H', 'type': uuid_kern, 'size': '1'},
-         ]
- 
-     for part in required_parts:
-@@ -462,18 +464,21 @@ def setup_cros_image(ubman):
-     set_part_data(2, pack_kernel(ubman, 'x86', kern, dummy))
-     set_part_data(4, pack_kernel(ubman, 'arm', kern, dummy))
- 
--    def bad_kernel_part(keyblock_size, preamble_size):
-+    def bad_kernel_part(keyblock_size, preamble_size,
-+                        bootloader_address=0x103000, bootloader_size=0x1000):
-         """Build corrupt-kernel-partition data that U-Boot must reject
- 
-         The keyblock carries a valid magic and the given keyblock_size; a
--        preamble with the given preamble_size follows it. The bootloader
--        address/size fields are chosen so that, were the partition not
--        rejected, scanning it would succeed and produce a spurious ready
-+        preamble with the given preamble_size follows it. The default
-+        bootloader address/size fields are chosen so that, were the partition
-+        not rejected, scanning it would succeed and produce a spurious ready
-         bootflow, which the bootflow-list assertions would then catch.
- 
-         Args:
-             keyblock_size (int): Value for the keyblock_size field
-             preamble_size (int): Value for the preamble_size field
-+            bootloader_address (int): Value for the bootloader_address field
-+            bootloader_size (int): Value for the bootloader_size field
- 
-         Return:
-             bytes: Data to place at the start of the partition
-@@ -484,7 +489,8 @@ def setup_cros_image(ubman):
-         # bootloader_size at offsets 48 / 56 / 64, body-signature data_size
-         # at offset 88
-         pre = struct.pack('<I', preamble_size).ljust(48, b'\0')
--        pre += struct.pack('<QQI', 0x100000, 0x103000, 0x1000)
-+        pre += struct.pack('<QQI', 0x100000, bootloader_address,
-+                           bootloader_size)
-         pre = pre.ljust(88, b'\0') + struct.pack('<I', 0x4000)
-         return kblock + pre
- 
-@@ -496,10 +502,16 @@ def setup_cros_image(ubman):
-     # - partition 14 (KERN_E): preamble_size wrapping the 32-bit body offset
-     # - partition 15 (KERN_F): keyblock_size smaller than the keyblock header,
-     #   placing the claimed preamble inside the header
-+    # - partition 16 (KERN_G): bootloader_address placing the command line
-+    #   before the start of the kernel body
-+    # - partition 17 (KERN_H): bootloader_size extending the bootloader past
-+    #   the end of the kernel body
-     set_part_data(6, bad_kernel_part(0xffffffff, 0x800))
-     set_part_data(0xd, bad_kernel_part(0x100, 0x800))
-     set_part_data(0xe, bad_kernel_part(0x100, 0xffffff10))
-     set_part_data(0xf, bad_kernel_part(0x18, 0x1000))
-+    set_part_data(0x10, bad_kernel_part(0x100, 0x1000, 0x101000))
-+    set_part_data(0x11, bad_kernel_part(0x100, 0x1000, 0x103000, 0x10000))
- 
-     with open(fname, 'wb') as outf:
-         outf.write(disk_data)
+ /**
+  * zimage_dump() - Dump the metadata of a zimage
