@@ -1,182 +1,147 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0CEE606A324
-	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 10:20:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 031FC606A326
+	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 10:33:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=puOBCq9B;
-	dkim=pass (2048-bit key, unprotected) header.d=marvell.com header.i=@marvell.com header.a=rsa-sha256 header.s=pfpt0220 header.b=c3BbndWF
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=peIhvIIa;
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=LVdWhce5
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2E44F6076F;
-	Mon,  2 Nov 2026 10:20:19 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TDuu4Oc4xJXk; Mon,  2 Nov 2026 10:20:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4987A60758
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793614818;
-	b=mWwO7okCfyaDecBGJ7zcPB//V2eoEzeZ/zN2owZFXwhgxx4gUTHuVXzZYmNSmoXbY+Sq
-	 d8U3gpiVQPjbJitMTtSxyWddY8vlZ8UFSGB/l0bSI+uFzzU6jAPfLGLcF4BE3JQPeGfR0
-	 XGa0NcpRcb+aTtVF3jDcVOS/e2yXVwLr0ph9F2A3ALfsAmDxU4krLyn9QLnCADIhZg8Cy
-	 PTASD1uPNPEQ+spLz8oGaXXiaPW4RxASXMEuAjGMIE1JujwX/MqAcJYMO0c6MBVnn55w7
-	 69XNhcGC/1EWCja8O9a+AOoQ/4GVfbMh0ArQ8ZSTsW/EEeqGx+mDU8xGUafdxQv7k0A==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793614818;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Received:Received:Received:Date:From:To:CC:
-	 Subject:Message-ID:Mail-Followup-To:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Virus-Version:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=kZ7kWUXMY9ApKlmuc9ermE3D/WkEby0GcQL/ifvEpZY=;
-	b=ZURZflYoSSbRl37gSCBZ7xnTHw4wRadmafe/im1houVgST13mCurcdXaZF7cB1eyEkgP
-	 v2gjCltv9wEbpZ9JlfDypbgC927IDf9yICOFJMYOOgIMV7s5rE+GACGhnteZTqSbCXY1+
-	 czjdKYb1TybdTj3LpmPFvTjByXhzZaRuZnrDBpeVfkJbOnZGFwL63CXXNdzEWmgBiTFUf
-	 fmudIXFg0tSpkUa4SOu/M29QiWDlKiOeDZWRtNz/yPpp/axPRT+Dx7XOM+5E6QJEbVIYu
-	 yho0E2urpmC0boGkNwFsfeCDC2uVyhCgwYJVV9BpQ4ic2hgE/sD3mCeB7aLPR8NhIMA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793614818;
-	bh=kZ7kWUXMY9ApKlmuc9ermE3D/WkEby0GcQL/ifvEpZY=;
-	h=Date:From:To:CC:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=puOBCq9BBRtw/RqKEy9UzrpekgpTJsRyXgEz5ikSYPqcVyGEMeWXxwSycxDzPnBpx
-	 XfW5VA1D1KEWNDHwiamKBQDPTH1JSvAP90rmvAv/hOjFm0Z8BYZ+6SjMIgtLuKfrzC
-	 1enoRzCqW2dmeOT5kRDCf7zpD+Q8RQIruOiC/29cOoGdH2BtL6PjsUSfL5y1nJ3p37
-	 BmTAe3mRxnOyEra3kl+170oPUt+/Eb2+NC2bH/acE9FIbJSfONnMN5p2ujod0bnC2V
-	 OePiuamqW+CvojFavXLXhQupfOUijqyNPPuwa/Ymx3G6zP+FRV/dAb/8ZlWMdCU4pL
-	 L9bAQsUa6MKdQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4987A60758;
-	Mon,  2 Nov 2026 10:20:18 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id D9AFBD3A
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 10:20:17 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id CB03940719
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 10:20:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 379CB40719;
+	Mon,  2 Nov 2026 10:33:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AHlpfHUKabA8 for <u-boot@lists.u-boot-project.org>;
- Mon,  2 Nov 2026 10:20:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7E0D44070C
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=67.231.156.173
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793614817;
- b=Yjn6GU4d/ArqgOrq5h11xbcvrDhIX7QqH3VCMPNsZHmcM5jfFShdbPjoXEKyVnFSYmqU
- mcbUzdnEIDvExbqPLk5WIMLWtOGgzjhyLnrtminVbE+iqXYcpWJW1k4pJ2kF58LQA7N6t
- bH6GglajGoK/ibnUcNdkBwe/RKIvyvy3max6mma2msoaYf3PAtMCdfH0EFWCGodaGR3AA
- 7JSl7NTf7aLy7Nuk7zEj34QOP1A9h7XKCQqIT5QuJbYPL+3w4Z0SnjpHxahHZoDeWQk8W
- twqhWUpqkjKW1JCu79LnQbrZKa6RrF05wqaaG9nKNs9MXSDwWGwMx3gRoe122tvHBsA==
+ id OWWuPEL-CTiJ; Mon,  2 Nov 2026 10:32:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3DD65406E7
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793615579;
+	b=alzyZCWIuISv+AIox0uHPEaAY5Q4vaYP7fNIwKh2NkqEXFK+YYgieJwTTs0l0O6/QfHy
+	 WK73Cj+WVgC/W5vDa04/DVSvlKWYmP+Jc7guFBnvsIJ3zk/JyorANYjlKeqgjrpgSYYYY
+	 io/9D+pYAm5AOgR8OzX1m9btl5qb3d7kYjqRs4YeZ+Eiq01xpzdOTB7rGAK/kPz4okmFY
+	 PguregVHVbRJKjk40j/s62miACH7/EwmZJm4+tuwb8XCyvp7+c0mWZHe4IZJ3AFtir/7M
+	 WfVDYjcP4Q7lD+WJWtK52Ec8fwRDFS8NgOa4ZzZpEmFp9RChSpW73a0mhjr1lIj7cfg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793615579;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 Received:Received:DKIM-Signature:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Last-TLS-Session-Version:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=vPXZDE64MviQhC+jDA32kBa6yjiQJf9JcJc0ENghRz4=;
+	b=sdi1BNYs6u2AZ47rZRcpS89a1/ky0uzTBzSe6E+T5Rdo7hl8vpq/HJPTGFxHflf8Q6CF
+	 3hTidPYYOA6SnYYiFvg0K+l7xb0RehFsZ7VlTCROdJX62UoQ+A18/moOVpQz0T2tShcIE
+	 YAYDPv3OqsJwuNphQ07eqqyd5Cngq2ClwsaIVQmyyyq/BZGKmMnDtSj6GTM5iyIgx3pt4
+	 XJ/Z7YWmRgcjYGZM/yhugERMEYQwpQjq5vDVRPY2pI8gL3KR9CAcEMtN4C7Ju8RQ/VyFF
+	 9jEH972h/zSQUtwTuxezM8pqMYiGknHgJ9LAflTyomQiP79oVLhIly5wHffJyW8bChQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=LVdWhce5;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1793615579;
+	bh=vPXZDE64MviQhC+jDA32kBa6yjiQJf9JcJc0ENghRz4=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=peIhvIIaqse3TVejbayCQmsgELsTVXSxTmIm8xGl/FRw926MmkZgP2A5Im4AqNy1L
+	 wV0qN6mePJoBf1x6UUcrVGbs5mn9TGnPjd9eu9xZUzQyzfUEyhsLCdvdJ2WJ692ZGJ
+	 ExRn3FToo1CxiS3PX3ZhVFvP67eTOX0p/zwZ0B6LJf5QPeg1gUVbAEbge6vdYvyz8w
+	 ueuIjcNDyaxmAGuNNsx03p/kKdaea/cxIrFiKrttUW4tmMSDpLxNPlyCYTqwWjr408
+	 6AutDn0+Gn57v7C2Y6anWopJqAZMU1v+lV+M8oAwKtqG4hQVnZ/3ZYpkjePQyigpPB
+	 r/jAHrH5Dp1QA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3DD65406E7;
+	Mon,  2 Nov 2026 10:32:59 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 12547435
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 10:32:58 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 043CF406E7
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 10:32:58 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3nSx_iZq9FlZ for <u-boot@lists.u-boot-project.org>;
+ Mon,  2 Nov 2026 10:32:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 496BA406D4
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=185.246.85.4
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793615576;
+ b=I3vEI+EjClQsDpDaOkAzebNdGbdgEyGKs/Xtzb3mVdEa4QLOvqzMnKnFldSVrlY/9dg8
+ uJaTaw29u8DAvw7paa6K+FzB1CAFvMDBsoOE5oK+4EQ8kjqbhDvLTNYtb37e2IPMwzsRD
+ B5kmh2FUpg2JZUJ1xW75YeMJ9VeFrhF1inOCO9FaInKGlM3BQWqKCsixtMPdAjGO22SDm
+ ju2ksJTe3pIaZSaVoMXuuyxHsv5DpBz2pbedtSebPj3k/0a4TzBMM70Wl8uNet/b6CKKO
+ AY3ycU/pz/IcI5MiY8nCT6RzW04Lu+no6cBjuiwoyeK4hDwaALI4O3sGJw+wdItNzFQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793614817;
- h=Received-SPF:Received:DKIM-Signature:Received:Received:Received:
- Received:Date:From:To:CC:Subject:Message-ID:Mail-Followup-To:
- References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
- X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
- X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
- X-Proofpoint-Virus-Version;
- bh=kZ7kWUXMY9ApKlmuc9ermE3D/WkEby0GcQL/ifvEpZY=;
- b=Ag69cBDGQoXga7FHAd+JfECkEIt1+cRrKAhSgevz1q5q4VeRfAqNLRRLgNlhdtY2SMoi
- izcuByviqCKFtCpv8ihAl6NRYwpciM1HcN9oaqFq/Ian3oifwoBqaJ/ODqJdMHzKhLNjD
- x6N2W2cGDBodzR0uM8hHEg1bTMOHgd0+hgnOMK1CYB40PHSYmKJxUtxit2+Xrpq55R1v7
- 9hV3Mx1z7wQkIkNnD46R3qjN/TZf+EoLZpHz3MgLjA/294i2aZoVh1Il6KyFKlzCTrJb2
- b+MvVDChlNKa+tvMGXaMq19XU7k13Uh8mfmH/SgsBWVdqd505lR1sLaoiz+m4LPYgUQ==
+ c=relaxed/relaxed; t=1793615576;
+ h=Received-SPF:Received:Received:Received:DKIM-Signature:From:Date:
+ Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+ X-Last-TLS-Session-Version;
+ bh=vPXZDE64MviQhC+jDA32kBa6yjiQJf9JcJc0ENghRz4=;
+ b=Ax8qf5QpqlR1smmWyc7xxkYhMv2U5lO9JJIf52xz6rmkpwFnkTTn+M9x85gTkM2lq63F
+ i8VALEgxRR73ZmJ4weQk63P3QFLe4wv3EuSFzHd+v0fEXU7HqZZ5qsnC4MXH7T5hmS5L9
+ DmJi4vlI1eMISlWReIJzsy3X12y/KGQVL5lJXWKYXd2i8hD21+5SirskPXqTaTTjQgtfW
+ M3k3e097XiG05lx4fyYguQpmPXZG6Dtg6RkLUoerboszQfE2pvsExwldtZFzf6X8A1Z+w
+ /2p05bpRxXFKXYAbuz8X6N/GIZ3VlLpe/k6Cj/dblWa6iMxJI9fcH/vhzpiL46iwXjQ==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=marvell.com;
- dkim=pass header.d=marvell.com header.i=@marvell.com header.a=rsa-sha256
- header.s=pfpt0220 header.b=c3BbndWF; 
- arc=none smtp.remote-ip=67.231.156.173
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=67.231.156.173;
- helo=mx0b-0016f401.pphosted.com;
- envelope-from=prvs=2766062cf2=akashn@marvell.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=marvell.com
+ dmarc=pass header.from=bootlin.com;
+ dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
+ header.s=dkim header.b=LVdWhce5; 
+ arc=none smtp.remote-ip=185.246.85.4
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.85.4;
+ helo=smtpout-03.galae.net; envelope-from=thomas.perrot@bootlin.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=marvell.com header.i=@marvell.com header.a=rsa-sha256
- header.s=pfpt0220 header.b=c3BbndWF
-Received: from mx0b-0016f401.pphosted.com (mx0b-0016f401.pphosted.com
- [67.231.156.173])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7E0D44070C
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 10:20:15 +0000 (UTC)
-Received: from pps.filterd (m0045851.ppops.net [127.0.0.1])
- by mx0b-0016f401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A29FW931501429; Mon, 2 Nov 2026 02:20:10 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=marvell.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=pfpt0220; bh=kZ7kWUXMY9ApKlmuc9ermE3D/
- WkEby0GcQL/ifvEpZY=; b=c3BbndWFszDk2K5qC3sUZT2anzVp6w9MtvE80gM1W
- rBu9O1Q+D9croR1TBX6vnvDlsnNr8Lm6Ml+eiwaioN0FHMZhKpou+C+h/9qKaorF
- 6bFJCJ3CtGki8tA32cqmjRuT8yOlJsxSjH833442c0pMp15mqsdEm1tJSz8FK8xa
- i3soSZ4dh73fOs3BD4FzAOvtN8VCgIyRYmDLpxVEQ8TmjynVXWRGO2N6YdcLdYDC
- T79UsRjWvnRPyKnEybIH88GfwigtrPmF3C6OQQVEH8QGu/xFxBxC1k7FDthjIGx/
- UydosFXj3MHQyFWjH6iCjPdBHp4cipL3LNmHvJoeQc8jQ==
-Received: from dc5-exch05.marvell.com ([199.233.59.128])
- by mx0b-0016f401.pphosted.com (PPS) with ESMTPS id 4hpmqegrwn-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 02 Nov 2026 02:20:10 -0800 (PST)
-Received: from DC5-EXCH05.marvell.com (10.69.176.209) by
- DC5-EXCH05.marvell.com (10.69.176.209) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.25; Mon, 2 Nov 2026 02:20:09 -0800
-Received: from maili.marvell.com (10.69.176.80) by DC5-EXCH05.marvell.com
- (10.69.176.209) with Microsoft SMTP Server id 15.2.1544.25 via Frontend
- Transport; Mon, 2 Nov 2026 02:20:09 -0800
-Received: from hyd1-dt91330 (unknown [10.29.36.146])
- by maili.marvell.com (Postfix) with SMTP id B3EC33F7040;
- Mon,  2 Nov 2026 02:20:06 -0800 (PST)
-Date: Mon, 2 Nov 2026 10:20:05 +0000
-From: Akash Nair <akashn@marvell.com>
-To: Peter Robinson <pbrobinson@gmail.com>, <trini@konsulko.com>
-CC: <u-boot@lists.u-boot-project.org>, <jerome.forissier@arm.com>,
- <rkannoth@marvell.com>, <naveenm@marvell.com>,
- <marek.vasut@mailbox.org>, <alice.guo@oss.nxp.com>
-Subject: Re: [PATCH RFC 0/2] net: pcs: Add generic PCS interface and Synopsys
- DW XPCS driver
-Message-ID: <lzwsvngwxn3zlb734f7bwegmvzcutnqovzmshjbisp4kledgxp@skaln3tgaucn>
-Mail-Followup-To: Peter Robinson <pbrobinson@gmail.com>, 
- trini@konsulko.com, u-boot@lists.u-boot-project.org, jerome.forissier@arm.com, 
- rkannoth@marvell.com, naveenm@marvell.com, marek.vasut@mailbox.org, 
- alice.guo@oss.nxp.com
-References: <20261028100259.2491887-1-akashn@marvell.com>
- <CALeDE9MH_tPQi+vHBis3jQVAUuCQLRU7a_GXPt_gOzYz1Y7k=A@mail.gmail.com>
+ unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
+ header.s=dkim header.b=LVdWhce5
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 496BA406D4
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 10:32:55 +0000 (UTC)
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-03.galae.net (Postfix) with ESMTPS id E32054E413C3;
+ Mon,  2 Nov 2026 10:32:52 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id B74E560750;
+ Mon,  2 Nov 2026 10:32:52 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id EF46B10329123; Mon,  2 Nov 2026 11:32:49 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1793615572; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=vPXZDE64MviQhC+jDA32kBa6yjiQJf9JcJc0ENghRz4=;
+ b=LVdWhce527ncNoRpWyZKuq8tT/eGDmmgbI52AGXeLFFAta6qqct3OKhIKyyDOiOOVHLafv
+ C+2C6keHiTqgXd2EAifCHLZRYtb0XF9gObW3eC0/orekb2mNjGWex7wZRbqmeO8WKy+0wR
+ PyfQSISsrgQkwD4o5Qo4YkbdY/UX60slEQBoMaVK0E4jT2zY36sYsYPzgZ15WonefdWerm
+ qjQ8ilHdDK/nIZTkWZhc4GF2S37dfW3oC/vr8DVF+vrmi5l3J0tszrmVFI5xloNVsHptgm
+ MY33q5Mpn0O2A+XZqMm9AStHTEhhlC/LYyel8Z7l71YkCdPQROavc6zYRcZfSg==
+From: Thomas Perrot <thomas.perrot@bootlin.com>
+Date: Mon, 02 Nov 2026 11:32:44 +0100
+Subject: [PATCH v2] pwm: stm32: Fix division by zero for 32-bit timers
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <CALeDE9MH_tPQi+vHBis3jQVAUuCQLRU7a_GXPt_gOzYz1Y7k=A@mail.gmail.com>
-X-Proofpoint-GUID: 4On-oLmvt5E7yLTryZG43R0RdsBucsg0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDA0MCBTYWx0ZWRfX6kph5Z9S8PiJ
- YNbx05Tj7IYUvj/Hh60RRzDuDRkonLTpxkfXW0Xycd2qMqQZXw5l4SXaaL/Asl0tT8KhdaIiehb
- wPEVsHO3slbYNvwJr4Co38FsZvJ7Wax9E3dF8DQK+TK6eEu45FV9Hi27g1lG0AhsqVhf0V+Qfdm
- +S0o7LjZHp24rYyvFah9Vp8PRYKSgg6NR3zWetQrY/2jyJ1dF9VegPZewsPDe3qOMLPcIGZUelI
- WLp/aGGIHWCBeZwe0vb8Wnph+maiR1K8hnfWc9wrvz/suAOOcZNOdXaFdu5EiYnSWwANyADc70X
- qgYd2CEKH/sZSGzl1U9kRyuhjJHoLHseYjMSPDVpwWToDkAGoCjoaK2cnpjGSyVci69PcKH9als
- j1nORFaI//5ILqzgQwhbvltd5IKidWE6MejHaL8/tQdJrdZwjcjSYBmdlubSv/vMLfnkGLEkKDd
- WEQ0Ho9kSnagEIxql/w==
-X-Proofpoint-ORIG-GUID: 4On-oLmvt5E7yLTryZG43R0RdsBucsg0
-X-Authority-Analysis: v=2.4 cv=IewSymqa c=1 sm=1 tr=0 ts=6ae863da cx=c_pps
- a=rEv8fa4AjpPjGxpoe8rlIQ==:117 a=rEv8fa4AjpPjGxpoe8rlIQ==:17
- a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=l0iWHRpgs5sLHlkKQ1IR:22 a=QXcCYyLzdtTjyudCfB6f:22 a=pGLkceISAAAA:8
- a=DoHy0CeRISRvG1poRpcA:9 a=CjuIK1q_8ugA:10
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDA0MCBTYWx0ZWRfX16SvviQ14sVm
- drYAM236Zy9OtRRYtMiCzdK1iPjN6bkDLnnxsmiO5NhNJ3Da+o6ek5Rjo9E91FloaWkHg571E+m
- jWxYLG8acZ9j2ZF6iPbof4S2nk8ytjs=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-02_03,2026-10-21_02,2025-10-01_01
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20261102-tprrt-pwm-stm32-32bit-timer-div-v2-1-352fe74a27d7@tupi.fr>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4WNyw6CMBAAf8Xs2TV9GAie/A/DAegim1hK2k3VE
+ P7dSrx7nDnMrJAoMiW4HFaIlDlxmAuY4wGGqZvvhOwKg1Gm0so0KEuMgsvTYxJvDVrTs6Cwp4i
+ OMxL1qlbUOVVpKJUl0siv/XBrC0+cJMT3Psz6a39tq/62s0aNYzU21tWNsXS+9iHIg+fTEDy02
+ 7Z9AG0AiSTQAAAA
+X-Change-ID: 20261029-tprrt-pwm-stm32-32bit-timer-div-eeb070ead061
+To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.u-boot-project.org
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Tom Rini <trini@konsulko.com>, Cheick Traore <cheick.traore@foss.st.com>, 
+ Thomas Perrot <thomas.perrot@bootlin.com>
+X-Mailer: b4 0.14.3
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -186,121 +151,86 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 2026-10-29 at 09:25:23, Peter Robinson (pbrobinson@gmail.com) wrote:
+stm32_pwm_set_config() derives the prescaler with
+do_div(div, priv->max_arr + 1). max_arr is a u32, so on a 32-bit timer
+(max_arr = 0xFFFFFFFF, e.g. TIM5 on STM32MP15) the sum wraps to 0 and
+do_div() divides by zero. Configuring a PWM on such a timer, for
+instance for a backlight, resets the board.
 
-Hi Peter, Tom,
+do_div() takes a 32-bit divisor, so widening the operand is not enough.
+Use div64_u64() with a 64-bit divisor. The prescaler then comes out as
+0, which is right since the period fits in ARR without prescaling.
 
-Thanks for the review, and sorry for the late reply.
+Fixes: be5523d38296 ("pwm: stm32: add driver to support pwm with timer")
+Signed-off-by: Thomas Perrot <thomas.perrot@bootlin.com>
+Tested-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+Reviewed-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+---
+On a 32-bit timer such as TIM5 on STM32MP15, stm32_pwm_set_config()
+divides by max_arr + 1, which wraps to 0 in a u32. Seen when a
+backlight on TIM5 is configured from U-Boot.
 
-> I would typically expect a driver, even if explicitly labelled not
-> ready for merge, to enable people to see how this would work.
+I first implemented this fix on ST's U-Boot v2023.10-stm32mp tree.
+---
+Changes in v2:
+- Drop the div variable and derive the prescaler from prd directly
+- Collect Tested-by and Reviewed-by from Fabrice
+- Reword the note on where the fix was first implemented
+- Link to v1: https://lore.kernel.org/r/20261030-tprrt-pwm-stm32-32bit-timer-div-v1-1-f6f93d7923e4@bootlin.com
+---
+ drivers/pwm/pwm-stm32.c | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
 
-Agreed. I will post the MAC driver as a separate RFC series and link
-it from the v2 cover letter, so the interface can be reviewed together
-with its user.
+diff --git a/drivers/pwm/pwm-stm32.c b/drivers/pwm/pwm-stm32.c
+index a691f75e4a71..212389088f74 100644
+--- a/drivers/pwm/pwm-stm32.c
++++ b/drivers/pwm/pwm-stm32.c
+@@ -13,6 +13,7 @@
+ #include <asm/arch/timers.h>
+ #include <dm/device_compat.h>
+ #include <linux/bitfield.h>
++#include <linux/math64.h>
+ #include <linux/time.h>
+ 
+ #define CCMR_CHANNEL_SHIFT	8
+@@ -33,7 +34,7 @@ static int stm32_pwm_set_config(struct udevice *dev, uint channel,
+ {
+ 	struct stm32_timers_plat *plat = dev_get_plat(dev_get_parent(dev));
+ 	struct stm32_timers_priv *priv = dev_get_priv(dev_get_parent(dev));
+-	unsigned long long prd, div, dty;
++	unsigned long long prd, dty;
+ 	unsigned int prescaler = 0;
+ 	u32 ccmr, mask, shift;
+ 
+@@ -60,12 +61,10 @@ static int stm32_pwm_set_config(struct udevice *dev, uint channel,
+ 	 *   (period_ns * clkrate) // (NSEC_PER_SEC * (max_arr + 1)) ≤ prescaler
+ 	 */
+ 
+-	div = (unsigned long long)priv->rate * period_ns;
+-	do_div(div, NSEC_PER_SEC);
+-	prd = div;
++	prd = (unsigned long long)priv->rate * period_ns;
++	do_div(prd, NSEC_PER_SEC);
+ 
+-	do_div(div, priv->max_arr + 1);
+-	prescaler = div;
++	prescaler = div64_u64(prd, (u64)priv->max_arr + 1);
+ 	if (prescaler > MAX_TIM_PSC)
+ 		return -EINVAL;
+ 
 
-> Do you happen to know if there's other drivers in U-Boot currently
-> that are poking the PCS interfaces directly? Not asking you to convert
-> them, more just wondering if it's been hacked up elsewhere.
+---
+base-commit: 03e45557e1f38a39a0c80fe30483130ff376cf92
+change-id: 20261029-tprrt-pwm-stm32-32bit-timer-div-eeb070ead061
 
-Yes, more than just Airoha. I went through the tree. The same
-Synopsys XPCS is already driven by hand in four places:
+Best regards,
+-- 
+Thomas Perrot <thomas.perrot@tupi.fr>
 
-  drivers/net/fsl_enetc_xpcs_phy.c   NXP ENETC / i.MX94, over MDIO
-  drivers/net/dwc_eth_qos_intel.c    Intel mGBE, over MDIO
-  drivers/net/sja1105.c              NXP SJA1105/SJA1110, over SPI
-  drivers/net/designware.c           NPCM8xx only, MMIO with a
-                                     hardcoded base and the same
-                                     indirect page register scheme
-
-> Is the DW driver based on the proposed Linux driver for this? [1]
-
-No, it is not based on that series.
-The register names and sequences
-for the Clause 73 auto-negotiation and 10GBASE-R programming come from
-mainline drivers/net/pcs/pcs-xpcs*.c, and I will add the Linux
-copyright and SPDX lines to the file header in v2.
-
-> Can you explain why you chose to depend on UCLASS_MISC for the
-> functionality other than scope? I think I would sooner see a
-> UCLASS_PCS now rather than a lot of driver duplicated work that will
-> need to be fixed later. Maybe work with the Airoha maintainer to
-> convert that driver as an example, the Airoha support is quite new.
-
-I agree that a dedicated UCLASS_PCS is the better design, and I am
-planning to add one in v2.
-
-> > Questions for reviewers
-> > -----------------------
-> >  1. Is UCLASS_MISC with the ops in include/pcs.h acceptable as a
-> >     starting point?
-
-> I would sooner we go straight to UCLASS_PCS, it might be a bit more
-> work now, but will be less maintenance overall.
-
-Agreed. Will work on this.
-
-> >  2. Are struct pcs_config and struct pcs_state enough for other PCS
-> >     drivers, or is something missing?
-
-> I would like to see what other drivers poke the PCS stuff in tree as I
-> doubt this is just Airoha.
-
-Besides Airoha, I found these drivers that program PCS :
-- drivers/net/fsl_enetc_xpcs_phy.c
-- drivers/net/mtk_eth/...
-
-> >  3. Auto-negotiation completion is polled from get_state() and the
-> >     interrupt is not used. Is that fine for U-Boot?
-
-> I suspect it's probably fine, does get state use the event loop interface?
-
-No. pcs_get_state() does not block and does not use the event,
-cyclic or schedule() interfaces. It reads the status registers once
-and returns. The caller decides how often to call it, normally from
-the MAC driver's link wait loop. The only bounded waits are in
-probe and set_config() (reset and power-up, 100 ms timeouts).
-
-> > Testing
-> > -------
-> > Not tested on hardware yet.
-> > Build tested with CONFIG_PCS_XPCS=y on qemu_arm64.
-> > checkpatch.pl --strict reports no errors.
-
-> I would like to see actual tests as part of the patch series.
-Agreed.
-
-> > Not done
-
-> Are you intending to do this list below? It's not clear.
-
-> > --------
-> >  - Interface modes other than the three above. More modes are planned
-> >    once this is approved.
-
-> Please outline where you expect those to go, it helps provide context
-> to the actual reviewers rather than telling a small part of the story,
-> it also may show that a PCS uclass is more appropriate than using
-> misc.
-
-> >  - Clause 73 Next Pages: a link partner that uses them is rejected
-> >  - Register access over MDIO and the "direct" mapping
-> >  - Clocks and the interrupt from the binding
-> >  - PMA/SerDes initialisation: not done by this driver, it must be set
-> >    up before pcs_set_config() is called
-
-> How is that done? How is it documented? Again the sample driver would
-> likely show this.
-I will document these things in the v2.
-
-Apart from these I will have SPDX headers in the files.
-
-Thanks,
-Akash Nair
