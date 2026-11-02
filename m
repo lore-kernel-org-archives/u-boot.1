@@ -1,176 +1,182 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1ED5606A324
-	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 10:05:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0CEE606A324
+	for <u-boot@archiver.kernel.org>; Mon,  2 Nov 2026 10:20:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=FtauQOa6;
-	dkim=pass (2048-bit key, unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=XwZc8HQI
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=puOBCq9B;
+	dkim=pass (2048-bit key, unprotected) header.d=marvell.com header.i=@marvell.com header.a=rsa-sha256 header.s=pfpt0220 header.b=c3BbndWF
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9BA5B405B1;
-	Mon,  2 Nov 2026 10:05:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2E44F6076F;
+	Mon,  2 Nov 2026 10:20:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XpULT1BIjdBk; Mon,  2 Nov 2026 10:05:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E20E9405BA
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793613938;
-	b=O981kF1bTNY22Jms4IuhUn7n71LdedQodPTGrs6GsiNdZYIE7OqnkkpRjYXs17b5VCgr
-	 mxoVC/PvHagc+Edi3kms2qrZfWFjitsbSQSCfcEaaVRiUzKtaPenix3HxAwAwWCcdUFIK
-	 kZgd2EZCdUScuFnGKNubJOzrwykkWpdbn6B0QkWlEm3FT81+zribpwbOc4/4YQXI57Pxe
-	 h7hkJVYdNVRTiIOhhzN2MbjHccOTVLgYvM4qpsbUxa7KELP4606l+EuX2XhQph2euIFd1
-	 QS+waIOzuyEJlALb3u+JMNYlrdniUL1Ks7xpCNIt35bc094u4fQ6tJxpeux471KOkxA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TDuu4Oc4xJXk; Mon,  2 Nov 2026 10:20:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4987A60758
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793614818;
+	b=mWwO7okCfyaDecBGJ7zcPB//V2eoEzeZ/zN2owZFXwhgxx4gUTHuVXzZYmNSmoXbY+Sq
+	 d8U3gpiVQPjbJitMTtSxyWddY8vlZ8UFSGB/l0bSI+uFzzU6jAPfLGLcF4BE3JQPeGfR0
+	 XGa0NcpRcb+aTtVF3jDcVOS/e2yXVwLr0ph9F2A3ALfsAmDxU4krLyn9QLnCADIhZg8Cy
+	 PTASD1uPNPEQ+spLz8oGaXXiaPW4RxASXMEuAjGMIE1JujwX/MqAcJYMO0c6MBVnn55w7
+	 69XNhcGC/1EWCja8O9a+AOoQ/4GVfbMh0ArQ8ZSTsW/EEeqGx+mDU8xGUafdxQv7k0A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793613938;
+	c=relaxed/relaxed; t=1793614818;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 DKIM-Signature:Received:Received:Received:Received:Date:From:To:CC:
+	 Subject:Message-ID:Mail-Followup-To:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Virus-Version:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=K0zU49DLrG5DzEoWDu93ChkhDi17H0h49zwuL/gSH2M=;
-	b=V+KdcQ6uFB8nktaWpwsTohcogR52q+S4K16ZC2sIYdTvj+bOnclxl+Y+peNMt7bh2AT0
-	 1cexLlif4hZqow9ORjSlFh98LHMkPiWjnLYtIkCSK84nPeZE2/foE0Jtg+C1AcJhxuRat
-	 ruM2gBatTG2nMTFmh+SlJaB7WGnKjHyIWDrgKCBJYxW2TgVQIw4q0r2IzEBxxWjYMG95f
-	 R3TzhZtzMybMhUpkNIfgcPbB5YzhCtJZWQOwxVxkAOt4a50TV1sk8eUNJmrPbyyOBXPSA
-	 pU1BMV4APrbwRCfsXvE3f6XtFIz7Ep7vfnsCHMGE0v9EbCpBIFFhAh+45ZpiHDgF7eQ==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=kZ7kWUXMY9ApKlmuc9ermE3D/WkEby0GcQL/ifvEpZY=;
+	b=ZURZflYoSSbRl37gSCBZ7xnTHw4wRadmafe/im1houVgST13mCurcdXaZF7cB1eyEkgP
+	 v2gjCltv9wEbpZ9JlfDypbgC927IDf9yICOFJMYOOgIMV7s5rE+GACGhnteZTqSbCXY1+
+	 czjdKYb1TybdTj3LpmPFvTjByXhzZaRuZnrDBpeVfkJbOnZGFwL63CXXNdzEWmgBiTFUf
+	 fmudIXFg0tSpkUa4SOu/M29QiWDlKiOeDZWRtNz/yPpp/axPRT+Dx7XOM+5E6QJEbVIYu
+	 yho0E2urpmC0boGkNwFsfeCDC2uVyhCgwYJVV9BpQ4ic2hgE/sD3mCeB7aLPR8NhIMA==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793613938;
-	bh=K0zU49DLrG5DzEoWDu93ChkhDi17H0h49zwuL/gSH2M=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793614818;
+	bh=kZ7kWUXMY9ApKlmuc9ermE3D/WkEby0GcQL/ifvEpZY=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=FtauQOa6vbqatLTaI2zE6DzDnNn9pDxY9b3swgVzoDlrRjCXrOi8cGhCqK7iQjQmo
-	 ydf6bMPEGAlFMxjCVJCzG60j5ZkJ/rnukh7QmXbIPe1I4yP5qCpPWXiXxU+YmQNbqQ
-	 4725+HWaSQRRnHITXm+cwL3TsMBAri99rAj2jwVmhNlBZYZeH9IzaZ7ajK/Xtx1bd3
-	 IgXKjuYnKSjdwXonf5QxM7rNTySmhVLuPtHw9pTFSk28yhoaLAhdzRVZLcTxnn+d/z
-	 +l6KOmPMI5EG2BboI9eT9X/RnyzqaXjQ5s3ISdPaT+6mk4OdXGyyc1g+laB3j+HaX4
-	 JTxjkuFbdnWGA==
+	b=puOBCq9BBRtw/RqKEy9UzrpekgpTJsRyXgEz5ikSYPqcVyGEMeWXxwSycxDzPnBpx
+	 XfW5VA1D1KEWNDHwiamKBQDPTH1JSvAP90rmvAv/hOjFm0Z8BYZ+6SjMIgtLuKfrzC
+	 1enoRzCqW2dmeOT5kRDCf7zpD+Q8RQIruOiC/29cOoGdH2BtL6PjsUSfL5y1nJ3p37
+	 BmTAe3mRxnOyEra3kl+170oPUt+/Eb2+NC2bH/acE9FIbJSfONnMN5p2ujod0bnC2V
+	 OePiuamqW+CvojFavXLXhQupfOUijqyNPPuwa/Ymx3G6zP+FRV/dAb/8ZlWMdCU4pL
+	 L9bAQsUa6MKdQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E20E9405BA;
-	Mon,  2 Nov 2026 10:05:37 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 875DDD3A
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 10:05:36 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4987A60758;
+	Mon,  2 Nov 2026 10:20:18 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id D9AFBD3A
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 10:20:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 6DC62401B9
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 10:05:36 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id CB03940719
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 10:20:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fj7nbjf0cbTv for <u-boot@lists.u-boot-project.org>;
- Mon,  2 Nov 2026 10:05:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 7DB1B400C8
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::430"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793613935;
- b=FB9c0D7aInbxVcGpXjLMLc3EGs0ol2MPWUqHvCLp+mDaOVv5S4dCKgsfK+M6g6+Gp3+t
- X0iHtO1QNCRjU0csJXKptJAOeGNKSght/8FDlcpDxk8L/vnLotDGNgGv+7z5PFFEnpOml
- xBul8d2llAAWeN9pbm/ADf7KISN4flYxTQgjyMws6d8DnYZjO4kGdShKlD8nmBe12pmsD
- ao//JvZH2ZafmaabT0k3P80WpbguOmVS4wy/d3TfNwFnfr15ezj+CvYkoaAaEdURif0rg
- bghp+FqR+ljFR6tmc30VOBr03syRuv63+4RgYwhCMvmv51JMlGE4vTX+rVj61wEA31A==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AHlpfHUKabA8 for <u-boot@lists.u-boot-project.org>;
+ Mon,  2 Nov 2026 10:20:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7E0D44070C
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip=67.231.156.173
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793614817;
+ b=Yjn6GU4d/ArqgOrq5h11xbcvrDhIX7QqH3VCMPNsZHmcM5jfFShdbPjoXEKyVnFSYmqU
+ mcbUzdnEIDvExbqPLk5WIMLWtOGgzjhyLnrtminVbE+iqXYcpWJW1k4pJ2kF58LQA7N6t
+ bH6GglajGoK/ibnUcNdkBwe/RKIvyvy3max6mma2msoaYf3PAtMCdfH0EFWCGodaGR3AA
+ 7JSl7NTf7aLy7Nuk7zEj34QOP1A9h7XKCQqIT5QuJbYPL+3w4Z0SnjpHxahHZoDeWQk8W
+ twqhWUpqkjKW1JCu79LnQbrZKa6RrF05wqaaG9nKNs9MXSDwWGwMx3gRoe122tvHBsA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793613935;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
- Content-Type:Content-Disposition:In-Reply-To;
- bh=K0zU49DLrG5DzEoWDu93ChkhDi17H0h49zwuL/gSH2M=;
- b=fu28TeeJZbXnoO11ialc/GFGuzRwH6qTrRTMUSL4OzYK8RLlfBXYHHxI3joBFDqT6EXo
- gRoLKzYuxk1AxQBG+dXU+yqzSQfT6iARO2ZS1hZU4YqeNbtSl3Uyqiv4HUH3pw04ij7/V
- g4PBciVkjgbtthBxvC24bkhLpXy8+z921sobnU9fW4418/GO5D3HJ67VGAzmoQsC/W9Qb
- JuJ3fWDoHV5rq9h3IK1uw2QG/IDtmeopKfGQc0lCmaHD9+hMTl8JOfr/IaiURpIZFvHbs
- 1NS45AsKu0LYY3imW+/Cyl9zHudIYLKOEzxxEBMyE/mcN8APY7PEbP9KblfWRRJDV3A==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=sifive.com;
- dkim=pass header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256
- header.s=google header.b=XwZc8HQI; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::430"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::430; helo=mail-pf1-x430.google.com;
- envelope-from=leo.liang@sifive.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=sifive.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256
- header.s=google header.b=XwZc8HQI
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7DB1B400C8
- for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 10:05:33 +0000 (UTC)
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-89f28c3ac7bso902114b3a.0
- for <u-boot@lists.u-boot-project.org>; Mon, 02 Nov 2026 02:05:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1793613933; x=1794218733;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=K0zU49DLrG5DzEoWDu93ChkhDi17H0h49zwuL/gSH2M=;
- b=XwZc8HQImcXcvHPRSI6YzqdwwKU4O8xops0EOE1siMwepHcj9efZ2ipX9/nGa2JpqT
- Z/MbeqXeWs13yVdLve3/GApsDeaKv2AvkhWjf8X/RD+l1nTHEv6OAi7yAFoy/K1sBCJO
- FanCTCykmuYozrADAKe5b4dJm1UNSM9axO9CitCBaVxF0nvaGFwDKfl5BaZDsGyY+g75
- V4iC99Y/nPtIC8J9/Nw7KKngNq0EzWoEe/KlLmpgVOVGLAZFLiORS/eFmRSenWV6sX3g
- RY5qv4f8o9eF/KLhixZySwrJpzpPME9KyaFsv5GAM+k/hsFQaDbsgOlCOxP/BkHy5tmN
- w0hg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793613933; x=1794218733;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=K0zU49DLrG5DzEoWDu93ChkhDi17H0h49zwuL/gSH2M=;
- b=YIcXRuVZiyhLRtQ8ZofeIPmDBP3GNGnh5t1Uv4TcdFYISDAHV3lE6IFUXmb1Bf0kBm
- jWpmk3sX+Vjp/HMR5PjI25uh4m0fJnjaAKsxHfSaCREdSNr0SY3ageDo0KYjseKtKenJ
- DntsKZeJ/2M5b4ljX8LrlZx81zPelaAzOWSAbmzv44S77gJ3915HJ9jXHE+uPfXtwgPS
- 6ulCu0eChkqkiX+jx2pKktv4zCJonw87jSMJkMaTchqTLnJ3GCt2UpmHCPOel9yN9fB9
- noEKQ5j6aCgBibjAdul1HgC44qccFDFX+mM4jr+Wjndw40qHWseLrBlrjkFnVW+0YyUz
- tYBQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvByIe9cbeLbWjJMK+kTg4OoukWvvzh4hmaCh8YFh2EbJMiQCaqIo4x969L8uoZ4Acfrl/w2swxE=@lists.u-boot-project.org
-X-Gm-Message-State: AFq9FYJ3rxRsz9y3jW+VKx/ti0O6utgccLZfjUqFtFvHd1oKjUaNTljS
- F0J34Bs/F91V5ZPXZ24p+4mhbMuZsyHjXIIHb9mwkbzoMwpYmw25cvb/fnnV6VeGmmQ=
-X-Gm-Gg: AYBFou1rjAczIVpQO+jakrxgodq6Aqp9M4t0XXJqu4ZUcArfsFrz84Au2oUhdj1r9wl
- qCCFVubVFVY5Dh0irRw2e//6IK8JqBBhicEB8ejC5jRWMctStJh8/sk/hluCIIh7ikkc39YkDzX
- 9VO0I81H+Rt8qGuS8Rl8rsCIyvSJOMiDrmTsmBDXsLC/Gj0UsJCjmimS+hz15spzgHNb2FsbROJ
- zylqWT2VZkkNa21ttF+/O6oj2zhKWFL2009CADHm/sOUgTeMU/vfWOQ5CwNmrKCez+yl4c8prQN
- 7PeNX2l/06Du6RLaRl1fOA0skzN0wNPSPztBbdOzzmYru9gAUTZyBddQafiH+oOYslWW+HycYS+
- Rv75yzXw+FG/JfUncxSncKG16jyB2iQtsPo00AbltfmGFpPxwILDl2S9DAEJnCsqVg0HRaU1cOG
- ZACTcaa4+llPBnRKbqDJ4mtHmSXNAG6T69o0t0ItTRLlTufVAxKXcouo/6aIIi5FF747L4kiZBh
- vCVDTGs78XfknrRreA93IalVDvio7qE34G9td3HfRngfNW+/WKrq1KHKUWVvZOVztAannJiLAGI
- dTKnDcg3ZOfBgv//g1/t5eNQR6l3TZj3vBFzZU6FJK+AYGPxYvWT9gQTH9tvA5/Rvg==
-X-Received: by 2002:a05:6a21:e44b:b0:3e0:c955:cd5a with SMTP id
- adf61e73a8af0-3e9290e4caamr6847068637.68.1793613932985; 
- Mon, 02 Nov 2026 02:05:32 -0800 (PST)
-Received: from lliang-1876.localdomain ([136.226.240.173])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-8aad9d03be0sm1775656b3a.27.2026.11.02.02.05.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Nov 2026 02:05:32 -0800 (PST)
-Date: Mon, 2 Nov 2026 18:05:23 +0800
-From: Leo Liang <leo.liang@sifive.com>
-To: Dave Klotz <DaveWK225@protonmail.com>
-Cc: Yixun Lan <dlan@kernel.org>, u-boot@lists.u-boot-project.org,
- Tom Rini <trini@konsulko.com>, Huan Zhou <pericycle.cc@gmail.com>,
- Eric Chung <eric.chung@riscstar.com>, u-boot-spacemit@groups.io
-Subject: Re: [PATCH] riscv: spacemit: handle overlapping DDR firmware
- relocation
-Message-ID: <auhgY5vDxCRWpQeT@lliang-1876.localdomain>
-References: <20261005T132330-0400.ddr-overlap.DaveWK225@protonmail.com>
+ c=relaxed/relaxed; t=1793614817;
+ h=Received-SPF:Received:DKIM-Signature:Received:Received:Received:
+ Received:Date:From:To:CC:Subject:Message-ID:Mail-Followup-To:
+ References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+ X-Proofpoint-GUID:X-Proofpoint-Spam-Details-Enc:
+ X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
+ X-Proofpoint-Virus-Version;
+ bh=kZ7kWUXMY9ApKlmuc9ermE3D/WkEby0GcQL/ifvEpZY=;
+ b=Ag69cBDGQoXga7FHAd+JfECkEIt1+cRrKAhSgevz1q5q4VeRfAqNLRRLgNlhdtY2SMoi
+ izcuByviqCKFtCpv8ihAl6NRYwpciM1HcN9oaqFq/Ian3oifwoBqaJ/ODqJdMHzKhLNjD
+ x6N2W2cGDBodzR0uM8hHEg1bTMOHgd0+hgnOMK1CYB40PHSYmKJxUtxit2+Xrpq55R1v7
+ 9hV3Mx1z7wQkIkNnD46R3qjN/TZf+EoLZpHz3MgLjA/294i2aZoVh1Il6KyFKlzCTrJb2
+ b+MvVDChlNKa+tvMGXaMq19XU7k13Uh8mfmH/SgsBWVdqd505lR1sLaoiz+m4LPYgUQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=marvell.com;
+ dkim=pass header.d=marvell.com header.i=@marvell.com header.a=rsa-sha256
+ header.s=pfpt0220 header.b=c3BbndWF; 
+ arc=none smtp.remote-ip=67.231.156.173
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=67.231.156.173;
+ helo=mx0b-0016f401.pphosted.com;
+ envelope-from=prvs=2766062cf2=akashn@marvell.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=marvell.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=marvell.com header.i=@marvell.com header.a=rsa-sha256
+ header.s=pfpt0220 header.b=c3BbndWF
+Received: from mx0b-0016f401.pphosted.com (mx0b-0016f401.pphosted.com
+ [67.231.156.173])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 7E0D44070C
+ for <u-boot@lists.u-boot-project.org>; Mon,  2 Nov 2026 10:20:15 +0000 (UTC)
+Received: from pps.filterd (m0045851.ppops.net [127.0.0.1])
+ by mx0b-0016f401.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6A29FW931501429; Mon, 2 Nov 2026 02:20:10 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=marvell.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=pfpt0220; bh=kZ7kWUXMY9ApKlmuc9ermE3D/
+ WkEby0GcQL/ifvEpZY=; b=c3BbndWFszDk2K5qC3sUZT2anzVp6w9MtvE80gM1W
+ rBu9O1Q+D9croR1TBX6vnvDlsnNr8Lm6Ml+eiwaioN0FHMZhKpou+C+h/9qKaorF
+ 6bFJCJ3CtGki8tA32cqmjRuT8yOlJsxSjH833442c0pMp15mqsdEm1tJSz8FK8xa
+ i3soSZ4dh73fOs3BD4FzAOvtN8VCgIyRYmDLpxVEQ8TmjynVXWRGO2N6YdcLdYDC
+ T79UsRjWvnRPyKnEybIH88GfwigtrPmF3C6OQQVEH8QGu/xFxBxC1k7FDthjIGx/
+ UydosFXj3MHQyFWjH6iCjPdBHp4cipL3LNmHvJoeQc8jQ==
+Received: from dc5-exch05.marvell.com ([199.233.59.128])
+ by mx0b-0016f401.pphosted.com (PPS) with ESMTPS id 4hpmqegrwn-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 02 Nov 2026 02:20:10 -0800 (PST)
+Received: from DC5-EXCH05.marvell.com (10.69.176.209) by
+ DC5-EXCH05.marvell.com (10.69.176.209) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.25; Mon, 2 Nov 2026 02:20:09 -0800
+Received: from maili.marvell.com (10.69.176.80) by DC5-EXCH05.marvell.com
+ (10.69.176.209) with Microsoft SMTP Server id 15.2.1544.25 via Frontend
+ Transport; Mon, 2 Nov 2026 02:20:09 -0800
+Received: from hyd1-dt91330 (unknown [10.29.36.146])
+ by maili.marvell.com (Postfix) with SMTP id B3EC33F7040;
+ Mon,  2 Nov 2026 02:20:06 -0800 (PST)
+Date: Mon, 2 Nov 2026 10:20:05 +0000
+From: Akash Nair <akashn@marvell.com>
+To: Peter Robinson <pbrobinson@gmail.com>, <trini@konsulko.com>
+CC: <u-boot@lists.u-boot-project.org>, <jerome.forissier@arm.com>,
+ <rkannoth@marvell.com>, <naveenm@marvell.com>,
+ <marek.vasut@mailbox.org>, <alice.guo@oss.nxp.com>
+Subject: Re: [PATCH RFC 0/2] net: pcs: Add generic PCS interface and Synopsys
+ DW XPCS driver
+Message-ID: <lzwsvngwxn3zlb734f7bwegmvzcutnqovzmshjbisp4kledgxp@skaln3tgaucn>
+Mail-Followup-To: Peter Robinson <pbrobinson@gmail.com>, 
+ trini@konsulko.com, u-boot@lists.u-boot-project.org, jerome.forissier@arm.com, 
+ rkannoth@marvell.com, naveenm@marvell.com, marek.vasut@mailbox.org, 
+ alice.guo@oss.nxp.com
+References: <20261028100259.2491887-1-akashn@marvell.com>
+ <CALeDE9MH_tPQi+vHBis3jQVAUuCQLRU7a_GXPt_gOzYz1Y7k=A@mail.gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20261005T132330-0400.ddr-overlap.DaveWK225@protonmail.com>
+In-Reply-To: <CALeDE9MH_tPQi+vHBis3jQVAUuCQLRU7a_GXPt_gOzYz1Y7k=A@mail.gmail.com>
+X-Proofpoint-GUID: 4On-oLmvt5E7yLTryZG43R0RdsBucsg0
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDA0MCBTYWx0ZWRfX6kph5Z9S8PiJ
+ YNbx05Tj7IYUvj/Hh60RRzDuDRkonLTpxkfXW0Xycd2qMqQZXw5l4SXaaL/Asl0tT8KhdaIiehb
+ wPEVsHO3slbYNvwJr4Co38FsZvJ7Wax9E3dF8DQK+TK6eEu45FV9Hi27g1lG0AhsqVhf0V+Qfdm
+ +S0o7LjZHp24rYyvFah9Vp8PRYKSgg6NR3zWetQrY/2jyJ1dF9VegPZewsPDe3qOMLPcIGZUelI
+ WLp/aGGIHWCBeZwe0vb8Wnph+maiR1K8hnfWc9wrvz/suAOOcZNOdXaFdu5EiYnSWwANyADc70X
+ qgYd2CEKH/sZSGzl1U9kRyuhjJHoLHseYjMSPDVpwWToDkAGoCjoaK2cnpjGSyVci69PcKH9als
+ j1nORFaI//5ILqzgQwhbvltd5IKidWE6MejHaL8/tQdJrdZwjcjSYBmdlubSv/vMLfnkGLEkKDd
+ WEQ0Ho9kSnagEIxql/w==
+X-Proofpoint-ORIG-GUID: 4On-oLmvt5E7yLTryZG43R0RdsBucsg0
+X-Authority-Analysis: v=2.4 cv=IewSymqa c=1 sm=1 tr=0 ts=6ae863da cx=c_pps
+ a=rEv8fa4AjpPjGxpoe8rlIQ==:117 a=rEv8fa4AjpPjGxpoe8rlIQ==:17
+ a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=l0iWHRpgs5sLHlkKQ1IR:22 a=QXcCYyLzdtTjyudCfB6f:22 a=pGLkceISAAAA:8
+ a=DoHy0CeRISRvG1poRpcA:9 a=CjuIK1q_8ugA:10
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDA0MCBTYWx0ZWRfX16SvviQ14sVm
+ drYAM236Zy9OtRRYtMiCzdK1iPjN6bkDLnnxsmiO5NhNJ3Da+o6ek5Rjo9E91FloaWkHg571E+m
+ jWxYLG8acZ9j2ZF6iPbof4S2nk8ytjs=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-02_03,2026-10-21_02,2025-10-01_01
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -180,28 +186,121 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Oct 05, 2026 at 05:30:07PM +0000, Dave Klotz wrote:
-> The binman-appended DDR firmware grows towards its fixed execution address
-> at 0xc082d000 as SPL gains code and device-tree data. On the current R2S
-> image the source starts at 0xc0825c80 and its 36248 bytes overlap the
-> execution region by 6680 bytes. The RV2 image overlaps by 7704 bytes.
-> 
-> memcpy() copies forwards on RISC-V and corrupts the end of the firmware
-> when the destination overlaps a later part of the source. Use memmove()
-> so both overlapping and disjoint image layouts preserve the firmware.
-> Keep the DDR configuration, execution address and instruction fence intact.
-> 
-> Signed-off-by: Dave Klotz <DaveWK225@protonmail.com>
-> ---
-> 
->  board/spacemit/k1/spl.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+On 2026-10-29 at 09:25:23, Peter Robinson (pbrobinson@gmail.com) wrote:
 
-Reviewed-by: Leo Yu-Chi Liang <leo.liang@sifive.com>
+Hi Peter, Tom,
+
+Thanks for the review, and sorry for the late reply.
+
+> I would typically expect a driver, even if explicitly labelled not
+> ready for merge, to enable people to see how this would work.
+
+Agreed. I will post the MAC driver as a separate RFC series and link
+it from the v2 cover letter, so the interface can be reviewed together
+with its user.
+
+> Do you happen to know if there's other drivers in U-Boot currently
+> that are poking the PCS interfaces directly? Not asking you to convert
+> them, more just wondering if it's been hacked up elsewhere.
+
+Yes, more than just Airoha. I went through the tree. The same
+Synopsys XPCS is already driven by hand in four places:
+
+  drivers/net/fsl_enetc_xpcs_phy.c   NXP ENETC / i.MX94, over MDIO
+  drivers/net/dwc_eth_qos_intel.c    Intel mGBE, over MDIO
+  drivers/net/sja1105.c              NXP SJA1105/SJA1110, over SPI
+  drivers/net/designware.c           NPCM8xx only, MMIO with a
+                                     hardcoded base and the same
+                                     indirect page register scheme
+
+> Is the DW driver based on the proposed Linux driver for this? [1]
+
+No, it is not based on that series.
+The register names and sequences
+for the Clause 73 auto-negotiation and 10GBASE-R programming come from
+mainline drivers/net/pcs/pcs-xpcs*.c, and I will add the Linux
+copyright and SPDX lines to the file header in v2.
+
+> Can you explain why you chose to depend on UCLASS_MISC for the
+> functionality other than scope? I think I would sooner see a
+> UCLASS_PCS now rather than a lot of driver duplicated work that will
+> need to be fixed later. Maybe work with the Airoha maintainer to
+> convert that driver as an example, the Airoha support is quite new.
+
+I agree that a dedicated UCLASS_PCS is the better design, and I am
+planning to add one in v2.
+
+> > Questions for reviewers
+> > -----------------------
+> >  1. Is UCLASS_MISC with the ops in include/pcs.h acceptable as a
+> >     starting point?
+
+> I would sooner we go straight to UCLASS_PCS, it might be a bit more
+> work now, but will be less maintenance overall.
+
+Agreed. Will work on this.
+
+> >  2. Are struct pcs_config and struct pcs_state enough for other PCS
+> >     drivers, or is something missing?
+
+> I would like to see what other drivers poke the PCS stuff in tree as I
+> doubt this is just Airoha.
+
+Besides Airoha, I found these drivers that program PCS :
+- drivers/net/fsl_enetc_xpcs_phy.c
+- drivers/net/mtk_eth/...
+
+> >  3. Auto-negotiation completion is polled from get_state() and the
+> >     interrupt is not used. Is that fine for U-Boot?
+
+> I suspect it's probably fine, does get state use the event loop interface?
+
+No. pcs_get_state() does not block and does not use the event,
+cyclic or schedule() interfaces. It reads the status registers once
+and returns. The caller decides how often to call it, normally from
+the MAC driver's link wait loop. The only bounded waits are in
+probe and set_config() (reset and power-up, 100 ms timeouts).
+
+> > Testing
+> > -------
+> > Not tested on hardware yet.
+> > Build tested with CONFIG_PCS_XPCS=y on qemu_arm64.
+> > checkpatch.pl --strict reports no errors.
+
+> I would like to see actual tests as part of the patch series.
+Agreed.
+
+> > Not done
+
+> Are you intending to do this list below? It's not clear.
+
+> > --------
+> >  - Interface modes other than the three above. More modes are planned
+> >    once this is approved.
+
+> Please outline where you expect those to go, it helps provide context
+> to the actual reviewers rather than telling a small part of the story,
+> it also may show that a PCS uclass is more appropriate than using
+> misc.
+
+> >  - Clause 73 Next Pages: a link partner that uses them is rejected
+> >  - Register access over MDIO and the "direct" mapping
+> >  - Clocks and the interrupt from the binding
+> >  - PMA/SerDes initialisation: not done by this driver, it must be set
+> >    up before pcs_set_config() is called
+
+> How is that done? How is it documented? Again the sample driver would
+> likely show this.
+I will document these things in the v2.
+
+Apart from these I will have SPDX headers in the files.
+
+Thanks,
+Akash Nair
