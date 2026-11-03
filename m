@@ -1,173 +1,180 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18EF9606A331
-	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 16:50:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7210606A328
+	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 16:50:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=pDjI0deW;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=cd+cP/3K
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=lkPz4TNU;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ZeKyGp9N
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CA7BB605B5;
-	Tue,  3 Nov 2026 16:50:14 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 978F880E3E;
+	Tue,  3 Nov 2026 16:50:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2IphsJ2gpLoS; Tue,  3 Nov 2026 16:50:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 23693606CE
-Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793724614;
-	b=noO+KF7coMgRqgpztCmgyA0OOvywNq6ixoyhI4afsjq4MQvaDQCBPFA1BmbX2yrus/oM
-	 X/C7j2Mt4B5/LVWR3ZFgNVxe4jcEAolK3WPjo80xOH9rJ5DA8DCm4xZ8NPVuXGl5Xtws6
-	 i4CQ9QCJ8RmttA7GE+Ynh4JdbD0hxek7nVZ8Mm11dCub7sQQDOPwekmnF61r6iNMmJKWa
-	 Q0vZyx+OPmVna5w3PXCBhhE2DV4OQY2zlYX07MTYAy09bUlDXjMYbfxnApmEPX5h9g2IL
-	 otblLDo3C2qkRNEc644pYakv6ekOJmr7/r5f7sduScOc7Ssv4Y7cdbQa9aDm0P9TOSg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3ME8D3v1a3CX; Tue,  3 Nov 2026 16:50:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C1FE180DD8
+Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793724617;
+	b=A2+0TG+f8UutpnN/OJ8KtzuFRMW+o6Uj7wwv30f1GtkocMrwnur0WWyD0MAr79wnvZY4
+	 6HlV7FOZ5tyVoiPziftIi7vV3yP04Y0jaw+1MVhYbqKA73MjxVHThsHBeqv+NtJyYEfH+
+	 5CwY4LX1uDtLHUgb2vZvKNCinVS+xwNkKvjXA74/ecVqAiWrlnZAt8Y/LD5MrpwDe6M3k
+	 pI2yNNm9xD27zwxLgkMhi+zX5x6omFUQkDqo0VDjlr41gl3VmW8A1jNbSMfy0Sx7m3XTv
+	 RYXQzKwd0itIR49O/IUnQVhZSeqqs7GpjVfbl+MifwczCJzmEtnFUmiqaAkF96u+OJA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793724614;
+	c=relaxed/relaxed; t=1793724617;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:X-Comment:Received:Received:
 	 Received:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-Virus-Scanned:X-Virus-Status:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=La1dibXF3oZ/05I7jyTVx5/57ddqni9keast6vEUmt0=;
-	b=J36etjsgHItZBl08P7yC27H33UK/xvCkrY27DpuE1L/sHBDuqgucY5Htd+ysJUIMWeJm
-	 o0JeRYfpGKOZwDCUUx7VuEDwjSoMpO+iKXrzreXC3nkJLXL7dUPoaaPcZvvLO8peQoE6Q
-	 AT9f8T6ofsDNFQCF/9NICZHEyzrsU+1hN3SrN3LT4wEN5nm1/F6RBsf7AkRy2EBXxU4k9
-	 CgZZXi82vbV3GCtZdMVbryurFjM5SK1ino+j9AxzUhBEzwHIh5YZQD5jQWgYLe6Lcj4i0
-	 rNV060uae9QVDAdFE+gPprJgFXci1UAbLq83XFaq5mwWlwYJf0i/zRuTJKpQK3wUhBA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-Virus-Scanned:X-Virus-Status:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=JbhTB+B0Anj4d9OdOpaWmw74165WNQw1S4WZRmBAgc4=;
+	b=iSOvQGO7/sJV/63u//xgDafauK00MiHrPB5lb7gflp9G9CPUmtsMDGZllIF4CZUbbEeO
+	 7ILrGMmTG7bNQVz9zDJ3DE4m2AyxzPeSL+aCAk7C+fFc6iUV7QA6Up5XyQtewCoRwUpqD
+	 3uS6BrzZah4Zf6wPQMTkqyvE8xYvjDu4zW9b0ySaq3fZuJRyq9RJ5VgTbntPoPwy9vtx1
+	 YASGNJnbz3fQ9CRhEm1WVF81b4HyjbOQLQxirkwbaa7QJTiXMGKiPOqgkS1UyFCn0++jo
+	 lXcWDxUq/CkOEx8LEeAY7MsnBcbfBu8rVrI7alFhRrh4mUGbBoqGl59N/vTLsJ8/n7w==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793724614;
-	bh=La1dibXF3oZ/05I7jyTVx5/57ddqni9keast6vEUmt0=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=pDjI0deWHOa7Tk2CCgrcgLjhGyRMVsUvonst+mgnQXD/QO2EkwwALpDlaoLQD6Hcm
-	 a2b6x+4APmKLghAm5EHVjMO70hrpJd359wB1Qcno+oVlh8K1d9nxcjoiM0iSrnhRYZ
-	 oFis/bE/uUE63vlcFLv8deFX2o77ZKbhL2uQ7o7+awhe0o+gQ9zcdxqMYNCKZaaOhB
-	 IVCchb7pr0huaSLrKLC1xQDwEdL6eDHoqzJBSqYacsG4AhhSArbAGF/htZhgM+rBZk
-	 B91gzNDg+8VM04/Ov9D9uwa78lP0J2uQEZqyygQX9IByifozdDdaWuuWHrqURHooQF
-	 kkZu7cAp43qig==
+	d=lists.u-boot-project.org; s=default; t=1793724616;
+	bh=JbhTB+B0Anj4d9OdOpaWmw74165WNQw1S4WZRmBAgc4=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=lkPz4TNUZQgYTOobpVDiLmaZDjYLyoGVV0Q2ULwqM1euUoMY6m1aZ5Z5pm9MaAyFi
+	 X6cvW9/4A0h8x4XiDJCP99JXWOfEQGN3XgoExmCBORx3DnU4udV+QQun2fcIWCWEpM
+	 XTJjeDwX4QA7RCcGwlTZb7eq3xRG1pHq7HtU+RRWiREKR4njuVXF3A4iVltA7k5zRY
+	 PervrHuFLWYxfBHBm/2/PB8g/Ra6ssVj5/XdqTq5uhP7HCJNIm8eNAfg/WFGmfIYb5
+	 YVSuDpH9dpnq9ZsBQMrPYfXOqvXY2neQPLR7C7qEfp3V7RS6MKYBYQMtTkFPIJ/lQl
+	 /m2cSfzEQieTA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 23693606CE;
-	Tue,  3 Nov 2026 16:50:14 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 06AB24BC
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 16:50:13 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C1FE180DD8;
+	Tue,  3 Nov 2026 16:50:16 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id C9565356
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 16:50:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E04E240068
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 16:50:12 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id BAE3940660
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 16:50:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EKY0YRHFmquP for <u-boot@lists.u-boot-project.org>;
- Tue,  3 Nov 2026 16:50:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 951A340062
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=85.214.62.61
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793724612;
- b=GTyUTH1p3FsIQ2dF2tUGbqRC1oRSTCnCPytbnGJ1rpaRG9vDZ8G+/Rqs5c41iTGEjo08
- HZP779sY3OmZ429HiYsaFKAEBFSrkvRYrtI3HLBJXODZo5lTq/z4+oTvQyMVRu8mgPZCb
- DmxEWPtiMgjGhZMOYr0oBP2G2QJVW0yIHc8wTg5RwQ+OtZZs+avNbDkhKHq9LYceIVRWp
- 8zyrlkHPa1Nf30lC6NRvMQUbsgFbeIwDH4JGYjL3iShprMWccIhao9qW/lIbG5lxd/C31
- lWcpFAReJMf7Pro+Q2d4tScERsW8OSTm9vDC2Zk413rQaf/dWbToiXs6Q6vhAnopImg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id H3K2LDddn40P for <u-boot@lists.u-boot-project.org>;
+ Tue,  3 Nov 2026 16:50:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7D5E140653
+Authentication-Results: smtp4.osuosl.org; arc=none
+ smtp.remote-ip="2a01:238:438b:c500:173d:9f52:ddab:ee01"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793724613;
+ b=lLeFvKKSWCPA1jvk7QnPp7KxpOjt0vye5twXPnZZBiFrUvb8z7tns4qOMweoxiKSl2HB
+ jm6r0QF6VwBy0/iBtGS1PquqequCyv0jjh0h602r9bwSLudil3S0uBJmBR0vMJjwSE2iJ
+ XP8fMLHap7ZMGI/totf8GmBGXGxeOvTTmLMOKreMP8eVgXqtK2G13DCb3iOPR+d3UyS96
+ rd8NOsuGLs4PYeJNuRlFDw6fJfWt8DPci66EKS24L6wX9NE+M5wS+/RO+MtolLqBw9Bgx
+ qRpzGj2Ma4858iVY3Qx54lkVoZxS0LxHT4zoSsF3uWu7Fd2VFg6FZXQcH+hrm2ijWDw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793724612;
+ c=relaxed/relaxed; t=1793724613;
  h=X-Comment:Received:X-Spam-Checker-Version:X-Spam-Level:X-Spam-Status:
  Received:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
- X-Virus-Scanned:X-Virus-Status;
- bh=La1dibXF3oZ/05I7jyTVx5/57ddqni9keast6vEUmt0=;
- b=FBg7Q/XGwYG9sOFauAffdY3TwT+mN7csrQEr71G7NdpIaw0qXJN+Nix3xsEEJ0URB9bO
- rU0VaftLnjR30OUFFze28l9qNDcDeuOfzoFZ8mSkuAH61vnjZx12xCDWp8mQEop+YEQDL
- lqruX7j5inCrVr4YUYgc11HrmbhAuMaJbql5WKyABWSkUMYtEdsofueyM5gd7HHXvt25l
- sKKYrLNEYts9R1DAm3cYvNprQGdCTVnGMpFKkwjhz7z3ITxzKRc8sd5Avlao0Bl7Ie9yx
- 4eqkv74uk1ujQeERfyc26pRPDUPoU5IIzWGxPpnJB/h3tYJvdl7qH9e3sDWQfK2zaoA==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
+ Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+ Content-Transfer-Encoding:X-Virus-Scanned:X-Virus-Status;
+ bh=JbhTB+B0Anj4d9OdOpaWmw74165WNQw1S4WZRmBAgc4=;
+ b=OUDn3NAQQyolhqdnaYog7jUyT8Rs1X70HOAQLfHz2jv7Vex1hukPhl4PFQb01d6M5e36
+ J4vvgFprpCFR6+6L7tk6ura0lO9wDjEYUXKxJ+JvF8R4KRJ5tcw7wTMfyRb5ksNR94Z6l
+ REO9FVuKtFeqfH4vAlra+Jr5LndrTxpJx+uaOTsfJXTFTLs9vshX1idCYCqtyvetEgebW
+ wP5pDAs7ZQP3lP/gk0FCMo8LtxbOjtOJnlmSqM382FDQHfQXiUxwCDrv9/oppt/IJaLFE
+ i/5Bdle/8LYA+5hXjUXFXtr3rKe9COr9YOOd84LH/z2v2zinpjOw/4wkwzYv5j0kG5Q==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  spf=fail smtp.mailfrom=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b="cd+cP/3K"; 
- arc=none smtp.remote-ip=85.214.62.61
-X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
- helo=phobos.denx.de; envelope-from=wpopov@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+ header.s=20260707 header.b=ZeKyGp9N; 
+ arc=none smtp.remote-ip="2a01:238:438b:c500:173d:9f52:ddab:ee01"
+X-Comment: SPF check N/A for local connections -
+ client-ip=2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=phobos.denx.de;
+ envelope-from=wpopov@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp2.osuosl.org; spf=fail smtp.mailfrom=gmail.com
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org; spf=fail smtp.mailfrom=gmail.com
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=cd+cP/3K
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 951A340062
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 16:50:11 +0000 (UTC)
+ header.a=rsa-sha256 header.s=20260707 header.b=ZeKyGp9N
+Received: from phobos.denx.de (phobos.denx.de
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 7D5E140653
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 16:50:13 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B6568482A; Tue,  3 Nov 2026 17:50:08 +0100 (CET)
-Received: from mail-yx1-xb132.google.com (mail-yx1-xb132.google.com
- [IPv6:2607:f8b0:4864:20::b132])
+ id 9D3E584820; Tue,  3 Nov 2026 17:50:10 +0100 (CET)
+Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
+ [IPv6:2607:f8b0:4864:20::b12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F4A18480F
- for <u-boot@lists.denx.de>; Tue,  3 Nov 2026 17:50:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8130B84820
+ for <u-boot@lists.denx.de>; Tue,  3 Nov 2026 17:50:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wpopov@gmail.com
-Received: by mail-yx1-xb132.google.com with SMTP id
- 956f58d0204a3-67a6cc9acbeso2119084d50.3
- for <u-boot@lists.denx.de>; Tue, 03 Nov 2026 08:50:00 -0800 (PST)
+Received: by mail-yx1-xb12c.google.com with SMTP id
+ 956f58d0204a3-679a2b5fe87so3918782d50.3
+ for <u-boot@lists.denx.de>; Tue, 03 Nov 2026 08:50:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793724600; x=1794329400; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=La1dibXF3oZ/05I7jyTVx5/57ddqni9keast6vEUmt0=;
- b=cd+cP/3KHRf06NZCOgKk/0anFLrWTtD6aQrpvV/WCUAjTwnl+nWF6YDwnmOqrlfD9n
- hHZzXpJnUKE/lgyu1h+C2wbRiNkpDsx0+3W43biBqM3lklugGRGO1iDcnoohGZXJ57mo
- zz+/rEyIAPjypAJqkclrhcMHKF87vT6buQ2lNIQqs1eei1hRYz9W7ZIMUYGDEhyc0gXH
- gaDIWIiXQKmIkKbWbYqca4ngCHMVzlAgcHv7cpl7es/6xCEHPUEO1P1wQ32XJzrcn4Gs
- GgkSt+KjMgr/cA5swFZ6r3ongRcWuc90WK9VTKt1Z6H2E0VtfJy8R9C5QHeRNY2xOTKU
- 2/Qg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793724600; x=1794329400;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20260707; t=1793724602; x=1794329402; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=La1dibXF3oZ/05I7jyTVx5/57ddqni9keast6vEUmt0=;
- b=FVFTk121ksUGipHot0QPcZpCsMOYCTLLsDa97LmvgpOj4Y5CohQqeuafcm7G4uIzF5
- 8foCmjeHSP/gPPmZ+blfo6avrj23X4ZsVSEttVHz8aMG6GLnuWb/gHLvAmkzX0RSW3Ql
- RMrMXk4VMVfhkcjg2AM39lalZvYUo17IrAPqP7TYHHbgbHHK0u3brSqzjtzGa9YOVuTp
- NRYHKb6P2McClqDgbhbl5wFCBbROgusnhC7K/wWfs1CRL5mWR4/IXHFfTlL9lmwQBwI3
- RSpWxCtzEQSlm26ko0kp6lwjcaa8T9gw328dy8EDz181WOfTmpMosEo0eRZpgeb2XSAs
- FQoQ==
-X-Gm-Message-State: APuU4Z9cj318XuZ2btIcVa70i3DYGmL1OW+TL3LXBcnAHC86PY7vRjJe
- oytO5ksub7djaaPFV/yPHpNE1KrouTLc8FNGL4BtOgi6OYf0WZdlcFTdbEpcMfyF
-X-Gm-Gg: AYBFou0ehE//ed4L2kKOO5SRcp9a7nXIXAAqCrWNJ5xXuQZi9OcFDcu/9SFsS3gBkJP
- FaDsCBu+oaQPXpV8WlC9r94GWJmOS20K2ovq58WBkIKx92BXpqHHcu8FHUOuCgbXN1OwNhA4DuI
- SSfqoH5KWZ/8aZDgnlurXb8yqu3fY6QNv7GkYeCpkkpSxyOG7sDuM8+8K/O4wx0QKItQQJoqa/k
- MKA8fPsdOFKn57YxDut4qc0EG/mzw6G/uKSXcrzsOOnSkY24WTRTtlhdR4NNDmDoKWUcS2Jc7rm
- DOZZOS5hiSrrpeYDwqVI8LJQXvHY+HushHcWDeh0/wcEQ1VhoOY0bsRLk4vRywFNVLGhcSfp09o
- 1/SBoUmuMOTl2Oi+y3frWZBSb6BFfuN2nujEJqDi5jEvt1dZTadrCtIFt9d7sPtdGX9NuTltZ3h
- Bcf0YsVfDv5slsdQSKN6aZ0nf4/3TPLtaz+ueyF9buIjLwC8j/c1as64A+Ph74OiTho4EgVriKO
- kaUNMyvDsce+3ILK6dIxxzNWlAM+tCXUgU6xRRfXmdPRj0KBB1Rx3ahfpwj8wr4a2c5u4BRRT5r
- wYsDdYSsOFqrOpWbYfTJEu0g+dIxnBote5IaEYo2s9FLv8vGq2at4M6/CA==
-X-Received: by 2002:a05:690e:438c:b0:679:a4f8:e47e with SMTP id
- 956f58d0204a3-67ba4f9f1c4mr6691918d50.32.1793724599650; 
- Tue, 03 Nov 2026 08:49:59 -0800 (PST)
+ bh=JbhTB+B0Anj4d9OdOpaWmw74165WNQw1S4WZRmBAgc4=;
+ b=ZeKyGp9N56PRi1mMmc/Dw7rah4eSXo7YZcGIOwqP4OHlOa4KS50HQx4jWgfEqoQa+o
+ qZC3X0ZYjsR6ulNM3THaRdyWC/OSRSl7JrQJF/oE0dgHlz/TcflPXhfJf9YcyVA0b/RX
+ lw16nqvQAbw8rSIS+SF2U/z7YkEULtlg9WhD3UbphCfvgCyGR4EMe6m+nh74D5BZuaQD
+ OYNw+JQsHgkVy68IkgNTh+ywP3HOUhxqwsdqnreBR8/phzch81AJ70JYz8tKG7ru5CMr
+ j6c1nORIadakkVsgFLRtS5E5QhuS3xta2sbbq+T6Zifv7IzEgCSVMvO/lrEX29Mf0b4y
+ ez9A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793724602; x=1794329402;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=JbhTB+B0Anj4d9OdOpaWmw74165WNQw1S4WZRmBAgc4=;
+ b=vLIJCoelv6lDpqXuuQ9/Qap0hJQfP2UWlZK9HSZ+DH7OndRWNvHZXbF1eM50q41i4Z
+ f6MPk4oUdtwRhuBzhpgkXUnN55g38NwgvYy330PaFvl8ndGG0wt+pJFwWTqsKsnVP63L
+ 66tZ76ujGBLeefKJCpJnh8y3PPFLRvemZi07OlmGkOx4Er0dWAm2xTicGMreYlA5+w7/
+ Vo5mqD+6URDy0yEk6CoRjtMIKRjDs6DpuyfK5fw74r4S5FWN9a342lSfp668+s1aHi8Q
+ iMOXb40p+p+w3lyjlxKh6C+fI8TouiIXyNf1qiP6MP2k/Uln5itPcI89apVlqAqLkn3t
+ FAYA==
+X-Gm-Message-State: APuU4Z9Fy0PAe5CN+Bc0uvbScuMtAjACobFy0Nfq79zVfRBSfDirSJp6
+ URuxNSiSc2Q5xdg46D0ohT2uAqL7ZAuL5xYS5z/t5/hEVmeX+z1v2/UTzmVJeA9s
+X-Gm-Gg: AYBFou1IGB3Zab0JNABR6kIyGI0ROkAnFv6C1A2IB8drVi5i1cGF7rGMY+nM+5bhgkl
+ G+cur50uVucRfr6d+vs/Cjarwma5BcNDWfwxdaGLi8o1f1TkvQXJygEhYi4XlE7UD3kWVotRtiN
+ M3xKIm2liFESqpkwWSL9V4vzC7haEFfEgfotiAr4ksjNNZ4kWskweZRP90Lyfp4TXXbvvMg/ivB
+ zlS9AvnuiN8nZOS94T9EH80NcJhhFuzewn8IcpUusMZ6hs8MakuRyAq2Jd16G10mk5AcCkD/6w1
+ eRjHeAyBWhQ2dd9Zu5KT8C0bxqe6TJI8ADb96I/+EYS4DpKIra3+cGsaBRyptLyN5B/evzlWrHd
+ JYD7c1BxtRayhhn8dO3gFrQ1Fy9NxQjCAWJFC3iLTGL6oLhwZClsf96+O0TvZ11f5V/HWOeUh07
+ BjVJhogQLQ7j8n62RlC4DiMr725htXo7WitsMCK57UQJ/snB0m0jh8vL5OBNZJaZuJ1CaARlz7Z
+ vgoKX7zS0o/uUVjSKarsaNccO86gtE4RdVFfzXvfC8TV/uyWHnuswY6Md8lWPl3PyEq3CDDhAuk
+ iSoPauIkcC8HNMDoNvEaa/Hb+d4Nd+J9t9w1h3Xa4pwwTLS1S31V4ynVIg==
+X-Received: by 2002:a05:690e:488f:10b0:677:b45a:d5fe with SMTP id
+ 956f58d0204a3-67ba4f52b03mr4871506d50.61.1793724602125; 
+ Tue, 03 Nov 2026 08:50:02 -0800 (PST)
 Received: from ABELHA2618-VM-UBUNTU.autotrac.corp ([177.174.221.194])
  by smtp.gmail.com with ESMTPSA id
- 956f58d0204a3-67be800b325sm440329d50.0.2026.11.03.08.49.57
+ 956f58d0204a3-67be800b325sm440329d50.0.2026.11.03.08.50.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Nov 2026 08:49:59 -0800 (PST)
+ Tue, 03 Nov 2026 08:50:01 -0800 (PST)
 From: Wagner Popov dos Santos <wpopov@gmail.com>
 To: u-boot@lists.denx.de
 Cc: wpopov@gmail.com
-Subject: [PATCH 0/7] fs: jffs2: improve one-pass reader and add metadata
-Date: Tue,  3 Nov 2026 13:49:46 -0300
-Message-ID: <cover.1793724561.git.wpopov@gmail.com>
+Subject: [PATCH 1/7] fs: jffs2: check cached-node reads before dereferencing
+Date: Tue,  3 Nov 2026 13:49:47 -0300
+Message-ID: <3aa59d06749e1a984b1862c2d406bf845512858f.1793724561.git.wpopov@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1793724561.git.wpopov@gmail.com>
+References: <cover.1793724561.git.wpopov@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -182,60 +189,162 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_FAIL,SPF_HELO_NONE,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This series improves the robustness of the JFFS2 one-pass reader and
-introduces CONFIG_JFFS2_CACHE_TO_SPEED_UP, an optional directory
-metadata cache designed to reduce repeated flash reads during sorting,
-directory listing, and pathname lookup when loading files.
+The one-pass reader assumes that get_node_mem() and get_fl_mem() always
+return valid pointers. Read or allocation failures can therefore cause
+NULL pointer dereferences during file loading, directory lookup and
+listing, sorting, or symbolic link resolution.
 
-With the cache enabled, directory entry names are interned in a
-configurable hash table during both full and summary-based filesystem
-scans. Cached names, inode numbers, and parent inode numbers allow
-lookup and sorting to use in-memory metadata. When fragment sorting
-is enabled, listing can also identify successive versions of the same
-directory entry through interned-name pointer equality before reading
-the selected raw node.
+Check the returned pointers before accessing raw nodes and report the
+affected inode or flash offset. Return an error if the latest inode
+header cannot be read, and skip unreadable entries where the operation
+can continue examining the remaining nodes.
 
-The optimization trades additional RAM for fewer directory entry reads.
-Names are allocated from 10 KiB pools, and
-CONFIG_JFFS2_CACHE_NAMES_HASH_WIDTH controls the hash table size,
-defaulting to 256 buckets. Cache memory is released with the filesystem
-cache, and raw-node comparisons remain available when names are not
-cached. Listing still reads selected directory entries and inode
-information, and loading still reads file data.
+Signed-off-by: Wagner Popov dos Santos <wpopov@gmail.com>
+---
+ fs/jffs2/jffs2_1pass.c | 59 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
 
-The preceding fixes address unchecked node reads, missing inode
-fragments, incomplete file loads incorrectly reported as successful,
-unsafe symlink target handling, leaked dirents on comparison errors,
-and incorrect handling of the selected raw dirent during listing.
-These fixes apply independently of the new cache option.
-
-The final patch corrects the sorting documentation to describe the
-existing post-scan merge sort with O(n log n) comparisons. This series
-does not introduce a new sorting algorithm; its performance focus is
-reducing flash accesses through cached metadata.
-
-Wagner Popov dos Santos (7):
-  fs: jffs2: check cached-node reads before dereferencing
-  fs: jffs2: reject missing fragments and fail incomplete loads
-  fs: jffs2: resolve symlink targets safely
-  fs: jffs2: release dirents on comparison read errors
-  fs: jffs2: retain the selected raw dirent when listing
-  fs: jffs2: cache directory metadata during one-pass scans
-  fs: jffs2: document post-scan merge sort
-
- fs/jffs2/Kconfig         |  29 ++++-
- fs/jffs2/jffs2_1pass.c   | 261 +++++++++++++++++++++++++++++++++++++--
- fs/jffs2/jffs2_private.h |  30 +++++
- 3 files changed, 308 insertions(+), 12 deletions(-)
-
+diff --git a/fs/jffs2/jffs2_1pass.c b/fs/jffs2/jffs2_1pass.c
+index 60dacf13448..f21def1821d 100644
+--- a/fs/jffs2/jffs2_1pass.c
++++ b/fs/jffs2/jffs2_1pass.c
+@@ -604,6 +604,17 @@ static int compare_dirents(struct b_node *new, struct b_node *old)
+ 	int cmp;
+ 	int ret;
+ 
++	if(!jNew) {
++		printf("%s: failed to get new record memory at offset 0x%08x\n",
++		       __func__, (u32)new->offset);
++		return 0;
++	}
++	if(!jOld) {
++		printf("%s: failed to get old record memory at offset 0x%08x\n",
++		       __func__, (u32)old->offset);
++		return 1;
++	}
++
+ 	if (jNew->pino != jOld->pino) {
+ 		/* ascending sort by pino */
+ 		ret = jNew->pino > jOld->pino;
+@@ -704,6 +715,11 @@ jffs2_1pass_read_inode(struct b_lists *pL, u32 inode, char *dest)
+ 	if (latestOffset >= 0) {
+ 		jNode = (struct jffs2_raw_inode *)get_fl_mem(latestOffset,
+ 			sizeof(struct jffs2_raw_inode), pL->readbuf);
++		if(!jNode) {
++			printf("%s: failed to get latest offset at 0x%08x\n",
++			       __func__, (u32)latestOffset);
++			return -1;
++		}
+ 		totalSize = jNode->isize;
+ 		put_fl_mem(jNode, pL->readbuf);
+ 	}
+@@ -724,6 +740,11 @@ jffs2_1pass_read_inode(struct b_lists *pL, u32 inode, char *dest)
+ 			jNode = (struct jffs2_raw_inode *)get_fl_mem(b->offset,
+ 					sizeof(struct jffs2_raw_inode),
+ 					pL->readbuf);
++			if(!jNode) {
++				printf("%s: failed to get memory at 0x%X\n",
++				       __func__, b->offset);
++				continue;
++			}
+ #if 0
+ 			putLabeledWord("\r\n\r\nread_inode: totlen = ", jNode->totlen);
+ 			putLabeledWord("read_inode: inode = ", jNode->ino);
+@@ -745,6 +766,11 @@ jffs2_1pass_read_inode(struct b_lists *pL, u32 inode, char *dest)
+ 				put_fl_mem(jNode, pL->readbuf);
+ 				jNode = (struct jffs2_raw_inode *)
+ 					get_node_mem(b->offset, pL->readbuf);
++				if (!jNode) {
++					printf("%s: failed to get node at 0x%X\n",
++					       __func__, b->offset);
++					continue;
++				}
+ 				src = ((uchar *)jNode) +
+ 					sizeof(struct jffs2_raw_inode);
+ 				/* ignore data behind latest known EOF */
+@@ -830,6 +856,11 @@ jffs2_1pass_find_inode(struct b_lists * pL, const char *name, u32 pino)
+ 	for(b = pL->dir.listHead; b; b = b->next, counter++) {
+ 		jDir = (struct jffs2_raw_dirent *) get_node_mem(b->offset,
+ 								pL->readbuf);
++		if (!jDir) {
++			printf("%s: failed to get jDir memory at 0x%X\n",
++			       __func__, b->offset);
++			continue;
++		}
+ 		if ((pino == jDir->pino) && (len == jDir->nsize) &&
+ 		    (!strncmp((char *)jDir->name, name, len))) {	/* a match */
+ 			if (jDir->version < version) {
+@@ -957,6 +988,11 @@ jffs2_1pass_list_inodes(struct b_lists * pL, u32 pino)
+ 
+ 			jDir = (struct jffs2_raw_dirent *)
+ 				get_node_mem(b->offset, pL->readbuf);
++			if (!jDir) {
++				printf("%s: failed to get jDir memory at 0x%X\n",
++				       __func__, b->offset);
++				continue;
++			}
+ #ifdef CONFIG_SYS_JFFS2_SORT_FRAGMENTS
+ 			/* Check for more recent versions of this file */
+ 			int match;
+@@ -967,6 +1003,11 @@ jffs2_1pass_list_inodes(struct b_lists * pL, u32 pino)
+ 					break;
+ 				jDirNext = (struct jffs2_raw_dirent *)
+ 					get_node_mem(next->offset, NULL);
++				if (!jDirNext) {
++					printf("%s: failed to get jDir memory at 0x%X\n",
++					       __func__, next->offset);
++					break;
++				}
+ 				match = jDirNext->pino == jDir->pino &&
+ 					jDirNext->nsize == jDir->nsize &&
+ 					strncmp((char *)jDirNext->name,
+@@ -1002,6 +1043,13 @@ jffs2_1pass_list_inodes(struct b_lists * pL, u32 pino)
+ 						   sizeof(*jNode),
+ 						   NULL);
+ 
++			if (!jNode) {
++				printf("%s: failed to get jNode for inode %u\n",
++				       __func__, jDir->ino);
++				put_fl_mem(jDir, pL->readbuf);
++				continue;
++			}
++
+ 			dump_inode(pL, jDir, jNode);
+ 			put_fl_mem(jNode, NULL);
+ 
+@@ -1086,6 +1134,11 @@ jffs2_1pass_resolve_inode(struct b_lists * pL, u32 ino)
+ 	for(b = pL->dir.listHead; b; b = b->next) {
+ 		jDir = (struct jffs2_raw_dirent *) get_node_mem(b->offset,
+ 								pL->readbuf);
++		if (!jDir) {
++			printf("%s: failed to get jDir memory at 0x%X\n",
++			       __func__, b->offset);
++			continue;
++		}
+ 		if (ino == jDir->ino) {
+ 			if (jDir->version < version) {
+ 				put_fl_mem(jDir, pL->readbuf);
+@@ -1116,6 +1169,12 @@ jffs2_1pass_resolve_inode(struct b_lists * pL, u32 ino)
+ 	while (b2) {
+ 		jNode = (struct jffs2_raw_inode *) get_node_mem(b2->offset,
+ 								pL->readbuf);
++		if (!jNode) {
++			printf("%s: failed to get jNode at 0x%X\n",
++			       __func__, b2->offset);
++			b2 = b2->next;
++			continue;
++		}
+ 		if (jNode->ino == jDirFoundIno) {
+ 			src = (unsigned char *)jNode + sizeof(struct jffs2_raw_inode);
+ 
 -- 
 2.43.0
 
