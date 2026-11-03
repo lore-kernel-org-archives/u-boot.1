@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 141BB606A324
-	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 07:02:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34EEF606A324
+	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 07:02:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=m7LbiDgZ;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=cl8AZsdi
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=p8Dpntuv;
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=GSxq/EGR
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E22D480DC8;
-	Tue,  3 Nov 2026 07:02:06 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E693660725;
+	Tue,  3 Nov 2026 07:02:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id R42BvFiYMQbo; Tue,  3 Nov 2026 07:02:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3B1DD80D81
-Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793689326;
-	b=G+kw2vTiCjcPTRwSmnLUcEdQKbujnS8uwKjti9vIVQdtq9F93lOtgLJ0Mtr5g7eJRsX2
-	 82wMJMgpCTN/339IhmzjP7ejVz+0qngkOGoxO8l/DFAqoACGMsogUWkWX82Ek2ShA0Dzd
-	 bwCB57T8KQxYUn4DmJbgWCXArxr/aHlQDm3/qy59xZ6GoXRqgXoOrub8J0Z8icB1pRNVK
-	 DcLirruCfoY0w7DtskgX2HTP4si2Zwp5uwL5NMjci29fDtyybGOr5sh84vhO6gOwuzbga
-	 I0h/FVIJh8M06BHdEab+loSrm/VwyMrHuBvtCg+1f3EbOONnVfDxaptsGyI3GJ7W1ww==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9_wfgLdRoySP; Tue,  3 Nov 2026 07:02:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DC53F60705
+Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793689346;
+	b=R5yj9O/uKmxBbcbDh0nysMuqPp9bEfxWT2FMGLAJ9UEgFXQVbb9kNnjSkJL5337TkuON
+	 z3cjVSRX1F6J4HEeMbDTtf/kVjhbx1Kiri8BLvcQYipKS9bJvLE5v5w8Kw1CxQyWsK0Nq
+	 m7G5hgYExZ3KXMjBEuOBUv0XfjQMcnOkYbo+RMN2Ail8Jv73VR6hVslSdP12E7md3fScW
+	 lI+xFKv0LcPFVY1MfDIsxH4z8aEROXHsfl98Uoz+R71g1d03zgOLaIOw/CxQt1JUbOAtx
+	 0SWhAklDc4f6pja05n7ajxdN3hkuKd6PtLXPZpxqGJJAX4bzBda0hrrMS3CSsFHNBvA==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793689326;
+	c=relaxed/relaxed; t=1793689346;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -46,52 +46,52 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=UOY2t1UjQlNIVrBmvCQI3/RkbXmWwewNqZXDX1+6CXo=;
-	b=rMMSU0B356WQEatWyyK0QcaiaXzqiJ8/Y8Irnn3QGVOSONYD+8HD3mpAZpXYXuh5GnL1
-	 RSIjEIkyHrLpM2WR+AAAi9bDRtU/HvF1Rt3sjLndoJPPa1sD+qgAcFbS8OFcbGs3kkCm/
-	 dHuA2kajE+4XN+4LbA+iY/2wUZQ/vjgakmH3xfmI56fIWbXCAqTHNGVK6/Cy82gl/c8Rd
-	 3mM0C6XNJzzracHK/cvI3yXi406lnZvlK/Af4oaqBq3bfnLJIVo04MEL5aMAnMIFyNih8
-	 HklUPat63+wBbOccAMKjbivub6aUtx0i0FYUa4gI0k0UdMA+oy3hANvOHPRM5EUSAUQ==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
+	bh=h06bFs8Ai2pv7OHMSVMZfcHx1mv8ANXZPEECChOEY6A=;
+	b=GkCqzr9tPMfWpdgqMOi5R19eWMdsDvielCNpuvUO2hx+ZjU85vaK6eSEEZy8rfRFeDGx
+	 CnTwiJobx7tRi4Sz1hRIRJlx/YQ9SyubCl0wE8DvdlguZpEjZdYOzQX7+kWTyqAtC+6hB
+	 ns01x+b50tu7HnlwolntDp4Cr7vikC78a8njRMAGG9af1u24jH2pNc1AbWk+Tp16ZzHhZ
+	 nsxmm6Dlh2y5ZoQnGg8cpeom2Vvv/4ZLwKxH4redXLMAokgknL34jFfDMyKNi/pXOJ4ev
+	 lWmUoJ641Jzub/uMCvbHiXeZViGK2/sZBD53SJCqd8zPjI8PpJ2XxoZsQDC1liY1dZQ==
+ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
 	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793689326;
-	bh=UOY2t1UjQlNIVrBmvCQI3/RkbXmWwewNqZXDX1+6CXo=;
+	d=lists.u-boot-project.org; s=default; t=1793689346;
+	bh=h06bFs8Ai2pv7OHMSVMZfcHx1mv8ANXZPEECChOEY6A=;
 	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=m7LbiDgZZgkyS2lBeAeLyre6hIbI9CJrY/SBoRXsqlZElvkMJCdSPgr9pswc47TKV
-	 swsiYo3Y7oKSJbP7NbpPYg41PimFW2NItY8BBCXjSr6q2CWX3B4BbFTTO0oChqShm3
-	 0S4H5KGQe5wWMXtgFxH/+88OKdDNtobtno+WgwAvJty+D/uJRRGtefiImfM6C3bL6i
-	 jKBRJ0fmZOVjkWz7yeeAyZVUw5UA0uX1Rh+Jixay8zEU3TzhGjYSvUynqh63NAtSeW
-	 VQEU35q51YZlUBmxAflmPeYoVk/COkKKVdEb7GSakSjDyIZVUDMtQ/YQtfAM42euFh
-	 rry2OOmYp99Kg==
+	b=p8DpntuvlSYzR9zpW+J71TL2UDNlSqSwtoOHwCl1GAKSEAJ4dUMTpm4FtAgz2H7vf
+	 Fc3O4JkUgXBZN1vjIjzNXfSSzuWJLEpP/w8GFHP+Y9IuXMIk25X+y4qkyYOwI9RmVV
+	 1HH56pXWWKLnYDppvtZpJQUJtdRdRQvtKd0VR6xGH2Y3VmTijHA4YGcjv5oaqKKZTZ
+	 +kgzU94/KodViwSs9Y+RyohSR27ZMqKLGJION0N3K/E+Q3l+6IsC2RMt2tsLfw+1MQ
+	 GPYv3SsM266kTIKbPcKBU1apDF1mvWU57BlzzdTzJKwBlueDqsb46I1ub6QnI2TZxG
+	 KpyrIP1b7m/DA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3B1DD80D81;
-	Tue,  3 Nov 2026 07:02:06 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 39F582AC
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 07:02:04 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DC53F60705;
+	Tue,  3 Nov 2026 07:02:25 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id D35F74BC
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 07:02:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2975560705
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 07:02:04 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id B5DF380E32
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 07:02:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 44MH58GuiGoU for <u-boot@lists.u-boot-project.org>;
- Tue,  3 Nov 2026 07:02:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 797E660642
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c112::5"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793689323;
- b=ooDuQplxIlJ4KBma33+kivjeamOORhpxRksCAq4odVnEIR2R1pfQcw2YdGCZ2HJ6c+cm
- 6Xa43ETQ2zLs1mFg9IgNpqMpIHtkYUCEOd4cPSmDsgjo9PdnKNdIlEY0nRMH5hSF3lcAD
- iTJL6ZflAB7J2UxvEY3kLO1Dec+N5cr1Y5pPNnNCvzI+iIFA8Djx2bO0iChGHlaVfZsvq
- nO0rM0HpwS9yacyUfmYya4F3mOJBNDk2QPvPwMKj7nkjWN3zJcYrirsht9hpnzzw7tuIB
- yzOK2PqJTxXKBhnCpdMCiusyzvcq6hRXXKFqQICqavelcRsmTlkJdPrupJgYQq59Trw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id fvU9SMog-lR2 for <u-boot@lists.u-boot-project.org>;
+ Tue,  3 Nov 2026 07:02:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9641B80E0D
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c112::7"
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793689343;
+ b=AedPqwdIGD3BqLyBC8fKFiK6+EyiLNGiAvoVCYQFlBaRKKyQzUK5v2voHBWQtLpgKNrQ
+ goraLz3mNaNfZ0XLRijMbvMOnwk1syR1Cu7UFvxBRzdEjMhybmrfK/TVs3d3dJ+rx6aya
+ K0vaacfxgblZenP8XYZxkEnJ0IG/4fgHiO4X46BENXK+QDSUMFlGvRov5K9ckfbF9FDde
+ t5/9xKtczRrugOUSKAvXfAC5DXJsQBBlfgYo1SjeSk18uYwNwu1BFOf3uAcX+HT57lmQ2
+ 2ie856UETsQ0UUFgT813pVt0Z1zSOEgz7N5fJAGYq6AsZvHTgo8uINKgJGlRy9/MLCg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793689323;
+ c=relaxed/relaxed; t=1793689343;
  h=Received-SPF:DKIM-Signature:Received:Received:Message-ID:Date:
  User-Agent:Subject:From:To:Cc:References:Content-Language:Autocrypt:
  In-Reply-To:Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:
@@ -109,66 +109,68 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
  X-MS-Exchange-CrossTenant-UserPrincipalName:
  X-MS-Exchange-Transport-CrossTenantHeadersStamped;
- bh=UOY2t1UjQlNIVrBmvCQI3/RkbXmWwewNqZXDX1+6CXo=;
- b=F9DhUiLYlR+0KAhvKJRqo5pPGsp4bZ5/76XYT6qNn5AfIGaiYnFAJmAw81TUlIRppktU
- 1nyoyUN9GY4Qo/oWD9z+C1leQBKJINMtBr/vbCZ+oeVrWUWHw7WeoKjoa82OiMunKbPWm
- Ss/SiPC0m54aMh6RKzaVwAFNxLOmmHL/qT/acJWcFeocvbs0540kwwr7gAuTr/tZlDGpz
- Engi0NlsZxghh2AbwhcY3/gcSkIqzLZz2kLssvZ8CNKS+mk3mBNX8b28oIpz5d/TTBAdR
- 2I6zAqcW2jJv2zFAHxPkLHtJ1Pr2fRuRJ2UNmtqolZtYWnEgXIzX6Kz9oCoTXuh9tBQ==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+ bh=h06bFs8Ai2pv7OHMSVMZfcHx1mv8ANXZPEECChOEY6A=;
+ b=fPO8GvbIvna6DvvgnfC2DzHF4y6PAQ+2/Wr+Kl3WS0giRrIsTFlKcWBsfG1vK8XQTrX9
+ wIdYPIEOxx+XprhoMHn+LMjQ6kl+Ypl4oiPOlqoldc8n4eKp/YSBUfgVTM5vvb80Jej+q
+ E5xKkOUuxO8OU/5e+XPJHrujmT5Gnu7uX8ucn57qL6f2HviW4CGk09Y60uPZPewkhOi/1
+ 5iTy0IFgkujOU8OycPDN4GSOeU26O5rzNOEfADaHDBPlI9Rhjdn9U97Lmv2GNGYwiS70+
+ pCNqzODQhoh32eOq6KZnpqfAkTl8pDnMdPGgdDGh8qurLABgDdGnHdAuaCR/o/dXlRw==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
  dmarc=pass header.from=amd.com;
  dkim=pass header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=cl8AZsdi; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c112::5"
+ header.s=selector1 header.b="GSxq/EGR"; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip="2a01:111:f403:c112::7"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c112::5;
- helo=cy7pr03cu001.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c112::7;
+ helo=cy3pr05cu001.outbound.protection.outlook.com;
  envelope-from=michal.simek@amd.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=cl8AZsdi
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 797E660642
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 07:02:01 +0000 (UTC)
+ header.s=selector1 header.b=GSxq/EGR
+Received: from CY3PR05CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::7])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 9641B80E0D
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 07:02:22 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vWqHTOkDFiM3LgeFm8v8kqc3wayMRvcKHC+l5ucTEbbDw7n03c5fWrBn6BX1SbGcK77SulMueH6c8K6P0TOWqJY5K4wu0sSvoPLa2uikCtkNBlrLFWnJcez8eg8fFw+oH9bj/fjzeTWMSeHl1q/V3ECZb/czoZWX+IHxlL/+bWNZLFPo6cEPEar999ssnYAeMmOwWpdRdyOAVN0/Le9jnDupMzQ/p183Hx2QOV81YMPEhIa65czOoyvxtfPO4pbVnRZrHgLI2DZQZZZ/mOXdt4Vh2VOF3/X+ClFLWB8JL4b7UsY3JceKqj/dzXsEDNrvnCk8ZH3EDeqRiBzt87j5IA==
+ b=sJw7x72B+It6MTTv540bLN5NIxtON0Pj85Mbl2DqVYaco6DkXSbFbNqsEoI1czMVw7Z4YcHnHU+eLoksVgYWafr79K35hVcyvEa3sCqtTfHLrXwpTniGPD3NrD0L+tm3ARQWLELC6orWodU9dl0P+8IO16ZJpWUUVHhEbtLGMnbVF5EY4nRRWjooigvFr8Xc43v1qZTNL8OaaNGZwJYJAv7RxAgFQoVFgBNJyOzx95SpMhoKSKTIJIeTeyDZpbhW0mWE5BbZzmz7+5Hc44sAvXmmRjR0bse/3U9bcC+QV0DkmM2Bt6aGkmFsylzs8m2byOM17PBbj98peuvaY58CHg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UOY2t1UjQlNIVrBmvCQI3/RkbXmWwewNqZXDX1+6CXo=;
- b=CClf2FSukFH/kO38zX8iOwjIUHZEHjpr1w7zYzirB7/Y2lIjRNmRf7qcI/6ljvr2dfmR+7pZXvzfu1SskEfwtnafmNBAXdVoLhjxHnR0e0w7MMGd8zgvNHGW6Fo1OM0C2glgXT2h4UIyPThs/dLrIAhPhA0KRy4Ci/pH7vC8lA4/syh0380/QexC/hL7LA3cCddv9nO8ySxgCZ4y422O9o+BR6xbNwNYeU518Dm6a5+BVEG5qUxfjkNyyvHOxKt5g3EdYp4/FxuwzaE9wuo5H1jnF7EfbihbYZq/2yAZ92V2jdd3gAsoIFrPyVwk4hHniyFHPUw65CYTwL96AquXfQ==
+ bh=h06bFs8Ai2pv7OHMSVMZfcHx1mv8ANXZPEECChOEY6A=;
+ b=XMjS+8UmpoWkI8ewifnOnlMvt3aNrYW8RRPG6fw2IRl6vv1eQuFrBJeGZOQWJJIUsvfytgsXYne/xYYrqV0hDHt/F+I6NzhQ0s66+VTs5uRLK8CowgjybD1Nu9kkQyXDmalHr8nW4mD6NH0MloqX6YWkkvAjEE+VHfkmOgJiMX1qixgLVYzrnF3Tov5Ld1QxOnAJTSZE/tpPcDrlNmAMzr5kcXB0bi7vLx9nrIs6Eonm0eEQaqQy+NOD9DwcThUFkWnzC37HdOq5OwnlD9agrqXJbxzprTE1evas0c9KDvNFlwFhlBOyfo/2yawCIuMfPRwzpzjhd+8J5eIj1aCJ0w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UOY2t1UjQlNIVrBmvCQI3/RkbXmWwewNqZXDX1+6CXo=;
- b=cl8AZsdir5OYYHtTeR3+K0FpjtAtbegcyFEnIeSw04MiDglQSz5LE03RzVKe7yuPZDi+PRwCq+pB7nNufCAtKrUCTV+WTcgZX3Dqe+TWpRqlQTjqs/0t3imC3PPwQxLFwQShDQn/wKd7EpVBmiXv0ET4FbbZiPnIo/2pO4jW1Uc=
+ bh=h06bFs8Ai2pv7OHMSVMZfcHx1mv8ANXZPEECChOEY6A=;
+ b=GSxq/EGRur9nSOFezyRGvZlM2smcVfAAuQ5xxPOykGo9KY+B27dXmV7KfxNiSstVAyKJyRZKxFRWvKRUl5kP72KyEb4LPgb/NNnihSb26fHJ1NiqhrxsoPCi1LBA+Oiem1WVDqfHvqZyewCeJ4mDEKn8cb+OZDGhJw5a6/A3TIw=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com (2603:10b6:408:301::14)
  by CH3PR12MB347562.namprd12.prod.outlook.com (2603:10b6:610:367::9)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.8; Tue, 3 Nov 2026
- 07:01:58 +0000
+ 07:02:18 +0000
 Received: from LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287]) by LV5PR12MB9779.namprd12.prod.outlook.com
  ([fe80::8ac8:e862:8ae9:9287%5]) with mapi id 15.21.0569.011; Tue, 3 Nov 2026
- 07:01:58 +0000
-Message-ID: <7df8a788-5285-4781-b48f-ea05e0a5db2b@amd.com>
-Date: Tue, 3 Nov 2026 08:01:53 +0100
+ 07:02:17 +0000
+Message-ID: <c4bc396d-aa9e-42d2-9878-817333224315@amd.com>
+Date: Tue, 3 Nov 2026 08:02:13 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: versal2: Disable FF-A
+Subject: Re: [PATCH] arm64: dts: xilinx: drop bias-high-impedance on SDIO
+ CD/WP pins
 From: Michal Simek <michal.simek@amd.com>
 To: u-boot@lists.u-boot-project.org, git@amd.com
-Cc: Padmarao Begari <padmarao.begari@amd.com>,
- Pranav Sanwal <pranav.sanwal@amd.com>,
- Prasad Kummari <prasad.kummari@amd.com>, Tom Rini <trini@konsulko.com>
-References: <c0af1071a0b965e208391eaaf000a25008730ac0.1792505836.git.michal.simek@amd.com>
+Cc: Mikko Rapeli <mikko.rapeli@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Shaikh Mohammed Suhan <suhan.sm@amd.com>, Tom Rini <trini@konsulko.com>,
+ Tomas Melin <tomas.melin@vaisala.com>
+References: <15d2705e0807fef7567df21ebcfe48aa7f1466dc.1792505922.git.michal.simek@amd.com>
 Content-Language: en-US
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -214,76 +216,76 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <c0af1071a0b965e208391eaaf000a25008730ac0.1792505836.git.michal.simek@amd.com>
+In-Reply-To: <15d2705e0807fef7567df21ebcfe48aa7f1466dc.1792505922.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SJ0PR03CA0035.namprd03.prod.outlook.com
- (2603:10b6:a03:33e::10) To LV5PR12MB9779.namprd12.prod.outlook.com
+X-ClientProxiedBy: SJ0PR03CA0049.namprd03.prod.outlook.com
+ (2603:10b6:a03:33e::24) To LV5PR12MB9779.namprd12.prod.outlook.com
  (2603:10b6:408:301::14)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: LV5PR12MB9779:EE_|CH3PR12MB347562:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1e8b78d5-e767-4062-96f3-08df39785a39
+X-MS-Office365-Filtering-Correlation-Id: 92f613db-57d4-4eee-a29c-08df397865cd
 X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|23010399003|366016|376014|11063799006|261009223027099003|261021123027099003|56012099006|10067099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: VotNFKquV/prDZdtn3TiladMptMcbRfC3oxhI/UykJRFS0ehdXLtsqRMElACm/x3IPoIwoUkSECAQCDv6WUH7Qt0v2Z6ti0ImrBROET4cHUb1bpV6s0v8lCRG76Ra2zu7UptJh/5/+Vjlal4TdGoPZjcqnL0J5sljNiff1UKcvR2yn/nVAaGu3MQ3apXXv40kRMUaVRIiuLURvWypFPb/G+jYtLDJRtLH75p3OdJtWIwsofpwWTXbM5ZHRbWk64BTyc9+omYh/VfsDa0MM4EamASYzl+0YeJhmRV3NjP3YJyFvd+2iUe8ro08+ggTaSF+S7+FKlppO2EM/Lo/kyYrh9ea8N1IYUzxkS4KG5t37D5tD8ZS4XYh6dfl6woJrtn6fA4VgjTLkItxXVP0pWDTxqbO0pZJfoxJr8boO1VrRaLyQGqZsMLvXFYezeaYhMMIQ/XXuxBfY92ABlirdfh2y6ssCGU6rOeHOW1hyNH1xUagFxv2B1FaaaUxpmen9aPRFR8v+7rB9pz/48y/JM6QUwrxdFXfsKDyhJhC6LJsFsf/yJ2B4E1Clyfgaw1+S5gKt6ta78MlvPahjl4Qm8PiVQN5ywIV1xu6i+9gi2Gu5wFy34oEoFDehTSvdgztRZ4g+3/toChi1bIaasrqonYFoH8H+9dBIFh9wqQ6xgr3q8=
+ ARA:13230040|1800799024|23010399003|366016|376014|261102123227099003|11063799006|261009223027099003|261021123027099003|56012099006|261021121427099003|261022075727099003|10067099003|22082099003|18002099003|6133799003;
+X-Microsoft-Antispam-Message-Info: PWM36wNfGhNfMkcIUbeBtT71wFhrYfOWytu6RB+bizMoyGqHH1X++8G3hzWW9U8xNmHtF3qY2PcTDePcznsxqiHulWr4Yh3DVRgfR8Wzc5utpDwKsC68tTtabLmjaRviD+PKKxrNEVEuV7PYd2YbAPZqj7222ruRAd3GMzywmJbOuuNXAyozl3G4dbQOvq+2LKb5WGSAG8JZ21NtMbrPCjNVLwgaTn3smgE93uc62509/bW5eSIZsvqOssR5uw+2FpWlFGPYlfrsM+tMDamXt50/K6edm6SLAq4X1y8ZvtBOVWU0jSXyTrkGW41ZE/9ahQxjXfbu1Y8urGdoUOmhkeb8MiL5BlIZuCIvfM0HNkLbYJs9fXGgBVYQZyo4l15Ze5jMFbmPgbaOb9Ofc1nrRaDnyMekbxqRPOaxL4NeRdjxC/HNKY/aobvZU6Grf8bORnN9ogNt8RPaFKxhYMQ+38T20PgIEYrvJRpfPsaCZuJqamie8cEOeMp5sxBYPIxq0ztYNmQtPnh93EMp7FT0j+RWe0lJ8okxBmdQQ8g8Ye72a53t41b6fTdX9kKJWOWrUI/alJWMh1UdDxcH1Z8G0J2qBUht2z0Junvg+VBG2hb9YrPfNxr3biYOSF9FXP2ucos9G3EdJ7+MNdRhgtL3pz0JniQJYTTdsis7MQCbM4A=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:LV5PR12MB9779.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(23010399003)(366016)(376014)(11063799006)(261009223027099003)(261021123027099003)(56012099006)(10067099003)(22082099003)(18002099003);
+ SFS:(13230040)(1800799024)(23010399003)(366016)(376014)(261102123227099003)(11063799006)(261009223027099003)(261021123027099003)(56012099006)(261021121427099003)(261022075727099003)(10067099003)(22082099003)(18002099003)(6133799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QnZpNnZMcG1xVS9rN2ZIcGVza2Q4VVB0RENZcTFmbUtNd2s4UTg3WWZ0TkVR?=
- =?utf-8?B?R2VRRDBPcGFHYjNrU2diVm1WbTVGTllzdnhmU082dStkQXdVUUp4TGg3YXN3?=
- =?utf-8?B?cHBLQUJzVkZlRm5Rdk96b0lhSHlQbWRMS1Q4TXBlRVpqeFJWZjd6Q0tqV3Iz?=
- =?utf-8?B?SHpaMWs0VjdyMG5TS1hZRFpHVTdWa3IwMmRHcjlWUVVtbFQ4VU5XL3FVZmJu?=
- =?utf-8?B?SWgyaWNxcE1qRURZY2ZHU2hvMHk1QnZlclF1MGZiQlhvK2N1ZVp1ZGlERjdq?=
- =?utf-8?B?TXl3cW84d1NOd2tFYVd1NmVlTG5ZTEpnQzVOL1crNXNlbXVpZFFKbnRXU002?=
- =?utf-8?B?Sk9heUJ5N2VteVpwRUpWakxFMVpGcEI5cERlbXBhbm04alhzNGtpbzB5ZFdU?=
- =?utf-8?B?Y1VLOTh4QklERSt5THVkNUxSOU5VWmFDbThKM05JaVR3Q1NnRk1EME5uK05j?=
- =?utf-8?B?R2hoYUF2VWxpL05ENUUyc1RJc2VhYzJ6dHhUY1RPQ3NvZGRXL0tKYktDTWZJ?=
- =?utf-8?B?c0Z6dld4QnZaVWF3eXdrbnRQRXRvdE1CREFadVhNNVdONzc5azZGMTNWMUFR?=
- =?utf-8?B?Z3I5Nlo2RGFZQ2dZOU9RMmVwT29qYXc0b0tHVUI2RGc1SEx4aThhWUNmQWh2?=
- =?utf-8?B?VUFScTg2Nm1SR3Y0V2pobUhoZlVCa1NQa3hsWTF5Y1d6ZnJhVHVTUnE5Y2RD?=
- =?utf-8?B?RzdyekRnK2ZhbHU3Q2tUbEdPTmFrVXVDOTJUMy9zbFh4WG9KMzByMDdHaUJU?=
- =?utf-8?B?UkJkTWZuWllvUkdTdTJiM0trdENhMlRCMXQvSzM5cHNDWHlLcFF5ZXlUZjVB?=
- =?utf-8?B?Z3R6L3I3MWYyWjdHVlhrQnNTNHIyc3dhcXF1WGgvcXczNjlvUG9XbHUrcVVm?=
- =?utf-8?B?SGdDVS9aWDRHMWRFMENhS0x5aWkrOWVsMkdwdzRkUUtTWGNka0VSN0c5bXpk?=
- =?utf-8?B?Mm13RlpHaE1JQ1NtRmpFY2dpbW90S054QTFLSWxXNEZWcmxTSzRzVVhFc3Vo?=
- =?utf-8?B?Q1ZUSkJaUDczdDlJZHJlaUU5dWpJWktNTlVkRzlSQjhEaUlPVmhYenkrdW5E?=
- =?utf-8?B?eDJTNTAyRTdIYlZQZXhNWHViSmM3L2RmWWZOMTVNVmZtbXp0RktiQW9tNUR1?=
- =?utf-8?B?RXRJemF6NnNncmZGNnNTc0JDVkErV3NDOWJnV25qSXBJcVUwN1BGYjNFMWFu?=
- =?utf-8?B?WXVMdmtLNE5sZjFuRTF3TVBiQXlJeVlWNmNjbjVFTmRoSFYzbjBaeTF2bjZF?=
- =?utf-8?B?RDYwVmsrT3VJTTN2MW9YaVZPL0NGQ2h5cG9PSlZFc1dhbWJLTGFrcnd4NVM1?=
- =?utf-8?B?OUVnMTR4OERnYkdNdVAyWVBpajJpejN3TkRha3RvS3craWtCRmVvSkoxSGFn?=
- =?utf-8?B?a3l1c3VtcDN3cWNoNEVpOUQ1dkVmaC9jMmUyZGUwSjBDaTZQeVJpRW5uZU53?=
- =?utf-8?B?d1YveTNrWTBicmtmRXNiRWF3a0ZmemZ6UkZKa1p4Ykt5M2lDLzB6U2JWL1lV?=
- =?utf-8?B?YTFiVFFKRmJkQWY2OE0xVUZPL3BuUjRKV3R3Sis1aVBkQW5YdjZnVlhEckNk?=
- =?utf-8?B?cUNwNTJKbVFWblNwRkZ5Q05ZOVFVSDdYNnhCbUJ4bFpnQXBwNzBZRytvQ2c1?=
- =?utf-8?B?MXIxZFh3VFZpRFZGYld3eHdJWDhUamwySUJ2QW9hTkFmMXIvNDV4TmloMTA3?=
- =?utf-8?B?c2ZxQXJCREVaaDdFUW5uRDZWWHp6ZyswQWl3MFVBRnJwdDY5aktHVndHaDJS?=
- =?utf-8?B?WitDLzROUTZQVDROQUQyYXdxallCdVE1T0lNKzNRR1J5VXZnUk1zL0N5L0hi?=
- =?utf-8?B?YXJlZkt4WmZia3VvL2xnZnZQRlBYS0ZxTWZIK1Nva0k5cGViSVkvWnFmVWlM?=
- =?utf-8?B?UkszVEcyL2FPVzdzWlFxT2U1QmhyVzBwdHZ2T3pra0J1MUgrVGtiTDQ4K1ZJ?=
- =?utf-8?B?b0k3eFRsT1A0ck1vMyt0MjBjWlBneVBtSDF4cVNnSXZndE14ZlJYUXlPRTdX?=
- =?utf-8?B?M1ZOcW43eENucUorOWdFd1RqRUhiZHRJTjA3Qytmdyt0Rmh0bjVZUjZhUVVW?=
- =?utf-8?B?SXZJV3I0bFY1eVFZNzdIR3VjQld5SXlBVk56RHo3bXVQaThjZU5zcFlJSHdh?=
- =?utf-8?B?bmFxWndpRm1xTS90disvUE04Vk5OVE1WcHR4OEc5QkpUZFYyOU8zekE1c0VF?=
- =?utf-8?B?VnBDN1pYa1EyUHRBcTBZcFUwTGJKWFgzcnExM2c2STZKMFdJVk1lWm5qNlRT?=
- =?utf-8?B?dnVYY1dHN0dsZzRXWHBYeG5xOWZRMHo4UmFUNk9veXRrQnlOSG1aNWd3MU1D?=
- =?utf-8?B?djZwc256OC94Ymd6dXcwQUNOdWQxTlliLzVZcU55T3c0UTdacnFSdz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WUlZOGJkNGJtWmpMaDFtVVNNL3A2STVldUtmc1AycXd1QTN4c3N5QnB2UTJY?=
+ =?utf-8?B?VDB3RVBmQ2tHM1lzbWc0TE92L2ZaR0xwY0JvVVJ6a2Nxa1dRWFNmTjRTbW00?=
+ =?utf-8?B?YVRHcjRHTWkvVU8wQ2Y2N1pvMGR4QTBIVEttM1Boek5WTVBhT2ZobXRTTDNG?=
+ =?utf-8?B?V3VNRjhjaDM2TmExanBuZmxJL0QwSFdTZUVYZmxYdmFoZ3NaUDVjYnpKQk5S?=
+ =?utf-8?B?d3QrK0NHSXdHSHVxUFBVcUE2SE4vbTNhclRpaG5ZVGhaM0haNDVITGhZRTB3?=
+ =?utf-8?B?cTZ5dFZ3ZUlhRk9GOWhvMld4aEc3L29OdDRRSEtNdkdHcFpLa1ZObmtRbHJW?=
+ =?utf-8?B?dmdrWnpRUWVieUk3QVNhUzliaDVHK3RhWk5pTmtkUmxOdGVEczRoK1Q2MWwz?=
+ =?utf-8?B?QUJLNWRMOGhObkVNTkhGbGlhNUJuRTVTUThJdFF4NGJ5bEVueURZMTVkVHUr?=
+ =?utf-8?B?am0xOFRtdmQ2YWxRbXQ1aFI4djgvNXNxbUJmTThQUFh3SUJTcnkrbzI4ak5R?=
+ =?utf-8?B?WlNkVGMzZDhyc1NKcGd3eGxOTGlITlM1RFdFdjhTRnp4Y0ZidTUrQ2l6aGFD?=
+ =?utf-8?B?Nk5pRTVJSE94cU9WU0VhK0tQNFA4L0gzTWxqaldXSTdBNUh4RmV3d1Rpc0I3?=
+ =?utf-8?B?NUJjWHlSVlhudXgydlRrTmFIa1VHSkgxL0pVc2dLUVZWc2NWeWZvWU5VN01M?=
+ =?utf-8?B?N1FWS1N4NDBneHBSRHpPMHhPU1hCdElnWUNnK3BQTDIzZk5xS1dqTXZBdk16?=
+ =?utf-8?B?QTM2OFg0QnR0M1NnZVdWWUFhWDNwRjF5R2Ftbldlc1NnNWdLb1gwaGEvcUtH?=
+ =?utf-8?B?U0tZYVFWU21sV3gwWXpPMEhKRnB5ZTMrRVVJS1BKOWNrenowcyszbnVNT3cz?=
+ =?utf-8?B?U0lJT0tyMzRBOTZkdlVrVkswUTN3Y0VrSXdZZFdyUFlWWlpzK3V1VEdHVlFw?=
+ =?utf-8?B?VHhHbXY3ZmdQZ2lqYjNHU1pPY2FFenk3My9FZVhWQVFyaDVpR01xbDlVaWpM?=
+ =?utf-8?B?dWFna0hBWmQzM3FsNmxMdkN5Q3h3M3hHZEI4dXNHU0laTE94QkRGbU1FdWFM?=
+ =?utf-8?B?RHhWNW5TMmZTeS9TWWtpbDRRUEJJK3FVQXRXd2NVU0EzcTRGQU1QYnllbnov?=
+ =?utf-8?B?TFJ6aTBqNy9NcmJLZHJUR0dWVDYvT1hmZnM5NnhhanRNcTZSWUI5YTkvTEE0?=
+ =?utf-8?B?S0RLUGVYZXVMRkIzcktQS3NWNEdFdnE5RXRGaFFmZ09kaUhETUtJOXNsd3lq?=
+ =?utf-8?B?R1UzWFVZdzFaM0NNVVMyc2swaStudDlIeWN3VmU3Z25XbEs5STNKZnZXc0xB?=
+ =?utf-8?B?MHJDYXJOeXpFOWpzeGhPRUljckJ6ZjVXcWhiazY1ZW9UY2lrcWlINFJ5cS9w?=
+ =?utf-8?B?aHRzaXFNVkNBZE5DNUEvOGlVdUFwSFBjUkJ2bVVVREc1dy9id0tENXVXNUoz?=
+ =?utf-8?B?a292MVVzbSs0RWxiK3VrbGtxN2FrMmdUdjZMNlIvbzZZOVRNbkxzSFdhdk1Y?=
+ =?utf-8?B?WWdHTHFPNEhDdnlmYTB3SkZlUlFoT3VNcEEwQWhiZVhVNnN1MjVUakJJSEE3?=
+ =?utf-8?B?TVNKUGI2dEROcjVsRjBhWjhFTXkrdmhnQlRwWlNhS2RkQ2pWdzd4WVJjYzNu?=
+ =?utf-8?B?c0JDUDJaV2QzeXNXUC9OQXRhVjd5bUhGZjNjMm85SVg4U2tYZ0s2aVBuSG1h?=
+ =?utf-8?B?ei9kNDlIVlcyTVBNNG1OTWZleHVuMmVzcW9sb0ZhZjBHNGcvUXpCSnZ2SUdB?=
+ =?utf-8?B?Mm1Xa0ZNZlg4c3FmRUt0WVVQMVZ5L2RPMEJPWE5qYjJoNC83VnRjbTZNeVFh?=
+ =?utf-8?B?MVh1NmNKemhOQ0NKTjVpT2lvSWN4TC94OEEwaXp5S1NQNUdqUDlMaTdmQi9t?=
+ =?utf-8?B?ZklxYkVtd011Y1pDdmROZ3AxWE8zdHdZVTFoaGxjMjdxQkEyRkt4SStKcWIx?=
+ =?utf-8?B?c3RoMkIzTFM2U0tiajI1dkhmbGdzVS9WMWhiQko1WVpnbURGNXJYZ21oZnBa?=
+ =?utf-8?B?djFQRW52UGVIdkxYd0prRUROZm4rZFpoYVE5NUNZM1JJQjdxOEFCMTBlcXlr?=
+ =?utf-8?B?M3hWS09PZGs1UWJXSGt0U1E0RHRaUEJZNkNnc2hEc21DMDhaMUl0UmZ1bnhs?=
+ =?utf-8?B?QzU2T3lSVGlZa3JqL1llbDdrWWtvbnZ3S2t6REY3eHNRblhmNEhvYlp4OUh2?=
+ =?utf-8?B?emxaQW8walNJcVcxNmhVR2ViZGFNbnd2SEQzcEFZUDM4QXBKT3U4bmNvMDJ3?=
+ =?utf-8?B?MlV6bHRmMWFER2pGMnhqaThNMU1XQ0o2RWJ3b0pYTXpxMWpPTHM5aDM2MHU1?=
+ =?utf-8?B?SEVXbS9oZ3IrOXMxYU1CUzVJUFl0bFF3NmVTeWRTQnUzRUl3RWhCUT09?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1e8b78d5-e767-4062-96f3-08df39785a39
+X-MS-Exchange-CrossTenant-Network-Message-Id: 92f613db-57d4-4eee-a29c-08df397865cd
 X-MS-Exchange-CrossTenant-AuthSource: LV5PR12MB9779.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2026 07:01:58.3306 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Nov 2026 07:02:17.9102 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ZUm2IC6g6lho0mzBbWXSvx+1/nHY/fPQAhK3z/FmKSsUEPBKyJjABtNoNXqP6xIc
+X-MS-Exchange-CrossTenant-UserPrincipalName: QvJuMrmXThcs2sVhyRhWcfYDV7rcBm/C7le5CBjhrikm4lso5wGebwzriBydx6jf
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB347562
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -304,27 +306,206 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 
 
-On 10/20/26 16:17, Michal Simek wrote:
-> Disable unused FF-A transport layer.
+On 10/20/26 16:18, Michal Simek wrote:
+> Since commit 9c105255108b ("pinctrl: pinconf-generic: perform basic
+> checks on pincfg properties"), the generic pinconf parser logs an error
+> when a pin configuration node specifies more than one bias mode.
+> Several ZynqMP boards described SDIO card-detect and write-protect pins
+> with both bias-high-impedance and bias-pull-up, which triggers at
+> pinctrl probe:
 > 
+>    generic pinconfig core: /firmware/zynqmp-firmware/pinctrl/.../conf-cd:
+>      cannot have multiple bias configurations
+> 
+> On ZynqMP, bias-high-impedance enables tri-state while bias-pull-up
+> enables the internal pull resistor; these are mutually exclusive bias
+> settings and only pull-up is needed for CD/WP inputs. Drop the redundant
+> bias-high-impedance property and keep bias-pull-up.
+> 
+> Reported-by: Mikko Rapeli (Linaro) <mikko.rapeli@linaro.org>
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 > 
->   configs/amd_versal2_virt_defconfig | 1 -
->   1 file changed, 1 deletion(-)
+>   arch/arm/dts/zynqmp-sck-kv-g-revA.dtso   | 1 -
+>   arch/arm/dts/zynqmp-sck-kv-g-revB.dtso   | 1 -
+>   arch/arm/dts/zynqmp-zc1751-xm015-dc1.dts | 4 ----
+>   arch/arm/dts/zynqmp-zc1751-xm019-dc5.dts | 2 --
+>   arch/arm/dts/zynqmp-zcu100-revC.dts      | 1 -
+>   arch/arm/dts/zynqmp-zcu102-revA.dts      | 2 --
+>   arch/arm/dts/zynqmp-zcu104-revA.dts      | 1 -
+>   arch/arm/dts/zynqmp-zcu104-revC.dts      | 1 -
+>   arch/arm/dts/zynqmp-zcu106-revA.dts      | 2 --
+>   arch/arm/dts/zynqmp-zcu111-revA.dts      | 1 -
+>   10 files changed, 16 deletions(-)
 > 
-> diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
-> index f6f87df632a2..b138d58adea8 100644
-> --- a/configs/amd_versal2_virt_defconfig
-> +++ b/configs/amd_versal2_virt_defconfig
-> @@ -92,7 +92,6 @@ CONFIG_DFU_MTD=y
->   CONFIG_DFU_RAM=y
->   CONFIG_DFU_SF=y
->   CONFIG_SYS_DFU_DATA_BUF_SIZE=0x1800000
-> -CONFIG_ARM_FFA_TRANSPORT=y
->   CONFIG_SCMI_FIRMWARE=y
->   CONFIG_FPGA_XILINX=y
->   CONFIG_FPGA_VERSALPL=y
+> diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+> index 45396e420433..fc8d3467198d 100644
+> --- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+> +++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+> @@ -403,7 +403,6 @@
+>   
+>   		conf-cd {
+>   			groups = "sdio1_cd_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+> index 22faec35f793..80d1577c92bd 100644
+> --- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+> +++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+> @@ -394,7 +394,6 @@
+>   
+>   		conf-cd {
+>   			groups = "sdio1_cd_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> diff --git a/arch/arm/dts/zynqmp-zc1751-xm015-dc1.dts b/arch/arm/dts/zynqmp-zc1751-xm015-dc1.dts
+> index 2897c423f82e..7942e632d047 100644
+> --- a/arch/arm/dts/zynqmp-zc1751-xm015-dc1.dts
+> +++ b/arch/arm/dts/zynqmp-zc1751-xm015-dc1.dts
+> @@ -285,7 +285,6 @@
+>   
+>   		conf-cd {
+>   			groups = "sdio0_cd_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> @@ -298,7 +297,6 @@
+>   
+>   		conf-wp {
+>   			groups = "sdio0_wp_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> @@ -325,7 +323,6 @@
+>   
+>   		conf-cd {
+>   			groups = "sdio1_cd_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> @@ -338,7 +335,6 @@
+>   
+>   		conf-wp {
+>   			groups = "sdio1_wp_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> diff --git a/arch/arm/dts/zynqmp-zc1751-xm019-dc5.dts b/arch/arm/dts/zynqmp-zc1751-xm019-dc5.dts
+> index 722b2e833b44..34b68cbc1e9e 100644
+> --- a/arch/arm/dts/zynqmp-zc1751-xm019-dc5.dts
+> +++ b/arch/arm/dts/zynqmp-zc1751-xm019-dc5.dts
+> @@ -285,7 +285,6 @@
+>   
+>   		conf-cd {
+>   			groups = "sdio0_cd_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> @@ -298,7 +297,6 @@
+>   
+>   		conf-wp {
+>   			groups = "sdio0_wp_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> diff --git a/arch/arm/dts/zynqmp-zcu100-revC.dts b/arch/arm/dts/zynqmp-zcu100-revC.dts
+> index 81353b60b38b..2ebba269d208 100644
+> --- a/arch/arm/dts/zynqmp-zcu100-revC.dts
+> +++ b/arch/arm/dts/zynqmp-zcu100-revC.dts
+> @@ -337,7 +337,6 @@
+>   
+>   		conf-cd {
+>   			groups = "sdio0_cd_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> diff --git a/arch/arm/dts/zynqmp-zcu102-revA.dts b/arch/arm/dts/zynqmp-zcu102-revA.dts
+> index 4d5f4754171f..1af7b889cbf5 100644
+> --- a/arch/arm/dts/zynqmp-zcu102-revA.dts
+> +++ b/arch/arm/dts/zynqmp-zcu102-revA.dts
+> @@ -947,7 +947,6 @@
+>   
+>   		conf-cd {
+>   			groups = "sdio1_cd_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> @@ -960,7 +959,6 @@
+>   
+>   		conf-wp {
+>   			groups = "sdio1_wp_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> diff --git a/arch/arm/dts/zynqmp-zcu104-revA.dts b/arch/arm/dts/zynqmp-zcu104-revA.dts
+> index 4479ff735145..b03774bba937 100644
+> --- a/arch/arm/dts/zynqmp-zcu104-revA.dts
+> +++ b/arch/arm/dts/zynqmp-zcu104-revA.dts
+> @@ -373,7 +373,6 @@
+>   
+>   		conf-cd {
+>   			groups = "sdio1_cd_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> diff --git a/arch/arm/dts/zynqmp-zcu104-revC.dts b/arch/arm/dts/zynqmp-zcu104-revC.dts
+> index 0f1b1fd92a70..ec1b9168a1c1 100644
+> --- a/arch/arm/dts/zynqmp-zcu104-revC.dts
+> +++ b/arch/arm/dts/zynqmp-zcu104-revC.dts
+> @@ -386,7 +386,6 @@
+>   
+>   		conf-cd {
+>   			groups = "sdio1_cd_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> diff --git a/arch/arm/dts/zynqmp-zcu106-revA.dts b/arch/arm/dts/zynqmp-zcu106-revA.dts
+> index ad76159084ef..5a5d3884821c 100644
+> --- a/arch/arm/dts/zynqmp-zcu106-revA.dts
+> +++ b/arch/arm/dts/zynqmp-zcu106-revA.dts
+> @@ -946,7 +946,6 @@
+>   
+>   		conf-cd {
+>   			groups = "sdio1_cd_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> @@ -959,7 +958,6 @@
+>   
+>   		conf-wp {
+>   			groups = "sdio1_wp_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
+> diff --git a/arch/arm/dts/zynqmp-zcu111-revA.dts b/arch/arm/dts/zynqmp-zcu111-revA.dts
+> index a9a473602374..e13e93847bd8 100644
+> --- a/arch/arm/dts/zynqmp-zcu111-revA.dts
+> +++ b/arch/arm/dts/zynqmp-zcu111-revA.dts
+> @@ -778,7 +778,6 @@
+>   
+>   		conf-cd {
+>   			groups = "sdio1_cd_0_grp";
+> -			bias-high-impedance;
+>   			bias-pull-up;
+>   			slew-rate = <SLEW_RATE_SLOW>;
+>   			power-source = <IO_STANDARD_LVCMOS18>;
 > ---
 > 
 
