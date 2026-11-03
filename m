@@ -2,143 +2,183 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DE5E606A97A
-	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 08:44:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 531CF606A326
+	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 08:55:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=LoA0+0b3;
-	dkim=pass (2048-bit key, unprotected) header.d=emlix.com header.i=@emlix.com header.a=rsa-sha256 header.s=20250930 header.b=Yd2PAtnY
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=saxwY+74;
+	dkim=pass (4096-bit key, unprotected) header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=lSzfgY7L
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EFAAC80DE2;
-	Tue,  3 Nov 2026 08:44:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2EE1580E26;
+	Tue,  3 Nov 2026 08:55:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MZGUxmsZzy7d; Tue,  3 Nov 2026 08:44:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DAC3E80C5D
+ id Q3Ucecr4I0KY; Tue,  3 Nov 2026 08:55:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E0C8480D84
 Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793695484;
-	b=n2gd77X3DpeSXjkflUdwp0UqAAcn63NDKDHoANCmSAsORkT278r7UEtx0paUIp5VgXWy
-	 4QhAEgqo6favZN2c8e+SX0YPjaKUM6yOyddN/fUd3mOMTGoKtMx3swBiE/7qJWN9Ob0/+
-	 FTHv1EQ8opBgNHOvIhmCJSC1Ml7TRaNetXONJn8McpsoXadgKY5okZSEYzpn5BQDKFDX9
-	 Bs7QQyqR4sHFfBF0CdxSPEWZRBEvoSxXhdiJ53XqLLzwgxaFcd0K7+fSYYA1Ie2zISlt1
-	 aAKw+ZyqkBSYiwPnLqG9WDiuXJgQS65O8IPWTlS+BxQrMu8JQdnGC3GugSQJLEdZNqQ==
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793696126;
+	b=qfW2nXxxQ8h3g3cXBa+axOio3QfUw+Le4roS+JxUgsmgbmCwCWs97N/FcFS3wLhJmdBv
+	 rt4NipcU2DbUdKukP+ugWehIjpCFHGppbV/+H6uUItRWnC5XI8LqdziwYSUzBMGN5zMa8
+	 KMcBUme3zYnArdeS5OATcwvGWEYcvmwlhfsHsSjLyQcwzcKt7V76bCnztAkHw/9tdM61m
+	 F3SNMfBJvRGoy7TXK1RjSuW2yK8y0rGjSiET7PrCkAbfsP/JHKUtdiVc8xe2qACBEkKFk
+	 A80eDg5sYnAE3PhO6MRWtnBd6gWceuUONSxYSUbulMORY6tH3py2GlBcxW+N6Ffdmvg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793695484;
+	c=relaxed/relaxed; t=1793696126;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Virus-Scanned:X-Virus-Status:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=F8FL+zvtquEEOQT4ZzfLUyNR7PX2JYZ+klgX1InLHH8=;
-	b=kNmiTTs5ZHMSINKDCxsIMuxtY3cA4BdMde0c9I+3kdkmTRk0wweUQ4lhPTlNvqtgpZDp
-	 RkzYkjTsANz/COvb87fu8MMDxjanaqlndX2RBO+pEA1Lr2DnsFTtfpLXsnnrp0mP/Qze9
-	 3yB1zYZgrH8iHTi8AT7fvdxDgTqmyTiEQQeqs/amZyEZnGXBMD4GMABnlJTQPxA9DchjL
-	 35D22gkCbpcSmEO4IvOkp7gSXv5TmZwORqCenyfLwfv+glt5YmiZJHpQHcXaIXgKSQqdM
-	 5fbU8ShQTmTyNwPbwGEEmSqV0rbqwfXBdjRuJEJWBYaHglcqKjx0lJUhqzyEve4cFNA==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
+	 Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=QRf99eRMxvTs2amFmjmDOeSDysl8ssPns6xMzIeHLtk=;
+	b=cBz7SZe7Garc8NYuZHkD7wor4EXp0PfJfvsTVbhLvVLPiphYV0o/RQgJ+jrTo6/4FYW+
+	 IH2YuNl4sHupmE8ONhkgiWuXiuV7+ENtYFAi26Wj/f0xcJ327SDLD4U6JSM5Wz1wnUu6o
+	 h6v5y53dumLFIiWsPDE2NhabFhoklPp9h8LxBWWBhupPLYEPi2Wbw1M0JA3NUn58dmlaF
+	 70lm2qBybfSFNcsYSlrhJ5p6sfeYnOHhPeieqpJNoU/43cjkn7Eh05V4FL62gCEBdUyNm
+	 KQKKO//4gRs783yYyqBDM1D420j4zvJ01mWHtSY7k2AVO//9UvtI+ZKioTeX8YmOQvQ==
 ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793695484;
-	bh=F8FL+zvtquEEOQT4ZzfLUyNR7PX2JYZ+klgX1InLHH8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=LoA0+0b3ynZJOH4dvGBEnHIvK6rgKBjzhfI59Tosapirw+MwA95cwHqpLRWleihds
-	 M5KRBgeb7q8Mafr3z7bubUG8AHLRHFv0bEAE7jKxIYbDmvW/g18ck5254+eAWJwkUP
-	 KUClU1cRtL9oYfdbqI8dli9nN5eq9d75HDnnGFo7i/kHcOSeMNLrUfKtBtRIymfpkH
-	 CHVGQLuvLhTsNghd63DKsNfaI9d7dNhh5A347wn/9dhLlShUqIHa6IxIpuB5v/kaiJ
-	 087d6syK/q5jRYTxCtxAg0hiXa6HAriecGnNCV8HsJ6Y2gZnvZIyRdXd2cvspKho1m
-	 bvLfc/fgQjIYQ==
+	d=lists.u-boot-project.org; s=default; t=1793696126;
+	bh=QRf99eRMxvTs2amFmjmDOeSDysl8ssPns6xMzIeHLtk=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=saxwY+74UHWzMauXy+HTBKmJxLT1cJd10WwBA3EXWFswKZ8j6HHlpox3MD3luW3Ke
+	 qVJPz3RPuDr7jVpoXvXPCMwig8Ds5xTXpAevm1wGwq9XkeyzC1la8NFhUOnrgzxRyQ
+	 TDN+Oe8Q77k1nO1Wtt6Fn0ZTlzcPM9wMw0NnBLHKbwJygo9CpYcyIQd5aNydAe3HPE
+	 XOQ6RI6I41ahDCUsNRo+tSNImPxpkWT46XVzFC3T04EEQ5P6LBjveyQkuMgzmGIviV
+	 BVomIqBZ1PBxB2Ipf7POt0Yjri9DyXRamXrRwPL+c3iBLKyrBRzYT62Ur2PsvB1Int
+	 Kq40RMDATwOzQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DAC3E80C5D;
-	Tue,  3 Nov 2026 08:44:43 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 6A5E4411
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 08:44:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E0C8480D84;
+	Tue,  3 Nov 2026 08:55:25 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id DCE3F411
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 08:55:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 6398A401DB
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 08:44:42 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id C2B326069A
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 08:55:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LSQ82Iej5vS9 for <u-boot@lists.u-boot-project.org>;
- Tue,  3 Nov 2026 08:44:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 93BE040080
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=178.63.209.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793695481;
- b=ONH7uccTb6bXu+aTPmEn/RcGuFd7sFlLbfZxVvFGTWCScPxELYpsIi43Dna5upvGGWpX
- Y+e/nnPX/6TZIRAltv3GEyvxWZpe2JWU1eHkHomk1YdbhxGAYQmbR3N8W+snktyIl2KyI
- jrmvuxwsIQ+RiJfRMbpz7jbIJ5X3gQwVtnBSvNQkpbwmZK9xQ1uE83P/JbbetdJ4r3jjl
- W9J7xSBP1ELIhw00o7fDsmtRlfHHF2OjjkOxVBnOg1wTjjMvD/5XU+jUXEMmu2nSWgnn4
- xBq3Foo3pTme66nXCczrelUbyhLqsC/I9wB1v/61xKduVcibr5UUggnbfV7uHruYckQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id umJhQhx8Iv57 for <u-boot@lists.u-boot-project.org>;
+ Tue,  3 Nov 2026 08:55:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7BF89605CC
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=185.125.188.123
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793696123;
+ b=e1pjuC645Qig6o35z2rqnXv71N8uZ/ashb7euOTOHg4kDmc8JwYL3U4/XhUU51YNDBXy
+ yezch7kNViodgnxKdxRXcDgLQ5ehebxPaso8YA1l80VM31LoUFEhjhNsu1x/+wK1blCEp
+ 9P5Gm5auV8S6AhOs7kCooDibLLMTt5vZr643kr7usW+gyv4dhYCS8gz7/4oOHxYOCXW/4
+ iXf96i0nr8+85RmMkd52Nb1/BvhcDu9M+xhB4CuV+6btJnSMoiQGu2BD5jLLV9tuDHIdQ
+ 5e/xjDk/p79foUoVTvuEo1uC/rWZ6RzmyEa2IYtQaN8z2cBqB3sf8nMFi/vbupI0s9Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793695481;
- h=Received-SPF:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
- User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding:X-Virus-Scanned:
- X-Virus-Status;
- bh=F8FL+zvtquEEOQT4ZzfLUyNR7PX2JYZ+klgX1InLHH8=;
- b=dM8X31qscNS9aOwDXWBYSG4gt/kZOnhRQ0jP54oEpuZehZid4skW0/vtlOOCpLaYsVJa
- vWWd5C4HJprNLhRul3T25ubTrBumrk1sc0u1dun4FmYXSQiXM5Syvo4QVpa50D1q+abJe
- j2iHGFo9adLwTpDomoOMn0qaA79xVBHMhG4qurxEjUPKPr1Q+TGUTFwjjTW4sj0whTZVU
- DHlZFthbSwO/OP++LQPgGTjrt5eWF8qTzff0yUXMh1rL1mOEC5dDinOtJrnCzUXwcHjhg
- AJAMwBP9c2xB4VamENFd17GWpbHGAWPdUJU5Uk3tNqo2vtDEfzyTwmB0wsWXmQEXROg==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=emlix.com;
- dkim=pass header.d=emlix.com header.i=@emlix.com header.a=rsa-sha256
- header.s=20250930 header.b=Yd2PAtnY; 
- arc=none smtp.remote-ip=178.63.209.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.63.209.131;
- helo=mx1.emlix.com; envelope-from=tkirchner@emlix.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=emlix.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=emlix.com header.i=@emlix.com header.a=rsa-sha256
- header.s=20250930 header.b=Yd2PAtnY
-Received: from mx1.emlix.com (mx1.emlix.com [178.63.209.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 93BE040080
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 08:44:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=emlix.com;
- s=20250930; t=1793695477;
- bh=F8FL+zvtquEEOQT4ZzfLUyNR7PX2JYZ+klgX1InLHH8=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Yd2PAtnYLjPM/VFy39T6xtj/yu4T8XH3suWX5nW4KenO8Iwxtra6/uoFAl4SJur1O
- dZNl15npqAAACN7hndcVrzvYQ6Y/KcUia8TBa4RpbrBd+FrY35hmd+Lzxwxw8n8Idl
- oyIwEFAIOzw45N0Li12Mre4myXJxSotGWNTLN2ZwKIhLXdWTlPxrVDQ2ED3Bk1hbU+
- lnWRuELhIgQnp3xKo8qEisRHnvuvXBHjzshctMqDCKe78JTZqzFrZ+zu+WF/ubCEl+
- sKC3sM3mZg6YGVSGvlw2wn/6wnhhuhWx4ReGvzTgVEOkd0jNovggLxw1bO5Y4QVJgh
- Ihef8pM5sr1dA==
-Received: from mailer.emlix.com (p5098be52.dip0.t-ipconnect.de [80.152.190.82])
- (using TLSv1.2 with cipher ADH-AES256-GCM-SHA384 (256/256 bits))
+ c=relaxed/relaxed; t=1793696123;
+ h=Received-SPF:Received:DKIM-Signature:Received:
+ X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+ X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:Subject:Date:
+ Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+ bh=QRf99eRMxvTs2amFmjmDOeSDysl8ssPns6xMzIeHLtk=;
+ b=Z6iS4XnSurff6wkj1CKxIHGODthOdIGKR4e0mpv64gT9BztvuXgzLjgRAy84Qxv/tBx9
+ DAEDOaPlb4Ti7iKIrx/pAQ5rSqhIAq0PJXqJMbqSQp14C5Kew96GkS6qwn12ZOq8GEsHG
+ L8EnlrwxGpTEVRpsMaTbUrLv8LvetZsIok2FLzYDxjikVrLOHtF9bAssEZA0nkfyybFZS
+ JEN8fH9xpTW9kc6DXyJ0nsrK4gMSQUnQDecBV/o5y8JMl/5OzhThTJZoaqZsPN22KHnaJ
+ j+f0XFezovnuR9YFx8KIEzq+1DtkQAS99pQ0ragimAHrWqc6J+Yu+c54XUqp4XXNJ0w==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=canonical.com;
+ dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256
+ header.s=20251003 header.b=lSzfgY7L; 
+ arc=none smtp.remote-ip=185.125.188.123
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.125.188.123;
+ helo=smtp-relay-internal-1.canonical.com;
+ envelope-from=heinrich.schuchardt@canonical.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (4096-bit key,
+ unprotected) header.d=canonical.com header.i=@canonical.com
+ header.a=rsa-sha256 header.s=20251003 header.b=lSzfgY7L
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7BF89605CC
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 08:55:20 +0000 (UTC)
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx1.emlix.com (Postfix) with ESMTPS id 2B4875F82C;
- Tue, 03 Nov 2026 09:44:37 +0100 (CET)
-Message-ID: <a71d2e80-f36d-4e54-b85d-917a7d494a31@emlix.com>
-Date: Tue, 3 Nov 2026 09:44:35 +0100
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 433173F32F
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 08:55:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1793696118;
+ bh=QRf99eRMxvTs2amFmjmDOeSDysl8ssPns6xMzIeHLtk=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=lSzfgY7LKe46zTVdXF1k5M6oG+nX5hioQB0mgDJopYx9l0gYc1HC/yPKaCvRKqByL
+ 8ohj3qwPNhWW5tCt3fCPnsE36R3f0Irdt3VuOwWIKJ82F1yBrtA/1vshl/KEDAwGrl
+ HgIiGDd1vwLBbglYkmBBvArD0KFH2Kpq/WQIMyNi8LyqNrcrsyxnE9FI3QIJhUMN2/
+ yWXrCJmx0Msa00XcUdaMi8+HrRk06Exow0C/3v6ZGt9E65EcA3Rr8ZOiZlPcgmthOS
+ QViuHSDC+6p07LG6gKqMzOyJ64vUYWXkP1DzmptS2zAhtVEtxzk8nyJr0pM6f02h9m
+ w3MgyyZmSBhACqw8IoluG24XT0FJ7tizywUuAI2t9HWOstZcRqedO40HZ/M1QBrsbh
+ 69p3aBeG98vuKoyo8uRnddtezsBuHGadbiALuD4D4v9G5CPj3nNWG6Y4dptPImCvsz
+ jS7NgPEcu4dJqO4jYzRHt2Qh8gZHEBgI/xUf/xqeg9vfHmyKzxqAfasy14IIV5inas
+ YgMkmE/6d/OGXAyVsgLMJ+kFEfNlUNpbEvrMZtizK2sUbof1ItEVws0GTm2wRlF6Uh
+ axBTFug6HNjuPJuLt1o1Vy3Qi4to1luKYh0MjzgIN4fDG2yC+e5rbso3YhlDbBLPkZ
+ BPJ0P38RPlp26TlsJax/vIW4=
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-48df5b058ddso2544960f8f.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 03 Nov 2026 00:55:18 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793696118; x=1794300918;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=QRf99eRMxvTs2amFmjmDOeSDysl8ssPns6xMzIeHLtk=;
+ b=Wp0P7AHkMpchO04xkhKEOki9XfpjZhlKEluFOzpjj6f48yDBoPCsbO2vRyhCKFr+oO
+ 3EJ9rech/atmSXMudQmC7llSVnfcj5xOP5YnzPxZcRj9x7eukUiUHzsAZw/1/XUdB/WD
+ fi2+iB6LsAAoP1lAlHTw81ZqPgavT+kiJ1yXaK2IzFoT0SlrQY/FOPyO1L4RMMRYv1Zv
+ /STfJBYY3KOaIgFxfPHnuS9/iJ35VNGIutMt9I06MFfXZZCdzhT/Q4q3S0xH6aI0NaiL
+ s4bJqZPBnStrLkBjwbkXrzp4K1Ogm0oYHCiRyWWbJp3vlyPhiKCJ7RLZiXcZEhUMJBrS
+ RNUg==
+X-Forwarded-Encrypted: i=1;
+ AKwUvByyHfxCHa2rrcmKesxFxJ4J4oY8dsKREhI+bltA7NPpKQnGpHjF+pncXZ/tYy4dnYd61/N4xXE=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/9LitDnOhFlC5PFJcCKM93xgnHSvSkRjdpGVpCOovGlB5M3MBU
+ nB+hBlkCoiT/uOH/Euy1zsKaed3hX4ZMgDU4MNNwABOSWiUfdE2cEAGlZORCpqSv2g1Ukd7jX2a
+ q6iN8IpYW75KH8TZ+Jqp4B8XtcZypu0J9RZDgs2UXIYgHaoXknfGa+R1EzRAu/7v5JYltKkuYxG
+ 6pf23lHLMJQA==
+X-Gm-Gg: AYBFou0RakoFWz9gT2OftOTSJ1cvBWTQvIB963rCKNDn+7lBHc+Oe6Or6WyYSioKccH
+ ZhgA+RsIt+CaqbWVZx+J9fOFVok3k1yZqm8fe9pObZVAtzEYEAD9n6vK0KfwW/XIEY3G556AVRs
+ WrXeq6k6o7VmE492Ti9fl2IBZz4yP9a9uEI2v51vkkvmS3SD0qoX385lP6dESxHGLgUtsS8Z8qI
+ P3+aoZNTZWqpvRmXfvG9aqnTKYrc7YsKzVzLqXArQn1UbKh8Rtd6GZDRHqkpS60VpRo2klUgJwq
+ CPcTWprsq48laj0czO6yvYgZouiC/udjLlzgrzLEMZJ+oDSa1ehtOdJ0ppyXRIRuOO0KWDkh6ug
+ 13fBDGOa2b4Qy4391/30eTyepTHbJiDbpJwKrkytGqIl9b2+eOnakzYWEbgPUIxz29mHcxJwj7x
+ 99oGYih2cVAQ1nx5fkl7IRkS/15RNy3Q==
+X-Received: by 2002:adf:f007:0:b0:48b:174:eab1 with SMTP id
+ ffacd0b85a97d-48e6e509b48mr21917330f8f.36.1793696117789; 
+ Tue, 03 Nov 2026 00:55:17 -0800 (PST)
+X-Received: by 2002:adf:f007:0:b0:48b:174:eab1 with SMTP id
+ ffacd0b85a97d-48e6e509b48mr21917312f8f.36.1793696117469; 
+ Tue, 03 Nov 2026 00:55:17 -0800 (PST)
+Received: from workstation5 ([2a02:908:1242:30e0:a04c:46f7:da56:996e])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48e71b789ecsm22932274f8f.29.2026.11.03.00.55.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Nov 2026 00:55:16 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ u-boot@lists.u-boot-project.org,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_loader: handling of missing TPM in efi_load_pe()
+Date: Tue,  3 Nov 2026 09:55:11 +0100
+Message-ID: <20261103085511.74079-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.55.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] tpm: deactivate unsupported banks in tpm2_auto_start()
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Raymond Mao <raymondmaoca@gmail.com>, Eddie James <eajames@linux.ibm.com>
-References: <20261029150906.1558380-1-tkirchner@emlix.com>
- <20261029150906.1558380-6-tkirchner@emlix.com>
- <CAC_iWjLX_3RAzxeCy7HQHEy+fZS4Jm-J_E6wnv_QG5+DWpX+GQ@mail.gmail.com>
- <64f49638-bcf8-45ca-bf88-2e96e2d8d68c@emlix.com>
- <CAC_iWjLwGpmX3jfeo2h=ERDuYZo-a5scgBejzV_euCgazHimQA@mail.gmail.com>
-Content-Language: en-US, de-DE
-From: Tycho Kirchner <tkirchner@emlix.com>
-In-Reply-To: <CAC_iWjLwGpmX3jfeo2h=ERDuYZo-a5scgBejzV_euCgazHimQA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Virus-Scanned: clamav-milter 1.4.3 at mx1.emlix.com
-X-Virus-Status: Clean
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -148,133 +188,44 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Ilias,
+In efi_load_pe() if efi_image_authenticate() fails, we completely load the
+image and afterwards return EFI_SECURITY_VIOLATION.
 
-Am 02.11.26 um 22:00 schrieb Ilias Apalodimas:
-> On Mon, 2 Nov 2026 at 12:35, Tycho Kirchner <tkirchner@emlix.com> wrote:
->> I would rather keep it as a fallback: callers may use tpm2_startup()
->> directly instead of tpm_auto_start(), e.g. custom board code or
->> "tpm2 startup" followed by "tpm2 pcr_extend" on the command line. For
->> them, the check in tpm2_pcr_extend() is the only place where active
->> unsupported banks are caught. With patch 4, it only deactivates the
->> unsupported banks, and only with CONFIG_TPM_PCR_ALLOCATE.
-> 
-> Yes that's what I was implying, but I wasn't very clear. Is there a
-> reason we can't move it to tpm2_startup()? tpm_auto_start() is calling
-> it anyway unless it's already initialized.
+If the TPM device is not found, we also return EFI_SECURITY_VIOLATION
+but the image header and sections are not loaded.
 
-No, that works. For v2, I would deactivate the unsupported banks in
-tpm2_startup() with CONFIG_TPM_PCR_ALLOCATE, but only if the TPM was
-actually started there, i.e. TPM2_Startup(TPM2_SU_CLEAR) returned
-success. If it returns TPM2_RC_INITIALIZE, an earlier stage (e.g. SPL
-or TF-A) has already started the TPM and is expected to have taken
-care of the banks. With an event log, tcg2_log_prepare_buffer() still
-aligns them afterwards. TPM2_SU_STATE, i.e. tpm_resume(), is left
-alone.
+This difference in behavior does not look right. Handle the no TPM case
+like any other security violation and load the image header and sections.
 
-The fallback in tpm2_pcr_extend() from 4/5 stays, for the case that
-the earlier stage supports more algorithms than U-Boot.
+Fixes: f9b51dcf294d ("efi_loader: correctly handle no tpm device error")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ lib/efi_loader/efi_image_loader.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-I suggest something like:
-
-```
-ret = tpm_sendrecv_command(dev, command_v2, NULL, NULL);
-if ((ret && ret != TPM2_RC_INITIALIZE) || !bon)
-    return ret;
-
-/*
- * Only the stage which actually starts the TPM deactivates the
- * unsupported banks. On success, this resets the board.
- */
-if (IS_ENABLED(CONFIG_TPM_PCR_ALLOCATE) && !ret &&
-    mode == TPM2_SU_CLEAR) {
-    ret = tpm2_activate_banks(dev, 0);
-    if (ret) {
-        log_err("TPM: failed to deactivate unsupported banks\n");
-        return ret;
-    }
-}
-
-return tpm2_update_active_banks(dev);
-```
-
-What do you think?
-
-
-Thanks,
-Tycho
-
-
-
-
->>
->>
->>
->>>>
->>>>   tcg2_create_digest: unsupported algorithm 28
->>>>   Cannot extend PCRs if all the TPM enabled algorithms are not supported
->>>>
->>>> Deactivate them in tpm2_auto_start() already, before anything gets
->>>> measured. If this fails, e.g. because the TPM refuses the allocation or
->>>> no supported bank would remain active, return an error. The rationale
->>>> is that with CONFIG_TPM_PCR_ALLOCATE enabled, U-Boot is expected to
->>>> manage the banks, so fail early instead of at the first PCR extend.
->>>> This is in line with the TPM_PCR_ALLOCATE help text, which does not
->>>> specify at which point during boot the allocation takes place.
->>>>
->>>> Signed-off-by: Tycho Kirchner <tkirchner@emlix.com>
->>>> ---
->>>>  lib/tpm-v2.c | 12 ++++++++++++
->>>>  1 file changed, 12 insertions(+)
->>>>
->>>> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
->>>> index 18ec9eb960d..bd049fed748 100644
->>>> --- a/lib/tpm-v2.c
->>>> +++ b/lib/tpm-v2.c
->>>> @@ -232,6 +232,18 @@ u32 tpm2_auto_start(struct udevice *dev)
->>>>         if (rc)
->>>>                 return rc;
->>>>
->>>> +       /*
->>>> +        * Early deactivate active banks with unsupported algorithms. On success,
->>>> +        * this resets the board.
->>>> +        */
->>>> +       if (IS_ENABLED(CONFIG_TPM_PCR_ALLOCATE)) {
->>>> +               rc = tpm2_activate_banks(dev, 0);
->>>> +               if (rc) {
->>>> +                       log_err("TPM: failed to deactivate unsupported banks\n");
->>>> +                       return rc;
->>>> +               }
->>>> +       }
->>>> +
->>>>         return tpm2_update_active_banks(dev);
->>>>  }
->>>>
->>>> --
->>>> 2.47.3
->>>>
->>
->> --
->> M.Sc. Tycho Kirchner
->>
->> emlix GmbH
->> Headquarters: Berliner Str. 12, 37073 Göttingen, Germany
->> Phone +49 (0)551 30664-0, e-mail info@emlix.com
->> District Court of Göttingen, Registry Number HR B 3160
->> Managing Directors: Heike Jordan, Dr. Uwe Kracke
->> VAT ID No. DE 205 198 055
->> Office Berlin: Panoramastr. 1, 10178 Berlin, Germany
->> Office Bonn: Bachstr. 6, 53115 Bonn, Germany
->> Office München: Am Knie 16, 81241 München, Germany
->> http://www.emlix.com
->>
->> emlix - your embedded Linux partner
->>
+diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
+index f9a2d2df405..a03866c2907 100644
+--- a/lib/efi_loader/efi_image_loader.c
++++ b/lib/efi_loader/efi_image_loader.c
+@@ -1004,9 +1004,8 @@ efi_status_t efi_load_pe(struct efi_loaded_image_obj *handle,
+ 		 * this is not expected.
+ 		 */
+ 		log_err("PE image measurement failed, no tpm device found\n");
+-		goto err;
++		handle->auth_status = EFI_IMAGE_AUTH_FAILED;
+ 	}
+-
+ #endif
+ 
+ 	/* Copy PE headers */
+-- 
+2.55.0
 
