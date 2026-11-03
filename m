@@ -1,147 +1,142 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 327A3606A324
-	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 03:35:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E153F606A324
+	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 04:17:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=TSHlTo8l;
-	dkim=pass (2048-bit key, unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=MeSWcmBQ
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zUnzHIsC;
+	dkim=pass (2048-bit key, unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=bmgYn8JB
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1760680DC9;
-	Tue,  3 Nov 2026 03:35:30 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dyRxao0FnBcu; Tue,  3 Nov 2026 03:35:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 56C2D80DAE
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793676928;
-	b=lZX7CXRkWO11tCyeOK0RQ9Se/7+uxJ2E0g5ce13Ltw/9PRnTqpE6o8m696RPNtuZSEH8
-	 TCCmUqD2YZtnSlf8DNJPyBYOtGoyql2w94VsFvQvsFVSMiuLUqnRQZNAFn47J6s57JKpe
-	 rR6KEfpCiCXigcjEvxNlyaLKT0Yq9Y3m+nNcxZnRSNKr42hBkTn68OPrkl0gNwldKCPKf
-	 Qa3rtjdPRkjCYbdtHA4f7dfxkBL6dsghN6cqLZkc4CB1JwTN8e3VxPcrQXnXT95MgIw8+
-	 153H0ESyUBDeFODYJi2Ix/aFQbu1R9Kdx/odUYcRjOY7zfJwAuFY06xwM8+vu6rm5Ww==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793676928;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
-	 References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=9UIkzZqMh2nm62BgmWPMVvKpnDdiKEfXlVo2FfUrtJ4=;
-	b=hc00ZvBn68oMGa2KtIOJVdoCPe9U53wkyZIJcqOjlmjMGBBs68aIp8rqGtAK/NLjKgQD
-	 V2KTOgIDrPWpt9ABtzoD5+saAKJHXSWLVU/A644m/oXhHDVF2U9Vf1hoDVqoOwBCROHma
-	 CA1WChzR5CfL7PGTYb7X+1HqBzt+3+stD5YrZVrl6KL22+E7Wv18vJXvE/MgLLHs6c0RK
-	 SjsnCb6JTYmKe/ZqjIf7+hSCFsDauyy/8hmI/ZGeCk4MmMAPnH7MGAvzhNFpMiDy7AIPK
-	 pBVg8wcLx5hk12+I1y54XjK2wksGUoz2RF/2hE1HNQkmwksRhtzxo6edyTLf7PmdRaw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793676928;
-	bh=9UIkzZqMh2nm62BgmWPMVvKpnDdiKEfXlVo2FfUrtJ4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=TSHlTo8lKCIj4YqVIx5xdkFXL1/NyS5NCWgSZMp3w7R4jhyTft6LLgguzgE8uRxM+
-	 /wxqQgn4vx3W6Ren+jqCAlZkjT/5jYYELnel+pYJ56HtJ6g888wrognFlk98LNwf+D
-	 Rrm1+yZlqwtoamjg/dXfteh97kw9xoVqejTIlIhAI+PSQptTUiP3x9tvTy/+AO1Cro
-	 HuxijBQINXoN4f01A/n+ZBaHR+QRbjY+gUagVDe7j4y3GfR94nF4sBKpX2Pc8jnlGk
-	 sM9Gdkz1lSh/L25t3SX/gJF/kcn6DhwAZUMqjoAklsUjIgzZwOYGBTsazm6vqLvlgG
-	 3j+iy2SLSUaHQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 56C2D80DAE;
-	Tue,  3 Nov 2026 03:35:28 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 07E664BC
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 03:35:27 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D8DED404EE
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 03:35:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BF4C8405A1;
+	Tue,  3 Nov 2026 04:17:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id e4Gkn_9tAL9s for <u-boot@lists.u-boot-project.org>;
- Tue,  3 Nov 2026 03:35:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8370640400
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=80.241.56.161
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793676925;
- b=i8V0E3fE2d1SP2iWHnfGaa/i7TJABRIkoAGRmqzlKSC/WCzn5ZnF3eE6OZBXCAsIqEJI
- GcPXK06Lm1LQjxXeCraRrKd4jVGJjWp4IGGu7yPLpoOPT20/vfD+6LioAswQpkyOgfk2/
- VFyG3RR50cPijehr+XJBqmATh3YFs15A0xvsPHEMZrkA70aVj6fBcl/rUJ62AYo89EdM+
- rP4yGh/j1juwr1STse+N+ZzeEZmm+4oS394q8l90iwwnebnD+ENTcR1FNn/+fj2jXoY1p
- YvQc+WgxiPfynf4hNfjnJ3gxeZCw+/BLWm2arwHsGU/xto8LR20DPEatsmP0pybVr7Q==
+ id 9hq0HUmh_0iT; Tue,  3 Nov 2026 04:17:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E2F0E40583
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793679433;
+	b=VPnA0yXpj843gOAUp+aVXkhTK+OY2IxyNwQlxn5IDu+kcvREq1gMsWEe6KQn2kPA92ld
+	 g6KijRdk//fXaP3HuLIi66wiMVa22Dy6N/xnKta/pfFQDwEb1RPhCbe9PvhqS9iEK8zMb
+	 rR5QSFYsNOR02i6T5abUSxU8iezrUfOV3Nz7AHWbiCX9iQdMw654ZOfUPM6KWKChnJyJx
+	 ZV+b0tMoAEgazIcxhfvpf2mccbz0DrwHie2GsEJsiKTp2NIudQfaYeUB0S2ZVJtHayXaS
+	 5S8D7lOzX+UdhHedInLYIocEgKmh7uZ3e9W8VWZ9TQVyae8a1RZOJnANLd7KyodYpJw==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793679433;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=jTGkE9mNhQyrBV0SmAEduvxK5JmMrl7q3hsxbjtZaog=;
+	b=R+L1A0G6Gd8H39QJS4KFrM0iZ+BE9Mcr7gaxEAYG8HoiHw2nLx3jR6zPB5gZaR6IAPk/
+	 WIgKiWO8sAKsnXo4IrtMsta2tOZhWWh45bTpQglhn1njXquxFA5MZCE/bBvGrmDGQKlY5
+	 rMa+E5pqaawJxaH3FEAJsXEVFzYDc74e9chn05RZYQVGjgX69KDqxFoDo+a8lflRW4xch
+	 z5ELB+OCVjtPgKT7Hi/bbPF1IZie7D9BzBX/qy+HQv+D2B6X6s/+pVTmM/RameVOMBKhY
+	 a1woNMpvUWKIGsK4/QnwukJ/vWA0hLZziuqmsK/0h7ymR9pwyAreAhGyDhp1E/GCkvQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1793679433;
+	bh=jTGkE9mNhQyrBV0SmAEduvxK5JmMrl7q3hsxbjtZaog=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=zUnzHIsCxFPMAbjTrRD9I6r7FelPsVEYFXx9aTHYLVKY+RfyGLmIMCmkvUc0Yoft2
+	 UtdmBD09nAAC94zj7tCit80g6NxIaJ9H5/ioYGYg4Zp+aZn+h4zDv4L8ysIPis6b7I
+	 Mtmo2KQeAwrhkAuT2RaOF3NntchltvmggONNsCixfrowM/h0kvy9sQosT0I+DfEDsw
+	 EskVnqtYZhe33rEnvY2m2NL3Xn2w6HKIt9N67TNS5IGRyw8vUyo23mwPjfTNJwkETo
+	 b1ev8k+sL4S61vXcA/Ud8rhbMbXmKdmvjFReetxP9Nq3vv9IAz0Zf9Q7xmtxYEQWS9
+	 CIDl92lHai8xg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id E2F0E40583;
+	Tue,  3 Nov 2026 04:17:12 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id D581C411
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 04:17:10 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id C741880DA9
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 04:17:10 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id atCEGrh91M-e for <u-boot@lists.u-boot-project.org>;
+ Tue,  3 Nov 2026 04:17:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0DFA980DA1
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793679429;
+ b=avR4Ny+AsSjPL77Jm4/RT69gQMaxt//3P8whbXhIk5XlrcCwPiTWePUteM4O+0VTPZjn
+ 6zQDHxyntrp8AVn/GQXtaYpWt9JvEmyGQHHDMqBojKcSBSaZwV9Lk4FkhCuwlkOL1dguh
+ sS1TpwRgvPPdBitu14lG4LgK/AAbEK5Cnly3Y8YRoIiJ+GaOQzJmvhCQ+1QP5iEGu6MDN
+ Am3HVuEf0ekw+tUqEeZReKqPc0qQZ0vwe6bAybSKPsWKbVBPBWAuAYd7I8oi196Cmwg+G
+ 3Sj/xTHU3GEfo95FPdq/eFE3jjhhmalQPhoAgZYj10CAgzeK3w4kh1TvB29LB7GtDsA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793676925;
- h=Received-SPF:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+ c=relaxed/relaxed; t=1793679429;
+ h=Received-SPF:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
  User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
- Content-Type:Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META;
- bh=9UIkzZqMh2nm62BgmWPMVvKpnDdiKEfXlVo2FfUrtJ4=;
- b=l7f8iD+bwsLu72Ju1Ne3Sx1oLXiHNRjoNvZ20+PG2ZfkmhnHao42oai1EN3wvKI8/Pck
- LTXA+9I3zFH4OMNgEls1tzxx1sUAqTMH3hDaTF9V8FZjYPKII89tU5bQAtGYmDSsigffH
- b39X9/XRSYxvSk8DC+70Y7iKJe4GRWDaafwFcmaiG41qR8qJjJLVRlpw8XAPz/IL994Ov
- cKpxii0E34ao9l70DJE1qJNIu2z5e2A13/LBSsWe8Nz5CLySpMXYHwVXUw/1J7DRokbsz
- iGfPxy6gWCea7vyX8vccMQoPYP67aGrK9BDkzp8QjPMBifCz1yziQj0sRIEcgpqWnag==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
- dmarc=pass header.from=mailbox.org;
- dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=MeSWcmBQ; 
- arc=none smtp.remote-ip=80.241.56.161
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.161;
- helo=mout-p-103.mailbox.org; envelope-from=marek.vasut@mailbox.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=MeSWcmBQ
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8370640400
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 03:35:24 +0000 (UTC)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4jJZ2x47XCzKnl2;
- Tue, 03 Nov 2026 04:35:21 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1793676921;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9UIkzZqMh2nm62BgmWPMVvKpnDdiKEfXlVo2FfUrtJ4=;
- b=MeSWcmBQlcNUfcpUGIvWRLF/tADoEKv4fKBQmWsy+Ll7N9T8KRTMweZ0o6XfDa1me99uQ9
- S8asyn23wKiylNyk7bNxne/cI11cSjhck+HvitUANhGEWc2DQUVeyAdZcjsQhRbMxqnMU/
- SkHBf1VvLMK0xcrYzHOhyg0RJMjsKStUKxB3jQ6ttzwmEufTehDRHvUQg6vpVMv9OlkJvg
- M9ukLdUULgrCc4FP8IBlWdXex7x06VE2WrxZtmgEZfBBdikEC2NKZYIuFTum3KfPm+w25T
- 335BUsWzsRtnW0wRg63xuYPKtPyQ+NbpEXkBI9WpTrElP3bWIBNcbYdeY/piqQ==
-Message-ID: <6a7e2f00-3ff7-49e8-8211-bc05be2758f8@mailbox.org>
-Date: Tue, 3 Nov 2026 04:35:19 +0100
+ Content-Type:Content-Transfer-Encoding;
+ bh=jTGkE9mNhQyrBV0SmAEduvxK5JmMrl7q3hsxbjtZaog=;
+ b=S2VymsMbsc8OVzDUZBWfqs9qX6SWvA9b4Sz8I+kT/HjESuE4JRvIhmIl4fYCjfJHygoP
+ EiGJUzYzDf0DyFKgixYOYnRU5EzrnfLwSCi7BuVI1JvLeAPBegcJxHMAlXCvJ/QnQRDPI
+ 4kH7vlB0niX5XtmoKTdli6PGgU+CTms6/ns7Vi+1DLXW1Spk0neuzSYO44DYckQpTxjx7
+ RRejtWgVuifTo0Dohixf8viAYTco3hqMAUEcOxPE7JvnqYHc0sZ12Cy3mAhZQwtOfUgGB
+ Bxcuk6FvcAVa3vpvqqOwIab/CS37ujdz8L/SmHIc8ECkpSJW3dxjwepQG+uFykfPD/A==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=pass header.from=freeshell.de;
+ dkim=pass header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
+ header.s=s2025 header.b=bmgYn8JB; 
+ arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:4f8:231:482b::2;
+ helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
+ header.s=s2025 header.b=bmgYn8JB
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0DFA980DA1
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 04:17:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1793679406;
+ bh=jTGkE9mNhQyrBV0SmAEduvxK5JmMrl7q3hsxbjtZaog=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=bmgYn8JBccYIjEy1EsU2m8Z0l9JAnoK8P2E4bOb1Mv0lF0axzkWXxR5t4Fts9qMUI
+ SytgCxXiYTEBUCLpqXa6HalVvZusfOr0Mj4bRY1BTtmO+8acs3GxU69+1DUplbZ43d
+ IzPfyeNL5SXd0qp09P5rmHmAmtM4T0/RNSRb0G9dR7ZY8B9A5gxYKDTqAxYTz8/yy/
+ GeQfmAALAs6M160G9Hj1HR0mEra3epENEWckQS8wMXLeImwFhsOEA7/TFmHs0Ak9SK
+ xkmr2vyrTnmrRkRwN7OEjPONkbt1SnHKQ3hgZqUNfwWJdADEtpUJNBWSa4pHRktrwC
+ N9K6KBrh/WPig==
+Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
+ [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 65D9FB22046C;
+ Tue,  3 Nov 2026 05:16:44 +0100 (CET)
+Message-ID: <ebb40fe4-cc95-49df-8a90-73db8b2e3bfe@freeshell.de>
+Date: Mon, 2 Nov 2026 20:16:39 -0800
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: dwc3: gadget: make Set Endpoint Configuration macros
- safe
+Subject: Re: [PATCH v2] cmd: fastboot: default the buffer address to
+ $fastboot_addr_r
 To: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>,
- Marek Vasut <marek.vasut+usb@mailbox.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
  u-boot@lists.u-boot-project.org
-Cc: Lukasz Majewski <lukma@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Thinh Nguyen <Thinh.Nguyen@synopsys.com>
-References: <20261102-dwc3-depcfg-macros-v1-1-0def219ced9c@oss.qualcomm.com>
+Cc: Tom Rini <trini@konsulko.com>, Casey Connolly
+ <casey.connolly@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Kaustabh Chakraborty <kauschluss@disroot.org>, u-boot-qcom@groups.io
+References: <20261102-fastboot-addr-r-v2-1-65ee21f29fec@oss.qualcomm.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20261102-dwc3-depcfg-macros-v1-1-0def219ced9c@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20261102-fastboot-addr-r-v2-1-65ee21f29fec@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 51d39a921c33a9a6ab7
-X-MBO-RS-META: 9wdxb3d19rxswz8nha5ygok79fbrjies
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -151,35 +146,126 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 11/2/26 10:11 AM, Igor Opaniuk wrote:
-> The DEPCFG field macros shift their argument without masking it, so an
-> out-of-range value spills into the neighbouring fields. This happens
-> on every SuperSpeed bulk endpoint: no gadget function sets
-> usb_ep.maxburst, dwc3_gadget_set_ep_config() programs maxburst - 1 =
-> 0xffffffff as the burst size, and DWC3_DEPCFG_BURST_SIZE() sets bits
-> 31:22 of parameter 0 - the data sequence number and the configuration
-> action as well as the burst size. The fastboot bulk-out endpoint, for
-> example, is configured with parameter 0 0xffc02004 instead of
-> 0x03c02004.
+Hi Igor,
+
+On 11/2/26 14:08, Igor Opaniuk wrote:
+> The fastboot command downloads to CONFIG_FASTBOOT_BUF_ADDR unless -l is
+> given. Platforms that only know a usable address at run time leave that
+> at 0 and put the address in the fastboot_addr_r environment variable:
+> mach-snapdragon allocates the buffer from free memory, and so does the
+> Samsung exynos-mobile board. Their environments wrap the command in
+> "fastboot -l $fastboot_addr_r usb 0", but a plain "fastboot usb 0"
+> still downloads to address 0.
 > 
-> Mask each field to its width, as Linux does since commit 7369090a9fb5
-> ("usb: dwc3: gadget: make Set Endpoint Configuration macros safe").
-> A maxburst of 0 still yields the burst size of 16 the endpoints get
-> today, so only the fields beyond the burst size change.
+> Use fastboot_addr_r when it is set. -l still overrides it, and boards
+> without the variable keep using CONFIG_FASTBOOT_BUF_ADDR.
 > 
-> Fixes: 85d5e7075f33 ("usb: dwc3: add dwc3 folder from linux kernel to u-boot")
 > Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 > ---
-> Tested at SuperSpeed on QCM2290 (DWC3), host Linux 7.0, with fastboot
-> and with the mass storage SuperSpeed support from u-boot-dfu next:
-> parameter 0 of the bulk endpoints goes from 0xffc02004/0xffc22004 to
-> 0x03c02004/0x03c22004, the burst size stays 16 and the throughput is
-> unchanged (fastboot download of 100 MiB in 1.76 s).
-Reviewed-by: Marek Vasut <marek.vasut+usb@mailbox.org>
+> Tested on a Qualcomm QCM2290 board with qcom_defconfig: before, the
+> first "fastboot stage" after a plain "fastboot usb 0" crashed U-Boot.
+> With the patch a 100 MiB download lands at $fastboot_addr_r (CRC32 of
+> the buffer matches the file), and "fastboot -l ${ramdisk_addr_r} usb 0"
+> still places it at the given address.
+> 
+> Refusing to start with a zero address instead was not an option:
+> sandbox uses address 0 as its buffer.
+> ---
+> Changes in v2:
+> - Leave the command help text as it was: it describes what the user
+>   can pass, not how the default is chosen (E Shattow)
+> - Reword the fastboot_addr_r paragraph in doc/android/fastboot.rst
+>   (E Shattow)
+> - Link to v1: https://lore.kernel.org/r/20261102-fastboot-addr-r-v1-1-7ef1a2ac8fd1@oss.qualcomm.com
+> ---
+>  cmd/fastboot.c           | 4 +++-
+>  doc/android/fastboot.rst | 8 +++++---
+>  2 files changed, 8 insertions(+), 4 deletions(-)
+> 
+> diff --git a/cmd/fastboot.c b/cmd/fastboot.c
+> index ace877b6e28..795c3138cbb 100644
+> --- a/cmd/fastboot.c
+> +++ b/cmd/fastboot.c
+> @@ -7,6 +7,7 @@
+>   * Rob Herring <robh@kernel.org>
+>   */
+>  #include <command.h>
+> +#include <env.h>
+>  #include <fastboot.h>
+>  #include <net.h>
+>  #include <vsprintf.h>
+> @@ -88,7 +89,8 @@ static int do_fastboot_usb(int argc, char *const argv[],
+>  static int do_fastboot(struct cmd_tbl *cmdtp, int flag, int argc,
+>  		       char *const argv[])
+>  {
+> -	uintptr_t buf_addr = (uintptr_t)NULL;
+> +	/* Boards which place the buffer at run time put it in fastboot_addr_r */
+> +	uintptr_t buf_addr = env_get_hex("fastboot_addr_r", 0);
+>  	size_t buf_size = 0;
+>  
+>  	if (argc < 2)
+> diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
+> index 8e15f287f9b..ba817e8c1eb 100644
+> --- a/doc/android/fastboot.rst
+> +++ b/doc/android/fastboot.rst
+> @@ -68,9 +68,11 @@ General configuration
+>  The fastboot protocol requires a large memory buffer for
+>  downloads. This buffer should be as large as possible for a
+>  platform. The location of the buffer and size are set with
+> -``CONFIG_FASTBOOT_BUF_ADDR`` and ``CONFIG_FASTBOOT_BUF_SIZE``. These
+> -may be overridden on the fastboot command line using ``-l`` and
+> -``-s``.
+> +``CONFIG_FASTBOOT_BUF_ADDR`` and ``CONFIG_FASTBOOT_BUF_SIZE``. If the
+> +``fastboot_addr_r`` environment variable is set, its value is used as
+> +the buffer address instead of ``CONFIG_FASTBOOT_BUF_ADDR``, which lets
+> +a platform choose the address at run time. The address and size may be
+> +overridden on the fastboot command line using ``-l`` and ``-s``.
+
+It looks better than it was, and now I do understand what you are
+writing. There are three-or-four sources of information here into the logic:
+
+1. Build time
+
+2. Strictly U-Boot environment
+
+3. Fastboot server/client requests  (and here, does the client request
+override the server command line? so... potentially split to #3 and #4
+sources of information here into the logic)
+
+Does each source described after the previous source implicitly override
+the previous source?
+
+Is there a functional reason we did not mention both address and size
+configurations for all of the above sources (notably no mention of
+fastboot buffer size override as environment variable)?
+
+The word ordering flows more naturally if it is "here is a stack of two
+related things A1 and B1, now we override those with A2 and B2, and
+again override with A3 and B3, and finally A4 and B4." If it's more
+complex than this perhaps we should just dump this into a formatted
+table and not bother describing it more than "Order of precedence" table
+name. If it is not so complex then it should be said in one or two
+sentences that simply list the order of precedence.
+
+>  
+>  Fastboot in SPL
+>  ^^^^^^^^^^^^^^^
+> 
+> ---
+> base-commit: 3973f3c4d24df75ca90d7c0a9f03e5e5c9b48f32
+> change-id: 20261102-fastboot-addr-r-28fe6ea5615f
+> 
+> Best regards,
+
+I do not want to go far beyond what you're trying to fix in this one
+patch but it does open more questions for me now that I understand it.
+Let me know what you think, thanks!
+
+-E
