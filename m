@@ -1,169 +1,149 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19604606A82F
-	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 11:29:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6DAC0606A332
+	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 11:45:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=W1jzBYxR;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=fbsgPJzs
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DxRsoRD/;
+	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=n3vq9Vzd;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=kBqdqe4s
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DF8FA80BE9;
-	Tue,  3 Nov 2026 11:29:13 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F361D405B6;
+	Tue,  3 Nov 2026 11:45:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id DrL8BS1pJZKs; Tue,  3 Nov 2026 11:29:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org F0AD880AB2
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793705353;
-	b=g4duiIx96EfFR0nJQmB/ptwIkthWDxU5a1t3ZOrYgWTXccMRgFUxcn7pS+4deiSBfqFd
-	 6oG5mwIcbXmtGILGps2ChJYGsz6ZA2KeXp8loSMx7C93U4bNbTxjb8vkUQQtH4is+zJ3f
-	 LL+8Y4BcAjsS58sssRzqwXdgxqUHF/Dq6laEycxHLU9ipfQDXetfJXutQ+5pEvUlKedLF
-	 W/YPxImiwk1l2YDFXZVV2gKgEQGjyuW4rf6JgEwcxyNi7bHIc85JZNxM8TM48wpYPJFSM
-	 c4si2WjZv1zD6+jIJKyApk0L+YQ1biWg/k8woSSod7qsoHWqEBx8HgNkV8+rkLLYHnQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3cJrvmTw84Gb; Tue,  3 Nov 2026 11:45:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C0FF240509
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793706348;
+	b=ZdOr+yL5QACrVOmlYarAbw3fPP+KKbBVDfdemG36rAXLAvaO+bNFQvf7yH9dBXg5CM6y
+	 sbgaHTDXIzoyOlTWaERRl6tsutb7hdVzt6vvxKBavpfSXgpSSuSld07u5YbYKLH0Xrcp3
+	 EinlkTohMVAWsyZ9CGrkr9QtsMELkumi9VTT1GRe9MpTr7LTK4vbnydWFJ//awWOXEBix
+	 U96oJm0VYr0NxndWb84qSD61YH/CiAOoYyVHWBbnnOp93WDWqoizjIgLZTYS5wICTeNLJ
+	 QED6lkNjZ3D+x7s7vwghnyhO6VA0vLJu7Voiekwv+6Xg+/xikfrzAR/4jD7bLvWfAZg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793705353;
+	c=relaxed/relaxed; t=1793706348;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=xcEw1+dD6NtUCz3XmJdM7cpENtsm7cC8oYwydeWALmQ=;
-	b=JxiSTdVzr1oDZv5v8aaLcTekVXyuzQ5B60de73hJXQCyq7+1zLoTiNpjERtExPPDYZqf
-	 qswIRzCZV1vbc+AKbAipOiZKErku7UHf1r8uqKKoujtXyIY9Ank6bDQWSs65cBKQ+VN7Y
-	 wzFTJpx0m8g2fhkvgkeN9fekO8gs6s50mYNASJI+D8lF1Kkmq56d6kl1bn1oEdYLgBc92
-	 xBjNZKGa5dqitxYtGEFbvWcpIeAN2vFxtSBLnKKRAu1GIeyq34k3gURQ/m48irV7bCQXV
-	 NntiTmdRD+Jsj4pAsRNsngeprR1Fvap0aFHEjEdGy6OA2K+ib8SEQYJ+L9ECUHbZMoA==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:DKIM-Signature:Date:From:To:CC:Subject:In-Reply-To:
+	 References:Message-ID:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=rfjLPlAgBbsiKJ3rfRzq4brNJfBDzslIaH7oziHAW2U=;
+	b=tHicWbJ8GnWmVHB+IIX3HUgirlCafotP2RZN0hT9P9jDvdUbjhozQV4zaxnRtN+E2Pim
+	 PsKamUg2U9NJvbzXLvLS7W0FereucYDMYMHh/zDeL4Pi0HSgbCjrHaEaAgptH0WLszv2V
+	 thooALWxxKr+vzuO3StT4J7CUiVOEHI0Mgm2hG3yzoHpZFT6CmvwALeZGSIgAY64Vo4vw
+	 xjNGzhTS+owgYT/apGwtOigpMGjnImaWFvUALgO6/k/DZrJ2eMHjgOcLVIrfIf4l1kAkT
+	 ih2otB+wg8WUF2j4Za5+vLR0nccHo1LMXbICJGmJoWzpLK+p9DJkJsqX2S3FTC/bzpw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=mainlining.org;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=n3vq9Vzd;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=kBqdqe4s;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793705353;
-	bh=xcEw1+dD6NtUCz3XmJdM7cpENtsm7cC8oYwydeWALmQ=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=W1jzBYxRhoLjSGWTgmrfx69l+0aB63MbfyWXh7zWcUfGR5vqADaXoWZcv+gc0XcqB
-	 ndyMT1kLC8IPdO7km37mYptv0FGFwZ8gro69OipyYSx90pRZKC0/PRLupXtVk0IAtV
-	 YVWWRET6EsxVbXDTfBUGAOVM/kR36630c7hKbdLX3QN9RCBu3T9uGyBK9Uf/y38PIr
-	 OeIYmA8bjA45KaafLTrSafo++6KgtJr7hhQdMsYBEJplyjiqnKe2tE3RZkuhX3R8Ez
-	 PtONrBqb9w/NPW8zkhDEol0mcNBL4KJc92ygrXi9k7lciIQwvIX7QbmgB5zfEPNrzG
-	 Y8Ma0H+RBDdsA==
+	d=lists.u-boot-project.org; s=default; t=1793706348;
+	bh=rfjLPlAgBbsiKJ3rfRzq4brNJfBDzslIaH7oziHAW2U=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=DxRsoRD/whmPa2bF+6ZTr8CiRVfU+qLZYkR7c5brcq5YKvPtvjvIvQYKYt6Vsf0qX
+	 qjErebA9pz3FSUBE047OVEiQX3Xmwi3Grv2bbvyWs+VcXyVtHSQglUlnsi90g4ejhV
+	 NLQ80TuZYcEBgXxit/bVZTj5sHB9RaOcCGtrz9/WNxO7DIKbaC6bJP2w9WDtekLiPA
+	 UtgoldYtajqNSUIPwILOo/xFuP21AlVgNNP0OCDqtjshGkrboiXM3gcdrHfUP1Z7Fs
+	 Qmt4N7ni3K3paDkjhr/06Tw8s9kfVHtCWOrU7UMwc//6LbjgJNL24h7CrTHq5vO2a6
+	 g+DmXteoqHEKQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F0AD880AB2;
-	Tue,  3 Nov 2026 11:29:12 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 4C0B4356
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 11:29:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C0FF240509;
+	Tue,  3 Nov 2026 11:45:48 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id D081C2A8
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 11:45:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 3D7E8605DF
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 11:29:11 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7B63440509
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 11:45:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RZjAxwseqkQb for <u-boot@lists.u-boot-project.org>;
- Tue,  3 Nov 2026 11:29:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 33A55605D8
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::931"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793705350;
- b=ZtW3sG7rL2yW7hn0JPE/N+t2flMQQ3GXwkqZgijpxHZWiWWbxYxbC7X8vwsZobchMm6F
- c90ZCRj168/4LD1ohDdLplPMcSg6YJosTPAzj81WkaA6L0EhVMRRJTXkJm0W+h8M0+u7Y
- iLZRORU5vu/AoBMDYWmquEqWtxTzahR6ZaEItPAkUlSZPFNdhEDj6LtBGGGSFARk/AKAx
- 8gbsYg4dQeP8bVpWhg48+TVX2aPIEpGbtoKcNkSE7RpyrfIntEXHXE1vPLgwk8raCNNzH
- koqvEu2W1+qvN5KOxQSix5fAGMPxSu+5nJwvSGlcJwcU+4GqFq0P99hdsG6dwqrjYMA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lJ3a2ITJLIzF for <u-boot@lists.u-boot-project.org>;
+ Tue,  3 Nov 2026 11:45:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E0EAE40507
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793706345;
+ b=cUy613etgub6gk8e18wk5inY3D6ughjsde6RCALkmMKIPhPhU2h+0EERI2SDsKBHw4Lc
+ 57kJdUOBWyoI+qnsld8CoTQuI/2PAfRCD0PVMAWRMkxTjaI1v9z3iP1/0o++Z5TsyCFYy
+ gxUOFgw+fEVwAeqXZ4eOu9uxiIickc7QEkJ1pbJcHdSlPuBIpqFpru8M2L43u1NbVbVq/
+ Z6N/7vvIuOgEoN3AHCm7xaYjwK5u2OnqQLQiAMqU6jQwxuFbxGPiMyAa6n0LfLuAXQSAy
+ spczG3lIxgnFfTn26ukFa5wE9fnQd17ay/zKd8+3lVoiRvxbkbvDz4NxUGqIGONKi2g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793705350;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:MIME-Version:Content-Type:
+ c=relaxed/relaxed; t=1793706345;
+ h=Received-SPF:DKIM-Signature:DKIM-Signature:Date:From:To:CC:Subject:
+ In-Reply-To:References:Message-ID:MIME-Version:Content-Type:
  Content-Transfer-Encoding;
- bh=xcEw1+dD6NtUCz3XmJdM7cpENtsm7cC8oYwydeWALmQ=;
- b=qyGelZQhMYVwpsoBcsJKmAdQ5kEaj6/kWG3bSKydD+9/Z9GmaaDik8i13U6gr4Lv5xAG
- sgzhkc42MKBVSQAa/HuLoyQyhzkMJ3x6ecutAaCSpBJWyr95HHSNhJxjl0crJqIem6nGd
- hyxjzEo6whdSqXoFcL6AQVZU+lrwgucF27e6fqZbv5bSeI5mz+3BPIqgLgzQlNB76Pad/
- kOUxjQwr4djn6HPLsN5dxwYyXOBENliVyEBlfiU5TwLdNQuX14QrGPs7OTyx0W9B2xGTd
- /xwVVy5bXxuGh65UWQ+ujtMDTDG0VTnrEoHU0GM9i9nmtsi93zGH8Hl89tttAfRotMQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=fbsgPJzs; 
- arc=none smtp.remote-ip="2607:f8b0:4864:20::931"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::931; helo=mail-ua1-x931.google.com;
- envelope-from=vinicius.eduardo.pedrosa@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=fbsgPJzs
-Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
- [IPv6:2607:f8b0:4864:20::931])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 33A55605D8
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 11:29:09 +0000 (UTC)
-Received: by mail-ua1-x931.google.com with SMTP id
- a1e0cc1a2514c-98febe968deso1880470241.0
- for <u-boot@lists.u-boot-project.org>; Tue, 03 Nov 2026 03:29:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793705348; x=1794310148;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=xcEw1+dD6NtUCz3XmJdM7cpENtsm7cC8oYwydeWALmQ=;
- b=fbsgPJzsk7lSg9maF0wh5WCjX2LV2TcNQT0t39znKsfxJaNuxMgZM8quJ8akkFSJWx
- RD03V8e9gYJUz3vsSZajngSHC3t6xNzWDqy8MQw0RNm0b7xzJCJYtV2OIohuZs8laFGT
- B/AL2PnKKTYe88c2crrHWkGaMS1x5ZQGXdF88spTOh/vphGfpbhhosDRHkioSOqh6Lnp
- 8vFSyvJ6K5Ru95OWFKTdymP/lrdi/uyEW4t5ro3rjTfybGdV5Lw/50j1ReoIr+NcqMG6
- c6n+I58R4I7qRVGsoNl4jENv6TpDq9GI690rioQOvAr/FsUfruux1VhQQs1oC9KJIf+U
- ZdMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793705348; x=1794310148;
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=xcEw1+dD6NtUCz3XmJdM7cpENtsm7cC8oYwydeWALmQ=;
- b=EF+9li1tnamQgeW9ISuH4Nk621RlJJ7Z5tMB5Rhr4JNOf8BFfGTYGQV2iEriO3aX6E
- 1ENmgLNGLOcMfmjAwISmQknkPd/honuOw0fsIl9AXDrq2wh/FRQIN49vspjq3HrDO7Yn
- FKwCizyV/QdmHGy+Ws0qpJmNX7RNlBR19Y27rANTX0y0DxyM/BA1uB9ZdL2a0wNYoi5L
- g/hWIo6DL5115oaEmCpZ5/LnlSx+yXMI6hXRAs+LBKPq4HuU0MRWhRoKdCfhHsrko6Hd
- 9u7vA+EuC4T3I6v3lm63UqdxCLwbUalJgLquP8LYrizyNPbSYdFrbgEYZw43JBtU/oBt
- eHNA==
-X-Gm-Message-State: APuU4Z+8//lR1Uqe30hDLJGDGq1Gvv/xsD/5nSzQDIWn006tcmTvccGv
- 2VOVC0SAyM+Ra1V84G26ArrWagKwKkW/xizrTwBoH53HblursjoUfsH8bWf101H8
-X-Gm-Gg: AYBFou2JKm5+fzM25zSrP1HqEFkqSJoy5HIyUidfK8VdmGJxnP14tv0Cm6yPEXiQbrX
- OtRQmJKEtxpTt4oXxlyK39kTMtmY3k2w8inZoAx426EDc8Gy6UAUhN8WIB+g6GAPBo9aoCM9MUR
- 7E1ylZZOYxnlTNE2mPnPI2v27eIIof0l/BgVKJO/7ER40sc5cowAvrruDF8ft6teAkAlajLIplq
- fW1ZRpk2X2wxD0wAM2q8ooo5v78upObuOK+IYS8QW8I6PvfHL69JPZtN2MCWG1GIaZPtVpWvPhP
- d47M7lCOltwn+l6ahMv5WUMVvLDlRP4RssbHeSxaG97O7gatNMTRaLJSO3fOggZQLFYM2XwXVDt
- FwBNe7Sa/oaMi/UHOAUqtaeDy76s+NaKXk5FS58/Zh1AmBni6+GRfKgHR2JupSN9CoXL18ITSmO
- eNYfFmK7lgx7ukl/VtOFrsNndivXSUmrUxqQeOYSRTpX2n1k0VqcKJdAMDLyd3iC7BntB5JZqTK
- B+KEevVkeAn/IA+rzIFmVx80/hGDj7EkoIFqjjL3maXZ8s3KTFYLuBd3+N3J2an5QmvzrQIMPQW
- FvKUGfOoDQ85ggX4pnephOsDENzcJhdnnDNd/7prBLQPdirAaYvRYOEjtrxsk29qLisTcqrx+fM
- tibWsmeUEeUwwWRtKM6YY84UVAoRubq5YfQbc
-X-Received: by 2002:a05:6102:6881:b0:7a8:1837:9eb9 with SMTP id
- ada2fe7eead31-7d07273b428mr4542184137.27.1793705348348; 
- Tue, 03 Nov 2026 03:29:08 -0800 (PST)
-Received: from MaquinaLab.. ([179.179.238.247])
- by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-7d07765cae9sm12458784137.9.2026.11.03.03.29.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Nov 2026 03:29:07 -0800 (PST)
-From: Vinicius Pedrosa <vinicius.eduardo.pedrosa@gmail.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Vinicius Pedrosa <vinicius.eduardo.pedrosa@gmail.com>
-Subject: [PATCH] sunxi: Limit the PIO power mode copy to SoCs with the H6
- layout
-Date: Tue,  3 Nov 2026 08:28:21 -0300
-Message-ID: <20261103112845.26721-1-vinicius.eduardo.pedrosa@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ bh=rfjLPlAgBbsiKJ3rfRzq4brNJfBDzslIaH7oziHAW2U=;
+ b=VCPKeh4zmrDI9KO+OlkbOA06W+JsOx43HIxT6xfU8pSdfnjyc9L2WVb5tFi6V0TyPILr
+ d4nvsi8IB6OxnMdgv+PcwxuPv2qtVptE3YeUm0qqL/v8X+98jJYcUXwiFB9KfFmWRxNSr
+ FL+dhTvIMU8F9wNEj81wYrVQTiDfMfa1iPVl0H+8/oz8g35iSow5+oc7gHWb8tz2IOjdv
+ AYaZbFuZSvPxKOF6LoyXSI5fQDfQSoJGlKA6TugYOG6kzwB/UDRXLGLqqdj2xu0T9e+J7
+ Rluvo7wpJMERhtmMF1jk6L6MIwwZjGPiAq/DKrgqpasy04jftTXzdZ9ORH/bMw4/StQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=mainlining.org;
+ dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256
+ header.s=202507r header.b=n3vq9Vzd; 
+ dkim=pass header.d=mainlining.org header.i=@mainlining.org
+ header.a=ed25519-sha256 header.s=202507e header.b=kBqdqe4s; 
+ arc=none smtp.remote-ip=5.75.144.95
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=5.75.144.95;
+ helo=mail.mainlining.org; envelope-from=brads@mainlining.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=mainlining.org
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=mainlining.org
+ header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r
+ header.b=n3vq9Vzd; 
+ dkim=pass header.d=mainlining.org header.i=@mainlining.org
+ header.a=ed25519-sha256 header.s=202507e header.b=kBqdqe4s
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E0EAE40507
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 11:45:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
+ c=relaxed/relaxed; 
+ h=Message-ID:Subject:To:From:Date; t=1793706341; bh=rfjLPlAgBbsiKJ3rfRzq4br
+ NJfBDzslIaH7oziHAW2U=; b=n3vq9VzdZN6i2vhq943hujYsUwqvTvnCbQA/T/pBQgfEQUhrJa
+ aUlr/jVASq0Rx965M+XDoByynB7TGoKWFQUTZ0G2AA5WcD9HCCKC229H2GbhQYTUVfNfDPfZe4W
+ kgE0zbid1DcKXdGVuW+hzZBGGoaC8nKyzLwoEbrHr2RdMlGqHUnoGVlnn6u9S0KXc0m1e2zF38Z
+ 70jNxLcOrERzkQ+0LK51mfopfuVM6STgITAcz2mE6liONBwyh5OwMTAcYEe7oYSuXIQ69T/1F9G
+ /OwLSN/BF0YyFN70CJBIPs6N+mfo9e4H68gq4AWG60p32g7PknoK8xldmJGWix/InFA==;
+DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
+ c=relaxed/relaxed; 
+ h=Message-ID:Subject:To:From:Date; t=1793706341; bh=rfjLPlAgBbsiKJ3rfRzq4br
+ NJfBDzslIaH7oziHAW2U=; b=kBqdqe4sEzodFsHYTurmjeM4w62zvuLYQZ8twQOPczbW8RrwV5
+ 2VsGHvzO1RiU3bQUJ/4fDzpyiz9G/r+nQCAg==;
+Date: Tue, 03 Nov 2026 11:45:42 +0000
+From: Bradley Morgan <brads@mainlining.org>
+To: Heiko Schocher <hs@nabladev.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.u-boot-project.org
+CC: Christophe Leroy <christophe.leroy@csgroup.eu>,
+ =?ISO-8859-1?Q?Marek_Beh=FAn?= <kabel@kernel.org>,
+ Mario Six <mario.six@gdsys.cc>, Peng Fan <peng.fan@oss.nxp.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Sinan Akman <sinan@writeme.com>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v3_00/26=5D_powerpc=3A_drop_unmainta?=
+ =?US-ASCII?Q?ined_boards_and_SoCs=2C_take_over_maintenance?=
+In-Reply-To: <d3b2f30c-d9c5-6566-5048-3e82f8c46ff1@nabladev.com>
+References: <20261021160145.10430-1-brads@mainlining.org>
+ <179305815837.10976.380221911015278933.b4-ty@mainlining.org>
+ <7502C221-FFFA-47DC-B3AE-4269C4C6465F@mainlining.org>
+ <d3b2f30c-d9c5-6566-5048-3e82f8c46ff1@nabladev.com>
+Message-ID: <84E9EB3A-E281-454A-B3A5-95FEE3A2434B@mainlining.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -174,70 +154,170 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-gpio_init() copies PIO+0x348 (POW_MOD_VAL) to PIO+0x340 (POW_MOD_SEL)
-on the H6 generation and, as intended by commit 4a9e89a3e390 ("sunxi:
-introduce NCAT2 generation model"), on NCAT2 SoCs. The NCAT2 half has
-never been active, because the guard checks CONFIG_SUN50I_GEN_NCAT2
-while the Kconfig symbol is CONFIG_SUNXI_GEN_NCAT2.
+On 1 November 2026 06:18:26 GMT, Heiko Schocher <hs@nabladev.com> wrote:
+>Hi Bradley,
+>
+>On 27.10.26 00:50, Bradley Morgan wrote:
+>> On 26 October 2026 23:47:58 GMT, Bradley Morgan <brads@mainlining.org>
+>> wrote:
+>>> On Wed, 21 Oct 2026 16:00:56 +0000, Bradley Morgan wrote:
+>>>> PowerPC in U-Boot has been orphaned since October 2022. Several boards
+>>>> and SoC targets in arch/powerpc appear to have had no active community
+>>>> maintenance or testing for some time.
+>>>> 
+>>>> This series proposes removing the targets that are currently
+>>> unmaintained,
+>>>> to help reduce maintenance overhead and ease treewide work. If any
+>board
+>>>> maintainers or users are still actively testing or relying on a
+>specific
+>>>> board, those removals can easily be skipped.
+>>>> 
+>>>> [...]
+>>> 
+>>> Applied to next at u-boot-ppc, Thanks!
+>>> 
+>>> [01/25] board: powerpc: Remove MPC8548CDS support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/91332bbfa36c
+>>> [02/25] board: powerpc: Remove P2020RDB-PC support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/74f4118d5607
+>>> [03/25] board: powerpc: Remove P3041DS support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/f345ae08fa06
+>>> [04/25] board: powerpc: Remove P4080DS support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/c7492940bf9a
+>>> [05/25] board: powerpc: Remove P5040DS support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/23f32a1d1eac
+>>> [06/25] board: powerpc: Remove T1042D4RDB support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/bdad411ca572
+>>> [07/25] powerpc: mpc85xx: Remove P3041 support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/d63e5fc8303c
+>>> [08/25] powerpc: mpc85xx: Remove P4080 support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/353f7e2edaa1
+>>> [09/25] powerpc: mpc85xx: Remove P5040 support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/e85e4e0e26b0
+>>> [10/25] powerpc: mpc83xx: Remove MPC837x support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/286b4f95a2ca
+>>> [11/25] powerpc: mpc85xx: Remove C29x support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/ab46013e050e
+>>> [12/25] powerpc: mpc85xx: Remove P1011 support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/244d495b2d72
+>>> [13/25] powerpc: mpc85xx: Remove P1023 support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/07b36f2f63be
+>>> [14/25] powerpc: mpc85xx: Remove P1025 support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/2bf43c8d082d
+>>> [15/25] powerpc: mpc85xx: Remove MPC8536 support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/9ba511b59ce5
+>>> [16/25] powerpc: mpc85xx: Remove MPC8540 support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/4e2d7d590196
+>>> [17/25] powerpc: mpc85xx: Remove MPC8560 support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/b75b1e387d83
+>>> [18/25] powerpc: mpc85xx: Remove BSC9132 support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/2bc1536a913d
+>>> [19/25] powerpc: mpc83xx: Remove MPC831x support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/d7f92247c56a
+>>> [20/25] powerpc: mpc83xx: Remove MPC834x support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/64c720ccc8d3
+>>> [21/25] powerpc: mpc85xx: Remove P1024 support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/97ab3bbd4979
+>>> [22/25] powerpc: mpc85xx: Remove BSC9131 support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/afc835c3312b
+>>> [23/25] powerpc: mpc83xx: Remove MPC8309 support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/6e2405d54e5d
+>>> [24/25] powerpc: Remove MPC86xx support
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/dbb43f735a5b
+>>> [25/25] MAINTAINERS: powerpc: Add me as PowerPC maintainer
+>>>        
+>https://git.u-boot-project.org/u-boot/custodians/u-boot-ppc/-/commit/86b1f677e263
+>>> --- Thanks!
+>> 
+>> Pretty confusing, hmm? Sorry for the confusion, B4 stuff. Heh.
+>> 
+>> So I would be more than gracious to rebase if anyone was to NAK any
+>patch
+>> in this series, I'll wait about one more week then send the PR, maybe
+>two.
+>> :)
+>
+>Thanks!
+>
+>Please give people time to react, as most of powerpc hardware is old, and
+>main
+>business is not anymore powerpc...
 
-Fixing only the spelling would enable the copy on every NCAT2 SoC.
-That is right for the R528/T113: the T113-S3 user manual describes
-these registers at 0x340/0x348 like the H616 user manual, with each
-port's power value bit at the same position and polarity as its
-power mode select bit. It is wrong for the A523 family: its power mode
-registers are at 0x380/0x388, so the copy would write an interrupt
-configuration register at 0x340 instead.
+Apologies for late respond, lets have a look.
 
-Enable the copy for the R528 explicitly instead of for all NCAT2 SoCs,
-and leave the A523 alone until it gets its own handling.
+>
+>I can speak only for the socrates mpc85xx board and it is still in
+>production use.
+>(Luckily not in this series!)
 
-Fixes: 4a9e89a3e390 ("sunxi: introduce NCAT2 generation model")
-Link: https://lore.kernel.org/u-boot/20260723105705.3338923-1-fugininsane@googlemail.com/
-Signed-off-by: Vinicius Pedrosa <vinicius.eduardo.pedrosa@gmail.com>
----
-Sören Hantel found the misspelled guard and posted the patch linked
-above. This replaces it, at his request.
+Thanks for showing your interest.
 
-Build-tested only: I have no R528/T113 hardware. In reproducible
-builds on next ed869863, the SPL changes only for mangopi_mq_r (R528),
-which now has the copy. The SPLs for avaota-a1, orangepi_4a,
-radxa-cubie-a5e and x96q_pro_plus (A523), pine_h64 (H6),
-orangepi_zero2 (H616) and liontron-h-a133l (A133) are byte-identical.
+>
+>I try to convince customer to give me some time for updating to mainline
+>and may to
+>setup gitlab CI (I have a setup for this including a BDI2000 for
+>recovering board,
+>but need some time to get it up and running... hope I get some).
+>
 
-A Tested-by from anyone with an R528 or T113 board would be welcome.
+Makes sense.
 
- arch/arm/mach-sunxi/board.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+>BTW: Do you have any powerpc hardware (as you volunteer for custodian of *all* powerpc?
+>I do not see much commits from your side in tree...
 
-diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
-index 432b1c10f9..75aede14b2 100644
---- a/arch/arm/mach-sunxi/board.c
-+++ b/arch/arm/mach-sunxi/board.c
-@@ -196,12 +196,13 @@ static int gpio_init(void)
- 
- 	/*
- 	 * Update PIO power bias configuration by copying the hardware
--	 * detected value.
-+	 * detected value. This relies on the H6 layout (SEL at 0x340, VAL
-+	 * at 0x348, matching per-port bit meanings). Not all NCAT2 SoCs
-+	 * have it: the A523 needs different handling.
- 	 */
- 	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
--	    IS_ENABLED(CONFIG_SUN50I_GEN_NCAT2)) {
-+	    IS_ENABLED(CONFIG_MACH_SUN8I_R528)) {
- 		val = readl(SUNXI_PIO_BASE + SUN50I_H6_GPIO_POW_MOD_VAL);
--		/* TODO: A523: keep only the lower two bits? */
- 		writel(val, SUNXI_PIO_BASE + SUN50I_H6_GPIO_POW_MOD_SEL);
- 	}
- 	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6)) {
--- 
-2.43.0
+yes. Power10 board from osuosl (not ported to u-boot), and I have some nxp
+one somewhere in my room of which
+ill find it :)
 
+>
+>Also, just finished work on mpc855 board (port to 2026.10, linux 6.18 and
+>yocto wrynose)
+
+Again, thank you very much for your interest 
+
+>
+>Here too, trying to convince customer to get some time for pushing this
+>board to mainline
+>(base dts is already in mainline ./dts/upstream/src/powerpc/tqm8xx.dts
+>u-boot and linux)
+
+Ok.
+
+>
+>bye,
+>Heiko
+>
+
+--- Thanks!
