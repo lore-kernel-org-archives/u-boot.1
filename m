@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1206606A324
-	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 13:05:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20663606A326
+	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 13:05:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=KkQoySLT;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VBEPKUsG
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=s0TisgaJ;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NG3R683Q
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AEDA460848;
+	by smtp4.osuosl.org (Postfix) with ESMTP id F14994079A;
 	Tue,  3 Nov 2026 13:05:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Auecv-XkH6xG; Tue,  3 Nov 2026 13:05:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E1496608AA
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793711154;
-	b=rBwaSvwQW++FxqBgWiAkb0GshNse07uQHaIFQy9Zr18iFRt3J2+cYQaWPYZhtUaBcQ4g
-	 ROTX9CMgFaUAvaJ2+J7LuR4UuDnMqkImiGCFZ5NQaCYFJk977kLM7rtE0jMn/o+soC430
-	 Fa5l15l8ISaGulSC6khz+/67f37SBPx3pBUqvjxaXvxRcO/kpSqoGTV2cLgVxg1IqWIvM
-	 k8fHy9D7BPN46rqzsO2y9ZZtY+QlHPYp1rf0yA6RjLcTLtqnkSk7F9LYFyBLH458xS4yJ
-	 Jeo+LUSzlH/KaMNmoSOcYtqEAFm75kldeTg2f5rO55BXswyA00XGD0rEuxyu9CKJROA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id klZK4WsW-ok6; Tue,  3 Nov 2026 13:05:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BB43E40762
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793711155;
+	b=CEGvDrYJ6sGxgbB+9gVzvOtCpUNGMDr2MQWl4d46shIRZkS5+pX1E6okICTJnYNc/vnW
+	 iAePjVHzy6uI001/ASkFmcbbLYKp4BZvow9QHz94NZ9ieNW2725eo8wOjJTkUm6JfgV5Y
+	 ynmhVsMKCKbl/OPGshIMv9Ln3lZFH1ga++CSpNJEAzPXYipVKcaxujv84/mgXTFbsOB+8
+	 fluYgoQrDGDy93ekGYpnWPF46VOTGQlWt5XWQS3P5gL01BcLAnpfg6YAnEdwmoEOG1K/L
+	 b4L3lUFvifdGwBB4Ys6TZJiZZUtrfiRcmlokDOWssTMTb9stHFusbKrgWTAXkcEwfWA==
 ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793711154;
+	c=relaxed/relaxed; t=1793711155;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,50 +33,50 @@ ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Original-From:Content-Transfer-Encoding:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=ySBU0ZvdnCW4N3auj4fbANpvjCyq3AGjsPx/U/TdNA8=;
-	b=dYWq4abjuIeWDtnqMjONENMyINza5bZT7CrqKdThoAY7nnK9tf9/cIMctoecC5HBtbYd
-	 ZlN1s8OO/XXgcJF7zO0caPfhHpioSLd+lWVOpCHmaM72a22aGYxITkMvwKrVzF7vunfLw
-	 4PGdGUm0FTUtfiGtGW1bl8tA0AKl2CAPpx+vhpKtI2GBlmfaN7TDWtn08B/Yz6GFZfXTp
-	 ZUe+FV8JMhDkwJtV8xDnKFLqh0isHigsOHAjQy3Z0sqeQyBuzPAsoQ8zoH/yNdoXJEevD
-	 On+2vHs1KuzbZVnfzujy8CetIROXeR9IoBVDf8gsoZ3YLEqB7hwgK2w2FKtbqg2r65Q==
-ARC-Authentication-Results: i=3; smtp3.osuosl.org; 
+	bh=ACQQ9H+ChV9WMPExpfRjFI+qFjXlPAYUxm1Q8Ehhiq0=;
+	b=qy346huXgqjP1OI1QPyoHF/H0oyXaCm1V2xEzpPDM1I4qT1i79SY+P1EhngP0K5irRfC
+	 WTnmaudDACihxzk/cJbhHjh1pK5KnGToPhQyh+kgx1uNHnIEE5rPHjJtMB6smSifMqX0j
+	 qU3FHukxbtLQA412feYnAnBR4/YAHXG6FIj8HhCHFjBlidZ9O/GUhkMOe6QCeVaqqdsm9
+	 kA/cem9TOs29FydfpHO1R0CkoRxqG7NCgpV4viJNhydiFxjuqXNH0yLmX4uQb3afavtqW
+	 GBVYlwSayqKGF32tfnSiKi9IcTzj/0YqXYoOZKBIpMJMQRH74ommAfmNbxxhjoGktoQ==
+ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793711154;
-	bh=ySBU0ZvdnCW4N3auj4fbANpvjCyq3AGjsPx/U/TdNA8=;
+	d=lists.u-boot-project.org; s=default; t=1793711155;
+	bh=ACQQ9H+ChV9WMPExpfRjFI+qFjXlPAYUxm1Q8Ehhiq0=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=KkQoySLTlnnahK850bhMAfaiBCF7H6SK4IgznN1eA03zWg7ZlUnSyFtp1QOWuhCN4
-	 //zyYLttdA94Y7texWMFz9sHCJwPay3FXv22ag/Pbtjnid7k5v4xAhz0lDAs4d0/Vj
-	 7oJFrvL/3gbmfH1OK3tBcpPb7tknNpmD7nEJ1U4wGcuN0Zmkef2YqmmaHYrZeRoNHR
-	 8aPcGxyjdvocGJ8yBqyNsoHUxhh2hRdSCC862WEbAUGN3X1j1jvOCD3nfl/5BS8xN3
-	 PmgXs/cK5n7W/VhVtMqmMVB2NmiW1xMCm7MkPntVDI185kP8B1t+EMl9Z1RP3KoBci
-	 K2jYrpSXMve/g==
+	b=s0TisgaJv8+pdLp5u9mwEd7/xJgJnAo5SH6iMozIGbkzZkvNche3+/nd0k/n7e0YY
+	 aO8LvgghtfbvLwQTDUDrs9eyBI65sAjTL6fTac3W8w97BwQRttmiYr0PvrwsTtBm94
+	 41DKsS8yMCe+NRKZwJGfBG5SBNtW1Rk72S1fw9DLhgnRZqWAa9T09IP7wBwQV32U7s
+	 lx/1rVlfwmPLcm+m0s0ArMCvfidVb810bd3lTZ+jROXcgqINvA6EUfaS6U0GlOuYpP
+	 c7ahezu9tVGWExQLv+ruDQ2Ema4TVQH008BEY3iZIUVTnlGviWMj/rNj/L9X1iwdC5
+	 TDDNfeQMP1PYw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E1496608AA;
-	Tue,  3 Nov 2026 13:05:53 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 806562AC
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 10:37:15 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BB43E40762;
+	Tue,  3 Nov 2026 13:05:55 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id C8879A15
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 10:37:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7E4324005E
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 10:37:15 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id BA28180C66
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 10:37:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eDZwpOJ9g-nx for <u-boot@lists.u-boot-project.org>;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 7vAVWs1zJh32 for <u-boot@lists.u-boot-project.org>;
  Tue,  3 Nov 2026 10:37:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 7F36F400B1
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3D5D280C6A
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
 ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793702234;
- b=S73F+/BW1W9ea3kXICwTROb6cYdG8Paayx3XAF7RcK1UENgobPVh5Q+TYycui4ROfb5R
- SF6bQfmLs2x4Ac72/Yyncaw4TdBXKdr8yEcLEnz4JjDt69a88Wx2vLfka95kbM07DNWNQ
- PFicKJ2DuJ1Spwx8zl1Efmb2qaoXtlkrlfaVazwyOFlctppGD/manO1ovkwEvoLga+PRJ
- WpYHn2FZjUUTUGrjGH+S4zb3PWfj0BovX6FQvErHI+AkmKY1RyNGv2cZxp74ZftPbYuXZ
- AsHLYu8qcXPYt7+Bb3TWt1b1MGyLrXre8CW67CSJFnHOufEjPgaHEMNDYYM6oOHENnQ==
+ b=UCos1DFCAnhoGG4hIIzQ8nPxK+YNAi7oHamXUoJ44HjUzVLTcHoF29xNSIAT1yo6jAaX
+ YuFPx61KZ0JtYO4eYbeTrlFJLI5Hfy/DAAsl4QYFx9PiQriDu9rVbo5sZ29uwUrc7ljUM
+ wlRLgWvaTiuHE+g+wk+JKSIzcKJlaq0YKviMXKCpXSMzlj6WY/Yx4P3ubWcNhI4xXgiDV
+ cqaGIU78Bg2N1zMVhrXCMYipxcdUrlNprTIs7Z2kRul/9TMFrkcEpBakJvWYgXrx9DhtN
+ PIttJFbY3UHEpW0zL/M6Vr3VcOUnVnC6UE+4r8yqVtUJ7EXc0MJg2e9UcB7k1oqKpdg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1793702234;
  h=Received-SPF:Received:Received:DKIM-Signature:Received:From:Date:
@@ -84,99 +84,101 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
  To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
  X-Endpoint-Received:X-Original-From:Reply-To:
  Content-Transfer-Encoding;
- bh=ySBU0ZvdnCW4N3auj4fbANpvjCyq3AGjsPx/U/TdNA8=;
- b=UoTj+TRK15dAZLJwCz0ZRtd/MbxRp8fGDMps2PlIKyHdBYxcjvncBikxOD9eTjMwV/wy
- K7bOtsPKmNheuy0oUPfwYZ8A07Q8xrAASVRBff9Jj6HYc9chisFBDUelLippceMoVnDq9
- mzQPIyIg6tAv7+52a0cqkA2DTO6wcPZxwyDYJ7ACx9LvluRg7V9m3D/IfV5WQQ2iC6w7N
- vMw8W+cz0fAHtE0ehDGr3GWtUW+fBrn1sqjzUSasqzEEs5QSj9o04RpwYL6/I2JoGEXw8
- j3gdWbhaQmVv/yxHncuKdlX3L3YHBm8ebwg8M1mXsQ+bITTJk5J9g1IkbLdwlm9OZ8w==
-ARC-Authentication-Results: i=2; smtp2.osuosl.org; 
+ bh=ACQQ9H+ChV9WMPExpfRjFI+qFjXlPAYUxm1Q8Ehhiq0=;
+ b=sp/j+PFdGo6u+ZCweE6+SSjFJ7T9Do3tgzdriBwHSGUU7iDfm4AWeLODq+HU3QHN3AJa
+ QQvMEcN+5IYX/iU7/Kr9OFg63UvnY4ZXGe2dqhA1ilFMx7VQkx7FvcETeZ596QZU2uNiV
+ yeXEOUIgRaGQTt9LD47tiU1Bff8cYmTDCsGJ6C/yTObNci6CT97GEFGn9BpQ1lLCiZCOA
+ 70RmdyT9IDloi41OVkvyqdZ4fWV+Y/6IiYAV/kBazTG5C119rrw8QUSZGmp83X8gqrtiS
+ Jb837YX18sw0Zczb/LVE5QgsGh3QbpWccVWMSEfeMDId4ixFJdCoCyBZlee6sX1SLrg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=VBEPKUsG; 
+ header.s=k20260515 header.b=NG3R683Q; 
  arc=pass header.oldest-pass=0 smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
  envelope-from=devnull+hystericaldragons.proton.me@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=VBEPKUsG
+ header.a=rsa-sha256 header.s=k20260515 header.b=NG3R683Q
 Received: from tor.source.kernel.org (tor.source.kernel.org
  [IPv6:2600:3c04:e001:324:0:1991:8:25])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7F36F400B1
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 10:37:14 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3D5D280C6A
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 10:37:12 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 6A09D6057A;
- Tue,  3 Nov 2026 10:37:12 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 58D42602C2;
+ Tue,  3 Nov 2026 10:37:11 +0000 (UTC)
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
- t=1793702232;
- b=iV61+Dext9wmUza7KsRU6i8NuXG2cLLlfY9LY+DS/G0QYp1ZjFB8LUzhy2FSxsYtjmzg
- I/BBV50iB7RxAaHZ1CEYFj2n7Z/xRyOJf68wF55wGDdw6L8D7V4jUSHcrqAtzo+3FDY3M
- TXvCOTA6VcqK8MuH5vNVXpHkadeUlXLJR2t4/Y3b2Kl06IWVHa/DWhbAIDXSUeiACJq9l
- dcY59X/OEYjZUqUTwNpf2fPFZX/9BB27/ajd1Pk579a2Abkbai5ePL/0UnV3z9t29lBtW
- XgAtJPf10DHhP8U2qtJOjUlNasCGbPDWmtUSTBEv/3q4F9M/TfjPS1l1GExp47sEHQw==
+ t=1793702231;
+ b=kXmoX+yRqcg2vos+p+nNOwf0Oc0H3zOoPdYGIdZizEnlEoBwOE3rtgS1MsOt5dTm55q0
+ tMQtelf6QeXWCfhrghOSY9PJyqh+OI7MikR2MzJmGgQ0N4Q37yMGJ+I4UxnARWLlDQb+c
+ QhYC2RMb9hJ0DfIS5wTnbIVXFkdctVSlhSsRT2nNbKTzUYxACFyoC0wTgbRaNDrnvlOI0
+ sC7YuUMHJCgCPZ7ZzGwKlpK0xSS69RGX1bUIo0+8x45TP4lyLQqieXxM5k1JMMgXCnPrv
+ t2kBYCHabNrMx840ebiR6/u8Do45wr3JetFaywGYxRBgKxeMcA4m8/nErOxybpftyfA==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
- c=relaxed/relaxed; t=1793702232;
+ c=relaxed/relaxed; t=1793702231;
  h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
  X-Original-From:Reply-To:Content-Transfer-Encoding;
- bh=ySBU0ZvdnCW4N3auj4fbANpvjCyq3AGjsPx/U/TdNA8=;
- b=0yqnNGwHLAlEjU3DZ0nwqqSxgtZgPoI2i3RkEgZ9zywHwyzfw7K8CBMLqVU6ME/gonDb
- H2ZVs2mU+UtuFTv+7X2lAeZjHM3yAKzSGZltR2Rkv4cT/rNkdtCETi6qG8rZv/dKMPf0n
- hqZLCOlTyh9bcs9SxXL+QdCegjsFfKUT5SArVUr+nMrQQvIl3T5DdXDgoTUARxq3QaO6T
- 9ab+xpLsN9nvo38Od49MdoJgOCPep830YycaLf47j5MTmvmpqLDi6A5TEq0Qm62xyZWai
- ZpfXg+wXFM3yOEUUWK2u57t2HYxCdpO1EfVcw29v0bNYyJWaaWWl29PPbD4r/bZGSJg==
+ bh=ACQQ9H+ChV9WMPExpfRjFI+qFjXlPAYUxm1Q8Ehhiq0=;
+ b=E0ofXV2YwTfTGnjuXLThxVC6tZOsGebYo7mJK3ZASnYjdfAJ5qocY1Ntd3s80109qKa9
+ tDEwHeuMrQ/eLqcveiivB2aJGfe8Al4UflhJitAJ32GtilpGyyh/ysWhqvcGGyMFtdUxu
+ T6+WwVbdw1VYV4Qj5Kd4RIEyu3VLjShdEhebsnnUQ6zTXhn/dKvAalHFmkfDPSt7qfDwt
+ w2VLNZc7s9iyCwXjm80bacfmFbsTiMGrx6faPY4dTyOc46VveZb/JSKO2cV7rMG1keZbm
+ CfhVDg6c+LEzkZMlKVYvDxEdeBdPiKQymLMYCT7GvWBp5YStFhEBAjeQ4iYSum5UiPA==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
  arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
  (No client certificate requested)
- by smtp.kernel.org (Postfix) with ESMTPS id 1651F1F000C1;
- Tue,  3 Nov 2026 10:37:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1793702232;
- bh=ySBU0ZvdnCW4N3auj4fbANpvjCyq3AGjsPx/U/TdNA8=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
- b=VBEPKUsGCOSU/1Zyla5WsOS4jfHf0hEdrqYC9ZtKmQcATaTZkyG6GG9WzHT9g3OwW
- b29xuJ9mIKjCHQs5trUlsOuph9uEG+0rCJBGvxbp0T/n0JJqsf1fxbxuv2DtRFPgIE
- c8dTd4Lu3uwhnWQlwSDbFXsRUaNu1Pi2YPMYY3NUrPX1AVO44Ha1gET/lq5Ux7uRji
- AtD9qBG+KclZl2vmhtd+pbh9DH8ha8pGvMP2cLPGyr34F5+JSjfZkeIRMWbu7MGr3z
- 6MxtA4LtSWORLY/d0ULGEhe3a8da28Yo6fOD4f/NxhID9SwiYX+MoUxIUozXK93ItE
- Lq+BJRHvkixNw==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
- by lkml.kernel.org (Postfix) with ESMTP id 04C32468DC;
+ by smtp.kernel.org (Postfix) with ESMTPS id 65FD91F0093A;
  Tue,  3 Nov 2026 10:37:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1793702231;
+ bh=ACQQ9H+ChV9WMPExpfRjFI+qFjXlPAYUxm1Q8Ehhiq0=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
+ b=NG3R683Qom6PmzTnhp71cHf9yg1WO6xwdASkY7GYQLpbYEts0I3ExHBLNfz7tv3VE
+ HhTwXp8IXXQIG0HPtZKR0FwTHDcNJ6c4RNNENwThRIa7Bme+WlY6fNJk42ytWACpcG
+ 6aPzSCR65yeVKcSXAw4dsbOwJImtEgEz8v0FosT3vFxfeAgQJ2Q0ZkJR5ZOFZXLE1H
+ dpGdNkrR3bq6cXX330lqLfSM58aP+pOAT4T8EstwUEsQMFucP9qoRsLCWcyyxanrSY
+ YoEgsJ37jvRtfkTbeVXP8yv861TxbPZ1TnQ7AVBJTdAVRpRoBPQDbpnVW0eaSCEG8Q
+ fyzDr0qIypeAQ==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+ by lkml.kernel.org (Postfix) with ESMTP id D6900468D0;
+ Tue,  3 Nov 2026 10:37:08 +0000 (UTC)
 From: =?utf-8?q?=E5=AE=89=E5=AE=B9_via_B4_Relay?=
  <devnull+HystericalDragons.proton.me@kernel.org>
-Date: Tue, 03 Nov 2026 18:37:10 +0800
-Subject: [PATCH v3 5/6] board: rockchip: Add common NanoPi RK3528 board target
+Date: Tue, 03 Nov 2026 18:37:07 +0800
+Subject: [PATCH v3 2/6] arm64: dts: rockchip: Split out the common NanoPi
+ RK3528 parts
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261103-nanopi-r28s-v3-5-ae8664fd168f@proton.me>
+Message-Id: <20261103-nanopi-r28s-v3-2-ae8664fd168f@proton.me>
 References: <20261103-nanopi-r28s-v3-0-ae8664fd168f@proton.me>
 In-Reply-To: <20261103-nanopi-r28s-v3-0-ae8664fd168f@proton.me>
 To: u-boot@lists.u-boot-project.org
 Cc: Kever Yang <kever.yang@rock-chips.com>, 
  Quentin Schulz <u-boot@0leil.net>, Jonas Karlman <jonas@kwiboo.se>, 
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Chukun Pan <amadeus@jmu.edu.cn>, 
  =?utf-8?q?=E5=AE=89=E5=AE=B9?= <HystericalDragons@proton.me>, 
- Quentin Schulz <quentin.schulz@cherry.de>
+ Heiko Stuebner <heiko@sntech.de>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6188;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=16001;
  i=HystericalDragons@proton.me; s=20261103; h=from:subject:message-id;
- bh=HboyIzzulA+TijYJDv463UW209fkjiWrZEUJxID1dl8=;
- b=owGbwMvMwCU8Ldb53x4TtgLG02pJDFkvdwYHvP+56YFXRc2T0FS3doePtydO/C2ZuuyEp9zPL
- 3/aLM7Ed2xnYRDmYpAVU2TplP488cvjC9O/3pyUBTOHlQlkCAMXpwBMJKqAid0zr1l/2sogPqFi
- 857KFOPOjQ9O1DnX7Eibys4l2CstwHgl8+OGZT4KWZpPKstsv+lkPYsysmvZ3x03PTC85NCTkoY
- VTByLV9SnSHvLVBWeXn10Eptx6zGewCPzejIl07ZbLHJM/vIltHC5Wr6WtKPU95j8+DsCmxaqX5
- m5uqb4zm3FA73W67MdZgAA
+ bh=bWGo+pll+6s3eusplW11fnYgfXnVGyG3Jfk6ZSU0Jmg=;
+ b=owGbwMvMwCU8Ldb53x4TtgLG02pJDFkvdwZ/i9+3ymX52klZieL2Buol37K3Ngqyfw+Njtr6m
+ M/N/uGdjp0sDMJcDLJiiiyd0p8nfnl8YfrXm5OyYOawMoEMYeDiFICJ/J/AxMm4U/BXzk27FUUS
+ nveqJv1IunvBXedCXWujzeJVVib/pE8eVGBQuDJRrcmrgStyx/mTFT6lE8N1XEOXZl9svdkzocP
+ l0i6gGSe0316/OOnqprDz8yp73N4bGtVZHdgu3Hv/0uEyn11Bd7zk9Y6/OCkT41hpeZJbbeo12z
+ f3Y9Y9mdBx6p7KfblP4UtV4gA=
 X-Developer-Key: i=HystericalDragons@proton.me; a=openpgp;
  fpr=5A3AC293DCEEAA41A8A3266A910205A0AEB09D84
 X-Endpoint-Received: by B4 Relay for HystericalDragons@proton.me/20261103
@@ -197,214 +199,673 @@ Reply-To: HystericalDragons@proton.me
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: 安容 <HystericalDragons@proton.me>
 
-The board variant of the FriendlyElec NanoPi RK3528 family can be
-identified using the HW_ID voltage divider on SARADC channel 2.
+The FriendlyElec NanoPi Zero2 and the NanoPi R28S share their power
+tree, storage, RGMII Ethernet, RTC, LEDs and debug console. Move those
+parts into rk3528-nanopi.dtsi so the NanoPi R28S can reuse them, and
+leave only the board specific nodes in the NanoPi Zero2 devicetree.
 
-Add a TARGET_NANOPI_RK3528 board target, based on the Radxa ROCK 2
-board target, that reads HW_ID to select the FDT in SPL and to set the
-fdtfile env var. This allows one defconfig to support multiple NanoPi
-RK3528 board variants.
+Both boards drive a green LED from GPIO4_PB1, but give it a different
+purpose, so the common file describes the LED itself and each board
+adds the function, trigger and default state. While moving the LED pins
+give them the usual _pin suffix, which frees the led1 label for the LED
+node.
 
-Move the NanoPi Zero2 to the new board target, it is the only variant
-for now.
-
-Suggested-by: Jonas Karlman <jonas@kwiboo.se>
+Suggested-by: Chukun Pan <amadeus@jmu.edu.cn>
 Signed-off-by: 安容 <HystericalDragons@proton.me>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- arch/arm/dts/rk3528-nanopi-u-boot.dtsi           |  5 ++
- arch/arm/mach-rockchip/rk3528/Kconfig            |  6 +++
- arch/arm/mach-rockchip/rk3528/MAINTAINERS        |  7 ---
- board/friendlyelec/nanopi-rk3528/Kconfig         | 14 ++++++
- board/friendlyelec/nanopi-rk3528/MAINTAINERS     |  7 +++
- board/friendlyelec/nanopi-rk3528/Makefile        |  3 ++
- board/friendlyelec/nanopi-rk3528/nanopi-rk3528.c | 59 ++++++++++++++++++++++++
- configs/nanopi-zero2-rk3528_defconfig            |  1 +
- 8 files changed, 95 insertions(+), 7 deletions(-)
+Link: https://patch.msgid.link/20260919-r28s-upstream-v7-2-e80a6f8ef521@proton.me
+Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 
-diff --git a/arch/arm/dts/rk3528-nanopi-u-boot.dtsi b/arch/arm/dts/rk3528-nanopi-u-boot.dtsi
-index 3e2fbd81da1..e8c8dc2f032 100644
---- a/arch/arm/dts/rk3528-nanopi-u-boot.dtsi
-+++ b/arch/arm/dts/rk3528-nanopi-u-boot.dtsi
-@@ -2,6 +2,11 @@
+[ upstream commit: fdb087806e808ccc4963e2e5225fe16581ecb421 ]
+
+(cherry picked from commit f7f1ea96945deee8bbadfd0737706ce770315342)
+---
+ .../src/arm64/rockchip/rk3528-nanopi-zero2.dts     | 290 +-------------------
+ dts/upstream/src/arm64/rockchip/rk3528-nanopi.dtsi | 291 +++++++++++++++++++++
+ 2 files changed, 296 insertions(+), 285 deletions(-)
+
+diff --git a/dts/upstream/src/arm64/rockchip/rk3528-nanopi-zero2.dts b/dts/upstream/src/arm64/rockchip/rk3528-nanopi-zero2.dts
+index 97d85124d21..05ae03622e8 100644
+--- a/dts/upstream/src/arm64/rockchip/rk3528-nanopi-zero2.dts
++++ b/dts/upstream/src/arm64/rockchip/rk3528-nanopi-zero2.dts
+@@ -2,41 +2,12 @@
  
- #include "rk3528-u-boot.dtsi"
+ /dts-v1/;
  
-+&saradc {
-+	bootph-pre-ram;
-+	vdd-microvolts = <1800000>;
-+};
-+
- &vdd_arm {
- 	regulator-init-microvolt = <953000>;
- };
-diff --git a/arch/arm/mach-rockchip/rk3528/Kconfig b/arch/arm/mach-rockchip/rk3528/Kconfig
-index 480ac2942ff..87b65d666e9 100644
---- a/arch/arm/mach-rockchip/rk3528/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3528/Kconfig
-@@ -1,5 +1,10 @@
- if ROCKCHIP_RK3528
+-#include <dt-bindings/input/input.h>
+-#include <dt-bindings/leds/common.h>
+-#include <dt-bindings/pwm/pwm.h>
+-#include "rk3528.dtsi"
++#include "rk3528-nanopi.dtsi"
  
-+config TARGET_NANOPI_RK3528
-+	bool "FriendlyElec NanoPi Zero2"
-+	help
-+	  FriendlyElec NanoPi Zero2 single board computer with a RK3528A SoC.
-+
- config TARGET_RADXA_ROCK_2_RK3528
- 	bool "Radxa ROCK 2A/2F"
- 	help
-@@ -14,6 +19,7 @@ config ROCKCHIP_STIMER_BASE
- config SYS_SOC
- 	default "rk3528"
+ / {
+ 	model = "FriendlyElec NanoPi Zero2";
+ 	compatible = "friendlyarm,nanopi-zero2", "rockchip,rk3528";
  
-+source "board/friendlyelec/nanopi-rk3528/Kconfig"
- source "board/radxa/rock-2-rk3528/Kconfig"
- 
- config SYS_CONFIG_NAME
-diff --git a/arch/arm/mach-rockchip/rk3528/MAINTAINERS b/arch/arm/mach-rockchip/rk3528/MAINTAINERS
-index d1810fb0528..e56108d67cb 100644
---- a/arch/arm/mach-rockchip/rk3528/MAINTAINERS
-+++ b/arch/arm/mach-rockchip/rk3528/MAINTAINERS
-@@ -10,13 +10,6 @@ S:	Maintained
- F:	arch/arm/dts/rk3528-hinlink-h28k*
- F:	configs/hinlink-h28k-rk3528_defconfig
- 
--NANOPI-ZERO2-RK3528
--M:	Jonas Karlman <jonas@kwiboo.se>
--S:	Maintained
--F:	arch/arm/dts/rk3528-nanopi-u-boot.dtsi
--F:	arch/arm/dts/rk3528-nanopi-zero2*
--F:	configs/nanopi-zero2-rk3528_defconfig
+-	aliases {
+-		ethernet0 = &gmac1;
+-		i2c1 = &i2c1;
+-		mmc0 = &sdhci;
+-		mmc1 = &sdmmc;
+-		serial0 = &uart0;
+-	};
 -
- RADXA-E20C
- M:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
-diff --git a/board/friendlyelec/nanopi-rk3528/Kconfig b/board/friendlyelec/nanopi-rk3528/Kconfig
+-	chosen {
+-		stdout-path = "serial0:1500000n8";
+-	};
+-
+-	adc-keys-0 {
+-		compatible = "adc-keys";
+-		io-channels = <&saradc 0>;
+-		io-channel-names = "buttons";
+-		keyup-threshold-microvolt = <1800000>;
+-		poll-interval = <100>;
+-
+-		button-maskrom {
+-			label = "MASK";
+-			linux,code = <KEY_SETUP>;
+-			press-threshold-microvolt = <0>;
+-		};
+-	};
+-
+ 	adc-keys-1 {
+ 		compatible = "adc-keys";
+ 		io-channels = <&saradc 1>;
+@@ -51,28 +22,6 @@
+ 		};
+ 	};
+ 
+-	leds {
+-		compatible = "gpio-leds";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&led1>, <&led_sys>;
+-
+-		led-0 {
+-			color = <LED_COLOR_ID_RED>;
+-			default-state = "on";
+-			function = LED_FUNCTION_HEARTBEAT;
+-			gpios = <&gpio4 RK_PB0 GPIO_ACTIVE_HIGH>;
+-			linux,default-trigger = "heartbeat";
+-		};
+-
+-		led-1 {
+-			color = <LED_COLOR_ID_GREEN>;
+-			default-state = "on";
+-			function = LED_FUNCTION_STATUS;
+-			gpios = <&gpio4 RK_PB1 GPIO_ACTIVE_HIGH>;
+-			linux,default-trigger = "default-on";
+-		};
+-	};
+-
+ 	vcc0v6_ddr: regulator-0v6-vcc-ddr {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "vcc0v6_ddr";
+@@ -83,66 +32,6 @@
+ 		vin-supply = <&vcc5v0_sys>;
+ 	};
+ 
+-	vdd_0v9: regulator-0v9-vdd {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vdd_0v9";
+-		regulator-always-on;
+-		regulator-boot-on;
+-		regulator-min-microvolt = <900000>;
+-		regulator-max-microvolt = <900000>;
+-		vin-supply = <&vcc5v0_sys>;
+-	};
+-
+-	vcc_ddr: regulator-1v1-vcc-ddr {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vcc_ddr";
+-		regulator-always-on;
+-		regulator-boot-on;
+-		regulator-min-microvolt = <1100000>;
+-		regulator-max-microvolt = <1100000>;
+-		vin-supply = <&vcc5v0_sys>;
+-	};
+-
+-	vcc_1v8: regulator-1v8-vcc {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vcc_1v8";
+-		regulator-always-on;
+-		regulator-boot-on;
+-		regulator-min-microvolt = <1800000>;
+-		regulator-max-microvolt = <1800000>;
+-		vin-supply = <&vcc_3v3>;
+-	};
+-
+-	vcc_3v3: regulator-3v3-vcc {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vcc_3v3";
+-		regulator-always-on;
+-		regulator-boot-on;
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		vin-supply = <&vcc5v0_sys>;
+-	};
+-
+-	vcc3v3_sd: regulator-3v3-vcc-sd {
+-		compatible = "regulator-fixed";
+-		gpios = <&gpio4 RK_PA1 GPIO_ACTIVE_LOW>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&sdmmc_pwren_l>;
+-		regulator-name = "vcc3v3_sd";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		vin-supply = <&vcc_3v3>;
+-	};
+-
+-	vcc5v0_sys: regulator-5v0-vcc-sys {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vcc5v0_sys";
+-		regulator-always-on;
+-		regulator-boot-on;
+-		regulator-min-microvolt = <5000000>;
+-		regulator-max-microvolt = <5000000>;
+-	};
+-
+ 	usb2_host_5v: regulator-5v0-usb2-host {
+ 		compatible = "regulator-fixed";
+ 		enable-active-high;
+@@ -154,138 +43,15 @@
+ 		regulator-max-microvolt = <5000000>;
+ 		vin-supply = <&vcc5v0_sys>;
+ 	};
+-
+-	vccio_sd: regulator-vccio-sd {
+-		compatible = "regulator-gpio";
+-		gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&sdmmc_vol_ctrl_h>;
+-		regulator-name = "vccio_sd";
+-		regulator-min-microvolt = <1800000>;
+-		regulator-max-microvolt = <3300000>;
+-		states = <1800000 0x0>, <3300000 0x1>;
+-		vin-supply = <&vcc5v0_sys>;
+-	};
+-
+-	vdd_arm: regulator-vdd-arm {
+-		compatible = "pwm-regulator";
+-		pwms = <&pwm1 0 5000 PWM_POLARITY_INVERTED>;
+-		pwm-supply = <&vcc5v0_sys>;
+-		regulator-name = "vdd_arm";
+-		regulator-always-on;
+-		regulator-boot-on;
+-		regulator-min-microvolt = <746000>;
+-		regulator-max-microvolt = <1201000>;
+-		regulator-settling-time-up-us = <250>;
+-	};
+-
+-	vdd_logic: regulator-vdd-logic {
+-		compatible = "pwm-regulator";
+-		pwms = <&pwm2 0 5000 PWM_POLARITY_INVERTED>;
+-		pwm-supply = <&vcc5v0_sys>;
+-		regulator-name = "vdd_logic";
+-		regulator-always-on;
+-		regulator-boot-on;
+-		regulator-min-microvolt = <705000>;
+-		regulator-max-microvolt = <1006000>;
+-		regulator-settling-time-up-us = <250>;
+-	};
+-};
+-
+-&cpu0 {
+-	cpu-supply = <&vdd_arm>;
+-};
+-
+-&cpu1 {
+-	cpu-supply = <&vdd_arm>;
+-};
+-
+-&cpu2 {
+-	cpu-supply = <&vdd_arm>;
+-};
+-
+-&cpu3 {
+-	cpu-supply = <&vdd_arm>;
+ };
+ 
+-&gmac1 {
+-	clock_in_out = "output";
+-	phy-handle = <&rgmii_phy>;
+-	phy-mode = "rgmii-id";
+-	phy-supply = <&vcc_3v3>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&rgmii_miim>, <&rgmii_tx_bus2>, <&rgmii_rx_bus2>,
+-		    <&rgmii_rgmii_clk>, <&rgmii_rgmii_bus>;
+-	status = "okay";
+-};
+-
+-&gpu {
+-	mali-supply = <&vdd_logic>;
+-	status = "okay";
+-};
+-
+-&i2c1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&i2c1m0_xfer>;
+-	status = "okay";
+-
+-	hym8563: rtc@51 {
+-		compatible = "haoyu,hym8563";
+-		reg = <0x51>;
+-		#clock-cells = <0>;
+-		interrupt-parent = <&gpio4>;
+-		interrupts = <RK_PC1 IRQ_TYPE_LEVEL_LOW>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&rtc_int_l>;
+-		wakeup-source;
+-	};
+-};
+-
+-&mdio1 {
+-	rgmii_phy: ethernet-phy@1 {
+-		compatible = "ethernet-phy-ieee802.3-c22";
+-		reg = <0x1>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&gmac1_rstn_l>;
+-		reset-assert-us = <20000>;
+-		reset-deassert-us = <100000>;
+-		reset-gpios = <&gpio4 RK_PC2 GPIO_ACTIVE_LOW>;
+-	};
++&led1 {
++	default-state = "on";
++	function = LED_FUNCTION_STATUS;
++	linux,default-trigger = "default-on";
+ };
+ 
+ &pinctrl {
+-	ethernet {
+-		gmac1_rstn_l: gmac1-rstn-l {
+-			rockchip,pins = <4 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
+-		};
+-	};
+-
+-	leds {
+-		led1: led1 {
+-			rockchip,pins = <4 RK_PB1 RK_FUNC_GPIO &pcfg_pull_none>;
+-		};
+-
+-		led_sys: led-sys {
+-			rockchip,pins = <4 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+-		};
+-	};
+-
+-	rtc {
+-		rtc_int_l: rtc-int-l {
+-			rockchip,pins = <4 RK_PC1 RK_FUNC_GPIO &pcfg_pull_up>;
+-		};
+-	};
+-
+-	sdmmc {
+-		sdmmc_vol_ctrl_h: sdmmc-vol-ctrl-h {
+-			rockchip,pins = <4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
+-		};
+-
+-		sdmmc_pwren_l: sdmmc-pwren-l {
+-			rockchip,pins = <4 RK_PA1 RK_FUNC_GPIO &pcfg_pull_none>;
+-		};
+-	};
+-
+ 	usb {
+ 		usb20_host1_pwren: usb20-host1-pwren {
+ 			rockchip,pins = <4 RK_PB5 RK_FUNC_GPIO &pcfg_pull_none>;
+@@ -293,52 +59,6 @@
+ 	};
+ };
+ 
+-&pwm1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pwm1m0_pins>;
+-	status = "okay";
+-};
+-
+-&pwm2 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pwm2m0_pins>;
+-	status = "okay";
+-};
+-
+-&saradc {
+-	vref-supply = <&vcc_1v8>;
+-	status = "okay";
+-};
+-
+-&sdhci {
+-	bus-width = <8>;
+-	cap-mmc-highspeed;
+-	mmc-hs200-1_8v;
+-	no-sd;
+-	no-sdio;
+-	non-removable;
+-	vmmc-supply = <&vcc_3v3>;
+-	vqmmc-supply = <&vcc_1v8>;
+-	status = "okay";
+-};
+-
+-&sdmmc {
+-	bus-width = <4>;
+-	cap-mmc-highspeed;
+-	cap-sd-highspeed;
+-	disable-wp;
+-	sd-uhs-sdr104;
+-	vmmc-supply = <&vcc3v3_sd>;
+-	vqmmc-supply = <&vccio_sd>;
+-	status = "okay";
+-};
+-
+-&uart0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&uart0m0_xfer>;
+-	status = "okay";
+-};
+-
+ &usb_host0_ehci {
+ 	status = "okay";
+ };
+diff --git a/dts/upstream/src/arm64/rockchip/rk3528-nanopi.dtsi b/dts/upstream/src/arm64/rockchip/rk3528-nanopi.dtsi
 new file mode 100644
-index 00000000000..94b15b06691
+index 00000000000..4b3f26dab6c
 --- /dev/null
-+++ b/board/friendlyelec/nanopi-rk3528/Kconfig
-@@ -0,0 +1,14 @@
-+if TARGET_NANOPI_RK3528
++++ b/dts/upstream/src/arm64/rockchip/rk3528-nanopi.dtsi
+@@ -0,0 +1,291 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +
-+config SYS_BOARD
-+	default "nanopi-rk3528"
++#include <dt-bindings/input/input.h>
++#include <dt-bindings/leds/common.h>
++#include <dt-bindings/pwm/pwm.h>
++#include "rk3528.dtsi"
 +
-+config SYS_VENDOR
-+	default "friendlyelec"
++/ {
++	aliases {
++		ethernet0 = &gmac1;
++		i2c1 = &i2c1;
++		mmc0 = &sdhci;
++		mmc1 = &sdmmc;
++		serial0 = &uart0;
++	};
 +
-+config BOARD_SPECIFIC_OPTIONS # dummy
-+	def_bool y
-+	select ADC
-+	select SPL_ADC
++	chosen {
++		stdout-path = "serial0:1500000n8";
++	};
 +
-+endif
-diff --git a/board/friendlyelec/nanopi-rk3528/MAINTAINERS b/board/friendlyelec/nanopi-rk3528/MAINTAINERS
-new file mode 100644
-index 00000000000..67f14661087
---- /dev/null
-+++ b/board/friendlyelec/nanopi-rk3528/MAINTAINERS
-@@ -0,0 +1,7 @@
-+NANOPI-RK3528
-+M:	Jonas Karlman <jonas@kwiboo.se>
-+S:	Maintained
-+F:	board/friendlyelec/nanopi-rk3528
-+F:	arch/arm/dts/rk3528-nanopi-u-boot.dtsi
-+F:	arch/arm/dts/rk3528-nanopi-zero2*
-+F:	configs/nanopi-zero2-rk3528_defconfig
-diff --git a/board/friendlyelec/nanopi-rk3528/Makefile b/board/friendlyelec/nanopi-rk3528/Makefile
-new file mode 100644
-index 00000000000..752426dcfdb
---- /dev/null
-+++ b/board/friendlyelec/nanopi-rk3528/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0+
++	adc-keys-0 {
++		compatible = "adc-keys";
++		io-channels = <&saradc 0>;
++		io-channel-names = "buttons";
++		keyup-threshold-microvolt = <1800000>;
++		poll-interval = <100>;
 +
-+obj-y += nanopi-rk3528.o
-diff --git a/board/friendlyelec/nanopi-rk3528/nanopi-rk3528.c b/board/friendlyelec/nanopi-rk3528/nanopi-rk3528.c
-new file mode 100644
-index 00000000000..86932eab7c7
---- /dev/null
-+++ b/board/friendlyelec/nanopi-rk3528/nanopi-rk3528.c
-@@ -0,0 +1,59 @@
-+// SPDX-License-Identifier: GPL-2.0+
++		button-maskrom {
++			label = "MASK";
++			linux,code = <KEY_SETUP>;
++			press-threshold-microvolt = <0>;
++		};
++	};
 +
-+#include <linux/errno.h>
-+#include <linux/kernel.h>
-+#include <adc.h>
-+#include <env.h>
++	leds: leds {
++		compatible = "gpio-leds";
++		pinctrl-names = "default";
++		pinctrl-0 = <&led_sys_pin>, <&led1_pin>;
 +
-+#define HW_ID_CHANNEL	2
++		led-0 {
++			color = <LED_COLOR_ID_RED>;
++			default-state = "on";
++			function = LED_FUNCTION_HEARTBEAT;
++			gpios = <&gpio4 RK_PB0 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "heartbeat";
++		};
 +
-+struct board_model {
-+	unsigned int low;
-+	unsigned int high;
-+	const char *fdtfile;
++		/* The purpose of the second LED differs per board. */
++		led1: led-1 {
++			color = <LED_COLOR_ID_GREEN>;
++			gpios = <&gpio4 RK_PB1 GPIO_ACTIVE_HIGH>;
++		};
++	};
++
++	vdd_0v9: regulator-0v9-vdd {
++		compatible = "regulator-fixed";
++		regulator-name = "vdd_0v9";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <900000>;
++		regulator-max-microvolt = <900000>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++
++	vcc_ddr: regulator-1v1-vcc-ddr {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc_ddr";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <1100000>;
++		regulator-max-microvolt = <1100000>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++
++	vcc_1v8: regulator-1v8-vcc {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc_1v8";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++		vin-supply = <&vcc_3v3>;
++	};
++
++	vcc_3v3: regulator-3v3-vcc {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc_3v3";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++
++	vcc3v3_sd: regulator-3v3-vcc-sd {
++		compatible = "regulator-fixed";
++		gpios = <&gpio4 RK_PA1 GPIO_ACTIVE_LOW>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&sdmmc_pwren_l>;
++		regulator-name = "vcc3v3_sd";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		vin-supply = <&vcc_3v3>;
++	};
++
++	vcc5v0_sys: regulator-5v0-vcc-sys {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc5v0_sys";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++	};
++
++	vccio_sd: regulator-vccio-sd {
++		compatible = "regulator-gpio";
++		gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&sdmmc_vol_ctrl_h>;
++		regulator-name = "vccio_sd";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <3300000>;
++		states = <1800000 0x0>, <3300000 0x1>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++
++	vdd_arm: regulator-vdd-arm {
++		compatible = "pwm-regulator";
++		pwms = <&pwm1 0 5000 PWM_POLARITY_INVERTED>;
++		pwm-supply = <&vcc5v0_sys>;
++		regulator-name = "vdd_arm";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <746000>;
++		regulator-max-microvolt = <1201000>;
++		regulator-settling-time-up-us = <250>;
++	};
++
++	vdd_logic: regulator-vdd-logic {
++		compatible = "pwm-regulator";
++		pwms = <&pwm2 0 5000 PWM_POLARITY_INVERTED>;
++		pwm-supply = <&vcc5v0_sys>;
++		regulator-name = "vdd_logic";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <705000>;
++		regulator-max-microvolt = <1006000>;
++		regulator-settling-time-up-us = <250>;
++	};
 +};
 +
-+/* HW_ID buckets from the FriendlyElec vendor U-Boot hwrev.c */
-+static const struct board_model board_models[] = {
-+	{  82, 150, "rockchip/rk3528-nanopi-zero2.dtb" },
++&cpu0 {
++	cpu-supply = <&vdd_arm>;
 +};
 +
-+static const struct board_model *get_board_model(void)
-+{
-+	unsigned int val;
-+	int i, ret;
++&cpu1 {
++	cpu-supply = <&vdd_arm>;
++};
 +
-+	ret = adc_channel_single_shot("adc@ffae0000", HW_ID_CHANNEL, &val);
-+	if (ret)
-+		return NULL;
++&cpu2 {
++	cpu-supply = <&vdd_arm>;
++};
 +
-+	for (i = 0; i < ARRAY_SIZE(board_models); i++) {
-+		unsigned int min = board_models[i].low;
-+		unsigned int max = board_models[i].high;
++&cpu3 {
++	cpu-supply = <&vdd_arm>;
++};
 +
-+		if (min <= val && val <= max)
-+			return &board_models[i];
-+	}
++&gmac1 {
++	clock_in_out = "output";
++	phy-handle = <&rgmii_phy>;
++	phy-mode = "rgmii-id";
++	phy-supply = <&vcc_3v3>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&rgmii_miim>, <&rgmii_tx_bus2>, <&rgmii_rx_bus2>,
++		    <&rgmii_rgmii_clk>, <&rgmii_rgmii_bus>;
++	status = "okay";
++};
 +
-+	return NULL;
-+}
++&gpu {
++	mali-supply = <&vdd_logic>;
++	status = "okay";
++};
 +
-+int rk_board_late_init(void)
-+{
-+	const struct board_model *model = get_board_model();
++&i2c1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&i2c1m0_xfer>;
++	status = "okay";
 +
-+	if (model)
-+		env_set("fdtfile", model->fdtfile);
++	hym8563: rtc@51 {
++		compatible = "haoyu,hym8563";
++		reg = <0x51>;
++		#clock-cells = <0>;
++		interrupt-parent = <&gpio4>;
++		interrupts = <RK_PC1 IRQ_TYPE_LEVEL_LOW>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&rtc_int_l>;
++		wakeup-source;
++	};
++};
 +
-+	return 0;
-+}
++&mdio1 {
++	rgmii_phy: ethernet-phy@1 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <0x1>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&gmac1_rstn_l>;
++		reset-assert-us = <20000>;
++		reset-deassert-us = <100000>;
++		reset-gpios = <&gpio4 RK_PC2 GPIO_ACTIVE_LOW>;
++	};
++};
 +
-+int board_fit_config_name_match(const char *name)
-+{
-+	const struct board_model *model = get_board_model();
++&pinctrl {
++	ethernet {
++		gmac1_rstn_l: gmac1-rstn-l {
++			rockchip,pins = <4 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
 +
-+	if (model && !strcmp(name, model->fdtfile))
-+		return 0;
++	leds {
++		led_sys_pin: led-sys-pin {
++			rockchip,pins = <4 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
 +
-+	return -EINVAL;
-+}
-diff --git a/configs/nanopi-zero2-rk3528_defconfig b/configs/nanopi-zero2-rk3528_defconfig
-index 2c725380ef4..dde9134112f 100644
---- a/configs/nanopi-zero2-rk3528_defconfig
-+++ b/configs/nanopi-zero2-rk3528_defconfig
-@@ -4,6 +4,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3528-nanopi-zero2"
- CONFIG_ROCKCHIP_RK3528=y
-+CONFIG_TARGET_NANOPI_RK3528=y
- CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART_BASE=0xFF9F0000
- CONFIG_DEBUG_UART_CLOCK=24000000
++		led1_pin: led1-pin {
++			rockchip,pins = <4 RK_PB1 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
++	rtc {
++		rtc_int_l: rtc-int-l {
++			rockchip,pins = <4 RK_PC1 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++	};
++
++	sdmmc {
++		sdmmc_pwren_l: sdmmc-pwren-l {
++			rockchip,pins = <4 RK_PA1 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++
++		sdmmc_vol_ctrl_h: sdmmc-vol-ctrl-h {
++			rockchip,pins = <4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++};
++
++&pwm1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pwm1m0_pins>;
++	status = "okay";
++};
++
++&pwm2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pwm2m0_pins>;
++	status = "okay";
++};
++
++&saradc {
++	vref-supply = <&vcc_1v8>;
++	status = "okay";
++};
++
++&sdhci {
++	bus-width = <8>;
++	cap-mmc-highspeed;
++	mmc-hs200-1_8v;
++	no-sd;
++	no-sdio;
++	non-removable;
++	vmmc-supply = <&vcc_3v3>;
++	vqmmc-supply = <&vcc_1v8>;
++	status = "okay";
++};
++
++&sdmmc {
++	bus-width = <4>;
++	cap-mmc-highspeed;
++	cap-sd-highspeed;
++	disable-wp;
++	sd-uhs-sdr104;
++	vmmc-supply = <&vcc3v3_sd>;
++	vqmmc-supply = <&vccio_sd>;
++	status = "okay";
++};
++
++&uart0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart0m0_xfer>;
++	status = "okay";
++};
 
 -- 
 2.56.0
