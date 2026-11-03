@@ -1,131 +1,135 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DC3D60A5BD5
-	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 14:03:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CB3A606D816
+	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 14:06:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=PD0TcP+E;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VCUU1eJb
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=IRGFrRSl;
+	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=ITdYgr2W
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 72B57807FA;
-	Tue,  3 Nov 2026 14:03:32 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AF3296077D;
+	Tue,  3 Nov 2026 14:06:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id M0aN-OTK8UEn; Tue,  3 Nov 2026 14:03:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 34FDD8111C
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793714611;
-	b=tRx8ET5O7nH5DrNbGV+s4kcgwiUo+DiVexwLjaiE+dn7ECbFeOdRrgXwyUB4CPu5MwgL
-	 GKuYK41x2SuHYg1XPe+y072JaFyh2VcbFGnmYPkES4DD0OZcLr1TME5zUFsOGDDBDKSsD
-	 66MQYpxNDEfTez/WN7w/mT208138KVsc/i9mjHB86decMx8GTy+pOhKr43+uVj2XtYpgp
-	 Usrg5tAbh8l/OVQvD7S++/q5/uFyM9WLawvRgtCa+xYMJpTuR30mBpPRGPk/zeutGd/Y9
-	 xK0rmSyDODCFoCoELOsyfL5A/4SQMJbeckcFRiqxKG1aY/qQLzk1qlDGB/mo2Aumngg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id RlMIY2CLzo-y; Tue,  3 Nov 2026 14:06:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A9406606DE
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793714776;
+	b=LeFdhrHaIaJW39eSJW9YB8RjpivtqJl/6A9GB4Qw3Foa5EUuZR8KtzQ8cKaVnHqQDiF9
+	 y7NkG9peU1AS0724JQAhxj6QAsHXLU8xcqnYVr+rV3lMDJ+JycC8SVqWoyU2enmmOJynF
+	 dNySVQB4WcPxdCe0VqrBjv+IbdhnDJyg80Xupn3w6S1vyJKnMEEFAB3TFF+ubezYjz5jY
+	 VKiX0nBDZ+7ws9+2LsiGJEjYrVv3eUcVeOlb66TtvQZg2SfXVqaQZjCzr47j+grlmqi/G
+	 HEF9FUElOXWT3NCwbMeUxobT4/WPluEj6J47JvDHnvjqkUvDMzrFjRpo4kQCpPlz4pg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793714611;
+	c=relaxed/relaxed; t=1793714776;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=cuUOYbIjyuDEFS0ACmVeuqHIGh7cxA0k/Lvdnw9gqkI=;
-	b=nQBgHnv7NbBrlrDhMl9cAaWRZn4kTuefR/NwBVshxYIYFyK4gC3wWk+qCqEoRAGsKuGL
-	 WEsLRcLAFxBDYV3nO0xgIzYPDoNLCpI+sDb2lGCl7poSNIZaZ3hl3GjSObT+7MvmSZe/S
-	 FVoECaYbVu44FPBneT0XDQosRS/ShmCcPmkiG07sDEFlXF8B1LPPViSxOOFetN5UG4KOb
-	 WLVHVGWXfHwWGjr7mR0XAOLwSkMz5yj4HIYnFTP0n+/zNbdL3psCTgxS+FzFB9lG0izUi
-	 zLyGShpjOxOHmFOF5Y4uvfQdp+Sl1H2z5iVZORNmlKZu3+U2GSQ+Z0SDvk5NawTYhXQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=uqniUnIUbndOBICF0KfXhdVDUb9/iHWWisCuAq2Dn1E=;
+	b=R4I74/6oiuWMFS4CETquM5FlQvCsDfTnUAKk4SNfRNAlxtRqse07KoYacIHKEZiiu4js
+	 /DV1xaT7snchewEzA/wyzeFWoFnG5b9vb9VkJIG3QGMajb9rtbcxiP+vyMapf+yR8UoLP
+	 JjucTC6ZIlgKzkSk+J9f8S1+UQW/rVuBqJIwCwVMlYLVykRUlsnhc3JQ5/96QjiyazoRL
+	 djm3yOiZao6F9178+DFru8+8puBWbdx7aCa7BAXNdIu03X9IsWS13DZoTK8TNdxuaa/P7
+	 K7+XXlnc0Or0bTUcR5RECLvrPY3jdQ1ZzAcMD9tkT9kYQaJgkdnOqR+JAwa9MsStC9g==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793714611;
-	bh=cuUOYbIjyuDEFS0ACmVeuqHIGh7cxA0k/Lvdnw9gqkI=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=PD0TcP+ESnsYeW6M99YWHz7ZT79XFd3et3PRdyyDAI+6Xm8rzCUV39w22ToqnCL2p
-	 +dIe6H0cr4ZZRYrRz0rqvSb6RrvWvzWKOIvr7QPDdvosapqFIWTeg1j0rtDsa62DYz
-	 JP2n25G80xo4SZXasQ4DkInssCUnUd9bq2uxVxVY6PqsYsy+QOjUag76dDdEOKxA0S
-	 71Q3pvC3tKP/toEo8nQmQAYkJFy5bhQCSBVOpaCxmwexEFLpzbJF2A+SZOqSOIDV3E
-	 v/MLXl5ygpf2Kac8WugjuKsgfh9GHqlpiv3NJeJ6JJWJLWijVtAmVa5R+hLQB4FuWl
-	 ReVwrIXKImrtg==
+	d=lists.u-boot-project.org; s=default; t=1793714776;
+	bh=uqniUnIUbndOBICF0KfXhdVDUb9/iHWWisCuAq2Dn1E=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=IRGFrRSls4s6za8du/pv3QhjZRBWAGl7EB0+/d0SJKtIgOKZc4VMliZ/9dWO0w1X+
+	 zIJYLVMcpaZ0dDK0gf2GYTdp0EBoT7XC5cESrAJGHLTL0aG24jL4VgKEIOpdfVIvRN
+	 nMu3YZWXhm1f1lqi+3cpnMYS+UflqPBt2QNTExQUVcCM5qa0+1qxBIZh/9lFPC7EMi
+	 1yQvpiTCgUsHrw25EkfwOcxqu1eVNf54UlSebDYcUimQca7+Ym+KI37rQ8KPuI4MDe
+	 aXhWiwvQT5CgepFuIi9LzAr0dcTlXz7Z8a2mRfpkNI5oamgz4w/ZMmdBgxx7RsCXaD
+	 qEVb8CTPJmDrw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 34FDD8111C;
-	Tue,  3 Nov 2026 14:03:31 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id F3207D3A
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 14:03:29 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A9406606DE;
+	Tue,  3 Nov 2026 14:06:16 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8091DD3A
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 14:06:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C0FD1400E0
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 14:03:29 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7109C40070
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 14:06:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XyTPbh58b9GZ for <u-boot@lists.u-boot-project.org>;
- Tue,  3 Nov 2026 14:03:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org CFB6A40068
+ id 6-2D81N2I-ul for <u-boot@lists.u-boot-project.org>;
+ Tue,  3 Nov 2026 14:06:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 53B5840068
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=172.234.252.31
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793714609;
- b=m97YT2OWAAfqTC5tkkTVwEH5J0zuJuhBVi/Ye2nJ5/6yojlHse7+VfDI1yx/o+TMPrwr
- jXAmeeaesiHuQGfwDfFs5RC+OSYGIeoAYc4f+a1nAkOW3fqvnbq996u65D8UnMEhhC63t
- ceUGOttp9Xi14vnHC5x1i8v0NIN5QpxtLlPrR2i6e9n5Qg5kFgWF8w5HF35m6PGZhtRKo
- jmctDeCNcglHf51Iihlhb0tjIz4dGnxLngSH/JZKVqjAXwpWN+TuqFov3Exw9p7A4WlXJ
- 9icfmHyivUDBt80TiiT4Yk/txXuZvBX8Y2TbS7umjGnGPleQbPwI44w6Jg4dWtkAF6A==
+ arc=none smtp.remote-ip=217.140.110.172
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793714774;
+ b=K1QgaLIb/blXZSdQPW9F+XMHShmucnNwfLO3Hntwoi7XiZRmP98d2wisbEFzfsTjoBUm
+ fifLyBlKRryqYTuwesqI33srsee5CU0oFjHemVly/7vqQ6Y3Y55FKvY3LJxHQzJfuho0Z
+ RjgsIezd5ii8Tmn7/1vM0au9KMo0PDaAQzB46YBM0U28bAVcexyRd+BQC78tURFYyvp1I
+ fibwVnOvhd33+ftDl6N/u3QQr5PAe60wcqzEvkzmpjXnUAPs78lcnqGXRjYLqaCJTAqCj
+ /yISSSTkQTYMVdjGWeeoPbBh8O/fWRWYtBrZUnu5/8/H0xfohyYJQAknp8QeAKh5FcQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793714609;
- h=Received-SPF:Received:Received:DKIM-Signature:From:To:Cc:Subject:
- Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
- bh=cuUOYbIjyuDEFS0ACmVeuqHIGh7cxA0k/Lvdnw9gqkI=;
- b=hrsNFe6X58pf1YKZNjDjgic49PetVw0WaMozfAtEVBC9loG9tV1HKp6RjhwetwKU76Ic
- ZZTBmYQcphOJzAPOCgYW6PJmPguree/Ng6GsvylJP3JVVIn/EuvQ6LlU+X0fJLIaaqD6g
- mC6OEempFBvUsmwLHsRdApgKEckeyN3dwTCCC/bWW5dPqmq795iIFeLi9JZN8HXozUSaO
- 76IqYt9WwV39Ptn4VpUQk2ZTvfE7zdOxk5Sv09dYWOBW8U6suK2fLRdu96+XyAeDLmrG2
- N9Wca4I7dw/zPCSPzAniKMthHshSt8y6NTs6S3AG0ZuqBT7jBM/oqWEotOzWz1vvs/A==
+ c=relaxed/relaxed; t=1793714774;
+ h=Received-SPF:Received:Received:DKIM-Signature:Message-ID:Date:
+ MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+ From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ bh=uqniUnIUbndOBICF0KfXhdVDUb9/iHWWisCuAq2Dn1E=;
+ b=s3YEiYNuI/xhXBIrySiDu8vEVuaDNpCzsoZr5gx04HO3yZR80qrSs9TDhEBZjOaW2Vj/
+ ltdZiOqiPeyKrCw0jc19TBXBEmM7TsLZ/dwX6fVNFTVeondOjPK8wvXW/Z/zAUw06xynp
+ c7pCtiHTVLs1E+oFJaM8Lh/CgN9xeAC+SuHWvwXBuPmbIUw4EVPZM/IRbPXm4BFIh0Onz
+ 0pDoaoEE2rcAgf70Z8IbQn1WaujfAb4qBVqsDCDoDNA+pOxAkxHCB1YWmVEYnE3JWv1P5
+ V6UrrnMl5gbSjJTSpZwz6eIR+K/yzIv3hutK0elqqwYc1Ed4RCuPi7/Q7BrzMqPIAig==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=pass header.from=kernel.org;
- dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=VCUU1eJb; 
- arc=none smtp.remote-ip=172.234.252.31
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
- helo=sea.source.kernel.org; envelope-from=chleroy@kernel.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=VCUU1eJb
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp2.osuosl.org (Postfix) with ESMTPS id CFB6A40068
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 14:03:28 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 0503841A2C;
- Tue,  3 Nov 2026 14:03:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 45B6E1F0093A;
- Tue,  3 Nov 2026 14:03:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1793714607;
- bh=cuUOYbIjyuDEFS0ACmVeuqHIGh7cxA0k/Lvdnw9gqkI=;
- h=From:To:Cc:Subject:Date;
- b=VCUU1eJbi0oe6msCi2WGu2okqHtw0kEK/KfigMDS4Z40q3Cacga8Hy5KcUxfcChIL
- wXrZ8L3nU7wcwBLud9Rmj3Ihbe8VvHQtN1I+ki/6ElBNGaCt2mtqq2Nno9aVvzvmUu
- gtNlFikJoYnemgbhvYmi5TMeCl+6tZva6qn0Kuiz4SNV92ScfepST8q85xI1TNEXWs
- DxFfVRHSlCvt0raKDHdBX/ML9lOjP7nJ0DjJQTJB5CvCzsg5A6BGvPLzpJKNDcgztV
- 58Q8nrxvn0CtjtAkmTmSc9hsrUTfaquiexfOybpxExejUrCHLC/I1gNbgbz5Ppd+sx
- gC+oTMiwSbNzQ==
-From: "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>
-To: Tom Rini <trini@konsulko.com>,
-	Bradley Morgan <brads@mainlining.org>
-Cc: "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
- u-boot@lists.u-boot-project.org
-Subject: [PATCH] MAINTAINERS: Update my email address
-Date: Tue,  3 Nov 2026 15:03:07 +0100
-Message-ID: <bd82ee029f9df32b85f4a1c90016fe98852ba92b.1793711640.git.chleroy@kernel.org>
-X-Mailer: git-send-email 2.54.0
+ dmarc=pass header.from=arm.com;
+ dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss
+ header.b=ITdYgr2W; 
+ arc=none smtp.remote-ip=217.140.110.172
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
+ helo=foss.arm.com; envelope-from=andre.przywara@arm.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256
+ header.s=foss header.b=ITdYgr2W
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 53B5840068
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 14:06:11 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B91091595;
+ Tue,  3 Nov 2026 06:06:07 -0800 (PST)
+Received: from [192.168.178.24] (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id
+ 2488D3F628; Tue,  3 Nov 2026 06:06:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+ t=1793714770; bh=Rf592qWGUsApGrwAJoLFrw2uir45bEWc/Owff29Quhg=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=ITdYgr2WhcK52qaqeEqqetq6sblbBkcMaqSx04LEl391B9U36LoFtmG51TIOYDU0f
+ trjdoF7lW+nfMy4DJZYrOtZEGhAD3WyQT8UmoBUe4gd190f1msjDwRxV721qmeBgTH
+ GybojNOGJ22poQYG6RR5iIdw4Ls3F5mGwidGY2gE=
+Message-ID: <bae86d13-eaea-4dea-a67d-64b166fb3ddd@arm.com>
+Date: Tue, 3 Nov 2026 15:06:08 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] sunxi: Limit the PIO power mode copy to SoCs with the H6
+ layout
+To: Vinicius Pedrosa <vinicius.eduardo.pedrosa@gmail.com>,
+ u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20261103112845.26721-1-vinicius.eduardo.pedrosa@gmail.com>
+Content-Language: en-GB
+From: Andre Przywara <andre.przywara@arm.com>
+In-Reply-To: <20261103112845.26721-1-vinicius.eduardo.pedrosa@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -136,85 +140,80 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-15.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Some people have reported christophe.leroy@csgroup.eu being stale
-from time to time.
+Hi Vinicius,
 
-Change to use my Linux Kernel address chleroy@kernel.org
+On 11/3/26 12:28, Vinicius Pedrosa wrote:
+> gpio_init() copies PIO+0x348 (POW_MOD_VAL) to PIO+0x340 (POW_MOD_SEL)
+> on the H6 generation and, as intended by commit 4a9e89a3e390 ("sunxi:
+> introduce NCAT2 generation model"), on NCAT2 SoCs. The NCAT2 half has
+> never been active, because the guard checks CONFIG_SUN50I_GEN_NCAT2
+> while the Kconfig symbol is CONFIG_SUNXI_GEN_NCAT2.
+> 
+> Fixing only the spelling would enable the copy on every NCAT2 SoC.
+> That is right for the R528/T113: the T113-S3 user manual describes
+> these registers at 0x340/0x348 like the H616 user manual, with each
+> port's power value bit at the same position and polarity as its
+> power mode select bit. It is wrong for the A523 family: its power mode
+> registers are at 0x380/0x388, so the copy would write an interrupt
+> configuration register at 0x340 instead.
+> 
+> Enable the copy for the R528 explicitly instead of for all NCAT2 SoCs,
+> and leave the A523 alone until it gets its own handling.
 
-Signed-off-by: Christophe Leroy (CS GROUP) <chleroy@kernel.org>
----
- .mailmap               | 2 ++
- MAINTAINERS            | 2 +-
- board/cssi/MAINTAINERS | 2 +-
- doc/git-mailrc         | 3 ++-
- 4 files changed, 6 insertions(+), 3 deletions(-)
+I think you can do better: instead of this untested patch that fixes a 
+non-issue, you should be able to do it right: In contrast to Linux, 
+U-Boot binaries are per-SoC, at best, so we can have compile time values 
+the differ between SoCs. So just adjusting SUN50I_H6_GPIO_POW_MOD_VAL 
+and friends for the A523 should do the trick.
+The only added complication is the difference between R_PIO and PIO, then.
 
-diff --git a/.mailmap b/.mailmap
-index 76ba0a7fea3..6685205a232 100644
---- a/.mailmap
-+++ b/.mailmap
-@@ -41,6 +41,8 @@ Boris Brezillon <bbrezillon@kernel.org> <boris.brezillon@free-electrons.com>
- Casey Connolly <casey.connolly@linaro.org> <caleb.connolly@linaro.org>
- Chen-Yu Tsai <wens@kernel.org> <wens@csie.org>
- Christian Kohn <chris.kohn@amd.com> <christian.kohn@xilinx.com>
-+Christophe Leroy (CS GROUP) <chleroy@kernel.org> <christophe.leroy@csgroup.eu>
-+Christophe Leroy (CS GROUP) <chleroy@kernel.org> <christophe.leroy@c-s.fr>
- Christopher Obbard <christopher.obbard@linaro.org> <chris.obbard@collabora.com>
- Dirk Behme <dirk.behme@googlemail.com>
- Durga Challa <durga.challa@amd.com> <vnsl.durga.challa@xilinx.com>
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 45e9076de67..f0a6de9409e 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1594,7 +1594,7 @@ S:	Orphan (Since 2022-10-21)
- F:	arch/powerpc/
- 
- POWERPC MPC8XX
--M:	Christophe Leroy <christophe.leroy@csgroup.eu>
-+M:	Christophe Leroy (CS GROUP) <chleroy@kernel.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-mpc8xx.git
- F:	arch/powerpc/cpu/mpc8xx/
-diff --git a/board/cssi/MAINTAINERS b/board/cssi/MAINTAINERS
-index f82dd3b789b..8fbbb94b953 100644
---- a/board/cssi/MAINTAINERS
-+++ b/board/cssi/MAINTAINERS
-@@ -1,5 +1,5 @@
- BOARDS from CS GROUP France
--M:	Christophe Leroy <christophe.leroy@csgroup.eu>
-+M:	Christophe Leroy (CS GROUP) <chleroy@kernel.org>
- S:	Maintained
- F:	board/cssi/
- F:	include/configs/mcr3000.h
-diff --git a/doc/git-mailrc b/doc/git-mailrc
-index 65626d89eac..eb676b3ed85 100644
---- a/doc/git-mailrc
-+++ b/doc/git-mailrc
-@@ -20,6 +20,7 @@ alias alisonwang     Alison Wang <alison.wang@nxp.com>
- alias angelo_ts      Angelo Dureghello <angelo@sysam.it>
- alias apritzel       Andre Przywara <andre.przywara@arm.com>
- alias bmeng          Bin Meng <bmeng.cn@gmail.com>
-+alias chleroy        Christophe Leroy (CS GROUP) <chleroy@kernel.org>
- alias danielschwierzeck Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
- alias dinh           Dinh Nguyen <dinguyen@kernel.org>
- alias ehristev       Eugen Hristev <eugen.hristev@linaro.org>
-@@ -97,7 +98,7 @@ alias nios2          nios
- 
- alias powerpc        uboot, afleming, stroese, wd, priyankajain, mariosix
- alias ppc            powerpc
--alias mpc8xx         uboot, wd, Christophe Leroy <christophe.leroy@csgroup.eu>
-+alias mpc8xx         uboot, wd, chleroy
- alias mpc83xx        uboot, mariosix
- alias mpc85xx        uboot, afleming, priyankajain
- 
--- 
-2.54.0
+Cheers,
+Andre
+> 
+> Fixes: 4a9e89a3e390 ("sunxi: introduce NCAT2 generation model")
+> Link: https://lore.kernel.org/u-boot/20260723105705.3338923-1-fugininsane@googlemail.com/
+> Signed-off-by: Vinicius Pedrosa <vinicius.eduardo.pedrosa@gmail.com>
+> ---
+> Sören Hantel found the misspelled guard and posted the patch linked
+> above. This replaces it, at his request.
+> 
+> Build-tested only: I have no R528/T113 hardware. In reproducible
+> builds on next ed869863, the SPL changes only for mangopi_mq_r (R528),
+> which now has the copy. The SPLs for avaota-a1, orangepi_4a,
+> radxa-cubie-a5e and x96q_pro_plus (A523), pine_h64 (H6),
+> orangepi_zero2 (H616) and liontron-h-a133l (A133) are byte-identical.
+> 
+> A Tested-by from anyone with an R528 or T113 board would be welcome.
+> 
+>   arch/arm/mach-sunxi/board.c | 7 ++++---
+>   1 file changed, 4 insertions(+), 3 deletions(-)
+> 
+> diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
+> index 432b1c10f9..75aede14b2 100644
+> --- a/arch/arm/mach-sunxi/board.c
+> +++ b/arch/arm/mach-sunxi/board.c
+> @@ -196,12 +196,13 @@ static int gpio_init(void)
+>   
+>   	/*
+>   	 * Update PIO power bias configuration by copying the hardware
+> -	 * detected value.
+> +	 * detected value. This relies on the H6 layout (SEL at 0x340, VAL
+> +	 * at 0x348, matching per-port bit meanings). Not all NCAT2 SoCs
+> +	 * have it: the A523 needs different handling.
+>   	 */
+>   	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
+> -	    IS_ENABLED(CONFIG_SUN50I_GEN_NCAT2)) {
+> +	    IS_ENABLED(CONFIG_MACH_SUN8I_R528)) {
+>   		val = readl(SUNXI_PIO_BASE + SUN50I_H6_GPIO_POW_MOD_VAL);
+> -		/* TODO: A523: keep only the lower two bits? */
+>   		writel(val, SUNXI_PIO_BASE + SUN50I_H6_GPIO_POW_MOD_SEL);
+>   	}
+>   	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6)) {
 
