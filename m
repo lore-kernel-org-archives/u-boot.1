@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 356A7606A32D
-	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 13:05:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E7FC606A324
+	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 13:05:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=cmFOnBp9;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=ShVWxkav
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=V/2lyUIU;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=d+jx+NIi
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 12ADE60857;
-	Tue,  3 Nov 2026 13:05:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1F8DB407C0;
+	Tue,  3 Nov 2026 13:05:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2xf1RemBT6IA; Tue,  3 Nov 2026 13:05:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1032260849
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793711111;
-	b=cSXz1bwtzLlDFui+sHMPE4GcEVkN5Dg20KriWTtyFQnYz0I/WZ138JvF7I7MqaioskH0
-	 n2rHH7cnAqE3Z6KpgOH4zjsKN4nHxMJrwUsj4LkSCeTKCB9CtqJovJXoV/1wZ6Jw4jfPI
-	 Xsep22AixfJ6McpPmOpIrFJczG760MGM3xpsJTb/amq1BeHrwdpXbnjfKIQDJpwO3epVk
-	 MY7+Wua+FRYwAw6qRKvpXux/Of+cAb2AqKjgE1oCE17i5QSKtW1fVr9SPetLGO0QNz/F7
-	 uDBlr7SPZNvg4idYkmHHG0v3QNc+iT1RMagNRjo0orYvFdoTZgKVHMld/+aOiutg/jw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AXplEmN0G-fj; Tue,  3 Nov 2026 13:05:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BF662407E6
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793711112;
+	b=kmdYgtH777lxoOhZDzTXrtjAUeDC/ecC4dsBgVqyWwn5cf50aTzZPg9Yl6F2L+fqF+AF
+	 rd1zLJF4jPztMQZC1eYQP5bbgrIvEn19rZWwJntfUHmubdaa5sInrpCXN8hUR+wcnOTxe
+	 /m+navn39BxMiWlj00YS4kwBljFaRSFj8bZY3Tgxu1TWnB7VConV54wMJPhZVLbobTDk9
+	 bE6lU7rUMCs4jXU13t3RjBPhaZgxxgJp77YLmU4Q9kvlgYH/g+R1qBj9GP6OEdM/t/Vbf
+	 rwDZxjWr4gLINLGXKsJsCx0VhdZUP4XEjkPvLO9r44Y4bIcukttQvABNdkxhzO6bIuA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793711111;
+	c=relaxed/relaxed; t=1793711112;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -34,139 +34,139 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Developer-Key:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=5sZGgll+vb5WjmHB1GRSpXrH7mseHk4yQG4xI7R7FXI=;
-	b=ZSBQS5ENN9BMojZHieoI9bY9mn4mnlVuo8ZUoZbmTNf1ktGkd2OJlllk1JkCsOuE1vPF
-	 xmk8Zq7ay1XiXvePqPQy6BN3LhoRcfbmSTI6Tb1EJdJctkkE5vCCKYDOFcyFY27ElKLmB
-	 x7p0+WAyrY5o/KThJp06lJOXPxVtFDhD1a6OXG7q0ht2xZCjbIYOctljJq7CJuBeWAAHE
-	 O3AzSs+ylkh3HBEqAA/ywjJEzMAi6tUbb6DbMjsebLj+YlajQQVi+uEqMXkTsiUUdwBK1
-	 1J+TJxjolZe5kudvFoURMdSt7IjK6aKOI9s4oDymx9VHudFlcYIuWGjTCoznDX/8QZA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=GSxjhTeyFvbo6Bt80Guw1EGRFScSeVYKeee1HdBt1Gc=;
+	b=n59e0tMKabA/vBYRNeFxO68VmcoVe1ptCFSGmBbh09gL0KGHJFDBZ9JIpkAi1jjr0BnO
+	 wyTG2BkvMElI9iFwe5rz94ZEJXGz8hDSzckQIAHlP7zdmdm3E3xPbGQ3tZcuvozAkiIyU
+	 pcXI0HPj++7ZSNJN1TxhGxzvXKndIRbzwrBfPFSr6BF+DK2fPnn1fKaFQhssXALI/dW+Q
+	 xs4791go+pzWSdpJTf+Tw8yCVBs6l+8JISz+TERB7YAwOxIOipigwIf7f50aMB7Nz23pm
+	 oG+Dpob1DJj/ma4XvKAgy36TkfkPfdUJgp46aVRkcMNZAcRGgFIIhJh85am2YvSCAEg==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793711111;
-	bh=5sZGgll+vb5WjmHB1GRSpXrH7mseHk4yQG4xI7R7FXI=;
+	d=lists.u-boot-project.org; s=default; t=1793711112;
+	bh=GSxjhTeyFvbo6Bt80Guw1EGRFScSeVYKeee1HdBt1Gc=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=cmFOnBp9Wc2WlQR41NLW2RWIvnJLaY2jzkKzd8IkP++Vt2/LoYdwB4NztmVg9pvtR
-	 7S41oUBNLTEAex4esdyE01jYJhBDKSxBR74lL+n/hQguNxx6a4YkF1vAnoczSbRbJa
-	 te7NdXNsXtTYsBBeyzindHpy5tPJT58iV6GLIMwX0eurC3cuPEIDE6Oq+0vUUw9OTS
-	 ZKNbxeFPsp20aOo6KHFHd3pQTpzCEG5VFKuEzwdibVx9820+i81yGTVDKrSxfGrrxq
-	 OPQWuUpKMhv042I68JStnAoCRtBVTW1kGDghetGfZNJ/Til5HLT/VQJe1v/03HjG6r
-	 xgD1+GuIaE8IA==
+	b=V/2lyUIUDLtwMJM7FYqXofn5N3m+M3EAnv6H4o4KqppFp4P26FIB9+PUby0LOPhoI
+	 Oft5Tm/Ci3EP/0aPLypu9FvLhrH1vmGmV2daJ+xMrPbrmE7i/KaAZUe9T5BrL+dn3O
+	 TTHfDRq9hYgaBoxBpff1I4A0esQEbKgaw60A6ZgbmpFTSRZISHHDlpxewnIMedNurs
+	 waiTnBVp27S/6QHDj7OAOB1lvJ3QpLpN1kZuADWedvAyAE9DO61NVd8sX23DF8JOTA
+	 LpqAH2nRC4JNbVX2E/d1QBKssGTOUpwpTISZEQckwaiO4ZDwQf9vxERLuCkgVWf893
+	 R3SG6lZIreKGg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1032260849;
-	Tue,  3 Nov 2026 13:05:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id BF662407E6;
+	Tue,  3 Nov 2026 13:05:12 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 2315BA15
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 09:58:40 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id D5B42356
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 09:58:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 14F3240080
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 09:58:40 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id BC5A640080
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 09:58:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1qsgWAGB7FPw for <u-boot@lists.u-boot-project.org>;
- Tue,  3 Nov 2026 09:58:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org EC5D84005E
+ id QwQGBySeP3Ms for <u-boot@lists.u-boot-project.org>;
+ Tue,  3 Nov 2026 09:58:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 79A8E4005E
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::432"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793699919;
- b=bU+Hm9OIm2N6HBT++6quga78K+O4vFax09f+mw31ihfokTtvEPGDE9hcNhIl30ziK7DC
- LXKnELSsyCZ72UvDKhzBQVEx8KCeNTmxtg/YMf2slREvYw4OCIWU4Yeu7nl/WnXrkCPLk
- rcXzUOzozBmPhhl+ciCjkbcS9QgI+n93RscG3Zh0CGuT1wDDVfBpC+xE00OyZSvZp75Bx
- NAcmTnWSS1+0J0jlL1W2uSW29mNfqjcjCvczy1A8fTizF8s+LbkgTA1xKjOhHzAmKZCn/
- 1UjFqi/KDMB6Y5qw+GZvOCjrbJQ5wNzEGqH/sVdb5kzShxFEDYRVxzyLmFWxbZCAugg==
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42d"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793699920;
+ b=UlRDnIxMoj2AxdTn3op270z/cAtW0i6WvHhrowuiQ9p2UHuq1DEHDoF9Vq0F1z1+wfsh
+ GG/2Jbk2PCsdu3skZz57AAZp0T7EkW6OxHPJLKvzhjCRcLwrNC/gVB/f9xwvKipwdavmJ
+ pTW/gUbtyItkcZz3MTrA43xBbsdDvRlu7c1fbdZ7YKNIRFW3eROzrsm7RmncodzY2q2BU
+ dYbZw9Irf3h3qRvQBKkRIbxRgNmecjh41H7wD2oYfC9U+C8KcL3Ybq6sqZNDCD+l+NLf1
+ DMaIpcMNqFKttitF9MURgashWUaw9c783+RDekIWzvn6eHqSP0fW2tS5UV62stw60iQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793699919;
+ c=relaxed/relaxed; t=1793699920;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Developer-Signature:X-Developer-Key;
- bh=5sZGgll+vb5WjmHB1GRSpXrH7mseHk4yQG4xI7R7FXI=;
- b=bwTWkzB7cXpt7p21rMkz/VQl+smkmgacJf/PVlO2xrp7SOkkIIQdVkLBOcOXUGR7a/uP
- pk4g7Dyl2nhyAiEBT5ak7RScFRBAh1qG20NDFJ0nvrvRfP0r0R7J+54VuTFtuRpsyJW9w
- XzUuTiOPMK1XBhSjFKWvuf2Di6wQEY+jj//Un24Yf6amqsy0NoOXzziwILILQmHC9rw9z
- WFnQ/okB699hln08GHA6zSKvrR1fUY5cTzNvnIG76283hpdDDkR0Kybe0V6ArXFZLjm0O
- D1PcQI/dJIgTcObo9XDCTcEXqTnBxqlQO+6yzoEy6ekqZH31tm6aqlLdXlQ+y/FqXgA==
+ bh=GSxjhTeyFvbo6Bt80Guw1EGRFScSeVYKeee1HdBt1Gc=;
+ b=sfHekaeHB8TqEwsbI1F7Ei6VGTeOLx56Yj3J5ATZZM6fFdG9TYl8MScS29ocbr/vteyd
+ vPq4O9aKFHr5+Pxz1MqLnqvv3fp05euvahINqzKrAYX2yCZb2qqxu+AFHJKgZO2k+2cr7
+ VpN7XSmraSLc01qIrJmvnLaPkDlS19fHqYcaPr+THwr3QbNk5Z6k01yJIff+4MKYuBy45
+ c7q4cFrZk+6a45v6TahgKPktMuJj33T2kbBeFJaatCAzyN3s8Sq4Dy1DVMlId71ILEsL5
+ Nq3bsfHKQlmK1PeIW1fOlPB1yLPHgifPE0IGoArngUYb2FDEmwIDxMkUYrZ9fKhrUcg==
 ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=none header.from=baylibre.com;
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=ShVWxkav; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::432"
+ header.s=google header.b=d+jx+NIi; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42d"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::432; helo=mail-wr1-x432.google.com;
+ client-ip=2a00:1450:4864:20::42d; helo=mail-wr1-x42d.google.com;
  envelope-from=msp@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=ShVWxkav
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
- by smtp2.osuosl.org (Postfix) with ESMTPS id EC5D84005E
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 09:58:38 +0000 (UTC)
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-48e47347279so2459071f8f.1
- for <u-boot@lists.u-boot-project.org>; Tue, 03 Nov 2026 01:58:38 -0800 (PST)
+ header.a=rsa-sha256 header.s=google header.b=d+jx+NIi
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 79A8E4005E
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 09:58:39 +0000 (UTC)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-48e20ed3b9dso3481558f8f.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 03 Nov 2026 01:58:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1793699916; x=1794304716;
+ d=baylibre.com; s=google; t=1793699918; x=1794304718;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=5sZGgll+vb5WjmHB1GRSpXrH7mseHk4yQG4xI7R7FXI=;
- b=ShVWxkavZfehUJx1CKJzwbjkies/BZCeRSuwI+9zMh5b3X/Hsp5pjGEriNdbwwAuIW
- /1HCfX2K4PsqXSQqlN8nZ62oeZGPRFToGjXG8s7u4XhjFkTvpQUTBVZuBHS8s+WScwaT
- fGrwRV/dTHeQ8VfC+CnJ8ZLKiCNwf2sO6USF2ZyPJ3RQK6NYeBbaDgLketlcEmSjdRAT
- S4zq7MsMMx01thMxSNAS2vX758TMd0lWFGP3snccZ7yC18R9lhxZdlWSYqC9dgynJRru
- bDY6AyfbSHLy0bNomAT6XoVMq5qoGD49zyvYbwgmcM8Wqz2DHecVj4ooaKrFlUu+9v86
- y8CQ==
+ bh=GSxjhTeyFvbo6Bt80Guw1EGRFScSeVYKeee1HdBt1Gc=;
+ b=d+jx+NIikS1q5LY4YFuApwPcCVm/phcz6ahHdRdRmbPw/BUEZNHDTi79t+4xlKkrFL
+ xyctUvuRDDw6uJc6BIPofYB8zrHlmBLVNLJxY3KpxdsezUKCdUjn0bvUDqqdVTBgqTNy
+ Igz86m+VFiCu2j9yaPgqjJMtJ9qdqY8KiPPIND/DWVIR9bzdgKYvfmadnxlfLIPZUs31
+ jvFRy3qQLZ1M9qJjBi03Rfkw6fA9ROfL6JECPlpibuzRZ/IUfsbykwKFP6SI8cDAaaX/
+ Pnv98tKZ/8VHmTUDzqO69l7Sog4++Gzhv3MTb00wbtBb8VfkuVzpC/NosKTDjWpaip2H
+ HcUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793699916; x=1794304716;
+ d=1e100.net; s=20260707; t=1793699918; x=1794304718;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=5sZGgll+vb5WjmHB1GRSpXrH7mseHk4yQG4xI7R7FXI=;
- b=A2EP+EBMTrVT21SSpH/WODZO89pIu3bwhvpGdznT+HmRWYIhR525kIJ5dmmHIUdmSu
- MZjENlBpK4qC+sl1+LXxohbsmdavV8ETuGNRI6COp4Q5mkGCFq0oFLMeK1AqHW3ElIFi
- NjyTcAG+XePb4Wx3dMg0APYvnJAh4+OpQvmdPf22nCsPqwJ942m6b10u1SE4fErXFxFy
- un13gxvvZ33YS9R8N2238XxBB0kP6mS//AFSlKbfgA0UcrHnfsqLiRDcBVP76IgPc05/
- AzQfvNgXrGP7tIzcdX0G3qjSpk96gJZz7qjdw167A5Vk/rYhP3YN7PAhANhnTFyOjT01
- MTcg==
+ bh=GSxjhTeyFvbo6Bt80Guw1EGRFScSeVYKeee1HdBt1Gc=;
+ b=fuHs3qDs4q8p1gqWVn28qpiBwxwmonvpVSIUivS0yb3dZG/KRGYZs8GqVtrpUsh0Lj
+ CTRJMBTecDNyI7zSfltt7sNYtH+hhsN8Nsw+1wmVBcputR4Hu+7Inls7XwtkQFATuiLQ
+ fUi1BSSqhI6sJAfPfPcarNUZtKh16dZzYY8rNX5PonVqpmnnTw3G4UEw0Lf1OhP2xAgP
+ G7r4ghHwP8erRA2AklIbNanCxefwsytYr12xz8h+j/YgqT56QWWKifAiNTVcM9DajlVt
+ Woz8O5gFxvTqYVuOPsg9teAv1e2GkZ588qWbLRPFihHmEG6H0PR65kYjvXf6OMM7nMeR
+ eS1A==
 X-Forwarded-Encrypted: i=1;
- AKwUvBx4LXRuyAfVm6Qji5dnVxFOFDmCj48f7TLpmVn+XRhwer30SrzsLQYQGF9CYUo+qmV4VUWTq/8=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+YunRAzkLovO+AYRTU2yoZie/JkWbuEL+lh0Hwjwg93dHVY+BH
- PnqNNVPVP2/0y+xL60MgBT+GBcYK/jQttCx1YVhcLHMNOIcWdFbQRpMToRHtIc5uDnE=
-X-Gm-Gg: AYBFou3uydINnEU64lfqBeV4F2gXUyrxn79Yb5OeH55+L9LmOGON2mDUCpGQplogoYA
- pnBDF1ObjQZtVkghRvSbsBPq8aYfQrTio51upRIwbem5FJ6/59gqOJZNM87Lmnn9cJpKtwAcidX
- DBjlCp7HNmz73Qb3WjRkgYLN6kwI2iZ7zR/3MtP4xDmjIagjpnJRRSDhH+zyMaX89+n74WLR/H/
- Ovov/30Pdu29KrFK5okEWbBUt3l+rJf3O3mIsurS5DawnXMs1ymDQgwzg7aDHSLv/4Wdsn4D8VW
- Po7wKnFfkPZd3w1T1IGGR630xYKCeVTeF6wjCvnwDJFj0S7Xy8/tucniy3oMrVV1wSVuOts7MDC
- 0vf1pkBhDEiIkuMzAfTl0zA8zvNB/bkdNv3lOG9WP4dWI2iqhVXCprENcF/kGkc5R1dH6Xbi8BN
- Qr+wu4qi3uL4juxcxC+bT6CCk8qtZMFVZ2riObYnU4NTK/smp2h8huAXhxFtfSBD01y5T9vgH40
- TWk7UrWUokUJhpHFK1STjA2lp5OmIWSvgrj4f8FkSvdZ1Rf2h5sk+pmemmoyAiWXQG+ex/fwpP/
- FQocKe3mzyErtcwiOjoJUf1EwA==
-X-Received: by 2002:a05:600c:4e43:b0:4ab:e27d:e241 with SMTP id
- 5b1f17b1804b1-4ac180f28f7mr271788575e9.15.1793699916455; 
- Tue, 03 Nov 2026 01:58:36 -0800 (PST)
+ AKwUvBwiqFY+Ju5lqVlaV6ge/HdPtVOmtcF1Wx/wHmMFKZhJiILqbzJzVcxybN2jMG4KMJr5drknqvg=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+JkMJBr1JriHnxOf0ZN+Vy0VEDXeEkh6/S9HhVeqW+l5MCJxDJ
+ gMIcmxT956u+o+RBOWmL4KX+e+072JUrQLSjngWsxZnL6GDe0bmLBZx1Sx4OySgAr4U=
+X-Gm-Gg: AYBFou18WISQSmddI4PFs1KMJtOUDB0xY4/qUWm1r2bix58FgDDN89XoXd79DeZL83a
+ UK3DGbiCczjV+/ncc8Wt6oqFRw2WcHVuMUbl23TOr9BvBF8Jbp7+CBm0341S0iAtTVjRzy+1dSN
+ hx7DNvTFqnL7BDCMteVcCxH0R7weesu9R2fZAgKevMRNycv6i0XByXWMTyynnLG7kVeP4XCGykA
+ ZHzOL3xuram50k6A+HEs0T5W6NhT4qIRd4qtozLpcxEL/RFAuz3idmkFS7cVQ2Ayz0m/aD7NxBC
+ gq9IvCOwzacJMulr8RKaj6HwqLvDlGGa8beV6bLdR8ep63TUWMZ03SkVHkTn2JoCWbcBzP55FZZ
+ IuS+DLFHjdJhDEcyhLltLYFfldCkXZk/GVbgdJYuWi42sz1uyKMgYbNhA8Hj1pNbdv4jpKRS6AQ
+ 057/NxT8LbrIFOm3iOBFxZk+T80eUs57zd/UtkJNiwqpd8fR+/WsujWiztF9zoGLT531Y2oXDGS
+ JFDJaR9/rj3IXqzh7Hs/fhEwafI1rdsm3PPXDJxjsUfLjq34X32778n1dcuTtRCn6DxYAcO0+w5
+ 39lpnNTjsLB5VzGUkoxzDFSa3A==
+X-Received: by 2002:a05:6000:400a:b0:48e:4115:f3e8 with SMTP id
+ ffacd0b85a97d-48e6e50096emr29729954f8f.27.1793699917819; 
+ Tue, 03 Nov 2026 01:58:37 -0800 (PST)
 Received: from localhost ([2001:4090:a244:81d0:2c16:1c4d:8a04:e0bf])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b2ab3ea6a9sm69724885e9.15.2026.11.03.01.58.35
+ ffacd0b85a97d-48e71b959c1sm23698534f8f.45.2026.11.03.01.58.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Nov 2026 01:58:35 -0800 (PST)
+ Tue, 03 Nov 2026 01:58:37 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Date: Tue, 03 Nov 2026 10:55:52 +0100
-Subject: [PATCH v10 06/24] arm64: dts: ti: var-som-am62p: Fix wkup R5F
- memory region size
+Date: Tue, 03 Nov 2026 10:55:53 +0100
+Subject: [PATCH v10 07/24] arm64: dts: ti: k3-am62a: Split r5f memory
+ region
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261103-topic-am62-ioddr-v2025-04-rc1-v10-6-0b24ff0a4d6e@baylibre.com>
+Message-Id: <20261103-topic-am62-ioddr-v2025-04-rc1-v10-7-0b24ff0a4d6e@baylibre.com>
 References: <20261103-topic-am62-ioddr-v2025-04-rc1-v10-0-0b24ff0a4d6e@baylibre.com>
 In-Reply-To: <20261103-topic-am62-ioddr-v2025-04-rc1-v10-0-0b24ff0a4d6e@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
@@ -198,12 +198,12 @@ Cc: Kevin Hilman <khilman@baylibre.com>,
  Bin Liu <b-liu@ti.com>, u-boot@lists.u-boot-project.org, 
  Jerome Forissier <jerome.forissier@arm.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1913; i=msp@baylibre.com;
- h=from:subject:message-id; bh=diUdMwvu24q77IOa7v5d/YmHcwyhpR2Ar3p3sy5NehM=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhqyX62+zTOK7euqX2pe9W8wqo/MtPh9mctA3mx/y//vjL
- KPrszSMOkpZGMS4GGTFFFk6E0PT/svvPJa8aNlmmDmsTCBDGLg4BWAi/y0Y/lmerzIVLTmYst9S
- NGfVnahNr6X7pn4qmfDO886zBR3Vy7QZfrPvmqN1/tiNrH/2Hj7sSzQvOL4xClywL35bhbH/iXx
- pC2YA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5758; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=K08aB1lXEoi9fXBBma4JASOyvbglYie+tN+EMDQUQfA=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhqyX6x+k5s6vK2Mz9bJ1LustMdju21/0fKJwhMXseS+/Z
+ Ty/0/Kto5SFQYyLQVZMkaUzMTTtv/zOY8mLlm2GmcPKBDKEgYtTACZyKYjhrxjLY04HPvnnCrGL
+ y9OkY+bF5N6Lrdg39d3kG4t78nhSfRkZfvC1N0075KD3NsZn8m0vQ4kTEbtf8WazNl1YcO/ys53
+ 7+AE=
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Tue, 03 Nov 2026 13:04:38 +0000
@@ -216,56 +216,180 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The wkup_r5fss0_core0_memory_region was reserved with
-0x01e00000 but the MCU SDK linker for the wkup R5F firmware on
-AM62P defines the DM code/data DDR footprint differently:
+Split the firmware memory region in more specific parts so it is better
+described where to find which information. Specifically the LPM metadata
+region is important as bootloader software like U-Boot has to know where
+that data is to be able to read that data.
 
-    /* DDR for DM R5F code/data [ size 27 MiB + 396 KB ] */
-    DDR                         : ORIGIN = 0x9CAA5000 LENGTH = 0x1B63000
-
-which results in an end at 0x9e608000. For this memory region which
-starts at 0x9c900000 this means a length of:
-
-    0x9e608000 - 0x9c900000 = 0x1d08000
-
-Link: https://github.com/TexasInstruments/mcupsdk-core-k3/blob/k3_main/examples/drivers/ipc/ipc_rpmsg_echo_linux/am62px-sk/wkup-r5fss0-0_freertos/ti-arm-clang/linker.cmd
-Fixes: 571562e76458 ("arm64: dts: ti: Add support for Variscite VAR-SOM-AM62P")
-Reviewed-by: Stefano Radaelli <stefano.r@variscite.com>
 Reviewed-by: Bryan Brattlof <bb@ti.com>
 Reviewed-by: Kendall Willis <k-willis@ti.com>
 Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
-Link: https://patch.msgid.link/20260918-topic-am62a-ioddr-dt-v6-19-v9-6-40972ef1f663@baylibre.com
+Link: https://patch.msgid.link/20260918-topic-am62a-ioddr-dt-v6-19-v9-7-40972ef1f663@baylibre.com
 Signed-off-by: Nishanth Menon <nm@ti.com>
 
-[ upstream commit: c9b15cd49b3fbd54f3382655b4e898921a7adb4e ]
+[ upstream commit: 13aea49af974352c2a6a96608bbaa3ed3030706c ]
 
-(cherry picked from commit 8ea59b637d34c19559d5828d83e3df2c32257f12)
+(cherry picked from commit 58c41f0943b030e47e3505e510eb45dd52e6667a)
 Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 ---
- dts/upstream/src/arm64/ti/k3-am62p5-var-som.dtsi | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../src/arm64/ti/k3-am62a-phycore-som.dtsi         | 28 ++++++++++++++++++++--
+ .../src/arm64/ti/k3-am62a-ti-ipc-firmware.dtsi     | 10 ++++++--
+ dts/upstream/src/arm64/ti/k3-am62a7-sk.dts         | 28 ++++++++++++++++++++--
+ dts/upstream/src/arm64/ti/k3-am62d2-evm.dts        | 28 ++++++++++++++++++++--
+ 4 files changed, 86 insertions(+), 8 deletions(-)
 
-diff --git a/dts/upstream/src/arm64/ti/k3-am62p5-var-som.dtsi b/dts/upstream/src/arm64/ti/k3-am62p5-var-som.dtsi
-index 8a8dec80cb30..3d1a2c5bc464 100644
---- a/dts/upstream/src/arm64/ti/k3-am62p5-var-som.dtsi
-+++ b/dts/upstream/src/arm64/ti/k3-am62p5-var-som.dtsi
-@@ -71,7 +71,7 @@
- 
- 		wkup_r5fss0_core0_memory_region: r5f-memory@9c900000 {
- 			compatible = "shared-dma-pool";
--			reg = <0x00 0x9c900000 0x00 0x01e00000>;
-+			reg = <0x00 0x9c900000 0x00 0x01d08000>;
+diff --git a/dts/upstream/src/arm64/ti/k3-am62a-phycore-som.dtsi b/dts/upstream/src/arm64/ti/k3-am62a-phycore-som.dtsi
+index 53c096da68b5..7fa19ced1a23 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62a-phycore-som.dtsi
++++ b/dts/upstream/src/arm64/ti/k3-am62a-phycore-som.dtsi
+@@ -65,9 +65,33 @@
  			no-map;
  		};
  
+-		wkup_r5fss0_core0_memory_region: memory@9c900000 {
++		wkup_r5fss0_core0_ipc_region: memory@9c900000 {
+ 			compatible = "shared-dma-pool";
+-			reg = <0x00 0x9c900000 0x00 0x1e00000>;
++			reg = <0x00 0x9c900000 0x00 0x100000>;
++			no-map;
++		};
++
++		wkup_r5fss0_core0_lpm_fs_stub_region: memory@9ca00000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9ca00000 0x00 0x8000>;
++			no-map;
++		};
++
++		wkup_r5fss0_core0_lpm_metadata_region: memory@9ca08000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9ca08000 0x00 0x1000>;
++			no-map;
++		};
++
++		wkup_r5fss0_core0_lpm_rest_region: memory@9ca09000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9ca09000 0x00 0x97000>;
++			no-map;
++		};
++
++		wkup_r5fss0_core0_dm_region: memory@9caa0000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9caa0000 0x00 0x1c60000>;
+ 			no-map;
+ 		};
+ 
+diff --git a/dts/upstream/src/arm64/ti/k3-am62a-ti-ipc-firmware.dtsi b/dts/upstream/src/arm64/ti/k3-am62a-ti-ipc-firmware.dtsi
+index 06d4e815b167..94c1d60d8d7a 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62a-ti-ipc-firmware.dtsi
++++ b/dts/upstream/src/arm64/ti/k3-am62a-ti-ipc-firmware.dtsi
+@@ -65,8 +65,14 @@
+ &wkup_r5fss0_core0 {
+ 	mboxes = <&mailbox0_cluster0>, <&mbox_r5_0>;
+ 	memory-region = <&wkup_r5fss0_core0_dma_memory_region>,
+-			<&wkup_r5fss0_core0_memory_region>;
+-	memory-region-names = "dma", "firmware";
++			<&wkup_r5fss0_core0_ipc_region>,
++			<&wkup_r5fss0_core0_lpm_fs_stub_region>,
++			<&wkup_r5fss0_core0_lpm_metadata_region>,
++			<&wkup_r5fss0_core0_lpm_rest_region>,
++			<&wkup_r5fss0_core0_dm_region>;
++	memory-region-names = "dma", "ipc", "lpm-stub",
++			      "lpm-metadata", "lpm-context",
++			      "dm-firmware";
+ 	status = "okay";
+ };
+ 
+diff --git a/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts b/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
+index 6e5419de8e35..871ec227def9 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
++++ b/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
+@@ -59,9 +59,33 @@
+ 			no-map;
+ 		};
+ 
+-		wkup_r5fss0_core0_memory_region: memory@9c900000 {
++		wkup_r5fss0_core0_ipc_region: memory@9c900000 {
+ 			compatible = "shared-dma-pool";
+-			reg = <0x00 0x9c900000 0x00 0x1e00000>;
++			reg = <0x00 0x9c900000 0x00 0x100000>;
++			no-map;
++		};
++
++		wkup_r5fss0_core0_lpm_fs_stub_region: memory@9ca00000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9ca00000 0x00 0x8000>;
++			no-map;
++		};
++
++		wkup_r5fss0_core0_lpm_metadata_region: memory@9ca08000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9ca08000 0x00 0x1000>;
++			no-map;
++		};
++
++		wkup_r5fss0_core0_lpm_rest_region: memory@9ca09000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9ca09000 0x00 0x97000>;
++			no-map;
++		};
++
++		wkup_r5fss0_core0_dm_region: memory@9caa0000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9caa0000 0x00 0x1c60000>;
+ 			no-map;
+ 		};
+ 
+diff --git a/dts/upstream/src/arm64/ti/k3-am62d2-evm.dts b/dts/upstream/src/arm64/ti/k3-am62d2-evm.dts
+index a8c794d07343..7cba3ff99e6a 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62d2-evm.dts
++++ b/dts/upstream/src/arm64/ti/k3-am62d2-evm.dts
+@@ -65,13 +65,37 @@
+ 			no-map;
+ 		};
+ 
+-		wkup_r5fss0_core0_memory_region: memory@9c900000 {
++		wkup_r5fss0_core0_ipc_region: memory@9c900000 {
+ 			compatible = "shared-dma-pool";
+-			reg = <0x00 0x9c900000 0x00 0x1e00000>;
++			reg = <0x00 0x9c900000 0x00 0x100000>;
++			no-map;
++		};
++
++		wkup_r5fss0_core0_lpm_fs_stub_region: memory@9ca00000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9ca00000 0x00 0x8000>;
++			no-map;
++		};
++
++		wkup_r5fss0_core0_lpm_metadata_region: memory@9ca08000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9ca08000 0x00 0x1000>;
+ 			no-map;
+ 			bootph-pre-ram;
+ 		};
+ 
++		wkup_r5fss0_core0_lpm_rest_region: memory@9ca09000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9ca09000 0x00 0x97000>;
++			no-map;
++		};
++
++		wkup_r5fss0_core0_dm_region: memory@9caa0000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0x9caa0000 0x00 0x1c60000>;
++			no-map;
++		};
++
+ 		secure_ddr: optee@9e800000 {
+ 			reg = <0x00 0x9e800000 0x00 0x01800000>; /* for OP-TEE */
+ 			no-map;
 
 -- 
 2.55.0
