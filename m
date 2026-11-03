@@ -1,176 +1,174 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C0FA606A324
-	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 13:05:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC952606A332
+	for <u-boot@archiver.kernel.org>; Tue,  3 Nov 2026 13:05:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Mq/dN0T7;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=B2IhTIi9
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=xRPPetGS;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=a+xGrelN
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EB97A60844;
-	Tue,  3 Nov 2026 13:05:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 82E36407B7;
+	Tue,  3 Nov 2026 13:05:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yUuDlyz4DC4Y; Tue,  3 Nov 2026 13:05:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A764760842
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793711100;
-	b=n6Rt4Y7jj2ymJUp25MVuC4GuRFSpI7ySvWZUqvPdVo5N9cANMhH+BZuhPtXsGuWGINEX
-	 P9dfUWljizB0XNFjLxRiCXXk9PMUHXRlxDo/gGxqSIPsxUEk01XXFhxBEjrQ3rlHfvVf6
-	 h4ESp90k0ETk2WX0CSP6TeIbMouQSgqOSm8nXXeR7JonON+cO/tmA1iEuTpGUqZWiqxYL
-	 cOyFN7pAdLAPrZn3hOM5yUUAW+jRCmeryUlXJtaMZBidoLW7TuIw51RO1fUP8jc9H3EhW
-	 7WN3dwQXO2Tnbtwtz156wDsAMr6GGZXPN4JTdaWjs+UwAmnBfNygV5DNRGAAd6NZxsQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id slg3bpHbyv7x; Tue,  3 Nov 2026 13:05:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5ACDF40778
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793711102;
+	b=NIaHXuGHAbVxrqam5gH5r+gjUTaVyiBXr/TzOxTtHKGMFTxGBtjw45mEUXvjjHD0bQs9
+	 ucEl4+G/VU/aJwH3tBverjTkOcpbTT1BrAEf/NSz/UgjRhTBdN/2HF6fXirldPILnxmQU
+	 hkUsNjBjsciRtC8Da/OEFXo6fihpccVKDppy8gXMWbCdSMB0BlEvit4tV0CafqbRXvvbb
+	 TMqeYNj1H4kCC/gN9DgJ+2onuhGkXMWfCNpWP4D0p/5b/4QXXokcCkAFWoTwRJ/pDQRoo
+	 n1G68XrvWe/5THEVooJ8jXvw+zn7+pq+B+mAe4MPBHebPdfG9D1Fpd5I1Hpv6wkGzew==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793711100;
+	c=relaxed/relaxed; t=1793711102;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
-	 Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
 	 X-Developer-Key:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=9fog547iEYJEB2sqqucTbqeOPd8kCexEKC4eGn5/JMk=;
-	b=IanRTW4OXImFfB9nHFUDU/nHzJSqIQmI8kJqRAaxGT8Oljm0rpnh01bPKptnBg1cbSL0
-	 w7/vq+Vue/KcXxO6GX11ATDyFLxt1pN++s1dbkPa6Px7Wkl4TGLA4YjMYNMo0Fc98wh9X
-	 JZgINMIQItYX2sjai0RzYrhngvu+Wv89se1J4nVNkbPyRQLayQt+vCANUq3UPgDM1MIiZ
-	 hUvOm1wZ3OeiRU5b8LsGIDfdUuem64Si2tQZsgq4SFluXHW6S4shzZw86ajVndANK5fjN
-	 jwSLJoURCbWLvkWXetWyLP3cU0ZHTKH5uNnZRwYYYQYM6hEPg6RiL6QuJzZ5DrObmxg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=a2EoipHl9jGxY8yeY0pwkNL6dmnFmXdBhacQvPsR4kE=;
+	b=K26F419P7eKqli7EapYBGwvED/lCE/U9UUHkyZXmEaZqr/lCzmM2PeqaTndxmAkIgoLG
+	 vflEIWmxjKSDv3OCOn92I9TGHIgciX7inB172+wVzCzbb6ge8NHFF1ea8BpeUtVzAs2HC
+	 YM0f0pWcGzIKuy243tXbv1G1Q4xHeSGNgGBxFK9o3jZEMw4FJPqj4TfgZ5WP8R6NrUgfJ
+	 gmWGhDisGL47b/ZBucJbgA4c06SXkDDvx9npegr4I8mpq1P6swmdS/+L/T1Ag8lBkCcd6
+	 gRgHPlHBSAQY/288jM2t7ho4QBK/ofGt2HFNw0S/0jxlgmhuKm2CckOQbe/Po37/zJw==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793711100;
-	bh=9fog547iEYJEB2sqqucTbqeOPd8kCexEKC4eGn5/JMk=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Mq/dN0T7P+hyi4HTWc7GpRqgKCJ/2Y7EHaR47rhT2uSCJKIa/pJs2GPIgv9jG8+jX
-	 feeMUo7wSFGI6n1wk6E+pwqt2OiGH0L/vR2Q9jUNKV15ewDN732lZCLbyzGQt0sK/L
-	 S/RTn4Bw7MFS8eD4U19hNTZnTjPs2CFMLQza4fuamLnSV8SfvYbK22VIpFVReQMep7
-	 bnK9Gk3yDqM7IJMXOqqG+L6Hzrn8LHJM0VotO0miDlYQou/W/2TcudvnMz9BCXfdkt
-	 v6SLaJZps5MQ7eLLZ8xMufU5PghJ0ImqIHY1Yb1tgXi8VxQ8si/VnBqZfWPz7J8rMt
-	 g1F5bBGgm0D/w==
+	d=lists.u-boot-project.org; s=default; t=1793711102;
+	bh=a2EoipHl9jGxY8yeY0pwkNL6dmnFmXdBhacQvPsR4kE=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=xRPPetGS4VYzFjS7Cw2pjlVTg3U/Fh14Suki0U/cVpbgNC+CNMNNaAehHhrr3T7Nk
+	 FIpVNbmWNBHt52XjbUHu8Jiy8lHINhg+/UWLT6YmK9nPe9fssKt6T3N3K0mV/g7FEo
+	 VhGPXIFhfwfSzVGUzWiAJd0eyraTkXnc5g4VlPijLQHku97c7l4CM2Ua0KHi/BbR9s
+	 x7Nmcq6JSUmAIq1xGQF5DpjL40jYAFEo8GOyAWLjeXdLXqDu+XOIcaSsXfh+9mwQDd
+	 rfCbAnrPYo1HCIKYvvUdVQs+PFUYxIcQl6EDCm+fNElxL2c0OdrNFXsdPHkwadQ2/e
+	 mq5j8LTE80xRQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A764760842;
-	Tue,  3 Nov 2026 13:05:00 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id B3C05A15
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5ACDF40778;
+	Tue,  3 Nov 2026 13:05:02 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id BDD59D3A
  for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 09:58:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id A4ECD80DE2
+ by smtp3.osuosl.org (Postfix) with ESMTP id A3DEB606A0
  for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 09:58:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kTs9B7oint9w for <u-boot@lists.u-boot-project.org>;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Na75VaIfEyLx for <u-boot@lists.u-boot-project.org>;
  Tue,  3 Nov 2026 09:58:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B550180DC2
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::429"
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5DCE660670
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::434"
 ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793699910;
- b=II9VaHjdeEHXgbszMg5XV+3UYDYjGo66JoMWr0oBjgSKrHYk2WwX4K3U9T494eIEnvla
- jUOLgNMki9rpcDHZbxTdewDNb8i2f3O/MD/V3rm6s1uoxt3wH+Tn0ELBoq30cpTNo5Ve5
- NKUTBkwW0514gNi9hpNC1pLpeKxOnh3Jfkx5ep5vB5YyDsfXlqg//tnporIh6Q4gGOV7J
- 0q6FMz8DopVUM5EdT+i7vNzCAM0Ry+JkW9Bvc+XNUhu/rAmtI+P1cdWG8F8/Q9gpVNbUE
- z4q3BMVNReOgt63bT7Qt61WcOBwfb71OvOM1IoGyLgbQWBSum6TCV64mBdQVyJtJj8w==
+ b=QWtS/RZK1F8qzlqv6L5E+ckIbVM5sv5ab4Md7Ou1vLB1Z5NyH21hHU4YyfcWut1bmEOB
+ t+KL5Nhxz0PjFwreV2fMGmu+OGya33h3NSq061QwARphLV54tLOkABqPqGZuQ+UsEOtk6
+ zNR74mpvQ0T6ynVw9IBvoBdLsqdiLbEDznr8lzGXK+eGNSujCw7zL25f7jOrknBUuaEI1
+ ILZxufcd78PUTmzEHJafuv221oCzbuKOPM8on1k9b8VWqLjO1ZGVUrE5NWgqVUx3C++V5
+ KU6NM8UTfszhaRDMVu5cCa+zSMR5vVspTPNUe44fd7pmirw14yzYzhpVLL5l8FZ02Jw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
  c=relaxed/relaxed; t=1793699910;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:Subject:Date:Message-Id:MIME-Version:Content-Type:
- Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+ From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
  X-Developer-Signature:X-Developer-Key;
- bh=9fog547iEYJEB2sqqucTbqeOPd8kCexEKC4eGn5/JMk=;
- b=oIJVU8RFaRmx8Y+uNfM1kKYNImhB251T6A7Ib09MilShs46QRUn5cyqL1r+hKA5cBgMC
- lDhE4yvK8vmbXlIorm97pKaEsXex8G4LYOcCp66AxVWefo5KavWBW0sDxCsj7X0qxJZ4c
- GuRtEPiyk9KggPtaKS6kh0UmnkqFj91ZtP43xfXnMDIVH/C7bgBn+TGB6uJj9tf1BCFiu
- aok3zOTwv7iG+nfWsNjB9yLokq5e3VikCek2P2ywto/p2ltNFoP9e9eNjchOsVow3wmBf
- D4XnERMCK1AZiOTIhm6Kf5qlefaVW/31+jlUczsK/hKnGRDZTS028crflLa0QriH/Aw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=a2EoipHl9jGxY8yeY0pwkNL6dmnFmXdBhacQvPsR4kE=;
+ b=aeY8WVtACQrg7TSbY4ybxVzmUIZRuDCHHvkJMQfRFhCTlixXPXneXC8YQMF73aEFy0gQ
+ ce9yrNqYirgXMPM6B5Ddk9TQ3YuH9b9z57BO/rRJ/eDgIfwPC/6jbs1G5sYh/4tfV6aMH
+ 4xR4rZfx7jClNJxu7w5bKR1YJpy3IlrfY3nmKOJzeTgnJ8y86yfMf07YMN4RuLoxDGueu
+ lPz/lClS7zXkmue4CCopB7F+lUmN6VPDf1pl16gi5ie64MTOS2p+07TecT1LYdFkVxXlV
+ OwcjyazasiaLclhm0p2oRin5qgCmrOyb/+1gYIFL514D+1vd0hcThnvuSyZfrttMmvQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
  dmarc=none header.from=baylibre.com;
  dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=B2IhTIi9; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::429"
+ header.s=google header.b=a+xGrelN; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::434"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::429; helo=mail-wr1-x429.google.com;
+ client-ip=2a00:1450:4864:20::434; helo=mail-wr1-x434.google.com;
  envelope-from=msp@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=B2IhTIi9
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
- by smtp1.osuosl.org (Postfix) with ESMTPS id B550180DC2
- for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 09:58:28 +0000 (UTC)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-48df4e9d2d4so2117568f8f.3
- for <u-boot@lists.u-boot-project.org>; Tue, 03 Nov 2026 01:58:28 -0800 (PST)
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=a+xGrelN
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5DCE660670
+ for <u-boot@lists.u-boot-project.org>; Tue,  3 Nov 2026 09:58:29 +0000 (UTC)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-48c4be28b82so4163045f8f.2
+ for <u-boot@lists.u-boot-project.org>; Tue, 03 Nov 2026 01:58:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1793699906; x=1794304706;
+ d=baylibre.com; s=google; t=1793699907; x=1794304707;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=9fog547iEYJEB2sqqucTbqeOPd8kCexEKC4eGn5/JMk=;
- b=B2IhTIi9ZJLFbw1Ca+3+TG21dkADXS5lI1gJWMmF+QZJlr/tk7QPEWazbVEHUVp9BU
- HNAbrFGSz82b5qBClHbAbr2BeRBEK6KBzn1H2+iJ6C8QIE8WuLFyBGWuOb4JahEIi+5b
- HEHLvKbHa5Gua/0As+7pgffjPdc1Za7x42QaRz5RlfrOOzE2MeGe8oKwd11aYPpr+Y6N
- i7GJNQ9rqNYci82BahSPGx9CfO9qvvSjgfJRTK4l2eR+HIYPodA8EIgT7E/eQQJPIv1X
- A60LVagP/kHvevRyjfVcj/Ob1vcEj4tdDMBcohg1A4KlXHnR0A9n3v1QlU7Msch7C11D
- xPYQ==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=a2EoipHl9jGxY8yeY0pwkNL6dmnFmXdBhacQvPsR4kE=;
+ b=a+xGrelN/2kGZyVa8atzNtGH+ymgkxioPr+9QTkVgPIUgUfE+kAoGd5fSH3l9chFXn
+ jProb7s65A0ySp8Pil9yHGqNRxFenBM2qxRTiZqtCLydPp6SmjpPvJjWTua1o/cE2RMo
+ Otnlev9scg1erTmcnjlc+AMEQAw/OUhHhMzf16EBYwoXMmgIrcGYp/8+RmKVeUXbNwEs
+ 6hiwvdxWQ+8DqfJuRgLUlCgmlYiPQppqVMwIEY86oFgt2gVB0pC2Tm6ca9xhH1t106Su
+ nkCaIeP6QO0LEt60corAPFsIlHrE4BX5PS/urhfWu3nXiY3MX6x6rRLP+0+Lq/2V5uSY
+ iSTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793699906; x=1794304706;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=9fog547iEYJEB2sqqucTbqeOPd8kCexEKC4eGn5/JMk=;
- b=hGD/j8PbLa09d/X1hL+gIO3MZoVfqqvols845KQgVlHvFO1fRwipCivZR9kYEQ4z/l
- xriKgwf0F3u04qA+a+MqqCWw7URTuCp80WXm1o/ptXnGj9R12RI8ZIpf4O8FIcHeZZH+
- 8ST9YTUlxxxMJ1pcLmtK9m1KvLG9KdF0qlgHsw9R1rNsjDCJVInL6W1lEBcCP24/TOdr
- Et3lIHizHhSCyKMRuUHZkXc8A9Vbw9jhTvVeay8HldA3vsY5cvAmXE6ln5+icOvmVI7h
- ZH5gGSDcUdyuPImi7wXPw/gDCG3CJ80uVWog25A3OUVJwTi2sLbP0nUKyXaY191+3bBu
- YxJA==
+ d=1e100.net; s=20260707; t=1793699907; x=1794304707;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=a2EoipHl9jGxY8yeY0pwkNL6dmnFmXdBhacQvPsR4kE=;
+ b=Nuo9Wk/PAkPgCPvwtCDdj1Ws2oCvKieNk7CzrMrbUa/IBHsctZA1+tLzbwQEuf/JRh
+ lb8le1gZMBYeZ000hsUFt+2ZXk7/7aijQmqIZkeONhAgDb+8PbNX12XeyZdojyADJ8fT
+ a9bu3mlVvq0fqolzfbqonSXT85xvVq/3iPRwctjC/TS9DwpZp8w3Ew9mggQjaqximcb1
+ rFjk1QNB8pmN7/0VkgVxfOyTReCaOpWhPpbmdTw6P/w4feM3uQBcGpkwKy+LKN+KWYEs
+ iyXbQJhBEzVgDkRh563homutucdF/fyX86t8XsJgCYuIt6kx2xwBFjg0W2db64Yt+9Wy
+ Vjsw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzs9sHlD+zPeU21lwM/WZZNJNc7bYzhFTbVizpYUdFM8yav1mx+H1yU8RHlPmXXrvvVIEt6HE4=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/za1R/FakJDoQJpHAIgpQZNq0Gj2TjqiEVKLS7psui9PmgCJMF
- jLwEaUQS/1PGPST17vqmGmD7qs7v8E3eUUzQZmGuT6Eha/u43oJfiOucSJLk61+2NgE=
-X-Gm-Gg: AYBFou2UufvaMC6i65+UFJ4khv7i32OWjUMJvwBjzSDq8EEnTdUVOEkaYp5A4nWYNKf
- +5bSyXZj3qmyW6wA9gbt+BvusPbvn2qKOIzl3yFWoMcI6lL2xC86i2YCyO9DHsyZOLJhz8P5HLO
- ArjvONe6Ofk/A0reilqv9y2sqDehwjZnjUBLSG9gmis5j3aDhAJXdu2Dmb3uKzyPtcKLRnGtsVu
- NutxPEnhy0gLXT6yAlwVUP6+mo/jHzoVoa7mCjSZrj5D+GT2ctV/htxox+vBZ9aGvGfKcz9z8lt
- Wev6pgi+nxFcALZriVVB/1pd+8omFEflDcidR0V17FxFsYjrLiRNZ6KUusuaBhE3OXuE6MLN9IW
- kKkMibLq9DH14TFsQxQy63M1SwgtOz++rJSokjJyF7DFnMHCBGCtIFIbc3m2DJ7S8C/CB7sWdLb
- ON4Kax0MTISiOIPNxgjfGXuhbnGHti6mxodIQlekHSJJXHA/wGJx9OvY9yURbwWtZ/0Rssf4P92
- OsowJEO7pUUce1v79eX9RCDhx73+vKaZSzlS+RiCDADfAfP38Uwn+kxHsFz19WsPwKDU4IGSdth
- pgxnntnRTbcMBqpifU0PQpJ5Pw==
-X-Received: by 2002:a05:6000:2002:b0:48e:5eac:7e48 with SMTP id
- ffacd0b85a97d-48e6e2f692emr26167468f8f.22.1793699906022; 
- Tue, 03 Nov 2026 01:58:26 -0800 (PST)
+ AKwUvBxiF4wX5H7Kg0NlBrY7AxkR8L2L7J8ly2mL5c/pzu0FyF1U7Kyc+F89WAcqb0a9wpW/pTgQ8wA=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+AT2VTqnfD0rPfXm8dp3/RzgpqR4dMw5z8ziXAxhVTFB61/xVa
+ SyZrL3olXlhCgUaUb7rN6awqfPYS+KXFuTKky3Gwd/xXn9N+GY+yQEZpIeo/RyuCV50=
+X-Gm-Gg: AYBFou32PnsUejw6qhJRyRLHwifzn2DPn25+FP5Pv8g0KK572T2WOu4BtOIzCx/LGnd
+ jc77XNVDt8Y9SABAqrcjzAN52Q9IYzEBbFC6iHoYcvnK8Gi2ID6aluchQEE/05fnh9Nj7eEOkYC
+ MwrBR0170d/4UqWBI8jaloT5TAtn5IGIct7SU4jxo/nUS7v4PMXqv4hfMThABiV5mLv81BBCAZW
+ 4vmFA2tQkWYOW5yQwigRqkKhhEnDvXf4QH+BeGfeapdDmok4IkfRqp4w7i757IfX2zjoSaze89x
+ l1wtzawdcAnekJ/8FSmZWosQFP8iWFDcF9XuIJJad0nQkNHuT2XjVbs5gc2q1TTVC6cpUkfw6yI
+ 2zk/p98r9gFN4fXngSS7dDVI770q8WFg7JJDyS73x4BiMJIOs3Vi+VHHORfDf7ASL76W6M9HhIC
+ 8H9LWQhFc2K6EZ/DyWsqLUhcA99WKZL6L9UuiZPM25sKcZILfQlUfX5pjvk+VTDq1ORDD+NXTQz
+ phGc/WpFVB4lwWVPpRC2Mlx1k/d3Z/Hguog5vIvdvaiNIHlZwe2VZVVbvtYWzr943wWV2PWSRko
+ 6EutuFouOEdiNfmD8mKEIapq+w==
+X-Received: by 2002:a05:6000:250a:b0:48e:c84:5be6 with SMTP id
+ ffacd0b85a97d-48e6e303c68mr27811855f8f.14.1793699907580; 
+ Tue, 03 Nov 2026 01:58:27 -0800 (PST)
 Received: from localhost ([2001:4090:a244:81d0:2c16:1c4d:8a04:e0bf])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e71b723b4sm24751213f8f.17.2026.11.03.01.58.24
+ ffacd0b85a97d-48fbba47a32sm951492f8f.1.2026.11.03.01.58.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Nov 2026 01:58:25 -0800 (PST)
+ Tue, 03 Nov 2026 01:58:27 -0800 (PST)
 From: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Subject: [PATCH v10 00/24] am62: IO+DDR resume support
-Date: Tue, 03 Nov 2026 10:55:46 +0100
-Message-Id: <20261103-topic-am62-ioddr-v2025-04-rc1-v10-0-0b24ff0a4d6e@baylibre.com>
+Date: Tue, 03 Nov 2026 10:55:47 +0100
+Subject: [PATCH v10 01/24] arm64: dts: ti: k3-am62a-phycore-som: Fix wkup
+ R5F memory region size
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAKKv6WoC/4XSzWrDMAwA4FcpOc/DkhI52WnvMXbwj7wa1qY4J
- ayUvPucsq1lBHyzZPgkS742k+QkU/OyuzZZ5jSl8VgC0E+7xu/t8UNUCiXRoMZOk2Z1Hk/JK3t
- gVGkMIat5vVK6VdmD0o6sjlEGdNAU45Qlpq9bgbf3Eu/TdB7z5VZvhjX7IwNU5LngipmDDB505
- 92rs5fP5LI8+/HQrPiMd5CBaiAWkAISWSuWum4DpAcQqyAV0LbBEqIHtnEDbP9AKNOsgW0BWy8
- Rehs1Im+A3R0EqILlpIZei2hN7DdBfgCxCvK6lBCGwRo04LaWYu4g1js0BYwA5KDj2NPWDPsHE
- LEG9gUUo6MEYAe89eThF2RdflYNHApohCiiNya4/x0uy/INiGN2iFYDAAA=
-X-Change-ID: 20250306-topic-am62-ioddr-v2025-04-rc1-0b3a0ffe92b1
+Message-Id: <20261103-topic-am62-ioddr-v2025-04-rc1-v10-1-0b24ff0a4d6e@baylibre.com>
+References: <20261103-topic-am62-ioddr-v2025-04-rc1-v10-0-0b24ff0a4d6e@baylibre.com>
+In-Reply-To: <20261103-topic-am62-ioddr-v2025-04-rc1-v10-0-0b24ff0a4d6e@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>, 
  Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
  Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, 
@@ -198,15 +196,14 @@ Cc: Kevin Hilman <khilman@baylibre.com>,
  "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>, 
  Stefano Radaelli <stefano.r@variscite.com>, Paresh Bhagat <p-bhagat@ti.com>, 
  Bin Liu <b-liu@ti.com>, u-boot@lists.u-boot-project.org, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>
+ Jerome Forissier <jerome.forissier@arm.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8606; i=msp@baylibre.com;
- h=from:subject:message-id; bh=jh8nx+NyPZFXrl6RyUlfWLtjx5Kv5sgxW6zyni9tVqQ=;
- b=owGbwMvMwCXWejAsc4KoVzDjabUkhqyX65d8jpneUF8e/j+wNdz29rNyFelVwYa5m3c3zEtfo
- /vjyv2HHaUsDGJcDLJiiiydiaFp/+V3HktetGwzzBxWJpAhDFycAjCRrxyMDM+u/svfvPjkiZp9
- 5wJOTJ56MPHmfNcLN2L/MzLIvr58ZRkTw18Jw2dcb5oZ13P5f0/TOMt1XO+vJUdu1Jqevaf9vgm
- nHWAAAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2139; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=PidVOKGFm7YOFoU6qt8kYherLIlUpTPliHxSBLLDmCo=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhqyX69e4+0SsW7pzx29REeMGP9YtPN9frs3PYxZPMknp2
+ f9F9vGxjlIWBjEuBlkxRZbOxNC0//I7jyUvWrYZZg4rE8gQBi5OAZjI852MDMsFNQOCN/4y56zR
+ XX76Qpta+dS6cvNygyy3NUame/1r9jMyTD3elziRcSLnR844vbNfxXPXGvsvdFh6/IZK3eu4Db+
+ TuQA=
 X-Developer-Key: i=msp@baylibre.com; a=openpgp;
  fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-Mailman-Approved-At: Tue, 03 Nov 2026 13:04:38 +0000
@@ -219,188 +216,63 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi,
+The wkup_r5fss0_core0_memory_region was reserved with only
+0x0f00000 but the MCU SDK linker for the wkup R5F firmware on
+AM62A defines the DM code/data DDR footprint differently:
 
-this series introduces support to resume from IO+DDR. IO+DDR is a low
-power mode of am62a and am62p in which nearly everything is powered off
-except DDR which is in self-refresh and a few pins which detect
-activity and can wakeup the system again.
+    /* DDR for DM R5F code/data [ size 27 MiB + 364 KB ] */
+    DDR                         : ORIGIN = 0x9CAA5000 LENGTH = 0x1B5B000
 
-On resume uboot SPL is loaded and checks if this is a IO+DDR resume. If
-it is, the DDR initialization sequence in k3-ddrss differs slightly as
-it has to get the DDR out of the self-refresh.
+which results in an end at 0x9e600000. For this memory region which
+starts at 0x9c900000 this means a length of:
 
-Afterward a specific address determined from DT is used to get the
-metadata that stores relevant context addresses. The context is restored
-using the tisci message TI_SCI_MSG_MIN_CONTEXT_RESTORE. At the end all
-further initializations are skipped and uboot SPL directly jumps into
-the DM resume address which takes care of the rest.
+    0x9e600000 - 0x9c900000 = 0x1d00000
 
-This was tested on am62p.
+AM62A additionally has a second DM firmware for edgeai whose highest
+section end address reaches 0x9e700000, so the region should end there:
 
-Best,
-Markus
+    0x9e700000 - 0x9c900000 = 0x1e00000
 
+Link: https://github.com/TexasInstruments/mcupsdk-core-k3/blob/k3_main/examples/drivers/ipc/ipc_rpmsg_echo_linux/am62ax-sk/r5fss0-0_freertos/ti-arm-clang/linker.cmd
+Fixes: 8dd0ac27fcd1 ("arm64: dts: ti: k3-am62a-phycore-som: Enable Co-processors")
+Acked-by: Andrew Davis <afd@ti.com>
+Reviewed-by: Bryan Brattlof <bb@ti.com>
+Reviewed-by: Kendall Willis <k-willis@ti.com>
+Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
+Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
+Link: https://patch.msgid.link/20260918-topic-am62a-ioddr-dt-v6-19-v9-1-40972ef1f663@baylibre.com
+Signed-off-by: Nishanth Menon <nm@ti.com>
+
+[ upstream commit: 3690b591d07a2e8863eb96e2aff740da47b8de03 ]
+
+(cherry picked from commit 3cc9e9eb606aab57294854bfa440a9eb7c43ea53)
 Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 ---
-Changes in v10:
-- Rebase to v2027.01-rc1
-- Drop the two DT patches adding bootph-pre-ram flags. These are now
-  part of upstream DT. Also pick memory region size fixes from the same
-  merged series.
-- Cherry picked upstream DT patches for splitting the memory regions to
-  be able to reference the relevant section directly
-- Use "lpm-metadata" memory region name to lookup the correct memory
-  region instead of a hardcoded memory offset and index
-- Do not read the address in u-boot code, but pass a pointer to the
-  address to the tifs restore
-- Added all patches from the series:
-    IO+DDR low power mode bugfixes for AM62P and AM62A
-    https://lore.kernel.org/all/20260310100614.951573-1-a-kaur@ti.com/
-- Link to v9: https://lore.kernel.org/r/20260105-topic-am62-ioddr-v2025-04-rc1-v9-0-7e33f2c77dbf@baylibre.com
+ dts/upstream/src/arm64/ti/k3-am62a-phycore-som.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Changes in v9:
-- Swap setup_qos() and spl_enable_cache() in am62p5_init.c and
-  am62a7_init.c. setup_qos() is still required for lpm resume but
-  spl_enable_cache() is not. There should be no dependency between the
-  two.
-- Link to v8: https://lore.kernel.org/r/20251222-topic-am62-ioddr-v2025-04-rc1-v8-0-e70fed16b166@baylibre.com
+diff --git a/dts/upstream/src/arm64/ti/k3-am62a-phycore-som.dtsi b/dts/upstream/src/arm64/ti/k3-am62a-phycore-som.dtsi
+index de4048a3564b..53c096da68b5 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62a-phycore-som.dtsi
++++ b/dts/upstream/src/arm64/ti/k3-am62a-phycore-som.dtsi
+@@ -67,7 +67,7 @@
+ 
+ 		wkup_r5fss0_core0_memory_region: memory@9c900000 {
+ 			compatible = "shared-dma-pool";
+-			reg = <0x00 0x9c900000 0x00 0xf00000>;
++			reg = <0x00 0x9c900000 0x00 0x1e00000>;
+ 			no-map;
+ 		};
+ 
 
-Changes in v8:
-- Create and use am62xx-lpm-common for am62xx lpm common functions
-- Create platform dependent functions in k3-ddrss in k3_ddrss_data
-- Align am62a and am62p initialization regarding caches and QoS
-- Link to v7: https://lore.kernel.org/r/20251210-topic-am62-ioddr-v2025-04-rc1-v7-0-f113b156f83f@baylibre.com
-
-Changes in v7:
-- Removed parent nodes bootph-pre-ram properties as not necessary
-  anymore.
-- Added missing new line in
-    arm: mach-k3: common: Helper for LPM meta data address from DT
-- Split off LPM specific ddr code into its own file k3-ddrss-lpm
-- Rename lpm_ops->restore_context to lpm_ops->min_context_restore
-- Pulled patch to add wakeup check helpers before the IO isolation
-  removal to remove later cleanup of
-  wkup_ctrl_remove_can_io_isolation_if_set()
-- Some reviewed-bys and tested-bys removed due to changes in the
-  patches
-- Link to v6: https://lore.kernel.org/r/20251120-topic-am62-ioddr-v2025-04-rc1-v6-0-6dd99a7271bb@baylibre.com
-
-Changes in v6:
-- Add comment for last part of removing can io isolation
-- Only mention a single kconfig symbol in the commit message
-- Add defines for timeouts in k3-ddrss
-- Link to v5: https://lore.kernel.org/r/20251110-topic-am62-ioddr-v2025-04-rc1-v5-0-980ee0036c26@baylibre.com
-
-Changes in v5:
-- Fixed compile warnings
-- Link to v4: https://lore.kernel.org/r/20251030-topic-am62-ioddr-v2025-04-rc1-v4-0-4cef18af0226@baylibre.com
-
-Changes in v4:
-- Copy lpm_meta_data into the stack to be able to debug unstable memory
-  issues
-- Add missing comments about ctx_lo and ctx_hi
-- Use absolute addresses for k3-ddrss CANUART_WAKE_STAT1 and
-  CANUART_WAKE_OFF_MODE_STAT to avoid using addresses outside of the
-  range given in the devicetree
-- Remove the cherry picked devicetree patches as they are already
-  included now
-- In lpm_resume_from_ddr() print upper and lower 32bit of the meta data
-  values separately.
-- Link to v3: https://lore.kernel.org/r/20250623-topic-am62-ioddr-v2025-04-rc1-v3-0-a4da322c16af@baylibre.com
-
-Changes in v3:
-- Use wait_for_bit helpers in k3-ddrss where possible and add panic
-  messages for easier debugging
-- Link to v2: https://lore.kernel.org/r/20250613-topic-am62-ioddr-v2025-04-rc1-v2-0-3d233aaea355@baylibre.com
-
-Changes in v2:
-- Remove 'default n' from K3_IODDR
-- Pick devicetree patches from upstream instead of mailinglist
-- Link to v1: https://lore.kernel.org/r/20250311-topic-am62-ioddr-v2025-04-rc1-v1-0-666de9c105cb@baylibre.com
-
-To: u-boot@lists.u-boot-project.org
-Cc: Sumit Garg <sumit.garg@kernel.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
-Cc: Nishanth Menon <nm@ti.com>
-Cc: Stefano Radaelli <stefano.r@variscite.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Paresh Bhagat <p-bhagat@ti.com>
-Cc: Akashdeep Kaur <a-kaur@ti.com>
-Cc: Vignesh Raghavendra <vigneshr@ti.com>
-Cc: Bryan Brattlof <bb@ti.com>
-Cc: Bin Liu <b-liu@ti.com>
-Cc: Kendall Willis <k-willis@ti.com>
-Cc: Udit Kumar <u-kumar1@ti.com>
-Cc: Neha Malcom Francis <n-francis@ti.com>
-
----
-Akashdeep Kaur (4):
-      ram: k3-ddrss: Add workaround sequence for errata i2487
-      arm: mach-k3: am62xx-lpm: Add 32kHz LFOSC enable function declaration
-      arm: mach-k3: am62px: Enable 32kHz LFOSC during LPM resume
-      arm: mach-k3: am62ax: Enable 32kHz LFOSC during LPM resume
-
-Markus Schneider-Pargmann (TI) (20):
-      arm64: dts: ti: k3-am62a-phycore-som: Fix wkup R5F memory region size
-      arm64: dts: ti: k3-am62d2-evm: Fix wkup R5F memory region size
-      arm64: dts: ti: k3-am62a7-sk: Fix wkup R5F memory region size
-      arm64: dts: ti: k3-am62p-verdin: Fix wkup R5F memory region size
-      arm64: dts: ti: k3-am62p5-sk: Fix wkup R5F memory region size
-      arm64: dts: ti: var-som-am62p: Fix wkup R5F memory region size
-      arm64: dts: ti: k3-am62a: Split r5f memory region
-      arm64: dts: ti: k3-am62p: Split r5f memory region
-      arm64: dts: ti: k3-am62*: Add wkup R5F nodes to pre-ram bootphase
-      arm: mach-k3: Kconfig: Add symbol for IO+DDR Low Power Mode
-      arm: mach-k3: am62xx-lpm-common: Add CANUART wakeup check helpers
-      arm: mach-k3: Remove CANUART IO isolation
-      ram: k3-ddrss: Add support for DDR in self-refresh
-      firmware: ti_sci: Add TI_SCI_MSG_MIN_CONTEXT_RESTORE
-      arm: mach-k3: am62xx-lpm-common: Add lpm_resume_from_ddr
-      arm: mach-k3: am62xx-lpm-common: Helper for LPM meta data address from DT
-      arm: mach-k3: am62a7_init: Resume on LPM exit
-      arm: mach-k3: am62p5_init: Resume on LPM exit
-      configs: am62ax_evm_r5: Enable IODDR resume support
-      configs: am62p_evm_r5_defconfig: Enable IODDR resume support
-
- arch/arm/mach-k3/Kconfig                           |   9 +
- arch/arm/mach-k3/Makefile                          |   3 +
- arch/arm/mach-k3/am62ax/am62a7_init.c              |  24 +-
- arch/arm/mach-k3/am62px/am62p5_init.c              |  20 +-
- arch/arm/mach-k3/am62x/am625_init.c                |   5 +
- arch/arm/mach-k3/am62xx-lpm-common.c               | 240 +++++++++++++++++++
- arch/arm/mach-k3/am62xx-lpm-common.h               |  20 ++
- configs/am62ax_evm_r5_defconfig                    |   1 +
- configs/am62px_evm_r5_defconfig                    |   1 +
- drivers/firmware/ti_sci.c                          |  38 +++
- drivers/firmware/ti_sci.h                          |  16 ++
- drivers/ram/k3-ddrss/Makefile                      |   1 +
- drivers/ram/k3-ddrss/k3-ddrss-lpm.c                | 261 +++++++++++++++++++++
- drivers/ram/k3-ddrss/k3-ddrss-lpm.h                |  21 ++
- drivers/ram/k3-ddrss/k3-ddrss.c                    |  31 ++-
- .../src/arm64/ti/k3-am62a-phycore-som.dtsi         |  29 ++-
- .../src/arm64/ti/k3-am62a-ti-ipc-firmware.dtsi     |  11 +-
- dts/upstream/src/arm64/ti/k3-am62a7-sk.dts         |  29 ++-
- dts/upstream/src/arm64/ti/k3-am62d2-evm.dts        |  32 ++-
- .../src/arm64/ti/k3-am62p-ti-ipc-firmware.dtsi     |  11 +-
- dts/upstream/src/arm64/ti/k3-am62p-verdin.dtsi     |  29 ++-
- dts/upstream/src/arm64/ti/k3-am62p5-sk.dts         |  29 ++-
- dts/upstream/src/arm64/ti/k3-am62p5-var-som.dtsi   |  29 ++-
- include/linux/soc/ti/ti_sci_protocol.h             |   9 +
- 24 files changed, 874 insertions(+), 25 deletions(-)
----
-base-commit: dfcfc4c9f78d1743f490a497082a4ec8e058aae8
-change-id: 20250306-topic-am62-ioddr-v2025-04-rc1-0b3a0ffe92b1
-
-Best regards,
---  
-Markus Schneider-Pargmann (TI) <msp@baylibre.com>
+-- 
+2.55.0
 
