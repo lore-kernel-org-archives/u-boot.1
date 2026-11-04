@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B432606D804
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 12:50:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75E15606D811
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 12:50:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=nJAJyEq/;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=uABcBmU7
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=RMtizx2u;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ZaumjUsR
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 782B560778;
-	Wed,  4 Nov 2026 12:50:49 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 53F844072B;
+	Wed,  4 Nov 2026 12:50:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vF-8jc8ThIiY; Wed,  4 Nov 2026 12:50:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org AC9AE606A7
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793796648;
-	b=mfjoFR/fvaZll9ND38eibLOVV0XS5CRDDcEHk2clONWZsI3dB3seS41P4RvceMNyE6YA
-	 kA2MeOto2fFt9+W0tI4VWkMBrt42aMj/k/nPIEKTNDnlhZuxpMrk7i7d3niN58FkdFdRv
-	 v6ueb0VjdmNfTvMt4g+tcPUiaftU690o4EO95hNWL9AoWgZK4HTCwpZC3mrIqMyffCVoT
-	 1RlLTI5pEEPRf5MxoiSoTwVd3X7A8Y8VEHDZJCp6IQTPL40gnV/eZva195yKJUhs6Pe7K
-	 Z3wVncWOl4+R4Eb1ZAVV0LSO/M3vd5N9uQgPxUCIoi7mifGg9FvdvwO/9VoWq6SpXVA==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id CzV5rwmVUWkC; Wed,  4 Nov 2026 12:50:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 79DAB405F4
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793796654;
+	b=iJdLHbD6aR4gxwj4dHAGHBlf0XRp5fplfOSuaH2cl/ihKfySbZEgbJGC/r+ffQ4dfJo8
+	 kw8aRA9ahokr/NQOW9mvjjBxCPgcI+Nj61IcZRmzM2knqslq6q0heUa5Wfg7jq8rEyjpy
+	 jzMMdhHaGC84syTb1RO/QFPmbFxpScwpl1MYO7hS798D+XKXlTw6TTNv+6Hd1KLgHXLrv
+	 CRnRB0TXjm3lMiLEAEzBy3aOKXYIxyz3jsCQ2BRptJLKorxUWJn5XE/dwTa6PbRsX50zR
+	 lL63mLVe3JQpAthgcUz8F1Sg3eQ7q3V2GYHzbfoNaS+rOi29jucM5IATWoh3eCAoqnA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793796648;
+	c=relaxed/relaxed; t=1793796654;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,123 +32,125 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=qrAR8lJ4imukpXjrW4CphDMWtiygvgmxq3C6YxdCJwQ=;
-	b=R3qmuzvsTgr1D5mGI4aHX7GOQ44H3NBF5MyWxzTy43qUA0kn/oLt7PLQkQI6bFf0z3/P
-	 sag2KMBUhIsn25/+/Hlhw4nYx569wuCsPYwWwRPRUNm97uWmlo/cG69sotccYGr4ftv4S
-	 J56Y6mih9ugqXHx0A4csN90KjJ5Oo8gpDcTOXMXkRRWETpVJicqLlK57PcRFO/L2gH9JL
-	 pvK6iMtdw23qPwLXr/MeqfDwrn3Or75ntyTIk8UdyWsjSceTEcUj6OAgfn1CzZiA/oEMI
-	 XOYlhZGgERVJheD1MLaS2e8OpzW3UfHM0mqJMcVawZfTxe9yD26yrkuEq2k893gkOcg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=/Q64LJxhd6d8Nqm+xp5UxY8S6DMN+N75zY8poqEbpOg=;
+	b=iVffP2uhvNss2oNxbsUTGYJh4+E6D3LfzEuysiTmPLpepfRoVhqsPg+BuSC0QI7t1Xc1
+	 L8uiM/IOmFKCv05R0RRDWF6lwn11gft2bDcgO/ccU2c5HMOmASrmz333jCgCmVdZhdnVT
+	 wnxZumldwIz+8F02+tdAp+AHvTsc6lZnAYXeQGrQJ0zrmJfHS0lk3lWwE2Moujv5vmpo5
+	 7ZiiyMEE/i6O3W/eX5405wSUTCtl13Z+5SxQVpZoXFExl4Y7r9uQIQjH8PcBPooQ+sAEc
+	 99j2Gk0Mf7Ap6mZ/QprohhA+2UiEl2qqqhxK+Fe44ErPMsac+DQ7ozgqikMNQG75NcQ==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ZaumjUsR;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793796648;
-	bh=qrAR8lJ4imukpXjrW4CphDMWtiygvgmxq3C6YxdCJwQ=;
+	d=lists.u-boot-project.org; s=default; t=1793796654;
+	bh=/Q64LJxhd6d8Nqm+xp5UxY8S6DMN+N75zY8poqEbpOg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nJAJyEq/8E7cn5/bhAqQpxbISyzlpbQ6MPdsbB29DVxW2SC/+Rm1tl3jbkcYrZwIz
-	 7SFH1ye9bgPELE+MZEmF4CIatSuonYxixvDSKbCIteWuZbD3zqo9nl10dvtgP6RIHQ
-	 hp0C6LfQez4kKB3eEDOF9L4u3DGLBvfCHKMPHsuvNLaiYt9JLu2FczizL0nQm/pwjL
-	 VQPqQxZRJQ50o70dTk0kikLwhIvnUGMHKcJaAwsAbTIhAYoE1jXd5tJFshSSq+hdOM
-	 dmmfJQIR65q8BTvy98H1/oUfiK40VK78oYYsjoFgddlMfNd8gNETosgHwj660s9Jj9
-	 seo6FFnEckBxQ==
+	b=RMtizx2usDfJshXFuaSQy/YV5G/yhfjoN9GixYWuZxIeMYQx7ljmsc2d7BdXjtI2D
+	 4X9f88yAf+mC7AZdgRyIn1UFZ1MWzTE7iwboWtBTBRI4JdR+4sALNNy2YsBpMr2IIT
+	 fggW/c+2oPawrjOMNLpsUdG0a1isKLYH4vGuJiloec8JF/wJDixwhY77M+mICzdXvi
+	 qpXT0qMDz+EQ4s7jSLFQbu/Kfck6O/FhP6xdWgV+5zIeS1z5YAUhLr1xxo+qg9yYcz
+	 sPvIF8TIfem72D42Yt1jPrIgw8NroClhqCN64n4QX2xxn5M2zy68mmKDdZkU6oZaZy
+	 4wxN5LyOCC7Pw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AC9AE606A7;
-	Wed,  4 Nov 2026 12:50:48 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 63D24435
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 12:50:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 79DAB405F4;
+	Wed,  4 Nov 2026 12:50:54 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3B69634D
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 12:50:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 49AB381061
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 12:50:47 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2CD1E405F4
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 12:50:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zYa1ZRTd_6ok for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 12:50:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5E76E80D66
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::62a"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793796646;
- b=a9ZAWaiYstiVxXin0erQBU+uCt/Ii9VoV8UJJwSa5kOxrMh5KkYsYnh4w9/iZLWxBkv5
- ESTfaSoIHR9H5Km85dNh1yehizE0reFG55RhSMHcGZk+g4JoM0Q/Yj2/2OlKzxYKrLfTS
- lrAdfT+ko9+mvScx3FqKivkuHT20h9KiS4ZvNI5KHYb2PQfp+PuYsxMBasZjDqnPnefvN
- VnhS2ZXLL8khU0BDb2YoWNrtoiq8+K+1D3Tp7Kq3TBVK2cyiJ9DAENdIUEBnuoVLmc+yg
- A6wh67stso0AvtCkyFF4JEGb1GotWitDnabuOL9P9ohyLli/nfzufcWb2oYB8PTPVWQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 68OHaYHd4_2s for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 12:50:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 28098405C9
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::631"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793796652;
+ b=dqXzQXDb+OlzQMEWzAUBwGqPjVLtQQxaxc0Fr9qDeVAAG/RwaVKIkL0WuAXcXuWmIVo7
+ e9DWoxNcemtDnqMyvtvOOpvPciEnveRdPVnS7cl8hsrHvCSzlZy247BJE6PANrkRIh58O
+ AtWPdVGSW7xrQ4EK+Xf1ZVYSsGhyc5Og0ozdzM5v3/yWH8vrYIA+SUhP+siKpap99Aha+
+ cyMkeOqXr+FMFaD48qFtrnTLs4oNMtAwYCXy9c7gGYE6GDJli4dDBjziCLsll/WItUnqc
+ EK1hCHzZ9th5Vary3OXPVwtgVO0ouVUred+kUFCfBORUE7+pzDZrsbG/ZpxT67JZB6A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793796646;
+ c=relaxed/relaxed; t=1793796652;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:In-Reply-To:References;
- bh=qrAR8lJ4imukpXjrW4CphDMWtiygvgmxq3C6YxdCJwQ=;
- b=XHmSGWR80/EFjd3urkQzVFOjeXwgo5tQsYNOgRL+VMvlHVpXC0xjKzNFaadesXTssmhw
- fylWvC0NW/j39x1eh7+/c4BGAVW3v/7sxKg4Uqj25xo01OBR3rm6KlfsGUTvoVZ+6d/fC
- Out5NGMFGpd+pZpalAQ4o/jQkrIk0rOeGoLxQoq+4EJ/SQ3hDzVUkxP5pmZnE5PLImOrB
- dYJ6YAmhHiR6MO4g1/5PGopERjwsE/F4CZmIR8pm5NeANIBecOC6l+FStYppEYtroj5AG
- YoqknIc91VVH8ge1OKHWx1hJ9nZEORhPlr6F6qThNGnppwX/WwnZzHEf00Y/5pGISuw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ bh=/Q64LJxhd6d8Nqm+xp5UxY8S6DMN+N75zY8poqEbpOg=;
+ b=J+TRNRT0MdfgqZa4RdoIPt5ZWNarctfGDFr/7DKUTGSGMHA0kjGjQ4DzJ6Pui2AVcVaE
+ 4vg6pNPxODInDQh40q8N9itRYJ9qZC61ZPdnfemEEKt5aABB05ozA6+9DAM6E9kZ9tX/b
+ 8Pp+kNiKrxWtM3iq4KY/dOCAbHS86jMuw/uFWRar5li+OqD2RsWrbsnIfq7mNFCdBKECG
+ YuzGSwaDxv+s2EG6Be7m8g/oFAgrxZ1kbExFZcQcPYN1tP8vV6mMFQ7A8Ch/4DVYe9ROP
+ foJqZRTHZlsQEt9Zl5yAa2AStM7bQZUSGV1BObGRMZRjWaiA0wjL4qdvjVkLYn8w2PA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=uABcBmU7; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::62a"
+ header.s=20260707 header.b=ZaumjUsR; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::631"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62a; helo=mail-ej1-x62a.google.com;
+ client-ip=2a00:1450:4864:20::631; helo=mail-ej1-x631.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=uABcBmU7
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 5E76E80D66
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 12:50:45 +0000 (UTC)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-c450ab1483cso101596266b.3
- for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 04:50:45 -0800 (PST)
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=ZaumjUsR
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 28098405C9
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 12:50:51 +0000 (UTC)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-c40e30c26a4so343923066b.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 04:50:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793796644; x=1794401444;
+ d=gmail.com; s=20260707; t=1793796650; x=1794401450;
  darn=lists.u-boot-project.org; 
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=qrAR8lJ4imukpXjrW4CphDMWtiygvgmxq3C6YxdCJwQ=;
- b=uABcBmU7BsYXidwC1aB64Wy/EHpPUw2IYwbM2l7aTAbQcrQEpMFPpderjceErlSIok
- Z2YDAX2QNy3hOhxXo7yXJgFo20Uy0pWTZCH+m7o1tpT/CwhgpO0XHZ+KeOwVCyXi7Bwr
- EfQW3MWHeJ0dRMtQmFNMpwsScfqtE5KFVUGQhs0VL7rG8mfQt0PFgSnvpta1UxC3CYlu
- wWDHB41Jhl6u55A/Qobu6VKOppRhtC+N9K+zS4sNT+CotcLexy/4rOCk2CNDtM7iMneo
- lgyCkI1ACRnLF8qYNqkKeeJpDYNSnrQRwLOROX8MnFuYQ53EtuV2y24M9USnrhF3sjTL
- SdSw==
+ bh=/Q64LJxhd6d8Nqm+xp5UxY8S6DMN+N75zY8poqEbpOg=;
+ b=ZaumjUsR6G0QTeX9wALPyuzKoOGtrrlPsYPgopd07n+yZrzQSUcVUES1/gwvy3G3RE
+ KYThdkRXPxARt4ZiuTKi7Urre+TUBHlexuZGI76WUrxccM/esw/dmzMld8NVU9gf0FPz
+ LFQLtCVuVLD6yQthvsiEQ9wHDW9NCK5xHETfa19O7UQ7DGObtPBvA75Z+Mq/WB4PiYno
+ Oe15v8IUDTN/pohWVmhufAQ5w8eWBZDje0MhzZTwxJDJ/hKsO8FdTnfz0SbTtLyBp0tI
+ uBUWINxkKP0PKa/JfcCB++oadGy4Msed/8GPyf3avu/sLsdNs3j7QC5GFGoEWBzCHzhX
+ S02Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793796644; x=1794401444;
+ d=1e100.net; s=20260707; t=1793796650; x=1794401450;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=qrAR8lJ4imukpXjrW4CphDMWtiygvgmxq3C6YxdCJwQ=;
- b=bp/bWkqyAoojhItsIixfoUhW2Am7KKZ8OROsrECi/2VEXEqOfuv/gfrAMQXKc8mQh0
- lknqfoEXoiZBE/9TcjTG87AFDyVj59JisdjopDR9+blIPt129lZCB/yTHvchFBUBaD2X
- 1spNEOpcXrn2akdUlwfQBppHHN6AlHKB0q5S8R3Y5Y9rKlUZulqLNArm13OaZR6Zup29
- HL/aJeQUNn88gtDGAUgqfBdF4LV3oJOejXyNZ2bCkYld2fTv4F1PdMJ/MRIHZBoaY52z
- 30U8NkhS7946wpXMXHI/0Z1VMwOZwctMIyGGgBlGg2swk/sG8op3ZBgGV+sw9Y5ucAe7
- L5dg==
-X-Gm-Message-State: APuU4Z8Y9RPW/+Ysh+nL9wC+zyVEpl7dzF+sEf4QNvRxZqIM7EsG6mcv
- ZNZjuoNr6JodQ/N8rq5ruc6nxNzmm1vx4myiPBrTot/QEqH5Eu/Tb1dn
-X-Gm-Gg: AYBFou0dnstqmTcyhoJohjJSR5ZVjNBdNrJvwDzOd6f7YVZAlIq0HAm+/E4n476OA8H
- d7oHmOwgo7v7nNoQEBoaS3kUts3hdAU7DvXhogK68KkAHT6aDu3rD8tZQcKzV+QbRPSZSplhGcL
- xCCKz/TR8zK43ZbrH0mf7sNUoWtZ/w1G7HXZiviDpav4feCdI+UoOL4aKCSxOpGGV/WUpoS6zbp
- sDNe2lJd+wj5mRoagXt5sELrwpJjnb9gffZVMqjU3VNBpFe3AVQBAB0d4A/RXEwH6t0U1TLfKLZ
- IOCwfGCDJhm5hUgD6rn9BMI7zdkcESB7McftGn60LTtORHpDCrpheSgFQHA5l3RugrvrSnrREC+
- XDyIr9BhfI3k7sR2cnFhI9ojHNerSqN/OadtuwT3Ef+gTeD7JeAMSWX3GyEWk5rS+w9lm+tN9YW
- IlOhws9kcnQ7VGqQWkblXi950+YqWkP3UlFuCUSCxRadeaG0jDyGcX/maCSr64Zv//9rQhj9jAf
- ZrMZJvXn4hY4bhIslmSC9/qbT3GmrENacmcckbfm/w/D3Bd4oav0WBUzPjOIzRf80j69RA0bAR5
- 4aSHxlSYeXocJHdPXbx4uaZaP6Udd/Q9
-X-Received: by 2002:a17:907:7254:b0:c46:2987:2156 with SMTP id
- a640c23a62f3a-c4ca7aac2b3mr1344824666b.29.1793796643435; 
- Wed, 04 Nov 2026 04:50:43 -0800 (PST)
+ bh=/Q64LJxhd6d8Nqm+xp5UxY8S6DMN+N75zY8poqEbpOg=;
+ b=vu1BwXN7pyyPQN2LFKZEbCVaLof0dzAEFONkT9o/qei0RetIaADLmmEo0FcWUiXr/u
+ W0f0cMX94k6AmeX90Tfv/pIxE+DL+T8bZN8dYp2kGz9Mo95e/XgwmYE99PxCC0rLnV1L
+ YiTozL1uR6hpBD+2/8VJjZDwAEjkoRUV1WRZmscnkgMm4HGTy4xSrAaXYZAbWMC2lv6k
+ Hi/Sap9j0rWb9ZgGTfKNT8/bV/9IYQ0A0COU1VYc7OKjUp+oBTqBpuavO8Ncvw5BJ0HB
+ zwig5LWh8Uxg63zhPgW2qh9EFcUP8aG8nnaWzlBusTW+ejk/WAM5GWrvD7iRtY+wrdqb
+ w/hw==
+X-Gm-Message-State: APuU4Z/6botKlcNqMe6B1AspFTamLfSgxD8dPxxeet0X9Gfbyltrf6f2
+ 1vjX2AKwsNUd3pZglijn/269bXXFdSoJycrA8iByAYlaTkcTvsov8sXr
+X-Gm-Gg: AYBFou2Vp9Vqb15DYts7jx0mPNHBF7HMTfXW99e7wh/dKLX3Ger6+98CPPU/owhrjMF
+ WImOheRLHGlFOLKWNCC+GlLUxJlbflyRj36399KYK9jBdLHsnZkL/499dpSUV6Uvvv/znc/K5Rw
+ pfbWQU8lKwUIYqiyg52O2+yajpR3hpHp9B/JOetAJ3dVCQPHSdnXpYSkotqeiOi/Z+fPdX/4hAU
+ /9OBFabhsXJ0kMsOqaRyfXgy/qs7Fs0LmsxNz9mo+4vcfmEcT5SYZvVLeY7JvuD3CJM+fud/mnN
+ hd1ef0xSiALe884lPSW4IKnPRbskBiA76pAguX95Z/SCabajWDf8FcsPE44p5E33C+Jd3XN/Ppk
+ dXc5c4lZXqEmPN0kGkfzpmGyFYyP6kMjQAHbX7KJZHg/l6IAAaHKiMcHxWdZUfO4S8n+uDmHkH8
+ Xeo0oBTpxKiKnNkSNev/3VkqK7aN3+mtqabbYlqopQaB2M1NLj33agAa/9WgJGzPt+fYe6FK+rb
+ CIU+2P14n2njRWwo/iwuKXLlRVcMa9bfn6n10rQkTAhOuNnZFuPAYFspyOJ2SPz4rRrCb+1c+YN
+ RX8SMcjU4aKmPEVHV337xe2DKsMOCsE=
+X-Received: by 2002:a17:907:2d8e:b0:c45:219c:7fec with SMTP id
+ a640c23a62f3a-c49d14bc1e1mr1733992566b.27.1793796649653; 
+ Wed, 04 Nov 2026 04:50:49 -0800 (PST)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c4d0e424f89sm66151466b.29.2026.11.04.04.50.42
+ a640c23a62f3a-c4d0e48b93dsm66566066b.64.2026.11.04.04.50.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Nov 2026 04:50:43 -0800 (PST)
+ Wed, 04 Nov 2026 04:50:49 -0800 (PST)
 From: Ana Bobillo <anabobillo3@gmail.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
@@ -158,10 +160,10 @@ Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Alexey Charkov <alchark@flipper.net>,
  Javier Martinez Canillas <javierm@redhat.com>
-Subject: [PATCH v4 03/14] usb: storage: Fix the capacity faked when READ
- CAPACITY fails
-Date: Wed, 04 Nov 2026 12:50:42 +0000
-Message-ID: <a6f346ff-1865-4c75-a86e-aa2be64ab185@gmail.com>
+Subject: [PATCH v4 04/14] usb: storage: Refuse a block size the block layer
+ cannot use
+Date: Wed, 04 Nov 2026 12:50:48 +0000
+Message-ID: <b1d94013-7054-4366-99c2-f2c5e2b8fa22@gmail.com>
 In-Reply-To: <1369653d-e0d4-4baf-adef-895a24190250@gmail.com>
 References: <1369653d-e0d4-4baf-adef-895a24190250@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -184,44 +186,158 @@ X-Archived-By: <archiver.kernel.org>
 
 From: Ana Bobillo <anabobillo3@gmail.com>
 
-When READ CAPACITY fails, usb_stor_get_info() makes up a reply of its own
-for a 1.44MB floppy, 2880 blocks of 512 bytes. But it sets the values in
-host byte order, while the reply is read back as big endian, so on a
-little-endian host the device gets 0x400b0001 blocks (about 1G) of 128KiB
-rather than 2880 of 512 bytes. It also puts 2880 where READ CAPACITY
-returns the last LBA, so even on a big-endian host the device gets 2881
-blocks.
+usb_stor_get_info() takes the block size from the READ CAPACITY reply of
+the device as it is. Once blk_post_probe() refuses a block size that
+blk_valid_blksz() rejects, at the end of this series, such a device would
+fail to probe there, and usb_stor_probe_device() would stop, skipping the
+other LUNs of the device.
 
-Set the reply in big endian like the one it stands in for, with 2879 as
-the last LBA, so that such a device has 2880 blocks of 512 bytes on any
-host.
+Check the block size where it is read, and treat a LUN reporting one
+that blk_valid_blksz() rejects as unusable, as for a LUN that is not
+ready, saying which LUN is skipped. This also covers the legacy (non-BLK)
+path, which calls part_init() itself.
 
-Fixes: 149dded2b178 ("* Add support for USB Mass Storage Devices (BBB)   (tested with USB memory sticks only)")
+Add a test where the sandbox flash stick reports an unsupported block
+size.
+
 Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 (no changes since v2)
 
 Changes in v2:
-- New patch, split out of v1 patch 2, with a Fixes: tag (Simon)
-- Give 2879 as the last LBA, so that the device has 2880 blocks (Simon)
+- Move the READ CAPACITY fallback fix to a patch of its own (Simon)
+- Name the LUN in the message (Simon)
+- Check for that message in the test, with UTF_CONSOLE (Simon)
 
- common/usb_storage.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ arch/sandbox/include/asm/test.h  | 10 +++++++
+ common/usb_storage.c             |  5 ++++
+ drivers/usb/emul/sandbox_flash.c |  8 +++++
+ test/dm/usb.c                    | 51 ++++++++++++++++++++++++++++++++
+ 4 files changed, 74 insertions(+)
 
+diff --git a/arch/sandbox/include/asm/test.h b/arch/sandbox/include/asm/test.h
+index 0438790028b..e5590d01a92 100644
+--- a/arch/sandbox/include/asm/test.h
++++ b/arch/sandbox/include/asm/test.h
+@@ -123,6 +123,16 @@ long sandbox_i2c_rtc_get_set_base_time(struct udevice *dev, long base_time);
+ 
+ int sandbox_usb_keyb_add_string(struct udevice *dev, const char *str);
+ 
++/**
++ * sandbox_flash_set_block_size() - Set the block size a flash stick reports
++ *
++ * @dev:	USB flash-stick emulator
++ * @block_size:	Block size in bytes
++ *
++ * The host reads it when it next probes the stick's mass-storage device.
++ */
++void sandbox_flash_set_block_size(struct udevice *dev, int block_size);
++
+ /**
+  * sandbox_osd_get_mem() - get the internal memory of a sandbox OSD
+  *
 diff --git a/common/usb_storage.c b/common/usb_storage.c
-index ac331f1c1b0..f7c96195b59 100644
+index f7c96195b59..6bada2b309b 100644
 --- a/common/usb_storage.c
 +++ b/common/usb_storage.c
-@@ -1496,8 +1496,9 @@ int usb_stor_get_info(struct usb_device *dev, struct us_data *ss,
- 	if (usb_read_capacity(pccb, ss) != 0) {
- 		printf("READ_CAP ERROR\n");
- 		ss->flags &= ~USB_READY;
--		cap[0] = 2880;
--		cap[1] = 0x200;
-+		/* a 1.44MB floppy, as READ CAPACITY gives it: last LBA, size */
-+		cap[0] = cpu_to_be32(2880 - 1);
-+		cap[1] = cpu_to_be32(0x200);
- 	}
- 	debug("Read Capacity returns: 0x%08x, 0x%08x\n", cap[0], cap[1]);
- #if 0
+@@ -1513,6 +1513,11 @@ int usb_stor_get_info(struct usb_device *dev, struct us_data *ss,
+ 	blksz = be32_to_cpu(cap[1]);
+ 
+ 	debug("Capacity = 0x%08x, blocksz = 0x%08x\n", capacity, blksz);
++	if (!blk_valid_blksz(blksz)) {
++		printf("LUN %d: unsupported block size %u, skipping\n",
++		       dev_desc->lun, blksz);
++		return 0;
++	}
+ 	dev_desc->lba = capacity;
+ 	dev_desc->blksz = blksz;
+ 	dev_desc->log2blksz = LOG2(dev_desc->blksz);
+diff --git a/drivers/usb/emul/sandbox_flash.c b/drivers/usb/emul/sandbox_flash.c
+index b5176bb30ce..02e0901050f 100644
+--- a/drivers/usb/emul/sandbox_flash.c
++++ b/drivers/usb/emul/sandbox_flash.c
+@@ -13,6 +13,7 @@
+ #include <scsi.h>
+ #include <scsi_emul.h>
+ #include <usb.h>
++#include <asm/test.h>
+ 
+ /*
+  * This driver emulates a flash stick using the UFI command specification and
+@@ -357,6 +358,13 @@ static int sandbox_flash_probe(struct udevice *dev)
+ 	return 0;
+ }
+ 
++void sandbox_flash_set_block_size(struct udevice *dev, int block_size)
++{
++	struct sandbox_flash_priv *priv = dev_get_priv(dev);
++
++	priv->eminfo.block_size = block_size;
++}
++
+ static int sandbox_flash_remove(struct udevice *dev)
+ {
+ 	struct sandbox_flash_priv *priv = dev_get_priv(dev);
+diff --git a/test/dm/usb.c b/test/dm/usb.c
+index fa894c1096e..79a85b11910 100644
+--- a/test/dm/usb.c
++++ b/test/dm/usb.c
+@@ -84,6 +84,57 @@ static int dm_test_usb_flash(struct unit_test_state *uts)
+ }
+ DM_TEST(dm_test_usb_flash, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+ 
++/* Test that a flash stick reporting an unsupported block size is refused */
++static int dm_test_usb_flash_blksz(struct unit_test_state *uts)
++{
++	static const struct {
++		int blksz;
++		bool ok;
++	} cases[] = {
++		{ 256, false },
++		{ 520, false },
++		{ 2 * BLK_MAX_BLKSZ, false },
++		{ SZ_4K, true },
++	};
++	struct udevice *dev, *emul, *blk;
++	struct blk_desc *desc;
++	int i, ret;
++
++	state_set_skip_delays(true);
++	ut_assertok(usb_init());
++	ut_assertok(uclass_get_device(UCLASS_MASS_STORAGE, 0, &dev));
++	ut_assertok(uclass_get_device_by_name(UCLASS_USB_EMUL, "flash-stick@0",
++					      &emul));
++
++	for (i = 0; i < ARRAY_SIZE(cases); i++) {
++		/* Probe the stick again, so that it reads the block size */
++		console_record_reset();
++		sandbox_flash_set_block_size(emul, cases[i].blksz);
++		ut_assertok(device_remove(dev, DM_REMOVE_NORMAL));
++		ut_assertok(device_chld_unbind(dev, NULL));
++		ut_assertok(device_probe(dev));
++
++		ret = device_find_first_child_by_uclass(dev, UCLASS_BLK, &blk);
++		if (!cases[i].ok) {
++			/* usb_stor_get_info() refuses the LUN */
++			ut_assert_nextline("LUN 0: unsupported block size %d, skipping",
++					   cases[i].blksz);
++			ut_assert_console_end();
++			ut_asserteq(-ENODEV, ret);
++			continue;
++		}
++		ut_assert_console_end();
++		ut_assertok(ret);
++		desc = dev_get_uclass_plat(blk);
++		ut_asserteq(cases[i].blksz, desc->blksz);
++	}
++
++	ut_assertok(usb_stop());
++
++	return 0;
++}
++DM_TEST(dm_test_usb_flash_blksz, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_CONSOLE);
++
+ /* test that we can handle multiple storage devices */
+ static int dm_test_usb_multi(struct unit_test_state *uts)
+ {
