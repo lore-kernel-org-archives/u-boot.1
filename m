@@ -1,140 +1,189 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2451606A326
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 09:43:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6AA08606A32D
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 09:48:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=nWXFzxhR;
-	dkim=pass (2048-bit key, unprotected) header.d=emlix.com header.i=@emlix.com header.a=rsa-sha256 header.s=20250930 header.b=c5arrWg0
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=uAqP14lz;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=E5XglomK
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7DFA560831;
-	Wed,  4 Nov 2026 09:43:38 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3631C80C55;
+	Wed,  4 Nov 2026 09:48:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6HoYwlFlEI0l; Wed,  4 Nov 2026 09:43:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B363A606F2
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793785417;
-	b=Pr3F+0RPsvh9UFnuBs05LvtAGhqcMmUZSWPsXgZqPid26zpfHVJzX7IrVJdSPoaVlnp3
-	 Wd+LxM5rTLQHBhtHhlKCmpvfGDziYAQLqJ1d1OXPb+U39g5ZcvcFuaFL7ue+lisaWB2+B
-	 OUhLpm4oZtRsmedE4PprWpVHiVgAr2rP/vL3bUb/1NZyInYSEThwJgWp2oksoaZCxG0/i
-	 1zDKo0/z539c4QIR9ZM0fSVPgpOo20tcfvNdSacAcpJv/otYn6g1dzv4O0A3/7zH9Sfm4
-	 ViyEiVeIuerIE/d/UV6jZAnLYRD8vF1p/r2Iw1h4Lj++ODDB9IjGqNrwhBrcuJDaMXw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WFWP92Y0JY0K; Wed,  4 Nov 2026 09:48:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 33F1D80C3B
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793785719;
+	b=gQTGlv/pWqw3q3Zg+Ue6iwJcNI4uPtKHHo7JOeINXAfgQ2Tj2OFqI4OhcO54hz419Z61
+	 O1b8NRX+qg7QG2MkYyRwZw23xNp7eyOQI149IsSGBDBq5y0PODMRETbrZ8PCiYrnCyNGq
+	 i6PmPwJH5ar5z4o9nOzRlVTqLgeoEne+yy5BadpHgbJdzXBV66ktueC3JKjVcqwPI7yRp
+	 5xBprCysVk+5Mb4ghiBUKYiww5P19H3OqTZ28VXSWMdAlq8C+WFPAa6fhnOfZkYP++bss
+	 EsycjdxQePo6Qmc0+pXv5s/YuEa6Pr8335q9Meg8SfiIIbry16RWFKRfiLGmUVJbjhA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793785417;
+	c=relaxed/relaxed; t=1793785719;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-Virus-Scanned:X-Virus-Status:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=iL2p74MrSwDKciZ33jwXiA22TBZ+9n8t6qHYQVVFo6I=;
-	b=GaQMpK2bCvdBeeG+PSsy0XjrYIzOF9MI4w9ijbrp8J+a3IZrb8u1uNlN/WIE6HAI8kfg
-	 PkuHrLdM7YwaJeJjDo1OsLl2c591L0Q4OKeL40+XFQ4h+DLMteobJNhR6PaX4RtVXeX2D
-	 9zdRiHt3dA84Hg1db8rOsboTExkwQ42eBMWE9hC3hArfsIvW2prBhZ8AJZGDrch9V/D4p
-	 iC9xJusketC7g9ventcmYycD2Xuerhq5GfK9TQh+/PCmgkbbcdzlyMYRYPz/7jEzwjf60
-	 D6XmR3OwsO+yuPNCkU/XV366b3/evCdFStcKFrbz6VEr7jZRYlV3irHnzkRBch3xWsA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	dmarc=pass header.from=emlix.com;
-	dkim=pass header.d=emlix.com header.i=@emlix.com header.a=rsa-sha256 header.s=20250930 header.b=c5arrWg0;
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=LS88UF96aS/1GKJNmSJNPtrzPpqiD3bq+Is3yX/VPU8=;
+	b=aJbX4Sgvye72cgs4PBO8tsdripp7XRXzkwuMONAbtGyEWq7xPPcnJrqcN0CdN+yM+abW
+	 5E0ad9AcQXsmYSVegAGNEskUQbpSEFIYDVI0TPq1pkPbKh90nH3TmcAHguL/cqoNOC+C3
+	 7gTP/mC93kMn7NhjVu4dC+1I3jCZyNwRaXb/lAWwZn2ZS9PA5nSOiownraIXgiG2YuNqZ
+	 qiKMm2TEJAUAvnWFAHDPbZmtnAMZdRQAJlvn1vehxovViXeXqcx0qheCRLScVQ9CDHt5m
+	 VbrExmETPMLMYHM32FM4eI7DvLCaHzdMJsZMkXZz4CkNEzNGOHzRhVtyGC4YHw9rnvA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793785417;
-	bh=iL2p74MrSwDKciZ33jwXiA22TBZ+9n8t6qHYQVVFo6I=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=nWXFzxhRD8nt4gmO5B0fYNURJ9wSOF1HL1NNrmzEwtqybwgfOj7cEnbcrFsmYwXAA
-	 8CropvBjEbINBeGhpvk6ml+3KngKaspW4KbOGrEoZMUy+bEMhzD98A8x/sC2qCdAoE
-	 ie69FyI4hSbOruPjYQhB3me85cOhUF0ViFKH3nRRPVzsRfTUfIZ8/o/Qk/opL5eXhG
-	 pCWQDk+1q9o1HK5vKADnpoMM2IG9KO+u33mKyPODy6wLu5wAEb6SLdbArAGePFxLTj
-	 v4NxBSmqzKeKWYxG1BeDsw0zfn5zfio6IkI507qRJv53ovJigqNrh7z5YCvEkPIW3A
-	 fCru+xcB8Rxcg==
+	d=lists.u-boot-project.org; s=default; t=1793785719;
+	bh=LS88UF96aS/1GKJNmSJNPtrzPpqiD3bq+Is3yX/VPU8=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=uAqP14lzYp4JROAJj8EpMcalofr/4YzSDsIciAIumNH/W9dWJVHslww9+FR52okw0
+	 hhXBt7cbBPBmRWgVXjpZ4MtdpoFJQ0Dbi1Lq4xaXkgnoDGue08dSlExwKlBF2TJBB+
+	 q2PGhQvvgbyNwGnJF8vM4fLs+8xzp34//d8QVbPdd8bNoWr2vUEBonXo3w6jwSL/uZ
+	 6V87riFI87CTulTQ772z8ITlSX0MPKV8e8U4nUI2qsqhsedMgJob4L87A7yoadLw0u
+	 zI/6vwXn9rQnXTGRCdDIWZQfPTktzZr/WbGNHuX1CfFVYvcZ1nh7PzxMlrEHAzPKzq
+	 DJyEa8UcPsDmw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B363A606F2;
-	Wed,  4 Nov 2026 09:43:37 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 683E02B6
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 09:43:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 33F1D80C3B;
+	Wed,  4 Nov 2026 09:48:39 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2D9DA9C4
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 09:48:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 5948E606F2
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 09:43:36 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1E77E60768
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 09:48:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OdegrDzgJItb for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 09:43:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 97F21606EC
+ id boBAn_hTKNOp for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 09:48:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 28AA3606FA
 Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=178.63.209.131
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793785415;
- b=Xm3SLhMxFcsmQMZ03+d/QP5QZAXgVwmo+hz0LXWtRkph33lXnAESOnz+SMozcr/DsxHa
- EXUF2d6oqyJaCmz+S03hai6JBVh1FDA7uxPL/Ofxaq6G5JM7ig2V6CRkVWZd8VUaBAB8+
- IKlrK4ttIixlk5Tswpm9HKTqMlA+rfvI3Dv2ZA+KvyzpNU3VsWx7czlurPiCpQtV9qUX/
- eIS4wN7ZnK9GayvAA4YVDYQWe90N0uPdkhRlBACiUiKJlbCWTzvp/xj+jJmdFRoOEXupU
- gdYY9VoAlzkR1IhANtU7FA11q2UAltH4T+2wsTZsf2sXlHNVHis5l94BLX7Kh9Qkxbw==
+ arc=none smtp.remote-ip="2a00:1450:4864:20::429"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793785717;
+ b=GKSRn8CbMt9Vj0V5VTCtTA8ed1QIQMY10/yk5xfzZZ4bIgA1XYGAJbKZywcuv7P9MVxt
+ hj125tPTOzwIzSGRe4O9AGHq5drm9pti87LwoWdctZmiZkenV0LnGyHynUEcgc0Vmcek7
+ bw8Hox57FbcbqUqQ/0cv4u6ih789cN6tU2O6aQ7aLmu7U8vWK4DXXNmOnQYVvfWUi696N
+ tS6OAsUBr93IMzrp+nVg35iXzfTvs6WnyR93N3AnBGVEpPOgcnve99I2flxXVD4Kbuuth
+ qSJnaoHOxcTVpcam6gqxxttbTxWLKwvGG7iDn2jHcZ78zsAKFwWiiSbEuYnYUQE632w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793785415;
- h=Received-SPF:DKIM-Signature:Received:From:To:Cc:Subject:Date:
- Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
- Content-Transfer-Encoding:X-Virus-Scanned:X-Virus-Status;
- bh=iL2p74MrSwDKciZ33jwXiA22TBZ+9n8t6qHYQVVFo6I=;
- b=pVQzjq4iXutFM7pLgFL5c44RoL/wFcQ+T3uSAxH60Wn5oAtnlDm+3cTgtslB12rh8gAa
- Wcru64VtP8tLTVhuZrw/OSLyfjotC2QBeYTO+rkVUsmQHMZJGZ6tIvgtS51X8kco+FPJx
- q1rwtKm7PuO5dh6ELopAN0ENA5m7Q/mboTKA4kowCf1aFy7H5smNJSgsUOdHUft7hBxaf
- XAptYSa7Td1n/FU5otIb5LSBVVGmeH24mq7f4i50N5Pzr42ETQQvviIkBgcNvgz5FKcRe
- xwPSXAPKFy/PkG3SruE16713APQ7VH9GAaTgsmHafX3fQWzyaKXwDZJuiUrOUKijk4A==
+ c=relaxed/relaxed; t=1793785717;
+ h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
+ Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+ X-Developer-Key;
+ bh=LS88UF96aS/1GKJNmSJNPtrzPpqiD3bq+Is3yX/VPU8=;
+ b=E/IHT2Oj35npJ0XTFgVXyaQovZiGX4UkDHoeEGQIlh9aM19Djgm2AMN0ue1iE8A8VsDN
+ fWT7TFsV5GAdrtprgDhveXd/oxiWkHAd10mBSQyObfWlFX6M/pxyFF6iTAUTHb5YwGxfd
+ JhVmiXkb7lkioBmnZdHM7Cj2WX0l4w4zQVOt3PGDgrcp0E+bWb6FNo8sRZWdMMAaEgjfc
+ TGKwdnGqUfSlq6PzHRhkhGjGVPlm7KjHYazuM/MIh1MPDfgU/LrVn6MMXjZl0hdi+zDjZ
+ egkhU0Y9b6XdKcvNMiQPAb+aub4EFKjhwFZuA7ijAqVfLQbaP47fBySl3oVdsTlblYQ==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=emlix.com;
- dkim=pass header.d=emlix.com header.i=@emlix.com header.a=rsa-sha256
- header.s=20250930 header.b=c5arrWg0; 
- arc=none smtp.remote-ip=178.63.209.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=178.63.209.131;
- helo=mx1.emlix.com; envelope-from=tkirchner@emlix.com; receiver=<UNKNOWN> 
+ dmarc=none header.from=baylibre.com;
+ dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=E5XglomK; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::429"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::429; helo=mail-wr1-x429.google.com;
+ envelope-from=msp@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=emlix.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=emlix.com header.i=@emlix.com
- header.a=rsa-sha256 header.s=20250930 header.b=c5arrWg0
-Received: from mx1.emlix.com (mx1.emlix.com [178.63.209.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 97F21606EC
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 09:43:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=emlix.com;
- s=20250930; t=1793785379;
- bh=iL2p74MrSwDKciZ33jwXiA22TBZ+9n8t6qHYQVVFo6I=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=c5arrWg0ESCcBJHHdo+KHsJM19PyBKGEPaGk4IhTmns0lSFJbeg+eh/u2HZNffHFA
- uOSEBl6jpzR/vrNO/oUflbXmSgoHVC+saZHodOhGZPHAywC1BRDt+Xqw+cd0jhY8qa
- zzSeFYZK0EVwRz22Rrj62pZUMQSIE1lfX2em/0MOmroeCrSFS3SQ1ea1KMoRBHZjc1
- PlMk8TBgQZMS8hjwf2BOEF/KYZQaZGw0km//UdhUwMwzxOGRtbm5q5Vh53ecBd7J9Y
- AoxF9KfyK9Sr8XGVxqjQBAO+mYl4Gnw0tJyD855XCHwKCdt64dVe3BxdOg2fhzNHam
- kipS1QC1Fo1TA==
-Received: from mailer.emlix.com (p5098be52.dip0.t-ipconnect.de [80.152.190.82])
- (using TLSv1.2 with cipher ADH-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.emlix.com (Postfix) with ESMTPS id 85FDE5F8CF;
- Wed, 04 Nov 2026 10:42:59 +0100 (CET)
-From: Tycho Kirchner <tkirchner@emlix.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Raymond Mao <raymondmaoca@gmail.com>,
- Eddie James <eajames@linux.ibm.com>, Tycho Kirchner <tkirchner@emlix.com>
-Subject: [PATCH v2 5/5] tpm: deactivate unsupported banks in tpm2_startup()
-Date: Wed,  4 Nov 2026 10:42:38 +0100
-Message-ID: <20261104094238.519111-6-tkirchner@emlix.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261104094238.519111-1-tkirchner@emlix.com>
-References: <20261104094238.519111-1-tkirchner@emlix.com>
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=E5XglomK
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 28AA3606FA
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 09:48:34 +0000 (UTC)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-48dfdd0678dso381582f8f.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 01:48:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre.com; s=google; t=1793785713; x=1794390513;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=LS88UF96aS/1GKJNmSJNPtrzPpqiD3bq+Is3yX/VPU8=;
+ b=E5XglomKblOdtSZvh+kZEAS+hn6/1nip1sQbcAcqNwKn1RsDJ/4Npqc19M4wCUkiSk
+ dhenJPT/UHOJnxj2W8d48oL1EsCsmkx2d3pqaUuQW8OwmjgHGm8Ko2jpsmA3LfWzRYwJ
+ qLnyURTogKIzSGbntHzO7L6VVqXzRba89w8GdOa5rWh+9mi+hBUgqbPnaH7kDWTjTJzt
+ NIhgCTurll2+tC645ZyGRrlIHhe+5e3fgyTgwb+QYetRzQcqVqHFerXkp57CaxDp+bcO
+ Cz5h/y/hWvEQpEp/vE/uUMVySr8poHqtW7mG5rO6+1oJILA6pmEIlw/eoKCiSGFDGt04
+ CKKQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793785713; x=1794390513;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=LS88UF96aS/1GKJNmSJNPtrzPpqiD3bq+Is3yX/VPU8=;
+ b=qtZzFSVB6ksmoSxeXxJn1z6dpkbkTgoHNc5LeGueWioBE+dpW2CEuUsdqWpussmDwu
+ spZ2sL+ow636G9s8T5TvQ3q4DCOPY4WvWJa/hnqiCrLQ5bjeFlLuyYGWRoCO7DekayC/
+ +Ko7gGnRl3dMqdac5SNUSxIPQuZCdEnfJH6tPOUaOG6YUSGRl1aOzSu5ccnkorKhWohm
+ 2GnL01MMOVeuZz0d5MIVfPzwJu+8fuv5Z+0tk/sYlOF/K6uUtNh+tJN9CdlbJxm70aiD
+ xfQK9FNKKG3AFJzzIvcc+ObJc7JWsqeDTgI+t/kPZgp25LFnBvzZClsxl7o/ezPGdYjB
+ Tncg==
+X-Gm-Message-State: APuU4Z+gTuEP2vGUnXNEKFKpJ5UjvObmf5hhUC8GtjFSYqOMQrCWBLDt
+ sBZH7S5IPtipAayGFoK/f34EVU+Yl4O4ue2qDpSmk3ag5y9a+VHvq7zYgfIuuR+VKKw=
+X-Gm-Gg: AYBFou15iugTjibjW3Gf66aaHiLBodPrDCytVb8hbcrqfo1SPBZovv/GN7fhDQ0x40x
+ Q29K7nKeGoZkvmSoYOGWUkKSi77E5dPsL+5n8raMXIy0Bac7La3Xz6rXK6CZLEjLXbRgHTrxDIX
+ 7nLa+pQA1nd5MC0f2KU56eQYEzrNX/55P6P2L9oPE5a9KDh03jKfKehipgiUo+C5Dag/EVkuzv5
+ 19G2hkEEhBoSe4ummsFzpEmOUBD77NMkxwi2o2hi5zsLO9TjSzOjJ1MVj9EZy6qVOvLGxNJfemR
+ X+5sRSQp3FckkSD88sI56uEhWJTnc4Z6eR7ug853FVOOoHRC4Ap5ORV0+bzF0dylAvEEUtBvq5b
+ jx+O3GVXpKrRCRuZlm12ljzf1gd3Bc006OYrWRSdhgjn6KQTAnP58qOI1TDYDhkmOYJO3D4gCn/
+ K8OTvfdiOVOnxZmoFGuQtKAYyWGS80lTg9OZLE6WFZjcgJBXTM6KaVq4RSy/8m/QvAL/pd6UCjh
+ THzd7+8b6k8RAUqFEuvJY+j60z2o6yBZ8TWIZ7EcRRUyu7HWmHQ3IDOymSGgl4CgKA1liZj/Tbv
+ h1VD5qA9Ck6VYDiJvD0tPu1JICo8XeEXABFNRKY9MQp1v6O6
+X-Received: by 2002:a5d:5d06:0:b0:48d:ff71:dd87 with SMTP id
+ ffacd0b85a97d-48e6e303f29mr34909405f8f.17.1793785712887; 
+ Wed, 04 Nov 2026 01:48:32 -0800 (PST)
+Received: from localhost ([2001:4090:a244:81d0:2c16:1c4d:8a04:e0bf])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48fece99d67sm2909809f8f.24.2026.11.04.01.48.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Nov 2026 01:48:32 -0800 (PST)
+From: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
+Subject: [PATCH v2 0/7] arm: dts: am43xx: Switch to OF_UPSTREAM
+Date: Wed, 04 Nov 2026 10:47:47 +0100
+Message-Id: <20261104-v2026-10-next-topic-am45-ofupstream-am4-of-upstream-v2-0-6091edbb51fa@baylibre.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Virus-Scanned: clamav-milter 1.4.3 at mx1.emlix.com
-X-Virus-Status: Clean
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAEP/6moC/52OQQ6CMBBFr2K6dkyLIOjKexgW7TBqjVBsSwMh3
+ N1Wje7dzZv8/P9m5shqcuywmpmloJ02XYRsvWJ4ld2FQDeRWcazHa+yEkK6QHDoaPTgTa8RZJs
+ XYM5D77wl2SaOCF8uFRZClTlKJBabe0tnPb5WT/Wb3aBuhD5NfRKWHkPU8b/YVTtv7PRyDSJ93
+ 1p7vv1LKwjgkJckcLdtRFXhUcnprpWlDZqW1cuyPAHbRw3hIAEAAA==
+X-Change-ID: 20260827-v2026-10-next-topic-am45-ofupstream-am4-of-upstream-7bc51b74cace
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Marek Vasut <marek.vasut+usb@mailbox.org>, "Andrew F. Davis" <afd@ti.com>, 
+ Nikita Kiryanov <nikita@compulab.co.il>, Peng Fan <peng.fan@nxp.com>, 
+ David Lechner <dlechner@baylibre.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Julien Panis <jpanis@baylibre.com>, "Mendez, Judith" <jm@ti.com>, 
+ "Francis, Sebin" <sebin.francis@ti.com>, 
+ "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3354; i=msp@baylibre.com;
+ h=from:subject:message-id; bh=FoObyVODtbwwhAsVaSRWtDg1vb25DqQB84zZOp7t+c8=;
+ b=owGbwMvMwCXWejAsc4KoVzDjabUkhqxX/13XHmRx/7P12dwbF9fsNE/etuq+oeqEzDsKIb/Ws
+ EhfvFJn1VHKwiDGxSArpsjSmRia9l9+57HkRcs2w8xhZQIZwsDFKQAT+T6R4b9zgIlhsPvsVVez
+ Pi+zsomYqPau3zs/IzA2qF28XvIspzrDP9MNa4oMC63Xf7ilHjVb11PFQOi10lPFUOHPgZUxCT/
+ nMAAA
+X-Developer-Key: i=msp@baylibre.com; a=openpgp;
+ fpr=BADD88DB889FDC3E8A3D5FE612FA6A01E0A45B41
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -146,67 +195,85 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-With CONFIG_TPM_PCR_ALLOCATE, active banks with unsupported algorithms
-are only deactivated by tcg2_log_prepare_buffer() or, as a fallback,
-when a PCR is extended. Users of the TPM which do not go through
-tcg2_measurement_init() or the EFI TCG2 protocol therefore only notice
-the unsupported banks when measuring, e.g.
+Hi,
 
-  tcg2_create_digest: unsupported algorithm 28
-  Cannot extend PCRs if all the TPM enabled algorithms are not supported
+this series does the final changes to switch on OF_UPSTREAM on am43xx.
+Mainly it adds some -u-boot.dtsi files to define tick-timer and other
+necessary pieces. It changes the defconfigs and removes the old
+devicetrees.
 
-Deactivate them in tpm2_startup() already, before anything gets
-measured, but only if the TPM was actually started there, i.e.
-TPM2_Startup(TPM2_SU_CLEAR) succeeded. This also covers
-tpm2_auto_start(), which calls tpm2_startup() if the TPM was not
-started yet.
+This series does not have any dependencies that are not merged.
 
-If TPM2_Startup returns TPM2_RC_INITIALIZE, an earlier boot stage (e.g.
-SPL or TF-A) has already started the TPM and is expected to take care
-of the banks. With an event log, tcg2_log_prepare_buffer() still aligns
-them afterwards. The fallback in tpm2_pcr_extend() remains for the case
-that the earlier stage supports more algorithms than U-Boot.
-TPM2_SU_STATE, used by tpm_resume(), is left alone.
+It was tested on am437x industrial EVM with mmc. Help testing is
+appreciated.
 
-If the deactivation fails, e.g. because the TPM refuses the allocation
-or no supported bank would remain active, return an error. With
-CONFIG_TPM_PCR_ALLOCATE enabled, U-Boot is expected to manage the banks,
-so fail early instead of at the first PCR extend.
+Best,
+Markus
 
-Signed-off-by: Tycho Kirchner <tkirchner@emlix.com>
+Signed-off-by: Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 ---
- lib/tpm-v2.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+Changes in v2:
+- Rebased, all dependencies were merged
+- Add patch to remove the generic devicetree because of a missing
+  upstream one. This broke the build in v1 as I had a temporary
+  workaround still in place uncommitted.
+- Add patch enabling PHANDLE_CHECK_SEQ
+- Add patch to use usb aliases
+- Add bootph-some-ram to device nodes to be able to read EEPROM early
+- Link to v1: https://patch.msgid.link/20260903-v2026-10-next-topic-am45-ofupstream-am4-of-upstream-v1-0-47e1c63d188c@baylibre.com
 
-diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-index 18ec9eb960d..6370b97a7d4 100644
---- a/lib/tpm-v2.c
-+++ b/lib/tpm-v2.c
-@@ -201,6 +201,19 @@ u32 tpm2_startup(struct udevice *dev, bool bon, enum tpm2_startup_types mode)
- 	if ((ret && ret != TPM2_RC_INITIALIZE) || !bon)
- 		return ret;
- 
-+	/*
-+	 * Only the boot stage which actually starts the TPM deactivates active
-+	 * banks with unsupported algorithms. On success, this resets the board.
-+	 */
-+	if (IS_ENABLED(CONFIG_TPM_PCR_ALLOCATE) && !ret &&
-+	    mode == TPM2_SU_CLEAR) {
-+		ret = tpm2_activate_banks(dev, 0);
-+		if (ret) {
-+			log_err("TPM: failed to deactivate unsupported banks\n");
-+			return ret;
-+		}
-+	}
-+
- 	return tpm2_update_active_banks(dev);
- }
- 
--- 
-2.47.3
+To: u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: "Andrew F. Davis" <afd@ti.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: "Markus Schneider-Pargmann (TI)" <msp@baylibre.com>
+Cc: Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: Nikita Kiryanov <nikita@compulab.co.il>
+
+---
+Markus Schneider-Pargmann (TI) (7):
+      board: ti: am43xx: Remove am4372-generic devicetree
+      arm: dts: am43xx: Add missing board u-boot.dtsi files
+      arm: dts: am4372-u-boot.dtsi: Add tick-timer
+      configs: am43xx: Enable PHANDLE_CHECK_SEQ
+      board: ti: am43xx: Use aliases for USB controllers
+      configs: am43xx: Switch to upstream devicetree
+      arm: dts: am43xx: Remove local devicetrees for migrated boards
+
+ arch/arm/dts/Makefile                     |    5 -
+ arch/arm/dts/am4372-generic-u-boot.dtsi   |   16 -
+ arch/arm/dts/am4372-generic.dts           |   23 -
+ arch/arm/dts/am4372-u-boot.dtsi           |   76 ++-
+ arch/arm/dts/am4372.dtsi                  | 1006 -----------------------------
+ arch/arm/dts/am437x-cm-t43-u-boot.dtsi    |   21 +
+ arch/arm/dts/am437x-cm-t43.dts            |  420 ------------
+ arch/arm/dts/am437x-gp-evm-u-boot.dtsi    |    8 +-
+ arch/arm/dts/am437x-gp-evm.dts            |  798 -----------------------
+ arch/arm/dts/am437x-idk-evm.dts           |  420 ------------
+ arch/arm/dts/am437x-sk-evm.dts            |  710 --------------------
+ arch/arm/dts/am43x-epos-evm-u-boot.dtsi   |   21 +
+ arch/arm/dts/am43x-epos-evm.dts           |  803 -----------------------
+ arch/arm/dts/am43xx-clocks.dtsi           |  754 ---------------------
+ board/ti/am43xx/board.c                   |   10 +-
+ configs/am43xx_evm_defconfig              |   23 +-
+ configs/am43xx_evm_qspiboot_defconfig     |   15 +-
+ configs/am43xx_evm_rtconly_defconfig      |   23 +-
+ configs/am43xx_evm_usbhost_boot_defconfig |   23 +-
+ configs/am43xx_hs_evm_defconfig           |   23 +-
+ configs/am43xx_hs_evm_qspi_defconfig      |   15 +-
+ configs/cm_t43_defconfig                  |   17 +-
+ 22 files changed, 234 insertions(+), 4996 deletions(-)
+---
+base-commit: 903c9578eeb36d72f087082da494c605ddaed3b2
+change-id: 20260827-v2026-10-next-topic-am45-ofupstream-am4-of-upstream-7bc51b74cace
+
+Best regards,
+--  
+Markus Schneider-Pargmann (TI) <msp@baylibre.com>
 
