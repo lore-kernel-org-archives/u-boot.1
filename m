@@ -1,187 +1,150 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01E17606A31B
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 08:54:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70971606A31B
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 09:13:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=mB6TgFhH;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=AcIEXVGf
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=0cT3LzV5;
+	dkim=pass (2048-bit key, unprotected) header.d=steffen.cc header.i=@steffen.cc header.a=rsa-sha256 header.s=MBO0001 header.b=mg+bnyYs
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D5BC98113B;
-	Wed,  4 Nov 2026 08:54:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1280F60768;
+	Wed,  4 Nov 2026 09:13:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Kq6IN2U9Oecl; Wed,  4 Nov 2026 08:54:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1F32C81127
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793782477;
-	b=bnTANXFUT6CC1u8jHmtqidNEiAGxCkgiD6+cC7yGRxOLskCWhzIldZ3Zq1TS4irmTJYr
-	 BpBI7DXvlcnqzUZGnJJoSlq0l4nKlzMWjp+Jt+6EFFgvcCsn+f2fV4clBzsjEwOBEiADM
-	 t6sC3sRR68Z88lBkGLEVESrHfwMOQe8qz8I3MK9Hrmd6MDeE2kFfYTRIO91Hqf+gL8Zrg
-	 V6PEMdOyb8imi1T2S9HS5lIC/G+yg7ge0CKnYi6K2Kc1aa28ffdOo/Slt2GSbQb6cYBsL
-	 b18K5TB1XtwIW0P9PnYVI+hiadhNXSCVz7BbY0mYxIQ1n+NSpeK3cMjn+HqzaPHsU3w==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dsdeKH-iL5Q1; Wed,  4 Nov 2026 09:13:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E82A6606DE
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793783632;
+	b=tEyVfUlnKLdp++mvu2fn20eypAXceGGc4C9uSezjqYhm2fBRGE7JgXYDghDfRHVmsgAP
+	 Ejq/piM+jSGrp52L7jH/j4IqhUwcn+wGBBflZ6hgn8g7zSHmkBd0qn4TkCUnIorPhEDCQ
+	 f2w0coAiX7Wv5duxsjI+5PBYhfE61OWhhDIt69kQWKB8YvhX/m+PrIiK2s/+TcxHq66dE
+	 tByEGFtH59OWbZtS2BMmyywImpp2a4Ejg/c2Mw84yI6vrNVislbN5Y3FWlzff/vsupb5/
+	 34NWGT5OIg2jGY57dqENN/B67Eu9MrA+a/LKdAd6lnTZL8Y403U1IlHN4VqTOoT06Gw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793782477;
+	c=relaxed/relaxed; t=1793783632;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 References:In-Reply-To:To:Cc:X-Mailer:X-BeenThere:X-Mailman-Version:
+	 DKIM-Signature:Message-ID:Subject:From:To:Cc:Date:In-Reply-To:
+	 References:Content-Type:Content-Transfer-Encoding:User-Agent:
+	 MIME-Version:X-Rspamd-Queue-Id:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=GyWGyCoKSdlqJCOPduMFNdohKCCPOHxqvGNYJO7524M=;
-	b=CSJP31W/QSj/6of4XpGrJOcLLNwpoZk0BQuAIMWTK8CaGh52SD85fkUVTqHeU+wL68ao
-	 lg/ednevJ1UanNeJJY0nXOoBwJ1xZ5OSo+YmgnEm45833WHIeIwkOmWuzyifcfR0vVAbQ
-	 LdE37rhQp49yHJ78gBpY8Y0eOMiaUDqTiRAuTD/zsq+azjV2hLuezIQCp0Kq75jxg8TY2
-	 k6xtfMmvAqBCRTHp0ztlNdAHAMkWAMKiMTd6nGYiDMD0TBfL9eG8ZLBofv9FzoBzvQTcr
-	 IMBqfStCaHx9Nauz0ARmNxoGibwYy9jM42bSvgjcrqNesklNk0Y9JMIbQ0O48d3n+Mw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+	bh=NJCCSInZWsarf9WxT6gCAHwJyZm//jme/FDfWzvHjeQ=;
+	b=XBoC1D9Ts+jygnl0p1ANmXMXY/2gMCXRCYBcm6MKGZ+Ghm51IKQzlh3/wzv8Y0FPAGsx
+	 awGIPSXP1OsvzSGZwKTAhojlL0eaZq4w7V0Bbs0ytD/Rrm3y4E02qJA7hgWEfUSa13DyJ
+	 9BD7MTnq5tdm3/iRgZU9ZejhDVRXA42cx5L3rGPu3xY/2Ug4rUzxjijkBwOghLZwV6LzO
+	 MyjSAiJl2G5lZdF6cFNZ/YUMEAPQnaOuMNlm1gVs+oV25TSk+PfijossozCUXGwsMnqC8
+	 oIAAFlDvvEzI1mJJxw9+RT46o2HjTeIs3cKysVkP09+K14W0nM4/ROlLHADZpGDI6tw==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793782477;
-	bh=GyWGyCoKSdlqJCOPduMFNdohKCCPOHxqvGNYJO7524M=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793783632;
+	bh=NJCCSInZWsarf9WxT6gCAHwJyZm//jme/FDfWzvHjeQ=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=mB6TgFhHT5UEFFlGcmSVhqv/DdAFH4CLT3l4Ut4KgJXEy3szDX1cQ+a33n77S4HNv
-	 Cetr+oyQhWYK7HksNwjSeoSrl3h5svjcKTdjMTUzRhSBkBw4wTwu3n4JK+VCXxFfJ7
-	 ISZszDyY2rpNxTQyj+zvJtEnOLvnZF14wew9vQDMDFp28wJXUciJwvjg1mwpTMViJo
-	 3xYh0YLtfGlQGpQG9FVZchA6QuZ/5rF64tXdgqgLrPSDj138CAGOsOa+19fE8D+E0d
-	 XXkU6UheJS2e05v+VJvsrypGakTOkbciqj5wVjVE47v+al9GqJ+DpsHE7w4mj2Cw5c
-	 awT6UcEF629Qg==
+	b=0cT3LzV59B2ol96kUqi+j6CwGfRmM+JMrL3rtB6mzoDx+nKFUE88vQFVZ4bK2sd72
+	 m4vNkz6jFtAxFA5pyGwtCvoxU30VN1HkWd5qkWY/2w+fly3CsdOHKu94W1/Mrp7OW7
+	 F2Ybvkdkn3OcMxomGO84ctm8Hjy/btuycdZAXs1ZE9gXWDPsfKHKdZq9R5XNky8+2T
+	 /A2JJ9PkDmc+hz6tO2YG9Oc0ahCzaljm75MeEaBuLKKNrs84CetMvfnO8qkjs2HzFO
+	 g8wvqOjwIVIanbxCrhvSJ5k6hSVbxIvYWPGalLRPYgsARqsbzPYWY/F3oVGMKhszww
+	 ohCYxWPcvmj/w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1F32C81127;
-	Wed,  4 Nov 2026 08:54:37 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 621B6A10
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 08:54:35 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E82A6606DE;
+	Wed,  4 Nov 2026 09:13:51 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 38A6D932
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 09:13:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4801A402B0
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 08:54:35 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1E2F840726
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 09:13:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zYnTkzjrY7sy for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 08:54:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 615E04004D
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::330"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793782474;
- b=VJXxzV+YAf8wy55F9oqJphjvHI1CsxaIS1bNYbO6OuLuNsAzqWzoT4mi84E2mkkqmI+O
- K306ZHID6p2vpRCVtrgZwabHQTW7g4wVOqukA6HPNmTzQFpgzTcIKy+BtXHTQEzz7cGFr
- C/VJRNd/8DzreJkBntPQZRT1/hKyD/xc1L7/VPzOGLCNlYTWgJ9SF4Sam87dqXPFISUmb
- fdjTTHEyf9Xwsr9DhUP1+Z/tmzQp8QIVrfUlszzlsgxxzdAEke1weoXFnmCpi4/f99ZtE
- Vyy9/rjHWx+vpOxkOUT3vIxc6vNeDxTtX18Qe597Hr86grbZFdgWU9QqgpNK50aV8+A==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 257hv8BzmlVa for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 09:13:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8DB68405F4
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2001:67c:2050:0:465::102"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793783629;
+ b=VhuqCIVa+AFlWSuTi5gFWsH2Ax6baL+he9PWJ+2TTJfoY9XURPmZ3y0OsiATbeh24NE2
+ OYVd2lcKhfE7w4KydHLhu3kc4XSg295TtLX8zBj8s+8fqi3q/xQNy3GYtnfdZEECNQhWG
+ OpkgfhYQXCO6FrNWGz8nNpdMOZILXGZyRzKZlh6w2jBA/crGdP1MPDa0G2R3Xq2B1AHlj
+ kl0c/H5SToobnDrWbKVUO1/BGuNgRFuCu0XPusRslIKDI7KEH/bMxxTCfKr+YRg9DcRh6
+ mPpvECrpxPWObq8ZGwku6/H65hqh7mV4HO+zI+gN5DJv3C8maft+Xi5x9fqn5dH4YiA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793782474;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
- From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
- bh=GyWGyCoKSdlqJCOPduMFNdohKCCPOHxqvGNYJO7524M=;
- b=m+nrYWyeb5hpqSFo6g65SC+oclJS2RJ8sjc8dMonbzgy1N6rBI8+52RZGzOb7pscXv5l
- nL+2Yg0QsBDPul7Frsj6Ml3p2L5ydVyn7KtPQzlwG5+ZmuaBOsu1kFPPqOSJg3Y6ljuYf
- y+aIIyWTE/5R2FmGZ5ZwJCf5j00PvQ1XT39ELzWlEaEQTbp9nZHQiXmUnuGFZANj0WSTV
- YHVNcMmKy4ta2fkQjVkiU3tijoNtKA9j5F/+YyEJcmPlsjJNRCcrGAXoMbAi8aIWDu9Gc
- tLD3zWzCRQvBIV6MOBp3KCCiYuobzZSKcYjXvLboto+2J2YphPDkx5UGJ0lkPDB1e+w==
-ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
- dmarc=none header.from=baylibre.com;
- dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=AcIEXVGf; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::330"
+ c=relaxed/relaxed; t=1793783629;
+ h=Received-SPF:Received:DKIM-Signature:Message-ID:Subject:From:To:Cc:
+ Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:
+ User-Agent:MIME-Version:X-Rspamd-Queue-Id;
+ bh=NJCCSInZWsarf9WxT6gCAHwJyZm//jme/FDfWzvHjeQ=;
+ b=GgQ9maqhnhp+seZtR5e4oD6jnMJG5+aX7Zo6t7OXPbpRZsxaetpf5AeepEBzTQSPAOGC
+ xbpQkJLGfUyIPETAeApX2vfD8am28VR4KpqgoyxGSwEN/ZpTIHpaD0rQG5ndWEz64OtOK
+ FHas+/uaPkx8yQNHvT7czzSbvuoIBzMz4TD4BJJmYVl7humfLI8D2AOj8qTcPZ7e9s8Tp
+ IAzTUgXfhSvQbaT88GMCMz9a1/0jcmIwUTLp37zoe5Q1iiI6dHO61sAkViiAXZkAW5yX0
+ T1CniWHl5nlw80QiAXZkX7BSvDpL39FvqlKvxx5AbYfySwl5zsb+o8Se2whRG7ArlCA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=steffen.cc;
+ dkim=pass header.d=steffen.cc header.i=@steffen.cc header.a=rsa-sha256
+ header.s=MBO0001 header.b=mg+bnyYs; 
+ arc=none smtp.remote-ip="2001:67c:2050:0:465::102"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
- envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=AcIEXVGf
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 615E04004D
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 08:54:32 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4a4d7ae1ae9so3625125e9.1
- for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 00:54:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1793782470; x=1794387270;
- darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=GyWGyCoKSdlqJCOPduMFNdohKCCPOHxqvGNYJO7524M=;
- b=AcIEXVGfapybz4zxdem9TGw+YMiSyOaedNYZ4NiVGitMKzj6yeMwwuHqATtJ/mpaGL
- AbJ+FaI4oIdXDgL8KMlVKRBBb1EcL9+b17a1Hu6fh6+cyP+8fjWltGjSDFDh4fvAv71z
- GLlmBjXrjaVdo4VTlCQl0D7pO37r4IEWDSniaKk1kV+hqPuZfnkJot+jp+0hyo4m4yH2
- Z4+BVS3inFnJNizog40ULzn8k3A1BEpY6/MB9poxs6r1HrUGq/agfEUUFSUc7oBoJ5PN
- FycGEKbAEx/6iQVl3nAwoWOLTKcr7KMYFPnPupVaZ5eU1+dQbfDEAe0e6M1BRp2n98Sd
- 5A5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793782470; x=1794387270;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=GyWGyCoKSdlqJCOPduMFNdohKCCPOHxqvGNYJO7524M=;
- b=t5w3AicRjDIzn0ARnDG0rZFC4bfblwTbbD50mqv3pjjekf6F7Zvmi74GYg9dsUwWPN
- j6ZM/ebZdfmyAAJCpNbj1aCPL+pgtUdsqwT2oJ7ln+mNx28s3ztk+4fbfEUg9khaOHlC
- 0HJL1IE4jaIiD+3XKTIwHaOxqhq6vyrm7yUGxS+2oGJW0gaDmSfiiRO3/Zr+b9kfPwi7
- VnSUOjw9AlXNnYNpAc5anuu5ci8zed25GlAFIe7hVyazAyMFigoSY3h+MSfVF/drV7+w
- skz7Wv76/IqMb9BLu5iuQVuViex7mbJx/T3zE+MQ/KPhKACZOt3tS082Mnrkwlctlvtn
- UH5A==
-X-Forwarded-Encrypted: i=1;
- AKwUvBwl/Ll7lfej5iEIrFpfS55sbrSqCePc5Z8DjB4afoieBlYVeR3Xx6znUB7/SJPxnXAxNgAA+6k=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/oylQiWhVWvaERnfAFIvM45GrZ+D24CNGVox/DCViGY0YTR8QL
- VEvh0a7QLxkk9ECjN2v+xOeldC+x6plcyD0ozA5yWPRFJdBssIU0n1pUdkf5UkuklRg=
-X-Gm-Gg: AYBFou2QmfhF8JxsS3JODuELCCT4+sLs8pj1El9BIia4ZEsuI1qcNLuqwwiT52fawla
- M6zA4lQfSCNwoU7XQYYwWlDu6hugeEbKBcnGhq2YoS/+4FSqxeam3JsIL0XX7KOKSNYTZcPq4LB
- TiPTz0+M+13hcMQ9n5vEmSRv8Q8YDQ2phVIbuxNdLbstPmIi+noMBFR/yAgl3YgF7PPuxNsZif4
- 5zALUcSJ77WD1LsWykEcNOg2l8/HWhQ666FFYPCNvfUl2ykJkxfR5ZZ/X5k+Osu276m2/b2Uhii
- uzJPLQXpJwmXgdgK5aRCyNzQ+pdNTDXB4JU18quYHBmmxwuQ3s29a8Ja6p8ZxWdmdozu37cgrIk
- Mz6Fr9yY8pB8jFmWIf2jxvagC1ySskIppXtoeICIY6l+Njm3b06id0UeRda501MmeNcz4rbtE3b
- 3PEGnp5fWAmZUX/45jUrkB43hyepaODFdvNg4nBBDfyIXuvxlq+mzCJVrLeH8toXVuH5CaMnXez
- fpcLYXmMbFEL1WvZ+qYZPly0AqH8yIzZf+REp3g2VeujktnG1eNcWY3MoNCBt5fvHpNlRxMFdz4
- aQh569tExH0mz4mUe8dUW/tF+cJpIKGvl6ZrYYSumSsv1D+tjpHLp84pBE6q+OiD4EdqazHiQb3
- woLJH+IlSOkiC68MIUXH4jtBr+xDm1ByHABNELHvyQIChWq/B1H+O4S8uC0f8/55z+KQ=
-X-Received: by 2002:a05:600c:83c5:b0:4a1:78c5:79f5 with SMTP id
- 5b1f17b1804b1-4ac1970b976mr301177365e9.33.1793782470239; 
- Wed, 04 Nov 2026 00:54:30 -0800 (PST)
-Received: from macbook.homenet.telecomitalia.it
- (host-95-246-144-141.retail.telecomitalia.it. [95.246.144.141])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b4107b7198sm20656245e9.0.2026.11.04.00.54.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Nov 2026 00:54:29 -0800 (PST)
-From: Carlo Caione <ccaione@baylibre.com>
-Date: Wed, 04 Nov 2026 09:50:32 +0100
-Subject: [PATCH v2 4/4] configs: mt8188: enable USB host support
+ client-ip=2001:67c:2050:0:465::102; helo=mout-p-102.mailbox.org;
+ envelope-from=lists@steffen.cc; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=steffen.cc
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=steffen.cc header.i=@steffen.cc header.a=rsa-sha256
+ header.s=MBO0001 header.b=mg+bnyYs
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8DB68405F4
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 09:13:47 +0000 (UTC)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4jKKL54g3vzKsmn;
+ Wed, 04 Nov 2026 10:06:05 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=steffen.cc; s=MBO0001; 
+ t=1793783165;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=NJCCSInZWsarf9WxT6gCAHwJyZm//jme/FDfWzvHjeQ=;
+ b=mg+bnyYsaFULZtSTYdI1iWNyprKeBAS2Jo30x/RGUFQQI/VIO0A2N/CSWFGBahoDEnPba1
+ kp9wjoYdVr3gbvahDXQR0vux+Pb85t5JjWh5lXPOFUT3/CUVp/M7DpGBrJZC7zUXkJaD7S
+ x5nuuX3abSCQo3zXmpWVpR3t9etcpZLPcu5prpgxG8BsvcfsMV+zBznyypvi/p2YiMcyOO
+ XY7cDL3/AZoz1bAcofzC09/qlFisLTa6HEe81gPUd+4URgdUjr6NFbe/a0BFWgaGrvc/Tu
+ Psg7cyOvbHOULr6JLcN3oZUItDmdVucnY49iG7+0vwEtakXtZKf+86TCe5HuSg==
+Authentication-Results: outgoing_mbo_mout; dkim=none;
+ spf=pass (outgoing_mbo_mout: domain of lists@steffen.cc designates
+ 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=lists@steffen.cc
+Message-ID: <fa976a04821fac42c0a937305e621c4da20fc04a.camel@dirkwinkel.cc>
+Subject: Re: [PATCH 0/2] mediatek: mt8189: apply the DRAM description from
+ the bloblist
+From: Steffen Dirkwinkel <lists@steffen.cc>
+To: David Lechner <dlechner@baylibre.com>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Macpaul Lin <macpaul.lin@mediatek.com>
+Cc: u-boot@lists.u-boot-project.org, GSS_MTK_Uboot_upstream	
+ <GSS_MTK_Uboot_upstream@mediatek.com>, Julien Stephan
+ <jstephan@baylibre.com>,  Carlo Caione <ccaione@baylibre.com>
+Date: Wed, 04 Nov 2026 10:06:01 +0100
+In-Reply-To: <20261023-mtk-mt8189-tfa-fdt-v1-0-f86616860bcb@baylibre.com>
+References: <20261023-mtk-mt8189-tfa-fdt-v1-0-f86616860bcb@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.62.1 
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261104-ccaione-upstream-mtk-g700-usb-v2-4-b8dc65b47373@baylibre.com>
-References: <20261104-ccaione-upstream-mtk-g700-usb-v2-0-b8dc65b47373@baylibre.com>
-In-Reply-To: <20261104-ccaione-upstream-mtk-g700-usb-v2-0-b8dc65b47373@baylibre.com>
-To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- u-boot@lists.u-boot-project.org
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>, Tom Rini <trini@konsulko.com>, 
- Carlo Caione <ccaione@baylibre.com>, 
- Marek Vasut <marek.vasut+usb@mailbox.org>, 
- Alexey Charkov <alchark@flipper.net>, 
- Macpaul Lin <Macpaul.Lin@mediatek.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-X-Mailer: b4 0.16.0
+X-Rspamd-Queue-Id: 4jKKL54g3vzKsmn
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -191,63 +154,123 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-20.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The Genio 510 and 700 EVKs use the same USB host controller, PHY, PMIC
-and onboard hub. Enable the required drivers in their shared MT8188
-configuration fragment so both boards can use the USB-C PD host port.
+Hi David,
 
-Enable the MediaTek xHCI/MTU3 host and T-PHY drivers together with the
-PMIC, regulator and onboard-hub support. Enable the USB command and
-mass-storage driver to discover and read removable media using the
-existing USB stack.
+On Fri, 2026-10-23 at 17:32 -0500, David Lechner wrote:
+> On the Genio 520 and 720 EVKs (MT8189), the DRAM size and some memory
+> reserved for the DRAM controller depend on the DRAM fitted to the board.
+> The devicetree built into U-Boot can't describe them, but the boot stage
+> which initializes the DRAM has this information.
 
-Signed-off-by: Carlo Caione <ccaione@baylibre.com>
----
- configs/mt8188.config | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+I also looked into this a while ago and found some code in coreboot reading
+EMI_CONA/EMI_CONH on mediatek socs [1]. I adapted it to mt8188 and tested w=
+ith
+some memory sizes (at least 2GB, 4GB and 8GB work).
 
-diff --git a/configs/mt8188.config b/configs/mt8188.config
-index cd5e68dbca3..8355ce56f90 100644
---- a/configs/mt8188.config
-+++ b/configs/mt8188.config
-@@ -13,16 +13,30 @@ CONFIG_BOOTSTD_FULL=y
- CONFIG_CMD_CLK=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_USB=y
- CONFIG_OF_UPSTREAM=y
- CONFIG_CLK=y
-+CONFIG_DM_GPIO=y
- CONFIG_DM_I2C=y
- CONFIG_MMC_MTK=y
- CONFIG_PHY=y
-+CONFIG_PHY_MTK_TPHY=y
- CONFIG_PINCTRL=y
- CONFIG_POWER_DOMAIN=y
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_PMIC_MTK_PWRAP=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_MT6359=y
- CONFIG_BAUDRATE=921600
- CONFIG_DM_SERIAL=y
- CONFIG_MTK_SERIAL=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_XHCI_MTK=y
-+CONFIG_USB_MTU3=y
-+CONFIG_USB_STORAGE=y
-+CONFIG_USB_ONBOARD_HUB=y
- CONFIG_VIDEO=y
- CONFIG_VIDEO_MEDIATEK_HDMI=y
- # CONFIG_WATCHDOG_AUTOSTART is not set
+If you're not set on passing it from TF-A I would send a patch for this (on=
+ly
+tested on mt8188 so far, see rough patch below).
 
--- 
-2.56.0
+[1]https://github.com/coreboot/coreboot/blob/main/src/vendorcode/mediatek/m=
+t8195/dramc/emi.c#L670
 
++#define MT8188_EMI_BASE                        0x10219000
++#define MT8188_SUB_EMI_BASE            0x1021d000
++
++#define EMI_CONA                       0x000
++#define EMI_CONA_CHANNELS              GENMASK(9, 8)
++#define EMI_CONA_DUAL_RANK             GENMASK(17, 16)
++#define EMI_CONH                       0x038
++#define EMI_CONH_RANK_SIZE_SHIFT(ch, rank)     (16 + (ch) * 8 + (rank) * 4=
+)
++#define EMI_CONH_RANK_SIZE_MASK                GENMASK(3, 0)
++#define EMI_RANK_SIZE_UNIT             SZ_256M
++
++static phys_size_t mt8188_emi_dram_size(void)
++{
++       u32 cona =3D readl(MT8188_EMI_BASE + EMI_CONA);
++       u32 conh =3D readl(MT8188_EMI_BASE + EMI_CONH);
++       int channels =3D 1 << FIELD_GET(EMI_CONA_CHANNELS, cona);
++       int ranks =3D (cona & EMI_CONA_DUAL_RANK) ? 2 : 1;
++       int quad_ch_ratio;
++       phys_size_t size =3D 0;
++       int ch, rank;
++
++       if (readl(MT8188_SUB_EMI_BASE + EMI_CONA))
++               channels *=3D 2;
++       quad_ch_ratio =3D channels =3D=3D 4 ? 2 : 1;
++
++       for (ch =3D 0; ch < min(channels, 2); ch++) {
++               for (rank =3D 0; rank < ranks; rank++) {
++                       u32 nibble =3D conh >> EMI_CONH_RANK_SIZE_SHIFT(ch,=
+ rank);
++
++                       size +=3D (phys_size_t)(nibble & EMI_CONH_RANK_SIZE=
+_MASK)
+*
++                               quad_ch_ratio * EMI_RANK_SIZE_UNIT;
++               }
++       }
++
++       log_debug("DRAM: EMI_CONA %08x EMI_CONH %08x: %d channels, %d ranks=
+,
+%llu MiB\n",
++                 cona, conh, channels, ranks, (u64)size >> 20);
++
++       return size;
++}
+
+
+Best regards,
+Steffen Dirkwinkel
+
+
+
+>=20
+> That boot stage can describe them with a devicetree overlay in a
+> Firmware Handoff transfer list: a memory node with the DRAM size and a
+> no-map reserved-memory node for each reserved region. U-Boot already
+> applies such overlays, but only when the transfer list also contains
+> the devicetree of U-Boot itself.
+>=20
+> The first patch makes U-Boot apply the overlays to the devicetree it
+> found by other means as well, so that the earlier boot stage only has to
+> pass the DRAM information. The second patch enables bloblist support for
+> MT8189.
+>=20
+> The first patch only changes behavior when a transfer list contains
+> overlays but no devicetree. As far as I can tell, no board does that
+> today.
+>=20
+> Tested with TF-A BL2 passing the overlay on a Genio 720 EVK (8 GiB).
+> U-Boot reports the DRAM size from the overlay and its devicetree
+> contains the reserved regions. Without a transfer list, U-Boot uses its
+> devicetree as before.
+>=20
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> ---
+> David Lechner (2):
+>       fdtdec: apply bloblist DT overlays to the built-in devicetree
+>       configs: mt8189: enable bloblist support
+>=20
+>  configs/mt8189.config              |  1 +
+>  doc/develop/devicetree/control.rst |  5 ++++-
+>  lib/fdtdec.c                       | 32 ++++++++++++++++++++++++++++++++
+>  3 files changed, 37 insertions(+), 1 deletion(-)
+> ---
+> base-commit: 283ed6f2477b02a74f1e39c1225bafa8332f8109
+> base-tree: https://git.u-boot-project.org/u-boot/custodians/u-boot-mediat=
+ek.git mediatek-staging
+> change-id: 20261013-mtk-mt8189-tfa-fdt-94283317c6c0
+>=20
+> Best regards,
+> -- =20
+> David Lechner <dlechner@baylibre.com>
