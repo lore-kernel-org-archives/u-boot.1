@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C600B6070998
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 21:52:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B76B6070989
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 21:52:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=SLNUrpjM;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=LhRuJOHC
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=qvD/NIEL;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=KZt++Fo1
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A2EC3811A0;
-	Wed,  4 Nov 2026 21:52:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 373A5407D4;
+	Wed,  4 Nov 2026 21:52:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OEdg9nKAmKbv; Wed,  4 Nov 2026 21:52:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D0E94811E9
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793829167;
-	b=CX/hCRUIxBuRiTAc1HUeCDiBqoRS0ne8FZqjQzOgV9A4eWzkeUm4beIMIA9177vP5+DH
-	 Lap6+hVHP0T5Po96UjoQ8KPPTA+l7Mhrr11pOaOoMZQXo5x/2JW1/5HtQSdQx6BoOIeU4
-	 u8p8NeU1oFUw7f7HSLXHDkxpO/KQ3ztIAgOz+so+lh0aEw6EgyKHgiRkHlb/FXMn0xOiA
-	 d4c7eq2NGUP0ZexCIOaW9Zu5gpwxoEtZsq0lG7HkIh5vxGyfkL5jr72OpAw2LvC/s98ws
-	 ERIR/C7hmOitQ1+SfLWUYGRED2uQ4J6Me2Uiut/TJs0EBpcQLOVryNFsVNgzfPZ5k/A==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 070padnYtKRz; Wed,  4 Nov 2026 21:52:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6FF6B407E4
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793829172;
+	b=DEZ3Mfaony9d5yTSThZERolBbDLGxMYmQ21Wju0X6oBVGkHDM00UWRVN+0Y1L8mVdw4h
+	 RmNQkkJLwLALBRemjoz6WzScELNk583SVdnjvVL6/lTiUc9xv9EvL04863stpXNbUZ6M4
+	 V0CjwGf8YTfTfugRhD/W+tYiU1eGZmFSTe0wdNJaeMiPhtJ3fGYrmP1ubZQP6NzC/R/v4
+	 0xgunO3Ft6jKj1S2LJxMFkhNWW/+HOHFk7nhIUJoun2MyDOewZmJDK9V05YEe38oic4dT
+	 cUqtgjXl7E+9TLH2wFVVJZxXuZz3TnBNsuI4ORcb0jmHxJBMKQZgTX3bp+9HjNgz1sg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793829167;
+	c=relaxed/relaxed; t=1793829172;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,115 +33,114 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=6P1oeycL3stW5W0zP/opSlpcgErz3X+rqrqpyv1l1fs=;
-	b=b9lStyZLJnveWA0OPzRRjzM6j+wxNdjTpyGypkI28ADysoFIbxaVRW6zSV1F3aW3Rjlc
-	 2HR0qFOmvkYl2YpAXbivESW2v8kBizqAX2HFhAn3KPrL8Vphy3Ct66xtdHzniDARxTVYl
-	 HVamVoknAk90NeRC2xgOb38RXY32/3TakkcnqT5oMqmLwbtPo3H2WOrhqLwVpRjwLqn8O
-	 Te294eAWjt2KHhuSB4K+z9A5tdrNUkV+YBZQ0xVHRqBJi4Ss7Av+ZtcYMh2s17302dzJ+
-	 sdcFZF/9jZyDICCL6RvARScGGoQwt+AfpcahUmgoncSLhSVlwoLzTJD4whykopS4MxA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=dApbbMgu0Wnh1ljk0DwB1IMGayU4YyRue/lrPRCFh7U=;
+	b=stVPksievHKyPzNGp+QwK7JCuGRPaP6R0pyGITe9xU9C/Aaib1HkzsgcOnbh6J5TRrth
+	 fYMm4z6b4cglaLqBIQSGax0xKiuH3A9PLtwFhuwGtG+rAv1yNFL5Z5ZLAdm3m0kzEdxBK
+	 L9o5IayKJHx0WJqrSXLxmzX/J0cLWu/PY8DVU8+ppBlEJa7P3YD747YCF79h8Q+MhFhDi
+	 dLQmVE84OleTmU1VvQPjfh4CA4z69LifEBRBgnkpYXUqBiSErwh78IHJU8v7924lMz8pu
+	 l38/3CFsfN5hVW0Q6gkMDlxcVasBfhtFRV+MbOcBrgWABvun2WgCwujQ2c+7CWnE1mQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	dmarc=none header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=LhRuJOHC;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=KZt++Fo1;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793829167;
-	bh=6P1oeycL3stW5W0zP/opSlpcgErz3X+rqrqpyv1l1fs=;
+	d=lists.u-boot-project.org; s=default; t=1793829172;
+	bh=dApbbMgu0Wnh1ljk0DwB1IMGayU4YyRue/lrPRCFh7U=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=SLNUrpjM38Saf+oTjiqTo0VgBoi1+rWkqgZN5Fo2SpMDOoKq3jOjLwZWgqmt8RNmY
-	 DGQeNgtwIxC8f7y1DqHqkQmqKDZzZrYKrqI4oQxTQ+JFljKtzUoghPAMvkTwMM7zWD
-	 V+VFZUbj54Rh2lFtp79BOAK5j4r38MXBgcCLsKrYTxuOGMjwCdFq9UggElBxx4reSf
-	 4wP34ZxLMqbWBE7GFF/jNPkiCJxtMa+wVpRVsKe+hNxswqmAScmUjJUneqMIDP5hW7
-	 gmRpRYKZWUTAQ8TrM3enej0ZIMKLPUu63bdAUMxcbneMXwxP2Q/3tfTqcpL0MrI5+P
-	 L0rmxGBVkYdjw==
+	b=qvD/NIELQGTplRy4p1Pm4Fm0Ht1Bls2NBezm9UdBAZ3ncf+bA0+aUJ8j5BRGxjlCr
+	 pDhB4JmkQIT9KTUZ3QOH+pEyy8kO0BQtHCHtQo1U3lsEoIo36tujP9bDAzghRtH+Oc
+	 PcZ4S1pnCK5F5EvCoxdHr01n2MxW4dZS+Tgi6z+MBjyvl5sjv5uiII5T7RN6elwL5F
+	 kW1mjHz5t7q9jb9bbfnL3wKWl43eOTw0HDE7lCi2YEXMKaP8apm3EQxMchgHlreGdi
+	 dixC2buUU03K1NQApN+mVSaI+2nuhd+jAsr3gYLxKTohxuT/kHFDaYwlYrjCHD+Y40
+	 rU3AvvTpFwhIQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D0E94811E9;
-	Wed,  4 Nov 2026 21:52:46 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 8023C362
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 21:52:43 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6FF6B407E4;
+	Wed,  4 Nov 2026 21:52:52 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id A5ED1362
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 21:52:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 65BCC811E1
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 21:52:43 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 93DE6407E4
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 21:52:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nP8Vs9RlLyly for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 21:52:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8C6A7811AC
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c30"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jQmziYdRPlrm for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 21:52:50 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A8039407D4
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::c29"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c30; helo=mail-oo1-xc30.google.com;
+ client-ip=2607:f8b0:4864:20::c29; helo=mail-oo1-xc29.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=LhRuJOHC
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8C6A7811AC
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 21:52:42 +0000 (UTC)
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-702dedeb70dso706896eaf.1
- for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 13:52:42 -0800 (PST)
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
+ header.s=google header.b=KZt++Fo1
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A8039407D4
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 21:52:49 +0000 (UTC)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-6de1fd5f572so557912eaf.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 13:52:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1793829161; x=1794433961;
+ d=baylibre.com; s=google; t=1793829168; x=1794433968;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=6P1oeycL3stW5W0zP/opSlpcgErz3X+rqrqpyv1l1fs=;
- b=LhRuJOHCrWXMS5hDgw7UiqevEVM+8LXV0YrHM2nuAYhK1fvyH93bcSX7lAGRP3n9lq
- DGWRPl4RtI9tixMtVRIim89vrtPN6k5tLV9EouUhGW+bASowjCJqTQ3EVD8OI0VyUBHL
- TDy1a22YMIYXOl9/jSzgleRNbeEO/ikR88xLL3Fb17CCO/2G23BmtOIrA7G1tL+DDmPC
- EMU8kUCHow43Doa7R0mxcyGxscsAuLruVuXn4EI0BqEPPQa6AfU8ugHu+ZK3lmrg2mk+
- tLj448+Rab5NKwMi0TdOeMcw8pDko6YfxCv/zcNBrTCcz1r/jwB2N+0f2fPyGQf7Lcb8
- 37iQ==
+ bh=dApbbMgu0Wnh1ljk0DwB1IMGayU4YyRue/lrPRCFh7U=;
+ b=KZt++Fo1l4gqxA+8PhzAoF2IMbpdQIW0rHqAHfL398kr5b+MyfTitmVAObYWEFpndN
+ exJiSzZrtEq/h/R+wsE5c9j5wt4gealtBy8AmAY4lh5GrUAHi2G89R8VyVOr98sd7ibv
+ q8wKra+FQQvp6eUsK6yRGdnVKrNzWesDhjQanKfwAiRJ2rhKdnO5OjCQbzbOTG4+5+Tx
+ +EFfNxLuI7q/GLhDNVhfn0Rk3NSTUzaF57OGhlDDql5gtMEet2tPaNwsOjFi58UPfv4P
+ 4VqjI56IJ6J2bV8FeaAhjVRCJc8VTyGzApStZNiEi1iH/tp03nZLlfhEsnpqy0RnKzc3
+ XUOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793829161; x=1794433961;
+ d=1e100.net; s=20260707; t=1793829168; x=1794433968;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=6P1oeycL3stW5W0zP/opSlpcgErz3X+rqrqpyv1l1fs=;
- b=bzMYzUakn6cMyPssVXLREhdxb885Fo6ZyU/CbyrQX3m/uc5+JNAP4pd37ghlosF7up
- GEgD3DbyuAhc37mYIYNSmTNnJ21SVMqljVv+5MgZeB8q8+TcVmLiQV4UI/nRGC8TVGlA
- m2ZaiA3AKHFKSCiX1qHwaw/hCuO79YjrzdMVBDYlc/S0+L+7DaVIdgs5krHoEJX4bMx5
- ZFMov+GHgIadj+iTWAdaktdtE42mb/ls8lG3CM+jC0JCgxLcGN01QaidiFgWRTKtsBeg
- njkVIz5Sy7rhEecmiUljCS8BJOOBD2tdkdSlC3+s4Ok6u3hyxJAPUbLeS0Y02X9EgaEM
- Uy0g==
-X-Gm-Message-State: APuU4Z8jDqe7z1RPatOFs8J2L6/70BzD0N949VcgrdpNphX90X9c1Qol
- FVJ94viVNzQClYocAtt/2f4HpUp8ZLGxhQf/s1NAdrY1TFwhMkcQqlam10zlk9EMz9I=
-X-Gm-Gg: AYBFou1or+fDtLYpZGzmOuBpelC0zu7CmwbdtSIwSFrU2xVluCffhGPAuQpFddVNM8l
- 8NSoEFmIDJUkhHRookb01dUFUTqk/cFDlc/dTUk1qScg4e9Rc+rI7dayCj1Q8kf67BE268Pugwv
- lMqTlS5yk/L8m1yRqUt3cNcn8Z8MpvjZqHs9P1uqM5JtfoYmJeRF/0LVKfmRSFad+6FeWfHPVOk
- lqF7V64p7dc7dxBhhs1mXQ8UmiM8wq1818itDHZC91S0gIWZiamrwTwSQbVbhSo0wTQxhrKGGd9
- BCFELCZaM/iyS5HQb1uDgK0cT/Z9D3VnWZMId5AaNuKJDaEpr60nHLaAn/s6sYMl9FdSmdwIm4h
- o5MqjuN79ydXQoJaYiONwqALf4pqwQ9N9VINgQqdgjbAWrYISKit7Y2VazJ4n2em8INrcWDX4On
- xJUocDHnMYzq8xP0R5+hS7JDGYaqXP64akUYep24/P4zR0qhnEIqOMYjl94Ai1xwC5FnaD+VD+t
- AU3WkV/QSbP2bE+qNjdXGl3zfEFH9lkIYWMK4KcCp/rcMe2JCjSbTEjbFpANfc0ZIepIlDXNmI0
- EzX/3Td9Me3n5QlFyM5s5wmQNnQKJtA5
-X-Received: by 2002:a05:6820:a659:20b0:6f7:fc58:b7a5 with SMTP id
- 006d021491bc7-714f27e6a18mr7185279eaf.85.1793829161079; 
- Wed, 04 Nov 2026 13:52:41 -0800 (PST)
+ bh=dApbbMgu0Wnh1ljk0DwB1IMGayU4YyRue/lrPRCFh7U=;
+ b=DKia5ifI2nProKKqE5bzEpJ4JpuFmWwUvHcbmuu4qUGMvce3OOVWqYPhoJuEOcKWlr
+ /+SBkczNGXtgN07IbsRrZEm6FLo2fI+6zDC4MGoJEis3aYHlQC/1+GWhxiCtwzWYfGjN
+ t+1QnM6DCs1+tm8Iy/nSsbYQwuZhfWa5nIYwKbmMy2QB6P6hBiVX9ZCtATLvpd5M7Iwu
+ f8sUOJc+FtoAz/DQDCR5jJq71Z+wgVOU76kind9OAupjC59R8KXYwNeHgh1bVtZSy6/I
+ XWPuCnY84l/1EuroxnFktvp+tvUjKt+SWER0gbvSXYgGWPTlLgGeJWhwIVzp52tQ88eu
+ kSrA==
+X-Gm-Message-State: APuU4Z9XhBby3Inebpm0rlav9rXnFcumL6aE5wcDh4ZU//mBt1kbmeYQ
+ pTeua3acYCG87M/w/qge8cfPZ0DHN9q/iIwW3org8oMT5zIzRbYMEm1qtyrVO6XJ/To=
+X-Gm-Gg: AYBFou3zngkTPK5+HuqgNr81wfSZxCSTYMGLoEr1pZBoHh14aIqKTXjPoi16fPf+Chg
+ mMb7/lQZeyHRM0XRspJyClLlAqiNMpAql2/QaxdHuk5qD60UhBgG6rGwS860w+brtQ9l3aV+i+8
+ Bg5L4vEs9ACvGJ9dkf/SlyDluwf8dKGxzrBRCB8vaSuyHbBwO7wzd0frcHEVwrpkuA8NeiV3MaO
+ 7IfNvImfF3o7+PJspMAzPlxgFLmc7P8WGHK7W3UTMR8+N0VnKApTBwFDMHbYF8FEcgDkiPOm2/N
+ ljnHn/lcoemrpht9E75TxGi4f9jeo7h5bj0FQWCporQno8ewl/xoq5VWItZ+13ihPxpJ2VHARsX
+ 2P2GjKgithcAJ/Lk8ekOZ+AUG7xXC7Wm7uiTRWCes0Gi/F0XDPr+DLAcPZfw5jHdr/LFd/BXamo
+ efTxc0u8tgP+k44K+6VtMy0pqflOWBsKKrxrqcFx7IUCSyVhnkJQFvbCfRijxhnBxv+7PDS9wQ4
+ 6BXW44UE/0sKpWofOEMiuuCt/ZkymUM/lPKUQ1y/rDdIB9WKUHX8s40w3kto+vH4aa/5PXSoklQ
+ V2VdCIb82OLVGTeTTWifk+b4wawlSOhd
+X-Received: by 2002:a05:6820:1612:b0:6fa:ddda:4234 with SMTP id
+ 006d021491bc7-714f24b9ba5mr9772960eaf.1.1793829163524; 
+ Wed, 04 Nov 2026 13:52:43 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:f563:d5d:661c:51ed])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-716c12d1f36sm2479415eaf.8.2026.11.04.13.52.39
+ 006d021491bc7-716c12d1f36sm2479415eaf.8.2026.11.04.13.52.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Nov 2026 13:52:39 -0800 (PST)
+ Wed, 04 Nov 2026 13:52:41 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Date: Wed, 04 Nov 2026 15:51:56 -0600
-Subject: [PATCH v2 3/4] spl: optionally pass the bloblist to the next phase
- in registers
+Date: Wed, 04 Nov 2026 15:51:57 -0600
+Subject: [PATCH v2 4/4] spl: atf: pass the bloblist to BL33 in registers
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261104-spl-bloblist-pass-regs-v2-3-3126de1b77e9@baylibre.com>
+Message-Id: <20261104-spl-bloblist-pass-regs-v2-4-3126de1b77e9@baylibre.com>
 References: <20261104-spl-bloblist-pass-regs-v2-0-3126de1b77e9@baylibre.com>
 In-Reply-To: <20261104-spl-bloblist-pass-regs-v2-0-3126de1b77e9@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -151,17 +150,17 @@ Cc: u-boot@lists.u-boot-project.org,
  Julien Stephan <jstephan@baylibre.com>, Carlo Caione <ccaione@baylibre.com>, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3789; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4152; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=mwu/HmNVau2MCshxaL34cMRFWLoq6wrxhZwuvOMYy70=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq66kRQ274CJA2SgnyxCKy85oYg0CXodwP52WxD
- p3hoC/MAXKJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCauupERYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ABs8H/13wvzJQ3lXi/dOs6OyBn4Me99pYxMsAoB1J/xM
- X5g75YKxdYRVqE7yibhhgr8Cm0JQFliLJZSHuz7B9sBYQP1KK6G7+xjYyzzQC66qpO9an0Kp8GV
- lUlfKQ+qSziJ51pUNXMI2/niW3MXZSGgq0HlLMFokemyPj4O0CleJqpzsRXhFrjcRrYAmQ/CrPN
- N+Bt8biY+lB+3pmI1y6POJVPHkS3+KReCxkRzN6b9Txfyda2C4hJ1tSkDYk8NXXqCaO1qjcHB3T
- JNQuxUe8eOiD4LZkKcPHV3IrTw0aoXd/wiwmgz6ry0wRCPw03MImn+IVSow6E5C5vd3SpHOu5xU
- BUDI=
+ bh=szwoE/8rWRQyyY6zyu8iSW+P5h+9mZW/2jgaMU8UHiQ=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq66kZjjNap+9JEEVgyxS16MhK+dfyc/79D5u7d
+ xTBianaDIWJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCauupGRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AMWgH/1TspFi7OfWH+rvTQ2QyONMMDjwH7kJ6RkV0uRO
+ cpSfVJOoWRFmHbVmEWDEd6e/NMjuKr/1LsRGYlA+XKGRo4j9WJWEBMeQ4DQZRy9Uv6mSE9tZi5Z
+ fEwHJlXI3qOzdbn+aBl5pVtwZokDCU/rh9LMzbzs5td/G4BWTVGJkAtvKT9jnpTxqxg701Cv0iU
+ ZR9CaDRd+DBYQ64FAMPrFkU1I8T+DN1ydn4zhgvS9zzxOlv41GGjWeDN99+saqj1x1iwwstH8DN
+ FlErpm7meJDZqYN3v6fFKoqvEhxTbG/3cRblNx8aD9/N9EdLz2RpwepO2CzyNH9LUfKoNzmXbH1
+ hzOw=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -180,113 +179,119 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add SPL_BLOBLIST_PASS_REGS to pass the bloblist to the next phase in
-registers, with the register conventions of the Firmware Handoff spec.
-SPL works out the register values once, right after finishing the
-bloblist, and keeps them in struct spl_image_info. The default
-jump_to_image() starts the next phase with them. Without the option, or
-if there is no bloblist to pass, the next phase is started without
-arguments as before.
+Make SPL_BLOBLIST_PASS_REGS also pass the bloblist to BL33, which is
+normally U-Boot proper, when SPL starts it through BL31. Set the BL33
+entry point arguments that SPL gives to BL31 to the register values in
+struct spl_image_info instead of the primary CPU MPID. BL31 passes these
+on to BL33 unchanged.
 
-U-Boot proper already looks for a bloblist in its boot registers, but
-SPL never puts one there, so the only way to hand the SPL bloblist on is
-a fixed address in memory that every phase has to agree on. Memory at a
-fixed address can also still hold a bloblist from an earlier boot, for
-example after a warm reset. Passing it in registers ties it to the
-current boot.
+This is done after bl2_plat_get_bl31_params() or
+bl2_plat_get_bl31_params_v2() returns, so it also works with boards that
+provide their own.
 
-Architectures and boards that provide their own jump_to_image() are not
-changed, but can use the same register values.
+Without this, the only way for BL33 to find the SPL bloblist is a fixed
+address in memory.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- common/Kconfig   | 13 +++++++++++++
- common/spl/spl.c | 21 ++++++++++++++++++++-
- include/spl.h    |  3 +++
- 3 files changed, 36 insertions(+), 1 deletion(-)
+ common/Kconfig       |  4 ++++
+ common/spl/spl_atf.c | 48 +++++++++++++++++++++++++++++++++++++++++++-----
+ 2 files changed, 47 insertions(+), 5 deletions(-)
 
 diff --git a/common/Kconfig b/common/Kconfig
-index 92bf31f038b..4180755525d 100644
+index 4180755525d..5b728cfe324 100644
 --- a/common/Kconfig
 +++ b/common/Kconfig
-@@ -1234,6 +1234,19 @@ config SPL_BLOBLIST_ALLOC
+@@ -1243,6 +1243,10 @@ config SPL_BLOBLIST_PASS_REGS
+ 	  specification. The next phase then finds the bloblist without relying
+ 	  on a fixed address in memory.
  
- endchoice
- 
-+config SPL_BLOBLIST_PASS_REGS
-+	bool "Pass the bloblist to the next phase in registers"
-+	depends on ARM
-+	help
-+	  Pass the bloblist to the next phase, normally U-Boot proper, in
-+	  registers with the register conventions of the Firmware Handoff
-+	  specification. The next phase then finds the bloblist without relying
-+	  on a fixed address in memory.
++	  When SPL starts BL31 (SPL_ATF), the registers are passed to BL33
++	  through its entry point arguments instead of the primary CPU MPID,
++	  and BL31 must pass them on unchanged.
 +
-+	  SPL works out the register values in struct spl_image_info. The
-+	  default jump_to_image() uses them, other implementations need to do
-+	  the same.
-+
- endif # SPL_BLOBLIST
- 
- if TPL_BLOBLIST
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 6c9a1a1cbcc..6d81984428c 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -401,12 +401,23 @@ int spl_load(struct spl_image_info *spl_image,
- 
- __weak void __noreturn jump_to_image(struct spl_image_info *spl_image)
- {
-+	typedef void __noreturn (*image_entry_args_t)(ulong, ulong, ulong, ulong);
- 	typedef void __noreturn (*image_entry_noargs_t)(void);
- 
-+	debug("image entry point: 0x%lx\n", spl_image->entry_point);
-+
-+	if (CONFIG_IS_ENABLED(BLOBLIST_PASS_REGS) &&
-+	    spl_image->bloblist_args_valid) {
-+		const ulong *args = spl_image->bloblist_args;
-+		image_entry_args_t image_entry_args =
-+			(image_entry_args_t)spl_image->entry_point;
-+
-+		image_entry_args(args[0], args[1], args[2], args[3]);
-+	}
-+
- 	image_entry_noargs_t image_entry =
- 		(image_entry_noargs_t)spl_image->entry_point;
- 
--	debug("image entry point: 0x%lx\n", spl_image->entry_point);
- 	image_entry();
+ 	  SPL works out the register values in struct spl_image_info. The
+ 	  default jump_to_image() uses them, other implementations need to do
+ 	  the same.
+diff --git a/common/spl/spl_atf.c b/common/spl/spl_atf.c
+index c1233b54cf5..00346779713 100644
+--- a/common/spl/spl_atf.c
++++ b/common/spl/spl_atf.c
+@@ -181,6 +181,39 @@ __weak struct bl_params *bl2_plat_get_bl31_params_v2(ulong bl32_entry,
+ 						   fdt_addr);
  }
  
-@@ -846,6 +857,14 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 			printf("Warning: Failed to finish bloblist (ret=%d)\n",
- 			       ret);
- 	}
-+	if (CONFIG_IS_ENABLED(BLOBLIST_PASS_REGS)) {
-+		ret = xferlist_to_boot_arg(spl_image.bloblist_args);
-+		if (ret)
-+			printf("Warning: Failed to pass bloblist (ret=%d)\n",
-+			       ret);
-+		else
-+			spl_image.bloblist_args_valid = true;
++/*
++ * Pass the bloblist to BL33 in its entry point arguments, which BL31 passes on
++ * to BL33 unchanged, instead of the primary CPU MPID.
++ */
++static void bl31_params_set_bl33_args(void *bl31_params, const ulong *args)
++{
++	struct entry_point_info *ep_info = NULL;
++
++	if (CONFIG_IS_ENABLED(ATF_LOAD_IMAGE_V2)) {
++		struct bl_params_node *node;
++
++		for (node = ((struct bl_params *)bl31_params)->head; node;
++		     node = node->next_params_info) {
++			if (node->image_id == ATF_BL33_IMAGE_ID) {
++				ep_info = node->ep_info;
++				break;
++			}
++		}
++	} else {
++		ep_info = ((struct bl31_params *)bl31_params)->bl33_ep_info;
 +	}
++
++	if (!ep_info) {
++		printf("Warning: Failed to pass bloblist to BL33\n");
++		return;
++	}
++
++	ep_info->args.arg0 = args[0];
++	ep_info->args.arg1 = args[1];
++	ep_info->args.arg2 = args[2];
++	ep_info->args.arg3 = args[3];
++}
++
+ static inline void raw_write_daif(unsigned int daif)
+ {
+ 	__asm__ __volatile__("msr DAIF, %x0\n\t" : : "r" (daif) : "memory");
+@@ -188,10 +221,11 @@ static inline void raw_write_daif(unsigned int daif)
  
- 	spl_board_prepare_for_boot();
+ typedef void __noreturn (*atf_entry_t)(struct bl31_params *params, void *plat_params);
  
-diff --git a/include/spl.h b/include/spl.h
-index 390d18fd9d5..2b8a2f02835 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -298,6 +298,9 @@ struct spl_image_info {
- 	ulong fdt_size;
- 	u32 flags;
- 	void *arg;
-+	/* Register values to pass a bloblist to the next phase, if valid */
-+	ulong bloblist_args[4];
-+	bool bloblist_args_valid;
- #ifdef CONFIG_SPL_LEGACY_IMAGE_CRC_CHECK
- 	ulong dcrc_data;
- 	ulong dcrc_length;
+-static void __noreturn bl31_entry(ulong bl31_entry, ulong bl32_entry,
+-				  ulong bl33_entry, ulong fdt_addr)
++static void __noreturn bl31_entry(struct spl_image_info *spl_image,
++				  ulong bl32_entry, ulong bl33_entry,
++				  ulong fdt_addr)
+ {
+-	atf_entry_t  atf_entry = (atf_entry_t)bl31_entry;
++	atf_entry_t  atf_entry = (atf_entry_t)spl_image->entry_point;
+ 	void *bl31_params;
+ 
+ 	if (CONFIG_IS_ENABLED(ATF_LOAD_IMAGE_V2))
+@@ -202,6 +236,11 @@ static void __noreturn bl31_entry(ulong bl31_entry, ulong bl32_entry,
+ 		bl31_params = bl2_plat_get_bl31_params(bl32_entry, bl33_entry,
+ 						       fdt_addr);
+ 
++	if (CONFIG_IS_ENABLED(BLOBLIST_PASS_REGS) &&
++	    spl_image->bloblist_args_valid)
++		bl31_params_set_bl33_args(bl31_params,
++					  spl_image->bloblist_args);
++
+ 	raw_write_daif(SPSR_EXCEPTION_MASK);
+ 	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+ 		dcache_disable();
+@@ -309,6 +348,5 @@ void __noreturn spl_invoke_atf(struct spl_image_info *spl_image)
+ 	 * We don't provide a BL3-2 entry yet, but this will be possible
+ 	 * using similar logic.
+ 	 */
+-	bl31_entry(spl_image->entry_point, bl32_entry,
+-		   bl33_entry, platform_param);
++	bl31_entry(spl_image, bl32_entry, bl33_entry, platform_param);
+ }
 
 -- 
 2.53.0
