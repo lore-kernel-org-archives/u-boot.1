@@ -1,161 +1,156 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47E7F606A31B
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 16:37:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 62C7C606D831
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 16:37:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=RwyhmB6p;
-	dkim=pass (1024-bit key, unprotected) header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=ZMOtMVgq
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=EszDmvhf;
+	dkim=pass (1024-bit key, unprotected) header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=CJqQMDLm
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E04C3406FA;
-	Wed,  4 Nov 2026 16:37:21 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3B12180CB0;
+	Wed,  4 Nov 2026 16:37:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZRrPlIPHVpwB; Wed,  4 Nov 2026 16:37:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9F9384072B
-Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793810241;
-	b=JyRNF7tJhyiX878Qx8QNaZGuDJkEoccpZZrL4Of3/EEhEDmZ50tVdPgXFKE+PMK9V+HY
-	 0nx289R5ZpRxJ1sk1jqccmM0lDeT8NOkSn3rMmVnccnSRrnjGpLMKXcKLG7XnGEDE+2gM
-	 GUKPPBElfkVG53AF/Gr/KjpFwfaFl6XeCwMEQpY7l4BcgQeYPs6zmjCddqwJu+CX7hZ+U
-	 kkaooWkIrUMsKrcJh8zZK0T33vCYxdPrDk9kg+Hkb5ZUMw0UQXrHWm5liQc5GeHH+wnuS
-	 QalgDNZmejqInDtQLVBK+YtjtamzFlUsbcvnR2J7xu3f4pCUSv2Ka4NLoyTQpAB7Tiw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id juraeyY-iNwD; Wed,  4 Nov 2026 16:37:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 082BA80A84
+Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793810243;
+	b=n1HF35Nl7SYI0AOClIkDuE123JpJ8CClfboI8eo5usWQOpISHAEFoT8VtnYZNqC1RGnL
+	 L3sTpamRQ8oOqzfXvXCIM1Mf041CQfa6cxqOVrf4v45vQVGlA8nGMUReFGw296vCMV4ER
+	 Zc3p7tiW9CZMuWE7jjZtPEaAin0YT4/uS8VT/OQo9/F+lgQbI27HqB2afakllgrygdLVA
+	 bfr+vvWxikRcO+BdGn42msFZExXUWrAKDJhtNmdI5xS7YeZd4FI4jG3FAJpaEn/QLryJO
+	 oQcKD74FG7sOjzGCz13gCwxuxumWI/dJ2rpPiJdNT0mJ/cUDGxAgPxxAO9Nk0NPUA+A==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793810241;
+	c=relaxed/relaxed; t=1793810243;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:X-Comment:Received:Received:
 	 Received:DKIM-Signature:Received:X-QQ-mid:Message-ID:X-QQ-XMAILINFO:
-	 X-QQ-XMRINFO:From:To:Cc:Subject:Date:X-OQ-MSGID:X-Mailer:In-Reply-To:
-	 References:MIME-Version:Content-Transfer-Encoding:X-Virus-Scanned:
-	 X-Virus-Status:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 X-QQ-XMRINFO:From:To:Cc:Subject:Date:X-OQ-MSGID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding:X-Virus-Scanned:X-Virus-Status:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=K+TCE+oX4366MTGwWTPuhHG9aOKkTHO8cf38dlyolFs=;
-	b=cn8TaC7b2gxXmL9zF9CV1+g6v2cf3HInNNxOna2HJYxSXPrBjTBdTamdpJs9YLRx8q0E
-	 8b/ffnnTfXu52+/wH+uJfmmmKmT/JyaiM0WI5PyzTirKxd8y2PIIwiqgLF11/mXru3bD1
-	 A0pzmTIfalSioba9ykhsF/ypYMAo2Tx6DIlwLlAGqHsZhPfsqeZtnj0ABVDxath3PGve7
-	 OB9UTpCztv3y5dHfJ7QiGFcG2eO32Wwl0vARFioZXuLnLIENxDzjr5p8tHN+wH0wgaUpi
-	 eqQdv/I8b6lQbW73pjDi7A41kgUWq/RirOblXNEFmIwyycZCMs404LhFXc8ojs3dG+A==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=DqJrcYfjPbfEsHlUIY5rz3wsKIuevKRd8v0aKsITELM=;
+	b=MllTzNUqDBt1ftIua2ak6xrz4XFJ+OUDbkpXuE1x/qyAnhzr9M45OfAfa0fbi42Nd+xM
+	 3othTtXxB+4tgTcgahS9nChSmshqtxd8+KDFvHOJsToDeu4DPcP56eKPgcexXBnqqHvYc
+	 iBSXHV+2slzw5oqBxFtuO/5A3J1k2lybpi3HeGUY58VWowupNljsJOR46J6cwBwceTJh9
+	 d5M/tl7ltGmz6b/HcJF60zDgneUT5gNywHVX8plFsfdhqVv4s1IZXiOkkbggWTVD4x7qq
+	 X1oiqDB1wJRdeSugz2lMxZE96wvqLJTGyfKcJ773fuKAXiKyR8bLxzdx+FQY8GpLEfQ==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793810241;
-	bh=K+TCE+oX4366MTGwWTPuhHG9aOKkTHO8cf38dlyolFs=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=RwyhmB6p5Hp67toAiSE8l1Lj8QxJLAh1d5mI0s4Aiw79ZWmY8kZY0n4O2rxdfT1Xs
-	 9HNAAu3qYirknQj7oTSyvjLna4vkMhdGxQCXC6r0IglziacCZccbjI9T5dZXLjT5kq
-	 B1OsBwJQzmEI2G3mFVrSXtVX6dlbiuJCPMv6GlMMc3hzp3SP0liKeI+No4DPYIRJRL
-	 UNmcPJ35D6TM1Z9dwaphcM9wnreIiQMI1+cOLi4hIbwDcW3ty1kypARKPCtxzcMaMD
-	 AeCJVmxZUkJcHmujldTZ7zgFjHCBsDU83xwtgXaHGCfayEMFYfldjuaIAR+uqYegUx
-	 NIFAt/sX4JsxQ==
+	d=lists.u-boot-project.org; s=default; t=1793810243;
+	bh=DqJrcYfjPbfEsHlUIY5rz3wsKIuevKRd8v0aKsITELM=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=EszDmvhf6Xy/qdrgqh5n9ariUiFj8hra7EA0Fu8gOouCN9zsQqdA/xUZavDoDsju1
+	 6CuzpFI1yJttb/LqjMWiDMz7WjoTJrhFyY3kYYzzfBd1uyM8y3K1qsQpYTeLO1IqeO
+	 AzHPIvFgqX4VQ4/TbIWsiXx7GJBdObbGCOx0TjAgKRu2njPCynMxSjDFmjgrHsrjWY
+	 im2+ySWYvzUq02O2dGLWNTneCMSJycWk/C7OMe48cPY4jSpAyW+s89ZtY4NFCGVrqf
+	 BugnhSVuvQTxeDCEoeBjvx4B0EvTnQC5vwxtcR/SPqMKiBGMFWjcaMPrAyvfJSWBF8
+	 feGaj3+4El8qQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9F9384072B;
-	Wed,  4 Nov 2026 16:37:20 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id D41E8A10
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 14:11:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 082BA80A84;
+	Wed,  4 Nov 2026 16:37:23 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id C4812362
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 14:11:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C629280CA6
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 14:11:40 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id AA98140062
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 14:11:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 246HEbGw8Jjk for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 14:11:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BBEF480C9C
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=85.214.62.61
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793801499;
- b=J6Lganuqyk1noKnASjfB2VUPDgux8juoxDfsGfTJQbWBNMhlOG0pToA5FUli7BEe/dM/
- KDgCRsYUYXYTfHigDA2ynQaq1a2Y2iOdnLwy80WB+28nNSzTCCvTiZma4jP/8wT4mjifN
- 3PCjj0Y7Qzjii4Z2v0MrJXwgT/QsBeXpQ3o3xuNspLZ8EENct7DiVZiURIRMQyIgHPGqz
- N4arM7Recnb8DuNSWmxyDrpNUcGeOUS6JJXCAR34OmP47e+cSiXKDYTcuaA93jU6YqDtA
- mJsSAU9Pfq7bSlJ7rbdXKcbnH+oYVy+/u2c0kRU98B2BQzaFaWxGYIEwlJdTsKhHI+A==
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AeWcDDeIAXFa for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 14:11:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 757DD40068
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=85.214.62.61
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793801501;
+ b=CdZMx4g82s2O1FX4CF2d92XMOSgy/Th5P+LzVwIM5Ee6o5ZARlIfeCkVM90rS2O3Q6e5
+ V//A/Y71eexyrcpSnb6fPM+JInNk/0WgRteiZNuZv7K7Q6R970XyU1ZoOD1ieG132yPnD
+ +19sNfQEgzY9G56GcZdgHv/MhcBoq0SpV3tmsJjibcw/1gAbEZKkh3MIKgg2XjJ005pMb
+ 65sWJn1oFLT65eu2bCW/6RdrL2Cl0Rdx465l73lNHzsJFO5Z8WaAjiO++kUf8pxYxlWxK
+ zwc6Bcw165l8VskuHH2RXhCcvVAtuFov7ml+OIVvf5XTI5tTBaMmnjEddwOns5YRpYw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793801499;
+ c=relaxed/relaxed; t=1793801501;
  h=X-Comment:Received:X-Spam-Checker-Version:X-Spam-Level:X-Spam-Status:
  Received:DKIM-Signature:Received:X-QQ-mid:Message-ID:X-QQ-XMAILINFO:
- X-QQ-XMRINFO:From:To:Cc:Subject:Date:X-OQ-MSGID:X-Mailer:In-Reply-To:
- References:MIME-Version:Content-Transfer-Encoding:X-Virus-Scanned:
- X-Virus-Status;
- bh=K+TCE+oX4366MTGwWTPuhHG9aOKkTHO8cf38dlyolFs=;
- b=cZSmDKZbFG+84v8GFsHIBKqQbzkuRhmplfb84naF8vCuG8XgLumv7XbIKEwtJIukHEql
- bI7buuzx8VWGzJK/KAmN+vZ2QghjdEVVdInZiDbQKpgRY9Q0CAiIVuHsGDVbJpCqOd4Yr
- 3nKK0J5ZOMQNd4KY95Z9dDszfz5pzmEf/0OA6Ga4Ojq5VzNO4WRqtwV5V3JssIL6hNyxq
- vJwo+1AlxtgBSLDo8MH60RxPgZptkCnaWi9ni5Z8BY9kOvRdUXRUOaZaxaIKV39J7XvbW
- 7n2MvvXdsDjx94H2sVgf+XOLbbB6nJXY/cclVFeOf34nL2ZfH/evtH/JXWHAT8DGDLQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ X-QQ-XMRINFO:From:To:Cc:Subject:Date:X-OQ-MSGID:X-Mailer:MIME-Version:
+ Content-Transfer-Encoding:X-Virus-Scanned:X-Virus-Status;
+ bh=DqJrcYfjPbfEsHlUIY5rz3wsKIuevKRd8v0aKsITELM=;
+ b=gograp8xfHXmZsAoIxNl8Y6x08hEVS/eVZEafV6+2zScOKe+gpyKOe0qHV9f3VN26U2z
+ 2VXxuowJr655lcMeJ+vgHQwMiDplabf6cZo18FZm/j47cFBrPiJbXIwBxYmoW3RBXMrcH
+ aROVZLd/owzXFBeqiffW9gUDXNZ4ZkjE7buoxq0g0QOcn4NPsqtEmWBgrdvhDbFSEqO+e
+ 1dPLpIxWcfpok0SbTKWILzLk7Eg5lYCx6d5hQr7OpEVtLSuRR7BULKQD/Gp/l2a5iBQsD
+ Tyq0r+ZpahBtyOEhFtjZ/Bv6eUQMKPIfb6oZ7BOXPMQ3OBq1V/aU13KrlwADfnGnvMA==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=qq.com;
  spf=fail smtp.mailfrom=qq.com;
  dkim=pass header.d=qq.com header.i=@qq.com header.a=rsa-sha256
- header.s=s201512 header.b=ZMOtMVgq; 
+ header.s=s201512 header.b=CJqQMDLm; 
  arc=none smtp.remote-ip=85.214.62.61
 X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
  helo=phobos.denx.de; envelope-from=xjmps7114@qq.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: smtp1.osuosl.org; spf=fail smtp.mailfrom=qq.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp2.osuosl.org; spf=fail smtp.mailfrom=qq.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=qq.com header.i=@qq.com header.a=rsa-sha256
- header.s=s201512 header.b=ZMOtMVgq
+ header.s=s201512 header.b=CJqQMDLm
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- by smtp1.osuosl.org (Postfix) with ESMTPS id BBEF480C9C
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 14:11:34 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 757DD40068
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 14:11:36 +0000 (UTC)
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0CD584828; Wed,  4 Nov 2026 15:11:32 +0100 (CET)
-Received: from out203-205-221-210.mail.qq.com (out203-205-221-210.mail.qq.com
- [203.205.221.210])
+ id ECA718480F; Wed,  4 Nov 2026 15:11:33 +0100 (CET)
+Received: from out203-205-221-191.mail.qq.com (out203-205-221-191.mail.qq.com
+ [203.205.221.191])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A88E48480F
- for <u-boot@lists.denx.de>; Wed,  4 Nov 2026 15:11:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 129BF84823
+ for <u-boot@lists.denx.de>; Wed,  4 Nov 2026 15:11:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=xjmps7114@qq.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1793801478; bh=K+TCE+oX4366MTGwWTPuhHG9aOKkTHO8cf38dlyolFs=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=ZMOtMVgqfdzIfD/neKWzTuwse6Y1Xtj1KgFaFd92+czFBUAtf4DvbhD0RZh0FqdWN
- wNpCPoBji4ybeXjxEWPXqllvgSvQapu1R3P92GHO7dgg0gIdDzYvlE6w7gc7X+G9pf
- /9mMuAHYH7ONtxtrq9WzeGmi13NR7D/nBuG4k9MA=
+ t=1793801478; bh=DqJrcYfjPbfEsHlUIY5rz3wsKIuevKRd8v0aKsITELM=;
+ h=From:To:Cc:Subject:Date;
+ b=CJqQMDLmdCQgfXBLUrOXtP0E+36vZKTjz+tNMrRZYiTW73dMEa+XLqzjh7kCgLlC2
+ urlFPmgiMHRbInQgYEoZcNhofYn7+ABlbSnDaN6Y+sU2AEOGzQNhyB7OibkfMtoCld
+ NxNUtmfEhhOmgZSVwdoDRC7RuR4bkje0BID19n2Q=
 Received: from localhost.localdomain ([27.38.1.195])
  by newxmesmtplogicsvrszb51-0.qq.com (NewEsmtp) with SMTP
  id 2D030261; Wed, 04 Nov 2026 22:11:16 +0800
-X-QQ-mid: xmsmtpt1793801477tg4f4rwm6
-Message-ID: <tencent_6C5B293C811C2C4B1C6DC17B52A6E3C87E08@qq.com>
-X-QQ-XMAILINFO: NGZp1yYNf7Y+WZ3pdeBQwqhF4+wkuuVNpFAJp23vrxJT07FddgXlOBdjAdRjLe
- LR/6Nzhe76zIHclnCzpsOoAzd3FMffNgFM4v5s2bXCcvZhkCu2/2FyRL9n/F3yguRmHc06oD03r8
- VGOY6GO01sBig6pkSFJHlVu9aRUUjzSkuG7IGQwUdbuKzRQmCSS1Wrs26OOWT4VSP0zTX2rw0ln6
- tj+yh5eKd9hLIt3nFtgviKy4+1Q2w/k0s2NGgIoaa9SnB7KeX5sajZtuVCo57ZhIFBaBG9oYQ9FQ
- H6I6T430D0YZ7V2mkTK7B+juAwE0eaIHi+AsAqlNqI88htWalEyvXuQfyvrv4Nafi1Vrs/VZb//Y
- hIwJdJKsgu6oIg7IbAW8yP3tL4kg0lws69u7UlwpfGo2ZaIIdHk3xuqEG6Qtlyz5qLyaBPjmo5Xe
- 3SUrEF0Q3rPXimHOAbg9dXdQ1KlSbX4nOZOYY0L+1auPl69bYGIFzXFTkMoi6b9X/W9gwVa/WrAJ
- V9myUI+VVmlgT8MVc1m6zO86oGgzbGJzI5pinGnDftaidGtx2JIkHU7yYBJbeSfT7SzyoNTkT7ex
- tD9jlIIF72dqeqEhQ7X5FU67hCHkz5cM691gQdibSe15KT9HmfAGLxIrJt8Vzi+2cKcWhd8fy8f9
- 0zZYqTJW9b+hjtQGKns3ywa2YWhBvEK+w23iAp5X96t8B0ppHxMwpiO/n8uRqG0LusC5il0bg3ns
- SqWtRjy5sfjdy6kiBoevIeg2kZOmvKw2wIijjZX5NPQCZ/4auKhJnX9c8LzqEsQx8orOISqgLb7v
- VziPqyOGgpCvxGnP0Pv+sQvEgyNczNmacGVScMfZ8+FEKPNCFZpOmvzAUk1IbWACMU3b9qlP6El8
- RNyvsLKz0g1T2I5NFBnG/HZcQMFtfrKBV+Ovi3kMdITOqcJcuvKzSqwzU+hgKJDIQARv+YIoYSRs
- fahQtXFCbjyRPQGk/Pfncjn4JNWHlmHD/0Sx1juW2cQda3K20f76KOP7gWdHE4o34Q/XvEQa00hW
- UdT5eDrpRz7uFXN63WFiKcKBSssnpf8wE2B+CN3VSVSbIU5JBT86l7X0k4b1kIdPqVAjBX3NatVM
- HC5sUT/oubap5VovI=
-X-QQ-XMRINFO: MPJ6Tf5t3I/ylTmHUqvI8+Wpn+Gzalws3A==
+X-QQ-mid: xmsmtpt1793801476teebio2o8
+Message-ID: <tencent_4D4A63A00ACB3E875F30AD14C1B8961F5D06@qq.com>
+X-QQ-XMAILINFO: M1rD3f8svNznZwa6WMUCD7+j2YVq7T+xPDhdV6zYw+04ExzrTjgFOu5fFp4xFt
+ C+Clu//niEaw5+XnnL1BtNnZdpi+BiIf04GCb+Fk/NLxSZ5Y+9Vb1oAC8qvgatAdMmmE4sqY0Xt5
+ ckHOR+MrXeLUWnrBgEqSCHVoPU97hETBd3PEr4bRvg8/WPSsWj39Ecxrqnzvfh+62uWiwh+H83QC
+ Fqj8w75cDf21n60CgwdCx3amU2dZ5ScitrVSb6aqbUGUAXzVIBADDE1aS2O8o1ZgL/c+iMjNTOOT
+ 4DFg78D6H6TGTfhC2kX9DFa90528rdjfPKRx8FlGrzBOvF5SEsEd3jQSjJPSnzSmKnfZDDTX5uXc
+ nb6BVMm8yNJWL2HeZikD/Nf1oPdongcCIUPhRKwfXbYLaC+PrgmRn2XbSD26tmywSmqSNcnEjNnN
+ NCuYWt5GSjnvrnUcGwnPpRnixyuBgd9pjaxSeG7YrUyenAhTPyXcb0cV/TRp3ju29VZeiRnwzXqS
+ l58prr5hlmVxe+L8R+G5efxX0QwN3pDHFxHLOXLKrPuFYhSsb7eoYJx18EbR3wP0j0zxHl8paWDK
+ KJdkaXzsfoj7xt0jBSFwMrhIho4SgahIZMbRGc5Ek+gwByiSKtdWm3oylwL98rXk7wiIF+ZiXiE0
+ ey+uo+NqrxX+Y/4L+YDM+MhVTMpRD8S9qcL7/Cpl0btCLZkBQfoHb4JiHfATk4A/jjzukrHMjvYI
+ 0iWMqD9MXlWhs++wfR/OtaiivjIGmYFkNhW/muMWSSS3BiAK2bg07e3UOXEOF3ZOnAnov3TY3dm6
+ utcjieZncK97lXcPL3W1fPbWvVeXOdhf8Ywbv2QWGJes442OKfq3FSJb0D5wEahDLAx5HCGE0jes
+ xp/mfPejJwKM771DMNG6xQbX94n95urNEG0WpgSXFYLrBgutJ4BeJbQGfWb6yT/5W9IUFO1Gs0rh
+ eBs4BUTdp4qv1xwV/8ifn15l6xJPkkrOQBtdjdf5Jabt0YfxDfvIEmJsvwWVrpcjagxitvvQ640z
+ 06w1ymBvkEEP2XtMFp4FcpuGI5ALe12llgRFVVlSSKVq16z9ZRRJcWF+sABXl48dqstEG1MUBJEI
+ tK3qjg4JH1XJLdjc8=
+X-QQ-XMRINFO: NI4Ajvh11aEjEMj13RCX7UuhPEoou2bs1g==
 From: eli <xjmps7114@qq.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	xjmps7114@qq.com
-Subject: [PATCH 1/2] spl: fit: add software rollback protection for verified
- FIT configurations
-Date: Wed,  4 Nov 2026 22:11:16 +0800
-X-OQ-MSGID: <20261104141117.12284-2-xjmps7114@qq.com>
+Subject: [PATCH 0/2] SPL FIT software rollback protection
+Date: Wed,  4 Nov 2026 22:11:15 +0800
+X-OQ-MSGID: <20261104141117.12284-1-xjmps7114@qq.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261104141117.12284-1-xjmps7114@qq.com>
-References: <20261104141117.12284-1-xjmps7114@qq.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -171,90 +166,54 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_FAIL,SPF_HELO_NONE,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 A verified FIT is authentic but not necessarily current: replacing the
 next-stage image with an older, still correctly signed image reintroduces
-vulnerabilities fixed in newer firmware.
+vulnerabilities fixed in newer firmware. This series adds opt-in software
+rollback protection to the SPL verified FIT flow.
 
-After signature verification succeeds, compare the configuration's
-'version' property (covered by the signature; missing counts as 0) against
-CONFIG_SPL_MINIMUM_FIT_VERSION and refuse to boot if it is lower. 0
-disables the check.
+Patch 1 adds CONFIG_SPL_MINIMUM_FIT_VERSION: after signature verification
+succeeds, SPL compares the configuration's "version" property (covered by
+the signature; missing counts as 0) against the minimum and refuses to
+boot a lower version. The default of 0 disables the check, so existing
+boards are unaffected unless they opt in.
 
-Validated on real StarFive VisionFive2 (JH7110) hardware: signed
-version=2 FITs pass, a correctly signed version=1 image is rejected
-independently of hash verification.
+Patch 2 documents the mechanism, including its trust-root boundary: the
+minimum version lives in the SPL binary itself, so this is a software
+trust root only.
 
-Signed-off-by: eli <xjmps7114@qq.com>
----
+Related work: "Add anti-rollback validation feature" by Sean Edmond
+(2023, Patchwork series 372657, currently changes-requested) addresses
+anti-rollback at the OS/boot-flow level; this series instead targets the
+SPL FIT configuration-verification step and is complementary to
+monotonic-counter approaches (RPMB/TEE-based).
+
+Validation: the same mechanism was validated on real StarFive
+VisionFive2 (JH7110) hardware against a vendor 2026.07-based tree:
+signed version=2 FITs pass (cold boot x3), a correctly signed version=1
+image is rejected with a dedicated message independently of hash
+verification, and recovery was re-verified. This series was replayed on
+v2026.07 and builds for starfive_visionfive2_defconfig with
+CONFIG_SPL_FIT_SIGNATURE=y / CONFIG_SPL_MINIMUM_FIT_VERSION=2; the SPL
+binary contains both the hash-verification and rollback-check strings.
+
+eli (2):
+  spl: fit: add software rollback protection for verified FIT
+    configurations
+  doc: spl: describe SPL FIT anti-rollback usage
+
  boot/Kconfig         | 11 +++++++++++
  common/spl/spl_fit.c | 24 ++++++++++++++++++++++++
- 2 files changed, 35 insertions(+)
+ doc/develop/spl.rst  | 43 +++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 78 insertions(+)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index ae6f09a6..7ec0bde1 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -224,6 +224,17 @@ config SPL_FIT_SIGNATURE_MAX_SIZE
- 	  device memory. Assure this size does not extend past expected storage
- 	  space.
- 
-+config SPL_MINIMUM_FIT_VERSION
-+	int "Minimum acceptable version for FIT configurations verified by SPL"
-+	depends on SPL_FIT_SIGNATURE
-+	default 0
-+	help
-+	  Software rollback protection: when verifying a signed FIT, the SPL
-+	  compares the selected configuration's "version" property against
-+	  this value and refuses to boot if it is lower (a missing property
-+	  counts as version 0). This rejects older but still correctly signed
-+	  images. Set to 0 to disable the check. See doc/develop/spl.rst.
-+
- config SPL_LOAD_FIT
- 	bool "Enable SPL loading U-Boot as a FIT (basic fitImage features)"
- 	depends on SPL
-diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index 46ebcabe..9dcc58a0 100644
---- a/common/spl/spl_fit.c
-+++ b/common/spl/spl_fit.c
-@@ -781,6 +781,30 @@ static int spl_simple_fit_parse(struct spl_fit_info *ctx)
- 		if (fit_config_verify(ctx->fit, ctx->conf_node))
- 			return -EPERM;
- 		puts("OK\n");
-+
-+		/*
-+		 * Anti-rollback: a correctly signed but older FIT must be
-+		 * rejected too. The configuration's "version" property is
-+		 * covered by its signature; a missing property counts as
-+		 * version 0. CONFIG_SPL_MINIMUM_FIT_VERSION == 0 disables
-+		 * the check.
-+		 */
-+		if (CONFIG_SPL_MINIMUM_FIT_VERSION > 0) {
-+			u32 version = 0;
-+			const fdt32_t *verp;
-+
-+			verp = fdt_getprop(ctx->fit, ctx->conf_node,
-+					   "version", NULL);
-+			if (verp)
-+				version = fdt32_to_cpu(*verp);
-+			printf("## Checking rollback version: FIT %u, minimum %u ... ",
-+			       version, (u32)CONFIG_SPL_MINIMUM_FIT_VERSION);
-+			if (version < CONFIG_SPL_MINIMUM_FIT_VERSION) {
-+				puts("REJECTED\n");
-+				return -EPERM;
-+			}
-+			puts("OK\n");
-+		}
- 	}
- 
- 	/* find the node holding the images information */
 -- 
 2.53.0
 
