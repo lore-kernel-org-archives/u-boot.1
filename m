@@ -1,171 +1,151 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C1E1606A326
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 07:18:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27621606A326
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 07:48:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=d1MLUsZE;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=jhhkI1zx
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=iGJyZAld;
+	dkim=pass (2048-bit key, unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=gpt6cTHE
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E76CC606E3;
-	Wed,  4 Nov 2026 07:18:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E02A3405C6;
+	Wed,  4 Nov 2026 07:48:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EXzfLt7gB-Ck; Wed,  4 Nov 2026 07:18:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D562F606C4
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793776704;
-	b=rw7yZHsB/4BzzuWjj5zM74u4UEKeDdKZODj20ArEx0Y47MxWh6oMRt6Nj7oUjvOWkgd5
-	 w5J9ekLzH9XJxsx321pJBfu8apGQ/VH9jUtBRc0nHV8y7Uw00M6KfIFvcojy5DCD5C8eB
-	 WmPvmJnxc0kK2bk7lvpuceAHLUCdlbAhT4y8WMSLwrYwkzMwELhtsiLBHVxBRr+TLJNDn
-	 7QyS8vMcbyD+RFKicKws2m7p/+1dKyC+EkSNKR8NTnKtMBLNOVr790dCm2fziv+yJFojj
-	 xit0Fade+1poHlp4qHVcexrVS8xCmS8Wv0+nFTPkyRB1BwYNFGuwdd/eQkmfjQ4JWSw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ai4gttNXx5Ea; Wed,  4 Nov 2026 07:48:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2AE67405C9
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793778483;
+	b=TtxdTmvXHWS7Dc5LDbve9yzZhCEVzbtfCz3u4JX5y0v//3wRvYlVR2M6jdaZJzwtbiyS
+	 fv0X1VZ84t8tG0MgyZ0uG7Owjir/LLWRLkxM0rQgCanwQxBkhCg/LYyjTRV0jj0CgyQrl
+	 9cRVeHrVGE6+0nHioLRZAHBwWtvSbHhV3SV04QCc3AcMA2qJyKOv+vEyVKs1f9FXRN4x1
+	 Fu+O0qZjO/RDEW4B3/7re0dHNo/Xwq8mYWsxqtRhLJXEgqlQ1JienIAyUqnfKKaqmV/P1
+	 lrIVTHNswIgVYegALYue2Ll0MJwCfMO5NeQYKBUwG+AV4kmUGl+QPIdOtNidFtlQHAA==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793776704;
+	c=relaxed/relaxed; t=1793778483;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:In-Reply-To:
-	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=uSi1vWhi27MvSmw0u08lNcI8dawsByW3JZh1vsssIrQ=;
-	b=oUyxAt75GvPkgRimLL+QtQ2XpvBmjC9XUXEby/iQyFyELjYZFwTeJyecYHOIttubfL7n
-	 Du3yYeCJZ3BPdhgIWo7pXfonbHldgSd33ZbuLnJuwR6Gj0lU7393PmbeH6HsPMWZ+tPt6
-	 nFb2GIRenQ990Nt5fViICpI1Ls1o5IcViOjeEWT0p24U95eBGPkGCeYYD+qW2G6/wflov
-	 xriSQ1438o8YgA4B6Tosyo7UnwtaHeqKIqapMfW9ismuIG0ZHMsnYj2WduebPGoQHcKRS
-	 t06yDJVUkyT2POCtUPweDf2oosPsZ81A4xHTbhGKlW6KAiOjzzGKv7ki0qOD3obMZcA==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=jhhkI1zx;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 X-Spam-Status:Received:ARC-Filter:X-Comment:Received:Received:
+	 Received:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:Content-Language:To:References:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version:
+	 X-Virus-Scanned:X-Virus-Status:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=IiobQ5JtKQ3Iu0Ih8dKR8unlF3Gz2KZdIEXWX7XcwVc=;
+	b=EI58nSSmMDN70Mj3Qn5f92P/b2jC0U5dpc0YNtpuEX8WjBhnUn+QmDyAVqozCWB6AWYx
+	 A2JMgzVtyOwruewwGuTTUL9qgZaF4oWxPfY0FkbhiVSB4iHMW8ce8dPavknq9nFgyjU4U
+	 Iq/PXClhBDPZ0HRLVeM5tnr7wE6Ms3gUanb7Eg9UEtHQoXc8kDtzWUw3qzX7WZjuXPGhB
+	 IJTsgHxGz7Vs2dBSeds6DPbJckaHIrwxFFo9qQIySWwmXfoQmb33E/CPfbuwFNk981F0l
+	 HcYweJp4tIk8QJvH5mAma8sNY94JBLABc9M8GRHuwzOu+/30Qrq+rCUfPQwrAbYfmUA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793776704;
-	bh=uSi1vWhi27MvSmw0u08lNcI8dawsByW3JZh1vsssIrQ=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793778483;
+	bh=IiobQ5JtKQ3Iu0Ih8dKR8unlF3Gz2KZdIEXWX7XcwVc=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=d1MLUsZEV7M+97k9rQlONJ4jzRrirFbiCU717OU6LBAc06V2eLRa6q8ufHOzyLz3N
-	 kERtkGJp/o5WJfovVcSxgz2ZXYCEY4beDyOOBM8nK6Va6ZIENr7Hv7lcTYwutHRRSG
-	 +J1GLXSedIu5iBs9l4KD6fICp+vSpW4gb3lblP0yryVEH3vVePo+c0EQ/AqvKyCxzh
-	 TjUeul97kaMGWqnbzvTv5euNid7HqnWCsIBkn17pqyFIfvj7Fz/KPQahuKxDWkaX/f
-	 Ceam3S/iyzpUvNn85HLqlAOC16q500tnDUCTPL0r+FjlOeeKzkYAYl3OfL4MrD+9Yq
-	 lH7AH9U9ldtRg==
+	b=iGJyZAldFH1H4Wb2vUqfSxt7veNaSn0aEnR090NYHsLiRPNgAj2sP2vsWo8PgSVf7
+	 u/SXrJWcCDNKWJBZ6WspqLNWBZavYhIkmximx4sYqzgXAOjmpmBoU6W+l11zmIQFFA
+	 gkKl9nEZ1Mv/nqLTCieaSNtSW+UQWHW+U6ZKEmYZMsHE+K10GAzlEdLpuigVqPj/xe
+	 mlpjDKguNmW0LW94Eu5T7+kjL26/5Hg/2IUtyEtRrt7naAFDOWaqkE+9NE9wqoso6T
+	 Aj/d4TfJP/B6b6D79LMj2pdmndnkRIVK2JJvLXlUY/YTcenA8iYxUV8xQruJxbIm9E
+	 96kFbWU+8Ggwg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D562F606C4;
-	Wed,  4 Nov 2026 07:18:23 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id B93162B6
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:18:21 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2AE67405C9;
+	Wed,  4 Nov 2026 07:48:03 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id BAEF4435
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:48:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9F118606C4
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:18:21 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id ABDB380DA2
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:48:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YGy-GY4EaB4I for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 07:18:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 65EF960698
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::433"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793776700;
- b=qZ+q0kSrRADJdhjoWxFBFprX6eOgDmZrGBIDOSFfbDVhMRf8m4yf6mG3O4HI34JkTp5k
- q7kbVb7iTn1rUIqOY18p14+0HgVUiy3jf1eKtXPO7aZwnqV9fMTFVq5yIa+yWWKRrLk8R
- tIJJAYbuafHZ0/riev/fKCRmsaOAlb6qJJg4vHl3IBdQDjMoFHhaJc4nXt/qf/MXv8SV9
- 6HlRDvenOrXiU2xmISc9lYM8vNVaaK/aiYDNMpSBaX/VkQgk/56kBKo58UiToes4mZZSo
- ojsUlqGZkAmIDYoc9EF20ViwWKGqONhr9iVOYFAdd7LLajbkZq2vSIlvjRVspCIh7FQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IGP-0A_NrmUX for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 07:48:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 20ED380D8D
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=85.214.62.61
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793778481;
+ b=IngcQh0QavpnHJCS0cVXosNEqAJxndvM01kR3xcnxei2jbh9xoh0Fr5j+A4AHe2wbraz
+ y6AbJhQlmvuLzmMey2TARBBmaqjQmwfMiBORqHmbbjBMfhXILOyEC2D99L74M5ls7ypAl
+ 7QQuJG30ZM+Vs/gyoYcNATr93WC8jVHSrjkiqr3KN9a6YZaYnfVBIEa96oLPXBVkry8HJ
+ 58oz1lbX3bMhMwDifnPJfd0bjYMgpxtY8UTyqnQLK6qZ1gj+gnuLuBvfo7PCSjgiEtT4J
+ Pn9VVtuy2Tud7GJR1ZPZ6MypagPdj34HAfi2/5XW1Kl17f7c+KMHcLz+ZDJJ/2lyyzw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793776700;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:In-Reply-To:References;
- bh=uSi1vWhi27MvSmw0u08lNcI8dawsByW3JZh1vsssIrQ=;
- b=HXxCZ2u8nItQSp2lAR68tVOyBP5+vj8brQnBzA1xgd8BU3PqUbgQ+5z/Oid+xQL9Jud/
- eNCnCzgK/xY4iFOjeBT+EZSNjvRuDZ/+EMoJtoWCXS6j0uBJf89RCThZU1n3LcdIIuJ9g
- wvybAcYuvm33GsfVSUqjTTXKS982DtUzbAPcfaU7irXeKPss8FSqA1XN/UB9h3xy8MNW+
- 7+uJV/Lq3a7a/GfZjGkTsn28X+0T4yeRYUV+CbSgLrkqVofvU1jlElNZes1PRPETFWHVI
- sbikAm76KyabMN0oE/uoeDiMESUOnjBTNnhV476PFV4Q9fSC+xILw/tlERSarwEgjQA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=jhhkI1zx; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::433"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::433; helo=mail-wr1-x433.google.com;
- envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=jhhkI1zx
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 65EF960698
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:18:19 +0000 (UTC)
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-48bbb06e746so169036f8f.3
- for <u-boot@lists.u-boot-project.org>; Tue, 03 Nov 2026 23:18:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793776698; x=1794381498;
- darn=lists.u-boot-project.org; 
- h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=uSi1vWhi27MvSmw0u08lNcI8dawsByW3JZh1vsssIrQ=;
- b=jhhkI1zxqMLX9mCuLhHQc6T2WoYWmZ8TFtdP39DqZz+O0tVKJEaD4nZFWWqlqglBED
- 3n99N3bxoGkw4e0EJLAua+d8N51XYhY3cz7plZ6Kl53rB21Ov+I1n5cwD3hOJEfaKpoa
- Dzi4+7QQHoIB2xj+bsq9DgxBEHvUsW2kTgtwW90lm9ocGQcGV1gISl5/kCyyIWKTaSkC
- QD7AOCspCo2byvTJ8qfl/YgmzYJHWkQHdLKcveYBoea58bO8300jvGxZAekFmt/ft5Zp
- Pc43pj+dsBgKPfmw6ZEzH9rpk9/b6FEb+pHGdfuaBU2m0cQ7icNrn2JNm6iGUmOh9nvf
- w5vQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793776698; x=1794381498;
- h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=uSi1vWhi27MvSmw0u08lNcI8dawsByW3JZh1vsssIrQ=;
- b=0k2bWjCCFZf6aG8WsQVrinhBH0/PYsqGbraEtygw0txOOhcAjZOBlO7vYfYCNAzW8r
- i4/Wh+74YyAmKkIisK23oVpMqkdqREZyFLllHj0HaMUGFAOzCMt5WjkdZW+M0b34+Iux
- 4FlCbZq+/bkPHSkCk+wLmq1CMz4Yhuzk1QnQyTr9UxRlNTkK7Nq/U7fmRZxVWTiX6p2e
- PWjM8yxO6WOUcneahNHvCVeAaqeppAHbeRXuG+Uk6B9f7dnH0wiacqE1iAKDTfNIB/Iw
- NmU+DpKH38UJlC3UlXTz2NPoU5x9SE+vyYIJGpdqUHlcc5XbNsZjC32PE/eE/u1qhiZ/
- BG9w==
-X-Gm-Message-State: APuU4Z+0/JTcja5JDROdQzQiILniNHlRRmOGPrcex5m8oSjyKqJGndiT
- u/WIMc+L2bmhHu5E/blGgkNev7TEghGmTI5oD0m4UxQRWEv0XzT3DR50yicPKk0dopc=
-X-Gm-Gg: AYBFou2qM6cRGsu23MayhmEedW0RPxC2RX5iLFlLUqeNvu2gEE8B9whU1kc9tp0uXod
- DRrTgxZaODbSA/9S/B39hlZOCq89pC+14p2GVTf/5k4YRWou/SmSMjN1FAq7eCfmQunReoU6u3T
- GGz55wdv56uJ2ZQrbUxzlFT10Vj8e2u9MEK6maOD943XELbNVzecfYlZBJ6ltmVPJI4ZLAPlYvk
- zvP+WQmVV2wmgepbqOhyGLv93asB/axvz4klAsy1ZLRDA/esr6cTpNKqiGapdIC7p9pQ2jPoZA2
- 0x7TITL7WOG50LeaUzUf2UAMx/tx21Q/iYtKlr4ezOiNpWNDXIm9Xwy32tG/fqQkkICOogbpjGD
- msO86AVSo3l1VIBJ5reeFX0T0UrPuToaNNhcpMNjIpOH/ahgBA7keS2HK6BWuQ4O7neqc3TXWYh
- PnKSrMosPcGdn+JY/kMAS+jPfDyW0ExszZDGBSdBz/ezU3oLwQRZeQJfL1KpYdD82jGETiFO7k2
- u2kJmK4ZwWI5QV6lNzgsEgxgfU1FsjFI4Dm6jWLnG5Sai0Ujc/65SNmSpBT0U/7YAUd6Fa4vkCC
- kfIMszZgurGMF8hieZuBasKlu47MV/k=
-X-Received: by 2002:a05:6000:2306:b0:486:f907:ebec with SMTP id
- ffacd0b85a97d-48e6e303c80mr31773382f8f.31.1793776697752; 
- Tue, 03 Nov 2026 23:18:17 -0800 (PST)
-Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48fecac1a1csm2184070f8f.12.2026.11.03.23.18.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Nov 2026 23:18:17 -0800 (PST)
-From: Ana Bobillo <anabobillo3@gmail.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Lukasz Majewski <lukma@nabladev.com>,
- Marek Vasut <marek.vasut+usb@mailbox.org>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- Tom Rini <trini@konsulko.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>
-Subject: [PATCH 6/6] usb: gadget: f_sdp: refuse unauthenticated loads on a
- closed part
-Date: Wed, 04 Nov 2026 07:18:16 +0000
-Message-ID: <3369ea11-628e-4e70-82b1-9a42afd54598@gmail.com>
-In-Reply-To: <4bdba9dc-0c21-4e33-8f20-2c0a7ebba0d6@gmail.com>
-References: <4bdba9dc-0c21-4e33-8f20-2c0a7ebba0d6@gmail.com>
+ c=relaxed/relaxed; t=1793778481;
+ h=X-Comment:Received:X-Spam-Checker-Version:X-Spam-Level:X-Spam-Status:
+ Received:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+ User-Agent:Subject:Content-Language:To:References:From:In-Reply-To:
+ Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version:
+ X-Virus-Scanned:X-Virus-Status;
+ bh=IiobQ5JtKQ3Iu0Ih8dKR8unlF3Gz2KZdIEXWX7XcwVc=;
+ b=aJFPDGaQ4QFFAot8b0I3tZJ31ZcP4gD5v3FTc6uvZxJ96zlPxVqEMsmkji5B+THkxf8I
+ 0JN1xgpJvbv32D8Y8/p/3OEtgzGKJhH+vdrY7mG/fGkJn7anxKZJnyy1Nh8M8lDARyiCH
+ ByW3aTFdz4TPh6/aLR+XVHPUSP/pgrLapQwVCQ/ykBK6agvA17Hx2LyxAZUlVY2galONk
+ oJSTHh4L0yyjMWRz/6dyb7sdvIzLAG6DpMoQ9w3ANm72tiiQhDALt2SybGp4NMBvx9lGE
+ LDC2H2JLui66tivOJs/ZpkdHEH5zsjc1YzSGz2OsNkWMWrymxKwmraRX0nfZB21gBNA==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+ dmarc=pass header.from=nabladev.com;
+ spf=fail smtp.mailfrom=nabladev.com;
+ dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=gpt6cTHE; 
+ arc=none smtp.remote-ip=85.214.62.61
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=hs@nabladev.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: smtp1.osuosl.org; spf=fail smtp.mailfrom=nabladev.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=gpt6cTHE
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 20ED380D8D
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:47:58 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2E8BB84823; Wed,  4 Nov 2026 08:47:56 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B90783E76
+ for <u-boot@lists.denx.de>; Wed,  4 Nov 2026 08:47:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 1E4A110C917; Wed, 04 Nov 2026 08:47:43 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1793778464;
+ h=from:subject:date:message-id:to:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=IiobQ5JtKQ3Iu0Ih8dKR8unlF3Gz2KZdIEXWX7XcwVc=;
+ b=gpt6cTHEGZQ3znr8IWQ8Tw5Zy0ttYinEaMsY7Uis9a+u75gsTpD/OAOXugvQXyVQfw136f
+ Yhv/rjtm7pnUdj9CLVWK/QmvlpVSs8pwUbWgQ07OHzDlUOLxmWk7c95gYAI1n1G6Upi0uv
+ tj6z8ouGHOJdECU9w0H5EPn8CnHXv2TuaezeLwUMf6xQmBdOUrRYXEk3uguK3X+eURdl8U
+ 1uU3PeVkuRBGReuVJjrWvnUY2FH+dBHxoiYQDum2JlMWwmI6KODTXy+Qu+okcL951jjFfX
+ rnN3wywXWd1cp939KrPnWSlfHPWyvx/3rGUjzkmeKM/gbymKgv91WXENnZBTNw==
+Message-ID: <153958ec-abbf-25d7-29d7-9f6549db8a1c@nabladev.com>
+Date: Wed, 4 Nov 2026 08:47:31 +0100
+X-Archived-By: <archiver.kernel.org>
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH 0/7] fs: jffs2: improve one-pass reader and add metadata
+Content-Language: en-US
+To: Wagner Popov dos Santos <wpopov@gmail.com>, u-boot@lists.denx.de
+References: <cover.1793724561.git.wpopov@gmail.com>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <cover.1793724561.git.wpopov@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -175,288 +155,75 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-14.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
-X-Archived-By: <archiver.kernel.org>
 
-From: Ana Bobillo <anabobillo3@gmail.com>
+Hi,
 
-On a part with secure boot fused closed, the i.MX boot ROM's serial
-download mode only runs an image it has authenticated, and NXP treats a
-ROM that reads out memory there as a vulnerability (CVE-2022-45163).
-The SDP gadget in SPL takes the ROM's place in that chain but does none
-of this, so a host on the USB port of a closed part can run any code it
-sends:
+please resend this series on the new list:
 
-- SDP_JUMP_ADDRESS first calls sdp_jump_imxheader(), which calls the
-  entry of any IVT it finds, unchecked, before the FIT, container and
-  legacy image paths that authenticate;
-- SDP_WRITE_FILE writes anywhere, the running loader's own BSS, heap,
-  stack and page tables included, so that what it wrote runs before any
-  image is checked;
-- SDP_READ_REGISTER reads any address.
+U-Boot Mailing List <u-boot@lists.u-boot-project.org>
 
-When sdp_is_closed() says the part is closed:
+Thanks!
 
-- skip the raw IVT jump, and take an image only by a path that
-  authenticates it: a FIT with IMX_HAB (spl_load_simple_fit_fix_load()),
-  a container with AHAB_BOOT (spl_load_imx_container()), a legacy image
-  with IMX_HAB whose header starts the range the i.MX jump_to_image()
-  authenticates (else the entry point comes from an unsigned header).
-  A container on a HAB part, a FIT on an AHAB part and a script in
-  U-Boot proper are refused. Where SPL searches for a FIT or container
-  header and finds none, an IVT image on a closed part included, the
-  jump ends in the existing panic;
-- receive and drop a WRITE_FILE that wraps, starts below DRAM
-  (CFG_SYS_SDRAM_BASE: the ROM, the peripherals, the on-chip RAM where
-  SPL runs) or touches this phase's BSS, malloc areas, device tree, page
-  tables or stack (once relocated: the stack up to ram_top);
-- refuse READ_REGISTER.
+bye,
+Heiko
 
-Each refusal is answered with a failure in report 4, and the gadget
-waits for the next command. Read-back of a download through
-READ_REGISTER, as imx_usb_loader's verify option does, no longer works
-on a closed part. An open part, and every other platform, behaves as
-before: these checks only apply when sdp_is_closed() returns true.
+On 03.11.26 17:49, Wagner Popov dos Santos wrote:
+> This series improves the robustness of the JFFS2 one-pass reader and
+> introduces CONFIG_JFFS2_CACHE_TO_SPEED_UP, an optional directory
+> metadata cache designed to reduce repeated flash reads during sorting,
+> directory listing, and pathname lookup when loading files.
+> 
+> With the cache enabled, directory entry names are interned in a
+> configurable hash table during both full and summary-based filesystem
+> scans. Cached names, inode numbers, and parent inode numbers allow
+> lookup and sorting to use in-memory metadata. When fragment sorting
+> is enabled, listing can also identify successive versions of the same
+> directory entry through interned-name pointer equality before reading
+> the selected raw node.
+> 
+> The optimization trades additional RAM for fewer directory entry reads.
+> Names are allocated from 10 KiB pools, and
+> CONFIG_JFFS2_CACHE_NAMES_HASH_WIDTH controls the hash table size,
+> defaulting to 256 buckets. Cache memory is released with the filesystem
+> cache, and raw-node comparisons remain available when names are not
+> cached. Listing still reads selected directory entries and inode
+> information, and loading still reads file data.
+> 
+> The preceding fixes address unchecked node reads, missing inode
+> fragments, incomplete file loads incorrectly reported as successful,
+> unsafe symlink target handling, leaked dirents on comparison errors,
+> and incorrect handling of the selected raw dirent during listing.
+> These fixes apply independently of the new cache option.
+> 
+> The final patch corrects the sorting documentation to describe the
+> existing post-scan merge sort with O(n log n) comparisons. This series
+> does not introduce a new sorting algorithm; its performance focus is
+> reducing flash accesses through cached metadata.
+> 
+> Wagner Popov dos Santos (7):
+>    fs: jffs2: check cached-node reads before dereferencing
+>    fs: jffs2: reject missing fragments and fail incomplete loads
+>    fs: jffs2: resolve symlink targets safely
+>    fs: jffs2: release dirents on comparison read errors
+>    fs: jffs2: retain the selected raw dirent when listing
+>    fs: jffs2: cache directory metadata during one-pass scans
+>    fs: jffs2: document post-scan merge sort
+> 
+>   fs/jffs2/Kconfig         |  29 ++++-
+>   fs/jffs2/jffs2_1pass.c   | 261 +++++++++++++++++++++++++++++++++++++--
+>   fs/jffs2/jffs2_private.h |  30 +++++
+>   3 files changed, 308 insertions(+), 12 deletions(-)
+> 
 
-Fixes: 5661f08a7144 ("usb: gadget: add SDP driver")
-Fixes: 2c72ead73874 ("usb: gadget: f_sdp: Allow SPL to load and boot FIT via SDP")
-Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
----
- drivers/usb/gadget/f_sdp.c | 125 ++++++++++++++++++++++++++++++++++++-
- 1 file changed, 122 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/usb/gadget/f_sdp.c b/drivers/usb/gadget/f_sdp.c
-index 8bd8f239766..7d12f0b8444 100644
---- a/drivers/usb/gadget/f_sdp.c
-+++ b/drivers/usb/gadget/f_sdp.c
-@@ -22,12 +22,16 @@
- #include <log.h>
- #include <malloc.h>
- #include <linux/printk.h>
-+#include <linux/sizes.h>
- 
- #include <linux/usb/ch9.h>
- #include <linux/usb/gadget.h>
- #include <linux/usb/composite.h>
- 
-+#include <config.h>
- #include <asm/io.h>
-+#include <asm/global_data.h>
-+#include <asm/sections.h>
- #include <g_dnl.h>
- #include <sdp.h>
- #include <spl.h>
-@@ -36,6 +40,8 @@
- #include <imx_container.h>
- #include <watchdog.h>
- 
-+DECLARE_GLOBAL_DATA_PTR;
-+
- #define HID_REPORT_ID_MASK	0x000000ff
- 
- /*
-@@ -69,6 +75,8 @@ struct hid_report {
- #define SDP_WRITE_REGISTER_COMPLETE	0x128A8A12
- #define SDP_SKIP_DCD_HEADER_COMPLETE	0x900DD009
- #define SDP_ERROR_IMXHEADER		0x000a0533
-+/* Status of a command refused on a closed part (HAB_FAILURE is 0x33) */
-+#define SDP_ERROR_CLOSED		0x33333333
- 
- #define SDP_COMMAND_LEN		16
- 
-@@ -113,6 +121,7 @@ struct f_sdp {
- 	u32				dnl_bytes;
- 	u32				dnl_bytes_remaining;
- 	u32				jmp_address;
-+	bool				dnl_discard;
- 	bool				always_send_status;
- 	u32				error_status;
- 
-@@ -293,6 +302,61 @@ __weak bool sdp_is_closed(void)
- 	return false;
- }
- 
-+/*
-+ * On a closed part the image is authenticated when the host jumps to it, so
-+ * its download must not change what runs before then: it has to land in
-+ * DRAM, clear of this phase's BSS, heaps, stack, device tree and page tables.
-+ * SPL runs from on-chip RAM below DRAM; U-Boot proper runs from the top of
-+ * DRAM, which the stack range covers there.
-+ */
-+static bool sdp_write_allowed(u32 addr, u32 cnt)
-+{
-+	const gd_t *g = gd;
-+	ulong start = addr, end = start + cnt;
-+	ulong sp = (ulong)&start;
-+	ulong top = (ulong)g + sizeof(*g);
-+	const void *fdt = g->fdt_blob;
-+	int i;
-+
-+	if (!sdp_is_closed())
-+		return true;
-+
-+#ifdef CFG_SYS_SDRAM_BASE
-+	if (start < CFG_SYS_SDRAM_BASE || cnt > U32_MAX - addr)
-+		return false;
-+#else
-+	return false;
-+#endif
-+
-+	if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
-+		/* ram_top may be 4 GiB, which a 32-bit ulong holds as 0 */
-+		top = (ulong)g->ram_top;
-+		if (!top)
-+			top = ULONG_MAX;
-+	}
-+
-+	/* Stack (up to ram_top once relocated), BSS, heaps, DT, page tables */
-+	ulong busy[][2] = {
-+		{ sp > SZ_64K ? sp - SZ_64K : 0, top },
-+		{ (ulong)__bss_start, (ulong)__bss_end },
-+		{ mem_malloc_start, mem_malloc_end },
-+		{ (ulong)fdt, fdt ? (ulong)fdt + fdt_totalsize(fdt) : 0 },
-+#if CONFIG_IS_ENABLED(SYS_MALLOC_F)
-+		{ g->malloc_base, g->malloc_base + g->malloc_limit },
-+#endif
-+#if defined(CONFIG_ARM) && \
-+	!(CONFIG_IS_ENABLED(SYS_ICACHE_OFF) && CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
-+		{ g->arch.tlb_addr, g->arch.tlb_addr + g->arch.tlb_size },
-+#endif
-+	};
-+
-+	for (i = 0; i < ARRAY_SIZE(busy); i++)
-+		if (start < busy[i][1] && busy[i][0] < end)
-+			return false;
-+
-+	return true;
-+}
-+
- static void sdp_rx_command_complete(struct usb_ep *ep, struct usb_request *req)
- {
- 	struct f_sdp *sdp = req->context;
-@@ -326,6 +390,14 @@ static void sdp_rx_command_complete(struct usb_ep *ep, struct usb_request *req)
- 		sdp->dnl_address = addr;
- 		sdp->dnl_bytes_remaining = cnt;
- 		sdp->next_state = SDP_STATE_TX_REGISTER;
-+
-+		/* Nothing is read out of a closed part */
-+		if (sdp_is_closed()) {
-+			sdp->error_status = SDP_ERROR_CLOSED;
-+			sdp->next_state = SDP_STATE_IDLE;
-+			break;
-+		}
-+
- 		printf("Reading %d registers at 0x%08x... ",
- 		       sdp->dnl_bytes_remaining, sdp->dnl_address);
- 		break;
-@@ -339,6 +411,12 @@ static void sdp_rx_command_complete(struct usb_ep *ep, struct usb_request *req)
- 		sdp->dnl_bytes = sdp->dnl_bytes_remaining;
- 		sdp->next_state = SDP_STATE_IDLE;
- 
-+		/* A refused download is received and dropped, then reported */
-+		sdp->dnl_discard = !sdp_write_allowed(sdp->dnl_address,
-+						      sdp->dnl_bytes);
-+		if (sdp->dnl_discard)
-+			sdp->error_status = SDP_ERROR_CLOSED;
-+
- 		printf("Downloading file of size %d to 0x%08x... ",
- 		       sdp->dnl_bytes_remaining, sdp->dnl_address);
- 
-@@ -414,7 +492,7 @@ static void sdp_rx_data_complete(struct usb_ep *ep, struct usb_request *req)
- 	}
- 	sdp->dnl_bytes_remaining -= datalen;
- 
--	if (sdp->state == SDP_STATE_RX_FILE_DATA_BUSY) {
-+	if (sdp->state == SDP_STATE_RX_FILE_DATA_BUSY && !sdp->dnl_discard) {
- 		memcpy(sdp_ptr(sdp->dnl_address), req->buf + 1, datalen);
- 		sdp->dnl_address += datalen;
- 	}
-@@ -757,6 +835,23 @@ static u32 sdp_jump_imxheader(void *address)
- 	return 0;
- }
- 
-+/*
-+ * On a closed part the ROM only runs an image it has authenticated: take an
-+ * image only by a load path that authenticates it, else report the failure.
-+ */
-+static bool sdp_jump_refused(bool authenticated)
-+{
-+	if (authenticated || !sdp_is_closed())
-+		return false;
-+
-+	debug("%s: refused on a closed part\n", __func__);
-+	sdp_func->error_status = SDP_ERROR_CLOSED;
-+	sdp_func->next_state = SDP_STATE_IDLE;
-+	sdp_func->state = SDP_STATE_TX_STATUS;
-+
-+	return true;
-+}
-+
- #ifdef CONFIG_XPL_BUILD
- static ulong sdp_load_read(struct spl_load_info *load, ulong sector,
- 			   ulong count, void *buf)
-@@ -842,7 +937,10 @@ static int sdp_handle_in_ep(struct spl_image_info *spl_image,
- 		break;
- 	case SDP_STATE_JUMP:
- 		printf("Jumping to header at 0x%08x\n", sdp_func->jmp_address);
--		status = sdp_jump_imxheader(sdp_ptr(sdp_func->jmp_address));
-+		/* An IVT entry is called as it is, unauthenticated */
-+		status = SDP_ERROR_IMXHEADER;
-+		if (!sdp_is_closed())
-+			status = sdp_jump_imxheader(sdp_ptr(sdp_func->jmp_address));
- 
- 		/* If imx header fails, try some U-Boot specific headers */
- 		if (status) {
-@@ -864,6 +962,10 @@ static int sdp_handle_in_ep(struct spl_image_info *spl_image,
- 				int ret;
- 
- 				debug("Found FIT\n");
-+				/* spl_load_simple_fit_fix_load() authenticates it */
-+				if (sdp_jump_refused(IS_ENABLED(CONFIG_IMX_HAB)))
-+					return 0;
-+
- 				spl_load_init(&load, sdp_load_read, header, 1);
- 				ret = spl_load_simple_fit(spl_image, &load, 0,
- 							  header);
-@@ -878,6 +980,10 @@ static int sdp_handle_in_ep(struct spl_image_info *spl_image,
- 				struct spl_load_info load;
- 				int ret;
- 
-+				/* spl_load_imx_container() authenticates it */
-+				if (sdp_jump_refused(IS_ENABLED(CONFIG_AHAB_BOOT)))
-+					return 0;
-+
- 				spl_load_init(&load, sdp_load_read, header, 1);
- 				ret = spl_load_imx_container(spl_image, &load, 0);
- 				if (ret)
-@@ -889,10 +995,23 @@ static int sdp_handle_in_ep(struct spl_image_info *spl_image,
- 			/* In SPL, allow jumps to U-Boot images */
- 			struct spl_image_info spl_image = {};
- 			struct spl_boot_device bootdev = {};
--			spl_parse_image_header(&spl_image, &bootdev, header);
-+			int err = spl_parse_image_header(&spl_image, &bootdev,
-+							 header);
-+
-+			/*
-+			 * The i.MX jump_to_image() authenticates from load_addr
-+			 * on, so the header is signed only if it lies there
-+			 */
-+			if (sdp_jump_refused(IS_ENABLED(CONFIG_IMX_HAB) && !err &&
-+					     spl_image.load_addr == sdp_func->jmp_address))
-+				return 0;
- 			spl_board_prepare_for_boot();
- 			jump_to_image(&spl_image);
- #else
-+			/* Nothing authenticates a script */
-+			if (sdp_jump_refused(false))
-+				return 0;
-+
- 			/* In U-Boot, allow jumps to scripts */
- 			cmd_source_script(sdp_func->jmp_address, NULL, NULL);
- #endif
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
