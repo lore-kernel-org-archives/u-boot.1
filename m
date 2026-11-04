@@ -1,157 +1,156 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 100B5606A328
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 13:00:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8316606A32D
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 13:00:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=dXedEE6z;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=B9O3bh6l
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=lB899TQR;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GBQ2I5u9
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DF08D40663;
-	Wed,  4 Nov 2026 13:00:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BF1F780E42;
+	Wed,  4 Nov 2026 13:00:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VT7GFjcjiCvQ; Wed,  4 Nov 2026 13:00:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 4414E406AE
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793797208;
-	b=Sd83uEgAuXv0FlbxFBcrB/XqkPNVKZCr8eKjCN6Vr7fWeiT7ShaCUCLz/wxGerjdy7Xc
-	 9aLAG9136OsAEsMmTHGsWCbpuLqzTchqfvn6LhY4hRbz5OgACuKgJWslZE7+3+bneXYZq
-	 6p7YrxFbIdk/OhZE1vJ65kTnOT+19MhaObNNj+7ORi2rx70YCcE6b26pRkKmnle5D4m73
-	 lNfEWhcGOasxpxa2HbtcPIzNniwYx0l/f4fScYYUrejvbIHKsiwu/4EpzX9VUPa59L1nA
-	 1A32mpU+lZFqGwPa/JFtQTQ5tSfjDpRnUwNS3QRLmpdBRwcr3MMuCjpnxFjWGDbPw9Q==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id X-cSO47yT4PE; Wed,  4 Nov 2026 13:00:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org EBD1480DFD
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793797213;
+	b=GX8O7NoSGkq277iqrhH669p9PUvZUWap2U0OOBu43vSoIaFYsmcNGVRTQPX+DbBS2rVM
+	 MxiEl51bZznNKBOL1lBYYYDhJFbA1anpDZpNYlfdNRJa0YCyC9fKMmQLu3GwCrsStpHc0
+	 FzQ6jIpiSewwWe0OTOuOTimc30pRu5vjGsEKWQVSQa4soMia+uKROejtwGGTGdPJwqGtu
+	 bsukIQtt32wcbBRUGKssyxw9e8Jc9jTrMe1kwVA98v1E2WIJMKPkeMjTSDxcVbK7qNx/n
+	 jq2n6Ie+49iwm9Ms8YF31eR3K87HbwVxsln+souPvuRLUEX1h0vzJUQp4uN1nzkGgqg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793797208;
+	c=relaxed/relaxed; t=1793797213;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=3EThT9QODuQHIaiCcB4H+2p92Dg3I78HbNKVsu6nwkk=;
-	b=rCaByZcF/o5EUQc3abFdTnPbhSdjAMjAcgX4Yr8nIiWamroEGXd/fRQr9V8IknvWSLic
-	 6RL+8/JcyOq820sScMcBIf3ytq8nfjvVYfgpWsCX9+SG/0hgjDryT5HoTCey0z9k3qMAk
-	 hfveQL+0OFw+3cfc+CcneEpr+s4a1WYaeuv+bYA0Kr+uxAyqMB14omyb2rvn9pcgyagBG
-	 DQ6dTEyTzHTkJniWxaEU7AjhpfZpV+N8FiZ+Gt+EUvg7CDrBFPBdH5UnCsiBA4rQvjiXz
-	 HkSVdVjoG0STc3GPafVZwUuRsKlnLyDArc9rbDIwYtYZ2+uwPHZBve0KT1EYMUFyVDA==
-ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	bh=Bk5vUCrrNmCpnyaCXFwyv23uNkd+IocPgn31wCDp2hk=;
+	b=kL7CYQU8uNPkCZxInSvOnHzybd0OwF5YPCtxi1Ny3VeYNFnk/z72Ar3+piBAlGcQNZfk
+	 82k3OR093RqsUNFu1wC+7anILhXguxh3BoNwrPSVgOWi8QToMCwNWVMdEZCC64R6cUpkE
+	 GxbYiV2zrP0M+O6Pxg2Zf9GvEdoRzoQA4VV5+1SDwLfd3KXZEcnhFJeHo4I04s2rCNB9u
+	 tQzdVdyE9/7u9lYCPME72BLDWWu3Ak+jt5m2ZvFnSP6QfHCcgR8FHwa627SIx5ktIceMK
+	 nkfNpVAjAFCt2eUTtMDw0SU7gpRQt6b41BprTsf6ihXruIX08YwTlt/ITrZKFhdwNvA==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793797208;
-	bh=3EThT9QODuQHIaiCcB4H+2p92Dg3I78HbNKVsu6nwkk=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=dXedEE6zJjhJZX1lYWv0LhFF7DEAsIsvySeiQWfXNxSpyRtW+Eu4mAotRY5WX7X/z
-	 CCAc8RpIM8HnIgYKPdbvD7MgDMqt4rffAuKtQbCHGMUHT2h5kFR+uVriel/Vw2ggaG
-	 eUpzu87NBAvodpibW7RQKgepYGlYRiWBlQcDr932rKcDxRn4Re8mA40H4QJPJqTDLs
-	 maJKw+y18Xt2KM1VrK00Wt9l6oG2zi19mwgGIWSNtXWsFHSFyFJxT3pNov1MFoEBof
-	 1tthP72lnLmzKlsFdUa/R5yMEqOSthxictawzd0Q9SMNflPdRTZXPedxPd0GMw1D8K
-	 C+aVOzklRv2gg==
+	d=lists.u-boot-project.org; s=default; t=1793797213;
+	bh=Bk5vUCrrNmCpnyaCXFwyv23uNkd+IocPgn31wCDp2hk=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=lB899TQR/x1dhN8eio8F3tFGQALuvw2LfNUWEC6J2sSD8kjx+ZoG+SRFjoxNO4H+O
+	 c29SlyCbA4e5aDOP/tCvfAdwfDr6JXcXR+LRNlhWA2QbcqyHKkBL1oR/8Jg1N7asBD
+	 Ud9Z2ZunAour5vHM3jHxXpgbvvVF0C0aDAb+5rkKyZS5We9py5L98UHWDVGwu78tHg
+	 yh4O8s2nqI32ZDZWv+EXLRXt9sLTwGUDuKZAeCZZqr7HLBt9Rd8IB/7GYVLT8kOWWy
+	 Vnyh+WxcplAzDmNW/0HwiEKN0SstUDQv47enrlQSTaYlmxYVGbQof0yroPPBPgwxqe
+	 2KU7rId+g9yLA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4414E406AE;
-	Wed,  4 Nov 2026 13:00:08 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id BBB52341
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 13:00:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id EBD1480DFD;
+	Wed,  4 Nov 2026 13:00:12 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D8939A10
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 13:00:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id ADAA0606F2
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 13:00:06 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id BE21740068
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 13:00:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BIOOVDjFjW_U for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 13:00:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org EC958606EC
-Authentication-Results: smtp3.osuosl.org; arc=none
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5chGfw2PmvqA for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 13:00:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 1DDDB40063
+Authentication-Results: smtp2.osuosl.org; arc=none
  smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793797206;
- b=Y/l++0saDoPObpTVGezYdZ8vqhpOLiTym431+/UvlRrEL18eCmAv1wE2zAw196bo8sNG
- NNuMMyPerehwfw+EVtxxkHsLOR0tJMljrylLasjMOOyDlYTRKC+4Cg/+Xl1+21p26xG4U
- Nbjc+qDUMO04sY6CAuqqau1A6yDB7MTHKyVXm/rw7dOe3X6M3ZPpFDmH/5F88ISh8cRZb
- ooGDCgWrJEH7qMf+xVhOYuc0Mc7FjHKsI6F1rGbX7J7yMZcOozcQlGGwbAFQfCODqCuEH
- LBKqPPaqV6QLpcV7TCBVtv9on05d4Pj6JSe8106JXgHAUG4KQoIJCGNF81xwiygxc1w==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793797210;
+ b=rIpoyZkuOJB0kUO2yKbzQmY7iYZScymUFhi1z8mgt7pJq3AzO6L5c7Rqnu0VpWc5fR6p
+ /eEXtoL/rwTOPd9H5mWb2jviPLi9egDjfTYQM/w9dP1qjBnVvWSs8SRotiiQUd11Kn9Qz
+ nPFnRlAA1I0Zb6LysLttppYdPYsGkd+YAQuBi7pfW12J4EeQIzvE5gHgNbpgvJmWIFSNr
+ ZWC80leXhhpVHijOVporZiXApmc5PrjAQdBplIC2H2B5LJV5K0SrzPTSSn9vkwRmWn0xS
+ pVSdwKDfSxIph5B0QZ9Raj+WrJ8PEmZBYSjz0GOYhnGoCxGE2Arl1ffFdKp4rwMsnWw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793797206;
- h=Received-SPF:Received:Received:DKIM-Signature:From:Subject:Date:
- Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
- X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+ c=relaxed/relaxed; t=1793797210;
+ h=Received-SPF:Received:Received:DKIM-Signature:From:Date:Subject:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+ References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
  X-Developer-Key;
- bh=3EThT9QODuQHIaiCcB4H+2p92Dg3I78HbNKVsu6nwkk=;
- b=B3sLh4fWwLUcfb3aYKGktkyNXlIxXuHGrRP61SgUcxqvGHHp3R09FmWGHifSXvya9rPQ
- VSb37xReaLTXi9fNKAVTg2DIj+kVtXziU+rPLa0h027x+sTUNMikU3aEmM6IL2r4j+uta
- eEU2yXQWjanlH3UlvAmG9eYq4ADytJ26HHJTAkxQ17tzqZGMdW2q/EZvgrqSNfNsY5/OL
- /qPZl/vpns854sNoC5cv2Mu5I9Y1atO1d9X4//R7DLwuatYgjQNph9HGqJoFBxQ/LWC8L
- OR7k8tatUo15BlgxFNHgN5GObuZxAz3/urojY0Do2fSmEB6nT5U12WJNbeEWUrlHGfQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=Bk5vUCrrNmCpnyaCXFwyv23uNkd+IocPgn31wCDp2hk=;
+ b=McNVG4UFR0jfEX2Q1gwSojVm3BB7KVQj/mf4CvLGjop0YBV1FZCvPuBnBfE5KJSdLqdx
+ uDwcgR+srXrU/E63gFBaVLZ+cmqYxHZvBX9ZtrZWadHM+Ap5yz5EL4L40+E+07pjPIXcM
+ QRfZ/+Ox/DEkS3GVDznXkCzaz28yw+mgiuIAp1Vs9QPYz+hmqiv8i+OAVtlHSOVPzfiSs
+ io7NoYYLROXKYQih7IlHNiyqaB/I/ws/TWJEyVOILKvVxIrqzdL9xAM9e2c948KYL1SSJ
+ VEgEONpqk4JDvHAuWr+Av9RkNiOTvMsqOtKtQXo5JBO4wa8W+4aTByUUdqiPBs4KGgQ==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=kernel.org;
  dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=B9O3bh6l; 
+ header.s=k20260515 header.b=GBQ2I5u9; 
  arc=none smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
  envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=B9O3bh6l
+ header.s=k20260515 header.b=GBQ2I5u9
 Received: from sea.source.kernel.org (sea.source.kernel.org
  [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp3.osuosl.org (Postfix) with ESMTPS id EC958606EC
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 13:00:05 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1DDDB40063
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 13:00:09 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id AF33741449;
- Wed,  4 Nov 2026 13:00:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7274E1F000C1;
- Wed,  4 Nov 2026 13:00:02 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 321E642A6B;
+ Wed,  4 Nov 2026 13:00:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C2BC1F000C1;
+ Wed,  4 Nov 2026 13:00:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1793797204;
- bh=3EThT9QODuQHIaiCcB4H+2p92Dg3I78HbNKVsu6nwkk=;
- h=From:Subject:Date:To:Cc;
- b=B9O3bh6laJ1/1+sYUJcbfQslynOQdScI4a10KOajNV/EdKL41EFRjhe3orLMmUAMY
- eSf/ohfzfo3ntyHGo8aHSZdAiZsrz6IFL1zn7LF0QdRi6olbMshe1FXBAl5rYQeDgi
- MY+icJmh9SmRbhobvQC/eiuGwYp4e8GpIgRpYPTfKzT20GhXNbp2P7VqPIKkg7/E/A
- aXn4/OpcCQmX5KRr0FEedBRo/5GvPgjFC8g1XR3iUrZxUNaQa7vfsTdcVGXijN7xmJ
- Otu/Pw/ZKQaOdPrMUmyXU5NyKx7d1pXiI3oT2wTDvlWAMRiGgOFQUi+DGs2RHHcQEG
- S2qa/d1F6pqpA==
+ s=k20260515; t=1793797209;
+ bh=Bk5vUCrrNmCpnyaCXFwyv23uNkd+IocPgn31wCDp2hk=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc;
+ b=GBQ2I5u9gurg8ELUHIPSlyGhgL/SGIhOW5n7Yzrvz+XmmFEt5TFYlydu2ySG0wsPw
+ 9XMDBZVSbmHyK9OZ5HXTvH3J/XqJr+7UenrTdSOB8wsAAotNVVr9pYBQqeRmrT39Z/
+ KpI4H1BoHni4D7C7SBCjGB8Ve//qzl9s8nwBxUpbEFhDeDl04nCaVFLepkJNF5sPb+
+ Ks105IqQ43fZCHZxGJQwQZignOvWZxohQ7uJUGO1kw5at4ke7MRqTwxfP2A0u698xZ
+ i9nRP8MUDIiXBlcyPhuwQZEJdovPwz6yFPNVLlZVTDK1aFLZGv2Ryxt6cbkE1S108b
+ n66L8Pm1QPO/w==
 From: Yixun Lan <dlan@kernel.org>
-Subject: [PATCH 0/2] gpio: spacemit: fix bias flags lost problem
-Date: Wed, 04 Nov 2026 12:59:50 +0000
-Message-Id: <20261104-02-k3-gpio-pull-flag-v1-0-de9f0a9b7669@kernel.org>
+Date: Wed, 04 Nov 2026 12:59:52 +0000
+Subject: [PATCH 2/2] gpio: spacemit: propagate GPIO bias flag
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ6CMBBA0auQWTtJpxgQr2JYYGeoow00LRgTw
- t2tuHyL/zfIklQyXKsNkrw16zwV0KkC9xgmL6hcDNbYhsic0Vh81eijzhjXEHAMg0dHLXfcEfO
- lhZLGJKN+ju2t/zuv96e45feCff8CjBwie3gAAAA=
-X-Change-ID: 20261104-02-k3-gpio-pull-flag-c17d9d91dd87
+Message-Id: <20261104-02-k3-gpio-pull-flag-v1-2-de9f0a9b7669@kernel.org>
+References: <20261104-02-k3-gpio-pull-flag-v1-0-de9f0a9b7669@kernel.org>
+In-Reply-To: <20261104-02-k3-gpio-pull-flag-v1-0-de9f0a9b7669@kernel.org>
 To: u-boot-spacemit@groups.io, u-boot@lists.u-boot-project.org
 Cc: Eric Chung <eric.chung@riscstar.com>, 
  Raymond Mao <raymond.mao@riscstar.com>, Tom Rini <trini@konsulko.com>, 
  Junhui Liu <junhui.liu@pigmoral.tech>, Yixun Lan <dlan@kernel.org>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=851; i=dlan@kernel.org;
- h=from:subject:message-id; bh=bMsd1FmWJ3nQeF6lbVyrVgjJ41ccqwY/8om7AsqpZv8=;
- b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBq6yxIdUjeNcyYkGeep6oSdqncFml8SwbPZjeqO
- q621nbS3FuJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCaussSBsUgAAAAAAEAA5t
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1297; i=dlan@kernel.org;
+ h=from:subject:message-id; bh=7pEgMKYQfQ4gHUNkeLUPAtem6nx9WEfmzBJlVpQopz8=;
+ b=owEB6QIW/ZANAwAKATGq6kdZTbvtAcsmYgBq6yxPcb1HUv8s2Vkt/STzbKwiKUZzRK1e+Jsgb
+ zrwdfry8xGJAq8EAAEKAJkWIQS1urjJwxtxFWcCI9wxqupHWU277QUCaussTxsUgAAAAAAEAA5t
  YW51MiwyLjUrMS4xMiwyLDJfFIAAAAAALgAoaXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5
  maWZ0aGhvcnNlbWFuLm5ldEI1QkFCOEM5QzMxQjcxMTU2NzAyMjNEQzMxQUFFQTQ3NTk0REJCRU
- QACgkQMarqR1lNu+2MWw/9FZN/cAt8d5bJ+Gu6hGlrmXuIZY84I/EBV/UFVs4G+FiAzmDCPCyn1
- 5MsT1w+CUyxZXRCmuuiSWmZHgTtWf7YCLiOO0zMeJhZzfo/RkKAOHyJhDxXsQvGEvhtT09CFsoO
- SXW/2w/1oaByYeqtTTZepNN+mHqGSjXjUU5oaDsEPbRdRfLEKWFBzL18XIzEesF4uFPgHy/0cpa
- cumGIQ+rAPOoEP+LHXclvGH/s0Ouw+09ZYQ2gdsFNVWeKjTdzkgPxA8p/fw82ElKsOzGcsE+ynl
- vmUjIKDOXDXaLyjqfh7LcOQwQGstfVLOrRiUZrhC0MicvLZuBzIYEki4U4tzUod2zmWxNvePEfY
- hwU75YEs4sPzaBZQiFRVwmKMcDMTfHqst8/TbQ0QNzPBJFboGTaR0CWP7DQIGqqXuSngZhWfMgN
- dnd/PCxip5avrLtxHSWmPqJbEaVYyKcRKXKMR1twqvYUE3DAOIpG8VkcRQwQzMYXiEA3VtKcdf9
- gOVuferO27qmVj5UTvnO9j6mfLUj1e1+kEEUrY3w5Us5OPXOnlbH4b7sQFm1ZwDvPEOyoeIkue5
- nWV2Peco5YObUp52k8i+EUvDfygd9Z3TdnQIhW8+i5BdRsUPLdlD5sZXcwKY9LgxXY1u/8qDLN9
- volUeh1ujcts5twSIkudK7woUIBuYA=
+ QACgkQMarqR1lNu+3REw/+LbHoh59Vl7j6sf2ozyB+nFkmzbnXOMH+CVIj4v0C81wvAuwpUP0F0
+ Te3AzEJrPJOBdvqpk2rgEkqJv+Doe3aB/4po4j/oAUH6tP/Hs0l6quZ6ZJ06G9ZS3bBymx1Lfyv
+ mPp0A6SsYT3Bm80QeQ+4lxJ6ylwqUyZPqDyJ1R57CD/QdWzrIEC7ABUX13KZoeVhN0qovDBSdcq
+ gjgCbJr0Lvwg2h6GPQMGxfNi0DhM006tegg9TUtMIi5uWQLiDJedfn0HLoFHiFOYHWioxpB8Vak
+ H2lE4QnVgBzS0PdsabAM+tN3SxxY3siETUwsNF4MQ3OkvG9DEXG3ME3Bx6X/vv7ED7X/ssQiFXZ
+ Y3FLisQ9VNYjD/UlZTrQuaqV03uiUHG9yNwau46Uuq3t/ZQCluTPhLeTyLDVbkoRypbtkT84MKe
+ QNodbITspbh+eMUuKoPXwjO0Zy/Dqz+GGuIck80v0grR0TZA87vY2EKgXV07rZUySHI84rT44i/
+ sUpYBTYe15c4kz/L6vq7RVinyiIRHKHcvGxCWczYnK4paS0B4u3caM16uunAjNpxd+cFfEQqzoV
+ QTmZG0AadT+8o/QXLmo8LfS/HYC3bgJQYRC9e8BzCaOHgvH1u6wmIrNPhFEfAsURkUoKlMMjCJo
+ k60QF9/eT1JPTJ6oXVBUzAsn4zsWRI=
 X-Developer-Key: i=dlan@kernel.org; a=openpgp;
  fpr=50B03A1A5CBCD33576EF8CD7920C0DBCAABEFD55
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -171,29 +170,48 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This series fix the gpio bias flags which not configured when passed
-from DT property.
-
-The problem was found when testing SD card CD pin (Card Detect pin)
-in K3 SoC, which we need to set internal pull up settings
- cd-gpios = <&gpio K3_GPIO(4) (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; 
-
-Without this patch, GPIO_PULL_UP configuration will be lost, and
-result using a wrong default reset settings.
+Pass GPIO bias flags down to pinctrl driver, so GPIO_PULL_UP
+and GPIO_PULL_DOWN will actually take effect.
 
 Signed-off-by: Yixun Lan <dlan@kernel.org>
 ---
-Yixun Lan (2):
-      gpio: spacemit: cache pinctrl dev
-      gpio: spacemit: propagate GPIO bias flag
+ drivers/gpio/spacemit_gpio.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
- drivers/gpio/spacemit_gpio.c | 36 ++++++++++++++++++++++++------------
- 1 file changed, 24 insertions(+), 12 deletions(-)
----
-base-commit: ab4dc5aacf957835c295b59ef2dd28281839cb20
-change-id: 20261104-02-k3-gpio-pull-flag-c17d9d91dd87
+diff --git a/drivers/gpio/spacemit_gpio.c b/drivers/gpio/spacemit_gpio.c
+index 6c8184a9818..0733e1472ca 100644
+--- a/drivers/gpio/spacemit_gpio.c
++++ b/drivers/gpio/spacemit_gpio.c
+@@ -126,6 +126,7 @@ static int spacemit_gpio_set_flags(struct udevice *dev, unsigned int offset,
+ 				   ulong flags)
+ {
+ 	struct spacemit_gpio_priv *priv = dev_get_priv(dev);
++	const struct pinctrl_ops *ops;
+ 	void __iomem *base, *addr;
+ 	int value;
+ 
+@@ -147,6 +148,20 @@ static int spacemit_gpio_set_flags(struct udevice *dev, unsigned int offset,
+ 		addr = base + to_spacemit_gpio_regs(priv, SPACEMIT_GSDR);
+ 		writel(1 << GPIO_TO_BIT(offset), addr);
+ 	}
++	if (flags & GPIOD_MASK_PULL) {
++		unsigned int param;
++		int ret;
++
++		ops = pinctrl_get_ops(priv->pinctrl);
++		if (!ops->pinconf_set)
++			return -ENOSYS;
++
++		param = flags & GPIOD_PULL_UP ? PIN_CONFIG_BIAS_PULL_UP :
++			PIN_CONFIG_BIAS_PULL_DOWN;
++		ret = ops->pinconf_set(priv->pinctrl, offset, param, 1);
++		if (ret)
++			return ret;
++	}
+ 	return 0;
+ }
+ 
 
-Best regards,
---  
-Yixun Lan <dlan@kernel.org>
+-- 
+2.56.0
 
