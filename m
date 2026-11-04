@@ -2,130 +2,108 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97C46606A334
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 03:57:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C84CC606A31B
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 03:59:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=hDrT9kns;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=gVdie+/g
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=kqlhQMOu;
+	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=fV++fqg5
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id ED0F140598;
-	Wed,  4 Nov 2026 03:57:15 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7087D405C9;
+	Wed,  4 Nov 2026 03:59:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oNNryv2T7eWB; Wed,  4 Nov 2026 03:57:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org CEB234057A
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793764635;
-	b=iCgmVd/W52j9DkcAu9ZEtbCwg/qpi8+QLW7VGp3fUK5WohNAUznkwAo482Sm2qNCZjS+
-	 YAEy3fIUvBsQ4PpqyjyHKXpL0TVEh7WqdY4y0rr+8FACfYnaHC2n65WcIvjf0c+i6U43t
-	 sxL79h18rZzZrBcIChXh/MbIbByEDL0CLltTW3nGTk+GvriNoVlpKuZjdo81VT8Hq130Q
-	 vQVxXrqSATf4BTmJKGJyeCmBtD/1ywLc3IGdPJv2t8aDZbjbmcQiLDAZyFro13QG0ERUT
-	 SDI1hwC+8EjgOXjdDyHIw36jpBpIKR+BlCKuVpZR8hQKzpVjGtQgapOo8MMnu8DaRnw==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793764635;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=KG076o9TNl2hMAEFUu34ZSmDRE9DCApKZ8ewgiuIoCw=;
-	b=c1M26qJY3wzMIfuKyKC+wS8HI9ZKSPUdYQv001zSfObAFbq3R/cI7DFfPIV9DvBJBfWt
-	 WJ12+OWA7HY2aGRqwA1fe2v0+AxlL2GKTjbdpIISu3CTmHgNJEeaVluFUHkPc/qqCmDC8
-	 16V/Y8RwddWRTGsxZnQVBgwIIMpEZWLKtvgmnRJXiAtTGMu1No9UVtb4sdOkhiF484jp6
-	 uPyX5skUzuq4Unr5ftw5t1hF1lCmXaeNZuzDZVT+emdSOz6FLzRDmoD56vaepT0H77tCC
-	 UkRqiBjvnoyAJet0k7tiekJa1CTw8ZvRwBLz89diQ0WqetZtdfJNK2jVY9Jcz9Cdm2w==
-ARC-Authentication-Results: i=3; smtp4.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ id pkz-RgVp5LZ7; Wed,  4 Nov 2026 03:59:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 616654057A
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793764634;
-	bh=KG076o9TNl2hMAEFUu34ZSmDRE9DCApKZ8ewgiuIoCw=;
+	d=lists.u-boot-project.org; s=default; t=1793764785;
+	bh=0OGGpoK075L0leywjynhg5Z6i+Ai878zNue2tbox9Pw=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=hDrT9kns3rkqWB4mMnD14z0zyndn1m/RVIDaXN9G+GSRFUf3cVy0ke47IhayijU43
-	 IVMd9wSlihk5O9Hha8kl93Xz5o0eBuUtcOwS0I/n7kt5r5+wUARP5tl3hxCO1hsv8X
-	 TIpDdWeqFMwV0B+Ba+Zfnh9+xpl88L8H6OLZRyP0nkPxb2znGnI4WsSgpuKxeV+A+5
-	 OsrM1ZFRp3nJw+NetLqPyavbKaeupCrr4gh5CbkDSXEZrgCnqXVlqpiiUYJe3RH5Sk
-	 hkuzNHhga2XrdULK3H47h8a13KLiBKFncnUY2RFaJyTbI/SwTy2wdo0goGbaH6Ho3J
-	 CdacC0kOiJsXA==
+	b=kqlhQMOuSMCYK+Gy/LG81JAgN5F/f+BY0583q28lDujQkculbk8phrbKiJw68pYxD
+	 03bma2tFSGBa7O4dubEYK5nUj1Kl+2/Es8OBQQGY73LNIPVPd6QKrKwYbqzPbl1omM
+	 795mWJFfdCG2k0CubRzpZE+2B2EqkVa1El+ZJiI5c9wzSrCymaFJsL9fQ8iSjVEP4U
+	 fVmkZKt2H9y6QUAyMLbIIbKoAhrrk8mL7u/09iuZYJDby1ew3hitgBHMGc1VVmAdxX
+	 jfKBryWiNRobjz2J1n3r7Kx0JBDVbXsxlKD2nSTn+STpZxkG+0r1E7CQosLSekykMv
+	 kWBnLryS4qw8Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CEB234057A;
-	Wed,  4 Nov 2026 03:57:14 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id E14A8784
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 03:57:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 616654057A;
+	Wed,  4 Nov 2026 03:59:45 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3291E9C4
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 03:59:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C6CE380D32
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 03:57:12 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 18A6060686
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 03:59:43 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Jpp17h48i9Qs for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 03:57:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 89FCF80D30
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.180.15
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793764631;
- b=iBBWBzeMHe9GGQAOili/jJgLMNRZvU8iZHO8+KDji0Y0uQdJuPJJUpAvLK+lMOywuB4N
- oNzS6sjDGqgQixk6d/flYT1s0hmId4mDjTmEcwAMtO8j9qGsUHOYXJNieOj2aUWsnmWMN
- r8EXECEYa0haJZT4JiuQwbS4E8klk6vlPgE6X6zpIstPPpXeHPYkOR0r5P76xBpSHVaBK
- CuLhbeTHAESRnAKI376c8boHbVt1InHGtbo7bDtOs0XPuZ53RDrcpftepfdIbtNufJ7wY
- /vCLCYK4gO/UTAeivCWbi4JPC56QDscPVtIXxfuFyJYMbDHVbU+drl8TYe88+k1eaWw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9d3yXOWaZPpg for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 03:59:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org EDA476066C
+Authentication-Results: smtp3.osuosl.org;
+ arc=fail smtp.remote-ip=165.173.180.15
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793764782;
+ b=q0CpekcwiDW5PGDzr8AISEo/Sam8WSro5fECQBCrjxEvXGkP8SExWwySwUkA1Zk3zr95
+ hXfHFmBgcHLnbftyE1p4qzn/89BZC1KQkqTtbOJKYslBMSV/5DHE+IjEL/L4+/8v1Vpkr
+ z86Yu3QIrxHYLJ8nshutAC1jLYT9xtVF4lh4rwh1dlvHzA4/+uianJvLwkWYRA/1dvTXb
+ MQq4Lm880nJNtRC5L+HqDcAUjeXQ4PxifckNIJKQJcqJaiDmtXBVsFb3VMDehJyD7/qGg
+ 0hu80Jbb104nll2Ybo7tafGMcKpK3c51xi2ujJVRgkevHeLIN7uEuyTn0LKAnoL81kw==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793764631;
+ c=relaxed/relaxed; t=1793764782;
  h=Received-SPF:DKIM-Signature:Received:Date:From:To:Cc:Subject:
  Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
- In-Reply-To:X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient;
- bh=KG076o9TNl2hMAEFUu34ZSmDRE9DCApKZ8ewgiuIoCw=;
- b=b7vWKt+qvx86EnRSSJeP7K7w2brtafeBAQhsZVd+Ugz6uFlXVm63TOi0o+e6aSsI9eBL
- nf43Wleb44Yce/mqW6WtOHZD6VI8jiagIi9ou6uyxmRiStmZrwQmI607GonE+Rub6yYDd
- oQYn6Db4LbnHXaxg/U3U/R/6P+OWxMdmlbq3vokyCoQk7xfq5W5dZ/OeohSUnB0EU2AgV
- VO81hfHSYan/mqYA4nZYs7qSATkQ9MH7/A+OdViPWLrpEYkNVQfHTlp5XoVWAtpe0m4Bg
- A0kfA2XJ3qbd61aT48fvqLg/SSpjyEaH4oX3SVCOqAm34k8NMvEn79yBIkgAyJhL7Qw==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+ Content-Transfer-Encoding:In-Reply-To:X-Zoho-Virus-Status:
+ X-Zoho-AV-Stamp:X-ZohoMailClient;
+ bh=0OGGpoK075L0leywjynhg5Z6i+Ai878zNue2tbox9Pw=;
+ b=GKzt2j5lLjrD5ifPaKhi0EHbLpCZmS86tBnTQtWJYl8JwCgPzCCcdChF9cvCii7zLLj/
+ 6ZFBeavMKTJuDt9gnQ3rKotGWItW2w/Mdgjk363Mp7WnGnCmkne38lDEDc+8scp9z23zA
+ hN53/x9dlvNqB3+hQvSWP5WXFaToAvz2M75o+crqT4KjcXxY+35+Hnp2KnkCTanVW0DMJ
+ vStUwFrp9M+MDkE7aUeDcceZPkZOCyYV935G4nLkdFpJOXSGqqY3vKyH/hcloBerVWMf9
+ cvUICGz+ZVrxPSJ9xZ9T3OIFSRK8OeEUjVM4fQ6dRw0OhV4ZSO1lYwEB+mcE4o079FQ==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
  dmarc=pass header.from=ziyao.cc;
  dkim=pass header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b="gVdie+/g"; 
- arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.15
+ header.s=zmail header.b=fV++fqg5; 
+ arc=fail smtp.remote-ip=165.173.180.15
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
  helo=sender6-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=gVdie+/g
+ header.s=zmail header.b=fV++fqg5
 Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
  [165.173.180.15])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 89FCF80D30
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 03:57:10 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; t=1793764605; cv=none; 
+ by smtp3.osuosl.org (Postfix) with ESMTPS id EDA476066C
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 03:59:41 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1793764761; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=ciyRejo+wxCGd+jd7aNVKAu19sZOloO6+xMUEzGKjLUNw5wzq3cEiALTpcziepK6+Zqa0Yfevwr1PEiJDn2M/d6+r1rbUw1A1NWcQigpia2LxmgSRXfv38pEJ/cr08GPxJf0UblGFe3LKEn4R2nfFhohyQjtD5GOQiEZ2GbaRwQ=
+ b=jGWCu/wedO3Dgxp732KBRRygTJ4tCSuOZ8wre0MQthdr+vkPT95S77iA8ISSCLTlXr2iw2xlpjNoNRsPJ1LM1KOxBbrp0zpNXTStb5lzCfmzomu9/l6WX3RGcIM5mdajt0H9naHXkDzExPkKHOQ+U0+7VwljOJVFUjYVt0ngM14=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1793764605;
- h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=KG076o9TNl2hMAEFUu34ZSmDRE9DCApKZ8ewgiuIoCw=; 
- b=bvLG/BD9eoNqZEeZhm9gKw/9rNMIsnnxG+SODUQVztV3XH6qF4tMpAgPsjyG+uF6LEopAXaQ0Abpa54SpqxH5EX2W4yKw8kKpeKzfvapMLhqLfzFgV2Wuxiixfa3rZQGCLbm4YPcBCkMwxLOF7lSzO/S8A/Fo8YzBUHPEckfmwg=
+ s=zohoarc; t=1793764761;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=lVyvl0sj4HjwomhD8KbIPT/nr8myTeplnYQCET0gzeE=; 
+ b=YDKGmh30qzPfVwGQRdE3QbhdTHo56Qq63SwfisOsbCuIWi6Pc6vw3qEYFaN5TIddV9T/ZqZuxVK8kf9WHeyt0XmVbTs/q3P2lNDHvq3PVXlUWqz8L4//YFfW58rlHotmKqmzLBV/eWX7JWWQIWM3vbYYny0196YtH3guK+PE6dM=
 ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
  spf=pass  smtp.mailfrom=me@ziyao.cc;
  dmarc=pass header.from=<me@ziyao.cc>
 DKIM-Signature: a=rsa-sha256;
- b=gVdie+/g9qbq4KP/9oZ5DwhBH6l/T553lr0NRl/tKO48g37XZEr4FJxR/APTC/l1Hq4umPJ1xNfar62DkfwKs5gmzGf8HXTwAP4MD7ciNNnN7MtoZvl0WI7rJ7YxcX+4w4E+geL4kv7tcf8Fz63dELTFGHITm+F/PYFEEozYupY=;
+ b=fV++fqg59Br8K6gRNfEJxe8OVB4aPljilcngZi3enkcxBJa3LZLiuH2Qxnk4IS090yoC0E59UUyCyRnQG412JhiLanBJpBfEAe1Jz9GNRM1khyuPDXuWLzSdpnV6GJWT0XeA4/WvyBsSresGb5wtNOzvjWBTNtYcr733VCGcNsU=;
  c=relaxed/relaxed; s=zmail; d=ziyao.cc; v=1;
- bh=KG076o9TNl2hMAEFUu34ZSmDRE9DCApKZ8ewgiuIoCw=;
+ bh=0OGGpoK075L0leywjynhg5Z6i+Ai878zNue2tbox9Pw=;
  h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 179376460434524.262489550976625; 
- Tue, 3 Nov 2026 19:56:44 -0800 (PST)
-Date: Wed, 4 Nov 2026 03:56:32 +0000
+Received: by smtp.zohomail.com with SMTPS id 1793764760769279.64611376131745; 
+ Tue, 3 Nov 2026 19:59:20 -0800 (PST)
+Date: Wed, 4 Nov 2026 03:59:13 +0000
 From: Yao Zi <me@ziyao.cc>
-To: Hiago De Franco <hfranco@baylibre.com>, u-boot@lists.u-boot-project.org,
- Yao Zi <me@ziyao.cc>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+To: =?iso-8859-1?Q?Jo=E3o_Paulo_Gon=E7alves?=
+ <jpaulo.silvagoncalves@gmail.com>, Hiago De Franco <hfranco@baylibre.com>
+Cc: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Marek Vasut <marex@nabladev.com>, Tim Ouyang <tim609@andestech.com>,
  Leo Liang <leo.liang@sifive.com>,
@@ -134,15 +112,17 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
  Andrei Lalaev <andrey.lalaev@gmail.com>,
  Zhuxu Ran <zhuxu_ran@zohomail.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: Re: [PATCH 4/8] board: sophgo: milkv_duo: add SPL support
-Message-ID: <auqs8BSPdzT2N9dL@pie>
+Subject: Re: [PATCH 6/8] board: sophgo: milkv_duo: enable RTC power and reset
+Message-ID: <auqtkRJmEyJqGhKF@pie>
 References: <20261021-milkv-duo-spl-v1-0-ee7618860237@baylibre.com>
- <20261021-milkv-duo-spl-v1-4-ee7618860237@baylibre.com>
+ <20261021-milkv-duo-spl-v1-6-ee7618860237@baylibre.com>
+ <auoV_97xdZB8MLlU@jpg-duosnb>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20261021-milkv-duo-spl-v1-4-ee7618860237@baylibre.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <auoV_97xdZB8MLlU@jpg-duosnb>
 X-Zoho-Virus-Status: 1
 X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/293.744.82
 X-ZohoMailClient: External
@@ -155,85 +135,89 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, Oct 21, 2026 at 09:54:20AM -0300, Hiago De Franco wrote:
-> Wire up SPL for the Milk-V Duo so it no longer depends on the vendor
-> FSBL.
+On Tue, Nov 03, 2026 at 02:31:51PM -0300, João Paulo Gonçalves wrote:
+> On Wed, Oct 21, 2026 at 09:54:22AM -0300, Hiago De Franco wrote:
+> > Let the RTC power domain handle shutdown, warm reset, power-cycle and
+> > watchdog reset requests, and stop the board from powering back on by
+> > itself after a power off.
+> > 
+> > Without this, the reset and poweroff paths are left in their BootROM
+> > defaults, which do not match what the vendor FSBL configures.
+> > 
+> > Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
+> > ---
+> >  board/sophgo/milkv_duo/spl.c | 53 +++++++++++++++++++++++++++++++++++++++++++-
+> >  1 file changed, 52 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/board/sophgo/milkv_duo/spl.c b/board/sophgo/milkv_duo/spl.c
+> > index 8b2dc2756ae..97681e5a61b 100644
+> > --- a/board/sophgo/milkv_duo/spl.c
+> > +++ b/board/sophgo/milkv_duo/spl.c
+> > @@ -2,7 +2,7 @@
+> >  /*
+> >   * Copyright (c) 2026, Hiago De Franco <hfranco@baylibre.com>
+> >   *
+> > - * PLL setup based on the Sophgo FSBL (https://github.com/sophgo/fsbl),
+> > + * PLL and RTC setup based on the Sophgo FSBL (https://github.com/sophgo/fsbl),
+> >   * plat/cv180x/platform.c.
+> >   */
+> >  
+> > @@ -13,7 +13,9 @@
+> >  #include <hang.h>
+> >  #include <linux/bitops.h>
+> >  #include <linux/delay.h>
+> > +#include <linux/iopoll.h>
+> >  #include <linux/kernel.h>
+> > +#include <log.h>
+> >  #include <spl.h>
+> >  #include <spl_load.h>
+> >  
+> > @@ -52,6 +54,25 @@
+> >  #define CLK_DIV(div, src)		(((div) << 16) | ((src) << 8) | BIT(3) | BIT(0))
+> >  #define clkgen_reg(off)			((void __iomem *)(CLKGEN_BASE + (off)))
+> >  
+> > +#define RTC_BASE			0x05026000UL
+> > +#define RTC_EN_SHDN_REQ			0x0c0
+> > +#define RTC_EN_PWR_CYC_REQ		0x0c8
+> > +#define RTC_EN_WARM_RST_REQ		0x0cc
+> > +#define RTC_EN_PWR_VBAT_DET		0x0d0
+> > +#define  RTC_EN_PWR_VBAT_DET_PWR_UP	BIT(2)
+> > +#define RTC_EN_WDT_RST_REQ		0x0e0
+> > +#define RTC_CTRL_BASE			0x05025000UL
+> > +#define RTC_CTRL0_UNLOCKKEY		0x004
+> > +#define  RTC_CTRL0_UNLOCKKEY_VAL	0xab18
+> > +#define RTC_CTRL0			0x008
+> > +#define  RTC_CTRL0_WRITE_MASK		GENMASK(31, 16)
+> > +#define  RTC_CTRL0_HW_WDG_RST_EN	BIT(11)
+> > +#define RTC_POR_RST_CTRL		0x0ac
+> > +#define RTC_EN_REQ_TIMEOUT_US		100000
+> > +
+> > +#define rtc_reg(off)			((void __iomem *)(RTC_BASE + (off)))
+> > +#define rtc_ctrl_reg(off)		((void __iomem *)(RTC_CTRL_BASE + (off)))
 > 
-> The SPL uses the BootROM ROMAPI to load the FIT image with OpenSBI,
-> U-Boot and the device tree, from offset 0x40000 of fip.bin.
+> Instead of hardcoding the bases here, could we get them from the DT? The
+> upstream cv18xx.dtsi already has the RTC node (rtc@5025000, with
+> "syscon" in its compatible), and its range covers both RTC_CTRL_BASE and
+> RTC_BASE. Also, use syscon/regmap in SPL (CONFIG_SPL_SYSCON and
+> CONFIG_SPL_REGMAP) to read/write the registers.
 > 
-> The BootROM loads the SPL into the 100 KiB VC SRAM at 0x3bc00000 and
-> jumps past the 32-byte BL2 header, so SPL_TEXT_BASE is 0x3bc00020.
-> SPL_MAX_SIZE (0x13fe0) is exactly SPL_BSS_START_ADDR (0x3bc14000) minus
-> SPL_TEXT_BASE, so the SPL image cannot grow into its own BSS.
-> SPL_BSS_MAX_SIZE (0x1000) caps that 4 KiB BSS, ending at 0x3bc15000, and
-> SPL_STACK (0x3bc19000) is the end of the SRAM, leaving 16 KiB below it
-> for the stack, the pre-relocation malloc_f pool (SPL_SYS_MALLOC_F_LEN, 8
-> KiB) and the global data, as the generic SPL board_init_f flow expects.
+> Just a suggestion though, I'll leave it to the maintainers to decide.
 
-Thanks for the helpful explanation, I think it would be better to add
-some documentation for the SoC bootflow.
-
-> In DRAM, SPL_OPENSBI_LOAD_ADDR (0x80000000) is the base of RAM: the
-> fixed link address OpenSBI's "generic" platform uses for fw_dynamic, and
-> the load address given to it in the FIT. SPL_CUSTOM_SYS_MALLOC_ADDR
-> (0x81000000) moves the SPL heap into DRAM once it is up, 16 MiB in,
-> clear of SYS_LOAD_ADDR (0x80080000), U-Boot's default load address, and
-> of TEXT_BASE (0x80200000).
-> 
-> SPL_SMP is disabled, as only one hart is brought up, and
-> SPL_OPENSBI_SCRATCH_OPTIONS is cleared so that OpenSBI prints its boot
-> banner, which the default (SBI_SCRATCH_NO_BOOT_PRINTS) hides.
-
-Should we avoid this to keep aligned with other RISC-V boards? The
-banner, IMHO, is only meaningful for debugging purpose.
-
-> Signed-off-by: Hiago De Franco <hfranco@baylibre.com>
-> ---
->  arch/riscv/dts/cv1800b-milkv-duo-u-boot.dtsi  | 92 +++++++++++++++++++++++++++
->  arch/riscv/include/asm/arch-cv1800b/rom_api.h | 36 +++++++++++
->  board/sophgo/milkv_duo/Kconfig                |  5 ++
->  board/sophgo/milkv_duo/MAINTAINERS            |  5 +-
->  board/sophgo/milkv_duo/Makefile               |  1 +
->  board/sophgo/milkv_duo/spl.c                  | 76 ++++++++++++++++++++++
->  configs/milkv_duo_defconfig                   | 18 ++++++
->  7 files changed, 232 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/riscv/dts/cv1800b-milkv-duo-u-boot.dtsi b/arch/riscv/dts/cv1800b-milkv-duo-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..7f9a7a03c5d
-> --- /dev/null
-> +++ b/arch/riscv/dts/cv1800b-milkv-duo-u-boot.dtsi
-> @@ -0,0 +1,92 @@
-> +// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-> +/*
-> + * Copyright (c) 2026, Hiago De Franco <hfranco@baylibre.com>
-> + */
+I'll second the idea of handling RTC stuff in its driver, and I think it
+doesn't even need being configured at the SPL stage, right?
 
 ...
 
-> +&uart0 {
-> +	bootph-pre-ram;
-> +	clock-frequency = <25000000>;
+> Best regards,
+> João Paulo Gonçalves
 
-The upstream UART 8250 binding disallows clocks and clock-frequency
-to co-exist, and with current Linux drivers, it does cause issues, see
-this series[1].
-
-If you worry about the burden of introducing clock related stuff to SPL,
-consider define CFG_SYS_NS16550_CLK in the board configuration header
-instead.
-
-...
-
-Best regards,
+Regards,
 Yao Zi
-
-[1]: https://lore.kernel.org/all/20250623093445.62327-1-ziyao@disroot.org/
