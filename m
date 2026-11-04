@@ -2,169 +2,312 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4EF3606A31B
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 12:51:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56728606A31B
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 12:57:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=VT44uRYf;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GHw+CElr
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=x5jOthmc;
+	dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=a5xKQNMu;
+	dkim=pass (1024-bit key, unprotected) header.d=ticloud.onmicrosoft.com header.i=@ticloud.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-ticloud-onmicrosoft-com header.b=F7NeHyUo
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id AE56280F95;
-	Wed,  4 Nov 2026 12:51:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2B8B280FFE;
+	Wed,  4 Nov 2026 12:57:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MkBsSZNkJ0ek; Wed,  4 Nov 2026 12:51:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B907381086
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793796718;
-	b=CHPCHybeuFtX/+D/v9HORBsKsaeQW1DCQpK2z1cYOgJikBRZ1vzWB6cBz4cdA71pxIF2
-	 0hjM+c0qXPrC+iH+ZeylOpwI5UNyjCbhgi3mXoZuGkRxOZWAVPjJ5k+bLE9mxxh3jXc1q
-	 yEJXDLGL2mmMyqnqq7l3lGwIMMJ8E1VBb2lYoOcitqhgfpdzzojd4QNLkWfVkmiXcEkQC
-	 N5klAob2Oab7yFnoTZUerTIooFnAN+RmPO9Yg6nscYCCCIFt3JDO+2OxheedE3aL6q+n/
-	 stAw35kOwQWyueItLkHI/GdHCjCF60GhUPL6M/BqAESW/PIh4J2AlJJsxrRwcvtSjRg==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793796718;
+ id LLdMv7DJniq0; Wed,  4 Nov 2026 12:57:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E43AD80F46
+Authentication-Results: smtp1.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793797022;
+	b=GTMEroHdWf1ce8YlHojWKpVrExWdJDjmZEXJfFdt9Jr4OmobI6j/3zRSRQr2q7riQqME
+	 NYA8J1xK8tBnsHnxrrbFAjsQTlqy4jQaiNE0R7od7jt/8YACLtGXPLrWDd49SSjPuX404
+	 7jJA0QSrrgxh+mpjBKMuW8rJSJyhfknLmx0PZ6sAGW5mABaUiyKk/QGB4gcsqUUqLK7V9
+	 DlQRNrFeasDr1Aw50vL+iAct0KXCYGUr7thdfq8kzlO3EB5haOvP3g9dCznSbyO1kUHf8
+	 kjKlQ96Tqn1E/OdslCGjMia4JigAXRQLW6PbweAqmvqU9iIqEmPX5NX22tdco5hfI3Q==
+ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793797022;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:In-Reply-To:
-	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=qO5VskAPpf/j0nAvWLXMo5w5HsgZ1/qXRSe5Q1Yx3AE=;
-	b=AHxCjpmu4KSg2sayQbqKyi+Cfks3m6H/9jxaobKnKsB9olQ3aclBTkE3vyx7OYQ7lYvY
-	 8AIMHHLyfYFe4sfnR35M+x+IVY2UBTrIinQ3kzHwx+UypXHKB5bZ6Zz7SVgJBmelhxnbT
-	 ddASD6+RfYjBDF8ffvG3j+q32LBZXLZ7hU6R42jTLvtMAce0OQPcijz17CCGHw6bq1zH0
-	 lOpLQlruNevdS5elC9rlCWhEZ8rN8S/AAPJpXHph/qp9Ido2HdAUPkY9ZPJ3nMCu8OT0W
-	 1yKmOqbfzmIS8ngjNNrOcwLv+QK7Gr6D9wBllsbs8OFnod8Y0ha0X3WdcyztEH84tkQ==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
-	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+	 DKIM-Signature:Received:DKIM-Signature:Received:Received:
+	 X-MS-Exchange-Authentication-Results:Received-SPF:Received:Received:
+	 Received:Received:Received:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Subject:From:To:CC:In-Reply-To:References:
+	 Date:Message-ID:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-EOPAttributedMessage:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
+	 X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-Id:
+	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=7yWe2Hi50xdM1qzqE089j2b7A3DkPgcWT8RtLSW+y0w=;
+	b=K9JRAAvWWFUmmb/9FTMpDAQz2au3mLsBtvVx1FYfWPAvNJCfraVQZ9bgph2/caHmMaMh
+	 1tSbTDxjpcyE69FNavDU6jDf9Fs0uyWyVxNIPCAS82sDBpi9n5eti4Pygs5mpimcL0695
+	 DYpLy37PtO+o28gjv6zjrg1tWZ8c4m/zhAf3INho/Le1BjjFvW7v4BSo8/XqCTULRCNFs
+	 PSEYiVzCtP14zRzPwU2/HxfIngIkUY41N1+lC0ioC4zWXuJFwu38Qv/sxLoj5yRnPAlTv
+	 o9RZcdO9nOEmn5E5qMvtDYiwwkDLsOh0xxXueah7AAjQKqPgsxgFP628RMkzwlAKPFg==
+ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
+	dmarc=pass header.from=ti.com;
+	dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=a5xKQNMu;
+	dkim=pass header.d=ticloud.onmicrosoft.com header.i=@ticloud.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-ticloud-onmicrosoft-com header.b=F7NeHyUo;
+	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793796718;
-	bh=qO5VskAPpf/j0nAvWLXMo5w5HsgZ1/qXRSe5Q1Yx3AE=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793797022;
+	bh=7yWe2Hi50xdM1qzqE089j2b7A3DkPgcWT8RtLSW+y0w=;
+	h=Subject:From:To:CC:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=VT44uRYfgJWWP9AxIbC+WezDcow9NSQggHn4jNuqck1HtvT60Q7j5od2NbCTMDsal
-	 +wEzfDs6OX0F1vkwxuavgdzj0zuBud5/8rVeSYbFW7MQwYjjQlbjaP/DDO4aRHKdxU
-	 LLbzFklCGTmDx1MyJbVM2V03v9VrQt42nIc4uzyvLqf4addL0IqugRh1UQ7akW6FaH
-	 AF7UqU/k1h8SnTzDZNGSUYKF/JaxMERbuV+z/w1ueBMLXkRObQsuDCdjjSc6Buaa7F
-	 vpEvNUT3Od0wCvNGpP1H1IJR8TkwNfFec3O++00hPrd+3bbZlhquOTDFQWlYmXTHVb
-	 A+MooxGUj3QGA==
+	b=x5jOthmcITybgvx+o2hPi3Mx9kAKTJiyLNHiIn6iCJy1wUtHaplWBq2SMqL93CnHK
+	 eKDQussy8oDGj1m93pttqNc25dbn5ySqcOIG/XvuEf4d8ajCHUnwOFomMlRnPDNyAA
+	 bLs8dBZEQsfJjyG7aGVfgQS18Msc52D9CMVRxhlZxVLWON8THZCL9WFPGpPUGidTcB
+	 alk0RcwFgRpWSuZodcr/Wq09QPBESI5E8El6sXf2AVOf3S4EvGhpYd76mAszaEqeEw
+	 JBe3TzDnzteulv1uEzR5TOYLwYR60MNZCJrGN0EsNo7XaY3SkOjfFdm+Mzu2fGRm73
+	 EiFjb2Q8ZEYDw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B907381086;
-	Wed,  4 Nov 2026 12:51:58 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 88E75A10
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 12:51:57 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E43AD80F46;
+	Wed,  4 Nov 2026 12:57:01 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id CFCA334D
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 12:57:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 7A8AF607C4
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 12:51:57 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id C076280F46
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 12:57:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Jod0s3gH5Nbp for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 12:51:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 40E68605DA
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::62a"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793796716;
- b=LXtXErCsfYl3/ieC47nHczYwJro/1rpUDroQ8+s03HHdRpMJSYrB3UaNcLacdaQGq0zm
- JRiVx/TtuaJ5gQC1toXRF/wH8f/cyUKDAfFRKw0rCY4OCeXOfMMpDEkOt42DVBLP/G1AX
- f5rxsGHjRE4tzksgULr13+Y5Zaq2hXs5dso1aFE6iphP2TQUjg+h4HU2oW7JhFvvTyB5w
- LYUsJz7caoYj4L+QL6xWv4xOc1rllKLn+ehp5yDAzetf3V6FjfYaNUiX7mk6V274XGmon
- bWcUWpGB7/3VbibMu/X1BcHtuVenmK7ltrwEba/lsnbMVrAqNIamIoExa4BaKIy6VDQ==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793796716;
- h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
- Date:Message-ID:In-Reply-To:References;
- bh=qO5VskAPpf/j0nAvWLXMo5w5HsgZ1/qXRSe5Q1Yx3AE=;
- b=bKWOrCkvvF18NYBH0FIwgOx6mbCIiEBiI1PyExwEn0jv9fWM5SzvEtSB5rQVAcdUWSJZ
- vh1Jcg4eoQn5uX1/pHz+oPzf8KLJ5z2L1PnQMARonZ7WxuhE9hLgre57OaVpZ9z5N2uUq
- IVo19BIN9v+0fzyzBP9IVL1lObIF881p9BN+7sBBfCVhQHdZbv/eN/2Zjw2pDnMDAwY8q
- 1NfFnH24GVb4QuFD+E6NMTVYrc2tS6gO9PA8gH+gvoPkMyND0gfXE8zgd8lrmzcEy9FAW
- wPxOsbikJoSA/o+JWqz+DFFfOV2ckM+0bOrKy70saM3V//i2j27Rlw47MNI/8iHFFjg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
- dmarc=pass header.from=gmail.com;
- dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=GHw+CElr; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::62a"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62a; helo=mail-ej1-x62a.google.com;
- envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=GHw+CElr
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 40E68605DA
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 12:51:55 +0000 (UTC)
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-c4cac7a7d3cso88622966b.3
- for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 04:51:55 -0800 (PST)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SID00a2FFT2T for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 12:56:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A673880A55
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=148.163.154.28
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793797019;
+ b=G5WPgoSnPX5iAYQDHEzF8bW/XzEO355KXobKZfU3MExW4TRDJXDwPpa8QFvjmD62y7BW
+ sGNzC8qW9VpqTOmmDvhQJrXNpPtvfPE04MYnGfGpJuureRFgBSK7qHxPBLcU9/VoBI1tf
+ gwMyaPl03jWOb28HHrR4RtX6OX/Rpgs8mZ642rQTeWmWm47i35hOE47SZ7+wKX20Q2+Wy
+ YzJGCKraLGNWhQ7Jjw8HEJHX/0Mroe2y2m+7jGefh13t1T+2aZxBDfC97hVGCTrfSPGqu
+ Axu3V/7QlLP3tHxWOqgV+p0Z7jhqvXhA/WhjjMH9PUs6rvNNZybKcjLYXUx0zkyXWdQ==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793797019;
+ h=Received-SPF:Received:DKIM-Signature:Received:DKIM-Signature:
+ Received:Received:X-MS-Exchange-Authentication-Results:Received-SPF:
+ Received:Received:Received:Received:Received:MIME-Version:
+ Content-Type:Content-Transfer-Encoding:Subject:From:To:CC:In-Reply-To:
+ References:Date:Message-ID:X-Mailer:X-Developer-Signature:
+ X-Developer-Key:X-EOPAttributedMessage:X-MS-PublicTrafficType:
+ X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+ X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+ X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+ X-Forefront-Antispam-Report:
+ X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+ X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
+ X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+ X-MS-Exchange-CrossTenant-Network-Message-Id:
+ X-MS-Exchange-CrossTenant-Id:
+ X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+ X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+ X-MS-Exchange-CrossTenant-FromEntityHeader:
+ X-MS-Exchange-Transport-CrossTenantHeadersStamped:
+ X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+ X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
+ X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+ bh=7yWe2Hi50xdM1qzqE089j2b7A3DkPgcWT8RtLSW+y0w=;
+ b=isgUQJ9viRnhNwIXUP7dQvq491lSJOP7vy4pNHchs1n33zQ29A4lkQ/my64aOdn1xTgq
+ pZr38BycMEK362CyPkiGkTkp++hVEdLcszmdSckvvQnJOC2pzlk0r0VC7ypc27ZNJXZ0A
+ b7XYjfyjj+usYkWEFwVbyoHyt7MLqKM5orhSDm7jlaQmcbjTgaqGwRl8p27al1SiUOIbO
+ jOggaIxu/8dbZY0O4of/MECQE/IGFtgtAfJMCnqlx/XK6leYv99qzRWtk6ZUPQcMrjhjj
+ KH2Fk6VhQVsY8HNAOipgQyW+ePTUVSiaioOA7M87EUXAprYOsXWzKSvNQvwgG3Vo5Wg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
+ dmarc=pass header.from=ti.com;
+ dkim=pass header.d=ti.com header.i=@ti.com header.a=rsa-sha256
+ header.s=proofpoint-05-2026 header.b=a5xKQNMu; 
+ dkim=pass header.d=ticloud.onmicrosoft.com header.i=@ticloud.onmicrosoft.com
+ header.a=rsa-sha256 header.s=selector1-ticloud-onmicrosoft-com
+ header.b=F7NeHyUo; 
+ arc=pass header.oldest-pass=0 smtp.remote-ip=148.163.154.28
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.154.28;
+ helo=mx0b-0002e601.pphosted.com; envelope-from=n-francis@ti.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=ti.com header.i=@ti.com
+ header.a=rsa-sha256 header.s=proofpoint-05-2026 header.b=a5xKQNMu; 
+ dkim=pass (1024-bit key,
+ unprotected) header.d=ticloud.onmicrosoft.com
+ header.i=@ticloud.onmicrosoft.com header.a=rsa-sha256
+ header.s=selector1-ticloud-onmicrosoft-com header.b=F7NeHyUo
+Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com
+ [148.163.154.28])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id A673880A55
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 12:56:57 +0000 (UTC)
+Received: from pps.filterd (m0374956.ppops.net [127.0.0.1])
+ by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6A4Bbl7W1677314; Wed, 4 Nov 2026 06:56:47 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=
+ proofpoint-05-2026; bh=7yWe2Hi50xdM1qzqE089j2b7A3DkPgcWT8RtLSW+y
+ 0w=; b=a5xKQNMur48m3hOwX4uEOhvlCpL54TfKLpqA01ND8KE2NRSnTxSozCZ9c
+ ZXvqgK4TXlYm/uRcya/Wn/UIQ1jd3sBpc6PCVXDfa2qdB1U6EcQszOOjwMX06Mxh
+ yI1+d29iT4cTHPV3VnOX9Yn+ZcMEuU/Q/AAgyzTBfdhlXcPP5nB130OGnHDr0wE2
+ jn8/lrsOSqmKEX+tqgSSYn0y0K9Is5w0Evoykax907WnE0JkCj2bS0SFbT48GxPe
+ Pf7LJpiIk5NuwRyLpFvJzddGLh0QTKJkHOm68YbE5uXheaXIJYB4SdwbWOwp2CuW
+ El9Oi3QCizfiRRY+G10ZEywF4Bqjw==
+Received: from co1pr03cu002.outbound.protection.outlook.com
+ (mail-westus2azon11010070.outbound.protection.outlook.com [52.101.46.70])
+ by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4hquyf2ys6-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Wed, 04 Nov 2026 06:56:47 -0600 (CST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SbngVaklMNGC7lC2o+CDFUA/xXLUjm6Q4yn2ov7RnnbiA1NV37JetfomRsRFbsubNO1TOhmcOL/UrgoBPHQ9MEUd5nAVqllZ+1xF6PNH6Bd9n8QJpXCGAE73uVfLVv/9o8cM4UQcJqSHE1hp6chH3THiWpaGvAPTm1vGR/LLoMh4i9U5lrgyYVc60Gre6YzHH6GKDXkoyRBAv9J4BrshumCbdAi/4uTxNbHFyplFFcDtV7p9ZV2Pu8WuFD+CKzDUa0svrD6LymlGo0k2BzHvAZWqOc4Bm5rJVayPYr3NeTEaWff0ZtnymbCzXX0EagoyArYxzdYSE6PmJTPqbagtbg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7yWe2Hi50xdM1qzqE089j2b7A3DkPgcWT8RtLSW+y0w=;
+ b=nbDMusjwqhCViRqD9uQ960QvEjGCfpagP40ILPxwsQsCwmvn8kqw+JO1HJuQ+w48SvDL8sEYunylQWp+mj04fMExPKHjNmwdJaWvpPqGKIUwXrwei2PmFjqVzH/m2TQyokrQb8YINZLq6GWb0+VP+D6ElZL+GBX7oLV0Xh9ZsbUa2zU5oUwTEqsbnrFNV3YS9hFygQ5fNTLGZcs9aYWf7w7WQKeRm5MqlxNBY+qUGtHlOsUTIXmBuQs2iXpd3eFphuBeMfq9Ibv3c8kZhQa+huqqNBX5eT9QtcrA7yrpggvlIGOPSdQWQ5dNvCcYyZ7NOaN5r+Ma7AJnnAQ/2Hj55g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=basepowercompany.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793796714; x=1794401514;
- darn=lists.u-boot-project.org; 
- h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=qO5VskAPpf/j0nAvWLXMo5w5HsgZ1/qXRSe5Q1Yx3AE=;
- b=GHw+CElr40CtT1m8QLNu5feCpAkH893/58xlU7OM47ysFV7ReZ4wlm7bkmfcl6M4Bh
- b35CJ8e8WpHUhnE2ScwtVC7b70OCeKOoezCui08qGxutk/bQ2wJcpzxQ3FmH+3LF6DYO
- 3Ng4tZq2oIlz+yMMZ8oAr5I6rpfZUEPML7A3QKObx+siamqWAy0bA6Sf3SnK63gTmns7
- vKp+Ocx6A1oH3nL5ghGKbYHx1qGnZ1nuz/M/UnCMUWsNfqwNlBOKcQDl8PLJw0Iruahz
- 7ISd7nkAhu5+ZPprz5Y2ZwogzQpR9tEiYRQM05sPKBzX1U1BWtNUvoQ5lOL6kkNrRJG6
- jPkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793796714; x=1794401514;
- h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=qO5VskAPpf/j0nAvWLXMo5w5HsgZ1/qXRSe5Q1Yx3AE=;
- b=pgfeyNrBbM0/CNUwElRDSoOuEgrNLxWcVdzlZs057FvZJYUIsLwdgV/4ISku5WB5KM
- CCEbImtVnHd51bNGMGQFgLg81+/DBSx011BKwwv+mXCHY6tIpKsl2e9Q9b/HI7SMi0jL
- 2vyBUtETlAqMUie76Ep1rh6KZauBOqMalYuA3JAiuL5cQJ55lwDnabvfuhpIsVs9t7Z5
- mp0m8Cacv55ANcvTyvAWfA1VCIzZ3ikOIQCRpxtEgUZS9jiI3Ms62jN0XGrHk8AcDNSm
- hXIQOerf0E4qt6qiSlznn+2q41It7ld4k9ESaAMt2hrsFA1qvu3fgDHDtem0obF9vj+2
- u3ZQ==
-X-Gm-Message-State: APuU4Z+DBmuwMPuftvR0mPSBGlzzngUaJBpBC7gsOOdae8EgBox1Rs6n
- aTUwGFGft+7WIwtZhzrBfQx1h72+URqUSCNT+BNK33hyJPH02kci+r6o
-X-Gm-Gg: AYBFou3NtYjGpCcTFY9PaudMJT9hs11LND9+TKefPlgUUaGYV77/uvJapa9foQdFz95
- +YVw6j3zWQ7m3/pSpnHuY/1W00p6QkEt+WK+OYhIUs5E73XrEkE+8qCyYZ+alTacAQNt0Tq5pQ/
- +ZLUyefgJ6MFvUWLiAErQxQOIo0iJe7t0KVWZB/OEGKPQEfNJmXaXWY9qMubWI8nc99fs3r+D2X
- 2eEH0GEUDs7J3e/ejmVys38xq6cgHhHNT6kYpKgGEao3NqJnublO1j+DPy7G+U1lzmVpoPhbwmU
- aWCyNibKE2o7PIJQiPKirL38OP5tPeNY4NHaUc8dQzzACD4PGt7tT/tu3Mze4FWD6MKbZuy1MmS
- O5GoqAp784pLFE0mssU2dOUB1JVZw+r77LLM/RZkeeulCX4j4h7lLUi9o+JNd7LHOm2UXSkY0ZW
- sTsVqhMEVztWc9hjM10HPQmaYktS/rm0odCL0Yuc5GkQXyPNjG7ZHP6dLBqDGELr4HQyU4SJA4D
- FGOGM3Izer+sUf/tHPVYjp0tKOCPZaA/+k+nwxU9zTMqFM9GfUqLG3I4TxKjwtFtVL3777puhCR
- FkdyWfYgUvSxfi3W5e4yf4wzWp0mL9o=
-X-Received: by 2002:a17:907:1b08:b0:c41:835b:8f24 with SMTP id
- a640c23a62f3a-c4ca7adc682mr1273954466b.49.1793796713898; 
- Wed, 04 Nov 2026 04:51:53 -0800 (PST)
-Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c4d0e4a76d6sm66317766b.84.2026.11.04.04.51.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Nov 2026 04:51:53 -0800 (PST)
-From: Ana Bobillo <anabobillo3@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+usb@mailbox.org>, Bin Meng <bmeng.cn@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Alexey Charkov <alchark@flipper.net>,
- Javier Martinez Canillas <javierm@redhat.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-Subject: [PATCH v4 14/14] mmc: Always use a 512-byte block length
-Date: Wed, 04 Nov 2026 12:51:52 +0000
-Message-ID: <6a4e3afb-4336-4e21-b5c7-b9ec88a9b6bb@gmail.com>
-In-Reply-To: <1369653d-e0d4-4baf-adef-895a24190250@gmail.com>
-References: <1369653d-e0d4-4baf-adef-895a24190250@gmail.com>
+ d=ticloud.onmicrosoft.com; s=selector1-ticloud-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7yWe2Hi50xdM1qzqE089j2b7A3DkPgcWT8RtLSW+y0w=;
+ b=F7NeHyUo5sIhCAhEuWFPb4H4Xo6HsrMuYcwDArWZXE3bLvfnyguPZhIVrQan1+RUqGIhEH+Pd2TRLQHIsTXChlKpmb+Hryc+aW0fwgdWsiTO8hasTITpgls43fvjUmeBbzJ0AFI+56vinzu1RqB9BXi5I3PrdQKNxQMgwR9bKRI=
+Received: from BN9PR03CA0091.namprd03.prod.outlook.com (2603:10b6:408:fd::6)
+ by PH0PR10MB5780.namprd10.prod.outlook.com (2603:10b6:510:149::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.8; Wed, 4 Nov 2026
+ 12:56:39 +0000
+Received: from BN3PEPF00022BBE.namprd04.prod.outlook.com
+ (2603:10b6:408:fd:cafe::60) by BN9PR03CA0091.outlook.office365.com
+ (2603:10b6:408:fd::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.9 via Frontend Transport; Wed, 4
+ Nov 2026 12:56:37 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 198.47.23.195) smtp.mailfrom=ti.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BN3PEPF00022BBE.mail.protection.outlook.com (10.167.248.119) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.592.5 via Frontend Transport; Wed, 4 Nov 2026 12:56:36 +0000
+Received: from DLEE204.ent.ti.com (157.170.170.84) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 4 Nov
+ 2026 06:56:31 -0600
+Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE204.ent.ti.com
+ (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Wed, 4 Nov
+ 2026 06:56:31 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
+ Transport; Wed, 4 Nov 2026 06:56:31 -0600
+Received: from [127.0.1.1]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.50.71])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6A4CuCdr2180519;
+ Wed, 4 Nov 2026 06:56:26 -0600
+X-Archived-By: <archiver.kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v4 7/7] arm: mach-k3: j722s: Wait for TIFS initialization
+From: Neha Malcom Francis <n-francis@ti.com>
+To: Markus Schneider-Pargmann <msp@baylibre.com>
+CC: <u-boot@lists.u-boot-project.org>, Tom Rini <trini@konsulko.com>, "Ilias
+ Apalodimas" <ilias.apalodimas@linaro.org>, Daniel Schultz
+ <d.schultz@phytec.de>, Udit Kumar <u-kumar1@ti.com>, Richard Genoud
+ <richard.genoud@bootlin.com>, Anshul Dalal <anshuld@ti.com>, Aristo Chen
+ <aristo.chen@canonical.com>, Simon Glass <sjg@chromium.org>, Kory Maincent
+ <kory.maincent@bootlin.com>, Paresh Bhagat <p-bhagat@ti.com>, Julien Panis
+ <jpanis@baylibre.com>, Jacob Parker <jparker@basepowercompany.com>,
+ "Mattijs Korpershoek" <mkorpershoek@kernel.org>, Igor Opaniuk
+ <igor.opaniuk@gmail.com>, Johan Jonker <jbx6244@gmail.com>
+In-Reply-To: <20261104-v2026-10-next-topic-am62-hs-se-fix-unlock-race-v4-7-e211cba9f3ea@baylibre.com>
+References: <20261104-v2026-10-next-topic-am62-hs-se-fix-unlock-race-v4-0-e211cba9f3ea@baylibre.com>
+ <20261104-v2026-10-next-topic-am62-hs-se-fix-unlock-race-v4-7-e211cba9f3ea@baylibre.com>
+Date: Wed, 4 Nov 2026 18:26:02 +0530
+Message-ID: <179379696263.3643704.6549516340385731516.b4-review@b4>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793796972; l=581;
+ i=n-francis@ti.com; s=20260428; h=from:subject:message-id;
+ bh=DzNp8+7E6Crn7PsFgFpyDU6wRW19kdnrZ4vX4lQNP6s=;
+ b=suenTV5PFFuIsHmxuQtVP1gelw/LtTnRtLFrXynmOIZ/YjlqqlhO92BIqxXi1Ok0+/Y0NaZwe
+ o1P5ZkhYqYRC1kSoVR2VWEHO+weXpNdr1tHO5Tzyou69g8mhitAByJB
+X-Developer-Key: i=n-francis@ti.com; a=ed25519;
+ pk=Z4nV5FmpAM9e1Jk0HnCKOoVUtHW8cscgDRncr2IngXg=
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF00022BBE:EE_|PH0PR10MB5780:EE_
+X-MS-Office365-Filtering-Correlation-Id: f9c5b861-32bb-4500-e7c9-08df3a730fd3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700016|82310400026|7416014|23010399003|376014|1800799024|6133799003|22082099003|10067099003|18002099003|56012099006|4143699003|261022075727099003|261026121527099003|261021121427099003|261102123227099003;
+X-Microsoft-Antispam-Message-Info: STLPkTKaTakHKiZRSC2+I00CLHtmZ5XRD3uENQ08Xm6i9PP6/wb/itCpPzMzmm/E/RNIXK6+4h6f2CIMeEoVsoZUTz5nlRHWTtz8e6d00vh+SNcbcnLJAarYl89MmAyHvr/cIVRP3BdEM5LhQra0JbDGeofKH+ybg1bybVzWxHxJQSgjyaVh0rs24gLr7JFq6q12ZN9p8F+k+rb0ioKlla5UxiJ/+H1yOmoICn31BHDmmrjRxZ1+bOQJmdo2H8kGDAgfh7zZAvYTquiNt43W1dMdBIhcgTrljM2rVNDsYsb8uqW9pxO6Ff0ux5+ybpgRvNiSsIN64hjFswU68tkrmhLv2KsAc3WpZFAy7/2zplr7I3PtdNz9w6ZTn7eAiIvyHN9mnmjOkTDwTM67DACuQfbRuM4Sfj2hNw4AcYHJIHgLfGsxBQ0hvsg+K7K6YLfsyC4yWel7MV/dSlWYu457g09EL84hoG9UB/E/elJ88YtZn1pf8s3FptTiITsDvLumhdOtM6/cVyxbDNBDIbsqbvOmIUIdzKOCYEuDPeRbFUvLJy4zf7rtNL1S4MjD8UCj3puCPC3GmjhoiWUxOzdImjArUVzlL6FFsp6J1/OJfc2d0T+ORcHMl/3sLKLwxA9X8GN/oSu+pnsGeG0uh64NMpfbPUQ5aAKXUIC0QKq5P0daoUte6IJur8yosW3PnIfXf61RGVbimabRbxaMQG6fxw==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(7416014)(23010399003)(376014)(1800799024)(6133799003)(22082099003)(10067099003)(18002099003)(56012099006)(4143699003)(261022075727099003)(261026121527099003)(261021121427099003)(261102123227099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 51AaYDGdOjr4BWiz4Vrku7jsOcJH7sod2X44eicVILHEIaaBZq/pSga5ULbuRPynju1qfDEvZTGmnD5rTYsPu+6aL2RYPI04FEdbU2V3tqdFJujT5cESp1XNTS69k8+aQSe5833xwPiRp0aXNv6ooy9WJJzCLeh7x53KV4KtFtkJpaFV8UnefiLIZ8x7emj/Jhxom1boqGwTIHEXUVzPYgrkCzfHEWPtStDsu4cOKhM3pnqzhmYmAXdcTjNVuTtqHqcIBRUklncmTJh0bB73FY4BxtoF1cSlBibBaiZh1DvPrEivw4DlaCsty4qEYrrIGfe4RBDG4D2XV/Xh6eZFE+bzwT6fnval+9RzwkCFdxT7Gi+J2pd34zSyccMolXH7wB+4RdYeYpTUsSHOb8VVm5fvyLEXBOlCV/SgfKIQwOR2UxiHAg+pLeiVb/vMOvV8
+X-Exchange-RoutingPolicyChecked: y0fxGcRa1xwbsjQhhfKTTa44UAeLeot/P1daSrPx2UBPuFkLp8+46QX7a6yQnm+I2JsLQEy+7cEl86Yg1pToXF8fprJua1upTctyFeVPdseacJ5bEbPv09THhd3EBQ1S8AZOd5EZV3cgCi2uKjfPLLcNqzh9oWh3/PmBTJ4FI7fEURG66SFQy6x+VvxSpWaOMdOzZzoIgMxDeiluLlh3CgRH8pvLXBnKBMS+V0aZWduhgzHsr7Qp4E4IjVeHZdwrrqalCq3/hDfk8r8GSclMKCvFUvj+P1SRWHE8VK4HCUCSNK/rH6XNw/lJvDm0CaSeCWX4epjV8QlqzrG4mR4Dug==
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2026 12:56:36.9835 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f9c5b861-32bb-4500-e7c9-08df3a730fd3
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF00022BBE.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB5780
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA0MDA1MSBTYWx0ZWRfX7SSORkFKsetE
+ 4105+nhbgcMl1JMOugD6YjDYUT71plpZTLsrN+cvzWm69GzvnTg4ebpjOAXZJCkf2blR2Z1BuxM
+ eVTh/kROvRPRxUoH3KrLjxK+nOUWry8h1GabEwVDypcDWwrblGbsX2/RJ9sgmkR+PfutwgHhc41
+ KZ0/m7lAYVHyyldgx4hKEcU+wro9FGhDtmQN0M6kBQO6EohR+xfOX7sJLxtS0GPZXWgwxXMHhFO
+ 9cCgJHNy1ZsCNPolIkqc/Y3xH0SnXkLscVS/Q7lkEErU4EjzHG16g0RVvBYKKQ9f8Am7d0NLbm6
+ IRdX9DI+ZWwnqKzcHW5Kc3djWA6OWZAr+4lS0ep6aiyFSS0KOT7nr/F8SI6g6qXO6YEbnChQIpH
+ HLZ+7jccjfVdhq08FXzQLNSHm1ELUvL0Q1gCH+mDujEnOFcgGHB79Ls39tTe234lO+N9UZvlxgi
+ Mn+aA2u+xm8pW9yOJjw==
+X-Proofpoint-GUID: 5n09Hgl42SkvJ3BjmQ3YNGvfaJnYKV1y
+X-Proofpoint-ORIG-GUID: 5n09Hgl42SkvJ3BjmQ3YNGvfaJnYKV1y
+X-Authority-Analysis: v=2.4 cv=MpzHeGae c=1 sm=1 tr=0 ts=6aeb2b8f cx=c_pps
+ a=DyUboiW8/Fjv5kZUpInndg==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
+ a=s63m1ICgrNkA:10 a=AlMIdn_sM9wA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=Z8NIEmU8O1QQgoT56wFK:22 a=jwouBfj2j3NM8CExmVVE:22 a=IpJZQVW2AAAA:8
+ a=sozttTNsAAAA:8 a=kml-I0801DVgoifd8qoA:9 a=QEXdDO2ut3YA:10
+ a=IawgGOuG5U0WyFbmm1f5:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA0MDA1MSBTYWx0ZWRfX6dAAtQQ/rPoQ
+ q2229kPkDYS04sk7lDclE2gsrw0qAcqvHYkMP6qZAeSPlldNYAPAjRWzxcm/AE32dzKkzG1Zb7k
+ O9pTSJmofoCAYNk/hj9l3Ry5SxXE0Vk=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-04_04,2026-11-03_04,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 impostorscore=0 suspectscore=0 priorityscore=1501 malwarescore=0
+ spamscore=0 lowpriorityscore=0 clxscore=1011 adultscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611040051
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -174,251 +317,24 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
-X-Archived-By: <archiver.kernel.org>
 
-From: Ana Bobillo <anabobillo3@gmail.com>
+On Wed, 04 Nov 2026 11:58:25 +0100, Markus Schneider-Pargmann <msp@baylibre.com> wrote:
+> On HS-SE platforms TIFS takes longer to initialize. TIFS only removes
+> the firewall on the registers at the end of initialization. On HS-SE the
+> U-Boot ctrl_mmr_unlock() can happen before TIFS removed the firewall
+> leading to a race condition. This leads to a broken watchdog since the
+> signal configuration doesn't succeed because the write doesn't take
+> effect.
+> 
+> [...]
 
-mmc_startup() sets the block size of the card's block device from the
-READ_BL_LEN field of its CSD and only caps it at 512 bytes from above. A
-card reporting a READ_BL_LEN below 9, which the SD specification
-reserves, gives the block device a block size below 512 bytes. A block
-that small cannot hold an MBR or a GPT header, and the partition and
-filesystem code assumes at least 512 bytes. Nor does the code bound an
-MMC card's WRITE_BL_LEN from below, though mmc_bwrite() then writes
-blocks of that length where the block layer passes 512-byte ones.
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 
-The check in blk_post_probe() does not catch this. It is left out of
-SPL, TPL and VPL, which commonly boot from MMC. In U-Boot proper,
-mmc_startup() runs again whenever the card is initialised again, by
-'mmc rescan' or 'mmc dev', or after the card-detect poll has seen it
-removed, and sets the block size of a block device that is already
-probed.
-
-Use 512-byte blocks whatever READ_BL_LEN and WRITE_BL_LEN say, as the
-code already does in DDR mode and as Linux does for its transfers; the
-capacity is still computed with the block length the card reports. Only
-some old MultiMediaCards could have blocks that really are smaller, and
-the partition and filesystem code could not use those either. This makes
-the DDR case redundant, so drop it. The SPL does not grow: imx28_btt3's,
-close to its size limit, gets 16 bytes smaller.
-
-Make the READ_BL_LEN that the sandbox MMC emulator reports settable, and
-test that a card initialised again with a READ_BL_LEN of 0, 8 or 11 gets
-512-byte blocks and can be written and read back.
-
-Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
-Changes in v4:
-- Drop the reference to the patch adding blk_valid_blksz() from the
-  commit message, and say the code already "does" use 512-byte blocks
-  in DDR mode (Simon)
-
-Changes in v3:
-- New patch: blk_post_probe() does not see the block size the MMC code
-  sets when it initialises a card again, as the v2 cover letter said
-
- arch/sandbox/include/asm/test.h | 10 +++++++++
- drivers/mmc/mmc.c               | 34 +++++++++-------------------
- drivers/mmc/sandbox_mmc.c       | 11 ++++++++-
- test/dm/mmc.c                   | 40 +++++++++++++++++++++++++++++++++
- 4 files changed, 71 insertions(+), 24 deletions(-)
-
-diff --git a/arch/sandbox/include/asm/test.h b/arch/sandbox/include/asm/test.h
-index 76e2f11b059..f73bf51ef35 100644
---- a/arch/sandbox/include/asm/test.h
-+++ b/arch/sandbox/include/asm/test.h
-@@ -143,6 +143,16 @@ void sandbox_flash_set_block_size(struct udevice *dev, int block_size);
-  */
- void sandbox_scsi_set_block_size(struct udevice *dev, int block_size);
- 
-+/**
-+ * sandbox_mmc_set_bl_len_shift() - Set the READ_BL_LEN an SD card reports
-+ *
-+ * @dev:	Sandbox MMC controller
-+ * @bl_len_shift: log2 of the block length, as the CSD's READ_BL_LEN field
-+ *
-+ * The host reads it when it next initialises the card.
-+ */
-+void sandbox_mmc_set_bl_len_shift(struct udevice *dev, int bl_len_shift);
-+
- /**
-  * sandbox_osd_get_mem() - get the internal memory of a sandbox OSD
-  *
-diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-index 4835ce0c64b..90331823926 100644
---- a/drivers/mmc/mmc.c
-+++ b/drivers/mmc/mmc.c
-@@ -2555,7 +2555,7 @@ error:
- static int mmc_startup(struct mmc *mmc)
- {
- 	int err, i;
--	uint mult, freq;
-+	uint mult, freq, bl_len;
- 	u64 cmult, csize;
- 	struct mmc_cmd cmd;
- 	struct blk_desc *bdesc;
-@@ -2652,14 +2652,7 @@ static int mmc_startup(struct mmc *mmc)
- 	mmc_select_mode(mmc, MMC_LEGACY);
- 
- 	mmc->dsr_imp = ((cmd.response[1] >> 12) & 0x1);
--	mmc->read_bl_len = 1 << ((cmd.response[1] >> 16) & 0xf);
--#if CONFIG_IS_ENABLED(MMC_WRITE)
--
--	if (IS_SD(mmc))
--		mmc->write_bl_len = mmc->read_bl_len;
--	else
--		mmc->write_bl_len = 1 << ((cmd.response[3] >> 22) & 0xf);
--#endif
-+	bl_len = 1 << ((cmd.response[1] >> 16) & 0xf);
- 
- 	if (mmc->high_capacity) {
- 		csize = (mmc->csd[1] & 0x3f) << 16
-@@ -2672,18 +2665,21 @@ static int mmc_startup(struct mmc *mmc)
- 	}
- 
- 	mmc->capacity_user = (csize + 1) << (cmult + 2);
--	mmc->capacity_user *= mmc->read_bl_len;
-+	mmc->capacity_user *= bl_len;
- 	mmc->capacity_boot = 0;
- 	mmc->capacity_rpmb = 0;
- 	for (i = 0; i < 4; i++)
- 		mmc->capacity_gp[i] = 0;
- 
--	if (mmc->read_bl_len > MMC_MAX_BLOCK_LEN)
--		mmc->read_bl_len = MMC_MAX_BLOCK_LEN;
--
-+	/*
-+	 * Use 512-byte blocks whatever READ_BL_LEN and WRITE_BL_LEN say. A
-+	 * larger value is the most the card takes in one block, and a smaller
-+	 * one, which the SD specification reserves, would give the block
-+	 * device a block size the partition and filesystem code cannot use.
-+	 */
-+	mmc->read_bl_len = MMC_MAX_BLOCK_LEN;
- #if CONFIG_IS_ENABLED(MMC_WRITE)
--	if (mmc->write_bl_len > MMC_MAX_BLOCK_LEN)
--		mmc->write_bl_len = MMC_MAX_BLOCK_LEN;
-+	mmc->write_bl_len = MMC_MAX_BLOCK_LEN;
- #endif
- 
- 	if ((mmc->dsr_imp) && (0xffffffff != mmc->dsr)) {
-@@ -2765,14 +2761,6 @@ static int mmc_startup(struct mmc *mmc)
- 
- 	mmc->best_mode = mmc->selected_mode;
- 
--	/* Fix the block length for DDR mode */
--	if (mmc->ddr_mode) {
--		mmc->read_bl_len = MMC_MAX_BLOCK_LEN;
--#if CONFIG_IS_ENABLED(MMC_WRITE)
--		mmc->write_bl_len = MMC_MAX_BLOCK_LEN;
--#endif
--	}
--
- 	/* fill in device description */
- 	bdesc = mmc_get_blk_desc(mmc);
- 	bdesc->lun = 0;
-diff --git a/drivers/mmc/sandbox_mmc.c b/drivers/mmc/sandbox_mmc.c
-index a24520f2e78..34a5c7506ab 100644
---- a/drivers/mmc/sandbox_mmc.c
-+++ b/drivers/mmc/sandbox_mmc.c
-@@ -29,6 +29,7 @@ struct sandbox_mmc_plat {
- struct sandbox_mmc_priv {
- 	char *buf;
- 	int csize;	/* CSIZE value to report */
-+	int bl_len_shift;	/* READ_BL_LEN value to report */
- 	int size;
- };
- 
-@@ -62,7 +63,7 @@ static int sandbox_mmc_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
- 		break;
- 	case MMC_CMD_SEND_CSD:
- 		cmd->response[0] = 0;
--		cmd->response[1] = (MMC_BL_LEN_SHIFT << 16) |
-+		cmd->response[1] = (priv->bl_len_shift << 16) |
- 				   ((priv->csize >> 16) & 0x3f);
- 		cmd->response[2] = (priv->csize & 0xffff) << 16;
- 		cmd->response[3] = 0;
-@@ -144,6 +145,13 @@ static const struct dm_mmc_ops sandbox_mmc_ops = {
- 	.get_cd = sandbox_mmc_get_cd,
- };
- 
-+void sandbox_mmc_set_bl_len_shift(struct udevice *dev, int bl_len_shift)
-+{
-+	struct sandbox_mmc_priv *priv = dev_get_priv(dev);
-+
-+	priv->bl_len_shift = bl_len_shift;
-+}
-+
- static int sandbox_mmc_of_to_plat(struct udevice *dev)
- {
- 	struct sandbox_mmc_plat *plat = dev_get_plat(dev);
-@@ -169,6 +177,7 @@ static int sandbox_mmc_probe(struct udevice *dev)
- 	struct sandbox_mmc_priv *priv = dev_get_priv(dev);
- 	int ret;
- 
-+	priv->bl_len_shift = MMC_BL_LEN_SHIFT;
- 	if (plat->fname) {
- 		ret = os_map_file(plat->fname, OS_O_RDWR | OS_O_CREAT,
- 				  (void **)&priv->buf, &priv->size);
-diff --git a/test/dm/mmc.c b/test/dm/mmc.c
-index cdebb955196..d393883855c 100644
---- a/test/dm/mmc.c
-+++ b/test/dm/mmc.c
-@@ -6,6 +6,7 @@
- #include <dm.h>
- #include <mmc.h>
- #include <part.h>
-+#include <asm/test.h>
- #include <dm/test.h>
- #include <test/test.h>
- #include <test/ut.h>
-@@ -51,3 +52,42 @@ static int dm_test_mmc_blk(struct unit_test_state *uts)
- 	return 0;
- }
- DM_TEST(dm_test_mmc_blk, UTF_SCAN_PDATA | UTF_SCAN_FDT);
-+
-+/* Test that a card with a READ_BL_LEN other than 9 gets 512-byte blocks */
-+static int dm_test_mmc_bl_len(struct unit_test_state *uts)
-+{
-+	static const int shift[] = { 0, 8, 11 };
-+	struct blk_desc *dev_desc;
-+	char write[512], read[512];
-+	struct udevice *dev;
-+	struct mmc *mmc;
-+	int i, j;
-+
-+	ut_assertok(uclass_get_device_by_seq(UCLASS_MMC, 0, &dev));
-+	ut_assertok(blk_get_device_by_str("mmc", "0", &dev_desc));
-+	mmc = mmc_get_mmc_dev(dev);
-+
-+	for (i = 0; i < ARRAY_SIZE(shift); i++) {
-+		/* Initialise the card again, as 'mmc rescan' does */
-+		sandbox_mmc_set_bl_len_shift(dev, shift[i]);
-+		mmc->has_init = 0;
-+		ut_assertok(mmc_init(mmc));
-+
-+		ut_asserteq(512, mmc->read_bl_len);
-+		ut_asserteq(512, mmc->write_bl_len);
-+		ut_asserteq(512, dev_desc->blksz);
-+		ut_asserteq(9, dev_desc->log2blksz);
-+
-+		/* mmc0 reports 1024 blocks of the length in READ_BL_LEN */
-+		ut_asserteq((1024ULL << shift[i]) / 512, dev_desc->lba);
-+
-+		for (j = 0; j < sizeof(write); j++)
-+			write[j] = i + j;
-+		ut_asserteq(1, blk_dwrite(dev_desc, 1, 1, write));
-+		ut_asserteq(1, blk_dread(dev_desc, 1, 1, read));
-+		ut_asserteq_mem(write, read, sizeof(write));
-+	}
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_mmc_bl_len, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+-- 
+Neha Malcom Francis <n-francis@ti.com>
