@@ -2,177 +2,136 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E288606A338
-	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 05:17:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C908606A330
+	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 05:42:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=gSrHy+Kg;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=jusMwZbh
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=nPoUKD14;
+	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=infineon.com header.i=@infineon.com header.a=rsa-sha256 header.s=IFXMAIL header.b=Mn7T93m5
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4C04C407D1;
-	Thu,  5 Nov 2026 05:17:49 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C3B184076E;
+	Thu,  5 Nov 2026 05:42:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ajcvCLJoU8AH; Thu,  5 Nov 2026 05:17:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2074E40598
+ id nrXuGM5Iyojp; Thu,  5 Nov 2026 05:42:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 11D0940748
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793855868;
-	b=X23aA5QT1Q/3xYmH9h9JgylCzfEMr873y7rXWAOclS0wwyFlSxbm3E8SxhhMcka2CLiY
-	 2NwfIxoLCMmXsDou/sZ+QKWo/O1ywUkpEUX87fNsKfeA1sxukHjvQF/WoN5r9qeYkp4xl
-	 F/YdCSPAqu7QLMcwlkvdzVK/AGYVjra8uv56wdCLW1Bxk3OnOraYnD+uzRjXzRSl9X6vS
-	 2lMqEG+GxNN1Dxz4WxOiJqs0czFKZZ0N+xh5+g84TzY84xLOM+7IGmcNVKUHXeBbXci18
-	 krPYhBJOJbs8HDkOhge5SK7DC9QbecuvN8ULaMXPedxZiE5JanSc3ug9UxxFgMwjlfw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793857323;
+	b=tFXovdqgdfAsYdbfycS1XHfTDNG3hvB1uOt1sHa0GYjh0NSeGtIv2CvsURScgjD+0C4U
+	 IKOJIgnoU/ZH8heyR6alrX8D90Z5PmyYyEE4cn3E0GmtJ01rjC2fOjER0nJ6ZXEXKTIF/
+	 Y1wPyL8xi55eUs4MyI2/UFP3CfY25BG+w4fhFDTflYPMHN/QhGl8pwQ2z7EivPHeSrIc1
+	 EeJWglmO4X2engs8ft/3KIqaXc+wxoCMe58zAALhDA01BSKotUG2nLfjbifsx+dK9cmao
+	 g05tNeFbPfpdUiYSoh5bycEbGZVfnrV+LMf6D6ojzvDlE8xnWzadd2r2Ai25qOnfw2Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793855868;
+	c=relaxed/relaxed; t=1793857323;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:X-MS-Exchange-Authentication-Results:
-	 Received-SPF:Received:Received:Received:From:To:CC:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:Content-Type:X-EOPAttributedMessage:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=WLVMTfhy83efIPaxIrYf7Nkxaf8fSUOnTWPDy6uLw0E=;
-	b=r70WQyJ16ilQuXpk1ucqVwdk46nqoy+ml7reo2DECmHNu7CMRuhWcEuCKwiYoEAeQ9NU
-	 0suvpPSiSk/J9Oe/c8KAfXMPsAxaTWc9dZFDGnwzUoEqljBNh6T0iGtz+64M18ycdvI/Y
-	 rZ/1Ocm924GjtnSK2Zi04mj95X+eHeS7obDDppshA12We5a1geyzv5g7759RxAx9OSW06
-	 XFbcmdN1e2+odXysBAfV6r1DlEvFTm+G9+RYWI5ARYAA2sJtpm/jwyptJ72cA+hWQYqMX
-	 uoJdNl88DHInmXkbYzIRXxN/EAU5KOucc91u1CL3Zr9tDBHXmiEaev5dhBk/D8Ei6VQ==
+	 DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:X-IronPort-AV:
+	 X-IronPort-AV:X-Amp-Result:Received:Received:Received:Received:From:
+	 To:CC:Subject:Thread-Topic:Thread-Index:Date:Message-ID:References:
+	 In-Reply-To:Accept-Language:Content-Language:X-MS-Has-Attach:
+	 X-MS-TNEF-Correlator:x-originating-ip:Content-Type:
+	 Content-Transfer-Encoding:MIME-Version:X-Mailman-Approved-At:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=3Lq5RFkP39//Q7XX9Ba54M/ytAndYfYe/Zl0brRWyW4=;
+	b=WBOvbUhnd/pOAuIH1Cotz/q4hrk1BJYit7FkN+7o47QgeTM26rsnjNCesJkH01pnE/LB
+	 UyBou5sFZkPceWsJw+JwbYITg8DDq3iEnmhKlCjddVtB3cEcYty58nbqNDCa0ryWzVt33
+	 kHtNNL9Q8a+iyriVkM5bChJ8KxHk0aUWen3CtJs+JN6NCAFUU7BgV2XYrOJKRFz8/fpGJ
+	 PrpGuj/R41Mi5P5m3gIPhT0XYIQGorvLVr7gRxMJn9BhNJanh6Exi2bDoBI8yeW6piRPM
+	 w5T529/aiSFIf39ZDCHc5aUeP4EPE8ptfwUxhVmA4NgY+IUSk6W28YTW+EamQvfR+Cw==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=pass header.from=amd.com;
-	dkim=pass header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=jusMwZbh;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793855868;
-	bh=WLVMTfhy83efIPaxIrYf7Nkxaf8fSUOnTWPDy6uLw0E=;
-	h=From:To:CC:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793857323;
+	bh=3Lq5RFkP39//Q7XX9Ba54M/ytAndYfYe/Zl0brRWyW4=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=gSrHy+KgsUQTSQo/F+dTo6h/AX26RJY6VMnnY7TrczpRmFjVNxk4trFyKrk0zJbQ6
-	 j+rmI0DupzLQjjDCg11KKUeeJpg+0z0LuUYQVhnuiaL4qz/EIkW0ohjT/F/rI9j+DU
-	 N2bEGrnCStg/Mkz5FR1G+Pb7MrfRbFXOTD//DP8HF6OxVffNScuYXXYVJfJ7UJyaf0
-	 N+qLWhk1BFaXy0mKY67CgmwbnUC0lSCYt401pRjnLfoew+JhPjmcOcTaeJsqZH+Cjk
-	 xLilhqB8kqEKzTYA9CvvPdcgI5Wb2PSaGisWCQdrzT8s9k68cifaIW2Voa9oT+pDqq
-	 gYn3Ho9/pdzZA==
+	b=nPoUKD14aCxtJHWtoU+2+v8Kaku80XEDwH+GmjEBpG4SOZEl+LGtF2BgfApcSunjB
+	 F4b1Afe7e1OGIEqa+/hDYe8A66NRVWkC/op+r/qHynudYQp02fmrWdqjNWPVVlkXhm
+	 UXcnBYvV/xP4FWsQLw4ZPIFKTV39cl7kRhww85rCd0KqKpAr55btYTgsuB5vM5qo0I
+	 6hiSa6pLe7ho+z4da+LX2plZvh7FZ3CAY8kmvsibVyknzrbwUcwXVTUeklbvMEdX5k
+	 //BznlPnbX3cJ5CHI0zSBD7bDmZ57Xwo0Jbk2l6pRX8C83kym/qp1YcqDDTVmLrm4R
+	 Iu5v9bej0GheA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2074E40598;
-	Thu,  5 Nov 2026 05:17:48 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 95B8937B
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 05:17:44 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 11D0940748;
+	Thu,  5 Nov 2026 05:42:03 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2F818362
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 23:52:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4E4D8407C0
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 05:17:44 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 2C9B381184
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 23:52:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aNxmY_2EEpzs for <u-boot@lists.u-boot-project.org>;
- Thu,  5 Nov 2026 05:17:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B281C40762
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c101::7"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c101::7;
- helo=bl0pr03cu003.outbound.protection.outlook.com;
- envelope-from=padmarao.begari@amd.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=jusMwZbh
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c101::7])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B281C40762
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 05:17:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WLVMTfhy83efIPaxIrYf7Nkxaf8fSUOnTWPDy6uLw0E=;
- b=jusMwZbhKA/ghdNK016GOD8l8zFp9IFwVN10ACPdKtPqvB7D5Hr8KZUKyZ82Ln6gRDJ+cXO95uH5nvKQGg9mgor1AUvJOKlUtpFhYJNcfx3TCLvWbybNitH+CUlsOzp3r+64oqy/in1qNHKYgNcvwgObRHnbP+/LyeOfxKKLwlM=
-Received: from SJ0PR13CA0196.namprd13.prod.outlook.com (2603:10b6:a03:2c3::21)
- by PH7PR12MB6539.namprd12.prod.outlook.com (2603:10b6:510:1f0::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Thu, 5 Nov
- 2026 05:17:36 +0000
-Received: from SJ5PEPF00000206.namprd05.prod.outlook.com
- (2603:10b6:a03:2c3:cafe::4c) by SJ0PR13CA0196.outlook.office365.com
- (2603:10b6:a03:2c3::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.4 via Frontend Transport; Thu, 5
- Nov 2026 05:17:36 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SJ5PEPF00000206.mail.protection.outlook.com (10.167.244.39) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.592.5 via Frontend Transport; Thu, 5 Nov 2026 05:17:35 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Wed, 4 Nov
- 2026 23:17:33 -0600
-Received: from xhdpabegari40x.xilinx.com (10.180.168.240) by
- satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.53 via Frontend Transport; Wed, 4 Nov 2026 23:17:31 -0600
-From: Padmarao Begari <padmarao.begari@amd.com>
-To: <u-boot@lists.u-boot-project.org>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, "Tom
- Rini" <trini@konsulko.com>
-Subject: [PATCH v3 2/2] efi_loader: expand disk device names with drive details
-Date: Thu, 5 Nov 2026 10:46:54 +0530
-Message-ID: <20261105051715.215560-3-padmarao.begari@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261105051715.215560-1-padmarao.begari@amd.com>
-References: <20261105051715.215560-1-padmarao.begari@amd.com>
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id GUGSn0kJ_G_X for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 23:52:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org ED3378117A
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=217.10.52.204
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.10.52.204;
+ helo=smtp9.infineon.com; envelope-from=takahiro.kuwano@infineon.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=infineon.com
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=infineon.com header.i=@infineon.com header.a=rsa-sha256
+ header.s=IFXMAIL header.b=Mn7T93m5
+Received: from smtp9.infineon.com (smtp9.infineon.com [217.10.52.204])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id ED3378117A
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 23:52:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=infineon.com; i=@infineon.com; q=dns/txt; s=IFXMAIL;
+ t=1793836361; x=1825372361;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=3Lq5RFkP39//Q7XX9Ba54M/ytAndYfYe/Zl0brRWyW4=;
+ b=Mn7T93m5EoodyUbbLy1qxp78DfFiZZrfjaupMSUmg1MB+8E6QIPYCYzN
+ aFN0Fh2FgqEb/dzPzDVrXBJZrhfE3zggyB+LdeIcNhp+r+Hvhmjhr5PIY
+ /A19V+//Na/wSBVUzg5YzxNY4z6xAOYTcqlaZyl3P7yIyvQiV7vhoOgIE 4=;
+X-CSE-ConnectionGUID: Ij74yUfdQwm/SVrRIF016g==
+X-CSE-MsgGUID: FlKds4JTQA60ojpsL2K5DQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11956"; a="116492664"
+X-IronPort-AV: E=Sophos;i="6.27,196,1787004000"; d="scan'208";a="116492664"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO MUCSE805.infineon.com) ([172.23.29.31])
+ by smtp9.infineon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 05 Nov 2026 00:48:37 +0100
+Received: from MUCSE820.infineon.com (172.23.29.46) by MUCSE805.infineon.com
+ (172.23.29.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.56; Thu, 5 Nov
+ 2026 00:48:37 +0100
+Received: from MUCSE815.infineon.com (172.23.29.41) by MUCSE820.infineon.com
+ (172.23.29.46) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.56; Thu, 5 Nov
+ 2026 00:48:36 +0100
+Received: from MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be]) by
+ MUCSE815.infineon.com ([fe80::b54c:c0bd:546c:c9be%12]) with mapi id
+ 15.02.2562.056; Thu, 5 Nov 2026 00:48:36 +0100
+From: <Takahiro.Kuwano@infineon.com>
+To: <oss.patchbox@gmail.com>, <vigneshr@ti.com>
+CC: <trini@konsulko.com>, <u-boot@lists.u-boot-project.org>
+Subject: RE: [PATCH] mtd: spi-nor: Don't let clean_bar() overwrite read/write
+ errors
+Thread-Topic: [PATCH] mtd: spi-nor: Don't let clean_bar() overwrite read/write
+ errors
+Thread-Index: AQHdanpum56JNC/450OisPXniqpYJLcemExQ
+Date: Wed, 4 Nov 2026 23:48:36 +0000
+Message-ID: <11cdc940358344068869aefad012fd42@infineon.com>
+References: <20261102032950.305343-1-oss.patchbox@gmail.com>
+In-Reply-To: <20261102032950.305343-1-oss.patchbox@gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF00000206:EE_|PH7PR12MB6539:EE_
-X-MS-Office365-Filtering-Correlation-Id: 839d1cff-f477-4c43-3f18-08df3afc1a06
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|23010399003|1800799024|36860700016|82310400026|56012099006|261009223027099003|11063799006|261022113327099003|261021123027099003|261021121427099003|261028144727099003|261022075727099003|261022105027099003|261026121527099003|261102123227099003|261026140227099003|10067099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: XVbg+uQ0LJIXMZbYi0euJVW854k4GkV0iugYyWqyYqjlSQVHmWqx8rrccHeU4r0Yn41ZMI+YxRGARgwCb34niHyVFWkXAavAKuoso2ZbY2HZaq8EQ+s3mCpQAoNc0emHpLh2UrkYUl9G52Sasfw1xDXEzAsUwulWqqpHUz5FjnW4PRbe7d+23TO6X2diShuWK0wdXzs2VlwGsM5sabJPoY4Eyh5X/P+vxUmn48AGp04npbVBscKhLp53oBBh9H0jnVKrpy/gP20Nerku8GcdZhC2UvdESFWQsYbOlVwAiF4E8bN+uMPYuh3BiKc8z0m6jmTOI+PqNjBIElvBFFEbuouEo21TWOcHJh9VCCigGR+KIZ7J1al3pkzqhDR1Pye52P1VdZO1XKhPARtox1M7q7YxAHZ69+L0djI+s88kYqR0ZP24ySxnllxzY0TrkMwdld/mbbmz044uaALpZPLvO5vHv4JkxhlDoPpaXdBOebINdGb7jk0DwwIgZIvM7OjZJbY8tvUZg0pLOn6/yAjYolSFTumy01ifUbMnbmRNvT/E31njIuz9TpuK0rIb3WVCEZFyO4mr1nxEGc/y8vm8YtoMxbz7efoHYPVdaaLCWCk2BKVHDVhSu6ugoZqIPum+av3LFiP+nCFTCAeAknyONqYOIifBedfz+084G++phjtPmaqQZyQRN+Cd9c9/ACE+7CS2NtNpgFEh60roC3eGmw==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(23010399003)(1800799024)(36860700016)(82310400026)(56012099006)(261009223027099003)(11063799006)(261022113327099003)(261021123027099003)(261021121427099003)(261028144727099003)(261022075727099003)(261022105027099003)(261026121527099003)(261102123227099003)(261026140227099003)(10067099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: QRtRNmjXH6mecekOJwytbzm9IQBoixpfjik8XJq42SktJ40JWhJ0vSiqO2Kp+msbjNbyligKx8uKLPIjFdrqGdrkF0GKyzCH3EClvHBAN5WQ0bOeDCzBJI3xaHORXyHe8Ii2BsrHvtCxzGpo4JmXMyUF/tm0/IzdBmn5i8CewiIG4Dftf82sr7U3WSbw/xyXE9bDl8mZNMP98xVuaTgJEN89aNjq2gsJpbYejbIOxOfaRMEbUBU2oJbEFXL/Mp1jePexhfD4poc0MekLNUmKl++5htusFDZbg7FyVEHdBvWnvADUGqSmsDxxmEnLCDPK+eakrax8I1KxwtvaXcitRvp5mgyl/Wul/JwL0/5lnLP0yXPdxs2DSysBK9RovP/KGDBHN5dqkgACcpS8NJhXL1IGyTKYMoG7Vhu1/a3SQZ+luxtrCK4j58wRuowy4Wjs
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2026 05:17:35.1437 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 839d1cff-f477-4c43-3f18-08df3afc1a06
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF00000206.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6539
+X-Mailman-Approved-At: Thu, 05 Nov 2026 05:42:01 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -182,195 +141,36 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+X-Spam-Status: No, score=-8.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Increase the boot menu device name buffer so that extra metadata can
-be appended. Append the disk capacity and trimmed vendor/product
-strings to the device name so users can differentiate drives in the
-EFI boot menu.
+> With SPI_FLASH_BAR enabled, spi_nor_read() and spi_nor_write() call
+> clean_bar() at their common exit label and assign its return value to
+> ret. This is also done on the error paths, so an error from
+> nor->read(), nor->write() or spi_nor_wait_till_ready() is replaced by
+> the result of clean_bar(), which is 0 when the bank register is already
+> 0 or was reset successfully. The caller then gets 0 back for a read or
+> write that did not complete.
+>=20
+> Only use the result of clean_bar() when no earlier error occurred, as
+> was done for spi_nor_erase() in commit a9d9d412e00e ("mtd: spi-nor-core:
+> Don't overwrite return value if it is non-zero").
+>=20
+> Fixes: 8c927809ea96 ("mtd: spi: spi-nor-core: Add back U-Boot specific fe=
+atures")
+> Signed-off-by: Yuho Choi <oss.patchbox@gmail.com>
+> ---
+> Tested on sandbox with SPI_FLASH_BAR=3Dy and the emulated m25p16, using
+> gdb to make spi_nor_read_data() and spi_nor_write_data() return -EIO
+> after the probe. Without this patch 'sf read' and 'sf write' print OK;
+> with it they print ERROR -5. 'ut dm spi_flash' and
+> 'ut dm spi_flash_func' pass, and a normal erase/write/read/compare
+> still works. Not tested on hardware.
+>=20
 
-For example, the U-Boot boot menu now shows entries such as:
-
-    usb 0 (29.7 GiB, Generic Ultra HS-COMBO)
-    usb 1 (28.6 GiB, USB SanDisk 3.2Gen1)
-    scsi 0 (1 GiB, MICRON MT064GBCAV1U31AA)
-
-The menus are drawn with absolute cursor positioning starting at
-column 7, see bootmenu_print_entry() and eficonfig_print_entry(), and
-the titles are not truncated. A title which does not fit into a line
-would wrap and thereby corrupt the menu layout. The name is therefore
-limited to 64 characters, which leaves the longest description above
-at 46 columns. Should the identification strings not fit, the
-capacity is shown alone rather than a string cut in the middle:
-
-    usb 0 (1023.9 GiB)
-
-Note the limitation of this approach: the description is built from
-what struct blk_desc carries, so devices reporting the same capacity
-and the same identification strings still get the same description.
-Two identical USB sticks, several namespaces of one NVMe drive, or
-several sandbox host devices remain indistinguishable:
-
-    nvme 0 (953.9 GiB, SKHynix_HFS001TEM4X169N)
-    nvme 1 (953.9 GiB, SKHynix_HFS001TEM4X169N)
-
-    host 0 (64 MiB, U-Boot hostfile)
-    host 1 (64 MiB, U-Boot hostfile)
-
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
----
-Changes in v3:
-- Print the capacity with "%.1lluZ" instead of snprint_size()
-- Order the local variables by line length
-- Say in the BOOTMENU_DEVICE_NAME_MAX comment that the size includes
-  the terminating NUL, and why it fits 80 columns
-- Do not mention the linux/string.h include in the commit message
-
-Changes in v2:
-- Reuse the print_size() formatting through the new snprint_size()
-  helper instead of open-coding the unit selection.
-- Build the suffix with a single snprintf() instead of a chain of
-  strlcat() calls into an intermediate buffer.
-- Limit the device name to 64 instead of 128 characters and fall back to
-  the capacity alone when the identification strings do not fit, so that
-  the entries stay within an 80 column terminal.
-- Document the limitation of the approach in the commit message.
-
- include/efi_loader.h      | 13 ++++++--
- lib/efi_loader/efi_disk.c | 66 ++++++++++++++++++++++++++++++++++++++-
- 2 files changed, 76 insertions(+), 3 deletions(-)
-
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 7b865fe900a..e9c387b7f9a 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -292,8 +292,17 @@ const char *__efi_nesting_dec(void);
- #define EFI_CACHELINE_SIZE 128
- #endif
- 
--/* max bootmenu title size for volume selection */
--#define BOOTMENU_DEVICE_NAME_MAX 16
-+/*
-+ * Max bootmenu title size for volume selection, including the terminating
-+ * NUL.
-+ *
-+ * The menu entries are drawn with absolute cursor positioning starting at
-+ * column 7, see bootmenu_print_entry() and eficonfig_print_entry(), and are
-+ * not truncated. A title which does not fit into a line wraps and thereby
-+ * corrupts the menu layout, so keep it short enough for a terminal with
-+ * 80 columns: a title of 63 characters ends at column 69.
-+ */
-+#define BOOTMENU_DEVICE_NAME_MAX 64
- 
- /* Key identifying current memory map */
- extern efi_uintn_t efi_memory_map_key;
-diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-index 4a3ace3a304..28181e94932 100644
---- a/lib/efi_loader/efi_disk.c
-+++ b/lib/efi_loader/efi_disk.c
-@@ -20,6 +20,8 @@
- #include <part.h>
- #include <malloc.h>
- 
-+#include <linux/string.h>
-+
- struct efi_system_partition efi_system_partition = {
- 	.uclass_id = UCLASS_INVALID,
- };
-@@ -814,9 +816,69 @@ int efi_disk_remove(void *ctx, struct event *event)
- 
- }
- 
-+/**
-+ * efi_disk_append_detail() - append capacity and vendor info to a device label
-+ *
-+ * Appends a " (size, vendor product)" suffix to @buf when the block
-+ * descriptor carries readable capacity or identification strings.
-+ *
-+ * @desc:	block device descriptor
-+ * @buf:	label buffer to append to (already contains base name)
-+ * @size:	total size of @buf in bytes
-+ */
-+static void efi_disk_append_detail(const struct blk_desc *desc,
-+				   char *buf, int size)
-+{
-+	u64 capacity = (u64)desc->lba * desc->blksz;
-+	char product_buf[BLK_PRD_SIZE + 1];
-+	char vendor_buf[BLK_VEN_SIZE + 1];
-+	char *vendor, *product;
-+	char capacity_str[16];
-+	int len = strlen(buf);
-+	int ret;
-+
-+	/* The longest size is e.g. "1023.9 MiB" */
-+	capacity_str[0] = '\0';
-+	if (capacity)
-+		snprintf(capacity_str, sizeof(capacity_str), "%.1lluZ",
-+			 capacity);
-+
-+	/*
-+	 * Some drivers, e.g. usb_storage and nvme, do not strip the blanks the
-+	 * identification strings are padded with. Use copies as strim()
-+	 * modifies the string.
-+	 */
-+	strlcpy(vendor_buf, desc->vendor, sizeof(vendor_buf));
-+	strlcpy(product_buf, desc->product, sizeof(product_buf));
-+	vendor = strim(vendor_buf);
-+	product = strim(product_buf);
-+
-+	if (!capacity_str[0] && !vendor[0] && !product[0])
-+		return;
-+
-+	ret = snprintf(buf + len, size - len, " (%s%s%s%s%s)", capacity_str,
-+		       capacity_str[0] && (vendor[0] || product[0]) ? ", " : "",
-+		       vendor, vendor[0] && product[0] ? " " : "",
-+		       product);
-+	if (ret >= size - len) {
-+		/*
-+		 * The identification strings are too long to be shown in a
-+		 * menu entry. Fall back to the capacity instead of displaying
-+		 * a string cut in the middle.
-+		 */
-+		buf[len] = '\0';
-+		if (capacity_str[0])
-+			snprintf(buf + len, size - len, " (%s)", capacity_str);
-+	}
-+}
-+
- /**
-  * efi_disk_get_device_name() - get U-Boot device name associated with EFI handle
-  *
-+ * Fills @buf with a human-readable label such as "mmc 0 (7.5 GiB, SanDisk
-+ * AJTD4R)". Capacity and trimmed vendor/product strings are appended when
-+ * available.
-+ *
-  * @handle:	pointer to the EFI handle
-  * @buf:	pointer to the buffer to store the string
-  * @size:	size of buffer
-@@ -834,7 +896,7 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
- 	bool is_partition = false;
- 	struct disk_part *part_data;
- 
--	if (!handle || !buf || !size)
-+	if (!handle || !buf || size <= 0)
- 		return EFI_INVALID_PARAMETER;
- 
- 	dev = handle->dev;
-@@ -862,6 +924,8 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
- 	if (count < 0 || (count + 1) > size)
- 		return EFI_INVALID_PARAMETER;
- 
-+	efi_disk_append_detail(desc, buf, size);
-+
- 	return EFI_SUCCESS;
- }
- 
--- 
-2.34.1
+Reviewed-by: Takahiro Kuwano <takahiro.kuwano@infineon.com>
 
