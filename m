@@ -1,210 +1,165 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BD7A606A326
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 16:35:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EB91606A31B
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 16:37:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=twEQyAFi;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=HonAVMYk;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=RZYlh+Zf
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=M/dsv8bb;
+	dkim=pass (1024-bit key, unprotected) header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=ZGKE5xH+
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0938180D50;
-	Wed,  4 Nov 2026 16:35:45 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 69D5D40629;
+	Wed,  4 Nov 2026 16:37:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id aiJZ000RD-LN; Wed,  4 Nov 2026 16:35:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 431A880C7E
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793810144;
-	b=EkJAX56CM9SxzSUqqj1xoeL3IV+/a2FcH27NpvePVZpI2sxI9BuoPHpw/ifrYN3aT0c0
-	 evIaB571rPaFvDxsOu1LHDUGZ51QYH6H5BZ591jKrKVBYRL2LmfPgYUMRMp3Vnauv4VZ0
-	 Kd97dwiDK3bJwvs9hD+fHr2pQLrQuJXknXD0P27hsOkTP9AZBDu58ntKFmDJxYCMqfpa7
-	 4E8nCziUxgSOVCQtsAPqelk0mlacUljiTnuuU1ZgEFVhZgdQakkLG0zLHr4570DTOnBJT
-	 6Ms7b34ZKCtCAwlHVWYzRohu+hZl4P5TuxVoFhBMWcIesrIj6JJIaX1/Xiq9WyQ5sqA==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793810144;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UjjHhXpWeQBq; Wed,  4 Nov 2026 16:37:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 08E19403FB
+Authentication-Results: smtp4.osuosl.org; arc=fail smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=fail; t=1793810239;
+	b=LGg84cumtw3EbIV0WZV5aW8wsoOx15uFcKiNtp+6AQK0lh94syzaQde8sd3VMSxMRqBE
+	 BwT/xb6X1Q2CBO46Lsgj3ttwmiaCQ+z1WvtXeJ6y3UvlZ4NGzaK2nKAITPaTPio+byXlk
+	 evfnO6KsMySR3AcmY9zNKh+BsGSLXV7fQto/nndH9uLtSaIPbTdaXYmMPI8d0v42gASha
+	 966g3z6AaDmxJ7DcZpgJ+DkDKNUP8Gh1Uz+wAXautV3VFPf8ahxHy03uwW2yZWQMBXFKp
+	 gSxJyxBXDiVLXFMef/g7J16/GIvyE4ooQ9na72ZAOjC3KWbwAP0eJcKkp1u4+RxEIZg==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793810239;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Received:DKIM-Signature:
-	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 X-Spam-Status:Received:ARC-Filter:X-Comment:Received:Received:
+	 Received:DKIM-Signature:Received:X-QQ-mid:Message-ID:X-QQ-XMAILINFO:
+	 X-QQ-XMRINFO:From:To:Cc:Subject:Date:X-OQ-MSGID:X-Mailer:In-Reply-To:
+	 References:MIME-Version:Content-Transfer-Encoding:X-Virus-Scanned:
+	 X-Virus-Status:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=rVAiOCLTRbApVn9H2OP1Qa8nDsp7moMETbhhP6rAMZ4=;
-	b=iY6WlH6vIFPxhXSTc5misodGOXtiAWERZ63Sj/1H8lpEOoTvSnAJAgC/EfZvgwIz3ulY
-	 KxjFbObLWuqpceuwUXvRJyNQ0jOgGKlDkEd03lcYJFqm1Zvl+fFdFHhbv4RLDyuKngfE6
-	 lGkMu7DzBaRDgKDCI9YqwPvQtG6Pv78rJstif3Gjj95JZnyN+p8g3FeOQUg2pac07Ip+V
-	 NAZhkaysBrUF68UCY7c3bqEI2S5dL1VjPDeGWVHBywQefBXQ3ilTQdyDYEm9zJsydGf3D
-	 CFAX9IA07J3FrG5zNp8PrNbjj+VHz2GO328VDtroTdvIPM3YoOQHoKuel7tB1nZ1HmQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	arc=none smtp.remote-ip=140.211.166.142
+	bh=Lbx3SPgiCBe1gYyMJZ15E3Nia84IK64Ed7NKtHF+4K0=;
+	b=sfvBepXmvz9eO5JsWdYOTgfNw6t99XBWVDtUtbA+eZ6mVUAbgZkk2Mo1J7kCRfX3m/is
+	 YLzKqlWEOYxMWCyGCfExkQol0qUrrdurtoWSXRCNDE53gne+tnxDKOqqHYIBQXmjPTX0J
+	 rNE8HiOgHgUxzLAcT9TPUwWu6W8Nxcbkd5otjgLLKdaaUytE/OEXM9J1WjWFZHFqd6U4w
+	 NVSVcGPmsFXDsz1zIeBGGlcJcDOsLSOniIu6zJHz95igSxIcuBSzW8zrS3WGKQm/qEzMx
+	 MhVRDgIjxwsAUKiyjRf6UPZgZSQe3yPZPkiswACrYZM18C75YDGIonxr4mn34buYuxA==
+ARC-Authentication-Results: i=2; smtp4.osuosl.org; 
+	arc=fail smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793810144;
-	bh=rVAiOCLTRbApVn9H2OP1Qa8nDsp7moMETbhhP6rAMZ4=;
-	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793810239;
+	bh=Lbx3SPgiCBe1gYyMJZ15E3Nia84IK64Ed7NKtHF+4K0=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=twEQyAFiYSfdf21QtYTWZslh/7x0l/p+5Bbz5bO069U3ME6dZ3Wu6Z1QLCrzSwhvW
-	 8HbCBM3rTdRon1koUwEwMy01x8ccHsPIB0cY55aPqLLlS1Cdemknc3i/91/05dXtyP
-	 medANmzukfBYgidf+nvce2sBnEi/RuCmh14EfS/UZoYOLARyqO6JrTjDiRQ7N+A3nU
-	 JOG47hAUgzSg2R8Fj5HDc+NpH3YKpE2DUa69cMFsBA8xqiLKL6Rsq6I8wuQ55BU5+k
-	 FidpY1hYXeDtn6SjGdByegDJFgt8AXZ1RQTFhUqKuyU9oPI0SunvUlLeZTpFArNb6i
-	 ASTLJWaU9OW2A==
+	b=M/dsv8bbTCOWVCCTnfSQEPjZaXgqokij2LGE4OyMBcSStn3Yhj6vwxQc3/f9fj7Rh
+	 uNxa/TjQgKMT2YhrkItG6UdLesVzRlQHdmMo0tN3rJRIPFi05eZ5Q5SJVqCS4dhU1/
+	 mnMq01c0eRXWeYcyYVBm+GcttPJ4F06g3YKw8Di6LmDyq6nLGYhiwTMRGBHhpS751K
+	 Fr8kSkVPOH9IZFAh+BfIrEhQ1iFepZYizbKCjMiTJUgWW/nTdWDBaDumWiTy1VzES+
+	 GXtP0lEaFFmXjQYug/zYkewvaszfYXyrIbZvioH89qwFa3+E/Pc190MiMrBeAnwXhE
+	 8lcT4s955Kisw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 431A880C7E;
-	Wed,  4 Nov 2026 16:35:44 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 08E19403FB;
+	Wed,  4 Nov 2026 16:37:19 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 29827165
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 16:35:42 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 92CF8341
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 14:11:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 1B79C60650
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 16:35:42 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 788B060628
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 14:11:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UPf7zSEIwH6i for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 16:35:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7C1AA60642
+ id z0pM_wK_FLKG for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 14:11:39 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8C6656062C
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=85.214.62.61
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793801499;
+ b=IAesQbLTxkZ8MQmWCpgiR9xjq0BsiUl6FntssETEAWXfPxAkdZbwBSuA9PpCv/TbeLpY
+ XJ5zJbTIUAk6c4gL4Gbm0nw1ibO3j40e5FrCzTNtsNQIIMrXqcXl5I0LAQBUvnKIKbAZP
+ F81HEXD2682XsS0NHf/wuiZBLjg7Nludu0b9AXc/YpoGCJPgqp6Kr9+RFONuU0qghxOc1
+ /FAPi2rSpLFK+YdKbeaF/0dH+XhRuFrW7zFdREq7EAsV67IhfCg+5mCkj7VbQvgIPQIGm
+ /kcfKVol+IfN71oeuBWbp63P8w/Usvu9XjezHnN36/FD3q2GTmCVp4cU0E6gD86cgQQ==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793801499;
+ h=X-Comment:Received:X-Spam-Checker-Version:X-Spam-Level:X-Spam-Status:
+ Received:DKIM-Signature:Received:X-QQ-mid:Message-ID:X-QQ-XMAILINFO:
+ X-QQ-XMRINFO:From:To:Cc:Subject:Date:X-OQ-MSGID:X-Mailer:In-Reply-To:
+ References:MIME-Version:Content-Transfer-Encoding:X-Virus-Scanned:
+ X-Virus-Status;
+ bh=Lbx3SPgiCBe1gYyMJZ15E3Nia84IK64Ed7NKtHF+4K0=;
+ b=PCcMPyuNTbGrkY+VBKbzRnq3QhuJoHLxMJAnnEsBlZXciLHGLQYnbJMx7bvmbc9Bpl73
+ 0ygAyoApvp3ZFtbSZJMOxb+Lg0jj/N8jDwy6057m9RA7Utv4m8XTRfCRvnW44XeByiFBI
+ vWkC+xAwR8K2nUrPGTwozli4+gh7MpaQSHpZzmGdIMqynHLtDeF/jYh3PnryhdkPhXFZR
+ g6lMjOmwlz2so7wdjWFoe5KKLyVouQONf/1I8OkNOWt/HGN2UyO7HlL7pmOIdJcirS/5W
+ 3F0MbqNEXe8TcqIuFU3fYqhqmPsv49eXzhYKUceg3YyJFozpD+excEDPwTbznA758Ow==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ dmarc=pass header.from=qq.com;
+ spf=fail smtp.mailfrom=qq.com;
+ dkim=pass header.d=qq.com header.i=@qq.com header.a=rsa-sha256
+ header.s=s201512 header.b=ZGKE5xH+; 
+ arc=none smtp.remote-ip=85.214.62.61
+X-Comment: SPF check N/A for local connections - client-ip=85.214.62.61;
+ helo=phobos.denx.de; envelope-from=xjmps7114@qq.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=205.220.168.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
- helo=mx0a-0031df01.pphosted.com; envelope-from=sumit.dhami@oss.qualcomm.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=HonAVMYk; 
- dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=RZYlh+Zf
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7C1AA60642
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 16:35:41 +0000 (UTC)
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A4FipXU1292216
- for <u-boot@lists.u-boot-project.org>; Wed, 4 Nov 2026 16:35:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=rVAiOCLTRbA
- pVn9H2OP1Qa8nDsp7moMETbhhP6rAMZ4=; b=HonAVMYkR/7L4Hrv7X7mhTHF7Lc
- WT1dQiXtWcJHpqTvojpx7o4R6S6sWB0qIyo9+ZfxP2AGQzH62ZZyUOPI5FxQBozm
- txOqlQbZYZA3AaoU+UlHetaiT2ajttKnn9xXGI+BDf/FALxOSe2IrGLk7wWi+hCR
- eyTVroCfOWdX5PjG1jI6vRDlp92zWUO4vQdBXNMT8JB+uFiIAMlCSwMUTeMFpaaf
- gFC7AAfbwUKJS3KVLC7hZVGADUTLzzQYn5DPK2Vi6xCmZuWNDsybImC6lvFXSEgU
- b4UqmXuLuOboszAHbJOnnYNXhz9wYbTJrwUfQk6kNP9EpG3EA6+hfNU8eVw==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com
- [74.125.82.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hr163hx77-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 16:35:40 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id
- 5a478bee46e88-36d2d353a5aso593834eec.1
- for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 08:35:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793810140; x=1794414940;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=rVAiOCLTRbApVn9H2OP1Qa8nDsp7moMETbhhP6rAMZ4=;
- b=RZYlh+ZfV3Ybton4nKgxA3D4VKlswDsAPMYTDJqcF537ZdiPeEq/34sHhPyC4+iPvF
- G7lDG3Pce+d/IncIr58/sWOGsssJ3C/9MwETIRKiaF0LUku/u5fz8OcBofYGJ1BrunHc
- rnPqH1ze1hM3E5av9Ask9OzaByLzaCX7VWqWZGCXipae0iXV3hrzxzGflEI0yJY1vj/I
- qmY+YsKLTL5Foeo49UfYl1pvRFhDteV317/cRI3vxxmW4hWF7Jzgw/Vd7q2KslQUBExK
- lxXMna8fQ/U8jPLLzr3LxYH9D9DPPm+cjUognOf2/7++tXmv9r99Nbo1SoG3PE0uhn6Z
- EMGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793810140; x=1794414940;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=rVAiOCLTRbApVn9H2OP1Qa8nDsp7moMETbhhP6rAMZ4=;
- b=XkzQLwNQ2HDYj8+T9rQHlq7wxFXp/cD7Yo3DeSD72EVyQIjO+gJqEHtb4jpuYgyNBb
- TJTLPvMgDQaOOwTf35UvBG4yqFoikKigvM6Cc8o6tdztdaiMlOFtZFMf6wC6X1fFaRI0
- zhyCXbvKqiRexwwl7K7jzO03ChxbfOQgJKRiXx3BwzWfE4JMe5UPyUcnqiET5Z+IsKo7
- jzXfcjqwFAcZCXTDhGpvZ5x2mbIjK01lvl+FQMLc0k8OKtwO6pkFko+eY7yGr7zyNMFF
- lcioUGHj3RrsDhSUPSMogDGqlVnj226z91CqXVgpQf9Zkx3PEh2AMvorygiAQXY/684U
- W7xQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBy/5lx4o3PLQSgiSKdCf44ohYwkMSLnG1x2WVDo/TRf4dRZx1Ug/2ooYiC+GwlEqShLKb5Vt+s=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z8Tkhoghcr/JaaJOmzslrqHYOUN/jTvOr7dChS8YCErszmTdTCo
- udfWcHMcapdbyGdJseLb/mER4hss1iDVZ78qouHFMWKRx3lF2goKrLm8CdHlFO5F9rfXFK1v9Bt
- daCCuyKItsUqNGl2fryHs7rbG4a7U2YtabPpy4dmw/ZI7mhS2rpUhaxXvpwmFFB6UkEQwUZA=
-X-Gm-Gg: AYBFou02u6i0t9rYi+lMONxuhdQj1msB/Imh06+Mj+Ny6PKiiQvnpTNzR+ov0+xkK3p
- F+lfy4ik3jlY5IRD2CNqkxgxhyS3bRjzfqquZwl2mjitTIhc+aNxUN9USGtXzLNbTB8ap1wQZRC
- lB3vaMmLQYJzxUwxdwi0wCucqocYviC/3mgJMgG7G7sluVrCbnS/nz0p/T5j+Umd80P1kJiKYmn
- MNVR27JOpRzsboKTn8YSqzLOW1EKpV6xz5udZxSNZtxF9dtqQaQD/FWPX7Iv5ZfKGdtzBErqKGM
- joCQGeOtnTOjh8UCqry2gGJneAzdOlEWo/4xLcF5xFa0rTACTOFPNE6Syjj3fWSIgA1M8x0l3ha
- K07qYi6OVrs800g7u/0TbVzhic9C0pccPr+j3pR5Rd7cxAkPuCLUkUAil0TwiKH2BnkXc0hO2Jh
- JF0UK+SXgnqNNcV+/auA7g6X3BLcJaM67vjpbkLpRglqp8Bb5lHW4dVz1nIL5I0xfp
-X-Received: by 2002:a05:7300:dc10:b0:36c:a1bc:6102 with SMTP id
- 5a478bee46e88-36de0488bc8mr137208eec.0.1793810139850; 
- Wed, 04 Nov 2026 08:35:39 -0800 (PST)
-X-Received: by 2002:a05:7300:dc10:b0:36c:a1bc:6102 with SMTP id
- 5a478bee46e88-36de0488bc8mr137148eec.0.1793810139288; 
- Wed, 04 Nov 2026 08:35:39 -0800 (PST)
-Received: from hu-sdhami-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-36db94376b1sm1046879eec.10.2026.11.04.08.35.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Nov 2026 08:35:37 -0800 (PST)
-From: Sumit Singh Dhami <sumit.dhami@oss.qualcomm.com>
-To: trini@konsulko.com, ilias.apalodimas@linaro.org, casey.connolly@linaro.org,
- neil.armstrong@linaro.org, sumit.garg@kernel.org, lukma@nabladev.com,
- sjg@chromium.org, Michael.Srba@seznam.cz,
- senthilkumar.l@oss.qualcomm.com, sumit.dhami@oss.qualcomm.com,
- manivannan.sadhasivam@oss.qualcomm.com, nathbappai@gmail.com,
- balaji.selvanathan@oss.qualcomm.com, petr.hodina@protonmail.com,
- marek.vasut+renesas@mailbox.org, u-boot-qcom@groups.io,
- u-boot@lists.u-boot-project.org
-Subject: [PATCH v1 9/9] configs: qcom_defconfig: enable PCIe1 RC/PHY and
- qcom_board_init override for QCS6490
-Date: Wed,  4 Nov 2026 22:03:58 +0530
-Message-ID: <20261104163408.1250410-10-sumit.dhami@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261104163408.1250410-1-sumit.dhami@oss.qualcomm.com>
-References: <20261104163408.1250410-1-sumit.dhami@oss.qualcomm.com>
+ dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: smtp3.osuosl.org; spf=fail smtp.mailfrom=qq.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=qq.com header.i=@qq.com header.a=rsa-sha256
+ header.s=s201512 header.b=ZGKE5xH+
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8C6656062C
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 14:11:33 +0000 (UTC)
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 205678482B; Wed,  4 Nov 2026 15:11:31 +0100 (CET)
+Received: from out162-62-57-137.mail.qq.com (out162-62-57-137.mail.qq.com
+ [162.62.57.137])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DE65483E76
+ for <u-boot@lists.denx.de>; Wed,  4 Nov 2026 15:11:22 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=xjmps7114@qq.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1793801479; bh=Lbx3SPgiCBe1gYyMJZ15E3Nia84IK64Ed7NKtHF+4K0=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References;
+ b=ZGKE5xH+GI7dcGGJFCaN7i/hlR0KqLJHW4J9sIlTX++ckAgrrjZbJj3DvZIsOKktO
+ FujL9VjkM5UVZzPKQHgz3ufkK70zO9F9ueQ11ARLuT15z97VaBn8V3rkRdsaJpyn8Q
+ xwErAdTjZzw2NQBNR/Eu7blwV9k9l2phgihgSRVU=
+Received: from localhost.localdomain ([27.38.1.195])
+ by newxmesmtplogicsvrszb51-0.qq.com (NewEsmtp) with SMTP
+ id 2D030261; Wed, 04 Nov 2026 22:11:16 +0800
+X-QQ-mid: xmsmtpt1793801477tvwu5jk9k
+Message-ID: <tencent_2570A614E7B8955F61CA5DE0070B17874006@qq.com>
+X-QQ-XMAILINFO: MDbayGdXPuoeQR3kqq5V3U2FWQ+lSXPz5/gExKfxbgKtyFxXh65gTsJpWoMCL6
+ ADGgpXou6n8bNOzG5anAR9FmYHYItZuea4EFQc+gtOXbxcsPG8ZwWhg4MBzhSMmasXyx86WgO9Uz
+ bi3RK7649uitfMEnXUk1dRLDHAnTYojMUY24W4qAe7wlMmQgC64fPxBSqQRns3ohl9RLRRWbDugo
+ O3M40ubw47uUhylY/FvokbtozUK118KqnYaELFa65ysx1B1ZTMY29BRICUeXnWwgCgTLMDSpDaH/
+ sQorc6DkpjFy1NVgiLYu3ctzWD+mUfH5ydIA8XySDq2n2oMLmoji2XnHUCOC7n8UGmSXR3IgtB4E
+ oYxOX27NqD8WMgrFQpQQSRt+cgBpsGgK5fUrwb2zeVVg1SjNh6IenCgRrBiikEMxGIK/fcNy6PYB
+ eLWuQffkzo+AbXydqDJ3eab6VKCNwPTar9sKJU+g70ZqlYo683vCv1z/DSaPPlnskLiuBJ77Z0Cf
+ TK20dK1rOYEStTllAarjRAlsDZqY3A49WT0B6QseByAM6mXHo0zLtTuppxfdmCqm1Rs8fFfxVdQb
+ DirNaiPq8dVjusUDi5UO7bxNmxiS7yTCUYbUvLrSHeq+FVOIhjnr+c6uaCPNyZDOxgkRUAigkh/5
+ 5FRtbE5AG2M5AsZPoEr7LfnFIhkGUp+ALCEO8LOlNG8j2a0GPZeVUbeuv+qAtHLLytM0jHkF+eH5
+ iagWNwEYZeHiZXSl2HbHGZvI+WC47kHJy6w/bclFwL/WwJuwwnq6+Hlo5tPpxPHbM951tNi+sMse
+ OFoOwzmR564U+Tkc8x3nhgtLxwh/j+Ti2TZ25rdOpnOswqmxOre+/ODMBI4I+vJCs400mFebBcpK
+ CBdclAhal6NXGI0tIzaDqJyrJMOm/7AcghbcGl00pJowffbykhIRP8oxY/m/fTI+VMMhdtVTxZXJ
+ axTONh8MKUO/cvn+/P3hZPzDGZkeZDXXeM2wYDsQ9WClc87s/D9uQojxhbT9XafCLspk1OSgq8RJ
+ r4BegpgyZCpfm8d9Tk8uHSmhRsDkE7ABjeX3Tk/ESbLTIH8T88O8ohWxOWhBY=
+X-QQ-XMRINFO: OWPUhxQsoeAVwkVaQIEGSKwwgKCxK/fD5g==
+From: eli <xjmps7114@qq.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	xjmps7114@qq.com
+Subject: [PATCH 2/2] doc: spl: describe SPL FIT anti-rollback usage
+Date: Wed,  4 Nov 2026 22:11:17 +0800
+X-OQ-MSGID: <20261104141117.12284-3-xjmps7114@qq.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261104141117.12284-1-xjmps7114@qq.com>
+References: <20261104141117.12284-1-xjmps7114@qq.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: HlJmFv9fbnaHBLinZoMFrNlcg_OXQbjr
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA0MDA2NiBTYWx0ZWRfX/7OffxpT/3cf
- bwGsRyLVUEpkiUIxjSN0P4SjKEQIIkfwr9fmwLCgmvd/HKUhgkD/jhjiwdR3KMREcCNJqYFDOpS
- feF1M3pC9Oy+sNwnImbJAkNoADRDYg4=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA0MDA2NiBTYWx0ZWRfXwz37oDJ2CQOp
- 1gaR0F598fJi4xrhs5FVTi6SNhyUGFXIK+zYm1WO2iaMIEhELjo/cIjvjrLg7p5w1q/HX8lofCU
- BOULOTKhBUPEPFyGl12U9qeUP8TFwjebvR7Doz3BEGfR9tbAnFzop6kEPFwvILQBvWBkPR/U80X
- O2fgIWoevpZPUEdgLpf8nEYFSzUB2HLE9aNm0zDrJkWFbFsscn1qf9I/vdlQ+IExSWzII+20YT+
- XT4ykKH5bF0A8+gH6wDQcXCrnJb9tdEBF5me58DsYJ34qdxarBFL2MM9N8t4B6ztvMMstktQSos
- gkyC1/jqBwhroIF47GnPSsW7+UUvj+FU8mXkNMRYxjYk7chXOljjo+PeVggNT1oPWXKZwWzbvWZ
- DILhUOnJiFN3YJ60CTpXOg7pgPyn25gIhTBTceDXryoWstFR4edzBIBH8NeQKmXgOSPPy3SYbos
- drtR52E8NBzrWohLvRg==
-X-Proofpoint-GUID: HlJmFv9fbnaHBLinZoMFrNlcg_OXQbjr
-X-Authority-Analysis: v=2.4 cv=O5OsLx9W c=1 sm=1 tr=0 ts=6aeb5edc cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=2xNLncASRj2ts_CbtmMA:9 a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-04_05,2026-11-04_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 adultscore=0 phishscore=0 lowpriorityscore=0 malwarescore=0
- clxscore=1015 impostorscore=0 suspectscore=0 priorityscore=1501 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611040066
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+X-Mailman-Approved-At: Wed, 04 Nov 2026 16:37:17 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -214,68 +169,77 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Senthilkumar <senthilkumar.l@oss.qualcomm.com>
+Document CONFIG_SPL_MINIMUM_FIT_VERSION, the FIT configuration 'version'
+property it checks, and the trust-root boundary of the mechanism (the
+minimum lives in the SPL binary itself).
 
-Enable the generic PCI subsystem, the PCI command, and the Qualcomm
-DesignWare PCIe controller and QMP PCIe PHY drivers needed to bring up
-PCIe1 (RC1), which on RB3 Gen2 connects to a QPS615 PCIe switch.
-
-Also, enable QCS6490_PCIE_INIT to override the __weak
-qcom_board_init() in mach-snapdragon/board.c for
-QCS6490 / RB3 Gen2 platform.
-
-Signed-off-by: Senthilkumar <senthilkumar.l@oss.qualcomm.com>
-Signed-off-by: Sumit Singh Dhami <sumit.dhami@oss.qualcomm.com>
+Signed-off-by: eli <xjmps7114@qq.com>
 ---
- configs/qcm6490_defconfig | 1 +
- configs/qcom_defconfig    | 7 +++++++
- 2 files changed, 8 insertions(+)
+ doc/develop/spl.rst | 43 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
 
-diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
-index 7e7739c9d73..a8afd2ccced 100644
---- a/configs/qcm6490_defconfig
-+++ b/configs/qcm6490_defconfig
-@@ -16,6 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
+diff --git a/doc/develop/spl.rst b/doc/develop/spl.rst
+index 08b51172..762edeea 100644
+--- a/doc/develop/spl.rst
++++ b/doc/develop/spl.rst
+@@ -125,6 +125,49 @@ Use `xpl_phase()` to find the current U-Boot phase, e.g. `PHASE_SPL`. You can
+ also find the previous and next phase and get the phase name.
  
- CONFIG_FASTBOOT_BUF_ADDR=0xd8800000
- CONFIG_PHY_QCOM_QMP_COMBO=y
-+CONFIG_QCS6490_PCIE_INIT=y
  
- CONFIG_FASTBOOT_FLASH_BLOCK=y
- CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME="scsi"
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index e5291750aa7..387ce2492cf 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -111,7 +111,12 @@ CONFIG_DWC_ETH_QOS_QCOM=y
- CONFIG_RGMII=y
- CONFIG_PHY_MICREL=y
- CONFIG_PHY_MICREL_KSZ90X1=y
-+CONFIG_PCI=y
-+CONFIG_PCI_PNP=y
-+CONFIG_CMD_PCI=y
-+CONFIG_PCIE_DW_QCOM=y
- CONFIG_PHY=y
-+CONFIG_PHY_QCOM_QMP_PCIE=y
- CONFIG_PHY_QCOM_QMP_COMBO=y
- CONFIG_PHY_QCOM_QMP_UFS=y
- CONFIG_PHY_QCOM_QUSB2=y
-@@ -143,6 +148,8 @@ CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_DWC3=y
- CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_GADGET=y
-+CONFIG_USB_HOST_ETHER=y
-+CONFIG_USB_ETHER_ASIX88179=y
- CONFIG_UFS=y
- CONFIG_UFS_QCOM=y
- CONFIG_VIDEO=y
++SPL FIT anti-rollback
++---------------------
++
++When SPL verifies a signed FIT (CONFIG_SPL_FIT_SIGNATURE), the signature
++guarantees that the image is authentic, but not that it is current: an
++attacker who can write the next-stage image location could replace it with an
++older image that is still correctly signed, reintroducing vulnerabilities
++fixed in newer firmware.
++
++CONFIG_SPL_MINIMUM_FIT_VERSION adds a software rollback check: after
++signature verification succeeds, SPL reads the "version" property of the
++selected configuration node and refuses to boot if it is lower than this
++value. A missing property counts as version 0, so the minimum must be raised
++together with images that actually carry the property. The default of 0
++disables the check.
++
++Example configuration node::
++
++    configurations {
++        default = "conf-1";
++        conf-1 {
++            version = <0x2>;
++            description = "U-Boot 2026.07";
++            firmware = "uboot";
++            signature-1 {
++                algo = "sha256,rsa4096";
++                key-name-hint = "dev";
++                sign-images = "firmware";
++            };
++        };
++    };
++
++The configuration node, including its "version" property, is covered by its
++signature, so the property cannot be forged without the signing key; the
++minimum version itself is fixed at SPL build time.
++
++Note that this is a software trust root: the minimum version lives in the SPL
++binary, so an attacker able to rewrite the SPL itself (for example via a
++writable boot flash) can also lower the minimum. For a stronger guarantee,
++protect the SPL boot medium against writes or anchor the trust root in
++one-time programmable storage.
++
++
+ .. _fdtgrep_filter:
+ 
+ Device tree
 -- 
-2.55.0
+2.53.0
 
