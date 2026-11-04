@@ -1,199 +1,164 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BECAD606A31B
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 06:47:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D344606A326
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 07:18:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=YbDbNxG8;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=OXtphlFT
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=RkHj7TLo;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=tsc6KI1o
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6EA4F80D66;
-	Wed,  4 Nov 2026 06:47:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DAC266069A;
+	Wed,  4 Nov 2026 07:17:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ilFy6d23HmPg; Wed,  4 Nov 2026 06:47:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 620B180D74
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=3; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793774866;
-	b=dUMVfGrBwflVKwUrzogUR6EfG1oGKWoitOVXgWK2htx//e7ufi+MoXa7auYKd4aVDvWg
-	 tJo/tsqT4aJEJv/AlTL9YeTq61H2uRqnn4+WMG67HH8yeEtY/WozWXeyUunSP4j3qsmQQ
-	 PkgTRmF5JGTrAH2kYPyLBU6z+50MopDz0nSDitZxvLpW22w3bnXbmrmnCe6BPDAttrAUx
-	 TLDtwayTlnVpl5zToqFzCSTLaW+aprAcNCVlvgucJjdaiZsoaUCsdT5EcgiZsXtJv9/4n
-	 Eo4OP+9hR74EQBUM6IC2Lo5nzTXOfyviFrOqpDF/qWb9lBVZlqKjyE2DpGu25GGCogg==
-ARC-Message-Signature: i=3; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793774866;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id WtS7JGDYf8et; Wed,  4 Nov 2026 07:17:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B427060686
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793776678;
+	b=daiCqYdKiXu15BLrCwAXe2mN6v1qCwQw4y8mtS4RzvLx7hmvo7SMKooaODR/N7/Y9lwL
+	 Bk0/sXqi2P7HWwzyKfsIyOC6SvjTMxMU4+0xynMrYAl6aizDVvLQw9h7SzKUo0nxgKdKi
+	 ap0tb6MyAIzDZHUpsjxb/MCvtZ0I5Z+YjnkexzV26k3B9FB9xZk4lQIEXsHvpEOa/CZmc
+	 xVDW3LFs7YQgz39AHx2mTReuJjPrxqNBBdeVqJOQE/2GXm7yt13Xl0O2XQv14z3vRntiz
+	 6NIL/yupN7WHmevtEbSZVSMii+B0G9BCbvhBPBM1Y3X75JgdfnDE4MR+JUBv/re7e5w==
+ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793776678;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=YrT81sixhSYJL9geF7mgRPe417envOdzb1Q7i8CDULg=;
-	b=csr69hyc12LNQ/1ZIjMnsUnxIVr2UoSjTYfBclS+r9k4CVs4DC80DaJt6zYAPzvSgQkE
-	 R8FIVGrF+7KL7VG2xwI85S3dbJosrc/cVkos0WRPPYusvggZ5L1aB+ULC6oVuK7WcWc0N
-	 Mn2lCVI2HVPCvKj9FcuwZWvKUDqdM/GupE1ENA5mhcC6y1zbRGU/SkAICgZ+1ucEPE8ry
-	 CBkjvKLqE9pgDVZiD+QxHQYLmO9hceAI0R5H4Ko5IShLjoYgOy/xLS1m5fLnxwryTM/Ih
-	 GCmgr7avHVOqzxj+UFGN4fkHtcrRiP6lR4wFY9k5XcSkifk7UwYv2tliJS6tb12g/wA==
-ARC-Authentication-Results: i=3; smtp1.osuosl.org; 
-	dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=OXtphlFT;
+	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=hSKWFbnrb5fcIOjyHmJ6F46Kvg/ekV/70+BCn34cz20=;
+	b=jHQK69oEvakBhLA9XkGszO9813TyWU8Zg2JfUI8syf7pf5EpKvArKDn8yHpCUfsY62cL
+	 rqc86zLePOP2w2KPBdnEqD/nWdKttaigNm8hCLbLL5h0+PL2T/Ao6YI0rIQ7q81kFE3aE
+	 mf1moOZdVTfBBxXYqDPF2ZD8s5HRHhFT7hJi6f15u2xSbX+b+h40SyiCwenGtU5W7yTC1
+	 z1sqGm61kW5Y5L8qfW0AuJmPdJYvIoMKrxk9FQWY1erzi2ai0oijn1x/bhsH67Bu7HSp+
+	 0redDteHc6xih2MbgitM2TXwFg6KxYacDYU95yPnkzY/pzmZEz9htyv4YmSwsoA5sig==
+ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793774866;
-	bh=YrT81sixhSYJL9geF7mgRPe417envOdzb1Q7i8CDULg=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=YbDbNxG8g1qtX8GIS66xpg2OlnsU++F4ZhYdyf1I7naXoP1kqxWSkMivF47eQlSbe
-	 JI0IoeM0tf03adzrZSZFMi7L98gAmbE4sC6vkV4IY1EV8Qv5w8iWEqaQPYRBs91ptF
-	 db1wAJXhQRPsp6xsBgzYRuz/SCptYjMLbRSgNoKe9IWK2LT6PH4TZTzbx7z3AcHGKp
-	 pmVfF9Qr7ZWneG16uCg3lVFeHCSgt34O/iPYLrjykYAbuMtanp2B7ILkFjiIxpjbpQ
-	 KpF+T1eeFF8puM+eU2E3v5YBFb3bds2Ztj3W8gC/bvj2tiWkp9ipvrL4JTR3x538c9
-	 EVr6FcFrOYr4w==
+	d=lists.u-boot-project.org; s=default; t=1793776678;
+	bh=hSKWFbnrb5fcIOjyHmJ6F46Kvg/ekV/70+BCn34cz20=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=RkHj7TLokGIx/mt5dfOOU/cgaOkgJyycKsx+dV4dh5+99sWUgi3T04LDj1WEI/lca
+	 QUkSh9sDM+KeX7NJHkSHbJf3dxh60F14g9mDJ1/bLkLspjokfNEjGvo9neLzDdGTt7
+	 FhOPe5FTWre0taC2L5do3xjFboRy9YpjQD/IYsqW8EGcLuFCqhRfPwT5NtZfYWg50c
+	 KKmDbTWg6rYhDjx8DEktXHOVzjo2/ysy4olbu0qRpdf2WOWRutFBQvvTax28PZzih6
+	 FMhfZ/pmtPgxJfN36qtFkuO3A762imG/Qq01aad3GG/8vHTj0HxwyP1fhCM0+Ewr2x
+	 sWSMpBjCG67Qg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 620B180D74;
-	Wed,  4 Nov 2026 06:47:46 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 003AB341
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 06:47:44 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B427060686;
+	Wed,  4 Nov 2026 07:17:58 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1CCCB341
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:17:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D92B380D74
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 06:47:44 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0E23E405C9
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:17:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Nq2JIE7zp70k for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 06:47:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 918EF80D66
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::1136"
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793774864;
- b=qjxXdF2XUci+bCvVNDxQmjNl3oGFs6nNkk3eT4toAIxthDILghr3v/bdFPuvRBXKFYjA
- cbGofehYe/eonAvUhj2pFi0hWqKNQmMOcmWhYFUD59yt70JLgSFRKdOCrAJTTnZRjBRzk
- F4QTCOBk7C+YvnyX7eCgejqR6fYjH40pw8l9QP36gmGqq37p6YtIYvY0wC7wxVqQ1Rrfq
- y7kDnZzwsivzo0a/e+uob/TwqayoO7pqobD86bVopw5OnaA9LzEhEdTcZNf2KP7NBL+GX
- wOcuTgyiMeKU+EOKvBIhD1qJGhP4zUB2vxPDOgXxgKH3Bnur4qDlGmvlbPKd0xnAz+w==
-ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793774864;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id juCySpmBIGGT for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 07:17:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BBAE6405C6
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::432"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793776676;
+ b=bkm89ldntUAmMFi4tKGsy59lv5ZVlpX3TSi7XdbEajKSJkdIL23/WCSdKYYHpPVHrK+d
+ 51xMpu9zUL5k0T0DJl2o5rxxYEOkTgrGOcdsVyjGhxHyFUnffr3FiXs9/m6J3mu0kYKbb
+ r9G6MGaeo6A1lxdPSALeyQ1InJHa00VNPFtcETN96/ol5cDF3YOWh819ql0FFm/qMAxzE
+ YByvhl63FDxUZ1Yf2mB678441GgSyPT9WokF2LRsODNvlgLrqyT9XPJJ69vMtKG4g5J3/
+ 4aTY61XTdrKo6FiU55TqdE2PJtzzzCqCzTswoBLZCLxFvzqnqd8EFHMM6qKuR+X4IQw==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+ c=relaxed/relaxed; t=1793776676;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
- X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
- In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
- Content-Type:Content-Transfer-Encoding;
- bh=YrT81sixhSYJL9geF7mgRPe417envOdzb1Q7i8CDULg=;
- b=O0aRHKLYmeT5ekbBeRNksP2jF2QDuWXBvy4ZcBokw1DVSQvUlyU8ySkml8xlM5j82BD8
- tQcfC5gwSjTIC8yPeoI0feQPbsZKet0CZXSMGaP+cWUrOtZ4gT4VtJbmuLrMvrBVxKlcP
- Y+qu/QYGNAeUY1LIAtBplw2Gw9C5nJPEVbNRM8NM8VDFTzCPzRmzMNOF9+TCCujsoH5Dd
- OW+oI18UZhbgTTkQ5FdxhyQPt+HavAxWj4j/iI0Enf+it3YXydQkofwfcBKs3GcKjGv70
- JFjg9lqrur0i9nQ6kW0AzVcjdmlfqnz2wkoTA5E8G51qQ4bN0CRCNoIGefsUTtSMkjg==
-ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
- dmarc=pass header.from=linaro.org;
- dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=OXtphlFT; 
- arc=pass header.oldest-pass=0 smtp.remote-ip="2607:f8b0:4864:20::1136"
+ X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+ Date:Message-ID;
+ bh=hSKWFbnrb5fcIOjyHmJ6F46Kvg/ekV/70+BCn34cz20=;
+ b=CIvtCSoyQTXdS9rusIwAQKcPwrRkq2c/Cnss0GL8DFSFx790zrPOmBy+WYV/7SxXUhlq
+ raWF4QXDvg/mCs4t/2GZEcBfk7hp1dCv5hHyizkrcnsXUmYvrUO2z/rNZ8h1TVbQDadHE
+ VSu+8xzq3vyUk6SS28EIEzoG+DBTZB1jsE5xlb2jUeo8zylqhSLbIlhlenfjXEys/rIcQ
+ 3izLT9pxs2OAuN9H7bKT7yvtOO5jbBI4V9iQoxibrQVm9AHEnobJDXV9dYAzjIj0CMq9X
+ bWdatFp1aXtrk7cXtoTMg0tmNHS/xIwps+JEtY6W+NON0e3i6zHDjhRwA6H/iyky9mQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ dmarc=pass header.from=gmail.com;
+ dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=tsc6KI1o; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::432"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1136; helo=mail-yw1-x1136.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=OXtphlFT
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 918EF80D66
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 06:47:42 +0000 (UTC)
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-8b30cbfa628so4708817b3.0
- for <u-boot@lists.u-boot-project.org>; Tue, 03 Nov 2026 22:47:42 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1793774862; cv=none;
- d=google.com; s=arc-20260327;
- b=DG0p1r6j7osYjimv2Y8qg2qHAcslwd7vli5ZOeUlWm5PUaNJxwlSaPQ/4Ku/1C4OIY
- PTvUp3QrfwoCG4Kk9JGN8qlhyuzeDuz77s+TSwmf1m4txIU5XRD4yy8oZVPqHBe5TFV1
- eM1NgBAAh+Ux6gj9Jlfa+kqkKt8f+SIMO3ymy0yXhn02O1zok2f9jVlyOxAApcWV50ya
- dVov8/Jrp3FqE0IAeeThkI9txHhxfsSVWvZ7Bf8UIHxtfIsGSsZ00Ev4HY5a5m+OsyoE
- 1WEk9nOG9GwHTApA3/iRbKismb6a4MPChU3Y/GsOGO1e5SKnxP8+wgggNry8275cHgOI
- mvsw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=YrT81sixhSYJL9geF7mgRPe417envOdzb1Q7i8CDULg=;
- fh=7QWwyUnPAQm5WNln6yz2UnPVMLv30rqCuNC8nkM6bR0=;
- b=NbCgx/DhRZo8OSlBRK4MDOUBR2ktyGmlo8T6t4a84BI1XspzrWovp55z8AEZjVahCq
- 1M+LzKNKPvsiXqoGk+bLLVGz/CA84wa6r9ApkkkSc1HKY+wa1rjkdlCpfmd0LZD09pdb
- VmdoiWcMK7lphD3wMQkh+5IWixvjG9WcF/utnbWtYoc+alcryXs8SXfN176wyeMHqMKk
- qPrFTDLpGvap3qhMVksMwUVLXSUALAqSj0eZtP24WCbOuxtT1lEic0CKI2iUhobnkLWf
- N6t9hDu1UppwWNcsajfYuGcBYL8XHLc3tmZoZ21K23wBd3wT7NAa25Bd5q9bl94kXLwy
- Xc7Q==; darn=lists.u-boot-project.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ client-ip=2a00:1450:4864:20::432; helo=mail-wr1-x432.google.com;
+ envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20260707 header.b=tsc6KI1o
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id BBAE6405C6
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:17:55 +0000 (UTC)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-48e0d1da913so176436f8f.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 03 Nov 2026 23:17:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793774862; x=1794379662;
+ d=gmail.com; s=20260707; t=1793776673; x=1794381473;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=YrT81sixhSYJL9geF7mgRPe417envOdzb1Q7i8CDULg=;
- b=OXtphlFTuDoNsCwp9ufWqgLIWnZRzhFuPvn1anpa8jauilsAlckhouaVopSZqk8fWC
- XxidghX9EkEcRItVE6yq7qoTU2GaK7K14+eON6zb4C0MZko1cwYnmrcsYXXcskyP+04+
- KpNfYShn+P4oqZcXGhtwXzS8m1PMr6e2xsDUf7Kyi7fF6WkQR3o6KIzgeyOrSd+PHyPi
- qVSbOXzAR7+55/xp8TMan6wQGmLOsbAqzSisslwQL8HPn1TVhkv8Q5IUIIszTN2RWbX0
- x67frHws67TU2BjG0wVoSbS/mdfyB83eR3MbxDtBi4En5KdrXULFD+YiZQy/9AO/APE6
- WNDg==
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=hSKWFbnrb5fcIOjyHmJ6F46Kvg/ekV/70+BCn34cz20=;
+ b=tsc6KI1oF2exIveRRe9VbCcNZRlClxK/1lXlcxlpCgWrbK7zsVabOM5m7D7grCSQlU
+ p67goIYwjUVQAuqadICaZJWcO0eRWsG17Mhs1kQvsdBEAVBJlC9APeqQoN3otZGsTIJl
+ MTC8Uk59VGLgbPSGZWWP0O+d+86B+H2EexaTRb5Ak1R2arg3y4qPYLZBSst7IMTXK8RQ
+ /cbr0Yey5qtkcwLWpnxxxixH7ktXqek6QWFfg3Dsdqbqzpjs0R0oaJVMpD8Q6XHFlWSJ
+ DcfMBRqUsIOp5DH30/olEkxeMg+RC3O6KrHtJzdP14wfp2Ql0GABZTfge8AJZ5NjNg3k
+ V70g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793774862; x=1794379662;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=YrT81sixhSYJL9geF7mgRPe417envOdzb1Q7i8CDULg=;
- b=1ZpDNcbl1pwBgb3E3Nla6OBZwhZnh+wKA1btRuCPEZ15sSBXe3I8SgWeWyT1hehb2R
- z8wTyJk4APtGssZTGrU9VKJt5HObj4iH+l9cMX7Hun9Hy9DQI/AtrpLcuc6zABNkgtkh
- p3VJG+mdMfoejPokX4YPK4aN3DP0Fky3PE17t5Qh1cIahkq6XIZO+JlPR2vkCzmdGs64
- MyBmQ48giiUeffX8nh95e41TwHFdciz/n1dq7V42zv7Qc5CxzvyFB2ke+BasgOYNUbHr
- JELnnUFnwmHrQdONq62pk5wffMwDpiOqELiK8VT6wdyj01QzWHryni8Yr1lBWWMmEMBP
- iDXg==
-X-Gm-Message-State: APuU4Z8D7SGOmDGtbmltVHaj4RatK6Wp+rWsQLbwSRwJ2+7iv9X2unG0
- hXwaQIRA2Z7MiRs6fhGmqHlRru81Q98Sw4bpv+SZ+1O4/KBq6H1+xPJtA2d9cGEZO5NI+a8CNsT
- M0FrhxD0Srm6irj8AiLP8xWW4I/wme4Rzr3ifUFzdgQ==
-X-Gm-Gg: AYBFou31gQWzYRHaKGQ7vjFABB0R6JDtEE4vHaWnBBp8bVdf3US7BwAzeLVWIb4lcFb
- 9c+tNmEMsTGsCk/zEEkHKl4UeD7lInrsyRTpYBCuicZhbHn2dWPtCjiGavFOG7xdnWOwqaO6ueM
- CU2ok/0slCFezU/pBjGeaUGCPureYvElZz1v9o/yIAv2ssPDitrBTvdDNbxrmtSGEzBDY+QnNr+
- MrDzwcLVi8to3ouVHSFZ82ey0gUvBxVIqebe2fZKoq+6yjf3O7ajHuh53qfHUqC4nP28X2su+qQ
- Cd9Wjif+eOtAy5XxO6dQZJANKUWgM1fUeoDYiHnlsSrDxAOPojrU/l4kKcdNd2eg9dE8s7V/4Gw
- oPQBPcQua3LBDl4iig9HtI6HxkJ1MroybH9YcIl5Zc6BIRnbzLgL/cCzB3yJ+ChZ6ewHgnnCmCl
- MZanqXnqs8AYJtTXDB6sqfdJgLex5ylHaP73sh9cdsiooZ+dgT/bIjgoGRw7QH9t0FBeb5+Arua
- rEpZnhyT6SrXGHEP/mc5dpG/26nBXMQQXqdXPCfTKyfIDWUXjyCXy2VHc1AUD0ByerwnUJ2q9gA
- b9zTNZ89T4nJD2vpn7cICobmByedD8GzchhuLlQBBW3sMICZGZiO7V4lnpvl9HdRg8aIZKnTVwA
- dnW5mUvK+Vy64BjCA5f9TWBXH3wNHeYeksiPYac0SZ54Z2wKYT6HtAoAj9yTW51NVNFR73sO0ym
- RPKwyKc2zPTupdx2CQf2RXe50brBWtImeR93Q=
-X-Received: by 2002:a05:690c:e3e7:b0:89b:6b8c:8edd with SMTP id
- 00721157ae682-8b2b676966cmr108640137b3.48.1793774861619; Tue, 03 Nov 2026
- 22:47:41 -0800 (PST)
-X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
-References: <20261029150906.1558380-1-tkirchner@emlix.com>
- <20261029150906.1558380-6-tkirchner@emlix.com>
- <CAC_iWjLX_3RAzxeCy7HQHEy+fZS4Jm-J_E6wnv_QG5+DWpX+GQ@mail.gmail.com>
- <64f49638-bcf8-45ca-bf88-2e96e2d8d68c@emlix.com>
- <CAC_iWjLwGpmX3jfeo2h=ERDuYZo-a5scgBejzV_euCgazHimQA@mail.gmail.com>
- <a71d2e80-f36d-4e54-b85d-917a7d494a31@emlix.com>
-In-Reply-To: <a71d2e80-f36d-4e54-b85d-917a7d494a31@emlix.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 4 Nov 2026 08:47:05 +0200
-X-Gm-Features: AclHuK-gD1A7Zsc-jnL5aU0X_ExBcdkbWyg_a6fnYbOq9Ns1s6yZdHRBEiAeYcQ
-Message-ID: <CAC_iWjKCJdvX-9ToZWcCNLhZuDS7iL8cTwm=6md42WBx2dEDvQ@mail.gmail.com>
-Subject: Re: [PATCH 5/5] tpm: deactivate unsupported banks in tpm2_auto_start()
-To: Tycho Kirchner <tkirchner@emlix.com>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Raymond Mao <raymondmaoca@gmail.com>, Eddie James <eajames@linux.ibm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ d=1e100.net; s=20260707; t=1793776673; x=1794381473;
+ h=message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=hSKWFbnrb5fcIOjyHmJ6F46Kvg/ekV/70+BCn34cz20=;
+ b=z32KUDa5lZnO0TpSzCH6l2gAf7cjTzLbVyUY7R6YGrtXwR3W7ZU4GmhaAq/t3J0rh1
+ PCtehd8BtbcWOswmT/XQIwFHgbAOU4l6x7/YBto9TookIE9mdUyjycO23yrM0lBDh3Gb
+ 8Yoe9ICTR4skj4ncgVfWssD3MhjRq/8oPLvBOborJtwJiK6ieRM5TNXV8vokqGxXZExh
+ DBXNjdgnnStnZtg8cim3GFdh/+xt2jx7zKrsGxN7CjkmEaMqRlsMcj6wDzpGDq8Nl248
+ hzM0qhGTkIuzxky9pbPSk9EVaWh4+YCM/PNkssosSdKHnevAPRlxMkwPhcg88SQLPTNw
+ TOyw==
+X-Gm-Message-State: APuU4Z8xSwLhNirHO9okHSjV5A+nBPpzzMFGX844lA7hDivKzfE7FfIQ
+ qHMvuWDCMyQUHCZFpr41POCq+LZYBFbH3CjRUDw9yaJUvnJHkUNMBOBayZSfZNdf12s=
+X-Gm-Gg: AYBFou0rY6yDLprFzBwTt6A9v+BIaLbyXDfs0sRDRrqZpgRXwuvGwQbrqqhcWRvjcMY
+ 12emOzTd6Xpob6U6K2dIYCIAX75i0JI00A4r5+UxVvMD2V8RU22x10aXx+bsbvmU0Fw9X6G/maE
+ jXZoAsnTloSlEpWxJ5GXz1uAJQMSVdylSjCzdROtjYZDICO94/+Iy5VzZzfwLAerKN8LV1YrfjW
+ zl+lVNbH8naa8ZNqceFLr344IzoRVrDQBBlN0YXYgAIR4aKeveaKmzDfQqhdIYhz2mtDnCyfL1Y
+ awuhMd9qZHpB4TRtPa3D3rTs5KDNpJBvp7auSW1JAWGYLFRnSnIK0Iv2ESeYRJjVYwUX2U44f8f
+ 1dr5aPa5/5Y/qWVXUbY4f4qBgQTyfpuXSWRlStteQmxaVKx5UfHT1tIydYItaobW6xaa4RpfKb0
+ wGARvDPpXY2i4cEUKO7cYFhO9AMQy2qN42fq8eC7qetJPp7sRmpaY/W/skTZOISKdJ9GlCCL6ei
+ Bfdd+gg9lSEzfDkSrelg/Cxlylk4yrXV6JLuL1kyW4W0O/pkmqW8uOZisoan46B6JJkXb+7X6vB
+ 15tmPHTSrs+RSOq7VMeVZDj/j/rOIb0=
+X-Received: by 2002:adf:e18c:0:b0:48e:eb:56c5 with SMTP id
+ ffacd0b85a97d-48e6e2c1d83mr37695281f8f.8.1793776672761; 
+ Tue, 03 Nov 2026 23:17:52 -0800 (PST)
+Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48fecac2772sm2112373f8f.18.2026.11.03.23.17.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 03 Nov 2026 23:17:52 -0800 (PST)
+From: Ana Bobillo <anabobillo3@gmail.com>
+To: u-boot@lists.u-boot-project.org
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Lukasz Majewski <lukma@nabladev.com>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Tom Rini <trini@konsulko.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: [PATCH 0/6] usb: gadget: f_sdp: honour a closed i.MX part,
+ bound ep0 data
+Date: Wed, 04 Nov 2026 07:17:51 +0000
+Message-ID: <4bdba9dc-0c21-4e33-8f20-2c0a7ebba0d6@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -203,146 +168,114 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_GMAIL_RCVD,
+	FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
+X-Archived-By: <archiver.kernel.org>
 
-On Tue, 3 Nov 2026 at 10:44, Tycho Kirchner <tkirchner@emlix.com> wrote:
->
-> Hi Ilias,
->
-> Am 02.11.26 um 22:00 schrieb Ilias Apalodimas:
-> > On Mon, 2 Nov 2026 at 12:35, Tycho Kirchner <tkirchner@emlix.com> wrote=
-:
-> >> I would rather keep it as a fallback: callers may use tpm2_startup()
-> >> directly instead of tpm_auto_start(), e.g. custom board code or
-> >> "tpm2 startup" followed by "tpm2 pcr_extend" on the command line. For
-> >> them, the check in tpm2_pcr_extend() is the only place where active
-> >> unsupported banks are caught. With patch 4, it only deactivates the
-> >> unsupported banks, and only with CONFIG_TPM_PCR_ALLOCATE.
-> >
-> > Yes that's what I was implying, but I wasn't very clear. Is there a
-> > reason we can't move it to tpm2_startup()? tpm_auto_start() is calling
-> > it anyway unless it's already initialized.
->
-> No, that works. For v2, I would deactivate the unsupported banks in
-> tpm2_startup() with CONFIG_TPM_PCR_ALLOCATE, but only if the TPM was
-> actually started there, i.e. TPM2_Startup(TPM2_SU_CLEAR) returned
-> success. If it returns TPM2_RC_INITIALIZE, an earlier stage (e.g. SPL
-> or TF-A) has already started the TPM and is expected to have taken
-> care of the banks. With an event log, tcg2_log_prepare_buffer() still
-> aligns them afterwards. TPM2_SU_STATE, i.e. tpm_resume(), is left
-> alone.
->
-> The fallback in tpm2_pcr_extend() from 4/5 stays, for the case that
-> the earlier stage supports more algorithms than U-Boot.
->
-> I suggest something like:
->
-> ```
-> ret =3D tpm_sendrecv_command(dev, command_v2, NULL, NULL);
-> if ((ret && ret !=3D TPM2_RC_INITIALIZE) || !bon)
->     return ret;
->
-> /*
->  * Only the stage which actually starts the TPM deactivates the
->  * unsupported banks. On success, this resets the board.
->  */
-> if (IS_ENABLED(CONFIG_TPM_PCR_ALLOCATE) && !ret &&
->     mode =3D=3D TPM2_SU_CLEAR) {
->     ret =3D tpm2_activate_banks(dev, 0);
->     if (ret) {
->         log_err("TPM: failed to deactivate unsupported banks\n");
->         return ret;
->     }
-> }
->
-> return tpm2_update_active_banks(dev);
-> ```
->
-> What do you think?
+The SDP gadget lets SPL, and the sdp command, act as the i.MX boot
+ROM's serial download mode: a host on the USB port writes files to
+memory and jumps to them. On a part whose secure boot is fused closed,
+the ROM only runs an image it has authenticated. The gadget does not
+ask: SDP_JUMP_ADDRESS first calls the entry of any IVT it finds at the
+given address, before the FIT, container and legacy paths that
+authenticate, and SDP_WRITE_FILE and SDP_READ_REGISTER take any
+address. A closed part that boots SPL with SPL_USB_SDP_SUPPORT will
+therefore run unsigned code from the USB host, past the chain of trust
+that HAB or AHAB set up. Separately, two ep0 requests take the length
+of their data stage from the host's wLength alone, against a 4 KiB
+buffer.
 
-Yes, that's what I had in mind!
+Patch 1 bounds every control request's data stage to the ep0 buffer in
+composite_setup(), as Linux commit 36dfdf11af49 ("USB: gadget: detect
+too-big endpoint 0 requests") and barebox do: an OUT request that is
+too long is stalled, an IN request is shortened. This covers the SDP
+report 2 SET_REPORT and the OS descriptor vendor request, which clears
+and returns wLength bytes of the 4 KiB buffer.
 
-Thanks
-/Ilias
->
->
-> Thanks,
-> Tycho
->
->
->
->
-> >>
-> >>
-> >>
-> >>>>
-> >>>>   tcg2_create_digest: unsupported algorithm 28
-> >>>>   Cannot extend PCRs if all the TPM enabled algorithms are not suppo=
-rted
-> >>>>
-> >>>> Deactivate them in tpm2_auto_start() already, before anything gets
-> >>>> measured. If this fails, e.g. because the TPM refuses the allocation=
- or
-> >>>> no supported bank would remain active, return an error. The rational=
-e
-> >>>> is that with CONFIG_TPM_PCR_ALLOCATE enabled, U-Boot is expected to
-> >>>> manage the banks, so fail early instead of at the first PCR extend.
-> >>>> This is in line with the TPM_PCR_ALLOCATE help text, which does not
-> >>>> specify at which point during boot the allocation takes place.
-> >>>>
-> >>>> Signed-off-by: Tycho Kirchner <tkirchner@emlix.com>
-> >>>> ---
-> >>>>  lib/tpm-v2.c | 12 ++++++++++++
-> >>>>  1 file changed, 12 insertions(+)
-> >>>>
-> >>>> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> >>>> index 18ec9eb960d..bd049fed748 100644
-> >>>> --- a/lib/tpm-v2.c
-> >>>> +++ b/lib/tpm-v2.c
-> >>>> @@ -232,6 +232,18 @@ u32 tpm2_auto_start(struct udevice *dev)
-> >>>>         if (rc)
-> >>>>                 return rc;
-> >>>>
-> >>>> +       /*
-> >>>> +        * Early deactivate active banks with unsupported algorithms=
-. On success,
-> >>>> +        * this resets the board.
-> >>>> +        */
-> >>>> +       if (IS_ENABLED(CONFIG_TPM_PCR_ALLOCATE)) {
-> >>>> +               rc =3D tpm2_activate_banks(dev, 0);
-> >>>> +               if (rc) {
-> >>>> +                       log_err("TPM: failed to deactivate unsupport=
-ed banks\n");
-> >>>> +                       return rc;
-> >>>> +               }
-> >>>> +       }
-> >>>> +
-> >>>>         return tpm2_update_active_banks(dev);
-> >>>>  }
-> >>>>
-> >>>> --
-> >>>> 2.47.3
-> >>>>
-> >>
-> >> --
-> >> M.Sc. Tycho Kirchner
-> >>
-> >> emlix GmbH
-> >> Headquarters: Berliner Str. 12, 37073 G=C3=B6ttingen, Germany
-> >> Phone +49 (0)551 30664-0, e-mail info@emlix.com
-> >> District Court of G=C3=B6ttingen, Registry Number HR B 3160
-> >> Managing Directors: Heike Jordan, Dr. Uwe Kracke
-> >> VAT ID No. DE 205 198 055
-> >> Office Berlin: Panoramastr. 1, 10178 Berlin, Germany
-> >> Office Bonn: Bachstr. 6, 53115 Bonn, Germany
-> >> Office M=C3=BCnchen: Am Knie 16, 81241 M=C3=BCnchen, Germany
-> >> http://www.emlix.com
-> >>
-> >> emlix - your embedded Linux partner
-> >>
->
+Patches 2 and 3 fix the SDP data path on every part: a zero-length
+report 2 packet made the copy length -1, a report 2 sent outside a
+download was copied to wherever the last one ended, and the padding of
+the last packet was copied past the announced length.
+
+Patch 4 converts the command's address and count once instead of in
+each command, with no change in behaviour. It makes room in SPL for
+the checks of patch 6 on imx6dl_mamoj, whose SPL is close to its size
+limit.
+
+Patch 5 adds sdp_is_closed(), a weak hook (false by default) with
+implementations for HAB parts (imx_hab_is_enabled()) and ELE AHAB parts
+(OEM closed or locked lifecycle), and reports SDP_SECURITY_CLOSED as
+the ROM does. Patch 6 then, on a closed part only, skips the raw IVT
+jump, takes an image only by a path that authenticates it, refuses
+READ_REGISTER, and receives and drops a WRITE_FILE that lies below
+DRAM or touches the loader's own BSS, heaps, device tree, page tables
+or stack. A legacy image is taken only when its header starts the
+range that jump_to_image() authenticates, since its entry point comes
+from that header. Refusals are answered with a failure in report 4 and
+the gadget waits for the next command; where SPL searches for a FIT or
+container header and finds none, the jump ends in the existing panic.
+On an open part, and on every other platform, the SDP flows of
+imx_usb_loader and uuu are unchanged: every new check sits behind
+sdp_is_closed().
+
+There is no sandbox UDC, and the closed paths need fused hardware, so
+the series was checked by building the SPL SDP boards before and after
+it with the toolchain CI uses (gcc 14.2), with and without the part's
+secure boot option:
+
+  defconfig        secure boot   SPL bytes before -> after
+  imx6dl_mamoj     IMX_HAB (*)          58800 -> 59088
+  apalis_imx6      -                    46928 -> 47224
+  apalis_imx6      IMX_HAB              49864 -> 50208
+  colibri_imx6     -                    43280 -> 43576
+  colibri_imx6     IMX_HAB              46248 -> 46560
+  imx8mm_evk       -                   152448 -> 152400
+  imx8mm_evk       IMX_HAB             155224 -> 155704
+  verdin-imx8mm    -                   156336 -> 156288
+  verdin-imx8mm    IMX_HAB             159112 -> 159576
+  imx952_evk       -                   125248 -> 125696
+  imx952_evk       AHAB_BOOT           129088 -> 129520
+  qcom_sdm845_spl  -                   242032 -> 242192
+
+  (*) in its defconfig
+
+All build without new warnings, and imx6dl_mamoj, apalis_imx6,
+imx8mm_evk and imx952_evk build at patches 4 and 5 too. The SPL links
+the weak sdp_is_closed() without the option and the i.MX one with it;
+on the imx8mm boards, where LTO inlines it, the SDP code calls
+imx_hab_is_enabled() only with IMX_HAB. The tightest are imx6dl_mamoj,
+whose u-boot-spl.bin grows from 61017 to 61305 bytes against its limit
+of 61344, and verdin-imx8mm with IMX_HAB, which keeps 168 bytes of its
+SPL's on-chip RAM, from 632; this is also why the refusals print
+nothing.
+
+checkpatch flags the two #if in patch 6: they guard gd members that
+only exist under those options, so IS_ENABLED() cannot replace them.
+
+CI: the series passes all 91 jobs of U-Boot's Azure pipeline, in build
+13725 of my CI-only pull request, on main e43c38e0021.
+PR:    https://github.com/u-boot/u-boot/pull/1064
+Build: https://dev.azure.com/u-boot/u-boot/_build/results?buildId=13725
+
+Ana Bobillo (6):
+  usb: gadget: composite: bound ep0 requests to the request buffer
+  usb: gadget: f_sdp: drop an empty data packet
+  usb: gadget: f_sdp: write report 2 data only within a download
+  usb: gadget: f_sdp: decode the command's address and count once
+  usb: gadget: f_sdp: report a closed part as the boot ROM does
+  usb: gadget: f_sdp: refuse unauthenticated loads on a closed part
+
+ arch/arm/mach-imx/ele_ahab.c   |  13 +++
+ arch/arm/mach-imx/hab.c        |   7 ++
+ drivers/usb/gadget/composite.c |  16 +++
+ drivers/usb/gadget/f_sdp.c     | 175 +++++++++++++++++++++++++++++----
+ include/sdp.h                  |  19 ++++
+ 5 files changed, 212 insertions(+), 18 deletions(-)
+
+
+base-commit: e43c38e00218eae1a7b4a683c0fef8973d838fa3
