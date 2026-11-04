@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 591EE606B2EE
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 21:23:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4792606B2F1
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 21:23:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zCg8pQh7;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=HpQLxzTL
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=tocII/EG;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=ozNzL+NH
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DA24240988;
-	Wed,  4 Nov 2026 21:23:42 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 491B960820;
+	Wed,  4 Nov 2026 21:23:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4O7whwYBi7sr; Wed,  4 Nov 2026 21:23:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org DDCCA40981
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793827422;
-	b=mZ9BvB+I2nkUTwCJYfvDtwt0dDsgTHPsWNRLSPAJom1TzmsGYzUOkMv8knF2jvm1rDDQ
-	 dFkCszvDvg12DU4/Dm4l2cTtc4dZ58oryl7jVVibhA14qUsEd0j1N1/1c2fjEPKWQELEz
-	 cbxnUCxDdKY8GwCochhjmHWRwlk+Rqb14doEdUypi98vtno4u+1QqjHWmhdt6LWjcktOS
-	 nPan6rv84uUn60bxlul4A5G/oOhFt8p4QpoTn1uxriynx6xHCM8w9mQNxdS7NBObhRRpC
-	 pAbwTw/7eTIys0PqlPEYTzGK/OOJR/Lo9F7C5wwV2kLcWZNwDPdU2FMix+8ZvTn0xSw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 8ngG0UWX2PYj; Wed,  4 Nov 2026 21:23:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 34A03607BE
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793827424;
+	b=TgsaRuxWUiLuMyatZaUU4nWHFcUjKnFceR9DAyUkGMtuW1cYFXkkzxQAuz9BvhSwmjTa
+	 N/PNHKsLedK36dJc04cVurgQ9yIqrOGz+7lqdjJeNfgMSNPuhtO4QMxBlPEOjZFkPkg+U
+	 W5iVWGi2Gy7uVh9L4VO4bBxLPABmlOIdV9e3ufZhYNw1jd63F1b/2z7b2wdEJkkcTHdNW
+	 z1c+u2dT4tuCd/LbmrFQifPkqmxuLIAWQ22N8kcwXVmNh0wtrXqca+RVgxPObmcT7TQK7
+	 uMHKnspMRBbu8REgTqGfTVO8ypBXFYtWD2ESkTYxPl+YFUqpS+BMHuFRHv7SAke9lcA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793827422;
+	c=relaxed/relaxed; t=1793827424;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -34,116 +34,115 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=JqXLHca+GuXl/vMVdb9sZUmszzkctpGX0kZNtbArk1I=;
-	b=FKje7m2hjbKagHUfvbcShiNAyMaru0GquHU3F5NReYVdRZW1PVY9l0PQ0G/FuNk7McrF
-	 JGdriuWqlUrJmXlXh/vcunmO9XFfUY4j8oX19hGGKIZhGdAy6UEUTf9ZY1x1lWETmqmGE
-	 JaFOyDM7OT3vJDvb4jEqqqh2aHkXJKfIXgEpSzBmAaKXtwgjrCqljLGz9YMCYtRp7+r2n
-	 V3tIZCjkfhGT0Xob3jGJ6QBWnWvo5Bfxe8SKYTkC9+IXpdQfPhXCNhWjWtNmMD29yOM9x
-	 Ku54B/WSKH6r/N+aI1ODDea16GqsG1akWjkBamJX1OKU64fMq86KTOqwOoMFRoaIOjg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=none header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=HpQLxzTL;
+	bh=OPHgPKSO9q8pbh04e2Euz8sOVZQfN1ns8TuYkOtruV0=;
+	b=neg7b4GDYoZ5iTgg7FX+QPs8ZcnncPsmR0M919M7v5+C6uYL4LjTt65qkwmi+nddfiGW
+	 1YNyjYXdf3KnYqY+IeMruAGGf3si8RbX0CL2E9g5TIl9n+u+wyeeQQWQLcZ55GIJsT1UV
+	 v0R9hi11wjdrQkBbQKyqK9zf4lGFPq0mgvVDf7x3coXUvoR80MYWBUydtNp17ytmDxMvF
+	 ey4uJdq5KleHNPuxK0g7jmJ6jMBMAAAj8bjlpKHvD/LUSJU38MJz4tccDbPYbeYK7hQC6
+	 MMZK6dWesZGt3GqoT6hpNmiFQmP72aQ2DGe6plMYtpbRufu5enNqx3z2wfxrtgKBv6Q==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793827422;
-	bh=JqXLHca+GuXl/vMVdb9sZUmszzkctpGX0kZNtbArk1I=;
+	d=lists.u-boot-project.org; s=default; t=1793827424;
+	bh=OPHgPKSO9q8pbh04e2Euz8sOVZQfN1ns8TuYkOtruV0=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=zCg8pQh7Bz5J+7JgwGnF3n+hVAAHp1Ki3L46YT5cosGQAZ/BpBzu01fFooNwc+47/
-	 gnNMExSmrsxH5wrJP5lNj0WhirwRH0OZ86G7yidxZAgfUpAp1Gnp9CbWKlQ5DrAkjn
-	 Sz3rYUW9MPz7kcCMvLk6xMJVNmjQXY7uNj6c3go0GIASGCEbe961Pxm2MnNMKOsVsH
-	 4SUgIPgsbOZM47jJdgL8niTEps1fq7oJuBODfgi7j7DOnawpjSCiRgT77AZwwIqlIH
-	 cP9bc4lZx4ALfOWQEAw0Y9cdCCSv2B/eXUypOAsh8ckzU4+8gi58zImvmuocxaKsn5
-	 k1KSphPUw9zOw==
+	b=tocII/EGX5WY5VekqxUxWu+5123SUm1nTVyerbo3ZtskgYN0GIAO/oLQltAdkM3UW
+	 BoSGbApdwmvZcsaPJKZ5uQhjXpA8MaC3omC68anaEVT3FOWuqFiWgQhrtHP558onLz
+	 RY58UjKIsQWz4+Km632E3RBt/Xg5rqA3WdTQ3XNygXru2a5bj3IWodVhLAimalvqtG
+	 9c87gtScbre+5Vl+wxO28Hypr8ULHIKmgQTECOfExuj6aoiGp0a1ab/yYo3rWFhvAu
+	 gbK655rzQXzNIXXryp4sp653faGje9mYbUlvpDmRXRIcwkaM/gF2L7f1cH7ia1mMf7
+	 4C84le0wK/P2w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DDCCA40981;
-	Wed,  4 Nov 2026 21:23:41 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id A668BD3A
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 21:23:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 34A03607BE;
+	Wed,  4 Nov 2026 21:23:44 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id EA086B00
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 21:23:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8BE1C40960
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 21:23:40 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id DBD8A4098A
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 21:23:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id u5w812zw4WsY for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 21:23:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 00F2D40963
+ id poFgVbw5csqj for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 21:23:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7C43E40967
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::332"
+ arc=none smtp.remote-ip="2001:4860:4864:20::2a"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
+ client-ip=2001:4860:4864:20::2a; helo=mail-oa1-x2a.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=HpQLxzTL
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 00F2D40963
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 21:23:38 +0000 (UTC)
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-8451a619da7so792411a34.1
- for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 13:23:38 -0800 (PST)
+ header.a=rsa-sha256 header.s=google header.b=ozNzL+NH
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 7C43E40967
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 21:23:41 +0000 (UTC)
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-48e2d5a69c4so705344fac.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 13:23:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1793827417; x=1794432217;
+ d=baylibre.com; s=google; t=1793827420; x=1794432220;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=JqXLHca+GuXl/vMVdb9sZUmszzkctpGX0kZNtbArk1I=;
- b=HpQLxzTLm7tOOdfSsfVAdp3uGMEADjxNGk7j6NrnHstK44a22rQ1buWvYSLrImpfdV
- JhcNzzQjQTVNuE3DFqlZRJz69aVSg40+rM/TnkkLFVfq0XgXtFBJM4EFm30R1LuQ92xL
- YZZigCBaTAWstLiZxUfYYUCV5ObcdpU2/9W4aJ95gK0LBkanr4zW0Axv9v0jalVK3t1s
- p5GN0rFrBQibikAeeJXF2VUgGmzGsS/NgMLRz7rXzrz2trocVk8EjBjBQPeJxKNfmyUc
- 4eIbJdcuMg+FRoQZPhv1poVB2Q2aKzzKN0V96ppmh8lai9sMZEHKeeoNB5RuL5ePDBwL
- AP1g==
+ bh=OPHgPKSO9q8pbh04e2Euz8sOVZQfN1ns8TuYkOtruV0=;
+ b=ozNzL+NHpf+2pLdtFd4FvO3LmNvy0GvrBg8hzsg78tmOpS5mZ6yWAEDLli/8yprK1A
+ YD+X/3gjsLLLlhB1XwujrM/a425ejnK7w69DPE2ZOLpGg7vM+ftV/XSb9ekt+HfHPPge
+ lGHhZuXQCBkihxvFmhXKM6YskpUpcUcjvdBOL/cfcKUGmM7P5whzhtZ+X5xh0c80Dm8g
+ e3J+KQJy9vv2mv/NYnyinEUijvfWUP0JJtK6KYyZChnMbdQPWv5t2iHDNIvLNKQGFFss
+ 5c4Zjzn/IpROWx74bief+COEhmr3hhK8QAQfG+nhIpPVcKIe5a4WypwdzHlY+OLUEAYg
+ eA1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793827417; x=1794432217;
+ d=1e100.net; s=20260707; t=1793827420; x=1794432220;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=JqXLHca+GuXl/vMVdb9sZUmszzkctpGX0kZNtbArk1I=;
- b=XlZaJ38+7jTwcAAzNvH66I7X9SSXhQFmQHgUE+FzhW2Qhe02v6fqZKsYzJ02+sJ6ba
- BX711Bfj1aGydOmMFhKVn0lvuvsVfSdtFtYVe6yTGykK9pG3P77Rf5h/1Czd5sTXC0pl
- QuyDWMrUl3k93Dz7UaN3DlHpP8FcEVHFvMzT5PvHaMUh+dCM2arglI7dBbnjOLJQzDw/
- hHFXjX81CttCelXYp435JImKEl6w8MFUj9XkhqrDbR1F+/vJsDSSa1j6OOiBNs3eY1Yn
- cfoTmN1PiadL1ErH+W9PNFkvCHWRCmr6lNhNyEce2eU6EwlZDpxCyOIQAFm+43F9RhaW
- 19SQ==
+ bh=OPHgPKSO9q8pbh04e2Euz8sOVZQfN1ns8TuYkOtruV0=;
+ b=h5TXnRsvBsA4KhTpi9/AU0nz5eyc9no+cxG+qJ1847B4M7CUu15GcFr4jwH2Tz1mPg
+ X/kDNGc0EGFnkKAgezFYDzPMg81MIF17qAe8AjLZTagVjgaIxv39WvQf+B4Fxyv43v1y
+ SJDzNUkJBvWuUpJPos6a9i8AT8wULVVvDuOURfJvbqPRp9daYG4aLqoAb559dytqZRUN
+ Ydj4mCRtXYhTKwByt0srGjHfKOyDHlTwkJg+AQMgxRx+xxp5RZAmLy9O2SI5/ceIQMn/
+ kls5bDzOWm7gyTNwhYl4VJX0rZQZaMiDazbjs/SVrwUnmOVGIk7urSiYZHtOUgRSZgfM
+ Csfg==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxprzV9heZDoy8eABhFcdV/LD5QYqJLnqvyPf4GGe++dfAEDA4Q23H6sR7SRi8Ea0iPs6klbRQ=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9VMVOvIGJ68kLbuwrrrDUHi0iyqQeWhJgIgj23/2J/jGLgLdh+
- MQ0v9wFr3/pQq/Eu6Q1pfuAGwEzzLm9YfcYrQ4/tkmpoyIrutEGWztZ+3W5FbYYaIIs=
-X-Gm-Gg: AYBFou0X/WnIotj6Um6e1gwp51vPF3PSCpKbumCAy19GKz+kaq2vwu3HmJKpmfLeU0o
- 7EtX9kdFbYY9ki/C1/ZOfNLvoR/Y9i/4ytiDuyP1scpqkMOQrcKL8M0Q3RqWSY4J30vNcnnYKY7
- d6sarHSWRn3vo9aE7JrUbY/FyVC5K64Ru0u6SalXuPuQuDmg5N2NSSq8QXYNYpRSyO9YhdEVOpA
- QA4lptQ/gzQfYFeQA8RR1l6HZl0v8AySrq6ZF1M4Zi6VZYDB82g2o0DhaQWcIhJEiMttj0/AESI
- 1POZryGKnsWxIal0iAfdebH0QQwtzUta4nalR9QTS5pCEkByjsl35AbwO3Ev45OjhfU2sPo8E/4
- LlxZpxmkEsBIuqD+/HSizY4UKpGfPISN67OxANr2R83ItWbo18UJ48fMQG21+xyTeqWTvpA6FTv
- zmUvJRwvDXM21GLHukiRKqpWjBE+14DP0sP+ZJvMm4LvzR0TzeWErEeOQ6GaS1Hp6l5Hqpb+h0s
- Yiad+29am/MM2IOfZJYiKf/xSut4/MJQ/TMSQyq7u21VmJdIkvCuI5E5g0IJ96RPwcG4IuCdZz1
- lP+AAy81UPTBt0OkFOWYnCXFnpViclpF
-X-Received: by 2002:a05:6808:1383:b0:4d5:27da:a496 with SMTP id
- 5614622812f47-5640dea5a02mr13005508b6e.48.1793827417352; 
- Wed, 04 Nov 2026 13:23:37 -0800 (PST)
+ AKwUvBxMTX0Ctbr7reahWgFTGAeE8D8//fhhor7M9uzjHUK2ttd46BN8cAVvXwWlIEMauBLoQ//y6tE=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z8kQf9L/ovce1bfFJFz7nla0Rn8tqMmjT0vkk4knjBYj1o8uLqo
+ KbD2S+3tRgk0T9MnVDEejh4dN14H8Z7FhPeLzHi/4XmTiLSAsCq9h3IDmIct1UqdQts=
+X-Gm-Gg: AYBFou12GBaxNcDE9I/rGut8A/RjQsbqc4pfKsCQp7IqxLMHIF86dDJaFGzawKmiX6n
+ vOonQETmtvLSUhwVkNRUnVaFEH6dZNubeGDeR9S25QgMdiEkpijRVIW80EFF04ChfJe+HNz518b
+ trPhV/2EvvA8dTa78GGNdrXgWRgjxKOmlkA4Jb+ns/Ju/scWL/EQuMRTvq6Cb/DcAG8gJ6esSbQ
+ XiMj1tx5gQxg2i9L40TW9CfIJVWMQXmKCbXcMobdduqkZjhaIPyc00D2c8sKYc4rrDki2tJJbrA
+ aDQaIjMqOFG2S5oE91pgEaG6Fmm0u9CGoEurD2i+pw2f45+pmU7R98GTU81jocdI1eRRG7335ku
+ feSDcraiilluX+qCAgmnb1FGiWGlFckCGDTapzBqM4I5O6AH/RfM53JFhyWHN9MzbuoUDrjS/Oy
+ V/oI0BmEkFy7dA5Z0ujs9QlwgkKscnCrlb9NRWRBwVVeknng1vjj6j4PuhkYvxeavHY220hBLD6
+ C6694FySUEZCd1kTsgX8rhzERo1qBBN6M52AFmtJ7fhmXRxXxTUCnFhSZozXvQAZtkLIY8z/2zJ
+ QBq2VkCoucwQ0GjOLC8ptKdNKHDGmokP
+X-Received: by 2002:a05:6871:e78b:b0:492:1de3:785f with SMTP id
+ 586e51a60fabf-4a9077982a0mr11134186fac.46.1793827420036; 
+ Wed, 04 Nov 2026 13:23:40 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:f563:d5d:661c:51ed])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4ad6840797dsm845548fac.9.2026.11.04.13.23.33
+ 586e51a60fabf-4ad6840797dsm845548fac.9.2026.11.04.13.23.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Nov 2026 13:23:35 -0800 (PST)
+ Wed, 04 Nov 2026 13:23:37 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Date: Wed, 04 Nov 2026 15:23:08 -0600
-Subject: [PATCH 1/2] bloblist: align the used size before adding a record
+Date: Wed, 04 Nov 2026 15:23:09 -0600
+Subject: [PATCH 2/2] bloblist: move to version 2 of the transfer list
+ header
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261104-bloblist-tl-fixes-v1-1-477121908257@baylibre.com>
+Message-Id: <20261104-bloblist-tl-fixes-v1-2-477121908257@baylibre.com>
 References: <20261104-bloblist-tl-fixes-v1-0-477121908257@baylibre.com>
 In-Reply-To: <20261104-bloblist-tl-fixes-v1-0-477121908257@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -154,17 +153,17 @@ Cc: Raymond Mao <raymondmaoca@gmail.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  u-boot@lists.u-boot-project.org, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2777; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4663; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=Ot9XjA/6yzJRPT0PEF3/AWRON5Rcd6LTw6dhx+ljXb4=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq66JF4y8K/EquF8EleiDS/tzXIqUIn73ACDrmw
- BToMnzWLjGJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCauuiRRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ap/cH/2e+pNKaVUB9VhuBynrhQcb8ALz64nJEVCJ51Wl
- Q5PnFrvC/gj5XgOaEhr3pZbIkw0ewxbUWXK8fxsz+gxByvKtQncpHHcFdUow/Iw99IWJ3RE5FzS
- qCOYVNAH23arp62BTPnMI9HnPEo/6n/8HR7o1IXScQiiP5fK4XL92+cCBOFJqLlNaN7wxW/M1YK
- HKdYzNTTXpoK96gWoJOJEkxzUKomU6PSR7qeP0Zt4G7H5SlOTG0wmRBzSdQNPBzfqqMOeqFfckN
- ZDGhZpEtxd47pC5feC1tjpXgrNf2dJi5Q4hMPHZ1zZs89n4S2dMToSqa7mirpCxjXradoMkUJnR
- ZjHs=
+ bh=0DrGpo8TjDNKtqfl2If83vMDmNXUTYWX6AV8BAFPQhQ=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq66JLb8SCLMB354zae9HuYQWUVgPA+JlMVNNrV
+ AEfb7w4ytqJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCauuiSxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AHw4H/0KyggTH+Ntos+4qJ1nkOw3hUOHu/jEatoDXdph
+ K1m9r7lRutyMd3KmjgrRt1A35UP2WiNdWrtECVjpnZNU/Irrk+AOjduicFvWvMxlsfn6t+eZDqs
+ A8luQ/QsnoEXyTA+7N7zF4RKAyj94bG67ovVSyms7PoFMMHkQ8LQatoP5P86v7wNGGCSnNHdA8c
+ TToeM/0cpI6WaOiQv3B7aoHREtikGg1WaxambktxLSryVSshyNgMg3MZzViIyYPKTKSeVfO++xF
+ Z3J8b/k1YEr5CvLvIr7Z06a5fLzxxjClo+kBx77/9dWkx6b8k4SQmHALLnumxbAjoI+tExdCCmA
+ qNDo=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -176,86 +175,123 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Adjust the used size of the bloblist up to the record alignment before
-adding a record.
+Create transfer lists with header version 2, and accept lists with
+header version 1 or 2.
 
-A transfer list from another boot stage can have a used size that ends
-with the data of its last entry, which does not have to be a multiple of
-8 bytes. TF-A's transfer list library creates lists like this. The next
-entry still starts 8-byte aligned.
+Version 1.0 of the Firmware Handoff specification is withdrawn, because
+it specified an XOR checksum while implementations used an additive one.
+Version 2.0 went back to the additive checksum, which U-Boot already
+uses, and changed the header version to 2 without changing the layout
+of the header or the entries. Since TF-A v2.15, its transfer list
+library creates version 2 lists, which U-Boot rejects, so it loses
+everything that the earlier boot stage passed in the list.
 
-With such a list, bloblist_addrec() works out an alignment gap that is
-smaller than a record header and tries to fill it with a void record of
-negative size. That call sees the same used size, so it recurses until
-the stack overflows.
+Lists with version 1 are still accepted, since existing firmware creates
+them.
 
-Fixes: f9ef9fb033d5 ("bloblist: Handle alignment with a void entry")
+Link: https://github.com/FirmwareHandoff/firmware_handoff/commit/dfb62d83c735064291a249d802aabcf48bffb8a0
+Link: https://github.com/TF-Shared/transfer-list-library/commit/81d7f820853aa117a0458ada3b9892c619233db1
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- common/bloblist.c      |  6 ++++++
- test/common/bloblist.c | 25 +++++++++++++++++++++++++
- 2 files changed, 31 insertions(+)
+ common/bloblist.c      | 10 +++++++++-
+ include/bloblist.h     |  8 ++++++--
+ test/common/bloblist.c | 21 ++++++++++++++++++++-
+ 3 files changed, 35 insertions(+), 4 deletions(-)
 
 diff --git a/common/bloblist.c b/common/bloblist.c
-index 846c8047f74..4ddb4a56944 100644
+index 4ddb4a56944..90b70b06826 100644
 --- a/common/bloblist.c
 +++ b/common/bloblist.c
-@@ -169,6 +169,12 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
- 	if (!align_log2)
- 		align_log2 = BLOBLIST_BLOB_ALIGN_LOG2;
- 
+@@ -467,7 +467,15 @@ int bloblist_check(ulong addr, uint size)
+ 	hdr = map_sysmem(addr, sizeof(*hdr));
+ 	if (hdr->magic != BLOBLIST_MAGIC)
+ 		return log_msg_ret("Bad magic", -ENOENT);
+-	if (hdr->version != BLOBLIST_VERSION)
 +	/*
-+	 * The data of the last record does not have to end aligned, but the
-+	 * next record starts aligned.
++	 * Lists of version 1 and 2 are implemented the same way. Version 1.0
++	 * of the Firmware Handoff specification was withdrawn because it
++	 * specified an XOR checksum while implementations used the additive
++	 * checksum that version 2.0 specifies. Both are accepted for backwards
++	 * compatibility.
 +	 */
-+	hdr->used_size = ALIGN(hdr->used_size, BLOBLIST_BLOB_ALIGN);
-+
- 	/* Figure out where the new data will start */
- 	data_start = map_to_sysmem(hdr) + hdr->used_size + sizeof(*rec);
++	if (hdr->version != BLOBLIST_VERSION &&
++	    hdr->version != BLOBLIST_VERSION_WITHDRAWN)
+ 		return log_msg_ret("Bad version", -EPROTONOSUPPORT);
+ 	if (!hdr->total_size || (size && hdr->total_size > size))
+ 		return log_msg_ret("Bad total size", -EFBIG);
+diff --git a/include/bloblist.h b/include/bloblist.h
+index fcd290eeb16..f368a6acb85 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -76,7 +76,10 @@
+ #include <linux/errno.h>
  
+ enum {
+-	BLOBLIST_VERSION	= 1,
++	/* Version of the lists supported here */
++	BLOBLIST_VERSION	= 2,
++	/* Withdrawn version 1.0 of the specification, still accepted */
++	BLOBLIST_VERSION_WITHDRAWN = 1,
+ 	BLOBLIST_MAGIC		= 0x4a0fb10b,
+ 
+ 	BLOBLIST_REGCONV_SHIFT_64 = 32,
+@@ -179,7 +182,8 @@ enum bloblist_tag_t {
+  *	blobs can be altered after being created, this checksum is only valid
+  *	when the bloblist is finalized before jumping to the next stage of boot.
+  *	This is the value needed to make all checksummed bytes sum to 0
+- * @version: BLOBLIST_VERSION
++ * @version: BLOBLIST_VERSION, or BLOBLIST_VERSION_WITHDRAWN when created by
++ *	another boot stage
+  * @hdr_size: Size of this header, normally sizeof(struct bloblist_hdr). The
+  *	first bloblist_rec starts at this offset from the start of the header
+  * @align_log2: Power of two of the maximum alignment required by this list
 diff --git a/test/common/bloblist.c b/test/common/bloblist.c
-index 797bde27025..ef410ca62fc 100644
+index ef410ca62fc..3ae5eef3859 100644
 --- a/test/common/bloblist.c
 +++ b/test/common/bloblist.c
-@@ -360,6 +360,31 @@ static int bloblist_test_align(struct unit_test_state *uts)
- }
- BLOBLIST_TEST(bloblist_test_align, UFT_BLOBLIST);
+@@ -69,7 +69,10 @@ static int bloblist_test_init(struct unit_test_state *uts)
+ 	ut_asserteq_ptr(NULL, bloblist_check_magic(TEST_ADDR));
+ 	ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0, 0));
+ 	ut_asserteq_ptr(hdr, bloblist_check_magic(TEST_ADDR));
+-	hdr->version++;
++	hdr->version = BLOBLIST_VERSION + 1;
++	ut_asserteq(-EPROTONOSUPPORT, bloblist_check(TEST_ADDR,
++						     TEST_BLOBLIST_SIZE));
++	hdr->version = 0;
+ 	ut_asserteq(-EPROTONOSUPPORT, bloblist_check(TEST_ADDR,
+ 						     TEST_BLOBLIST_SIZE));
  
-+/* Test adding a record after one whose data does not end aligned */
-+static int bloblist_test_align_used_size(struct unit_test_state *uts)
+@@ -92,6 +95,22 @@ static int bloblist_test_init(struct unit_test_state *uts)
+ }
+ BLOBLIST_TEST(bloblist_test_init, UFT_BLOBLIST);
+ 
++/* Test that a list of the withdrawn version is still accepted */
++static int bloblist_test_version(struct unit_test_state *uts)
 +{
 +	struct bloblist_hdr *hdr;
-+	char *data;
 +
 +	hdr = clear_bloblist();
 +	ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0, 0));
-+	data = bloblist_add(TEST_TAG, TEST_SIZE, 0);
-+	ut_assertnonnull(data);
-+
-+	/* Another boot phase may end the used size with the data */
-+	hdr->used_size = map_to_sysmem(data) + TEST_SIZE - TEST_ADDR;
-+	ut_assert(hdr->used_size & (BLOBLIST_BLOB_ALIGN - 1));
-+
-+	data = bloblist_add(TEST_TAG2, TEST_SIZE2, 0);
-+	ut_assertnonnull(data);
-+	ut_asserteq(0, map_to_sysmem(data) & (BLOBLIST_BLOB_ALIGN - 1));
-+	ut_asserteq_ptr(data, bloblist_find(TEST_TAG2, TEST_SIZE2));
-+	ut_assertnonnull(bloblist_find(TEST_TAG, TEST_SIZE));
++	hdr->version = BLOBLIST_VERSION_WITHDRAWN;
++	ut_assertok(bloblist_finish());
++	ut_assertok(bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
++	ut_assertnonnull(bloblist_add(TEST_TAG, TEST_SIZE, 0));
 +
 +	return 0;
 +}
-+BLOBLIST_TEST(bloblist_test_align_used_size, UFT_BLOBLIST);
++BLOBLIST_TEST(bloblist_test_version, UFT_BLOBLIST);
 +
- /* Test relocation of a bloblist */
- static int bloblist_test_reloc(struct unit_test_state *uts)
+ static int bloblist_test_blob(struct unit_test_state *uts)
  {
+ 	struct bloblist_hdr *hdr;
 
 -- 
 2.53.0
