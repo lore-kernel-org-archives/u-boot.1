@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7C24606A329
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 07:18:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A2B8606A32D
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 07:18:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=0gnoAqcH;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=if3tAqwg
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=PpC344Ul;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=c5BQYmKd
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8A49C606EC;
-	Wed,  4 Nov 2026 07:18:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1FC0880DF5;
+	Wed,  4 Nov 2026 07:18:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7KlXwi48v7tn; Wed,  4 Nov 2026 07:18:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 88DD0605AD
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793776693;
-	b=EOVZuVY2SUXMuD0IcrOKDzWtP1S3+SrA1p9pWA8u3v+9vmlVXPFvpytfIUOAd8464Khf
-	 qCmlcP6OHBkf6bhjBODQlKhZZ7rJhUV+UOfepvRfBHVbWmrfVQq7nwa7WYas37yh+usqA
-	 KCrOn76cO86HoYLWZufNmzKDIGK0Lx3eLPAqCLH7QK+XeovkdkcG4cwrJPjsb7HDI9/QT
-	 +niQNqUoxVEDEj6aRjMtMjjDLDsw4JFH1D7MQwHAylJvc4dvzUm4nOEfV1CZmgkn4uS0q
-	 DiGA6WBMC/BbmoX3sJ+P9y9fUanrmdE+ovE+nPxCzCTTSjRToeEwE3ogcKqMTgi4S2A==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qrBLAUnmNIaa; Wed,  4 Nov 2026 07:18:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5435B80DB0
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793776697;
+	b=H/p0PVAIsMUTtUIK2yTnwgY4MYK4VqpnK93HxcGU9Do4EEDdbEOkmDCy+xkeNAgoBOvT
+	 kIIAcswACpavg1XoZtdbJRmJ6zl7laWA6Tww3+zFg+X7mFq+4QlFnttWwFlWsEWt/FpFd
+	 TAnU5xg1ff6QGqLJLchYTqqGWRpxtPjZsfgbezvUQ5goGUKBhs6suHIpox/Ztp6ftVI/l
+	 nPZARJz0oi8UuXxGyv3X1bpXO4xOtuR6kf9t+c4Z7ok3SUhWKf8rm5SoGQaTIjCWnR6kr
+	 oEeJA9idor2P1CcER40V/D7tIZDY9zJ3rFiPB77rrBWPSt2jFq2DFDilDdVkg6lKnbg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793776693;
+	c=relaxed/relaxed; t=1793776697;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,123 +32,123 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=AAxCLkbFGpQ1C8kRGb6gCRQXMCHQlg8CITuMGElEfZg=;
-	b=NVYwYkkWFAmt2BUbIwVjz6hEDVGXtNIVGHr5TOJmuqsCmjyRMeH34Eakz0UVUi7qJ7h5
-	 TfhGHtGwZViW+SiSIWDYGmMBB5/Rgsods69NiRViwcsx481KJyqpy+5hpMiowsTDJd5CV
-	 ZiEijp1FMbTmmoJe220lbvYmDv0yiYw8Z0RHG5sFWOg1hrROekqdrOcAlswn2ki2+mVBm
-	 jSrvcDByLGOSMOiGFMntVVgBoqscLpCZzARczPBw0U6w/s76CHbmfXybWD1PvtzduHBUZ
-	 qpdv5TBX5dUDqXZGGdlGYQz3hIgZIv0AWbaS7VCyTQnVoiFul3cRTpdF0DCpteC92uw==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=dW6kJa9sMKqG945ie51LYx09qM4ukuM1/VKihNxLTyI=;
+	b=Z+UsIJMHQ2s8DCw3Xm5suGxJ+M0H2TRA+sT/fC+vVC0fyn2S3MT/8kRxDeqaUAoictR8
+	 4+1TTwZItoVmvscgilyXXVpcU5vHgKIPhv0lAXBeOeMJf89BtfRVcCufevkjqYyJIsHGO
+	 6JJ+wHHekNYV6WsMoi5tMQmUxxPCetPYerPCcugU6WVGsdKh9ekwX1UUP010zkYDGt7rM
+	 Xp4xo34eCfND3qrrkkGq+glsVwfFwjo3C+ysvSuz4wOYRR0WsJYU8U3Zfab9bhWzWbjzX
+	 EQKinfUrUMBLZwOkCWUC5ZAFYppzN8ZOugjgre5ZaEcthAoTDdxHURb6Qv6brnTHXgg==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793776693;
-	bh=AAxCLkbFGpQ1C8kRGb6gCRQXMCHQlg8CITuMGElEfZg=;
+	d=lists.u-boot-project.org; s=default; t=1793776697;
+	bh=dW6kJa9sMKqG945ie51LYx09qM4ukuM1/VKihNxLTyI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0gnoAqcHfQT3ZPh/SqgYs/pTvG7zkbj8nKgUEo0CL4BYrkiKgROvzaJW2lY1yBRHc
-	 ewQqEQi5Cw6PmDNKtWoENH1XIvwA5x+6vIn/ZICGeYaIsgxsfu+/wCDzL7ek3Yc2gD
-	 Xs8g9hv5SV3X24dlbrc7BAZpzrFYpQlUwLMGAMVjjwEKF9CURfyCFz8dksppRzjh5N
-	 LW52OAfu6Z32U9Y5lWivMD068QAGKQoZOKu5uu9vr9x/9DWK7llMCWusb/Wj7ujqHA
-	 3fRQWPqqSDO29/RINOHYdh4dJ9Z8DSNfBeB6plTv81iS7MLVEpbbKcHiuWrywKp6kt
-	 OOEZtuFdVcV2Q==
+	b=PpC344UlelKXNPNIfnzn73RHYP+A0K1W9AukIss1GnCCT4+JWV/G9ACfQQPwOmkVZ
+	 ABGEyU4j6Gtyv1Y4o3EwdhG5Or/8dmnKGuua+PMWbpRugOyPBvCraIBW2z0benmEWj
+	 FnEv83RdJb+N7MChOonvFJfQWnHLacjZ56VgtIMeBhcp7bmy8enFsPfTNfcxHTZIIj
+	 qjx6v/8L6s9XQpRq8ssakC4fVwScw6K9xgqt++PuZ0CPVRPxUKsdbEJDHL5MN/4lwv
+	 2yccFVhkmyJ16fh1sIM+CJjaqd6JAG6OGss0cgXLJGStmsT1PqwjwmdrQkoRu6F7zN
+	 /AF+RKjUuIPDQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 88DD0605AD;
-	Wed,  4 Nov 2026 07:18:13 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 614F7932
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:18:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5435B80DB0;
+	Wed,  4 Nov 2026 07:18:17 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0759D435
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:18:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 45FCF405CD
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:18:12 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id ED6A940176
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:18:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id njPlMzD6ROeY for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 07:18:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 37010405C9
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id f-hF7JrvinOc for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 07:18:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 183964004D
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip="2a00:1450:4864:20::330"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793776691;
- b=XLfWzggks/H/S9vbHs7IvazE+qRVHGTwhD8k/VZpz39s+6jKP9lYHpRWugPHz2/EWBcb
- WQMruEHoGAPWEIfGbgKB6gcE591vytxNeeiVEIrufRhtYIHrVYAqoWZxXKDDAWBNZzbOj
- 63+7ojVLE+k80fiYE1iQ+g3mErU40O9eFIknsSpF0Y3m/oeDPzv2/d3vuZSV6qdh8IFGu
- vjP4KWGVUfi39e0CYDAkd9AouTEfseN2FQ/BZ98PvQ4XpEwXJvUIYvBmQdW/AzSsTl2UF
- 932/JY4XJ5OlpNFlDgCj8QnSxf47Vm/B+tAo7+bHeg8ByXJizN2OXFMwXAE5zSHznnQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793776695;
+ b=o4VQLfhTnNYAAZC+8wLJBaPeFYzDr0YT1bdYOILtjAxTgHX1m5XIohzmP37ufVNlwWMy
+ Ffx+xykddKmI9zuiIwHUMUGAocQo6fvZBfR1bNsTgoCRP2O32N0Cx4FxrOY25fTMMM3tg
+ tG0RtNbwAW/D+Z64r/pn/ELQu/ZjlObzzvgCDGBs6SSnhDTXIYDtrH+I237VyWX88WjDf
+ 3MjfE4k7ZIQWg2hBIBOE+5MJsisXAGAwIwhx1+DZ19JX3yLjRTnCUQaHbF1rPveoYrEvb
+ G1zdT7LmEZgYDvAf7+pOoi4f6qFOm0e5rulT/EOLQX/4YGk2s+fgnSCus6wrcOHwdcg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793776691;
+ c=relaxed/relaxed; t=1793776695;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
  Date:Message-ID:In-Reply-To:References;
- bh=AAxCLkbFGpQ1C8kRGb6gCRQXMCHQlg8CITuMGElEfZg=;
- b=DxJo2p6rhGSvrLwjGIBqG4swS8eNnAiR2SVVc+lWFG8hwmRyrgWRasgtWY2wThhLZboe
- q2AqQyJuvXs9qEGoVKlPy1DEqGb4fmistdyvBxDv4GY6SDhUCO059Ck633GsavamScHoA
- dukLxSAQgqJ3vOElNQFtefZ88M0/KhocBg2qC9KtfDlbFZ8+hbSyvlNXArX+tntnru6pq
- eDRmAeMPVyE7K/aehxigyhJkw6PtVLIlFooWa6LFmeKWAAZt0J/b19WyfE7GAZLxxvI/X
- CJNEDVeHbgZGQN/9rbJX4V3fcaKiBvwUmYv3+XO1ZBQxnPAocRyCBA9wIbvlMyT/vbA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+ bh=dW6kJa9sMKqG945ie51LYx09qM4ukuM1/VKihNxLTyI=;
+ b=DNzNFTUKHIA2jV2F8c0FmzdPxMiox7IpKdd0GN1nYCGjTu+p/0ECSVGh/OaLEep4IioM
+ 8PO2L5xWNGAR+5MgLDxpbx+0475zqO0Enq1iycCxpUbX2I4fTe+6Fqt/GklLe06afHkI3
+ SZ7e1gY0QGkD6OK8ZbybmOVt9nJyMOy6gniBVo269D6hqw+qAjAmQ5dIOOoJ77mxDay7w
+ S8pJYHaRxk44ScCqhi1c4U/beAGQTMiYY0IhNqNxgKJmOFEpJdNnI5PwwNFfTnPHBk/F6
+ gDL9EOIXz2bWBNn+Wn/+NCNU09+hVenIY71pv6h05C8/6N2762mlIr3ip7mY7umXkXg==
+ARC-Authentication-Results: i=1; smtp2.osuosl.org; 
  dmarc=pass header.from=gmail.com;
  dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=if3tAqwg; 
+ header.s=20260707 header.b=c5BQYmKd; 
  arc=none smtp.remote-ip="2a00:1450:4864:20::330"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=if3tAqwg
+ header.a=rsa-sha256 header.s=20260707 header.b=c5BQYmKd
 Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
  [IPv6:2a00:1450:4864:20::330])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 37010405C9
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:18:10 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 183964004D
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 07:18:14 +0000 (UTC)
 Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4a2167bd087so2312405e9.3
- for <u-boot@lists.u-boot-project.org>; Tue, 03 Nov 2026 23:18:10 -0800 (PST)
+ 5b1f17b1804b1-4a35db1f202so1980495e9.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 03 Nov 2026 23:18:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793776689; x=1794381489;
+ d=gmail.com; s=20260707; t=1793776693; x=1794381493;
  darn=lists.u-boot-project.org; 
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=AAxCLkbFGpQ1C8kRGb6gCRQXMCHQlg8CITuMGElEfZg=;
- b=if3tAqwgv+0X9wIDlyq2FrHaNo4xFZaxrr2Y/og2aVFFYKOGuQDhTQwYn3rh03YGbF
- pdTwIe3Hdy9DmqklVJ4N+ezMpnOWiUpDSFsYDJAbbqla/+fp2hdq/53cKc9GBHf1wzjL
- XGIwtD3OulczmKwPhOb8b2iVF7YWmCk1TYWIm1so9yekKrZQuieat/i3AT75dYsTFw72
- N5HSSJMteCOAVMqlBYTyspcqM/DyqKWcV7IJrhlub085+igIviygMZe4+q1draakYU2m
- glaDf5qfuIOFCg/P2f4erwcIv2f3i+KEr93xcm6QCky8SXv+irZtch7jPjuqzDkUpxQG
- bxLw==
+ bh=dW6kJa9sMKqG945ie51LYx09qM4ukuM1/VKihNxLTyI=;
+ b=c5BQYmKdlUEDmaAktvySzlI0g+si8osfKMJw+mE7G17LhlZpIRW7hpBjlxeD69Dps6
+ +UXdAgn8zZju/fs2wp7HYxKnvTCSB3aSEJGI9eedV7i5bP1CpIJAKW7/M/ooMTPVsRoz
+ 6choX97ev0fAFpOZ8f1IuxzTeZs6Dwf+nPWvVXXgC84uGCbcjYLORwhQB8q20pX81Ecd
+ mLcgjOlSp6XQ9iB2WY1j6MLRvVMgiQef+oZRPy10kculfh+7MGcmdNf1XtwrNR8+F5Qc
+ hmVza6aNPiQnP9DNEVZWkFit/kqhmu3hQeF0DiNQ1w9YGxAGq1tCnZIXujyZRffaJ/jM
+ RfpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793776689; x=1794381489;
+ d=1e100.net; s=20260707; t=1793776693; x=1794381493;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=AAxCLkbFGpQ1C8kRGb6gCRQXMCHQlg8CITuMGElEfZg=;
- b=F6jyXM0bVuWSppbfcBu9EjPGZSSoo0fBCWTsCw843uaRII5CQqWpAJkX68IA+k9NhW
- M3Y5z0SmXNaYcihkKN21MybWk8vc7ho1ZPyuKqfP+/0Ut6oc2YBRMdg1o9Pqw1zH232L
- 7cE/tecUNpo63ukfZcvBC6KzY9OktVw3Gr2ly7c8MfH/sTGj7gmgEBvbb0tIwfgs0pVU
- xyhqSI5KYNhcKbeww6A/ybQvErhsAIh+/OrFkrOdSOdGjLzmHS5KjSxbEdFKjTZfQs8b
- mB7bs/NoqXkTm8v9yvGuL6glXvf8l4h/S+hatwv0f04wxhRc70rmJp9cpcpWKjij1y2F
- qbEg==
-X-Gm-Message-State: APuU4Z8zq9zG1bl/fQceoKcbQ7WimL2EfthxH6V1NvciZ/J8R1e8m89L
- o8LVyR3n718qGtuNLGrK4JTwA/xU2Wby08Gp/MYzOJy+rsru9sW6AhXhUScUvxzl9J0=
-X-Gm-Gg: AYBFou3kY9hoRTad7WTFq5mu+NvHChtyJJqREOrtZlEpJGhq276jglcjrX5JilQ+Yli
- 7fq4cF58SXzkZDurWEKln6lhAdZPeA/VRJlb4dh3d7KIX9oGQVBp7n5XKPffG26S0WHmtJV6vK2
- DNGgzyTvTi4prvhGXH2t0/an7oxqueXecfknuReU5vlMMCUbKi5DPBHpRuSUwO5qLpgA7MGrW5t
- 8IIz+VjUlN8/6qznKn8EweELLjoMo9f3lEV6dMG8Bd2CSiGu6XH/KA3V7NZ0YERx5k+6AT0pS3i
- b5tKFAqmk/9SSjMPwFKHeFn7nHR4elPdIjXe6nW8hxfUM3dLGSP9I79dtRwzUGTZDKzKyym/2CI
- NPectKDioI2wPXmUx7W4eFNJD9YFnouY8k/IDH4goU7ATKHWe+bviZVLt2hnODqViTd7ZcI6V+x
- vfinQhyLkqm5RGyjWYK34B/iUYCVxL1Jc/HsZs1B0COxofEwhhU8qoAKJNITVhr25rTji5wTPuF
- v6B0nUfWQ+5NxML2iOeRKzLBXiHlSkK4GxNHOZLL5/hTGeLdlmnj5YcFXtdOtb4Rqw7mLHkZ9no
- FRnDh/ukO+uFQwFlNp0r4ppm36t1W+o=
-X-Received: by 2002:a05:600c:3554:b0:4a2:267:25b3 with SMTP id
- 5b1f17b1804b1-4ac18c7461emr376299595e9.35.1793776688906; 
- Tue, 03 Nov 2026 23:18:08 -0800 (PST)
+ bh=dW6kJa9sMKqG945ie51LYx09qM4ukuM1/VKihNxLTyI=;
+ b=Uro9upDlqM+CfNqrexY9UO3bFiZS5MjiTYulAtbTaUqCmEiSIasW1PafQhZs+eudVg
+ hjZq3cOYvdtDd2joCMaj5gahArZIQkiXVAQE4Cdc4rKim5FjpyOlwNbbIuGDd8Uvx8d9
+ Bw0BvpHQlHs6gP1ZUNI9jMa/rxuG5Cjcqsg/DJf18YXBq4qUkKLqpMnQbqsWczY0HvbF
+ 1UUqI0s0V9AI1hX9cgruQfG6MXqmvpxeWlnvDFru0UEqn9N0q0RUnCQSbg43iy4XZg8d
+ gezouPzZN1OiZRTmSnpA8l74gYSY7bvFigcyuyIyAta7NCDMVpeV9mCFQb1VeX+h5+Pj
+ LYpA==
+X-Gm-Message-State: APuU4Z/C2YyPluphjd+TN2hThDdztpcqSY0s4GcIMuvuO0NU+UhvbaOs
+ zLaUB+Z821sW/kUy0g8QhbQPo+UUmPoMGN7Yt+7TLhJDGGKgwrJCCnFqURi7nj5Lk1I=
+X-Gm-Gg: AYBFou01T7T76tgpwAX+2Jk37ia7MpHcms2Fwuk8L7sn4VNs4KRf0L66E9SYlmTosII
+ 7urSfZaQtmoyT+M7jvCDAJfepuSjFrNbhYVNAFLfNb6GExa53HaZYH2bPOusSbXEh8dq4KrkK1r
+ YoZUgayeYz99poNBdO+5RyxXiTkoZudmIClYUaNrOk1V36n6a+lAzU3rqe5+9gfAc+I/+5FxYrY
+ SgaTOF6VrVloWJcZ8EGtOX/I0wSFHsJSE6p+Gm6G2La47T4tGgLfP+Jnf92/RiGl3mPffO8yV5S
+ OGY7BwjOIz4g8+n5y30/x/bCR0Sk0QaQf/l/QOMk95Ano4O3P5B+gSdjhbw37F/10OHM78caG76
+ SGXlc/4WCjpy//JBrJ70+4JifGL8+k7UBzS1iJA4LafdBfezTYn92OvmW6bhOpojgWQ+oau3j0H
+ KIka2xAh7U33n0n0R5N9bCQSeoL1EdLG4XpPuhVAMnGf9KyB5HezMeeahOmE+lI2o2PbW7adC7d
+ UEvlb8C7WaPPMlzE46kdTg2PmwcI8sYsqZREcbyhAkQkDI58uOmKLoW0wJisTvJl+IJQJkjB8fJ
+ JsBlj31KUjBAaTv6PCpbuZigzavuzOo/H90i9id+2PNUQC3C4NI1
+X-Received: by 2002:a05:600c:5246:b0:4a1:d459:db4b with SMTP id
+ 5b1f17b1804b1-4ac1889c7bdmr349518615e9.24.1793776692617; 
+ Tue, 03 Nov 2026 23:18:12 -0800 (PST)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b43c17ecdasm52982115e9.5.2026.11.03.23.18.08
+ 5b1f17b1804b1-4b4320efc7csm14997655e9.2.2026.11.03.23.18.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Nov 2026 23:18:08 -0800 (PST)
+ Tue, 03 Nov 2026 23:18:12 -0800 (PST)
 From: Ana Bobillo <anabobillo3@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
@@ -158,10 +158,10 @@ Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Tom Rini <trini@konsulko.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>
-Subject: [PATCH 3/6] usb: gadget: f_sdp: write report 2 data only within a
- download
-Date: Wed, 04 Nov 2026 07:18:07 +0000
-Message-ID: <7caa5a02-b6b5-4666-a1f1-7aa8fb3ce10f@gmail.com>
+Subject: [PATCH 4/6] usb: gadget: f_sdp: decode the command's address and
+ count once
+Date: Wed, 04 Nov 2026 07:18:10 +0000
+Message-ID: <86dbb40f-372d-4894-bdd2-b45f38b28e94@gmail.com>
 In-Reply-To: <4bdba9dc-0c21-4e33-8f20-2c0a7ebba0d6@gmail.com>
 References: <4bdba9dc-0c21-4e33-8f20-2c0a7ebba0d6@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -184,75 +184,75 @@ X-Archived-By: <archiver.kernel.org>
 
 From: Ana Bobillo <anabobillo3@gmail.com>
 
-sdp_setup() switches to SDP_STATE_RX_FILE_DATA_BUSY on every report 2
-SET_REPORT, whatever the state, and sdp_rx_data_complete() then copies
-the packet to dnl_address. Two things follow:
+sdp_rx_command_complete() converts the big-endian addr and cnt fields
+of the command in each case that uses them. struct sdp_command is
+packed and starts one byte into the report, so every conversion is a
+run of byte loads: six of them across four commands.
 
-- a report 2 sent outside a download (after the previous WRITE_FILE
-  completed, or during a DCD_WRITE) is still copied to dnl_address,
-  where the last download ended, or wherever an earlier command left
-  it;
-- the last packet of a download is copied whole, padding included,
-  although dnl_bytes_remaining is clamped to zero: up to a packet past
-  the length the host announced in WRITE_FILE.
+Convert both fields once, before the switch. No functional change: an
+addr of zero still selects CONFIG_SDP_LOADADDR. This takes 96 bytes
+off the SPL of imx6dl_mamoj, room the closed-part checks later in this
+series need to stay within that board's SPL size limit.
 
-Accept report 2 only while a WRITE_FILE or DCD_WRITE expects data and
-stall it otherwise, and copy no more than the bytes remaining. DCD data
-is still consumed without being written, as the DCD commands are
-stubs. The host tools (imx_usb_loader, uuu) send data only after the
-command and pad only the last packet, so their flows are unchanged.
-
-Fixes: 5661f08a7144 ("usb: gadget: add SDP driver")
 Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
 ---
- drivers/usb/gadget/f_sdp.c | 19 +++++++++++++------
- 1 file changed, 13 insertions(+), 6 deletions(-)
+ drivers/usb/gadget/f_sdp.c | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/usb/gadget/f_sdp.c b/drivers/usb/gadget/f_sdp.c
-index 20de9507d36..9af411f16ec 100644
+index 9af411f16ec..aff69c3a138 100644
 --- a/drivers/usb/gadget/f_sdp.c
 +++ b/drivers/usb/gadget/f_sdp.c
-@@ -402,12 +402,11 @@ static void sdp_rx_data_complete(struct usb_ep *ep, struct usb_request *req)
- 		/*
- 		 * Some USB stacks require to send a complete buffer as
- 		 * specified in the HID descriptor. This leads to longer
--		 * transfers than the file length, no problem for us.
-+		 * transfers than the file length: drop the padding.
- 		 */
--		sdp->dnl_bytes_remaining = 0;
--	} else {
--		sdp->dnl_bytes_remaining -= datalen;
-+		datalen = sdp->dnl_bytes_remaining;
- 	}
-+	sdp->dnl_bytes_remaining -= datalen;
- 
- 	if (sdp->state == SDP_STATE_RX_FILE_DATA_BUSY) {
- 		memcpy(sdp_ptr(sdp->dnl_address), req->buf + 1, datalen);
-@@ -415,7 +414,9 @@ static void sdp_rx_data_complete(struct usb_ep *ep, struct usb_request *req)
+@@ -306,10 +306,11 @@ static void sdp_rx_command_complete(struct usb_ep *ep, struct usb_request *req)
  	}
  
- 	if (sdp->dnl_bytes_remaining) {
--		sdp->state = SDP_STATE_RX_FILE_DATA;
-+		/* DCD data is consumed, never written to dnl_address */
-+		if (sdp->state == SDP_STATE_RX_FILE_DATA_BUSY)
-+			sdp->state = SDP_STATE_RX_FILE_DATA;
- 		return;
- 	}
+ 	struct sdp_command *cmd = req->buf + 1;
++	u32 addr = be32_to_cpu(cmd->addr);
++	u32 cnt = be32_to_cpu(cmd->cnt);
  
-@@ -509,9 +510,15 @@ static int sdp_setup(struct usb_function *f, const struct usb_ctrlrequest *ctrl)
- 				sdp_func->ep_int_enable = false;
- 				break;
- 			case 2:
-+				/* Data only follows a WRITE_FILE or DCD_WRITE */
-+				if (sdp_func->state == SDP_STATE_RX_FILE_DATA ||
-+				    sdp_func->state == SDP_STATE_RX_FILE_DATA_BUSY)
-+					sdp_func->state = SDP_STATE_RX_FILE_DATA_BUSY;
-+				else if (sdp_func->state != SDP_STATE_RX_DCD_DATA)
-+					return -EOPNOTSUPP;
-+
- 				value = len;
- 				req->complete = sdp_rx_data_complete;
--				sdp_func->state = SDP_STATE_RX_FILE_DATA_BUSY;
- 				break;
- 			}
- 		}
+ 	debug("%s: command: %04x, addr: %08x, cnt: %u\n",
+-	      __func__, be16_to_cpu(cmd->cmd),
+-	      be32_to_cpu(cmd->addr), be32_to_cpu(cmd->cnt));
++	      __func__, be16_to_cpu(cmd->cmd), addr, cnt);
+ 
+ 	switch (be16_to_cpu(cmd->cmd)) {
+ 	case SDP_READ_REGISTER:
+@@ -317,8 +318,8 @@ static void sdp_rx_command_complete(struct usb_ep *ep, struct usb_request *req)
+ 		sdp->error_status = 0x0;
+ 
+ 		sdp->state = SDP_STATE_TX_SEC_CONF;
+-		sdp->dnl_address = be32_to_cpu(cmd->addr);
+-		sdp->dnl_bytes_remaining = be32_to_cpu(cmd->cnt);
++		sdp->dnl_address = addr;
++		sdp->dnl_bytes_remaining = cnt;
+ 		sdp->next_state = SDP_STATE_TX_REGISTER;
+ 		printf("Reading %d registers at 0x%08x... ",
+ 		       sdp->dnl_bytes_remaining, sdp->dnl_address);
+@@ -328,8 +329,8 @@ static void sdp_rx_command_complete(struct usb_ep *ep, struct usb_request *req)
+ 		sdp->error_status = SDP_WRITE_FILE_COMPLETE;
+ 
+ 		sdp->state = SDP_STATE_RX_FILE_DATA;
+-		sdp->dnl_address = cmd->addr ? be32_to_cpu(cmd->addr) : CONFIG_SDP_LOADADDR;
+-		sdp->dnl_bytes_remaining = be32_to_cpu(cmd->cnt);
++		sdp->dnl_address = addr ? addr : CONFIG_SDP_LOADADDR;
++		sdp->dnl_bytes_remaining = cnt;
+ 		sdp->dnl_bytes = sdp->dnl_bytes_remaining;
+ 		sdp->next_state = SDP_STATE_IDLE;
+ 
+@@ -349,14 +350,14 @@ static void sdp_rx_command_complete(struct usb_ep *ep, struct usb_request *req)
+ 		sdp->error_status = SDP_WRITE_REGISTER_COMPLETE;
+ 
+ 		sdp->state = SDP_STATE_RX_DCD_DATA;
+-		sdp->dnl_bytes_remaining = be32_to_cpu(cmd->cnt);
++		sdp->dnl_bytes_remaining = cnt;
+ 		sdp->next_state = SDP_STATE_IDLE;
+ 		break;
+ 	case SDP_JUMP_ADDRESS:
+ 		sdp->always_send_status = false;
+ 		sdp->error_status = 0;
+ 
+-		sdp->jmp_address = cmd->addr ? be32_to_cpu(cmd->addr) : CONFIG_SDP_LOADADDR;
++		sdp->jmp_address = addr ? addr : CONFIG_SDP_LOADADDR;
+ 		sdp->state = SDP_STATE_TX_SEC_CONF;
+ 		sdp->next_state = SDP_STATE_JUMP;
+ 		break;
