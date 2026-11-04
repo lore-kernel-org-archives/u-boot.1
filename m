@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3085A606A326
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 08:51:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 097F5606A31B
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 08:51:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=NLMIh7jG;
-	dkim=pass (1024-bit key, unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=hpT3Vzmc
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=efUpGjKl;
+	dkim=pass (1024-bit key, unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=U+M4GF2N
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0C7C46084F;
-	Wed,  4 Nov 2026 08:51:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D9A6D80F74;
+	Wed,  4 Nov 2026 08:51:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nlsSY8iyecX0; Wed,  4 Nov 2026 08:51:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D81A16084A
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
-ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793782307;
-	b=jkWzZWvxSj1ADWA5IzmEFN0jkI6Yl175q8Pyx3o30d50Q1PrZhn/ANMV0tD+ABfyYaxr
-	 8afIbkLQda3QMVG+n9JONXY5SdA7GmwKitXHmcoXaGKtxHO9q5PQXIPaD2yDvgq1kWu1N
-	 4nivB7AJz1AnpfgAPy+UIfEkRyQwm3aXDtwfGcE9/zrrRk5RKyZ3GnYdrn5yTO13ULEhv
-	 ibhdBm4X/30GoWcUD+ql1P++CeqNReENc8YP4UKDTaKYAAomvxIdUDayRw8fSx71O0Rt9
-	 qUhx4YzNimcHeKSc7VciBF5oOF7cQDWKfrvPGzNMeLwvxz3c8WYgi/PCN0XbvMd0ZaA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UNy4kfhB8wJf; Wed,  4 Nov 2026 08:51:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A194B80E16
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
+ARC-Seal: i=2; d=osuosl.org; s=arc; a=rsa-sha256; cv=pass; t=1793782309;
+	b=Kg6wX6eUvv2lGXBlUwTnPPWlgFYhICae8gpnN4+P9ePLo6Iz8T8MPms7Hj38BNVKYtRH
+	 qlfWqEmYoVyAXik/hGZH9mqNrDOfF0d/spd8tlugLB1NpyPB+5Wepq+QThuhHTmEST26S
+	 U1vZl10Ct2LGDBrCGiopzpuP9KM4rIZpZZsaa9QtE7lhgDwxYW6ajVj0j3tT4lr2HzmE1
+	 WtbBNsw7s2Xt/JlPhHaR6fKL+gG/WKXFzklQuwwedWfNI+rT2QO/PzuWn2kwcSGFSdJni
+	 qve0B96htpv1k86YG95JveNVwzR6OqqK9w8cBWq/Drqp5qUcJ4x/r3Pqtg7GQApKySg==
 ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793782307;
+	c=relaxed/relaxed; t=1793782309;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,129 +33,129 @@ ARC-Message-Signature: i=2; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=1fYDYK4/0py2sPc/P4MXBMkGVAuK0Mp193TalKAa6Zw=;
-	b=DZ9hkYJ34+UbfqGZobOP+T6KXl/fJUFuAWvrI4109AZz/+x19QcwygSaiJwDcqq2iO0X
-	 iZT/Yz80j5kEGTnHrFIznlAnPLol2+GWCACpbni9ErjhkXUZ/RC5gvmdrMIHMqjM9RNIL
-	 JycVL4sII7QSJdfb3xR7w+l5KLeUGIZRF5a9crw1k1zImS0/hwXZQkWz5BMB1KJTiodib
-	 waggZRFor6JVVNVLbpV7GMO6g/mBqLSx+aAGffD5tI76tt19at+yt6cKNpiolTRoVtsVS
-	 2a9/af6G8WXeKVfxv2DvPm53AZFo5NeNaTa3fiHUJQzcSd6T4HUIMDCxBYT9wWVRgxg==
-ARC-Authentication-Results: i=2; smtp3.osuosl.org; 
+	bh=YSUHCIDcmZzEeXSprcIzOzkXpsWfub2fItkHzGBqiCw=;
+	b=gMC70SSx8fFSXh2BlOZctcqAF8Ub+4iZjUfruKy7umSzGtP0gr/CLvghUbKnM5DJwDuD
+	 XsMOJNtTOmnphYNMe3t7ihzouXJTePs9aSJP4i+aw7CdtAvEptlMUPjWWZHhEyTUmdmgm
+	 nrzoabKz5yTnaF6ACYhuyUzkt97OmaEzXEi5gF0R5ai/AgnE8ix926dK7UNoInp+O26+z
+	 2e94s/2kIaU3GfpJWxn6qJoLvJ9vhpMVAQ5tHW0f6mLeq/la/wfK+CquPT3JPDrGAd84p
+	 o8DM8J2Rs6I75OAhXjeIX94JgwTHjU+I2xUpIqehVKD/aw5/b5rrdp7/3KLpMqzes3A==
+ARC-Authentication-Results: i=2; smtp1.osuosl.org; 
 	dmarc=pass header.from=amarulasolutions.com;
-	dkim=pass header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=hpT3Vzmc;
+	dkim=pass header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=U+M4GF2N;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793782307;
-	bh=1fYDYK4/0py2sPc/P4MXBMkGVAuK0Mp193TalKAa6Zw=;
+	d=lists.u-boot-project.org; s=default; t=1793782309;
+	bh=YSUHCIDcmZzEeXSprcIzOzkXpsWfub2fItkHzGBqiCw=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=NLMIh7jGO+6drojYj5XQVWV2iMOJAWKqNki1z3w5SG3rWEx2DvixprsYG3k/TEmHP
-	 1ssbE9AAcvvpyNMIllNlesUIIwyLY68ZpSh0Vg/xAy+9HTBWv7iFuNLcxeGXtwhWM0
-	 s3TgXtV+TOcTOGdsYDxsyXXoVlrBQEOJD3K+Qjx+I/j4I3Mp07ELunD8jQcIc7mpUa
-	 PUtNK0xuGdwL0weJhKDFhoYuVUEkNdh7R36TflXUI391mYtDAdxuWjNqEZYj7Dnod0
-	 vPHxyZZqf+H1m1spbtf2vU2yx/u1n+14+rAGljS9/ka93ecJITajU2TJmxl9fBNx2I
-	 j8ZSsZ0pLA2dQ==
+	b=efUpGjKlnjIxOlCIU/u3foyGCXE0vtdKs2BIJiVhkIVgDuHEmjQKcsUOv6RYxpF0I
+	 hyOtvhn+/sBHG3L1p/AyGKaELjnatKPvLBqmJHGNvttCRulElvc4Qs9UBvdzvIjzsP
+	 z2VDSp0UlvA2mzQ0RbHSQT22MCsHN+jjBr5PUPqRScDS5biCegmlx4w9gxP9dTzEh/
+	 dz5XHHjTNZgg1QbiJQu5byQRIXnr+Mx+sMIAGflFajxRXm91tyPhRMhxGugjjJvcmo
+	 w1QLgWD6S+6c0R76MjBcePl1kZyhiiyKfiGxU45vvKrqeHHYN02VH/CQDb8IePUsaz
+	 Xh6DK9qtPps1Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D81A16084A;
-	Wed,  4 Nov 2026 08:51:46 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id AE5BB2AC
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 08:51:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A194B80E16;
+	Wed,  4 Nov 2026 08:51:49 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7BDDC235
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 08:51:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9F6F96084A
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 08:51:45 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 626E180FDD
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 08:51:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jK30CObmrtWx for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 08:51:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 609DA6083A
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32b"
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793782304;
- b=nSXELMLhY00/caYGWi/G+V+L3HxcihF0rDtDdWkmwzyz8ccJIhZlMICgo0bHL461Re13
- ADCDNZoryEdCg4rswwlYZDcf3tsdWIJ0necBlqeFFaa0cfau64QTuyNvIhCrgRLtby4P6
- VSQt+uW1iAzyolR4F3Mi0+t8WMzJpha/gBczpJdPjijV442mrxOwHlwfq+lutp8pp0tHj
- /83DYDFXbQZNfV1QEPwAEce81x9xvI7aDv6syn9ravisvgn48dx/DNWcQVFGvAbZ1P9+4
- mB/9msqoYOrZZH++MTc0/BCNwwCX7giTsLlkvX6WtUigTy8gUfIfcBv5S4uOkoL6kjg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id cUXg0EX823ok for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 08:51:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4639480E49
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::333"
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793782307;
+ b=aenrCiKe7cC3YXmoAI7dINpn49Pjy2AHJdg61WbO1q1CEzj0+Agex2F+IHJI1e6H3flB
+ 48LOC48EkHrWmltVC7eNt1Ksvc5px5UeSQBYKPlLDfmrnqsLP/cV3gjPSWi+mK7m6cAEa
+ 7N2XQznmxH0jXFFEuDK43Lb+XBpCfeYMKmC63foktDVs2PKOocPaioFToqIdFkGH1dyGW
+ LQQw2ZD+hSdNkDq/fr6k8oh3qaNtYr6lLeEkTwubgsb39zAc8k9/33HsIPkPFs6umzWD+
+ m+UUhoDcH+W4QEbP9W8g/XToyG073qs7FEFxvCZfK70DpMK2SSl4xgqJIPX7UqzD6mQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
- c=relaxed/relaxed; t=1793782304;
+ c=relaxed/relaxed; t=1793782307;
  h=Received-SPF:Received:DKIM-Signature:X-Google-DKIM-Signature:
  X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
  From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
  MIME-Version:Content-Transfer-Encoding;
- bh=1fYDYK4/0py2sPc/P4MXBMkGVAuK0Mp193TalKAa6Zw=;
- b=aY9TMrNXcQ5llq8dVbGOk4j2ifRrLvRdmCBl2TgXST4Zehp4+pTu2ln3EicrPzWO+nUw
- +lM6SdTUiC4U96JIFwtgbRb5yFq8x3kOsIZ4zUaEvKbqL2Ww4DB26B2UeUwvIy4XDDVdf
- H217aFcYPM9hmDw2UDZI25mbKVqTDOSYgQVz3lmnR6GYCcINliYrSCuJZiIwSSLANli+C
- VeKfEXejXXWbgDKZ1DSZjUKEL+cjn9wbn/Hl692bZPwQ4+Bq1RcNIUOBCyz1F/ndua95A
- lq6c84t4+xrNcT9OMraIoCrBkbQR7FQ63eU5ov/km3sIMkURPG/fO8ZmTsNrCjcofyA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+ bh=YSUHCIDcmZzEeXSprcIzOzkXpsWfub2fItkHzGBqiCw=;
+ b=bLFBD6Qr/hM71HRsWOQb2jnATTFZ+Z1tM7OplVgK0YfN6GlRbPNmQV0v5wuE8mlanLvZ
+ tfYBSahDjfcWAdnpu4z7QdfdoczEip8EryHljSpokkgjQKOxvO8WI0S9dYLDPQTmRrg9c
+ PvbUgE4/H2u8XDl1vQQn1P9vIJ3GjB3E4MKK2MnzU9E+CxNYEAHq56gGBFR4aFsPUlvGr
+ z1KYXJjQdVALePq2BHdEfg++N9gsZ2S1TfueqSYfuubn8LTm2P/yAc8Dk29zB6U6xrXYY
+ 3kzWgHhmDu/Bq0SQnh/k50Hl3nDcVod4tWgDIKx3ZM0PSSpY7Q4n45Pcp8lyqr+u2Pg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
  dmarc=pass header.from=amarulasolutions.com;
  dkim=pass header.d=amarulasolutions.com header.i=@amarulasolutions.com
- header.a=rsa-sha256 header.s=google header.b=hpT3Vzmc; 
- arc=none smtp.remote-ip="2a00:1450:4864:20::32b"
+ header.a=rsa-sha256 header.s=google header.b=U+M4GF2N; 
+ arc=none smtp.remote-ip="2a00:1450:4864:20::333"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32b; helo=mail-wm1-x32b.google.com;
+ client-ip=2a00:1450:4864:20::333; helo=mail-wm1-x333.google.com;
  envelope-from=dario.binacchi@amarulasolutions.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (1024-bit key) header.d=amarulasolutions.com
  header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google
- header.b=hpT3Vzmc
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 609DA6083A
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 08:51:43 +0000 (UTC)
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4a20bdaf39cso3798255e9.1
- for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 00:51:43 -0800 (PST)
+ header.b=U+M4GF2N
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 4639480E49
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 08:51:45 +0000 (UTC)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4a549cd7fd2so3376265e9.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 00:51:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1793782301; x=1794387101;
+ d=amarulasolutions.com; s=google; t=1793782304; x=1794387104;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=1fYDYK4/0py2sPc/P4MXBMkGVAuK0Mp193TalKAa6Zw=;
- b=hpT3Vzmcjv8TUxjcok9zb6USryEOC1z8h05YWs8uGEp0VW3RZ961nRbRjaON0vgH1P
- 6IIgX5jaxbYBK3PnBhUBQpHXWP2QNwYwS7A+9PR5gIVKh0R1XNEKkK05m86o9Qe1Yly6
- IoHSHr4UHBSL+mBHHRaVQGDiqmwWLEydTB3II=
+ bh=YSUHCIDcmZzEeXSprcIzOzkXpsWfub2fItkHzGBqiCw=;
+ b=U+M4GF2N9fhczDYd4mXviXmF7jrNMDgK7Mr2I20HoBmOiwx+8vpf+EhT1NyyZ1DNZH
+ ULAavJWcf3Wel9A9Jy+jYEMxwsi6EoksWDGq1rIYIsYuzG1lf6elxMqr212ENnPIPIoc
+ EhQo9ZcgVzIXzztApTHBK0WQn6OTlywqXzWHs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793782301; x=1794387101;
+ d=1e100.net; s=20260707; t=1793782304; x=1794387104;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=1fYDYK4/0py2sPc/P4MXBMkGVAuK0Mp193TalKAa6Zw=;
- b=B+YsTQOyKQRNfWV8TSxAK+NU+A0cVb7LC/ObsiyXTKP1KMWr91/4NymRQdzG+xoukF
- rwJGdfsN3yq6q2j5YyUGBUIKTGX10jyF4UZLrNJ+gXsZ8vhrWktcPeqIKmTG7lh0jeVP
- /v7ySZbU2A8E7yNhG6rmVIWWCO8eW88AW7O5rCXYloMtLaNh3oeJ7AMr1peeFG85iTqv
- 5OkHn1C/nR9tvA395ojAM1Vb/LkWq+tdJGFQ02wRxFKi5yl6NXFUEUVvc8+BbHNxJNz6
- 5EYW8rR5tcORlsjsoQGvnAaWPdub2QRZ/yhowtgfzjA93bhRjnGgq2W14P3xVbpWtDFp
- H2nw==
+ bh=YSUHCIDcmZzEeXSprcIzOzkXpsWfub2fItkHzGBqiCw=;
+ b=NTg8ciSptZq+G0VkuZvxEMg/vmH1QSDnGko4dVq1WxYmIHREx3LCRP+1y6sjvAgKCz
+ A2mra+Vkgo2JIcTCbE7cy48tZW8oYVMFabZxx575sXSZ47AShDZjEIaXDYDVvz9KraTG
+ JhcdDpK/2G2LbYLIHzFPSvFFCZEzhFh0D1k5MqhYWzM1gNfXvzkZBXSNuMDwKpyc1OgF
+ GTcNdKTVIwbBCjZK5Kcuh4+LPsUWx8t1KdsLMJvPhb0QfNoeTJSRE01f7YkQbuMx4yyr
+ 6Vnm7lrKTSVpURl4q+UIrCNHKwYlYDTvWSkTp1qlkG17FJbbPv3gCCFvQ9CR7X+Nq2sP
+ M/ew==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzcoZETskeMuKvCxVyyRPxRYjErTvAp56dPAHLzj9ZrKgAl4w659AXxVOMfFNlED5EPqip/KHI=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/6LiLVJ7lVKj7KbOOOkYFkEK0edNatJyF9Pjb3VzuaCct8lrAw
- RVl05DUDRz+ySvvOLQWeGNdIxjq2No/F87QPF9AsEWMuhIUFcunydHg3b+aWzpjv4lU=
-X-Gm-Gg: AYBFou2hRj/CsGnh7G2kKxcyyDLp7uMA7MamDAYpZBKj8yJEW6/aFbLNQMD3Mpde10W
- ONrzibfa8ZmqPJbejbsbQmcfG0ESntmY4fDX+4jbPbFXRwdSCQTU8kpQelDyN8LWURSg1tQSKVm
- Yafd1IFfdgx3j3MvnrGfGtYE642adO6FPTXthf1kS73r7Q7/R1pp/MlgYUOIsGVBAEXYbCUbE3x
- Rg4JpnOO4T6MEDgAFIMQ2otMZo1AASJi/ne5eawEKI2cFQ53KGwn7A1dN2YZrCzkkzPkWAaEpjk
- bUaGBxECdRJEeIqEghwn4AYNstj2Hp6+6Kwp2Z5iHAzPtq7zwap9bAEJpZca7LjSdYhoBGFgF/3
- Sp3XxjmLM4eBLk3uH5eqqH8knoLWZ55TnF6Cn/SCIBN9ZYvMIaoKdJsgah4S+9pDKR1tlhC7062
- cgfubm5aHbnvqKA5KNafIKiaBEjxxk68Dcd7Dwg8VnlbjAnZnzpudXMJ8SXEeZZLRlG1hIlME+L
- 0lzaoX5WzvKfgBWjbLbKoblWJq7GCU6rhH4FGutnR7pFJtgj1xDwIBvfjD1qHeqqzDL/LNUfpFv
- WbaiTVlIfZB3VXVUcR9owqzQB2K2Yfs0M53tZdZs+3g8CQZ/E+JcGpxvsVa9gmHOPqTk9NxeWzb
- hv5x0YHP4ACbGhvI3PQLeR3P6CnE=
-X-Received: by 2002:a05:600c:628d:b0:4a1:9663:7633 with SMTP id
- 5b1f17b1804b1-4ac17d16b99mr348240245e9.11.1793782301176; 
- Wed, 04 Nov 2026 00:51:41 -0800 (PST)
+ AKwUvBzKRX9t4dE3vD7ffgqCm6NlieDshr4R937bWUhnajYYjxrUrJyR8p573zwztbDbAjKXXpyKUfI=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+atFJkCMhI8Qb2SmgedMOYFP6hQ7MzscA7zhmpwv6hfjqNFyw1
+ huzXajkKtdko+cRg0rSFpEbZvrTtVwCYhIhD3XhCadJusI/z9y7mdIvWNLeXtR1xkEg=
+X-Gm-Gg: AYBFou01fT8+MO+5bcvnrIcXSePCvk+Q8mWzXEtklDUfcZe4sg+KPtcDOfgGQwAsBwH
+ cbI2DIJne9cGQKukFq9B4fzIm79s76xzEd4MfrBtr7GmuLODHhMV6oRs0nr+0J43ugZKWkTne8F
+ SeMzGU6BS4NRl8iVJrLqVgZq63suSogwwzaKlrkrkHHdIKrDqMlu7r/+D4A5N2smOebMdUdGyap
+ wQHjMQQ2AzYDX+0BPyGPY6lAmHub4WHP8OPY8SzKQSJOa8ImO5gkhljUxDXk4g3k89li8zc8zrI
+ xzO7cFKbX83rH1VAFN8ScOo+g1bK348jKqWWvKB8mYycYOTIY5WNSQwl7tV2j0skoAMBPUkwq3Q
+ dciIvB1PIYjqeXwvxfprFwhp3pzhA61s5jQBNfgJzS91Yx7abdrHyktC+rctewlmddk4J6j2FW6
+ a9LoMWM3tKxkc05WoLwSl2hcCP12nLHFs4d4sN5HufHhHIqGH37jaiLYmw+bPhoOFr1A3c0Eith
+ y5A9Na5NrVun0brTKRDvog46D2yAhBpvXqwEHZQnQMMJnqjdfWneAPU1zlIKN7qEI3anOqhtol7
+ YTzkCXzJB/oSRg7XtxRfaHsTXGNpDd7TZUT3vmXIMXIksWOnEMts6AMyLAYcmMVLLvhS6/lMDqz
+ 6F26WCIBapSsPQuhv3uvDnnUh/N3f
+X-Received: by 2002:a05:600c:1387:b0:4a1:88df:8a2a with SMTP id
+ 5b1f17b1804b1-4ac1793e81cmr369587335e9.13.1793782303928; 
+ Wed, 04 Nov 2026 00:51:43 -0800 (PST)
 Received: from dario-ThinkPad-P14s-Gen-5.. ([109.54.139.206])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b413312a4fsm20555915e9.1.2026.11.04.00.51.36
+ 5b1f17b1804b1-4b413312a4fsm20555915e9.1.2026.11.04.00.51.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Nov 2026 00:51:39 -0800 (PST)
+ Wed, 04 Nov 2026 00:51:43 -0800 (PST)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
@@ -164,10 +164,10 @@ Cc: linux-amarula@amarulasolutions.com, michael@amarulasolutions.com,
  Alexandre Torgue <alexandre.torgue@foss.st.com>,
  Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.u-boot-project.org, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 16/33] arm64: dts: st: move Engicam MicroGEA-STM32MP257D-RMM
- display to an overlay
-Date: Wed,  4 Nov 2026 09:49:49 +0100
-Message-ID: <20261104085036.4012238-17-dario.binacchi@amarulasolutions.com>
+Subject: [PATCH 17/33] arm64: dts: st: add Engicam MicroGEA-STM32MP257D-RMM
+ LVDS display overlay
+Date: Wed,  4 Nov 2026 09:49:50 +0100
+Message-ID: <20261104085036.4012238-18-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261104085036.4012238-1-dario.binacchi@amarulasolutions.com>
 References: <20261104085036.4012238-1-dario.binacchi@amarulasolutions.com>
@@ -190,171 +190,110 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The board is fitted with different displays depending on the product
-variant. Keep in the board dts only what is common to all variants and
-move the RK050HR345-CT106A RGB panel and its touchscreen to an overlay.
+Add an overlay for the variant fitted with the AM-1280800W8TZQW-T00H
+10.1" 1280x800 LVDS panel. Its touchscreen is connected over USB, so
+there is no touchscreen node.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Link: https://lore.kernel.org/r/20260923155333.610134-2-dario.binacchi@amarulasolutions.com
+Link: https://lore.kernel.org/r/20260923155333.610134-3-dario.binacchi@amarulasolutions.com
 Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
 
-[ upstream commit: c82d6c52a2514b0a5a7968b6fed8ff212b80e5e1 ]
+[ upstream commit: 29ee49c0f82fffb8b0eed14b4ef3ff19ab89f455 ]
 
-(cherry picked from commit 8fbbd1cc0edb754a6653ec4af418e02887cb3bdb)
+(cherry picked from commit 535f863022c1f9491a2d224023f5a6e3419ebc6f)
 ---
 
- ...icrogea-rmm-overlay-rk050hr345-ct106a.dtso | 68 +++++++++++++++++++
- .../st/stm32mp257d-engicam-microgea-rmm.dts   | 46 +------------
- 2 files changed, 69 insertions(+), 45 deletions(-)
- create mode 100644 dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm-overlay-rk050hr345-ct106a.dtso
+ ...gea-rmm-overlay-am-1280800w8tzqw-t00h.dtso | 67 +++++++++++++++++++
+ .../st/stm32mp257d-engicam-microgea-rmm.dts   |  2 +-
+ 2 files changed, 68 insertions(+), 1 deletion(-)
+ create mode 100644 dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm-overlay-am-1280800w8tzqw-t00h.dtso
 
-diff --git a/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm-overlay-rk050hr345-ct106a.dtso b/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm-overlay-rk050hr345-ct106a.dtso
+diff --git a/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm-overlay-am-1280800w8tzqw-t00h.dtso b/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm-overlay-am-1280800w8tzqw-t00h.dtso
 new file mode 100644
-index 000000000000..f89641bdb23b
+index 000000000000..7655c1bf56b1
 --- /dev/null
-+++ b/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm-overlay-rk050hr345-ct106a.dtso
-@@ -0,0 +1,68 @@
++++ b/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm-overlay-am-1280800w8tzqw-t00h.dtso
+@@ -0,0 +1,67 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * Copyright (C) 2026 Amarula Solutions, Dario Binacchi <dario.binacchi@amarulasolutions.com>
 + * Copyright (C) 2026 Engicam srl
 + *
-+ * Rocktech RK050HR345-CT106A 5" 480x854 RGB panel with EDT FT5306
-+ * I2C touchscreen controller.
++ * Ampire AM-1280800W8TZQW-T00H 10.1" 1280x800 LVDS panel. Its touchscreen
++ * controller is connected over USB.
 + */
 +
 +/dts-v1/;
 +/plugin/;
 +
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/interrupt-controller/irq.h>
++#include <dt-bindings/clock/st,stm32mp25-rcc.h>
 +
-+&i2c1 {
-+	pinctrl-names = "default", "sleep";
-+	pinctrl-0 = <&i2c1_pins_a>;
-+	pinctrl-1 = <&i2c1_sleep_pins_a>;
-+	i2c-scl-rising-time-ns = <185>;
-+	i2c-scl-falling-time-ns = <20>;
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	status = "okay";
++&{/} {
++	panel-lvds {
++		compatible = "ampire,am-1280800w8tzqw-t00h";
++		backlight = <&backlight>;
++		power-supply = <&reg_3v3>;
 +
-+	touchscreen@38 {
-+		compatible = "edt,edt-ft5306";
-+		reg = <0x38>;
-+		interrupt-parent = <&gpiob>;
-+		interrupts = <0 IRQ_TYPE_EDGE_FALLING>;
-+		reset-gpios = <&gpiod 1 GPIO_ACTIVE_LOW>;
-+		touchscreen-size-x = <480>;
-+		touchscreen-size-y = <854>;
-+	};
-+};
-+
-+&ltdc {
-+	pinctrl-names = "default", "sleep";
-+	pinctrl-0 = <&ltdc_pins_a>;
-+	pinctrl-1 = <&ltdc_sleep_pins_a>;
-+	status = "okay";
-+
-+	port {
-+		ltdc_out: endpoint {
-+			remote-endpoint = <&panel_in>;
++		port {
++			panel_in: endpoint {
++				remote-endpoint = <&lvds_out>;
++			};
 +		};
 +	};
 +};
 +
-+&spi1 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
++&framebuffer {
++	clocks = <&rcc CK_BUS_LTDC>, <&rcc CK_KER_LTDC>,
++		 <&rcc CK_BUS_LVDS>, <&rcc CK_KER_LVDSPHY>;
++};
 +
-+	display@0 {
-+		compatible = "rocktech,rk050hr345-ct106a", "ilitek,ili9806e";
-+		reg = <0>;
-+		vdd-supply = <&reg_3v3>;
-+		spi-max-frequency = <10000000>;
-+		reset-gpios = <&gpiob 6 GPIO_ACTIVE_LOW>;
-+		backlight = <&backlight>;
++&ltdc {
++	status = "okay";
 +
-+		port {
-+			panel_in: endpoint {
++	port {
++		ltdc_out: endpoint {
++			remote-endpoint = <&lvds_in>;
++		};
++	};
++};
++
++&lvds {
++	status = "okay";
++
++	ports {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		port@0 {
++			reg = <0>;
++
++			lvds_in: endpoint {
 +				remote-endpoint = <&ltdc_out>;
++			};
++		};
++
++		port@1 {
++			reg = <1>;
++
++			lvds_out: endpoint {
++				remote-endpoint = <&panel_in>;
 +			};
 +		};
 +	};
 +};
 diff --git a/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm.dts b/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm.dts
-index f5af0913bf1b..faedddc2c914 100644
+index faedddc2c914..96b7cb6b5bc1 100644
 --- a/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm.dts
 +++ b/dts/upstream/src/arm64/st/stm32mp257d-engicam-microgea-rmm.dts
-@@ -116,25 +116,9 @@
- };
+@@ -43,7 +43,7 @@
+ 		#size-cells = <2>;
+ 		ranges;
  
- &i2c1 {
--	pinctrl-names = "default", "sleep";
--	pinctrl-0 = <&i2c1_pins_a>;
--	pinctrl-1 = <&i2c1_sleep_pins_a>;
--	i2c-scl-rising-time-ns = <185>;
--	i2c-scl-falling-time-ns = <20>;
--	status = "okay";
--	/* spare dmas for other usage */
-+	/* dt overlays don't support /delete-property/ */
- 	/delete-property/dmas;
- 	/delete-property/dma-names;
--
--	touchscreen@38 {
--		compatible = "edt,edt-ft5306";
--		reg = <0x38>;
--		interrupt-parent = <&gpiob>;
--		interrupts = <0 IRQ_TYPE_EDGE_FALLING>;
--		reset-gpios = <&gpiod 1 GPIO_ACTIVE_LOW>;
--		touchscreen-size-x = <480>;
--		touchscreen-size-y = <854>;
--	};
- };
- 
- &i2c2 {
-@@ -179,19 +163,6 @@
- 	};
- };
- 
--&ltdc {
--	pinctrl-names = "default", "sleep";
--	pinctrl-0 = <&ltdc_pins_a>;
--	pinctrl-1 = <&ltdc_sleep_pins_a>;
--	status = "okay";
--
--	port {
--		ltdc_out: endpoint {
--			remote-endpoint = <&panel_in>;
--		};
--	};
--};
--
- &m_can1 {
- 	pinctrl-names = "default", "sleep";
- 	pinctrl-0 = <&m_can1_pins_a>;
-@@ -259,21 +230,6 @@
- 	#size-cells = <0>;
- 	cs-gpios = <&gpioh 8 GPIO_ACTIVE_LOW>, <&gpioh 3 GPIO_ACTIVE_HIGH>;
- 	status = "okay";
--
--	display: display@0 {
--		compatible = "rocktech,rk050hr345-ct106a", "ilitek,ili9806e";
--		reg = <0>;
--		vdd-supply = <&reg_3v3>;
--		spi-max-frequency = <10000000>;
--		reset-gpios = <&gpiob 6 GPIO_ACTIVE_LOW>;
--		backlight = <&backlight>;
--
--		port {
--			panel_in: endpoint {
--				remote-endpoint = <&ltdc_out>;
--			};
--		};
--	};
- };
- 
- &timers2 {
+-		framebuffer {
++		framebuffer: framebuffer {
+ 			compatible = "simple-framebuffer";
+ 			clocks = <&rcc CK_BUS_LTDC>, <&rcc CK_KER_LTDC>;
+ 			lcd-supply = <&reg_3v3>;
 -- 
 2.43.0
 
