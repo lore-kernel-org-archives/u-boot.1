@@ -1,30 +1,30 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3CEC606A326
-	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 16:34:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BF3B606A330
+	for <u-boot@archiver.kernel.org>; Wed,  4 Nov 2026 16:34:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=rMLHXSwW;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=HjVesgOf;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gq9Ad4T7
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ApT9pLp/;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=JO2wlZG+;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XVTnAQdg
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9CC7F40386;
-	Wed,  4 Nov 2026 16:34:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5469380C8B;
+	Wed,  4 Nov 2026 16:34:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id rca377LHLz4E; Wed,  4 Nov 2026 16:34:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E08A040514
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793810085;
-	b=KwECiOyTV3IFsoin5r9Qx8eFLiW+uS7F+5pepls8SYB3QZKqJbssxYu72Hk2PcU+7XvN
-	 QNfn4bgogfLI4AhEwT5zckHPk/g+yXzrMSfnvAb1Ucjab2HBXc6R72+YEeKR6TJY4dHKy
-	 WXE0xd21cF14T0cqTzSHhfMJPqqi0Uh9gRp7N1pR5BgWJeIM3kZ2otArcc60Lvh4SrEQa
-	 B8AkWcoM5ddUYO2kCJOCJUXXe5ifTFIVnrU6TYEqOpkG1uYIJg1H4ckDZblNCM0gNn4Iv
-	 ASF1BISj34mNKWz7nrg7AZ8lIf6LbQVQ0ITXrw2S3JHz4pzLjAvWBJ50pC9hpZWW8hw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id tijBFfSlQ8DI; Wed,  4 Nov 2026 16:34:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 77A4A80A55
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793810093;
+	b=WlqJBimsjpovf/nX5/o8zPptmRg/vqle2b+xYM+3/VydW4sJc1SllbEtC2f+FyAoc6kQ
+	 HlsGoMHCv8SX13XkIQxjri6JkXTY6LPRxxLxo2ULDkQU60M7UO1How6YYPymaG0L9nvcg
+	 UtQHuKaiS7HsJTdCLXeSnqv8jtvLkcqze6JkOjbaMNM7Z+QzsJwFGaywT13KLHjPkqRwE
+	 aFGeeMl7rLCIfVAhWH7cqI8g98QkLL3tqYa6PkcGvaxpOlzI2LuFRfc/2U01T65M1bp5B
+	 J5PL5iY0wgZKM0lip0c++NUct6mZyOvJYdjLVVXjgG/qe31W/iFaIQSTJgjlbOzLNaA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793810085;
+	c=relaxed/relaxed; t=1793810093;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,48 +32,48 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
 	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Subject:Date:
 	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=AXJDaag3cxZQSF3w/NYBUCDRHNivZQB6hc5gGjAykWA=;
-	b=bDT/CXE7rJVbZpT/McfgfW4hNxvITYgUIzWMylXLPhj72G416bQ+udgHsg2uDEzMA9YZ
-	 l+m6kZtsVJuYTc0ZowRVZePxiuvTmPcBGcaprE59sNjN84cfov1zYcjoy0ukXiUszScw4
-	 6HiygGuVkrnKTwK6EdARsFa6NvvOb4FtR3gfe6xcEPeMhYeYj5319nS+bFtALpvPu/Qzg
-	 OXaZdu6vcV2dkAjbOoDpmPu2dg13HAE7saXgYjT+JttkHfwN7uiid0d96GZd7PLTZvCjD
-	 MeS1ptTBTFWJGkMEoQ3wnauOuUw9wrTAmOvQT2OGFZJq6JbjDVFXk7IYuSipabw98Ig==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=BtZfOBjvm0xHf1GhRwEc4VfKNQ3qHmDBawMkS4kuU5M=;
+	b=jh+c+Elvrbyp5RRGtiaL7Xphzj0OH+m5rOJhrAlUDwboRhDUXe9CElJw08ttcGQGndCv
+	 QMfl40UOSo8akngWrBqYBIaqts/PXPDYCC9H6XLGxL6w8lqsb/5kQV5pFHN+ButtsllL1
+	 3DDJdn77+9qwOOCJBwpBPI9nYSktgEwDdFlVYUozvAK5VcgyVKyL9X4Zu8MaoM2KtP5wH
+	 NnimASJLMjd0bHtXYHUkidYxg3FKhlCFD7xiQjtEv/82kEqN5J6mYeHAL6qYVpE5N38dX
+	 e/fAt33e1GKa3qiVKwstmpwUwNc0czFXhgag3hD7UDnIyydI/YcUzEvxSQ1FEy6ur8w==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793810085;
-	bh=AXJDaag3cxZQSF3w/NYBUCDRHNivZQB6hc5gGjAykWA=;
+	d=lists.u-boot-project.org; s=default; t=1793810093;
+	bh=BtZfOBjvm0xHf1GhRwEc4VfKNQ3qHmDBawMkS4kuU5M=;
 	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=rMLHXSwWG2GbZG6G9akNt/lm8gKUMs8iwqiwu0yYtsZuB8LEyh9UWDM44NzLA2EhE
-	 b3XhAvIGl0t4hRwfuyPmI6eWwKNh8rCIxGIjiqLsR44XbONh45NeddsBk3L+3E4B0z
-	 oLnaTWI7tvcU5mBp17tBNZcEpvPpdcfz6Edu32kYVlZQGBGJ5k9vtCq1kUYqjTpAzb
-	 1B2dCdrDiDUiq/46lx7Th8i64lG8M2jgYnj5Z2wTQ4WXS+3rB27PELDGerDi/kEEKK
-	 tRUVgHjYkLl9zSOqJQTKU00TrF9CyH1CW81eKMlWLTipiBej/AwU3UGq5QSBQMbqzU
-	 xl8hzG7N0RhnQ==
+	b=ApT9pLp/AtubvZDS1i6UZ7oIFS5r3P+U1cgJbhzoK6m4IaqMwhjb967pYsZNd166p
+	 FJobMuFW42agfl/DTf1tKHaLTkIhbpHcBU0Uxtjebgv4u36gVfs19dmXFYjlvVkGQu
+	 OzMCiOc6qMgk6R+6gYSlfHy2h1DGgPNFPok55OpGaHMErX1kIQahGPEuWVD7OA64Mj
+	 M4hUvopT6GHeNt+WiYmOkML2kpJmrKhJT7RC63VK0pofm4uD8P9C+CoXKNoP3VbC3f
+	 /n0joON/DeSYtKJKgOYDsgb1RAZHKtcriBNlmI3T+5iPMGW9oGkEwIwQ6+ejerolRa
+	 UbPCLxXrgs0mw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E08A040514;
-	Wed,  4 Nov 2026 16:34:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 77A4A80A55;
+	Wed,  4 Nov 2026 16:34:53 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 3174A165
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 16:34:43 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id E7D8A411
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 16:34:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 1750060642
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 16:34:43 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id CD99760650
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 16:34:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mo6kVGH4VxN4 for <u-boot@lists.u-boot-project.org>;
- Wed,  4 Nov 2026 16:34:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 55D0B605DF
+ id scOfOx-Zpz7V for <u-boot@lists.u-boot-project.org>;
+ Wed,  4 Nov 2026 16:34:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1B068605DF
 Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip=205.220.180.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
@@ -83,83 +83,84 @@ Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=HjVesgOf; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=JO2wlZG+; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=gq9Ad4T7
+ header.a=rsa-sha256 header.s=google header.b=XVTnAQdg
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 55D0B605DF
- for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 16:34:41 +0000 (UTC)
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 1B068605DF
+ for <u-boot@lists.u-boot-project.org>; Wed,  4 Nov 2026 16:34:50 +0000 (UTC)
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A4Fj7Pw2853363
- for <u-boot@lists.u-boot-project.org>; Wed, 4 Nov 2026 16:34:40 GMT
+ 6A4FjC4q2251557
+ for <u-boot@lists.u-boot-project.org>; Wed, 4 Nov 2026 16:34:49 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=AXJDaag3cxZ
- QSF3w/NYBUCDRHNivZQB6hc5gGjAykWA=; b=HjVesgOfUeKbi/MrO60Dq4JA2ha
- 0DjouKigdFrohV5xSsSrel70sblfs0VCiO8WhLNLAtOVwsHgRWcXqixx6wyPKPSr
- G9OYCwPnn6YQRWBqyCGbGM5ziTYkx9eVLsk577jboPkTYufQbq3Zb/IpIpoLkNPR
- U8g7hjz+WwHr9NtCXAjdW/vbNHDg0eCtE5KNaE/HQcezYAYQjfq78MzAtOgft2mS
- gjmnbfEGxLxlu+n2MkytAxKHmoXZ4NL/RyQWbz6+0k8IxfH8HEhP+WKtjj8HiHqC
- BY5TyJRL2i5l1Yg1E9zRzIjtDpUmYXvNiA/732QFqyiJQL+bZEOomb96JWA==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
- [74.125.82.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hqn8mvtun-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=BtZfOBjvm0x
+ Hf1GhRwEc4VfKNQ3qHmDBawMkS4kuU5M=; b=JO2wlZG+XBLdhzLgxsM6sTeZdoI
+ 58MqH+AV6+FwsOq3ysbDL0w2vTgAaVy7R2bt9G09TdeStITEtLDAJVJb1tLyMjx0
+ pCy3WTw/SP1tQZV5fjySKDd6KyK3Jky3zYTDmdDbv0KffjOimQU7YSNHmHi+44qv
+ UpIh883yh599GAdwJ95HWD8S/o++otJs+8c7oEST8OUA6byAaiyLtHFHMkLPsz9b
+ G1gnwzSRO5/KCICKlsVbV55g8V3vaQUXmVg0IwmBBAI0U1lSgrRKBYlh8/l7zV1d
+ cF5A/VX6AZWGLKmxOD41oI0yBZW6i9/qHmndpbK1p4wx85S2tF/pqNA+KEw==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com
+ [74.125.82.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hr4bn13ec-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 16:34:40 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id
- 5a478bee46e88-36c9e87d262so1249582eec.0
- for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 08:34:40 -0800 (PST)
+ for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 16:34:49 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id
+ 5a478bee46e88-36cec75d8caso838026eec.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 04 Nov 2026 08:34:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793810079; x=1794414879;
+ d=oss.qualcomm.com; s=google; t=1793810088; x=1794414888;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=AXJDaag3cxZQSF3w/NYBUCDRHNivZQB6hc5gGjAykWA=;
- b=gq9Ad4T722EVJeh2nurvaqQNUnJYjz6bdWrzcjeHj7gQ/oyow+9KNWAxuL8Qq76WKb
- EuFYfXWcQkuYH/rcjG0hJA9Y2jc3ig0C57In3/W4ybU69b9B5XHTIFGo5yWanoCSLYBD
- nWyo+s1RmBGdYLRgBU1TSLBnuX7U5p6ll1ujTahOGxl2b/9O2Vf+0W86pKFuduSnj4jS
- wHls7+P485oINpHLf/DXizxofXnH3AmHaOgK3wNVY+O/iVezHcv4JPiEM8Vgsoa0VhS3
- FmzkWZOH9BdnHNdosRbCX82yPP260DiBmFR0HqSs/2Ynd4Bf02+bueAESP6WD68X/1wW
- o8SA==
+ bh=BtZfOBjvm0xHf1GhRwEc4VfKNQ3qHmDBawMkS4kuU5M=;
+ b=XVTnAQdg83zFpwqqyh3Q+urUeVpevLryTr6w60zEF1GfMnOHJwzpV2vseBZL2d3Jx2
+ 24BzcE0Ss8wjpZjZp5CODRaIzYdkyHWBGmRnrEOBRORKd/nuO74NDB9YLY2jtJ475Oi5
+ dM64vV5XVACXbAd/70DNvOEGNF+JOUCeTDY8qvz83q8AC7KC8IZS/gf4VCLsfZQpbnTk
+ WrWTDpfosfaM4xYYzzgHqyUK8MV7GFjt1ZsaXSt6l+Ed7xE9T51E3yE4dtGIAb47ojOT
+ nBDdIffii/4I7614TKz+zrvhpW7xIOZq2PJJKiC9n1NjMh5wAXxlbf+rblUazGqWK4vP
+ argw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793810079; x=1794414879;
+ d=1e100.net; s=20260707; t=1793810088; x=1794414888;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=AXJDaag3cxZQSF3w/NYBUCDRHNivZQB6hc5gGjAykWA=;
- b=uM/6R8217Z0guPPSw/TTmdMbTXXfRgoeXAQzkHzkSlgQsjxg0IHpGPAPpN/CNzTBlk
- jqNe4/fJwTHPI2txvNFJlsycftX1R9xAtFHpyzo1U/y8kdlbsxoOkM/zUjgGhigPP6OZ
- FXSPKIc1g1+76lqa+Q7lxw4O12SILJ5R7DwVAZNA4a9kY/7gjhMz2Uyhj3KhZM06XBaX
- B+Dor4EUWse42u4VYBLR3S8qf7X/qyQCCs1mHNMIzH53zFSKpJJgVv4X8pWU4P3burH5
- f/iPAPAcBp9mMTZ0a5vsPNbWiZ+95dApH8RglkKDwb05xAv9TzMJEAWUFTyjYs8zWdo7
- OLYA==
+ bh=BtZfOBjvm0xHf1GhRwEc4VfKNQ3qHmDBawMkS4kuU5M=;
+ b=Se/4cBhTtlzH+/c/PQZlHD0TPoTAyHZ/vsqxE3ZGE/wQv+9iUx0h3iSsbVcvtBgH7k
+ UMasLwa9aXs8re7H64uA1Z4iU5ljwRw00n1ebiolBdIs3U6MIrGh1Z/+o546o9L1VB01
+ mlwyST6eDNLG45h+ENJprK9BBjds8FpG6uLPfmnpLNKDrHrdGlW7FVy2cK4+4nWtRh/V
+ H19E5wxR8VIy1pCMZwLmC40KJ5QsC5ZWNHBpbv7FYq42E5ckv+RTNSS4rriiUPkC+HOn
+ LMFTvVPorTdGPaoP07dQFHrilaq/60eORI99v/pkpaoeEL6PjjA8vw6NHLX7g7XHH14t
+ hT9g==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwRBFcstU9/HslVDxurmh61Bvyy3e4kGNXBAEPAXAopIdsxBpqPSP0bZzRNxcgh45kzidVA2Lk=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z82NP+1deMf3gzHHrPn8QGDFtOshOIkMAHcReGP2vhHVfx1TjSo
- EHvm3s2njdl9w5GVsO5DTGKX+Mhi2k5s6J47P25wcv+ZYCuuTmtY3M5IUHa3RTkR5k0gEPQbDII
- WQiRFXumyCA9iLR1JVOukWGpn71wGAtF1vYekFfg3BXXjkDiMbsJRjAlA17mfkqKy7ClKd3c=
-X-Gm-Gg: AYBFou0iUiEOxiD1h1qaXU0+rCY0kim6PBRHWjwfJdRPPEd6yqnkehKCtBkiiillbbh
- Ya90jLWg6NFK9P6aukPYgP+YISJwE/fZqe9NRfdwyB+lR/7c0yLJEEXjgjIhhNejcEWJuOYFavC
- +kb2F7aAYQ6oJkYsIQQ4p5NSLgEjPbzT62IrBQw4xNBsH6u30AN8OjhQ/p6vdNx52TUb+H8F5K7
- vhEUk9CoX8wC1oDV7yyHUkYxdmROu68ASrPsS6nKyAfqaWMZysmRu7Us9DHdZlay1Fgr48pLtVF
- BZhwPhFDF4XxC+02L6ahrKevQEdR7vLqR6qeFVSr3MqtaM7TCVoJI9M7AEy1toQ0Nev1C7RCFt+
- AIxbqhP97GBl4QX7rpBLRHnApS9th9zSOmtL5aeHEHy1fMccLuUYem1XYC2qwx8r4PqNNc+tpIM
- 0wehrQcoL7gxMwyK2YJgYqXQ8j82mDN6UNJ/gLoB5kdAoE9C7S/K5qUQqDp9kWXUWJ
-X-Received: by 2002:a05:7301:618b:20b0:35f:2858:aa4b with SMTP id
- 5a478bee46e88-36a4241b070mr22566272eec.30.1793810079118; 
- Wed, 04 Nov 2026 08:34:39 -0800 (PST)
-X-Received: by 2002:a05:7301:618b:20b0:35f:2858:aa4b with SMTP id
- 5a478bee46e88-36a4241b070mr22566240eec.30.1793810078544; 
- Wed, 04 Nov 2026 08:34:38 -0800 (PST)
+ AKwUvBwEhQsDdLTeX0yRikboh69BXBZXF4JDS5y+RBy4Rb9XcpZQvOxXaaaeaoXJsswwrUnLQGPqcnc=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9BR5fBTWR/+wG5XqPPa6WbIFzOmzD55vI5yxYIydP0QphvAg19
+ /BS8Yo/iFoRPnXLXECcwvfaZDFGDS24gI9MoAupsRrjm1IcdFQ0dYX81aQx8OMtOlS88MkygaoQ
+ GUWYgvMrrOMXgVOvtv02ildzPbzA8X0DgQzFYv8YqSx4ECGJ9OE29dHrkblSJ+3bs/UlbAsah2y
+ EOZNk=
+X-Gm-Gg: AYBFou3u0oLcs4pdbyii9MAqMdNoVx1NcfTpnjGNpQfOawQoD4l/x/vkrIo8o7n4PpY
+ K2mwYnP83/9e+RkrhFz/W10msz1PlbEM4M6a9+zLynB/E9T/I+8L+Hx7ygR60O9VBTqmyhpp189
+ bpbMjGYcacA7Hj9/DeUW1eu8CdDsomYtZM2iN90dPH2ohh5KwJdX5kUxeFGd4kHWnPVj7LeAGg9
+ CqaqhY1TwEouuAqt8qD7SozfVkv4K8tI6UKbBGOy+X9pU/qNhXTCPXbqIdK8hDbMXznSVBk1Dn3
+ uRKrx+EuTsMQrGdBo60FZOxfvujBLhEr86UXqgp7eGknlBTshiq2ORuMRYh2gKBALuY184jQyNe
+ EPgFhBuwqfVzqWrCkCLarGAiK9nenmBj8ZLJI5CkmMFPofpMd/Aeh6maj6e/Qy4t099wlW0UUmU
+ 5emEykQLmbwbw1J5ROVX4ugWY8RWer2Z0uy8Rwal++8mNKP/ICp1AXP9Tzmm95ifI+
+X-Received: by 2002:a05:693c:41c5:20b0:369:f17d:efb with SMTP id
+ 5a478bee46e88-36de655f12fmr4045eec.10.1793810088149; 
+ Wed, 04 Nov 2026 08:34:48 -0800 (PST)
+X-Received: by 2002:a05:693c:41c5:20b0:369:f17d:efb with SMTP id
+ 5a478bee46e88-36de655f12fmr3978eec.10.1793810087237; 
+ Wed, 04 Nov 2026 08:34:47 -0800 (PST)
 Received: from hu-sdhami-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-36db94376b1sm1046879eec.10.2026.11.04.08.34.33
+ 5a478bee46e88-36db94376b1sm1046879eec.10.2026.11.04.08.34.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Nov 2026 08:34:38 -0800 (PST)
+ Wed, 04 Nov 2026 08:34:45 -0800 (PST)
 From: Sumit Singh Dhami <sumit.dhami@oss.qualcomm.com>
 To: trini@konsulko.com, ilias.apalodimas@linaro.org, casey.connolly@linaro.org,
  neil.armstrong@linaro.org, sumit.garg@kernel.org, lukma@nabladev.com,
@@ -169,41 +170,43 @@ To: trini@konsulko.com, ilias.apalodimas@linaro.org, casey.connolly@linaro.org,
  balaji.selvanathan@oss.qualcomm.com, petr.hodina@protonmail.com,
  marek.vasut+renesas@mailbox.org, u-boot-qcom@groups.io,
  u-boot@lists.u-boot-project.org
-Subject: [PATCH v1 2/9] pci: pcie_dw_qcom: configure an inbound iATU window
-Date: Wed,  4 Nov 2026 22:03:51 +0530
-Message-ID: <20261104163408.1250410-3-sumit.dhami@oss.qualcomm.com>
+Subject: [PATCH v1 3/9] pci: pcie_dw_qcom: program PARF DBI/ATU base address
+ registers
+Date: Wed,  4 Nov 2026 22:03:52 +0530
+Message-ID: <20261104163408.1250410-4-sumit.dhami@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261104163408.1250410-1-sumit.dhami@oss.qualcomm.com>
 References: <20261104163408.1250410-1-sumit.dhami@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: xrHF9wk2iUPz5bkH0Qsm4XOJSmsZxISQ
-X-Proofpoint-ORIG-GUID: xrHF9wk2iUPz5bkH0Qsm4XOJSmsZxISQ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA0MDA2NSBTYWx0ZWRfX+luDY1WcNMws
- iSo3NoYGNccqeqE2mzTnpfna+E0zZHIY7bn7PIfPldV+d8EvqSFHsDy9G8fkAzzz5iJ0HPKbFJx
- g7Yg7KpA0AUTLlVIAhsfnCmG/CO6HmtuNJk3vsSuXXJXLg3mRzXR5or75UyAA2JlLQRuG3J3eWT
- TgQPAJTIPxKUI/cFibfPP1dEUcOpFLgV6IOv4vLPnBlmdVpfQYQGDd4JPZ6tqU9FW+nHcepAzGo
- 9ilh+rMNeTcScYl2s27uXCpMj9+IyhGHSNzLM/SKRfy/rPDoQJMxQotGAUbHFOi3fLUbUXaJgP3
- Xnb0dMxLQmky79P3en8PIkXA82ncT6x0zWVgAReTiWldk2nrpM3qDGuH10hkTy3V7uHW8enc/xX
- 1IXI5bsxO/S1SYlShdZzC2PMEuxyL2rj1tyjFP0I0kZw6sW4/sWsAkMK0fV8rfFiASQXTlNXOyp
- bLw64T3Mh9HC1yu45nQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA0MDA2NSBTYWx0ZWRfX8qSaEOwBEjYJ
- RMBwUTzIsBspb4LMljKoytE/kgD2FrqJqQbhxj9OP2O/nuxIvERI9+qFGSQL/T0Rkjmnd8m3bdR
- O3Faqg/NaJAmaD2xIc0v4b5TpB8yQ6E=
-X-Authority-Analysis: v=2.4 cv=HbWB3SE8 c=1 sm=1 tr=0 ts=6aeb5ea0 cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA0MDA2NiBTYWx0ZWRfXz3St660yOLPQ
+ V7EZHnj/petn0XCHaIT04A1h/eQa11VWgDBY9KxGib3deWnO7e8qtR4iWqIH82L3g/kMpRdMOeX
+ dhkpa1JdJL1GTS+I5iLHjIFB8MuInllfQD3Bw7SkiiEfC4OFYpCmCLv1ai12m/8BBP4wtNDwz3J
+ et7Yfd5cNHYGJrOrVV1IZcmzAg3itf3zYfCHBSxI0+/1wdDYyhHEegErsMMJiUxKBBL+bLD0C96
+ OaliXU56dC23EZhUsswQ+QbRsoRD5b0nMMBFN8WOROL5InKuy1lRgGhfJXRQ1e0gVk4BzkYG6aB
+ xtPX3CXIekaYgUSO/Pk/ukbP6CO71arIAbb79WIYniZOFVDmyQ5MP52keBFCI2Dv84YDAwSWMne
+ LY1WB410z57E4pUPjUX/J2eOl4OlBSpR2zqcbioSfq/AjYgQK5psta6wKJ/oHBQO7ABoqiA6hXa
+ Y7AR1FETPam15qvCa/Q==
+X-Proofpoint-GUID: tFwWwJ0vpZS5aOFASIkzdU__UaP8ffNf
+X-Authority-Analysis: v=2.4 cv=IcUSymqa c=1 sm=1 tr=0 ts=6aeb5ea9 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
- a=AesQuYKOYhzTj5GBKvwA:9 a=6Ab_bkdmUrQuMsNx7PHu:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
+ a=IHYlreO90MXzq0s2gkwA:9 a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA0MDA2NiBTYWx0ZWRfXy9l8kGK03p7f
+ t0ODvyHxUELCZPpRSTtvPYV6Urr/eru40EgpC9FZAYLTxSX/og9BR8JQsuXWZ4Z8MaOCzN8e6aH
+ kf5nDSZGGenu9eJRnp5zjkM75cDdmh8=
+X-Proofpoint-ORIG-GUID: tFwWwJ0vpZS5aOFASIkzdU__UaP8ffNf
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-04_05,2026-11-04_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 priorityscore=1501 adultscore=0 malwarescore=0 suspectscore=0
- clxscore=1011 spamscore=0 phishscore=0 lowpriorityscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611040065
+ priorityscore=1501 bulkscore=0 lowpriorityscore=0 impostorscore=0
+ adultscore=0 clxscore=1015 suspectscore=0 phishscore=0 malwarescore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
+ definitions=main-2611040066
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -222,82 +225,96 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Senthilkumar <senthilkumar.l@oss.qualcomm.com>
 
-The RC leaves every inbound window disabled, so inbound Memory
-Read/Write TLPs from endpoints are dropped, resulting in a
-Completion Timeout.
+The V2 DBI/ATU base address and slave-address-space-size PARF
+registers remain unprogrammed and retain their hardware-reset
+default of 0.
 
-Configure an inbound iATU window via pcie_dw_prog_inbound_atu_unroll(),
-sized from "dma-ranges" (via dev_get_dma_range(), which also picks
-up an ancestor node's dma-ranges). Fall back to a conservative 4GB
-identity window with a warning if no dma-ranges is found.
+Program these registers so the RC's internal routing logic knows the
+location of its DBI/ATU register blocks, matching Linux's
+qcom_pcie_configure_dbi_atu_base() implementation for
+IP revision 1_9_0.
+
+Also, remove the unused legacy PARF_DBI_BASE_ADDR and
+PARF_SLV_ADDR_SPACE_SIZE which are not required for IP revision 1_9_0.
 
 Signed-off-by: Senthilkumar <senthilkumar.l@oss.qualcomm.com>
 Signed-off-by: Sumit Singh Dhami <sumit.dhami@oss.qualcomm.com>
 ---
- drivers/pci/pcie_dw_qcom.c | 36 ++++++++++++++++++++++++++++++------
- 1 file changed, 30 insertions(+), 6 deletions(-)
+ drivers/pci/pcie_dw_qcom.c | 26 ++++++++++++++++++++------
+ 1 file changed, 20 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/pci/pcie_dw_qcom.c b/drivers/pci/pcie_dw_qcom.c
-index ce6b4d97d1d..1215346bcb4 100644
+index 1215346bcb4..dbcdc82224f 100644
 --- a/drivers/pci/pcie_dw_qcom.c
 +++ b/drivers/pci/pcie_dw_qcom.c
 @@ -17,6 +17,7 @@
  #include <linux/delay.h>
  #include <linux/log2.h>
  #include <linux/bitfield.h>
-+#include <linux/sizes.h>
++#include <linux/kernel.h>
+ #include <linux/sizes.h>
  
  #include "pcie_dw_common.h"
+@@ -49,7 +50,6 @@ struct qcom_pcie {
+ #define PARF_PHY_CTRL				0x40
+ #define PARF_PHY_REFCLK				0x4c
+ #define PARF_CONFIG_BITS			0x50
+-#define PARF_DBI_BASE_ADDR			0x168
+ #define PARF_MHI_CLOCK_RESET_CTRL		0x174
+ #define PARF_AXI_MSTR_WR_ADDR_HALT		0x178
+ #define PARF_AXI_MSTR_WR_ADDR_HALT_V2		0x1a8
+@@ -57,7 +57,12 @@ struct qcom_pcie {
+ #define PARF_LTSSM				0x1b0
+ #define PARF_SID_OFFSET				0x234
+ #define PARF_BDF_TRANSLATE_CFG			0x24c
+-#define PARF_SLV_ADDR_SPACE_SIZE		0x358
++#define PARF_DBI_BASE_ADDR_V2			0x350
++#define PARF_DBI_BASE_ADDR_V2_HI		0x354
++#define PARF_SLV_ADDR_SPACE_SIZE_V2		0x358
++#define PARF_SLV_ADDR_SPACE_SIZE_V2_HI		0x35c
++#define PARF_ATU_BASE_ADDR			0x634
++#define PARF_ATU_BASE_ADDR_HI			0x638
+ #define PARF_DEVICE_TYPE			0x1000
+ #define PARF_BDF_TO_SID_TABLE_N			0x2000
  
-@@ -484,6 +485,9 @@ static int qcom_pcie_probe(struct udevice *dev)
+@@ -111,8 +116,8 @@ struct qcom_pcie {
+ /* PARF_CONFIG_BITS register fields */
+ #define PHY_RX0_EQ(x)				FIELD_PREP(GENMASK(26, 24), x)
+ 
+-/* PARF_SLV_ADDR_SPACE_SIZE register value */
+-#define SLV_ADDR_SPACE_SZ			0x10000000
++/* PARF_SLV_ADDR_SPACE_SIZE_V2/_HI register value (64-bit pair, matches Linux) */
++#define SLV_ADDR_SPACE_SZ_V2_HI			0x80000000
+ 
+ /* PARF_MHI_CLOCK_RESET_CTRL register fields */
+ #define AHB_CLK_EN				BIT(0)
+@@ -298,6 +303,7 @@ static int qcom_pcie_init_port(struct udevice *dev)
  	struct qcom_pcie *priv = dev_get_priv(dev);
- 	struct udevice *ctlr = pci_get_controller(dev);
- 	struct pci_controller *hose = dev_get_uclass_priv(ctlr);
-+	phys_addr_t cpu_addr;
-+	dma_addr_t bus_addr;
-+	u64 size;
- 	int ret = 0;
+ 	int vreg, ret;
+ 	u32 val;
++	u64 dbi_phys, atu_phys;
  
- 	priv->dw.first_busno = dev_seq(dev);
-@@ -507,12 +511,32 @@ static int qcom_pcie_probe(struct udevice *dev)
- 	else
- 		printf("PCIE-%d: Link up timeout\n", dev_seq(dev));
+ 	dm_gpio_set_value(&priv->rst_gpio, 1);
+ 	udelay(PERST_DELAY_US);
+@@ -346,8 +352,16 @@ static int qcom_pcie_init_port(struct udevice *dev)
+ 	val &= ~PHY_TEST_PWR_DOWN;
+ 	writel(val, priv->parf + PARF_PHY_CTRL);
  
--	return pcie_dw_prog_outbound_atu_unroll(&priv->dw,
--						PCIE_ATU_REGION_INDEX0,
--						PCIE_ATU_TYPE_MEM,
--						priv->dw.mem.phys_start,
--						priv->dw.mem.bus_start,
--						priv->dw.mem.size);
-+	ret = pcie_dw_prog_outbound_atu_unroll(&priv->dw,
-+					       PCIE_ATU_REGION_INDEX0,
-+					       PCIE_ATU_TYPE_MEM,
-+					       priv->dw.mem.phys_start,
-+					       priv->dw.mem.bus_start,
-+					       priv->dw.mem.size);
-+	if (ret)
-+		return ret;
+-	/* change DBI base address */
+-	writel(0, priv->parf + PARF_DBI_BASE_ADDR);
++	/* Tell the RC where its DBI/ATU blocks live, and size the slave address space */
++	dbi_phys = (u64)(uintptr_t)priv->dw.dbi_base;
++	atu_phys = (u64)(uintptr_t)priv->dw.atu_base;
 +
-+	/* Size the inbound window from "dma-ranges" so PCIe endpoints can DMA to host memory */
-+	ret = dev_get_dma_range(dev, &cpu_addr, &bus_addr, &size);
-+	if (ret) {
-+		dev_warn(dev, "no dma-ranges found, assuming identity map over 4GB\n");
-+		cpu_addr = 0;
-+		bus_addr = 0;
-+		size = SZ_4G;
-+	}
-+
-+	ret = pcie_dw_prog_inbound_atu_unroll(&priv->dw,
-+					      PCIE_ATU_REGION_INDEX0,
-+					      PCIE_ATU_TYPE_MEM,
-+					      bus_addr, cpu_addr, size);
-+	if (ret)
-+		dev_warn(dev, "failed to configure inbound iATU (%d)\n", ret);
-+
-+	return 0;
- }
++	writel(lower_32_bits(dbi_phys), priv->parf + PARF_DBI_BASE_ADDR_V2);
++	writel(upper_32_bits(dbi_phys), priv->parf + PARF_DBI_BASE_ADDR_V2_HI);
++	writel(lower_32_bits(atu_phys), priv->parf + PARF_ATU_BASE_ADDR);
++	writel(upper_32_bits(atu_phys), priv->parf + PARF_ATU_BASE_ADDR_HI);
++	writel(0x0, priv->parf + PARF_SLV_ADDR_SPACE_SIZE_V2);
++	writel(SLV_ADDR_SPACE_SZ_V2_HI, priv->parf + PARF_SLV_ADDR_SPACE_SIZE_V2_HI);
  
- static const struct dm_pci_ops qcom_pcie_ops = {
+ 	/* MAC PHY_POWERDOWN MUX DISABLE  */
+ 	val = readl(priv->parf + PARF_SYS_CTRL);
 -- 
 2.55.0
 
