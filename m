@@ -2,159 +2,200 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 119A8606A32C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 15:39:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 676CF606A328
+	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 15:46:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=nfJbi6NR;
-	dkim=pass (1024-bit key, unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=RNFS4kkQ
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=dvfJ2DmL;
+	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=nYYgs33/
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D148C60778;
-	Thu,  5 Nov 2026 15:39:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B02F260860;
+	Thu,  5 Nov 2026 15:46:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FT3I3574qIvW; Thu,  5 Nov 2026 15:39:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 046B960721
+ id Mi1q3HrVnSjR; Thu,  5 Nov 2026 15:46:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B29106070C
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793893173;
-	b=CUTm0h/WbsgwfBqBEsD3oHYI/zLmP0+j+sTOgArmP01NI5ZmdPjieETs9erVvfGBqe2J
-	 qApjtaczSya6674AgSgkvwR68F6Dgo8AUOPxv7+cNZY4+PC44932cQM+STd1973ymeLUX
-	 sTVpwnUdWkh0QG8QZW/T+eXWLiCnZ2LlJ9UznbQvYcB5yVlWOOM7NFAGLlgSWNHDyox2c
-	 JKtAdoFsh+nf6SwM8fzjNYXz8pwvZH2pAtrvfWSZPLyC7u+ecLdIq3MfPkMdb0T2uX3Sx
-	 kzUKlEJYFFXkxb1p1PctCMZzDdFjRTo669HuilQzvK94WbgLQz/FgwEWFzMPdU4t7nQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793893589;
+	b=jpoF5wvA/8CK+Dm5takCFmbCtalKNdLnCUHOYduhBV+2IbeAo3xaBH1vqu4r2jLLzO4i
+	 1yF360FEJ8d48dPkiwdxg4HTufs9BLirFUdDfrRNNz3WIHHId0Y/W8J/jOkA3RhUS4Qgo
+	 KtluU4fSP1FRoDkUqiJpuA2jsLrr2i9cV9sXCldQpvDsE8F4rvbBqfBPLANlfLa19NGLM
+	 tbDii8A9NN3dliuYOzVybg67XlLMsSMAa0tkQmJkmSkizfDrY5zdlS07dI2x9wvaHZhs1
+	 MK3ASfr1x2LZ71xrAx646DyN2iSVxEuA3w0ZEUZWqFg6HCyFTnjdcwjb/274DylC/BQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793893173;
+	c=relaxed/relaxed; t=1793893589;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=ExV4rB9L32lDatv22Zqy52/z8+qlJaij7PVpV5j9zyM=;
-	b=S+gEpNFr92L/+8f069Rv453LxO4WY/Xlc4zT+PPT/lzzrHkxQlyL+9iy+ovgjJVj/En4
-	 QIX3zBGfR+ZKSNHzUKPQw2i6V6nlAg1Ovi9ihWbH+TVtHJGQc+rN5rJAMHBiNiimdfy7n
-	 0az9gl4lEk67xRkyfoDvPyQpIY/tZUNNILL+Cose1AWCxA0Ptmg2cwnGMAVNmF5SjXscN
-	 9XnrdlYHc7MQwpSlhyow2BmxZfAb2GjMZFPW4PSLooP3v8uX5lr1DdCLwLvChWxPFVJOl
-	 sNOgsmqb37XuXH85usc+foqrBHwzpyKR6G1Irh6G5JvGn4EgMJRxQIU2Prp/QS5yilg==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=k3jaUJMfjBYl20oSOZoVj7wgHcVbhc3oem1yuMCoAaw=;
+	b=tStuMZW2Vka+r+dlzDd4k1+56hp6yvq42XPA64N6gqyEYwPFpEB8mH7sCX3qdkEukvap
+	 niwfHbJ3a69o8koTnsaW47yM1Y2yb94J2UwRCpmp94HIgXXBBq153b+6Q5Tb5gouApk0c
+	 jSD4q9nj9VwgM/AI4M7bFgxwKY3Wz/OVIESXJvWs3bxOpiH2uoZ+fC9NPtDdqBtAQHcE0
+	 bDZG4rxDOEUmaCoWaQgZAPT3P7NeU14163j69im6PdQVS8S3jfzFZRL8Avy03/5PApIz+
+	 AUcAjBxw3yGhG+7HoU9CC9WYcBm/rlMttSxnoCddUPa8Rhj2fid68ai3/wz6Bf+kB+w==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=amarulasolutions.com;
-	dkim=pass header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=RNFS4kkQ;
+	dmarc=pass header.from=cherry.de;
+	dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b="nYYgs33/";
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793893173;
-	bh=ExV4rB9L32lDatv22Zqy52/z8+qlJaij7PVpV5j9zyM=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793893589;
+	bh=k3jaUJMfjBYl20oSOZoVj7wgHcVbhc3oem1yuMCoAaw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nfJbi6NR/KPQYAuL0hmtNhZzCI2/j+Mwr6iXzKBEuYaJ9e8HDZffCL9KApPcL1d7K
-	 3kCz71JGhbD1wX+fkMPunaQC9zSIwdjuRMoW4HcXf7txuQFxJi7y5Aw9qNxyXuu5nQ
-	 GLAe0w+iNz0Y1canO9zyepNY/ztbVJutz5WF3Sk1QufHDuWYiPVvJMYfGhexwhDc4w
-	 3eLR4eDwhO330oVQ5W716MlwdO+3MKy6xWvwtFxe1CRp1LxjlndZb1q6zy0kaU4f+S
-	 fmqR3269las3iG5Hfamav246dmksSXgkzCz8LuBfL/OkRr632a99NaOOg1LteidqOh
-	 jmvjs3zeTgd7Q==
+	b=dvfJ2DmLK+/UO6YoQMeJZU188M0N0u44ArzjouEm2zG8g81INzydEiTIEKa2+GBQT
+	 BOR99lP6wrSEpKQkJxTj55EbyhC/DS0scqfZpW+KcwORkWztiMQCIj9T6ExMzl6ayL
+	 c4s+P+2ptxBY7X4nEfG3iBi5YJBmZi64HyYvq/35xiCwgHqSPXlyFCt9BWfWw71RDn
+	 odHdHKEkNB331KikjfTcWJBUp1mqN3c9WgQAN1fohy0LVmnHRtjYl5p04zt/tUZOTn
+	 rij2mvxr5l49yU/+I07ljPermAzXjNnD+oETiuyoS6q0NYzBUGp5zjiC7il/qRx/0T
+	 GqLlNj5s/FYtg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 046B960721;
-	Thu,  5 Nov 2026 15:39:33 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id B5D11B00
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 15:39:31 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B29106070C;
+	Thu,  5 Nov 2026 15:46:29 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 06D8BB00
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 15:46:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9B84960721
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 15:39:31 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 044C86070C
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 15:46:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uWMmpI6WXpsk for <u-boot@lists.u-boot-project.org>;
- Thu,  5 Nov 2026 15:39:31 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 9987460697
+ id pWIouKvjxF6a for <u-boot@lists.u-boot-project.org>;
+ Thu,  5 Nov 2026 15:46:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2B86D606A7
 Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::b12b"
+ smtp.remote-ip="2a01:111:f403:c200::3"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b12b; helo=mail-yx1-xb12b.google.com;
- envelope-from=dario.binacchi@amarulasolutions.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ client-ip=2a01:111:f403:c200::3;
+ helo=du2pr03cu002.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com
- header.a=rsa-sha256 header.s=google header.b=RNFS4kkQ
-Received: from mail-yx1-xb12b.google.com (mail-yx1-xb12b.google.com
- [IPv6:2607:f8b0:4864:20::b12b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 9987460697
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 15:39:30 +0000 (UTC)
-Received: by mail-yx1-xb12b.google.com with SMTP id
- 956f58d0204a3-675617e81f9so1763653d50.3
- for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 07:39:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1793893169; x=1794497969;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=ExV4rB9L32lDatv22Zqy52/z8+qlJaij7PVpV5j9zyM=;
- b=RNFS4kkQW3ZZnP7BaHkP/AFBTS92pniWD4eR2sNhuSayQaoEP/ehdtfMkjXkdhEo0e
- 2oxSYzSEY3SxLlPC8sUTdUUiXSuKow/dGc/gURLyw8/GHpi9h0YcryzhQCZGsEo2PlOb
- x+PajeqWCZfshCP0vavEDbBAg1U0wwFqQTTu4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793893169; x=1794497969;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=ExV4rB9L32lDatv22Zqy52/z8+qlJaij7PVpV5j9zyM=;
- b=2NYWCmxPeNaVANDo8O3hd8k5Xr7DfGn+mqeFHMEl1usvW2tQvQFGsq25VWcBX4CP8c
- OxiwRDcPfKe46zlqlfaHmkrnteRN4MUL8SQqGE8AM8TaPQpV7UOqqvBeifbmaWUCeqiu
- vOut3Fc8taN8TqH3abhUpraBiTB6I1R0IHdIG5qzjr1tm6kFHfdwAnHA10+iMXGOg+bm
- PJpDBcBbHkZ/e223QEvvrsDDeaYASvdhvQMowkBbPrJ4BO74V6rBFRzIrymmuv2AqsUW
- ozHIUneaf1c8r+lUBZgEn7G4xsaYb4hUIL9/Pec99G7TdPEF66tbPXB6n/dvUTdAUxhA
- X5pA==
-X-Forwarded-Encrypted: i=1;
- AKwUvBx4Gc9PLWUjQ5u7JIn4rvjndPYpG3gH4qzW/HEIKQrMJHAGgQUgTakEwT5SaB2JwPCEB3McbWc=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+2vHR4H+UvRgU8kdbrDbzIPmiBWNI1jDqESDCbzvHTds53RhPV
- qRH51bBMqfr/BH8Z51sRU5/T6LXIRghXimPkImh+7Nj7j74BBlVzB2n1ujtBkolFdTB5Y+KaUOX
- nK6FiUoGUALEAwbs46n49+U6Rrq8RLvDz1EzprJgKWA==
-X-Gm-Gg: AYBFou0NwweSfVGBpfcn00Sh6LujrAhChOog4sxP2S8h8BfXPQERRqut13vG93fpAxj
- jzVFZzUfpCP2pC8EKi2LwlCzGtSdM9Yl0vNekobzQlJS2fdhm+txAfg+7C7tjr3Xxrx/NudjDpo
- VLWfzQ0HpYdaBVdGhWh+Z/vlhncmOflKQt7YcMWQP2LRy0r2svLb4Ho325JVcXwoKyscwsl9N39
- kefI8BtNunvZrf5WBii6lwyHUrlYcmJ8r5+KGQXFOiKofSYKbsIP2Uy+weLoqFbpVu2Q8JSddBf
- F9Ytz40BgL/h2NS8b2MSXPPc2CcVZ9eFa2aI8Q3zyPUlOAIyBiotQg2m8ISf9TcEtcHYnCYqB3f
- J6p3yK15igruD5Q4VJELerga6T6Uwl/w/oq+r8bF52fQIywU8m+VkSWpizFVHJxZXmSVsF8CaOL
- r1udBCgThx6xk=
-X-Received: by 2002:a05:690e:b86:b0:679:9fde:25db with SMTP id
- 956f58d0204a3-67ba500cc09mr12521786d50.93.1793893168801; Thu, 05 Nov 2026
- 07:39:28 -0800 (PST)
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=nYYgs33/
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 2B86D606A7
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 15:46:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=k3jaUJMfjBYl20oSOZoVj7wgHcVbhc3oem1yuMCoAaw=;
+ b=nYYgs33/eRclImYQ8egToRHA6HDQG0AQKp4vvj0xettwQf6Skj5DqZOeYpyHiy4bMx8S69ofAN+bOEu92S1KU2PkL/KJe2pPzmLY9IbxJlaUXKiShzjd7uuXv+/DyA5HnKxJ8g8h4d7uWIdVXSSIeA6TvxxU1SM34/O9dhWQPUk=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by GVXPR04MB10802.eurprd04.prod.outlook.com (2603:10a6:150:220::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Thu, 5 Nov
+ 2026 15:46:19 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0592.009; Thu, 5 Nov 2026
+ 15:46:18 +0000
+Message-ID: <fc54cf9e-e56f-427b-b390-fbb2c9ea5c1c@cherry.de>
+Date: Thu, 5 Nov 2026 16:46:17 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] doc: develop/sending_patches: add tips for series
+To: Ralph Siemsen <ralph.siemsen@linaro.org>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, E Shattow <e@freeshell.de>
+References: <20261104-doc-sending-patches-v2-1-c0a90ff6c049@linaro.org>
+ <76240a0d-96ed-4a8b-9336-8cc96c6e6e4f@cherry.de>
+ <auyTzNmT63e_mEWO@maple.netwinder.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <auyTzNmT63e_mEWO@maple.netwinder.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: PR1P264CA0054.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:2ca::8) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261104085036.4012238-1-dario.binacchi@amarulasolutions.com>
- <20261104192118.GD1164024@bill-the-cat>
- <CABGWkvqisJBzV=tRQrhZ87evgF6mTff+dJvO1LVwVQC-YX=DpA@mail.gmail.com>
- <20261105144835.GM1164024@bill-the-cat>
-In-Reply-To: <20261105144835.GM1164024@bill-the-cat>
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Thu, 5 Nov 2026 16:39:17 +0100
-X-Gm-Features: AclHuK945_5pi7BCDCf_VUaFLVg4XFhHAMX6H80gZKDuOC-6odiTXw-U8FJjXJQ
-Message-ID: <CABGWkvqoNBvjynykG-Y7V8BP5OTP4TOq4zwkAwSQ_P+e8-6JPQ@mail.gmail.com>
-Subject: Re: [PATCH 00/33] Add Engicam MicroGEA-STM32MP257D-RMM board support
-To: Tom Rini <trini@konsulko.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- linux-amarula@amarulasolutions.com, 
- michael@amarulasolutions.com, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
- Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- David Lechner <dlechner@baylibre.com>, 
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Kory Maincent <kory.maincent@bootlin.com>, Lukasz Majewski <lukma@nabladev.com>,
- Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
- Sumit Garg <sumit.garg@kernel.org>, 
- Yannick Fertre <yannick.fertre@foss.st.com>, u-boot@lists.denx.de, 
- u-boot@lists.u-boot-project.org, uboot-stm32@st-md-mailman.stormreply.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|GVXPR04MB10802:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5f97e507-1d9d-4f1a-a4b5-08df3b53ee85
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|23010399003|366016|1800799024|22082099003|18002099003|10067099003|3023799007|56012099006|4143699003|11063799006|261026121527099003|261026140227099003|261028144727099003|261022075727099003|261022105027099003|261021135927099003|261102123227099003|261021121427099003;
+X-Microsoft-Antispam-Message-Info: DhmIRIuCDErSP4foK0YYRnnyfSanKLWWZN4wxlbAvzKnlifiImeQJL6GZxNTakSCn4H5JYb7vlqkRU0tTab84WvCnIHfOXrawaj3h46+iHJQ0Kar6z5qQprRuLCfqTOQ0ilDZ/bm2OnDMLJap92EX0UeW9LCDyatNU2Zz8AIDth90ZblGc2lLqPSmFQVQ77r5m0XcorjXMdCuntL2pCo8DlRyaDO78xwE+HNd8M3hrsOdr8qUzJbmaE7haGeIGOnrEBeZgvuR40GRikm2sIOQMKMIzd/bFQ/G0JCMEqKd264G5omfKu6f8nyCkO4PgQsB7XLo33CujnLa5bZ4dc1kBzZ4rpPH042vV60q+H3NzOkFFjoW9ghK+c58+UcDPJb1qrQCXnUNIFzipBJ5C7yhVa/hYV6OTrMbvZdwcD+J7P1hkttzQkbm0GKTYv6dWhlEnO3BvrWVpJ4ouGvit1Pnt1DQ8WdFLP+pjYFRuO2OYRisbYMWg16rYowuF3oG3Jey4qx46nwqc+hMtRGCmxX8i6FyOCI7B6ZJ7Mal6HBBezYQ4j8V5OIXNTw+l0g1d5fWpvzSL8nvvzL9Afj8ceOsmALIuel6CzOL/f+KlR/7coZetGZTFu1qz2oQX0W2QV77jnIoRDC9pldSC3+fe4rw9ryHNDzhKq2/55slpi+LoE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(23010399003)(366016)(1800799024)(22082099003)(18002099003)(10067099003)(3023799007)(56012099006)(4143699003)(11063799006)(261026121527099003)(261026140227099003)(261028144727099003)(261022075727099003)(261022105027099003)(261021135927099003)(261102123227099003)(261021121427099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bUsyTDV3cDhTTThTOTNybHBCblhOTjVBaVg2bVNVWnVGL2t6bDM1dmFZLy9H?=
+ =?utf-8?B?QlJ4bHJuWHBleHd5bGd4QmgrNHJUMTFnUDF5bjROYVJiaTNucm5ka0cwcE5n?=
+ =?utf-8?B?TnN1blQvbGhWMEcyWjA5R2VlQWVCSGlkRnd2VlRWSDlhV3BKeTVBWUN0USsx?=
+ =?utf-8?B?Mm03NVhkakZlemFNaUlCOG9JWFlFRmIrUGtubWt5V0FkMW9jT3RmWkZTVWJT?=
+ =?utf-8?B?QXIrellpOGx0UVo4N2dLQlVub2pmU0Z3b0ZFRTZSemdKNGxKUGhkcTc2UWVB?=
+ =?utf-8?B?UlNqVExHNW9UZDVBaW0vTmEzOVkxajhwdk1OdEJOZGttSG1NcUZaRUc1M25U?=
+ =?utf-8?B?WjZjQWtUMTVuVzc0Qks0R3ZRalhGYWF2ZUxvcU02Q0tMT3FIVlBOcUhscHpY?=
+ =?utf-8?B?MkFGc3NQMUsyZ0FYV0RxNEF6MWRTY0UrVURyeXlBNjZVTGtDby9ZV2d3eFVB?=
+ =?utf-8?B?ZjJzMFVNQnZmVVJmaGs2VTh6eVlJVTlIdGQzb1JSL0xRR3B3anQxaWI5MUNp?=
+ =?utf-8?B?d05BM05tQ0tSR1RhMU8yeXhPQkk3U1VFZWJEQ2wzQ0pmM2JpYTZyOTgzbllJ?=
+ =?utf-8?B?NU5QYzR6ZjJESURVTmlWeVQwTmd3M2ovVzlVa0t1elBsdzduZ211dDVoRkVT?=
+ =?utf-8?B?Nk56QkZ3TXhhOExmcDZTUW5yUUdYS1ppYmYvWkVWOTFGVkZmWktGSlBvREZC?=
+ =?utf-8?B?NUxpV0pyaVRYdGgvdzNUZW5OQzBKY1NGTkoyd0JDTk1nOHMweUFHVkRMWWJz?=
+ =?utf-8?B?ZzVOSDY2NTBET3Rkb3B0dURMc0NYK0h3Ym9aZGlhYlFMOUZoK3ZuY3VTY0tu?=
+ =?utf-8?B?UGI5NE5GcnJsWWhQNUVjL0FYTm1ua0taeGZJSFh2My8rZFAvV1cvTEFodGRa?=
+ =?utf-8?B?dE82UkFmelZPR3FxZGJGdHhFeHNWQXhPcXFPcHAvUmhtdHJrbDFqblp2SlJE?=
+ =?utf-8?B?dFNRZ01jQ3NmVHV4UzFVdmVXOFZOVGNHcVdMeWoyL2o4RnJVZG52TFRnbXlH?=
+ =?utf-8?B?cDJONnRUeCs4Nzc2QitJdC84dUFodVRrZUNqTldjaTI5N0hDTU5za2QzNE85?=
+ =?utf-8?B?SkZYb0ZsL3prRlBaaWJ1aWVRY2x1Smc4ckdTclR4bHFyQ1BuSWdJTWV6dXRs?=
+ =?utf-8?B?eEtrMisxYTA0Z2doY1VQNWZ4M0dTbTk0d1BuNkUyZnpmdmVEaFJkSzZpaHE3?=
+ =?utf-8?B?cTQ4UnpRTndUYjZhMUNJWXNsTWE5SVk4OTZBalRtSENuUWFkU3ZpMW9YTHI4?=
+ =?utf-8?B?eGN5TjhNeldNa1lHQkkxcDEwdE5oZnQyU2F2N2VobktPeVJud3pMSzFvUVY5?=
+ =?utf-8?B?Q0RiMTNPRFE4dEluMFZOS1lQaUhheHVpS2JrWVRwV01vTzRDTVorRGN2ZXJR?=
+ =?utf-8?B?MU9acVRmczZ5eGJaSHdBK3BOeHgxQnhXdkhjR3ZRRmI0UTg4OTZtaUZHS2FF?=
+ =?utf-8?B?NWpiQmt1QnIyUnNjUllkN25tVC9Ia0tsMEJUT3FHNm1neStndy9nb0YwaVpr?=
+ =?utf-8?B?K0J1UVV0RHhWbS9ZMmpuRWRSc08vbEVsZUlFRXk0R0JWSWx0MEhVVDZ2aU1o?=
+ =?utf-8?B?bTFOOWpPRUFydzdKMlBpN0RydUVDblVYMVZsTGxsZnBEZk1iWXlSSW51ZUNV?=
+ =?utf-8?B?RTVra1BaTExXSU5xelZCVjlFamZtQXR4UFFTYXpGem5lSHNuRE1VTUwwZzMr?=
+ =?utf-8?B?bS9QZkF2Vnc2dXo5eDVxSmhNbVk4b3BYMVBpUjJ5SGcrOGNVNitaWmhXMEQr?=
+ =?utf-8?B?Q3o1bWdtS1ZWeHFzSFA3MDJWOGVPN0RVTndPSjN6RU5jOTBFWElwZHc0OVY3?=
+ =?utf-8?B?NTh6MGsvdHo5cXBJcTJqTis2YlpHZVZIc3JWZW1zYjFyaUI1NTRVWjZzU2hJ?=
+ =?utf-8?B?T25iRmZtcmNmb0xYZmhqZllHRnJMWnA2UjhKSWhpN2tLcjcvNjN2TDZqbUtF?=
+ =?utf-8?B?SjRIMzlxRm9HOG42ZHBrNEp1Q1JYQmdPTGxTL2ZKN1pBQ2htalVlZGFkejRa?=
+ =?utf-8?B?UHFvKzNUbWxpYmFlQm1SbWk0dWhwWHBTV3kxV2RpYm9YVmdndEhJMi9tT3lq?=
+ =?utf-8?B?NFY0VFpXVlBSblI1U2lNdzNUdTYrSXIzOGJKZitiYVBwZ2FPQW9WVGZKTDc1?=
+ =?utf-8?B?VmVYRWFjS0pCUXN2eG5vdGVTcGM0b1o1V3VwUGZFZi90MUMybENxc1FqbVpw?=
+ =?utf-8?B?dk43RE1jU3hkZnZkajdkQ3l4UzV2UFRzR3Z6dCtxRHVCWFM2R0s4NWdBT3VR?=
+ =?utf-8?B?R3lGSnl5QWl0N0pNNG16YnJ2Si9iendodFlIUEVnZ1U3ejA5bUVKY1NQL0J3?=
+ =?utf-8?B?RWE5ODdYcm9Ebml4cWZzTVVVSEs0SWg3WXlrbUlpTHNPS0xvT0xmUT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5f97e507-1d9d-4f1a-a4b5-08df3b53ee85
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2026 15:46:18.1115 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: iBTvrDw0ukDQI45pfGMJMlCvwC07J3I+FmnwkRGkwDymqdvg15dWxHgk5Zu3rFF4dXqrdqmzctLYZ5S4oM1BHo7MWA+VmlxSk+kpx1xBsBg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10802
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -164,102 +205,117 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-7.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
-	version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Tom,
+Hi Ralph,
 
-On Thu, Nov 5, 2026 at 3:48=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Nov 05, 2026 at 08:12:07AM +0100, Dario Binacchi wrote:
-> > Hi Tom,
-> >
-> > On Wed, Nov 4, 2026 at 8:21=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
-ote:
-> > >
-> > > On Wed, Nov 04, 2026 at 09:49:33AM +0100, Dario Binacchi wrote:
-> > >
-> > > > This series adds support for the Engicam MicroGEA-STM32MP257D-RMM
-> > > > board, with its RGB and LVDS displays and the FWU A/B update.
-> > > >
-> > > > The first patches pick the board devicetrees, merged for Linux v7.4=
-,
-> > > > from devicetree-rebasing. They can be dropped if dts/upstream is sy=
-nced
-> > > > with v7.4-dts first. Then come the fixes, the refactors moving the
-> > > > STM32MP2 environment and FWU support to the SoC code, and the board
-> > > > support.
-> > >
-> > > What's the status on upstreaming all of the changes you're putting in
-> > > the -u-boot.dtsi files? Thanks.
-> >
-> > The -u-boot.dtsi contains:
-> >
-> > - U-Boot specific nodes and properties: the environment partition, the
-> >   FWU metadata and the bootph-all properties.
->
-> bootph is to be upstreamed,  I don't recall where the FWU stuff ended
-> up, and I'd need to double check the specific environment binding you're
-> referring to.
+On 11/5/26 3:33 PM, Ralph Siemsen wrote:
+> On Thu, Nov 05, 2026 at 12:00:27PM +0100, Quentin Schulz wrote:
+>>
+>> On 11/4/26 8:48 PM, Ralph Siemsen wrote:
+>>> +Of course there are sometimes cases where a large patch series is okay:
+>>> +
+>>> +* when the changes are all in a specific area: for example when 
+>>> fixing a bug
+>>> +  in a driver, but also doing some refactoring or cleanup in the 
+>>> same code
+>>
+>> issue: This is typically the things we don't want to see I believe. 
+>> Separate bugs from refactoring, cleanup, and new features. The 
+>> argument is: we want the bug to be fixed as soon as possible, but we 
+>> *reaaaaally* like to merge full series at once, so having this kind of 
+>> changes mixed in a series means it's likely we'll either ask the 
+>> contributor to split the series, or if the non-bug-fixing part of the 
+>> series is controversial or not in a good state yet, unnecessarily 
+>> postpone the merging of the bug fix.
+> 
+> Maybe I should have said: "*directly related* refactoring or cleanup"?
+> 
+> Ideally a bug fix should be its own patch, and certainly it should not 
+> include any new features. But sometimes a bit of refactor/cleanup helps 
+> to make a bug fix easier to implement and/or understand.
+> 
 
-I added the bootph-all properties to the -u-boot.dtsi because I saw
-the same in the other STM32MP25 boards, e.g. the stm32mp257f-ev1. If
-they should go to Linux instead, I will send them for this board.
+Sometimes it's tempting to squeeze some refactoring that isn't actually 
+necessary. I'm sure there are exceptions, but the more there is in 
+context for a bug fix to be merged, the longer it'll take for the bug to 
+be fixed, that's unfortunately the reality. We can strongly 
+encourage/discourage people to do something, but there are of course 
+always exceptions. Best judgment applies, but everybody has a different 
+one and it gets trained over time :)
 
-The FWU metadata node and the environment partition use bindings which
-are only in U-Boot: doc/device-tree-bindings/firmware/fwu-mdata-gpt.yaml
-and u-boot,mmc-env-partition in doc/device-tree-bindings/config.txt.
-They are not in dt-schema yet. Both are also used in the -u-boot.dtsi
-of the other STM32MP boards.
+Something along the lines of "In the event a refactoring drastically 
+simplifies bug fixing, it may be part of the same series, but it should 
+be understood that this means the review will likely take much longer 
+than if it was the bug fix alone in the series".
 
->
-> > - The RGB and LVDS panels, with the LTDC and LVDS endpoints. These are
-> >   already upstream in Linux, but in two devicetree overlays, one per
-> >   display. Since the display is selected by the "display" environment
-> >   variable, which is stored in the eMMC/SD and is not available yet
-> >   when the U-Boot control devicetree is set up, both displays are
-> >   described here and the board code keeps only the selected one.
->
-> You can't detect and apply the overlay instead?
+>>> +* when there are unavoidable dependencies between patches: keeping them
+>>> +  together avoids having to explain how multiple series are dependent
+>>
+>> thought: People usually struggle to detect the *actual* dependencies 
+>> and are usually leaning too much on "I need those two drivers to be 
+>> merged for the board to work" for example. We've seen this more 
+>> recently with a full SoC bring-up being sent as one series. Yes, the 
+>> SoC is unusable without all the minimally required drivers, but each 
+>> individual driver can and should be sent a separate series. I'm not 
+>> sure how we can word this better, maybe providing a real-life example 
+>> would be nice. This can always be improved later on, so not a blocker.
+> 
+> Having struggled with this myself, while I do agree with the idea of 
+> using separate series, it does complicate the development process. It 
+> means a branch for each series, and merging them together for each 
+> compile/test cycle. Only after doing this dozens of times did I realize 
+> that I could stack the branches on top of each other rather than merging 
+> each time. Then "git history fixup" and "git history reword" made it 
+> much easier to modify the stack. But all of this has to be learned and 
+> it is not immediately obvious.
+> 
 
-No, the displays can't be detected. There is no EEPROM or other ID on
-the board or on the displays indicating which one is connected. That is
-why the selection is left to the user, by the "display" environment
-variable. Since the environment is in the eMMC/SD, it is only loaded
-after relocation, when the devices are already bound. Is there a way
-to apply an overlay to the control devicetree at that point that I
-missed?
+There needs to be a compromise between friction for the contributor and 
+friction for the maintainer/reviewer. Unfortunately, the balance is 
+already so skewed in Open Source Software in general that more friction 
+for the individual contributor than the reviewer is currently necessary 
+for the maintainers/reviewers to barely avoid burning out. I 
+unfortunately do not have an answer other than "we know this isn't super 
+nice, but this is what we could come up with that makes merging your 
+patches more likely and faster with the resources we have today".
 
-Thanks and regards,
-Dario
+> I also agree that it is hard to detect the actual dependencies. And in 
+> fact they are not static: when a reviewer of one series requests 
+> changes, it can often impact other series. Which suggests that there is 
+> a dependency, even if it was not apparent initially.
+> 
 
->
-> > - The LTDC "lcd" clock for the RGB output. This is not upstream yet:
-> >   I sent it in an RFC series [1], and Gabriel is reworking the STM32MP2=
-5
-> >   SYSCFG pixel clock support, which should cover it. I will drop it onc=
-e
-> >   it is merged in Linux.
->
-> OK, thanks.
->
-> --
-> Tom
+At some point, there's also "don't send too many series at once". If 
+your series A requires big changes in series B, it either means it 
+should be series A+B, or that series B was sent too early and we should 
+focus on answering design questions in series A before having a look at 
+series B. Sometimes patience pays off in the long run.
 
+>> With the issue in the previous paragraph fixed, I think this is a good 
+>> improvement and we should merge as soon as possible.
+> 
+> Perhaps I should just drop the whole "Of course there are sometimes 
+> cases where a large patch series..." section?
+> 
 
+I like the second bullet point. It also gives a way out to people: we 
+aren't super strict and sometimes we're fine with a series with 
+"different subsystems but somewhat related". I prefer the patches to 
+exist even if we don't review them quick than having the contributor 
+agonize over what it is we exactly want. We can always tell them once 
+their series is sent how we would have liked it to be formatted. This is 
+something I've learned over the years by doing, the same with learning 
+how to do bisectable changes, fine-grained commits and write commit logs 
+that are (I hope) helpful to reviewers. I believe Tom's position in 
+general is to leave enough wiggle room so people can figure out how 
+things work best for them (e.g. we don't have super strict rules for 
+custodians or merging, unlike the kernel for example).
 
---=20
-Dario Binacchi
-Senior Embedded Software Engineer
-M. +39 328 0625246
-dario.binacchi@amarulasolutions.com
-=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=
-=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95=E2=80=95
-Amarula Solutions SRL
- Via Felice Cavallotti 25D, 41012 Carpi, MO, IT
-info@amarulasolutions.com
-www.amarulasolutions.com
+Cheers,
+Quentin
