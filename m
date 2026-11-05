@@ -1,169 +1,165 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8930606A31B
-	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 18:27:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C51E6606A32C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 18:27:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XyVyYis7;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GtmDkQt5;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Lye818qb
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=xGdS9Wt9;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YmpDkl4h;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=j/KawqOf
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A7A61809B4;
-	Thu,  5 Nov 2026 18:27:13 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A1FA1406DE;
+	Thu,  5 Nov 2026 18:27:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id crUINpGDYP6I; Thu,  5 Nov 2026 18:27:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BB0F2811A5
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793903231;
-	b=ib5sZlByrTKI498pPYPflzOGepZZjG08O9OXmK4DebOSLCfiECXm4lvxI9/knRGXlMSp
-	 kFZWxyqqRvm3q+vlQ7p5q/oVInAumC8zZgrMcHeUwl26+C+4qGakgtVF0GEQAb6sU9KUS
-	 GCv4HVYJtPO+zUu0PTv8IVCx3mMg6nNcg2DAKyGiHXr0QH5yRX/0MxNV4iNAZWyOB/YMO
-	 kk7WQT9DaJBRnenYEpn+/I8To4m5ABi6XoPGLVLHluq1GjK2YcpOT4GJGAVPH/na4Upz5
-	 jFt0m0Iq1ipUcAyLUoEQpyceAM8q1ZCtuCBFWpsxdCSEYSXr+q0Xo1jyp/fWypZURCg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lf5Qro9ON8LP; Thu,  5 Nov 2026 18:27:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7AD2A406E7
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793903240;
+	b=V3iiLdBOdSFsAAenWnT1WXEqKK4S5RTe64Wj2JKuw/7DSUYKoQf1vwnQGrmJV2BgmTut
+	 TWp5/xxUgwTrpAV9A91YGCKmntEyupAJx7yBzihc7iNorS5CtWBWDm/V3aj/WNFrQDjK8
+	 RCQyubLZZt1qD9ophPtv6zwWmJHnn9bietc618+k0n/NlyacrQHma00ITACES/BxAOnVl
+	 TX36vcPDg20FBoGeRAH2eIOhnLbPhBrnYgJ6R+VZV5cCtbvBRtELtClJCTStI0288zeIi
+	 qzJzKjAgcwddRx3F4ouNKhuE+inmUwH34C2X3Jts+7zJZ17mKkAz8/gSVXlgqgmwNHg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793903231;
+	c=relaxed/relaxed; t=1793903240;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:Received:Received:DKIM-Signature:
 	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Subject:Date:
+	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:Subject:Date:
 	 Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=JW4t2SBEynKWazeeOuUYg/UkNcjAdky91829JS6T7yA=;
-	b=FDNEfbcpY3Nsy4Q16Zj7cY6euStwqs5sod1G/EXe5lOQuYVwuxaoE0LwhVMQDD5WBCAi
-	 TKfPWEdKvuv08OG7Sk+prTSKjuNr1dgJHrh4i1Y4uyiMb9Z+KBxdPB+bpuI4V8KT+T4Zw
-	 hEfNd+o6f/C1/y6ZimA5769ud5/EMRRw+zIUQs7lrs1fFiQefyP0LjqoAyueRGzI8qjPY
-	 +kTcFtE4Hh3ZDV+GiXj9U8z054IdGA8XntxQWF+BSHmIvV3Jq0HCbYLFQn17ysgAnNDxb
-	 b8IKbrJnDJ/fK/joeGsUeOiRquVjTeTHzmw6jxsOI1DwCO2dF//QvCmLE2aDD7926aw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GtmDkQt5;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Lye818qb;
+	bh=T3EusgpYM+nMZM/YA38JkbOmFU/+1QR6VLsbVP9qnzI=;
+	b=IZFJXMR7vdZ9L8tJoLnHbqivZZv3LPnOAY+VUFpVchC+YNpQYX0PBckjAV/vQifaVJGz
+	 xiOlex4vlpyf0KCymIZhltZNW+DlcL6ouSVHfCEd5dN1G76iudjGsz6cAz9qkvoyhsTml
+	 mi0Airkckx47aT7ftp1YYp3t6yPWlEuSCM67BOjA65ANnqphOEYOVNMUnAg5zaeGmn+VF
+	 1guV1oXumUEuoTzzKmED3encmGTwzG8FuK7AXP3EOhHSsaDJdeaAP7rmqw4YksLfbQAA6
+	 +lgqGpzvUtre01TrVWe1I4Cn9VmAY0suWay5WZ4leHM30Lymazz7aXlFdWggKnRia3A==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793903231;
-	bh=JW4t2SBEynKWazeeOuUYg/UkNcjAdky91829JS6T7yA=;
-	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793903240;
+	bh=T3EusgpYM+nMZM/YA38JkbOmFU/+1QR6VLsbVP9qnzI=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=XyVyYis7Fif2kxbd+TSZcjhQPpB0h1zGFUKJ/flcp5tH431YqLAFOEKDDa47a3UR6
-	 Oqy8NcG+Rp9a0gBR1/qo5FZWzfwHvRqL5e3n0kZgTEuVoF8zKKIcgpflYlp/r4E5se
-	 HmzJ0BkmqImeEASVDf3dTUJ9QsO61UmlNVB8pAoBUbCP3R2Y9mGv6N4tI5MvQ2PJtq
-	 SlsmkDCyeaF+LfAmv1M6xl89uFFaxG2UdAVGHZiDcYdPooS6zlEXZLDvsr/4kxslDT
-	 2D7kVHpUUi28eiyRd1lNmQHiG1MQo1KKzG8Y6jthKl76Huu7uD31VMfwVFMEskEnf0
-	 1ZW6mdOprnmxw==
+	b=xGdS9Wt9tmhdAapWmcirTZl1IoAICwQiCmPXVzW2+gyPIN1fq/SR3Ij2/ZP6xmzCS
+	 EI1r2kYq3if8YdfJsUbg6hhAy5SE1hgqcwhGtd6HuJg5a3dpc0XHs5xKm4JfI+EWxp
+	 HR00Uqbsxdjue5PqFfoMCGRPfbAn/w8We5HnqiMVw0t5evR+s7HK61couquCp0AlPC
+	 Df7nkQBYk+3T1PRic24buV23vLv8JtpgsVvIpAwV5U9vm7u9Cxlvb4lw6cz0iDto3T
+	 J2wXf5PZGogv3rcaLVRuRsoCJTSuNfFQEP8/01KV7zJ+ChEAIX/4jGNurAOdrBh9Wi
+	 GRtqkpxqcbj0A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BB0F2811A5;
-	Thu,  5 Nov 2026 18:27:11 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0143A2AC
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 18:27:10 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7AD2A406E7;
+	Thu,  5 Nov 2026 18:27:20 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2728352B
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 18:27:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D8CD3811A4
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 18:27:09 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0284F400FF
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 18:27:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Vm03pyksxkdI for <u-boot@lists.u-boot-project.org>;
- Thu,  5 Nov 2026 18:27:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 68CED811A6
-Authentication-Results: smtp1.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id urLwyBay7Joa for <u-boot@lists.u-boot-project.org>;
+ Thu,  5 Nov 2026 18:27:16 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 7D86440012
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip=205.220.168.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
  helo=mx0a-0031df01.pphosted.com; envelope-from=aswin.murugan@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=GtmDkQt5; 
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=YmpDkl4h; 
  dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=Lye818qb
+ header.a=rsa-sha256 header.s=google header.b=j/KawqOf
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 68CED811A6
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 18:27:07 +0000 (UTC)
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7D86440012
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 18:27:16 +0000 (UTC)
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A5HeASc2433562
- for <u-boot@lists.u-boot-project.org>; Thu, 5 Nov 2026 18:27:07 GMT
+ 6A5HeSpA1440206
+ for <u-boot@lists.u-boot-project.org>; Thu, 5 Nov 2026 18:27:15 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=JW4t2SBEynK
- WazeeOuUYg/UkNcjAdky91829JS6T7yA=; b=GtmDkQt5VoGxWiP9kyMYhtmJj7o
- FgqiFPWjulr/t7vktEK92hkL25V0dzihTch0I+agoXI3m8/m8aTS39ArlHLdVp7Y
- CUhnOKkyZ+OuT/hPx1PxC8KR18bJUYEMHATPxDqB/hh8M3hdVdZHdjiue8A5/7OW
- FChQddGtA8lALVGesq9WUGuJIPuFsbQbXslNpc8BK6Be27uIwX/aFyrCSmWvn0Vk
- 5hQukmsEIskAf2APhJZkGlDQdb4vdvyD8woX41RhnDIwGebKi3YfB4UxhBJ5ymkw
- 5uZ6DQco3OCYqXSbaMEtPUzzgQ45yuKyG3SBWfVpSI6/4TxUWzU0F8C6PeA==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com
- [74.125.82.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrqpd27bw-1
+ cc:content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=T3EusgpYM+n
+ MZM/YA38JkbOmFU/+1QR6VLsbVP9qnzI=; b=YmpDkl4hqBI8rJetu5UiEABuUaN
+ WrUjaGsGYGIrjZpYGFHC3+QWGOAVnzKDl+feGkZveu9gZhu/M7NluzcVPWDvtdY/
+ qIXhT9khNwj4eTLg/lYKT6KN78OSHMUB6tyNMX2xdExPPhlwLGDmYbU6PGUhl8uk
+ 66huHxmwbbOrXRoRO6+au6Ec92LKd12+65bvI0YJXEH0cPlu5G4goHeS+/+rfha9
+ AMCHVG0/QDy+p5XZNpjgHEZNwCE0edToL6FazZ6IJadhvtop/GqY8zJvAaIdgHn3
+ llYLp0JkFBaygWO0VRx9E83V92ia6Cd8LDZveSOOSDItgmP3/VbxhSG0zUg==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
+ [74.125.82.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrm9v358b-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 18:27:06 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id
- 5a478bee46e88-3425098ae4bso1424442eec.0
- for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 10:27:06 -0800 (PST)
+ for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 18:27:15 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id
+ 5a478bee46e88-36de26cb4b3so1642330eec.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 10:27:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793903226; x=1794508026;
+ d=oss.qualcomm.com; s=google; t=1793903235; x=1794508035;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=JW4t2SBEynKWazeeOuUYg/UkNcjAdky91829JS6T7yA=;
- b=Lye818qbl7O92TjFAJ6M4T/5JkwAXeM+YF8s3xqMfnPQIi0CmdqW0eRyJKzKBDa1+a
- Hf+NEcsOTT9URbHth3KnlcdxGVS01WK/owWN1rIvk3tUc4/y/3ZiYaWKB+Iqi2kAoBgp
- gsrpcKttjk/ATjH9oIJljV5cJMCdxzYiA5jVhoq66xJe76ekgPWshFvCLh4ObCPmm70e
- IgCzXnXyCN1WWDXxp+sUDImFJ1WzPBGmzL9yJjnntqBy4SgZ9mpfr6/V0HihTf0BMk/N
- XG1iGxvFrGDvI8gBIJuiLxD4K4dZ557pG2xeUEZr/ePZXcJDbY3MR+v12bdlAZ2Jm35T
- vngw==
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=T3EusgpYM+nMZM/YA38JkbOmFU/+1QR6VLsbVP9qnzI=;
+ b=j/KawqOfbViYcVD2eJpueydfcusQ3JpJKhDEEu6SzIK/VA/O+4cq0/VDDmKI4DGRfs
+ ++bQRl4CmgJdmI+TcBDE0AfD31q6O49g+LP+/Hcbqe1MuQsIUPQhYcZ2Frfhc6fGQzDc
+ RaauoySloAcK+TI1dWEPQ3l5sdOtj2VqPtxvLVC95o9RcBGEOi8yI1Np68xWBCi/9Evl
+ cU6D9Az7cqaMPG06rXDCXsUZBGOmaM3gBAqoM+IPPNW/is+uD6DH2G+6mE44ZF905I8k
+ ZIZD+e8Up25SQbOJprMYQ0xAZN4muw+y3wHMo/9h8DQsS+Kca1jRLRNRjczU/aK04bbO
+ KmWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793903226; x=1794508026;
+ d=1e100.net; s=20260707; t=1793903235; x=1794508035;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=JW4t2SBEynKWazeeOuUYg/UkNcjAdky91829JS6T7yA=;
- b=UzA3vo8VZHZ67aGb1yLDNN4wfe2/Xkk++FsSBWl1sL+RZke+jAmUhMHRaxl5rqHQh3
- 9qbBNrdbfcWC0UzKwGASXISaXhuRvlE7n0aSI/VQDxAVi6JOaLiRbHyEHiHF/A+JibdJ
- jcYlPBBrKgdh0OGmSTUPwl8yhdKxXeybyb5ZAOhfM3J8zCHDdI0/UjuLXXnQPA7d3CNL
- SJHqwx/t7/13DSnBGtidPPzMTcMGX5UMYHSAhUAdHv6Mbvx1hBAiD+0viRkvFmiRlo2v
- hQ2C+8V+jDPM56xjHGJK+ZI76gqAjwGP8pR9+RdLevpsgbRwDkXoIjItxMuG7v1LKfiW
- 9Byg==
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=T3EusgpYM+nMZM/YA38JkbOmFU/+1QR6VLsbVP9qnzI=;
+ b=Kk70q45EFIUT5wDW8EwxX0fAOIHoF8JrbkmlBz2pJqK9aEeoG+gScHG/lByZBmNKmI
+ We9xTQQAYl1ni2vZ060QLhS2HCTVZxmqcowcwC1MSE2tg76uypXLyWVNmk7aoYaEbYl+
+ olo+wWVG4bix4Ki6eMgiNtyCS3hubTKYS86XCXKxTcvY14FYib6k74bzM21QriSaWWfr
+ 0oXrw7K++ZG2JfBCfgZsBGoiBgcF5i9F64d1LpecISyqTd8iokfFJghXA20uBsdY1blk
+ mZEgwVDRtU0dE4y0QM3AjzRYQhJNx5kTvOMuRWCoyrNL1oQ4qhLEtaM8TI4HOUYyA9Km
+ /qcQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvByvkKFQyAHSsa0fw+Q3JD39BO+cT19UZw3enCCfiPhui9jEI8GBB0xdsE27j2xtY81py/y1yvw=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+o0kSLRMNPMSRyo66gpnEIDEdNf3GCeCvdxSNoFF3IgMX9D958
- uaMUXGShTAYiVdh1lBQo4TXwzky75L8HlGPunI4hRSTpa4FVWmN7iQJuhP9JFFtQvCIA7dA5Nrv
- VR/n2uTSSCzq1wK3eV8izDv5Ki86rqo5v9ll8apfU/PZ4g0eOuwMXMyrp0HirOB9K93XOF7AbQv
- UE1Q8=
-X-Gm-Gg: AYBFou3Soc9r9q+qN5joV9KbHe2WbfS2H/dVzCzOKfS9nFkl8M1xaQG1hgKh5u7f9FX
- 8GlsefCP93W1GxD87Afxk6PYbgsrtGkCaD6idBCHvZy14/4uULPLAtrpcrBPAfuqf6Yf5ec9h15
- mW+ztJWOwnicJHtdcbpHkcuWD3B7NYeS+zM32af1kMWhUVQny9MkS3qriPVQde2RaWXlWvV8Ehg
- L4ms2ql8hcGx8QyTWpTQ+bsu8nDZW5mS6SrPSwXgK4MTbg/AJ8iaMgjZoMPKTCXTb2pdoKzM6mU
- xAMQWXeQQ9F8F9TDSGneqJ3f14/70Y/0fYxx3GVOcJ4i2B3uaZYbtkzRXuM09kquKqUP6UWOcnQ
- 9pMndw/Ai9x1vi9dNYHghYAkIJ9fK4jQ+NwXroBE1ZaUo8+N2pvACDs09VxeYRk4x/QsDcN3LC5
- r0QwLSYzAEV5CeoUDZOt2jvKG/uzSB9X2QFTtJxyE8lFsePt/DEQtje337/hPc3nGJ0iSs
-X-Received: by 2002:a05:7022:3f0d:b0:156:d588:c881 with SMTP id
- a92af1059eb24-1b24f432240mr4497995c88.2.1793903225838; 
- Thu, 05 Nov 2026 10:27:05 -0800 (PST)
-X-Received: by 2002:a05:7022:3f0d:b0:156:d588:c881 with SMTP id
- a92af1059eb24-1b24f432240mr4497936c88.2.1793903224830; 
- Thu, 05 Nov 2026 10:27:04 -0800 (PST)
+ AKwUvBw+9gsRjyTIcMDVYzX3ZaOrKXZS1sQ0oQsZC7zb1QXhWaMVJhdI8th+6hl58YFtYtiUqKQ+Jlk=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z83bj45JcptzNXNBE06/HN6ea5cYn5TCtqYSIWUMcflttIw5Y7I
+ XyeAyj1m/Tc/Bqi9HXVPL9ab+Ukna9B+j31WU7yJ9j058p9q3CCN3idmvJtNGdKWnc9ghjJA/7H
+ r+YSfevaNTuJw/Wp4TZ2wcbM41YbzyL2USu/BeHuYRR11a4TJqJZH1owC7cBifi+BTkpbAYY=
+X-Gm-Gg: AYBFou1wcU7RkMvLWnNQFQmfaWgZIgUBmsd1XEf0jrGQh17ATDAccNTuRZBaXlHnjRX
+ 3pCAQmUXSDJC14SVZdOaX4OWDzpZSSZX7UqaW0Q8JDhtWtL654ZskKyepzzA1HEPxzEL7MWPA33
+ cRSYPsK9K5ujCWiFm++iTuWWZLdxiRy/cu/zvjlwi2g3RYdnTuIkArSirYtO/oeEh+tQwgh9+Rm
+ OwzTu594WPo8ZeJ1NFZvt1esZ+qcNG2sk56UVgmvr5lr4sPQFvVwTuKsG1lJsgn1pDqQq6P5gcj
+ LQI+LlIvFzH4zYdc6MC+8W6mecgmtd1KkEMVvP0Iv3w0urGP/7d9YtbMywW9NOnHYy5ki1W1qmX
+ p5k1HG7TIOEAepapjF7c4SAR6X813+QLcWXOPVvK6/8sSLZ3fcp+xIB7LvYCpojvDVEvVHrNLrI
+ AeN3/zxDYX/fkJh1q3DvyDwj/fxCSqs7BqcI9jINJaKL5ohTMKPGjEVbdOgErMHnOW6271
+X-Received: by 2002:a05:7301:db8a:b0:36d:394d:e690 with SMTP id
+ 5a478bee46e88-36d395d342amr6056272eec.40.1793903233334; 
+ Thu, 05 Nov 2026 10:27:13 -0800 (PST)
+X-Received: by 2002:a05:7301:db8a:b0:36d:394d:e690 with SMTP id
+ 5a478bee46e88-36d395d342amr6056190eec.40.1793903231976; 
+ Thu, 05 Nov 2026 10:27:11 -0800 (PST)
 Received: from hu-aswinm-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-36f6b2be5bcsm141198eec.6.2026.11.05.10.26.59
+ 5a478bee46e88-36f6b2be5bcsm141198eec.6.2026.11.05.10.27.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Nov 2026 10:27:04 -0800 (PST)
+ Thu, 05 Nov 2026 10:27:11 -0800 (PST)
 From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
  sumit.garg@kernel.org, trini@konsulko.com,
@@ -174,39 +170,42 @@ To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
  bartosz.golaszewski@oss.qualcomm.com, shengchao.guo@oss.qualcomm.com,
  andersson@kernel.org, u-boot-qcom@groups.io,
  u-boot@lists.u-boot-project.org
-Subject: [PATCH v4 07/13] pinctrl: qcom: add TLMM driver for nord
-Date: Thu,  5 Nov 2026 23:56:08 +0530
-Message-Id: <20261105182614.2405482-8-aswin.murugan@oss.qualcomm.com>
+Cc: Deepti Jaggi <deepti.jaggi@oss.qualcomm.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: [PATCH v4 08/13] arm64: dts: qcom: Add device tree for Nord SoC series
+Date: Thu,  5 Nov 2026 23:56:09 +0530
+Message-Id: <20261105182614.2405482-9-aswin.murugan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261105182614.2405482-1-aswin.murugan@oss.qualcomm.com>
 References: <20261105182614.2405482-1-aswin.murugan@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA3MyBTYWx0ZWRfX6j5zqOsNsn/X
- ItlrHArLMKnuyA6/lJQphEAVOYIGYsqU2fDWmHk50YEOqpb79ZtvnJRJjesqpyhnlZmIUkl9StT
- gFcPzTxZjYmqbt83azRa8n+6JAZaZ08=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA3MyBTYWx0ZWRfXyosk3IexQiWK
- gQreH7HVhxPHMZF7qDgJFub3PTRnKmh9LTpCg3L94+kfpX9vGsY1xun+H6OiMOZmyxjteZLUCy4
- QtmqZt0C+o0ZFV11e5z81eAjJko7otxth6dgDrvK1XMlkuPrr4TKKuktARkWIPQtyNtVI9U544g
- N1EIK+v9OKk5pb+q2LXfcKVJXDnadpv6lZUiIUGtlOpxoDg5FcNDeu184Fle23MMzB4OBgHCJQA
- fz+UuiMGIuTIrKMkuBa0oGH+kGVXXsMSqENq3czL+k9tztFslpXRjTL1DPGJewt1fK1mKD8bU/U
- GjyCSUpJUlOr0zejge0CGLU/HNWOm1FUit/RZ2iqnInwmnysi0gn9nyh8lZ5p4uxan308Ln+8RB
- h1N9VcCSa885monoP+M4Dbs/RGxeym2O0JVgINag+p/9gB7fTFObYchFIo0OQ4D/ERL80lC+Uof
- wD5QIWCHzuu5ihfvSjw==
-X-Proofpoint-ORIG-GUID: Yo_myx6I5PkYKljMJf-f_Dnmhs0VrlQX
-X-Proofpoint-GUID: Yo_myx6I5PkYKljMJf-f_Dnmhs0VrlQX
-X-Authority-Analysis: v=2.4 cv=Y5JtIReN c=1 sm=1 tr=0 ts=6aecca7a cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA3MyBTYWx0ZWRfX9JsC8E6FS8N9
+ SQupwYEHoLCFryV7QlpOMV2iac0v2jXQJTMBE7Cacff4qKOtVDPb5mH9ROwxFhhspRvO+dlNKhs
+ nt+VSTD/x2Pw1WaWzHny3jqEuxG/GXg=
+X-Authority-Analysis: v=2.4 cv=KrHYSmWN c=1 sm=1 tr=0 ts=6aecca83 cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
- a=fmhBYP9P6AsTxTjTit8A:9 a=O8hF6Hzn-FEA:10 a=bBxd6f-gb0O0v-kibOvt:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=8CEx8uHD1C-9Ad5L0JgA:9 a=6Ab_bkdmUrQuMsNx7PHu:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA3MyBTYWx0ZWRfX7Mmk12qVPVg+
+ DZrNm+7XzYc+Rfbxb0JqiyXK84J9Toj2EERpda2EmXFnOre6glj/vpYvG78Xh6dbttQPlZZrzm9
+ /tCzwZxYEANQ4YpNibfXcUA3tSEIo+1bjkoATMG6CsyQVdZXFnq19lvgGxsznc+5q53DAl84LFr
+ C3bhANLzSNlDI3mId2Mm7jfQGHWPH3pIrn0RYKeEUMnWWWPjoB2Svq8lX0z6LeqlFTTnTLDCbZM
+ EfKTu4hViT5Vkt4YBZ7iEua2XBwTWuBxwU3i3bghnWhN/NhXgb6G/b+M1v1UkHOrs8hTkBUOwUS
+ wG/KN+466Kxl7vH4HZpCkV36e6lUdTA8JWTBLTp/ijb0/8gXpui1YJS/VDv7h2sB/f+Rcjeft1r
+ OGh7iPYY7siuaAelT3j5ri56TVfpQnF4kJ1QHFnG4Uyvjvf8wwCekVvjjqkgLt+RsfPYd3AbltL
+ SjS1bIa+RagkfIbXPcg==
+X-Proofpoint-GUID: QP2CF0xspldbDGwyZogGtwJJ21OwHrij
+X-Proofpoint-ORIG-GUID: QP2CF0xspldbDGwyZogGtwJJ21OwHrij
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-05_05,2026-11-04_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 adultscore=0 impostorscore=0 priorityscore=1501 bulkscore=0
- suspectscore=0 clxscore=1015 lowpriorityscore=0 phishscore=0 spamscore=0
+ lowpriorityscore=0 priorityscore=1501 adultscore=0 bulkscore=0 suspectscore=0
+ spamscore=0 phishscore=0 impostorscore=0 clxscore=1015 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611050073
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -225,682 +224,4651 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add support for the nord Top Level Mode Multiplexer (TLMM).
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
 
-Implement the qcom,nord-tlmm pinctrl driver to provide pin
-configuration support required by nord peripherals.
+Add base device tree include (nord.dtsi) for the Nord SoC series
+describing the core hardware components:
 
-Reviewed-by: Tyler Baker <tyler.baker@oss.qualcomm.com>
-Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+ - 18 Oryon (qcom,oryon-1-5) cores in three clusters, with PSCI-based
+   power management and CPU/cluster idle states
+ - ARM GICv3 interrupt controller with ITS
+ - TLMM GPIO/pinctrl controller
+ - 8 TSENS thermal sensors with thermal zones
+ - 3 APPS SMMU-500 instances
+ - 3 QUPv3 GENI SE QUP blocks
+ - PDP SCMI channel and mailbox
+ - Watchdog, Crypto, TRNG and TCSR
+ - Reserved memory, CMD-DB and firmware SCM
+ - PSCI and architected timers
+
+Co-developed-by: Deepti Jaggi <deepti.jaggi@oss.qualcomm.com>
+Signed-off-by: Deepti Jaggi <deepti.jaggi@oss.qualcomm.com>
+Co-developed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Link: https://lore.kernel.org/r/20260914031412.140856-2-shengchao.guo@oss.qualcomm.com
+Signed-off-by: Bjorn Andersson <andersson@kernel.org>
+
+[ upstream commit: 5e97460df08d194acb20861d1c58d7f55f8bb9bf ]
+
+(cherry picked from commit 54ef628a35edf0a59e9984428de46b82fc15d006)
 ---
- drivers/pinctrl/qcom/Kconfig        |   8 +
- drivers/pinctrl/qcom/Makefile       |   1 +
- drivers/pinctrl/qcom/pinctrl-nord.c | 626 ++++++++++++++++++++++++++++
- 3 files changed, 635 insertions(+)
- create mode 100644 drivers/pinctrl/qcom/pinctrl-nord.c
+ dts/upstream/src/arm64/qcom/nord.dtsi | 4605 +++++++++++++++++++++++++
+ 1 file changed, 4605 insertions(+)
+ create mode 100644 dts/upstream/src/arm64/qcom/nord.dtsi
 
-diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-index fa0385f159a..cb6f50099d6 100644
---- a/drivers/pinctrl/qcom/Kconfig
-+++ b/drivers/pinctrl/qcom/Kconfig
-@@ -62,6 +62,14 @@ config PINCTRL_QCOM_MILOS
- 	  Say Y here to enable support for pinctrl on the Snapdragon Milos SoC,
- 	  as well as the associated GPIO driver.
- 
-+config PINCTRL_QCOM_NORD
-+	bool "Qualcomm Nord Pinctrl"
-+	default y if PINCTRL_QCOM_GENERIC
-+	select PINCTRL_QCOM
-+	help
-+	  Say Y here to enable support for pinctrl on the Snapdragon Nord SoC,
-+	  as well as the associated GPIO driver.
-+
- config PINCTRL_QCOM_QCM2290
- 	bool "Qualcomm QCM2290 Pinctrl"
- 	default y if PINCTRL_QCOM_GENERIC
-diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-index 97d59f5eac0..af075102ef3 100644
---- a/drivers/pinctrl/qcom/Makefile
-+++ b/drivers/pinctrl/qcom/Makefile
-@@ -9,6 +9,7 @@ obj-$(CONFIG_PINCTRL_QCOM_IPQ5424) += pinctrl-ipq5424.o
- obj-$(CONFIG_PINCTRL_QCOM_IPQ9574) += pinctrl-ipq9574.o
- obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
- obj-$(CONFIG_PINCTRL_QCOM_MILOS) += pinctrl-milos.o
-+obj-$(CONFIG_PINCTRL_QCOM_NORD) += pinctrl-nord.o
- obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
- obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
- obj-$(CONFIG_PINCTRL_QCOM_QCS615) += pinctrl-qcs615.o
-diff --git a/drivers/pinctrl/qcom/pinctrl-nord.c b/drivers/pinctrl/qcom/pinctrl-nord.c
+diff --git a/dts/upstream/src/arm64/qcom/nord.dtsi b/dts/upstream/src/arm64/qcom/nord.dtsi
 new file mode 100644
-index 00000000000..8f622165ec0
+index 00000000000..e0496fd40c3
 --- /dev/null
-+++ b/drivers/pinctrl/qcom/pinctrl-nord.c
-@@ -0,0 +1,626 @@
-+// SPDX-License-Identifier: GPL-2.0-only
++++ b/dts/upstream/src/arm64/qcom/nord.dtsi
+@@ -0,0 +1,4605 @@
++// SPDX-License-Identifier: BSD-3-Clause
 +/*
-+ * Qualcomm Nord pinctrl
-+ *
 + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ *
 + */
 +
-+#include <dm.h>
++#include <dt-bindings/interrupt-controller/arm-gic.h>
 +
-+#include "pinctrl-qcom.h"
++/ {
++	interrupt-parent = <&intc>;
++	#address-cells = <2>;
++	#size-cells = <2>;
 +
-+#define MAX_PIN_NAME_LEN 32
-+static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
++	cpus {
++		#address-cells = <2>;
++		#size-cells = <0>;
 +
-+typedef unsigned int msm_pin_function[10];
++		cpu0: cpu@0 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x0>;
++			enable-method = "psci";
++			power-domains = <&cpu0_pd>, <&cpu_perf 0>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_0>;
++			#cooling-cells = <2>;
 +
-+#define PINGROUP(id, f1, f2, f3, f4, f5, f6, f7, f8, f9)\
-+	{					        \
-+		msm_mux_gpio, /* gpio mode */		\
-+		msm_mux_##f1,				\
-+		msm_mux_##f2,				\
-+		msm_mux_##f3,				\
-+		msm_mux_##f4,				\
-+		msm_mux_##f5,				\
-+		msm_mux_##f6,				\
-+		msm_mux_##f7,				\
-+		msm_mux_##f8,				\
-+		msm_mux_##f9				\
-+	}
++			l2_0: l2-cache {
++				compatible = "cache";
++				cache-level = <2>;
++				cache-unified;
++			};
++		};
 +
-+#define UFS_RESET(pg_name, ctl, io)			\
-+	{						\
-+		.name = #pg_name,			\
-+		.ctl_reg = ctl,				\
-+		.io_reg = io,				\
-+		.pull_bit = 3,				\
-+		.drv_bit = 0,				\
-+		.oe_bit = -1,				\
-+		.in_bit = -1,				\
-+		.out_bit = 0,				\
-+	}
++		cpu1: cpu@100 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x100>;
++			enable-method = "psci";
++			power-domains = <&cpu1_pd>, <&cpu_perf 0>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_0>;
++			#cooling-cells = <2>;
++		};
 +
-+enum nord_functions {
-+	msm_mux_aoss_cti,
-+	msm_mux_atest_char,
-+	msm_mux_atest_usb20,
-+	msm_mux_atest_usb21,
-+	msm_mux_aud_intfc0_clk,
-+	msm_mux_aud_intfc0_data,
-+	msm_mux_aud_intfc0_ws,
-+	msm_mux_aud_intfc10_clk,
-+	msm_mux_aud_intfc10_data,
-+	msm_mux_aud_intfc10_ws,
-+	msm_mux_aud_intfc1_clk,
-+	msm_mux_aud_intfc1_data,
-+	msm_mux_aud_intfc1_ws,
-+	msm_mux_aud_intfc2_clk,
-+	msm_mux_aud_intfc2_data,
-+	msm_mux_aud_intfc2_ws,
-+	msm_mux_aud_intfc3_clk,
-+	msm_mux_aud_intfc3_data,
-+	msm_mux_aud_intfc3_ws,
-+	msm_mux_aud_intfc4_clk,
-+	msm_mux_aud_intfc4_data,
-+	msm_mux_aud_intfc4_ws,
-+	msm_mux_aud_intfc5_clk,
-+	msm_mux_aud_intfc5_data,
-+	msm_mux_aud_intfc5_ws,
-+	msm_mux_aud_intfc6_clk,
-+	msm_mux_aud_intfc6_data,
-+	msm_mux_aud_intfc6_ws,
-+	msm_mux_aud_intfc7_clk,
-+	msm_mux_aud_intfc7_data,
-+	msm_mux_aud_intfc7_ws,
-+	msm_mux_aud_intfc8_clk,
-+	msm_mux_aud_intfc8_data,
-+	msm_mux_aud_intfc8_ws,
-+	msm_mux_aud_intfc9_clk,
-+	msm_mux_aud_intfc9_data,
-+	msm_mux_aud_intfc9_ws,
-+	msm_mux_aud_mclk0_mira,
-+	msm_mux_aud_mclk0_mirb,
-+	msm_mux_aud_mclk1_mira,
-+	msm_mux_aud_mclk1_mirb,
-+	msm_mux_aud_mclk2_mira,
-+	msm_mux_aud_mclk2_mirb,
-+	msm_mux_aud_refclk0,
-+	msm_mux_aud_refclk1,
-+	msm_mux_bist_done,
-+	msm_mux_ccu_async_in,
-+	msm_mux_ccu_i2c_scl,
-+	msm_mux_ccu_i2c_sda,
-+	msm_mux_ccu_timer,
-+	msm_mux_clink_debug,
-+	msm_mux_dbg_out,
-+	msm_mux_dbg_out_clk,
-+	msm_mux_ddr_bist_complete,
-+	msm_mux_ddr_bist_fail,
-+	msm_mux_ddr_bist_start,
-+	msm_mux_ddr_bist_stop,
-+	msm_mux_ddr_pxi,
-+	msm_mux_dp_rx0,
-+	msm_mux_dp_rx00,
-+	msm_mux_dp_rx01,
-+	msm_mux_dp_rx0_mute,
-+	msm_mux_dp_rx1,
-+	msm_mux_dp_rx10,
-+	msm_mux_dp_rx11,
-+	msm_mux_dp_rx1_mute,
-+	msm_mux_edp0_hot,
-+	msm_mux_edp0_lcd,
-+	msm_mux_edp1_hot,
-+	msm_mux_edp1_lcd,
-+	msm_mux_edp2_hot,
-+	msm_mux_edp2_lcd,
-+	msm_mux_edp3_hot,
-+	msm_mux_edp3_lcd,
-+	msm_mux_emac0_mcg,
-+	msm_mux_emac0_mdc,
-+	msm_mux_emac0_mdio,
-+	msm_mux_emac0_ptp,
-+	msm_mux_emac1_mcg,
-+	msm_mux_emac1_mdc,
-+	msm_mux_emac1_mdio,
-+	msm_mux_emac1_ptp,
-+	msm_mux_gcc_gp1_clk,
-+	msm_mux_gcc_gp2_clk,
-+	msm_mux_gcc_gp3_clk,
-+	msm_mux_gcc_gp4_clk,
-+	msm_mux_gcc_gp5_clk,
-+	msm_mux_gcc_gp6_clk,
-+	msm_mux_gcc_gp7_clk,
-+	msm_mux_gcc_gp8_clk,
-+	msm_mux_gpio,
-+	msm_mux_jitter_bist,
-+	msm_mux_lbist_pass,
-+	msm_mux_mbist_pass,
-+	msm_mux_mdp0_vsync_out,
-+	msm_mux_mdp1_vsync_out,
-+	msm_mux_mdp_vsync_e,
-+	msm_mux_mdp_vsync_p,
-+	msm_mux_mdp_vsync_s,
-+	msm_mux_pcie0_clk_req_n,
-+	msm_mux_pcie1_clk_req_n,
-+	msm_mux_pcie2_clk_req_n,
-+	msm_mux_pcie3_clk_req_n,
-+	msm_mux_phase_flag,
-+	msm_mux_pll_bist_sync,
-+	msm_mux_pll_clk_aux,
-+	msm_mux_prng_rosc0,
-+	msm_mux_prng_rosc1,
-+	msm_mux_pwrbrk_i_n,
-+	msm_mux_qdss,
-+	msm_mux_qdss_cti,
-+	msm_mux_qspi,
-+	msm_mux_qup0_se0,
-+	msm_mux_qup0_se1,
-+	msm_mux_qup0_se2,
-+	msm_mux_qup0_se3,
-+	msm_mux_qup0_se4,
-+	msm_mux_qup0_se5,
-+	msm_mux_qup1_se0,
-+	msm_mux_qup1_se1,
-+	msm_mux_qup1_se2,
-+	msm_mux_qup1_se3,
-+	msm_mux_qup1_se4,
-+	msm_mux_qup1_se5,
-+	msm_mux_qup1_se6,
-+	msm_mux_qup2_se0,
-+	msm_mux_qup2_se1,
-+	msm_mux_qup2_se2,
-+	msm_mux_qup2_se3,
-+	msm_mux_qup2_se4,
-+	msm_mux_qup2_se5,
-+	msm_mux_qup2_se6,
-+	msm_mux_qup3_se0_mira,
-+	msm_mux_qup3_se0_mirb,
-+	msm_mux_sailss_ospi,
-+	msm_mux_sdc4_clk,
-+	msm_mux_sdc4_cmd,
-+	msm_mux_sdc4_data,
-+	msm_mux_smb_alert,
-+	msm_mux_smb_alert_n,
-+	msm_mux_smb_clk,
-+	msm_mux_smb_dat,
-+	msm_mux_tb_trig_sdc4,
-+	msm_mux_tmess_prng0,
-+	msm_mux_tmess_prng1,
-+	msm_mux_tsc_timer,
-+	msm_mux_tsense_pwm,
-+	msm_mux_usb0_hs,
-+	msm_mux_usb0_phy_ps,
-+	msm_mux_usb1_hs,
-+	msm_mux_usb1_phy_ps,
-+	msm_mux_usb2_hs,
-+	msm_mux_usxgmii0_phy,
-+	msm_mux_usxgmii1_phy,
-+	msm_mux_vsense_trigger_mirnat,
-+	msm_mux_wcn_sw,
-+	msm_mux_wcn_sw_ctrl,
-+	msm_mux__,
-+};
++		cpu2: cpu@200 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x200>;
++			enable-method = "psci";
++			power-domains = <&cpu2_pd>, <&cpu_perf 0>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_0>;
++			#cooling-cells = <2>;
++		};
 +
-+#define MSM_PIN_FUNCTION(fname)                         \
-+	[msm_mux_##fname] = {#fname, msm_mux_##fname}
++		cpu3: cpu@300 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x300>;
++			enable-method = "psci";
++			power-domains = <&cpu3_pd>, <&cpu_perf 0>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_0>;
++			#cooling-cells = <2>;
++		};
 +
-+static const struct pinctrl_function msm_pinctrl_functions[] = {
-+	MSM_PIN_FUNCTION(aoss_cti),
-+	MSM_PIN_FUNCTION(atest_char),
-+	MSM_PIN_FUNCTION(atest_usb20),
-+	MSM_PIN_FUNCTION(atest_usb21),
-+	MSM_PIN_FUNCTION(aud_intfc0_clk),
-+	MSM_PIN_FUNCTION(aud_intfc0_data),
-+	MSM_PIN_FUNCTION(aud_intfc0_ws),
-+	MSM_PIN_FUNCTION(aud_intfc10_clk),
-+	MSM_PIN_FUNCTION(aud_intfc10_data),
-+	MSM_PIN_FUNCTION(aud_intfc10_ws),
-+	MSM_PIN_FUNCTION(aud_intfc1_clk),
-+	MSM_PIN_FUNCTION(aud_intfc1_data),
-+	MSM_PIN_FUNCTION(aud_intfc1_ws),
-+	MSM_PIN_FUNCTION(aud_intfc2_clk),
-+	MSM_PIN_FUNCTION(aud_intfc2_data),
-+	MSM_PIN_FUNCTION(aud_intfc2_ws),
-+	MSM_PIN_FUNCTION(aud_intfc3_clk),
-+	MSM_PIN_FUNCTION(aud_intfc3_data),
-+	MSM_PIN_FUNCTION(aud_intfc3_ws),
-+	MSM_PIN_FUNCTION(aud_intfc4_clk),
-+	MSM_PIN_FUNCTION(aud_intfc4_data),
-+	MSM_PIN_FUNCTION(aud_intfc4_ws),
-+	MSM_PIN_FUNCTION(aud_intfc5_clk),
-+	MSM_PIN_FUNCTION(aud_intfc5_data),
-+	MSM_PIN_FUNCTION(aud_intfc5_ws),
-+	MSM_PIN_FUNCTION(aud_intfc6_clk),
-+	MSM_PIN_FUNCTION(aud_intfc6_data),
-+	MSM_PIN_FUNCTION(aud_intfc6_ws),
-+	MSM_PIN_FUNCTION(aud_intfc7_clk),
-+	MSM_PIN_FUNCTION(aud_intfc7_data),
-+	MSM_PIN_FUNCTION(aud_intfc7_ws),
-+	MSM_PIN_FUNCTION(aud_intfc8_clk),
-+	MSM_PIN_FUNCTION(aud_intfc8_data),
-+	MSM_PIN_FUNCTION(aud_intfc8_ws),
-+	MSM_PIN_FUNCTION(aud_intfc9_clk),
-+	MSM_PIN_FUNCTION(aud_intfc9_data),
-+	MSM_PIN_FUNCTION(aud_intfc9_ws),
-+	MSM_PIN_FUNCTION(aud_mclk0_mira),
-+	MSM_PIN_FUNCTION(aud_mclk0_mirb),
-+	MSM_PIN_FUNCTION(aud_mclk1_mira),
-+	MSM_PIN_FUNCTION(aud_mclk1_mirb),
-+	MSM_PIN_FUNCTION(aud_mclk2_mira),
-+	MSM_PIN_FUNCTION(aud_mclk2_mirb),
-+	MSM_PIN_FUNCTION(aud_refclk0),
-+	MSM_PIN_FUNCTION(aud_refclk1),
-+	MSM_PIN_FUNCTION(bist_done),
-+	MSM_PIN_FUNCTION(ccu_async_in),
-+	MSM_PIN_FUNCTION(ccu_i2c_scl),
-+	MSM_PIN_FUNCTION(ccu_i2c_sda),
-+	MSM_PIN_FUNCTION(ccu_timer),
-+	MSM_PIN_FUNCTION(clink_debug),
-+	MSM_PIN_FUNCTION(dbg_out),
-+	MSM_PIN_FUNCTION(dbg_out_clk),
-+	MSM_PIN_FUNCTION(ddr_bist_complete),
-+	MSM_PIN_FUNCTION(ddr_bist_fail),
-+	MSM_PIN_FUNCTION(ddr_bist_start),
-+	MSM_PIN_FUNCTION(ddr_bist_stop),
-+	MSM_PIN_FUNCTION(ddr_pxi),
-+	MSM_PIN_FUNCTION(dp_rx0),
-+	MSM_PIN_FUNCTION(dp_rx00),
-+	MSM_PIN_FUNCTION(dp_rx01),
-+	MSM_PIN_FUNCTION(dp_rx0_mute),
-+	MSM_PIN_FUNCTION(dp_rx1),
-+	MSM_PIN_FUNCTION(dp_rx10),
-+	MSM_PIN_FUNCTION(dp_rx11),
-+	MSM_PIN_FUNCTION(dp_rx1_mute),
-+	MSM_PIN_FUNCTION(edp0_hot),
-+	MSM_PIN_FUNCTION(edp0_lcd),
-+	MSM_PIN_FUNCTION(edp1_hot),
-+	MSM_PIN_FUNCTION(edp1_lcd),
-+	MSM_PIN_FUNCTION(edp2_hot),
-+	MSM_PIN_FUNCTION(edp2_lcd),
-+	MSM_PIN_FUNCTION(edp3_hot),
-+	MSM_PIN_FUNCTION(edp3_lcd),
-+	MSM_PIN_FUNCTION(emac0_mcg),
-+	MSM_PIN_FUNCTION(emac0_mdc),
-+	MSM_PIN_FUNCTION(emac0_mdio),
-+	MSM_PIN_FUNCTION(emac0_ptp),
-+	MSM_PIN_FUNCTION(emac1_mcg),
-+	MSM_PIN_FUNCTION(emac1_mdc),
-+	MSM_PIN_FUNCTION(emac1_mdio),
-+	MSM_PIN_FUNCTION(emac1_ptp),
-+	MSM_PIN_FUNCTION(gcc_gp1_clk),
-+	MSM_PIN_FUNCTION(gcc_gp2_clk),
-+	MSM_PIN_FUNCTION(gcc_gp3_clk),
-+	MSM_PIN_FUNCTION(gcc_gp4_clk),
-+	MSM_PIN_FUNCTION(gcc_gp5_clk),
-+	MSM_PIN_FUNCTION(gcc_gp6_clk),
-+	MSM_PIN_FUNCTION(gcc_gp7_clk),
-+	MSM_PIN_FUNCTION(gcc_gp8_clk),
-+	MSM_PIN_FUNCTION(gpio),
-+	MSM_PIN_FUNCTION(jitter_bist),
-+	MSM_PIN_FUNCTION(lbist_pass),
-+	MSM_PIN_FUNCTION(mbist_pass),
-+	MSM_PIN_FUNCTION(mdp0_vsync_out),
-+	MSM_PIN_FUNCTION(mdp1_vsync_out),
-+	MSM_PIN_FUNCTION(mdp_vsync_e),
-+	MSM_PIN_FUNCTION(mdp_vsync_p),
-+	MSM_PIN_FUNCTION(mdp_vsync_s),
-+	MSM_PIN_FUNCTION(pcie0_clk_req_n),
-+	MSM_PIN_FUNCTION(pcie1_clk_req_n),
-+	MSM_PIN_FUNCTION(pcie2_clk_req_n),
-+	MSM_PIN_FUNCTION(pcie3_clk_req_n),
-+	MSM_PIN_FUNCTION(phase_flag),
-+	MSM_PIN_FUNCTION(pll_bist_sync),
-+	MSM_PIN_FUNCTION(pll_clk_aux),
-+	MSM_PIN_FUNCTION(prng_rosc0),
-+	MSM_PIN_FUNCTION(prng_rosc1),
-+	MSM_PIN_FUNCTION(pwrbrk_i_n),
-+	MSM_PIN_FUNCTION(qdss),
-+	MSM_PIN_FUNCTION(qdss_cti),
-+	MSM_PIN_FUNCTION(qspi),
-+	MSM_PIN_FUNCTION(qup0_se0),
-+	MSM_PIN_FUNCTION(qup0_se1),
-+	MSM_PIN_FUNCTION(qup0_se2),
-+	MSM_PIN_FUNCTION(qup0_se3),
-+	MSM_PIN_FUNCTION(qup0_se4),
-+	MSM_PIN_FUNCTION(qup0_se5),
-+	MSM_PIN_FUNCTION(qup1_se0),
-+	MSM_PIN_FUNCTION(qup1_se1),
-+	MSM_PIN_FUNCTION(qup1_se2),
-+	MSM_PIN_FUNCTION(qup1_se3),
-+	MSM_PIN_FUNCTION(qup1_se4),
-+	MSM_PIN_FUNCTION(qup1_se5),
-+	MSM_PIN_FUNCTION(qup1_se6),
-+	MSM_PIN_FUNCTION(qup2_se0),
-+	MSM_PIN_FUNCTION(qup2_se1),
-+	MSM_PIN_FUNCTION(qup2_se2),
-+	MSM_PIN_FUNCTION(qup2_se3),
-+	MSM_PIN_FUNCTION(qup2_se4),
-+	MSM_PIN_FUNCTION(qup2_se5),
-+	MSM_PIN_FUNCTION(qup2_se6),
-+	MSM_PIN_FUNCTION(qup3_se0_mira),
-+	MSM_PIN_FUNCTION(qup3_se0_mirb),
-+	MSM_PIN_FUNCTION(sailss_ospi),
-+	MSM_PIN_FUNCTION(sdc4_clk),
-+	MSM_PIN_FUNCTION(sdc4_cmd),
-+	MSM_PIN_FUNCTION(sdc4_data),
-+	MSM_PIN_FUNCTION(smb_alert),
-+	MSM_PIN_FUNCTION(smb_alert_n),
-+	MSM_PIN_FUNCTION(smb_clk),
-+	MSM_PIN_FUNCTION(smb_dat),
-+	MSM_PIN_FUNCTION(tb_trig_sdc4),
-+	MSM_PIN_FUNCTION(tmess_prng0),
-+	MSM_PIN_FUNCTION(tmess_prng1),
-+	MSM_PIN_FUNCTION(tsc_timer),
-+	MSM_PIN_FUNCTION(tsense_pwm),
-+	MSM_PIN_FUNCTION(usb0_hs),
-+	MSM_PIN_FUNCTION(usb0_phy_ps),
-+	MSM_PIN_FUNCTION(usb1_hs),
-+	MSM_PIN_FUNCTION(usb1_phy_ps),
-+	MSM_PIN_FUNCTION(usb2_hs),
-+	MSM_PIN_FUNCTION(usxgmii0_phy),
-+	MSM_PIN_FUNCTION(usxgmii1_phy),
-+	MSM_PIN_FUNCTION(vsense_trigger_mirnat),
-+	MSM_PIN_FUNCTION(wcn_sw),
-+	MSM_PIN_FUNCTION(wcn_sw_ctrl),
-+};
++		cpu4: cpu@400 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x400>;
++			enable-method = "psci";
++			power-domains = <&cpu4_pd>, <&cpu_perf 0>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_0>;
++			#cooling-cells = <2>;
++		};
 +
-+static const msm_pin_function nord_pin_functions[] = {
-+	[0] = PINGROUP(0, _, _, _, _, _, _, _, _, _),
-+	[1] = PINGROUP(1, pcie0_clk_req_n, _, _, _, _, _, _, _, _),
-+	[2] = PINGROUP(2, _, _, _, _, _, _, _, _, _),
-+	[3] = PINGROUP(3, _, _, _, _, _, _, _, _, _),
-+	[4] = PINGROUP(4, pcie1_clk_req_n, _, _, _, _, _, _, _, _),
-+	[5] = PINGROUP(5, _, _, _, _, _, _, _, _, _),
-+	[6] = PINGROUP(6, _, _, _, _, _, _, _, _, _),
-+	[7] = PINGROUP(7, pcie2_clk_req_n, _, _, _, _, _, _, _, _),
-+	[8] = PINGROUP(8, _, _, _, _, _, _, _, _, _),
-+	[9] = PINGROUP(9, _, _, _, _, _, _, _, _, _),
-+	[10] = PINGROUP(10, pcie3_clk_req_n, _, _, _, _, _, _, _, _),
-+	[11] = PINGROUP(11, _, _, _, _, _, _, _, _, _),
-+	[12] = PINGROUP(12, usb0_hs, clink_debug, _, _, _, _, _, _, _),
-+	[13] = PINGROUP(13, usb1_hs, clink_debug, gcc_gp7_clk, _, _, _, _, _, _),
-+	[14] = PINGROUP(14, usb2_hs, clink_debug, gcc_gp8_clk, _, _, _, _, _, _),
-+	[15] = PINGROUP(15, ccu_i2c_sda, _, _, _, _, _, _, _, _),
-+	[16] = PINGROUP(16, ccu_i2c_scl, emac0_mcg, _, _, _, _, _, _, _),
-+	[17] = PINGROUP(17, ccu_i2c_sda, emac0_mcg, _, _, _, _, _, _, _),
-+	[18] = PINGROUP(18, ccu_i2c_scl, emac0_mcg, _, _, _, _, _, _, _),
-+	[19] = PINGROUP(19, ccu_i2c_sda, emac0_mcg, _, _, _, _, _, _, _),
-+	[20] = PINGROUP(20, ccu_i2c_scl, emac1_mcg, _, _, _, _, _, _, _),
-+	[21] = PINGROUP(21, ccu_i2c_sda, emac1_mcg, _, _, _, _, _, _, _),
-+	[22] = PINGROUP(22, ccu_i2c_scl, emac1_mcg, _, _, _, _, _, _, _),
-+	[23] = PINGROUP(23, ccu_i2c_sda, emac1_mcg, _, _, _, _, _, _, _),
-+	[24] = PINGROUP(24, ccu_i2c_scl, _, _, _, _, _, _, _, _),
-+	[25] = PINGROUP(25, ccu_timer, tsc_timer, _, _, _, _, _, _, _),
-+	[26] = PINGROUP(26, ccu_timer, tsc_timer, _, _, _, _, _, _, _),
-+	[27] = PINGROUP(27, ccu_timer, tsc_timer, _, _, _, _, _, _, _),
-+	[28] = PINGROUP(28, ccu_timer, tsc_timer, _, _, _, _, _, _, _),
-+	[29] = PINGROUP(29, ccu_timer, tsc_timer, _, _, _, _, _, _, _),
-+	[30] = PINGROUP(30, ccu_timer, tsc_timer, _, _, _, _, _, _, _),
-+	[31] = PINGROUP(31, ccu_timer, tsc_timer, _, _, _, _, _, _, _),
-+	[32] = PINGROUP(32, ccu_timer, tsc_timer, _, _, _, _, _, _, _),
-+	[33] = PINGROUP(33, ccu_timer, tsc_timer, _, _, _, _, _, _, _),
-+	[34] = PINGROUP(34, ccu_timer, tsc_timer, _, _, _, _, _, _, _),
-+	[35] = PINGROUP(35, dp_rx0_mute, _, _, _, _, _, _, _, _),
-+	[36] = PINGROUP(36, dp_rx1_mute, ddr_bist_start, _, _, _, _, _, _, _),
-+	[37] = PINGROUP(37, emac1_ptp, ddr_bist_complete, _, _, _, _, _, _, _),
-+	[38] = PINGROUP(38, emac1_ptp, ddr_bist_stop, _, _, _, _, _, _, _),
-+	[39] = PINGROUP(39, emac1_ptp, ddr_bist_fail, _, _, _, _, _, _, _),
-+	[40] = PINGROUP(40, emac1_ptp, _, _, _, _, _, _, _, _),
-+	[41] = PINGROUP(41, emac1_ptp, qdss_cti, _, _, _, _, _, _, _),
-+	[42] = PINGROUP(42, emac1_ptp, qdss_cti, gcc_gp3_clk, _, _, _, _, _, _),
-+	[43] = PINGROUP(43, emac1_ptp, gcc_gp4_clk, tsense_pwm, _, _, _, _, _, _),
-+	[44] = PINGROUP(44, emac1_ptp, tsense_pwm, _, _, _, _, _, _, _),
-+	[45] = PINGROUP(45, usxgmii0_phy, ccu_async_in, tsense_pwm, _, _, _, _, _, _),
-+	[46] = PINGROUP(46, usxgmii1_phy, tsense_pwm, _, _, _, _, _, _, _),
-+	[47] = PINGROUP(47, emac0_mdc, edp0_lcd, tsense_pwm, _, _, _, _, _, _),
-+	[48] = PINGROUP(48, emac0_mdio, edp1_lcd, tsense_pwm, _, _, _, _, _, _),
-+	[49] = PINGROUP(49, emac1_mdc, edp2_lcd, tsense_pwm, _, _, _, _, _, _),
-+	[50] = PINGROUP(50, emac1_mdio, edp3_lcd, tsense_pwm, _, _, _, _, _, _),
-+	[51] = PINGROUP(51, edp0_hot, clink_debug, gcc_gp1_clk, _, _, _, _, _, _),
-+	[52] = PINGROUP(52, edp1_hot, clink_debug, gcc_gp2_clk, _, _, _, _, _, _),
-+	[53] = PINGROUP(53, edp2_hot, clink_debug, _, _, _, _, _, _, _),
-+	[54] = PINGROUP(54, edp3_hot, clink_debug, _, _, _, _, _, _, _),
-+	[55] = PINGROUP(55, dp_rx0, clink_debug, _, _, _, _, _, _, _),
-+	[56] = PINGROUP(56, dp_rx1, _, _, _, _, _, _, _, _),
-+	[57] = PINGROUP(57, aud_intfc0_clk, _, _, _, _, _, _, _, _),
-+	[58] = PINGROUP(58, aud_intfc0_ws, _, _, _, _, _, _, _, _),
-+	[59] = PINGROUP(59, aud_intfc0_data, _, _, _, _, _, _, _, _),
-+	[60] = PINGROUP(60, aud_intfc0_data, _, _, _, _, _, _, _, _),
-+	[61] = PINGROUP(61, aud_intfc0_data, aud_intfc10_clk, _, _, _, _, _, _, _),
-+	[62] = PINGROUP(62, aud_intfc0_data, aud_intfc10_ws, _, _, _, _, _, _, _),
-+	[63] = PINGROUP(63, aud_intfc0_data, aud_intfc7_clk, _, _, _, _, _, _, _),
-+	[64] = PINGROUP(64, aud_intfc0_data, aud_intfc7_ws, _, _, _, _, _, _, _),
-+	[65] = PINGROUP(65, aud_intfc0_data, aud_intfc7_data, _, _, _, _, _, _, _),
-+	[66] = PINGROUP(66, aud_intfc0_data, aud_intfc7_data, _, _, _, _, _, _, _),
-+	[67] = PINGROUP(67, aud_intfc1_clk, phase_flag, _, qdss, _, _, _, _, _),
-+	[68] = PINGROUP(68, aud_intfc1_ws, phase_flag, _, qdss, _, _, _, _, _),
-+	[69] = PINGROUP(69, aud_intfc1_data, phase_flag, _, qdss, _, _, _, _, _),
-+	[70] = PINGROUP(70, aud_intfc1_data, aud_intfc9_clk, phase_flag, _, qdss, _, _, _, _),
-+	[71] = PINGROUP(71, aud_intfc1_data, aud_intfc9_ws, phase_flag, _, qdss, _, _, _, _),
-+	[72] = PINGROUP(72, aud_intfc1_data, aud_intfc9_data, phase_flag, _, qdss, _, _, _, _),
-+	[73] = PINGROUP(73, aud_intfc1_data, aud_intfc8_clk, phase_flag, _, qdss, _, _, _, _),
-+	[74] = PINGROUP(74, aud_intfc1_data, aud_intfc8_ws, phase_flag, _, qdss, _, _, _, _),
-+	[75] = PINGROUP(75, aud_intfc1_data, aud_intfc8_data, phase_flag, _, qdss, _, _, _, _),
-+	[76] = PINGROUP(76, aud_intfc1_data, aud_intfc8_data, phase_flag, _, qdss, _, _, _, _),
-+	[77] = PINGROUP(77, aud_intfc2_clk, phase_flag, _, qdss, _, _, _, _, _),
-+	[78] = PINGROUP(78, aud_intfc2_ws, phase_flag, _, qdss, _, _, _, _, _),
-+	[79] = PINGROUP(79, aud_intfc2_data, phase_flag, _, qdss, _, _, _, _, _),
-+	[80] = PINGROUP(80, aud_intfc2_data, phase_flag, _, _, qdss, _, _, _, _),
-+	[81] = PINGROUP(81, aud_intfc2_data, aud_intfc10_data, phase_flag, _, _, qdss, _, _, _),
-+	[82] = PINGROUP(82, aud_intfc2_data, aud_intfc10_data, phase_flag, _, qdss, _, _, _, _),
-+	[83] = PINGROUP(83, aud_intfc3_clk, dp_rx0, aoss_cti, phase_flag, _, qdss, _, _, _),
-+	[84] = PINGROUP(84, aud_intfc3_ws, dp_rx0, aoss_cti, phase_flag, _, qdss, _, _, _),
-+	[85] = PINGROUP(85, aud_intfc3_data, dp_rx0, aoss_cti, phase_flag, _, qdss, _, _, _),
-+	[86] = PINGROUP(86, aud_intfc3_data, aud_mclk0_mirb, dp_rx0, aoss_cti, phase_flag, _, qdss,
-+			_, _),
-+	[87] = PINGROUP(87, aud_intfc4_clk, phase_flag, _, qdss, _, _, _, _, _),
-+	[88] = PINGROUP(88, aud_intfc4_ws, dp_rx0, phase_flag, _, qdss, _, _, _, _),
-+	[89] = PINGROUP(89, aud_intfc4_data, dp_rx0, phase_flag, _, qdss, _, _, _, _),
-+	[90] = PINGROUP(90, aud_intfc4_data, aud_mclk1_mirb, phase_flag, _, qdss, _, _, _, _),
-+	[91] = PINGROUP(91, aud_intfc5_clk, phase_flag, _, qdss, _, _, _, _, _),
-+	[92] = PINGROUP(92, aud_intfc5_ws, dp_rx1, phase_flag, _, qdss, _, _, _, _),
-+	[93] = PINGROUP(93, aud_intfc5_data, dp_rx1, phase_flag, _, qdss, _, _, _, _),
-+	[94] = PINGROUP(94, aud_intfc5_data, aud_mclk2_mirb, phase_flag, tmess_prng0, _, qdss, _,
-+			_, _),
-+	[95] = PINGROUP(95, aud_intfc6_clk, dp_rx1, phase_flag, tmess_prng1, _, qdss, _, _, _),
-+	[96] = PINGROUP(96, aud_intfc6_ws, dp_rx1, phase_flag, _, qdss, _, _, _, _),
-+	[97] = PINGROUP(97, aud_intfc6_data, dp_rx1, qdss, _, _, _, _, _, _),
-+	[98] = PINGROUP(98, aud_intfc6_data, dp_rx1, phase_flag, _, qdss, _, _, _, _),
-+	[99] = PINGROUP(99, aud_mclk0_mira, qdss, dp_rx00, ddr_pxi, _, _, _, _, _),
-+	[100] = PINGROUP(100, aud_mclk1_mira, aud_refclk0, pll_clk_aux, qdss, dp_rx01, ddr_pxi, _,
-+			 _, _),
-+	[101] = PINGROUP(101, aud_mclk2_mira, aud_refclk1, phase_flag, _, qdss, _, _, _, _),
-+	[102] = PINGROUP(102, qspi, qup3_se0_mira, qup3_se0_mirb, _, _, _, _, _, _),
-+	[103] = PINGROUP(103, qspi, qup3_se0_mira, qup3_se0_mirb, _, _, _, _, _, _),
-+	[104] = PINGROUP(104, qspi, qup3_se0_mira, _, _, _, _, _, _, _),
-+	[105] = PINGROUP(105, qspi, qup3_se0_mira, gcc_gp5_clk, _, _, _, _, _, _),
-+	[106] = PINGROUP(106, qspi, qup3_se0_mira, gcc_gp6_clk, _, _, _, _, _, _),
-+	[107] = PINGROUP(107, qspi, qup3_se0_mira, _, _, _, _, _, _, _),
-+	[108] = PINGROUP(108, qspi, qup3_se0_mira, qdss, _, _, _, _, _, _),
-+	[109] = PINGROUP(109, qup0_se0, qup0_se1, qup0_se5, mdp_vsync_e, smb_alert_n, _, ddr_pxi,
-+			 _, _),
-+	[110] = PINGROUP(110, qup0_se0, qup0_se1, qup0_se5, qdss_cti, mdp_vsync_p, smb_alert, _,
-+			 ddr_pxi, _),
-+	[111] = PINGROUP(111, qup0_se1, qup0_se0, smb_dat, _, _, _, _, _, _),
-+	[112] = PINGROUP(112, qup0_se1, qup0_se0, smb_clk, _, _, _, _, _, _),
-+	[113] = PINGROUP(113, qup0_se2, qup0_se3, ccu_i2c_sda, mdp0_vsync_out, dbg_out, ddr_pxi, _,
-+			 _, _),
-+	[114] = PINGROUP(114, qup0_se2, qup0_se3, ccu_i2c_scl, mdp0_vsync_out, _, ddr_pxi, _, _, _),
-+	[115] = PINGROUP(115, qup0_se3, qup0_se2, ccu_i2c_sda, mdp0_vsync_out, _, ddr_pxi, _, _, _),
-+	[116] = PINGROUP(116, qup0_se3, qup0_se2, ccu_i2c_scl, mdp0_vsync_out, _, ddr_pxi, _, _, _),
-+	[117] = PINGROUP(117, qup0_se4, prng_rosc0, _, ddr_pxi, _, _, _, _, _),
-+	[118] = PINGROUP(118, qup0_se4, prng_rosc1, _, ddr_pxi, _, _, _, _, _),
-+	[119] = PINGROUP(119, qup0_se4, _, ddr_pxi, _, _, _, _, _, _),
-+	[120] = PINGROUP(120, qup0_se4, _, ddr_pxi, _, _, _, _, _, _),
-+	[121] = PINGROUP(121, qup0_se5, lbist_pass, mdp0_vsync_out, _, dp_rx10, ddr_pxi, _, _, _),
-+	[122] = PINGROUP(122, qup0_se5, mbist_pass, mdp0_vsync_out, _, dp_rx11, ddr_pxi, _, _, _),
-+	[123] = PINGROUP(123, qup1_se0, qup1_se1, mdp1_vsync_out, jitter_bist, _, _, _, _, _),
-+	[124] = PINGROUP(124, qup1_se0, qup1_se1, mdp1_vsync_out, _, _, _, _, _, _),
-+	[125] = PINGROUP(125, qup1_se1, qup1_se0, ccu_i2c_sda, mdp1_vsync_out, _, _, _, _, _),
-+	[126] = PINGROUP(126, qup1_se1, qup1_se0, ccu_i2c_scl, mdp1_vsync_out, _, atest_usb20,
-+			 ddr_pxi, _, _),
-+	[127] = PINGROUP(127, qup1_se2, qup1_se2, _, atest_usb21, ddr_pxi, _, _, _, _),
-+	[128] = PINGROUP(128, qup1_se2, qup1_se2, _, atest_usb20, ddr_pxi, _, _, _, _),
-+	[129] = PINGROUP(129, qup1_se3, qup1_se3, ccu_i2c_sda, mdp1_vsync_out, _, atest_usb21,
-+			 ddr_pxi, _, _),
-+	[130] = PINGROUP(130, qup1_se3, qup1_se3, ccu_i2c_scl, mdp1_vsync_out, _, atest_usb20,
-+			 ddr_pxi, _, _),
-+	[131] = PINGROUP(131, qup1_se4, qup1_se6, ccu_i2c_sda, mdp1_vsync_out, _, atest_usb21,
-+			 ddr_pxi, _, _),
-+	[132] = PINGROUP(132, qup1_se4, qup1_se6, ccu_i2c_scl, mdp1_vsync_out, _,
-+			 vsense_trigger_mirnat, ddr_pxi, _, _),
-+	[133] = PINGROUP(133, qup1_se5, emac0_ptp, mdp1_vsync_out, _, ddr_pxi, _, _, _, _),
-+	[134] = PINGROUP(134, qup1_se5, emac0_ptp, mdp1_vsync_out, _, ddr_pxi, _, _, _, _),
-+	[135] = PINGROUP(135, qup1_se5, emac0_ptp, mdp1_vsync_out, _, ddr_pxi, _, _, _, _),
-+	[136] = PINGROUP(136, qup1_se5, emac0_ptp, _, ddr_pxi, _, _, _, _, _),
-+	[137] = PINGROUP(137, qup1_se6, qup1_se4, dp_rx0, _, ddr_pxi, _, _, _, _),
-+	[138] = PINGROUP(138, qup1_se6, qup1_se4, dp_rx0, qdss_cti, jitter_bist, ddr_pxi, _, _, _),
-+	[139] = PINGROUP(139, qup2_se0, emac0_ptp, mdp0_vsync_out, ddr_pxi, _, _, _, _, _),
-+	[140] = PINGROUP(140, qup2_se0, emac0_ptp, mdp0_vsync_out, _, _, _, _, _, _),
-+	[141] = PINGROUP(141, qup2_se0, emac0_ptp, mdp0_vsync_out, _, _, _, _, _, _),
-+	[142] = PINGROUP(142, qup2_se0, emac0_ptp, qdss_cti, mdp0_vsync_out, _, _, _, _, _),
-+	[143] = PINGROUP(143, qup2_se1, qup2_se4, ccu_timer, mdp0_vsync_out, _, _, _, _, _),
-+	[144] = PINGROUP(144, qup2_se1, qup2_se4, ccu_timer, qdss_cti, mdp_vsync_s, _, _, _, _),
-+	[145] = PINGROUP(145, qup2_se2, _, _, _, _, _, _, _, _),
-+	[146] = PINGROUP(146, qup2_se2, _, _, _, _, _, _, _, _),
-+	[147] = PINGROUP(147, qup2_se2, _, _, _, _, _, _, _, _),
-+	[148] = PINGROUP(148, qup2_se2, _, _, _, _, _, _, _, _),
-+	[149] = PINGROUP(149, qup2_se2, _, _, _, _, _, _, _, _),
-+	[150] = PINGROUP(150, qup2_se3, qup2_se4, ccu_timer, _, _, _, _, _, _),
-+	[151] = PINGROUP(151, qup2_se3, qup2_se4, ccu_timer, _, _, _, _, _, _),
-+	[152] = PINGROUP(152, qup2_se3, qup2_se4, ccu_timer, _, _, _, _, _, _),
-+	[153] = PINGROUP(153, qup2_se3, ccu_timer, _, _, _, _, _, _, _),
-+	[154] = PINGROUP(154, qup2_se4, qup2_se1, _, _, _, _, _, _, _),
-+	[155] = PINGROUP(155, qup2_se4, qup2_se1, _, _, _, _, _, _, _),
-+	[156] = PINGROUP(156, qup2_se5, qup2_se6, _, _, _, _, _, _, _),
-+	[157] = PINGROUP(157, qup2_se5, qup2_se6, _, _, _, _, _, _, _),
-+	[158] = PINGROUP(158, qup2_se6, qup2_se5, dp_rx1, _, _, _, _, _, _),
-+	[159] = PINGROUP(159, qup2_se6, qup2_se5, dp_rx1, _, _, _, _, _, _),
-+	[160] = PINGROUP(160, wcn_sw_ctrl, _, _, _, _, _, _, _, _),
-+	[161] = PINGROUP(161, wcn_sw, _, _, _, _, _, _, _, _),
-+	[162] = PINGROUP(162, qdss_cti, _, ddr_pxi, _, _, _, _, _, _),
-+	[163] = PINGROUP(163, qdss_cti, _, ddr_pxi, _, _, _, _, _, _),
-+	[164] = PINGROUP(164, usb0_phy_ps, _, sailss_ospi, ddr_pxi, _, _, _, _, _),
-+	[165] = PINGROUP(165, usb1_phy_ps, dbg_out_clk, sailss_ospi, ddr_pxi, _, _, _, _, _),
-+	[166] = PINGROUP(166, _, _, _, _, _, _, _, _, _),
-+	[167] = PINGROUP(167, pwrbrk_i_n, _, _, _, _, _, _, _, _),
-+	[168] = PINGROUP(168, bist_done, _, _, _, _, _, _, _, _),
-+	[169] = PINGROUP(169, tb_trig_sdc4, _, _, _, _, _, _, _, _),
-+	[170] = PINGROUP(170, sdc4_data, _, _, _, _, _, _, _, _),
-+	[171] = PINGROUP(171, sdc4_data, _, _, _, _, _, _, _, _),
-+	[172] = PINGROUP(172, sdc4_data, _, _, _, _, _, _, _, _),
-+	[173] = PINGROUP(173, sdc4_data, _, _, _, _, _, _, _, _),
-+	[174] = PINGROUP(174, sdc4_cmd, _, _, _, _, _, _, _, _),
-+	[175] = PINGROUP(175, sdc4_clk, _, _, _, _, _, _, _, _),
-+	[176] = PINGROUP(176, ccu_async_in, pll_bist_sync, atest_char, _, _, _, _, _, _),
-+	[177] = PINGROUP(177, ccu_async_in, atest_char, _, _, _, _, _, _, _),
-+	[178] = PINGROUP(178, ccu_async_in, atest_char, _, _, _, _, _, _, _),
-+	[179] = PINGROUP(179, ccu_async_in, atest_char, _, _, _, _, _, _, _),
-+	[180] = PINGROUP(180, ccu_async_in, atest_char, _, _, _, _, _, _, _),
-+};
++		cpu5: cpu@500 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x500>;
++			enable-method = "psci";
++			power-domains = <&cpu5_pd>, <&cpu_perf 0>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_0>;
++			#cooling-cells = <2>;
++		};
 +
-+static const struct msm_special_pin_data nord_special_pins_data[] = {
-+	[0] = UFS_RESET(ufs_reset, 0xbd004, 0xbe000),
-+};
++		cpu6: cpu@10000 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x10000>;
++			power-domains = <&cpu6_pd>, <&cpu_perf 1>;
++			power-domain-names = "psci", "perf";
++			enable-method = "psci";
++			next-level-cache = <&l2_10000>;
++			#cooling-cells = <2>;
 +
-+static const char *nord_get_function_name(struct udevice *dev, unsigned int selector)
-+{
-+	return msm_pinctrl_functions[selector].name;
-+}
++			l2_10000: l2-cache {
++				compatible = "cache";
++				cache-level = <2>;
++				cache-unified;
++			};
++		};
 +
-+static const char *nord_get_pin_name(struct udevice *dev, unsigned int selector)
-+{
-+	if (selector >= 181)
-+		snprintf(pin_name, MAX_PIN_NAME_LEN, "%s",
-+			 nord_special_pins_data[selector - 181].name);
-+	else
-+		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
++		cpu7: cpu@10100 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x10100>;
++			enable-method = "psci";
++			power-domains = <&cpu7_pd>, <&cpu_perf 1>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_10000>;
++			#cooling-cells = <2>;
++		};
 +
-+	return pin_name;
-+}
++		cpu8: cpu@10200 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x10200>;
++			enable-method = "psci";
++			power-domains = <&cpu8_pd>, <&cpu_perf 1>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_10000>;
++			#cooling-cells = <2>;
++		};
 +
-+static int nord_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
-+{
-+	unsigned int i;
-+	const msm_pin_function *func = NULL;
++		cpu9: cpu@10300 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x10300>;
++			enable-method = "psci";
++			power-domains = <&cpu9_pd>, <&cpu_perf 1>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_10000>;
++			#cooling-cells = <2>;
++		};
 +
-+	if (pin >= ARRAY_SIZE(nord_pin_functions))
-+		return -EINVAL;
++		cpu10: cpu@10400 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x10400>;
++			enable-method = "psci";
++			power-domains = <&cpu10_pd>, <&cpu_perf 1>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_10000>;
++			#cooling-cells = <2>;
++		};
 +
-+	func = nord_pin_functions + pin;
-+	for (i = 0; i < 10; i++)
-+		if ((*func)[i] == selector)
-+			return i;
++		cpu11: cpu@10500 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x10500>;
++			enable-method = "psci";
++			power-domains = <&cpu11_pd>, <&cpu_perf 1>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_10000>;
++			#cooling-cells = <2>;
++		};
 +
-+	pr_err("Can't find requested function for pin %u pin\n", pin);
++		cpu12: cpu@20000 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x20000>;
++			enable-method = "psci";
++			power-domains = <&cpu12_pd>, <&cpu_perf 2>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_20000>;
++			#cooling-cells = <2>;
 +
-+	return -EINVAL;
-+}
++			l2_20000: l2-cache {
++				compatible = "cache";
++				cache-level = <2>;
++				cache-unified;
++			};
++		};
 +
-+static const struct msm_pinctrl_data nord_data = {
-+	.pin_data = {
-+		.pin_count = 182,
-+		.special_pins_start = 181,
-+		.special_pins_data = nord_special_pins_data,
-+	},
-+	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
-+	.get_function_name = nord_get_function_name,
-+	.get_function_mux = nord_get_function_mux,
-+	.get_pin_name = nord_get_pin_name,
-+};
++		cpu13: cpu@20100 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x20100>;
++			enable-method = "psci";
++			power-domains = <&cpu13_pd>, <&cpu_perf 2>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_20000>;
++			#cooling-cells = <2>;
++		};
 +
-+static const struct udevice_id msm_pinctrl_ids[] = {
-+	{
-+		.compatible = "qcom,nord-tlmm",
-+		.data = (ulong)&nord_data
-+	},
-+	{ /* Sentinel */ } };
++		cpu14: cpu@20200 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x20200>;
++			enable-method = "psci";
++			power-domains = <&cpu14_pd>, <&cpu_perf 2>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_20000>;
++			#cooling-cells = <2>;
++		};
 +
-+U_BOOT_DRIVER(pinctrl_nord) = {
-+	.name = "pinctrl_nord",
-+	.id = UCLASS_NOP,
-+	.of_match = msm_pinctrl_ids,
-+	.ops = &msm_pinctrl_ops,
-+	.bind = msm_pinctrl_bind,
++		cpu15: cpu@20300 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x20300>;
++			enable-method = "psci";
++			power-domains = <&cpu15_pd>, <&cpu_perf 2>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_20000>;
++			#cooling-cells = <2>;
++		};
++
++		cpu16: cpu@20400 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x20400>;
++			enable-method = "psci";
++			power-domains = <&cpu16_pd>, <&cpu_perf 2>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_20000>;
++			#cooling-cells = <2>;
++		};
++
++		cpu17: cpu@20500 {
++			device_type = "cpu";
++			compatible = "qcom,oryon-1-5";
++			reg = <0x0 0x20500>;
++			enable-method = "psci";
++			power-domains = <&cpu17_pd>, <&cpu_perf 2>;
++			power-domain-names = "psci", "perf";
++			next-level-cache = <&l2_20000>;
++			#cooling-cells = <2>;
++		};
++
++		cpu-map {
++			cluster0 {
++				core0 {
++					cpu = <&cpu0>;
++				};
++
++				core1 {
++					cpu = <&cpu1>;
++				};
++
++				core2 {
++					cpu = <&cpu2>;
++				};
++
++				core3 {
++					cpu = <&cpu3>;
++				};
++
++				core4 {
++					cpu = <&cpu4>;
++				};
++
++				core5 {
++					cpu = <&cpu5>;
++				};
++			};
++
++			cluster1 {
++				core0 {
++					cpu = <&cpu6>;
++				};
++
++				core1 {
++					cpu = <&cpu7>;
++				};
++
++				core2 {
++					cpu = <&cpu8>;
++				};
++
++				core3 {
++					cpu = <&cpu9>;
++				};
++
++				core4 {
++					cpu = <&cpu10>;
++				};
++
++				core5 {
++					cpu = <&cpu11>;
++				};
++			};
++
++			cluster2 {
++				core0 {
++					cpu = <&cpu12>;
++				};
++
++				core1 {
++					cpu = <&cpu13>;
++				};
++
++				core2 {
++					cpu = <&cpu14>;
++				};
++
++				core3 {
++					cpu = <&cpu15>;
++				};
++
++				core4 {
++					cpu = <&cpu16>;
++				};
++
++				core5 {
++					cpu = <&cpu17>;
++				};
++			};
++		};
++
++		idle-states {
++			entry-method = "psci";
++
++			core_off_c4: cluster-c4 {
++				compatible = "arm,idle-state";
++				idle-state-name = "retention";
++				entry-latency-us = <93>;
++				exit-latency-us = <129>;
++				min-residency-us = <560>;
++				arm,psci-suspend-param = <0x00000003>;
++			};
++		};
++
++		domain-idle-states {
++			cluster_pwr_dn: cluster-sleep-0 {
++				compatible = "domain-idle-state";
++				arm,psci-suspend-param = <0x01000053>;
++				entry-latency-us = <2150>;
++				exit-latency-us = <1983>;
++				min-residency-us = <9144>;
++			};
++
++			domain_ss3: domain-sleep-0 {
++				compatible = "domain-idle-state";
++				arm,psci-suspend-param = <0x02000153>;
++				entry-latency-us = <2800>;
++				exit-latency-us = <4400>;
++				min-residency-us = <10150>;
++			};
++		};
++	};
++
++	firmware: firmware {
++		scm {
++			compatible = "qcom,scm-nord",
++				     "qcom,scm";
++			qcom,dload-mode = <&tcsr 0x79000>;
++		};
++
++		pdp_scmi: scmi {
++			compatible = "arm,scmi";
++			mboxes = <&pdp0_mbox 0>,
++				 <&pdp0_mbox 11>,
++				 <&pdp0_mbox 1>;
++			mbox-names = "tx",
++				     "tx_reply",
++				     "rx";
++			shmem = <&pdp0_a2p>,
++				<&pdp0_p2a>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			cpu_perf: protocol@13 {
++				reg = <0x13>;
++				#power-domain-cells = <1>;
++			};
++		};
++	};
++
++	memory@80000000 {
++		device_type = "memory";
++		/* Size will be updated by bootloader */
++		reg = <0x0 0x80000000 0x0 0x0>;
++	};
++
++	psci {
++		compatible = "arm,psci-1.0";
++		method = "smc";
++
++		cpu0_pd: power-domain-cpu0 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster0_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu1_pd: power-domain-cpu1 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster0_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu2_pd: power-domain-cpu2 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster0_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu3_pd: power-domain-cpu3 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster0_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu4_pd: power-domain-cpu4 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster0_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu5_pd: power-domain-cpu5 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster0_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu6_pd: power-domain-cpu6 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster1_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu7_pd: power-domain-cpu7 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster1_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu8_pd: power-domain-cpu8 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster1_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu9_pd: power-domain-cpu9 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster1_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu10_pd: power-domain-cpu10 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster1_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu11_pd: power-domain-cpu11 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster1_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu12_pd: power-domain-cpu12 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster2_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu13_pd: power-domain-cpu13 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster2_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu14_pd: power-domain-cpu14 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster2_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu15_pd: power-domain-cpu15 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster2_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu16_pd: power-domain-cpu16 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster2_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cpu17_pd: power-domain-cpu17 {
++			#power-domain-cells = <0>;
++			power-domains = <&cluster2_pd>;
++			domain-idle-states = <&core_off_c4>;
++		};
++
++		cluster0_pd: power-domain-cluster0 {
++			#power-domain-cells = <0>;
++			power-domains = <&system_pd>;
++			domain-idle-states = <&cluster_pwr_dn>;
++		};
++
++		cluster1_pd: power-domain-cluster1 {
++			#power-domain-cells = <0>;
++			power-domains = <&system_pd>;
++			domain-idle-states = <&cluster_pwr_dn>;
++		};
++
++		cluster2_pd: power-domain-cluster2 {
++			#power-domain-cells = <0>;
++			power-domains = <&system_pd>;
++			domain-idle-states = <&cluster_pwr_dn>;
++		};
++
++		system_pd: power-domain-system {
++			#power-domain-cells = <0>;
++			domain-idle-states = <&domain_ss3>;
++		};
++	};
++
++	reserved_memory: reserved-memory {
++		#address-cells = <2>;
++		#size-cells = <2>;
++		ranges;
++
++		cpucp_scandump_mem: cpucp-scandump-region@80000000 {
++			reg = <0x0 0x80000000 0x0 0x800000>;
++			no-map;
++		};
++
++		tme_sail_mem: tme-sail-region@81ff0000 {
++			reg = <0x0 0x81ff0000 0x0 0x10000>;
++			no-map;
++		};
++
++		tz_sail_mailbox_mem: tz-sail-mailbox-region@82000000 {
++			reg = <0x0 0x82000000 0x0 0x8000>;
++			no-map;
++		};
++
++		sail_mailbox_mem: sail-mailbox-region@82008000 {
++			reg = <0x0 0x82008000 0x0 0x1f8000>;
++			no-map;
++		};
++
++		sail_ota_mem: sail-ota-region@82200000 {
++			reg = <0x0 0x82200000 0x0 0x5ff000>;
++			no-map;
++		};
++
++		sail_vdt_mem: sail-vdt-region@827ff000 {
++			reg = <0x0 0x827ff000 0x0 0x1000>;
++			no-map;
++		};
++
++		hyp_mem: hyp-region@82800000 {
++			reg = <0x0 0x82800000 0x0 0x2400000>;
++			no-map;
++		};
++
++		deepsleep_mem: deepsleep-region@84c00000 {
++			reg = <0x0 0x84c00000 0x0 0x800000>;
++			no-map;
++		};
++
++		deepsleep_backup_mem: deepsleep-backup-region@86a00000 {
++			reg = <0x0 0x86a00000 0x0 0x200000>;
++			no-map;
++		};
++
++		soccp_fe_vm_0: soccp-fe-vm-0-region@86c00000 {
++			reg = <0x0 0x86c00000 0x0 0xac000>;
++			no-map;
++		};
++
++		soccp_fe_vm_1: soccp-fe-vm-1-region@86cac000 {
++			reg = <0x0 0x86cac000 0x0 0x18d000>;
++			no-map;
++		};
++
++		soccp_fe_vm_2: soccp-fe-vm-2-region@86e39000 {
++			reg = <0x0 0x86e39000 0x0 0x1c7000>;
++			no-map;
++		};
++
++		tme_crash_dump_mem: tme-crash-dump-region@87000000 {
++			reg = <0x0 0x87000000 0x0 0xa0000>;
++			no-map;
++		};
++
++		tme_log_mem: tme-log-region@87140000 {
++			reg = <0x0 0x87140000 0x0 0x4000>;
++			no-map;
++		};
++
++		aop_cmd_db_p_mem: aop-cmd-db-p-region@87148000 {
++			compatible = "qcom,cmd-db";
++			reg = <0x0 0x87148000 0x0 0x20000>;
++			no-map;
++		};
++
++		nsp_sync_buffer_mem: nsp-sync-buffer-region@871ff000 {
++			reg = <0x0 0x871ff000 0x0 0x1000>;
++			no-map;
++		};
++
++		ddr_training_checksum_data_mem: ddr-training-checksum-data-region@87200000 {
++			reg = <0x0 0x87200000 0x0 0x2000>;
++			no-map;
++		};
++
++		xbl_dtlog_mem: xbl-dtlog-region@87202000 {
++			reg = <0x0 0x87202000 0x0 0x60000>;
++			no-map;
++		};
++
++		xbl_ramdump_mem: xbl-ramdump-region@87262000 {
++			reg = <0x0 0x87262000 0x0 0x1c0000>;
++			no-map;
++		};
++
++		uefi_log: uefi-log@87442000 {
++			reg = <0x0 0x87442000 0x0 0x10000>;
++			no-map;
++		};
++
++		secdata_apss_mem: secdata-apss-region@87452000 {
++			reg = <0x0 0x87452000 0x0 0x1000>;
++			no-map;
++		};
++
++		antireplay_emulation_mem: antireplay-emulation-region@87453000 {
++			reg = <0x0 0x87453000 0x0 0x1000>;
++			no-map;
++		};
++
++		soccp_sdi_mem: soccp-sdi-region@87454000 {
++			reg = <0x0 0x87454000 0x0 0x40000>;
++			no-map;
++		};
++
++		hyp_mem_database_mem: hyp-mem-database-region@87494000 {
++			reg = <0x0 0x87494000 0x0 0x60000>;
++			no-map;
++		};
++
++		pmic_mini_dump_mem: pmic-mini-dump-region@874f4000 {
++			reg = <0x0 0x874f4000 0x0 0x80000>;
++			no-map;
++		};
++
++		qup_fw_mem: qup-fw-region@87574000 {
++			reg = <0x0 0x87574000 0x0 0x20000>;
++			no-map;
++		};
++
++		softsku_mem: softsku-region@87594000 {
++			reg = <0x0 0x87594000 0x0 0x9000>;
++			no-map;
++		};
++
++		resource_scheduler_mem: resource-scheduler-region@8759d000 {
++			reg = <0x0 0x8759d000 0x0 0x20000>;
++			no-map;
++		};
++
++		pdp_ns_mem: pdp-ns-mem-region@87600000 {
++			reg = <0x0 0x87600000 0x0 0x8000>,
++			      <0x0 0x87609000 0x0 0x1f7000>;
++			no-map;
++		};
++
++		pdp0_p2a: scmi-shmem@87608000 {
++			compatible = "arm,scmi-shmem";
++			reg = <0x0 0x87608000 0x0 0x80>;
++			no-map;
++		};
++
++		pdp0_a2p: scmi-shmem@87608180 {
++			compatible = "arm,scmi-shmem";
++			reg = <0x0 0x87608180 0x0 0x80>;
++			no-map;
++		};
++
++		tz_stat_mem: tz-stat-region@87a00000 {
++			reg = <0x0 0x87a00000 0x0 0x100000>;
++			no-map;
++		};
++
++		qdss_apps_mem: qdss-apps-region@87b00000 {
++			reg = <0x0 0x87b00000 0x0 0x2000000>;
++			no-map;
++		};
++
++		global_sync_mem: global-sync-region@89f00000 {
++			reg = <0x0 0x89f00000 0x0 0x400000>;
++			no-map;
++		};
++
++		tzffi_mem: tzffi-region@8a300000 {
++			compatible = "shared-dma-pool";
++			reg = <0x0 0x8a300000 0x0 0x1400000>;
++			no-map;
++		};
++
++		gunyah_md_mem: gunyah-md-region@8b700000 {
++			reg = <0x0 0x8b700000 0x0 0x80000>;
++			no-map;
++		};
++
++		flashless_qntm_tool_mem: flashless-qntm-tool-region@8b780000 {
++			reg = <0x0 0x8b780000 0x0 0x182000>;
++			no-map;
++		};
++
++		ipa_fw_mem: ipa-fw-region@8bb00000 {
++			reg = <0x0 0x8bb00000 0x0 0x10000>;
++			no-map;
++		};
++
++		ipa_gsi_mem: ipa-gsi-region@8bb10000 {
++			reg = <0x0 0x8bb10000 0x0 0xa000>;
++			no-map;
++		};
++
++		gpu_microcode_mem: gpu-microcode-region@8bb1a000 {
++			reg = <0x0 0x8bb1a000 0x0 0x2000>;
++			no-map;
++		};
++
++		gpu_microcode_2_mem: gpu-microcode-2-region@8bb1c000 {
++			reg = <0x0 0x8bb1c000 0x0 0x2000>;
++			no-map;
++		};
++
++		soccp_mem: soccp-region@8bc00000 {
++			reg = <0x0 0x8bc00000 0x0 0x300000>;
++			no-map;
++		};
++
++		cvp_mem: cvp-region@8d100000 {
++			reg = <0x0 0x8d100000 0x0 0x800000>;
++			no-map;
++		};
++
++		cdsp0_mem: cdsp0-region@8d900000 {
++			reg = <0x0 0x8d900000 0x0 0x2300000>;
++			no-map;
++		};
++
++		cdsp1_mem: cdsp1-region@8fc00000 {
++			reg = <0x0 0x8fc00000 0x0 0x2300000>;
++			no-map;
++		};
++
++		cdsp2_mem: cdsp2-region@91f00000 {
++			reg = <0x0 0x91f00000 0x0 0x2300000>;
++			no-map;
++		};
++
++		cdsp3_mem: cdsp3-region@94200000 {
++			reg = <0x0 0x94200000 0x0 0x2300000>;
++			no-map;
++		};
++
++		hpass_dsp0_mem: hpass-dsp0-region@96500000 {
++			reg = <0x0 0x96500000 0x0 0x2800000>;
++			no-map;
++		};
++
++		hpass_dsp1_mem: hpass-dsp1-region@98d00000 {
++			reg = <0x0 0x98d00000 0x0 0x2800000>;
++			no-map;
++		};
++
++		hpass_dsp2_mem: hpass-dsp2-region@9b500000 {
++			reg = <0x0 0x9b500000 0x0 0x2800000>;
++			no-map;
++		};
++
++		q6_cdsp0_dtb_mem: q6-cdsp0-dtb-region@9dd00000 {
++			reg = <0x0 0x9dd00000 0x0 0x80000>;
++			no-map;
++		};
++
++		q6_cdsp1_dtb_mem: q6-cdsp1-dtb-region@9dd80000 {
++			reg = <0x0 0x9dd80000 0x0 0x80000>;
++			no-map;
++		};
++
++		q6_cdsp2_dtb_mem: q6-cdsp2-dtb-region@9de00000 {
++			reg = <0x0 0x9de00000 0x0 0x80000>;
++			no-map;
++		};
++
++		q6_cdsp3_dtb_mem: q6-cdsp3-dtb-region@9de80000 {
++			reg = <0x0 0x9de80000 0x0 0x80000>;
++			no-map;
++		};
++
++		hpass_dsp0_dtb_mem: hpass-dsp0-dtb-region@9df00000 {
++			reg = <0x0 0x9df00000 0x0 0x80000>;
++			no-map;
++		};
++
++		hpass_dsp1_dtb_mem: hpass-dsp1-dtb-region@9df80000 {
++			reg = <0x0 0x9df80000 0x0 0x80000>;
++			no-map;
++		};
++
++		hpass_dsp2_dtb_mem: hpass-dsp2-dtb-region@9e000000 {
++			reg = <0x0 0x9e000000 0x0 0x100000>;
++			no-map;
++		};
++
++		camera_icp_1_mem: camera-icp-1-region@9e100000 {
++			reg = <0x0 0x9e100000 0x0 0x800000>;
++			no-map;
++		};
++
++		camera_icp_2_mem: camera-icp-2-region@9e900000 {
++			reg = <0x0 0x9e900000 0x0 0x800000>;
++			no-map;
++		};
++
++		camera_qup_1_mem: camera-qup-1-region@9f100000 {
++			reg = <0x0 0x9f100000 0x0 0x200000>;
++			no-map;
++		};
++
++		camera_qup_2_mem: camera-qup-2-region@9f300000 {
++			reg = <0x0 0x9f300000 0x0 0x200000>;
++			no-map;
++		};
++
++		video_mem: video-region@9f500000 {
++			reg = <0x0 0x9f500000 0x0 0xc00000>;
++			no-map;
++		};
++
++		pil_umd_reserved: mdt-load-region@a0100000 {
++			reg = <0x0 0xa0100000 0x0 0x100000>;
++			no-map;
++		};
++
++		mm_dspq: mm-dspq-region@ba200000 {
++			reg = <0x0 0xba200000 0x0 0x200000>;
++			no-map;
++		};
++
++		display_config_reserved: display-config-region@ba400000 {
++			reg = <0x0 0xba400000 0x0 0xa00000>;
++			no-map;
++		};
++
++		mm_calibration_data_mem: mm-calibration-data-region@bae00000 {
++			reg = <0x0 0xbae00000 0x0 0x800000>;
++			no-map;
++		};
++
++		audio_config_mem: audio-config-region@bb600000 {
++			reg = <0x0 0xbb600000 0x0 0xa00000>;
++			no-map;
++		};
++
++		dare_tz_mem: dare-tz-region@bc000000 {
++			reg = <0x0 0xbc000000 0x0 0xa300000>;
++			no-map;
++		};
++
++		hpass_rpc_remote_heap_mem: hpass-rpc-remote-heap-region@d4600000 {
++			reg = <0x0 0xd4600000 0x0 0x800000>;
++			no-map;
++		};
++
++		mdf_mem: mdf-region@d4e00000 {
++			reg = <0x0 0xd4e00000 0x0 0x2000000>;
++			no-map;
++		};
++
++		firmware_mem: firmware-region@d6e00000 {
++			reg = <0x0 0xd6e00000 0x0 0x800000>;
++			no-map;
++		};
++
++		firmware_shared_mem: firmware-shared-region@d7650000 {
++			reg = <0x0 0xd7650000 0x0 0x180000>;
++			no-map;
++		};
++
++		firmware_logs_mem: firmware-logs-region@d77d0000 {
++			reg = <0x0 0xd77d0000 0x0 0x20000>;
++			no-map;
++		};
++
++		sail_p_mem: sail-p-region@8c0000000 {
++			reg = <0x8 0xc0000000 0x0 0x8000000>;
++			no-map;
++		};
++
++		reserved_mem2: reserved-region@8c8000000 {
++			reg = <0x8 0xc8000000 0x0 0x18000000>;
++			no-map;
++		};
++
++		dump_mem: mem-dump-region {
++			alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
++			size = <0x0 0x79b0000>;
++		};
++	};
++
++	soc: soc@0 {
++		compatible = "simple-bus";
++		#address-cells = <2>;
++		#size-cells = <2>;
++		dma-ranges = <0 0 0 0 0x10 0>;
++		ranges = <0 0 0 0 0x10 0>;
++
++		qupv3_2: geniqup@8c0000 {
++			compatible = "qcom,geni-se-qup";
++			reg = <0x0 0x008c0000 0x0 0x2000>;
++			#address-cells = <2>;
++			#size-cells = <2>;
++			iommus = <&apps_smmu_0 0x15a3 0x0>;
++			ranges;
++
++			i2c14: i2c@880000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00880000 0x0 0x4000>;
++				interrupts = <GIC_SPI 373 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi14: spi@880000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00880000 0x0 0x4000>;
++				interrupts = <GIC_SPI 373 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart14: serial@880000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00880000 0x0 0x4000>;
++				interrupts = <GIC_SPI 373 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c15: i2c@884000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00884000 0x0 0x4000>;
++				interrupts = <GIC_SPI 583 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi15: spi@884000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00884000 0x0 0x4000>;
++				interrupts = <GIC_SPI 583 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart15: serial@884000 {
++				compatible = "qcom,geni-debug-uart";
++				reg = <0x0 0x00884000 0x0 0x4000>;
++				interrupts = <GIC_SPI 583 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c16: i2c@888000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00888000 0x0 0x4000>;
++				interrupts = <GIC_SPI 584 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi16: spi@888000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00888000 0x0 0x4000>;
++				interrupts = <GIC_SPI 584 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart16: serial@888000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00888000 0x0 0x4000>;
++				interrupts = <GIC_SPI 584 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c17: i2c@88c000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x0088c000 0x0 0x4000>;
++				interrupts = <GIC_SPI 585 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi17: spi@88c000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x0088c000 0x0 0x4000>;
++				interrupts = <GIC_SPI 585 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart17: serial@88c000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x0088c000 0x0 0x4000>;
++				interrupts = <GIC_SPI 585 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c18: i2c@890000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00890000 0x0 0x4000>;
++				interrupts = <GIC_SPI 586 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi18: spi@890000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00890000 0x0 0x4000>;
++				interrupts = <GIC_SPI 586 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart18: serial@890000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00890000 0x0 0x4000>;
++				interrupts = <GIC_SPI 586 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c19: i2c@894000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00894000 0x0 0x4000>;
++				interrupts = <GIC_SPI 587 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi19: spi@894000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00894000 0x0 0x4000>;
++				interrupts = <GIC_SPI 587 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart19: serial@894000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00894000 0x0 0x4000>;
++				interrupts = <GIC_SPI 587 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c20: i2c@898000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00898000 0x0 0x4000>;
++				interrupts = <GIC_SPI 461 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi20: spi@898000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00898000 0x0 0x4000>;
++				interrupts = <GIC_SPI 461 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart20: serial@898000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00898000 0x0 0x4000>;
++				interrupts = <GIC_SPI 461 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++		};
++
++		qupv3_0: geniqup@9c0000 {
++			compatible = "qcom,geni-se-qup";
++			reg = <0x0 0x009c0000 0x0 0x2000>;
++			#address-cells = <2>;
++			#size-cells = <2>;
++			iommus = <&apps_smmu_2 0x1003 0x0>;
++			ranges;
++
++			i2c0: i2c@980000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00980000 0x0 0x4000>;
++				interrupts = <GIC_SPI 314 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi0: spi@980000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00980000 0x0 0x4000>;
++				interrupts = <GIC_SPI 314 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart0: serial@980000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00980000 0x0 0x4000>;
++				interrupts = <GIC_SPI 314 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c1: i2c@984000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00984000 0x0 0x4000>;
++				interrupts = <GIC_SPI 513 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi1: spi@984000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00984000 0x0 0x4000>;
++				interrupts = <GIC_SPI 513 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart1: serial@984000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00984000 0x0 0x4000>;
++				interrupts = <GIC_SPI 513 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c2: i2c@988000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00988000 0x0 0x4000>;
++				interrupts = <GIC_SPI 514 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi2: spi@988000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00988000 0x0 0x4000>;
++				interrupts = <GIC_SPI 514 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart2: serial@988000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00988000 0x0 0x4000>;
++				interrupts = <GIC_SPI 514 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c3: i2c@98c000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x0098c000 0x0 0x4000>;
++				interrupts = <GIC_SPI 515 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi3: spi@98c000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x0098c000 0x0 0x4000>;
++				interrupts = <GIC_SPI 515 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart3: serial@98c000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x0098c000 0x0 0x4000>;
++				interrupts = <GIC_SPI 515 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c4: i2c@990000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00990000 0x0 0x4000>;
++				interrupts = <GIC_SPI 516 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi4: spi@990000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00990000 0x0 0x4000>;
++				interrupts = <GIC_SPI 516 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart4: serial@990000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00990000 0x0 0x4000>;
++				interrupts = <GIC_SPI 516 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c5: i2c@994000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00994000 0x0 0x4000>;
++				interrupts = <GIC_SPI 517 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi5: spi@994000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00994000 0x0 0x4000>;
++				interrupts = <GIC_SPI 517 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart5: serial@994000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00994000 0x0 0x4000>;
++				interrupts = <GIC_SPI 517 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++		};
++
++		qupv3_1: geniqup@ac0000 {
++			compatible = "qcom,geni-se-qup";
++			reg = <0x0 0x00ac0000 0x0 0x2000>;
++			#address-cells = <2>;
++			#size-cells = <2>;
++			iommus = <&apps_smmu_2 0x1043 0x0>;
++			ranges;
++
++			i2c7: i2c@a80000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00a80000 0x0 0x4000>;
++				interrupts = <GIC_SPI 353 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi7: spi@a80000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00a80000 0x0 0x4000>;
++				interrupts = <GIC_SPI 353 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart7: serial@a80000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00a80000 0x0 0x4000>;
++				interrupts = <GIC_SPI 353 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c8: i2c@a84000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00a84000 0x0 0x4000>;
++				interrupts = <GIC_SPI 354 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi8: spi@a84000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00a84000 0x0 0x4000>;
++				interrupts = <GIC_SPI 354 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart8: serial@a84000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00a84000 0x0 0x4000>;
++				interrupts = <GIC_SPI 354 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c9: i2c@a88000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00a88000 0x0 0x4000>;
++				interrupts = <GIC_SPI 355 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			uart9: serial@a88000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00a88000 0x0 0x4000>;
++				interrupts = <GIC_SPI 355 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c10: i2c@a8c000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00a8c000 0x0 0x4000>;
++				interrupts = <GIC_SPI 356 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			uart10: serial@a8c000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00a8c000 0x0 0x4000>;
++				interrupts = <GIC_SPI 356 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c11: i2c@a90000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00a90000 0x0 0x4000>;
++				interrupts = <GIC_SPI 357 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi11: spi@a90000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00a90000 0x0 0x4000>;
++				interrupts = <GIC_SPI 357 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart11: serial@a90000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00a90000 0x0 0x4000>;
++				interrupts = <GIC_SPI 357 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c12: i2c@a94000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00a94000 0x0 0x4000>;
++				interrupts = <GIC_SPI 358 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi12: spi@a94000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00a94000 0x0 0x4000>;
++				interrupts = <GIC_SPI 358 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart12: serial@a94000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00a94000 0x0 0x4000>;
++				interrupts = <GIC_SPI 358 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			i2c13: i2c@a98000 {
++				compatible = "qcom,geni-i2c";
++				reg = <0x0 0x00a98000 0x0 0x4000>;
++				interrupts = <GIC_SPI 363 IRQ_TYPE_LEVEL_HIGH>;
++
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				status = "disabled";
++			};
++
++			spi13: spi@a98000 {
++				compatible = "qcom,geni-spi";
++				reg = <0x0 0x00a98000 0x0 0x4000>;
++				interrupts = <GIC_SPI 363 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++
++			uart13: serial@a98000 {
++				compatible = "qcom,geni-uart";
++				reg = <0x0 0x00a98000 0x0 0x4000>;
++				interrupts = <GIC_SPI 363 IRQ_TYPE_LEVEL_HIGH>;
++
++				status = "disabled";
++			};
++		};
++
++		rng: rng@10c3000 {
++			compatible = "qcom,nord-trng",
++				     "qcom,trng";
++			reg = <0x0 0x010c3000 0x0 0x1000>;
++		};
++
++		ufs_mem_hc: ufshc@1d44000 {
++			compatible = "qcom,nord-ufshc",
++				     "qcom,ufshc",
++				     "jedec,ufs-2.0";
++			reg = <0x0 0x01d44000 0x0 0x3000>,
++			      <0x0 0x01d60000 0x0 0x15000>;
++			reg-names = "std",
++				    "mcq";
++			interrupts = <GIC_SPI 265 IRQ_TYPE_LEVEL_HIGH>;
++			lanes-per-direction = <2>;
++			iommus = <&apps_smmu_0 0x14c0 0x0>;
++			dma-coherent;
++			msi-parent = <&gic_its 0x14c0>;
++
++			status = "disabled";
++		};
++
++		cryptobam: dma-controller@1dc4000 {
++			compatible = "qcom,bam-v1.7.4", "qcom,bam-v1.7.0";
++			reg = <0x0 0x01dc4000 0x0 0x28000>;
++			interrupts = <GIC_SPI 272 IRQ_TYPE_LEVEL_HIGH>;
++			#dma-cells = <1>;
++			iommus = <&apps_smmu_0 0x1689 0>;
++			qcom,ee = <0>;
++			qcom,num-ees = <4>;
++			num-channels = <20>;
++			qcom,controlled-remotely;
++		};
++
++		crypto: crypto@1dfa000 {
++			compatible = "qcom,nord-qce", "qcom,sm8150-qce", "qcom,qce";
++			reg = <0x0 0x01dfa000 0x0 0x6000>;
++			dmas = <&cryptobam 4>, <&cryptobam 5>;
++			dma-names = "rx", "tx";
++			iommus = <&apps_smmu_0 0x1689 0>;
++
++			/* It stops nord-gearvm variant from booting to console */
++			status = "disabled";
++		};
++
++		tcsr_mutex: hwlock@1f40000 {
++			compatible = "qcom,tcsr-mutex";
++			reg = <0x0 0x01f40000 0x0 0x20000>;
++			#hwlock-cells = <1>;
++		};
++
++		tcsr: syscon@1f60000 {
++			compatible = "qcom,nord-tcsr",
++				     "syscon";
++			reg = <0x0 0x01f60000 0x0 0xa0000>;
++		};
++
++		pdc: interrupt-controller@b220000 {
++			compatible = "qcom,nord-pdc",
++				     "qcom,pdc";
++			reg = <0x0 0x0b220000 0x0 0x10000>;
++			qcom,pdc-ranges = <0 745 43>,
++					  <67 543 31>,
++					  <98 609 32>,
++					  <130 717 12>,
++					  <142 251 5>,
++					  <147 796 16>;
++			#interrupt-cells = <2>;
++			interrupt-parent = <&intc>;
++			interrupt-controller;
++		};
++
++		tsens0: thermal-sensor@c22c000 {
++			compatible = "qcom,nord-tsens",
++				     "qcom,tsens-v2";
++			reg = <0x0 0x0c22c000 0x0 0x1000>,
++			      <0x0 0x0c222000 0x0 0x1000>;
++			interrupts = <GIC_SPI 771 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 484 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "uplow",
++					  "critical";
++			#qcom,sensors = <16>;
++			#thermal-sensor-cells = <1>;
++		};
++
++		tsens1: thermal-sensor@c22d000 {
++			compatible = "qcom,nord-tsens",
++				     "qcom,tsens-v2";
++			reg = <0x0 0x0c22d000 0x0 0x1000>,
++			      <0x0 0x0c223000 0x0 0x1000>;
++			interrupts = <GIC_SPI 772 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 485 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "uplow",
++					  "critical";
++			#qcom,sensors = <16>;
++			#thermal-sensor-cells = <1>;
++		};
++
++		tsens2: thermal-sensor@c22e000 {
++			compatible = "qcom,nord-tsens",
++				     "qcom,tsens-v2";
++			reg = <0x0 0x0c22e000 0x0 0x1000>,
++			      <0x0 0x0c224000 0x0 0x1000>;
++			interrupts = <GIC_SPI 773 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 486 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "uplow",
++					  "critical";
++			#qcom,sensors = <16>;
++			#thermal-sensor-cells = <1>;
++		};
++
++		tsens3: thermal-sensor@c22f000 {
++			compatible = "qcom,nord-tsens",
++				     "qcom,tsens-v2";
++			reg = <0x0 0x0c22f000 0x0 0x1000>,
++			      <0x0 0x0c225000 0x0 0x1000>;
++			interrupts = <GIC_SPI 774 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 487 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "uplow",
++					  "critical";
++			#qcom,sensors = <16>;
++			#thermal-sensor-cells = <1>;
++		};
++
++		tsens4: thermal-sensor@c230000 {
++			compatible = "qcom,nord-tsens",
++				     "qcom,tsens-v2";
++			reg = <0x0 0x0c230000 0x0 0x1000>,
++			      <0x0 0x0c226000 0x0 0x1000>;
++			interrupts = <GIC_SPI 775 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 399 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "uplow",
++					  "critical";
++			#qcom,sensors = <16>;
++			#thermal-sensor-cells = <1>;
++		};
++
++		tsens5: thermal-sensor@c231000 {
++			compatible = "qcom,nord-tsens",
++				     "qcom,tsens-v2";
++			reg = <0x0 0x0c231000 0x0 0x1000>,
++			      <0x0 0x0c227000 0x0 0x1000>;
++			interrupts = <GIC_SPI 776 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 400 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "uplow",
++					  "critical";
++			#qcom,sensors = <16>;
++			#thermal-sensor-cells = <1>;
++		};
++
++		tsens6: thermal-sensor@c232000 {
++			compatible = "qcom,nord-tsens",
++				     "qcom,tsens-v2";
++			reg = <0x0 0x0c232000 0x0 0x1000>,
++			      <0x0 0x0c228000 0x0 0x1000>;
++			interrupts = <GIC_SPI 777 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 401 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "uplow",
++					  "critical";
++			#qcom,sensors = <16>;
++			#thermal-sensor-cells = <1>;
++		};
++
++		tsens7: thermal-sensor@c233000 {
++			compatible = "qcom,nord-tsens",
++				     "qcom,tsens-v2";
++			reg = <0x0 0x0c233000 0x0 0x1000>,
++			      <0x0 0x0c229000 0x0 0x1000>;
++			interrupts = <GIC_SPI 778 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 402 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "uplow",
++					  "critical";
++			#qcom,sensors = <16>;
++			#thermal-sensor-cells = <1>;
++		};
++
++		tlmm: pinctrl@f100000 {
++			compatible = "qcom,nord-tlmm";
++			reg = <0x0 0x0f100000 0x0 0xc0000>;
++			interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
++			gpio-controller;
++			#gpio-cells = <2>;
++			interrupt-controller;
++			#interrupt-cells = <2>;
++			gpio-ranges = <&tlmm 0 0 181>;
++			wakeup-parent = <&pdc>;
++		};
++
++		apps_smmu_0: iommu@15a00000 {
++			compatible = "qcom,nord-smmu-500",
++				     "qcom,smmu-500",
++				     "arm,mmu-500";
++			reg = <0x0 0x15a00000 0x0 0x100000>;
++			#iommu-cells = <2>;
++			#global-interrupts = <1>;
++			dma-coherent;
++			interrupts = <GIC_SPI 886 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 32 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 33 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 34 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 35 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 36 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 37 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 38 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 39 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 40 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 41 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 42 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 43 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 44 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 45 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 46 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 47 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 48 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 49 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 50 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 51 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 52 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 53 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 54 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 55 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 56 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 57 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 58 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 59 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 60 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 61 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 62 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 63 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 64 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 65 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 66 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 67 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 68 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 69 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 70 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 71 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 72 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 73 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 74 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 75 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 76 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 77 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 78 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 79 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 80 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 81 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 82 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 83 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 84 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 85 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 86 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 87 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 88 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 89 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 90 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 91 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 92 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 93 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 94 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 95 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 96 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 97 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 98 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 99 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 100 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 101 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 102 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 103 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 104 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 105 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 106 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 107 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 108 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 109 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 110 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 111 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 112 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 113 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 114 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 115 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 116 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 117 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 118 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 119 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 120 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 121 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 122 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 123 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 124 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 125 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 126 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 127 IRQ_TYPE_LEVEL_HIGH>;
++		};
++
++		apps_smmu_1: iommu@15c00000 {
++			compatible = "qcom,nord-smmu-500",
++				     "qcom,smmu-500",
++				     "arm,mmu-500";
++			reg = <0x0 0x15c00000 0x0 0x100000>;
++			#iommu-cells = <2>;
++			#global-interrupts = <1>;
++			dma-coherent;
++			interrupts = <GIC_SPI 882 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 128 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 129 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 130 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 131 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 132 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 133 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 134 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 135 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 136 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 137 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 138 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 139 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 140 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 141 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 142 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 143 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 144 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 145 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 146 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 147 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 148 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 149 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 150 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 151 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 152 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 153 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 154 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 155 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 156 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 157 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 158 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 159 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 160 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 161 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 162 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 163 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 164 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 165 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 166 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 167 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 168 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 169 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 170 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 171 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 172 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 173 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 174 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 175 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 176 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 177 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 178 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 179 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 180 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 181 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 182 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 183 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 184 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 185 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 186 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 187 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 188 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 189 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 190 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 191 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 192 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 193 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 194 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 195 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 196 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 197 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 198 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 199 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 200 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 201 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 202 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 203 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 204 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 205 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 206 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 207 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 208 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 209 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 210 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 211 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 212 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 213 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 214 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 215 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 216 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 217 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 218 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 219 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 220 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 221 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 222 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 223 IRQ_TYPE_LEVEL_HIGH>;
++		};
++
++		apps_smmu_2: iommu@15e00000 {
++			compatible = "qcom,nord-smmu-500",
++				     "qcom,smmu-500",
++				     "arm,mmu-500";
++			reg = <0x0 0x15e00000 0x0 0x100000>;
++			#iommu-cells = <2>;
++			#global-interrupts = <1>;
++			dma-coherent;
++			interrupts = <GIC_SPI 877 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 224 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 225 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 226 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 227 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 228 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 229 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 230 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 231 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 232 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 233 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 234 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 235 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 236 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 237 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 238 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 239 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 240 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 241 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 242 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 243 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 244 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 245 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 246 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 247 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 248 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 249 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 250 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 251 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 252 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 253 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 254 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 255 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 256 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 257 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 258 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 259 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 260 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 261 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 262 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 263 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 264 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 265 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 266 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 267 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 268 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 269 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 270 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 271 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 272 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 273 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 274 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 275 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 276 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 277 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 278 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 279 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 280 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 281 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 282 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 283 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 284 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 285 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 286 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 287 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 288 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 289 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 290 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 291 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 292 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 293 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 294 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 295 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 296 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 297 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 298 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 299 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 300 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 301 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 302 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 303 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 304 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 305 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 306 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 307 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 308 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 309 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 310 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 311 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 312 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 313 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 314 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 315 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 316 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 317 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 318 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_ESPI 319 IRQ_TYPE_LEVEL_HIGH>;
++		};
++
++		intc: interrupt-controller@17000000 {
++			compatible = "arm,gic-v3";
++			reg = <0x0 0x17000000 0x0 0x10000>,
++			      <0x0 0x17080000 0x0 0x480000>;
++			interrupts = <GIC_PPI 9 IRQ_TYPE_LEVEL_HIGH>;
++			#interrupt-cells = <3>;
++			interrupt-controller;
++			#redistributor-regions = <1>;
++			redistributor-stride = <0x0 0x40000>;
++			#address-cells = <2>;
++			#size-cells = <2>;
++			ranges;
++
++			gic_its: msi-controller@17040000 {
++				compatible = "arm,gic-v3-its";
++				reg = <0x0 0x17040000 0x0 0x40000>;
++				msi-controller;
++				#msi-cells = <1>;
++			};
++		};
++
++		pdp0_mbox: mailbox@17610000 {
++			compatible = "qcom,nord-cpucp-mbox",
++				     "qcom,x1e80100-cpucp-mbox";
++			reg = <0x0 0x17610000 0x0 0x4c08>,
++			      <0x0 0x19980000 0x0 0x300>;
++			#mbox-cells = <1>;
++			interrupts = <GIC_SPI 56 IRQ_TYPE_LEVEL_HIGH>;
++		};
++
++		memtimer: timer@17810000 {
++			compatible = "arm,armv7-timer-mem";
++			reg = <0x0 0x17810000 0x0 0x1000>;
++			ranges = <0x0 0x0 0x0 0x20000000>;
++			#address-cells = <1>;
++			#size-cells = <1>;
++
++			frame@17811000 {
++				reg = <0x17811000 0x1000>,
++				      <0x17812000 0x1000>;
++				interrupts = <GIC_SPI 38 IRQ_TYPE_LEVEL_HIGH>,
++					     <GIC_SPI 31 IRQ_TYPE_LEVEL_HIGH>;
++				frame-number = <0>;
++			};
++
++			frame@17813000 {
++				reg = <0x17813000 0x1000>;
++				interrupts = <GIC_SPI 39 IRQ_TYPE_LEVEL_HIGH>;
++				frame-number = <1>;
++
++				status = "disabled";
++			};
++
++			frame@17815000 {
++				reg = <0x17815000 0x1000>;
++				interrupts = <GIC_SPI 40 IRQ_TYPE_LEVEL_HIGH>;
++				frame-number = <2>;
++
++				status = "disabled";
++			};
++
++			frame@17817000 {
++				reg = <0x17817000 0x1000>;
++				interrupts = <GIC_SPI 41 IRQ_TYPE_LEVEL_HIGH>;
++				frame-number = <3>;
++
++				status = "disabled";
++			};
++
++			frame@17819000 {
++				reg = <0x17819000 0x1000>;
++				interrupts = <GIC_SPI 42 IRQ_TYPE_LEVEL_HIGH>;
++				frame-number = <4>;
++
++				status = "disabled";
++			};
++
++			frame@1781b000 {
++				reg = <0x1781b000 0x1000>;
++				interrupts = <GIC_SPI 43 IRQ_TYPE_LEVEL_HIGH>;
++				frame-number = <5>;
++
++				status = "disabled";
++			};
++
++			frame@1781d000 {
++				reg = <0x1781d000 0x1000>;
++				interrupts = <GIC_SPI 44 IRQ_TYPE_LEVEL_HIGH>;
++				frame-number = <6>;
++
++				status = "disabled";
++			};
++		};
++
++		watchdog@17826000 {
++			compatible = "qcom,apss-wdt-nord",
++				     "qcom,kpss-wdt";
++			reg = <0x0 0x17826000 0x0 0x1000>;
++			clocks = <&sleep_clk>;
++			interrupts = <GIC_ESPI 848 IRQ_TYPE_EDGE_RISING>;
++		};
++	};
++
++	arch_timer: timer {
++		compatible = "arm,armv8-timer";
++		interrupts = <GIC_PPI 13 IRQ_TYPE_LEVEL_LOW>,
++			     <GIC_PPI 14 IRQ_TYPE_LEVEL_LOW>,
++			     <GIC_PPI 11 IRQ_TYPE_LEVEL_LOW>,
++			     <GIC_PPI 10 IRQ_TYPE_LEVEL_LOW>;
++	};
++
++	thermal_zones: thermal-zones {
++		ddr-0-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 0>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-0-0-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 1>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-0-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 2>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-0-2-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 3>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-0-3-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 4>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-0-4-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 5>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-0-5-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 6>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpullc-0-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 7>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-1-0-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 8>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-1-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 9>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-1-2-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 10>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-1-3-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 11>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-1-4-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 12>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-1-5-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 13>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpullc-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 14>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		ddr-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens0 15>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		ddr-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 0>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-0-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 1>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-0-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 2>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-0-2-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 3>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-0-3-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 4>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-0-4-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 5>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-0-5-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 6>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpullc-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 7>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-1-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 8>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-1-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 9>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-1-2-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 10>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-1-3-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 11>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-1-4-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 12>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-1-5-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 13>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpullc-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 14>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		ddr-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens1 15>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		amux-2-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 0>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-2-0-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 1>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-2-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 2>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-2-2-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 3>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-2-3-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 4>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-2-4-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 5>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-2-5-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 6>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpullc-2-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 7>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		audhvx-0-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 8>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		audhmx-0-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 9>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		audhvx-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 10>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		audhmx-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 11>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		audhvx-2-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 12>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		audhmx-2-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 13>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		pcie-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens2 15>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		amux-3-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 0>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-2-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 1>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-2-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 2>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-2-2-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 3>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-2-3-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 4>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-2-4-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 5>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpu-2-5-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 6>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <125000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cpullc-2-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 7>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		audhvx-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 8>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		audhmx-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 9>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		audhvx-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 10>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		audhmx-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 11>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		audhvx-2-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 12>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		audhmx-2-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 13>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		pcie-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens3 15>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-0-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 0>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-0-2-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 1>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-0-0-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 2>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-0-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 3>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 4>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-1-2-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 5>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-1-0-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 6>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-1-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 7>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-2-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 8>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-2-2-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 9>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-2-0-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 10>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-2-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 11>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-3-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 12>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-3-2-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 13>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-3-0-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 14>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-3-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens4 15>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 0>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-0-3-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 1>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-0-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 2>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-0-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 3>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 4>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-1-3-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 5>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-1-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 6>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-1-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 7>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-2-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 8>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-2-3-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 9>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-2-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 10>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-2-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 11>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-3-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 12>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsphvx-3-3-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 13>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-3-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 14>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		nsp-3-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens5 15>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		amux-6-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 0>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 1>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 2>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-2-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 3>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpu-0-0-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 4>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 5>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 6>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cv-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 7>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		video-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 8>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		camera-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 9>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		ddr-2-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 10>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		ddr-3-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 11>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-0-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 12>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-1-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 13>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-2-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 14>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpu-0-1-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens6 15>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		amux-7-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 0>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-0-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 1>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-1-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 2>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-2-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 3>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpu-0-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 4>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-1-2-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 5>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpu-1-0-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 6>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		cv-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 7>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		video-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 8>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		camera-2-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 9>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		ddr-2-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 10>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		ddr-3-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 11>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 12>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-1-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 13>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpuss-2-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 14>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++
++		gpu-0-0-1-thermal {
++			polling-delay-passive = <0>;
++			polling-delay = <0>;
++			thermal-sensors = <&tsens7 15>;
++
++			trips {
++				trip-point0 {
++					temperature = <105000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++
++				trip-point1 {
++					temperature = <115000>;
++					hysteresis = <10000>;
++					type = "passive";
++				};
++			};
++		};
++	};
 +};
 -- 
 2.34.1
