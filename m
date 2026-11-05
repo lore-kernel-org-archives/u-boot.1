@@ -1,121 +1,118 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0D75606A32D
-	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 14:08:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8037606A31B
+	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 14:09:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=SAfhYAVV;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kWLMf2+4
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=UxkF7bEk;
+	dkim=pass (2048-bit key, unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=cKjr3r8g
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8EAA44088F;
-	Thu,  5 Nov 2026 14:08:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9FD8C8117F;
+	Thu,  5 Nov 2026 14:09:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EyBp9qyaum4a; Thu,  5 Nov 2026 14:08:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8D9674087E
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793887715;
-	b=a4lIMKp8XClVpooL29/4rsPH0Gy141AjXtEmtyK+0FDFJT+mje03tmIsuUfz8cMNaTIi
-	 1YxzwDuGYVQAs0rAdJTYS4mGnDtjD2WfjZCWKr7weFTBu02c/OTn4HweRc4bHB+qPVSYi
-	 8QpFDd4+m5EETuZeA15v+53KsuxKlaFb+DsskFPBMWx/DNm1Ha8l2+3f5+wqDrmYWZnRc
-	 vvcQScy8rUWBLJqPIjVGykk1cOeZfERtsO5u4PqidP8Yeqj/lT+vbNeEuPhazYYa1HSi9
-	 NOCcwF/Ohq4umsGysxFYTjyGYYTkmwZHADmgXFE96fSJLwM3fDBhzxpqKRbtFUu9KIQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0luc40jY961v; Thu,  5 Nov 2026 14:09:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7B08781172
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793887764;
+	b=QgJUKVBCCsFL3jXYp8wjyjZUGa5ugssHpAMB1dK26MiR+T9jRoc6O2MQmngT8sITkDIh
+	 PwIioybnHAmsqA2hk4IaY9Rx931v3Rk8IPhxzETaQ41eNCuN14jKoJU+SAq1bITI0SkBY
+	 QOe9BVVx0xUt816MKxwQPZiiFXk8zQKgp18ZEiG+vSsmtuhRpiO9xi1yIPsDHfLMWCMHY
+	 hLfNnTpXAsnDF2U0lBTwbexmqJIJC71uN9TcoDIoHTXd08MjXpRoEF1TnyqX7IJ2GcLu/
+	 hDFdTSNmfaQiHfzixZBQzbO76TKwZL3PPEw5y2aAGj4WNiKQ+uijPWHmk6U+OOpNsSA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793887715;
+	c=relaxed/relaxed; t=1793887764;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=LD034ZYguZ4PjurLOzA1eYqsLOyh3IPwICtjNr5j2HM=;
-	b=jsplrv8TdFrKzFDXa7xoB33HZW9QCjWF5T7Q/ig56VT0dHA2/O72cd5s95K3zQfgYyQz
-	 yEpKgszcA9JwF5qva/W2VHD5Wgo8/RlGamYSgik06z7YPywQpp951ENLpj7AEHqKdkRiC
-	 f+w+qbvMRk9Sa2skFBI3bNHIuwhJtOO2fjYn7p80G8cz+mO+rbwT1lAa0vUGRtTtDUUGU
-	 MyYEuPgHokwmcbfl/lUe3b6v61neq5N5gauijBqhy8hexwS6II9qbPoi9i6q4Z8yVLpmj
-	 8kvwquPSUvnb4DD2vzbrC8yIBdWUzep07gufVcsvdNZpdRQoFiq8ij43oHILt+E5i+w==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=ndhfp4kUjbbmn3G3YnHOT0A4IlDunWCDBK7XTxH7Lf8=;
+	b=K8PplRD5pI6yHtswLL6bfgs94+VGcPGeczMnDcTwTh7Zl3aD1EtHKKK1AgmvTu9pYKYT
+	 krF22QXB61kF1MBZ9YJPN66FRg3D3CuG63jHft60OMasriao0/rzgiypq6vHKP6bZoqJZ
+	 xp2GWE86ocjMwD0Xg+yCCR6XofRVsSrZa070fEq5VSb6FalLOj5NHJolX0a9OHcfuPb08
+	 SbM9qiFtX9QTpWSYz7PPadNRjUdms/oXFpPZfn1QytkWaWu2+GWQvJoXu0PC67cfGkRiF
+	 fhLFV697uH6n1b/nxmVCT8lpRg2kfhL6jitTr7nW3QERlNwUOde2I7a6idF6lDOYveQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793887715;
-	bh=LD034ZYguZ4PjurLOzA1eYqsLOyh3IPwICtjNr5j2HM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=SAfhYAVV/QI50qIyXBgGgAuB1zjheq25TM1YrxYkGs4J8p5MV73dGWwtDGwMfQ+jm
-	 uoydhxz05YK1Qy61m4UG+WFtH4ufglWAv5SC4ly6EGtV3LlaHvmuquKD+dpa11m6De
-	 CR9cZLPoao/VxIdYKzYHe0WSX9fs+pyxCYhqZ5qSiJFyfJAchO4PqAMe8y6e5L9041
-	 gqwkzBAEeE7leLFrCLEjuoazW/idf5mGKCSiNAqoCPYS4w3E9ZDaRb4w4kELPL5Bqw
-	 5jgjzYIU3qXHQZezheOLMMvTlESMzPwfr7TGPSfF+UcpZqxocVPwWXw7vFL4dClARI
-	 /bqtKfowsetQg==
+	d=lists.u-boot-project.org; s=default; t=1793887764;
+	bh=ndhfp4kUjbbmn3G3YnHOT0A4IlDunWCDBK7XTxH7Lf8=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=UxkF7bEk3HOFftxPuMRM8EDQ6VmJOeb52ojlVrVsJLEpET7p6fTo63WWmCeT40uUI
+	 gSWXwGziaXb/SOKq70HdczbvxXdyQfEvTRMML6fkghjdAl6w8hqlPkd2I1yHNJZtDL
+	 AbeTQ+eqWs0mQ5mFp+lhn6AY5gGCtfv4o0wXaeW3OmajTTtlCSWdZ9tZ1hQ9V2sctG
+	 89wX4W9od3ISQvszpWkask/3ulzbNlO6Lnsro0cEFe8snSz4ZN03yriAGig/r+a1qY
+	 uBO6Fq8NyjLKYVEdcnYtRgyNJH/OkHSywuDgXjTC2ncwxuG2S3tok2ceJ/zGo+bDT4
+	 EqtT84LfSNwiw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8D9674087E;
-	Thu,  5 Nov 2026 14:08:35 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id D2C54235
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 14:08:33 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7B08781172;
+	Thu,  5 Nov 2026 14:09:24 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 08378235
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 14:09:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D085B400B4
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 14:08:33 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 05D1B60778
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 14:09:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RKhtSXbJNrAa for <u-boot@lists.u-boot-project.org>;
- Thu,  5 Nov 2026 14:08:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org E61C64007E
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=172.234.252.31
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
- helo=sea.source.kernel.org; envelope-from=dlan@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=kWLMf2+4
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E61C64007E
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 14:08:31 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 0169F43755;
- Thu,  5 Nov 2026 14:08:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 517C11F00A02;
- Thu,  5 Nov 2026 14:08:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1793887710;
- bh=LD034ZYguZ4PjurLOzA1eYqsLOyh3IPwICtjNr5j2HM=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=kWLMf2+4u7QALb6pV4CZcIDl49w6E428pz6etYxPMNK4A4j2ACn71mH20v+E5q3uF
- uqwmT3jrCkFhyT3xlHzCCJRVBLHJ/CwYPFSqo4VPx3+Wo/jk169Gd2ge4v0iOtn6Jg
- C4sk7i0smHJ6mrEHf4Zk+Dpl+q71FrILGiQ8V9Ih9OEG5ycGzqV5pI9zv5tZaYP/e6
- lbjaP7Q0L2EcdSYyZGEv5/nArM8S3k7MAQo3pcepx6ohdqxEaYIkUSK5isI0v9wwr/
- NE7DWaEZIQctlvUPCJ26kwD35CgxjLAylHRHANp6A8thtQnCid0TwABPxh6P/nFsXD
- IfJk7EeSSLPmw==
-Date: Thu, 5 Nov 2026 14:08:27 +0000
-From: Yixun Lan <dlan@kernel.org>
-To: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>, Eric Chung <eric.chung@riscstar.com>,
- u-boot@lists.u-boot-project.org, u-boot-spacemit@groups.io,
- Dave Klotz <DaveWK225@protonmail.com>,
- Zixian Zeng <sycamoremoon376@gmail.com>,
- Hung-Chun Tseng <alan.tseng.cs@gmail.com>,
- Anand Moon <linux.amoon@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>,
- Huan Zhou <pericycle.cc@gmail.com>,
- Guodong Xu <guodong@riscstar.com>, Leo Liang <leo.liang@sifive.com>,
- Tim Ouyang <tim609@andestech.com>, Yao Zi <me@ziyao.cc>
-Subject: Re: [PATCH v3 0/4] mmc: k1: multi-block SD reads in SPL and a probe
- failure fix
-Message-ID: <20261105140827-GKA249737@kernel.org>
-References: <20261031215452.16013-1-tanmay.kathpalia@altera.com>
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 0gs4IPfJstTF for <u-boot@lists.u-boot-project.org>;
+ Thu,  5 Nov 2026 14:09:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 267BA606AA
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=80.241.56.161
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.161;
+ helo=mout-p-103.mailbox.org; envelope-from=marek.vasut+renesas@mailbox.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=cKjr3r8g
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 267BA606AA
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 14:09:21 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4jL41V3jcyzKmwc;
+ Thu, 05 Nov 2026 15:09:18 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1793887758;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ndhfp4kUjbbmn3G3YnHOT0A4IlDunWCDBK7XTxH7Lf8=;
+ b=cKjr3r8gqZe5VtYaEWrsIZDdlTpst2i5E/7rGvpa/rVfk9Zoh2n725b+SiHvKV5QyAAjMu
+ /Hs/DCGbhPqoM8GN1uQ1eFEI5dBNmnNr/B/Sm8lwucoJpuqrrEX7w766E7MJUy3aZa1sW1
+ 0Mmlf3zy7eZdU37BcK2abdNjidqh/G3DRBKTCgP8fM/ehDVZ5WPLtFt5IbzpX/RuSLRI4o
+ al2S7IgXwKQ3JrVxiNQYoybTcqUw47lNUimhoadzCUBCM0aLl3JPh6hOarVaD74UakGgmn
+ qxG8TLdtFEiid9210w6PgzN1YT/VEpsWAohdG5NJqJCuPi8dZa5eDFIJxzqoDQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+To: u-boot@lists.u-boot-project.org
+Cc: Kenichi Nagai <kenichi.nagai.ry@renesas.com>,
+ Takahiro Kuwano <takahiro.kuwano@infineon.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tom Rini <trini@konsulko.com>, Vignesh R <vigneshr@ti.com>,
+ Vincent Jardin <vjardin@free.fr>,
+ Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+Subject: [PATCH v2] mtd: spi-nor-ids: Add support for Winbond W77T51NW
+Date: Thu,  5 Nov 2026 15:08:57 +0100
+Message-ID: <20261105140915.10682-1-marek.vasut+renesas@mailbox.org>
+X-Mailer: git-send-email 2.53.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20261031215452.16013-1-tanmay.kathpalia@altera.com>
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 5919df8702bfa7fb0de
+X-MBO-RS-META: agyk8d9rbmerzk863uhydrojcg4k5mn6
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -125,79 +122,48 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Tanmay Kathpalia,
+From: Kenichi Nagai <kenichi.nagai.ry@renesas.com>
 
-On 14:54 Sat 31 Oct     , Tanmay Kathpalia wrote:
-> I am taking this series over from Dave (thanks, Dave).
-> 
-> Testing v2 2/3 on a Banana Pi BPI-F3 and a Milk-V Jupiter showed that
-> multi-block SD reads in the SPL fail because the SD I/O rail (PMIC
-> aldo1) is at 1.8 V: set_vdd_mmc() sets it, and without
-> SPL_MMC_IO_VOLTAGE the MMC core never sets it back to 3.3 V. Patch 1
-> lets the MMC core set the rail, patch 2 drops set_vdd_mmc(), patch 3
-> is Dave's multi-block change, and patch 4 is Dave's probe error path
-> fix, narrowed to the resets because, as Yixun pointed out, the clocks
-> are reference counted.
-> 
-> Not in this version:
-> - v2 1/3 (missing max-frequency). As Yixun suggested, the io clock
->   should be set up with assigned-clock-parents/rates in the DT, which
->   also works for Linux; that will follow separately. Hung-Chun has
->   withdrawn his matching RFC.
-> - SPL_PINCTRL. On its own it links no K1 pinctrl driver into the SPL
->   (there is no SPL Kconfig symbol for it yet), so it would not program
->   any pads. It will follow separately once it has been tested on
->   hardware.
-> 
-> Testing: I do not have a K1 board, so v3 itself is build-tested only.
-> The changes were tested piecewise in the v2 thread, and in each case
-> multi-block SD reads in the SPL worked: Zixian enabled
-> SPL_MMC_IO_VOLTAGE on a BPI-F3, Yixun dropped set_vdd_mmc() alone on
-> a BPI-F3, and Hung-Chun set aldo1 to 3.3 V on a Jupiter. Zixian,
-> Yixun, Hung-Chun: a Tested-by on v3 would be much appreciated.
-> 
-> Thanks also to Anand for testing v2.
-> 
-> v2: https://lore.kernel.org/u-boot/20261005T135220-0400.mmc-v2-0001.DaveWK225@protonmail.com/
-> 
-> Changes in v3:
-> - New: configs: k1: enable SPL_MMC_IO_VOLTAGE
-> - New: spacemit: k1: do not force the SD I/O rail to 1.8 V in SPL
-> - v2 2/3 -> 3/4: commit message explains the BPI-F3 and Jupiter
->   failures; code unchanged
-> - v2 3/3 -> 4/4: keep clk_release_bulk(), only drop
->   reset_release_bulk()
-> - Drop v2 1/3
-> 
-> Dave Klotz (2):
->   mmc: k1: let the SPL read SD cards more than one block at a time
->   mmc: k1: do not assert the shared AXI reset on probe failure
-> 
-> Tanmay Kathpalia (2):
->   configs: k1: enable SPL_MMC_IO_VOLTAGE
->   spacemit: k1: do not force the SD I/O rail to 1.8 V in SPL
-> 
->  arch/riscv/dts/k1-bananapi-f3-u-boot.dtsi | 10 ++++----
->  arch/riscv/dts/k1-musepi-pro-u-boot.dtsi  |  2 +-
->  board/spacemit/k1/spl.c                   | 21 -----------------
->  configs/spacemit_k1_defconfig             |  1 +
->  doc/board/spacemit/k1-spl.rst             |  1 -
->  drivers/mmc/spacemit_sdhci.c              | 28 ++++++++---------------
->  6 files changed, 17 insertions(+), 46 deletions(-)
-> 
+Add IDs for Winbond W77T51NW, 512M-bit Secure Serial Flash Memory
+with Post-Quantum Cryptography, SPI, Quad, Octal and DTR .
 
-The series looks good to me, also tested on BPI-F3 board
+Reviewed-by: Takahiro Kuwano <takahiro.kuwano@infineon.com>
+Signed-off-by: Kenichi Nagai <kenichi.nagai.ry@renesas.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Kenichi Nagai <kenichi.nagai.ry@renesas.com>
+Cc: Takahiro Kuwano <takahiro.kuwano@infineon.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Vignesh R <vigneshr@ti.com>
+Cc: Vincent Jardin <vjardin@free.fr>
+Cc: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+Cc: u-boot@lists.u-boot-project.org
+---
+V2: - Add RB from Kuwano-san
+    - Drop product page link
+---
+ drivers/mtd/spi/spi-nor-ids.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Tested-by: Yixun Lan <dlan@kernel.org>
-Reviewed-by: Yixun Lan <dlan@kernel.org>
-
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index 67486d7a945..fce22300b61 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -670,6 +670,7 @@ const struct flash_info spi_nor_ids[] = {
+ 	{ INFO("w25q01nw-im", 0xef8021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("w25q02nw-im", 0xef8022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("w77q51nw", 0xef8a1a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
++	{ INFO("w77t51nw", 0xef8e1a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ #endif
+ #ifdef CONFIG_SPI_FLASH_XMC
+ 	/* XMC (Wuhan Xinxin Semiconductor Manufacturing Corp.) */
 -- 
-Yixun Lan (dlan)
+2.53.0
+
