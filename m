@@ -2,169 +2,206 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FBE9606A335
-	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 17:54:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41892606A326
+	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 18:26:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=kJYnf/IB;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=prk8pnSj
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ft6WD+1J;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YCd4TFW6;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=adDzSkeb
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1B07E608A1;
-	Thu,  5 Nov 2026 17:54:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0727A60859;
+	Thu,  5 Nov 2026 18:26:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nKjZMTCQmVDF; Thu,  5 Nov 2026 17:54:47 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 606C26089A
+ id 4M7xIueaeVfZ; Thu,  5 Nov 2026 18:26:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E321A607F7
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793901287;
-	b=LE94erTOR5e26Go12xb01JPg1/hyu15LYbTfK5QDxK6mq3CcbU4+vonTvOdP9JAmtypL
-	 6ErkuS2oW8QLG4ehKdFXf+1uBJwZXchGRYrDnkR3PRPV8rhe2e6D/oD6Znluy1wPvTX31
-	 6kCTdjon8ZPvvzedMVAtrRuIVx4Y1clCaUBezOxTC8oaLePshfVIm1iMbeeq2MlmA/AsT
-	 3PaB0wXQ222Jk0J9yQJtvo5nIexSTY2ZzT9yabqaCtQJvfrGhGwJb0qRKBDRJ3lv4Gtcy
-	 76ro1cGjJIOrrnjeSuKuU+nuGnjqetWw/IKzjK7cDAe+PWdSn367YZzXfUp1ZZEUBbQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793903191;
+	b=hQnrsunnMvlMsUyAn3PVjXwJD6M14xYlAWsrwKAnlrbXXtlSiAyqprmvmPXbhWTA19Ys
+	 yAH6AzuagF3AYcLtp+dX8yh5Om+nOTWCq8JJP91in7AiofhIws+TdD7hpmGiDYFnp3JXq
+	 2pT3SrSTbP/0wySAzT3bfxU2T0fUa32Q9cxfYrwSwkk3dgUV1eiBIBUsge14NQU53gmR4
+	 PN6ZLd1RZnkqeT/1iNS3H2mPvDfaTLx0jkiF9EJ+X9qvxAmT3HPX2+ojqyYfTIO+zkP/V
+	 T1ikC2Zu9msQ7MRBGj0oeRsTCcDQBT9Bf5JMGVur73z4tSF/AuIqcC+MSSPli76IIWg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793901287;
+	c=relaxed/relaxed; t=1793903191;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Subject:Date:
+	 Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=xJWhwHHuOcKMpeDJpinw9xpdwsMeAAceZaARTweqU0c=;
-	b=tbx/4a08Jn0fYTlBTZOxGmKkLbTzdy0BRdkXE3luw/vOJk1FNxDjIqX08EFfqvgkDvd1
-	 0d/FQuAErNoqQB0KYEr9BeXxhqRrtRlvxwvQsfBhAgd0htvqg0/vakbTC/GMJz3/VAp9S
-	 3D4ANzgKy+LFZ1eRqpq7IXC5me5kdrooo8HyJbSm78sIuYhOMzkKKEWGuA7Rjmblp86+9
-	 JB76QyVDVom2O1+2eX/heOhBKSOtFe5FVC93FFYW4RP6FXGGMH+1q2SCxzhUHeXZKR+mZ
-	 24Ao5iWUv2Nx4NngBZmuzfcJ+tz2JjaSEId6yPpdPBK+ARrc6rAeV8A2Ofv5WZQIzZQ==
+	bh=/VWW0y31KXKYze5NFoUhFmEdcgxz85AWtAfPH4swSf0=;
+	b=OanDtotkVfI/RKjUK2fFLar5UVxd2/WAcJPdoC8dEjQhB5R32I+Ne2wTKB9XFdI7N0vn
+	 D+dqlHRliBLFNKOhn+FflsRurf3GUYxCEgmz/QEVWdOpyBsRE0OhwotH3RYdnyEl8NDoC
+	 VqvzyDaakp2O32CQee5TKEScKKHa0AuGX5n0Kl5JG+jZWNTjwci4uKLA5B4vWO39h9q1/
+	 CKpc9jqHTqoC78A92W6K5bS+F1Fl16t1Ho5W9pQl0m7ldEGcEtgz6tW+TbPwCt5qYh9So
+	 pQJCkUQwkGR3t+ttFwiz51cHTRYz5EGzl3AMesSUJcQeu9Kogj8i9OaSxXjHGqICcfA==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793901287;
-	bh=xJWhwHHuOcKMpeDJpinw9xpdwsMeAAceZaARTweqU0c=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=kJYnf/IBjBV78k4SSruiFTPpVpmnIGyR1GNOauet/0FuYkYkdGJrZsvDatBRoHtmx
-	 ETOxdg6z/0u4FlYClwa+yBkiAS7SZG3wBa7uyzHJzzArU7nlyy1dNfr4pCnWLgS8+2
-	 gZ0UvBkw3Nub/NRWQa0LdAQwp0MnxXHRMd7JdKZf/VNJdOWo+i7CqJQP3zSHVyjKPk
-	 1bBQXGjYIhZ78fljar5U79ORXiJ4qfKCrzBX0iVbVJthdvmGbwD5TV++UhR0ERFK2/
-	 4JG2VLkrFLqIIXjliXRZUOLfSCd+vTAJ7OsFa2MltY9YLpImCUNy/wv45t93JqaFJM
-	 IuYNmWSPNPqpQ==
+	d=lists.u-boot-project.org; s=default; t=1793903191;
+	bh=/VWW0y31KXKYze5NFoUhFmEdcgxz85AWtAfPH4swSf0=;
+	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=ft6WD+1JkG/+ZD4GRMgqr6QwW7u32vMlOFq3bPwtUw3HX6W0n9er4sh6Y9/9Av3iE
+	 BTsf7nhRaNgbCgF1vcemK1sh/D5nl5P98eaMnp9A2XQ4JNepwHhbjh5rpzPjP0Uyad
+	 jRpdVL4W+R8x5wo1nb6d8pAUoOXHTCjXzBVDBJerjv9afWyWpVBhVdlulWeA72xv70
+	 c1/WXzT0a4hH/+0UtgOEqft2K1ejmTvU9tAbeXH0ZydX7hxUPvnXnOpEB4QCv6BT1b
+	 bCvtrHuDggaKbCkilcB6iTKgfM3ZHR5jML6X+5JE/+GLv1sgXsNNzBhI2ao3qwSio1
+	 ItYMCfHYNo1GA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 606C26089A;
-	Thu,  5 Nov 2026 17:54:47 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 64B9E2AC
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 17:54:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E321A607F7;
+	Thu,  5 Nov 2026 18:26:30 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id EFC6552B
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 18:26:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 568CF40093
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 17:54:40 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id ED035400FF
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 18:26:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id j0Pom-cdpX-f for <u-boot@lists.u-boot-project.org>;
- Thu,  5 Nov 2026 17:54:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org B443740378
+ id r4RCwPxNaSs3 for <u-boot@lists.u-boot-project.org>;
+ Thu,  5 Nov 2026 18:26:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org ECCA240012
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c2d"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2d; helo=mail-oo1-xc2d.google.com;
- envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
+ arc=none smtp.remote-ip=205.220.168.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
+ helo=mx0a-0031df01.pphosted.com; envelope-from=aswin.murugan@oss.qualcomm.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: smtp2.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=prk8pnSj
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B443740378
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 17:54:38 +0000 (UTC)
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-6d68de53053so1194492eaf.0
- for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 09:54:38 -0800 (PST)
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=YCd4TFW6; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=adDzSkeb
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id ECCA240012
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 18:26:27 +0000 (UTC)
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6A5HeAnd2433580
+ for <u-boot@lists.u-boot-project.org>; Thu, 5 Nov 2026 18:26:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=/VWW0y31KXKYze5NFoUhFmEdcgxz85AWtAf
+ PH4swSf0=; b=YCd4TFW6FAKezwW8XVvTi1GyYPD6Ap2oAuWCMgG7/kh28wpAefQ
+ ViZDe0fuM4fKV0sPvyP0kFzKBfeSoOzL/cBxCCsqBaMN6omfFFhAcPxKg2kH/aXq
+ DtC5qH3TYaLlHFmL1dyOWR2kPJDAvm6OVexVxzcEyrmuZH5+gEU5LGTZ9t+0CVVu
+ i8wG+ore5dsiWCSFAbhsFPU5wQ6InS7NY1NksdXRv4cc0B+oLpiRW5O8NVP1lbt5
+ 3cv3F14t60IT1axVZFrB4xLUYL+rlmxxjnUq8ZifibgqM2jaBuvQ6n3eamHGZdTE
+ r8yldnXR3jwcMK3QDHosRz9cF8ZeHA3ggWw==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
+ [74.125.82.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrqpd2791-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 18:26:26 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id
+ 5a478bee46e88-341eff9e381so4123578eec.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 10:26:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1793901277; x=1794506077;
+ d=oss.qualcomm.com; s=google; t=1793903186; x=1794507986;
  darn=lists.u-boot-project.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=xJWhwHHuOcKMpeDJpinw9xpdwsMeAAceZaARTweqU0c=;
- b=prk8pnSjcRk+gjtzKeUU5BDwgqbBsM4UVjLsFyjiaCaBzHoXaNXUkP0yOJOQ7l7oZp
- /PTt1IMmli/nY0tcE5WFGK5YvNvcA6kzrD9zORPhLcfdYFofzITeMMP1gLSI6OcO2ys5
- Q0gFO7MGCHrUXHJIz5Qi81+JRiLopSY6KduZG8IQzDgMc7jFC977Uufg8gn0QNwq9m3O
- 9Yb1Y25jC/vqQSE7T9SPfKJisS5PXGQ4ag5JMMdPubQhLWUU7OH0LVJPGOPxWqqPpOYy
- rwm+xWEV8g+eHQw9yI50XQEakvYGrHBzIFpx4WJO2ebfCxgcc1OADUmvFVYyOVCj7Tzb
- Rf9g==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=/VWW0y31KXKYze5NFoUhFmEdcgxz85AWtAfPH4swSf0=;
+ b=adDzSkebQWFqTQrXv8WBmIyqMzjM8+27fP5xNgkBTM6OrkRjpm1jZuDaInyMUrtYiw
+ +koE0iPiD63KB+N4doNzCczXj0I5Lx+2Dte9VMGM7LSNwoMXHmKAvH/PH4fXWxWo+sGb
+ yw9STn6DGzRW8t0HgsM5PK4yLqS4XqGNy8Ni4K0PFqLAMSlUNP04gjo0xPHXCXCYdtl6
+ PjdwT9Sm/Kl/7G7eyHxJ71Y9tSS1bQ/2aLoqCJ+HnrlcxC4CFxcO9hNCRfJKyylplJ17
+ iH+QSC0Mig1pBNyRd9/IEHIaRlhA/LBzGSL7PI/Kwlu2VQ3Td9rZQPtLh7Xr4+WE1gm7
+ b8CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793901277; x=1794506077;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :content-type:mime-version:subject:date:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=xJWhwHHuOcKMpeDJpinw9xpdwsMeAAceZaARTweqU0c=;
- b=hgVHEvPqyRXL2y6CJy5FXDj1eRJj6RdAj9ANJT1J5sIHhJCfY1otCjRI4TuhyOxp9o
- YKvGQQMRYFAPGbxqzZcdhTK3soVbceLJMxhrojjiobk5XqDTXEBphH1Janl2/6WzL5Ze
- CwuOAuX4ZQx0aVAefA2JoYVG/+B8BXkUVaXES9RXK3I4c/5ViVpCZzUqkC6RNDSbablY
- BeuyoMUVAByIYrC57hvFAWzKb0iyJI/kGu2yOUgNvSMI01pUgDgreRHqNcC2HDcdr49z
- 3tnzG1j7t5mnAQ652jMXPUj56NoXCit8AOsglVER8+dtgGn/Bell7IYTcuNFt+3EXYLV
- JGpg==
-X-Gm-Message-State: APuU4Z9sWWfliT+OZHi6npg3LG117Zy9iu8F74zKl6ZdjgV6NPHtyKrk
- ANGw2GQevqXrZ0u8P2JSYh2v4FOS9mPaD9/ad8VgGYRCTWvAPwBqFHSpZSqide97fYY=
-X-Gm-Gg: AYBFou0lquff2Ed1b05VkTK6CE80Hq7Eu39qVekSIUtNjNO2VHWjCLlW1jK3TLTZHd2
- DlwPsvufwtS0ki054rov6Z2vQwCBa2y/3GTY1b3HFJdjEZuXn8hNdI0/wVwsNCvUv/4ll2VEJTv
- TrQLnvqYQg926ZpagQwAuaqe+cSa2HJ/MEKGdLuGIHaO4PM+t23a1nTppoRDvDX4uDH4lFcK+9v
- rbfJgRx6GCtDiMkKBlvLPLSYXuBZ7fusxvy9EDjQS1mO9ioVpyzPbt2jmcDbcOvEKLkjWfc3GE6
- io9Zj2eXFGkDwjoespEhiUPe56wc2QFXTvBQnEcjGpp6LmtUu9vsLBq8dJXJ9iJq0pQ8Tmuk1G6
- xiiK39uuX7Pu6n5ZoBPKrM7DLXw5steartthLALXy3zNFvgDUW62dIY1fHL9NjhLD5e5VM5IceK
- YlrCLuManQdsn66XyC1fIQPi8VmGeY+GviP1rvF28yPFcBIEtyWE5+5YHcmxiWutpbAJSTcq7Rd
- QQKP6OlWah2rd+VhBPXTZM64to8t2JsRWnN5kGo+4pIg9QSIRmpSbnlxL0cYxMhShWJV96OHkLC
- z1XLaqfkf9B8LRqVQCC8/06QcD+mit/Sqg==
-X-Received: by 2002:a05:6820:1c91:b0:713:da3b:9052 with SMTP id
- 006d021491bc7-716e78c1507mr214618eaf.31.1793901277163; 
- Thu, 05 Nov 2026 09:54:37 -0800 (PST)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:7f36:1c5c:8ddb:3ed6])
+ d=1e100.net; s=20260707; t=1793903186; x=1794507986;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=/VWW0y31KXKYze5NFoUhFmEdcgxz85AWtAfPH4swSf0=;
+ b=o+f7EyYKhiNkJ2/ykFuCb1YYQEMlSafuom8mn1urZYCDeJosxedEoRRaCc9Ty/puY9
+ 5A2OwhUVVZrIZSl+n2IRVxYm/clqo3WDmo+KRZ06A8KODmXMdIGaCGlC/wiAmxIrlfhe
+ eHJhWaCVtkbzq80Lijqe92r65oNC115REXPM1s9BeNXHxkDj3u/pDWLjrDfOir69mZn4
+ AtiFmF8gYYea++vGQPxB55nKbPPn5irFaS7iZsmAjtPFkXGQW9uJDRSpDmNq3dczQgwZ
+ AjVe/70YA0WBkcYphKYBzKVuxjrL3pj6Q3j7jWTFJafpWLTmsxN+FozIixvMKyZwVBS9
+ iQrw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBwEbIw8HuZNY1Z56bTuLSnTnd97++68V2aphHVATtcfTef51lT9qh6Dp2OPHX2L/AuWB2ZlaG8=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/ycDADGeWMyNkfV0W09nEGfmnfyyACbi/yzJyTrXXkf4bNB6hC
+ UDORZXRIN42YBEIkuRT4rb2eq/oOXHj0GgzB3xrs3gDSQr8J0vpTAqZOKPrWMM43hHAL1fqdbF+
+ ZkhhQwTK+aP/nLURWPotmiAWhn50tMxlS0bfldmBx+C/tysUkzCqdIDavAqbXpTqbVfl+dK8=
+X-Gm-Gg: AYBFou2Hz9VyEpFHCUGjwmvT2vEUiYSzYAWt8Y0fySyL2QTnIwDXnE4EnhRq2/9d2JD
+ tyFy6Kqb6A9iBr6VyPit5ab6dK56Mm5uWd6+w1muLGzcsJOK2cY4DRhoXAymaw1D80zdvACwApS
+ yIOpfkKsfYsnpaWWsOrKxiiEpNQyDlgWfBqG319/1s6GihTZEL05nOqpsVecg2uo9YsInb7wMMM
+ 3Y5pY4QOenu+dlPFGshqP5HDFHHMS715jvJjztMLOtClYJwMLdVrUhKfYlP7dguVoUvurjGdGze
+ 29JYS0d9WidGmLSmIUvH8HVOr7QteRElSfep88qrb1GjuZ+1IdhbAqZVmU/6Ys0rerATtXJjojV
+ bPLHgWGOvWT2e3x5G7xjiGfK812eAMPNwxWOJOVdGz3VgsQoa5WDd21haB0KwvmrHREXsxPpd9X
+ xlhaug7uVI3njRHr4j0KeAM8htfl80L6fag2MHmPVQmJblQH6LNq1S5WrvBpho9NYseQfX
+X-Received: by 2002:a05:7301:fc86:b0:36e:c07a:426f with SMTP id
+ 5a478bee46e88-36ec07a4913mr2038991eec.39.1793903185436; 
+ Thu, 05 Nov 2026 10:26:25 -0800 (PST)
+X-Received: by 2002:a05:7301:fc86:b0:36e:c07a:426f with SMTP id
+ 5a478bee46e88-36ec07a4913mr2038947eec.39.1793903184629; 
+ Thu, 05 Nov 2026 10:26:24 -0800 (PST)
+Received: from hu-aswinm-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-716c12eb1b9sm4659682eaf.10.2026.11.05.09.54.36
+ 5a478bee46e88-36f6b2be5bcsm141198eec.6.2026.11.05.10.26.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Nov 2026 09:54:36 -0800 (PST)
-From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 05 Nov 2026 11:53:41 -0600
-Subject: [PATCH v2 6/6] doc: board: mediatek: document Genio 520 and 720 boot
+ Thu, 05 Nov 2026 10:26:24 -0800 (PST)
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, trini@konsulko.com,
+ aswin.murugan@oss.qualcomm.com, lukma@nabladev.com,
+ nathbappai@gmail.com, balaji.selvanathan@oss.qualcomm.com,
+ Michael.Srba@seznam.cz, tyler.baker@oss.qualcomm.com,
+ jbx6244@gmail.com, nikroks@mainlining.org,
+ bartosz.golaszewski@oss.qualcomm.com, shengchao.guo@oss.qualcomm.com,
+ andersson@kernel.org, u-boot-qcom@groups.io,
+ u-boot@lists.u-boot-project.org
+Subject: [PATCH v4 00/13] arm64: qcom: Add initial support for Nord SoC
+Date: Thu,  5 Nov 2026 23:56:01 +0530
+Message-Id: <20261105182614.2405482-1-aswin.murugan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261105-mtk-genio-720-spl-v2-6-4994535a3848@baylibre.com>
-References: <20261105-mtk-genio-720-spl-v2-0-4994535a3848@baylibre.com>
-In-Reply-To: <20261105-mtk-genio-720-spl-v2-0-4994535a3848@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Julien Stephan <jstephan@baylibre.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, 
- Chris-QJ Chen <chris-qj.chen@mediatek.com>
-Cc: u-boot@lists.u-boot-project.org, Carlo Caione <ccaione@baylibre.com>, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=11257;
- i=dlechner@baylibre.com; h=from:subject:message-id;
- bh=LUhHpKA/nfQrLgQZpEn5ds4nGxUMKahC7n5Vh0L4PEM=;
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq7MLNHQKLUdqr+9X7IDPOKSCw6j2UUVuM17MNG
- TQRDD+tF1KJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCauzCzRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AfcsH/jtb1QYQgY53+jVeZnygD30x8o/TCIM7bvOAX9Q
- GnhFgEkJtR+SHWKnPPklTKwapzy/Ww+2eEJ6dQWT+rYRusGGPqs4wXQ7H2fsWu9w/8kdSWNxba8
- ep096tetOzEPyTtq0l2vWc+vDmAb3778LPk5ber89zQcvd2hAmcpFOsmW4xqkGW+o53i8deidEz
- PmG3TjuF6BfSPjQYRxLKi4rf/f4lhmpzI66imWawQ9U/Q+193P2ZTv0+3krJW4v3FdoggqQNrqw
- 65BjRG9/XmRm6uA5B3kj/Gy3FUuZ607DsLqVfr5a1v77KYHKUMd778IIWLg91iM8FCezSQ8bFzY
- 5YDw=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA3MyBTYWx0ZWRfX8YdbU1+7LFKX
+ LTlF6ls155MCY3o3EiScZedRJCTu4MMz/9nj7wtosYnVJXWp2IT1jTRm8Fu6b4H/U1iejHV91eh
+ sNdoM+cn0yasO6EysdnbJbxmnMKQG0E=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA3MyBTYWx0ZWRfX/uB0fYdWuLTB
+ BphXbJpAN4Rbxu9/L1tEnt05F3V6thF0gqc7UbSg3TQ00CIupctpRtfz2kq3jIUhqwKW4SY95V1
+ 2C3kce/4ZeltkDC3EyGnFgQVo9RLbKPm6UVe+1ohNiDQeOceEy/mitJHa5mC+96MQU0FZjfTrAQ
+ dkxlcK4TH+R0qWDLv1Ig9u4BX5QgwJAIBSusTrNbVfkSs3HdZREb0TUUsZ0j8eu3fBpgUEouYlz
+ btKP6IVwC61Oi0tQqFUmCl/lZE5yXlYjnpAntMUdfk5tYABoH5e6yWrdyslblqxDsTS32WVUQKL
+ OWiw4AlaTEUGKrOAyDO+382mTYlY1tEC2fN6DNAM8FO2OaCoR6siwxSrMxTeFq1MbZs28cNEGvG
+ oveOfjLmxSOu5KvWHhPAhirecFMZjn4ClnaYot7QD1Zatdi263ZTOb/E4HooDbkfMIasT1mNkYo
+ nGvpvj2qCXw4+M/pg2A==
+X-Proofpoint-ORIG-GUID: C5zI4erMB2a9YqGthIZzFxsHIOEro9-7
+X-Proofpoint-GUID: C5zI4erMB2a9YqGthIZzFxsHIOEro9-7
+X-Authority-Analysis: v=2.4 cv=Y5JtIReN c=1 sm=1 tr=0 ts=6aecca52 cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=gu6fZOg2AAAA:8 a=tl6KkQwk3wzYetsA23IA:9
+ a=6Ab_bkdmUrQuMsNx7PHu:22 a=2RSlZUUhi9gRBrsHwhhZ:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-05_05,2026-11-04_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 adultscore=0 impostorscore=0 priorityscore=1501 bulkscore=0
+ suspectscore=0 clxscore=1015 lowpriorityscore=0 phishscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611050073
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -174,293 +211,98 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add a board page for the Genio 520 and Genio 720 EVKs. It describes
-how to build U-Boot proper as BL33 for the platform's own BL2.
+This series adds foundational support for the Qualcomm Nord SoC in
+U-Boot, including clock, pinctrl, board enablement configs & doc
+required for early platform enablement.
 
-It also describes the optional U-Boot SPL boot chain. This covers the
-DDR-loader handoff contract, the MT8189 image layout and the eMMC
-BootROM size limit, as well as the build and install steps.
+The series includes:
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- board/mediatek/MAINTAINERS              |   1 +
- doc/board/mediatek/index.rst            |   1 +
- doc/board/mediatek/mt8189-genio-evk.rst | 238 ++++++++++++++++++++++++++++++++
- 3 files changed, 240 insertions(+)
+  - Clock driver support for Nord
+  - Pinctrl driver support for Nord TLMM
+  - DTS changes cherrypicked
+  - Configuration updates required for platform enablement
 
-diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
-index 17bbb4d9f59..aa21cb9c767 100644
---- a/board/mediatek/MAINTAINERS
-+++ b/board/mediatek/MAINTAINERS
-@@ -9,6 +9,7 @@ F:	arch/arm/dts/mtk-genio-binman-u-boot.dtsi
- F:	configs/mt8189.config
- F:	configs/mt8371_genio_*
- F:	configs/mt8391_genio_*
-+F:	doc/board/mediatek/mt8189-genio-evk.rst
- 
- MT8365 EVK
- M:	Julien Masson <jmasson@baylibre.com>
-diff --git a/doc/board/mediatek/index.rst b/doc/board/mediatek/index.rst
-index 7ca1bd9fde2..21f01ec88ad 100644
---- a/doc/board/mediatek/index.rst
-+++ b/doc/board/mediatek/index.rst
-@@ -8,3 +8,4 @@ Mediatek
- 
-    mt7621
-    mt8188-genio-evk
-+   mt8189-genio-evk
-diff --git a/doc/board/mediatek/mt8189-genio-evk.rst b/doc/board/mediatek/mt8189-genio-evk.rst
-new file mode 100644
-index 00000000000..184085b83c1
---- /dev/null
-+++ b/doc/board/mediatek/mt8189-genio-evk.rst
-@@ -0,0 +1,238 @@
-+.. SPDX-License-Identifier: GPL-2.0-only
-+.. Copyright (C) 2026 BayLibre SAS
-+
-+MediaTek Genio 520 and Genio 720 EVKs
-+=====================================
-+
-+The Genio 520 and Genio 720 EVKs use the same MT8189-family boot flow:
-+
-+================  ======  ====================================
-+Board             SoC     Defconfig
-+================  ======  ====================================
-+Genio 520 EVK     MT8371  ``mt8371_genio_520_evk_defconfig``
-+Genio 720 EVK     MT8391  ``mt8391_genio_720_evk_defconfig``
-+================  ======  ====================================
-+
-+The configurations share their memory layout, drivers and firmware-image
-+layout. Each board has its own control devicetree.
-+
-+U-Boot can be used on these boards in two ways:
-+
-+* as U-Boot proper only, started as BL33 by the platform's own BL2 and Arm
-+  Trusted Firmware-A, or
-+* optionally, also as U-Boot SPL, which replaces the platform BL2 and loads
-+  BL31, OP-TEE and U-Boot proper itself.
-+
-+U-Boot proper
-+-------------
-+
-+In the usual boot chain, U-Boot provides only U-Boot proper::
-+
-+   BootROM
-+     -> platform BL2
-+     -> Arm Trusted Firmware-A (BL31)
-+     -> OP-TEE (BL32)
-+     -> U-Boot proper (BL33)
-+
-+The platform BL2 initializes DRAM and loads BL31, BL32 and BL33. U-Boot proper
-+is linked at ``CONFIG_TEXT_BASE``, ``0x4c000000``. It takes the DRAM size from
-+the ``memory`` node of its devicetree, which describes 8 GiB of DRAM.
-+
-+Building
-+~~~~~~~~
-+
-+Select the defconfig for the target board. For example, for Genio 720::
-+
-+   $ export CROSS_COMPILE=aarch64-linux-gnu-
-+   $ export KBUILD_OUTPUT=build
-+   $ make mt8391_genio_720_evk_defconfig
-+   $ make
-+
-+Use ``mt8371_genio_520_evk_defconfig`` instead for Genio 520.
-+
-+The EVKs have DIP switches and jumpers which connect either the eMMC or the
-+UFS storage. The default devicetree is for eMMC. When the board is set up for
-+UFS, select the UFS variant of the devicetree instead::
-+
-+   $ make DEVICE_TREE=mt8391-genio-720-evk-ufs
-+
-+Use ``DEVICE_TREE=mt8371-genio-520-evk-ufs`` for Genio 520.
-+
-+This produces ``build/u-boot.bin``, which is the BL33 image. The build also
-+produces ``build/spl/u-boot-spl.bin``, which is not used in this boot chain.
-+No external firmware is needed. Install ``u-boot.bin`` as BL33 as described
-+by the platform firmware.
-+
-+U-Boot SPL
-+----------
-+
-+U-Boot SPL can optionally replace the platform BL2::
-+
-+   BootROM
-+     -> platform DDR loader
-+     -> U-Boot SPL
-+     -> Arm Trusted Firmware-A (BL31)
-+     -> OP-TEE (BL32)
-+     -> U-Boot proper (BL33)
-+
-+The BootROM loads a MediaTek image containing a platform DDR loader followed by
-+U-Boot SPL. The DDR loader initializes DRAM, copies SPL to DRAM and enters it.
-+SPL then reads a FIT image containing BL31, OP-TEE, U-Boot proper and the
-+U-Boot control devicetree, and uses the standard FIT and Arm Trusted Firmware
-+support to hand off to BL31.
-+
-+The DDR loader is a platform firmware component built separately from U-Boot
-+and supplied to binman as an external blob.
-+
-+Boot storage
-+~~~~~~~~~~~~
-+
-+The supplied configurations boot from eMMC. The BootROM loads ``mtk-boot.bin``
-+from the eMMC boot0 hardware partition, and SPL loads ``bootloaders.img`` from
-+GPT partition 1 of the eMMC user area. SPL selects the partition by number
-+through ``CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION``; it does not locate it
-+by name.
-+
-+Make sure the DIP switches and jumpers are set for eMMC, and use the default
-+devicetree.
-+
-+DDR-loader handoff contract
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+The contract between the DDR loader and U-Boot SPL consists of a fixed image
-+layout, initialized DRAM and the execution state at the SPL entry point. The
-+BootROM loads the image payload to ``CONFIG_MTK_GENIO_BROM_LOAD_ADDR``::
-+
-+   offset 0                                     +----------------------+
-+                                                | DDR loader           |
-+                                                |                      |
-+   offset CONFIG_MTK_GENIO_DDR_LOADER_SIZE      +----------------------+
-+                                                | U-Boot SPL           |
-+                                                | CONFIG_SPL_MAX_SIZE  |
-+   image end                                    +----------------------+
-+
-+The supplied configurations use the following values:
-+
-+=====================================  ==============  ========
-+Setting                                Value           Size
-+=====================================  ==============  ========
-+``CONFIG_MTK_GENIO_BROM_LOAD_ADDR``    ``0x2001000``
-+``CONFIG_MTK_GENIO_DDR_LOADER_SIZE``   ``0xa0000``     640 KiB
-+``CONFIG_SPL_MAX_SIZE``                ``0x40000``     256 KiB
-+``CONFIG_SPL_TEXT_BASE``               ``0x40000000``
-+``CONFIG_MTK_GENIO_BL31_LOAD_ADDR``    ``0x54601000``
-+=====================================  ==============  ========
-+
-+The DDR loader must:
-+
-+* initialize and train DRAM,
-+* copy the complete ``CONFIG_SPL_MAX_SIZE`` byte SPL region from
-+  ``CONFIG_MTK_GENIO_BROM_LOAD_ADDR + CONFIG_MTK_GENIO_DDR_LOADER_SIZE``
-+  (``0x20a1000``) to ``CONFIG_SPL_TEXT_BASE``,
-+* leave the MMU and caches disabled, with all of its writes visible to the
-+  CPU, and
-+* enter SPL at ``CONFIG_SPL_TEXT_BASE`` in AArch64 EL3h with exceptions
-+  masked.
-+
-+SPL obtains platform information from its embedded control devicetree and
-+initializes the console, clocks, pinctrl, watchdog and eMMC through U-Boot
-+drivers.
-+
-+The MT8189 BootROM loads at most about 930 KiB from eMMC boot0 and does not
-+start a larger image. The loader and SPL regions together occupy 896 KiB,
-+which leaves little room to enlarge either of them.
-+
-+The DDR loader runs from SRAM at the load address, and the SPL region stays in
-+the same SRAM until the loader has copied it to DRAM. The loader's code, data,
-+BSS and stack must therefore all stay below the SPL region, not only its
-+binary image.
-+
-+Firmware image prerequisites
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+The following external binaries are required to assemble the complete
-+firmware images:
-+
-+``ddr-loader.bin``
-+   A MediaTek DDR loader which initializes the DRAM fitted to the target board
-+   and satisfies the handoff contract above. The input may be shorter than the
-+   configured loader region; binman pads it with zeros.
-+
-+``BL31``
-+   The U-Boot build variable naming the Arm Trusted Firmware-A BL31 binary
-+   built for the MT8189 platform. It is loaded and entered at
-+   ``CONFIG_MTK_GENIO_BL31_LOAD_ADDR``.
-+
-+``TEE``
-+   The U-Boot build variable naming the OP-TEE binary. A standard OP-TEE v1
-+   ``tee.bin`` image is supported. Binman removes its header and derives the
-+   load and entry addresses from it when creating the FIT.
-+
-+BL31 and OP-TEE must agree on the secure-memory layout. Place
-+``ddr-loader.bin`` in a directory which can be passed to binman with
-+``BINMAN_INDIRS``.
-+
-+Building
-+~~~~~~~~
-+
-+Enable ``CONFIG_MTK_GENIO_BOOT_IMAGES`` to assemble the complete firmware
-+images. For example, for Genio 720 with the DDR loader in
-+``/path/to/firmware/ddr-loader.bin``::
-+
-+   $ export CROSS_COMPILE=aarch64-linux-gnu-
-+   $ export KBUILD_OUTPUT=build
-+   $ export BL31=/path/to/bl31.bin
-+   $ export TEE=/path/to/tee.bin
-+   $ make mt8391_genio_720_evk_defconfig
-+   $ scripts/config --file "${KBUILD_OUTPUT}/.config" \
-+         --enable MTK_GENIO_BOOT_IMAGES
-+   $ make olddefconfig
-+   $ make BINMAN_INDIRS=/path/to/firmware
-+
-+Use ``mt8371_genio_520_evk_defconfig`` instead for Genio 520. ``TEE`` must be
-+set for both configuration and compilation. Do not deploy images if binman
-+reports that it used fake or missing external blobs.
-+
-+Binman produces two deployable images and one intermediate payload in the
-+build directory:
-+
-+``mtk-boot.bin``
-+   A MediaTek eMMC image with load and entry address
-+   ``CONFIG_MTK_GENIO_BROM_LOAD_ADDR``. It contains the DDR loader, padded to
-+   ``CONFIG_MTK_GENIO_DDR_LOADER_SIZE``, followed by U-Boot SPL padded to
-+   ``CONFIG_SPL_MAX_SIZE``.
-+
-+``mtk-boot-payload.bin``
-+   The raw DDR-loader and SPL payload contained in ``mtk-boot.bin``, without
-+   the MediaTek BootROM header. This is an intermediate input for external
-+   MediaTek secure-boot tooling and must not be flashed directly.
-+
-+``bootloaders.img``
-+   A FIT image containing BL31, U-Boot proper, OP-TEE and the U-Boot control
-+   devicetree. Each component has a SHA-256 hash.
-+
-+The FIT can also be signed, as described for the Genio 510 and Genio 700 EVKs
-+in :doc:`mt8188-genio-evk`.
-+
-+Installing
-+~~~~~~~~~~
-+
-+Use the board provisioning tools to place the images as follows:
-+
-+===================  ================================================
-+Image                Destination
-+===================  ================================================
-+``mtk-boot.bin``     Start of the eMMC boot0 hardware partition
-+``bootloaders.img``  GPT partition 1 in the eMMC user area
-+===================  ================================================
-+
-+For example, with `Genio Tools
-+<https://genio.mediatek.com/doc/iot-yocto/latest/tools/genio-tools.html>`_ and
-+a prebuilt Genio image for the target board::
-+
-+   $ genio-flash -P /path/to/genio-image \
-+         mmc0boot0:/absolute/path/to/build/mtk-boot.bin \
-+         bootloaders:/absolute/path/to/build/bootloaders.img
-+
-+Writing an invalid image to eMMC boot0 can make the board unbootable. Preserve
-+the platform recovery path while testing.
+Changes in v4:
+- Fix GCC clock rate handling & update CBCR-backed clock gates to
+  use GATE_CLK_POLLED.
+- Cherry-pick latest Nord DTS changes.
+- Add Nord enablement patch with MAINTAINERS entry and board documentation.
+
+Link to v3: https://lore.kernel.org/u-boot/20261021160448.3893858-1-aswin.murugan@oss.qualcomm.com/
+
+Changes in v3:
+ - Drop the DT binding patch since it is now available upstream.
+
+Link to v2: https://lore.kernel.org/u-boot/20260928120209.1064781-1-aswin.murugan@oss.qualcomm.com/
+
+Changes in v2:
+  - Drop DT patches; they will be synced once the corresponding changes
+    land in the upstream Linux kernel
+  - Drop Nord-specific defconfig
+  - Drop ELF 4K-alignment support changes
+  - Add USB HS PHY support for Nord
+  - Retain only clock, pinctrl, USB, and platform enablement changes
+  - Address review comments from v1
+
+Link to v1: https://marc.info/?l=u-boot&m=178695918491771&w=2
+
+
+Aswin Murugan (10):
+  clk: qcom: add GCC driver for nord
+  clk: qcom: add NEGCC driver for nord
+  clk: qcom: add SEGCC driver for nord
+  clk: qcom: add NWGCC driver for nord
+  clk: qcom: add TCSRCC driver for nord
+  configs: qcom_defconfig: enable nord clock drivers
+  pinctrl: qcom: add TLMM driver for nord
+  tools: qcom: mkmbn: add Nord board mappings
+  configs: qcom: add debug UART config fragment for nord
+  configs: add Nord defconfig, MAINTAINERS and documentation
+
+Shawn Guo (3):
+  arm64: dts: qcom: Add device tree for Nord SoC series
+  arm64: dts: qcom: Add device tree for Nord Embedded variant
+  arm64: dts: qcom: Add device tree for Nord RRD board
+
+ board/qualcomm/MAINTAINERS                    |    6 +
+ board/qualcomm/debug-nord.config              |    5 +
+ configs/qcom_defconfig                        |    1 +
+ configs/qcom_nord_defconfig                   |   27 +
+ doc/board/qualcomm/dragonwing.rst             |   14 +-
+ drivers/clk/qcom/Kconfig                      |    8 +
+ drivers/clk/qcom/Makefile                     |    5 +
+ drivers/clk/qcom/clock-nord-gcc.c             |  165 +
+ drivers/clk/qcom/clock-nord-negcc.c           |  193 +
+ drivers/clk/qcom/clock-nord-nwgcc.c           |   91 +
+ drivers/clk/qcom/clock-nord-segcc.c           |  151 +
+ drivers/clk/qcom/clock-nord-tcsrcc.c          |   88 +
+ drivers/pinctrl/qcom/Kconfig                  |    8 +
+ drivers/pinctrl/qcom/Makefile                 |    1 +
+ drivers/pinctrl/qcom/pinctrl-nord.c           |  626 +++
+ .../src/arm64/qcom/nord-embedded.dtsi         | 1820 +++++++
+ dts/upstream/src/arm64/qcom/nord-rrd.dts      |  424 ++
+ dts/upstream/src/arm64/qcom/nord.dtsi         | 4605 +++++++++++++++++
+ tools/qcom/mkmbn/mkmbn.py                     |    1 +
+ 19 files changed, 8236 insertions(+), 3 deletions(-)
+ create mode 100644 board/qualcomm/debug-nord.config
+ create mode 100644 configs/qcom_nord_defconfig
+ create mode 100644 drivers/clk/qcom/clock-nord-gcc.c
+ create mode 100644 drivers/clk/qcom/clock-nord-negcc.c
+ create mode 100644 drivers/clk/qcom/clock-nord-nwgcc.c
+ create mode 100644 drivers/clk/qcom/clock-nord-segcc.c
+ create mode 100644 drivers/clk/qcom/clock-nord-tcsrcc.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-nord.c
+ create mode 100644 dts/upstream/src/arm64/qcom/nord-embedded.dtsi
+ create mode 100644 dts/upstream/src/arm64/qcom/nord-rrd.dts
+ create mode 100644 dts/upstream/src/arm64/qcom/nord.dtsi
 
 -- 
-2.53.0
+2.34.1
 
