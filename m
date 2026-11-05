@@ -2,123 +2,170 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46F36606A333
-	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 04:41:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A87D606A328
+	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 05:17:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=r9lq3QZ5;
-	dkim=pass (2048-bit key, unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=NoFVr6jy
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=0YiZMAxE;
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=DmT0Za1w
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 253F2403D3;
-	Thu,  5 Nov 2026 04:41:38 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1FEC440754;
+	Thu,  5 Nov 2026 05:17:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dYWqbnAW9gW9; Thu,  5 Nov 2026 04:41:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3CF434078C
+ id LJlFfNqZCJDb; Thu,  5 Nov 2026 05:17:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2332440598
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793853697;
-	b=A2BwlNBUOZ1qMhJvtyFPp9q66y5xSrArt4MzefuFQP+3HoHt+dUGeRNwROX57hANfvH3
-	 BgjiIigCmFQsCLnSF91NM9d6aqWTeJBg24hrg8V2ll85k8rgwM22G0LwGHyMHfG8ega3s
-	 OXoVuUccOTlW2dL70m5d6d2ROlr4/CGlR60uOFcmC9u8uoBj9YeT+UGoRJUC7+5G6qRot
-	 W0buPxhj/xkZTPrVujcKRU7BZUmLzdAyOQ9YQkaFUT3M/Nrr0VNPzvZPsnMzUnFy0Z4YS
-	 IcHwR1YV/rw6Sdwj3lvH63EdF1WhjZDeH985mCfnKlCJfNb1oHc4kG0NdWE8HSsRsnw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793855861;
+	b=ThXT0pPszms3qZmzDbbGRI/sp/mseAB825NgC64I8UgyY6hXJ7FtD6H0mOH8KL9zwZNJ
+	 gbo6NibArNxQWkUogxy8fkA/xDWygfl238TXk+Cp3sqlCWtbFnnxFOkySHfBAckTkMQc8
+	 fIO+bp7PihNp+JR1Nit4NTXw3RCNFEsbTxIX8dvYvYzWLqEvlBrzmQfMGHqhpaq6+gbSY
+	 52A7ZHtDtoRLaZzSQgDoCfOmolmc6zEn8GBkNhXpoxX8YV+uEMpEveYhDbR89myM1wZkp
+	 rd1DfUmCj2tPHPm8fb/tD1W+L/Zf00cooOifAtnDxpvAVmPSDbloqh+dKBloZuwP1Ug==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793853697;
+	c=relaxed/relaxed; t=1793855861;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
-	 References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:X-MS-Exchange-Authentication-Results:
+	 Received-SPF:Received:Received:Received:From:To:CC:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 Content-Type:X-EOPAttributedMessage:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-Id:
+	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=hQhI7m9Iif/+1NEZWZC2YDn1i7q9vkoVcvPxWiH/lIA=;
-	b=lftoUI31PR3BWhDnGHUk3+K7OTHhyvX1Y1nY1UD15Etcsm/TZB5U6PKmLwtZJAdlc1iY
-	 TbgX9Zb/+KpJmhpMTSzA9nTt6jOvZOFj8PJmdGTsglmI6Uy1kDSueqBxY47oohEKelfTJ
-	 MmNHiBbBZ65Xz2lwX7Xd3B3cpLwByuGR3o2Ia1GnCD8E2c/s0o8+qMscWAHkUzhyOP9tn
-	 hlUN8aaKDoM1+rUuRGdR8Nv5mS+Edb+w6OV470RIPvuevkM3K+UwhrQSlrm21I3kwoUxL
-	 KxbHCymx8M5v+f+LrCUsahP4U9cw9X7eEiAxs5epnpG/nMb/4BnxN6/xJ/sBNzWJ9EQ==
+	bh=XLqCKwHWm3lX4b+A4CU5VyVlAWncOlQ9xSOf+mcJ0u8=;
+	b=nHjulIV52jxkQTk4ajovp8F5oqGJc5ERz37Aroihosb4vQeNE0shKpHc60Tr+StZYjcI
+	 TP8Eckmr2nY8r5paHDykUkXN7Vt3OPwZdxZC485DT+lzyfBQfPlClbN1S0aDanBDHNLcJ
+	 hMn+ZcQcsSQBDBkXlhD35Dr0Ei3TmM9d5F4q7up4Q79esEmDRHcDTrSEmscNkVDhcUwhb
+	 c5+qP+iJ9pwM1RNAjm1FaPth3Y+vTRMuucko0xfTzdF70ThwnlBR3EIgkNQe5t9CIzt8Z
+	 9nPh4P4dFW8E0zhrQVBOaQ8kanlP1BVJOEciZ/dRvBKsneKPc9/ljv4UO0jr8UqJ0OA==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793853697;
-	bh=hQhI7m9Iif/+1NEZWZC2YDn1i7q9vkoVcvPxWiH/lIA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=r9lq3QZ5Nb3f0AszmLcHTDNXZdXFaoeqATqs8Lsmw3KzfENW4jhmiKJHytuUU1wNo
-	 SKkpsAkWX4HmsxoO8s0Bnk4wBd3N/fIBHv3CUhBqIFlwKwI14vHOJFY+oZnTrQEfY0
-	 qIFATZvMa+k4tXvrH9PLGVV2Zv/y1R+dicmsAIL6YACIYdDlsrKeM1jQN2x6SKsh68
-	 e59kKeLZfMCvVXIVBrRUhwtx4waU6cbVX+HL54Z3GfiF1BVRktMGKZXSQfWyV/IUCp
-	 KXcgCY8lpnuOPEZyJ+kbMNkUotKrYTj432OxDRAgYf0aCx7Bg7kdlarMMlYnCVfPo7
-	 sYjy1oFmE/ImA==
+	d=lists.u-boot-project.org; s=default; t=1793855861;
+	bh=XLqCKwHWm3lX4b+A4CU5VyVlAWncOlQ9xSOf+mcJ0u8=;
+	h=From:To:CC:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=0YiZMAxELd4BPoTGJUazhsVZTZYNTUDvXFniJkHuGff9IXPHhrvqermrF6WQVDIyH
+	 hzCM/Lw/FgDZFfyj/l9fzedrdnZ1+FOK4jhU9pygjqoZEIXKNB4tETHrc6fX2Dh1Zo
+	 9Ehpj/yqzIRKfFYYUdrTrIsUt2Oaaf+GCDnJQxaa0glBm5exgYNIcayUpnLbj2jP3a
+	 ZjkCgfstgyPt+AHgmrAAwmrqYSzpGij5IxU/58o8dvvKlMAy0GF/yQh9lxlt+FzHXW
+	 e1rhGSjvbqdfRBDXPzSssMX7UIu0byhMFtjZywuNq2Iw0UWxX1jMrTsq9IX6jraE4b
+	 3092agepiBGXQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3CF434078C;
-	Thu,  5 Nov 2026 04:41:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2332440598;
+	Thu,  5 Nov 2026 05:17:41 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id C142E52B
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 04:41:35 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id E1F5634D
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 05:17:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id A7B58606E8
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 04:41:35 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id D2F23606D3
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 05:17:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id I23aSA_ZLbRU for <u-boot@lists.u-boot-project.org>;
- Thu,  5 Nov 2026 04:41:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7B3C9606DE
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=80.241.56.161
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.161;
- helo=mout-p-103.mailbox.org; envelope-from=marek.vasut@mailbox.org;
- receiver=<UNKNOWN> 
+ id a-muD-ygXn_v for <u-boot@lists.u-boot-project.org>;
+ Thu,  5 Nov 2026 05:17:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B51DA606A5
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c105::7"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c105::7;
+ helo=ch4pr04cu002.outbound.protection.outlook.com;
+ envelope-from=padmarao.begari@amd.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=NoFVr6jy
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7B3C9606DE
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 04:41:31 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4jKqQJ1ShbzKnm5;
- Thu, 05 Nov 2026 05:41:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1793853688;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=hQhI7m9Iif/+1NEZWZC2YDn1i7q9vkoVcvPxWiH/lIA=;
- b=NoFVr6jyM+FuqsSdCiQilKIYKoKielXZiI/AM29H/qGHWEy8RgrIQykNNfXq9i8h7709U8
- N0G2zw/GZPhJaLfDzxiyWgke28hCZiVupLtsnEOHInc/t61CZCfWk2u7nv18wZVcGZQ9K2
- OeIT1koSjbkF/Kh4nUWpxp+BrFvNr4HaLCsIXWnmsVTfptoxfQ+bQWDMXPBthKwuh4357D
- phjJxtMsSCWKlcb9IIFjoc30JGEK4PaZSXAEjBZiOJeoc+xaWSGL7y2CD6I+Ste5o6NBQX
- cbPZZEJz0lDaOaRit38clYu5HdhoUmsWgQY5P4Vo2l0tA8UT5S03HaLnPEywNA==
-Message-ID: <636803e2-ea4f-47c9-9883-6cd070b1c772@mailbox.org>
-Date: Thu, 5 Nov 2026 02:46:07 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
+ header.s=selector1 header.b=DmT0Za1w
+Received: from CH4PR04CU002.outbound.protection.outlook.com
+ (mail-northcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::7])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B51DA606A5
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 05:17:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=XLqCKwHWm3lX4b+A4CU5VyVlAWncOlQ9xSOf+mcJ0u8=;
+ b=DmT0Za1w9Ya3vzpeJPzIuE/4pHNFx8Oeupgeh2E9CwojuX7ktxweuTh3WkHJjQPGLkcyEuhOZN7zEh1YhsoKsL8GHsrJAkK37ERxP5ft1oCEVKFJ/+qU4auuJoJShlAPoVMSY52FuWBKGp6GlnkFAT04EX0kUmKPM5WdC/ZUtSs=
+Received: from BY5PR03CA0010.namprd03.prod.outlook.com (2603:10b6:a03:1e0::20)
+ by SA1PR12MB8918.namprd12.prod.outlook.com (2603:10b6:806:386::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.8; Thu, 5 Nov 2026
+ 05:17:31 +0000
+Received: from SJ5PEPF0000020A.namprd05.prod.outlook.com
+ (2603:10b6:a03:1e0:cafe::6f) by BY5PR03CA0010.outlook.office365.com
+ (2603:10b6:a03:1e0::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.10 via Frontend Transport; Thu, 5
+ Nov 2026 05:17:30 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ SJ5PEPF0000020A.mail.protection.outlook.com (10.167.244.43) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.592.5 via Frontend Transport; Thu, 5 Nov 2026 05:17:29 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Wed, 4 Nov
+ 2026 23:17:24 -0600
+Received: from xhdpabegari40x.xilinx.com (10.180.168.240) by
+ satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.53 via Frontend Transport; Wed, 4 Nov 2026 23:17:22 -0600
+From: Padmarao Begari <padmarao.begari@amd.com>
+To: <u-boot@lists.u-boot-project.org>, <michal.simek@amd.com>
+CC: <git@amd.com>, <padmarao.begari@amd.com>
+Subject: [PATCH v3 0/2] efi_loader: show drive details in the boot menu
+Date: Thu, 5 Nov 2026 10:46:52 +0530
+Message-ID: <20261105051715.215560-1-padmarao.begari@amd.com>
+X-Mailer: git-send-email 2.34.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: spi-nor-ids: Add support for Winbond W77T51NW
-To: Takahiro.Kuwano@infineon.com, u-boot@lists.u-boot-project.org
-Cc: kenichi.nagai.ry@renesas.com, trini@konsulko.com, vigneshr@ti.com,
- vjardin@free.fr, yuya.hamamachi.sx@renesas.com
-References: <20261026134745.81217-1-marek.vasut+renesas@mailbox.org>
- <896390bd13f4439297a31492e1a3dda5@infineon.com>
- <b7fa5fba-17de-4e3c-bf9c-ff2c80e67a86@mailbox.org>
- <2d7719916f1a40288f80e0bfb63492ad@infineon.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <2d7719916f1a40288f80e0bfb63492ad@infineon.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: qo5gwrbxwtb3xqbaicodximhieecuxhf
-X-MBO-RS-ID: d7e14099ab18e1431a5
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF0000020A:EE_|SA1PR12MB8918:EE_
+X-MS-Office365-Filtering-Correlation-Id: 63211a72-bbcf-4716-6d1f-08df3afc169e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700016|376014|23010399003|1800799024|10067099003|18002099003|13003099007|56012099006|11063799006|261021123027099003|261021121427099003|261022075727099003|261028144727099003|261102123227099003|261026140227099003|261022105027099003|261009223027099003|261026121527099003;
+X-Microsoft-Antispam-Message-Info: 24MRFxjnO1TKeBqM4LohbYVVtdbZxQzRo9QyM8O9M28z2hlNGYTkh5IMbXEUO3NNBRSRjZH7TXM9hsj9i4u2UUbUXq6Tqzm6Bbc7HbU87XB5TnrKiWMHjjbxWy7xQBG6ZJcxFdLAFIgchhncBk1kWYbcVw2VQQ+z22GWqPuKEhl9MXvL7sZRIhmhsA1i2pDox3BEqZ02cN/WAc5rwg7+H7+hoB4+rrqpekU5zzFEb8JnBGAyUPqofEtgc2aaGgRj99EilK9YJsYG1P7ZwnY1jS4sm0gA8SEvU1n7V1VjKUE6vny1KkK8F9s6aU38OUIdqxCmKM/TajUX/dWKP+bKrii/vqoF6k53W+yTTAMnsIwhc6rynX6LvKQtXKn9SZm5Q8K/lrwsd4vGEVEQM73eh9OTnMUxlfNalmRlrXmmDsSkBf9ZugEukzS8NKHCjR6pdQjqwvdJaT02zPUgmMsvFA4f0krngPccHQTq5ziU/aPvRMeQhgr415CbLgsoG2bdu+9pCZK4GxFzCo4OwCN4UXU2KIyATl8Sap+9oy3MLouIynTCPTmoStj0rRoITGY3RJrV8IKtmVhbGLu4f5QNSPMUqpR6jAqCTolxVcPB4UXEZ2mPr5Nk9potI0L3L7vbV/DROTb+o8N3ZXDz/smirOFelwljWtaJS1hFBk2OYNE=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700016)(376014)(23010399003)(1800799024)(10067099003)(18002099003)(13003099007)(56012099006)(11063799006)(261021123027099003)(261021121427099003)(261022075727099003)(261028144727099003)(261102123227099003)(261026140227099003)(261022105027099003)(261009223027099003)(261026121527099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 5fAm4IQ4a9MKrOKwxBBJD8xK7B1tIdxDgFoH+CW0CM5ultB8dBs5d/o6pgAD5HpWIezaxysdOXdc3OnRAw2ZvfWaJDJbQ7BPTYmYPKIY+ZkP9t0PVxhhhzc0VNRl1aHINFy+kIPGZpXAz+0nG2jBv+lZFJjy0vlHG9b4FRYHp4RhPr8wmnQT/x3qG5rQK0z5u7Tszj2/cz+FkoB5aGVIKRpUvIG8RtSy4Qt+R0SGd/TMermmY0X2ovRwkHIXCit5hhU1dB4JC9BXEyUxIhKNBdWZYqka2jWXxPcUX5luXHQH/oiFulu61CaUwUrUb0rVgKuWKD0tg+Jdd4EKkAvD3UB0m1/zI1untt3FSuFyo8eiRdIvxssHDaoUzRMl2uxvdURGmYBUYypbzTufehM16ZaWLFAMCytrY2KYCtEsTRn/rSNVHh9+La78FtCkUgLY
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2026 05:17:29.4804 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 63211a72-bbcf-4716-6d1f-08df3afc169e
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF0000020A.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8918
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -128,72 +175,65 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 11/4/26 6:40 AM, Takahiro.Kuwano@infineon.com wrote:
+The EFI boot menu only shows entries like "usb 0" or "scsi 0", which is
+of little help when several drives of the same type are attached. Append
+the capacity and the vendor/product strings of the drive so that the
+entries read:
 
-Hello Kuwano-san,
+    usb 0 (29.7 GiB, Generic Ultra HS-COMBO)
+    usb 1 (28.6 GiB, USB SanDisk 3.2Gen1)
+    scsi 0 (1 GiB, MICRON MT064GBCAV1U31AA)
 
->>>> From: Kenichi Nagai <kenichi.nagai.ry@renesas.com>
->>>>
->>>> Add IDs for Winbond W77T51NW, 512M-bit Secure Serial Flash Memory
->>>> with Post-Quantum Cryptography, SPI, Quad, Octal and DTR . For
->>>> details please see vendor page:
->>>>
->>>> https://www.winbond.com/hq/product/code-storage-flash/trustme-secure/w77t-nw/
->>>>
->>> Please use Link: tag.
->>
->> Does Link tag apply to arbitrary links in the commit message ?
->>
->> I believe Link tag only applies to lore links, hence I did not use it.
->>
-> I have been using Link: tag with datasheet link since [3].
-> I prefer to use the tag with datasheet link if it is publicly available in
-> vendor's site, but I won't push for it.
+As Heinrich suggested in the v2 review, patch 1 adds a Z suffix to the
+%u printf() conversion, which prints a size with a binary unit, instead
+of adding an snprint_size() helper:
 
-The datasheet is not available, it is only this product page that I 
-could find. Would you still prefer me to use the Link: tag for this page 
-and send a V2 ?
+    printf("%lluZ\n", 0x113000ULL);      /* 1 MiB */
+    printf("%.3lluZ\n", 0x113000ULL);    /* 1.074 MiB */
 
-[...]
+"%.1lluZ" prints the same as print_size(), which a test checks. Patch 2
+uses it for the capacity in the boot menu.
 
->>> It would be helpful to see how it differs from the existing w77q51nw.
->>   From what I can find in [1] and [2], W77T is faster and wider than W77Q:
->> - W77T is up to Octal-IO/200MHz
->> - W77Q is up to Quad-IO /166MHz
-> 
-> Just out of curiosity, do you plan to add Octal-IO support in the future?
+The roughly 100 callers of print_size() could then use the new format,
+and print_size() be removed, but that is left for a separate series.
+print_size() also works with the SPL and TPL tiny printf(), which does
+not support the new format.
 
-At this point, there is no plan to do so. If I learn there is a plan, I 
-will inform you.
+Changes in v3:
+- Replace the snprint_size() helper with a %uZ printf() format, as
+  suggested by Heinrich Schuchardt, with documentation and tests
+- Print the capacity in the boot menu with "%.1lluZ"
 
->> The security extras are unsupported by either U-Boot or Linux, and I do
->> not know the details of the security extras of the W77T part, so I can
->> not comment on that.
->>
->> And of course, the ID differs too.
->>
->> Do you have any particular detail in mind that you would like me to find
->> out ?
->>
-> Nothing particularly. I understood the interface improvement in W77T.
+Changes in v2:
+- Address Heinrich Schuchardt review comments
+- Reuse the print_size() formatting
+- Add a new snprint_size() helper
+- Build the suffix with a single snprintf() instead of a chain of
+  strlcat() calls.
+- Limit the name to 64 instead of 128 characters.
+- Document the limitation in the commit message.
 
-Understood.
+Link to v2: https://patchwork.ozlabs.org/project/uboot/list/?series=520652
 
->> Thank you for your help !
->>
-> Thank you!
-> 
-> Reviewed-by: Takahiro Kuwano <takahiro.kuwano@infineon.com>
+Padmarao Begari (2):
+  lib: vsprintf: add %uZ to print sizes
+  efi_loader: expand disk device names with drive details
 
-Thank you !
+ doc/develop/printf.rst    | 30 ++++++++++++
+ include/efi_loader.h      | 13 +++++-
+ lib/efi_loader/efi_disk.c | 66 +++++++++++++++++++++++++-
+ lib/vsprintf.c            | 98 +++++++++++++++++++++++++++++++++++++++
+ test/common/print.c       | 97 ++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 301 insertions(+), 3 deletions(-)
 
 -- 
-Best regards,
-Marek Vasut
+2.34.1
+
