@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2734B606A334
-	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 14:06:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73827606A33D
+	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 14:06:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=vahq8Yn5;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=XuxW0Qw0
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=nI3xeEgo;
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=sEacWSHO
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 953F3407FB;
-	Thu,  5 Nov 2026 14:06:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 349A66086A;
+	Thu,  5 Nov 2026 14:06:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tZjofz12RHu0; Thu,  5 Nov 2026 14:06:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 678E44073B
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793887580;
-	b=bWYME7/A8WHHxsd1xf1OSBlalDnQqVAXG3Gwxd9v7KkDMbz8YHg25BpVi/Gec0OP5cWJ
-	 CRXptOk4oX4yQaSPnfJWhIYMcCQ8YxxXvw8E1xlq9xllsnnDkLcvHHOlXJS3xqxXw2RU+
-	 u6Zr4eqAM7klLAOoQqYSQFoc75wZb6lOdI7KdrPLfOttINHBYrO9zXrvKjC4IjFO8FFr4
-	 MzdjMMMgF7wFVPuRCn9uq92CejlWYDjHaEyYFNPlNA7wFMBoVxBbyOJQM8HC51x+V5Cxi
-	 ADOFRqw1wfRN2Uww3N01uqCYaC9sJs84gEXdhsPMtTaYCI3OMrsAQ2nwXtTlracO1SQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id YarTMp5-fT3a; Thu,  5 Nov 2026 14:06:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 227A760855
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793887586;
+	b=hRLciY+3zXA3hWt0MRIOGMgS5YkUKnBFwBdGBjEp7qSp0nrXtNt9/WPypViT4AjpF8+3
+	 9D3KM8UTyHzPL8SqsPKxJyznmRF0EBJ0xYplARW3P49WP8a8UF+tnoTZKad7ZIoPIweS6
+	 3MYuZzy+gSmQBhcDDLVggMnfrTSZpHy61U0oT0972poVlfsSDQCEmQmx8SuvuxWTiSSrA
+	 7tKfxyiYneF4Hg44C3osZ0cmP34azxq8acIS7A0g9y/LUs+oR9p9iHkh9Qx3CMhPSHFJs
+	 EqWMorwoc8tU1lURYUp3IH/EnsxCY6SWsD4J8pppXbgZqUCMvxOor4LpPCcgY2d8SaA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793887580;
+	c=relaxed/relaxed; t=1793887586;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,80 +32,79 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:To:Cc:X-Mailer:X-Last-TLS-Session-Version:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=OeZEp4tkz4+Ena98VBhVyTBfnT86Mm1iu93gzrLYzrk=;
-	b=tHNSLeGnkTdG0chVBpafLWxPAQ/pa8sDdI3P9Y2zN7lHEZgZMRYkRBmyMlk4aOQwLkWl
-	 gmmNjc83Y4BGMwxs4XgK1mKKATdoRe1c6SxdHmr8o396sJDRMTKihxklFAFWX3lPI1gax
-	 sE8J9/2XPHRkLdyRk2SV56Ogb+dC3EOZ06zKSay2JC84DUqsw4quyIriWtxJ/dEieL/xn
-	 93gw8Uncwd40v7vbAUNffahorEUW38T0e+5K0C0D8eGSjLNGJENrneMDcH6XgEfko9IEH
-	 xy9h/KP4WLO8otpe3qhv9CZ7imnzZWdjXUD8Ta/48zJ/PxlEvuuWGgBrCPO26/8n5Yw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=dQKUZLrQ+y8tKuJtCBhVMvz/64iGEBu8ydH3EXWaItw=;
+	b=OPLiS09oz0jpse7GmXQtuvuI2o1TCPvCUBM+SzsBoDAzPtS2NGWgRqEyyBzBUVa5r2Hg
+	 yl5wrNmgRqMt72YOVW/mgwJ+T3hSihCId6fh3jeFkIeR3N7RgVb0lbedbEAqlsQMxa2vB
+	 T+tvnRgfq6Wh1u58JezmWoU6GJKOhZPbVkTnEA6Oc/gdaCF07AZ38cW7B+uL2aWhyfHxj
+	 Jofnp38ba7GpIA7FStNqbtYnCGQ/jYhDxlkeOOc5QnEgga85PLrWgc1outW8rYyLsGzQR
+	 AeZsF1ndoGnWXow46XrdsWJng8ttqm4s5R80dVJYV+TKS6T0ztzr0IqvAEGfoh2N3Mw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793887580;
-	bh=OeZEp4tkz4+Ena98VBhVyTBfnT86Mm1iu93gzrLYzrk=;
+	d=lists.u-boot-project.org; s=default; t=1793887586;
+	bh=dQKUZLrQ+y8tKuJtCBhVMvz/64iGEBu8ydH3EXWaItw=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vahq8Yn5bpYIPSpvcuYrIN0yDSdK+xydHpmqV+UWVsZSqMIk/SWR2jhhZWrkVATkl
-	 iwxy+iDMrEBOx0ob2i2dnRrA3szL6iJ4i4YAA4GZb/InryW6+ul+2BGemQjf/Gg+xH
-	 2RydqYYFwpKIWgNRsyYfpf1YaoyouQnppgcEpj7MpuUXIuWUBKtKr2kt+jSOZIY1uX
-	 lVLyOK6k/sj+p231al0AC5NonBU2tanG/v60lJF1trbhWwFZ9w2+qzwmmUyXccEWN8
-	 5sWBwslg73MCrOXGu069zBroJfW1OZTA5vU2iYpFL2VuZSAOvPNpaZgi2lOcysBQsb
-	 wFMW8XTzBHCwA==
+	b=nI3xeEgovGKRhy1YsdZNZV1DN6wuJWnt3JbbkhSdVLjHYEEZ2sHOSexktOma6SQGw
+	 ysdO9hbbv90W9JL1wFBBqid9w8FIR50t6U3aApTE0C1k/z3qOomwmPEvCHXxX9snez
+	 8h0dGimMeZN9M+0aBuNhY5n48pa/uRm4OL0fAiM05P2qOQLyhMMur2erS6Y1PE/o4g
+	 eW/73FXtRweoAoAHk0wMAtSGsvsnWccpqa10U/uuOICzQdNfY7PU32Ffp8Vh8SOXNz
+	 1oBM6r1iTud2QeI1xs/eS67B2wfmLNln8bvHLTcRdEfgX44NdR5VGKLarTMtRKUROe
+	 3Pnswvv0VWNQg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 678E44073B;
-	Thu,  5 Nov 2026 14:06:20 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 7D58234D
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 14:06:18 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 227A760855;
+	Thu,  5 Nov 2026 14:06:26 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id AAFBB235
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 14:06:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 6B75060855
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 14:06:18 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 90AE2400B4
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 14:06:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Xg62u6GREn7H for <u-boot@lists.u-boot-project.org>;
- Thu,  5 Nov 2026 14:06:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E8C8F60847
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=185.171.202.116
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.171.202.116;
- helo=smtpout-04.galae.net; envelope-from=thomas.perrot@bootlin.com;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1LLLgtwT0Iii for <u-boot@lists.u-boot-project.org>;
+ Thu,  5 Nov 2026 14:06:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org EBC714007E
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=185.246.84.56
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=185.246.84.56;
+ helo=smtpout-02.galae.net; envelope-from=thomas.perrot@bootlin.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256
- header.s=dkim header.b=XuxW0Qw0
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E8C8F60847
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 14:06:16 +0000 (UTC)
+ header.s=dkim header.b=sEacWSHO
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id EBC714007E
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 14:06:22 +0000 (UTC)
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 6A6BDC6915B;
- Thu,  5 Nov 2026 14:06:13 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 536AA1A09F3;
+ Thu,  5 Nov 2026 14:06:20 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 477995FF85;
- Thu,  5 Nov 2026 14:06:14 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 25A055FF85;
+ Thu,  5 Nov 2026 14:06:20 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9883E103291F9; Thu,  5 Nov 2026 15:06:07 +0100 (CET)
+ with ESMTPSA id 9BEA41032923C; Thu,  5 Nov 2026 15:06:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1793887569; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1793887575; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=OeZEp4tkz4+Ena98VBhVyTBfnT86Mm1iu93gzrLYzrk=;
- b=XuxW0Qw0EV4NF55qWPATWkJfqypiG+C5FeFPmtfinegsKm0QnwvJDMFqBjLMFmnuTkXGWf
- mqDxnSq8WvgGao50HKbazXEP4q1A/40n5PhS+9xGIMdjWEQ0IdLJyyOaq6rMj4LiwGFxnu
- AM5HYoc94ddCD49Gcu9kYG/cZiwPwl5lV/GEUUNwF4gSwOaxAZSxf/AScRB7nzipDP/TiI
- PSp9k4Y8pGc0LA78qOvi8+TtOJDikWH1EQw0ljitxBbhOKB4rOedd0k1gIUvwCJCJLkicY
- BR2aSHE5mt+WGhxF4X9mJ5MJMFkBkl9r9WIApLCmSChFB8KYg0+bKvvmi7CEgA==
+ bh=dQKUZLrQ+y8tKuJtCBhVMvz/64iGEBu8ydH3EXWaItw=;
+ b=sEacWSHO0gyKt2Rf5mjZWe76vLfSbRXqB9Y7X2Z4zxJrinnURXofnJhIlgA8gAWBmb5jIC
+ r6LA85XqDsodNRe/p3dz3xE5PbPtrwG6twnXGVzjLTSKvo0prbm69uj+1jqNCfMO75WrJJ
+ 9IsMJiKoxNCwbIQ09SkvnKTGuljGa2q0EwS6H+H69Ac/UoVpMsBBaSU2pbyA5HoHDBv7Oi
+ XY7SM23C616geFgS02A8+zz/8K6RyqttMjo1sJoihmUb8iYAr39YUbwiSZ0aFWfy4jZT6I
+ EfiPYMEWNzVEVgEoGxuNxeJLH9uxb3pbcZ0XvosUQ2JPuOTQunvpux5GP0TKMQ==
 From: Thomas Perrot <thomas.perrot@bootlin.com>
-Date: Thu, 05 Nov 2026 15:05:57 +0100
-Subject: [PATCH RESEND 2/3] board: beagle: Add BeagleV-Ahead board support
+Date: Thu, 05 Nov 2026 15:05:58 +0100
+Subject: [PATCH RESEND 3/3] doc: board: beagle: Add BeagleV-Ahead documentation
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261105-dev-tprrt-beaglev-ahead-spl-v1-2-ba7472d69ebf@bootlin.com>
+Message-Id: <20261105-dev-tprrt-beaglev-ahead-spl-v1-3-ba7472d69ebf@bootlin.com>
 References: <20261105-dev-tprrt-beaglev-ahead-spl-v1-0-ba7472d69ebf@bootlin.com>
 In-Reply-To: <20261105-dev-tprrt-beaglev-ahead-spl-v1-0-ba7472d69ebf@bootlin.com>
 To: u-boot@lists.u-boot-project.org
@@ -126,398 +125,149 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add support for the BeagleBoard.org BeagleV-Ahead, based on the T-Head
-TH1520 SoC with 4 GB of LPDDR4X.
-
-The TH1520 SoC support and the devicetree are already upstream, so only
-a board directory, a U-Boot devicetree include and a defconfig are
-needed. As on the Lichee Pi 4A, the SPL is loaded into SRAM through
-fastboot and starts OpenSBI and U-Boot from a FIT generated by binman.
-
-The board has a single rank of memory, so the DDR firmware must be built
-from lpddr4x-3733-singlerank.lua instead of the dual rank configuration
-used by the Lichee Pi 4A.
+Describe how to generate the DDR firmware, build OpenSBI and U-Boot, and
+load the resulting u-boot-with-spl.bin on the BeagleV-Ahead through
+fastboot.
 
 Signed-off-by: Thomas Perrot <thomas.perrot@bootlin.com>
 ---
- arch/riscv/Kconfig                              |   9 ++
- arch/riscv/dts/th1520-beaglev-ahead-u-boot.dtsi |  32 +++++++
- board/beagle/beaglev_ahead/Kconfig              |  43 +++++++++
- board/beagle/beaglev_ahead/MAINTAINERS          |   8 ++
- board/beagle/beaglev_ahead/Makefile             |   7 ++
- board/beagle/beaglev_ahead/board.c              |  14 +++
- board/beagle/beaglev_ahead/spl.c                |  51 +++++++++++
- configs/beaglev_ahead_defconfig                 | 110 ++++++++++++++++++++++++
- include/configs/beaglev_ahead.h                 |  20 +++++
- 9 files changed, 294 insertions(+)
+ doc/board/beagle/beaglev_ahead.rst | 102 +++++++++++++++++++++++++++++++++++++
+ doc/board/beagle/index.rst         |   9 ++++
+ 2 files changed, 111 insertions(+)
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index ad7589123c6c..20bf9b54d652 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -20,6 +20,14 @@ config TARGET_BANANAPI_F3
- config TARGET_BEAGLEBOARD_BEAGLEVFIRE
- 	bool "Support BeagleBoard BeagleV-Fire Board (based on Microchip MPFS)"
- 
-+config TARGET_BEAGLEV_AHEAD
-+	bool "Support BeagleBoard BeagleV-Ahead Board (based on T-Head TH1520)"
-+	select SYS_CACHE_SHIFT_6
-+	help
-+	  The BeagleBoard.org BeagleV-Ahead is a single board computer based on
-+	  the T-Head TH1520 SoC (4x Xuantie C910), with 4 GB of LPDDR4X and
-+	  16 GB of eMMC.
-+
- config TARGET_K230_CANMV
- 	bool "Support K230 CanMV Board"
- 
-@@ -109,6 +117,7 @@ config SPL_ZERO_MEM_BEFORE_USE
- source "board/andestech/ae350/Kconfig"
- source "board/andestech/voyager/Kconfig"
- source "board/aspeed/ibex_ast2700/Kconfig"
-+source "board/beagle/beaglev_ahead/Kconfig"
- source "board/beagle/beaglev_fire/Kconfig"
- source "board/canaan/k230_canmv/Kconfig"
- source "board/emulation/qemu-riscv/Kconfig"
-diff --git a/arch/riscv/dts/th1520-beaglev-ahead-u-boot.dtsi b/arch/riscv/dts/th1520-beaglev-ahead-u-boot.dtsi
+diff --git a/doc/board/beagle/beaglev_ahead.rst b/doc/board/beagle/beaglev_ahead.rst
 new file mode 100644
-index 000000000000..b5e77bdf9d06
+index 000000000000..a70f227c8fd2
 --- /dev/null
-+++ b/arch/riscv/dts/th1520-beaglev-ahead-u-boot.dtsi
-@@ -0,0 +1,32 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2025 Yao Zi <ziyao@disroot.org>
-+ * Copyright (C) 2026 Thomas Perrot <thomas.perrot@bootlin.com>
-+ */
++++ b/doc/board/beagle/beaglev_ahead.rst
+@@ -0,0 +1,102 @@
++.. SPDX-License-Identifier: GPL-2.0+
 +
-+#include "th1520-u-boot.dtsi"
-+#include "thead-th1520-binman.dtsi"
++BeagleBoard.org BeagleV-Ahead
++=============================
 +
-+&{/memory@0} {
-+	bootph-pre-ram;
-+};
++BeagleV-Ahead is an open-source single board computer based on the T-Head
++TH1520 SoC (4x Xuantie C910 @ 1.85GHz), featuring 4 GB of LPDDR4X and 16 GB of
++eMMC flash.
 +
-+&clk {
-+	bootph-some-ram;
-+};
++ - SoC            T-Head TH1520
++ - System Memory  4 GB LPDDR4X (single rank, 3733 MT/s)
++ - Storage        16 GB eMMC flash
++ -                external microSD slot
++ - Networking     Gigabit Ethernet
++ -                WiFi + BT
++ - Display        HDMI 2.0, 4-lane MIPI DSI
++ - USB            4x USB 3.0 Type-A, 1x USB 2.0 Type-C
++ - Expansion      BeagleBone-compatible P8/P9 headers
 +
-+&padctrl0_apsys {
-+	bootph-some-ram;
-+};
++Mainline support
++----------------
 +
-+&uart0_pins {
-+	bootph-some-ram;
++The following features are currently supported:
 +
-+	tx-pins {
-+		bootph-some-ram;
-+	};
++1. ns16550 UART driver
++2. eMMC and microSD card
++3. Gigabit Ethernet (DesignWare GMAC with Realtek PHY)
++4. LPDDR4X controller and PHY initialization in SPL
 +
-+	rx-pins {
-+		bootph-some-ram;
-+	};
-+};
-diff --git a/board/beagle/beaglev_ahead/Kconfig b/board/beagle/beaglev_ahead/Kconfig
-new file mode 100644
-index 000000000000..f0c4fe54678a
---- /dev/null
-+++ b/board/beagle/beaglev_ahead/Kconfig
-@@ -0,0 +1,43 @@
-+if TARGET_BEAGLEV_AHEAD
++Building
++~~~~~~~~
 +
-+config ARCH_THEAD
-+	bool
-+	default y
++1. Add the RISC-V toolchain to your PATH.
++2. Setup ARCH & cross compilation environment variable:
 +
-+config SYS_BOARD
-+	default "beaglev_ahead"
++.. code-block:: none
 +
-+config SYS_VENDOR
-+	default "beagle"
++   export CROSS_COMPILE=<riscv64 toolchain prefix>
 +
-+config SYS_CPU
-+	default "th1520"
++3. Build DDR firmware
 +
-+config SYS_CONFIG_NAME
-+	default "beaglev_ahead"
++The DDR driver requires a firmware blob to initialize the controller and the
++PHY. BeagleV-Ahead has a single rank of LPDDR4X, which needs the single-rank
++variant of the configuration:
 +
-+config TEXT_BASE
-+	default 0x01b00000 if SPL
-+	default 0x01c00000 if !RISCV_SMODE
-+	default 0x01c00000 if RISCV_SMODE
++.. code-block:: bash
 +
-+config SPL_TEXT_BASE
-+	default 0xffe0000000
++	git clone --depth 1 https://github.com/ziyao233/th1520-firmware
++	cd th1520-firmware
++	lua5.4 ddr-generate.lua src/lpddr4x-3733-singlerank.lua th1520-ddr-firmware.bin
 +
-+config SPL_OPENSBI_LOAD_ADDR
-+	default 0x80000000
++4. Build OpenSBI firmware
 +
-+config BOARD_SPECIFIC_OPTIONS
-+	def_bool y
-+	select ARCH_EARLY_INIT_R
-+	select THEAD_TH1520
-+	imply CPU
-+	imply CPU_RISCV
-+	imply RISCV_TIMER if RISCV_SMODE
-+	imply CMD_CPU
-+	imply SMP
-+	imply SUPPORT_OF_CONTROL
-+	imply OF_CONTROL
-+	imply OF_REAL
++The proper U-Boot runs in S mode, thus OpenSBI is required as SBI firmware.
++TH1520 support in OpenSBI requires v1.2 or a more recent version:
 +
-+endif
-diff --git a/board/beagle/beaglev_ahead/MAINTAINERS b/board/beagle/beaglev_ahead/MAINTAINERS
-new file mode 100644
-index 000000000000..7d6a162863b0
---- /dev/null
-+++ b/board/beagle/beaglev_ahead/MAINTAINERS
-@@ -0,0 +1,8 @@
-+BeagleBoard BeagleV-Ahead
-+M:	Thomas Perrot <thomas.perrot@bootlin.com>
-+S:	Maintained
-+F:	arch/riscv/dts/th1520-beaglev-ahead-u-boot.dtsi
-+F:	board/beagle/beaglev_ahead/
-+F:	configs/beaglev_ahead_defconfig
-+F:	doc/board/beagle/beaglev_ahead.rst
-+F:	include/configs/beaglev_ahead.h
-diff --git a/board/beagle/beaglev_ahead/Makefile b/board/beagle/beaglev_ahead/Makefile
-new file mode 100644
-index 000000000000..ab3c61a10eca
---- /dev/null
-+++ b/board/beagle/beaglev_ahead/Makefile
-@@ -0,0 +1,7 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (c) 2023, Yixun Lan <dlan@gentoo.org>
-+# Copyright (c) 2026, Thomas Perrot <thomas.perrot@bootlin.com>
++.. code-block:: bash
 +
-+obj-y += board.o
-+obj-$(CONFIG_XPL_BUILD) += spl.o
-diff --git a/board/beagle/beaglev_ahead/board.c b/board/beagle/beaglev_ahead/board.c
-new file mode 100644
-index 000000000000..32c3f3205078
---- /dev/null
-+++ b/board/beagle/beaglev_ahead/board.c
-@@ -0,0 +1,14 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2023, Yixun Lan <dlan@gentoo.org>
-+ * Copyright (c) 2026, Thomas Perrot <thomas.perrot@bootlin.com>
-+ */
++	git clone https://github.com/riscv-software-src/opensbi.git
++	cd opensbi
++	make PLATFORM=generic
 +
-+#include <cpu_func.h>
++5. Build U-Boot images
 +
-+int board_init(void)
-+{
-+	enable_caches();
++The DDR firmware must be found by binman. The simplest way is to copy it to
++the U-Boot source directory before building:
 +
-+	return 0;
-+}
-diff --git a/board/beagle/beaglev_ahead/spl.c b/board/beagle/beaglev_ahead/spl.c
-new file mode 100644
-index 000000000000..d75fa6f3eff7
---- /dev/null
-+++ b/board/beagle/beaglev_ahead/spl.c
-@@ -0,0 +1,51 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2025, Yao Zi <ziyao@disroot.org>
-+ */
++.. code-block:: bash
 +
-+#include <asm/io.h>
-+#include <asm/spl.h>
-+#include <asm/arch/cpu.h>
-+#include <asm/arch/spl.h>
-+#include <cpu_func.h>
-+#include <dm.h>
-+#include <hang.h>
-+#include <spl.h>
++	cd <U-Boot-dir>
++	cp <path-to-ddr-firmware> th1520-ddr-firmware.bin
++	make beaglev_ahead_defconfig
++	make OPENSBI=<opensbi_dir>/build/platform/generic/firmware/fw_dynamic.bin
 +
-+u32 spl_boot_device(void)
-+{
-+	/*
-+	 * We don't bother to load proper U-Boot from an external device as
-+	 * it fits in the integrated SRAM nicely.
-+	 */
-+	return BOOT_DEVICE_RAM;
-+}
++Alternatively, binman can be pointed to the directory holding the firmware
++with BINMAN_INDIRS, which keeps the source tree clean and works with
++out-of-tree builds:
 +
-+void board_init_f(ulong dummy)
-+{
-+	int ret = spl_early_init();
-+	struct udevice *dev;
++.. code-block:: bash
 +
-+	if (ret)
-+		panic("spl_early_init() failed %d\n", ret);
++	cd <U-Boot-dir>
++	make O=<build-dir> beaglev_ahead_defconfig
++	make O=<build-dir> \
++		BINMAN_INDIRS=<dir-containing-th1520-ddr-firmware.bin> \
++		OPENSBI=<opensbi_dir>/build/platform/generic/firmware/fw_dynamic.bin
 +
-+	preloader_console_init();
++This generates u-boot-with-spl.bin, which contains SPL, the DDR firmware, the
++OpenSBI firmware and the proper U-Boot.
 +
-+	/*
-+	 * Manually bind CPU ahead of time to make sure in-core timers are
-+	 * available in SPL.
-+	 */
-+	ret = uclass_get_device(UCLASS_CPU, 0, &dev);
-+	if (ret)
-+		panic("failed to bind CPU: %d\n", ret);
++Booting
++~~~~~~~
 +
-+	riscv_cpu_setup();
-+	th1520_kick_secondary_cores();
++u-boot-with-spl.bin is loaded to SRAM through fastboot. Hold the USB button
++while connecting the board to the host through the Type-C port, then release
++the button and run:
 +
-+	spl_dram_init();
++.. code-block:: bash
 +
-+	icache_enable();
-+	dcache_enable();
++	fastboot flash ram u-boot-with-spl.bin
++	fastboot reboot
 +
-+	th1520_invalidate_pmp();
-+}
-diff --git a/configs/beaglev_ahead_defconfig b/configs/beaglev_ahead_defconfig
-new file mode 100644
-index 000000000000..1ababbd63f2a
---- /dev/null
-+++ b/configs/beaglev_ahead_defconfig
-@@ -0,0 +1,110 @@
-+CONFIG_RISCV=y
-+CONFIG_SYS_MALLOC_LEN=0x800000
-+CONFIG_SYS_MALLOC_F_LEN=0x10000
-+CONFIG_SPL_GPIO=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="thead/th1520-beaglev-ahead"
-+CONFIG_SPL_STACK=0xffe0170000
-+CONFIG_SPL_BSS_START_ADDR=0xffe0160000
-+CONFIG_SPL_BSS_MAX_SIZE=0x10000
-+CONFIG_SYS_LOAD_ADDR=0x80200000
-+CONFIG_SPL=y
-+CONFIG_TARGET_BEAGLEV_AHEAD=y
-+CONFIG_ARCH_RV64I=y
-+CONFIG_RISCV_SMODE=y
-+CONFIG_SYS_BOOT_GET_CMDLINE=y
-+CONFIG_SYS_BOOT_GET_KBD=y
-+# CONFIG_EFI_LOADER is not set
-+CONFIG_FIT=y
-+# CONFIG_FIT_FULL_CHECK is not set
-+# CONFIG_FIT_PRINT is not set
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0xffe0040000
-+# CONFIG_BOOTSTD is not set
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTARGS_SUBST=y
-+CONFIG_BOOTCOMMAND=""
-+CONFIG_DEFAULT_FDT_FILE="thead/th1520-beaglev-ahead.dtb"
-+CONFIG_SYS_CBSIZE=256
-+CONFIG_SYS_PBSIZE=276
-+CONFIG_LOG=y
-+CONFIG_DISPLAY_CPUINFO=y
-+CONFIG_DISPLAY_BOARDINFO=y
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_HAVE_INIT_STACK=y
-+CONFIG_SPL_SYS_MALLOC=y
-+CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-+CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x10000000
-+CONFIG_SPL_SYS_MALLOC_SIZE=0x400000
-+CONFIG_SPL_RAM_DEVICE=y
-+CONFIG_SYS_PROMPT="Ahead=> "
-+CONFIG_CMD_CONFIG=y
-+CONFIG_CMD_LICENSE=y
-+CONFIG_CMD_BOOTZ=y
-+# CONFIG_BOOTM_PLAN9 is not set
-+# CONFIG_BOOTM_RTEMS is not set
-+# CONFIG_BOOTM_VXWORKS is not set
-+CONFIG_CMD_BOOTMENU=y
-+# CONFIG_CMD_ELF is not set
-+# CONFIG_CMD_IMI is not set
-+# CONFIG_CMD_XIMG is not set
-+# CONFIG_CMD_EXPORTENV is not set
-+# CONFIG_CMD_IMPORTENV is not set
-+# CONFIG_CMD_EDITENV is not set
-+# CONFIG_CMD_SAVEENV is not set
-+# CONFIG_CMD_CRC32 is not set
-+# CONFIG_CMD_MEMORY is not set
-+# CONFIG_CMD_LZMADEC is not set
-+# CONFIG_CMD_UNLZ4 is not set
-+# CONFIG_CMD_UNZIP is not set
-+CONFIG_CMD_GPIO=y
-+# CONFIG_CMD_LOADB is not set
-+# CONFIG_CMD_LOADS is not set
-+CONFIG_CMD_MMC=y
-+CONFIG_MMC_SPEED_MODE_SET=y
-+# CONFIG_CMD_ITEST is not set
-+# CONFIG_CMD_SOURCE is not set
-+# CONFIG_CMD_SETEXPR is not set
-+# CONFIG_CMD_SLEEP is not set
-+CONFIG_PARTITION_TYPE_GUID=y
-+CONFIG_ENV_RELOC_GD_ENV_ADDR=y
-+CONFIG_VERSION_VARIABLE=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+# CONFIG_BLOCK_CACHE is not set
-+CONFIG_DWAPB_GPIO=y
-+# CONFIG_I2C is not set
-+# CONFIG_INPUT is not set
-+CONFIG_MMC=y
-+CONFIG_MMC_IO_VOLTAGE=y
-+CONFIG_MMC_UHS_SUPPORT=y
-+CONFIG_MMC_HS400_ES_SUPPORT=y
-+CONFIG_MMC_HS400_SUPPORT=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ADMA=y
-+CONFIG_MMC_SDHCI_SNPS=y
-+# CONFIG_MTD is not set
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_ETH_DESIGNWARE=y
-+CONFIG_ETH_DESIGNWARE_THEAD=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_PINCTRL=y
-+# CONFIG_POWER is not set
-+CONFIG_RAM=y
-+CONFIG_SPL_RAM=y
-+CONFIG_SPL_THEAD_TH1520_DDR=y
-+CONFIG_SYS_NS16550=y
-+CONFIG_AES=y
-+CONFIG_BLAKE2=y
-+CONFIG_SHA512=y
-+CONFIG_LZ4=y
-+CONFIG_LZMA=y
-+CONFIG_LZO=y
-+CONFIG_ZLIB_UNCOMPRESS=y
-+CONFIG_BZIP2=y
-+CONFIG_ZSTD=y
-+CONFIG_LIB_RATIONAL=y
-diff --git a/include/configs/beaglev_ahead.h b/include/configs/beaglev_ahead.h
-new file mode 100644
-index 000000000000..ac5df86890a3
---- /dev/null
-+++ b/include/configs/beaglev_ahead.h
-@@ -0,0 +1,20 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2023 Yixun Lan <dlan@gentoo.org>
-+ * Copyright (c) 2026 Thomas Perrot <thomas.perrot@bootlin.com>
-+ */
++The serial console is available on the debug UART header at 115200 8n1.
+diff --git a/doc/board/beagle/index.rst b/doc/board/beagle/index.rst
+index e33d39fc677f..58b01d62a7de 100644
+--- a/doc/board/beagle/index.rst
++++ b/doc/board/beagle/index.rst
+@@ -13,3 +13,12 @@ ARM based boards
+    am62x_beagleplay
+    am67a_beagley_ai.rst
+    j721e_beagleboneai64
 +
-+#ifndef __BEAGLEV_AHEAD_H
-+#define __BEAGLEV_AHEAD_H
 +
-+#include <linux/sizes.h>
++RISC-V based boards
++-------------------
 +
-+#define CFG_SYS_NS16550_CLK		100000000
-+#define CFG_SYS_SDRAM_BASE		0x00000000
++.. toctree::
++   :maxdepth: 2
 +
-+/* Environment options */
-+
-+#define CFG_EXTRA_ENV_SETTINGS \
-+	"PS1=[BeagleV-Ahead]# \0"
-+
-+#endif /* __BEAGLEV_AHEAD_H */
++   beaglev_ahead
 
 -- 
 2.56.0
