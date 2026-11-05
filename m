@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DB3C606A31B
-	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 23:46:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5299D606A326
+	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 23:46:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=GF61Nirk;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=AayKTq8x
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=JEQsFKTc;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=jyjgpTUN
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 39FCD6085F;
-	Thu,  5 Nov 2026 23:46:46 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3010640926;
+	Thu,  5 Nov 2026 23:46:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8p3C-pdFFsfY; Thu,  5 Nov 2026 23:46:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 57187608AC
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793922405;
-	b=GALNRSg8mDsddDd0xfCEzbg7GEwyG7kBvtbzeoXjh5pOUGxALDuWJ6nHQNQ/MjZue4qH
-	 Ogzuk3bFHslBjZBKhV9r19gP487EC9R0tgPxONyh+GDJt7+1h+Z8buTRrfsMfF8emyEnf
-	 JhJb+bAPqSZf5hzcZHlbJN1ynG++hfdt0QPRBnBCR6l7qdabrzW5uXZPY6W2TE+dM1TEU
-	 VG380f5/QJFw1Lu+UIh0/p7o4EDH6Uaznu6NZsceOOJ3U68Qqcd4lyPHewb9EH07iZjnk
-	 RMbWGAI6YiwUjDZle6Grnf0SHiRrh4faYh3jyV5YtWZJ/tsFTLBMBk3VR1vBtlS/V9Q==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lnc85wWPhV0J; Thu,  5 Nov 2026 23:46:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 02F28408E6
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793922407;
+	b=GSzHmG/kQt3j3NbrNAIpwwz9xxj5KEz++pi0RroJzhWrYk6tk6s96OaMSHI0HxzUMdkA
+	 oegvIZy9oqGN+ZdDjwLzpj/K7U713Ca5430iTWgnSD72P5I0dDXKV5UWhaPTkmYjHL8/S
+	 j4a3UunErunq9Wk/O2kfH3hO5fv1e/fR/bbic7e+gcE0tuwInDnvqWoxGnVc9VYSAnpzX
+	 QZEAaZaH17WAMzj+WNc2rQes/I17Izk9fOVFaMxrcyybmOh8eLL1uUC/niJgvkcfdg8ZO
+	 A4ANaubUji+2ZYMKN4H/39dWwYPtA3FMtS00d8FUr3RfaTO5vlF5vDCFwV+NtDlUaCQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793922405;
+	c=relaxed/relaxed; t=1793922407;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,112 +33,113 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=a6TLqdjfm7thWVBHOymAOZo+hYsOhnqLDB+BgV65+j8=;
-	b=XLojbGG7bMpZQsT0dbZGixOcceo/wWhlec08XDJusHetomgJU4M66liQ5+Mf+l0/pJ7I
-	 EmyNeAqN7nbXl8yIBpT6mEGz4RTx2vdnBlojnIIsNrRRhz4Hkam7BUaV4O2l0rHYH2Feq
-	 iiyMF0j0l2dmdPi0q4fIZvz4NEpVCdOYj3ZmbD6jpYuYaG7wwOxO7/clBcleV5wJZP8cR
-	 OFg1uOj5SrK22y+DSLklJ+NPp/jhVi+t5qSjr025WZcDxY9kc5Rj8jL3gCjlq0p2qDqtV
-	 WBoXHhQkK1zidWE6wb+A/Axk9CvdPSBI+emSE6/LRbt4Jv3iRs99kMUBh+N4eqQdxrg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=mSQd1RDsE8UCBSEAc2FLXtGOycpXKLijwjwAeEJyqak=;
+	b=U7u/1Be/fosD1wbA210t05OmhLXnxZqfXY1/mhXZZ1J2JRGEGRWLf3H88yTGwurJJIoF
+	 y9hzBhfMgYCNXPgJ1qq241uiiAo1nlHIBpOmEkWztprjWQAReHe0HfG44+hlEJfx3c1fD
+	 iy83TmpACrlHoAJOD4EGVah8cUMrdfgv/n/sVwZtYATiNg0hE1QY9Zren+U850Z/4ffGB
+	 APWqFCscBFLyK1/G8j+FbU5BiuwIkPonnDJ3vGf9x7IVHXGh1tEguFrLEJDwiNI7oKkMM
+	 jM33p+vN6SMX0RCZ1+AopVFt5TsnfcPfadnOuabbYK1chtMnGoDxNldUepGaz9eizJQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793922405;
-	bh=a6TLqdjfm7thWVBHOymAOZo+hYsOhnqLDB+BgV65+j8=;
+	d=lists.u-boot-project.org; s=default; t=1793922407;
+	bh=mSQd1RDsE8UCBSEAc2FLXtGOycpXKLijwjwAeEJyqak=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GF61Nirk0+XcPObeUHLvtnsDj3GWk/+IYv2npe6CBKlR3xO7+OTsoqq2Tt+VAy1xb
-	 gEKM9Zr6fugARyCmHjogOvkWtcgbXP/hHuMNDKyeZ8XsKkDRAJwO/bMTGTMwVyOVex
-	 E9QsUfWPcwNBQPSVxob4ZIJpVxeXTntJWBJhu1pgR6oPUJbvu87GEvb8AlIY3R6Mpr
-	 aMXj8BiSe12EoKMb+HK7fiJvcZG0ISBPOFhtpKCiY7fQsS7swRdVVQ2NHWrlAFVxPY
-	 0DTldKchKDA8QIgoaW+JxCEJ0+D+2S1h4DVnL3VxbiS7LTACkpEO2vaGONA5RRedJ3
-	 YDSd/YliH619g==
+	b=JEQsFKTca48WFDQAAMqUoA80A34PTRyCZEuktdoHMfW/qfgcs0GAdMv83sDBMN3Ya
+	 hebcrpaLhG8FN3QZqGS4s7Qvkrps8mCCgRAyWMTYWh314eshVz5cbqlhD+jgOio4df
+	 /dDcGZPbnPyyI3bL5ni78LLcXQ8YMJDdbeah0uaqXJKexegIwe1PhTHg1Sz/nA0d+M
+	 01hEznaKey1angsVKLkecilQDp+PY9oW2LsWH8bGJwDnGGyGwc7JpNgiJOm6vLZJFi
+	 XOqA8J4dwcl+1/+N+rn+wjYR+05pPyXAo5u4O23qUYrYRYB/4Oeq1YZWNQrnrarf3r
+	 7Zfug480uq/mw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 57187608AC;
-	Thu,  5 Nov 2026 23:46:45 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id DD4DA211
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 23:46:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 02F28408E6;
+	Thu,  5 Nov 2026 23:46:47 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3404B49B
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 23:46:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id CF2BF40378
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 23:46:37 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1A219811F3
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 23:46:39 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tDBgSOX3uqM7 for <u-boot@lists.u-boot-project.org>;
- Thu,  5 Nov 2026 23:46:37 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 0785C4010C
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::32a"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6r-PNWlpman0 for <u-boot@lists.u-boot-project.org>;
+ Thu,  5 Nov 2026 23:46:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 153BC811D9
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::32e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32a; helo=mail-ot1-x32a.google.com;
+ client-ip=2607:f8b0:4864:20::32e; helo=mail-ot1-x32e.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=AayKTq8x
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0785C4010C
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 23:46:36 +0000 (UTC)
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-843cf077f10so200545a34.1
- for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 15:46:36 -0800 (PST)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=jyjgpTUN
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 153BC811D9
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 23:46:37 +0000 (UTC)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-84e513877a3so97072a34.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 15:46:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1793922396; x=1794527196;
+ d=baylibre.com; s=google; t=1793922397; x=1794527197;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=a6TLqdjfm7thWVBHOymAOZo+hYsOhnqLDB+BgV65+j8=;
- b=AayKTq8xZzMKSPEiIEEh5zhoHE6wFVicN1AExE9617bLtsMAXx5F6aSgdjOtlt+9QP
- d8BhcqPuKJG5wyvZZin1trAXJ+zHPIcNkpJNxB16GzG5K3c4Q+x/1HBjhGRz0bYf1YVr
- t/7KLTf5dvys0ngljbBg9yhI0OKBDnIOecdaQ3MPFagJ4eQz0aCjsqyOg6xB395BSrwW
- UIva6MUgyNZkA9shPmQ3f4weczuu7ooXTdyexG//v/6eJ+JKNpjXyBaLfVlb+9vvfDrU
- c9nzLd0hIoXuLwkJTMdT6J0mjt3ZqfEvepugm95yr8ieymWL1Jn4Sn3jXfSc9bAv1fXz
- W6eQ==
+ bh=mSQd1RDsE8UCBSEAc2FLXtGOycpXKLijwjwAeEJyqak=;
+ b=jyjgpTUNrgEUhtoDM7OKAzqxGNY8MzxIHHtX6pJxaYDK5sDSut4mrC6fDpfHKNPUCa
+ GFpbz09ijr/gsCgT7+3i9xEz9/tVMVCfWHv//2HC463mTY/HkmzjuGjnvocPxCgCd09L
+ iuwZ3NX67m7/KBvgTQ9yTaBibdOrgYw3QfONJoAiGq//ZW8npf5z236ytPPhPtzoV0pl
+ Cesh2oIP6LqXAWh7n7zookLpjSku3FlBmHp4i/0gebx8qM/McjI/YClnmoJ1SjZDsQ0O
+ EbCjo6VmIxlkn3zNQGVB/7qmYVX6LS8yQx6skiGUqnNgFh7Wt03+bnwu3bM5fJ1Hzp0s
+ 0DBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793922396; x=1794527196;
+ d=1e100.net; s=20260707; t=1793922397; x=1794527197;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=a6TLqdjfm7thWVBHOymAOZo+hYsOhnqLDB+BgV65+j8=;
- b=AsReMn5iycijKjaaub6ynOt/xKQ6EJ4lLO5k7tsFuOKXqt18qNy0dowXTjKdChjl5Y
- D1GT2Cz3+Ff/EW2IRdyDgEOMqxvgZIZrXEl7mQ90anB/8hfYsPjvtPk5Gf7nRDKmjg/g
- BDAoi8VYBTNiCxEc+f+UGVPBYZQqk3kQ4QIwwRZQPQnRlJ2JKr364jrv5jJEPGO+aE+t
- Sv5onxiNw6zGwUZFlZLbWi+ZWne+f70YDQS3wo3aw7UsH+DibtrU0zGvHdtUV18LEtIZ
- 4xkSWj5G+qXfrqwU9MkUTSdcCc33LzJLtpmdIGHR2n68KOpN5iIf6Em130Np53U5DlgA
- 8/Vw==
-X-Gm-Message-State: APuU4Z/xZ5bub4FZVgLa3VA/rTfIFGp1A4+afu800+TT/DDxk8WseV5m
- v71Orh3xXefx0fcNp6CTZFaGsPSdT7Noh0lm/rbhCVIzl1+YJYkY87bQYmfyNysnoIY=
-X-Gm-Gg: AYBFou0KaOI4pKoj8CkwLiUiSumMTalB6jRJew7LDJuhnI5FgOYY7FzRT2zAMQ6tpGA
- IJ/EqHVd2PhHQQNVNKqLlIfAI3NxAnEBo/CsPai4PYln0IgvdZRnlnQV3xmnijswnwrDcacvRlB
- QNtCBffTGgd8v31UaUbc84pfR3oU8H+xfOLSlGvaCPWTRl//vJEjVjSLOKH1Hy0KDJ3mPKM/NFQ
- MnQIO6cXtS8LyuN+pBQupsrVHCAIPVBPoXJwlvy/aj6+7syr0aTTUzTn4gamFJqqumLyrjhvw6L
- Sl2lpBHzAVSYWYw+1fz49Sl0ViCfCNzPY5NYdISMoYGar4z8uhcEUvXz+RpfxAUSSph7Jxp7Elc
- EW0HUlhZazE2SHsmR1CfiB+qyCx66sQ/KRjhF0gILn5EYGfC3EVYeSWHya5IExiPCMY0BmOhOd7
- W9vwbB0p94dUbLaZCZIRFTGPq1S0dulodnMfJYTZvjga7VIrU9u97z3dkCID6gNgfXkJfjSFtsD
- G8u1U9krIU1kqq5Lg3tA2l9UH9OTjzuqNPev1e5860J+oTL851g6LLRH/RL30/sfC1wmHRD24z3
- EQID9QfL9//4U8hNowPBWRe6tcU+EkOjsw==
-X-Received: by 2002:a05:6830:4490:b0:81c:37e2:2008 with SMTP id
- 46e09a7af769-85f1cfe403cmr930048a34.14.1793922395675; 
- Thu, 05 Nov 2026 15:46:35 -0800 (PST)
+ bh=mSQd1RDsE8UCBSEAc2FLXtGOycpXKLijwjwAeEJyqak=;
+ b=vUG3stvyqlETV4XmjBo7Rum74DaBxzGU+u5dAXDS/9L/6Uxb3SO138AGAMPiyYSW1D
+ vnDCjrJiBPeGaE5bLUPpRHRQnNjA2LF/xODW6nuJi2iKsOnB4U9o6SQaW1CXaDH+bE/8
+ fdSDMleIXLPuixOVsENLWzX0GK7Rvazf+/eb1Ys8+wTFtog7gT7J1jTKpqY50h9umxcU
+ Yra8uYXW7wdR5buklZ/57dY7nO2ayym2EtZiCHroTd/5xtb0mL6nbhKQ2+BcG3gQgLyZ
+ 8OnC9UBrFWxINLuY5iZfn0UfpC+krBFWj12/zhyYV4AO9vyJ55Q2QybOcC0b4uShDXAL
+ OnUQ==
+X-Gm-Message-State: APuU4Z+6+pbqepYyw9DBUyWAUWEI/8AM9bFpQ2sMPv0fakWL/N+E2p9X
+ L5y6Wg1yIxLiEejMuTzXwugtNZS2V4plIGB1iYDTilifLlTGBhV4+FvRdtYy49XlCtU=
+X-Gm-Gg: AYBFou0Zy/kVWDYSwePafcdq3vkTvTRra7Nm6yFPvzb7ox8UN15UvpByxq0vK205cs8
+ dlpnDmmrXhcpPYA0LJogTof0Ecj4r58qCnQMdM+dM4yGraxeTBt91ULIZ9cLAin435b8DMaRBsD
+ 6G9tCbxDHI+1HBgrrKVYINBDITBNcCgV+3hjY9vMKCFtHpE15cWUGBf77qA7rZxu3/it0DaEj+n
+ zf7qEqTrdRGhluSXpwCLkIhp/UuKOmrc+9HimNtZu02EO4lqpfH47KSk60uxBbN2uuJ9Dhltpl4
+ ZP25Ybx2lAFnVbsVpG+9MSo7v9z21t7j1oSMlYi6HopL7N5N5p68Q0N+Z2C0yKxc5/ynK/UsEto
+ 8APxZtsd6WSpmUDKS9wON9Q5Y6zCcFFWoYS8lxQZ9GtOkrNNMEvKrms5BlEK/Vjd88CUmixnJ5+
+ 4hKQa7by+3e7dMadPv4XRqI9WbbY256M6K1Z3cuunmIp8BOv8BTypziMi+gSWz20DRW3L3NRyNt
+ aLYfVHOIxiD/gEjzBZacAnjmk8dFEVQzh3SFKnIH9IW767b083d2WwolENPvuihIr8g612KH6XD
+ ywILuetlcF+L/OpJG2HZUKiHS3HYZdVTFkzIaY6WFlvg+wbgioCfNwQ=
+X-Received: by 2002:a05:6830:3d8f:b0:855:4d49:10aa with SMTP id
+ 46e09a7af769-85f0592af2cmr2644115a34.24.1793922396744; 
+ Thu, 05 Nov 2026 15:46:36 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:7f36:1c5c:8ddb:3ed6])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-85f1de4e53dsm592122a34.20.2026.11.05.15.46.34
+ 46e09a7af769-85f1de4e53dsm592122a34.20.2026.11.05.15.46.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Nov 2026 15:46:35 -0800 (PST)
+ Thu, 05 Nov 2026 15:46:36 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 05 Nov 2026 17:45:29 -0600
-Subject: [PATCH v2 7/8] arm: mediatek: pass reserved memory on to the OS
+Date: Thu, 05 Nov 2026 17:45:30 -0600
+Subject: [PATCH v2 8/8] doc: board: mediatek: describe the Genio 520 and
+ 720 DRAM handoff
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261105-mtk-mt8189-tfa-fdt-v2-7-c168a7b4041c@baylibre.com>
+Message-Id: <20261105-mtk-mt8189-tfa-fdt-v2-8-c168a7b4041c@baylibre.com>
 References: <20261105-mtk-mt8189-tfa-fdt-v2-0-c168a7b4041c@baylibre.com>
 In-Reply-To: <20261105-mtk-mt8189-tfa-fdt-v2-0-c168a7b4041c@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
@@ -153,17 +154,17 @@ Cc: u-boot@lists.u-boot-project.org,
  Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3808; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5594; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=wwFERJxaStdvTd9KI73egv4aCRmvoe+Mn5UEt/ekSWI=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq7RVFW49H3MU0WX63wm7bfRqiTMFdbuX1GADox
- deOuzfTYkeJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCau0VRRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ak14IAIJ4n97E/aWZcrgX2ctH3XnfJ+fNP7hWaDLRi6O
- BU1glOdMUoaeXjVL+slZ21xKgylWimI1IJ6GH6hygQkg26jnRhHUHS6GZD7UuhtV28b2hfT5Gve
- onCZQ8EZvJ0JUPb92wDS2ncEZFrmMpaS+5UIcxpb4nGtES92OutryMj4QJ8o5FTlG/pIQK+s1D7
- mDAOt+1VqN0BTYGHjS5LvkCuiXvJoeQ6gQfA1bV9K00tEJH45gwcqiaXvOf0KUWLFaJ3oDx2noF
- fs1Eq8ls6q0rXO4eKkvcCSUdeppa1sIrG18k/CBvdYbk50LCABGrTgBat26CYQ904dy5LQFHE9F
- wpG0=
+ bh=uIlqgFKEYj6radQJXOxYuT5dbRpeES/bvHW0+Cp1wMY=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq7RVLLccvATtq25wvWsvFAjwwQnQuwmHPCif0n
+ JOyBKNUY5+JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCau0VSxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ax5cH/RO1sF1SE0ZDMIaaKAcCVXZAdqSoiLogeLiBYGz
+ m61DaPApenIwtpTU24mEqvPal6rbwCiqe6r2xIupgGd01OANkAPhsam6DZwq7XVW+MDH8R2uvYG
+ 4KCPW90xUobNeHidCuy3+cp9RjBkmWCLkVLGOVUQKYqXN7lbsrbg/wv53TWVpoVLEIQE2KLjz4q
+ DzdECWuQrNBPXC4wxBzUjhreQ4rWVL5AujZRb5J/j4xWRJyM0zFKVUVDVDN1O0UcVulwgjITahL
+ 24jJ8BlWwkW3AVJy4QEKhL2hY9akSvULlDbIoiQDVBoljqoRKMez1gSFfDeMZJDiXu1zuU4vOzd
+ bza8=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -175,125 +176,140 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Copy the no-map reserved-memory regions of the control devicetree into
-the devicetree passed to the OS when MTK_DRAM_DESC_HANDOFF is enabled.
+Describe how the DDR loader passes the DRAM description to U-Boot in a
+transfer list, and add the transfer list to the DDR-loader handoff
+contract.
 
-The control devicetree describes the memory reserved for firmware such
-as BL31 and OP-TEE, and the boot stage that initializes the DRAM adds
-regions whose location depends on the DRAM fitted to the board. An OS
-devicetree loaded from elsewhere does not necessarily describe these
-regions, but the OS must not use them.
+Also state that U-Boot proper started by the platform BL2 now needs a
+transfer list with its devicetree.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- arch/arm/mach-mediatek/Kconfig     |  6 ++++-
- arch/arm/mach-mediatek/Makefile    |  3 +++
- arch/arm/mach-mediatek/dram_desc.c | 52 ++++++++++++++++++++++++++++++++++++++
- 3 files changed, 60 insertions(+), 1 deletion(-)
+ doc/board/mediatek/mt8189-genio-evk.rst | 79 ++++++++++++++++++++++++++++++---
+ 1 file changed, 73 insertions(+), 6 deletions(-)
 
-diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kconfig
-index 42868c9113d..98e95a11bf4 100644
---- a/arch/arm/mach-mediatek/Kconfig
-+++ b/arch/arm/mach-mediatek/Kconfig
-@@ -282,6 +282,8 @@ config MTK_DRAM_DESC_HANDOFF
- 	bool "Require the DRAM description in a transfer list"
- 	depends on BLOBLIST
- 	depends on SPL_BLOBLIST || !SPL
-+	depends on !MTK_TZ_MOVABLE
-+	select OF_SYSTEM_SETUP
- 	help
- 	  The DRAM size and the memory reserved for the DRAM controller depend
- 	  on the DRAM fitted to the board, so the devicetree built into U-Boot
-@@ -289,7 +291,9 @@ config MTK_DRAM_DESC_HANDOFF
- 	  describes them instead, with a devicetree overlay in a Firmware
- 	  Handoff transfer list.
+diff --git a/doc/board/mediatek/mt8189-genio-evk.rst b/doc/board/mediatek/mt8189-genio-evk.rst
+index 184085b83c1..637aa21e271 100644
+--- a/doc/board/mediatek/mt8189-genio-evk.rst
++++ b/doc/board/mediatek/mt8189-genio-evk.rst
+@@ -35,8 +35,11 @@ In the usual boot chain, U-Boot provides only U-Boot proper::
+      -> U-Boot proper (BL33)
  
--	  Make SPL stop if it does not receive such an overlay.
-+	  Make SPL stop if it does not receive such an overlay, and pass the
-+	  no-map reserved memory regions of the control devicetree on to the
-+	  OS.
+ The platform BL2 initializes DRAM and loads BL31, BL32 and BL33. U-Boot proper
+-is linked at ``CONFIG_TEXT_BASE``, ``0x4c000000``. It takes the DRAM size from
+-the ``memory`` node of its devicetree, which describes 8 GiB of DRAM.
++is linked at ``CONFIG_TEXT_BASE``, ``0x4c000000``.
++
++U-Boot proper requires a transfer list containing its devicetree, and does not
++start without one. The platform BL2 must therefore pass such a transfer list
++to BL33, together with the DRAM description described in `DRAM description`_.
  
- config MTK_TZ_MOVABLE
- 	select ARCH_MISC_INIT
-diff --git a/arch/arm/mach-mediatek/Makefile b/arch/arm/mach-mediatek/Makefile
-index 661fc0b88d9..665909cf585 100644
---- a/arch/arm/mach-mediatek/Makefile
-+++ b/arch/arm/mach-mediatek/Makefile
-@@ -4,6 +4,9 @@ obj-$(CONFIG_ARM64) += armv8-mem-map.o
- obj-y	+= cpu.o
- obj-$(CONFIG_MTK_TZ_MOVABLE)	+= tzcfg.o
- obj-$(CONFIG_XPL_BUILD)	+= spl.o
-+ifndef CONFIG_XPL_BUILD
-+obj-$(CONFIG_MTK_DRAM_DESC_HANDOFF) += dram_desc.o
-+endif
- obj-$(CONFIG_$(PHASE_)MTK_FIRMWARE_AB) += spl_ab.o mtk_ab.o
+ Building
+ ~~~~~~~~
+@@ -96,12 +99,71 @@ by name.
+ Make sure the DIP switches and jumpers are set for eMMC, and use the default
+ devicetree.
  
- obj-$(CONFIG_TARGET_MT7622) += mt7622/
-diff --git a/arch/arm/mach-mediatek/dram_desc.c b/arch/arm/mach-mediatek/dram_desc.c
-new file mode 100644
-index 00000000000..1e66ea2a5a6
---- /dev/null
-+++ b/arch/arm/mach-mediatek/dram_desc.c
-@@ -0,0 +1,52 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (C) 2026 BayLibre SAS
-+ */
++DRAM description
++~~~~~~~~~~~~~~~~
 +
-+#include <fdt_support.h>
-+#include <fdtdec.h>
-+#include <string.h>
-+#include <asm/u-boot.h>
-+#include <dm/ofnode.h>
-+#include <linux/ioport.h>
++The DRAM size depends on the DRAM fitted to the board, and so do the regions
++which DRAM initialization reserves for use by the hardware, such as the DRAM
++controller's tracking buffers at the top of each rank. The devicetree built
++into U-Boot cannot describe them, so the DDR loader describes them in a
++devicetree overlay. It passes the overlay to SPL in a `Firmware Handoff`_
++transfer list, which U-Boot reads as its bloblist (see
++:doc:`/develop/bloblist`).
 +
-+/*
-+ * Pass the no-map reserved memory regions of the control devicetree on to the
-+ * OS. Besides the static firmware regions, these can include regions that an
-+ * earlier boot stage added, at addresses that depend on the DRAM fitted to the
-+ * board.
-+ */
-+int ft_system_setup(void *blob, struct bd_info *bd)
-+{
-+	ofnode node, subnode;
-+	int ret;
++The overlay contains a ``memory`` node with the DRAM size and a ``no-map``
++``reserved-memory`` node for each reserved region. The first compatible string
++of its root node must match the one of the U-Boot devicetree. For example, on
++a Genio 720 EVK with 8 GiB of DRAM::
 +
-+	node = ofnode_path("/reserved-memory");
-+	if (!ofnode_valid(node))
-+		return 0;
++   /dts-v1/;
++   /plugin/;
 +
-+	ofnode_for_each_subnode(subnode, node) {
-+		struct fdt_memory carveout;
-+		struct resource res;
-+		char name[64], *at;
++   / {
++           compatible = "mediatek,mt8391-evk";
++   };
 +
-+		if (!ofnode_read_bool(subnode, "no-map") ||
-+		    ofnode_read_resource(subnode, 0, &res))
-+			continue;
++   &{/} {
++           reserved-memory {
++                   #address-cells = <2>;
++                   #size-cells = <2>;
++                   ranges;
 +
-+		strlcpy(name, ofnode_get_name(subnode), sizeof(name));
-+		at = strchr(name, '@');
-+		if (at)
-+			*at = '\0';
++                   dramc-rk0@13fffe000 {
++                           reg = <0x1 0x3fffe000 0x0 0x2000>;
++                           no-map;
++                   };
 +
-+		carveout.start = res.start;
-+		carveout.end = res.end;
++                   dramc-rk1@23fffe000 {
++                           reg = <0x2 0x3fffe000 0x0 0x2000>;
++                           no-map;
++                   };
++           };
 +
-+		ret = fdtdec_add_reserved_memory(blob, name, &carveout, NULL, 0,
-+						 NULL, FDTDEC_RESERVED_MEMORY_NO_MAP);
-+		if (ret)
-+			return ret;
-+	}
++           memory@40000000 {
++                   device_type = "memory";
++                   reg = <0x0 0x40000000 0x2 0x0>;
++           };
++   };
 +
-+	return 0;
-+}
++SPL adds the devicetree of U-Boot proper from the FIT to the transfer list and
++passes the list on to U-Boot proper, through the BL33 entry point arguments
++that it gives to BL31. U-Boot proper takes its devicetree from the transfer
++list, applies the overlay to it and passes the reserved regions on to the OS.
++If the transfer list has no room for the devicetree, SPL moves it to a bigger
++buffer, so the DDR loader only needs to make the transfer list big enough for
++its own entries.
++
++SPL stops if the DDR loader does not pass a transfer list with an overlay,
++since U-Boot would otherwise use a DRAM size that may be wrong and would not
++reserve the memory used by the DRAM controller.
++
+ DDR-loader handoff contract
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+ The contract between the DDR loader and U-Boot SPL consists of a fixed image
+-layout, initialized DRAM and the execution state at the SPL entry point. The
+-BootROM loads the image payload to ``CONFIG_MTK_GENIO_BROM_LOAD_ADDR``::
++layout, initialized DRAM, a transfer list describing the DRAM, and the
++execution state at the SPL entry point. The BootROM loads the image payload to
++``CONFIG_MTK_GENIO_BROM_LOAD_ADDR``::
+ 
+    offset 0                                     +----------------------+
+                                                 | DDR loader           |
+@@ -129,10 +191,13 @@ The DDR loader must:
+ * copy the complete ``CONFIG_SPL_MAX_SIZE`` byte SPL region from
+   ``CONFIG_MTK_GENIO_BROM_LOAD_ADDR + CONFIG_MTK_GENIO_DDR_LOADER_SIZE``
+   (``0x20a1000``) to ``CONFIG_SPL_TEXT_BASE``,
++* write the transfer list described in `DRAM description`_ to DRAM outside
++  the SPL region and the memory used by SPL and the images it loads,
+ * leave the MMU and caches disabled, with all of its writes visible to the
+   CPU, and
+-* enter SPL at ``CONFIG_SPL_TEXT_BASE`` in AArch64 EL3h with exceptions
+-  masked.
++* enter SPL at ``CONFIG_SPL_TEXT_BASE`` in AArch64 EL3h with exceptions masked,
++  and with the transfer list in ``x0`` to ``x3`` following the transfer list
++  register convention.
+ 
+ SPL obtains platform information from its embedded control devicetree and
+ initializes the console, clocks, pinctrl, watchdog and eMMC through U-Boot
+@@ -236,3 +301,5 @@ a prebuilt Genio image for the target board::
+ 
+ Writing an invalid image to eMMC boot0 can make the board unbootable. Preserve
+ the platform recovery path while testing.
++
++.. _`Firmware Handoff`: https://github.com/FirmwareHandoff/firmware_handoff
 
 -- 
 2.53.0
