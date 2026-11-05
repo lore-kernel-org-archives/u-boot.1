@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF275606A31B
-	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 23:46:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79532606A31B
+	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 23:46:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=t33hHMSj;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=lgQej/VX
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=gF2V7yzr;
+	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=X/2VHb3z
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 88947811E4;
-	Thu,  5 Nov 2026 23:46:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 589EA608B5;
+	Thu,  5 Nov 2026 23:46:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QpF8Fu4esn-X; Thu,  5 Nov 2026 23:46:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9D88A811F1
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793922398;
-	b=PZLXYHQMskz7N1BdD6ePWT3UoBJqp9j6MvyUOOBRxu4qRX3PGZRS3ZqLk16VjGIukovc
-	 JsdMGj/wtBLtCYR4/KS7eNZqfNIO6peFaDAd50SuQk5lH6Yzb9GBbVFSpWoY2na30aSPa
-	 RmYKirSob1hDEs1qM7c4fV2IPUlhQAh5cSxaPDSjGh6kwGjDOOMmEX5z+jDAGc6UTAX3Q
-	 yhDngCe3tsWhyNU0rGQyc6Iew1fOiXws6CFaxmfYnQh7HlZD94SuDBWtL/ETDT3vrblMY
-	 a0Kqgudzu2z6C9qiUdgpBPCIMjmRO26+C32edTEoXQGfSUn4bhZQPdTB1Guj0lq7LTQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6XVWqR_UvxEH; Thu,  5 Nov 2026 23:46:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6D4546085F
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793922400;
+	b=DfW0Cho6k4qI+Uj+ycVj7MKSojnKctafU0tIdB1IQia8vd1RV5QPcgWfYlJfHv0FC5xI
+	 WzHXbBUkBcaqKYnfJaXpKaRySHeMk4hkq7BHr8wv3o0ISqMuI+XUPzYTYHspWq+vIViwU
+	 v4U5qcuoTSvX+mmPKQ8igkrRPtNamYWJepFlawH1pJp+Q1KXoCa/DXqAMFHYYpGljZJOr
+	 BFiw1UnaaZrpfYRAr7rAjHk5OBqqGC/RaakpwnwqfJCRGSTm/0ym8yXnE6QyuYfEmK1a3
+	 DPHA2mnCN671mnNkSvzW/P4Y+puDimSv8eqXv5F9B1NGc4Dq/OyapsBYfYV7FvdwyHg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793922398;
+	c=relaxed/relaxed; t=1793922400;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,114 +33,113 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=p2vcQoxRWjpy1rUqpU61ZrPwSMPtS7tzYVKBVzRqsOQ=;
-	b=BvNFSMg/OdlEcAi0gtEtb2TCwvitJJTz5OEY6AuUu9amuiL7RSLluvIU558G4j+cBu0o
-	 SxRkv5dDNzAzJEuf0Zx+iT4yGsO2uXnIrlMtrQ1/W8DrlcziaY9T2+PFHFE18iF/6su//
-	 FD+S/hJNyOQOFlVCyoakBx2Ogue7ITg5/zEFpCnvPH+AtfkfXucE8OFsFL/EXVF1lhiqz
-	 YqsyVA2WISZcggSIG3+5/RLIEiagLdL1CUbjNKMajk4PGLwAYDxnlZPNAvsye1RbHgANY
-	 9cruhmFUjjd1uUoWu21B7OWYECpa20L3I2Ff+Jcg1LQPj9YOvbVuKdb5Ky0aeTnD+4A==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=EAGLxTGVlvPveAnnAPYvcjmuhUvUdx/n0sBHEtQZ7h0=;
+	b=mCdmv29WYvWukQbbC4TtWsLcn0kPm+Ot0m2GWCPWu45hU/rEezYrZhZPYz6JdThY/ta/
+	 L+yoKOuOmirAMSPYJ93g9V+QTElhJ/FNihTNNoxz7n2lRjhM+eE5BZa/B04qVYNtK5mhE
+	 5bZcEMnc+WwsbDuPmCiVx6Ckj6XQCqyz1ynMAaPatUZpHzdXJWMdnfJb1WF5LdlR6zY2j
+	 pCt+Wi21A3ottw+dCxExF4gmGVi7zI1vhfusUURPezslZ41otWEJTRMEmV8MrMRZs7mGo
+	 Dv4OcEVTDPDvOAsyXheUKGuLyde2tLnqqkBO+zenjJEbDXnC6of4KSda3f1VhrfVv4g==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793922398;
-	bh=p2vcQoxRWjpy1rUqpU61ZrPwSMPtS7tzYVKBVzRqsOQ=;
+	d=lists.u-boot-project.org; s=default; t=1793922400;
+	bh=EAGLxTGVlvPveAnnAPYvcjmuhUvUdx/n0sBHEtQZ7h0=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=t33hHMSjOxdTHiYTl3COLmFNz6vXYvw//Tu5b9Bhi6p0KDRmw0dV9eLQ2NG+DCBpg
-	 gV5EtAK/nF2HM36JYc+uo1wzCMJMvIxB8Ixps6LopiGyTco9vZ0ER8upER10dKPAn5
-	 tpWLdyO+auNcnXvrQPLitmsgXEXLDwQrpMQAobS7tE/Af5UwOU5Y9WAQnJiWYKKE6+
-	 b6nhw2x8gTysfqfSxsFJuPCN43XI/8MTAnq+ij1q6dVnT+sCuGMbzT8IE2+5qEpgo5
-	 cYpywxakGXTVlhkZd6FuZ+338+oRXPuWMELLdn9UlaqZosamzsy6JwFak8keHTqgau
-	 +88zb5Ks24Iog==
+	b=gF2V7yzrCKa8qZpEaF56EifCrTLblTa3kQytuPv0FL++HIN2UrZKVimMkgSqI+h6H
+	 Op6vmxkQtyajApR9PmGVzd+BxJrBvDe1wDKUxYzBqT5pi2Y5P57WnbQyW7BOof5swG
+	 OKbPFhyRWHlxZ03+TcC14H1mG7Q0Bm3IpM8syc93z7sxbHEP9nYLKF6KoBnNATDanI
+	 RDm/zWPx9/kh5hgiWnp1MRgb/xnNfyvYSM6rLjwe3vuUR40Ypu4+Hfl3+B3pjfxBar
+	 6tQ10MW8vbY4PqjAeWSxGbIVP6dHMBCACAZY0TousK5isNGEHF1b+ZIFvUkEnS4DTq
+	 stWwqCWRmsDbw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9D88A811F1;
-	Thu,  5 Nov 2026 23:46:38 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id BCC6B49B
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 23:46:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6D4546085F;
+	Thu,  5 Nov 2026 23:46:40 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 70E2D211
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 23:46:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id AD59240815
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 23:46:33 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6A4FE811D8
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 23:46:35 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id N83vigM1QKP5 for <u-boot@lists.u-boot-project.org>;
- Thu,  5 Nov 2026 23:46:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 00F624050E
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::32d"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DMk7KRo6bqzj for <u-boot@lists.u-boot-project.org>;
+ Thu,  5 Nov 2026 23:46:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E420C811DD
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::331"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::32d; helo=mail-ot1-x32d.google.com;
+ client-ip=2607:f8b0:4864:20::331; helo=mail-ot1-x331.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=lgQej/VX
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 00F624050E
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 23:46:31 +0000 (UTC)
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-8253bc5a613so86686a34.0
- for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 15:46:31 -0800 (PST)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=X/2VHb3z
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E420C811DD
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 23:46:33 +0000 (UTC)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-854b6e2e41fso80518a34.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 15:46:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1793922390; x=1794527190;
+ d=baylibre.com; s=google; t=1793922392; x=1794527192;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=p2vcQoxRWjpy1rUqpU61ZrPwSMPtS7tzYVKBVzRqsOQ=;
- b=lgQej/VX3zd2j7TGhIPeGpKvPMrKGgMEZcFfFmU3oQeshxwTXvjdTmfwZaCocucmZW
- E5NjjT/UyNrd2VN7p9Wz5GqY1qMDPCqy5i9Xj1w6zlJ+cFffJ1o3CircHDTq0Rm2hnix
- YfDfPLHdD6qH5pZjW0nrUQs6L4ByNhhVP53XTjMC42o8klo2KWEJtirCyfNwT+RnZ9VX
- 8NYLPo9DocN3NjKYc1VX+qFHDYf3PhyoN5wXl1ZfDDv8dzjOFfGk6Q3BhmaIMzitBF3G
- ABs7o/2z4S5HypEpbqP83nYAnMAjxBF8maq//Wa/I9W33pHN8woEyYY+66gi0A2d3E2l
- 6nHg==
+ bh=EAGLxTGVlvPveAnnAPYvcjmuhUvUdx/n0sBHEtQZ7h0=;
+ b=X/2VHb3zTIs1ETJcFVQ4jcmwOQgGlNay9G1eT/SSR63bQVRg4yThNpBQHoZuyYfj28
+ 07DlYHGzJKxkL4ZprOZhKsJRbuUpXmHNKQTvbGE9nR/RGFepw0UxYkZoZXSwBp2DqpFy
+ TE3aDh6AeSmnnNfO3iXBeDCcE8GFron5/o7jSuUMK989TGbIR+icRx7crzY5F0Lczexr
+ i1Rsi7LrakWeTDZXsEmsoUqgBDOK3BFw4zLZ6crYm690lHNpW/2Kn3nWNxWx0vev9Ymc
+ +zXa/CtTW60+FoG4KV9fxKCtoI6glXekMtCEmx7gL4xsyxrBG5N0BA3VyinQrz/sxNt1
+ tkgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793922390; x=1794527190;
+ d=1e100.net; s=20260707; t=1793922392; x=1794527192;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=p2vcQoxRWjpy1rUqpU61ZrPwSMPtS7tzYVKBVzRqsOQ=;
- b=MaaFkqfyGMgZerzB3uf580LQBOis3OOkp3DBeLXLxGZHlULXOBjDj3bcKb5ZlEuPOk
- c+R2WXUgmMzueZmwhuQXa1kZ8Gw9B4GsfuY37V7U+tk9/zIVMFrh6DVGee0IFqWWM+uh
- PU9FpMJWwQo+HLw5Rg4dnaU4HvCIAGb0Ime+OZ7B7tk7zn4ooH9HF19l0j6PW8P8QMpT
- S7faWrZOwSItOsafpn4I8jHM9vnT3wtJ8jj4NMXqo7pBCT3boONbDrlbHnuu6MgT1C1+
- lg5N2XUNTiuJebaXehOVh8Wns4VOHormS7N+mzS35W7mGPQ8vqPRH6o4dJL3dVIBjPJK
- GQTg==
-X-Gm-Message-State: APuU4Z9/egoERwkq0q7dtNJxDPoB6bOqYBx3YuY2uh7QvUMtPaZyUs5V
- UuK6k+Cph+LahifGe1NeFBPDJCnoKxWHiexXa/MOvV5U2dxdgRQn3JJ7Cz3NA756rYlSPhz6iEl
- /Od9fXUI=
-X-Gm-Gg: AYBFou2DiBJZ5ngSfv7zYo+yW8cCjsQab92kz1GTdAE7NfLx00EnbfB54I1K9zWgWpD
- LVVpZH77If6t1jpHd5Nd8WhJd6vFE9WBB1fIzR/QUAhOBCsRo7ZL3+Hr+jBVm+u8aT0bhD7p7wD
- HaQS6G6tJMi1Odgo0UTJSCskglu6hYtiuhdhTGisHFY+pSU8udCILMcyIQch3BHia0oAG6TJudU
- IldibqRJFNLvQ27tlQGaly7xG6xFGLVQVb3S958jR59y5+q0o042sBIqMsM746dDhUz6zz/TAyu
- +cF0SrWyp/WwY+By8WlrD2JTIEo8SwKHhbMYRTjOJUEijR5H63XQ3BQzVc3y51T4BC5ZofWAURs
- EuK6YbrBt2nBovn5/eJfQyD+WvESpeGt8IpqM3/7w4BqWmnVXLQYrJxJrYXLew1LO9tS3LivNa7
- sK27EYOzidtNKZy5QbmS5JHTqNaurmM+Clw5BQ3eeomPhLReCnCeoTxMKf04+xYe7mUOMlcvwDQ
- ZU8lEEMkzrDOKxpkz04zVqwcVdJ0e4D0nREOsfs7nLi/0JrKLK4E623HxsJFOYignuxyz1Ft1Bc
- pS0IuiM0qbLoaVzLCzMe/9E0NQSqxPg4kQ==
-X-Received: by 2002:a05:6830:43a7:b0:806:d79a:c932 with SMTP id
- 46e09a7af769-85f1d07b04cmr1002290a34.20.1793922390492; 
- Thu, 05 Nov 2026 15:46:30 -0800 (PST)
+ bh=EAGLxTGVlvPveAnnAPYvcjmuhUvUdx/n0sBHEtQZ7h0=;
+ b=gLLeICEV/JFOXkAGtwEFfh9PZaZUZNEDncw07XLGVjLLF2NvL68eqlyJTneyB4z0x9
+ a2EUujO8Hj4B/gTs+Frz+AmIoJLvsPoE1W/N4t2NNuJgCVg+aP47c6XFyj5kdd1Rpx1J
+ o56A77fIVGkj0InJxDRaX2zIXpk8j7jM4FTHQwbEg7upgvFGzu4Y3yxfs0l2paU0aoXe
+ T1/df3SK2UEjA5Y2xwRlsjVL5e1D75N9kQXHK2zK1On/Xz7WtLtNeLeqNhznz6F4FysW
+ afV7LM2P5VzZyw5J8HkMhF4OrW30er08PP4RTA/fya6cwfAaTKMpoVfRJkjSmFfNGVgi
+ /x6Q==
+X-Gm-Message-State: APuU4Z80072oRqUOh6Vfpmg8uH+IbKNcpOahCVMcS8oj8WBOf4z3d3jL
+ DlUqg1XNEvaTLGv/RvAD3xRRWz9zOKgRzjhVMAAKCQiIFt1Tf1T7qf3bdtRarEDhnMc=
+X-Gm-Gg: AYBFou0VvEo7tL5FdF4UcjPqO/D/nKo/jX997RWAHMaVKoa9OeYdZn5mqmqlqsSJW4U
+ Dmv6yof2huKlM1YscH02NdAdbNbYC9+5ygzMBo14U4Ig+tPlUMuOS0hWpFIs7mkWJ8gZeRcIqXi
+ gMjpEnLrrY+WrgrwBZ6/F3dwy7wLnchUCA9OWr+T+o10jAD9Wdw30KfwkQ5K8TuMVlb/vCo8gcJ
+ qOwER7eHcjoz2oUL9YDFEONq//A+j3uNCaA/2JrAWx0PlMwTbiU8mCVEa8mCP3h/CX3z58JnhOr
+ qTxHl6jW0P/fdMzWECloVqMIjg6nMw6NGHs6GJrSz2nK6/Dn8fNFhgBd5pKmlKgZ8rT88YEeN+f
+ YPQY95PeDkOlwuzuqFsiCfU3bnGrOoX1Dir6O+fX8S8sTEp+6ZDfBe4H3VNoyRiuQsrYzABnOhL
+ 4aQCxFq8BM+bC48gderO5qADS3HoI2iY80Wq63CpJWjFjl8wuvGHB4C1OlvK0An5ksqqCh9Q/sS
+ R2p9Y1/IiYoqRBluflUHm5N/3EQt7jupTNYwk4qdTO/3m72K2awWDEXb41udz+zlY3AkAklszNX
+ F1M5gQTo1hm6ifKaoj768V580tjlWchpmA==
+X-Received: by 2002:a05:6830:3499:b0:7e6:d0ad:5254 with SMTP id
+ 46e09a7af769-85f1cf837a9mr802159a34.8.1793922392493; 
+ Thu, 05 Nov 2026 15:46:32 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:7f36:1c5c:8ddb:3ed6])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-85f1de4e53dsm592122a34.20.2026.11.05.15.46.29
+ 46e09a7af769-85f1de4e53dsm592122a34.20.2026.11.05.15.46.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Nov 2026 15:46:29 -0800 (PST)
+ Thu, 05 Nov 2026 15:46:32 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 05 Nov 2026 17:45:24 -0600
-Subject: [PATCH v2 2/8] spl: add the devicetree of the next phase to the
- bloblist
+Date: Thu, 05 Nov 2026 17:45:26 -0600
+Subject: [PATCH v2 4/8] arm: mediatek: require the DRAM description from
+ the earlier boot stage
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261105-mtk-mt8189-tfa-fdt-v2-2-c168a7b4041c@baylibre.com>
+Message-Id: <20261105-mtk-mt8189-tfa-fdt-v2-4-c168a7b4041c@baylibre.com>
 References: <20261105-mtk-mt8189-tfa-fdt-v2-0-c168a7b4041c@baylibre.com>
 In-Reply-To: <20261105-mtk-mt8189-tfa-fdt-v2-0-c168a7b4041c@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
@@ -155,17 +154,17 @@ Cc: u-boot@lists.u-boot-project.org,
  Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5402; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3618; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=si9Qtu4CEmafH5gfD5IACncRKK+7gIXsIIu1/vwfOAM=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq7RUjCBqSbaOcw70S60Ji/mVHffRbdUJzfqgJb
- CQuYhG5jQuJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCau0VIxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AATkH/jfB6+DgcmcK/FPb/6uta1dvWYFtsH7MqaeERSo
- Qq2Gh4clsBrQ/WxK7aRBFKf0Sqyii4ONHoPjkyquuuFNdkl4u19UB9P5wn3FBSTTKJcHDdwCGTi
- MJItGOPSkEzQ1vQ1gGfLXfxM3hRN0Q5Z9cOdTOCjjESzzJMpq0693jKDwS5eebDvs/lZkaR9Jw/
- ZzDVFTN1Y4PDHNLCkjrOY11Nzlc/mh8Fmfl2b4pOvERebjJVEWybvqw9NtcjmMx02tT8539OpKM
- TbQ67YcGrrl/mxa1N7v2W5cMLHOMaJPy0E2h0/87BrfzXMbMpoiGfJR8/z0pE8W0KmITT9MOXkj
- VF9c=
+ bh=3yaSV7XSGeYQMc8HX5XwkMee6L0UGs2Y3rHIukoVePg=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq7RUxCW9MGTKEPFyG5rCRbfa1vwTmROzbKtKQG
+ bEB62qUCnGJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCau0VMRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AoRsH/2wZiO1jHQwFnEiRCfRUBWoC/1YMRvxm7V89w+Z
+ etCR3LYLg4Edsuf9ZUOnxT3FBGIqLsPx07Y6kbmNcZpPxwGgeVxEXE9fZwr4CtypACDtvohPBxD
+ xJshtPuQIOWLFr1ZjZ19k+D8twfd6XEQZGwju/ccOPE0gQIWnFQc9F298O3825Mt4C72tJfG96K
+ JYkO7BFLmKibLuEHmKoHknpXe3LXtAWHP7DZx7aqdfsY+PlORzA/Q4KDpHeyBNTRwjMHMaIBJay
+ bE6c1VF8zvOFiOfXbh/2DdCl9RQakTXRQEl0XyXmq/UE02moCywr4cBopWnr+OM93MRP9/fq7DS
+ 1iVw=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -184,165 +183,121 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add SPL_BLOBLIST_FDT to copy the devicetree that SPL loads for the next
-phase into the bloblist, unless the bloblist already has one.
+Add MTK_DRAM_DESC_HANDOFF to stop in SPL if the boot stage that
+initializes the DRAM did not pass a transfer list with a devicetree
+overlay, and enable it on MT8189.
 
-The next phase then takes its devicetree from the bloblist and applies
-the devicetree overlays in the bloblist to it with the existing code. An
-earlier boot stage, e.g. the one that initializes the DRAM, can then pass
-an overlay with only what it knows, without having to provide the whole
-devicetree of the next phase.
+The overlay describes the DRAM size and the memory reserved for the DRAM
+controller, which depend on the DRAM fitted to the board. The devicetree
+built into U-Boot cannot describe them, so booting without the overlay
+would give the OS a wrong memory size and let it use reserved memory.
 
-If the bloblist has no room for the devicetree, move it to a bigger
-buffer from the SPL heap, so that the earlier boot stage does not have
-to know how big the devicetree is. The next phase only finds the moved
-bloblist through the registers, so depend on SPL_BLOBLIST_PASS_REGS. If
-the devicetree cannot be added, report it and carry on; the next phase
-then decides whether it can boot without it.
+The option is not specific to MT8189. The DRAM initialization on MT8366
+has the same code to reserve memory for the DRAM controller, so the
+Genio 360 can use it as well once support for that is added later.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- common/Kconfig   | 18 ++++++++++++
- common/spl/spl.c | 83 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 101 insertions(+)
+ arch/arm/mach-mediatek/Kconfig | 13 +++++++++++++
+ arch/arm/mach-mediatek/spl.c   | 31 +++++++++++++++++++++++++++++++
+ configs/mt8189.config          |  1 +
+ 3 files changed, 45 insertions(+)
 
-diff --git a/common/Kconfig b/common/Kconfig
-index 5b728cfe324..c0251c95740 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -1251,6 +1251,24 @@ config SPL_BLOBLIST_PASS_REGS
- 	  default jump_to_image() uses them, other implementations need to do
- 	  the same.
+diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kconfig
+index 1fde892baa2..42868c9113d 100644
+--- a/arch/arm/mach-mediatek/Kconfig
++++ b/arch/arm/mach-mediatek/Kconfig
+@@ -278,6 +278,19 @@ config MTK_GENIO_BL31_LOAD_ADDR
  
-+config SPL_BLOBLIST_FDT
-+	bool "Add the devicetree of the next phase to the bloblist"
-+	depends on SPL_LOAD_FIT || SPL_LOAD_FIT_FULL
-+	depends on SPL_BLOBLIST_PASS_REGS
+ endif
+ 
++config MTK_DRAM_DESC_HANDOFF
++	bool "Require the DRAM description in a transfer list"
++	depends on BLOBLIST
++	depends on SPL_BLOBLIST || !SPL
 +	help
-+	  Copy the devicetree that SPL loads for the next phase, normally
-+	  U-Boot proper, into the bloblist, unless the bloblist already has
-+	  one. The next phase then takes its devicetree from the bloblist and
-+	  applies any devicetree overlays in the bloblist to it, so an earlier
-+	  boot stage only has to pass an overlay with what it knows, e.g. the
-+	  DRAM layout.
++	  The DRAM size and the memory reserved for the DRAM controller depend
++	  on the DRAM fitted to the board, so the devicetree built into U-Boot
++	  cannot describe them. The boot stage that initializes the DRAM
++	  describes them instead, with a devicetree overlay in a Firmware
++	  Handoff transfer list.
 +
-+	  If the bloblist does not have room for the devicetree, plus
-+	  SYS_FDT_PAD for applying the overlays, SPL moves it to a bigger
-+	  buffer from its malloc() heap and passes the new address to the
-+	  next phase in registers. That memory must stay intact until the
-+	  next phase has relocated the bloblist.
++	  Make SPL stop if it does not receive such an overlay.
 +
- endif # SPL_BLOBLIST
+ config MTK_TZ_MOVABLE
+ 	select ARCH_MISC_INIT
+ 	select OF_SYSTEM_SETUP
+diff --git a/arch/arm/mach-mediatek/spl.c b/arch/arm/mach-mediatek/spl.c
+index 125ebcd784f..9150f677b04 100644
+--- a/arch/arm/mach-mediatek/spl.c
++++ b/arch/arm/mach-mediatek/spl.c
+@@ -4,16 +4,43 @@
+  * Author: Ryder Lee <ryder.lee@mediatek.com>
+  */
  
- if TPL_BLOBLIST
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 6d81984428c..7cc6a031b66 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -39,6 +39,7 @@
- #include <dm/device-internal.h>
- #include <dm/uclass-internal.h>
- #include <linux/compiler.h>
-+#include <linux/libfdt.h>
- #include <fdt_support.h>
- #include <bootcount.h>
- #include <wdt.h>
-@@ -465,6 +466,82 @@ static inline int write_spl_handoff(void) { return 0; }
++#include <bloblist.h>
+ #include <clk.h>
++#include <errno.h>
+ #include <hang.h>
+ #include <init.h>
+ #include <spl.h>
++#include <stdio.h>
++#include <asm/global_data.h>
++
++DECLARE_GLOBAL_DATA_PTR;
  
- #endif /* HANDOFF */
+ __weak int mtk_soc_early_init(void)
+ {
+ 	return 0;
+ }
  
-+#if CONFIG_IS_ENABLED(BLOBLIST_FDT)
-+/**
-+ * spl_bloblist_grow() - Make sure the bloblist has room for a new blob
-+ *
-+ * The previous phase may have passed a bloblist with only little free space.
-+ * If a blob of the given size does not fit, move the bloblist to a bigger
-+ * buffer.
-+ *
-+ * @size: Size of the blob, without its record header
-+ * Return: 0 if OK, -ENOMEM if there is no memory for a bigger bloblist
++/*
++ * The boot stage that initializes the DRAM describes the DRAM size and the
++ * memory reserved for the DRAM controller with a devicetree overlay in a
++ * transfer list. The devicetree cannot describe them, so do not boot without
++ * the overlay.
 + */
-+static int spl_bloblist_grow(ulong size)
++static int mtk_dram_desc_check(void)
 +{
-+	struct bloblist_hdr *hdr = gd->bloblist;
-+	ulong align, need;
-+	void *buf;
-+
-+	need = ALIGN(bloblist_get_size(), BLOBLIST_BLOB_ALIGN) +
-+	       sizeof(struct bloblist_rec) + ALIGN(size, BLOBLIST_BLOB_ALIGN);
-+	if (need <= bloblist_get_total_size())
++	if (!IS_ENABLED(CONFIG_MTK_DRAM_DESC_HANDOFF) ||
++	    !CONFIG_IS_ENABLED(BLOBLIST))
 +		return 0;
 +
-+	align = max_t(ulong, BLOBLIST_ALIGN, 1UL << hdr->align_log2);
-+	buf = memalign(align, need);
-+	if (!buf)
-+		return -ENOMEM;
-+
-+	log_debug("Moving bloblist to %p, size %lx\n", buf, need);
-+
-+	return bloblist_reloc(buf, need);
-+}
-+
-+/**
-+ * spl_bloblist_add_fdt() - Add the devicetree of the next phase to the bloblist
-+ *
-+ * Copy the devicetree that SPL loaded for the next phase into the bloblist,
-+ * unless the bloblist already has one. If the bloblist is too small, it is
-+ * moved to a bigger buffer first.
-+ *
-+ * @spl_image: Image that SPL is about to start
-+ * Return: 0 if OK, -ENOENT if no devicetree was loaded, -ENOMEM if there is
-+ * no memory for a bigger bloblist, -ENOSPC if the bloblist has no room for it
-+ */
-+static int spl_bloblist_add_fdt(struct spl_image_info *spl_image)
-+{
-+	void *fdt = spl_image_fdt_addr(spl_image);
-+	void *blob;
-+	int size, ret;
-+
-+	if (bloblist_find(BLOBLISTT_CONTROL_FDT, 0))
-+		return 0;
-+
-+	if (!fdt)
++	if (!(gd->flags & GD_FLG_BLOBLIST_HANDOFF) ||
++	    !bloblist_find(BLOBLISTT_FDT_OVERLAY, 0)) {
++		printf("No DRAM description from the previous boot stage\n");
 +		return -ENOENT;
-+
-+	size = fdt_totalsize(fdt);
-+	/* Leave room for the next phase to apply overlays to it */
-+	ret = spl_bloblist_grow(size + CONFIG_SYS_FDT_PAD);
-+	if (ret)
-+		return ret;
-+
-+	blob = bloblist_add(BLOBLISTT_CONTROL_FDT, size, 0);
-+	if (!blob)
-+		return -ENOSPC;
-+
-+	memcpy(blob, fdt, size);
-+
-+	return 0;
-+}
-+#else
-+static int spl_bloblist_add_fdt(struct spl_image_info *spl_image)
-+{
-+	return 0;
-+}
-+#endif /* BLOBLIST_FDT */
-+
- /**
-  * get_bootstage_id() - Get the bootstage ID to emit
-  *
-@@ -851,6 +928,12 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 			hang();
- 		}
- 	}
-+	if (CONFIG_IS_ENABLED(BLOBLIST_FDT)) {
-+		ret = spl_bloblist_add_fdt(&spl_image);
-+		if (ret)
-+			printf(PHASE_PROMPT
-+			       "Failed to add FDT to bloblist (ret=%d)\n", ret);
 +	}
- 	if (CONFIG_IS_ENABLED(BLOBLIST)) {
- 		ret = bloblist_finish();
- 		if (ret)
++
++	return 0;
++}
++
+ void board_init_f(ulong dummy)
+ {
+ 	int ret;
+@@ -29,6 +56,10 @@ void board_init_f(ulong dummy)
+ 	ret = mtk_soc_early_init();
+ 	if (ret)
+ 		hang();
++
++	ret = mtk_dram_desc_check();
++	if (ret)
++		hang();
+ }
+ 
+ u32 spl_boot_device(void)
+diff --git a/configs/mt8189.config b/configs/mt8189.config
+index efa95a2fe03..356673af059 100644
+--- a/configs/mt8189.config
++++ b/configs/mt8189.config
+@@ -8,6 +8,7 @@ CONFIG_DM_GPIO=y
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_TARGET_MT8189=y
+ CONFIG_MTK_MEM_MAP_DDR_SIZE=0x200000000
++CONFIG_MTK_DRAM_DESC_HANDOFF=y
+ CONFIG_SYS_LOAD_ADDR=0x4c000000
+ CONFIG_FIT=y
+ CONFIG_BOOTSTD_FULL=y
 
 -- 
 2.53.0
