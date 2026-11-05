@@ -2,213 +2,190 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB06F606A326
-	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 10:36:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 595C3606A31B
+	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 10:38:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Q78BGBwS;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=S+RR7PtM;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=B5cDWi/i
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zABPbmiY;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=iKFP+/VK
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2A4B3404C8;
-	Thu,  5 Nov 2026 10:36:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B670D40856;
+	Thu,  5 Nov 2026 10:38:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id V6sZSB9k2XYa; Thu,  5 Nov 2026 10:36:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 6FB28403E8
+ id X5B-8_jgf00W; Thu,  5 Nov 2026 10:38:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8FBBF40820
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793874966;
-	b=WK6CF/R0dU2l46orF1yHsNsr7vAjxbmpGkX1GYnusfhr7C4wK+jPDjz3VF8DFlteKJF7
-	 DtU1WMqHOUAd3vFzV8HbgxbuXitcHL2h91cJT7ItJxw3lKV+RCGDp6r2N+tr+BtWsyr8i
-	 hXvWDRUkuw8WBYrXzYwz7SpV50B2h9YRYzhFKicCl/+D/aE60G3bqg96293N0Frqtz27O
-	 QvRrcdXZd1dljiKsQUL7ZbFSuwGfGz5+nk7ERQXBsNN47NeuxfWXB2m6kBQrAyjopAFk9
-	 wj/MSqhnc7Lm4H7wbtY5X+dIwKJ4xbXOSSvkAiL+1h7hcIBORJWFRKkWS29+g+WTaZg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793875106;
+	b=ed7/BmM+IGl4YImX6gUtW8fzWi5qpjlm8e22jfSDDcHBuVDcuj5kb5Ksw8pwPkqBnasa
+	 khZ8EweEVrkHhifB64Q2+Nl2Nkp+igCE23qGR5D8D0O+c3z6to3JyIhQZgimkmHg9Fn6a
+	 Bo5q9mqozUAJQ5tuT5sBcnloC62HeC/8Qr+vrS7XJMvXxid8tY87/YxaA5ppCsjC0b8Bd
+	 Hc9TgsQp0Hyizg25UgY98y07pSdsyFnfBEmmYyP59Zt7bW2Z8BmsjGv0Z1rnFhpDW7Vxy
+	 l21OVw/FD1SxiDoAHmwaNm1jZAgiEV5mZfaI7bkGVQAKBqC08gQ2MS+2X3iKg1zMNXw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793874966;
+	c=relaxed/relaxed; t=1793875106;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Received:DKIM-Signature:
-	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:Date:From:To:Cc:Subject:
-	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
-	 In-Reply-To:X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=2EQ61IWAOMGueQVMITuVNgM3brGNjoffwWz3EKGSsTE=;
-	b=UYS2Q2t0O6r0E8XFNMP29kgPESLKpB5kbLre0nV6zGqpfSmyxDhOuc40rRsezaeXAtwK
-	 W/ywebrPDihtRcgU+u+mRs0liD5cmNONqXZiSYWPdrplkgdEkgLYur19EJQxATrFQRZHo
-	 WWkOZ6afZwun82pli5ABUQtsv/fp12jGeBEtBHTHzUNnZNeOdqnE4twYdybYlPAoh4CsF
-	 AGuRbNp2kdIu416ulKkUqu48q6M8fCXBXFzWQpSnKTjDnfyUb116+wQFJW/xMZvXcNnZa
-	 ARda8neC/BRMzGmw5kn7glJKfJ36kkCvHygnmjNymCp66IaxEF83RZ/itAJn09GaZag==
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:From:Subject:To:References:Content-Language:
+	 Autocrypt:Organization:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Reply-To:Errors-To;
+	bh=lXWl+9BWaZUrLqn5WdMvFaQtgv+H5gglaqmqyn4QReQ=;
+	b=siG2vecrbrHtnS5Ix4/sZW/h1+PoHyRrFTa+g5bNvNuVMkyxrvfyraXSS520UqMJE/GF
+	 uyKYnatGMNeHnuJsjuTuwqRFR03LFwRif7fM/bPsDTDObclVi1OlXKPWCInBMEN99E3m3
+	 4NAdrnBrC/ChIyo3x4wqLdGKW3Uro2lWGL62yKS74oxMfTQvV0C/kXF1KfiQ3gyw/CyiC
+	 gS1nWsEj3HS+T65K3gYyoVFDittIIonNwLCLN7ROOPliBOVm3dxNhnnQCPC3Wi250bbA1
+	 l5A7WemsXSnyomkE6x15GWpN30fIYx1l9AEPUb8ZzXDbs9OWUdVzYUlr9t+wHRgKjAg==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="iKFP+/VK";
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793874966;
-	bh=2EQ61IWAOMGueQVMITuVNgM3brGNjoffwWz3EKGSsTE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793875106;
+	bh=lXWl+9BWaZUrLqn5WdMvFaQtgv+H5gglaqmqyn4QReQ=;
+	h=Date:From:Subject:To:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Q78BGBwSC/GtVtqJcFXxSdPu0Ix/PiOAjhtsBQ7JfDPrMOmeR9zgEN6bxdHGcaO/k
-	 6Ra5Gvwnnc7eiBwajU1Stjc3lmm0SeK6erWToCW8M7R8A2FYFPCWQRo66IFkd6kM8Q
-	 oakC+vnBup2eAIFxbAOvnrxZ4+oQkKELDWiFroZaR7OeUrvnXEFaCwxlVyGrsQDM2O
-	 7WGtI/Ir9zOOGyxb6h46c1z2tEEdCjy0OUv/K26WbPrJm3dtxjd/4bfxFjNZ7bOJNi
-	 YTYpb3lQjw8/o+K8ECrb6PwJx1iHZrSSp7NKP6GGwb2D135ST5GMwh3tbxvRMlL8AM
-	 mvD7Bx/HtR5Ng==
+	 Reply-To:From;
+	b=zABPbmiYYmWi2T7unfa71f7nvqSbjzgq9BG+izOV2qGbpRm64sA5Ji8uV4v9XvYY1
+	 O+Xteoj13eI/TV8Gjb1Nqf1O13ZxnsMQ5m6gseUl9Sf2Jpk97xim7laI1blMancu3n
+	 MbJ4v8vH2SZUpCyqvMcOMEPSQ+QIXfrO3VQhg6pZwTvLEsaRjh/xFT+ZF/2bVQtsHH
+	 3yacb81VpT4sqs8r4X2GziofPftqShTEl/hBFIbA8q7AasVgaNKD7oJClTlmcJPXTx
+	 p0abr7VvzutvBpWmjKb6TlH2emlsGEuM2U+OveDvwtKm0jJI4RbCXyE3zz929uTYmX
+	 Gf0o90Yk4QgHg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6FB28403E8;
-	Thu,  5 Nov 2026 10:36:06 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 7B37052B
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 10:36:05 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8FBBF40820;
+	Thu,  5 Nov 2026 10:38:26 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id C6B1031F
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 10:38:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 5D5E8810AD
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 10:36:05 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id AC4C740820
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 10:38:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Amz5FNKfzyYd for <u-boot@lists.u-boot-project.org>;
- Thu,  5 Nov 2026 10:36:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 818188108E
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=205.220.180.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
- helo=mx0b-0031df01.pphosted.com;
- envelope-from=varadarajan.narayanan@oss.qualcomm.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=S+RR7PtM; dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=B5cDWi/i
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 818188108E
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 10:36:02 +0000 (UTC)
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A59tDCj444466
- for <u-boot@lists.u-boot-project.org>; Thu, 5 Nov 2026 10:36:01 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=2EQ61IWAOMGueQVMITuVNgM3
- brGNjoffwWz3EKGSsTE=; b=S+RR7PtM1gqTUM66G6b5zcQRoe2zxX4+sZ4mWJej
- +nkWfxuom+JygESsSn/N3wt8rK93W5iAX9rpZu13EtQ9S7gvyjbZJ0eYHgtRWCMe
- Haw2JnbgkPTU0wbquKsSzhy+MPevAJjO3owG2InxJBVjR+skJ6ESEiwgFdE8nlOj
- vEbT6F9b60nZfvsaDQLs21UYt1BfW7nINRbqMHnbQazabobnDqMTYUpbxTg9Cvy1
- GHMrtdsTZNrGSexBafSEEIVuBjr73mTHBXKrQsmv/sE6P5uEkYUDGV6F8ZfgMfcX
- 467IqZiEuLC6uUC35rcsvKooZ8LhkIalgVFE7e8TBNOTBw==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
- [74.125.82.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrpaagguf-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 10:36:01 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id
- 5a478bee46e88-3662e7a9299so6026540eec.1
- for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 02:36:01 -0800 (PST)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5Nak9g8A-dYW for <u-boot@lists.u-boot-project.org>;
+ Thu,  5 Nov 2026 10:38:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3804540770
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::433"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::433; helo=mail-wr1-x433.google.com;
+ envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=iKFP+/VK
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3804540770
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 10:38:23 +0000 (UTC)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-490a0e72588so710980f8f.3
+ for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 02:38:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793874960; x=1794479760;
+ d=linaro.org; s=google; t=1793875101; x=1794479901;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=2EQ61IWAOMGueQVMITuVNgM3brGNjoffwWz3EKGSsTE=;
- b=B5cDWi/iHp4V7weniijpobhTw9lXpQjc2oKAwiiWldixihZxQVY+lbrpYUCcQhyc6q
- GwDwq3TUIlnQo6YabvNkLndszC5wgCA1PYHidEAY+07Pt2Z9oP5cDWQ1oku7bRnO8S+Q
- 1pge4z6ppebhegXgplb0OE0PyeQzbKVQI8jH+j1HjvAh8tkinFVn5P5bxR57GeXN1fRH
- YJfqvbAjPVbwI5ZpMxSlnKM4sVNgo7fk7EbpvFdrAHZQ0OwpqFRf00J27eBBgDuk+JdT
- Ay/NEik9eTYrCQZqN+l0Qm4cQPtqhmeqiWxTWQCqFQf11QcAz1jWURMvSnb15JKhIkPg
- p8Pw==
+ h=content-transfer-encoding:content-type:in-reply-to:organization
+ :autocrypt:content-language:references:to:subject:reply-to:from
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=lXWl+9BWaZUrLqn5WdMvFaQtgv+H5gglaqmqyn4QReQ=;
+ b=iKFP+/VKdAErqI2a+DyOgAYkak3D7YXKPyKPNFsZNl3tHmY2AbTUpfOmeEj8GD60Tk
+ O2UpuSIJczsb4iLYqhzbNSUI4gep+ByPZYhImN07XY9VDZx4Tcr+NVEitSF7ZFJN867V
+ 7Z6dZt3lgwSeGvj9vWPHiKrKMTW4P81M3r73h5U4iKyOIZtTZpSeAai/xgLvFNEaVODC
+ WNhPk9MppovOPSvGXWTx4NUnY76KsUt9PN909n2Vtc74/BFgMDOu1Ols5eCL94NufNbO
+ J4FSHFv89Yipa5vU4S0glTwiDHBjcL8vwS6dlGg+RjMAKfo1oEdqMbg1Yg8QW4+Z7q8j
+ selg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793874960; x=1794479760;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=2EQ61IWAOMGueQVMITuVNgM3brGNjoffwWz3EKGSsTE=;
- b=EvdmHFZuaX9L/nISAICrpP7W+xu8HDSB7LXbqn2g+pkVsOivFD7aQ6rr3wGb01+m7b
- QHnASGkf18lpgD/mL2IozJKb1KY1NwnbMqbl+vUjMVfWkR5XJ/TQritoAeC2Tqv1sgfO
- o1eP2iFAxVfuBoTCIQq494s4R554osmifsHf3SE8JrDr/iiZS37tNuDp3E2qm+4glVBE
- VqvWqOU5P8Hykw+rhtwFSjtqXHvNWSwwlP4K2EzjzRF8hTU/a9Ieil1o+NF5H9fxcMtH
- 21QodtAJHxBlFjMB5ucRyLGf2IwKCrLb8d4qbeU288QZEqS0+cPfN7MQwVEJXFMghb1c
- sz3w==
+ d=1e100.net; s=20260707; t=1793875101; x=1794479901;
+ h=content-transfer-encoding:content-type:in-reply-to:organization
+ :autocrypt:content-language:references:to:subject:reply-to:from
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=lXWl+9BWaZUrLqn5WdMvFaQtgv+H5gglaqmqyn4QReQ=;
+ b=0lZmuur8tDl27t0pf9UMVvRSFUqykUFbHtQXum0ntHaWIiA1tJPwyJROuMq/2o7vrr
+ z64bSSuirQaCMMDaCFq54eGLCwzeAiqSB9PAltFiQQeJOUF0jl7Hhy1Kjm10UMOQfcGW
+ dXcXbtYoz7u+uEoav69mMZfI+cRinIBwqDWsVEuCMzXKZqW8Aqz+YSwrLQqCSCjnikiQ
+ 1AeVH/aTNpJRRFfQfMpVVrpU6TSHMgW6iEbfw8lWbPD3Oqo+wynL/BND95KP0Cu73kjG
+ PJcd7LxZXTHD7HaarmzR//+Z9Cern4rk9+oFy/5Iga6301ohrWs/Keb7xLK3/gp+LjMU
+ zQ8g==
 X-Forwarded-Encrypted: i=1;
- AKwUvBz78oGaJXIN1Qkr1U9W2RoMwPnE9qvbsx4if8Zssj3WjJ1xKvU/Cjj8ZU3cfkSjplbj909oyZo=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+UtpUXm096slBtTbG7XW3+Hpc1MLqjIO1O5jeJXmOwHaCcsqGb
- p3gCu6yVe5Vr5htWkJCi6ap7uVIlDV8hbLYNomXpvZ4Pf9bwmCa1HUEXZMQek5KmO599gSaVzrw
- eJO6FNsbB31+HQNHZDdceAK4/Pr9kcMBTD6vMggFou4vm252qqWRN6SfgY29iKZfC/bNeJUs=
-X-Gm-Gg: AYBFou3BmofuKjH2YIIHeSdGvBbcvskPe/pm9p6lifDZ4GO9PAiiTo1Y6oJGks3X9Le
- zp428BGsqhaq5/8pKxe4wxq3zNA62vb4roMc4wiOghT42LwPw+5jzA0VmPpSOjXq6J6QSF+PkwQ
- EYK6lWuWyycnHeqtLuQQcyDBl38njGdsWZTXUsBMZVRjJVJ/oTxHIcKDDbiklwVT6D3kCfIqg6t
- qq0Ttg8+6BMreSTzpaqq0DZ8YC/W6vEB0nFEjCMQeyZRBxD+dJD54VTQgM5cV2ifsKHXCX4p8bU
- sNzsi+z/SK/H1ZkTB/MVCYtv6/UqAuEl6lu0ZJPULLQpWwE2sSVO8M0GYPUanmC20ilY1tcqIJJ
- V502caWKrXoVDzeRWbLd0ofombnB4xm7jr9VjZ12Ln8ockczUQKm3BOM0sP/p0vzwb5K8GT8mEb
- 295qZDPVVIOkcjxELxojajsnCjcNIzBIAOktFDOe4jn/r/VihVYLhnFApHu8Ntd6KZ9rVP6DVN3
- xeJkg==
-X-Received: by 2002:a05:7301:e0cd:b0:35c:707b:acba with SMTP id
- 5a478bee46e88-36a4220406emr28396353eec.3.1793874960037; 
- Thu, 05 Nov 2026 02:36:00 -0800 (PST)
-X-Received: by 2002:a05:7301:e0cd:b0:35c:707b:acba with SMTP id
- 5a478bee46e88-36a4220406emr28396320eec.3.1793874959591; 
- Thu, 05 Nov 2026 02:35:59 -0800 (PST)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ AKwUvBySii55JwSx7zIquE+XYVSzxFVkf1P7U/nl299toqWLuh/anTFZ+zWkWLADc54zhQHCRiYRfhs=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9vf1TnV2N5eYL3oWNp/0u3miceIG5VDMx8jl01vtf4pzp70gGx
+ OsEm0ev0mTfdBtDTplvSAaTjqDaqJKdebkO4HIxUwzUFtgwMtrMup3WEeQbGntRtoFk=
+X-Gm-Gg: AYBFou2zFjEl821/3DMT5shOEoCLEWo4RFdjDeUERQzGg8FneyzNXF5BbqpvZzyVQlG
+ 28t2Y/pBO5StTP8uqDoHHiC4SyPhMDBZDV5uMhRxAj8DxvIs0zVn5hU2UuktujGLaQNxGkpdHfr
+ UGw6vqBhBtildeBmurmplrKpXsFdMQicuRmR6btIl8DFXGCnD5zNXDRFPkgunckhQSQ2vBmFOeE
+ EkZ01xLLd8K1yY6ZOrj0R5yMeaqrs023qHeVveYs2uPlUSeSNPNQqLsUW0MHK3fFTSzb4dCmYXo
+ WZPf4CaTQySGd6aVMAs72u1Ep5PLmPwtcHZD7mKaiAHY2DWb8o19+AZgPO6wj5FRvxvDaICrht7
+ OipACKLsXdYfATrLOGaHJT99o3XCV57bq3pEOhV9O8fW0Lo2palTXeQEs03GrfL3BITnmzv6OwO
+ tcrgK63rc7r8OKxDy8e6wAtXVUm4aortWW2KstyujcwzqQKOWjstJt2Z/C445f9lK/7dlI597BL
+ Msyo+5yt+3H82AXdlB8KdZClklGs98TQFUjrIz7l48k2STWNX2XM6tztyFvt5UlP47Jt2MVStPT
+ +07Vk+iShr8TGSCmjcUYHLn+OVp5yiFDgAMYvpTHgkqeklGMDj8c2cJpBxvoEX2Rm/ZMONwrAJ7
+ mXBBrHs92eocbcT9YiNe6jjVsRYzZ
+X-Received: by 2002:a5d:5f89:0:b0:490:2033:1477 with SMTP id
+ ffacd0b85a97d-49020331482mr7289812f8f.56.1793875101265; 
+ Thu, 05 Nov 2026 02:38:21 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:106d:1080:9899:e54b:a2f2:3695?
+ ([2a01:e0a:106d:1080:9899:e54b:a2f2:3695])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-36ca38fa273sm17992865eec.16.2026.11.05.02.35.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Nov 2026 02:35:59 -0800 (PST)
-Date: Thu, 5 Nov 2026 16:05:50 +0530
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: Badhrinath S <badhrinath.s@oss.qualcomm.com>
-Cc: casey.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, trini@konsulko.com, peng.fan@nxp.com,
- jh80.chung@samsung.com, tanmay.kathpalia@altera.com,
- lukma@nabladev.com, Michael.Srba@seznam.cz,
- balaji.selvanathan@oss.qualcomm.com, nathbappai@gmail.com,
- nikroks@mainlining.org, jbx6244@gmail.com, xerikasxx@gmail.com,
- u-boot-qcom@groups.io, u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH v8 2/3] pinctrl: qcom: Add ipq9650 pinctrl driver
-Message-ID: <auxcBtwNtas2YqKL@hu-varada-blr.qualcomm.com>
-References: <20261105095821.3009544-1-badhrinath.s@oss.qualcomm.com>
- <20261105095821.3009544-3-badhrinath.s@oss.qualcomm.com>
+ ffacd0b85a97d-48fea180e7csm9349547f8f.5.2026.11.05.02.38.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 05 Nov 2026 02:38:20 -0800 (PST)
+Message-ID: <2b46fb47-182d-41d8-873b-96d07d575172@linaro.org>
+Date: Thu, 5 Nov 2026 11:38:18 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261105095821.3009544-3-badhrinath.s@oss.qualcomm.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA0MiBTYWx0ZWRfXzuE5w7lMyzOG
- ytL0bLduxviSxUWItTq0PWwMh66DG+OcRa8rB9xvQDlgmxoOBAwSOe2LfK/rXoyZHF3xxsNOb6q
- OnwC4QJIkvYJZmc16lt3ZkALatOuOPX/bPnYZH78DOVxoEeEh6OjVgFqbWNa4AIw7uXmLpyq3/u
- 9kUPYbgYdvhcuS7jPTia6/U3dTD55QlDBqWOqwkEBKFe2pbWgAiTmMnptvoXcLdHWWbJl1qeLhA
- pbBBYc/WEA+EnogNGs4cPKwwZtSA+j0wJGWEG/nDVGSm1810uUYGFhMuXZbKPGEv3QShJCl0+CP
- 18BouOfp6+q4xPb55en7A5OoJNJBNyAZ7Rta7dtoLTccqqbxAaZgcB96DVZcCLxTYdQZLqHGWO5
- rulaPfsEbP8acG4D8sS1zDVIK7dWV4WB7EWJoa052M3ap1ItOVr0WKWCDFMt5U54nPoZawun9le
- IRpXmL3O++0cfzyP5Gg==
-X-Proofpoint-GUID: kaxqCT4FrfWClRV0jrOqHf9AHLKSvXTS
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA0MiBTYWx0ZWRfX7t0H2i2xXQgF
- ccVb6NZTe2Qc8lNBnMu8ZGrFNmRVMNOsHzCsMdC1coabrTIRSbCrh4B8CglR4igeYDKz9WDVMJ2
- nYASZhd24GuzmUme663A0hQp4U3gl+E=
-X-Proofpoint-ORIG-GUID: kaxqCT4FrfWClRV0jrOqHf9AHLKSvXTS
-X-Authority-Analysis: v=2.4 cv=WOXqzXsR c=1 sm=1 tr=0 ts=6aec5c11 cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=ZKDt5Znw961Hpe79zl0A:9 a=CjuIK1q_8ugA:10
- a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-05_03,2026-11-04_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 clxscore=1015 spamscore=0 phishscore=0 suspectscore=0
- impostorscore=0 adultscore=0 priorityscore=1501 malwarescore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
- definitions=main-2611050042
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH v1 8/9] iommu: add PCI stream-ID resolution for devices
+ without an ofnode
+To: Sumit Singh Dhami <sumit.dhami@oss.qualcomm.com>, trini@konsulko.com,
+ ilias.apalodimas@linaro.org, casey.connolly@linaro.org,
+ sumit.garg@kernel.org, lukma@nabladev.com, sjg@chromium.org,
+ Michael.Srba@seznam.cz, senthilkumar.l@oss.qualcomm.com,
+ manivannan.sadhasivam@oss.qualcomm.com, nathbappai@gmail.com,
+ balaji.selvanathan@oss.qualcomm.com, petr.hodina@protonmail.com,
+ marek.vasut+renesas@mailbox.org, u-boot-qcom@groups.io,
+ u-boot@lists.u-boot-project.org
+References: <20261104163408.1250410-1-sumit.dhami@oss.qualcomm.com>
+ <20261104163408.1250410-9-sumit.dhami@oss.qualcomm.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20261104163408.1250410-9-sumit.dhami@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -218,19 +195,262 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
+X-Spam-Status: No, score=-22.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Thu, Nov 05, 2026 at 03:28:20PM +0530, Badhrinath S wrote:
-> Add pinctrl driver for TLMM block found in the Qualcomm IPQ9650 SoC.
->
-> This driver supports 54 GPIO pins with various pin functions including
-> UART, SPI, I2C, SDCC, PCIe, and other peripherals.
->
-> Signed-off-by: Badhrinath S <badhrinath.s@oss.qualcomm.com>
+On 11/4/26 17:33, Sumit Singh Dhami wrote:
+> From: Senthilkumar <senthilkumar.l@oss.qualcomm.com>
+> 
+> dev_iommu_enable() returns early for any device without an ofnode,
+> making the dev_pci_iommu_enable() PCI iommu-map fallback unreachable.
+> That fallback also only resolve which IOMMU a device belongs to, not
+> its stream ID, so ops->connect() has no ID to classify the device with.
+> Separately, qcom-hyp-smmu.c disables stream classification at EL2,
+> but firmware converts an unclaimed stream to a FAULT stream regardless
+> of the CPU's exception level, blocking DMA for downstream PCIe/UFS masters.
+> 
+> Restructure dev_iommu_enable() to fall through to the PCI iommu-map
+> path when there is no ofnode. Extend dev_pci_iommu_enable() to
+> resolve and store the stream ID in the new pci_iommu_sid field and
+> call ops->connect(). Wire this field to get_stream_id(), and drop
+> the EL2 self-disable.
 
-Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+I think it would be preferable to either:
+- add the sid as a parameter of ops->connect()
+or
+- add a new ops->connect_pci(u32 sid) dedicated to PCIe endpoints
+if you don't want to touch the other IOMMU controller drivers.
+
+I don't think it's a good idea to polute struct udevice with the pci sid.
+
+And then please split out the qcom-hyp-smmu into a separate change,
+first adding the connect_pci() and then enabling for EL2.
+
+FYI I have a similar changeset in dev:
+https://gitlab.com/superna9999/u-boot/-/commit/f08275fa955106deb3a03eac8f735919a824dc15
+https://gitlab.com/superna9999/u-boot/-/commit/6b381f8a17e75c19044eb52a4e6b29fcde4e9a43
+https://gitlab.com/superna9999/u-boot/-/commit/5b248f5d32cd742029d5eda9cea07de98d153a0a
+which is functionally similar.
+
+Thanks,
+Neil
+
+> 
+> Signed-off-by: Senthilkumar <senthilkumar.l@oss.qualcomm.com>
+> Signed-off-by: Sumit Singh Dhami <sumit.dhami@oss.qualcomm.com>
+> ---
+>   drivers/iommu/iommu-uclass.c  | 78 +++++++++++++++++++++--------------
+>   drivers/iommu/qcom-hyp-smmu.c | 27 +++++++-----
+>   include/dm/device.h           |  7 ++++
+>   3 files changed, 70 insertions(+), 42 deletions(-)
+> 
+> diff --git a/drivers/iommu/iommu-uclass.c b/drivers/iommu/iommu-uclass.c
+> index 31b40e5713a..2299bbbdd37 100644
+> --- a/drivers/iommu/iommu-uclass.c
+> +++ b/drivers/iommu/iommu-uclass.c
+> @@ -18,8 +18,9 @@ static int dev_pci_iommu_enable(struct udevice *dev)
+>   {
+>   	struct udevice *parent = dev->parent;
+>   	struct udevice *dev_iommu;
+> +	const struct iommu_ops *ops;
+>   	u32 *iommu_map;
+> -	u32 iommu_map_mask, length, phandle, rid, rid_base;
+> +	u32 iommu_map_mask, length, phandle, rid, rid_base, iommu_base;
+>   	int i, count, len, ret;
+>   
+>   	while (parent) {
+> @@ -50,6 +51,7 @@ static int dev_pci_iommu_enable(struct udevice *dev)
+>   	for (i = 0; i < count; i += 4) {
+>   		rid_base = iommu_map[i];
+>   		phandle = iommu_map[i + 1];
+> +		iommu_base = iommu_map[i + 2];
+>   		length = iommu_map[i + 3];
+>   
+>   		if (rid < rid_base || rid >= rid_base + length)
+> @@ -64,6 +66,18 @@ static int dev_pci_iommu_enable(struct udevice *dev)
+>   			return ret;
+>   		}
+>   		dev->iommu = dev_iommu;
+> +		dev->pci_iommu_sid = iommu_base + (rid - rid_base);
+> +
+> +		ops = device_get_ops(dev->iommu);
+> +		if (ops && ops->connect) {
+> +			ret = ops->connect(dev);
+> +			if (ret) {
+> +				log_err("%s: Failed to connect '%s' to IOMMU '%s': %d\n",
+> +					__func__, dev->name, dev->iommu->name, ret);
+> +				free(iommu_map);
+> +				return ret;
+> +			}
+> +		}
+>   		break;
+>   	}
+>   
+> @@ -79,41 +93,43 @@ int dev_iommu_enable(struct udevice *dev)
+>   	const struct iommu_ops *ops;
+>   	int i, count, ret = 0;
+>   
+> -	if (!dev_has_ofnode(dev))
+> -		return 0;
+> -
+> -	count = dev_count_phandle_with_args(dev, "iommus",
+> -					    "#iommu-cells", 0);
+> -	for (i = 0; i < count; i++) {
+> -		ret = dev_read_phandle_with_args(dev, "iommus",
+> -						 "#iommu-cells", 0, i, &args);
+> -		if (ret) {
+> -			log_err("%s: Failed to parse 'iommus' property for '%s': %d\n",
+> -				__func__, dev->name, ret);
+> -			return ret;
+> -		}
+> -
+> -		ret = uclass_get_device_by_ofnode(UCLASS_IOMMU, args.node,
+> -						  &dev_iommu);
+> -		if (ret) {
+> -			log_err("%s: Failed to find IOMMU device for '%s': %d\n",
+> -				__func__, dev->name, ret);
+> -			return ret;
+> -		}
+> -		dev->iommu = dev_iommu;
+> -
+> -		if (dev->parent && dev->parent->iommu == dev_iommu)
+> -			continue;
+> +	if (dev_has_ofnode(dev)) {
+> +		count = dev_count_phandle_with_args(dev, "iommus",
+> +						    "#iommu-cells", 0);
+> +		for (i = 0; i < count; i++) {
+> +			ret = dev_read_phandle_with_args(dev, "iommus",
+> +							 "#iommu-cells", 0, i,
+> +							 &args);
+> +			if (ret) {
+> +				log_err("%s: Failed to parse 'iommus' property for '%s': %d\n",
+> +					__func__, dev->name, ret);
+> +				return ret;
+> +			}
+>   
+> -		ops = device_get_ops(dev->iommu);
+> -		if (ops && ops->connect) {
+> -			ret = ops->connect(dev);
+> +			ret = uclass_get_device_by_ofnode(UCLASS_IOMMU, args.node,
+> +							  &dev_iommu);
+>   			if (ret) {
+> -				log_err("%s: Failed to connect '%s' to IOMMU '%s': %d\n",
+> -					__func__, dev->name, dev->iommu->name, ret);
+> +				log_err("%s: Failed to find IOMMU device for '%s': %d\n",
+> +					__func__, dev->name, ret);
+>   				return ret;
+>   			}
+> +			dev->iommu = dev_iommu;
+> +
+> +			if (dev->parent && dev->parent->iommu == dev_iommu)
+> +				continue;
+> +
+> +			ops = device_get_ops(dev->iommu);
+> +			if (ops && ops->connect) {
+> +				ret = ops->connect(dev);
+> +				if (ret) {
+> +					log_err("%s: Failed to connect '%s' to IOMMU '%s': %d\n",
+> +						__func__, dev->name, dev->iommu->name, ret);
+> +					return ret;
+> +				}
+> +			}
+>   		}
+> +	} else {
+> +		count = -1;
+>   	}
+>   
+>   #if CONFIG_IS_ENABLED(PCI)
+> diff --git a/drivers/iommu/qcom-hyp-smmu.c b/drivers/iommu/qcom-hyp-smmu.c
+> index 5b37c21f66c..3fc3e1211a9 100644
+> --- a/drivers/iommu/qcom-hyp-smmu.c
+> +++ b/drivers/iommu/qcom-hyp-smmu.c
+> @@ -7,7 +7,6 @@
+>    */
+>   
+>   #include <log.h>
+> -#include <cpu_func.h>
+>   #include <dm.h>
+>   #include <iommu.h>
+>   #include <linux/bitfield.h>
+> @@ -92,8 +91,6 @@ struct qcom_smmu_priv {
+>   	phys_addr_t base;
+>   	struct list_head devices;
+>   	struct udevice *dev;
+> -	/* SMMU is not needed when running in EL2 */
+> -	bool disable;
+>   
+>   	/* Read-once config */
+>   	int num_cb;
+> @@ -132,12 +129,25 @@ struct mmu_dev {
+>   
+>   static int get_stream_id(struct udevice *dev)
+>   {
+> -	ofnode node = dev_ofnode(dev);
+> +	ofnode node;
+>   	struct ofnode_phandle_args args;
+> -	int count = ofnode_parse_phandle_with_args(node, "iommus",
+> -						   "#iommu-cells", 0, 0, &args);
+> +	int count;
+> +
+> +	if (!dev_has_ofnode(dev))
+> +		return dev->pci_iommu_sid;
+> +
+> +	node = dev_ofnode(dev);
+> +	count = ofnode_parse_phandle_with_args(node, "iommus",
+> +					       "#iommu-cells", 0, 0, &args);
+>   
+>   	if (count < 0) {
+> +		/*
+> +		 * No "iommus" property of its own: PCI endpoint resolved
+> +		 * via an ancestor's iommu-map property instead.
+> +		 */
+> +		if (device_is_on_pci_bus(dev))
+> +			return dev->pci_iommu_sid;
+> +
+>   		printf("Error: %s: iommus property not found or wrong number of cells\n",
+>   		       __func__);
+>   		return -EINVAL;
+> @@ -280,9 +290,6 @@ static int qcom_smmu_connect(struct udevice *dev)
+>   	if (WARN_ON(!priv))
+>   		return -EINVAL;
+>   
+> -	if (priv->disable)
+> -		return 0;
+> -
+>   	mdev = alloc_dev(dev);
+>   	if (IS_ERR(mdev) && PTR_ERR(mdev) != -EEXIST) {
+>   		printf("%s: %s Couldn't create mmu context\n", __func__,
+> @@ -354,8 +361,6 @@ static int qcom_smmu_probe(struct udevice *dev)
+>   	priv->base = dev_read_addr(dev);
+>   	INIT_LIST_HEAD(&priv->devices);
+>   
+> -	priv->disable = current_el() > 1;
+> -
+>   	/* Read SMMU config */
+>   	val = gr0_readl(priv, ARM_SMMU_GR0_ID0);
+>   	priv->num_smr = FIELD_GET(ARM_SMMU_ID0_NUMSMRG, val);
+> diff --git a/include/dm/device.h b/include/dm/device.h
+> index 5d700888503..f8777aead83 100644
+> --- a/include/dm/device.h
+> +++ b/include/dm/device.h
+> @@ -203,6 +203,13 @@ struct udevice {
+>   #endif
+>   #if CONFIG_IS_ENABLED(IOMMU)
+>   	struct udevice *iommu;
+> +	/*
+> +	 * Stream ID resolved from a PCI iommu-map property, for devices
+> +	 * that have no ofnode of their own to carry an "iommus" property
+> +	 * (e.g. dynamically enumerated PCI endpoints). Valid only when
+> +	 * iommu is set and the device has no "iommus" property of its own.
+> +	 */
+> +	u32 pci_iommu_sid;
+>   #endif
+>   };
+>   
+
