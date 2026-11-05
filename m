@@ -2,152 +2,125 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 330C3606A31B
-	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 19:03:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5262606A31B
+	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 19:10:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=gMSqcaPs;
-	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=LqGF8qBT
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=enpi19V/;
+	dkim=pass (2048-bit key, unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=lr7fPtZT
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 216E4408C3;
-	Thu,  5 Nov 2026 19:03:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 840264080B;
+	Thu,  5 Nov 2026 19:10:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id u4JbmLuqmHId; Thu,  5 Nov 2026 19:03:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 51B84408F2
+ id xO1UmG3_X0Sx; Thu,  5 Nov 2026 19:10:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C87324081D
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793905409;
-	b=sNzFSIOPYZrtyb6rRIOW/Eb3zGVgjAd8wXPshKTq5Gp/4YLbSgU8ckJ0XjlhrtKT1CdX
-	 GJI9DVVog17ZAh+sfPTvMJfQuFf7VZsWlHoklrN3btT8nAAo0JtXA2WKmWkGzKJgOSJC0
-	 lnX8puBJ4rtaKR0WqPzDtiyAcPiKurht6Mxc8yiIcx2AA1tux1g9m5Bl+8viKwEAS0mLF
-	 mL6JrmfKrHmECW5ZmPYdzrAAqfDcP6Hr3Q2SBR3+9W1u4s3AmhdkTU4tQgww54rOvkiXd
-	 3hkX0gAD+zPI2iQv4YxoHMAoDQONHI4cQl+r5qaAspKI8j576BBsNPLvowZST6nYLkQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793905837;
+	b=m0EvMA/cAK2ZwZnTY/hNmtBKyae3cA2TCD8eAZkDMXogRrFl8bBNdixsPt+iq7S9Ykbe
+	 UpRJbUlwxh6psqur8UTWHKnpoKNWDea3Oxx5MlkxOv0ihoU2hJ+w+jNBnLK3N4z3U3VIH
+	 q4fKBWquoRree5Jt9Y2Ub64OLltTYqga20/O+SU0zU/CU0Fts0HolzyF5vEJlGA/M7zEw
+	 8e6EtQiljCYOHxSx5sF2I18wO3RI2+VZatUzIH0/CcrbYYrOpNJ3RUZUC7TiEYLhta/6u
+	 BLdt0OENnvAPiJMUXT3upOnrtm7fI/zbQyXv8bUjjw5BI4LOoUZUwvNSSb+moZtwODQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793905409;
+	c=relaxed/relaxed; t=1793905837;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=zJMqI6pDYJdbZLP/EYEXO8g1mgUvVomErZvZU3TvuzA=;
-	b=gCjktbeY11/wShxvhYMxQonnrXvfMnfHbm8/fMfYcr/m1AVoeDG9TPG9PJKTibplT0hs
-	 RLDPwJYvWjTe30FYhDW3r3yx75G2iw6YBpJnJ7+FGirT+33Dwm4fgJldJc3+PFXEGiQWj
-	 9K0PV2ElkN16X50m/lfoHGl0zYOCx4xIRqFUPbz+Ef95+L0dH/FGQFaiB6avUUddjowoT
-	 ndrWu+aL74wCVFrGMkPIgGL8uK1pxoB/idhhT6U5a4gZtDxGx6OXJ8/BCYOh8Nvq89GL2
-	 y7nHO/p+MbWowNc8J+g9+JRINczy6INA7CJ3M2o6BNhWgKDtfLsa8EH9o7+ZMmy2HpA==
+	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+	 References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=lxDSoiAFn25+mmuZHkcazL6VBZgkY3esNVJzzlkSWpE=;
+	b=C5O3K9G5yOUd/Fp6gb3/P0ExGEJdxazoZqyz942kqtG4qYod8w6Bz/ujfRksOqvvJOiX
+	 wQvhqU/QchEkLvR39Z908H9ENSvfoLRqNrr96it9lBoHRIncmweRFoCybh8xAEjeW7SAu
+	 +5W/ch+4Nsb0bfEijhJAP9Pznr5+u+aqa7eC4nmAo0jARqdGUZKcqQjGaFSecIXdyuP0o
+	 LYemmcKpG4PCziInYNSli1ZBhGUk/GFKE/nyp2BbU9df+ai7vpiVciZ9wBvmBI9N0vyMO
+	 5g5Y7HN/CDFjajFRFw4KQbcbNJFFKRDVfTsvDW6yUWJPYSXeVR1I7Bh7Tvf+/uPL8ew==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=pass header.from=konsulko.com;
-	dkim=pass header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=LqGF8qBT;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793905409;
-	bh=zJMqI6pDYJdbZLP/EYEXO8g1mgUvVomErZvZU3TvuzA=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793905836;
+	bh=lxDSoiAFn25+mmuZHkcazL6VBZgkY3esNVJzzlkSWpE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=gMSqcaPs/ZPGm/b/pro3CLkFg5TGHIwmy3TynS6E1k2teZE8E7EpMxADIZRF//uGy
-	 RAaTU7VPBBjuuCqqzT3QtM5gTiRVKJvPs87+DpAKh36tlVFExRYNZ64TXNGUgEUqol
-	 hvd3KUp0huxsONwqE3cepGM8EL4NOVLbD/2KzVnxFu3v7xnNtJYhdn/Uql8+McMpb3
-	 7bMgXLOTsHQyfmVIvCpZCdYfkJ55zXFjWBrmEIPD+gOzfAlikVX41QBO3RJHCODedD
-	 OhUDn2/1F3UHZdiMTaiev4mYoa1HDxrRe17Ww7NKn0J/JVpH9m3pk426mmiTiALB8j
-	 eXRsV1sUDuPwQ==
+	b=enpi19V/lG9Jd5ve6nirSHugepGMmoncyog0xw+aex9Y174o0mFf4xwplpz38jhTN
+	 ey2oNy0oM0s9y0MvgDx+Soe3SPwc5qO+QuNEFcb9veVSxAdUbb4o7SygAcALQ6YDwI
+	 OcC+x7I0T2JecJAzdbrbKK/BNSJR/HF+h/b5S9OZrG5zKOnltNTLeS8gdoohb3hzXD
+	 qMFbaWRaICZfXvMnciFXeQJDi0yeSFwdtwdb7wI+G3GQGv0VQJVMdYdcauwRnNEbq/
+	 Uix82pqU3lw/J3wwxGOfLaWbu42/3wLqtg3lUfsipz6MxFdApcUCEccN3Icl/osAZA
+	 OWiv+y6VZg7DA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 51B84408F2;
-	Thu,  5 Nov 2026 19:03:29 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id E676931F
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 19:03:25 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C87324081D;
+	Thu,  5 Nov 2026 19:10:36 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9657FB00
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 19:10:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C0F26408CB
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 19:03:25 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 87D0D81138
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 19:10:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id j5FKcmCtUCYh for <u-boot@lists.u-boot-project.org>;
- Thu,  5 Nov 2026 19:03:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 08BA6408BE
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c2d"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2d; helo=mail-oo1-xc2d.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=LqGF8qBT
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 08BA6408BE
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 19:03:24 +0000 (UTC)
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-6aa9606ddadso1517805eaf.0
- for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 11:03:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1793905403; x=1794510203;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=zJMqI6pDYJdbZLP/EYEXO8g1mgUvVomErZvZU3TvuzA=;
- b=LqGF8qBTLLzN8PFVE6uoaZos2w3Fdrx3fnTJ7lM4LZSDictqoxejf4P6F7S/7++2xm
- tlXus6FyiGhQm3fwh5GT4KKn49F8ehSvmUr/uFT7q8FNMoxyFLoUBzTN7WKSC8M5YDBP
- UKNIzlPAjyKx5HHtZKaB73PTRDEHQ9+W9WFn4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793905403; x=1794510203;
- h=content-transfer-encoding:content-type:mime-version:date:message-id
- :subject:references:in-reply-to:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=zJMqI6pDYJdbZLP/EYEXO8g1mgUvVomErZvZU3TvuzA=;
- b=oweCITLLjTz7sDFLt8cny64uxLR5FFTKj2BKyd2abVrC0o3TmLd9GnJrrxAufh1tjw
- 3PoahLdxvneLgpZ9TkY9EZqcTHSz1oGVpbtQXRYiLo1f0gm3ZB1Nuz0KZv6rA8mLEhZw
- cGnWOi+PuYDz6QlXxMMqdJ5yq74WBNz1UW7ZOXcaq/07VRKMGCbqFXvz/Wd1qSaUhRRW
- +WhJRHANh3nJeuGMCrpj0iraBDSWuqMK9F9MDpH9E2jUv/b0YE/zwVjcU4F63IsYO/dk
- BN0n0W7jL42RZ0Gvig7ZisY1riZhkTx47SHhpkfNR0fSnv6oLGfOfJXSmMJQIjDMSGIL
- BPTQ==
-X-Gm-Message-State: APuU4Z/QUlx553fvTJTHqjSi6kHaxxV5skZuchi+vJlc1pSPYSiad+7j
- ORv1bicTdWmT98YQI/PN6722cjvGsEDoVkzAL5eUCaVKgO45Ucz8q+15se+5RHjCXfH0by19LAL
- /qCKFXWZmDHWM
-X-Gm-Gg: AYBFou26vzMJ5nojxS0v+Kr2a2okPpmnJI3HSC7RW5N5I/eI+MRCVmOZafGgXS97faJ
- KQu5zFei2bQieljqrBUG7D9QjliHIdwI6HOk4e3Vlj3WmzUpz5NzwT76PqwOp4ZpgKhqDEbHp36
- HyaQNJo26gN+DAFpd2/s3Dv64ztByFEmo/XCDnJBI3qtKAORzjPesB1h+F0Mkf6T5DKGIObP78h
- JLJI3q9srPRiDONMosUG9JPQqpFemKckgmwlSTroUG1EG+8K/7y1Ze3SFFb9N5X2gwPiYS7CHLh
- bCZCZM6ph06yLXQdZZG+NdKmxlnWXBcpHUaYgIXvJoqrFuJd/dsl64OJMJsBJr6bUklGZGpcnH/
- eOdAXqqebuX3XUo2dCChV89hGzBw9j7Zvz7ZOe0A3rSflsp526P4v6XrMC3YA6WkyJXTu3hz+QD
- Q7ZDI/yS4/NQU5f306NCewimNR4zsE9S8vTAnFXKZGeXA/v+KK5xDUrm8tPH4piI5ktS17adfO8
- HkZEnO5zeoa/VkwvGmZRqD2sOd3OJNd5myMLshIdPiyNrqlp/l3eHUq3IbirMNeGju8r3cvmAtJ
- meNlSHiAbMe8osb47WAsEkzAOMuP+FQN3yVl+y5TC0hqMeERqWYJTfyDf0VT0Qq9Yo4YOodxnAe
- vEv53YTA5Os/U8PdtWiPGVUbNfTthNNGVAcHG3AzUICoEqu7R0Lcq6u/vOAg7PwGZV0UF28g8Lb
- Sby5TCQQ0uddFA75PRifepidt8NxcGQQ==
-X-Received: by 2002:a05:6820:2205:b0:6f8:2e98:cfcb with SMTP id
- 006d021491bc7-716e79ad986mr363672eaf.48.1793905403061; 
- Thu, 05 Nov 2026 11:03:23 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-85f1dd2bbb3sm93385a34.18.2026.11.05.11.03.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Nov 2026 11:03:22 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.u-boot-project.org, 
- =?utf-8?q?Enrique_Hern=C3=A1ndez_Bello?= <ehbello@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20261028021415.2439865-1-ehbello@gmail.com>
-References: <20261028021415.2439865-1-ehbello@gmail.com>
-Subject: Re: [PATCH] tools: mkimage: copy the FIT in process instead of
- shelling out to cp
-Message-Id: <179390540245.1843724.11576108562850442989.b4-ty@konsulko.com>
-Date: Thu, 05 Nov 2026 13:03:22 -0600
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IUEQHP--e2Ky for <u-boot@lists.u-boot-project.org>;
+ Thu,  5 Nov 2026 19:10:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D74DE81135
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=80.241.56.171
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.171;
+ helo=mout-p-201.mailbox.org; envelope-from=marek.vasut@mailbox.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=lr7fPtZT
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D74DE81135
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 19:10:32 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4jLBj00tMRzMlXf;
+ Thu, 05 Nov 2026 20:10:28 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1793905828;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=lxDSoiAFn25+mmuZHkcazL6VBZgkY3esNVJzzlkSWpE=;
+ b=lr7fPtZT2POEL4HdqgiuB7nw9F7wZIsXT1MIjAktlGFLbRR6L4+nI5edwHDLzBYM98ndxF
+ TS1xaHr1mvJRlTF2lp1alvjTvj22pPiCbzsn1p0YuBmvgNE8M5zJu3utQYPWsL2wGy/1SZ
+ Nu1IDN2C3lcz9BJ0ldAWPfdcNwHUeH2bRBKFGBNdP5LfpeyrmCPDn3T2Deceo+RLRLQr/4
+ IGIdWcfpimqxugfEZ9FmfwqhH5nBnuI5Fz9G//76PuG8wd4MhxeT/hNNKKnW/6d8Z/X1ZE
+ ZppBKulgrAh5sjl7yhcC5ouxqkPQiFXuFHT+07ownd8nM9fJ8hMd5p/a9wV7ng==
+Message-ID: <e6f06550-772f-426f-8b43-da13b58b0202@mailbox.org>
+Date: Thu, 5 Nov 2026 20:10:26 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.14.3
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] remoteproc: Hide REMOTEPROC options in REMOTEPROC
+ conditional
+To: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>
+References: <20261026221147.483695-1-marek.vasut+renesas@mailbox.org>
+ <20261104142958.GA1112376@bill-the-cat>
+ <ca84f075-5f13-4275-98df-5521b14b9c15@mailbox.org>
+ <20261105144209.GL1164024@bill-the-cat>
+ <CAC928HbGeoLQuHjiDN+qBU7A=wLa=EgM7xQMppv9LvFh5kV_xg@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <CAC928HbGeoLQuHjiDN+qBU7A=wLa=EgM7xQMppv9LvFh5kV_xg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: de54f6a4b7c15309f03
+X-MBO-RS-META: 6rwzumxuxq57hmdnug3u3qe91q91nnxy
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -157,32 +130,143 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-8.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, 28 Oct 2026 02:14:15 +0000, Enrique Hernández Bello wrote:
-
-> Rebuilding an existing FIT (-F) starts by making a working copy of it,
-> and mkimage asks a shell to do that:
+On 11/5/26 7:51 PM, Massimo Pegorer wrote:
+> Hi,
 > 
-> 	snprintf(cmd, sizeof(cmd), "cp \"%s\" \"%s\"",
-> 		 params->imagefile, tmpfile);
+> Il giorno gio 5 nov 2026 alle ore 15:42 Tom Rini <trini@konsulko.com>
+> ha scritto:
+>>
+>> On Wed, Nov 04, 2026 at 06:33:21PM +0100, Marek Vasut wrote:
+>>> On 11/4/26 3:29 PM, Tom Rini wrote:
+>>>> On Mon, Oct 26, 2026 at 11:11:32PM +0100, Marek Vasut wrote:
+>>>>
+>>>>> Add conditional around REMOTEPROC menu entries, turn REMOTEPROC into
+>>>>> configurable boolean, and update all defconfigs and Kconfigs which
+>>>>> previously only selected REMOTEPROC driver to also select REMOTEPROC
+>>>>> itself.
+>>>>>
+>>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>>> ---
+>>>>> Cc: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+>>>>> Cc: MD Danish Anwar <danishanwar@ti.com>
+>>>>> Cc: Tom Rini <trini@konsulko.com>
+>>>>> Cc: u-boot@lists.u-boot-project.org
+>>>>
+>>>> Unfortunately this misses some handful of at least TI K3 platforms. I
+>>>> think using qconfig.py to confirm which configs have REMOTEPROC set
+>>>> before / after, and that they match would make sorting that part of the
+>>>> problem out easier. Do you have time to do that, or should I pick it up
+>>>> and do a v2? Thanks.
+>>> I can respin this, but do you know which platforms got missed ?
+>>
+>> I lost the list, sorry. It was a number of the r5 builds. Perhaps some
+>> fragment got missed? But qconfig.py -f REMOTEPROC, with a db built with
+>> and without the patch will quickly show which oens it is.
 > 
-> so signing a FIT needs /bin/sh and cp on top of mkimage itself. That
-> rules the tool out of the minimal images where firmware tends to be
-> assembled; in one of them the failure reads
+> This is the result of comparing the two qoconfig.py outputs:
+
+u-boot$ git log --oneline HEAD~4..
+1e29311663e (HEAD -> master) Revert "remoteproc: Hide REMOTEPROC options 
+in REMOTEPROC conditional"
+97162e533ca remoteproc: Hide REMOTEPROC options in REMOTEPROC conditional
+df3b8e16e6d remoteproc: Make REMOTEPROC_MAX_FW_SIZE depend on REMOTEPROC
+d1d45c926a5 (origin/main) Merge branch 'main' of 
+https://git.u-boot-project.org/u-boot/custodians/u-boot-riscv
+
+u-boot$ ./tools/qconfig.py -f REMOTEPROC
+126 matches
+am6254atl_evm_a53 am6254atl_evm_r5 am62_pocketbeagle2_a53 
+am62_pocketbeagle2_r5 am62ax_evm_a53 am62ax_evm_a53_ethboot 
+am62ax_evm_r5 am62ax_evm_r5_ethboot am62dx_evm_a53 am62dx_evm_r5 
+am62px_evm_a53 am62px_evm_a53_ethboot am62px_evm_r5 
+am62px_evm_r5_ethboot am62x_beagleplay_a53 am62x_beagleplay_r5 
+am62x_evm_a53 am62x_evm_a53_ethboot am62x_evm_r5 am62x_evm_r5_ethboot 
+am62x_lpsk_a53 am62x_lpsk_r5 am64x_evm_a53 am64x_evm_r5 am65x_evm_a53 
+am65x_evm_r5 am65x_evm_r5_usbdfu am65x_evm_r5_usbmsc 
+am67a_beagley_ai_a53 am67a_beagley_ai_r5 am68_sk_a72 am68_sk_a72_ethboot 
+am68_sk_r5 am68_sk_r5_ethboot am69_sk_a72 am69_sk_a72_ethboot am69_sk_r5 
+am69_sk_r5_ethboot aquila-am69_a72 aquila-am69_r5 aquila-imx95 
+imx8mm_evk imx8mm_evk_fspi imx8mn_ddr4_evk imx8mn_evk imx8mp_evk 
+imx8mq_evk imx93_11x11_evk imx93_9x9_qsb imx93_9x9_qsb_inline_ecc 
+imx93_frdm imx93w_evk imx93w_evk_inline_ecc imx95_15x15_evk 
+imx95_15x15_frdm imx95_19x19_evk imx95_19x19_frdm_pro imx95_a0_19x19_evk 
+imx95_navq iot2050 j7200_evm_r5 j721e_beagleboneai64_a72 
+j721e_beagleboneai64_r5 j721e_evm_a72 j721e_evm_r5 j721e_sk_a72 
+j721e_sk_r5 j721s2_evm_a72 j721s2_evm_r5 j722s_evm_a53 
+j722s_evm_a53_ethboot j722s_evm_r5 j722s_evm_r5_ethboot j742s2_evm_a72 
+j742s2_evm_r5 j784s4_evm_a72 j784s4_evm_r5 k2g_evm k2g_hs_evm 
+phycore_am62ax_a53 phycore_am62ax_r5 phycore_am62ax_r5_ethboot 
+phycore_am62ax_r5_usbdfu phycore_am62x_a53 phycore_am62x_r5 
+phycore_am62x_r5_ethboot phycore_am62x_r5_usbdfu phycore_am64x_a53 
+phycore_am64x_r5 phycore_am68x_a72 phycore_am68x_r5 r8a779g0_whitehawk 
+r8a779g3_sparrowhawk r8a78000_ironhide_cm33 sandbox64 sandbox64_lwip 
+sandbox sandbox_flattree sandbox_nocmdline sandbox_noinst sandbox_spl 
+sandbox_vpl sc598-som-ezkit-spl sc598-som-ezlite-spl 
+stm32mp15-icore-stm32mp1-ctouch2 stm32mp15-icore-stm32mp1-edimm2.2 
+stm32mp15-microgea-stm32mp1-microdev2-of7 
+stm32mp15-microgea-stm32mp1-microdev2 stm32mp15-odyssey stm32mp15_basic 
+stm32mp15 stm32mp15_dhcom_basic stm32mp15_dhcom_drc02_basic 
+stm32mp15_dhcom_pdk2_basic stm32mp15_dhcom_picoitx_basic 
+stm32mp15_dhcor_avenger96_basic stm32mp15_dhcor_basic 
+stm32mp15_dhcor_drc_compact_basic stm32mp15_dhcor_testbench_basic 
+stm32mp15_trusted toradex-smarc-imx95 verdin-am62_a53 verdin-am62_r5 
+verdin-am62p_a53 verdin-am62p_r5 verdin-imx95
+
+u-boot$ git reset --hard HEAD~1
+HEAD is now at 97162e533ca remoteproc: Hide REMOTEPROC options in 
+REMOTEPROC conditional
+
+u-boot$ ./tools/qconfig.py -f REMOTEPROC
+126 matches
+am6254atl_evm_a53 am6254atl_evm_r5 am62_pocketbeagle2_a53 
+am62_pocketbeagle2_r5 am62ax_evm_a53 am62ax_evm_a53_ethboot 
+am62ax_evm_r5 am62ax_evm_r5_ethboot am62dx_evm_a53 am62dx_evm_r5 
+am62px_evm_a53 am62px_evm_a53_ethboot am62px_evm_r5 
+am62px_evm_r5_ethboot am62x_beagleplay_a53 am62x_beagleplay_r5 
+am62x_evm_a53 am62x_evm_a53_ethboot am62x_evm_r5 am62x_evm_r5_ethboot 
+am62x_lpsk_a53 am62x_lpsk_r5 am64x_evm_a53 am64x_evm_r5 am65x_evm_a53 
+am65x_evm_r5 am65x_evm_r5_usbdfu am65x_evm_r5_usbmsc 
+am67a_beagley_ai_a53 am67a_beagley_ai_r5 am68_sk_a72 am68_sk_a72_ethboot 
+am68_sk_r5 am68_sk_r5_ethboot am69_sk_a72 am69_sk_a72_ethboot am69_sk_r5 
+am69_sk_r5_ethboot aquila-am69_a72 aquila-am69_r5 aquila-imx95 
+imx8mm_evk imx8mm_evk_fspi imx8mn_ddr4_evk imx8mn_evk imx8mp_evk 
+imx8mq_evk imx93_11x11_evk imx93_9x9_qsb imx93_9x9_qsb_inline_ecc 
+imx93_frdm imx93w_evk imx93w_evk_inline_ecc imx95_15x15_evk 
+imx95_15x15_frdm imx95_19x19_evk imx95_19x19_frdm_pro imx95_a0_19x19_evk 
+imx95_navq iot2050 j7200_evm_r5 j721e_beagleboneai64_a72 
+j721e_beagleboneai64_r5 j721e_evm_a72 j721e_evm_r5 j721e_sk_a72 
+j721e_sk_r5 j721s2_evm_a72 j721s2_evm_r5 j722s_evm_a53 
+j722s_evm_a53_ethboot j722s_evm_r5 j722s_evm_r5_ethboot j742s2_evm_a72 
+j742s2_evm_r5 j784s4_evm_a72 j784s4_evm_r5 k2g_evm k2g_hs_evm 
+phycore_am62ax_a53 phycore_am62ax_r5 phycore_am62ax_r5_ethboot 
+phycore_am62ax_r5_usbdfu phycore_am62x_a53 phycore_am62x_r5 
+phycore_am62x_r5_ethboot phycore_am62x_r5_usbdfu phycore_am64x_a53 
+phycore_am64x_r5 phycore_am68x_a72 phycore_am68x_r5 r8a779g0_whitehawk 
+r8a779g3_sparrowhawk r8a78000_ironhide_cm33 sandbox64 sandbox64_lwip 
+sandbox sandbox_flattree sandbox_nocmdline sandbox_noinst sandbox_spl 
+sandbox_vpl sc598-som-ezkit-spl sc598-som-ezlite-spl 
+stm32mp15-icore-stm32mp1-ctouch2 stm32mp15-icore-stm32mp1-edimm2.2 
+stm32mp15-microgea-stm32mp1-microdev2-of7 
+stm32mp15-microgea-stm32mp1-microdev2 stm32mp15-odyssey stm32mp15_basic 
+stm32mp15 stm32mp15_dhcom_basic stm32mp15_dhcom_drc02_basic 
+stm32mp15_dhcom_pdk2_basic stm32mp15_dhcom_picoitx_basic 
+stm32mp15_dhcor_avenger96_basic stm32mp15_dhcor_basic 
+stm32mp15_dhcor_drc_compact_basic stm32mp15_dhcor_testbench_basic 
+stm32mp15_trusted toradex-smarc-imx95 verdin-am62_a53 verdin-am62_r5 
+verdin-am62p_a53 verdin-am62p_r5 verdin-imx95
+
+> (I had to drop also the select REMOTEPROC for the new REMOTEPROC_TI_K3_HSM_M4F
+> which landed into main but not yet included in the patch)
 > 
-> [...]
-
-Applied to u-boot/main, thanks!
-
-[1/1] tools: mkimage: copy the FIT in process instead of shelling out to cp
-      commit: 58eb0801bca518d6aa81a7b49b063aacc6e98bb2
--- 
-Tom
-
-
+> Could adding an "imply REMOTEPROC" in arch/arm/mach-k3/Kconfig, where other
+> REMOTEPROC sub-options are implied, help to simplify? Avoid need to add it
+> to defconfigs.
+No, imply keyword is not recommended.
