@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC3DC606D802
-	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 10:57:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D128606A31B
+	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 10:59:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DTt+6W10;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=dZPQYhXF
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=QUCdDY9n;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=QyFRNJqw
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8E96D605D2;
-	Thu,  5 Nov 2026 10:57:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AD9A8810E8;
+	Thu,  5 Nov 2026 10:59:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qmWFughiiOLp; Thu,  5 Nov 2026 10:57:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D0AA76080C
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793876246;
-	b=EMRnPRpra6mK+N5ljPLtU4tWHa03FbCUhLkkaBUnEz+8kEh7grmGxYEWw8BRIUr1NzCb
-	 IhSEfxV70m8PSURs4YYjuWKoQv7gfKIMihq64dfECIr0EqLm4RKp/Hs0e24+VJWmzJEjr
-	 XUJnvM8Fa+hzhbWnozg/Qgy1cxdCHXe7gkATpMMIRcvX8YDdBOVXBiJEtFmMwlBnATk1y
-	 qHz6eqo6yOcokZGiJkBILQ5jaw0sCnsHXU57m9asKZQYNb6iPVtT7g93qXJzRgJ+BzFAX
-	 Ru8gXs+hzVQAQkgqbhEAhN2O/wk4GxndkCzVwJjobYIhfc2Gkf8+5ErcultK8MWHXIw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Y7YKNsmVz_mA; Thu,  5 Nov 2026 10:59:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BED62810CF
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793876343;
+	b=Jz//aW7HCmUUcUjkAKVIEVxBe6sqNqVM9gZ0jVwKVda+/Fb97Pv+Vckhcm1nb0G0kY6l
+	 xDq9mgc6V/8+k90jp1Jta/a37OPX+hkZAXY7qveoNfKTZrS1ar7eojOR/xpw/i2lOZ72P
+	 e1m7P+PSDZ3tD1N74V+C4uI8+NRQvrHrZdDpUoCNV740+LbZtAf/boKxKn5rX8ydgCxFp
+	 r337/1lLAqtutSqPRgrVYTQaf9rtC9+NubI5Yl+mTosqp6lk5+CT34ocqZKObKqPR2ks4
+	 vHaMZ8aJZZg89OtXfM4Cs9INMe0BKILuOsvCsECY+wzxssSIlOpanZ4iCg8Lbus/ieg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793876246;
+	c=relaxed/relaxed; t=1793876343;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -34,127 +34,123 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Reply-To:Errors-To;
-	bh=JNpPGFb3+T1KVoeSAxhIuPeeoEbYpzeZGdxO2hbdM0M=;
-	b=gb8GTQh94Z8bvonE6sWfoaS6rqehGZe7Riq5HIXy6FSiHWrLKmw+CSlQZTqo889tTJsM
-	 XhgEjGq9yqGUV5lVPp4wIf4NtUyyC0z9029a0hNt3vcGuaPxc1jF1PiHSBXQ+iK8f9nC6
-	 uBreZ8FwbiYh9GUolkljGWIpWITPGc9RG6bvctgY1rPomX8JrNEU+3s68rVN6vCmxmYpZ
-	 DOodenGaixo0XjXGE1TVJ50LJfUoP/Dhy4el63xR2bB7yWzTkVRbqn95WeIMjkHw7ckoO
-	 jTWWIONQE2l7e0UzZuQkDmpYMDWRQC0Ed1ubbQZYb3gSa/yqVGBb8PO6KyvgXDhmzDg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=v7506ruzbA5NEcnFC72LQjn58/MYnru0+tbDmLt5qxU=;
+	b=L7/BtdUwkJ9qdeOhxOJuk74Bysna1iHWhs6EbgMtOAzukDfoNvTZcKJ02na3+CQLAybE
+	 nKLFLO+MKAkTCBmge9Epy8N7h12Lpu/tAsbU+PEG12vk2FRGRSirXsjXlLUqQjSQGMfk7
+	 F+EgpDsyXhqBGvz4oI/XPqJxYWw+IHPESSJ20Jy9Ag2eTlQ96aHue8pz7N31kL6v4VneK
+	 TDiNePAor8+o59ULS+JrAVnwclXgOb7L/6wR99OQ0dUAPPd/dLgjnzqsxHZdIgCOAwRu8
+	 /VSg4IdqGQvytRZukyF+7OhH2AkRiV1bDI1gbxH1KL+301GSmmkIp1jQw7p6CeVabZg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793876246;
-	bh=JNpPGFb3+T1KVoeSAxhIuPeeoEbYpzeZGdxO2hbdM0M=;
+	d=lists.u-boot-project.org; s=default; t=1793876342;
+	bh=v7506ruzbA5NEcnFC72LQjn58/MYnru0+tbDmLt5qxU=;
 	h=Date:From:Subject:To:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=DTt+6W101JC42mtZo/kN/nb7aS1YWC0Fw2O+q6iOywDIe5VJzzFz5YLd1egW4gNIx
-	 OT7MPyUmjip7pa7AHXIVscQaBaI++NLrOu9LSBSXAB0Qdm14FDILqaPv/7o2YndDTq
-	 aiFVdaL+aerhe1PFOk04ID+y+gO6wDDra30V2Ae/Ag+qx8Ym88CRQ1KAgFf64LO2oO
-	 QO6ytHqTmOM58dboB4NYM+WPkrIwvS6TdmfJWzEYMkRoNZvRD6nc5FnKRs9Eby4hwM
-	 iE1hPhgC7gdfWuTF7DiI/H69OJvQB22zZBhpq1kbiOpHEs3/prvm9RlpbddE/dGKbe
-	 YynTv0mqH52EQ==
+	b=QUCdDY9n5mY79/PsXtvUDETsN8HN8QpmzkuvAg+BjH/nygZGABCQEC9RQ2j02XVd5
+	 ILm5CW+2w13HTNOpQFZv3iQzttoCzhCyzO4aMIMRs+hJqd1zq9iGdhgT9IcqbBWXaw
+	 SwnJWGb7S6q6NEs2BvicqHw/9QTRyDzXqaSq10/tw2Ui61MQug/11doM6R96IPIzIK
+	 IDxa+Tx6noQLYKc2qs8V9ldZXoNA75+82GBG+Bi9USLlNb/ltkD+hs98zXdh2aZAzE
+	 Lb+Z5Z9O+ygQmDMn35x+yqvsDGbmbhdOXEtPOgnul4dL2HSJJjFIdrs9tPp5tUskQy
+	 e554fZkEH/OlQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D0AA76080C;
-	Thu,  5 Nov 2026 10:57:25 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 2608952B
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 10:57:24 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BED62810CF;
+	Thu,  5 Nov 2026 10:59:02 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 30E4952B
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 10:59:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 16CD180AED
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 10:57:24 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 227146083C
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 10:59:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lsGbVPoGA1hD for <u-boot@lists.u-boot-project.org>;
- Thu,  5 Nov 2026 10:57:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org EE83980AEC
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xL8Y-v0nsPB5 for <u-boot@lists.u-boot-project.org>;
+ Thu,  5 Nov 2026 10:59:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org F14A5606CB
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::333"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32f; helo=mail-wm1-x32f.google.com;
+ client-ip=2a00:1450:4864:20::333; helo=mail-wm1-x333.google.com;
  envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=dZPQYhXF
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- by smtp1.osuosl.org (Postfix) with ESMTPS id EE83980AEC
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 10:57:21 +0000 (UTC)
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4a35db1f202so13335895e9.3
- for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 02:57:21 -0800 (PST)
+ header.s=google header.b=QyFRNJqw
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id F14A5606CB
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 10:58:59 +0000 (UTC)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4a20a37703bso12776385e9.1
+ for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 02:58:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793876239; x=1794481039;
+ d=linaro.org; s=google; t=1793876337; x=1794481137;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=JNpPGFb3+T1KVoeSAxhIuPeeoEbYpzeZGdxO2hbdM0M=;
- b=dZPQYhXFlc5Pnt8BWfN6OakFTJzvDdDWnSvy+tPkzd9RQaSuHcP0gSZJUGkE2aUdi9
- qtwzN6Mc0265W+tBVV68jiQQE8TDKHsbz18apYvsqWvVafkFQ12O24G/xO/2poHKMzUf
- V91nMb0ukk26yUR/Ugg6Nc1AJ7Vi/QqHBrwxbYAFpeQUhez9rHoKgbovJN7Vy5HlnYUH
- WXGLK900p/WqcxeKChV6bGsYogXlS9musgIR/z3UqCTZDIm/xC/DEATZStA+pR59/aHu
- ho2OZghMfS4S2GSVjouvw/AZoD1TqGU0McyKuFKTfD4TFJjmvo/Ya+LxRuc6M6npqcO+
- rlrg==
+ bh=v7506ruzbA5NEcnFC72LQjn58/MYnru0+tbDmLt5qxU=;
+ b=QyFRNJqwg2l5OQbyEs+aZlKk58MPNDuzvTbdxQhrXBJQfL8p8ANmltT5wD60TnKr3c
+ mmnMHJAe/rI59l/sOUTOzleJSnHBiGDYbWUPhOg/1Id5Q9aEt4RkmQCWI662PasqaGP7
+ oacxyoM/O+mjLr7YOjOYoKkOMkwC75t95MBmXBw1hjS1cgE8+AKl6RkRXWxKnlmhIIEZ
+ ELy7CZRQsbDy6dkPiU9CljywmFsQEk++XKvcJ+RnaGjeB4GhnN3BSUDCOB9pqjS1zdEg
+ NRpZUkSwkpc9BejtLwJnIkLZnAQ1VBEQLmu/S2+dEi/HkypPfqh36fkb1Lp7EpitSuzZ
+ UzRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793876239; x=1794481039;
+ d=1e100.net; s=20260707; t=1793876337; x=1794481137;
  h=content-transfer-encoding:content-type:in-reply-to:organization
  :autocrypt:content-language:references:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=JNpPGFb3+T1KVoeSAxhIuPeeoEbYpzeZGdxO2hbdM0M=;
- b=zSUXlkN+2cREU0BgSt03CcikYJNG3wXhfhxPJcPBn4twj51GXgPAUvS8A740mBG8dk
- tlxblm9+fRyL6nmu5k6r+Pee806oG0hgHua2VMR4YwFbKerb2Ov+/fYCG/x+0OwckjiC
- +jEt44bUuxr2s2dC5vrqhz3ZrlToLwT8xeAasEBd7PJm7WqvlLUlWvUGLDXLkOnLLRTj
- 7tnokkAwuPmEo4HTdyhUIKAowgmVpExFuhwxPHEoEEH8qR2MsBFo2FVmGuBKFDCIlaer
- aMFoVESL002B5aioGME8pVwYo1W2FXDobcmHQopXjACrHlzQ+RjYY58EhwZOECMRrTeY
- RRVg==
+ bh=v7506ruzbA5NEcnFC72LQjn58/MYnru0+tbDmLt5qxU=;
+ b=F/wMkF9RXvCPtWoRPhFspoZLNByQhvpEEB1CcSXBivQwd3uBH4fArl4FLW42OM+NHY
+ m+hg8VPN3siAqiLUizVQei4/TQw7P9ZBi0HKJK75wLHU5uMR+j72uPasTymPDeqfz2c1
+ MjGLRARcAkiJL+7810LIIRB9DvHuDpGHEAv2U9fQ5NDHntIpjzhe6MlCFIfGbWuac+LS
+ iwI5JlbaBXPvPK5FcHevNkGm/RPpaTgyCh7ZNKHhD/jo2IXDNB/EeX77FOnlgoqNWLOc
+ dWZwqlZherABztymkK/w+E3mg4OB9anSQCw77XgM2K1AlXMkl2zkS4ZrTlkUAZTvzvuI
+ m89w==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzSnu8IsjoClTb7q218fjBPvzBtnW7Pi9b2fhAEYtjrMePYckgyt4PgIDiDcjuk2sFb9nJnRDI=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+FIn1DNTqX+vDmAwW8LZtypSZAHNYh5SwL3Cy9muwSMwoAEDdm
- R9CQYgHX3B/yRYcMohpWeTLjdCKV9S/gxnJw+5iaa6Qn42WYB/GWH083GVi6yWV2MHM=
-X-Gm-Gg: AYBFou1SU+Zfk3hieSmq4xofEGpTCsHB4NY90bAp0N+3rUPbIf6m3YCutVoCTPnp7CQ
- m287OUUx5vtRSJIuU+Fe3Lh3bStj7z/NSqqVPl1xZyYyOo/FrjtW2UReQgdznc9PiHfdRlnbnep
- 3P2UBZ/sIKLcTMXL3jTAZBH/7yoRqO+UgHvLKXYMXYkZDK1rofeXAtuyDwpzj65EIS54YDwLKIa
- RmRKdSwonhFLtv9/aFapJ8TfWzapORefhWLEMCQvPLwEbtGzCYqEBp5ytmyNqohatTkxDy3O9SW
- ycT1QuT9XeNKBCBDw7Xoj0bw0HkzE+ikMvMflMUWD9vW6vYwoeCp5ZsA4NiJDiZnItkUfvLBDCr
- t0VY5i9udDgyTTbQCaXUN4yN/c9dbXiJ8oBAVeyUokuV3Ibu9plxhmFjkb74Az1shSXdhpInvM4
- KaqklMFhn7qdBrzgDN+8B7NA6qAVWW24PZTJ0krD1dvgNzaUB6hPedAhHgblmYevdDNZrj/Irom
- Mvjbuooh+a0+FjEmPw/X0k1ggyHlv5FqUfJ0InFmtdhmiUGPrVIRGTYi/NTVlHKy6Z3JOX2EH/n
- NVL7tDTT7UUcZXoilcXdm7OJvNwMbgFRft3r/G9p8Dq53DxanbYxBCcxNwtKHzfwzB/xST/yyIW
- JhLBl/tXy
-X-Received: by 2002:a05:600c:a012:b0:4a1:d675:b031 with SMTP id
- 5b1f17b1804b1-4ac17b2bc4dmr410219015e9.6.1793876239474; 
- Thu, 05 Nov 2026 02:57:19 -0800 (PST)
+ AKwUvBxlwSsP2iwDBquY1nuwSVVdzLUsqueQcUzG55ESHJaU0+xkSDKUOtoWNkXY4iNPsrntDzLUA58=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+95rPgDq+SfLuzKZgUbxwTPZnOfsgL2Spxd2RMzU2FbKDUniyU
+ 3wOO4DUJ9JBJI/AsXmflZ1onmpG3t154UCPz3zfVfMPR0SzY67aAZ1n61sntQeNA4/C1py+x9jL
+ 4FDj4
+X-Gm-Gg: AYBFou2rKabWMjZY+9VJXtGU/RYUkLZFF80RprV5fmN5crZKGVBKxRnBSvOnxkDotZc
+ H9xaPTLfX4Wi5kPw5KEdQdNaPvlx+WCcvsWEjk6yqGfAaToaTS4zgvtttsg6VVY+ypx0vFRrLxh
+ l/F4lXk5v/xODX30o+MP51fJYw1uNAPy5A2G1DpbJkLVj7mAFMU2i1ApTOjzRF3npq/MWINF9Fb
+ o/MQyc7a1QAtJIZFg3ccAcQQI9GOqPst4woXy+00ENPtS72cM8KnZNkBB0q3ZVdJpnT9XzlNMfN
+ C/5R5mbz7hh3bLP8Pq9vK6T0WbkI7bSKM3bFutKZbO+F5HWOJgR34VsUsw9v3Lif50HCethPnZm
+ bbdSLVbVPIFS8FlehTXXHlhRHeD2sFV9sy0fkxWVRFXjreskiR2Jlx7dD5ulYumKKP6d3/kqItK
+ vaxfX477B9jLobciaysgRk99z/3Sem1dbPgdgQ47KamUhiFgfffmZ5rXXYGtLH5CJMpwRY8jfz/
+ a7sIba1Yb4orwXIZnKFeRfRRQbdAsaevWj2TiP9CCzixBcGlr/mlPNt87Ed7PLtyQgJT8Sb+DLj
+ BgHUrKCzqp8sn64BDcWPH3IBkXijMniuIdKXR6tZ3/bOoZ8NjqRUeiukaL3ZeUxCyb/KWDBKYcp
+ gNAtHD/NE
+X-Received: by 2002:a05:600c:a4e:b0:4a1:e57b:667c with SMTP id
+ 5b1f17b1804b1-4ac183d1edamr411790715e9.26.1793876337039; 
+ Thu, 05 Nov 2026 02:58:57 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:106d:1080:9899:e54b:a2f2:3695?
  ([2a01:e0a:106d:1080:9899:e54b:a2f2:3695])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48feda20935sm8918755f8f.54.2026.11.05.02.57.18
+ 5b1f17b1804b1-4b4320efc7csm55377195e9.2.2026.11.05.02.58.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Nov 2026 02:57:19 -0800 (PST)
-Message-ID: <7baed8bd-c328-42f7-a2be-0d05af46a025@linaro.org>
-Date: Thu, 5 Nov 2026 11:57:18 +0100
+ Thu, 05 Nov 2026 02:58:56 -0800 (PST)
+Message-ID: <bc83d215-e59f-4646-81ac-9016a1c60f8d@linaro.org>
+Date: Thu, 5 Nov 2026 11:58:55 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v1 4/9] clk: qcom: sc7280: add GCC_PCIE_1_PIPE_CLK_SRC
- no-op gate
-To: Sumit Singh Dhami <sumit.dhami@oss.qualcomm.com>, trini@konsulko.com,
- ilias.apalodimas@linaro.org, casey.connolly@linaro.org,
- sumit.garg@kernel.org, lukma@nabladev.com, sjg@chromium.org,
- Michael.Srba@seznam.cz, senthilkumar.l@oss.qualcomm.com,
- manivannan.sadhasivam@oss.qualcomm.com, nathbappai@gmail.com,
- balaji.selvanathan@oss.qualcomm.com, petr.hodina@protonmail.com,
- marek.vasut+renesas@mailbox.org, u-boot-qcom@groups.io,
- u-boot@lists.u-boot-project.org
-References: <20261104163408.1250410-1-sumit.dhami@oss.qualcomm.com>
- <20261104163408.1250410-5-sumit.dhami@oss.qualcomm.com>
+Subject: Re: [PATCH v1] pci: pcie_dw_qcom: fix clock/power-domain bring-up
+ ordering
+To: Sumit Singh Dhami <sumit.dhami@oss.qualcomm.com>,
+ casey.connolly@linaro.org, sumit.garg@kernel.org, trini@konsulko.com,
+ senthilkumar.l@oss.qualcomm.com, marek.vasut+renesas@mailbox.org,
+ u-boot-qcom@groups.io, u-boot@lists.u-boot-project.org
+References: <20261104162626.1244225-1-sumit.dhami@oss.qualcomm.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -181,7 +177,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20261104163408.1250410-5-sumit.dhami@oss.qualcomm.com>
+In-Reply-To: <20261104162626.1244225-1-sumit.dhami@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -201,40 +197,108 @@ X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 11/4/26 17:33, Sumit Singh Dhami wrote:
+On 11/4/26 17:26, Sumit Singh Dhami wrote:
 > From: Senthilkumar <senthilkumar.l@oss.qualcomm.com>
 > 
-> GCC_PCIE_1_PIPE_CLK_SRC (ID 56) has no gate entry, so
-> clk_get_bulk()/clk_enable_bulk() fail with "unknown clock ID 56"
-> for any consumer listing it in "clocks".
+> Two probe-ordering issues in qcom_pcie_parse_dt():
 > 
-> The mux it represents is actually configured by
-> clk_phy_mux_enable() as a side effect of enabling
-> GCC_PCIE_1_PIPE_CLK, so register it as a no-op gate.
+> 	- clk_get_bulk() aborts and releases everything already
+> 	  fetched as soon as one clock (e.g. a not-yet-registered
+> 	  PHY pipe clock) fails to resolve, even clocks needed earlier
+> 	  such as ones gating PARF access.
+> 
+> 	- The power domain may not be enabled yet via driver model
+> 	  auto-enable, and PARF access while it is off aborts.
+> 
+> Instead, fetch each clock individually, tolerating -ENODEV/-ENOENT
+> for clocks enabled later by their own provider, and explicitly turn
+> the power domain on before any PARF access.
+
+Sorry I don't understand the problem, which clock is missing ? why do you
+need to ignore -ENODEV/-ENOENT ? how will you get those clocks
+after the pcie controller probe ?
+
+Split out the Power Domain change, and explain better why it should
+be enabled so early.
+
+Thanks,
+Neil
+
 > 
 > Signed-off-by: Senthilkumar <senthilkumar.l@oss.qualcomm.com>
 > Signed-off-by: Sumit Singh Dhami <sumit.dhami@oss.qualcomm.com>
 > ---
->   drivers/clk/qcom/clock-sc7280.c | 5 +++++
->   1 file changed, 5 insertions(+)
+>   drivers/pci/pcie_dw_qcom.c | 43 ++++++++++++++++++++++++++++++++++----
+>   1 file changed, 39 insertions(+), 4 deletions(-)
 > 
-> diff --git a/drivers/clk/qcom/clock-sc7280.c b/drivers/clk/qcom/clock-sc7280.c
-> index eddeecfd9b7..fb2a017674f 100644
-> --- a/drivers/clk/qcom/clock-sc7280.c
-> +++ b/drivers/clk/qcom/clock-sc7280.c
-> @@ -206,6 +206,11 @@ static const struct gate_clk sc7280_clks[] = {
->   	GATE_CLK_POLLED(GCC_PCIE_CLKREF_EN, 0x8c004, BIT(0), 0x8c004),
+> diff --git a/drivers/pci/pcie_dw_qcom.c b/drivers/pci/pcie_dw_qcom.c
+> index ce6b4d97d1d..863bc601f49 100644
+> --- a/drivers/pci/pcie_dw_qcom.c
+> +++ b/drivers/pci/pcie_dw_qcom.c
+> @@ -13,6 +13,7 @@
+>   #include <asm/io.h>
+>   #include <asm-generic/gpio.h>
+>   #include <dm/device_compat.h>
+> +#include <dm/devres.h>
+>   #include <linux/iopoll.h>
+>   #include <linux/delay.h>
+>   #include <linux/log2.h>
+> @@ -415,6 +416,7 @@ static const char *qcom_pcie_vregs[NUM_SUPPLIES] = {
+>   static int qcom_pcie_parse_dt(struct udevice *dev)
+>   {
+>   	struct qcom_pcie *priv = dev_get_priv(dev);
+> +	struct power_domain pd;
+>   	int vreg, ret;
 >   
->   	GATE_CLK(GCC_PCIE_1_PIPE_CLK, 0x52000, BIT(30)),
+>   	priv->dw.dbi_base = dev_read_addr_name_ptr(dev, "dbi");
+> @@ -448,10 +450,43 @@ static int qcom_pcie_parse_dt(struct udevice *dev)
+>   		return ret;
+>   	}
+>   
+> -	ret = clk_get_bulk(dev, &priv->clks);
+> -	if (ret) {
+> -		dev_err(dev, "failed to get clocks (%d)\n", ret);
+> -		return ret;
 > +	/*
-> +	 * No-op gate: actual mux config is done by clk_phy_mux_enable()
-> +	 * when GCC_PCIE_1_PIPE_CLK is enabled.
+> +	 * clk_get_bulk() aborts on the first unresolved clock (e.g.
+> +	 * a not-yet-registered PHY pipe clock), dropping clocks
+> +	 * fetched earlier too. Instead, fetch one clock at a time,
+> +	 * skipping ones not yet available (-ENODEV/-ENOENT), which
+> +	 * are expected to be enabled by their own provider later.
 > +	 */
-> +	GATE_CLK(GCC_PCIE_1_PIPE_CLK_SRC, PCIE_1_PIPE_CLK_PHY_MUX, 0),
->   	GATE_CLK(GCC_PCIE_1_AUX_CLK, 0x52000, BIT(29)),
->   	GATE_CLK(GCC_PCIE_1_CFG_AHB_CLK, 0x52000, BIT(28)),
->   	GATE_CLK(GCC_PCIE_1_MSTR_AXI_CLK, 0x52000, BIT(27)),
+> +	int count = dev_count_phandle_with_args(dev, "clocks",
+> +						"#clock-cells", 0);
+> +	int idx;
+> +
+> +	priv->clks.count = 0;
+> +	if (count > 0) {
+> +		priv->clks.clks = devm_kcalloc(dev, count,
+> +					       sizeof(struct clk),
+> +					       GFP_KERNEL);
+> +		if (!priv->clks.clks)
+> +			return -ENOMEM;
+> +
+> +		for (idx = 0; idx < count; idx++) {
+> +			ret = clk_get_by_index(dev, idx,
+> +					       &priv->clks.clks[priv->clks.count]);
+> +			if (!ret) {
+> +				priv->clks.count++;
+> +			} else if (ret != -ENODEV && ret != -ENOENT) {
+> +				dev_err(dev, "failed to get clock %d (%d)\n",
+> +					idx, ret);
+> +				return ret;
+> +			}
+> +		}
+> +	}
+> +
+> +	/* Ensure the power domain is on before any PARF register access */
+> +	if (!power_domain_get_by_index(dev, &pd, 0)) {
+> +		ret = power_domain_on(&pd);
+> +		if (ret && ret != -ENOSYS)
+> +			dev_warn(dev, "failed to enable power domain (%d)\n", ret);
+>   	}
+>   
+>   	ret = generic_phy_get_by_index(dev, 0, &priv->phy);
+> 
+> base-commit: 3973f3c4d24df75ca90d7c0a9f03e5e5c9b48f32
 
-Instead add early check in sc7280_enable for GCC_PCIE_1_PIPE_CLK_SRC which just returns 0.
-
-Neil
