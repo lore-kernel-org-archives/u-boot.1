@@ -2,156 +2,146 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F11F606B9C4
-	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 19:58:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F982606A332
+	for <u-boot@archiver.kernel.org>; Thu,  5 Nov 2026 19:59:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=U7wWpk3H;
-	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=Mg0/wzgt
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=EtvN7KzH;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=OSsvehi6
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0BE1440825;
-	Thu,  5 Nov 2026 19:58:25 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 32AE440829;
+	Thu,  5 Nov 2026 19:59:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wzn-0uRbetgZ; Thu,  5 Nov 2026 19:58:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0D3DF40818
+ id pxDHw6CPFDRt; Thu,  5 Nov 2026 19:59:12 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 365F140818
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793908704;
-	b=DR+LXdS9sHlO7KxiPVosk9+V0o96QbFXcIWF2ytGd6JOGVSnc2oybJk8zN3SEQmeWQ3t
-	 7qC45EsZy6ZNK1ISYOrA4ZKpoOKsODs03RE8UJFSqeMKtiJQls4H4knhv81fJcTNABnSl
-	 YLbvxX14tCrATCFc240QQIW3wXGj0vdTx5t3frlJvi1mk4canRZjxg6dofNIGr0ZYZH5M
-	 Ov8bU2pM0kbXiWNwqW2mptKifZi85FBeT8lvaKqKpoY7X0sifNkzucFDxH99o+xpSmIVo
-	 peLrILuBQvm271OS0wTyA8wiEwp/Iw/G9fu0dpITZz13/5MUzqyk8ArabgqEm4X9ldw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793908752;
+	b=AaRoUJ3vFNEKmWIwtiX/L/Y2Wbrl3zccepy7XiQH5jqvAiotQdLPWiET0qfBOt45crHR
+	 Cp/7HxsQA47LLInUQqxPYZEoZCFhenydIxFoFISNKNjL1m9RJRreXXZeK8LzvUjj+7NGx
+	 1y74sEDwYWIvW3WTQqt8a1YxNJw8s/PZeaOdPUbrlMowd+or4ZVkmT+ksFl8+0iSyJvX9
+	 RI98gaiSEfdktdq6fsG+rjGRw/qNmtj7ka2lnUY4x+X51o7ov5iOdDAKea7Vgig6hm6RB
+	 je9HFD83F0dZyvsLs/O3Dy73TSLyuDijptS/EZEa4qcKNVkKKr4hNCKDVaAjAqR+zLg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793908704;
+	c=relaxed/relaxed; t=1793908752;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=JlqJtnfrA9k3XO7rZsr/r4MSN5mqyYkT8YhPG6+RX0o=;
-	b=IRAvZ51Rc9YDMBVpRpKygA1TequBMSb8eCCymuPAXqTcYym0vJO7DalyYTuAVOJxTbld
-	 aziPYg3RI8HGCSDSsHvLwT+IyhAa6utsxnWN1jjM2COGz7p41rXLj+qGon/rWfwSrR20o
-	 M3r6NwOy2JJQBLAbieSWYki6fd0d+soJiZWl0u6HJ34O1H4pTAtAbPOwuzqqvmK49MyDi
-	 TnPJPxY69zN7k5mQrsbVkOz6aAGbFTmO4kcLWZBvewKnvPbXFh5S3kFCMAU8+cZGSRj/v
-	 PFn/zVYTR/e/m2LXLvfRfX3FQsbqwTrPrdujpit3DJ4QVFjVIpRnrr5BDgQR6geLnMg==
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Received:From:
+	 In-Reply-To:References:MIME-Version:Date:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=f1j4WQ59x/ZLKnjaxu2BbduePnjL+7k9fTZtSBZZkCg=;
+	b=OO5DiqxJcNUOm9s2X4Nv3R+VXErMqqfcwqoTqzFGaaPLmg/jIcyNXz50//YgG77sWcrI
+	 jteD8uzpnSTv880DHgCwhxAvpWM/i1OfuJsjkto9eCM4z4r5hXTbSPAcnZwE76FPZYBHS
+	 tUPmEU5X0aqahtdgXeAa2ft1SPfwU+Dz/sOB6G+K2YgCINkVsmdGrGBEiR0rkocpGsUqD
+	 VuGxQGMcxrRxjwTRAuq1RfLMVBYTXfUbDBNN8Jb8XvJ3dfrs+lFZccOjcLqxCMqL2KXUL
+	 /7Kl+zJ3POixr6n4go4ma0DHc0Un6xyT+AG4ItUzQpLczEgI7YURBsJw1wO5QKyNcsg==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793908704;
-	bh=JlqJtnfrA9k3XO7rZsr/r4MSN5mqyYkT8YhPG6+RX0o=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793908752;
+	bh=f1j4WQ59x/ZLKnjaxu2BbduePnjL+7k9fTZtSBZZkCg=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=U7wWpk3HA6J+exCBRtHiSpcLi9z0Nrjhl4Wk/lnZk7/UvFVD1PDcSJxSEkFrgsjVd
-	 ujao9U96HHwAZHq7uIw/3LXgOYK94jrDHlKdBVJk6xkvwijXOaVkufTwbO0Pgkyx4E
-	 q8CJW50jGC1v3c7rv1Qqg19VdpPIYj8lwRsMi/xGqeGfccV05nSRE3zmBE344qKU1G
-	 7YQM8b0Cc/RYRp1Mrj+OO1BzQLYFMLudW7XqahPCK9uw+oseWUydtXtmALFjZ5JSMh
-	 N88BChhtFlhudt5yn2KKkuf9H0hiOkGcUNSeJ4Wa16pT9jYYxu5wpX+YDW+mn0Mrit
-	 +ea/rlyyQ7WUA==
+	b=EtvN7KzHPn23GBSxfhGWX4/Emn+6SXJzV/yQ4a2qUWa9iqhUX2o08g3CDmS2NS+Bl
+	 coQ4qt1fShzxEheUNl+rF/I+hoQ3sm0yjb4wn/J+lxu1ibrVAgWpqIn664zHTInn6R
+	 3kUPnug+2KF1tnFTTs0DyNP0ma7vRULNAv9Q7YA3kc64YgZ5z/ECUTEfcRVeTu/Ltc
+	 qY0BGqLw29z4W1Wgv/HTMoruMlWC8Cfl/ODnO5Y14nxQQH4EKR9/yU3Lmg4OPQuJFd
+	 vyM9CeEsj0St1ox/w24Yzg6fmDFfNdT0ofAIgm+oHvJUVROlVu+bRwq+gUsboRM7cA
+	 qZvwvUEFqUSqg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0D3DF40818;
-	Thu,  5 Nov 2026 19:58:24 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 4AEF2280
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 19:58:23 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 365F140818;
+	Thu,  5 Nov 2026 19:59:12 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7E473B00
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 19:59:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 47FCD400FF
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 19:58:23 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6F72C6085F
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 19:59:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wdZJIPIGrOwa for <u-boot@lists.u-boot-project.org>;
- Thu,  5 Nov 2026 19:58:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 669E740012
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::22f"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jgOExtnUTs2U for <u-boot@lists.u-boot-project.org>;
+ Thu,  5 Nov 2026 19:59:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 778B460615
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::332"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::22f; helo=mail-oi1-x22f.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=Mg0/wzgt
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 669E740012
- for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 19:58:21 +0000 (UTC)
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-4c5d8c7f326so885754b6e.1
- for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 11:58:21 -0800 (PST)
+ client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
+ envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=OSsvehi6
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 778B460615
+ for <u-boot@lists.u-boot-project.org>; Thu,  5 Nov 2026 19:59:08 +0000 (UTC)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-83bbcfba0ffso1587518a34.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 11:59:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1793908701; x=1794513501;
+ d=gmail.com; s=20260707; t=1793908748; x=1794513548;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=JlqJtnfrA9k3XO7rZsr/r4MSN5mqyYkT8YhPG6+RX0o=;
- b=Mg0/wzgtrKwe2szua/UKPYz5f2OlBs1z+XusRFlQ98W/TLA6hZB4Uvbc3l1ngmLq5K
- JWavB6k4kYingoaScJz8OiizHZ80Q9ZL0sn49WR7jCTonig8vfWUxS/yyr1z3zNZVfJj
- XIEMjZ5Qi+UreSOCfXwSI0GN4aI4aiy3bpSKk=
+ h=content-type:cc:to:subject:message-id:date:mime-version:references
+ :in-reply-to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=f1j4WQ59x/ZLKnjaxu2BbduePnjL+7k9fTZtSBZZkCg=;
+ b=OSsvehi6k6enAFRMyEwyjM/Hj9VFmh2kjGExSxz9nOsAJ8BhtEls9wcn2CvKQ9JGN5
+ dIFdbHY8KnHCMDRuoCn5TZwAi9qijB5wTTIvvZEASMDDmrT7cXSTBuOB0SRIzSMlscXE
+ LLj34ykL351YNEJQKjZ5CzM1zpWwEelG2jkZoVY0a3ZILzRjMY74ADZQAnq7qOYgVTV8
+ 39J/50Ig/J3pbphtfwHs/8BjqO8JPB0YBUo6guYe0HVDS0DlbVTRm9WtsdtJA/w/W0Zn
+ kf2PBeO0BGpYOvW+DFH2TSroDLdgyUABymirBW/AV/Mw3WUQkeGJqt/rr3hs7Ry0jTTY
+ rcNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793908701; x=1794513501;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=JlqJtnfrA9k3XO7rZsr/r4MSN5mqyYkT8YhPG6+RX0o=;
- b=OMK+4LWeN6y7bX972IHrLmozLiugVxTD2AueWzHXJIrgu5lLbH9XG8ksO6UpHZtKP1
- IEAcUlrcokZVGSJqvWIoAgomE/8bK9qVghhlMETq6SdZbPBB9Ukx6Rd/i1iMRYHu9Elg
- 5EgmZkHzA7WLZLTWthcIc8CpkFstTJ0lzo318l424pPxmp3pVWLiaJ3kPI+wW04RnM5f
- zN+iipL80VtrBYNnMDTQr9j9Vza6dl1jDzVsqRVAoA70f7iH4jZYvV+v8oZOW5GlAlVz
- w5z3wUW/TTU3RaJiHRRXqOLdkpmCWAqmpd4mVQY8ukuqO6LO/yBe7DdLaGCoda92jl0V
- yDgw==
+ d=1e100.net; s=20260707; t=1793908748; x=1794513548;
+ h=content-type:cc:to:subject:message-id:date:mime-version:references
+ :in-reply-to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=f1j4WQ59x/ZLKnjaxu2BbduePnjL+7k9fTZtSBZZkCg=;
+ b=I7/EaVVYrKVmFeQsRf/utN1k0OEMvsrexx4m0S9ONuYrI/WbVLoKl9i4Jwc5jHrcNe
+ jb97OyQUcvTD3oFVi6rAPbuuzK7xc86vzg5g7rKFlUjAbhc8U31YUTxVp+//HtLlyiIe
+ cDS6lDqRkk3YgcRoH+IoajdWprbmcjiVVt+z7tMg631IJk1n9dF5OcDVCSqKfNQb7AP1
+ D5HyI78A6l/1EB7aXPs8Uigpsx2czIUa71dmFSC2wbvvAcokNukQNk7+XmJf9q9tKwBL
+ tRWTKp471Ca2NwTYjQnKAKthuBNESBSlH+HzqIXh/MpBJ2P0TSpVX8/IP3n5YCLv/Dh6
+ jUow==
 X-Forwarded-Encrypted: i=1;
- AKwUvBz3jGiZOuBnBRa8z06/cClromKgvwdEmydh8It1lvtEfVnhX4gKwWwviG9X0XlaZ1DO9HpK80o=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+7DdTqqK7a9sPcZzZaLP6AQMePKcAY8i1/A2iw0eZKaFbGk9hx
- PjLzjf+7zD3Z5kuhdzr08z4Snv2YtfdV1k7MumuJUC0Lc32E6+VmiAUz2GHnOdDn2WE=
-X-Gm-Gg: AYBFou0GRnSyA/4+rICj6meg9wnuXqCqQaOReJ6RIplE4Pc6OBZeXJUBRgac9mBnnWx
- GBK58AYlhSovAHYljRAv4b5rmLK64gyYg9FiF7ZA+WSeQff/B1qvD1h1O22AbcihD8eABIxHBil
- DBKPhRgslAdgIB2EeWheX38s5p8HLNBmPXdEDOfJPpr3MlHQF3QyT+BMqv4TSDxbgIkwNArmMBH
- QOgS7rVL+we5qviaAeciwvStrN+N/ru3s0UiRf4yvSNEmp9Uv+Mep7Xc/Uij4BPOKN111wXR5Vo
- pi7TlE1L125QBst7twj4Aj97frZ/lsyGW9zbDTo9sjBkxu0aOhNxi4S8F/uFJQEL6zQwDO8TAlm
- szlZ3xaV6XfZvb/JkTcqdFqjuek76rRVLO22UosZ9VZqhKVKDOrUAl15Djn9mryR9dOzyevTEdl
- RVNohU1kttvYqZXRVnDSxqtEFa9vwyW1VJW6H1Z6KTpmGMjkRWPAQNapMqN/xGhQMfzcuxyA5xW
- D3e0oMmYzSgq48sGxiahH7/O1tSkm+wCQv1VEW2sUx2etrg5J2+ShqSRCTc7BVCPMrkUKUJ0xSH
- /1xpDgvyyZ5Fq1+WqoRXtnvnj+fMv9klMS8jszwlGThFLiAZsSbbLpXFJxh3amp2AdOX9AeVGnw
- lDyE9FoQHm0wnXf3BXYhMx9l6clxIAnXRQnJEArv8dW/EHdwt6/psCHB0RZrGUn2ZYkmsD2rTLJ
- szhR3fVcHWeg4fl9dKW9NkZ5/l3kj1dA==
-X-Received: by 2002:a05:6808:23d0:b0:53a:a080:249b with SMTP id
- 5614622812f47-567e1597ceamr148802b6e.41.1793908700889; 
- Thu, 05 Nov 2026 11:58:20 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-567a9c7bbcesm4933262b6e.1.2026.11.05.11.58.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Nov 2026 11:58:20 -0800 (PST)
-Date: Thu, 5 Nov 2026 13:58:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH] remoteproc: Hide REMOTEPROC options in REMOTEPROC
- conditional
-Message-ID: <20261105195818.GQ1164024@bill-the-cat>
-References: <20261026221147.483695-1-marek.vasut+renesas@mailbox.org>
- <20261104142958.GA1112376@bill-the-cat>
- <ca84f075-5f13-4275-98df-5521b14b9c15@mailbox.org>
- <20261105144209.GL1164024@bill-the-cat>
- <902a93a7-df59-436b-b959-ad41f7d64f19@mailbox.org>
+ AKwUvBy57X+FRhr1lPBsmfFjrVprdAig8wmMQe1JOq74huT/SDtKk2kZ13SsIuJ0aD5Ge+FPEhd1rwo=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9norwrTGX1C4JfbnPxBz8cgcdN03SOIEm16/pApW0tqDYAeCGg
+ N78utmGk49MbbIfB2Vs75r7bALIVF6VFmBNPDY++UUHHLR5H25tBZtu1K8WaJ5oh0odl4kHM+nl
+ KYtbR4jgB5AYG83NHHvklAeovHex+kh9z7gLidFv1mR+j
+X-Gm-Gg: AYBFou3Fdqig3aISm2wfCVdSDgvQ1MXdJgMgvojtd/G6+7z3Kx/DO/Oirqifvhh0PXI
+ 3UgBjiApCGUmxCLZgMWwZKK6Mu0SF99bxYGjHjRHVpc8fYEvoFvGwbHfEWlsey1UU8gs7C0v0tC
+ YuMxWzUxof6d5HaqHWFoTXUEFrv0ByE8j55gAlsnNxMTGQ7dK84cMEWRsUG8X8QjSavwaMQrgg5
+ Wa6PP3jLh6Kkn8NJj6PzWHmIymYErerUF3hA2HHro0ueVu8F6FLO4ZGAbmIuctSv6QUNfC/ptdR
+ dwhxBJBzu84oK5NB6hi1JwLtdt9C7IH5d6INhsL5ncmzdhOYaQiZlg12yB0nFIdUf9vCP/bXKk7
+ hRyNm3lpaVjionKY8NQvVJVfmDyUx6zN230ZSDg==
+X-Received: by 2002:a05:6808:1310:b0:53e:42e4:47c with SMTP id
+ 5614622812f47-567e150410dmr156840b6e.34.1793908747897; Thu, 05 Nov 2026
+ 11:59:07 -0800 (PST)
+Received: from 1077388689865 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 5 Nov 2026 11:59:06 -0800
+Received: from 1077388689865 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 5 Nov 2026 11:59:06 -0800
+From: Ana Bobillo <anabobillo3@gmail.com>
+In-Reply-To: <20261105131601.1854572-1-odeschamps.mail@gmail.com>
+References: <20261105131601.1854572-1-odeschamps.mail@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="H3QsAbaVG1wuQltl"
-Content-Disposition: inline
-In-Reply-To: <902a93a7-df59-436b-b959-ad41f7d64f19@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Date: Thu, 5 Nov 2026 11:59:06 -0800
+X-Gm-Features: AclHuK-uVdjlFZb50HAbQqbUgl219Ljbg-7t78nmm16kQHQl1mGTdkoCeKWXRFw
+Message-ID: <CAJnxHsjmgEOscHkzGO_tgh4_Qu4Pc-wQQ_==PZ0hLD8OPD_fzw@mail.gmail.com>
+Subject: Re: [PATCH] fs: ext4: bound extent-tree depth in
+ ext4fs_get_extent_block()
+To: Oscar Deschamps <odeschamps.mail@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ u-boot@lists.u-boot-project.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -161,115 +151,38 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-2.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Hi Oscar,
 
---H3QsAbaVG1wuQltl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 5 Nov 2026 at 14:16, Oscar Deschamps wrote:
+> A valid extent tree has strictly decreasing depth down to the leaves, so
+> require eh_depth to decrease at every step and reject the image otherwise.
 
-On Thu, Nov 05, 2026 at 07:25:05PM +0100, Marek Vasut wrote:
-> On 11/5/26 3:42 PM, Tom Rini wrote:
-> > On Wed, Nov 04, 2026 at 06:33:21PM +0100, Marek Vasut wrote:
-> > > On 11/4/26 3:29 PM, Tom Rini wrote:
-> > > > On Mon, Oct 26, 2026 at 11:11:32PM +0100, Marek Vasut wrote:
-> > > >=20
-> > > > > Add conditional around REMOTEPROC menu entries, turn REMOTEPROC i=
-nto
-> > > > > configurable boolean, and update all defconfigs and Kconfigs which
-> > > > > previously only selected REMOTEPROC driver to also select REMOTEP=
-ROC
-> > > > > itself.
-> > > > >=20
-> > > > > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> > > > > ---
-> > > > > Cc: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-> > > > > Cc: MD Danish Anwar <danishanwar@ti.com>
-> > > > > Cc: Tom Rini <trini@konsulko.com>
-> > > > > Cc: u-boot@lists.u-boot-project.org
-> > > >=20
-> > > > Unfortunately this misses some handful of at least TI K3 platforms.=
- I
-> > > > think using qconfig.py to confirm which configs have REMOTEPROC set
-> > > > before / after, and that they match would make sorting that part of=
- the
-> > > > problem out easier. Do you have time to do that, or should I pick i=
-t up
-> > > > and do a v2? Thanks.
-> > > I can respin this, but do you know which platforms got missed ?
-> >=20
-> > I lost the list, sorry. It was a number of the r5 builds. Perhaps some
-> > fragment got missed? But qconfig.py -f REMOTEPROC, with a db built with
-> > and without the patch will quickly show which oens it is.
-> I have this in either case:
->=20
-> am6254atl_evm_a53 am6254atl_evm_r5 am62_pocketbeagle2_a53
-> am62_pocketbeagle2_r5 am62ax_evm_a53 am62ax_evm_a53_ethboot am62ax_evm_r5
-> am62ax_evm_r5_ethboot am62dx_evm_a53 am62dx_evm_r5 am62px_evm_a53
-> am62px_evm_a53_ethboot am62px_evm_r5 am62px_evm_r5_ethboot
-> am62x_beagleplay_a53 am62x_beagleplay_r5 am62x_evm_a53 am62x_evm_a53_ethb=
-oot
-> am62x_evm_r5 am62x_evm_r5_ethboot am62x_lpsk_a53 am62x_lpsk_r5 am64x_evm_=
-a53
-> am64x_evm_r5 am65x_evm_a53 am65x_evm_r5 am65x_evm_r5_usbdfu
-> am65x_evm_r5_usbmsc am67a_beagley_ai_a53 am67a_beagley_ai_r5 am68_sk_a72
-> am68_sk_a72_ethboot am68_sk_r5 am68_sk_r5_ethboot am69_sk_a72
-> am69_sk_a72_ethboot am69_sk_r5 am69_sk_r5_ethboot aquila-am69_a72
-> aquila-am69_r5 aquila-imx95 imx8mm_evk imx8mm_evk_fspi imx8mn_ddr4_evk
-> imx8mn_evk imx8mp_evk imx8mq_evk imx93_11x11_evk imx93_9x9_qsb
-> imx93_9x9_qsb_inline_ecc imx93_frdm imx93w_evk imx93w_evk_inline_ecc
-> imx95_15x15_evk imx95_15x15_frdm imx95_19x19_evk imx95_19x19_frdm_pro
-> imx95_a0_19x19_evk imx95_navq iot2050 j7200_evm_r5 j721e_beagleboneai64_a=
-72
-> j721e_beagleboneai64_r5 j721e_evm_a72 j721e_evm_r5 j721e_sk_a72 j721e_sk_=
-r5
-> j721s2_evm_a72 j721s2_evm_r5 j722s_evm_a53 j722s_evm_a53_ethboot
-> j722s_evm_r5 j722s_evm_r5_ethboot j742s2_evm_a72 j742s2_evm_r5
-> j784s4_evm_a72 j784s4_evm_r5 k2g_evm k2g_hs_evm phycore_am62ax_a53
-> phycore_am62ax_r5 phycore_am62ax_r5_ethboot phycore_am62ax_r5_usbdfu
-> phycore_am62x_a53 phycore_am62x_r5 phycore_am62x_r5_ethboot
-> phycore_am62x_r5_usbdfu phycore_am64x_a53 phycore_am64x_r5 phycore_am68x_=
-a72
-> phycore_am68x_r5 r8a779g0_whitehawk r8a779g3_sparrowhawk
-> r8a78000_ironhide_cm33 sandbox64 sandbox64_lwip sandbox sandbox_flattree
-> sandbox_nocmdline sandbox_noinst sandbox_spl sandbox_vpl sc598-som-ezkit-=
-spl
-> sc598-som-ezlite-spl stm32mp15-icore-stm32mp1-ctouch2
-> stm32mp15-icore-stm32mp1-edimm2.2 stm32mp15-microgea-stm32mp1-microdev2-o=
-f7
-> stm32mp15-microgea-stm32mp1-microdev2 stm32mp15-odyssey stm32mp15_basic
-> stm32mp15 stm32mp15_dhcom_basic stm32mp15_dhcom_drc02_basic
-> stm32mp15_dhcom_pdk2_basic stm32mp15_dhcom_picoitx_basic
-> stm32mp15_dhcor_avenger96_basic stm32mp15_dhcor_basic
-> stm32mp15_dhcor_drc_compact_basic stm32mp15_dhcor_testbench_basic
-> stm32mp15_trusted toradex-smarc-imx95 verdin-am62_a53 verdin-am62_r5
-> verdin-am62p_a53 verdin-am62p_r5 verdin-imx95
->=20
-> Do you also have this patch applied?
->=20
-> [PATCH] remoteproc: Make REMOTEPROC_MAX_FW_SIZE depend on REMOTEPROC
+This loop is already handled by patch 1/6 of my series "fs: ext4: check
+on-disk indices before using them" (v2, 28 October, all six patches
+Reviewed-by Simon Glass):
 
-No, because I thought this patch replaced the other patch, sigh, sorry
-for the confusion.
+https://patchwork.ozlabs.org/project/uboot/list/?series=530226
 
---=20
-Tom
+Its ext4fs_check_extent_header() requires the depth to drop by exactly
+one at each level and to be at most 5, as Linux __ext4_ext_check() and
+ext4_find_extent() do, so an index node pointing back at itself, or at
+any node that is not one level below it, is rejected. It also checks
+eh_entries against eh_max and against what fits in the node, since the
+index scan in the same loop otherwise reads past the end of the node.
+Patch 6/6 has a test for your case, test_fs_ext_oob_extent_loop: an
+index node that points at itself.
 
---H3QsAbaVG1wuQltl
-Content-Type: application/pgp-signature; name="signature.asc"
+The two patches change the same lines, so whichever is applied second
+does not apply. With git am -3 they merge without a conflict, but the
+result has two depth variables in the loop and the header check reads
+the inner one before it is set, so they should not both go in.
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCauzf0wAKCRAr4qD1Cr/k
-CgQoAP9YVR03dpfQ9OUhC9Pt/GsFvbGufiinSU7MZsOr8j6ISgD+J+zc0YcuYJRq
-TBg8R3r0Z6ukQkPmwVOwgVhSLnhISA4=
-=43T+
------END PGP SIGNATURE-----
-
---H3QsAbaVG1wuQltl--
+Thanks,
+Ana
