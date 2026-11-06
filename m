@@ -2,152 +2,162 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 429D2606A326
-	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 16:42:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE03D606D807
+	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 16:45:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=wtG2hFmd;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=urEncruj
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=HO2fUdEw;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=i4OxWaiC
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 12D9781551;
-	Fri,  6 Nov 2026 16:42:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8609F8138E;
+	Fri,  6 Nov 2026 16:45:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xWhVO0jfNzwN; Fri,  6 Nov 2026 16:42:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 06C3E8138E
+ id OZ-zS_OPGFvf; Fri,  6 Nov 2026 16:45:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C662D81241
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793983364;
-	b=MwpUnbCF6mmIkcmjhDvx/i20dH8V/IcAJEG1MD7FJiH5E65JfGMvScja6AvqoskPv0OE
-	 0d+fCp3Iy/eECzQWKh1VK1ObuJKQMqNW9MeW5o0PZpUfHzjWx8K822OEmeSLgng/8/X5/
-	 Jnf56umfVCvJrTfxVy9A1EdrKb0KMcGua7u/9XVd1VQz8RqxYxgU1ykylUfKNwuL2jI/n
-	 VooMEZOm6QekoLLVuvbCUJLRnVjP1izYrlzHRMfWcxT0FllyJRSpgugsdrcXet7L/zIXM
-	 NOlONOeRrD9cgR/YzHgdRx9CrNLqgxya8gvmsJwnCaHXO4P8NBa8mNuPrL6/kUu65nA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793983547;
+	b=TAbOzlnADM2sBro0WHkpGoqEHy4UrzNaNgQUupoLcW1e+y4mCE3dLk8ykSSbAsP3DQvz
+	 X1bDPcg+l7cVZWsH1uVJ85uioxJT15UduW0t00ob2uA2U3JN6ultUhoC7/2+BhrUVWuaB
+	 6w7k56hIc+2HfRHlcHzFhw7Bar/wADXH4tRzfImAJIpVxYUEg7b0uicg46c/l0ZnWs/F9
+	 SWmZONr+fAm6AeIYPR76FhMU9DG8jQzso4VIVgP1jn4i8cPrhSKSSLSSR6K8WfSqAyIaB
+	 rC2ujGsITv5l/8sVMqYjY4AZ1TSuMZvVq7RA8Bs+OylpT/XtzpStPlI1jSG/463+VaA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793983364;
+	c=relaxed/relaxed; t=1793983547;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:Content-Language:To:References:From:
-	 In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=iCXvagcMFPMFHqQ4GkarqkM9ISr/W/drXe9Hj/CCfuE=;
-	b=DfnI5HHPEd+IZb7S0McWRaE52myEaYduYqmW+6T1B+52oNhvO/CZSMyOsxc4PgxD/fUW
-	 iO0nYBAlLRg1+40CEnV+SMDq03551cX3wOgIxPsR0Bukz+z5yl/ftkg9ESNDC2y2AkIRc
-	 42obcZ/Fg3PmCvqqfoi73YEfGXAwrB01AlHeUF1hzQe2ZpZWrfgjVNPTDeNck9MGfg27W
-	 D3KpmlUFwNKeVhNUvu6PPrnvUKpyfwzH+mmdS2wJyvz53dVl9a42ZEqMXyr1LRD7Z4uJg
-	 x6+NhPgc7jrIvoNAhY0yk/P/YgAW4jb53X92iFzg5BB/7lOaNfQYPeV6IMqERld2dNA==
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:Message-ID:Date:MIME-Version:User-Agent:Subject:
+	 Content-Language:To:Cc:References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=h1tDUy2b0yxerIshXh/vX9x6oYuy01J6BgQHVw8z330=;
+	b=qZrKm8Cu2FAwwRotXXc3n7IGNZWyN0yH1sX+M31bxciJOhcnVpMisyAsgeF16JHWZYgJ
+	 Y3JXPH6x3SeuJOqYPSVHOLdnJ4MI1Pw/v9TrnSL/m0by0TNDbGcDQ8AK9sRdj6pk1VAPi
+	 2LI2on+o30z90nS1PWPcStLrPljVcNAIE6qLTL4OzyJv/9pmpYrx2SPBOSkMfFgxsNM6l
+	 WrteCsFSbmC7p332TonXQlpjDc4gulzWED13BLgW4z/Rq8XPpe6kjTwaMcgm0koP817+z
+	 H97paMBtzaJx36OLVtzHxxkNEeSk0QWWT4KBWz0e9LOjtJzKxUnfJCjcFIdTEl9vaOQ==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	dmarc=pass header.from=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=i4OxWaiC;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793983364;
-	bh=iCXvagcMFPMFHqQ4GkarqkM9ISr/W/drXe9Hj/CCfuE=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793983546;
+	bh=h1tDUy2b0yxerIshXh/vX9x6oYuy01J6BgQHVw8z330=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=wtG2hFmdAspn5eC/9KFjVu4LcV3XLSv4igMbGgNlwJKACfogPCA0G2kPs1VXeMD+F
-	 T6XwnNKWln7pUHxBpLEs82V814uwsx/o4NpE5kHrwi5fs2KYdE4FgqMPRLiyJ/JfB7
-	 o8lcqL5HdrjrHW5xVoP73ZPieXTUc2FUiLkHWGuGac3qducI1I5PkOy8tOHy76P9nU
-	 +mWGAVDxkEDM+EqTCALq0CAuOC6NRWwl1CLW5ezR1gzeEw6uwFQerDJ5CSG/s8VUrp
-	 qfy9tlNOpNp20FbQgx6LF88oQSago3CK7OaYGrANXso490Tf9EtOAhpDYf5qRDcS7Z
-	 4zabsGXhsqWJw==
+	b=HO2fUdEwziTHAJgqPDKsUadShXiLpQgSUFdsS9f2/lOG08TDYZpXcCTlhMSoETMT8
+	 UuGU2/SYp/xY8VKWff+YGxD7AYM9FkQr1Uzp3yGV3k/kwNdnuPng1H05g3g7Q24N03
+	 dfEK7pqXRTzqQHPovOSfyyiEoLWsEKTkPS+VAm/1QXIFX8gRlKYlAXvxLwevCQvIYd
+	 1bhtW52yuw7pp2/5VGp2vzH8vPEAbbPIeH6YBFy1tZ4639FI0gr58SHS9ieP5cARKc
+	 NdVN6iVFZBeVMaxntATHt9VoMBuUitydV7RkL7dEG+ShrHyOSZvmo35ywIRiPei+eO
+	 gionByNDEL7Iw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 06C3E8138E;
-	Fri,  6 Nov 2026 16:42:44 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 5ADD931F
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 16:42:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C662D81241;
+	Fri,  6 Nov 2026 16:45:46 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id DE57F4B8
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 16:45:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 412576073B
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 16:42:43 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id D03B481771
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 16:45:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LLgZdNyL5wqV for <u-boot@lists.u-boot-project.org>;
- Fri,  6 Nov 2026 16:42:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E0596606BB
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:30::b"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:30::b;
- helo=mail-wr2-x0b.google.com; envelope-from=casey.connolly@linaro.org;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kDI7dilLra4R for <u-boot@lists.u-boot-project.org>;
+ Fri,  6 Nov 2026 16:45:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C5D1981241
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::435"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::435; helo=mail-wr1-x435.google.com;
+ envelope-from=casey.connolly@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=urEncruj
-Received: from mail-wr2-x0b.google.com (mail-wr2-x0b.google.com
- [IPv6:2a00:1450:4864:30::b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E0596606BB
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 16:42:41 +0000 (UTC)
-Received: by mail-wr2-x0b.google.com with SMTP id
- ffacd0b85a97d-48df160d369so245929f8f.0
- for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 08:42:41 -0800 (PST)
+ header.s=google header.b=i4OxWaiC
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id C5D1981241
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 16:45:43 +0000 (UTC)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-490585eddfcso585460f8f.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 08:45:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793983359; x=1794588159;
+ d=linaro.org; s=google; t=1793983541; x=1794588341;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:from:references
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=iCXvagcMFPMFHqQ4GkarqkM9ISr/W/drXe9Hj/CCfuE=;
- b=urEncrujdUX9qy4g3mEp4pUS+TnAGwV6d/L5BpS4jlLmxj3DPkIvsGdU/ts6vMl8ed
- UUlTydIpyi1CV0H94DFt4fzzH3L6SRpFxvCqZrBFYAs2pz030B3ReKuG3Lg8rHSEvl2a
- gY403szc+DsmPjvGs0ussKqVfpxkbcB8utH+CsZx/tjw/RAe80OmswOKgXs10wsaJBa9
- Qorb1NK6/Um4KVR8FjDq2MJ8z342AY0+X33AWNjeftBtmOE+aPY5GK/vU4fmWAhv9WQG
- Uctp4iuISW3h4SDgnkEnQL87daV9YDA8mulUZqDsYC+L5SH9lu3DoxySSDLRsMt5XxAA
- APLQ==
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=h1tDUy2b0yxerIshXh/vX9x6oYuy01J6BgQHVw8z330=;
+ b=i4OxWaiCRBt+eGkFpICsDp1QpMvwpBIdLGYkHtM+XpYx/irfVFQioMWOkDs24/X0jz
+ oXBWsV84hU0hVxoCUWL4kANwqvB9fX4YkpQiEzWObRjhYUaaEJytNEcZvXXgUO7GH7g8
+ h3+EGB8/akFlYn4HPvPIkdMnggkcL9E+tWr6XHJsk0dG2MFju5tI0NrH4prAhNdrQVwI
+ 2fQ9+Gy5SlIqu7/B42AbrgH5tN4d8zCBgDwIUmaXFvJ7DvGG6ZG5h4iWI1F7G93HQeLo
+ 2fsdMsWfwbWX6MvEJnLcXWqeO9MiE0NddKCwcfl2YEzCqJ7rYkglG2rj9n+tuOfvYiv3
+ msaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793983359; x=1794588159;
+ d=1e100.net; s=20260707; t=1793983541; x=1794588341;
  h=content-transfer-encoding:content-type:in-reply-to:from:references
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=iCXvagcMFPMFHqQ4GkarqkM9ISr/W/drXe9Hj/CCfuE=;
- b=1BfSoM3WHKXzrcOcWGOaNC3CL25wvHNJ/UzXiK52hYNjyknuS+zCmNRcBcLJJazeM5
- 9FzOPR9DakcTQRrSU2X6OlTYT1r0S1CvPkQarbtk3HI3hM+fDc4tmYcQ2eJFhFFnNYCf
- XlJP9MkuQCrKxdkUp3BfEQ/4pUTo+wKDcyDmIFhmaFdzquqPZ9KZm0PRBm+nYNXzff5f
- m1Z+/hj6+krE76WtZYSydI3yjqjpBVixinCT+eCIin5oBg+YeHJyweSm8yXYl63fedj+
- 1exH4jKuKHbm28RVYJyMbK0vfD5p0y+xWqZYO4AEDUcv1FFeDKJW5lXXOz5AaTW3mT9B
- TUYg==
-X-Forwarded-Encrypted: i=1;
- AL+hErHga7xD0OvmlxMp6dBVMe0N1qW2/yGdTvArruirVnKZXBCiOrFaWHOvDUb5vBlLM9Axj7yrJ8s=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9deYeNwdL0OMyB4MpSpsnwrhDjqJsQasEIf4tZ/hVg2qE5cOHD
- Xt9yaPjenpyobEhML5T9T5DeSwPMe4zwEV+1BCYXm4iRUqyRuhRvCCMbpOp7apt3tq0=
-X-Gm-Gg: AYBFou2bPgoOPoiyJ9JuExWaKcjeebzmb5abaJ0jusG34jsKqT5lfe1KT3XsBbVbptF
- VL4bpAM66UWEphE5hv1ZOHV4w9KTSAwoh6r+Q2BPlankP9oty/IssmmoJsvq5r/NJNUwFGcswEu
- 80YKFDd3W1vzF/P2m9rTmlCY0L4GzNJIxFamDqtpDOTWYUx3HeHlnsPrGaYVACKAmxtj7aYx+oG
- xuumu6X3vqtpu8ACsyZl1MAxGgHNvCzXpAcM41aQAc/BM4+Jj4wwzeHl7QbU7JWuX3nGt/3bxuC
- 4dh5jfs5gZYsX1miWlprzN4NTGeq+Wz+CFzOMWvtxi6TS75MDy/xgMzM32dCsBFWKgZvHg+xd2j
- 9A9nU7IJDhDSRCBPkk9X4f194PlvoRdhIxRfewUyazlbaokMElbRc9eKCxpkkbzzNurtzUzrwDG
- GnL1Tn3H0++MApiqMkUkrtbEHsTowH0VZ9S+Vm5TyPczzLE6+I/L7jEoALKPYA3Y/PUh+3sFqyt
- dI/1B50ZBJBnAhiBJ3Lrzj9lpqZktOehXb543mrM/AxNsfPOuq+dNgNALyhvThoElRNLpRhoSzf
- B++P7WkbqWupro88hWFChP6o7/B78mxFOEqOMJYIpUogGH/wdD2bgirIXDKYGvDZkkzT
-X-Received: by 2002:a05:6000:310a:b0:48e:5444:a1d3 with SMTP id
- ffacd0b85a97d-4927e553b25mr5191301f8f.11.1793983359362; 
- Fri, 06 Nov 2026 08:42:39 -0800 (PST)
+ :cc:to:content-language:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=h1tDUy2b0yxerIshXh/vX9x6oYuy01J6BgQHVw8z330=;
+ b=pHGfD+5iIv8A0cH5DaskbIlpCfBQZna9FEq6A7dnmQF+5gD5gT3E39APDnxXF7vn8j
+ 2xM+1+qt+DrMnGv3waCmB3VIK8dX9U8GsU043Vk0u/AG8tjNPICSgvxQvbY92ulMIJvn
+ +3lDFuEqkF/UFKNWDI61WP11kwzNVUStPmsQB+mYHu509h+5rzIAhu8LbEZrvjXxitw8
+ JH0pE0cXy+xWffrut1g4XkNyMIQvmp/NoM1SJPUQ6FigI0mDUbVetZ/OPBoR1nXC1UxR
+ MJ/TMatZbiFYq3fHbDcVMUZ99MutAio+hMZVlrTTGr2vThbtJx3HlYB3y650NxpbxvPZ
+ XTig==
+X-Gm-Message-State: APuU4Z+O/+p4rccevMNb8yWIAU9aeMirlLB9/tjaVUE0BaJomTy4zOoo
+ 9R7jOkcKRsOnVlL3OiEf5B+XOR6OE4t3eYpqsXGXDPatv6niqj/njEZZ6vmB70Z2Vnk=
+X-Gm-Gg: AYBFou2aQN45rOz5iO3OigAPwPAc0meZaZ81KZ3L7iOaY8SgxrR0pNBYkYtI9kUJrYq
+ ff0WTnqua3VOtk1pikbvxRiAEMUwymXMQ/jzhOk1lCtGBef+0MfLVE12LiJg1JwNwPRLWNpGkaC
+ pkJ4/3+5Pa5Ycomo1mBDLMKbEVzHj/7NRuBGho2urK7g4o5bA70IyQOuvKgetryo08iBrR4I4TX
+ u4f0cXKlqDL6WoSAF2umgOaufOgS2IUNOtqbOvzPj2rY+sPr9N+tHVRg7qb7ZJ0yGaH1vLb8YDv
+ KnkSrgPV9itCVIje+Cgy5H/utrf21N0NfirYPM9EYDR47E4LBaKhqLCBIvdRefV+S4UlA+OtwAq
+ pnuCQ/IKIZ7Ui10N4MFZK7nGlkZaUdUFr6TeL3EWtMgIgvBWZRirSeBVWDKLzQlQ3vOKraAZ9ZH
+ dKH9DVzdJYjTQzbyFNs2Bmbf+6saKNaUcsngVucXvkwc0qQwy7HWAVk1wDVRFZ/8X4jRrmUmMuz
+ EH3Cy4GiQmb6ytbb6MkyGMZAUCgV2m4hhuoFKBN88y5RykWEh7v1EFncU2FPME+ufRwH8UDvtap
+ XQzToUJu6oHLAdHeIqRhP+2xAqrEw2jqw5IL+aEaZNh061XSC68xotJBwixdkw6zP8RE
+X-Received: by 2002:a05:6000:24c8:b0:492:3982:a80c with SMTP id
+ ffacd0b85a97d-493aa4fbc64mr1583660f8f.29.1793983540692; 
+ Fri, 06 Nov 2026 08:45:40 -0800 (PST)
 Received: from [192.168.1.37] (p5b29ebc8.dip0.t-ipconnect.de. [91.41.235.200])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-492d7bcfcbfsm4624763f8f.43.2026.11.06.08.42.38
+ ffacd0b85a97d-492d6d63accsm4828689f8f.17.2026.11.06.08.45.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 06 Nov 2026 08:42:38 -0800 (PST)
-Message-ID: <7600fb5d-d245-438b-8e26-4a1261c47acd@linaro.org>
-Date: Fri, 6 Nov 2026 17:42:37 +0100
+ Fri, 06 Nov 2026 08:45:39 -0800 (PST)
+Message-ID: <fbc41e04-88de-4ac7-8267-dba976929fff@linaro.org>
+Date: Fri, 6 Nov 2026 17:45:38 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mach-snapdragon: skip reserved-memory regions outside
- DRAM
+Subject: Re: [PATCH v9 2/8] arm: snapdragon: Guard PSCI functions with
+ CONFIG_ARM_SMCCC
 Content-Language: en-US
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, trini@konsulko.com,
- ilias.apalodimas@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, Michael.Srba@seznam.cz, u-boot-qcom@groups.io,
- u-boot@lists.u-boot-project.org
-References: <20261105171752.2344459-1-aswin.murugan@oss.qualcomm.com>
+To: Tom Rini <trini@konsulko.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>,
+ u-boot-qcom@groups.io, Rayagonda Kokatanur
+ <rayagonda.kokatanur@broadcom.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Johan Jonker
+ <jbx6244@gmail.com>, Tien Fong Chee <tien.fong.chee@altera.com>,
+ Michael Srba <Michael.Srba@seznam.cz>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Simon Glass <sjg@chromium.org>, Hongyang Zhao <hongyang.zhao@thundersoft.com>
+References: <20261021-snagboot-v9-0-18ce3e431320@oss.qualcomm.com>
+ <20261021-snagboot-v9-2-18ce3e431320@oss.qualcomm.com>
+ <20261021173537.GA3275858@bill-the-cat>
 From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20261105171752.2344459-1-aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20261021173537.GA3275858@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -167,123 +177,73 @@ X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Aswin,
 
-On 05/11/2026 18:17, Aswin Murugan wrote:
-> configure_reserved_memory() updates PTE attributes for every
-> reserved-memory node, but regions located in inter-bank gaps were
-> never mapped by build_mem_map(). Attempting to update such regions
-> causes find_pte()/split_block() to fail.
+
+On 21/10/2026 19:35, Tom Rini wrote:
+> On Wed, Oct 21, 2026 at 09:48:21PM +0530, Balaji Selvanathan wrote:
 > 
-> Add region_in_dram() and skip reserved-memory regions that are not
-> fully contained within a populated gd->dram[] bank before modifying
-> PTE attributes. This preserves unmapped DRAM gaps and avoids MMU
-> setup failures.
-
-this still sounds like a bug in the MMU code to me. Does this diff fix
-it? Not sure if the second hunk is needed
-
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 1c1e33bec24f..7b717413c297 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -891,8 +891,13 @@ static u64 set_one_region(u64 start, u64 size, u64
-attrs, bool flag, int level)
- 	int levelshift = level2shift(level);
- 	u64 levelsize = 1ULL << levelshift;
- 	u64 *pte = find_pte(start, level);
-
-+	/* Don't panic when unmapping a page which isn't mapped */
-+	if (pte_type(pte) == PTE_TYPE_FAULT && attrs == PTE_TYPE_FAULT &&
-+	    size < levelsize)
-+		return size;
-+
- 	/* Can we can just modify the current level block PTE? */
- 	if (is_aligned(start, size, levelsize)) {
- 		if (flag) {
- 			*pte &= ~PMD_ATTRMASK;
-@@ -1033,8 +1038,12 @@ void mmu_change_region_attr(phys_addr_t addr,
-size_t siz, u64 attrs)
- 	flush_dcache_range(gd->arch.tlb_addr,
- 			   gd->arch.tlb_addr + gd->arch.tlb_size);
- 	__asm_invalidate_tlb_all();
-
-+	/* If we were unmapping a region then we have nothing to make and can
-return. */
-+	if (attrs == PTE_TYPE_FAULT)
-+		return;
-+
- 	mmu_change_region_attr_nobreak(addr, siz, attrs);
- }
-
- int pgprot_set_attrs(phys_addr_t addr, size_t size, enum pgprot_attrs perm)
-
-
+>> In snagboot mode, U-Boot is loaded directly by XBL without PSCI
+>> firmware support. The functions show_psci_version() and
+>> qcom_psci_fixup() call arm_smccc_smc() which is unavailable when
+>> CONFIG_ARM_SMCCC is disabled, causing build failures.
+>>
+>> Hence, added CONFIG_ARM_SMCCC guards to both functions.
+>>
+>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+>> ---
+>> Changes in v7:
+>> - No changes
+>>
+>> Changes in v5:
+>> - No changes
+>>
+>> Changes in v4:
+>> - No changes
+>>
+>> Changes in v3:
+>> - Added CONFIG_ARM_SMCCC guards
+>>
+>> Changes in v2:
+>> - Newly introduced in v2
+>> ---
+>>  arch/arm/mach-snapdragon/board.c | 6 ++++++
+>>  1 file changed, 6 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+>> index 87adb100edd..daee2ed4fa0 100644
+>> --- a/arch/arm/mach-snapdragon/board.c
+>> +++ b/arch/arm/mach-snapdragon/board.c
+>> @@ -35,6 +35,9 @@ static void show_psci_version(void)
+>>  {
+>>  	struct arm_smccc_res res;
+>>  
+>> +	if (!IS_ENABLED(CONFIG_ARM_SMCCC))
+>> +		return;
+>> +
+>>  	arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
+>>  
+>>  	/* Some older SoCs like MSM8916 don't always support PSCI */
+>> @@ -58,6 +61,9 @@ static void qcom_psci_fixup(void *fdt)
+>>  	int offset, ret;
+>>  	struct arm_smccc_res res;
+>>  
+>> +	if (!IS_ENABLED(CONFIG_ARM_SMCCC))
+>> +		return;
+>> +
+>>  	arm_smccc_smc(ARM_PSCI_0_2_FN_PSCI_VERSION, 0, 0, 0, 0, 0, 0, 0, &res);
+>>  
+>>  	if ((int)res.a0 != PSCI_RET_NOT_SUPPORTED)
+>>
 > 
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> ---
-> Changes in v2:
-> 
-> - Drop the previous approach of mapping inter-bank DRAM gaps as
->   MT_DEVICE_NGNRNE regions to avoid reserved-memory MMU failures.
-> - Fix configure_reserved_memory() by validating reserved-memory
->   regions against DRAM banks and skipping regions outside DRAM.
-> 
-> Link to v1: https://lore.kernel.org/u-boot/20260917091932.4150797-1-aswin.murugan@oss.qualcomm.com/
-> ---
->  arch/arm/mach-snapdragon/mem_map.c | 32 ++++++++++++++++++++++++++++++
->  1 file changed, 32 insertions(+)
-> 
-> diff --git a/arch/arm/mach-snapdragon/mem_map.c b/arch/arm/mach-snapdragon/mem_map.c
-> index f3d2308b4bb..7a7e0c0160c 100644
-> --- a/arch/arm/mach-snapdragon/mem_map.c
-> +++ b/arch/arm/mach-snapdragon/mem_map.c
-> @@ -83,6 +83,25 @@ static int fdt_cmp_res(const void *v1, const void *v2)
->  	return res1->start - res2->start;
->  }
->  
-> +/*
-> + * Returns true if [start, start+size) is fully contained within a single
-> + * populated DRAM bank. Reserved-memory regions outside any real bank were
-> + * never mapped by build_mem_map() and have no PTE for
-> + * mmu_change_region_attr_nobreak() to rewrite.
-> + */
-> +static bool region_in_dram(phys_addr_t start, phys_addr_t size)
-> +{
-> +	int bank;
-> +
-> +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS && gd->dram[bank].size; bank++) {
-> +		if (start >= gd->dram[bank].start &&
-> +		    start + size <= gd->dram[bank].start + gd->dram[bank].size)
-> +			return true;
-> +	}
-> +
-> +	return false;
-> +}
-> +
->  #define N_RESERVED_REGIONS 64
->  
->  /* Map and unmap reserved memory regions as appropriate.
-> @@ -140,6 +159,19 @@ static void configure_reserved_memory(void)
->  			 */
->  			res[i].start = fdt32_to_cpu(ptr[1]);
->  			res[i].size = fdt32_to_cpu(ptr[3]);
-> +
-> +			/*
-> +			 * Skip regions not backed by real DRAM (e.g. in an
-> +			 * inter-bank gap). These addresses don't physically
-> +			 * exist and were correctly left unmapped; updating
-> +			 * their attributes would panic in find_pte()/split_block().
-> +			 */
-> +			if (!region_in_dram(res[i].start, res[i].size)) {
-> +				log_debug("Skipping reserved region 0x%llx-0x%llx: no backing DRAM\n",
-> +					  (u64)res[i].start, (u64)(res[i].start + res[i].size));
-> +				continue;
-> +			}
-> +
->  			res[i].attrs = attrs;
->  			i++;
->  		}
+> Do we even need this, patch 1 of the series disables SYSRESET_PSCI when
+> you're doing this special snagboot mode so we shouldn't be calling
+> show_psci_version at all.
+
+Somehow this show_psci_version() function has managed to stick around
+mach-snapdragon since before I took over, I'm not sure why it's here, it
+can certainly be dropped.
+
+The second hunk unfortunately seems necessary still.>
 
 -- 
 // Casey (she/her)
