@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D04D606A326
-	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 17:49:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F64E606A32F
+	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 17:52:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ZObid3um;
-	dkim=pass (2048-bit key, unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=xOasG4R7
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=OPyM3EG7;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Ch48zCOs
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id F2DA54093B;
-	Fri,  6 Nov 2026 17:49:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9FCDC81330;
+	Fri,  6 Nov 2026 17:52:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nKSYYaMXwNsR; Fri,  6 Nov 2026 17:49:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E47F040940
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793987346;
-	b=QZ5/KEsaXZYNRSREt6dvv+ZSiyCexlqfK9bPTkE4bheLzTGl8cjeYUXjet36SDTccngb
-	 xSByL94QexVVSwV7Vy2hazl8/mm4jQWo5ANgaysJ5yXCYYGU5X+WOXHWT34r/f3bvKZI4
-	 IIPuGpuK4L7kQO2+2Yaj9pHs52eV4OaLrmSwwcdGWUQpVNVdMuGgOVj3Z006hAS2gMbuy
-	 PpdtzW79Qf+5T9S+RZRe+JYsoWHmM8OVtu0EmAmVg0Hf5BinjphtVyxpB7jDMIMZlhVMQ
-	 VOzxlcl1I2d3XRE9xBVteRFWZVPBqssts/zojyitbSo6lSnofCywIxtIHmdyrYg0OQA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Fs3l4CzqbiYH; Fri,  6 Nov 2026 17:52:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org AFC3E8132B
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793987577;
+	b=puWOBWgP4lxYAMvXfw+5F9O1HzM2GCe7PLhl3A3zW7/Kwxki+/esHmK+UmIdEKQ2Doer
+	 rADB/WFMNkoAj3bkuRz+COQz25LFvheMXBrqM+koR70XRRq+G4PwGPWYOQhCeN1kkLvie
+	 6Xq8Kf7s0bRIljRtfUKifBtpdtO1NdAOKhA/H6bb8dfA2CX5yxxH9r+pGq3H8rcoaXL/N
+	 gqzcn2XD93OIcl+iabW+ozjGPBMZ9GJyeY9YbwSZplc+Yc5CAExW/exwFBV9tjfouH5LV
+	 7THiMhfBI+MpEBsCpfoPov81nYCajNT2D1qFtKlDSnVu215ILJc7FxoOUf3ue9nCZQw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793987346;
+	c=relaxed/relaxed; t=1793987577;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,131 +33,131 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=UU1v28J/IDSu43XmN2rySupdtH63MX5/ANn+fxB8Xg8=;
-	b=IRdDYMvzWF/TK2aa3BdisyuKjrgPaeS1lJ2fPt7R8cJ08sl6dASWwLlEVl+8gggHYKl5
-	 Q23CjFhWsz17U8tQpqjqhH3UdpTFMgZVXiPMImi9781hI9v6Z+0JY7RM57p9izdsZ97qH
-	 R9et/LLYrHRIuRa8kofcv0znNQyjx6VOOblT5481s/WaS77bF5brGskC+KaI2B9GY/3De
-	 ljAmUf1MzsDGnSOj3327nv3rqcSC+8RfK5xqyvPF6V63W7Wkmx6tJi+PHRVt+1s57kY9U
-	 jZ3DMObe+U0d87pYdJa5WFX1X8wYvnTeWXxgAnwln//v34Sa1dTUsuf1+44KSvHNuUg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=1a2cnt/SLjGKEkm/YaplY1YcbtGsiLZ+z4mm0cgH0Qo=;
+	b=ro0NO2tLLz5f1w0TqO4QpsF0tVZcPkGoq+JWyxedNpnDTh1Ksd5TWtIKup9qcGtOlSzx
+	 y69IaymYlBS2IrzsXAmKfg1GmfbVz0HiUHs4UPgDYkMd4rJ/f+2LgGHAV5avkVu9Hekma
+	 jkOkqP+v/N0UIH7+d3ZlzeaaTsSiyAAOgkGP//pQav4ENiZB/gbPKHYrf9WWeUuAeq0LS
+	 0THaqbR2aszAPD+IxkZRjyKPbS//YFE23ZKKDxN22Tpd5MJZJdKlzYctBckcncrInaDeH
+	 KIckEBt4BxYoY13jzUiyFBxJk69IrEsARZEGnKXluJSrv2rNHh7zYRC+cG1g9Mh6LbA==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793987346;
-	bh=UU1v28J/IDSu43XmN2rySupdtH63MX5/ANn+fxB8Xg8=;
+	d=lists.u-boot-project.org; s=default; t=1793987577;
+	bh=1a2cnt/SLjGKEkm/YaplY1YcbtGsiLZ+z4mm0cgH0Qo=;
 	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=ZObid3umBvHIT/MUrZr4z3q+eOpMxKgl+Sxk/D/q+lD+JRJQFp00JJ410GmPrUtmF
-	 y3XcG+5YofhSCwFXbaqoJkkaX1sDQ1Ck9wUtpW3PyND0xNnchDXypmDu2GoxmjpthJ
-	 TG+s18txVD7WiDgbu9O+6BWQqRxaKT0fSLf8+QbRRz5fOWK5/uGSAhb/uR1X66tHda
-	 AlaDWryWyjS2D+CeCE7O9fNBmpESd/FThnJ3N4o5fiK+I14IoOyPnsR05V3rVcicDu
-	 kYB/7QK2cloV/+YZwu/0GBPKLfP/TyMhdIGgHFLBfy63WCkkVIGwiljO8ajBi0axxA
-	 oHQ5tf2T2cTgw==
+	b=OPyM3EG7s7Y5PluF1C1pANVjnWPEy3gL7H/rjPljT6EsiI1TEsk5ySINoijZLkLk3
+	 0smwWdk6P/yMlfPfv1aCLQxnuep8lRhKFxCxVFkzNolFIHVMSE55bRxdNtQvfKN6tv
+	 sj2nIbqqUUftepMFJbXdCwX/GcVcSZiGhOp+4MLe67trXHYs1fWtzOTZiDITl87Epp
+	 YdgUZ2WGip6lizv3zgZXKh7wkyveH7D+Ijck1CDFsISaVjLHYs6iUmoSHzlCKc+KOd
+	 FQDHq281MhZnnkapm9Samxg2HsRfqBbvVBDBARWAGwj+lcgZ1aPjRaIyDzIt2CPIcU
+	 hXiYhyN9L+7Tw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E47F040940;
-	Fri,  6 Nov 2026 17:49:05 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 9EE052E5
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 17:49:04 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AFC3E8132B;
+	Fri,  6 Nov 2026 17:52:57 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7069734D
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 17:52:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9BFDB403D5
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 17:49:04 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 55D7740956
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 17:52:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7ylmfj2JHNbw for <u-boot@lists.u-boot-project.org>;
- Fri,  6 Nov 2026 17:49:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 49D93401EC
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::336"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Pdj2Exho7Qb8 for <u-boot@lists.u-boot-project.org>;
+ Fri,  6 Nov 2026 17:52:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D405A40944
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::735"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::336; helo=mail-wm1-x336.google.com;
- envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
- header.s=google header.b=xOasG4R7
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 49D93401EC
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 17:49:02 +0000 (UTC)
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4a5036bbac7so5959275e9.3
- for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 09:49:02 -0800 (PST)
+ client-ip=2607:f8b0:4864:20::735; helo=mail-qk1-x735.google.com;
+ envelope-from=ralph.siemsen@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=Ch48zCOs
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id D405A40944
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 17:52:54 +0000 (UTC)
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-93cb9e9405fso53826685a.2
+ for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 09:52:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1793987341; x=1794592141;
+ d=linaro.org; s=google; t=1793987573; x=1794592373;
  darn=lists.u-boot-project.org; 
  h=cc:to:message-id:content-transfer-encoding:content-type
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=UU1v28J/IDSu43XmN2rySupdtH63MX5/ANn+fxB8Xg8=;
- b=xOasG4R7HdS4MibVRalnhy7HISAnClQ6W/DD9ZmP/tdQznnnuj1mmlG6zIDlz3v2FF
- jD7gM9BegQpsFNK0nYKzxhGRX/AaPfvk2Q5fd5tELBF4bGugYDVPusp5vbTs5kcddNZK
- Szm8lBDPw+utCcyFAxZ+HwXAZBDqhkDk+c5h2jbQH5AJPr3xfguwI46kob0+MzLuDqPC
- XKw7+qXuir3DVmC7vF2FWVgfFmjv5Vq9J/oB/4o7e0/VN4mnoLhqaAL4AefaAWReQMDT
- e0iphbb3W9BU3oQU0H6cNRlXECjk9IdRMMUPFDRlCLrEGEnbZ2VZYQWHS4lHqrVm19Dk
- htpw==
+ bh=1a2cnt/SLjGKEkm/YaplY1YcbtGsiLZ+z4mm0cgH0Qo=;
+ b=Ch48zCOsabgIIa3i5pe/moVnHezBvFwR0Uwc3CqkxybAq1SVVmsans86TN/VAAAFZD
+ myERYW1ezdB9uwoO48ER4luCm+VY74VOgVWj0OWlE1YEuEpQp88JG1ggJom+achayn+Y
+ 7WDrVvQO6BKfzZVDuekKVUHgtNJh5ODG7/rZzMXv+wiCSX1lFZ7TYRBXbFlM5fjwV7EO
+ 4QSlz8hRfSXjYj+0r4iXTmsxcMTNudm+PtqWF2AJf8f2v9YlDTExxsBqW7tEoeWswCym
+ gVWeLfClNtMYHqGohoVhmG8VSmRcJIMYsi6slCon/iFWOLR8hxOUM2eEPyRMnd9hzH6x
+ ndSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793987341; x=1794592141;
+ d=1e100.net; s=20260707; t=1793987573; x=1794592373;
  h=cc:to:message-id:content-transfer-encoding:content-type
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=UU1v28J/IDSu43XmN2rySupdtH63MX5/ANn+fxB8Xg8=;
- b=UNYTxJWzz590ektHPjyZCcGjlMz3Zxa3m6Im0FTUuYkors/Hz8R8Lskhx+DomZJO8v
- OOHM3378H80PwYA3F7twgB+T2yGDosiFEXDaVizui2gwex2fOvffWUjbuMtXLXvP5FjN
- s1fkj0o8XwRm2DDz3qIqBodrgChfKDELM+5wS51n14V8J1V++KBdO4mzBlQ638/g75Kv
- CTQ94KFHQlTOPIxBW/YRAtARLIvI/SnNUxCDRfeukjnHz6xhUlvejGjuRktYW31ONsDc
- MavHlLWbZ1Ney4s4iaCIKnyKx6VZ4yc1SwmByRiK0wi98/TmFNUW93amaYUtrY3I9mxw
- 6Kgg==
-X-Gm-Message-State: APuU4Z8fpVWf6ZZzX9Lf8EZls5OzWDyaVuDqgtVRJ5V3UxmZjXQRmfWh
- TvG9NKTvALYZhbD1O/AZuLSVVi5PVr5R4H4NlfXdevyJUXWgvlF0Zg81n9yPwRGKaOljES4Qe6q
- nxVLJUTOWdg==
-X-Gm-Gg: AYBFou0yGE0cr03DtPzi0SS+NcSexlc993At+UBt4kt2E646AFEE/6M8xuxiRdKaGq2
- x2qy6W/EXCR3Yz0OM8VymKLRVn+PdGtJOJl2aIfH1HuDjmhOuxz2ZIMae83jfJtpWReo8om2qAR
- 5eYKOOXF/uUzlz5KhGXe9p0/W92w/VErYF5w8BJQbb0pFhvd0LV/eQjlaKBLK1lbUyBjYYnCjSE
- iseZNzeboW4+Y14kX7ycqKkcjokGOTrhIunYSt/VpEEaxy7tJiBx3ukoYMHWN4E5dkmJu7NjbNN
- nkKA8mrJj6sWm+7AtDfs4qJD96X8ieKTkfH0thdl1v2j8lGJGbq49HaE64kB+e9Rze0CND688Nl
- gj/L2wAix8vrZRaXfnj/SbgvnWPkH+kHSzA5fwpQu2WfGi1NoqtV1g1a251AWI1XvP6Xmz4WUEw
- X2If8VEKM6dBh+slSOo3XeWlvWeOC31vt451yMFNKJjuyYf9EeiOSnnp5NKjBk/ToAhuVZBsLc6
- 5G4AEXsbrVPoSIHYLv3VoW7v56t4k66LMVasDEa0GZqYSoBwGYAbBMzr2cdN6uQUSAySTrf4YMI
- J8dUaNLfh8jpJgz6DDoV1rapBGmxJJmlnlNuJKP+BEjOe1kZYVZsG16fUJdOUdIIQrxPa7oMWWV
- jDZYQOLhDpw==
-X-Received: by 2002:a05:600c:3ba0:b0:4a7:a5db:a93e with SMTP id
- 5b1f17b1804b1-4b6db1c5f48mr64344855e9.4.1793987340936; 
- Fri, 06 Nov 2026 09:49:00 -0800 (PST)
-Received: from alchark-surface.localdomain (bba-86-98-194-229.alshamil.net.ae.
- [86.98.194.229]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b5725061e1sm169119935e9.7.2026.11.06.09.48.59
+ bh=1a2cnt/SLjGKEkm/YaplY1YcbtGsiLZ+z4mm0cgH0Qo=;
+ b=FZJ2xI6kTE7wYf5mq0R5BfFSCy6X/sY2t2JMmJzGiMsdWjeHCzR3QayWfeHKr9zi+s
+ j6Jy3w5+TCg2deH1OHW6gGrQ/xPGrJT0Si+QvFfbSRBuxgkHYornUNk+rQmlcK83G2vF
+ Zf7lwbs7keUbDn1Ivb6UKwaL2Wg1qvsIXzjcSQ8kA+sdPfFqpqF5vHGhfOOC6HqBxfzH
+ Y2rd4yPLsDuyGt29Ij4r+IBuY7HFLzc36mH8SttRVZOZH8jlBJdpEpgwBG+JqAXR9gjQ
+ 0G1MT4sSJDVyrbbnGKSNdxp/+9FB2lAb3V5abVR2RZmgyct/ago8ToYyhDhcdfT5c5fS
+ TIcg==
+X-Gm-Message-State: APuU4Z//yOtF4kchrvhi41gzTfLwKe56Wnmt0w9SoAgc8gmlYxnHiCHO
+ 8a43tK+3RghFmmo0B0vWAU+jGCrErXFCzC+kYDe2o+QIDbUyNJjvCKQruj0W/mPdrYE=
+X-Gm-Gg: AYBFou0kt3Vn4+T4syiba4WRjRjqsMLxtEnNRJmpZ1dvb8gf4z6kPrr8nJuLKYW6Srj
+ p4ffp4/oy32s55cx2BHcq2NfoG3p2wQJjCDKCxsu13z8ACJR5UQoaWvpRdHgcHHgDXX5bbSLd5k
+ pj0REnA5nUlGlQ/04ZgBNemXqxhsQ80Ln9baAG15j/9EMbh4gqWtqUdx804COiFml/ziWOf9/PT
+ xxFqNR40PT+7/b5BKCejEhqfPPEBaT6Twl+cBJCYWZ514dnPTg4a1rOKofdVDnZGIyWDmG+ZQxj
+ W1v2dvdkA5VREycjpSuuzJsGtQx6HF8ioRC/LyN2MENpPnrrCA0RKuPIYY2Y5e2R5DNwSFUApCh
+ SzHhlJLk1mY5MydTSmqHzQ9A+rxavGhXRABBvHxgwJiXAXSAnuraC3SL+XBTjfo/jJTz5DKtbQH
+ 2vsz7fhRJuYcC1LrJF2Bl+H2HKsY7n7dg8iKqg+ZizcMayBKSDm0KAPF5/hdM3JnYAP/WJ63wQO
+ Ho/0viiKJVqxL29ftRO3jI4Pw1lgNBhzjP/HxNVxDdksc0ea/6o1lvcCjTm+LlsElye2jm7jggT
+ NFy57isnSbpd75syoqAafFzor0p2VU+INPDNSF7FGGnPd9/n75tWl0y5pmLY8Id9/GABjO/H74z
+ st1quTJYJD8I3pMF+76+KtIe4X2Libx38d8idfeNunFNPIy4QoCemL3tOn5WwgfB6p3PNw/oJgD
+ UgJb74wA==
+X-Received: by 2002:a05:620a:28cb:b0:93c:62c4:e2e2 with SMTP id
+ af79cd13be357-945f32cfd3dmr473552485a.12.1793987573103; 
+ Fri, 06 Nov 2026 09:52:53 -0800 (PST)
+Received: from maple.netwinder.org ([204.244.107.52])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-945f5be26f5sm195053685a.28.2026.11.06.09.52.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Nov 2026 09:49:00 -0800 (PST)
-From: Alexey Charkov <alchark@flipper.net>
-Date: Fri, 06 Nov 2026 21:48:45 +0400
-Subject: [PATCH] usb: gadget: f_mass_storage: add SuperSpeed descriptors
+ Fri, 06 Nov 2026 09:52:52 -0800 (PST)
+From: Ralph Siemsen <ralph.siemsen@linaro.org>
+Date: Fri, 06 Nov 2026 12:52:46 -0500
+Subject: [PATCH v3] doc: develop/sending_patches: add tips for series
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261106-ums-ss-v1-1-ad215bcdb735@flipper.net>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzNDQwMz3dLcYt3iYl0jSwuDRGND01RDYyMloOKCotS0zAqwQdGxEH5xaVJ
- WanIJSLdSbS0Acyonf2oAAAA=
-X-Change-ID: 20261106-ums-ss-2980a315e132
+Message-Id: <20261106-doc-sending-patches-v3-1-86fa7d158cc2@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAO0T7moC/32N0QrCIBhGX2V4naFu2NZV7xFdOP3d/ggduqQYe
+ /d0XUQQXR74vnMWEiEgRHKsFhIgYUTvMtS7iuhRuQEomsxEMCE5Ey01XtMIzqAb6KRmPUKkpla
+ NbCxY27UkP6cAFh+b9Xx5c7z3V9BzUZXFiHH24bllEy+7/4XEKadS9szyXhykgdMNnQp+78NAS
+ iKJj4Sz5rdEZIlmqmPWSs2a7kuyrusLYhLBGA4BAAA=
+X-Change-ID: 20261028-doc-sending-patches-d3a464feff98
 To: u-boot@lists.u-boot-project.org
-Cc: Lukasz Majewski <lukma@nabladev.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Marek Vasut <marek.vasut+usb@mailbox.org>, Tom Rini <trini@konsulko.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Alexey Charkov <alchark@flipper.net>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7038; i=alchark@flipper.net;
- h=from:subject:message-id; bh=fuFl+qvJLUPO5ysYcaa9l7aPkwMohP39KpZoQuIskE4=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWS9E+balt7UVOBlsZ/vR9DxV5/my1wR/Ljqi0Vs+wdr3
- QuL5k5N6JjIwiDGxWAppsgy99sS26lGfLN2eXh8hZnDygQyRFqkgQEIWBj4chPzSo10jPRMtQ31
- DI10jHWMGLg4BWCqveQY/orkrss/N083S/9GfE32CZ+eZaxzt36QzFRc4Kz5/pWjuCjD/5xU+8X
- lySyHDvQa/2u5dnlugCRj9pO/Gr4y01r+tgQeZwUA
-X-Developer-Key: i=alchark@flipper.net; a=openpgp;
- fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Ralph Siemsen <ralph.siemsen@linaro.org>, E Shattow <e@freeshell.de>
+X-Mailer: b4 0.16-dev-401aa
+X-Developer-Signature: v=1; a=openssh-sha256; t=1793987571; l=2659;
+ i=ralph.siemsen@linaro.org; h=from:subject:message-id;
+ bh=CFiVeF4EAC44IRBtVyBdoGmaizoOoQQHbDQSKZeLV/0=;
+ b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgG/ALfT0jfT5dAzjFlh+rTh9j4pAiw
+ vPQ/tR3mihuAFYAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
+ QOKAdo0j9+5f9TqfJwZNFe0mm/6E4jnWXyKKd8YSbOmoQRUmGgLhmpqljSqRu5kvNG83NbSwCYg
+ y03oe91t0VQY=
+X-Developer-Key: i=ralph.siemsen@linaro.org; a=openssh;
+ fpr=SHA256:12SQdavZEBUxPbBBtqQJgZ9F8vSvwTB6kFlSNgb4IcM
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -167,214 +167,77 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The mass storage function only provides full and high speed
-descriptors, so a SuperSpeed-capable UDC that comes up at SuperSpeed
-reports a device descriptor with no configurations: count_configs()
-skips every configuration without SuperSpeed support. The host then
-gives up with "no configurations" and keeps power-cycling the port,
-which makes `ums` unusable on such controllers unless their DT caps
-maximum-speed at high-speed.
+Related patches can be grouped into a "patch series". Add some tips on
+how to decide how much belongs into a "patch series".
 
-Backport the SuperSpeed descriptors from the Linux mass storage
-function, adapted to the U-Boot copy, so that `ums` enumerates and
-runs at SuperSpeed. Leave out the BOS and device capability
-descriptors that came with it, as nothing references them.
+Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
+Reviewed-by: E Shattow <e@freeshell.de>
+--
+Changes for v3:
+- explicitly mention keeping bug fixes separate from other changes
+- focus on "keep it small" rather than the exceptions to that rule
+- Link to v2: https://patch.msgid.link/20261104-doc-sending-patches-v2-1-c0a90ff6c049@linaro.org
 
-U-Boot has no config_ep_by_speed(), so set the bulk endpoints'
-companion descriptor and maxburst by hand before enabling them.
-Otherwise the UDC sees a maxburst of 0, which DWC3 turns into an
-underflowed burst size instead of the bMaxBurst the host was given.
+Changes for v2:
+- small wording changes to help non-native English speakers
+- add R-b
 
-Based on Linux commit 4bb99b7c82ba ("usb: gadget: storage: add
-superspeed support").
+Link to v1:
+https://patch.msgid.link/20261028-doc-sending-patches-v1-1-66b0f1b276de@linaro.org
 
-Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
-CI for this patch: https://git.u-boot-project.org/u-boot/contributors/alchark/u-boot/-/pipelines/1872
----
- drivers/usb/gadget/f_mass_storage.c | 40 ++++++++++++++++++-
- drivers/usb/gadget/storage_common.c | 77 ++++++++++++++++++++++++++++++++++++-
- 2 files changed, 114 insertions(+), 3 deletions(-)
+ doc/develop/sending_patches.rst | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
-index 20c094b0d96f..7cc5998cec7c 100644
---- a/drivers/usb/gadget/f_mass_storage.c
-+++ b/drivers/usb/gadget/f_mass_storage.c
-@@ -2219,16 +2219,29 @@ reset:
- 	common->fsg = new_fsg;
- 	fsg = common->fsg;
+diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
+index 99581dc0ba0..b6096cd346f 100644
+--- a/doc/develop/sending_patches.rst
++++ b/doc/develop/sending_patches.rst
+@@ -184,6 +184,31 @@ General Patch Submission Rules
+   cases, you did something wrong if your patch exceeds this limit. Think again
+   if you should not split it into separate logical parts.
  
-+	/*
-+	 * The UDC programs the SuperSpeed burst from the endpoint, so
-+	 * hand it the companion descriptors before enabling.
-+	 */
-+	if (common->gadget->speed >= USB_SPEED_SUPER) {
-+		fsg->bulk_in->comp_desc = &fsg_ss_bulk_in_comp_desc;
-+		fsg->bulk_in->maxburst = fsg_ss_bulk_in_comp_desc.bMaxBurst + 1;
-+		fsg->bulk_out->comp_desc = &fsg_ss_bulk_out_comp_desc;
-+		fsg->bulk_out->maxburst = fsg_ss_bulk_out_comp_desc.bMaxBurst + 1;
-+	}
++Tips for creating patch series
++------------------------------
 +
- 	/* Enable the endpoints */
- 	d = fsg_ep_desc(common->gadget,
--			&fsg_fs_bulk_in_desc, &fsg_hs_bulk_in_desc);
-+			&fsg_fs_bulk_in_desc, &fsg_hs_bulk_in_desc,
-+			&fsg_ss_bulk_in_desc);
- 	rc = enable_endpoint(common, fsg->bulk_in, d);
- 	if (rc)
- 		goto reset;
- 	fsg->bulk_in_enabled = 1;
++A series of related patches can be sent as a "patch series", as described
++above. Individual patches should be small and self contained. Likewise,
++this also applies to each "patch series". Keep the following in mind:
++
++* large series are harder to review. Maintainers are busy and may postpone
++  large reviews, whereas smaller reviews are more easily accommodated.
++
++* bug fixes should not be part of a larger series, so that the fixes can
++  get reviewed and merged quickly.
++
++* tools like ``b4`` and ``patman`` send the entire patch series to all
++  reviewers, even though individual reviews may only care about some parts.
++  Filtering out the relevant parts takes time away from actual reviews.
++
++Therefore large series should be broken int smaller sub-series, for example by
++subsystem (clock, pinctrl, reset, etc.). This allows better targeting of only
++the relevant reviewers for each sub-series. Finding the right granularity can
++be difficult, but when in doubt, aim for smaller changes.
++
++Overall, the goal is to make changes easily understood by reviewers, as well
++as the next person who works on the code.
++
+ Attributing Code, Copyrights, Signing
+ -------------------------------------
  
- 	d = fsg_ep_desc(common->gadget,
--			&fsg_fs_bulk_out_desc, &fsg_hs_bulk_out_desc);
-+			&fsg_fs_bulk_out_desc, &fsg_hs_bulk_out_desc,
-+			&fsg_ss_bulk_out_desc);
- 	rc = enable_endpoint(common, fsg->bulk_out, d);
- 	if (rc)
- 		goto reset;
-@@ -2649,6 +2662,7 @@ static void fsg_unbind(struct usb_configuration *c, struct usb_function *f)
- 	fsg_common_release(fsg->common);
- 	free(fsg->function.descriptors);
- 	free(fsg->function.hs_descriptors);
-+	free(fsg->function.ss_descriptors);
- 	kfree(fsg);
- }
- 
-@@ -2704,6 +2718,28 @@ static int fsg_bind(struct usb_configuration *c, struct usb_function *f)
- 			return -ENOMEM;
- 		}
- 	}
-+
-+	if (gadget_is_superspeed(gadget)) {
-+		unsigned int max_burst;
-+
-+		/* Calculate bMaxBurst, we know packet size is 1024 */
-+		max_burst = min_t(unsigned int, FSG_BUFLEN / 1024, 15);
-+
-+		fsg_ss_bulk_in_desc.bEndpointAddress =
-+			fsg_fs_bulk_in_desc.bEndpointAddress;
-+		fsg_ss_bulk_in_comp_desc.bMaxBurst = max_burst;
-+
-+		fsg_ss_bulk_out_desc.bEndpointAddress =
-+			fsg_fs_bulk_out_desc.bEndpointAddress;
-+		fsg_ss_bulk_out_comp_desc.bMaxBurst = max_burst;
-+
-+		f->ss_descriptors = usb_copy_descriptors(fsg_ss_function);
-+		if (unlikely(!f->ss_descriptors)) {
-+			free(f->hs_descriptors);
-+			free(f->descriptors);
-+			return -ENOMEM;
-+		}
-+	}
- 	return 0;
- 
- autoconf_fail:
-diff --git a/drivers/usb/gadget/storage_common.c b/drivers/usb/gadget/storage_common.c
-index 7e4b542f7ce5..a89c7ea3e532 100644
---- a/drivers/usb/gadget/storage_common.c
-+++ b/drivers/usb/gadget/storage_common.c
-@@ -531,11 +531,86 @@ static struct usb_descriptor_header *fsg_hs_function[] = {
- 	NULL,
- };
- 
-+static struct usb_endpoint_descriptor
-+fsg_ss_bulk_in_desc = {
-+	.bLength =		USB_DT_ENDPOINT_SIZE,
-+	.bDescriptorType =	USB_DT_ENDPOINT,
-+
-+	/* bEndpointAddress copied from fs_bulk_in_desc during fsg_bind() */
-+	.bmAttributes =		USB_ENDPOINT_XFER_BULK,
-+	.wMaxPacketSize =	cpu_to_le16(1024),
-+};
-+
-+static struct usb_ss_ep_comp_descriptor fsg_ss_bulk_in_comp_desc = {
-+	.bLength =		sizeof(fsg_ss_bulk_in_comp_desc),
-+	.bDescriptorType =	USB_DT_SS_ENDPOINT_COMP,
-+
-+	/*.bMaxBurst =		DYNAMIC, */
-+};
-+
-+static struct usb_endpoint_descriptor
-+fsg_ss_bulk_out_desc = {
-+	.bLength =		USB_DT_ENDPOINT_SIZE,
-+	.bDescriptorType =	USB_DT_ENDPOINT,
-+
-+	/* bEndpointAddress copied from fs_bulk_out_desc during fsg_bind() */
-+	.bmAttributes =		USB_ENDPOINT_XFER_BULK,
-+	.wMaxPacketSize =	cpu_to_le16(1024),
-+};
-+
-+static struct usb_ss_ep_comp_descriptor fsg_ss_bulk_out_comp_desc = {
-+	.bLength =		sizeof(fsg_ss_bulk_out_comp_desc),
-+	.bDescriptorType =	USB_DT_SS_ENDPOINT_COMP,
-+
-+	/*.bMaxBurst =		DYNAMIC, */
-+};
-+
-+#ifndef FSG_NO_INTR_EP
-+
-+static struct usb_endpoint_descriptor
-+fsg_ss_intr_in_desc = {
-+	.bLength =		USB_DT_ENDPOINT_SIZE,
-+	.bDescriptorType =	USB_DT_ENDPOINT,
-+
-+	/* bEndpointAddress copied from fs_intr_in_desc during fsg_bind() */
-+	.bmAttributes =		USB_ENDPOINT_XFER_INT,
-+	.wMaxPacketSize =	cpu_to_le16(2),
-+	.bInterval =		9,	/* 2**(9-1) = 256 uframes -> 32 ms */
-+};
-+
-+static struct usb_ss_ep_comp_descriptor fsg_ss_intr_in_comp_desc = {
-+	.bLength =		sizeof(fsg_ss_intr_in_comp_desc),
-+	.bDescriptorType =	USB_DT_SS_ENDPOINT_COMP,
-+
-+	.wBytesPerInterval =	cpu_to_le16(2),
-+};
-+
-+#endif
-+
-+static struct usb_descriptor_header *fsg_ss_function[] = {
-+#ifndef FSG_NO_OTG
-+	(struct usb_descriptor_header *) &fsg_otg_desc,
-+#endif
-+	(struct usb_descriptor_header *) &fsg_intf_desc,
-+	(struct usb_descriptor_header *) &fsg_ss_bulk_in_desc,
-+	(struct usb_descriptor_header *) &fsg_ss_bulk_in_comp_desc,
-+	(struct usb_descriptor_header *) &fsg_ss_bulk_out_desc,
-+	(struct usb_descriptor_header *) &fsg_ss_bulk_out_comp_desc,
-+#ifndef FSG_NO_INTR_EP
-+	(struct usb_descriptor_header *) &fsg_ss_intr_in_desc,
-+	(struct usb_descriptor_header *) &fsg_ss_intr_in_comp_desc,
-+#endif
-+	NULL,
-+};
-+
- /* Maxpacket and other transfer characteristics vary by speed. */
- static struct usb_endpoint_descriptor *
- fsg_ep_desc(struct usb_gadget *g, struct usb_endpoint_descriptor *fs,
--		struct usb_endpoint_descriptor *hs)
-+		struct usb_endpoint_descriptor *hs,
-+		struct usb_endpoint_descriptor *ss)
- {
-+	if (gadget_is_superspeed(g) && g->speed >= USB_SPEED_SUPER)
-+		return ss;
- 	if (gadget_is_dualspeed(g) && g->speed == USB_SPEED_HIGH)
- 		return hs;
- 	return fs;
 
 ---
 base-commit: 709a97a05df66e394f40d249105d0baade46f107
-change-id: 20261106-ums-ss-2980a315e132
+change-id: 20261028-doc-sending-patches-d3a464feff98
 
 Best regards,
 --  
-Alexey Charkov <alchark@flipper.net>
+Ralph Siemsen <ralph.siemsen@linaro.org>
 
