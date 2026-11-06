@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EA76606A326
-	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 13:30:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2236606A329
+	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 13:32:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=GDHjs/zH;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nuyYuwJN
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=aoBLUH6G;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SEks8sjW
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 13D72608B0;
-	Fri,  6 Nov 2026 13:29:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5792581137;
+	Fri,  6 Nov 2026 13:32:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Zgaw2WBGpFrj; Fri,  6 Nov 2026 13:29:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 93FA1607C3
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793971796;
-	b=BP5Swaj+dp20hMC5WyvaMD7hEeFQ9E8eNIEXlrv7cY0Uso4Q78oZPrJhPZznQGn+VKuK
-	 BgE7fPdJzkESYm/okCjF2QI3TGS6S33c5i5Jix83Jg7UT0IUPwwIot6ls62nJ3szOOtF2
-	 t+jPUWjiRdQNvuJ6Csc9sRN/oHeuUDp1E29p5E1PVbXW4Qcc8dXT3o81X6bxWGvUN/NLM
-	 5C59hTzIXy0ZvYC/qeD/2o6f7Q7EDvnrJlL2f18oAq64LOiNbYVVePQ9JsWvwMPPhw36x
-	 O9LOK1ZQWKdZ+iNsQ1zSsW6UXKvtly0IB1Dvw30j81l2F8ix7VPToAm7v4ZyTj9GcIQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id q1rjFGnmjxhA; Fri,  6 Nov 2026 13:32:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 76AED810FB
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793971922;
+	b=YGAaMPwS6KpROB0XbQZ6A4Q6gc8UJ+yfiZhR4ID/KDPOEAH2RXkCEXUMXd6QqjeVI9of
+	 AW9JlbKBLxcOGesahnSuO/tlcMsie5Awf0IbjAz/dtCso0ZIdhgi0ukaVAALpGKBgAw7G
+	 ZpB+p+uKTpQJ8QV4GzfNX+TR6nlK7wVmJEroMG5+5pI6Q3j99hfv4x/lq/E0RvoglobFc
+	 ZGsrwVKl+RYg1Zz8xjTeUVPrzRrKDLzLP9LTQepbScoJHmO3dWfNDLKZLQNQwf1s7X0Za
+	 HYjNB8r9fQLXea2FoHrOAM5R2eJMyds0wpTCJ3VOl434fonaDdidJJBf9/O/pEeYaQw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793971796;
+	c=relaxed/relaxed; t=1793971922;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,98 +32,100 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=uBPrI7iR+mG5vMtR81GkKILCFNuE+k88lIkfMD+bEjU=;
-	b=o4Ozy5tyfToZdeWJyU1PpTCT8jyM0V9NpJ9REypt2RUX4/SXubpmGSUuX+oAoPPuDTsl
-	 RZadcxD1ErI4cnORZm6AKcsS4E87KWkyUogcF/pevDhYjEpSjxb8QKvjgnWXQxdqOcSGF
-	 S00ZE/GjFUtWzEN/QRZrSyfk5GWP1mVbAoj0FcwHT27ihq4Olk6gOD/pzZRF+5GJsWMm3
-	 2mxZx3A1W7a+GMZ8wQhT/W0II2SRAg8spFv5u1n61dCMge7RQn6QIY/Yav/Oey+jj8E3l
-	 fdwKTuydc2dpNeJ0FIw8+HIYeP/xcwAEOiWe+P8V38ahES5x9nTYB0FpPYAp3ZrfSww==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=xRAaljTQXX7Zj92KXLqBzENoBipQGd+cPhEy08RTgC8=;
+	b=Sz91qGqde/zbq3+SJFghJ9qAX3KVq2iPcl50kg2GqqxEDUz80YNid2IQpMRBE06nDZxO
+	 20z/Lb2ay9dGjrjBE9lL/MJiWQrH7b1buJZU6eeyTag/UXVQdc03BA/HXNcxd09O90zAq
+	 pYJU9yymXG58Iw8VT/rRhKOMvJcX5PLnFyAdMCKXPXWCI4Uln/O7FR6Cmy+khqZ6UW4eI
+	 dG7RuRKZGxxSuDKY8W4cXTzg0pTy1ypf62jnLfvsTjJk3I0C9/1qpLVNGyLeT5Y4jx9TY
+	 0ar4HlZnlT0kcAUXcEFcazTMwE3jsB7tfY8EgYwqG3yTaTMOC8foen4KyO7LqyCTrLg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793971796;
-	bh=uBPrI7iR+mG5vMtR81GkKILCFNuE+k88lIkfMD+bEjU=;
+	d=lists.u-boot-project.org; s=default; t=1793971922;
+	bh=xRAaljTQXX7Zj92KXLqBzENoBipQGd+cPhEy08RTgC8=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GDHjs/zH7o3slcoG3y8OCKTByHMpTjA1TDTsh090EMYJSTQGjix2aRgGI38n6jN+9
-	 yTML60LNaLNOty7XoYQ8OQBfiEyhCUEeofVfzoXe1E226gG8WrY7ZIkiLGs5PCMeBB
-	 xSXk3w/ZH7hEYno9MpsLOk5TXAL/GvCSQf0EKDMSzqMQB/fJaEy4wjlIBVej+VAEuv
-	 bwF76w144OygEUXoMXjmoUYqQarCLQc6ZgQG182uyANVSA97r9TzubuOwJZPCrAVTf
-	 SAC0kQd08HM2x2YRcn2qpxHX40uMrKFeXOc/CdMcLFB0Xycju4CxUkwhjQUJVjHYyW
-	 hI2EM+Efi8aMQ==
+	b=aoBLUH6GvFKPtUyGTPCADG77FX3xLq0hP307KhpHH+UoHI3VqarSEjmoeoeQrbanZ
+	 sbx8CaTSXTlCVPJgDvXxC1Cak9ajp1Sl90jW/NQKCWG0xdvtHcuY2djM+0hcBhslOx
+	 N7EZWZS8oJ98vI/OAAliHd0xAx1JXqnQ/IFsXuCB2qg1kkncEP/F9QK4hBUfZLp7Sk
+	 eAH1Mrou0wh0Q5hIYMBFg7Cyu4UYrRuc4apjA9y9RgclTa4cTJhwuBYYZaZF82NGrn
+	 heb1KbCOlJTj/bHJfKl/MPpkifyhxqqK7gYUsB00Om5k6GmwQz4ncW2MFVH1Ez99P3
+	 5e28EvTt4Yzhw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 93FA1607C3;
-	Fri,  6 Nov 2026 13:29:56 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 94CDC2AC
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 13:29:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 76AED810FB;
+	Fri,  6 Nov 2026 13:32:02 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 510282AC
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 13:32:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7A53E40927
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 13:29:54 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 4EA30400FF
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 13:32:01 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QVRI7st5mWGH for <u-boot@lists.u-boot-project.org>;
- Fri,  6 Nov 2026 13:29:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 152AB40802
-Authentication-Results: smtp4.osuosl.org; arc=none
- smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
- envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6Ob64dpd2MD2 for <u-boot@lists.u-boot-project.org>;
+ Fri,  6 Nov 2026 13:32:00 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5832F400CD
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=172.234.252.31
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
+ helo=sea.source.kernel.org; envelope-from=mkorpershoek@kernel.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=nuyYuwJN
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 152AB40802
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 13:29:52 +0000 (UTC)
+ header.s=k20260515 header.b=SEks8sjW
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5832F400CD
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 13:31:59 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 3AE2843471;
- Fri,  6 Nov 2026 13:29:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9B8EB1F0089F;
- Fri,  6 Nov 2026 13:29:51 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 534C043DE2;
+ Fri,  6 Nov 2026 13:31:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B649B1F0089F;
+ Fri,  6 Nov 2026 13:31:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1793971792;
- bh=uBPrI7iR+mG5vMtR81GkKILCFNuE+k88lIkfMD+bEjU=;
+ s=k20260515; t=1793971919;
+ bh=xRAaljTQXX7Zj92KXLqBzENoBipQGd+cPhEy08RTgC8=;
  h=From:To:Cc:In-Reply-To:References:Subject:Date;
- b=nuyYuwJN+/awmgVYXqvadQg2dEOdjUZPUVGAeXvCGfkL2JgiY3+ktr2Ngz3zh0MQ8
- y9qcC1Mu15Yp+ip3UidOLBZuiQLyWm/ejMPNFT9t3TQh0uZcEwmfw6I5TyCHe3+obR
- MRBZYexCIm+RAnqFYmLcs9LwbV/tHIi88RFVz/YZcT/tKlvCrQPZOTF429K3pe0Qty
- a0U4kjar0dE5hb6cTrMoaINmnxhAkjrTSyehuFVvjCepritMUC03Rj955DwOVfPExY
- UUw4gOA3VSt2UCwQ0gfx5/iG5G2zvYQnGsxWRXYBhgBxt8Pn5X+TExKN4czo6DxO9d
- SRW9XTisMyHBA==
+ b=SEks8sjWZtNWmqdf2e19Jr3zyhrX6osJyTaK4ichqdbHGlE8XOutJFFtMfMDs+HEL
+ g/XHlIzbR5zAoYGd4v9ZDh4IOf6OWgmLJuB49Xi3fbKvhs+Coh8iNT0/8FVeNDmJci
+ vHGM9uKsxIz36nHj8Xq05z9m3bmZw1ebPPQDdjMD0OhwRHFng5D18UHBdiPafLjEQP
+ Daf+TxRCqDa291LmwzDcSbAKs2GChasFjEj+vSa6FG8SnOzIHTXpskWUnKvRlcHMxp
+ OZvw3XrjuPfVjGRZgf+XPQxsfHhylxrGo5ILm1CrUjn0mFKNEpPLwdfUCfoFF74kDw
+ iwFwhAaK6gQHA==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: u-boot@lists.u-boot-project.org, 
- Guillaume La Roque <glaroque@baylibre.com>
+ Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 Cc: Tom Rini <trini@konsulko.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Marek Vasut <marex@nabladev.com>, 
- Michal Simek <michal.simek@amd.com>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>
-In-Reply-To: <20261104-maintainers-android-reviewer-v1-1-a239c7926351@baylibre.com>
-References: <20261104-maintainers-android-reviewer-v1-1-a239c7926351@baylibre.com>
-Subject: Re: [PATCH] MAINTAINERS: android: add myself as a reviewer
-Message-Id: <179397178466.1028119.3728008637982663565.b4-ty@b4>
-Date: Fri, 06 Nov 2026 14:29:44 +0100
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Vincent Jardin <vjardin@free.fr>, Petr Hodina <petr.hodina@protonmail.com>, 
+ Bruno Banelli <bbanelli@gmail.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>, 
+ Jan Kehren <jan.kehren@emteria.com>
+In-Reply-To: <20261023-upstream-libavb_b4-v1-0-97ed25b09ed3@oss.qualcomm.com>
+References: <20261023-upstream-libavb_b4-v1-0-97ed25b09ed3@oss.qualcomm.com>
+Subject: Re: [PATCH 0/2] libavb: resync with AOSP 1.4.0 on U-Boot's SHA library
+Message-Id: <179397191317.1028119.7293091746715377145.b4-ty@b4>
+Date: Fri, 06 Nov 2026 14:31:53 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=403;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=956;
  i=mkorpershoek@kernel.org; h=from:subject:message-id;
- bh=CZOB0CnLrt/QaoJI01U+UU2aI1I889TMR133dZ03fns=;
- b=owGbwMvMwMUoySu7Jc1P0pTxtFoSQ9bba75rFGMXR69/ns01j7d0rWj1xdyPs8qav6qynpwXX
- Zuv82p1J6MxCwMjF4OsmCKL3kun5dvks/YFC69lgBnEygQyhYGLUwAmssaD/a9MqnC0mpX/qbeh
- i3hTU5dezVyYwqzlbhAnd87P09a++Uz1h+cnzY94Fl2Xm9bpFFV2nDX8p8aCNN2Db4p+FVuWBgm
- Za6Q2OWReO/qzUXmrzzzthxd73Xd0K0xf6DmpNOda1mufvMV8Vqe3tbzMcg9t+7pROX1S5aYtyw
- QWznpzglts7rLw6e5xnoJx9XIPt1f0qopUZE2cvpK521D5XI3+ujuMftxMh6or7D+r1m3asO3NC
- cbQicv3+wdnfOqb4V9bKFFp3XLr2q6nb3l8Yx0eyUtcmNVeLJlV90fd3MGGU1NVbFrBlCkG34/v
- Urs9qTvPvfTkbXnZUk/HW21iSa31vRMfr1PaGPl3lf4NAA==
+ bh=ecWByYv+3N9K+046NejV8hcHt5M1/KMK4NQnE8z9N1s=;
+ b=owEBbQGS/pANAwAKARkNHbRmThk1AcsmYgBq7dbN9LoB4ki6bICWJMVF83cnMnHfF+UnIphaI
+ 9UEns2FFS+JATMEAAEKAB0WIQQu6UKnth9qvlMTrQAZDR20Zk4ZNQUCau3WzQAKCRAZDR20Zk4Z
+ NUztCACF1om8CoP8SUpunuPESmPyVlLP2JNfS1rdzRywCXbYEi6mhaapENAnu3MCWS51StOchPS
+ C+Bh5kQXpgXell+hXsDozXed2NjvXfabYEq/P3xk++qnlqCq8fT6dj7wKutwADUOe1i/ZdktVOw
+ 7VJgFXY8PHNOD8rPHQP+/zwLVvfFz4g0EpFhDojS2RNDVXBkunnBV87ELhPQWO2ubAc7bvhSx/4
+ eQ01yM4Cc5MZgjI4liII1BKo36olH9q9XkP+DkvVSkSUHcGyk8iZ+ykXMX6v+DY7waIG/4DtWuH
+ IoY3gAkOVC4NQ24wsZMYOWDjY+KS+i3f54Rssjm9mE9Zu4SF
 X-Developer-Key: i=mkorpershoek@kernel.org; a=openpgp;
  fpr=8234A35B45C0D26B31C1A2DA570338B018144F28
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -138,20 +140,31 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 Hi,
 
-On Wed, 04 Nov 2026 13:48:51 +0100, Guillaume La Roque wrote:
-> MAINTAINERS: android: add myself as a reviewer
+On Fri, 23 Oct 2026 21:50:44 +0200, Igor Opaniuk wrote:
+> libavb: resync with AOSP 1.4.0 on U-Boot's SHA library
+> 
+> lib/libavb is a copy of AOSP external/avb's libavb from 2023 (1.3.0)
+> with U-Boot glue. Upstream has since fixed a verification bypass in
+> chained vbmeta partitions, a silent failure of RSA verification on
+> allocation errors and out-of-bounds reads in the key parsers, and
+> added the vbmeta digest command line properties that newer Android
+> releases expect.
+> 
+> [...]
 
 Thanks, Applied to https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
-[1/1] MAINTAINERS: android: add myself as a reviewer
-      https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/0a3f609e295978520068dad76f2f4b2f4ac58e60
+[1/2] libavb: build the SHA functions on U-Boot's SHA library
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/9450a497dc03744fc9e4b40cf8de20084921dc24
+[2/2] libavb: update to AOSP 1.4.0
+      https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/cdafa8448ed4487f663ad9e026116a9baf8ca688
 
 --
 Mattijs
