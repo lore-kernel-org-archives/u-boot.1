@@ -2,218 +2,216 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66CF1606D80A
-	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 10:11:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD2806083620
+	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 10:20:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=LsAQ4mFg;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=XUIg4eO2;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=STBC6taQ
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=yj+dn3x6;
+	dkim=pass (1024-bit key, unprotected) header.d=toradex.com header.i=@toradex.com header.a=rsa-sha256 header.s=toradex-com header.b=XNndjSYy
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1D202811FF;
-	Fri,  6 Nov 2026 10:11:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8E427811F8;
+	Fri,  6 Nov 2026 10:20:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id npEgpceJyJgD; Fri,  6 Nov 2026 10:11:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E412C811F2
+ id YhRbQArhEAR2; Fri,  6 Nov 2026 10:20:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DD28F811FF
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793959903;
-	b=JOmGTxgMo7qznsDmGKZPtsYevjp3lKpAXP9aymrfNpgIlFNkKhFPVKkFKLGOqSCtZ+30
-	 RW2Sgi6qeIXo7suYkMoE3ACc3uK2h/QRvQ7fI6XQ6+Ddsi+z7ehbdwF9czs8KvpyGLjnw
-	 PpIwIG8im7QtXVgZumF+dhJ6qVFi+DksTy7MNd88GSeNzfF0coqPx2lJ4DbgrBHmtZLbD
-	 bEfoerIVjShh7yTuE1hC9C7vRymn6oSeYzLRQRnoBfu3UCn43TUYDeFmEMOifhhDtq0Yy
-	 luQEPm0ghbMTqr4/tpYLfxvXbO45y6U2hWMMFNw/366aYFNqOqSzbqIsS/w7VYiAWIw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793960419;
+	b=Z/xAA9AUlcap+ziMk1VmKkIbUvqQapN5X5o51AaUJKpF+YMb9Jui1Qea4O0MbfOhl6YJ
+	 kGI+SC8jiIMqd+3TRv2xcm5cNfOqxnBdlElB+yEmJ4I+QfVqJ89eiiwIFkohlCBFMGxhS
+	 47LbztsUY1HBroXZYTb21X8rEjYZ07csiDXIVlvs5rDEpu6vtAruXP4tdtahgNREm6nNI
+	 aFymulVCl6rEgE6qhEK4R26lPgKGg1E/lUGCo+B3TbvsrjZTGBxyNNUPYUZY8LZmfJF90
+	 YuyAjOr5BfNcqUNtu0n89V+fVGhnPuOqU4OjaVTG4DWJ1ylZZTWBLj8XPPpk/u6PJJQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793959903;
+	c=relaxed/relaxed; t=1793960419;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Received:DKIM-Signature:
-	 X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=qQbFD5idzNO6EoW1g0+U7SDYDDcoB+7aCce2ZVE3x7k=;
-	b=dhBVWeokNMmTxsIvKeq0chsIIqWBpFduAOOYrLvE8SpT5st5S2moFKXD3oDPZlWhUL/A
-	 ZFjgfmhmArN4FMT09el/1DOMcs994YcSzTi3TB1xujVBoIEI9SAxW5V77mpHzEFCQvjiq
-	 Ex/aHhNu+WCWiXUOI+PHSQVc/6tPq8g2IQUltq+JXEqIRXRGQ1V6YVrY+spB2WQxbC2rz
-	 2Mkl4bzfjaStW0DZN79gw0ojaGNk3/QbXs5v+isE2NXU6n1XISsVD106NFhjq5BNWOsak
-	 0oGZW1AWsZtfECtyiF6uJNi6ddWA9W5gPcDHMYGFpIJ3XMetlNNo+k29af54pi7jhvA==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:X-MC-Unique:X-Mimecast-MFC-AGG-ID:Received:
+	 Received:Date:From:To:Cc:Subject:Message-ID:References:In-Reply-To:
+	 X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
+	 X-OriginatorOrg:X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
+	 X-Mimecast-Spam-Score:X-Mimecast-MFC-PROC-ID:X-Mimecast-Originator:
+	 Content-Type:Content-Disposition:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=unEyvBJ4gu3r+jxvpjnQ11VfE8LAXBlQfIL7ADYmA9o=;
+	b=f3c8XrOcuFaRvJjQ7eKY3u9pIAlImWuARGjff8hs+xk50rRqI0r7VVRNHEYOYxlkNR9i
+	 YYZ1MrvpjeDfq86M6gfdk/lkfhrUjs6J3Ho/NCBYaz3N5VN2frDrMPhjtQLzAd2n1RWQi
+	 Hdqj23PB39Wb2MsSv8T/qNEXuvR//byehW7jr3IQHbP5u/XsR0e/8uc3EyZdU5BdipOhw
+	 grVISc1oBXb6KVDgwNiiUCT2asZKL6NV1gjjybTvHb4hC1Br5xcwTBl4mvMS01v8X2Qb8
+	 +9MKsswVvpqpc5dzgcQoSD9iJwMebf92buVseVouOOASADuBpsN8rMolu9LHgVgwxgg==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=XUIg4eO2;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=STBC6taQ;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793959903;
-	bh=qQbFD5idzNO6EoW1g0+U7SDYDDcoB+7aCce2ZVE3x7k=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793960419;
+	bh=unEyvBJ4gu3r+jxvpjnQ11VfE8LAXBlQfIL7ADYmA9o=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=LsAQ4mFgHVe4SGpck64COFWKrzAImWShkVK9FzHdCPYtA2G+AgW59H7N8ielSMbGs
-	 72I+CKI4VcrqCyyEXiHvJEe1r70olIlEhURyD1/vArzvDiHNhJA8B2uJYcVZJFcmN7
-	 NLt5NjwDzMWYcu8mjFaf+oE9WtJq7B9Lmr9BDZFP+e4UfA8iMhS46vJcdH1D7VB9C9
-	 9wE8NjYgbWmpJmoeYO7Dl559SQ47jS0aEH0LdTUvKPulYYCai7Pn8I16ncUE7pxRQo
-	 gsty9q7KVIhVT8Nanp5AbPueEsnvTwBcUNBxgbklEVNbVklxc+BD3d/n7iiQoCWZco
-	 yDVP5hYoyHzrA==
+	b=yj+dn3x69UkvTDXtrGI1GgYd8n7lQZJxt9+EPAHja51RltQ4cCLZU1+C/QZJ/+4ss
+	 5i0425SI9g3+lhDhz7LliChPklLbvoI1mvshkxRdoQQBtZU56tpZtvTtCBI3A5vGyU
+	 whXtl9L07EcV8NDirBdNyBKjEoH0xtOGpPWmd7j6GHJodTzH43VgPIJB3ZwMVb9ReN
+	 ROJTV/nLT8Xe58mdmthufuh9yHTu3lUzwjbXn8ovV1WY7RBSoGs0dZrZPThVTmBRD0
+	 stNZxYFwWW5Ylwis5biu3+GAEcqxALsW+peIFhFYpIxlVurF+DE3jmBBkyBBxnnM8Z
+	 gkA8CzgDXkgtA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E412C811F2;
-	Fri,  6 Nov 2026 10:11:42 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 8B7111E3
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 10:11:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DD28F811FF;
+	Fri,  6 Nov 2026 10:20:18 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id C08851E3
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 10:20:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 8886A811F8
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 10:11:41 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id A5DBC403A9
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 10:20:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id txWhgSeqf1HE for <u-boot@lists.u-boot-project.org>;
- Fri,  6 Nov 2026 10:11:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8C311811DF
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=205.220.168.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
- helo=mx0a-0031df01.pphosted.com; envelope-from=igor.opaniuk@oss.qualcomm.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=XUIg4eO2; 
- dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=STBC6taQ
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8C311811DF
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 10:11:39 +0000 (UTC)
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A67RT2G2730721
- for <u-boot@lists.u-boot-project.org>; Fri, 6 Nov 2026 10:11:39 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- qQbFD5idzNO6EoW1g0+U7SDYDDcoB+7aCce2ZVE3x7k=; b=XUIg4eO2KzEVQujT
- SplsOsfpes+t+N79KsRIPbDm3hxyoJEmgmHR5znO1g+bhrvtJhrPuVUIi0+BQBV/
- TR8IfSZdfkpsCuwdBLN9zBOzWybImhzbOGF2brJmv0/qMGcjxJtRSU82/V3UJ5RD
- RqxUHFOOSD2Mz3fY56bw7xbNhW7zk+vr6ls8PjeywkwQld/9x89omAXIunOgIVuB
- aUPQDR5mOvXqd/8ae3v9WQm3WGdCXbU9dc/sfmaGpQLf7IFkLoSo9D18k2Z2y9qY
- NyzPjAHpHyfnpHF9cTBPzyhQeHIPQ6LCXlUiczKP+0/+7KuEb6/Z41hMyjeqADpu
- anwv+w==
-Received: from mail-yx1-f72.google.com (mail-yx1-f72.google.com
- [74.125.224.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hs3p9j8sp-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 10:11:39 +0000 (GMT)
-Received: by mail-yx1-f72.google.com with SMTP id
- 956f58d0204a3-67c0ff91f4cso819139d50.3
- for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 02:11:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793959898; x=1794564698;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=qQbFD5idzNO6EoW1g0+U7SDYDDcoB+7aCce2ZVE3x7k=;
- b=STBC6taQOaNbQhbrlC1BUIHXJ6hdmDDLTLsx2ype3l7d483NSHieHncUnjixYM9z/I
- AKUNkkWwkiS0stMnFZ9vQoguVpvtG4g4rhSEpHzypSTDvK7YVKZO9V8AeH38Zu0qXkA9
- y84sFT5vpnA/sAFLh5V9KLb7w3SkuopWJPaqG6rIXCpLyU67vST201HaQaeAJJaSJtCt
- C96M9de2gjSD1YeZbXF0bcYK8oI1L4dW9WbDDUBCUu4PESsWey4tPPez5aOcNjYAVnSX
- aR6Z8FIoUPX8f33emL1DxpG0d+eN3lpDXZtB/uKovAyYaAXI/mkiMGBxpsVnDeUSdCdO
- Ab4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793959898; x=1794564698;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=qQbFD5idzNO6EoW1g0+U7SDYDDcoB+7aCce2ZVE3x7k=;
- b=zNdWnmGoP9o+/aGw+quhrvGzHaCGZIlFNTnVZvfmEzAJPZdwSp73aXsxAqGI/D1d6d
- qfEorkRF2RiF9oHiOTTBPalA8F4WstQvp8FXuw3gG3aLgP5bqVP1/gVfduUL3snK8W0w
- 34xsisEjFoXTQJOAyc4lWzjWSNWqA1TuS4H3dYjleKRteumivB8orDzgZ0de4ajdv/fa
- DKlzAgSyEHsJsZZNtwnMZSfr4O510+ESdBrfa9/Qq4YlO2SiOrnZWY6WLFs6lqW/Kw/J
- FzKZ5ENZcWt+EauCr5LhTE67QzRcp9rLp1ZGmqz9+1SqVmxZuUDTNCssKOLlORFAnUBN
- czFg==
-X-Gm-Message-State: APuU4Z8cb5b37LvuvU1SBo+ffsiprVrHzby0fKzjZ6FfkZ6Eu/wBL/lG
- B1ybyh94OfXJuDWJvY9t0iEpaKHU3Dc9rStSqHj3pRngdVJt8wZ+/pM0u9honAPEI1Sj6nJcNg9
- lBLLw7A19oLj+COHzxoDJ7A76MNt3LVOxjuzVbVmfII/LpjOLQeSm8Y4txJVeN/XOSKeY0wD8ll
- m8QGMYxpmv/GdL8HDXA+O7JaqSmm3HtH7vMoTZT2cenlIsQ5bfnpKt27xk
-X-Gm-Gg: AYBFou1Hd6UzoWErODqQhUqM+CKIzJ9sj400YXqT5lJNjTrfLzMnPJAX0fHo++I8S6s
- ISlOaCwnSd/OuWMEqg89bppxhYrX+/iJ4xfkevqzDEneBSnwXOaAWqB8xZG5LUZWtD/zwqxnQA8
- i429/NvcUspNheZ/gnuSwjia4+Yyp+5DjskuId3pjbj+KdMml8c+q6+60=
-X-Received: by 2002:a53:c08e:0:b0:677:dae6:51d4 with SMTP id
- 956f58d0204a3-67c1465d103mr943651d50.106.1793959898131; 
- Fri, 06 Nov 2026 02:11:38 -0800 (PST)
-X-Received: by 2002:a53:c08e:0:b0:677:dae6:51d4 with SMTP id
- 956f58d0204a3-67c1465d103mr943640d50.106.1793959897668; Fri, 06 Nov 2026
- 02:11:37 -0800 (PST)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id KnXylhva6BJG for <u-boot@lists.u-boot-project.org>;
+ Fri,  6 Nov 2026 10:20:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org A4324400FF
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=194.104.109.113
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=194.104.109.113;
+ helo=de-smtp-delivery-113.mimecast.com;
+ envelope-from=francesco.dolcini@toradex.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=toradex.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=toradex.com header.i=@toradex.com header.a=rsa-sha256
+ header.s=toradex-com header.b=XNndjSYy
+Received: from de-smtp-delivery-113.mimecast.com
+ (de-smtp-delivery-113.mimecast.com [194.104.109.113])
+ by smtp2.osuosl.org (Postfix) with ESMTP id A4324400FF
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 10:20:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
+ s=toradex-com; t=1793960411;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=unEyvBJ4gu3r+jxvpjnQ11VfE8LAXBlQfIL7ADYmA9o=;
+ b=XNndjSYybZUqTIrXZltO/3VHahpfEiIgpGdBDS6cOx6YJFbkghVoQTtxdEXzzJ1WfqASx4
+ j4ze3dFXJrQdE6/Y7I4141awLfgXnkrRSVniQEUjvaRBV5a5g7q9vJaH/Qu6Km2zXMzPKF
+ IKSD03ktUJlK52K0R16LjIIpk7jj6j0=
+Received: from ZRZP278CU001.outbound.protection.outlook.com
+ (mail-switzerlandnorthazon11021093.outbound.protection.outlook.com
+ [40.107.167.93]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ de-mta-89-TclpWDXZNpShFfoGOjkXPQ-1; Fri, 06 Nov 2026 11:20:08 +0100
+X-MC-Unique: TclpWDXZNpShFfoGOjkXPQ-1
+X-Mimecast-MFC-AGG-ID: TclpWDXZNpShFfoGOjkXPQ_1793960407
+Received: from ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:2e::8) by
+ GVAP278MB516620.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:103::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.11; Fri, 6 Nov
+ 2026 10:20:05 +0000
+Received: from ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::88:6821:13f5:a5b2]) by ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::88:6821:13f5:a5b2%3]) with mapi id 15.21.0592.009; Fri, 6 Nov 2026
+ 10:20:05 +0000
+Date: Fri, 6 Nov 2026 11:20:03 +0100
+From: Francesco Dolcini <francesco.dolcini@toradex.com>
+To: Daniel Drake <ddrake@baylibre.com>
+Cc: Francesco Dolcini <francesco@dolcini.it>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ u-boot@lists.u-boot-project.org,
+ Christoph Stoidner <c.stoidner@phytec.de>, upstream@lists.phytec.de,
+ Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>, Ye Li <ye.li@nxp.com>,
+ Simona Toaca <simona.toaca@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Mathieu Othacehe <m.othacehe@gmail.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Torsten Rupp <torsten.rupp@8tronix.de>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ Marek Vasut <marex@nabladev.com>, u-boot@dh-electronics.com
+Subject: Re: [PATCH 1/4] imx: enter fastboot on USB serial download boot
+Message-ID: <au2p00b514-YiOTp@francesco-nb>
+References: <20261103-imx-usb-boot-fastboot-v1-0-f3a918d55a20@baylibre.com>
+ <20261103-imx-usb-boot-fastboot-v1-1-f3a918d55a20@baylibre.com>
+ <20261104085049.GA810881@francesco-nb>
+ <CAPGwodr9Nsy_C7oZJ+up2yktsgJbrKjXzgw94QPmOpYWKAoRbA@mail.gmail.com>
+In-Reply-To: <CAPGwodr9Nsy_C7oZJ+up2yktsgJbrKjXzgw94QPmOpYWKAoRbA@mail.gmail.com>
+X-ClientProxiedBy: MI1PEPF00000D62.ITAP293.PROD.OUTLOOK.COM
+ (2603:10a6:298:1::494) To ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:2e::8)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261106-firehose-v1-v1-0-e7591c12fc65@oss.qualcomm.com>
-In-Reply-To: <20261106-firehose-v1-v1-0-e7591c12fc65@oss.qualcomm.com>
-From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Fri, 6 Nov 2026 11:11:24 +0100
-X-Gm-Features: AclHuK8CEXZ5jip4pZkvvjz47zY1o-eHSrIg5Jh4eJ4QeQH4GfBY6EOHTEYIOG0
-Message-ID: <CAPzfCAYo1FqD9EXVM8Y_vEzTVF_84QFo3z=7=iDdM5pEwMhgfg@mail.gmail.com>
-Subject: Re: [PATCH 00/14] Qualcomm Firehose flashing protocol support
-To: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>,
- u-boot-qcom@groups.io
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@nabladev.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Marek Vasut <marek.vasut+usb@mailbox.org>,
- Johan Jonker <jbx6244@gmail.com>,
- Vitor Sato Eschholz <vsatoes@baylibre.com>,
- Carlo Caione <ccaione@baylibre.com>,
- James Hilliard <james.hilliard1@gmail.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Simon Glass <sjg@chromium.org>,
- Mehmet Fide <mehmet.fide@screeningeagle.com>,
- Vincent Jardin <vjardin@free.fr>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Michael Srba <Michael.Srba@seznam.cz>,
- Biswapriyo Nath <nathbappai@gmail.com>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Daniel Golle <daniel@makrotopia.org>,
- Rasmus Villemoes <rv@rasmusvillemoes.dk>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: ZRAP278MB0495:EE_|GVAP278MB516620:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1341eb5e-13ce-4194-cd71-08df3bef86a0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|23010399003|7416014|366016|1800799024|22082099003|18002099003|10067099003|4143699003|56012099006|261026121527099003
+X-Microsoft-Antispam-Message-Info: n3a7QvoP0X314u1Rt2zE47pT+1R/LNVMaUbyqU/gEsFnH39lWoYLsKxiPtqo6265oDJsONv9PA10gU3OrmE8IOKJ9qEjMPkdoRBiSxPhl+U4r5JkkkpEQ8F9nluYJgZSij4/vFN7uM44w8K/gp7RzPHrP532R8n6OQOuywJr+EiLalTycZQjhtz349mpEHLoa/RR2DfnqCjOpH+g63RrYIu6GW1kwDBXOyuF1h9KkT6pfQWzM1l174I3nt+sO7iUUan0O7ADTJyNFXl7UvzQ/lYHZtUwC4Ki3a0JAeZ+OOmh/yvoBr8BmvMJUIUOk0dblhGgE6F0LpdjQ1RjYJbvI/cMVgEkE4rU807VzB1MrFbMfQRQqMECoNpmyHwRsEjWmgKQ2mS8NwG6tmwo11jnUqLY5vVR1p+fxpyld1CNkGYqV2mok1q1FTXXHtSMM5IvB0ezo0De5bLhxaMS/ihfMd7rVuqFhVjEZBk8Z7GMkVAoFeKAlS4zd1HWVaW2IkdhMuqAa2hS0/80Pepn6D1vaBw+wXpmMvl092KXyctpnL5GpD19yAAmZFSyIdml7ClWFvzxTeKcvYlyiYu354412rfGxnIXqXUfwEztrAm/53HZbnT+n27tgdJk9k008uQQc/IJ7zr0KFDeXAlfmc4aZgiKXxFfOTh7ZRHYg3MCpyM=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(23010399003)(7416014)(366016)(1800799024)(22082099003)(18002099003)(10067099003)(4143699003)(56012099006)(261026121527099003);
+ DIR:OUT; SFP:1102
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?qdYTsxr5gNzXk0PVLE+LvuhsVKhK8q2GDhWmGYXe1qxe+dQGp7ye46QgYHSi?=
+ =?us-ascii?Q?3+U2JRRTbF7jNhl383loQgtmsEf7KpnORAkz/1H1hYGpGb2OgL3v00hzmbD8?=
+ =?us-ascii?Q?CbQBda4jnYrQ0KH17HH1mVyINjlZDxhJBH8jlZgDBCexgk8vGF/bCRCMg8ma?=
+ =?us-ascii?Q?rddKwUtsZe+PLhXeX77SUOqE0q2yBgQe+zOT8Cd+6So0/IPdUeBWQdwrAxKS?=
+ =?us-ascii?Q?liAPkhUAO5salhW95YG6GcxZCCmDz9whDGpFMtBc7cIuPC+ikCNpfY14xHPJ?=
+ =?us-ascii?Q?Q92faKqkejHIarINkE/xyWz2ZPybWhzDyr9CykBtMWZDdLaOsjEyHvLjafvO?=
+ =?us-ascii?Q?zaBJTstaglWNbhC+YZKBbKkleqCjBIC0ONElAxIOwX9Vor8HevrWEbuqg3Fk?=
+ =?us-ascii?Q?JrmDpuzTkttq8oeHFts48oZIKs8Zjs3kWY17Wo1Gqb4IeQnKEN0371NbewSe?=
+ =?us-ascii?Q?ssV72mirH3pTPrNLxY00qS19+a9steRewMCKfxo+poPOoOiJ6J2OosFbW8G6?=
+ =?us-ascii?Q?LutsVvY7hfiEsoGX+d+LIp8MIZryXd4Jddu6cwtceBLgcyrAw61zZxOEh6a7?=
+ =?us-ascii?Q?+hsyLh09djhD9BkJCepCP32WLW+Jc7/oovl9+Jt/rWHRPb1SE+6I/Rk/ELqG?=
+ =?us-ascii?Q?bshOfC181HkulZlxDIqnusnqn3YeJZUrCE18b1h5DRszEzUc9EbcYz3mIAKO?=
+ =?us-ascii?Q?JN/CBdKnveh15QlujhV5usJq7ag5I4aKhXgZP3MxzLJKX6ZGzeaO3hsjYdT0?=
+ =?us-ascii?Q?Tzj994LjLsccK3pHWQh0NsD+a8Ig+UqpVr5EUMc6kHItyVjy2rLLPxsPOXgK?=
+ =?us-ascii?Q?gjROB1smM6DR3ok48VnYLeAikSSzJ4pFIn5g03bmeUJyCs/RWjNE1ys9FjEu?=
+ =?us-ascii?Q?0lghpCc66quEWwT60zhUmeY6WH0TU/MIJ2qFdwdaq1+77UtKTz7LXca9FTXU?=
+ =?us-ascii?Q?/BDbh/cmlOLBNvZUEu/2s1MYz8pgQDWVJVY6M6YnzFzBCUe8ETfrHwJNoH2g?=
+ =?us-ascii?Q?g3oSuVP+lP7gUMWBOs0tuwakcz6rmdnpJtcORhXh3LIwaXovVVIe8Nf91DVM?=
+ =?us-ascii?Q?f+l9SuCeOrRlT3pYxaM7R9NacrvFuMdTYhs2oFUKAMVdlvQn4+cFNZtj6VOk?=
+ =?us-ascii?Q?fz26tI/RKljnJJ19I0jTKvKRbGReR+nPjczT8icF4ImAQHuFjnAIcYeRX2hH?=
+ =?us-ascii?Q?/+dW3bt7gEe4fyYgIJzrmo96ALOVcrV4QGZVNF63IkXPHLtmdFDgEFp7QiDJ?=
+ =?us-ascii?Q?hO4znLH2qqmdd8paa4URJ17wDxQJemO5znVhOxhTetMgsQ2rG5bKAZW0AwvQ?=
+ =?us-ascii?Q?J/vOm0BrKfUlIzSRy5yazUCYd38YSCuQgzcLaapPbFZjTczqvYtCOy4F4HMK?=
+ =?us-ascii?Q?05Lxa50wHa+oO3z3IghPr390rpBp+kWRSvJicaJg10jENWhi/AKmFacJnISr?=
+ =?us-ascii?Q?MOT7spSD28w/QS5HnfMqgP3Pyhx/goHuBl0lEea9QbZ5deI5Q2pKLgiuyA33?=
+ =?us-ascii?Q?3zaHV4Av1gVF+u6QLrFww6Xj4gCC6wRbEhU86SIxtKidaBz9ylDJnWNQD5cJ?=
+ =?us-ascii?Q?/p3EYqJVUH4VAGnBSGv37/d8qpwSs3cqlFyQ+v+31YMg34+2dPkvMxpwyU02?=
+ =?us-ascii?Q?Vmmq21A/SpEGzomVN9D/56klBL9M1Zbk6ncmSnoIDdTMpatwnZCg4OSXgldI?=
+ =?us-ascii?Q?D7q9jca9NDOkO46USaEPrCWYV9zi4eqvsgwoy5Ub8Sy4BCKkIaLPUdnLiFlm?=
+ =?us-ascii?Q?hOs6VPbXziYyuXOOmmaPU08+5BgvsT0=3D?=
+X-Exchange-RoutingPolicyChecked: siLPZqszGxcszzUD+cf/AFnhSpOzBbK9xHckvTTkbsi2YLJDRrmug9Wz1UH4Aas7jD2TmRNr6ry9FSSB9QCjDaPecV0sntCPW8QS8qSu7EPxTgWxxpRdsFKyYyk/7KsuweTab/HW7504Uj0XBvE7AQfHzNuTGKbQ/TFBpsOzfZKWKFmHTYCuhYLInK5CX9/V6hvsq/G/sITkqnRfMswfXeTlTLg5VEEkTIwo1f2fkGnpiXIS8rZV/69Q6aPsP/o7Plemfy9YH0uucEBx0oVH/fcFLVovCWryNtWf0dKjHItk+PqfQ0HFGuDifv4e5l5wWKMwP1SrqZfEKrDOhIvXHA==
+X-OriginatorOrg: toradex.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1341eb5e-13ce-4194-cd71-08df3bef86a0
+X-MS-Exchange-CrossTenant-AuthSource: ZRAP278MB0495.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2026 10:20:05.3290 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d9995866-0d9b-4251-8315-093f062abab4
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Jf/GB2qYUm/8B5h8tiOmtzbjeTttDCIH9oWDOF8+29ryjmcLK/C5g4pYcd0OmgEudyg+xuDI1XUid6FdOServ3vp95uhztj3bydkI4WKTLI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVAP278MB516620
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 2Bfhnq5qDRrquU-wrPdqNi0JCCPwjH0LxB8WstmPw28_1793960407
+X-Mimecast-Originator: toradex.com
+Content-Type: text/plain; charset=WINDOWS-1252
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-ORIG-GUID: OcPrEs5qikcteFs-dRf6xefQM5xrEZrP
-X-Proofpoint-GUID: OcPrEs5qikcteFs-dRf6xefQM5xrEZrP
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDA0MCBTYWx0ZWRfXwHPdLNdapYR0
- /8gfYdWD91b1m/7E7XlDFoIM9OsmKIVXlxet74uoowva8w4xNFCOFSBTdUl2eRwEiTDlaA6cad/
- hzz5Uic86S+DjpuzqWl8AdAMRQhUYsU=
-X-Authority-Analysis: v=2.4 cv=XvNvqlF9 c=1 sm=1 tr=0 ts=6aeda7db cx=c_pps
- a=VEzVgl358Dq0xwHDEbsOzA==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_K5XuSEh1TEqbUxoQ0s3:22 a=NEAV23lmAAAA:8 a=1VxDqnHFAAAA:8 a=EUspDBNiAAAA:8
- a=oAcF8F-ipFNkRM5c_wkA:9 a=QEXdDO2ut3YA:10 a=uujmmnXaIg8lM0-o0HFK:22
- a=aZ5uHUMKh6B-zo3GvD48:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDA0MCBTYWx0ZWRfX4Zk0Fe+3G3Xy
- aE3P/fiSCYxStdx+v6zSP+q+Kq4tmeIphdBjcWhhr86DSilApc+HIzFF7lKnSEMhCAAQ3VuNUHH
- 2mQfr4JzEF0FTWyQcftGQxv0h1L+mm1XSze37znlFRPkcandUk2fJzm7x4L1G6HS8jSDjpu99NP
- qLNlqGbWauTZJSTRQrH7kbjWeRH7JIOnZUyQMdG4XBj5k4nm7NmvbhELtb1xhheMhQuDe98iKXf
- 9V6dqIC/g8r4XmrQVKYkgYy8JB9AzjABeyjbtGWUCHitRBwb4eaI9QI1AZbRd5P/jn/GqNneuAQ
- u8EXZLAoWS0tjNCXI7jdHnEK/sBuCYxCvg9uOZlhMuItU3uGwrz1P+Vb0FNULQbxW7jb8MKOCzV
- BHw91sgTl4gpLCVeGHICbuM2CfJ+m9RAs81yx8EmlUU5kv9/vaqPxokwW2+WIjDA/0sJ94WU5x2
- oLwAdhfQmzTaZCMoN0w==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-06_02,2026-11-04_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 adultscore=0 malwarescore=0 impostorscore=0
- phishscore=0 spamscore=0 lowpriorityscore=0 bulkscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611060040
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -223,133 +221,26 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi all,
+On Thu, Nov 05, 2026 at 11:40:00AM +0000, Daniel Drake wrote:
+> So I'm wondering if we should just leave this as a board-level thing
+> as it is now, and have each board continue to do:
+>=20
+>   if (device was booted in recovery mode)
+>      adjust the bootcmd appropriately;
+>=20
+> and I'll just fix up the obvious inconsistency with the way bootcmd
+> gets set for the FRDM-IMX93 in front of me.
+>=20
+> Thoughts?
 
-On Fri, Nov 6, 2026 at 10:42=E2=80=AFAM Igor Opaniuk
-<igor.opaniuk@oss.qualcomm.com> wrote:
->
-> This series adds a "firehose" command that serves a block device to a
-> such tools as QDL [1]. Firehose is the protocol used to
-> flash Qualcomm boards in EDL mode. With this, a board running U-Boot can
-> be reflashed with the same toolset used for flashing any
-> Snapdragon-based device.
->
-> As discussed on the RFC [2], only the subset of the protocol needed
-> for flashing is implemented, and the XML parser accepts only the subset
-> Firehose uses:
->
-> - configure, program, read, erase, patch, power (reset) and nop
-> - physical partition 0 only
-> - sector values N, NUM_DISK_SECTORS[-N] and CRC32(<sector>,<bytes>)
-> - no VIP, UFS provisioning, getsha256digest or getstorageinfo
->
-> Btw, work is ongoing to make the Firehose and Sahara specs public and
-> community driven, so soon there will it will be available and used
-> as a reference for host and device implementations alike.
->
-> The command usage:
->
-> On Snapdragon SoCs the gadget enumerates as 05c6:9008, the EDL ID, since
-> host tools like QDL only probe this VID:PID
->
-> Usage in U-Boot:
->
->   =3D> firehose 0
->   or specifying the storage
->   =3D> firehose 0 mmc 0
->
-> Running flashing tool on the host:
->
->   $ qdl --storage emmc prog_firehose_ddr.elf rawprogram0.xml patch0.xml
->
-> The device is either given on the command line ("firehose 0 mmc 0") or
-> picked from the MemoryName of the host's configure command
-> ("firehose 0").
->
-> QDL automatically skips Sahara when a Firehose "server" is already runnin=
-g,
-> so the programmer file is not sent.
->
-> Tested this implemnentation with qdl v2.8 on the Arduino UNO Q (QRB2210, =
-eMMC):
-> - reads of flashed partitions match the images
-> - write and read back of a scratch range, with and without a device on
->   the command line
-> - erase reads back as zeros
-> - GPT rewritten with gpt_main0.bin, gpt_backup0.bin and patch0.xml is
->   byte-identical to the original
-> - a read of physical partition 1 is NAKed
-> - power reset from the host
-> - test/py test_firehose.py: 3 passed
->
-> On sandbox, the ut tests dm_test_firehose_* and dm_test_cmd_firehose
-> pass. UFS and NVMe are untested (no hardware), and so is a full
-> rawprogram0.xml flash.
+This makes sense to me, thanks
 
-This is a minimal first implementation, I deliberately avoided any
-complex cmd handling,
-so it currently doesn't support these cmds/functionality:
-- getsha256/digest/getcrc16digest
-- getstroageinfo
-- setbootablestoragedrive
-- benchmark, peek/poke etc
-- VIP mode (which I think we won't need probably)
-- different straoge handling logic (handling multiple LUNs on UFS or
-NVMe physical hardware parts)
-- Payload size cconfiguration, ZLP handling etc
->
-> [1] https://github.com/linux-msm/qdl
-> [2] https://lists.u-boot-project.org/pipermail/u-boot/2026-November/63897=
-3.html
->
-> ---
-> Igor Opaniuk (14):
->       usb: gadget: add a Qualcomm Firehose function
->       usb: gadget: firehose: add the read command
->       usb: gadget: firehose: add the program command
->       usb: gadget: firehose: add the erase command
->       usb: gadget: firehose: add the patch command
->       usb: gadget: firehose: pick the storage from MemoryName
->       cmd: add the firehose command
->       doc: usage: describe the firehose command
->       mach-snapdragon: use the EDL USB IDs for Firehose
->       configs: qcom: enable the firehose command
->       configs: sandbox: enable the firehose command
->       test: dm: add Firehose tests
->       test: cmd: add a firehose command test
->       test: py: add firehose tests with qdl
->
->  arch/arm/mach-snapdragon/board.c    |  23 +
->  cmd/Kconfig                         |   9 +
->  cmd/Makefile                        |   1 +
->  cmd/firehose.c                      |  50 +++
->  configs/qcom_defconfig              |   1 +
->  configs/sandbox_defconfig           |   1 +
->  doc/usage/cmd/firehose.rst          |  81 ++++
->  drivers/usb/gadget/Kconfig          |   9 +
->  drivers/usb/gadget/Makefile         |   1 +
->  drivers/usb/gadget/f_firehose.c     | 849 ++++++++++++++++++++++++++++++=
-++++++
->  drivers/usb/gadget/firehose_parse.c | 282 ++++++++++++
->  include/firehose.h                  | 117 +++++
->  test/cmd/Makefile                   |   1 +
->  test/cmd/firehose.c                 |  40 ++
->  test/dm/Makefile                    |   1 +
->  test/dm/firehose.c                  | 204 +++++++++
->  test/py/tests/test_firehose.py      |  99 +++++
->  17 files changed, 1769 insertions(+)
-> ---
-> base-commit: 709a97a05df66e394f40d249105d0baade46f107
-> change-id: 20261106-firehose-v1-af7cf3b4ce48
->
-> Best regards,
-> --
-> Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
->
+Francesco
+
