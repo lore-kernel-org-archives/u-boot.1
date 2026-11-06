@@ -1,30 +1,30 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8ADB4606D806
-	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 09:43:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1D40606D806
+	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 09:43:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zjHqulqP;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GoCF/oeU;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=M+rSC3Nm
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Urf86+BO;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=kRvV6fxN;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=SXMSbriJ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 61549409B1;
-	Fri,  6 Nov 2026 09:43:28 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 902F0811F9;
+	Fri,  6 Nov 2026 09:43:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hR1fsNInPbhL; Fri,  6 Nov 2026 09:43:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 65DAE409AF
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793958207;
-	b=oazjS7M3bsrqVBggsS6NgHcr3/bMDktZ9U6SMqNM4Eiy++ErXE3vD559ia9hBYnvqpxr
-	 AwOgGeLOegHP4MavPSfo1/y8xMDqlh9HmAEexgt5miDfAfRPQkxgZoTlsW32lMm8ir+H3
-	 iyflRRHd0tgfFYoKAFtkoiRjIDS1YEsBjdxxEPOHE3aqCLvqZhIKYdPrpmd/Lt39OAuHa
-	 0R2Abtmc5VjX3ajC9MA6UBF5Fvnfogl9uH1HGPtBk2qYiYBad/TZ23rKps1f84t4ALJ8p
-	 vmwVZ7tVnMv45XYchV5Gb3CmfrnaqWnIyqB04jytYNWiiNBlSAfXPz3EqshTy8wRJnw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id HbFyas1HfOUN; Fri,  6 Nov 2026 09:43:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A7D41811FB
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793958209;
+	b=XhMeiF/hPaZJ9LOFsRdYhKQ6tR81obxZLNfxi1ytKGKMHNwxN8e5ztxn1UeyDXcNera8
+	 hRCP6aUc/QMNOYejRBDc+V25i4qcDn6J+8wuoFABeY60Xnldekgd4s5VarI9NN0YggPQ9
+	 R4O7COoqny7xP4tjp28A8/RDGU/hP+jknbv4nqsrXmWeSmTB5W9dCdeqpv0pUlEP8OydZ
+	 VOArakiH60wsNlwvOL1UJiX5Rg9rMCDqlkWxDuyyQJjb8zrLS/2zPaXJXBMdq1j/Ru9m8
+	 A6zZkuTopJWYVnqODkcp5znR0/8/VYofekqKd4W0elA3AUB97xKLoNmNBKamRiIiKxw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793958207;
+	c=relaxed/relaxed; t=1793958209;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,47 +32,48 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
 	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=FyHUBBavs86EcHCaCG1RQBuvUQAN6dQtp+tBllSbayQ=;
-	b=oX+2kbOrI8+rKTfbmL3bau0wDMiKKSz+9XB804EFumbrnrDYBaWzZuXq5cobJeaONSfc
-	 EWhhJ7+/Yc9ZwNPj8kpcv/c4d/StTP+EkfFwlmt8a8T8032yGyBsLBMXpht65vvlVtwEG
-	 TU38H0lxfW35zARkXVDrRRPmY6PvaS5kGI55IE5bFwX0jaQF5F8nykac1+khi/q4iB9HW
-	 PILzoMD+cwvtqA8V8EMyWM7meV4B+Pu1oYBqWYtz/rvqmGBf9I9sZWTUesnRVpaQd/9lJ
-	 ctJaOJk8VmuB9aZ/NwYEiX5CcRStG6by+6HsExBke8HkuatgN/AICSPn/incZPveDCw==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	 X-Mailer:X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=uzM30v+n0rhLFG1LYwvD0xnjzcZWpoLWLOEuZzpfXx4=;
+	b=Z875fr287MqNNZgujmr7ABgWK3PtTQj3a4NdYVtmSmmIJYnejiFUtxg7FGr+jB1cFPCw
+	 Yp4ZY01YbgdWn/YnZ3thMTPJV+rBep6qbSR2GvPpmavr6SEcVkvZd7gL946DpX8pbzv1s
+	 +lIq35KdUyFS8QHS7NMrxY2VEJnLh9EX6qfCRzjrXj1tJhRhmk6Gk44bLdjJnezQ15mED
+	 DKj1pwMmKEChzQIvn9b1GwuqgvvwHnZ3WcYxFJyELKmEbFlHc4erIjKXkVR5Gba7d86rL
+	 zfp2bkecOigE93Ib0ELQhvPsP8Yy3u5AOZbONgQg+/eMhV+JizR3xMsD0ymt0PoTd/g==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793958207;
-	bh=FyHUBBavs86EcHCaCG1RQBuvUQAN6dQtp+tBllSbayQ=;
+	d=lists.u-boot-project.org; s=default; t=1793958209;
+	bh=uzM30v+n0rhLFG1LYwvD0xnjzcZWpoLWLOEuZzpfXx4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=zjHqulqP228O39MKjVp1gDMV6sY/Fb6H7B7MhBy+BKxYeFiD8I12k6QDuF/21MLWB
-	 PC1tnCvcH3Gm2beZ/qi+ofnDEmkTLbT0K2yzXx8mFzKQcWfpK2ZwE6T+AKlSBTED9V
-	 xf+pko/Hb/fv5nqxLimVlyXVSp8CW0G0fudr1c74zktrtPdT3sDYmuhvZYqV3Ijccd
-	 6m3l/QIBs9iS8LTVp/wZyE9BF30r2AEDfX1Qsbg7ZOusL9HAXOH1kpLNlYTV8ZGVnh
-	 COgubJJXNaqzpFt/8KtCirEjr6gOJUOAG52w7ah8NI5yP4JRpxXSAA2LE2Q/XmEv7H
-	 J6dJHn03TjqXA==
+	b=Urf86+BO4SvC1Ce25UhtyYCzLHXSwhdk0Q1ZOxIVteKVgb4rD4D7R28/gNKlFkaH7
+	 PAjqhV775jxYwrmrF76CpwOmwuS3LYg7dZHNiqFGj2Q6kquCVo/Mz/uWYVtVNHUF+L
+	 LekSLA9PgnPBxnnYE55wiQN1RZFDX38nSrq/5Ti6cqOKdL1csd00FoltWqgKfY5HiZ
+	 QKSjJsH12N3OsDjOvLgRh2SBn91Cv5uoyr5ua34faAGSniEwJ84ncB9+XrcFJP52Ao
+	 g/+vn1DXprbnywjF142+NPTeH94/kVMT+rWcDZXyw4lUgZ61Fi7Z5IZFD9QNLz+s/5
+	 PmRKEcE8ErGQA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 65DAE409AF;
-	Fri,  6 Nov 2026 09:43:27 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 0172C2AC
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 09:43:25 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A7D41811FB;
+	Fri,  6 Nov 2026 09:43:29 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8B22831F
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 09:43:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E70B36069B
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 09:43:24 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 7CFB06069B
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 09:43:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VeObfNykQWeQ for <u-boot@lists.u-boot-project.org>;
- Fri,  6 Nov 2026 09:43:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 39A1860640
+ id mulfV7s7tdea for <u-boot@lists.u-boot-project.org>;
+ Fri,  6 Nov 2026 09:43:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 9AA1B60640
 Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip=205.220.168.131
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
@@ -81,92 +82,91 @@ Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
 Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
- header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
- header.b=GoCF/oeU; dkim=pass (2048-bit key,
- unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=M+rSC3Nm
+ dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
+ header.a=rsa-sha256 header.s=qcppdkim1 header.b=kRvV6fxN; 
+ dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=SXMSbriJ
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
  [205.220.168.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 39A1860640
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 09:43:23 +0000 (UTC)
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 9AA1B60640
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 09:43:26 +0000 (UTC)
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A67R5dZ129121
- for <u-boot@lists.u-boot-project.org>; Fri, 6 Nov 2026 09:43:23 GMT
+ 6A67R7uO3243883
+ for <u-boot@lists.u-boot-project.org>; Fri, 6 Nov 2026 09:43:25 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- FyHUBBavs86EcHCaCG1RQBuvUQAN6dQtp+tBllSbayQ=; b=GoCF/oeUxBIR3HZz
- sry9/G8nO0dfsirpdaMOIFQV6f87UX6nkhBPHqM181P5BoyqUR05MRN0AIjXbZrW
- eX7TGeyBRYBmvzanFv0f3oGo1lCPvPyCSBWhmL+3a5km9fSiLldjTwKrgcA0+V2q
- B90tHtV4zBRpCZ+IGYhi8rdVPfS/8vBuwjClyGSchFK2mIi+2ozsbYtFIMPDyab2
- pSXU0Wd7B3BPLgPvCfYj5L5mTI7msDzhgfM4hjpoLTWbDCQFLjLOiospNymeRrBr
- zEk/+ptNHGWDCRE1Do9DVLjxKUlh9SLr8Ywlo+s7QADaVDxPY4ETGMFo53lIrSW9
- GOL0qw==
+ uzM30v+n0rhLFG1LYwvD0xnjzcZWpoLWLOEuZzpfXx4=; b=kRvV6fxNaTiqGKYr
+ mhBqJIi2yV6IUAVfk6Y+tOULrRa+HawLkaTfDNGX1YiueoGsiZeQjJ6xXupg4HtN
+ g45ls2/53DNNhFnXjUjcrUUwGCCCoiGp7bDQSvTUN4s9kFHrMVJW1XtvDUr7uYxC
+ qaBPhXn9pu78PV/ENkXM7j+VtwakE87bqcNJv3GJ97oWGCKUniKfnWUXsy2w3zvP
+ 3GW9N7eCRJFsin8C4IA25FdkNC66IfqcHi2QRmdxF8Qa78gaQJ6CHbyL32l2DNSM
+ kqCYuTPyVWKBxn0+6NktCtCLbwBwloWzilPwNI6uUwfrMQ5q+0igxbfq3xYXZwAq
+ n1Fzpg==
 Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
  [209.85.222.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hs3p9t68t-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hs3pa24yv-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 09:43:23 +0000 (GMT)
+ for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 09:43:25 +0000 (GMT)
 Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-93f62934ef6so103039385a.3
- for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 01:43:23 -0800 (PST)
+ af79cd13be357-93f33438950so102480985a.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 01:43:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793958202; x=1794563002;
+ d=oss.qualcomm.com; s=google; t=1793958205; x=1794563005;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=FyHUBBavs86EcHCaCG1RQBuvUQAN6dQtp+tBllSbayQ=;
- b=M+rSC3NmoH7uSFn2rQ0w2pzA68XCMRD4psCaRDBjkL+akozcIo+hOLTyxqtGfjRvHN
- IfzjRvE21UlbBm16Bkrchvl53uER3rfkA4lXql+47gQJq/Ruq0SrON0pxtVVXKPm8xAw
- lJruVFCdOeb/29aATrsHhUq4QgWpuAxcPexIQ1shxkowlP0N9q6gXPVc1eWlIskR6RxA
- f+UhOosyjLTtUa9qqml6m1gbZh0YhtG76dalZCCPGC98WGsdNS2z2Iz9iMZ3iugjv+f9
- r5xL6I+rMdNvOeC4hKQ5FnNJL4Cv326LsCAVOmPpfiqOI2UrOt4KwKoCXLvhAYzz/ywk
- 520w==
+ bh=uzM30v+n0rhLFG1LYwvD0xnjzcZWpoLWLOEuZzpfXx4=;
+ b=SXMSbriJywIuSVwvswlCJeDxKMYn2wTh7rM8F24zdqbvQOG0zWIXQldBqBPJO1pDg4
+ bw5JU/4vV4nRPJppiPYwMkpMpX0rmVdDUzioq+Qb7WB5oxmSuhzMia8ZZ/WGkziKb3bh
+ Nx5oJR2Fecn+tfjUWkdOnjeZQU+gze9EDgbB6hENs8CFDQ54SifvitrHuSgx+q/YJX0l
+ npYrJaCcn+X4Aj2g6cRY6CLnRsT+/UqsfD90p1/ChC8Pn/Aje4tAKtxA4yT5C02bJuJ2
+ Fe7gVA2JLCPDG36FNEd70DMmjvtqf/6vZspp+7umxMALgSlGn4k0qWbInuB2RqMCQ3XY
+ EQpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793958202; x=1794563002;
+ d=1e100.net; s=20260707; t=1793958205; x=1794563005;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=FyHUBBavs86EcHCaCG1RQBuvUQAN6dQtp+tBllSbayQ=;
- b=eiSv5EFQVELnoR/2RH04sdiOMeD0CgJ85oc8JkvZYpgJzsdPb2miKdK4GBRuVoF3tl
- nz3iTRe78J3RArFNCdQr+A9AScVu+JR2T2ifXPpizvrPN1AQIBCdMRIG+UI74curjZuE
- URIb9Cw7YqutozhMNjtYJTC79xbBNrBZPh0zu5tOyVFFxssfFW5G4eG69UzQhH3zX1+7
- PH4dOgvt+8IL386+toVyPXLi8LFW/n1/EhVGVNz3ecdNg/1Kq3dmiAfTENpkLw9fge2I
- EwQnKhn+K0LbahE/bfYeYyNLbmystGaHWABuA4hn4GQbdn9Q03FBxa97gwh2MExikQ/N
- 8cuA==
-X-Gm-Message-State: APuU4Z/W/CXKJZr6A0mQVOIDrm9JOeTPSVLp1rUsIX7eTQ0gPTSUG/A2
- QQpyvhqbtPLKdr3MLOqcsZ4fjZXynXlvz51QVZWLK3TXa6BZVlEkXKkvY+OjP0N0I6bUEnOQPaQ
- /FPl1EDLL7+pgVgmykZM8Hjq1xbxdgMNbitRwBeG0zxNunRAC+Xvlsktkuj5sThKTxEAGl8o=
-X-Gm-Gg: AYBFou2NFH4NIh748Fl9bX6Yvya3vzc9j5IY2cTsX+99MpMVoZftmzH1VteZ9GCsmLb
- Ei0onGJeGYQlpBHRRPxEzCPmaqYMOMFyeTC76IfhSqDNigkSWY8qYoZX0fKLzBVRd2Ln77hfebe
- mj2qWVxOw0OYUKH3v1OydIhMUbdGPpzlEeVLYuKgodzB1bP4YxNg9FHrpDQDPd5FMjhJ87TLgi/
- vS6+2LpH/kfYSLjMrLQIOi/8x1PbN4OWBlP6KlJCLevDQKmB78DCwFFqgrfdS7cWkv96+kjpYu3
- MFHiMp68GLnGRBBBD5KR4V4QalZSLNxn87U/t0crIrVq9s4eTf//gUMLZl20MA2BGkqIvk5DNOj
- EqKZdlsVHbD9DueISHgfqXUQ1p2cQI5XUnYrs9d3uceRzQs1puAB80U8VU6oYCfxwj4Xt2SWYOZ
- 5SOvOS6kgE3TDL
-X-Received: by 2002:a05:620a:4628:b0:93f:2463:f784 with SMTP id
- af79cd13be357-945f350a772mr273004685a.66.1793958202176; 
- Fri, 06 Nov 2026 01:43:22 -0800 (PST)
-X-Received: by 2002:a05:620a:4628:b0:93f:2463:f784 with SMTP id
- af79cd13be357-945f350a772mr273003385a.66.1793958201707; 
- Fri, 06 Nov 2026 01:43:21 -0800 (PST)
+ bh=uzM30v+n0rhLFG1LYwvD0xnjzcZWpoLWLOEuZzpfXx4=;
+ b=nS+Usr8eEmLaFL2JsrBiEMD8d3aTZz9Zyk+tau9Rhg1NY/MPNxLYB3VUYmT1YvEUAN
+ pxRDMFOZQKLa7BCd9eKOqdNgWQdYy2R5UIS78LkZ8je/mytiy3hmwCrpZgwe5XTi7w/3
+ Uxy+zCdJW/ehbk3dg0WI09pKSdLI+9tEVqyBAFWThlmUxLtNehA7HBOpu//DBUYxnmRP
+ TzEC5h7M6polF9YwkFlei7MeZ7v9jldEUR3S7XJ2UoT+nIuz/SETLrs0aL1o1zWY3tj7
+ ir68HO6xACCJlZvq0wJkrG3V7p2Bu3Vprg8kROKRXIkgemJ1xqndoEPnbGxzEsVOfuTH
+ qmig==
+X-Gm-Message-State: APuU4Z8762yeFfNGjjVHsUsqrUEQwOPiCmrEX0RU7iWAOvekpz8wfSoJ
+ UsgS7FhTpBHq+Wesy+7DT6LHdBJH8ZXGPFmqGgB2wh1uafumWfi/v4O+EfTTfbCQK62Pyz2Vy8V
+ gjBrf0U51T6rP3JJDeGjzm9XcNdav6Pbba/TcrXN/ZO+HG7ko/+QUC0Lo3wBTPiXk9RV1wo4=
+X-Gm-Gg: AYBFou0ZFaDsLQaG/bMLR+fc0OyIY8PGszuMxy5JaTrjw98hSvY8ZCUpd4QVt4teNl/
+ aH3afAq6nkbea1mS24G9bgMJHBhSqg9s+PAjOM6GbfwTPz+LQ0AronRftAQ0ez7RX9JIR7LseWq
+ A3/sbnkonn46110tVDRGbfOazzOBsH/pZyd7RE95RNfjywPw+FbeN8EU5zJ8WJhXBXxMKv8cjme
+ 2NVN81fZMlMgRYSOIEJBYVAePYfzY95F3hT7hrlwVwvvVzdAZqFG0jahgTOR+z6bfFK3U2BQV0n
+ EFwHJa4wPUATeFDYcDQ1apYPdBCuWQrmVRjtuV5ZWpRGWqZJB3YnlJhp0/Je+mDr4369vfJbDF6
+ JzcfuEs1kmBgYP+zx679Oqq5SxjMrk0HtUH06KheaIugeFaw3N0O03ZSYuGwsAgZQUH2CubiAPD
+ k7BE1sqnJ0KBe7
+X-Received: by 2002:a05:620a:2811:b0:93e:a51e:7ffb with SMTP id
+ af79cd13be357-945f3355eb4mr209716985a.2.1793958204508; 
+ Fri, 06 Nov 2026 01:43:24 -0800 (PST)
+X-Received: by 2002:a05:620a:2811:b0:93e:a51e:7ffb with SMTP id
+ af79cd13be357-945f3355eb4mr209713085a.2.1793958203910; 
+ Fri, 06 Nov 2026 01:43:23 -0800 (PST)
 Received: from [127.0.1.1] (93-159-22-70.cgnat.inetia.pl. [93.159.22.70])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c4d3562ec2csm64822366b.14.2026.11.06.01.43.19
+ a640c23a62f3a-c4d3562ec2csm64822366b.14.2026.11.06.01.43.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Nov 2026 01:43:20 -0800 (PST)
+ Fri, 06 Nov 2026 01:43:23 -0800 (PST)
 From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Fri, 06 Nov 2026 10:42:43 +0100
-Subject: [PATCH 11/14] configs: sandbox: enable the firehose command
+Date: Fri, 06 Nov 2026 10:42:44 +0100
+Subject: [PATCH 12/14] test: dm: add Firehose tests
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261106-firehose-v1-v1-11-e7591c12fc65@oss.qualcomm.com>
+Message-Id: <20261106-firehose-v1-v1-12-e7591c12fc65@oss.qualcomm.com>
 References: <20261106-firehose-v1-v1-0-e7591c12fc65@oss.qualcomm.com>
 In-Reply-To: <20261106-firehose-v1-v1-0-e7591c12fc65@oss.qualcomm.com>
 To: u-boot@lists.u-boot-project.org, Sumit Garg <sumit.garg@kernel.org>,
@@ -193,31 +193,31 @@ Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@nabladev.com>,
  Rasmus Villemoes <rv@rasmusvillemoes.dk>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>
 X-Mailer: b4 0.14.3
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDAzOCBTYWx0ZWRfX3xWyCAvNVusg
- vgCWmyRIhlh7ETr5rRqjSfqC+bYW70iCAb2gHRQopeg8HjeoJkm+oqBJOuLBiSIYpiRaXKlouck
- TpYeznA+eCg7FUYBeQzq7EuElr/49+g=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDAzOCBTYWx0ZWRfX1B3filnssJ5i
- WAp9JaDiwHo8l7TtdOhAvOyh5RJ9dzpVPQy2huoaX132okXpyu6OO8FmVlWMr1x0qw+5VgC076m
- gaOtqH+RtN23se2vwqsurnxrLGvazvj6SA7OME5OKcIDvpDvUXWJJpleCoKqsX/dcRmj5hcdDq8
- ualxkBvr0wxknbLNk43aExYfKF0n5lIltTiDQZoU2D4GIo/QFPPZrvbcJBVIiyoeTGnp1s6PsHs
- eonhAEytgxewQL7Nq4I7qWtS58vTg7kDRMu88lB2tdfAJPwuXtjZGHtY2axR41MrTO9+vyvGJKJ
- 8SX2aZ1FhkBTpkUCoBf34M8AYoHQMNPSPKD9z7GqzAX8/9qjWYPgprcuLIqdegXNM/2WSuLHR2w
- 2YkP9FT9cp+quFQWlrSKzbptzmI7u+etWrI2Ejph/e26KtiPR+giKIf+n4A7LuUBi3oHMAwxjk6
- I+XhW/8zwrjQrs0UIyw==
-X-Proofpoint-ORIG-GUID: 6LHyNLtD9v2Xb4fIqkkH8j752E7hJMbR
-X-Authority-Analysis: v=2.4 cv=f6Pdl+yM c=1 sm=1 tr=0 ts=6aeda13b cx=c_pps
+X-Authority-Analysis: v=2.4 cv=PLeaavqC c=1 sm=1 tr=0 ts=6aeda13d cx=c_pps
  a=50t2pK5VMbmlHzFWWp8p/g==:117 a=ySe+0nHqNG5yihRO1pIWsw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=MqYgbl_MLcuh2LLqNG0A:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=W1BiHNyAc7_2oUjjS0wA:9 a=QEXdDO2ut3YA:10 a=O8hF6Hzn-FEA:10
  a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-GUID: 6LHyNLtD9v2Xb4fIqkkH8j752E7hJMbR
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDAzOCBTYWx0ZWRfX26TG50HPe3PA
+ zCVy9gN8fdwT98+Zv58Jr0P8AHKDNRF+VA0GSO96uuyCpU/7eIqM8ITt49dwrWCeypquvWjGAIb
+ syy0jMamDyM40vfoZ4vxTWsX7ExV2O4=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDAzOCBTYWx0ZWRfX2hXDepYxZqF3
+ q7V/fsFhrTpsK+vyIQCqGbHPkLp7SLisJotcorcrWf7BXaPy+nwluz5b9WyA9lqKc0Kh0U30Tvw
+ M8xed3JBxKVnSisl2fBrW5WxYBfqBHJtiRf8v0PbyKz5kIHCOKm8zOu6xwuEZ1WhwUHbcsusx8Q
+ tJa4N1fkym/176cfc4YviHn3QJZzgA7VXXXf+rjTxrU8K9GTD29+VzSALC7PgOtMAJOQnhhTfdX
+ 0jqqxxeYrs5BO0FE8FERDkhyB33vDzvsytloKTS2L1UnALJHYyOyMtZgbfPQ3AUDxoW5U1M32RT
+ Nruz8kYF3b2SzOWtum7sUWNUZVb+lUdLOA1CT36mHYLgLfB8eIcnVcT5Hup1u2UU/S7AtEnYY+b
+ 2ZjmvA4TjP4qhB1LFxj7o+tpz9JHUcrnRZ1R5lRnFmIRbfZFvWSlqqE9Akr6yM7fMl+5sDvT4DR
+ 9f+8w2ShDbr9srzBj5Q==
+X-Proofpoint-GUID: yDjU6Mn-I0bJORfawI5HmY_3P5WBDA5M
+X-Proofpoint-ORIG-GUID: yDjU6Mn-I0bJORfawI5HmY_3P5WBDA5M
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-06_02,2026-11-04_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 malwarescore=0 bulkscore=0 phishscore=0
- adultscore=0 spamscore=0 clxscore=1015 impostorscore=0 suspectscore=0
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 clxscore=1015 bulkscore=0
+ priorityscore=1501 spamscore=0 phishscore=0 adultscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611060038
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -231,31 +231,244 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Build the Firehose function and command on sandbox, so that the parser
-and the command can be tested there.
+Check commands as qdl sends them and the rejection of malformed ones,
+including qdl's Sahara probe; sector values and CRC32() against the
+sandbox MMC; and the MemoryName lookup: SD cards do not count as eMMC,
+UFS finds the sandbox SCSI disk.
 
 Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 ---
- configs/sandbox_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ test/dm/Makefile   |   1 +
+ test/dm/firehose.c | 204 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 205 insertions(+)
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index c63a4df8bef..05978d9fad5 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -108,6 +108,7 @@ CONFIG_CMD_REMOTEPROC=y
- CONFIG_CMD_SPI=y
- CONFIG_CMD_TEMPERATURE=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_FIREHOSE=y
- CONFIG_CMD_RKMTD=y
- CONFIG_CMD_WDT=y
- CONFIG_CMD_WRITE=y
+diff --git a/test/dm/Makefile b/test/dm/Makefile
+index 1b3a20aa932..e9c7daa1636 100644
+--- a/test/dm/Makefile
++++ b/test/dm/Makefile
+@@ -94,6 +94,7 @@ obj-$(CONFIG_CMD_MUX) += mux-cmd.o
+ obj-$(CONFIG_MULTIPLEXER) += mux-emul.o
+ obj-$(CONFIG_MUX_MMIO) += mux-mmio.o
+ obj-y += fdtdec.o
++obj-$(CONFIG_USB_FUNCTION_FIREHOSE) += firehose.o
+ obj-$(CONFIG_MTD_RAW_NAND) += nand.o
+ obj-$(CONFIG_IP_DEFRAG) += net_defrag.o
+ obj-$(CONFIG_CMD_NFS) += nfs.o
+diff --git a/test/dm/firehose.c b/test/dm/firehose.c
+new file mode 100644
+index 00000000000..bcd89d3764a
+--- /dev/null
++++ b/test/dm/firehose.c
+@@ -0,0 +1,204 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Tests for the Qualcomm Firehose command parser and expressions
++ *
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#include <blk.h>
++#include <firehose.h>
++#include <malloc.h>
++#include <part.h>
++#include <scsi.h>
++#include <vsprintf.h>
++#include <dm/test.h>
++#include <linux/string.h>
++#include <test/test.h>
++#include <test/ut.h>
++#include <u-boot/crc.h>
++
++static int parse(const char *xml, struct firehose_cmd *cmd, char *buf,
++		 size_t size)
++{
++	strlcpy(buf, xml, size);
++
++	return firehose_parse(buf, cmd);
++}
++
++static int dm_test_firehose_parse(struct unit_test_state *uts)
++{
++	struct firehose_cmd cmd;
++	char buf[512];
++	u64 val;
++
++	ut_assertok(parse("<?xml version=\"1.0\" ?>\n<data>\n"
++			  "<program SECTOR_SIZE_IN_BYTES=\"512\" "
++			  "start_sector='NUM_DISK_SECTORS-33.' "
++			  "filename=\"gpt_backup0.bin\" />\n</data>",
++			  &cmd, buf, sizeof(buf)));
++	ut_asserteq_str("program", cmd.tag);
++	ut_asserteq(3, cmd.num_attrs);
++	ut_asserteq_str("512", firehose_attr(&cmd, "sector_size_in_bytes"));
++	ut_asserteq_str("NUM_DISK_SECTORS-33.",
++			firehose_attr(&cmd, "start_sector"));
++	ut_asserteq_str("gpt_backup0.bin", firehose_attr(&cmd, "filename"));
++	ut_assertnull(firehose_attr(&cmd, "label"));
++	ut_assertok(firehose_attr_u64(&cmd, "SECTOR_SIZE_IN_BYTES", &val));
++	ut_asserteq(512, val);
++	ut_asserteq(-EINVAL, firehose_attr_u64(&cmd, "filename", &val));
++	ut_asserteq(-EINVAL, firehose_attr_u64(&cmd, "label", &val));
++
++	/* As qdl sends it, without the declaration and with no attribute */
++	ut_assertok(parse("<data><nop/></data>", &cmd, buf, sizeof(buf)));
++	ut_asserteq_str("nop", cmd.tag);
++	ut_asserteq(0, cmd.num_attrs);
++
++	ut_assertok(parse("<?xml version=\"1.0\"?>\n<data><power value=\"reset\" "
++			  "DelayInSeconds=\"10\"/></data>\n",
++			  &cmd, buf, sizeof(buf)));
++	ut_asserteq_str("power", cmd.tag);
++	ut_asserteq_str("reset", firehose_attr(&cmd, "value"));
++
++	return 0;
++}
++DM_TEST(dm_test_firehose_parse, 0);
++
++static int dm_test_firehose_parse_invalid(struct unit_test_state *uts)
++{
++	static const char * const invalid[] = {
++		"",
++		"\x02",		/* Sahara HELLO response, as qdl probes */
++		"<program A=\"1\"/>",
++		"<data><program A=\"1\"></data>",
++		"<data><program A=\"1\"/>",
++		"<data><program A=\"1/></data>",
++		"<data><program A=1/></data>",
++		"<data><program A/></data>",
++		"<data><program A=\"1\"B=\"2\"/></data>",
++		"<data><program A=\"&amp;\"/></data>",
++		"<data><program A=\"<\"/></data>",
++		"<data><1program/></data>",
++		"<data></data>",
++		"<?xml version=\"1.0\" <data><nop/></data>",
++		"<data><nop/></dat>",
++	};
++	struct firehose_cmd cmd;
++	char buf[512];
++	int i;
++
++	for (i = 0; i < ARRAY_SIZE(invalid); i++)
++		ut_asserteq(-EINVAL, parse(invalid[i], &cmd, buf, sizeof(buf)));
++
++	/* One attribute more than fits */
++	strcpy(buf, "<data><program");
++	for (i = 0; i <= FIREHOSE_MAX_ATTRS; i++)
++		sprintf(buf + strlen(buf), " a%d=\"%d\"", i, i);
++	strcat(buf, "/></data>");
++	ut_asserteq(-EINVAL, firehose_parse(buf, &cmd));
++
++	return 0;
++}
++DM_TEST(dm_test_firehose_parse_invalid, 0);
++
++static int dm_test_firehose_eval(struct unit_test_state *uts)
++{
++	static const char * const invalid[] = {
++		"", "x", "-1", "+1", " 1", "1 ", "1.2", "0x10",
++		"18446744073709551616", "NUM_DISK_SECTORS+1",
++		"NUM_DISK_SECTORS-", "NUM_DISK_SECTORS-1-1",
++		"CRC32(2,700", "CRC32(2)", "CRC32(,700)", "CRC32(2,0x10)",
++		"CRC32(2,700) ", "(1)",
++	};
++	struct blk_desc *desc;
++	char expr[64];
++	u8 *data;
++	void *buf;
++	u64 n, val;
++	int i;
++
++	ut_assertok(blk_get_device_by_str("mmc", "0", &desc));
++	n = desc->lba;
++	buf = malloc(4 * desc->blksz);
++	ut_assertnonnull(buf);
++
++	ut_assertok(firehose_eval(desc, buf, 4 * desc->blksz, "0", &val));
++	ut_asserteq(0, val);
++	ut_assertok(firehose_eval(desc, buf, 4 * desc->blksz, "34", &val));
++	ut_asserteq(34, val);
++	ut_assertok(firehose_eval(desc, buf, 4 * desc->blksz, "34.", &val));
++	ut_asserteq(34, val);
++	ut_assertok(firehose_eval(desc, buf, 4 * desc->blksz,
++				  "18446744073709551615", &val));
++	ut_asserteq_64(U64_MAX, val);
++	ut_assertok(firehose_eval(desc, buf, 4 * desc->blksz,
++				  "NUM_DISK_SECTORS", &val));
++	ut_asserteq(n, val);
++	ut_assertok(firehose_eval(desc, buf, 4 * desc->blksz,
++				  "NUM_DISK_SECTORS-1.", &val));
++	ut_asserteq(n - 1, val);
++	ut_assertok(firehose_eval(desc, buf, 4 * desc->blksz,
++				  "NUM_DISK_SECTORS-33", &val));
++	ut_asserteq(n - 33, val);
++
++	/* Fill sectors 2-3 and the last one, then check CRC32() against them */
++	data = malloc(3 * desc->blksz);
++	ut_assertnonnull(data);
++	for (i = 0; i < 3 * desc->blksz; i++)
++		data[i] = i * 7;
++	ut_asserteq(2, blk_dwrite(desc, 2, 2, data));
++	ut_asserteq(1, blk_dwrite(desc, n - 1, 1, data + 2 * desc->blksz));
++
++	ut_assertok(firehose_eval(desc, buf, 4 * desc->blksz, "CRC32(2,700)",
++				  &val));
++	ut_asserteq(crc32(0, data, 700), val);
++	/* A buffer of one sector makes CRC32() read in chunks */
++	ut_assertok(firehose_eval(desc, buf, desc->blksz, "CRC32(2,1024)",
++				  &val));
++	ut_asserteq(crc32(0, data, 1024), val);
++	ut_assertok(firehose_eval(desc, buf, 4 * desc->blksz,
++				  "CRC32(NUM_DISK_SECTORS-1.,92)", &val));
++	ut_asserteq(crc32(0, data + 2 * desc->blksz, 92), val);
++
++	ut_asserteq(-ERANGE, firehose_eval(desc, buf, 4 * desc->blksz,
++					   "CRC32(NUM_DISK_SECTORS,1)", &val));
++	ut_asserteq(-ERANGE, firehose_eval(desc, buf, 4 * desc->blksz,
++					   "CRC32(NUM_DISK_SECTORS-1,513)",
++					   &val));
++
++	sprintf(expr, "NUM_DISK_SECTORS-%llu", n + 1);
++	ut_asserteq(-EINVAL, firehose_eval(desc, buf, 4 * desc->blksz, expr,
++					   &val));
++	ut_asserteq(-EINVAL, firehose_eval(desc, buf, 4 * desc->blksz, NULL,
++					   &val));
++	for (i = 0; i < ARRAY_SIZE(invalid); i++)
++		ut_asserteq(-EINVAL, firehose_eval(desc, buf, 4 * desc->blksz,
++						   invalid[i], &val));
++
++	free(data);
++	free(buf);
++
++	return 0;
++}
++DM_TEST(dm_test_firehose_eval, UTF_SCAN_PDATA | UTF_SCAN_FDT);
++
++static int dm_test_firehose_storage(struct unit_test_state *uts)
++{
++	struct blk_desc *desc;
++
++	ut_assertok(blk_get_device_by_str("mmc", "0", &desc));
++	ut_asserteq_str("eMMC", firehose_storage_name(desc));
++
++	/* The sandbox MMC devices are SD cards, not eMMC */
++	ut_asserteq(-ENODEV, firehose_find_storage("emmc", &desc));
++	ut_asserteq(-EINVAL, firehose_find_storage("spinor", &desc));
++	ut_asserteq(-EINVAL, firehose_find_storage("", &desc));
++
++	ut_assertok(scsi_scan(false));
++	ut_assertok(firehose_find_storage("ufs", &desc));
++	ut_asserteq(UCLASS_SCSI, desc->uclass_id);
++	ut_asserteq(0, desc->lun);
++	ut_asserteq_str("UFS", firehose_storage_name(desc));
++
++	return 0;
++}
++DM_TEST(dm_test_firehose_storage, UTF_SCAN_PDATA | UTF_SCAN_FDT);
 
 -- 
 2.53.0
