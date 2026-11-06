@@ -1,163 +1,163 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57AF1606A329
-	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 17:47:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D04D606A326
+	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 17:49:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=u95/MWEP;
-	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=HRcyBuI/
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ZObid3um;
+	dkim=pass (2048-bit key, unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=xOasG4R7
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AC78E60890;
-	Fri,  6 Nov 2026 17:47:58 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id IqiabvLGH-bo; Fri,  6 Nov 2026 17:47:58 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org EEECF60771
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793987278;
-	b=ZZ487RlrojYJB33JTxIIHytxHBis4x6pPPqL+Xsr7TbhfInwNpishj1AHaN4OTddOdCM
-	 /C/y5EfDg23RaPNIq3ok7+40CZVc5zxtFyRLPMi5GnvZBL+A1MwVxBJyZOe0Gu4vp7Kp2
-	 JsHSURZthPoAE94igyv0w1Oz/tHoKuwLlxQKwJ/GATaODJig46eChJamjOUJl4oKTomN1
-	 QvZbcYI2YA7srMho8FdajZhI4KwhGMfJSETEkIPVXmgsdRT2vEq5+P/4HHjgKehyONzbr
-	 2K4BAzuz9TukpeEnTJy7/ZfcZlhSydW/uuouu8CuCUz6FfHJf/+NsGgwck9DwcOSQ0w==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793987278;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=/s5mnZSn3r80oPcxJB6WWms+oq6RNDAvvgt+8m99REg=;
-	b=E9wl0neQiprYC2GL/ToM8tm8yjNcp9oJk78cTLPmIBNf6ZixOXIP4mvCb9mmzoMZDmaj
-	 ioCV8L75FBCkfO0rmNAvJYNqjlWDu9IFVWkY3q6ZokICSuJZDCt2UPXutd88LEWnxqDoC
-	 bjKDvd8J/oxYOMzDAFbKVHdEvwZd/xSv6swntok2FVc9OkbpE6OsuFQSClB6MBpmQiOft
-	 /Vx92EAQRhspeZJcg8U4V37+NFIQJ02XfAUbQE1QUHCuMfjJ9M/FVUHqAa2mh/HUiJmMI
-	 FWbI3j9aWXU4giWXWlgPWw51axzj/aoRJOVHmptMRLX2G7bLZl/5cloP0kqiW6gMvXg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	arc=none smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793987278;
-	bh=/s5mnZSn3r80oPcxJB6WWms+oq6RNDAvvgt+8m99REg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=u95/MWEPMvdytPPY8bFRlSECGNPNCHNu/jPaddULw5ywPbv6Pt+x+EcoM7/xhRTns
-	 GUFRbi3/E8jxqD9VBX5wlUf3tzKuJKYoq/Zu5+UYopKB7mi6WCaDi1bfH9Ljin0vfV
-	 c1+M/GTqtAcobCXFZfxGO9ii375utD0sff+NDFtBzFg7us0X7XiCNE2fXvRQG4jQ6A
-	 3W8RjsOUVW5x/rjCqLG+UpSWTv3cNb7CpTFKYrCUbWXlLOgBBco4lQyLPL0srxAzDN
-	 1vHDbG9Im+fde2uQoTBzeVtTIE/03CicsPChicKBF75CUsl2h1K467SXlqgPO9E0lU
-	 Zs0IZ5OFNEJIQ==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EEECF60771;
-	Fri,  6 Nov 2026 17:47:57 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 822FD2AC
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 17:47:56 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 689194080A
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 17:47:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F2DA54093B;
+	Fri,  6 Nov 2026 17:49:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MCX5hnMjF8UG for <u-boot@lists.u-boot-project.org>;
- Fri,  6 Nov 2026 17:47:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A25B8407E2
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::c2b"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::c2b; helo=mail-oo1-xc2b.google.com;
- envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
- header.s=google header.b=HRcyBuI/
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
- by smtp4.osuosl.org (Postfix) with ESMTPS id A25B8407E2
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 17:47:55 +0000 (UTC)
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-6df0b02fe91so1247710eaf.0
- for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 09:47:55 -0800 (PST)
+ id nKSYYaMXwNsR; Fri,  6 Nov 2026 17:49:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E47F040940
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793987346;
+	b=QZ5/KEsaXZYNRSREt6dvv+ZSiyCexlqfK9bPTkE4bheLzTGl8cjeYUXjet36SDTccngb
+	 xSByL94QexVVSwV7Vy2hazl8/mm4jQWo5ANgaysJ5yXCYYGU5X+WOXHWT34r/f3bvKZI4
+	 IIPuGpuK4L7kQO2+2Yaj9pHs52eV4OaLrmSwwcdGWUQpVNVdMuGgOVj3Z006hAS2gMbuy
+	 PpdtzW79Qf+5T9S+RZRe+JYsoWHmM8OVtu0EmAmVg0Hf5BinjphtVyxpB7jDMIMZlhVMQ
+	 VOzxlcl1I2d3XRE9xBVteRFWZVPBqssts/zojyitbSo6lSnofCywIxtIHmdyrYg0OQA==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793987346;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=UU1v28J/IDSu43XmN2rySupdtH63MX5/ANn+fxB8Xg8=;
+	b=IRdDYMvzWF/TK2aa3BdisyuKjrgPaeS1lJ2fPt7R8cJ08sl6dASWwLlEVl+8gggHYKl5
+	 Q23CjFhWsz17U8tQpqjqhH3UdpTFMgZVXiPMImi9781hI9v6Z+0JY7RM57p9izdsZ97qH
+	 R9et/LLYrHRIuRa8kofcv0znNQyjx6VOOblT5481s/WaS77bF5brGskC+KaI2B9GY/3De
+	 ljAmUf1MzsDGnSOj3327nv3rqcSC+8RfK5xqyvPF6V63W7Wkmx6tJi+PHRVt+1s57kY9U
+	 jZ3DMObe+U0d87pYdJa5WFX1X8wYvnTeWXxgAnwln//v34Sa1dTUsuf1+44KSvHNuUg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	arc=none smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1793987274; x=1794592074;
+	d=lists.u-boot-project.org; s=default; t=1793987346;
+	bh=UU1v28J/IDSu43XmN2rySupdtH63MX5/ANn+fxB8Xg8=;
+	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=ZObid3umBvHIT/MUrZr4z3q+eOpMxKgl+Sxk/D/q+lD+JRJQFp00JJ410GmPrUtmF
+	 y3XcG+5YofhSCwFXbaqoJkkaX1sDQ1Ck9wUtpW3PyND0xNnchDXypmDu2GoxmjpthJ
+	 TG+s18txVD7WiDgbu9O+6BWQqRxaKT0fSLf8+QbRRz5fOWK5/uGSAhb/uR1X66tHda
+	 AlaDWryWyjS2D+CeCE7O9fNBmpESd/FThnJ3N4o5fiK+I14IoOyPnsR05V3rVcicDu
+	 kYB/7QK2cloV/+YZwu/0GBPKLfP/TyMhdIGgHFLBfy63WCkkVIGwiljO8ajBi0axxA
+	 oHQ5tf2T2cTgw==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id E47F040940;
+	Fri,  6 Nov 2026 17:49:05 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 9EE052E5
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 17:49:04 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9BFDB403D5
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 17:49:04 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 7ylmfj2JHNbw for <u-boot@lists.u-boot-project.org>;
+ Fri,  6 Nov 2026 17:49:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 49D93401EC
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::336"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::336; helo=mail-wm1-x336.google.com;
+ envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=xOasG4R7
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 49D93401EC
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 17:49:02 +0000 (UTC)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4a5036bbac7so5959275e9.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 09:49:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=flipper.net; s=google; t=1793987341; x=1794592141;
  darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=/s5mnZSn3r80oPcxJB6WWms+oq6RNDAvvgt+8m99REg=;
- b=HRcyBuI/EEEr9tUDTaYiznc3xnW0QwyhExCzQzMafCVTLqSAvWqrFcpipZrUDIIP08
- tdmkwpppeHnSY/izFjG7Twb+vZvO04a6Ik3yNjg1j2L5Me7k8DTxQLvpPKJywCOHLQpa
- IuOgTv3chfAKuDFjJ/wdR86mMD9xHuEwENCUI=
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=UU1v28J/IDSu43XmN2rySupdtH63MX5/ANn+fxB8Xg8=;
+ b=xOasG4R7HdS4MibVRalnhy7HISAnClQ6W/DD9ZmP/tdQznnnuj1mmlG6zIDlz3v2FF
+ jD7gM9BegQpsFNK0nYKzxhGRX/AaPfvk2Q5fd5tELBF4bGugYDVPusp5vbTs5kcddNZK
+ Szm8lBDPw+utCcyFAxZ+HwXAZBDqhkDk+c5h2jbQH5AJPr3xfguwI46kob0+MzLuDqPC
+ XKw7+qXuir3DVmC7vF2FWVgfFmjv5Vq9J/oB/4o7e0/VN4mnoLhqaAL4AefaAWReQMDT
+ e0iphbb3W9BU3oQU0H6cNRlXECjk9IdRMMUPFDRlCLrEGEnbZ2VZYQWHS4lHqrVm19Dk
+ htpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793987274; x=1794592074;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=/s5mnZSn3r80oPcxJB6WWms+oq6RNDAvvgt+8m99REg=;
- b=FTunLdzEEQZ6nOD1GLdvmQCULAFrt8tTTQz1PFk3SUOn8e5ao4Rh1mts8hFkZcSqxq
- JYVx9LuZ2dtjXnXY+WBp9iLWcrZJGfe7HbLUaVwOsEtylCrq+D0Dg2SMaxgiPYvMNbi7
- cEHHDPwYsElyAtPqgIHePmcfSYzpadlD3MwWz6Wp7hA+3HnMZE8qbXJakvp5stg7j6RS
- 80fYRRGteh0nXRiglHAowa0V2avOE/16w6+9lBDVCcto1rE4zLAS8pr13nS2w5rAc6Kk
- nIxzbCLaVgcjvLfJ7Jtp2608XibpOcS0YyiYOVh5APfsSjaAl8+Tz6BPRCRoE4wgirbx
- TeqQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvByxrbgzapNiLJw5TVy5iOWQSoCWBslTSKD7nyhpeSVcovj0UR5sVkJUEaovlwJHW9wrlXiRD5U=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z8q1MKlF4+nNX0gITVmxX/O9CxrYM9cGT7xwwPyxc18JBAmjSpj
- 5MeU8SYKiBJ5vnHk2LGWY+gzKe7L6wUB8UT5WzNEVSV/IX3+aUlzTkGFZivTUeg2eOo=
-X-Gm-Gg: AYBFou0QN/73Ut/WdJGb6EF5W6PkLutJqzAyRdUIkmPYuFIhQXrpOCONVBp5wN4zV4Q
- n7S9HDROQoovKHEVmb36rVH1FEWRCTpj1fgJgxnE5jP2n5OntpaFAyT1xOvYv96lHgrLKmgJ9/G
- Njm18uHPtTzKDbNxxcynC94VQBbLXw64b69kgHvSZUvKyHKhVYItKdt63AjUnWhjhZPxtAh3iOA
- VlxRRKxBehYrAMFYdv736srd4cBbU6KhdzKd7ISWEWayOK1cFUfqKfowd7/cpuOXYZ/WRqCf/E0
- ML2sSHN26C/z6WdzqXSdUBoMgiAHgkI3Ty4IbJdQoly7ki5as3rTgeFfHSaVY3vqphC6gOFv6VQ
- 9Dis1Zd8omxE1GTi4Awp+DOPoD2WlNh+B7VNvM6MvdzrMC8j5A/RpR+ppnk3ei4s171EqF/iR1s
- bg+nxDrBAMJdl0mhCa3ljg/2aXw80xcQ81d8UGM5mwP7+qWRmih++IRPi/6VKBw5pXi6kG1c5e/
- uNhQsAyCK/W5++mZGhvlNKsZbfALYx/Q3VsvD5Q2b3b5GqOFYuw7j6yOiAYWhX7+SHDWdw8mNW3
- yzOLdiPHjz4il00a9FtsCHCRralpY+N9qfdfByljqTLovGwXBM8gDyKPnFEHeM825cMhDoxODm6
- qdJFWnDpzNbAgX2zHeH2EaPhU/pZuGYPtSv8bt4X/QFiySeInftcZUDu8Lux+9rJNLTRVP65qad
- 656q2O00E2rYgWnOUJPal11nppp/iXMg==
-X-Received: by 2002:a05:6820:1c81:b0:715:bd3:ad6a with SMTP id
- 006d021491bc7-716d1e195ddmr3467005eaf.4.1793987274306; 
- Fri, 06 Nov 2026 09:47:54 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
- [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4ad97a59797sm2472521fac.13.2026.11.06.09.47.52
+ d=1e100.net; s=20260707; t=1793987341; x=1794592141;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=UU1v28J/IDSu43XmN2rySupdtH63MX5/ANn+fxB8Xg8=;
+ b=UNYTxJWzz590ektHPjyZCcGjlMz3Zxa3m6Im0FTUuYkors/Hz8R8Lskhx+DomZJO8v
+ OOHM3378H80PwYA3F7twgB+T2yGDosiFEXDaVizui2gwex2fOvffWUjbuMtXLXvP5FjN
+ s1fkj0o8XwRm2DDz3qIqBodrgChfKDELM+5wS51n14V8J1V++KBdO4mzBlQ638/g75Kv
+ CTQ94KFHQlTOPIxBW/YRAtARLIvI/SnNUxCDRfeukjnHz6xhUlvejGjuRktYW31ONsDc
+ MavHlLWbZ1Ney4s4iaCIKnyKx6VZ4yc1SwmByRiK0wi98/TmFNUW93amaYUtrY3I9mxw
+ 6Kgg==
+X-Gm-Message-State: APuU4Z8fpVWf6ZZzX9Lf8EZls5OzWDyaVuDqgtVRJ5V3UxmZjXQRmfWh
+ TvG9NKTvALYZhbD1O/AZuLSVVi5PVr5R4H4NlfXdevyJUXWgvlF0Zg81n9yPwRGKaOljES4Qe6q
+ nxVLJUTOWdg==
+X-Gm-Gg: AYBFou0yGE0cr03DtPzi0SS+NcSexlc993At+UBt4kt2E646AFEE/6M8xuxiRdKaGq2
+ x2qy6W/EXCR3Yz0OM8VymKLRVn+PdGtJOJl2aIfH1HuDjmhOuxz2ZIMae83jfJtpWReo8om2qAR
+ 5eYKOOXF/uUzlz5KhGXe9p0/W92w/VErYF5w8BJQbb0pFhvd0LV/eQjlaKBLK1lbUyBjYYnCjSE
+ iseZNzeboW4+Y14kX7ycqKkcjokGOTrhIunYSt/VpEEaxy7tJiBx3ukoYMHWN4E5dkmJu7NjbNN
+ nkKA8mrJj6sWm+7AtDfs4qJD96X8ieKTkfH0thdl1v2j8lGJGbq49HaE64kB+e9Rze0CND688Nl
+ gj/L2wAix8vrZRaXfnj/SbgvnWPkH+kHSzA5fwpQu2WfGi1NoqtV1g1a251AWI1XvP6Xmz4WUEw
+ X2If8VEKM6dBh+slSOo3XeWlvWeOC31vt451yMFNKJjuyYf9EeiOSnnp5NKjBk/ToAhuVZBsLc6
+ 5G4AEXsbrVPoSIHYLv3VoW7v56t4k66LMVasDEa0GZqYSoBwGYAbBMzr2cdN6uQUSAySTrf4YMI
+ J8dUaNLfh8jpJgz6DDoV1rapBGmxJJmlnlNuJKP+BEjOe1kZYVZsG16fUJdOUdIIQrxPa7oMWWV
+ jDZYQOLhDpw==
+X-Received: by 2002:a05:600c:3ba0:b0:4a7:a5db:a93e with SMTP id
+ 5b1f17b1804b1-4b6db1c5f48mr64344855e9.4.1793987340936; 
+ Fri, 06 Nov 2026 09:49:00 -0800 (PST)
+Received: from alchark-surface.localdomain (bba-86-98-194-229.alshamil.net.ae.
+ [86.98.194.229]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4b5725061e1sm169119935e9.7.2026.11.06.09.48.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Nov 2026 09:47:53 -0800 (PST)
-Date: Fri, 6 Nov 2026 11:47:50 -0600
-From: Tom Rini <trini@konsulko.com>
-To: David Lechner <dlechner@baylibre.com>
-Cc: Macpaul Lin <macpaul.lin@mediatek.com>,
- Raymond Mao <raymondmaoca@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- u-boot@lists.u-boot-project.org,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Julien Stephan <jstephan@baylibre.com>,
- Carlo Caione <ccaione@baylibre.com>,
- Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
-Subject: Re: [PATCH v2 4/8] arm: mediatek: require the DRAM description from
- the earlier boot stage
-Message-ID: <20261106174750.GC3669968@bill-the-cat>
-References: <20261105-mtk-mt8189-tfa-fdt-v2-0-c168a7b4041c@baylibre.com>
- <20261105-mtk-mt8189-tfa-fdt-v2-4-c168a7b4041c@baylibre.com>
+ Fri, 06 Nov 2026 09:49:00 -0800 (PST)
+From: Alexey Charkov <alchark@flipper.net>
+Date: Fri, 06 Nov 2026 21:48:45 +0400
+Subject: [PATCH] usb: gadget: f_mass_storage: add SuperSpeed descriptors
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TuHp/pURPKUAduf9"
-Content-Disposition: inline
-In-Reply-To: <20261105-mtk-mt8189-tfa-fdt-v2-4-c168a7b4041c@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261106-ums-ss-v1-1-ad215bcdb735@flipper.net>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzNDQwMz3dLcYt3iYl0jSwuDRGND01RDYyMloOKCotS0zAqwQdGxEH5xaVJ
+ WanIJSLdSbS0Acyonf2oAAAA=
+X-Change-ID: 20261106-ums-ss-2980a315e132
+To: u-boot@lists.u-boot-project.org
+Cc: Lukasz Majewski <lukma@nabladev.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Marek Vasut <marek.vasut+usb@mailbox.org>, Tom Rini <trini@konsulko.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Alexey Charkov <alchark@flipper.net>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7038; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=fuFl+qvJLUPO5ysYcaa9l7aPkwMohP39KpZoQuIskE4=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWS9E+balt7UVOBlsZ/vR9DxV5/my1wR/Ljqi0Vs+wdr3
+ QuL5k5N6JjIwiDGxWAppsgy99sS26lGfLN2eXh8hZnDygQyRFqkgQEIWBj4chPzSo10jPRMtQ31
+ DI10jHWMGLg4BWCqveQY/orkrss/N083S/9GfE32CZ+eZaxzt36QzFRc4Kz5/pWjuCjD/5xU+8X
+ lySyHDvQa/2u5dnlugCRj9pO/Gr4y01r+tgQeZwUA
+X-Developer-Key: i=alchark@flipper.net; a=openpgp;
+ fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -167,91 +167,214 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+The mass storage function only provides full and high speed
+descriptors, so a SuperSpeed-capable UDC that comes up at SuperSpeed
+reports a device descriptor with no configurations: count_configs()
+skips every configuration without SuperSpeed support. The host then
+gives up with "no configurations" and keeps power-cycling the port,
+which makes `ums` unusable on such controllers unless their DT caps
+maximum-speed at high-speed.
 
---TuHp/pURPKUAduf9
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Backport the SuperSpeed descriptors from the Linux mass storage
+function, adapted to the U-Boot copy, so that `ums` enumerates and
+runs at SuperSpeed. Leave out the BOS and device capability
+descriptors that came with it, as nothing references them.
 
-On Thu, Nov 05, 2026 at 05:45:26PM -0600, David Lechner wrote:
+U-Boot has no config_ep_by_speed(), so set the bulk endpoints'
+companion descriptor and maxburst by hand before enabling them.
+Otherwise the UDC sees a maxburst of 0, which DWC3 turns into an
+underflowed burst size instead of the bMaxBurst the host was given.
 
-> Add MTK_DRAM_DESC_HANDOFF to stop in SPL if the boot stage that
-> initializes the DRAM did not pass a transfer list with a devicetree
-> overlay, and enable it on MT8189.
->=20
-> The overlay describes the DRAM size and the memory reserved for the DRAM
-> controller, which depend on the DRAM fitted to the board. The devicetree
-> built into U-Boot cannot describe them, so booting without the overlay
-> would give the OS a wrong memory size and let it use reserved memory.
->=20
-> The option is not specific to MT8189. The DRAM initialization on MT8366
-> has the same code to reserve memory for the DRAM controller, so the
-> Genio 360 can use it as well once support for that is added later.
->=20
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-[snip]
-> +/*
-> + * The boot stage that initializes the DRAM describes the DRAM size and =
-the
-> + * memory reserved for the DRAM controller with a devicetree overlay in a
-> + * transfer list. The devicetree cannot describe them, so do not boot wi=
-thout
-> + * the overlay.
-> + */
-> +static int mtk_dram_desc_check(void)
-> +{
-> +	if (!IS_ENABLED(CONFIG_MTK_DRAM_DESC_HANDOFF) ||
-> +	    !CONFIG_IS_ENABLED(BLOBLIST))
-> +		return 0;
-> +
-> +	if (!(gd->flags & GD_FLG_BLOBLIST_HANDOFF) ||
-> +	    !bloblist_find(BLOBLISTT_FDT_OVERLAY, 0)) {
-> +		printf("No DRAM description from the previous boot stage\n");
-> +		return -ENOENT;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->  void board_init_f(ulong dummy)
->  {
->  	int ret;
-> @@ -29,6 +56,10 @@ void board_init_f(ulong dummy)
->  	ret =3D mtk_soc_early_init();
->  	if (ret)
->  		hang();
-> +
-> +	ret =3D mtk_dram_desc_check();
-> +	if (ret)
-> +		hang();
+Based on Linux commit 4bb99b7c82ba ("usb: gadget: storage: add
+superspeed support").
 
-Can we simplify this to something along the lines of in board_init_f():
-	if (IS_ENABLED(CONFIG_MTK_DRAM_DESC_HANDOFF) && mtk_dram_desc_check())
-		hang();
+Signed-off-by: Alexey Charkov <alchark@flipper.net>
+---
+CI for this patch: https://git.u-boot-project.org/u-boot/contributors/alchark/u-boot/-/pipelines/1872
+---
+ drivers/usb/gadget/f_mass_storage.c | 40 ++++++++++++++++++-
+ drivers/usb/gadget/storage_common.c | 77 ++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 114 insertions(+), 3 deletions(-)
 
-And then mtk_dram_desc_check just does the bloblist check? This will
-still get us the compile time sanity checking but a clearer path for
-compiler optimization.
+diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
+index 20c094b0d96f..7cc5998cec7c 100644
+--- a/drivers/usb/gadget/f_mass_storage.c
++++ b/drivers/usb/gadget/f_mass_storage.c
+@@ -2219,16 +2219,29 @@ reset:
+ 	common->fsg = new_fsg;
+ 	fsg = common->fsg;
+ 
++	/*
++	 * The UDC programs the SuperSpeed burst from the endpoint, so
++	 * hand it the companion descriptors before enabling.
++	 */
++	if (common->gadget->speed >= USB_SPEED_SUPER) {
++		fsg->bulk_in->comp_desc = &fsg_ss_bulk_in_comp_desc;
++		fsg->bulk_in->maxburst = fsg_ss_bulk_in_comp_desc.bMaxBurst + 1;
++		fsg->bulk_out->comp_desc = &fsg_ss_bulk_out_comp_desc;
++		fsg->bulk_out->maxburst = fsg_ss_bulk_out_comp_desc.bMaxBurst + 1;
++	}
++
+ 	/* Enable the endpoints */
+ 	d = fsg_ep_desc(common->gadget,
+-			&fsg_fs_bulk_in_desc, &fsg_hs_bulk_in_desc);
++			&fsg_fs_bulk_in_desc, &fsg_hs_bulk_in_desc,
++			&fsg_ss_bulk_in_desc);
+ 	rc = enable_endpoint(common, fsg->bulk_in, d);
+ 	if (rc)
+ 		goto reset;
+ 	fsg->bulk_in_enabled = 1;
+ 
+ 	d = fsg_ep_desc(common->gadget,
+-			&fsg_fs_bulk_out_desc, &fsg_hs_bulk_out_desc);
++			&fsg_fs_bulk_out_desc, &fsg_hs_bulk_out_desc,
++			&fsg_ss_bulk_out_desc);
+ 	rc = enable_endpoint(common, fsg->bulk_out, d);
+ 	if (rc)
+ 		goto reset;
+@@ -2649,6 +2662,7 @@ static void fsg_unbind(struct usb_configuration *c, struct usb_function *f)
+ 	fsg_common_release(fsg->common);
+ 	free(fsg->function.descriptors);
+ 	free(fsg->function.hs_descriptors);
++	free(fsg->function.ss_descriptors);
+ 	kfree(fsg);
+ }
+ 
+@@ -2704,6 +2718,28 @@ static int fsg_bind(struct usb_configuration *c, struct usb_function *f)
+ 			return -ENOMEM;
+ 		}
+ 	}
++
++	if (gadget_is_superspeed(gadget)) {
++		unsigned int max_burst;
++
++		/* Calculate bMaxBurst, we know packet size is 1024 */
++		max_burst = min_t(unsigned int, FSG_BUFLEN / 1024, 15);
++
++		fsg_ss_bulk_in_desc.bEndpointAddress =
++			fsg_fs_bulk_in_desc.bEndpointAddress;
++		fsg_ss_bulk_in_comp_desc.bMaxBurst = max_burst;
++
++		fsg_ss_bulk_out_desc.bEndpointAddress =
++			fsg_fs_bulk_out_desc.bEndpointAddress;
++		fsg_ss_bulk_out_comp_desc.bMaxBurst = max_burst;
++
++		f->ss_descriptors = usb_copy_descriptors(fsg_ss_function);
++		if (unlikely(!f->ss_descriptors)) {
++			free(f->hs_descriptors);
++			free(f->descriptors);
++			return -ENOMEM;
++		}
++	}
+ 	return 0;
+ 
+ autoconf_fail:
+diff --git a/drivers/usb/gadget/storage_common.c b/drivers/usb/gadget/storage_common.c
+index 7e4b542f7ce5..a89c7ea3e532 100644
+--- a/drivers/usb/gadget/storage_common.c
++++ b/drivers/usb/gadget/storage_common.c
+@@ -531,11 +531,86 @@ static struct usb_descriptor_header *fsg_hs_function[] = {
+ 	NULL,
+ };
+ 
++static struct usb_endpoint_descriptor
++fsg_ss_bulk_in_desc = {
++	.bLength =		USB_DT_ENDPOINT_SIZE,
++	.bDescriptorType =	USB_DT_ENDPOINT,
++
++	/* bEndpointAddress copied from fs_bulk_in_desc during fsg_bind() */
++	.bmAttributes =		USB_ENDPOINT_XFER_BULK,
++	.wMaxPacketSize =	cpu_to_le16(1024),
++};
++
++static struct usb_ss_ep_comp_descriptor fsg_ss_bulk_in_comp_desc = {
++	.bLength =		sizeof(fsg_ss_bulk_in_comp_desc),
++	.bDescriptorType =	USB_DT_SS_ENDPOINT_COMP,
++
++	/*.bMaxBurst =		DYNAMIC, */
++};
++
++static struct usb_endpoint_descriptor
++fsg_ss_bulk_out_desc = {
++	.bLength =		USB_DT_ENDPOINT_SIZE,
++	.bDescriptorType =	USB_DT_ENDPOINT,
++
++	/* bEndpointAddress copied from fs_bulk_out_desc during fsg_bind() */
++	.bmAttributes =		USB_ENDPOINT_XFER_BULK,
++	.wMaxPacketSize =	cpu_to_le16(1024),
++};
++
++static struct usb_ss_ep_comp_descriptor fsg_ss_bulk_out_comp_desc = {
++	.bLength =		sizeof(fsg_ss_bulk_out_comp_desc),
++	.bDescriptorType =	USB_DT_SS_ENDPOINT_COMP,
++
++	/*.bMaxBurst =		DYNAMIC, */
++};
++
++#ifndef FSG_NO_INTR_EP
++
++static struct usb_endpoint_descriptor
++fsg_ss_intr_in_desc = {
++	.bLength =		USB_DT_ENDPOINT_SIZE,
++	.bDescriptorType =	USB_DT_ENDPOINT,
++
++	/* bEndpointAddress copied from fs_intr_in_desc during fsg_bind() */
++	.bmAttributes =		USB_ENDPOINT_XFER_INT,
++	.wMaxPacketSize =	cpu_to_le16(2),
++	.bInterval =		9,	/* 2**(9-1) = 256 uframes -> 32 ms */
++};
++
++static struct usb_ss_ep_comp_descriptor fsg_ss_intr_in_comp_desc = {
++	.bLength =		sizeof(fsg_ss_intr_in_comp_desc),
++	.bDescriptorType =	USB_DT_SS_ENDPOINT_COMP,
++
++	.wBytesPerInterval =	cpu_to_le16(2),
++};
++
++#endif
++
++static struct usb_descriptor_header *fsg_ss_function[] = {
++#ifndef FSG_NO_OTG
++	(struct usb_descriptor_header *) &fsg_otg_desc,
++#endif
++	(struct usb_descriptor_header *) &fsg_intf_desc,
++	(struct usb_descriptor_header *) &fsg_ss_bulk_in_desc,
++	(struct usb_descriptor_header *) &fsg_ss_bulk_in_comp_desc,
++	(struct usb_descriptor_header *) &fsg_ss_bulk_out_desc,
++	(struct usb_descriptor_header *) &fsg_ss_bulk_out_comp_desc,
++#ifndef FSG_NO_INTR_EP
++	(struct usb_descriptor_header *) &fsg_ss_intr_in_desc,
++	(struct usb_descriptor_header *) &fsg_ss_intr_in_comp_desc,
++#endif
++	NULL,
++};
++
+ /* Maxpacket and other transfer characteristics vary by speed. */
+ static struct usb_endpoint_descriptor *
+ fsg_ep_desc(struct usb_gadget *g, struct usb_endpoint_descriptor *fs,
+-		struct usb_endpoint_descriptor *hs)
++		struct usb_endpoint_descriptor *hs,
++		struct usb_endpoint_descriptor *ss)
+ {
++	if (gadget_is_superspeed(g) && g->speed >= USB_SPEED_SUPER)
++		return ss;
+ 	if (gadget_is_dualspeed(g) && g->speed == USB_SPEED_HIGH)
+ 		return hs;
+ 	return fs;
 
---=20
-Tom
+---
+base-commit: 709a97a05df66e394f40d249105d0baade46f107
+change-id: 20261106-ums-ss-2980a315e132
 
---TuHp/pURPKUAduf9
-Content-Type: application/pgp-signature; name="signature.asc"
+Best regards,
+--  
+Alexey Charkov <alchark@flipper.net>
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCau4SwwAKCRAr4qD1Cr/k
-CuaQAP4tG5omm6RaAMhaR4lRuL3l1jha9bAC4tukpwF7LmZZQAEA6YUwmFQmhFDN
-si0WlLSPyXdF8Q22d2K2PDbx05oX9QY=
-=aBJT
------END PGP SIGNATURE-----
-
---TuHp/pURPKUAduf9--
