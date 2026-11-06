@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDD85606A802
-	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 11:19:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1DCFC606A801
+	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 11:19:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=YG7LZDAs;
-	dkim=pass (2048-bit key, unprotected) header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256 header.s=selector2 header.b=Yg1lhLCA
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=haRwOZKd;
+	dkim=pass (2048-bit key, unprotected) header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256 header.s=selector2 header.b=HQ8VXTRd
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7B0CF4098A;
-	Fri,  6 Nov 2026 11:19:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EA7E960640;
+	Fri,  6 Nov 2026 11:19:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id s5R21MEMOMEz; Fri,  6 Nov 2026 11:19:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 929C84093F
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793963944;
-	b=G00BW6o3W5oHm4OtrSAvjl3lAnqrESzCsCoFBO+H3VnDlTq6VQnSPHvuFglLUCMCQA+K
-	 0sM3PcRNbEpO9L56qQLtF3km9obOhJOhGrpuSkuKA2KyLTYu77Hpfdt+3rK5vWM/SbAO7
-	 FvJmZbVTqRpxpbvNuYfLuF5cRfqXvrcK4Jk7zbGGUkxHbGTPruTV1qUnEJL9+4v4a226g
-	 08IkTX6PIBGESwY69YVY/pdBLEQBDSpmUnsKTLvXljs06CiGlo4LEVtaxC+cUBsIyKvoe
-	 fXW4QpTBSHYrjwKHGCZQgsiwvOn3pOg/X4xRbJC/we9xwD82ndjs/57Sj86is4LVLLA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Sl7RtfFW_uFQ; Fri,  6 Nov 2026 11:19:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C1F1F607CF
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793963947;
+	b=q0xdY0DBICf8tM52YH5/TOdnHou8FrtLhdJshdZAJz7TeTaQqIsSzMYE7vSz0Fq/37X9
+	 30WRbq1reiqebgteIyb1iw6FvdhBmipvQboTvfzTj9UX6W0zexieHEi3YVF29lM1dDhtF
+	 uB5slkSJXvgCbWmWr8dFKod/kn5BGVMaBao2+JjlrmR95avLrNPSBc3BcsJDS/hIIXGu2
+	 iZlhyyyHWNXCquN2tpOem8AI4259Q2e3y1Abwt33riQruJw9BR90hhUkk/x/Q2ahHsRWK
+	 3Uvgi57/QJQffqGKtw6XbbuOCH3G1RhXNse12t2rZKvlVQuTL3qE8jtlYJSGnuyVzfw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793963944;
+	c=relaxed/relaxed; t=1793963947;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -47,73 +47,73 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=yv+xNN4INIu1Dc2YKaf/3KCd8+F1VqzuyY+c8TxxO1o=;
-	b=CeGZgI9j9h1Iqslqr4qVSnP4eOF4eguWGSyLLmgs8a3aKyFNfu8NVOueRb1eZIdhOMlH
-	 UU+LG/zYclM3eS1d3g/J3dEtEKB+vrmN03aow+0MRdCWwQ9QqaaoXON/wXfub4z34sRHI
-	 PBg4pqzMPq/mBpsPMQbCV/UOb323rLsQx0gtfcdhyJfvdaRkiZdpX5UY4/OMLHjFyCudN
-	 /8ZC9FqvXvA5Tv/ox7NEPm/EyA5SYQdsp4Rssex8Z1qepSXS4CyfLE0dVAZzrfLzD5Kv8
-	 Qjv5IxIVzPIPzCUCoeHDa3GNEd7Phquuz6EANp9vRm0gkIkN602zK4wHWKqtiUh6n7Q==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=mhyU8golx+ks4qvQ6rwp1MSrxC3WKyC4LGjmBKrNEM8=;
+	b=mAoplxNot2Z9hDnn1A5ccmsHPWb4g8nb9SvGZMBPzTuMJVs+40Lt1OHQSqOFPuBoOwtk
+	 00GbEHwyrhHWStAyJ5+RbGnc0foS6fYzvpaR8heI9smKCa/pCqWJxvDKJijN9TA3JrUCJ
+	 x4X1aE01azpHnKsiU++ia6WrVFa4JPDiuEaM7BAmQ3L02pKPQsUgUpnbBBxnqx+qJGAxX
+	 PyQL6nHKag0TggyFZvlLgxlrHy0zspJgQ73sHJJp5IOsosN+Z1LfZaoGOLqLRWaRNZNGH
+	 CI0VeTjtHRGigwqGvn93F0XwyA/hS2cSqL3Pf5CHYaeq5q3Enffka9Z00QutOARHDug==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793963944;
-	bh=yv+xNN4INIu1Dc2YKaf/3KCd8+F1VqzuyY+c8TxxO1o=;
+	d=lists.u-boot-project.org; s=default; t=1793963946;
+	bh=mhyU8golx+ks4qvQ6rwp1MSrxC3WKyC4LGjmBKrNEM8=;
 	h=From:Date:Subject:References:In-Reply-To:To:CC:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YG7LZDAsLLqOs5w0kGs0pFBGojg9w6KmGH1Aealr1btPRh9lVmOEqg9HvpaaXA+Kr
-	 blg4hj9p17UDydky+caTJ0TvyENcLoX1va1eBjfHp4VWcu0Ao575VUCXT4RuNFVoLC
-	 2diuHgUT+xl7Ny7JIPZGEZvhjh1BTULGo+Pb64oxBJZq4KeGWJfHbEChUdEK7NMkTX
-	 fgggIJlc3J6thv/s7Zxjyz4YrOcXNVIelgA8SLYoDmeeC7cUZeUPBn+H2bO6u5etBB
-	 2Ml7dx+yPtsUgUMlRBZR6IESLyJPirneu7gmnFCAXZMv5k9D19HCQ5EEfbpPQvSIzF
-	 6VEQIfwvYIOqQ==
+	b=haRwOZKdIUn3VLwG3/CMpHZQNr9ZM7L8iVGAP+co7FprcyIqSOjnAJu2Rbs4vQ0Gs
+	 lvjhBvgPpWveFDg9o1Uo+LOPEFCiRhiQuetOC/t8suEO+C35AoZ9XLYbt2syoqPhar
+	 JDmHvzT5TGSoUTm3JIuBerL5d947jT+FqKJifp33gpYf+BYaruB7eka9vmUPfenQFU
+	 P3EEuLt+pdc4wuxtGZT0OB4Y3yjoG1/dio/ZpXH68kfwPFx8sV4VP2I5e0hZpbG6KQ
+	 qw51hPLjAKQppjHtcm4Cfe2WVlGCApY+0gEbqE/CFP6JU95IzHHbDNdCCmp6KGOzyx
+	 NA0Qddl5Xd1JQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 929C84093F;
-	Fri,  6 Nov 2026 11:19:04 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 1F5E01E3
+	by smtp3.osuosl.org (Postfix) with ESMTP id C1F1F607CF;
+	Fri,  6 Nov 2026 11:19:06 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 871D31E3
  for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 11:19:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 041B2607CF
+ by smtp2.osuosl.org (Postfix) with ESMTP id 78554403A9
  for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 11:19:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Xa4q1j3Xywy2 for <u-boot@lists.u-boot-project.org>;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id s5QCbkGF_kyA for <u-boot@lists.u-boot-project.org>;
  Fri,  6 Nov 2026 11:19:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D6ED060640
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c200::1"
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org DAF15400FF
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c207::3"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::1;
- helo=db3pr0202cu003.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c207::3;
+ helo=mrwpr03cu001.outbound.protection.outlook.com;
  envelope-from=patrice.chotard@foss.st.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256
- header.s=selector2 header.b=Yg1lhLCA
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D6ED060640
+ header.s=selector2 header.b=HQ8VXTRd
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DAF15400FF
  for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 11:19:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yv+xNN4INIu1Dc2YKaf/3KCd8+F1VqzuyY+c8TxxO1o=;
- b=Yg1lhLCA9SraLVcgwZD6IUwGdD6vHKR+6Ku2ISKkzPpjbV7CuM0qMfij1HaHrO7Z98GuNkdBAmEX0YqCg0kID8x31nuhptBHZ1p3EcsbDDqoGwpibVvpxmUu8sL/WEEz5Fz697EFua+iRkaTTV0XXEzRQe63+zwUTwbTsGFe6hlgLH9ENLbA0WqorGP+krmGqVA0Ve0MG4xneHLdUT8/gZ95aYSa1l3kmFONZa5vSrAqnz8gfCkY/kvVKJd94Fqxb0yH4BmD1dZ3zfp5+IPZ9as3kxONsVqaTxKdXovefrUAgHfJNJmU5i1h67Rc5YJhyCk6rLaAs4thJk4+0MHWgg==
-Received: from OS6P279CA0020.NORP279.PROD.OUTLOOK.COM (2603:10a6:e10:33::14)
- by AS2PR10MB6822.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5f0::15) with
+ bh=mhyU8golx+ks4qvQ6rwp1MSrxC3WKyC4LGjmBKrNEM8=;
+ b=HQ8VXTRdvnr5KRJxkdG6NBdbMWXVFcFdbfAKizXlZktNGHqNKgeuF7sYGXFb/gPiJMiFGG2QFTmImExnktqV/4fBWUnZlT0Qv2pFj8P0dM6bQJHfDgxX2HHq2icrMu0g24k7QmI5uOzmgdTBfQQmepJH+T4ES5r+HPxuj/pPlWNcleNW1cjgrJP+mLpGPNLhUwYy7fmLj9t8yBQsY3poJgFRc2iFbHogiV+LngS8LIbx/mkGXo2ZX9CHSWrd5qDPdBvd6X9mHdoB8m4ZlpWsart57GjyGHJLP+1JHiM5tURL8Y9EXUIef0k/5nkckVbPkf+VNv6kaKYtbsWYGgNPQQ==
+Received: from OL1P279CA0009.NORP279.PROD.OUTLOOK.COM (2603:10a6:e10:12::14)
+ by AM0PR10MB618534.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:80b::18) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.5; Fri, 6 Nov 2026
- 11:18:55 +0000
-Received: from CPH1EPF0000051D.eurprd04.prod.outlook.com
- (2603:10a6:e10:33:cafe::76) by OS6P279CA0020.outlook.office365.com
- (2603:10a6:e10:33::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.11 via Frontend Transport; Fri, 6
- Nov 2026 11:18:55 +0000
+ 11:18:53 +0000
+Received: from CPH1EPF0000051C.eurprd04.prod.outlook.com (2603:10a6:e10:12::4)
+ by OL1P279CA0009.outlook.office365.com (2603:10a6:e10:12::14) with
+ Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.11
+ via Frontend Transport; Fri, 6 Nov 2026 11:18:53 +0000
 X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=fail (sender IP
  is 164.130.1.60)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
@@ -122,25 +122,25 @@ Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
  designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
  client-ip=164.130.1.60; helo=smtpO365.st.com;
 Received: from smtpO365.st.com (164.130.1.60) by
- CPH1EPF0000051D.mail.protection.outlook.com (10.167.241.232) with Microsoft
+ CPH1EPF0000051C.mail.protection.outlook.com (10.167.241.231) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.615.4 via Frontend Transport; Fri, 6 Nov 2026 11:18:55 +0000
+ 15.21.615.4 via Frontend Transport; Fri, 6 Nov 2026 11:18:53 +0000
 Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
  (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.46; Fri, 6 Nov
- 2026 12:19:40 +0100
+ 2026 12:19:39 +0100
 Received: from localhost (10.252.31.114) by STKDAG1NODE1.st.com
  (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.46; Fri, 6 Nov
- 2026 12:18:54 +0100
+ 2026 12:18:52 +0100
 From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Fri, 6 Nov 2026 12:18:51 +0100
-Subject: [PATCH 3/5] dm: gpio: Add GPIOF_PROTECTED flag test
+Date: Fri, 6 Nov 2026 12:18:49 +0100
+Subject: [PATCH 1/5] pinctrl: stm32: Support I/O synchronization parameters
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20261106-upstream_pinctrl_update-v1-3-4f3d4f6e97fc@foss.st.com>
+Message-ID: <20261106-upstream_pinctrl_update-v1-1-4f3d4f6e97fc@foss.st.com>
 References: <20261106-upstream_pinctrl_update-v1-0-4f3d4f6e97fc@foss.st.com>
 In-Reply-To: <20261106-upstream_pinctrl_update-v1-0-4f3d4f6e97fc@foss.st.com>
 To: <uboot-stm32@st-md-mailman.stormreply.com>,
@@ -151,35 +151,35 @@ CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
  <mehmet.fide@screeningeagle.com>, Vincent Jardin <vjardin@free.fr>, "Pranav
  Sanwal" <pranav.sanwal@amd.com>, Simon Glass <sjg@chromium.org>, Marek Vasut
  <marek.vasut+renesas@mailbox.org>, Patrice Chotard
- <patrice.chotard@foss.st.com>
+ <patrice.chotard@foss.st.com>, Valentin Caron <valentin.caron@foss.st.com>
 X-Mailer: b4 0.16.0
 X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CPH1EPF0000051D:EE_|AS2PR10MB6822:EE_
-X-MS-Office365-Filtering-Correlation-Id: 23512222-1134-4029-8099-08df3bf7bea7
+X-MS-TrafficTypeDiagnostic: CPH1EPF0000051C:EE_|AM0PR10MB618534:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8a3060e5-f41b-4857-4350-08df3bf7bdab
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|23010399003|376014|36860700016|1800799024|10067099003|22082099003|18002099003|3023799007|56012099006|11063799006|261026121527099003|261102123227099003|261021121427099003|261021123027099003|261009223027099003|41080700001;
-X-Microsoft-Antispam-Message-Info: eMDcOMqmpH7TA1qx9fCii9dTT7LW+tV82wwphxXlkUUa+IbAEoHyP53k2LwPYP0166iv7TzsSmF4uKr/PoNNx7NQeSyYBtRRcGQ5fRIX/tOIB5REqkwkP6oV1WqHPWcvLVR0FLDzI/PxYkiAYK0jExpV4x9lReX/5irEQJOoLfWMXeTyEHWF9ntDvYoDZgyB5dt8dVC/JJ//5xG7So90q2+3xqZ5y2tX6SO0sUC12GKHIS1X1ovgxJU7a8/ROwx3Du8TlVQl660uMGfNvhuf2myDUbdKBH1xradeqiX++YnEejZIJStiriWxxizaVKK+ucakQ/YUlnsTW07/eQ4uqqLZACL8hu/sHY564GtHJgDo1BGF95jndoaaFTLT6WZ2Az70cuEwHPq1zu/CExaA8GtSGhAMywDi+5gBt1zIUJrIeB0mv9SYyHd+o7fZfBCdWSdPNn68h1A9wx8U2KW5ReHsweo8fpoRB15N18f6GbS1XQzUo+pLxP1C8ghk69RIvZDduFByMC0pg10Zhhj8HOF+D6PNm4zOfZr68RpNtjnwPW7uM+mxBqtZtzfKL2tz+oeZJJ6o2n1knHQNHAXcZUVAHk5xzlJWVEuxdDY/kI4fx+ZuNLQY1iYaO+anRzywsPnV69ZYONYRjwVyES3EWuGNi+3yVfrhFBm5S+ORomdwmKVx9LJKGai8ZkhMGFmASbj/DujhRDKzWSIUY+Ss3+cLomplMnTRq5iQiEky5U1WFUyHNdVMgZw+Wih6smMXv3Ps4/lkHKNA9zQLldw58g==
+ ARA:13230040|376014|23010399003|36860700016|1800799024|82310400026|11063799006|56012099006|261021123027099003|261022075727099003|261021121427099003|261009223027099003|261009221227099003|261102123227099003|261026121527099003|10067099003|22082099003|18002099003|6133799003|3023799007|41080700001;
+X-Microsoft-Antispam-Message-Info: KCbKul6baSFoNVKBjTxFPxTeFgRzy5vyKCDP3p4xvam6Xo9F0KYB3r1FW+S+aneD77L6Fh462LNz86rOIUFKnYzVXsAfNuS6o/YipK1+nUxVRzr6dvmiDoy+joy6UuPzlnQGV5LjDDFQl46IfcAFmhTCkPKwTqSGq+ZJ38MKp7nq/xQXMIMIbggmjDK4JLykRgLypzkgivToUceGOx+Fs7yjf3mLCF65AiSVFdGTqAR+x67wX//eYVTjRqQY/5TpDlJikrOCCC3rf4kI3pl5BbWvJtEMaI3uQCFepR86SyUMuzj+mZIk2Im5DL0mZffUUEM74Iin7qMXuayvp/CYovdy3ADWreqPFkjrvYkXgpLhtDLkXDDRQ71FkqO089wRBy2hqWd2gBfra44khfuMhWgf+gYmMQxP2sA/NvuX+PN/S8w/ojYb4NV5Hr4Bd0JW+xKDewVDWeyc/QWxlg/tmmwR2ox5KOj/AL2ueEG9DuvKYPGyYzxU/7v0mfAue83Uu7kKh7swOCBvqRhPyUXWZavI7qd5kqEWQybU4TdfJ2caxYDn1UPCEKPtofxZi/iihyj2fNVu4cMfIdDpCgqWAPiK6sXWl2UehQ67nAD1RuS5E1ozomOIeG68ovJCFDeZvmivq18IM6ilGX9QW0rrUWI3SFXL0lXPstsuoR6b85XabzELKcW4lgTdskiSxKcjh78UarAi2Cye7m3E1YDtNrOagxlXGrgz0SV0ZS3uiWPQaDkw16bcdC0urX0dSJe/tQ6414Yjxc9xxmx4eITENA==
 X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(23010399003)(376014)(36860700016)(1800799024)(10067099003)(22082099003)(18002099003)(3023799007)(56012099006)(11063799006)(261026121527099003)(261102123227099003)(261021121427099003)(261021123027099003)(261009223027099003)(41080700001);
+ SFS:(13230040)(376014)(23010399003)(36860700016)(1800799024)(82310400026)(11063799006)(56012099006)(261021123027099003)(261022075727099003)(261021121427099003)(261009223027099003)(261009221227099003)(261102123227099003)(261026121527099003)(10067099003)(22082099003)(18002099003)(6133799003)(3023799007)(41080700001);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: zvLN8khbDwLa7eL7j7eBXUDq4tnLrFL0I0g0gTzK8LpQnUk2r8dU69QQcKkc0nU7G9n7artah70OxD+hura9PsaVNMwmzWV4Bb6D7JaYLwWHIl/GNozqq2nkfZQstnyq8wqr8w2jbSvr/jaHoXcHdsRAOnuGM1BTh8ST6wei5d0TAI9UgHpSEiyKJQ9y80rWrSyqEbjfLa+T4TN6slHihRLmSHZv0FixPgbFLB5+B+XS7ieN1L5/33nGiGlTHcblKE0lcsLedX4SYG/6N7FmP4Smza8CM/bPNKTdusJrg+QK2Kv5AW4ScI2vtck9XgzeM3kCppb7KDsNjfK/Ra7d6sKtIt+nwVSkpYLRbc6TsZVloF6STgTO5wRSQwnayYLGYO/4sDakS/p83Ywu96PU6MTOrBtngBH88t9uNwm3oBYEnatcL8DBlzGIucjHpAOe
+X-MS-Exchange-AntiSpam-MessageData-0: IGbyPUlIL9cPNmOOIGT4HFFFpkh1gGV0rEQ1HYU8T35ZIRILvKMAYgsDkF8md7AXumPvmErwFWkKvvm5qIwYR4u5AiFQMMGXVBlfkIaoHINT8HZ2EkayF7WhxCC3u3edbi8km5sBfZsJg4y3Pxyo8BuUMd75bjZBv039FyGT4HkY+UbhgDSAbEQCwlV5T5mQgwOBsBU7FnxDCOoJHwbXMXWm1Pt4aeblvyMP583u9Zazw4zRCnMuDVBco2+1JsGNrrq01p6W+Z5ulH2wbEsVuzmwISKpnZLCazS20YpbpQhMkRE6/kB/L0Fju/cSAQDHATlqIgnKbiXk6ZewzZ6dqpZACHZuV5sa4P1hES2ugPhs8dz/SVAoYX1GooMhyI5IPeidAZfQwEu2ER8MoLsTXtauSc97CKTG7AOvlyAqYq1Vb2DFuQyIeY96Om32NOu3
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2026 11:18:55.0614 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 23512222-1134-4029-8099-08df3bf7bea7
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2026 11:18:53.3960 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8a3060e5-f41b-4857-4350-08df3bf7bdab
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: CPH1EPF0000051D.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CPH1EPF0000051C.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB6822
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR10MB618534
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -196,102 +196,324 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Fabien Dessenne <fabien.dessenne@foss.st.com>
+From: Antonio Borneo <antonio.borneo@foss.st.com>
 
-GPIOF_PROTECTED flag identifies a GPIO which can't be used because it
-has a protected access, this GPIO can only be accessed from the secure
-world.
+Devices in the stm32mp2xx family include an I/O synchronization
+block on each pin that is used to fine tune and improve the I/O
+timing margins of high speed synchronous interfaces.
+It can be configured to provide independently for each pin:
+- skew rate on input direction or latch delay on output direction;
+- inversion of clock signals or re-sampling of data signals.
 
-Add a test and support for GPIO sandbox.
+Add support for the generic properties:
+- skew-delay-input-ps;
+- skew-delay-output-ps.
 
+Add support for the property 'st,io-sync' to configure clock
+inversion or data re-sampling mode.
+
+Enable it for the stm32mp257 pinctrl driver.
+
+Co-developed-by: Valentin Caron <valentin.caron@foss.st.com>
+Signed-off-by: Valentin Caron <valentin.caron@foss.st.com>
+Co-developed-by: Fabien Dessenne <fabien.dessenne@foss.st.com>
 Signed-off-by: Fabien Dessenne <fabien.dessenne@foss.st.com>
+Signed-off-by: Antonio Borneo <antonio.borneo@foss.st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- arch/sandbox/include/asm/gpio.h |  3 ++-
- drivers/gpio/sandbox.c          | 16 ++++++++++++----
- test/dm/gpio.c                  |  5 +++++
- 3 files changed, 19 insertions(+), 5 deletions(-)
+ drivers/gpio/stm32_gpio_priv.h  |  58 +++++++++++++++++--
+ drivers/pinctrl/pinctrl_stm32.c | 120 +++++++++++++++++++++++++++++++++++-----
+ 2 files changed, 158 insertions(+), 20 deletions(-)
 
-diff --git a/arch/sandbox/include/asm/gpio.h b/arch/sandbox/include/asm/gpio.h
-index 0dd4c7bf601..c5ff9e9cdd5 100644
---- a/arch/sandbox/include/asm/gpio.h
-+++ b/arch/sandbox/include/asm/gpio.h
-@@ -28,9 +28,10 @@
- #define GPIOD_EXT_DRIVEN	BIT(30)	/* external source is driven */
- #define GPIOD_EXT_PULL_UP	BIT(29)	/* GPIO has external pull-up */
- #define GPIOD_EXT_PULL_DOWN	BIT(28)	/* GPIO has external pull-down */
-+#define GPIOD_EXT_PROTECTED	BIT(27)	/* GPIO is access protected */
+diff --git a/drivers/gpio/stm32_gpio_priv.h b/drivers/gpio/stm32_gpio_priv.h
+index d89e9b8ed60..69868787af0 100644
+--- a/drivers/gpio/stm32_gpio_priv.h
++++ b/drivers/gpio/stm32_gpio_priv.h
+@@ -51,7 +51,45 @@ enum stm32_gpio_af {
+ 	STM32_GPIO_AF15
+ };
  
- #define GPIOD_EXT_PULL		(BIT(28) | BIT(29))
--#define GPIOD_SANDBOX_MASK	GENMASK(31, 28)
-+#define GPIOD_SANDBOX_MASK	GENMASK(31, 27)
++enum stm32_gpio_delay_path {
++	STM32_GPIO_DELAY_PATH_OUT = 0,
++	STM32_GPIO_DELAY_PATH_IN
++};
++
++enum stm32_gpio_clk_edge {
++	STM32_GPIO_CLK_EDGE_SINGLE = 0,
++	STM32_GPIO_CLK_EDGE_DOUBLE
++};
++
++enum stm32_gpio_clk_type {
++	STM32_GPIO_CLK_TYPE_NOT_INVERT = 0,
++	STM32_GPIO_CLK_TYPE_INVERT
++};
++
++enum stm32_gpio_retime {
++	STM32_GPIO_RETIME_DISABLED = 0,
++	STM32_GPIO_RETIME_ENABLED
++};
++
++enum stm32_gpio_delay {
++	STM32_GPIO_DELAY_NONE = 0,
++	STM32_GPIO_DELAY_0_3,
++	STM32_GPIO_DELAY_0_5,
++	STM32_GPIO_DELAY_0_75,
++	STM32_GPIO_DELAY_1_0,
++	STM32_GPIO_DELAY_1_25,
++	STM32_GPIO_DELAY_1_5,
++	STM32_GPIO_DELAY_1_75,
++	STM32_GPIO_DELAY_2_0,
++	STM32_GPIO_DELAY_2_25,
++	STM32_GPIO_DELAY_2_5,
++	STM32_GPIO_DELAY_2_75,
++	STM32_GPIO_DELAY_3_0,
++	STM32_GPIO_DELAY_3_25
++};
++
+ #define STM32_GPIO_FLAG_SEC_CTRL	BIT(0)
++#define STM32_GPIO_FLAG_IO_SYNC_CTRL	BIT(1)
  
- /**
-  * Return the simulated value of a GPIO (used only in sandbox test code)
-diff --git a/drivers/gpio/sandbox.c b/drivers/gpio/sandbox.c
-index 76aff0ed5aa..2319b8854e1 100644
---- a/drivers/gpio/sandbox.c
-+++ b/drivers/gpio/sandbox.c
-@@ -191,6 +191,8 @@ static int sb_gpio_set_value(struct udevice *dev, unsigned offset, int value)
+ struct stm32_gpio_dsc {
+ 	u8	port;
+@@ -59,11 +97,16 @@ struct stm32_gpio_dsc {
+ };
  
- static int sb_gpio_get_function(struct udevice *dev, unsigned offset)
+ struct stm32_gpio_ctl {
+-	enum stm32_gpio_mode	mode;
+-	enum stm32_gpio_otype	otype;
+-	enum stm32_gpio_speed	speed;
+-	enum stm32_gpio_pupd	pupd;
+-	enum stm32_gpio_af	af;
++	enum stm32_gpio_mode		mode;
++	enum stm32_gpio_otype		otype;
++	enum stm32_gpio_speed		speed;
++	enum stm32_gpio_pupd		pupd;
++	enum stm32_gpio_af		af;
++	enum stm32_gpio_delay_path	delay_path;
++	enum stm32_gpio_clk_edge	clk_edge;
++	enum stm32_gpio_clk_type	clk_type;
++	enum stm32_gpio_retime		retime;
++	enum stm32_gpio_delay		delay;
+ };
+ 
+ struct stm32_gpio_regs {
+@@ -79,6 +122,11 @@ struct stm32_gpio_regs {
+ 	u32 brr;	/* GPIO port bit reset */
+ 	u32 rfu;	/* Reserved */
+ 	u32 seccfgr;	/* GPIO secure configuration */
++	u32 rfu2;	/* Reserved (privcfgr) */
++	u32 rfu3;	/* Reserved (rcfglock) */
++	u32 rfu4;	/* Reserved */
++	u32 delayr[2];	/* GPIO port delay */
++	u32 advcfgr[2];	/* GPIO port PIO control */
+ };
+ 
+ struct stm32_gpio_priv {
+diff --git a/drivers/pinctrl/pinctrl_stm32.c b/drivers/pinctrl/pinctrl_stm32.c
+index 1758f9a909c..27a50392f74 100644
+--- a/drivers/pinctrl/pinctrl_stm32.c
++++ b/drivers/pinctrl/pinctrl_stm32.c
+@@ -29,6 +29,14 @@
+ #define OTYPE_MSK			1
+ #define AFR_MASK			0xF
+ #define SECCFG_MSK			1
++#define ADVCFGR_MASK			0xF
++#define DELAYR_MASK			0xF
++#define ADVCFGR_DLYPATH_POS		0
++#define ADVCFGR_DE_POS			1
++#define ADVCFGR_INVCLK_POS		2
++#define ADVCFGR_RET_POS			3
++
++#define DELAYRL_UNITS_PS		250
+ 
+ struct stm32_pinctrl_priv {
+ 	struct hwspinlock hws;
+@@ -43,6 +51,7 @@ struct stm32_gpio_bank {
+ 
+ struct stm32_pinctrl_data {
+ 	bool secure_control;
++	bool io_sync_control;
+ };
+ 
+ #ifndef CONFIG_XPL_BUILD
+@@ -304,7 +313,7 @@ static int stm32_gpio_config(ofnode node,
+ 	struct stm32_gpio_regs *regs = priv->regs;
+ 	struct stm32_pinctrl_priv *ctrl_priv;
+ 	int ret;
+-	u32 index;
++	u32 index, io_sync, advcfg;
+ 
+ 	/* Check access protection */
+ 	ret = stm32_pinctrl_get_access(desc->dev, desc->offset);
+@@ -318,6 +327,14 @@ static int stm32_gpio_config(ofnode node,
+ 	    ctl->pupd > 2 || ctl->speed > 3)
+ 		return -EINVAL;
+ 
++	io_sync = dev_get_driver_data(desc->dev) & STM32_GPIO_FLAG_IO_SYNC_CTRL;
++	if (io_sync && (ctl->delay_path > STM32_GPIO_DELAY_PATH_IN ||
++			ctl->clk_edge > STM32_GPIO_CLK_EDGE_DOUBLE ||
++			ctl->clk_type > STM32_GPIO_CLK_TYPE_INVERT ||
++			ctl->retime > STM32_GPIO_RETIME_ENABLED ||
++			ctl->delay > STM32_GPIO_DELAY_3_25))
++		return -EINVAL;
++
+ 	ctrl_priv = dev_get_priv(dev_get_parent(desc->dev));
+ 	ret = hwspinlock_lock_timeout(&ctrl_priv->hws, 10);
+ 	if (ret == -ETIME) {
+@@ -339,6 +356,20 @@ static int stm32_gpio_config(ofnode node,
+ 	index = desc->offset;
+ 	clrsetbits_le32(&regs->otyper, OTYPE_MSK << index, ctl->otype << index);
+ 
++	if (io_sync) {
++		index = (desc->offset & 0x07) * 4;
++		advcfg = (ctl->delay_path << ADVCFGR_DLYPATH_POS) |
++			 (ctl->clk_edge << ADVCFGR_DE_POS) |
++			 (ctl->clk_type << ADVCFGR_INVCLK_POS) |
++			 (ctl->retime << ADVCFGR_RET_POS);
++
++		clrsetbits_le32(&regs->advcfgr[desc->offset >> 3],
++				ADVCFGR_MASK << index, advcfg << index);
++
++		clrsetbits_le32(&regs->delayr[desc->offset >> 3],
++				DELAYR_MASK << index, ctl->delay << index);
++	}
++
+ 	uc_priv->name[desc->offset] = strdup(ofnode_get_name(node));
+ 
+ 	hwspinlock_unlock(&ctrl_priv->hws);
+@@ -358,6 +389,9 @@ static int prep_gpio_dsc(struct stm32_gpio_dsc *gpio_dsc, u32 port_pin)
+ static int prep_gpio_ctl(struct stm32_gpio_ctl *gpio_ctl, u32 gpio_fn,
+ 			 ofnode node)
  {
-+	if (get_gpio_flag(dev, offset, GPIOD_EXT_PROTECTED))
-+		return GPIOF_PROTECTED;
- 	if (get_gpio_flag(dev, offset, GPIOD_IS_OUT))
- 		return GPIOF_OUTPUT;
- 	if (get_gpio_flag(dev, offset, GPIOD_IS_IN))
-@@ -198,7 +200,7 @@ static int sb_gpio_get_function(struct udevice *dev, unsigned offset)
- 	if (get_gpio_flag(dev, offset, GPIOD_IS_AF))
- 		return GPIOF_FUNC;
++	const char *s;
++	u32 delay;
++
+ 	gpio_fn &= 0x00FF;
+ 	gpio_ctl->af = 0;
  
--	return GPIOF_INPUT; /*GPIO is not configurated */
-+	return GPIOF_INPUT; /* GPIO is not configured */
+@@ -391,10 +425,55 @@ static int prep_gpio_ctl(struct stm32_gpio_ctl *gpio_ctl, u32 gpio_fn,
+ 	else
+ 		gpio_ctl->pupd = STM32_GPIO_PUPD_NO;
+ 
++	s = ofnode_read_string(node, "st,io-sync");
++	if (!s || !strcmp(s, "pass-through")) {
++		gpio_ctl->clk_edge = STM32_GPIO_CLK_EDGE_SINGLE;
++		gpio_ctl->clk_type = STM32_GPIO_CLK_TYPE_NOT_INVERT;
++		gpio_ctl->retime = STM32_GPIO_RETIME_DISABLED;
++	} else if (!strcmp(s, "clock inverted")) {
++		gpio_ctl->clk_edge = STM32_GPIO_CLK_EDGE_SINGLE;
++		gpio_ctl->clk_type = STM32_GPIO_CLK_TYPE_INVERT;
++		gpio_ctl->retime = STM32_GPIO_RETIME_DISABLED;
++	} else if (!strcmp(s, "data on rising edge")) {
++		gpio_ctl->clk_edge = STM32_GPIO_CLK_EDGE_SINGLE;
++		gpio_ctl->clk_type = STM32_GPIO_CLK_TYPE_NOT_INVERT;
++		gpio_ctl->retime = STM32_GPIO_RETIME_ENABLED;
++	} else if (!strcmp(s, "data on falling edge")) {
++		gpio_ctl->clk_edge = STM32_GPIO_CLK_EDGE_SINGLE;
++		gpio_ctl->clk_type = STM32_GPIO_CLK_TYPE_INVERT;
++		gpio_ctl->retime = STM32_GPIO_RETIME_ENABLED;
++	} else if (!strcmp(s, "data on both edges")) {
++		gpio_ctl->clk_edge = STM32_GPIO_CLK_EDGE_DOUBLE;
++		gpio_ctl->clk_type = STM32_GPIO_CLK_TYPE_NOT_INVERT;
++		gpio_ctl->retime = STM32_GPIO_RETIME_ENABLED;
++	} else {
++		return -EINVAL;
++	}
++
++	if (!ofnode_read_u32(node, "skew-delay-input-ps", &delay)) {
++		gpio_ctl->delay = delay / DELAYRL_UNITS_PS;
++		gpio_ctl->delay_path = STM32_GPIO_DELAY_PATH_IN;
++	} else if (!ofnode_read_u32(node, "skew-delay-output-ps", &delay)) {
++		gpio_ctl->delay = delay / DELAYRL_UNITS_PS;
++		gpio_ctl->delay_path = STM32_GPIO_DELAY_PATH_OUT;
++	} else {
++		gpio_ctl->delay = STM32_GPIO_DELAY_NONE;
++		gpio_ctl->delay_path = STM32_GPIO_DELAY_PATH_OUT;
++	}
++
+ 	log_debug("gpio fn= %d, slew-rate= %x, op type= %x, pull-upd is = %x\n",
+ 		  gpio_fn, gpio_ctl->speed, gpio_ctl->otype,
+ 		  gpio_ctl->pupd);
+ 
++	if (gpio_ctl->retime || gpio_ctl->clk_type || gpio_ctl->clk_edge || gpio_ctl->delay_path ||
++	    gpio_ctl->delay)
++		log_debug("	Retime:%d InvClk:%d DblEdge:%d DelayIn:%d\n",
++			  gpio_ctl->retime, gpio_ctl->clk_type, gpio_ctl->clk_edge,
++			  gpio_ctl->delay_path);
++	if (gpio_ctl->delay)
++		log_debug("	Delay: %d (%d ps)\n", gpio_ctl->delay,
++			  gpio_ctl->delay * DELAYRL_UNITS_PS);
++
+ 	return 0;
  }
  
- static int sb_gpio_xlate(struct udevice *dev, struct gpio_desc *desc,
-@@ -528,6 +530,14 @@ static int sb_pinctrl_get_pin_muxing(struct udevice *dev,
- 	unsigned int gpio_idx;
- 	ulong flags;
- 	int function;
-+	static const char * const gpio_function[GPIOF_COUNT] = {
-+		"input",
-+		"output",
-+		"unused",
-+		"unknown",
-+		"func",
-+		"protected",
-+	};
+@@ -428,7 +507,9 @@ static int stm32_pinctrl_config(ofnode node)
  
- 	/* look up for the bank which owns the requested pin */
- 	gpio_dev = sb_pinctrl_get_gpio_dev(dev, selector, &gpio_idx);
-@@ -536,9 +546,7 @@ static int sb_pinctrl_get_pin_muxing(struct udevice *dev,
- 	} else {
- 		function = sb_gpio_get_function(gpio_dev, gpio_idx);
- 		flags = *get_gpio_flags(gpio_dev, gpio_idx);
--
--		snprintf(buf, size, "gpio %s %s",
--			 function == GPIOF_OUTPUT ? "output" : "input",
-+		snprintf(buf, size, "gpio %s %s", gpio_function[function],
- 			 get_flags_string(flags));
+ 			log_debug("pinmux = %x\n", *(pin_mux + i));
+ 			prep_gpio_dsc(&gpio_dsc, *(pin_mux + i));
+-			prep_gpio_ctl(&gpio_ctl, *(pin_mux + i), subnode);
++			rv = prep_gpio_ctl(&gpio_ctl, *(pin_mux + i), subnode);
++			if (rv)
++				return rv;
+ 			rv = uclass_get_device_by_seq(UCLASS_GPIO,
+ 						      gpio_dsc.port,
+ 						      &desc.dev);
+@@ -466,7 +547,9 @@ static int stm32_pinctrl_bind(struct udevice *dev)
+ 		return -EINVAL;
  	}
+ 	if (drv_data->secure_control)
+-		gpio_data = STM32_GPIO_FLAG_SEC_CTRL;
++		gpio_data |= STM32_GPIO_FLAG_SEC_CTRL;
++	if (drv_data->io_sync_control)
++		gpio_data |= STM32_GPIO_FLAG_IO_SYNC_CTRL;
  
-diff --git a/test/dm/gpio.c b/test/dm/gpio.c
-index 2401c5ed1be..a28c93ec544 100644
---- a/test/dm/gpio.c
-+++ b/test/dm/gpio.c
-@@ -112,6 +112,11 @@ static int dm_test_gpio(struct unit_test_state *uts)
- 	ut_asserteq_str("a", name);
- 	ut_asserteq(25, offset_count);
+ 	dev_for_each_subnode(node, dev) {
+ 		dev_dbg(dev, "bind %s\n", ofnode_get_name(node));
+@@ -546,25 +629,32 @@ static struct pinctrl_ops stm32_pinctrl_ops = {
+ #endif
+ };
  
-+	/* Flag a pin as protected, and check its status */
-+	ut_assertok(gpio_lookup_name("a1", &dev, &offset, &gpio));
-+	sandbox_gpio_set_flags(dev, 1, GPIOD_EXT_PROTECTED);
-+	ut_asserteq(GPIOF_PROTECTED, gpio_get_raw_function(dev, 1, NULL));
+-static const struct stm32_pinctrl_data stm32_pinctrl_no_sec = {
++static const struct stm32_pinctrl_data stm32_pinctrl_base = {
+ 	.secure_control = false,
++	.io_sync_control = false,
++};
 +
- 	/* add gpio hog tests */
- 	ut_assertok(gpio_hog_lookup_name("hog_input_active_low", &desc));
- 	ut_asserteq(GPIOD_IS_IN | GPIOD_ACTIVE_LOW, desc->flags);
++static const struct stm32_pinctrl_data stm32_pinctrl_sec = {
++	.secure_control = true,
++	.io_sync_control = false,
+ };
+ 
+-static const struct stm32_pinctrl_data stm32_pinctrl_with_sec = {
++static const struct stm32_pinctrl_data stm32_pinctrl_sec_iosync = {
+ 	.secure_control = true,
++	.io_sync_control = true,
+ };
+ 
+ static const struct udevice_id stm32_pinctrl_ids[] = {
+-	{ .compatible = "st,stm32f429-pinctrl",    .data = (ulong)&stm32_pinctrl_no_sec },
+-	{ .compatible = "st,stm32f469-pinctrl",    .data = (ulong)&stm32_pinctrl_no_sec },
+-	{ .compatible = "st,stm32f746-pinctrl",    .data = (ulong)&stm32_pinctrl_no_sec },
+-	{ .compatible = "st,stm32f769-pinctrl",    .data = (ulong)&stm32_pinctrl_no_sec },
+-	{ .compatible = "st,stm32h743-pinctrl",    .data = (ulong)&stm32_pinctrl_no_sec },
+-	{ .compatible = "st,stm32mp157-pinctrl",   .data = (ulong)&stm32_pinctrl_no_sec },
+-	{ .compatible = "st,stm32mp157-z-pinctrl", .data = (ulong)&stm32_pinctrl_no_sec },
+-	{ .compatible = "st,stm32mp135-pinctrl",   .data = (ulong)&stm32_pinctrl_with_sec },
+-	{ .compatible = "st,stm32mp257-pinctrl",   .data = (ulong)&stm32_pinctrl_with_sec },
+-	{ .compatible = "st,stm32mp257-z-pinctrl", .data = (ulong)&stm32_pinctrl_with_sec },
++	{ .compatible = "st,stm32f429-pinctrl",    .data = (ulong)&stm32_pinctrl_base },
++	{ .compatible = "st,stm32f469-pinctrl",    .data = (ulong)&stm32_pinctrl_base },
++	{ .compatible = "st,stm32f746-pinctrl",    .data = (ulong)&stm32_pinctrl_base },
++	{ .compatible = "st,stm32f769-pinctrl",    .data = (ulong)&stm32_pinctrl_base },
++	{ .compatible = "st,stm32h743-pinctrl",    .data = (ulong)&stm32_pinctrl_base },
++	{ .compatible = "st,stm32mp157-pinctrl",   .data = (ulong)&stm32_pinctrl_base },
++	{ .compatible = "st,stm32mp157-z-pinctrl", .data = (ulong)&stm32_pinctrl_base },
++	{ .compatible = "st,stm32mp135-pinctrl",   .data = (ulong)&stm32_pinctrl_sec },
++	{ .compatible = "st,stm32mp257-pinctrl",   .data = (ulong)&stm32_pinctrl_sec_iosync },
++	{ .compatible = "st,stm32mp257-z-pinctrl", .data = (ulong)&stm32_pinctrl_sec_iosync },
+ 	{ }
+ };
+ 
 
 -- 
 2.43.0
