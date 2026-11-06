@@ -1,197 +1,194 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DB94606A33D
-	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 10:00:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B09A606A33F
+	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 10:08:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=f1sh9lVl;
-	dkim=pass (2048-bit key, unprotected) header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256 header.s=selector2 header.b=ocMahdfx
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=wG4C6oVn;
+	dkim=pass (2048-bit key, unprotected) header.d=monstr-eu.20260707.gappssmtp.com header.i=@monstr-eu.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=tAabN+em
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6EF85811F7;
-	Fri,  6 Nov 2026 10:00:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 67E2940963;
+	Fri,  6 Nov 2026 10:08:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id siVNKzqMI_jI; Fri,  6 Nov 2026 10:00:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 62DC0811EF
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793959239;
-	b=P5PppuEa7Nc0TrYZbzrna8dA614nEDH0VBzyrH3fEru4UnurVNOKybNwzEbmIy/ATM4P
-	 YQ4LY9Rw2gHcmugkA0ZuOyssTFfAXe0K+gylJd5kK8Bd5CiGeY7MlKyPUPyWA5z0oLw6q
-	 kjtVM6GblU5/Cj9zG5A+qSFr1MGEPqcplM0ipZGjIvd02eF8A8IUpDB+Bqj3iTntH9UOu
-	 9RDeZZExLTDdDc0Vw6N76jhVhg5o5i9rekYz7CG4I7MN//A9TabpE82ITSQ6vXjxNz2uo
-	 qZPxcjeuZuVa5xgBdPt666MbfqWi4f0BFkEFVuu5LDl+tvcJsuxxOSZK73veLXARMWQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id sWHbh8aY9TUw; Fri,  6 Nov 2026 10:08:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 1EC6E40958
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793959690;
+	b=qdGsftSE+u+jrbPzFIGdF+vcKAaCIo4ZSOpdpjlYmTZuEBS2onzUB7X7yezaWMmY2mkj
+	 ce+HvLza6rY9Xk3r/DFI9filRloWgXcrG5DBNpvEmR328Gu944+qIDP66D9E2pp1ZW3qm
+	 bASAgcCyp1VkivcRn/TlsCtIGNmkehkj/OVI/u4jjvPLzYSvekM5fiMZjAh7nsh4Z5vnq
+	 tA/Kj6eehcHR7cc9jndV/nrr2goonUsM3TLpi5PU1BvJ+1U/GGsabc1avgCa4D5T6tfno
+	 VlBbjICydIZ/L7Jg0UUmNVMdIMSrhP/0opuKhPW9i/wOBMeWh6FlddAS0uFNsaGX2HA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793959239;
+	c=relaxed/relaxed; t=1793959690;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:X-MS-Exchange-Authentication-Results:
-	 Received-SPF:Received:Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:CC:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Originating-IP:
-	 X-ClientProxiedBy:X-EOPAttributedMessage:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-LD-Processed:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=OqDD/GGqffbog3bSpG6DT86vuq0h3z4fX+IZkcffv2Y=;
-	b=p+l5+OsnGeuu53tb08QbBxm4Pdp2PZKxHj0DSCAR2rKV+/94Pv3jwRhf6V7jaPBWANPb
-	 /eXmzbKIX+fUSD6rk8RGdHD6EnNpbj8gb8qgg+L+TSOJEjv2t0PNXid716czME99SGg9d
-	 JZfzTBwE90wrOBIWyWp+/ryaKDC9KGtbbxeHxMs8jDlBV290eqvATqGux8sGqQ4I98fyM
-	 PNRaSiB7novP4FqGh/KkA2ZZu7Yv+/8+9a9eHJXp/RjfkRJG+XUBoa3QJLCSID7piutit
-	 RLkHMYLJUVrd3W/bAbmAbkCoDVFOTXMNRa8TaAu6K0VKTJN5WDZ6CTRVmC+4YmLv1ig==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=foss.st.com;
-	dkim=pass header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256 header.s=selector2 header.b=ocMahdfx;
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Content-Language:To:Cc:From:Subject:Autocrypt:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=shtx1ZoXpLhqYTI35s3VY/MlGEAmb3AbNLEHpxqzqxc=;
+	b=gOBbyBTpchr7cc4lKv3dN2wSnOWqp43Jw/NHfwPX6fy8FYB3+WE5//sjcjtmpVVIfzII
+	 7IQz6lzgoR4wyriUDbcLfrqFj9Il0VDD4K88qQE2uVobTTH17rBr96K793m7jJU7vBU6B
+	 EO5xsSLzXGXopQkGsEnPtSZqhZ1qkWrY4RG3eN6Z1oz0N9XlcNmSBXNQoCjEjwJXJSTIt
+	 Op6D4yb589vrlgcFqnLL7Et6xwWoCNgOQIUjHMjZTGMgjzizxnyV8cwNHz0lrUnM2eE1Z
+	 tXhEDCPl0+R95IjgVNUQ/LjCvYj83YOP6BT+cXnQPVWRZVk6LmwL7XvsnMUJpfzbv1Q==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793959239;
-	bh=OqDD/GGqffbog3bSpG6DT86vuq0h3z4fX+IZkcffv2Y=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=f1sh9lVlBfaALrMYidYiOKEagfrbb1n0Hm+Jcdk/1wuUDGT2qO+ZIlSGw3PSnFrKW
-	 C87NTgOpKODKrHwQZf5boYHK2B185Z4uTIAjSM6gaHODHd90icscN2ykxENcUTtAyE
-	 4Btwrsx4T4Pcyh4OG5m9Uts7MfYZCbEz8FQMEl9gE0YxsECOvVYA7g/DZD+Gd3ihXm
-	 Q8/j1Npp6dWJ2pqCnQJyfnpXkCWX/ySAQPWWE9IJ+fiCXy0/XaXseSRopCRDXXMryi
-	 C8kqFo80pi9ra9SPnLMydNlmADhEmAedjh9wWhoPPyc1UZLMpFzlBCBQ8A+dENDPks
-	 T9fqCu9MufrNA==
+	d=lists.u-boot-project.org; s=default; t=1793959690;
+	bh=shtx1ZoXpLhqYTI35s3VY/MlGEAmb3AbNLEHpxqzqxc=;
+	h=Date:To:Cc:From:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=wG4C6oVnb9/oa0cCeQxQXaKVqRLe1qXpTNQ6trXev0omDTaIEFSYHAPrGRRqgjAYa
+	 2J5jizNOVffICi44uAAnbDmByTRoi1pF1Hbjnz9sV5xHOb9MUt1UdaFtHMO/BCnB04
+	 2P/LUAlwYdfUo7loujm/d5BtXQSkjS9zvZUr5W1CwGSq4H+flcLQclx8DNOG7NYXKv
+	 mhIV4SewJE0CV5LiNuf5eMid6GF1htOStuzKouB884jY9P7/JJuoAc9dghTF/1IoK4
+	 YMHhusiGVIwAx47h+x2T/yujFz29dnz+OI2BDaC3MBhqPR0V68tSM5aa1NfN1aC3S/
+	 ZgK3yH2xqdYfQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 62DC0811EF;
-	Fri,  6 Nov 2026 10:00:39 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1EC6E40958;
+	Fri,  6 Nov 2026 10:08:10 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id D35AB1E3
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 10:00:37 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 1A0BF31F
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 10:08:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C53FE811EF
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 10:00:37 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0BC67809E7
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 10:08:08 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FvicElVTdvJA for <u-boot@lists.u-boot-project.org>;
- Fri,  6 Nov 2026 10:00:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E63FF811DF
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c200::5"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::5;
- helo=duzpr83cu001.outbound.protection.outlook.com;
- envelope-from=patrice.chotard@foss.st.com; receiver=<UNKNOWN> 
+ id g4mAVQ3xk60s for <u-boot@lists.u-boot-project.org>;
+ Fri,  6 Nov 2026 10:08:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 08FEE80A50
 Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ arc=none smtp.remote-ip="2a00:1450:4864:20::632"
+Received-SPF: None (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::632; helo=mail-ej1-x632.google.com;
+ envelope-from=monstr@monstr.eu; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=foss.st.com header.i=@foss.st.com header.a=rsa-sha256
- header.s=selector2 header.b=ocMahdfx
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E63FF811DF
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 10:00:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OqDD/GGqffbog3bSpG6DT86vuq0h3z4fX+IZkcffv2Y=;
- b=ocMahdfxi8YpPN+QFuQ+grtUkNpiCgHq1BHgqPBbWx6SAQSsxSfD28ZLjq9NXROV/4YxWjO4HuhTvLc8PMUaqOeetTl70jy89M6jCimLP3GaZPg2ZBkLRpyJDnocHlG4L9/C9iezEOrI3/HfwsgxhTqF+8W/a8/WnITsuKY1q+qs9apMdUjNgHTd8xlIvYe81CBfCA4Te0UjutN/Z0CiSGQTsj/1iZxSOqdxlQLLuMvC1SAif3eUZU/OxeE1NoNgqhR41GdD/jTmDwTv2/CLwAW2yZ82JhB1pp3SfChxBiGHCfbItAwLOWf/PlS3I5zTrKoZiZ3EvMSlwvELAl1w4Q==
-Received: from AM9P250CA0023.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:21c::28)
- by PAXPR10MB5158.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:28a::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.4; Fri, 6 Nov 2026
- 10:00:26 +0000
-Received: from AM1PEPF000C1ADB.eurprd02.prod.outlook.com
- (2603:10a6:20b:21c:cafe::99) by AM9P250CA0023.outlook.office365.com
- (2603:10a6:20b:21c::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.10 via Frontend Transport; Fri, 6
- Nov 2026 10:00:26 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=fail (sender IP
- is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- AM1PEPF000C1ADB.mail.protection.outlook.com (10.167.242.106) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.615.4 via Frontend Transport; Fri, 6 Nov 2026 10:00:26 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.46; Fri, 6 Nov
- 2026 11:00:55 +0100
-Received: from [10.252.31.114] (10.252.31.114) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.46; Fri, 6 Nov
- 2026 11:00:24 +0100
-Message-ID: <c68f3957-3d23-480b-b7ef-428f5dde2546@foss.st.com>
-Date: Fri, 6 Nov 2026 11:00:22 +0100
+ unprotected) header.d=monstr-eu.20260707.gappssmtp.com
+ header.i=@monstr-eu.20260707.gappssmtp.com header.a=rsa-sha256
+ header.s=20260707 header.b=tAabN+em
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 08FEE80A50
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 10:08:03 +0000 (UTC)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-c4d28f75d62so52446166b.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 02:08:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=monstr-eu.20260707.gappssmtp.com; s=20260707; t=1793959682; x=1794564482;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+ :content-language:user-agent:mime-version:date:message-id:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=shtx1ZoXpLhqYTI35s3VY/MlGEAmb3AbNLEHpxqzqxc=;
+ b=tAabN+emCovqsU7YwVNC3Qg+ieCQzvGfkqRHPRw26GfvmGjQJRNJgxRsLYyQFh8FOf
+ e+xJKvGT39ubkBYgec6GZ09ul0VZ7rnpZ32Q7TII2j5WACaBe4fXoStueSw+tWKYIxhr
+ J/t8C4mqxE5w9b2KrwsKvJW3esxO9RFmK2EatoLRXRtOl28N2y+NYUQCsmZx9KProEM0
+ 7wNPO4HjQE4fWt68BOS6ish9QpPmP+TMsfhPQXuUf4vQLudIqPYBOLhLUEQRuptifRyC
+ gbHUraN3W7MREFTw5xx7vWyCfjrxKZrqtDK09WMiR0YIBGQV2IL4q2vcaAezqg5NbCZg
+ TSWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793959682; x=1794564482;
+ h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+ :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=shtx1ZoXpLhqYTI35s3VY/MlGEAmb3AbNLEHpxqzqxc=;
+ b=IJd2+Wg9MjPtCSL+6CnXanUIPfxkWPFuFNFsBiLvX7Pu/qGlSZhc6cBKMQzEHwZc4x
+ LaqEp+y2AdszWl3cbxB4YjU16YsiUZx+itqXncsBKyxnj+OrPyyl8hw8XZwdDqOQ8NTP
+ AZIySFuUtq62pSnnhU1z/lK6nz3+W1OCuM8K711j/EYspkdmrBi+V+NmHBWncC84hWyq
+ fTh8U10lBoMEZbD4d23Y92B51ZqQl5iu6/OdxtcAAfqRTkEL9GNfVuNWpr7uaoHXql+g
+ L/8W15nXdTQsMP5oKq2E4Ni4jsVLuV6ZsU7rkLOucLpb5RaN89zrEEortJ8jumm7lJo0
+ ZKmw==
+X-Gm-Message-State: APuU4Z+EwxS+WVQdqdkE+6zx3FHu9X1NW/fzBQH2cbwUMfeXg1hDTQru
+ fLBZMkEFG+bC2aM9KLSwDFj9uelQPk77eeb5Cjx+zIPKvoS0MokIuvxAZ2sCACzBRVdiGyxriDd
+ OqNCjXmwH
+X-Gm-Gg: AYBFou2UQ6NWgdgrxbHpmAwyd/M3IjrDVJgajJ4JyTVKGesvWJP38+i7yzkmXeTU2+2
+ +B2NN7pws2PDD6iA6y1WVhFR3C/+OLegZVUGLD/aYwP/QRtrcQ8IowIjPo9GbJMwt9kbgD8q0Ss
+ p1KPFgVGM3aqzsDdGH4H56rV7gwwEppS9J8QOKZIHWtOZsWpxIOPTv8SGHs2xc5Up0POjH/BQPl
+ 0QHnlsjdg8NB3pMhREiHMukRBcCHihVWf/ER0hLDM8ddjAbKRiOvbAYJoqOXL1GlQP9Ne7cfDIb
+ R6hMvQKtBe/12tIYjENpX/lwCEbsgkAiE12sWN2K8RvjRpGttyPYNLDZiskmyNQWDSt3TM+Thq2
+ rJT30Du4Ei7SSbSD/xZjLLZdpF7o82LxJfzSYjkEqfhAW4SbWwByCHKKGjeukkLLRiZ3ECKpH2S
+ B1j1vKHQq/0LyNDsS4ZDf+7lF0tqrBtyuYQgOth8Eo78wvt0v1aJtknwY7CuVwIVWskmP7cfkGP
+ IONhKq6Oc0QojMY1621qlMHG2PaO/vNMuK9f4n537l2Mv75NQNCtAGtC8fkmzR0h5FDOTO3SQQQ
+ O6iCTS/qOvnDbdsWe5ZEY49JeDWGQKBX+u5QQCpyQhteyS6AdTr9J7Nindf5kQS2+Z422jGgZJI
+ /OdD8oz6efLph3hyDRjUM90mjiRF34YDPO8q0vH3Avz2wTJH7yEfsrJodzA==
+X-Received: by 2002:a17:907:2d92:b0:c2e:7da8:f54f with SMTP id
+ a640c23a62f3a-c4d34c8b118mr173237366b.38.1793959681009; 
+ Fri, 06 Nov 2026 02:08:01 -0800 (PST)
+Received: from [192.168.0.105] (nat-108f.starnet.cz. [109.164.53.108])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c4d3562eaf9sm65964566b.29.2026.11.06.02.08.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Nov 2026 02:08:00 -0800 (PST)
+Message-ID: <544a283d-2fde-454e-9240-af6f05f09d9d@monstr.eu>
+Date: Fri, 6 Nov 2026 11:07:59 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/33] Add Engicam MicroGEA-STM32MP257D-RMM board support
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Tom Rini
- <trini@konsulko.com>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- <linux-amarula@amarulasolutions.com>, <michael@amarulasolutions.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>, Anatolij Gustschin
- <ag.dev.uboot@gmail.com>, David Lechner <dlechner@baylibre.com>, "Gabriel
- Fernandez" <gabriel.fernandez@foss.st.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jagan Teki <jagan@amarulasolutions.com>, "Kory
- Maincent" <kory.maincent@bootlin.com>, Lukasz Majewski <lukma@nabladev.com>,
- Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, Sumit Garg
- <sumit.garg@kernel.org>, Yannick Fertre <yannick.fertre@foss.st.com>,
- <u-boot@lists.denx.de>, <u-boot@lists.u-boot-project.org>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20261104085036.4012238-1-dario.binacchi@amarulasolutions.com>
- <20261104192118.GD1164024@bill-the-cat>
- <CABGWkvqisJBzV=tRQrhZ87evgF6mTff+dJvO1LVwVQC-YX=DpA@mail.gmail.com>
- <20261105144835.GM1164024@bill-the-cat>
- <CABGWkvqoNBvjynykG-Y7V8BP5OTP4TOq4zwkAwSQ_P+e8-6JPQ@mail.gmail.com>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <CABGWkvqoNBvjynykG-Y7V8BP5OTP4TOq4zwkAwSQ_P+e8-6JPQ@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM1PEPF000C1ADB:EE_|PAXPR10MB5158:EE_
-X-MS-Office365-Filtering-Correlation-Id: d42dd7de-c347-42c1-ca10-08df3becc7d9
-X-LD-Processed: 75e027c9-20d5-47d5-b82f-77d7cd041e8f,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|7416014|36860700016|1800799024|23010399003|6133799003|22082099003|18002099003|3023799007|10067099003|4143699003|11063799006|261026121527099003|261009223027099003|261026140227099003|261028144727099003|261021121427099003|261102123227099003|56012099006|261022105027099003;
-X-Microsoft-Antispam-Message-Info: zBMKP/+SGmblLGdWfDTHTOfVxNoxK6ws6d65B3utitJCweitPr++TVV3sAKBbvBK/UliOjXj6d3YPyv3QFtgYATXo+97Hm/jg6HI83vXC2Bgc2WMWm14b95Zt2QeghGM6OGZ1benCd9j32akBESu3MHBftx2f4zWTLUADEl0wl2htp1T3aBC5EQFk0+b7ECX446HPSCDcmYLgHYRFNqXxKGWxQA7ay6nm/OCYXExPRmUosyrYeVfzNCcvWj/u48khlvoWqOBFEhzUsgPAeRRGoS3A2LIva5AOwms1eTB5Il9//bU814Y9nM5yg4S+YDv+HJqJSKA5JpNVlKOfl6nPe66HrlL9UyLXKJYkmaCaqL8PUEU6nO121OqKNvU/ok12thdm3tB0PPWwi29FXpqT/yRiCa9gcTAm/0eCRIyepDXujSwpeveuZQ40YKwCVpK3epeievOJdUhq0lrpwWDEW5kZOEXFnoKZ3hu2OtJ+ZKcFQmf4lRk2ygLDYWxi/vF5t+kez0gykxaUs10mUfAp9xZRLoecTIWPFZQdqZ2PkFAFeOw4RKV5Aaqs2L49tvVGIWmMFVF4LcPtPykL+qelvKFAg7i+n+tUK7UtruBHJou+peUudvIdUlCdXn/FPwmTcdEcyt5Sb+cTDPBtTGutqbfPsu66SwSbsgfA2mAWao=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(7416014)(36860700016)(1800799024)(23010399003)(6133799003)(22082099003)(18002099003)(3023799007)(10067099003)(4143699003)(11063799006)(261026121527099003)(261009223027099003)(261026140227099003)(261028144727099003)(261021121427099003)(261102123227099003)(56012099006)(261022105027099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: EmaYzzzlbbyUG6t2qZBCPjYE/+I/6Tf3Kl6vAae+zQHvLbicDxWDMQAhSf25KUEbe5NiXJMYJvoPA7ksZFztAgPgemH1JBIrFbOoAUqrgxdl6pv83hpHcqjQrffSi/GJBfPizTpZb406lrz3LUM0BHmm+YAL0xKGkm/Lm/OMAhLcxV4EyM5NY4sZH01eOgw4DUcxZEE64GPuHv2QWIBUMyUsM6irUpOiYGxZAmRV+Z0DWnZja7XNPSU24YCyBvSZdgltqsM/yAYNG7wCEbmDANSxrelhml6ifxyKctktTZm352cfnXei/0SPavBo8COAITecPywcMRhqPwxfXP+qDDtoeHoK3l0zaXubN2NI9eo1lPcOP8iHrxw09HlmhntHywv6DKeQsLehLfvgpIgIqmLZhadfssQWfwU2s1u7hgTmPIfffDP03NDuyV9H6mpA
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2026 10:00:26.0239 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d42dd7de-c347-42c1-ca10-08df3becc7d9
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM1PEPF000C1ADB.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR10MB5158
+To: Tom Rini <trini@konsulko.com>
+Cc: "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
+From: Michal Simek <monstr@monstr.eu>
+Subject: [GIT PULL] amd/xilinx/fpga patches for v2027.01-rc2
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ mpwx1d8=
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -201,104 +198,171 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-7.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-20.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	INCLUDES_PULL_REQUEST,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Hi Tom,
 
+please pull these changes to your tree. I have run CI yesterday
+https://git.u-boot-project.org/u-boot/custodians/u-boot-amd/-/pipelines/1833
+without any issue.
+But I found that one patch wasn't taken via b4 that's why I have rebased it on 
+the latest&greatest and pushed it.
 
-On 11/5/26 16:39, Dario Binacchi wrote:
-> Hi Tom,
-> 
-> On Thu, Nov 5, 2026 at 3:48 PM Tom Rini <trini@konsulko.com> wrote:
->>
->> On Thu, Nov 05, 2026 at 08:12:07AM +0100, Dario Binacchi wrote:
->>> Hi Tom,
->>>
->>> On Wed, Nov 4, 2026 at 8:21 PM Tom Rini <trini@konsulko.com> wrote:
->>>>
->>>> On Wed, Nov 04, 2026 at 09:49:33AM +0100, Dario Binacchi wrote:
->>>>
->>>>> This series adds support for the Engicam MicroGEA-STM32MP257D-RMM
->>>>> board, with its RGB and LVDS displays and the FWU A/B update.
->>>>>
->>>>> The first patches pick the board devicetrees, merged for Linux v7.4,
->>>>> from devicetree-rebasing. They can be dropped if dts/upstream is synced
->>>>> with v7.4-dts first. Then come the fixes, the refactors moving the
->>>>> STM32MP2 environment and FWU support to the SoC code, and the board
->>>>> support.
->>>>
->>>> What's the status on upstreaming all of the changes you're putting in
->>>> the -u-boot.dtsi files? Thanks.
->>>
->>> The -u-boot.dtsi contains:
->>>
->>> - U-Boot specific nodes and properties: the environment partition, the
->>>   FWU metadata and the bootph-all properties.
->>
->> bootph is to be upstreamed,  I don't recall where the FWU stuff ended
->> up, and I'd need to double check the specific environment binding you're
->> referring to.
-> 
-> I added the bootph-all properties to the -u-boot.dtsi because I saw
-> the same in the other STM32MP25 boards, e.g. the stm32mp257f-ev1. If
-> they should go to Linux instead, I will send them for this board.
-> 
+There are also some SPI changes pending but they should go to next version 
+because we are going to rc2 and I would like others to test them on their boards.
 
-Hi
+Thanks,
+Michal
 
-Currently bootph properties are in -u-boot.dtsi for STM32MP platform, but 
-it must be upstream in kernel DT. 
-The bootph properties migration from -u-boot.dtsi files to kernel DT is on-going [1]
-but need some rework (stm32f4/f7/h7 MCU support has been removed [2])
+The following changes since commit 709a97a05df66e394f40d249105d0baade46f107:
 
-[1] https://lore.kernel.org/linux-arm-kernel/20260526-upstream_uboot_properties-v7-0-e17cd424d5db@foss.st.com/
-[2] https://lore.kernel.org/linux-arm-kernel/2afd5f78-0174-4955-8c1b-be18aea3800b@app.fastmail.com/
+   Merge tag 'efi-2027-01-rc2' of 
+https://git.u-boot-project.org/u-boot/custodians/u-boot-efi (2026-11-05 07:58:42 
+-0600)
 
-Thanks
-Patrice
+are available in the Git repository at:
 
-> The FWU metadata node and the environment partition use bindings which
-> are only in U-Boot: doc/device-tree-bindings/firmware/fwu-mdata-gpt.yaml
-> and u-boot,mmc-env-partition in doc/device-tree-bindings/config.txt.
-> They are not in dt-schema yet. Both are also used in the -u-boot.dtsi
-> of the other STM32MP boards.
-> 
->>
->>> - The RGB and LVDS panels, with the LTDC and LVDS endpoints. These are
->>>   already upstream in Linux, but in two devicetree overlays, one per
->>>   display. Since the display is selected by the "display" environment
->>>   variable, which is stored in the eMMC/SD and is not available yet
->>>   when the U-Boot control devicetree is set up, both displays are
->>>   described here and the board code keeps only the selected one.
->>
->> You can't detect and apply the overlay instead?
-> 
-> No, the displays can't be detected. There is no EEPROM or other ID on
-> the board or on the displays indicating which one is connected. That is
-> why the selection is left to the user, by the "display" environment
-> variable. Since the environment is in the eMMC/SD, it is only loaded
-> after relocation, when the devices are already bound. Is there a way
-> to apply an overlay to the control devicetree at that point that I
-> missed?
-> 
-> Thanks and regards,
-> Dario
-> 
->>
->>> - The LTDC "lcd" clock for the RGB output. This is not upstream yet:
->>>   I sent it in an RFC series [1], and Gabriel is reworking the STM32MP25
->>>   SYSCFG pixel clock support, which should cover it. I will drop it once
->>>   it is merged in Linux.
->>
->> OK, thanks.
->>
->> --
->> Tom
-> 
-> 
-> 
+   https://git.u-boot-project.org/u-boot/custodians/u-boot-amd.git 
+tags/xilinx-for-v2027.01-rc2
 
+for you to fetch changes up to 087f6651756cd90053e6766cbe5dc36cd741be1d:
+
+   board: zynqmp: Remove 1 second delay in psu_uboot_init (2026-11-06 10:43:39 
++0100)
+
+----------------------------------------------------------------
+AMD/Xilinx changes for v2027.01-rc2
+
+mbv:
+- DT updates
+- Defconfig updates with spi fragment
+- Update memory layout
+
+pcie:
+- Add support for CPM6 host1
+
+fru:
+- harden FRU parsing against malformed data
+
+fpga:
+- zynq: fix bitstream header scan length checks
+- zynqmp: fix pointer arithmetic in zynqmp_align_dma_buffer()
+
+zynqmp:
+- Defconfig updates
+- DT updates
+- spl: Remove 1s clock delay
+
+versal2:
+- Defconfig updates
+
+firmware:
+- Fix PM_REGNODE_PMC_TAP node ID
+
+versal:
+- mini: Skip relocation
+
+spi:
+- cadence: Fix double reset assert
+
+----------------------------------------------------------------
+Akshay Belsare (1):
+       firmware: zynqmp: fix PM_REGNODE_PMC_TAP node ID collision
+
+Michal Simek (8):
+       riscv: dts: mbv: Update bootph-all in xilinx-mbv64 DT
+       xilinx: mbv: Enable GPIO driver and command
+       xilinx: mbv: Enable CMD_EXCEPTION
+       xilinx: mbv: Add support for using bigger boot images via bootm
+       xilinx: mbv: Enable MTD command by default
+       arm64: versal2: Disable FF-A
+       arm64: dts: xilinx: drop bias-high-impedance on SDIO CD/WP pins
+       arm64: zynqmp: Fix DTOVL warning about graphs in kv/kr260
+
+Mike Looijmans (1):
+       board: zynqmp: Remove 1 second delay in psu_uboot_init
+
+Padmarao Begari (6):
+       configs: versal: Skip relocation for mini OSPI
+       spi: cadence_qspi: Fix double reset assert
+       xilinx: mbv: Enable Ethernet support
+       xilinx: mbv: Update stack, heap, and OpenSBI memory
+       xilinx: mbv: Disable SPL raw image support
+       xilinx: mbv: Add SPI-related board config
+
+Pranav Sanwal (1):
+       pci: dw_amd: Enable CPM6 host1 and quiesce interrupts on init
+
+Pranav Tilak (3):
+       xilinx: fru: Add bounds checks when parsing FRU data
+       xilinx: fru: Fix wrong argv index in do_fru_capture() addr check
+       xilinx: fru: Use sizeof() for board header size
+
+Prasad Kummari (1):
+       amd: versal2: Disable EEMI clk reset power and switch to SCMI
+
+Sandeep Gundlupet Raju (2):
+       riscv: dts: mbv: Update mem size to 2GB
+       xilinx: mbv: Add sys prompt for mbv32 and mbv64
+
+Senthil Nathan Thangaraj (1):
+       amd: versal2: Enable SCMI power domain support
+
+Shaikh Mohammed Suhan (1):
+       arm64: dts: zynqmp: Add post-init provider for USB424 USB3 hub
+
+Suraj Kakade (4):
+       fpga: zynqmppl: fix pointer arithmetic in zynqmp_align_dma_buffer()
+       fpga: zynqpl: use actread for bitstream scan in zynq_loadfs
+       fpga: zynqpl: stop header scan once a full header can't fit
+       configs: zynqmp: Enable Xilinx AXI Quad SPI driver
+
+  arch/arm/dts/zynqmp-sck-kd-g-revA.dtso    |   1 +
+  arch/arm/dts/zynqmp-sck-kr-g-revA.dtso    |   5 +
+  arch/arm/dts/zynqmp-sck-kr-g-revB.dtso    |   5 +
+  arch/arm/dts/zynqmp-sck-kv-g-revA.dtso    |   6 +-
+  arch/arm/dts/zynqmp-sck-kv-g-revB.dtso    |   6 +-
+  arch/arm/dts/zynqmp-zc1751-xm015-dc1.dts  |   4 -
+  arch/arm/dts/zynqmp-zc1751-xm019-dc5.dts  |   2 -
+  arch/arm/dts/zynqmp-zcu100-revC.dts       |   1 -
+  arch/arm/dts/zynqmp-zcu102-revA.dts       |   2 -
+  arch/arm/dts/zynqmp-zcu104-revA.dts       |   1 -
+  arch/arm/dts/zynqmp-zcu104-revC.dts       |   1 -
+  arch/arm/dts/zynqmp-zcu106-revA.dts       |   2 -
+  arch/arm/dts/zynqmp-zcu111-revA.dts       |   1 -
+  arch/riscv/dts/xilinx-mbv64.dts           |   8 +-
+  board/xilinx/common/board.c               |   7 +-
+  board/xilinx/common/fru.c                 |  14 ++-
+  board/xilinx/common/fru.h                 |   5 +-
+  board/xilinx/common/fru_ops.c             | 103 +++++++++++++----
+  board/xilinx/zynqmp/zynqmp.c              |   3 -
+  configs/amd_versal2_virt_defconfig        |   5 +-
+  configs/xilinx_mbv32_defconfig            |  24 +++-
+  configs/xilinx_mbv32_smode_defconfig      |   2 +-
+  configs/xilinx_mbv64_defconfig            |   1 +
+  configs/xilinx_mbv64_smode_defconfig      |   2 +-
+  configs/xilinx_mbv_spi.config             |  14 +++
+  configs/xilinx_versal_mini_ospi_defconfig |   9 +-
+  configs/xilinx_zynqmp_virt_defconfig      |   1 +
+  drivers/fpga/zynqmppl.c                   |   2 +-
+  drivers/fpga/zynqpl.c                     |   4 +-
+  drivers/pci/pcie_dw_amd.c                 | 116 +++++++++++++++++---
+  drivers/spi/cadence_qspi.c                |  10 +-
+  drivers/spi/cadence_qspi.h                |   1 +
+  include/zynqmp_firmware.h                 |   2 +-
+  33 files changed, 280 insertions(+), 90 deletions(-)
+  create mode 100644 configs/xilinx_mbv_spi.config
+
+-- 
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
+TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
