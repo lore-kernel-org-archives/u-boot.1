@@ -1,145 +1,151 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EF84606A329
-	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 12:48:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A03FC606A326
+	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 12:48:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=kLRPUMW/;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=W/9u2Bfk
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=VrV6F54P;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=e3wFeZvm
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A9C834097D;
-	Fri,  6 Nov 2026 12:48:41 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MwVZ6zBaFsdb; Fri,  6 Nov 2026 12:48:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D23A94095F
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793969321;
-	b=DpS6ZSl+7cq66WBl3wqySTmwIPIzNpC6qMoLzlS1769qw4+ACP59IHIfFsrlCmA8/P5t
-	 92izfCWBiHUaf4jDP0IbR0ox/MTWdfRBjzdObfw8NskC8uSVxliOkU/Ow9VNJGnenqrGi
-	 KNT5yS3lHrJdcEcMibEnjlkzQrYUswLCh+gotekw+8jqxMhx3fzTzpwLD2/sKU5lvcR89
-	 RV/IGxLgA7zHQ9ClMonT0/k62FmHb8jz9GoMT129qHw7gxMvtKehMP2GgZhxKSewF/y7c
-	 tccltKO+cmdKyxBUb1Y7d8Vi4sXYiUsl+tDZYQPZ/UcA9w5rQIoQx+17gYBvz74xxkg==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793969321;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=N7ItCu/FRFqGuR90Hv8VxyxxTFh3qNxVLxDDZPbwuxY=;
-	b=SxwN4TcTbuZI1/+DR2IRR3Nc8kHTh1TNNNKmgsXxPluxU9aZ5COob0hePKzPNNh7odfc
-	 qUFYjHquWxG3BngI6FmjmqLmJQGBBz0z4xiyGB6kEdcvbroZKDckvPqqIk7M9Ofn4K37N
-	 AEk6dhM3t1s+1OcFm0qi2mAEVpdtlg04n44EirhJm+bU7tHBKWyv/9CZTbgorFuWul1H1
-	 n5m6cQ9UWo7wZpBhaHLLuF3aJFTIOmJV8nrCmPyTrCMadgI5WpngL00Ngd4LwWDNGOxdL
-	 FkmCVCG0nZfX4yanV4kz9oowfPYIp7Bg/m3j5kKMhhNUe//dPwGjMr7qtHy33V3/37Q==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	arc=none smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793969321;
-	bh=N7ItCu/FRFqGuR90Hv8VxyxxTFh3qNxVLxDDZPbwuxY=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=kLRPUMW/2ENnicN5luCBQfg3P5htXgYnmqx3BKMj+joKx7VA3PlEbPRH3JRC3xlbt
-	 oXI4rF9c25PECebwDQGGTD7Hf/w9agVaLiUEFiSWbKirhSC43EBkhqp1mGU5tJCahh
-	 XYksFcLww5aSSI4hpQ9UxA28QfXKsAa3W93c1p+N5tDqif6L+Kumbo49Qf5fBbYrRb
-	 ltZeOj4RXjs9wobNJpx005zA69UgtC9aCfGNvxVn/Rs4wDJ5fJj8ujoiYqPTH2IdYj
-	 MRwwC6RQ8tBnocJtKHR7JC+fnGcLXzP2HCWJnXqWulGG3MAh9x+aMxww6Dh4iMTF+J
-	 hCGS4dculpURw==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D23A94095F;
-	Fri,  6 Nov 2026 12:48:40 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 8298032A
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 12:48:39 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 742FC607C3
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 12:48:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 74DDB6064F;
+	Fri,  6 Nov 2026 12:48:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nwfrEXTPYOsv for <u-boot@lists.u-boot-project.org>;
- Fri,  6 Nov 2026 12:48:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4DDC76064F
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::1129"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1129; helo=mail-yw1-x1129.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=W/9u2Bfk
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4DDC76064F
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 12:48:37 +0000 (UTC)
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-8b305e10ac7so4288077b3.0
- for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 04:48:37 -0800 (PST)
+ id mS8B9sySKKSm; Fri,  6 Nov 2026 12:48:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B6FBD607C3
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793969323;
+	b=iHYz0tHXfd5Yxl+DkXiAz7e/As7ATc5L2RubWwzyjnC1WfDY3OBdiMQZVEsI9ppLLVTp
+	 qLK5Sq0JC2i3c7roNFdMCvlRvxu2QQhr3n7bfOZ/bj97GUzA/XOaThPCEYIjBgJpnNik5
+	 dFzRKg+yYzkoFkeOJRuOUM7G8ONb/L00wr/o2BjCt/f11vM7ifsE+UNjaIMU1wcRPuNu8
+	 KwDftDHHejRprSJeI6ySEpMOi8MIGiEc4K0VCe7zRB9K16VKr4L44O2zbw5XfgNkVMfrh
+	 EV/+IBRV0fEv+bRtTgoIe7UeteGze/5gZEwLc8Sa+rl4L3ocJyk4mxi1cRbv+XUgnGw==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793969323;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=N5wnarlTU4tCR/CF5M3XCMxD40nlpAcokxFLngbjfZA=;
+	b=HMNG97xUe2MIkeHfeqyZWly3CpLj2BNmSkXm3n/p99P3zVUeML5CbhrJRXbuR/PM5NHt
+	 CZI44GAdCYJ+91MjFjvq7JhiBNvEtBIQyEtkGUitdnRHXG3aP7nIYGdKlzIAa5QUxaovF
+	 i1ju4zM0n12W4BOJvpVDYcau+E96IOAH3POPVbsg8TFtJ9yTYHqdub95ThX8izbpqRqNl
+	 ywxT+nmmbxOm33IdOJ9lytOtyR6rYzZtm1L62t8aWUJJDC2kJbYLKcDOVdqwFfxHhb0pB
+	 fronskeIZH3agc1p0dll1d31yL7Kcv1VM3BJgeBVUwpQaHH4eIjhuT3aYpSD1WVjTPA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=e3wFeZvm;
+	arc=none smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793969316; x=1794574116;
+	d=lists.u-boot-project.org; s=default; t=1793969323;
+	bh=N5wnarlTU4tCR/CF5M3XCMxD40nlpAcokxFLngbjfZA=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=VrV6F54PdUGLFrF9bdKZy7WLIsMP94N5uEEuLJ/o92H7fytcJJpqfPeq5TMIRIWhJ
+	 tQmSlXCS4hNClhxIslJgpvk17GT+LOUYeTz1pFYKIsdY4Pw3vBEZEOJhc1tpqTqLBO
+	 Z5iBta6texrJXbUl7CWY2tU54l61xwvX+nbrqwDPWr4sR0ENARxx6YkItMIv15jfs/
+	 FzXr9NDHIyzebuyUxWrReniOmTPdWUx4ggS3nvkmcPheDWdt3uzlfD3HaSStq7W9ve
+	 4+/bbSO6uVQ9iskdrJzeinK3SkFlLNlDe+wNIHaYUzhc+1e5tSDv53n/RehjG4XQBN
+	 qrpn7it2IS6rg==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp3.osuosl.org (Postfix) with ESMTP id B6FBD607C3;
+	Fri,  6 Nov 2026 12:48:43 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 18EEF211
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 05:14:03 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0AA7A606D3
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 05:14:03 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6ETwFoLvSrAT for <u-boot@lists.u-boot-project.org>;
+ Fri,  6 Nov 2026 05:14:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3D97E605D0
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::835"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::835; helo=mail-qt1-x835.google.com;
+ envelope-from=oss.patchbox@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=e3wFeZvm
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [IPv6:2607:f8b0:4864:20::835])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3D97E605D0
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 05:14:01 +0000 (UTC)
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-535179e995bso2297091cf.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 05 Nov 2026 21:14:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1793942041; x=1794546841;
  darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=N7ItCu/FRFqGuR90Hv8VxyxxTFh3qNxVLxDDZPbwuxY=;
- b=W/9u2BfkkSnd/2htWK3kJC6n4jkRHHWwwaDzfXXYDiBXfIRzYjdLJlt1kuCrQpvWY9
- rpKAJwbumiB9m0stBG6xsbm3bXHmuQeYwJThK4IOZ+fbwllc5tsFN8EmeMkkvXPT8bvj
- JrmQK2rSgkZvkQvO8BR7TjMe2LIWQfFWaIP9VRkV5D9oZNfzNX0t7zVkhHQCNxI7thBX
- EHH4QeOstbtf47LIliEcXENd17lOT0ku7JqTs1dvyYNoOSCwvN/AHZJp/Tv7oupewXMl
- +sCninvSRjbr5XJgGDFHH9o0Uy6eTrbohv4B1i96rNeE1obgymZ8Sn2q0rh0CRUrklfX
- jmVg==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=N5wnarlTU4tCR/CF5M3XCMxD40nlpAcokxFLngbjfZA=;
+ b=e3wFeZvmfWlXcgbiwic9PTgMncN8fwtLZTtHPXC6/PhRD/mb8aAwPZagJ/OPbgLq9z
+ akqOQJRuA61dBbMGTAbRHap/UpRgGiTOOG2hk2d3o+fu6Kf0bzqcUYT32sjJ+/3zhzYn
+ qrPWfBMHAuYpwt8V+9OcW6M2bJXjy3s/fK/Bf+dYwO4pDZSbVoYboR/ZOJYPIeUIkosS
+ 8fwVYng2jZf6rcwIzjDKniiVzuwfpat0effwn+8x1icpvA6PsPLs8CWH7U/hpA8+Sd8p
+ q1DWHkKPLZdVuYQu4JefphcKYj8bev8V0Q061IsymeMr18TrHAFxQU+m4/YjnD9rnOWr
+ /Iqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793969316; x=1794574116;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=N7ItCu/FRFqGuR90Hv8VxyxxTFh3qNxVLxDDZPbwuxY=;
- b=wxDzIl+Fu0yuUerU7lDV1u1ytVrg1H2YfHKGN03cKJ1/rVamEFXrsIWC1NR5NVJV/H
- g5ilZMmkhdv8dXfyRfE+f9d786YJ7QcW1UpP9gHEf7G+EdNaIKW26vVynzxFMlGQVYEt
- ftB9a3ZTyOwI0A2fAqSfNsf1CXTrDudwLJiaCJk+YsT/d/EshtFmw+KOHRjB5ilNiGP8
- lRGAg5sjEy70OtV2xDgShTLtqYC5NH6nknaA9nVPbLi+WQwTyXrX7hAa+PI88pZ3uNBp
- r6SBQe4vDttMfsdMvAx63frOlejYo0LSnIV+DZP5cxZlh/L5u8WdExRl/x1rqnbHSJOR
- 3FgA==
-X-Gm-Message-State: APuU4Z/Mxab2VZY9VjkD7QnHjDbUpUXMW5nA+ttt+nZmNbCRow9Ly/WC
- O/AhquENXAhQ6dgd8fJrlXxdEcUWUtkHtlIl+gMsjeJxE6Zmc9QNpTXIZsq+VatMlgpQr6nQ6TN
- PKHuSSp9rMQo02xaRNTlnO3rCj/mfbUmatKXyW3gnHg==
-X-Gm-Gg: AYBFou298cEjDMesFE7cQNTQBSKUcAfFdMVsT2UmQRK1PAyBrY2H1sgpExgh6uwdKjt
- 82hSui90tY5XOrUQuIjMB51YCvNtNfuNyhuUsBX3lY3LlFpArgwniTYDS9NuRv/itvmut7Pr88o
- 4W+tPdCYzrRFCi3h61WAWem/wGMLXe9IpT6syPJy35iPP7LfdXZYS6ISdUHd8IhCg7XIy0LCAWr
- 1LOa7GJnZSIqRNZbs5plp+ftjBNYmQgutyoLvZca+7ABRs3ZWlhN5tY5lIwwS0DcfmC6M9d8dxl
- hwycNxWsMka4CnaGsS5+yi1hQEtmHB04r3B31tRYYLqTHzUvyLGXFrkF6rvK6GxfWuRY4oVOV85
- ZPIwXaTr5xd6eo5bFuXXkiPfLtZpcvFOxTckmQcxZJe22d+6nve0Ex1ODJ7l+vAmgmBjNB5TIgj
- M15jjN44cWOhzHAVcYsv2A51h9x9XUYh2F2LqX8AMaUdtCDmEi8VyU5ZDs/CoWqaNIk77wCwNIV
- jFKn7Hyiq/VxJzMRxEuotfFWI2yBAgWt24u5buGOFUvcfOsRFULgMvdGjgovCQM4AXq2hZJ+aRc
- 7eZkYKVPlASBmd4jdGJ+IYF25P0m5jk3725qaVy5LvoM0pbSgOOVuXaI4PRpeQiyaUAB1ikCWRR
- KujvKfm3Nju5s1YP4so3iBIa3S14YLRbDFN+v0CVQfYM9km/3qhWtCyfDspU89LdMvmThZKG5eH
- nby1Gy9UXUHt/XeK/Yr7p7yPYaV4JUwhmIpvQ=
-X-Received: by 2002:a05:690c:8e09:b0:8b1:33bc:edf0 with SMTP id
- 00721157ae682-8b341b8938fmr11187977b3.69.1793969311719; Fri, 06 Nov 2026
- 04:48:31 -0800 (PST)
+ d=1e100.net; s=20260707; t=1793942041; x=1794546841;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=N5wnarlTU4tCR/CF5M3XCMxD40nlpAcokxFLngbjfZA=;
+ b=jStnuj/1eeWa0h+qZ7Huc+ZB99Q4B2iko9kewnAZvPSM5+nncz+RkicuT2d3Z7xR7J
+ KOFRtkRGJy7ofhDFrwlHkLroyPFPoUqA536ocOBVYDO0W9t3d1mnbaRC1vWK8X8v2ocK
+ S9xKiUZYAYvn+0HXydC4A6odKxaW1FdCH6a48v5HpDqy6onAUcqYoqaHAy/Uzxf/S44p
+ eBCdznNecYdduv8bYQ0zdMDqJBjPdy1DLHGtFMn0liNp8X3QkAfteXjJ7Qsb4zoeArz8
+ plSkJed7z5tSkxIs0QkXrcDXZTciaquPWOfsCP4FE0mqzb1yTZi108m3bwJqSqg+eyas
+ RvNw==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBxK5WI0xQGqLmdLZq+RuwRwJ1thxNV6D3PASOBAViaZIK/QYn2FRwKuE952zTGQI09lNdTaFOI=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9ycTKHkZenoVrzUiX9YL/ntW2W2bvniogGMsGLkf9Z0U4vjn69
+ b3l8vbBx3tgQx8WKF4zAK0m/XINj2khudUe4lBT96yjTPUPMLVoAT1ld
+X-Gm-Gg: AYBFou2t1JNY3aSkN89y1f9irBYvUPqh4CnEIEcAYyx2Sl5vbn9W4L1KUV4FA/fden3
+ lmkGWHD/utEMR7/s6mRYOySSkCJ4l2aSzG0tAm4qSDX734QLg+woky16jrlAMMSJtlwTi3tTKuG
+ NnFX0AeHi6ooRlzRo12DKLQ32uepCDWRwSRUGUzhpdihj0JRBFC8/GjfmYLReUAUgkhCK6Yx3FD
+ 0vB2LeEt0jV7I6LUmKePucqElFb/4naLg0ynSO9X4D134v22Jym572nIQzUdOKhns4a2WuemTSp
+ nZzMCtkPJ0hFCQC0nvECrAxRLH3vR8zMdkyB9FIZJkAvyLV9f0pjEATCZCrXP/vip8VoU/qkvrs
+ wBtVMgSuBC9/KQYlksHWFTiqrg5FUxFf5QsMBuUPnKuRDrMyXrTzlcdmfgRzjFzHBfxqEb0PzQ+
+ FfqQdKD5yz8p+MfLqJsCtrAv1tdOb0Zo/uxpCcWbICWzfUh03PcfCJJ7I2v/P4OOmL5RrUBTOqR
+ mY3IgFADm2YLmO/Qj9CRGPaN4BLF8KCK8VzQQ6KzZUpvqk59x84aaJPq/77BuUjgFqJiH441EIF
+ lm98mmniyBYXsiB/zfPqhmUfnmGvCTHApA62OrU4mYYRNWvWwkHc
+X-Received: by 2002:ac8:5c8a:0:b0:535:52c:a2d6 with SMTP id
+ d75a77b69052e-54e100e5abbmr21623291cf.3.1793942040666; 
+ Thu, 05 Nov 2026 21:14:00 -0800 (PST)
+Received: from i4-gl-tmk5904.ad.psu.edu ([130.203.156.186])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-54e27502132sm11246211cf.28.2026.11.05.21.13.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Nov 2026 21:14:00 -0800 (PST)
+From: Yuho Choi <oss.patchbox@gmail.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ u-boot@lists.u-boot-project.org, Yuho Choi <oss.patchbox@gmail.com>
+Subject: [PATCH v2] efi_loader: unload image if efi_run_image() fails before
+ starting it
+Date: Fri,  6 Nov 2026 00:13:01 -0500
+Message-ID: <20261106051357.265179-1-oss.patchbox@gmail.com>
+X-Mailer: git-send-email 2.43.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <ad3fd084-d61c-44e2-980f-c978ca1e1dbf@gmail.com>
- <b509d1f3-50f0-4b3f-97fa-724862cc92fe@gmail.com>
-In-Reply-To: <b509d1f3-50f0-4b3f-97fa-724862cc92fe@gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 6 Nov 2026 14:47:55 +0200
-X-Gm-Features: AclHuK_6GVXlpHosS3_oT6-4HwfCSZrqYcKzZU0yNZW19VbKH2isjWCmbaARHWk
-Message-ID: <CAC_iWjJg6aK1zy4ujOg-OfSK3Qt_NkTpgW3JRL08KaoYBTdzvg@mail.gmail.com>
-Subject: Re: [PATCH v2 07/11] efi_loader: check certificate lengths in
- efi_image_authenticate()
-To: Ana Bobillo <anabobillo3@gmail.com>
-Cc: u-boot@lists.u-boot-project.org, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 06 Nov 2026 12:48:42 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -149,77 +155,87 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-14.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FORGED_GMAIL_RCVD,
+	FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue, 3 Nov 2026 at 18:13, Ana Bobillo <anabobillo3@gmail.com> wrote:
->
-> From: Ana Bobillo <anabobillo3@gmail.com>
->
-> efi_image_authenticate() walks the certificate table of an image by
-> dwLength, rounded up to a multiple of 8, without checking it:
->
-> - a dwLength of 0, or one that wraps around to 0 when rounded up,
->   does not advance the walk, so U-Boot hangs on such an image;
-> - a dwLength larger than the rest of the table makes
->   pkcs7_parse_message() read past the end of the table and of the
->   image.
->
-> As EDK2's DxeImageVerificationLib does, reject an image whose
-> certificate table holds a certificate shorter than its header or
-> longer than the rest of the table.
->
-> Fixes: 4540dabdcaca ("efi_loader: image_loader: support image authentication")
-> Fixes: 1a44b7059c18 ("efi_loader: image_loader: add a check against certificate type of authenticode")
-> Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
-> ---
->  lib/efi_loader/efi_image_loader.c | 21 +++++++++++++++++++--
->  1 file changed, 19 insertions(+), 2 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
-> index 73e96b63671..5a784bfb43a 100644
-> --- a/lib/efi_loader/efi_image_loader.c
-> +++ b/lib/efi_loader/efi_image_loader.c
-> @@ -808,10 +808,27 @@ static bool efi_image_authenticate(void *efi, size_t efi_size)
->         for (wincert = wincerts, wincerts_end = (u8 *)wincerts + wincerts_len;
->              (u8 *)wincert < wincerts_end;
->              wincert = (WIN_CERTIFICATE *)
-> -                       ((u8 *)wincert + ALIGN(wincert->dwLength, 8))) {
-> -               if ((u8 *)wincert + sizeof(*wincert) >= wincerts_end)
-> +                       ((u8 *)wincert + ALIGN((size_t)wincert->dwLength, 8))) {
-> +               size_t remaining = wincerts_end - (u8 *)wincert;
-> +
-> +               if (sizeof(*wincert) >= remaining)
->                         break;
->
-> +               /*
-> +                * dwLength includes the WIN_CERTIFICATE header. A shorter one
-> +                * would not advance the walk, and one longer than the rest of
-> +                * the certificate table would make the signature run past its
-> +                * end. Like EDK2, reject an image with such a corrupted
-> +                * certificate table.
-> +                */
-> +               if (wincert->dwLength < sizeof(*wincert) ||
-> +                   wincert->dwLength > remaining) {
-> +                       log_err("Invalid certificate length: %u\n",
-> +                               wincert->dwLength);
-> +                       ret = false;
-> +                       goto out;
-> +               }
-> +
->                 if (wincert->dwLength <= sizeof(*wincert)) {
->                         log_debug("dwLength too small: %u < %zu\n",
->                                   wincert->dwLength, sizeof(*wincert));
+efi_run_image() returns without unloading the image in two cases where
+the image has been loaded:
 
-The code you just added above rejects the < case no ? So with this
-we'll print something like "dwLength too small: 8 < 8".
+- efi_load_image() returns EFI_SECURITY_VIOLATION when an image fails
+  Secure Boot authentication. The image has still been loaded and a
+  valid image handle is returned, and it is up to the caller to unload
+  it.
+- efi_env_set_load_options() fails after the image has been loaded.
 
-Also the new check is similar to the old one. Combine them to a single
-check that makes sense.
+Each such attempt to run an image through 'bootefi', 'bootm' or an EFI
+bootflow leaves the relocated image pages, the image handle and its
+loaded image protocol behind.
 
-Thanks
-/Ilias
+Unload the image on any error before do_bootefi_exec() is called. For
+its other errors efi_load_image() either sets the handle to NULL or
+fails before it creates one, so initialize the handle to NULL and only
+unload when it is set.
+
+Fixes: 6b95b38c41a6 ("efi_loader: rework bootmgr/bootefi using load_image API")
+Fixes: 4540dabdcaca ("efi_loader: image_loader: support image authentication")
+Signed-off-by: Yuho Choi <oss.patchbox@gmail.com>
+---
+Changes in v2:
+- Unload the image on any error before it is started, not only on
+  EFI_SECURITY_VIOLATION (Heinrich)
+- Add a Fixes tag for the efi_env_set_load_options() path
+- Reword the subject and the commit message accordingly
+
+Tested on sandbox only (LTO disabled, gdb). Forcing either a Secure
+Boot authentication failure (efi_secure_boot set to true in
+efi_load_image()) or an efi_set_load_options() failure for three
+'bootefi hello' runs left 8 handles in 'efidebug dh' without this
+patch, 3 of them with a Loaded Image protocol; with it the count stays
+at 5. A normal 'bootefi hello' still runs and gets its load options.
+Not tested with enrolled keys or on hardware.
+
+do_bootefi_exec() also leaves the image loaded when efi_set_watchdog()
+fails before efi_start_image(). That affects all of its callers, so I
+will look at it separately.
+
+ lib/efi_loader/efi_bootbin.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+index 12db8f517c7..5bcb8c2540f 100644
+--- a/lib/efi_loader/efi_bootbin.c
++++ b/lib/efi_loader/efi_bootbin.c
+@@ -170,7 +170,7 @@ static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size,
+ 				  struct efi_device_path *dp_dev,
+ 				  struct efi_device_path *dp_img)
+ {
+-	efi_handle_t handle;
++	efi_handle_t handle = NULL;
+ 	struct efi_device_path *msg_path, *file_path;
+ 	efi_status_t ret;
+ 	u16 *load_options;
+@@ -192,9 +192,15 @@ static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size,
+ 	if (ret != EFI_SUCCESS)
+ 		goto out;
+ 
+-	ret = do_bootefi_exec(handle, load_options);
++	return do_bootefi_exec(handle, load_options);
+ 
+ out:
++	/*
++	 * The image has not been started. efi_load_image() also returns a
++	 * handle for an image that fails authentication.
++	 */
++	if (handle && EFI_CALL(efi_unload_image(handle)) != EFI_SUCCESS)
++		log_err("Unloading image failed\n");
+ 
+ 	return ret;
+ }
+-- 
+2.43.0
+
