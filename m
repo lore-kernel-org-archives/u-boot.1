@@ -1,156 +1,217 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82070606A329
-	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 18:42:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5C7D606A326
+	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 19:10:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=h4OKCBZb;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=UdHbnpcr
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=BpkE5Zcc;
+	dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=selector1 header.b=q7EtYdJy;
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=selector1 header.b=q7EtYdJy
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 58F82608B2;
-	Fri,  6 Nov 2026 18:42:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 56DC1812C8;
+	Fri,  6 Nov 2026 19:10:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RsLgLZUmMSv9; Fri,  6 Nov 2026 18:41:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6640160771
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793990519;
-	b=gpnfzywYaM6RvO/HIc3GrBmXagecHpK2ZjIC0+eRW98cIiMcjWgjwGjMce9IlJ3hqUZ9
-	 +Wovp2z1inMvHEeKtQ0t6jIdwU3SVMs5y1Bc+KoaADdQ+BZkkXWNi0F5Ga4OzjX65Qok2
-	 3kQy9f83W/ORCCC9DU+A46jbilcYG8mf0rawJOQDY/WMnflyQiYRCE82+Wk5IEfLKRs9Y
-	 a3VF2WMd7WLU/4mbyji3vNmPiGrhj6fhSn11YAuNTZZ/ohH2Ba19mSjg9bb36ZMf89/8S
-	 3+zCB+kdTBq4FQy/KWq4cHVTpZz1feBAuT+uQ5jyy0SJjK5PyVwCXuIqUNbCTZLaQQA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id o_LqKGROyiY5; Fri,  6 Nov 2026 19:10:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0D8ED812CA
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793992257;
+	b=J+KKFml9wJ0JyHk6qNZyZwz6ePb1ldvFwDnILDidWVhmTKGytWWq1yuQ4ouGOmvbc4mf
+	 2dUQeEKbZysZo2gTcj6vC7IhnbVIEj4Ugs348BpGFAh74f1hAGIoN047uwBOQmXR5/Mt6
+	 EuODHgdv7Sj7uSMh5j1juMOaY19xPznSdU127QTRi9h6Xr+veXlgoduZplTH/LdPcMYCD
+	 rqoSHn1CGeOKGkFWKgaRJCQwcPcUMVBGa79AIfBR+dJkqSPQRJScOe/jajXy+/seTnWhf
+	 QFsvC25PynqHV6kSAPHsNETSRYuPhyj3GbkbB2QI3kf6e3DKLVqfE3M0mgaasVJpFmw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793990519;
+	c=relaxed/relaxed; t=1793992257;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:X-MS-Exchange-Authentication-Results:
+	 Received-SPF:Received:DKIM-Signature:Authentication-Results-Original:
+	 Received:Received:Message-ID:Date:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 x-checkrecipientrouted:NoDisclaimer:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam-Untrusted:
+	 X-Microsoft-Antispam-Message-Info-Original:
+	 X-Forefront-Antispam-Report-Untrusted:X-Exchange-RoutingPolicyChecked:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
+	 X-EOPAttributedMessage:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+	 X-MS-PublicTrafficType:X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-Id:
+	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=1kXU2MeioznKMVdFjuSdb8IpApZY2xhf+chwJu2o7lA=;
-	b=Z71And4r//9NeJbvqjXa3UqcXon337IoFhgJwLf8tjCURoQ/WHfkqiS9DQsBsEJgUHo6
-	 tAE5ZEV5qT1jdNIUZxUs/6I7Qb5rGHnROZKrTa7+fgjxAZXhjs7gz8mlVoXNUVnAk/u1v
-	 rGW1vwpYUhWQrkJjYosMh3UQLOUZY1CTGqKciF2SgZgaCpvrPwPUViPOL3TepaP4o/IqO
-	 BwAJxrZwJRcSYCXP6EoewA1EwiUkB5l4A7XxKQFsSPYFGMOLIkITUj2D/izGJ78eGiaIo
-	 GyTkhMAT56jj4w6DXWCdcmO3hYwcjyVwCNW5P8u+EWo0xCgZc44HxZY7FmQwzZZjbcg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=none header.from=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=UdHbnpcr;
+	bh=6yqRDJdXk0UCu0z4oA5z7Xaz7yQErfc917unDW2odoQ=;
+	b=UzKlgmHBnjMKkFub7clfxvYLRd+lF5+goAyW4vw+F5PcsBZWl9v9TDKSV9rVgoEIm6YB
+	 Wk9u02aSB2VPq/CStj2Q+N5jwvjKMnnlTCKwvkob2REFs3k5dPSFZjSgDt+KJBIp7tUVZ
+	 7zu1g24+i36xbYFSTNqbz65ADke1l9fXRdafTuryx0hjkt1yps4X1rYFfmZ8FS7Sg0Ple
+	 Zituf5k7ozqscod7ZdELzf2o4ceyA+11Fq7t8Jk3j3GduRR6Bg1SZtd7Mw829x/Bpgn5i
+	 BLde9qgdxBjznHfTeY93gop9/5xuno6a6n/ADIyOYqAcKvVytJPZNC2MNV6/18TUOaQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793990519;
-	bh=1kXU2MeioznKMVdFjuSdb8IpApZY2xhf+chwJu2o7lA=;
-	h=From:Date:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=h4OKCBZbui2G2ytf5Hm5zFW1DgnEUU/E44HbPmazYIbwVQZ7UEiLyDBR2UWSUl3zK
-	 /Rd7XrDsuu1huhad8fjvD2jJkaVXrwbiqQvCsWLEHKSWYFup1XAtc0UZsllhUW1b9u
-	 HIBrL4Io6IDxROIBiFRtj4ENwB1yaclSoqt7Eu/Ilr/pWBFRWVYP3aNNOBXv5XOfK4
-	 TIxOMFRAWoZryzXw2ZICFwhm1oC9OLPM5APQ2tg5giEIk01d8b+osqiE5gPRJleHnG
-	 AsL9dN0NphU6633d6YYk4SjzSILxvXQo6Oudo8NHn4L2y41tlBhg0A1TmSaI+/4B0Z
-	 M/WRfFaV66VGg==
+	d=lists.u-boot-project.org; s=default; t=1793992257;
+	bh=6yqRDJdXk0UCu0z4oA5z7Xaz7yQErfc917unDW2odoQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=BpkE5Zccqa8HfdE5HO5RpRIQCyDFRp70rik8Q+c4+ope5t1IRYNolxdTXy93Uhe0f
+	 gmulCaH4sDqYArIAdQqVA48p0BYR7SwaPagq38QWFyY+EiBiXWYFQrKVXOzYG3TBQq
+	 zfPI6xcnmZ1TffjZ1lz7xkxVgEvDAeJDofu/965aSVdBfvlxtXFT/Vq44ECo+P5Q14
+	 RPz8AqtZ5TMMIGN+Uc0gYODLCPQfzTcn8W2c05aRgUXRhkT51CrPov26ZFfHCm9ywW
+	 B8rwHAHCoK/0pLfiG21R4lmZMoR+qiC0Bfv5Q5T13w0PZirXludgtQi2OEALsbxT0C
+	 jIObJXI0emJGg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6640160771;
-	Fri,  6 Nov 2026 18:41:59 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 08BF732A
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 18:41:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0D8ED812CA;
+	Fri,  6 Nov 2026 19:10:57 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id C93504B8
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 19:10:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id EE2E860771
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 18:41:57 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id AEBFC40899
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 19:10:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uJlCKHRRqElA for <u-boot@lists.u-boot-project.org>;
- Fri,  6 Nov 2026 18:41:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 297E260744
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::434"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Xs1Xg43tcmbs for <u-boot@lists.u-boot-project.org>;
+ Fri,  6 Nov 2026 19:10:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 33A36407D4
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=2
+ smtp.remote-ip="2a01:111:f403:c201::6"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::434; helo=mail-wr1-x434.google.com;
- envelope-from=ddrake@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=UdHbnpcr
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 297E260744
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 18:41:55 +0000 (UTC)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-48e4831c028so1006908f8f.0
- for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 10:41:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1793990513; x=1794595313;
- darn=lists.u-boot-project.org; 
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=1kXU2MeioznKMVdFjuSdb8IpApZY2xhf+chwJu2o7lA=;
- b=UdHbnpcr988uhb9x4vlW5dl0jdU34e0porxOZ97vzxFNuh1DMjrTyQy+Mqe13MvtvY
- fF81ctI/Hfed1PApCMRbKOWkdrTQJkGThCrE18GnOFa0ksRvj2hZo/jyNY3uO7ic3O13
- XwZ2VCDSJ8S3Kb9P2CtGJlDBfdG4IHaQY36jjp5nb+tXPihxih5YNxOX1qLB21PYYukL
- xnjqrsW/Gtdcoa+xEUldPDFRBi6awZ2FsIjiRwh7wYE4oU6Ul94zTLgsM1ggR5i+mQng
- yWWEUmmvI51TyzuBWBBBp4vxNRN/N7pMXPWdTXp+Mhzj3Sk+3b48GnocwS/2vW5PnKHl
- +JbQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793990513; x=1794595313;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=1kXU2MeioznKMVdFjuSdb8IpApZY2xhf+chwJu2o7lA=;
- b=qOk1rMyUCvsoeOqgYdhfBQS8Gf2u8axjwNAvfKPJ3NGp5+MvK9lyopCYeipEYuxuyN
- F6q7DI9nfSQa9y6SUPXAc9B/VY2+g53YYvJY2RmxBbcugxqAXPDZzne/zev1CJOvaJiA
- eIqnycQ6LY1WrmChLMMFihH/5Z9fljDB148qe0MehKzeb1Bzy/tMLP228JGyXcWDj8Sd
- 9xS2KYqR0BLPpqfnfBVCsPPfez+FPTMfmyQKLhanbAr1TDFXUg7OqEmp/TqebzLXsESe
- rK5yhXV7v4wHZzNPhltuoF5yv1vjrPyvECxA32oFeJUHbtCc5qZZeRBN4gAzFGUMfKtI
- OJeQ==
-X-Forwarded-Encrypted: i=1;
- AL+hErEvjWn1xDCQRFk2TvnB8jzJbNQeozBUzdnIzKUdo8pnhE1LilEpV5WI8y6v5izjbp6azm6vcnc=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9kcnFz7rRvCx8lGdgInbSjBr9/5y5rFTeabh34KONm9H1JS1tz
- CBlZz/qKUa/QqebZz7/wawMC50mp7OVUE2NvE7uQDPTsiRioO7n1NLMhXAhf2y4ODS4=
-X-Gm-Gg: AYBFou3lih+KZI8pfQsy65/s9BhsqM+1UJTyCHmf5lYCG0Z3wq7YXlH7NFoURXX0x5H
- AjKL5gJSCGZpkrqUUV5FfOZszFfgMO/CPy23M0T2hLvMj4ULymbleFe9r7HqsPNAgpeA/LLV/U3
- 3L8LT9/srQ0G5KcILVjl1MoE8jBwHhBCJ/lIwFcHYgjYWKOkCsqidO17awDCGja3sIM7kgY4Mcq
- D7Fpxa0w7QvhC/3QIS/WwADLzsA0Mxn1bkRYBGTTRi/8zg03lYxjx9Ihh5I+OmzVHwS29enmuPY
- siy6bsLy54YvXDszu/3Nl35Qq88Ip9x63ksQTV+xqL0+zfeLjfRyqein6Bzqpll3DGlSO6bNX9J
- 1qsK9ume8/vNUI5pN6SBJhnaLm4+oSGHCwOKbEGZ73eAEMWabQzdBtlt/jnYP7Uylok1XTbHgaC
- Rq6KwDt+XRkc+nha/WZ74XNIaMBKhwwWIgdflrHH2jciFVTm6b4CjmTYFgIyLJHBuMnwCW9l85Q
- ZkQaSJok12EPDuvCLKhfHeVA6sKwNCvQixBS2g6tSZLjCYt+5uXAjsMgr/igdk5vmO0eKmRLAhV
- PX4xqHt0DlRSMA15mkiReEGdC1fc/atid2+55g==
-X-Received: by 2002:a05:6000:430b:b0:491:4b13:f8bd with SMTP id
- ffacd0b85a97d-49275373a0emr8167896f8f.19.1793990513451; 
- Fri, 06 Nov 2026 10:41:53 -0800 (PST)
-Received: from [192.168.1.123] ([2001:8a0:d6cd:9000:86f4:4e71:9fc8:3183])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-492d72335eesm4886939f8f.24.2026.11.06.10.41.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Nov 2026 10:41:53 -0800 (PST)
-From: Daniel Drake <ddrake@baylibre.com>
-Date: Fri, 06 Nov 2026 18:41:45 +0000
-Subject: [PATCH] imx93_frdm: prefer fastboot over regular boot in recovery mode
+ client-ip=2a01:111:f403:c201::6;
+ helo=am0pr02cu008.outbound.protection.outlook.com;
+ envelope-from=jerome.forissier@arm.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com
+ header.a=rsa-sha256 header.s=selector1 header.b=q7EtYdJy; 
+ dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
+ header.a=rsa-sha256 header.s=selector1 header.b=q7EtYdJy
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 33A36407D4
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 19:10:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6yqRDJdXk0UCu0z4oA5z7Xaz7yQErfc917unDW2odoQ=;
+ b=q7EtYdJy3mSQcv2uBXHJ9Ihq7UR5x0OqvEFVGVTlU0OCgFeRQ7PfJ9Oe3xna/VnGhGgmhLZBP5DZNadX2UTOj1FdQUpgzmq7DJz4a2zC4F+lvKWDLoi0JRVJoTjANksX/UFhTprf7T1HE/Pse1UlvlN6P4BrWUj4Wp8vjq71mOw=
+Received: from PAZP264CA0131.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1f8::17)
+ by GV2PR08MB8098.eurprd08.prod.outlook.com (2603:10a6:150:76::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Fri, 6 Nov
+ 2026 19:10:41 +0000
+Received: from MI3PEPF00008496.eurprd03.prod.outlook.com
+ (2603:10a6:102:1f8:cafe::a0) by PAZP264CA0131.outlook.office365.com
+ (2603:10a6:102:1f8::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.11 via Frontend Transport; Fri, 6
+ Nov 2026 19:10:41 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 4.158.2.129) smtp.mailfrom=arm.com;
+ dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ MI3PEPF00008496.mail.protection.outlook.com (10.167.240.181) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.4
+ via Frontend Transport; Fri, 6 Nov 2026 19:10:40 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6yqRDJdXk0UCu0z4oA5z7Xaz7yQErfc917unDW2odoQ=;
+ b=q7EtYdJy3mSQcv2uBXHJ9Ihq7UR5x0OqvEFVGVTlU0OCgFeRQ7PfJ9Oe3xna/VnGhGgmhLZBP5DZNadX2UTOj1FdQUpgzmq7DJz4a2zC4F+lvKWDLoi0JRVJoTjANksX/UFhTprf7T1HE/Pse1UlvlN6P4BrWUj4Wp8vjq71mOw=
+Authentication-Results-Original: mx.microsoft.com 1; dkim=none (message not
+ signed) header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16) by GVXPR08MB11786.eurprd08.prod.outlook.com
+ (2603:10a6:150:312::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Fri, 6 Nov
+ 2026 19:10:07 +0000
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3%6]) with mapi id 15.21.0592.009; Fri, 6 Nov 2026
+ 19:10:07 +0000
+Message-ID: <2b5d3f92-666f-4c0b-863e-c681674c611c@arm.com>
+Date: Fri, 6 Nov 2026 20:10:06 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/4] cmd: lwip: wget: write the download to a block device
+To: E Shattow <e@freeshell.de>, iav@iav.lv
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, u-boot@lists.u-boot-project.org,
+ nd@arm.com
+References: <20261101-b4-wget-blk-r4-v1-0-e27a009e4043@iav.lv>
+ <3bb5a9a4-ce05-45c8-9fc4-d4fe99b1b0c1@arm.com>
+ <79fdb1d0-c777-43c4-a7ea-98455186e900@freeshell.de>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@arm.com>
+In-Reply-To: <79fdb1d0-c777-43c4-a7ea-98455186e900@freeshell.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PA7P264CA0289.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:370::6) To AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261106-imx93-frdm-usb-boot-fastboot-v1-1-c0bdfbff3c63@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAA/yXMwQrDIAwA0F8JOTegDmT6K6UHq3HLobWYdhRK/
- 32w3d7pXajchRUjXNj5IyptxQh2AMzvtL6YpGAEdMZ5a40nWc7woNrLQofONLe2U026/+GDcTm
- kkusTB8Ctc5Xz14/TfX8BRByh5G4AAAA=
-X-Change-ID: 20261106-imx93-frdm-usb-boot-fastboot-f6902c9adcf8
-To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- u-boot@lists.u-boot-project.org
-Cc: Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@nabladev.com>, 
- Tom Rini <trini@konsulko.com>, Daniel Drake <ddrake@baylibre.com>, 
- Peng Fan <peng.fan@nxp.com>, francesco.dolcini@toradex.com
-X-Mailer: b4 0.14.3
+X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|GVXPR08MB11786:EE_|MI3PEPF00008496:EE_|GV2PR08MB8098:EE_
+X-MS-Office365-Filtering-Correlation-Id: a8c57ba7-d1ea-4ed3-8e6b-08df3c39a60d
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+ ARA:13230040|1800799024|366016|376014|23010399003|261009223027099003|261021121427099003|261022105027099003|261028144727099003|261022115727099003|261022075727099003|261021123027099003|261102123227099003|261026140227099003|10067099003|261026121527099003|11063799006|4143699003|260925021911599003|5023799004|260925022911599003|260925021311599003|22082099003|18002099003|56012099006;
+X-Microsoft-Antispam-Message-Info-Original: fOqCi3as1XXJ3X1r6BqX7P+ZODUYWyzBuyJ4lqa9kTjiaCtYzPX6+1rbWhjFsD+rbSf38klw1VGZNADR3yDwOMrK/3UJr6TNl43r30Enr3t2f5tSPB9kTqcQnfCXX5xlGzHP5gd+htoF2ukMt+2K6PQCMyKEVlAuy5P+Ay+OrABM5lxUHQN0GP6gsAtWAwesJUGy21pn+5At40OCEefBvposGWff670Ae21ubembHF/HuPAHiNtTzcPuGP2hDyJ1Cu2LXu2OrJQdjDcjeiuKB3m2i6X4ZsmTiND7QnM+bHFCA9F9aCST2NOwBgsen2aCi6/WXyvu0Db07Lxj2E3l/V09LNU47KTCLxhnTx5TR9yz4yLx5ySPrPqBTrTp2Duq97Ve9jiZ8mcRlsLCdiTQtbJgQabH1XVydkdUxqsX/5q37kyiR5KtKm30RRhpj6RrD/ELjRbKc1Z5bNp2owfOA3/qj7krSJOs1APdVEYyHE4VU7PzcaW48V4ubros0n+wPWv+YCwa3GRHD1SEFUNNHVxCP5tsL1F8tH6SUoPmyDJ8k7xX6ZvlvI/szow/1P8+UnRYDwKoc/sAyJpsp0VcpN9aMdgw94Ea/GYWnQkNJ6w6d/oTaaIahox7W+0cOte2
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(261009223027099003)(261021121427099003)(261022105027099003)(261028144727099003)(261022115727099003)(261022075727099003)(261021123027099003)(261102123227099003)(261026140227099003)(10067099003)(261026121527099003)(11063799006)(4143699003)(260925021911599003)(5023799004)(260925022911599003)(260925021311599003)(22082099003)(18002099003)(56012099006);
+ DIR:OUT; SFP:1101; 
+X-Exchange-RoutingPolicyChecked: Q0Ac+dcDMRYkErDxKKNT+4OZ+JXJg/3U8hHq7cjC5BFhi0RfmpUn0tLeDi9YY1wc/pO3W+ZVkj0zvhq5eFNvjbzN4KjgZjUiTPUp7M3gTR3WmQ/EMoDXG1TX83S+cBV/aVT6Ar4pu8grB7EyR10f6SkOk4RoBDD4LT2m8VQ27BO5LhT00MQOwUUYOxRTSZtXE/piFi1u01kdlNv0VgAs3ozowlro5GEkLfhXMZD43COZkLnRjURUgM7WoWnRCbDTn8X6v04jnyqOUnwo9xZl6fIQUHhHnziJw5tYCotokbT3FMN+UDh+oqhuDgJaVJtk+Ftx0Qg+DufREjn1N2NMEg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR08MB11786
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: MI3PEPF00008496.eurprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 0cff2923-95c5-4e3a-92e0-08df3c39922b
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|35042699022|23010399003|36860700016|14060799003|82310400026|22082099003|18002099003|13003099007|56012099006|10067099003|260925021311599003|260925022911599003|5023799004|11063799006|4143699003|260925021911599003|261026121527099003|261022115727099003|261028144727099003|261022105027099003|261022075727099003|261021121427099003|261021123027099003|261026140227099003|261102123227099003|261009223027099003;
+X-Microsoft-Antispam-Message-Info: 5OzU7O/obUpgpxNr/s2coDctx7f1jmWkpf+HLuATA8QA/31i29PSIkqd/A4oJ5ZQ6EHUFtKzFPRWFw2YENvZ4rbSG/yF00Rfe0oheb45ZiWvqS9gbw+YGiiwi+H3o6Tyhfszs937p0n+OWuNfVwSMzrYT+hwwslToUjpi11Zqm5pEKJi7uJ0g2uCD0olBsubctxZ67rr0pDAIIN3PDQog8AQwztDOI/Xa5LY4b4ud4hV7XiOYWYB9nLUwgQ25z4V1RRhSfEZe4udQAgLb0Aqr2v3KWlAWYrekA1NiXRIJObQW/GZWeSIMXcDhqOto+9rlRzIlDrvJgXN3yu5XBeiWutbERD06dFRJXE948klYFLmmBZdqE3Yf8W1EgJ5hzy/ogP/PzJpV6xDTCDgyZD/Vm4fH6jWFa86UXmDlur+TqqL8o6DmyLgOd/IVIrto9vDGgYeCrvgHYJmeygVgbEIlh4NFb/GSrRM7SlP9aN+xfFvzJQIiZcXpiPnylF0SoHfOICmdXOWEX9a3UMHDjhc47ao2fPon0Ex99gwffmZ/+qgL+OBsZndt6DOe3LxGZSumx8hpeGMfKcdxSNnADN0dIE0JkxEynaD6Ebq4bS0vJYDMOntUDbbJWhFBwPQwW9F4fCA4ErnRmCW5up9iHe9Kg==
+X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(35042699022)(23010399003)(36860700016)(14060799003)(82310400026)(22082099003)(18002099003)(13003099007)(56012099006)(10067099003)(260925021311599003)(260925022911599003)(5023799004)(11063799006)(4143699003)(260925021911599003)(261026121527099003)(261022115727099003)(261028144727099003)(261022105027099003)(261022075727099003)(261021121427099003)(261021123027099003)(261026140227099003)(261102123227099003)(261009223027099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 8kQTciQgEKOaWR1+civ8jGDCVFuJL7a11tNHcoEt36HZSNfKsiYMa4Gx6UAP21FF13FwdyN7WhCrfLbdZLll+iXnoZyFSchXPkcYfCl7nKQB+loX7aubTlPXJ9aCQkxMqW9vioz90dN09xtAqIUi3wmPP4PjdXW2lhICZUkLHFZPR6h/3DrJ8chsPdpcet6JXex0YI8Ltt/hIfqpRxl7xg/8FWn9Kwc7eI4cmBCnpXxhP9cdpf6rri+7+pIsMPo2ywGqT4nfP+QEKtp5KPUQ8wR0FAR8BCq80wwB9GgmnjCwfxEhOTV2aCbfhRxDrEOitng2OHt6FtwZ5BOgkabRFpmmAcpL5ngwNFvbY1fDWUFT8aY13y+s+7ijpGebrLdsZ+9cnRmGvt92aCHazWvXn13RFIhIAoRo/vVb2haYMo54JaF552xTl9zJ2eg3xBoI
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2026 19:10:40.4616 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a8c57ba7-d1ea-4ed3-8e6b-08df3c39a60d
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
+ Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource: MI3PEPF00008496.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR08MB8098
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -160,79 +221,129 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-21.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,NUMERIC_HTTP_ADDR,SPF_HELO_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The FRDM i.MX 93 board can be booted in a USB-serial download
-mode where the bootrom pauses and expects the host to upload
-a U-Boot binary which will boot directly into fastboot mode.
-The host is then expected to use 'uuu' to flash storage devices.
+Hi E,
 
-The current implementation of this will only enter fastboot mode
-after the regular boot command completes, which means that U-Boot will
-prefer to boot existing OSes even when the USB-serial download mode has
-been explicitly set.
+On 06/11/2026 19:40, E Shattow wrote:
+> Hi Jerome,
+> 
+> On 11/6/26 10:07, Jerome Forissier wrote:
+>>> wget can write a disk image only after the whole file is in RAM. This
+>>> series lets lwIP wget write the download to a block device while it
+>>> arrives:
+>>>
+>>>   => wget -o mmc 1 -b 400000 http://192.168.1.65/armbian.img
+>>>
+>>> The target is a whole device, a hardware partition, a partition by
+>>> number or name, and an optional byte offset into it.
+>>>
+>>> Patch 1 fixes the buffer size check for a reply without Content-Length;
+>>> patch 4 sets that check to the target size, and without the fix such a
+>>> reply would be refused. Patch 2 lets a wget client take the data
+>>> through a callback, patch 3 adds the block device writer, and patch 4
+>>> adds the options to the command.
+>>>
+>>> Tested:
+>>> - ROCK Pi 4A: a 1862270976-byte image to the SD card in 3 min 16 s to
+>>>   3 min 35 s with a 4 MiB buffer; the first 1862270976 bytes of the
+>>>   card have the sha256 of the image, and the card boots. A
+>>>   2936012800-byte image, past the Content-Length limit below, took
+>>>   4 min 18 s and checks and boots the same way.
+>>> - QEMU arm64, virtio-blk: a 404 writes nothing; a file larger than the
+>>>   target is refused before any write with Content-Length, and at the
+>>>   end of the target without it.
+>>> - sandbox: ut lib lib_test_sink_blk; every patch builds on sandbox and
+>>>   sandbox64_lwip.
+>>>
+>>> Notes:
+>>> - lwIP's http_client.c reads Content-Length through an int, so from
+>>>   2 GiB on the length is unknown and a file that does not fit fails
+>>>   only at the end of the target.
+>>> - EFI HTTP, the other user of check_buffer_size, retries with the
+>>>   reported length when it exceeds the buffer (efi_net.c:1715), so a
+>>>   reply without Content-Length still ends in a 4 GiB allocation there;
+>>>   patch 1 does not change that.
+>>> - checkpatch asks for IS_ENABLED() at "#if defined(CONFIG_WGET_STREAM)"
+>>>   in cmd/lwip/wget.c; that #if picks lines of the help string, as the
+>>>   WGET_CACERT ones next to it do.
+>>>
+>>> gzip and zstd input follow in a separate series on top of this one.
+>>>
+>>> Signed-off-by: Igor Velkov <iav@iav.lv>
+>>> ---
+>>> Igor Velkov (4):
+>>>       net: lwip: wget: accept a reply without Content-Length in the size check
+>>>       net: lwip: wget: hand the payload to an optional sink
+>>>       lib: add a stream sink for block devices
+>>>       cmd: lwip: wget: write the download to a block device
+>>>
+>>>  cmd/Kconfig                      |   9 ++
+>>>  cmd/lwip/wget.c                  | 107 +++++++++++++++++++++-
+>>>  configs/sandbox64_lwip_defconfig |   1 +
+>>>  configs/sandbox_defconfig        |   1 +
+>>>  doc/usage/cmd/wget.rst           |  43 ++++++++-
+>>>  include/net-common.h             |   6 ++
+>>>  include/stream_sink.h            |  75 ++++++++++++++++
+>>>  lib/Kconfig                      |   8 ++
+>>>  lib/Makefile                     |   1 +
+>>>  lib/stream_sink.c                | 189 +++++++++++++++++++++++++++++++++++++++
+>>>  net/lwip/wget.c                  |  89 +++++++++++++++---
+>>>  test/lib/Makefile                |   3 +
+>>>  test/lib/stream_sink.c           | 137 ++++++++++++++++++++++++++++
+>>>  13 files changed, 655 insertions(+), 14 deletions(-)
+>>> ---
+>>> base-commit: 3401e006432abcbf7d73d7210f10df157f990ed3
+>>> change-id: 20261101-b4-wget-blk-r4-833f8a3d344e
+>>>
+>>> Best regards,
+>>
+>> Applied to u-boot-net branch for-main [1], thanks!
+>>
+>> [1] https://git.u-boot-project.org/u-boot/custodians/u-boot-net/-/commits/for-main
+>>
+>> [1/4] net: lwip: wget: accept a reply without Content-Length in the size check
+>>       commit: 8498fbf8788eff07bc7fc59f9b15cf6c65025b10
+>>
+>> [2/4] net: lwip: wget: hand the payload to an optional sink
+>>       commit: 40611fe0277a7a8f9639aab02a6f1a1e0e897d57
+>>
+>> [3/4] lib: add a stream sink for block devices
+>>       commit: fdf4d9621c8b507f69fe0dd09fc53ebfe860fda5
+>>
+>> [4/4] cmd: lwip: wget: write the download to a block device
+>>       commit: f0870bb385cf923bfab0baddacc952151efa4c39
+>>
+>> Best regards,
+> 
+> FYI stating my objection to making the wget command take these
+> arguments, it seems short sighted and not very U-Boot -like.
 
-Fix the USB-based fastboot launching to prepend bootcmd instead,
-following the example of phyCORE-i.MX91/93. And if bootcmd has been
-customised then this behaviour will be skipped.
+Well the way U-Boot deals with command arguments is not its major
+strength if you ask me. I think options are much easier to use than
+positional arguments and can simplify the implementation too.
+That being said...
+> The functionality itself I have no objection to but including this
+> command line argument complexity now for 'wget' implies that scripts and
+> documentation will be built around this change and then we must maintain
+> that compatibility, which is a bad design choice in my opinion.
 
-Signed-off-by: Daniel Drake <ddrake@baylibre.com>
----
-This replaces the series "imx: consistently enter fastboot on USB serial
-download boot", because I concluded that the generic approach doesn't
-really make sense:
-https://lore.kernel.org/r/20261103-imx-usb-boot-fastboot-v1-0-f3a918d55a20@baylibre.com
----
- board/nxp/imx93_frdm/imx93_frdm.c   | 7 +++++--
- board/nxp/imx93_frdm/imx93_frdm.env | 4 ----
- 2 files changed, 5 insertions(+), 6 deletions(-)
+...I agree that compatibility is a must and that we should not
+introduce such a change lightly. Thanks for raising the point. Let's
+see what others think. I will drop this series if it is deemed unacceptable
+or if we simply need more time to discuss it.
 
-diff --git a/board/nxp/imx93_frdm/imx93_frdm.c b/board/nxp/imx93_frdm/imx93_frdm.c
-index e187de74a72..b6e4e97c988 100644
---- a/board/nxp/imx93_frdm/imx93_frdm.c
-+++ b/board/nxp/imx93_frdm/imx93_frdm.c
-@@ -106,8 +106,11 @@ int board_late_init(void)
- 	}
- 
- 	if (get_boot_device() == USB_BOOT) {
--		printf("USB boot detected. Will enter fasboot mode\n");
--		env_set_ulong("dofastboot", 1);
-+		const char *bootcmd = env_get("bootcmd");
-+
-+		printf("USB boot detected. Will enter fastboot mode\n");
-+		if (bootcmd && !strcmp(bootcmd, CONFIG_BOOTCOMMAND))
-+			env_set("bootcmd", "fastboot 0; " CONFIG_BOOTCOMMAND);
- 	}
- 
- 	clear_pd_alert();
-diff --git a/board/nxp/imx93_frdm/imx93_frdm.env b/board/nxp/imx93_frdm/imx93_frdm.env
-index 96096bc51a0..b68ab18258e 100644
---- a/board/nxp/imx93_frdm/imx93_frdm.env
-+++ b/board/nxp/imx93_frdm/imx93_frdm.env
-@@ -26,12 +26,8 @@ fastboot_partition_alias_all=0:0
- fastboot_partition_alias_bootloader=0.1
- emmc_dev=0
- sd_dev=1
--dofastboot=0
- 
- bsp_bootcmd=
--	if test ${dofastboot} = 1; then
--		fastboot 0;
--	fi;
- 	echo Running BSP bootcmd ...;
- 	mmc dev ${mmcdev};
- 	run mmcargs;
-
----
-base-commit: 709a97a05df66e394f40d249105d0baade46f107
-change-id: 20261106-imx93-frdm-usb-boot-fastboot-f6902c9adcf8
-
-Best regards,
+Regards,
 -- 
-Daniel Drake <ddrake@baylibre.com>
+Jerome
+
+> Respectfully,
+> 
+> -E
 
