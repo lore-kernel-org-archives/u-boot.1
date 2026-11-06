@@ -1,153 +1,119 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B550D606A326
-	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 18:41:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBBF6606A326
+	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 18:41:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=glAuI2gU;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=omxpfiNH
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=pHQ19pmB;
+	dkim=pass (2048-bit key, unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256 header.s=s2025 header.b=FGLVlTo6
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7B66360771;
-	Fri,  6 Nov 2026 18:41:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 65AFC81202;
+	Fri,  6 Nov 2026 18:41:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id oBS1Gwxu3kZw; Fri,  6 Nov 2026 18:41:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 9B1EE607AD
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793990468;
-	b=ortpKG1/XQqlrLCX84/cTsLJSAojILwNkent0AfLhB2CJUxnvQRGEyU6x8xwkUK42RQ8
-	 FogAaVyqT0pIJzxGQAONLDI49k0tx7NYs6k6dW3GOP2soDZlGH0wE2ggkN2EjuKuOASdq
-	 UWx2IPgII+0tZadOPeYl/ZI9XQiDoAX9dvicZMKV3szogxY5fEYGNL1GufxXcAdFF3tZj
-	 jUSbGc3kI/v35Jf/pCz7xPbQIICRDGNTkpo5JvVRc5+Zbf49ywYEJF6ZwBQGkbOLeSeru
-	 S7wdNjn9qwA32JFUTL92aU7MCgYN1WZi7lH3Q2Vxr+RO5OeXdKVUQ3sEPviKGB8pt9Q==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id CkOJk1dL4cT8; Fri,  6 Nov 2026 18:41:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9A40D810BB
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793990480;
+	b=YTSegCsN8zlAhXP1ClFQrLuls2AgU7RJbcDkrHA0AAGYyVOlUp18DEGiJTZc3ks4dNkp
+	 4PVCr/MX1Bs319H7l4TIZ1jCDzLSl75TSEaId0IAa4vgSa7bcFe1Go95Sw8isrL4ddI7Y
+	 G0N+qyGWC+QA6Qc6eoUEbGfEQhnkOORaVzyPB540FNrerhnSMpSbVVbtByKEsctYWUm57
+	 k17ay1P0+yOBKcZrXpJb3Is/LebGunej2nvQvODfJGrgyTERMXYaJgALUD/vFBWT+GUHJ
+	 z7OJO9OmTjeolofpsD6q2P3EZeNTDnwEQK/yB2gx07OM3D3bcyqSKxqOqf7t8WuSw7A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793990468;
+	c=relaxed/relaxed; t=1793990480;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=EdTxjy5UJOM2kUMwGoc5AL78DlwYkck42CXz5DTwU2U=;
-	b=ar5w3TC0c9eElysTwjRrCgd6tWdOWlb7kJrn32sPNFoia4IIwVflkHlWhcxEQnrLVfTa
-	 JqtdpR2U+ooSIVIwE/xeOCwpm21v/u3YbrdVDDHXo8uZJ0qx4fQ/NGy6gDOKmB0wgMPel
-	 A2O2WAwaJC4IgnBHidTUFvGOZOtI/lhNFVGKQKRFLf85GFP4v83/+rWFH/NQBbbRt83zr
-	 JJG5eULv4fg2aAc3JCAFZTLuAyTWjYEwUbSBeDs+tqGHGCEkh/Gi4EnFiyIngxHSNhH3s
-	 eP1Pz46LEG/D6IBPNLfRg0wSIpHE8UZFnsZBgxfexmegzLti65OFHe7mJ0ehvaXELzA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=omxpfiNH;
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=9CGIp6EmJ7gV4Yh5zKDD5Ms11wS10MzsKAx7A8fi3T0=;
+	b=DWYq9tKP0EIrbyGDS5USOvdjOCNwbxQItx5cn8/IP7FaLDWH7iHj4LaVvJBuYJk837Qz
+	 mTLnw6PzxLkgJD2tTAfaKvQ1l4Iu7LcEdfxzjQRrTYdEmSpl3eavw9vyGs+Abi3R8GpxK
+	 BLLVVrQVy9/VUL8Dm3qSv/ordDq/d8mxKpOs9pFh7LQD2Xz3dR9YqHRfYZroSbfXVJb+8
+	 yo9I6NmxG2ekW6ganlEzmJZ5ni6mfVUMeyzUlqUZ7mAmPmdhyxXg/Oxz2S4qFit1LVR4w
+	 T4qKq+wGUZ9DcOZM0j1+gstoSRLeXptjbiDQUlVseNA78+oJuoHTSzraflSlkz5fOGg==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793990468;
-	bh=EdTxjy5UJOM2kUMwGoc5AL78DlwYkck42CXz5DTwU2U=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1793990480;
+	bh=9CGIp6EmJ7gV4Yh5zKDD5Ms11wS10MzsKAx7A8fi3T0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=glAuI2gUbzoAP0sKnUI9H7Ovi154MPJuuxXkXQpo4JVQbC2mvaW1QjTl70+AyVXCX
-	 koQjOaMXrVUsp9Ir46fx5BrqzI644NsARGLtLO1DuUj98e4PFzFWHvaR1h3uKoxUXN
-	 0ci8YTnYOv+hN6Hzh5zgDiNMz0WxS5mXCdxAZPqZ2/HyMB7hneYGNbx5dE8SLuhsDj
-	 H7b1Loo2msJ7P1subCAvZIw2q97QHbI/aelX/gOFLoLpf7LXCadEB2VKuE4YMsF/1S
-	 F0bds2aq6BXRV3uI3D3uJlpOtwHeh4PxUyHZPbEvEYefuYm2x79rtmQm7gI68V5BwG
-	 8uf+Qt8zpPYPw==
+	b=pHQ19pmB7qlabwhXrZyu7ZD8L+/4vyqDdwvBXJIYMA5RiTwWjXfFD0c32XlclIIQK
+	 5fn6ApLarCkChaWWugeRoggoPRIe+31R4Ab7y1aGw9ogICZWNUG6M2HzVr7yaIVGX2
+	 eUNyWzBDHjoqbmc1nok9+Culqbe505I5tpedAM9shqnRvkcbFcfLb1JSqxvg9GqOv1
+	 eFs/gjmbtgjxfdSApufhSHmuD9ejixejmHnyYchgOv5wuVKjm76HZ6y+iex3Rj00ks
+	 NMVm0m9YtCsBAlTGGJuGZll2nOQFqgwcAeU9asHZ01VlVsF2s0hc/M8RuylvEmq+6J
+	 JnswXH2B1b9zQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9B1EE607AD;
-	Fri,  6 Nov 2026 18:41:08 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 63BD932A
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 18:41:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9A40D810BB;
+	Fri,  6 Nov 2026 18:41:20 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 26D764B8
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 18:41:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 490A660771
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 18:41:06 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 181D9403D8
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 18:41:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ztLt3PLzokJn for <u-boot@lists.u-boot-project.org>;
- Fri,  6 Nov 2026 18:41:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 2469460744
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::e36"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::e36; helo=mail-vs1-xe36.google.com;
- envelope-from=ralph.siemsen@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=omxpfiNH
-Received: from mail-vs1-xe36.google.com (mail-vs1-xe36.google.com
- [IPv6:2607:f8b0:4864:20::e36])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2469460744
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 18:41:04 +0000 (UTC)
-Received: by mail-vs1-xe36.google.com with SMTP id
- ada2fe7eead31-7d06ecaf709so553328137.1
- for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 10:41:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793990463; x=1794595263;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=EdTxjy5UJOM2kUMwGoc5AL78DlwYkck42CXz5DTwU2U=;
- b=omxpfiNH4WQI9zWr1I8wjuoou7hFPFEfIlPCb/rVs6H9GYb1FVTpjeJLeDG3twuEdq
- 6Q5+MNLlUUYbgWjPxnNN7u690ywlUnw0J7WZVyTLMdfOXmj47qrfk/ILkCbDM3GDjr5E
- zOD+w5TIqEJQB5067e3lz34eTE+3K56tSI3XV6fe9sA0caX0p37w/6X/eG34MECeXfJI
- nHR++qlIpvihy9yHuQHjsm9MrTGmqBCRdGrWLQtan+njZsGdbYPFlWO9EdWPWI/7Q+du
- Vr99Z9UDuVf5YfqCrrvPSTI7g9L5XmLFslfCTm84tJ1WBugyFtQO9WkE/KOW3iAlWNaB
- 6dbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793990463; x=1794595263;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=EdTxjy5UJOM2kUMwGoc5AL78DlwYkck42CXz5DTwU2U=;
- b=s70KMnEn4JJHWboWu6Z/EL13kL+VOkriK3Tei+0SNYoVC/lXCScUxBsP0UNVDKUYAk
- ZaSXfzMgGvvko/6v7tP38RoLHBaGYLMp2QZyFIA1mHFU1z4E6j6kY4dUQafg3UGbxufA
- GLvUt2m4srwhUuWVSAuDMQpX7fOBzivPmdlVO/9fyxJR22qXW2/Mqzil8qZShig4Hf3n
- z9xdGmZIz8XuRjS1Cwp2bbT5DwSOgmtsJ6iR2V9msCkuf+hse0kQlDI9NOLGTmI7Wp6e
- It1VzO8avB9KIydWJNnYzST2glZazaNmcrxQ/2tJZJ+V47oJf6/CNDnpK/O8LBz1bv4G
- VLjw==
-X-Gm-Message-State: APuU4Z+jTAgps//9W3WGEIXsmU7FCXEFwDB7anx6LBRpNcFpcor36cWV
- 1CsMS+KtENVxeEQG2iiNi8G6UQymXAvWjQsoZ2vK52zp5gOxaBjovPLUNPX3tSdeuzQ=
-X-Gm-Gg: AYBFou2DNegt/DVvrjkbiGRA0Ga18AWsuiTVT+JR38T7iL7rIQtKlM1VZJnZEBgINyl
- n9lQYQb2qUnJSsPwY7vppaDBHnyXT6GdX/Hq+vNZSG5z3orZNjh9uL6MDgUdSvpJ/XuxmPAPYw4
- c0+NM5xCDyEe6TNf84NI/tNjWiaEMFYCRhXKxpqqd1MzTrm6Zv1s+neGhAM1F2/4k6wYlLdkY0p
- AIaiw5hEUtcvGeUv3Dr4yzrRYhfFVSSgnk0pbe5Xy2tIgzpXTkm0f7DCIeu2+wMMzTcJzjfcE/U
- h8/TeWUeVIDqQecN4mcUbcBl154bcmSZjI6JopC5ewKc+QVMjmoQx/y7nypSOAPm8RAg/xJRm0e
- Jky8ekvuBBKRbRM8DPp9gRfn3aTp/jPlVfWAXv3/jUUT5wJBHudB56VwXorz5YrMvVsXu0wlpqQ
- 1wzCJ3N+YwsYWTuxV2iR9riIinFHfnQkmzglIa9jQw83HsQAizyNG7DUBoc/Yu88404TpBV+uQt
- ULMUmkjONYwG3A8tuy6CLhozys9cQGgkN3rjZQ6bQa9kj7dcoWmf74WgMr5ygXnhpnwWY9Fh4o/
- cZywBSUQJwnO6UodRq8WJlNw7apTvXYWbvr/f//CJHEWqu/POed/iysLlGXdknDg7MNhPes1KeH
- CirIM7Ob2mu2HhiQGbkEjueWCjTTVIa9UbeZ7VtTJSbWL8w==
-X-Received: by 2002:a05:6102:f11:b0:7bf:74c1:b607 with SMTP id
- ada2fe7eead31-7d2a16b4725mr2011737137.34.1793990463260; 
- Fri, 06 Nov 2026 10:41:03 -0800 (PST)
-Received: from localhost ([204.244.107.52]) by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-5ecc64a6174sm1834926e0c.5.2026.11.06.10.41.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Nov 2026 10:41:02 -0800 (PST)
-Date: Fri, 6 Nov 2026 13:41:02 -0500
-From: Ralph Siemsen <ralph.siemsen@linaro.org>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, E Shattow <e@freeshell.de>
-Subject: Re: [PATCH v2] doc: develop/sending_patches: add tips for series
-Message-ID: <au4fPht4wT72RFUD@maple.netwinder.org>
-References: <20261104-doc-sending-patches-v2-1-c0a90ff6c049@linaro.org>
- <76240a0d-96ed-4a8b-9336-8cc96c6e6e4f@cherry.de>
- <auyTzNmT63e_mEWO@maple.netwinder.org>
- <fc54cf9e-e56f-427b-b390-fbb2c9ea5c1c@cherry.de>
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oUkk9nnOeic2 for <u-boot@lists.u-boot-project.org>;
+ Fri,  6 Nov 2026 18:41:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 9B303400A2
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a01:4f8:231:482b::2"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a01:4f8:231:482b::2;
+ helo=freeshell.de; envelope-from=e@freeshell.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=freeshell.de header.i=@freeshell.de header.a=rsa-sha256
+ header.s=s2025 header.b=FGLVlTo6
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 9B303400A2
+ for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 18:41:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1793990458;
+ bh=9CGIp6EmJ7gV4Yh5zKDD5Ms11wS10MzsKAx7A8fi3T0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=FGLVlTo6jgSdUBjWGmNEp3TOM0U1l6iFhEj5YvtKp2iSn1zC0I+nynE/VTTbR1KWS
+ ggT3Om9ZClRim3r6m6QBwJGx/u3yttp/upRQorcbXmR5L0VudL3sVDoFDPFasYB83w
+ e1zPBvI/7VAB2pWUEKfh9x/fnlH8pnstKdTPF4/d3DywRpWanbgOiet7wOodCMPf21
+ Dm5hGP22dqT1G/PF5nQ9s48t7Argl78EXy6fr6qC/YnPYf8wOJ2OH7cy29tiILDyd6
+ sc9y15nVBoaSmdFodhcSfo7p+Lbyft8rBZAqIqz0U2I/2QmjPsx9y/msTweXf4Xrg4
+ avptAIGQxvuCw==
+Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
+ [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id EC46FB22007F;
+ Fri,  6 Nov 2026 19:40:56 +0100 (CET)
+Message-ID: <79fdb1d0-c777-43c4-a7ea-98455186e900@freeshell.de>
+Date: Fri, 6 Nov 2026 10:40:48 -0800
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <fc54cf9e-e56f-427b-b390-fbb2c9ea5c1c@cherry.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/4] cmd: lwip: wget: write the download to a block device
+To: Jerome Forissier <jerome.forissier@arm.com>, iav@iav.lv
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, u-boot@lists.u-boot-project.org,
+ nd@arm.com
+References: <20261101-b4-wget-blk-r4-v1-0-e27a009e4043@iav.lv>
+ <3bb5a9a4-ce05-45c8-9fc4-d4fe99b1b0c1@arm.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <3bb5a9a4-ce05-45c8-9fc4-d4fe99b1b0c1@arm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -157,58 +123,112 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-21.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,NUMERIC_HTTP_ADDR,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Thu, Nov 05, 2026 at 04:46:17PM +0100, Quentin Schulz wrote:
->Hi Ralph,
->
->On 11/5/26 3:33 PM, Ralph Siemsen wrote:
->>I also agree that it is hard to detect the actual dependencies. And in 
->>fact they are not static: when a reviewer of one series requests 
->>changes, it can often impact other series. Which suggests that there 
->>is a dependency, even if it was not apparent initially.
+Hi Jerome,
+
+On 11/6/26 10:07, Jerome Forissier wrote:
+>> wget can write a disk image only after the whole file is in RAM. This
+>> series lets lwIP wget write the download to a block device while it
+>> arrives:
 >>
->
->At some point, there's also "don't send too many series at once". If 
->your series A requires big changes in series B, it either means it 
->should be series A+B, or that series B was sent too early and we 
->should focus on answering design questions in series A before having a 
->look at series B. Sometimes patience pays off in the long run.
+>>   => wget -o mmc 1 -b 400000 http://192.168.1.65/armbian.img
+>>
+>> The target is a whole device, a hardware partition, a partition by
+>> number or name, and an optional byte offset into it.
+>>
+>> Patch 1 fixes the buffer size check for a reply without Content-Length;
+>> patch 4 sets that check to the target size, and without the fix such a
+>> reply would be refused. Patch 2 lets a wget client take the data
+>> through a callback, patch 3 adds the block device writer, and patch 4
+>> adds the options to the command.
+>>
+>> Tested:
+>> - ROCK Pi 4A: a 1862270976-byte image to the SD card in 3 min 16 s to
+>>   3 min 35 s with a 4 MiB buffer; the first 1862270976 bytes of the
+>>   card have the sha256 of the image, and the card boots. A
+>>   2936012800-byte image, past the Content-Length limit below, took
+>>   4 min 18 s and checks and boots the same way.
+>> - QEMU arm64, virtio-blk: a 404 writes nothing; a file larger than the
+>>   target is refused before any write with Content-Length, and at the
+>>   end of the target without it.
+>> - sandbox: ut lib lib_test_sink_blk; every patch builds on sandbox and
+>>   sandbox64_lwip.
+>>
+>> Notes:
+>> - lwIP's http_client.c reads Content-Length through an int, so from
+>>   2 GiB on the length is unknown and a file that does not fit fails
+>>   only at the end of the target.
+>> - EFI HTTP, the other user of check_buffer_size, retries with the
+>>   reported length when it exceeds the buffer (efi_net.c:1715), so a
+>>   reply without Content-Length still ends in a 4 GiB allocation there;
+>>   patch 1 does not change that.
+>> - checkpatch asks for IS_ENABLED() at "#if defined(CONFIG_WGET_STREAM)"
+>>   in cmd/lwip/wget.c; that #if picks lines of the help string, as the
+>>   WGET_CACERT ones next to it do.
+>>
+>> gzip and zstd input follow in a separate series on top of this one.
+>>
+>> Signed-off-by: Igor Velkov <iav@iav.lv>
+>> ---
+>> Igor Velkov (4):
+>>       net: lwip: wget: accept a reply without Content-Length in the size check
+>>       net: lwip: wget: hand the payload to an optional sink
+>>       lib: add a stream sink for block devices
+>>       cmd: lwip: wget: write the download to a block device
+>>
+>>  cmd/Kconfig                      |   9 ++
+>>  cmd/lwip/wget.c                  | 107 +++++++++++++++++++++-
+>>  configs/sandbox64_lwip_defconfig |   1 +
+>>  configs/sandbox_defconfig        |   1 +
+>>  doc/usage/cmd/wget.rst           |  43 ++++++++-
+>>  include/net-common.h             |   6 ++
+>>  include/stream_sink.h            |  75 ++++++++++++++++
+>>  lib/Kconfig                      |   8 ++
+>>  lib/Makefile                     |   1 +
+>>  lib/stream_sink.c                | 189 +++++++++++++++++++++++++++++++++++++++
+>>  net/lwip/wget.c                  |  89 +++++++++++++++---
+>>  test/lib/Makefile                |   3 +
+>>  test/lib/stream_sink.c           | 137 ++++++++++++++++++++++++++++
+>>  13 files changed, 655 insertions(+), 14 deletions(-)
+>> ---
+>> base-commit: 3401e006432abcbf7d73d7210f10df157f990ed3
+>> change-id: 20261101-b4-wget-blk-r4-833f8a3d344e
+>>
+>> Best regards,
+> 
+> Applied to u-boot-net branch for-main [1], thanks!
+> 
+> [1] https://git.u-boot-project.org/u-boot/custodians/u-boot-net/-/commits/for-main
+> 
+> [1/4] net: lwip: wget: accept a reply without Content-Length in the size check
+>       commit: 8498fbf8788eff07bc7fc59f9b15cf6c65025b10
+> 
+> [2/4] net: lwip: wget: hand the payload to an optional sink
+>       commit: 40611fe0277a7a8f9639aab02a6f1a1e0e897d57
+> 
+> [3/4] lib: add a stream sink for block devices
+>       commit: fdf4d9621c8b507f69fe0dd09fc53ebfe860fda5
+> 
+> [4/4] cmd: lwip: wget: write the download to a block device
+>       commit: f0870bb385cf923bfab0baddacc952151efa4c39
+> 
+> Best regards,
 
-When adding a new SoC, we end up with series A+B and often many more. 
-All of that code needs to be written in order to get the device to boot, 
-so it is generally not possible to "upstream" any of it until it's all 
-functional. (I don't like to send out untested code!)
+FYI stating my objection to making the wget command take these
+arguments, it seems short sighted and not very U-Boot -like.
 
-The problem then becomes, which series to send first. Inevitably, in at 
-least one of the series, a reviewer will suggest another approach, 
-perhaps to extend some existing subsystem, or simply to do certain 
-things a different way.
+The functionality itself I have no objection to but including this
+command line argument complexity now for 'wget' implies that scripts and
+documentation will be built around this change and then we must maintain
+that compatibility, which is a bad design choice in my opinion.
 
-Unfortunately such suggestions frequently result in changes to the other 
-series. These changes are hard to anticipate or plan for. Sometimes I 
-try to send an early preview "RFC" to help identify such issues. But 
-even then, during the actual merge, further changes are requested, once 
-again with ripple effects on other series.
+Respectfully,
 
-Sending out the series in a different order would not avoid this problem 
-in general. Specifically because it is hard to know which parts will 
-generate friction with reviewers. My guesses have been wrong more often 
-than not in this regard.
-
-Not sure there is anything we can really do about it, but I can totally 
-understand why someone would send large "add new SoC xyz" patch series. 
-It keeps everything together and the ripple effect of one change can be 
-seen more clearly, than if all the pieces were done in separate series 
-over a longer time period, with goalposts being moved along the way.
-
-Anyhow, I've posted v3, with a focus on making it easier for the 
-reviewers and the future code maintainer.
-
-Regards,
-Ralph
+-E
