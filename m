@@ -2,28 +2,28 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC21E606D829
-	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 09:35:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A59E606D829
+	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 09:35:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=JwEkPLqr;
-	dkim=pass (2048-bit key, unprotected) header.d=nokia.com header.i=@nokia.com header.a=rsa-sha256 header.s=selector1 header.b=Ntk6N6aA
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=MjBECuKQ;
+	dkim=pass (2048-bit key, unprotected) header.d=nokia.com header.i=@nokia.com header.a=rsa-sha256 header.s=selector1 header.b=ig1bNIiL
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 93DC240967;
-	Fri,  6 Nov 2026 09:35:21 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7619D4096E;
+	Fri,  6 Nov 2026 09:35:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8z9z-yt1ztGc; Fri,  6 Nov 2026 09:35:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 956BA40963
+ id QQUkIvrH2v7Z; Fri,  6 Nov 2026 09:35:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5C85940966
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793957720;
-	b=PkjY2Uh8ETDL2sLsGSvUN3fbAX+1DTlKik3t+Xzfnz7N9JdV+T7EfYP/AiwgljXAiN2L
-	 UBpieFGCPWIrxfRJaiBgChGyEcOqBohYw402Uuod+ECAk4cdn4+RG1ZVFu5pSzRHS02Uh
-	 zRA4ob1WWRYMndJmdnN1fGjCHzcjbvIlzbFMrvXBp+piGdIF3HTdmU6BEiXLPTaW3GH2S
-	 smj8ztH+OdyAOYpGyy9bLbU5x0G03exbO9mQJCibDkN8W1czftplAD3Ohkv88rKsmct+w
-	 kVpaSWzt3eafWkWhHTwwL8lZdhtNEpJmZqvnXucS8oDlUI4zMZph4rx+8xSki5/0t1g==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1793957722;
+	b=dethktV+IUWlok4KBC2xM3K2pSoCbm0T7dc+CcoBHdh5/KqEWQSOvj7g3/e7BP2aJ3a5
+	 QktJWz8n2lBpAs+9VlIBQ+xGbUvzTZ/5UDw1+OjUOhZ+E6KQec8tmv2uIeWh/qsHHLaTF
+	 ms9vIKh/FntbJbPQSgcNF4k4yQ1jtLF4xsgdHLIvGoioWBrm3vuFhvFuzop5mphQ9v2Zx
+	 Nk6p6Cq7/LIxlGG2PHeUSwTKM2QMYEYQjbEfAsPZFmFIePBhszr+25m4uXSrw+hzq6CD3
+	 Je2ihtObXZFOdJXNbMsOWDkWwrxkeM/YOZoqOF/zowDqRQ9eJx//BE1bcxdgXvopbTQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793957720;
+	c=relaxed/relaxed; t=1793957722;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -47,71 +47,71 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=z3o8NlgYvH06eKt45sKGUkCiVcPB8MmrRqtzZTst8y4=;
-	b=WI7nXV1uxoukwi8P3Ub4N/qpVGA2P2MYEaOykzjCsOTSdX/rydH+kxmKF9/O0f3mtkL+
-	 jB/IWT1+nmn3Y8y3xEPkAwvv7x4vIi+mraSdvjFQaOMYjCZE+Mn78qPFdP4Sg9P2eDtF2
-	 tXlQDFGt+jt2v9GE2a8VoZ/M6lkdGXOm7A1084hTu3UQAfn3GGL3pfyq+w4Nm5+m4nDQV
-	 pLmU0u7J9pqKsZYlpaM4YNU/OjHcaPgsdktrY706ComCLDlXkZYtbLyngpod5eohv+9J5
-	 Bs03Zktu+5xws3/lPtJBuSTpDcY4l2Fok2T2RfDawKf/Z+X5tMJoefNe1m4nf0OcVDg==
+	bh=0AzCRNzQXKUmGVWkXUnwx6zZntKTmXuf21M3TH5fxhU=;
+	b=qtKXlB7eBrOviaDjWfeJlaPsiODIMD5uVNllU/qhHw5uBF9osfaRMQXCcCwuwsTIS10S
+	 +dcgfBoiLxm5bLF3OSHyAFkkd/XUzE4TKDwr8L3614ZRr/Jt2UkjCT7k19eDhjd4RKThB
+	 QSNI9USMBuphuOvdhCKi5Br0ww0Wj5OlnepiffyaLVhb04qmoPHanMp4NSkaDvPqAoKVB
+	 U9tob5c6K1ZhqZkLggcLQvoxztOZo2yk9lMnGjPk3wXZETrUiDX2lta4j2pjZBPc4Q5fQ
+	 bbdKrIPo0zOuJGHoZq9VXECgzvK0/gD4m28AH2g7Dww4TWueiE01uJbdC7PR/ahijtg==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1793957720;
-	bh=z3o8NlgYvH06eKt45sKGUkCiVcPB8MmrRqtzZTst8y4=;
+	d=lists.u-boot-project.org; s=default; t=1793957722;
+	bh=0AzCRNzQXKUmGVWkXUnwx6zZntKTmXuf21M3TH5fxhU=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=JwEkPLqrfRLGIIjwLqDTZ39vekrv3PNEv2kKtU3tn09rztqVSSNTLCaTY/ju1pTu1
-	 80L+W0W1rHrYJh2rXEvCCXCNyGv4oKwgT37SQtUtjORfCnNBOuf2EQoXgfVavE5E/3
-	 KJSXL2DLuft0lCuS7KTFT+0vSKAZJJjJxYyyhmSGr167mXv3zgEJjmiNkjYeDv1BJ2
-	 HTY8dxIHulc55PC+RMyKQ2YiDaF4G+oETPJbjelKWi6MYzjq6Iaf9CnbEhlpuTco8i
-	 j/tHyteIkGZN6wLW8IR2yLVHB2NSbb2jWk1VgAy4XulPrqy5v2VBJhVGOmnSncKbW5
-	 19Bh1B4eQfS1w==
+	b=MjBECuKQf1BKPACbq2TXabongZ/sJwjRMLZy3zflr7zcPwW7nayEjsdsKkCLj3TG4
+	 BEqnw/ymPPuQ+kQFKvPljhKCIY6IphuYg2EzIxdJjS5j4Vc8tM/y8nAZOOlaPf6ZqR
+	 0K/0nVwvs0PFF5+KgFoEbxRbAwF5gyQCvRNnyO5OntpdxsjI5fVlzXVLqPx6e+huLo
+	 paOTynBPQvv2c10AZgm6j4A6fnJdHkWz0TAVoZSrBxeRUYg+xYubOBYZV9BNvlH4C2
+	 mP7mNFl7AEIYkWVNXV8WE4xSroQYNsCw4bw9uilXwzSZBCRwhE1HO7Iv+e1TkapFqx
+	 o3Y2EwoSS92+g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 956BA40963;
-	Fri,  6 Nov 2026 09:35:20 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id C203634D
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5C85940966;
+	Fri,  6 Nov 2026 09:35:22 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E040834D
  for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 09:35:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 7E96960774
+ by smtp1.osuosl.org (Postfix) with ESMTP id D1C7581195
  for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 09:35:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JTCqnsQBkLWe for <u-boot@lists.u-boot-project.org>;
- Fri,  6 Nov 2026 09:35:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 43E066069B
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c20a::7"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id oIwooAjwqymq for <u-boot@lists.u-boot-project.org>;
+ Fri,  6 Nov 2026 09:35:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0738E81188
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c20f::7"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c20a::7;
- helo=pa4pr04cu001.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c20f::7;
+ helo=osppr02cu001.outbound.protection.outlook.com;
  envelope-from=juuso.rinta@nokia.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=nokia.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=nokia.com header.i=@nokia.com header.a=rsa-sha256
- header.s=selector1 header.b=Ntk6N6aA
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 43E066069B
+ header.s=selector1 header.b=ig1bNIiL
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0738E81188
  for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 09:35:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nokia.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=z3o8NlgYvH06eKt45sKGUkCiVcPB8MmrRqtzZTst8y4=;
- b=Ntk6N6aA81dIMClMLeiBYOL5Helqj9bvPRKv+O8wDmnRSFWzOFoI0tV00PXq96dz+7JiAlRYy8PLEe/IZc9PeKFIbTsFu/hZBOQ/FerkkG5TCW9Av+KUPorliLrAHsNxzpvK4fNiw+kDu4MI4Q/oVnZKIK+YMLoRWcNPTxZjFK4+9Kn2qeg6KttgPJmMUXr2WOgecVRc5VxIKOrKjGwpS7VBMVzU1m2O1qkhhCqpAR+T/OHmFiJsrJjo/sgSnPCCz9UVWYzmcT6wIDkdOSPFwQV5q8vwi2WlNP5+tJ1MvXD13YT3XFSs8xmxm67UDF12oF9T070VY16XJBma/NK4XQ==
-Received: from AS9PR05CA0102.eurprd05.prod.outlook.com (2603:10a6:20b:498::27)
- by GV2PR07MB997967.eurprd07.prod.outlook.com (2603:10a6:150:31e::9)
+ bh=0AzCRNzQXKUmGVWkXUnwx6zZntKTmXuf21M3TH5fxhU=;
+ b=ig1bNIiLcLJxjnLwW0b7yv1WnNNzRN2rGxr+n7719eG5RpBv8G9MHxkkZayCQWag6xUBxgwWaABRvS7xThDgNQBBYPUikVCtT3dnaCjrUyIGLq+b2EjLmETiurfFNoUr05zvPFZH3DjDec2qETmdtwJzTVvXpksrhokDjQnqTlT96pmUAeqDw+yd79aBWaN7B/K1zVouEJmIp0Jwi/9ZdVkvhOsQzQazCaVjDSAY09wJXnoateQeVmgeYGJs4pMpuy4+W0DWQI5RKUP0C53+e6fmhHOKZlAFusIQ4boqW+2BODgrXDLo/S77MyT+us6vOvOv/hDHyC1C9bmg3p/QSQ==
+Received: from AS8P189CA0015.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:31f::11)
+ by VI1PR07MB9754.eurprd07.prod.outlook.com (2603:10a6:800:1d7::6)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Fri, 6 Nov
- 2026 09:34:57 +0000
-Received: from AM7PEPF00000054.EURPRD83.prod.outlook.com
- (2603:10a6:20b:498:cafe::72) by AS9PR05CA0102.outlook.office365.com
- (2603:10a6:20b:498::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.10 via Frontend Transport; Fri, 6
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.9; Fri, 6 Nov 2026
+ 09:34:57 +0000
+Received: from ZR1PEPF0000E462.eurprd04.prod.outlook.com
+ (2603:10a6:20b:31f:cafe::7e) by AS8P189CA0015.outlook.office365.com
+ (2603:10a6:20b:31f::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.592.11 via Frontend Transport; Fri, 6
  Nov 2026 09:34:57 +0000
 X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
  is 131.228.2.20) smtp.mailfrom=nokia.com; dkim=none (message not signed)
@@ -120,21 +120,21 @@ Received-SPF: Pass (protection.outlook.com: domain of nokia.com designates
  131.228.2.20 as permitted sender) receiver=protection.outlook.com;
  client-ip=131.228.2.20; helo=fihe3nok0734.emea.nsn-net.net; pr=C
 Received: from fihe3nok0734.emea.nsn-net.net (131.228.2.20) by
- AM7PEPF00000054.mail.protection.outlook.com (10.167.242.40) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.2
- via Frontend Transport; Fri, 6 Nov 2026 09:34:57 +0000
+ ZR1PEPF0000E462.mail.protection.outlook.com (10.167.241.52) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.4
+ via Frontend Transport; Fri, 6 Nov 2026 09:34:56 +0000
 Received: from updev-hifix-1-5g.devops-fwk.dynamic.nsn-net.net
  (10-175-3-186.he-pi-os-dhn-100.nesc.nokia.net [10.175.3.186])
- by fihe3nok0734.emea.nsn-net.net (Postfix) with ESMTP id BAE132010D;
+ by fihe3nok0734.emea.nsn-net.net (Postfix) with ESMTP id B04B42007F;
  Fri,  6 Nov 2026 11:34:55 +0200 (EET)
 From: Juuso Rinta <juuso.rinta@nokia.com>
-Date: Fri, 06 Nov 2026 11:34:19 +0200
-Subject: [PATCH v2 9/9] test: wdt: add tests for get_timeout support
+Date: Fri, 06 Nov 2026 11:34:18 +0200
+Subject: [PATCH v2 8/9] watchdog: sandbox_wdt: add get_timeout operation
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261106-rinta-watchdog-gettimeout-v2-9-07de25b6312a@nokia.com>
+Message-Id: <20261106-rinta-watchdog-gettimeout-v2-8-07de25b6312a@nokia.com>
 References: <20261106-rinta-watchdog-gettimeout-v2-0-07de25b6312a@nokia.com>
 In-Reply-To: <20261106-rinta-watchdog-gettimeout-v2-0-07de25b6312a@nokia.com>
 To: u-boot@lists.u-boot-project.org
@@ -145,39 +145,39 @@ Cc: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>,
  "Maxin B. John" <maxin.john@gmail.com>, 
  Rasmus Villemoes <rv@rasmusvillemoes.dk>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793957695; l=7069;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793957695; l=1905;
  i=juuso.rinta@nokia.com; s=20260428; h=from:subject:message-id;
- bh=U5hexThMD/osdI76zU8spNAO7k2SuKweXkStIZb7i60=;
- b=6yNtYXa5dfgGwJIAuIzZ8Dp3jhku0ApAE3unV3WlERLMMheKDA/iVgtSSlsupmYcuddLu9CzD
- 1n3vsl/8fdABl+8YOFn/Nk3UwOpwOpZEWNSHqvJ38I5VEutybp92s/d
+ bh=XQYzKkWrMGwyim1lfYaJleye1RbqK5xTxj9V+3eUQ4A=;
+ b=gcqIOoNHFqQlc+YmCYEXsh57D27aVEQhHhZ2PTt+hv0305d4E9B6j2NFSzm3a+2cw0GmFMS04
+ hpEcoaDXa/0CLVeYv2NqO6XZv9w/YHovJqh2UcfIeRM2eXhsljIAJ6o
 X-Developer-Key: i=juuso.rinta@nokia.com; a=ed25519;
  pk=CnH7U1WPlQ4t8gHpzhFvPnTjoealqDnbmbLMYEd5GDQ=
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM7PEPF00000054:EE_|GV2PR07MB997967:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1d20877f-0122-42e6-3430-08df3be93889
+X-MS-TrafficTypeDiagnostic: ZR1PEPF0000E462:EE_|VI1PR07MB9754:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4569aa0e-846e-4fc4-f514-08df3be93867
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|23010399003|1800799024|82310400026|36860700016|261028144727099003|11063799006|56012099006|261021123027099003|261009223027099003|261021121427099003|261022105027099003|261022075727099003|261026140227099003|261026121527099003|261102123227099003|18002099003|22082099003|6133799003|10067099003;
-X-Microsoft-Antispam-Message-Info: Q3DiglG6riJxRhDV+2isGyB2ORxzkoljqxoa9goIggbPWV/YfObrL3H8ayHQYwy+6yt643dj8MOqU/cGkY63N18LaCde5TirU2TafVNhRphkq8AbgUS7olECDBD8qqf0EdEsqIWXi4SH/roMO33jLe9wwt34k9VXC/Frdrc1vCSAhc7vr93oJQ63ZOSzuvvqiH4vH/I2S8nhrltUj52COoXgH8lD07yLBThtJj8MCYPg0boEUXdU7tEFxHcaRx6W3NCLBvyYYjTnt0lBP9hIgcPx6PXiL2Y5rYtWAWn0OFbEdiAWDe+l5Lfsc7WCaPnDcYFnfC6Pk3LH3ZJCyTHC/jXymTQ3itRAzi1TN5jS2VHhIbG6qk/FW6dgzi3ybYyALGvM+pvwWTv3SO0aX4kBnIJEw6c6dz9HZDU9IUBuMksR7TQFl1NqoyamQrKgyg8uuIoD9gvg/BubtPoZ4Y+r+5+iFR2Pmg81RGepzozkTZC3cviQE7j9814FOQn+B9q77QJmshuz4Cf76kbpHPPvd7JzhcqU7WwyAV89efb388DXgFwMGx3104mIMUi69WrajPpQoRgpM6FatTGWASa9pO9Nuu+W1pFMdxejSBJeF69jArQHXmU28l1ZxCYbsyOmmHxKON6aJL7EvHSmGmyzPQzrOtLoKu1ctJnqif2jWkfR0N7KGwLuzGvsoeWa9JSokOAsDGeOWvw25kwvIuAqhg==
+ ARA:13230040|23010399003|376014|1800799024|36860700016|82310400026|261102123227099003|261021123027099003|11063799006|261021121427099003|261009223027099003|56012099006|261026121527099003|22082099003|18002099003|10067099003;
+X-Microsoft-Antispam-Message-Info: ORPd7aDnpR1Dd/59ijXEjZx6JOzBfe3h8C7WFF71fD2RLQ0rSV8C9yYbkcrtI3qoYAFP6omLBSExaOuvGRNXB5Icqd2AMTMvMvY/mLku/TB/JCuj+/6eqiQIFieBt/HoI5alVn5A9DRhe9NOF1C4+rNQnY10U3wEsHtOsv7+L0lfewjF8AC0IbeXMEXK/v0F8GgPoOKd1b1bLdaFpALO0pN5uyaaOCb9LZqx2FM6tZwyeO9rZOuU5sCX8GxgYv/gRJGSobW8M+SRKVh78TIjn1CdiU09GCLmWtrs7bdHqrYBHkVqit7VLhMkJm1rpKlscwqVE0tgDQqpd9MtVm8lkc6iwMTDonWEAuvYZDdzXX/f1W3FqioXQhv0cl67FE0HKB6XdJddE1ZnHsr7iVWUHSWwi/TeW+Mw9K7i/IevcECRKNr7L+BKl70/fdLooe4bTVr67N42J+yGYq8FgHGwu0Bx82S5f6RILSaxuD7Qt59oMzbbTaXGCzZRZfGZFDc+Jq2Iu9bL+G9DXKXK/q/TyXvd9p1VQJewMfGFJ2I8D0kLv1lG0/cZ0jC+sN3dMZLchVPvlN8lb/rvn0uRDI/pqX9eMdmB7sqwb8H7oEhz8MeeLC46Noc88JxCwlztazalpZ+pFMiJYOUo21s7peqaWv9lpWwQedexs/P+QVkMMpidQxj0CcdZOKw7mKmajtN+
 X-Forefront-Antispam-Report: CIP:131.228.2.20; CTRY:FI; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:fihe3nok0734.emea.nsn-net.net; PTR:InfoDomainNonexistent;
  CAT:NONE;
- SFS:(13230040)(376014)(23010399003)(1800799024)(82310400026)(36860700016)(261028144727099003)(11063799006)(56012099006)(261021123027099003)(261009223027099003)(261021121427099003)(261022105027099003)(261022075727099003)(261026140227099003)(261026121527099003)(261102123227099003)(18002099003)(22082099003)(6133799003)(10067099003);
+ SFS:(13230040)(23010399003)(376014)(1800799024)(36860700016)(82310400026)(261102123227099003)(261021123027099003)(11063799006)(261021121427099003)(261009223027099003)(56012099006)(261026121527099003)(22082099003)(18002099003)(10067099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: HVUkPZTfUM/AM9Srw6woztxFE/Ao6wKy2en+lCLGDFW3b4cursxpMmqmpc0MjU7od0Hp7He7nWaUes2Mp3dahyWnkRuCMbAYO9r/HXHmrg+lDrrWoOZk9GBhSlDnXsqdHEx37O0l3EJD93cWUBgEsVMDEv4jbaZbxM5ie/X/mxkdBCf17C4s8ewM6yRHxnuCD7E/jzuwmoEdaGVHFDhZcm4TwqI92d3XnSKvs3tRQPghNh6YXNikrQk58OpkOIzIc2AVxF4aOOnN6uYaUVsuN+yrYeK5z1/tQQagshoOt1k98h1EJ6MBzvtLFANBVFF7KJ4m6QERYnKukr0HyC3BPLCuLxvDRDHNpC3yFu3CjOUM9TZTHZ7LeJL328DEiJEYQ4+MDY3Rs5gWJiz0y+D+sI3c2SLbVjzc8MbcC9KuSNkuBuAyc3KohaR6Htzr9HGU
+X-MS-Exchange-AntiSpam-MessageData-0: f01+9aKQeRSM4HCGIpMj0bIOWPZAHwXJ9lDAwywWQrCg7eJW2obxOcGVu1YduKhHu3jcjfLu4pUBEj5wWkeqKOz6bFsXe0VKseRex4n2UgI2iF8BOrt9YEuQDz6ZKWVGuVbPWszr9lmhpWGgo4SyHOxEFjcwlsIINVsKl/e2+MS7bXm8juufjcz3MNfx9zKakbjxIKMc0J51KytVdGlXYDwXGDdOdGyEVhw0qpYBrYqVYtIVn+4WRj3UnGLQi70a9rdMOa1D89bfIz+kQre+LcX0o+SYZYZpqHakWx1Xe7PoLUenqtuL7epxhlLfuOrj5myXqNAwOiWfEZhKxZMEQHA0Qg/sBE2rVOfAsAraW5o4OV66SiKcZhGPluNFivc+J1gIV8/GzZtv3bIT0GF0okj+elcFA+I1CdLA5tJ6oVzuI3PE/wG//ew6TpwVHlJN
 X-OriginatorOrg: nokia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2026 09:34:57.0420 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1d20877f-0122-42e6-3430-08df3be93889
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2026 09:34:56.8643 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4569aa0e-846e-4fc4-f514-08df3be93867
 X-MS-Exchange-CrossTenant-Id: 5d471751-9675-428d-917b-70f44f9630b0
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=5d471751-9675-428d-917b-70f44f9630b0; Ip=[131.228.2.20];
  Helo=[fihe3nok0734.emea.nsn-net.net]
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-AM7PEPF00000054.EURPRD83.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-ZR1PEPF0000E462.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR07MB997967
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR07MB9754
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -190,217 +190,71 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add tests for (1) get_timeout operation, (2) warning print when
-the timeout is not longer than the servicing interval, and (3)
-the wdt gettimeout command
+Implement the get_timeout operation for the sandbox watchdog driver.
 
-The get_timeout success-path and not-running case is tested with
-the sandbox driver, and the not-supported path through the GPIO
-driver.
-
-Warning print is tested via the gpio driver. The sandbox driver
-rounds the requested timeout up to a whole second so the timeout
-is never set lower than or equal to the 50ms servicing interval.
-
-For the 'wdt gettimeout' command tests, a new test/cmd/wdt.c file
-is added and the file is included to test/cmd/Makefile.
+Round the timeout in sandbox_wdt_start() up to a whole second to
+emulate hardware with 1s granularity, so that the effective timeout
+can differ from the requested one and the tests can check that.
 
 Signed-off-by: Juuso Rinta <juuso.rinta@nokia.com>
 ---
- test/cmd/Makefile |  3 +++
- test/cmd/wdt.c    | 60 ++++++++++++++++++++++++++++++++++++++++++++++
- test/dm/wdt.c     | 72 ++++++++++++++++++++++++++++++++++++++++++++++++++++++-
- 3 files changed, 134 insertions(+), 1 deletion(-)
+ drivers/watchdog/sandbox_wdt.c | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
-diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-index 79cbb291250..9ecc665262a 100644
---- a/test/cmd/Makefile
-+++ b/test/cmd/Makefile
-@@ -43,6 +43,9 @@ obj-$(CONFIG_CMD_PWM) += pwm.o
- obj-$(CONFIG_CMD_READ) += rw.o
- obj-$(CONFIG_CMD_SETEXPR) += setexpr.o
- obj-$(CONFIG_CMD_TEMPERATURE) += temperature.o
-+ifeq ($(CONFIG_CMD_WDT)$(CONFIG_WDT_GPIO)$(CONFIG_WDT_SANDBOX),yyy)
-+obj-y += wdt.o
-+endif
- ifdef CONFIG_NET_LEGACY
- obj-$(CONFIG_CMD_WGET) += wget.o
- endif
-diff --git a/test/cmd/wdt.c b/test/cmd/wdt.c
-new file mode 100644
-index 00000000000..186c32c521c
---- /dev/null
-+++ b/test/cmd/wdt.c
-@@ -0,0 +1,60 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2026 Nokia
-+ */
-+
-+#include <command.h>
-+#include <console.h>
-+#include <dm.h>
-+#include <dm/test.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+#include <wdt.h>
-+
-+/* Test the wdt gettimeout command supported path */
-+static int dm_test_wdt_cmd_gettimeout(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	const u64 timeout = 5000;
-+
-+	ut_assertok(uclass_get_device_by_driver(UCLASS_WDT,
-+						DM_DRIVER_GET(wdt_sandbox), &dev));
-+	ut_assertnonnull(dev);
-+
-+	ut_assertok(run_commandf("wdt dev %s", dev->name));
-+	ut_assertok(run_commandf("wdt start %llu", timeout));
-+
-+	console_record_reset();
-+	ut_assertok(run_commandf("wdt gettimeout"));
-+	ut_assert_nextline("Timeout: %llums", timeout);
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_commandf("wdt stop"));
-+
-+	console_record_reset();
-+	ut_asserteq(CMD_RET_FAILURE, run_commandf("wdt gettimeout"));
-+	ut_assert_nextline("Watchdog not running.");
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_wdt_cmd_gettimeout, UTF_SCAN_FDT | UTF_CONSOLE);
-+
-+/* Test the wdt gettimeout command unsupported path */
-+static int dm_test_wdt_cmd_gettimeout_unsupported(struct unit_test_state *uts)
-+{
-+	struct udevice *wdt;
-+
-+	ut_assertok(uclass_get_device_by_name(UCLASS_WDT,
-+					      "wdt-gpio-toggle", &wdt));
-+	ut_assertnonnull(wdt);
-+
-+	ut_assertok(run_commandf("wdt dev %s", wdt->name));
-+	console_record_reset();
-+	ut_asserteq(CMD_RET_FAILURE, run_commandf("wdt gettimeout"));
-+	ut_assert_nextline("Getting watchdog timeout not supported.");
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_wdt_cmd_gettimeout_unsupported, UTF_SCAN_FDT | UTF_CONSOLE);
-diff --git a/test/dm/wdt.c b/test/dm/wdt.c
-index 2e9d641d6bb..5c524c7482a 100644
---- a/test/dm/wdt.c
-+++ b/test/dm/wdt.c
-@@ -18,7 +18,7 @@
- #include <u-boot/schedule.h>
- #include <watchdog.h>
+diff --git a/drivers/watchdog/sandbox_wdt.c b/drivers/watchdog/sandbox_wdt.c
+index 9a0cdac232a..7b1acb69a64 100644
+--- a/drivers/watchdog/sandbox_wdt.c
++++ b/drivers/watchdog/sandbox_wdt.c
+@@ -3,6 +3,7 @@
+  * Copyright 2017 Google, Inc
+  */
  
--/* Test that watchdog driver functions are called */
-+/* Test that watchdog driver start, reset and stop functions are called */
- static int dm_test_wdt_base(struct unit_test_state *uts)
++#include <div64.h>
+ #include <dm.h>
+ #include <wdt.h>
+ #include <asm/state.h>
+@@ -11,7 +12,8 @@ static int sandbox_wdt_start(struct udevice *dev, u64 timeout, ulong flags)
  {
  	struct sandbox_state *state = state_get_current();
-@@ -75,6 +75,72 @@ static int dm_test_wdt_base(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_wdt_base, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_CONSOLE);
  
-+/* Test the watchdog driver get_timeout operation */
-+static int dm_test_wdt_get_timeout(struct unit_test_state *uts)
+-	state->wdt.counter = timeout;
++	/* Emulate hardware with 1s granularity, round up to a whole second */
++	state->wdt.counter = DIV_ROUND_UP_ULL(timeout, 1000) * 1000;
+ 	state->wdt.running = true;
+ 
+ 	return 0;
+@@ -43,6 +45,18 @@ static int sandbox_wdt_expire_now(struct udevice *dev, ulong flags)
+ 	return 0;
+ }
+ 
++static int sandbox_wdt_get_timeout(struct udevice *dev, u64 *timeout_msp)
 +{
 +	struct sandbox_state *state = state_get_current();
-+	struct udevice *dev;
-+	u64 get_timeout_val;
 +
-+	ut_assertok(uclass_get_device_by_driver(UCLASS_WDT,
-+						DM_DRIVER_GET(wdt_sandbox), &dev));
-+	ut_assertnonnull(dev);
++	if (!state->wdt.running)
++		return -ENODATA;
 +
-+	ut_asserteq(false, state->wdt.running);
-+	/* wdt_get_timeout() returns -ENODATA when watchdog is not running */
-+	ut_asserteq(-ENODATA, wdt_get_timeout(dev, &get_timeout_val));
-+
-+	/* sandbox_wdt_start() rounds up to a whole second */
-+	console_record_reset();
-+	ut_assertok(wdt_start(dev, 4500, 0));
-+	ut_asserteq(true, state->wdt.running);
-+	ut_assert_nextline("WDT:   Started %s with servicing every 50ms (5s timeout, requested 4s)",
-+			   dev->name);
-+	ut_assert_console_end();
-+	ut_assertok(wdt_get_timeout(dev, &get_timeout_val));
-+	ut_asserteq_64(5000, get_timeout_val);
-+
-+	ut_assertok(wdt_stop(dev));
-+	ut_asserteq(false, state->wdt.running);
++	*timeout_msp = state->wdt.counter;
 +
 +	return 0;
 +}
-+DM_TEST(dm_test_wdt_get_timeout, UTF_SCAN_FDT | UTF_CONSOLE);
 +
-+/* Test wdt_start() warning prints when timeout not longer than servicing interval */
-+static int dm_test_wdt_warning(struct unit_test_state *uts)
-+{
-+	struct udevice *wdt;
-+
-+	ut_assertok(uclass_get_device_by_name(UCLASS_WDT,
-+					      "wdt-gpio-toggle", &wdt));
-+	ut_assertnonnull(wdt);
-+
-+	console_record_reset();
-+	/* Warning, timeout shorter than servicing interval */
-+	ut_assertok(wdt_start(wdt, 24, 0));
-+	ut_assert_nextline("WDT:   Started %s with servicing every 25ms (0s timeout)",
-+			   wdt->name);
-+	ut_assert_nextline(
-+		"WDT:   Warning: timeout 24ms is not longer than servicing interval 25ms");
-+
-+	/* Warning, timeout equal to servicing interval */
-+	ut_assertok(wdt_start(wdt, 25, 0));
-+	ut_assert_nextline("WDT:   Started %s with servicing every 25ms (0s timeout)",
-+			   wdt->name);
-+	ut_assert_nextline(
-+		"WDT:   Warning: timeout 25ms is not longer than servicing interval 25ms");
-+
-+	/* No warning, timeout longer than servicing interval */
-+	ut_assertok(wdt_start(wdt, 26, 0));
-+	ut_assert_nextline("WDT:   Started %s with servicing every 25ms (0s timeout)",
-+			   wdt->name);
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_wdt_warning, UTF_SCAN_FDT | UTF_CONSOLE);
-+
- static int dm_test_wdt_gpio_toggle(struct unit_test_state *uts)
+ static int sandbox_wdt_probe(struct udevice *dev)
  {
- 	/*
-@@ -87,6 +153,7 @@ static int dm_test_wdt_gpio_toggle(struct unit_test_state *uts)
- 	const u64 timeout = 4000;
- 	const int offset = 8;
- 	int val;
-+	u64 get_timeout_val;
+ 	struct wdt_uc_plat *plat = dev_get_uclass_plat(dev);
+@@ -58,6 +72,7 @@ static const struct wdt_ops sandbox_wdt_ops = {
+ 	.reset = sandbox_wdt_reset,
+ 	.stop = sandbox_wdt_stop,
+ 	.expire_now = sandbox_wdt_expire_now,
++	.get_timeout = sandbox_wdt_get_timeout,
+ };
  
- 	ut_assertok(uclass_get_device_by_name(UCLASS_WDT,
- 					      "wdt-gpio-toggle", &wdt));
-@@ -104,6 +171,9 @@ static int dm_test_wdt_gpio_toggle(struct unit_test_state *uts)
- 			   wdt->name, (u32)lldiv(timeout, 1000));
- 	ut_assert_console_end();
- 
-+	/* GPIO driver does not implement get_timeout op */
-+	ut_asserteq(-ENOSYS, wdt_get_timeout(wdt, &get_timeout_val));
-+
- 	val = sandbox_gpio_get_value(gpio, offset);
- 	ut_assertok(wdt_reset(wdt));
- 	ut_asserteq(!val, sandbox_gpio_get_value(gpio, offset));
+ static const struct udevice_id sandbox_wdt_ids[] = {
 
 -- 
 2.39.2
