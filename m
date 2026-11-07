@@ -1,115 +1,126 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6447606A326
-	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 09:11:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35515606A32D
+	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 10:04:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=RGOzbY+q;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=pigmoral.tech header.i=@pigmoral.tech header.a=rsa-sha256 header.s=zmail header.b=nshTAWHa
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=SiYMn7js;
+	dkim=pass (2048-bit key, unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=aObjDsMe
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 87171606CF;
-	Sat,  7 Nov 2026 09:11:58 +0000 (UTC)
-X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id cKWkzG-p4NYh; Sat,  7 Nov 2026 09:11:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3DE9F606AA
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794042717;
-	b=IGCrTnsNEJCaX2qHe+AuneG7AuKnmXOTaWL299pJLgqR11BSbiTTN3eppEMs/sYuNTFW
-	 SQLi551u1j37dU0boc2LCh+9/TnFbDNRdfRLDHuLvy2diDNW1I7s8X2C4IpXN3bARbFvX
-	 R44cCr6ZVit2u8HctACrKwKHZVGDUSDn2ZPIwKMptbLVw9mpw4GepORTDZBKCDHSmxeBp
-	 U/IluRPeKATUVHfG+Cs3j4U74qBYbkcjOWu9ZAzpb6Ucdq3ULfSZIRuvJsGjkNc4n87Ya
-	 6E1Vd7yq9ynKsTHnCLqCKWz9YC44hGS74GAzAmGXWyS8+cgiI+LEw+yn+NeOIx+24ig==
-ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794042717;
-	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
-	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Mime-Version:Content-Transfer-Encoding:
-	 Content-Type:Date:Message-Id:Cc:Subject:From:To:X-Mailer:References:
-	 In-Reply-To:X-ZohoMailClient:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=2kihS9aSK74km2BzdmgciEIJLg1Zp5hcZNM5ac9I9H4=;
-	b=frFKh8YJzn5i1BkVpwY4mG0t+8Hj0Ais1TpoeAxcRBdna6kL4A6k8HnV41KH8WLVGAVz
-	 8u8Pmhnl38ztgdUETpqNp2FigcPrKn8Btc7jEctsiX2Z3mR15CT2OT3VpX9N9Cq6qtVMu
-	 4AL7/B4zcXJO2Yra+NrSgtpjV+iQlwLZwxgNCwA874/Ng8BawnWPY8iz6Sed/L1IZxykb
-	 /TAtlsRxfAnxys3OOUU0RntDl2zAbi0+HG0pMvCHFZqvgV05iRpKjM5mS8N1D2KGPkBQM
-	 e1YlrhBO/lrDbJJ44vL9ewhxb+nU4kc52qhPDthZ8R66s9z4fYe8WFAUnP35MDBN1YA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	arc=none smtp.remote-ip=140.211.166.142
-X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794042717;
-	bh=2kihS9aSK74km2BzdmgciEIJLg1Zp5hcZNM5ac9I9H4=;
-	h=Date:Cc:Subject:From:To:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=RGOzbY+qH2m6oVVRL1UVWrvhBM256eRRHx0T8jm9ViW/Ywf8t42JDKXSPyItezgoV
-	 72oU77okgb/BKZslmSuuE/p6cYim89INv9rEl5ZX50ZjaBnioY3ayi4swvoG8mn+b8
-	 uQvuzxrRcTn7wdlg5+YFJGqZc5tou39IAzjjkZP6BWp+xOnOetpzPVJelwBSvTyNlm
-	 zkrnemSTUE+rCDUEn5U0OSg11LYE+ev6xmh9syX5U/QEG/9swpFUM1VrMLPugvPXl5
-	 pchcqoWa0/8JOiV0vzPfBI2HM4ec3+7zGUC8/D/E3utDIPosCfz3kXOq7aZ1BFpHQl
-	 bNQpl1r4RcsWA==
-Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3DE9F606AA;
-	Sat,  7 Nov 2026 09:11:57 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 8E4C92E5
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 09:11:56 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8045C406AC
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 09:11:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0655A40704;
+	Sat,  7 Nov 2026 10:04:58 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2CD15IzE7lig for <u-boot@lists.u-boot-project.org>;
- Sat,  7 Nov 2026 09:11:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8776B406A0
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.182.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.15;
- helo=sender5-op-o15.zoho.com; envelope-from=junhui.liu@pigmoral.tech;
+ id j--_HeWTk6gr; Sat,  7 Nov 2026 10:04:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3D237406EF
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794045897;
+	b=TH5U+GnEIcos0pzcgjU2A4H13CHqePU+cfFHZVJge220LBmzGUzX0bjOE852n2RgSj7t
+	 7J8KjxTSJ87yplOvjJzuxxZ2FhbuvWs7AsIG9/9ISFI4DuTXjyF9U8WgQMTeCJJEJuVjU
+	 W8yzc9ZsMpckmzRhd4xB0kKwXbvtN5rs+T8KJNSYVznBjxiJ8GkEk6YtJ2741qzfUgpAK
+	 N9NBd1ckrED3rJzjOJ1lcg7JCC2n7C2rerRDNbI5Pa8deBNxSHKo4lc5XcP3YrGC5rWRg
+	 dMBGFGqVeiNlo53ZOppmK0QAztpoPKjAPDZcG5ApfuoxhmPKe15eeR5JNx+zVKugdfw==
+ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1794045897;
+	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
+	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:Content-Type:MIME-Version:
+	 Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=XUPg10dpr+93518rRvQF07yDi5ZlX/se5D5TjdqHFOo=;
+	b=UtZbBRy15wO+zhNWWTycCAm5nmTcrD/0Owh2HkNzqy5vHz8uNbkEBHIOpenjnG5rsZH4
+	 36FCoRbPzEq2CWi0lOYg3LrbzqXUMlV7F9WBssxd9pktDN4TclsER9QzlIfHmtV1hAqMW
+	 Zih/x77Xb8kvTKlsXw5iYFCw37hOp2F0J0wvK3AQJXXw+MdN9kQqqlgJBKLPeC7D856aQ
+	 WBNYIMqzu9ubT/gGlt2G1veVGQihVtPuSR7pMG2vpCbbAiq9CcC9htHcl4VWqmWXRPWJV
+	 ga4nRpQWVDf77Cg/0lteVfOKaULBqRbUcSbIu+kM0Y0FhiXI6PISi0QJ3jk3LRnCHTQ==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	arc=none smtp.remote-ip=140.211.166.142
+X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=lists.u-boot-project.org; s=default; t=1794045897;
+	bh=XUPg10dpr+93518rRvQF07yDi5ZlX/se5D5TjdqHFOo=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=SiYMn7jsIhz4n4ctx7nAIOjl6ZU5THXK1n8eUL4SJAxJ5uhntrsQpAJiXhDfAEqLC
+	 wQm7gsngeMQERe8wKb2YG+oytCIYcOTB8DbzAAdCrSaFvqSGAVJyTKQMsOi1gEK4a7
+	 la3VAYr2DdEcc11Elow1gvkGvD9ZP3M+TI9S8T+5Fs2fsUh4gliTYgKXRCBxBV6RCN
+	 3TSAZE4Y9SAIGqiCShmLV3jj8Sdw1uNwp9q5B3CtQGv7VBqtFeolECjg5diW7ljzBQ
+	 bxAS851ImnrR/NMa5D3C3WSlvLZibmG3crcVcqnMfZYc/GdJl+JdB5RNRWKZwmdSRz
+	 Uc0ZlhwbnZygA==
+Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3D237406EF;
+	Sat,  7 Nov 2026 10:04:57 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 406251C6
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 10:04:56 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 25EC580F4D
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 10:04:56 +0000 (UTC)
+X-Virus-Scanned: amavis at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dee4sirIvLY5 for <u-boot@lists.u-boot-project.org>;
+ Sat,  7 Nov 2026 10:04:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0294D80F3E
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=80.241.56.172
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.172;
+ helo=mout-p-202.mailbox.org; envelope-from=stefan.roese@mailbox.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=none (p=none dis=none) header.from=pigmoral.tech
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=pigmoral.tech header.i=@pigmoral.tech
- header.a=rsa-sha256 header.s=zmail header.b=nshTAWHa
-Received: from sender5-op-o15.zoho.com (sender5-op-o15.zoho.com
- [165.173.182.15])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8776B406A0
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 09:11:52 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256;
- b=nshTAWHa21LW1m1oZ5MG1mAjqn8c+jVzIM3PzD1scbFlN0VSgqiSRdRh+0H15BnRfbAhGK0npAybR+kLxmlBEK/5xpXZooduzxY0p2e2Q92RjPNNli+xRCdiW2R3huHTqKLRQsloOS4OUsC9SraGYPdn3XoDdt76uTfXBmCgrg0=;
- c=relaxed/relaxed; s=zmail; d=pigmoral.tech; v=1;
- bh=2kihS9aSK74km2BzdmgciEIJLg1Zp5hcZNM5ac9I9H4=;
- h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1794042674503543.9601163387505;
- Sat, 7 Nov 2026 01:11:14 -0800 (PST)
-X-Archived-By: <archiver.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
+ header.s=mail20150812 header.b=aObjDsMe
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0294D80F3E
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 10:04:53 +0000 (UTC)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4jMBVV3yG4zMlT6;
+ Sat, 07 Nov 2026 11:04:50 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1794045890;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=XUPg10dpr+93518rRvQF07yDi5ZlX/se5D5TjdqHFOo=;
+ b=aObjDsMec3HszQUfQbU72+vhTS+noZuseNWAGl3n+32KkPaSQqxrrQFN91ObQipuxr3rKl
+ 3207GTyLaWKz389fcUi5gHgO1QGeUd4YZgu6PMoIeg15e4xi8JYXDy+3/X8O+fpWG2aveH
+ SjJNIt52Fah5TkpFm8BZlkG7NQ4qPW1fTWLHus1rRuHZ26rwqyAi+TGPpa1c3ppt9f9yAK
+ BgVFJgh2eqQ2GUsTPiprIzUR12jSjVz7VFZzV/n61dMe2QHHmjOLPJOz+0aRoeqyn+dOfP
+ KmgA+uZ51x3IR7cV1kjkSNC9XVIzBdfvs3Tz8eX+fAbZnm+n+wS+JJZyzbZhLw==
+From: Stefan Roese <stefan.roese@mailbox.org>
+To: Igor Velkov <iav@iav.lv>, Tom Rini <trini@konsulko.com>,
+ Aaron Williams <awilliams@marvell.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Chris Packham <judge.packham@gmail.com>,
+ Robert Marko <robert.marko@sartura.hr>, Baruch Siach <baruch@tkos.co.il>,
+ u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH 2/2] arm: mvebu: set up the AHCI controller that is being
+ probed
+Date: Sat,  7 Nov 2026 11:04:46 +0100
+Message-ID: <20261107100447.2091502-2-stefan.roese@mailbox.org>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261003-ahci-mvebu-windows-v1-2-e382f73fc299@iav.lv>
+References: <20261003-ahci-mvebu-windows-v1-0-e382f73fc299@iav.lv>
+ <20261003-ahci-mvebu-windows-v1-2-e382f73fc299@iav.lv>
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 07 Nov 2026 17:11:09 +0800
-Message-Id: <DMOV1SBS6QJO.MFJO4I90QL0P@pigmoral.tech>
-Cc: "Andre Przywara" <andre.przywara@arm.com>, "Tim Ouyang"
- <tim609@andestech.com>, "Leo Liang" <leo.liang@sifive.com>, "Yao Zi"
- <me@ziyao.cc>, "Peng Fan" <peng.fan@nxp.com>, "Jaehoon Chung"
- <jh80.chung@samsung.com>, "Lukasz Majewski" <lukma@nabladev.com>, "Stefan
- Roese" <stefan.roese@mailbox.org>, "Samuel Holland" <samuel@sholland.org>,
- "Tom Rini" <trini@konsulko.com>
-Subject: Re: [PATCH 01/10] riscv: cpu: add Allwinner D1/D1s(F133) CPU support
-From: "Junhui Liu" <junhui.liu@pigmoral.tech>
-To: "Indrek Kruusa" <indrek.kruusa@gmail.com>,
- <u-boot@lists.u-boot-project.org>
-X-Mailer: aerc 0.22.0
-References: <20261101210449.1235102-1-indrek.kruusa@gmail.com>
- <20261101210449.1235102-2-indrek.kruusa@gmail.com>
-In-Reply-To: <20261101210449.1235102-2-indrek.kruusa@gmail.com>
-X-ZohoMailClient: External
+X-Archived-By: <archiver.kernel.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: b48a8j8odsxryqwehe6hrqnpco7f5jmr
+X-MBO-RS-ID: 7435464a00a9cf86653
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -120,248 +131,33 @@ List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Indrek,
+On 10/3/26 07:36, Igor Velkov wrote:
 
-Thanks for your work. I'm very happy to finally see someone proposing
-this work. But for most of the T-Head/XuanTie CPU support, I think it is
-better to make it common code instead of keeping it private to sun20i.
-
-On Mon Nov 2, 2026 at 5:04 AM CST, Indrek Kruusa wrote:
-> Add the C906 support for the D1/D1s(F133) SoCs:
+> From: Igor Velkov <iav@iav.lv>
 >
-> - T-Head cache operations from the custom cache instructions
-> - harts_early_init() programming MXSTATUS, MHCR and MHINT
-> - cleanup_before_linux() disabling interrupts and flushing the caches
-> - dram_init() from the device tree memory nodes
-> - the T-Head CSR, CCU clock and memory map headers
-> - SUN20I Kconfig (cache line size, T-Head CMO support)
+> board_ahci_enable() sets the DRAM windows and the regret bit only at
+> MVEBU_SATA0_BASE, the first controller (sata@a8000), but the generic AHCI
+> driver calls it before probing each controller. On Armada 388 the second
+> controller, sata@e0000, is left without these windows, so its DMA does not
+> reach DRAM: the link comes up, the first command never completes and
+> scsi scan hangs.
 >
-> Signed-off-by: Indrek Kruusa <indrek.kruusa@gmail.com>
-> ---
->  arch/riscv/Kconfig                            |  1 +
->  arch/riscv/cpu/sun20i/Kconfig                 |  6 ++
->  arch/riscv/cpu/sun20i/Makefile                |  5 ++
->  arch/riscv/cpu/sun20i/cache.c                 | 88 +++++++++++++++++++
->  arch/riscv/cpu/sun20i/cpu.c                   | 44 ++++++++++
->  arch/riscv/cpu/sun20i/dram.c                  | 21 +++++
->  arch/riscv/include/asm/arch-sun20i/clock.h    | 71 +++++++++++++++
->  arch/riscv/include/asm/arch-sun20i/cpu.h      | 18 ++++
->  .../riscv/include/asm/arch-sun20i/thead_csr.h | 29 ++++++
->  9 files changed, 283 insertions(+)
->  create mode 100644 arch/riscv/cpu/sun20i/Kconfig
->  create mode 100644 arch/riscv/cpu/sun20i/Makefile
->  create mode 100644 arch/riscv/cpu/sun20i/cache.c
->  create mode 100644 arch/riscv/cpu/sun20i/cpu.c
->  create mode 100644 arch/riscv/cpu/sun20i/dram.c
->  create mode 100644 arch/riscv/include/asm/arch-sun20i/clock.h
->  create mode 100644 arch/riscv/include/asm/arch-sun20i/cpu.h
->  create mode 100644 arch/riscv/include/asm/arch-sun20i/thead_csr.h
+> Use the address of the controller being probed. MVEBU_SATA0_BASE has no
+> other user, drop it.
 >
-> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-> index 386241efd4a..14c8ca817fb 100644
-> --- a/arch/riscv/Kconfig
-> +++ b/arch/riscv/Kconfig
-> @@ -144,6 +144,7 @@ source "arch/riscv/cpu/jh7110/Kconfig"
->  source "arch/riscv/cpu/k1/Kconfig"
->  source "arch/riscv/cpu/k3/Kconfig"
->  source "arch/riscv/cpu/k230/Kconfig"
-> +source "arch/riscv/cpu/sun20i/Kconfig"
->  source "arch/riscv/cpu/th1520/Kconfig"
-> =20
->  # architecture-specific options below
-> diff --git a/arch/riscv/cpu/sun20i/Kconfig b/arch/riscv/cpu/sun20i/Kconfi=
-g
-> new file mode 100644
-> index 00000000000..7f459518cfe
-> --- /dev/null
-> +++ b/arch/riscv/cpu/sun20i/Kconfig
-> @@ -0,0 +1,6 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +config SUN20I
-> +	bool
-> +	select SYS_CACHE_SHIFT_6
-> +	select SYS_CACHE_THEAD_CMO if !SYS_DCACHE_OFF
-> diff --git a/arch/riscv/cpu/sun20i/Makefile b/arch/riscv/cpu/sun20i/Makef=
-ile
-> new file mode 100644
-> index 00000000000..556aa842ec1
-> --- /dev/null
-> +++ b/arch/riscv/cpu/sun20i/Makefile
-> @@ -0,0 +1,5 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +obj-y +=3D cache.o
-> +obj-y +=3D cpu.o
-> +obj-y +=3D dram.o
-> diff --git a/arch/riscv/cpu/sun20i/cache.c b/arch/riscv/cpu/sun20i/cache.=
-c
-> new file mode 100644
-> index 00000000000..c961eded109
-> --- /dev/null
-> +++ b/arch/riscv/cpu/sun20i/cache.c
-> @@ -0,0 +1,88 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2026, Indrek Kruusa <indrek.kruusa@gmail.com>
-> + *
-> + * T-Head C906 cache operations for the Allwinner D1 (sun20i).
-> + */
-> +
-> +#include <asm/arch/thead_csr.h>
-> +#include <asm/cache.h>
-> +#include <asm/csr.h>
-> +#include <cpu_func.h>
-> +#include <linux/bitops.h>
-> +
-> +/*
-> + * T-Head cache maintenance instructions, emitted as raw encodings becau=
-se the
-> + * assembler does not know them: dcache.ciall (write back and invalidate=
- all),
-> + * dcache.iall (invalidate all), icache.ipa (invalidate the line holding=
- the
-> + * physical address in a0) and sync.i (wait for the operation to complet=
-e).
-> + * They only decode while MXSTATUS.THEADISAEE is set, which harts_early_=
-init()
-> + * does before any of them is used.
-> + */
-> +#define THEAD_SYNC_I            ".long 0x01a0000b"
-> +#define THEAD_DCACHE_CIALL      ".long 0x0030000b"
-> +#define THEAD_DCACHE_IALL       ".long 0x0020000b"
-> +#define THEAD_ICACHE_IPA_A0     ".long 0x0385000b"
-> +
-> +static inline void sync_i(void)
-> +{
-> +	asm volatile (THEAD_SYNC_I ::: "memory");
-> +}
-> +
-> +void flush_dcache_all(void)
-> +{
-> +	asm volatile (THEAD_DCACHE_CIALL ::: "memory");
-> +	sync_i();
-> +}
-> +
-> +void invalidate_dcache_all(void)
-> +{
-> +	asm volatile (THEAD_DCACHE_IALL ::: "memory");
-> +	sync_i();
-> +}
-> +
-> +void invalidate_icache_range(unsigned long start, unsigned long end)
-> +{
-> +	register ulong addr asm ("a0") =3D start & -CONFIG_SYS_CACHELINE_SIZE;
-> +
-> +	for (; addr < end; addr +=3D CONFIG_SYS_CACHELINE_SIZE)
-> +		asm volatile (THEAD_ICACHE_IPA_A0 :: "r" (addr) : "memory");
-> +	sync_i();
-> +}
+> Tested on Helios4, whose disk is on the second controller: without this
+> change scsi scan hangs; with it the disk is found, and blocks read in
+> U-Boot have the same CRC32 as when read from Linux.
+>
+> Signed-off-by: Igor Velkov <iav@iav.lv>
 
-For these cache operations, arch/riscv/lib/thead_cmo.c already contains
-the D-cache range operations. The D-cache all operations and I-cache
-operations added here are common T-Head/XuanTie CMO operations, so I
-think it's better to add them to that common file instead of being
-implemented under sun20i.
+Applied to u-boot-marvell/main
 
-> +
-> +#if CONFIG_IS_ENABLED(RISCV_MMODE)
-> +
-> +void icache_enable(void)
-> +{
-> +	invalidate_icache_all();
-> +	csr_set(CSR_MHCR, MHCR_IE);
-> +}
-> +
-> +void icache_disable(void)
-> +{
-> +	csr_clear(CSR_MHCR, MHCR_IE);
-> +}
-> +
-> +int icache_status(void)
-> +{
-> +	return csr_read(CSR_MHCR) & MHCR_IE;
-> +}
-> +
-> +void dcache_enable(void)
-> +{
-> +	invalidate_dcache_all();
-> +	csr_set(CSR_MHCR, MHCR_DE);
-> +}
-> +
-> +void dcache_disable(void)
-> +{
-> +	flush_dcache_all();
-> +	csr_clear(CSR_MHCR, MHCR_DE);
-> +}
-> +
-> +int dcache_status(void)
-> +{
-> +	return csr_read(CSR_MHCR) & MHCR_DE;
-> +}
-> +
-> +#endif
-
-For this part, arch/riscv/cpu/th1520/cache.c already has related
-functions. Can we extract them into a common file, for example
-arch/riscv/lib/thead_cache.c, and provide a THEAD_CACHE config for the
-platforms that need it to select?
-
-[...]
-
-> diff --git a/arch/riscv/include/asm/arch-sun20i/thead_csr.h b/arch/riscv/=
-include/asm/arch-sun20i/thead_csr.h
-> new file mode 100644
-> index 00000000000..4d6e15aab1c
-> --- /dev/null
-> +++ b/arch/riscv/include/asm/arch-sun20i/thead_csr.h
-> @@ -0,0 +1,29 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (C) 2026, Indrek Kruusa <indrek.kruusa@gmail.com>
-> + *
-> + * T-Head C906 CSR definitions for the Allwinner D1 (sun20i).
-> + */
-> +
-> +#ifndef _ASM_RISCV_ARCH_THEAD_CSR_H
-> +#define _ASM_RISCV_ARCH_THEAD_CSR_H
-> +
-> +#define CSR_MXSTATUS            0x7c0
-> +#define CSR_MHCR                0x7c1
-> +#define CSR_MHINT               0x7c5
-> +
-> +#define MXSTATUS_THEADISAEE     BIT(22) /* T-HEAD ISA extensions enable =
-*/
-> +#define MXSTATUS_MAEE           BIT(21) /* MMU honours the PTE memory ty=
-pe */
-> +#define MXSTATUS_MM             BIT(15) /* misaligned access enable */
-> +
-> +#define MHCR_IE                 BIT(0)  /* icache enable */
-> +#define MHCR_DE                 BIT(1)  /* dcache enable */
-> +#define MHCR_WA                 BIT(2)  /* dcache write allocate */
-> +#define MHCR_RS                 BIT(4)  /* return stack enable */
-> +#define MHCR_BPE                BIT(5)  /* branch prediction enable */
-> +#define MHCR_BTB_C906           BIT(6)  /* branch target prediction enab=
-le */
-> +
-> +#define MHINT_IPLD              BIT(8)  /* icache prefetch enable */
-> +#define MHINT_IWPE              BIT(9)  /* icache way prediction enable =
-*/
-> +
-> +#endif /* _ASM_RISCV_ARCH_THEAD_CSR_H */
-
-A number of these CSR definitions already exist in
-arch/riscv/cpu/th1520/spl.c and arch/riscv/cpu/th1520/cache.c. Can the
-common register numbers and bitfields be moved into a common header,
-such as arch/riscv/include/asm/thead_csr.h, instead of placing them
-under arch-sun20i?
-
---=20
-Best regards,
-Junhui Liu
+Thanks,
+Stefan
