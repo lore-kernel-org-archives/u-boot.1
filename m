@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B14E3606A326
-	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 12:51:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F340606A326
+	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 12:51:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=d/Yydjkf;
-	dkim=pass (1024-bit key) header.d=student.uibk.ac.at header.i=@student.uibk.ac.at header.a=rsa-sha256 header.s=prod24a header.b=mloM7iHe
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=LTjRoSJq;
+	dkim=pass (1024-bit key) header.d=student.uibk.ac.at header.i=@student.uibk.ac.at header.a=rsa-sha256 header.s=prod24a header.b=POSZjLfw
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 83ED381826;
-	Sat,  7 Nov 2026 12:51:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 133778186E;
+	Sat,  7 Nov 2026 12:51:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SzAo5Z3tO_3g; Sat,  7 Nov 2026 12:51:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2EF8281836
+ id 07v9hnjCg8z2; Sat,  7 Nov 2026 12:51:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BA48B81697
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794055870;
-	b=USCVNB+X5fStEh0nKflbAiywElRDaikg/yHUSYaigXVakWHgcrYjoBa1mppk7aGN7KoM
-	 eaWaJ1F+GdFHdMASds0b7URMY1afSAq9hZ0WhVie4TyHMtippM5oRNFL7rzHdAh7pzJsQ
-	 SXU5uWTqE44H7xqtkrKISu6OwGw6zwP/XAjuVY8ehC3XHtV5bxtjO/aCVxSOXq0s7tuzi
-	 lnAYThY+xSsYw1PJIbhqXmbWeF7B8sbVr7sjK0Q5PCWBzI+BCxF5zTOXOjorgzm2qXcrn
-	 Fl1wwicJE/nlPYakHzXa/ofyyIzDCi3tnfDSNHBdVPldnibHWwPjBoGfnyjfbEWqjcw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794055873;
+	b=gtkHiwqPe1HGaubh2MbSA5wgdNT4MmyYO5/0jdxP/k0yPhAQoYXCE9/mTPP1MBLnPoDK
+	 TcUp9qLt4qOm0Sv+4u5RTYUKpoHwH3/g0kfC8y/MS9Wsz/7tjW+0RE5uT9bbsEGOH/lZG
+	 aTpv2zuJS5lA2M9JWMCLo2T21sdA5ZvC/dyd5bG13hM085CwFQxOtVIiUzL9lwTuk1dyr
+	 bGTHzCtsSM/sOAOP71hF27QELFDIK/umQz128IFG+kvgVVmceUV+JfOxY8yn5xSPQMfa6
+	 SSf/ZetgBQpJYrXHVMNtuhRq/0ata4C8kCrFscGqicCG0ryvdCTKT2Vvmznv5FMkafQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794055870;
+	c=relaxed/relaxed; t=1794055873;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,42 +32,42 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-Scanned-By:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=HnzP+jkt9OuWpF84SzdipUvTuKRX0DYCM+b2SrjJxj0=;
-	b=Zx0lysimgL7YxNh7IRi4F4Zl9IZwMLgKx446nPIiVX5bDDfRxEeIAcRYsWuLaUg2dFZ4
-	 CSEyUrEO9CRSwoMp7F96nm7EwvlvAXjBvSROzQjpOENP5oGYTLsZE9n80NLeJanRPlfEW
-	 a1wAxN9o8qbA2N4jewCJwT9LjoGnIM1t0VqDfsTSrsoWH1+EAnXhNeTVg+Hr3lQRs3J8X
-	 5WB8f+l3hmRlrBQBjIqkHyFMoM+iRvHC30BvyeitXHIzbzntaTxO32N06gvoGsDwRaouR
-	 dCZwAGM3YnRM41gWT4gNLrHH/s7y90DjBS+M5OjqzLmlWUWqrQziyWPybNIVtpdSJNA==
+	bh=pV6GtlYR7TF3sTkGq2vlTZhJnO61EmFvAI+0dDGBzSY=;
+	b=CsnuaqJyLqnpZeV0ld8v6OJg1kXdsHQDE7+t8DLwWH0IHDLzdia7NJ8aO2Fbxw68nAAl
+	 RiIQ6zFImwoiBVcV8gKb0n9T6xQuW1jUJ/DxhIFByc2e9pPg5+y36YODRnJrV95/j+D3U
+	 mEAJcLMjRYOsHgL6LudXwopJrUhfwJxOm4C7fSoqkzPPNyw8zNdzrmtqKzg56rm9ewbZJ
+	 rpEoL99gSMVWsG+N9tHi1bcNLuQq05YAbpgnSAKCAm1ei18YrUYwH82Sm9MXgoION1oDt
+	 rFSaCGQGrn7IWtnwVEo/GMo4feB3XXXtDz2RMTtyCR5hVr9bhr+AX06XR6ppQPmx11w==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794055870;
-	bh=HnzP+jkt9OuWpF84SzdipUvTuKRX0DYCM+b2SrjJxj0=;
+	d=lists.u-boot-project.org; s=default; t=1794055873;
+	bh=pV6GtlYR7TF3sTkGq2vlTZhJnO61EmFvAI+0dDGBzSY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=d/Yydjkf7q7w8L7z0/cBai4W6nuVS4l0ZNs0m5xWwzh3aQrGi9JKC127erw4TBIBh
-	 MO36a47+vmxF8PUJtMpps2xJRUz5XQdgWXw4wthC8nBokfQkTbm5eWoyTPgh26Rlf4
-	 A9SNCIgWpnUMVEhYhAYrJIyunAhLSFYOiO/fQr3VOvivPBLm3Atz4qqTFLaCZxcQSX
-	 gn1k7a/TwlWEiOqMsQm14xB6tMbZrbJ5daP/AGRmk6G5EPibs/IgOHO76aEHGzSYfd
-	 k5JPS6yVz+JxEpAaiK5/cjDEAyGbR4IQ0r2y0iqKOlohRNMwQ6efdLkYTFo21kkXto
-	 booFmQ4nVNfsQ==
+	b=LTjRoSJqukAHBYBP4fJfVqybfL8PrdmM5ZFdX5065XUcZfcz99xZ5q/ygsoPvH8i8
+	 05CHY5mBD0K35yJgY5Kp84TBDOHIb4gO173KebGXKhOhwcNZgrgf7ZO+dkDJMEaTmK
+	 zBRxsS8jBUb6KTOzd4r4e4N59ILD/7rzo2EE5kXbJ36rVkZq+mq+3j+KFN3oqRuA49
+	 kvJDzyuYER3vPnvQtmN9Zxzu41ScBz7+HYcWH08RM5rCdiSp/LwYPP/bgGAePRu8vp
+	 W2ZZ1JTvtNEQzGQsN0Wp32vArBamoxbzhNqAeazrOTFQ0zvy1Ne/+CctmVBkOw61TY
+	 ba1R1h+MFlniQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2EF8281836;
-	Sat,  7 Nov 2026 12:51:10 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id C971C2E5
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 11:54:33 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BA48B81697;
+	Sat,  7 Nov 2026 12:51:12 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id DB321211
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 11:54:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id BAD6F400BB
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 11:54:33 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id C195E400BB
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 11:54:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fDK7IMH1-nTC for <u-boot@lists.u-boot-project.org>;
- Sat,  7 Nov 2026 11:54:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 7896B4009B
+ id BpwX89vKtOZK for <u-boot@lists.u-boot-project.org>;
+ Sat,  7 Nov 2026 11:54:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org D67174009B
 Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=138.232.1.142
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=138.232.1.142;
  helo=lmr1.uibk.ac.at; envelope-from=christian.koever-draxl@student.uibk.ac.at;
@@ -77,33 +77,32 @@ Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=student.uibk.ac.at
  header.i=@student.uibk.ac.at header.a=rsa-sha256 header.s=prod24a
- header.b=mloM7iHe
+ header.b=POSZjLfw
 Received: from lmr1.uibk.ac.at (lmr1.uibk.ac.at [138.232.1.142])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7896B4009B
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 11:54:32 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D67174009B
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 11:54:33 +0000 (UTC)
 Received: from surface-pro-5 (178.115.47.78.wireless.dyn.drei.com
  [178.115.47.78]) (authenticated bits=0)
- by smtp.uibk.ac.at (8.15.2/8.15.2/F1) with ESMTPSA id 6A7Bivmr711658
+ by smtp.uibk.ac.at (8.15.2/8.15.2/F1) with ESMTPSA id 6A7Bivn1711658
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Sat, 7 Nov 2026 12:45:07 +0100
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp.uibk.ac.at 6A7Bivmr711658
+ Sat, 7 Nov 2026 12:45:18 +0100
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp.uibk.ac.at 6A7Bivn1711658
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=student.uibk.ac.at;
- s=prod24a; t=1794051907;
- bh=HnzP+jkt9OuWpF84SzdipUvTuKRX0DYCM+b2SrjJxj0=;
+ s=prod24a; t=1794051919;
+ bh=pV6GtlYR7TF3sTkGq2vlTZhJnO61EmFvAI+0dDGBzSY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=mloM7iHenuGwhgE3Gak+1TjQhGhYaQmYfgwqcfpDV2s1wuaTa3p5hrWaC6gxQAA4U
- D01T4ciEot4BGgCmirRTKSudVtrv8O5cWQev9pWbXkA0EWYluvWyMtePgoIZis3doi
- K9gP5RScSYFchE2bReC5TPQgRca8HN8EzAhargoY=
+ b=POSZjLfwh4R+J1MAAO51NPEGmuqDQP2lWEcXTTuJ50h4KfiTNhzC2NEfwpaPBq+JR
+ dcYqTGlt62ippQ7tOhN+V8oa9bQ+TthQ8MC4Jkqova9zPQqNfY6KmDcHqMeHbYfA8A
+ VIHfOmFQiHYbzp+uu3Arg1j+1eBZ1ZCU+7QXPGsU=
 From: christian.koever-draxl@student.uibk.ac.at
 To: u-boot@lists.u-boot-project.org
 Cc: trini@konsulko.com, patrice.chotard@foss.st.com,
  patrick.delaunay@foss.st.com, uboot-stm32@st-md-mailman.stormreply.com,
  =?UTF-8?q?Christian=20Stefan=20K=C3=B6v=C3=A9r-Draxl?= <ckoever@outlook.de>,
  "Claude Opus 5.5" <noreply@anthropic.com>
-Subject: [RFC PATCH 02/10] dt-bindings: clock: add STM32L4 RCC clock and reset
- identifiers
-Date: Sat,  7 Nov 2026 12:44:47 +0100
-Message-ID: <20261107114455.304896-3-christian.koever-draxl@student.uibk.ac.at>
+Subject: [RFC PATCH 10/10] board: st: stm32l4r5zi-nucleo: enable bootapp
+Date: Sat,  7 Nov 2026 12:44:55 +0100
+Message-ID: <20261107114455.304896-11-christian.koever-draxl@student.uibk.ac.at>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261107114455.304896-1-christian.koever-draxl@student.uibk.ac.at>
 References: <20261107114455.304896-1-christian.koever-draxl@student.uibk.ac.at>
@@ -125,16 +124,15 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Christian Stefan Kövér-Draxl <ckoever@outlook.de>
 
-Add identifiers for the STM32L4/L4+ RCC. Peripheral clock gates and
-reset lines are both encoded as (register offset * 8 + bit), the
-encoding the generic stm32_rcc_reset driver already decodes, plus four
-bus clocks (SYSCLK, HCLK, PCLK1, PCLK2).
+Enable the bootapp command and let it accept vector tables in the
+internal flash, where applications are placed right after U-Boot
+(0x08040000). Document how to start them.
 
 This patch was written with heavy use of an AI coding assistant
 (Claude Code, model Claude Opus 5.5), reviewed by the submitter and
@@ -143,60 +141,75 @@ tested on a NUCLEO-L4R5ZI; see the cover letter for details.
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 Signed-off-by: Christian Stefan Kövér-Draxl <ckoever@outlook.de>
 ---
- include/dt-bindings/clock/stm32l4-clock.h | 44 +++++++++++++++++++++++
- 1 file changed, 44 insertions(+)
- create mode 100644 include/dt-bindings/clock/stm32l4-clock.h
+ board/st/stm32l4r5zi-nucleo/stm32l4r5zi-nucleo.c | 15 +++++++++++++++
+ configs/stm32l4r5zi-nucleo_defconfig             |  1 +
+ doc/board/st/stm32_MCU.rst                       | 11 +++++++++++
+ 3 files changed, 27 insertions(+)
 
-diff --git a/include/dt-bindings/clock/stm32l4-clock.h b/include/dt-bindings/clock/stm32l4-clock.h
-new file mode 100644
-index 00000000..e2fc2565
---- /dev/null
-+++ b/include/dt-bindings/clock/stm32l4-clock.h
-@@ -0,0 +1,44 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-+/*
-+ * Copyright (C) 2026
-+ * Author(s): Christian Stefan Kövér-Draxl <ckoever@outlook.de>
-+ *
-+ * Clock and reset identifiers for the STM32L4/L4+ RCC (U-Boot local
-+ * binding). Reference: RM0432 section 6.4 "RCC registers".
-+ *
-+ * Peripheral clock gates and reset lines are both encoded as
-+ * (register byte offset * 8 + bit), so that the generic stm32_rcc_reset
-+ * driver and the clk-stm32l4 driver can decode them the same way.
-+ *
-+ *   clocks = <&rcc STM32L4_APB1ENR2(0)>;	LPUART1EN
-+ *   resets = <&rcc STM32L4_APB1RSTR2(0)>;	LPUART1RST
-+ */
+diff --git a/board/st/stm32l4r5zi-nucleo/stm32l4r5zi-nucleo.c b/board/st/stm32l4r5zi-nucleo/stm32l4r5zi-nucleo.c
+index 5854e757..ee9a14b6 100644
+--- a/board/st/stm32l4r5zi-nucleo/stm32l4r5zi-nucleo.c
++++ b/board/st/stm32l4r5zi-nucleo/stm32l4r5zi-nucleo.c
+@@ -13,6 +13,10 @@
+ #include <vsprintf.h>
+ #include <asm/io.h>
+ #include <asm/arch/stm32.h>
++#include <asm/global_data.h>
++#include <linux/sizes.h>
 +
-+#ifndef _DT_BINDINGS_CLOCK_STM32L4_H
-+#define _DT_BINDINGS_CLOCK_STM32L4_H
++DECLARE_GLOBAL_DATA_PTR;
+ 
+ /*
+  * U-Boot keeps its stack, malloc area and device tree in SRAM1 + SRAM2;
+@@ -35,6 +39,17 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+ 	return STM32L4R5_SRAM3_BASE;
+ }
+ 
++/* bootapp: applications may also run from the internal flash */
++bool bootapp_addr_valid(ulong addr, ulong len)
++{
++	ulong size = (readl(STM32_FLASH_SIZE_REG) & 0xffff) * SZ_1K;
 +
-+#define STM32L4_RCC_ID(off, bit)	(((off) * 8) + (bit))
++	if (addr >= STM32_FLASH_BASE && addr - STM32_FLASH_BASE + len <= size)
++		return true;
 +
-+/* Reset registers */
-+#define STM32L4_AHB1RSTR(bit)		STM32L4_RCC_ID(0x28, bit)
-+#define STM32L4_AHB2RSTR(bit)		STM32L4_RCC_ID(0x2c, bit)
-+#define STM32L4_AHB3RSTR(bit)		STM32L4_RCC_ID(0x30, bit)
-+#define STM32L4_APB1RSTR1(bit)		STM32L4_RCC_ID(0x38, bit)
-+#define STM32L4_APB1RSTR2(bit)		STM32L4_RCC_ID(0x3c, bit)
-+#define STM32L4_APB2RSTR(bit)		STM32L4_RCC_ID(0x40, bit)
++	return addr >= gd->ram_base && addr - gd->ram_base + len <= gd->ram_size;
++}
 +
-+/* Clock enable registers */
-+#define STM32L4_AHB1ENR(bit)		STM32L4_RCC_ID(0x48, bit)
-+#define STM32L4_AHB2ENR(bit)		STM32L4_RCC_ID(0x4c, bit)
-+#define STM32L4_AHB3ENR(bit)		STM32L4_RCC_ID(0x50, bit)
-+#define STM32L4_APB1ENR1(bit)		STM32L4_RCC_ID(0x58, bit)
-+#define STM32L4_APB1ENR2(bit)		STM32L4_RCC_ID(0x5c, bit)
-+#define STM32L4_APB2ENR(bit)		STM32L4_RCC_ID(0x60, bit)
+ int board_early_init_f(void)
+ {
+ 	struct udevice *dev;
+diff --git a/configs/stm32l4r5zi-nucleo_defconfig b/configs/stm32l4r5zi-nucleo_defconfig
+index c57cdb3a..da3e0e06 100644
+--- a/configs/stm32l4r5zi-nucleo_defconfig
++++ b/configs/stm32l4r5zi-nucleo_defconfig
+@@ -22,6 +22,7 @@ CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_MISC_INIT_R=y
+ CONFIG_HUSH_PARSER=y
+ CONFIG_SYS_PROMPT="U-Boot > "
++CONFIG_CMD_BOOTAPP=y
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_GPIO=y
+ # CONFIG_CMD_SETEXPR is not set
+diff --git a/doc/board/st/stm32_MCU.rst b/doc/board/st/stm32_MCU.rst
+index 25965674..a521df7f 100644
+--- a/doc/board/st/stm32_MCU.rst
++++ b/doc/board/st/stm32_MCU.rst
+@@ -198,3 +198,14 @@ not relocated. Its stack, malloc area and device tree stay in SRAM1 + SRAM2;
+ SRAM3 (0x20040000 - 0x2009ffff) is left free for applications.
+ 
+ The console is LPUART1, connected to the ST-Link virtual COM port.
 +
-+/* Bus clocks (no gate); placed above the register space */
-+#define STM32L4_CLK_SYSCLK		0x1000
-+#define STM32L4_CLK_HCLK		0x1001
-+#define STM32L4_CLK_PCLK1		0x1002
-+#define STM32L4_CLK_PCLK2		0x1003
++Bare-metal applications linked to run from reset at 0x08040000 (vector table
++first) are started with::
 +
-+#endif /* _DT_BINDINGS_CLOCK_STM32L4_H */
++  => bootapp 0x08040000
++
++bootapp checks the stack pointer and reset vector in the vector table, then
++disables interrupts, SysTick and the MPU, sets VTOR and MSP and jumps to the
++reset handler. The application inherits the clock tree set up by U-Boot
++(SYSCLK 120 MHz from the PLL) and must enable interrupts itself.
++
 -- 
 2.56.0
 
