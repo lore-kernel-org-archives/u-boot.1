@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D569606A335
-	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 14:33:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18738606A332
+	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 14:33:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=MvC31Agz;
-	dkim=pass (1024-bit key) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=QRk5/KH9
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=bGWBBqGi;
+	dkim=pass (1024-bit key) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=CnHPsotx
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 733C2607D2;
-	Sat,  7 Nov 2026 14:33:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E61C781671;
+	Sat,  7 Nov 2026 14:33:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HYDGpu9pis55; Sat,  7 Nov 2026 14:33:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 9408C607FB
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794061988;
-	b=fA/+0FCb1TbucuDirU2xt6rinVsTEizjvdKJNA6zqTHqqnFJ8pj9AG8kUOyYuVGemWTH
-	 YqMR4uMYHQ6jKBe/9D5lu5NgN7yD5nGwucmazJlnyZmJqy6Cqfq0CnWVm+t2eiNe45CpL
-	 eev+2G48e1enHXb7EwYEC6aGu0kw9wlkli+uHBZtaLglB0YJ/qpfaYCsFQFzr1+ld0uuf
-	 R9O9Nc3V+Hf9yjxFSFrtF2kmdSUqxJzxN/PyFnBOwCKVz15i0SsjxEDneVrdvxpSQebLG
-	 snYWrbi8mu91Hq7yPycc5fNfi2kv1iUxKY4jK8HIjsPBzpxN66kegkf1o71OnqgRU2A==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id G-OPkTtbFiIm; Sat,  7 Nov 2026 14:33:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 48DB081655
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794061990;
+	b=pqJHJ2P+41doZgLIRAAE4W2WMtAgrnmfqUfKvDuLcDK8ovMSXQTMPm2JbssbyHy0hPkS
+	 3KdmT+3KiTdomi9qUYQPKba+TLXsFtbW3CSA9LpWgCFONEJv9jsqt/BD9mLzm4RVw+aV+
+	 k88s57VU+f6gmw2fE0yGjbDqiMSQ4XWQpgDu8A0IsNXqszc5Noz+IL2/FEHb9Lyee048u
+	 GusWXVOdZXG2yZfUUQIAKjsjT6mKqj3EFC9xXMPjK0hlISbQLbFrkXvTlrrXMEqzVRaJq
+	 HEoxDKaibSd3CIiGqhEd4ujgV7X1LJNLoHOyZLU66dN67xwU8HxCYEtYv0u/KR9LTZQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794061988;
+	c=relaxed/relaxed; t=1794061990;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,106 +33,108 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=/krHuJC9ShW9NcMkzIGR+6pdP2wDUKW50lQhoU1SG0A=;
-	b=EwDCaqhhpmTaeeA9m3LUczNIpqI2IHFiz+BJsmBIuWafS3v484FkE3Ypa+AcLjOsO10y
-	 Jj9NS/FenDHJZJEbKgi8q+LXjsvKN9JQhGn0HMHwUiOoDmZUwXe0HC1NHodOMsQNB1xdX
-	 5H5xFOidnHXdHWKvZiqsE6m/tXNotXxaHWZpyc3Mij/85A/VDXI6loAEnzeILw9wc2BcF
-	 pYRrU/eeXq5MxMNyj1bh3F5kYhFxCVcEOb+HVBV4i+9ty8Bejb6TWQcEvsDQEc+JSicaC
-	 QR+KvxWNG+tv6Q08qG3dK8CoWUYlKy5sND3ROO1nrnhnzDFNkfhsoPVozFAmdjOkZCA==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=fJG+SY80IKQjKhoqPH+1C9bBVUCowaqerSlez/bj1Cg=;
+	b=EOGq1aaAkdha7bfCvX2PPZLaQXmbUiPcuVdfWN7zeii5Xub11jmVeKWTJPiRcnKIMqwj
+	 L6ecLCfpGQYdcVlqvW94YlLgCG9pr5m7dlWX5J/Oy7fDsXT3Eh0Rko1reMSb0/pbxa1xL
+	 uXFcChRbyPrgLbV/fepmaviZnNCxFnhF106/mpt8ndOQzty/T8FeAjUfqVb8Pp9HnuuhS
+	 ElRGiWQ92rEyO1QvWCtPxRro5v5iJnfnFZR9l/EN2siVTMz0EOfXAb0P7Y8R6I4jeIsCu
+	 rmz5q3KmHYyuFJaeSPzWNlNNHJ/qg7A6YWLldO7EqaB3InJk3tRQrd5DFkID7w2Wiog==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	dmarc=pass header.from=amarulasolutions.com;
+	dkim=pass header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=CnHPsotx;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794061988;
-	bh=/krHuJC9ShW9NcMkzIGR+6pdP2wDUKW50lQhoU1SG0A=;
+	d=lists.u-boot-project.org; s=default; t=1794061990;
+	bh=fJG+SY80IKQjKhoqPH+1C9bBVUCowaqerSlez/bj1Cg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=MvC31Agz1voQkm78ChVNol0pIl2PYPT9XlEvIuOGspP5cfvlhgiu6EbrZVKGqwmet
-	 zhMKgZXRq5GtEguVJPgcXo8qEahoJAB3kfUt9l6JqSzOGYt681o8EiN6JP/VILVDpC
-	 H0l10ehlQN+S2GlmBo80yrl04Q+kKzrDM1EVX0jJ/9N2XAJDEOGOeJH8fYrNNcfpty
-	 /TSuPFAWgwnhmHMN1i61tDyJgGzAMpl+u9tPhLqLeRWi8rt8LUisixeCgHmP8Y2riV
-	 fWwQL/eDQaGgfpM8opYxMUxbAxWbrloK0kk1Jk01rAMskD++zvJCI0CFtsnl4eVwxk
-	 KNbeSP40WrtOw==
+	b=bGWBBqGiolWani7wLpGaGtOEVUcyGYBX10Gf7/DwWV1P+HZdyxEdkdGx+1Vg/lPUw
+	 27HLCVz3ic2zA34GrOz52AHgTtkC0NDr1XZa8fyANpptmEJE8t6Ww+4RkaiXgQmxh8
+	 bUw1B4QJUVlKVSQx6XPkO7bVJlOT/r8f2s1IqCtoZdQU2dHF9fzFNN+9Pia4sIB7X8
+	 KIEemiMW4WM6G2VuZ0giKfOEKrHbFD91/9AZjK9k3ZqoJaMOITVot1ttiB0v4lDssj
+	 BktMoCYJqyOwtdn2+xHxVbS/lsjYYzBXpEM+ra4FH/Lk7dVrcqTMpsVRX1SJVrkwoa
+	 PVH+9JUW3/icQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9408C607FB;
-	Sat,  7 Nov 2026 14:33:08 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 91C08211
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 14:33:01 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 48DB081655;
+	Sat,  7 Nov 2026 14:33:10 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 310CC34D
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 14:33:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6CC7F815CF
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 14:33:01 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 22211815CF
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 14:33:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Kr6vUTd6GnX8 for <u-boot@lists.u-boot-project.org>;
- Sat,  7 Nov 2026 14:33:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C5304815C5
+ id ZUCmMv0lwMin for <u-boot@lists.u-boot-project.org>;
+ Sat,  7 Nov 2026 14:33:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 76687815D8
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::332"
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32f"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::332; helo=mail-wm1-x332.google.com;
+ client-ip=2a00:1450:4864:20::32f; helo=mail-wm1-x32f.google.com;
  envelope-from=dario.binacchi@amarulasolutions.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (1024-bit key) header.d=amarulasolutions.com
  header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google
- header.b=QRk5/KH9
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- by smtp1.osuosl.org (Postfix) with ESMTPS id C5304815C5
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 14:32:59 +0000 (UTC)
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4a140e7405dso14914795e9.3
- for <u-boot@lists.u-boot-project.org>; Sat, 07 Nov 2026 06:32:59 -0800 (PST)
+ header.b=CnHPsotx
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 76687815D8
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 14:33:01 +0000 (UTC)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4a214c5c4c0so13018025e9.3
+ for <u-boot@lists.u-boot-project.org>; Sat, 07 Nov 2026 06:33:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1794061977; x=1794666777;
+ d=amarulasolutions.com; s=google; t=1794061980; x=1794666780;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=/krHuJC9ShW9NcMkzIGR+6pdP2wDUKW50lQhoU1SG0A=;
- b=QRk5/KH9U1BVQu1gzQ2nFba8ug3OgA1l8zGJB8KdlefWje7VgbV6chxb/R+HRXBI0Q
- Xe+wSfA+iKIpbI5vG/sZqXB4oa0/x/vShPm8OGGhdXZaNQkarrdkgEtx9Jn2PR9u+SjB
- izG+J4Pp3vHBYGj4pt9LqXE3sxVtUMGjEthBY=
+ bh=fJG+SY80IKQjKhoqPH+1C9bBVUCowaqerSlez/bj1Cg=;
+ b=CnHPsotxfF6KpFjtyq0rnn7sk3tb8qoyVoL73ZTw87bB6xeih3V/6kk8eIc+L2Zc8A
+ nmcbSd4DwusIwhmexxgiQaP+AVV98fhkrQTexO2IlDJ7BXYcfxdfs5dCHnPf4bvEDeRc
+ vJRRL2DGmEC34/EM5dPEYG69ezGc9MX/oLcJU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794061977; x=1794666777;
+ d=1e100.net; s=20260707; t=1794061980; x=1794666780;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=/krHuJC9ShW9NcMkzIGR+6pdP2wDUKW50lQhoU1SG0A=;
- b=BItuzos7TiykDGpJ4Hg2/3Tga/f3s/k5pXH/Y4C2lXe/0Ze47kO/CRjv3Mqp2A7dut
- WH39hWQwCDVvJ6Rx8LTV/cUvC2bvhHDsgKAorl6CTkCPXseC2hQgHu+WekDcjgRgHxCU
- DOqkkBshq0spw5FngcBI2P9e+qIBXPGoG+DP1tD90bwk3G6ekoCiOD4/uroJSEPVbkNi
- ftBIqGozZKdyK2D2fhPCbUGvtAVHC5wcPLX7suHDOSUPffXOkClMRDe6hHhH5NBPDS1t
- u4lgvNQ5iuTRC4wa/Q5B2+n81eIxEA4bCSGnq2WJtS4RsklpfwPuCmel4RHuViHiYB61
- ttxw==
+ bh=fJG+SY80IKQjKhoqPH+1C9bBVUCowaqerSlez/bj1Cg=;
+ b=L/g/r7svF9i+iDs7ZyBDLLdYAiHGjmkMf5OLrakOBDhtGZ6EOtOLd8sC6dahbyoCEr
+ ZBDdCgAY+UUoLtbHgps96l+yhe4Mi9zpwq8ycpqRc3MM2kH9Fe1nmfIU+CyA4Ea1tETL
+ uzJ2xqB/DEWdGu9SkRhPfAPD0YPYvSvpuW50haPmXNpj3RpUTopmrDsKLY/QD177MhKM
+ A2X3d7LOoqLHxtMQ8PfzB6lBzXcMU0UVZTnG8QPvZzaROaEQy4J+Av8OTG+ulrDyUEzc
+ Rq5SAebDqI9EYZe4RSGJ12jH1TmgNf0WFKwj5v1p0nYMDompX1VIED1JFa044/SJ3E+V
+ TN8A==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxJf8hkAN0wrdW4hQA7ydrn1r+ga8gMmN/DHbZGtjPR7xYyJHGWFeu9a0e+m6GH875qkTMcNcQ=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+LGQOYUWVAPRefMdT6+VavXYCs7pmV2SNfYlXIG+QmMiZkIsK9
- /Sfdmcft0XUYEWJTUebhfGUnE52l/TUSjg7uglm8/72mY7zWoKzh2/hWrOhz1dY8eUI=
-X-Gm-Gg: AYBFou1WTVz5isKqd1zFfQNaPYoorWdXtqGFSLnZHTq3qGEkTCq4X+uIE9Dtwbn2oi5
- GzjCZEzN8LkD9PgwtJRBU87EyZ1Q9wg8NjEexp0MNLwnKIRYTgK9lwiENBJ4dav6DxqgJYOVIE/
- zOL34gclUizX/JdQoco5Y/5xXH68fxB0ZFQudMIuToWTXIVv+PLOl/brKCqkSWI7CKkI/FWEn9y
- m+juFw93OMifjQmHzUWJW2SLLSXoYZlfDjexRhAWFOYk4fzrHBmNcM8L2fn1Gx7DWkSCNp77yry
- CftZ0z7WhL9uLWhy4EAEc/kNuCft5fH88TaU0ndKyolEwQhItNMJpTVouchhFEAFPCXK2dvnU9+
- jAYwHdqMKxPuBwTYcCKgQUuhaLS67AOD+RIsgjvY9frrz3ID600atV827Ak7BSfbIPNPf69KA/I
- Hb7IoEr3gXDHBWMVrz2oeUUb8nndeEM5ahba0s+EA/DxRaztmohWJl2kEVJqvT2jxnSB1+ihkPK
- 5mboPNoxiGcesWq8QeQZSVzC0uAgPCpVcKfuSXuOg1inAipKut/0jxrMWtU8NKiEivi8I7kM6vC
- +8XMCiMKSLnPCqhZjiQH8x4kTnET45hfug2M2NxYGVzZj15jSo8TPt7StzM7XVHIvQJylwJXoXo
- kmdl5KGR/ZpZD9tI5i4kekx1214nhCqdAGHUfR2fnAfvgNECqpH1OQP7YJs0Dfg5jV/45gr9U6a
- x5pl9dDniK0/l7KSLnOGVy8R4Hmw==
-X-Received: by 2002:a05:600c:45d4:b0:4a6:7d6:821f with SMTP id
- 5b1f17b1804b1-4b6e01717dfmr95697085e9.29.1794061977553; 
- Sat, 07 Nov 2026 06:32:57 -0800 (PST)
+ AKwUvBx0LnjuGkQGLjvnno5e/9/mifvadTkZd0JxmVK924EcT9eR0IuAhS1TF1ZeH3/cDJP4ECzlHww=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z84L6b7abva9Ipe7FYydEgxKJ/6EkkLidynQrPKsOz2CgPNFVYs
+ ZWSf0hCyia9g/UIvsJItVaxjmhiJb8G9OKSYsBIcwlhsqK/rPu8uBBJIM03wYhyHomg=
+X-Gm-Gg: AYBFou2/gBwe038zxIMw7oDEllacMCgKF6LC9ntyxNjPWgBqxzVeZNvBwGrUB9oRrsH
+ HNCorsQT8H1ShUesWgD6+MltpnKlahzW4pCZdHqifZ/v8x0SQILV0ZaR6guWGSVMFGVANQlt6Wy
+ n0yDjryge7vmjV0wcJBjnSIfKkuS2UNm6EgM9lByypKvGhZPs81hW64OqwjwGweY0wPyEGUEUHG
+ QJRXzUPBZmJM+VPyKO1SyfVqJbW/eBtMSvOiGfOQuBQieDbx5uHs9PPvYVRfoRAW9Wj/YKedFfQ
+ V7eLjOzqvpe7a16rq/5IH6Rbpc/zvjMiqNb81iHzGxONYOzb2Hzbm03QHTIySFH9gLH3cJDFhA5
+ MwZD73x35V1JHRw07tnuRNl+T+you+5fRiA+bagj4US31OHHmS0fOLhN2Q3WIbCUyjJLXEtdDWE
+ aYhNcYLk00HbdIRwtDceYqdnG5ny9ZjPtgAjydjonncQCU6c6Ecnz/cZgPqn93/9nCFvuu9w8LU
+ lKVY9HEfQxFwwh8xKWXNndSU2SiO0/JNmn9Wyj345J+ruRtIRdW6zdbnJCXFfMk+A0RUaQh+S5l
+ o3cG8EJ9mo05x1wNTVwbmwIifYqBfyZENVzdVkvWwkAhMYeDhCcTYK9ytmNlyE+LwgITi9w8MjD
+ rgxO/+17JdL8XcgCs930OCf85h/gCzFhhyVqFQGw9Nu4WOEtZ6I1Y/RHYebE58WTjRgjsNOM0qO
+ fJ6vJaqLHlIQFhxffu0+mJh2Q8Hw==
+X-Received: by 2002:a05:600c:4e8e:b0:4a1:6992:f861 with SMTP id
+ 5b1f17b1804b1-4b6db4a5dc5mr98545765e9.1.1794061979873; 
+ Sat, 07 Nov 2026 06:32:59 -0800 (PST)
 Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
  (host-79-14-29-58.business.telecomitalia.it. [79.14.29.58])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-492d7cc6187sm10027247f8f.46.2026.11.07.06.32.56
+ ffacd0b85a97d-492d7cc6187sm10027247f8f.46.2026.11.07.06.32.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Nov 2026 06:32:56 -0800 (PST)
+ Sat, 07 Nov 2026 06:32:59 -0800 (PST)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
@@ -141,9 +143,9 @@ Cc: michael@amarulasolutions.com, linux-amarula@amarulasolutions.com,
  Alexandre Torgue <alexandre.torgue@foss.st.com>,
  Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.u-boot-project.org, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v2 06/35] arm64: dts: st: add i2c1 pins for stm32mp25
-Date: Sat,  7 Nov 2026 15:31:56 +0100
-Message-ID: <20261107143241.2236511-7-dario.binacchi@amarulasolutions.com>
+Subject: [PATCH v2 07/35] arm64: dts: st: add ltdc pins for stm32mp25
+Date: Sat,  7 Nov 2026 15:31:57 +0100
+Message-ID: <20261107143241.2236511-8-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261107143241.2236511-1-dario.binacchi@amarulasolutions.com>
 References: <20261107143241.2236511-1-dario.binacchi@amarulasolutions.com>
@@ -161,56 +163,108 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add the i2c1 pins used on MicroGEA-STM32MP257D-RMM board.
+Add the LTDC pins used on MicroGEA-STM32MP257D-RMM board.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Link: https://lore.kernel.org/r/20260820091652.43541-7-dario.binacchi@amarulasolutions.com
+Link: https://lore.kernel.org/r/20260820091652.43541-8-dario.binacchi@amarulasolutions.com
 Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
 
-[ upstream commit: 650d83cab19ea1acd3c1a17583d91efcd1688a7c ]
+[ upstream commit: 0183a9f7ba2de9fc9c1e0ee53e4cc7b049e69181 ]
 
-(cherry picked from commit 7cac3c4a9f9b57c8e7d4c1430991f0df3b0883b9)
+(cherry picked from commit 24128ab8c8a3c29003deb325424d39d31ee08165)
 ---
 
 (no changes since v1)
 
- .../src/arm64/st/stm32mp25-pinctrl.dtsi       | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+ .../src/arm64/st/stm32mp25-pinctrl.dtsi       | 71 +++++++++++++++++++
+ 1 file changed, 71 insertions(+)
 
 diff --git a/dts/upstream/src/arm64/st/stm32mp25-pinctrl.dtsi b/dts/upstream/src/arm64/st/stm32mp25-pinctrl.dtsi
-index 456ece7f8ebc..db485b9ed904 100644
+index db485b9ed904..50f454630cf2 100644
 --- a/dts/upstream/src/arm64/st/stm32mp25-pinctrl.dtsi
 +++ b/dts/upstream/src/arm64/st/stm32mp25-pinctrl.dtsi
-@@ -203,6 +203,25 @@
+@@ -260,6 +260,77 @@
  		};
  	};
  
 +	/omit-if-no-ref/
-+	i2c1_pins_a: i2c1-0 {
++	ltdc_pins_a: ltdc-0 {
 +		pins {
-+			pinmux = <STM32_PINMUX('G', 13, AF9)>, /* I2C1_SCL */
-+				 <STM32_PINMUX('A', 2, AF10)>; /* I2C1_SDA */
++			pinmux = <STM32_PINMUX('C',  6, AF14)>, /* LCD_CLK */
++				 <STM32_PINMUX('G',  2, AF13)>, /* LCD_HSYNC */
++				 <STM32_PINMUX('G',  1, AF13)>, /* LCD_VSYNC */
++				 <STM32_PINMUX('C',  5, AF14)>, /* LCD_DE */
++				 <STM32_PINMUX('H',  4, AF10)>, /* LCD_R0 */
++				 <STM32_PINMUX('F',  7, AF13)>, /* LCD_R1 */
++				 <STM32_PINMUX('C', 11, AF13)>, /* LCD_R2 */
++				 <STM32_PINMUX('A',  1, AF11)>, /* LCD_R3 */
++				 <STM32_PINMUX('B', 15, AF13)>, /* LCD_R4 */
++				 <STM32_PINMUX('G',  3, AF13)>, /* LCD_R5 */
++				 <STM32_PINMUX('A', 10, AF12)>, /* LCD_R6 */
++				 <STM32_PINMUX('G',  7, AF13)>, /* LCD_R7 */
++				 <STM32_PINMUX('F',  8, AF13)>, /* LCD_G0 */
++				 <STM32_PINMUX('H',  5, AF10)>, /* LCD_G1 */
++				 <STM32_PINMUX('C',  9, AF13)>, /* LCD_G2 */
++				 <STM32_PINMUX('C', 10, AF13)>, /* LCD_G3 */
++				 <STM32_PINMUX('A',  6, AF10)>, /* LCD_G4 */
++				 <STM32_PINMUX('G', 11, AF13)>, /* LCD_G5 */
++				 <STM32_PINMUX('G', 12, AF13)>, /* LCD_G6 */
++				 <STM32_PINMUX('A',  9, AF12)>, /* LCD_G7 */
++				 <STM32_PINMUX('F',  6, AF13)>, /* LCD_B0 */
++				 <STM32_PINMUX('A',  3, AF11)>, /* LCD_B1 */
++				 <STM32_PINMUX('G', 15, AF13)>, /* LCD_B2 */
++				 <STM32_PINMUX('I',  0, AF13)>, /* LCD_B3 */
++				 <STM32_PINMUX('I',  1, AF13)>, /* LCD_B4 */
++				 <STM32_PINMUX('A',  7, AF10)>, /* LCD_B5 */
++				 <STM32_PINMUX('F',  5, AF13)>, /* LCD_B6 */
++				 <STM32_PINMUX('I',  4, AF13)>; /* LCD_B7 */
 +			bias-disable;
-+			drive-open-drain;
-+			slew-rate = <0>;
++			drive-push-pull;
++			slew-rate = <1>;
 +		};
 +	};
 +
 +	/omit-if-no-ref/
-+	i2c1_sleep_pins_a: i2c1-sleep-0 {
++	ltdc_sleep_pins_a: ltdc-sleep-0 {
 +		pins {
-+			pinmux = <STM32_PINMUX('G', 13, ANALOG)>, /* I2C1_SCL */
-+				 <STM32_PINMUX('A', 2, ANALOG)>; /* I2C1_SDA */
++			pinmux = <STM32_PINMUX('C',  6, ANALOG)>, /* LCD_CLK */
++				 <STM32_PINMUX('G',  2, ANALOG)>, /* LCD_HSYNC */
++				 <STM32_PINMUX('G',  1, ANALOG)>, /* LCD_VSYNC */
++				 <STM32_PINMUX('C',  5, ANALOG)>, /* LCD_DE */
++				 <STM32_PINMUX('H',  4, ANALOG)>, /* LCD_R0 */
++				 <STM32_PINMUX('F',  7, ANALOG)>, /* LCD_R1 */
++				 <STM32_PINMUX('C', 11, ANALOG)>, /* LCD_R2 */
++				 <STM32_PINMUX('A',  1, ANALOG)>, /* LCD_R3 */
++				 <STM32_PINMUX('B', 15, ANALOG)>, /* LCD_R4 */
++				 <STM32_PINMUX('G',  3, ANALOG)>, /* LCD_R5 */
++				 <STM32_PINMUX('A', 10, ANALOG)>, /* LCD_R6 */
++				 <STM32_PINMUX('G',  7, ANALOG)>, /* LCD_R7 */
++				 <STM32_PINMUX('F',  8, ANALOG)>, /* LCD_G0 */
++				 <STM32_PINMUX('H',  5, ANALOG)>, /* LCD_G1 */
++				 <STM32_PINMUX('C',  9, ANALOG)>, /* LCD_G2 */
++				 <STM32_PINMUX('C', 10, ANALOG)>, /* LCD_G3 */
++				 <STM32_PINMUX('A',  6, ANALOG)>, /* LCD_G4 */
++				 <STM32_PINMUX('G', 11, ANALOG)>, /* LCD_G5 */
++				 <STM32_PINMUX('G', 12, ANALOG)>, /* LCD_G6 */
++				 <STM32_PINMUX('A',  9, ANALOG)>, /* LCD_G7 */
++				 <STM32_PINMUX('F',  6, ANALOG)>, /* LCD_B0 */
++				 <STM32_PINMUX('A',  3, ANALOG)>, /* LCD_B1 */
++				 <STM32_PINMUX('G', 15, ANALOG)>, /* LCD_B2 */
++				 <STM32_PINMUX('I',  0, ANALOG)>, /* LCD_B3 */
++				 <STM32_PINMUX('I',  1, ANALOG)>, /* LCD_B4 */
++				 <STM32_PINMUX('A',  7, ANALOG)>, /* LCD_B5 */
++				 <STM32_PINMUX('F',  5, ANALOG)>, /* LCD_B6 */
++				 <STM32_PINMUX('I',  4, ANALOG)>; /* LCD_B7 */
 +		};
 +	};
 +
  	/omit-if-no-ref/
- 	i2c2_pins_a: i2c2-0 {
+ 	ospi_port1_clk_pins_a: ospi-port1-clk-0 {
  		pins {
 -- 
 2.43.0
