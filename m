@@ -1,116 +1,200 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8A30606A326
-	for <u-boot@archiver.kernel.org>; Fri,  6 Nov 2026 23:17:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 805A9606A326
+	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 02:05:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=V/ljRGXx;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=Mq56X2SN
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=wIoNowk0;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=U7LSxw5p;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=W4AqEb9D
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 70EF980C0F;
-	Fri,  6 Nov 2026 23:17:53 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 35CF34099A;
+	Sat,  7 Nov 2026 02:05:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 70dGzKS6Il9x; Fri,  6 Nov 2026 23:17:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C2E8980BDB
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794007072;
-	b=H5QYkmWctI8coAJ/MDlKC/RvUIDSlza7XUu8xp0Miyydpr9ASmIS5opvTe8Q0aJ53QF8
-	 WFfjle6SyV2vgVhWQOv5hkV6s5MgV21vvEq2FoajZ1otxVohdFESpM6+9y5YMA/wo6aiX
-	 NL6iD4kGSzgCGdGaTdSi5x1s48lfTb2M0Kp9fgonZq0apqFpp7boMLP2PoBW8aku3TPTK
-	 ElYuuVSYGCz8qyfK1W434sefCGAomMm46HVXRxSPaJWxpGrrJO/DHsoK+yijJhSo1G8qT
-	 au+WJcpP66tvO4/J3DC5uzcHh1i5+gLoZ3bkKfYFy0kmHxPMDh5tPcKWzqrqsVneuuQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ifruuDhCp0Ls; Sat,  7 Nov 2026 02:05:58 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7F1DE409B4
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794017158;
+	b=RmLIzGM4i09Z3TaUz2ySziLItdFy93gToBHUfVRlpI/S3r/ZeoIMh41zqjDwBUrZd7Kl
+	 l8gnhZle5onvfA5SD8MO7IFOcoC20/kJbV05PTs+TGiMhio3xX1Zbba/FmApeWU3MCJ/Q
+	 M2iUWljcVHIxQM9z899T4Z7pbyMFDyJlx2yjKV7K3AdLZh3yBtRVnBFSwVpgad+xLm9HY
+	 KslXu3iaAtZpE9aU0znM72QbO5Y80/Wbqqi7UxIs4bv4Z1LBXLOrz2705QXIXC6h0M7G3
+	 E+AlId00DupVM/KbiA0G2fH/cnTN9xj+qb9xEtvpSNfG3FUOhG4l6sa27aeUbc43DBw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794007072;
+	c=relaxed/relaxed; t=1794017158;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 In-Reply-To:References:Organization:X-Mailer:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 X-Received:Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=NSS5Fvysn34v09V5/F9vHVSu07QmgWO/FrdhaLyru/E=;
-	b=GXvsvvCp4xsAaveIMSzWtorcnSS60BassEZKlY7Iqxbael7VQW5O22VLz7qfFV1Kw+dp
-	 bAGShf89Xq+4JoJULb2pppqYme/CSzFIQiJSPgZtg+ms4VqJ/GjHw/xg2sW0+Rv7Sg4o8
-	 5tb+5qZoUgc+u9h8La8OcbFAumB8b5oyP/uTU6KG9qcbET+90JQjqHygWBp14lAt4As2r
-	 G0RZgGSsfAzGkxRG065IiZqsiN/TA96PYh8Ehe7OFP9nrZekRgpOMGDkoMDJsGu+Dy7Kr
-	 kkIgBtl1MRJGjOGCYFHBX+2sRMKcMJG+i40eHPjOh/BlRzmbH4KbWJ1t1xlIHoareww==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=8mUWQawhPoIMEVWwSIfvCUsZ7MnFUoBFzyJbrMJBNIw=;
+	b=k/FCHcKvvxz/YMVVk6m0UuDC7IqkudeYbtMea5mG8cVTkHEf9CkOoyXfrEjI+5vZnDKF
+	 stXYDZ4SE+nMbkCUESNquua+J31iZn0wrAAJf1HwaPp1VYbmM+7FNGfr0Qc+H8atDt7X1
+	 dhZX1Ym1cqvMNUh/W083wvGphqgPlaCHM5vLLiiO7kZ+c46IKA1V/3+UFvRNpwmD/Y1rc
+	 vY2HZJr9PJTR1oZ1HmJhlXrHzo5t2fT6d1PWUEiq1B13olgoZXAHgDGlTI9jX7ODwejkF
+	 4DfaVCBN+XnBETkyJxClVvhQhQoW0x8mzizZcttlpasiwMV3Xl3YCMf0hbpzlelOhPg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794007071;
-	bh=NSS5Fvysn34v09V5/F9vHVSu07QmgWO/FrdhaLyru/E=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=V/ljRGXx6wVofLYCGg3Vsd1Y0taciQT9A7y9wj+NO/hlyvd3g1EyuHUCWpH7HCIzO
-	 Zpt2KAyIYhzkiZ7Pu80du01oVGcVleP6BCiUbXQRGeV9oUHgVkPz98QR2HjKUQX5NO
-	 02w1B/oY5/JsPULRW+cD+AU5D5FVABdDKR9IsK2yspb5+N72RWGr9jpnpxq2qLcmQS
-	 JEeT15vBHjjfrWVOEc2BFAhmwapo8AGBLlEp6IVuYy9EWGNFx+55vkZlWbSdIb5c2l
-	 LEB9ySLqyuiEJ4Zb+6DBg80qoKPWiAldelaZGH7CQwrmj0UNhRZ6fZ3xVuwfcDmrRA
-	 aHAqwHq3ZfASg==
+	d=lists.u-boot-project.org; s=default; t=1794017158;
+	bh=8mUWQawhPoIMEVWwSIfvCUsZ7MnFUoBFzyJbrMJBNIw=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=wIoNowk0WGfj0wVIupMvOHaQaQ7nE5Lb0iJpFeMzUrkJdpc41/TCiATi4x/96CUVZ
+	 NaHW62cVvZRQaJQqxHNSyxXUX8NY+PFApRlArLBKlr1T8EjEVa/KNPScd0qpqxWpOL
+	 Bmgu5PTWf7BkpCMApBWJ9AB4iO1Q7RDAYCYcYhwWQgid+b4gk0vwGzt1aD51Ewnrwr
+	 gvhyCNR2La0qaz8UdCYR7CTJWK0Oq77loPscU3qkwV9V44E4i9Dlp/kF99bh3cXzmq
+	 8/hKsiYE8/Y9arPvki0N+Ph86rgwQclv7//nY0RkwXcR+p4h9lQu5LAE4cUTM9UwmQ
+	 rjepy6KdA1FPw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C2E8980BDB;
-	Fri,  6 Nov 2026 23:17:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7F1DE409B4;
+	Sat,  7 Nov 2026 02:05:58 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 0E6972E5
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 23:17:50 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 0C89631F
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 02:05:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E829A40407
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 23:17:49 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id E734440086
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 02:05:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id AHTcoCgU-PxG for <u-boot@lists.u-boot-project.org>;
- Fri,  6 Nov 2026 23:17:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 60D1C40403
+ id TR8AIbcCBThs for <u-boot@lists.u-boot-project.org>;
+ Sat,  7 Nov 2026 02:05:56 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5EFFE403CB
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip=217.140.110.172
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
- helo=foss.arm.com; envelope-from=andre.przywara@arm.com; receiver=<UNKNOWN> 
+ arc=none smtp.remote-ip=205.220.168.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
+ helo=mx0a-0031df01.pphosted.com; envelope-from=urvashi.sharma@oss.qualcomm.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256
- header.s=foss header.b=Mq56X2SN
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp2.osuosl.org (Postfix) with ESMTP id 60D1C40403
- for <u-boot@lists.u-boot-project.org>; Fri,  6 Nov 2026 23:17:46 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B7BB91650;
- Fri,  6 Nov 2026 15:17:42 -0800 (PST)
-Received: from ryzen.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 98AC93F632;
- Fri,  6 Nov 2026 15:17:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1794007065; bh=P95fEWAAC1L5xQVSLkIp7JwPFQ1XlYgBcmhGiRxWsZo=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=Mq56X2SNUGWi7kVUe4dDFc3GW11ivmaWkNcXm3NnuimcRU9K9i3xcwYimCi4AwrcY
- M0IEwNxSQnMJA5sE2Kh+9nKPYmoAn6euV5qsTQHu6xce4YTms1ixuXR/3RT9WcBbF4
- WU1lK4A3NhLz0EX4e+qOuWlitFwG9Hl+uZdkF4LA=
-Date: Sat, 7 Nov 2026 00:17:35 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Indrek Kruusa <indrek.kruusa@gmail.com>
-Cc: u-boot@lists.u-boot-project.org, Tim Ouyang <tim609@andestech.com>, Leo
- Liang <leo.liang@sifive.com>, Yao Zi <me@ziyao.cc>, Peng Fan
- <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Lukasz Majewski
- <lukma@nabladev.com>, Stefan Roese <stefan.roese@mailbox.org>, Samuel
- Holland <samuel@sholland.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 00/10] riscv: sun20i: add support for the Allwinner
- D1/D1s(F133) SoCs and boards
-Message-ID: <20261107001735.66ef37d6@ryzen.lan>
-In-Reply-To: <20261101210449.1235102-1-indrek.kruusa@gmail.com>
-References: <20261101210449.1235102-1-indrek.kruusa@gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=U7LSxw5p; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=W4AqEb9D
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5EFFE403CB
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 02:05:54 +0000 (UTC)
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6A6Mo7i41064710
+ for <u-boot@lists.u-boot-project.org>; Sat, 7 Nov 2026 02:05:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=8mUWQawhPoIMEVWwSIfvCUsZ7MnFUoBFzyJ
+ brMJBNIw=; b=U7LSxw5pwLHgLkTOGJoss5dslnRKQuIscV6grdhtGp7wDml74/Y
+ H80960MXz7AvnaX+R8mzr8CcwXXOlkNY/4Ih4xzN2qfvOpFQ8HUvFLvvYiJFQUq9
+ 6/8ckORD/L0q6iALYRgOyNaulqz3YcIYOMyFM8Ch2rW9ylML/WoLou6ftwnpPwHO
+ urb+vaZ6B84y5lv3UNEvcXyi+EJ0qjzY+goWp41m0yA8mjiQhC4thq2ZtilkdNJN
+ 6Jak69qB3Dy3vbvynvHU2zgEHSJhSOYg+G2y8TMROAq9mwIbTuvQFA8bbQ6eL8LI
+ cxNmSC9DnqzpPmWdxqheMR3UOaQigM9IjEw==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
+ [74.125.82.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hsmyv138j-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Sat, 07 Nov 2026 02:05:53 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id
+ 5a478bee46e88-36f1e7d9d4dso2513775eec.0
+ for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 18:05:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1794017153; x=1794621953;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=8mUWQawhPoIMEVWwSIfvCUsZ7MnFUoBFzyJbrMJBNIw=;
+ b=W4AqEb9DWJVrzey5hXM29xRb9hT3ZLBmGT20vGRTV9y+UMlmVIV6NUpcCxMqI6Rj4v
+ t5I5WRhzxDYTveEnBQVdflHtjNfd7GIbIyszbynjMIuIvhEhnobTeaENlWVaIbtJ4mWk
+ 9COts4TMK02GLhgb2sHQp2xhoxddvNY2pwKCtqscNy84U51x9zFE+USA5+WxVWp6GVVv
+ HHlFPzLQgDMg5zI0dqtnblfIiO9FTLDAvxnH7zQuid81a68l/wDhov6EaWGkukfrPPwl
+ +jbSqTcZecWqZRspGJRNnSyQ6CSj0Tk++0lq3gkHqLbz/VnDYhIuDlo/frx+YhIStFQL
+ QfEQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794017153; x=1794621953;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=8mUWQawhPoIMEVWwSIfvCUsZ7MnFUoBFzyJbrMJBNIw=;
+ b=eQ0ZJlZobBusT6CEHdWPqBBy3cLTRqzp9K77O4rEFJAb8JTfWm1QVWexgTl6qBHhyG
+ wa62QJUWdfCbvkEubzIt56fPh61hgkrazx7Fr11M9+4NeXpwGSvyPW3KtGEw/XYBBray
+ LRmCkMWQvCcktAps9vSE3G3cyPbvV0VQpDKzh3Bu3PVE8Ipr+2FpFfF3bhw7EAOgS1IJ
+ pa4/4A4BwHzz2ohWpUNTibfCd9OAWSq2cx776Mxu7SJ8YZ5iBQlRcIyQlpPuZGCdEQak
+ mNYqUX3oX3APBpdNl+1bhfZ1mnWZbeyDx+lVGyGK4o2rors7c0QkPb1Mnq8QeRSkSQj/
+ KCGw==
+X-Gm-Message-State: APuU4Z+jYYXg1ZUDPc/zFhMAqhhWJlsISexzN753Z7fVSL6ur6lLm10I
+ lfqrxP1WJJw6DfnNLum2IlX9nzNdhdoRhOdONO+hPLX4ZRRwqposiFbTfhqfBLDGKqOJXXhfGo4
+ XNw5ivOXjVQWvl/HACbbJE2orKPd9Nn+MsenRcQXMa0OB6mxUzCJe9hZmNPswB3rsKFhaPNpJzz
+ bhYmU=
+X-Gm-Gg: AYBFou221yuDe8JhYId13pchSOv44A768K2ewFn3yhPNKnHcgGflsYwPUxxgXMLewT7
+ bZBqRVKnakxqD6IRrgfs70a4E9TheaNKgu4P+js5kIla8qjrms2oZZfgJp+JiOl5WlnicmzB3zc
+ ktDOypulpGLbSwWTGnV5yPVtcLIt/wIUB01iorsqYiahHn84kWLCNDEVw+3U59z4UZmt4N00JXY
+ u9CaWWz72M/fAlQS/EhEro667tSj6YmLUXJXUkk9zjvBzNV/4Q6fvDokVkT0StkqqbFEdm02315
+ VMXmiVVqUwSuS0mOgUBmVw+nyjt934a7V/zRHbs1lZ/SqKaSqrZG7Oq2DYegf54XstfT13nwydY
+ 5qPjih5V0bcmPC1mI2xGzQQ99k1TAQihZya0Wwq3qV1tYxV6ZYOTJgujW6zcpxoxH5fy3d4zAP0
+ JzwJ3BRa3OhPDZeVam3K6+Yc6EI+nWxQ==
+X-Received: by 2002:a05:7301:1601:b0:36e:dd5:fb08 with SMTP id
+ 5a478bee46e88-36f773f7c7fmr5451550eec.40.1794017152935; 
+ Fri, 06 Nov 2026 18:05:52 -0800 (PST)
+X-Received: by 2002:a05:7301:1601:b0:36e:dd5:fb08 with SMTP id
+ 5a478bee46e88-36f773f7c7fmr5451511eec.40.1794017152255; 
+ Fri, 06 Nov 2026 18:05:52 -0800 (PST)
+Received: from hu-urvashis-lv.qualcomm.com (Global_NAT1.qualcomm.com.
+ [129.46.96.20]) by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-36fa8d44500sm10922798eec.5.2026.11.06.18.05.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 06 Nov 2026 18:05:51 -0800 (PST)
+From: Urvashi Sharma <urvashi.sharma@oss.qualcomm.com>
+To: u-boot@lists.u-boot-project.org
+Cc: trini@konsulko.com, rick@andestech.com, ycliang@andestech.com,
+ e@freeshell.de
+Subject: [PATCH v3 0/2] riscv: spl: Add BOOT_DEVICE_UFS via common
+ asm-generic/spl.h
+Date: Fri,  6 Nov 2026 18:05:45 -0800
+Message-Id: <20261107020547.2021618-1-urvashi.sharma@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: JFQgiAUE6YzUYliWefj4PVRLGcgtH9bx
+X-Authority-Analysis: v=2.4 cv=IdYSymqa c=1 sm=1 tr=0 ts=6aee8781 cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=x7lnOLRdgEZdsa4TSNQA:9
+ a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA3MDAwOCBTYWx0ZWRfXxsj6LkaOIGXP
+ GvMtQS7bySf50beIQyXr86xWO7X29EdQItb4UXbtYaf4PhOEeNvMj/ePoxobTHOGUxj6L8RMM+2
+ dhIk5oBqI6KJc96/ahfXimdAAZteoIo=
+X-Proofpoint-GUID: JFQgiAUE6YzUYliWefj4PVRLGcgtH9bx
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA3MDAwOCBTYWx0ZWRfX2uTRXyOP6xEX
+ rrdyiJUI3ofQHEp7g8iZD9NrreVQZA0Ha7o6m2jI2bF3hHDYKSJXFRDwjYsLduFniwOUmgLhnbu
+ w2QHs/sJimXo9JDwMKv8YsyJgfH7UswHGLTzq+zwEGN/IpDlNSNQ5N29RAewaDkFGab+9UqMx8j
+ CYyYrOXn1f6RhCu7zlFKyxtaN/HDghxPKijidSmWLJM++MQ1/BQKOzqoTdzp2gQFf3XUiCDXQhM
+ V+17ws0MsvlD1UFH4SwdxZkFrYVA0+02Lbe3+BJkNEq936wSnuckFCyPuaecSzJsoqGysXVyaQo
+ qhbDEBVq4nkqHArIMWOkYG5SlGjjDjAkrXExrirNFVn6QJiEiVnrcds5toddr3K1UjzFcDYBuIC
+ OTbv/4DIQw2+v5kt9yvf/lYmM8L4DadAk5yLJWINOtid2/Oz5jEj2Lym/NtqyJCX1rzONxmoX9X
+ ZPxsA47qN2d0MUD8WFw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-06_07,2026-11-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 bulkscore=0 phishscore=0 clxscore=1015 adultscore=0
+ lowpriorityscore=0 priorityscore=1501 malwarescore=0 suspectscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611070008
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -120,233 +204,37 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_SANE_2 autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Sun,  1 Nov 2026 23:04:39 +0200
-Indrek Kruusa <indrek.kruusa@gmail.com> wrote:
+Following Tom's review of v2, add a common include/asm-generic/spl.h
+with the BOOT_DEVICE_* list, use it for RISC-V, and then add
+BOOT_DEVICE_UFS to it. Other architectures that do not need ROM-defined
+values can switch to the common header in follow-up patches.
 
-Hi Indrek,
+Changes in v3:
+- Add include/asm-generic/spl.h with the common BOOT_DEVICE list and use
+  it for RISC-V, as suggested by Tom Rini
+- Split into a move patch and a BOOT_DEVICE_UFS patch
 
-thanks for sending this out.
-This looks surprisingly simple on a first glance.
-I haven't had a detailed look, but wanted to reply with some general
-thoughts.
+Changes in v2:
+- Add a comment documenting that BOOT_DEVICE_NONE must stay last
+- Explain in the commit message that BOOT_DEVICE_* values are
+  SPL-internal, so this is not an ABI change
 
-> Building upon the work of Samuel Holland [1], this series introduces support
+Urvashi Sharma (2):
+  riscv: spl: Move BOOT_DEVICE enum to asm-generic/spl.h
+  spl: Add BOOT_DEVICE_UFS
 
-I guess you took quite some patches from Samuel? I don't see him being
-the author of any patch, that doesn't sound likely. Please try to
-attribute his work, by keeping this authorship.
+ arch/riscv/include/asm/spl.h | 22 +--------------------
+ include/asm-generic/spl.h    | 38 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 39 insertions(+), 21 deletions(-)
+ create mode 100644 include/asm-generic/spl.h
 
-> for the Allwinner D1/D1s(F133) RISC-V SoCs and two development boards:
-> 
-> - Sipeed Lichee RV Dock (D1 SoC)
-> - MangoPi MQ (RISC-V version with D1s/F133-A SoC)
-> 
-> The main difference from Samuel's work is how the boards are wired into the
-
-I think Samuel also used DM_SPL (which I heavily oppose), looks like
-this is gone as well? I like that, but it seems to be a major
-difference worth mentioning.
-
-> tree. The original design aimed at one cross-architecture configuration which
-> covers ARM sun8i and RISC-V sun20i parts from Allwinner. This series does not
-> do that. The D1/D1s get their own configuration instead:
-> 
->   - arch/riscv/cpu/sun20i/ and board/sun20i/ hold the RISC-V side
->   - SUN20I is a SoC-family symbol, TARGET_SUN20I the board target
->   - the shared sunxi drivers accept SUN20I next to ARCH_SUNXI, so they are
->     shared as before -- only the Kconfig condition changes
-> 
-> Keeping the two sides apart has a cost: a few things exist twice.
-
-Mmmh, I need to have a closer look, but am wondering if we can avoid
-those double definitions and integrate both architectures better.
-arch/arm vs. arm/riscv should separate itself naturally, and the
-drivers shouldn't care about the architecture.
-That's just a hunch, though, I will have a closer look in the next
-weeks, as I am busy with other things.
-
-Thanks,
-Andre
-
-> SUNXI_GEN_NCAT2 is declared in both arch trees, because the shared drivers
-> test it and no Kconfig file is sourced by both. clock_get_pll6() is a C
-> function for ARM (clock_sun50i_h6.c) and an inline for RISC-V
-> (arch-sun20i/clock.h), decoding the same NCAT2 registers. The MMC mod-clock
-> bits, the CCU offsets and parts of board/sunxi/board.c are repeated the same
-> way.
-> 
-> For the sake of simplicity the image names stay "sunxi"
-> (u-boot-sunxi-with-spl.bin, inner sunxi-spl.bin) because that is the shared
-> Allwinner eGON boot format.
-> 
-> Both defconfigs build, and both boards boot from the SD card to a userspace
-> login. The images were built with custom Buildroot configuration, using
-> gcc 16.2.0, binutils 2.46.1 and Linux 7.3.0.
-> 
-> One caveat -- reboot does not work yet; it needs fixes outside U-Boot, on the
-> firmware/OS side.
-> 
-> AI/LLM tools were used as development assistants throughout this work.
-> Their use included debugging DRAM initialization and probing issues,
-> assisting with code development, reviewing code, helping with testing and
-> validation, and reviewing and refining commit messages.
-> 
-> PS. The boards use CONFIG_NS16550_CLK_ENABLE, which comes from a patch
-> originally posted by khaliforce <kforce@gmail.com> and merged as commit
-> 70f51e1e2ea5 ("serial: ns16550: make probe clock enabling optional") by
-> Samuel Holland; v2027.01-rc1 already contains it.
-> 
-> [1] https://github.com/smaeul/u-boot/tree/d1-wip
-> 
-> 
-> The patches (on tag v2027.01-rc1)
-> ---------------------------------
-> 
-> 1/10 riscv: cpu: add Allwinner D1/D1s(F133) CPU support
->      Add the C906 support for the D1/D1s(F133) SoCs:
-> 
->      - T-Head cache operations from the custom cache instructions
->      - harts_early_init() programming MXSTATUS, MHCR and MHINT
->      - cleanup_before_linux() disabling interrupts and flushing the caches
->      - dram_init() from the device tree memory nodes
->      - the T-Head CSR, CCU clock and memory map headers
->      - SUN20I Kconfig (cache line size, T-Head CMO support)
-> 
-> 2/10 sunxi: allow the sunxi drivers to be built for sun20i
->      Accept SUN20I next to ARCH_SUNXI for the RAM, clock, pinctrl, GPIO, MMC,
->      reset and watchdog drivers, and keep WATCHDOG_AUTOSTART off for it.
-> 
->      Declare SUNXI_GEN_NCAT2 here as well - the ARM sunxi Kconfig is not read
->      by a RISC-V build - and add the MMC base addresses to arch-sun20i/cpu.h
->      so sunxi_mmc.c builds.
-> 
-> 3/10 board: sun20i: add common support for the D1/D1s boards
->      Add the board code used by all D1/D1s(F133) boards:
-> 
->      - TARGET_SUN20I, board init and CPU probing
->      - sunxi eGON/TOC0 SPL header: boot source, FEL mode, SPL size
->      - SPL DRAM probing and the /memory fixup
->      - FIT DT name matching
->      - environment placement for MMC/SPI boot media
->      - the u-boot-sunxi-with-spl.bin image
->      - a MAINTAINERS section for the new board and CPU files
-> 
->      CONFIG_ARCH_SUNXI is never set on these RISC-V parts, so extend the SPL
->      image rule in scripts/Makefile.xpl to match TARGET_SUN20I as well.
-> 
->      The board code, the devicetree overlay and include/configs/sun20i.h come
->      from Samuel Holland's d1-wip tree [1]. The board code in turn derives from
->      the ARM sunxi board code, so its copyright notices are kept.
-> 
->      [1] https://github.com/smaeul/u-boot/tree/d1-wip
-> 
-> 4/10 sunxi: dram: fix integer-pointer conversions in the D1 DRAM driver
->      Fix readl()/writel() address types for GCC 15+
-> 
->      Use typed base address macros and cast remaining register addresses
->      to void __iomem * to satisfy GCC 15's stricter type checking.
-> 
->      No functional change.
-> 
-> 5/10 sunxi: dram: count the banks on address bit 11, not A22
->      The bank test looks for the BA2 alias at address bit 22, but in the mode
->      the probe programs BA2 is bit 11. A four bank part therefore always
->      reports eight banks, turning 64MB into 128MB.
-> 
->      On a MangoPi MQ with F133-A the probe now reports 4 banks, 13 rows and 2KB
->      pages - the vendor's dram_para1 = 0xd2. Boot tested on a Lichee RV Dock
->      too, where a D1 with external 512MB DDR3 is detected correctly.
-> 
-> 6/10 sunxi: dram: no AC remapping on the co-packaged DRAM parts
->      The PHY AC remapping tables compensate for the drive strength of the
->      DRAM chips connected to the SoC. This compensation must be skipped
->      when the DRAM is integrated on-die.
-> 
-> 7/10 sunxi: dram: let the board set the MR1 mode register
->      The DRAM mode register 1 value belongs to the DRAM part, and the parts in
->      use differ: 0x02 for the DDR2 die co-packaged with the D1s and F133-A,
->      against the 0x42 that the boards with external DDR3 have booted with so
->      far.
-> 
->      Expose it next to the other vendor DRAM settings, keeping 0x42 as the
->      default so nothing changes for the existing users.
-> 
-> 8/10 sunxi: mmc: handle D1 PLL6 clock rate correctly
->      Apply the existing MMC clock /2 compensation to SUN20I,
->      as already done for SUN8I_R528.
-> 
-> 9/10 configs: add the Lichee RV Dock defconfig
->      Sipeed Lichee RV Dock: D1, 512 MB DDR3.
-> 
-> 10/10 configs: add the MangoPi MQ D1s(F133) defconfig
->      MangoPi MQ D1s(F133), 64 MB co-packaged DDR2.
-> 
-> 
->  MAINTAINERS                                   |  10 +
->  arch/riscv/Kconfig                            |  14 +
->  arch/riscv/cpu/sun20i/Kconfig                 |  17 +
->  arch/riscv/cpu/sun20i/Makefile                |   5 +
->  arch/riscv/cpu/sun20i/cache.c                 |  88 ++++
->  arch/riscv/cpu/sun20i/cpu.c                   |  44 ++
->  arch/riscv/cpu/sun20i/dram.c                  |  21 +
->  arch/riscv/dts/sun20i-u-boot.dtsi             |  86 ++++
->  arch/riscv/include/asm/arch-sun20i/clock.h    |  71 +++
->  arch/riscv/include/asm/arch-sun20i/cpu.h      |  22 +
->  .../riscv/include/asm/arch-sun20i/thead_csr.h |  29 ++
->  board/sun20i/Kconfig                          | 173 ++++++++
->  board/sun20i/Makefile                         |   4 +
->  board/sun20i/board.c                          | 309 +++++++++++++
->  board/sun20i/spl.c                            | 142 ++++++
->  configs/lichee_rv_dock_defconfig              |  14 +
->  configs/mangopi_mq_d1s_defconfig              |  20 +
->  drivers/clk/sunxi/Kconfig                     |   2 +-
->  drivers/gpio/Kconfig                          |   2 +-
->  drivers/mmc/Kconfig                           |   2 +-
->  drivers/mmc/sunxi_mmc.c                       |   3 +-
->  drivers/pinctrl/sunxi/Kconfig                 |   2 +-
->  drivers/ram/sunxi/Kconfig                     |   8 +-
->  drivers/ram/sunxi/dram_sun20i_d1.c            | 417 ++++++++++--------
->  drivers/reset/Kconfig                         |   2 +-
->  drivers/watchdog/Kconfig                      |   3 +-
->  include/configs/sun20i.h                      |  11 +
->  scripts/Makefile.xpl                          |   2 +-
->  28 files changed, 1329 insertions(+), 194 deletions(-)
->  create mode 100644 arch/riscv/cpu/sun20i/Kconfig
->  create mode 100644 arch/riscv/cpu/sun20i/Makefile
->  create mode 100644 arch/riscv/cpu/sun20i/cache.c
->  create mode 100644 arch/riscv/cpu/sun20i/cpu.c
->  create mode 100644 arch/riscv/cpu/sun20i/dram.c
->  create mode 100644 arch/riscv/dts/sun20i-u-boot.dtsi
->  create mode 100644 arch/riscv/include/asm/arch-sun20i/clock.h
->  create mode 100644 arch/riscv/include/asm/arch-sun20i/cpu.h
->  create mode 100644 arch/riscv/include/asm/arch-sun20i/thead_csr.h
->  create mode 100644 board/sun20i/Kconfig
->  create mode 100644 board/sun20i/Makefile
->  create mode 100644 board/sun20i/board.c
->  create mode 100644 board/sun20i/spl.c
->  create mode 100644 configs/lichee_rv_dock_defconfig
->  create mode 100644 configs/mangopi_mq_d1s_defconfig
->  create mode 100644 include/configs/sun20i.h
-> 
-> Cc
-> --
-> 
->   Tom Rini <trini@konsulko.com>               (U-Boot maintainer)
->   Andre Przywara <andre.przywara@arm.com>     (sunxi custodian)
->   Tim Ouyang <tim609@andestech.com>           (RISC-V)
->   Leo Liang <leo.liang@sifive.com>            (RISC-V)
->   Yao Zi <me@ziyao.cc>                        (RISC-V reviewer)
->   Peng Fan <peng.fan@nxp.com>                 (MMC)
->   Jaehoon Chung <jh80.chung@samsung.com>      (MMC)
->   Lukasz Majewski <lukma@nabladev.com>        (CLOCK)
->   Stefan Roese <stefan.roese@mailbox.org>     (WATCHDOG)
->   Samuel Holland <samuel@sholland.org>        (original d1-wip author)
-> 
+-- 
+2.34.1
 
