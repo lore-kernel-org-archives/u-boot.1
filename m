@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28E11606A326
-	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 14:24:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03C41606A326
+	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 14:29:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=0TMyex2u;
-	dkim=pass (1024-bit key, unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=fP6vaxtm
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=iP9ZRLu3;
+	dkim=pass (1024-bit key) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b=lWM/ZDKn
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D1C678138E;
-	Sat,  7 Nov 2026 14:24:50 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C80DF81468;
+	Sat,  7 Nov 2026 14:29:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9aXpvOcNM36v; Sat,  7 Nov 2026 14:24:50 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BFF6F81327
+ id DzLKC0w8DvM5; Sat,  7 Nov 2026 14:29:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B70A681421
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794061490;
-	b=mGLrnpRpSEzZ4qDUOsR4IcP7rCTVT2sXE0hXJdnVbslyBEoVnV0SWCD6rjKdbcEKGltU
-	 sLyNzCjbRhNNp/8wowBN8zPyYArgFZEgl9Pwwdnn5xh43N+PyzuDCzYnolTyHnzaizQXj
-	 aY6/5qY7yUJAl27wyrAvepEXwKKRVa2VL+b2i1XKcCj8K2mtn0huWQvWoDSfniUWfaWOr
-	 ww5H/fA60iPHAPA5ByDWQV0BcYioKfrBtBd/8BOxpe7LNWa+IyBtNGRI0Wv89YoOOltO7
-	 o3ybaycp7YyHTD9FccQlHAIUmm+AnR8QocsQlLTOQXJFFjulF3wEno45mhwK9F9LAUA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794061755;
+	b=M6fUD3tEk7s+6ud0Uf/tJb5F1zgfCDG5QuA7cvK9Li7zhmRnaSJq1mPiq4ApkhzJkK3Y
+	 uRZNbPmdtSKoNLVo440gEYnRsAMpvd5dNenQtBCUz/2UBpRLSarB1GFC/1ufI5/CsbEpe
+	 d74vHCZ6807Vdo7ncDUzn/Rft9ChIAOnJfljzKqVCzBQZ/n9RZhq0JaUAb+ZJz18j8QDg
+	 0ndPUFJley+Z/T7sms3wZrxg/ee5YAapUYsuzwQPZPIaMontqvuriQKeXe7d5Y5ZtAVUi
+	 fpqxMJj51MRlFFRgTiSIkeTXE89T/33OX4bxsqYp+HnrdUsn1khQtuv+6AS6rMWo0OQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794061490;
+	c=relaxed/relaxed; t=1794061755;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,116 +33,128 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=q7Z2NHnZVQqBRUdBXtrthBvH5Piyg/2CYr+jSuhtxn8=;
-	b=LWcrfu98lsOKn5XXNHcsjpCw7iUp98NOHCNzoU3kYY/MkLcISsf9V2qKQgpc9HekKiGO
-	 KJYEeGu1Rgdpzb4jELCW/hE1UFlF7MP6zpurQWrLaHTjmdqaSpRrJ96m7dv5S98rUDuf8
-	 LyaBQ8j08kbQxS+I9NBBX0nahin6/jDj4lAPFWaxefQwp7hzw0oo8PKt0IDtl0TMxp3tQ
-	 ZiIWcjacmB2s5N+2LfM/HsgvWvJlQoxzVFe/1/YZktzoJOdrAKFJb3CzrvIvu1Uev2oVs
-	 j4CzY2Jt3OysivL0ET/6Bp11UWU+49sBw9qnsqi3c8CZL8v56Oz/cdlE2vM/YH9U0zA==
+	bh=hQsMun9o7H3Bf/y+O2hCOBvYN2RA/SjNNgsBWQvTRVM=;
+	b=GrX0qGLEJYPc0+3T5CUm4JGWkJ/8JZMhFaqFQfcgMavTf8g3ybvEuxv5c6BnsZYRPFJu
+	 xeMZc76lJvauCPcgCL4jjYwDA2hKrE28E4t1V0PQbufYMEFjYIPNyKH0PcaHESA5Sopdk
+	 4xKWWAWubtB9cM2raqRuxdq4SZwzSvuJy5N6KXj2OoUN3gFpeJfQwqhg9OsnmavcNtE1G
+	 3MdK6NrjtP7iM4O9hLhysTxaU2P0QodwpawRJcIOzXr+cXnXeklxDgb+p3NydtESTkTrf
+	 lmzJBXavfhn33JzmQI8sflLH0Xble/0t4hPQ1Zt1USzS1d4FRnVJ9YeoVBZpogNEPEg==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	dmarc=pass header.from=amarulasolutions.com;
+	dkim=pass header.d=amarulasolutions.com header.i=@amarulasolutions.com header.a=rsa-sha256 header.s=google header.b="lWM/ZDKn";
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794061489;
-	bh=q7Z2NHnZVQqBRUdBXtrthBvH5Piyg/2CYr+jSuhtxn8=;
+	d=lists.u-boot-project.org; s=default; t=1794061755;
+	bh=hQsMun9o7H3Bf/y+O2hCOBvYN2RA/SjNNgsBWQvTRVM=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0TMyex2uE+rf8p4PBoo/86+vlxv/+d9bJKAkAAIK+Qse0Uly84b4NNTNAD/320cUZ
-	 HQzN1oH+1nftu3va6aNSbfdv+JXnApWwqEt35yvKCLI0PkDZ5zLGqisLqZ8YB7ryWS
-	 z5WkRkARyQIcmP/7HHXdVUJ2UgszdVgWIHUBpg257Gg+GWsIa6B98ZbOjj9PyyW5i+
-	 1RQoEX4FK44LCjNvF+DMaD28wqciSuQCMGQb6FeerMuZtJ/1bGZbAoWoDpIP5H/BPg
-	 C0+lGyosjQpOK1JMRKPHzSmD3zG/pYrM8MkRl7WueKsV5u4y3+r6BpIppsISYmkpuc
-	 nnaTQ/cDAnTXw==
+	b=iP9ZRLu3FXo9SCje+DvW6lMjKtP8XMMVubytX9d7JeJFQ2QahI4+r6rao2xUBB5EG
+	 Ns5Djq4zihd4ugvr71NjoYX8uMUBN1gCY/mbc1dsN0EzJzRIpwWBbeWWA9lFyd+M2D
+	 oMmFF4Cv40JN+yPkbXWrHoGVzvQcn0OY/InqzeJfb1g+JSNuki3/yn5sVgmr5Ozo4+
+	 ElmrJtP6pGFlU0068PIDyBABzFocLIsAKA06YRlPX3eku04byFWsuMMO2uVwdidrsA
+	 9aHhYMNwIEf/i8K+UDBL7/nLPF37GYSj3zXM6t4Wn1PXb1WdsJ2SMjEsAe2X3A1L2x
+	 TnHvSYDvQqBqw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BFF6F81327;
-	Sat,  7 Nov 2026 14:24:49 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id CCD4634D
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 14:24:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B70A681421;
+	Sat,  7 Nov 2026 14:29:15 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6AFC137D
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 14:29:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id BE05240761
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 14:24:48 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 508C681414
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 14:29:14 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xXhsdhlqPHMa for <u-boot@lists.u-boot-project.org>;
- Sat,  7 Nov 2026 14:24:48 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 729634074C
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::b12c"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 7QBF4MZaHNSn for <u-boot@lists.u-boot-project.org>;
+ Sat,  7 Nov 2026 14:29:13 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1D2B181360
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::b130"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b12c; helo=mail-yx1-xb12c.google.com;
+ client-ip=2607:f8b0:4864:20::b130; helo=mail-yx1-xb130.google.com;
  envelope-from=dario.binacchi@amarulasolutions.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com
- header.a=rsa-sha256 header.s=google header.b=fP6vaxtm
-Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
- [IPv6:2607:f8b0:4864:20::b12c])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 729634074C
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 14:24:47 +0000 (UTC)
-Received: by mail-yx1-xb12c.google.com with SMTP id
- 956f58d0204a3-67c24619b19so960755d50.2
- for <u-boot@lists.u-boot-project.org>; Sat, 07 Nov 2026 06:24:46 -0800 (PST)
+ header.a=rsa-sha256 header.s=google header.b=lWM/ZDKn
+Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
+ [IPv6:2607:f8b0:4864:20::b130])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 1D2B181360
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 14:29:12 +0000 (UTC)
+Received: by mail-yx1-xb130.google.com with SMTP id
+ 956f58d0204a3-6798af41644so1268301d50.2
+ for <u-boot@lists.u-boot-project.org>; Sat, 07 Nov 2026 06:29:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1794061486; x=1794666286;
+ d=amarulasolutions.com; s=google; t=1794061751; x=1794666551;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=q7Z2NHnZVQqBRUdBXtrthBvH5Piyg/2CYr+jSuhtxn8=;
- b=fP6vaxtmEEHlUXQEFHU+1+N3kfSecfm3mO8JfOly1wPgBRUOBKcVEb9uFA4irQD+ov
- /FW+8FYfPWcYkJ+3sd+VpHqWYyfxnKHv5MywwT5evX5Yx52LAfSg8XoLw9GESm401zSL
- QPLt2mk+y0pEX2K9f644JtNqTUsdzwP7CdIo4=
+ bh=hQsMun9o7H3Bf/y+O2hCOBvYN2RA/SjNNgsBWQvTRVM=;
+ b=lWM/ZDKnEzGhcIeTF81juGyBkVRJeFCg9ROpBY9ASXqBUhq5m8/aKF65s2+UiUl2FT
+ ZPl4cfpddBBYEETgQqHC0DmUZHUMtem62A67IQVMfpZw0dliMOj5OhzXqXtwwqgfb60Z
+ uf+bCQCa8Nb5KdxBPtE9zXBPhdkSGmdyjzOvs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794061486; x=1794666286;
+ d=1e100.net; s=20260707; t=1794061751; x=1794666551;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=q7Z2NHnZVQqBRUdBXtrthBvH5Piyg/2CYr+jSuhtxn8=;
- b=eJDx3+yQxNHFa/weS0rACxwgCmkjMa5fgWn+CG62r3EkmMidM/quMf219HnwDir1rq
- mArIvXjcmagRyYxpwIbQoMy/VO9EUEnbaxE8Lz5IiS1jbj1fCjUytXn5RXyatVZARFow
- TzmmOFtgus9EmTNzHHgME7DC7+doL3cQE99jYJp1jTnGQBxaYJZhSGEL3SWi6A9AeH7p
- hbNAGVxhP6qCkGqolAbv9FavY9lwVzcVlcXa+7UR4JcWyZR29y4iwfj9hifisF9A+q1L
- v2fTW2yLECg3nzipMMfMPY3AZBkaQaGJ9vaKWbnf6oYpGdvDoIxxESOCe/kngZvnfffq
- dE9g==
+ bh=hQsMun9o7H3Bf/y+O2hCOBvYN2RA/SjNNgsBWQvTRVM=;
+ b=0J/m9ht2ybV/wsvYliyqyKyGjd0/Jh+PtkwVK1Sxk+CByVtqA32w7D9EwyknLuXmb5
+ xdXWDJUhh5YuX3md6zJpYRiEjy0ET0bgacLu/F0alOSrRSiQ7o5O9SMONngYm0WWvcHB
+ /g5DFL9rWRYMr76L10auy99GoznF3coD4iWi8/VWk/43SWHKhi2uQWGZXkllbhpvWYCP
+ oNcdkrdkb3QkEALBYiwEBgO9anS+WqFRasOELCqhTrdIWGWPmd3WzlTRCUukWaesMDEK
+ SJ36bMgrn6PB8xbDYZcz5hyhnEtNHLVLDat1Gi64xF2+l9MAPyPZfmHdQyO7XJVzj4w8
+ 260w==
 X-Forwarded-Encrypted: i=1;
- AL+hErGI7mylO/jgvaxI8XXENVbAMpjsN6UlTfD9PUS2Lc+s3DsGW3po7mR59yyNcaodZ+YVUpC7eBY=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/DqWkyhUVINtXOOjsDqsPd9JadsGjfBfyof9Bx+J+F8sz5UcSq
- z+Ngl9SAkHLoQOUwYtjr+KDtid2ih/aRIFMeFT0cwhAYgDpUsv2WndkAQRwpIee4xiD2IOy1RiT
- Cw948YWpXbyXUZGLer8xQ9CpHqLKF9AwaiQou+WkJfQ==
-X-Gm-Gg: AYBFou2t3BdsuQ/bdQAFetDD9rxZ967lzVwOUi6XLb/hpwsdxNal/5l/0lqf9nBN597
- 2Hn67LFKptsTs3b5ZnEBIEloqtbdzFZ+NkHB7bgOaegHPRuiI2A89AhXq6ul5isRTNPeV3PIzBj
- 7Vwqqd3GtOOHkuidxsqmTWsMIQUArjyYghuOqhi2aamHVkfx6w2HAL8Mlacc4qFgnsjCZZ5b7+w
- 8FWkJ52RUd/FciNxthtGSEtAr/Ro4CVdIeZ/tE09tKaC99oAYX0OcAZStE1dNaqG9lRhn1oI5BF
- BnudtD1ivsl+rQstAhI4yOWmNs/58lqEIXgqpK83WTY1pRC6lhUOw16g6hWoY5zKmdNU5MLRlEk
- 4mBoAk/VlQTPAUnmx/uP3mVe4M+E/PeBnhm3XJ+eoWlYhiwbe1s6AOQziEGS8rQHQeCf4D39bGR
- rx+26vxB9Cfao=
-X-Received: by 2002:a05:690e:16a0:b0:679:1517:497a with SMTP id
- 956f58d0204a3-67c1469e711mr3411760d50.108.1794061485899; Sat, 07 Nov 2026
- 06:24:45 -0800 (PST)
+ AL+hErHozTumVKv9aJifuLWxAvmKXvbBWeASEdvNVDyHrmFTZWoLZ/HgsiFtzL0KSxRkXnfrHwt646o=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z8GOwOab6ER9U0Qqf/Zc7YSzh5QAdWFTSEJc3liqGNwp/z0Qo09
+ bNqBRVgIuDMPRaIBNcR9TT/u4+UwxsSfpVosMpKwaTVm/jSZasIJzqPAqjIbPGTCXGRKuNm71gr
+ mbqpk74rGd/hEodpkz/SFMQ+bX1tk8XYbHLkh9DSsew==
+X-Gm-Gg: AYBFou0Pr4yrOf/qUajYsX7HBtwxvEpvrKme/nOmHIDHB7ylDcRwgI3T1qXHnOVF7ls
+ 7Iz5hp58Lnvh23/7yw2UyKMaC4E6BQtqpEkNPlcXs4eeSrM5vtus649kB0VYRiL7+yq6x/ynjQ6
+ lPyRCCRHw18nBw7Xrj52F9yw9hmhFeULfKwi513IVIN2qrBGIAF8JN7vQeItKzoyZ1r4UYJ2/rk
+ gJxsek9+TNq2yfGitNAzmM2Bfi+fjFjXcwGG8B1heCfO2ajdR7OXcziSJC+rat8HDVTNCowISM7
+ rXKj83q72sW6jVPSCSxwI5KOzELGThuxnbha0zWNrEiKxs2ccj3Tw3uaGaHje0KgjQNtWXbYFMY
+ FJ8r6FD7CyCCXI2NE8/CaZ+zTH4liBO6yN/YYwzxN51rgaz1KPM3wvm61JSskgpWdor2N/ALV1m
+ aYCFY84BnQ7jE=
+X-Received: by 2002:a05:690e:4091:b0:679:ab13:552d with SMTP id
+ 956f58d0204a3-67c1441af4dmr3198725d50.48.1794061748568; Sat, 07 Nov 2026
+ 06:29:08 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 References: <20261104085036.4012238-1-dario.binacchi@amarulasolutions.com>
- <20261104085036.4012238-21-dario.binacchi@amarulasolutions.com>
- <99888b6a-90b6-416a-bce2-b5e83d36de0e@foss.st.com>
-In-Reply-To: <99888b6a-90b6-416a-bce2-b5e83d36de0e@foss.st.com>
+ <20261104192118.GD1164024@bill-the-cat>
+ <CABGWkvqisJBzV=tRQrhZ87evgF6mTff+dJvO1LVwVQC-YX=DpA@mail.gmail.com>
+ <20261105144835.GM1164024@bill-the-cat>
+ <CABGWkvqoNBvjynykG-Y7V8BP5OTP4TOq4zwkAwSQ_P+e8-6JPQ@mail.gmail.com>
+ <20261105172616.GN1164024@bill-the-cat>
+In-Reply-To: <20261105172616.GN1164024@bill-the-cat>
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Sat, 7 Nov 2026 15:24:34 +0100
-X-Gm-Features: AclHuK_K8AWblRNFxzR2R9eA2Z053TD30p9UcuMpaUUKf4lXgWSc_npmh0mTFZ8
-Message-ID: <CABGWkvqjUDr0=wgAOznX6=XgYV3BcE1PCGqxexxkL2+9L3NWYA@mail.gmail.com>
-Subject: Re: [PATCH 20/33] clk: stm32: propagate rate changes to the parent
- clock
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- linux-amarula@amarulasolutions.com, michael@amarulasolutions.com, 
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Lukasz Majewski <lukma@nabladev.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org, 
- uboot-stm32@st-md-mailman.stormreply.com
+Date: Sat, 7 Nov 2026 15:28:57 +0100
+X-Gm-Features: AclHuK8vWe-UzdilgKMyldFIvYIaDvSa5Z_4nW76VPtn93_ZL0FBOR0_4iUo-Bg
+Message-ID: <CABGWkvpbBG2zrPDz7Fx766TdE07YHae1KnJ-+ReqGF2CRzyydA@mail.gmail.com>
+Subject: Re: [PATCH 00/33] Add Engicam MicroGEA-STM32MP257D-RMM board support
+To: Tom Rini <trini@konsulko.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ linux-amarula@amarulasolutions.com, 
+ michael@amarulasolutions.com, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ David Lechner <dlechner@baylibre.com>, 
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Kory Maincent <kory.maincent@bootlin.com>, Lukasz Majewski <lukma@nabladev.com>,
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+ Sumit Garg <sumit.garg@kernel.org>, 
+ Yannick Fertre <yannick.fertre@foss.st.com>, u-boot@lists.denx.de, 
+ u-boot@lists.u-boot-project.org, uboot-stm32@st-md-mailman.stormreply.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -154,86 +166,125 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-20.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Patrice,
+Hi Tom,
 
-On Fri, Nov 6, 2026 at 5:46=E2=80=AFPM Patrice CHOTARD
-<patrice.chotard@foss.st.com> wrote:
+On Thu, Nov 5, 2026 at 6:26=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
 >
+> On Thu, Nov 05, 2026 at 04:39:17PM +0100, Dario Binacchi wrote:
+> > Hi Tom,
+> >
+> > On Thu, Nov 5, 2026 at 3:48=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
+ote:
+> > >
+> > > On Thu, Nov 05, 2026 at 08:12:07AM +0100, Dario Binacchi wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Wed, Nov 4, 2026 at 8:21=E2=80=AFPM Tom Rini <trini@konsulko.com=
+> wrote:
+> > > > >
+> > > > > On Wed, Nov 04, 2026 at 09:49:33AM +0100, Dario Binacchi wrote:
+> > > > >
+> > > > > > This series adds support for the Engicam MicroGEA-STM32MP257D-R=
+MM
+> > > > > > board, with its RGB and LVDS displays and the FWU A/B update.
+> > > > > >
+> > > > > > The first patches pick the board devicetrees, merged for Linux =
+v7.4,
+> > > > > > from devicetree-rebasing. They can be dropped if dts/upstream i=
+s synced
+> > > > > > with v7.4-dts first. Then come the fixes, the refactors moving =
+the
+> > > > > > STM32MP2 environment and FWU support to the SoC code, and the b=
+oard
+> > > > > > support.
+> > > > >
+> > > > > What's the status on upstreaming all of the changes you're puttin=
+g in
+> > > > > the -u-boot.dtsi files? Thanks.
+> > > >
+> > > > The -u-boot.dtsi contains:
+> > > >
+> > > > - U-Boot specific nodes and properties: the environment partition, =
+the
+> > > >   FWU metadata and the bootph-all properties.
+> > >
+> > > bootph is to be upstreamed,  I don't recall where the FWU stuff ended
+> > > up, and I'd need to double check the specific environment binding you=
+'re
+> > > referring to.
+> >
+> > I added the bootph-all properties to the -u-boot.dtsi because I saw
+> > the same in the other STM32MP25 boards, e.g. the stm32mp257f-ev1. If
+> > they should go to Linux instead, I will send them for this board.
 >
+> Yes, there's many examples of needing to upstream this still.
 >
-> On 11/4/26 09:49, Dario Binacchi wrote:
-> > Since commit 901e0d95df3b ("clk: stm32: fix clock counter"), the
-> > set_rate operation of the clock is called directly, so the
-> > CLK_SET_RATE_PARENT flag is ignored and the rate of a clock relying on
-> > its parent, like the STM32MP25 LTDC kernel clock, can't be set anymore:
-> >
-> >   stm32_display display-controller@48010000: fail to set pixel clock 27=
-000000 hz, ret=3D-38
-> >
-> > Use clk_set_rate() again, which walks up the parents having
-> > CLK_SET_RATE_PARENT set. Unlike clk_enable(), it doesn't update any
-> > counter, so the issue fixed by that commit is not reintroduced.
-> >
-> > Fixes: 901e0d95df3b ("clk: stm32: fix clock counter")
-> > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> > ---
-> >
-> >  drivers/clk/stm32/clk-stm32-core.c | 7 +------
-> >  1 file changed, 1 insertion(+), 6 deletions(-)
-> >
-> > diff --git a/drivers/clk/stm32/clk-stm32-core.c b/drivers/clk/stm32/clk=
--stm32-core.c
-> > index cd6bdee5412f..f9a0ba2f5748 100644
-> > --- a/drivers/clk/stm32/clk-stm32-core.c
-> > +++ b/drivers/clk/stm32/clk-stm32-core.c
-> > @@ -168,17 +168,12 @@ static ulong stm32_clk_get_rate(struct clk *clk)
-> >
-> >  static ulong stm32_clk_set_rate(struct clk *clk, unsigned long clk_rat=
-e)
-> >  {
-> > -     const struct clk_ops *ops;
-> >       struct clk *c =3D NULL;
-> >
-> >       if (!clk->id || clk_get_by_id(clk->id, &c))
-> >               return -ENOENT;
-> >
-> > -     ops =3D clk_dev_ops(c->dev);
-> > -     if (!ops->set_rate)
-> > -             return -ENOSYS;
-> > -
-> > -     return ops->set_rate(c, clk_rate);
-> > +     return clk_set_rate(c, clk_rate);
-> >  }
-> >
-> >  const struct clk_ops stm32_clk_ops =3D {
+> > The FWU metadata node and the environment partition use bindings which
+> > are only in U-Boot: doc/device-tree-bindings/firmware/fwu-mdata-gpt.yam=
+l
+> > and u-boot,mmc-env-partition in doc/device-tree-bindings/config.txt.
+> > They are not in dt-schema yet. Both are also used in the -u-boot.dtsi
+> > of the other STM32MP boards.
 >
-> Hi Dario
+> OK, thanks.
 >
-> This patch is coming from ST downstream tree :
-> https://github.com/STMicroelectronics/u-boot/commit/804e2d5f7b376703a465e=
-1a9a81b5d7db7adfd01
+> > > > - The RGB and LVDS panels, with the LTDC and LVDS endpoints. These =
+are
+> > > >   already upstream in Linux, but in two devicetree overlays, one pe=
+r
+> > > >   display. Since the display is selected by the "display" environme=
+nt
+> > > >   variable, which is stored in the eMMC/SD and is not available yet
+> > > >   when the U-Boot control devicetree is set up, both displays are
+> > > >   described here and the board code keeps only the selected one.
+> > >
+> > > You can't detect and apply the overlay instead?
+> >
+> > No, the displays can't be detected. There is no EEPROM or other ID on
+> > the board or on the displays indicating which one is connected. That is
+> > why the selection is left to the user, by the "display" environment
+> > variable. Since the environment is in the eMMC/SD, it is only loaded
+> > after relocation, when the devices are already bound. Is there a way
+> > to apply an overlay to the control devicetree at that point that I
+> > missed?
 >
-> Please, keep original Signed-off-by: Gabriel Fernandez <gabriel.fernandez=
-@foss.st.com>
+> Maybe? How far down the path did you try going for using overlays here?
+> And then also, since both of the overlays are upstream, is there a real
+> penalty in applying both and then doing the fixup you do to remove the
+> unused one?
 
-Thanks for pointing it out. In v2 I will send Gabriel's patch, keeping
-him as the author with his
-Signed-off-by, and adding the Fixes tag.
+In v2, which I am about to send, a new option,
+CONFIG_OF_UPSTREAM_CONTROL_DT_OVERLAYS,
+applies the upstream overlays for both displays to the U-Boot
+devicetree at build time, and the board
+code keeps only the one selected by the "display" environment variable.
+The panels are no longer described in the -u-boot.dtsi.
+
+As for the bootph-all properties, I sent them to Linux [1].
+
+So the -u-boot.dtsi now contains only:
+- the environment partition and the FWU metadata, which use U-Boot
+specific bindings
+- the bootph-all properties, until [1] is merged
+- the LTDC "lcd" clock, until the pixel clock support [2] is merged
+
+[1] https://lore.kernel.org/all/20261107141353.2228391-1-dario.binacchi@ama=
+rulasolutions.com/
+[2] https://lore.kernel.org/all/20261028135915.2665857-2-dario.binacchi@ama=
+rulasolutions.com/
 
 Thanks and regards,
 Dario
-
 >
-> Thanks
-> Patrice
+> --
+> Tom
 
 
 
