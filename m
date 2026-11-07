@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8B7F606A326
-	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 09:02:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E639B606A326
+	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 09:02:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=tsCCSbbf;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=bGK75l45
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=T0zVGXrn;
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=klorzuSH
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A5CFC608DC;
-	Sat,  7 Nov 2026 09:02:35 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BC75D60A4B;
+	Sat,  7 Nov 2026 09:02:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 70ycKtTajwRH; Sat,  7 Nov 2026 09:02:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E36C56075E
+ id WAAsIP7gPUdw; Sat,  7 Nov 2026 09:02:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B7EAD60A3E
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794042155;
-	b=JyaX19j6uoaUwHfy4MhSicpUzTEo4ooAOYWWDj6zIuZZPoWaH64s6PsRVnZEkhkvfdKq
-	 BugucVgZ9VkkH7gu65DMt8Bp5UXXubrzLhG7k7K1WznC18AltnwjRhgFzivylawjObs7C
-	 w+MEek84p9qJVdnN/D3sNBW1V0Myb9rBIAzOEWYPa64ota7RwTugeSrcWSQqOjCTSEv/3
-	 TlvF/71VcYQPGLViT664kYj1sMdQ188xHamdg5XtqIkokwEz20BYHGDGQ1jEAlDPXnsKS
-	 +tolh24bN90LTNH5G+bki++uGkT5eaH47w3d5wBDUbbcVlP69avdUktI8aDzf7bvR5Q==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794042157;
+	b=I2hO0/gwkBaIsKGiUWli9JK0PBx7AvmFn7Ajjobv1ATjnJ4o4LTzA9yEXrbnnMjEBPc8
+	 4uhHMH21SxI7qzWXODGnuBR6utPFyAuOVOPTf/kpr6skspm5L3cWlALej5LgKlI0NUz5N
+	 m6TzwS0YnYVxjL/Rc2VUxy3Xwb6LNzmVMYMZE84hoCWbFQMah5I+lqEbi/AcXdpQkcXtd
+	 N4olqE+zaVggxI5wIB2KDbU1G3KR06KvlK4mQUkYwNYTO+2DDUZPP6LQ4L8i6w7/zz+pz
+	 rkxHU7kpsu6zbmIPWoZYD1qTVnqyocF4OzR8SZCeatl+LuH+YmAusQIa3OtLzk8TfEg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794042155;
+	c=relaxed/relaxed; t=1794042157;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,64 +32,62 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=SuPIIjOOoOvVKqyW75uC6g2WQPzPLwaNTs3ZP/i8JmY=;
-	b=OFZQ8w+fRBMFQNpTtm+z2XZfn2yUW3ZYrryaFgmFKaGlFdmysYyeFvzZn1syDJtxBWkC
-	 m52gN/CAOzELw9Rp952kVDQGg3kgHUFX0RLndKkCGLYljxFzB2v8AmnJHpz3JInr1/Yxd
-	 NWnYec0huaWrS23NEfv9wpBEJrs4k0CExkGDLdDHE5J+djjYrQFTYCuNtDTzJUgouX1oG
-	 8ufqUDZJUsF55ocjS2tV7fcIGZNTTGTFXjPr3LAYQWOqOaIjX7aIv0FoJzdaQSg3xM+UT
-	 /LfOZjA0K/qrodTK87qULVYnB/JmldIjGWgPKkf0gCdYXgewsAmqHJMEhwb01MGGqYA==
+	bh=DTSeTczEoVUy/nw/x37dw+Zv/DDzEmN9zkRGfVYKrNo=;
+	b=jhSE3aE40eYyAnZTXc3jhZj/ZnuK4FWs8Kvv7h44Kk6L16HbI2yVo00s+HeQ9MGgN+/W
+	 8IHgpJdI2f0/QY5BMi3hNa+q+ZGFo4RaONYnuSM3VNA+SsRbqXSHz4PGp/DAMW+q1zFDq
+	 MZpffhym1xz8OO0Py+uvmaMU8gxxe7rUtOpVJ0S+BysGA63GxlfEvNdZPASiKGAvp3wCU
+	 CbhiaI4ZewqfV1H8GEnXx2VsYkodjgxClyOviBQywxA5imf2ZerBC3Kv93NxgKUmr6/iY
+	 Sjq83fQZ3Xvou1wE1nEEqyv76IG6ge4CoVJ7XwYdw/XWgfce3Csa1Pm7u1q51aY2NKg==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=mailbox.org;
-	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=bGK75l45;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794042155;
-	bh=SuPIIjOOoOvVKqyW75uC6g2WQPzPLwaNTs3ZP/i8JmY=;
+	d=lists.u-boot-project.org; s=default; t=1794042157;
+	bh=DTSeTczEoVUy/nw/x37dw+Zv/DDzEmN9zkRGfVYKrNo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=tsCCSbbfLsU2icVuU82ZTjzMhtxkU0UgnScqs3R9ESDbK2yozeAQ7O2kvCExl9+6Y
-	 IHMxUZHB9gGkUYuayF+V1TJKcMJNJAvPkI60UX8nMKNRCH5NE2BiPFtf5kwE4g1PmV
-	 qZp9+NJM+qpIEb4I/HIM2UYCpuIu0iYf+3kvfaR70etJpxpCB6WrhUi19IljCMiR4Y
-	 PrTjgoV2wEUfqfsTejNbeCD+1q5tvQlTh+FgRWIc/Y+yHANZMQVyqfu3QvXDSPSMff
-	 7WoSUsVZ7Y6jn/wsGNMs2omFNhYsy8VxV0cDGNzKO0LNZkUPUnWP4u1ZdJFJ5AcQuP
-	 +0eJI08SttoWw==
+	b=T0zVGXrn80poctfAKaKjkCPSU5OgHbn7wRFLASDWAulEKQbyOobDeuhCf82AIAF5I
+	 QYOp0oFdsA2y6g59IoPdR9+IZd+zAPVt2+3lg4TZo/nYrIf85lrExa+dlWrQlHpYnV
+	 vA2CXVH+UNEs+27HISm9Xys8d2s2NUrhg4w3mAbq2jKyjUg4DMibvmZEyO6BhQgseK
+	 oeJbS/d+rk/UK6bos8a1LZ7XllEEu2xA2ozgqyQus0VfPtQddnOPenTTe06bnFqam4
+	 WCnhyW0vg7DsL8tQ9A/t7DhE6hSxzTFrFV0M8WKdK3nYPib02qUUlRLBkrTfk85/0k
+	 E1HAl+BHOPMeA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E36C56075E;
-	Sat,  7 Nov 2026 09:02:34 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 9B2962FE
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 09:02:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B7EAD60A3E;
+	Sat,  7 Nov 2026 09:02:36 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id EF28937D
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 09:02:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8A3C660824
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 09:02:24 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D291240081
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 09:02:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id E-Kc4LSz1UmD for <u-boot@lists.u-boot-project.org>;
- Sat,  7 Nov 2026 09:02:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6ED6260737
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2001:67c:2050:0:465::103"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Us7BuYdUPTxN for <u-boot@lists.u-boot-project.org>;
+ Sat,  7 Nov 2026 09:02:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org D7CC140042
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2001:67c:2050:0:465::101"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::103; helo=mout-p-103.mailbox.org;
+ client-ip=2001:67c:2050:0:465::101; helo=mout-p-101.mailbox.org;
  envelope-from=stefan.roese@mailbox.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=bGK75l45
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6ED6260737
+ header.a=rsa-sha256 header.s=mail20150812 header.b=klorzuSH
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D7CC140042
  for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 09:02:23 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4jM96M6d0JzKmTr;
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4jM96M13hJz8v5f;
  Sat, 07 Nov 2026 10:02:19 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1794042139;
@@ -97,31 +95,30 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=SuPIIjOOoOvVKqyW75uC6g2WQPzPLwaNTs3ZP/i8JmY=;
- b=bGK75l45BwNUXv8I0Fr7zGjF4+ON91A2BOUeGd154jAFyj+lmpILBIacGj0/WRslgaNO+N
- qwDt2LxrUEMW39DOVhy7AfbnOCueyQKKGrycNMZvn+L5DLUFP6VQJ3EhqC2x+4iosSaIqT
- lyNrbWwtzGCjoTWDpZip0No0DsnMZVI+gA+kOPqZW/rfro+uLk41bHIY1RG9nxEg4nnl7T
- MIf9Jbzbuq4RTjZ/BjCuZU3R/Lm4UtRlcW6XgmJN/9OZDmTQ1CpPSI0eA6F6j/vjXGmLko
- IjFlAwvSGk9GE2lobC71yHvxwSfosZK+fpesLH6mhpHqHD45tDLexucAZsv5/g==
+ bh=DTSeTczEoVUy/nw/x37dw+Zv/DDzEmN9zkRGfVYKrNo=;
+ b=klorzuSHpcQvVy/HbryZ055HjXTRUyq51Y0zhpwlI1d33zydle0pEJC0oIRc/P96qLr1ru
+ bnW7QDddJ0cvqYTCU3oUOPGtngrQJRWiOcl0jbx7gLpv4ndtekuhR1S6TLwx0J0B4h83gM
+ QMyPBvIxVptel4jGwV0VwagSiNDvWsFUD7Y4jSWE5cnsdnLvRXAR9zbxAxmDvMqurLuTTE
+ yfe8r6c5oU41zzFVw9eUtT3tabJ+vTmmiV3jM7vXcDkowBEhV9xij4cfbQNqsCWibX4fNJ
+ vTyGSyR5skumeG0z+92HgpgxQ/f0Mnp/rBmL+0301t28ja8dRRh7npVzGotKIQ==
 From: Stefan Roese <stefan.roese@mailbox.org>
 To: Jan Kiszka <jan.kiszka@siemens.com>,
  U-Boot Mailing List <u-boot@lists.u-boot-project.org>
 Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>,
  Hung-Chun Tseng <alan.tseng.cs@gmail.com>
-Subject: Re: [PATCH v4 2/3] watchdog: add support to call initr_watchdog
- multiple times
-Date: Sat,  7 Nov 2026 10:02:05 +0100
-Message-ID: <20261107090206.2015512-11-stefan.roese@mailbox.org>
+Subject: Re: [PATCH v4 1/3] watchdog: Add support for i6300esb
+Date: Sat,  7 Nov 2026 10:02:04 +0100
+Message-ID: <20261107090206.2015512-10-stefan.roese@mailbox.org>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <174a18e4f6805299db40fa3504c24e19d79b7776.1792320756.git.jan.kiszka@siemens.com>
+In-Reply-To: <ac8707e106b9fc91326ce64d983e9b12cd0a61a3.1792320756.git.jan.kiszka@siemens.com>
 References: <cover.1792320756.git.jan.kiszka@siemens.com>
- <174a18e4f6805299db40fa3504c24e19d79b7776.1792320756.git.jan.kiszka@siemens.com>
+ <ac8707e106b9fc91326ce64d983e9b12cd0a61a3.1792320756.git.jan.kiszka@siemens.com>
 Content-Type: text/plain; charset=UTF-8
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 96wbrcomuonjj5naw7cz466ugckyyyty
-X-MBO-RS-ID: c79ee3fb7af4da78e1b
+X-MBO-RS-META: whsdszzcw7bgy1qrsixnoxkqe3tqskoy
+X-MBO-RS-ID: 54376dd33dfa520982a
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -142,14 +139,15 @@ On 10/18/26 12:52, Jan Kiszka wrote:
 
 > From: Jan Kiszka <jan.kiszka@siemens.com>
 >
-> This allows to invoke it from board init code once more if probe
-> ordering requires this. In that case, avoid to re-add already activated
-> watchdog devices.
+> While the real hardware might be in the museum now, this allows to test
+> watchdog integrations against QEMU virtual machines (-device i6300esb).
 >
 > Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
 > Tested-by: Hung-Chun Tseng <alan.tseng.cs@gmail.com> # qemu-riscv64 S-mode
 
-Applied to u-boot-watchdog/main
+Applied to u-boot-watchdog/main, with a fixup while applying:
+
+  [sr: use void __iomem *base]
 
 Thanks,
 Stefan
