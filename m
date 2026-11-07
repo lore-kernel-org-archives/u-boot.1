@@ -2,133 +2,136 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9FC49606A326
-	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 12:49:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A374606A326
+	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 12:49:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=khQTEcff;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=hgxP+YGA
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=k2Qe3zzR;
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=YUhmNG99
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4B1CC812CB;
-	Sat,  7 Nov 2026 12:49:53 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D57E98132E;
+	Sat,  7 Nov 2026 12:49:55 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dHM5CTsPgrDe; Sat,  7 Nov 2026 12:49:52 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1B462812CF
+ id pxNaHjhrkFmg; Sat,  7 Nov 2026 12:49:54 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C0974812E8
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794055792;
-	b=jBp6MFRv3MwiO7vwIFpbDL97gK92YD7QWPfFoUK4ZiuwMeGSKz3wmuJOJ6Gxpea8TpVi
-	 w9OzYl5yAV13j+ykG+yiiL+M07mM7F5h36uygk1dHispm14pIzrr6p0BD6fr+ykk2ArUQ
-	 BNMFTWq7cUjdfPU0coLqye0k+sST45phb71dWFMPzhlyLUCmnAKReao1EYEQ7k6FCNNny
-	 lw71RctV9o4SvUqu0bHV+xBIzStk8vwTZo1MbvZI4ZFl4Ci+GWMPqNOXycHfRN+cJIxVI
-	 AcSd3cBEEJYX850jZ34RpNdW7B56kURL0x4iVdFjYd3tgPIIWPpK0mHQxM1TwhqYIFg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794055794;
+	b=Nw8k4bCDCgPjrrxgz+gcouOI8DKtZoFkxTM6PeH3RvgN1FNuslixpvA/j/LqhzdimmO7
+	 PmgAuXfBZZ2NbWZ49yFxg2efEJyFfq7PeI0L9qj8y9C5p90yF9Az8GQHh3ZbhRP7Fr3lk
+	 yDRndYyGZFL9g+i829KQXP2uFIHeW+dZxQN5WZ+28i06fYfsiVrgjE+CdN4nKF2NTInJQ
+	 7XX9+a7oG5rI9pRtxD86XT0T8yMamzhOHJkEDkx5eXVXbB/Sn06PVXYU/c81RAUTZtd+e
+	 e4jkvkKumdeVWTTD5Ro+1g6W9OjeJjwmiNf7mlHFkjLJcLpTKntol3yVvCc9PAOs2Xg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794055792;
+	c=relaxed/relaxed; t=1794055794;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=TU2t33EGiqp/LjXehRHFlNroU8sFwni/riOs5yClKlw=;
-	b=QHGhXmgEMvTMC/qXOvYROg7YWa3eZ6zAPXt+UaBBdIa3r9AojlQKjSbaAy/PRuM7phkz
-	 czGY+rJJiKkmD5iG6B+KnNe7plMOtQxFHXczI55GQj/4C3/76Ck3+kZjZtV+N6RDWUa4e
-	 f174tvE6GHxfgTrCSfi7XVAVLlnCbF4iDKitxYOD+iB4GsyYq0qi4V9Qeb1BSPuYBIDw+
-	 veXbAGSfvoEgTaBw3Glq5THt82uONSAdnWJgK64s1ysuB8Pc3k4klgGdK134jJZAPx0Nc
-	 WoFHxGp1f2ht2d3/MP+mthKfvbv+cli0ITMu+z9bsX8qL4UzWuYHsGKeZvfHsl3Dhgw==
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=MOVbeTppnUi9s3MW/roj0LQj0J2EuoHnwNvIVsD75z8=;
+	b=QM8KkY/oSbxr3ukSZpaLfE6Bgd0Gs0rG9QseAhbYd3ge6KeFX+ABGfDbs4RqAR9BhmKW
+	 uIft8ESiM7/z5sfIH/SxbBR1Hz3lsq5m6iLkDLfw59L0r7q635QMe2FhArRdM8fQOyJbn
+	 XlJPEctFl5dLrxDHNuq9qpW8fVpxRjFd5f1rqzS/SkTjIvsYo0K3GrttRZhL7/AGW9FOZ
+	 OaL1npqZRK8byq26f3D678YX9xTxTk9Ig7ZnKQ11uV4LMgCcTgRZ7FBdLpovU3zrbQYNu
+	 /rL/FHS2g6o7a57KM3PVrOpuEWyPYCfNlGmWnBKBx/T9SHkqfOBODPCA86owZqrYLYg==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794055792;
-	bh=TU2t33EGiqp/LjXehRHFlNroU8sFwni/riOs5yClKlw=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=khQTEcffoWrOOsONE511m0lufiOZuXbasGVem80eqNaMwT8buqeIaRVOE4dvke5q0
-	 J7vJgOdq8ea69xkK/y7RxtdenuindvtcvyM5W0HG8q5xQD7wifzZSgLOPCZAZHzaG5
-	 Z8ALfssPYOs1c6EgUUyxWCcbn77t6k575QMoElV/W+iMUQs4how6f7uKeU8FB3gnCd
-	 DuC75fsEes7KRxJ88S0JOHLWiiyF/2EPgjhVVd1a9ux4ZDkiqm2RCsJ1S/2fY+pep2
-	 ETTst5LCd33bjitaXTYcr6Ix2etgH2RdRbSP2j9vFbL1YSC2HBnh0gz80rZg3QkCgE
-	 fJV0qUSfwpaRg==
+	d=lists.u-boot-project.org; s=default; t=1794055794;
+	bh=MOVbeTppnUi9s3MW/roj0LQj0J2EuoHnwNvIVsD75z8=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=k2Qe3zzR2rvlsCo3Uzudlgr8Lfu9hvCRmCS+KCbN15Ne494NCxUAeKms1tBDMBUbU
+	 uhhxqtCuLU4wAByXNQ7B2EDW7cJZW11jnwpxKAbPsPxpfkaIjjA0I2BzBSQmjy8zh7
+	 bVkp/kDVeCC4mGPDnWGYAwYjK20te0EGQFd3bFSG1cqIpwtYSRDA4pH6REkDnqesFJ
+	 FthfwzBWNxuEk5NqTMNBqAK62yFqFA9PbWV6y/snb03XnxVpp1dnNK5OvUDVIWxuCl
+	 n5YBraQk/q0Dr040nT2qpRxxXH5E4mhunPrFp0Px4Io+MqJwA9SZvECAZSVp30/qGf
+	 iLr11auWHZYVg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1B462812CF;
-	Sat,  7 Nov 2026 12:49:52 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 2065431F
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:22:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C0974812E8;
+	Sat,  7 Nov 2026 12:49:53 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id D081B32A
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:22:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 069064005F
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:22:35 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id C2243407EE
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:22:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id MG3iqCSxnXKS for <u-boot@lists.u-boot-project.org>;
- Sat,  7 Nov 2026 07:22:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 66A2D40042
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::529"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 7Bs8WCuPrQxL for <u-boot@lists.u-boot-project.org>;
+ Sat,  7 Nov 2026 07:22:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8CB2040762
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::52f"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::529; helo=mail-ed1-x529.google.com;
+ client-ip=2a00:1450:4864:20::52f; helo=mail-ed1-x52f.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=hgxP+YGA
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 66A2D40042
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:22:32 +0000 (UTC)
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-6aa046a99c6so244877a12.2
- for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 23:22:32 -0800 (PST)
+ header.s=google header.b=YUhmNG99
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8CB2040762
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:22:35 +0000 (UTC)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-6b565211890so218136a12.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 23:22:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794036150; x=1794640950;
+ d=linaro.org; s=google; t=1794036153; x=1794640953;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=TU2t33EGiqp/LjXehRHFlNroU8sFwni/riOs5yClKlw=;
- b=hgxP+YGAelwWmbrq8Tnu9hBqlECeQNmWE/ezsnRCAf1BeGjAnJgLFFyCn1X+auxnzr
- Gm6YOeEGX+V85//oTKmTWYfupAU9LPaY2T8Y2Wd4Fc1U0BmxUpxSz7yVhOKLPVoC7mQT
- EPiqgAPXq3AcCGxPe5YDhCk0n4Genk7bnNR0xmbCr1STElJv5EEF+xnLRzGk7o2XH9ea
- Eqv0PBytV9dM/8xUFj3HbHvidaW3Px10c3tQBlxOUm8pSu2cqU4KTKtZG00aRerEonlc
- LGriHuu6CSU7zsxtKCBYaWf6DpebqNwa9ycuoDF9BYw8l4Vt/OMoRjMa2aLDtR03YYXi
- kNXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794036150; x=1794640950;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=TU2t33EGiqp/LjXehRHFlNroU8sFwni/riOs5yClKlw=;
- b=Hclnhok1+40YM3p534E0E4ToYh4Ngb43HnAWfs6vf+3gf2zGBe654cjivCZPLlhoeA
- quhzqFJJysWp5VB+UjlaXEptFyxE+tsK5JrRsj5ujnWDbsE6T5lFMXtiYmK/08A7ZfBT
- cR6xO3fsTZ5sZtiXXcHXCZkZ2nl0E3TWVrTIelokozKjKOsaJPzsH/rVuT2W1AZ+KIVE
- Bzz0c0VcYFOX7GyoTETZuBPnJdFzCOeV/+ucqUMxyk3qt7yTVK7X1mLSMTKp86MGmkGw
- 39Q0/xAp2mKhmSrO982UU9pyzmGNBAnGQTxtGedEZ0C1imv20gtgr1YESMZ6eEPI/UfW
- OeNg==
-X-Gm-Message-State: APuU4Z+O+/j5TyWVO2KbZjwvrzMDxtJPR5DLjl0OYZ2JNvwg//nL/LjM
- pi1ZgYBAM6K6f/JB5cK7db52z6Wf4yPdA8fzBTKx46tKq8uo6ZOWdZCVqHzaz8JhesliFNsckXF
- ar6zI
-X-Gm-Gg: AYBFou13o5O9iJ1+5gbTDWffdPep/6GAjOBvLQdeU9ouR8YpF/yBOf7/k9CzKX8orRA
- Pyj/KfsRJosISrlYQqtM9l6l+oTydLiY7wtcg9o76jRNkotMLBohD6wgqt68W6l/V8QxcEifKZj
- 5midHlP4iuZaH65dvW0i8CTvVn51NBvDgNBiRTS5KRSdnY3iXuNRj6SOHCaGSVxqiaXWqM6eOY0
- ff42FhVDxrsJMv6gAQzVZoZAY00Dcs50egb2hzkaJ2w6ddXTyMQsOYbCG2/KuIoE8Ipbx+NOFkV
- nicnH6VFcoWueSVQkhe52/0Zs+8JrhQUAsttE/BV5FIt/GTOR9WXBLVEZfwEd+xhTS6a4UBZHEI
- dYeK9QXexXTBrjT5UQqXxx2Jj2YUC07W/DvAk2VC3oPkUPtFpEWl+L4GWfegZ0hZR105+k0HJNE
- zt2dRazzTmHOTej+lzFCLWoQhfnwlLTLv5y1MQbrInHloJ8v/LzilC3CQpSWIFCVdvJG9QevkVk
- Q6572/H12nLKYZCbEU6vrbcMHofh0qnsWnCg/Tn15XvSe3Yn6U5ldICy+V/UaV0ggH9ZqsEDVlV
- bNUfAYmlruMBWPcW5coq1CY+dqWXeHG9MvocmU8iWiGTERn0QsI40GlGe8PHhZzNNj6KuDGisTL
- RUaxwa0wYmQ==
-X-Received: by 2002:a17:906:941:b0:c41:8e21:4d62 with SMTP id
- a640c23a62f3a-c4d34fd3a8fmr398649366b.1.1794036150396; 
- Fri, 06 Nov 2026 23:22:30 -0800 (PST)
+ bh=MOVbeTppnUi9s3MW/roj0LQj0J2EuoHnwNvIVsD75z8=;
+ b=YUhmNG99gJXP8CMyYDLZYUOkh4KGZjaPURMQUVKR70osNeaKaWMOS2vyMqeqZh7GTG
+ oMoJ9r7zLTE9CGFl/SSFMyjfI1kKEob4txPSzWnk17mM4XMTzuLAjddAFTBennZORlCN
+ tP6/aKacw7sP+v/PSRCALHTZLt5JiR4LjQ9PJ1zUfjPVbnOBJaVfUtGObwWJrtSU3rQl
+ HHT3pP0HL1T76qpREXK0puuBdcGr2cfYhbPJqDJQPA2mkzDg3o/U3tRZF3zcpcNKfsIX
+ ns7Z0ofQOn5I9xWzGXkTSxHIZnRbu/3rH/fGWR9VXs/OsqvhJblZF6+r1Z6QlMaIkW03
+ QUOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794036153; x=1794640953;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=MOVbeTppnUi9s3MW/roj0LQj0J2EuoHnwNvIVsD75z8=;
+ b=PfpNsgiI3sKUe3aAMDdAbRx5LR8zwspXNlYj7bkqH7h17HxSTJcjZThOWHOpEZTrMX
+ MZhWC2MWCulULQx2+6A8PRNh41q+IYLk6y8LDGcDF/DhNd6mogQDQ6vdRqttaGjd/sm4
+ h2ZZ64AcQrOOfuwAp7ER9grorqyPrcCfJCCnA+8cfRmTcviY+4HDSMsKvcV+/7Lb6+6/
+ yZnIq5xwX8G6MkXlFy1GcTsVNi7Ly0VkEIKuIUChsL9j8IqdMY5efVK0djM7M+f+fjaz
+ pdzWQD+Fy0lNzRymRUecPRXjW4vLEUnRjyKcj1QvwlLQjmFudFVyuAoLPlXAD6EHr9gU
+ wBIA==
+X-Gm-Message-State: APuU4Z/EdRLUtgQ1reJx/CvIiGCteOEFpSzfTupy50t142mIG110Hsa2
+ 1qqGUa6QnMl9mo+VwYAGn+hlCd4NlbLkDyblBUzU/944a9r9vWTQemdHl9Kb8xDKIIAGTJ/PYKp
+ MoyfF
+X-Gm-Gg: AYBFou1XQ2JDRrF2sJrtivL3iR6AnX50+KGY+1wlQEej3zoL2zHq3s/gbRYoH89Nq/W
+ dIiP3tVcgdjkJKR1vDrRAY8afna+ZOgFH3zQN3AIafus8oA8JZyt1ZBTuE04EtyiUtM3k0eJzPd
+ uVnlQycWVmzTzS7XPYQ0g3rTZxBssiMLQtPlYg+hgPXHnBiuWpTCxAkxzPev/uMk2xhWh4AXlPp
+ s4fbCCOe18KiId8Rc9pKum/SoXlqV61QsaD1BSjMzAmFmzVjUVrOe/HP+C4xbjExDhRCVzwdUma
+ EDC3g/aOrry1Z1mWKwTSldttNrk0rE1uj0Jc7OxaggnIMGZwaItNjQ4r3f6Hq6hwQsIIh8wB8tA
+ fzCdBXWohcAYBC0RrCKybAnd+qyml8X++W3+LKsUa62JDKYXOExkE5j60z5ZqQJSR+npA47ryy2
+ fbwVCNVZr9VAd2qOzli6p5jy1AWtFslTD04SqHbTY4u0njIw4FAYoOqukYH1m1A8+5DWTz2UV+c
+ LvEOHQMes1rGNYMnWNc0LcSXczEecktP0Gp+ji0YoPOWVGpOJK1bl0l8Q7FAfsN3ae2j+z+Fjpt
+ oQfuZuOxkFSCMfiOkCrtobMOxESE0NeP+9hnUCD06PlBX3pizxDFqxTOuhWLiVhyXWEcgWze55+
+ vv5tXxpJ++g==
+X-Received: by 2002:a17:907:1258:b0:c4d:1501:ac3a with SMTP id
+ a640c23a62f3a-c4d352df5a2mr397994266b.2.1794036152633; 
+ Fri, 06 Nov 2026 23:22:32 -0800 (PST)
 Received: from monster.taild06a60.ts.net (c-85-229-7-191.bbcust.telenor.se.
  [85.229.7.191]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c4d356eae34sm132640566b.85.2026.11.06.23.22.29
+ a640c23a62f3a-c4d356eae34sm132640566b.85.2026.11.06.23.22.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Nov 2026 23:22:29 -0800 (PST)
+ Fri, 06 Nov 2026 23:22:32 -0800 (PST)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
@@ -136,11 +139,15 @@ Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  jerome.forissier@arm.com, dlechner@baylibre.com, anshuld@ti.com,
  sjg@chromium.org, Thinh.Nguyen@synopsys.com, mkorpershoek@kernel.org,
  love.kumar@amd.com, quentin.schulz@cherry.de, s-vadapalli@ti.com,
- Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH v11 00/30] usb: dwc3: part 2, make the resynced code work
-Date: Sat,  7 Nov 2026 08:21:54 +0100
-Message-ID: <20261107072224.3492260-1-anders.roxell@linaro.org>
+ Anders Roxell <anders.roxell@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>
+Subject: [PATCH v11 02/30] dm: add helpers needed by the resynced DWC3 code
+Date: Sat,  7 Nov 2026 08:21:56 +0100
+Message-ID: <20261107072224.3492260-3-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261107072224.3492260-1-anders.roxell@linaro.org>
+References: <20261107072224.3492260-1-anders.roxell@linaro.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -154,209 +161,143 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi,
+The resynced DWC3 code calls a few helpers that U-Boot did not have.
+Add them first so the next commits can use them.
 
-This is part two of two. It applies on top of part one [1], which resets
-the DWC3 driver and imports it up to Linux v6.16. Part one alone breaks
-the build for every board that enables DWC3. This part adds back the
-U-Boot glue, the XHCI and UDC updates and the build fixes, so the tree
-builds and the gadget works again. It builds on Jerome's work [2].
+These are not copies of kernel files. They are small U-Boot versions of
+the Linux v6.16 API that the DWC3 code expects:
 
-The two parts have to go in together. Part one did not change, so I do
-not resend it. The v10 patches [1] still apply on ab4dc5aacf95.
+- dev_err_probe() from include/linux/device.h. It prints the error and
+  the message on one line, like Linux does.
+- device_property_*() from include/linux/property.h, only the ones the
+  DWC3 code calls. They are thin wrappers on the matching dev_read_*()
+  calls. device_property_count_u32() returns the number of u32 cells,
+  from dev_read_size().
+- reset_control_assert() and reset_control_deassert() from
+  include/linux/reset.h. They go in include/reset.h and call
+  reset_assert() and reset_deassert(). They return 0 for a NULL reset,
+  like Linux does, since reset_assert() would dereference it. The DWC3 core
+  only calls reset_control_assert() in dwc3_core_exit(), and dwc->reset
+  is NULL there, since the glue driver handles the reset.
 
-The resynced epautoconf matches endpoints on their caps field instead of
-on their name. Five UDC drivers never filled that in, so each one gets a
-patch next to its other fixup: at91_udc, atmel_usba_udc, ci_udc, musb-new
-and mtu3. With those and dwc2, every UDC driver in the tree sets caps.
+Co-developed-by: Jerome Forissier <jerome.forissier@linaro.org>
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Co-developed-by: Jens Wiklander <jens.wiklander@linaro.org>
+Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+---
+ include/dm/device_compat.h | 11 ++++++++++
+ include/dm/read.h          | 43 ++++++++++++++++++++++++++++++++++++++
+ include/reset.h            | 16 ++++++++++++++
+ 3 files changed, 70 insertions(+)
 
-Build tested one board per driver: every DWC3 glue layer in the tree,
-dwc3 on riscv (spacemit_k1), RK3588 and RK3399, dwc2 with and without
-DM_USB_GADGET, at91_udc, atmel_usba_udc, ci_udc with SPL SDP, musb-new
-on sunxi and in the am335x_evm SPL, and mtu3. 24 boards, no warnings.
-
-Ilias found a few bisect gaps, so I built eight of the boards at every
-patch. Gadget configs build again from patch 20, the other UDC drivers
-from their own fixup patch.
-
-Tested on hardware with v10, per vendor:
-
-- AMD/Xilinx: Love tested and sent a Tested-by.
-- TI: DFU and ums on BeagleBoard-X15 (me), and on AM62p and BeaglePlay
-  (Anshul).
-- NXP: ci_udc with ums on an i.MX93 board (me).
-- Amlogic: gadget and host on Khadas VIM3 (Mattijs).
-- Rockchip: host on RK3399 Puma, same as master (Quentin). RK3588
-  Tiger had two regressions, see below.
-
-Tested on hardware with v11:
-
-- NXP: ci_udc with ums on i.MX93, chainloaded from the vendor U-Boot.
-  Three ums rounds, the host read 64 MiB each time. It needs usbotg1 in
-  peripheral mode.
-- TI: dwc3 ums on BeagleBoard-X15, the host enumerates it at high
-  speed. That is where I found the event buffer bug in patch 15.
-- Rockchip: host on RK3399 Puma and RK3588 Tiger (Quentin). The two
-  Tiger regressions from v10 are gone, and he sent a Tested-by:
-
-  Tested-by: Quentin Schulz <quentin.schulz@cherry.de> # RK3399 Puma usbdrd_dwc3_1
-  Tested-by: Quentin Schulz <quentin.schulz@cherry.de> # RK3588 Tiger usb_host1_xhci + usb_host2_xhci
-- Rockchip: host and gadget on RK3576, a Flipper One and an RK3576 EVB1
-  (Alexey). No regressions against master, and he sent a Tested-by:
-
-  Tested-by: Alexey Charkov <alchark@flipper.net> # Rockchip RK3576
-
-The rest is build tested only.
-
-One thing is still open.
-
-Anshul sees a single "unknown endpoint event 0" line on AM62p during
-enumeration. I got the same line on the X15 from the event buffer bug
-that patch 15 fixes. I think it is the same on AM62p, but I have not
-tested it.
-
-The branch has both parts [3].
-
-[1] part one, subject: [PATCH v10 00/63] usb: dwc3: part 1, reset and
-    import from Linux v6.16
-[2] Jerome's adaptation work: https://lore.kernel.org/all/20251121153812.2076440-1-jerome.forissier@linaro.org/
-[3] https://github.com/roxell/u-boot/tree/usb_dwc3_sync_v11
-[4] v10 part two: https://lore.kernel.org/u-boot/20261028141554.3073545-1-anders.roxell@linaro.org/
-
-v10 -> v11:
-- Rebased on ab4dc5aacf95.
-- dm helpers: device_property_count_u32() returns the count, so the
-  INCR burst is set again. dev_err_probe() prints one line. Dropped the
-  unused of_node and property helpers. Kept Mattijs' Reviewed-by.
-  (Ilias)
-- udc-core: folded in "enable async callbacks on bind" and the
-  epautoconf.c include fix, so dwc3 enumerates at every commit. (Ilias)
-- udc-core: IS_ENABLED(CONFIG_XPL_BUILD) instead of #ifndef
-  CONFIG_SPL_BUILD. (Ilias)
-- xhci-dwc3: the rename is before the dwc3 core patches, so DWC3 and
-  XHCI_DWC3 link together again. Dropped the stale
-  dwc3_core_soft_reset() prototype. (Ilias)
-- at91_udc: the local register functions go away in the patch that
-  registers with udc-core. (Ilias)
-- io.h/Makefile: the message says what changed, the kernel glue comment
-  is gone. (Ilias)
-- core: use dwc3_core_is_valid(), and leave GSBUSCFG0 REQINFO alone like
-  Linux. (Ilias)
-- core: count the ports without xhci_resources. Host-only cores failed
-  with -ENOMEM. (Ilias)
-- core: no DT read through a NULL udevice from dwc3_uboot_init().
-  (Ilias)
-- core: drop dwc3_clk_disable(), the glue owns the clocks. (Ilias)
-- core: free evt and evt->cache, they leaked without DEVRES. (Ilias)
-- core: bring back the 100ms wait after soft reset (SC7280) and
-  RUN_STOP on exit (K2). (Ilias)
-- core: new patch 15, flush the event buffer after allocation. Without
-  it dwc3 read old heap data as events. Found on the X15.
-- gadget: keep the pullups_connected check, so a second pullup(1) does
-  not reset the controller. (Ilias)
-- gadget: dma_unmap_single() instead of dma_map_single() on unmap.
-  Dropped the extra invalidate in giveback. (Ilias)
-- gadget: flush the whole trb ring on endpoint enable, drop an unused
-  variable and fix a comment. (Ilias)
-- f_sdp: full speed uses the full speed descriptors again. (Ilias)
-- atmel_usba_udc and musb-new: register with udc-core without
-  DM_USB_GADGET too. (Ilias)
-- ci_udc: give the controller back on udc_stop(). usb reset left freed
-  data behind before. (Ilias)
-- dwc2_udc_otg: add the gadget to udc-core only once, and only without
-  DM_USB_GADGET. (Ilias)
-
-Older changes are listed in v10 [4].
-
-Cheers,
-Anders
-
-Anders Roxell (30):
-  x86: asm: io.h: add rmb() and wmb()
-  dm: add helpers needed by the resynced DWC3 code
-  phy: cadence: use reset_control_assert() from reset.h
-  usb: phy: add the usb_phy helpers needed by the resynced DWC3 code
-  usb: gadget: adapt the gadget API after the resync
-  usb: gadget: udc: make udc-core build in U-Boot
-  usb: host: xhci: fix up after the resync
-  usb: dwc3: core: remove the code U-Boot does not use
-  usb: dwc3: core: bring back the U-Boot entry points
-  usb: dwc3: core: adapt to the U-Boot APIs
-  usb: dwc3: adapt io.h, the Makefile and the TI glue
-  usb: dwc3: make gadget and ep0 build in U-Boot
-  usb: dwc3: ep0: flush and invalidate cache around ep0 transfers
-  usb: dwc3: gadget: flush and invalidate cache around transfers
-  usb: dwc3: core: flush the event buffer after allocation
-  usb: dwc3: make the am62 glue build in U-Boot
-  usb: gadget: ci_udc: move to the udc-core registration
-  usb: gadget: ci_udc: set endpoint capabilities
-  usb: gadget: dwc2_udc_otg: fix up after the resync
-  usb: gadget: fix up the function drivers after the resync
-  usb: gadget: at91_udc: register with udc-core
-  usb: gadget: atmel_usba_udc: fix up after the resync
-  usb: gadget: atmel_usba_udc: set endpoint capabilities
-  usb: gadget: at91_udc: set endpoint capabilities
-  usb: musb-new: fix up after the resync
-  usb: musb-new: set endpoint capabilities
-  usb: mtu3: fix up after the resync
-  usb: mtu3: set endpoint capabilities
-  usb: cdns3: fix up after the resync
-  usb: dwc3: enable SUSPHY again after xhci is registered
-
- arch/x86/include/asm/io.h                 |    2 +
- drivers/phy/cadence/phy-cadence-sierra.c  |   18 -
- drivers/phy/cadence/phy-cadence-torrent.c |    2 -
- drivers/usb/cdns3/ep0.c                   |    8 +-
- drivers/usb/dwc3/Makefile                 |   11 +-
- drivers/usb/dwc3/core.c                   | 1779 +++++----------------
- drivers/usb/dwc3/core.h                   |   41 +-
- drivers/usb/dwc3/dwc3-am62.c              |  424 +----
- drivers/usb/dwc3/dwc3-generic.c           |    8 +-
- drivers/usb/dwc3/dwc3-layerscape.c        |    8 +-
- drivers/usb/dwc3/dwc3-omap.c              |    2 -
- drivers/usb/dwc3/ep0.c                    |  117 +-
- drivers/usb/dwc3/gadget.c                 |  727 ++-------
- drivers/usb/dwc3/gadget.h                 |    4 +-
- drivers/usb/dwc3/io.h                     |   36 +-
- drivers/usb/dwc3/ti_usb_phy.c             |    2 -
- drivers/usb/gadget/at91_udc.c             |   83 +-
- drivers/usb/gadget/atmel_usba_udc.c       |  106 +-
- drivers/usb/gadget/ci_udc.c               |   92 +-
- drivers/usb/gadget/composite.c            |    2 +-
- drivers/usb/gadget/dwc2_udc_otg.c         |   89 +-
- drivers/usb/gadget/epautoconf.c           |    2 -
- drivers/usb/gadget/ether.c                |   21 +-
- drivers/usb/gadget/f_acm.c                |   20 +-
- drivers/usb/gadget/f_fastboot.c           |   10 +-
- drivers/usb/gadget/f_mass_storage.c       |    5 +-
- drivers/usb/gadget/f_rockusb.c            |   11 +-
- drivers/usb/gadget/f_sdp.c                |   12 +-
- drivers/usb/gadget/f_thor.c               |   19 +-
- drivers/usb/gadget/udc/Makefile           |    1 +
- drivers/usb/gadget/udc/udc-core.c         |  931 ++---------
- drivers/usb/host/xhci-dwc3.c              |    4 +-
- drivers/usb/mtu3/mtu3_gadget.c            |   10 +
- drivers/usb/mtu3/mtu3_gadget_ep0.c        |   16 +-
- drivers/usb/musb-new/musb_gadget.c        |   21 +-
- drivers/usb/musb-new/musb_gadget_ep0.c    |   24 +-
- drivers/usb/musb-new/musb_uboot.c         |   51 +-
- include/dm/device_compat.h                |   11 +
- include/dm/read.h                         |   43 +
- include/linux/usb/ch9.h                   |   25 +-
- include/linux/usb/dwc3.h                  |    1 -
- include/linux/usb/gadget.h                |  529 ++----
- include/linux/usb/phy.h                   |   57 +
- include/reset.h                           |   16 +
- 44 files changed, 1383 insertions(+), 4018 deletions(-)
-
+diff --git a/include/dm/device_compat.h b/include/dm/device_compat.h
+index aa9a6fbb5e3f..2ef619949c53 100644
+--- a/include/dm/device_compat.h
++++ b/include/dm/device_compat.h
+@@ -119,4 +119,15 @@
+ #define dev_vdbg(dev, fmt, ...) \
+ 	__dev_printk(LOGL_DEBUG_CONTENT, dev, fmt, ##__VA_ARGS__)
+ 
++#define dev_err_probe(dev, err, fmt, ...) \
++	({ \
++		int _err = (err); \
++		if (_err != -EPROBE_DEFER) { \
++			dev_err(dev, "error %d: " fmt, _err, ##__VA_ARGS__); \
++		} else { \
++			dev_dbg(dev, "error %d: " fmt, _err, ##__VA_ARGS__); \
++		} \
++		_err; \
++	 })
++
+ #endif
+diff --git a/include/dm/read.h b/include/dm/read.h
+index 12dcde6645c7..5219c956733f 100644
+--- a/include/dm/read.h
++++ b/include/dm/read.h
+@@ -1273,6 +1273,49 @@ static inline phy_interface_t dev_read_phy_mode(const struct udevice *dev)
+ 
+ #endif /* CONFIG_DM_DEV_READ_INLINE */
+ 
++static inline int dev_count_u32(const struct udevice *dev,
++				const char *name)
++{
++	int size;
++
++	size = dev_read_size(dev, name);
++	if (size < 0)
++		return size;
++
++	return size / sizeof(u32);
++}
++
++/* Linux compatibility */
++
++#define device_property_count_u32 dev_count_u32
++#define device_property_read_u32_array dev_read_u32_array
++
++static inline bool device_property_present(const struct udevice *dev,
++					   const char *propname)
++{
++	return (dev_read_size(dev, propname) > 0);
++}
++
++static inline int device_property_count_u8(const struct udevice *dev,
++					   const char *propname)
++{
++	return dev_read_size(dev, propname);
++}
++
++static inline int device_property_read_u8_array(const struct udevice *dev,
++						const char *propname,
++						u8 *out, size_t count)
++{
++	const u8 *ptr = dev_read_u8_array_ptr(dev, propname, count);
++
++	if (!ptr)
++		return -EINVAL;
++
++	memcpy(out, ptr, count);
++
++	return 0;
++}
++
+ /**
+  * dev_for_each_subnode() - Helper function to iterate through subnodes
+  *
+diff --git a/include/reset.h b/include/reset.h
+index 58574b983f66..e8358beb6ece 100644
+--- a/include/reset.h
++++ b/include/reset.h
+@@ -519,4 +519,20 @@ static inline bool reset_valid(struct reset_ctl *reset_ctl)
+ 	return !!reset_ctl->dev;
+ }
+ 
++static inline int reset_control_assert(struct reset_ctl *rstc)
++{
++	if (!rstc)
++		return 0;
++
++	return reset_assert(rstc);
++}
++
++static inline int reset_control_deassert(struct reset_ctl *rstc)
++{
++	if (!rstc)
++		return 0;
++
++	return reset_deassert(rstc);
++}
++
+ #endif
 -- 
 2.53.0
 
