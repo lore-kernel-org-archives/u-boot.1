@@ -2,157 +2,148 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75453606A32C
-	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 12:51:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D7EF606A326
+	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 12:51:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=BIUI7V6A;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=N0TGXpLs
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=nebTlGMQ;
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Nd/o23XF
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 36FDC8165B;
-	Sat,  7 Nov 2026 12:51:01 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 523B981684;
+	Sat,  7 Nov 2026 12:51:03 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LxG2fuKAwu5B; Sat,  7 Nov 2026 12:50:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 612D081695
+ id oROwapkTRNGr; Sat,  7 Nov 2026 12:51:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B90EA816EF
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794055848;
-	b=dTa0KI+sdZGCMtyICer2q1LT9DjKYOIukR5uUpGf4AH/Wn4tQccfkO+f4S52wluiyfmh
-	 l+zp2NaLPI+Juew+nxLfnm/++VGXNtCyoUSIdICS9NGy/Md/e4OOSC9GyNuqP27T6o1zX
-	 Nmrc9e4zSgeKjEhA6tcfW768bIjoZwy582i5OCJ/KRLc2yAou21eF3Wch7UrHHx5xRFs8
-	 Tr4pAo4oPT9+uksLUtaYUIwYWogrftS/4fxUh9pRTMll31MRVzjEhIOrSfl/Ae92jgVNh
-	 cFVEo2yknyCpgVUtyAf3r4bog3W31SVGKUPskWwlQr82Pdczsv8staBVreAYyldDCgg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794055853;
+	b=FaqEgd8KKcQ6Vj91MfExgCSHnJSciZC2Rfa0m9JuKqtLykHX7FgaUOy+iTUFBHHE+dR4
+	 QhUn8p5x1D54rY5novkhlXxq/l6rMsTXVWWM2UE6JlV9B1TNAYDEbNMWR0QsxFylRt4wV
+	 HaAG1XpR76xq79t3oE20e3xkSx3e5UIOvn3gLx8m5r1P9PDXMwq64W0UNO2LsGiZmClOA
+	 dZ9RBM4aSxLp9nqngjAqfx6ixBh9etblkCDySnPGbTpamZqdzuAoHuij/1kU/UuIp92UR
+	 PIvIwZGgKFz87l3SLIJJ65SejAYxiwXYlKhhOzDj5PHFMmNbDLAsYK6Uw6rY62w5xTw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794055848;
+	c=relaxed/relaxed; t=1794055853;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=/XWSC8MTlEiQv9sydP6YP1Yc3LJ+Cph2PrN0/OFhESA=;
-	b=JTQBB/6mSaB+UaSGqKEyTq3tAtwdtXPq7yxSdnHNfChNGeQP1h+IHarr1mUeFc3fflGY
-	 SkwKzg9pBx+dZJoF25+Zfc1eveVzQB7QbUYBmKwrLH1gm/VwC6Pupt46ha5uvGfc2fJuP
-	 CUZj1lNVMb3pKYyiLbXPr0zQuM7+Y8PAZWRsDcajciG8QQCXbMwMppm8TqPrpAYw8FawF
-	 jX1o2Q8o7YqSl4+C46tbAVEOD6p7ZRHytmYVHWMF2qHXsOveFiRM27WDpkZaa/9Z6e7jx
-	 LZzsErmw6GnXkoTrB7Nh2H2gF/F4g1Xu0QItUiTvNqruxnHbVnPXb9LglH/UyGWdMiw==
+	bh=LtM57qFVXXmQVnXYuhHVCSEswlVAfemLnSkHuV17FHQ=;
+	b=fVhxqOJxhGA+Bz4H/RjJACKNHM8ElxxsET0c0fiNeqtQmUomwFmny3qPPyaTQIsQSiGR
+	 nkiR28urAD9EcORDAvKx75aUqcMrA0+wHOWzxZ2W4NblBemIW7fEdWANUOIa8r54sk2XB
+	 VtN2YMqOoCj30a8rXLBDBBVg97Gewje7IKhkMHMH7qkZ1BkHGaP61MUFD71kh2zHRbn6a
+	 JQ2nh4OgEdHz4+jw9TN95K96PJ/0C9XwqWKLT0Ifs7JMMGXkDLu6mCOM2zV/1ol6xu6Z0
+	 IN5lr7dCYwaz+TEym8SAJ2BnDH8HcfxRh9VyJhgScv+uVr+jMGgFMk0SC6o+Aw+c07w==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=N0TGXpLs;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="Nd/o23XF";
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794055848;
-	bh=/XWSC8MTlEiQv9sydP6YP1Yc3LJ+Cph2PrN0/OFhESA=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794055853;
+	bh=LtM57qFVXXmQVnXYuhHVCSEswlVAfemLnSkHuV17FHQ=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=BIUI7V6A9fL4GrQL0lZhE+llk6RY19zWaF6LKRoaRL+LhQl5MUJI5FF+QE3kqg5ae
-	 1HMN8rKPOhVDHDD8wPjWF+3p1cOu/beOsfbzov5SNmsO4WS/jz8tgPw/85HyVkuCCi
-	 j65uxfSBk2Zv/qKv05o9Mmj9D+1sn4ut5FJRiO7FQgmCx3bVIEg156XPgmmmRR8dh7
-	 xV2zilOLxFTXluybOrmbBmKijv0zf5scop4ilsrtL3MY2RI+HY4HKMR5tM/yDegmhQ
-	 HTbilvPmht/xGmL/p6EqpSdFJ4CMlquGOIncU/C6cZ84DkhLDz6zgXkDaznYtluKVQ
-	 CpXepanyNm+Ow==
+	b=nebTlGMQf1QSVn6v1Qu971QHrimK/uV2NU9W31YUp5j2jBVRapveT2x/VtIR1HDuM
+	 9n0VJhhRjKWGVObhpygDWklsQ21xPH2JXl5ZqwgNeXIru8+0czQP0WPnFg5dzWgTEl
+	 mzseF/VVrjOH7tjZlyn32YCr8KjYP988nZC8OBcT9Iry+bSrYp6Wa9YCQE7k5meuOg
+	 v6qeqvRbOKxNl6H767MnBV3M5zaFYRSOFi6+eKVi60CZaD8qmxS4ps/D4qYyWVba4R
+	 PuSvTNLth0fPCU/+pWEMnao+wgZlXr9rXBHeQFn0JuXei0E4xKOp+0VbIRkU4W5+Dr
+	 zV5mHd4mmZcqg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 612D081695;
-	Sat,  7 Nov 2026 12:50:48 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 04A422AC
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:24:16 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B90EA816EF;
+	Sat,  7 Nov 2026 12:50:52 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id CFF7C211
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 08:34:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id EB07D811BF
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:24:15 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id B574B81244
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 08:34:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TqoPeXLpG2Vq for <u-boot@lists.u-boot-project.org>;
- Sat,  7 Nov 2026 07:24:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1CBF381223
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::531"
+ id 7t8Hvzwfkp_C for <u-boot@lists.u-boot-project.org>;
+ Sat,  7 Nov 2026 08:34:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8D15681238
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::52e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::531; helo=mail-ed1-x531.google.com;
+ client-ip=2a00:1450:4864:20::52e; helo=mail-ed1-x52e.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=N0TGXpLs
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 1CBF381223
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:24:14 +0000 (UTC)
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-6b7073ddb15so15085a12.2
- for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 23:24:14 -0800 (PST)
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=Nd/o23XF
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8D15681238
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 08:34:34 +0000 (UTC)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-6b5853f3d8bso284883a12.3
+ for <u-boot@lists.u-boot-project.org>; Sat, 07 Nov 2026 00:34:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794036253; x=1794641053;
+ d=linaro.org; s=google; t=1794040473; x=1794645273;
  darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=/XWSC8MTlEiQv9sydP6YP1Yc3LJ+Cph2PrN0/OFhESA=;
- b=N0TGXpLsuFapEMqQrgluTrNlNRPC6STyb23oYAFB8gO9ccXKYOaXsz1MpO383VXXgb
- rIWuw0Q6RJPbn0mwbWpnexhroSjfZuhnbq9RQeZZIQZj/quFELl513V7LiANcnC+5IY4
- jG+iukRfze7m7iDOyHeEP5/Xtht81dkR2YFs/AO2PYn7I1FPfIlv3/fKB3Pi2OH2QqgV
- ibcwTy8SGvvncMr0ZPUP7IHGSfmzV20pwb0FPbLbCEplZeLBMoMdWzJMDnYQVU2wixbg
- QjAHgfCGYxF08HxEVrCZrDUMAl9yAJm6unJ8fWnuoMWwf4TtC/1lTF6fh0nCoiK72RSv
- 75sA==
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=LtM57qFVXXmQVnXYuhHVCSEswlVAfemLnSkHuV17FHQ=;
+ b=Nd/o23XFGHPupimFAbH8S9jNNGyaIyjJiG8eOkkfhJG5XgXc9Btqr6eSPpQu4d9aUS
+ vOsI2qwzjHWG70lcmYgBLbUtsD7Q/a1A5notvkJ2gEsatT0RIM0Xfl6PhZHtbIoIMrgq
+ U0h9NDgmv4JUmfPBaX2iFq/6obak8G3dcY/fyaXqyAFQpzxfvoyvJtKxffH4VT2xP7fn
+ p0P+6c4qZIt5J9q4NYrl1xLxP/y24E4YoN7iqZADeGAzTGyd42OT6no+L6ZzMdQgPe5B
+ DRblTsgkuSc77lxA2v2CdksFbGrWGPlygYSpV0ryCc/S3x5w5/u+eYPgZCRNZgpGGjlz
+ UklQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794036253; x=1794641053;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=/XWSC8MTlEiQv9sydP6YP1Yc3LJ+Cph2PrN0/OFhESA=;
- b=EvbyrxUO5aMFVHs9w6pDcVetjGzD3Q2Elx2Y6AedOl1F8v3AC6qmgwMhX0aos/wi5F
- 2GaLEAhxZ20v4YxIGx1vYyHQOduTr9EUm+B87ihV4t1KzlH6X5bA7jv1oHMvS0qjBvmz
- iLgFi3ukK9j+COYVYx4spJClqmWoO1c7HELcrTX98UD0c00K/8Ul3/22nxNi5FwfwsMo
- V6BbzKJQxBEnPIjrwedIQImOZ07np6UrkfDNWbV/CcwmGZ3ncPZlyUvbnLvrDxXopzXX
- M/+RM1JV+uKhxV9oJPt1g4LCRIlfm4i4du9Q/CnWtNKphsMDXkjs4vbR05DFXacLFeJO
- yVZQ==
-X-Gm-Message-State: APuU4Z8SmEDced6a2vIpmqVMk3MMgvlWceJmtKl42jzaTFKKTrTVK0Ud
- jH6iO3hMbfLGk2lymzSqj6IjJiAuB5aZdBhU5aEkXrTgLv4RAtLJQnbbOWP1ccWwBZE+91yEMhL
- bWUn2
-X-Gm-Gg: AYBFou3XMcxAYAQ5DnuRiqu9nxFvWkbhgaziD+FUfYGvijfJhG5kkAUi6u6LGMaeYXL
- xsf2VM8Gme7DcJhyCydqy7m1TJzrAT2i5F0kONNTVvvMbX5xAtq4tP5XspgDQphZTPJlBi9y2Vz
- qjDKxmOk3lbWk4x6sxTgGF8EHt9dqXPxRfV4zvD9U4fDW3fCA57YK/12a4BjNO23sK2MTVD0x35
- 0zGQHxacRJdwjo7hJNeLCc8Ah9Ou3rz2tGYUilVbrAGDtdOXYevERwY69qpdQklnUBtu0h1HSwV
- YfU6oE+jYqzb60no9FELZMgnrHnAX1RBCHA0ah0b4IUXDANqS7ZjO3fiBeXac6H+cO0VpdUrfUc
- p55hc62us9ISetuWGwPnLI2+kjV/OVeA1AYdkcHtAdXB6aB3sVeNm9smrPvBj5zLLgS7vjmRj8C
- fMcoUdA/rScyR3gSGLKbVzIjkOEUl506kFnCQAIj/np5+1OxeP75Qb54lKcRaaXcLdoETQeBsD7
- gBMnJEf9aabx+yW224AoLgILCMK3IbZWk6/Jai2pmmZ7ZRnD2GZ3pmN5VeGloPrImBMJBiG9fcy
- braX955K1yS4+CHfrTDFRSvAklOPBjOl3EyQHd8ZBkWRHGGGy3sb9Ooy2K7Aja3uIhtB40Y0mMB
- SBUMl3WrgHQ==
-X-Received: by 2002:a17:906:6557:b0:c49:ce7c:8a60 with SMTP id
- a640c23a62f3a-c4d34b8ff77mr389195366b.2.1794036252852; 
- Fri, 06 Nov 2026 23:24:12 -0800 (PST)
-Received: from monster.taild06a60.ts.net (c-85-229-7-191.bbcust.telenor.se.
- [85.229.7.191]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c4d3562ea8csm130129166b.22.2026.11.06.23.24.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Nov 2026 23:24:12 -0800 (PST)
-From: Anders Roxell <anders.roxell@linaro.org>
-To: u-boot@lists.u-boot-project.org
-Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
- michal.simek@amd.com, lukma@nabladev.com, alchark@flipper.net,
- jerome.forissier@arm.com, dlechner@baylibre.com, anshuld@ti.com,
- sjg@chromium.org, Thinh.Nguyen@synopsys.com, mkorpershoek@kernel.org,
- love.kumar@amd.com, quentin.schulz@cherry.de, s-vadapalli@ti.com,
- Anders Roxell <anders.roxell@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jens Wiklander <jens.wiklander@linaro.org>
-Subject: [PATCH v11 29/30] usb: cdns3: fix up after the resync
-Date: Sat,  7 Nov 2026 08:22:23 +0100
-Message-ID: <20261107072224.3492260-30-anders.roxell@linaro.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261107072224.3492260-1-anders.roxell@linaro.org>
-References: <20261107072224.3492260-1-anders.roxell@linaro.org>
+ d=1e100.net; s=20260707; t=1794040473; x=1794645273;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=LtM57qFVXXmQVnXYuhHVCSEswlVAfemLnSkHuV17FHQ=;
+ b=oedYfNxE/NHnGfuIOk3r1P7Swcd4PlkXOVqbh9kkf6WxE3+eueXIEPd8CrB+JNeoDJ
+ JfKxtTW9hIzNBXcSYmd//ZIhCtT6BCAmDNki1ePtKOvMfLEKjFORG/jj2GRtn3PZv00c
+ rkraTf3iSo8+94MHy9zpNMVq54LiaJpRCVbouAuiveXbDHyyE2mhBkssYa8qOhLRf4tR
+ QpNz9mcKIXXRWS9FVVol2+CMFknBFOs2nX+xRn5Xu+GUnK+3TIqDUOlGm6kgO9nYNsOI
+ 7cBWG7M7ALVcF4X9FFJznqqIFpeI2Ao9saBNk191TqLrVxppYSpboMSivgwzTndQ7gIU
+ 7sAA==
+X-Gm-Message-State: APuU4Z8v88J8j0zfdKUUqnYoU8tVQZ2oY+JOEY4XM9YoqnL7K0+11fWE
+ HZPLNBpgPCqLv6b1Mn8x+7vYCaNMryp4KGMyeG2zTLtvd9TlFBtQs5pQ0otmo7Z2riZJpwSpaks
+ VeQWBDIfQls3sAFaCwrk6JVDE0yB7kMBRVZfv76ZYYA==
+X-Gm-Gg: AYBFou3gNoHHZrvelOY8QSrT1fksyqLXNtcu0erXq0J8tRn0gvGmFMr9cjYso7YEo9s
+ O7QVCcUnFB+3Aa+rT0xX12yRobqzscfm9wZA2gJVRoVqSTo7jMWJyIsoStw7P4bmSkLTcj7Q+vs
+ cYbeLeV/8XBSQEe5itEfhPxTaRmwUvNEwBqXpakbXwjZD5WZNhDpq01eU5nwXw5gaZ928JwTN3V
+ fLQXgMXXkwSPTVdQxXatmGZ0vo5GVo7pETdRPb+BfqdAEln6MX2eUrsMhnPnlpy2Ra3zAlDS9x+
+ pRxlBRrX6vgFvRBLKdRVzdevTN0YfvAqKftO1SMaZgzTIktgKWT1rbCG3RSspsymyXzlVqGqbGF
+ Rm9sexDSLRkoBGwrrzx/vYeQH6NunNhtkB6c=
+X-Received: by 2002:a05:6402:1256:b0:6b4:2960:d381 with SMTP id
+ 4fb4d7f45d1cf-6b5975659b7mr3731918a12.1.1794040472251; Sat, 07 Nov 2026
+ 00:34:32 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261028141554.3073545-1-anders.roxell@linaro.org>
+ <b464c545-c1f4-461f-8f17-48854bd70825@cherry.de> <aunlk5FaVe_jcpSr@monster>
+ <ca7b3725-cabd-4064-95dd-46c3eaa325f0@cherry.de>
+ <548adaa3-9d2f-4fa2-8fdf-7c537c4d153b@cherry.de>
+In-Reply-To: <548adaa3-9d2f-4fa2-8fdf-7c537c4d153b@cherry.de>
+From: Anders Roxell <anders.roxell@linaro.org>
+Date: Sat, 7 Nov 2026 09:34:20 +0100
+X-Gm-Features: AclHuK9yRwzvHu1lx6VgnN2zT36XkMwR8FhE-6zku_-TwLtmZ8S2c1berrk1avY
+Message-ID: <CADYN=9LxRY_AT4rtyv9OfpxWcWd-uRxQnbAgc7xkhmx2HUZgNA@mail.gmail.com>
+Subject: Re: [PATCH v10 00/30] usb: dwc3: part 2, make the resynced code work
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.u-boot-project.org, marek.vasut@mailbox.org, 
+ trini@konsulko.com, ilias.apalodimas@linaro.org, michal.simek@amd.com, 
+ lukma@nabladev.com, alchark@flipper.net, jerome.forissier@arm.com, 
+ dlechner@baylibre.com, anshuld@ti.com, sjg@chromium.org, 
+ Thinh.Nguyen@synopsys.com, mkorpershoek@kernel.org, love.kumar@amd.com, 
+ s-vadapalli@ti.com
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Sat, 07 Nov 2026 12:49:49 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -163,43 +154,51 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Adapt the cdns3 gadget code to the new gadget API.
+On Fri, 6 Nov 2026 at 11:57, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>
+> Hi Anders,
+>
+> On 11/4/26 6:51 PM, Quentin Schulz wrote:
+> > Hi Anders,
+> >
+> > On 11/3/26 2:45 PM, Anders Roxell wrote:
+> >> On 2026-10-30 15:28, Quentin Schulz wrote:
+> >>> Hi Andrew,
+> >>>
+> >>> On 10/28/26 3:15 PM, Anders Roxell wrote:
+> >>>> Hi,
+> >>>>
+> >>
 
-Co-developed-by: Jerome Forissier <jerome.forissier@linaro.org>
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Co-developed-by: Jens Wiklander <jens.wiklander@linaro.org>
-Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
-Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
----
- drivers/usb/cdns3/ep0.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+[ ... ]
 
-diff --git a/drivers/usb/cdns3/ep0.c b/drivers/usb/cdns3/ep0.c
-index acff79ae1ca1..40282cbc3234 100644
---- a/drivers/usb/cdns3/ep0.c
-+++ b/drivers/usb/cdns3/ep0.c
-@@ -341,10 +341,10 @@ static int cdns3_ep0_feature_handle_device(struct cdns3_device *priv_dev,
- 			return -EINVAL;
- 
- 		switch (tmode >> 8) {
--		case TEST_J:
--		case TEST_K:
--		case TEST_SE0_NAK:
--		case TEST_PACKET:
-+		case USB_TEST_J:
-+		case USB_TEST_K:
-+		case USB_TEST_SE0_NAK:
-+		case USB_TEST_PACKET:
- 			cdns3_ep0_complete_setup(priv_dev, 0, 1);
- 			/**
- 			 *  Little delay to give the controller some time
--- 
-2.53.0
+> > I would like to run all test scenarios again and see if v11 introduces
+> > other regressions compared to v10, but this takes me about 2h
+> > uninterrupted and I'm not sure I will have time tomorrow or Friday as
+> > there are other fires to put out (still have to review the OpenSSL
+> > provider thing again, and I'm now finally impacted by it myself as I
+> > updated to Fedora 45 with OpenSSL 4 this morning).
+> >
+>
+> For the v11 (commit 6030c4d33099 ("usb: dwc3: enable SUSPHY again after
+> xhci is registered")):
+>
+> Tested-by: Quentin Schulz <quentin.schulz@cherry.de> RK3399 Puma
+> usbdrd_dwc3_1
+> Tested-by: Quentin Schulz <quentin.schulz@cherry.de> RK3588 Tiger
+> usb_host1_xhci + usb_host2_xhci
+>
+> I've just remembered I've now got a Pine64 Quartz64 (RK3566) with two
+> DWC3, will try it next Monday.
 
+Thanks for testing, Quentin. I added your tags to the v11 cover letter.
+
+Cheers,
+Anders
