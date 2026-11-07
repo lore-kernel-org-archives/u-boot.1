@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87E05606A326
-	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 09:02:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8287606A326
+	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 09:02:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=fOJDbDFr;
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=LWpPP3VU
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=FD1oAugP;
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=TGGbX5Ra
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 62D6560761;
-	Sat,  7 Nov 2026 09:02:29 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6A72D60743;
+	Sat,  7 Nov 2026 09:02:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4seFqLQqZ7Em; Sat,  7 Nov 2026 09:02:28 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7F0BB60812
+ id jzRMJE-Ar1YE; Sat,  7 Nov 2026 09:02:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C93E9608A5
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794042148;
-	b=ncjgbEuL4RbnjGFUI0anUvEWmLnciEdRxVTNE6sWkRoXxGeqVvC9Il4vpmiT+9y6FpXA
-	 xTri67cLMldvwbeyiUUnZuJYWc6sKKgbqL35InO72MkGTv7gLrq5ILMrb9M7fNiBdpU7X
-	 6/0LVBsfAJKsEddXx35aHn+RawB+fqx8spxXHurctS3XUELGN1L1tRqNbwwoVWAribfo2
-	 Exnh8j3ODhZUT0PhglrukWbaPcuALxYXVMTFCL5hx/kzizdCyE4fGqKfSho7H9SjWYQ77
-	 HF2XAqze6iyJ6f7m5X6wrB9UId/YgfoAi8GdZLHDvNE/0JAQhV3XX10FZbHxeZZbqyQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794042151;
+	b=G25jEoVFsb9LOqJ1Q8LxhrM5rWa1vdSAxrTZ4lyJhsrzr3+9AU1h8fRFJNITO9Et01PC
+	 OcG0STtYzI6GZ5DxnVvljHic75tFM1H72uUHj7kBPyM6+pkYo4WH9TMnLQmaBmetommxC
+	 9Boov2uwDWzn09o9HizYbnofaPNVsBsOMychEQgd7vsjnMwP84HyB3JRTnMfsCS+BA1Ia
+	 1XNgb4GbL+gdordVS9stQBiWpnPqjFhG0GiGrJjzQgAkDlj40fBcHbUVRJeqMv9H7trs5
+	 KyYKvyhnSYi/ZjR4ZNAZvWAoQBLzpe7ls2T+lG3sDGcAvM6WjN/hqTM7AKoDMlNkZXg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794042148;
+	c=relaxed/relaxed; t=1794042151;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,75 +32,73 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-MBO-RS-META:X-MBO-RS-ID:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=Im/tU++G14jjjjHOJZeTYHKa9n/Ab54iPQIWNd1ggTA=;
-	b=HObL561OE2Myyd+BABBIB5laLfOUEJlDl94Tc8y25/oGwHciSKhjY4BFVNVcUIBL6SUW
-	 qfgalKIZstdDu4DPmH8jGifzaWseA4396mzcybuwVE1Oo60UznXb6mQx6/tmXJ7MxnuHI
-	 0G05Vf+jQCDRUOY2QZ50zD5Jm9SpZ6HJOvpBOPxpzPQIKfaTdAEtUpnL7sKBFdt+SQrT2
-	 YKMmRq6bWscazcGR6iwfymIlGWtrw3wdM+VqHcfnEUenVoliMFnNBjrMz7eROMCyXCaya
-	 AoIQr+F2P1Zb3rBbFxmznRvmpnsJSKMBVIzNmA/FD8nOMov6etd/Qw90ku/pGFaqfHQ==
+	bh=HrANGA58pkJ0YE2VVCQp3ttyJZGMFKl9NE/PVHDlH5w=;
+	b=PuWaV8Rdf9jJ5RWn9kM9n6Lp6SpFCPOtBbaMzdTxcxvlTw02zYwKQcPFuBE4q2GhFnvk
+	 MnIxrk/sm+up25RCnfgnGDZlAZhuiENjYM+Qzh0nYhfQqNPdOOUCcz/iAZ6IPsYlyCcdt
+	 M3QPZN9a2fHVt6urQgTvOlQEMY50hPrTu53fwvR9YIHVFhXQLRIBDQJnZslsIa0nItDRO
+	 xZPlE+TM6TWq84foQKRbGtuK+Flswnct5Z4KMwCHFvljTeO7lKbcuUVq57lIfsSD6pAWo
+	 mJi6EAo8lLsedLMdI1IVJuAj5KIqMuoxWhUMDSR5QcablQs+vh/qRgvWWlVX+K3Ta7g==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794042148;
-	bh=Im/tU++G14jjjjHOJZeTYHKa9n/Ab54iPQIWNd1ggTA=;
+	d=lists.u-boot-project.org; s=default; t=1794042151;
+	bh=HrANGA58pkJ0YE2VVCQp3ttyJZGMFKl9NE/PVHDlH5w=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fOJDbDFrQAvbBS0kVgF6rN3897aFnjjCS4HSSUkPLH5WvVQLRUoKAdAhczHWSn3j0
-	 KVW8Y7ZBqWIwN65vnqezM3bye5043Vi9fWbp8yVzkLBw1JDQWPKdQd1+zuNKjn2iPH
-	 2e7PEqr6KHjlYBL/CcWgA0vt3ZtVQO5hzC85FNkRr22daOFfzg7vjvZRaH26d43OBX
-	 HOSUuZKqlVcdB3acTTO4sP54FvrunFqY0oN3wwdjVbtHRZrtOph8jlRIO+SVos0v/8
-	 NHFrof5F/6qk3vioSGJ7SXPQzyseP9Rg3cvX3xI+fzl/FP5wt5AlyXx/+XoenhnxE8
-	 WxA7ClEVR4aFA==
+	b=FD1oAugPu+3Sxe1x8w1IGo1LoHUVjCK4ZRKue4kyJuHOG0K2Mfvdq4QZOJfvhDEgM
+	 3E6yJOim38eWD/hEs8R5/mPrh3vG/r3TG+by+YrszT+HbGU4v8CpSGFHnvqd0vxa9S
+	 F4Iip6XCjeQ2kAv5AapbpsNQvDwhjkR0YoPcO47KpaRUesZPtv9h9NFh4DBRNeHfLg
+	 1ZWywyFUvW8Yva69xxz8xzmgiuvYLuRDq+3mBwvvThnuAnWfgRi9Ad/W3CuWTOzY+6
+	 BXwVL+qDX2QHI4uWgyYiWAgMXb7c4N2LAeh4UB2SzRgo2hPud1D4Mi8q0EfdYYLOsW
+	 Xtlbh4NoiThvw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7F0BB60812;
-	Sat,  7 Nov 2026 09:02:28 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C93E9608A5;
+	Sat,  7 Nov 2026 09:02:30 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id BAEDF1C6
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 09:02:19 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id D79DF1C6
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 09:02:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id AD37780DDD
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 09:02:19 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id C996D80E1E
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 09:02:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SXSOQTI8Uc8k for <u-boot@lists.u-boot-project.org>;
- Sat,  7 Nov 2026 09:02:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E78BC80D8D
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2001:67c:2050:0:465::201"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::201; helo=mout-p-201.mailbox.org;
- envelope-from=stefan.roese@mailbox.org; receiver=<UNKNOWN> 
+ id C6it_1LdNtDc for <u-boot@lists.u-boot-project.org>;
+ Sat,  7 Nov 2026 09:02:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 25C3080DEB
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=80.241.56.152
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=80.241.56.152;
+ helo=mout-p-102.mailbox.org; envelope-from=stefan.roese@mailbox.org;
+ receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org
- header.a=rsa-sha256 header.s=mail20150812 header.b=LWpPP3VU
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E78BC80D8D
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 09:02:18 +0000 (UTC)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+ header.a=rsa-sha256 header.s=mail20150812 header.b=TGGbX5Ra
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 25C3080DEB
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 09:02:20 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4jM96H24GLzMldb;
- Sat, 07 Nov 2026 10:02:15 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4jM96K2cX9zKnDf;
+ Sat, 07 Nov 2026 10:02:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1794042135;
+ s=mail20150812; t=1794042137;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Im/tU++G14jjjjHOJZeTYHKa9n/Ab54iPQIWNd1ggTA=;
- b=LWpPP3VUAomaTqIrD2nkVi8Nbc2A7NV27RDxBCXtrpEEK29u30DV0J1mPb/OUBvMmp3YSL
- 57SQqaRYbFTsNN/j1C6LJ1kRtO/CKPS+hZt6fgSq7uCQY7wTZ92DnB/r1YAaDhECG4B7oV
- 6Q7UfOkA3Wenw9b3SMdmK3iPj+eU3lXkbzS6al5mx3pyKPE4KfoY0ps0FbF9SAUdZq/lyj
- MHaeQfJtL6yqYwqS4uVKOaeI/1F8cqAe+n8v48+g2WHFcmcbjkzNPKlLj8vj9bclOMEIhq
- PGg1k7/VwPVO8AmOIhomEdMIvIgkwBP8nmpVqD+l83kYY9GHolRk4diHL8eSCw==
+ bh=HrANGA58pkJ0YE2VVCQp3ttyJZGMFKl9NE/PVHDlH5w=;
+ b=TGGbX5RaKT4BrLqJ7T7Y1YVa83TvHLU6IzavZAmCQpqpGxJK6VjwMkqv1zvq0qwHT0GHQK
+ HhWAu89669RSeZ8B/S+bYeD5bpS4w1IAVcq51us1AbhygpIpmYLWrQrbNoR+I5thY5Pbou
+ OqNFjyTvnA1wvFyN2VxxX6kMAWzXgAsgoLALTuGwAd106mCJOuDg64G94Dfovcmh278Pk6
+ I9yxlW28/73dqd6IreDQkikbD6O9XjkPvV8HPTHZ3EkLd1F51Gc47r7D6Ui+PO2g2/YPLz
+ IPDddt+uTJ14AM9AjuFj3JptVIbqGX+XI4/SSSzoOjBUCVozeGkH1hLuUao1bQ==
 From: Stefan Roese <stefan.roese@mailbox.org>
 To: Juuso Rinta <juuso.rinta@nokia.com>,
 	u-boot@lists.u-boot-project.org
@@ -108,19 +106,19 @@ Cc: Tom Rini <trini@konsulko.com>, Yuri Zaporozhets <yuriz@vodafonemail.de>,
  Jonathan GUILLOT <jonathan@joggee.fr>, Jonas Karlman <jonas@kwiboo.se>,
  Simon Glass <sjg@chromium.org>, "Maxin B. John" <maxin.john@gmail.com>,
  Rasmus Villemoes <rv@rasmusvillemoes.dk>
-Subject: Re: [PATCH v2 7/9] watchdog: max6370_wdt: add get_timeout operation
-Date: Sat,  7 Nov 2026 10:02:01 +0100
-Message-ID: <20261107090206.2015512-7-stefan.roese@mailbox.org>
+Subject: Re: [PATCH v2 9/9] test: wdt: add tests for get_timeout support
+Date: Sat,  7 Nov 2026 10:02:03 +0100
+Message-ID: <20261107090206.2015512-9-stefan.roese@mailbox.org>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261106-rinta-watchdog-gettimeout-v2-7-07de25b6312a@nokia.com>
+In-Reply-To: <20261106-rinta-watchdog-gettimeout-v2-9-07de25b6312a@nokia.com>
 References: <20261106-rinta-watchdog-gettimeout-v2-0-07de25b6312a@nokia.com>
- <20261106-rinta-watchdog-gettimeout-v2-7-07de25b6312a@nokia.com>
+ <20261106-rinta-watchdog-gettimeout-v2-9-07de25b6312a@nokia.com>
 Content-Type: text/plain; charset=UTF-8
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 38nat8pz8uy8bwa7jak7q3ji7qoqxqof
-X-MBO-RS-ID: 2f0bb55e95d34c06ef4
+X-MBO-RS-META: 44rxqexnwuwbg3akp9nrsb3o44t5krp4
+X-MBO-RS-ID: 6eb731c6a3bdd2c63aa
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -139,9 +137,20 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 On 11/6/26 11:34, Juuso Rinta wrote:
 
-> Implement the get_timeout operation for the max6370_wdt watchdog driver.
-> This is useful because the device supports a fixed set of periods, so
-> max6370_wdt_start() rounds the requested value up to the next one.
+> Add tests for (1) get_timeout operation, (2) warning print when
+> the timeout is not longer than the servicing interval, and (3)
+> the wdt gettimeout command
+>
+> The get_timeout success-path and not-running case is tested with
+> the sandbox driver, and the not-supported path through the GPIO
+> driver.
+>
+> Warning print is tested via the gpio driver. The sandbox driver
+> rounds the requested timeout up to a whole second so the timeout
+> is never set lower than or equal to the 50ms servicing interval.
+>
+> For the 'wdt gettimeout' command tests, a new test/cmd/wdt.c file
+> is added and the file is included to test/cmd/Makefile.
 >
 > Signed-off-by: Juuso Rinta <juuso.rinta@nokia.com>
 
