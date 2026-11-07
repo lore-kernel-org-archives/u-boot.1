@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E355606A326
-	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 12:50:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADDA5606A326
+	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 12:50:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=CuLj1ulg;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=nWm9S8M0
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=SN2YuZjm;
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=fIFxcBuR
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 47943608DC;
-	Sat,  7 Nov 2026 12:50:11 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 80934814BF;
+	Sat,  7 Nov 2026 12:50:13 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nOMDh3XOAPzf; Sat,  7 Nov 2026 12:50:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org CF11460767
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794055809;
-	b=mOZJcUWDQvhaRLJManZ1xI0MvWR5oxHxM+xNZc6Lh84EAzHdsvXOt+IGT/wAOr0di4jF
-	 JF3AmQcz7wyQDVkiXwSpp6r1xvtk5tefAWM1k16GHYAAgjVMaUPNnQ7z3CncduUoFjd/f
-	 SK0E29O2n7y9XBSR2iwKvH9VXz0dl5eJh1yuPPmNCMoP37uxb8eyRdWfSZO8oJI71YV+U
-	 0ie+l9IIingXA4QWNG1XlfTOZrzl5LkY+vhzfDOMnYn1Wg0lpJFYnk/2iSFociB8dDnlX
-	 EszZ2y2eiXqVp0p8ksb6Fkt8XCfRCZ7Hp94XNGeRBsIFKeOEYvyFxZsyQdE34kuunMQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id L0GUIXNHv1lG; Sat,  7 Nov 2026 12:50:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BE56681352
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794055805;
+	b=hWqXCmxZVi4JQC+RjSsf6MT2ln610lpF6W0ocPgFgpeXs/1tbOBr7VOK9l77bcRdSFhC
+	 axFByvNXy6oQw2iwXEK3AhVJwhPwpeo7/iIwi33SZPH9/TRYN2vh9gpxwcb3CQdty/rmu
+	 OEQrd0R/8vs1qCB1c2VqgptAcM5oIiv2iEoGM2+EGQh4ufnhErtsKrj7UbYte1DEtlfD0
+	 E40pxwbB+sHtbtaWveTLgVp4uNreckcA2eSTFiQnSnCp3lVi/I5CX26SYSUlnD3oJlDqp
+	 +DLgvsSOhQASoKNUAhhxKF1YKZ/2pVw+9kPFyVVK0GHC4eLQxHf8o2kMmc6JkaXmsuQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794055809;
+	c=relaxed/relaxed; t=1794055805;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,105 +33,105 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=45CRhkr0keptA6Ct4+x9nm93nJAOmQV+jG2fzk78WD8=;
-	b=a4o63wEOshQY9sQEfohvFSi0GWJJowRBtsNvgjU47MmeZ5UzKEEkRFPC4nQ3+2ylclle
-	 O2QACNcmE7xWm3KyfYVtGvGySeTtnoea5/E6YcS0Q//8nV/5Z5CdNJAPu7P1taiFIPHpg
-	 6A8/UmdgG54GU0t8Homf/A284eMn8eRyDE1ubKHKYtRN8fmYL4puFD8wqP7p/nx1g3eFY
-	 oZUGpQew4kyfS+Lrbwo5yqxrojLJBpNOG9/a6Wc5OSZ4CEuoyNbEGQp90iKUNOsBdfJwh
-	 WXd02hSwEU6Ay4r5kZ4yZDhdx0/4DSw8P2n6UB0dXFMjtOEOO4xGB/LFD3wRhWnIJXg==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=PfR/ZOuMUGMNrTFeYycBwTXsUQGAF5aqStKMwAT2Rs0=;
+	b=NDH0MHqPv2Few9JjMRA5fxtEAdWFj6pdTQd2je9vl2/jRUEt2Mz59/nKFYJMKiAZp3T8
+	 Ye/3aXk3jvb9qHdCchPfAFZMwynyOPWM6xowtZmSrznGxv5ebbfat6bPtblZmlZh7vMV2
+	 EGCuDpPa5lHLo8INq9hpRUpVSn76lttezPCRgTCgdaq02fVztStdyFdoKyipZdpz9rMa1
+	 7JkeBhr3meDNv0hfKcSrwWOao97GXfXOE2yxsECyZeWf5IVV0iThynFprBpH4ouP4oqeN
+	 AoetJsFndYLT5KGs6/4wpmlC9MMsHrcjxMzG+Bx8MRMJiBm6U4NPt0qjoJuAPlNSjQQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794055808;
-	bh=45CRhkr0keptA6Ct4+x9nm93nJAOmQV+jG2fzk78WD8=;
+	d=lists.u-boot-project.org; s=default; t=1794055805;
+	bh=PfR/ZOuMUGMNrTFeYycBwTXsUQGAF5aqStKMwAT2Rs0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=CuLj1ulglwBFgsjOTB2kLWKOZllVM597bpXZVbD4dklQocj68lJ/sRBRhVNnhjrDV
-	 vdi7DtTWiBcmAAqDZJyHL5SOvip9ZVZH4nqULaL8U0Rowk+rIld841pld75nuglyl0
-	 0AEzS1Q2PYyW/1gLt7ftZp+L+wKd49l8JOfZi5ef4DJZnbeaGRE3pP18T0Ehf9mcQW
-	 ukyNR5RuuVJ35a/09xIa47tbz1tKCJtOhM+wL8GjKG7a9UccbhPX+fuLgBuZd2rak5
-	 MeQWbtA2Mxpea1a9KZ9cXfQeW8p/mT0kCwPGeit598ckzqTbWTjJFBoUVNJN2EHYhg
-	 V4Ly3/Xzz5oow==
+	b=SN2YuZjmFhUNZZJsAYQz3Dje+stDovSRnjM8xyDwMZPWNidrAVePyqNmTM8f71+LK
+	 kltBXv22Y8blhd0nyHvmZm9W1xBEdXSUkiSy8T8kxa34z2dHWiytwkygwqyo2HrVIO
+	 M7NGAJNSG+jU8WJvhtC+K/eeM6U2QvaZDpsJHWbbByK2emUzQ+uVzVGno5XqSHh/bY
+	 W05LMKzy/fKiu8IKYAJFIFOdJMc+GItwdk9nTpBTvzQ84dRHKCujRW1dmlk4F8Kzlr
+	 4ehoEpu2urWuLANtFElJNFIsMqCVjU/z5dCL+8P8yF5Q2f4NtIpWtpEfT27KV2KgZ7
+	 TETGXD8XfwPIA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CF11460767;
-	Sat,  7 Nov 2026 12:50:08 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 759991C6
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:22:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BE56681352;
+	Sat,  7 Nov 2026 12:50:05 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id A0B1532A
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:22:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 5BABC407AA
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:22:45 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 85B6A407AA
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:22:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 93nWIhhCREGX for <u-boot@lists.u-boot-project.org>;
- Sat,  7 Nov 2026 07:22:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org CCA4040762
+ id NemMYpZMWSH1 for <u-boot@lists.u-boot-project.org>;
+ Sat,  7 Nov 2026 07:22:40 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0C9C940762
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::532"
+ arc=none smtp.remote-ip="2a00:1450:4864:20::633"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::532; helo=mail-ed1-x532.google.com;
+ client-ip=2a00:1450:4864:20::633; helo=mail-ej1-x633.google.com;
  envelope-from=anders.roxell@linaro.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=nWm9S8M0
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- by smtp4.osuosl.org (Postfix) with ESMTPS id CCA4040762
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:22:42 +0000 (UTC)
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-6b5785aea56so228254a12.2
- for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 23:22:42 -0800 (PST)
+ header.a=rsa-sha256 header.s=google header.b=fIFxcBuR
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 0C9C940762
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 07:22:39 +0000 (UTC)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-c40db84b4b5so12081966b.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 06 Nov 2026 23:22:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794036160; x=1794640960;
+ d=linaro.org; s=google; t=1794036157; x=1794640957;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=45CRhkr0keptA6Ct4+x9nm93nJAOmQV+jG2fzk78WD8=;
- b=nWm9S8M0FmIpPT75CWtDusM0OUNBYl2mlqp3S+N37bKRUFdITBeWMJNxyCADdADgeR
- duWdgpQHHvc/T3H6QRSsdt/93bXgm6C9AkaryI4EGUvHt+JBOaizcvI93Vpwso0lWHxC
- B9pkmBrbqq5118Shp31tqw23oYPjVqCC0EY281HqoNemckHfYPURZC3nuNHR5JjJ5cH4
- kgd56nvA4iUI9EUKZkzPEk37Qd1qSrsAi78q47EtM/9WAw4nnh0OBiV+g+J8UyJ4Y3xb
- F8GIW7E6554z/GmuRVq2k6ErCpsFLK3u2Qd6UxrbwC6Jx9uLz9f0HUbYZiWn8HPAPKYo
- T0CQ==
+ bh=PfR/ZOuMUGMNrTFeYycBwTXsUQGAF5aqStKMwAT2Rs0=;
+ b=fIFxcBuRx7kpoRdu9cW5RB9+sKpcx9FTr5KSaWfUtrFECHCqWzaJIma4hGAWNycz+i
+ qoJHbtXw70DirOgqM13cBFK7Nv1BwWx9xQvGT79sm8Mz/7/fYjaC7/C4rMhrZXU2Ze7D
+ CrlrNKEtms1AOpbOWe66OuFYVIYqPmtJV/K4ev1oUo7YOoE89Fo+0XREH8nUZZSYSr8p
+ Nj99two1qUnBGKwCjMQtXBp+qzoz7U4mAFYM/hDnr7OTRVJeyhygC0p/OUulYITEbNg/
+ WtgJZCr1l09axFNgzGGNgHW/1+mc0eRSsQG3RXGhNkDQy6qAJMhfYXV4I69eH9RCPsYG
+ CeVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794036160; x=1794640960;
+ d=1e100.net; s=20260707; t=1794036157; x=1794640957;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=45CRhkr0keptA6Ct4+x9nm93nJAOmQV+jG2fzk78WD8=;
- b=vOvvEcMXjOTKj9dTYrPppLzOd9u21GGzd2qq5+V5mdXKH0UCc+fIiIehQDju1s4/fg
- F+k+tdZOSamO3NHFiPELPAvxVo/4A33BODSh8oruHT0Q1UtLsRZydVH+ePCzxDfqdNXX
- jb2H6g85lsEnk0J/S6VgdIFs+MIPdxJEgSSWb2K3TlsegSCIZJbKzj2VyowgVV+wd9bi
- Qd3wTtcef58lRv1joJmbwX24LjRpGs2vVnUzm+k4XYKxjJDRMMIT1YMxvZQNH/aTTzFM
- wuqt4B0mJQ7HziHeJV1oNwe1IbRHG5JKMtW15aaWOLV7LVcJ764qqh2ZQUZCz23Kuolw
- WWrA==
-X-Gm-Message-State: APuU4Z9E/t5oQcQFJ1YW9/SQqETU3VVzyAMBvf8mSORuqlcGWp/jukr6
- YkBEmXMu7exYlBRLH1gmlbyKBOtMF64I/jlLL7FkjHgCu5KZk9Dv624daBFqVnpgBGRxCcAeOE0
- vwf22
-X-Gm-Gg: AYBFou05vrPe+yzPT38NqvPBejamy5YmzpQj5W0/HD/e8HSWUHCdskN1vUwQTjKurlc
- CaCR5D+fUWKN1mXqK6G2lm+KHjonC3kuWuHcdz8URv6PVbpnrzuumvnp6cNkpk47QTDWYRzEDpe
- LrVS2oITZz08y1TSzzdL6iZAXEKz0pceaxeRmbLoX4AS7YRGZg7cV5R2AQjM1IJiT9zb/6ln13b
- a0jCbE7SSnb1wdhAgM4ovrG2CdAjXUKx5L+puSSZAFAbj6C5EuuaQme21bo9EKuTju1VA6im+po
- FTT5LfR6iSomcn6Bqonwu1QVvytAn/gSHwEtgvuNUYBReT7CSHMaoAZd6jtW/cV1MG3102VrxcA
- WmU7zT6hzrCGEsE4OgXKaZ0EAcLl/MvgjZjHAA7R2hLxwJVx4WoqTrel0zGOiwXm5gFyoqN0ypE
- DWqqWv2UV7Vssifh/XDB5E/RMZTRxzUs7F034aGVDgr4+ac1MfroM5jQblCt7YGEIu8cpH3by0d
- zkhwOo2CoW6ubSAxWFDbfJjSkjhQRUJ6xPSJJ/tv7nZiOqs+VhbZ7IE37gQkWe8fTP7GTbxTAz5
- x0eibuoPqYBX7PVNpiABMlnUjRAfqZhz4XsaGq7drInT7h8AL509U32bJzV+4VKEioCrZjAMsAA
- SA+kLAaoLEQ==
-X-Received: by 2002:a17:906:a84a:b0:c4d:3543:336e with SMTP id
- a640c23a62f3a-c4d35435267mr372455066b.0.1794036159692; 
- Fri, 06 Nov 2026 23:22:39 -0800 (PST)
+ bh=PfR/ZOuMUGMNrTFeYycBwTXsUQGAF5aqStKMwAT2Rs0=;
+ b=UHDepM2bcWlYSYBRY0CN58xElkruQ1xmZyIIqWensGzrwQekroC6zLk1sNQFMEW0yq
+ q4MzALT09a/4kjJozsQXmG5dW945ewAlRwoF5QewHJHOSvrDFbNolWRkwsdNPB0wHHqi
+ rnoeaUmx3OIW12j5wdAwuTwZMP725996tigpxSZgUZMZJhditlYWMKbVCFf+l9DVs05O
+ vaeXkTneompP1+oBdyr0cxGO8/HNrsNf9ET90k8Y2jevmHpWan77sQ1ZqAOex9Fap+8n
+ M+eOwYS6AQe/DKqFcs9WQmN60FmR/69mupYmz2D7/zL3wVEuUZTNZeTkFb7wxFMb22pn
+ hAoA==
+X-Gm-Message-State: APuU4Z/thWN3kEMqcf4T5MHuzPzycvgmw9QGqPfbC0zx1Lr/J5jMes+R
+ 70K57F64tEm3Z51XMFBUpW1FnxsyY9nkFzlUEv+v7wImxfNvHvw5xRiAL9G0J+/gBuZ3MSI8OOa
+ hoC9U
+X-Gm-Gg: AYBFou00qwOfaV8+8Qxlv7a2C0oDyq7m4yXj/MOVySY/oOtZsvM9rcllxUYvR/iJqI8
+ cAUEPHE/8kGVwqpxsR8/ErnOtwxCZqmknBpzNspQHf9J/+ooF4LWnvOz0s3iDMyqfCHzV1oiSuN
+ WlqxTb6TTT72+ivL2sD22+buo8n7kPIomHvSGqAyNI7s4nN+w/w9KrQ9VYclAXCtFBgt5m+tJsh
+ PXCCp2ErNBfwSP2Ji2eCg1h7g4EDHZq27BZukuYp2NQT3Yg4EaNoY8qb7pQmVkZWLn3BqyWZTgt
+ 7vgnQ/QdjzL3mF8H5E8WqlfwNfKhAZK8z3DEutaEDOHA+v6adp+EmacDKQvVFxibvirQjNv/sNu
+ +JzRc6aUT2yVYyDEwPJ+ssctpzO8huoZkHA3hIrUi1YBE723dzZDUL+dggaKAJtIoiTVKIX1EV/
+ sRqZS2TFoHkWB8NXIY/O+nw5aSfYGgzZYFfOVsqyqMryoD3+3C3+47wy5cc83102aDoCOHy5jBe
+ v4amK5gck9Mept4irFPMSf+B8SRkFzfGKJ1LlAwxB+ulTr+avpWz5CVQ9CfwZlaYfxbbydP7ET6
+ pMrdzjr+Lcj0Ac1gLNKzwtDeXXTXejG8bX/SW9/PMBEPKy2Bsx9u57mrxtOLrFuaTZKzpWF1cil
+ FdJPRsh3vWQ==
+X-Received: by 2002:a17:906:c1d4:b0:c4d:2b77:681e with SMTP id
+ a640c23a62f3a-c4d34c90417mr359061966b.3.1794036157337; 
+ Fri, 06 Nov 2026 23:22:37 -0800 (PST)
 Received: from monster.taild06a60.ts.net (c-85-229-7-191.bbcust.telenor.se.
  [85.229.7.191]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c4d356eae34sm132640566b.85.2026.11.06.23.22.38
+ a640c23a62f3a-c4d356eae34sm132640566b.85.2026.11.06.23.22.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Nov 2026 23:22:39 -0800 (PST)
+ Fri, 06 Nov 2026 23:22:36 -0800 (PST)
 From: Anders Roxell <anders.roxell@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
@@ -142,9 +142,9 @@ Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org,
  Anders Roxell <anders.roxell@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Jens Wiklander <jens.wiklander@linaro.org>
-Subject: [PATCH v11 08/30] usb: dwc3: core: remove the code U-Boot does not use
-Date: Sat,  7 Nov 2026 08:22:02 +0100
-Message-ID: <20261107072224.3492260-9-anders.roxell@linaro.org>
+Subject: [PATCH v11 06/30] usb: gadget: udc: make udc-core build in U-Boot
+Date: Sat,  7 Nov 2026 08:22:00 +0100
+Message-ID: <20261107072224.3492260-7-anders.roxell@linaro.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261107072224.3492260-1-anders.roxell@linaro.org>
 References: <20261107072224.3492260-1-anders.roxell@linaro.org>
@@ -163,1527 +163,1393 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-After the resync core.c is the Linux v6.16 file. U-Boot does not use
-most of it: the platform driver, PM, extcon, power supply, DRD mode
-switching and the clock and property lookup.
+Adapt the re-imported udc-core.c to U-Boot and build it for every gadget
+config. The resynced gadget.h makes usb_ep_enable() and friends real
+functions and they live here now.
 
-Remove it. This commit only deletes code, so the next ones are easier
-to review.
+udc-core only sees controllers that called usb_add_gadget_udc(). Driver
+model drivers do that from probe. The others have no probe at all. Add a
+weak usb_gadget_udc_bringup() hook so they can bring themselves up each
+time a gadget driver asks for a UDC. Report what the hook returns,
+otherwise a controller that fails to come up only says "No UDC
+available".
 
-dwc3_clk_disable() goes too. The glue drivers own the clocks in U-Boot,
-and dwc3-generic disables the ref clock it enabled itself.
-
-dwc3_core_is_valid() stays. U-Boot needs it to read the IP and the
-revision.
+In the kernel udc_start(), udc_stop() and get_frame() are mandatory. In
+U-Boot they are not, so check them before calling. Without the check a
+driver that does not have them takes the board down instead of failing.
 
 Co-developed-by: Jerome Forissier <jerome.forissier@linaro.org>
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 Co-developed-by: Jens Wiklander <jens.wiklander@linaro.org>
 Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+
+Enable async callbacks after udc_start and disable them on unbind, the
+same way Linux does. The resynced dwc3 ep0 code only passes control
+requests to the gadget driver when dwc->async_callbacks is set, so
+without it GET_DESCRIPTOR stalls and no dwc3 board enumerates.
+
+Drop the <linux/module.h> and <linux/device.h> includes from the
+re-imported epautoconf.c. U-Boot has no linux/module.h, so no gadget
+config builds without this.
+
+Reported-by: Anshul Dalal <anshuld@ti.com>
 Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
 ---
- drivers/usb/dwc3/core.c | 1410 ---------------------------------------
- drivers/usb/dwc3/core.h |    3 -
- 2 files changed, 1413 deletions(-)
+ drivers/usb/gadget/epautoconf.c   |   2 -
+ drivers/usb/gadget/udc/Makefile   |   1 +
+ drivers/usb/gadget/udc/udc-core.c | 931 +++++-------------------------
+ include/linux/usb/gadget.h        |   3 +
+ 4 files changed, 153 insertions(+), 784 deletions(-)
 
-diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index 8002c23a5a02..4c930358af42 100644
---- a/drivers/usb/dwc3/core.c
-+++ b/drivers/usb/dwc3/core.c
-@@ -45,68 +45,6 @@
+diff --git a/drivers/usb/gadget/epautoconf.c b/drivers/usb/gadget/epautoconf.c
+index 4fbea9137240..5128d147c168 100644
+--- a/drivers/usb/gadget/epautoconf.c
++++ b/drivers/usb/gadget/epautoconf.c
+@@ -7,9 +7,7 @@
+  */
  
- #define DWC3_DEFAULT_AUTOSUSPEND_DELAY	5000 /* ms */
+ #include <linux/kernel.h>
+-#include <linux/module.h>
+ #include <linux/types.h>
+-#include <linux/device.h>
+ 
+ #include <linux/ctype.h>
+ #include <linux/string.h>
+diff --git a/drivers/usb/gadget/udc/Makefile b/drivers/usb/gadget/udc/Makefile
+index 56b9b123fa16..f80ae6e5add5 100644
+--- a/drivers/usb/gadget/udc/Makefile
++++ b/drivers/usb/gadget/udc/Makefile
+@@ -7,4 +7,5 @@ obj-$(CONFIG_USB_DWC3_GADGET)	+= udc-core.o
+ endif
+ 
+ obj-$(CONFIG_$(PHASE_)DM_USB_GADGET)	+= udc-core.o
++obj-$(CONFIG_$(PHASE_)USB_GADGET)	+= udc-core.o
+ obj-y += udc-uclass.o
+diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc/udc-core.c
+index 2af62c579cb3..a22e38a51875 100644
+--- a/drivers/usb/gadget/udc/udc-core.c
++++ b/drivers/usb/gadget/udc/udc-core.c
+@@ -7,27 +7,17 @@
+  * Author: Felipe Balbi <balbi@ti.com>
+  */
+ 
+-#define pr_fmt(fmt)	"UDC core: " fmt
+-
+-#include <linux/kernel.h>
+-#include <linux/module.h>
+-#include <linux/device.h>
+-#include <linux/list.h>
+-#include <linux/idr.h>
+-#include <linux/err.h>
++#include <dm/device.h>
++#include <dm/device_compat.h>
++#include <dm/devres.h>
++#include <linux/compat.h>
++#include <malloc.h>
++#include <asm/cache.h>
++#include <linux/bug.h>
+ #include <linux/dma-mapping.h>
+-#include <linux/sched/task_stack.h>
+-#include <linux/workqueue.h>
+ 
+ #include <linux/usb/ch9.h>
+ #include <linux/usb/gadget.h>
+-#include <linux/usb.h>
+-
+-#include "trace.h"
+-
+-static DEFINE_IDA(gadget_id_numbers);
+-
+-static const struct bus_type gadget_bus_type;
+ 
+ /**
+  * struct usb_udc - describes one usb device controller
+@@ -41,7 +31,6 @@ static const struct bus_type gadget_bus_type;
+  * @allow_connect: Indicates whether UDC is allowed to be pulled up.
+  * Set/cleared by gadget_(un)bind_driver() after gadget driver is bound or
+  * unbound.
+- * @vbus_work: work routine to handle VBUS status change notifications.
+  * @connect_lock: protects udc->started, gadget->connect,
+  * gadget->allow_connect and gadget->deactivate. The routines
+  * usb_gadget_connect_locked(), usb_gadget_disconnect_locked(),
+@@ -59,15 +48,13 @@ struct usb_udc {
+ 	bool				vbus;
+ 	bool				started;
+ 	bool				allow_connect;
+-	struct work_struct		vbus_work;
+ 	struct mutex			connect_lock;
+ };
+ 
+-static const struct class udc_class;
+ static LIST_HEAD(udc_list);
+ 
+ /* Protects udc_list, udc->driver, driver->is_bound, and related calls */
+-static DEFINE_MUTEX(udc_lock);
++DEFINE_MUTEX(udc_lock);
+ 
+ /* ------------------------------------------------------------------------- */
+ 
+@@ -84,8 +71,6 @@ void usb_ep_set_maxpacket_limit(struct usb_ep *ep,
+ {
+ 	ep->maxpacket_limit = maxpacket_limit;
+ 	ep->maxpacket = maxpacket_limit;
+-
+-	trace_usb_ep_set_maxpacket_limit(ep, 0);
+ }
+ EXPORT_SYMBOL_GPL(usb_ep_set_maxpacket_limit);
+ 
+@@ -120,9 +105,9 @@ int usb_ep_enable(struct usb_ep *ep)
+ 
+ 	/* UDC drivers can't handle endpoints with maxpacket size 0 */
+ 	if (!ep->desc || usb_endpoint_maxp(ep->desc) == 0) {
+-		WARN_ONCE(1, "%s: ep%d (%s) has %s\n", __func__, ep->address, ep->name,
+-			  (!ep->desc) ? "NULL descriptor" : "maxpacket 0");
+-
++		if (!IS_ENABLED(CONFIG_XPL_BUILD))
++			WARN_ONCE(1, "%s: ep%d (%s) has %s\n", __func__, ep->address,
++				  ep->name, (!ep->desc) ? "NULL descriptor" : "maxpacket 0");
+ 		ret = -EINVAL;
+ 		goto out;
+ 	}
+@@ -134,8 +119,6 @@ int usb_ep_enable(struct usb_ep *ep)
+ 	ep->enabled = true;
+ 
+ out:
+-	trace_usb_ep_enable(ep, ret);
+-
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(usb_ep_enable);
+@@ -168,8 +151,6 @@ int usb_ep_disable(struct usb_ep *ep)
+ 	ep->enabled = false;
+ 
+ out:
+-	trace_usb_ep_disable(ep, ret);
+-
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(usb_ep_disable);
+@@ -191,13 +172,7 @@ EXPORT_SYMBOL_GPL(usb_ep_disable);
+ struct usb_request *usb_ep_alloc_request(struct usb_ep *ep,
+ 						       gfp_t gfp_flags)
+ {
+-	struct usb_request *req = NULL;
+-
+-	req = ep->ops->alloc_request(ep, gfp_flags);
+-
+-	trace_usb_ep_alloc_request(ep, req, req ? 0 : -ENOMEM);
+-
+-	return req;
++	return  ep->ops->alloc_request(ep, gfp_flags);
+ }
+ EXPORT_SYMBOL_GPL(usb_ep_alloc_request);
+ 
+@@ -213,7 +188,6 @@ EXPORT_SYMBOL_GPL(usb_ep_alloc_request);
+ void usb_ep_free_request(struct usb_ep *ep,
+ 				       struct usb_request *req)
+ {
+-	trace_usb_ep_free_request(ep, req, 0);
+ 	ep->ops->free_request(ep, req);
+ }
+ EXPORT_SYMBOL_GPL(usb_ep_free_request);
+@@ -301,8 +275,6 @@ int usb_ep_queue(struct usb_ep *ep,
+ 	ret = ep->ops->queue(ep, req, gfp_flags);
+ 
+ out:
+-	trace_usb_ep_queue(ep, req, ret);
+-
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(usb_ep_queue);
+@@ -326,12 +298,7 @@ EXPORT_SYMBOL_GPL(usb_ep_queue);
+  */
+ int usb_ep_dequeue(struct usb_ep *ep, struct usb_request *req)
+ {
+-	int ret;
+-
+-	ret = ep->ops->dequeue(ep, req);
+-	trace_usb_ep_dequeue(ep, req, ret);
+-
+-	return ret;
++	return ep->ops->dequeue(ep, req);
+ }
+ EXPORT_SYMBOL_GPL(usb_ep_dequeue);
+ 
+@@ -360,12 +327,7 @@ EXPORT_SYMBOL_GPL(usb_ep_dequeue);
+  */
+ int usb_ep_set_halt(struct usb_ep *ep)
+ {
+-	int ret;
+-
+-	ret = ep->ops->set_halt(ep, 1);
+-	trace_usb_ep_set_halt(ep, ret);
+-
+-	return ret;
++	return ep->ops->set_halt(ep, 1);
+ }
+ EXPORT_SYMBOL_GPL(usb_ep_set_halt);
+ 
+@@ -386,12 +348,7 @@ EXPORT_SYMBOL_GPL(usb_ep_set_halt);
+  */
+ int usb_ep_clear_halt(struct usb_ep *ep)
+ {
+-	int ret;
+-
+-	ret = ep->ops->set_halt(ep, 0);
+-	trace_usb_ep_clear_halt(ep, ret);
+-
+-	return ret;
++	return ep->ops->set_halt(ep, 0);
+ }
+ EXPORT_SYMBOL_GPL(usb_ep_clear_halt);
+ 
+@@ -416,8 +373,6 @@ int usb_ep_set_wedge(struct usb_ep *ep)
+ 	else
+ 		ret = ep->ops->set_halt(ep, 1);
+ 
+-	trace_usb_ep_set_wedge(ep, ret);
+-
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(usb_ep_set_wedge);
+@@ -448,8 +403,6 @@ int usb_ep_fifo_status(struct usb_ep *ep)
+ 	else
+ 		ret = -EOPNOTSUPP;
+ 
+-	trace_usb_ep_fifo_status(ep, ret);
+-
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(usb_ep_fifo_status);
+@@ -469,8 +422,6 @@ void usb_ep_fifo_flush(struct usb_ep *ep)
+ {
+ 	if (ep->ops->fifo_flush)
+ 		ep->ops->fifo_flush(ep);
+-
+-	trace_usb_ep_fifo_flush(ep, 0);
+ }
+ EXPORT_SYMBOL_GPL(usb_ep_fifo_flush);
+ 
+@@ -485,13 +436,11 @@ EXPORT_SYMBOL_GPL(usb_ep_fifo_flush);
+  */
+ int usb_gadget_frame_number(struct usb_gadget *gadget)
+ {
+-	int ret;
+ 
+-	ret = gadget->ops->get_frame(gadget);
++	if (!gadget->ops->get_frame)
++		return -EOPNOTSUPP;
+ 
+-	trace_usb_gadget_frame_number(gadget, ret);
+-
+-	return ret;
++	return gadget->ops->get_frame(gadget);
+ }
+ EXPORT_SYMBOL_GPL(usb_gadget_frame_number);
+ 
+@@ -520,39 +469,10 @@ int usb_gadget_wakeup(struct usb_gadget *gadget)
+ 	ret = gadget->ops->wakeup(gadget);
+ 
+ out:
+-	trace_usb_gadget_wakeup(gadget, ret);
+-
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(usb_gadget_wakeup);
  
 -/**
-- * dwc3_get_dr_mode - Validates and sets dr_mode
-- * @dwc: pointer to our context structure
+- * usb_gadget_set_remote_wakeup - configures the device remote wakeup feature.
+- * @gadget:the device being configured for remote wakeup
+- * @set:value to be configured.
+- *
+- * set to one to enable remote wakeup feature and zero to disable it.
+- *
+- * returns zero on success, else negative errno.
 - */
--static int dwc3_get_dr_mode(struct dwc3 *dwc)
+-int usb_gadget_set_remote_wakeup(struct usb_gadget *gadget, int set)
 -{
--	enum usb_dr_mode mode;
--	struct device *dev = dwc->dev;
--	unsigned int hw_mode;
+-	int ret = 0;
 -
--	if (dwc->dr_mode == USB_DR_MODE_UNKNOWN)
--		dwc->dr_mode = USB_DR_MODE_OTG;
--
--	mode = dwc->dr_mode;
--	hw_mode = DWC3_GHWPARAMS0_MODE(dwc->hwparams.hwparams0);
--
--	switch (hw_mode) {
--	case DWC3_GHWPARAMS0_MODE_GADGET:
--		if (IS_ENABLED(CONFIG_USB_DWC3_HOST)) {
--			dev_err(dev,
--				"Controller does not support host mode.\n");
--			return -EINVAL;
--		}
--		mode = USB_DR_MODE_PERIPHERAL;
--		break;
--	case DWC3_GHWPARAMS0_MODE_HOST:
--		if (IS_ENABLED(CONFIG_USB_DWC3_GADGET)) {
--			dev_err(dev,
--				"Controller does not support device mode.\n");
--			return -EINVAL;
--		}
--		mode = USB_DR_MODE_HOST;
--		break;
--	default:
--		if (IS_ENABLED(CONFIG_USB_DWC3_HOST))
--			mode = USB_DR_MODE_HOST;
--		else if (IS_ENABLED(CONFIG_USB_DWC3_GADGET))
--			mode = USB_DR_MODE_PERIPHERAL;
--
--		/*
--		 * DWC_usb31 and DWC_usb3 v3.30a and higher do not support OTG
--		 * mode. If the controller supports DRD but the dr_mode is not
--		 * specified or set to OTG, then set the mode to peripheral.
--		 */
--		if (mode == USB_DR_MODE_OTG && !dwc->edev &&
--		    (!IS_ENABLED(CONFIG_USB_ROLE_SWITCH) ||
--		     !device_property_read_bool(dwc->dev, "usb-role-switch")) &&
--		    !DWC3_VER_IS_PRIOR(DWC3, 330A))
--			mode = USB_DR_MODE_PERIPHERAL;
--	}
--
--	if (mode != dwc->dr_mode) {
--		dev_warn(dev,
--			 "Configuration mismatch. dr_mode forced to %s\n",
--			 mode == USB_DR_MODE_HOST ? "host" : "gadget");
--
--		dwc->dr_mode = mode;
--	}
--
--	return 0;
--}
--
- void dwc3_enable_susphy(struct dwc3 *dwc, bool enable)
- {
- 	u32 reg;
-@@ -158,146 +96,6 @@ void dwc3_set_prtcap(struct dwc3 *dwc, u32 mode, bool ignore_susphy)
- 	dwc->current_dr_role = mode;
- }
- 
--static void __dwc3_set_mode(struct work_struct *work)
--{
--	struct dwc3 *dwc = work_to_dwc(work);
--	unsigned long flags;
--	int ret;
--	u32 reg;
--	u32 desired_dr_role;
--	int i;
--
--	mutex_lock(&dwc->mutex);
--	spin_lock_irqsave(&dwc->lock, flags);
--	desired_dr_role = dwc->desired_dr_role;
--	spin_unlock_irqrestore(&dwc->lock, flags);
--
--	pm_runtime_get_sync(dwc->dev);
--
--	if (dwc->current_dr_role == DWC3_GCTL_PRTCAP_OTG)
--		dwc3_otg_update(dwc, 0);
--
--	if (!desired_dr_role)
+-	if (!gadget->ops->set_remote_wakeup) {
+-		ret = -EOPNOTSUPP;
 -		goto out;
--
--	if (desired_dr_role == dwc->current_dr_role)
--		goto out;
--
--	if (desired_dr_role == DWC3_GCTL_PRTCAP_OTG && dwc->edev)
--		goto out;
--
--	switch (dwc->current_dr_role) {
--	case DWC3_GCTL_PRTCAP_HOST:
--		dwc3_host_exit(dwc);
--		break;
--	case DWC3_GCTL_PRTCAP_DEVICE:
--		dwc3_gadget_exit(dwc);
--		dwc3_event_buffers_cleanup(dwc);
--		break;
--	case DWC3_GCTL_PRTCAP_OTG:
--		dwc3_otg_exit(dwc);
--		spin_lock_irqsave(&dwc->lock, flags);
--		dwc->desired_otg_role = DWC3_OTG_ROLE_IDLE;
--		spin_unlock_irqrestore(&dwc->lock, flags);
--		dwc3_otg_update(dwc, 1);
--		break;
--	default:
--		break;
 -	}
 -
--	/*
--	 * When current_dr_role is not set, there's no role switching.
--	 * Only perform GCTL.CoreSoftReset when there's DRD role switching.
--	 */
--	if (dwc->current_dr_role && ((DWC3_IP_IS(DWC3) ||
--			DWC3_VER_IS_PRIOR(DWC31, 190A)) &&
--			desired_dr_role != DWC3_GCTL_PRTCAP_OTG)) {
--		reg = dwc3_readl(dwc->regs, DWC3_GCTL);
--		reg |= DWC3_GCTL_CORESOFTRESET;
--		dwc3_writel(dwc->regs, DWC3_GCTL, reg);
--
--		/*
--		 * Wait for internal clocks to synchronized. DWC_usb31 and
--		 * DWC_usb32 may need at least 50ms (less for DWC_usb3). To
--		 * keep it consistent across different IPs, let's wait up to
--		 * 100ms before clearing GCTL.CORESOFTRESET.
--		 */
--		msleep(100);
--
--		reg = dwc3_readl(dwc->regs, DWC3_GCTL);
--		reg &= ~DWC3_GCTL_CORESOFTRESET;
--		dwc3_writel(dwc->regs, DWC3_GCTL, reg);
--	}
--
--	spin_lock_irqsave(&dwc->lock, flags);
--
--	dwc3_set_prtcap(dwc, desired_dr_role, false);
--
--	spin_unlock_irqrestore(&dwc->lock, flags);
--
--	switch (desired_dr_role) {
--	case DWC3_GCTL_PRTCAP_HOST:
--		ret = dwc3_host_init(dwc);
--		if (ret) {
--			dev_err(dwc->dev, "failed to initialize host\n");
--		} else {
--			if (dwc->usb2_phy)
--				otg_set_vbus(dwc->usb2_phy->otg, true);
--
--			for (i = 0; i < dwc->num_usb2_ports; i++)
--				phy_set_mode(dwc->usb2_generic_phy[i], PHY_MODE_USB_HOST);
--			for (i = 0; i < dwc->num_usb3_ports; i++)
--				phy_set_mode(dwc->usb3_generic_phy[i], PHY_MODE_USB_HOST);
--
--			if (dwc->dis_split_quirk) {
--				reg = dwc3_readl(dwc->regs, DWC3_GUCTL3);
--				reg |= DWC3_GUCTL3_SPLITDISABLE;
--				dwc3_writel(dwc->regs, DWC3_GUCTL3, reg);
--			}
--		}
--		break;
--	case DWC3_GCTL_PRTCAP_DEVICE:
--		dwc3_core_soft_reset(dwc);
--
--		dwc3_event_buffers_setup(dwc);
--
--		if (dwc->usb2_phy)
--			otg_set_vbus(dwc->usb2_phy->otg, false);
--		phy_set_mode(dwc->usb2_generic_phy[0], PHY_MODE_USB_DEVICE);
--		phy_set_mode(dwc->usb3_generic_phy[0], PHY_MODE_USB_DEVICE);
--
--		ret = dwc3_gadget_init(dwc);
--		if (ret)
--			dev_err(dwc->dev, "failed to initialize peripheral\n");
--		break;
--	case DWC3_GCTL_PRTCAP_OTG:
--		dwc3_otg_init(dwc);
--		dwc3_otg_update(dwc, 0);
--		break;
--	default:
--		break;
--	}
+-	ret = gadget->ops->set_remote_wakeup(gadget, set);
 -
 -out:
--	pm_runtime_mark_last_busy(dwc->dev);
--	pm_runtime_put_autosuspend(dwc->dev);
--	mutex_unlock(&dwc->mutex);
--}
+-	trace_usb_gadget_set_remote_wakeup(gadget, ret);
 -
--void dwc3_set_mode(struct dwc3 *dwc, u32 mode)
--{
--	unsigned long flags;
--
--	if (dwc->dr_mode != USB_DR_MODE_OTG)
--		return;
--
--	spin_lock_irqsave(&dwc->lock, flags);
--	dwc->desired_dr_role = mode;
--	spin_unlock_irqrestore(&dwc->lock, flags);
--
--	queue_work(system_freezable_wq, &dwc->drd_work);
--}
--
- u32 dwc3_core_fifo_space(struct dwc3_ep *dep, u8 type)
- {
- 	struct dwc3		*dwc = dep->dwc;
-@@ -928,58 +726,11 @@ static void dwc3_phy_power_off(struct dwc3 *dwc)
- 	usb_phy_set_suspend(dwc->usb2_phy, 1);
- }
- 
--static int dwc3_clk_enable(struct dwc3 *dwc)
--{
--	int ret;
--
--	ret = clk_prepare_enable(dwc->bus_clk);
--	if (ret)
--		return ret;
--
--	ret = clk_prepare_enable(dwc->ref_clk);
--	if (ret)
--		goto disable_bus_clk;
--
--	ret = clk_prepare_enable(dwc->susp_clk);
--	if (ret)
--		goto disable_ref_clk;
--
--	ret = clk_prepare_enable(dwc->utmi_clk);
--	if (ret)
--		goto disable_susp_clk;
--
--	ret = clk_prepare_enable(dwc->pipe_clk);
--	if (ret)
--		goto disable_utmi_clk;
--
--	return 0;
--
--disable_utmi_clk:
--	clk_disable_unprepare(dwc->utmi_clk);
--disable_susp_clk:
--	clk_disable_unprepare(dwc->susp_clk);
--disable_ref_clk:
--	clk_disable_unprepare(dwc->ref_clk);
--disable_bus_clk:
--	clk_disable_unprepare(dwc->bus_clk);
 -	return ret;
 -}
+-EXPORT_SYMBOL_GPL(usb_gadget_set_remote_wakeup);
 -
--static void dwc3_clk_disable(struct dwc3 *dwc)
+ /**
+  * usb_gadget_set_selfpowered - sets the device selfpowered feature.
+  * @gadget:the device being declared as self-powered
+@@ -574,8 +494,6 @@ int usb_gadget_set_selfpowered(struct usb_gadget *gadget)
+ 	ret = gadget->ops->set_selfpowered(gadget, 1);
+ 
+ out:
+-	trace_usb_gadget_set_selfpowered(gadget, ret);
+-
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(usb_gadget_set_selfpowered);
+@@ -602,43 +520,10 @@ int usb_gadget_clear_selfpowered(struct usb_gadget *gadget)
+ 	ret = gadget->ops->set_selfpowered(gadget, 0);
+ 
+ out:
+-	trace_usb_gadget_clear_selfpowered(gadget, ret);
+-
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(usb_gadget_clear_selfpowered);
+ 
+-/**
+- * usb_gadget_vbus_connect - Notify controller that VBUS is powered
+- * @gadget:The device which now has VBUS power.
+- * Context: can sleep
+- *
+- * This call is used by a driver for an external transceiver (or GPIO)
+- * that detects a VBUS power session starting.  Common responses include
+- * resuming the controller, activating the D+ (or D-) pullup to let the
+- * host detect that a USB device is attached, and starting to draw power
+- * (8mA or possibly more, especially after SET_CONFIGURATION).
+- *
+- * Returns zero on success, else negative errno.
+- */
+-int usb_gadget_vbus_connect(struct usb_gadget *gadget)
 -{
--	clk_disable_unprepare(dwc->pipe_clk);
--	clk_disable_unprepare(dwc->utmi_clk);
--	clk_disable_unprepare(dwc->susp_clk);
--	clk_disable_unprepare(dwc->ref_clk);
--	clk_disable_unprepare(dwc->bus_clk);
--}
+-	int ret = 0;
 -
- static void dwc3_core_exit(struct dwc3 *dwc)
+-	if (!gadget->ops->vbus_session) {
+-		ret = -EOPNOTSUPP;
+-		goto out;
+-	}
+-
+-	ret = gadget->ops->vbus_session(gadget, 1);
+-
+-out:
+-	trace_usb_gadget_vbus_connect(gadget, ret);
+-
+-	return ret;
+-}
+-EXPORT_SYMBOL_GPL(usb_gadget_vbus_connect);
+-
+ /**
+  * usb_gadget_vbus_draw - constrain controller's VBUS power usage
+  * @gadget:The device whose VBUS usage is being described
+@@ -653,21 +538,10 @@ EXPORT_SYMBOL_GPL(usb_gadget_vbus_connect);
+  */
+ int usb_gadget_vbus_draw(struct usb_gadget *gadget, unsigned mA)
  {
- 	dwc3_event_buffers_cleanup(dwc);
- 	dwc3_phy_power_off(dwc);
- 	dwc3_phy_exit(dwc);
--	dwc3_clk_disable(dwc);
- 	reset_control_assert(dwc->reset);
+-	int ret = 0;
++	if (!gadget->ops->vbus_draw)
++		return -EOPNOTSUPP;
+ 
+-	if (!gadget->ops->vbus_draw) {
+-		ret = -EOPNOTSUPP;
+-		goto out;
+-	}
+-
+-	ret = gadget->ops->vbus_draw(gadget, mA);
+-	if (!ret)
+-		gadget->mA = mA;
+-
+-out:
+-	trace_usb_gadget_vbus_draw(gadget, ret);
+-
+-	return ret;
++	return gadget->ops->vbus_draw(gadget, mA);
  }
+ EXPORT_SYMBOL_GPL(usb_gadget_vbus_draw);
  
-@@ -1090,7 +841,6 @@ static void dwc3_core_setup_global_control(struct dwc3 *dwc)
- 	dwc3_writel(dwc->regs, DWC3_GCTL, reg);
+@@ -694,8 +568,6 @@ int usb_gadget_vbus_disconnect(struct usb_gadget *gadget)
+ 	ret = gadget->ops->vbus_session(gadget, 0);
+ 
+ out:
+-	trace_usb_gadget_vbus_disconnect(gadget, ret);
+-
+ 	return ret;
  }
+ EXPORT_SYMBOL_GPL(usb_gadget_vbus_disconnect);
+@@ -726,8 +598,6 @@ static int usb_gadget_connect_locked(struct usb_gadget *gadget)
+ 		gadget->connected = 1;
  
--static int dwc3_core_get_phy(struct dwc3 *dwc);
- static int dwc3_core_ulpi_init(struct dwc3 *dwc);
- 
- /* set global incr burst type configuration registers */
-@@ -1528,75 +1278,6 @@ err_exit_ulpi:
+ out:
+-	trace_usb_gadget_connect(gadget, ret);
+-
  	return ret;
  }
  
--static int dwc3_core_get_phy(struct dwc3 *dwc)
--{
--	struct device		*dev = dwc->dev;
--	struct device_node	*node = dev->of_node;
--	char phy_name[9];
--	int ret;
--	u8 i;
+@@ -785,8 +655,6 @@ static int usb_gadget_disconnect_locked(struct usb_gadget *gadget)
+ 	mutex_unlock(&udc_lock);
+ 
+ out:
+-	trace_usb_gadget_disconnect(gadget, ret);
 -
--	if (node) {
--		dwc->usb2_phy = devm_usb_get_phy_by_phandle(dev, "usb-phy", 0);
--		dwc->usb3_phy = devm_usb_get_phy_by_phandle(dev, "usb-phy", 1);
--	} else {
--		dwc->usb2_phy = devm_usb_get_phy(dev, USB_PHY_TYPE_USB2);
--		dwc->usb3_phy = devm_usb_get_phy(dev, USB_PHY_TYPE_USB3);
--	}
--
--	if (IS_ERR(dwc->usb2_phy)) {
--		ret = PTR_ERR(dwc->usb2_phy);
--		if (ret == -ENXIO || ret == -ENODEV)
--			dwc->usb2_phy = NULL;
--		else
--			return dev_err_probe(dev, ret, "no usb2 phy configured\n");
--	}
--
--	if (IS_ERR(dwc->usb3_phy)) {
--		ret = PTR_ERR(dwc->usb3_phy);
--		if (ret == -ENXIO || ret == -ENODEV)
--			dwc->usb3_phy = NULL;
--		else
--			return dev_err_probe(dev, ret, "no usb3 phy configured\n");
--	}
--
--	for (i = 0; i < dwc->num_usb2_ports; i++) {
--		if (dwc->num_usb2_ports == 1)
--			snprintf(phy_name, sizeof(phy_name), "usb2-phy");
--		else
--			snprintf(phy_name, sizeof(phy_name),  "usb2-%u", i);
--
--		dwc->usb2_generic_phy[i] = devm_phy_get(dev, phy_name);
--		if (IS_ERR(dwc->usb2_generic_phy[i])) {
--			ret = PTR_ERR(dwc->usb2_generic_phy[i]);
--			if (ret == -ENOSYS || ret == -ENODEV)
--				dwc->usb2_generic_phy[i] = NULL;
--			else
--				return dev_err_probe(dev, ret, "failed to lookup phy %s\n",
--							phy_name);
--		}
--	}
--
--	for (i = 0; i < dwc->num_usb3_ports; i++) {
--		if (dwc->num_usb3_ports == 1)
--			snprintf(phy_name, sizeof(phy_name), "usb3-phy");
--		else
--			snprintf(phy_name, sizeof(phy_name), "usb3-%u", i);
--
--		dwc->usb3_generic_phy[i] = devm_phy_get(dev, phy_name);
--		if (IS_ERR(dwc->usb3_generic_phy[i])) {
--			ret = PTR_ERR(dwc->usb3_generic_phy[i]);
--			if (ret == -ENOSYS || ret == -ENODEV)
--				dwc->usb3_generic_phy[i] = NULL;
--			else
--				return dev_err_probe(dev, ret, "failed to lookup phy %s\n",
--							phy_name);
--		}
--	}
--
--	return 0;
--}
--
- static int dwc3_core_init_mode(struct dwc3 *dwc)
- {
- 	struct device *dev = dwc->dev;
-@@ -1665,208 +1346,6 @@ static void dwc3_core_exit_mode(struct dwc3 *dwc)
- 	dwc3_set_prtcap(dwc, DWC3_GCTL_PRTCAP_DEVICE, true);
+ 	return ret;
  }
  
--static void dwc3_get_software_properties(struct dwc3 *dwc)
--{
--	struct device *tmpdev;
--	u16 gsbuscfg0_reqinfo;
--	int ret;
--
--	dwc->gsbuscfg0_reqinfo = DWC3_GSBUSCFG0_REQINFO_UNSPECIFIED;
--
--	/*
--	 * Iterate over all parent nodes for finding swnode properties
--	 * and non-DT (non-ABI) properties.
--	 */
--	for (tmpdev = dwc->dev; tmpdev; tmpdev = tmpdev->parent) {
--		ret = device_property_read_u16(tmpdev,
--					       "snps,gsbuscfg0-reqinfo",
--					       &gsbuscfg0_reqinfo);
--		if (!ret)
--			dwc->gsbuscfg0_reqinfo = gsbuscfg0_reqinfo;
--	}
--}
--
--static void dwc3_get_properties(struct dwc3 *dwc)
--{
--	struct device		*dev = dwc->dev;
--	u8			lpm_nyet_threshold;
--	u8			tx_de_emphasis;
--	u8			hird_threshold;
--	u8			rx_thr_num_pkt = 0;
--	u8			rx_max_burst = 0;
--	u8			tx_thr_num_pkt = 0;
--	u8			tx_max_burst = 0;
--	u8			rx_thr_num_pkt_prd = 0;
--	u8			rx_max_burst_prd = 0;
--	u8			tx_thr_num_pkt_prd = 0;
--	u8			tx_max_burst_prd = 0;
--	u8			tx_fifo_resize_max_num;
--	u16			num_hc_interrupters;
--
--	/* default to highest possible threshold */
--	lpm_nyet_threshold = 0xf;
--
--	/* default to -3.5dB de-emphasis */
--	tx_de_emphasis = 1;
--
--	/*
--	 * default to assert utmi_sleep_n and use maximum allowed HIRD
--	 * threshold value of 0b1100
--	 */
--	hird_threshold = 12;
--
--	/*
--	 * default to a TXFIFO size large enough to fit 6 max packets.  This
--	 * allows for systems with larger bus latencies to have some headroom
--	 * for endpoints that have a large bMaxBurst value.
--	 */
--	tx_fifo_resize_max_num = 6;
--
--	/* default to a single XHCI interrupter */
--	num_hc_interrupters = 1;
--
--	dwc->maximum_speed = usb_get_maximum_speed(dev);
--	dwc->max_ssp_rate = usb_get_maximum_ssp_rate(dev);
--	dwc->dr_mode = usb_get_dr_mode(dev);
--	dwc->hsphy_mode = of_usb_get_phy_mode(dev->of_node);
--
--	dwc->sysdev_is_parent = device_property_read_bool(dev,
--				"linux,sysdev_is_parent");
--	if (dwc->sysdev_is_parent)
--		dwc->sysdev = dwc->dev->parent;
--	else
--		dwc->sysdev = dwc->dev;
--
--	dwc->sys_wakeup = device_may_wakeup(dwc->sysdev);
--
--	dwc->has_lpm_erratum = device_property_read_bool(dev,
--				"snps,has-lpm-erratum");
--	device_property_read_u8(dev, "snps,lpm-nyet-threshold",
--				&lpm_nyet_threshold);
--	dwc->is_utmi_l1_suspend = device_property_read_bool(dev,
--				"snps,is-utmi-l1-suspend");
--	device_property_read_u8(dev, "snps,hird-threshold",
--				&hird_threshold);
--	dwc->dis_start_transfer_quirk = device_property_read_bool(dev,
--				"snps,dis-start-transfer-quirk");
--	dwc->usb3_lpm_capable = device_property_read_bool(dev,
--				"snps,usb3_lpm_capable");
--	dwc->usb2_lpm_disable = device_property_read_bool(dev,
--				"snps,usb2-lpm-disable");
--	dwc->usb2_gadget_lpm_disable = device_property_read_bool(dev,
--				"snps,usb2-gadget-lpm-disable");
--	device_property_read_u8(dev, "snps,rx-thr-num-pkt",
--				&rx_thr_num_pkt);
--	device_property_read_u8(dev, "snps,rx-max-burst",
--				&rx_max_burst);
--	device_property_read_u8(dev, "snps,tx-thr-num-pkt",
--				&tx_thr_num_pkt);
--	device_property_read_u8(dev, "snps,tx-max-burst",
--				&tx_max_burst);
--	device_property_read_u8(dev, "snps,rx-thr-num-pkt-prd",
--				&rx_thr_num_pkt_prd);
--	device_property_read_u8(dev, "snps,rx-max-burst-prd",
--				&rx_max_burst_prd);
--	device_property_read_u8(dev, "snps,tx-thr-num-pkt-prd",
--				&tx_thr_num_pkt_prd);
--	device_property_read_u8(dev, "snps,tx-max-burst-prd",
--				&tx_max_burst_prd);
--	device_property_read_u16(dev, "num-hc-interrupters",
--				 &num_hc_interrupters);
--	/* DWC3 core allowed to have a max of 8 interrupters */
--	if (num_hc_interrupters > 8)
--		num_hc_interrupters = 8;
--
--	dwc->do_fifo_resize = device_property_read_bool(dev,
--							"tx-fifo-resize");
--	if (dwc->do_fifo_resize)
--		device_property_read_u8(dev, "tx-fifo-max-num",
--					&tx_fifo_resize_max_num);
--
--	dwc->disable_scramble_quirk = device_property_read_bool(dev,
--				"snps,disable_scramble_quirk");
--	dwc->u2exit_lfps_quirk = device_property_read_bool(dev,
--				"snps,u2exit_lfps_quirk");
--	dwc->u2ss_inp3_quirk = device_property_read_bool(dev,
--				"snps,u2ss_inp3_quirk");
--	dwc->req_p1p2p3_quirk = device_property_read_bool(dev,
--				"snps,req_p1p2p3_quirk");
--	dwc->del_p1p2p3_quirk = device_property_read_bool(dev,
--				"snps,del_p1p2p3_quirk");
--	dwc->del_phy_power_chg_quirk = device_property_read_bool(dev,
--				"snps,del_phy_power_chg_quirk");
--	dwc->lfps_filter_quirk = device_property_read_bool(dev,
--				"snps,lfps_filter_quirk");
--	dwc->rx_detect_poll_quirk = device_property_read_bool(dev,
--				"snps,rx_detect_poll_quirk");
--	dwc->dis_u3_susphy_quirk = device_property_read_bool(dev,
--				"snps,dis_u3_susphy_quirk");
--	dwc->dis_u2_susphy_quirk = device_property_read_bool(dev,
--				"snps,dis_u2_susphy_quirk");
--	dwc->dis_enblslpm_quirk = device_property_read_bool(dev,
--				"snps,dis_enblslpm_quirk");
--	dwc->dis_u1_entry_quirk = device_property_read_bool(dev,
--				"snps,dis-u1-entry-quirk");
--	dwc->dis_u2_entry_quirk = device_property_read_bool(dev,
--				"snps,dis-u2-entry-quirk");
--	dwc->dis_rxdet_inp3_quirk = device_property_read_bool(dev,
--				"snps,dis_rxdet_inp3_quirk");
--	dwc->dis_u2_freeclk_exists_quirk = device_property_read_bool(dev,
--				"snps,dis-u2-freeclk-exists-quirk");
--	dwc->dis_del_phy_power_chg_quirk = device_property_read_bool(dev,
--				"snps,dis-del-phy-power-chg-quirk");
--	dwc->dis_tx_ipgap_linecheck_quirk = device_property_read_bool(dev,
--				"snps,dis-tx-ipgap-linecheck-quirk");
--	dwc->resume_hs_terminations = device_property_read_bool(dev,
--				"snps,resume-hs-terminations");
--	dwc->ulpi_ext_vbus_drv = device_property_read_bool(dev,
--				"snps,ulpi-ext-vbus-drv");
--	dwc->parkmode_disable_ss_quirk = device_property_read_bool(dev,
--				"snps,parkmode-disable-ss-quirk");
--	dwc->parkmode_disable_hs_quirk = device_property_read_bool(dev,
--				"snps,parkmode-disable-hs-quirk");
--	dwc->gfladj_refclk_lpm_sel = device_property_read_bool(dev,
--				"snps,gfladj-refclk-lpm-sel-quirk");
--
--	dwc->tx_de_emphasis_quirk = device_property_read_bool(dev,
--				"snps,tx_de_emphasis_quirk");
--	device_property_read_u8(dev, "snps,tx_de_emphasis",
--				&tx_de_emphasis);
--	device_property_read_string(dev, "snps,hsphy_interface",
--				    &dwc->hsphy_interface);
--	device_property_read_u32(dev, "snps,quirk-frame-length-adjustment",
--				 &dwc->fladj);
--	device_property_read_u32(dev, "snps,ref-clock-period-ns",
--				 &dwc->ref_clk_per);
--
--	dwc->dis_metastability_quirk = device_property_read_bool(dev,
--				"snps,dis_metastability_quirk");
--
--	dwc->dis_split_quirk = device_property_read_bool(dev,
--				"snps,dis-split-quirk");
--
--	dwc->lpm_nyet_threshold = lpm_nyet_threshold;
--	dwc->tx_de_emphasis = tx_de_emphasis;
--
--	dwc->hird_threshold = hird_threshold;
--
--	dwc->rx_thr_num_pkt = rx_thr_num_pkt;
--	dwc->rx_max_burst = rx_max_burst;
--
--	dwc->tx_thr_num_pkt = tx_thr_num_pkt;
--	dwc->tx_max_burst = tx_max_burst;
--
--	dwc->rx_thr_num_pkt_prd = rx_thr_num_pkt_prd;
--	dwc->rx_max_burst_prd = rx_max_burst_prd;
--
--	dwc->tx_thr_num_pkt_prd = tx_thr_num_pkt_prd;
--	dwc->tx_max_burst_prd = tx_max_burst_prd;
--
--	dwc->tx_fifo_resize_max_num = tx_fifo_resize_max_num;
--
--	dwc->num_hc_interrupters = num_hc_interrupters;
--}
--
- /* check whether the core supports IMOD */
- bool dwc3_has_imod(struct dwc3 *dwc)
- {
-@@ -1875,227 +1354,6 @@ bool dwc3_has_imod(struct dwc3 *dwc)
- 		DWC3_IP_IS(DWC32);
+@@ -815,170 +683,31 @@ int usb_gadget_disconnect(struct usb_gadget *gadget)
  }
+ EXPORT_SYMBOL_GPL(usb_gadget_disconnect);
  
--static void dwc3_check_params(struct dwc3 *dwc)
+-/**
+- * usb_gadget_deactivate - deactivate function which is not ready to work
+- * @gadget: the peripheral being deactivated
+- *
+- * This routine may be used during the gadget driver bind() call to prevent
+- * the peripheral from ever being visible to the USB host, unless later
+- * usb_gadget_activate() is called.  For example, user mode components may
+- * need to be activated before the system can talk to hosts.
+- *
+- * This routine may sleep; it must not be called in interrupt context
+- * (such as from within a gadget driver's disconnect() callback).
+- *
+- * Returns zero on success, else negative errno.
+- */
+-int usb_gadget_deactivate(struct usb_gadget *gadget)
 -{
--	struct device *dev = dwc->dev;
--	unsigned int hwparam_gen =
--		DWC3_GHWPARAMS3_SSPHY_IFC(dwc->hwparams.hwparams3);
+-	int ret = 0;
 -
--	/*
--	 * Enable IMOD for all supporting controllers.
--	 *
--	 * Particularly, DWC_usb3 v3.00a must enable this feature for
--	 * the following reason:
--	 *
--	 * Workaround for STAR 9000961433 which affects only version
--	 * 3.00a of the DWC_usb3 core. This prevents the controller
--	 * interrupt from being masked while handling events. IMOD
--	 * allows us to work around this issue. Enable it for the
--	 * affected version.
--	 */
--	if (dwc3_has_imod((dwc)))
--		dwc->imod_interval = 1;
+-	mutex_lock(&gadget->udc->connect_lock);
+-	if (gadget->deactivated)
+-		goto unlock;
 -
--	/* Check the maximum_speed parameter */
--	switch (dwc->maximum_speed) {
--	case USB_SPEED_FULL:
--	case USB_SPEED_HIGH:
--		break;
--	case USB_SPEED_SUPER:
--		if (hwparam_gen == DWC3_GHWPARAMS3_SSPHY_IFC_DIS)
--			dev_warn(dev, "UDC doesn't support Gen 1\n");
--		break;
--	case USB_SPEED_SUPER_PLUS:
--		if ((DWC3_IP_IS(DWC32) &&
--		     hwparam_gen == DWC3_GHWPARAMS3_SSPHY_IFC_DIS) ||
--		    (!DWC3_IP_IS(DWC32) &&
--		     hwparam_gen != DWC3_GHWPARAMS3_SSPHY_IFC_GEN2))
--			dev_warn(dev, "UDC doesn't support SSP\n");
--		break;
--	default:
--		dev_err(dev, "invalid maximum_speed parameter %d\n",
--			dwc->maximum_speed);
--		fallthrough;
--	case USB_SPEED_UNKNOWN:
--		switch (hwparam_gen) {
--		case DWC3_GHWPARAMS3_SSPHY_IFC_GEN2:
--			dwc->maximum_speed = USB_SPEED_SUPER_PLUS;
--			break;
--		case DWC3_GHWPARAMS3_SSPHY_IFC_GEN1:
--			if (DWC3_IP_IS(DWC32))
--				dwc->maximum_speed = USB_SPEED_SUPER_PLUS;
--			else
--				dwc->maximum_speed = USB_SPEED_SUPER;
--			break;
--		case DWC3_GHWPARAMS3_SSPHY_IFC_DIS:
--			dwc->maximum_speed = USB_SPEED_HIGH;
--			break;
--		default:
--			dwc->maximum_speed = USB_SPEED_SUPER;
--			break;
--		}
--		break;
+-	if (gadget->connected) {
+-		ret = usb_gadget_disconnect_locked(gadget);
+-		if (ret)
+-			goto unlock;
+-
+-		/*
+-		 * If gadget was being connected before deactivation, we want
+-		 * to reconnect it in usb_gadget_activate().
+-		 */
+-		gadget->connected = true;
 -	}
+-	gadget->deactivated = true;
 -
--	/*
--	 * Currently the controller does not have visibility into the HW
--	 * parameter to determine the maximum number of lanes the HW supports.
--	 * If the number of lanes is not specified in the device property, then
--	 * set the default to support dual-lane for DWC_usb32 and single-lane
--	 * for DWC_usb31 for super-speed-plus.
--	 */
--	if (dwc->maximum_speed == USB_SPEED_SUPER_PLUS) {
--		switch (dwc->max_ssp_rate) {
--		case USB_SSP_GEN_2x1:
--			if (hwparam_gen == DWC3_GHWPARAMS3_SSPHY_IFC_GEN1)
--				dev_warn(dev, "UDC only supports Gen 1\n");
--			break;
--		case USB_SSP_GEN_1x2:
--		case USB_SSP_GEN_2x2:
--			if (DWC3_IP_IS(DWC31))
--				dev_warn(dev, "UDC only supports single lane\n");
--			break;
--		case USB_SSP_GEN_UNKNOWN:
--		default:
--			switch (hwparam_gen) {
--			case DWC3_GHWPARAMS3_SSPHY_IFC_GEN2:
--				if (DWC3_IP_IS(DWC32))
--					dwc->max_ssp_rate = USB_SSP_GEN_2x2;
--				else
--					dwc->max_ssp_rate = USB_SSP_GEN_2x1;
--				break;
--			case DWC3_GHWPARAMS3_SSPHY_IFC_GEN1:
--				if (DWC3_IP_IS(DWC32))
--					dwc->max_ssp_rate = USB_SSP_GEN_1x2;
--				break;
--			}
--			break;
--		}
--	}
+-unlock:
+-	mutex_unlock(&gadget->udc->connect_lock);
+-	trace_usb_gadget_deactivate(gadget, ret);
+-
+-	return ret;
 -}
+-EXPORT_SYMBOL_GPL(usb_gadget_deactivate);
 -
--static struct extcon_dev *dwc3_get_extcon(struct dwc3 *dwc)
+-/**
+- * usb_gadget_activate - activate function which is not ready to work
+- * @gadget: the peripheral being activated
+- *
+- * This routine activates gadget which was previously deactivated with
+- * usb_gadget_deactivate() call. It calls usb_gadget_connect() if needed.
+- *
+- * This routine may sleep; it must not be called in interrupt context.
+- *
+- * Returns zero on success, else negative errno.
+- */
+-int usb_gadget_activate(struct usb_gadget *gadget)
 -{
--	struct device *dev = dwc->dev;
--	struct device_node *np_phy;
--	struct extcon_dev *edev = NULL;
--	const char *name;
+-	int ret = 0;
 -
--	if (device_property_present(dev, "extcon"))
--		return extcon_get_edev_by_phandle(dev, 0);
+-	mutex_lock(&gadget->udc->connect_lock);
+-	if (!gadget->deactivated)
+-		goto unlock;
 -
--	/*
--	 * Device tree platforms should get extcon via phandle.
--	 * On ACPI platforms, we get the name from a device property.
--	 * This device property is for kernel internal use only and
--	 * is expected to be set by the glue code.
--	 */
--	if (device_property_read_string(dev, "linux,extcon-name", &name) == 0)
--		return extcon_get_extcon_dev(name);
+-	gadget->deactivated = false;
 -
 -	/*
--	 * Check explicitly if "usb-role-switch" is used since
--	 * extcon_find_edev_by_node() can not be used to check the absence of
--	 * an extcon device. In the absence of an device it will always return
--	 * EPROBE_DEFER.
+-	 * If gadget has been connected before deactivation, or became connected
+-	 * while it was being deactivated, we call usb_gadget_connect().
 -	 */
--	if (IS_ENABLED(CONFIG_USB_ROLE_SWITCH) &&
--	    device_property_read_bool(dev, "usb-role-switch"))
--		return NULL;
+-	if (gadget->connected)
+-		ret = usb_gadget_connect_locked(gadget);
 -
--	/*
--	 * Try to get an extcon device from the USB PHY controller's "port"
--	 * node. Check if it has the "port" node first, to avoid printing the
--	 * error message from underlying code, as it's a valid case: extcon
--	 * device (and "port" node) may be missing in case of "usb-role-switch"
--	 * or OTG mode.
--	 */
--	np_phy = of_parse_phandle(dev->of_node, "phys", 0);
--	if (of_graph_is_present(np_phy)) {
--		struct device_node *np_conn;
+-unlock:
+-	mutex_unlock(&gadget->udc->connect_lock);
+-	trace_usb_gadget_activate(gadget, ret);
 -
--		np_conn = of_graph_get_remote_node(np_phy, -1, -1);
--		if (np_conn)
--			edev = extcon_find_edev_by_node(np_conn);
--		of_node_put(np_conn);
--	}
--	of_node_put(np_phy);
--
--	return edev;
+-	return ret;
 -}
+-EXPORT_SYMBOL_GPL(usb_gadget_activate);
 -
--static int dwc3_get_clocks(struct dwc3 *dwc)
--{
--	struct device *dev = dwc->dev;
+ /* ------------------------------------------------------------------------- */
+ 
+-#ifdef	CONFIG_HAS_DMA
 -
--	if (!dev->of_node)
+-int usb_gadget_map_request_by_dev(struct device *dev,
++int usb_gadget_map_request(struct usb_gadget *gadget,
+ 		struct usb_request *req, int is_in)
+ {
+ 	if (req->length == 0)
+ 		return 0;
+ 
+-	if (req->sg_was_mapped) {
+-		req->num_mapped_sgs = req->num_sgs;
 -		return 0;
--
--	/*
--	 * Clocks are optional, but new DT platforms should support all clocks
--	 * as required by the DT-binding.
--	 * Some devices have different clock names in legacy device trees,
--	 * check for them to retain backwards compatibility.
--	 */
--	dwc->bus_clk = devm_clk_get_optional(dev, "bus_early");
--	if (IS_ERR(dwc->bus_clk)) {
--		return dev_err_probe(dev, PTR_ERR(dwc->bus_clk),
--				"could not get bus clock\n");
 -	}
 -
--	if (dwc->bus_clk == NULL) {
--		dwc->bus_clk = devm_clk_get_optional(dev, "bus_clk");
--		if (IS_ERR(dwc->bus_clk)) {
--			return dev_err_probe(dev, PTR_ERR(dwc->bus_clk),
--					"could not get bus clock\n");
+-	if (req->num_sgs) {
+-		int     mapped;
+-
+-		mapped = dma_map_sg(dev, req->sg, req->num_sgs,
+-				is_in ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
+-		if (mapped == 0) {
+-			dev_err(dev, "failed to map SGs\n");
+-			return -EFAULT;
 -		}
--	}
 -
--	dwc->ref_clk = devm_clk_get_optional(dev, "ref");
--	if (IS_ERR(dwc->ref_clk)) {
--		return dev_err_probe(dev, PTR_ERR(dwc->ref_clk),
--				"could not get ref clock\n");
--	}
--
--	if (dwc->ref_clk == NULL) {
--		dwc->ref_clk = devm_clk_get_optional(dev, "ref_clk");
--		if (IS_ERR(dwc->ref_clk)) {
--			return dev_err_probe(dev, PTR_ERR(dwc->ref_clk),
--					"could not get ref clock\n");
+-		req->num_mapped_sgs = mapped;
+-	} else {
+-		if (is_vmalloc_addr(req->buf)) {
+-			dev_err(dev, "buffer is not dma capable\n");
+-			return -EFAULT;
+-		} else if (object_is_on_stack(req->buf)) {
+-			dev_err(dev, "buffer is on stack\n");
+-			return -EFAULT;
 -		}
--	}
 -
--	dwc->susp_clk = devm_clk_get_optional(dev, "suspend");
--	if (IS_ERR(dwc->susp_clk)) {
--		return dev_err_probe(dev, PTR_ERR(dwc->susp_clk),
--				"could not get suspend clock\n");
--	}
+-		req->dma = dma_map_single(dev, req->buf, req->length,
+-				is_in ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
 -
--	if (dwc->susp_clk == NULL) {
--		dwc->susp_clk = devm_clk_get_optional(dev, "suspend_clk");
--		if (IS_ERR(dwc->susp_clk)) {
--			return dev_err_probe(dev, PTR_ERR(dwc->susp_clk),
--					"could not get suspend clock\n");
+-		if (dma_mapping_error(dev, req->dma)) {
+-			dev_err(dev, "failed to map buffer\n");
+-			return -EFAULT;
 -		}
+-
+-		req->dma_mapped = 1;
 -	}
 -
--	/* specific to Rockchip RK3588 */
--	dwc->utmi_clk = devm_clk_get_optional(dev, "utmi");
--	if (IS_ERR(dwc->utmi_clk)) {
--		return dev_err_probe(dev, PTR_ERR(dwc->utmi_clk),
--				"could not get utmi clock\n");
--	}
--
--	/* specific to Rockchip RK3588 */
--	dwc->pipe_clk = devm_clk_get_optional(dev, "pipe");
--	if (IS_ERR(dwc->pipe_clk)) {
--		return dev_err_probe(dev, PTR_ERR(dwc->pipe_clk),
--				"could not get pipe clock\n");
--	}
--
--	return 0;
--}
--
- static int dwc3_get_num_ports(struct dwc3 *dwc)
- {
- 	void __iomem *base;
-@@ -2144,671 +1402,3 @@ static int dwc3_get_num_ports(struct dwc3 *dwc)
- 
++	req->dma = dma_map_single(req->buf, req->length,
++				  is_in ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
  	return 0;
  }
+-EXPORT_SYMBOL_GPL(usb_gadget_map_request_by_dev);
 -
--static struct power_supply *dwc3_get_usb_power_supply(struct dwc3 *dwc)
+-int usb_gadget_map_request(struct usb_gadget *gadget,
+-		struct usb_request *req, int is_in)
 -{
--	struct power_supply *usb_psy;
--	const char *usb_psy_name;
--	int ret;
+-	return usb_gadget_map_request_by_dev(gadget->dev.parent, req, is_in);
+-}
+ EXPORT_SYMBOL_GPL(usb_gadget_map_request);
+ 
+-void usb_gadget_unmap_request_by_dev(struct device *dev,
++void usb_gadget_unmap_request(struct usb_gadget *gadget,
+ 		struct usb_request *req, int is_in)
+ {
+-	if (req->length == 0 || req->sg_was_mapped)
++	if (req->length == 0)
+ 		return;
+ 
+-	if (req->num_mapped_sgs) {
+-		dma_unmap_sg(dev, req->sg, req->num_sgs,
+-				is_in ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
 -
--	ret = device_property_read_string(dwc->dev, "usb-psy-name", &usb_psy_name);
+-		req->num_mapped_sgs = 0;
+-	} else if (req->dma_mapped) {
+-		dma_unmap_single(dev, req->dma, req->length,
+-				is_in ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
+-		req->dma_mapped = 0;
+-	}
+-}
+-EXPORT_SYMBOL_GPL(usb_gadget_unmap_request_by_dev);
+-
+-void usb_gadget_unmap_request(struct usb_gadget *gadget,
+-		struct usb_request *req, int is_in)
+-{
+-	usb_gadget_unmap_request_by_dev(gadget->dev.parent, req, is_in);
++	dma_unmap_single(req->dma, req->length,
++			 is_in ? DMA_TO_DEVICE : DMA_FROM_DEVICE);
+ }
+ EXPORT_SYMBOL_GPL(usb_gadget_unmap_request);
+ 
+-#endif	/* CONFIG_HAS_DMA */
+-
+ /* ------------------------------------------------------------------------- */
+ 
+ /**
+@@ -992,11 +721,6 @@ EXPORT_SYMBOL_GPL(usb_gadget_unmap_request);
+ void usb_gadget_giveback_request(struct usb_ep *ep,
+ 		struct usb_request *req)
+ {
+-	if (likely(req->status == 0))
+-		usb_led_activity(USB_LED_EVENT_GADGET);
+-
+-	trace_usb_gadget_giveback_request(ep, req, 0);
+-
+ 	req->complete(ep, req);
+ }
+ EXPORT_SYMBOL_GPL(usb_gadget_giveback_request);
+@@ -1112,71 +836,13 @@ EXPORT_SYMBOL_GPL(usb_gadget_check_config);
+ 
+ /* ------------------------------------------------------------------------- */
+ 
+-static void usb_gadget_state_work(struct work_struct *work)
+-{
+-	struct usb_gadget *gadget = work_to_gadget(work);
+-	struct usb_udc *udc = gadget->udc;
+-
+-	if (udc)
+-		sysfs_notify(&udc->dev.kobj, NULL, "state");
+-}
+-
+ void usb_gadget_set_state(struct usb_gadget *gadget,
+ 		enum usb_device_state state)
+ {
+ 	gadget->state = state;
+-	schedule_work(&gadget->work);
+ }
+ EXPORT_SYMBOL_GPL(usb_gadget_set_state);
+ 
+-/* ------------------------------------------------------------------------- */
+-
+-/* Acquire connect_lock before calling this function. */
+-static int usb_udc_connect_control_locked(struct usb_udc *udc) __must_hold(&udc->connect_lock)
+-{
+-	if (udc->vbus)
+-		return usb_gadget_connect_locked(udc->gadget);
+-	else
+-		return usb_gadget_disconnect_locked(udc->gadget);
+-}
+-
+-static void vbus_event_work(struct work_struct *work)
+-{
+-	struct usb_udc *udc = container_of(work, struct usb_udc, vbus_work);
+-
+-	mutex_lock(&udc->connect_lock);
+-	usb_udc_connect_control_locked(udc);
+-	mutex_unlock(&udc->connect_lock);
+-}
+-
+-/**
+- * usb_udc_vbus_handler - updates the udc core vbus status, and try to
+- * connect or disconnect gadget
+- * @gadget: The gadget which vbus change occurs
+- * @status: The vbus status
+- *
+- * The udc driver calls it when it wants to connect or disconnect gadget
+- * according to vbus status.
+- *
+- * This function can be invoked from interrupt context by irq handlers of
+- * the gadget drivers, however, usb_udc_connect_control() has to run in
+- * non-atomic context due to the following:
+- * a. Some of the gadget driver implementations expect the ->pullup
+- * callback to be invoked in non-atomic context.
+- * b. usb_gadget_disconnect() acquires udc_lock which is a mutex.
+- * Hence offload invocation of usb_udc_connect_control() to workqueue.
+- */
+-void usb_udc_vbus_handler(struct usb_gadget *gadget, bool status)
+-{
+-	struct usb_udc *udc = gadget->udc;
+-
+-	if (udc) {
+-		udc->vbus = status;
+-		schedule_work(&udc->vbus_work);
+-	}
+-}
+-EXPORT_SYMBOL_GPL(usb_udc_vbus_handler);
+-
+ /**
+  * usb_gadget_udc_reset - notifies the udc core that bus reset occurs
+  * @gadget: The gadget which bus reset occurs
+@@ -1219,6 +885,9 @@ static inline int usb_gadget_udc_start_locked(struct usb_udc *udc)
+ 		return -EBUSY;
+ 	}
+ 
++	if (!udc->gadget->ops->udc_start)
++		return -EOPNOTSUPP;
++
+ 	ret = udc->gadget->ops->udc_start(udc->gadget, udc->driver);
+ 	if (!ret)
+ 		udc->started = true;
+@@ -1247,7 +916,8 @@ static inline void usb_gadget_udc_stop_locked(struct usb_udc *udc)
+ 		return;
+ 	}
+ 
+-	udc->gadget->ops->udc_stop(udc->gadget);
++	if (udc->gadget->ops->udc_stop)
++		udc->gadget->ops->udc_stop(udc->gadget);
+ 	udc->started = false;
+ }
+ 
+@@ -1325,6 +995,38 @@ static inline void usb_gadget_disable_async_callbacks(struct usb_udc *udc)
+ 		gadget->ops->udc_async_callbacks(gadget, false);
+ }
+ 
++static int udc_bind_to_driver(struct usb_udc *udc, struct usb_gadget_driver *driver)
++{
++	int ret;
++
++	dev_dbg(&udc->dev, "registering UDC driver [%s]\n",
++			driver->function);
++
++	udc->driver = driver;
++
++	usb_gadget_udc_set_speed(udc, driver->speed);
++
++	ret = driver->bind(udc->gadget);
++	if (ret)
++		goto err1;
++	ret = usb_gadget_udc_start_locked(udc);
++	if (ret) {
++		driver->unbind(udc->gadget);
++		goto err1;
++	}
++	usb_gadget_enable_async_callbacks(udc);
++	udc->allow_connect = true;
++	usb_gadget_connect(udc->gadget);
++
++	return 0;
++err1:
++	if (ret != -EISNAM)
++		dev_err(&udc->dev, "failed to start %s: %d\n",
++			udc->driver->function, ret);
++	udc->driver = NULL;
++	return ret;
++}
++
+ /**
+  * usb_udc_release - release the usb_udc struct
+  * @dev: the dev member within usb_udc
+@@ -1337,17 +1039,9 @@ static void usb_udc_release(struct device *dev)
+ 	struct usb_udc *udc;
+ 
+ 	udc = container_of(dev, struct usb_udc, dev);
+-	dev_dbg(dev, "releasing '%s'\n", dev_name(dev));
+ 	kfree(udc);
+ }
+ 
+-static const struct attribute_group *usb_udc_attr_groups[];
+-
+-static void usb_udc_nop_release(struct device *dev)
+-{
+-	dev_vdbg(dev, "%s\n", __func__);
+-}
+-
+ /**
+  * usb_initialize_gadget - initialize a gadget and its embedded struct device
+  * @parent: the parent device to this udc. Usually the controller driver's
+@@ -1358,16 +1052,8 @@ static void usb_udc_nop_release(struct device *dev)
+ void usb_initialize_gadget(struct device *parent, struct usb_gadget *gadget,
+ 		void (*release)(struct device *dev))
+ {
+-	INIT_WORK(&gadget->work, usb_gadget_state_work);
+ 	gadget->dev.parent = parent;
+-
+-	if (release)
+-		gadget->dev.release = release;
+-	else
+-		gadget->dev.release = usb_udc_nop_release;
+-
+-	device_initialize(&gadget->dev);
+-	gadget->dev.bus = &gadget_bus_type;
++	gadget->dev.release = release;
+ }
+ EXPORT_SYMBOL_GPL(usb_initialize_gadget);
+ 
+@@ -1387,15 +1073,9 @@ int usb_add_gadget(struct usb_gadget *gadget)
+ 	if (!udc)
+ 		goto error;
+ 
+-	device_initialize(&udc->dev);
+ 	udc->dev.release = usb_udc_release;
+-	udc->dev.class = &udc_class;
+-	udc->dev.groups = usb_udc_attr_groups;
++	udc->dev.class = NULL;
+ 	udc->dev.parent = gadget->dev.parent;
+-	ret = dev_set_name(&udc->dev, "%s",
+-			kobject_name(&gadget->dev.parent->kobj));
+-	if (ret)
+-		goto err_put_udc;
+ 
+ 	udc->gadget = gadget;
+ 	gadget->udc = udc;
+@@ -1406,50 +1086,11 @@ int usb_add_gadget(struct usb_gadget *gadget)
+ 	mutex_lock(&udc_lock);
+ 	list_add_tail(&udc->list, &udc_list);
+ 	mutex_unlock(&udc_lock);
+-	INIT_WORK(&udc->vbus_work, vbus_event_work);
+-
+-	ret = device_add(&udc->dev);
+-	if (ret)
+-		goto err_unlist_udc;
+ 
+ 	usb_gadget_set_state(gadget, USB_STATE_NOTATTACHED);
+-	udc->vbus = true;
+-
+-	ret = ida_alloc(&gadget_id_numbers, GFP_KERNEL);
 -	if (ret < 0)
--		return NULL;
+-		goto err_del_udc;
+-	gadget->id_number = ret;
+-	dev_set_name(&gadget->dev, "gadget.%d", ret);
 -
--	usb_psy = power_supply_get_by_name(usb_psy_name);
--	if (!usb_psy)
--		return ERR_PTR(-EPROBE_DEFER);
--
--	return usb_psy;
--}
--
--int dwc3_core_probe(const struct dwc3_probe_data *data)
--{
--	struct dwc3		*dwc = data->dwc;
--	struct device		*dev = dwc->dev;
--	struct resource		dwc_res;
--	unsigned int		hw_mode;
--	void __iomem		*regs;
--	struct resource		*res = data->res;
--	int			ret;
--
--	dwc->xhci_resources[0].start = res->start;
--	dwc->xhci_resources[0].end = dwc->xhci_resources[0].start +
--					DWC3_XHCI_REGS_END;
--	dwc->xhci_resources[0].flags = res->flags;
--	dwc->xhci_resources[0].name = res->name;
--
--	/*
--	 * Request memory region but exclude xHCI regs,
--	 * since it will be requested by the xhci-plat driver.
--	 */
--	dwc_res = *res;
--	dwc_res.start += DWC3_GLOBALS_REGS_START;
--
--	if (dev->of_node) {
--		struct device_node *parent = of_get_parent(dev->of_node);
--
--		if (of_device_is_compatible(parent, "realtek,rtd-dwc3")) {
--			dwc_res.start -= DWC3_GLOBALS_REGS_START;
--			dwc_res.start += DWC3_RTK_RTD_GLOBALS_REGS_START;
--		}
--
--		of_node_put(parent);
--	}
--
--	regs = devm_ioremap_resource(dev, &dwc_res);
--	if (IS_ERR(regs))
--		return PTR_ERR(regs);
--
--	dwc->regs	= regs;
--	dwc->regs_size	= resource_size(&dwc_res);
--
--	dwc3_get_properties(dwc);
--
--	dwc3_get_software_properties(dwc);
--
--	dwc->usb_psy = dwc3_get_usb_power_supply(dwc);
--	if (IS_ERR(dwc->usb_psy))
--		return dev_err_probe(dev, PTR_ERR(dwc->usb_psy), "couldn't get usb power supply\n");
--
--	if (!data->ignore_clocks_and_resets) {
--		dwc->reset = devm_reset_control_array_get_optional_shared(dev);
--		if (IS_ERR(dwc->reset)) {
--			ret = PTR_ERR(dwc->reset);
--			goto err_put_psy;
--		}
--
--		ret = dwc3_get_clocks(dwc);
--		if (ret)
--			goto err_put_psy;
--	}
--
--	ret = reset_control_deassert(dwc->reset);
+-	ret = device_add(&gadget->dev);
 -	if (ret)
--		goto err_put_psy;
+-		goto err_free_id;
 -
--	ret = dwc3_clk_enable(dwc);
+-	ret = sysfs_create_link(&udc->dev.kobj,
+-				&gadget->dev.kobj, "gadget");
 -	if (ret)
--		goto err_assert_reset;
+-		goto err_del_gadget;
+ 
+ 	return 0;
+ 
+- err_del_gadget:
+-	device_del(&gadget->dev);
 -
--	if (!dwc3_core_is_valid(dwc)) {
--		dev_err(dwc->dev, "this is not a DesignWare USB3 DRD Core\n");
--		ret = -ENODEV;
--		goto err_disable_clks;
--	}
+- err_free_id:
+-	ida_free(&gadget_id_numbers, gadget->id_number);
 -
--	dev_set_drvdata(dev, dwc);
--	dwc3_cache_hwparams(dwc);
+- err_del_udc:
+-	flush_work(&gadget->work);
+-	device_del(&udc->dev);
 -
--	if (!dwc->sysdev_is_parent &&
--	    DWC3_GHWPARAMS0_AWIDTH(dwc->hwparams.hwparams0) == 64) {
--		ret = dma_set_mask_and_coherent(dwc->sysdev, DMA_BIT_MASK(64));
--		if (ret)
--			goto err_disable_clks;
--	}
+- err_unlist_udc:
+-	mutex_lock(&udc_lock);
+-	list_del(&udc->list);
+-	mutex_unlock(&udc_lock);
 -
--	/*
--	 * Currently only DWC3 controllers that are host-only capable
--	 * can have more than one port.
--	 */
--	hw_mode = DWC3_GHWPARAMS0_MODE(dwc->hwparams.hwparams0);
--	if (hw_mode == DWC3_GHWPARAMS0_MODE_HOST) {
--		ret = dwc3_get_num_ports(dwc);
--		if (ret)
--			goto err_disable_clks;
--	} else {
--		dwc->num_usb2_ports = 1;
--		dwc->num_usb3_ports = 1;
--	}
+- err_put_udc:
+-	put_device(&udc->dev);
 -
--	spin_lock_init(&dwc->lock);
--	mutex_init(&dwc->mutex);
+  error:
+ 	return ret;
+ }
+@@ -1468,13 +1109,8 @@ EXPORT_SYMBOL_GPL(usb_add_gadget);
+ int usb_add_gadget_udc_release(struct device *parent, struct usb_gadget *gadget,
+ 		void (*release)(struct device *dev))
+ {
+-	int	ret;
 -
--	pm_runtime_get_noresume(dev);
--	pm_runtime_set_active(dev);
--	pm_runtime_use_autosuspend(dev);
--	pm_runtime_set_autosuspend_delay(dev, DWC3_DEFAULT_AUTOSUSPEND_DELAY);
--	pm_runtime_enable(dev);
--
--	pm_runtime_forbid(dev);
--
--	ret = dwc3_alloc_event_buffers(dwc, DWC3_EVENT_BUFFERS_SIZE);
--	if (ret) {
--		dev_err(dwc->dev, "failed to allocate event buffers\n");
--		ret = -ENOMEM;
--		goto err_allow_rpm;
--	}
--
--	dwc->edev = dwc3_get_extcon(dwc);
--	if (IS_ERR(dwc->edev)) {
--		ret = dev_err_probe(dwc->dev, PTR_ERR(dwc->edev), "failed to get extcon\n");
--		goto err_free_event_buffers;
--	}
--
--	ret = dwc3_get_dr_mode(dwc);
+ 	usb_initialize_gadget(parent, gadget, release);
+-	ret = usb_add_gadget(gadget);
 -	if (ret)
--		goto err_free_event_buffers;
--
--	ret = dwc3_core_init(dwc);
--	if (ret) {
--		dev_err_probe(dev, ret, "failed to initialize core\n");
--		goto err_free_event_buffers;
--	}
--
--	dwc3_check_params(dwc);
--	dwc3_debugfs_init(dwc);
--
--	ret = dwc3_core_init_mode(dwc);
--	if (ret)
--		goto err_exit_debugfs;
--
--	pm_runtime_put(dev);
--
--	dma_set_max_seg_size(dev, UINT_MAX);
--
--	return 0;
--
--err_exit_debugfs:
--	dwc3_debugfs_exit(dwc);
--	dwc3_event_buffers_cleanup(dwc);
--	dwc3_phy_power_off(dwc);
--	dwc3_phy_exit(dwc);
--	dwc3_ulpi_exit(dwc);
--err_free_event_buffers:
--	dwc3_free_event_buffers(dwc);
--err_allow_rpm:
--	pm_runtime_allow(dev);
--	pm_runtime_disable(dev);
--	pm_runtime_dont_use_autosuspend(dev);
--	pm_runtime_set_suspended(dev);
--	pm_runtime_put_noidle(dev);
--err_disable_clks:
--	dwc3_clk_disable(dwc);
--err_assert_reset:
--	reset_control_assert(dwc->reset);
--err_put_psy:
--	if (dwc->usb_psy)
--		power_supply_put(dwc->usb_psy);
--
+-		usb_put_gadget(gadget);
 -	return ret;
++	return usb_add_gadget(gadget);
+ }
+ EXPORT_SYMBOL_GPL(usb_add_gadget_udc_release);
+ 
+@@ -1499,7 +1135,7 @@ char *usb_get_gadget_udc_name(void)
+ 	mutex_lock(&udc_lock);
+ 	list_for_each_entry(udc, &udc_list, list) {
+ 		if (!udc->driver) {
+-			name = kstrdup(udc->gadget->name, GFP_KERNEL);
++			name = strdup(udc->gadget->name);
+ 			break;
+ 		}
+ 	}
+@@ -1522,409 +1158,140 @@ int usb_add_gadget_udc(struct device *parent, struct usb_gadget *gadget)
+ }
+ EXPORT_SYMBOL_GPL(usb_add_gadget_udc);
+ 
+-/**
+- * usb_del_gadget - deletes a gadget and unregisters its udc
+- * @gadget: the gadget to be deleted.
+- *
+- * This will unbind @gadget, if it is bound.
+- * It will not do a final usb_put_gadget().
+- */
+-void usb_del_gadget(struct usb_gadget *gadget)
++static void usb_gadget_remove_driver(struct usb_udc *udc)
+ {
+-	struct usb_udc *udc = gadget->udc;
+-
+-	if (!udc)
+-		return;
++	dev_dbg(&udc->dev, "unregistering UDC driver [%s]\n",
++			udc->driver->function);
+ 
+-	dev_vdbg(gadget->dev.parent, "unregistering gadget\n");
+-
+-	mutex_lock(&udc_lock);
+-	list_del(&udc->list);
+-	mutex_unlock(&udc_lock);
++	udc->allow_connect = false;
++	usb_gadget_disable_async_callbacks(udc);
++	usb_gadget_disconnect(udc->gadget);
++	udc->driver->disconnect(udc->gadget);
++	udc->driver->unbind(udc->gadget);
++	usb_gadget_udc_stop_locked(udc);
+ 
+-	kobject_uevent(&udc->dev.kobj, KOBJ_REMOVE);
+-	sysfs_remove_link(&udc->dev.kobj, "gadget");
+-	device_del(&gadget->dev);
+-	flush_work(&gadget->work);
+-	ida_free(&gadget_id_numbers, gadget->id_number);
+-	cancel_work_sync(&udc->vbus_work);
+-	device_unregister(&udc->dev);
++	udc->driver = NULL;
+ }
+-EXPORT_SYMBOL_GPL(usb_del_gadget);
+ 
+ /**
+- * usb_del_gadget_udc - unregisters a gadget
+- * @gadget: the gadget to be unregistered.
++ * usb_del_gadget_udc - deletes @udc from udc_list
++ * @gadget: the gadget to be removed.
+  *
+- * Calls usb_del_gadget() and does a final usb_put_gadget().
++ * This, will call usb_gadget_unregister_driver() if
++ * the @udc is still busy.
+  */
+ void usb_del_gadget_udc(struct usb_gadget *gadget)
+ {
+-	usb_del_gadget(gadget);
+-	usb_put_gadget(gadget);
 -}
--EXPORT_SYMBOL_GPL(dwc3_core_probe);
+-EXPORT_SYMBOL_GPL(usb_del_gadget_udc);
 -
--static int dwc3_probe(struct platform_device *pdev)
+-/* ------------------------------------------------------------------------- */
+-
+-static int gadget_match_driver(struct device *dev, const struct device_driver *drv)
 -{
--	struct dwc3_probe_data probe_data = {};
--	struct resource *res;
--	struct dwc3 *dwc;
+-	struct usb_gadget *gadget = dev_to_usb_gadget(dev);
+-	struct usb_udc *udc = gadget->udc;
+-	const struct usb_gadget_driver *driver = container_of(drv,
+-			struct usb_gadget_driver, driver);
 -
--	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
--	if (!res) {
--		dev_err(&pdev->dev, "missing memory resource\n");
--		return -ENODEV;
+-	/* If the driver specifies a udc_name, it must match the UDC's name */
+-	if (driver->udc_name &&
+-			strcmp(driver->udc_name, dev_name(&udc->dev)) != 0)
+-		return 0;
+-
+-	/* If the driver is already bound to a gadget, it doesn't match */
+-	if (driver->is_bound)
+-		return 0;
+-
+-	/* Otherwise any gadget driver matches any UDC */
+-	return 1;
+-}
+-
+-static int gadget_bind_driver(struct device *dev)
+-{
+-	struct usb_gadget *gadget = dev_to_usb_gadget(dev);
+-	struct usb_udc *udc = gadget->udc;
+-	struct usb_gadget_driver *driver = container_of(dev->driver,
+-			struct usb_gadget_driver, driver);
+-	int ret = 0;
++	struct usb_udc		*udc = NULL;
+ 
+ 	mutex_lock(&udc_lock);
+-	if (driver->is_bound) {
+-		mutex_unlock(&udc_lock);
+-		return -ENXIO;		/* Driver binds to only one gadget */
 -	}
+-	driver->is_bound = true;
+-	udc->driver = driver;
+-	mutex_unlock(&udc_lock);
 -
--	dwc = devm_kzalloc(&pdev->dev, sizeof(*dwc), GFP_KERNEL);
--	if (!dwc)
--		return -ENOMEM;
+-	dev_dbg(&udc->dev, "binding gadget driver [%s]\n", driver->function);
 -
--	dwc->dev = &pdev->dev;
--
--	probe_data.dwc = dwc;
--	probe_data.res = res;
--
--	return dwc3_core_probe(&probe_data);
--}
--
--void dwc3_core_remove(struct dwc3 *dwc)
--{
--	pm_runtime_get_sync(dwc->dev);
--
--	dwc3_core_exit_mode(dwc);
--	dwc3_debugfs_exit(dwc);
--
--	dwc3_core_exit(dwc);
--	dwc3_ulpi_exit(dwc);
--
--	pm_runtime_allow(dwc->dev);
--	pm_runtime_disable(dwc->dev);
--	pm_runtime_dont_use_autosuspend(dwc->dev);
--	pm_runtime_put_noidle(dwc->dev);
--	/*
--	 * HACK: Clear the driver data, which is currently accessed by parent
--	 * glue drivers, before allowing the parent to suspend.
--	 */
--	dev_set_drvdata(dwc->dev, NULL);
--	pm_runtime_set_suspended(dwc->dev);
--
--	dwc3_free_event_buffers(dwc);
--
--	if (dwc->usb_psy)
--		power_supply_put(dwc->usb_psy);
--}
--EXPORT_SYMBOL_GPL(dwc3_core_remove);
--
--static void dwc3_remove(struct platform_device *pdev)
--{
--	dwc3_core_remove(platform_get_drvdata(pdev));
--}
--
--#ifdef CONFIG_PM
--static int dwc3_core_init_for_resume(struct dwc3 *dwc)
--{
--	int ret;
--
--	ret = reset_control_deassert(dwc->reset);
+-	usb_gadget_udc_set_speed(udc, driver->max_speed);
++	list_for_each_entry(udc, &udc_list, list)
++		if (udc->gadget == gadget)
++			goto found;
+ 
+-	ret = driver->bind(udc->gadget, driver);
 -	if (ret)
--		return ret;
+-		goto err_bind;
 -
--	ret = dwc3_clk_enable(dwc);
+-	mutex_lock(&udc->connect_lock);
+-	ret = usb_gadget_udc_start_locked(udc);
+-	if (ret) {
+-		mutex_unlock(&udc->connect_lock);
+-		goto err_start;
+-	}
+-	usb_gadget_enable_async_callbacks(udc);
+-	udc->allow_connect = true;
+-	ret = usb_udc_connect_control_locked(udc);
 -	if (ret)
--		goto assert_reset;
+-		goto err_connect_control;
 -
--	ret = dwc3_core_init(dwc);
--	if (ret)
--		goto disable_clks;
+-	mutex_unlock(&udc->connect_lock);
 -
+-	kobject_uevent(&udc->dev.kobj, KOBJ_CHANGE);
 -	return 0;
 -
--disable_clks:
--	dwc3_clk_disable(dwc);
--assert_reset:
--	reset_control_assert(dwc->reset);
+- err_connect_control:
+-	udc->allow_connect = false;
+-	usb_gadget_disable_async_callbacks(udc);
+-	if (gadget->irq)
+-		synchronize_irq(gadget->irq);
+-	usb_gadget_udc_stop_locked(udc);
+-	mutex_unlock(&udc->connect_lock);
 -
+- err_start:
+-	driver->unbind(udc->gadget);
+-
+- err_bind:
+-	if (ret != -EISNAM)
+-		dev_err(&udc->dev, "failed to start %s: %d\n",
+-			driver->function, ret);
+-
+-	mutex_lock(&udc_lock);
+-	udc->driver = NULL;
+-	driver->is_bound = false;
++	dev_err(gadget->dev.parent, "gadget not registered.\n");
+ 	mutex_unlock(&udc_lock);
+ 
 -	return ret;
 -}
 -
--static int dwc3_suspend_common(struct dwc3 *dwc, pm_message_t msg)
+-static void gadget_unbind_driver(struct device *dev)
 -{
--	u32 reg;
--	int i;
+-	struct usb_gadget *gadget = dev_to_usb_gadget(dev);
+-	struct usb_udc *udc = gadget->udc;
+-	struct usb_gadget_driver *driver = udc->driver;
+-
+-	dev_dbg(&udc->dev, "unbinding gadget driver [%s]\n", driver->function);
+-
+-	udc->allow_connect = false;
+-	cancel_work_sync(&udc->vbus_work);
+-	mutex_lock(&udc->connect_lock);
+-	usb_gadget_disconnect_locked(gadget);
+-	usb_gadget_disable_async_callbacks(udc);
+-	if (gadget->irq)
+-		synchronize_irq(gadget->irq);
+-	mutex_unlock(&udc->connect_lock);
+-
+-	udc->driver->unbind(gadget);
++	return;
+ 
+-	mutex_lock(&udc->connect_lock);
+-	usb_gadget_udc_stop_locked(udc);
+-	mutex_unlock(&udc->connect_lock);
++found:
++	dev_vdbg(gadget->dev.parent, "unregistering gadget\n");
+ 
+-	mutex_lock(&udc_lock);
+-	driver->is_bound = false;
+-	udc->driver = NULL;
++	list_del(&udc->list);
+ 	mutex_unlock(&udc_lock);
+ 
+-	kobject_uevent(&udc->dev.kobj, KOBJ_CHANGE);
++	if (udc->driver)
++		usb_gadget_remove_driver(udc);
+ }
++EXPORT_SYMBOL_GPL(usb_del_gadget_udc);
+ 
+ /* ------------------------------------------------------------------------- */
+ 
+-int usb_gadget_register_driver_owner(struct usb_gadget_driver *driver,
+-		struct module *owner, const char *mod_name)
++int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
+ {
 -	int ret;
--
--	if (!pm_runtime_suspended(dwc->dev) && !PMSG_IS_AUTO(msg)) {
--		dwc->susphy_state = (dwc3_readl(dwc->regs, DWC3_GUSB2PHYCFG(0)) &
--				    DWC3_GUSB2PHYCFG_SUSPHY) ||
--				    (dwc3_readl(dwc->regs, DWC3_GUSB3PIPECTL(0)) &
--				    DWC3_GUSB3PIPECTL_SUSPHY);
--		/*
--		 * TI AM62 platform requires SUSPHY to be
--		 * enabled for system suspend to work.
--		 */
--		if (!dwc->susphy_state)
--			dwc3_enable_susphy(dwc, true);
--	}
--
--	switch (dwc->current_dr_role) {
--	case DWC3_GCTL_PRTCAP_DEVICE:
--		if (pm_runtime_suspended(dwc->dev))
--			break;
--		ret = dwc3_gadget_suspend(dwc);
--		if (ret)
--			return ret;
--		synchronize_irq(dwc->irq_gadget);
--		dwc3_core_exit(dwc);
--		break;
--	case DWC3_GCTL_PRTCAP_HOST:
--		if (!PMSG_IS_AUTO(msg) && !device_may_wakeup(dwc->dev)) {
--			dwc3_core_exit(dwc);
--			break;
--		}
--
--		/* Let controller to suspend HSPHY before PHY driver suspends */
--		if (dwc->dis_u2_susphy_quirk ||
--		    dwc->dis_enblslpm_quirk) {
--			for (i = 0; i < dwc->num_usb2_ports; i++) {
--				reg = dwc3_readl(dwc->regs, DWC3_GUSB2PHYCFG(i));
--				reg |=  DWC3_GUSB2PHYCFG_ENBLSLPM |
--					DWC3_GUSB2PHYCFG_SUSPHY;
--				dwc3_writel(dwc->regs, DWC3_GUSB2PHYCFG(i), reg);
--			}
--
--			/* Give some time for USB2 PHY to suspend */
--			usleep_range(5000, 6000);
--		}
--
--		for (i = 0; i < dwc->num_usb2_ports; i++)
--			phy_pm_runtime_put_sync(dwc->usb2_generic_phy[i]);
--		for (i = 0; i < dwc->num_usb3_ports; i++)
--			phy_pm_runtime_put_sync(dwc->usb3_generic_phy[i]);
--		break;
--	case DWC3_GCTL_PRTCAP_OTG:
--		/* do nothing during runtime_suspend */
--		if (PMSG_IS_AUTO(msg))
--			break;
--
--		if (dwc->current_otg_role == DWC3_OTG_ROLE_DEVICE) {
--			ret = dwc3_gadget_suspend(dwc);
--			if (ret)
--				return ret;
--			synchronize_irq(dwc->irq_gadget);
--		}
--
--		dwc3_otg_exit(dwc);
--		dwc3_core_exit(dwc);
--		break;
--	default:
--		/* do nothing */
--		break;
--	}
--
--	return 0;
--}
--
--static int dwc3_resume_common(struct dwc3 *dwc, pm_message_t msg)
--{
--	int		ret;
--	u32		reg;
--	int		i;
--
--	switch (dwc->current_dr_role) {
--	case DWC3_GCTL_PRTCAP_DEVICE:
--		ret = dwc3_core_init_for_resume(dwc);
--		if (ret)
--			return ret;
--
--		dwc3_set_prtcap(dwc, DWC3_GCTL_PRTCAP_DEVICE, true);
--		dwc3_gadget_resume(dwc);
--		break;
--	case DWC3_GCTL_PRTCAP_HOST:
--		if (!PMSG_IS_AUTO(msg) && !device_may_wakeup(dwc->dev)) {
--			ret = dwc3_core_init_for_resume(dwc);
--			if (ret)
--				return ret;
--			dwc3_set_prtcap(dwc, DWC3_GCTL_PRTCAP_HOST, true);
--			break;
--		}
--		/* Restore GUSB2PHYCFG bits that were modified in suspend */
--		for (i = 0; i < dwc->num_usb2_ports; i++) {
--			reg = dwc3_readl(dwc->regs, DWC3_GUSB2PHYCFG(i));
--			if (dwc->dis_u2_susphy_quirk)
--				reg &= ~DWC3_GUSB2PHYCFG_SUSPHY;
--
--			if (dwc->dis_enblslpm_quirk)
--				reg &= ~DWC3_GUSB2PHYCFG_ENBLSLPM;
--
--			dwc3_writel(dwc->regs, DWC3_GUSB2PHYCFG(i), reg);
--		}
--
--		for (i = 0; i < dwc->num_usb2_ports; i++)
--			phy_pm_runtime_get_sync(dwc->usb2_generic_phy[i]);
--		for (i = 0; i < dwc->num_usb3_ports; i++)
--			phy_pm_runtime_get_sync(dwc->usb3_generic_phy[i]);
--		break;
--	case DWC3_GCTL_PRTCAP_OTG:
--		/* nothing to do on runtime_resume */
--		if (PMSG_IS_AUTO(msg))
--			break;
--
--		ret = dwc3_core_init_for_resume(dwc);
--		if (ret)
--			return ret;
--
--		dwc3_set_prtcap(dwc, dwc->current_dr_role, true);
--
--		dwc3_otg_init(dwc);
--		if (dwc->current_otg_role == DWC3_OTG_ROLE_HOST) {
--			dwc3_otg_host_init(dwc);
--		} else if (dwc->current_otg_role == DWC3_OTG_ROLE_DEVICE) {
--			dwc3_gadget_resume(dwc);
--		}
--
--		break;
--	default:
--		/* do nothing */
--		break;
--	}
--
--	if (!PMSG_IS_AUTO(msg)) {
--		/* restore SUSPHY state to that before system suspend. */
--		dwc3_enable_susphy(dwc, dwc->susphy_state);
--	}
--
--	return 0;
--}
--
--static int dwc3_runtime_checks(struct dwc3 *dwc)
--{
--	switch (dwc->current_dr_role) {
--	case DWC3_GCTL_PRTCAP_DEVICE:
--		if (dwc->connected)
--			return -EBUSY;
--		break;
--	case DWC3_GCTL_PRTCAP_HOST:
--	default:
--		/* do nothing */
--		break;
--	}
--
--	return 0;
--}
--
--int dwc3_runtime_suspend(struct dwc3 *dwc)
--{
--	int		ret;
--
--	if (dwc3_runtime_checks(dwc))
--		return -EBUSY;
--
--	ret = dwc3_suspend_common(dwc, PMSG_AUTO_SUSPEND);
--	if (ret)
++	struct usb_udc		*udc = NULL;
++	int			ret = -ENODEV;
+ 
+-	if (!driver || !driver->bind || !driver->setup)
++	if (!driver || !driver->unbind)
+ 		return -EINVAL;
+ 
+-	driver->driver.bus = &gadget_bus_type;
+-	driver->driver.owner = owner;
+-	driver->driver.mod_name = mod_name;
+-	driver->driver.probe_type = PROBE_FORCE_SYNCHRONOUS;
+-	ret = driver_register(&driver->driver);
+-	if (ret) {
+-		pr_warn("%s: driver registration failed: %d\n",
+-				driver->function, ret);
 -		return ret;
--
--	return 0;
--}
--EXPORT_SYMBOL_GPL(dwc3_runtime_suspend);
--
--int dwc3_runtime_resume(struct dwc3 *dwc)
--{
--	struct device *dev = dwc->dev;
--	int		ret;
--
--	ret = dwc3_resume_common(dwc, PMSG_AUTO_RESUME);
--	if (ret)
--		return ret;
--
--	switch (dwc->current_dr_role) {
--	case DWC3_GCTL_PRTCAP_DEVICE:
--		if (dwc->pending_events) {
--			pm_runtime_put(dev);
--			dwc->pending_events = false;
--			enable_irq(dwc->irq_gadget);
--		}
--		break;
--	case DWC3_GCTL_PRTCAP_HOST:
--	default:
--		/* do nothing */
--		break;
 -	}
 -
--	pm_runtime_mark_last_busy(dev);
--
--	return 0;
--}
--EXPORT_SYMBOL_GPL(dwc3_runtime_resume);
--
--int dwc3_runtime_idle(struct dwc3 *dwc)
--{
--	struct device *dev = dwc->dev;
--
--	switch (dwc->current_dr_role) {
--	case DWC3_GCTL_PRTCAP_DEVICE:
--		if (dwc3_runtime_checks(dwc))
--			return -EBUSY;
--		break;
--	case DWC3_GCTL_PRTCAP_HOST:
--	default:
--		/* do nothing */
--		break;
+ 	mutex_lock(&udc_lock);
+-	if (!driver->is_bound) {
+-		if (driver->match_existing_only) {
+-			pr_warn("%s: couldn't find an available UDC or it's busy\n",
+-					driver->function);
+-			ret = -EBUSY;
+-		} else {
+-			pr_info("%s: couldn't find an available UDC\n",
+-					driver->function);
++	list_for_each_entry(udc, &udc_list, list)
++		if (udc->driver == driver) {
++			usb_gadget_remove_driver(udc);
++			usb_gadget_set_state(udc->gadget,
++					USB_STATE_NOTATTACHED);
+ 			ret = 0;
++			break;
+ 		}
 -	}
+-	mutex_unlock(&udc_lock);
+ 
+-	if (ret)
+-		driver_unregister(&driver->driver);
++	mutex_unlock(&udc_lock);
+ 	return ret;
+ }
+-EXPORT_SYMBOL_GPL(usb_gadget_register_driver_owner);
 -
--	pm_runtime_mark_last_busy(dev);
--	pm_runtime_autosuspend(dev);
+-int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
+-{
+-	if (!driver || !driver->unbind)
+-		return -EINVAL;
 -
+-	driver_unregister(&driver->driver);
 -	return 0;
 -}
--EXPORT_SYMBOL_GPL(dwc3_runtime_idle);
--
--static int dwc3_plat_runtime_suspend(struct device *dev)
+ EXPORT_SYMBOL_GPL(usb_gadget_unregister_driver);
+ 
+ /* ------------------------------------------------------------------------- */
+ 
+-static ssize_t srp_store(struct device *dev,
+-		struct device_attribute *attr, const char *buf, size_t n)
 -{
--	return dwc3_runtime_suspend(dev_get_drvdata(dev));
+-	struct usb_udc		*udc = container_of(dev, struct usb_udc, dev);
+-
+-	if (sysfs_streq(buf, "1"))
+-		usb_gadget_wakeup(udc->gadget);
+-
+-	return n;
 -}
+-static DEVICE_ATTR_WO(srp);
 -
--static int dwc3_plat_runtime_resume(struct device *dev)
+-static ssize_t soft_connect_store(struct device *dev,
+-		struct device_attribute *attr, const char *buf, size_t n)
 -{
--	return dwc3_runtime_resume(dev_get_drvdata(dev));
--}
+-	struct usb_udc		*udc = container_of(dev, struct usb_udc, dev);
+-	ssize_t			ret;
 -
--static int dwc3_plat_runtime_idle(struct device *dev)
--{
--	return dwc3_runtime_idle(dev_get_drvdata(dev));
--}
--#endif /* CONFIG_PM */
--
--#ifdef CONFIG_PM_SLEEP
--int dwc3_pm_suspend(struct dwc3 *dwc)
--{
--	struct device *dev = dwc->dev;
--	int		ret;
--
--	ret = dwc3_suspend_common(dwc, PMSG_SUSPEND);
--	if (ret)
--		return ret;
--
--	pinctrl_pm_select_sleep_state(dev);
--
--	return 0;
--}
--EXPORT_SYMBOL_GPL(dwc3_pm_suspend);
--
--int dwc3_pm_resume(struct dwc3 *dwc)
--{
--	struct device *dev = dwc->dev;
--	int		ret = 0;
--
--	pinctrl_pm_select_default_state(dev);
--
--	pm_runtime_disable(dev);
--	ret = pm_runtime_set_active(dev);
--	if (ret)
+-	device_lock(&udc->gadget->dev);
+-	if (!udc->driver) {
+-		dev_err(dev, "soft-connect without a gadget driver\n");
+-		ret = -EOPNOTSUPP;
 -		goto out;
+-	}
 -
--	ret = dwc3_resume_common(dwc, PMSG_RESUME);
--	if (ret)
--		pm_runtime_set_suspended(dev);
+-	if (sysfs_streq(buf, "connect")) {
+-		mutex_lock(&udc->connect_lock);
+-		usb_gadget_udc_start_locked(udc);
+-		usb_gadget_connect_locked(udc->gadget);
+-		mutex_unlock(&udc->connect_lock);
+-	} else if (sysfs_streq(buf, "disconnect")) {
+-		mutex_lock(&udc->connect_lock);
+-		usb_gadget_disconnect_locked(udc->gadget);
+-		usb_gadget_udc_stop_locked(udc);
+-		mutex_unlock(&udc->connect_lock);
+-	} else {
+-		dev_err(dev, "unsupported command '%s'\n", buf);
+-		ret = -EINVAL;
+-		goto out;
+-	}
 -
+-	ret = n;
 -out:
--	pm_runtime_enable(dev);
--
+-	device_unlock(&udc->gadget->dev);
 -	return ret;
 -}
--EXPORT_SYMBOL_GPL(dwc3_pm_resume);
+-static DEVICE_ATTR_WO(soft_connect);
 -
--void dwc3_pm_complete(struct dwc3 *dwc)
+-static ssize_t state_show(struct device *dev, struct device_attribute *attr,
+-			  char *buf)
 -{
--	u32		reg;
+-	struct usb_udc		*udc = container_of(dev, struct usb_udc, dev);
+-	struct usb_gadget	*gadget = udc->gadget;
 -
--	if (dwc->current_dr_role == DWC3_GCTL_PRTCAP_HOST &&
--			dwc->dis_split_quirk) {
--		reg = dwc3_readl(dwc->regs, DWC3_GUCTL3);
--		reg |= DWC3_GUCTL3_SPLITDISABLE;
--		dwc3_writel(dwc->regs, DWC3_GUCTL3, reg);
--	}
+-	return sprintf(buf, "%s\n", usb_state_string(gadget->state));
 -}
--EXPORT_SYMBOL_GPL(dwc3_pm_complete);
+-static DEVICE_ATTR_RO(state);
 -
--int dwc3_pm_prepare(struct dwc3 *dwc)
--{
--	struct device *dev = dwc->dev;
+-static ssize_t function_show(struct device *dev, struct device_attribute *attr,
+-			     char *buf)
++/*
++ * u-boot: a controller that is not a driver model device has no probe of its
++ * own, so it never calls usb_add_gadget_udc(). Such drivers implement this
++ * hook and bring themselves up each time a gadget driver asks for a UDC.
++ */
++__weak int usb_gadget_udc_bringup(void)
+ {
+-	struct usb_udc		*udc = container_of(dev, struct usb_udc, dev);
+-	struct usb_gadget_driver *drv;
+-	int			rc = 0;
 -
--	/*
--	 * Indicate to the PM core that it may safely leave the device in
--	 * runtime suspend if runtime-suspended already in device mode.
--	 */
--	if (dwc->current_dr_role == DWC3_GCTL_PRTCAP_DEVICE &&
--	    pm_runtime_suspended(dev) &&
--	    !dev_pinctrl(dev))
--		return 1;
+-	mutex_lock(&udc_lock);
+-	drv = udc->driver;
+-	if (drv && drv->function)
+-		rc = scnprintf(buf, PAGE_SIZE, "%s\n", drv->function);
+-	mutex_unlock(&udc_lock);
+-	return rc;
++	return 0;
+ }
+-static DEVICE_ATTR_RO(function);
 -
+-#define USB_UDC_SPEED_ATTR(name, param)					\
+-ssize_t name##_show(struct device *dev,					\
+-		struct device_attribute *attr, char *buf)		\
+-{									\
+-	struct usb_udc *udc = container_of(dev, struct usb_udc, dev);	\
+-	return scnprintf(buf, PAGE_SIZE, "%s\n",			\
+-			usb_speed_string(udc->gadget->param));		\
+-}									\
+-static DEVICE_ATTR_RO(name)
+-
+-static USB_UDC_SPEED_ATTR(current_speed, speed);
+-static USB_UDC_SPEED_ATTR(maximum_speed, max_speed);
+-
+-#define USB_UDC_ATTR(name)					\
+-ssize_t name##_show(struct device *dev,				\
+-		struct device_attribute *attr, char *buf)	\
+-{								\
+-	struct usb_udc		*udc = container_of(dev, struct usb_udc, dev); \
+-	struct usb_gadget	*gadget = udc->gadget;		\
+-								\
+-	return scnprintf(buf, PAGE_SIZE, "%d\n", gadget->name);	\
+-}								\
+-static DEVICE_ATTR_RO(name)
+-
+-static USB_UDC_ATTR(is_otg);
+-static USB_UDC_ATTR(is_a_peripheral);
+-static USB_UDC_ATTR(b_hnp_enable);
+-static USB_UDC_ATTR(a_hnp_support);
+-static USB_UDC_ATTR(a_alt_hnp_support);
+-static USB_UDC_ATTR(is_selfpowered);
+-
+-static struct attribute *usb_udc_attrs[] = {
+-	&dev_attr_srp.attr,
+-	&dev_attr_soft_connect.attr,
+-	&dev_attr_state.attr,
+-	&dev_attr_function.attr,
+-	&dev_attr_current_speed.attr,
+-	&dev_attr_maximum_speed.attr,
+-
+-	&dev_attr_is_otg.attr,
+-	&dev_attr_is_a_peripheral.attr,
+-	&dev_attr_b_hnp_enable.attr,
+-	&dev_attr_a_hnp_support.attr,
+-	&dev_attr_a_alt_hnp_support.attr,
+-	&dev_attr_is_selfpowered.attr,
+-	NULL,
+-};
+-
+-static const struct attribute_group usb_udc_attr_group = {
+-	.attrs = usb_udc_attrs,
+-};
+ 
+-static const struct attribute_group *usb_udc_attr_groups[] = {
+-	&usb_udc_attr_group,
+-	NULL,
+-};
+-
+-static int usb_udc_uevent(const struct device *dev, struct kobj_uevent_env *env)
++int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
+ {
+-	const struct usb_udc	*udc = container_of(dev, struct usb_udc, dev);
++	struct usb_udc		*udc = NULL;
++	unsigned int		udc_count = 0;
+ 	int			ret;
+ 
+-	ret = add_uevent_var(env, "USB_UDC_NAME=%s", udc->gadget->name);
+-	if (ret) {
+-		dev_err(dev, "failed to add uevent USB_UDC_NAME\n");
+-		return ret;
+-	}
++	if (!driver || !driver->bind || !driver->setup)
++		return -EINVAL;
+ 
+-	mutex_lock(&udc_lock);
+-	if (udc->driver)
+-		ret = add_uevent_var(env, "USB_UDC_DRIVER=%s",
+-				udc->driver->function);
+-	mutex_unlock(&udc_lock);
++	ret = usb_gadget_udc_bringup();
+ 	if (ret) {
+-		dev_err(dev, "failed to add uevent USB_UDC_DRIVER\n");
++		if (!IS_ENABLED(CONFIG_XPL_BUILD))
++			printf("UDC bringup failed: %d\n", ret);
+ 		return ret;
+ 	}
+ 
 -	return 0;
 -}
--EXPORT_SYMBOL_GPL(dwc3_pm_prepare);
 -
--static int dwc3_plat_suspend(struct device *dev)
--{
--	return dwc3_pm_suspend(dev_get_drvdata(dev));
--}
--
--static int dwc3_plat_resume(struct device *dev)
--{
--	return dwc3_pm_resume(dev_get_drvdata(dev));
--}
--
--static void dwc3_plat_complete(struct device *dev)
--{
--	dwc3_pm_complete(dev_get_drvdata(dev));
--}
--
--static int dwc3_plat_prepare(struct device *dev)
--{
--	return dwc3_pm_prepare(dev_get_drvdata(dev));
--}
--#else
--#define dwc3_plat_complete NULL
--#define dwc3_plat_prepare NULL
--#endif /* CONFIG_PM_SLEEP */
--
--static const struct dev_pm_ops dwc3_dev_pm_ops = {
--	SET_SYSTEM_SLEEP_PM_OPS(dwc3_plat_suspend, dwc3_plat_resume)
--	.complete = dwc3_plat_complete,
--	.prepare = dwc3_plat_prepare,
--	/*
--	 * Runtime suspend halts the controller on disconnection. It relies on
--	 * platforms with custom connection notification to start the controller
--	 * again.
--	 */
--	SET_RUNTIME_PM_OPS(dwc3_plat_runtime_suspend, dwc3_plat_runtime_resume,
--			   dwc3_plat_runtime_idle)
+-static const struct class udc_class = {
+-	.name		= "udc",
+-	.dev_uevent	= usb_udc_uevent,
 -};
 -
--#ifdef CONFIG_OF
--static const struct of_device_id of_dwc3_match[] = {
--	{
--		.compatible = "snps,dwc3"
--	},
--	{
--		.compatible = "synopsys,dwc3"
--	},
--	{ },
--};
--MODULE_DEVICE_TABLE(of, of_dwc3_match);
--#endif
--
--#ifdef CONFIG_ACPI
--
--#define ACPI_ID_INTEL_BSW	"808622B7"
--
--static const struct acpi_device_id dwc3_acpi_match[] = {
--	{ ACPI_ID_INTEL_BSW, 0 },
--	{ },
--};
--MODULE_DEVICE_TABLE(acpi, dwc3_acpi_match);
--#endif
--
--static struct platform_driver dwc3_driver = {
--	.probe		= dwc3_probe,
--	.remove		= dwc3_remove,
--	.driver		= {
--		.name	= "dwc3",
--		.of_match_table	= of_match_ptr(of_dwc3_match),
--		.acpi_match_table = ACPI_PTR(dwc3_acpi_match),
--		.pm	= &dwc3_dev_pm_ops,
--	},
+-static const struct bus_type gadget_bus_type = {
+-	.name = "gadget",
+-	.probe = gadget_bind_driver,
+-	.remove = gadget_unbind_driver,
+-	.match = gadget_match_driver,
 -};
 -
--module_platform_driver(dwc3_driver);
--
--MODULE_ALIAS("platform:dwc3");
--MODULE_AUTHOR("Felipe Balbi <balbi@ti.com>");
--MODULE_LICENSE("GPL v2");
--MODULE_DESCRIPTION("DesignWare USB3 DRD Controller Driver");
-diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
-index d5b985fa12f4..036a1440c8e8 100644
---- a/drivers/usb/dwc3/core.h
-+++ b/drivers/usb/dwc3/core.h
-@@ -1231,8 +1231,6 @@ struct dwc3 {
- 	struct usb_role_switch	*role_sw;
- 	enum usb_dr_mode	role_switch_default_mode;
+-static int __init usb_udc_init(void)
+-{
+-	int rc;
++	mutex_lock(&udc_lock);
++	list_for_each_entry(udc, &udc_list, list) {
++		udc_count++;
  
--	struct power_supply	*usb_psy;
--
- 	u32			fladj;
- 	u32			ref_clk_per;
- 	u32			irq_gadget;
-@@ -1565,7 +1563,6 @@ struct dwc3_gadget_ep_cmd_params {
+-	rc = class_register(&udc_class);
+-	if (rc)
+-		return rc;
++		/* For now we take the first one */
++		if (!udc->driver)
++			goto found;
++	}
  
- /* prototypes */
- void dwc3_set_prtcap(struct dwc3 *dwc, u32 mode, bool ignore_susphy);
--void dwc3_set_mode(struct dwc3 *dwc, u32 mode);
- u32 dwc3_core_fifo_space(struct dwc3_ep *dep, u8 type);
+-	rc = bus_register(&gadget_bus_type);
+-	if (rc)
+-		class_unregister(&udc_class);
+-	return rc;
++	if (!IS_ENABLED(CONFIG_XPL_BUILD)) {
++		if (!udc_count)
++			printf("No UDC available in the system\n");
++		else
++			/* When this happens, users should 'unbind <class> <index>'
++			 * using the output of 'dm tree' and looking at the line right
++			 * after the USB peripheral/device controller.
++			 */
++			printf("All UDCs in use (%d available), use the unbind command\n",
++			       udc_count);
++	}
++	mutex_unlock(&udc_lock);
++	return -ENODEV;
++found:
++	ret = udc_bind_to_driver(udc, driver);
++	mutex_unlock(&udc_lock);
++	return ret;
+ }
+-subsys_initcall(usb_udc_init);
++EXPORT_SYMBOL_GPL(usb_gadget_probe_driver);
  
- #define DWC3_IP_IS(_ip)							\
+-static void __exit usb_udc_exit(void)
++int usb_gadget_register_driver(struct usb_gadget_driver *driver)
+ {
+-	bus_unregister(&gadget_bus_type);
+-	class_unregister(&udc_class);
++	return usb_gadget_probe_driver(driver);
+ }
+-module_exit(usb_udc_exit);
++EXPORT_SYMBOL_GPL(usb_gadget_register_driver);
+ 
+ MODULE_DESCRIPTION("UDC Framework");
+ MODULE_AUTHOR("Felipe Balbi <balbi@ti.com>");
+diff --git a/include/linux/usb/gadget.h b/include/linux/usb/gadget.h
+index 7137f0faf3c6..866f6049bb5f 100644
+--- a/include/linux/usb/gadget.h
++++ b/include/linux/usb/gadget.h
+@@ -554,6 +554,9 @@ struct usb_gadget_driver {
+  */
+ int usb_gadget_register_driver(struct usb_gadget_driver *driver);
+ 
++/* u-boot: bring up a non driver model UDC on demand, see udc-core.c */
++int usb_gadget_udc_bringup(void);
++
+ /**
+  * usb_gadget_unregister_driver - unregister a gadget driver
+  * @driver:the driver being unregistered
 -- 
 2.53.0
 
