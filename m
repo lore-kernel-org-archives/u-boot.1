@@ -2,113 +2,110 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4C64606A326
-	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 19:03:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E966606A326
+	for <u-boot@archiver.kernel.org>; Sat,  7 Nov 2026 21:49:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=VZoFmu7y;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=avBQjyfs
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Fs2Or1qd;
+	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=kzfY3RwF;
+	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=jauhmPYR
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 829FB40704;
-	Sat,  7 Nov 2026 19:03:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id DDC1C4065E;
+	Sat,  7 Nov 2026 21:49:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id a23ihmdnM39r; Sat,  7 Nov 2026 19:03:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9B8AF406FC
+ id Fyo8tSf-VyVp; Sat,  7 Nov 2026 21:49:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 385E840642
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794078205;
-	b=lf23/FrWUuuvwG7J17LfxtZgXp2rcwpaye8ddAZHwzkeJ+OArBfmXDiUxdA6QDdamXbY
-	 U6ltiDNGAJCCwpwCxp5lY+3euTLAqzFFPHW4P+B28q3BXhybo5LPK+t1wI2muvvID4VJS
-	 lpc6b/pC5IkrCjDho8YxfJvfoweRMIFGmoh+rfImsYmDpSWFNrveJqAh7ulczdibzEzhj
-	 acjWWCM0uATNQcK3d6SUpcRIgPS00B1uNBqQ0Kv5ZWhYGYV/PpPHXShvrdyAE+1ecVqvj
-	 1GqC6+qVaoH0wuCzF4i2ir/mYeDDuObg38+s2X+QkrDxwGgLDUkciqRo01BkavA4foQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794088157;
+	b=O+JvbutMtJw48VPm/K0HX7ngdQuxz091bXmvHpwv1l5/dxq4oUNhw9xPk/NaddJVGSL+
+	 tLFxI+52tqrArhPgUjR7K0zuEn3a/YVw7XTgoB3vhs+1uTRX1XKnjUeLDrisvKeY9+29M
+	 dx9WV79ERsHKEPmoGjqwOXb79HTmWsXYsBSYtGXsnp/9YUaRb49Ne3kRwzi6teMLiIS26
+	 yivaPmE8XM+KSbZpj9qLiZvQ8ozTsxrw8nysKA7uPTdaiaSsLVCwEBxDgTY8lRFApHJzK
+	 RR0rYMqlT2ygpFdGpCXSRPKH5Q79EW3lEoWs86m9qEWErApBuQWpQmJxZCsIGivFH/g==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794078205;
+	c=relaxed/relaxed; t=1794088157;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:
+	 DKIM-Signature:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:MIME-Version:Content-Transfer-Encoding:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=WshqW8VT8vXqx3Sl1llcVksTVxBd7SwjtfXEAT0k8bA=;
-	b=FFEXngdVxqMzJBVMCSwa/ewGoFMy9gVklHEy+eOeI2rJM+e4+ju5ivmjfvzZjwY6Qgpg
-	 76DjS+eUd/wI98Xpwqev+PfdJ7RiSSRdf0EeGkKoLfP6I31Tb5KB7nQqwogflzK2bDJxM
-	 L//o/yUYTfusCrVXs3NG4BRIXU9iT8+sRa6qaAlZhGsIkDE9+DPQnD1Y2QvRdmhyx0lAY
-	 eT5KM49IlEp9mGZcJpRbWVJl4N+rpiiiyRn3Y6fYERIY4zOs1aNxEKXI8igQnaJzgdeK4
-	 jy6m/7vhIwuy16zmjLKSZjdnyeqvHmUoLT2GlloDFu9issF55LuO5fWNzevrXGiT3Gg==
+	bh=s0EC0GcHcG7LqZgEwqSzUqsx3Ee4LLX+wq/IUykFqK4=;
+	b=EUVnCUaiZSdVcTtHUUWjxb9v1j6ArGbM8H3VwycLVp8vDG6mw1h6cPTWfnO22xGn/QB2
+	 XSpBbGAV5iOSU4yzb+ytRt7h05oEkAGp8tCjAwiTzZ+oqb5EuEkOWuuD287cWONAFKjWG
+	 mpFRxW3mDCqswMGB8Einp1BmHVgV2ZIA67JHTmwXVxSh9/lC6bAgjkz8u/1gUIaBonZxg
+	 0s+17+dNpMFNtOT8pNivmZobhAS+vjke/qWEOSO1eSnSsMzQtjqRzoqjP/q8O8kgHCtG/
+	 MlOVaPIM10fDhkDu8AIGwWCnJq5kwH6w9ytR9QPHtSlkAk1u9XdmIAVH4DksUYe9UkA==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794078205;
-	bh=WshqW8VT8vXqx3Sl1llcVksTVxBd7SwjtfXEAT0k8bA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=VZoFmu7yChHNL6ZHM4PYHZklkjhEYeG4ltsclqaxYQlguxJWj+gsvo6udfkNRdA2X
-	 N4VuJ/tooi6nFr0ZFrMWCCt9ifjBdeb+JMYyiA/PfCFxsd/OnTm7qPYLSJOejVwSQK
-	 lIp0MGu4045fZUHGWUT7wYBPY5ef8fSqMjq4OKHiTcEihwxp4gpInie8iG3BITWun0
-	 q0tOPWT9lhcq7ud1/NOBkxUJFGZfVBJ6RCCGHNL/tLxb2RFYZa/9E3s5Gdxa8M7gNw
-	 rqXUXfLfWjoSCkxT0dGW316uXvFRjeYUUUB4tgOcmC3yI2S0ucgt8k0sF1XDg4NLnB
-	 DHeqI1jROL1lA==
+	d=lists.u-boot-project.org; s=default; t=1794088157;
+	bh=s0EC0GcHcG7LqZgEwqSzUqsx3Ee4LLX+wq/IUykFqK4=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Fs2Or1qdqJh9aqebI3AL/dA4SguvfYIo1J0kpcjtb/oMT2XF2uTyd6qYgmZGc5hhV
+	 r5Ra95JlQp8Wfll+0A9KBbBvUB6f+F5/r4NlHuL+ZHTAG39bDZSawMOT/jySbScJnC
+	 J08eWahP1Mnm0aWYdOpNajxZIjaA++tjSKngneGSpDC7+TzHETjT8+zERyGGoNdILu
+	 dsoMSTjoqCvDjbooBlyxQ/r+HLaIpFJsljbYlvGcyVYsp7nAjfjOBO94KgrlP6UI4A
+	 p7c5iF1ums5OkdFzt+BCmysw7WAY85LmNUtO47Anpka6h1GaRU8vZeOAOOjUnkt8YW
+	 RD/aW8HpEmCHg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9B8AF406FC;
-	Sat,  7 Nov 2026 19:03:25 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 75A6D32A
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 19:03:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 385E840642;
+	Sat,  7 Nov 2026 21:49:17 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D1466317
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 21:49:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 7312C81265
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 19:03:24 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id CE5F5400A9
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 21:49:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pvDEMYvX8uwq for <u-boot@lists.u-boot-project.org>;
- Sat,  7 Nov 2026 19:03:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4A7CF80F6A
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.180.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
- helo=sender6-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=avBQjyfs
-Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
- [165.173.180.15])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 4A7CF80F6A
- for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 19:03:22 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256;
- b=avBQjyfs+K8gtUFUHmTZ+rbc2GBPCE8T17PeBFmqsVjxzCTe7x5+oQRD1Olp1HDSA9brkZwyw5nfmIVuSrGmLFXpiXRRWLsNtoOCYMxc86FBbCCW4VVo7ru8xFrxsD5iMpcitQKde6qqZ5l3wkqZy+lGBdmq2v+uIl0amJOCf9Q=;
- c=relaxed/relaxed; s=zmail; d=ziyao.cc; v=1;
- bh=WshqW8VT8vXqx3Sl1llcVksTVxBd7SwjtfXEAT0k8bA=;
- h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1794078193192205.948321274818;
- Sat, 7 Nov 2026 11:03:13 -0800 (PST)
-Date: Sat, 7 Nov 2026 19:03:04 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Simon Glass <sjg@chromium.org>, me@ziyao.cc
-Cc: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.u-boot-project.org
-Subject: Re: [PATCH v6 10/20] LoongArch: Boot Image bits
-Message-ID: <au916H8p1_rxVJFU@pie>
-References: <20261029050738.1107663-1-me@ziyao.cc>
- <20261029050738.1107663-11-me@ziyao.cc>
- <CAFLszTgZyC1yDgCtH_VzCS0ZvEG3kw81fx_xns8L=6w7m9OEaw@mail.gmail.com>
- <auq4coFjtPBivwdl@pie>
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MssNWVxLXq0J for <u-boot@lists.u-boot-project.org>;
+ Sat,  7 Nov 2026 21:49:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org A0F7940053
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=5.75.144.95
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=5.75.144.95;
+ helo=mail.mainlining.org; envelope-from=brads@mainlining.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=mainlining.org
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=mainlining.org
+ header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r
+ header.b=kzfY3RwF; 
+ dkim=pass header.d=mainlining.org header.i=@mainlining.org
+ header.a=ed25519-sha256 header.s=202507e header.b=jauhmPYR
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A0F7940053
+ for <u-boot@lists.u-boot-project.org>; Sat,  7 Nov 2026 21:49:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
+ c=relaxed/relaxed; 
+ h=Message-ID:Date:Subject:To:From; t=1794088133; bh=s0EC0GcHcG7LqZgEwqSzUqs
+ x3Ee4LLX+wq/IUykFqK4=; b=kzfY3RwFLbCltJvfQDaZBbeP9bAkXLAIVUEr6OE7iS0cuicHwF
+ stQmpd7dIIPF1eIb0Ui7SFnJ+OiJ4904o3fEEy67+4JSIj1/tg2f28M4J9Mlc6WsvaS3xq/xiRb
+ lo/WgphkjlJo6S6IuZhFQWVz2K5JORvx1QTFaj8mT+TzwfxVh0b9FjziXirrdp/PM2b1AJDVDHI
+ SVNEHL1h20OwACP7L77x3CTZnRBZ+WZL/xq2OmvBtoc7raxI4cTAHel07Y+f4Op/PakIIEQtwHy
+ WmhR6W5bXjYtMByEoHiU9Y63eNMhpNZEzxJ7oVSdK6jwvpzLkj2Wk7MFQB5LYUPKrFQ==;
+DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
+ c=relaxed/relaxed; 
+ h=Message-ID:Date:Subject:To:From; t=1794088133; bh=s0EC0GcHcG7LqZgEwqSzUqs
+ x3Ee4LLX+wq/IUykFqK4=; b=jauhmPYRwZxpHbjpMl8Vr2ot/QEFdAIjP9EpYl6yeI4ThUuBsj
+ Yln9MR0hqgJFr9grROtEne51wx6FYVYpFvAA==;
+From: Bradley Morgan <brads@mainlining.org>
+To: u-boot@lists.u-boot-project.org
+Cc: trini@konsulko.com, tomas.alvarez-vanoli@hitachienergy.com,
+ Bradley Morgan <brads@mainlining.org>
+Subject: [PATCH] powerpc: time: Prevent overflow in usec2ticks()
+Date: Sat,  7 Nov 2026 21:48:50 +0000
+Message-ID: <20261107214850.3208042-1-brads@mainlining.org>
+X-Mailer: git-send-email 2.53.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <auq4coFjtPBivwdl@pie>
-X-Zoho-Virus-Status: 1
-X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/294.65.33
-X-ZohoMailClient: External
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -118,76 +115,65 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, Nov 04, 2026 at 04:45:38AM +0000, Yao Zi wrote:
-> On Sat, Oct 31, 2026 at 01:43:27AM -0700, Simon Glass wrote:
-> > Hi Jiaxun,
-> > 
-> > On 2026-10-29T05:07:18+11:00, Yao Zi <me@ziyao.cc> wrote:
-> > > LoongArch: Boot Image bits
-> > >
-> > > Implement loading and booting functions for LoongArch
-> > > standard kernel image as per spec.
-> > >
-> > > LoongArch kernel do expect us to fake a efi systemtable
-> > > for passing fdt to kernel, we don't need to implement any
-> > > EFI functions for kernel because it won't look into anything
-> > > beside devicetree from that table if we tell kernel we are
-> > > not efi compatible by setting a0 boot argument to zero.
-> > >
-> > > Link: https://docs.kernel.org/arch/loongarch/booting.html
-> > > Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-> > > Signed-off-by: Yao Zi <me@ziyao.cc>
-> > >
-> > >  arch/loongarch/lib/Makefile |   2 +
-> > >  arch/loongarch/lib/bootm.c  | 129 ++++++++++++++++++++++++++++++++++++++++++++
-> > >  arch/loongarch/lib/image.c  |  77 ++++++++++++++++++++++++++
-> > >  boot/Kconfig                |   1 +
-> > >  cmd/Kconfig                 |   2 +-
-> > >  5 files changed, 210 insertions(+), 1 deletion(-)
-> > 
-> > > diff --git a/arch/loongarch/lib/bootm.c b/arch/loongarch/lib/bootm.c
-> > > @@ -0,0 +1,129 @@
-> > > +	systab->hdr.crc32 = crc32(0, (const unsigned char *)systab,
-> > > +				  systab->hdr.headersize);
-> > > +
-> > > +	cfgtab[0].guid = efi_guid_fdt;
-> > > +	cfgtab[0].table = images->ft_addr;
-> > > +
-> > > +	gd->bd->bi_boot_params = (ulong)systab;
-> > 
-> > The CRC is still calculated before cfgtab[0] is filled in, so please
-> > move it after that.
-> 
-> Oops, I'm totally confused by UEFI specification, where hdr.headersize
-> is the size of the full table, instead of only the header's size :(
-> 
-> I'll fix it up.
+In usec2ticks(), the author of this file indicated
+that this was only intended for "short delays"
+for example, it would have overflowed at 10 seconds
+at 400 MHz, which is quite a hack.
 
-After reading the code again, I think this should be okay.
-efi_system_table points to cfgtab, so it doesn't matter whehther CRC
-is calculated before or after cfgtab is populated, they're contiguous
-in our implementation only because we want to avoid an extra allocation
-here.
+To fix this, use lldiv() and 64 bit math in order to
+compute the tick count without the overflow, then
+clamp the output to ULONG_MAX so it does not break
+32 bit PowerPC boards
 
-I'll keep the code as-is.
+Signed-off-by: Bradley Morgan <brads@mainlining.org>
+---
+ arch/powerpc/lib/time.c | 16 +++++-----------
+ 1 file changed, 5 insertions(+), 11 deletions(-)
 
-...
-
-> > Regards,
-> > Simon
-> 
-> Best regards,
-> Yao Zi
-
+diff --git a/arch/powerpc/lib/time.c b/arch/powerpc/lib/time.c
+index 0a0e75e726b..120f1fcd0d7 100644
+--- a/arch/powerpc/lib/time.c
++++ b/arch/powerpc/lib/time.c
+@@ -6,27 +6,21 @@
+ 
+ #include <init.h>
+ #include <time.h>
++#include <div64.h>
++#include <linux/kernel.h>
+ #include <asm/io.h>
+ #include <linux/delay.h>
+ 
+ /* ------------------------------------------------------------------------- */
+ 
+ /*
+- * This function is intended for SHORT delays only.
+- * It will overflow at around 10 seconds @ 400MHz,
+- * or 20 seconds @ 200MHz.
++ * Convert microseconds to timebase ticks without overflow.
+  */
+ unsigned long usec2ticks(unsigned long usec)
+ {
+-	ulong ticks;
++	u64 ticks = lldiv((u64)usec * get_tbclk() + 500000, 1000000);
+ 
+-	if (usec < 1000) {
+-		ticks = ((usec * (get_tbclk()/1000)) + 500) / 1000;
+-	} else {
+-		ticks = ((usec / 10) * (get_tbclk() / 100000));
+-	}
+-
+-	return (ticks);
++	return ticks > ULONG_MAX ? ULONG_MAX : ticks;
+ }
+ 
+ /* ------------------------------------------------------------------------- */
 -- 
-Thanks,
-Yao Zi
+2.53.0
 
-Meow-mrrp-mrow, I'm a cat.
