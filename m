@@ -2,28 +2,28 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D2BB606A31C
-	for <u-boot@archiver.kernel.org>; Sun,  8 Nov 2026 15:12:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D62A4606A31C
+	for <u-boot@archiver.kernel.org>; Sun,  8 Nov 2026 15:12:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XzITxu34;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=nEbPIkCf
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=VFCP0gIZ;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=WiFNqexT
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DED8040608;
-	Sun,  8 Nov 2026 15:12:10 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B5CA3405F5;
+	Sun,  8 Nov 2026 15:12:17 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ChMP2xYild36; Sun,  8 Nov 2026 15:12:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 17744405F5
+ id Ye_co9GZmvf1; Sun,  8 Nov 2026 15:12:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C61E040604
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794150730;
-	b=Rn6BMtW2fAq96iIGzicXloqWGBNpGfWcGQJ1E5hS49FTqu2x4tbzGwCWJJhyUY3lXxw3
-	 1CbuLHdS6LafcBvVtNMerwoPOlpUoQPHPM59+zwhiMVBSauS/zq0mQvNZ0dCpdKv5vmtD
-	 ZRn1H/iuW5P3zTTYFcUNmUBKlRhekL/hQEcFAAk5RfNwdr6r9TBQYzdno390IV7xvwlzA
-	 Z+X0BJ8Xy+WzdwnAVuLqhl3ddYA4fw8gohD3z4oznnhkLPtqfY0zPZZKZXrVAfN908Wc0
-	 AkashR9RFITofiD0jhxvIQgcWWjKYI/NASJwwShdtQ0ONeH5A6VR/bv8YXvneDjXkfA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794150737;
+	b=pTF2LbWDLGPT9MgoRFE64Ryug0aFdIaZ4+aHem/TuyUwXShhWYNh/QHon9hiKEmHoMU4
+	 MdY42nCMF2mrfMNT+0lHk69sfU6N1QBtzr2Yu1rsRl4d+pGLNx8MrPniObrhuvvU2nCef
+	 S5TT7EFvfMh3a8K4kU7/pUMik8aTkXsFBeomA33MqNXUasgDDcb4f0oo8zik6rKub8C0r
+	 tTVLus/BED9UVFIx7jpoNbNZTTO/TR57kr8z5JpJrHg6i33vF5sAnqkT7hE7TD38NO5vP
+	 dHwo6LaQYfPyhhEH/HjBSgV7N1n26HTfVInxwrMpB9bd91j9TcNKVN/6NVgx8QxuSLQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794150730;
+	c=relaxed/relaxed; t=1794150737;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,109 +32,108 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=c+dL0LInU9lRTdLiJfVLmN3r/SyDYwmJQJEzbMqSRr0=;
-	b=aTWJKc1HXawl3L7Yr0G+MOsl0G1/Asth7Pg1KmPINEzVvkc9WqQh5HH4o+fJiNMd9xv0
-	 olyN6F7a98QyhJhvC95s0hEHX3i4Znm3MqteVbXMbctv4EcJmEjaPhKe+B3sLvOQZ+xDt
-	 4XXB5hJvbcmPp5frVMGnIt4/gSyIUuyVlJ02vsvD0PcztoFNXf4cv2dlQxkA8WQGpWLUv
-	 0ikdZ/TKwxOchzMDlhgsf1TDQG3a/IwYcqJtcDSihOAU4x+P74ZKERf3taH8AM8fBs3C6
-	 RuGJV+JhDijJQ1gNhxoHa2ybyVd4GKL+RnJZ6xAz5AM/D6rsZfHoigr30cKtKU3Relg==
+	bh=IktHLgnHWsanVCtxyx8c4CryMP3iAKaDBJBnDLzNwzc=;
+	b=n2lGret4QcY/UqJxN6zpxNN8mWj1b/WJr6OA6Y2342nkZ2Wytv2u89g10QFRTze54V+h
+	 18ibN6wQisIg6ysznogE63OF+bhqks9FDMKRMLZ7r0kSmtAgZb9rQSa0/F18Sv+fBFjKh
+	 s1VSnLQ1+fRIPuCmglUGprbsI4EfJiYBmwBKGhvvAa02/lbsZpKn8a2c8z+JuYNuVAnN4
+	 lO4yN6NnovnPrkUKVlvLS0oGuimFeD0cqOCT1LRDDGObcr2c81JFM8N/hwyPw2M9OpybF
+	 OyI6brB2RgbuSeexrW750MyFvsi1F1vnlWKjWjmUCNcIyJx3Obk5JeRvkeMVe5cguAg==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794150730;
-	bh=c+dL0LInU9lRTdLiJfVLmN3r/SyDYwmJQJEzbMqSRr0=;
+	d=lists.u-boot-project.org; s=default; t=1794150736;
+	bh=IktHLgnHWsanVCtxyx8c4CryMP3iAKaDBJBnDLzNwzc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=XzITxu34DgDKTqOYFR/Q9UenZzAjMPDyY44674oiggLGmQtvcTNvRT1DFZiH3Yc9H
-	 VDB0oVfgKFbnC8Th8IvXg7mqhBRwLkWqkSSnhaTrdczaLSI1OHlLRVRxLhEiohAf/z
-	 igZgqZAYBXWUA2Kqmia6BWgNCAJLXAWQTUHurUew7PGTkf++9+HQdqSSpHNhpgrK1r
-	 YVewR9WcUUVkyozCJWOM7O1JBhC3kG4CS6fVzyoYjx4tVCkc8A1ZsEvLZxZJF0C+EB
-	 mRMt3D944sTyDOgEhcmmbJHuxSvh2TcATwSte//8M411N/l9cYPV0xRYGZ6qQYVyG0
-	 rRgaZAxWMBulQ==
+	b=VFCP0gIZaVee4JZeMNMm1UoUaLATDxzcxcfoUvdT7asW2JAnnVwZJbsaQ5y6ReqvM
+	 jKwfEPgj3o2aiJvyy+uXgHdetBS5ydhS8vtbCm+FpZlz18ETWghDmTeQZOPObbEX/O
+	 ZW6lkq0Q3BqB4L/sWXLpI1NelliqNAdqLZINHlDjO2CWVKUr0QPSruwwqQjgDDqElE
+	 QEWZVE5Q+x+Oo7ypsvPbo9O70Mhd9O78QF/4jU5JRuiUXHzLYTVHxOX9HU7wYZxGoq
+	 dWkBEUPguD8DKhkg/Gv+TfOkPYUcrLc6ULE1arNx9rLJ7xxzp68cwf4KrTl8NcynCc
+	 kqugjV16ePExA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 17744405F5;
-	Sun,  8 Nov 2026 15:12:10 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 5C978362
- for <u-boot@lists.u-boot-project.org>; Sun,  8 Nov 2026 15:12:09 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C61E040604;
+	Sun,  8 Nov 2026 15:12:16 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 7B8732AC
+ for <u-boot@lists.u-boot-project.org>; Sun,  8 Nov 2026 15:12:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4E333400A8
- for <u-boot@lists.u-boot-project.org>; Sun,  8 Nov 2026 15:12:09 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6D913400A8
+ for <u-boot@lists.u-boot-project.org>; Sun,  8 Nov 2026 15:12:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id f0kSS_IlJta7 for <u-boot@lists.u-boot-project.org>;
- Sun,  8 Nov 2026 15:12:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 61B184005E
+ id r3BUuSK9UaP4 for <u-boot@lists.u-boot-project.org>;
+ Sun,  8 Nov 2026 15:12:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 585F14005E
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
+ arc=none smtp.remote-ip="2a00:1450:4864:20::335"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
+ client-ip=2a00:1450:4864:20::335; helo=mail-wm1-x335.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=nEbPIkCf
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 61B184005E
- for <u-boot@lists.u-boot-project.org>; Sun,  8 Nov 2026 15:12:07 +0000 (UTC)
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4a214af2076so653885e9.0
- for <u-boot@lists.u-boot-project.org>; Sun, 08 Nov 2026 07:12:07 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=WiFNqexT
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 585F14005E
+ for <u-boot@lists.u-boot-project.org>; Sun,  8 Nov 2026 15:12:13 +0000 (UTC)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4a2000d5fb1so404725e9.1
+ for <u-boot@lists.u-boot-project.org>; Sun, 08 Nov 2026 07:12:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794150726; x=1794755526;
+ d=gmail.com; s=20260707; t=1794150731; x=1794755531;
  darn=lists.u-boot-project.org; 
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=c+dL0LInU9lRTdLiJfVLmN3r/SyDYwmJQJEzbMqSRr0=;
- b=nEbPIkCfxTXtldDhsngdO7xqx9gSNTCnH+ejzVqN/s1N63CKhVZ43kG835ijt+tnhR
- lJSLWnIoa+3rjmbLd4L3FV2HDT/mohtBQtPZTmIqTV11WlxOVLdHm7N/n2SDHk84Lpyo
- IMdCqXVirZDxt04S6/eBnbSSrbg8fZmBmAWfxCoMS3uGnZqYyJyfpGXd8WK5ePn9h6yu
- 3Dq+ZelMvXnw+Ds6oqdurIoMVOKJEOrA+kxPLLLJgx8XxSnUhSTGM07rQkFwm5TrWSJo
- 0qhLMoN06RofntVbnAFq8PthFdO5lI+Vih9xMu5BywYekALGc+MjmfwqZzQqqgofw7hS
- E7sw==
+ bh=IktHLgnHWsanVCtxyx8c4CryMP3iAKaDBJBnDLzNwzc=;
+ b=WiFNqexTC9mq7eEUMxTA6qT34vQWoumuMoA//IN/CRZP+xgpQ/gMGP5kMh7h61hdwR
+ 5VrSS9byk3nI9l67aQc61vX5DSjKPno4ljbKJBBS6scEXMp1L1rcFkUAsp0IsWLwBS9C
+ UeMHQU9J2dvtBVkYoySCiWZckOGlaugJ5RFTEYzkR3hISu4OUVHc/8vDZFjL6libPvwo
+ pEismQm2XwB4nbUEUn/bl3c3revoGo/NuRTsbfhLcsIhiUeDTPwNDwAPDGxL3Lv6ql2j
+ 6okeoExPfyl8BISUbF+7uFcavE4mcsN8k3p/BLFMl99j6W772gaD4VYZzO2hoFqVZyz7
+ QOyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794150726; x=1794755526;
+ d=1e100.net; s=20260707; t=1794150731; x=1794755531;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=c+dL0LInU9lRTdLiJfVLmN3r/SyDYwmJQJEzbMqSRr0=;
- b=qNW1k5RaWuzc7ZaQkmCxSz9q6TBo+Fic7dnmBDojqul47jc3jTlT/uRhbfgvPKJykw
- iyTB2bL2dE4h2ghxLvIO4IAmFS06sjx64dRKR0uTDl5YUG/xM2fjf3qoNHbCnmahJgnT
- +aXLWiAlPh8wS3PHqrtZEUv7J32dxPgsf6Jdq08UskckxSzICWGLNin+/o7gdOHmh4FJ
- 8n09PG5hzMvKAimmfDq0X0ByRTK0XHwePSnSlFmRhJsctniZAvMqCyGBxk3CZ28383sh
- MSti885DuyLLXEgK3ebGHUErwAvMPc6XQYMNgOYOMK92Fp0NachmF3lvk8OMy0RLB0Vd
- l7fA==
-X-Gm-Message-State: APuU4Z/wuhc6g5gjPKGOC8ulryyUnOVPiO09+AIPMJA2wQg6SbP3MRa4
- EwiI5aZx+ic7i3ZjHN0ta2w0gUN6v6F8hX1J2SRaMf0+3GbLClggfWeY
-X-Gm-Gg: AYBFou3juQ2GPiNw0xHEtqO4t/+bSV9/8GTEaq9p8DD4eexNZZM3dP6stMeQHh81yCQ
- is4rEc7tX632hi9/b+7Miw7w4W97RE/ACdZB7w6CFqmKYfURgCs4HIe7ju8k6seFFBwCM/W/Ogi
- AzPs5TJ1zk4P2YlD6TCnseLz3+EF1i2y37/jgSVzkofCypNCulirlyAnUrNgVrqoFZ0wrVxV7O6
- 7vM+R9isTIOx92WpInKlA5iHiEJFoqJ6SST2AXp68MMcRtGAgRi4wgWfE78UTHAWzwzwwY63WhQ
- NZPJdRlni5+crwUIFJ0oZiA9EajD9gWsZC+FReKkxb3s+sZRu+I+t9YJVGK9DhgAeuYGOhrkOsi
- tZIvvYzhtwwo2Bc5DAIYh6YemlF2ggLNWG7G+qnoLWaQRDInHEnbADYHLbivBeur9KfvBOIT36i
- iIUlwGVmUgj/8A6EIiohcyy7Y8NyofuMfmgdHAPjCz8kCvyD4KgMR6WbJncBjvSa8HT4b0ONP8w
- eAM/nNNGeYbXCHbAYZlPB7oPRR/XcVo03qI341qD8ItW+xjm1clt48s3knNlDwKm6tCOccXRP5m
- GdhQqgcO4vF3jU3JJPJO8+MPft9ymls=
-X-Received: by 2002:a05:600c:37c9:b0:4a3:59c9:a744 with SMTP id
- 5b1f17b1804b1-4b963c6c533mr30051175e9.7.1794150725892; 
- Sun, 08 Nov 2026 07:12:05 -0800 (PST)
+ bh=IktHLgnHWsanVCtxyx8c4CryMP3iAKaDBJBnDLzNwzc=;
+ b=R5GYN4Olo0MMeRNbzlvoJkFqE54/cqm0X/gkn6tBVVasHHFhFKDFLRZYV6Zc8w7q0l
+ +3LPVO5nhwerWoZ6z10GP12Rop+sDj+NJypeDOGOWqN5vUOhfcdEfVjIpmAgmSlLC9VO
+ zsJ/HXDef2OXgezkEfNxLrNCPanrc4FRjixsw6mA3f6z9HuuGhnSG/7MqVzKUz9OEGqC
+ E5wYqBbZtQgLQzFDRqhMhlOVCAPniUbk8Sq+VDSK+HkxVtjADD3eoP/R0YBMjMcMv4+3
+ nl6du3/gMnbFCXdkmH0vcqzMYNCBAa+lEdeIVp+3CSvLaPoVIA3/AQlMzEFJG/sJ7ofC
+ WaPQ==
+X-Gm-Message-State: APuU4Z8FemRbdJivYG0TRrHFO1AVx4r1Rsq0R9Wd+meXX+6LiuCYfvfi
+ umWlfa5QYBLS5fQjfTDEymhwjCOlNrdfJmEy45MD28T0O+i+HgLSB3kz8ftehecqmEDKQg==
+X-Gm-Gg: AYBFou3iD2buR0uNhB5zgUPRAwhvwI4R+1cWr6usEe4MfcqFo70bC0A1da0ZiVDoSel
+ 37DET1GJVurVe4ioyLSYV8JGSHiOfovtUwq9V49Ne0khxR2erLZ43lxpzijuioMfdwlkT62cuDA
+ rJGK1oN4/NPewMDO6bn5TZivPzr/gm2jiPKMjjTVpkODPhC14RtKRB9z6iVwzPZl9HhdkrpZoB1
+ PGbEjzF4YYvS9tiSVyumtj7g4TdxFQxpNBYQ4xaNq02oQU6BuEE48ALNwn94SPnnO1SY6OAhPBA
+ 58VR+yQ9nzklXSXS2Ve1UBtwCxeHgN0os/OYPq5I2iTqu5bJAXtcJOinQc4OAR2XIJp4epe5H4g
+ hPJsPpCljGxxshV4FkNMgEIDzJZPA+IllQctpNeXwMvkLgdRnrXYFeAs6FX7/ZhhSZkPbkiboce
+ tlBWtixQPKQiMod3kDiloq/gf7yAtt4anOs4LJ+wN9+MgvcRla0MUmHeSsf56VrbWdshLup6Jsh
+ HTyr36eVUMJotn7GPHxZk3btGsxse/tpTOapdKLBMioc55Rvx605C8T4peXo9dkPGJ+snYnN+xz
+ 8At+rxfT14iT6nUgwMQEYl8QaJ0EgN8=
+X-Received: by 2002:a05:600c:524e:b0:4a2:a9:ed5a with SMTP id
+ 5b1f17b1804b1-4b960d9bb10mr35434595e9.8.1794150731041; 
+ Sun, 08 Nov 2026 07:12:11 -0800 (PST)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b7efb1547fsm289325385e9.11.2026.11.08.07.12.05
+ 5b1f17b1804b1-4b7efb0d7a7sm154623605e9.9.2026.11.08.07.12.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 08 Nov 2026 07:12:05 -0800 (PST)
+ Sun, 08 Nov 2026 07:12:10 -0800 (PST)
 From: Ana Bobillo <anabobillo3@gmail.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org, Tony Dinh <mibodhi@gmail.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH 2/6] fs: ext4: use ext4fs_blk_to_group() in
- ext4fs_get_new_blk_no()
-Date: Sun, 08 Nov 2026 15:12:04 +0000
-Message-ID: <eb534601-abb7-4912-be31-a9ce05ec7be3@gmail.com>
+Subject: [PATCH 3/6] fs: ext4: check directory entries before using them
+Date: Sun, 08 Nov 2026 15:12:09 +0000
+Message-ID: <9fe7adf0-424f-445d-9aae-21df93002f95@gmail.com>
 In-Reply-To: <5072bec2-e2e3-405d-91eb-58fe78ea6669@gmail.com>
 References: <5072bec2-e2e3-405d-91eb-58fe78ea6669@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -146,10 +145,10 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
@@ -157,92 +156,199 @@ X-Archived-By: <archiver.kernel.org>
 
 From: Ana Bobillo <anabobillo3@gmail.com>
 
-ext4fs_get_new_blk_no() works out the block group of the next block to
-allocate with its own arithmetic, which takes the first data block to
-be block 1 with 1 KiB blocks and block 0 otherwise. Now that
-ext4fs_init() refuses any other first data block, ext4fs_blk_to_group()
-gives the same group, so use it, and step to the first block of the next
-group from the first data block too.
+ext4fs_update_parent_dentry() looks for room for a new name by walking
+the entries of the parent directory's last block by their on-disk
+rec_len. The walk only stops at an entry whose rec_len reaches exactly
+to the end of the block, so an entry that claims a length past the end
+of the block, or a misaligned or too short one, moves the walk out of
+the block buffer: it reads entries from the memory after it, and the
+new entry is then written there.
 
-Running past the last group means here that the filesystem is full, not
-that a block number is corrupt, so first check quietly that the block
-lies inside the filesystem, as ext4fs_get_new_inode_no() does for
-inodes, and stop rather than skip past a full last group. The search for
-the next block then ends at the end of the filesystem rather than at the
-end of the last group, so it no longer takes a block past the end when
-the padding bits of the last group's bitmap are clear.
+search_dir() and unlink_filename() check the alignment and the minimum
+length of each entry since commit ecdfb4195b20 ("ext4: recover from
+filesystem corruption when reading"), but not that the entry's name
+fits in its rec_len and in the block.
 
-Suggested-by: Simon Glass <sjg@chromium.org>
+An entry with a rec_len of 0 also ends the walk early, and the new
+entry is then written over it.
+
+Add ext4fs_get_dirent(), which returns an entry of a directory block
+only if it is aligned, lies inside the block and its rec_len covers its
+header and name, much as Linux checks in ext4_check_dir_entry(), and
+use it for every entry the three functions walk. search_dir() and
+unlink_filename() stop reading a corrupt block, as they did at a
+misaligned entry, and ext4fs_update_parent_dentry() now refuses to
+write to one. A block it has just added to the directory has no entry
+yet, so it is not walked.
+
 Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
 ---
- fs/ext4/ext4_common.c | 32 ++++++++++++++++----------------
- 1 file changed, 16 insertions(+), 16 deletions(-)
+ fs/ext4/ext4_common.c | 90 ++++++++++++++++++++++++++++---------------
+ 1 file changed, 60 insertions(+), 30 deletions(-)
 
 diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
-index 273e6628b8d..ccfce5c745c 100644
+index ccfce5c745c..9c41d2f60fc 100644
 --- a/fs/ext4/ext4_common.c
 +++ b/fs/ext4/ext4_common.c
-@@ -1037,10 +1037,11 @@ uint32_t ext4fs_get_new_blk_no(void)
- {
- 	short i;
- 	short status;
--	int remainder;
--	unsigned int bg_idx;
-+	int bg_idx;
- 	static int prev_bg_bitmap_index = -1;
- 	unsigned int blk_per_grp = le32_to_cpu(ext4fs_root->sblock.blocks_per_group);
-+	uint32_t first_data_block =
-+		le32_to_cpu(ext4fs_root->sblock.first_data_block);
- 	struct ext_filesystem *fs = get_fs();
- 	char *journal_buffer = zalloc(fs->blksz);
- 	char *zero_buffer = zalloc(fs->blksz);
-@@ -1092,28 +1093,27 @@ uint32_t ext4fs_get_new_blk_no(void)
- 	} else {
- 		fs->curr_blkno++;
- restart:
-+		/* no free block left after the last one allocated */
-+		if (fs->curr_blkno >=
-+		    le32_to_cpu(ext4fs_root->sblock.total_blocks))
-+			goto fail;
- 		/* get the blockbitmap index respective to blockno */
--		bg_idx = fs->curr_blkno / blk_per_grp;
--		if (fs->blksz == 1024) {
--			remainder = fs->curr_blkno % blk_per_grp;
--			if (!remainder)
--				bg_idx--;
--		}
-+		bg_idx = ext4fs_blk_to_group(fs, fs->curr_blkno);
-+		if (bg_idx < 0)
-+			goto fail;
+@@ -443,6 +443,37 @@ uint16_t ext4fs_checksum_update(uint32_t i)
+ 	return crc;
+ }
  
- 		/*
- 		 * To skip completely filled block group bitmaps
- 		 * Optimize the block allocation
- 		 */
--		if (bg_idx >= fs->no_blkgrp)
--			goto fail;
--
- 		struct ext2_block_group *bgd = NULL;
- 		bgd = ext4fs_get_group_descriptor(fs, bg_idx);
- 		if (ext4fs_bg_get_free_blocks(bgd, fs) == 0) {
--			debug("block group %u is full. Skipping\n", bg_idx);
--			fs->curr_blkno = (bg_idx + 1) * blk_per_grp;
--			if (fs->blksz == 1024)
--				fs->curr_blkno += 1;
-+			debug("block group %d is full. Skipping\n", bg_idx);
-+			if (bg_idx + 1 >= fs->no_blkgrp)
-+				goto fail;
-+			fs->curr_blkno = (bg_idx + 1) * blk_per_grp +
-+					 first_data_block;
- 			goto restart;
++/**
++ * ext4fs_get_dirent() - get a directory entry of a directory block
++ *
++ * Check that the entry at @offset lies inside the block and that its length
++ * covers its header and name, as Linux does in ext4_check_dir_entry(), so
++ * that the entry can be used and the next one found at @offset plus its
++ * length.
++ *
++ * @block:	directory block
++ * @offset:	offset of the entry in @block
++ * @blksz:	size of @block
++ * Return:	the entry, or NULL if it is not valid
++ */
++static struct ext2_dirent *ext4fs_get_dirent(char *block, unsigned int offset,
++					     unsigned int blksz)
++{
++	struct ext2_dirent *dir;
++	unsigned int direntlen;
++
++	if ((offset & 3) || offset > blksz - sizeof(*dir))
++		return NULL;
++
++	dir = (struct ext2_dirent *)(block + offset);
++	direntlen = le16_to_cpu(dir->direntlen);
++	if (direntlen < sizeof(*dir) + dir->namelen ||
++	    direntlen > blksz - offset)
++		return NULL;
++
++	return dir;
++}
++
+ static int check_void_in_dentry(struct ext2_dirent *dir, char *filename)
+ {
+ 	int dentry_length;
+@@ -493,6 +524,7 @@ int ext4fs_update_parent_dentry(char *filename, int file_type)
+ 	uint32_t new_size;
+ 	uint32_t new_blockcnt;
+ 	uint32_t directory_blocks;
++	bool new_blk = false;
+ 
+ 	zero_buffer = zalloc(fs->blksz);
+ 	if (!zero_buffer) {
+@@ -530,16 +562,25 @@ restart_read:
+ 	dir = (struct ext2_dirent *)root_first_block_buffer;
+ 	totalbytes = 0;
+ 
+-	while (le16_to_cpu(dir->direntlen) > 0) {
+-		unsigned short used_len = ROUND(dir->namelen +
+-		    sizeof(struct ext2_dirent), 4);
++	/* a block just added to the directory has no entry yet */
++	while (!new_blk) {
++		unsigned short used_len;
++		int direntlen;
++
++		dir = ext4fs_get_dirent(root_first_block_buffer, totalbytes,
++					fs->blksz);
++		if (!dir) {
++			printf("Corrupt directory block, not writing\n");
++			goto fail;
++		}
++		direntlen = le16_to_cpu(dir->direntlen);
++		used_len = ROUND(dir->namelen + sizeof(struct ext2_dirent), 4);
+ 
+ 		/* last entry of block */
+-		if (fs->blksz - totalbytes == le16_to_cpu(dir->direntlen)) {
++		if (fs->blksz - totalbytes == direntlen) {
+ 
+ 			/* check if new entry fits */
+-			if ((used_len + new_entry_byte_reqd) <=
+-			    le16_to_cpu(dir->direntlen)) {
++			if ((used_len + new_entry_byte_reqd) <= direntlen) {
+ 				dir->direntlen = cpu_to_le16(used_len);
+ 				break;
+ 			} else {
+@@ -581,17 +622,15 @@ restart_read:
+ 				    (root_first_block_buffer,
+ 				     first_block_no_of_root))
+ 					goto fail;
++				new_blk = true;
+ 				goto restart;
+ 			}
  		}
  
-@@ -1129,7 +1129,7 @@ restart:
+-		templength = le16_to_cpu(dir->direntlen);
+-		totalbytes = totalbytes + templength;
++		totalbytes = totalbytes + direntlen;
+ 		sizeof_void_space = check_void_in_dentry(dir, filename);
+ 		if (sizeof_void_space)
+ 			break;
+-
+-		dir = (struct ext2_dirent *)((char *)dir + templength);
+ 	}
  
- 		if (ext4fs_set_block_bmap(fs->curr_blkno, fs->blk_bmaps[bg_idx],
- 				   bg_idx) != 0) {
--			debug("going for restart for the block no %ld %u\n",
-+			debug("going for restart for the block no %ld %d\n",
- 			      fs->curr_blkno, bg_idx);
- 			fs->curr_blkno++;
- 			goto restart;
+ 	/* make a pointer ready for creating next directory entry */
+@@ -663,17 +702,13 @@ static int search_dir(struct ext2_inode *parent_inode, char *dirname)
+ 
+ 		offset = 0;
+ 		do {
+-			if (offset & 3) {
+-				printf("Badly aligned ext2_dirent\n");
++			dir = ext4fs_get_dirent(block_buffer, offset,
++						fs->blksz);
++			if (!dir) {
++				printf("Corrupt directory block\n");
+ 				break;
+ 			}
+-
+-			dir = (struct ext2_dirent *)(block_buffer + offset);
+-			direntname = (char*)(dir) + sizeof(struct ext2_dirent);
+-
+-			int direntlen = le16_to_cpu(dir->direntlen);
+-			if (direntlen < sizeof(struct ext2_dirent))
+-				break;
++			direntname = (char *)(dir) + sizeof(struct ext2_dirent);
+ 
+ 			if (dir->inode && (strlen(dirname) == dir->namelen) &&
+ 			    (strncmp(dirname, direntname, dir->namelen) == 0)) {
+@@ -681,7 +716,7 @@ static int search_dir(struct ext2_inode *parent_inode, char *dirname)
+ 				break;
+ 			}
+ 
+-			offset += direntlen;
++			offset += le16_to_cpu(dir->direntlen);
+ 
+ 		} while (offset < fs->blksz);
+ 
+@@ -892,26 +927,21 @@ static int unlink_filename(char *filename, unsigned int blknr)
+ 
+ 	offset = 0;
+ 	do {
+-		if (offset & 3) {
+-			printf("Badly aligned ext2_dirent\n");
++		previous_dir = dir;
++		dir = ext4fs_get_dirent(block_buffer, offset, fs->blksz);
++		if (!dir) {
++			printf("Corrupt directory block\n");
+ 			break;
+ 		}
+-
+-		previous_dir = dir;
+-		dir = (struct ext2_dirent *)(block_buffer + offset);
+ 		direntname = (char *)(dir) + sizeof(struct ext2_dirent);
+ 
+-		int direntlen = le16_to_cpu(dir->direntlen);
+-		if (direntlen < sizeof(struct ext2_dirent))
+-			break;
+-
+ 		if (dir->inode && (strlen(filename) == dir->namelen) &&
+ 		    (strncmp(direntname, filename, dir->namelen) == 0)) {
+ 			inodeno = le32_to_cpu(dir->inode);
+ 			break;
+ 		}
+ 
+-		offset += direntlen;
++		offset += le16_to_cpu(dir->direntlen);
+ 
+ 	} while (offset < fs->blksz);
+ 
