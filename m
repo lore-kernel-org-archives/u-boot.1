@@ -1,131 +1,129 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A21E606A321
-	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 04:34:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 639FE606A31C
+	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 04:39:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=iVt0W0m3;
-	dkim=pass (2048-bit key, unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=HQ4EBcx1
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=iV/7h5lh;
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=U5FCum7o
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 43CDF80F20;
-	Mon,  9 Nov 2026 04:34:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E8AFA4065C;
+	Mon,  9 Nov 2026 04:39:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id zoDSG9Ta5Sth; Mon,  9 Nov 2026 04:34:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D556480F1D
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794198845;
-	b=fW2zCyq319aRXtGDmcCTMfxg25KZNK4IRAabEMQxBPKAa2UBaipC61bnmGeY3ITdtUCL
-	 ttqLWNtxJwQpsn/vuAcc10PUh5Nhnh1nLaiu0PDhiAEf05ubIypwOjnuu6HD4ZN/lak8N
-	 lCdmUVSUeU/uPCopBkiRzCX7HipekS3qWreLmojVSv27mdidybt7CNrwlZB3xHEfNT+OS
-	 w5c/uDPCmGC7u6qiBSnN1KuSnTcWJ+8fj13YR+rMQRdLQ7t5DUjSBxTVRYxhOv9DL7ABF
-	 Mum2YWehpIsU3xYcgXyKAY9zynmQMr5RXsfOL81Q2v7mwZ04h+dvV7Zjwa8A6GsFWJQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mZUB14QstrI3; Mon,  9 Nov 2026 04:39:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2E00F4064C
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794199172;
+	b=d8bxeA84JR0tOMfXhmejdwolOPJfpqn9TMrDa4i2xbq5B/GgcGB4Kc1bQM6kMD6SLo1o
+	 QsGZd/v8IajiEtaxtNKVtvhFdE+LQHmUtCL0xaT2R2+IDKFyyBsIJN+bYtfARuogSctot
+	 BroNSijVfmLR9TEyr0zplP+nBvzUB2/+2hGJ5MIXYtMYJtLmGoA3rbvp2kAOHuP0wZ9c5
+	 mOyc9H3o47eeiApaKjsXJ5XiHVsOQjSg3xQZV9WkuSyo4ptbMA2TA6yBWJx8xTWKw4tvs
+	 UF49X3wD/eOU4Zqew0eoSX4dPBAtow0usref1K0M773Z4f6UC6NdXnrGPyGSVDslluQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794198845;
+	c=relaxed/relaxed; t=1794199172;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
-	 Received:DKIM-Signature:Date:From:To:Cc:Message-ID:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-Priority:
-	 Importance:X-Mailer:X-Originating-Client:X-MBO-RS-META:X-MBO-RS-ID:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=5oPRWtAFAvQCyu4WnYvksLQOkjtfnG41CibWu748Gek=;
-	b=N/Vp35f5xj1Rp25nbXA5J3wDz+I8vjy5WIlNQaaFeQ9Fo96RS0vw3eJfEpKQjdjGFFSn
-	 FPRbYWXgXE871V2BwayWWU1fXtNG9luTwZaA9Tt0c15AYSBUvXXynGD7gU1PWnsUH1Gz9
-	 5Gh3LC2HRQWHKE8mBScPg8v31dbgbgLgthmZKQ0PSdAOMR4iqCK506ywigIFCJc3DsZZU
-	 8e2oCHBnwdqLrduGhKqceKVbhw814teLQwFw+I3pZm7duaQfTu0jLfb0H2atQwyPqtVZj
-	 Sv3KDpPpcCsrSdNImbqbUtTRI3Ad+35Hrps09QGhUikzi+HhR/WFumYdo3gv070YvCA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=mailbox.org;
-	dkim=pass header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256 header.s=mail20150812 header.b=HQ4EBcx1;
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+	 References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-MBO-RS-ID:X-MBO-RS-META:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=pVutQOLikyCUYyQZj5mnavUmohFM8R6/Y4tW9NhwHPQ=;
+	b=NqOtJ437mqsVaoObSQ36AXUw6XQIrfpgDYvYcUEylt5Q7ulxuI3e55AoZXg7FYDN75Mm
+	 SPywyWrcftNFYAcMdHabBlR5tn2SOT8QD2c89CCycUNpJ5ZJUtOnTc9C72sMmgVfNxVXc
+	 ElGL9WCEG1BrWj/MLBi6HO7vtYl4/QXVXJM9xbu+5EVDjZjpTjyo19kWtKjgSzIlVPySA
+	 gwPG6cs8LHKREiGKQyjDmiXDwLUhfIcv3VSf0cUCw5ASwXbIwla66VtfRHURdh+y6NNAr
+	 2G+3sQ1O6lxNQeyJG3LQtwJ7A7kRDMUgtulpMrBT5IfnrWwnDukt0xXyDyL/ue4avhg==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794198845;
-	bh=5oPRWtAFAvQCyu4WnYvksLQOkjtfnG41CibWu748Gek=;
-	h=Date:From:To:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=iVt0W0m33n8jAaCGVBlELyyHygyHHk9e+68S6q2fUcRpgyRhs4YLHJdUMh9vGxlqR
-	 FKndcdPiPRQMUXNkzG58XmzkJLq0U1RfdkKGclWXqz4ZUUmUuCkxGQ9CcwQPAiN3jc
-	 QhxJyHWLgKXi+Kx+5jDmixHCWgpt1yUbwynp0zA0XE1RqL+X7igEBNQBtrVyIuq0eX
-	 T6HUr0vE0kOQSVwu9zJwXBVGd1UGFRrZG0BTQ9ORp6jMfhRAeirQ0LgEhx0LNdssTS
-	 GeWl0RSEROD5bzH6AWZMW9gL2l8/prKeDRV5iWARVek+ZV0X1el2FaqpxiI6YFRAmV
-	 2XNArHyt2aE0A==
+	d=lists.u-boot-project.org; s=default; t=1794199172;
+	bh=pVutQOLikyCUYyQZj5mnavUmohFM8R6/Y4tW9NhwHPQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=iV/7h5lhUsU6mHYDVR/9uBsJB7fbNOr41bqa2UJPIRAboNh8NkTZGB5ViMHn99wP4
+	 W7j38rU/MYmtSjJWLGlEIOaI5vVuQWeQZKDu4JtQjdrsLI3gUJzIv4O/GNJr8+z9dH
+	 b05dQ6iP2TPQNzyJCFGb8P+/Ks+FVL3VmcdILXssVooFF5PH7/Ytvfg4Qb16x1xofn
+	 iUao0+8CMaLjVcUEbrWCLvy/0MCCNyHp4AIW0G8pM2KC8B+GDI97Ub/OcCWukhp8JF
+	 yTtHp+F1sWp0huzCkfyYwfP/EKwAlnITQTE9dCovaip4qEF2KuFIarZQkgzKY5Asoq
+	 lx3qyIZ++zX8w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D556480F1D;
-	Mon,  9 Nov 2026 04:34:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2E00F4064C;
+	Mon,  9 Nov 2026 04:39:32 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 05609932
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 03:09:43 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id D51C61A6
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 04:39:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 73E0680E34
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 03:09:43 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id D241E80E5E
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 04:39:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FNvjdHRnesaf for <u-boot@lists.u-boot-project.org>;
- Mon,  9 Nov 2026 03:09:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DD23D80E1F
+ id DWNi1ZJe0-_p for <u-boot@lists.u-boot-project.org>;
+ Mon,  9 Nov 2026 04:39:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DEC5180E55
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2001:67c:2050:0:465::201"
-X-Greylist: delayed 559 seconds by postgrey-1.37 at util1.osuosl.org;
- Mon, 09 Nov 2026 03:09:41 UTC
+ arc=none smtp.remote-ip="2001:67c:2050:0:465::202"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:67c:2050:0:465::202; helo=mout-p-202.mailbox.org;
+ envelope-from=marek.vasut@mailbox.org; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=mailbox.org header.i=@mailbox.org header.a=rsa-sha256
- header.s=mail20150812 header.b=HQ4EBcx1
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:67c:2050:0:465::201; helo=mout-p-201.mailbox.org;
- envelope-from=timsurber@mailbox.org; receiver=<UNKNOWN> 
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- by smtp1.osuosl.org (Postfix) with ESMTPS id DD23D80E1F
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 03:09:41 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+ header.s=mail20150812 header.b=U5FCum7o
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id DEC5180E55
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 04:39:29 +0000 (UTC)
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4jNDzj3023zMlSl;
- Mon, 09 Nov 2026 04:00:17 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4jNHB61FQ0zMlMf;
+ Mon, 09 Nov 2026 05:39:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1794193217;
+ s=mail20150812; t=1794199166;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=5oPRWtAFAvQCyu4WnYvksLQOkjtfnG41CibWu748Gek=;
- b=HQ4EBcx1Yqx0QQtxGo1t3WXvHCJMJTAyJ8QN7qFPb9exsUw/JyoDXpxgTjCdVnKH07b0/F
- U/eOvdkknPbkUJUT2PE619Hf4lihanBfjiCMqg+7kB3UB3NDNqZkTleWhgowfrssFKUKzg
- IyEZrMyaeooS/LOnQGAUDCEWd80xWNMk0h/Ls6rlX0mCCBTxtzzt10HK819oI+QDHjiE/w
- qQlG+FDW8zMV6ejNwxuFYb5E37blg411e9PrDbGYHIRfhCs3mEw869ncOW2fgGerPdAQ6y
- kpQz0nwk+EN/iP9N00m3Hz3CxsA//H2ugmTPzmyd+vt9IaH06blocoKg+yZszQ==
-Date: Mon, 9 Nov 2026 04:00:15 +0100 (CET)
-From: timsurber@mailbox.org
-To: "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
-Cc: "jonas@kwiboo.se" <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- Quentin Schulz <u-boot@0leil.net>, Simon Glass <sjg@chromium.org>,
- Lukasz Majewski <lukma@nabladev.com>, Tom Rini <trini@konsulko.com>,
- SuperKali <hello@superkali.me>
-Message-ID: <1551247609.687446.1794193215725@app.mailbox.org>
-Subject: rockchip: rk3588: big cores left on 24 MHz oscillator, Linux boot
- takes minutes
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pVutQOLikyCUYyQZj5mnavUmohFM8R6/Y4tW9NhwHPQ=;
+ b=U5FCum7oPXRadZllg3RBJEljMozB8kpvj4DU4KeX0Nms2poNpkS8FOKryN4djZze/xDlHF
+ ERrvbRza50QQQjCgVvv9AFwwT4lJNfrh028IRvxaPzNsUn0X9dtYuUw2HhDcarZWm/Oi+Y
+ Uby7yAKOD0SigTnAomVrsaBQ5NgsqHk8x5Zpe4JsTL+6iS8sfZJ7k/IINhVwqymR2Thng7
+ AwMFSOnTDHyLIm8D7vscicqp7AfqyGjQGmN8dLh6hxbEHzoKRP4nWO/hy91wgI4rH6/9EV
+ 3FC0vcxGp1uVew47HewzI52th0FML5hTaeX44cQ8vTyMdXIquqrdU6QP+TSXlQ==
+Message-ID: <8b25a735-979e-437d-944e-9711c00f2105@mailbox.org>
+Date: Sun, 8 Nov 2026 17:24:03 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v11 02/30] dm: add helpers needed by the resynced DWC3 code
+To: Anders Roxell <anders.roxell@linaro.org>, u-boot@lists.u-boot-project.org
+Cc: trini@konsulko.com, ilias.apalodimas@linaro.org, michal.simek@amd.com,
+ lukma@nabladev.com, alchark@flipper.net, jerome.forissier@arm.com,
+ dlechner@baylibre.com, anshuld@ti.com, sjg@chromium.org,
+ Thinh.Nguyen@synopsys.com, mkorpershoek@kernel.org, love.kumar@amd.com,
+ quentin.schulz@cherry.de, s-vadapalli@ti.com,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>
+References: <20261107072224.3492260-1-anders.roxell@linaro.org>
+ <20261107072224.3492260-3-anders.roxell@linaro.org>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20261107072224.3492260-3-anders.roxell@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Priority: 3
-Importance: Normal
-X-Mailer: Open-Xchange Mailer v8.53.348
-X-Originating-Client: open-xchange-appsuite
-X-MBO-RS-META: 1o1r559kxi5c41n3p7umtztoi1tujd95
-X-MBO-RS-ID: 7d2b68c5d5bdf00fda7
-X-Mailman-Approved-At: Mon, 09 Nov 2026 04:33:56 +0000
+X-MBO-RS-ID: eb730a3f4d478b9c85c
+X-MBO-RS-META: jwfgbqy1aby6ebpa5u1x9do6bi6f77kf
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -135,68 +133,101 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-11.3 required=3.0 tests=BAYES_00,DATE_IN_PAST_12_24,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi,
+On 11/7/26 8:21 AM, Anders Roxell wrote:
 
-On RK3588 with mainline U-Boot and mainline TF-A, the big CPU clusters
-are still clocked from the 24 MHz oscillator when Linux starts. They
-stay there until the Linux cpufreq driver loads. Linux prefers the big
-cores for work, so early boot is very slow: on a FriendlyElec CM3588
-NAS it takes over 4 minutes to reach userspace.
+[...]
 
-Setup:
-  - U-Boot v2026.10, cm3588-nas-rk3588_defconfig, binman build
-  - TF-A v2.15.0, PLAT=rk3588
-  - rkbin rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.24.bin as ROCKCHIP_TPL
-  - Debian kernel 7.2.15 (cpufreq-dt is a module and loads late)
+> +static inline int dev_count_u32(const struct udevice *dev,
+> +				const char *name)
+> +{
+> +	int size;
+> +
+> +	size = dev_read_size(dev, name);
+> +	if (size < 0)
+> +		return size;
+> +
+> +	return size / sizeof(u32);
 
-When cpufreq-dt finally comes up, Linux reports the starting rates:
+What does this function do exactly ?
 
-  cpufreq: CPU0: Running at unlisted initial frequency: 900000 kHz
-  cpufreq: CPU4: Running at unlisted initial frequency: 24000 kHz
-  cpufreq: CPU6: Running at unlisted initial frequency: 24000 kHz
+This does need kerneldoc documentation.
 
-Timings from the same SD card image:
+> +}
+> +
+> +/* Linux compatibility */
+> +
+> +#define device_property_count_u32 dev_count_u32
+> +#define device_property_read_u32_array dev_read_u32_array
+> +
+> +static inline bool device_property_present(const struct udevice *dev,
+> +					   const char *propname)
+> +{
+> +	return (dev_read_size(dev, propname) > 0);
 
-                               unmodified    SCMI CPU clock raise
-  initramfs unpacked           43 s          0.6 s
-  Run /init                    56.9 s        0.9 s
-  systemd-analyze              4 min 29 s    11.1 s
+Parenthesis () around the statement are not necessary.
 
-Cause, as far as I can tell: rk3588_clk_probe() in SPL programs B0PLL
-and B1PLL to LPLL_HZ (816 MHz), but it never switches the big-core
-clock mux to them. BIGCORE0/1 CRU CLKSEL_CON(0)[7:6] stay at the reset
-value, which selects xin24m. TF-A's SCMI clock driver returns 24 MHz
-for that mux setting (clk_scmi_cpub01_get_rate(), src == 0), and it
-only changes these clocks on the first SCMI set_rate request.
+> +}
+> +
+> +static inline int device_property_count_u8(const struct udevice *dev,
+> +					   const char *propname)
+> +{
+> +	return dev_read_size(dev, propname);
+> +}
+> +
+> +static inline int device_property_read_u8_array(const struct udevice *dev,
+> +						const char *propname,
+> +						u8 *out, size_t count)
+> +{
+> +	const u8 *ptr = dev_read_u8_array_ptr(dev, propname, count);
+> +
+> +	if (!ptr)
+> +		return -EINVAL;
+> +
+> +	memcpy(out, ptr, count);
+> +
+> +	return 0;
+> +}
+> +
+>   /**
+>    * dev_for_each_subnode() - Helper function to iterate through subnodes
+>    *
+> diff --git a/include/reset.h b/include/reset.h
+> index 58574b983f66..e8358beb6ece 100644
+> --- a/include/reset.h
+> +++ b/include/reset.h
+> @@ -519,4 +519,20 @@ static inline bool reset_valid(struct reset_ctl *reset_ctl)
+>   	return !!reset_ctl->dev;
+>   }
+>   
+> +static inline int reset_control_assert(struct reset_ctl *rstc)
+> +{
+> +	if (!rstc)
+> +		return 0;
 
-Armbian has carried a workaround for every RK3588 board since U-Boot
-v2026.04 [1][2]. It raises the CPUL, CPUB01 and CPUB23 SCMI clocks to
-1008 MHz from U-Boot proper, after BL31 is running, so that BL31 does
-the PVTPLL setup. That produced the right-hand column above. I also
-tried setting the CLKSEL_CON(0) mux to B0PLL/B1PLL directly in SPL. It
-builds, but I have not tested it on hardware, and it bypasses TF-A's
-own view of the CPU clock state, so the SCMI approach looks cleaner.
+These helpers are not DM, they are reset: helpers, separate patch please.
 
-Questions:
-  1. Is the SCMI approach acceptable upstream, or would you prefer the
-     CPU clocks to be set elsewhere (SPL, or TF-A at BL31 init)?
-  2. According to the Armbian patch, the vendor U-Boot also uses
-     1008 MHz. Is that rate safe on all RK3588/RK3588S/RK3582 boards
-     at boot-time voltages?
+> +	return reset_assert(rstc);
+> +}
+> +
+> +static inline int reset_control_deassert(struct reset_ctl *rstc)
+> +{
+> +	if (!rstc)
+> +		return 0;
 
-SuperKali, you wrote the Armbian patch. Would you be willing to send
-it upstream? If not, I can prepare and test a version on the CM3588
-with your Signed-off-by kept.
+Should those helpers be checking for non-NULL rstc or should this be 
+guaranteed by the caller ?
 
-[1] https://github.com/armbian/build/pull/10125
-[2] https://github.com/armbian/build/pull/10543
+> +	return reset_deassert(rstc);
+> +}
+> +
+>   #endif
 
-Thanks,
-Tim Surber
+[...]
