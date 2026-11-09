@@ -1,140 +1,200 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D546606A338
-	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 13:28:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DA74606A323
+	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 14:03:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=HfhFF8lp;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PofUK4QJ
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=mHqWrp5l;
+	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=BzPR3Ify
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2CE3880EA0;
-	Mon,  9 Nov 2026 13:28:49 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B79E7607B3;
+	Mon,  9 Nov 2026 14:03:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id J_U_IhnLSA1Q; Mon,  9 Nov 2026 13:28:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 448FB80F31
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794230926;
-	b=oPBoP34WR93BBfpMJCiiA2iMWuv9oBQFSn7ed8RL99kY5yVeB5lc5/39lrqhTmE189ad
-	 3BgUIX35Ds0dUB/PTRx7VJoT96kug4b/n67ZzctMoUHz3x5kelgdINVd0cRce2Ekkwvg7
-	 X6IHkZ7OwMFfX6nFaO1l6AwPQSEjRM4aLNtY2WL19qE+awAfKIN2ijLM3K8WFUCdB7IUy
-	 Yau2n9tz5zMLQk1/NfLsVR9TbJH/4KRiRU/XcipSCG9PtlN/uzaf3P35LeXeKCWGsb+JD
-	 IViE6UVQkXP6PO0LjGKRrbuT+9WJZM49cJcdXLyF6dexe5qeZw4n2f5oXiUrhNE6ZDw==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id UXQrNu7dEM8t; Mon,  9 Nov 2026 14:03:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B06756072A
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794233012;
+	b=edPw4bJ6nnRKRTF4UiWdIb66+SXtU7aK3jBchrcSuxXsKplwssHfcXkguH0qoagXzx/Y
+	 dhWd7Au+3XJnlVAvO6Ta9/2xpwuRpbgopL30FTViQzZ/r2i5GLJu+0HzJ4aexIKVLpjoa
+	 tDL672qEKo+R1C2/HUdEK8liDip6e+gvcL1xBEDY114cEoWZAkip1muhXFHNTBiHP1xcX
+	 e7CeI2AKHWvJBeJ+e/p/Ye9XSJ1r6DoJxxFAAcd+Xe4z+4z//+rrn9vFbx5odNtTyX/SD
+	 ynukq66c1Lwujuq8KI0D2lvxQU2/F7WW+skH68/q7z3RT+AEzxfBExlVZeUJS63/oIw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794230926;
+	c=relaxed/relaxed; t=1794233012;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Content-Transfer-Encoding:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=h9OJKY3D4aWxFVn6z/YichyTpiAeuJzstWi35EUSzZk=;
-	b=UyxRVh9gEL7369sddeHhG/3wotB7sdgFUERmHO5GEON9RPPPImT7P6JkH5A+yhl4wdlP
-	 LRD7sH9zfIlGLsb0EMJOu1+qZ98Xcl92EQ0dU4q7qOdl6SMEHyTn8mjGCdh/efcJ30Y7+
-	 4ut94uIZUV0qVnnfAGl3RVel0YyPYIFlIE5EFs/m2lLhfrOJkZMwVir+Xicv2OcbEFKoY
-	 Eq5OSzWKVbNx+l5Km78lOc+xliFE6wiz4AbyoGMp0Ng4huTGw2ev6CMPZb/sJ9w7vCuWb
-	 1qbImzB7Xgem8B+M3XwFI6qE410/OvKztABqRzOo9H7Y2QBa7Tk3RXm6wTKtCxUDpnQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=B89yc++K8MxcpkmqxhmoAKIYz+RG82viJG4vUnFvDyE=;
+	b=YSKDa+GH0kydvUm+/F8ePdjRR0wVmtX4OAuNmmyMEJrgatHEDTqitWrG35kZmJysq1JY
+	 e5F+BCpLvB8y40fcMbFdWsCaPlEO02Jo9g1cqadu8VHv48KHVg15mRP60dNBOtXmYclK3
+	 x0pDpl9TZzwuMaPLO2kucT/7rMUibFiOURV4uMgGv9vFjwo7LnSbfM0D1mFjgJqays6o1
+	 w5nyvTzj4KAQ2NU4+y8Tcpwf3WLQ6u5aa1rbH+SdOw95t9OTnXUSu3Fo3vik/AruEeiav
+	 1uj87vfkZM/fImbxVWdA+JWbazR4Xmtkd5CDZEwsniJfO+L0gH8KI7+JhRIDdo+Ll4A==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794230926;
-	bh=h9OJKY3D4aWxFVn6z/YichyTpiAeuJzstWi35EUSzZk=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794233012;
+	bh=B89yc++K8MxcpkmqxhmoAKIYz+RG82viJG4vUnFvDyE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=HfhFF8lpMCiXhR0RSC7tnGPY0fhxU+hJXtwz0kMXPgKmBrjq0HWGW8ROW5YePP8+p
-	 2UKsQg4Bs5miht7cFV1+EGB9i32Lvqt4BCRCOFNfIeVA9a2FlV2Ho1+PJAJCy3V7Wu
-	 2bOA5t0XXp3NIHDe/ro7VhwmetGKujEA6t+EHnztukUfSmEjtPnYopMczKSXKIcsO+
-	 GVOyBNrPkTxjLJhWLk8RYwobh7FlMBDgokDrdM7AxB1tWujNDGRZTotQ5nCjvVMRiQ
-	 w3wzzb3Al3Uu56kBN6G7dvAaCmhlRkQ1Hf1aY9bNpTAHwV1BYI5lg+qwBXTEdHRwyn
-	 TD1aDkqDzX6yQ==
+	 From;
+	b=mHqWrp5lUaU+Px3agLdzk5b6FfQa71wKjFMl2+a7pml/eQ2NeBw87hw6UIF1TIOgu
+	 9h1ATK/d1psKnQN5FhCiYBjpEC6+n86YvdgcT9zIfBgqVixhNKWL3n9df9Ub1Wisct
+	 yQGQi9EcjoopZ21kS2BIRzgNY7Mr+PAcS56iw1FgUjMlhwNyR684wg1tMMVcvafgiq
+	 s9S5TH5zeDJzKKU/9ni0/k/pOtm7FrfBHQoCIXR1GCC4MgTaAkwnDAe54oVjYKEsgm
+	 Z9eDefoI4lh6Qa4a9x/f7i+/xqtBlWG3BS3OiWS61kmJpOfnxi1MyFFfEzEhKCiWEi
+	 /hC9iKoJ/VasA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 448FB80F31;
-	Mon,  9 Nov 2026 13:28:46 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 4634C9D1
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 09:40:04 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B06756072A;
+	Mon,  9 Nov 2026 14:03:32 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id B5FBA2AC
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 14:03:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 37A254065D
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 09:40:04 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id A2F8140709
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 14:03:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id HpF4RCoIia5r for <u-boot@lists.u-boot-project.org>;
- Mon,  9 Nov 2026 09:40:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 131D44065C
+ id 3wu3SXDXnqyd for <u-boot@lists.u-boot-project.org>;
+ Mon,  9 Nov 2026 14:03:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E09D040631
 Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=172.105.4.254
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
- helo=tor.source.kernel.org;
- envelope-from=devnull+takahiro.kuwano.infineon.com@kernel.org;
- receiver=<UNKNOWN> 
+ smtp.remote-ip="2a01:111:f403:c207::3"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c207::3;
+ helo=mrwpr03cu001.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
- header.s=k20260515 header.b=PofUK4QJ
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 131D44065C
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 09:40:00 +0000 (UTC)
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id A91B86300B;
- Mon,  9 Nov 2026 09:39:59 +0000 (UTC)
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
- (No client certificate requested)
- by smtp.kernel.org (Postfix) with ESMTPS id 5F4761F008A3;
- Mon,  9 Nov 2026 09:39:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1794217199;
- bh=h9OJKY3D4aWxFVn6z/YichyTpiAeuJzstWi35EUSzZk=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
- b=PofUK4QJzl6YHG+ATjiYmRWbuLbr0XlcjdGNeXsILRYI0iogZI8CHVfEAY6yKXM+4
- r4RjgXBDVTj/oNqmA7LnfG0jqzolmsPliZveuL4r4VY1eqMhKwIPj7f682fv5Fy24Z
- mvCApre6ycpuAHsFEd7kakjyorTjucPNrUa+2+w8mk3srT3iNN7QscvLfkBm4puBw9
- nDIPSaWqQvKaAkQygH1qBdsDIwYkTolKRtfRmKbqDmreh1z+wFZM9I85a8ci70lF0t
- a9JOcj05DgxjfIhU1g8qZHS5cl9oJNAQVQxn4edsDt89pBfmo9B4LFq5x/xkpmBWcJ
- oFUHyTIS8TVQA==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
- by lkml.kernel.org (Postfix) with ESMTP id C87F4483A9;
- Mon,  9 Nov 2026 09:39:53 +0000 (UTC)
-From: Takahiro Kuwano via B4 Relay
- <devnull+takahiro.kuwano.infineon.com@kernel.org>
-Date: Mon, 09 Nov 2026 18:39:41 +0900
-Subject: [PATCH v4 1/5] mtd: spi-nor: move SFDP logic out of the core
+ header.from=cherry.de
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=BzPR3Ify
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E09D040631
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 14:03:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=B89yc++K8MxcpkmqxhmoAKIYz+RG82viJG4vUnFvDyE=;
+ b=BzPR3Ifyml8s0qayZ8VQjKhbxoP2CuW9fS8/QTsV7+kyZCVHRmINo12qf+/nh8iwYFIiNdw7hh8J48zm7+GDM0Ri13/h2rbGUkBoJ/HV+P4jPpkHRCtB6xThsu/qVaiUotmlErz/9G4PCwn9X9lCGhNUB6XfxFIzk8Hc1fxDgSU=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by AS8PR04MB8580.eurprd04.prod.outlook.com (2603:10a6:20b:427::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Mon, 9 Nov
+ 2026 14:03:23 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0592.010; Mon, 9 Nov 2026
+ 14:03:23 +0000
+Message-ID: <da653d41-6c49-46ff-99df-91df27e45815@cherry.de>
+Date: Mon, 9 Nov 2026 15:03:22 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v11 00/30] usb: dwc3: part 2, make the resynced code work
+To: Anders Roxell <anders.roxell@linaro.org>, u-boot@lists.u-boot-project.org
+Cc: marek.vasut@mailbox.org, trini@konsulko.com, ilias.apalodimas@linaro.org, 
+ michal.simek@amd.com, lukma@nabladev.com, alchark@flipper.net,
+ jerome.forissier@arm.com, dlechner@baylibre.com, anshuld@ti.com,
+ sjg@chromium.org, Thinh.Nguyen@synopsys.com, mkorpershoek@kernel.org,
+ love.kumar@amd.com, s-vadapalli@ti.com, Jonas Karlman <jonas@kwiboo.se>
+References: <20261107072224.3492260-1-anders.roxell@linaro.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20261107072224.3492260-1-anders.roxell@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VIYP296CA0007.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:29d::12) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261109-split-sfdp-id-v3-v4-1-7270c9d82fd3@infineon.com>
-References: <20261109-split-sfdp-id-v3-v4-0-7270c9d82fd3@infineon.com>
-In-Reply-To: <20261109-split-sfdp-id-v3-v4-0-7270c9d82fd3@infineon.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Vignesh R <vigneshr@ti.com>, 
- Raymond Mao <raymond.mao@riscstar.com>, Vincent Jardin <vjardin@free.fr>, 
- Fabio Estevam <festevam@nabladev.com>, Eugen Hristev <ehristev@kernel.org>, 
- Bastien Curutchet <bastien.curutchet@bootlin.com>, 
- Takahiro Kuwano <takahiro.kuwano@infineon.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794217192; l=61184;
- i=takahiro.kuwano@infineon.com; s=20261016-2; h=from:subject:message-id;
- bh=t9hbPgJ33gesilE+gVMEEm9Amp82CfFDvgWbRecu42A=;
- b=WQ8T7eNK9QVGCQxy0GZUeU8XcR5GKYlXKUbz+euuM23BGroPObDer6cv/Lk1C5NHjlIPylJnI
- NUyQHeXxOdCCNsE+HZhPOLfh46thggqUTJ4UFXzvL30kaPbbK9VuPej
-X-Developer-Key: i=takahiro.kuwano@infineon.com; a=ed25519;
- pk=pp4mpJAHIqhV2MvdSGbIzKRk3ujhk+tSlGjyTursr4E=
-X-Endpoint-Received: by B4 Relay for
- takahiro.kuwano@infineon.com/20261016-2 with auth_id=1202
-X-Original-From: Takahiro Kuwano <takahiro.kuwano@infineon.com>
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Mon, 09 Nov 2026 13:28:36 +0000
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|AS8PR04MB8580:EE_
+X-MS-Office365-Filtering-Correlation-Id: 186f0ead-3bea-4c72-13d8-08df3e6a37e4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|23010399003|366016|376014|7416014|261022105027099003|56012099006|261009223027099003|11063799006|261026121527099003|261021123027099003|261026140227099003|261028144727099003|261022113327099003|18002099003|22082099003|10067099003;
+X-Microsoft-Antispam-Message-Info: 7Mu+HOJ/eAbNaXkSoqE4xG2BGRAm92o5rw6zyWW7QdDkiBQk8ef34+9tEskqQ97ly7ApcooGYoozwUXp6cRp5XV+YaIW1b2NC52dGzD+O4S/rZxTGygCazgTBfDu0B8xTCK9v8bDv+6P2uLD4qvsibHW0NBjHMRtECTwCPjlq+PICjKM7wiv5T6IM/JVtsC+zqOq7hD574EQN9F8u28lnq9E2117tuv5LdU56bIx2nkH6H7dc4/MpSBKx0DJLk06z5eQk6GILb7aF7p14pTJqRoQVi0893tNoz67DH8onogSoaGgaSy9jzB7KdojG/Cs7HvFZUiMr0gclSaGjxnZWP8cpwlHWtpodXCJ/sk/MKA8/xCU0r9H6+fuR02/WBrff3vWRUFY+Zja7QjTPYpwrQm/QEQqPBiGzo7H0T3c3qcQx07j4j9rUYsgvsX0S0ylhibPuahcXr3x78/VZJcuL8B8c2uqn6Mc/NvZ2T02FSQcVpTM2t3Ge+h1bTDGNSt1mz0cJ0gAfpQqmhQ301J2TfD+DQN2pIedfhGuDljT4aYU+t5wFkxQhISXswK+UK3+madHFgQ1A8/w4KEFgf3MXG2qc5k6ajNQLCQF03wvzraqrJ/SHDpOObA2ZRUZvwnc8s/7bCfIEcoEVhp8gjmKTByQh75/gWMWxiOfksRurGY=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(23010399003)(366016)(376014)(7416014)(261022105027099003)(56012099006)(261009223027099003)(11063799006)(261026121527099003)(261021123027099003)(261026140227099003)(261028144727099003)(261022113327099003)(18002099003)(22082099003)(10067099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?THFYZDhyaXlTS3hOS3lOZUxjUGdPdG5HSWFOdmgyTmNHSXNMWGh6bVRmV1Qv?=
+ =?utf-8?B?Uk5ZSEk0cGVHaDNxMmI5YXlPTUdGYjZORVhMeEJWTkNybHNhRkJLUy83NXdY?=
+ =?utf-8?B?YVAwaHVjNWhsZkpsSlFvTlpjNFRZMWpNeVc1NE1zWW1OTkpvQkI0eGRuVTJN?=
+ =?utf-8?B?a3kwS29vTXhWdmZaczd2dExQeHFXcU5TaDFZdTdTMUIvdmZHaG1vODZRaGJr?=
+ =?utf-8?B?RGtabklwZm00ZzBPQVlXODV4OHo0b0RzMkxWRVE0RkFjT1ErOVowS0RLTS9o?=
+ =?utf-8?B?VmhWeHBIcmJUYS9CUmxneEx3L3dIWWx6UStlNElYUW1XSWVNVDNxRUxpcjFW?=
+ =?utf-8?B?NHN0R2JGL0FidUJnRnN5ZUZrZGFtSHkzTmpQYkNzd0hqd0d1LzlnM1ZnMVZh?=
+ =?utf-8?B?ckg0QnR3NDczUHhlbk1yOHEvZzhYUDg5d2pqc2hRbmxCQ1hBeTllR1ZZN212?=
+ =?utf-8?B?eWl6c1Y3cit5ZHJNdVFhSll2UDhTdE9hTXBnd3VmaWpnanp6RjN3dzkwZHBx?=
+ =?utf-8?B?TmNCSndJVWh4SEowL1I3QkltZ1hkMVllY1RJYjgyNjR3aHE2NGRzQlBSS0Ny?=
+ =?utf-8?B?NFFSNmVzQzB2NnZWSE0xQzR3M1hBUjdpVjZKb2VLYVNrenhwMGxCNWhxOHh5?=
+ =?utf-8?B?bUdkazZHRUtubTl2R01aVUpnSzZsbnlrRlQ3ZzdCdU5zQS9VOVBEVUZ0YndL?=
+ =?utf-8?B?OW4zSlFzZGxsU2IxL0JRTUYrd0ZJUTBoKzZrZFQ4R2tLL29QWnpVcTZnOTRw?=
+ =?utf-8?B?OGdmTENiaE8xNHllKzdDS1NkUWlidjFpN3Z5eEhEZTI0VG9UamhMbEN3OHRr?=
+ =?utf-8?B?RmdYY2tZcGRXVlBuSG1tTkwrM1F4Z1Zjd2k1YXNGUmNza0kyUU1oVDlHeVFK?=
+ =?utf-8?B?SkJFK1h6dkxiVHFLN1N0YU5UdWIvMVdSQUhJS2pDYzI5RHlmWFZkajNkNnZO?=
+ =?utf-8?B?MFBwRG1RRWE2TExqTlRVODhwMkhydC8wSyt3emM5YVkzb2lvVnFZM0Q2TVU2?=
+ =?utf-8?B?L3Fqb0dKV05CYVpRZXBIaGZlUUJocTBlSDRWdjJ3YklMUUhWM3pTTXNMTHhK?=
+ =?utf-8?B?U1h0eHVnRy90VncyMDJsWWlZM2hLemtZMUhQS3RMKzBFWTF0MzZIeVhacGZU?=
+ =?utf-8?B?eDRFYjNKS0Q2NEE4TGlQdC9ZWFVXS29TSW1OR29xd0YydWMydWp6cmx4OUl6?=
+ =?utf-8?B?TlVqLzBmR1B1S2xYd1lXc1MzNkFBdm1PV3c2eW5ZSlZUWEtUaUN0U01mNHZC?=
+ =?utf-8?B?Nmdvbkx0RVJXQjdYcHhQdG1HQWVQZGhiRWRTM3hCTUc4WDgxTG05S3RENHBX?=
+ =?utf-8?B?eWN3VXUxOFBtNVQ1V01pTXdHZURkWVpDa2dPL2s2WGRDNjU2SERHNlV6TWZ0?=
+ =?utf-8?B?TWdnaUN3Sytpamwvb1FlNFIxMkUyNjFaSnVsbXBMckZFL2tPMjV0MzBUUGNh?=
+ =?utf-8?B?emdObDZDZWkzR0lNeDB4VDhwUWpUMDhwSStjMXFHMTFGYzl2ZXl5dzJVYXdP?=
+ =?utf-8?B?MHc4M2Z0MExZQlozRFFJRngyRDAySmdCdkQ0YzlMb0EzNkFUVGwxUW83Vnk5?=
+ =?utf-8?B?NkxRNksybmpObWlBa0ZJdk11Y09lNXZnRWcrTURkMlhacjJoU2hQb3NrL2Jk?=
+ =?utf-8?B?WVlzL2ErU1pBc3lzbGlCSXJLaU9pQ3NoT2wvMzVyNzFiY1NGVHV6SENNaTBH?=
+ =?utf-8?B?bVVYbit4K2lSbFBwU2RFVHYyVUc4dXUwV3I5VStjZ0ZuVklmdTRzRTY1enJJ?=
+ =?utf-8?B?QnJGMC9CZWZnZE9tZktlODJBbjdPN1Y5N0JzZ3psRzR1STU0T1BKOEp3T1F3?=
+ =?utf-8?B?YjIxOWpneGtaN3ZsZ3BtV3FINERNSlUyRmtiYXVPblpmYkhJYUVvUzNReDVM?=
+ =?utf-8?B?cW1xWUlEYzI1L2Z0Y21qY3FyRFFRcUV4RFJnTXI0bGdRa1dWMXhVemdzUkNX?=
+ =?utf-8?B?eTNtRWx6QTc2T0Z5amxhbngzeGVseFlSRG1ZRURDK1pGR3VQb1hEM0YzZlIr?=
+ =?utf-8?B?STlDam9scHFLQXcxKzM5VVdsbVdWRWxiQUJDVU4yME9ZbnRKS0lTc3BTeU4x?=
+ =?utf-8?B?U21CazNwcCsvUjg2RW5BdlJGdDU1RytDcHpLRDF5a096UEpWWkUvNzF1dnFt?=
+ =?utf-8?B?SENPREQwbFk1TmNiSVptaXdFazVkMFQ1Z3JWV1M1UnZ4bFNwRklOaTYyMXRM?=
+ =?utf-8?B?empjTGN0Y1lpZ3cvTDRVL01kSkhkY3lsRDFDTVVMb0JHbnlvVnNhUk8xUTN2?=
+ =?utf-8?B?RUhuWUJvUU15QitJMzAvZGtCcER1VDNKbm5tSkp2NTZ2R0Q4NEpsQTkrWFFl?=
+ =?utf-8?B?anFqR1grcmhiZ1BJSVdIc1BpVDg5Tlp1OFdVMVhQbUp0MTU5NEtOZz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 186f0ead-3bea-4c72-13d8-08df3e6a37e4
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2026 14:03:23.6458 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /4yZ1BeTwJ8oNMn2E19afQMkAERwEBb17mpVpgcn0uH7c5yCtB7VpqXF4QtA941rmT+Wk6+1I6WgnBpWflRtsJMGrWTDuUOLy1+wAD+GIWU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8580
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -144,1925 +204,264 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-Reply-To: takahiro.kuwano@infineon.com
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Takahiro Kuwano <takahiro.kuwano@infineon.com>
+Hi Anders,
 
-Move SFDP parsing functions and definitions to newly introduced
-sfdp.c/sfdp.h. The new module (sfdp.c) is compiled along with
-spi-nor-core depending on SPI_FLASH_SFDP_SUPPORT configuration option.
+On 11/7/26 8:21 AM, Anders Roxell wrote:
+[...]
+> Tested on hardware with v11:
+[...]
+> - Rockchip: host on RK3399 Puma and RK3588 Tiger (Quentin). The two
+>    Tiger regressions from v10 are gone, and he sent a Tested-by:
+> 
+>    Tested-by: Quentin Schulz <quentin.schulz@cherry.de> # RK3399 Puma usbdrd_dwc3_1
+>    Tested-by: Quentin Schulz <quentin.schulz@cherry.de> # RK3588 Tiger usb_host1_xhci + usb_host2_xhci
 
-The quad_enable hooks and some helper functions are exposed from core
-and some need to be guarded by CONFIG_SPI_FLASH_TINY to avoid name
-conflict with local functions in tiny.
+As promised, I gave DWC3 on my Pine64 Quartz64 Model A a try but 
+couldn't make the single USB3 port work in U-Boot from main at 
+ab4dc5aacf95 ("Merge patch series "Misc Fixes for VGA BIOS Emulation"") 
+or from v11 at 6030c4d33099 ("usb: dwc3: enable SUSPHY again after xhci 
+is registered"). It works in Linux though. Maybe I'm holding it wrong, 
+who knows, first time booting the board on my side. I've asked Jonas on 
+IRC if he had USB3 work at some point since he's the one who added its 
+support in U-Boot.
 
-Tested-by: Bastien Curutchet <bastien.curutchet@bootlin.com> # mx25uw51245g
-Signed-off-by: Takahiro Kuwano <takahiro.kuwano@infineon.com>
----
- drivers/mtd/spi/Makefile       |   1 +
- drivers/mtd/spi/sf_internal.h  |  50 +++
- drivers/mtd/spi/sfdp.c         | 711 +++++++++++++++++++++++++++++++++
- drivers/mtd/spi/sfdp.h         | 152 +++++++
- drivers/mtd/spi/spi-nor-core.c | 879 +----------------------------------------
- 5 files changed, 919 insertions(+), 874 deletions(-)
+One try:
+=> usb reset && usb tree && random $loadaddr 0x8000  && mw.q 
+$kernel_addr_r 0xffffffffffffffff 0x1000 && usb dev 0 && usb write 
+$loadaddr 0 0x40 && usb read $kernel_addr_r 0 0x40 && cmp.q $loadaddr 
+$kernel_addr_r 0x1000
+resetting USB...
+USB XHCI 1.10
+USB XHCI 1.10
+USB EHCI 1.00
+USB OHCI 1.0
+USB EHCI 1.00
+USB OHCI 1.0
+cannot reset port 2!?
+ERROR:  USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+ERROR: USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+ERROR:  USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+ERROR: USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+ERROR:  USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+ERROR: USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+unable to get device descriptor (error=-1)
+Bus usb@fcc00000: 1 USB Device(s) found
+Bus usb@fd000000: 1 USB Device(s) found
+Bus usb@fd800000: 1 USB Device(s) found
+Bus usb@fd840000: 1 USB Device(s) found
+Bus usb@fd880000: 1 USB Device(s) found
+Bus usb@fd8c0000: 1 USB Device(s) found
+        scanning usb for storage devices... 0 Storage Device(s) found
+USB device tree:
+   1  Hub (5 Gb/s, 0mA)
+      U-Boot XHCI Host Controller
 
-diff --git a/drivers/mtd/spi/Makefile b/drivers/mtd/spi/Makefile
-index 9a96be11e6d..1828e5fadfe 100644
---- a/drivers/mtd/spi/Makefile
-+++ b/drivers/mtd/spi/Makefile
-@@ -14,6 +14,7 @@ ifeq ($(CONFIG_$(PHASE_)SPI_FLASH_TINY),y)
- spi-nor-y += spi-nor-tiny.o
- else
- spi-nor-y += spi-nor-core.o
-+spi-nor-$(CONFIG_SPI_FLASH_SFDP_SUPPORT) += sfdp.o
- endif
- 
- obj-$(CONFIG_SPI_FLASH) += spi-nor.o
-diff --git a/drivers/mtd/spi/sf_internal.h b/drivers/mtd/spi/sf_internal.h
-index 8d2249ce354..576617beb70 100644
---- a/drivers/mtd/spi/sf_internal.h
-+++ b/drivers/mtd/spi/sf_internal.h
-@@ -13,9 +13,35 @@
- #include <linux/types.h>
- #include <linux/compiler.h>
- 
-+#include "sfdp.h"
-+
- #define SPI_NOR_MAX_ID_LEN	6
- #define SPI_NOR_MAX_ADDR_WIDTH	4
- 
-+/**
-+ * struct spi_nor_fixups - SPI NOR fixup hooks
-+ * @post_bfpt: called after the BFPT table has been parsed
-+ * @post_sfdp: called after SFDP has been parsed. Typically used to tweak
-+ *             various parameters that could not be extracted by other means
-+ *             (i.e. when information provided by the SFDP tables are incomplete
-+ *             or wrong).
-+ * @late_init: used to initialize flash parameters that are not declared in the
-+ *             JESD216 SFDP standard, or where SFDP tables not defined at all.
-+ *
-+ * Those hooks can be used to tweak the SPI NOR configuration when the SFDP
-+ * table is broken or not available.
-+ */
-+struct spi_nor_fixups {
-+	int (*post_bfpt)(struct spi_nor *nor,
-+			 const struct sfdp_parameter_header *bfpt_header,
-+			 const struct sfdp_bfpt *bfpt,
-+			 struct spi_nor_flash_parameter *params);
-+	void (*post_sfdp)(struct spi_nor *nor,
-+			  struct spi_nor_flash_parameter *params);
-+	void (*late_init)(struct spi_nor *nor,
-+			  struct spi_nor_flash_parameter *params);
-+};
-+
- struct flash_info {
- #if !CONFIG_IS_ENABLED(SPI_FLASH_TINY)
- 	char		*name;
-@@ -93,4 +119,28 @@ static inline void spi_flash_mtd_unregister(struct spi_flash *flash)
- }
- #endif
- 
-+#if CONFIG_IS_ENABLED(SPI_FLASH_SFDP_SUPPORT)
-+int spi_nor_parse_sfdp(struct spi_nor *nor,
-+		       struct spi_nor_flash_parameter *params);
-+#else
-+static inline int spi_nor_parse_sfdp(struct spi_nor *nor,
-+				     struct spi_nor_flash_parameter *params)
-+{
-+	return -EINVAL;
-+}
-+#endif
-+
-+#if !CONFIG_IS_ENABLED(SPI_FLASH_TINY)
-+void spi_nor_set_read_settings(struct spi_nor_read_command *read,
-+			       u8 num_mode_clocks,
-+			       u8 num_wait_states,
-+			       u8 opcode,
-+			       enum spi_nor_protocol proto);
-+int spansion_read_cr_quad_enable(struct spi_nor *nor);
-+int macronix_quad_enable(struct spi_nor *nor);
-+#endif
-+
-+int spi_nor_hwcaps_read2cmd(u32 hwcaps);
-+int spansion_no_read_cr_quad_enable(struct spi_nor *nor);
-+
- #endif /* _SF_INTERNAL_H_ */
-diff --git a/drivers/mtd/spi/sfdp.c b/drivers/mtd/spi/sfdp.c
-new file mode 100644
-index 00000000000..fd545796d50
---- /dev/null
-+++ b/drivers/mtd/spi/sfdp.c
-@@ -0,0 +1,711 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2005, Intec Automation Inc.
-+ * Copyright (C) 2014, Freescale Semiconductor, Inc.
-+ */
-+
-+#include <stddef.h>
-+#include <string.h>
-+#include <dm/device_compat.h>
-+#include <dm/devres.h>
-+#include <linux/errno.h>
-+#include <linux/sizes.h>
-+#include <linux/bitfield.h>
-+#include <linux/mtd/spi-nor.h>
-+#include <spi.h>
-+
-+#include "sf_internal.h"
-+
-+/*
-+ * Serial Flash Discoverable Parameters (SFDP) parsing.
-+ */
-+
-+/**
-+ * spi_nor_read_sfdp() - read Serial Flash Discoverable Parameters.
-+ * @nor:	pointer to a 'struct spi_nor'
-+ * @addr:	offset in the SFDP area to start reading data from
-+ * @len:	number of bytes to read
-+ * @buf:	buffer where the SFDP data are copied into (dma-safe memory)
-+ *
-+ * Whatever the actual numbers of bytes for address and dummy cycles are
-+ * for (Fast) Read commands, the Read SFDP (5Ah) instruction is always
-+ * followed by a 3-byte address and 8 dummy clock cycles.
-+ *
-+ * Return: 0 on success, -errno otherwise.
-+ */
-+static int spi_nor_read_sfdp(struct spi_nor *nor, u32 addr,
-+			     size_t len, void *buf)
-+{
-+	u8 addr_width, read_opcode, read_dummy;
-+	int ret;
-+
-+	read_opcode = nor->read_opcode;
-+	addr_width = nor->addr_width;
-+	read_dummy = nor->read_dummy;
-+
-+	nor->read_opcode = SPINOR_OP_RDSFDP;
-+	nor->addr_width = 3;
-+	nor->read_dummy = 8;
-+
-+	while (len) {
-+		/* Both chips are identical, so should be the SFDP data */
-+		if (nor->flags & SNOR_F_HAS_PARALLEL)
-+			nor->spi->flags |= SPI_XFER_LOWER;
-+
-+		ret = nor->read(nor, addr, len, (u8 *)buf);
-+		if (!ret || ret > len) {
-+			ret = -EIO;
-+			goto read_err;
-+		}
-+		if (ret < 0)
-+			goto read_err;
-+
-+		buf += ret;
-+		addr += ret;
-+		len -= ret;
-+	}
-+	ret = 0;
-+
-+read_err:
-+	nor->read_opcode = read_opcode;
-+	nor->addr_width = addr_width;
-+	nor->read_dummy = read_dummy;
-+
-+	return ret;
-+}
-+
-+/**
-+ * spi_nor_read_sfdp_dma_unsafe() - read Serial Flash Discoverable Parameters.
-+ * @nor:	pointer to a 'struct spi_nor'
-+ * @addr:	offset in the SFDP area to start reading data from
-+ * @len:	number of bytes to read
-+ * @buf:	buffer where the SFDP data are copied into
-+ *
-+ * Wrap spi_nor_read_sfdp() using a kmalloc'ed bounce buffer as @buf is now not
-+ * guaranteed to be dma-safe.
-+ *
-+ * Return: -ENOMEM if kmalloc() fails, the return code of spi_nor_read_sfdp()
-+ *          otherwise.
-+ */
-+static int spi_nor_read_sfdp_dma_unsafe(struct spi_nor *nor, u32 addr,
-+					size_t len, void *buf)
-+{
-+	void *dma_safe_buf;
-+	int ret;
-+
-+	dma_safe_buf = kmalloc(len, GFP_KERNEL);
-+	if (!dma_safe_buf)
-+		return -ENOMEM;
-+
-+	ret = spi_nor_read_sfdp(nor, addr, len, dma_safe_buf);
-+	memcpy(buf, dma_safe_buf, len);
-+	kfree(dma_safe_buf);
-+
-+	return ret;
-+}
-+
-+/* Fast Read settings. */
-+
-+static void
-+spi_nor_set_read_settings_from_bfpt(struct spi_nor_read_command *read,
-+				    u16 half,
-+				    enum spi_nor_protocol proto)
-+{
-+	read->num_mode_clocks = (half >> 5) & 0x07;
-+	read->num_wait_states = (half >> 0) & 0x1f;
-+	read->opcode = (half >> 8) & 0xff;
-+	read->proto = proto;
-+}
-+
-+struct sfdp_bfpt_read {
-+	/* The Fast Read x-y-z hardware capability in params->hwcaps.mask. */
-+	u32			hwcaps;
-+
-+	/*
-+	 * The <supported_bit> bit in <supported_dword> BFPT DWORD tells us
-+	 * whether the Fast Read x-y-z command is supported.
-+	 */
-+	u32			supported_dword;
-+	u32			supported_bit;
-+
-+	/*
-+	 * The half-word at offset <setting_shift> in <setting_dword> BFPT DWORD
-+	 * encodes the op code, the number of mode clocks and the number of wait
-+	 * states to be used by Fast Read x-y-z command.
-+	 */
-+	u32			settings_dword;
-+	u32			settings_shift;
-+
-+	/* The SPI protocol for this Fast Read x-y-z command. */
-+	enum spi_nor_protocol	proto;
-+};
-+
-+static const struct sfdp_bfpt_read sfdp_bfpt_reads[] = {
-+	/* Fast Read 1-1-2 */
-+	{
-+		SNOR_HWCAPS_READ_1_1_2,
-+		BFPT_DWORD(1), BIT(16),	/* Supported bit */
-+		BFPT_DWORD(4), 0,	/* Settings */
-+		SNOR_PROTO_1_1_2,
-+	},
-+
-+	/* Fast Read 1-2-2 */
-+	{
-+		SNOR_HWCAPS_READ_1_2_2,
-+		BFPT_DWORD(1), BIT(20),	/* Supported bit */
-+		BFPT_DWORD(4), 16,	/* Settings */
-+		SNOR_PROTO_1_2_2,
-+	},
-+
-+	/* Fast Read 2-2-2 */
-+	{
-+		SNOR_HWCAPS_READ_2_2_2,
-+		BFPT_DWORD(5),  BIT(0),	/* Supported bit */
-+		BFPT_DWORD(6), 16,	/* Settings */
-+		SNOR_PROTO_2_2_2,
-+	},
-+
-+	/* Fast Read 1-1-4 */
-+	{
-+		SNOR_HWCAPS_READ_1_1_4,
-+		BFPT_DWORD(1), BIT(22),	/* Supported bit */
-+		BFPT_DWORD(3), 16,	/* Settings */
-+		SNOR_PROTO_1_1_4,
-+	},
-+
-+	/* Fast Read 1-4-4 */
-+	{
-+		SNOR_HWCAPS_READ_1_4_4,
-+		BFPT_DWORD(1), BIT(21),	/* Supported bit */
-+		BFPT_DWORD(3), 0,	/* Settings */
-+		SNOR_PROTO_1_4_4,
-+	},
-+
-+	/* Fast Read 4-4-4 */
-+	{
-+		SNOR_HWCAPS_READ_4_4_4,
-+		BFPT_DWORD(5), BIT(4),	/* Supported bit */
-+		BFPT_DWORD(7), 16,	/* Settings */
-+		SNOR_PROTO_4_4_4,
-+	},
-+};
-+
-+struct sfdp_bfpt_erase {
-+	/*
-+	 * The half-word at offset <shift> in DWORD <dwoard> encodes the
-+	 * op code and erase sector size to be used by Sector Erase commands.
-+	 */
-+	u32			dword;
-+	u32			shift;
-+};
-+
-+static const struct sfdp_bfpt_erase sfdp_bfpt_erases[] = {
-+	/* Erase Type 1 in DWORD8 bits[15:0] */
-+	{BFPT_DWORD(8), 0},
-+
-+	/* Erase Type 2 in DWORD8 bits[31:16] */
-+	{BFPT_DWORD(8), 16},
-+
-+	/* Erase Type 3 in DWORD9 bits[15:0] */
-+	{BFPT_DWORD(9), 0},
-+
-+	/* Erase Type 4 in DWORD9 bits[31:16] */
-+	{BFPT_DWORD(9), 16},
-+};
-+
-+static int
-+spi_nor_post_bfpt_fixups(struct spi_nor *nor,
-+			 const struct sfdp_parameter_header *bfpt_header,
-+			 const struct sfdp_bfpt *bfpt,
-+			 struct spi_nor_flash_parameter *params)
-+{
-+	if (nor->fixups && nor->fixups->post_bfpt)
-+		return nor->fixups->post_bfpt(nor, bfpt_header, bfpt, params);
-+
-+	return 0;
-+}
-+
-+/**
-+ * spi_nor_parse_bfpt() - read and parse the Basic Flash Parameter Table.
-+ * @nor:		pointer to a 'struct spi_nor'
-+ * @bfpt_header:	pointer to the 'struct sfdp_parameter_header' describing
-+ *			the Basic Flash Parameter Table length and version
-+ * @params:		pointer to the 'struct spi_nor_flash_parameter' to be
-+ *			filled
-+ *
-+ * The Basic Flash Parameter Table is the main and only mandatory table as
-+ * defined by the SFDP (JESD216) specification.
-+ * It provides us with the total size (memory density) of the data array and
-+ * the number of address bytes for Fast Read, Page Program and Sector Erase
-+ * commands.
-+ * For Fast READ commands, it also gives the number of mode clock cycles and
-+ * wait states (regrouped in the number of dummy clock cycles) for each
-+ * supported instruction op code.
-+ * For Page Program, the page size is now available since JESD216 rev A, however
-+ * the supported instruction op codes are still not provided.
-+ * For Sector Erase commands, this table stores the supported instruction op
-+ * codes and the associated sector sizes.
-+ * Finally, the Quad Enable Requirements (QER) are also available since JESD216
-+ * rev A. The QER bits encode the manufacturer dependent procedure to be
-+ * executed to set the Quad Enable (QE) bit in some internal register of the
-+ * Quad SPI memory. Indeed the QE bit, when it exists, must be set before
-+ * sending any Quad SPI command to the memory. Actually, setting the QE bit
-+ * tells the memory to reassign its WP# and HOLD#/RESET# pins to functions IO2
-+ * and IO3 hence enabling 4 (Quad) I/O lines.
-+ *
-+ * Return: 0 on success, -errno otherwise.
-+ */
-+static int spi_nor_parse_bfpt(struct spi_nor *nor,
-+			      const struct sfdp_parameter_header *bfpt_header,
-+			      struct spi_nor_flash_parameter *params)
-+{
-+	struct mtd_info *mtd = &nor->mtd;
-+	struct sfdp_bfpt bfpt;
-+	size_t len;
-+	int i, cmd, err;
-+	u32 addr;
-+	u16 half;
-+
-+	/* JESD216 Basic Flash Parameter Table length is at least 9 DWORDs. */
-+	if (bfpt_header->length < BFPT_DWORD_MAX_JESD216)
-+		return -EINVAL;
-+
-+	/* Read the Basic Flash Parameter Table. */
-+	len = min_t(size_t, sizeof(bfpt),
-+		    bfpt_header->length * sizeof(u32));
-+	addr = SFDP_PARAM_HEADER_PTP(bfpt_header);
-+	memset(&bfpt, 0, sizeof(bfpt));
-+	err = spi_nor_read_sfdp_dma_unsafe(nor,  addr, len, &bfpt);
-+	if (err < 0)
-+		return err;
-+
-+	/* Fix endianness of the BFPT DWORDs. */
-+	for (i = 0; i < BFPT_DWORD_MAX; i++)
-+		bfpt.dwords[i] = le32_to_cpu(bfpt.dwords[i]);
-+
-+	/* Number of address bytes. */
-+	switch (bfpt.dwords[BFPT_DWORD(1)] & BFPT_DWORD1_ADDRESS_BYTES_MASK) {
-+	case BFPT_DWORD1_ADDRESS_BYTES_3_ONLY:
-+	case BFPT_DWORD1_ADDRESS_BYTES_3_OR_4:
-+		nor->addr_width = 3;
-+		nor->addr_mode_nbytes = 3;
-+		break;
-+
-+	case BFPT_DWORD1_ADDRESS_BYTES_4_ONLY:
-+		nor->addr_width = 4;
-+		nor->addr_mode_nbytes = 4;
-+		break;
-+
-+	default:
-+		break;
-+	}
-+
-+	/* Flash Memory Density (in bits). */
-+	params->size = bfpt.dwords[BFPT_DWORD(2)];
-+	if (params->size & BIT(31)) {
-+		params->size &= ~BIT(31);
-+
-+		/*
-+		 * Prevent overflows on params->size. Anyway, a NOR of 2^64
-+		 * bits is unlikely to exist so this error probably means
-+		 * the BFPT we are reading is corrupted/wrong.
-+		 */
-+		if (params->size > 63)
-+			return -EINVAL;
-+
-+		params->size = 1ULL << params->size;
-+	} else {
-+		params->size++;
-+	}
-+	params->size >>= 3; /* Convert to bytes. */
-+
-+	/* Fast Read settings. */
-+	for (i = 0; i < ARRAY_SIZE(sfdp_bfpt_reads); i++) {
-+		const struct sfdp_bfpt_read *rd = &sfdp_bfpt_reads[i];
-+		struct spi_nor_read_command *read;
-+
-+		if (!(bfpt.dwords[rd->supported_dword] & rd->supported_bit)) {
-+			params->hwcaps.mask &= ~rd->hwcaps;
-+			continue;
-+		}
-+
-+		params->hwcaps.mask |= rd->hwcaps;
-+		cmd = spi_nor_hwcaps_read2cmd(rd->hwcaps);
-+		read = &params->reads[cmd];
-+		half = bfpt.dwords[rd->settings_dword] >> rd->settings_shift;
-+		spi_nor_set_read_settings_from_bfpt(read, half, rd->proto);
-+	}
-+
-+	/* Sector Erase settings. */
-+	for (i = 0; i < ARRAY_SIZE(sfdp_bfpt_erases); i++) {
-+		const struct sfdp_bfpt_erase *er = &sfdp_bfpt_erases[i];
-+		u32 erasesize;
-+		u8 opcode;
-+
-+		half = bfpt.dwords[er->dword] >> er->shift;
-+		erasesize = half & 0xff;
-+
-+		/* erasesize == 0 means this Erase Type is not supported. */
-+		if (!erasesize)
-+			continue;
-+
-+		erasesize = 1U << erasesize;
-+		opcode = (half >> 8) & 0xff;
-+#ifdef CONFIG_SPI_FLASH_USE_4K_SECTORS
-+		if (erasesize == SZ_4K) {
-+			nor->erase_opcode = opcode;
-+			mtd->erasesize = erasesize;
-+			break;
-+		}
-+#endif
-+		if (!mtd->erasesize || mtd->erasesize < erasesize) {
-+			nor->erase_opcode = opcode;
-+			mtd->erasesize = erasesize;
-+		}
-+	}
-+
-+	/* Stop here if not JESD216 rev A or later. */
-+	if (bfpt_header->length == BFPT_DWORD_MAX_JESD216)
-+		return spi_nor_post_bfpt_fixups(nor, bfpt_header, &bfpt,
-+						params);
-+
-+	/* Page size: this field specifies 'N' so the page size = 2^N bytes. */
-+	params->page_size = bfpt.dwords[BFPT_DWORD(11)];
-+	params->page_size &= BFPT_DWORD11_PAGE_SIZE_MASK;
-+	params->page_size >>= BFPT_DWORD11_PAGE_SIZE_SHIFT;
-+	params->page_size = 1U << params->page_size;
-+
-+	/* Quad Enable Requirements. */
-+	switch (bfpt.dwords[BFPT_DWORD(15)] & BFPT_DWORD15_QER_MASK) {
-+	case BFPT_DWORD15_QER_NONE:
-+		params->quad_enable = NULL;
-+		break;
-+#if defined(CONFIG_SPI_FLASH_SPANSION) || defined(CONFIG_SPI_FLASH_WINBOND)
-+	case BFPT_DWORD15_QER_SR2_BIT1_BUGGY:
-+	case BFPT_DWORD15_QER_SR2_BIT1_NO_RD:
-+		params->quad_enable = spansion_no_read_cr_quad_enable;
-+		break;
-+#endif
-+#if defined(CONFIG_SPI_FLASH_MACRONIX) || defined(CONFIG_SPI_FLASH_ISSI)
-+	case BFPT_DWORD15_QER_SR1_BIT6:
-+		params->quad_enable = macronix_quad_enable;
-+		break;
-+#endif
-+#if defined(CONFIG_SPI_FLASH_SPANSION) || defined(CONFIG_SPI_FLASH_WINBOND)
-+	case BFPT_DWORD15_QER_SR2_BIT1:
-+		params->quad_enable = spansion_read_cr_quad_enable;
-+		break;
-+#endif
-+	default:
-+		dev_dbg(nor->dev, "BFPT QER reserved value used\n");
-+		break;
-+	}
-+
-+	/* Soft Reset support. */
-+	if (bfpt.dwords[BFPT_DWORD(16)] & BFPT_DWORD16_SOFT_RST)
-+		nor->flags |= SNOR_F_SOFT_RESET;
-+
-+	/* Stop here if JESD216 rev B. */
-+	if (bfpt_header->length == BFPT_DWORD_MAX_JESD216B)
-+		return spi_nor_post_bfpt_fixups(nor, bfpt_header, &bfpt,
-+						params);
-+
-+	/* 8D-8D-8D command extension. */
-+	switch (bfpt.dwords[BFPT_DWORD(18)] & BFPT_DWORD18_CMD_EXT_MASK) {
-+	case BFPT_DWORD18_CMD_EXT_REP:
-+		nor->cmd_ext_type = SPI_NOR_EXT_REPEAT;
-+		break;
-+
-+	case BFPT_DWORD18_CMD_EXT_INV:
-+		nor->cmd_ext_type = SPI_NOR_EXT_INVERT;
-+		break;
-+
-+	case BFPT_DWORD18_CMD_EXT_RES:
-+		return -EINVAL;
-+
-+	case BFPT_DWORD18_CMD_EXT_16B:
-+		dev_err(nor->dev, "16-bit opcodes not supported\n");
-+		return -ENOTSUPP;
-+	}
-+
-+	return spi_nor_post_bfpt_fixups(nor, bfpt_header, &bfpt, params);
-+}
-+
-+/**
-+ * spi_nor_parse_microchip_sfdp() - parse the Microchip manufacturer specific
-+ * SFDP table.
-+ * @nor:		pointer to a 'struct spi_nor'.
-+ * @param_header:	pointer to the SFDP parameter header.
-+ *
-+ * Return: 0 on success, -errno otherwise.
-+ */
-+static int
-+spi_nor_parse_microchip_sfdp(struct spi_nor *nor,
-+			     const struct sfdp_parameter_header *param_header)
-+{
-+	size_t size;
-+	u32 addr;
-+	int ret;
-+
-+	size = param_header->length * sizeof(u32);
-+	addr = SFDP_PARAM_HEADER_PTP(param_header);
-+
-+	nor->manufacturer_sfdp = devm_kmalloc(nor->dev, size, GFP_KERNEL);
-+	if (!nor->manufacturer_sfdp)
-+		return -ENOMEM;
-+
-+	ret = spi_nor_read_sfdp(nor, addr, size, nor->manufacturer_sfdp);
-+
-+	return ret;
-+}
-+
-+/**
-+ * spi_nor_parse_profile1() - parse the xSPI Profile 1.0 table
-+ * @nor:		pointer to a 'struct spi_nor'
-+ * @profile1_header:	pointer to the 'struct sfdp_parameter_header' describing
-+ *			the 4-Byte Address Instruction Table length and version.
-+ * @params:		pointer to the 'struct spi_nor_flash_parameter' to be.
-+ *
-+ * Return: 0 on success, -errno otherwise.
-+ */
-+static int spi_nor_parse_profile1(struct spi_nor *nor,
-+				  const struct sfdp_parameter_header *profile1_header,
-+				  struct spi_nor_flash_parameter *params)
-+{
-+	u32 *table, opcode, addr;
-+	size_t len;
-+	int ret, i;
-+	u8 dummy;
-+
-+	len = profile1_header->length * sizeof(*table);
-+	table = kmalloc(len, GFP_KERNEL);
-+	if (!table)
-+		return -ENOMEM;
-+
-+	addr = SFDP_PARAM_HEADER_PTP(profile1_header);
-+	ret = spi_nor_read_sfdp(nor, addr, len, table);
-+	if (ret)
-+		goto out;
-+
-+	/* Fix endianness of the table DWORDs. */
-+	for (i = 0; i < profile1_header->length; i++)
-+		table[i] = le32_to_cpu(table[i]);
-+
-+	/* Get 8D-8D-8D fast read opcode and dummy cycles. */
-+	opcode = FIELD_GET(PROFILE1_DWORD1_RD_FAST_CMD, table[0]);
-+
-+	/*
-+	 * We don't know what speed the controller is running at. Find the
-+	 * dummy cycles for the fastest frequency the flash can run at to be
-+	 * sure we are never short of dummy cycles. A value of 0 means the
-+	 * frequency is not supported.
-+	 *
-+	 * Default to PROFILE1_DUMMY_DEFAULT if we don't find anything, and let
-+	 * flashes set the correct value if needed in their fixup hooks.
-+	 */
-+	dummy = FIELD_GET(PROFILE1_DWORD4_DUMMY_200MHZ, table[3]);
-+	if (!dummy)
-+		dummy = FIELD_GET(PROFILE1_DWORD5_DUMMY_166MHZ, table[4]);
-+	if (!dummy)
-+		dummy = FIELD_GET(PROFILE1_DWORD5_DUMMY_133MHZ, table[4]);
-+	if (!dummy)
-+		dummy = FIELD_GET(PROFILE1_DWORD5_DUMMY_100MHZ, table[4]);
-+	if (!dummy)
-+		dummy = PROFILE1_DUMMY_DEFAULT;
-+
-+	/* Round up to an even value to avoid tripping controllers up. */
-+	dummy = ROUND_UP_TO(dummy, 2);
-+
-+	/* Update the fast read settings. */
-+	spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_8_8_8_DTR],
-+				  0, dummy, opcode,
-+				  SNOR_PROTO_8_8_8_DTR);
-+
-+	/*
-+	 * Set the Read Status Register dummy cycles and dummy address bytes.
-+	 */
-+	if (table[0] & PROFILE1_DWORD1_RDSR_DUMMY)
-+		params->rdsr_dummy = 8;
-+	else
-+		params->rdsr_dummy = 4;
-+
-+	if (table[0] & PROFILE1_DWORD1_RDSR_ADDR_BYTES)
-+		params->rdsr_addr_nbytes = 4;
-+	else
-+		params->rdsr_addr_nbytes = 0;
-+
-+out:
-+	kfree(table);
-+	return ret;
-+}
-+
-+/**
-+ * spi_nor_parse_sccr() - Parse the Status, Control and Configuration Register
-+ *			  Map.
-+ * @nor:		  pointer to a 'struct spi_nor'
-+ * @sccr_header:	  pointer to the 'struct sfdp_parameter_header' describing
-+ * 			  the SCCR Map table length and version.
-+ *
-+ * Return: 0 on success, -errno otherwise.
-+ */
-+static int spi_nor_parse_sccr(struct spi_nor *nor,
-+			      const struct sfdp_parameter_header *sccr_header)
-+{
-+	u32 *table, addr;
-+	size_t len;
-+	int ret, i;
-+
-+	len = sccr_header->length * sizeof(*table);
-+	table = kmalloc(len, GFP_KERNEL);
-+	if (!table)
-+		return -ENOMEM;
-+
-+	addr = SFDP_PARAM_HEADER_PTP(sccr_header);
-+	ret = spi_nor_read_sfdp(nor, addr, len, table);
-+	if (ret)
-+		goto out;
-+
-+	/* Fix endianness of the table DWORDs. */
-+	for (i = 0; i < sccr_header->length; i++)
-+		table[i] = le32_to_cpu(table[i]);
-+
-+	if (FIELD_GET(SCCR_DWORD22_OCTAL_DTR_EN_VOLATILE, table[21]))
-+		nor->flags |= SNOR_F_IO_MODE_EN_VOLATILE;
-+
-+out:
-+	kfree(table);
-+	return ret;
-+}
-+
-+/**
-+ * spi_nor_parse_sfdp() - parse the Serial Flash Discoverable Parameters.
-+ * @nor:		pointer to a 'struct spi_nor'
-+ * @params:		pointer to the 'struct spi_nor_flash_parameter' to be
-+ *			filled
-+ *
-+ * The Serial Flash Discoverable Parameters are described by the JEDEC JESD216
-+ * specification. This is a standard which tends to supported by almost all
-+ * (Q)SPI memory manufacturers. Those hard-coded tables allow us to learn at
-+ * runtime the main parameters needed to perform basic SPI flash operations such
-+ * as Fast Read, Page Program or Sector Erase commands.
-+ *
-+ * Return: 0 on success, -errno otherwise.
-+ */
-+int spi_nor_parse_sfdp(struct spi_nor *nor,
-+		       struct spi_nor_flash_parameter *params)
-+{
-+	const struct sfdp_parameter_header *param_header, *bfpt_header;
-+	struct sfdp_parameter_header *param_headers = NULL;
-+	struct sfdp_header header;
-+	size_t psize;
-+	int i, err;
-+
-+	/* Get the SFDP header. */
-+	err = spi_nor_read_sfdp_dma_unsafe(nor, 0, sizeof(header), &header);
-+	if (err < 0)
-+		return err;
-+
-+	/* Check the SFDP header version. */
-+	if (le32_to_cpu(header.signature) != SFDP_SIGNATURE ||
-+	    header.major != SFDP_JESD216_MAJOR)
-+		return -EINVAL;
-+
-+	/*
-+	 * Verify that the first and only mandatory parameter header is a
-+	 * Basic Flash Parameter Table header as specified in JESD216.
-+	 */
-+	bfpt_header = &header.bfpt_header;
-+	if (SFDP_PARAM_HEADER_ID(bfpt_header) != SFDP_BFPT_ID ||
-+	    bfpt_header->major != SFDP_JESD216_MAJOR)
-+		return -EINVAL;
-+
-+	/*
-+	 * Allocate memory then read all parameter headers with a single
-+	 * Read SFDP command. These parameter headers will actually be parsed
-+	 * twice: a first time to get the latest revision of the basic flash
-+	 * parameter table, then a second time to handle the supported optional
-+	 * tables.
-+	 * Hence we read the parameter headers once for all to reduce the
-+	 * processing time. Also we use kmalloc() instead of devm_kmalloc()
-+	 * because we don't need to keep these parameter headers: the allocated
-+	 * memory is always released with kfree() before exiting this function.
-+	 */
-+	if (header.nph) {
-+		psize = header.nph * sizeof(*param_headers);
-+
-+		param_headers = kmalloc(psize, GFP_KERNEL);
-+		if (!param_headers)
-+			return -ENOMEM;
-+
-+		err = spi_nor_read_sfdp(nor, sizeof(header),
-+					psize, param_headers);
-+		if (err < 0) {
-+			dev_err(nor->dev,
-+				"failed to read SFDP parameter headers\n");
-+			goto exit;
-+		}
-+	}
-+
-+	/*
-+	 * Check other parameter headers to get the latest revision of
-+	 * the basic flash parameter table.
-+	 */
-+	for (i = 0; i < header.nph; i++) {
-+		param_header = &param_headers[i];
-+
-+		if (SFDP_PARAM_HEADER_ID(param_header) == SFDP_BFPT_ID &&
-+		    param_header->major == SFDP_JESD216_MAJOR &&
-+		    (param_header->minor > bfpt_header->minor ||
-+		     (param_header->minor == bfpt_header->minor &&
-+		      param_header->length > bfpt_header->length)))
-+			bfpt_header = param_header;
-+	}
-+
-+	err = spi_nor_parse_bfpt(nor, bfpt_header, params);
-+	if (err)
-+		goto exit;
-+
-+	/* Parse other parameter headers. */
-+	for (i = 0; i < header.nph; i++) {
-+		param_header = &param_headers[i];
-+
-+		switch (SFDP_PARAM_HEADER_ID(param_header)) {
-+		case SFDP_SECTOR_MAP_ID:
-+			dev_info(nor->dev,
-+				 "non-uniform erase sector maps are not supported yet.\n");
-+			break;
-+
-+		case SFDP_SST_ID:
-+			err = spi_nor_parse_microchip_sfdp(nor, param_header);
-+			break;
-+
-+		case SFDP_PROFILE1_ID:
-+			err = spi_nor_parse_profile1(nor, param_header, params);
-+			break;
-+
-+		case SFDP_SCCR_MAP_ID:
-+			err = spi_nor_parse_sccr(nor, param_header);
-+			break;
-+
-+		default:
-+			break;
-+		}
-+
-+		if (err) {
-+			dev_warn(nor->dev,
-+				 "Failed to parse optional parameter table: %04x\n",
-+				 SFDP_PARAM_HEADER_ID(param_header));
-+			/*
-+			 * Let's not drop all information we extracted so far
-+			 * if optional table parsers fail. In case of failing,
-+			 * each optional parser is responsible to roll back to
-+			 * the previously known spi_nor data.
-+			 */
-+			err = 0;
-+		}
-+	}
-+
-+exit:
-+	kfree(param_headers);
-+	return err;
-+}
-diff --git a/drivers/mtd/spi/sfdp.h b/drivers/mtd/spi/sfdp.h
-new file mode 100644
-index 00000000000..f85ac71490b
---- /dev/null
-+++ b/drivers/mtd/spi/sfdp.h
-@@ -0,0 +1,152 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2005, Intec Automation Inc.
-+ * Copyright (C) 2014, Freescale Semiconductor, Inc.
-+ */
-+
-+#ifndef _SPI_NOR_SFDP_H_
-+#define _SPI_NOR_SFDP_H_
-+
-+#define ROUND_UP_TO(x, y)	(((x) + (y) - 1) / (y) * (y))
-+
-+struct sfdp_parameter_header {
-+	u8		id_lsb;
-+	u8		minor;
-+	u8		major;
-+	u8		length; /* in double words */
-+	u8		parameter_table_pointer[3]; /* byte address */
-+	u8		id_msb;
-+};
-+
-+#define SFDP_PARAM_HEADER_ID(p)	(((p)->id_msb << 8) | (p)->id_lsb)
-+#define SFDP_PARAM_HEADER_PTP(p) \
-+	(((p)->parameter_table_pointer[2] << 16) | \
-+	 ((p)->parameter_table_pointer[1] <<  8) | \
-+	 ((p)->parameter_table_pointer[0] <<  0))
-+
-+#define SFDP_BFPT_ID		0xff00	/* Basic Flash Parameter Table */
-+#define SFDP_SECTOR_MAP_ID	0xff81	/* Sector Map Table */
-+#define SFDP_SST_ID		0x01bf	/* Manufacturer specific Table */
-+#define SFDP_PROFILE1_ID	0xff05	/* xSPI Profile 1.0 Table */
-+#define SFDP_SCCR_MAP_ID	0xff87	/*
-+					 * Status, Control and Configuration
-+					 * Register Map.
-+					 */
-+
-+#define SFDP_SIGNATURE		0x50444653U
-+#define SFDP_JESD216_MAJOR	1
-+#define SFDP_JESD216_MINOR	0
-+#define SFDP_JESD216A_MINOR	5
-+#define SFDP_JESD216B_MINOR	6
-+
-+struct sfdp_header {
-+	u32		signature; /* Ox50444653U <=> "SFDP" */
-+	u8		minor;
-+	u8		major;
-+	u8		nph; /* 0-base number of parameter headers */
-+	u8		unused;
-+
-+	/* Basic Flash Parameter Table. */
-+	struct sfdp_parameter_header	bfpt_header;
-+};
-+
-+/* Basic Flash Parameter Table */
-+
-+/*
-+ * JESD216 rev D defines a Basic Flash Parameter Table of 20 DWORDs.
-+ * They are indexed from 1 but C arrays are indexed from 0.
-+ */
-+#define BFPT_DWORD(i)		((i) - 1)
-+#define BFPT_DWORD_MAX		20
-+
-+/* The first version of JESB216 defined only 9 DWORDs. */
-+#define BFPT_DWORD_MAX_JESD216			9
-+#define BFPT_DWORD_MAX_JESD216B			16
-+
-+/* 1st DWORD. */
-+#define BFPT_DWORD1_FAST_READ_1_1_2		BIT(16)
-+#define BFPT_DWORD1_ADDRESS_BYTES_MASK		GENMASK(18, 17)
-+#define BFPT_DWORD1_ADDRESS_BYTES_3_ONLY	(0x0UL << 17)
-+#define BFPT_DWORD1_ADDRESS_BYTES_3_OR_4	(0x1UL << 17)
-+#define BFPT_DWORD1_ADDRESS_BYTES_4_ONLY	(0x2UL << 17)
-+#define BFPT_DWORD1_DTR				BIT(19)
-+#define BFPT_DWORD1_FAST_READ_1_2_2		BIT(20)
-+#define BFPT_DWORD1_FAST_READ_1_4_4		BIT(21)
-+#define BFPT_DWORD1_FAST_READ_1_1_4		BIT(22)
-+
-+/* 5th DWORD. */
-+#define BFPT_DWORD5_FAST_READ_2_2_2		BIT(0)
-+#define BFPT_DWORD5_FAST_READ_4_4_4		BIT(4)
-+
-+/* 11th DWORD. */
-+#define BFPT_DWORD11_PAGE_SIZE_SHIFT		4
-+#define BFPT_DWORD11_PAGE_SIZE_MASK		GENMASK(7, 4)
-+
-+/* 15th DWORD. */
-+
-+/*
-+ * (from JESD216 rev B)
-+ * Quad Enable Requirements (QER):
-+ * - 000b: Device does not have a QE bit. Device detects 1-1-4 and 1-4-4
-+ *         reads based on instruction. DQ3/HOLD# functions are hold during
-+ *         instruction phase.
-+ * - 001b: QE is bit 1 of status register 2. It is set via Write Status with
-+ *         two data bytes where bit 1 of the second byte is one.
-+ *         [...]
-+ *         Writing only one byte to the status register has the side-effect of
-+ *         clearing status register 2, including the QE bit. The 100b code is
-+ *         used if writing one byte to the status register does not modify
-+ *         status register 2.
-+ * - 010b: QE is bit 6 of status register 1. It is set via Write Status with
-+ *         one data byte where bit 6 is one.
-+ *         [...]
-+ * - 011b: QE is bit 7 of status register 2. It is set via Write status
-+ *         register 2 instruction 3Eh with one data byte where bit 7 is one.
-+ *         [...]
-+ *         The status register 2 is read using instruction 3Fh.
-+ * - 100b: QE is bit 1 of status register 2. It is set via Write Status with
-+ *         two data bytes where bit 1 of the second byte is one.
-+ *         [...]
-+ *         In contrast to the 001b code, writing one byte to the status
-+ *         register does not modify status register 2.
-+ * - 101b: QE is bit 1 of status register 2. Status register 1 is read using
-+ *         Read Status instruction 05h. Status register2 is read using
-+ *         instruction 35h. QE is set via Writ Status instruction 01h with
-+ *         two data bytes where bit 1 of the second byte is one.
-+ *         [...]
-+ */
-+#define BFPT_DWORD15_QER_MASK			GENMASK(22, 20)
-+#define BFPT_DWORD15_QER_NONE			(0x0UL << 20) /* Micron */
-+#define BFPT_DWORD15_QER_SR2_BIT1_BUGGY		(0x1UL << 20)
-+#define BFPT_DWORD15_QER_SR1_BIT6		(0x2UL << 20) /* Macronix */
-+#define BFPT_DWORD15_QER_SR2_BIT7		(0x3UL << 20)
-+#define BFPT_DWORD15_QER_SR2_BIT1_NO_RD		(0x4UL << 20)
-+#define BFPT_DWORD15_QER_SR2_BIT1		(0x5UL << 20) /* Spansion */
-+
-+#define BFPT_DWORD16_SOFT_RST			BIT(12)
-+#define BFPT_DWORD16_EX4B_PWRCYC		BIT(21)
-+
-+#define BFPT_DWORD18_CMD_EXT_MASK		GENMASK(30, 29)
-+#define BFPT_DWORD18_CMD_EXT_REP		(0x0UL << 29) /* Repeat */
-+#define BFPT_DWORD18_CMD_EXT_INV		(0x1UL << 29) /* Invert */
-+#define BFPT_DWORD18_CMD_EXT_RES		(0x2UL << 29) /* Reserved */
-+#define BFPT_DWORD18_CMD_EXT_16B		(0x3UL << 29) /* 16-bit opcode */
-+
-+/* xSPI Profile 1.0 table (from JESD216D.01). */
-+#define PROFILE1_DWORD1_RD_FAST_CMD		GENMASK(15, 8)
-+#define PROFILE1_DWORD1_RDSR_DUMMY		BIT(28)
-+#define PROFILE1_DWORD1_RDSR_ADDR_BYTES		BIT(29)
-+#define PROFILE1_DWORD4_DUMMY_200MHZ		GENMASK(11, 7)
-+#define PROFILE1_DWORD5_DUMMY_166MHZ		GENMASK(31, 27)
-+#define PROFILE1_DWORD5_DUMMY_133MHZ		GENMASK(21, 17)
-+#define PROFILE1_DWORD5_DUMMY_100MHZ		GENMASK(11, 7)
-+#define PROFILE1_DUMMY_DEFAULT			20
-+
-+/* Status, Control and Configuration Register Map(SCCR) */
-+#define SCCR_DWORD22_OCTAL_DTR_EN_VOLATILE      BIT(31)
-+
-+struct sfdp_bfpt {
-+	u32	dwords[BFPT_DWORD_MAX];
-+};
-+
-+#endif /* _SPI_NOR_SFDP_H_ */
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index 937d79af64e..b99a1a45d8f 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -50,171 +50,6 @@
-  */
- #define CHIP_ERASE_2MB_READY_WAIT_JIFFIES      (40UL * HZ)
- 
--#define ROUND_UP_TO(x, y)	(((x) + (y) - 1) / (y) * (y))
--
--struct sfdp_parameter_header {
--	u8		id_lsb;
--	u8		minor;
--	u8		major;
--	u8		length; /* in double words */
--	u8		parameter_table_pointer[3]; /* byte address */
--	u8		id_msb;
--};
--
--#define SFDP_PARAM_HEADER_ID(p)	(((p)->id_msb << 8) | (p)->id_lsb)
--#define SFDP_PARAM_HEADER_PTP(p) \
--	(((p)->parameter_table_pointer[2] << 16) | \
--	 ((p)->parameter_table_pointer[1] <<  8) | \
--	 ((p)->parameter_table_pointer[0] <<  0))
--
--#define SFDP_BFPT_ID		0xff00	/* Basic Flash Parameter Table */
--#define SFDP_SECTOR_MAP_ID	0xff81	/* Sector Map Table */
--#define SFDP_SST_ID		0x01bf	/* Manufacturer specific Table */
--#define SFDP_PROFILE1_ID	0xff05	/* xSPI Profile 1.0 Table */
--#define SFDP_SCCR_MAP_ID	0xff87	/*
--					 * Status, Control and Configuration
--					 * Register Map.
--					 */
--
--#define SFDP_SIGNATURE		0x50444653U
--#define SFDP_JESD216_MAJOR	1
--#define SFDP_JESD216_MINOR	0
--#define SFDP_JESD216A_MINOR	5
--#define SFDP_JESD216B_MINOR	6
--
--struct sfdp_header {
--	u32		signature; /* Ox50444653U <=> "SFDP" */
--	u8		minor;
--	u8		major;
--	u8		nph; /* 0-base number of parameter headers */
--	u8		unused;
--
--	/* Basic Flash Parameter Table. */
--	struct sfdp_parameter_header	bfpt_header;
--};
--
--/* Basic Flash Parameter Table */
--
--/*
-- * JESD216 rev D defines a Basic Flash Parameter Table of 20 DWORDs.
-- * They are indexed from 1 but C arrays are indexed from 0.
-- */
--#define BFPT_DWORD(i)		((i) - 1)
--#define BFPT_DWORD_MAX		20
--
--/* The first version of JESB216 defined only 9 DWORDs. */
--#define BFPT_DWORD_MAX_JESD216			9
--#define BFPT_DWORD_MAX_JESD216B			16
--
--/* 1st DWORD. */
--#define BFPT_DWORD1_FAST_READ_1_1_2		BIT(16)
--#define BFPT_DWORD1_ADDRESS_BYTES_MASK		GENMASK(18, 17)
--#define BFPT_DWORD1_ADDRESS_BYTES_3_ONLY	(0x0UL << 17)
--#define BFPT_DWORD1_ADDRESS_BYTES_3_OR_4	(0x1UL << 17)
--#define BFPT_DWORD1_ADDRESS_BYTES_4_ONLY	(0x2UL << 17)
--#define BFPT_DWORD1_DTR				BIT(19)
--#define BFPT_DWORD1_FAST_READ_1_2_2		BIT(20)
--#define BFPT_DWORD1_FAST_READ_1_4_4		BIT(21)
--#define BFPT_DWORD1_FAST_READ_1_1_4		BIT(22)
--
--/* 5th DWORD. */
--#define BFPT_DWORD5_FAST_READ_2_2_2		BIT(0)
--#define BFPT_DWORD5_FAST_READ_4_4_4		BIT(4)
--
--/* 11th DWORD. */
--#define BFPT_DWORD11_PAGE_SIZE_SHIFT		4
--#define BFPT_DWORD11_PAGE_SIZE_MASK		GENMASK(7, 4)
--
--/* 15th DWORD. */
--
--/*
-- * (from JESD216 rev B)
-- * Quad Enable Requirements (QER):
-- * - 000b: Device does not have a QE bit. Device detects 1-1-4 and 1-4-4
-- *         reads based on instruction. DQ3/HOLD# functions are hold during
-- *         instruction phase.
-- * - 001b: QE is bit 1 of status register 2. It is set via Write Status with
-- *         two data bytes where bit 1 of the second byte is one.
-- *         [...]
-- *         Writing only one byte to the status register has the side-effect of
-- *         clearing status register 2, including the QE bit. The 100b code is
-- *         used if writing one byte to the status register does not modify
-- *         status register 2.
-- * - 010b: QE is bit 6 of status register 1. It is set via Write Status with
-- *         one data byte where bit 6 is one.
-- *         [...]
-- * - 011b: QE is bit 7 of status register 2. It is set via Write status
-- *         register 2 instruction 3Eh with one data byte where bit 7 is one.
-- *         [...]
-- *         The status register 2 is read using instruction 3Fh.
-- * - 100b: QE is bit 1 of status register 2. It is set via Write Status with
-- *         two data bytes where bit 1 of the second byte is one.
-- *         [...]
-- *         In contrast to the 001b code, writing one byte to the status
-- *         register does not modify status register 2.
-- * - 101b: QE is bit 1 of status register 2. Status register 1 is read using
-- *         Read Status instruction 05h. Status register2 is read using
-- *         instruction 35h. QE is set via Writ Status instruction 01h with
-- *         two data bytes where bit 1 of the second byte is one.
-- *         [...]
-- */
--#define BFPT_DWORD15_QER_MASK			GENMASK(22, 20)
--#define BFPT_DWORD15_QER_NONE			(0x0UL << 20) /* Micron */
--#define BFPT_DWORD15_QER_SR2_BIT1_BUGGY		(0x1UL << 20)
--#define BFPT_DWORD15_QER_SR1_BIT6		(0x2UL << 20) /* Macronix */
--#define BFPT_DWORD15_QER_SR2_BIT7		(0x3UL << 20)
--#define BFPT_DWORD15_QER_SR2_BIT1_NO_RD		(0x4UL << 20)
--#define BFPT_DWORD15_QER_SR2_BIT1		(0x5UL << 20) /* Spansion */
--
--#define BFPT_DWORD16_SOFT_RST			BIT(12)
--#define BFPT_DWORD16_EX4B_PWRCYC		BIT(21)
--
--#define BFPT_DWORD18_CMD_EXT_MASK		GENMASK(30, 29)
--#define BFPT_DWORD18_CMD_EXT_REP		(0x0UL << 29) /* Repeat */
--#define BFPT_DWORD18_CMD_EXT_INV		(0x1UL << 29) /* Invert */
--#define BFPT_DWORD18_CMD_EXT_RES		(0x2UL << 29) /* Reserved */
--#define BFPT_DWORD18_CMD_EXT_16B		(0x3UL << 29) /* 16-bit opcode */
--
--/* xSPI Profile 1.0 table (from JESD216D.01). */
--#define PROFILE1_DWORD1_RD_FAST_CMD		GENMASK(15, 8)
--#define PROFILE1_DWORD1_RDSR_DUMMY		BIT(28)
--#define PROFILE1_DWORD1_RDSR_ADDR_BYTES		BIT(29)
--#define PROFILE1_DWORD4_DUMMY_200MHZ		GENMASK(11, 7)
--#define PROFILE1_DWORD5_DUMMY_166MHZ		GENMASK(31, 27)
--#define PROFILE1_DWORD5_DUMMY_133MHZ		GENMASK(21, 17)
--#define PROFILE1_DWORD5_DUMMY_100MHZ		GENMASK(11, 7)
--#define PROFILE1_DUMMY_DEFAULT			20
--
--/* Status, Control and Configuration Register Map(SCCR) */
--#define SCCR_DWORD22_OCTAL_DTR_EN_VOLATILE      BIT(31)
--
--struct sfdp_bfpt {
--	u32	dwords[BFPT_DWORD_MAX];
--};
--
--/**
-- * struct spi_nor_fixups - SPI NOR fixup hooks
-- * @post_bfpt: called after the BFPT table has been parsed
-- * @post_sfdp: called after SFDP has been parsed. Typically used to tweak
-- *             various parameters that could not be extracted by other means
-- *             (i.e. when information provided by the SFDP tables are incomplete
-- *             or wrong).
-- * @late_init: used to initialize flash parameters that are not declared in the
-- *             JESD216 SFDP standard, or where SFDP tables not defined at all.
-- *
-- * Those hooks can be used to tweak the SPI NOR configuration when the SFDP
-- * table is broken or not available.
-- */
--struct spi_nor_fixups {
--	int (*post_bfpt)(struct spi_nor *nor,
--			 const struct sfdp_parameter_header *bfpt_header,
--			 const struct sfdp_bfpt *bfpt,
--			 struct spi_nor_flash_parameter *params);
--	void (*post_sfdp)(struct spi_nor *nor,
--			  struct spi_nor_flash_parameter *params);
--	void (*late_init)(struct spi_nor *nor,
--			  struct spi_nor_flash_parameter *params);
--};
- 
- #define SPI_NOR_SRST_SLEEP_LEN			200
- 
-@@ -2121,7 +1956,7 @@ write_err:
-  *
-  * Return: 0 on success, -errno otherwise.
-  */
--static int macronix_quad_enable(struct spi_nor *nor)
-+int macronix_quad_enable(struct spi_nor *nor)
- {
- 	int ret, val;
- 
-@@ -2247,7 +2082,7 @@ static int write_sr_cr(struct spi_nor *nor, u8 *sr_cr)
-  *
-  * Return: 0 on success, -errno otherwise.
-  */
--static int spansion_read_cr_quad_enable(struct spi_nor *nor)
-+int spansion_read_cr_quad_enable(struct spi_nor *nor)
- {
- 	u8 sr_cr[2];
- 	int ret;
-@@ -2301,7 +2136,7 @@ static int spansion_read_cr_quad_enable(struct spi_nor *nor)
-  *
-  * Return: 0 on success, -errno otherwise.
-  */
--static int spansion_no_read_cr_quad_enable(struct spi_nor *nor)
-+int spansion_no_read_cr_quad_enable(struct spi_nor *nor)
- {
- 	u8 sr_cr[2];
- 	int ret;
-@@ -2321,7 +2156,7 @@ static int spansion_no_read_cr_quad_enable(struct spi_nor *nor)
- #endif /* CONFIG_SPI_FLASH_SFDP_SUPPORT */
- #endif /* CONFIG_SPI_FLASH_SPANSION */
- 
--static void
-+void
- spi_nor_set_read_settings(struct spi_nor_read_command *read,
- 			  u8 num_mode_clocks,
- 			  u8 num_wait_states,
-@@ -2343,710 +2178,6 @@ spi_nor_set_pp_settings(struct spi_nor_pp_command *pp,
- 	pp->proto = proto;
- }
- 
--#if CONFIG_IS_ENABLED(SPI_FLASH_SFDP_SUPPORT)
--/*
-- * Serial Flash Discoverable Parameters (SFDP) parsing.
-- */
--
--/**
-- * spi_nor_read_sfdp() - read Serial Flash Discoverable Parameters.
-- * @nor:	pointer to a 'struct spi_nor'
-- * @addr:	offset in the SFDP area to start reading data from
-- * @len:	number of bytes to read
-- * @buf:	buffer where the SFDP data are copied into (dma-safe memory)
-- *
-- * Whatever the actual numbers of bytes for address and dummy cycles are
-- * for (Fast) Read commands, the Read SFDP (5Ah) instruction is always
-- * followed by a 3-byte address and 8 dummy clock cycles.
-- *
-- * Return: 0 on success, -errno otherwise.
-- */
--static int spi_nor_read_sfdp(struct spi_nor *nor, u32 addr,
--			     size_t len, void *buf)
--{
--	u8 addr_width, read_opcode, read_dummy;
--	int ret;
--
--	read_opcode = nor->read_opcode;
--	addr_width = nor->addr_width;
--	read_dummy = nor->read_dummy;
--
--	nor->read_opcode = SPINOR_OP_RDSFDP;
--	nor->addr_width = 3;
--	nor->read_dummy = 8;
--
--	while (len) {
--		/* Both chips are identical, so should be the SFDP data */
--		if (nor->flags & SNOR_F_HAS_PARALLEL)
--			nor->spi->flags |= SPI_XFER_LOWER;
--
--		ret = nor->read(nor, addr, len, (u8 *)buf);
--		if (!ret || ret > len) {
--			ret = -EIO;
--			goto read_err;
--		}
--		if (ret < 0)
--			goto read_err;
--
--		buf += ret;
--		addr += ret;
--		len -= ret;
--	}
--	ret = 0;
--
--read_err:
--	nor->read_opcode = read_opcode;
--	nor->addr_width = addr_width;
--	nor->read_dummy = read_dummy;
--
--	return ret;
--}
--
--/**
-- * spi_nor_read_sfdp_dma_unsafe() - read Serial Flash Discoverable Parameters.
-- * @nor:	pointer to a 'struct spi_nor'
-- * @addr:	offset in the SFDP area to start reading data from
-- * @len:	number of bytes to read
-- * @buf:	buffer where the SFDP data are copied into
-- *
-- * Wrap spi_nor_read_sfdp() using a kmalloc'ed bounce buffer as @buf is now not
-- * guaranteed to be dma-safe.
-- *
-- * Return: -ENOMEM if kmalloc() fails, the return code of spi_nor_read_sfdp()
-- *          otherwise.
-- */
--static int spi_nor_read_sfdp_dma_unsafe(struct spi_nor *nor, u32 addr,
--					size_t len, void *buf)
--{
--	void *dma_safe_buf;
--	int ret;
--
--	dma_safe_buf = kmalloc(len, GFP_KERNEL);
--	if (!dma_safe_buf)
--		return -ENOMEM;
--
--	ret = spi_nor_read_sfdp(nor, addr, len, dma_safe_buf);
--	memcpy(buf, dma_safe_buf, len);
--	kfree(dma_safe_buf);
--
--	return ret;
--}
--
--/* Fast Read settings. */
--
--static void
--spi_nor_set_read_settings_from_bfpt(struct spi_nor_read_command *read,
--				    u16 half,
--				    enum spi_nor_protocol proto)
--{
--	read->num_mode_clocks = (half >> 5) & 0x07;
--	read->num_wait_states = (half >> 0) & 0x1f;
--	read->opcode = (half >> 8) & 0xff;
--	read->proto = proto;
--}
--
--struct sfdp_bfpt_read {
--	/* The Fast Read x-y-z hardware capability in params->hwcaps.mask. */
--	u32			hwcaps;
--
--	/*
--	 * The <supported_bit> bit in <supported_dword> BFPT DWORD tells us
--	 * whether the Fast Read x-y-z command is supported.
--	 */
--	u32			supported_dword;
--	u32			supported_bit;
--
--	/*
--	 * The half-word at offset <setting_shift> in <setting_dword> BFPT DWORD
--	 * encodes the op code, the number of mode clocks and the number of wait
--	 * states to be used by Fast Read x-y-z command.
--	 */
--	u32			settings_dword;
--	u32			settings_shift;
--
--	/* The SPI protocol for this Fast Read x-y-z command. */
--	enum spi_nor_protocol	proto;
--};
--
--static const struct sfdp_bfpt_read sfdp_bfpt_reads[] = {
--	/* Fast Read 1-1-2 */
--	{
--		SNOR_HWCAPS_READ_1_1_2,
--		BFPT_DWORD(1), BIT(16),	/* Supported bit */
--		BFPT_DWORD(4), 0,	/* Settings */
--		SNOR_PROTO_1_1_2,
--	},
--
--	/* Fast Read 1-2-2 */
--	{
--		SNOR_HWCAPS_READ_1_2_2,
--		BFPT_DWORD(1), BIT(20),	/* Supported bit */
--		BFPT_DWORD(4), 16,	/* Settings */
--		SNOR_PROTO_1_2_2,
--	},
--
--	/* Fast Read 2-2-2 */
--	{
--		SNOR_HWCAPS_READ_2_2_2,
--		BFPT_DWORD(5),  BIT(0),	/* Supported bit */
--		BFPT_DWORD(6), 16,	/* Settings */
--		SNOR_PROTO_2_2_2,
--	},
--
--	/* Fast Read 1-1-4 */
--	{
--		SNOR_HWCAPS_READ_1_1_4,
--		BFPT_DWORD(1), BIT(22),	/* Supported bit */
--		BFPT_DWORD(3), 16,	/* Settings */
--		SNOR_PROTO_1_1_4,
--	},
--
--	/* Fast Read 1-4-4 */
--	{
--		SNOR_HWCAPS_READ_1_4_4,
--		BFPT_DWORD(1), BIT(21),	/* Supported bit */
--		BFPT_DWORD(3), 0,	/* Settings */
--		SNOR_PROTO_1_4_4,
--	},
--
--	/* Fast Read 4-4-4 */
--	{
--		SNOR_HWCAPS_READ_4_4_4,
--		BFPT_DWORD(5), BIT(4),	/* Supported bit */
--		BFPT_DWORD(7), 16,	/* Settings */
--		SNOR_PROTO_4_4_4,
--	},
--};
--
--struct sfdp_bfpt_erase {
--	/*
--	 * The half-word at offset <shift> in DWORD <dwoard> encodes the
--	 * op code and erase sector size to be used by Sector Erase commands.
--	 */
--	u32			dword;
--	u32			shift;
--};
--
--static const struct sfdp_bfpt_erase sfdp_bfpt_erases[] = {
--	/* Erase Type 1 in DWORD8 bits[15:0] */
--	{BFPT_DWORD(8), 0},
--
--	/* Erase Type 2 in DWORD8 bits[31:16] */
--	{BFPT_DWORD(8), 16},
--
--	/* Erase Type 3 in DWORD9 bits[15:0] */
--	{BFPT_DWORD(9), 0},
--
--	/* Erase Type 4 in DWORD9 bits[31:16] */
--	{BFPT_DWORD(9), 16},
--};
--
--static int spi_nor_hwcaps_read2cmd(u32 hwcaps);
--
--static int
--spi_nor_post_bfpt_fixups(struct spi_nor *nor,
--			 const struct sfdp_parameter_header *bfpt_header,
--			 const struct sfdp_bfpt *bfpt,
--			 struct spi_nor_flash_parameter *params)
--{
--	if (nor->fixups && nor->fixups->post_bfpt)
--		return nor->fixups->post_bfpt(nor, bfpt_header, bfpt, params);
--
--	return 0;
--}
--
--/**
-- * spi_nor_parse_bfpt() - read and parse the Basic Flash Parameter Table.
-- * @nor:		pointer to a 'struct spi_nor'
-- * @bfpt_header:	pointer to the 'struct sfdp_parameter_header' describing
-- *			the Basic Flash Parameter Table length and version
-- * @params:		pointer to the 'struct spi_nor_flash_parameter' to be
-- *			filled
-- *
-- * The Basic Flash Parameter Table is the main and only mandatory table as
-- * defined by the SFDP (JESD216) specification.
-- * It provides us with the total size (memory density) of the data array and
-- * the number of address bytes for Fast Read, Page Program and Sector Erase
-- * commands.
-- * For Fast READ commands, it also gives the number of mode clock cycles and
-- * wait states (regrouped in the number of dummy clock cycles) for each
-- * supported instruction op code.
-- * For Page Program, the page size is now available since JESD216 rev A, however
-- * the supported instruction op codes are still not provided.
-- * For Sector Erase commands, this table stores the supported instruction op
-- * codes and the associated sector sizes.
-- * Finally, the Quad Enable Requirements (QER) are also available since JESD216
-- * rev A. The QER bits encode the manufacturer dependent procedure to be
-- * executed to set the Quad Enable (QE) bit in some internal register of the
-- * Quad SPI memory. Indeed the QE bit, when it exists, must be set before
-- * sending any Quad SPI command to the memory. Actually, setting the QE bit
-- * tells the memory to reassign its WP# and HOLD#/RESET# pins to functions IO2
-- * and IO3 hence enabling 4 (Quad) I/O lines.
-- *
-- * Return: 0 on success, -errno otherwise.
-- */
--static int spi_nor_parse_bfpt(struct spi_nor *nor,
--			      const struct sfdp_parameter_header *bfpt_header,
--			      struct spi_nor_flash_parameter *params)
--{
--	struct mtd_info *mtd = &nor->mtd;
--	struct sfdp_bfpt bfpt;
--	size_t len;
--	int i, cmd, err;
--	u32 addr;
--	u16 half;
--
--	/* JESD216 Basic Flash Parameter Table length is at least 9 DWORDs. */
--	if (bfpt_header->length < BFPT_DWORD_MAX_JESD216)
--		return -EINVAL;
--
--	/* Read the Basic Flash Parameter Table. */
--	len = min_t(size_t, sizeof(bfpt),
--		    bfpt_header->length * sizeof(u32));
--	addr = SFDP_PARAM_HEADER_PTP(bfpt_header);
--	memset(&bfpt, 0, sizeof(bfpt));
--	err = spi_nor_read_sfdp_dma_unsafe(nor,  addr, len, &bfpt);
--	if (err < 0)
--		return err;
--
--	/* Fix endianness of the BFPT DWORDs. */
--	for (i = 0; i < BFPT_DWORD_MAX; i++)
--		bfpt.dwords[i] = le32_to_cpu(bfpt.dwords[i]);
--
--	/* Number of address bytes. */
--	switch (bfpt.dwords[BFPT_DWORD(1)] & BFPT_DWORD1_ADDRESS_BYTES_MASK) {
--	case BFPT_DWORD1_ADDRESS_BYTES_3_ONLY:
--	case BFPT_DWORD1_ADDRESS_BYTES_3_OR_4:
--		nor->addr_width = 3;
--		nor->addr_mode_nbytes = 3;
--		break;
--
--	case BFPT_DWORD1_ADDRESS_BYTES_4_ONLY:
--		nor->addr_width = 4;
--		nor->addr_mode_nbytes = 4;
--		break;
--
--	default:
--		break;
--	}
--
--	/* Flash Memory Density (in bits). */
--	params->size = bfpt.dwords[BFPT_DWORD(2)];
--	if (params->size & BIT(31)) {
--		params->size &= ~BIT(31);
--
--		/*
--		 * Prevent overflows on params->size. Anyway, a NOR of 2^64
--		 * bits is unlikely to exist so this error probably means
--		 * the BFPT we are reading is corrupted/wrong.
--		 */
--		if (params->size > 63)
--			return -EINVAL;
--
--		params->size = 1ULL << params->size;
--	} else {
--		params->size++;
--	}
--	params->size >>= 3; /* Convert to bytes. */
--
--	/* Fast Read settings. */
--	for (i = 0; i < ARRAY_SIZE(sfdp_bfpt_reads); i++) {
--		const struct sfdp_bfpt_read *rd = &sfdp_bfpt_reads[i];
--		struct spi_nor_read_command *read;
--
--		if (!(bfpt.dwords[rd->supported_dword] & rd->supported_bit)) {
--			params->hwcaps.mask &= ~rd->hwcaps;
--			continue;
--		}
--
--		params->hwcaps.mask |= rd->hwcaps;
--		cmd = spi_nor_hwcaps_read2cmd(rd->hwcaps);
--		read = &params->reads[cmd];
--		half = bfpt.dwords[rd->settings_dword] >> rd->settings_shift;
--		spi_nor_set_read_settings_from_bfpt(read, half, rd->proto);
--	}
--
--	/* Sector Erase settings. */
--	for (i = 0; i < ARRAY_SIZE(sfdp_bfpt_erases); i++) {
--		const struct sfdp_bfpt_erase *er = &sfdp_bfpt_erases[i];
--		u32 erasesize;
--		u8 opcode;
--
--		half = bfpt.dwords[er->dword] >> er->shift;
--		erasesize = half & 0xff;
--
--		/* erasesize == 0 means this Erase Type is not supported. */
--		if (!erasesize)
--			continue;
--
--		erasesize = 1U << erasesize;
--		opcode = (half >> 8) & 0xff;
--#ifdef CONFIG_SPI_FLASH_USE_4K_SECTORS
--		if (erasesize == SZ_4K) {
--			nor->erase_opcode = opcode;
--			mtd->erasesize = erasesize;
--			break;
--		}
--#endif
--		if (!mtd->erasesize || mtd->erasesize < erasesize) {
--			nor->erase_opcode = opcode;
--			mtd->erasesize = erasesize;
--		}
--	}
--
--	/* Stop here if not JESD216 rev A or later. */
--	if (bfpt_header->length == BFPT_DWORD_MAX_JESD216)
--		return spi_nor_post_bfpt_fixups(nor, bfpt_header, &bfpt,
--						params);
--
--	/* Page size: this field specifies 'N' so the page size = 2^N bytes. */
--	params->page_size = bfpt.dwords[BFPT_DWORD(11)];
--	params->page_size &= BFPT_DWORD11_PAGE_SIZE_MASK;
--	params->page_size >>= BFPT_DWORD11_PAGE_SIZE_SHIFT;
--	params->page_size = 1U << params->page_size;
--
--	/* Quad Enable Requirements. */
--	switch (bfpt.dwords[BFPT_DWORD(15)] & BFPT_DWORD15_QER_MASK) {
--	case BFPT_DWORD15_QER_NONE:
--		params->quad_enable = NULL;
--		break;
--#if defined(CONFIG_SPI_FLASH_SPANSION) || defined(CONFIG_SPI_FLASH_WINBOND)
--	case BFPT_DWORD15_QER_SR2_BIT1_BUGGY:
--	case BFPT_DWORD15_QER_SR2_BIT1_NO_RD:
--		params->quad_enable = spansion_no_read_cr_quad_enable;
--		break;
--#endif
--#if defined(CONFIG_SPI_FLASH_MACRONIX) || defined(CONFIG_SPI_FLASH_ISSI)
--	case BFPT_DWORD15_QER_SR1_BIT6:
--		params->quad_enable = macronix_quad_enable;
--		break;
--#endif
--#if defined(CONFIG_SPI_FLASH_SPANSION) || defined(CONFIG_SPI_FLASH_WINBOND)
--	case BFPT_DWORD15_QER_SR2_BIT1:
--		params->quad_enable = spansion_read_cr_quad_enable;
--		break;
--#endif
--	default:
--		dev_dbg(nor->dev, "BFPT QER reserved value used\n");
--		break;
--	}
--
--	/* Soft Reset support. */
--	if (bfpt.dwords[BFPT_DWORD(16)] & BFPT_DWORD16_SOFT_RST)
--		nor->flags |= SNOR_F_SOFT_RESET;
--
--	/* Stop here if JESD216 rev B. */
--	if (bfpt_header->length == BFPT_DWORD_MAX_JESD216B)
--		return spi_nor_post_bfpt_fixups(nor, bfpt_header, &bfpt,
--						params);
--
--	/* 8D-8D-8D command extension. */
--	switch (bfpt.dwords[BFPT_DWORD(18)] & BFPT_DWORD18_CMD_EXT_MASK) {
--	case BFPT_DWORD18_CMD_EXT_REP:
--		nor->cmd_ext_type = SPI_NOR_EXT_REPEAT;
--		break;
--
--	case BFPT_DWORD18_CMD_EXT_INV:
--		nor->cmd_ext_type = SPI_NOR_EXT_INVERT;
--		break;
--
--	case BFPT_DWORD18_CMD_EXT_RES:
--		return -EINVAL;
--
--	case BFPT_DWORD18_CMD_EXT_16B:
--		dev_err(nor->dev, "16-bit opcodes not supported\n");
--		return -ENOTSUPP;
--	}
--
--	return spi_nor_post_bfpt_fixups(nor, bfpt_header, &bfpt, params);
--}
--
--/**
-- * spi_nor_parse_microchip_sfdp() - parse the Microchip manufacturer specific
-- * SFDP table.
-- * @nor:		pointer to a 'struct spi_nor'.
-- * @param_header:	pointer to the SFDP parameter header.
-- *
-- * Return: 0 on success, -errno otherwise.
-- */
--static int
--spi_nor_parse_microchip_sfdp(struct spi_nor *nor,
--			     const struct sfdp_parameter_header *param_header)
--{
--	size_t size;
--	u32 addr;
--	int ret;
--
--	size = param_header->length * sizeof(u32);
--	addr = SFDP_PARAM_HEADER_PTP(param_header);
--
--	nor->manufacturer_sfdp = devm_kmalloc(nor->dev, size, GFP_KERNEL);
--	if (!nor->manufacturer_sfdp)
--		return -ENOMEM;
--
--	ret = spi_nor_read_sfdp(nor, addr, size, nor->manufacturer_sfdp);
--
--	return ret;
--}
--
--/**
-- * spi_nor_parse_profile1() - parse the xSPI Profile 1.0 table
-- * @nor:		pointer to a 'struct spi_nor'
-- * @profile1_header:	pointer to the 'struct sfdp_parameter_header' describing
-- *			the 4-Byte Address Instruction Table length and version.
-- * @params:		pointer to the 'struct spi_nor_flash_parameter' to be.
-- *
-- * Return: 0 on success, -errno otherwise.
-- */
--static int spi_nor_parse_profile1(struct spi_nor *nor,
--				  const struct sfdp_parameter_header *profile1_header,
--				  struct spi_nor_flash_parameter *params)
--{
--	u32 *table, opcode, addr;
--	size_t len;
--	int ret, i;
--	u8 dummy;
--
--	len = profile1_header->length * sizeof(*table);
--	table = kmalloc(len, GFP_KERNEL);
--	if (!table)
--		return -ENOMEM;
--
--	addr = SFDP_PARAM_HEADER_PTP(profile1_header);
--	ret = spi_nor_read_sfdp(nor, addr, len, table);
--	if (ret)
--		goto out;
--
--	/* Fix endianness of the table DWORDs. */
--	for (i = 0; i < profile1_header->length; i++)
--		table[i] = le32_to_cpu(table[i]);
--
--	/* Get 8D-8D-8D fast read opcode and dummy cycles. */
--	opcode = FIELD_GET(PROFILE1_DWORD1_RD_FAST_CMD, table[0]);
--
--	/*
--	 * We don't know what speed the controller is running at. Find the
--	 * dummy cycles for the fastest frequency the flash can run at to be
--	 * sure we are never short of dummy cycles. A value of 0 means the
--	 * frequency is not supported.
--	 *
--	 * Default to PROFILE1_DUMMY_DEFAULT if we don't find anything, and let
--	 * flashes set the correct value if needed in their fixup hooks.
--	 */
--	dummy = FIELD_GET(PROFILE1_DWORD4_DUMMY_200MHZ, table[3]);
--	if (!dummy)
--		dummy = FIELD_GET(PROFILE1_DWORD5_DUMMY_166MHZ, table[4]);
--	if (!dummy)
--		dummy = FIELD_GET(PROFILE1_DWORD5_DUMMY_133MHZ, table[4]);
--	if (!dummy)
--		dummy = FIELD_GET(PROFILE1_DWORD5_DUMMY_100MHZ, table[4]);
--	if (!dummy)
--		dummy = PROFILE1_DUMMY_DEFAULT;
--
--	/* Round up to an even value to avoid tripping controllers up. */
--	dummy = ROUND_UP_TO(dummy, 2);
--
--	/* Update the fast read settings. */
--	spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_8_8_8_DTR],
--				  0, dummy, opcode,
--				  SNOR_PROTO_8_8_8_DTR);
--
--	/*
--	 * Set the Read Status Register dummy cycles and dummy address bytes.
--	 */
--	if (table[0] & PROFILE1_DWORD1_RDSR_DUMMY)
--		params->rdsr_dummy = 8;
--	else
--		params->rdsr_dummy = 4;
--
--	if (table[0] & PROFILE1_DWORD1_RDSR_ADDR_BYTES)
--		params->rdsr_addr_nbytes = 4;
--	else
--		params->rdsr_addr_nbytes = 0;
--
--out:
--	kfree(table);
--	return ret;
--}
--
--/**
-- * spi_nor_parse_sccr() - Parse the Status, Control and Configuration Register
-- *			  Map.
-- * @nor:		  pointer to a 'struct spi_nor'
-- * @sccr_header:	  pointer to the 'struct sfdp_parameter_header' describing
-- * 			  the SCCR Map table length and version.
-- *
-- * Return: 0 on success, -errno otherwise.
-- */
--static int spi_nor_parse_sccr(struct spi_nor *nor,
--			      const struct sfdp_parameter_header *sccr_header)
--{
--	u32 *table, addr;
--	size_t len;
--	int ret, i;
--
--	len = sccr_header->length * sizeof(*table);
--	table = kmalloc(len, GFP_KERNEL);
--	if (!table)
--		return -ENOMEM;
--
--	addr = SFDP_PARAM_HEADER_PTP(sccr_header);
--	ret = spi_nor_read_sfdp(nor, addr, len, table);
--	if (ret)
--		goto out;
--
--	/* Fix endianness of the table DWORDs. */
--	for (i = 0; i < sccr_header->length; i++)
--		table[i] = le32_to_cpu(table[i]);
--
--	if (FIELD_GET(SCCR_DWORD22_OCTAL_DTR_EN_VOLATILE, table[21]))
--		nor->flags |= SNOR_F_IO_MODE_EN_VOLATILE;
--
--out:
--	kfree(table);
--	return ret;
--}
--
--/**
-- * spi_nor_parse_sfdp() - parse the Serial Flash Discoverable Parameters.
-- * @nor:		pointer to a 'struct spi_nor'
-- * @params:		pointer to the 'struct spi_nor_flash_parameter' to be
-- *			filled
-- *
-- * The Serial Flash Discoverable Parameters are described by the JEDEC JESD216
-- * specification. This is a standard which tends to supported by almost all
-- * (Q)SPI memory manufacturers. Those hard-coded tables allow us to learn at
-- * runtime the main parameters needed to perform basic SPI flash operations such
-- * as Fast Read, Page Program or Sector Erase commands.
-- *
-- * Return: 0 on success, -errno otherwise.
-- */
--static int spi_nor_parse_sfdp(struct spi_nor *nor,
--			      struct spi_nor_flash_parameter *params)
--{
--	const struct sfdp_parameter_header *param_header, *bfpt_header;
--	struct sfdp_parameter_header *param_headers = NULL;
--	struct sfdp_header header;
--	size_t psize;
--	int i, err;
--
--	/* Get the SFDP header. */
--	err = spi_nor_read_sfdp_dma_unsafe(nor, 0, sizeof(header), &header);
--	if (err < 0)
--		return err;
--
--	/* Check the SFDP header version. */
--	if (le32_to_cpu(header.signature) != SFDP_SIGNATURE ||
--	    header.major != SFDP_JESD216_MAJOR)
--		return -EINVAL;
--
--	/*
--	 * Verify that the first and only mandatory parameter header is a
--	 * Basic Flash Parameter Table header as specified in JESD216.
--	 */
--	bfpt_header = &header.bfpt_header;
--	if (SFDP_PARAM_HEADER_ID(bfpt_header) != SFDP_BFPT_ID ||
--	    bfpt_header->major != SFDP_JESD216_MAJOR)
--		return -EINVAL;
--
--	/*
--	 * Allocate memory then read all parameter headers with a single
--	 * Read SFDP command. These parameter headers will actually be parsed
--	 * twice: a first time to get the latest revision of the basic flash
--	 * parameter table, then a second time to handle the supported optional
--	 * tables.
--	 * Hence we read the parameter headers once for all to reduce the
--	 * processing time. Also we use kmalloc() instead of devm_kmalloc()
--	 * because we don't need to keep these parameter headers: the allocated
--	 * memory is always released with kfree() before exiting this function.
--	 */
--	if (header.nph) {
--		psize = header.nph * sizeof(*param_headers);
--
--		param_headers = kmalloc(psize, GFP_KERNEL);
--		if (!param_headers)
--			return -ENOMEM;
--
--		err = spi_nor_read_sfdp(nor, sizeof(header),
--					psize, param_headers);
--		if (err < 0) {
--			dev_err(nor->dev,
--				"failed to read SFDP parameter headers\n");
--			goto exit;
--		}
--	}
--
--	/*
--	 * Check other parameter headers to get the latest revision of
--	 * the basic flash parameter table.
--	 */
--	for (i = 0; i < header.nph; i++) {
--		param_header = &param_headers[i];
--
--		if (SFDP_PARAM_HEADER_ID(param_header) == SFDP_BFPT_ID &&
--		    param_header->major == SFDP_JESD216_MAJOR &&
--		    (param_header->minor > bfpt_header->minor ||
--		     (param_header->minor == bfpt_header->minor &&
--		      param_header->length > bfpt_header->length)))
--			bfpt_header = param_header;
--	}
--
--	err = spi_nor_parse_bfpt(nor, bfpt_header, params);
--	if (err)
--		goto exit;
--
--	/* Parse other parameter headers. */
--	for (i = 0; i < header.nph; i++) {
--		param_header = &param_headers[i];
--
--		switch (SFDP_PARAM_HEADER_ID(param_header)) {
--		case SFDP_SECTOR_MAP_ID:
--			dev_info(nor->dev,
--				 "non-uniform erase sector maps are not supported yet.\n");
--			break;
--
--		case SFDP_SST_ID:
--			err = spi_nor_parse_microchip_sfdp(nor, param_header);
--			break;
--
--		case SFDP_PROFILE1_ID:
--			err = spi_nor_parse_profile1(nor, param_header, params);
--			break;
--
--		case SFDP_SCCR_MAP_ID:
--			err = spi_nor_parse_sccr(nor, param_header);
--			break;
--
--		default:
--			break;
--		}
--
--		if (err) {
--			dev_warn(nor->dev,
--				 "Failed to parse optional parameter table: %04x\n",
--				 SFDP_PARAM_HEADER_ID(param_header));
--			/*
--			 * Let's not drop all information we extracted so far
--			 * if optional table parsers fail. In case of failing,
--			 * each optional parser is responsible to roll back to
--			 * the previously known spi_nor data.
--			 */
--			err = 0;
--		}
--	}
--
--exit:
--	kfree(param_headers);
--	return err;
--}
--#else
--static int spi_nor_parse_sfdp(struct spi_nor *nor,
--			      struct spi_nor_flash_parameter *params)
--{
--	return -EINVAL;
--}
--#endif /* SPI_FLASH_SFDP_SUPPORT */
--
- /**
-  * spi_nor_post_sfdp_fixups() - Updates the flash's parameters and settings
-  * after SFDP has been parsed.
-@@ -3273,7 +2404,7 @@ static int spi_nor_hwcaps2cmd(u32 hwcaps, const int table[][2], size_t size)
- 	return -EINVAL;
- }
- 
--static int spi_nor_hwcaps_read2cmd(u32 hwcaps)
-+int spi_nor_hwcaps_read2cmd(u32 hwcaps)
- {
- 	static const int hwcaps_read2cmd[][2] = {
- 		{ SNOR_HWCAPS_READ,		SNOR_CMD_READ },
+   1  Hub (5 Gb/s, 0mA)
+      U-Boot XHCI Host Controller
 
--- 
-2.53.0
+   1  Hub (480 Mb/s, 0mA)
+      u-boot EHCI Host Controller
 
+   1  Hub (12 Mb/s, 0mA)
+       U-Boot Root Hub
 
+   1  Hub (480 Mb/s, 0mA)
+      u-boot EHCI Host Controller
+
+   1  Hub (12 Mb/s, 0mA)
+       U-Boot Root Hub
+
+32768 bytes filled with random data
+
+Device 0: unknown device
+
+Another try:
+resetting USB...
+USB XHCI 1.10
+USB XHCI 1.10
+USB EHCI 1.00
+USB OHCI 1.0
+USB EHCI 1.00
+USB OHCI 1.0
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+Resetting EP 3...
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+Resetting EP 3...
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+Resetting EP 3...
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+Resetting EP 3...
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+Resetting EP 3...
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+  ** fs_devread read error - block
+ERROR:  USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+ERROR: USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+ERROR:  USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+ERROR: USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+ERROR:  USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+unable to get device descriptor (error=-1)
+Bus usb@fcc00000: 1 USB Device(s) found
+Bus usb@fd000000: 2 USB Device(s) found
+Bus usb@fd800000: 1 USB Device(s) found
+Bus usb@fd840000: 1 USB Device(s) found
+Bus usb@fd880000: 1 USB Device(s) found
+Bus usb@fd8c0000: 1 USB Device(s) found
+        scanning usb for storage devices... 1 Storage Device(s) found
+USB device tree:
+   1  Hub (5 Gb/s, 0mA)
+      U-Boot XHCI Host Controller
+
+   1  Hub (5 Gb/s, 0mA)
+   |  U-Boot XHCI Host Controller
+   |
+   +-2  Mass Storage (5 Gb/s, 126mA)
+        Kingston DataTraveler 3.0 1C6F654E48EBB161D95D8F07
+
+   1  Hub (480 Mb/s, 0mA)
+      u-boot EHCI Host Controller
+
+   1  Hub (12 Mb/s, 0mA)
+       U-Boot Root Hub
+
+   1  Hub (480 Mb/s, 0mA)
+      u-boot EHCI Host Controller
+
+   1  Hub (12 Mb/s, 0mA)
+       U-Boot Root Hub
+
+32768 bytes filled with random data
+
+Device 0: Vendor: Kingston Rev: PMAP Prod: DataTraveler 3.0
+             Type: Removable Hard Disk
+             Capacity: 14784.0 MB = 14.4 GB (30277632 x 512)
+... is now current device
+
+usb write: device 0 block # 0, count 64 ... Resetting EP 3...
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+Resetting EP 3...
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+Resetting EP 3...
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+WARN endpoint is halted
+0 blocks written: ERROR
+
+Yet another try:
+=> usb reset && usb tree && random $loadaddr 0x8000  && mw.q 
+$kernel_addr_r 0xffffffffffffffff 0x1000 && usb dev 0 && usb write 
+$loadaddr 0 0x40 && usb read $kernel_addr_r 0 0x40 && cmp.q $loadaddr 
+$kernel_addr_r 0x1000
+resetting USB...
+USB XHCI 1.10
+USB XHCI 1.10
+USB EHCI 1.00
+USB OHCI 1.0
+USB EHCI 1.00
+USB OHCI 1.0
+Resetting EP 3...
+WARN endpoint is halted
+Resetting EP 3...
+WARN endpoint is halted
+Resetting EP 2...
+WARN endpoint is halted
+Resetting EP 3...
+WARN endpoint is halted
+Resetting EP 3...
+WARN endpoint is halted
+Resetting EP 3...
+WARN endpoint is halted
+READ_CAP ERROR
+abort_td: Expected a TRB_TRANSFER TRB first
+BUG at drivers/usb/host/xhci-ring.c:591/abort_td()!
+BUG!
+resetting ...
+
+Once I attach a USB2 hub to the USB3 port, the USB stick works just fine 
+in U-Boot (in USB2 mode of course).
+
+I've checked with git-range-diff between the v11 on GitHub and what was 
+sent here as v11, they match. Considering the RK3566 issue is not new, 
+so unless Jonas (or someone else) can help me figure out what I did 
+wrong and make USB3 work on my Quartz64 Model A, I give this series the 
+green light for Rockchip.
+
+Cheers,
+Quentin
