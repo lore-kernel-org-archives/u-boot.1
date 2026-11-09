@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06387606A336
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D546606A338
 	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 13:28:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=IXy+m9JG;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HXXPK4Ax
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=HfhFF8lp;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PofUK4QJ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D5BCE406D5;
-	Mon,  9 Nov 2026 13:28:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2CE3880EA0;
+	Mon,  9 Nov 2026 13:28:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ty-D5C40w0I0; Mon,  9 Nov 2026 13:28:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org AA7FE406FE
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794230924;
-	b=jQzz+UiXnuDLaAxg9unWCknjcLqvNGfadze3o1eLLY3dzeYfFqWn51ojsJCIFqeFf1JD
-	 qjJfTcf0YGB74MOSbdrtreq29gUvXw6hNWvygvnHzuYgLE92nAWJcuQQmAvrVWMtKs1ks
-	 AbfA12Gzmi3YksEOkroWJz+6yCarkpe8buMJ6X36JyRogfZ3mVLlXPW5VQ0FXB6Uqusux
-	 Kem+uPcpdFIrhzD48rcrwYyjbwx82PDT3GXpSVu1Utx9mDwdOWew31PAbUwnOYHeTt7JN
-	 pVPAPg3LoNNREYjV+XvMTjgweOtbhXG1Wh6CfjBmK+GKNlE3cOnPlFtwesGq2DTeRRw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id J_U_IhnLSA1Q; Mon,  9 Nov 2026 13:28:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 448FB80F31
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794230926;
+	b=oPBoP34WR93BBfpMJCiiA2iMWuv9oBQFSn7ed8RL99kY5yVeB5lc5/39lrqhTmE189ad
+	 3BgUIX35Ds0dUB/PTRx7VJoT96kug4b/n67ZzctMoUHz3x5kelgdINVd0cRce2Ekkwvg7
+	 X6IHkZ7OwMFfX6nFaO1l6AwPQSEjRM4aLNtY2WL19qE+awAfKIN2ijLM3K8WFUCdB7IUy
+	 Yau2n9tz5zMLQk1/NfLsVR9TbJH/4KRiRU/XcipSCG9PtlN/uzaf3P35LeXeKCWGsb+JD
+	 IViE6UVQkXP6PO0LjGKRrbuT+9WJZM49cJcdXLyF6dexe5qeZw4n2f5oXiUrhNE6ZDw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794230924;
+	c=relaxed/relaxed; t=1794230926;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,88 +33,87 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Original-From:Content-Transfer-Encoding:X-Mailman-Approved-At:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=qkZ9k3C0myy+yS6Nfn+DDef6XpOYscAvGUEHE8TlLAQ=;
-	b=sVxFuBOKaaeJW3kF7zmZj25T2wKxy+67FcCPmMLRKMcKeiL90Pd8JxHCiJYw2RlhI3E0
-	 ruE0HtbwU6U3JyfvUUwlyA46KLFUESkkSdemrECgeOWlB8yXfl/CPDL/yxogEQIqUQ3Bh
-	 u/212WWK6FKvYWwkPd5++stWT/TO3kvzKGAyUNTqusUbLtncPhMqCx4QsB6s41Go6sCsG
-	 R3pkPSgh7nPDF4wu230RelLPLHnGaMzC510URquAJtQQ0uEEaOcTWEJPjgzA04BDTJza+
-	 VYLhKEUzdaoiqc3XFn/Mp0vQSu3N13sgZiY1KoAv50WRsh7PILC/NYvxE5Z74Y5QwMg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=h9OJKY3D4aWxFVn6z/YichyTpiAeuJzstWi35EUSzZk=;
+	b=UyxRVh9gEL7369sddeHhG/3wotB7sdgFUERmHO5GEON9RPPPImT7P6JkH5A+yhl4wdlP
+	 LRD7sH9zfIlGLsb0EMJOu1+qZ98Xcl92EQ0dU4q7qOdl6SMEHyTn8mjGCdh/efcJ30Y7+
+	 4ut94uIZUV0qVnnfAGl3RVel0YyPYIFlIE5EFs/m2lLhfrOJkZMwVir+Xicv2OcbEFKoY
+	 Eq5OSzWKVbNx+l5Km78lOc+xliFE6wiz4AbyoGMp0Ng4huTGw2ev6CMPZb/sJ9w7vCuWb
+	 1qbImzB7Xgem8B+M3XwFI6qE410/OvKztABqRzOo9H7Y2QBa7Tk3RXm6wTKtCxUDpnQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794230924;
-	bh=qkZ9k3C0myy+yS6Nfn+DDef6XpOYscAvGUEHE8TlLAQ=;
+	d=lists.u-boot-project.org; s=default; t=1794230926;
+	bh=h9OJKY3D4aWxFVn6z/YichyTpiAeuJzstWi35EUSzZk=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=IXy+m9JGkJcii9/84EKlJ2ZGocW5dR4/rx5G4gA0BDXO0tvdhEnrrNzBW3E1fUAwJ
-	 OMku+tZ5NnfK7a3LobAbYH9TTaicrWRA3XZN4LFvKbZTZDtDCP4lLdXY91YaHRRsop
-	 jj4TKzbRoy9JIPdOY0+IRngHfSYnnr9Rpj2U458HSz8pqXv46uJwnqMM0CRK5OHHTN
-	 VOLR+xVu0OyJVWPPSa+//6AzfVBwyt5QtuvWrfFtky/aE7e/qWk8FMUpdV0GDYAO5D
-	 kFUKuy45ReBC0tu+4XxCwsWnJ1hx48hHCFr+YOICPz7AFba7hzvXGtE/IJhG2bcPG9
-	 R2OPhuPnWTylw==
+	b=HfhFF8lpMCiXhR0RSC7tnGPY0fhxU+hJXtwz0kMXPgKmBrjq0HWGW8ROW5YePP8+p
+	 2UKsQg4Bs5miht7cFV1+EGB9i32Lvqt4BCRCOFNfIeVA9a2FlV2Ho1+PJAJCy3V7Wu
+	 2bOA5t0XXp3NIHDe/ro7VhwmetGKujEA6t+EHnztukUfSmEjtPnYopMczKSXKIcsO+
+	 GVOyBNrPkTxjLJhWLk8RYwobh7FlMBDgokDrdM7AxB1tWujNDGRZTotQ5nCjvVMRiQ
+	 w3wzzb3Al3Uu56kBN6G7dvAaCmhlRkQ1Hf1aY9bNpTAHwV1BYI5lg+qwBXTEdHRwyn
+	 TD1aDkqDzX6yQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AA7FE406FE;
-	Mon,  9 Nov 2026 13:28:44 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id C5C63235
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 09:40:02 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 448FB80F31;
+	Mon,  9 Nov 2026 13:28:46 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4634C9D1
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 09:40:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id AD3B9400BE
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 09:40:02 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 37A254065D
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 09:40:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XdrQjLXzgry0 for <u-boot@lists.u-boot-project.org>;
- Mon,  9 Nov 2026 09:40:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org B1B31400CC
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=172.234.252.31
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.234.252.31;
- helo=sea.source.kernel.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id HpF4RCoIia5r for <u-boot@lists.u-boot-project.org>;
+ Mon,  9 Nov 2026 09:40:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 131D44065C
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip=172.105.4.254
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=172.105.4.254;
+ helo=tor.source.kernel.org;
  envelope-from=devnull+takahiro.kuwano.infineon.com@kernel.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20260515 header.b=HXXPK4Ax
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B1B31400CC
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 09:39:59 +0000 (UTC)
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=PofUK4QJ
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 131D44065C
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 09:40:00 +0000 (UTC)
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id F236C41824;
- Mon,  9 Nov 2026 09:39:58 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id A91B86300B;
+ Mon,  9 Nov 2026 09:39:59 +0000 (UTC)
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
  (No client certificate requested)
- by smtp.kernel.org (Postfix) with ESMTPS id 699161F008A5;
+ by smtp.kernel.org (Postfix) with ESMTPS id 5F4761F008A3;
  Mon,  9 Nov 2026 09:39:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1794217198;
- bh=qkZ9k3C0myy+yS6Nfn+DDef6XpOYscAvGUEHE8TlLAQ=;
+ s=k20260515; t=1794217199;
+ bh=h9OJKY3D4aWxFVn6z/YichyTpiAeuJzstWi35EUSzZk=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
- b=HXXPK4Axk4fMdUsp+DJqqngdN7KGVIMogcTFkRsgcCyE9H63C3zWbW+ra094vDAO5
- MBDhkBa6+CwdPObltJbyY+pndTvHiN20nE8CZu7Xr/d8dGNitDTZ3IQLX9pIxrkVKt
- L6NZVKEZsDC4llK5Eh8Ih+pLjOgxJ8gA4iXVSL7fTusUoDdKecJyo1trIjVFW9j9os
- gqkdfErQ6iSCLoDzluJ5jhE7Aq9oibfqWoCnacAIbsDtTxtspBOLq+oYqverzU1xRK
- Ps/mVlO0jb2IChQ8qAiELcYJf2O+fcXPhCY6gPf1vifZAyYbVYM6PFmc1U0cqdxk0J
- bwkvND8Q45LrA==
+ b=PofUK4QJzl6YHG+ATjiYmRWbuLbr0XlcjdGNeXsILRYI0iogZI8CHVfEAY6yKXM+4
+ r4RjgXBDVTj/oNqmA7LnfG0jqzolmsPliZveuL4r4VY1eqMhKwIPj7f682fv5Fy24Z
+ mvCApre6ycpuAHsFEd7kakjyorTjucPNrUa+2+w8mk3srT3iNN7QscvLfkBm4puBw9
+ nDIPSaWqQvKaAkQygH1qBdsDIwYkTolKRtfRmKbqDmreh1z+wFZM9I85a8ci70lF0t
+ a9JOcj05DgxjfIhU1g8qZHS5cl9oJNAQVQxn4edsDt89pBfmo9B4LFq5x/xkpmBWcJ
+ oFUHyTIS8TVQA==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
- by lkml.kernel.org (Postfix) with ESMTP id E9606483B5;
+ by lkml.kernel.org (Postfix) with ESMTP id C87F4483A9;
  Mon,  9 Nov 2026 09:39:53 +0000 (UTC)
 From: Takahiro Kuwano via B4 Relay
  <devnull+takahiro.kuwano.infineon.com@kernel.org>
-Date: Mon, 09 Nov 2026 18:39:43 +0900
-Subject: [PATCH v4 3/5] mtd: spi-nor: move flash info entries to
- manufacturer drivers
+Date: Mon, 09 Nov 2026 18:39:41 +0900
+Subject: [PATCH v4 1/5] mtd: spi-nor: move SFDP logic out of the core
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261109-split-sfdp-id-v3-v4-3-7270c9d82fd3@infineon.com>
+Message-Id: <20261109-split-sfdp-id-v3-v4-1-7270c9d82fd3@infineon.com>
 References: <20261109-split-sfdp-id-v3-v4-0-7270c9d82fd3@infineon.com>
 In-Reply-To: <20261109-split-sfdp-id-v3-v4-0-7270c9d82fd3@infineon.com>
 To: u-boot@lists.u-boot-project.org
@@ -124,11 +123,11 @@ Cc: Tom Rini <trini@konsulko.com>, Vignesh R <vigneshr@ti.com>,
  Bastien Curutchet <bastien.curutchet@bootlin.com>, 
  Takahiro Kuwano <takahiro.kuwano@infineon.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794217192; l=98591;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794217192; l=61184;
  i=takahiro.kuwano@infineon.com; s=20261016-2; h=from:subject:message-id;
- bh=5An7+0iogOdes85wq6KhDR4AjTiihLZrLDP0XT9/Pv0=;
- b=BrueO0ZBdanQT2O6fxKan3sM1O1GbndSj48M9v73cvZNCbtyl70fQY+uotWIyqcu98E8CjGgS
- ksnqMXt2vK0C9/5fb0D8ZP6cMsYgiIw/5NDooJpBFhnPGMh8lN+iqkv
+ bh=t9hbPgJ33gesilE+gVMEEm9Amp82CfFDvgWbRecu42A=;
+ b=WQ8T7eNK9QVGCQxy0GZUeU8XcR5GKYlXKUbz+euuM23BGroPObDer6cv/Lk1C5NHjlIPylJnI
+ NUyQHeXxOdCCNsE+HZhPOLfh46thggqUTJ4UFXzvL30kaPbbK9VuPej
 X-Developer-Key: i=takahiro.kuwano@infineon.com; a=ed25519;
  pk=pp4mpJAHIqhV2MvdSGbIzKRk3ujhk+tSlGjyTursr4E=
 X-Endpoint-Received: by B4 Relay for
@@ -149,2001 +148,1919 @@ Reply-To: takahiro.kuwano@infineon.com
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Takahiro Kuwano <takahiro.kuwano@infineon.com>
 
-Create manufacturer driver files and move flash info entries into them.
+Move SFDP parsing functions and definitions to newly introduced
+sfdp.c/sfdp.h. The new module (sfdp.c) is compiled along with
+spi-nor-core depending on SPI_FLASH_SFDP_SUPPORT configuration option.
+
+The quad_enable hooks and some helper functions are exposed from core
+and some need to be guarded by CONFIG_SPI_FLASH_TINY to avoid name
+conflict with local functions in tiny.
 
 Tested-by: Bastien Curutchet <bastien.curutchet@bootlin.com> # mx25uw51245g
 Signed-off-by: Takahiro Kuwano <takahiro.kuwano@infineon.com>
 ---
- drivers/mtd/spi/Makefile        |  17 +
- drivers/mtd/spi/atmel.c         |  28 ++
- drivers/mtd/spi/dosilicon.c     |  27 ++
- drivers/mtd/spi/eon.c           |  23 ++
- drivers/mtd/spi/fujitsu.c       |  27 ++
- drivers/mtd/spi/gigadevice.c    | 141 ++++++++
- drivers/mtd/spi/issi.c          |  84 +++++
- drivers/mtd/spi/macronix.c      |  65 ++++
- drivers/mtd/spi/micron-st.c     |  70 ++++
- drivers/mtd/spi/puya.c          |  56 +++
- drivers/mtd/spi/sandbox.c       |  33 +-
- drivers/mtd/spi/sf_internal.h   |  57 +++-
- drivers/mtd/spi/siliconkaiser.c |  18 +
- drivers/mtd/spi/spansion.c      |  73 ++++
- drivers/mtd/spi/spi-nor-core.c  |  10 +-
- drivers/mtd/spi/spi-nor-ids.c   | 740 ++--------------------------------------
- drivers/mtd/spi/spi-nor-tiny.c  |  11 +-
- drivers/mtd/spi/sst.c           |  34 ++
- drivers/mtd/spi/winbond.c       | 146 ++++++++
- drivers/mtd/spi/xmc.c           |  27 ++
- drivers/mtd/spi/xtx.c           |  54 +++
- drivers/mtd/spi/zbit.c          |  19 ++
- 22 files changed, 1030 insertions(+), 730 deletions(-)
+ drivers/mtd/spi/Makefile       |   1 +
+ drivers/mtd/spi/sf_internal.h  |  50 +++
+ drivers/mtd/spi/sfdp.c         | 711 +++++++++++++++++++++++++++++++++
+ drivers/mtd/spi/sfdp.h         | 152 +++++++
+ drivers/mtd/spi/spi-nor-core.c | 879 +----------------------------------------
+ 5 files changed, 919 insertions(+), 874 deletions(-)
 
 diff --git a/drivers/mtd/spi/Makefile b/drivers/mtd/spi/Makefile
-index 1828e5fadfe..74fe9b49a69 100644
+index 9a96be11e6d..1828e5fadfe 100644
 --- a/drivers/mtd/spi/Makefile
 +++ b/drivers/mtd/spi/Makefile
-@@ -17,6 +17,23 @@ spi-nor-y += spi-nor-core.o
- spi-nor-$(CONFIG_SPI_FLASH_SFDP_SUPPORT) += sfdp.o
+@@ -14,6 +14,7 @@ ifeq ($(CONFIG_$(PHASE_)SPI_FLASH_TINY),y)
+ spi-nor-y += spi-nor-tiny.o
+ else
+ spi-nor-y += spi-nor-core.o
++spi-nor-$(CONFIG_SPI_FLASH_SFDP_SUPPORT) += sfdp.o
  endif
  
-+spi-nor-$(CONFIG_SPI_FLASH_ATMEL) += atmel.o
-+spi-nor-$(CONFIG_SPI_FLASH_DOSILICON) += dosilicon.o
-+spi-nor-$(CONFIG_SPI_FLASH_EON) += eon.o
-+spi-nor-$(CONFIG_SPI_FRAM_FUJITSU) += fujitsu.o
-+spi-nor-$(CONFIG_SPI_FLASH_GIGADEVICE) += gigadevice.o
-+spi-nor-$(CONFIG_SPI_FLASH_ISSI) += issi.o
-+spi-nor-$(CONFIG_SPI_FLASH_MACRONIX) += macronix.o
-+spi-nor-$(CONFIG_SPI_FLASH_PUYA) += puya.o
-+spi-nor-$(CONFIG_SPI_FLASH_SILICONKAISER) += siliconkaiser.o
-+spi-nor-$(CONFIG_SPI_FLASH_STMICRO) += micron-st.o
-+spi-nor-$(CONFIG_SPI_FLASH_SPANSION) += spansion.o
-+spi-nor-$(CONFIG_SPI_FLASH_SST) += sst.o
-+spi-nor-$(CONFIG_SPI_FLASH_WINBOND) += winbond.o
-+spi-nor-$(CONFIG_SPI_FLASH_XMC) += xmc.o
-+spi-nor-$(CONFIG_SPI_FLASH_XTX) += xtx.o
-+spi-nor-$(CONFIG_SPI_FLASH_ZBIT) += zbit.o
-+
  obj-$(CONFIG_SPI_FLASH) += spi-nor.o
- obj-$(CONFIG_SPI_FLASH_DATAFLASH) += sf_dataflash.o
- obj-$(CONFIG_$(PHASE_)SPI_FLASH_MTD) += sf_mtd.o
-diff --git a/drivers/mtd/spi/atmel.c b/drivers/mtd/spi/atmel.c
-new file mode 100644
-index 00000000000..53c7afff323
---- /dev/null
-+++ b/drivers/mtd/spi/atmel.c
-@@ -0,0 +1,28 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
-+
-+static const struct flash_info atmel_nor_parts[] = {
-+	{ INFO("at26df321",	0x1f4700, 0, 64 * 1024, 64, SECT_4K) },
-+	{ INFO("at25df321a",	0x1f4701, 0, 64 * 1024, 64, SECT_4K) },
-+	{ INFO("at45db011d",	0x1f2200, 0, 64 * 1024,   4, SECT_4K) },
-+	{ INFO("at45db021d",	0x1f2300, 0, 64 * 1024,   8, SECT_4K) },
-+	{ INFO("at45db041d",	0x1f2400, 0, 64 * 1024,   8, SECT_4K) },
-+	{ INFO("at45db081d",	0x1f2500, 0, 64 * 1024,  16, SECT_4K) },
-+	{ INFO("at45db161d",	0x1f2600, 0, 64 * 1024,  32, SECT_4K) },
-+	{ INFO("at45db321d",	0x1f2700, 0, 64 * 1024,  64, SECT_4K) },
-+	{ INFO("at45db641d",	0x1f2800, 0, 64 * 1024, 128, SECT_4K) },
-+	{ INFO("at25sl321",	0x1f4216, 0, 64 * 1024,  64, SECT_4K) },
-+	{ INFO("at26df081a",	0x1f4501, 0, 64 * 1024,  16, SECT_4K) },
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_atmel = {
-+	.parts = atmel_nor_parts,
-+	.nparts = ARRAY_SIZE(atmel_nor_parts),
-+};
-diff --git a/drivers/mtd/spi/dosilicon.c b/drivers/mtd/spi/dosilicon.c
-new file mode 100644
-index 00000000000..2ae1ef3c393
---- /dev/null
-+++ b/drivers/mtd/spi/dosilicon.c
-@@ -0,0 +1,27 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
-+
-+static const struct flash_info dosilicon_nor_parts[] = {
-+	{ INFO("ds25m4cb", 0xe5401a, 0, 64 * 1024, 1024,
-+		    SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("ds25m4dn", 0xe5401b, 0, 64 * 1024, 2048,
-+		    SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("ds25q4cb", 0xe5301a, 0, 64 * 1024, 1024,
-+		    SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("ds25q4dn", 0xe5301b, 0, 64 * 1024, 2048,
-+		    SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("ds25q4bb", 0xe53019, 0, 64 * 1024, 512,
-+		    SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_dosilicon = {
-+	.parts = dosilicon_nor_parts,
-+	.nparts = ARRAY_SIZE(dosilicon_nor_parts),
-+};
-diff --git a/drivers/mtd/spi/eon.c b/drivers/mtd/spi/eon.c
-new file mode 100644
-index 00000000000..6690ba2a1da
---- /dev/null
-+++ b/drivers/mtd/spi/eon.c
-@@ -0,0 +1,23 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
-+
-+static const struct flash_info eon_nor_parts[] = {
-+	{ INFO("en25q80b",   0x1c3014, 0, 64 * 1024,   16, SECT_4K) },
-+	{ INFO("en25q32b",   0x1c3016, 0, 64 * 1024,   64, 0) },
-+	{ INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K) },
-+	{ INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, 0) },
-+	{ INFO("en25qh128",  0x1c7018, 0, 64 * 1024,  256, 0) },
-+	{ INFO("en25s64",    0x1c3817, 0, 64 * 1024,  128, SECT_4K) },
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_eon = {
-+	.parts = eon_nor_parts,
-+	.nparts = ARRAY_SIZE(eon_nor_parts),
-+};
-diff --git a/drivers/mtd/spi/fujitsu.c b/drivers/mtd/spi/fujitsu.c
-new file mode 100644
-index 00000000000..3d5328b1815
---- /dev/null
-+++ b/drivers/mtd/spi/fujitsu.c
-@@ -0,0 +1,27 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
-+
-+static const struct flash_info fujitsu_nor_parts[] = {
-+	{
-+		INFO_NAME("mb85rs256ty")
-+		.id = {0x04, 0x7f, 0x25, 0x00, 0x00},
-+		.id_len = 3,
-+		.sector_size = 32 * 1024,
-+		.n_sectors = 1,
-+		.page_size = 32 * 1024, /* Whole chip can be written at once */
-+		.flags = SPI_NOR_NO_ERASE,
-+		.addr_width = 2,
-+	},
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_fujitsu = {
-+	.parts = fujitsu_nor_parts,
-+	.nparts = ARRAY_SIZE(fujitsu_nor_parts),
-+};
-diff --git a/drivers/mtd/spi/gigadevice.c b/drivers/mtd/spi/gigadevice.c
-new file mode 100644
-index 00000000000..b961d9b6c98
---- /dev/null
-+++ b/drivers/mtd/spi/gigadevice.c
-@@ -0,0 +1,141 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
-+
-+static const struct flash_info gigadevice_nor_parts[] = {
-+	{
-+		INFO("gd25q16", 0xc84015, 0, 64 * 1024,  32,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("gd25q32", 0xc84016, 0, 64 * 1024,  64,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("gd25lq32", 0xc86016, 0, 64 * 1024, 64,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("gd25q64", 0xc84017, 0, 64 * 1024, 128,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("gd25lq64c", 0xc86017, 0, 64 * 1024, 128,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("gd25q128", 0xc84018, 0, 64 * 1024, 256,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	/* adding these 3V QSPI flash parts */
-+	{INFO("gd25b256", 0xc84019, 0, 64 * 1024, 512,	SECT_4K |
-+	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)	},
-+	{INFO("gd25b512", 0xc8471A, 0, 64 * 1024, 1024,	SECT_4K |
-+	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55b01g", 0xc8471B, 0, 64 * 1024, 2048,	SECT_4K |
-+	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55b02g", 0xc8471C, 0, 64 * 1024, 4096,	SECT_4K |
-+	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd25f64", 0xc84317, 0, 64 * 1024, 128,	SECT_4K |
-+	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)},
-+	{INFO("gd25f128", 0xc84318, 0, 64 * 1024, 256,	SECT_4K	|
-+	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)},
-+	{INFO("gd25f256", 0xc84319, 0, 64 * 1024, 512,	SECT_4K |
-+	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55f512", 0xc8431A, 0, 64 * 1024, 1024,	SECT_4K |
-+	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd25t512", 0xc8461A, 0, 64 * 1024, 1024,	SECT_4K |
-+	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55t01g", 0xc8461B, 0, 64 * 1024, 2048,	SECT_4K |
-+	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55t02g",	0xc8461C, 0, 64 * 1024, 4096,	SECT_4K |
-+	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	/* adding these 3V OSPI flash parts */
-+	{INFO("gd25x512", 0xc8481A, 0, 64 * 1024, 1024,	SECT_4K |
-+	SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55x01g", 0xc8481B, 0, 64 * 1024, 2048,	SECT_4K |
-+	SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55x02g", 0xc8481C, 0, 64 * 1024, 4096,	SECT_4K |
-+	SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)},
-+	{
-+		INFO("gd25lq128", 0xc86018, 0, 64 * 1024, 256,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("gd25lq256d", 0xc86019, 0, 64 * 1024, 512,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	/* adding these 1.8V QSPI flash parts */
-+	{INFO("gd25lb256", 0xc86719, 0, 64 * 1024, 512,	SECT_4K |
-+	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd25lb512", 0xc8671A, 0, 64 * 1024, 1024,	SECT_4K |
-+	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55lb01g", 0xc8671B, 0, 64 * 1024, 2048,	SECT_4K |
-+	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55lb02g", 0xc8671C, 0, 64 * 1024, 4096,	SECT_4K |
-+	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd25lf80", 0xc86314, 0, 64 * 1024, 16,	SECT_4K |
-+	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)},
-+	{INFO("gd25lf16", 0xc86315, 0, 64 * 1024, 32,	SECT_4K |
-+	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)},
-+	{INFO("gd25lf32", 0xc86316, 0, 64 * 1024, 64,	SECT_4K |
-+	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)	},
-+	{INFO("gd25lf64", 0xc86317, 0, 64 * 1024, 128,	SECT_4K |
-+	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)	},
-+	{INFO("gd25lf128", 0xc86318, 0, 64 * 1024, 256,	SECT_4K |
-+	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)	},
-+	{INFO("gd25lf255", 0xc86319, 0, 64 * 1024, 512,	SECT_4K |
-+	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd25lf511", 0xc8631A, 0, 64 * 1024, 1024,	SECT_4K |
-+	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd25lt256", 0xc86619, 0, 64 * 1024, 512,	SECT_4K |
-+	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd25lt512", 0xc8661A, 0, 64 * 1024, 1024,	SECT_4K |
-+	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55lt01g", 0xc8661B, 0, 64 * 1024, 2048,	SECT_4K |
-+	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55lt02g", 0xc8661C, 0, 64 * 1024, 4096,	SECT_4K |
-+	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd25lx128j", 0xc86818, 0, 64 * 1024, 256,	SECT_4K |
-+	SPI_NOR_OCTAL_READ)},
-+	{
-+		INFO("gd25lx256e", 0xc86819, 0, 64 * 1024, 512,
-+		     SECT_4K | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)
-+	},
-+	/* adding these 1.8V OSPI flash parts */
-+	{INFO("gd25lx512", 0xc8681A, 0, 64 * 1024, 1024,	SECT_4K |
-+	SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55lx01g", 0xc8681B, 0, 64 * 1024, 2048,	SECT_4K |
-+	SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)},
-+	{INFO("gd55lx02g", 0xc8681C, 0, 64 * 1024, 4096,	SECT_4K |
-+	SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)},
-+	{
-+		INFO("gd55lb02ge", 0xc8671c, 0, 64 * 1024, 4096,
-+		     SECT_4K | SPI_NOR_QUAD_READ |
-+		     SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("gd55lb02gf", 0xc8601c, 0, 64 * 1024, 4096,
-+		     SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+		     SPI_NOR_4B_OPCODES)
-+	},
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_gigadevice = {
-+	.parts = gigadevice_nor_parts,
-+	.nparts = ARRAY_SIZE(gigadevice_nor_parts),
-+};
-diff --git a/drivers/mtd/spi/issi.c b/drivers/mtd/spi/issi.c
-new file mode 100644
-index 00000000000..2537ca811f8
---- /dev/null
-+++ b/drivers/mtd/spi/issi.c
-@@ -0,0 +1,84 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
-+
-+static const struct flash_info issi_nor_parts[] = {
-+	{ INFO("is25lq040b", 0x9d4013, 0, 64 * 1024,   8,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25lp008", 0x9d6014, 0, 64 * 1024,  16, SPI_NOR_QUAD_READ) },
-+	{ INFO("is25lp016", 0x9d6015, 0, 64 * 1024,  32, SPI_NOR_QUAD_READ) },
-+	{ INFO("is25lp032",	0x9d6016, 0, 64 * 1024,  64, 0) },
-+	{ INFO("is25lp064",	0x9d6017, 0, 64 * 1024, 128, 0) },
-+	{ INFO("is25lp128",  0x9d6018, 0, 64 * 1024, 256,
-+			SECT_4K | SPI_NOR_DUAL_READ) },
-+	{ INFO("is25lp256",  0x9d6019, 0, 64 * 1024, 512,
-+			SECT_4K | SPI_NOR_DUAL_READ) },
-+	{ INFO("is25lp512",  0x9d601a, 0, 64 * 1024, 1024,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25lp512mj", 0x9d6020, 0, 64 * 1024, 1024,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25lp01g",  0x9d601b, 0, 64 * 1024, 2048,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25wp008", 0x9d7014, 0, 64 * 1024,  16, SPI_NOR_QUAD_READ) },
-+	{ INFO("is25wp016", 0x9d7015, 0, 64 * 1024,  32, SPI_NOR_QUAD_READ) },
-+	{ INFO("is25wp032",  0x9d7016, 0, 64 * 1024,  64,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25wp064",  0x9d7017, 0, 64 * 1024, 128,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25wp128",  0x9d7018, 0, 64 * 1024, 256,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25wp256",  0x9d7019, 0, 64 * 1024, 512,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_4B_OPCODES) },
-+	{ INFO("is25wp512",  0x9d701a, 0, 64 * 1024, 1024,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25wp512mj", 0x9d7020, 0, 64 * 1024, 1024,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25wp01g",  0x9d701b, 0, 64 * 1024, 2048,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25wp01gg",  0x9d7021, 0, 64 * 1024, 2048,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25wx128",  0x9d5b18, 0, 64 * 1024, 256,
-+			SECT_4K | USE_FSR | SPI_NOR_OCTAL_READ) },
-+	{ INFO("is25wx256",  0x9d5b19, 0, 128 * 1024, 256,
-+			SECT_4K | USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("is25lx128",  0x9d5a18, 0, 64 * 1024, 256,
-+			SECT_4K | USE_FSR | SPI_NOR_OCTAL_READ) },
-+	{ INFO("is25lx512",  0x9d5a1a, 0, 64 * 1024, 1024,
-+			SECT_4K | USE_FSR | SPI_NOR_4B_OPCODES | SPI_NOR_HAS_TB) },
-+	{ INFO("is25lp01gg",  0x9d6021, 0, 64 * 1024, 2048,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
-+	{ INFO("is25lp010e",  0x9d4011, 0, 64 * 1024, 2,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25lp020e",  0x9d4012, 0, 64 * 1024, 4,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25lp040e",  0x9d4013, 0, 64 * 1024, 8,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("is25lp01gj",  0x9d6021, 0, 64 * 1024, 2048,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
-+	{ INFO("is25lp02gg",  0x9d6022, 0, 64 * 1024, 4096,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
-+	{ INFO("is25lp02gj",  0x9d6022, 0, 64 * 1024, 4096,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
-+	{ INFO("is25wp01gg",  0x9d7021, 0, 64 * 1024, 2048,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
-+	{ INFO("is25wp01gj",  0x9d7021, 0, 64 * 1024, 2048,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
-+	{ INFO("is25wj128f",  0x9d7118, 0, 64 * 1024, 256,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
-+	{ INFO("is25wp02gg",  0x9d7022, 0, 64 * 1024, 4096,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
-+	{ INFO("is25wp02gj",  0x9d7022, 0, 64 * 1024, 4096,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_issi = {
-+	.parts = issi_nor_parts,
-+	.nparts = ARRAY_SIZE(issi_nor_parts),
-+};
-diff --git a/drivers/mtd/spi/macronix.c b/drivers/mtd/spi/macronix.c
-new file mode 100644
-index 00000000000..87843978cad
---- /dev/null
-+++ b/drivers/mtd/spi/macronix.c
-@@ -0,0 +1,65 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
-+
-+static const struct flash_info macronix_nor_parts[] = {
-+	{ INFO("mx25l2005a",  0xc22012, 0, 64 * 1024,   4, SECT_4K) },
-+	{ INFO("mx25l4005a",  0xc22013, 0, 64 * 1024,   8, SECT_4K) },
-+	{ INFO("mx25l8005",   0xc22014, 0, 64 * 1024,  16, 0) },
-+	{ INFO("mx25l1606e",  0xc22015, 0, 64 * 1024,  32, SECT_4K) },
-+	{ INFO("mx25l3205d",  0xc22016, 0, 64 * 1024,  64, SECT_4K) },
-+	{ INFO("mx25l6405d",  0xc22017, 0, 64 * 1024, 128, SECT_4K) },
-+	{ INFO("mx25u2033e",  0xc22532, 0, 64 * 1024,   4, SECT_4K) },
-+	{ INFO("mx25u1635e",  0xc22535, 0, 64 * 1024,  32, SECT_4K) },
-+	{ INFO("mx25u3235f",  0xc22536, 0, 4 * 1024,  1024, SECT_4K) },
-+	{ INFO("mx25u6435f",  0xc22537, 0, 64 * 1024, 128, SECT_4K) },
-+	{ INFO("mx25l12805d", 0xc22018, 0, 64 * 1024, 256, SECT_4K) },
-+	{ INFO("mx25u12835f", 0xc22538, 0, 64 * 1024, 256, SECT_4K |
-+	       SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("mx25u51245g", 0xc2253a, 0, 64 * 1024, 1024, SECT_4K |
-+	       SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25l12855e", 0xc22618, 0, 64 * 1024, 256, 0) },
-+	{ INFO("mx25l25635e", 0xc22019, 0, 64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("mx25u25635f", 0xc22539, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25v8035f",  0xc22314, 0, 64 * 1024,  16, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("mx25r1635f",  0xc22815, 0, 64 * 1024,  32, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("mx25l25655e", 0xc22619, 0, 64 * 1024, 512, 0) },
-+	{ INFO("mx66l51235l", 0xc2201a, 0, 64 * 1024, 1024, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx66u51235f", 0xc2253a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25u51245f", 0xc2953a, 0, 64 * 1024, 1024, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx66u1g45g",  0xc2253b, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx66u2g45g",  0xc2253c, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx66l1g45g",  0xc2201b, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("mx66l2g45g",  0xc2201c, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25l1633e", 0xc22415, 0, 64 * 1024,   32, SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | SECT_4K) },
-+	{ INFO("mx25r6435f", 0xc22817, 0, 64 * 1024,   128,  SECT_4K) },
-+	{ INFO("mx66uw2g345gx0", 0xc2943c, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES | SPI_NOR_OCTAL_READ) },
-+	{ INFO("mx66lm1g45g",    0xc2853b, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25lm51245g",   0xc2853a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25lw51245g",   0xc2863a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25lm25645g",   0xc28539, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx66uw2g345g",   0xc2843c, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx66um1g45g",    0xc2803b, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx66uw1g45g",    0xc2813b, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25uw51245g",   0xc2813a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25uw51345g",   0xc2843a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25um25645g",   0xc28039, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25uw25645g",   0xc28139, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25um25345g",   0xc28339, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25uw25345g",   0xc28439, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25uw12845g",   0xc28138, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25uw12345g",   0xc28438, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25uw6445g",    0xc28137, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx25uw6345g",    0xc28437, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_macronix = {
-+	.parts = macronix_nor_parts,
-+	.nparts = ARRAY_SIZE(macronix_nor_parts),
-+};
-diff --git a/drivers/mtd/spi/micron-st.c b/drivers/mtd/spi/micron-st.c
-new file mode 100644
-index 00000000000..2d47f1c60c0
---- /dev/null
-+++ b/drivers/mtd/spi/micron-st.c
-@@ -0,0 +1,70 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
-+
-+static const struct flash_info micron_nor_parts[] = {
-+	{ INFO("n25q016a",	 0x20bb15, 0, 64 * 1024,   32, SECT_4K | SPI_NOR_QUAD_READ) },
-+	{ INFO("n25q032",	 0x20ba16, 0, 64 * 1024,   64, SPI_NOR_QUAD_READ) },
-+	{ INFO("n25q032a",	0x20bb16, 0, 64 * 1024,   64, SPI_NOR_QUAD_READ) },
-+	{ INFO("n25q064",     0x20ba17, 0, 64 * 1024,  128, SECT_4K | SPI_NOR_QUAD_READ) },
-+	{ INFO("n25q064a",    0x20bb17, 0, 64 * 1024,  128, SECT_4K | SPI_NOR_QUAD_READ) },
-+	{ INFO("n25q128a11",  0x20bb18, 0, 64 * 1024,  256, SECT_4K | SPI_NOR_QUAD_READ) },
-+	{ INFO("n25q128a13",  0x20ba18, 0, 64 * 1024,  256, SECT_4K | SPI_NOR_QUAD_READ) },
-+	{ INFO6("mt25ql256a",    0x20ba19, 0x104400, 64 * 1024,  512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | USE_FSR) },
-+	{ INFO("n25q256a",    0x20ba19, 0, 64 * 1024,  512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_FSR) },
-+	{ INFO6("mt25qu256a",  0x20bb19, 0x104400, 64 * 1024,  512, SECT_4K | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | USE_FSR) },
-+	{ INFO("n25q256ax1",  0x20bb19, 0, 64 * 1024,  512, SECT_4K | SPI_NOR_QUAD_READ | USE_FSR) },
-+	{ INFO("mt25qu128ab", 0x20bb18, 0, 64 * 1024,  256, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ) },
-+	{ INFO6("mt25qu512a",  0x20bb20, 0x104400, 64 * 1024, 1024,
-+		 SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
-+		 USE_FSR) },
-+	{ INFO("n25q512a",    0x20bb20, 0, 64 * 1024, 1024, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ) },
-+	{ INFO6("mt25ql512a",  0x20ba20, 0x104400, 64 * 1024, 1024, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("n25q512ax3",  0x20ba20, 0, 64 * 1024, 1024, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ) },
-+	{ INFO("n25q00",      0x20ba21, 0, 64 * 1024, 2048, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE) },
-+	{ INFO("n25q00a",     0x20bb21, 0, 64 * 1024, 2048, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE) },
-+	{ INFO("mt25ql01g",   0x21ba20, 0, 64 * 1024, 2048, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE) },
-+	{ INFO6("mt25qu01g",  0x20bb21, 0x104400, 64 * 1024, 2048, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mt25qu02g",   0x20bb22, 0, 64 * 1024, 4096, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE) },
-+	{ INFO("mt25ql02g",   0x20ba22, 0, 64 * 1024, 4096, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE | SPI_NOR_4B_OPCODES) },
-+#ifdef CONFIG_SPI_FLASH_MT35XU
-+	{ INFO("mt35xl512aba", 0x2c5a1a, 0,  128 * 1024,  512, USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES | SPI_NOR_OCTAL_DTR_READ) },
-+	{ INFO("mt35xu512aba", 0x2c5b1a, 0,  128 * 1024,  512, USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES | SPI_NOR_OCTAL_DTR_READ) },
-+	{ INFO("mt35xu01gaba", 0x2c5b1b, 0,  128 * 1024,  1024,
-+		USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES | NO_CHIP_ERASE) },
-+#endif /* CONFIG_SPI_FLASH_MT35XU */
-+	{ INFO6("mt35xu01g",  0x2c5b1b, 0x104100, 128 * 1024,  1024,
-+		USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES | NO_CHIP_ERASE) },
-+	{ INFO("mt35xu02g",  0x2c5b1c, 0, 128 * 1024,  2048,
-+		USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES | NO_CHIP_ERASE) },
-+};
-+
-+static const struct flash_info st_nor_parts[] = {
-+	{ INFO("m25p10",  0x202011,  0,  32 * 1024,   4, 0) },
-+	{ INFO("m25p20",  0x202012,  0,  64 * 1024,   4, 0) },
-+	{ INFO("m25p40",  0x202013,  0,  64 * 1024,   8, 0) },
-+	{ INFO("m25p80",  0x202014,  0,  64 * 1024,  16, 0) },
-+	{ INFO("m25p16",  0x202015,  0,  64 * 1024,  32, 0) },
-+	{ INFO("m25p32",  0x202016,  0,  64 * 1024,  64, 0) },
-+	{ INFO("m25p64",  0x202017,  0,  64 * 1024, 128, 0) },
-+	{ INFO("m25p128", 0x202018,  0, 256 * 1024,  64, 0) },
-+	{ INFO("m25pe16", 0x208015,  0, 64 * 1024, 32, SECT_4K) },
-+	{ INFO("m25px16",    0x207115,  0, 64 * 1024, 32, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("m25px64",    0x207117,  0, 64 * 1024, 128, 0) },
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_micron = {
-+	.parts = micron_nor_parts,
-+	.nparts = ARRAY_SIZE(micron_nor_parts),
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_st = {
-+	.parts = st_nor_parts,
-+	.nparts = ARRAY_SIZE(st_nor_parts),
-+};
-diff --git a/drivers/mtd/spi/puya.c b/drivers/mtd/spi/puya.c
-new file mode 100644
-index 00000000000..37092945dfc
---- /dev/null
-+++ b/drivers/mtd/spi/puya.c
-@@ -0,0 +1,56 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
-+
-+static const struct flash_info puya_nor_parts[] = {
-+	{ INFO
-+	 ("p25q05h", 0x856010, 0, 64 * 1024, 1,
-+	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO
-+	 ("p25q10h", 0x856011, 0, 64 * 1024, 2,
-+	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO
-+	 ("p25q20h", 0x856012, 0, 64 * 1024, 4,
-+	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO
-+	 ("p25q40h", 0x856013, 0, 64 * 1024, 8,
-+	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO
-+	 ("p25q80h", 0x856014, 0, 64 * 1024, 16,
-+	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO
-+	 ("p25q16h", 0x856015, 0, 64 * 1024, 32,
-+	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO
-+	 ("p25q32h", 0x856016, 0, 64 * 1024, 64,
-+	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO
-+	 ("p25q64h", 0x856017, 0, 64 * 1024, 128,
-+	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO
-+	 ("p25q128h", 0x856018, 0, 64 * 1024, 256,
-+	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO
-+	 ("py25f512hb", 0x85231a, 0, 64 * 1024, 1024,
-+	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO
-+	 ("py25f01ghb", 0x85231b, 0, 64 * 1024, 2048,
-+	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO
-+	 ("py25f512lc", 0x85631a, 0, 64 * 1024, 1024,
-+	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO
-+	 ("py25f01glc", 0x85631b, 0, 64 * 1024, 2048,
-+	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_puya = {
-+	.parts = puya_nor_parts,
-+	.nparts = ARRAY_SIZE(puya_nor_parts),
-+};
-diff --git a/drivers/mtd/spi/sandbox.c b/drivers/mtd/spi/sandbox.c
-index e5ebc3479fb..44d8509cd64 100644
---- a/drivers/mtd/spi/sandbox.c
-+++ b/drivers/mtd/spi/sandbox.c
-@@ -110,6 +110,27 @@ void sandbox_sf_set_block_protect(struct udevice *dev, int bp_mask)
- 	sbsf->status |= bp_mask << STAT_BP_SHIFT;
- }
+diff --git a/drivers/mtd/spi/sf_internal.h b/drivers/mtd/spi/sf_internal.h
+index 8d2249ce354..576617beb70 100644
+--- a/drivers/mtd/spi/sf_internal.h
++++ b/drivers/mtd/spi/sf_internal.h
+@@ -13,9 +13,35 @@
+ #include <linux/types.h>
+ #include <linux/compiler.h>
  
-+static const struct flash_info *spi_nor_match_name(const char *name,
-+						   size_t name_len)
-+{
-+	const struct flash_info *part;
-+	unsigned int i, j;
-+	size_t len;
++#include "sfdp.h"
 +
-+	for (i = 0; manufacturers[i]; i++) {
-+		for (j = 0; j < manufacturers[i]->nparts; j++) {
-+			part = &manufacturers[i]->parts[j];
-+			len = strlen(part->name);
-+			if (name_len != len)
-+				continue;
-+			if (!strncasecmp(name, part->name, len))
-+				return part;
+ #define SPI_NOR_MAX_ID_LEN	6
+ #define SPI_NOR_MAX_ADDR_WIDTH	4
+ 
++/**
++ * struct spi_nor_fixups - SPI NOR fixup hooks
++ * @post_bfpt: called after the BFPT table has been parsed
++ * @post_sfdp: called after SFDP has been parsed. Typically used to tweak
++ *             various parameters that could not be extracted by other means
++ *             (i.e. when information provided by the SFDP tables are incomplete
++ *             or wrong).
++ * @late_init: used to initialize flash parameters that are not declared in the
++ *             JESD216 SFDP standard, or where SFDP tables not defined at all.
++ *
++ * Those hooks can be used to tweak the SPI NOR configuration when the SFDP
++ * table is broken or not available.
++ */
++struct spi_nor_fixups {
++	int (*post_bfpt)(struct spi_nor *nor,
++			 const struct sfdp_parameter_header *bfpt_header,
++			 const struct sfdp_bfpt *bfpt,
++			 struct spi_nor_flash_parameter *params);
++	void (*post_sfdp)(struct spi_nor *nor,
++			  struct spi_nor_flash_parameter *params);
++	void (*late_init)(struct spi_nor *nor,
++			  struct spi_nor_flash_parameter *params);
++};
++
+ struct flash_info {
+ #if !CONFIG_IS_ENABLED(SPI_FLASH_TINY)
+ 	char		*name;
+@@ -93,4 +119,28 @@ static inline void spi_flash_mtd_unregister(struct spi_flash *flash)
+ }
+ #endif
+ 
++#if CONFIG_IS_ENABLED(SPI_FLASH_SFDP_SUPPORT)
++int spi_nor_parse_sfdp(struct spi_nor *nor,
++		       struct spi_nor_flash_parameter *params);
++#else
++static inline int spi_nor_parse_sfdp(struct spi_nor *nor,
++				     struct spi_nor_flash_parameter *params)
++{
++	return -EINVAL;
++}
++#endif
++
++#if !CONFIG_IS_ENABLED(SPI_FLASH_TINY)
++void spi_nor_set_read_settings(struct spi_nor_read_command *read,
++			       u8 num_mode_clocks,
++			       u8 num_wait_states,
++			       u8 opcode,
++			       enum spi_nor_protocol proto);
++int spansion_read_cr_quad_enable(struct spi_nor *nor);
++int macronix_quad_enable(struct spi_nor *nor);
++#endif
++
++int spi_nor_hwcaps_read2cmd(u32 hwcaps);
++int spansion_no_read_cr_quad_enable(struct spi_nor *nor);
++
+ #endif /* _SF_INTERNAL_H_ */
+diff --git a/drivers/mtd/spi/sfdp.c b/drivers/mtd/spi/sfdp.c
+new file mode 100644
+index 00000000000..fd545796d50
+--- /dev/null
++++ b/drivers/mtd/spi/sfdp.c
+@@ -0,0 +1,711 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2005, Intec Automation Inc.
++ * Copyright (C) 2014, Freescale Semiconductor, Inc.
++ */
++
++#include <stddef.h>
++#include <string.h>
++#include <dm/device_compat.h>
++#include <dm/devres.h>
++#include <linux/errno.h>
++#include <linux/sizes.h>
++#include <linux/bitfield.h>
++#include <linux/mtd/spi-nor.h>
++#include <spi.h>
++
++#include "sf_internal.h"
++
++/*
++ * Serial Flash Discoverable Parameters (SFDP) parsing.
++ */
++
++/**
++ * spi_nor_read_sfdp() - read Serial Flash Discoverable Parameters.
++ * @nor:	pointer to a 'struct spi_nor'
++ * @addr:	offset in the SFDP area to start reading data from
++ * @len:	number of bytes to read
++ * @buf:	buffer where the SFDP data are copied into (dma-safe memory)
++ *
++ * Whatever the actual numbers of bytes for address and dummy cycles are
++ * for (Fast) Read commands, the Read SFDP (5Ah) instruction is always
++ * followed by a 3-byte address and 8 dummy clock cycles.
++ *
++ * Return: 0 on success, -errno otherwise.
++ */
++static int spi_nor_read_sfdp(struct spi_nor *nor, u32 addr,
++			     size_t len, void *buf)
++{
++	u8 addr_width, read_opcode, read_dummy;
++	int ret;
++
++	read_opcode = nor->read_opcode;
++	addr_width = nor->addr_width;
++	read_dummy = nor->read_dummy;
++
++	nor->read_opcode = SPINOR_OP_RDSFDP;
++	nor->addr_width = 3;
++	nor->read_dummy = 8;
++
++	while (len) {
++		/* Both chips are identical, so should be the SFDP data */
++		if (nor->flags & SNOR_F_HAS_PARALLEL)
++			nor->spi->flags |= SPI_XFER_LOWER;
++
++		ret = nor->read(nor, addr, len, (u8 *)buf);
++		if (!ret || ret > len) {
++			ret = -EIO;
++			goto read_err;
++		}
++		if (ret < 0)
++			goto read_err;
++
++		buf += ret;
++		addr += ret;
++		len -= ret;
++	}
++	ret = 0;
++
++read_err:
++	nor->read_opcode = read_opcode;
++	nor->addr_width = addr_width;
++	nor->read_dummy = read_dummy;
++
++	return ret;
++}
++
++/**
++ * spi_nor_read_sfdp_dma_unsafe() - read Serial Flash Discoverable Parameters.
++ * @nor:	pointer to a 'struct spi_nor'
++ * @addr:	offset in the SFDP area to start reading data from
++ * @len:	number of bytes to read
++ * @buf:	buffer where the SFDP data are copied into
++ *
++ * Wrap spi_nor_read_sfdp() using a kmalloc'ed bounce buffer as @buf is now not
++ * guaranteed to be dma-safe.
++ *
++ * Return: -ENOMEM if kmalloc() fails, the return code of spi_nor_read_sfdp()
++ *          otherwise.
++ */
++static int spi_nor_read_sfdp_dma_unsafe(struct spi_nor *nor, u32 addr,
++					size_t len, void *buf)
++{
++	void *dma_safe_buf;
++	int ret;
++
++	dma_safe_buf = kmalloc(len, GFP_KERNEL);
++	if (!dma_safe_buf)
++		return -ENOMEM;
++
++	ret = spi_nor_read_sfdp(nor, addr, len, dma_safe_buf);
++	memcpy(buf, dma_safe_buf, len);
++	kfree(dma_safe_buf);
++
++	return ret;
++}
++
++/* Fast Read settings. */
++
++static void
++spi_nor_set_read_settings_from_bfpt(struct spi_nor_read_command *read,
++				    u16 half,
++				    enum spi_nor_protocol proto)
++{
++	read->num_mode_clocks = (half >> 5) & 0x07;
++	read->num_wait_states = (half >> 0) & 0x1f;
++	read->opcode = (half >> 8) & 0xff;
++	read->proto = proto;
++}
++
++struct sfdp_bfpt_read {
++	/* The Fast Read x-y-z hardware capability in params->hwcaps.mask. */
++	u32			hwcaps;
++
++	/*
++	 * The <supported_bit> bit in <supported_dword> BFPT DWORD tells us
++	 * whether the Fast Read x-y-z command is supported.
++	 */
++	u32			supported_dword;
++	u32			supported_bit;
++
++	/*
++	 * The half-word at offset <setting_shift> in <setting_dword> BFPT DWORD
++	 * encodes the op code, the number of mode clocks and the number of wait
++	 * states to be used by Fast Read x-y-z command.
++	 */
++	u32			settings_dword;
++	u32			settings_shift;
++
++	/* The SPI protocol for this Fast Read x-y-z command. */
++	enum spi_nor_protocol	proto;
++};
++
++static const struct sfdp_bfpt_read sfdp_bfpt_reads[] = {
++	/* Fast Read 1-1-2 */
++	{
++		SNOR_HWCAPS_READ_1_1_2,
++		BFPT_DWORD(1), BIT(16),	/* Supported bit */
++		BFPT_DWORD(4), 0,	/* Settings */
++		SNOR_PROTO_1_1_2,
++	},
++
++	/* Fast Read 1-2-2 */
++	{
++		SNOR_HWCAPS_READ_1_2_2,
++		BFPT_DWORD(1), BIT(20),	/* Supported bit */
++		BFPT_DWORD(4), 16,	/* Settings */
++		SNOR_PROTO_1_2_2,
++	},
++
++	/* Fast Read 2-2-2 */
++	{
++		SNOR_HWCAPS_READ_2_2_2,
++		BFPT_DWORD(5),  BIT(0),	/* Supported bit */
++		BFPT_DWORD(6), 16,	/* Settings */
++		SNOR_PROTO_2_2_2,
++	},
++
++	/* Fast Read 1-1-4 */
++	{
++		SNOR_HWCAPS_READ_1_1_4,
++		BFPT_DWORD(1), BIT(22),	/* Supported bit */
++		BFPT_DWORD(3), 16,	/* Settings */
++		SNOR_PROTO_1_1_4,
++	},
++
++	/* Fast Read 1-4-4 */
++	{
++		SNOR_HWCAPS_READ_1_4_4,
++		BFPT_DWORD(1), BIT(21),	/* Supported bit */
++		BFPT_DWORD(3), 0,	/* Settings */
++		SNOR_PROTO_1_4_4,
++	},
++
++	/* Fast Read 4-4-4 */
++	{
++		SNOR_HWCAPS_READ_4_4_4,
++		BFPT_DWORD(5), BIT(4),	/* Supported bit */
++		BFPT_DWORD(7), 16,	/* Settings */
++		SNOR_PROTO_4_4_4,
++	},
++};
++
++struct sfdp_bfpt_erase {
++	/*
++	 * The half-word at offset <shift> in DWORD <dwoard> encodes the
++	 * op code and erase sector size to be used by Sector Erase commands.
++	 */
++	u32			dword;
++	u32			shift;
++};
++
++static const struct sfdp_bfpt_erase sfdp_bfpt_erases[] = {
++	/* Erase Type 1 in DWORD8 bits[15:0] */
++	{BFPT_DWORD(8), 0},
++
++	/* Erase Type 2 in DWORD8 bits[31:16] */
++	{BFPT_DWORD(8), 16},
++
++	/* Erase Type 3 in DWORD9 bits[15:0] */
++	{BFPT_DWORD(9), 0},
++
++	/* Erase Type 4 in DWORD9 bits[31:16] */
++	{BFPT_DWORD(9), 16},
++};
++
++static int
++spi_nor_post_bfpt_fixups(struct spi_nor *nor,
++			 const struct sfdp_parameter_header *bfpt_header,
++			 const struct sfdp_bfpt *bfpt,
++			 struct spi_nor_flash_parameter *params)
++{
++	if (nor->fixups && nor->fixups->post_bfpt)
++		return nor->fixups->post_bfpt(nor, bfpt_header, bfpt, params);
++
++	return 0;
++}
++
++/**
++ * spi_nor_parse_bfpt() - read and parse the Basic Flash Parameter Table.
++ * @nor:		pointer to a 'struct spi_nor'
++ * @bfpt_header:	pointer to the 'struct sfdp_parameter_header' describing
++ *			the Basic Flash Parameter Table length and version
++ * @params:		pointer to the 'struct spi_nor_flash_parameter' to be
++ *			filled
++ *
++ * The Basic Flash Parameter Table is the main and only mandatory table as
++ * defined by the SFDP (JESD216) specification.
++ * It provides us with the total size (memory density) of the data array and
++ * the number of address bytes for Fast Read, Page Program and Sector Erase
++ * commands.
++ * For Fast READ commands, it also gives the number of mode clock cycles and
++ * wait states (regrouped in the number of dummy clock cycles) for each
++ * supported instruction op code.
++ * For Page Program, the page size is now available since JESD216 rev A, however
++ * the supported instruction op codes are still not provided.
++ * For Sector Erase commands, this table stores the supported instruction op
++ * codes and the associated sector sizes.
++ * Finally, the Quad Enable Requirements (QER) are also available since JESD216
++ * rev A. The QER bits encode the manufacturer dependent procedure to be
++ * executed to set the Quad Enable (QE) bit in some internal register of the
++ * Quad SPI memory. Indeed the QE bit, when it exists, must be set before
++ * sending any Quad SPI command to the memory. Actually, setting the QE bit
++ * tells the memory to reassign its WP# and HOLD#/RESET# pins to functions IO2
++ * and IO3 hence enabling 4 (Quad) I/O lines.
++ *
++ * Return: 0 on success, -errno otherwise.
++ */
++static int spi_nor_parse_bfpt(struct spi_nor *nor,
++			      const struct sfdp_parameter_header *bfpt_header,
++			      struct spi_nor_flash_parameter *params)
++{
++	struct mtd_info *mtd = &nor->mtd;
++	struct sfdp_bfpt bfpt;
++	size_t len;
++	int i, cmd, err;
++	u32 addr;
++	u16 half;
++
++	/* JESD216 Basic Flash Parameter Table length is at least 9 DWORDs. */
++	if (bfpt_header->length < BFPT_DWORD_MAX_JESD216)
++		return -EINVAL;
++
++	/* Read the Basic Flash Parameter Table. */
++	len = min_t(size_t, sizeof(bfpt),
++		    bfpt_header->length * sizeof(u32));
++	addr = SFDP_PARAM_HEADER_PTP(bfpt_header);
++	memset(&bfpt, 0, sizeof(bfpt));
++	err = spi_nor_read_sfdp_dma_unsafe(nor,  addr, len, &bfpt);
++	if (err < 0)
++		return err;
++
++	/* Fix endianness of the BFPT DWORDs. */
++	for (i = 0; i < BFPT_DWORD_MAX; i++)
++		bfpt.dwords[i] = le32_to_cpu(bfpt.dwords[i]);
++
++	/* Number of address bytes. */
++	switch (bfpt.dwords[BFPT_DWORD(1)] & BFPT_DWORD1_ADDRESS_BYTES_MASK) {
++	case BFPT_DWORD1_ADDRESS_BYTES_3_ONLY:
++	case BFPT_DWORD1_ADDRESS_BYTES_3_OR_4:
++		nor->addr_width = 3;
++		nor->addr_mode_nbytes = 3;
++		break;
++
++	case BFPT_DWORD1_ADDRESS_BYTES_4_ONLY:
++		nor->addr_width = 4;
++		nor->addr_mode_nbytes = 4;
++		break;
++
++	default:
++		break;
++	}
++
++	/* Flash Memory Density (in bits). */
++	params->size = bfpt.dwords[BFPT_DWORD(2)];
++	if (params->size & BIT(31)) {
++		params->size &= ~BIT(31);
++
++		/*
++		 * Prevent overflows on params->size. Anyway, a NOR of 2^64
++		 * bits is unlikely to exist so this error probably means
++		 * the BFPT we are reading is corrupted/wrong.
++		 */
++		if (params->size > 63)
++			return -EINVAL;
++
++		params->size = 1ULL << params->size;
++	} else {
++		params->size++;
++	}
++	params->size >>= 3; /* Convert to bytes. */
++
++	/* Fast Read settings. */
++	for (i = 0; i < ARRAY_SIZE(sfdp_bfpt_reads); i++) {
++		const struct sfdp_bfpt_read *rd = &sfdp_bfpt_reads[i];
++		struct spi_nor_read_command *read;
++
++		if (!(bfpt.dwords[rd->supported_dword] & rd->supported_bit)) {
++			params->hwcaps.mask &= ~rd->hwcaps;
++			continue;
++		}
++
++		params->hwcaps.mask |= rd->hwcaps;
++		cmd = spi_nor_hwcaps_read2cmd(rd->hwcaps);
++		read = &params->reads[cmd];
++		half = bfpt.dwords[rd->settings_dword] >> rd->settings_shift;
++		spi_nor_set_read_settings_from_bfpt(read, half, rd->proto);
++	}
++
++	/* Sector Erase settings. */
++	for (i = 0; i < ARRAY_SIZE(sfdp_bfpt_erases); i++) {
++		const struct sfdp_bfpt_erase *er = &sfdp_bfpt_erases[i];
++		u32 erasesize;
++		u8 opcode;
++
++		half = bfpt.dwords[er->dword] >> er->shift;
++		erasesize = half & 0xff;
++
++		/* erasesize == 0 means this Erase Type is not supported. */
++		if (!erasesize)
++			continue;
++
++		erasesize = 1U << erasesize;
++		opcode = (half >> 8) & 0xff;
++#ifdef CONFIG_SPI_FLASH_USE_4K_SECTORS
++		if (erasesize == SZ_4K) {
++			nor->erase_opcode = opcode;
++			mtd->erasesize = erasesize;
++			break;
++		}
++#endif
++		if (!mtd->erasesize || mtd->erasesize < erasesize) {
++			nor->erase_opcode = opcode;
++			mtd->erasesize = erasesize;
 +		}
 +	}
 +
-+	return NULL;
++	/* Stop here if not JESD216 rev A or later. */
++	if (bfpt_header->length == BFPT_DWORD_MAX_JESD216)
++		return spi_nor_post_bfpt_fixups(nor, bfpt_header, &bfpt,
++						params);
++
++	/* Page size: this field specifies 'N' so the page size = 2^N bytes. */
++	params->page_size = bfpt.dwords[BFPT_DWORD(11)];
++	params->page_size &= BFPT_DWORD11_PAGE_SIZE_MASK;
++	params->page_size >>= BFPT_DWORD11_PAGE_SIZE_SHIFT;
++	params->page_size = 1U << params->page_size;
++
++	/* Quad Enable Requirements. */
++	switch (bfpt.dwords[BFPT_DWORD(15)] & BFPT_DWORD15_QER_MASK) {
++	case BFPT_DWORD15_QER_NONE:
++		params->quad_enable = NULL;
++		break;
++#if defined(CONFIG_SPI_FLASH_SPANSION) || defined(CONFIG_SPI_FLASH_WINBOND)
++	case BFPT_DWORD15_QER_SR2_BIT1_BUGGY:
++	case BFPT_DWORD15_QER_SR2_BIT1_NO_RD:
++		params->quad_enable = spansion_no_read_cr_quad_enable;
++		break;
++#endif
++#if defined(CONFIG_SPI_FLASH_MACRONIX) || defined(CONFIG_SPI_FLASH_ISSI)
++	case BFPT_DWORD15_QER_SR1_BIT6:
++		params->quad_enable = macronix_quad_enable;
++		break;
++#endif
++#if defined(CONFIG_SPI_FLASH_SPANSION) || defined(CONFIG_SPI_FLASH_WINBOND)
++	case BFPT_DWORD15_QER_SR2_BIT1:
++		params->quad_enable = spansion_read_cr_quad_enable;
++		break;
++#endif
++	default:
++		dev_dbg(nor->dev, "BFPT QER reserved value used\n");
++		break;
++	}
++
++	/* Soft Reset support. */
++	if (bfpt.dwords[BFPT_DWORD(16)] & BFPT_DWORD16_SOFT_RST)
++		nor->flags |= SNOR_F_SOFT_RESET;
++
++	/* Stop here if JESD216 rev B. */
++	if (bfpt_header->length == BFPT_DWORD_MAX_JESD216B)
++		return spi_nor_post_bfpt_fixups(nor, bfpt_header, &bfpt,
++						params);
++
++	/* 8D-8D-8D command extension. */
++	switch (bfpt.dwords[BFPT_DWORD(18)] & BFPT_DWORD18_CMD_EXT_MASK) {
++	case BFPT_DWORD18_CMD_EXT_REP:
++		nor->cmd_ext_type = SPI_NOR_EXT_REPEAT;
++		break;
++
++	case BFPT_DWORD18_CMD_EXT_INV:
++		nor->cmd_ext_type = SPI_NOR_EXT_INVERT;
++		break;
++
++	case BFPT_DWORD18_CMD_EXT_RES:
++		return -EINVAL;
++
++	case BFPT_DWORD18_CMD_EXT_16B:
++		dev_err(nor->dev, "16-bit opcodes not supported\n");
++		return -ENOTSUPP;
++	}
++
++	return spi_nor_post_bfpt_fixups(nor, bfpt_header, &bfpt, params);
 +}
 +
- /**
-  * This is a very strange probe function. If it has platform data (which may
-  * have come from the device tree) then this function gets the filename and
-@@ -119,7 +140,7 @@ static int sandbox_sf_probe(struct udevice *dev)
- {
- 	/* spec = idcode:file */
- 	struct sandbox_spi_flash *sbsf = dev_get_priv(dev);
--	size_t len, idname_len;
-+	size_t idname_len;
- 	const struct flash_info *data;
- 	struct sandbox_spi_flash_plat_data *pdata = dev_get_plat(dev);
- 	struct sandbox_state *state = state_get_current();
-@@ -153,14 +174,8 @@ static int sandbox_sf_probe(struct udevice *dev)
- 	idname_len = strlen(spec);
- 	debug("%s: device='%s'\n", __func__, spec);
- 
--	for (data = spi_nor_ids; data->name; data++) {
--		len = strlen(data->name);
--		if (idname_len != len)
--			continue;
--		if (!strncasecmp(spec, data->name, len))
--			break;
--	}
--	if (!data->name) {
-+	data = spi_nor_match_name(spec, idname_len);
-+	if (!data) {
- 		printf("%s: unknown flash '%*s'\n", __func__, (int)idname_len,
- 		       spec);
- 		ret = -EINVAL;
-diff --git a/drivers/mtd/spi/sf_internal.h b/drivers/mtd/spi/sf_internal.h
-index bc69af94aca..f96895c7439 100644
---- a/drivers/mtd/spi/sf_internal.h
-+++ b/drivers/mtd/spi/sf_internal.h
-@@ -97,6 +97,45 @@ struct flash_info {
- #define SPI_NOR_OCTAL_DTR_READ	BIT(17)	/* Flash supports Octal DTR Read */
- };
- 
-+/* Exclude chip names for SPL to save space */
-+#if !CONFIG_IS_ENABLED(SPI_FLASH_TINY)
-+#define INFO_NAME(_name) .name = _name,
-+#else
-+#define INFO_NAME(_name)
-+#endif
++/**
++ * spi_nor_parse_microchip_sfdp() - parse the Microchip manufacturer specific
++ * SFDP table.
++ * @nor:		pointer to a 'struct spi_nor'.
++ * @param_header:	pointer to the SFDP parameter header.
++ *
++ * Return: 0 on success, -errno otherwise.
++ */
++static int
++spi_nor_parse_microchip_sfdp(struct spi_nor *nor,
++			     const struct sfdp_parameter_header *param_header)
++{
++	size_t size;
++	u32 addr;
++	int ret;
 +
-+/* Used when the "_ext_id" is two bytes at most */
-+#define INFO(_name, _jedec_id, _ext_id, _sector_size, _n_sectors, _flags)	\
-+		INFO_NAME(_name)					\
-+		.id = {							\
-+			((_jedec_id) >> 16) & 0xff,			\
-+			((_jedec_id) >> 8) & 0xff,			\
-+			(_jedec_id) & 0xff,				\
-+			((_ext_id) >> 8) & 0xff,			\
-+			(_ext_id) & 0xff,				\
-+			},						\
-+		.id_len = (!(_jedec_id) ? 0 : (3 + ((_ext_id) ? 2 : 0))),	\
-+		.sector_size = (_sector_size),				\
-+		.n_sectors = (_n_sectors),				\
-+		.page_size = 256,					\
-+		.flags = (_flags),
++	size = param_header->length * sizeof(u32);
++	addr = SFDP_PARAM_HEADER_PTP(param_header);
 +
-+#define INFO6(_name, _jedec_id, _ext_id, _sector_size, _n_sectors, _flags)	\
-+		INFO_NAME(_name)					\
-+		.id = {							\
-+			((_jedec_id) >> 16) & 0xff,			\
-+			((_jedec_id) >> 8) & 0xff,			\
-+			(_jedec_id) & 0xff,				\
-+			((_ext_id) >> 16) & 0xff,			\
-+			((_ext_id) >> 8) & 0xff,			\
-+			(_ext_id) & 0xff,				\
-+			},						\
-+		.id_len = 6,						\
-+		.sector_size = (_sector_size),				\
-+		.n_sectors = (_n_sectors),				\
-+		.page_size = 256,					\
-+		.flags = (_flags),
++	nor->manufacturer_sfdp = devm_kmalloc(nor->dev, size, GFP_KERNEL);
++	if (!nor->manufacturer_sfdp)
++		return -ENOMEM;
 +
- /**
-  * struct spi_nor_manufacturer - SPI NOR manufacturer object
-  * @parts: array of parts supported by this manufacturer
-@@ -114,7 +153,23 @@ struct spi_nor_manufacturer {
- };
- 
- extern const struct spi_nor_manufacturer *manufacturers[];
--extern const struct flash_info spi_nor_ids[];
-+extern const struct spi_nor_manufacturer spi_nor_atmel;
-+extern const struct spi_nor_manufacturer spi_nor_dosilicon;
-+extern const struct spi_nor_manufacturer spi_nor_eon;
-+extern const struct spi_nor_manufacturer spi_nor_fujitsu;
-+extern const struct spi_nor_manufacturer spi_nor_gigadevice;
-+extern const struct spi_nor_manufacturer spi_nor_issi;
-+extern const struct spi_nor_manufacturer spi_nor_macronix;
-+extern const struct spi_nor_manufacturer spi_nor_puya;
-+extern const struct spi_nor_manufacturer spi_nor_siliconkaiser;
-+extern const struct spi_nor_manufacturer spi_nor_micron;
-+extern const struct spi_nor_manufacturer spi_nor_st;
-+extern const struct spi_nor_manufacturer spi_nor_spansion;
-+extern const struct spi_nor_manufacturer spi_nor_sst;
-+extern const struct spi_nor_manufacturer spi_nor_winbond;
-+extern const struct spi_nor_manufacturer spi_nor_xmc;
-+extern const struct spi_nor_manufacturer spi_nor_xtx;
-+extern const struct spi_nor_manufacturer spi_nor_zbit;
- 
- #define JEDEC_MFR(info)	((info)->id[0])
- #define JEDEC_ID(info)		(((info)->id[1]) << 8 | ((info)->id[2]))
-diff --git a/drivers/mtd/spi/siliconkaiser.c b/drivers/mtd/spi/siliconkaiser.c
++	ret = spi_nor_read_sfdp(nor, addr, size, nor->manufacturer_sfdp);
++
++	return ret;
++}
++
++/**
++ * spi_nor_parse_profile1() - parse the xSPI Profile 1.0 table
++ * @nor:		pointer to a 'struct spi_nor'
++ * @profile1_header:	pointer to the 'struct sfdp_parameter_header' describing
++ *			the 4-Byte Address Instruction Table length and version.
++ * @params:		pointer to the 'struct spi_nor_flash_parameter' to be.
++ *
++ * Return: 0 on success, -errno otherwise.
++ */
++static int spi_nor_parse_profile1(struct spi_nor *nor,
++				  const struct sfdp_parameter_header *profile1_header,
++				  struct spi_nor_flash_parameter *params)
++{
++	u32 *table, opcode, addr;
++	size_t len;
++	int ret, i;
++	u8 dummy;
++
++	len = profile1_header->length * sizeof(*table);
++	table = kmalloc(len, GFP_KERNEL);
++	if (!table)
++		return -ENOMEM;
++
++	addr = SFDP_PARAM_HEADER_PTP(profile1_header);
++	ret = spi_nor_read_sfdp(nor, addr, len, table);
++	if (ret)
++		goto out;
++
++	/* Fix endianness of the table DWORDs. */
++	for (i = 0; i < profile1_header->length; i++)
++		table[i] = le32_to_cpu(table[i]);
++
++	/* Get 8D-8D-8D fast read opcode and dummy cycles. */
++	opcode = FIELD_GET(PROFILE1_DWORD1_RD_FAST_CMD, table[0]);
++
++	/*
++	 * We don't know what speed the controller is running at. Find the
++	 * dummy cycles for the fastest frequency the flash can run at to be
++	 * sure we are never short of dummy cycles. A value of 0 means the
++	 * frequency is not supported.
++	 *
++	 * Default to PROFILE1_DUMMY_DEFAULT if we don't find anything, and let
++	 * flashes set the correct value if needed in their fixup hooks.
++	 */
++	dummy = FIELD_GET(PROFILE1_DWORD4_DUMMY_200MHZ, table[3]);
++	if (!dummy)
++		dummy = FIELD_GET(PROFILE1_DWORD5_DUMMY_166MHZ, table[4]);
++	if (!dummy)
++		dummy = FIELD_GET(PROFILE1_DWORD5_DUMMY_133MHZ, table[4]);
++	if (!dummy)
++		dummy = FIELD_GET(PROFILE1_DWORD5_DUMMY_100MHZ, table[4]);
++	if (!dummy)
++		dummy = PROFILE1_DUMMY_DEFAULT;
++
++	/* Round up to an even value to avoid tripping controllers up. */
++	dummy = ROUND_UP_TO(dummy, 2);
++
++	/* Update the fast read settings. */
++	spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_8_8_8_DTR],
++				  0, dummy, opcode,
++				  SNOR_PROTO_8_8_8_DTR);
++
++	/*
++	 * Set the Read Status Register dummy cycles and dummy address bytes.
++	 */
++	if (table[0] & PROFILE1_DWORD1_RDSR_DUMMY)
++		params->rdsr_dummy = 8;
++	else
++		params->rdsr_dummy = 4;
++
++	if (table[0] & PROFILE1_DWORD1_RDSR_ADDR_BYTES)
++		params->rdsr_addr_nbytes = 4;
++	else
++		params->rdsr_addr_nbytes = 0;
++
++out:
++	kfree(table);
++	return ret;
++}
++
++/**
++ * spi_nor_parse_sccr() - Parse the Status, Control and Configuration Register
++ *			  Map.
++ * @nor:		  pointer to a 'struct spi_nor'
++ * @sccr_header:	  pointer to the 'struct sfdp_parameter_header' describing
++ * 			  the SCCR Map table length and version.
++ *
++ * Return: 0 on success, -errno otherwise.
++ */
++static int spi_nor_parse_sccr(struct spi_nor *nor,
++			      const struct sfdp_parameter_header *sccr_header)
++{
++	u32 *table, addr;
++	size_t len;
++	int ret, i;
++
++	len = sccr_header->length * sizeof(*table);
++	table = kmalloc(len, GFP_KERNEL);
++	if (!table)
++		return -ENOMEM;
++
++	addr = SFDP_PARAM_HEADER_PTP(sccr_header);
++	ret = spi_nor_read_sfdp(nor, addr, len, table);
++	if (ret)
++		goto out;
++
++	/* Fix endianness of the table DWORDs. */
++	for (i = 0; i < sccr_header->length; i++)
++		table[i] = le32_to_cpu(table[i]);
++
++	if (FIELD_GET(SCCR_DWORD22_OCTAL_DTR_EN_VOLATILE, table[21]))
++		nor->flags |= SNOR_F_IO_MODE_EN_VOLATILE;
++
++out:
++	kfree(table);
++	return ret;
++}
++
++/**
++ * spi_nor_parse_sfdp() - parse the Serial Flash Discoverable Parameters.
++ * @nor:		pointer to a 'struct spi_nor'
++ * @params:		pointer to the 'struct spi_nor_flash_parameter' to be
++ *			filled
++ *
++ * The Serial Flash Discoverable Parameters are described by the JEDEC JESD216
++ * specification. This is a standard which tends to supported by almost all
++ * (Q)SPI memory manufacturers. Those hard-coded tables allow us to learn at
++ * runtime the main parameters needed to perform basic SPI flash operations such
++ * as Fast Read, Page Program or Sector Erase commands.
++ *
++ * Return: 0 on success, -errno otherwise.
++ */
++int spi_nor_parse_sfdp(struct spi_nor *nor,
++		       struct spi_nor_flash_parameter *params)
++{
++	const struct sfdp_parameter_header *param_header, *bfpt_header;
++	struct sfdp_parameter_header *param_headers = NULL;
++	struct sfdp_header header;
++	size_t psize;
++	int i, err;
++
++	/* Get the SFDP header. */
++	err = spi_nor_read_sfdp_dma_unsafe(nor, 0, sizeof(header), &header);
++	if (err < 0)
++		return err;
++
++	/* Check the SFDP header version. */
++	if (le32_to_cpu(header.signature) != SFDP_SIGNATURE ||
++	    header.major != SFDP_JESD216_MAJOR)
++		return -EINVAL;
++
++	/*
++	 * Verify that the first and only mandatory parameter header is a
++	 * Basic Flash Parameter Table header as specified in JESD216.
++	 */
++	bfpt_header = &header.bfpt_header;
++	if (SFDP_PARAM_HEADER_ID(bfpt_header) != SFDP_BFPT_ID ||
++	    bfpt_header->major != SFDP_JESD216_MAJOR)
++		return -EINVAL;
++
++	/*
++	 * Allocate memory then read all parameter headers with a single
++	 * Read SFDP command. These parameter headers will actually be parsed
++	 * twice: a first time to get the latest revision of the basic flash
++	 * parameter table, then a second time to handle the supported optional
++	 * tables.
++	 * Hence we read the parameter headers once for all to reduce the
++	 * processing time. Also we use kmalloc() instead of devm_kmalloc()
++	 * because we don't need to keep these parameter headers: the allocated
++	 * memory is always released with kfree() before exiting this function.
++	 */
++	if (header.nph) {
++		psize = header.nph * sizeof(*param_headers);
++
++		param_headers = kmalloc(psize, GFP_KERNEL);
++		if (!param_headers)
++			return -ENOMEM;
++
++		err = spi_nor_read_sfdp(nor, sizeof(header),
++					psize, param_headers);
++		if (err < 0) {
++			dev_err(nor->dev,
++				"failed to read SFDP parameter headers\n");
++			goto exit;
++		}
++	}
++
++	/*
++	 * Check other parameter headers to get the latest revision of
++	 * the basic flash parameter table.
++	 */
++	for (i = 0; i < header.nph; i++) {
++		param_header = &param_headers[i];
++
++		if (SFDP_PARAM_HEADER_ID(param_header) == SFDP_BFPT_ID &&
++		    param_header->major == SFDP_JESD216_MAJOR &&
++		    (param_header->minor > bfpt_header->minor ||
++		     (param_header->minor == bfpt_header->minor &&
++		      param_header->length > bfpt_header->length)))
++			bfpt_header = param_header;
++	}
++
++	err = spi_nor_parse_bfpt(nor, bfpt_header, params);
++	if (err)
++		goto exit;
++
++	/* Parse other parameter headers. */
++	for (i = 0; i < header.nph; i++) {
++		param_header = &param_headers[i];
++
++		switch (SFDP_PARAM_HEADER_ID(param_header)) {
++		case SFDP_SECTOR_MAP_ID:
++			dev_info(nor->dev,
++				 "non-uniform erase sector maps are not supported yet.\n");
++			break;
++
++		case SFDP_SST_ID:
++			err = spi_nor_parse_microchip_sfdp(nor, param_header);
++			break;
++
++		case SFDP_PROFILE1_ID:
++			err = spi_nor_parse_profile1(nor, param_header, params);
++			break;
++
++		case SFDP_SCCR_MAP_ID:
++			err = spi_nor_parse_sccr(nor, param_header);
++			break;
++
++		default:
++			break;
++		}
++
++		if (err) {
++			dev_warn(nor->dev,
++				 "Failed to parse optional parameter table: %04x\n",
++				 SFDP_PARAM_HEADER_ID(param_header));
++			/*
++			 * Let's not drop all information we extracted so far
++			 * if optional table parsers fail. In case of failing,
++			 * each optional parser is responsible to roll back to
++			 * the previously known spi_nor data.
++			 */
++			err = 0;
++		}
++	}
++
++exit:
++	kfree(param_headers);
++	return err;
++}
+diff --git a/drivers/mtd/spi/sfdp.h b/drivers/mtd/spi/sfdp.h
 new file mode 100644
-index 00000000000..23e03ff8088
+index 00000000000..f85ac71490b
 --- /dev/null
-+++ b/drivers/mtd/spi/siliconkaiser.c
-@@ -0,0 +1,18 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/drivers/mtd/spi/sfdp.h
+@@ -0,0 +1,152 @@
++/* SPDX-License-Identifier: GPL-2.0 */
 +/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
++ * Copyright (C) 2005, Intec Automation Inc.
++ * Copyright (C) 2014, Freescale Semiconductor, Inc.
 + */
 +
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
++#ifndef _SPI_NOR_SFDP_H_
++#define _SPI_NOR_SFDP_H_
 +
-+static const struct flash_info siliconkaiser_nor_parts[] = {
-+	{ INFO("sk25lp128", 0x257018, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
++#define ROUND_UP_TO(x, y)	(((x) + (y) - 1) / (y) * (y))
++
++struct sfdp_parameter_header {
++	u8		id_lsb;
++	u8		minor;
++	u8		major;
++	u8		length; /* in double words */
++	u8		parameter_table_pointer[3]; /* byte address */
++	u8		id_msb;
 +};
 +
-+const struct spi_nor_manufacturer spi_nor_siliconkaiser = {
-+	.parts = siliconkaiser_nor_parts,
-+	.nparts = ARRAY_SIZE(siliconkaiser_nor_parts),
++#define SFDP_PARAM_HEADER_ID(p)	(((p)->id_msb << 8) | (p)->id_lsb)
++#define SFDP_PARAM_HEADER_PTP(p) \
++	(((p)->parameter_table_pointer[2] << 16) | \
++	 ((p)->parameter_table_pointer[1] <<  8) | \
++	 ((p)->parameter_table_pointer[0] <<  0))
++
++#define SFDP_BFPT_ID		0xff00	/* Basic Flash Parameter Table */
++#define SFDP_SECTOR_MAP_ID	0xff81	/* Sector Map Table */
++#define SFDP_SST_ID		0x01bf	/* Manufacturer specific Table */
++#define SFDP_PROFILE1_ID	0xff05	/* xSPI Profile 1.0 Table */
++#define SFDP_SCCR_MAP_ID	0xff87	/*
++					 * Status, Control and Configuration
++					 * Register Map.
++					 */
++
++#define SFDP_SIGNATURE		0x50444653U
++#define SFDP_JESD216_MAJOR	1
++#define SFDP_JESD216_MINOR	0
++#define SFDP_JESD216A_MINOR	5
++#define SFDP_JESD216B_MINOR	6
++
++struct sfdp_header {
++	u32		signature; /* Ox50444653U <=> "SFDP" */
++	u8		minor;
++	u8		major;
++	u8		nph; /* 0-base number of parameter headers */
++	u8		unused;
++
++	/* Basic Flash Parameter Table. */
++	struct sfdp_parameter_header	bfpt_header;
 +};
-diff --git a/drivers/mtd/spi/spansion.c b/drivers/mtd/spi/spansion.c
-new file mode 100644
-index 00000000000..405f5bf5e79
---- /dev/null
-+++ b/drivers/mtd/spi/spansion.c
-@@ -0,0 +1,73 @@
-+// SPDX-License-Identifier: GPL-2.0+
++
++/* Basic Flash Parameter Table */
++
 +/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
++ * JESD216 rev D defines a Basic Flash Parameter Table of 20 DWORDs.
++ * They are indexed from 1 but C arrays are indexed from 0.
 + */
++#define BFPT_DWORD(i)		((i) - 1)
++#define BFPT_DWORD_MAX		20
 +
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
++/* The first version of JESB216 defined only 9 DWORDs. */
++#define BFPT_DWORD_MAX_JESD216			9
++#define BFPT_DWORD_MAX_JESD216B			16
 +
-+static const struct flash_info spansion_nor_parts[] = {
-+	{ INFO("s25sl032p",  0x010215, 0x4d00,  64 * 1024,  64, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("s25sl064p",  0x010216, 0x4d00,  64 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO6("s25fl256s0", 0x010219, 0x4d0080, 256 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fl256s1", 0x010219, 0x4d0180,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fl512s",  0x010220, 0x4d0080, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fs064s",  0x010217, 0x4d0181,  64 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fs128s",  0x012018, 0x4d0181,  64 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fs256s",  0x010219, 0x4d0181,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fs512s",  0x010220, 0x4d0081, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO("s25fl512s_256k",  0x010220, 0x4d00, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO("s25fl512s_64k",  0x010220, 0x4d01, 64 * 1024, 1024, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO("s25fl512s_512k", 0x010220, 0x4f00, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO("s70fs01gs_256k", 0x010221, 0x4d00, 256 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("s25sl12800", 0x012018, 0x0300, 256 * 1024,  64, 0) },
-+	{ INFO("s25sl12801", 0x012018, 0x0301,  64 * 1024, 256, 0) },
-+	{ INFO6("s25fl128s",  0x012018, 0x4d0180, 64 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO("s25fl129p0", 0x012018, 0x4d00, 256 * 1024,  64, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO("s25fl129p1", 0x012018, 0x4d01,  64 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO("s25sl008a",  0x010213,      0,  64 * 1024,  16, 0) },
-+	{ INFO("s25sl016a",  0x010214,      0,  64 * 1024,  32, 0) },
-+	{ INFO("s25sl032a",  0x010215,      0,  64 * 1024,  64, 0) },
-+	{ INFO("s25sl064a",  0x010216,      0,  64 * 1024, 128, 0) },
-+	{ INFO("s25fl116k",  0x014015,      0,  64 * 1024,  32, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("s25fl164k",  0x014017,      0,  64 * 1024, 128, SECT_4K) },
-+	{ INFO("s25fl208k",  0x014014,      0,  64 * 1024,  16, SECT_4K | SPI_NOR_DUAL_READ) },
-+	{ INFO("s25fl064l",  0x016017,      0,  64 * 1024, 128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("s25fl128l",  0x016018,      0,  64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("s25fl256l",  0x016019,      0,  64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO6("s25hl512t",  0x342a1a, 0x0f0390, 256 * 1024, 256,
-+		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
-+		USE_CLSR) },
-+	{ INFO6("s25hl01gt",  0x342a1b, 0x0f0390, 256 * 1024, 512,
-+		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
-+		USE_CLSR) },
-+	{ INFO6("s25hl02gt",  0x342a1c, 0x0f0090, 256 * 1024, 1024,
-+		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | NO_CHIP_ERASE) },
-+	{ INFO6("s25hs512t",  0x342b1a, 0x0f0390, 256 * 1024, 256,
-+		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
-+		USE_CLSR) },
-+	{ INFO6("s25hs01gt",  0x342b1b, 0x0f0390, 256 * 1024, 512,
-+		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
-+		USE_CLSR) },
-+	{ INFO6("s25hs02gt",  0x342b1c, 0x0f0090, 256 * 1024, 1024,
-+		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | NO_CHIP_ERASE) },
-+	{ INFO6("s25fs256t",  0x342b19, 0x0f0890, 128 * 1024, 256,
-+		SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+#ifdef CONFIG_SPI_FLASH_S28HX_T
-+	{ INFO("s28hl256t",  0x345a19,      0, 256 * 1024, 128, SPI_NOR_OCTAL_DTR_READ) },
-+	{ INFO("s28hl512t",  0x345a1a,      0, 256 * 1024, 256, SPI_NOR_OCTAL_DTR_READ) },
-+	{ INFO("s28hl01gt",  0x345a1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
-+	{ INFO("s28hl02gt",  0x345a1c,      0, 256 * 1024, 1024, SPI_NOR_OCTAL_DTR_READ | NO_CHIP_ERASE) },
-+	{ INFO("s28hs256t",  0x345b19,      0, 256 * 1024, 128, SPI_NOR_OCTAL_DTR_READ) },
-+	{ INFO("s28hs512t",  0x345b1a,      0, 256 * 1024, 256, SPI_NOR_OCTAL_DTR_READ) },
-+	{ INFO("s28hs01gt",  0x345b1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
-+	{ INFO("s28hs02gt",  0x345b1c,      0, 256 * 1024, 1024, SPI_NOR_OCTAL_DTR_READ | NO_CHIP_ERASE) },
-+#endif
++/* 1st DWORD. */
++#define BFPT_DWORD1_FAST_READ_1_1_2		BIT(16)
++#define BFPT_DWORD1_ADDRESS_BYTES_MASK		GENMASK(18, 17)
++#define BFPT_DWORD1_ADDRESS_BYTES_3_ONLY	(0x0UL << 17)
++#define BFPT_DWORD1_ADDRESS_BYTES_3_OR_4	(0x1UL << 17)
++#define BFPT_DWORD1_ADDRESS_BYTES_4_ONLY	(0x2UL << 17)
++#define BFPT_DWORD1_DTR				BIT(19)
++#define BFPT_DWORD1_FAST_READ_1_2_2		BIT(20)
++#define BFPT_DWORD1_FAST_READ_1_4_4		BIT(21)
++#define BFPT_DWORD1_FAST_READ_1_1_4		BIT(22)
++
++/* 5th DWORD. */
++#define BFPT_DWORD5_FAST_READ_2_2_2		BIT(0)
++#define BFPT_DWORD5_FAST_READ_4_4_4		BIT(4)
++
++/* 11th DWORD. */
++#define BFPT_DWORD11_PAGE_SIZE_SHIFT		4
++#define BFPT_DWORD11_PAGE_SIZE_MASK		GENMASK(7, 4)
++
++/* 15th DWORD. */
++
++/*
++ * (from JESD216 rev B)
++ * Quad Enable Requirements (QER):
++ * - 000b: Device does not have a QE bit. Device detects 1-1-4 and 1-4-4
++ *         reads based on instruction. DQ3/HOLD# functions are hold during
++ *         instruction phase.
++ * - 001b: QE is bit 1 of status register 2. It is set via Write Status with
++ *         two data bytes where bit 1 of the second byte is one.
++ *         [...]
++ *         Writing only one byte to the status register has the side-effect of
++ *         clearing status register 2, including the QE bit. The 100b code is
++ *         used if writing one byte to the status register does not modify
++ *         status register 2.
++ * - 010b: QE is bit 6 of status register 1. It is set via Write Status with
++ *         one data byte where bit 6 is one.
++ *         [...]
++ * - 011b: QE is bit 7 of status register 2. It is set via Write status
++ *         register 2 instruction 3Eh with one data byte where bit 7 is one.
++ *         [...]
++ *         The status register 2 is read using instruction 3Fh.
++ * - 100b: QE is bit 1 of status register 2. It is set via Write Status with
++ *         two data bytes where bit 1 of the second byte is one.
++ *         [...]
++ *         In contrast to the 001b code, writing one byte to the status
++ *         register does not modify status register 2.
++ * - 101b: QE is bit 1 of status register 2. Status register 1 is read using
++ *         Read Status instruction 05h. Status register2 is read using
++ *         instruction 35h. QE is set via Writ Status instruction 01h with
++ *         two data bytes where bit 1 of the second byte is one.
++ *         [...]
++ */
++#define BFPT_DWORD15_QER_MASK			GENMASK(22, 20)
++#define BFPT_DWORD15_QER_NONE			(0x0UL << 20) /* Micron */
++#define BFPT_DWORD15_QER_SR2_BIT1_BUGGY		(0x1UL << 20)
++#define BFPT_DWORD15_QER_SR1_BIT6		(0x2UL << 20) /* Macronix */
++#define BFPT_DWORD15_QER_SR2_BIT7		(0x3UL << 20)
++#define BFPT_DWORD15_QER_SR2_BIT1_NO_RD		(0x4UL << 20)
++#define BFPT_DWORD15_QER_SR2_BIT1		(0x5UL << 20) /* Spansion */
++
++#define BFPT_DWORD16_SOFT_RST			BIT(12)
++#define BFPT_DWORD16_EX4B_PWRCYC		BIT(21)
++
++#define BFPT_DWORD18_CMD_EXT_MASK		GENMASK(30, 29)
++#define BFPT_DWORD18_CMD_EXT_REP		(0x0UL << 29) /* Repeat */
++#define BFPT_DWORD18_CMD_EXT_INV		(0x1UL << 29) /* Invert */
++#define BFPT_DWORD18_CMD_EXT_RES		(0x2UL << 29) /* Reserved */
++#define BFPT_DWORD18_CMD_EXT_16B		(0x3UL << 29) /* 16-bit opcode */
++
++/* xSPI Profile 1.0 table (from JESD216D.01). */
++#define PROFILE1_DWORD1_RD_FAST_CMD		GENMASK(15, 8)
++#define PROFILE1_DWORD1_RDSR_DUMMY		BIT(28)
++#define PROFILE1_DWORD1_RDSR_ADDR_BYTES		BIT(29)
++#define PROFILE1_DWORD4_DUMMY_200MHZ		GENMASK(11, 7)
++#define PROFILE1_DWORD5_DUMMY_166MHZ		GENMASK(31, 27)
++#define PROFILE1_DWORD5_DUMMY_133MHZ		GENMASK(21, 17)
++#define PROFILE1_DWORD5_DUMMY_100MHZ		GENMASK(11, 7)
++#define PROFILE1_DUMMY_DEFAULT			20
++
++/* Status, Control and Configuration Register Map(SCCR) */
++#define SCCR_DWORD22_OCTAL_DTR_EN_VOLATILE      BIT(31)
++
++struct sfdp_bfpt {
++	u32	dwords[BFPT_DWORD_MAX];
 +};
 +
-+const struct spi_nor_manufacturer spi_nor_spansion = {
-+	.parts = spansion_nor_parts,
-+	.nparts = ARRAY_SIZE(spansion_nor_parts),
-+};
++#endif /* _SPI_NOR_SFDP_H_ */
 diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index 205986a4464..d107828092c 100644
+index 937d79af64e..b99a1a45d8f 100644
 --- a/drivers/mtd/spi/spi-nor-core.c
 +++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -1405,13 +1405,9 @@ static const struct flash_info *spi_nor_read_id(struct spi_nor *nor)
- 		return ERR_PTR(tmp);
- 	}
+@@ -50,171 +50,6 @@
+  */
+ #define CHIP_ERASE_2MB_READY_WAIT_JIFFIES      (40UL * HZ)
  
--	info = spi_nor_ids;
--	for (; info->name; info++) {
--		if (info->id_len) {
--			if (!memcmp(info->id, id, info->id_len))
--				return info;
--		}
--	}
-+	info = spi_nor_match_id(nor, id);
-+	if (info)
-+		return info;
- 
- 	dev_err(nor->dev, "unrecognized JEDEC id bytes: %02x, %02x, %02x\n",
- 		id[0], id[1], id[2]);
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 6ee141f3e11..d1b22f0e5da 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -11,728 +11,56 @@
- 
- #include "sf_internal.h"
- 
--/* Exclude chip names for SPL to save space */
--#if !CONFIG_IS_ENABLED(SPI_FLASH_TINY)
--#define INFO_NAME(_name) .name = _name,
--#else
--#define INFO_NAME(_name)
--#endif
+-#define ROUND_UP_TO(x, y)	(((x) + (y) - 1) / (y) * (y))
 -
--/* Used when the "_ext_id" is two bytes at most */
--#define INFO(_name, _jedec_id, _ext_id, _sector_size, _n_sectors, _flags)	\
--		INFO_NAME(_name)					\
--		.id = {							\
--			((_jedec_id) >> 16) & 0xff,			\
--			((_jedec_id) >> 8) & 0xff,			\
--			(_jedec_id) & 0xff,				\
--			((_ext_id) >> 8) & 0xff,			\
--			(_ext_id) & 0xff,				\
--			},						\
--		.id_len = (!(_jedec_id) ? 0 : (3 + ((_ext_id) ? 2 : 0))),	\
--		.sector_size = (_sector_size),				\
--		.n_sectors = (_n_sectors),				\
--		.page_size = 256,					\
--		.flags = (_flags),
--
--#define INFO6(_name, _jedec_id, _ext_id, _sector_size, _n_sectors, _flags)	\
--		INFO_NAME(_name)					\
--		.id = {							\
--			((_jedec_id) >> 16) & 0xff,			\
--			((_jedec_id) >> 8) & 0xff,			\
--			(_jedec_id) & 0xff,				\
--			((_ext_id) >> 16) & 0xff,			\
--			((_ext_id) >> 8) & 0xff,			\
--			(_ext_id) & 0xff,				\
--			},						\
--		.id_len = 6,						\
--		.sector_size = (_sector_size),				\
--		.n_sectors = (_n_sectors),				\
--		.page_size = 256,					\
--		.flags = (_flags),
--
--/* NOTE: double check command sets and memory organization when you add
-- * more nor chips.  This current list focusses on newer chips, which
-- * have been converging on command sets which including JEDEC ID.
-- *
-- * All newly added entries should describe *hardware* and should use SECT_4K
-- * (or SECT_4K_PMC) if hardware supports erasing 4 KiB sectors. For usage
-- * scenarios excluding small sectors there is config option that can be
-- * disabled: CONFIG_SPI_FLASH_USE_4K_SECTORS.
-- * For historical (and compatibility) reasons (before we got above config) some
-- * old entries may be missing 4K flag.
-- */
--const struct flash_info spi_nor_ids[] = {
--#ifdef CONFIG_SPI_FLASH_ATMEL		/* ATMEL */
--	/* Atmel -- some are (confusingly) marketed as "DataFlash" */
--	{ INFO("at26df321",	0x1f4700, 0, 64 * 1024, 64, SECT_4K) },
--	{ INFO("at25df321a",	0x1f4701, 0, 64 * 1024, 64, SECT_4K) },
--
--	{ INFO("at45db011d",	0x1f2200, 0, 64 * 1024,   4, SECT_4K) },
--	{ INFO("at45db021d",	0x1f2300, 0, 64 * 1024,   8, SECT_4K) },
--	{ INFO("at45db041d",	0x1f2400, 0, 64 * 1024,   8, SECT_4K) },
--	{ INFO("at45db081d",	0x1f2500, 0, 64 * 1024,  16, SECT_4K) },
--	{ INFO("at45db161d",	0x1f2600, 0, 64 * 1024,  32, SECT_4K) },
--	{ INFO("at45db321d",	0x1f2700, 0, 64 * 1024,  64, SECT_4K) },
--	{ INFO("at45db641d",	0x1f2800, 0, 64 * 1024, 128, SECT_4K) },
--	{ INFO("at25sl321",	0x1f4216, 0, 64 * 1024,  64, SECT_4K) },
--	{ INFO("at26df081a",	0x1f4501, 0, 64 * 1024,  16, SECT_4K) },
--#endif
--#ifdef CONFIG_SPI_FLASH_DOSILICON
--	/* Dosilicon Co., Ltd */
--	{ INFO("ds25m4cb", 0xe5401a, 0, 64 * 1024, 1024,
--		    SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("ds25m4dn", 0xe5401b, 0, 64 * 1024, 2048,
--		    SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("ds25q4cb", 0xe5301a, 0, 64 * 1024, 1024,
--		    SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("ds25q4dn", 0xe5301b, 0, 64 * 1024, 2048,
--		    SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("ds25q4bb", 0xe53019, 0, 64 * 1024, 512,
--		    SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--#endif
--#ifdef CONFIG_SPI_FLASH_EON		/* EON */
--	/* EON -- en25xxx */
--	{ INFO("en25q80b",   0x1c3014, 0, 64 * 1024,   16, SECT_4K) },
--	{ INFO("en25q32b",   0x1c3016, 0, 64 * 1024,   64, 0) },
--	{ INFO("en25q64",    0x1c3017, 0, 64 * 1024,  128, SECT_4K) },
--	{ INFO("en25q128b",  0x1c3018, 0, 64 * 1024,  256, 0) },
--	{ INFO("en25qh128",  0x1c7018, 0, 64 * 1024,  256, 0) },
--	{ INFO("en25s64",    0x1c3817, 0, 64 * 1024,  128, SECT_4K) },
-+const struct spi_nor_manufacturer *manufacturers[] = {
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_ATMEL))
-+	&spi_nor_atmel,
- #endif
--#ifdef CONFIG_SPI_FRAM_FUJITSU
--	/* Fujitsu MB85RS256TY */
--	{
--		INFO_NAME("mb85rs256ty")
--		.id = {0x04, 0x7f, 0x25, 0x00, 0x00},
--		.id_len = 3,
--		.sector_size = 32 * 1024,
--		.n_sectors = 1,
--		.page_size = 32 * 1024, /* Whole chip can be written at once */
--		.flags = SPI_NOR_NO_ERASE,
--		.addr_width = 2,
--	},
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_DOSILICON))
-+	&spi_nor_dosilicon,
- #endif
--#ifdef CONFIG_SPI_FLASH_GIGADEVICE	/* GIGADEVICE */
--	/* GigaDevice */
--	{
--		INFO("gd25q16", 0xc84015, 0, 64 * 1024,  32,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("gd25q32", 0xc84016, 0, 64 * 1024,  64,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("gd25lq32", 0xc86016, 0, 64 * 1024, 64,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("gd25q64", 0xc84017, 0, 64 * 1024, 128,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("gd25lq64c", 0xc86017, 0, 64 * 1024, 128,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("gd25q128", 0xc84018, 0, 64 * 1024, 256,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	/* adding these 3V QSPI flash parts */
--	{INFO("gd25b256", 0xc84019, 0, 64 * 1024, 512,	SECT_4K |
--	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)	},
--	{INFO("gd25b512", 0xc8471A, 0, 64 * 1024, 1024,	SECT_4K |
--	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd55b01g", 0xc8471B, 0, 64 * 1024, 2048,	SECT_4K |
--	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd55b02g", 0xc8471C, 0, 64 * 1024, 4096,	SECT_4K |
--	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd25f64", 0xc84317, 0, 64 * 1024, 128,	SECT_4K |
--	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)},
--	{INFO("gd25f128", 0xc84318, 0, 64 * 1024, 256,	SECT_4K	|
--	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)},
--	{INFO("gd25f256", 0xc84319, 0, 64 * 1024, 512,	SECT_4K |
--	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd55f512", 0xc8431A, 0, 64 * 1024, 1024,	SECT_4K |
--	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd25t512", 0xc8461A, 0, 64 * 1024, 1024,	SECT_4K |
--	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd55t01g", 0xc8461B, 0, 64 * 1024, 2048,	SECT_4K |
--	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd55t02g",	0xc8461C, 0, 64 * 1024, 4096,	SECT_4K |
--	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	/* adding these 3V OSPI flash parts */
--	{INFO("gd25x512", 0xc8481A, 0, 64 * 1024, 1024,	SECT_4K |
--	SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)},
--	{INFO("gd55x01g", 0xc8481B, 0, 64 * 1024, 2048,	SECT_4K |
--	SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)},
--	{INFO("gd55x02g", 0xc8481C, 0, 64 * 1024, 4096,	SECT_4K |
--	SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)},
--	{
--		INFO("gd25lq128", 0xc86018, 0, 64 * 1024, 256,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("gd25lq256d", 0xc86019, 0, 64 * 1024, 512,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	/* adding these 1.8V QSPI flash parts */
--	{INFO("gd25lb256", 0xc86719, 0, 64 * 1024, 512,	SECT_4K |
--	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd25lb512", 0xc8671A, 0, 64 * 1024, 1024,	SECT_4K |
--	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd55lb01g", 0xc8671B, 0, 64 * 1024, 2048,	SECT_4K |
--	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd55lb02g", 0xc8671C, 0, 64 * 1024, 4096,	SECT_4K |
--	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd25lf80", 0xc86314, 0, 64 * 1024, 16,	SECT_4K |
--	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)},
--	{INFO("gd25lf16", 0xc86315, 0, 64 * 1024, 32,	SECT_4K |
--	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)},
--	{INFO("gd25lf32", 0xc86316, 0, 64 * 1024, 64,	SECT_4K |
--	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)	},
--	{INFO("gd25lf64", 0xc86317, 0, 64 * 1024, 128,	SECT_4K |
--	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)	},
--	{INFO("gd25lf128", 0xc86318, 0, 64 * 1024, 256,	SECT_4K |
--	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK)	},
--	{INFO("gd25lf255", 0xc86319, 0, 64 * 1024, 512,	SECT_4K |
--	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd25lf511", 0xc8631A, 0, 64 * 1024, 1024,	SECT_4K |
--	SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd25lt256", 0xc86619, 0, 64 * 1024, 512,	SECT_4K |
--	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd25lt512", 0xc8661A, 0, 64 * 1024, 1024,	SECT_4K |
--	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd55lt01g", 0xc8661B, 0, 64 * 1024, 2048,	SECT_4K |
--	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd55lt02g", 0xc8661C, 0, 64 * 1024, 4096,	SECT_4K |
--	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
--	{INFO("gd25lx128j", 0xc86818, 0, 64 * 1024, 256,	SECT_4K |
--	SPI_NOR_OCTAL_READ)},
--	{
--		INFO("gd25lx256e", 0xc86819, 0, 64 * 1024, 512,
--		     SECT_4K | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)
--	},
--	/* adding these 1.8V OSPI flash parts */
--	{INFO("gd25lx512", 0xc8681A, 0, 64 * 1024, 1024,	SECT_4K |
--	SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)},
--	{INFO("gd55lx01g", 0xc8681B, 0, 64 * 1024, 2048,	SECT_4K |
--	SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)},
--	{INFO("gd55lx02g", 0xc8681C, 0, 64 * 1024, 4096,	SECT_4K |
--	SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)},
--	{
--		INFO("gd55lb02ge", 0xc8671c, 0, 64 * 1024, 4096,
--		     SECT_4K | SPI_NOR_QUAD_READ |
--		     SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("gd55lb02gf", 0xc8601c, 0, 64 * 1024, 4096,
--		     SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--		     SPI_NOR_4B_OPCODES)
--	},
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_EON))
-+	&spi_nor_eon,
- #endif
--#ifdef CONFIG_SPI_FLASH_ISSI		/* ISSI */
--	/* ISSI */
--	{ INFO("is25lq040b", 0x9d4013, 0, 64 * 1024,   8,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("is25lp008", 0x9d6014, 0, 64 * 1024,  16, SPI_NOR_QUAD_READ) },
--	{ INFO("is25lp016", 0x9d6015, 0, 64 * 1024,  32, SPI_NOR_QUAD_READ) },
--	{ INFO("is25lp032",	0x9d6016, 0, 64 * 1024,  64, 0) },
--	{ INFO("is25lp064",	0x9d6017, 0, 64 * 1024, 128, 0) },
--	{ INFO("is25lp128",  0x9d6018, 0, 64 * 1024, 256,
--			SECT_4K | SPI_NOR_DUAL_READ) },
--	{ INFO("is25lp256",  0x9d6019, 0, 64 * 1024, 512,
--			SECT_4K | SPI_NOR_DUAL_READ) },
--	{ INFO("is25lp512",  0x9d601a, 0, 64 * 1024, 1024,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("is25lp512mj", 0x9d6020, 0, 64 * 1024, 1024,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("is25lp01g",  0x9d601b, 0, 64 * 1024, 2048,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("is25wp008", 0x9d7014, 0, 64 * 1024,  16, SPI_NOR_QUAD_READ) },
--	{ INFO("is25wp016", 0x9d7015, 0, 64 * 1024,  32, SPI_NOR_QUAD_READ) },
--	{ INFO("is25wp032",  0x9d7016, 0, 64 * 1024,  64,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("is25wp064",  0x9d7017, 0, 64 * 1024, 128,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("is25wp128",  0x9d7018, 0, 64 * 1024, 256,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("is25wp256",  0x9d7019, 0, 64 * 1024, 512,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_4B_OPCODES) },
--	{ INFO("is25wp512",  0x9d701a, 0, 64 * 1024, 1024,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("is25wp512mj", 0x9d7020, 0, 64 * 1024, 1024,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("is25wp01g",  0x9d701b, 0, 64 * 1024, 2048,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("is25wp01gg",  0x9d7021, 0, 64 * 1024, 2048,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("is25wx128",  0x9d5b18, 0, 64 * 1024, 256,
--			SECT_4K | USE_FSR | SPI_NOR_OCTAL_READ) },
--	{ INFO("is25wx256",  0x9d5b19, 0, 128 * 1024, 256,
--			SECT_4K | USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("is25lx128",  0x9d5a18, 0, 64 * 1024, 256,
--			SECT_4K | USE_FSR | SPI_NOR_OCTAL_READ) },
--	{ INFO("is25lx512",  0x9d5a1a, 0, 64 * 1024, 1024,
--			SECT_4K | USE_FSR | SPI_NOR_4B_OPCODES | SPI_NOR_HAS_TB) },
--	{ INFO("is25lp01gg",  0x9d6021, 0, 64 * 1024, 2048,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
--	{ INFO("is25lp010e",  0x9d4011, 0, 64 * 1024, 2,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("is25lp020e",  0x9d4012, 0, 64 * 1024, 4,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("is25lp040e",  0x9d4013, 0, 64 * 1024, 8,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("is25lp01gj",  0x9d6021, 0, 64 * 1024, 2048,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
--	{ INFO("is25lp02gg",  0x9d6022, 0, 64 * 1024, 4096,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
--	{ INFO("is25lp02gj",  0x9d6022, 0, 64 * 1024, 4096,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
--	{ INFO("is25wp01gg",  0x9d7021, 0, 64 * 1024, 2048,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
--	{ INFO("is25wp01gj",  0x9d7021, 0, 64 * 1024, 2048,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
--	{ INFO("is25wj128f",  0x9d7118, 0, 64 * 1024, 256,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
--	{ INFO("is25wp02gg",  0x9d7022, 0, 64 * 1024, 4096,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
--	{ INFO("is25wp02gj",  0x9d7022, 0, 64 * 1024, 4096,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_HAS_TB) },
-+#if (IS_ENABLED(CONFIG_SPI_FRAM_FUJITSU))
-+	&spi_nor_fujitsu,
- #endif
--#ifdef CONFIG_SPI_FLASH_MACRONIX	/* MACRONIX */
--	/* Macronix */
--	{ INFO("mx25l2005a",  0xc22012, 0, 64 * 1024,   4, SECT_4K) },
--	{ INFO("mx25l4005a",  0xc22013, 0, 64 * 1024,   8, SECT_4K) },
--	{ INFO("mx25l8005",   0xc22014, 0, 64 * 1024,  16, 0) },
--	{ INFO("mx25l1606e",  0xc22015, 0, 64 * 1024,  32, SECT_4K) },
--	{ INFO("mx25l3205d",  0xc22016, 0, 64 * 1024,  64, SECT_4K) },
--	{ INFO("mx25l6405d",  0xc22017, 0, 64 * 1024, 128, SECT_4K) },
--	{ INFO("mx25u2033e",  0xc22532, 0, 64 * 1024,   4, SECT_4K) },
--	{ INFO("mx25u1635e",  0xc22535, 0, 64 * 1024,  32, SECT_4K) },
--	{ INFO("mx25u3235f",  0xc22536, 0, 4 * 1024,  1024, SECT_4K) },
--	{ INFO("mx25u6435f",  0xc22537, 0, 64 * 1024, 128, SECT_4K) },
--	{ INFO("mx25l12805d", 0xc22018, 0, 64 * 1024, 256, SECT_4K) },
--	{ INFO("mx25u12835f", 0xc22538, 0, 64 * 1024, 256, SECT_4K |
--	       SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("mx25u51245g", 0xc2253a, 0, 64 * 1024, 1024, SECT_4K |
--	       SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25l12855e", 0xc22618, 0, 64 * 1024, 256, 0) },
--	{ INFO("mx25l25635e", 0xc22019, 0, 64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("mx25u25635f", 0xc22539, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25v8035f",  0xc22314, 0, 64 * 1024,  16, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("mx25r1635f",  0xc22815, 0, 64 * 1024,  32, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("mx25l25655e", 0xc22619, 0, 64 * 1024, 512, 0) },
--	{ INFO("mx66l51235l", 0xc2201a, 0, 64 * 1024, 1024, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx66u51235f", 0xc2253a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25u51245f", 0xc2953a, 0, 64 * 1024, 1024, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx66u1g45g",  0xc2253b, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx66u2g45g",  0xc2253c, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx66l1g45g",  0xc2201b, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("mx66l2g45g",  0xc2201c, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25l1633e", 0xc22415, 0, 64 * 1024,   32, SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | SECT_4K) },
--	{ INFO("mx25r6435f", 0xc22817, 0, 64 * 1024,   128,  SECT_4K) },
--	{ INFO("mx66uw2g345gx0", 0xc2943c, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES | SPI_NOR_OCTAL_READ) },
--	{ INFO("mx66lm1g45g",    0xc2853b, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25lm51245g",   0xc2853a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25lw51245g",   0xc2863a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25lm25645g",   0xc28539, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx66uw2g345g",   0xc2843c, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx66um1g45g",    0xc2803b, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx66uw1g45g",    0xc2813b, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25uw51245g",   0xc2813a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25uw51345g",   0xc2843a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25um25645g",   0xc28039, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25uw25645g",   0xc28139, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25um25345g",   0xc28339, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25uw25345g",   0xc28439, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25uw12845g",   0xc28138, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25uw12345g",   0xc28438, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25uw6445g",    0xc28137, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("mx25uw6345g",    0xc28437, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_GIGADEVICE))
-+	&spi_nor_gigadevice,
- #endif
--#ifdef CONFIG_SPI_FLASH_PUYA
--	/* Puya Semiconductor (Shanghai) Co., Ltd */
--	{ INFO
--	 ("p25q05h", 0x856010, 0, 64 * 1024, 1,
--	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO
--	 ("p25q10h", 0x856011, 0, 64 * 1024, 2,
--	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO
--	 ("p25q20h", 0x856012, 0, 64 * 1024, 4,
--	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO
--	 ("p25q40h", 0x856013, 0, 64 * 1024, 8,
--	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO
--	 ("p25q80h", 0x856014, 0, 64 * 1024, 16,
--	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO
--	 ("p25q16h", 0x856015, 0, 64 * 1024, 32,
--	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO
--	 ("p25q32h", 0x856016, 0, 64 * 1024, 64,
--	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO
--	 ("p25q64h", 0x856017, 0, 64 * 1024, 128,
--	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO
--	 ("p25q128h", 0x856018, 0, 64 * 1024, 256,
--	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO
--	 ("py25f512hb", 0x85231a, 0, 64 * 1024, 1024,
--	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO
--	 ("py25f01ghb", 0x85231b, 0, 64 * 1024, 2048,
--	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO
--	 ("py25f512lc", 0x85631a, 0, 64 * 1024, 1024,
--	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO
--	 ("py25f01glc", 0x85631b, 0, 64 * 1024, 2048,
--	  SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_ISSI))
-+	&spi_nor_issi,
- #endif
--
--#ifdef CONFIG_SPI_FLASH_SILICONKAISER
--	{ INFO("sk25lp128", 0x257018, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_MACRONIX))
-+	&spi_nor_macronix,
- #endif
--
--#ifdef CONFIG_SPI_FLASH_STMICRO		/* STMICRO */
--	/* Micron */
--	{ INFO("n25q016a",	 0x20bb15, 0, 64 * 1024,   32, SECT_4K | SPI_NOR_QUAD_READ) },
--	{ INFO("n25q032",	 0x20ba16, 0, 64 * 1024,   64, SPI_NOR_QUAD_READ) },
--	{ INFO("n25q032a",	0x20bb16, 0, 64 * 1024,   64, SPI_NOR_QUAD_READ) },
--	{ INFO("n25q064",     0x20ba17, 0, 64 * 1024,  128, SECT_4K | SPI_NOR_QUAD_READ) },
--	{ INFO("n25q064a",    0x20bb17, 0, 64 * 1024,  128, SECT_4K | SPI_NOR_QUAD_READ) },
--	{ INFO("n25q128a11",  0x20bb18, 0, 64 * 1024,  256, SECT_4K | SPI_NOR_QUAD_READ) },
--	{ INFO("n25q128a13",  0x20ba18, 0, 64 * 1024,  256, SECT_4K | SPI_NOR_QUAD_READ) },
--	{ INFO6("mt25ql256a",    0x20ba19, 0x104400, 64 * 1024,  512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | USE_FSR) },
--	{ INFO("n25q256a",    0x20ba19, 0, 64 * 1024,  512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_FSR) },
--	{ INFO6("mt25qu256a",  0x20bb19, 0x104400, 64 * 1024,  512, SECT_4K | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | USE_FSR) },
--	{ INFO("n25q256ax1",  0x20bb19, 0, 64 * 1024,  512, SECT_4K | SPI_NOR_QUAD_READ | USE_FSR) },
--	{ INFO("mt25qu128ab", 0x20bb18, 0, 64 * 1024,  256, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ) },
--	{ INFO6("mt25qu512a",  0x20bb20, 0x104400, 64 * 1024, 1024,
--		 SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
--		 USE_FSR) },
--	{ INFO("n25q512a",    0x20bb20, 0, 64 * 1024, 1024, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ) },
--	{ INFO6("mt25ql512a",  0x20ba20, 0x104400, 64 * 1024, 1024, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("n25q512ax3",  0x20ba20, 0, 64 * 1024, 1024, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ) },
--	{ INFO("n25q00",      0x20ba21, 0, 64 * 1024, 2048, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE) },
--	{ INFO("n25q00a",     0x20bb21, 0, 64 * 1024, 2048, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE) },
--	{ INFO("mt25ql01g",   0x21ba20, 0, 64 * 1024, 2048, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE) },
--	{ INFO6("mt25qu01g",  0x20bb21, 0x104400, 64 * 1024, 2048, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE | SPI_NOR_4B_OPCODES) },
--	{ INFO("mt25qu02g",   0x20bb22, 0, 64 * 1024, 4096, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE) },
--	{ INFO("mt25ql02g",   0x20ba22, 0, 64 * 1024, 4096, SECT_4K | USE_FSR | SPI_NOR_QUAD_READ | NO_CHIP_ERASE | SPI_NOR_4B_OPCODES) },
--#ifdef CONFIG_SPI_FLASH_MT35XU
--	{ INFO("mt35xl512aba", 0x2c5a1a, 0,  128 * 1024,  512, USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES | SPI_NOR_OCTAL_DTR_READ) },
--	{ INFO("mt35xu512aba", 0x2c5b1a, 0,  128 * 1024,  512, USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES | SPI_NOR_OCTAL_DTR_READ) },
--	{ INFO("mt35xu01gaba", 0x2c5b1b, 0,  128 * 1024,  1024,
--		USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES | NO_CHIP_ERASE) },
--#endif /* CONFIG_SPI_FLASH_MT35XU */
--	{ INFO6("mt35xu01g",  0x2c5b1b, 0x104100, 128 * 1024,  1024,
--		USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES | NO_CHIP_ERASE) },
--	{ INFO("mt35xu02g",  0x2c5b1c, 0, 128 * 1024,  2048,
--		USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES | NO_CHIP_ERASE) },
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_PUYA))
-+	&spi_nor_puya,
- #endif
--#ifdef CONFIG_SPI_FLASH_SPANSION	/* SPANSION */
--	/* Spansion/Cypress -- single (large) sector size only, at least
--	 * for the chips listed here (without boot sectors).
--	 */
--	{ INFO("s25sl032p",  0x010215, 0x4d00,  64 * 1024,  64, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("s25sl064p",  0x010216, 0x4d00,  64 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO6("s25fl256s0", 0x010219, 0x4d0080, 256 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--	{ INFO6("s25fl256s1", 0x010219, 0x4d0180,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--	{ INFO6("s25fl512s",  0x010220, 0x4d0080, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--	{ INFO6("s25fs064s",  0x010217, 0x4d0181,  64 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--	{ INFO6("s25fs128s",  0x012018, 0x4d0181,  64 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--	{ INFO6("s25fs256s",  0x010219, 0x4d0181,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--	{ INFO6("s25fs512s",  0x010220, 0x4d0081, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--	{ INFO("s25fl512s_256k",  0x010220, 0x4d00, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--	{ INFO("s25fl512s_64k",  0x010220, 0x4d01, 64 * 1024, 1024, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--	{ INFO("s25fl512s_512k", 0x010220, 0x4f00, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--	{ INFO("s70fs01gs_256k", 0x010221, 0x4d00, 256 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("s25sl12800", 0x012018, 0x0300, 256 * 1024,  64, 0) },
--	{ INFO("s25sl12801", 0x012018, 0x0301,  64 * 1024, 256, 0) },
--	{ INFO6("s25fl128s",  0x012018, 0x4d0180, 64 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--	{ INFO("s25fl129p0", 0x012018, 0x4d00, 256 * 1024,  64, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--	{ INFO("s25fl129p1", 0x012018, 0x4d01,  64 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
--	{ INFO("s25sl008a",  0x010213,      0,  64 * 1024,  16, 0) },
--	{ INFO("s25sl016a",  0x010214,      0,  64 * 1024,  32, 0) },
--	{ INFO("s25sl032a",  0x010215,      0,  64 * 1024,  64, 0) },
--	{ INFO("s25sl064a",  0x010216,      0,  64 * 1024, 128, 0) },
--	{ INFO("s25fl116k",  0x014015,      0,  64 * 1024,  32, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("s25fl164k",  0x014017,      0,  64 * 1024, 128, SECT_4K) },
--	{ INFO("s25fl208k",  0x014014,      0,  64 * 1024,  16, SECT_4K | SPI_NOR_DUAL_READ) },
--	{ INFO("s25fl064l",  0x016017,      0,  64 * 1024, 128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("s25fl128l",  0x016018,      0,  64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("s25fl256l",  0x016019,      0,  64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO6("s25hl512t",  0x342a1a, 0x0f0390, 256 * 1024, 256,
--		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
--		USE_CLSR) },
--	{ INFO6("s25hl01gt",  0x342a1b, 0x0f0390, 256 * 1024, 512,
--		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
--		USE_CLSR) },
--	{ INFO6("s25hl02gt",  0x342a1c, 0x0f0090, 256 * 1024, 1024,
--		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | NO_CHIP_ERASE) },
--	{ INFO6("s25hs512t",  0x342b1a, 0x0f0390, 256 * 1024, 256,
--		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
--		USE_CLSR) },
--	{ INFO6("s25hs01gt",  0x342b1b, 0x0f0390, 256 * 1024, 512,
--		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES |
--		USE_CLSR) },
--	{ INFO6("s25hs02gt",  0x342b1c, 0x0f0090, 256 * 1024, 1024,
--		SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | NO_CHIP_ERASE) },
--	{ INFO6("s25fs256t",  0x342b19, 0x0f0890, 128 * 1024, 256,
--		SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--#ifdef CONFIG_SPI_FLASH_S28HX_T
--	{ INFO("s28hl256t",  0x345a19,      0, 256 * 1024, 128, SPI_NOR_OCTAL_DTR_READ) },
--	{ INFO("s28hl512t",  0x345a1a,      0, 256 * 1024, 256, SPI_NOR_OCTAL_DTR_READ) },
--	{ INFO("s28hl01gt",  0x345a1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
--	{ INFO("s28hl02gt",  0x345a1c,      0, 256 * 1024, 1024, SPI_NOR_OCTAL_DTR_READ | NO_CHIP_ERASE) },
--	{ INFO("s28hs256t",  0x345b19,      0, 256 * 1024, 128, SPI_NOR_OCTAL_DTR_READ) },
--	{ INFO("s28hs512t",  0x345b1a,      0, 256 * 1024, 256, SPI_NOR_OCTAL_DTR_READ) },
--	{ INFO("s28hs01gt",  0x345b1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
--	{ INFO("s28hs02gt",  0x345b1c,      0, 256 * 1024, 1024, SPI_NOR_OCTAL_DTR_READ | NO_CHIP_ERASE) },
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_SILICONKAISER))
-+	&spi_nor_siliconkaiser,
- #endif
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_STMICRO))
-+	&spi_nor_micron,
-+	&spi_nor_st,
- #endif
--#ifdef CONFIG_SPI_FLASH_SST		/* SST */
--	/* SST -- large erase sizes are "overlays", "sectors" are 4K */
--	{ INFO("sst25vf040b", 0xbf258d, 0, 64 * 1024,  8, SECT_4K | SST_WRITE) },
--	{ INFO("sst25vf080b", 0xbf258e, 0, 64 * 1024, 16, SECT_4K | SST_WRITE) },
--	{ INFO("sst25vf016b", 0xbf2541, 0, 64 * 1024, 32, SECT_4K | SST_WRITE) },
--	{ INFO("sst25vf032b", 0xbf254a, 0, 64 * 1024, 64, SECT_4K | SST_WRITE) },
--	{ INFO("sst25vf064c", 0xbf254b, 0, 64 * 1024, 128, SECT_4K) },
--	{ INFO("sst25wf512",  0xbf2501, 0, 64 * 1024,  1, SECT_4K | SST_WRITE) },
--	{ INFO("sst25wf010",  0xbf2502, 0, 64 * 1024,  2, SECT_4K | SST_WRITE) },
--	{ INFO("sst25wf020",  0xbf2503, 0, 64 * 1024,  4, SECT_4K | SST_WRITE) },
--	{ INFO("sst25wf020a", 0x621612, 0, 64 * 1024,  4, SECT_4K) },
--	{ INFO("sst25wf040b", 0x621613, 0, 64 * 1024,  8, SECT_4K) },
--	{ INFO("sst25wf040",  0xbf2504, 0, 64 * 1024,  8, SECT_4K | SST_WRITE) },
--	{ INFO("sst25wf080",  0xbf2505, 0, 64 * 1024, 16, SECT_4K | SST_WRITE) },
--	{ INFO("sst26vf064b", 0xbf2643, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_HAS_SST26LOCK | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("sst26wf016b", 0xbf2641, 0, 64 * 1024,  32, SECT_4K) },
--	{ INFO("sst26wf016",  0xbf2651, 0, 64 * 1024,  32, SECT_4K | SPI_NOR_HAS_SST26LOCK) },
--	{ INFO("sst26wf032",  0xbf2622, 0, 64 * 1024,  64, SECT_4K | SPI_NOR_HAS_SST26LOCK) },
--	{ INFO("sst26wf064",  0xbf2643, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_HAS_SST26LOCK) },
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_SPANSION))
-+	&spi_nor_spansion,
- #endif
--#ifdef CONFIG_SPI_FLASH_STMICRO		/* STMICRO */
--	/* STMicroelectronics -- newer production may have feature updates */
--	{ INFO("m25p10",  0x202011,  0,  32 * 1024,   4, 0) },
--	{ INFO("m25p20",  0x202012,  0,  64 * 1024,   4, 0) },
--	{ INFO("m25p40",  0x202013,  0,  64 * 1024,   8, 0) },
--	{ INFO("m25p80",  0x202014,  0,  64 * 1024,  16, 0) },
--	{ INFO("m25p16",  0x202015,  0,  64 * 1024,  32, 0) },
--	{ INFO("m25p32",  0x202016,  0,  64 * 1024,  64, 0) },
--	{ INFO("m25p64",  0x202017,  0,  64 * 1024, 128, 0) },
--	{ INFO("m25p128", 0x202018,  0, 256 * 1024,  64, 0) },
--	{ INFO("m25pe16", 0x208015,  0, 64 * 1024, 32, SECT_4K) },
--	{ INFO("m25px16",    0x207115,  0, 64 * 1024, 32, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("m25px64",    0x207117,  0, 64 * 1024, 128, 0) },
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_SST))
-+	&spi_nor_sst,
- #endif
--#ifdef CONFIG_SPI_FLASH_WINBOND		/* WINBOND */
--	/* Winbond -- w25x "blocks" are 64K, "sectors" are 4KiB */
--	{ INFO("w25p80", 0xef2014, 0x0,	64 * 1024,    16, 0) },
--	{ INFO("w25p16", 0xef2015, 0x0,	64 * 1024,    32, 0) },
--	{ INFO("w25p32", 0xef2016, 0x0,	64 * 1024,    64, 0) },
--	{ INFO("w25x05", 0xef3010, 0, 64 * 1024,  1,  SECT_4K) },
--	{ INFO("w25x40", 0xef3013, 0, 64 * 1024,  8,  SECT_4K) },
--	{ INFO("w25x16", 0xef3015, 0, 64 * 1024,  32, SECT_4K) },
--	{ INFO("w25x32", 0xef3016, 0, 64 * 1024,  64, SECT_4K) },
--	{ INFO("w25q20cl", 0xef4012, 0, 64 * 1024,  4, SECT_4K) },
--	{ INFO("w25q20bw", 0xef5012, 0, 64 * 1024,  4, SECT_4K) },
--	{ INFO("w25q20ew", 0xef6012, 0, 64 * 1024,  4, SECT_4K) },
--	{
--		INFO("w25q16dw", 0xef6015, 0, 64 * 1024,  32,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q32dw", 0xef6016, 0, 64 * 1024,  64,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q16jv", 0xef7015, 0, 64 * 1024,  32,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ)
--	},
--	{
--		INFO("w25q32jv", 0xef7016, 0, 64 * 1024,  64,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q32jwm", 0xef8016, 0, 64 * 1024,  64,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q256jwm", 0xef8019, 0, 64 * 1024, 512,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{ INFO("w25x64", 0xef3017, 0, 64 * 1024, 128, SECT_4K) },
--	{
--		INFO("w25q64dw", 0xef6017, 0, 64 * 1024, 128,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q64jv", 0xef7017, 0, 64 * 1024, 128,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q128fw", 0xef6018, 0, 64 * 1024, 256,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q128jv", 0xef7018, 0, 64 * 1024, 256,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q128jw", 0xef8018, 0, 64 * 1024, 256,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q256fw", 0xef6019, 0, 64 * 1024, 512,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q256jw", 0xef7019, 0, 64 * 1024, 512,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q512nwq", 0xef6020, 0, 64 * 1024, 1024,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q512nwm", 0xef8020, 0, 64 * 1024, 1024,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q512jvq", 0xef4020, 0, 64 * 1024, 1024,
--		     SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--		     SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q01jv", 0xef4021, 0, 64 * 1024, 2048,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q01jvfim", 0xef7021, 0, 64 * 1024, 2048,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{
--		INFO("w25q02jv", 0xef7022, 0, 64 * 1024, 4096,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{ INFO("w25q80", 0xef5014, 0, 64 * 1024,  16, SECT_4K) },
--	{ INFO("w25q80bl", 0xef4014, 0, 64 * 1024,  16, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{
--		INFO("w25q16cl", 0xef4015, 0, 64 * 1024,  32,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{ INFO("w25q32", 0xef4016, 0, 64 * 1024,  64, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25q64cv", 0xef4017, 0, 64 * 1024,  128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25q128", 0xef4018, 0, 64 * 1024, 256,
--			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
--			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
--	},
--	{ INFO("w25q256", 0xef4019, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25m512jw", 0xef6119, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25m512jv", 0xef7119, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25h02jv", 0xef9022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25h512nw-am", 0xefa020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25h01nw-am", 0xefa021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25h02nw-am", 0xefa022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25q01nw-iq", 0xef6021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25q01nw-im", 0xef8021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w25q02nw-im", 0xef8022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("w77q51nw", 0xef8a1a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_WINBOND))
-+	&spi_nor_winbond,
- #endif
--#ifdef CONFIG_SPI_FLASH_XMC
--	/* XMC (Wuhan Xinxin Semiconductor Manufacturing Corp.) */
--	{ INFO("XM25QH64A", 0x207017, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("XM25QH64C", 0x204017, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("XM25QH128A", 0x207018, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("XM25QH128C", 0x204018, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("XM25QU128C", 0x204118, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("XM25QH256C", 0x204019, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("XM25QU256C", 0x204119, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("XM25QH512D", 0x204020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("XM25QU512C", 0x204120, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("XM25QH01D", 0x204021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_XMC))
-+	&spi_nor_xmc,
- #endif
--#ifdef CONFIG_SPI_FLASH_XTX
--	/* XTX Technology Limited */
--	/* adding these 3V QSPI flash parts */
--	{ INFO("xt25f08", 0x0b4014, 0, 64 * 1024, 16,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("xt25f16", 0x0b4015, 0, 64 * 1024, 32,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("xt25f32", 0x0b4016, 0, 64 * 1024, 64,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("xt25f64", 0x0b4017, 0, 64 * 1024, 128,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("xt25f128", 0x0b4018, 0, 64 * 1024, 256,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("xt25f256", 0x0b4019, 0, 64 * 1024, 512,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	/* adding these 1.8V QSPI flash parts */
--	{ INFO("xt25q08", 0x0b6014, 0, 64 * 1024, 16,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("xt25q16", 0x0b6015, 0, 64 * 1024, 32,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("xt25q32", 0x0b6016, 0, 64 * 1024, 64,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("xt25q64", 0x0b6017, 0, 64 * 1024, 128,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("xt25q128", 0x0b6018, 0, 64 * 1024, 256,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
--	{ INFO("xt25q256", 0x0b6019, 0, 64 * 1024, 512,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("xt25q512", 0x0b601A, 0, 64 * 1024, 1024,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("xt25q01g", 0x0b601B, 0, 64 * 1024, 2048,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("xt55q02g", 0x0b601C, 0, 64 * 1024, 4096,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	/* adding these wide voltage QSPI flash parts */
--	{ INFO("xt25w512", 0x0b651A, 0, 64 * 1024, 1024,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
--	{ INFO("xt25w01g", 0x0b651B, 0, 64 * 1024, 2048,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_XTX))
-+	&spi_nor_xtx,
- #endif
--#ifdef CONFIG_SPI_FLASH_ZBIT
--	/* Zbit Semiconductor Inc. */
--	{ INFO("zb25vq128", 0x5e4018, 0, 64 * 1024, 256,
--	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+#if (IS_ENABLED(CONFIG_SPI_FLASH_ZBIT))
-+	&spi_nor_zbit,
- #endif
--	{ },
+-struct sfdp_parameter_header {
+-	u8		id_lsb;
+-	u8		minor;
+-	u8		major;
+-	u8		length; /* in double words */
+-	u8		parameter_table_pointer[3]; /* byte address */
+-	u8		id_msb;
 -};
 -
--const struct spi_nor_manufacturer *manufacturers[] = {
- 	NULL /* sentinel */
- };
+-#define SFDP_PARAM_HEADER_ID(p)	(((p)->id_msb << 8) | (p)->id_lsb)
+-#define SFDP_PARAM_HEADER_PTP(p) \
+-	(((p)->parameter_table_pointer[2] << 16) | \
+-	 ((p)->parameter_table_pointer[1] <<  8) | \
+-	 ((p)->parameter_table_pointer[0] <<  0))
+-
+-#define SFDP_BFPT_ID		0xff00	/* Basic Flash Parameter Table */
+-#define SFDP_SECTOR_MAP_ID	0xff81	/* Sector Map Table */
+-#define SFDP_SST_ID		0x01bf	/* Manufacturer specific Table */
+-#define SFDP_PROFILE1_ID	0xff05	/* xSPI Profile 1.0 Table */
+-#define SFDP_SCCR_MAP_ID	0xff87	/*
+-					 * Status, Control and Configuration
+-					 * Register Map.
+-					 */
+-
+-#define SFDP_SIGNATURE		0x50444653U
+-#define SFDP_JESD216_MAJOR	1
+-#define SFDP_JESD216_MINOR	0
+-#define SFDP_JESD216A_MINOR	5
+-#define SFDP_JESD216B_MINOR	6
+-
+-struct sfdp_header {
+-	u32		signature; /* Ox50444653U <=> "SFDP" */
+-	u8		minor;
+-	u8		major;
+-	u8		nph; /* 0-base number of parameter headers */
+-	u8		unused;
+-
+-	/* Basic Flash Parameter Table. */
+-	struct sfdp_parameter_header	bfpt_header;
+-};
+-
+-/* Basic Flash Parameter Table */
+-
+-/*
+- * JESD216 rev D defines a Basic Flash Parameter Table of 20 DWORDs.
+- * They are indexed from 1 but C arrays are indexed from 0.
+- */
+-#define BFPT_DWORD(i)		((i) - 1)
+-#define BFPT_DWORD_MAX		20
+-
+-/* The first version of JESB216 defined only 9 DWORDs. */
+-#define BFPT_DWORD_MAX_JESD216			9
+-#define BFPT_DWORD_MAX_JESD216B			16
+-
+-/* 1st DWORD. */
+-#define BFPT_DWORD1_FAST_READ_1_1_2		BIT(16)
+-#define BFPT_DWORD1_ADDRESS_BYTES_MASK		GENMASK(18, 17)
+-#define BFPT_DWORD1_ADDRESS_BYTES_3_ONLY	(0x0UL << 17)
+-#define BFPT_DWORD1_ADDRESS_BYTES_3_OR_4	(0x1UL << 17)
+-#define BFPT_DWORD1_ADDRESS_BYTES_4_ONLY	(0x2UL << 17)
+-#define BFPT_DWORD1_DTR				BIT(19)
+-#define BFPT_DWORD1_FAST_READ_1_2_2		BIT(20)
+-#define BFPT_DWORD1_FAST_READ_1_4_4		BIT(21)
+-#define BFPT_DWORD1_FAST_READ_1_1_4		BIT(22)
+-
+-/* 5th DWORD. */
+-#define BFPT_DWORD5_FAST_READ_2_2_2		BIT(0)
+-#define BFPT_DWORD5_FAST_READ_4_4_4		BIT(4)
+-
+-/* 11th DWORD. */
+-#define BFPT_DWORD11_PAGE_SIZE_SHIFT		4
+-#define BFPT_DWORD11_PAGE_SIZE_MASK		GENMASK(7, 4)
+-
+-/* 15th DWORD. */
+-
+-/*
+- * (from JESD216 rev B)
+- * Quad Enable Requirements (QER):
+- * - 000b: Device does not have a QE bit. Device detects 1-1-4 and 1-4-4
+- *         reads based on instruction. DQ3/HOLD# functions are hold during
+- *         instruction phase.
+- * - 001b: QE is bit 1 of status register 2. It is set via Write Status with
+- *         two data bytes where bit 1 of the second byte is one.
+- *         [...]
+- *         Writing only one byte to the status register has the side-effect of
+- *         clearing status register 2, including the QE bit. The 100b code is
+- *         used if writing one byte to the status register does not modify
+- *         status register 2.
+- * - 010b: QE is bit 6 of status register 1. It is set via Write Status with
+- *         one data byte where bit 6 is one.
+- *         [...]
+- * - 011b: QE is bit 7 of status register 2. It is set via Write status
+- *         register 2 instruction 3Eh with one data byte where bit 7 is one.
+- *         [...]
+- *         The status register 2 is read using instruction 3Fh.
+- * - 100b: QE is bit 1 of status register 2. It is set via Write Status with
+- *         two data bytes where bit 1 of the second byte is one.
+- *         [...]
+- *         In contrast to the 001b code, writing one byte to the status
+- *         register does not modify status register 2.
+- * - 101b: QE is bit 1 of status register 2. Status register 1 is read using
+- *         Read Status instruction 05h. Status register2 is read using
+- *         instruction 35h. QE is set via Writ Status instruction 01h with
+- *         two data bytes where bit 1 of the second byte is one.
+- *         [...]
+- */
+-#define BFPT_DWORD15_QER_MASK			GENMASK(22, 20)
+-#define BFPT_DWORD15_QER_NONE			(0x0UL << 20) /* Micron */
+-#define BFPT_DWORD15_QER_SR2_BIT1_BUGGY		(0x1UL << 20)
+-#define BFPT_DWORD15_QER_SR1_BIT6		(0x2UL << 20) /* Macronix */
+-#define BFPT_DWORD15_QER_SR2_BIT7		(0x3UL << 20)
+-#define BFPT_DWORD15_QER_SR2_BIT1_NO_RD		(0x4UL << 20)
+-#define BFPT_DWORD15_QER_SR2_BIT1		(0x5UL << 20) /* Spansion */
+-
+-#define BFPT_DWORD16_SOFT_RST			BIT(12)
+-#define BFPT_DWORD16_EX4B_PWRCYC		BIT(21)
+-
+-#define BFPT_DWORD18_CMD_EXT_MASK		GENMASK(30, 29)
+-#define BFPT_DWORD18_CMD_EXT_REP		(0x0UL << 29) /* Repeat */
+-#define BFPT_DWORD18_CMD_EXT_INV		(0x1UL << 29) /* Invert */
+-#define BFPT_DWORD18_CMD_EXT_RES		(0x2UL << 29) /* Reserved */
+-#define BFPT_DWORD18_CMD_EXT_16B		(0x3UL << 29) /* 16-bit opcode */
+-
+-/* xSPI Profile 1.0 table (from JESD216D.01). */
+-#define PROFILE1_DWORD1_RD_FAST_CMD		GENMASK(15, 8)
+-#define PROFILE1_DWORD1_RDSR_DUMMY		BIT(28)
+-#define PROFILE1_DWORD1_RDSR_ADDR_BYTES		BIT(29)
+-#define PROFILE1_DWORD4_DUMMY_200MHZ		GENMASK(11, 7)
+-#define PROFILE1_DWORD5_DUMMY_166MHZ		GENMASK(31, 27)
+-#define PROFILE1_DWORD5_DUMMY_133MHZ		GENMASK(21, 17)
+-#define PROFILE1_DWORD5_DUMMY_100MHZ		GENMASK(11, 7)
+-#define PROFILE1_DUMMY_DEFAULT			20
+-
+-/* Status, Control and Configuration Register Map(SCCR) */
+-#define SCCR_DWORD22_OCTAL_DTR_EN_VOLATILE      BIT(31)
+-
+-struct sfdp_bfpt {
+-	u32	dwords[BFPT_DWORD_MAX];
+-};
+-
+-/**
+- * struct spi_nor_fixups - SPI NOR fixup hooks
+- * @post_bfpt: called after the BFPT table has been parsed
+- * @post_sfdp: called after SFDP has been parsed. Typically used to tweak
+- *             various parameters that could not be extracted by other means
+- *             (i.e. when information provided by the SFDP tables are incomplete
+- *             or wrong).
+- * @late_init: used to initialize flash parameters that are not declared in the
+- *             JESD216 SFDP standard, or where SFDP tables not defined at all.
+- *
+- * Those hooks can be used to tweak the SPI NOR configuration when the SFDP
+- * table is broken or not available.
+- */
+-struct spi_nor_fixups {
+-	int (*post_bfpt)(struct spi_nor *nor,
+-			 const struct sfdp_parameter_header *bfpt_header,
+-			 const struct sfdp_bfpt *bfpt,
+-			 struct spi_nor_flash_parameter *params);
+-	void (*post_sfdp)(struct spi_nor *nor,
+-			  struct spi_nor_flash_parameter *params);
+-	void (*late_init)(struct spi_nor *nor,
+-			  struct spi_nor_flash_parameter *params);
+-};
  
-diff --git a/drivers/mtd/spi/spi-nor-tiny.c b/drivers/mtd/spi/spi-nor-tiny.c
-index cf00473ee83..0df78483ccb 100644
---- a/drivers/mtd/spi/spi-nor-tiny.c
-+++ b/drivers/mtd/spi/spi-nor-tiny.c
-@@ -383,13 +383,10 @@ static const struct flash_info *spi_nor_read_id(struct spi_nor *nor)
- 		return ERR_PTR(tmp);
- 	}
+ #define SPI_NOR_SRST_SLEEP_LEN			200
  
--	info = spi_nor_ids;
--	for (; info->sector_size != 0; info++) {
--		if (info->id_len) {
--			if (!memcmp(info->id, id, info->id_len))
--				return info;
+@@ -2121,7 +1956,7 @@ write_err:
+  *
+  * Return: 0 on success, -errno otherwise.
+  */
+-static int macronix_quad_enable(struct spi_nor *nor)
++int macronix_quad_enable(struct spi_nor *nor)
+ {
+ 	int ret, val;
+ 
+@@ -2247,7 +2082,7 @@ static int write_sr_cr(struct spi_nor *nor, u8 *sr_cr)
+  *
+  * Return: 0 on success, -errno otherwise.
+  */
+-static int spansion_read_cr_quad_enable(struct spi_nor *nor)
++int spansion_read_cr_quad_enable(struct spi_nor *nor)
+ {
+ 	u8 sr_cr[2];
+ 	int ret;
+@@ -2301,7 +2136,7 @@ static int spansion_read_cr_quad_enable(struct spi_nor *nor)
+  *
+  * Return: 0 on success, -errno otherwise.
+  */
+-static int spansion_no_read_cr_quad_enable(struct spi_nor *nor)
++int spansion_no_read_cr_quad_enable(struct spi_nor *nor)
+ {
+ 	u8 sr_cr[2];
+ 	int ret;
+@@ -2321,7 +2156,7 @@ static int spansion_no_read_cr_quad_enable(struct spi_nor *nor)
+ #endif /* CONFIG_SPI_FLASH_SFDP_SUPPORT */
+ #endif /* CONFIG_SPI_FLASH_SPANSION */
+ 
+-static void
++void
+ spi_nor_set_read_settings(struct spi_nor_read_command *read,
+ 			  u8 num_mode_clocks,
+ 			  u8 num_wait_states,
+@@ -2343,710 +2178,6 @@ spi_nor_set_pp_settings(struct spi_nor_pp_command *pp,
+ 	pp->proto = proto;
+ }
+ 
+-#if CONFIG_IS_ENABLED(SPI_FLASH_SFDP_SUPPORT)
+-/*
+- * Serial Flash Discoverable Parameters (SFDP) parsing.
+- */
+-
+-/**
+- * spi_nor_read_sfdp() - read Serial Flash Discoverable Parameters.
+- * @nor:	pointer to a 'struct spi_nor'
+- * @addr:	offset in the SFDP area to start reading data from
+- * @len:	number of bytes to read
+- * @buf:	buffer where the SFDP data are copied into (dma-safe memory)
+- *
+- * Whatever the actual numbers of bytes for address and dummy cycles are
+- * for (Fast) Read commands, the Read SFDP (5Ah) instruction is always
+- * followed by a 3-byte address and 8 dummy clock cycles.
+- *
+- * Return: 0 on success, -errno otherwise.
+- */
+-static int spi_nor_read_sfdp(struct spi_nor *nor, u32 addr,
+-			     size_t len, void *buf)
+-{
+-	u8 addr_width, read_opcode, read_dummy;
+-	int ret;
+-
+-	read_opcode = nor->read_opcode;
+-	addr_width = nor->addr_width;
+-	read_dummy = nor->read_dummy;
+-
+-	nor->read_opcode = SPINOR_OP_RDSFDP;
+-	nor->addr_width = 3;
+-	nor->read_dummy = 8;
+-
+-	while (len) {
+-		/* Both chips are identical, so should be the SFDP data */
+-		if (nor->flags & SNOR_F_HAS_PARALLEL)
+-			nor->spi->flags |= SPI_XFER_LOWER;
+-
+-		ret = nor->read(nor, addr, len, (u8 *)buf);
+-		if (!ret || ret > len) {
+-			ret = -EIO;
+-			goto read_err;
+-		}
+-		if (ret < 0)
+-			goto read_err;
+-
+-		buf += ret;
+-		addr += ret;
+-		len -= ret;
+-	}
+-	ret = 0;
+-
+-read_err:
+-	nor->read_opcode = read_opcode;
+-	nor->addr_width = addr_width;
+-	nor->read_dummy = read_dummy;
+-
+-	return ret;
+-}
+-
+-/**
+- * spi_nor_read_sfdp_dma_unsafe() - read Serial Flash Discoverable Parameters.
+- * @nor:	pointer to a 'struct spi_nor'
+- * @addr:	offset in the SFDP area to start reading data from
+- * @len:	number of bytes to read
+- * @buf:	buffer where the SFDP data are copied into
+- *
+- * Wrap spi_nor_read_sfdp() using a kmalloc'ed bounce buffer as @buf is now not
+- * guaranteed to be dma-safe.
+- *
+- * Return: -ENOMEM if kmalloc() fails, the return code of spi_nor_read_sfdp()
+- *          otherwise.
+- */
+-static int spi_nor_read_sfdp_dma_unsafe(struct spi_nor *nor, u32 addr,
+-					size_t len, void *buf)
+-{
+-	void *dma_safe_buf;
+-	int ret;
+-
+-	dma_safe_buf = kmalloc(len, GFP_KERNEL);
+-	if (!dma_safe_buf)
+-		return -ENOMEM;
+-
+-	ret = spi_nor_read_sfdp(nor, addr, len, dma_safe_buf);
+-	memcpy(buf, dma_safe_buf, len);
+-	kfree(dma_safe_buf);
+-
+-	return ret;
+-}
+-
+-/* Fast Read settings. */
+-
+-static void
+-spi_nor_set_read_settings_from_bfpt(struct spi_nor_read_command *read,
+-				    u16 half,
+-				    enum spi_nor_protocol proto)
+-{
+-	read->num_mode_clocks = (half >> 5) & 0x07;
+-	read->num_wait_states = (half >> 0) & 0x1f;
+-	read->opcode = (half >> 8) & 0xff;
+-	read->proto = proto;
+-}
+-
+-struct sfdp_bfpt_read {
+-	/* The Fast Read x-y-z hardware capability in params->hwcaps.mask. */
+-	u32			hwcaps;
+-
+-	/*
+-	 * The <supported_bit> bit in <supported_dword> BFPT DWORD tells us
+-	 * whether the Fast Read x-y-z command is supported.
+-	 */
+-	u32			supported_dword;
+-	u32			supported_bit;
+-
+-	/*
+-	 * The half-word at offset <setting_shift> in <setting_dword> BFPT DWORD
+-	 * encodes the op code, the number of mode clocks and the number of wait
+-	 * states to be used by Fast Read x-y-z command.
+-	 */
+-	u32			settings_dword;
+-	u32			settings_shift;
+-
+-	/* The SPI protocol for this Fast Read x-y-z command. */
+-	enum spi_nor_protocol	proto;
+-};
+-
+-static const struct sfdp_bfpt_read sfdp_bfpt_reads[] = {
+-	/* Fast Read 1-1-2 */
+-	{
+-		SNOR_HWCAPS_READ_1_1_2,
+-		BFPT_DWORD(1), BIT(16),	/* Supported bit */
+-		BFPT_DWORD(4), 0,	/* Settings */
+-		SNOR_PROTO_1_1_2,
+-	},
+-
+-	/* Fast Read 1-2-2 */
+-	{
+-		SNOR_HWCAPS_READ_1_2_2,
+-		BFPT_DWORD(1), BIT(20),	/* Supported bit */
+-		BFPT_DWORD(4), 16,	/* Settings */
+-		SNOR_PROTO_1_2_2,
+-	},
+-
+-	/* Fast Read 2-2-2 */
+-	{
+-		SNOR_HWCAPS_READ_2_2_2,
+-		BFPT_DWORD(5),  BIT(0),	/* Supported bit */
+-		BFPT_DWORD(6), 16,	/* Settings */
+-		SNOR_PROTO_2_2_2,
+-	},
+-
+-	/* Fast Read 1-1-4 */
+-	{
+-		SNOR_HWCAPS_READ_1_1_4,
+-		BFPT_DWORD(1), BIT(22),	/* Supported bit */
+-		BFPT_DWORD(3), 16,	/* Settings */
+-		SNOR_PROTO_1_1_4,
+-	},
+-
+-	/* Fast Read 1-4-4 */
+-	{
+-		SNOR_HWCAPS_READ_1_4_4,
+-		BFPT_DWORD(1), BIT(21),	/* Supported bit */
+-		BFPT_DWORD(3), 0,	/* Settings */
+-		SNOR_PROTO_1_4_4,
+-	},
+-
+-	/* Fast Read 4-4-4 */
+-	{
+-		SNOR_HWCAPS_READ_4_4_4,
+-		BFPT_DWORD(5), BIT(4),	/* Supported bit */
+-		BFPT_DWORD(7), 16,	/* Settings */
+-		SNOR_PROTO_4_4_4,
+-	},
+-};
+-
+-struct sfdp_bfpt_erase {
+-	/*
+-	 * The half-word at offset <shift> in DWORD <dwoard> encodes the
+-	 * op code and erase sector size to be used by Sector Erase commands.
+-	 */
+-	u32			dword;
+-	u32			shift;
+-};
+-
+-static const struct sfdp_bfpt_erase sfdp_bfpt_erases[] = {
+-	/* Erase Type 1 in DWORD8 bits[15:0] */
+-	{BFPT_DWORD(8), 0},
+-
+-	/* Erase Type 2 in DWORD8 bits[31:16] */
+-	{BFPT_DWORD(8), 16},
+-
+-	/* Erase Type 3 in DWORD9 bits[15:0] */
+-	{BFPT_DWORD(9), 0},
+-
+-	/* Erase Type 4 in DWORD9 bits[31:16] */
+-	{BFPT_DWORD(9), 16},
+-};
+-
+-static int spi_nor_hwcaps_read2cmd(u32 hwcaps);
+-
+-static int
+-spi_nor_post_bfpt_fixups(struct spi_nor *nor,
+-			 const struct sfdp_parameter_header *bfpt_header,
+-			 const struct sfdp_bfpt *bfpt,
+-			 struct spi_nor_flash_parameter *params)
+-{
+-	if (nor->fixups && nor->fixups->post_bfpt)
+-		return nor->fixups->post_bfpt(nor, bfpt_header, bfpt, params);
+-
+-	return 0;
+-}
+-
+-/**
+- * spi_nor_parse_bfpt() - read and parse the Basic Flash Parameter Table.
+- * @nor:		pointer to a 'struct spi_nor'
+- * @bfpt_header:	pointer to the 'struct sfdp_parameter_header' describing
+- *			the Basic Flash Parameter Table length and version
+- * @params:		pointer to the 'struct spi_nor_flash_parameter' to be
+- *			filled
+- *
+- * The Basic Flash Parameter Table is the main and only mandatory table as
+- * defined by the SFDP (JESD216) specification.
+- * It provides us with the total size (memory density) of the data array and
+- * the number of address bytes for Fast Read, Page Program and Sector Erase
+- * commands.
+- * For Fast READ commands, it also gives the number of mode clock cycles and
+- * wait states (regrouped in the number of dummy clock cycles) for each
+- * supported instruction op code.
+- * For Page Program, the page size is now available since JESD216 rev A, however
+- * the supported instruction op codes are still not provided.
+- * For Sector Erase commands, this table stores the supported instruction op
+- * codes and the associated sector sizes.
+- * Finally, the Quad Enable Requirements (QER) are also available since JESD216
+- * rev A. The QER bits encode the manufacturer dependent procedure to be
+- * executed to set the Quad Enable (QE) bit in some internal register of the
+- * Quad SPI memory. Indeed the QE bit, when it exists, must be set before
+- * sending any Quad SPI command to the memory. Actually, setting the QE bit
+- * tells the memory to reassign its WP# and HOLD#/RESET# pins to functions IO2
+- * and IO3 hence enabling 4 (Quad) I/O lines.
+- *
+- * Return: 0 on success, -errno otherwise.
+- */
+-static int spi_nor_parse_bfpt(struct spi_nor *nor,
+-			      const struct sfdp_parameter_header *bfpt_header,
+-			      struct spi_nor_flash_parameter *params)
+-{
+-	struct mtd_info *mtd = &nor->mtd;
+-	struct sfdp_bfpt bfpt;
+-	size_t len;
+-	int i, cmd, err;
+-	u32 addr;
+-	u16 half;
+-
+-	/* JESD216 Basic Flash Parameter Table length is at least 9 DWORDs. */
+-	if (bfpt_header->length < BFPT_DWORD_MAX_JESD216)
+-		return -EINVAL;
+-
+-	/* Read the Basic Flash Parameter Table. */
+-	len = min_t(size_t, sizeof(bfpt),
+-		    bfpt_header->length * sizeof(u32));
+-	addr = SFDP_PARAM_HEADER_PTP(bfpt_header);
+-	memset(&bfpt, 0, sizeof(bfpt));
+-	err = spi_nor_read_sfdp_dma_unsafe(nor,  addr, len, &bfpt);
+-	if (err < 0)
+-		return err;
+-
+-	/* Fix endianness of the BFPT DWORDs. */
+-	for (i = 0; i < BFPT_DWORD_MAX; i++)
+-		bfpt.dwords[i] = le32_to_cpu(bfpt.dwords[i]);
+-
+-	/* Number of address bytes. */
+-	switch (bfpt.dwords[BFPT_DWORD(1)] & BFPT_DWORD1_ADDRESS_BYTES_MASK) {
+-	case BFPT_DWORD1_ADDRESS_BYTES_3_ONLY:
+-	case BFPT_DWORD1_ADDRESS_BYTES_3_OR_4:
+-		nor->addr_width = 3;
+-		nor->addr_mode_nbytes = 3;
+-		break;
+-
+-	case BFPT_DWORD1_ADDRESS_BYTES_4_ONLY:
+-		nor->addr_width = 4;
+-		nor->addr_mode_nbytes = 4;
+-		break;
+-
+-	default:
+-		break;
+-	}
+-
+-	/* Flash Memory Density (in bits). */
+-	params->size = bfpt.dwords[BFPT_DWORD(2)];
+-	if (params->size & BIT(31)) {
+-		params->size &= ~BIT(31);
+-
+-		/*
+-		 * Prevent overflows on params->size. Anyway, a NOR of 2^64
+-		 * bits is unlikely to exist so this error probably means
+-		 * the BFPT we are reading is corrupted/wrong.
+-		 */
+-		if (params->size > 63)
+-			return -EINVAL;
+-
+-		params->size = 1ULL << params->size;
+-	} else {
+-		params->size++;
+-	}
+-	params->size >>= 3; /* Convert to bytes. */
+-
+-	/* Fast Read settings. */
+-	for (i = 0; i < ARRAY_SIZE(sfdp_bfpt_reads); i++) {
+-		const struct sfdp_bfpt_read *rd = &sfdp_bfpt_reads[i];
+-		struct spi_nor_read_command *read;
+-
+-		if (!(bfpt.dwords[rd->supported_dword] & rd->supported_bit)) {
+-			params->hwcaps.mask &= ~rd->hwcaps;
+-			continue;
+-		}
+-
+-		params->hwcaps.mask |= rd->hwcaps;
+-		cmd = spi_nor_hwcaps_read2cmd(rd->hwcaps);
+-		read = &params->reads[cmd];
+-		half = bfpt.dwords[rd->settings_dword] >> rd->settings_shift;
+-		spi_nor_set_read_settings_from_bfpt(read, half, rd->proto);
+-	}
+-
+-	/* Sector Erase settings. */
+-	for (i = 0; i < ARRAY_SIZE(sfdp_bfpt_erases); i++) {
+-		const struct sfdp_bfpt_erase *er = &sfdp_bfpt_erases[i];
+-		u32 erasesize;
+-		u8 opcode;
+-
+-		half = bfpt.dwords[er->dword] >> er->shift;
+-		erasesize = half & 0xff;
+-
+-		/* erasesize == 0 means this Erase Type is not supported. */
+-		if (!erasesize)
+-			continue;
+-
+-		erasesize = 1U << erasesize;
+-		opcode = (half >> 8) & 0xff;
+-#ifdef CONFIG_SPI_FLASH_USE_4K_SECTORS
+-		if (erasesize == SZ_4K) {
+-			nor->erase_opcode = opcode;
+-			mtd->erasesize = erasesize;
+-			break;
+-		}
+-#endif
+-		if (!mtd->erasesize || mtd->erasesize < erasesize) {
+-			nor->erase_opcode = opcode;
+-			mtd->erasesize = erasesize;
 -		}
 -	}
-+	info = spi_nor_match_id(nor, id);
-+	if (info)
-+		return info;
-+
- 	dev_dbg(nor->dev, "unrecognized JEDEC id bytes: %02x, %02x, %02x\n",
- 		id[0], id[1], id[2]);
- 	return ERR_PTR(-EMEDIUMTYPE);
-diff --git a/drivers/mtd/spi/sst.c b/drivers/mtd/spi/sst.c
-new file mode 100644
-index 00000000000..e169dba663a
---- /dev/null
-+++ b/drivers/mtd/spi/sst.c
-@@ -0,0 +1,34 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
-+
-+static const struct flash_info sst_nor_parts[] = {
-+	{ INFO("sst25vf040b", 0xbf258d, 0, 64 * 1024,  8, SECT_4K | SST_WRITE) },
-+	{ INFO("sst25vf080b", 0xbf258e, 0, 64 * 1024, 16, SECT_4K | SST_WRITE) },
-+	{ INFO("sst25vf016b", 0xbf2541, 0, 64 * 1024, 32, SECT_4K | SST_WRITE) },
-+	{ INFO("sst25vf032b", 0xbf254a, 0, 64 * 1024, 64, SECT_4K | SST_WRITE) },
-+	{ INFO("sst25vf064c", 0xbf254b, 0, 64 * 1024, 128, SECT_4K) },
-+	{ INFO("sst25wf512",  0xbf2501, 0, 64 * 1024,  1, SECT_4K | SST_WRITE) },
-+	{ INFO("sst25wf010",  0xbf2502, 0, 64 * 1024,  2, SECT_4K | SST_WRITE) },
-+	{ INFO("sst25wf020",  0xbf2503, 0, 64 * 1024,  4, SECT_4K | SST_WRITE) },
-+	{ INFO("sst25wf020a", 0x621612, 0, 64 * 1024,  4, SECT_4K) },
-+	{ INFO("sst25wf040b", 0x621613, 0, 64 * 1024,  8, SECT_4K) },
-+	{ INFO("sst25wf040",  0xbf2504, 0, 64 * 1024,  8, SECT_4K | SST_WRITE) },
-+	{ INFO("sst25wf080",  0xbf2505, 0, 64 * 1024, 16, SECT_4K | SST_WRITE) },
-+	{ INFO("sst26vf064b", 0xbf2643, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_HAS_SST26LOCK | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("sst26wf016b", 0xbf2641, 0, 64 * 1024,  32, SECT_4K) },
-+	{ INFO("sst26wf016",  0xbf2651, 0, 64 * 1024,  32, SECT_4K | SPI_NOR_HAS_SST26LOCK) },
-+	{ INFO("sst26wf032",  0xbf2622, 0, 64 * 1024,  64, SECT_4K | SPI_NOR_HAS_SST26LOCK) },
-+	{ INFO("sst26wf064",  0xbf2643, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_HAS_SST26LOCK) },
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_sst = {
-+	.parts = sst_nor_parts,
-+	.nparts = ARRAY_SIZE(sst_nor_parts),
-+};
-diff --git a/drivers/mtd/spi/winbond.c b/drivers/mtd/spi/winbond.c
-new file mode 100644
-index 00000000000..02c29ccf78c
---- /dev/null
-+++ b/drivers/mtd/spi/winbond.c
-@@ -0,0 +1,146 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
-+
-+static const struct flash_info winbond_nor_parts[] = {
-+	{ INFO("w25p80", 0xef2014, 0x0,	64 * 1024,    16, 0) },
-+	{ INFO("w25p16", 0xef2015, 0x0,	64 * 1024,    32, 0) },
-+	{ INFO("w25p32", 0xef2016, 0x0,	64 * 1024,    64, 0) },
-+	{ INFO("w25x05", 0xef3010, 0, 64 * 1024,  1,  SECT_4K) },
-+	{ INFO("w25x40", 0xef3013, 0, 64 * 1024,  8,  SECT_4K) },
-+	{ INFO("w25x16", 0xef3015, 0, 64 * 1024,  32, SECT_4K) },
-+	{ INFO("w25x32", 0xef3016, 0, 64 * 1024,  64, SECT_4K) },
-+	{ INFO("w25q20cl", 0xef4012, 0, 64 * 1024,  4, SECT_4K) },
-+	{ INFO("w25q20bw", 0xef5012, 0, 64 * 1024,  4, SECT_4K) },
-+	{ INFO("w25q20ew", 0xef6012, 0, 64 * 1024,  4, SECT_4K) },
-+	{
-+		INFO("w25q16dw", 0xef6015, 0, 64 * 1024,  32,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q32dw", 0xef6016, 0, 64 * 1024,  64,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q16jv", 0xef7015, 0, 64 * 1024,  32,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ)
-+	},
-+	{
-+		INFO("w25q32jv", 0xef7016, 0, 64 * 1024,  64,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q32jwm", 0xef8016, 0, 64 * 1024,  64,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q256jwm", 0xef8019, 0, 64 * 1024, 512,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{ INFO("w25x64", 0xef3017, 0, 64 * 1024, 128, SECT_4K) },
-+	{
-+		INFO("w25q64dw", 0xef6017, 0, 64 * 1024, 128,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q64jv", 0xef7017, 0, 64 * 1024, 128,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q128fw", 0xef6018, 0, 64 * 1024, 256,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q128jv", 0xef7018, 0, 64 * 1024, 256,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q128jw", 0xef8018, 0, 64 * 1024, 256,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q256fw", 0xef6019, 0, 64 * 1024, 512,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q256jw", 0xef7019, 0, 64 * 1024, 512,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q512nwq", 0xef6020, 0, 64 * 1024, 1024,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q512nwm", 0xef8020, 0, 64 * 1024, 1024,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q512jvq", 0xef4020, 0, 64 * 1024, 1024,
-+		     SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+		     SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q01jv", 0xef4021, 0, 64 * 1024, 2048,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q01jvfim", 0xef7021, 0, 64 * 1024, 2048,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{
-+		INFO("w25q02jv", 0xef7022, 0, 64 * 1024, 4096,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{ INFO("w25q80", 0xef5014, 0, 64 * 1024,  16, SECT_4K) },
-+	{ INFO("w25q80bl", 0xef4014, 0, 64 * 1024,  16, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{
-+		INFO("w25q16cl", 0xef4015, 0, 64 * 1024,  32,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{ INFO("w25q32", 0xef4016, 0, 64 * 1024,  64, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25q64cv", 0xef4017, 0, 64 * 1024,  128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25q128", 0xef4018, 0, 64 * 1024, 256,
-+			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
-+			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
-+	},
-+	{ INFO("w25q256", 0xef4019, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25m512jw", 0xef6119, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25m512jv", 0xef7119, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25h02jv", 0xef9022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25h512nw-am", 0xefa020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25h01nw-am", 0xefa021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25h02nw-am", 0xefa022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25q01nw-iq", 0xef6021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25q01nw-im", 0xef8021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w25q02nw-im", 0xef8022, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("w77q51nw", 0xef8a1a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_winbond = {
-+	.parts = winbond_nor_parts,
-+	.nparts = ARRAY_SIZE(winbond_nor_parts),
-+};
-diff --git a/drivers/mtd/spi/xmc.c b/drivers/mtd/spi/xmc.c
-new file mode 100644
-index 00000000000..dbf11a4c5d3
---- /dev/null
-+++ b/drivers/mtd/spi/xmc.c
-@@ -0,0 +1,27 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
-+
-+static const struct flash_info xmc_nor_parts[] = {
-+	{ INFO("XM25QH64A", 0x207017, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("XM25QH64C", 0x204017, 0, 64 * 1024, 128, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("XM25QH128A", 0x207018, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("XM25QH128C", 0x204018, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("XM25QU128C", 0x204118, 0, 64 * 1024, 256, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("XM25QH256C", 0x204019, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("XM25QU256C", 0x204119, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("XM25QH512D", 0x204020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("XM25QU512C", 0x204120, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("XM25QH01D", 0x204021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_xmc = {
-+	.parts = xmc_nor_parts,
-+	.nparts = ARRAY_SIZE(xmc_nor_parts),
-+};
-diff --git a/drivers/mtd/spi/xtx.c b/drivers/mtd/spi/xtx.c
-new file mode 100644
-index 00000000000..e49b1ceb76d
---- /dev/null
-+++ b/drivers/mtd/spi/xtx.c
-@@ -0,0 +1,54 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
-+
-+static const struct flash_info xtx_nor_parts[] = {
-+	/* adding these 3V QSPI flash parts */
-+	{ INFO("xt25f08", 0x0b4014, 0, 64 * 1024, 16,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("xt25f16", 0x0b4015, 0, 64 * 1024, 32,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("xt25f32", 0x0b4016, 0, 64 * 1024, 64,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("xt25f64", 0x0b4017, 0, 64 * 1024, 128,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("xt25f128", 0x0b4018, 0, 64 * 1024, 256,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("xt25f256", 0x0b4019, 0, 64 * 1024, 512,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	/* adding these 1.8V QSPI flash parts */
-+	{ INFO("xt25q08", 0x0b6014, 0, 64 * 1024, 16,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("xt25q16", 0x0b6015, 0, 64 * 1024, 32,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("xt25q32", 0x0b6016, 0, 64 * 1024, 64,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("xt25q64", 0x0b6017, 0, 64 * 1024, 128,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("xt25q128", 0x0b6018, 0, 64 * 1024, 256,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+	{ INFO("xt25q256", 0x0b6019, 0, 64 * 1024, 512,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("xt25q512", 0x0b601A, 0, 64 * 1024, 1024,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("xt25q01g", 0x0b601B, 0, 64 * 1024, 2048,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("xt55q02g", 0x0b601C, 0, 64 * 1024, 4096,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	/* adding these wide voltage QSPI flash parts */
-+	{ INFO("xt25w512", 0x0b651A, 0, 64 * 1024, 1024,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("xt25w01g", 0x0b651B, 0, 64 * 1024, 2048,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_xtx = {
-+	.parts = xtx_nor_parts,
-+	.nparts = ARRAY_SIZE(xtx_nor_parts),
-+};
-diff --git a/drivers/mtd/spi/zbit.c b/drivers/mtd/spi/zbit.c
-new file mode 100644
-index 00000000000..ee709b2bef1
---- /dev/null
-+++ b/drivers/mtd/spi/zbit.c
-@@ -0,0 +1,19 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2013 Jagannadha Sutradharudu Teki, Xilinx Inc.
-+ * Copyright (C) 2016 Jagan Teki <jagan@openedev.com>
-+ * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include <linux/mtd/spi-nor.h>
-+#include "sf_internal.h"
-+
-+static const struct flash_info zbit_nor_parts[] = {
-+	{ INFO("zb25vq128", 0x5e4018, 0, 64 * 1024, 256,
-+	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
-+};
-+
-+const struct spi_nor_manufacturer spi_nor_zbit = {
-+	.parts = zbit_nor_parts,
-+	.nparts = ARRAY_SIZE(zbit_nor_parts),
-+};
+-
+-	/* Stop here if not JESD216 rev A or later. */
+-	if (bfpt_header->length == BFPT_DWORD_MAX_JESD216)
+-		return spi_nor_post_bfpt_fixups(nor, bfpt_header, &bfpt,
+-						params);
+-
+-	/* Page size: this field specifies 'N' so the page size = 2^N bytes. */
+-	params->page_size = bfpt.dwords[BFPT_DWORD(11)];
+-	params->page_size &= BFPT_DWORD11_PAGE_SIZE_MASK;
+-	params->page_size >>= BFPT_DWORD11_PAGE_SIZE_SHIFT;
+-	params->page_size = 1U << params->page_size;
+-
+-	/* Quad Enable Requirements. */
+-	switch (bfpt.dwords[BFPT_DWORD(15)] & BFPT_DWORD15_QER_MASK) {
+-	case BFPT_DWORD15_QER_NONE:
+-		params->quad_enable = NULL;
+-		break;
+-#if defined(CONFIG_SPI_FLASH_SPANSION) || defined(CONFIG_SPI_FLASH_WINBOND)
+-	case BFPT_DWORD15_QER_SR2_BIT1_BUGGY:
+-	case BFPT_DWORD15_QER_SR2_BIT1_NO_RD:
+-		params->quad_enable = spansion_no_read_cr_quad_enable;
+-		break;
+-#endif
+-#if defined(CONFIG_SPI_FLASH_MACRONIX) || defined(CONFIG_SPI_FLASH_ISSI)
+-	case BFPT_DWORD15_QER_SR1_BIT6:
+-		params->quad_enable = macronix_quad_enable;
+-		break;
+-#endif
+-#if defined(CONFIG_SPI_FLASH_SPANSION) || defined(CONFIG_SPI_FLASH_WINBOND)
+-	case BFPT_DWORD15_QER_SR2_BIT1:
+-		params->quad_enable = spansion_read_cr_quad_enable;
+-		break;
+-#endif
+-	default:
+-		dev_dbg(nor->dev, "BFPT QER reserved value used\n");
+-		break;
+-	}
+-
+-	/* Soft Reset support. */
+-	if (bfpt.dwords[BFPT_DWORD(16)] & BFPT_DWORD16_SOFT_RST)
+-		nor->flags |= SNOR_F_SOFT_RESET;
+-
+-	/* Stop here if JESD216 rev B. */
+-	if (bfpt_header->length == BFPT_DWORD_MAX_JESD216B)
+-		return spi_nor_post_bfpt_fixups(nor, bfpt_header, &bfpt,
+-						params);
+-
+-	/* 8D-8D-8D command extension. */
+-	switch (bfpt.dwords[BFPT_DWORD(18)] & BFPT_DWORD18_CMD_EXT_MASK) {
+-	case BFPT_DWORD18_CMD_EXT_REP:
+-		nor->cmd_ext_type = SPI_NOR_EXT_REPEAT;
+-		break;
+-
+-	case BFPT_DWORD18_CMD_EXT_INV:
+-		nor->cmd_ext_type = SPI_NOR_EXT_INVERT;
+-		break;
+-
+-	case BFPT_DWORD18_CMD_EXT_RES:
+-		return -EINVAL;
+-
+-	case BFPT_DWORD18_CMD_EXT_16B:
+-		dev_err(nor->dev, "16-bit opcodes not supported\n");
+-		return -ENOTSUPP;
+-	}
+-
+-	return spi_nor_post_bfpt_fixups(nor, bfpt_header, &bfpt, params);
+-}
+-
+-/**
+- * spi_nor_parse_microchip_sfdp() - parse the Microchip manufacturer specific
+- * SFDP table.
+- * @nor:		pointer to a 'struct spi_nor'.
+- * @param_header:	pointer to the SFDP parameter header.
+- *
+- * Return: 0 on success, -errno otherwise.
+- */
+-static int
+-spi_nor_parse_microchip_sfdp(struct spi_nor *nor,
+-			     const struct sfdp_parameter_header *param_header)
+-{
+-	size_t size;
+-	u32 addr;
+-	int ret;
+-
+-	size = param_header->length * sizeof(u32);
+-	addr = SFDP_PARAM_HEADER_PTP(param_header);
+-
+-	nor->manufacturer_sfdp = devm_kmalloc(nor->dev, size, GFP_KERNEL);
+-	if (!nor->manufacturer_sfdp)
+-		return -ENOMEM;
+-
+-	ret = spi_nor_read_sfdp(nor, addr, size, nor->manufacturer_sfdp);
+-
+-	return ret;
+-}
+-
+-/**
+- * spi_nor_parse_profile1() - parse the xSPI Profile 1.0 table
+- * @nor:		pointer to a 'struct spi_nor'
+- * @profile1_header:	pointer to the 'struct sfdp_parameter_header' describing
+- *			the 4-Byte Address Instruction Table length and version.
+- * @params:		pointer to the 'struct spi_nor_flash_parameter' to be.
+- *
+- * Return: 0 on success, -errno otherwise.
+- */
+-static int spi_nor_parse_profile1(struct spi_nor *nor,
+-				  const struct sfdp_parameter_header *profile1_header,
+-				  struct spi_nor_flash_parameter *params)
+-{
+-	u32 *table, opcode, addr;
+-	size_t len;
+-	int ret, i;
+-	u8 dummy;
+-
+-	len = profile1_header->length * sizeof(*table);
+-	table = kmalloc(len, GFP_KERNEL);
+-	if (!table)
+-		return -ENOMEM;
+-
+-	addr = SFDP_PARAM_HEADER_PTP(profile1_header);
+-	ret = spi_nor_read_sfdp(nor, addr, len, table);
+-	if (ret)
+-		goto out;
+-
+-	/* Fix endianness of the table DWORDs. */
+-	for (i = 0; i < profile1_header->length; i++)
+-		table[i] = le32_to_cpu(table[i]);
+-
+-	/* Get 8D-8D-8D fast read opcode and dummy cycles. */
+-	opcode = FIELD_GET(PROFILE1_DWORD1_RD_FAST_CMD, table[0]);
+-
+-	/*
+-	 * We don't know what speed the controller is running at. Find the
+-	 * dummy cycles for the fastest frequency the flash can run at to be
+-	 * sure we are never short of dummy cycles. A value of 0 means the
+-	 * frequency is not supported.
+-	 *
+-	 * Default to PROFILE1_DUMMY_DEFAULT if we don't find anything, and let
+-	 * flashes set the correct value if needed in their fixup hooks.
+-	 */
+-	dummy = FIELD_GET(PROFILE1_DWORD4_DUMMY_200MHZ, table[3]);
+-	if (!dummy)
+-		dummy = FIELD_GET(PROFILE1_DWORD5_DUMMY_166MHZ, table[4]);
+-	if (!dummy)
+-		dummy = FIELD_GET(PROFILE1_DWORD5_DUMMY_133MHZ, table[4]);
+-	if (!dummy)
+-		dummy = FIELD_GET(PROFILE1_DWORD5_DUMMY_100MHZ, table[4]);
+-	if (!dummy)
+-		dummy = PROFILE1_DUMMY_DEFAULT;
+-
+-	/* Round up to an even value to avoid tripping controllers up. */
+-	dummy = ROUND_UP_TO(dummy, 2);
+-
+-	/* Update the fast read settings. */
+-	spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_8_8_8_DTR],
+-				  0, dummy, opcode,
+-				  SNOR_PROTO_8_8_8_DTR);
+-
+-	/*
+-	 * Set the Read Status Register dummy cycles and dummy address bytes.
+-	 */
+-	if (table[0] & PROFILE1_DWORD1_RDSR_DUMMY)
+-		params->rdsr_dummy = 8;
+-	else
+-		params->rdsr_dummy = 4;
+-
+-	if (table[0] & PROFILE1_DWORD1_RDSR_ADDR_BYTES)
+-		params->rdsr_addr_nbytes = 4;
+-	else
+-		params->rdsr_addr_nbytes = 0;
+-
+-out:
+-	kfree(table);
+-	return ret;
+-}
+-
+-/**
+- * spi_nor_parse_sccr() - Parse the Status, Control and Configuration Register
+- *			  Map.
+- * @nor:		  pointer to a 'struct spi_nor'
+- * @sccr_header:	  pointer to the 'struct sfdp_parameter_header' describing
+- * 			  the SCCR Map table length and version.
+- *
+- * Return: 0 on success, -errno otherwise.
+- */
+-static int spi_nor_parse_sccr(struct spi_nor *nor,
+-			      const struct sfdp_parameter_header *sccr_header)
+-{
+-	u32 *table, addr;
+-	size_t len;
+-	int ret, i;
+-
+-	len = sccr_header->length * sizeof(*table);
+-	table = kmalloc(len, GFP_KERNEL);
+-	if (!table)
+-		return -ENOMEM;
+-
+-	addr = SFDP_PARAM_HEADER_PTP(sccr_header);
+-	ret = spi_nor_read_sfdp(nor, addr, len, table);
+-	if (ret)
+-		goto out;
+-
+-	/* Fix endianness of the table DWORDs. */
+-	for (i = 0; i < sccr_header->length; i++)
+-		table[i] = le32_to_cpu(table[i]);
+-
+-	if (FIELD_GET(SCCR_DWORD22_OCTAL_DTR_EN_VOLATILE, table[21]))
+-		nor->flags |= SNOR_F_IO_MODE_EN_VOLATILE;
+-
+-out:
+-	kfree(table);
+-	return ret;
+-}
+-
+-/**
+- * spi_nor_parse_sfdp() - parse the Serial Flash Discoverable Parameters.
+- * @nor:		pointer to a 'struct spi_nor'
+- * @params:		pointer to the 'struct spi_nor_flash_parameter' to be
+- *			filled
+- *
+- * The Serial Flash Discoverable Parameters are described by the JEDEC JESD216
+- * specification. This is a standard which tends to supported by almost all
+- * (Q)SPI memory manufacturers. Those hard-coded tables allow us to learn at
+- * runtime the main parameters needed to perform basic SPI flash operations such
+- * as Fast Read, Page Program or Sector Erase commands.
+- *
+- * Return: 0 on success, -errno otherwise.
+- */
+-static int spi_nor_parse_sfdp(struct spi_nor *nor,
+-			      struct spi_nor_flash_parameter *params)
+-{
+-	const struct sfdp_parameter_header *param_header, *bfpt_header;
+-	struct sfdp_parameter_header *param_headers = NULL;
+-	struct sfdp_header header;
+-	size_t psize;
+-	int i, err;
+-
+-	/* Get the SFDP header. */
+-	err = spi_nor_read_sfdp_dma_unsafe(nor, 0, sizeof(header), &header);
+-	if (err < 0)
+-		return err;
+-
+-	/* Check the SFDP header version. */
+-	if (le32_to_cpu(header.signature) != SFDP_SIGNATURE ||
+-	    header.major != SFDP_JESD216_MAJOR)
+-		return -EINVAL;
+-
+-	/*
+-	 * Verify that the first and only mandatory parameter header is a
+-	 * Basic Flash Parameter Table header as specified in JESD216.
+-	 */
+-	bfpt_header = &header.bfpt_header;
+-	if (SFDP_PARAM_HEADER_ID(bfpt_header) != SFDP_BFPT_ID ||
+-	    bfpt_header->major != SFDP_JESD216_MAJOR)
+-		return -EINVAL;
+-
+-	/*
+-	 * Allocate memory then read all parameter headers with a single
+-	 * Read SFDP command. These parameter headers will actually be parsed
+-	 * twice: a first time to get the latest revision of the basic flash
+-	 * parameter table, then a second time to handle the supported optional
+-	 * tables.
+-	 * Hence we read the parameter headers once for all to reduce the
+-	 * processing time. Also we use kmalloc() instead of devm_kmalloc()
+-	 * because we don't need to keep these parameter headers: the allocated
+-	 * memory is always released with kfree() before exiting this function.
+-	 */
+-	if (header.nph) {
+-		psize = header.nph * sizeof(*param_headers);
+-
+-		param_headers = kmalloc(psize, GFP_KERNEL);
+-		if (!param_headers)
+-			return -ENOMEM;
+-
+-		err = spi_nor_read_sfdp(nor, sizeof(header),
+-					psize, param_headers);
+-		if (err < 0) {
+-			dev_err(nor->dev,
+-				"failed to read SFDP parameter headers\n");
+-			goto exit;
+-		}
+-	}
+-
+-	/*
+-	 * Check other parameter headers to get the latest revision of
+-	 * the basic flash parameter table.
+-	 */
+-	for (i = 0; i < header.nph; i++) {
+-		param_header = &param_headers[i];
+-
+-		if (SFDP_PARAM_HEADER_ID(param_header) == SFDP_BFPT_ID &&
+-		    param_header->major == SFDP_JESD216_MAJOR &&
+-		    (param_header->minor > bfpt_header->minor ||
+-		     (param_header->minor == bfpt_header->minor &&
+-		      param_header->length > bfpt_header->length)))
+-			bfpt_header = param_header;
+-	}
+-
+-	err = spi_nor_parse_bfpt(nor, bfpt_header, params);
+-	if (err)
+-		goto exit;
+-
+-	/* Parse other parameter headers. */
+-	for (i = 0; i < header.nph; i++) {
+-		param_header = &param_headers[i];
+-
+-		switch (SFDP_PARAM_HEADER_ID(param_header)) {
+-		case SFDP_SECTOR_MAP_ID:
+-			dev_info(nor->dev,
+-				 "non-uniform erase sector maps are not supported yet.\n");
+-			break;
+-
+-		case SFDP_SST_ID:
+-			err = spi_nor_parse_microchip_sfdp(nor, param_header);
+-			break;
+-
+-		case SFDP_PROFILE1_ID:
+-			err = spi_nor_parse_profile1(nor, param_header, params);
+-			break;
+-
+-		case SFDP_SCCR_MAP_ID:
+-			err = spi_nor_parse_sccr(nor, param_header);
+-			break;
+-
+-		default:
+-			break;
+-		}
+-
+-		if (err) {
+-			dev_warn(nor->dev,
+-				 "Failed to parse optional parameter table: %04x\n",
+-				 SFDP_PARAM_HEADER_ID(param_header));
+-			/*
+-			 * Let's not drop all information we extracted so far
+-			 * if optional table parsers fail. In case of failing,
+-			 * each optional parser is responsible to roll back to
+-			 * the previously known spi_nor data.
+-			 */
+-			err = 0;
+-		}
+-	}
+-
+-exit:
+-	kfree(param_headers);
+-	return err;
+-}
+-#else
+-static int spi_nor_parse_sfdp(struct spi_nor *nor,
+-			      struct spi_nor_flash_parameter *params)
+-{
+-	return -EINVAL;
+-}
+-#endif /* SPI_FLASH_SFDP_SUPPORT */
+-
+ /**
+  * spi_nor_post_sfdp_fixups() - Updates the flash's parameters and settings
+  * after SFDP has been parsed.
+@@ -3273,7 +2404,7 @@ static int spi_nor_hwcaps2cmd(u32 hwcaps, const int table[][2], size_t size)
+ 	return -EINVAL;
+ }
+ 
+-static int spi_nor_hwcaps_read2cmd(u32 hwcaps)
++int spi_nor_hwcaps_read2cmd(u32 hwcaps)
+ {
+ 	static const int hwcaps_read2cmd[][2] = {
+ 		{ SNOR_HWCAPS_READ,		SNOR_CMD_READ },
 
 -- 
 2.53.0
