@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 892F3606A31C
-	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 17:29:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 155DB606A326
+	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 17:29:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=fRZwf/9P;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=fNP+aVe1
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=MKEd6EzN;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=QNA7v1jm
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 63A59608CE;
-	Mon,  9 Nov 2026 17:29:42 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E64AA608E0;
+	Mon,  9 Nov 2026 17:29:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id scgmefVZZU0n; Mon,  9 Nov 2026 17:29:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A6871607C2
+ id Xnrf5jWdXnIL; Mon,  9 Nov 2026 17:29:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3AC6960851
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794245381;
-	b=I2uGzHYU6NMO25RnmvddQWPYjw8LNbP37FmzMF489i3KYSJtU73D2OSCU/PCadiK1rdS
-	 t8CQuxmFaIe/KPBEDlixLM+tJbl/xk38MDewPC7SBi4BsGFqOHMC+qe13WzkcDN6v4gyG
-	 eO+lLcMjo9WnB7EfIVVrWr6uhACBkSOiId7RMNycyUCWrtgwp+95moAGid7C9iircEwlz
-	 18O0hvIW5yu/gJJ39QVY/DxPsrA6QnOhQOnWTv3rDaOPX27A+WjswyU2iekZ++/NWLm1Y
-	 5jeO8cpp1uuIq4rhcZw0D5/IsycYiENHErcRscnVfsg4YGpeSJg81TcO3QLAD86vnFg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794245388;
+	b=T4/ZSbiTsNX9aypU3Dr5RePNcVO/IwxkFhB27RM9vF1grWsgLREM6goY3HwOE8z+ggJi
+	 q5SmrGUcsDKjATM+r0jbIZ2NnP16StDLslgBrpejWIk8MTj0F0PBWEjPXx84Hl+EuNvgq
+	 Jimbf4wrpuIhzRyD7mq2xcoUbeeMezQugC9zGjsHD0SZe490mfWUOZEAAQqk4cqZYGXBx
+	 2IEVeF8xw55OMxU3bQ/dpDnNqcAIZRcHhS+xCLx/8/mcVHFIVyUIiluyKqx7BVDXNVmgM
+	 +q9aN6pTczDQZtF13h0724ukH1A/2/2ft0G7LVPXLcoLxk0bzP47+i+1Aa0zw2lasJg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794245381;
+	c=relaxed/relaxed; t=1794245388;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,101 +32,101 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=zH+hTKSzp+eyOHDDiVG1wceOu/lOYvO555zdf/OxgQ8=;
-	b=NfSxV2gq6IQQK/xANTeKrQt0ShT2isSQw/YKIW0j+/ksh7bHAcMddcXSARcwLsGH7BVp
-	 C0+Gvn7Bq5fFgsd+MbLPEJrZOQbqLD09EH8hJRAed4rd5YKUOxTdncY+WBiF9tlvXRi79
-	 ZSg7x55VamBivZPO3TNrU1HkBc7xj6OhXJR0ONccf0jBSnMNjqg1RfIllTiT6YeWppmNK
-	 bOXs0pOrIQLjfehsUCsuFPmLwUJB0XxK5Hd6Kj1TLQ8VOg5aAVv9tPwGnbcJCRukHpegA
-	 LxbZ+ESAGnmZj1q5lCbzpriiaU+Y788pAzqLAVNcIaa1I/DG5IjhS6MPAZ+WEUpfx8A==
+	bh=QYjoNXp/nXp4VvtPgeDCoRWCRURzf0sNSBK6vfQn0bo=;
+	b=mXAu+5g2NH/xOLUrFc3zVQNUSq4Scx2LfNEs1YBBzE1pKoTU5V+H3DPw+BsS4JPvA4a/
+	 RzdIq0ZNzcAoWbmej9JzuSxEzhYdo2SOb23je29ZV+2s1+GjF5XrOhwKVakhZ1rA4EcHf
+	 JLaCneIqMix3yldbu2Wzq7VUVcAr4/f2PId6vRxO++dCrKYYg+kh5fiLR2wpFQXcUFW9v
+	 QLJAjeodIGy7sY3wv59Pt85AoCfDndnUXFWAIwXHFdlxGDlPiFRjAOF4DxYMyM4BITra3
+	 cQBRwJnYaez9v9Ycw2qhxLMYjiRDp4lHTBSZoUo/ADnv0a3Nd6p4KWa1NDHPGhmubfw==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794245381;
-	bh=zH+hTKSzp+eyOHDDiVG1wceOu/lOYvO555zdf/OxgQ8=;
+	d=lists.u-boot-project.org; s=default; t=1794245388;
+	bh=QYjoNXp/nXp4VvtPgeDCoRWCRURzf0sNSBK6vfQn0bo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=fRZwf/9PKD0Otys3VDbshlM78C89lv8GsVkFC9j0mIMjM7oner/wRjH0Pld4VfoLi
-	 swk8RJ8Aszlt3cqgV3SaOO/x2wjvJ6pII4sDZl0xJZIVhiECcLvP9Sch44504n7/+p
-	 TNH5GV7ZHxt6+pDDQaKrzkMC9Sa704RbRWqEldo4XC+o6/t3fTyw/mXFHbm8DjrOFs
-	 v8zIpBftnH+A8M1EurdHGggMiOTotMuqRqIx8nCV1biVhnJVclktUfqYorpOC153X9
-	 BaNwO8/2PUx9bANQjt0dAYc3D5eDdpAAp1/6tU+IsXbI46xYjyIhUh3QvZHGjNkts5
-	 4nHxSOfbmPWCw==
+	b=MKEd6EzNx89lrZfzU2xhbo3FRBf071tYgQ1oJA7Cr6xnZ4AyE+poe50yt2pfcgqdp
+	 JZvpemAVdQ4BX8J9rWz5Q6Lfl4950gT++k81vNGTftJp5hdamk2XQwtj4IldpTe7Fu
+	 HXoF1VYMzLqnteO/2kHtskoWfXQt3hzYnWwzdtfOmmR25NXdaXSV9jdC9vnNexU7H8
+	 C89HhidHI5USkYOZMmrLQ6LDwmfcPYz/QKAJ0PxNR6aw9lLakIEBJVou1YOJ+6R5cy
+	 4vUm7wONCofEb23/e/G1jvT+XFInQt70hTlDYbnRmv5JenslIu8GRn+0JLHGmFdedC
+	 f3bf6/saeaUSw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A6871607C2;
-	Mon,  9 Nov 2026 17:29:41 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3AC6960851;
+	Mon,  9 Nov 2026 17:29:48 +0000 (UTC)
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id E2D98971
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:29:39 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id C05073AD
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:29:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C977E810DA
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:29:39 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id B28E88109E
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:29:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id E4psrvqX1qwE for <u-boot@lists.u-boot-project.org>;
- Mon,  9 Nov 2026 17:29:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E3EEA810DE
+ id prdKnW8s_EM5 for <u-boot@lists.u-boot-project.org>;
+ Mon,  9 Nov 2026 17:29:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org CF6BD80FB5
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::333"
+ arc=none smtp.remote-ip="2a00:1450:4864:20::330"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::333; helo=mail-wm1-x333.google.com;
+ client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
  envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=fNP+aVe1
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E3EEA810DE
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:29:38 +0000 (UTC)
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4b467581b98so10897225e9.0
- for <u-boot@lists.u-boot-project.org>; Mon, 09 Nov 2026 09:29:38 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=QNA7v1jm
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id CF6BD80FB5
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:29:45 +0000 (UTC)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4b467581b98so10898235e9.0
+ for <u-boot@lists.u-boot-project.org>; Mon, 09 Nov 2026 09:29:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794245376; x=1794850176;
+ d=gmail.com; s=20260707; t=1794245383; x=1794850183;
  darn=lists.u-boot-project.org; 
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=zH+hTKSzp+eyOHDDiVG1wceOu/lOYvO555zdf/OxgQ8=;
- b=fNP+aVe1eF0WCVLHK1XJ5C9dw5lYSK1l2TzvOOy5YhEUqQkiMqnAVCz+jd/1Wvg8id
- SHwuQf4uqdQWdmjx5UE4rzFRumZ+7gLp8JaxPz95GCpYvM6e947n8Eyuuz1Eoq1lRUYL
- 83z84WtvQ/KuxZCWvGTbjZxYe6LDH8W798ySFAaXXFm0+NybJ1fABmMu6bQrff8KjDwi
- O74IYQCKoRMyiHUoQRSNErrnNhfjTFH+6FrGadHdg/iG4hnqoA09yFgNQr7jRJA6Moi7
- qpLlWVMNvnRZcWXXK4Px12eUIkigzUP+zYpaQMbjgVTADPPyPy8oh3l09P8wbzZvuIPB
- Zalg==
+ bh=QYjoNXp/nXp4VvtPgeDCoRWCRURzf0sNSBK6vfQn0bo=;
+ b=QNA7v1jmUN6IdryINNE3r+x5RAUR8Eqy7iAWWk54dt8s1CQVHecgd2SieubBgh55AK
+ 2TMk4L3s3Ndx67t9N89mH2ytk/HcRz2s1eBJ5NRzucOgJChcsLtXducHHalLekY8fpYy
+ 387kg4jmrIFOau48mdpGPdQm9UIPb4ODG5yzuzVLDo9yRTE65lHVP6rJmhZygPT+oQrv
+ lwa1mJ05w3VV4XEV+HeIVowt/fciRiMbuwGm5A6BWDhifJnPCA62GtI9R1Kw4NnQdSI6
+ 1uUDwLuBztcJRRdvOTVlGU10S4FRr3E6VhMtu17zwkD6/zyYVZ6rGNbNMveNH9AkE6L9
+ ufZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794245376; x=1794850176;
+ d=1e100.net; s=20260707; t=1794245383; x=1794850183;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=zH+hTKSzp+eyOHDDiVG1wceOu/lOYvO555zdf/OxgQ8=;
- b=uDoeA5xde0/Np4iNm53ijkWBCK75117rvZhJhT3QBgIG3oy8GJHrJCLFJgLXYEXuxc
- /ElBkqciud2GhLzZIitZ7d3ncS4wfGlr3IvJjD/K3QXDqIYD+V46wWo54tnmpP05hPzI
- g9VEdj9lo1OxYTEzL0pww/JAPPIsqo56YaxIjBREOM9qe4aEt8giXpTivxIXz2jfzohp
- erTuvw+ju3N6UwibE9eLWVapPwyAeTfXenFLe9Ov+EkqivsMwWITJ/g7dIYnAJcVshjP
- 0ihk58Gvs8qoHABdJSTRYzpGQ7Agv9ofYOLBhzT9QacfhnCRLvqpEmifMGSxsK0V1F3H
- gJeA==
-X-Gm-Message-State: APuU4Z9P41Ke9qMgNJhhLMcbU5alvnDdDumeQhmtoTM7LQlp85cgH3iO
- SsJ77XKnleI6vd/ljW7qDIjFG2Irsoj/R/OOZqkA4FfUt9eQp/szrgTcsRgKT4xRbz8=
-X-Gm-Gg: AYBFou1j5XsUZE8HS7359Q+E2yTXwFdRLgROAZbA1UxYjsvcEt1X1l+XyvfN5ZtBuiE
- nPkO+lE6UTEVxcfJjb7r6Zp3wl4Gzm30Mm3WoIlUMGH+Pr1rTBUv6BF2kgQ1T7EgBs1AJT9ZhSi
- GdITcwJFIHHRd3YCYiY29DgLo5WGtdCZEwvKFx2BrZYAYoWzoz4PYLAyEMssKspaZZvIKiUsPUD
- SKrsPj2pHMnMMRsu93JXYQ/JTyr54vLycygOSnMVsU+t3Ng341c8bxpyBUD+DUAO9dASzsb5qle
- gSDwUg7jyR01HO6D0tOtDTwaQJS4z3BuN2OVX4swa8L+qA0nOhvafeFR0L3U+gOsln/kFt6+ijJ
- VNXFJdOwjZ2PvBsTYxyfjuMPZLAJdnPyryfpxub4mzbMxTwLKSFK3HPkUBrLMBs5Ob+NiQL1JH/
- 2QxSQYJ/K4uckTOh3hUO95VEtwpdrPBTDgs2qlFlg6OMr1xDQjbA5tLnDWODy0eISDqh2cdSKwk
- hxF/r6nVbMfr4CSBtzef2DIj5YQ43ypuVpsmFktbO9cfMBFLWxLML/4UqWbtZpQrnzha/bi2t3C
- 49nGUK5G2xj2Ha8N+lWbxPQCIRwsux0=
-X-Received: by 2002:a05:600c:c106:b0:4b2:406b:f3bd with SMTP id
- 5b1f17b1804b1-4b963c78dd1mr75143105e9.23.1794245376354; 
- Mon, 09 Nov 2026 09:29:36 -0800 (PST)
+ bh=QYjoNXp/nXp4VvtPgeDCoRWCRURzf0sNSBK6vfQn0bo=;
+ b=me29xQxKojjpiEV7ghGY+eBcXM8Fm6KDIyEr0qJzxErpHMhiWdT6m+Vr/E1dR8ywhj
+ xsqAnurM0I2jNlia3e6i8zLwi7ArcIoW0q/qPF/0WSH22VZ7p1YR6pf1GOtuEpQZdbsK
+ 068mb/Srae+LhbB4LldmNk168BY92qvuGOZQu+pirZDe25/hc8pq0hfpXacZ+f+KAqGL
+ vmgRUe+nY79ovh9MDF0a/ctuEaRi550BTeMRGGQmwr94b6t44+3iwk8kO1AAVAqLuE4Q
+ rYYhJtEEmhDV+gBAerhNQkVb7vqvUEhcWApya+VbU5Yft58Spo9gwenIksWeEkQrmn4H
+ pMXA==
+X-Gm-Message-State: APuU4Z/1o+CSBUjn2qNtvih7D9qsIBP6uKPRI6PjAn3PXNy4PvfgDNeA
+ DBA348X3fTaZPGzUr1Pme+jydf0v6lU1yoKz3vE14DjNks45wes+9/1DiHwYfeAj0+Q=
+X-Gm-Gg: AYBFou0EHwPtlyJG1x0kxgoEEGUHMEyexvzSr7WOhYT4lGyKBPH7vRRPnxwrf4GRtLp
+ DD32PQIfGtvLwjql51TxK/nfsJyY12p07O3Lrxf32QmxlwTcghoHsvX44kFb/5S+QUYR8//M9Al
+ ezTwVCDxB+RnOYTYEKWciL+TaayPSn0p7qCS1L8XS1ohtBWCgIc+i8x60MbKaMVW542fXdKzYnp
+ Gn51qP638ds9klob0OPU9kVAqP61mQNikmXtac+VlVYSIQ8c50RXSzuTCAoNi9TjvAu9xVIMAxp
+ USg8+sNaWphLsvqgqrAABiMaB8lULyLpaUAuNOtSbeQedIa/YLOGsyptmyzqxnyj1cQ+Py4ZRFt
+ XQWfxUqrp+a8CSYfdjJcHXzM4QayEacW1GQwoGXRSQyRCpnT2e9vDmPGMawAbg/Z5hKcM+AyXhG
+ C6AmwlIPXrrcbStoZ8BTPcqrSlr60wu7UUoqiUAaRB5L01zoFDJa3b91M5Sqzek5le8WgyH7YGK
+ RIsodwMK/vxAAu/k7sRWkhCJy6sZnikwdtfEKQV/H3GnQZjBjrNeRr+hNgP6ZBX+6XveCIYsIpR
+ ofhOCU4cEDJ/8YVjLTXN1faLKyGd8Fg=
+X-Received: by 2002:a05:600c:4695:b0:4a1:702f:c736 with SMTP id
+ 5b1f17b1804b1-4b94d76349cmr94929965e9.3.1794245383347; 
+ Mon, 09 Nov 2026 09:29:43 -0800 (PST)
 Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49835d2c027sm109750f8f.24.2026.11.09.09.29.35
+ 5b1f17b1804b1-4ba01fe2cb2sm2388865e9.3.2026.11.09.09.29.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Nov 2026 09:29:36 -0800 (PST)
+ Mon, 09 Nov 2026 09:29:43 -0800 (PST)
 From: Ana Bobillo <anabobillo3@gmail.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>,
@@ -139,10 +139,9 @@ Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>,
  uboot-stm32@st-md-mailman.stormreply.com,
  Neil Armstrong <neil.armstrong@linaro.org>,
  =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
-Subject: [PATCH 06/11] video: sunxi: de2: Tell the display the frame buffer
- size
-Date: Mon, 09 Nov 2026 17:29:35 +0000
-Message-ID: <5e2ceb08-8dbd-48e7-acf6-ec30f5ccef0c@gmail.com>
+Subject: [PATCH 07/11] video: tegra124: Tell the display the frame buffer size
+Date: Mon, 09 Nov 2026 17:29:42 +0000
+Message-ID: <1ac8e3ed-6d9c-4267-9c44-8d63b4e2233e@gmail.com>
 In-Reply-To: <2399d63c-ddd0-44b0-bb81-d5d9d2a8a8b4@gmail.com>
 References: <2399d63c-ddd0-44b0-bb81-d5d9d2a8a8b4@gmail.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -165,39 +164,40 @@ X-Archived-By: <archiver.kernel.org>
 
 From: Ana Bobillo <anabobillo3@gmail.com>
 
-The DE2 driver reserves a frame buffer for LCD_MAX_WIDTH x
-LCD_MAX_HEIGHT at 32bpp, but takes whatever mode the HDMI encoder reads
-from the display's EDID, while sunxi_dw_hdmi_mode_valid() only checks
-the pixel clock. A display announcing a larger mode makes the frame
+The Tegra124 display driver reserves a frame buffer for LCD_MAX_WIDTH x
+LCD_MAX_HEIGHT at 16bpp, but takes whatever mode the eDP driver reads
+from the panel's EDID. A panel announcing a larger mode makes the frame
 buffer run past the reserved memory.
 
-Pass the reserved size and depth to the display before reading the
-timing, so that only modes which fit are used.
+Pass the reserved size and depth to the display before it is probed,
+so that only modes which fit are used, and the device tree timing is
+kept when none does. The width is rounded up to 16 pixels after the
+mode is picked, so a mode which only fits before that rounding is still
+refused when the video device is probed.
 
-Fixes: 56009451d843 ("sunxi: video: Add A64/H3/H5 HDMI driver")
 Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
 ---
- drivers/video/sunxi/sunxi_de2.c | 3 +++
+ drivers/video/tegra/tegra124/display.c | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/drivers/video/sunxi/sunxi_de2.c b/drivers/video/sunxi/sunxi_de2.c
-index ab36ee1595b..383cf47b907 100644
---- a/drivers/video/sunxi/sunxi_de2.c
-+++ b/drivers/video/sunxi/sunxi_de2.c
-@@ -181,6 +181,7 @@ static int sunxi_de2_init(struct udevice *dev, ulong fbbase,
- 			  enum video_log2_bpp l2bpp,
- 			  struct udevice *disp, int mux, bool is_composite)
+diff --git a/drivers/video/tegra/tegra124/display.c b/drivers/video/tegra/tegra124/display.c
+index abe31e27d84..bae4725f064 100644
+--- a/drivers/video/tegra/tegra124/display.c
++++ b/drivers/video/tegra/tegra124/display.c
+@@ -331,6 +331,7 @@ static int display_update_config_from_edid(struct udevice *dp_dev,
+ static int display_init(struct udevice *dev, void *lcdbase,
+ 			int fb_bits_per_pixel, struct display_timing *timing)
  {
 +	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
- 	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
- 	struct display_timing timing;
  	struct display_plat *disp_uc_plat;
-@@ -194,6 +195,8 @@ static int sunxi_de2_init(struct udevice *dev, ulong fbbase,
- 	}
- 
- 	disp_uc_plat->source_id = mux;
+ 	struct dc_ctlr *dc_ctlr;
+ 	struct udevice *dp_dev;
+@@ -354,6 +355,8 @@ static int display_init(struct udevice *dev, void *lcdbase,
+ 	debug("Found device '%s', disp_uc_priv=%p\n", dp_dev->name,
+ 	      disp_uc_plat);
+ 	disp_uc_plat->src_dev = dev;
 +	disp_uc_plat->fb_size = plat->size;
-+	disp_uc_plat->fb_bpp = 1 << l2bpp;
++	disp_uc_plat->fb_bpp = fb_bits_per_pixel;
  
- 	ret = display_read_timing(disp, &timing);
+ 	ret = uclass_get_device(UCLASS_DISPLAY, 0, &dp_dev);
  	if (ret) {
