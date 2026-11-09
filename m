@@ -1,151 +1,132 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B895606A32A
-	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 17:30:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 180A1606A321
+	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 17:35:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=aETlRzau;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=SXAbx5nv
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XPm4lQ0A;
+	dkim=pass (2048-bit key, unprotected) header.d=steffen.cc header.i=@steffen.cc header.a=rsa-sha256 header.s=MBO0001 header.b=WJzIPABq
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3B46080FB5;
-	Mon,  9 Nov 2026 17:30:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B8384608DC;
+	Mon,  9 Nov 2026 17:35:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id eilV4uIPO1tR; Mon,  9 Nov 2026 17:30:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9904A80DEB
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794245418;
-	b=MWI/Cmuc7HvQ6t9Afte7F/f5TUuq5TsXFZAr2IekhWmMlqONbaqlpejxF40hgMnJgnfS
-	 kj4r7PGPYFrOcnLtL7IJcd18wt4fJhYp9Tr9CujtM3c+CLpFNWV8QembJ4727MHZyvRJO
-	 OKIJjoWDwB2f7HTSVhavRbSbTdt8E/fowTgAiQ2QL6V2/kROcVbb2Pe7BTVPT6e2bf768
-	 gYDx2GJoN4vqaf7hlGpktErxZzWfcU9I4IiSCgPLSDvnKbohlPblNSWFEfL8geygIINTh
-	 sU8IMhIXd4spMBsK+uJkfOBrspyVq1jusCzxJ7Cp2MPTPUCYIJbwFN3/dICeB1MXbhg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aeBgnb9fE009; Mon,  9 Nov 2026 17:35:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org AEED160819
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794245710;
+	b=c9B/TvGwEBzNCysUPHgoXRGec2ljMRCvnTApfL5iM9lauX2Gly3UWNANE1+oXisvgnDI
+	 WONa3FcwzN7+5e/whcO+kok3WoYdTJZnfaPNNQa9ASD7T9cHcEpDPDErayXTwRrneAvJh
+	 TUaVHWKPmVCgBgA2i0+Ys2hSkKvKn3gdtvxr1zmUDdHf8lMXzKFqcelvHUbjLiiB6Noef
+	 6zd1evL/D1emKjS+bb2C1HLFmDH3erAHUylB2ZMEO4QU1zw01rF/Be66jdX+TkYwDwe4C
+	 eYYTp/f1ydTznT3i1TI9nIrja/4fKBN7VQRQ7hFNL303MY0FcjO/oaYDdQCAkjR95KQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794245418;
+	c=relaxed/relaxed; t=1794245710;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:In-Reply-To:
-	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=cSBkFrIMpTXLNrxXSlmHpwhhLwk4E1AdzOJSLAHU0SI=;
-	b=BrQk6j3SzWQ2CRDU7mRfRwo5CZpjlmbnmLRUwa6wWEt26ABEQP7kSbJuayPC0zPTR7pY
-	 WFv5SLUUqmU9SMm0Cmxxll+GZCXd3wFrXOTITbpJYcX9g2Zw4flbdHryK5kCAbSpQK7tM
-	 4Nh01uMPMmBE8Rl790h8Orim4DMRlMHRRz4RMNfzZ62ccpZPPqRVoo17Xk0QwPHcvjh3s
-	 3Mje5aAXMHYvSv9eb3TBSQpmf94dlGpuQqhCLbQ9e5yLZ96nKeIK1EnS7WVTSp8YGjQon
-	 eOF32WXAXm6I5rQaN9RpcaE5/pFJjsy1hyUYyRLb7wDJ2BsOI9Ad3tdjT1VEZpeYzqQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=SXAbx5nv;
+	 DKIM-Signature:Message-ID:Subject:From:To:Cc:Date:In-Reply-To:
+	 References:Content-Type:Content-Transfer-Encoding:User-Agent:
+	 MIME-Version:X-Rspamd-Queue-Id:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=wr6/F2qGRX2OUnnvnnop7VEndLD59wn6J+s5qGOt3Uc=;
+	b=W1++7ASi1n5qki7rkt4xw14+6m7l9O8nA+D9c2BgzjVkhKshi6dpDr364VBceSpdv2ok
+	 J7l3d0Ka8dSrycByZzCEXJxY/ZtIizSy8vDUqc8YWG+01x4dvRWU+OtMnqRw1LMjvmswl
+	 zZpIEt+TVah5AtAAdOVWEEMI3x3GlgOMmQ9TawVWm3hOmbvjdJcFk7GFUB4fNmTffqAGg
+	 IzwvH1ZoCipM8NDDTYiHP9W9+qU6C7PyVLIAPM8JwPVQ0EwMGDiUtl+R9UairjKCb7cDa
+	 OUf8ou4w8d3J7GscLv+zeVjm/qyIUAbiYCjHq8WhKX2mzvhnCjhtiyZHrP/ZZ5B5+qg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794245418;
-	bh=cSBkFrIMpTXLNrxXSlmHpwhhLwk4E1AdzOJSLAHU0SI=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794245710;
+	bh=wr6/F2qGRX2OUnnvnnop7VEndLD59wn6J+s5qGOt3Uc=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=aETlRzauP36vjhqZlIuUqtZ6jt8EXJs+RaPsVaMfIiZt59lGKiCZDp8a0kU+YTTqM
-	 mF4OcaeXO9oX3LnxjI27mHW3EW5KfnPMq4sLo/RQj4U+DntEFMaDr6Xv68ZzE4qT/D
-	 rVS92NMw+w61rZC1aqk71moD8p1D/qMxFjpOVFseaptJAklEUdEYYFURTtJDPcgDnN
-	 dvFyM9nqq9VPNWOw5T2OpzWKHN9VLqfROman3/LWHwbKaqXqrNYD8SZ0t9yeL8eA//
-	 NkGZL79xdrbcHlRQQzI2+4Y7GWqSxJHB1Eoa3nlnC2aN1vy92Yw3Rmvowfy/3qxceZ
-	 mlK1y1Qw9CGYw==
+	b=XPm4lQ0Ax6z74g+ZIgDOfrmIQadocwFsOA30uT5QpLtmMlGEMZfUTVIh9baMVLIQJ
+	 HtIzTI2e9duEHSpvg3xJacVcxopS3qLDwpfIPNTeej+6Dp7hgltHem5p6watFhALJQ
+	 oUgOas1a15Xi6UC/EVBhbQxlpqzM3kcv/nib7o8Tgnq2RPYZfx4heSx7my5gkNSSiM
+	 f+MkIcMV8q+K9Nz1ZtD3kqOq6vxuiEQhry2f9OJw9lewve5nlDyTUyheGG/kgka/dm
+	 CltmiVQ7QYFDFfm7AP6TwvBVN0fpB6Ec4HIjE/QHQmwMyR7mMQQ1JwuKIDH8GIfbPn
+	 oELZNQNobzNRA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9904A80DEB;
-	Mon,  9 Nov 2026 17:30:18 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 35C9428C
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:30:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AEED160819;
+	Mon,  9 Nov 2026 17:35:10 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 4C46D28C
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:35:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 18D1A810DC
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:30:17 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 3E0724074F
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:35:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id swi8WXkLfvQf for <u-boot@lists.u-boot-project.org>;
- Mon,  9 Nov 2026 17:30:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4698380DEB
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::434"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vR6XpUsUwNbg for <u-boot@lists.u-boot-project.org>;
+ Mon,  9 Nov 2026 17:35:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B0EBE4073F
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2001:67c:2050:0:465::102"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::434; helo=mail-wr1-x434.google.com;
- envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=SXAbx5nv
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 4698380DEB
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:30:15 +0000 (UTC)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-48fd2e38825so769641f8f.2
- for <u-boot@lists.u-boot-project.org>; Mon, 09 Nov 2026 09:30:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794245414; x=1794850214;
- darn=lists.u-boot-project.org; 
- h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=cSBkFrIMpTXLNrxXSlmHpwhhLwk4E1AdzOJSLAHU0SI=;
- b=SXAbx5nv6Ryyitx4FpU6Ai39+wZYHCZzdZ2xCMxLn4QyvbZvjgcp7zOLzXBDcZ1PR5
- cQrdi0DwlRpUABwFVt2FOrugVdRNQunc/teYupxEsHLbJiafKCzZrztxwRQnmZKIsqmg
- vxP47nSRn+7ACIGrn1NWOIlG0frTrfPPKWUcWNvUF+B//fsfm2E6r2AxtTDsVpGqSa6R
- yBWObIo+fwxOpPsxlZ7YDLSiDD97iIipYrI2hNb6nS+1LO+9J7ycc7jA+6B2bDrDU8xB
- 5lllrhDuWdQsJ+FLNhhukZwpen+gCDyE688KvwjC+jtVKewneajJAQM7btzj7L/pX0xc
- FMHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794245414; x=1794850214;
- h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=cSBkFrIMpTXLNrxXSlmHpwhhLwk4E1AdzOJSLAHU0SI=;
- b=fIcdzMlUnThPi6WW0U8SN7Q6pgln+FffqR3nb0WSNdHm0CcPekbkaSqBfJTeaTKt3y
- AQ/6JSlh/JHV8ZffNokOMt/SrnvH7+llmGEctPijPybHnkscg4woqcCixWMgtxrLkaZM
- qmJGfxnyL4K5azF1s0KbPjVAxQ9zl0pS7lnUAgXTg7jvcOI6vKj30f9aiy2DchlCJoKc
- Heor+I2vfJQlEWDu3k00TBqCNnoxvjCZstRhiMh/cEqrH3BALa6FacekCVvnanr3pqvd
- YmeMGNpJ6z1CDMGJyZGT37b73Yx0vdIUZ7T90QQ4E0l47Aoug25TPMT0DSzIQokR5D7g
- QBIA==
-X-Gm-Message-State: APuU4Z8TW9XRl/Sng2EVDhT9HRufZoEW7viELpA4qVFlG5w3iyVPvjya
- g8tn4j55IDgMNGc2rRMaN30HnPXHFxeIHW+6VXVqoWCbVS1b0ptKlB9r99qWSY0RWpc=
-X-Gm-Gg: AYBFou1h7Bm373i5SQYMvPqbHXB9iTvB5QoNRhEHjPcEpoekwHGGOd6vjfUDY4UTbAR
- 69DXBYfnvitqjymExIXrCpMSrn7Nk/cZooaqTfYr/ONRyYCrzBI8u/KMn3nG6XchybPyWwDgF4q
- /IF4u4z+IpsmcdluUXlPaKvXbx9ZZyb1fEoLWpf29KNDWyefxz10dvGHSh4H3y3GzhLKjNqnXaj
- +kWQyLtxohYpi9VTgCFjOXbiRcSy8Hg69BDjgTniaJt4g/Z6QqqA1z+o7pLKaptx6iMbh4uhPTr
- 2AtEoM48lJYiGX04zMK0cx6GQPYfkr3KrtEiZZEpoKpXYxX0YGctSJk+gx9b4oF+nF0W566EehY
- PjrtSPZfhQ0LYVlgldBgE1cCRIsmlw5vze1Ic2RPYujeJ2qh7qaIZcsFoCUWUeM11KmT6NJWKPy
- 9e4r6ltmpcFe3Z4ampU08abun9IjTu+Amhu6xH0zwLhOyAK0sRN5m3XqiDNZcVKQhwoLFTulu3z
- uwRVC5qcwkcrzfcXyvvMICCqMRz33uYk0NPdPfycVPjke5/M/nWqprVzfh+C4JjwnMwEejYsyuF
- 3gJaKjGx1MWcTI4wuK9brXwu8Ko/YvQ=
-X-Received: by 2002:a05:6000:184e:b0:490:76de:c78c with SMTP id
- ffacd0b85a97d-4982ecf644emr283681f8f.9.1794245413567; 
- Mon, 09 Nov 2026 09:30:13 -0800 (PST)
-Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-49835858f58sm155598f8f.13.2026.11.09.09.30.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Nov 2026 09:30:13 -0800 (PST)
-From: Ana Bobillo <anabobillo3@gmail.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
- Quentin Schulz <u-boot@0leil.net>, Andre Przywara <andre.przywara@arm.com>,
- Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tom Warren <twarren@nvidia.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Neil Armstrong <neil.armstrong@linaro.org>,
- =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
-Subject: [PATCH 11/11] video: tegra124: dp: Limit the lane count to four
-Date: Mon, 09 Nov 2026 17:30:12 +0000
-Message-ID: <e4322cc3-01a8-4a91-a0f7-fbcf0807a375@gmail.com>
-In-Reply-To: <2399d63c-ddd0-44b0-bb81-d5d9d2a8a8b4@gmail.com>
-References: <2399d63c-ddd0-44b0-bb81-d5d9d2a8a8b4@gmail.com>
+ client-ip=2001:67c:2050:0:465::102; helo=mout-p-102.mailbox.org;
+ envelope-from=lists@steffen.cc; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=steffen.cc
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=steffen.cc header.i=@steffen.cc header.a=rsa-sha256
+ header.s=MBO0001 header.b=WJzIPABq
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B0EBE4073F
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:35:07 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519MLKEM768 server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4jNcP34y8dzKmBv;
+ Mon, 09 Nov 2026 18:35:03 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=steffen.cc; s=MBO0001; 
+ t=1794245703;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=wr6/F2qGRX2OUnnvnnop7VEndLD59wn6J+s5qGOt3Uc=;
+ b=WJzIPABqG/nY7oVG8m+cs8CxQBhAjXxohFMoCF0vBdqikmTGbbMPUC6HUXiU02SW0I/lln
+ PUcLAmcgCkPLYr96J95mtCuGil9BuKonBqNGLlhds4rL7gupmNQ/NTxjmgSrZhMKF3ZOn6
+ aPUO8nhVRiTCEmHdaA8PwSsoj3ADPgV1+iTeCzB7Xhae33FAN/4eACrXD2ZgHFXV1y4Som
+ zs5HrqHUqN5oGAe0SK1hlDi8FUJip4ZXznmwCXffjwWHgrOkSaa4xnEXVVTWmxZD0x2g5n
+ bsMTIewmaM5zixXLFkxSbIstupZxzi9VZP0KA1miFkmfQIxxGVUDcV1OOvRSkw==
+Authentication-Results: outgoing_mbo_mout; dkim=none;
+ spf=pass (outgoing_mbo_mout: domain of lists@steffen.cc designates
+ 2001:67c:2050:b231:465::1 as permitted sender) smtp.mailfrom=lists@steffen.cc
+Message-ID: <f0f4c3f24d0a9b5afcd72f9fb7ec1d282863d24d.camel@dirkwinkel.cc>
+Subject: Re: [PATCH v2 0/2] arm: mediatek: run SPL and pre-relocation U-Boot
+ with caches
+From: Steffen Dirkwinkel <lists@steffen.cc>
+To: Carlo Caione <ccaione@baylibre.com>
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, Ilias
+ Apalodimas	 <ilias.apalodimas@linaro.org>, Ryder Lee
+ <ryder.lee@mediatek.com>, Weijie Gao	 <weijie.gao@mediatek.com>, Chunfeng
+ Yun <chunfeng.yun@mediatek.com>, Igor Belwon
+ <igor.belwon@mentallysanemainliners.org>, David Lechner
+ <dlechner@baylibre.com>,  Julien Stephan <jstephan@baylibre.com>, Chris
+ Chen <chris-qj.chen@mediatek.com>
+Date: Mon, 09 Nov 2026 18:35:02 +0100
+In-Reply-To: <avH_uOLH5Op_WH5j@macbook.homenet.telecomitalia.it>
+References: <20261109-std-upstream-mt8188-spl-caches-v2-0-78cfb3e90c55@beckhoff.com>
+ <avH_uOLH5Op_WH5j@macbook.homenet.telecomitalia.it>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.62.1 
+X-Archived-By: <archiver.kernel.org>
+MIME-Version: 1.0
+X-Rspamd-Queue-Id: 4jNcP34y8dzKmBv
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -155,42 +136,62 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
-X-Archived-By: <archiver.kernel.org>
 
-From: Ana Bobillo <anabobillo3@gmail.com>
+On Mon, 2026-11-09 at 18:16 +0100, Carlo Caione wrote:
+> On Mon, Nov 09, 2026 at 16:13:07 +0100, Steffen Dirkwinkel wrote:
+> > Running u-boot without caches is slow, especially if using rsa
+> > signatures. This series turns the caches in u-boot spl and proper on
+> > early.
+> >=20
+> > Measured on an MT8370 module (Beckhoff SM0101, not upstream yet) with T=
+F-A
+> > BL2 as DDR loader and SPL loading a 2.7 MB FIT (BL31, OP-TEE, U-Boot,
+> > SHA-256 hashes) from SPI NOR:
+>=20
+> Hi Steffen,
+>=20
+> Could we add the early-cache Kconfig option David suggested, initially
+> enabled for MT8188, while keeping the implementation shared?
 
-tegra_dc_dp_init_max_link_cfg() takes the lane count from the sink's
-MAX_LANE_COUNT DPCD register, masked to 5 bits, and link training uses
-it to fill the four-entry pe[], vs[] and pc[] arrays on the stack. A
-sink reporting more than four lanes makes tegra_dp_lt_adjust() write
-past them.
+Hi Carlo,
 
-Limit the lane count to the four lanes the SOR has.
+yes, I'd do it with default enabled for SPL, since MT8188 is the only spl
+platform so far:
 
-Fixes: 59dd5aa8fa51 ("tegra: video: Add Embedded DisplayPort driver")
-Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
----
- drivers/video/tegra/tegra124/dp.c | 3 +++
- 1 file changed, 3 insertions(+)
+  +config MTK_EARLY_CACHES
+  +       bool "Enable caches before relocation"
+  +       depends on ARM64 && !SYS_DCACHE_OFF
+  +       default y if TARGET_MT8188
+  +       help
+  +         Enable the MMU and caches before relocation, using temporary
+  +         page tables.
+  +
+  +config SPL_MTK_EARLY_CACHES
+  +       bool "Enable caches in SPL"
+  +       depends on SPL && ARM64 && !SPL_SYS_DCACHE_OFF
+  +       default y
+  +       help
+  +         Enable the MMU and caches in SPL and disable them before
+  +         jumping to the next stage.
 
-diff --git a/drivers/video/tegra/tegra124/dp.c b/drivers/video/tegra/tegra124/dp.c
-index 611bf2f81a6..22e9a4b15f7 100644
---- a/drivers/video/tegra/tegra124/dp.c
-+++ b/drivers/video/tegra/tegra124/dp.c
-@@ -664,6 +664,9 @@ static int tegra_dc_dp_init_max_link_cfg(
- 	if (ret)
- 		return ret;
- 	link_cfg->max_lane_count = dpcd_data & DP_MAX_LANE_COUNT_MASK;
-+	/* The sink may report more lanes than the SOR has */
-+	if (link_cfg->max_lane_count > DP_MAX_LANE_COUNT_LANE_4)
-+		link_cfg->max_lane_count = DP_MAX_LANE_COUNT_LANE_4;
- 	link_cfg->tps3_supported = (dpcd_data &
- 			DP_MAX_LANE_COUNT_TPS3_SUPPORTED_YES) ? 1 : 0;
- 
+
+
+Or would you prefer the "if TARGET_MT8188" for SPL_MTK_EARLY_CACHES too?
+
+
+>=20
+> The problem I see is that V2 changes pre-relocation behavior for
+> all MediaTek ARM64 targets, while runtime testing so far is limited
+> to MT8370. A separate option would let other targets opt in after
+> validation.
+>=20
+> Thanks for working on this,
+>=20
+> --
+> Carlo Caione
