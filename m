@@ -1,122 +1,123 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55658606A321
-	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 17:21:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 494C6606A326
+	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 17:22:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=hAy8Eo2l;
-	dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr header.a=rsa-sha256 header.s=smtp-20201208 header.b=asaZY1lv
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=FPVeNdux;
+	dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=jbS4dq4U
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 33EA060809;
-	Mon,  9 Nov 2026 17:21:50 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 05A29810A2;
+	Mon,  9 Nov 2026 17:22:53 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id D1668_MbAl6A; Mon,  9 Nov 2026 17:21:49 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5B9BB607FC
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794244909;
-	b=aY/5Y7y0ehD8pctcqUmhIjyoajdvK04j+S4ruYxxSZSRwY9LG/hqCbqBDoLOyyO45P5m
-	 v/M0IEJEmnszlmXRJVZy4AdjV+GCAfP8vuy8WmUOS//7jXkKk6UXlQ4+QO9o8eA+45hUF
-	 bhpRPawMBRNwy12cXQEVMTWQTnn+PSJnPqWcIjI4isSvRPgyhEofJmHQnXlVucv/Hptnh
-	 HaXPpdP02A4kVGCQO3pI+WzeH2Ud8u15/LbjGVtjfBgvaOe7PF5WvNnYN8C1VJNmZc+nu
-	 E2u5PIih1wC2zJ2cl76BmPqCahZuwKf+Qt4yC/KldiS+6LYswQ/l8b0A0sMl4VYaUXg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id v1M8dJp5vQvP; Mon,  9 Nov 2026 17:22:52 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0A4D780F76
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794244972;
+	b=m7k+zzsG0Fm5gzf/75IJVwRtsOx6596QV8x0Oy4ZiYQXtCC6RmbgUs34Lu6ncAKfw4Uo
+	 Kwdm2CiFfeWrqQD1xtjf0AyGYEK7N6EUOsOKmLZfsVsQTP2toa0LW4nv1rG+HD9GrVwt/
+	 6A4pD0GwwJ+MxdDHWYwliwqktMeBSFMf4BadK1QRR8CsdCKI5ktK2fP8cWbilC52VXnhm
+	 8DoOCcjG/ADWzKd8NLEmuqWeJe/VFX/k4jIfFW7PTiPeyvRyl54xhi99pP5mYYewE/g5Z
+	 b9z6jGNh5LrOG5yvW9gRjG1FWZ/+LcuA9HIX/MZ7EV72SU6o9JaPGgYaDsM1PO2GNWA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794244909;
+	c=relaxed/relaxed; t=1794244972;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=B0b0KkaSrQsCzofOJ7gKknF1x72uGEDQhGoejBG4YhQ=;
-	b=KKAuvOqPAvQAD1O8oR2tqmUgGg7ihG/Ex+ox3/ZM4kndpezZaEIxrqGXtKvUf4YoYsla
-	 ak8XXhDLGuQxPGd1VI91j+GulXF8vkgoA3TPvqHefjtSDy28Zg1G2yEBOBGOzPGfwlfg8
-	 X4V03mi51lq8QMtiox2MhmPcmZu3qzxI1wfAq4GikvdYnCdFpG9cBlsKj3nPIbab0UfAI
-	 cur9YOPLdKA5PIWzbTiG58WwZKi8cqF9ontT8r2v26uqTqmW4ipscAdNwFY939B+8EANY
-	 aPkpNT49Xi6Ettz/L27YmxIwdnVyzvpxFDrEs2sWYQisu2zyHsg5ZmC6H95F4cqxy0Q==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=N5K6x8S2onLT+TBii/8pR8AQ9+FoSMIlWUTcN2vMu8s=;
+	b=jYcbRoMLWwZRPqh1mEZvKpmLP4kiprDjVfY1735lC7GvsqMlg2BC3nW8sJkx4pbGuwrO
+	 SFVqZkUUMdaog07esI0mFdG5MZ8cdYHw0akuqcvjlto2BdZ81R6pUxkrQAaEmoDRf2kxW
+	 dKKeWrvNrPamkLSG0DsglOmOoRjlgW7pPzKcEVfAyqYHESo9mO+igtj2EwM6KYOWqHUi/
+	 iPhUL0PGd8cB5+oxg1kuze7b4+JE/yU/WZD7XJrqsthhHRpoF1Doiaihqoq2apW5dtlW1
+	 vQxOOJ+bD6cbUzLrl9+vwPlSQm5EnPwI9h4tBGc98VlNlONg0+D7EUxYhoMqrTOIpRw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	dmarc=pass header.from=0leil.net;
+	dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=jbS4dq4U;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794244909;
-	bh=B0b0KkaSrQsCzofOJ7gKknF1x72uGEDQhGoejBG4YhQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794244972;
+	bh=N5K6x8S2onLT+TBii/8pR8AQ9+FoSMIlWUTcN2vMu8s=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=hAy8Eo2la4NWfDq5iJuPPrPZlNQS8xZiJ0d6lgEp/uVoSaW3d2Bj0zREptTSl84Ra
-	 dkIKg5Z1IUrh7A2pzOqrIK1L4SJjgUPygKi0HZaWKLNWvWrXLCs5brkl0GS6VzmKE2
-	 MWFIiHa3ZV+dRob+uTfavqFSNShjXZrraLgIZ5JkQd+5+Vua7lCjbw6S9FGmKbXG4T
-	 fcVON9UeA0TayVAAC9jAe8IOSmG08N3fARITZaJYEoalQqtM4tLb3J7P9eL9g3MsvA
-	 elTglPGW3ysTOHcEV3zT4v1MEAkBrV7faKus+W5rw42MKK8ZgeplZxn5EbX0FHCGU9
-	 CNOulXUy9YXRA==
+	b=FPVeNduxu6nEV0e92gfE7IKv1TAeYGZuGnbb5NeEaW5HypHnVRO/G7oNNdQCGzL0D
+	 8eAnIfDnQjYQEgX3gCSqMfxnFnR08+gYQXxJVnAmfYYOsxcoEeT4oizfB3rDuc2Oix
+	 +FYTD6HNbjFHltPRYUr1pLaAJHNsN4IBv8Grek+yxDf9NeVUsvp63cteU2cQqndU8e
+	 xE/UT35LpYKPa+FGe/IvLj7js+XZWsYCkB16LvXAregxzujrLhDNrcCe6fmc81We2x
+	 me8MgH0YS/2740ftzAbD0ZFAJhDfebF5gomGNmwagb8aUcObg8snI3+9twaeJ8kDzJ
+	 gidVS6ppToiEQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5B9BB607FC;
-	Mon,  9 Nov 2026 17:21:49 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 04EA1971
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:21:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0A4D780F76;
+	Mon,  9 Nov 2026 17:22:52 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id D5C95251
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:22:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id DF71E40769
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:21:47 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id C758B80F76
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:22:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vq8HHxcTk_BV for <u-boot@lists.u-boot-project.org>;
- Mon,  9 Nov 2026 17:21:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 19DAC40756
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=212.27.42.4
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.4;
- helo=smtp4-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=free.fr header.i=@free.fr header.a=rsa-sha256
- header.s=smtp-20201208 header.b=asaZY1lv
-Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [212.27.42.4])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 19DAC40756
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:21:45 +0000 (UTC)
-Received: from l3017727.home (unknown
- [IPv6:2a01:e0a:ac2:22b0:7dd8:506f:29aa:45b7])
- (Authenticated sender: vjardin@free.fr)
- by smtp4-g21.free.fr (Postfix) with ESMTPSA id 3292719F5A5;
- Mon,  9 Nov 2026 18:21:34 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1794244902;
- bh=VpFrHTfETttvv5ep976f83jauCbth+zl8MaRGrbv7rQ=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=asaZY1lv5AEfbkqisZSizObY8uO4rDyaTfzEi4VA6+BeuJNxPK4Y7iueCqHaz40SW
- s038V+rGvA/iQlsFewwpNHEJWZgckQye1ODMeeV2K1Gyi99UXl8Wo9CBtRDkQeQys+
- dESCEAj0UHH/mhAyHvL9EvJb7jlr4PpApp8V/X3wIAIJIT/vylPw7sceY+qtaCx76V
- +VO1aioIPqVWmtO+KODs2uzd/LCTZ91Q+FCyzA+u89TaO8NJs7sYdu/nuwTto1ihT0
- Vt0Wx55SC4y0Y6s2Lmv1WuNAjCo9dt6XmpxeGfmgdkjE5HdPkybvA24tnE13kKBnJI
- 8P3QLhCXjdzvA==
-Date: Mon, 9 Nov 2026 18:21:32 +0100
-From: Vincent Jardin <vjardin@free.fr>
-To: E Shattow <e@freeshell.de>
-Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.u-boot-project.org,
- Suraj Kakade <suraj.hanumantkakade@amd.com>,
- Markus Schneider-Pargmann <msp@baylibre.com>,
- Denis Mukhin <dmukhin@ford.com>, Simon Glass <sjg@chromium.org>,
- Rasmus Villemoes <rv@rasmusvillemoes.dk>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v1 0/3] dts: build the DTS from a directory outside the
- tree
-Message-ID: <avIBHFyUj8mDk6PQ@l3017727.home>
-References: <20261108155019.1485598-1-vjardin@free.fr>
- <434743b6-17af-477d-a09f-d110d565f023@mailbox.org>
- <avC2OzAeGxqVsJ2v@L30177.local>
- <fdee1975-8f27-45a7-85a8-2405c29e1dfe@mailbox.org>
- <avDgloDmuQcYP7ec@L30177.local>
- <8229e24f-bc71-4232-b1bb-8cd6c976dd3a@freeshell.de>
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VblTdUqi0mxq for <u-boot@lists.u-boot-project.org>;
+ Mon,  9 Nov 2026 17:22:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 389EB80F71
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2001:1600:19:7ff8::190e"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:1600:19:7ff8::190e; helo=smtp-190e.mail.infomaniak.ch;
+ envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=reject dis=none) header.from=0leil.net
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
+ header.a=rsa-sha256 header.s=20231125 header.b=jbS4dq4U
+Received: from smtp-190e.mail.infomaniak.ch (smtp-190e.mail.infomaniak.ch
+ [IPv6:2001:1600:19:7ff8::190e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 389EB80F71
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:22:47 +0000 (UTC)
+Received: from smtp-4-0001 (unknown [IPv6:2001:1600:7:10::a6c])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jNc6r3C0nzD00;
+ Mon,  9 Nov 2026 18:22:44 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
+ s=20231125; t=1794244964;
+ bh=N5K6x8S2onLT+TBii/8pR8AQ9+FoSMIlWUTcN2vMu8s=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=jbS4dq4UJQjK6nVr0EK8zrejjIC1RAtss9Em4MrnbSC+v1Ed4YM8/rZxLAIOeK/5d
+ 6uUTOGIavioa+79VafyCi41dADcooeRAMf4q+QcgCnZ2AH6bu0t+sAgDTgwPIigiuv
+ Uq9TawuG7lbHYqmNinII6do2oEk1562SuykKMsMDvSf99+7QPPOCHZJoJZrh7Pdrnn
+ Z2ju00h8WYKIGTjiFI1cJZHkA66Z5vwU2L7Q4CJ6KlnSLlQvO6ANSPzaB2JXdfd06F
+ S24T+wAVl7HMIQ81hUpSxrdZGYCH4JD0srdXtFCySKN/6xBZwkxQEhdyAoQTX3omOq
+ +cjtZCPc89m0Q==
+Received: from unknown by smtp-4-0001 (Postfix) with ESMTPA id 4jNc6p6S6fzP0D; 
+ Mon,  9 Nov 2026 18:22:42 +0100 (CET)
+Message-ID: <80ed7ea2-a4b1-48af-b756-4eac285f62e6@0leil.net>
+Date: Mon, 9 Nov 2026 18:22:42 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <8229e24f-bc71-4232-b1bb-8cd6c976dd3a@freeshell.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: ram: Fix LPDDR5X size decoding
+To: Jonas Karlman <jonas@kwiboo.se>, 1579567540@qq.com
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kever Yang <kever.yang@rock-chips.com>, Anshul Dalal <anshuld@ti.com>,
+ u-boot@lists.u-boot-project.org, Joseph Chen <chenjh@rock-chips.com>
+References: <20261019-lpddr5x-size-fix-v1-1-3688217baaa2@qq.com>
+ <7a9ef465-4cb3-4bf3-b0be-e5403165cc31@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <u-boot@0leil.net>
+In-Reply-To: <7a9ef465-4cb3-4bf3-b0be-e5403165cc31@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -126,63 +127,101 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-7.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS autolearn=no
+X-Spam-Status: No, score=-22.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi,
+Hi Jonas, Joseph,
 
-Le 08/11/26 16:58, E Shattow a écrit :
-> Hi Vincent,
+On 10/22/26 8:52 PM, Jonas Karlman wrote:
+> Hi Cunhao,
 > 
-> There is a concern that vendors would normalize this and make the
-> situation even more fragmented, contrary to the intent of having
-> Linux as the device tree upstream in-tree as a 'dts' sub-tree.
+> On 10/19/2026 9:31 AM, Cunhao Lu via B4 Relay wrote:
+>> From: Cunhao Lu <1579567540@qq.com>
+>>
+>> The shared SDRAM decoder treats type 10 as DDR5 and uses the wrong
+>> bank count for LPDDR5X. On the 4 GiB OK3572-C, register values
+>> 0x100043c1 and 0x30001001 therefore produce a size of 1 GiB.
+>>
+>> Define LPDDR5X as type 10 and DDR5 as type 11. Apply the existing
+>> LPDDR5 bank decoding to LPDDR5X so the same register values yield
+>> 4 GiB. The type values match include/soc/rockchip/rockchip_grf.h in
+>> the kernel-6.12 sources of Forlinx OK3572-C BSP Alpha1.
+>>
+>> Signed-off-by: Cunhao Lu <1579567540@qq.com>
+>> ---
+>> This patch fixes LPDDR5X capacity decoding in Rockchip's shared SDRAM
+>> decoder.
+>>
+>> The geometry registers captured on a Forlinx OK3572-C with 4 GiB of
+>> LPDDR5X are 0x100043c1 and 0x30001001. The current decoder labels type
+>> 10 as DDR5 and uses the generic bank calculation. With the bank bit
+>> set, it assumes four banks instead of 16 and reports only 1 GiB.
+>>
+>> Define LPDDR5X as type 10 and DDR5 as type 11, following the Rockchip
+>> type definitions in Forlinx OK3572-C BSP Alpha1. Use the existing
+>> LPDDR5 bank calculation for LPDDR5X so the captured register values
+>> decode to the correct 4 GiB capacity.
+>>
+>> The fix applies to mainline independently of the RK3572 SoC and board
+>> support.
+>>
+>> Host-side validation of the decoder with the captured register values
+>> reproduced 1 GiB before the fix and returned 4 GiB after it. Regression
+>> checks for eight other memory type codes produced the same results
+>> before and after the fix, with no UBSan errors.
+>> ---
+>>   arch/arm/include/asm/arch-rockchip/sdram.h | 3 ++-
+>>   arch/arm/mach-rockchip/sdram.c             | 4 ++--
+>>   2 files changed, 4 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/arch/arm/include/asm/arch-rockchip/sdram.h b/arch/arm/include/asm/arch-rockchip/sdram.h
+>> index 476fc1c4e..f5a213fde 100644
+>> --- a/arch/arm/include/asm/arch-rockchip/sdram.h
+>> +++ b/arch/arm/include/asm/arch-rockchip/sdram.h
+>> @@ -14,7 +14,8 @@ enum {
+>>   	LPDDR4 = 7,
+>>   	LPDDR4X = 8,
+>>   	LPDDR5 = 9,
+>> -	DDR5 = 10,
+>> +	LPDDR5X = 10,
+>> +	DDR5 = 11,
+> 
+> We should probably just drop the DDR5 symbol, and could possible also
+> add a DDR2 symbol. DRAM init blobs likely use something like following:
+> 
+> 	switch (dram_type) {
+> 	case 0:
+> 		return "DDR4";
+> 	case 2:
+> 		return "DDR2";
+> 	case 3:
+> 		return "DDR3";
+> 	case 5:
+> 		return "LPDDR2";
+> 	case 6:
+> 		return "LPDDR3";
+> 	case 7:
+> 		return "LPDDR4";
+> 	case 8:
+> 		return "LPDDR4X";
+> 	case 9:
+> 		return "LPDDR5";
+> 	case 10:
+> 		return "LPDDR5X";
+> 	default:
+> 		return "Unknown Device";
+> 	}
+> 
 
-I do not want that neither: the DTS of a board SHALL be upstream
-in Linux and in u-boot -> "upstream first"
+@Joseph: What is written in bits [15:13] of register OS_REG2 by the DDR 
+init blob (*_ddr_*.bin files from 
+https://github.com/rockchip-linux/rkbin.git) for all supported DRAM 
+types? Can you confirm what Jonas said above is correct?
 
-What I (we, I feel I am not alone) want is only to smooth the local
-bring-up, the months before the board is upstream, when the .dts
-changes several times a day and the build is the Yocto or Buildroot
-image of an internal team and its CI.
-
-Compiling u-boot outside of any build system does not help there,
-and the copies into arch/<arch>/dts that the layers do today [4][5][6]
-are a fragmentation.
-
-So the question could be how to make EXT_DTS_DIR usable for a bring-up and
-useless as a permanent home.
-
-For v2, I can explore more upstream "guards" for U-Boot like the one that
-already applies to CONFIG_OF_EMBED, which "crept into use":
-
- - it stays a make variable, like EXT_DTB and DEVICE_TREE: no defconfig
-   can set it, no board can depend on it
-
- - a stderr banner as CONFIG_OF_EMBED whenever it is set: the
-   device tree comes from outside the tree, not for boards in mainline
-   I mean, https://git.u-boot-project.org/u-boot/u-boot/-/blob/master/Makefile#L1404
-
- - maybe, an error when a name of the list also exists in dts/upstream or
-   arch/<arch>/dts: the directory can add a device tree, never shadow an
-   upstream one -> I do not like it because it avoids improving/preparing
-   a new DTS before sending. Maybe having an experimental flag.
-
- - control.rst: a third option in the Configuration section, next to
-   arch/<arch>/dts and update-subtree.sh pick, for a board that is not
-   in the tree: a board sent upstream must come with its .dts
-
- - others ?
-
-The SoC .dtsi are still taken from dts/upstream, only the board file
-would come from outside, as it does with EXT_DTB today (that was the answer
-for the VisionFive 2 question last April [7], with a precompiled blob
-because DEVICE_TREE= cannot build a file outside the tree).
-
-best regards,
-  Vincent
+Cheers,
+Quentin
