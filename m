@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BBE7606A321
-	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 15:26:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D6D4606A31C
+	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 15:40:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=h8Hfw0SW;
-	dkim=pass (2048-bit key) header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256 header.s=s31663417 header.b=aOXVu2qv
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=fj4xx5lD;
+	dkim=pass (2048-bit key) header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256 header.s=s31663417 header.b=oAT5ezRD
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0F03F607B0;
-	Mon,  9 Nov 2026 15:26:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0C857607DE;
+	Mon,  9 Nov 2026 15:40:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id OSxbCMPYGpgV; Mon,  9 Nov 2026 15:26:42 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4CC8D607C5
+ id VC722wD1vArC; Mon,  9 Nov 2026 15:40:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C3EF8607C5
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794238002;
-	b=Fi/6UQgXw3sKzRH/Zw0F5UV2hnRpMKKuqSI+xVDs1NYKfFmJ31Jz805S9HEQWvibpZnx
-	 POnPQIB1vMdQX6o1XtazCfiGOjgDJSaJrAp2nP5tHvKzjdPXQhlvvgnGX8dhodxIStwSb
-	 BvQG9YOIbeBDwUsxtlWnJc+gto6Tg/sMgz6zbosP2GTTXPq5lyPTC7sxejla7RSRENGTe
-	 W9dJWMFtov/xamvjOwsYrgZ8PPyIsMSM/qlgTKvRFQetGd3YSPCLwcT6dkPv6i3HDM1fW
-	 GITGdWmbMUl+2A4YvTc8Y0CLa14qN1QKLrKqLzl/bXS/cMSu1fMgIdr1CG1p7lnMbRw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794238832;
+	b=B7yvsTz0kO4RhfKlRiJoyaAzZnNpar3gjQ1JEnwOXoDYemW7uT0ztR4kI032Y7bjeprz
+	 nG3/f3ovnVlBhKvi1NjUNjNCgJLOabNUWrKXSf6wA8vjlXp6cYAkeBW1gh2wwGJ3CrRBF
+	 w1Jb6b6+jQXrpMsjvUwr+oT3X2aytnkh9zbvP4NT/E1nrM8pwbQhTpfakAlqs4jlLgkZj
+	 NY50x8qSqim1MybIw7QIpQpSgwGumhyqJZfce7v++XEWDsFdj2ZEYya/Gr0tqS1UiH/xx
+	 jTwsMK+wsregJljHBq5D35nbQN2OGvZP8MLfC+n2ou+/TfR5/xCS1LDek6ztrJFNVMQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794238002;
+	c=relaxed/relaxed; t=1794238832;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -33,223 +33,191 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 UI-OutboundReport:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=m7kkP/Ak3UuFFvb293Zo1i51ezk5hpn8slPIjNraHHw=;
-	b=Ro9WYTqn6rpI4W51ts7+9a2EmjZnCDUjogselISur6OPlRZIcvQl4CGpOAOcWZ7Q7Hj4
-	 8nQQHQu9tNqIIYGDUDWwfhZq/jAc1RVHX6k6i76DEAEHLx04/DDb64hwBA9XRrdBIEcb6
-	 uvUQxqZp86/Otw39WP/xhrTQn7JGqEXuqKCN5KqEk5LXjEirgqpdDbTCrkflE8TZXwvVI
-	 ZlBdDk27sRSKdqh8eKHGDiCeAtEgydFuWslHZu/zjeWL0Wvk+EACI71CpwiUe5kLYvRgr
-	 aFqKbgzln0zXwQ9wFQcO/MbNqercZixktIDNuSFgUb4LYiNd10wQeSScUxj5cmDdgdA==
+	bh=+uyrvuFHf8wGcmC7fRkH4E8EwvQEyNHWQC3vkdTAxAI=;
+	b=UDYfPtH8rtPCqDjOSgVvf7VmZ3yfxKSDxsCBL0uyErOtYp8SOnQHxWDy+Yx6z7I0/7Ys
+	 hpLvza5FZXMegXzU4YlwNdiAcTN+DBKk1J51+L9Yu6E0k+WY3Az8SCe2UANbIjRwgbQiN
+	 MkoOqfGKu5423ds/mPdlapQ42CSrFY7IkIjm44uLv+p9aevxZoOTKBz1ouKwAgtoJdfpd
+	 FQAoDYNeyZtZpuxHX4AmNVYe+/A77pKjId2MYBCACZvYny8m2HlagK50es3z/y5TqePJo
+	 KekUPCBIq3JohYO/zcty+EhW8Ll4PKH8PHuf6qXB6UWG45WAJ39h7y16yQ/aAhwxFlQ==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=gmx.de;
+	dkim=pass header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256 header.s=s31663417 header.b=oAT5ezRD;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794238002;
-	bh=m7kkP/Ak3UuFFvb293Zo1i51ezk5hpn8slPIjNraHHw=;
+	d=lists.u-boot-project.org; s=default; t=1794238832;
+	bh=+uyrvuFHf8wGcmC7fRkH4E8EwvQEyNHWQC3vkdTAxAI=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=h8Hfw0SWLCkvYCUoZmCRPQWw100KVLWH6Jv3Ef05pZpdpxO5X4Mw1ercNPFZ6ZQRf
-	 JQ2Bw35G75u6fdSncYDc51ZovTCcGivAToPfZ+E3l2cA6ZGsuPB3rexVjEQ3s/Av0b
-	 +R+caE756SGLhqKYpwjSQSPwUer4nnvQdLjkRzjbSNzGZONSpOjq80lu9y46FdHl66
-	 Ev2Bza4kDryqh/BEchruqMKJjsCh5xzNMJbgM0VNbhGwSu3GNOt9H2vJz1BAz3IoL4
-	 wL1n+Z1WMkkZTu2P8TpFeHSMzpCtjeaSKH0a+wMBsE/Trks1bCKQjUrzojtIFZFuFw
-	 wOTVyCTS5V5ig==
+	b=fj4xx5lDRWX4RiHbsedP2gaM/MUJnlPEYwDRuZ+3WcChx0OOQmqW3mRyF9GZs6jH1
+	 fdaDRl8bYuJVGGdNOs6f1wVlsb7kWdAHx70B/NS0Zkf1sLsGfddYcws80v/zL2wJJo
+	 6b64DERonbPMAo6mjyMHJpisCuxkQVni+DdqFaycyS4VGv7I9nvbPc38aqurKzVHqP
+	 dyniVie/4fsEN3l8gKEelvRCPzbEJ0Yqsmnp6L+BJIXcgyOTMRlXNdT6eQmfe8fOH2
+	 AAw9/Wp57xzlsnrDNrZXmW/AjCtzmVo+s9x4U9uNnBB9BOZlwMcRPtWUJ5ShSIFNr6
+	 TLl7PpcaRvTZQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4CC8D607C5;
-	Mon,  9 Nov 2026 15:26:42 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 7A93A932
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 15:26:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C3EF8607C5;
+	Mon,  9 Nov 2026 15:40:32 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 698F7932
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 15:40:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 600934008C
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 15:26:40 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 4F78A607CB
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 15:40:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5Xr24vssVop9 for <u-boot@lists.u-boot-project.org>;
- Mon,  9 Nov 2026 15:26:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 1724140087
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=212.227.15.19
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.15.19;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pEHZWWT-ggyw for <u-boot@lists.u-boot-project.org>;
+ Mon,  9 Nov 2026 15:40:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 669BC60703
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=212.227.17.20
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.17.20;
  helo=mout.gmx.net; envelope-from=xypron.glpk@gmx.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256
- header.s=s31663417 header.b=aOXVu2qv
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1724140087
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 15:26:38 +0000 (UTC)
+ header.s=s31663417 header.b=oAT5ezRD
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 669BC60703
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 15:40:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1794237989; x=1794842789; i=xypron.glpk@gmx.de;
- bh=m7kkP/Ak3UuFFvb293Zo1i51ezk5hpn8slPIjNraHHw=;
+ s=s31663417; t=1794238823; x=1794843623; i=xypron.glpk@gmx.de;
+ bh=+uyrvuFHf8wGcmC7fRkH4E8EwvQEyNHWQC3vkdTAxAI=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=aOXVu2qvV8Mw+E7bsYGe+ny3AY4jdFcIumoalFEoHbAMN75NUvRHMwt5zpPg4HEP
- RVwJdEoeeKdm8nGpi89RMxJMo/4UD9tcGvUa0nGOyAcpvTBhEHCzQTwa9QmYjSywV
- CdeUxX7udetVOHZxxpxpqc10EDTky7JwnMPO0FW+xamwgRrR+ILvkwRZsz8Nc+ttz
- oDYxNVDIgMcG6hvu09fapzldcpsbZoXsNR94qOiQwO44ZNx79cAMZvaqY3GVCdW1H
- IV2ndRmogb8V/oWuMbsBTt9KkokYnMgsoCNV4JP9xNRHo5oIlHyXSW2euNK8xwKoC
- XczuJwnUC1o1O79fXQ==
+ b=oAT5ezRDjxGpc4QyPc/E4oogDPYbr34kFyBbuLCGM6djG5kUzi1N6woY5kuTISle
+ m9zArMQk5M2bjDz7PjoVtb3ryGbTRUtJ0U2//4XSEIHzdWhnq2GrF3TygIu7ELnBZ
+ nYX1gIIX1THcISC4uRZjbIlQi38M5zCX2thrK5JFUY0ZGXXb3JaXSoFTsu23GOELN
+ 0rdR59TfDLhohWdHEqsPGPoBJBJ6LymJV98ZgI4l+ezo/06QdCEYeZ/GjIzftgyYK
+ 5tL1m1k0d9XxRnPr7pN+hMh1ghQRGIcBYcG/Ppw1Rs7CyqpMFlJy/jUWxA1xxXTr1
+ rMMl2vUsRCmGrKRxMQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MK3W0-1xCchv1eZy-00LWqj; Mon, 09
- Nov 2026 16:26:29 +0100
-Message-ID: <7e4c908c-cc84-4de1-8afb-3be76f7330b4@gmx.de>
-Date: Mon, 9 Nov 2026 16:26:25 +0100
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MZktj-1wwwEK1leJ-00SbUv; Mon, 09
+ Nov 2026 16:40:23 +0100
+Message-ID: <7c93eb2f-f00a-4219-83aa-c2863c94a356@gmx.de>
+Date: Mon, 9 Nov 2026 16:40:22 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH next 02/45] doc: arch/x86: fix "link" to IRQ router DT
- binding
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Viacheslav Bocharov <adeep@lexina.in>, Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>, Soeren Moch <smoch@web.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Le Jin <le.jin@siemens.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Peter Robinson <pbrobinson@gmail.com>,
- Sean Anderson <seanga2@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.u-boot-project.org,
- u-boot-amlogic@groups.io, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-References: <20260825-linkcheck-v1-0-ee7573fe3a4a@cherry.de>
- <20260825-linkcheck-v1-2-ee7573fe3a4a@cherry.de>
+Subject: Re: [PATCH v2 1/3] efi_loader: implement EFI_TIMESTAMP_PROTOCOL
+To: Felix Moessbauer <felix.moessbauer@siemens.com>
+Cc: ilias.apalodimas@linaro.org, jan.kiszka@siemens.com, sjg@chromium.org,
+ u-boot@lists.u-boot-project.org
+References: <20261103093338.963328-1-felix.moessbauer@siemens.com>
+ <20261103093338.963328-2-felix.moessbauer@siemens.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20260825-linkcheck-v1-2-ee7573fe3a4a@cherry.de>
+In-Reply-To: <20261103093338.963328-2-felix.moessbauer@siemens.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Sh22+s2xKeFFo+jMBCBT/BGKmeTnxEx+sYWXTzr+5FDgtP24h79
- 1tRbwjx8nnZ/sVa2dq3YLdn3lE4+GuavFHoswdeGSqjPEPGuiy0nDZWJQlnl4UTBBMttwEm
- tP/uGjvA7arEj8KTu2Qguj5XP9jzCwSL5J7I8dmyBcft9j7kUHc398o4jMW9VUmOuZmCidv
- k6rzgyndytxv+y9FyN4Sg==
-UI-OutboundReport: notjunk:1;M01:P0:kLgKKr/Ynmo=;Q/WMVO8jfNRupW4mZFmE6cuiy0l
- ukOKvfn5bGa5LU5zcfhL3Esq3oK0u+sRmQc1C0XAGYZ3UhFnHFyHEC2uTvACLs6vb9sgsVDUQ
- DGn3higBopuD1SY53nflTXLhTVO6Yj7/EsLoBPKr9ECfW85VJxy97/6NU0V8xAG5xk6TBapqI
- PPRhl+MtIqdNi6KG3nzKiw+ltvGXreg0mJfrnIkQdOT9F8/9/bz5OCAJ0xnVyBbFeoUxJOdUZ
- C8w2IWhumvl657MIneEriUOUAj9+BHibJJm5HQOHwkNcGKO3j2poboUcHOJIKm1kPDl8kdrt1
- cihGeUu0uvUinX0Enr2iARTWwFkD+cfVP9IefSKjMbXJu1Z9kX+bze8v3aBCkcjpkKfqTRUK6
- rTUpfggbx0vJGzlh22tvxL18xkg5IyYK97WlVqBdB3A2OueYFdwf5oE6QBX6+Z1nHmvjg7TtE
- HFyUoH+317ClX5Z9KudMaliFsHty4mvDuUyxUmw0bEP/luhQEgeHguS1qN2/SyrCY4dPIzV9C
- bnyeoqVgtrf91+kczBqy7+0LfIxUypm1heuBzdSuuyeQOBCCOmk/CAW1KGmnHrQDjkatvC07J
- MqZlnjHQHZDPvkDJhlz5Gsvn5LU8TZzLbRV6Qlmiqz+Nhfp3HI3jam2q2mADUIX8mZ1wK/aLt
- 0xyRHKrbrj7oFnSJHNInWIxrkeMwUgEMCLCtxKwICglgm6xHzlDYG+z3B37FDK+jiApUXmgTL
- GrDlCKT04L4wU0hsxwK9UtD+tSd49CJrZiHpG27zsnRo3HdwlNz8J5TwgIzBF92F0/KXHN3To
- 3Zpl1aJTRi+3K4keqwbuT86l3KIsfpSKhpr41AnLRsBggKXWZamQF7vdpnPgtaMkrPqsgQrFm
- 3HXIpsSAzBdiW0Kl6q0Jgd8CArumRkKmRGYpH/6VmWEEPAOOXG0nxTjS4eEVvxGlA/Y+fhJno
- ZMj4mkifu5wvJGa14TYctCIj+NnfuJF+vLBtLy4fw+SGrAsh9413tAbdgmSiM2nP4hoVT6/oP
- a9n13n0BeLrk/f524AEsbSwRY5alspqo/MghpTF9IQ5GV8z7Hr08tw3RaE9b880WsxdIqcrro
- FKqxYXwTvBXec8wfMGDzk1RvKXC7b2e9AG5UDRv5jx6F6601za+wihKFEekVP39PP5+WHjYNT
- D0mNv4IH1AT7RQBvfVwwDlz5VVmita7yAjqd18twQ0MQeuAtjnb0+Ebf8+5Ks38dUKkiGZP32
- KsITDFnFkkQOI6u89WfqMvvr3j6UF2tg4AA3s6pdh2Oe99jg1POAr9lhxtGaj3GFJWRVhucLa
- LVRAh1okoTr9HMbuK9UdJIvdWbX1+MlQy6GCCfy8PZuS7BapTtFcSRjpBBX8ou6cGxvxK8met
- 3S0M2pmiNxudI1kF0u75M9Q2q65rALPVLoJPV4VARzsJ96VD9Hcm+ePKpFTtl0/EqbjToP2jG
- azrRGTfw1S594jh2mtG24pY94dLsl8hQqXJxVdtxGUDeZBJ5cNNkcgJ7bmBV+7S7Hyib3DbJ8
- n+o79eOTCONEoWMqQOCEwzGKjLxAU9KPGc/iLZ95veIJpb4sagCMlY/6BXIduCpAVbzNjXltZ
- WwuWv7d7msq+0KK/ep9/7uuqZjLhiGCU/RTi+d9SB62WK+4RnnVqxafLPNilOHlwLUExQ8sdf
- jHXmlgdkGbsUGodkJpb3WFS9B1hn/DflAWsCduvNhYt++w9UddGyYMBr77lqusn+3izAh/T1b
- g18R/5d3UaMIfqy/wXHE/kSHXKzHuWyFLR5iDdEX2tejqv6P0w05+/b77DtU1VD3QqwEchvYY
- SC/y2ntIfoVGNNwH4g5aCIQlc/fUZWW1+NxVguhKUI/uQ6BHgQWgjJ0fn39UcI48ouRg0QM5Y
- 3T6VjBdKiaCf4bsY9XUIqykfn/FRbuCFyV8cNlG3Ryl5Kff4Oru/z6vyr2iwI7uqUwLzafuTj
- XD4SO0zn3O9RLXZdD8uwG41sS77lwhoY3fCCesW4xy3omKDytBerDL/dIo2rE12Y0x18GLbai
- lVVT7j6C2LRsaV47s1Bke4uaL9KOKQRbIFGmlEcVw0OJLJ5W9Ldu4yI1YHmKuwOClyq0SxcQb
- 5d6FBM3wyXHjGaHOGdVofEo4AjWIeTWnBGGcYQCg/os7cw8dAO0KR6yAt6/bOiuAhymjWEmL8
- dlN48pFXrRm2i7FqlYNW0eVUtMNPQQ5DFBvxp2AIJYGyqJuhEaI9E/Pc3x87zKCx0DUh+TKqq
- ue0PEkJuOg0QL/YF9kgJg/RTdfxisKaIJGyvQ8kEPr+1PLauLHJvczYqvDXCgti3NS/GvEita
- yUGbXrVpjXYIreUGucxpyFyc8LiStu10Di26SLgMUOGBzVgzy78181umB+HINObfTHyltl2YO
- crvedXNKzTp0uKW4Tz6qEUQ+ZJDofTZEjiYqS3MwV50HQE2GcsWY7WUncag1FbJIXDxqdUuI4
- iknyHj/QrdgONT2J4aMkMmMmROtmDncT0wxTpN2ubnhCG08AyUxFd0WIRX65a4AAUzXc/Y1Zf
- rZVPworG7TI6Ym2z8B6h5cSl+Gqx1hqsVtlk8ziuP0aWAMG43OAVpggYVrovo717EGWVW5zH1
- oObw7DhBR+9xX0ANqOfOYuKFLBCCUTMetFkiVvglqAxwjVAvEpj+Ir/0mDg/V91+wfVG8RTsb
- Uo1sxWz0dzmZHKZqaTvdNKhH5iJkVolLyKy0u7PTkgcCsN5ot9NCWOEK9c5ZqUKi/2K1AMFbm
- weI+oAfk+/r6ETrEAFIKxyWRup9gYHPruscsjr8ET1xoUt7ui287ypLpybW54hBhOuNqSUHbf
- RDtjqJgQDKpNBRmQFFqpKhoTvisy8TM2IEP689EFan532YcwUSMHG+ivKLJIyVIQ1yQBjkjKp
- C4kzYxsWwg5QEeO0A/sWXoUvEQGUuJ/nK00E0oGsWi/Y+iWTmX44l8tu/sS+ZCmBZIyVWLpBi
- RcmwrlxBHS+CqolC9tSrecTMFOkbbRazJdWfMpA9wkwf1jpX5eroPs2BNq/9F62x4TPZrdf7u
- 4uyohH3T6ru4iuzPZPqGT4aUMHF33Xhie16rT1pvOCnFErgZSNegNrQUuK2FzZZ0IfGI/uYSt
- 34n29S5tpLzU/tXr2uiAWRNgU54nGOSA1RP0rIg5HTZP/lLGB0o1uNOu7La+42KUhIsTmQLY5
- NtkcKnmoRuURjdorr7N8L55p/juM59vMw5AQY9W1KVBGM3riZvjT/VNG4MU0kdg1bg4ljyxeT
- j8zP/FKAXQWNs2wXWFywrDGCNDjdBxfu8zO1UT96IZDtayayBN9qFUM4BltKSMVhU78hiOQ/J
- UkStreH2kxvSN1X8KNLbkAtrSUiXmKEvbwblATb2IVXpuYgV9hRTxautN54yfpHOZ4ce+DvR/
- N2F6aYdMfqTo6pnMDawCnONTHUcwh10TOj6hneUak7OvumnXaREC/p6zIZuRNbno945d7ZCmR
- beEoLobhHgoYt135A3Wrqz78hH6ssVMyHG0Nud0fx8f1nRUOz23GgIzOZOH9dpF7QyRoRyC+F
- zr60UHAu4a4XSPrWORvDhpUVAxeC1EeJEwtWCk2kXPYNznB/nEGj3nolRdwn9xE+XVbSw/C3V
- tXuxWPZ1gC35Wr/VF1SopcCxxuqMmI3xo62pMQgg0eRnKFGM9yxRtkOHFEdZBMOaTk9c6xNyO
- XJRVGMC0WH6Ct2nAtAkEpp6/VjHUXgSajUMuIt5AaiWJwXXG7zgRhplpsi7PLAd4+zPm2/FWX
- 5At8cbYm+08/Sl9j1uZ+znGmt9XetTuvExoeVgz90Vc6eGjMFpx13NlL+aVYgAqyB3Z+plGl0
- WNxVDAgS40xtXogOHwTS4bG9FhtmYSLhgmg1lpi3QlV4ttkx3CFCb69HBYZUFN3z/WTGXY69C
- zOocysHFgPK4ZeWNzfN0uMSVXDQEc2fUWuIT69mia059sJCcN5qu0QZ4mQRS/mQGlGZRDhvF1
- xfJx44mo/m3diCAKA3p1aD3B4XjzNbXxVTzaUyOWAJCYb2BlHjwmuk87/FLyeWcvdTl+PJtDj
- TkeSupSuDq7BLlLFYY7o/KNXfh6Ok/Vb0k+OXed0pVsPhycYWf9htETqxgOoah0hA8xQFx3TY
- DqpV1a6UMnXuzO4Ibef0cvqGWJA315YUrlV7RSvg15eSCMPdC9112ILEM4iskOSgKsgOdCYq0
- 4rFqLgONSeCMoxBHJPCZjqCDfjtIghsnHzxTzXGUlwUEJqPU/bNCO5qcihTQOV1jkj+WIIhh2
- Lu38P9b5oXopXSjRvU+FMomYWDnxZI62Q4uoaiPErCrAp2b6QaXVjfvyuN21xMR3Uj6Jree9t
- hvw3TrW8QDeJEvJtRQe2QSzpug18NohXMV6VQtzc+x2OrRLY6SIcbh3WFNuYnJ2kAS7z+pZcP
- mSMsucez838QOo0VJTHGDk5kfTFwzXfioNMfgu5Y23LPpI0q35d8MGsy6Yd1Ek9K2u4bWhkH/
- qy7ggtmgZTkY5QrkdhTHkdk9r4Ca4/VE8pTmIJQMo+rsIl90wUybfe43w1MtWAsk5yiTHJpOG
- cpMXjU2asAih7eUMxkfk/GcAKsXWbofxuqTn6GvVa9WG9rnrfokRwhM1nfA+dEuJr7SqheQE4
- /DER38xoG+UgLh42cWLHPtB5vSGjU6bMo4fAqMNtzKFQTmhRxT1C/8ZxKfatI7L8+3i2qWdjq
- d0OZOneblWEx2pHCHrO5WiFVrbc/wbqJF2bj63HxDKN5Z/Jq0Inlp9PHQff77jud3Fhk2dg5X
- lyXXwYRdxeQgEuK4UMJe3iEBn9h2OZ6u/pJCWGG+b8OssOBXdpA2ctKOKqPOe+SWEfK6mFd/F
- GqgtT+mFbJc6PU3poeHSa3NdeEgOVEdyQAMpp867HHNxKPTPlHV4QwKRS9zLmIZCRPFbk5ZJy
- Qk7cITsqyOrkqgpYd/iCAiXWMpZJW3iatXUK1m4jUcJjgH2x91x/rcSMZsN4cbm+4j9Sbo2EI
- 4siw2/PxQdFURkN2WjiI9XcSKNCmzmUcDxzyQM6W8NVKfSQWUi242W0kGubUN3EXq6i33NjaL
- AdywPdefnDRutqHjz4XrqLAxarCm8F3mgUlh5vGHhYfZtLm/EX6/KtHS6vS3yCWUIFjfHVOwC
- 0VJpfPvjnVJar0HYqXEV32+E+BOMXze5/1YkLc8QJhq4kWdzaRa7ByYuAgFxTUPluXU6bqq5o
- 302R4LA7MRsG6kqBUhzWrGq1NtoUpHOw6WF37QOU82BEuVc/qB9kcAEJPHOkH2aV/35uZwh1W
- yn4P1KI4G7h8OVxY5gxlR2onfNNIk5J3uZlRWFjlVjGsPDTAaVyVuLU2I4IpNaA70wUBpC5p7
- S1rLkRs6Rnu9s7ublBfrz631MACSRTeKa1dixGIsR4ts8FpYwgzqJ1IRaF7lsHF7XYTrLoaHD
- wMWWQpvEd9HjYUWWuAfkmeFUF949/PxsFFpAka8XJqvolSfBldxx+QDMEjiSn17sWe5C+QyyW
- x4JMNHJmmOQ7UI0IwtX47wTAmz0c9puAH1NUTAM6JuBl9NLXedKP+kPRDrLOInmOAySG6ySQb
- TV/9WUoUlakp4oDy5g4x5Kc/gU6h8ULVdJRomJ8M4/a4n9WYYWyth6604/FbVnQw1D4dzQKNk
- K8L/ZzN0TyBVgMRpVRl0CpVMvi17kKVqpS6qcpltB0n8QMuVCW5Gc4aLI9bMEjzWC9GCv7QCe
- B54BfanhztrwQFN5bDHSS9F3pdd0+3c1/nvN4QWMUGPHkwjbvwySaohRVTXLlB3mLmpDAOKqb
- 9Q2oG4ZyqHsDUJfG3DiH7PZ6cukGpwxD3KcqK+ZSemzowRM9eR/aAqwipQjTGV7sAE8sljzT6
- Iv6ayF54ggQoag+mwn3F7gHH8t1Ir54rbN8pfVsViIjZ5Oa/Y/tt39vv+0WS261cbmriKs7VA
- B1aw4/OO82qJQcSGEhtA1G6iUpqCvRhSlPGwWepJRwdkS68LanhGoKs4njojjkU3mwC60mhBi
- qntX7lXpVLpKbrkNGFm5cRy6ynR7+t+9pxVA5r+/WJsxsjYCULiEsK2dItwEgP1cgE0cvoOuA
- VV7ckOkPFhEvLUjUUg8/nczljWmTbHzYmjkysPFSW7tLVWn7NTc1vlD1CQrT0Blr+kv0RDMSS
- ZXKZ8yN1JwzX4e4YJwJ964z+58OLmNanFkgum6ZYxxq7R7tTN2MmLCW94BDKSqq2iafuSTu1L
- bAAAM89CXwPbHbDdQU2wSFdn33yCSEDNOQimDM7RsOr7KK8npwlSYDEdzawvN5DSzuZK3vX3I
- RnfhJo9fvUhJ9n1hdMjL6PAuIrxDlMcrBgt2i+qdMd5zer0vJOSj6dt9rPVoXHUgEDbp2YoFX
- X7xfbxIFZ3lR6c9O9UK7ZhHjvWz2bV+dANGV927JMg6xuRLdU9MQbKQa3tzd98Ysy/UWnqZOI
- bIcAqwESu4hjQVIjm7nJxrlC9pvckgNz9Ja40ttnbGZQeiGcH/Tsa8qgQxfom27aFCL5N+oK5
- 2GwO48+qqeZnaDkCAWWI2+KKGrooQWk7tNIQXQg05EtQlV+IEUSzKhQ+tm4JGzp/sv3G0WL9K
- ud8OuENnHINJyagSnVsxMSB93K8HWIku9FBPuYOnDOrtFrPCfJMnrUZiE7dDXKT5I1DWp67K7
- XXWJ+ULahkRXe1Gj9K6IeA4HLZT3xe8zzjRMi2LgJ6zCKn1CALQ0Am2N/NI9NO/+Qcl7jaPGm
- BlGP96AQyUFRAmwYDFCyf8D93Ht2ovBa7/0im0tsKZ+JMXjio0Uw9SRIqhDPEdNSgAtCRbtit
- 49+od/AuSF1TBrDGEwk7fmbslhJM9hTxhzyTKcj8wZP3CWe8FGqy8YeLMfzcgtsXGgRAzoH8S
- 4Z2klyKVl8wkmEIeyy1Jy5y9fQUeaUF3n+4mtf0vzN0UTSQ9vWfN822ObQIdv8XvlTb8BV+6v
- 7PbSVMCwBDt95X8266Ks1yh2aJuJd/ruHpf8B3TweaaxoLrE1qfxIQHk/jcATBN4A35Oj4jdU
- MKyl2Cti9r0oq++UvnyEnASiJE4QXhPBR5Np6OBjAi2g2lxDI69oVBTe7t7dClgHBpgGmkIRJ
- /eVaQzCDe26fxxsqLkdyM3jiiINP+UzbVgL1j6PaBc7JAnHi/RaHTSKTJSHU/qzl3pVTfjo0M
- CN3VSC12G47Zz1TQaBbAFC6ZHPO4XPcyaq6BPWG9DC27CSRje7tAG5UHibkagKQ2biGK6BHdP
- chdc0+JiJmvTV4QPsAYqBmenEt7DwOBFY454dzZsCChAU24W8+p0jbzI6W+luDMva/CSa5zsj
- LICJrX+pwI8AO2Osh269WyNUguSLXCea+N9w/C/SPeN6BVUqBXii0E26AgYDFOgrOYWOFtbEZ
- d/u67OTsd0qyswi13R/zfU7Lr6YNug4Tmz1F0DeZSEPfgP9CBYL10jiZkmKj3ggK/26qvA9HN
- XOFFpFX3Dw6qFmxZiFHRc2XcxR3DmwPFCCg2h+JspvP/KBywiEoTEVEJ3noZw9n0Z+Kng29t2
- N5CFn5noT4JOoAzbtrWoVAkKTNISscPlLGvPvVEGgUjG2dq7w6X3BOkeYvmp62oqIt0DGIZaV
- rnDQUVOZQmEUm0J27rAjBWmE2/syO1whGpd+X7VhjZkSvvJa0igUnTpgJjsMGxUSPio6k57Bq
- r3FSHXSz3XglJBX0MII8e33NkXdr09gl9fIG/gd+Nf0RmWAQGEWymhYhD50mBMX9AKy7NtUSV
- geKznLujNzNTK5sL2197b7ffQvKgqeFVIB3Med231enKJGCFW80IZQn3D3tLXvC2TtjUwu9cP
- T68j6BZD2wY8UnqoN2xvnBF0AvY7Ndw0omg2y3mqw4dacgmIR1Wyo/0SKUBfco6mteNM0zjYt
- L+DJ5vqGRz1+mSnMpaWYcVwnRRTVUVS4u6mhXzHZGJ9yfRBb23X/t0Nd9KqolYjPteF+tovEI
- Ahjpr8tA2rDmNjs4Zsc9PcwDyASCuVP8abTrU2QjCXNvrnpAqUMu0VRYtAtpt0mnzTeAbzaW+
- VlVLkzH14UI3cAOXLaV4xbE3k9bpKqNBCu9VVcmHny0ZWkJX7F1qHIuFu8n/3TvSDaQhvo8jw
- VFt/WDjxzvXI37l7Z+wdFdCzK+IfId46rbFOqdNpWrWaNPhu/G3RKpOmfQPrpw8Kyh4fuEMub
- fQP09X+kHjsBGSj2+PU6Dip/E2YisPND+Vi42mTpUvldrWwcb94LPy/S4v9vmGbAaVvx4ljY+
- hL42sehlAKmWynXfjqn8cnB9IqioP07/qTGcGJ/kO0PwnhuNJQ1HVHistspmMPIwyo5bPPu4f
- NynXRCWXYrhuXkaLIb84H4azcFWmjf8dV8DxDJGlSroO64Q3Pqvx0Ecnc0LbM4/DJL5/X0om+
- 2vlZyjVyWerjDQKAR1PQkM53aBCCnXMgDMDPD5uGlJZMx2/NLULHCFnF8cGdelh1pzRIJGS3a
- G3H6zdEAy70XNmEriQ4XpXZsgHq2OPgzZ/y9vTepwcHbbdDKGCQ=
+X-Provags-ID: V03:K1:M85LL1+Uy/T3t206LAHTpQ0pc9j2zWpT3PUn7QX7arflXuoDsF6
+ RlPy3gD9z0ipVxp0/IPt4GsMFUll04ZjRVPmXUEEOY5OjZCioId0F2/CHG7kxDXOzI5g02h
+ /orxlvIxCuQxUYsSQBv5xkFoVEsGqGxNsy0kiN610fKaN+LYhlW12FcTlmD7R2Za2p51f7p
+ veBYA1A9Gz68U0/g/BjOw==
+UI-OutboundReport: notjunk:1;M01:P0:snBr554kbaE=;xYs7+CCA+e0Byu2WlI3MzFO9CQN
+ 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
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -267,38 +235,292 @@ X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 8/25/26 18:49, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+On 11/3/26 10:33, Felix Moessbauer wrote:
+> EFI applications such as boot loaders (e.g systemd-boot, efibootguard)
+> measure the time spent inside the bootloader prior to loading the next
+> stage. These values are then forwarded via efi variables to systemd,
+> which exposes them via systemd-analyze. This helps to identify where in
+> the boot chain delays are happening.
 >=20
-> The device-tree binding is not part of our Sphinx docs so we cannot
-> refer to it this way. Instead, follow what we've already done for other
-> DT bindings and simply use the :download: role.
+> Without having the protocol, bootloaders have to fall back to direct
+> reads of the time counters, which are architecture specific. Implement
+> EFI_TIMESTAMP_PROTOCOL in the EFI loader so that applications have an
+> architecture-independent interface.
 >=20
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> As the implementation of the protocol is tiny, enable it by default. If
+> this is not desired, set CONFIG_EFI_TIMESTAMP_PROTOCOL=3Dn.
+>=20
+> Signed-off-by: Felix Moessbauer <felix.moessbauer@siemens.com>
 > ---
->   doc/arch/x86/x86.rst | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   include/efi_api.h              |  4 ++
+>   include/efi_loader.h           |  4 ++
+>   include/efi_timestamp.h        | 35 +++++++++++++++
+>   lib/efi_loader/Kconfig         |  8 ++++
+>   lib/efi_loader/Makefile        |  1 +
+>   lib/efi_loader/efi_setup.c     |  7 +++
+>   lib/efi_loader/efi_timestamp.c | 79 ++++++++++++++++++++++++++++++++++
+>   lib/uuid.c                     |  4 ++
+>   8 files changed, 142 insertions(+)
+>   create mode 100644 include/efi_timestamp.h
+>   create mode 100644 lib/efi_loader/efi_timestamp.c
 >=20
-> diff --git a/doc/arch/x86/x86.rst b/doc/arch/x86/x86.rst
-> index f67216d6ce02..066838b956b8 100644
-> --- a/doc/arch/x86/x86.rst
-> +++ b/doc/arch/x86/x86.rst
-> @@ -242,7 +242,7 @@ debug serial port may be useful here. See setup_inte=
-rnal_uart() for an example.
->   During the U-Boot porting, one of the important steps is to write corr=
-ect PIRQ
->   routing information in the board device tree. Without it, device drive=
-rs in the
->   Linux kernel won't function correctly due to interrupt is not working.=
- Please
-> -refer to U-Boot `doc <doc/device-tree-bindings/misc/intel,irq-router.tx=
-t>`_ for
-> +refer to :download:`intel,irq-router.txt <../../device-tree-bindings/mi=
-sc/intel,irq-router.txt>` for
->   the device tree bindings of Intel interrupt router. Here we have more =
-details
->   on the intel,pirq-routing property below.
+> diff --git a/include/efi_api.h b/include/efi_api.h
+> index d4fdd50c49e..9789237b025 100644
+> --- a/include/efi_api.h
+> +++ b/include/efi_api.h
+> @@ -475,6 +475,10 @@ struct efi_runtime_services {
+>   	EFI_GUID(0x3152bca5, 0xeade, 0x433d, 0x86, 0x2e, \
+>   		 0xc0, 0x1c, 0xdc, 0x29, 0x1f, 0x44)
 >  =20
->=20
+> +#define EFI_TIMESTAMP_PROTOCOL_GUID \
+> +	EFI_GUID(0xafbfde41, 0x2e6e, 0x4262, 0xba, 0x65, \
+> +		 0x62, 0xb9, 0x23, 0x6e, 0x54, 0x95)
+> +
+>   #define EFI_DT_FIXUP_PROTOCOL_GUID \
+>   	EFI_GUID(0xe617d64c, 0xfe08, 0x46da, 0xf4, 0xdc, \
+>   		 0xbb, 0xd5, 0x87, 0x0c, 0x73, 0x00)
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 7b865fe900a..dd91c953776 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -384,6 +384,8 @@ extern const efi_guid_t efi_guid_cert_type_pkcs7;
+>  =20
+>   /* GUID of RNG protocol */
+>   extern const efi_guid_t efi_guid_rng_protocol;
+> +/* GUID of timestamp protocol */
+> +extern const efi_guid_t efi_guid_timestamp_protocol;
+>   /* GUID of capsule update result */
+>   extern const efi_guid_t efi_guid_capsule_report;
+>   /* GUID of firmware management protocol */
+> @@ -674,6 +676,8 @@ efi_status_t efi_console_register(void);
+>   efi_status_t efi_disks_register(void);
+>   /* Called by efi_init_obj_list() to install EFI_RNG_PROTOCOL */
+>   efi_status_t efi_rng_register(void);
+> +/* Called by efi_init_obj_list() to install EFI_TIMESTAMP_PROTOCOL */
+> +efi_status_t efi_timestamp_register(void);
+>   /* Called by efi_init_obj_list() to install EFI_TCG2_PROTOCOL */
+>   efi_status_t efi_tcg2_register(void);
+>   /* Called by efi_init_obj_list() to install RISCV_EFI_BOOT_PROTOCOL */
+> diff --git a/include/efi_timestamp.h b/include/efi_timestamp.h
+> new file mode 100644
+> index 00000000000..0fe0c41b62d
+> --- /dev/null
+> +++ b/include/efi_timestamp.h
+> @@ -0,0 +1,35 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (c) 2026, Siemens AG
+> + */
+> +
+> +#if !defined _EFI_TIMESTAMP_H_
+> +#define _EFI_TIMESTAMP_H_
+> +
+> +#include <efi.h>
+> +#include <efi_api.h>
+> +
+> +/**
+> + * struct efi_timestamp_properties - properties of the timestamp counte=
+r
+> + *
+> + * @frequency:	frequency of the timestamp counter in Hz
+> + * @end_value:	value at which the counter rolls over to zero
+> + */
+> +struct efi_timestamp_properties {
+> +	u64 frequency;
+> +	u64 end_value;
+> +};
+> +
+> +/**
+> + * struct efi_timestamp_protocol - EFI_TIMESTAMP_PROTOCOL
+> + *
+> + * @get_timestamp:	retrieve the current value of the timestamp counter
+> + * @get_properties:	retrieve the properties of the timestamp counter
+> + */
+> +struct efi_timestamp_protocol {
+> +	u64 (EFIAPI *get_timestamp)(void);
+> +	efi_status_t (EFIAPI *get_properties)
+> +		(struct efi_timestamp_properties *properties);
+> +};
+> +
+> +#endif /* _EFI_TIMESTAMP_H_ */
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index c4b0c2137b8..25e2c4b1144 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -469,6 +469,14 @@ config EFI_RNG_PROTOCOL
+>   	  Provide a EFI_RNG_PROTOCOL implementation using the hardware random
+>   	  number generator of the platform.
+>  =20
+> +config EFI_TIMESTAMP_PROTOCOL
+> +	bool "EFI_TIMESTAMP_PROTOCOL support"
+> +	default y
+> +	help
+> +	  Provide an EFI_TIMESTAMP_PROTOCOL implementation giving EFI
+> +	  applications access to a monotonic 64-bit timestamp counter and
+> +	  its frequency.
+> +
+>   config EFI_TCG2_PROTOCOL
+>   	bool "EFI_TCG2_PROTOCOL support"
+>   	default y
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> index 567db518a8f..8ff5468ae9a 100644
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -67,6 +67,7 @@ obj-$(CONFIG_EFI_HTTP_PROTOCOL) +=3D efi_http.o
+>   obj-$(CONFIG_ACPI) +=3D efi_acpi.o
+>   obj-$(CONFIG_SMBIOS) +=3D efi_smbios.o
+>   obj-$(CONFIG_EFI_RNG_PROTOCOL) +=3D efi_rng.o
+> +obj-$(CONFIG_EFI_TIMESTAMP_PROTOCOL) +=3D efi_timestamp.o
+>   obj-$(CONFIG_EFI_TCG2_PROTOCOL) +=3D efi_tcg2.o
+>   obj-$(CONFIG_EFI_RISCV_BOOT_PROTOCOL) +=3D efi_riscv.o
+>   obj-$(CONFIG_EFI_LOAD_FILE2_INITRD) +=3D efi_load_initrd.o
+> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> index f302bb62ab9..f0b3e59c3e7 100644
+> --- a/lib/efi_loader/efi_setup.c
+> +++ b/lib/efi_loader/efi_setup.c
+> @@ -325,6 +325,13 @@ efi_status_t efi_init_obj_list(void)
+>   			goto out;
+>   	}
+>  =20
+> +	/* Install EFI_TIMESTAMP_PROTOCOL */
+> +	if (IS_ENABLED(CONFIG_EFI_TIMESTAMP_PROTOCOL)) {
+> +		ret =3D efi_timestamp_register();
+> +		if (ret !=3D EFI_SUCCESS)
+> +			goto out;
+> +	}
+> +
+>   	if (IS_ENABLED(CONFIG_EFI_RISCV_BOOT_PROTOCOL)) {
+>   		ret =3D efi_riscv_register();
+>   		if (ret !=3D EFI_SUCCESS)
+> diff --git a/lib/efi_loader/efi_timestamp.c b/lib/efi_loader/efi_timesta=
+mp.c
+> new file mode 100644
+> index 00000000000..78cefd7a8c1
+> --- /dev/null
+> +++ b/lib/efi_loader/efi_timestamp.c
+> @@ -0,0 +1,79 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (c) 2026, Siemens AG
+> + *
+> + * Provides access to a monotonic 64-bit timestamp counter.
+> + */
+> +
+> +#define LOG_CATEGORY LOGC_EFI
+> +
+> +#include <efi_loader.h>
+> +#include <efi_timestamp.h>
+> +#include <log.h>
+> +#include <time.h>
+> +#include <linux/kernel.h>
+> +
+> +const efi_guid_t efi_guid_timestamp_protocol =3D EFI_TIMESTAMP_PROTOCOL=
+_GUID;
+> +
+> +/**
+> + * get_timestamp() - retrieve the current value of the timestamp counte=
+r
+> + *
+> + * This function implements the GetTimestamp() service of the
+> + * EFI_TIMESTAMP_PROTOCOL.
+> + *
+> + * Return:	current value of the timestamp counter
+> + */
+> +static u64 EFIAPI get_timestamp(void)
+> +{
+> +	EFI_ENTRY("");
+> +
+> +	return EFI_EXIT(get_ticks());
+> +}
+> +
+> +/**
+> + * get_properties() - retrieve the properties of the timestamp counter
+> + *
+> + * This function implements the GetProperties() service of the
+> + * EFI_TIMESTAMP_PROTOCOL.
+> + *
+> + * @properties:	buffer receiving the properties
+> + * Return:	status code
+> + */
+> +static efi_status_t EFIAPI
+> +get_properties(struct efi_timestamp_properties *properties)
+> +{
+> +	EFI_ENTRY("%p", properties);
+> +
+> +	if (!properties)
+> +		return EFI_EXIT(EFI_INVALID_PARAMETER);
+> +
+> +	properties->frequency =3D get_tbclk();
+> +	/* get_ticks() extends narrower hardware counters to 64 bits */
+> +	properties->end_value =3D U64_MAX;
 
-Acked-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Hello Felix,
+
+As already mentioned in my mail
+
+https://lore.kernel.org/u-boot/e54103ec-10c1-4342-8a2b-0e639ac0f6c1@gmx.de=
+/
+
+the end value is driver dependent.
+
+Please, consider this in your v3. I am setting the status for this v2=20
+series to "Changes requested" in patchwork.
+
+Reviewing becomes easier if you add a change log to each individual=20
+patch, e.g.
+
+=2D--
+v3:
+	Make end_value driver dependent.
+v2:
+	no change
+=2D--
+
+Best regards
+
+Heinrich
+
+
+> +
+> +	return EFI_EXIT(EFI_SUCCESS);
+> +}
+> +
+> +static const struct efi_timestamp_protocol efi_timestamp_protocol =3D {
+> +	.get_timestamp =3D get_timestamp,
+> +	.get_properties =3D get_properties,
+> +};
+> +
+> +/**
+> + * efi_timestamp_register() - install the EFI_TIMESTAMP_PROTOCOL
+> + *
+> + * The protocol is installed on the root node.
+> + *
+> + * Return:	status code
+> + */
+> +efi_status_t efi_timestamp_register(void)
+> +{
+> +	efi_status_t ret;
+> +
+> +	ret =3D efi_add_protocol(efi_root, &efi_guid_timestamp_protocol,
+> +			       (void *)&efi_timestamp_protocol);
+> +	if (ret !=3D EFI_SUCCESS)
+> +		log_err("Cannot install EFI_TIMESTAMP_PROTOCOL\n");
+> +
+> +	return ret;
+> +}
+> diff --git a/lib/uuid.c b/lib/uuid.c
+> index 16ca8f37751..d7022519f0e 100644
+> --- a/lib/uuid.c
+> +++ b/lib/uuid.c
+> @@ -189,6 +189,10 @@ static const struct {
+>   		NULL, "Random Number Generator",
+>   		EFI_RNG_PROTOCOL_GUID,
+>   	},
+> +	{
+> +		NULL, "Timestamp",
+> +		EFI_TIMESTAMP_PROTOCOL_GUID,
+> +	},
+>   	{
+>   		NULL, "Simple Network",
+>   		EFI_SIMPLE_NETWORK_PROTOCOL_GUID,
+
