@@ -1,160 +1,122 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B930606A31C
-	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 17:17:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55658606A321
+	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 17:21:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ShkemjTK;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=apJoft6/
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=hAy8Eo2l;
+	dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr header.a=rsa-sha256 header.s=smtp-20201208 header.b=asaZY1lv
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C725E80FF2;
-	Mon,  9 Nov 2026 17:17:06 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 33EA060809;
+	Mon,  9 Nov 2026 17:21:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id TwSy1vU_3E-z; Mon,  9 Nov 2026 17:17:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1D6F680FB4
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794244626;
-	b=FCJAPSUlwO3yndIZjIhfsD0aBvbFzMN9T2f63VUanZYTH6h0J/FciOxHIVgg58W4nDru
-	 6Bm7Je2kkvT1aKnMdXFsEHWwzyQD4vL6B75RTy4oybzYj4g+d3fXJO4CBZI+DMRAeOei8
-	 aRuoXBvCSOadxx34qJSo/PggVo7t1MVNvdI/b9LdMcjQQyyCEc1D6mx1XkmpW498+UTwh
-	 rEIooaOpcxm1M58Bcg20LvCD24d8nCPmdFkdgEMDsSV5hgzSV1kI7QRgS9n2i9aRq5QGf
-	 8PjuUWGpG3EVG/91aZB8V9ghToaGtxUszFDIKX6JYZVjK7oVZq500L/j1/XFiT76W5g==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id D1668_MbAl6A; Mon,  9 Nov 2026 17:21:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5B9BB607FC
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794244909;
+	b=aY/5Y7y0ehD8pctcqUmhIjyoajdvK04j+S4ruYxxSZSRwY9LG/hqCbqBDoLOyyO45P5m
+	 v/M0IEJEmnszlmXRJVZy4AdjV+GCAfP8vuy8WmUOS//7jXkKk6UXlQ4+QO9o8eA+45hUF
+	 bhpRPawMBRNwy12cXQEVMTWQTnn+PSJnPqWcIjI4isSvRPgyhEofJmHQnXlVucv/Hptnh
+	 HaXPpdP02A4kVGCQO3pI+WzeH2Ud8u15/LbjGVtjfBgvaOe7PF5WvNnYN8C1VJNmZc+nu
+	 E2u5PIih1wC2zJ2cl76BmPqCahZuwKf+Qt4yC/KldiS+6LYswQ/l8b0A0sMl4VYaUXg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794244626;
+	c=relaxed/relaxed; t=1794244909;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-BeenThere:X-Mailman-Version:
+	 DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=RKbTtwWQAHlP4BlfoLqa/KLTI8126fikJ0JV43eLTM0=;
-	b=jSUuH9QPCW7N76iOBIDeHhk0uZF41TYKpYfaXjm2YsX6LganaRmaEGLD+PPVXVCGADYI
-	 funnPqXbK7pIiYLKIim5cZ7AX02I2NpjlkfBEYmx+3Sapb36nhdOfbToKaO854kGULBU7
-	 q5friVyXllKxTQwj3+w/ofkUh6YZ+w1dIm8zvXZN9rzaSxcNEx/s9Wvq2d4Hjo2hSE92/
-	 W9Urq29G+dvzLcMTmrPbjmJiOUdVjKF+L94ItiQu4f8BzUyAy6SgOkrjCVxV6WS/Gg29g
-	 Lz3rzSjoWqWbXRcm71v6UzUajoyAlp3RSGD6XNrt3H0DsYa8ZmaeyCreEsrAHRi1yvw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=B0b0KkaSrQsCzofOJ7gKknF1x72uGEDQhGoejBG4YhQ=;
+	b=KKAuvOqPAvQAD1O8oR2tqmUgGg7ihG/Ex+ox3/ZM4kndpezZaEIxrqGXtKvUf4YoYsla
+	 ak8XXhDLGuQxPGd1VI91j+GulXF8vkgoA3TPvqHefjtSDy28Zg1G2yEBOBGOzPGfwlfg8
+	 X4V03mi51lq8QMtiox2MhmPcmZu3qzxI1wfAq4GikvdYnCdFpG9cBlsKj3nPIbab0UfAI
+	 cur9YOPLdKA5PIWzbTiG58WwZKi8cqF9ontT8r2v26uqTqmW4ipscAdNwFY939B+8EANY
+	 aPkpNT49Xi6Ettz/L27YmxIwdnVyzvpxFDrEs2sWYQisu2zyHsg5ZmC6H95F4cqxy0Q==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794244626;
-	bh=RKbTtwWQAHlP4BlfoLqa/KLTI8126fikJ0JV43eLTM0=;
+	d=lists.u-boot-project.org; s=default; t=1794244909;
+	bh=B0b0KkaSrQsCzofOJ7gKknF1x72uGEDQhGoejBG4YhQ=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ShkemjTKsA7qwf1J/l0Bf4dX8BKoNNkmkXxabbhP3yRtBQVD/uR8WnzOkAVjcCFOw
-	 shvDAVAD8zBm1GuNQMEFs615SXUcDsjGajPPjEgYYc06zTl2BpIRQXxyWk4RjeCpqc
-	 +bo0VeXDNDfWfd29sFOMhlzMxvxwNCUgemqN4JFXl7oLM+8XKJBY2VbtIOUN1btks3
-	 4vrIAVfmf4Uk3yI+tcuGsxHRpTztNX440ikO9NYLt1Urc6vvlUqXSJ8izOiG2MRqU7
-	 CCFDlaR5qgcu77I1oeQ80nsUqp1RHHvs2B9rsDWd8AwDkB7e33s8N1I3/gxbpVOVk/
-	 1+vbZr/lClhTA==
+	b=hAy8Eo2la4NWfDq5iJuPPrPZlNQS8xZiJ0d6lgEp/uVoSaW3d2Bj0zREptTSl84Ra
+	 dkIKg5Z1IUrh7A2pzOqrIK1L4SJjgUPygKi0HZaWKLNWvWrXLCs5brkl0GS6VzmKE2
+	 MWFIiHa3ZV+dRob+uTfavqFSNShjXZrraLgIZ5JkQd+5+Vua7lCjbw6S9FGmKbXG4T
+	 fcVON9UeA0TayVAAC9jAe8IOSmG08N3fARITZaJYEoalQqtM4tLb3J7P9eL9g3MsvA
+	 elTglPGW3ysTOHcEV3zT4v1MEAkBrV7faKus+W5rw42MKK8ZgeplZxn5EbX0FHCGU9
+	 CNOulXUy9YXRA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1D6F680FB4;
-	Mon,  9 Nov 2026 17:17:06 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id CCE51971
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:17:03 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5B9BB607FC;
+	Mon,  9 Nov 2026 17:21:49 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 04EA1971
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:21:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B043C402C2
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:17:03 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id DF71E40769
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:21:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gDwun6rjNK-g for <u-boot@lists.u-boot-project.org>;
- Mon,  9 Nov 2026 17:17:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 09F1E402A7
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::62b"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::62b; helo=mail-ej1-x62b.google.com;
- envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=apJoft6/
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 09F1E402A7
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:17:01 +0000 (UTC)
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-c4d30639709so140551566b.0
- for <u-boot@lists.u-boot-project.org>; Mon, 09 Nov 2026 09:17:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1794244619; x=1794849419;
- darn=lists.u-boot-project.org; 
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=RKbTtwWQAHlP4BlfoLqa/KLTI8126fikJ0JV43eLTM0=;
- b=apJoft6/vS9npera13ieGcuvDg6LD25bzq2p/ptKXAtruR3ouLVVB0M0a4YZLM+6vE
- SSqCRjU+3flOj7Zl/Z95xsvd8pwzKR27OJXXQe+XOmkFdGScz9brnTY71Gs4pqT4hE0D
- YirSj9KgOZX6G/2/788Yeuj6JyFM33LBDACCuyXB8Yu2b2HOkZ4NByzcXEsuvujMrIZI
- a9ajZVU5sVeMq86YFeSDIGC6OOazq5+mlsFQ8XhPLtN27nrAP2bUZRpgkct7cCbOjZf8
- aD7C5ll3bSs4WwgG8Xgx4oiNl42y+uKoZVsEr8IRbw6zi2VbLMxy+F8mflG6i3h8+f7T
- UOyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794244619; x=1794849419;
- h=in-reply-to:content-disposition:content-type:mime-version
- :references:message-id:subject:cc:to:from:date:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=RKbTtwWQAHlP4BlfoLqa/KLTI8126fikJ0JV43eLTM0=;
- b=pQtjUtSLe/9Vw05h3MB8q18V1g1ASOSnivP5uDuV04W9Uyfk/sD4qTAJq/dYflOptS
- OH4IQ4HfCbWtRK9ZdjeZ29KHbeN9KN9Y5arShebvJN4GPOeo2SzTe4qKlyr2EOgKbuBA
- rJaZJihGKQ0uS6Z8u8BCdboRLdll77wQZioyaxzeAFgiKIefAWdyYTmaFTFRZwPdmHcs
- 6gQCWQJd1SmiJ77o1Vo9vij4LqE15oR/6zwagmP06Z7bBLTyaSG9fTQ5tfEp3ltkSveZ
- wyZC8gXq7GsoZLeEWiGak8ZBibn/bhx53UTYGtJkjhKi9bAr+fFW1I7UG5GWm8fZP3xT
- cBeA==
-X-Forwarded-Encrypted: i=1;
- AL+hErH3Ib0+SxJSRGn3+DiFX5BSjluYw2HmLkizGhvM5XxJNip+x9OyXDWwELGEWgTOHON9PtI77qY=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9h56Wfn/NvvGToc47ST6ZFxi80fTaYYrlamj8111FSDW6PK4Xa
- oszTJc/3D+ZOAAD9SsEX70lOMV1zYGKku3QKTSq/15joMIKCQMI1HPyQD/4pwKGczfY=
-X-Gm-Gg: AYBFou3mqF/9QnTK3jeFvsukK1ErwHQtqEiJ+UGIbDskGnL5uFuA6aD12XSaHwx4yQy
- Cl7e5FfcrHOkdXmy29PBNJUKcQaxsy0PYQB9Wzeb9maxnoskDC+e7xjTBe/4k80vqRw2CwyfsXY
- SeBoDmPNO/8Bo+geg8qTBea5HqVPkYqyphQa14p5AghzJ0GOpSQX+kOw0oQziiL171nvTfyheHU
- Oc1LXr4SXzEYnc09To3OO+p/ONDtam1jGQE/O/3B0HEJaWA9tnf0KgVNYUOc6SSWEW5SiOi/WpK
- huNuEqyPcLa8MxJ8VNUveMV/637Sj2Cmjn5vtGprMKEdy+iegdaF05Z829+y+ridPmTTnW1yF9x
- eYsZlvgJFe+hziEodLg3pkLiXqWW2NBCIV3MPDbUPeaZYuni+tk2gdxkot2BZ8vcL5kAP+VAhVA
- gDiEfEIWVuby76zlJmgRNcBgrsBxl8LSSdWjmyz8bPh050NMbpGaItcVxku6BqBh3k515OtT/Uy
- IxlsXUHtlyR1E+eWfSThBkBI4UHE8+ZD8OsMpIY0jNlQEN8hlHyVUGjDRJBLrqCkkbngMMvt53K
- OTklG4WRMU836b9++gqwm6DxlKMMi8mqoMYk6izQtNjk4YKaFI0k8wsA7qNLRvOuODu7jVk=
-X-Received: by 2002:a17:907:3e0c:b0:c4d:2f6b:435 with SMTP id
- a640c23a62f3a-c50494e6ceamr3023866b.18.1794244619250; 
- Mon, 09 Nov 2026 09:16:59 -0800 (PST)
-Received: from macbook.homenet.telecomitalia.it ([91.80.26.234])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c4d6a4738casm193614866b.31.2026.11.09.09.16.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Nov 2026 09:16:57 -0800 (PST)
-Date: Mon, 9 Nov 2026 18:16:55 +0100
-From: Carlo Caione <ccaione@baylibre.com>
-To: Steffen Dirkwinkel <lists@steffen.cc>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>,
- Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>, 
- Chris Chen <chris-qj.chen@mediatek.com>
-Subject: Re: [PATCH v2 0/2] arm: mediatek: run SPL and pre-relocation U-Boot
- with caches
-Message-ID: <avH_uOLH5Op_WH5j@macbook.homenet.telecomitalia.it>
-References: <20261109-std-upstream-mt8188-spl-caches-v2-0-78cfb3e90c55@beckhoff.com>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id vq8HHxcTk_BV for <u-boot@lists.u-boot-project.org>;
+ Mon,  9 Nov 2026 17:21:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 19DAC40756
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=212.27.42.4
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.4;
+ helo=smtp4-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=quarantine dis=none) header.from=free.fr
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=free.fr header.i=@free.fr header.a=rsa-sha256
+ header.s=smtp-20201208 header.b=asaZY1lv
+Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [212.27.42.4])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 19DAC40756
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:21:45 +0000 (UTC)
+Received: from l3017727.home (unknown
+ [IPv6:2a01:e0a:ac2:22b0:7dd8:506f:29aa:45b7])
+ (Authenticated sender: vjardin@free.fr)
+ by smtp4-g21.free.fr (Postfix) with ESMTPSA id 3292719F5A5;
+ Mon,  9 Nov 2026 18:21:34 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1794244902;
+ bh=VpFrHTfETttvv5ep976f83jauCbth+zl8MaRGrbv7rQ=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=asaZY1lv5AEfbkqisZSizObY8uO4rDyaTfzEi4VA6+BeuJNxPK4Y7iueCqHaz40SW
+ s038V+rGvA/iQlsFewwpNHEJWZgckQye1ODMeeV2K1Gyi99UXl8Wo9CBtRDkQeQys+
+ dESCEAj0UHH/mhAyHvL9EvJb7jlr4PpApp8V/X3wIAIJIT/vylPw7sceY+qtaCx76V
+ +VO1aioIPqVWmtO+KODs2uzd/LCTZ91Q+FCyzA+u89TaO8NJs7sYdu/nuwTto1ihT0
+ Vt0Wx55SC4y0Y6s2Lmv1WuNAjCo9dt6XmpxeGfmgdkjE5HdPkybvA24tnE13kKBnJI
+ 8P3QLhCXjdzvA==
+Date: Mon, 9 Nov 2026 18:21:32 +0100
+From: Vincent Jardin <vjardin@free.fr>
+To: E Shattow <e@freeshell.de>
+Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.u-boot-project.org,
+ Suraj Kakade <suraj.hanumantkakade@amd.com>,
+ Markus Schneider-Pargmann <msp@baylibre.com>,
+ Denis Mukhin <dmukhin@ford.com>, Simon Glass <sjg@chromium.org>,
+ Rasmus Villemoes <rv@rasmusvillemoes.dk>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v1 0/3] dts: build the DTS from a directory outside the
+ tree
+Message-ID: <avIBHFyUj8mDk6PQ@l3017727.home>
+References: <20261108155019.1485598-1-vjardin@free.fr>
+ <434743b6-17af-477d-a09f-d110d565f023@mailbox.org>
+ <avC2OzAeGxqVsJ2v@L30177.local>
+ <fdee1975-8f27-45a7-85a8-2405c29e1dfe@mailbox.org>
+ <avDgloDmuQcYP7ec@L30177.local>
+ <8229e24f-bc71-4232-b1bb-8cd6c976dd3a@freeshell.de>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261109-std-upstream-mt8188-spl-caches-v2-0-78cfb3e90c55@beckhoff.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <8229e24f-bc71-4232-b1bb-8cd6c976dd3a@freeshell.de>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -164,34 +126,63 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-7.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Nov 09, 2026 at 16:13:07 +0100, Steffen Dirkwinkel wrote:
-> Running u-boot without caches is slow, especially if using rsa
-> signatures. This series turns the caches in u-boot spl and proper on
-> early.
+Hi,
+
+Le 08/11/26 16:58, E Shattow a écrit :
+> Hi Vincent,
 > 
-> Measured on an MT8370 module (Beckhoff SM0101, not upstream yet) with TF-A
-> BL2 as DDR loader and SPL loading a 2.7 MB FIT (BL31, OP-TEE, U-Boot,
-> SHA-256 hashes) from SPI NOR:
+> There is a concern that vendors would normalize this and make the
+> situation even more fragmented, contrary to the intent of having
+> Linux as the device tree upstream in-tree as a 'dts' sub-tree.
 
-Hi Steffen,
+I do not want that neither: the DTS of a board SHALL be upstream
+in Linux and in u-boot -> "upstream first"
 
-Could we add the early-cache Kconfig option David suggested, initially
-enabled for MT8188, while keeping the implementation shared?
+What I (we, I feel I am not alone) want is only to smooth the local
+bring-up, the months before the board is upstream, when the .dts
+changes several times a day and the build is the Yocto or Buildroot
+image of an internal team and its CI.
 
-The problem I see is that V2 changes pre-relocation behavior for
-all MediaTek ARM64 targets, while runtime testing so far is limited
-to MT8370. A separate option would let other targets opt in after
-validation.
+Compiling u-boot outside of any build system does not help there,
+and the copies into arch/<arch>/dts that the layers do today [4][5][6]
+are a fragmentation.
 
-Thanks for working on this,
+So the question could be how to make EXT_DTS_DIR usable for a bring-up and
+useless as a permanent home.
 
---
-Carlo Caione
+For v2, I can explore more upstream "guards" for U-Boot like the one that
+already applies to CONFIG_OF_EMBED, which "crept into use":
 
+ - it stays a make variable, like EXT_DTB and DEVICE_TREE: no defconfig
+   can set it, no board can depend on it
+
+ - a stderr banner as CONFIG_OF_EMBED whenever it is set: the
+   device tree comes from outside the tree, not for boards in mainline
+   I mean, https://git.u-boot-project.org/u-boot/u-boot/-/blob/master/Makefile#L1404
+
+ - maybe, an error when a name of the list also exists in dts/upstream or
+   arch/<arch>/dts: the directory can add a device tree, never shadow an
+   upstream one -> I do not like it because it avoids improving/preparing
+   a new DTS before sending. Maybe having an experimental flag.
+
+ - control.rst: a third option in the Configuration section, next to
+   arch/<arch>/dts and update-subtree.sh pick, for a board that is not
+   in the tree: a board sent upstream must come with its .dts
+
+ - others ?
+
+The SoC .dtsi are still taken from dts/upstream, only the board file
+would come from outside, as it does with EXT_DTB today (that was the answer
+for the VisionFive 2 question last April [7], with a precompiled blob
+because DEVICE_TREE= cannot build a file outside the tree).
+
+best regards,
+  Vincent
