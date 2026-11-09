@@ -1,198 +1,136 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1085606A321
-	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 06:36:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12A0E606A323
+	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 07:00:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=qcPEV80U;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=liI+Ps3S
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=AY3UCHvT;
+	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=superkali.me header.i=@superkali.me header.a=rsa-sha256 header.s=default header.b=djfi2PqQ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 27556606A0;
-	Mon,  9 Nov 2026 06:36:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 58C7180F1D;
+	Mon,  9 Nov 2026 07:00:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id V-moGOSvb_ZM; Mon,  9 Nov 2026 06:36:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1F42360621
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794206193;
-	b=dLLRD1Cs9fcFmV4Vfru07TKG3UusHwwjS3RUlLqTbDp90BwaqDwW/uBJv0o7SZWLtQZv
-	 t6ePhNhmDlr643IV4d4/sNhkwSmEWgPOLuk3dCmtCVbO+LaCu2rfjH2UbZHuOUp1NDS5B
-	 Jv5H2N9F0r5eD+7nOAMe0KHrbZS72ae70bL2k4XLR8usguFtv1TCvDXfJ52P012/2dAvV
-	 //1Wta+BNaYwB1vO5uvNxTlgxyQCm+wQZKP726uIAueho3GON9UoNGgdZZFdFB8EsidxF
-	 VBcI6zfZaTTQFvFCEBXBK0CeUanaRaGrfPhGBf7phsQj9gjyMyniEKnQsXTmzNYjc2w==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Dc8NJvDfwdDs; Mon,  9 Nov 2026 07:00:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 031C980F07
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794207625;
+	b=c1ywweuePsBof9FAleDTRfKw7AE0cWfxHYVW9Q7u3e6djUENyvX0rUANtZNcsVQ5uzXG
+	 fhoP9duopRE3ErDLzeMyKIpk0c0Plve05TsoXb1qTbNkLIbyL04JOUtxrQFNm9B+l50ql
+	 dOMXKiUvSPqR+aIfWhCAXA8ZaOxRdH0hLWaW4FJIwdud1NkjkvcnF62V5b9FgWq0nwWAT
+	 z+W6EA7aHkGAnY8fk1TAL7xVdYb3RRAvenh4W9KoEMWEaq6on5d3uKsWKw7SueVn5m+ZI
+	 akZzAYkEEP8oqBkRhNYAt/d8CS6evOxmzDrA7fgapNZxWf1wwCq5shlecX3PhBLtzow==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794206193;
+	c=relaxed/relaxed; t=1794207625;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Date:From:To:Cc:Subject:Message-ID:
-	 References:Content-Type:Content-Disposition:In-Reply-To:
-	 X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=+gKVEREIo0bGS7rmSf3rRL84UqPOaoqS01+wuT+XHVI=;
-	b=QkFbdQ8k62812YdjPW1Ut3vfKoO+3O/mgWE8aSiHK+qSVxUD2wKPMoN91E3to/kcTB1/
-	 rxzB1LNiy1rm4FGaD9w9oN9XDIFn79gSEBYp0MwfyiM4VK2DMsgMQ2m0XLxLIUEKXtRlq
-	 LjMd+cSwbySUNBD/VNf8HDCV46q4qkGraFl6yg6+Lv8zHLtogBXCjhQBDv89bCS3DoBrD
-	 5Bo4j39oYmQBWFn/d8I1OcpYZ+If6PHoFEkCdZg6y/tlBV0P12b79qol0TSUn28AOOF1Z
-	 SR2376rMgHrliW9Nas5rq8L3kWOr27/u/+VPNMP1+tm77KQlqSg/Mr05f+hO1V3xgfQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 DKIM-Signature:Received:MIME-Version:Date:From:To:Cc:Subject:
+	 Mail-Reply-To:In-Reply-To:References:User-Agent:Message-ID:X-Sender:
+	 Content-Type:X-AntiAbuse:X-AntiAbuse:X-AntiAbuse:X-AntiAbuse:
+	 X-AntiAbuse:X-Get-Message-Sender-Via:X-Authenticated-Sender:X-Source:
+	 X-Source-Args:X-Source-Dir:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Reply-To:Errors-To;
+	bh=GHjGf2EA0Yo+KCuuTG9RY4QgeWHP03Z52FfL1n0MCFU=;
+	b=NaqqCEOVA0XwCBnllkWWuTSHMQHaI9Wgu3veudZaqftnXZ4ptJvx5pQ9NFoGCKZgiqGi
+	 z3jydlVd0ygFW+AVTk/28u4NRfmlm6X7PJPik/KhkDKSyI5D4X7xVwoHhJON3G/bDA+W5
+	 VUl1PQumD6d1Ol/FjUqMo9/XK4QBtstCvjd8kquxnG8I/cz3kUSlUc86S1GYX+quSk6mp
+	 OsHHxME4j1ZS9fCb7M1sIOnY6eN1n2CQIef8o61zv2lNTCL+VnNeEvda85xG5nGa+ZQ/3
+	 n60zDlkT9ou9xmd6i3Mt98lSigA2kMOqeuWp/5gFfaZ5ebg1KhiaQFrMBBPWCO1EboQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794206193;
-	bh=+gKVEREIo0bGS7rmSf3rRL84UqPOaoqS01+wuT+XHVI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794207625;
+	bh=GHjGf2EA0Yo+KCuuTG9RY4QgeWHP03Z52FfL1n0MCFU=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=qcPEV80UepTvfkQyerYUR30oafbzrTneiXvuexAQVjGLcGHE5CsBQcZvMZN9xF/ZH
-	 MpwyekWpemPYZEvclOPBDG1k7l6xH0uU2LvrUmHuEof2dOPw+dPiL2pwIxY2C5h0r/
-	 ltHHGKpQGAS8kYWB/lTijx3j70kcxfXxNyQDdgdbErxSoefSZK7ue87281pMav67K0
-	 RA8lTZUPgLtGxoWfoqy+GMV2V8g2rQyF0DbX9VHaYRWxfc0F8IlFWsQpOJUInyJv9h
-	 8UFxsTubLbcocoHzi4BRyGP50+VhRHXZG8HqgG4BfyjukPxPvSMrE/HSWmI/xvJG7d
-	 bqb5Mi0Xk0LMw==
+	 Reply-To:From;
+	b=AY3UCHvTH989E7O1giEelFuN/zwjJ1izA8btdSegOEcaHWPccPXIQCY7juTrbPRoT
+	 2m+UVmZlBippj4Z+G0Xl/LAv4B4iyq8lHco+xWKyxlnGpb2FRsQG1HTQXkIufEaRZD
+	 7OpO0F8TeB460jV4Krl+9a5S7pC2GYRa5NCwzozUiqxBFoPbW1gRtLrBWuKwpZQDAb
+	 Lt2cjfrLkMKB6ghdKsylEmmk3ihrS3laibM4b1IVrB36J2QkEnHjQ2s71QIuvJ11/V
+	 mDJXruImtm5o/tj5MtuAJWnfnOdubvIm0B0L6fayVN33luWogNVtx/AN6VoSB3Rdig
+	 XCHVFMI++byBg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1F42360621;
-	Mon,  9 Nov 2026 06:36:33 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id B49D02AC
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 06:36:31 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 031C980F07;
+	Mon,  9 Nov 2026 07:00:25 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3BDBB361
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 07:00:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9A71340111
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 06:36:31 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2D50560621
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 07:00:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9Zhyfsk5TxYf for <u-boot@lists.u-boot-project.org>;
- Mon,  9 Nov 2026 06:36:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 8F046400AA
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c200::1"
-Received-SPF: Permerror (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::1;
- helo=db3pr0202cu003.outbound.protection.outlook.com;
- envelope-from=peng.fan@oss.nxp.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=fail (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com
- header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=liI+Ps3S
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 8F046400AA
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 06:36:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+gKVEREIo0bGS7rmSf3rRL84UqPOaoqS01+wuT+XHVI=;
- b=liI+Ps3SsQ2LPgyqnRfHX/8TrNN52kKt+aRDNd/ezxkxsNrn4ozsm8VEbq0tAHoe9GjhZPsQbH8u5x7Cch3i2RLbH6n2JuKnZnubHGlOzqZnzBsvXtxN313YX+FKBhaY8LTj8CT8UroHvUKJV7uxMIzFUU7jxEs3z5Dqg/1qGIVGQAZR3cUOxtHhTJDw7EVgefbwnIAZ+jdzuE+/cTAvuenEjIYQLQtIvX9cKYi2RY67bokXsPJqHHEPVwJWNPVDgi2NF4w4e5vcW2I9uHpXsspYZ796s0t4eS/zOV9neD5tin417BUHMV5mR4x3sS4UNgkOdUknXkDtOq4bJ5PuXQ==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
- by DBBPR04MB7849.eurprd04.prod.outlook.com (2603:10a6:10:1eb::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.12; Mon, 9 Nov
- 2026 06:36:25 +0000
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9%6]) with mapi id 15.21.0592.012; Mon, 9 Nov 2026
- 06:36:25 +0000
-Date: Mon, 9 Nov 2026 14:32:55 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Yixun Lan <dlan@kernel.org>
-Cc: Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>, Eric Chung <eric.chung@riscstar.com>,
- u-boot@lists.u-boot-project.org, u-boot-spacemit@groups.io,
- Dave Klotz <DaveWK225@protonmail.com>,
- Zixian Zeng <sycamoremoon376@gmail.com>,
- Hung-Chun Tseng <alan.tseng.cs@gmail.com>,
- Anand Moon <linux.amoon@gmail.com>, Raymond Mao <raymond.mao@riscstar.com>,
- Huan Zhou <pericycle.cc@gmail.com>,
- Guodong Xu <guodong@riscstar.com>, Leo Liang <leo.liang@sifive.com>,
- Tim Ouyang <tim609@andestech.com>, Yao Zi <me@ziyao.cc>
-Subject: Re: [PATCH v3 0/4] mmc: k1: multi-block SD reads in SPL and a probe
- failure fix
-Message-ID: <avFpF-5tuHYkOOcO@nxa18884-linux-1.ap.freescale.net>
-References: <20261031215452.16013-1-tanmay.kathpalia@altera.com>
- <20261105222737-GKB249737@kernel.org>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261105222737-GKB249737@kernel.org>
-X-ClientProxiedBy: SI2PR02CA0044.apcprd02.prod.outlook.com
- (2603:1096:4:196::17) To AM8PR04MB7874.eurprd04.prod.outlook.com
- (2603:10a6:20b:24d::9)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Uy_VIbWeSBEV for <u-boot@lists.u-boot-project.org>;
+ Mon,  9 Nov 2026 07:00:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org BBC0A605F7
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=92.42.104.18
+X-Greylist: delayed 1357 seconds by postgrey-1.37 at util1.osuosl.org;
+ Mon, 09 Nov 2026 07:00:21 UTC
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=superkali.me
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=superkali.me header.i=@superkali.me header.a=rsa-sha256
+ header.s=default header.b=djfi2PqQ
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=92.42.104.18;
+ helo=fr5000-r.dnsiaas.com; envelope-from=hello@superkali.me;
+ receiver=<UNKNOWN> 
+Received: from fr5000-r.dnsiaas.com (fr5000-r.dnsiaas.com [92.42.104.18])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id BBC0A605F7
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 07:00:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=superkali.me; s=default; h=Content-Type:Message-ID:References:In-Reply-To:
+ Reply-To:Subject:Cc:To:From:Date:MIME-Version:Sender:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Unsubscribe-Post:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=GHjGf2EA0Yo+KCuuTG9RY4QgeWHP03Z52FfL1n0MCFU=; b=d
+ jfi2PqQ4hd6GY3wENKHNZHKYlROyLIc5ZWv7v5a/mBqKHJjCM4CTzCGoGS0EEvNdcnf5HMnkAj6NY
+ lOknORq8rTpMgRyYee+jmR+8X4KJQigwOK+A3p5HqcDLKL6hsb+uYmiIUGiP/DrqpUgI6uZ583VKS
+ feEYJ7TXI/bppjO4D9a2RXnIs28auz2CHCUjFiIhFgSgn09BWfc2m/hUb/lTI2J51+lyumOgvP4TW
+ ZQ5X1dsTMM3QFePoDjoBCP/7lruLqpmqraLL/z8eLO4wR80mrWdS98hcabGerlKAi6I5ZWcI+l9yU
+ kM3DEu1OUG9UKux+BaXDMRCn6i7Xlelkg==;
+Received: from [::1] (port=59844 helo=fr5000-r.dnsiaas.com)
+ by fr5000-r.dnsiaas.com with esmtpa (Exim 4.100.1)
+ (envelope-from <hello@superkali.me>) id 1xQJ0g-00000001G5m-1ag5;
+ Mon, 09 Nov 2026 07:37:40 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|DBBPR04MB7849:EE_
-X-MS-Office365-Filtering-Correlation-Id: fd85b321-b5ef-4089-a7d2-08df3e2bc700
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|7416014|23010399003|19092799006|260925022911599003|260925021311599003|10067099003|11063799006|4143699003|56012099006|261021121427099003|261022105027099003|261009223027099003|261026140227099003|261028144727099003|261026121527099003|261102123227099003|22082099003|18002099003|6133799003;
-X-Microsoft-Antispam-Message-Info: QayuiYkucrHYiQxy1gemz+/ra8Sq7MQt1xWmftDXkvCcKAolroxZ1vKJ072Ltp18XCapTJFIBuLFa89EE3wOlkM/g06d/6+Pji/20gucRe50HhCvJ9SK4YwTbbwlmpdgZVyGwrIIM6Bx6TeUeTeMQ/numT1akoQV4h++1lXt6kJYUmM+CtHLnUSBNm447O1Ar/FsDjJvLXl5AE0SaMRF1p/ibKYr/n+5UM4brLOt8V3R5+EcKEXaa3XB5z9JSEOe+IHzT2QjHQTZgUCRUHtHKyoeuY1v5VXur5qUvovdG/cKWEEzF8MpMjAtY/OFwmZWHm1oUtA4UjkNOU0GkN/uBjCbz+r/gSLX4acJpVIQGnc6RPph2W/ME6DSfRf+j1z64ykr4c0Cloe7S1WKeVq+qO+MvxwhpVXaWubYqAN4dgVg8QGleyOcDSFZ2GiS1qC3WYrj7iV1wof9BlJYWJ0FTi7x2I93UXqLAyBxD35mf8FuuWc1Wu6GQudk0+/aseMzkP6lu27zarvgAo3oGasCD4xMJyd1vJKRO7O9F676HPkjIOZhqC8MGVLGmMwVJNCqwJpXMg/90A10jHdA1pC8ab6iJfap0cnWKKy0JddHXQk=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM8PR04MB7874.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(7416014)(23010399003)(19092799006)(260925022911599003)(260925021311599003)(10067099003)(11063799006)(4143699003)(56012099006)(261021121427099003)(261022105027099003)(261009223027099003)(261026140227099003)(261028144727099003)(261026121527099003)(261102123227099003)(22082099003)(18002099003)(6133799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Ox7mUwIKdYBro5i505ppi29zO+hXE+wDNIW+zbeBArz4ssNFhOu9wBKDGsO1?=
- =?us-ascii?Q?RqOxaG9JJP9HwL/slTYNxEwJ4L0+btJPmecEjYTzO204ijFWK98WB6x3VC8F?=
- =?us-ascii?Q?OMckUNI3phTByLr4X7RK0FcMADi6oJfRyVdk9rJrCqn4ArCSKQzHJRZLaYmK?=
- =?us-ascii?Q?zsR2efL2xyWxlcHoYSb7WQ3x2oiaurBMrd3nqVv6EyQKos8LoKthZ6x8UmBX?=
- =?us-ascii?Q?QS+Z3Th2ShyGn4qWTfcDxgHjNNnu2rmoYdVPFEWGu9COzQSzFmEVSvn2XvC5?=
- =?us-ascii?Q?DBB3gcLR1ydtRO2JPH2f9t70zhE+IAzu9vJYmQhnzIBMPggLlcJNRDifM9Jk?=
- =?us-ascii?Q?JSMytoXuib+ri912yCOf5MUjUekRowJoMAZJNMt6nBJ3RZqcjEY1qJ0TrMRs?=
- =?us-ascii?Q?DSNh6NHDsl1lgzlP8h5ucNT80LDKrXvmGvf6qi1zIqc7oLSIm46CDFrqnNBy?=
- =?us-ascii?Q?bIv2q5yoQAE68QVv0dkb8MWYKXXjF8jKgRfZSZlqBdMJRAdTFf9bsigTIQGd?=
- =?us-ascii?Q?/sgbUJp/dGu1bAUYDI4Mb7c/518u7d3i1uUrxUNuaDt7Wjt0e+V0uFfjU6nG?=
- =?us-ascii?Q?o2Gk9O7xwzDk8RU0GAYKVT0XiGAoLLZbYwZL/1sOBvukZ+ayMQxir/VHPFLr?=
- =?us-ascii?Q?hfWZkqWQ74ilhKqZpPPYKGTIYKm/2TmJffxO0h5sIfqI8mcKxJTTinkHljs7?=
- =?us-ascii?Q?UIO5ew1hk3agXQxeJ2nHi+i/ovKYA7R2bMIKGZv/PUNgVtIvQtA5dx/SKiOv?=
- =?us-ascii?Q?oJ7Tun9SZTD1qfavBDpmbAHYG2TXRpkyd9KqI5RPhgJUDO/01d1/3M1UuwzM?=
- =?us-ascii?Q?T0trLYe0zo8kdzSPenVfkVkqMOfX7TIlvzhB1B+iJofqkRNwH8G3Ds7hcOtH?=
- =?us-ascii?Q?hNI9d6ng2B7kJXJxalCmjsQk+ozBy4xEoq18ktRPDVscM/WKty1EbREOw6zR?=
- =?us-ascii?Q?VlF4eHZNxpBgEK6u68ZRGEDHyVDCUK+fN1IPYUKMDPD46+lgqcCEgzLNcu2C?=
- =?us-ascii?Q?/OlNZDPdikEWbQ8im8JH02rJ9wK3C0yQAzQJ5LNe8OSt48oHU7HloR8HAaQ8?=
- =?us-ascii?Q?DCj5f5kSo0IgAoxUloY58t3GZphEWEj2SZkGdHWewci1LRb9rKs3Rs6U0UfE?=
- =?us-ascii?Q?7cz03sRg7Mrh30wOkg3gUiIHFwh/xETP9d35bp54boVWWVHZy+umkdglaXoY?=
- =?us-ascii?Q?oRRg/KWuDlxs7MdKzrLuayOIDjUN/7G0n5pnqDSnebKJaBDdQJDpFGbHfgoB?=
- =?us-ascii?Q?55v54as67+lgr57H55H9Xfi2oGQpMlaQ/2lsHPK5CAdZBzrgo0Zkjgbgksfy?=
- =?us-ascii?Q?21pZqrmkdcJv6aBuuPEeveLNeNslOVpONyANTtxiUMvwnHX4qi9fhj6tBSdT?=
- =?us-ascii?Q?L3UDpKvpkKXWrBJQp9wwLx+0aquPJ9zy6oMnIfh89kfQXKA5KfTL8zhjEcxb?=
- =?us-ascii?Q?fQvmWyEsWE7JsaUNfwAlUsQ0pZk8wczFCxTzxWCOWMvdrZ/7HwXGYTaOL4Xs?=
- =?us-ascii?Q?YXIcQREsuySbzgCfjp/BhZKvoeYLfwVhR8hn69yCFZC4XC9D8lzfxhYJSCSs?=
- =?us-ascii?Q?+sJJrnLel3h0OzQslMLLAYEWCm6TvGGV+Lh6LL9fJyJmEKThsvhHgQRNUeXn?=
- =?us-ascii?Q?bDp4RUlw2y1/lTvl60GDdbIUUHgiadeLuz2uNSFUDD2MFZDHgoPJw+asxPZw?=
- =?us-ascii?Q?QfdP0SKjk9yMrSgsaPAyh93iWNXirekfEbkFmB4qPJY0XHAfymHEtVu1qnXj?=
- =?us-ascii?Q?qC1hdoV19FvP1SCW5nGJRWjy43ogE5mYuXOm7OME38N6fGmZdg/r?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fd85b321-b5ef-4089-a7d2-08df3e2bc700
-X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2026 06:36:25.8154 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dTOKGLHFpPo9mfzziy2kP84XCqy3B2tGR95YG1naQ/MreDfdD30cuRa2IxubBk7sKoIE1n6PfOltd3F7Dz3VoJo121z0bXtgybIsTs56RUaQclDgbnxpTr0sImpFvtkY
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7849
+Date: Mon, 09 Nov 2026 07:37:38 +0100
+From: SuperKali <hello@superkali.me>
+To: timsurber@mailbox.org
+Cc: u-boot@lists.u-boot-project.org, jonas@kwiboo.se, Kever Yang
+ <kever.yang@rock-chips.com>, Quentin Schulz <u-boot@0leil.net>, Simon Glass
+ <sjg@chromium.org>, Lukasz Majewski <lukma@nabladev.com>, Tom Rini
+ <trini@konsulko.com>
+Subject: Re: rockchip: rk3588: big cores left on 24 MHz oscillator, Linux boot
+ takes minutes
+Mail-Reply-To: hello@superkali.me
+In-Reply-To: <1551247609.687446.1794193215725@app.mailbox.org>
+References: <1551247609.687446.1794193215725@app.mailbox.org>
+User-Agent: Roundcube Webmail/1.6.20
+Message-ID: <51ae203e3fe3198ae4674a24c4625395@superkali.me>
+X-Sender: hello@superkali.me
+Content-Type: multipart/alternative;
+ boundary="=_87bd90e897ba99bd8dfae6798f269fe8"
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - fr5000-r.dnsiaas.com
+X-AntiAbuse: Original Domain - lists.u-boot-project.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - superkali.me
+X-Get-Message-Sender-Via: fr5000-r.dnsiaas.com: authenticated_id:
+ hello@superkali.me
+X-Authenticated-Sender: fr5000-r.dnsiaas.com: hello@superkali.me
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -202,71 +140,216 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,FORGED_SPF_HELO,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_PASS,T_SPF_PERMERROR autolearn=ham autolearn_force=no
-	version=4.0.1
+Reply-To: hello@superkali.me
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Thu, Nov 05, 2026 at 10:27:37PM +0000, Yixun Lan wrote:
->Hi Peng Fan,
->
->On 14:54 Sat 31 Oct     , Tanmay Kathpalia wrote:
->> I am taking this series over from Dave (thanks, Dave).
->> 
->> Testing v2 2/3 on a Banana Pi BPI-F3 and a Milk-V Jupiter showed that
->> multi-block SD reads in the SPL fail because the SD I/O rail (PMIC
->> aldo1) is at 1.8 V: set_vdd_mmc() sets it, and without
->> SPL_MMC_IO_VOLTAGE the MMC core never sets it back to 3.3 V. Patch 1
->> lets the MMC core set the rail, patch 2 drops set_vdd_mmc(), patch 3
->> is Dave's multi-block change, and patch 4 is Dave's probe error path
->> fix, narrowed to the resets because, as Yixun pointed out, the clocks
->> are reference counted.
->> 
->> Not in this version:
->> - v2 1/3 (missing max-frequency). As Yixun suggested, the io clock
->>   should be set up with assigned-clock-parents/rates in the DT, which
->>   also works for Linux; that will follow separately. Hung-Chun has
->>   withdrawn his matching RFC.
->> - SPL_PINCTRL. On its own it links no K1 pinctrl driver into the SPL
->>   (there is no SPL Kconfig symbol for it yet), so it would not program
->>   any pads. It will follow separately once it has been tested on
->>   hardware.
->> 
->> Testing: I do not have a K1 board, so v3 itself is build-tested only.
->> The changes were tested piecewise in the v2 thread, and in each case
->> multi-block SD reads in the SPL worked: Zixian enabled
->> SPL_MMC_IO_VOLTAGE on a BPI-F3, Yixun dropped set_vdd_mmc() alone on
->> a BPI-F3, and Hung-Chun set aldo1 to 3.3 V on a Jupiter. Zixian,
->> Yixun, Hung-Chun: a Tested-by on v3 would be much appreciated.
->> 
->> Thanks also to Anand for testing v2.
->> 
->> v2: https://lore.kernel.org/u-boot/20261005T135220-0400.mmc-v2-0001.DaveWK225@protonmail.com/
->> 
->> Changes in v3:
->> - New: configs: k1: enable SPL_MMC_IO_VOLTAGE
->> - New: spacemit: k1: do not force the SD I/O rail to 1.8 V in SPL
->> - v2 2/3 -> 3/4: commit message explains the BPI-F3 and Jupiter
->>   failures; code unchanged
->> - v2 3/3 -> 4/4: keep clk_release_bulk(), only drop
->>   reset_release_bulk()
->> - Drop v2 1/3
->> 
->> Dave Klotz (2):
->>   mmc: k1: let the SPL read SD cards more than one block at a time
->>   mmc: k1: do not assert the shared AXI reset on probe failure
->> 
->Generally ping for mmc patches, would it be Ok if I take patch-3,4
->through spacemit's custodian tree[1], I'd genuinely appreciate an
->Acked-by if that's fine with you..
+--=_87bd90e897ba99bd8dfae6798f269fe8
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
 
-Acked-by: Peng Fan <peng.fan@nxp.com>
+Hi Tim,
 
->
->Link: https://git.u-boot-project.org/u-boot/custodians/u-boot-spacemit [1]
->
->-- 
->Yixun Lan (dlan)
+Thanks for the detailed report and the CM3588 numbers.
+
+I hit the same thing on a Youyeetoo YY3588 in July and asked Jonas
+about it. He had rk35xx clk patches queued that might already cover
+it, so I kept the fix in Armbian and didn't post it. His clk series
+have gone out since then, but as far as I can see none of them touch
+the big-core mux or the SCMI CPU clocks.
+
+Jonas, is this still on your list? If not, I'll rebase the patch on
+master and send it this week. Tim, a Tested-by on the CM3588 would
+be very welcome.
+
+On your questions:
+
+1. I went with SCMI because BL31 owns the CPU clocks once it runs
+    and picks between PLL and PVTPLL itself. Switching the mux in SPL
+    goes behind its back. Barebox fixed the same issue with
+    assigned-clock-rates on the SCMI node in its rk3588 dtsi. That
+    would work in rk3588-u-boot.dtsi too, but U-Boot only probes the
+    SCMI clock device when a consumer asks for it, so something still
+    has to force the probe. That's why the patch calls clk_set_rate()
+    from the CRU probe. Happy to move it to DT if that's preferred.
+
+2. The vendor U-Boot sets all three clusters to CPU_PVTPLL_HZ
+    (1008 MHz) in rk3588_clk_probe(). In the Linux rk3588-opp.dtsi
+    the lowest big-core OPP is 1.2 GHz at 675 mV, the same minimum
+    voltage the little cluster uses at 1008 MHz, so 1008 MHz on the
+    big clusters stays below anything Linux would pick. I can't vouch
+    for the boot-time regulator voltage on every board, and I haven't
+    tested RK3582.
+
+Thanks,
+Daniele
+
+Il 09/11/2026 04:00 timsurber@mailbox.org ha scritto:
+
+> Hi,
+> 
+> On RK3588 with mainline U-Boot and mainline TF-A, the big CPU clusters
+> are still clocked from the 24 MHz oscillator when Linux starts. They
+> stay there until the Linux cpufreq driver loads. Linux prefers the big
+> cores for work, so early boot is very slow: on a FriendlyElec CM3588
+> NAS it takes over 4 minutes to reach userspace.
+> 
+> Setup:
+> - U-Boot v2026.10, cm3588-nas-rk3588_defconfig, binman build
+> - TF-A v2.15.0, PLAT=rk3588
+> - rkbin rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.24.bin as ROCKCHIP_TPL
+> - Debian kernel 7.2.15 (cpufreq-dt is a module and loads late)
+> 
+> When cpufreq-dt finally comes up, Linux reports the starting rates:
+> 
+> cpufreq: CPU0: Running at unlisted initial frequency: 900000 kHz
+> cpufreq: CPU4: Running at unlisted initial frequency: 24000 kHz
+> cpufreq: CPU6: Running at unlisted initial frequency: 24000 kHz
+> 
+> Timings from the same SD card image:
+> 
+> unmodified    SCMI CPU clock raise
+> initramfs unpacked           43 s          0.6 s
+> Run /init                    56.9 s        0.9 s
+> systemd-analyze              4 min 29 s    11.1 s
+> 
+> Cause, as far as I can tell: rk3588_clk_probe() in SPL programs B0PLL
+> and B1PLL to LPLL_HZ (816 MHz), but it never switches the big-core
+> clock mux to them. BIGCORE0/1 CRU CLKSEL_CON(0)[7:6] stay at the reset
+> value, which selects xin24m. TF-A's SCMI clock driver returns 24 MHz
+> for that mux setting (clk_scmi_cpub01_get_rate(), src == 0), and it
+> only changes these clocks on the first SCMI set_rate request.
+> 
+> Armbian has carried a workaround for every RK3588 board since U-Boot
+> v2026.04 [1 [1]][2 [2]]. It raises the CPUL, CPUB01 and CPUB23 SCMI 
+> clocks to
+> 1008 MHz from U-Boot proper, after BL31 is running, so that BL31 does
+> the PVTPLL setup. That produced the right-hand column above. I also
+> tried setting the CLKSEL_CON(0) mux to B0PLL/B1PLL directly in SPL. It
+> builds, but I have not tested it on hardware, and it bypasses TF-A's
+> own view of the CPU clock state, so the SCMI approach looks cleaner.
+> 
+> Questions:
+> 1. Is the SCMI approach acceptable upstream, or would you prefer the
+> CPU clocks to be set elsewhere (SPL, or TF-A at BL31 init)?
+> 2. According to the Armbian patch, the vendor U-Boot also uses
+> 1008 MHz. Is that rate safe on all RK3588/RK3588S/RK3582 boards
+> at boot-time voltages?
+> 
+> SuperKali, you wrote the Armbian patch. Would you be willing to send
+> it upstream? If not, I can prepare and test a version on the CM3588
+> with your Signed-off-by kept.
+> 
+> [1] https://github.com/armbian/build/pull/10125
+> [2] https://github.com/armbian/build/pull/10543
+> 
+> Thanks,
+> Tim Surber
+
+
+Links:
+------
+[1] https://github.com/armbian/build/pull/10125
+[2] https://github.com/armbian/build/pull/10543
+--=_87bd90e897ba99bd8dfae6798f269fe8
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3DUTF-8" /></head><body style=3D'font-size: 10pt; font-family: Verdana,Gen=
+eva,sans-serif'>
+<div class=3D"pre" style=3D"margin: 0; padding: 0; font-family: monospace">
+<p>Hi Tim,</p>
+<p>Thanks for the detailed report and the CM3588 numbers.</p>
+<p>I hit the same thing on a Youyeetoo YY3588 in July and asked Jonas<br />=
+about it. He had rk35xx clk patches queued that might already cover<br />it=
+, so I kept the fix in Armbian and didn't post it. His clk series<br />have=
+ gone out since then, but as far as I can see none of them touch<br />the b=
+ig-core mux or the SCMI CPU clocks.</p>
+<p>Jonas, is this still on your list? If not, I'll rebase the patch on<br /=
+>master and send it this week. Tim, a Tested-by on the CM3588 would<br />be=
+ very welcome.</p>
+<p>On your questions:</p>
+<p>1. I went with SCMI because BL31 owns the CPU clocks once it runs<br />&=
+nbsp; &nbsp;and picks between PLL and PVTPLL itself. Switching the mux in S=
+PL<br />&nbsp; &nbsp;goes behind its back. Barebox fixed the same issue wit=
+h<br />&nbsp; &nbsp;assigned-clock-rates on the SCMI node in its rk3588 dts=
+i. That<br />&nbsp; &nbsp;would work in rk3588-u-boot.dtsi too, but U-Boot =
+only probes the<br />&nbsp; &nbsp;SCMI clock device when a consumer asks fo=
+r it, so something still<br />&nbsp; &nbsp;has to force the probe. That's w=
+hy the patch calls clk_set_rate()<br />&nbsp; &nbsp;from the CRU probe. Hap=
+py to move it to DT if that's preferred.</p>
+<p>2. The vendor U-Boot sets all three clusters to CPU_PVTPLL_HZ<br />&nbsp=
+; &nbsp;(1008 MHz) in rk3588_clk_probe(). In the Linux rk3588-opp.dtsi<br /=
+>&nbsp; &nbsp;the lowest big-core OPP is 1.2 GHz at 675 mV, the same minimu=
+m<br />&nbsp; &nbsp;voltage the little cluster uses at 1008 MHz, so 1008 MH=
+z on the<br />&nbsp; &nbsp;big clusters stays below anything Linux would pi=
+ck. I can't vouch<br />&nbsp; &nbsp;for the boot-time regulator voltage on =
+every board, and I haven't<br />&nbsp; &nbsp;tested RK3582.</p>
+<p>Thanks,<br />Daniele</p>
+</div>
+<div class=3D"pre" style=3D"margin: 0; padding: 0; font-family: monospace">=
+&nbsp;</div>
+<div class=3D"pre" style=3D"margin: 0; padding: 0; font-family: monospace">=
+Il 09/11/2026 04:00 <a href=3D"mailto:timsurber@mailbox.org">timsurber@mail=
+box.org</a> ha scritto:
+<blockquote type=3D"cite" style=3D"padding: 0 0.4em; border-left: #1010ff 2=
+px solid; margin: 0">Hi,<br /><br />On RK3588 with mainline U-Boot and main=
+line TF-A, the big CPU clusters<br />are still clocked from the 24 MHz osci=
+llator when Linux starts. They<br />stay there until the Linux cpufreq driv=
+er loads. Linux prefers the big<br />cores for work, so early boot is very =
+slow: on a FriendlyElec CM3588<br />NAS it takes over 4 minutes to reach us=
+erspace.<br /><br />Setup:<br />&nbsp; - U-Boot v2026.10, cm3588-nas-rk3588=
+_defconfig, binman build<br />&nbsp; - TF-A v2.15.0, PLAT=3Drk3588<br />&nb=
+sp; - rkbin rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.24.bin as ROCKCHIP_TPL<br=
+ />&nbsp; - Debian kernel 7.2.15 (cpufreq-dt is a module and loads late)<br=
+ /><br />When cpufreq-dt finally comes up, Linux reports the starting rates=
+:<br /><br />&nbsp; cpufreq: CPU0: Running at unlisted initial frequency: 9=
+00000 kHz<br />&nbsp; cpufreq: CPU4: Running at unlisted initial frequency:=
+ 24000 kHz<br />&nbsp; cpufreq: CPU6: Running at unlisted initial frequency=
+: 24000 kHz<br /><br />Timings from the same SD card image:<br /><br />&nbs=
+p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
+bsp; &nbsp; &nbsp; &nbsp; &nbsp;unmodified &nbsp; &nbsp;SCMI CPU clock rais=
+e<br />&nbsp; initramfs unpacked &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 43 s &n=
+bsp; &nbsp; &nbsp; &nbsp; &nbsp;0.6 s<br />&nbsp; Run /init &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;56.9 s &nbsp; &nbsp; =
+&nbsp; &nbsp;0.9 s<br />&nbsp; systemd-analyze &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp;4 min 29 s &nbsp; &nbsp;11.1 s<br /><br />Cause, as far=
+ as I can tell: rk3588_clk_probe() in SPL programs B0PLL<br />and B1PLL to =
+LPLL_HZ (816 MHz), but it never switches the big-core<br />clock mux to the=
+m. BIGCORE0/1 CRU CLKSEL_CON(0)[7:6] stay at the reset<br />value, which se=
+lects xin24m. TF-A's SCMI clock driver returns 24 MHz<br />for that mux set=
+ting (clk_scmi_cpub01_get_rate(), src =3D=3D 0), and it<br />only changes t=
+hese clocks on the first SCMI set_rate request.<br /><br />Armbian has carr=
+ied a workaround for every RK3588 board since U-Boot<br />v2026.04 [<a href=
+=3D"https://github.com/armbian/build/pull/10125" target=3D"_blank" rel=3D"n=
+oopener noreferrer">1</a>][<a href=3D"https://github.com/armbian/build/pull=
+/10543" target=3D"_blank" rel=3D"noopener noreferrer">2</a>]. It raises the=
+ CPUL, CPUB01 and CPUB23 SCMI clocks to<br />1008 MHz from U-Boot proper, a=
+fter BL31 is running, so that BL31 does<br />the PVTPLL setup. That produce=
+d the right-hand column above. I also<br />tried setting the CLKSEL_CON(0) =
+mux to B0PLL/B1PLL directly in SPL. It<br />builds, but I have not tested i=
+t on hardware, and it bypasses TF-A's<br />own view of the CPU clock state,=
+ so the SCMI approach looks cleaner.<br /><br />Questions:<br />&nbsp; 1. I=
+s the SCMI approach acceptable upstream, or would you prefer the<br />&nbsp=
+; &nbsp; &nbsp;CPU clocks to be set elsewhere (SPL, or TF-A at BL31 init)?<=
+br />&nbsp; 2. According to the Armbian patch, the vendor U-Boot also uses<=
+br />&nbsp; &nbsp; &nbsp;1008 MHz. Is that rate safe on all RK3588/RK3588S/=
+RK3582 boards<br />&nbsp; &nbsp; &nbsp;at boot-time voltages?<br /><br />Su=
+perKali, you wrote the Armbian patch. Would you be willing to send<br />it =
+upstream? If not, I can prepare and test a version on the CM3588<br />with =
+your Signed-off-by kept.<br /><br />[1] <a href=3D"https://github.com/armbi=
+an/build/pull/10125" target=3D"_blank" rel=3D"noopener noreferrer">https://=
+github.com/armbian/build/pull/10125</a><br />[2] <a href=3D"https://github.=
+com/armbian/build/pull/10543" target=3D"_blank" rel=3D"noopener noreferrer"=
+>https://github.com/armbian/build/pull/10543</a><br /><br />Thanks,<br />Ti=
+m Surber</blockquote>
+</div>
+</body></html>
+
+--=_87bd90e897ba99bd8dfae6798f269fe8--
