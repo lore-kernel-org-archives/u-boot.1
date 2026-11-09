@@ -2,123 +2,123 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD1E0606A321
-	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 22:36:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4D8C606A31C
+	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 22:36:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=AW58LfwS;
-	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=VNDUQX/4
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=1KnqQS71;
+	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=linux.dev header.i=@linux.dev header.a=rsa-sha256 header.s=key1 header.b=GEkFXjaS
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 407844046D;
-	Mon,  9 Nov 2026 22:36:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1E423407C7;
+	Mon,  9 Nov 2026 22:36:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6nIT9s8XzxPk; Mon,  9 Nov 2026 22:36:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 1372D404DE
+ id eg3H-WBr3YhW; Mon,  9 Nov 2026 22:36:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 92C8F405A2
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794263773;
-	b=LuYCqp8xg3nlQ4tXi8gpgYFkOMFTpDjxJwj0nxZx78eFXW5CgRrpQXG4QuOlWKfn1EUm
-	 A6oTOwz8Q83oqXtqDZqualf7DhCu/6Y3yUDeBjhICcZrL4qNBpSZcpkG/sD28zA61v8PW
-	 pkBwcILCwS5AYW8GsPiommrVPE+VGd3l+cLnv1/jIf6LxYuyoMj8toivaXR08PDdR3obx
-	 WgR2yracKUkEOv8ucUNOxRCJ5jNRfTHltEcBr8vz4TvuiC744gF5n/XeP6rnpt9Gq9Eal
-	 bqXnZIKIuVGqkRzPWEpbAKzTcI/m8Oiken7CAYgAfNrNTyX8Z2mFDLezvVdgDcHhVNw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794263774;
+	b=q0E8pD3K3pkB3CJPcc0jDq2lpDcAIUuIKs4zVnrr9AiT3hPIvQvIdFz7/o6+f0BZOuBi
+	 VR3js+yRU6t/Fw4S9nXRHxvut4YhrmOWYDB2uQ+nb3f5T5IC2x4TUdkm8WqS1fBVzd/e9
+	 zhK/WTmVPBFNI5e+PR2+xGHfgaJBjnlWH5retlBixUTrpWNPyVApbCrIdoPUHD226wVmd
+	 5TobGR6+EOkBxr8ZaGMpr8KqbnAsp8IH9OZ3MlSWdSaP0a21RbRVVaAiEDXRwd/AayW0t
+	 ZnR3bbwVJeSwrMl0OufA3LFRfUbBWWBbP3DQebSgD35A1bQYWGh2C4CO+Kk/SduccTA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794263773;
+	c=relaxed/relaxed; t=1794263774;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
 	 X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:X-Mizu-Trace-ID:
-	 X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
-	 References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Mailman-Approved-At:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=QMdzbtadsF4ozUr29WN9KVnVKLYZIsl8a/7BWPJMups=;
-	b=JanpuSl0zw3XWXxDQtfzTItos9b5sPgf1NUKzX1YUyxFLxzzOnJM0nCWtuLVzth3qi6q
-	 T9JmvXbthx54obmI5mmk6xz+Cb1xqJ7nxVEPRQVqP9O/mF4NOR2UMSDOPuuED/kyU7MrB
-	 S0HeGEN+VPP1Ws3/rLMz+J57oKxUT9sX0YX9qYHEVNgxol5VVOveAH/HWGM0huVnvBM4/
-	 nIeRndoPZAIayP+SiwJzMlTUYHfXnApXsAhcQ+OzqxaYLkki8RZdjjDt1x76zsvAXL1Ng
-	 REZtmVxLX8TMlMq0ZUL/I8rq/31Rm2BqnryJWWhFGd75tV/gznxMw+vInQiHFTYFYmg==
+	 X-Migadu-Flow:Date:From:To:CC:Subject:In-Reply-To:References:
+	 Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=frVcThTVxKdovAFHH90e9Hwci75I8ZRMZmi87kKJOG8=;
+	b=Z9HGLUOb7N5Ii3ZlM6gN4mdlJhszSVE4QiUTawpzqvfGE5naxnoXlxfTZFdaGZXzMQwa
+	 PUAhQuA6eYfPy84w6R0WO3opN54kEBZ/TuNpWWqyG/p/AHdUx3yZqxg62yQSSS5ruSKD8
+	 4Xy5KSXXCW/ZCkbTmyEU9RYKYQKvyp14jdu9oTWQF9XD4XIEuuv38sQTDr7TsWY9WLPxP
+	 MaLsukqHzZAj0zISIDXTDik+d5teOf+dGnv/EoILWe44D0aNACWBXmFG0YFrqciEBDQWp
+	 MWt6iAQVHxhsaKZvWzIeXF1tU9MjXyGCsBwjSjuqxojYeQTm0PmHmmZ8i5autYUuR5A==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=pass header.from=packett.cool;
-	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b="VNDUQX/4";
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794263773;
-	bh=QMdzbtadsF4ozUr29WN9KVnVKLYZIsl8a/7BWPJMups=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794263774;
+	bh=frVcThTVxKdovAFHH90e9Hwci75I8ZRMZmi87kKJOG8=;
+	h=Date:From:To:CC:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=AW58LfwSFtTh/4crDAQhDoplkDushWALsaKmLVYRJXAZvU+iDbU6idZthJSb1HRjN
-	 0HiSw8llQPZ2yCozv5qwIg1ojCwdeRLHWM+QjGc7ObradZLDLluS2FM90uRXf0AVZo
-	 N2oWe/kooVxM4uCniGRlARSF4zmnqFbs5ZDVmJOCutBvbpUSdfYoAxue5pKi49U0X7
-	 e7jWQitGPNnZUbHTjD884pFtJMYQsKyJaUXn6KmY08xtzJbcj+Dk+z27m+boyhNYF3
-	 luCMyKb95KOVTTVCa8YJkjg+hRCr0e2+xulvYxmK1oUOiE6Lmz2JGG3soj8UMaEwQJ
-	 IyMyQxLfJE3oQ==
+	b=1KnqQS71Nn/8Rfd50/CFvyRAiO3ByggDgHHR4tsTRLNOzScaqJbrbNgOL/Va2JdyG
+	 xt+XfUB/pAgDd2WzCBiWwzSVE+CSedItCQGRGyQRrUGD76iwOyeii8PaWv1rkmYj08
+	 KVReDzpxliXZXMgKWSEQAZ3Zk/B0Z3qBXusQW/jBPXnqAr/WHMMa0EVHGN33oG7Y5p
+	 GEUz3gwthV++vi4BVuwyKONFBSzf5hTwIkAJ3NAd37fC8akGCeXnatSM0lo2WfSDct
+	 UgmkxHjH+hmZMwYH/THqsKBq7GqP4h7CqCzg2i/xhi7NLNzAKqLq2OgdJ0d2N8X0ck
+	 SXY/znQoSwNYw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1372D404DE;
-	Mon,  9 Nov 2026 22:36:13 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id D2840235
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 22:23:36 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 92C8F405A2;
+	Mon,  9 Nov 2026 22:36:14 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id CF4F3235
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 22:24:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id B27344077F
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 22:23:36 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id C0E40607AB
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 22:24:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4I4qaI5sIngi for <u-boot@lists.u-boot-project.org>;
- Mon,  9 Nov 2026 22:23:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D78A7406FC
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2001:41d0:1004:224b::93"
-X-Greylist: delayed 64 seconds by postgrey-1.37 at util1.osuosl.org;
- Mon, 09 Nov 2026 22:23:34 UTC
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=packett.cool
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256
- header.s=key1 header.b=VNDUQX/4
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mkd9ycVHujHy for <u-boot@lists.u-boot-project.org>;
+ Mon,  9 Nov 2026 22:24:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8F73F606F2
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2001:41d0:203:375::5b"
+X-Greylist: delayed 62 seconds by postgrey-1.37 at util1.osuosl.org;
+ Mon, 09 Nov 2026 22:24:43 UTC
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=linux.dev header.i=@linux.dev header.a=rsa-sha256
+ header.s=key1 header.b=GEkFXjaS
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:41d0:1004:224b::93; helo=mta0.migadu.com;
- envelope-from=val@packett.cool; receiver=<UNKNOWN> 
-Received: from mta0.migadu.com (out-147.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::93])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D78A7406FC
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 22:23:33 +0000 (UTC)
+ client-ip=2001:41d0:203:375::5b; helo=mta1.migadu.com;
+ envelope-from=bradley.morgan@linux.dev; receiver=<UNKNOWN> 
+Received: from mta1.migadu.com (out-91.mta1.migadu.com
+ [IPv6:2001:41d0:203:375::5b])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8F73F606F2
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 22:24:42 +0000 (UTC)
 X-Envelope-To: u-boot@lists.u-boot-project.org
-DKIM-Signature: a=rsa-sha256; bh=rczQtsYts3pjl/8nzogZuR60zQuMoQgfsfa5nYetvj0=; 
- c=simple/simple; d=packett.cool;
+DKIM-Signature: a=rsa-sha256; bh=frVcThTVxKdovAFHH90e9Hwci75I8ZRMZmi87kKJOG8=; 
+ c=simple/simple; d=linux.dev;
  h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1794263011; v=1; x=1794867811;
- b=VNDUQX/4d1eUjrzLTr5Ex1DPLE+M8y6eUuIK+BheNKK4hzBp35Xy/FSpLUYoyuTohY3ZfeCg
- PfmWoo3I+HpSfDMT6qchJMa0pKE4tEvc7w1If/Xuexde4DcIzW5j/ipiQFkBGqSxh2LUOnRoPr3
- Spt9KOWWg+qq/KN6m0kJjVk2AjbCbUZp/9dugRZmQ7j5XWoTvjnrzPpja995609O9kZ0v0m78OT
- tvIdhJdSjjuJr+oiKkUC1RR75Sg30e8ePx1Y9r+zRVwRC4Uiz4JDgUlRkUpp2Ay1QmmO3RhryyE
- 3Bb0VCdKwz75up87iStFSMvPKpGIG83sHbV1wQFHIMtyg==
+ t=1794263081; v=1; x=1794867881;
+ b=GEkFXjaSq+gcFXhl1TVJj+H/nxz+SPvFZkHwA2uDD8Y4XlUJY3XjrOYsDzsm9pTDHh9WPJbI
+ xS3G9ZRNI1I5s5gNo1wjGiIQ+WgQGRXpC6h1xxumjtC8kniSgmjc18tI63rv3YCQe7uLFGb7jj2
+ aLPfr2FIXvVnAl6ok8gk8oLg=
 X-Envelope-To: u-boot@lists.u-boot-project.org
-Received: by smtp.migadu.com with ESMTPS id 4f7474c5a8db5ab2;
- Mon, 09 Nov 2026 22:22:26 +0000
-X-Mizu-Trace-ID: 4f7474c5a8db5ab2
+Received: by smtp.migadu.com with ESMTPS id 6a43d8d2d76bd38e;
+ Mon, 09 Nov 2026 22:23:37 +0000
+X-Mizu-Trace-ID: 6a43d8d2d76bd38e
 X-Migadu-Flow: FLOW_OUT
-Message-ID: <1c237776-9839-4888-9464-acbb5c29034c@packett.cool>
-Date: Mon, 9 Nov 2026 19:22:23 -0300
+Date: Mon, 09 Nov 2026 22:23:35 +0000
+From: Bradley Morgan <bradley.morgan@linux.dev>
+To: Josef Schlehofer <pepe.schlehofer@gmail.com>
+CC: Bradley Morgan <brads@mainlining.org>, u-boot@lists.u-boot-project.org,
+ trini@konsulko.com, kabel@kernel.org, marek.mojik@nic.cz, peng.fan@nxp.com,
+ priyanka.jain@nxp.com, qiang.zhao@nxp.com, Shengzhou.Liu@nxp.com,
+ chleroy@kernel.org, christophe.leroy@csgroup.eu, mario.six@gdsys.cc,
+ dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ hs@nabladev.com, holger.brunck@hitachienergy.com, sjg@chromium.org
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v2_04/14=5D_powerpc=3A_lib=3A_Add?=
+ =?US-ASCII?Q?_64-bit_division_to_the_private_libgcc?=
+In-Reply-To: <20261109222037.73759-1-pepe.schlehofer@gmail.com>
+References: <20261018083516.49229-1-pepe.schlehofer@gmail.com>
+ <20261018083516.49229-5-pepe.schlehofer@gmail.com>
+ <3CB2A762-EDFD-4258-A4C4-73082EBF4DAB@mainlining.org>
+ <20261109222037.73759-1-pepe.schlehofer@gmail.com>
+Message-ID: <B3611024-7467-4EBC-AE27-8D7F9EA5CF2F@linux.dev>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] board: qualcomm: add Moto G10 configuration and boot
- instructions
-To: Michael McAllister <me@michaelmcallister.org>,
- u-boot@lists.u-boot-project.org
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
-References: <179415866631.52076.3385909914110437826.uboot-capri@michaelmcallister.org>
-Content-Language: en-US
-From: Val Packett <val@packett.cool>
-In-Reply-To: <179415866631.52076.3385909914110437826.uboot-capri@michaelmcallister.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 09 Nov 2026 22:36:12 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -130,70 +130,52 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-10.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi,
+On 9 November 2026 22:20:37 GMT, Josef Schlehofer
+<pepe.schlehofer@gmail.com> wrote:
+>Hi Bradley,
+>
+>thanks for the review, and apologies for the delayed reply.
 
-On 11/8/26 2:24 PM, Michael McAllister wrote:
-> [..]
-> +Motorola Moto G10 (capri)
+That's ok.
 
-These exact instructions would apply to a huge number of phones, not 
-just that exact one.
+>
+>> What's your source? Maybe cite it?
+>
+>The implementation is based on __div64_32() from U-Boot's lib/div64.c,
+>and the copyright notices are taken from the same file. The comment
+>above them already mentions the source, but I'll make the attribution
+>more explicit.
 
-Even the Bengal/Kamorta motos, there are 8 models: 
-https://github.com/moto-sm6115/kernel_devicetree
+Thanks.
 
-But the same applies to other SoCs too, it's more defined by which 
-Android version the device shipped with.
+>
+>> Could we clarify that better?
+>
+>Sure. That comment also comes from lib/div64.c. The algorithm first
+>divides the high 32-bit word, so this step is only valid when the
+>divisor fits into 32 bits.
+>
+>Regarding 03/14, I don't think a separate MAINTAINERS entry is needed.
+>Your POWERPC entry already covers arch/powerpc/.
 
-> +^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +The SM4250-based Moto G10 uses ``qcom_defconfig`` with the
-> +``motorola-capri.config`` and ``qcom-phone.config`` fragments::
-> +
-> +    make CROSS_COMPILE=aarch64-linux-gnu- O=.output \
-> +        qcom_defconfig qcom-phone.config motorola-capri.config
-> +    make CROSS_COMPILE=aarch64-linux-gnu- O=.output -j$(nproc)
-> +
-> +With an unlocked stock bootloader, package ``u-boot.bin`` (including its
-> +board DTB) in an Android boot image with header version 3. Pad the payload
-> +to the memory footprint in its ARM64 image header before packaging::
-> +
-> +    python3 - <<'PY'
-> +    from pathlib import Path
-> +    image = Path('.output/u-boot.bin').read_bytes()
-> +    assert image[56:60] == b'ARM\x64'
-> +    size = int.from_bytes(image[16:24], 'little')
-> +    assert size >= len(image)
-> +    Path('.output/u-boot-padded.bin').write_bytes(image.ljust(size, b'\0'))
-> +    PY
-> +    mkbootimg --header_version 3 --kernel .output/u-boot-padded.bin \
-> +        --output .output/boot.img
-> +    fastboot boot .output/boot.img
-> [..]
+Hmm. Okay, if you end up not getting CCed, I'll CC you in patches to that.
 
-Is the alignment thing why I couldn't make v3 images that boot? 
-Interesting!!
+>
+>I can send a v3 with these two updates and the tags I've collected, or
+>you can make the changes when applying the series. Either works for me.
 
-These devices' ABL supports earlier images just fine though, so I've 
-been using
+Hey, could you do the V3 cc'ing me? If that doesn't kill you.
 
-mkbootimg --kernel_offset 0x8000 --pagesize 4096 --os_patch_level 
-2028-09-21 \
-     --kernel <(cat <(gzip --stdout .output/u-boot-nodtb.bin) \
-.output/dts/upstream/src/arm64/qcom/sm6115-motorola-cebu-tianma.dtb) \
-     --ramdisk ~/empty.gz -o /tmp/uboot.img
+>
+>Best,
+>Josef
+>
 
-(with v1 images a gzipped empty file as ramdisk seemed to be required 
-sometimes at least)
-
-
-Thanks,
-~val
-
+--- Thanks!
