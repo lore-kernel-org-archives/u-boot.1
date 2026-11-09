@@ -1,112 +1,115 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDADE606A31C
-	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 14:29:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA715606A321
+	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 14:29:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=VK6L0vye;
-	dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=VQr18fuU
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Ejddufm/;
+	dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=mX/65eQ7
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 42F4240775;
-	Mon,  9 Nov 2026 14:29:30 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A798C607BC;
+	Mon,  9 Nov 2026 14:29:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tuUUHwgEvI0M; Mon,  9 Nov 2026 14:29:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 644FD40766
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794234569;
-	b=H/stDyF4W7pyQQVaaz0bON1kHZzZwj5YytKyaFlCU16mbUCGjWoOhPL4mxBwmXvrSyXO
-	 yBLAnVo7Ehj8Tce1NVT2bbTKf0MOhI4aT9gN3L5lGp3+qX3uSj3fRdcZlJ5rT5CDAAxUi
-	 cqHyzcTS4CwgzOednnou1Sj5CVGqwhHpdF/QLrsAN3WJibNK4QughH/Ubn7HGQsKUL0BQ
-	 ZRHJG1hrN6jT63b9q86xLWEOyxekTWtO2c8eoYrgj2YKFfq2BaLrW6rM89wjjwrJfG05E
-	 ffHbOKu815VEKYw4WEZxAuIsnwUwRiqLlOlqWPMYt456d+9OYe7u6zPhJN1IvDFzztQ==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id kGQZ0Z3dFVW4; Mon,  9 Nov 2026 14:29:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C2169607B3
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794234573;
+	b=qMV+9Zh8BuF9HosqpLZg16SnD286eDtN+17qHNcvkIX/JNLgPqxkqYxpwnNEjZ3NtiKH
+	 if6WPcXnz6/VHU0wMYRyPSuSyEMNf6R1r4LF0gcceyJW22wFFoorTDObPuNhHJj7CslXr
+	 HWKfLFxFKvFz9wOvo60uxAf2tY+Obhb9e8Dqs3Y+VuJ/mqnjcQh7mycQDj9GbNvk0qPlI
+	 xm7cjL+86jVcfKSXIla9MhosNsEr8g09owF6B0r1EPTUDR1BvUkQ37Uj+WgDr4heCda9P
+	 K6zLOFat2we3OE+B7tBAeRvRlcPzuW1nfujeY29Nmhob2dKc73kXr0TnSBijrervtGg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794234569;
+	c=relaxed/relaxed; t=1794234573;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Infomaniak-Routing:X-BeenThere:X-Mailman-Version:
+	 DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Infomaniak-Routing:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=maq5CbYKiTCryLKhut07gzcWwkJb8neqhgOJA6zw7+A=;
-	b=H7RNipSXBAAo3sGgfnAc95FKf3Humm3rN3Zl1Qp/FRLoPINDG3rZIS5WB/7rBwKTNXJK
-	 RdPH9Eeg7c6Sp7Czh6WL2oR6be5oB9L2IQPlLtHlMZqtsmMjJJFfOyB3zqT5zRM+QBJd7
-	 ETu7RHzs41JOymayuEXyFuuSzwb2dxstSh7wP2RVlHfoXZRuWu+ePlirj1Z+7O4KOVmrH
-	 Bn+PPBA3WWBQDs4Erv5tHAKPcs48sOlKLvYfb+nJ+QSf/Vmswt7vHassYmhHFtIqsH/qb
-	 9CZ45hCND33ygNmRItJXQUsCdmWrjDI+4x7CzxV8GKRfRwhEw8LxVH9MeQ0IS1HtrgA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=kfaFTk4rCU5MnMlJQDvXkN9GOIw4QZ2mfndciwNYfKI=;
+	b=A96nXQPwBfe1BM5CuH8KVt6IVU7Ug7ZSh/tjFjoIvPNcXF+O+0Gj32zkVZFC9gULZDH2
+	 k6TmAvWXDcfg/TAmBBpjmBNIcMvfao7Nr5PSUwiwrZTqfOqH8v1UkFAObk6Xkn8lHYCfV
+	 ehqTzhI7VtYQs50jQTA3fPdGpfvOvJeqOX56pNi/BGEqWNH83p7Blh/CQp2mo3Qb3tmWe
+	 lC2ng1rArd5yBSTzr20mPKvyXhqj80bCuO6v79IBIMkgOvisEmJc32wHjO5WNB9pv/SD4
+	 5yE19HbvwRexz2OwhCNLQUbQCiHQyNUcU2GxMXREYG8q062zcwk5ruWRljTKZ7loIOw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=0leil.net;
+	dkim=pass header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b="mX/65eQ7";
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794234569;
-	bh=maq5CbYKiTCryLKhut07gzcWwkJb8neqhgOJA6zw7+A=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=VK6L0vyeHapErCE+R1Ih1cKVWCV4XOPrmxA8L3VGR2JHdEPo8hHTt05FikkrWOBmp
-	 A+0uC1Xeb1+u+IGgwGl/xGVn1UGM5hxQ3d8ohwnMn6MsjauVQECkq5uOa+mLxCIQm/
-	 AYxGoHuvDitVJLr8IbwtAmI0PT54qt3gMhGtmwdvP4pAQcklnm+EVWug51Ug1Zb8Up
-	 SC+sA8QGaLgD9LN0sCZvpZLpEqOgELCOQZDm/l0dkcEqBxrq/HcNyTp0BCbCftsSu4
-	 JFcqbKc4VZlySOtjkZUIxE783t9LEQwO22TcPJU+Oq2X2HF5qjpfVJbnFj8iL4eoBi
-	 e7iYxNk/oXJdA==
+	d=lists.u-boot-project.org; s=default; t=1794234573;
+	bh=kfaFTk4rCU5MnMlJQDvXkN9GOIw4QZ2mfndciwNYfKI=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Ejddufm/zsxJVGqTW+HMBUcefLZiJfJ5qOEZBnRTBoxLx35YuyhEaQVRZyXyW3NM3
+	 YfH9hV1tjYQ5cX464KgSDDcOgxQhP0dvWhk/5I6VgGZnRIJGI6TE07Tm0W+LnXZwO0
+	 M4jlHdS3Q1Bq1GDEKG4fApkBNMZzeRcTCIBsPRXmT0cH9U7TM3wsUthAuDLrnlj+F3
+	 3q9oAXj1AdYZtTL580wW5ABmshSiKSx8sToprrgU48vGwwYNLijMZkxOedumpZnfWZ
+	 sOMBv1NJxHI5ve5Mgfzs+5pIwYV13FcW1C70Z9eXU8Q5xi0T9EEO6ku2lA7DdjHMM/
+	 AjaHQmLGaqWPg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 644FD40766;
-	Mon,  9 Nov 2026 14:29:29 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id CF731235
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 14:29:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C2169607B3;
+	Mon,  9 Nov 2026 14:29:33 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id C9F01111
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 14:29:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B52364027C
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 14:29:27 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id BA0A7607B1
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 14:29:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4KapgzIiG_4m for <u-boot@lists.u-boot-project.org>;
- Mon,  9 Nov 2026 14:29:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 19BE940087
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=45.157.188.13
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=45.157.188.13;
- helo=smtp-bc0d.mail.infomaniak.ch; envelope-from=foss+uboot@0leil.net;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FBUkBc67PhxF for <u-boot@lists.u-boot-project.org>;
+ Mon,  9 Nov 2026 14:29:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 8722D6074D
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=84.16.66.175
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=84.16.66.175;
+ helo=smtp-42af.mail.infomaniak.ch; envelope-from=foss+uboot@0leil.net;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=VQr18fuU
-Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
- [45.157.188.13])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 19BE940087
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 14:29:24 +0000 (UTC)
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
+ header.a=rsa-sha256 header.s=20231125 header.b=mX/65eQ7
+Received: from smtp-42af.mail.infomaniak.ch (smtp-42af.mail.infomaniak.ch
+ [84.16.66.175])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8722D6074D
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 14:29:29 +0000 (UTC)
 Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
  [10.4.36.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jNX7L1rDWzgQL;
- Mon,  9 Nov 2026 15:22:54 +0100 (CET)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jNX7H2mFvzdD8;
+ Mon,  9 Nov 2026 15:22:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1794234174;
- bh=maq5CbYKiTCryLKhut07gzcWwkJb8neqhgOJA6zw7+A=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=VQr18fuUshQADGiX3HKIFarskGy4IAJwUDfhWElyWmtBue/5TKXmvtHU2lu/T7kCC
- w+PVaFU+NJmgPots5JnB/9IZTKtIm5vvzrebYlP5VKVEl6S4ocyXR+MOf4bqfHMurp
- Y8FzVTn9GLC3VUZfF0S0t/KdYSptUAjWlHNxR1HD76WQ+r7t8uUEdQjy4d/H1Vhm/v
- a/+dOePeedyf1VcFK+II7HtuEo6aMcNtWmpl8Npw/S2MQuF7kHExQnR5n3NwLVH4Fv
- BBNWxMKzF/a4L8LGxSr/+kAh98mmWZFuIW1LWMrwNUA+D8b5Itk85tmwDD0TfC0tvG
- HYvw0iy0OQ6nA==
+ s=20231125; t=1794234171;
+ bh=kfaFTk4rCU5MnMlJQDvXkN9GOIw4QZ2mfndciwNYfKI=;
+ h=From:Subject:Date:To:Cc:From;
+ b=mX/65eQ7PW2MOeqsyfGHNkgDE1q9a3Gc8IaJdbbAYUMpHdnadCozYtu7hqw8Fdq5C
+ 7GlX0VSqz2SLrZnUhG3K/knw/3wdFJOo0ApBlDc1rETRSHrpAf4LCFlSbwwlCOQRg3
+ cfYr6bY8/chExxqJG4HT0WvuWCCxm2tXj84tb13ZoVoV6n3Isc3HBvS8caphrvvOav
+ iVqECSqo8/dz/GcOgkg8wNZrMNDArcQ/azHb2HTIj5lY2nVy8JrF+qR1GC+3q9pxo0
+ IF+RbjAy3YxkfgBVtEbdRsjMbdZGJ3GP/18J8C0rbfcnljaTbkXWWJ1HuP3RzwCYcC
+ kbWHFTFBab47g==
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4jNX7K0tdXzZCl; Mon,  9 Nov 2026 15:22:52 +0100 (CET)
+ id 4jNX7F6l5jzXrd; Mon,  9 Nov 2026 15:22:49 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 09 Nov 2026 15:22:28 +0100
-Subject: [PATCH 2/2] MAINTAINERS: remove Simon from reviewers for Rockchip
+Subject: [PATCH 0/2] MAINTAINERS: update entry for Rockchip
+Date: Mon, 09 Nov 2026 15:22:26 +0100
+Message-Id: <20261109-rockchip-maintainers-update-v1-0-d8f568818a1a@cherry.de>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261109-rockchip-maintainers-update-v1-2-d8f568818a1a@cherry.de>
-References: <20261109-rockchip-maintainers-update-v1-0-d8f568818a1a@cherry.de>
-In-Reply-To: <20261109-rockchip-maintainers-update-v1-0-d8f568818a1a@cherry.de>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAA/yXMwQqDMAwA0F8JOVuwnRPsr4wdYhtnNlZLWocg/
+ rtsO77L27GwChf0sKPyR4osCT3YBjDMlB5sJKIHdK3rrW0Ho0t4hVmyeZOkSpJYi1lzpMomxuu
+ l61w/DhNhA5iVJ9l+++3+d1nHJ4f6LfE4TlnYVPx/AAAA
+X-Change-ID: 20261109-rockchip-maintainers-update-dd534426b9fa
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@nabladev.com>, 
  Michal Simek <michal.simek@amd.com>, 
@@ -130,31 +133,28 @@ X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Kever has new duties at Rockchip and doesn't have the time to work on
+U-Boot anymore, as confirmed in private. He's suggested someone else at
+Rockchip could help reviewing but it is ultimately that person's choice
+to do so, so I did not include a patch to add him as reviewer.
 
-Simon is not part of the community anymore, so remove him from the
-reviewers for Rockchip to reflect the actual state. Thank you Simon for
-your Rockchip custodianship of a few years and the numerous reviews over
-more than a decade.
+Simon is not part of the community anymore, so update the Rockchip
+MAINTAINERS entry to reflect that.
 
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- MAINTAINERS | 1 -
- 1 file changed, 1 deletion(-)
+Quentin Schulz (2):
+      MAINTAINERS: remove Kever from Rockchip custodians
+      MAINTAINERS: remove Simon from reviewers for Rockchip
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index adea20d5f36b..9bd2d684d370 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -547,7 +547,6 @@ F:	drivers/usb/host/xhci-rcar*
- 
- ARM ROCKCHIP
- M:	Quentin Schulz <u-boot@0leil.net>
--R:	Simon Glass <sjg@chromium.org>
- S:	Maintained
- T:	git https://git.u-boot-project.org/u-boot/custodians/u-boot-rockchip.git
- # Exclude from N: px5 matches
+ MAINTAINERS | 2 --
+ 1 file changed, 2 deletions(-)
+---
+base-commit: 934995f642a21ca7f35fa9aed5f061394fcba243
+base-tree: https://git.u-boot-project.org/u-boot/u-boot.git main
+change-id: 20261109-rockchip-maintainers-update-dd534426b9fa
 
--- 
-2.56.0
+Best regards,
+--  
+Quentin Schulz <quentin.schulz@cherry.de>
 
