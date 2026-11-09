@@ -1,149 +1,159 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64581606A321
-	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 17:29:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3F77606A321
+	for <u-boot@archiver.kernel.org>; Mon,  9 Nov 2026 17:29:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=IlR3Y0c+;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=VwuWv0nC
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=kgYgBIcj;
+	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=AJZfa5gM
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3F46D80FB5;
-	Mon,  9 Nov 2026 17:29:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A0D40606B0;
+	Mon,  9 Nov 2026 17:29:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jExtiYO6N63N; Mon,  9 Nov 2026 17:29:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 60CC880FF8
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794245358;
-	b=mjJcjQCyqfhjIswqxzirGQvZlSlAIO3joSED1EzARWUG/1hm4g1lB12OKUO77EAQaxqv
-	 YTESRkEkq9+hhqgO9pxv7lDiHjVTtqqdfbf7t5xRrjg7yvW/KIdtYFLWRDSM+Ctp60T/g
-	 b+xo+9oLLkcksWGgD130m3ITBY4EQSlizqsdEFpMTixBj+DnQ23eF5Xk6ZS12ida2wa/t
-	 4Ts4HfzmC3pAskeB5EQkmrpMmqPN/isRibMYcEbkzPy74s8bHWytndFRoFbSWuJUTGhBC
-	 QnuyQRgAjk07ANMI0MrAiPaxbr0Ck6cDHJstKpI/K2SO6rcR7CeCdIlioxARletuVNg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BC_5nupGZqsK; Mon,  9 Nov 2026 17:29:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org EB9E360838
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794245364;
+	b=EhwFlyclOo4jFa8f6KDrEbOKHHeufpbACe+bwg4Ipq0LeaIBk50awi17FV/rEpDy6SMy
+	 dJen9IU5KQPZimCnubyviKy7DUKr6wG2TFcVQCn5QygUEa3t1nkRrP0nc1UgTHik7JcQZ
+	 kTxTGRFFJoTxip2jOQ5wLoCZjiTqjB49ZQSBFVB/lC+XN9HpUTxdQPrpxrSqHyKS9yZ5V
+	 0IQB+thpc1CrZ2EYc4EUGd+QIGmehesWkmxiEe18Xw8mu1PtFzDgiJFPQG9AHy0Ic5/M+
+	 umuGhF+z9egEp8FICWlx904pgNPSOKDRm6B+ygStvN7wf1dxAMzcw4rTSjYwYcXhghg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794245358;
+	c=relaxed/relaxed; t=1794245364;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:In-Reply-To:
-	 References:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Errors-To;
-	bh=O0pkVSR2BXuPuTVlZZ7lLJOgosLCzGn2zX+V+QK2F7A=;
-	b=e3M244JBPD2qWqJ46PlSZq1gW2GVL6P0TEIpdt15GpUWOXT1nx8k0PTroAezQgrdzFQH
-	 r8L/xidiHMAhqbo2PPQWXd0qe1jbKTd91KhLSIOTJPdYp5SAZHfN/KlUF/1ksStwtoSj2
-	 0bFaOZsTQnaClAWjM+bW73MJJXXt67LoJ1tJDM5FRcrjwOGa3WCbbeLdLAeEGLtosg7xk
-	 PX49oNi/cfIJn4mtLPfp73gq/FfjqtLhpyxwzSlmpQ/dsdD/664fGri4iNAr/yfeQi6um
-	 W11ZjlVEPvx92mZWOzL4dpYVBrYYRbw0iCSVxEPgtuCxb/C9onJh7WbVhQNVi2LgepA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=hA5O+IiyrNw8MsM15s/wdjOoDgASxDpjAgPx8gluAjE=;
+	b=kIBGT4bDT/G9pFlX2D2xhsACiEdh5HGT7Fz3CojzXugdKvm9A+1qz72SuWa5u/cGSEsG
+	 wJ1tZN+p5jQwzpPkbf8Int/YooYYJrgsfqFJzlkixP8vRvHiXHxHuKwxeMP+iqrFSjORf
+	 gn6TPPe0wET5yvnfszh/QtHtpkOUjmGdEKsqDi1BgO2i8FcQuUDjPsgcRzaW0g0cwspn3
+	 a+nyuSVqx57HWH2Z96QDZkgjtTPllq2ad/RvsYQCmiLgPw5rCQL+B896IAvK3n0/box9x
+	 Cv6b8FlNhfZcfPTX8e6ACewIcQFPUwhtRgBH+NJO6gN+1P55jxoS8MLRSznCu0t3r7A==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794245358;
-	bh=O0pkVSR2BXuPuTVlZZ7lLJOgosLCzGn2zX+V+QK2F7A=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794245364;
+	bh=hA5O+IiyrNw8MsM15s/wdjOoDgASxDpjAgPx8gluAjE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=IlR3Y0c+5NHx3TvwgsMiAFKYvhvl4Nb8W+0R6elSAABgRQrm5QBfbVzAgYiZJtrR6
-	 f7VPQPLXhvpQ8rYY33D7swoo1AQ+wccLqLwcC3LAUHdqzQGGen2hYdte2AM0YmAkXY
-	 uKcLloCX++p1/zAv53gI34vAFtw/+m9WG7kVvjNPAFo5WuAmu6DlK8eHryFhxbnE+z
-	 AogHpFh68gutbQIWpigw3qqn5Hqw357tqkBXMhlLZsVVKM/QVN0uBV76ZFXwr4pccf
-	 CedxFb0M7cbkvTMZ771/CmUIwiv0P8IVEZP/5tkNYj9R06oNzj2m1Zbj6Lvu/mucsc
-	 4op9+r//5382w==
+	b=kgYgBIcjwElJtyj99tg7rleNVU5aqYuM8wXHmbcwhZNoEXxb4OeLsPIRbvrE/500Q
+	 Xon9CzZRAkRN4i7j1jkHLMuJ0JYYguJC1ifUtQdqmpUtVTmEItvIIdQ2AS/GSQYU4D
+	 zTI2BHXpCp1dD1Bt2yYjem1Kg9PLbi6o1y9ZNcBu5dnFL9KZQgCDzSoBQPy3iiHnfn
+	 eV1cJiohWJANIQmLtZfrHqV0C1RSG/+TeJJ9FODCtRQK5UREN5vKMf9GVv3tG1SqCo
+	 TyDU2K9odFUyFa4qH/c6kkPiRv57icgtMltgA7cdNgGDKbpgNIDce51Bx18idaHbrK
+	 4HPNQOG6tcxGQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 60CC880FF8;
-	Mon,  9 Nov 2026 17:29:18 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 1680628C
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:29:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EB9E360838;
+	Mon,  9 Nov 2026 17:29:23 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id D9D56251
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:29:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id F080940769
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:29:16 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id CBE1C40176
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:29:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id SktLxgtzUMTE for <u-boot@lists.u-boot-project.org>;
- Mon,  9 Nov 2026 17:29:16 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org DE57140756
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42c"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3osifsWO8N94 for <u-boot@lists.u-boot-project.org>;
+ Mon,  9 Nov 2026 17:29:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 05F7240068
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::332"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42c; helo=mail-wr1-x42c.google.com;
- envelope-from=anabobillo3@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=VwuWv0nC
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- by smtp4.osuosl.org (Postfix) with ESMTPS id DE57140756
- for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:29:15 +0000 (UTC)
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-492690dd5daso813746f8f.1
- for <u-boot@lists.u-boot-project.org>; Mon, 09 Nov 2026 09:29:15 -0800 (PST)
+ client-ip=2607:f8b0:4864:20::332; helo=mail-ot1-x332.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=AJZfa5gM
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 05F7240068
+ for <u-boot@lists.u-boot-project.org>; Mon,  9 Nov 2026 17:29:21 +0000 (UTC)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-854e904005cso753568a34.1
+ for <u-boot@lists.u-boot-project.org>; Mon, 09 Nov 2026 09:29:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794245353; x=1794850153;
+ d=konsulko.com; s=google; t=1794245360; x=1794850160;
  darn=lists.u-boot-project.org; 
- h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=O0pkVSR2BXuPuTVlZZ7lLJOgosLCzGn2zX+V+QK2F7A=;
- b=VwuWv0nCJ37i2IJcsW8dJO4Dfm3mohfM67FULF8BqfiSLB51A5bc7RbiFFF3BOHTmc
- FKZz3wsu7j74kcQbYsZDidSKWsHtvMEOItJQN2VRSYkNpOFaeM9M6ZvHKsXUgRY0Fu26
- pZtuPlZ3BB+g3pkyk4SOm/5xrh3IxO4E3o6akKqborAp5YjJZCNNjt/VtE/pJNh8A8v7
- 8wBQ4ZJeY5+OQBk13FWvf7A4HA1pj/YvDbOzQVdK8GkVZxDlPSyAaNncXdpagy6hgawz
- OgeF7k04a78GXQlbStk2cfECoT6eRsZ2sW5dIw/Ypy8S1RrrTPyPGhHGfxhekUPe3vc6
- 8xYg==
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=hA5O+IiyrNw8MsM15s/wdjOoDgASxDpjAgPx8gluAjE=;
+ b=AJZfa5gM9/qHv1ebhpguI+xyZHIE2pKTRN4bTEvefx29d/zcBz+NsBUP5SX1RYdaHE
+ 8KEzPyFTxV8MzPs8nLXV7AgV//lWKcloLuGTPOuDdvQ+F1Ep1QitykJmx1DSt6QM57jr
+ C+z6my4phgmLX+O3mNNbup2QS1wfvtXOlHVqc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794245353; x=1794850153;
- h=references:in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ d=1e100.net; s=20260707; t=1794245360; x=1794850160;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=O0pkVSR2BXuPuTVlZZ7lLJOgosLCzGn2zX+V+QK2F7A=;
- b=dZasdRHcq4kA58AoaX6qS46VndmjPsk4aBPKB8lx6/4giWpwSlAV5b6SiQCb9BDXgJ
- qrKdkYKfdfRP/GmMxNAMvO1TTarMOb4wyXjbp+Z/jKIRSouU1NuVPAA8/12HSIeU1/Sa
- UqupNX/HKO8KpTKIqv3yxQ9pDi6sBypk+Fh1eFkIGiNCueTkFMcsO/Zp6RWxoKhijsgV
- NktMFpeJFIA1ewEQWbzUI7j+IjL3tyJ973kbYT/IbImm+AxK8wVbeV4FsdRM8zPtvDYO
- GeaeQGcC8eisEx7AT3SIrP4W0sHKqhqEf6DBbLSL8Kfg9U1LZwrYjy9CoUnhOKzro+1k
- ZvjQ==
-X-Gm-Message-State: APuU4Z/CVGEmW686Yfucsae8Ewk/ZtDbWPdKJ/sX1mkghFcIzT1L1xbz
- StZ7A0qsWo2Cw0brgTki59PiKdwISh8ubHQWCcMdSkFOSFCvUjE/VhBzy8LV8GUmtws=
-X-Gm-Gg: AYBFou19VHns8nAMCtKdA5mBGCxgTirnfEPpYi2wGGGHau6wIXbL1AP/UfBo7gAjDYE
- 0FKq2uDBULLvP9YNm52wgM3qrBRVGyhr1B96HZRTfJ0MoVfWp2DDqY2vqF7vB2m0WvyQm6jfZA7
- RMFeLPJKqAoto39VQ/6F8FrY0u03atsu96TLPUwkTRlvYf4l1MhiOeWmIgBsZ5OpzllVtD0+LUo
- VUfwjySbsWCvixLcjLHDR6+5+JcmJvtcS0U6hbh9EzfGbDKIx4Vq69DQUkTOYjKPGXrAhZVtyNn
- fK4OGeYY2I0u/tai9qUuW9fTJwvEPVdTHI4zEdoGg9AZhqJRmpPbOiEaGHkCS9cbChD9veovaLF
- n352r2c8IHjqyGbQNehHbUNAW4SzdoU7HOJO3dowynm/5sIClFTS3izoLtEvwQSe9xhNjA9mqpS
- IEGbKrhyxSARRmhf0ZLqwbmD+TXSSbZh4rI2Z0VjvsNoFkqpZafDfmd5lIXGCb60s8EsspF2hoC
- lVvipID1oQrqM+dcA6dadm+kujF0AURjINdpHS9aMY+EEnbO094EKm/Fh21FxShFMzAkkI6baWO
- rvvOCIO8PE0ME5TGl1fnM/uhuHbVqT7BjvlxnK5tMhogZ02kLICS
-X-Received: by 2002:a05:6000:2306:b0:48f:cb37:3ec3 with SMTP id
- ffacd0b85a97d-4982ff2890bmr287496f8f.41.1794245353175; 
- Mon, 09 Nov 2026 09:29:13 -0800 (PST)
-Received: from [127.0.0.1] ([85.204.204.133]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4983284c92asm191560f8f.4.2026.11.09.09.29.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Nov 2026 09:29:12 -0800 (PST)
-From: Ana Bobillo <anabobillo3@gmail.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
- Quentin Schulz <u-boot@0leil.net>, Andre Przywara <andre.przywara@arm.com>,
- Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tom Warren <twarren@nvidia.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Neil Armstrong <neil.armstrong@linaro.org>,
- =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
-Subject: [PATCH 03/11] edid: Leave the timing alone when no mode is valid
-Date: Mon, 09 Nov 2026 17:29:11 +0000
-Message-ID: <76cc4bd0-52e7-4362-8aff-489f17df1466@gmail.com>
-In-Reply-To: <2399d63c-ddd0-44b0-bb81-d5d9d2a8a8b4@gmail.com>
-References: <2399d63c-ddd0-44b0-bb81-d5d9d2a8a8b4@gmail.com>
+ bh=hA5O+IiyrNw8MsM15s/wdjOoDgASxDpjAgPx8gluAjE=;
+ b=0mk506BYr+kIYAl14q+9ui11pNaxSuwsOPFXMyMF+4ZQVkcH513A8TVboyrm2l4rOP
+ DzHtIZHJf+tSh7MhWlDzV1O+tsS118mgBpeeB9wJ3bmSo53dgsfGoxRP2EISF4Bw55vp
+ 2ElKcB3tSLNvibwJY0jogn+SpgmS6lNr50U397jU/XN96CBdYsJR/fKyKRa/pAuJjxiU
+ EWYnz7S0xta6IKClbwEZms0GocQeedptAZmePPmV2pyUsj9GmZqk3l/MGBUOhBZPWRc1
+ 3rYSyb3SVj/+qCMilcX/CyC0v7qQBmh0Clvp1tPO9WeZnPUK9vjAudpHq7LBRLKNW5z/
+ jPxA==
+X-Forwarded-Encrypted: i=1;
+ AL+hErFvkeiAIIBVbWE5Lzj2eZavKDF2CXwSkfqk5oscsGvyJVlfCH3IppXqJWGX3/8tBkwa+WnS5tI=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/1/MuSSa2UvknIZFT8PVy1OF1VNrdwWazdShlp4suU8FvhldBY
+ 95wWUTlT7KeZWkmh/ZPGBLMDHuR7F/iYD1a9utGhHCtZ1ROTiK11MQSEZ35xQ64z5+Q=
+X-Gm-Gg: AYBFou3KNSbNb/5UQwILyNan0ohttahnv1U60neH895TUPGX2ul4gOCwrLW6ytpg1bd
+ J0s5NpeCDk+1jMbBWonTx/82NzlYohugUSA2f5oDBKFBllTwcHCWdpicgaglQcqrMOWQsSCWMNz
+ 2lG2D3AnT22HXbgmr50nx2q0B9kywwOUKBRzpCo7C5TSTQyJhaVJpIF2tNrJu8uSCfsekI7wWGe
+ IJYF9qXAanvVzgUImUPl44cLfkI7fsCBZtYzRHtp/hH7+w01rTMqrpfstMx7wY4wxasfL/YFfuh
+ ynastEQkOm9yVVZBEAlYuOtqp01WQYsMLE9fUOJt0Sf6zThuFq0ivC7DEEVVMlJmusNsF4385lC
+ AFCIAtH7zi/h90BU+MYR9iHjryDmYw/ReSUQzLyJlrV7+hmFc5rGjGKr+mJrdmCHVvWuRj7qOc8
+ BUQeianX5gXe7U6CWHPLQlcH0JV9uG2z9NIHESCy4H4ru4yct/bd6J4hx9NBH+n0+PVyCraW5Hm
+ HvPW9AR/5cixp0D3CoxusAudKcws1y+HhHLfAJSu2maoL9nJRN8xgpOIbYHexda9ebRh7R8WLYR
+ KqbQHzF2s08HquhIqHqvjV1QOIDDAvSUSurfCDyYa6fLMS6s4SrtwKlRk1z2xCIArCQTQ8PTpvV
+ Powci/rrwAvcrlRWp0HVxHITfvbdML86pdh3c5zYEmO2V2wNNpJMsdWerIR+vd1UB2A85f1FKJ5
+ wKxMyZQ2exlCptEbVzmpXjmjhJobnYqA==
+X-Received: by 2002:a05:6820:a510:10b0:6ca:36f9:178e with SMTP id
+ 006d021491bc7-71899400429mr55706eaf.28.1794245360429; 
+ Mon, 09 Nov 2026 09:29:20 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-7170f8cbfbdsm3697812eaf.7.2026.11.09.09.29.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Nov 2026 09:29:20 -0800 (PST)
+Date: Mon, 9 Nov 2026 11:29:17 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Yuho Choi <oss.patchbox@gmail.com>
+Cc: Marek Vasut <marek.vasut+usb@mailbox.org>,
+ Stephan Gerhold <stephan@gerhold.net>, Linus Walleij <linusw@kernel.org>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, linux@analog.com,
+ u-boot@lists.u-boot-project.org
+Subject: Re: [PATCH 0/6] usb: musb-new: Free the controller if the host probe
+ fails
+Message-ID: <20261109172917.GQ3741582@bill-the-cat>
+References: <20261106194621.510146-1-oss.patchbox@gmail.com>
+ <20261106205608.GF3741582@bill-the-cat>
+ <CAGG=RgD_G2Ottv+0=JOBYyP8MsdDGGUhCB0R2BAHWa8mS2ECcg@mail.gmail.com>
+X-Archived-By: <archiver.kernel.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="DBgA+idudkeeW1nX"
+Content-Disposition: inline
+In-Reply-To: <CAGG=RgD_G2Ottv+0=JOBYyP8MsdDGGUhCB0R2BAHWa8mS2ECcg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -153,180 +163,58 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
-X-Archived-By: <archiver.kernel.org>
 
-From: Ana Bobillo <anabobillo3@gmail.com>
 
-edid_find_valid_detailed_timing() decodes each detailed timing into the
-caller's struct before asking mode_valid() about it. When it rejects
-them all, edid_get_timing_validate() fails but leaves the last rejected
-timing behind. The Tegra124 display driver ignores that failure and
-uses the timing it passed in, which it set from the device tree, so it
-ends up with the mode that was just rejected.
+--DBgA+idudkeeW1nX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Decode into a local struct and copy it out only once it is accepted, so
-the timing is left as it was on any error, and say so in the header.
+On Fri, Nov 06, 2026 at 06:19:43PM -0500, Yuho Choi wrote:
+> On Fri, 6 Nov 2026 at 15:56, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > How are you finding and investigating these issues, exactly? To cut to
+> > the chase, this series (and the other two patches) sure seem like what
+> > happens when someone sends an LLM to look for resource leaks. Which are
+> > not great. But the bigger concern is if we handle the error case
+> > correctly. Thanks.
+>=20
+> Thanks for the review.
+> The bugs were found as part of ongoing static analysis research on
+> configuration-dependent resource management bug patterns.
+> I used an LLM to help verify the bugs.
+>=20
+> The patches only fix the memory leak. They do not restore the
+> hardware state on the error path. Would you want patches that
+> restore all of the hardware state on these error paths instead?
 
-Add a test for edid_get_timing_validate() with a mode_valid() callback.
-It goes in test/common, as the code is in common/.
+So, the general project policy for LLMs is please don't. Using this as
+an example, it's less interesting that we might have a small leak (we
+aren't a persistent OS), but as the part of this thread with Greg and
+the sc5xx driver show, there are potentially interesting problems in the
+failure case (and we don't need to restore the HW state, just ensure our
+internal state is consistent). Digging past the initial leak to fully
+understand the error path and that on the software side we handle errors
+gracefully would be an interesting task.
 
-Fixes: 1c1ed441b0d1 ("edid: add edid_get_timing_validate() variant to filter out edid modes")
-Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
----
- common/edid.c        | 10 +++--
- include/edid.h       |  3 +-
- test/common/Makefile |  1 +
- test/common/edid.c   | 87 ++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 97 insertions(+), 4 deletions(-)
- create mode 100644 test/common/edid.c
+--=20
+Tom
 
-diff --git a/common/edid.c b/common/edid.c
-index e5aa4ca494f..1d934edf843 100644
---- a/common/edid.c
-+++ b/common/edid.c
-@@ -373,12 +373,16 @@ static bool edid_find_valid_detailed_timing(void *buf, int count,
- 
- 	for (i = 0; i < count && !found; i++, t++)
- 		if (EDID_DETAILED_TIMING_PIXEL_CLOCK(*t) != 0) {
--			decode_timing((u8 *)t, timing);
-+			struct display_timing dtd;
-+
-+			/* Leave the caller's timing alone if no mode is valid */
-+			decode_timing((u8 *)t, &dtd);
- 			if (mode_valid)
--				found = mode_valid(mode_valid_priv,
--						   timing);
-+				found = mode_valid(mode_valid_priv, &dtd);
- 			else
- 				found = true;
-+			if (found)
-+				*timing = dtd;
- 		}
- 
- 	return found;
-diff --git a/include/edid.h b/include/edid.h
-index 77a5d258311..fe0d88a859c 100644
---- a/include/edid.h
-+++ b/include/edid.h
-@@ -315,7 +315,8 @@ struct display_timing;
-  *
-  * @param buf		Buffer containing EDID data
-  * @param buf_size	Size of buffer in bytes
-- * @param timing	Place to put preferring timing information
-+ * @param timing	Place to put preferring timing information, left
-+ *			unchanged on error
-  * @param panel_bits_per_colourp	Place to put the number of bits per
-  *			colour supported by the panel. This will be set to
-  *			-1 if not available
-diff --git a/test/common/Makefile b/test/common/Makefile
-index baefc7b3622..658f30b3652 100644
---- a/test/common/Makefile
-+++ b/test/common/Makefile
-@@ -8,6 +8,7 @@ endif
- endif
- 
- obj-$(CONFIG_CYCLIC) += cyclic.o
-+obj-$(CONFIG_I2C_EDID) += edid.o
- obj-$(CONFIG_EVENT_DYNAMIC) += event.o
- obj-y += cread.o
- obj-$(CONFIG_$(PHASE_)CMDLINE) += print.o
-diff --git a/test/common/edid.c b/test/common/edid.c
-new file mode 100644
-index 00000000000..15f5eb81501
---- /dev/null
-+++ b/test/common/edid.c
-@@ -0,0 +1,87 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Tests for the EDID timing selection
-+ *
-+ * Copyright 2026 Ana Bobillo <anabobillo3@gmail.com>
-+ */
-+
-+#include <edid.h>
-+#include <fdtdec.h>
-+#include <linux/string.h>
-+#include <test/common.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+
-+/* Detailed timings for 3840x2160 and 1920x1080 at 60Hz */
-+static const u8 dtd_3840x2160[18] = {
-+	0x08, 0xe8, 0x00, 0x30, 0xf2, 0x70, 0x5a, 0x80,
-+	0xb0, 0x58, 0x8a, 0x00, 0x00, 0x00, 0x00, 0x00,
-+	0x00, 0x1e,
-+};
-+
-+static const u8 dtd_1920x1080[18] = {
-+	0x02, 0x3a, 0x80, 0x18, 0x71, 0x38, 0x2d, 0x40,
-+	0x58, 0x2c, 0x45, 0x00, 0x00, 0x00, 0x00, 0x00,
-+	0x00, 0x1e,
-+};
-+
-+static void edid_test_fill(u8 *buf)
-+{
-+	struct edid1_info *edid = (struct edid1_info *)buf;
-+
-+	memset(buf, '\0', EDID_SIZE);
-+	memcpy(edid->header, "\x0\xff\xff\xff\xff\xff\xff\x0", 8);
-+	edid->version = 1;
-+	edid->revision = 4;
-+	edid->video_input_definition = 0xa5;	/* digital, 8 bits/colour */
-+	edid->feature_support = 0x02;		/* preferred timing mode */
-+	memset(edid->standard_timings, 0x01, sizeof(edid->standard_timings));
-+	memcpy(&edid->monitor_details.timing[0], dtd_3840x2160,
-+	       sizeof(dtd_3840x2160));
-+	memcpy(&edid->monitor_details.timing[sizeof(dtd_3840x2160)],
-+	       dtd_1920x1080, sizeof(dtd_1920x1080));
-+}
-+
-+static bool edid_test_max_1920(void *priv, const struct display_timing *timing)
-+{
-+	return timing->hactive.typ <= 1920;
-+}
-+
-+static bool edid_test_none(void *priv, const struct display_timing *timing)
-+{
-+	return false;
-+}
-+
-+/* Test that a timing rejected by mode_valid is skipped, and never returned */
-+static int edid_test_timing_validate(struct unit_test_state *uts)
-+{
-+	struct display_timing timing;
-+	u8 buf[EDID_SIZE];
-+	int bpc;
-+
-+	edid_test_fill(buf);
-+
-+	ut_assertok(edid_get_timing_validate(buf, sizeof(buf), &timing, &bpc,
-+					     NULL, NULL));
-+	ut_asserteq(3840, timing.hactive.typ);
-+	ut_asserteq(2160, timing.vactive.typ);
-+	ut_asserteq(8, bpc);
-+
-+	ut_assertok(edid_get_timing_validate(buf, sizeof(buf), &timing, &bpc,
-+					     edid_test_max_1920, NULL));
-+	ut_asserteq(1920, timing.hactive.typ);
-+	ut_asserteq(1080, timing.vactive.typ);
-+
-+	/* With no valid mode, the timing passed in is left as it was */
-+	memset(&timing, '\0', sizeof(timing));
-+	timing.hactive.typ = 640;
-+	timing.vactive.typ = 480;
-+	ut_asserteq(-EINVAL, edid_get_timing_validate(buf, sizeof(buf), &timing,
-+						      &bpc, edid_test_none,
-+						      NULL));
-+	ut_asserteq(640, timing.hactive.typ);
-+	ut_asserteq(480, timing.vactive.typ);
-+
-+	return 0;
-+}
-+COMMON_TEST(edid_test_timing_validate, 0);
+--DBgA+idudkeeW1nX
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCavIC4wAKCRAr4qD1Cr/k
+CuSaAP9eAMJ5pi3u1mt9FoxaAEpnOyLlNQpmyD46RpL/efl0jQEAlxq2kZWZYdJX
+DdQx4IWUGIiP2qO34aXfLgMS9DmNiAw=
+=RUwy
+-----END PGP SIGNATURE-----
+
+--DBgA+idudkeeW1nX--
