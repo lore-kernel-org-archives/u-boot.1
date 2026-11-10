@@ -2,166 +2,112 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 998B4606A31C
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 17:31:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EE6A606A31C
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 17:59:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=c7/oy6bi;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=cpjswIKK
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=pggoa86Z;
+	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.a=rsa-sha256 header.s=key1 header.b=QU9zNlgV
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7086440850;
-	Tue, 10 Nov 2026 17:31:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0232F409E3;
+	Tue, 10 Nov 2026 17:59:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 2V3qMvlu_kw8; Tue, 10 Nov 2026 17:31:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org AE62F4086F
+ id XSXgl5jSxFN6; Tue, 10 Nov 2026 17:59:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 839C6408D1
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794331915;
-	b=kv/C2XEwR0CDjr7xfCc0VgITXdLeUHkOetMC/5hDdLiXTHxkl2wGEBaulgvwbJY9xati
-	 +DJGTHPR5pwVGAIzvM/MBXikxKi0v/gahCIs054hUo6voOsxLlA6ZO+BBs994mLoejQsB
-	 WqGGsa/DoQSm9vvXtwuth9e3GZaacYcrIgz5klnGuWjMU3wlHpL2rxzxM8gC69dicbmNv
-	 sL56vmUdq9QVaeNmAOOdpA2vlu+WY2rnhtcyFORLPnuojpvlCCwFqgwK5olKUn/PajKXu
-	 rzO6fhNkeuS98HnC2qo8MBQbRSH8x3kYj8k8ihJTYnn/bEcp8y9LGAUrJ/pVUqTziDQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794333565;
+	b=TcZo7xe7jTTBH8J2cOuc1LRFo8lrOtsR1dXsucVgWUyn/bUz8+ZHRnngplusXcbNk0+M
+	 JzXDlXCgriDjc6b7EQSdRIWci7JUV+YvjTmzNqJIduUWvZgEeZaTdKHfmSEq2mkljWnO9
+	 pGI5Uet/crpSV3t7X0xB7jr2k3wllWxkYTJsuWV/pm3KTpBguU/QzZwoFRWMp1OMEjbFn
+	 /T7Qur+u3m7kSfYE4cqUpgb/eR3ePg3l4mNjiWzY4nOyzoL6+sBPFqfXkJ6XV75Msr0A7
+	 OVcYqjWRkAYpI0kqPf/0YbWWeahXCvPC4/PlCCkmvcgW+aW2muUvQNZFjEvqzDSTSoQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794331915;
+	c=relaxed/relaxed; t=1794333565;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
-	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=pDe6HzROGWpHvUwzKIcWmlEofU/qYty3+/6KEp8r/C0=;
-	b=lrUuBUz7tENbzsGOteRzvAVkl4Dyw20sdBFEIUlBpqn/REQ1QfjC6jcStQoBT1I1bNsK
-	 nFDUZWY3mg0N+j2/3koRkty3iOqGFBB7XbpKWKkTnYW3E9YrGtw4VqgK+4fMS5kBvVDUj
-	 uR0pPjjG4sVsOrajaqy7dXgJd8/78ub7rdE0JgD0AlONcA4C+0Tk0R63WYKvE/lWY1tG0
-	 FNyQk788ddVbqUASOhyA+0LOa6aqpMA/rTKASyBkF/ktDkf3g7GAgg1MTtKrzECs/jfvK
-	 aM0SIF/VJL6DirgyJxu9irf866Q0+Ux7mvaLncuqGZ156KG1aPiBtoOgfNZGdv77zdw==
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:X-Mizu-Trace-ID:
+	 X-Migadu-Flow:MIME-Version:Date:Content-Type:
+	 Content-Transfer-Encoding:From:Message-ID:TLS-Required:Subject:To:Cc:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
+	bh=u4ZxPRieqZhZnUDLo4IygThfkJrKGiW/8r53xbrzUcI=;
+	b=aIqaZxITspFQTNSBVZ/mJKe4SIzw6SJewGOstG2i1X/4oQLARP1x+Ony4+CVwyaCk9mB
+	 X4aEd0HPloazG3JJVU0WpOTOrAzHlGy/TUgIB3TeHzdoJfu7rZP4GtRQ4WmCFmGywfTKc
+	 +ZLnLA1kC2CWckFvd03//aI74+ybE+XwppqnQMJSvQAGsNSFS5tQptv74MHu7N55D5XtR
+	 jLkQE7zZ+vBLNMlNH0ZAHz0VB0BHtynztrJB5fFh7adsGgkOK7A7xDSmQ9zvAQObuLMbV
+	 Az9XVnDpDcr4zb3+vkR96g/gLG8obc8FEOQlvUb82573FkRBa9mre+yEA0XY9Ag6vkQ==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=pass header.from=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=cpjswIKK;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794331915;
-	bh=pDe6HzROGWpHvUwzKIcWmlEofU/qYty3+/6KEp8r/C0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=c7/oy6bihT5kjNONfMwlYkjRvDTeAkG13MbzVrP25EJFvfb84xAPapBxzDHiKTZ/3
-	 yd1L/eY/7c38TR9UOwAVFFybbBNosIQGt19FtGAmlL3icWvVUggWz071lQD+UVDMyT
-	 SerfkBDnsEs7H17G27PaLl4z2ZosK2176jB74eCQxAGXAeWKT+GjGr4yMH6w9ZHlB6
-	 5IWi0E8kM/ysRnsJPxm33R6WB/vVhPR4a/C96epIitFRRfaAbOo8FvZoUWvwr4CMz9
-	 De+gSTYsmC44IPX8sl2dRsEaHadBX9zZN3eUqGJBetpQ7hWcO28kujY8rGG3NnE1Xs
-	 WOtVTurie8KZg==
+	d=lists.u-boot-project.org; s=default; t=1794333565;
+	bh=u4ZxPRieqZhZnUDLo4IygThfkJrKGiW/8r53xbrzUcI=;
+	h=Date:From:Subject:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=pggoa86Z/UgTSWO3+uzMVKMldWhkui5CubyUnkKPstcI+pancelDvZu+j4TCcieyu
+	 R6zo4EpRE8MakItsyFYsrMdmaTQz4eFJyQDHt5xE5URyqeJOs72YCjVM68InGiq1oD
+	 PjcJKg2XfMRdrl3A8al0lLhMif4AH8wz3wpMzZwU9Zg9hO5J1EavCHNkw+X1zNHct+
+	 4a8t2vVTIVqMPrSW5KyP8iQe880LJEX42gkoPcA5vlPzmz8xShakqcwUtJZNdTAVvd
+	 cYulWHdJEVorbJwj2lJ/fiebt4jCEgC04FXEn33TFIr38Me3smBGwJ9ye+46gSQPcv
+	 uswDmArkH7+5w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AE62F4086F;
-	Tue, 10 Nov 2026 17:31:55 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 8C5AD388
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:31:54 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 839C6408D1;
+	Tue, 10 Nov 2026 17:59:25 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5F76D28C
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:59:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7110E4086F
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:31:54 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 50ECB60A46
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:59:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Ncqz8yoIDqax for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 17:31:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BB64740850
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::42d"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::42d; helo=mail-wr1-x42d.google.com;
- envelope-from=andrew.goodbody@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=cpjswIKK
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id BB64740850
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:31:52 +0000 (UTC)
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-498f5fa4f70so634104f8f.0
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:31:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794331910; x=1794936710;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=pDe6HzROGWpHvUwzKIcWmlEofU/qYty3+/6KEp8r/C0=;
- b=cpjswIKKT/zCBKpdyjOEo5SV/G2mhanof/vqtSVCVm7CTEXanKvb4JhM1Rll8Gy0Lg
- +1th8CrzhkeTTZ2Y9ha0SaegMTrJULcTsvtu4OGGMGvKDROY8RObtk0eVuSS3/FkuFfs
- /jQHOtiZqNh0Y/DMkG0By04m9XGqcYeTdkX2brj0cOLrAb6nZS0yenTw2WfeRXYxDHPx
- c57IYrzZm/sqwXWTk4cu4x3PR1V+mn0CJaxd0b98bXwxNphPEKxvT31LAfxmxIx3H+fr
- hFNev1wU04dFZOeDQ6RXcqJQHbChYAhx2aQu/ZKHQ/HtPOsaAv6D3UQdihL6FCLGa2yp
- 1BJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794331910; x=1794936710;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=pDe6HzROGWpHvUwzKIcWmlEofU/qYty3+/6KEp8r/C0=;
- b=jFaQfhfsqsj5SaMAwyWixMAG2FK1PEMuUeFRVoB2cmKfF9kyeHCD6W0saQu6nnzYDF
- CLj7m3d8BZR6HGw1Odv9JsNHEgLu5gKLm0NO6pI0caPJXegHkBLGSd5pjbXuHqsSahK+
- qVX3FChRNWyRkGV/3/KJsFF8zsJx94Zop01VNZDnT92lwKpeHhLX37bLWpcdfvOYNQsZ
- OV83npzLvLrQOCk/HNQq7Kqv+DrcsDGchLiPmphO4FbZtRH+UgZUJFLb4idd6wmEUuyn
- XEMLNZ3UX09k/e3VBqN21iNAZdxEojsmBxQasLXFGO91qy0+WFfbyYMX6d1Z09HuwQ9u
- PWYw==
-X-Forwarded-Encrypted: i=1;
- AL+hErE0isrUDrEy6JpQuBZS7vBaowHi1jGq5d+Ox/L5xp4Q9017AygJrL1QAiWbg4tpdnj1qNMXp+E=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+NfZYhTgHvU5m2tHXjoy0OjeT+zGbd3MtRpgoiqFNuHhA1oyA5
- UgoR+VUpu32aomE3ditJo9BMMpkWjTVri5USvlrFjdtkXmqrFT9Yp+LqgNJe9tT/RKw=
-X-Gm-Gg: AYBFou0rqjcKCwdmJApuf0djfPtUYE2wGOJRSFv1AWiRbKChXVK6s1A7Eagw38Pm1K8
- rPgilkLvk01xzNp+8euV61LSov5XWDaJXWDuUfFYaoY89wUzg1jxGcpF+lb2aaCk3ES15y7+5Hh
- ASuI/ih9zfLQV0/VmWvROUVCDAhZaZ2BV73lRSWv3JLYKLPBzbBwDZDYKr2rgSABPkmaGCoUVEw
- 6hWoAJeH0YgoDoEjbY+41sBxV9DygVXVsujgSzDNh8Ue6pGdXsYBh49e0c8QBOQqrkppnRJvQGz
- FwO37CmOLafJL7kww5aQNF7pK+CBabgNF6HyskmnCBgCAxM2d1NZ5YB6w8c8xdgsytg6NSEm4ip
- oyiR5KBYDOtRommsGI8dm3NsvxHEvEjzTzYA0s8qwE1UUn3tSKVQK9MbAq9Ya8bAx+FmL4DKilS
- C4JSMwp4vVR8lagRh59VlJTT93avH8Dyq9h1JXxqoRda7tjOOZTw4bPzljCzLMWkm+5MGiFpORy
- owpGTjJJ6kkBCX+ymbscmvD9iqiurwNwtfglDVGEtn7TisILLXCZfh9OOMQh7DV3VZGvy6UKUK5
- 0hCuf+hr2i1seNgKjlr3kL3G1/SH0GZrOD0l2ZHcV4DP8sW5r2TlurcnxhuBFTgWKAJ54oFExx5
- ELUdLBw==
-X-Received: by 2002:a05:6000:1a86:b0:488:57ad:d5c8 with SMTP id
- ffacd0b85a97d-4982ba3297amr6405894f8f.3.1794331909987; 
- Tue, 10 Nov 2026 09:31:49 -0800 (PST)
-Received: from ?IPV6:2a0a:ef40:e16:1f01:e384:fd63:c1b:f384?
- ([2a0a:ef40:e16:1f01:e384:fd63:c1b:f384])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-499823761f5sm710123f8f.2.2026.11.10.09.31.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Nov 2026 09:31:49 -0800 (PST)
-Message-ID: <6485ce1d-2b5b-4800-9782-0a6276209fcc@linaro.org>
-Date: Tue, 10 Nov 2026 17:31:48 +0000
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id u3VJQNga8B9m for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 17:59:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 9ED1D60871
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=95.215.58.183
+X-Greylist: delayed 63 seconds by postgrey-1.37 at util1.osuosl.org;
+ Tue, 10 Nov 2026 17:59:20 UTC
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=postmarketos.org
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=postmarketos.org header.i=@postmarketos.org
+ header.a=rsa-sha256 header.s=key1 header.b=QU9zNlgV
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=95.215.58.183;
+ helo=mta1.migadu.com; envelope-from=funderscore@postmarketos.org;
+ receiver=<UNKNOWN> 
+Received: from mta1.migadu.com (out-183.mta1.migadu.com [95.215.58.183])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 9ED1D60871
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:59:20 +0000 (UTC)
+X-Envelope-To: u-boot@lists.u-boot-project.org
+DKIM-Signature: a=rsa-sha256; bh=u4ZxPRieqZhZnUDLo4IygThfkJrKGiW/8r53xbrzUcI=; 
+ c=simple/simple; d=postmarketos.org;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1794333558; v=1; x=1794938358;
+ b=QU9zNlgVD7hxiXBqo/un7i1e0jQwIsBqRgNPHQLMiABAUzsAPvm0Ja3l6JmN7sUqcnkVL9rU
+ nog+wcYrxjrHkRPN6GGYqwSpHrVpkD9QzBVuVvteph590ECXgy8av/yOawTQx8z1MKIZjTHaEq5
+ 03za70tpQeRQAFhBxDK5Y3cEPLDeVXQz5T8gogyPauGe0inAgtC3NCFAhftGlNFH1xn0FSZLR8F
+ NulOot0rlTGThchpx2VM1TtRzsqW3xnPxBBljcClMVQkFr87+aGkuYH/IpYBaeZcVXxsyfVyaDU
+ M0ycKGClZIHxqwqL2RgREXexMjxfa5igzFXRhohoI18/Q==
+X-Envelope-To: u-boot@lists.u-boot-project.org
+Received: by smtp.migadu.com with ESMTPS id e09c713606dfae68;
+ Tue, 10 Nov 2026 17:58:15 +0000
+X-Mizu-Trace-ID: e09c713606dfae68
+X-Migadu-Flow: FLOW_OUT
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/12] test: Fix test_basic file system tests
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- u-boot@lists.u-boot-project.org, Kory Maincent <kory.maincent@bootlin.com>,
- Linus Walleij <linusw@kernel.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini
- <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>,
- Alexey Charkov <alchark@flipper.net>, Francesco Valla <francesco@valla.it>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Carlo Caione <ccaione@baylibre.com>, Yao Zi <me@ziyao.cc>,
- Michal Simek <michal.simek@amd.com>
-References: <20261110-qcheck_fix-v2-0-1c76e0b68f29@linaro.org>
- <20261110-qcheck_fix-v2-12-1c76e0b68f29@linaro.org>
- <4c272bb8-5ac8-42e9-9338-fc9e13cfeca4@cherry.de>
-Content-Language: en-GB
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <4c272bb8-5ac8-42e9-9338-fc9e13cfeca4@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Date: Tue, 10 Nov 2026 17:58:11 +0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+From: "Ferass El Hafidi" <funderscore@postmarketos.org>
+Message-ID: <f483d695f11cae36032782e8eac49e59457135f3@postmarketos.org>
+TLS-Required: No
+Subject: Re: [RFH] Writing a project Code of Conduct
+To: trini@konsulko.com
+Cc: xypron.glpk@gmx.de, mkorpershoek@kernel.org,
+ u-boot@lists.u-boot-project.org
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -171,95 +117,128 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+Reply-To: b415d946-eda6-4ac8-a8ec-4b00a379effb@gmx.de
+X-Spam-Status: No, score=-3.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=no autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 10/11/2026 15:39, Quentin Schulz wrote:
-> Hi Andrew,
-> 
-> On 11/10/26 1:24 PM, Andrew Goodbody wrote:
->> Ensure that /sbin is on the path so that distributions that do not have
->> it will still be able to successfully run these tests that need fsck.
->> Add a forced clean of the newly created file system to cope with the
->> fact that there is an orphaned file on ext4 that will cause the
->> integrity test to fail later on if not removed now.
->>
-> 
-> question: are those really related?
-> 
-> It feels to me that those should be fixed in separate commits?
+Hi,
 
-OK.
+On Tue, 10 Nov 2026 16:12:08 +0100, Heinrich Schuchardt wrote:
+>On 11/10/26 11:32, Mattijs Korpershoek wrote:
+>> Hi Tom,
+>>=20
+>>=20On Tue, Nov 03, 2026 at 11:20, Tom Rini <trini@konsulko.com> wrote:
+>>=20
+>>>=20Hey all,
+>>>
+>>> Getting back on track with project administrative tasks, one thing I
+>>> have talked about the project needing for some time is a code of
+>>> conduct. In my mind, the best starting point here is, are there code =
+of
+>>> conducts in other projects that people use and they feel would be a g=
+ood
+>>> example for us to adopt? Thanks!
+>>=20
+>>=20Have you considered the Contributor Covenant Code of Conduct?
+>> That's the one Linux uses, see:
+>> https://docs.kernel.org/process/code-of-conduct.html
+>>=20
+>>>
+>>>=20--=20
+>>>=20Tom
+>
+>https://policies.python.org/python.org/code-of-conduct/
+>is another reasonable code of conduct.
+>
+>Best regards
+>
+>Heinrich
 
->> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
->> ---
->>   test/py/tests/fs_helper.py              | 4 ++++
->>   test/py/tests/test_fs/fstest_helpers.py | 5 +++++
->>   2 files changed, 9 insertions(+)
->>
->> diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
->> index e3824b2c1fd..48b047aeefd 100644
->> --- a/test/py/tests/fs_helper.py
->> +++ b/test/py/tests/fs_helper.py
->> @@ -250,6 +250,10 @@ def mk_fs(config, fs_type, size, prefix, 
->> src_dir=None, fs_img=None, quiet=False)
->>                                         shell=True).decode()
->>               if 'metadata_csum' in sb_content:
->>                   check_call(f'tune2fs -O ^metadata_csum {fs_img}', 
->> shell=True)
->> +            # Cannot use check_call here as it will return an exit 
->> code of 1
->> +            # as it modifies the file system. The -f is needed as 
->> although the
->> +            # fs is marked clean, it is not really.
->> +            call(f'fsck.ext4 -f -y {fs_img}', shell=True)
-> 
-> nitpick: just use an array to avoid shell=True
-> 
-> Considering the rest of the file still uses shell=True with a single 
-> string, I guess it's fine for now but we should really think about 
-> getting rid of those.
-> 
->>           elif fs_lnxtype == 'vfat' and src_dir:
->>               flags = f"-smpQ{'' if quiet else 'v'}"
->>               check_call(f'mcopy -i {fs_img} {flags} {src_dir}/* ::/',
->> diff --git a/test/py/tests/test_fs/fstest_helpers.py b/test/py/tests/ 
->> test_fs/fstest_helpers.py
->> index d25326ee993..6164eca476a 100644
->> --- a/test/py/tests/test_fs/fstest_helpers.py
->> +++ b/test/py/tests/test_fs/fstest_helpers.py
->> @@ -3,9 +3,14 @@
->>   # Author: JJ Hiblot <jjhiblot@ti.com>
->>   #
->> +import os
->>   from subprocess import check_call, CalledProcessError
->>   def assert_fs_integrity(fs_type, fs_img):
->> +    # Some distributions do not add /sbin to the default PATH, where 
->> fsck lives
->> +    if '/sbin' not in os.environ["PATH"].split(os.pathsep):
->> +        os.environ["PATH"] += os.pathsep + '/sbin'
->> +
-> 
-> issue: modifying the environment like this is a big no-no.
+Yes I think either the Contributor Covenant or the Python Code of Conduct
+should do here. What is good about both of them is that they both give ex=
+amples
+of appropriate and inappropriate behavior, while not being exhaustive and
+leaving a bit of room for the people responsible to enforce it...
 
-I copied the code from fs_helper.py but OK.
+...speaking of that:
+Having a CoC is definitely a step in the right direction and I applaud th=
+e
+effort towards making that happen. However, I think what should also be t=
+alked
+about at the same time is its enforcement. Of course, it is easy to just =
+"slap"
+a code of conduct to the project, but actually enforcing it, that is easi=
+er said
+than done.
 
-> Modifying the environment like this should really be last resort as it 
-> breaks things in various sneaky and random ways.
-> 
-> check_call() takes an env parameter, so copy os.environ and edit the 
-> PATH key, then pass this copy as env parameter to all check_call calls 
-> in this function.
+Ideally there should be a "CoC team" that would have the responsibility
+of dealing with conflicts between community members. That team does not
+necessarily have to be comprised of people from the PLC (although having =
+at
+least 1 or 2 people with access to infrastructure would be helpful, shoul=
+d
+there be a need to, for example, block an individual).
 
-Ack.
+It also does not have to be very big (honestly depends on the size of the=
+ whole
+community and how many CoC cases come up, but 3-5 people is already a goo=
+d start)
+I highly recommend seeking CoC training for these team members in order t=
+o be
+better prepared to handle cases. It's not usually free, but it is worth i=
+t IMO.
+I also think it would be preferred to have people from diverse cultural b=
+ackgrounds
+in that team.
+These people would have their contact info public, so people can privatel=
+y
+contact them in case of issues. (and I've seen in many communities that t=
+hey
+have a coc@ email alias that goes to all CoC members, that is also a good=
+ thing
+to have, but people should also be able to contact a member privately)
 
-Thanks,
-Andrew
+Also another thing that is actually mentioned in both CoCs (kernel/Python=
+) is
+confidentiality. This forms some kind of trust between reporters and the =
+team,
+so they know they won't be exposed (and in turn potentially harassed). So=
+rry if
+that one seems obvious, but I think it's quite important to highlight tha=
+t.
+Of course, in the interest of being somewhat transparent, the team can pu=
+blish
+so-called "transparency reports" where the team can talk about each indiv=
+idual
+case while not going into too much detail to preserve reporter anonymity
+(see [1] for an example - disclaimer: I am a Nura/pmOS team member).
 
-> Cheers,
-> Quentin
+Finally, the space in which the code of conduct applies should be made cl=
+ear.
+That is mentioned in the PSF CoC ("Scope" [2]), I think this question is =
+not all that
+hard to answer. I would guess: (1) u-boot-project ML, (2) #u-boot IRC cha=
+nnel,
+(3) u-boot custodian spaces? I don't feel strongly about that, you should=
+ define
+it however it makes sense. But it really helps so people know where the C=
+oC
+applies and where it doesn't. Of course, it doesn't prevent the team from
+acting on seriously inappropriate behavior outside the community from a
+community member.
 
+So these are my thoughts on the whole thing. It does take quite a bit of
+organisation and work. It is worth it? IMO absolutely :)
+
+Thanks for reading through all this!
+
+[1]: https://docs.nura.eco/policies-and-processes/community/code-of-condu=
+ct/transparency-reports.html
+[2]: https://policies.python.org/python.org/code-of-conduct/#scope
+
+Best regards,
+Ferass
