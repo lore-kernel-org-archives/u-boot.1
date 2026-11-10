@@ -2,113 +2,124 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76FEC606A33E
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 17:20:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8975606A336
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 17:30:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=mvdbf08M
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=l4et47mM;
+	dkim=pass (2048-bit key, unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=AXrf3kYO
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4BA5140851;
-	Tue, 10 Nov 2026 17:20:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7F8234088F;
+	Tue, 10 Nov 2026 17:30:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LsWWoMlIAxkr; Tue, 10 Nov 2026 17:20:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7AB0D40820
+ id H5EhkGI_o3WU; Tue, 10 Nov 2026 17:30:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9637440874
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794331236;
-	b=T6LivDBLXd3Io5geg8NgXOWdLe2CvFqTSSXeGptOWL68PGcmANEeaq7unT7puKmtNLDW
-	 bWGOQ/NHoob44vPPDVXG55sG82znKXXOyoTgcXplEuYc0gIIBJl7ClpQ5OvJrWK4RODMl
-	 K7/rMnXiOSWPTiC/7WEuEHIYLCBt/hJOYN4GV1aEk3Q5Cv0jViuHLARlMWYCH7hIaalkc
-	 Vs0JIOJ6JLeg5iJdhRUqWDIPV6mTeg6FcNOaD4NuwoJcWrC3t2QN9+8EWKYjLkZ3y9aAq
-	 QvL+Fu5RRXHmZ5q+V0igj2FdY7gahnAZ8wOI1JEGQfosSRfhM1e/jiSritQA0twFZHw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794331801;
+	b=CE0ugK9c/96B6h9HehL3a5SMS5jJB6rjrIP7pgMCQJBKpGx9CtZFUeQqLg1fLA05Eb+9
+	 ffiuxNHWzAB4Bng4Wz/Gs9IUOxZcu5CUFr6kA2livFHBi4Wr/KHvQdyas43WQvV+Hpo8U
+	 zj5xXo9YfEcOpE9lTbbUhR5x51qlm9LfW9sooJwYWIN9GCziEG+1jFi5axWIzo15kBbMa
+	 sGiWFVwrmAwYwRd+Iz0KL9V7o8KEbbryWVeGC/DfwVUk5xvu/PV+hrlItVFat8+8bghAB
+	 nLKfqX9Blcha7KxgUH+ewT5V/OK2fwYmz0SftFsTsgc7Qgvy7ESXef8uLrjfBQp7TBQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794331236;
+	c=relaxed/relaxed; t=1794331801;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received:Received:From:
-	 To:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
-	 X-CM-SenderInfo:X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
+	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
+	 X-Report-Abuse:X-Report-Abuse-To:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=8JQDbrPUoISj4/15CHNCASgl9iWcOLhwgGRsOXEsEo4=;
-	b=YSN8s9BKnU5kLICAsFw+0xq/c1w1vkSO5vUUfcwYBIn4yW1LlrCPrkdUfHCrcXt4wgF4
-	 Th20VMbI8aMdfnVk9zquvGrsZlEEfGMNyPgPsIMB7ki23hSgRKE16NSekkktYYJdCu5pJ
-	 jP3+cB7taQIV1klO8SVjq0HZtbTpSYtqgq++R8905ySIvSuObXCXCJpm8kF8oo+G6RCPS
-	 0CQfZgQo9cCv36bMQVarBJZPRmEgq5cPigz+01DIX9K4ksdpLhXLoBHPLdC5p1rA31Ji5
-	 ycARp4qzaA0z/Tu6PZ0Ldi83vSs+Xo0xgTZFODpDg0jd0dzmCVFd5v3oZ2NNyAiEp+Q==
+	bh=WFuR/8gn8XbxQX4a1czZOhGq0bZARp0pgmN7LzKKtmQ=;
+	b=Ch0x2lV+i9I/bTLBOYzf1zs0XXuL/3fNuZCpqZN6IVjKKGHbfrYRWNB9wmORihPOAdPy
+	 tARj96YGNN/kTT5NEzBWNeCzeS7jJGyLcfmc3PPwlLufeeUQIcJk2bdeyWnaHzKFZMo2d
+	 BcDnXWdZHTm6InDWpVozNEWWesULkQh2pbjWO2giWGBFn7GGKtad0IaINiflFZEXOAUP/
+	 MEnAUB73y3cElxS031kmOoe3U+9Bhk2tEB7SgfkRkupOqhXuZR2eAiP1sQLhQnMD7UxEV
+	 eFKk7FN5GPBXMCtdnhM2htENbDFHPoixgks9yIovn9AqFuZJcH/i7JcoNfNKVL3YxTA==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794331236;
-	bh=8JQDbrPUoISj4/15CHNCASgl9iWcOLhwgGRsOXEsEo4=;
-	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=mvdbf08MmL3rG3UO3ImotdS6cnMcqPZC1H8mcaR6CXmEFXEQ/9veNyTncmGaCx3RA
-	 dtWuPrsfYhxQqCK7KrEOmPZrKwe20j7n84r6UsP0F/YFM8DJBscj5DXFGuGzeNVh5p
-	 Rc4Q/T3SYB86ArmyJU8KSCZyJrMt8O738VMNKYIgABp0o49QkuBBCsqeFWXZoYAlQz
-	 ssrJPV2tqtB2mNAXrATPAJodnepBtLU7l3MLDL0bFFk3OMziQDQ0HMR7hJ283CuT75
-	 gR2gg3qti3OPMWRQ+g02Ixru0br/iMJ/xBkUmyNbZ/JP6cqu6ntFTjF6ipI4USqsCz
-	 OJcGGawfySrGw==
+	d=lists.u-boot-project.org; s=default; t=1794331801;
+	bh=WFuR/8gn8XbxQX4a1czZOhGq0bZARp0pgmN7LzKKtmQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=l4et47mMpEP27BLxfq6WAhQ+Mmy8UKPd8Uw4NAso6WQTXbVFIdylrdoRWTGe79ZcF
+	 Y41NkHeU6KQDDHMg/mR7+w201uTDxU9Ua6DeGqyE+6HOhYy66a9JESmtTv2NVjjjtD
+	 lSZ9FUcfH8V2thcb3jnzuPEZh/QolYOHbWZO7Kb01CEhZ2Psn/ZR7geS1zrtKf/CFl
+	 QvsMNzsDlyJdsfravVDaGNFPl1Q7edl3LeP/lHm++lyX6LpB7J00W41z6/Dqu/HxDc
+	 TL74tM57b4caRC6Kw8VBIgXHARXccIeik28lEGIFZk4flvcYmEe0S3Eiv5D6dU1HWG
+	 tWtPBa8si4zVw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7AB0D40820;
-	Tue, 10 Nov 2026 17:20:36 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 0F9B1388
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 16:54:49 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9637440874;
+	Tue, 10 Nov 2026 17:30:01 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id E5621388
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:29:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C655681304
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 16:54:48 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id E206D810F0
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:29:59 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id z-_jyOKZGMo7 for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 16:54:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 1EB8C812CA
+ id iVs7B3vFE426 for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 17:29:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2E7AD810DD
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=202.118.224.62
-X-Greylist: delayed 148 seconds by postgrey-1.37 at util1.osuosl.org;
- Tue, 10 Nov 2026 16:54:37 UTC
-Authentication-Results: smtp1.osuosl.org; dmarc=none (p=none dis=none)
- header.from=alu.hit.edu.cn
-Authentication-Results: smtp1.osuosl.org; spf=pass smtp.mailfrom=alu.hit.edu.cn
-Received: from mail.hit.edu.cn (mail.hit.edu.cn [202.118.224.62])
- by smtp1.osuosl.org (Postfix) with ESMTP id 1EB8C812CA
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 16:54:36 +0000 (UTC)
-Received: from BRN-HXXB.. (unknown [219.223.232.242])
- by mail-appserver05 (Coremail) with UTF8SMTPSA id
- QUWgCgAHUbeyS_NqSgMZAA--.58604S4; 
- Wed, 11 Nov 2026 00:52:03 +0800 (CST)
-From: Xuechao Han <220110626hanxuechao@alu.hit.edu.cn>
-To: 220110626hanxuechao@alu.hit.edu.cn,
-	u-boot@lists.u-boot-project.org
-Subject: [PATCH] board: rockchip: Add LCKFB TaishanPi 3M
-Date: Wed, 11 Nov 2026 00:52:02 +0800
-Message-ID: <20261110165202.150810-1-220110626hanxuechao@alu.hit.edu.cn>
-X-Mailer: git-send-email 2.47.3
+ arc=none smtp.remote-ip=149.28.215.223
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=149.28.215.223;
+ helo=smtp.forwardemail.net;
+ envelope-from=srs0=7b12=ja=kwiboo.se=jonas@fe-bounces.kwiboo.se;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
+ header.s=fe-e1b5cab7be header.b=AXrf3kYO
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2E7AD810DD
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:29:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From:
+ Content-Language: References: Cc: To: Subject: MIME-Version: Date:
+ Message-ID; q=dns/txt; s=fe-e1b5cab7be; t=1794331796;
+ bh=WFuR/8gn8XbxQX4a1czZOhGq0bZARp0pgmN7LzKKtmQ=;
+ b=AXrf3kYOS0logP9gyYDwEjD3mDHfaQIbgz4BDnlnAwYOhlGkZuj/vUeMwgC809lptBk2cF3hX
+ ae3/PUZNpAkAl4P/dYDXvBa9ROP0MDOYBpUQ6JtpCO3Xcy6hI5TGUvQ6v2qePc7N+3ogc6ft9jI
+ FHfcbNnwus0lU1skIPvfBMG/GpHQO5nY1ArzCZNygB1xwQjaywuEvTZ7JDTuVRjZyZglnRkpCCr
+ twkSPItV6Yik/yD0ZQNBlH7ZnJomjqJ0p0836kFVE+HqmCVckhG0sGd0nnBOov3ElAeCiV/X/vp
+ sGBsh+UgZE2cuHVtl/oi+GE233RuP3sXvbGzSFATxjxA==
+X-Forward-Email-ID: 6af3548b1cae2d46f43fb4ed
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.19.18
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <672d8b9e-079e-4705-bbb3-e26a3983195f@kwiboo.se>
+Date: Tue, 10 Nov 2026 18:29:43 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: QUWgCgAHUbeyS_NqSgMZAA--.58604S4
-X-Coremail-Antispam: 1UD129KBjvJXoW3Xw43Kw45trW5Gr45ZF4xWFg_yoW7trW3pr
- n2yFWftFs7Wr17JrZxZFyDGr9YvF4kurWUGr47Xr1UJr95Gw43Grn0vrnrC347XF1DJr48
- ZF93KFW3Ars8A3JanT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUva14x267AKxVWUJVW8JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r1j
- 6r4UM28EF7xvwVC2z280aVAFwI0_Jr0_Gr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r1j6r
- 4UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
- jxv20xvE14v26r126r1DMcIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr
- 1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkF7I0En4kS14v26r12
- 6r1DMxkIecxEwVAFwVWUMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI
- 8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AK
- xVWUXVWUAwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI
- 8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280
- aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyT
- uYvjTREsjjDUUUU
-X-CM-SenderInfo: yssqiiaqwslx5dq03vpfkd0qhdoxhxllwovvfxof0/
-X-Mailman-Approved-At: Tue, 10 Nov 2026 17:20:35 +0000
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] clk: rockchip: rk356x: Set twice the SD/SDIO card clock
+To: "iav@iav.lv" <iav@iav.lv>
+Cc: Quentin Schulz <u-boot@0leil.net>, Kever Yang
+ <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@nabladev.com>, Tom Rini <trini@konsulko.com>,
+ Elaine Zhang <zhangqing@rock-chips.com>,
+ "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
+References: <20261110-rk3568-sdmmc-clk-v1-1-482eeb42f571@iav.lv>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20261110-rk3568-sdmmc-clk-v1-1-482eeb42f571@iav.lv>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -118,179 +129,139 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,FROM_STARTS_WITH_NUMS,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add support for the LCKFB TaishanPi 3M, an RK3576 based board.
+Hi Igor,
 
-The board device tree describes the microSD card detect pin as a plain
-GPIO (sdmmc0_det_l) for its cd-gpios property. dw_mmc does not use
-cd-gpios, so the pad stays in GPIO mode and switching the bus to 4-bit
-high speed fails with:
+On 11/10/2026 5:30 AM, Igor Velkov via B4 Relay wrote:
+> From: Igor Velkov <iav@iav.lv>
+> 
+> The dw_mmc controllers divide their input clock by 2, but
+> rk3568_sdmmc_set_clk() selects a parent equal to the requested card
+> clock, so the card runs at half of it: 25 MHz instead of 50 MHz in high
+> speed mode. The RK3399 and RK3328 clock drivers already set twice the
+> rate for their dw_mmc controllers.
 
-  CMD_SEND:6
-    ARG                      0x80fffff1
-    RET                      -110
-  unable to select a mode
-  mmc_init: -524
+This 2x clock rate should not be handled in the clock drivers, it should
+similar to Linux be handled in the rockchip dw_mmc driver. The Linux driver
+seem to use RK3288_CLKGEN_DIV (2) to request the 2x rate, something like:
 
-Use the sdmmc0_det pinmux in the U-Boot device tree, like other Rockchip
-boards do, so the card detect signal reaches the SDMMC controller.
+	cclkin = ios->clock * RK3288_CLKGEN_DIV;
 
-Signed-off-by: Xuechao Han <220110626hanxuechao@alu.hit.edu.cn>
+	ret = clk_set_rate(host->ciu_clk, cclkin);
 
-Cc: Kever Yang <kever.yang@rock-chips.com>
-Cc: Quentin Schulz <u-boot@0leil.net>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/dts/rk3576-lckfb-tspi-3m-u-boot.dtsi | 28 ++++++++
- arch/arm/mach-rockchip/rk3576/MAINTAINERS     |  6 ++
- configs/lckfb-tspi-3m-rk3576_defconfig        | 65 +++++++++++++++++++
- doc/board/rockchip/rockchip.rst               |  1 +
- 4 files changed, 100 insertions(+)
- create mode 100644 arch/arm/dts/rk3576-lckfb-tspi-3m-u-boot.dtsi
- create mode 100644 configs/lckfb-tspi-3m-rk3576_defconfig
+Please instead fix the U-Boot rockchip dw_mmc driver to do something similar
+and move current 2x handling from rk3399 and rk3328 clock drivers.
 
-diff --git a/arch/arm/dts/rk3576-lckfb-tspi-3m-u-boot.dtsi b/arch/arm/dts/rk3576-lckfb-tspi-3m-u-boot.dtsi
-new file mode 100644
-index 00000000000..412c92d357c
---- /dev/null
-+++ b/arch/arm/dts/rk3576-lckfb-tspi-3m-u-boot.dtsi
-@@ -0,0 +1,28 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2026 FragrantOrchid <fragrantorchid@foxmail.com>
-+ *
-+ * U-Boot specific device tree changes for the LCKFB TaishanPi 3M (RK3576).
-+ */
-+
-+#include "rk3576-u-boot.dtsi"
-+
-+/*
-+ * Use sdmmc0_det (SDMMC0_DETN) instead of sdmmc0_det_l, which the board device
-+ * tree selects as a plain GPIO for its cd-gpios.  dw_mmc does not read
-+ * cd-gpios, so the pad stays in GPIO mode and the switch to 4-bit high speed
-+ * mode fails; both entries are GPIO0_A7 with the same pull-up and only the mux
-+ * value differs:
-+ *
-+ *	CMD_SEND:6
-+ *		ARG                      0x80fffff1
-+ *		RET                      -110
-+ *	unable to select a mode
-+ *	mmc_init: -524
-+ *
-+ * 1-bit/25 MHz still works, so the slot looks alive until the first wide bus
-+ * data transfer.
-+ */
-+&sdmmc {
-+	pinctrl-0 = <&sdmmc0_clk &sdmmc0_cmd &sdmmc0_det &sdmmc0_bus4>;
-+};
-diff --git a/arch/arm/mach-rockchip/rk3576/MAINTAINERS b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
-index baae63fc7b0..158fc1421b4 100644
---- a/arch/arm/mach-rockchip/rk3576/MAINTAINERS
-+++ b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
-@@ -4,6 +4,12 @@ S:	Maintained
- F:	arch/arm/dts/rk3576-generic*
- F:	configs/generic-rk3576_defconfig
- 
-+LCKFB-TSPI-3M-RK3576
-+M:	Xuechao Han <220110626hanxuechao@alu.hit.edu.cn>
-+S:	Maintained
-+N:	rk3576-lckfb-tspi-3m
-+F:	configs/lckfb-tspi-3m-rk3576_defconfig
-+
- NANOPI-M5-RK3576
- M:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
-diff --git a/configs/lckfb-tspi-3m-rk3576_defconfig b/configs/lckfb-tspi-3m-rk3576_defconfig
-new file mode 100644
-index 00000000000..3b6b045eca6
---- /dev/null
-+++ b/configs/lckfb-tspi-3m-rk3576_defconfig
-@@ -0,0 +1,65 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-lckfb-tspi-3m"
-+CONFIG_ROCKCHIP_RK3576=y
-+CONFIG_SYS_LOAD_ADDR=0x40c00800
-+CONFIG_DEBUG_UART_BASE=0x2AD40000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_DEBUG_UART=y
-+CONFIG_BOOTCOMMAND="setenv bootmeths script; setenv boot_targets mmc0 mmc1; bootflow scan -lb"
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3576-lckfb-tspi-3m.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_SPL_MAX_SIZE=0x40000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_DM_RESET=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MISC=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_RNG=y
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_BUTTON=y
-+CONFIG_BUTTON_ADC=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_PHY_MAXIO=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_PHY_ROCKCHIP_USBDP=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_SCSI=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SYSRESET_PSCI=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index e22c2d6c575..832c9043a14 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -150,6 +150,7 @@ List of mainline supported Rockchip boards:
-      - FriendlyElec NanoPi M5 (nanopi-m5-rk3576)
-      - FriendlyElec NanoPi R76S (nanopi-r76s-rk3576)
-      - Generic RK3576 (generic-rk3576)
-+     - LCKFB TaishanPi 3M (lckfb-tspi-3m-rk3576)
-      - Luckfox Omni3576 (omni3576-rk3576)
-      - Radxa ROCK 4D (rock-4d-rk3576)
- 
--- 
-2.47.3
+We should expect the clock drivers to report correct rate for a clock and
+not use it to workaround quirks in device drivers.
+
+Regards,
+Jonas
+
+> 
+> Select the fastest parent that does not exceed twice the requested
+> rate, or the slowest one, and report half of the parent rate.
+> 
+> On ODROID-M1 with a SanDisk 128 GB card in high speed mode, reading
+> 512 MiB with mmc read takes 22 s instead of 44 s.
+> 
+> Fixes: 4a262feba3a5 ("rockchip: rk3568: add clock driver")
+> Signed-off-by: Igor Velkov <iav@iav.lv>
+> ---
+> Tested on ODROID-M1 with this change on v2026.07: CLKSEL_CON(30) selects
+> the 100 MHz parent for a 50 MHz card clock. The CRC32 of a 512 MiB block
+> read with mmc read is the same at 25 and 50 MHz, and the CRC32 of another
+> block is the same as computed in Linux. With the SPL erased from SPI, SPL
+> and U-Boot load from the SD card, also after two resets with sysrq-b.
+> ---
+>  drivers/clk/rockchip/clk_rk3568.c | 43 +++++++++++++++------------------------
+>  1 file changed, 16 insertions(+), 27 deletions(-)
+> 
+> diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
+> index 181917cf92a..06d7d4741c6 100644
+> --- a/drivers/clk/rockchip/clk_rk3568.c
+> +++ b/drivers/clk/rockchip/clk_rk3568.c
+> @@ -1426,19 +1426,20 @@ static ulong rk3568_sdmmc_get_clk(struct rk3568_clk_priv *priv, ulong clk_id)
+>  		return -ENOENT;
+>  	}
+>  
+> +	/* The card clock is half of the parent: dw_mmc divides it by 2 */
+>  	switch (sel) {
+>  	case CLK_SDMMC_SEL_24M:
+> -		return OSC_HZ;
+> +		return OSC_HZ / 2;
+>  	case CLK_SDMMC_SEL_400M:
+> -		return 400 * MHz;
+> +		return 400 * MHz / 2;
+>  	case CLK_SDMMC_SEL_300M:
+> -		return 300 * MHz;
+> +		return 300 * MHz / 2;
+>  	case CLK_SDMMC_SEL_100M:
+> -		return 100 * MHz;
+> +		return 100 * MHz / 2;
+>  	case CLK_SDMMC_SEL_50M:
+> -		return 50 * MHz;
+> +		return 50 * MHz / 2;
+>  	case CLK_SDMMC_SEL_750K:
+> -		return 750 * KHz;
+> +		return 750 * KHz / 2;
+>  	default:
+>  		return -ENOENT;
+>  	}
+> @@ -1448,34 +1449,22 @@ static ulong rk3568_sdmmc_set_clk(struct rk3568_clk_priv *priv,
+>  				  ulong clk_id, ulong rate)
+>  {
+>  	struct rk3568_cru *cru = priv->cru;
+> +	ulong parent = rate * 2;
+>  	int src_clk;
+>  
+> -	switch (rate) {
+> -	case OSC_HZ:
+> -	case 26 * MHz:
+> -	case 25 * MHz:
+> -		src_clk = CLK_SDMMC_SEL_24M;
+> -		break;
+> -	case 400 * MHz:
+> +	/* Fastest parent not above twice the card clock, or the slowest one */
+> +	if (parent >= 400 * MHz)
+>  		src_clk = CLK_SDMMC_SEL_400M;
+> -		break;
+> -	case 300 * MHz:
+> +	else if (parent >= 300 * MHz)
+>  		src_clk = CLK_SDMMC_SEL_300M;
+> -		break;
+> -	case 100 * MHz:
+> +	else if (parent >= 100 * MHz)
+>  		src_clk = CLK_SDMMC_SEL_100M;
+> -		break;
+> -	case 52 * MHz:
+> -	case 50 * MHz:
+> +	else if (parent >= 50 * MHz)
+>  		src_clk = CLK_SDMMC_SEL_50M;
+> -		break;
+> -	case 750 * KHz:
+> -	case 400 * KHz:
+> +	else if (parent >= OSC_HZ)
+> +		src_clk = CLK_SDMMC_SEL_24M;
+> +	else
+>  		src_clk = CLK_SDMMC_SEL_750K;
+> -		break;
+> -	default:
+> -		return -ENOENT;
+> -	}
+>  
+>  	switch (clk_id) {
+>  	case HCLK_SDMMC0:
+> 
+> ---
+> base-commit: ecdcf9e365df6249a57cd8cc946e7026804ff4ae
+> change-id: 20261110-rk3568-sdmmc-clk-95bccae72277
+> 
+> Best regards,
 
