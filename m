@@ -2,146 +2,120 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C29CF606A31C
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 02:13:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9163E606A32E
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 03:24:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=CD42E/Wj;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=y/O419J5
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=OOAwbnqc;
+	dkim=pass (1024-bit key, unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.a=rsa-sha256 header.s=default header.b=eqLZ41fb
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 842B080E03;
-	Tue, 10 Nov 2026 02:13:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C22F780FDE;
+	Tue, 10 Nov 2026 03:24:24 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id n8i-lUUnKIJ8; Tue, 10 Nov 2026 02:13:09 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C0A0A80D84
+ id LIm8J8u1v47e; Tue, 10 Nov 2026 03:24:23 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 48C9F80F8C
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794276789;
-	b=C7nlvybCF/jIWsnPRr2UaQLHCSFdaU4PyiinmcpZm9TXyDjhpHEeOwTvk7JM7UHLYm4z
-	 RtqU1vB+/BdeuAkz4oyfcOv6lVsu4aqjby0AX8ZiY6HsEwqwMf4mCc739qObG62ExWvlc
-	 NMf4xveskWnFMAMuN49dtSruyQHHNYF6353U9GZSIHEtT7D4i/djuu6Gqwgfle7wtpz0V
-	 yOTB7Dx0KMuhxRHWP9Nzdp4xoYRglUTZw2oEDKBqHKtRw/HOMQp/6ODxlMpOdtjZ34RD5
-	 DaKi1MbCRd7gCMEEuAoy1XFT/d2yJ8Kzw3VaHF/2rkTqIqSV/o2m3UDGgv/AtIkIkBA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794281063;
+	b=W5XQj/cau9trVQPBHMcSNSJJubNm740mhBewYfXwEC6skSmZkIo5zKGPB3sYNqrXbFra
+	 Zx8Y2CQsO0tu0weWWFiC6DfPqTM/GlUeufdCgy6T+r12Wdx3mInnSR2EJ31GIXj3wQS9W
+	 mTf+I4Ke+MLCTWVzdyM013RGoLGnJlTFHZSLcZoVrrvU0G8QlZQFArVEv86rQw+Vlum3y
+	 H/kxxemUvglDEKZgeh2+TbrCyijJEp4CNEIzLJcwNp9pBpi1tBZWBDu1n/62dSuwGFx/R
+	 wCEITUCvWv+7S+4A3J55eRQNJML8/EKvf8aYRjuVwZ6stAXdtIFVnnbCS/hAVk4dlPw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794276789;
+	c=relaxed/relaxed; t=1794281063;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-Mailman-Approved-At:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=Vk7OBSiauM7TxGUYfMU5+DHMBJD16dhLUgcsd1daLw8=;
-	b=sxRyJb95vqsJ9uWMr5/wbP1g/1DnNJHrtj6rnnIAvPG233bNU/nsJB2Ho8wJxAPlpR7p
-	 QwsyX4F5eJUvOwO3ndbSEhvdqyTrecvTDkuP/nmgUYkhxVQkci2iEQmsCTos0epc5M/6g
-	 PiK0xBMnbPuOXSZLERfiA7m7+sHyN9nevODl7PUvHxtKKTJt24oVlRtz+Majr9U+9nJby
-	 S3PZBeIybpYmEHj5hr14kullhr5zc3kyQ/jv7eLN9WVhTiUui9X1M65Gkzfn/rTEUtXim
-	 XdOR/UZUYCx1y+5Uz+WuULhrjW1vo3WDVdvIOAhSFrgKkmIUxc+Xyu9s93aIgq/ry2A==
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 Received:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+	 References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 X-HM-Tid:X-HM-MType:X-HM-Spam-Status:DKIM-Signature:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=UVvn26vtISqYMd6AmpvUpixoikrDaujXnmqLNDk6m44=;
+	b=oa3Ws+iVUnfPXeCybv52m0O6CTQj8VbCjMRAfHVeXm0uOlvSJiX+nmIemEAkZfpvaxfv
+	 36ngJc68NEZzNfqBRb7O94XuGBoZ0aeUPj5LXvoSEZrYi9xkhE7GbAKGfkGiOIeUiei6N
+	 tUFtmtKj1p4Pya3oSCvcEoQGgrgeCD4f3hr4b04wbtUrbTt+eTs4w6Pe5VjFBXMJYbMyq
+	 FxfPD2FB1EWJ8Dl9kGAkuZtakX23MBAdXtfm4NP61Utwb+PWGW6Xi6PGlSxJJXdqUdw75
+	 0e/VlQJGybLBwfr2ZdvBcW59OSLQLojZEkGqh+E+DY63KWlzMf01qLNpfOgy48hSVvQ==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="y/O419J5";
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794276788;
-	bh=Vk7OBSiauM7TxGUYfMU5+DHMBJD16dhLUgcsd1daLw8=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=CD42E/WjRxLZHMHSB4WQPhr0uwfU4w5cNDhgjihiko7SS/ITg5WjJdLSN9cZryebp
-	 d2bciWo4MwFyzZ3BTmjqMBdYZ/XFTexWZRx02HegRuWfZ6LPdk2NUAS3CQr7R6uOh3
-	 B+xFx5iPrPG5p2MZYY9cYAdHFEWTyUmIOV+jQlUdxUYT7Gv8Ek/QBepAialOCW5VVg
-	 +MGzUbycwZrqplPVKDXceIgeGJiO5/3LdxerkfYh5RFtNARo5CfJSKfr5so90sZU1f
-	 n8Nl6GOXqnpfKUYcc3fmVEytAz033NBNwACYCznZxCm/xn3GjFr2D19+/xLumI67jG
-	 blskU2KzIY+4Q==
+	d=lists.u-boot-project.org; s=default; t=1794281063;
+	bh=UVvn26vtISqYMd6AmpvUpixoikrDaujXnmqLNDk6m44=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=OOAwbnqcq+w1WxlFyeonTNv+DDAiffHJW7jDvSuIlWYMkwxgQZ9kdRsBvIT4GjlT0
+	 lynzCfTmHwBQ4RL3Vym0+qifPGPuF+D3H8mMw4NfAjXz1N/Mf2B4vVqL3hCPyXLQNi
+	 SgmLhxcf03hGkuPj7Ra3GJ4cilDT6tE0I00l9bf+glZvy3on2EtZZg5vWUMaqdaIqN
+	 c4XbpNI/XZruwzDBCGpujn0ESpZM/oqBBLry7jdKkxq9ZxcdSNEjVXHBeyce3zNPb/
+	 bYf1dl3SjPmOpyHSjPakqwXB379RUyyxC0evFDbSt5vlkSplKTJTLo3kQ8l3TtAQrQ
+	 ipyYdyr1WuGgw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C0A0A80D84;
-	Tue, 10 Nov 2026 02:13:08 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 880054B8
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 01:00:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 48C9F80F8C;
+	Tue, 10 Nov 2026 03:24:23 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8251BAF2
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 03:24:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6D9DD80F80
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 01:00:09 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 768924075F
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 03:24:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ObIUmUP1SvnE for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 01:00:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org ADE1080F28
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::122d"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::122d; helo=mail-dl1-x122d.google.com;
- envelope-from=prasanth.padarthi10@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=y/O419J5
-Received: from mail-dl1-x122d.google.com (mail-dl1-x122d.google.com
- [IPv6:2607:f8b0:4864:20::122d])
- by smtp1.osuosl.org (Postfix) with ESMTPS id ADE1080F28
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 01:00:08 +0000 (UTC)
-Received: by mail-dl1-x122d.google.com with SMTP id
- a92af1059eb24-1a3c08d6928so2661976c88.0
- for <u-boot@lists.u-boot-project.org>; Mon, 09 Nov 2026 17:00:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794272407; x=1794877207;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Vk7OBSiauM7TxGUYfMU5+DHMBJD16dhLUgcsd1daLw8=;
- b=y/O419J5BiHnLFNXQJQv953GpeckyygoUhhaZm+Btsnl5MA1qOIAXhlorqGIWvoU3U
- RxAK0Bk75ccmGSAlXBHxSv9dOeAtxYBdQqE8b1i+uvAtzrNlIiL1um8QJh3pg0aAPRcs
- BTZOnrSKbkmZld6nWkb4nEBeWwutAShTddzuL5xKh24pKadYgdOQa59UhS/yPyro0aWO
- N1is2sXEpn84fhUrbxlmHnT/ELOmR5HP1WICh8kochY4JtajiCLdarmZiOZTRymTYgwe
- o6WwPin/cq11nTFUCVOugaU0k4b7QuGoXSOYS7XLvEmZUVUYZk9sVgq6i46Wf029qV0v
- 0uHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794272407; x=1794877207;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Vk7OBSiauM7TxGUYfMU5+DHMBJD16dhLUgcsd1daLw8=;
- b=zjbhGAe4YFIDu2EHOhXF7ozPoAQZ+EFIRVGM4kybhmb+cG8zSFxzkzSYnC8Bj9wGsX
- mXS5E9AuBM72+zP5fi3tImDrpPt+6NWlABWBwiBzS+LSVZbcYqIbroZrA0FlBOyQPVh9
- 1TIah5utwXiJ9wdkdVbQuwzjsZEOKri3WEgB9Waid8BfKS/kZz8YEwv0oaultioKLFPR
- uekmI0xicUFpP8qaa/Nm+IFq2KXjz6giOJdI0CjDEZdmhrGYuZLWbhVQXb9bToAhDJwn
- 7UxlJqNCGOKoWpQ21VaDRV3JQGB3rbVh1bSxhW93SSYbvUieYi7IbZwVdTI3rdrX5J1O
- COJg==
-X-Gm-Message-State: APuU4Z/oIg7IY0XNJSp4oIp4qDB0f2GUxlFxPtCO9Q8vL+C9Ae2PGr2N
- GEhZuHT5HZWqlI7G0nwL7HUxbJh5CwnsCpWAP9W+zSrg3PFhqQv4FEazB5Ynws4b
-X-Gm-Gg: AYBFou0s5Tz2aDXjRASUOetour/1kbv5Ls/Y8j5pjShs1T7p/bDY0MqDkJjwXBnPfpU
- ibiiOk1+H4Movtw73s3oDcdUzTAw63K3Csm76bm1cA8ezPMjt6v5kA/V+bdWUn3a6yxAqch/E/z
- gWc3eFVhg0aQwSkXA0MAE7VirjyXP1a8d+b4iaNmPsRgnxGiiYuSICgK+3IWuff3A9RQEvVwiqx
- X3wE2oUYd9IWoCbUAZEs1wsyjBPOhf/jjd3DYuPTKfauSMFryjnCGmpYyg/ol6eL1WKU5QyXKpz
- 2rOC0QJwGf7cgBu+jfFcZpbgRSS6ucQ8adMMUcZBloBVwmmo5dKR3OoL4fV7NGBAk85Z/y+6I2r
- FeoHOGA58QkfzTjAeKj9ozo719lN/CyZMKZngVS2DK2L4t4ny6Yh1Des9SSo/G/xTJ6SPdcH/bi
- w6Ubw4I2fWhJuWauta+DvYP8JqHdjaJmomd3vJSMa2a5iwHrUBHNJIjhJ6d8SQB8N3KU8CND/Ho
- YNX2eyVF/VMlQISIFYkEmg6hiCGNSP0PhE4otXovVRhHB5OOiulfvrZQw6d9cFv7P+3um9eGe8+
- FvgEO5i2ZKmp/9z70cPnv8uWdQ4TJGafBjC40QZ1n/7y6Ag=
-X-Received: by 2002:a05:7022:3f0e:b0:1a3:dbb2:478a with SMTP id
- a92af1059eb24-1b3b600f2e9mr1623869c88.27.1794272406761; 
- Mon, 09 Nov 2026 17:00:06 -0800 (PST)
-Received: from debian.prasanth ([103.183.205.43])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1b3b5b4eef8sm2677126c88.16.2026.11.09.17.00.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Nov 2026 17:00:06 -0800 (PST)
-From: Prasanth Kumar Padarthi <prasanth.padarthi10@gmail.com>
-To: u-boot@lists.u-boot-project.org
-Cc: trini@konsulko.com, ryan_chen@aspeedtech.com, chiawei_wang@aspeedtech.com,
- ilias.apalodimas@linaro.org, BMC-SW@aspeedtech.com, joel@jms.id.au,
- Prasanth Kumar Padarthi <prasanth.padarthi10@gmail.com>
-Subject: [PATCH] arm: aspeed: ast2600: Add B650D4U THRU handover
-Date: Tue, 10 Nov 2026 06:29:30 +0530
-Message-ID: <20261110005930.6659-1-prasanth.padarthi10@gmail.com>
-X-Mailer: git-send-email 2.47.3
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id mxUsKMJmHT6S for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 03:24:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3B87C40721
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=154.81.10.140
+X-Greylist: delayed 308 seconds by postgrey-1.37 at util1.osuosl.org;
+ Tue, 10 Nov 2026 03:24:18 UTC
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=rock-chips.com header.i=@rock-chips.com
+ header.a=rsa-sha256 header.s=default header.b=eqLZ41fb
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=154.81.10.140;
+ helo=mail-m10140.netease.com; envelope-from=chenjh@rock-chips.com;
+ receiver=<UNKNOWN> 
+Received: from mail-m10140.netease.com (mail-m10140.netease.com
+ [154.81.10.140])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3B87C40721
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 03:24:17 +0000 (UTC)
+Received: from [172.16.12.163] (unknown [61.154.14.86])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 5418498e6;
+ Tue, 10 Nov 2026 11:19:03 +0800 (GMT+08:00)
+Message-ID: <501ace01-874b-4c61-b412-c297920c91a5@rock-chips.com>
+Date: Tue, 10 Nov 2026 11:19:02 +0800
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: ram: Fix LPDDR5X size decoding
+To: Quentin Schulz <u-boot@0leil.net>, Jonas Karlman <jonas@kwiboo.se>,
+ 1579567540@qq.com
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kever Yang <kever.yang@rock-chips.com>, Anshul Dalal <anshuld@ti.com>,
+ u-boot@lists.u-boot-project.org
+References: <20261019-lpddr5x-size-fix-v1-1-3688217baaa2@qq.com>
+ <7a9ef465-4cb3-4bf3-b0be-e5403165cc31@kwiboo.se>
+ <80ed7ea2-a4b1-48af-b756-4eac285f62e6@0leil.net>
+From: Joseph Chen <chenjh@rock-chips.com>
+In-Reply-To: <80ed7ea2-a4b1-48af-b756-4eac285f62e6@0leil.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 10 Nov 2026 02:13:07 +0000
+X-HM-Tid: 0aa1c377617c03aakunm6705d5c72c638a
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVlCS0MaVh5NTR9KTU1KGElCQlYVFA
+ kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlNSlVKTk9VSk9VQ01ZV1kWGg8SFR0UWUFZT0tIVUpLSU
+ 9PT0hVSktLVUpCS0tZBg++
+DKIM-Signature: a=rsa-sha256;
+ b=eqLZ41fbIds30ahuQWP4bWXBuiiYUCbREX70B6cw3fGKRghOEMujb7ZdLuMTm6YQKMXHbK8asSokimnRm72Nlct120/QLLNYwG6nD83HHSt+jNH/LoisACUqPXXVwuddkKTYH6kOke8l9QKUvAVK30h7U0k+U3YEiPgWxZWjMNw=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=UVvn26vtISqYMd6AmpvUpixoikrDaujXnmqLNDk6m44=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -151,112 +125,135 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-22.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The ASRock Rack B650D4U uses AST2600 GPIOP signals for
-host power and reset control.
+Hi Quentin,
 
-Add a board-specific initialization sequence to prepare
-the THRU pin selections and release the relevant strap
-overrides before handing control to the operating system.
+在 2026-11-10 1:22, Quentin Schulz 写道:
+> Hi Jonas, Joseph,
+>
+> On 10/22/26 8:52 PM, Jonas Karlman wrote:
+>> Hi Cunhao,
+>>
+>> On 10/19/2026 9:31 AM, Cunhao Lu via B4 Relay wrote:
+>>> From: Cunhao Lu <1579567540@qq.com>
+>>>
+>>> The shared SDRAM decoder treats type 10 as DDR5 and uses the wrong
+>>> bank count for LPDDR5X. On the 4 GiB OK3572-C, register values
+>>> 0x100043c1 and 0x30001001 therefore produce a size of 1 GiB.
+>>>
+>>> Define LPDDR5X as type 10 and DDR5 as type 11. Apply the existing
+>>> LPDDR5 bank decoding to LPDDR5X so the same register values yield
+>>> 4 GiB. The type values match include/soc/rockchip/rockchip_grf.h in
+>>> the kernel-6.12 sources of Forlinx OK3572-C BSP Alpha1.
+>>>
+>>> Signed-off-by: Cunhao Lu <1579567540@qq.com>
+>>> ---
+>>> This patch fixes LPDDR5X capacity decoding in Rockchip's shared SDRAM
+>>> decoder.
+>>>
+>>> The geometry registers captured on a Forlinx OK3572-C with 4 GiB of
+>>> LPDDR5X are 0x100043c1 and 0x30001001. The current decoder labels type
+>>> 10 as DDR5 and uses the generic bank calculation. With the bank bit
+>>> set, it assumes four banks instead of 16 and reports only 1 GiB.
+>>>
+>>> Define LPDDR5X as type 10 and DDR5 as type 11, following the Rockchip
+>>> type definitions in Forlinx OK3572-C BSP Alpha1. Use the existing
+>>> LPDDR5 bank calculation for LPDDR5X so the captured register values
+>>> decode to the correct 4 GiB capacity.
+>>>
+>>> The fix applies to mainline independently of the RK3572 SoC and board
+>>> support.
+>>>
+>>> Host-side validation of the decoder with the captured register values
+>>> reproduced 1 GiB before the fix and returned 4 GiB after it. Regression
+>>> checks for eight other memory type codes produced the same results
+>>> before and after the fix, with no UBSan errors.
+>>> ---
+>>>   arch/arm/include/asm/arch-rockchip/sdram.h | 3 ++-
+>>>   arch/arm/mach-rockchip/sdram.c             | 4 ++--
+>>>   2 files changed, 4 insertions(+), 3 deletions(-)
+>>>
+>>> diff --git a/arch/arm/include/asm/arch-rockchip/sdram.h 
+>>> b/arch/arm/include/asm/arch-rockchip/sdram.h
+>>> index 476fc1c4e..f5a213fde 100644
+>>> --- a/arch/arm/include/asm/arch-rockchip/sdram.h
+>>> +++ b/arch/arm/include/asm/arch-rockchip/sdram.h
+>>> @@ -14,7 +14,8 @@ enum {
+>>>       LPDDR4 = 7,
+>>>       LPDDR4X = 8,
+>>>       LPDDR5 = 9,
+>>> -    DDR5 = 10,
+>>> +    LPDDR5X = 10,
+>>> +    DDR5 = 11,
+>>
+>> We should probably just drop the DDR5 symbol, and could possible also
+>> add a DDR2 symbol. DRAM init blobs likely use something like following:
+>>
+>>     switch (dram_type) {
+>>     case 0:
+>>         return "DDR4";
+>>     case 2:
+>>         return "DDR2";
+>>     case 3:
+>>         return "DDR3";
+>>     case 5:
+>>         return "LPDDR2";
+>>     case 6:
+>>         return "LPDDR3";
+>>     case 7:
+>>         return "LPDDR4";
+>>     case 8:
+>>         return "LPDDR4X";
+>>     case 9:
+>>         return "LPDDR5";
+>>     case 10:
+>>         return "LPDDR5X";
+>>     default:
+>>         return "Unknown Device";
+>>     }
+>>
+>
+> @Joseph: What is written in bits [15:13] of register OS_REG2 by the 
+> DDR init blob (*_ddr_*.bin files from 
+> https://github.com/rockchip-linux/rkbin.git) for all supported DRAM 
+> types? Can you confirm what Jonas said above is correct?
+>
+Jonas is correct. The following is the type definition, but DDR5 is not 
+supported yet.
 
-The initialization is restricted to the B650D4U and
-checks the resulting strap state.
+enum {
+     DDR4 = 0,
+     DDR2 = 2,
+     DDR3 = 3,
+     LPDDR2 = 5,
+     LPDDR3 = 6,
+     LPDDR4 = 7,
+     LPDDR4X = 8,
+     LPDDR5 = 9,
+     LPDDR5X = 10,
+     DDR5 = 11,
+     UNUSED = 0xff
+};
 
-Tested on ASRock Rack B650D4U with a custom OpenBMC image:
-- U-Boot and OpenBMC boot successfully
-- Software-initiated host power-on
-- Physical power-button host power-on
 
-Signed-off-by: Prasanth Kumar Padarthi <prasanth.padarthi10@gmail.com>
----
- arch/arm/mach-aspeed/ast2600/board_common.c | 55 +++++++++++++++++++++
- 1 file changed, 55 insertions(+)
+> Cheers,
+> Quentin
 
-diff --git a/arch/arm/mach-aspeed/ast2600/board_common.c b/arch/arm/mach-aspeed/ast2600/board_common.c
-index 4c0b705ea88..3d8df6a9977 100644
---- a/arch/arm/mach-aspeed/ast2600/board_common.c
-+++ b/arch/arm/mach-aspeed/ast2600/board_common.c
-@@ -13,6 +13,8 @@
- #include <dm/uclass.h>
- #include <asm/arch/scu_ast2600.h>
- #include <asm/global_data.h>
-+#include <dm/ofnode.h>
-+
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -49,11 +51,64 @@ int dram_init(void)
- 	return 0;
- }
- 
-+
-+/*
-+ * B650D4U-specific AST2600 THRU handover.
-+ * Prepare the THRU pin selections before releasing the strap overrides.
-+ */
-+static int b650d4u_thru_init(void)
-+{
-+	const uintptr_t scu = 0x1e6e2000;
-+	u32 strap2, strap3, local;
-+
-+	if (!ofnode_device_is_compatible(ofnode_root(),
-+					 "asrock,b650d4u-bmc"))
-+		return 0;
-+
-+	strap2 = readl(scu + 0x510);
-+	strap3 = readl(scu + 0x51c);
-+
-+	if (!(strap2 & BIT(28)) &&
-+	    ((strap2 & BIT(30)) || !(strap3 & BIT(9))))
-+		return 0;
-+
-+	/* Prepare local THRU0, THRU1 and THRU2 selections. */
-+	local = readl(scu + 0x4bc);
-+	writel(local | GENMASK(29, 24), scu + 0x4bc);
-+
-+	local = readl(scu + 0x4bc);
-+	if ((local & GENMASK(29, 24)) != GENMASK(29, 24))
-+		return -EPERM;
-+
-+	if (!(strap2 & BIT(30)) && (strap3 & BIT(9))) {
-+		local = readl(scu + 0x51c);
-+		writel(local & ~BIT(9), scu + 0x51c);
-+	}
-+
-+	if (strap2 & BIT(28))
-+		writel(BIT(28), scu + 0x514);
-+
-+	strap2 = readl(scu + 0x510);
-+	strap3 = readl(scu + 0x51c);
-+
-+	if ((strap2 & BIT(28)) ||
-+	    (!(strap2 & BIT(30)) && (strap3 & BIT(9))))
-+		return -EPERM;
-+
-+	return 0;
-+}
-+
- int board_init(void)
- {
- 	int i = 0, rc;
- 	struct udevice *dev;
- 
-+	rc = b650d4u_thru_init();
-+	if (rc) {
-+		printf("B650D4U: THRU handover failed: %d\n", rc);
-+		return rc;
-+	}
-+
- 	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
- 
- 	while (1) {
 -- 
-2.47.3
+Best regards,
+
+陈健洪 (Joseph Chen)
+chenjh@rock-chips.com
+福州瑞芯微电子股份有限公司
+Fuzhou Rockchip Electronics Co.Ltd
+福建省福州市铜盘路软件大道89号软件园A区17号楼 (350003)
+No. 17 Building, A District, No.89,software Boulevard Fuzhou,Fujian,PRC
+TEL：0591-83991906/07-8573
 
