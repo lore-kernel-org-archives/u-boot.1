@@ -2,124 +2,166 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8975606A336
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 17:30:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 998B4606A31C
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 17:31:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=l4et47mM;
-	dkim=pass (2048-bit key, unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=AXrf3kYO
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=c7/oy6bi;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=cpjswIKK
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7F8234088F;
-	Tue, 10 Nov 2026 17:30:02 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7086440850;
+	Tue, 10 Nov 2026 17:31:56 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id H5EhkGI_o3WU; Tue, 10 Nov 2026 17:30:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9637440874
+ id 2V3qMvlu_kw8; Tue, 10 Nov 2026 17:31:55 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org AE62F4086F
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794331801;
-	b=CE0ugK9c/96B6h9HehL3a5SMS5jJB6rjrIP7pgMCQJBKpGx9CtZFUeQqLg1fLA05Eb+9
-	 ffiuxNHWzAB4Bng4Wz/Gs9IUOxZcu5CUFr6kA2livFHBi4Wr/KHvQdyas43WQvV+Hpo8U
-	 zj5xXo9YfEcOpE9lTbbUhR5x51qlm9LfW9sooJwYWIN9GCziEG+1jFi5axWIzo15kBbMa
-	 sGiWFVwrmAwYwRd+Iz0KL9V7o8KEbbryWVeGC/DfwVUk5xvu/PV+hrlItVFat8+8bghAB
-	 nLKfqX9Blcha7KxgUH+ewT5V/OK2fwYmz0SftFsTsgc7Qgvy7ESXef8uLrjfBQp7TBQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794331915;
+	b=kv/C2XEwR0CDjr7xfCc0VgITXdLeUHkOetMC/5hDdLiXTHxkl2wGEBaulgvwbJY9xati
+	 +DJGTHPR5pwVGAIzvM/MBXikxKi0v/gahCIs054hUo6voOsxLlA6ZO+BBs994mLoejQsB
+	 WqGGsa/DoQSm9vvXtwuth9e3GZaacYcrIgz5klnGuWjMU3wlHpL2rxzxM8gC69dicbmNv
+	 sL56vmUdq9QVaeNmAOOdpA2vlu+WY2rnhtcyFORLPnuojpvlCCwFqgwK5olKUn/PajKXu
+	 rzO6fhNkeuS98HnC2qo8MBQbRSH8x3kYj8k8ihJTYnn/bEcp8y9LGAUrJ/pVUqTziDQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794331801;
+	c=relaxed/relaxed; t=1794331915;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:X-Forward-Email-ID:X-Forward-Email-Sender:
-	 X-Forward-Email-Version:X-Forward-Email-Website:X-Complaints-To:
-	 X-Report-Abuse:X-Report-Abuse-To:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=WFuR/8gn8XbxQX4a1czZOhGq0bZARp0pgmN7LzKKtmQ=;
-	b=Ch0x2lV+i9I/bTLBOYzf1zs0XXuL/3fNuZCpqZN6IVjKKGHbfrYRWNB9wmORihPOAdPy
-	 tARj96YGNN/kTT5NEzBWNeCzeS7jJGyLcfmc3PPwlLufeeUQIcJk2bdeyWnaHzKFZMo2d
-	 BcDnXWdZHTm6InDWpVozNEWWesULkQh2pbjWO2giWGBFn7GGKtad0IaINiflFZEXOAUP/
-	 MEnAUB73y3cElxS031kmOoe3U+9Bhk2tEB7SgfkRkupOqhXuZR2eAiP1sQLhQnMD7UxEV
-	 eFKk7FN5GPBXMCtdnhM2htENbDFHPoixgks9yIovn9AqFuZJcH/i7JcoNfNKVL3YxTA==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=pDe6HzROGWpHvUwzKIcWmlEofU/qYty3+/6KEp8r/C0=;
+	b=lrUuBUz7tENbzsGOteRzvAVkl4Dyw20sdBFEIUlBpqn/REQ1QfjC6jcStQoBT1I1bNsK
+	 nFDUZWY3mg0N+j2/3koRkty3iOqGFBB7XbpKWKkTnYW3E9YrGtw4VqgK+4fMS5kBvVDUj
+	 uR0pPjjG4sVsOrajaqy7dXgJd8/78ub7rdE0JgD0AlONcA4C+0Tk0R63WYKvE/lWY1tG0
+	 FNyQk788ddVbqUASOhyA+0LOa6aqpMA/rTKASyBkF/ktDkf3g7GAgg1MTtKrzECs/jfvK
+	 aM0SIF/VJL6DirgyJxu9irf866Q0+Ux7mvaLncuqGZ156KG1aPiBtoOgfNZGdv77zdw==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=cpjswIKK;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794331801;
-	bh=WFuR/8gn8XbxQX4a1czZOhGq0bZARp0pgmN7LzKKtmQ=;
+	d=lists.u-boot-project.org; s=default; t=1794331915;
+	bh=pDe6HzROGWpHvUwzKIcWmlEofU/qYty3+/6KEp8r/C0=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=l4et47mMpEP27BLxfq6WAhQ+Mmy8UKPd8Uw4NAso6WQTXbVFIdylrdoRWTGe79ZcF
-	 Y41NkHeU6KQDDHMg/mR7+w201uTDxU9Ua6DeGqyE+6HOhYy66a9JESmtTv2NVjjjtD
-	 lSZ9FUcfH8V2thcb3jnzuPEZh/QolYOHbWZO7Kb01CEhZ2Psn/ZR7geS1zrtKf/CFl
-	 QvsMNzsDlyJdsfravVDaGNFPl1Q7edl3LeP/lHm++lyX6LpB7J00W41z6/Dqu/HxDc
-	 TL74tM57b4caRC6Kw8VBIgXHARXccIeik28lEGIFZk4flvcYmEe0S3Eiv5D6dU1HWG
-	 tWtPBa8si4zVw==
+	b=c7/oy6bihT5kjNONfMwlYkjRvDTeAkG13MbzVrP25EJFvfb84xAPapBxzDHiKTZ/3
+	 yd1L/eY/7c38TR9UOwAVFFybbBNosIQGt19FtGAmlL3icWvVUggWz071lQD+UVDMyT
+	 SerfkBDnsEs7H17G27PaLl4z2ZosK2176jB74eCQxAGXAeWKT+GjGr4yMH6w9ZHlB6
+	 5IWi0E8kM/ysRnsJPxm33R6WB/vVhPR4a/C96epIitFRRfaAbOo8FvZoUWvwr4CMz9
+	 De+gSTYsmC44IPX8sl2dRsEaHadBX9zZN3eUqGJBetpQ7hWcO28kujY8rGG3NnE1Xs
+	 WOtVTurie8KZg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9637440874;
-	Tue, 10 Nov 2026 17:30:01 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id E5621388
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:29:59 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AE62F4086F;
+	Tue, 10 Nov 2026 17:31:55 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8C5AD388
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:31:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E206D810F0
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:29:59 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7110E4086F
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:31:54 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id iVs7B3vFE426 for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 17:29:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2E7AD810DD
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=149.28.215.223
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=149.28.215.223;
- helo=smtp.forwardemail.net;
- envelope-from=srs0=7b12=ja=kwiboo.se=jonas@fe-bounces.kwiboo.se;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256
- header.s=fe-e1b5cab7be header.b=AXrf3kYO
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2E7AD810DD
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:29:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From:
- Content-Language: References: Cc: To: Subject: MIME-Version: Date:
- Message-ID; q=dns/txt; s=fe-e1b5cab7be; t=1794331796;
- bh=WFuR/8gn8XbxQX4a1czZOhGq0bZARp0pgmN7LzKKtmQ=;
- b=AXrf3kYOS0logP9gyYDwEjD3mDHfaQIbgz4BDnlnAwYOhlGkZuj/vUeMwgC809lptBk2cF3hX
- ae3/PUZNpAkAl4P/dYDXvBa9ROP0MDOYBpUQ6JtpCO3Xcy6hI5TGUvQ6v2qePc7N+3ogc6ft9jI
- FHfcbNnwus0lU1skIPvfBMG/GpHQO5nY1ArzCZNygB1xwQjaywuEvTZ7JDTuVRjZyZglnRkpCCr
- twkSPItV6Yik/yD0ZQNBlH7ZnJomjqJ0p0836kFVE+HqmCVckhG0sGd0nnBOov3ElAeCiV/X/vp
- sGBsh+UgZE2cuHVtl/oi+GE233RuP3sXvbGzSFATxjxA==
-X-Forward-Email-ID: 6af3548b1cae2d46f43fb4ed
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.19.18
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <672d8b9e-079e-4705-bbb3-e26a3983195f@kwiboo.se>
-Date: Tue, 10 Nov 2026 18:29:43 +0100
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Ncqz8yoIDqax for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 17:31:53 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org BB64740850
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42d"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:1450:4864:20::42d; helo=mail-wr1-x42d.google.com;
+ envelope-from=andrew.goodbody@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=cpjswIKK
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id BB64740850
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 17:31:52 +0000 (UTC)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-498f5fa4f70so634104f8f.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:31:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1794331910; x=1794936710;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=pDe6HzROGWpHvUwzKIcWmlEofU/qYty3+/6KEp8r/C0=;
+ b=cpjswIKKT/zCBKpdyjOEo5SV/G2mhanof/vqtSVCVm7CTEXanKvb4JhM1Rll8Gy0Lg
+ +1th8CrzhkeTTZ2Y9ha0SaegMTrJULcTsvtu4OGGMGvKDROY8RObtk0eVuSS3/FkuFfs
+ /jQHOtiZqNh0Y/DMkG0By04m9XGqcYeTdkX2brj0cOLrAb6nZS0yenTw2WfeRXYxDHPx
+ c57IYrzZm/sqwXWTk4cu4x3PR1V+mn0CJaxd0b98bXwxNphPEKxvT31LAfxmxIx3H+fr
+ hFNev1wU04dFZOeDQ6RXcqJQHbChYAhx2aQu/ZKHQ/HtPOsaAv6D3UQdihL6FCLGa2yp
+ 1BJg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794331910; x=1794936710;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=pDe6HzROGWpHvUwzKIcWmlEofU/qYty3+/6KEp8r/C0=;
+ b=jFaQfhfsqsj5SaMAwyWixMAG2FK1PEMuUeFRVoB2cmKfF9kyeHCD6W0saQu6nnzYDF
+ CLj7m3d8BZR6HGw1Odv9JsNHEgLu5gKLm0NO6pI0caPJXegHkBLGSd5pjbXuHqsSahK+
+ qVX3FChRNWyRkGV/3/KJsFF8zsJx94Zop01VNZDnT92lwKpeHhLX37bLWpcdfvOYNQsZ
+ OV83npzLvLrQOCk/HNQq7Kqv+DrcsDGchLiPmphO4FbZtRH+UgZUJFLb4idd6wmEUuyn
+ XEMLNZ3UX09k/e3VBqN21iNAZdxEojsmBxQasLXFGO91qy0+WFfbyYMX6d1Z09HuwQ9u
+ PWYw==
+X-Forwarded-Encrypted: i=1;
+ AL+hErE0isrUDrEy6JpQuBZS7vBaowHi1jGq5d+Ox/L5xp4Q9017AygJrL1QAiWbg4tpdnj1qNMXp+E=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+NfZYhTgHvU5m2tHXjoy0OjeT+zGbd3MtRpgoiqFNuHhA1oyA5
+ UgoR+VUpu32aomE3ditJo9BMMpkWjTVri5USvlrFjdtkXmqrFT9Yp+LqgNJe9tT/RKw=
+X-Gm-Gg: AYBFou0rqjcKCwdmJApuf0djfPtUYE2wGOJRSFv1AWiRbKChXVK6s1A7Eagw38Pm1K8
+ rPgilkLvk01xzNp+8euV61LSov5XWDaJXWDuUfFYaoY89wUzg1jxGcpF+lb2aaCk3ES15y7+5Hh
+ ASuI/ih9zfLQV0/VmWvROUVCDAhZaZ2BV73lRSWv3JLYKLPBzbBwDZDYKr2rgSABPkmaGCoUVEw
+ 6hWoAJeH0YgoDoEjbY+41sBxV9DygVXVsujgSzDNh8Ue6pGdXsYBh49e0c8QBOQqrkppnRJvQGz
+ FwO37CmOLafJL7kww5aQNF7pK+CBabgNF6HyskmnCBgCAxM2d1NZ5YB6w8c8xdgsytg6NSEm4ip
+ oyiR5KBYDOtRommsGI8dm3NsvxHEvEjzTzYA0s8qwE1UUn3tSKVQK9MbAq9Ya8bAx+FmL4DKilS
+ C4JSMwp4vVR8lagRh59VlJTT93avH8Dyq9h1JXxqoRda7tjOOZTw4bPzljCzLMWkm+5MGiFpORy
+ owpGTjJJ6kkBCX+ymbscmvD9iqiurwNwtfglDVGEtn7TisILLXCZfh9OOMQh7DV3VZGvy6UKUK5
+ 0hCuf+hr2i1seNgKjlr3kL3G1/SH0GZrOD0l2ZHcV4DP8sW5r2TlurcnxhuBFTgWKAJ54oFExx5
+ ELUdLBw==
+X-Received: by 2002:a05:6000:1a86:b0:488:57ad:d5c8 with SMTP id
+ ffacd0b85a97d-4982ba3297amr6405894f8f.3.1794331909987; 
+ Tue, 10 Nov 2026 09:31:49 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:e16:1f01:e384:fd63:c1b:f384?
+ ([2a0a:ef40:e16:1f01:e384:fd63:c1b:f384])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-499823761f5sm710123f8f.2.2026.11.10.09.31.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Nov 2026 09:31:49 -0800 (PST)
+Message-ID: <6485ce1d-2b5b-4800-9782-0a6276209fcc@linaro.org>
+Date: Tue, 10 Nov 2026 17:31:48 +0000
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: rockchip: rk356x: Set twice the SD/SDIO card clock
-To: "iav@iav.lv" <iav@iav.lv>
-Cc: Quentin Schulz <u-boot@0leil.net>, Kever Yang
- <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Lukasz Majewski <lukma@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Elaine Zhang <zhangqing@rock-chips.com>,
- "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>
-References: <20261110-rk3568-sdmmc-clk-v1-1-482eeb42f571@iav.lv>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20261110-rk3568-sdmmc-clk-v1-1-482eeb42f571@iav.lv>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v2 12/12] test: Fix test_basic file system tests
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ u-boot@lists.u-boot-project.org, Kory Maincent <kory.maincent@bootlin.com>,
+ Linus Walleij <linusw@kernel.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini
+ <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>,
+ Alexey Charkov <alchark@flipper.net>, Francesco Valla <francesco@valla.it>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Carlo Caione <ccaione@baylibre.com>, Yao Zi <me@ziyao.cc>,
+ Michal Simek <michal.simek@amd.com>
+References: <20261110-qcheck_fix-v2-0-1c76e0b68f29@linaro.org>
+ <20261110-qcheck_fix-v2-12-1c76e0b68f29@linaro.org>
+ <4c272bb8-5ac8-42e9-9338-fc9e13cfeca4@cherry.de>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <4c272bb8-5ac8-42e9-9338-fc9e13cfeca4@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -136,132 +178,88 @@ X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Igor,
-
-On 11/10/2026 5:30 AM, Igor Velkov via B4 Relay wrote:
-> From: Igor Velkov <iav@iav.lv>
+On 10/11/2026 15:39, Quentin Schulz wrote:
+> Hi Andrew,
 > 
-> The dw_mmc controllers divide their input clock by 2, but
-> rk3568_sdmmc_set_clk() selects a parent equal to the requested card
-> clock, so the card runs at half of it: 25 MHz instead of 50 MHz in high
-> speed mode. The RK3399 and RK3328 clock drivers already set twice the
-> rate for their dw_mmc controllers.
-
-This 2x clock rate should not be handled in the clock drivers, it should
-similar to Linux be handled in the rockchip dw_mmc driver. The Linux driver
-seem to use RK3288_CLKGEN_DIV (2) to request the 2x rate, something like:
-
-	cclkin = ios->clock * RK3288_CLKGEN_DIV;
-
-	ret = clk_set_rate(host->ciu_clk, cclkin);
-
-Please instead fix the U-Boot rockchip dw_mmc driver to do something similar
-and move current 2x handling from rk3399 and rk3328 clock drivers.
-
-We should expect the clock drivers to report correct rate for a clock and
-not use it to workaround quirks in device drivers.
-
-Regards,
-Jonas
-
+> On 11/10/26 1:24 PM, Andrew Goodbody wrote:
+>> Ensure that /sbin is on the path so that distributions that do not have
+>> it will still be able to successfully run these tests that need fsck.
+>> Add a forced clean of the newly created file system to cope with the
+>> fact that there is an orphaned file on ext4 that will cause the
+>> integrity test to fail later on if not removed now.
+>>
 > 
-> Select the fastest parent that does not exceed twice the requested
-> rate, or the slowest one, and report half of the parent rate.
+> question: are those really related?
 > 
-> On ODROID-M1 with a SanDisk 128 GB card in high speed mode, reading
-> 512 MiB with mmc read takes 22 s instead of 44 s.
+> It feels to me that those should be fixed in separate commits?
+
+OK.
+
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>   test/py/tests/fs_helper.py              | 4 ++++
+>>   test/py/tests/test_fs/fstest_helpers.py | 5 +++++
+>>   2 files changed, 9 insertions(+)
+>>
+>> diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
+>> index e3824b2c1fd..48b047aeefd 100644
+>> --- a/test/py/tests/fs_helper.py
+>> +++ b/test/py/tests/fs_helper.py
+>> @@ -250,6 +250,10 @@ def mk_fs(config, fs_type, size, prefix, 
+>> src_dir=None, fs_img=None, quiet=False)
+>>                                         shell=True).decode()
+>>               if 'metadata_csum' in sb_content:
+>>                   check_call(f'tune2fs -O ^metadata_csum {fs_img}', 
+>> shell=True)
+>> +            # Cannot use check_call here as it will return an exit 
+>> code of 1
+>> +            # as it modifies the file system. The -f is needed as 
+>> although the
+>> +            # fs is marked clean, it is not really.
+>> +            call(f'fsck.ext4 -f -y {fs_img}', shell=True)
 > 
-> Fixes: 4a262feba3a5 ("rockchip: rk3568: add clock driver")
-> Signed-off-by: Igor Velkov <iav@iav.lv>
-> ---
-> Tested on ODROID-M1 with this change on v2026.07: CLKSEL_CON(30) selects
-> the 100 MHz parent for a 50 MHz card clock. The CRC32 of a 512 MiB block
-> read with mmc read is the same at 25 and 50 MHz, and the CRC32 of another
-> block is the same as computed in Linux. With the SPL erased from SPI, SPL
-> and U-Boot load from the SD card, also after two resets with sysrq-b.
-> ---
->  drivers/clk/rockchip/clk_rk3568.c | 43 +++++++++++++++------------------------
->  1 file changed, 16 insertions(+), 27 deletions(-)
+> nitpick: just use an array to avoid shell=True
 > 
-> diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
-> index 181917cf92a..06d7d4741c6 100644
-> --- a/drivers/clk/rockchip/clk_rk3568.c
-> +++ b/drivers/clk/rockchip/clk_rk3568.c
-> @@ -1426,19 +1426,20 @@ static ulong rk3568_sdmmc_get_clk(struct rk3568_clk_priv *priv, ulong clk_id)
->  		return -ENOENT;
->  	}
->  
-> +	/* The card clock is half of the parent: dw_mmc divides it by 2 */
->  	switch (sel) {
->  	case CLK_SDMMC_SEL_24M:
-> -		return OSC_HZ;
-> +		return OSC_HZ / 2;
->  	case CLK_SDMMC_SEL_400M:
-> -		return 400 * MHz;
-> +		return 400 * MHz / 2;
->  	case CLK_SDMMC_SEL_300M:
-> -		return 300 * MHz;
-> +		return 300 * MHz / 2;
->  	case CLK_SDMMC_SEL_100M:
-> -		return 100 * MHz;
-> +		return 100 * MHz / 2;
->  	case CLK_SDMMC_SEL_50M:
-> -		return 50 * MHz;
-> +		return 50 * MHz / 2;
->  	case CLK_SDMMC_SEL_750K:
-> -		return 750 * KHz;
-> +		return 750 * KHz / 2;
->  	default:
->  		return -ENOENT;
->  	}
-> @@ -1448,34 +1449,22 @@ static ulong rk3568_sdmmc_set_clk(struct rk3568_clk_priv *priv,
->  				  ulong clk_id, ulong rate)
->  {
->  	struct rk3568_cru *cru = priv->cru;
-> +	ulong parent = rate * 2;
->  	int src_clk;
->  
-> -	switch (rate) {
-> -	case OSC_HZ:
-> -	case 26 * MHz:
-> -	case 25 * MHz:
-> -		src_clk = CLK_SDMMC_SEL_24M;
-> -		break;
-> -	case 400 * MHz:
-> +	/* Fastest parent not above twice the card clock, or the slowest one */
-> +	if (parent >= 400 * MHz)
->  		src_clk = CLK_SDMMC_SEL_400M;
-> -		break;
-> -	case 300 * MHz:
-> +	else if (parent >= 300 * MHz)
->  		src_clk = CLK_SDMMC_SEL_300M;
-> -		break;
-> -	case 100 * MHz:
-> +	else if (parent >= 100 * MHz)
->  		src_clk = CLK_SDMMC_SEL_100M;
-> -		break;
-> -	case 52 * MHz:
-> -	case 50 * MHz:
-> +	else if (parent >= 50 * MHz)
->  		src_clk = CLK_SDMMC_SEL_50M;
-> -		break;
-> -	case 750 * KHz:
-> -	case 400 * KHz:
-> +	else if (parent >= OSC_HZ)
-> +		src_clk = CLK_SDMMC_SEL_24M;
-> +	else
->  		src_clk = CLK_SDMMC_SEL_750K;
-> -		break;
-> -	default:
-> -		return -ENOENT;
-> -	}
->  
->  	switch (clk_id) {
->  	case HCLK_SDMMC0:
+> Considering the rest of the file still uses shell=True with a single 
+> string, I guess it's fine for now but we should really think about 
+> getting rid of those.
 > 
-> ---
-> base-commit: ecdcf9e365df6249a57cd8cc946e7026804ff4ae
-> change-id: 20261110-rk3568-sdmmc-clk-95bccae72277
+>>           elif fs_lnxtype == 'vfat' and src_dir:
+>>               flags = f"-smpQ{'' if quiet else 'v'}"
+>>               check_call(f'mcopy -i {fs_img} {flags} {src_dir}/* ::/',
+>> diff --git a/test/py/tests/test_fs/fstest_helpers.py b/test/py/tests/ 
+>> test_fs/fstest_helpers.py
+>> index d25326ee993..6164eca476a 100644
+>> --- a/test/py/tests/test_fs/fstest_helpers.py
+>> +++ b/test/py/tests/test_fs/fstest_helpers.py
+>> @@ -3,9 +3,14 @@
+>>   # Author: JJ Hiblot <jjhiblot@ti.com>
+>>   #
+>> +import os
+>>   from subprocess import check_call, CalledProcessError
+>>   def assert_fs_integrity(fs_type, fs_img):
+>> +    # Some distributions do not add /sbin to the default PATH, where 
+>> fsck lives
+>> +    if '/sbin' not in os.environ["PATH"].split(os.pathsep):
+>> +        os.environ["PATH"] += os.pathsep + '/sbin'
+>> +
 > 
-> Best regards,
+> issue: modifying the environment like this is a big no-no.
+
+I copied the code from fs_helper.py but OK.
+
+> Modifying the environment like this should really be last resort as it 
+> breaks things in various sneaky and random ways.
+> 
+> check_call() takes an env parameter, so copy os.environ and edit the 
+> PATH key, then pass this copy as env parameter to all check_call calls 
+> in this function.
+
+Ack.
+
+Thanks,
+Andrew
+
+> Cheers,
+> Quentin
 
