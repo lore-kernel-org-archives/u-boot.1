@@ -2,152 +2,118 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC537606A31C
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 08:51:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 249AA606A332
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 08:57:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=saU0IF7c;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=BZo8Gpw+
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=xkLVgLre;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RQ9eWsw1
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id AC99480E0C;
-	Tue, 10 Nov 2026 08:51:29 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E9A13810A5;
+	Tue, 10 Nov 2026 08:57:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id lg5QbU4nDJ4J; Tue, 10 Nov 2026 08:51:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 17305810C7
+ id 0o6omf9a6MYg; Tue, 10 Nov 2026 08:57:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 088F080F36
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794300689;
-	b=EbfxjNTJMT8uHK2v/wC9UGbba9VHDbUa7t0nNaCK7+wtiCUcFrkp1m/hvCU9KYe21aM8
-	 wQYOuWmX4broICu+ZZzYlli5TTRs3xhRO3RQRqLsn85Rjj0fXivLhv8iKcjYp0g7YuWB1
-	 CzefYy06WcHB5uZxhQOI6tQrZWrRB4fMsyOanMS4y4DJIUDSVyGJdy4N/3El8lPunGLN2
-	 5KYFPsXHYTxI/puAO6auiVEtUgGCNESiS6yOvKy5A30yDV2ujk2Tg/NdRrqSTkOojrXK5
-	 iS03C4Xsw36/zS9DhDIYLogGia7Pef8R0CEaB5XT+558ArtSKyF3N4G0QCTS53uvKKw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794301064;
+	b=WGKUFRnkgvZdl/v7O5XOckAlR9P2DqbQWY+4sA/mfPm53vSp1T1yK25HQYncjHUdlyQ/
+	 kZx+9mUI2q/qmit28LzWMg/evGQG1ImXNelGqdBg0/dOpTPXiWg0ZGQ+ASUty1+Ow9hRK
+	 jIGWsgkNM2Lv8kifSKYyfdEk/dnsSliNWpPAlKvpZdSvgokB++ffDGuEH2XlSY5Tjv+1s
+	 Xha97ap1S/B+9onsVjnplFOhcvgswR5aYKslXZQkRsLO5ldoeUdLtL9J4Dr6epYPu2zVv
+	 JEMcjWPoDwY2VjNa2+M+6NUpVk5fTDHpuTxgtLzBN1PEiljiGIIwey41osZ9TGYUQEQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794300689;
+	c=relaxed/relaxed; t=1794301064;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
-	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=MPGn1WJAyng6NRc9DLmAzGgio6wn7QmgkNErx1nyDIQ=;
-	b=h57zIjDCWT4uUW8TcwlMPKOBUIzibjT71qfZYB7QMV3VUDHUitTji0fIdAv53wQqfr0H
-	 EKA+2+bhoz6QJ3Cq2t+JANLrLdfJM5imIn348o98NZ6no5gRiMP8I1ypV71DT+CDwyVXx
-	 snaCDXNV3g/UufqMpxFCAFS+cORBpqBVJ/V3mMNcONc9hKZIb/sP7PRFaDk4rJb6qsN4k
-	 3vH+6Bq9YOhiMaGKw1fpAI7428AvTqZGJzPSwH1/sKY7T3UOVqOzp6MAWx0FrmeXufHaW
-	 aAfG6A7Z/RFABLem6e5x1aapMbC+VmR49Vt1AFAzy6ahVmsH1e1qcHR0wpx0SYMRVoQ==
+	 Received:DKIM-Signature:From:To:Cc:Subject:In-Reply-To:References:
+	 Date:Message-ID:MIME-Version:Content-Type:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=hLj+MU8KAb/8vf4LlXHmqyg8kq0nXRKu++czhzmvHT8=;
+	b=d0nhBF+ikQafwzgpN99c1Pmlmm1AblYE+g8JfgBF+CJy5LqOKZqmeHaDh2e0LB3l3KTp
+	 hE6WPcBZh0pnBV3zzQf44bnLB11XFLdujYwCBUKNPhwg+y1nd5V3yy3b3TuULsUxGwVoY
+	 BV39dYEa20cBAc5RofFFavYNrRd7AOfyTFFz3Jq1zlvARjGvWp7WGDdKsHkryZY/SwQMA
+	 SrHELNPhqgcJ8sIfIoCJKdAwrFF7hjriLPTuLj4AM9X5WNkYbYbdFgZOBndzVfOciV9Im
+	 /fSjYnylupALHfI20fR1T5XrbHkpJpyVAGwVHeaPvZY+bdsIlzqc5umi/Xqg/IAXRYw==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794300689;
-	bh=MPGn1WJAyng6NRc9DLmAzGgio6wn7QmgkNErx1nyDIQ=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794301064;
+	bh=hLj+MU8KAb/8vf4LlXHmqyg8kq0nXRKu++czhzmvHT8=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=saU0IF7cMhFA+u0wR3SXRHk3ssX81JDvpONPOIdXeEsorCbgVUUmhFWWlHmvmKQAZ
-	 /PRQrbwjKpHTsWv70tjag6Co66JIupLN8Sm57sXhJCwoQCB/lbO8sH2RqdJuMb7E3u
-	 EP9luRPrO6/gzNKomjTcBwUhFINrWA4XhTuiXJ+pHPlrMi16aOr5ScqhsoivjOFiKN
-	 LSGwkx/D0GQH9j/BxLY5BD3TuFC+y0SPB3bbkG3ekmRALZL6ZE8e1fou2dosWZ36bG
-	 3NvYoTem/Bk/DjOpyhHVR+TpKdI0cvJZnexrE2UrBgQrkmQTusG90jnLru1fnDKREW
-	 JMq+ruOXSIeYw==
+	b=xkLVgLrexlpLp9aHbRTZxVfQn+RXZIFlUCplvK47TzM9/FkTjIDT4V9IRrQbu2dEk
+	 hW6SxIQ0lgau4oGVFDRU1FxZzAnqqietDVk1x7RMbUsWtD4bF4Yk/SBtYnG34V1Np3
+	 DKP5znvgyk8oC0YX6PrxS15fTaeq0QRVgIN+NuTRsqoed7i/Zx1ISsRWOqh4rRt+6+
+	 l3Ne8kjj9jG9GaGwtz6CthJW9S5o5aQ4rtGUT0Rg5Bi/GneRVoLY+UrTWzxNktJD7J
+	 sOsmsgFnddY5oGtYJHuXXCXm/z+0DZH+U5OGPveCMP7cCViZ4Pbhord6Tayd1gisrM
+	 vXpMBxqm85YnA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 17305810C7;
-	Tue, 10 Nov 2026 08:51:29 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id DBB2A335
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:51:27 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 088F080F36;
+	Tue, 10 Nov 2026 08:57:44 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3D4C4335
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:57:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id BC0AB60768
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:51:27 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 22D1B40612
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:57:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id xJMEf0Vh1LHi for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 08:51:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0625C60668
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::132a"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 97rkEIUfSSju for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 08:57:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 3FF38405E8
+Authentication-Results: smtp4.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c0a:e001:78e:0:1991:8:25"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::132a; helo=mail-dy1-x132a.google.com;
- envelope-from=clamor95@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=BZo8Gpw+
-Received: from mail-dy1-x132a.google.com (mail-dy1-x132a.google.com
- [IPv6:2607:f8b0:4864:20::132a])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0625C60668
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:51:26 +0000 (UTC)
-Received: by mail-dy1-x132a.google.com with SMTP id
- 5a478bee46e88-36dbde64409so3600462eec.0
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 00:51:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794300685; x=1794905485;
- darn=lists.u-boot-project.org; 
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=MPGn1WJAyng6NRc9DLmAzGgio6wn7QmgkNErx1nyDIQ=;
- b=BZo8Gpw+mFiroEE6fhDy0MYDbu527CvUMuEpnVu37TjVdqrWx7dtKRniSh4sTaCZsv
- PBt32jJ9+R9EhMBoPUgyPcLqLJSlo44QGqcT61sbwTtGspFlkXADSQFh1jLlDUgBuOm1
- 42BBqmLZzYaP1hqZRo0aBQYHAJZhpEZisbWUpghGugCEBcc1yUXV2+gdUQfUDrRPZGbR
- 5Fiw3sz/bU4RRuOac6ou29fb6WZFFr8O0FE7MnVh3ui9K4hoTWx4z8smLKDSPnXP36hS
- vgTtM5wbBtGDr34lnbhCYfUKVp/uD0dZOVyNUd/VewqBkx05LfAnixKzlRdKHoaVxOd4
- I8rg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794300685; x=1794905485;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=MPGn1WJAyng6NRc9DLmAzGgio6wn7QmgkNErx1nyDIQ=;
- b=EsUGbKlyWC0FHPXFP5kRKhFfaZ32RX20n0pCYRNdyt2eVRORVYNAFDN8di2sol+Q3y
- dfGLBRaSxJNYm38mDEJqwNF5zm7wE/jB7M6DCex4xPD4Chq2gJvp5T6PyEXtIzOhQK4M
- HZefySvWGzftwtEbWzmfKjhsyRvO8CsfdPVQgWpWhLZwezp+AUxGAdrepor9XuxXXmjR
- wnhfALC/SEkEhu+kn+ZL2iixFh6HRVefltN/qF7cdwwKHINNd+uUn/wygWAYDlHXO+Ue
- JDS/HbwTU8+07Sghd1gUf15hrOZft1GZ5ozP09QDXm5MDQtELb/mOPMS8EfN58MYsN+3
- mjVA==
-X-Gm-Message-State: APuU4Z83aZwgVy7g1WyLPcxT3HIq3LsHJrCaLSesj42TSo5tYBYG6XmJ
- YiYqFkjAkrQvySET0afDOOOHooZ3aGScwIWH6h/Gs1DSNx5mLMggbThniEpWfAoeVIpGH2usEwY
- DXUFsPnt/cgTJHExUi6ZAuk61nIsFcOE=
-X-Gm-Gg: AYBFou3lOCvXE9TBJoc7XvD6e0JksNL0wkHCbBjgxse4LBTqloP9Z10EM4dGrLxVt4P
- gF8nU99K41pRvhibo8xSbBdm7+sJPitBzi7IDFVcb0He9v1kk6wuAHOv0IVDq3Jp2QC+br1lfLv
- girX3RqWVD72m7OR8cy6VKujW6KlNI0MmhisiFkxSxOMbTOp17a2uBFRa9+hiSZNHRFIeQrPPmV
- TdmrmXqaJqz2qPTYnByl5tYfvzLijF8axWbk83GMckDeihEyaA2hFc43XvUAXYyhYP1zwVX9czv
- n7oDvJOUbs35AsTreA9j5qS83juNz+ZYkQvEsgeUdoOG4v3F5XNqXeNu1oEzcuh6re3dFWnBMyv
- PCKaKC9wK2Odmip+wgEbPws5zLHLwk91mD5Xl9ubf0EDf4E3xQ1m9Wj73OQ7eO1K1a9GuOo+ylI
- yyz8fTesa5RaFerEX2K8ek939OO9oHjoo=
-X-Received: by 2002:a05:7300:ce03:b0:36e:c9e5:33aa with SMTP id
- 5a478bee46e88-3751fb32275mr2389935eec.13.1794300681906; Tue, 10 Nov 2026
- 00:51:21 -0800 (PST)
+ client-ip=2600:3c0a:e001:78e:0:1991:8:25; helo=sea.source.kernel.org;
+ envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=RQ9eWsw1
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3FF38405E8
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:57:40 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id D204441705;
+ Tue, 10 Nov 2026 08:57:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 40DFB1F008A5;
+ Tue, 10 Nov 2026 08:57:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1794301059;
+ bh=hLj+MU8KAb/8vf4LlXHmqyg8kq0nXRKu++czhzmvHT8=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date;
+ b=RQ9eWsw1tiyoXxHTZ+6JK1HQdn7pUfgWmJYlf6BKzRv9CsQywgByr/UGdg6kPsS9F
+ TcMBdNGWOMHEyer2ISUh5Vr3INeC8OLhFqbNjkaSCLpegVFugme4ZOgJ9L6b7Nc2Oi
+ je+iLuOwDbWLw/eNa/Q60tPll722ji58rM/GLaWNZT9lIL4JWozKlnXNQ/jkcQt5Ap
+ CLohcvU+uDYiR3xPaMCgOQ9ke1jPqUhLxmlKwEC2g1OG03/b3d9PKOlsQsNu8VUt8l
+ GtHfkxwl5vPN6vPHqxySy0058cNmis3OHrqOQzs7P/7huJBrfW+fvIDKHSybria1iV
+ ALu8kww4LJ9iw==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
+Cc: Dan Tran <Dan.Tran1@synopsys.com>, Lukasz Majewski <lukma@denx.de>, Tom
+ Rini <trini@konsulko.com>, Marek Vasut <marek.vasut+usb@mailbox.org>,
+ Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Tejas Narendra Joglekar
+ <Tejas.Joglekar@synopsys.com>, "u-boot@lists.u-boot-project.org"
+ <u-boot@lists.u-boot-project.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>
+Subject: Re: [PATCH v3 0/2] usb: gadget: add SuperSpeed descriptor support
+In-Reply-To: <avJpVgg6Jh_6Fuzu@vbox>
+References: <cover.1788488867.git.Thinh.Nguyen@synopsys.com>
+ <178911875744.102286.17132958660285497598.b4-ty@kernel.org>
+ <avJpVgg6Jh_6Fuzu@vbox>
+Date: Tue, 10 Nov 2026 09:57:37 +0100
+Message-ID: <xhkdbfqx9vzb2.fsf@mkorpers-koolstof.csb>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <2399d63c-ddd0-44b0-bb81-d5d9d2a8a8b4@gmail.com>
- <e4322cc3-01a8-4a91-a0f7-fbcf0807a375@gmail.com>
-In-Reply-To: <e4322cc3-01a8-4a91-a0f7-fbcf0807a375@gmail.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Tue, 10 Nov 2026 10:51:10 +0200
-X-Gm-Features: AclHuK_CMGh7LVeHF8gslEzrt_n6pswtDFJPlkUlGIlNs3ZjvEbLTyJKwZpRfQs
-Message-ID: <CAPVz0n1V_6ajUO4BfKGC--OAeT+qxjNZr+xFKTzk77hW46x_bw@mail.gmail.com>
-Subject: Re: [PATCH 11/11] video: tegra124: dp: Limit the lane count to four
-To: Ana Bobillo <anabobillo3@gmail.com>
-Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
- Anatolij Gustschin <ag.dev.uboot@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Kever Yang <kever.yang@rock-chips.com>, Quentin Schulz <u-boot@0leil.net>, 
- Andre Przywara <andre.przywara@arm.com>, Thierry Reding <treding@nvidia.com>, 
- Tom Warren <twarren@nvidia.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -157,47 +123,64 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-=D0=BF=D0=BD, 9 =D0=BB=D0=B8=D1=81=D1=82. 2026=E2=80=AF=D1=80. =D0=BE 19:30=
- Ana Bobillo <anabobillo3@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> From: Ana Bobillo <anabobillo3@gmail.com>
->
-> tegra_dc_dp_init_max_link_cfg() takes the lane count from the sink's
-> MAX_LANE_COUNT DPCD register, masked to 5 bits, and link training uses
-> it to fill the four-entry pe[], vs[] and pc[] arrays on the stack. A
-> sink reporting more than four lanes makes tegra_dp_lt_adjust() write
-> past them.
->
-> Limit the lane count to the four lanes the SOR has.
->
-> Fixes: 59dd5aa8fa51 ("tegra: video: Add Embedded DisplayPort driver")
-> Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
-> ---
->  drivers/video/tegra/tegra124/dp.c | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/drivers/video/tegra/tegra124/dp.c b/drivers/video/tegra/tegr=
-a124/dp.c
-> index 611bf2f81a6..22e9a4b15f7 100644
-> --- a/drivers/video/tegra/tegra124/dp.c
-> +++ b/drivers/video/tegra/tegra124/dp.c
-> @@ -664,6 +664,9 @@ static int tegra_dc_dp_init_max_link_cfg(
->         if (ret)
->                 return ret;
->         link_cfg->max_lane_count =3D dpcd_data & DP_MAX_LANE_COUNT_MASK;
-> +       /* The sink may report more lanes than the SOR has */
-> +       if (link_cfg->max_lane_count > DP_MAX_LANE_COUNT_LANE_4)
-> +               link_cfg->max_lane_count =3D DP_MAX_LANE_COUNT_LANE_4;
->         link_cfg->tps3_supported =3D (dpcd_data &
->                         DP_MAX_LANE_COUNT_TPS3_SUPPORTED_YES) ? 1 : 0;
->
+Hi Thinh,
 
-Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
+On Tue, Nov 10, 2026 at 00:52, Thinh Nguyen <Thinh.Nguyen@synopsys.com> wrote:
+
+> Hi Mattijs, Marek,
+>
+> On Fri, Sep 11, 2026, Mattijs Korpershoek wrote:
+>> Hi,
+>> 
+>> On Fri, 04 Sep 2026 02:29:22 +0000, Thinh Nguyen wrote:
+>> > This series adds SuperSpeed descriptor support for the mass_storage and DFU
+>> > gadget functions so they can operate correctly at SuperSpeed.
+>> > 
+>> > 
+>> > Dan Tran (2):
+>> >   usb: gadget: mass_storage: add SuperSpeed descriptor support
+>> >   usb: gadget: dfu: add SuperSpeed descriptor support
+>> > 
+>> > [...]
+>> 
+>> Thanks, Applied to https://urldefense.com/v3/__https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu__;!!A4F2R9G_pg!eQmEMvzVBEkabPwypmYnbdrp3msonmGKhxGZywPB79oo8spNCka6P9eGAae6yp-Ce742VIzmiq9zTSF-cAgowAKSmqcU$  (u-boot-dfu-next)
+>> 
+>> [1/2] usb: gadget: mass_storage: add SuperSpeed descriptor support
+>>       https://urldefense.com/v3/__https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/bc6f3f4b3882fec3eb21457ccaed993b40743725__;!!A4F2R9G_pg!eQmEMvzVBEkabPwypmYnbdrp3msonmGKhxGZywPB79oo8spNCka6P9eGAae6yp-Ce742VIzmiq9zTSF-cAgowHhP3EuL$ 
+>> [2/2] usb: gadget: dfu: add SuperSpeed descriptor support
+>>       https://urldefense.com/v3/__https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/commit/6e3f574e576585b0250ac387475d59e581bb5d9f__;!!A4F2R9G_pg!eQmEMvzVBEkabPwypmYnbdrp3msonmGKhxGZywPB79oo8spNCka6P9eGAae6yp-Ce742VIzmiq9zTSF-cAgowHPGt8hj$ 
+>> 
+>> --
+>> Mattijs
+>
+> Just following up on these patches. They were previously applied to
+> u-boot-dfu-next, but I don't see them there anymore or in mainline.
+
+You are right, there are not there.
+I'm terribly sorry. I completely missed to send a PR to Tom with this
+included and later on I rebased u-boot-dfu-next and dropped these
+patches.
+
+>
+> Do you know what happened to them, or whether they still need to be
+> picked up?
+
+I'll apply them to u-boot-dfu and send a PR for main this week.
+
+Again, I'm really sorry about this. This is the first time that it
+happens to me.
+
+Thank you for your understanding.
+Regards
+Mattijs
+
+>
+> Thanks,
+> Thinh
