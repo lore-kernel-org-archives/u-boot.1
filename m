@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7581606A7F2
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 13:06:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74E29606B2E8
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 13:06:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=0zrdFMbA;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=sHPTOIh0
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=UoH3za7m;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=GRqbGTg8
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id ADB8A81661;
-	Tue, 10 Nov 2026 13:06:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2332781677;
+	Tue, 10 Nov 2026 13:06:41 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id wvUrSam7BfUN; Tue, 10 Nov 2026 13:06:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org EB57B81624
+ id 37MEsg5N1ryb; Tue, 10 Nov 2026 13:06:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5E54881603
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794315996;
-	b=r5OegZczT4C69vnHTQ36E8i6bEmbE0Vf0aUvvqkvbI1uG9Tui2eYvv6nZmUBPNOr0k28
-	 ODufO8pGU6N6KOwfJmKWWXRlIxxrE4d4NFBFlD3URg7wGJhL03SUWipYSvKhMhdQrB585
-	 aim8+gCSvI4cGpEcoGErntHw5xSkTnSFzIFEOPcnkSkF+SJhunZRUUACdT+GhqdGI2d9D
-	 6xkkbSXYfVektNSyxv4YYt8U06fONBtelOXmGZ5Rq3goH3K/9jh99qkJcqQnn+4l5uuXE
-	 sS5QrEK0n9laJUfSqdxW95WyBd0fce/ASsCv2s5woTDFfnab1M7nOHxOR7kn3Sg+8dA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794315998;
+	b=F+L7+0dQ3+RG+dcFynM20ITELv/D7S+DEGcJORkRBkZutrki0weFanjdINOSWgQXGIJe
+	 eviD3wevuty0MATZxpMNtH2GQVmdyDStUtvmy5abYf5jTm52q5bzHoh3bDvEQ4caSYW+U
+	 SvhTep4ieyxZu2hMdK1p346FlO1pduX2D0a0fjI4DGwqlIf/TXZst+KuRMIpiWSOis5ll
+	 DRCdQJyY8RT3yel5SkkuoZmH508XMwt8t/wmFcg4V2vTNHGg6d50VqjYsUa4bg80JJ8AW
+	 RFeIWklQhkLuJG6SGDa0I/kHpl6yfNXp4bCGpyg8BWsOsFi/iFoh30Rgrq4Ia6qxXjw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794315996;
+	c=relaxed/relaxed; t=1794315998;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,42 +32,42 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=bp67XcsBhzMdtnnwuU4BNe8dplR5BJBEuCtQqse94dY=;
-	b=Ov04Ld49fVzwpbfUHZPy0tGWiL0F9Uqlw4hKSipyXpbOS/O+Jjfdz9JGIPot14a/lI10
-	 Mp4d2hDb+b4FFW0VEbJWq8rb3I6Vcg7vaVTkU5ZRP9LtpRNXOftEEioZE82znerJFmIqB
-	 wZVLiWHrhJ1LYzeIj72Kbi/j22+sfYifj+Hx0t+Vif2QiD3LBolGWccCLjsUrldg9z+ID
-	 vFmnbt4fDv4W3ZkDFIiBmU9BaoVHrDsWoY5uDec7eCQIZvRcCtWVVu0Ap5s6modkCJ3ly
-	 7hcVVgjuX6UzBtTJ/0zOiaE4JZ6tUedjj1XVLi/6eJ3ffj6aNuK/SaGllX1TuoEjAXQ==
+	bh=tLp4r1I70GXgIpHklS0JE5mEXTCy9dawT+Pij+JKq4U=;
+	b=L56lWUBwKKnqfZ8q0DsYE6hjetmzX3/0tjgWTu34YXJT+y8DlRP7Dv7lxxOUHx+0TGXN
+	 iuVItxUGbPYHVf/aSsERwcw3Gp7A3ZKWz62Fch96fQ/NcTCkBV6DL/5vNGPgyd6ugu9Bp
+	 EreqR/YkKsL1cF3v+eHU6KzyyHupbwGLkUANeHPK0Yeb96EZPrDA4VLEWmgYEH6N/8YCI
+	 L+GZEDKW+LHHLOnyE6WdOkjAEk1WcBVyAA1kglu/jlBIZXWYbc+MC7lERwe5cwq4qKZbV
+	 DfDy9OEhRglVnaJdjdGEmaQYm2FpTLyyYThTjrrDdqv7T74yrxDga0hGRUxTaAuDPxw==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794315996;
-	bh=bp67XcsBhzMdtnnwuU4BNe8dplR5BJBEuCtQqse94dY=;
+	d=lists.u-boot-project.org; s=default; t=1794315998;
+	bh=tLp4r1I70GXgIpHklS0JE5mEXTCy9dawT+Pij+JKq4U=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0zrdFMbA03+U78sWhVBWGjB5csx/IHEktokUDQFRspHyQWLj1Ff0AEN+rXUL6psZA
-	 Xp3tFYfRYdMdczWSeswpXr4aEYp6VwpuV04pvYIPMjHTaYILsu+telVimJMVRJMXGQ
-	 Ursxb7g+Bc28INlV+y6Tsd+8cf+Mk7UgpLyaExVwTsLwznUSPMWOlVmNRUwbzs3Nw4
-	 dTNcQtMDKCOsK2+2gnIhvUFLz6j7auh32HG+dsGb+o1C91Qo47OIjdHDpPeJGIJGL8
-	 BzcRZ8M9azWVGFcL9CvxEtxh8qyDaKBSpPMFmAMDmMr3ihnz+1wjSMSCzWhD/XXfNz
-	 M+IAI3JM9/D6w==
+	b=UoH3za7mmdnJ5W6UGvB2vYQEMAsIXF+qKyWInzeCuoW9Ltj12MyjKPFuyaDfHKrHv
+	 B1/kKrsvjXvkfEXgQNz6723UC1CYiBLj4GaoaA0NkBuhWf4Lj8RNL661FqSNmF6Da5
+	 vVs4TFR+4by8zPPmAmPouCCVdvtIXlail86hIj3tvLJN74JVyTVv9C+Q6tYv2DD9Py
+	 KP8gkXzTzAMusLoAYLYvJhWsHkkcmjGEs6T0m3zdcBcOtInKTebZwMUP5fRROY19IZ
+	 iQxNrdIkvAOSKkcUlNhtpqdEHYnLAgiLTojjDMV/znbyrLlAJYEta5FyMtFEjMlj/I
+	 yvdhmdQq1zM9A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EB57B81624;
-	Tue, 10 Nov 2026 13:06:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5E54881603;
+	Tue, 10 Nov 2026 13:06:38 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 90677F15
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:30 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id DC8CA731
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8E1864076E
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:30 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id CE37A4076E
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id NFFafGLevztB for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 09:58:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 830B840819
+ id kfCSvoISwh8W for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 09:58:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org EA998407FC
 Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=217.140.110.172
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
@@ -77,22 +77,22 @@ Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=sHPTOIh0
+ header.a=rsa-sha256 header.s=foss header.b=GRqbGTg8
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp4.osuosl.org (Postfix) with ESMTP id 830B840819
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:28 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id EA998407FC
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:30 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 662181F60;
- Tue, 10 Nov 2026 01:58:25 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D8BE81E7D;
+ Tue, 10 Nov 2026 01:58:26 -0800 (PST)
 Received: from e142474.cambridge.arm.com (e142474.arm.com [10.2.203.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 480793FAA1;
- Tue, 10 Nov 2026 01:58:27 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BAC003F632;
+ Tue, 10 Nov 2026 01:58:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1794304708; bh=nlVu7URJzl+9ZPNczGoYN3peCxmJMThoJ0L2vpHgCTw=;
+ t=1794304709; bh=TAMesmgTbMImgoyMiHo9FlgCc4Y2n/i5/ocqtbgggy4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=sHPTOIh0XpUFIUPsh4yJ9Wuu3a+TMH+Kj3kI9ncrFyITVu8uyO7k0yYZglcB2bZT7
- CZfT6FxLsdn11d9veQMDp3OzXaDhBnuYYxhgDZ5rvmVhJb3jFSR6SchbvCcV56bi9/
- xLvq/4XjvteioP7sp7kq2Wi8gfuR5GLDZTWuZV1E=
+ b=GRqbGTg8xDkX7GyQX8faBAIDOHjBC3CWzPKsImWiTtXYF6JibnBp8Kc6SOL65CIzj
+ wns6y/MVtA7L64TqR4Kv4M8qQj5Mmt/eFj6MTvboAgOuuumkp81waTIx0UmrP3XIRD
+ s3Z6yTmRtaJOWnKr2SHj30zE0dxoCf/YHS9jL4zo=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -100,9 +100,10 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v7 11/22] efi_loader: make FF-A MM communication runtime-safe
-Date: Tue, 10 Nov 2026 09:57:52 +0000
-Message-ID: <fe329f5e9465a04a8b36e85521bd429b5db414f0.1794221712.git.harsimransingh.tungal@arm.com>
+Subject: [PATCH v7 12/22] efi_loader: reserve FF-A shared buffer for runtime
+ variables
+Date: Tue, 10 Nov 2026 09:57:53 +0000
+Message-ID: <e57efcaaad03e3f0d08e55df28d15ecf334db5fe.1794221712.git.harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1794221712.git.harsimransingh.tungal@arm.com>
 References: <cover.1794221712.git.harsimransingh.tungal@arm.com>
@@ -126,13 +127,14 @@ X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Make the FF-A MM communication helper usable from EFI runtime code. The
-boot path copies requests into the configured FF-A shared buffer, while
-the runtime path operates directly on the runtime communication buffer.
+Use the statically reserved FF-A shared MM buffer for EFI variable
+runtime communication after ExitBootServices(), since dynamic allocation
+is no longer available.
 
-Use range-based cache maintenance on the active shared-buffer request
-and response sizes, and document the shared-buffer cacheline-alignment
-requirements in Kconfig.
+Keep the shared-buffer pointer convertible across
+SetVirtualAddressMap(), add the buffer to the EFI runtime memory map,
+and reject runtime requests that do not fit in the configured shared
+buffer.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
@@ -142,273 +144,226 @@ Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 Changelog:
 ===============
 
+v5:
+
+Ilias:
+
+  - Guard FF-A shared-buffer references for OP-TEE-only builds
+
 v3:
 
 Simon:
 
-- Restrict arm64 cache maintenance to the cacheline-rounded request and
-  response sizes
-- Reword the commit message for the BUILD_BUG_ON() checks
+- Document the get_comm_buf() ownership contract for boot and runtime
+- Zero only the active comm_buf_size in the runtime shared-buffer path
+- Add SetVirtualAddressMap() handling for ffa_shared_buf via
+  efi_convert_pointer()
+- Add a BUILD_BUG_ON() for EFI-page alignment of
+  CONFIG_FFA_SHARED_MM_BUF_ADDR
 
 v2:
 
 Ilias, Simon:
 
-- Collapse boot and runtime MM communication helpers
-- Document the FF-A shared buffer cacheline-alignment requirement and
-  add BUILD_BUG_ON() checks for the address and size
+- Move shared-buffer reservation to the end of init
+- Add a runtime shared-buffer bounds check
+- Document the shared-buffer page-alignment assumption
+- Reword setup_mm_hdr() documentation
+- Narrow mm_var_guid scope
+- Update the copyright header
 ---
- lib/efi_loader/Kconfig            |   4 +
- lib/efi_loader/efi_variable_tee.c | 130 +++++++++++++++++++++---------
- 2 files changed, 95 insertions(+), 39 deletions(-)
+ lib/efi_loader/efi_variable_tee.c | 130 +++++++++++++++++++++++++++---
+ 1 file changed, 119 insertions(+), 11 deletions(-)
 
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index c4b0c2137b8..4a2072f2c3b 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -195,6 +195,8 @@ config FFA_SHARED_MM_BUF_SIZE
- 	  the MM SP in secure world.
- 	  The size of the memory region must be a multiple of the size of the maximum
- 	  translation granule size that is specified in the ID_AA64MMFR0_EL1 System register.
-+	  For arm64 FF-A cache maintenance, this size must also be aligned to
-+	  CONFIG_SYS_CACHELINE_SIZE.
- 	  It is assumed that the MM SP knows the size of the shared MM communication buffer.
- 
- config FFA_SHARED_MM_BUF_OFFSET
-@@ -211,6 +213,8 @@ config FFA_SHARED_MM_BUF_ADDR
- 	  This defines the address of the shared MM communication buffer
- 	  used for communication between the MM feature in U-Boot and
- 	  the MM SP in secure world.
-+	  For arm64 FF-A cache maintenance, this address must also be aligned to
-+	  CONFIG_SYS_CACHELINE_SIZE.
- 	  It is assumed that the MM SP knows the address of the shared MM communication buffer.
- 
- config EFI_VARIABLE_SF_OFFSET
 diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-index 9cae7b7e5ac..7f35ac7dd22 100644
+index 7f35ac7dd22..a03f2091eb4 100644
 --- a/lib/efi_loader/efi_variable_tee.c
 +++ b/lib/efi_loader/efi_variable_tee.c
-@@ -22,6 +22,7 @@
- #include <efi_api.h>
- #include <efi_loader.h>
- #include <efi_variable.h>
-+#include <linux/build_bug.h>
- #include <linux/kernel.h>
- #include <malloc.h>
- #include <mapmem.h>
-@@ -301,77 +302,128 @@ static int ffa_discover_mm_sp_id(void)
+@@ -56,9 +56,12 @@ static const char *mm_sp_svc_uuid = MM_SP_UUID;
+ static u16 __efi_runtime_data mm_sp_id;
+ #endif
+ 
++#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
++static void *__efi_runtime_data ffa_shared_buf;
++#endif
+ extern struct efi_var_file __efi_runtime_data *efi_var_buf;
+-static efi_uintn_t max_buffer_size;	/* comm + var + func + data */
+-static efi_uintn_t max_payload_size;	/* func + data */
++static efi_uintn_t __efi_runtime_data max_buffer_size;	/* comm + var + func + data */
++static efi_uintn_t __efi_runtime_data max_payload_size;	/* func + data */
+ static const u16 __efi_runtime_rodata pk[] = u"PK";
+ static bool __efi_runtime_data ebs_called;
+ 
+@@ -524,8 +527,64 @@ static efi_status_t __efi_runtime mm_communicate(u8 *comm_buf,
  }
  
  /**
-- * ffa_mm_communicate() - Exchange EFI services data with  the MM partition using FF-A
-+ * ffa_mm_communicate() - Exchange EFI services data with the MM partition using FF-A
-  * @comm_buf:		locally allocated communication buffer used for rx/tx
-- * @dsize:				communication buffer size
-+ * @comm_buf_size:	communication buffer size
+- * setup_mm_hdr() -	Allocate a buffer for StandAloneMM and initialize the
+- *			header data.
++ * get_comm_buf() - Obtain a communication buffer for MM/FF-A exchange
++ * @payload_size: size of the payload that will be appended to the
++ *                MM communication header
++ *
++ * This helper returns a buffer suitable for constructing an
++ * EFI_MM_COMMUNICATE message. During the boot phase a new buffer is
++ * dynamically allocated. After ExitBootServices(), dynamic
++ * allocation is no longer permitted, and all runtime communication must
++ * use the statically reserved FF-A shared buffer.
++ *
++ * The caller owns the returned buffer only during the boot phase and
++ * must release it with free(). During the runtime phase, the returned
++ * pointer aliases the static FF-A shared buffer and must not be freed.
++ *
++ * Return:
++ *   Pointer to a valid communication buffer on success.
++ *   NULL if no suitable communication buffer is available.
++ */
++static __efi_runtime u8 *get_comm_buf(efi_uintn_t payload_size)
++{
++	efi_uintn_t comm_buf_size;
++	u8 *comm_buf;
++
++	comm_buf_size = MM_COMMUNICATE_HEADER_SIZE +
++			MM_VARIABLE_COMMUNICATE_SIZE +
++			payload_size;
++
++	/*
++	 * After ExitBootServices(), dynamic allocation is no longer permitted.
++	 * Use the predefined FF-A shared buffer at runtime; otherwise allocate
++	 * a fresh buffer during the boot phase.
++	 */
++	if (efi_at_runtime()) {
++#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
++		if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
++			if (comm_buf_size > CONFIG_FFA_SHARED_MM_BUF_SIZE)
++				return NULL;
++			comm_buf = ffa_shared_buf;
++			if (!comm_buf)
++				return NULL;
++			efi_memset_runtime(comm_buf, 0, comm_buf_size);
++		} else {
++			return NULL;
++		}
++#else
++		return NULL;
++#endif
++	} else {
++		comm_buf = calloc(1, comm_buf_size);
++		if (!comm_buf)
++			return NULL;
++	}
++	return comm_buf;
++}
++
++/**
++ * setup_mm_hdr() -	Obtain a communication buffer for StandAloneMM and
++ *			initialize the MM header
   *
-  * Issue a door bell event to notify the MM partition (SP) running in OP-TEE
-  * that there is data to read from the shared buffer.
-  * Communication with the MM SP is performed using FF-A transport.
-  * On the event, MM SP can read the data from the buffer and
-  * update the MM shared buffer with response data.
-- * The response data is copied back to the communication buffer.
-+ * The response data is copied back to the communication buffer during the
-+ * boot phase. At runtime, the communication buffer is already the FF-A
-+ * shared buffer and is updated in place.
-  *
-- * Return:
-- *
-- * EFI status code
-+ * Return: EFI status code
+  * @dptr:		pointer address of the corresponding StandAloneMM
+  *			function
+@@ -534,10 +593,11 @@ static efi_status_t __efi_runtime mm_communicate(u8 *comm_buf,
+  * @ret:		EFI return code
+  * Return:		buffer or NULL
   */
--static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
-+static efi_status_t __efi_runtime ffa_mm_communicate(void *comm_buf,
-+						     ulong comm_buf_size)
+-static u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_size,
+-			efi_uintn_t func, efi_status_t *ret)
++static __efi_runtime u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_size,
++				      efi_uintn_t func, efi_status_t *ret)
  {
-+	ulong hdr_cache_size;
- 	ulong tx_data_size;
-+	ulong tx_cache_size;
- 	int ffa_ret;
- 	efi_status_t efi_ret;
+-	const efi_guid_t mm_var_guid = EFI_MM_VARIABLE_GUID;
++	static const __efi_runtime_rodata efi_guid_t mm_var_guid =
++		EFI_MM_VARIABLE_GUID;
  	struct efi_mm_communicate_header *mm_hdr;
--	void *virt_shared_buf;
-+	u8 *shared_buf;
-+	bool at_runtime = efi_at_runtime();
+ 	struct smm_variable_communicate_header *var_hdr;
+ 	u8 *comm_buf;
+@@ -555,16 +615,15 @@ static u8 *setup_mm_hdr(void **dptr, efi_uintn_t payload_size,
+ 		return NULL;
+ 	}
  
- 	if (!comm_buf)
- 		return EFI_INVALID_PARAMETER;
- 
--	/* Discover MM partition ID at boot time */
--	if (!mm_sp_id && ffa_discover_mm_sp_id()) {
--		log_err("EFI: Failure to discover MM SP ID at boot time, FF-A MM comms failure\n");
--		return EFI_UNSUPPORTED;
-+	if (!mm_sp_id) {
-+		if (at_runtime)
-+			return EFI_UNSUPPORTED;
-+		if (ffa_discover_mm_sp_id())
-+			return EFI_UNSUPPORTED;
+-	comm_buf = calloc(1, MM_COMMUNICATE_HEADER_SIZE +
+-			  MM_VARIABLE_COMMUNICATE_SIZE +
+-			  payload_size);
++	comm_buf = get_comm_buf(payload_size);
+ 	if (!comm_buf) {
+ 		*ret = EFI_OUT_OF_RESOURCES;
+ 		return NULL;
  	}
  
  	mm_hdr = (struct efi_mm_communicate_header *)comm_buf;
- 	tx_data_size = mm_hdr->message_len + sizeof(efi_guid_t) + sizeof(size_t);
-+	hdr_cache_size = ALIGN(sizeof(*mm_hdr), CONFIG_SYS_CACHELINE_SIZE);
-+	tx_cache_size = ALIGN(tx_data_size, CONFIG_SYS_CACHELINE_SIZE);
+-	guidcpy(&mm_hdr->header_guid, &mm_var_guid);
++	efi_memcpy_runtime(&mm_hdr->header_guid, &mm_var_guid,
++			   sizeof(mm_hdr->header_guid));
+ 	mm_hdr->message_len = MM_VARIABLE_COMMUNICATE_SIZE + payload_size;
  
- 	if (comm_buf_size != tx_data_size || tx_data_size > CONFIG_FFA_SHARED_MM_BUF_SIZE)
- 		return EFI_INVALID_PARAMETER;
- 
--	/* Copy the data to the shared buffer */
--
--	virt_shared_buf = map_sysmem((phys_addr_t)CONFIG_FFA_SHARED_MM_BUF_ADDR, 0);
--	memcpy(virt_shared_buf, comm_buf, tx_data_size);
-+	if (at_runtime) {
-+		shared_buf = comm_buf;
-+	} else {
-+		/* Copy the data to the shared buffer */
-+		shared_buf = map_sysmem((phys_addr_t)CONFIG_FFA_SHARED_MM_BUF_ADDR, 0);
-+		memcpy(shared_buf, comm_buf, tx_data_size);
-+	}
- 
- 	/*
--	 * The secure world might have cache disabled for
--	 * the device region used for shared buffer (which is the case for Optee).
--	 * In this case, the secure world reads the data from DRAM.
--	 * Let's flush the cache so the DRAM is updated with the latest data.
-+	 * Shared buffer cache maintenance for FF-A / OP-TEE communication:
-+	 *
-+	 * NS -> S (request path):
-+	 *
-+	 * The non-secure side populates the shared buffer. If the buffer is cached
-+	 * in NS, the updated bytes may reside in dirty D-cache lines and not yet be
-+	 * visible in DDR. Since the secure world typically reads the shared buffer
-+	 * directly from DDR (e.g. with caches disabled / non-coherent mapping), we
-+	 * must clean the corresponding cache lines to the Point of Coherency (PoC)
-+	 * before entering secure world.
-+	 *
-+	 * S -> NS (response path):
-+	 *
-+	 * The secure world may update the same shared buffer in DDR. After returning
-+	 * to non-secure, any cached copies of that region in NS may be stale. We
-+	 * therefore invalidate the shared buffer range after the FF-A call to drop
-+	 * those lines and force subsequent reads to fetch the latest data from DDR.
-+	 *
-+	 * Note: Whole-cache invalidation must not be used in EFI runtime context.
-+	 * After ExitBootServices(), the OS owns the cache hierarchy; global
-+	 * invalidation could drop OS dirty lines and violate the OS coherency
-+	 * model. Always operate on the shared buffer range only.
- 	 */
--#ifdef CONFIG_ARM64
--	invalidate_dcache_all();
--#endif
-+	if (IS_ENABLED(CONFIG_ARM64)) {
-+		BUILD_BUG_ON(CONFIG_FFA_SHARED_MM_BUF_ADDR %
-+			     CONFIG_SYS_CACHELINE_SIZE);
-+		BUILD_BUG_ON(CONFIG_FFA_SHARED_MM_BUF_SIZE %
-+			     CONFIG_SYS_CACHELINE_SIZE);
-+		flush_dcache_range((unsigned long)shared_buf,
-+				   (unsigned long)(shared_buf +
-+					   tx_cache_size));
-+	}
- 
- 	/* Announce there is data in the shared buffer */
--
- 	ffa_ret = ffa_notify_mm_sp();
- 
- 	switch (ffa_ret) {
- 	case 0: {
- 		ulong rx_data_size;
--		/* Copy the MM SP response from the shared buffer to the communication buffer */
--		rx_data_size = ((struct efi_mm_communicate_header *)virt_shared_buf)->message_len +
-+		ulong rx_cache_size;
-+
-+		if (IS_ENABLED(CONFIG_ARM64))
-+			invalidate_dcache_range((unsigned long)shared_buf,
-+						(unsigned long)(shared_buf +
-+							hdr_cache_size));
-+
-+		rx_data_size = ((struct efi_mm_communicate_header *)shared_buf)->message_len +
- 			sizeof(efi_guid_t) +
- 			sizeof(size_t);
- 
--		if (rx_data_size > comm_buf_size) {
-+		if (rx_data_size > comm_buf_size ||
-+		    rx_data_size > CONFIG_FFA_SHARED_MM_BUF_SIZE) {
- 			efi_ret = EFI_OUT_OF_RESOURCES;
- 			break;
- 		}
- 
--		memcpy(comm_buf, virt_shared_buf, rx_data_size);
-+		if (IS_ENABLED(CONFIG_ARM64)) {
-+			rx_cache_size = ALIGN(rx_data_size,
-+					      CONFIG_SYS_CACHELINE_SIZE);
-+			if (rx_cache_size > hdr_cache_size)
-+				invalidate_dcache_range((unsigned long)(shared_buf +
-+							hdr_cache_size),
-+						(unsigned long)(shared_buf +
-+							rx_cache_size));
-+		}
-+
-+		if (!at_runtime)
-+			memcpy(comm_buf, shared_buf, rx_data_size);
- 		efi_ret = EFI_SUCCESS;
- 		break;
- 	}
-@@ -391,7 +443,8 @@ static efi_status_t ffa_mm_communicate(void *comm_buf, ulong comm_buf_size)
- 		efi_ret = EFI_ACCESS_DENIED;
- 	}
- 
--	unmap_sysmem(virt_shared_buf);
-+	if (!at_runtime)
-+		unmap_sysmem(shared_buf);
- 	return efi_ret;
+ 	var_hdr = (struct smm_variable_communicate_header *)mm_hdr->data;
+@@ -1077,6 +1136,20 @@ void efi_variables_boot_exit_notify(void)
+ 	ebs_called = true;
  }
  
-@@ -427,8 +480,8 @@ static enum mm_comms_select __efi_runtime get_mm_comms(void)
- #endif
- 
++/**
++ * ffa_shared_buf_notify_virtual_address_map() - SetVirtualAddressMap callback
++ *
++ * @event:	callback event
++ * @context:	callback context
++ */
++#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT) && IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)
++static void EFIAPI __efi_runtime
++ffa_shared_buf_notify_virtual_address_map(struct efi_event *event, void *context)
++{
++	efi_convert_pointer(0, (void **)&ffa_shared_buf);
++}
++#endif
++
  /**
-- * mm_communicate() - Adjust the communication buffer to the MM SP and send
-- * it to OP-TEE
-+ * mm_communicate() - Adjust the communication buffer to the MM SP and send it
-+ * to the selected MM transport
+  * efi_init_variables() - initialize variable services
   *
-  * @comm_buf:		locally allocated communication buffer
-  * @dsize:		buffer size
-@@ -438,11 +491,12 @@ static enum mm_comms_select __efi_runtime get_mm_comms(void)
-  * When using the u-boot OP-TEE driver, StandAlonneMM is supported.
-  * When using the u-boot FF-A  driver, any MM SP is supported.
-  *
-- * Return:		status code
-+ * Return: status code
-  */
--static efi_status_t mm_communicate(u8 *comm_buf, efi_uintn_t dsize)
-+static efi_status_t __efi_runtime mm_communicate(u8 *comm_buf,
-+						 efi_uintn_t dsize)
+@@ -1085,6 +1158,9 @@ void efi_variables_boot_exit_notify(void)
+ efi_status_t efi_init_variables(void)
  {
--	efi_status_t ret;
-+	efi_status_t ret = EFI_UNSUPPORTED;
- 	struct efi_mm_communicate_header *mm_hdr;
- 	struct smm_variable_communicate_header *var_hdr;
- #if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT)
-@@ -457,16 +511,14 @@ static efi_status_t mm_communicate(u8 *comm_buf, efi_uintn_t dsize)
- 	mm_comms = get_mm_comms();
- 	if (mm_comms == MM_COMMS_FFA)
- 		ret = ffa_mm_communicate(comm_buf, dsize);
--	else
-+	else if (mm_comms == MM_COMMS_OPTEE)
- 		ret = optee_mm_communicate(comm_buf, dsize);
- #else
--		ret = optee_mm_communicate(comm_buf, dsize);
-+	ret = optee_mm_communicate(comm_buf, dsize);
- #endif
+ 	efi_status_t ret;
++#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT) && IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)
++	struct efi_event *event;
++#endif
  
--	if (ret != EFI_SUCCESS) {
--		log_err("%s failed!\n", __func__);
-+	if (ret != EFI_SUCCESS)
+ 	/* Create a cached copy of the variables that will be enabled on ExitBootServices() */
+ 	ret = efi_var_mem_init();
+@@ -1103,5 +1179,37 @@ efi_status_t efi_init_variables(void)
+ 	if (ret != EFI_SUCCESS)
  		return ret;
--	}
  
- 	return var_hdr->ret_status;
++#if CONFIG_IS_ENABLED(ARM_FFA_TRANSPORT) && IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)
++	if (IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)) {
++		/*
++		 * The FF-A shared buffer is accessed by EFI runtime services, so
++		 * keep the resident pointer convertible across
++		 * SetVirtualAddressMap() and mark the region as runtime memory.
++		 *
++		 * CONFIG_FFA_SHARED_MM_BUF_ADDR is expected to be EFI-page aligned.
++		 */
++		BUILD_BUG_ON(CONFIG_FFA_SHARED_MM_BUF_ADDR & EFI_PAGE_MASK);
++		ffa_shared_buf = (void *)CONFIG_FFA_SHARED_MM_BUF_ADDR;
++		ret = efi_create_event(EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE,
++				       TPL_CALLBACK,
++				       ffa_shared_buf_notify_virtual_address_map,
++				       NULL, NULL, &event);
++		if (ret != EFI_SUCCESS)
++			return ret;
++		ret = efi_add_memory_map(CONFIG_FFA_SHARED_MM_BUF_ADDR,
++					 CONFIG_FFA_SHARED_MM_BUF_SIZE,
++					 EFI_RUNTIME_SERVICES_DATA);
++		if (ret != EFI_SUCCESS) {
++			efi_close_event(event);
++			log_err("EFI: failed to add FF-A shared buffer to runtime map (%lu)\n",
++				ret);
++			return ret;
++		}
++		log_info("EFI: FF-A shared buffer runtime map: addr=0x%lx size=0x%lx\n",
++			 (ulong)CONFIG_FFA_SHARED_MM_BUF_ADDR,
++			 (ulong)CONFIG_FFA_SHARED_MM_BUF_SIZE);
++	}
++#endif
++
+ 	return EFI_SUCCESS;
  }
 -- 
 2.43.0
