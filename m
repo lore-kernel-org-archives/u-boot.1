@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D7D9606A7D6
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 13:06:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A094606A330
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 13:06:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=J5tPr0ZX;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=sV3K9C+X
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=O8RLO9Gy;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=sbb85rZu
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 372C28134F;
-	Tue, 10 Nov 2026 13:06:24 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D301281514;
+	Tue, 10 Nov 2026 13:06:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 53k6024Dzok5; Tue, 10 Nov 2026 13:06:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A74D5814A0
+ id KqJC_MxHXrWR; Tue, 10 Nov 2026 13:06:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 57C3981498
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794315983;
-	b=oj3L/WtUnQbKc/ui5wO+s70Qybp7l3fvYLQIm8GJRbDQuJjfTmcJ6WjtPMKlJpcqCSdM
-	 nFqNdn01sjsAzc8NtgqVuOr8Hd1956QGYYNp20gsKBTXnCe/ZmDatBgTPfs5f+ZvDAtzx
-	 QfYmezVMTQrvsMMPoupH9xCMQs+6Bl08THdlcTV/y1XQQRx2jwpp+GT4r5I3rdZV1TOi8
-	 jqxeDn4HMfXFdjyajmjWToZomeiVi6IN2cAhJDL7jhLEr8AGSOVlNjGdb3QYRB7rtx6Rk
-	 jigurS7sRZrEhIFH4uuA9ILwh+5Re1CozdYjVMb16vDjTsdToUDw91tLdNMtNzWpXpA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794315985;
+	b=Htjgv3RaXxTCKEGUfrMDoD183bDRQT9WawtJF3XE2WGauFRSml/TT8r3jlmo2IYEZZBT
+	 fLYoFYVcjMbP/jjGd7l+leq1c2+k+5PzQMlsbsWn4s4XYVrZnr6LoYY9nR7r7DvTELmAq
+	 sLttBLq8tUkyOUnKQpyKJFCb2t58/qRrvAgWD2ztX26BhXMggDA68mGI+24m1S4znDwoW
+	 6dCa3rtoyhPlUL5DbF4Gr2IEygU5osLPX0PJIVlzrxAZbangPpgGODkG7wkSRMGpVjV6t
+	 ISAiDIqnlZMsMdFA0bWmqwkW+UHHSej6EM1OlbULUnagK4htg4WPC+YzbWb/UHcFwYQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794315983;
+	c=relaxed/relaxed; t=1794315985;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,67 +32,67 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=JOEooJH6+7iTugN5r5jcjocRaHZTSOs9rSXxABh7KVY=;
-	b=cnrZU9+CIaxap1b74B79DUXlOxuX2hVIn6wE5I0r25R2JJAuzrzV8gAwmK2FH7tg4Rtn
-	 /2MzO9fuo6qkFE7PbuuUrjEZDjwsXzjQvPjk0QWy8igk6wRqgi1b9xdYScpPhv7CqR86/
-	 OZLzu7IKL/Q41aeB6HJcFylIuunUR5kfG1FUn8Dkc6El+bAfK4PNhIdkHFH++zZL3S8jM
-	 4gZMUewHbWr6+B9WtSaSvmpM/gPdjyEd7CYkxpTFxSsWS4xIVTdexXRDzWWyT/JorIRvF
-	 v64BRuzwrhLXvvwVf8QGWqFp/kFFW6B6TvBKL6WDssFIkNZxookeGWjouWf98KjQRcA==
+	bh=DpRvGR3u3XpkMKtOPFDZAlhmnbxuCBI4WrJwXhnjuFg=;
+	b=PpHUSW9kgiYyu5nw7YSX4QEKIcDdDhs7dQkBmmkuvTs6CFjS27dfuRvWydjzBpnyr3mS
+	 jvh6sp9+iMf9EYpASl8Tr6NbV70J01cS61a+w9QgPJqxExmuwR9pdWbKdl+ATBuqnpHyJ
+	 RphrWzq894+QKpUayLtxG0VxD7kx5bQHTttOUCG2WbDdQPO103y3XTbmLykIn7AONsZug
+	 UrHkmDADFPLtdsdUXLFSQvVBZPN8sDfbQJ71XvKG9BhCcGTym5vDr4/TFf05vq4NO/1Rh
+	 2j/9qza3GXZmgIeVygSyFyw24rLLsjRCWl0RA75jy2j2SvIOhVD3cI6nGl6sP4VT42g==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794315983;
-	bh=JOEooJH6+7iTugN5r5jcjocRaHZTSOs9rSXxABh7KVY=;
+	d=lists.u-boot-project.org; s=default; t=1794315985;
+	bh=DpRvGR3u3XpkMKtOPFDZAlhmnbxuCBI4WrJwXhnjuFg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=J5tPr0ZXSEpujUj3tvbEq/ywmRUWoZRIkrHqT+Yw8qur5e3MtoU+FGLykHGBieTjg
-	 5PLlng4u37x9uoQxGR4MRx9FOEgjkVZmaTHQlaqTt5NLhpoq9ivUSHItoOIMg9uGnB
-	 2dMhO4xZHD6TseECmjpleYqeWLYkzZuxZP6Qhin/RxshrPM080Qw7Zfp7SYOJJgL8v
-	 D2WAyS1WBa4hVl9Y6hGOIEjSb4FbIx3HRzxpPiPhyraLqoa/W0KB082dH7Hk92XZAZ
-	 rrZ5DJEcPQvrJFtITObBneJx37WRiU5YbZ70j/7oEK6XLWU/fIrhtKkqZQBhFu9Mvy
-	 7WF6nZpYG3bNQ==
+	b=O8RLO9GyeXsAFX9HMcfumSDpC605JMRM4EHT4gpbILiGv0BsZbk2JoJKjFioiElvQ
+	 nYqQu5Vef+b6Hj7kIhJ5UG3eRmOP0QHFx2cr1pLSKFWTvQ7+rBqHRZw0nOluL9XZXn
+	 LmvFjuJU508Hn+jxismdPKJhWvS6K4WW3u+a/RCZ5MBmRJ/xTH4fU3kEDPtPIsQy0o
+	 j4ZrswPJ7S1W5czB1t+Wz32nUkRNq0qNglkVOLuX+YAaNtzXjnr0RP2F2jzE+Wj0Xr
+	 7PePAVh0fhFvhAzFFME7zUNAKEnQwYuTvDOWX4Da3YTmUeRjeeIUpNwNBP3fGcR0YP
+	 oRsqPdMBHjwuQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A74D5814A0;
-	Tue, 10 Nov 2026 13:06:22 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 55C89F15
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:24 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 57C3981498;
+	Tue, 10 Nov 2026 13:06:25 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 5345D731
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CF1E16081E
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:23 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 44F6B40816
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id bnBw-lfgS_I2 for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 09:58:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A9ABC6086F
-Authentication-Results: smtp3.osuosl.org;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5RsHrrlI3xui for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 09:58:24 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 80CB0407FC
+Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=217.140.110.172
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
  helo=foss.arm.com; envelope-from=harsimransingh.tungal@arm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256
- header.s=foss header.b=sV3K9C+X
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
+ header.a=rsa-sha256 header.s=foss header.b=sbb85rZu
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp3.osuosl.org (Postfix) with ESMTP id A9ABC6086F
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:20 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 80CB0407FC
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:23 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 91BC61516;
- Tue, 10 Nov 2026 01:58:16 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 802DD1516;
+ Tue, 10 Nov 2026 01:58:19 -0800 (PST)
 Received: from e142474.cambridge.arm.com (e142474.arm.com [10.2.203.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 743063F632;
- Tue, 10 Nov 2026 01:58:18 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6581E3F632;
+ Tue, 10 Nov 2026 01:58:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1794304699; bh=34R5lW37FPNwyAHdsem9LQKB8XTy1YEYvFyxnID54WU=;
+ t=1794304702; bh=D/9GT7Rkn1cnJVDZWY2JtRGKRDCslBEDo8nU+wDNToo=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=sV3K9C+Xg7FhL9XZJy1NvgBtaoz7lQX/Jfd3jVF9xJxSk+f41ef+6PRcC2l5XFwSp
- lN+ACHqnhqWKXEsD5xZguPOrZPhsNhJ8JCn1yDd5VOFHpxCKvkWllLF6TAwbWO7u8p
- UtsPvA8JI82BUAH6sL1GQZZO4papKw63g3hs+3ZU=
+ b=sbb85rZu6XxcoOdLMruiUEZgMj7YTDYdjdVgfFosQF/hdktb7mPlRSq+wdmjCw7BP
+ 3oIJxA7J3HcWa6DTzY8Iri08PLr8Vye5V+0PAJ0E+dVBgexEzZDD2GDJhjAxenkrSp
+ KeScpBYYYR40e4zYbdo31QAxbVNWR8u95KdsXT0M=
 From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 To: u-boot@lists.u-boot-project.org
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -100,9 +100,10 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v7 05/22] arm-ffa: reuse direct-message helper at boot time
-Date: Tue, 10 Nov 2026 09:57:46 +0000
-Message-ID: <874a1eeaefa77e5761f247c8af94d7fff7e94f6a.1794221712.git.harsimransingh.tungal@arm.com>
+Subject: [PATCH v7 07/22] arm: cache: keep range maintenance available at EFI
+ runtime
+Date: Tue, 10 Nov 2026 09:57:48 +0000
+Message-ID: <abe9bfed89a81a3189cfe4df09d011c8d5d245c8.1794221712.git.harsimransingh.tungal@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1794221712.git.harsimransingh.tungal@arm.com>
 References: <cover.1794221712.git.harsimransingh.tungal@arm.com>
@@ -126,153 +127,118 @@ X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The runtime transport adds ffa_invoke_msg_send_direct_req() as the common
-implementation for FFA_MSG_SEND_DIRECT_REQ/RESP. Use the same helper from
-the boot-time ffa_msg_send_direct_req_hdlr() instead of keeping a second
-copy of the direct-message sequence in arm-ffa-uclass.c.
+The FF-A EFI runtime variable path uses a shared MM communication buffer
+after ExitBootServices(). Before sending a request to the MM secure
+partition the buffer range must be flushed, and after the response the
+same range must be invalidated.
 
-This keeps boot-time and runtime direct-message handling aligned.
+Keep flush_dcache_range() and invalidate_dcache_range() available from
+EFI runtime code on arm64, together with the underlying assembly range
+helpers, so the FF-A runtime transport can maintain the shared buffer
+without using whole-cache operations after ExitBootServices().
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Acked-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
 
 ---
 Changelog:
 ===============
 
-v3:
+v5:
 
-Simon:
+Ilias:
 
-- Fix commit message styling
+- Split the ARMv8 cache range-maintenance runtime annotations out of
+  the EFI variable TEE runtime patch.
 ---
- drivers/firmware/arm-ffa/arm-ffa-uclass.c | 60 ++---------------------
- include/arm_ffa.h                         | 16 ++----
- 2 files changed, 7 insertions(+), 69 deletions(-)
+ arch/arm/cpu/armv8/cache.S    |  8 ++++++++
+ arch/arm/cpu/armv8/cache_v8.c | 20 ++++++++++++++++----
+ 2 files changed, 24 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-index 13e22a1b7f7..668c2156f8b 100644
---- a/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-+++ b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-@@ -818,16 +818,8 @@ static int ffa_cache_partitions_info(struct udevice *dev)
-  * @msg: pointer to the message data preallocated by the client (in/out)
-  * @is_smc64: select 64-bit or 32-bit FF-A ABI
-  *
-- * Implement FFA_MSG_SEND_DIRECT_{REQ,RESP}
-- * FF-A functions.
-- *
-- * FFA_MSG_SEND_DIRECT_REQ is used to send the data to the secure partition.
-- * The response from the secure partition is handled by reading the
-- * FFA_MSG_SEND_DIRECT_RESP arguments.
-- *
-- * The maximum size of the data that can be exchanged is 40 bytes which is
-- * sizeof(struct ffa_send_direct_data) as defined by the FF-A specification 1.0
-- * in the section relevant to FFA_MSG_SEND_DIRECT_{REQ,RESP}
-+ * This function calls the ffa_invoke_msg_send_direct_req() function which
-+ * invokes FFA_MSG_SEND_DIRECT_{REQ,RESP} FF-A functions.
-  *
-  * Return:
-  *
-@@ -836,9 +828,6 @@ static int ffa_cache_partitions_info(struct udevice *dev)
- int ffa_msg_send_direct_req_hdlr(struct udevice *dev, u16 dst_part_id,
- 				 struct ffa_send_direct_data *msg, bool is_smc64)
+diff --git a/arch/arm/cpu/armv8/cache.S b/arch/arm/cpu/armv8/cache.S
+index c9e46859b4f..386b62c2d81 100644
+--- a/arch/arm/cpu/armv8/cache.S
++++ b/arch/arm/cpu/armv8/cache.S
+@@ -169,7 +169,11 @@ ENDPROC(__asm_flush_l3_dcache)
+  * x0: start address
+  * x1: end address
+  */
++#ifdef CONFIG_ARM_FFA_RT_MODE
++.pushsection .text.efi_runtime.__asm_flush_dcache_range, "ax"
++#else
+ .pushsection .text.__asm_flush_dcache_range, "ax"
++#endif
+ ENTRY(__asm_flush_dcache_range)
+ 	mrs	x3, ctr_el0
+ 	ubfx	x3, x3, #16, #4
+@@ -195,7 +199,11 @@ ENDPROC(__asm_flush_dcache_range)
+  * x0: start address
+  * x1: end address
+  */
++#ifdef CONFIG_ARM_FFA_RT_MODE
++.pushsection .text.efi_runtime.__asm_invalidate_dcache_range, "ax"
++#else
+ .pushsection .text.__asm_invalidate_dcache_range, "ax"
++#endif
+ ENTRY(__asm_invalidate_dcache_range)
+ 	mrs	x3, ctr_el0
+ 	ubfx	x3, x3, #16, #4
+diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+index ad232435eb2..53d57c211cb 100644
+--- a/arch/arm/cpu/armv8/cache_v8.c
++++ b/arch/arm/cpu/armv8/cache_v8.c
+@@ -8,6 +8,12 @@
+  */
+ 
+ #include <cpu_func.h>
++#if IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)
++#include <efi_loader.h>
++#define CACHE_RUNTIME_ATTR __efi_runtime
++#else
++#define CACHE_RUNTIME_ATTR
++#endif
+ #include <hang.h>
+ #include <log.h>
+ #include <asm/cache.h>
+@@ -915,7 +921,8 @@ inline void flush_dcache_all(void)
+ /*
+  * Invalidates range in all levels of D-cache/unified cache
+  */
+-void invalidate_dcache_range(unsigned long start, unsigned long stop)
++void CACHE_RUNTIME_ATTR invalidate_dcache_range(unsigned long start,
++						unsigned long stop)
  {
--	ffa_value_t res = {0};
--	int ffa_errno;
--	u64 req_mode, resp_mode;
- 	struct ffa_priv *uc_priv;
- 
- 	uc_priv = dev_get_uclass_priv(dev);
-@@ -847,50 +836,7 @@ int ffa_msg_send_direct_req_hdlr(struct udevice *dev, u16 dst_part_id,
- 	if (!uc_priv->partitions.count || !uc_priv->partitions.descs)
- 		return -ENODEV;
- 
--	if (is_smc64) {
--		req_mode = FFA_SMC_64(FFA_MSG_SEND_DIRECT_REQ);
--		resp_mode = FFA_SMC_64(FFA_MSG_SEND_DIRECT_RESP);
--	} else {
--		req_mode = FFA_SMC_32(FFA_MSG_SEND_DIRECT_REQ);
--		resp_mode = FFA_SMC_32(FFA_MSG_SEND_DIRECT_RESP);
--	}
--
--	invoke_ffa_fn((ffa_value_t){
--			.a0 = req_mode,
--			.a1 = PREP_SELF_ENDPOINT_ID(uc_priv->rt.id) |
--				PREP_PART_ENDPOINT_ID(dst_part_id),
--			.a2 = 0,
--			.a3 = msg->data0,
--			.a4 = msg->data1,
--			.a5 = msg->data2,
--			.a6 = msg->data3,
--			.a7 = msg->data4,
--			}, &res);
--
--	while (res.a0 == FFA_SMC_32(FFA_INTERRUPT))
--		invoke_ffa_fn((ffa_value_t){
--			.a0 = FFA_SMC_32(FFA_RUN),
--			.a1 = res.a1,
--			}, &res);
--
--	if (res.a0 == FFA_SMC_32(FFA_SUCCESS)) {
--		/* Message sent with no response */
--		return 0;
--	}
--
--	if (res.a0 == resp_mode) {
--		/* Message sent with response extract the return data */
--		msg->data0 = res.a3;
--		msg->data1 = res.a4;
--		msg->data2 = res.a5;
--		msg->data3 = res.a6;
--		msg->data4 = res.a7;
--
--		return 0;
--	}
--
--	ffa_errno = res.a2;
--	return ffa_to_std_errno(ffa_errno);
-+	return ffa_invoke_msg_send_direct_req(uc_priv->rt.id, dst_part_id, msg, is_smc64);
+ 	__asm_invalidate_dcache_range(start, stop);
+ }
+@@ -923,20 +930,25 @@ void invalidate_dcache_range(unsigned long start, unsigned long stop)
+ /*
+  * Flush range(clean & invalidate) from all levels of D-cache/unified cache
+  */
+-void flush_dcache_range(unsigned long start, unsigned long stop)
++void CACHE_RUNTIME_ATTR flush_dcache_range(unsigned long start,
++					   unsigned long stop)
+ {
+ 	__asm_flush_dcache_range(start, stop);
+ }
+ #else
+-void invalidate_dcache_range(unsigned long start, unsigned long stop)
++void CACHE_RUNTIME_ATTR invalidate_dcache_range(unsigned long start,
++						unsigned long stop)
+ {
  }
  
- /* FF-A driver operations (used by clients for communicating with FF-A)*/
-diff --git a/include/arm_ffa.h b/include/arm_ffa.h
-index 2994d8ee3ae..6a03aad81a8 100644
---- a/include/arm_ffa.h
-+++ b/include/arm_ffa.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-- * Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ * Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-  *
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-@@ -129,21 +129,13 @@ int ffa_sync_send_receive(struct udevice *dev, u16 dst_part_id,
+-void flush_dcache_range(unsigned long start, unsigned long stop)
++void CACHE_RUNTIME_ATTR flush_dcache_range(unsigned long start,
++					   unsigned long stop)
+ {
+ }
+ #endif /* CONFIG_SYS_DISABLE_DCACHE_OPS */
  
- /**
-  * ffa_msg_send_direct_req_hdlr() - FFA_MSG_SEND_DIRECT_{REQ,RESP} handler function
-- * @dev: The arm_ffa bus device
-+ * @dev: The FF-A bus device
-  * @dst_part_id: destination partition ID
-  * @msg: pointer to the message data preallocated by the client (in/out)
-  * @is_smc64: select 64-bit or 32-bit FF-A ABI
-  *
-- * This function implements FFA_MSG_SEND_DIRECT_{REQ,RESP}
-- * FF-A functions.
-- *
-- * FFA_MSG_SEND_DIRECT_REQ is used to send the data to the secure partition.
-- * The response from the secure partition is handled by reading the
-- * FFA_MSG_SEND_DIRECT_RESP arguments.
-- *
-- * The maximum size of the data that can be exchanged is 40 bytes which is
-- * sizeof(struct ffa_send_direct_data) as defined by the FF-A specification 1.0
-- * in the section relevant to FFA_MSG_SEND_DIRECT_{REQ,RESP}
-+ * This function calls the ffa_invoke_msg_send_direct_req() function which
-+ * invokes FFA_MSG_SEND_DIRECT_{REQ,RESP} FF-A functions.
-  *
-  * Return:
-  *
++#undef CACHE_RUNTIME_ATTR
++
+ void dcache_enable(void)
+ {
+ 	/* The data cache is not active unless the mmu is enabled */
 -- 
 2.43.0
 
