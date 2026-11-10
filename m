@@ -2,113 +2,314 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BA5B606A7EE
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 13:05:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50AA6606A7D4
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 13:05:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Zd+MAwuJ;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=m3oFsXuq
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=M7PdoQrp;
+	dkim=pass (2048-bit key, unprotected) header.d=synopsys.com header.i=@synopsys.com header.a=rsa-sha256 header.s=pfptdkimsnps header.b=ccFRsXVa;
+	dkim=pass (2048-bit key, unprotected) header.d=synopsys.com header.i=@synopsys.com header.a=rsa-sha256 header.s=mail header.b=I3u/KO5a;
+	dkim=neutral header.d=synopsys.com header.i=@synopsys.com header.a=rsa-sha256 header.s=selector1 header.b=PJyeMAKR
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 587BF81271;
-	Tue, 10 Nov 2026 13:05:38 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2415F812B1;
+	Tue, 10 Nov 2026 13:05:40 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PGeRU-6MunuO; Tue, 10 Nov 2026 13:05:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0EC98812F1
+ id 0qm6b9jTqYIa; Tue, 10 Nov 2026 13:05:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 8DF8A81287
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794315935;
-	b=aaVC+WtyvBnIwrq/tdXAkAH8duxVKxzrytATVERn6SG4M96Ub/kTRsWoST3fDI4W/QlA
-	 V50C3OO57uCU1+q5tM3v+e8iyvli9k00OYg2FqTZ0ASYviExJRcrxSrbWw7SSO111pG4E
-	 12061TFFxPUWIJefwvW5umuWQ87oMwWtcngx0pE3jCfc+8yg1LMeqrubWZET2K3+xLW4g
-	 RcaV2Il5eoPCMdV/ubi7G+bviJj+3h1wPHbjak8xcGLc69qhEenjOWHf55kw5IBDynENh
-	 qRuckjQc7BSoad4BGX6l6UXOiHuIa0N9JUdLx7wv22PBoI78p2PDg/Fuopl04m6lX7w==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794315937;
+	b=lfZvm2bxNsoFD1ktcw6sh/FffN6BGHth9tPLVhyueep5IfJxOiNOpJV4B//oagsgxKhQ
+	 xCBo4k/i4OHV5eXeF3Ai14zoJLhS40+BYooN5t5Fv44lht/z2PyaaSBV0wXYmn/s4RXtu
+	 3YRASwX77cJfYY/nkqP3i/3oMEJdHe9fnOI8qNctj3TCV1KFQ9tgODlZAxPbfzjXQMGHZ
+	 SexUgl5XMYFTLLELOufJdBaodP4bsWacAEoTBallBPh3phFTg/JXOJXylNqSqgsbxRasO
+	 gLdKCV45gPtW8lX1PA4snqacsOdFDL6mZO8Sa9WO1jW3d7zwCZ9HIC4JLe9m1XacUzA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794315935;
+	c=relaxed/relaxed; t=1794315937;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=Hf4I/fg5VH3/g5kl3hiJHAkSClKrqZs3mZ3uT/F9pJ0=;
-	b=XaisF7VvTb3DpPrdkkma7QhiG+lMWhBInV8gHUKS+pVXS0lfqXvlsFB09yTVee4UF32m
-	 pxU9lSBktZa9bbL71udy0k3D3Ra2RRlcYhbr3qyDIff3jxH8u28i7G6SHmDMngT4ZXGYj
-	 1QhRA94TKdXSQS80mcZWV8cE2daARP9tBHd/efhY7Ds/htTJYe0RwYyzQrUI/rPKKrJox
-	 7vv5z5BzVoaiU9HUpD/6uIMtsPvlUWCoUxGerhEp/QrHUbht3b36siDGhlVWMdZtKXaz4
-	 nWkc8XzI4v8/C5E5TIzEcLpW7j7/6YkJHW5KW4XZH0KPZmJDlrJnXs8o2iFWasbGiTg==
+	 X-Spam-Status:Received:ARC-Filter:X-Greylist:Received-SPF:Received:
+	 Received:DKIM-Signature:Received:DKIM-Signature:Received:Received:
+	 Received:DKIM-Signature:Received:Received:X-SNPS-Relay:From:To:CC:
+	 Subject:Thread-Topic:Thread-Index:Date:Message-ID:References:
+	 In-Reply-To:Accept-Language:Content-Language:X-MS-Has-Attach:
+	 X-MS-TNEF-Correlator:x-ms-publictraffictype:
+	 x-ms-traffictypediagnostic:x-ms-office365-filtering-correlation-id:
+	 x-ms-exchange-senderadcheck:x-ms-exchange-antispam-relay:
+	 x-microsoft-antispam:x-microsoft-antispam-message-info:
+	 x-forefront-antispam-report:
+	 x-ms-exchange-antispam-messagedata-chunkcount:
+	 x-ms-exchange-antispam-messagedata-0:Content-Type:Content-ID:
+	 Content-Transfer-Encoding:MIME-Version:
+	 X-Exchange-RoutingPolicyChecked:
+	 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-AuthAs:X-MS-Exchange-CrossTenant-AuthSource:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-originalarrivaltime:
+	 X-MS-Exchange-CrossTenant-fromentityheader:
+	 X-MS-Exchange-CrossTenant-id:X-MS-Exchange-CrossTenant-mailboxtype:
+	 X-MS-Exchange-CrossTenant-userprincipalname:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details:X-Mailman-Approved-At:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=CgcgKhKf/2IcxFurxYu4QMQM9Ux+hgy0VviEXvGzDfU=;
+	b=S2j+J8iGAshnrp0lj4X1Nimo1D+A1RExaaT4QP6Fk2UkjvNZHLUb9RXvu3D3b+34v10O
+	 oIbdCBzMlyDppnf6m0cs6D/QyaJLkMu10PFwdnl6s8bA2lD1aDUUP1AWNt+3abuZKiO5O
+	 k+8LwbChGoxpZNLgDy8RURPe7sjlRUm/HILGfk0jbwMFipto+FOtnIwP4gPpRRD4cgXEy
+	 HrkQHhYj9fzujvp2SpsuRyzHBXt0mdaHRdsaGDANdwsdL833Xl9WRxImfM2Kgd6ikt5GZ
+	 af3wlaaHxWyfuZxq6hnWhAxcpGZlYKjYMwAQrK0fLDRtcsiF8tqVNhzAnwMrh2cIUCA==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794315934;
-	bh=Hf4I/fg5VH3/g5kl3hiJHAkSClKrqZs3mZ3uT/F9pJ0=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794315937;
+	bh=CgcgKhKf/2IcxFurxYu4QMQM9Ux+hgy0VviEXvGzDfU=;
+	h=From:To:CC:Subject:Date:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Zd+MAwuJQ1DfihQsQd9t9Cu2EdX4/PUmsOccYpnno3r1LMF7CCByRumDBO5OUDuuC
-	 QlTTNpaMdlaQONy0XNS/c1xBFewjzX1Vxk2QHVr841ESdva0HJ+tgkkQMoJhM0pYZJ
-	 k3gxMKZ5tsMJ78XpUAS5i8makayC5hs5rC7d6wGOHOrpyamysGYMWuYlZFgLn7f/4N
-	 V9FgALu08yay8voBII4NGpNXAF1tmwBjnV/a66UOsZRmvtjqyIXAUUqQjyVtXwkEH6
-	 rX/h7/FmjvXHYctfFWzMPWFTAf3rboe+S5gO/WkXEZMvxl4kiQGA3a/w/GPJRqrZ9y
-	 m0LCKq/PDt0FA==
+	b=M7PdoQrp/QEq46P8oyymow+mpBbAyTjvs8MBWf/E+aU1Xr8TCnM9LbAKMNo05ni7r
+	 VDWgfRZA7XKt5Wh5cFjO0mPv8qkKOjXutHVfXGyY03Squ7hbWXip8MT9SGwuLnYTtx
+	 FZxl7ShAwZi7PzlpDOobFTjF/X5czSt/NMgkNlDseoiCWHUxJ+Lt7VeJfigKNwwjLQ
+	 9iW4lyMEKlqtKw+FOAOtyIr816YzmPqXXxUNRRBw9XMZvHZVxvNNOipHgpiTL38sBc
+	 fd6sYsxtRmWPBqkaO189nGo6lBU5WN/wNYXv9rR0chovvYLBPjRJLifzaFcdnWI1eY
+	 VEIhUGid12KUQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0EC98812F1;
-	Tue, 10 Nov 2026 13:05:34 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id D63FBD7
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8DF8A81287;
+	Tue, 10 Nov 2026 13:05:37 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 808ABD7
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 02:46:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id BC566407FC
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:22 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 71DFB6070F
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 02:46:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 77QPCHEA9K6J for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 09:58:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 5409740831
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip=217.140.110.172
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
- helo=foss.arm.com; envelope-from=harsimransingh.tungal@arm.com;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IOSBFoHkuTok for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 02:46:28 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1828C6069A
+Authentication-Results: smtp3.osuosl.org; arc=fail smtp.remote-ip=148.163.158.9
+X-Greylist: delayed 6828 seconds by postgrey-1.37 at util1.osuosl.org;
+ Tue, 10 Nov 2026 02:46:27 UTC
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=synopsys.com
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=synopsys.com
+ header.i=@synopsys.com header.a=rsa-sha256 header.s=pfptdkimsnps
+ header.b=ccFRsXVa; 
+ dkim=pass (2048-bit key, unprotected) header.d=synopsys.com
+ header.i=@synopsys.com header.a=rsa-sha256 header.s=mail header.b=I3u/KO5a; 
+ dkim=fail reason="signature verification failed" (1024-bit key,
+ unprotected) header.d=synopsys.com header.i=@synopsys.com header.a=rsa-sha256
+ header.s=selector1 header.b=PJyeMAKR
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=148.163.158.9;
+ helo=mx0b-00230701.pphosted.com; envelope-from=thinh.nguyen@synopsys.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=m3oFsXuq
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp4.osuosl.org (Postfix) with ESMTP id 5409740831
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:18 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 209371E7D;
- Tue, 10 Nov 2026 01:58:15 -0800 (PST)
-Received: from e142474.cambridge.arm.com (e142474.arm.com [10.2.203.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D63CD3F632;
- Tue, 10 Nov 2026 01:58:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1794304698; bh=khWtXBdxQqOiI9AoVe8ASaQsJ/Q/6eyonPAcjnsTmZw=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=m3oFsXuqc6AsG5aLP0UMwnHicWoEKj+54RbDQYbkjQfjlgCOEHj/FpNtU29mUjnu3
- v6SuLa5wWfYKH/GVYi9ODxQq4zHuuJIEf99HEsrUeAVrVQkXF58WjBF0Y95tH+Dd62
- 0UNFqYWl/SrMYXdNXizbFcrwziAMqXdBtGIIPf58=
-From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v7 04/22] arm-ffa: add runtime direct-message support
-Date: Tue, 10 Nov 2026 09:57:45 +0000
-Message-ID: <b4a956877d787fd1c4bf6dfeb1cb60c1ce82ff15.1794221712.git.harsimransingh.tungal@arm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1794221712.git.harsimransingh.tungal@arm.com>
-References: <cover.1794221712.git.harsimransingh.tungal@arm.com>
+Received: from mx0b-00230701.pphosted.com (mx0b-00230701.pphosted.com
+ [148.163.158.9])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 1828C6069A
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 02:46:26 +0000 (UTC)
+Received: from pps.filterd (m0098572.ppops.net [127.0.0.1])
+ by mx0b-00230701.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6AA0gwkp1322855; Mon, 9 Nov 2026 16:52:21 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=synopsys.com; h=
+ cc:content-id:content-transfer-encoding:content-type:date:from
+ :in-reply-to:message-id:mime-version:references:subject:to; s=
+ pfptdkimsnps; bh=CgcgKhKf/2IcxFurxYu4QMQM9Ux+hgy0VviEXvGzDfU=; b=
+ ccFRsXVaHcZdG4ADKu/z1d7SQWZwl5dO3BiPJXL04WZ3WqBvHtU5OwxXqGP15IjT
+ VGI5GwWWyPftMGKkwBlC0GeJvnowBASj1INln8E2QKDTd10Y1ULtcM5YQvhV5dtQ
+ fLyOJJB/sPk+diDIfp5yUMQCLbAScT06XAV98srBh9GSzLmgm4PkNC2Y6K8bGNMu
+ beJiWYfQbJv1LXKv7DWlXRhKdrtP7Owy96Fx4UQqMlqosWMYt+Jfl7zJkqgm4s5o
+ 17FceEhrU54Ml2uEMB1B/dyEwoMFHB97P8EvU3NRIe+Mof6dMRKnyaUB4I4jkwol
+ f4vkzFHjzetHcMhD0OrxrQ==
+Received: from smtprelay-out1.synopsys.com (smtprelay-out1.synopsys.com
+ [149.117.73.133])
+ by mx0b-00230701.pphosted.com (PPS) with ESMTPS id 4huhs7tw31-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Mon, 09 Nov 2026 16:52:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=synopsys.com; s=mail;
+ t=1794271940; bh=CgcgKhKf/2IcxFurxYu4QMQM9Ux+hgy0VviEXvGzDfU=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=I3u/KO5aZ88bwqAtWmlaUuUYpzI7uZVVoZpb3b5o1Q6T8DPE/F05AtpFs05roGkCK
+ dBXYrGNMG31guswomyYDRIVQY5wF+4faYKVMqer84wia40jYRm4de6OtlZKOGIZSRp
+ liV0b/0y2e/HUkCf/BAScJFYMahzgfPE90y1UD+D2t3PE7sBwOF4dPhCFNguPXtBtP
+ Q2WFlSpv2Mtv2KZ9bY1f3yYB8KZEEibnuPoYja8C7S4gdY7CvyHr87I8s3+BxR1Ers
+ u8joCTUyHryD3+GIFhuFWAHZHAZFgx3NqiRA1Ps6nUfiglhUrj5mMqwC1h5N8RuOa/
+ IlDCc0pvekwpg==
+Received: from mailhost.synopsys.com (us03-mailhost2.synopsys.com [10.4.17.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits)
+ client-signature RSA-PSS (2048 bits))
+ (Client CN "mailhost.synopsys.com", Issuer "SNPSica2" (verified OK))
+ by smtprelay-out1.synopsys.com (Postfix) with ESMTPS id B8F0540408;
+ Tue, 10 Nov 2026 00:52:18 +0000 (UTC)
+Received: from o365relay-in.synopsys.com (us03-o365relay3.synopsys.com
+ [10.4.161.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits)
+ client-signature RSA-PSS (2048 bits))
+ (Client CN "o365relay-in.synopsys.com",
+ Issuer "Sectigo Public Server Authentication CA OV R36" (not verified))
+ by mailhost.synopsys.com (Postfix) with ESMTPS id D2CCBA0070;
+ Tue, 10 Nov 2026 00:52:17 +0000 (UTC)
+Authentication-Results: o365relay-in.synopsys.com;
+ dmarc=pass (p=reject dis=none) header.from=synopsys.com
+Authentication-Results: o365relay-in.synopsys.com;
+ spf=pass smtp.mailfrom=synopsys.com
+Authentication-Results: o365relay-in.synopsys.com; dkim=pass (1024-bit key;
+ unprotected) header.d=synopsys.com header.i=@synopsys.com header.a=rsa-sha256
+ header.s=selector1 header.b=PJyeMAKR; 
+ dkim-atps=neutral
+Received: from DM5PR08CU004.outbound.protection.outlook.com
+ (mail-dm5pr08cu00404.outbound.protection.outlook.com [40.93.13.100])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (2048 bits) server-digest
+ SHA256 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+ (Client CN "mail.protection.outlook.com",
+ Issuer "DigiCert SHA2 Secure Server CA" (not verified))
+ by o365relay-in.synopsys.com (Postfix) with ESMTPS id 7CF1340ACA;
+ Tue, 10 Nov 2026 00:52:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=synopsys.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CgcgKhKf/2IcxFurxYu4QMQM9Ux+hgy0VviEXvGzDfU=;
+ b=PJyeMAKRHZORM44jssi1+h61jNbHVl8io45dv7CvvSt8Wp4ttk19Ae+z6ruW1j9J2AxO51i71qs4a8sXC4/xHU9Txau11Oq0wznHMQSD08QxaVzwP094X4VOEa9ua2hnU9S+DDJlLYOuENXtwPocYTElPpQgEv0CK+ZohkcaL/8=
+Received: from PH0PR12MB7486.namprd12.prod.outlook.com (2603:10b6:510:1e9::6)
+ by MW6PR12MB7085.namprd12.prod.outlook.com (2603:10b6:303:238::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.13; Tue, 10 Nov
+ 2026 00:52:09 +0000
+Received: from PH0PR12MB7486.namprd12.prod.outlook.com
+ ([fe80::7df9:b25e:9216:f109]) by PH0PR12MB7486.namprd12.prod.outlook.com
+ ([fe80::7df9:b25e:9216:f109%5]) with mapi id 15.21.0592.012; Tue, 10 Nov 2026
+ 00:52:09 +0000
+X-SNPS-Relay: synopsys.com
+From: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>
+CC: Dan Tran <Dan.Tran1@synopsys.com>, Lukasz Majewski <lukma@denx.de>,
+ Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut+usb@mailbox.org>,
+ Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+ Tejas Narendra Joglekar <Tejas.Joglekar@synopsys.com>,
+ "u-boot@lists.u-boot-project.org" <u-boot@lists.u-boot-project.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: Re: [PATCH v3 0/2] usb: gadget: add SuperSpeed descriptor support
+Thread-Topic: [PATCH v3 0/2] usb: gadget: add SuperSpeed descriptor support
+Thread-Index: AQHdPBUy4ti99ufG6E6pK0/WcV4467bJJu+AgF28T4A=
+Date: Tue, 10 Nov 2026 00:52:09 +0000
+Message-ID: <avJpVgg6Jh_6Fuzu@vbox>
+References: <cover.1788488867.git.Thinh.Nguyen@synopsys.com>
+ <178911875744.102286.17132958660285497598.b4-ty@kernel.org>
+In-Reply-To: <178911875744.102286.17132958660285497598.b4-ty@kernel.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=synopsys.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PH0PR12MB7486:EE_|MW6PR12MB7085:EE_
+x-ms-office365-filtering-correlation-id: 77f0b713-6c97-419f-7471-08df3ec4d95c
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|23010399003|18002099003|22082099003|6133799003|10067099003|4133799003|38070700021|11063799006|261028144727099003|261026121527099003|261102123227099003|261022105027099003|261022113327099003|261022115727099003|261022075727099003|56012099006|261021135927099003|261021121427099003|261021133027099003|261021123027099003|261021130227099003|261026135527099003|261026140227099003|261009223027099003|261026130827099003|4143699003;
+x-microsoft-antispam-message-info: J+5g86vkTFTroAcKR2E47Bcr4Oo9dlEMOYTIx0zGxpC3l66tEXRqQydilIqFfag7EA9SmF22XSLegFwO5JJdntAEX4covmJHFpzB8plmwSvLunCo0Sc0dqIFJ4SQz+5Cd9ZAxqHB84wRyUG+Pook+Nrn0q0uyPg4iEc5NRv/vbWf9uHaaJtrgo+iuYys+cPaGPHW23DYPjjbd8yPthAziXyluhBNtQzt/LC0KiPKIUBqEwUCUmsvODsf7NJAfLpFqV94lds8pRNYvV59smibtvyRUWPAtLHFJOlNj1w1k/su63Rdne+zJj0rLl9qh49Gfq+eeRnzzfBdkpputa4HjXdeuf47rtpC6TRBjoEnhKg3Gtk3APDlD2yGH+8dLojqRd6dR9LTwMJRw73Nk/bO02QnSZ6Bich8ZcLJKBHisD2a9LM66jE8oSSFJemC59TSquUZeMirfXQbBABJMWD8Sxv84z8f/PXs1t7AzvaEh9iXVenBfbIWMPMGOYxYx9annRzCl+TbTYddnk7nrpUrACjTvImKuKQMosbN4E8RgnvX1Qv6mkSMF82j0RHbbYTNI/n9QWW8Ho2+IAMUNNDYLCstcZ5qzc+fYju5AdzzcoHETb06RI5SY8Qp6yflIi+s0iknUZFJdmGhMYLpWVeFvG1X4OYQ5CJM47z5lZkkDj4=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH0PR12MB7486.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(18002099003)(22082099003)(6133799003)(10067099003)(4133799003)(38070700021)(11063799006)(261028144727099003)(261026121527099003)(261102123227099003)(261022105027099003)(261022113327099003)(261022115727099003)(261022075727099003)(56012099006)(261021135927099003)(261021121427099003)(261021133027099003)(261021123027099003)(261021130227099003)(261026135527099003)(261026140227099003)(261009223027099003)(261026130827099003)(4143699003);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?TlBQbmFrdkpHQ0ErdDhuUmNMelpBQ0d3dExqQ0hxVUxoVnBUNG9ua0szQmxw?=
+ =?utf-8?B?V0FTZTZzeGtkVmE2UStmUytWRW5DWVdRZlJZc3RWMDZRYkVoaDM4N3YzWXJO?=
+ =?utf-8?B?YncxRUk4SlJzZlFpNGtpR3pqTEcwcHVJeUMxOEQ3RzhPVGlhL3NhNmtwak52?=
+ =?utf-8?B?MDlVaVVHemJHSDhwNUVobDRHSWd2VStxRFg4NTE3ZjM5S25qYStIU2p0WTBR?=
+ =?utf-8?B?WFgySHgxUDMxdndzUmI1MnVLSHA5TUMxZDZEemNqc214cnRObjY4d3BBTmRC?=
+ =?utf-8?B?UG9PWFYyODhtYjdmam5qZTVmeUdVenV1d0R6Z05GajRSdEpBQzZCa1RxV0Uw?=
+ =?utf-8?B?ajZyWGFDQjNSTTMxRisydWZNSlZubTU2VUMvQ1pRYVU0NTlFS2ZOdUNydm8v?=
+ =?utf-8?B?NEUyYmhXd2IwTzhmN1B2V2M3RzVXNCtNNmFQZTEvNlorenRWN01hUWxlYVor?=
+ =?utf-8?B?TUpZS2dxTWE2MElEL0dxWlFoeW1FSlM4TDZzVjVmWGxTaWxZeEQxV1NmL3da?=
+ =?utf-8?B?TjNCRHl0cUxVOE52anRXMkRwMnFDMHJNMHloNjVSU2ZmSkxNUTJoV2dqQTZu?=
+ =?utf-8?B?U2dCdmppWjF5YzZPV2JhdERqZUFNelI4SWR2WWFKTGFnNnlkbUtnVCsyMUtn?=
+ =?utf-8?B?S2tFY3Mrb1FNcllReGZGSEUwZTlIdUhFQVp5WVZidWh1OVBFN2huSUNuSXJw?=
+ =?utf-8?B?WGZIVEY4TDg0b0RUSG9UODBCemRHNkdySklzLzJMbnlKeU9iY1lxbXQzRnor?=
+ =?utf-8?B?RFZWT1VDTDB1bU9XR3dQNlJPNjFQbkdjemNyWm1xTHZyWVJSbXJlODRjcFV1?=
+ =?utf-8?B?Tk9NaXNCWEdLdzdXVzVScjMwZ1lWWjJ0TUZ6TWdoRkwwamZXbEhQaVFRUXV1?=
+ =?utf-8?B?WkVROUhWMUUxQjFMTzJuUlpjMWg1a0V0U2RRUG5CUi9kclJPaW5BRm5VY3NF?=
+ =?utf-8?B?QzJLZnJNYjJ6b2NWSlJ1NGlONkVwY1A1ODMxczFlSlEwbkxxYzhxb1dNZE9x?=
+ =?utf-8?B?YnlHajVLamN5a0FiSkNzeFJQc0ZGZHo4RU5pL2NQbHJsWXpYb0dEWTdoZ3lw?=
+ =?utf-8?B?RzYwM2gwU1IzblZUNXZtRGJ2dzcwYXNkNnZZckJrK2pJS3BkZVkyMUJmSHFM?=
+ =?utf-8?B?aTAwMHIxd0dud1N2Y2lHaVpTVmFLc1hJKzdZYzZpcGg3Wms5RzVRRTFlN1NW?=
+ =?utf-8?B?aUEzcVFQS3JUdlhmVTNjbnZsTmtLMDNlK1lMWEdOL09JNEJkOVBGbDB3M2hh?=
+ =?utf-8?B?UDlsTDdaVzY3WHBlTWoxWHQ4VHZkVlAydXB4YmhtaElzMU1XUmNNcnlUa1JS?=
+ =?utf-8?B?V25QSkdkeGZBeURMTFNhdEQyU1p3cVBlSXQ3dGgybitJNTRsenJFZFV4Q2s0?=
+ =?utf-8?B?OUt6RnJ4NUNReUdSdlJJUkZNR0s5Q0MxZ2FRMUZOUlpOUXVPOERZbngwTXFM?=
+ =?utf-8?B?Q2FwTEVDdTZRZG9BVVZjNGZ0d0d5Y0dTaDVuVXBteW5TdVNqQVBRUnVmUFRG?=
+ =?utf-8?B?VGtLcFM5MFJRNHMyajVEU2RRb3NoWFYzZEo2K2V5eTBUcnQ3SmRnWDlad1c2?=
+ =?utf-8?B?VVhQNSt2VUwydFNOT05KWU9GWkZ5SldXaVFYODQySE8xTE5mVlFCd2N3a1dH?=
+ =?utf-8?B?NU5kdndUTGYwV0ZxYjZPWkYxQjFWYjhXQVpieTZWS1JxR08rUXJKRUZaUlU2?=
+ =?utf-8?B?NTBSbzNIYVRXeGpvaGxhR1hrdDlnSW02N3ZENXZhdW5kb0JiUExHdkhvVVZP?=
+ =?utf-8?B?eUpjWEJoYXB4SHFXYjZlZ0FicmVnR0xlN1hzZ29OakRyME0vQVFVclpFTC9o?=
+ =?utf-8?B?QkhDaGhxRlNvMjM5bG5pV3lGT3JadE5xWEZ6Y1VacmVBYnJhbERmdEczRmd2?=
+ =?utf-8?B?aUZtcjNHdnlmNFRTaHdIdEdHdXBSdXlZaWdNYXE0QjlFWlNGYXVobmFBdllr?=
+ =?utf-8?B?NkYrNmlBdGpLK0pPRjdrQ01aUCtORk52QTNpY1FQVExXa2Npd0c1RjVSbFpx?=
+ =?utf-8?B?NzlSS2xVRTdWZ3F0TmFJZnlwT0lVL0YxZ2pUSG5LOHc3V2grRHdqWFpkOWhB?=
+ =?utf-8?B?dDgxYzFmTEwwdE0yUVA3Ym5SbnlpRWRUcVFiNS8rVHh1MW85dEpXeS9YbTgr?=
+ =?utf-8?B?WllZalp6VU01bHppeVhmRm43aTFQSm9vV08vdmZ4cnYvaFp4Y2lBTCtPajVV?=
+ =?utf-8?B?U3RzT1AwdEliQjVsUHNHMDdXTEtPeEpDVlN0UHdHUW9IbzdPTVBSMllBMjFW?=
+ =?utf-8?B?UXpIUHhDME56dlhqRzZNb3pYYTFzVEpwTURld3ZnZFQ0cWNkUmhuRFI1NWFZ?=
+ =?utf-8?B?Zk0wd2k1Vm9NdFkvVnM5OStyRVZSUzR1OWRCU3UvNTlPa3doQjJTZz09?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <8A1DED2F3AA5044284E433DFE51D1E2E@namprd12.prod.outlook.com>
+Content-Transfer-Encoding: base64
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Exchange-RoutingPolicyChecked: pE53FGvEMymhBlgQ6L+BSeLU/0Zyekx5Ud8utFaQ3EFsKLPKrIQs07+wpmd125XP4g5BcKzhQTjgwK1q1NKB80psa8s1nuhdx5cXAt89nxsyHkb/eFaUlD6qJPTM0Fr+f8SIkfE+Mvh2AQc7UQYPydhscZSKtm/LyqbDsA6bJaV/eeEguWFYkIWXPmiXTpun+dr4ov2Cz8GFeYj+mOKXihZn00dx6R1w8XNJvnu2nXZArBAXitvtofhHF0rcgFmzMYVcTh4xCJQL0GWjaJiE8n+b/B8G/BQGiK2bqnKJMotBD5EOPjCNksPfcX9eBOKV6S97X8gViIRjDTJpfqdy0A==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: q6GIvefyXYQOzfMOduxIta9Pcq0RFCjZSSraBG80INWfish5Zez2ewHqnQmuKP1T8egxUw2WNTxguKhPmBVRSDRMXnYNCVVJ3hB0jvEN837fVZVGHVFPCI7tYl8BinXXRYqGZKA76gjoAq681LOzzwyENKpIRQ4r3RT0DKVzqeRQdm8xF9ijGqGAvAMlvvmXl7szOcatgM2npjv+FQPQBMLDKKBkBug18BZjcqA4YdtpGwfswuJFT5jtq2wtOcrBfYYqqolCalQUJ+HsOwr6bqKptMNL7+zLECHqcLrg2WIp/m0Vh7hlfz3jjkdwLOiUTZqR0SVWh2pMoYcuWgKH18+IUBxZryAYh0wx7YdAkTcnMrLGdP52ZNA3AcHN69JlUwWiGRDsHXizOHftli2+bNQXRHYlf+szgSmhMjCx+yG2tsppAeZDMMbW0RqSrOAII7ivRE8QOsm9tI8740zgWhs74ZIu/1dGjK4jOhSvhz2LXtYzxWVFRKYGP8egTmth5b/xmjR5VLn3OXQD9v/cKAJH/zS4lVsfs19BZKamoizftcZe7rbg8c+YYgQledZ95Ik5RTr23N4CTmB59HFxXhlcF0i4/VnlXEEat/dTfRgyzzO32s3iESDn0CcaMgkBYan9SrgzP8U1cj7/CcZXRA==
+X-OriginatorOrg: synopsys.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR12MB7486.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 77f0b713-6c97-419f-7471-08df3ec4d95c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Nov 2026 00:52:09.0926 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: c33c9f88-1eb7-4099-9700-16013fd9e8aa
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: HTY4qOc6RYI/80WjmT37gJCZCT9S3wOl1FL3IbLeylHBSyb/RUTF+QGWNxe654BxWZO9MvCOegFkSd16Lweihw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB7085
+X-Proofpoint-ORIG-GUID: IuR9-x3PKD1dwPahisATwhCgQSjm4Gz5
+X-Authority-Analysis: v=2.4 cv=N828hG9B c=1 sm=1 tr=0 ts=6af26ac4 cx=c_pps
+ a=8EbXvwLXkpGsT4ql/pYRAw==:117 a=8EbXvwLXkpGsT4ql/pYRAw==:17
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=qPHU084jO2kA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=tU_645BZ7FZt8VqRJtHG:22 a=jSPayVjLy6xbsuKauFBc:22
+ a=1VxDqnHFAAAA:8 a=ZwIp0sn5CNpsRLgdvBEA:9 a=QEXdDO2ut3YA:10
+ a=aZ5uHUMKh6B-zo3GvD48:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEwMDAwMyBTYWx0ZWRfX4Q4lonpbcszL
+ kY52VtO1ML/SfXyH2OalzToFVzTfVJeNX2UurrAnJSxsl7pVDtL2R6J3uLgvnhiQU78rUeO/D6Y
+ 4yKZ/9JCgNJB7aWxP/tTJPoGpQE2+PvWTDvAlW42a48jTEiGhXIMu7QeZyecGWJpgz/oHYHTeWf
+ 7uZwFlJDf7fc4/a53Uwbse7L2fqu08ILPQL5TInaubg5oWwD0VVMcmtZmDFRdMJLd3dQfUDPpjz
+ YnQ/tO64g7lQF+2Rn0L6PX/nfwecN4wPq0RgT9SFjtdy5MEwHEJuxcb17tjDQ4JCdKLcTRAQXkw
+ eCcF2gzhehr2zzhCVXlsNe13llPa/+dKkJE9c6PtHXpXaHdM2D+2xoCwcqxysXxTCVNas1GK645
+ SrEHuZunSNO6xWVpIov3CO/pB1ohtQhPQnQdZuxgD1Fa7ADDkJxFaBm0DZ/l9maM/1ASA9+zAqJ
+ 3jShPHB7tTGsQphq/mg==
+X-Proofpoint-GUID: IuR9-x3PKD1dwPahisATwhCgQSjm4Gz5
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEwMDAwMyBTYWx0ZWRfX12eJ8T8aI85L
+ c8I9dbW5R8fJ80xNWCm2/iEb5zZtxi17g6d0rA1Vedeh5TI8ReqC//J5E41OPJl8YcFcGqrqHh4
+ HbbjwnXGNE5mThhGySMKmxORnA/qnyA=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-10_01,2026-11-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_active_cloned_notspam
+ policy=outbound_active_cloned score=0 adultscore=0 clxscore=1015
+ lowpriorityscore=0 priorityscore=1501 malwarescore=0 phishscore=0 spamscore=0
+ impostorscore=0 suspectscore=0 bulkscore=0 classifier=typeunknown authscore=0
+ authtc= authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.22.0-2611040001 definitions=main-2611100003
 X-Mailman-Approved-At: Tue, 10 Nov 2026 13:05:19 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -119,572 +320,39 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add the FF-A runtime transport implementation needed after
-ExitBootServices() so EFI runtime services can continue to exchange
-direct messages with secure partitions. The runtime code keeps resident
-FF-A private data, tracks whether the runtime context is ready,
-translates FF-A error codes, and exposes ffa_sync_send_receive_runtime()
-for FFA_MSG_SEND_DIRECT_REQ/RESP.
-
-Add the ARM_FFA_RT_MODE Kconfig option and build arm-ffa-runtime.c when
-FF-A transport and EFI loader support are enabled. Move FF-A errno
-translation out of arm-ffa-uclass.c so boot-time and runtime callers use
-the same mapping.
-
-Tag the runtime code and data with __efi_runtime and __efi_runtime_data
-so they remain available after ExitBootServices(). The runtime
-direct-message path uses invoke_ffa_fn_runtime() and rejects requests
-until the runtime context has been enabled.
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Acked-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-
----
-Changelog:
-===============
-
-v3:
-
-Simon:
-
-- Rename the runtime-context helpers to the ffa_runtime_context_* form
-- Fix commit message styling
-
-v2:
-
-Simon:
-
-- Keep the runtime-enabled flag separate from copied boot-time data
-- Remove unused global-data plumbing
-- Switch to IS_ENABLED(CONFIG_ARM_FFA_RT_MODE)
-- Fix style issues
----
- drivers/firmware/arm-ffa/Kconfig           |  11 +
- drivers/firmware/arm-ffa/Makefile          |   4 +-
- drivers/firmware/arm-ffa/arm-ffa-runtime.c | 251 +++++++++++++++++++++
- drivers/firmware/arm-ffa/arm-ffa-uclass.c  |  35 +--
- include/arm_ffa_runtime.h                  | 132 +++++++++++
- 5 files changed, 397 insertions(+), 36 deletions(-)
- create mode 100644 drivers/firmware/arm-ffa/arm-ffa-runtime.c
-
-diff --git a/drivers/firmware/arm-ffa/Kconfig b/drivers/firmware/arm-ffa/Kconfig
-index 3706a889305..7aaf25fdb58 100644
---- a/drivers/firmware/arm-ffa/Kconfig
-+++ b/drivers/firmware/arm-ffa/Kconfig
-@@ -18,6 +18,9 @@ config ARM_FFA_TRANSPORT
- 	  The FF-A support in U-Boot is based on FF-A specification v1.0 and uses SMC32
- 	  calling convention.
- 
-+	  The FF-A bus also provides a runtime layer to keep a minimal set of FF-A
-+	  operations available after ExitBootServices().
-+
- 	  FF-A specification:
- 
- 	  https://developer.arm.com/documentation/den0077/a/?lang=en
-@@ -41,3 +44,11 @@ config ARM_FFA_TRANSPORT
- 	  Secure World (sandbox_ffa.c).
- 
- 	  For more details about the FF-A support, please refer to doc/arch/arm64.ffa.rst
-+
-+config ARM_FFA_RT_MODE
-+	bool "Enable FF-A runtime support"
-+	depends on ARM_FFA_TRANSPORT && EFI_LOADER
-+	default y
-+	help
-+	  Enable the FF-A runtime layer, keeping a minimal set of FF-A
-+	  operations available after ExitBootServices().
-diff --git a/drivers/firmware/arm-ffa/Makefile b/drivers/firmware/arm-ffa/Makefile
-index 318123a7f42..9deb59ba640 100644
---- a/drivers/firmware/arm-ffa/Makefile
-+++ b/drivers/firmware/arm-ffa/Makefile
-@@ -1,12 +1,12 @@
- # SPDX-License-Identifier: GPL-2.0+
- #
--# Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+# Copyright 2022-2023, 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
- #
- # Authors:
- #   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
- 
- # build the generic FF-A methods
--obj-y += arm-ffa-uclass.o
-+obj-y += arm-ffa-uclass.o arm-ffa-runtime.o
- ifeq ($(CONFIG_SANDBOX),y)
- # build the FF-A sandbox emulator and driver
- obj-y += ffa-emul-uclass.o sandbox_ffa.o
-diff --git a/drivers/firmware/arm-ffa/arm-ffa-runtime.c b/drivers/firmware/arm-ffa/arm-ffa-runtime.c
-new file mode 100644
-index 00000000000..d761ec9ee07
---- /dev/null
-+++ b/drivers/firmware/arm-ffa/arm-ffa-runtime.c
-@@ -0,0 +1,251 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-+ *
-+ * Authors:
-+ *      Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-+ *      Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-+ */
-+
-+#include <arm_ffa_runtime.h>
-+#include <arm_ffa_priv.h>
-+#include <log.h>
-+#include <linux/errno.h>
-+#include <linux/types.h>
-+
-+/* Error mapping declarations */
-+
-+int __ffa_runtime_data ffa_to_std_errmap[MAX_NUMBER_FFA_ERR] = {
-+	[NOT_SUPPORTED] = -EOPNOTSUPP,
-+	[INVALID_PARAMETERS] = -EINVAL,
-+	[NO_MEMORY] = -ENOMEM,
-+	[BUSY] = -EBUSY,
-+	[INTERRUPTED] = -EINTR,
-+	[DENIED] = -EACCES,
-+	[RETRY] = -EAGAIN,
-+	[ABORTED] = -ECANCELED,
-+};
-+
-+static __ffa_runtime_data struct ffa_priv_runtime ffa_priv_rt = {0};
-+static __ffa_runtime_data bool ffa_runtime_enabled;
-+
-+/* Arm FF-A driver runtime operations */
-+static const __ffa_runtime_data struct ffa_bus_ops_runtime ffa_ops_rt = {
-+	.sync_send_receive = ffa_msg_send_direct_req_hdlr_runtime,
-+};
-+
-+#define ffa_get_ops_runtime()		(&ffa_ops_rt)
-+#define ffa_get_priv_runtime()		(&ffa_priv_rt)
-+
-+/**
-+ * ffa_copy_runtime_priv() - copy runtime data into resident storage
-+ * @priv: pointer to the runtime private data
-+ *
-+ * Copy boot-time runtime data into the resident runtime storage to be used
-+ * after ExitBootServices().
-+ */
-+void ffa_copy_runtime_priv(const struct ffa_priv_runtime *priv)
-+{
-+	struct ffa_priv_runtime *priv_rt = ffa_get_priv_runtime();
-+
-+	if (priv)
-+		*priv_rt = *priv;
-+}
-+
-+/**
-+ * ffa_runtime_context_enable() - Enable FF-A runtime context
-+ *
-+ * This function marks the FF-A runtime environment as ready for use by
-+ * EFI runtime services. It is called when ExitBootServices() is invoked,
-+ * after the FF-A bus device has successfully probed and U-Boot's FF-A
-+ * endpoint ID has been discovered and stored in the runtime private data
-+ * structure.
-+ *
-+ * The FF-A runtime flag allows the EFI runtime layer to verify that the
-+ * FF-A transport was initialized during the boot phase and that all
-+ * runtime-safe FF-A operations may now be used after ExitBootServices().
-+ *
-+ */
-+void ffa_runtime_context_enable(void)
-+{
-+	ffa_runtime_enabled = true;
-+}
-+
-+/**
-+ * ffa_runtime_context_reset() - Reset FF-A runtime resident state
-+ *
-+ * Clear the resident runtime flag and private data. This is used by the
-+ * FF-A unit tests to avoid leaking runtime state across test cases.
-+ */
-+void ffa_runtime_context_reset(void)
-+{
-+	struct ffa_priv_runtime *priv_rt = ffa_get_priv_runtime();
-+
-+	*priv_rt = (struct ffa_priv_runtime){0};
-+	ffa_runtime_enabled = false;
-+}
-+
-+/**
-+ * ffa_runtime_context_ready() - Query FF-A runtime readiness
-+ *
-+ * This helper returns whether the FF-A runtime environment has been
-+ * enabled during the boot phase. Runtime FF-A operations must check this
-+ * flag before attempting any FF-A access, as the U-Boot driver model
-+ * (DM/uclass) is no longer available after ExitBootServices().
-+ *
-+ * The runtime context becomes enabled when ffa_runtime_context_enable()
-+ * is called, typically after the FF-A bus device has probed and the
-+ * endpoint ID has been discovered and stored in the runtime private
-+ * data structure.
-+ *
-+ * Return: true if FF-A runtime support is ready, false otherwise.
-+ */
-+bool __ffa_runtime ffa_runtime_context_ready(void)
-+{
-+	return ffa_runtime_enabled;
-+}
-+
-+/**
-+ * ffa_to_std_errno() - convert FF-A error code to standard error code
-+ * @ffa_errno:	Error code returned by the FF-A ABI
-+ *
-+ * Map the given FF-A error code as specified
-+ * by the spec to a u-boot standard error code.
-+ *
-+ * Return: Standard U-Boot errno for known FF-A errors, or -EINVAL otherwise.
-+ */
-+int __ffa_runtime ffa_to_std_errno(int ffa_errno)
-+{
-+	int err_idx = -ffa_errno;
-+
-+	/* Map the FF-A error code to the standard u-boot error code */
-+	if (err_idx > 0 && err_idx < MAX_NUMBER_FFA_ERR)
-+		return ffa_to_std_errmap[err_idx];
-+	return -EINVAL;
-+}
-+
-+/**
-+ * ffa_invoke_msg_send_direct_req() - Invokes FFA_MSG_SEND_DIRECT_{REQ,RESP}
-+ * @endpoint_id: u-boot endpoint id
-+ * @dst_part_id: destination partition ID
-+ * @msg: pointer to the message data preallocated by the client (in/out)
-+ * @is_smc64: select 64-bit or 32-bit FF-A ABI
-+ *
-+ * This function invokes FFA_MSG_SEND_DIRECT_{REQ,RESP} FF-A functions.
-+ *
-+ * FFA_MSG_SEND_DIRECT_REQ is used to send the data to the secure partition.
-+ * The response from the secure partition is handled by reading the
-+ * FFA_MSG_SEND_DIRECT_RESP arguments.
-+ *
-+ * The maximum size of the data that can be exchanged is 40 bytes which is
-+ * sizeof(struct ffa_send_direct_data) as defined by the FF-A specification 1.0
-+ * in the section relevant to FFA_MSG_SEND_DIRECT_{REQ,RESP}
-+ *
-+ * Return: 0 on success, negative errno on failure.
-+ */
-+int __ffa_runtime ffa_invoke_msg_send_direct_req(u16 endpoint_id, u16 dst_part_id,
-+						 struct ffa_send_direct_data *msg, bool is_smc64)
-+{
-+	int ffa_errno;
-+	u64 req_mode;
-+	ffa_value_t ffa_args_rt;
-+	ffa_value_t ffa_res_rt;
-+
-+	if (is_smc64)
-+		req_mode = FFA_SMC_64(FFA_MSG_SEND_DIRECT_REQ);
-+	else
-+		req_mode = FFA_SMC_32(FFA_MSG_SEND_DIRECT_REQ);
-+	efi_memset_runtime(&ffa_args_rt, 0, sizeof(ffa_args_rt));
-+	efi_memset_runtime(&ffa_res_rt, 0, sizeof(ffa_res_rt));
-+	ffa_args_rt.a0 = req_mode;
-+	ffa_args_rt.a1 = PREP_SELF_ENDPOINT_ID(endpoint_id) |
-+			 PREP_PART_ENDPOINT_ID(dst_part_id);
-+	ffa_args_rt.a2 = 0;
-+	ffa_args_rt.a3 = msg->data0;
-+	ffa_args_rt.a4 = msg->data1;
-+	ffa_args_rt.a5 = msg->data2;
-+	ffa_args_rt.a6 = msg->data3;
-+	ffa_args_rt.a7 = msg->data4;
-+
-+	invoke_ffa_fn_runtime(&ffa_args_rt, &ffa_res_rt);
-+
-+	while (ffa_res_rt.a0 == FFA_SMC_32(FFA_INTERRUPT) ||
-+	       ffa_res_rt.a0 == FFA_SMC_64(FFA_INTERRUPT)) {
-+		efi_memset_runtime(&ffa_args_rt, 0, sizeof(ffa_args_rt));
-+		ffa_args_rt.a0 = (ffa_res_rt.a0 == FFA_SMC_64(FFA_INTERRUPT)) ?
-+				  FFA_SMC_64(FFA_RUN) : FFA_SMC_32(FFA_RUN);
-+		ffa_args_rt.a1 = ffa_res_rt.a1;
-+
-+		invoke_ffa_fn_runtime(&ffa_args_rt, &ffa_res_rt);
-+	}
-+	if (ffa_res_rt.a0 == FFA_SMC_32(FFA_SUCCESS) ||
-+	    ffa_res_rt.a0 == FFA_SMC_64(FFA_SUCCESS)) {
-+		/* Message sent with no response */
-+		return 0;
-+	}
-+
-+	if (ffa_res_rt.a0 == FFA_SMC_32(FFA_MSG_SEND_DIRECT_RESP) ||
-+	    ffa_res_rt.a0 == FFA_SMC_64(FFA_MSG_SEND_DIRECT_RESP)) {
-+		/* Message sent with response extract the return data */
-+		msg->data0 = ffa_res_rt.a3;
-+		msg->data1 = ffa_res_rt.a4;
-+		msg->data2 = ffa_res_rt.a5;
-+		msg->data3 = ffa_res_rt.a6;
-+		msg->data4 = ffa_res_rt.a7;
-+		return 0;
-+	}
-+
-+	ffa_errno = ffa_res_rt.a2;
-+	return ffa_to_std_errno(ffa_errno);
-+}
-+
-+/**
-+ * ffa_msg_send_direct_req_hdlr_runtime() - Runtime implementation of
-+ * FFA_MSG_SEND_DIRECT_{REQ,RESP} handler function
-+ * @dst_part_id: destination partition ID
-+ * @msg: pointer to the message data preallocated by the client (in/out)
-+ * @is_smc64: select 64-bit or 32-bit FF-A ABI
-+ *
-+ * This function calls the ffa_invoke_msg_send_direct_req() function which
-+ * invokes FFA_MSG_SEND_DIRECT_{REQ,RESP} FF-A functions.
-+ *
-+ * Return:
-+ *
-+ * 0 on success. Otherwise, failure
-+ */
-+int __ffa_runtime ffa_msg_send_direct_req_hdlr_runtime(u16 dst_part_id,
-+						       struct ffa_send_direct_data *msg,
-+						       bool is_smc64)
-+{
-+	struct ffa_priv_runtime *priv_rt = ffa_get_priv_runtime();
-+
-+	return ffa_invoke_msg_send_direct_req(priv_rt->id, dst_part_id, msg, is_smc64);
-+}
-+
-+/**
-+ * ffa_sync_send_receive_runtime() - Runtime implementation of
-+ *                              ffa_sync_send_receive()
-+ * @dst_part_id: destination partition ID
-+ * @msg: pointer to the message data preallocated by the client (in/out)
-+ * @is_smc64: select 64-bit or 32-bit FF-A ABI
-+ *
-+ * Please see ffa_msg_send_direct_req_hdlr_runtime() description for more details.
-+ *
-+ * Return:
-+ *
-+ * 0 on success. Otherwise, failure
-+ */
-+int __ffa_runtime ffa_sync_send_receive_runtime(u16 dst_part_id,
-+						struct ffa_send_direct_data *msg,
-+						bool is_smc64)
-+{
-+	const struct ffa_bus_ops_runtime *ops_rt = ffa_get_ops_runtime();
-+
-+	if (!ffa_runtime_context_ready())
-+		return -EPERM;
-+
-+	if (!ops_rt->sync_send_receive)
-+		return -ENOSYS;
-+
-+	return ops_rt->sync_send_receive(dst_part_id, msg, is_smc64);
-+}
-diff --git a/drivers/firmware/arm-ffa/arm-ffa-uclass.c b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-index eb159dbfade..13e22a1b7f7 100644
---- a/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-+++ b/drivers/firmware/arm-ffa/arm-ffa-uclass.c
-@@ -7,6 +7,7 @@
-  */
- #include <arm_ffa.h>
- #include <arm_ffa_priv.h>
-+#include <arm_ffa_runtime.h>
- #include <dm.h>
- #include <log.h>
- #include <malloc.h>
-@@ -18,19 +19,6 @@
- #include <linux/errno.h>
- #include <linux/sizes.h>
- 
--/* Error mapping declarations */
--
--int ffa_to_std_errmap[MAX_NUMBER_FFA_ERR] = {
--	[NOT_SUPPORTED] = -EOPNOTSUPP,
--	[INVALID_PARAMETERS] = -EINVAL,
--	[NO_MEMORY] = -ENOMEM,
--	[BUSY] = -EBUSY,
--	[INTERRUPTED] = -EINTR,
--	[DENIED] = -EACCES,
--	[RETRY] = -EAGAIN,
--	[ABORTED] = -ECANCELED,
--};
--
- static struct ffa_abi_errmap err_msg_map[FFA_ERRMAP_COUNT] = {
- 	[FFA_ID_TO_ERRMAP_ID(FFA_VERSION)] = {
- 		{
-@@ -94,27 +82,6 @@ static struct ffa_abi_errmap err_msg_map[FFA_ERRMAP_COUNT] = {
- 	},
- };
- 
--/**
-- * ffa_to_std_errno() - convert FF-A error code to standard error code
-- * @ffa_errno:	Error code returned by the FF-A ABI
-- *
-- * Map the given FF-A error code as specified
-- * by the spec to a u-boot standard error code.
-- *
-- * Return:
-- *
-- * The standard error code on success. . Otherwise, failure
-- */
--static int ffa_to_std_errno(int ffa_errno)
--{
--	int err_idx = -ffa_errno;
--
--	/* Map the FF-A error code to the standard u-boot error code */
--	if (err_idx > 0 && err_idx < MAX_NUMBER_FFA_ERR)
--		return ffa_to_std_errmap[err_idx];
--	return -EINVAL;
--}
--
- /**
-  * ffa_print_error_log() - print the error log corresponding to the selected FF-A ABI
-  * @ffa_id:	FF-A ABI ID
-diff --git a/include/arm_ffa_runtime.h b/include/arm_ffa_runtime.h
-index 66096db3d24..77b528745e8 100644
---- a/include/arm_ffa_runtime.h
-+++ b/include/arm_ffa_runtime.h
-@@ -12,6 +12,7 @@
- 
- #include <linux/types.h>
- #include <arm_ffa.h>
-+#include <arm_ffa_priv.h>
- #include <efi_loader.h>
- 
- /**
-@@ -38,4 +39,135 @@
-  */
- void __ffa_runtime invoke_ffa_fn_runtime(ffa_value_t *args, ffa_value_t *res);
- 
-+/**
-+ * struct ffa_bus_ops_runtime - Operations for FF-A runtime
-+ * @sync_send_receive:	callback for the FFA_MSG_SEND_DIRECT_REQ
-+ *
-+ * The data structure providing all the runtime operations supported by the driver.
-+ * This structure is an EFI runtime resident.
-+ */
-+struct ffa_bus_ops_runtime {
-+	int (*sync_send_receive)(u16 dst_part_id, struct ffa_send_direct_data *msg,
-+				 bool is_smc64);
-+};
-+
-+/**
-+ * ffa_runtime_context_enable() - Enable FF-A runtime context
-+ *
-+ * This function marks the FF-A runtime environment as ready for use by
-+ * EFI runtime services. It is called when ExitBootServices() is invoked,
-+ * after the FF-A bus device has successfully probed and U-Boot's FF-A
-+ * endpoint ID has been discovered and stored in the runtime private data
-+ * structure.
-+ *
-+ * The FF-A runtime flag allows the EFI runtime layer to verify that the
-+ * FF-A transport was initialized during the boot phase and that all
-+ * runtime-safe FF-A operations may now be used after ExitBootServices().
-+ *
-+ */
-+void ffa_runtime_context_enable(void);
-+
-+/**
-+ * ffa_runtime_context_reset() - Reset FF-A runtime resident state
-+ *
-+ * Clear the resident runtime flag and private data. This is used by the
-+ * FF-A unit tests to avoid leaking runtime state across test cases.
-+ */
-+void ffa_runtime_context_reset(void);
-+
-+/**
-+ * ffa_copy_runtime_priv() - copy runtime data into resident storage
-+ * @priv: pointer to the runtime private data
-+ *
-+ * Copy boot-time runtime data into the resident runtime storage to be used
-+ * after ExitBootServices().
-+ */
-+void ffa_copy_runtime_priv(const struct ffa_priv_runtime *priv);
-+
-+/**
-+ * ffa_runtime_context_ready() - Query FF-A runtime readiness
-+ *
-+ * This helper returns whether the FF-A runtime environment has been
-+ * enabled during the boot phase. Runtime FF-A operations must check this
-+ * flag before attempting any FF-A access, as the U-Boot driver model
-+ * (DM/uclass) is no longer available after ExitBootServices().
-+ *
-+ * The runtime context becomes enabled when ffa_runtime_context_enable()
-+ * is called, typically after the FF-A bus device has probed and the
-+ * endpoint ID has been discovered and stored in the runtime private
-+ * data structure.
-+ *
-+ * Return: true if FF-A runtime support is ready, false otherwise.
-+ */
-+bool __ffa_runtime ffa_runtime_context_ready(void);
-+
-+/**
-+ * ffa_to_std_errno() - convert FF-A error code to standard error code
-+ * @ffa_errno:	Error code returned by the FF-A ABI
-+ *
-+ * Map the given FF-A error code as specified
-+ * by the spec to a u-boot standard error code.
-+ *
-+ * Return: Standard U-Boot errno for known FF-A errors, or -EINVAL otherwise.
-+ */
-+int __ffa_runtime ffa_to_std_errno(int ffa_errno);
-+
-+/**
-+ * ffa_sync_send_receive_runtime() - Runtime implementation of
-+ *                              ffa_sync_send_receive()
-+ * @dst_part_id: destination partition ID
-+ * @msg: pointer to the message data preallocated by the client (in/out)
-+ * @is_smc64: select 64-bit or 32-bit FF-A ABI
-+ *
-+ * Please see ffa_msg_send_direct_req_hdlr_runtime() description for more details.
-+ *
-+ * Return: 0 on success, negative errno on failure.
-+ */
-+int __ffa_runtime ffa_sync_send_receive_runtime(u16 dst_part_id,
-+						struct ffa_send_direct_data *msg,
-+						bool is_smc64);
-+
-+/**
-+ * ffa_invoke_msg_send_direct_req() - Invokes FFA_MSG_SEND_DIRECT_{REQ,RESP}
-+ * @endpoint_id: u-boot endpoint id
-+ * @dst_part_id: destination partition ID
-+ * @msg: pointer to the message data preallocated by the client (in/out)
-+ * @is_smc64: select 64-bit or 32-bit FF-A ABI
-+ *
-+ * This function invokes FFA_MSG_SEND_DIRECT_{REQ,RESP} FF-A functions.
-+ *
-+ * FFA_MSG_SEND_DIRECT_REQ is used to send the data to the secure partition.
-+ * The response from the secure partition is handled by reading the
-+ * FFA_MSG_SEND_DIRECT_RESP arguments.
-+ *
-+ * The maximum size of the data that can be exchanged is 40 bytes which is
-+ * sizeof(struct ffa_send_direct_data) as defined by the FF-A specification 1.0
-+ * in the section relevant to FFA_MSG_SEND_DIRECT_{REQ,RESP}
-+ *
-+ * Return:
-+ *
-+ * 0 on success. Otherwise, error on failure
-+ */
-+int __ffa_runtime ffa_invoke_msg_send_direct_req(u16 endpoint_id, u16 dst_part_id,
-+						 struct ffa_send_direct_data *msg,
-+						 bool is_smc64);
-+
-+/**
-+ * ffa_msg_send_direct_req_hdlr_runtime() - Runtime implementation of
-+ * FFA_MSG_SEND_DIRECT_{REQ,RESP} handler function
-+ * @dst_part_id: destination partition ID
-+ * @msg: pointer to the message data preallocated by the client (in/out)
-+ * @is_smc64: select 64-bit or 32-bit FF-A ABI
-+ *
-+ * This function calls the ffa_invoke_msg_send_direct_req() function which
-+ * invokes FFA_MSG_SEND_DIRECT_{REQ,RESP} FF-A functions.
-+ *
-+ * Return:
-+ *
-+ * 0 on success. Otherwise, failure
-+ */
-+int __ffa_runtime ffa_msg_send_direct_req_hdlr_runtime(u16 dst_part_id,
-+						       struct ffa_send_direct_data *msg,
-+						       bool is_smc64);
-+
- #endif
--- 
-2.43.0
-
+SGkgTWF0dGlqcywgTWFyZWssDQoNCk9uIEZyaSwgU2VwIDExLCAyMDI2LCBNYXR0aWpzIEtvcnBl
+cnNob2VrIHdyb3RlOg0KPiBIaSwNCj4gDQo+IE9uIEZyaSwgMDQgU2VwIDIwMjYgMDI6Mjk6MjIg
+KzAwMDAsIFRoaW5oIE5ndXllbiB3cm90ZToNCj4gPiBUaGlzIHNlcmllcyBhZGRzIFN1cGVyU3Bl
+ZWQgZGVzY3JpcHRvciBzdXBwb3J0IGZvciB0aGUgbWFzc19zdG9yYWdlIGFuZCBERlUNCj4gPiBn
+YWRnZXQgZnVuY3Rpb25zIHNvIHRoZXkgY2FuIG9wZXJhdGUgY29ycmVjdGx5IGF0IFN1cGVyU3Bl
+ZWQuDQo+ID4gDQo+ID4gDQo+ID4gRGFuIFRyYW4gKDIpOg0KPiA+ICAgdXNiOiBnYWRnZXQ6IG1h
+c3Nfc3RvcmFnZTogYWRkIFN1cGVyU3BlZWQgZGVzY3JpcHRvciBzdXBwb3J0DQo+ID4gICB1c2I6
+IGdhZGdldDogZGZ1OiBhZGQgU3VwZXJTcGVlZCBkZXNjcmlwdG9yIHN1cHBvcnQNCj4gPiANCj4g
+PiBbLi4uXQ0KPiANCj4gVGhhbmtzLCBBcHBsaWVkIHRvIGh0dHBzOi8vdXJsZGVmZW5zZS5jb20v
+djMvX19odHRwczovL2dpdC51LWJvb3QtcHJvamVjdC5vcmcvdS1ib290L2N1c3RvZGlhbnMvdS1i
+b290LWRmdV9fOyEhQTRGMlI5R19wZyFlUW1FTXZ6VkJFa2FiUHd5cG1ZbmJkcnAzbXNvbm1HS2h4
+R1p5d1BCNzlvbzhzcE5Da2E2UDllR0FhZTZ5cC1DZTc0MlZJem1pcTl6VFNGLWNBZ293QUtTbXFj
+VSQgICh1LWJvb3QtZGZ1LW5leHQpDQo+IA0KPiBbMS8yXSB1c2I6IGdhZGdldDogbWFzc19zdG9y
+YWdlOiBhZGQgU3VwZXJTcGVlZCBkZXNjcmlwdG9yIHN1cHBvcnQNCj4gICAgICAgaHR0cHM6Ly91
+cmxkZWZlbnNlLmNvbS92My9fX2h0dHBzOi8vZ2l0LnUtYm9vdC1wcm9qZWN0Lm9yZy91LWJvb3Qv
+Y3VzdG9kaWFucy91LWJvb3QtZGZ1Ly0vY29tbWl0L2JjNmYzZjRiMzg4MmZlYzNlYjIxNDU3Y2Nh
+ZWQ5OTNiNDA3NDM3MjVfXzshIUE0RjJSOUdfcGchZVFtRU12elZCRWthYlB3eXBtWW5iZHJwM21z
+b25tR0toeEdaeXdQQjc5b284c3BOQ2thNlA5ZUdBYWU2eXAtQ2U3NDJWSXptaXE5elRTRi1jQWdv
+d0hoUDNFdUwkIA0KPiBbMi8yXSB1c2I6IGdhZGdldDogZGZ1OiBhZGQgU3VwZXJTcGVlZCBkZXNj
+cmlwdG9yIHN1cHBvcnQNCj4gICAgICAgaHR0cHM6Ly91cmxkZWZlbnNlLmNvbS92My9fX2h0dHBz
+Oi8vZ2l0LnUtYm9vdC1wcm9qZWN0Lm9yZy91LWJvb3QvY3VzdG9kaWFucy91LWJvb3QtZGZ1Ly0v
+Y29tbWl0LzZlM2Y1NzRlNTc2NTg1YjAyNTBhYzM4NzQ3NWQ1OWU1ODFiYjVkOWZfXzshIUE0RjJS
+OUdfcGchZVFtRU12elZCRWthYlB3eXBtWW5iZHJwM21zb25tR0toeEdaeXdQQjc5b284c3BOQ2th
+NlA5ZUdBYWU2eXAtQ2U3NDJWSXptaXE5elRTRi1jQWdvd0hQR3Q4aGokIA0KPiANCj4gLS0NCj4g
+TWF0dGlqcw0KDQpKdXN0IGZvbGxvd2luZyB1cCBvbiB0aGVzZSBwYXRjaGVzLiBUaGV5IHdlcmUg
+cHJldmlvdXNseSBhcHBsaWVkIHRvDQp1LWJvb3QtZGZ1LW5leHQsIGJ1dCBJIGRvbid0IHNlZSB0
+aGVtIHRoZXJlIGFueW1vcmUgb3IgaW4gbWFpbmxpbmUuDQoNCkRvIHlvdSBrbm93IHdoYXQgaGFw
+cGVuZWQgdG8gdGhlbSwgb3Igd2hldGhlciB0aGV5IHN0aWxsIG5lZWQgdG8gYmUNCnBpY2tlZCB1
+cD8NCg0KVGhhbmtzLA0KVGhpbmg=
