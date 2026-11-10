@@ -2,29 +2,29 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68771606A321
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 11:45:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCFED606A31C
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 11:45:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=YA4kCMBE;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=dEXq9ofw;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bq/8rM6o
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=suhz4IJ7;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=mPM5Eb39;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=IDYxSjBW
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 44C2C4081A;
-	Tue, 10 Nov 2026 11:45:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5A55C4061F;
+	Tue, 10 Nov 2026 11:45:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZOwQttm45NTv; Tue, 10 Nov 2026 11:45:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0705F40835
+ id xbncwa2hGVh1; Tue, 10 Nov 2026 11:45:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A803D408B6
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794311146;
-	b=YnuvmrBK00uusPiTprtXrCbLWrjQB1N2bSZsKRlihW6g2Igk1NHwjQkgQzUL1XQYgZMy
-	 KwiCxC2d2/SSJzOyH1Yk+mQ2JcUdlK/1LZ83J9NhNqULzWfccReiBvYrQPzPwsY7NRrT3
-	 JalTHOvcSEd5NH3v0xGxJZOLbZV1gwJFnbnj70AymMPTcVfKz2SS/A2x5+dHKQv2XZLlR
-	 vsu0Y04bAfOWAC5Wm+XGnx59t6jSE3e13naSIrWJekJ6c563tcldTgzFeROl5tgoydAtX
-	 QXGAu9kQ4yNfxLC7xpIzq2g6MH7b1Vjw1i44gV23LDu9yfRg2dXfr/x3g4yxv0lOvXA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794311149;
+	b=pBc3OpHIi/jPLYe552yJ8auljUfT4yTd5U5/8m3ZmQNjUGa8hbRDAfXr08CVGMbLVx+n
+	 t7DuRs0ZPICpCU+M8gSHq6+I1J+Kty19eaV5gD7a68yQ9ZfgCzHWxO0IHdsWZb2kqL5Uf
+	 5ugTZd7fG3U82yyeveIu0sH74gnQ0mJiSjqVPbcp9qAnh5e5YrQGqiav/mbvGqsnZbzHy
+	 eVmPreah/+eS++Q6CPNsvAxH+uFP/GognMI/hkDFq3rg1wErNxiQH7IngGTRikxGGx6gp
+	 hNs73nyNrjrXK6lGGSCDsTRWQJjpB6xkMsd3BbnJ5BWkC1q0M7PUwFxO34TjlvHxaLg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794311146;
+	c=relaxed/relaxed; t=1794311149;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,133 +33,135 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Subject:Date:
 	 Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=5tZixvcWGxpqk7Y7ziz9vSCT3jeCxnQPVR31pwCz+c4=;
-	b=ZLB7oXh7GnmNhdo+68WuUI8b05fUZN8rJkx+SE6aT2wbtbUvNbQAbIRfPwKzz7w+HDPG
-	 XTIpnKi+j1oJBd6OWFoFyt/LPQ6nRFLakVZtcjppG1tggMQLjJCzQEvm5g3iYLPga4tuE
-	 Ksk6hyulglE0w8ika1pAwkqN+woWxliKs/GLaIJIF0tIRdanjgF8gm+WHRE5H77Sj3mrl
-	 kdQZo3aO7fKdGwddzmzrT7kUdeM8c7v98H8IGOwf2QBJ94uSQn4EwpDGXHvN0uKopYzHl
-	 HOaZ/el9A+/nRM2YNBwMBHdL9p08UGwswWODLFC8IDQ9ABhcZ8NrA5hjkAKLR2V1nzg==
+	bh=Ml7yJ0d7urEghC/kVzLUestRGa3DlUtXCrm8aX3M3EU=;
+	b=Hit0IlmNRLt789SYv6sgZGgQ968YkdGaZ3aPnExkxx4j/AKcyynIaRu3avB24Ih7UFiO
+	 oflSA+bgrnSzQHCIaYCy15NO1vX07TeXTcwkeEzthTGpXnv2xAPW11LQ16U6S1Yk36m7v
+	 tRFLJKalu87QzOxfYgjsnzWI/gKKKpRL+SOCN8m59bEHP3bpyDrpYdLqSZQcPR8bERIhj
+	 WdtTNuEE3mkC4sjgsA3rXgZQNBtCGBrfibGuDvCUpctEPqRKsnKVgNvC9RbQSqhxBGaF3
+	 aBeQHlkOyEpUztDhlbWlpkH1/ynDxMUm78aEX+IwQqFrXLXYB14q91P0frT1mO+T9uw==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794311146;
-	bh=5tZixvcWGxpqk7Y7ziz9vSCT3jeCxnQPVR31pwCz+c4=;
+	d=lists.u-boot-project.org; s=default; t=1794311149;
+	bh=Ml7yJ0d7urEghC/kVzLUestRGa3DlUtXCrm8aX3M3EU=;
 	h=From:To:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YA4kCMBECgTHL/6L4pwA5ER438Qk75H3niXhcaHQ2w3bR+zH5MTaRFoZm37bqHAB0
-	 6CwdMocDPI9/GkTHukq3aQ6RW0l+HYhb2yuV7xarQQ11NFXJwKWj+F7pV7fTYmVJRT
-	 U9TW92KW0E330wkO6xtN6BeypTefTq7hetUGbUH53v7BdZazjhLqKHDhKb149tCoOe
-	 mnVZ8gW0bBkQo6MC+jyxyCEJbFFOOOh0cCpmvZi8CPxs9dt5EAZCwwqJWiW0WhuY/o
-	 SaxL5ZCYPl0KwD5Vl1aC5v02uA3MFXUsVL6XSPgBN+LPMIYMRG7gyqgptAgaLblYfg
-	 LIOnucIOmvMvA==
+	b=suhz4IJ7kUh+oHs7kKDZGuUPQq1tYXF61ICO9D/3OueQ3oQMEKu+E6+HvxlRIgmpf
+	 vAGv4UMqyJ+fNAqfB0BIyjUEimFqMlzLj14xE2nmPB8xfywDYcJHtFFqS+sAl1BI0v
+	 Dut5XWhn17Ac7/nPLkXi7pTTk50IvTfgm9vgQH+wHe1qyKa333GcZQ7HVPY/fdRaKS
+	 7O8Ps9c2k1QrzUB644eX5tzh6iqRjfS+yDIe8wSBuiV2MhNeQN9royJmXr8Nj5aDkS
+	 mjUN+h/YWroes01Ffzvf00buOWw+C0g7STirmrn0V227nRtKK6t905tQQrOKNAsi2k
+	 xS8q/iL4xuhFA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0705F40835;
-	Tue, 10 Nov 2026 11:45:46 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id C46C0CC4
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 11:45:44 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A803D408B6;
+	Tue, 10 Nov 2026 11:45:49 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3F914CC4
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 11:45:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id A74ED81141
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 11:45:44 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 311E96083E
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 11:45:48 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id vv3Kw-Y_spVZ for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 11:45:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7DA698113C
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=205.220.180.131
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
- helo=mx0b-0031df01.pphosted.com; envelope-from=aswin.murugan@oss.qualcomm.com;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 9kbXtktIBbmt for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 11:45:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C551160668
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip=205.220.168.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.168.131;
+ helo=mx0a-0031df01.pphosted.com; envelope-from=aswin.murugan@oss.qualcomm.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=none dis=none)
  header.from=oss.qualcomm.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com
- header.a=rsa-sha256 header.s=qcppdkim1 header.b=dEXq9ofw; 
- dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
- header.a=rsa-sha256 header.s=google header.b=bq/8rM6o
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 7DA698113C
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 11:45:42 +0000 (UTC)
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=mPM5Eb39; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=IDYxSjBW
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C551160668
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 11:45:46 +0000 (UTC)
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AABAH7Z2881275
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 11:45:41 GMT
+ 6AAB9t9C2253399
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 11:45:45 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=5tZixvcWGxp
- qk7Y7ziz9vSCT3jeCxnQPVR31pwCz+c4=; b=dEXq9ofw6x43AUAqmcFKv5tH3HZ
- u1iBNLHcnobN8ZDh4pMKkiMVDzzftZZCqckfZwsHu+9ewVG1ct0wjTYCdKBg7Pv5
- Nl8zuravPCEvpbBJ6I7T7UWQ/fkjTm31JN0Agp6dghVFB2d+8kaGyI54XVh/6gpd
- jBxnJLAo6L/3Zln4kaQ7tYt/XYcmGI92DtUZlRJaMghW4MZVZ0sA1goI4j8DAoFw
- NUcmXRiDjvuv0F8MD+uz1wlihpeMNPJmuMBO/6c2Xp7+I24iAGjPh7wdORAyfyxS
- dCD9GwDP3wwK8G4EDd8Dg41s/W454onyCqKXyifM+LKkygEVI7LlugHgMNA==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
- [74.125.82.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hux849464-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=Ml7yJ0d7urE
+ ghC/kVzLUestRGa3DlUtXCrm8aX3M3EU=; b=mPM5Eb39FOPMIGmW0PpX/jQHzDN
+ NVQbklupA3NQdNoLFBaeEuvfhXvHcB6cDUtNVQpj5YTPqTSjCegXbCZ4BH6WhjY+
+ 6TbD+WTp7WWzu323n7wVIy0AHs06jt1NXScHkVZDZKX8WVua8rGpXXixzbR+5Brr
+ DZlN2JMDpOFjHc189iiGMdiDuEB8tRA1t/yzmeZlJ9KmhyeE7ydvyMruBh6+6McO
+ 4oOvQV5Tosr0D6qsYPbakqtlNY1/gr/WRHYXwj5DuNb011mt0HQvvFKbWVnP53fR
+ JAwIkXRMbpN4zOKRyvWdQ1ZkcgdYrN2ZXLxV5DuI+oAJfbL2E1iqbyHjjTQ==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com
+ [74.125.82.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4huyw48n9v-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 11:45:41 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id
- 5a478bee46e88-3724667bc16so1789471eec.1
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 03:45:41 -0800 (PST)
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 11:45:45 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id
+ 5a478bee46e88-30bcb065bfdso3462509eec.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 03:45:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794311140; x=1794915940;
+ d=oss.qualcomm.com; s=google; t=1794311145; x=1794915945;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=5tZixvcWGxpqk7Y7ziz9vSCT3jeCxnQPVR31pwCz+c4=;
- b=bq/8rM6ojvnAbXK7fbRN1qJbSCEEBWaFNZlDV6FijFwQIYsvVHDd8PQsB3hcHXkT3a
- Puzz6LiGJBYCfyU7DntTud9JJJkVTt3xn8VaJugrOtzSPyBW9Rqi84MB2DTfjaUsz6Xb
- ohtmFB9mSi5lrdIHUavE8OSSiySYFSqjSTkbRqWyqull2L/plHBzl2pmeqes0BWuzlYC
- wrSqTTJi6uuqAZNR+gavwcjBqiUskXUBQ+imzkkuKWHHmmq6Dt18rq58nZTe+YFH04t4
- sZes+0SEjefG69bwvmKTpzouMBe0OjX0UVecwdEtCO9Xf3hba9il4Sx1FuVrYfStkNQ1
- MKGg==
+ bh=Ml7yJ0d7urEghC/kVzLUestRGa3DlUtXCrm8aX3M3EU=;
+ b=IDYxSjBWb8tqhDYi4L2IwumoqWZosOGh2l7jwmFzHbTsx5XvOqSjCit2HsTTZwrE59
+ CzdF2guTJzH0vJJBWEzh4ASbyyXMK/IgyFoDQcT1gw3UyTWM+SdqIT4OFZlYXBs3q+UG
+ L4KeQH64fmRLONu3V/0Ahd3kmy+rDDc7htPyL9MdD8MuPB8R+BR9A5aVlvzJROQjaXdY
+ XAnjtdDnaj4wBdvggiMC4GvAYcuoX2o3nMAIl0njd/PmGdU8+bmFMN2ETH2tODOA4cKQ
+ Cpb2nf8WSDZdPPgCIwIdQ5fjNuG78iN0HFDYGvp3xBCEsAOUNq7lZ0j+e1MiNx7oTXUX
+ IuFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794311140; x=1794915940;
+ d=1e100.net; s=20260707; t=1794311145; x=1794915945;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to:content-type;
- bh=5tZixvcWGxpqk7Y7ziz9vSCT3jeCxnQPVR31pwCz+c4=;
- b=stmrpspgjyMNMtNjb04WSNnnPlXBZH7lDVtX9XO7QX207XbdjK1a7KsfmfDqBA9IjN
- EAf5yyJkuEXWQjvjnpABNWkYTMA0cIMSYjkAG0V8B1puJmXb01Bx0c+6PRUmTcBjR8hc
- +950MohjCMGAmrIrXXq9VMp8XBHexAQBK1WpA93xhGLVkdv9Kw9xxVFUnMdsbTfWtXMq
- h5OTOfoRHNpQ4OEx2+ZTArHaNAyrRDwbwaMZoj96e2ulgxZlCVh3gmHTw30o3aSiNFtz
- mUqWsVQeIwP9x4/M0HNwnPRtXg7TgQnP4s8UIb0GitkJOQFJ/Ib3/8LdoaIZT+Ue08Z3
- J5BQ==
+ bh=Ml7yJ0d7urEghC/kVzLUestRGa3DlUtXCrm8aX3M3EU=;
+ b=qmy9IIEp6CSzHIFKkwwToy1bikLCcjYmpMEKrp1H8RdXev80YU0+aQEFJ8/cXAtlIM
+ 0OcSOrz37wZR3Bftmq5Dc0FZ8rbppP0okFSBO9fmElwmu78AYU01eDVBrsuYUd9RYaRM
+ pPAHs6OJfBXYvQJwN9Zpk3YneBZM9gPSw1yUA29NthR42jOlhOT8z1OPAxkzS28Zr4b2
+ f1m52e0nLc0uEqNZtcIHTKnAhDmQ9XZyeaGEfflUria9wwRJs71U8ti8hUBCTnAUshxI
+ 5+ecG6QbO4/CcTrShe3COvQvc5lWDSOl/xgd2emZU7ig6XGzURWqeLusXEK/pgy3/XRB
+ d7CA==
 X-Forwarded-Encrypted: i=1;
- AL+hErGiGy2/hywKIDUfGeNIDMMNIzqh8OmqnkrCnKHx6WWgJ7K5/HqI050AVYZWr+xLiDDUhNMpYzE=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/V1RCoU+i3prdW40LDH0TqWnuD3sKIOm9gGwzlzznXsUDrIbYN
- crBMArgKho2ID3Dy4XcE+PZnqYhBjBtkp8JUsCUyVQr7vXgGx91u/CTrXUrTE0fI3B1sJNkLGts
- Qv6yfTeToPqFnCSB67T7xnqm8LAQNEiSCVFuGzMkOUnSi4dDE4z46wc7Tl52NFtRod0jnXeU=
-X-Gm-Gg: AYBFou1s2niH3AmSKWZZ98jX6h3+ezdtIZY5syNAqnjtUgY5n52kFEooTHKi5keTe0y
- y7eNuClKCAizW/vSrHXnPhHZNxZLcU5BPd0VBSpkpFwPBYSsig6Q776JHIwC0RWJEE7iMg9eKj0
- oQrk/CoggJQqPUDIpZ5Pxqigl2zGLBk6pYkqH10eTcKEmkgaH5tsDDvuAnSPlB+EWmLoOcysHj3
- 97eCTn9fZfltAtmKVTC6BFVPh/k7BjTgDuD6pftFidklFuTu9SfD8WlgXrW2FVgu8XGgdIv4ttr
- hjHFU+7qots1/oRWkAU8MINpweMWzbGlh++mbcz/zDOsnKHBW1EIb6OFwwfxX+xMnG6+x2i7/Ii
- yK9EZIVtklpiUxmB+q8hb+bVOln9vb33pbxbwdFpbIXQM6hUNVpVr2yDmKMkRFORYzwHj3tPW6Y
- pPwmqDR0MD2el83xL7Fl5/8sBTNn8tIETCpBkle0+xmeSIoKqPqKcMiNEQ2k4X4Enfve0l
-X-Received: by 2002:a05:7301:6481:b0:36c:a26f:83c4 with SMTP id
- 5a478bee46e88-37509537791mr3294239eec.13.1794311139852; 
- Tue, 10 Nov 2026 03:45:39 -0800 (PST)
-X-Received: by 2002:a05:7301:6481:b0:36c:a26f:83c4 with SMTP id
- 5a478bee46e88-37509537791mr3294184eec.13.1794311139039; 
- Tue, 10 Nov 2026 03:45:39 -0800 (PST)
+ AL+hErG2AbND95uSJDRTCslFxp1QU+vP3ef3kYyBFjPcVjDqBAWgLgcbfh9rQ4C/JfnlAabVrfw/U68=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z8/kEVQaDK5TCeJQNrbZACJfwkTcYl078Gmfk6rXk/Tyd5RcR+l
+ oZOOcfTH46sWMbXkdJP5+Nv1x83QVgOFaEmpWD+0kV2UbT7rJq3z08LMdzOvQo2PLzu7ogvZrhD
+ CvVe43ayxZES5yfOhDMIddgPJ2IxkJ8r46A+kzT1ySDioer0aDaQqG85nu3dF6epnWVxZDhyx+7
+ 2xQK0=
+X-Gm-Gg: AYBFou2aYq22ItTPIrg84WZRNo1aCgCjhCS+je6lHCHfliz8ylHuWiTWZgKS9n2HyGx
+ OqMv3Bhmksp7PXK/rHTIt5AQFvR/YQfAgeytwXR/BgcyP7mRYMnSL/ip3qANKZkoCTWBKg+O5ft
+ No8oRjSdXFTHL5ihmF7Ca1kNSALaSoptXC6UASEd5gwTn1OCWsWzL5zx7T/35dISXAVsPofOj14
+ tpli+u1p7tDyL/rqFWND5VZqNIrOO2HLXrpWQtBFX8MgpXkRuxe31X6D3kmCqhffB4zW4AQnrcs
+ 4+6M+klhpDsyAEFVpWv5QG0MpXst5gMrQ/RFLCeI4FZWUXW8GevCBXsA1QeKFSBf00XdcHapboF
+ IEjhak+VL5q++0n3Smnw6pIEoUJmONNbDeCnX7pVMaXqvkJzHwhFXsTiSe0Mj2CSN55ljBGx1zg
+ eiT7Oouj3zcipYaGX4c3Ji2f/dw16JZTOmaSchu4HI5ibCkcyG5hWtM/mKDVVQJw7FCb86
+X-Received: by 2002:a05:7301:618e:10b0:370:1e50:a485 with SMTP id
+ 5a478bee46e88-3752011f48fmr2849301eec.37.1794311144346; 
+ Tue, 10 Nov 2026 03:45:44 -0800 (PST)
+X-Received: by 2002:a05:7301:618e:10b0:370:1e50:a485 with SMTP id
+ 5a478bee46e88-3752011f48fmr2849260eec.37.1794311143681; 
+ Tue, 10 Nov 2026 03:45:43 -0800 (PST)
 Received: from hu-aswinm-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-37520bf3e18sm11828890eec.16.2026.11.10.03.45.34
+ 5a478bee46e88-37520bf3e18sm11828890eec.16.2026.11.10.03.45.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Nov 2026 03:45:38 -0800 (PST)
+ Tue, 10 Nov 2026 03:45:43 -0800 (PST)
 From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
  sumit.garg@kernel.org, trini@konsulko.com, peng.fan@nxp.com,
@@ -167,40 +169,39 @@ To: casey.connolly@linaro.org, neil.armstrong@linaro.org,
  aswin.murugan@oss.qualcomm.com, nathbappai@gmail.com,
  balaji.selvanathan@oss.qualcomm.com, Michael.Srba@seznam.cz,
  u-boot-qcom@groups.io, u-boot@lists.u-boot-project.org
-Subject: [PATCH v4 2/4] mmc: msm_sdhci: add CM_DLL init and HS200 tuning
- support
-Date: Tue, 10 Nov 2026 17:15:18 +0530
-Message-Id: <20261110114520.229480-3-aswin.murugan@oss.qualcomm.com>
+Subject: [PATCH v4 3/4] mmc: msm_sdhci: add HS400 DDR/SDC4 DLL calibration
+Date: Tue, 10 Nov 2026 17:15:19 +0530
+Message-Id: <20261110114520.229480-4-aswin.murugan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261110114520.229480-1-aswin.murugan@oss.qualcomm.com>
 References: <20261110114520.229480-1-aswin.murugan@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEwMDA0NiBTYWx0ZWRfX3Z93sg0AlC+s
- YvvrqEABW3D86fVTffVe9spw0Biu1KVuJNCogyHOrE6ke01SEOGaCqE2Ntt4orPnVRviwoQUFki
- u2O9I2KaYl2bLKlrlV+zJuuWpLECz5fnL3DsOuVL71Ml5oPmTjVo0HSgnJpIr3Tkjzv/EmC+if/
- N+Ej7Zwjdss+AzYsE90otbPeu185wcNyGZcZdMM3LUQHQiUxgr6OTM9wu+LMSwoRd3RPExbJzjI
- kUh7wmW98G5yDZQ3sLoMxAv2ziZ7/7Uq28jCoGvMWn2f6H8yUf6zwfEvJEWVDTDf2aBMADRU+n0
- 23FZnS5r9eXCHvHgq6gWVASp0Q9b69RneTLVNXMUCexzLVfD/wvIS8KgxT7INlOUJQv4S5RfI/n
- xWtIwRtfc54pqT7GvNHVS8XraDIWvA6P6QGH0JbOTHOEfp2Evq1rtn4aQ6Vd2t78pMpumbhI/wQ
- cPG4kXfQO52FJbYLtWQ==
-X-Proofpoint-GUID: 6bUY2fupMAQbkxYvRur6efjGcTLoeFaU
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEwMDA0NiBTYWx0ZWRfXwWdpMj0CKcQe
- 1e/CYQ0RJOa44/VI8ukLCvm+n+BkAO+/0MVGFfSuDDpWD498Cq49qTmAUCDuLyM+67gUEw7pzMs
- XNq4Dv3LhEaXuG91vDN38BkEPtqT+ws=
-X-Proofpoint-ORIG-GUID: 6bUY2fupMAQbkxYvRur6efjGcTLoeFaU
-X-Authority-Analysis: v=2.4 cv=JNSuIMKb c=1 sm=1 tr=0 ts=6af303e5 cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEwMDA0NiBTYWx0ZWRfX5PmrUUlus/UO
+ cAK7vrtLBIR6lMJbyz9+d8mBFusTFIxzH9JmTtlZth1MVn/mpSQO9rj3OXrLljn6oJzv4JLNcI6
+ r4oLqk5O8K2ABQQ/iy8XqyPVjWOMVtaeDAiDmU8st8vVUM2wTMkZu/QhB8KiaFLfjB+25sxt52d
+ 2knvy40qQkWfFVPZ+HzQwIZ+Q1X9V/Zq+hw7YtMPf/eB3CEEL24YBEGj/723yUohZjf5p2CsUYV
+ swWv2dSen+1xAJR+lSojqIk7eBMv9MfWukF4qDWQ0I9CV1Re8hEe0YJMbVvRr2N1NN/2+9wzUkt
+ /VBODbrTP/6LTgVmfRkhaRMiIK4yGfQ2H4/EjiY6R2zhT7ypgyRo8CjpfmUIpNaHpgBqT0JUHWI
+ OIgNqSnRZFDN10c3Tir9n2HXaqlWGN1U5xKz2RzueU+4d0SY1oqJrUHsT/hRC9gDGi/mKHUViUs
+ H9gAuHTLS4fhRKRCR1Q==
+X-Authority-Analysis: v=2.4 cv=Ee1d0/mC c=1 sm=1 tr=0 ts=6af303e9 cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
- a=1eCGacO4p7ucnnlXo8QA:9 a=6Ab_bkdmUrQuMsNx7PHu:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
+ a=sM-x5haXdwywgm3JVD8A:9 a=PxkB5W3o20Ba91AHUih5:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEwMDA0NiBTYWx0ZWRfXxDumwPK2f8m6
+ ym7Q3e3Al6hk8inU2oAwh1UeDhlN6siTnKunzLizZG9yAMcemqdwHDSXyBPc21PeCuCeN/otqSu
+ A+NxMjMGnq766GkmnLpFYyC4MfNrWD0=
+X-Proofpoint-GUID: kfejrwkH06kVzW3mU6YbW0EDRds7GzAU
+X-Proofpoint-ORIG-GUID: kfejrwkH06kVzW3mU6YbW0EDRds7GzAU
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-10_04,2026-11-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 phishscore=0 clxscore=1015 adultscore=0
- lowpriorityscore=0 impostorscore=0 bulkscore=0 spamscore=0 priorityscore=1501
+ impostorscore=0 spamscore=0 priorityscore=1501 malwarescore=0 bulkscore=0
+ suspectscore=0 clxscore=1015 adultscore=0 phishscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611100046
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -219,163 +220,93 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add the CM_DLL (delay-locked loop) initialization sequence and wire up
-platform_execute_tuning so the driver can perform HS200 tuning. The
-14LPP DLL reset and Tassadar DLL variants are selected based on the
-SDCC core version, and an optional qcom,dll-config DT property can
-override the computed DLL configuration.
+Add the SDC4 CM_DLL based DDR calibration sequence required for
+HS400, along with the HC_MCLK_SEL/HC_SELECT_IN mode switching needed
+to move the data path into HS400 timing once calibration completes.
+An optional qcom,ddr-config DT property can override the DDR
+configuration POR value.
 
 Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 ---
- drivers/mmc/msm_sdhci.c | 411 ++++++++++++++++++++++++++++++++++++++++
- drivers/mmc/msm_sdhci.h |  45 +++++
- 2 files changed, 456 insertions(+)
+ drivers/mmc/msm_sdhci.c | 266 +++++++++++++++++++++++++++++++++++++++-
+ drivers/mmc/msm_sdhci.h |  26 ++++
+ 2 files changed, 291 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-index d7ae26c609c..23c06e8d15e 100644
+index 23c06e8d15e..b7e0c1e2b58 100644
 --- a/drivers/mmc/msm_sdhci.c
 +++ b/drivers/mmc/msm_sdhci.c
-@@ -14,6 +14,7 @@
- #include <wait_bit.h>
- #include <asm/io.h>
- #include <linux/bitops.h>
-+#include <linux/iopoll.h>
- #include <power/regulator.h>
- #include "msm_sdhci.h"
- 
-@@ -106,12 +107,404 @@ static int msm_sdc_mci_init(struct msm_sdhc *prv)
+@@ -340,6 +340,107 @@ static int msm_init_cm_dll(struct sdhci_host *host)
  	return 0;
  }
  
-+static int msm_dll_poll_ck_out_en(struct sdhci_host *host, u8 poll)
++/*
++ * HS400 DDR calibration via SDC4 CM_DLL, used when use_cdclp533 is false
++ * (core_minor >= 0x34).
++ */
++static int sdhci_msm_cm_dll_sdc4_calibration(struct sdhci_host *host)
 +{
-+	u32 ck_out_en;
 +	struct udevice *dev = host->mmc->dev;
++	struct msm_sdhc *priv = dev_get_priv(dev);
 +	const struct msm_sdhc_variant_info *var_info =
 +		(void *)dev_get_driver_data(dev);
++	u32 config, ddr_cfg_offset, wait_cnt;
 +	int ret;
 +
-+	ret = read_poll_timeout(readl, ck_out_en,
-+				(!!(ck_out_en & CORE_CK_OUT_EN) == poll),
-+				1, 50,
-+				host->ioaddr + var_info->core_dll_config);
-+	if (ret) {
-+		printf("%s: CK_OUT_EN bit is not %d\n",
-+		       host->name, poll);
-+		return -ETIMEDOUT;
++	/*
++	 * core_ddr_config defaults to the desired configuration on reset;
++	 * reprogram the POR value in case an earlier bootloader stage
++	 * modified it.
++	 */
++	if (priv->updated_ddr_cfg)
++		ddr_cfg_offset = var_info->core_ddr_config;
++	else
++		ddr_cfg_offset = var_info->core_ddr_config_old;
++	writel(priv->ddr_config, host->ioaddr + ddr_cfg_offset);
++
++	config = readl(host->ioaddr + var_info->core_ddr_200_cfg);
++	config &= ~CORE_CMDIN_RCLK_EN;
++	writel(config, host->ioaddr + var_info->core_ddr_200_cfg);
++
++	config = readl(host->ioaddr + var_info->core_dll_config_2);
++	config |= CORE_DDR_CAL_EN;
++	writel(config, host->ioaddr + var_info->core_dll_config_2);
++
++	ret = -ETIMEDOUT;
++	wait_cnt = 100;
++	while (wait_cnt--) {
++		if (readl(host->ioaddr + var_info->core_dll_status) &
++		    CORE_DDR_DLL_LOCK) {
++			ret = 0;
++			break;
++		}
++		udelay(10);
 +	}
 +
-+	return 0;
-+}
++	if (ret) {
++		printf("%s: CM_DLL_SDC4 calibration was not completed\n",
++		       host->name);
++		return ret;
++	}
 +
-+static int msm_config_cm_dll_phase(struct sdhci_host *host, u8 phase)
-+{
-+	int rc;
-+	static const u8 grey_coded_phase_table[] = {
-+		0x0, 0x1, 0x3, 0x2, 0x6, 0x7, 0x5, 0x4,
-+		0xc, 0xd, 0xf, 0xe, 0xa, 0xb, 0x9, 0x8
-+	};
-+	u32 config;
-+	struct udevice *dev = host->mmc->dev;
-+	const struct msm_sdhc_variant_info *var_info =
-+		(void *)dev_get_driver_data(dev);
-+
-+	if (phase > 0xf)
-+		return -EINVAL;
-+
-+	config = readl(host->ioaddr + var_info->core_dll_config);
-+	config &= ~(CORE_CDR_EN | CORE_CK_OUT_EN);
-+	config |= (CORE_CDR_EXT_EN | CORE_DLL_EN);
-+	writel(config, host->ioaddr + var_info->core_dll_config);
-+
-+	rc = msm_dll_poll_ck_out_en(host, 0);
-+	if (rc)
-+		return rc;
-+
-+	config = readl(host->ioaddr + var_info->core_dll_config);
-+	config &= ~CDR_SELEXT_MASK;
-+	config |= grey_coded_phase_table[phase] << CDR_SELEXT_SHIFT;
-+	writel(config, host->ioaddr + var_info->core_dll_config);
-+
-+	config = readl(host->ioaddr + var_info->core_dll_config);
-+	config |= CORE_CK_OUT_EN;
-+	writel(config, host->ioaddr + var_info->core_dll_config);
-+
-+	rc = msm_dll_poll_ck_out_en(host, 1);
-+	if (rc)
-+		return rc;
-+
-+	config = readl(host->ioaddr + var_info->core_dll_config);
-+	config |= CORE_CDR_EN;
-+	config &= ~CORE_CDR_EXT_EN;
-+	writel(config, host->ioaddr + var_info->core_dll_config);
++	/*
++	 * Skip CORE_PWRSAVE_DLL for the 14lpp DLL reset variant: it cannot
++	 * guarantee the MCLK-gating timing PWRSAVE_DLL depends on.
++	 */
++	if (!priv->use_14lpp_dll_reset) {
++		config = readl(host->ioaddr + var_info->core_vendor_spec3);
++		config |= CORE_PWRSAVE_DLL;
++		writel(config, host->ioaddr + var_info->core_vendor_spec3);
++	}
 +
 +	return 0;
 +}
 +
 +/*
-+ * Programs the MCLK_FREQ (CMUX_SHIFT_PHASE) field. Must be set before
-+ * enabling CORE_DLL_EN/CORE_CK_OUT_EN, otherwise the DLL will not lock.
-+ *
-+ * host->clock is not updated by the generic sdhci.c, so mmc->clock is
-+ * used instead.
++ * HS400 DLL calibration, performed once when transitioning into HS400 at
++ * clock > 100MHz.
 + */
-+static void msm_cm_dll_set_freq(struct sdhci_host *host)
-+{
-+	struct udevice *dev = host->mmc->dev;
-+	struct mmc *mmc = host->mmc;
-+	const struct msm_sdhc_variant_info *var_info =
-+		(void *)dev_get_driver_data(dev);
-+	u32 mclk_freq = 0, config;
-+	unsigned int clock = mmc->clock;
-+
-+	if (clock <= 112000000)
-+		mclk_freq = 0;
-+	else if (clock <= 125000000)
-+		mclk_freq = 1;
-+	else if (clock <= 137000000)
-+		mclk_freq = 2;
-+	else if (clock <= 150000000)
-+		mclk_freq = 3;
-+	else if (clock <= 162000000)
-+		mclk_freq = 4;
-+	else if (clock <= 175000000)
-+		mclk_freq = 5;
-+	else if (clock <= 187000000)
-+		mclk_freq = 6;
-+	else if (clock <= 200000000)
-+		mclk_freq = 7;
-+
-+	config = readl(host->ioaddr + var_info->core_dll_config);
-+	config &= ~CMUX_SHIFT_PHASE_MASK;
-+	config |= mclk_freq << CMUX_SHIFT_PHASE_SHIFT;
-+	writel(config, host->ioaddr + var_info->core_dll_config);
-+}
-+
-+static int msm_dll_poll_lock_status(struct sdhci_host *host)
-+{
-+	u32 dll_status;
-+	struct udevice *dev = host->mmc->dev;
-+	const struct msm_sdhc_variant_info *var_info =
-+		(void *)dev_get_driver_data(dev);
-+	int ret;
-+
-+	ret = read_poll_timeout(readl, dll_status,
-+				(dll_status & CORE_DLL_LOCK),
-+				1, 50,
-+				host->ioaddr + var_info->core_dll_status);
-+	if (ret) {
-+		printf("%s: DLL failed to LOCK (DLL_STATUS=0x%08x)\n",
-+		       host->name,
-+		       readl(host->ioaddr + var_info->core_dll_status));
-+		return -ETIMEDOUT;
-+	}
-+
-+	return 0;
-+}
-+
-+/* CM_DLL initialization sequence */
-+static int msm_init_cm_dll(struct sdhci_host *host)
++static int sdhci_msm_hs400_dll_calibration(struct sdhci_host *host)
 +{
 +	struct udevice *dev = host->mmc->dev;
 +	struct msm_sdhc *priv = dev_get_priv(dev);
@@ -384,385 +315,296 @@ index d7ae26c609c..23c06e8d15e 100644
 +	u32 config;
 +	int ret;
 +
-+	/*
-+	 * Keep the clock enabled while DLL tuning is in progress; PWRSAVE
-+	 * may otherwise turn it off.
-+	 */
-+	config = readl(host->ioaddr + var_info->core_vendor_spec);
-+	config &= ~CORE_CLK_PWRSAVE;
-+	writel(config, host->ioaddr + var_info->core_vendor_spec);
++	ret = msm_init_cm_dll(host);
++	if (ret)
++		return ret;
 +
-+	if (priv->dll_config)
-+		writel(priv->dll_config, host->ioaddr + var_info->core_dll_config);
-+
-+	if (priv->use_14lpp_dll_reset) {
-+		config = readl(host->ioaddr + var_info->core_dll_config);
-+		config &= ~CORE_CK_OUT_EN;
-+		writel(config, host->ioaddr + var_info->core_dll_config);
-+
-+		if (var_info->core_dll_config_2) {
-+			config = readl(host->ioaddr + var_info->core_dll_config_2);
-+			config |= CORE_DLL_CLOCK_DISABLE;
-+			writel(config, host->ioaddr + var_info->core_dll_config_2);
-+		}
-+	}
-+
-+	config = readl(host->ioaddr + var_info->core_dll_config);
-+	config |= CORE_DLL_RST;
-+	writel(config, host->ioaddr + var_info->core_dll_config);
-+
-+	config = readl(host->ioaddr + var_info->core_dll_config);
-+	config |= CORE_DLL_PDN;
-+	writel(config, host->ioaddr + var_info->core_dll_config);
-+
-+	/*
-+	 * MCLK_FREQ must be programmed while the DLL is reset and powered
-+	 * down, unless a DT dll-config override is in effect.
-+	 */
-+	if (!priv->dll_config)
-+		msm_cm_dll_set_freq(host);
-+
-+	config = readl(host->ioaddr + var_info->core_dll_config);
-+	config &= ~CORE_DLL_RST;
-+	writel(config, host->ioaddr + var_info->core_dll_config);
-+
-+	config = readl(host->ioaddr + var_info->core_dll_config);
-+	config &= ~CORE_DLL_PDN;
-+	writel(config, host->ioaddr + var_info->core_dll_config);
-+
-+	if (priv->use_14lpp_dll_reset) {
-+		if (!priv->dll_config)
-+			msm_cm_dll_set_freq(host);
-+
-+		if (var_info->core_dll_config_2) {
-+			config = readl(host->ioaddr + var_info->core_dll_config_2);
-+			config &= ~CORE_DLL_CLOCK_DISABLE;
-+			writel(config, host->ioaddr + var_info->core_dll_config_2);
-+		}
-+	}
-+
-+	/* Applicable to SDCC v5.1 onwards only */
-+	if (priv->uses_tassadar_dll && var_info->core_dll_usr_ctl) {
-+		config = DLL_USR_CTL_POR_VAL | FINE_TUNE_MODE_EN |
-+			 ENABLE_DLL_LOCK_STATUS | BIAS_OK_SIGNAL;
-+		writel(config, host->ioaddr + var_info->core_dll_usr_ctl);
-+
-+		if (var_info->core_dll_config_3) {
-+			config = readl(host->ioaddr + var_info->core_dll_config_3);
-+			config &= ~0xFF;
-+			if (host->mmc->clock < 150000000)
-+				config |= DLL_CONFIG_3_LOW_FREQ_VAL;
-+			else
-+				config |= DLL_CONFIG_3_HIGH_FREQ_VAL;
-+			writel(config, host->ioaddr + var_info->core_dll_config_3);
-+		}
-+	}
-+
-+	config = readl(host->ioaddr + var_info->core_dll_config);
-+	config |= CORE_DLL_EN;
-+	writel(config, host->ioaddr + var_info->core_dll_config);
-+
-+	config = readl(host->ioaddr + var_info->core_dll_config);
-+	config |= CORE_CK_OUT_EN;
-+	writel(config, host->ioaddr + var_info->core_dll_config);
-+
-+	ret = msm_dll_poll_lock_status(host);
++	/* Restore the phase found during HS200 tuning */
++	ret = msm_config_cm_dll_phase(host, priv->saved_tuning_phase);
 +	if (ret)
 +		return ret;
 +
 +	config = readl(host->ioaddr + var_info->core_dll_config);
-+	config |= CORE_CDR_EN;
-+	config &= ~CORE_CDR_EXT_EN;
++	config |= CORE_CMD_DAT_TRACK_SEL;
 +	writel(config, host->ioaddr + var_info->core_dll_config);
 +
-+	priv->calibration_done = false;
++	/*
++	 * use_cdclp533 only applies to legacy SDCC (core_minor < 0x34); our
++	 * supported targets always use the SDC4 calibration path.
++	 */
++	if (priv->use_cdclp533) {
++		printf("%s: CDCLP533 HS400 calibration path is not implemented\n",
++		       host->name);
++		return -EOPNOTSUPP;
++	}
 +
-+	return 0;
++	return sdhci_msm_cm_dll_sdc4_calibration(host);
 +}
 +
-+static int msm_find_most_appropriate_phase(struct sdhci_host *host,
-+					   u8 *phase_table,
-+					   u8 total_phases)
-+{
-+	int ret;
-+	u8 ranges[MAX_PHASES][MAX_PHASES] = { {0}, {0} };
-+	u8 phases_per_row[MAX_PHASES] = { 0 };
-+	int row_index = 0, col_index = 0, selected_row_index = 0;
-+	int i, longest_range_len = 0;
-+	bool found = false;
-+
-+	if (!total_phases || total_phases > MAX_PHASES) {
-+		printf("%s: Invalid argument: total_phases=%d\n",
-+		       host->name, total_phases);
-+		return -EINVAL;
-+	}
-+
-+	for (i = 0; i < total_phases; i++) {
-+		ranges[row_index][col_index] = phase_table[i];
-+		phases_per_row[row_index] += 1;
-+		col_index++;
-+
-+		if ((i + 1) == total_phases)
-+			continue;
-+
-+		if (phase_table[i] + 1 != phase_table[i + 1]) {
-+			row_index++;
-+			col_index = 0;
-+		}
-+	}
-+
-+	if (row_index == 0) {
-+		ret = phase_table[total_phases / 2];
-+		goto exit;
-+	}
-+
-+	for (i = 0; i <= row_index; i++) {
-+		if (phases_per_row[i] > longest_range_len) {
-+			longest_range_len = phases_per_row[i];
-+			selected_row_index = i;
-+			found = true;
-+		}
-+	}
-+
-+	if (found) {
-+		ret = ranges[selected_row_index][longest_range_len / 2];
-+	} else {
-+		ret = -EIO;
-+		printf("%s: Failed to find a valid phase\n", host->name);
-+	}
-+
-+exit:
-+	return ret;
-+}
-+
-+static bool sdhci_msm_is_tuning_needed(struct sdhci_host *host)
+ static int msm_find_most_appropriate_phase(struct sdhci_host *host,
+ 					   u8 *phase_table,
+ 					   u8 total_phases)
+@@ -496,9 +597,130 @@ retry:
+ }
+ #endif
+ 
++/*
++ * Configure HC mode selection. On the first HS400 transition,
++ * calibration_done is still false, so the HS400 mux-select bits are
++ * deferred until calibration completes in msm_sdhci_config_dll(); see
++ * sdhci_msm_hs400_select_in().
++ */
++static void sdhci_msm_hc_select_mode(struct sdhci_host *host)
 +{
 +	struct mmc *mmc = host->mmc;
-+
-+	return mmc->selected_mode == MMC_HS_200;
-+}
-+
-+#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
-+static int sdhci_msm_execute_tuning(struct mmc *mmc, u8 opcode)
-+{
-+	struct sdhci_host *host = mmc->priv;
-+	int tuning_seq_cnt = 10;
-+	u8 phase, tuned_phases[MAX_PHASES], tuned_phase_cnt = 0;
-+	int rc;
 +	struct udevice *dev = mmc->dev;
 +	struct msm_sdhc *priv = dev_get_priv(dev);
++	const struct msm_sdhc_variant_info *var_info =
++		(void *)dev_get_driver_data(dev);
++	bool is_hs400 = mmc->selected_mode == MMC_HS_400;
++	u32 config;
 +
-+	if (!sdhci_msm_is_tuning_needed(host))
-+		return 0;
++	config = readl(host->ioaddr + var_info->core_vendor_spec);
++	config &= ~CORE_HC_MCLK_SEL_MASK;
++
++	if (mmc->selected_mode == MMC_HS_200)
++		config |= CORE_HC_MCLK_SEL_DFLT;
++	else if (is_hs400)
++		config |= CORE_HC_MCLK_SEL_HS400;
++	else
++		config |= CORE_HC_MCLK_SEL_DFLT;
++
++	writel(config, host->ioaddr + var_info->core_vendor_spec);
++
++	if (is_hs400) {
++		if (priv->calibration_done) {
++			config = readl(host->ioaddr + var_info->core_vendor_spec);
++			config |= CORE_HC_SELECT_IN_HS400;
++			config |= CORE_HC_SELECT_IN_EN;
++			writel(config, host->ioaddr + var_info->core_vendor_spec);
++		}
++	} else {
++		/*
++		 * Clear these bits for every non-HS400 mode so a previous
++		 * HS400 attempt never leaves them stuck set.
++		 */
++		if (!priv->use_cdclp533) {
++			config = readl(host->ioaddr + var_info->core_vendor_spec3);
++			config &= ~CORE_PWRSAVE_DLL;
++			writel(config, host->ioaddr + var_info->core_vendor_spec3);
++		}
++
++		config = readl(host->ioaddr + var_info->core_vendor_spec);
++		config &= ~CORE_HC_SELECT_IN_EN;
++		config &= ~CORE_HC_SELECT_IN_MASK;
++		writel(config, host->ioaddr + var_info->core_vendor_spec);
++	}
++}
++
++/*
++ * Selects HS400 in the HC_SELECT_IN mux. Must only be called after
++ * sdhci_msm_hs400_dll_calibration() succeeds.
++ */
++static void sdhci_msm_hs400_select_in(struct sdhci_host *host)
++{
++	struct udevice *dev = host->mmc->dev;
++	const struct msm_sdhc_variant_info *var_info =
++		(void *)dev_get_driver_data(dev);
++	u32 config;
++
++	config = readl(host->ioaddr + var_info->core_vendor_spec);
++	config |= CORE_HC_SELECT_IN_HS400;
++	config |= CORE_HC_SELECT_IN_EN;
++	writel(config, host->ioaddr + var_info->core_vendor_spec);
++}
++
++static void sdhci_msm_set_control_reg(struct sdhci_host *host)
++{
++	struct mmc *mmc = host->mmc;
++	struct udevice *dev = mmc->dev;
++	struct msm_sdhc *priv = dev_get_priv(dev);
++	const struct msm_sdhc_variant_info *var_info =
++		(void *)dev_get_driver_data(dev);
++	u32 config;
 +
 +	/*
-+	 * The SDHCI core may call execute_tuning before host->clock is
-+	 * updated to match mmc->clock.
++	 * This controller has no HOST_CONTROL2 encoding for HS400. Keep the
++	 * UHS field at SDR104 (same as HS200) for HS400 too; the data path
++	 * is switched to HS400 timing via the vendor-specific
++	 * CORE_HC_MCLK_SEL/CORE_HC_SELECT_IN bits instead.
 +	 */
-+	if (host->clock != mmc->clock) {
-+		rc = sdhci_set_clock(mmc, mmc->clock);
-+		if (rc) {
-+			printf("%s: Failed to set clock for tuning\n", host->name);
-+			return rc;
-+		}
-+	}
++	sdhci_set_voltage(host);
++	if (mmc->selected_mode == MMC_HS_400) {
++		u32 ctrl2 = sdhci_readw(host, SDHCI_HOST_CONTROL2);
 +
-+	priv->tuning_done = false;
-+
-+retry:
-+	rc = msm_init_cm_dll(host);
-+	if (rc) {
-+		printf("%s: Failed to init DLL\n", host->name);
-+		return rc;
-+	}
-+
-+	phase = 0;
-+	tuned_phase_cnt = 0;
-+
-+	do {
-+		rc = msm_config_cm_dll_phase(host, phase);
-+		if (rc) {
-+			printf("%s: Failed to set DLL phase %d\n",
-+			       host->name, phase);
-+			return rc;
-+		}
-+
-+		rc = mmc_send_tuning(mmc, opcode);
-+		if (!rc)
-+			tuned_phases[tuned_phase_cnt++] = phase;
-+	} while (++phase < MAX_PHASES);
-+
-+	if (tuned_phase_cnt) {
-+		if (tuned_phase_cnt == MAX_PHASES) {
-+			/*
-+			 * All phases valid is close to as bad as none valid:
-+			 * likely no phase is really reliable. Retry a few
-+			 * times rather than guessing.
-+			 */
-+			if (--tuning_seq_cnt) {
-+				tuned_phase_cnt = 0;
-+				goto retry;
-+			}
-+		}
-+
-+		rc = msm_find_most_appropriate_phase(host, tuned_phases,
-+						     tuned_phase_cnt);
-+		if (rc < 0) {
-+			printf("%s: Failed to find appropriate phase\n",
-+			       host->name);
-+			return rc;
-+		}
-+		phase = rc;
-+
-+		rc = msm_config_cm_dll_phase(host, phase);
-+		if (rc) {
-+			printf("%s: Failed to set final phase %d\n",
-+			       host->name, phase);
-+			return rc;
-+		}
-+
-+		priv->saved_tuning_phase = phase;
++		ctrl2 &= ~SDHCI_CTRL_UHS_MASK;
++		ctrl2 |= SDHCI_CTRL_UHS_SDR104;
++		sdhci_writew(host, ctrl2, SDHCI_HOST_CONTROL2);
 +	} else {
-+		if (--tuning_seq_cnt)
-+			goto retry;
-+		printf("%s: No tuning point found\n", host->name);
-+		rc = -EIO;
++		sdhci_set_uhs_timing(host);
 +	}
 +
-+	if (!rc)
-+		priv->tuning_done = true;
++	sdhci_msm_hc_select_mode(host);
 +
-+	return rc;
++	/*
++	 * Below 100MHz the feedback clock must be provided without the DLL,
++	 * so tuning can be skipped.
++	 */
++	if (mmc->clock && mmc->clock <= CORE_FREQ_100MHZ) {
++		if (mmc->selected_mode == MMC_HS_200 ||
++		    mmc->selected_mode == MMC_HS_400) {
++			config = readl(host->ioaddr + var_info->core_dll_config);
++			config |= CORE_DLL_RST;
++			writel(config, host->ioaddr + var_info->core_dll_config);
++
++			config = readl(host->ioaddr + var_info->core_dll_config);
++			config |= CORE_DLL_PDN;
++			writel(config, host->ioaddr + var_info->core_dll_config);
++
++			/* Calibration must be redone once the clock returns to HS400 speed. */
++			priv->calibration_done = false;
++		}
++	}
 +}
-+#endif
 +
  static int msm_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enable)
  {
  	struct udevice *dev = mmc_to_dev(host->mmc);
++	struct mmc *mmc = host->mmc;
++	struct msm_sdhc *priv = dev_get_priv(dev);
  	const struct msm_sdhc_variant_info *var_info = (void *)dev_get_driver_data(dev);
  	u32 config;
  
-+	if (clock == 0)
-+		return 0;
+@@ -519,12 +741,32 @@ static int msm_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enable)
+ 		writel(config, host->ioaddr + var_info->core_dll_config);
+ 	}
+ 
++	/*
++	 * HS400 requires a dedicated DDR/SDC4 DLL calibration step, performed
++	 * once per calibration cycle once the clock is running above 100MHz.
++	 */
++	if (enable && clock > MHZ(100) &&
++	    mmc->selected_mode == MMC_HS_400 && priv->tuning_done &&
++	    !priv->calibration_done) {
++		int ret = sdhci_msm_hs400_dll_calibration(host);
 +
- 	if (enable && clock < MHZ(100)) {
- 		/*
- 		 * DLL is not required for clock <= 100MHz
-@@ -132,6 +525,9 @@ static int msm_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enable)
++		if (!ret) {
++			priv->calibration_done = true;
++			/* Safe to switch the data-path mux into HS400 timing now. */
++			sdhci_msm_hs400_select_in(host);
++		} else {
++			printf("%s: Failed to calibrate DLL for HS400 mode (%d)\n",
++			       host->name, ret);
++			return ret;
++		}
++	}
++
+ 	return 0;
+ }
+ 
  struct sdhci_ops msm_sdhci_ops = {
  	.config_dll = &msm_sdhci_config_dll,
- 	.set_control_reg = &sdhci_set_control_reg,
-+#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
-+	.platform_execute_tuning = &sdhci_msm_execute_tuning,
-+#endif
- };
+-	.set_control_reg = &sdhci_set_control_reg,
++	.set_control_reg = &sdhci_msm_set_control_reg,
+ #if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
+ 	.platform_execute_tuning = &sdhci_msm_execute_tuning,
+ #endif
+@@ -596,8 +838,17 @@ static int msm_sdc_probe(struct udevice *dev)
+ 	if (core_major == 1 && core_minor >= 0x71)
+ 		prv->uses_tassadar_dll = true;
  
- static int msm_sdc_probe(struct udevice *dev)
-@@ -193,6 +589,15 @@ static int msm_sdc_probe(struct udevice *dev)
- 
- 	log_debug("SDCC version %d.%d\n", core_major, core_minor);
- 
-+	/* Feature support depends on the SDCC core version. */
-+	if (core_major == 1 && core_minor >= 0x42)
-+		prv->use_14lpp_dll_reset = true;
++	if (core_major == 1 && core_minor < 0x34)
++		prv->use_cdclp533 = true;
 +
-+	if (core_major == 1 && core_minor >= 0x71)
-+		prv->uses_tassadar_dll = true;
++	if (core_major == 1 && core_minor >= 0x49)
++		prv->updated_ddr_cfg = true;
 +
-+	dev_read_u32(dev, "qcom,dll-config", &prv->dll_config);
+ 	dev_read_u32(dev, "qcom,dll-config", &prv->dll_config);
+ 
++	if (dev_read_u32(dev, "qcom,ddr-config", &prv->ddr_config))
++		prv->ddr_config = DDR_CONFIG_POR_VAL;
 +
  	/*
  	 * Support for some capabilities is not advertised by newer
  	 * controller versions and must be explicitly enabled.
-@@ -283,6 +688,8 @@ static const struct msm_sdhc_variant_info msm_sdhc_mci_var = {
- 	.mci_removed = false,
- 
- 	.core_dll_config = 0x100,
-+	.core_dll_status = 0x108,
-+	.core_dll_config_2 = 0x1b4,
+@@ -692,6 +943,11 @@ static const struct msm_sdhc_variant_info msm_sdhc_mci_var = {
+ 	.core_dll_config_2 = 0x1b4,
  	.core_vendor_spec = 0x10c,
  	.core_vendor_spec_capabilities0 = 0x11c,
++
++	.core_ddr_200_cfg = 0x184,
++	.core_vendor_spec3 = 0x1b0,
++	.core_ddr_config_old = 0x1b8,
++	.core_ddr_config = 0x1bc,
  };
-@@ -291,6 +698,10 @@ static const struct msm_sdhc_variant_info msm_sdhc_v5_var = {
- 	.mci_removed = true,
  
- 	.core_dll_config = 0x200,
-+	.core_dll_status = 0x208,
-+	.core_dll_config_2 = 0x254,
-+	.core_dll_config_3 = 0x258,
-+	.core_dll_usr_ctl = 0x388,
+ static const struct msm_sdhc_variant_info msm_sdhc_v5_var = {
+@@ -704,6 +960,14 @@ static const struct msm_sdhc_variant_info msm_sdhc_v5_var = {
+ 	.core_dll_usr_ctl = 0x388,
  	.core_vendor_spec = 0x20c,
  	.core_vendor_spec_capabilities0 = 0x21c,
++
++	.core_ddr_200_cfg = 0x224,
++	.core_vendor_spec3 = 0x250,
++	.core_ddr_config = 0x25c,
++	/*
++	 * core_ddr_config_old not present on V5 - updated_ddr_cfg is
++	 * effectively always true here since V5 implies core_minor >= 0x49
++	 */
  };
+ 
+ static const struct udevice_id msm_mmc_ids[] = {
 diff --git a/drivers/mmc/msm_sdhci.h b/drivers/mmc/msm_sdhci.h
-index a8e1c2e8334..337b73577c2 100644
+index 337b73577c2..af42295fb79 100644
 --- a/drivers/mmc/msm_sdhci.h
 +++ b/drivers/mmc/msm_sdhci.h
-@@ -31,6 +31,37 @@
- #define CORE_DLL_PDN		BIT(29)
- #define CORE_DLL_RST		BIT(30)
+@@ -59,6 +59,21 @@
  
-+/* DLL configuration */
-+#define CORE_DLL_EN		BIT(16)
-+#define CORE_CDR_EN		BIT(17)
-+#define CORE_CK_OUT_EN		BIT(18)
-+#define CORE_CDR_EXT_EN		BIT(19)
-+#define CORE_DLL_LOCK		BIT(7)
-+#define CORE_CMD_DAT_TRACK_SEL	BIT(0)
-+
-+#define CDR_SELEXT_SHIFT	20
-+#define CDR_SELEXT_MASK		(0xf << CDR_SELEXT_SHIFT)
-+
-+/* MCLK frequency selection (CMUX_SHIFT_PHASE) - required for the DLL to lock */
-+#define CMUX_SHIFT_PHASE_SHIFT	24
-+#define CMUX_SHIFT_PHASE_MASK	(7 << CMUX_SHIFT_PHASE_SHIFT)
-+
-+/* 14LPP DLL reset / Tassadar DLL extras, for SDCC minor >= 0x42 / 0x71 */
-+#define CORE_DLL_CLOCK_DISABLE	BIT(21)
-+
-+#define DLL_USR_CTL_POR_VAL	0x10800
-+#define ENABLE_DLL_LOCK_STATUS	BIT(26)
-+#define FINE_TUNE_MODE_EN	BIT(27)
-+#define BIAS_OK_SIGNAL		BIT(29)
-+
-+#define DLL_CONFIG_3_LOW_FREQ_VAL	0x08
-+#define DLL_CONFIG_3_HIGH_FREQ_VAL	0x10
-+
-+#define CORE_CLK_PWRSAVE	BIT(1)
-+
-+#define CORE_FREQ_100MHZ	(100 * 1000000)
-+#define MAX_PHASES		16
-+
- #define MHZ(X) ((X) * 1000000UL)
+ #define CORE_CLK_PWRSAVE	BIT(1)
  
- struct msm_sdhc_plat {
-@@ -43,12 +74,26 @@ struct msm_sdhc {
- 	void *base;
- 	struct clk_bulk clks;
- 	struct udevice *vqmmc;
++/* Timing mode selection */
++#define CORE_HC_MCLK_SEL_DFLT	(2 << 8)
++#define CORE_HC_MCLK_SEL_HS400	(3 << 8)
++#define CORE_HC_MCLK_SEL_MASK	(3 << 8)
++#define CORE_HC_SELECT_IN_EN	BIT(18)
++#define CORE_HC_SELECT_IN_HS400	(6 << 19)
++#define CORE_HC_SELECT_IN_MASK	(7 << 19)
 +
-+	/* HS200 tuning state */
-+	bool tuning_done;
-+	bool calibration_done;
-+	u8 saved_tuning_phase;
++/* HS400 DDR/SDC4 DLL calibration, needed alongside the SDR CM_DLL above */
++#define CORE_DDR_CAL_EN		BIT(0)
++#define CORE_DDR_DLL_LOCK	BIT(11)
++#define CORE_PWRSAVE_DLL	BIT(3)
++#define CORE_CMDIN_RCLK_EN	BIT(1)
++#define DDR_CONFIG_POR_VAL	0x80040873
 +
-+	/* DLL init sequence variant selection, from the SDCC core version */
-+	u32 dll_config;		/* qcom,dll-config DT override, 0 if absent */
-+	bool use_14lpp_dll_reset;	/* core_minor >= 0x42 */
-+	bool uses_tassadar_dll;		/* core_minor >= 0x71 */
+ #define CORE_FREQ_100MHZ	(100 * 1000000)
+ #define MAX_PHASES		16
+ 
+@@ -84,6 +99,11 @@ struct msm_sdhc {
+ 	u32 dll_config;		/* qcom,dll-config DT override, 0 if absent */
+ 	bool use_14lpp_dll_reset;	/* core_minor >= 0x42 */
+ 	bool uses_tassadar_dll;		/* core_minor >= 0x71 */
++
++	/* HS400 support */
++	bool use_cdclp533;		/* core_minor < 0x34, legacy calibration path */
++	bool updated_ddr_cfg;		/* core_minor >= 0x49 */
++	u32 ddr_config;			/* qcom,ddr-config DT override, else POR value */
  };
  
  struct msm_sdhc_variant_info {
- 	bool mci_removed;
- 
- 	u32 core_dll_config;
-+	u32 core_dll_status;
-+	u32 core_dll_config_2;
-+	u32 core_dll_config_3;
-+	u32 core_dll_usr_ctl; /* Present on SDCC5.1 onwards */
+@@ -96,6 +116,12 @@ struct msm_sdhc_variant_info {
+ 	u32 core_dll_usr_ctl; /* Present on SDCC5.1 onwards */
  	u32 core_vendor_spec;
  	u32 core_vendor_spec_capabilities0;
++
++	/* HS400 DDR/SDC4 calibration registers */
++	u32 core_ddr_200_cfg;
++	u32 core_vendor_spec3;
++	u32 core_ddr_config_old; /* Applicable to sdcc minor ver < 0x49; 0 if N/A */
++	u32 core_ddr_config;
  };
+ 
+ #endif /* __MSM_SDHCI_H__ */
 -- 
 2.34.1
 
