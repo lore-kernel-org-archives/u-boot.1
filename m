@@ -2,120 +2,155 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76157606A31C
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 08:03:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9EF7606A321
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 08:44:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=CrCsemRw;
-	dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr header.a=rsa-sha256 header.s=smtp-20201208 header.b=WtFYSkpV
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=io5kVVC4;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xv6ncyFE
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4D4DC406CC;
-	Tue, 10 Nov 2026 08:03:28 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9D7A44058B;
+	Tue, 10 Nov 2026 08:44:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Omq4WI2GwS8O; Tue, 10 Nov 2026 08:03:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7EF81406D8
+ id EdYt4AO0OR_0; Tue, 10 Nov 2026 08:44:02 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org EBDF44059B
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794297807;
-	b=KfPsUb5hjnG0jIchhveE1F8dgFadxp8pPAWHTt0b7XKjAg0UnjdhZBYAbPRmaidf8kRO
-	 SEH8v1XVffATklysB/cS4AIftUrkWfXfZVioq6JhWxNt5HZCk7pbLdCKBvYD6AkhCZSjD
-	 nHO920sIOEalkzW3vlQ7UBv9+gNVwg/dEuFbuXjs5nXt5CYywfwSHRmvxa8ErG8oBJTG/
-	 Ve81zzz4YVqnWg6TnO0wUGbWWxJ7zs+ThePFVw1Di8DXtp/8lkhe3a40AV2t/u+iFvf9Z
-	 EM+3fOHiLh6YfboVI7VRBKMAhbd1F5nRz6skh97XHbuVauO6ZaVBi9AJlISS3/5tdBw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794300242;
+	b=A7elBg1mFlrJwxqDFSBjqYcU/ApYSjOQhmXqNQmB30fK0djeIMc8mNx1E5PK4E1n4FQm
+	 pBqjaVa5DEP1MU2ylvFnpLewIR8Xi7kBu1JtTVstdUYM9SMPVbBg7mPPhafnxGozv/8Qn
+	 thID6bOF0e/HQc2yjXyWHksDqJ8DJwjjlP00UaO/TjTjDWz+KMKo0kSsCusc79Tp6mzSl
+	 L0B/VkRY8YgIy2S7jM/BVMT008dAV8ZIi9mhxXRmk+8W9V1MqbOmUR+BjJJTTZMNDqKGH
+	 FM0fUIAz1ULrbH2+CYZxwKCf3m9N9jxQBWYHt81myyTNL9dKgdTLpim+fWCewh0P91A==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794297807;
+	c=relaxed/relaxed; t=1794300242;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=YGUk7KmhDxQGTq3Yb+BdyHqZ456875QJRsNent/rc5Y=;
-	b=KNzSlQExYC4R3xJLM8pyy5MpOr3kz+xUBWfT1/S4219bmFy6osUg+uY+Cb56a3OBl2jn
-	 vBrjYx9PCu6/HFq+AYp/cHuNHgCtPHB4SWKOA2AIE2Pan1ootGsAcIerUPYXLFOliiRFM
-	 iZ5dU0ZwwShCWWhcZLIAQCZgAbSRabVTwyrqDugRbO9KabW+MYNvJXNBPZFfY0RuJoEmL
-	 dbUmv6J0lXvfAMGJUWDU2tXtFJwGX6S5Nzcq59noBwW1ZKtJdIUF1DDDMLEWg6diKWJoe
-	 S5lW4bxL1KuoV5ISUo8PXO8t5xEsXomyoE3NOkhInqEqDSiWquFCVWBKkskRg0ZRodw==
+	bh=MdKxfy5nIKExvtw5Z9pQzEWtZEuqiiilUcXMQmKNlP4=;
+	b=JrwFM9KQUxzczjnVYByf2kmQUTYibhj0g2tiID2qGyj1/iMCBaC1KtMcn75hPmMLRKUH
+	 zw2aXnJ4VKAIpskeNr6KVTS6mi/ZvbkGd8HKA6Vs6UB82BEIc48b4L86g/gmWgA111tsA
+	 3SRD29ApFdkdStXr5hCQBcESPdiA8xkVErHcumnw39KI0Sct/8NncbjweEwXmxqZyHBNn
+	 ntP8qekGcBc7rCSixwv/2UlvZlQiontPGmoMPGwtyFZDSQhyB/LzKWxB/i7UO7cDhIbyj
+	 ffDVUmwpcxmFB36hHwQ2juSvNn0n1AWiU+dLUFZQjRBDguMNOXi/bwd2bCmluQBE8qA==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=pass header.from=free.fr;
-	dkim=pass header.d=free.fr header.i=@free.fr header.a=rsa-sha256 header.s=smtp-20201208 header.b=WtFYSkpV;
+	dmarc=pass header.from=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xv6ncyFE;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794297807;
-	bh=YGUk7KmhDxQGTq3Yb+BdyHqZ456875QJRsNent/rc5Y=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794300242;
+	bh=MdKxfy5nIKExvtw5Z9pQzEWtZEuqiiilUcXMQmKNlP4=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=CrCsemRwjmJrWFDvnTvtf0U8bftu78vc4oi7Vie1xzVSCe3dqIT9gQeoPZKYMbGMR
-	 A5dQh4JFYd3c04n324eTHBod/abreNRcadDOrpYfxFh1UBJN5MG4mf2C3OdOAF99Iq
-	 V/CEihJma6RhmywCsjA90jn5Jh0Oyvz0+ZqvmsUNyVtmeHcROWl+LgaYUoEFgPGMHe
-	 T91Wyh8jzfSe4CWUgvmFCWAU37kk6dCVOs9bW8W/UpX9O3CAIOMplzcjAvwCr8uP/G
-	 DEH0GUWYBlpYyV6kN0C42yMliIzQLoUnyLJJQxnLyFFeIgdzV0bobaHNCsKAO8811A
-	 USc8+iC8stHrw==
+	b=io5kVVC4v5Go4Ix6lEZMInSGfgMHZiSzortUc3X5npMDl3RmKKIpUW97rI2a+iRdF
+	 PA9tt6vvpxGTYi7CvZ/Xhz4bUa7K9pzkcRQgyn1Dn3jv2VXqLnyyyHDu6vooZmX7eV
+	 W/gYo6XsgQvglPeMFPhN4mxYKzXttao5uvxs3+VUhCFdJkPyDsgL0NFegNStKOM3MM
+	 i5dYc2phmsZoNi93d1/C/AwCNGJ0w7ML9hhcWTbDA2grsLnm9ZqtJy/krfX8fRaBqO
+	 aYbN0b/7rvYZnUgvoC9nMoL5CtQ42LSDJSuMINEVoN6S6T67/Xk9J7whKg9166GKCg
+	 ckh+F427LMbOA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7EF81406D8;
-	Tue, 10 Nov 2026 08:03:27 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EBDF44059B;
+	Tue, 10 Nov 2026 08:44:01 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 5233631F
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:03:25 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 2E2404B8
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:44:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 37ADB406D8
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:03:25 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1F6D44058B
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:44:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PXXj4xi_4d8N for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 08:03:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 07DE8406CC
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=212.27.42.6
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.27.42.6;
- helo=smtp6-g21.free.fr; envelope-from=vjardin@free.fr; receiver=<UNKNOWN> 
+ id BGxQqtL4EAnM for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 08:43:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 492904059B
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::1334"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::1334; helo=mail-dy1-x1334.google.com;
+ envelope-from=clamor95@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=free.fr
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=free.fr header.i=@free.fr
- header.a=rsa-sha256 header.s=smtp-20201208 header.b=WtFYSkpV
-Received: from smtp6-g21.free.fr (smtp6-g21.free.fr [212.27.42.6])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 07DE8406CC
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:03:23 +0000 (UTC)
-Received: from l3017729.home (unknown
- [IPv6:2a01:e0a:ac2:22b0:465:ee79:21f5:acc4])
- (Authenticated sender: vjardin@free.fr)
- by smtp6-g21.free.fr (Postfix) with ESMTPSA id 0F75F78035B;
- Tue, 10 Nov 2026 09:03:13 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1794297801;
- bh=MtqtizMyasV9W91bpuxNekawwvLivkHZI4Ydjdbb90g=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=WtFYSkpVPwRh1tswmJpZKXZcOfRXbU+AFlWXt7OfNjYK4YCyMfML4AjtMhWPaZuuI
- /sH/Xl6cK0tj5apy1gN2ewUvGnJhFnZTO9I5jlupb/fioCRNi6GkU0tOaCiJVU37V0
- jlFlT59NbfgTo9Pgfw5b/fbrxR5+qhLQHnemRTdfhmNk5inxyWSq12XMJcR0GSKIz0
- XKlY2Pt29G8+Q19z0jUNmbgt9OFgfGtH+Ksp3q9iBZSH58H37/P+ul7wLyu12Z98yv
- 5t1i9pXXO09mAHVxJbSJPdk/KtLhuGSpfkYeNVM8PPP4bThd/pXWD4BgY7aZ+jvw0T
- B+1yuYmJwdSZw==
-Date: Tue, 10 Nov 2026 09:03:11 +0100
-From: Vincent Jardin <vjardin@free.fr>
-To: Tom Rini <trini@konsulko.com>
-Cc: E Shattow <e@freeshell.de>, Marek Vasut <marek.vasut@mailbox.org>,
- u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
- Rasmus Villemoes <rv@rasmusvillemoes.dk>, Denis Mukhin <dmukhin@ford.com>,
- Markus Schneider-Pargmann <msp@baylibre.com>,
- Suraj Kakade <suraj.hanumantkakade@amd.com>
-Subject: Re: [PATCH v1 0/3] dts: build the DTS from a directory outside the
- tree
-Message-ID: <avLPv24pc3fZ42nj@l3017729.home>
-References: <20261108155019.1485598-1-vjardin@free.fr>
- <avIBHFyUj8mDk6PQ@l3017727.home>
- <20261109191330.GW3741582@bill-the-cat>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=xv6ncyFE
+Received: from mail-dy1-x1334.google.com (mail-dy1-x1334.google.com
+ [IPv6:2607:f8b0:4864:20::1334])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 492904059B
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:43:57 +0000 (UTC)
+Received: by mail-dy1-x1334.google.com with SMTP id
+ 5a478bee46e88-37071c0f42aso3228136eec.0
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 00:43:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1794300237; x=1794905037;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=MdKxfy5nIKExvtw5Z9pQzEWtZEuqiiilUcXMQmKNlP4=;
+ b=xv6ncyFEnsrSnwyX/A2PzruJS9kjAneaqjSimogsKtKR8UnfhD/6j4qLPbVLybMtTS
+ SU7f88LyeaWS2alPUMK9sW1A2Y0SW9g/0VhT2adzqFwFlBUzG+rKFbZI0OPO3b3GAvGF
+ /dj6+WKIeWEPNI/z1SDbI52rbQ5Wzp6I6AJYnz0QeRO231TSrAlqgUvmQReIN6D0xMju
+ d/uPDQ3pFgxBrHxvvp1H8iIvUJJNWa4DrtIYyWKwpVN0+hNowINgIdIg1N9VtkyX0x+m
+ iG1MH2OnFwbGNO1kSllUOYJoUhOFSlJJT+o81ZVARIOyeyQ1iPZbozuBxyP+JLrh6FPx
+ uEoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794300237; x=1794905037;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=MdKxfy5nIKExvtw5Z9pQzEWtZEuqiiilUcXMQmKNlP4=;
+ b=z7hpQ4TK2qH6F3wBpUFUoFoUPeAHL7+eQ25L3l7BCsGFZGNpyImXrAocnC7l0sd5Z7
+ EKTu3wpIiN4i1sukL+y919f9glqHJ2imQXHkh+m7dddIHIzb5YaX9RNHl4uKpUPy/348
+ 3KmOxScN7ourWFNXvjvvYDv+ZvT9FU/3aPLyE0QE+vPrQd1kS1LYAiWwAwuFw4g6IHX9
+ gEQGs1+oVBshVyOT4tHHF5WbbFSnED9bTUIMkPmQJqNQSNo/JJg7uYSYezfGhaQ1S7Rk
+ QfzsbBSsnjbLMpoKuUnzNgjStmWPmRpAEimkao1XYpufTv8icFGmpOr+ezeEebcVaMh7
+ 0d0g==
+X-Gm-Message-State: APuU4Z/ZwhvK+veZeqS9V020hJrgTh6MMvjYJT6et12e7Xy9LwWNtLMv
+ jBVfKKtNUB3CTw0vZgmraDbXpBThgUY4mGVbYs9YEHUotaiUXLfIFCYrD9dKeIlafsQvOG/kOda
+ aPeRAcdix0krnf6FaiawJlcBbRMWQdRY=
+X-Gm-Gg: AYBFou1QjrNPGMxLLIBjNSX9I+uB5Z/My0S4fW6HEYR2nqLodEN7FvBdwftP/vgwXKF
+ x4itVqb+0t0Go6HkepiNf5mEvEpPyoOdnsNpAGdHuE2Q8ZJ81AZfQgf/Ek+SB8OWyaVksYr9Qkf
+ BBmRcbrRlT0Kc4e1VHxDE6e5RvlQwNYngL/oyO4SbEZHLiarApKUVpAT0JKf9/0dATURrL3ioAA
+ jw8K5b0v5LcB863M1I+2a+m/4+5nuQZuW/pG+UAcdP8sN0wGgF7lS56B0c35u4A+EPTtU0NtiV4
+ cK1w1lWfQd5IrzaGhGtgyQUHG7WmNX4brQJATrG+GIwXvDtQUgWpwPaSXcYd+vgTx/GryZSMYgA
+ rBsMHHW9l4MNyCQ3bU8Inz/gvfEAQyUNI52aAbSAk90xa/SRSZJqNoXhnaLnjBYYg4AKpRB80zf
+ uEx4EGnoPxUqKWAA11IkZSh9XGNCIk7A==
+X-Received: by 2002:a05:693c:8845:b0:366:9f06:3c4c with SMTP id
+ 5a478bee46e88-3751fe3228cmr2243277eec.32.1794300236731; Tue, 10 Nov 2026
+ 00:43:56 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261109191330.GW3741582@bill-the-cat>
+References: <2399d63c-ddd0-44b0-bb81-d5d9d2a8a8b4@gmail.com>
+ <54ffbe6d-668c-494f-874c-b5f34b84c593@gmail.com>
+In-Reply-To: <54ffbe6d-668c-494f-874c-b5f34b84c593@gmail.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Tue, 10 Nov 2026 10:41:23 +0200
+X-Gm-Features: AclHuK9XKFPqGrZjDcb8E_I2ZEY89nzgsNPQcSHcBqCntHOHyiiZ369osA1ZV8M
+Message-ID: <CAPVz0n2kOOddS+T_8-hJjzZt9-T1-HtebwxA9_fcw0SwzWVy-g@mail.gmail.com>
+Subject: Re: [PATCH 04/11] video: display: Skip modes which do not fit in the
+ source frame buffer
+To: Ana Bobillo <anabobillo3@gmail.com>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Kever Yang <kever.yang@rock-chips.com>, Quentin Schulz <u-boot@0leil.net>, 
+ Andre Przywara <andre.przywara@arm.com>, Thierry Reding <treding@nvidia.com>, 
+ Tom Warren <twarren@nvidia.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -125,27 +160,83 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-2.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,SPF_PASS autolearn=no autolearn_force=no version=4.0.1
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Le 09/11/26 20:13, Tom Rini a écrit :
-> It's a fine line to walk. Vendors who are trying to do the right thing
-> should be encouraged and so not walk in to "walls" that block progress.
-> Vendors that don't care about doing the right thing will just patch over
-> whatever check we add. Probably that first option is enough, it can be
-> set in metadata that builds U-Boot as needed.
+=D0=BF=D0=BD, 9 =D0=BB=D0=B8=D1=81=D1=82. 2026=E2=80=AF=D1=80. =D0=BE 19:29=
+ Ana Bobillo <anabobillo3@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> From: Ana Bobillo <anabobillo3@gmail.com>
+>
+> display_read_timing() picks the first EDID timing which the display
+> driver accepts, but the display driver does not know how much memory
+> the video device feeding it has reserved for its frame buffer, so it
+> can pick a mode which does not fit.
+>
+> Add the size and depth of the source's frame buffer to struct
+> display_plat, which the video device sets, as it does src_dev, before
+> it reads the timing. display_mode_valid() then skips the modes which do
+> not fit, so that a smaller one is picked. A video device which does not
+> set them is not affected.
+>
+> Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
+> ---
+>  drivers/video/display-uclass.c | 10 ++++++++++
+>  include/display.h              |  6 ++++++
+>  2 files changed, 16 insertions(+)
+>
+> diff --git a/drivers/video/display-uclass.c b/drivers/video/display-uclas=
+s.c
+> index 85dac12a197..06888df4112 100644
+> --- a/drivers/video/display-uclass.c
+> +++ b/drivers/video/display-uclass.c
+> @@ -42,6 +42,16 @@ static bool display_mode_valid(void *priv, const struc=
+t display_timing *timing)
+>  {
+>         struct udevice *dev =3D priv;
+>         struct dm_display_ops *ops =3D display_get_ops(dev);
+> +       struct display_plat *disp_uc_plat =3D dev_get_uclass_plat(dev);
+> +       u64 bits;
+> +
+> +       /* Skip modes which do not fit in the source's frame buffer */
+> +       if (disp_uc_plat->fb_size) {
+> +               bits =3D (u64)timing->hactive.typ * timing->vactive.typ *
+> +                      disp_uc_plat->fb_bpp;
+> +               if (bits > (u64)disp_uc_plat->fb_size * 8)
+> +                       return false;
+> +       }
+>
+>         if (ops && ops->mode_valid)
+>                 return ops->mode_valid(dev, timing);
+> diff --git a/include/display.h b/include/display.h
+> index 26b965daba9..f2ff9ffced8 100644
+> --- a/include/display.h
+> +++ b/include/display.h
+> @@ -18,11 +18,17 @@ struct display_timing;
+>   * controller
+>   * @src_dev:   Source device providing the video
+>   * @in_use:    Display is being used
+> + * @fb_size:   Size of the source's frame buffer in bytes, or 0 if unkno=
+wn. Set
+> + *             by the source before reading the timing, so that modes wh=
+ich
+> + *             do not fit in the frame buffer are skipped
+> + * @fb_bpp:    Bits per pixel of the source's frame buffer
+>   */
+>  struct display_plat {
+>         int source_id;
+>         struct udevice *src_dev;
+>         bool in_use;
+> +       uint fb_size;
+> +       int fb_bpp;
+>  };
+>
 
-big thanks.
+Decent idea
 
-I did post a v2 with some cosmetics: control.rst
-It states the option for a board that is not in the tree yet, and states that a
-board sent upstream shall still come with its devicetree source:
-
-  https://lore.kernel.org/u-boot/20261110075256.1800130-1-vjardin@free.fr/
-
-best regards,
-  Vincent
+Acked-by: Svyatoslav Ryhel <clamor95@gmail.com>
