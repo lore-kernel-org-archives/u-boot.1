@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3841160A2609
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 12:24:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABFE960A260F
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 12:24:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=KPbuI40v;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=iS5Iiq9o
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Gtb5j8wZ;
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=xAMVVmK7
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1745B40896;
-	Tue, 10 Nov 2026 12:24:24 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8676C81206;
+	Tue, 10 Nov 2026 12:24:25 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Aswssy5sJqJn; Tue, 10 Nov 2026 12:24:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 551BB4085D
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794313463;
-	b=aTs7E73+RqOFmXnfikKDlNWtQvaQsfoZ609fk5c7bBZ/2Fz9uK2gRgSt+nnlwlt6XAul
-	 KIb+KbP+we050qGhCnqZu6PS7eAIQpRD9NokxLRp1fA5zrkjR35tEncIiM0R/nC19RnMc
-	 9nPcHwZT5cDG3E8IIlTEVJxNPe0vA6tF2VFaotPK4/nZOf+6MHJPCWLr5EfX0o9swNzqJ
-	 yoKw0dGjx8fM2g1rXOmn+5AYLLB/cm5Xls4tmN3mcSAxEDS6jIxb7SxwoNug9H+1babYv
-	 kMPlrKqxxHVA+2TmAr0SZpxhpR7Un8rN1cyIF7EjBCvVo0PFRIRiWLi+Tj7fVHaB2Xw==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id RBTkU_fKTFjk; Tue, 10 Nov 2026 12:24:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D225181224
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794313465;
+	b=P8V/LKZGGfFA2sk5Im6WpzGDCveVQwy2gasIwLhalGq2jGymgPzZMzEaBHeSk+wmKxQI
+	 hCMi8I4xrhkZuDBWHjJvRpregsbozSiAm1kLYZz0sT/33C/7DtWTbdGECZt3nywVOJR32
+	 vh2tbZH8unEO5Y9bm4ejlt7lpys/1NCF+ixr4GnI/jBsXqyCD/Gnk8fRd2nMHdeG4v2j1
+	 oKe8epAeV+wMqKw+kGi4KVwhxr05UkwwSE2BnjEXWpAO04fUU0tkVbj+AaKP8jAddnZfO
+	 Yh/996WGNcMUEBjGB0N/eG1GSCIPBeF0+iknHoye6zXu15mHB0bkWjfGquARlDKctVw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794313463;
+	c=relaxed/relaxed; t=1794313465;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,112 +33,112 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=NPS9iFdRJLtKK5WPFBx+oHYTrFL2ypgGKldkwgflcL4=;
-	b=TKg33Wm4eg1dkBDmsKcqtmQ3goTXZqvbgjv1dMwIhAJnCwM/EJfxMKmLEGu5qAhv9WIw
-	 crzcw2k5a9UOJKZcL+jRFKrkZcfeqHVHMoeDgbjYRhmxce1Xq2DPIqjVsEtW6HbI0QHKB
-	 x1Wr04TrGmhU6H1v8ncB3IgPFX7QXnWNg+IsHkNAZYtwR16bjoMdvKr93jhXhxkuCzDVL
-	 6Z4OHXshBWnoQ/JSfayyJsZl8vc+WVHKP713xPaoHYu2lBPRhJk2mLc7UMMEfKnLkY9Y8
-	 274twcWWHeB1q+epSZqeSZhzCbJv6eB3eOyN9zqvQzFQfG5KyEUMEyA9QHRyH8XE3tQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=FyZ6oWSgtyjcjlJnAL7tMmwQaPzjeOzbQ9DN0OB1398=;
+	b=MwC1SK8rxPjxchAGkcHvZyUPh6B8Z+ttX8gfMSbrHpcks3Svc/DtTd70OsAsgJwpdp3T
+	 RWeiUJTYxlQ7iiOK5zyqIT5B3u71qVwwS35dJeLAntbre5PqsLfeo2EY4aH2R5VciUX14
+	 jSOCuXjK1LDntgt0NceOv6l7dfHFZcqpJRsfj++kzxLgPFzRfZtvq4jTH8mEPDPzxMvSL
+	 qZajrZ6WGXe+rRP2Xchk99p5W58lfgqSFs0hYG9FNSgjx5y0UNLK/9Wb4FD2yLLB/B+2F
+	 pUPy4UrjwclPHeXagmd1LCSFYfdWzTbuG5nvPPyrGW5VHMuB6UesJx2Qdg3EEndpOSQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794313463;
-	bh=NPS9iFdRJLtKK5WPFBx+oHYTrFL2ypgGKldkwgflcL4=;
+	d=lists.u-boot-project.org; s=default; t=1794313465;
+	bh=FyZ6oWSgtyjcjlJnAL7tMmwQaPzjeOzbQ9DN0OB1398=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=KPbuI40v7jxtVhOF+Myd7zoL86Sl4nUQ3FatH+ZnJ6fmRtlPSrKGkuUozP7dgY70K
-	 HeXno7HgyZVej0yldJQj0Q5590/kXUPpYUZcfYuljJjys0h2fkE+Uy7E7icfJsL6n1
-	 oegEEBEYZ+jWfgrP0i6fqjubH7wHiLUZ3bNWQa1OrUiLecC8vX77Xh7LogfmyTnmZF
-	 TlP/cCwht/+hnF0JFPRpORECJUssNfz6xEc4wcf2zGJJJF8VTIGq0TM+kV5Gwx13tP
-	 s3eX2rof4AbLp0z/7lBF8gMuT44uAypnRaTT8eZQ83/XB5XQ8Jv2kWHwbkZkYvF/U6
-	 P5Lwd8bgiOgAg==
+	b=Gtb5j8wZhvCC75TG3M4BQpmxo0oRV4PRpsWKw5Ul31i5ywUCU0QvkmyVKAxv1Xn33
+	 17mbuOyxWows6OsNHqdtbxJ2MogjMG9Pi7livqnbSl8Zxf6513SM4hb+ythkxnpFc8
+	 hVYhTXxaOIHuejf0D5AcMZLBozjtJQXDcMVPmQq/LQSf3f4kQlN5jazBfMR6eReqFC
+	 4+iHhk2xXmFLzJgnHDb+LKmNDTah5SIyh0oOFvKNIh03PGy4qBbsHQGQWrpD102qVv
+	 4gTraReL7QlIGlriV69Orrp7+XYs8zHEC9pWIhNA/HbajoyVPo9nStuCBtspGjkC5j
+	 bItC+LUI3u1eA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 551BB4085D;
-	Tue, 10 Nov 2026 12:24:23 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 42CA01A6
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 12:24:15 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D225181224;
+	Tue, 10 Nov 2026 12:24:24 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6FBA19D1
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 12:24:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4080C40176
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 12:24:15 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 555B66085C
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 12:24:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id KuTc-PrlxJaj for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 12:24:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 4C83A40347
-Authentication-Results: smtp2.osuosl.org;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 3Ul7yQwCBD4P for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 12:24:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6756E60768
+Authentication-Results: smtp3.osuosl.org;
  arc=none smtp.remote-ip="2a00:1450:4864:20::330"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
  envelope-from=andrew.goodbody@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
- header.a=rsa-sha256 header.s=google header.b=iS5Iiq9o
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=xAMVVmK7
 Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
  [IPv6:2a00:1450:4864:20::330])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 4C83A40347
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 12:24:14 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 6756E60768
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 12:24:15 +0000 (UTC)
 Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4a2d6d01ecbso11546115e9.0
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 04:24:13 -0800 (PST)
+ 5b1f17b1804b1-4a2167bd087so19306835e9.3
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 04:24:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794313452; x=1794918252;
+ d=linaro.org; s=google; t=1794313453; x=1794918253;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=NPS9iFdRJLtKK5WPFBx+oHYTrFL2ypgGKldkwgflcL4=;
- b=iS5Iiq9oV/7/5c6y3293FP6v+j9JpvdO6GQ7HJ5b1ZbNS8LGp5+iEAEqRKLT+D6haJ
- R3DO5Xo0JzIvGhP3DtRP4J3f7KwQrJeVBUxG8CNponPSqDCN0GpqY+g2IEgFfpKO8Srh
- r2pHfcmRGrd5oy5/ZM0bY0RmRlBWFDKQZeqiSyxNXJ/ZV5B8doFBvdfFHVKNAZYtxFvu
- I0jF8iEira7REaJmyCc5jb4X9rAPEEE/7sLd5y4Ynn0pIZQcDGL5xgBFiap8pb/HOljy
- MH5mtY3GR1IUnsT6Nc+gBX7NSZP/mu9YFYobyptIwexQ3bJ5O56lWUtOK8oWPovaazI5
- aozw==
+ bh=FyZ6oWSgtyjcjlJnAL7tMmwQaPzjeOzbQ9DN0OB1398=;
+ b=xAMVVmK7UXoeXiuOFwQyD/N+od+3y68Dn+8wWAgWgzHoFv9RkYGNWRuYzTyrS2hwKw
+ Covr21qsvsIFCXooBR2lnf7A/Ku/RbvGxWq/rkIrIzhaUTNce7E4dpzohSBRGwfZIYa6
+ NxP0n7hSd5UZHnxqTu75zPl7ImIWJREJKmriZc5eqwXUuNidSr1OIh7jIVtJI3eo2h7u
+ L8O9capP+HK4Mizm1SskSMeeICBReSqNCeuLT/Ldq4p8Ywy4dfRGT0KxGg7tutKkrq2G
+ +C77VH9HjY+9B2wwl/Ppprk9pRO5OfIS62HmzklD/AKtbKKCdhkJTr8uDI1mBsC94TGr
+ K9Tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794313452; x=1794918252;
+ d=1e100.net; s=20260707; t=1794313453; x=1794918253;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=NPS9iFdRJLtKK5WPFBx+oHYTrFL2ypgGKldkwgflcL4=;
- b=c7OqBmQRQnr99Q3/TTMPEGg45oB0Ko1cvd5RudM7jda4IIRBArqYoyb2kUKVRALWDJ
- i+9uvyAUSieJh9uFjd6qbB4xqeugr6qXjv8NqWAC8y/T8mil0NgOHUHg4TAWvTC18jNn
- cAC4H5D/2GkzrUh7tyMQDAI0Q87DGnST5mP4pYvhre7TOYFO8o4iYqf7hcmzSy5i1NHk
- EUM5u5699HOLbMiWSryZ1erK1nmpk2CNUDF+gV0Fwx0HUiptTi83utzTM5TekeTl4DXA
- /+hpJ3pTof3N57eNDmy2LZ0gpBhus0rHhO6FCjSpEHTz+qPrtNvb510lmDHT2YaUvc08
- yfhQ==
-X-Gm-Message-State: APuU4Z/oJnM5EujidP0Hed6SowQ42VBRdWaKHkCl6AiKohh3eGit9JKZ
- 2OJcFcU+kzXBdm4bqn+UDl5WctBegPx9YjVrFOpWQ9Ufa0hZ4uYy5fFDpYFW95MUmAA=
-X-Gm-Gg: AYBFou1N2J2jBWVvTnrvfi/8QjdWzflxwE/DefJ+e3JJzkKwW5Bf+D5EzHpKSVLXm2Q
- IRFdU7f4q2o68fvUMHWHsjREXKdhKXRw6h4kWV0l4CQ5TN+V120O/nE2f1UsirlZ7mxaggOBNcd
- 0Yv5p3EHI5GC8XkG5g3lWPFaWfwKZ0HIg0ZYC+QAVWb9N+LSGj36U98u9tcw/8X+wBJHFXuPzFS
- H4WHBR9Je1PuUWZ0LKBrvmY3cOmAraHzo+ZomTwybhTI5YXt+rWgwaByET+Vl1kkeBdfDimvtDV
- AfAN8LvDialSKox0x/aZQX/Tifp+6rbTGwtuUZyVF0HiR3ApKg0VuS7RUTmU57JAY+TO7zxOu01
- kcdadQnyqKnrXZVMgAL8/YWyWpys7e54II5c6BJe6OHtXagtYZzgabaM1NTzggzw/TVvaKOkWnz
- YICyB5yB+lvZQZXWt11HVjr7XOCRyKOYTqvjk983vDo59RcD8VltzXO+g0MS0J8N3DZSCIzgSxq
- 8vEZ52Pe/eh+YRb5r7E32EqNIUoI1dl/BKOOr7Y0m4gE3Um2hbzMHk9wzqEpmPvz/Mf04//q8aB
- 292f+o0uONt5dSpIQMHg2Qs/qufom4OCc9p522Ri4Wfy7hoL
-X-Received: by 2002:a05:600c:4687:b0:4a3:5a55:f454 with SMTP id
- 5b1f17b1804b1-4ba02347a5emr38388255e9.19.1794313451973; 
- Tue, 10 Nov 2026 04:24:11 -0800 (PST)
+ bh=FyZ6oWSgtyjcjlJnAL7tMmwQaPzjeOzbQ9DN0OB1398=;
+ b=J0XMcFc4ORAI5C3q8OvvumDkI8nj+7FsSrTHFehE1h0IXnYiV+O+hzpuMsWxRpQXbX
+ geY6+wmvbWfVX033mpDUDK+ifiIGXk4o3beyPwmuda+zTveCRaiV7ntuPH1+hhyhtCWW
+ lyRPm2eEF/ZXSFw0bg5iNcJihPBsOpnJaguZ7a2lqATiO5dBSyrSzxgPET1acGPl9Ipr
+ PYMwHJ++wdaHiuuD+ZL1j7YouW0G3P2/bQ6uWh5GwsyndM6/3qQvwamMvryKiF/vbNO8
+ aXD/cEQzKAMwpWK/sbHl/nKXLADkSwi+1owLQ/WUZg3w0cPdPH/i9+ZAkkYmz99aYG3J
+ tuVg==
+X-Gm-Message-State: APuU4Z/hd9FYgxM/VqevmPDGfX4MZsrFIrzanID6Ackr/o/bKQvHyqbl
+ m1QztRG+md1SYawoNY4evkX6F6xoPr1NQ3bHB7BEoKLy1r4+BSk/Xu4KGzIUt95IXAY=
+X-Gm-Gg: AYBFou25j06tjoIUwRVyxcrZXw26ESiIoX3J6L5EXVLrbgVn6Oyn011lDmh4cnYs5xN
+ iKG2WJNSlepTSXI4ndNl+IqspJEzgcOi+UHtbYljOExrkKZ8IfZkdNKKogYcqJK770DH/eFxosf
+ 748BUcEE/WBEajGL2FCkcQEG50yYC6QogZAfOyl2hH+HppowTHuHJIxAo2jOBaCtcEPuvkM2dkb
+ 4HoHKjYAjQRbNHB1o4696Cp9nm3nTSv9eRUrWT9+m7kWaapOhYtqRJmYQaegYwGEM7wtvXzYoGY
+ kmRqsdodbZeQXieJ1ZRYLs2dDNX0SyVFFpMBJNWHtQ1I8NGTRKyEtwMzFLAgdTuyg+DKdgO0MZl
+ CiCFml3AoLtuws4/XFmSKf+bQf92ulOCCVIVX/IJO1QrC37S/u5ttQqn4qEW87X5TtmrVMEUphy
+ X4aN+mQ14uN1FGgduRao6xWLKXnYnW8282SLYrFl+8fa998Vyky6RcQ9wWxDWGkSUABcrORR3KR
+ F07/MW2AuHcYEzZFfB3lL7bQf3TREwDDif207mCsQAIDhVY/zJDQLNflXmtG+CroNbBAm16p68G
+ ADavYmogP+83me2bkSooHwCEbV1iVf72sn4/E4OJ3Oo9LHrM
+X-Received: by 2002:a05:600c:34c7:b0:4a4:f48e:78fa with SMTP id
+ 5b1f17b1804b1-4ba02344f3fmr37399815e9.12.1794313453010; 
+ Tue, 10 Nov 2026 04:24:13 -0800 (PST)
 Received: from artemis3.elfringham ([2a0a:ef40:e16:1f01:e865:f651:6131:9a7d])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4ba01fea9eesm99279315e9.11.2026.11.10.04.24.11
+ 5b1f17b1804b1-4ba01fea9eesm99279315e9.11.2026.11.10.04.24.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Nov 2026 04:24:11 -0800 (PST)
+ Tue, 10 Nov 2026 04:24:12 -0800 (PST)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Tue, 10 Nov 2026 12:24:02 +0000
-Subject: [PATCH v2 05/12] dtoc: test: Fix coverage by adding test
+Date: Tue, 10 Nov 2026 12:24:03 +0000
+Subject: [PATCH v2 06/12] test: Disable running event_dump test for make check
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261110-qcheck_fix-v2-5-1c76e0b68f29@linaro.org>
+Message-Id: <20261110-qcheck_fix-v2-6-1c76e0b68f29@linaro.org>
 References: <20261110-qcheck_fix-v2-0-1c76e0b68f29@linaro.org>
 In-Reply-To: <20261110-qcheck_fix-v2-0-1c76e0b68f29@linaro.org>
 To: u-boot@lists.u-boot-project.org, 
@@ -153,7 +153,7 @@ Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
  Carlo Caione <ccaione@baylibre.com>, Yao Zi <me@ziyao.cc>, 
  Michal Simek <michal.simek@amd.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
 X-Mailer: b4 0.16.0
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -166,74 +166,44 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Use of 'indir' in EnsureCompiled() was not being tested and resulted in
-less than 100% code coverage. Add a test and supporting files that
-depends on the use of 'indir' by placing an included file in a new
-directory. The dts file will fail to compile if the new directory is not
-added to the search path with the use of 'indir'.
+The event dump script does not work on more recent versions of binutils
+so disable it from running for the moment.
 
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- tools/dtoc/test/dtoc_test_include.dts                  | 13 +++++++++++++
- tools/dtoc/test/newinclude/dtoc_test_include_file.dtsi |  7 +++++++
- tools/dtoc/test_fdt.py                                 |  7 +++++++
- 3 files changed, 27 insertions(+)
+ test/run | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/tools/dtoc/test/dtoc_test_include.dts b/tools/dtoc/test/dtoc_test_include.dts
-new file mode 100644
-index 00000000000..b5ef647c1b6
---- /dev/null
-+++ b/tools/dtoc/test/dtoc_test_include.dts
-@@ -0,0 +1,13 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Test device tree file for dtoc
-+ *
-+ * Copyright 2017 Google, Inc
-+ */
-+
-+/dts-v1/;
-+
-+/ {
-+};
-+
-+#include "dtoc_test_include_file.dtsi"
-diff --git a/tools/dtoc/test/newinclude/dtoc_test_include_file.dtsi b/tools/dtoc/test/newinclude/dtoc_test_include_file.dtsi
-new file mode 100644
-index 00000000000..f975005d023
---- /dev/null
-+++ b/tools/dtoc/test/newinclude/dtoc_test_include_file.dtsi
-@@ -0,0 +1,7 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+
-+/ {
-+	new_node {
-+		intval = <2>;
-+	};
-+};
-diff --git a/tools/dtoc/test_fdt.py b/tools/dtoc/test_fdt.py
-index 66d346b1272..a63c860eae1 100755
---- a/tools/dtoc/test_fdt.py
-+++ b/tools/dtoc/test_fdt.py
-@@ -1105,6 +1105,13 @@ class TestFdtUtil(unittest.TestCase):
-         finally:
-             tools.outdir = old_outdir
+diff --git a/test/run b/test/run
+index 17e78815fa7..d1654dffb5f 100755
+--- a/test/run
++++ b/test/run
+@@ -15,8 +15,9 @@ run_test() {
  
-+    def test_ensure_compiled_indir(self):
-+        """Test providing directory as indir"""
-+        indir = os.path.dirname(find_dtb_file('dtoc_test_include.dts'))
-+        indir = os.path.join(indir, 'newinclude')
-+        dtb = fdt_util.EnsureCompiled(find_dtb_file('dtoc_test_include.dts'), indir=[indir])
-+        self.assertEqual(dtb, fdt_util.EnsureCompiled(dtb))
-+
-     def test_get_phandle_name_offset(self):
-         val = fdt_util.GetPhandleNameOffset(self.node, 'missing')
-         self.assertIsNone(val)
+ # Select test attributes
+ ut_mark_expr=test_ut
++mark_expr="not event_dump"
+ if [ "$1" = "quick" ]; then
+-	mark_expr="not slow"
++	mark_expr="not slow and not event_dump"
+ 	ut_mark_expr="test_ut and not slow"
+ 	skip=--skip-net-tests
+ fi
+@@ -32,7 +33,7 @@ if [ "$1" = "parallel" ]; then
+ 	para="-n${jobs} -q"
+ 	prompt="Building and..."
+ 	skip=--skip-net-tests
+-	mark_expr="not slow and not bootstd and not spi_flash"
++	mark_expr="not slow and not bootstd and not spi_flash and not event_dump"
+ 	ut_mark_expr="test_ut and not slow and not bootstd and not spi_flash"
+ 	echo "Note: test log is garbled with parallel tests"
+ fi
 
 -- 
 2.47.3
