@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9EF7606A321
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 08:44:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C086760A2603
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 08:46:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=io5kVVC4;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xv6ncyFE
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=gtz4Kunl;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=hk5mQx+J
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9D7A44058B;
-	Tue, 10 Nov 2026 08:44:02 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 85BA680F86;
+	Tue, 10 Nov 2026 08:46:36 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EdYt4AO0OR_0; Tue, 10 Nov 2026 08:44:02 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org EBDF44059B
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794300242;
-	b=A7elBg1mFlrJwxqDFSBjqYcU/ApYSjOQhmXqNQmB30fK0djeIMc8mNx1E5PK4E1n4FQm
-	 pBqjaVa5DEP1MU2ylvFnpLewIR8Xi7kBu1JtTVstdUYM9SMPVbBg7mPPhafnxGozv/8Qn
-	 thID6bOF0e/HQc2yjXyWHksDqJ8DJwjjlP00UaO/TjTjDWz+KMKo0kSsCusc79Tp6mzSl
-	 L0B/VkRY8YgIy2S7jM/BVMT008dAV8ZIi9mhxXRmk+8W9V1MqbOmUR+BjJJTTZMNDqKGH
-	 FM0fUIAz1ULrbH2+CYZxwKCf3m9N9jxQBWYHt81myyTNL9dKgdTLpim+fWCewh0P91A==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id DLGtZBO_ACOI; Tue, 10 Nov 2026 08:46:36 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org CE64780FA4
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794300396;
+	b=rtbLkuvEVMqKr0rGoC+qL1Oex7Mi1beYXwiod+CioDivCS9f7d4oaBFQOF0RD7PEABDs
+	 dNUxCaRIYLi4jtAYKYJx8erTK5xF/urItcy5s0p1o3WcMYKedjKlP5OoZ/VZl9HeE/KII
+	 VFxgjN+8KuuyxfJd0NHrZ8Q4aeAS+iJ5+QHqNAYRFwXsWovZ+D6M83S2dSRQ1FGhRyKGC
+	 5w58d7ZjCQItWDMWJIYxkqahHr73DzqQL0OD7mVlyhQZRRX82r6TdNg6vFx2nZlvh0jWB
+	 PV7+dRUOy3WDH0y1V6ECyGK6zJoYWqNebMZaH6sapbnBf91GmZxXLXC0UjXjdkEi86w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794300242;
+	c=relaxed/relaxed; t=1794300396;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,117 +33,116 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=MdKxfy5nIKExvtw5Z9pQzEWtZEuqiiilUcXMQmKNlP4=;
-	b=JrwFM9KQUxzczjnVYByf2kmQUTYibhj0g2tiID2qGyj1/iMCBaC1KtMcn75hPmMLRKUH
-	 zw2aXnJ4VKAIpskeNr6KVTS6mi/ZvbkGd8HKA6Vs6UB82BEIc48b4L86g/gmWgA111tsA
-	 3SRD29ApFdkdStXr5hCQBcESPdiA8xkVErHcumnw39KI0Sct/8NncbjweEwXmxqZyHBNn
-	 ntP8qekGcBc7rCSixwv/2UlvZlQiontPGmoMPGwtyFZDSQhyB/LzKWxB/i7UO7cDhIbyj
-	 ffDVUmwpcxmFB36hHwQ2juSvNn0n1AWiU+dLUFZQjRBDguMNOXi/bwd2bCmluQBE8qA==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=kwqXErn/L+FlabPSQ5DL18WbZIfpaV4NPUaT6/CDhI4=;
+	b=G0uNPCsjz8k8Ev8NMGxXj1gs9l9fjvohm6Zm0xAWObhCfqN24M1RUc5Gr6p2MwxULLxR
+	 h9cFsQzvTJ77DuuOC3kwosUYKbawTUj9Te5XSOOnqOOSrKvKn9/VNxLqhdu2N0D4/KMbY
+	 1ocqSQppIn8TxzLPgyCJoMhGc8m9miNIcYE1v7nr+Ood3jOld/0bXeu7vCnRiCSTvquFC
+	 4umu7fJygv0Cz5g1MoCiJps+wNZifDuCz8wAiyc6p33upAZrIBY/WHC/SaiJcQPZ65TD9
+	 u1LigG3vfRIEK3qDEuQBqEfyNSW5rsWdwNrGtz1r2WJFKkwM2M4YEbzq92y885SeHAQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xv6ncyFE;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=hk5mQx+J;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794300242;
-	bh=MdKxfy5nIKExvtw5Z9pQzEWtZEuqiiilUcXMQmKNlP4=;
+	d=lists.u-boot-project.org; s=default; t=1794300396;
+	bh=kwqXErn/L+FlabPSQ5DL18WbZIfpaV4NPUaT6/CDhI4=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=io5kVVC4v5Go4Ix6lEZMInSGfgMHZiSzortUc3X5npMDl3RmKKIpUW97rI2a+iRdF
-	 PA9tt6vvpxGTYi7CvZ/Xhz4bUa7K9pzkcRQgyn1Dn3jv2VXqLnyyyHDu6vooZmX7eV
-	 W/gYo6XsgQvglPeMFPhN4mxYKzXttao5uvxs3+VUhCFdJkPyDsgL0NFegNStKOM3MM
-	 i5dYc2phmsZoNi93d1/C/AwCNGJ0w7ML9hhcWTbDA2grsLnm9ZqtJy/krfX8fRaBqO
-	 aYbN0b/7rvYZnUgvoC9nMoL5CtQ42LSDJSuMINEVoN6S6T67/Xk9J7whKg9166GKCg
-	 ckh+F427LMbOA==
+	b=gtz4KunlBPqtpRwhSSK20eHQHrFuPdt8XMIO8E+He0HWf5pHRjDrb2eRyNeMXAO05
+	 D4ouRUAm2HIpKOZ0QMMiC1ZimUL/OoyCkJY+GYTKlWs1YLep/BhUK4bxGUozzI3ZGT
+	 y2PKydN3nlok7lbNp6KOk8RQQF7JfeumzMxJDnJcVIb0uYRGN2jpa1W53N0+EpbY9C
+	 IKKUi5dYL6kLg1q7ZE+HWyuVz5wg6L/GoFIDg0XSFkf3RCSr0FRP5esYCn66dzYiuO
+	 XN9q3nrcvrMwTrLcchm8rp5v02sr/wayKIX12IAuZVLQZIQ6Jp5G6hiTMczFzGcS+y
+	 +Zia3cIOYDAIA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id EBDF44059B;
-	Tue, 10 Nov 2026 08:44:01 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 2E2404B8
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:44:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CE64780FA4;
+	Tue, 10 Nov 2026 08:46:35 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8C614335
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:46:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 1F6D44058B
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:44:00 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 7DA9C80FA4
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:46:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id BGxQqtL4EAnM for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 08:43:59 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 492904059B
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::1334"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6sBQRaA7u_pZ for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 08:46:34 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org CA74F80F36
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::1229"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::1334; helo=mail-dy1-x1334.google.com;
+ client-ip=2607:f8b0:4864:20::1229; helo=mail-dl1-x1229.google.com;
  envelope-from=clamor95@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=xv6ncyFE
-Received: from mail-dy1-x1334.google.com (mail-dy1-x1334.google.com
- [IPv6:2607:f8b0:4864:20::1334])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 492904059B
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:43:57 +0000 (UTC)
-Received: by mail-dy1-x1334.google.com with SMTP id
- 5a478bee46e88-37071c0f42aso3228136eec.0
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 00:43:57 -0800 (PST)
+ header.s=20260707 header.b=hk5mQx+J
+Received: from mail-dl1-x1229.google.com (mail-dl1-x1229.google.com
+ [IPv6:2607:f8b0:4864:20::1229])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id CA74F80F36
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 08:46:33 +0000 (UTC)
+Received: by mail-dl1-x1229.google.com with SMTP id
+ a92af1059eb24-1b3a05f8b5bso2695184c88.1
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 00:46:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794300237; x=1794905037;
+ d=gmail.com; s=20260707; t=1794300393; x=1794905193;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=MdKxfy5nIKExvtw5Z9pQzEWtZEuqiiilUcXMQmKNlP4=;
- b=xv6ncyFEnsrSnwyX/A2PzruJS9kjAneaqjSimogsKtKR8UnfhD/6j4qLPbVLybMtTS
- SU7f88LyeaWS2alPUMK9sW1A2Y0SW9g/0VhT2adzqFwFlBUzG+rKFbZI0OPO3b3GAvGF
- /dj6+WKIeWEPNI/z1SDbI52rbQ5Wzp6I6AJYnz0QeRO231TSrAlqgUvmQReIN6D0xMju
- d/uPDQ3pFgxBrHxvvp1H8iIvUJJNWa4DrtIYyWKwpVN0+hNowINgIdIg1N9VtkyX0x+m
- iG1MH2OnFwbGNO1kSllUOYJoUhOFSlJJT+o81ZVARIOyeyQ1iPZbozuBxyP+JLrh6FPx
- uEoA==
+ bh=kwqXErn/L+FlabPSQ5DL18WbZIfpaV4NPUaT6/CDhI4=;
+ b=hk5mQx+Jqu7ycV0euq+cLJsuxfSiRawsHKU0tzKCtNGv7Im5IyWYg51HHGHbJWX0Se
+ JhIxxHnENxdmhVJnSax1efHF75CP76m8zlxQRSPxFqQDk0+mtSwUpcKkuzlVbNP1hZW7
+ 54lICNyqdSSSjEzCs8V7pFbJKTfflQhado5TuEhI5q89noceTDXHWU9YcL9ar5iz4FbK
+ NtGeJhSUCYDigHjY8YwHX6O8D5vHTHM6y3+a+LTz0QSUYMRiVWMb14LPkZ+LBuGR0hdH
+ KzyaJ4rEBAoCqQ1P90ptAr8zzxkOC9vHcOTvwT1F5y83bHkAiCXNvHWiCXuaDqgd4PSS
+ Hsmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794300237; x=1794905037;
+ d=1e100.net; s=20260707; t=1794300393; x=1794905193;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=MdKxfy5nIKExvtw5Z9pQzEWtZEuqiiilUcXMQmKNlP4=;
- b=z7hpQ4TK2qH6F3wBpUFUoFoUPeAHL7+eQ25L3l7BCsGFZGNpyImXrAocnC7l0sd5Z7
- EKTu3wpIiN4i1sukL+y919f9glqHJ2imQXHkh+m7dddIHIzb5YaX9RNHl4uKpUPy/348
- 3KmOxScN7ourWFNXvjvvYDv+ZvT9FU/3aPLyE0QE+vPrQd1kS1LYAiWwAwuFw4g6IHX9
- gEQGs1+oVBshVyOT4tHHF5WbbFSnED9bTUIMkPmQJqNQSNo/JJg7uYSYezfGhaQ1S7Rk
- QfzsbBSsnjbLMpoKuUnzNgjStmWPmRpAEimkao1XYpufTv8icFGmpOr+ezeEebcVaMh7
- 0d0g==
-X-Gm-Message-State: APuU4Z/ZwhvK+veZeqS9V020hJrgTh6MMvjYJT6et12e7Xy9LwWNtLMv
- jBVfKKtNUB3CTw0vZgmraDbXpBThgUY4mGVbYs9YEHUotaiUXLfIFCYrD9dKeIlafsQvOG/kOda
- aPeRAcdix0krnf6FaiawJlcBbRMWQdRY=
-X-Gm-Gg: AYBFou1QjrNPGMxLLIBjNSX9I+uB5Z/My0S4fW6HEYR2nqLodEN7FvBdwftP/vgwXKF
- x4itVqb+0t0Go6HkepiNf5mEvEpPyoOdnsNpAGdHuE2Q8ZJ81AZfQgf/Ek+SB8OWyaVksYr9Qkf
- BBmRcbrRlT0Kc4e1VHxDE6e5RvlQwNYngL/oyO4SbEZHLiarApKUVpAT0JKf9/0dATURrL3ioAA
- jw8K5b0v5LcB863M1I+2a+m/4+5nuQZuW/pG+UAcdP8sN0wGgF7lS56B0c35u4A+EPTtU0NtiV4
- cK1w1lWfQd5IrzaGhGtgyQUHG7WmNX4brQJATrG+GIwXvDtQUgWpwPaSXcYd+vgTx/GryZSMYgA
- rBsMHHW9l4MNyCQ3bU8Inz/gvfEAQyUNI52aAbSAk90xa/SRSZJqNoXhnaLnjBYYg4AKpRB80zf
- uEx4EGnoPxUqKWAA11IkZSh9XGNCIk7A==
-X-Received: by 2002:a05:693c:8845:b0:366:9f06:3c4c with SMTP id
- 5a478bee46e88-3751fe3228cmr2243277eec.32.1794300236731; Tue, 10 Nov 2026
- 00:43:56 -0800 (PST)
+ bh=kwqXErn/L+FlabPSQ5DL18WbZIfpaV4NPUaT6/CDhI4=;
+ b=sIupJ7A/LjM9EtB0wa6GWLCRwavc5AW3K8f8p5+olFwUnZB7g7bbFYz2UwxeuCmxS3
+ HZ5UQWAhe/LWTJIDhpDn3CXMgk9AcOd2YAWyJrzVv3CZyOm04GgUIY+sCD16FUQys5Eh
+ XprhXYW09ZW3CoUjJaUs5wizj+XvgiZmehxIBpL11E5LO/qFl8derK9A31igPB7lgbu7
+ aZkFdPYl0kNWQMHAz4+aLxDToV6sF3tl9s3n1t+XozizmlMBgP/O50fZVW5uqfYAzkcb
+ 8MyfKhEAMEwSkYAG+l10TdWIB0aACl7O+a87O9gJdPzIZ4f7DbvzlCsAR4dqwRKCs0Ru
+ 4w3A==
+X-Gm-Message-State: APuU4Z+/iocauniLTHWfQFITiQvkIVi7Sx4WOgbjM8JsMHu4D/pfqfc5
+ 8kJF5PzajLNxvtID7TpjrK2uXvJKIuuxyy83wSkapSxUcAggqzs6blobg/1KdqJEeOPF2P9SOq5
+ nJxKBaAYQ0xXzEi7ULcj//SfvQi7XAcETxA==
+X-Gm-Gg: AYBFou3owtNXaMwZl57gkNFkXpCHLuzGLNsbJBRUO2hPqyeXT+ejmXqgaHkiA7wm4ie
+ yOmPtsjrTEhEPcgbOMQqUpHeu+FWzaMaI3mlCcg72ulGHYgJymwJGSGdsnMxPpGEbEVGwQZmJO7
+ pTDwqlDwOrqQwqzOsQKmldFWM1zR5lVENS1r3b1wnuqxcgSKr3oIl/83No8V3J1i+jSbKgN5fia
+ 2PD8yZV3gfGSVSlifZR6guKbKCARHxprP7c9A7YRuk2y1nLUBJzn81DluUIQj3Bbn7kiw3dBOJP
+ /o1j4jxl1vymY558Gq412Txu+V1odnGo0uoKoKyNkE7hORqkAUU7tscthfGpG94YyN6j9C54tiX
+ aMeG14eNR7yB/rslXNVuZbI+CjpIXEnvmti7Yt/VjOZa5bQV4m5i5laOnI4Kl33wGgWd6wBArKv
+ EDEtpmZFa/T0n28N+I00rcMX2C9vrbig==
+X-Received: by 2002:a05:7301:430c:b0:36c:3b8a:8090 with SMTP id
+ 5a478bee46e88-3751c53f42amr2676825eec.2.1794300392488; Tue, 10 Nov 2026
+ 00:46:32 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 References: <2399d63c-ddd0-44b0-bb81-d5d9d2a8a8b4@gmail.com>
- <54ffbe6d-668c-494f-874c-b5f34b84c593@gmail.com>
-In-Reply-To: <54ffbe6d-668c-494f-874c-b5f34b84c593@gmail.com>
+ <ab368609-f5ab-4169-9c53-c9590766cadf@gmail.com>
+In-Reply-To: <ab368609-f5ab-4169-9c53-c9590766cadf@gmail.com>
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Tue, 10 Nov 2026 10:41:23 +0200
-X-Gm-Features: AclHuK9XKFPqGrZjDcb8E_I2ZEY89nzgsNPQcSHcBqCntHOHyiiZ369osA1ZV8M
-Message-ID: <CAPVz0n2kOOddS+T_8-hJjzZt9-T1-HtebwxA9_fcw0SwzWVy-g@mail.gmail.com>
-Subject: Re: [PATCH 04/11] video: display: Skip modes which do not fit in the
- source frame buffer
+Date: Tue, 10 Nov 2026 10:46:06 +0200
+X-Gm-Features: AclHuK_F8OTxL68LzSCU7AphyCwPJTtTd3XuQXnz2K5N9_Ha6Y5nYUUmkKpxqIo
+Message-ID: <CAPVz0n0dOk3SjWZZL58UpQ-0NGTO0ZbXQxz7W1GCWPUdMXdjQw@mail.gmail.com>
+Subject: Re: [PATCH 09/11] video: tegra: hdmi: Skip modes larger than the DC
+ frame buffer
 To: Ana Bobillo <anabobillo3@gmail.com>
 Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
  Anatolij Gustschin <ag.dev.uboot@gmail.com>, Simon Glass <sjg@chromium.org>, 
  Kever Yang <kever.yang@rock-chips.com>, Quentin Schulz <u-boot@0leil.net>, 
  Andre Przywara <andre.przywara@arm.com>, Thierry Reding <treding@nvidia.com>, 
- Tom Warren <twarren@nvidia.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>, 
  Patrice Chotard <patrice.chotard@foss.st.com>,
  uboot-stm32@st-md-mailman.stormreply.com, 
@@ -160,10 +159,10 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
@@ -173,70 +172,23 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 >
 > From: Ana Bobillo <anabobillo3@gmail.com>
 >
-> display_read_timing() picks the first EDID timing which the display
-> driver accepts, but the display driver does not know how much memory
-> the video device feeding it has reserved for its frame buffer, so it
-> can pick a mode which does not fit.
+> tegra_lcd_bind() reserves a frame buffer for LCD_MAX_WIDTH x
+> LCD_MAX_HEIGHT, and the DC takes the mode its HDMI bridge read from the
+> display's EDID, but tegra_hdmi_mode_valid() only checks the pixel
+> clock. A display announcing a larger mode makes the frame buffer run
+> past the reserved memory.
 >
-> Add the size and depth of the source's frame buffer to struct
-> display_plat, which the video device sets, as it does src_dev, before
-> it reads the timing. display_mode_valid() then skips the modes which do
-> not fit, so that a smaller one is picked. A video device which does not
-> set them is not affected.
+> Move the DC limits to dc.h and have tegra_hdmi_mode_valid() refuse the
+> modes which exceed them, so that a smaller one, or the default 720p
+> mode, is used instead.
 >
+> Fixes: 2dd1092ab887 ("video: tegra20: provide driver support for the HDMI=
+ controller")
 > Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
 > ---
->  drivers/video/display-uclass.c | 10 ++++++++++
->  include/display.h              |  6 ++++++
->  2 files changed, 16 insertions(+)
->
-> diff --git a/drivers/video/display-uclass.c b/drivers/video/display-uclas=
-s.c
-> index 85dac12a197..06888df4112 100644
-> --- a/drivers/video/display-uclass.c
-> +++ b/drivers/video/display-uclass.c
-> @@ -42,6 +42,16 @@ static bool display_mode_valid(void *priv, const struc=
-t display_timing *timing)
->  {
->         struct udevice *dev =3D priv;
->         struct dm_display_ops *ops =3D display_get_ops(dev);
-> +       struct display_plat *disp_uc_plat =3D dev_get_uclass_plat(dev);
-> +       u64 bits;
-> +
-> +       /* Skip modes which do not fit in the source's frame buffer */
-> +       if (disp_uc_plat->fb_size) {
-> +               bits =3D (u64)timing->hactive.typ * timing->vactive.typ *
-> +                      disp_uc_plat->fb_bpp;
-> +               if (bits > (u64)disp_uc_plat->fb_size * 8)
-> +                       return false;
-> +       }
->
->         if (ops && ops->mode_valid)
->                 return ops->mode_valid(dev, timing);
-> diff --git a/include/display.h b/include/display.h
-> index 26b965daba9..f2ff9ffced8 100644
-> --- a/include/display.h
-> +++ b/include/display.h
-> @@ -18,11 +18,17 @@ struct display_timing;
->   * controller
->   * @src_dev:   Source device providing the video
->   * @in_use:    Display is being used
-> + * @fb_size:   Size of the source's frame buffer in bytes, or 0 if unkno=
-wn. Set
-> + *             by the source before reading the timing, so that modes wh=
-ich
-> + *             do not fit in the frame buffer are skipped
-> + * @fb_bpp:    Bits per pixel of the source's frame buffer
->   */
->  struct display_plat {
->         int source_id;
->         struct udevice *src_dev;
->         bool in_use;
-> +       uint fb_size;
-> +       int fb_bpp;
->  };
->
+>  drivers/video/tegra/dc.c   | 4 ++--
+>  drivers/video/tegra/dc.h   | 4 ++++
+>  drivers/video/tegra/hdmi.c | 5 +++++
+>  3 files changed, 11 insertions(+), 2 deletions(-)
 
-Decent idea
-
-Acked-by: Svyatoslav Ryhel <clamor95@gmail.com>
+Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
