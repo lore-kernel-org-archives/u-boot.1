@@ -2,231 +2,207 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C6B0606A333
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 15:12:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1AC8606A334
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 15:30:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=YrkdcAwc;
-	dkim=pass (2048-bit key) header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256 header.s=s31663417 header.b=cNCSaa/0
+	dkim=pass (2048-bit key, unprotected) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=HpME/smN;
+	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=goCRpiK7
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4C8CF40946;
-	Tue, 10 Nov 2026 15:12:15 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 843F8408AB;
+	Tue, 10 Nov 2026 15:30:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XUPcJesnrBWT; Tue, 10 Nov 2026 15:12:14 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7F35040966
+ id 7pq4I0Sv6CDZ; Tue, 10 Nov 2026 15:30:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C228C40937
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794323534;
-	b=otrZvsevsV80os+V/Yzdft5B8nrm+Fer8UJs2z5Q30o20/P9iG/XEMKr2y++0wIStF1v
-	 5G2vAqKr0UVn8OdwebhRfzYoK21/Y9/+biEL5P7UoPp2gCXOQ44BqwCaxDaOfmocW5xBs
-	 d1ipGWCsYgw1Zc4Gzu3128J0CdeCfvNCMnP3fLaH2cprv31tHwxZzTy6Ay70OkwwWQALs
-	 0Ltn5Ih5e8VGP3Ss/KQhEYMWVfaOYF0F0KwtnIKlBZRGn59H6bKNxhpt3enFrf5Xbd7dr
-	 rv2eLBWnsCfA2f024pwOYENa3F60wTULzncD2yTqKMcv42whbdV9d3Po8CzElCQLURg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794324606;
+	b=YBNPQYY3sobB1V22ZMTSrvr2y4K+U5bwQ8AbTMswNSod8uh4b1SATFiF31opUTVrT4IX
+	 OOggnz/+rFUi12LZrX/idI29cmmwoS55y01IObo4dp4/Ft2FFaHVDl23V5v9/GpwgchOk
+	 gJJdCtgM/hPPyeu25P4raKQTfKDeJtOdUs1xZCmp3fcSwCtaf5r/Imic+KV2DMeiutmNM
+	 zhCjIsIDjcZSNe3GokIIapqq1Uz5UYZ/jD7nGeKNDY5ap7jwOi5yLoYKXqtKbwFOdtqu0
+	 bZWh92IssCoE+n1582aMdnh3d7T8UXXfNb/HwpEmeY+Li3qFgzS2ketax1+FmnwUPRQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794323534;
+	c=relaxed/relaxed; t=1794324606;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM2-Signature:Message-Instance:DKIM-Signature:X-UI-Sender-Class:
-	 Received:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
-	 References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Provags-ID:UI-OutboundReport:X-BeenThere:
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=rmTt0/BBCl1Pp7L/iL4/0dSSdNOKWRZDDe8RIDJkcUc=;
-	b=icFBfttL6A7feL2Gc34Rv+ReK847KgT1ReqlAMNmURDWWpIzDZ4s8VHZcEVRQiCANmq1
-	 m9qRJLuloPpEY2p7GbSLiJXmJPStnaoPTpog2xrejGoxApbhytJQ8xA9ADw3w14kFBXKB
-	 unAvb4dsP+iTwL7Jcd0vFtQDUltjwu284g/bPiD36jy1DDn1KGUZb4cFEeE/VhH1xk+lI
-	 dNi8pF3y13Cv2wmzWJGQlwRHmqKHi7Z40uzFloOhIWOVNEacWdrPLPoQ82GxgytQvoGdj
-	 mKn9T2m3sSqfsejD9ldxVI4yF4Uq72xr+sfdtG7Szp0QpZDR+WBoZxBRe+uhLld8Wlw==
+	bh=0zvWtgdnQZGtzKT4FBtZzuOk6o8Fd+meHTDPYipzq0A=;
+	b=Gkk/W1POhPc4ssgMjp5RFTQPBcoCRabMhlrgv6gHAqA+aD7eABsRr8DMag/QysZ//buM
+	 a1QdM800ZRppQ8CTkakT9X19PkAwlW3kKjdqOo31knKg5TtKXkIzNsBY6SrScdH/TRACU
+	 SuhXULretaHCwQoTH1zKvKA/JKvn//UbAeZhs8wuxdEUQTcofEi2iym5ULLzZAf6Eeq0Z
+	 Z29gMfSBmB3QwQT8YPQjUi0rFeGGnsYoDO7V/k8Qd3Ha6d7zQBN2hNzzjUTwUei+KPVFJ
+	 VJCJyZVPT/pvxo+DIITsKRKWnE0psTlWd1rBxLpTG32MG8j/WTxywlOFTTAA/sNSYhA==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=pass header.from=gmx.de;
-	dkim=pass header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256 header.s=s31663417 header.b="cNCSaa/0";
+	dmarc=pass header.from=cherry.de;
+	dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=goCRpiK7;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794323534;
-	bh=rmTt0/BBCl1Pp7L/iL4/0dSSdNOKWRZDDe8RIDJkcUc=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794324606;
+	bh=0zvWtgdnQZGtzKT4FBtZzuOk6o8Fd+meHTDPYipzq0A=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YrkdcAwcbAmdccyz1GxA5DpxC1UfBqNl5A9FiOW1kuTR5VHnb0EQSOfVym1IP9tXb
-	 HF77kBX0bmQw6ZDhO26i428lr+KQR4YQ84XWwP3GNZRrN1aPDVXuXbJvq28oEoIQnC
-	 nNqhpiGxKcYd/T35iq9TEvQNd00vCYFwKusQgWGVj+KoVkfia6wPwyJaBRM5UW6uV3
-	 Yp4OWlRhlgdLAUnRZv+Mtt/V/sdBIm/x9fY7RH8+ZL+QQEV6kBiahZw2ewhlG/Jpra
-	 2vIztEyBSO6LzoNkF+9Dd5h/IJ0L7bZ7bHnQSGan/1WzKJqKWjfqRF+H2mQR7O//zY
-	 FhVarjF6akzxw==
+	b=HpME/smNWjKeYgADAdz27f0EzNUU3x1L7fmxLdsgrtEYPtQddYJ6UOclu4TJxDk+U
+	 2vrbhJJ/1ZfQ0ma3i3BaXqMo4BvXfdqRLB0MVveG/vqpa4KKxUsJNB38ZDEMSctI6N
+	 I6M35/bNyRBTJR7RowjsGnTtDhzxkbcJowj95uO9z1pe0kqpO51q8OprLlkgPIqFrk
+	 r7aopf/BceQLHZBFyhha94rIo1HwuJCNCiAefnssZ9jhn8O86rDAU1LA2Lezaof5KX
+	 y1jV9GtZfKEZzaTKxeWQaZoWVwKjbLy+OHkXwhBTi16NmAm2MAIh8u4tstzi9fAqw8
+	 8eLRbMEBoFIgQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7F35040966;
-	Tue, 10 Nov 2026 15:12:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C228C40937;
+	Tue, 10 Nov 2026 15:30:06 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 9F2051FC
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 15:12:13 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id EB9B0388
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 15:30:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9095240966
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 15:12:13 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id D0C0140946
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 15:30:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qNYB5PSfBxHY for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 15:12:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2019A40946
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=212.227.17.20
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=212.227.17.20;
- helo=mout.gmx.net; envelope-from=xypron.glpk@gmx.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmx.de header.i=xypron.glpk@gmx.de header.a=rsa-sha256
- header.s=s31663417 header.b=cNCSaa/0
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2019A40946
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 15:12:11 +0000 (UTC)
-DKIM2-Signature: i=1; m=1; t=1794323529; mf=PHh5cHJvbi5nbHBrQGdteC5kZT4=;
- rt=PHUtYm9vdEBsaXN0cy51LWJvb3QtcHJvamVjdC5vcmc+; d=gmx.de;
- s=s31663417:rsa-sha256:fWGuJMpfdjXGhs9LSyOP/diRGuJe
- xDi9AQjde/hQpTUtO0Tj+rE7OJx4l8jGXfFa24JFNEgVmAtq51PXKWfZC/PJAfig8GZZEUnqdEX
- PGSpsiHoY/MLSstQeuPRKaQRnJJEWxSNnW1vooOsoNd62p8xix037zCTC4QXbTAr6+S2pVD5INE
- /T6u6G8Yo8yuz2C2BxJyGtZVsJz3PyIxSggmTgI3Md4cb6Zkg0i27gNdqSlDGJiKS8088YLyXXo
- MCzjqm+SSzQIOQB5roXzqw8DQQXczGD5N1Us0sYz9pYCADs+qlzd0OuTMGEB1Kx+KrKl6BHlU0M
- j+3oR82ogerfTA==;
-Message-Instance: m=1; h=sha256: MIZTt/IcUmIXUFaj37KdBdOhUwcNEYA2z1Pa94HU7QM=:
- rmTt0/BBCl1Pp7L/iL4/0dSSdNOKWRZDDe8RIDJkcUc=, sha512:
- UF5ofA8RsI1b15bUuX7IKyWnSuyic+uAYdkB69rBzJEhHGocDCm6R+WEi0OVUrlSAAlx/YqgTRkQOLGk8yCX7A==:
- yAuLwWgadBJ75niYDRDndNk1TYgh3mE13mk5VfJjVGJWB5K6vljxWmZraYvUUS3FQMWaKhYQVXMmbI8NwnRkAA==;
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1794323529; x=1794928329; i=xypron.glpk@gmx.de;
- bh=rmTt0/BBCl1Pp7L/iL4/0dSSdNOKWRZDDe8RIDJkcUc=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=cNCSaa/0i28ziBmzzBfTPPxruJUYsFl7/X3VxZeak+haACbz1fckxuyCb0AXnRbh
- /XKpBLjHZF0CzEFSeIMjYkDJR4XzhgA/ur/I2cCXlqZZ0w2dNW5R0EZN2N6H8C/W9
- OQfmdjrKmeWa2XhpUMLj3yVF1GBABW6OlMLYmSvHoOTz1bVS+mDFE9Pi8QicosWLj
- UfOXu5jCQ4lVEAXYKvnV1ic8BkuNkfPBlruJjoo3AFgEBnzojI9NIxedW8dgAH75G
- Kty1LnddryocvhniiO2JP9g9umjizLjpPayUzapK/HkeJU7HY2b2x0Ut0ctS9DOjJ
- zb1NN6DSqn8tp6EVIg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MeCpb-1ws0nW1bb5-00mGri; Tue, 10
- Nov 2026 16:12:09 +0100
-Message-ID: <b415d946-eda6-4ac8-a8ec-4b00a379effb@gmx.de>
-Date: Tue, 10 Nov 2026 16:12:08 +0100
+ id B6Y4g8kSFSYt for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 15:30:04 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A6E1840937
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c201::3"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a01:111:f403:c201::3;
+ helo=as8pr04cu009.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=goCRpiK7
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A6E1840937
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 15:30:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0zvWtgdnQZGtzKT4FBtZzuOk6o8Fd+meHTDPYipzq0A=;
+ b=goCRpiK7OBZNokQDrKBwRKEy+DpD7tpO0817afOvO6G/YUob5ae6FvRPRE2otPG+rX+0SjbY7G+kqjYHMXTG6/bJ5YZLrxg3Cz84Cbj91OcrB3kF4OEZmk+iyd4ljQzHnNqlSyMPOurKhrp1VLYdEQ6ujjWi4Fh1dmXmvpCImqU=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by AS8PR04MB8834.eurprd04.prod.outlook.com (2603:10a6:20b:42d::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Tue, 10 Nov
+ 2026 15:29:53 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0592.012; Tue, 10 Nov 2026
+ 15:29:53 +0000
+Message-ID: <93a130bc-3c19-4ab6-8826-cf8bf76e4fba@cherry.de>
+Date: Tue, 10 Nov 2026 16:29:51 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 11/12] buildman: Cope with CPP="gcc -E"
+To: Andrew Goodbody <andrew.goodbody@linaro.org>,
+ u-boot@lists.u-boot-project.org, Kory Maincent <kory.maincent@bootlin.com>,
+ Linus Walleij <linusw@kernel.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini
+ <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>,
+ Alexey Charkov <alchark@flipper.net>, Francesco Valla <francesco@valla.it>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Carlo Caione <ccaione@baylibre.com>, Yao Zi <me@ziyao.cc>,
+ Michal Simek <michal.simek@amd.com>
+References: <20261110-qcheck_fix-v2-0-1c76e0b68f29@linaro.org>
+ <20261110-qcheck_fix-v2-11-1c76e0b68f29@linaro.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20261110-qcheck_fix-v2-11-1c76e0b68f29@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VIVP296CA0014.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:357::10) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFH] Writing a project Code of Conduct
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
-References: <20261103172036.GS3309461@bill-the-cat>
- <xhkdbcxsdvux2.fsf@mkorpers-koolstof.csb>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <xhkdbcxsdvux2.fsf@mkorpers-koolstof.csb>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:DQT9/3uY/NJFVuaUfeWbGON7UEdNSf6YTN+Qs938Zaz+Pc4VWNQ
- n5VgDeEmZyjgt6oIbhKYMxHR+BovASkE4jmhzy6YeFoT+PfZ6xAMAC2MvETt0vTggmzL5Z1
- 0dhY640DaK+85yx+dV//IrMdSaSt7nlkB8pYgGMQwC25zewvRqVmqPVHBhWZI2RVNzAepuS
- nLt3r7njHXxoCgBvPzwnA==
-UI-OutboundReport: notjunk:1;M01:P0:QJexfgP+aeU=;Q1BabjBbO/Wm7629qDszdnSjFWS
- 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
- 0RXssoE8HT7vK8bNZnWc/dZ
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|AS8PR04MB8834:EE_
+X-MS-Office365-Filtering-Correlation-Id: db088c6a-0c40-425a-3271-08df3f3f7768
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|23010399003|7416014|376014|1800799024|366016|261022105027099003|11063799006|261021123027099003|261021121427099003|261009223027099003|56012099006|261026121527099003|261102123227099003|261026140227099003|4143699003|261028144727099003|6133799003|17002099007|18002099003|22082099003|10067099003|3023799007;
+X-Microsoft-Antispam-Message-Info: coGo/is2lZmFaq/EyQIsvNtru0ZVvZAQIiTjfFXv5CME4Q1QhBU0DQ3gWbG1lVXovDvUiuC0Pe6nHrzRCcprEdF+VKwoZICf5xDc2gHHb3zr2iDhP1nJWqiBsrl0xZAsJ4eTuMgH3vTr51Biw4QUm8zIgbqwxI11qpR2bq9Mtv1pAfQLHFH72Vkw/lIFqPlGLpJwfngPMOqiVFOgLFnK9FiZyJ3sHakD86CtFyk1FTwk0TUtp+3zlW9ttt9nCfMM/I5qeJNNcT+tsIndpqa0frkV8hzlP62nsElL+mu7beYF1s3OgHUwqRTvv3STxOhaeWkZ3hP39wQPtZoa7Rs08lvEA+U9kShEAuueosiMCArFVI99fmedsxgmfzm2eyy3awtCRW5e13tXCkMzQVjhl+AS+ATJYPXb6E206VlZz/kp+ugAIOz+pNMyFrsbdcuD2bN+crBEJzO8dZ4q8WXfvjs1jkDEzqRFA3eoTQZxla86zXCB3NPJa0/uLIqd01iUaOdDLLWKy0pN9XmcduuP6WUBuHcNbUdOVEJOhjr7I43G1oWaDrJ8dNMK4Zvxk4CIFCVIrfMOzuQtcTnp0jdaqVC8CfJqcg539Yw8QtRJH704e9Q5oR1PdGGye4IhMFxUibmMIlB0njXpelfFdaz+btaR/LdA5py/Baee8cUEY6c=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(23010399003)(7416014)(376014)(1800799024)(366016)(261022105027099003)(11063799006)(261021123027099003)(261021121427099003)(261009223027099003)(56012099006)(261026121527099003)(261102123227099003)(261026140227099003)(4143699003)(261028144727099003)(6133799003)(17002099007)(18002099003)(22082099003)(10067099003)(3023799007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NE1lUWxOclB3TU5JWG9xeEtCTGhKVExuM2JBOHZ0Smw4ZUtzbElmVlU5QVgx?=
+ =?utf-8?B?NHV6amVHaVkzR1VDUzZPUWd5aGI4Z000QUkrNzRLOUthYVFoMGpuNmZwSW02?=
+ =?utf-8?B?MnlrUWR5Wk1xWkZqQk5BZ2Q5dDMvUm9DRmNiZXVISVJxczhpYTZDL2JBY0lu?=
+ =?utf-8?B?OXE1SCt3VENiUG56MEp1cVFhVnAxUEVCOGMyYzZpZnFHUDUrdk5paGpLNGdM?=
+ =?utf-8?B?Vm1SVE5WY2VRdzNwUzhySUZVN2FXcmpoc2xPTlJlNFAxTHM2dERDaFJhMHNP?=
+ =?utf-8?B?K2lBZlRYWnhqMGFNeDBWSHhROEpBbHVERHJKNHgzR0FrMWxHZVE2aXI3WXFU?=
+ =?utf-8?B?WXowUmxidU1HYXQyWWxlNDhZUXhVU0tlclVYR0JOcnJhbzNPR2xhc2RMR1ND?=
+ =?utf-8?B?U1JlNnRjd3hDakVIOVV2L3Ywd3hIVDFQVG15NS9LSFFDczlWeUl4d1Z4bjlH?=
+ =?utf-8?B?ZTZBMTYrdGV4YnFCS3NPUjVBeEphUk1LN0JBcVRCa1ppK2NxeWo2NVZpQnFE?=
+ =?utf-8?B?MUdFcnR0UFVmNHIrNlIxd3FnNkY4emZmUGR2dU1QZTNuS05KVFFsZitETEZn?=
+ =?utf-8?B?dVYralYvdG9HN0NWNVVodFhuWFFkWVZPRExpZ1E0M0NMUmdERFlmM0lLbmha?=
+ =?utf-8?B?QWl6T0ZMN0tiZWhtNEVaalVVQ2h1SmF3RW85VmNCaXhQakZJTmhoYXJuVHZl?=
+ =?utf-8?B?VjdZR2lUTE8ra2NKelVyQ2t1VTVtRGtFN1VOaTl5U1NkQW5pWlU0QmlUZGpn?=
+ =?utf-8?B?TFppNG9YSEx4cjV3RHJKUEJCVTJyMWp2NnVsOXUvRlhFS0FXZEhGWjN5R0hj?=
+ =?utf-8?B?MlVMYmVtSUg3SXpmK0RoeUZNMkRUamVnbndpOFFNbHpYalNBVDdDdGxiTFpT?=
+ =?utf-8?B?SHg0cHB2Qm1OQXU5SitFeTdvRUxyYWRQT1J0V2JTUStvZUZjUWI0RzJDdXhs?=
+ =?utf-8?B?RUJIWEV2cDJTZ1N6MmNDMFVLNE5BTjZSL3hPaWtab2Zma1VKdWsvVVRQelo2?=
+ =?utf-8?B?K0FzemRzYVQ1L2pwd0MrMlpqYktpejg4aTNLenQ1QXRnYkpxYWhxWWhmS0xI?=
+ =?utf-8?B?MURoYXhOMHBtcU1GOHA5RDVpNysrcEZqVUFaTzFJdGRNd0xIWmZOdDlGMjZi?=
+ =?utf-8?B?STZ6RjZPUGdPK01SYTg0a3FRL2ZwRTJQN0RIUkJrZmoyeDBVSmgwM1ByU09m?=
+ =?utf-8?B?MzM4aHNFTGMwVTdOUnZIL0hZRUZPenU2UUVRbVo1bjdiUyt2aUcrN2plYU81?=
+ =?utf-8?B?akdoSFBRVXVvdHFEVGJhNWdjVGNiQ3ZSMG52ZGZWUlFrallCT3VtdktaTExP?=
+ =?utf-8?B?bWwyU2JKM2MzNFYyQVB6Y1cwS0VDRkxmZ0xXS1AyMGhLSmlqMW81bjU2Zm16?=
+ =?utf-8?B?aUN2ZXcvZHlGelRYV2NpQU5od0tqWGdqeWw5azNSSVp4R0pmZUN0OGp5dUFi?=
+ =?utf-8?B?YTB3ZXV1T0UwZDVNUm1RWnVRakk3VVlyNm1rK2NwZnFGYVpReGs3N2JzZmpw?=
+ =?utf-8?B?K2RCaTJzWndQR0x6bW5URG95b0ZqN1dRcE9hdXVVZmRZWk9PK2NnVkVUWXhH?=
+ =?utf-8?B?Zm9xNjdHMzZKZDBFeDJzNU1DUGVGQWZ4clUwZDgwc0hxeXhlQ3Vla24xUk1z?=
+ =?utf-8?B?UENYcjlwWkNha3RHczlKNFN0aDdXeG5MZExRektlcDdVNVRwZWVHc005UXlu?=
+ =?utf-8?B?YjhzOXZYR2RKRzkrcElFd0hyQmNjVDFlbnYraFE1akdnWGpEWkpHSTUyNEJW?=
+ =?utf-8?B?OTYxdzdvbFhQWlZEQ3plaFpOVDJzYlk3Vkx5YmlZZGM1bkRXZEJQTHp3Q0RJ?=
+ =?utf-8?B?OWg5ckswSzR3eTd0WGgzSEJsT2svVmxJKytUOXVTcTRrSmFZQmYwWjhtd1Nu?=
+ =?utf-8?B?RXdMVC91MDRYdjI1U0d6ZUJpekdGUnhrTHhXdjY4cFo0K0c4ZFJUa1ozcUh4?=
+ =?utf-8?B?TTJTclZLVENEY1VWSnRWeTNROE5odWJ5R2padS9UaGtzQ0dYYzUyellQOUFP?=
+ =?utf-8?B?dmRBRlNkNzZxdUQwbWRTeTMyVVkxSmJWQmZKeS9uSk5zdDliZEdjVnNWa2c0?=
+ =?utf-8?B?Z0d4VXNuaEFDVXd5bnp3QUpmaGIxZlhpTytKYmxBNnh2c0phZ1ErWFUwdHlj?=
+ =?utf-8?B?K3AwSWwzN1NyeEMrMUx1MTN1c3BUSE03OW81M2w4V2x1RHAxdW9ldEdvR2tj?=
+ =?utf-8?B?QnhsajlpMWkzYnlOTUlWNkdzL1lTR01LLy9NaGNpSXlhRDJLbEs0dE82Nmsw?=
+ =?utf-8?B?SHZqMm84N25XTThlOE5MTGhUQU02dVAyM3ZDRHV6Zk5rbHRVOCs3eDRhbXl5?=
+ =?utf-8?B?WUVXN2VJYlB4eDl5YUFlMVlobHRUTGE2OEd3bDkrQWlCaXJ2WmRuUT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: db088c6a-0c40-425a-3271-08df3f3f7768
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2026 15:29:52.9985 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kSgEOXcB0tj09diflRMi1xhpIyaAlUHIjzJ/Zd/PDBFdpiKE11AIX375KXXPMdCTzSD7LF3uBlBo6WBmxYZANxzjHz6r0KGW2+ROpuS0BSM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8834
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -236,39 +212,87 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-4.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
-	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 11/10/26 11:32, Mattijs Korpershoek wrote:
-> Hi Tom,
->=20
-> On Tue, Nov 03, 2026 at 11:20, Tom Rini <trini@konsulko.com> wrote:
->=20
->> Hey all,
->>
->> Getting back on track with project administrative tasks, one thing I
->> have talked about the project needing for some time is a code of
->> conduct. In my mind, the best starting point here is, are there code of
->> conducts in other projects that people use and they feel would be a goo=
-d
->> example for us to adopt? Thanks!
->=20
-> Have you considered the Contributor Covenant Code of Conduct?
-> That's the one Linux uses, see:
-> https://docs.kernel.org/process/code-of-conduct.html
->=20
->>
->> --=20
->> Tom
+Hi Andrew,
 
-https://policies.python.org/python.org/code-of-conduct/
-is another reasonable code of conduct.
+On 11/10/26 1:24 PM, Andrew Goodbody wrote:
+> Allow the use of "gcc -E" as an alternative to "cpp" when set in the
+> environment as the value of CPP. Accept it as a valid command for
+> running the preprocessor and adjust the test to not depend on a fixed
+> number of arguments. Also split it into parts for constructing the
+> command list so that the validation for running a command does not fail
+> when it tries to find an executable named "gcc -E".
+> 
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>   tools/buildman/boards.py    | 3 +--
+>   tools/buildman/func_test.py | 5 +++--
+>   2 files changed, 4 insertions(+), 4 deletions(-)
+> 
+> diff --git a/tools/buildman/boards.py b/tools/buildman/boards.py
+> index 5d5d3a3822b..111789f1bd4 100644
+> --- a/tools/buildman/boards.py
+> +++ b/tools/buildman/boards.py
+> @@ -244,8 +244,7 @@ class KconfigScanner:
+>   
+>           temp = None
+>           if b'#include' in tools.read_file(defconfig):
+> -            cmd = [
+> -                os.getenv('CPP', 'cpp'),
+> +            cmd = os.getenv('CPP', 'cpp').split() + [
 
-Best regards
+issue: str.split() is not safe for shell commands.
 
-Heinrich
+I think the proper way is to run shlex.split() on it instead of a simple 
+str.split()
+
+>                   '-nostdinc', '-P',
+>                   '-I', self._srctree,
+>                   '-undef',
+> diff --git a/tools/buildman/func_test.py b/tools/buildman/func_test.py
+> index fce615ba8b8..eb13589ba17 100644
+> --- a/tools/buildman/func_test.py
+> +++ b/tools/buildman/func_test.py
+> @@ -378,7 +378,7 @@ class TestFunctional(unittest.TestCase):
+>       def _HandleCommandCpp(self, args):
+>           # args ['-nostdinc', '-P', '-I', '/tmp/tmp7f17xk_o/src', '-undef',
+>           # '-x', 'assembler-with-cpp', fname]
+> -        fname = args[7]
+> +        fname = args[-1]
+
+todo: add a comment with the new possible list of arguments
+
+This should explain why we are using -1 instead of an offset from the 
+beginning.
+
+>           buf = io.StringIO()
+>           for line in tools.read_file(fname, False).splitlines():
+>               if line.startswith('#include'):
+> @@ -424,7 +424,8 @@ class TestFunctional(unittest.TestCase):
+>               return self._HandleCommandObjcopy(args)
+>           elif cmd.endswith( 'size'):
+>               return self._HandleCommandSize(args)
+> -        elif cmd.endswith( 'cpp'):
+> +        elif cmd.endswith('cpp') \
+> +                or (cmd.endswith('gcc') and pipe_list[0][1] == '-E'):
+
+question: can't -E be anywhere in the list?
+
+Should we use "'-E' in pipe_list[0]" instead maybe?
+
+question: what about "gcc --preprocess"?
+
+This is the long-format version of -E according to gcc(1) manpage.
+
+question: what if we want to use clang instead?
+
+It seems like clang also supports -E/--preprocess.
+
+Cheers,
+Quentin
