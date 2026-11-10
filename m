@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C61560A3823
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 14:41:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE914606A330
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 14:43:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=nih7agbA;
-	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=XyMNd0Kc
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=N+P7Gbns;
+	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=mC+75DPs
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9C620608FF;
-	Tue, 10 Nov 2026 14:41:57 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8078160907;
+	Tue, 10 Nov 2026 14:43:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kpai71xCyCTp; Tue, 10 Nov 2026 14:41:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E1C89608DD
+ id 6b_-5TN3ANSA; Tue, 10 Nov 2026 14:43:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B9529608FF
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794321717;
-	b=nfemjqAD26Kqwl4sQ6MPq18uFZI6vVQJfsZNuIibKlC+l1gAvncHU4faiyTsdyn52oQ7
-	 k4lwzAxLp7zCrTBbndyfNMSBwDQtEitoGppA+L3tbuoQv3LyDx2Eopa/QWjSyiRBk9vWI
-	 f/Ht92Rc0qwLXRXP/MYa2/f2VpRMBZ3UTmqCwJjUc1WHIEQgr3ilRbYpfA5KppDh8UsXM
-	 ck8hcl5svsNWhXoHk7+ioxxFlO4h6nlUIzfHmDmbi7jbR0qW8UwvT4GIUpPZHTjnRLQn7
-	 +/m6ne7nS4Ge3TgodtPJGdGJbEr480yrMj4xb6Eg111HFMp0qpOnbPf9IwBLfBUefiQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794321812;
+	b=IbS7/WhFJUurm58pBofad/zyfIZGWklwlKEx9dMDayUyq/+zLxw+ptZicqgJYPER+agf
+	 boYOX3pyE0knGhmB9yjJwx6jcMMPFISMyZOfwTMyiyT31Ni+/Kg8EkzQgnc/DTgclvTMv
+	 p5oKCKptOIQs9KpyYbVxeI849DmWHCumibC9kJ0b8N2IUznxfnHlsWipGlUewygtByj55
+	 PE6kjDCafNnFsi0kTMUYNTXo1IvjOHtN1I+jFIBuEKTKjRK9WO8d1OdCvFEG+Pe37DH8T
+	 KSapMDHg8MDzsGy22obW2mqPH2Qt/llxCBnoAkTvwfXnHetP8zDMtgcwafAdVYlh7+w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794321717;
+	c=relaxed/relaxed; t=1794321812;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -45,77 +45,79 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=1aaCPUiFmQ3G58EH5F9yarGFrLNKd0F++vOsN9XC31I=;
-	b=M0NH6LtXMY99bHjJFCjlgTI8luwQalq2joG7wfDnePcpUuyleUViwFtmFo7GKWuivqWV
-	 9MTW7nA0KIU9GAt94F2Rk/2gVNS0ECnm7jZ6g0tNkS6O+gD6c8XqLIXtnEh0O8yxAQXt6
-	 7b4tmotnQcawvGprBuu4G+ZTNsz7Mtbw7U7ur1THO26Kri2x7R3SdQBLP8Skro1zdc0uP
-	 AxP9aDkAAIcXnycIcilOjWm2/hSrXpC0MFxaP/1DpHbxTklXiqg2Q8RsmNRxnP0ditdcH
-	 gFaCST5v6QFjueSytk5x0K1FExbFLq3o47O6hqVLM1tk0kKTSWvZ6fN+OYu4CtFR1TQ==
+	bh=fizfb6Qtchx1T8O7HXpoXfZtPPFJQ9hJC1sDJB+jJ1g=;
+	b=gpDgcSt/jK7mOvBa0OSG9EbxLdN5B+hYDm7Up8iLPqNQzLbD/gKOxK1mPobuZIa2sCt1
+	 We1ON0bEmC5zjIw2ckNoI245RLo64vOOstjCr7G9lNilau/SO85ZaoCItklQOD2teRdXG
+	 21+MoAR0cWCPPRvSJweWuRPDiZemPCU2qkDVY7YzVr5Oo2BuL3Sf1oqgOeIY4+L+16lBG
+	 NHXhTsshA2sTAMX04GkHArlZ9vJLmK9GwU38LaOXmEsjgEzkLODGPUb2zPXSLE2bNXFA6
+	 G//8Yk8aiTWopsQii+/8tkNQW3UULgf78jjCDRFjkhAqbyUN+5ZotUaoBVDzuAsGsog==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=cherry.de;
+	dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=mC+75DPs;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794321717;
-	bh=1aaCPUiFmQ3G58EH5F9yarGFrLNKd0F++vOsN9XC31I=;
+	d=lists.u-boot-project.org; s=default; t=1794321812;
+	bh=fizfb6Qtchx1T8O7HXpoXfZtPPFJQ9hJC1sDJB+jJ1g=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nih7agbAuxOsPr9/dVTMmebrlJu24Y6T+qLa0FOxdFJd+T6hqsJYKtAqwYOytllXL
-	 8E9J6QkgZzrlKh9yLyg96xi87jpR0EpZ/GPrw39eXLt52/MF/xVd+w/P7S4HPYxcoE
-	 pFchrl7C1rCt4QJnVA4CdBfklDTQqF4KMfdvP/9x81RhP2dB2xcMxMe7W+aHK8+V0D
-	 BqU4VVCkVIS2zlFkytY+X6TgJf4lMB7Q0gveRTpE2X8+IPwTP98YAlrB4m6kxEpCCi
-	 xagMjkJ3S22liYC4OhD3GmVFyL/BL+YMOAEx4Zqg4NT4V7Ys98te1YSOpamOft2Ww2
-	 5P7imOF+AAF3Q==
+	b=N+P7GbnsdBcgCki9m7iOnq/JRCIsJeFjH+0t4Bp5xrR9OT1oUd7T3cYVMJkEByCT3
+	 +gSu7ME/KAiqdhafazFhBXLZyHHDCVxrXkTg64CmBPwB4H9cIpCI7DLBmPyjdmf5wk
+	 YXCMtEPTMRR+ecfhKCa/JXtIo1dR4gPOgZ4jkZlZzBJdohnSd6gzopLNaze/EB4AF3
+	 fc70oowiaMGOeKueFpeTrvxGuqXAsu7v9FLKcvUhQYfZpkEuxyYVAukF4spZ5BwPHe
+	 5dqyefcd5Haanm0ahXeozcbpwmYziZAttCY/xHMmq793kAhrQMaIzO1tGlinQIYiiM
+	 h1t5+cErcVgMQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E1C89608DD;
-	Tue, 10 Nov 2026 14:41:56 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id E6E8E1A6
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 14:41:55 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B9529608FF;
+	Tue, 10 Nov 2026 14:43:32 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id DFE449D1
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 14:43:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D821D81290
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 14:41:55 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id C64B5608DD
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 14:43:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Bh2xgnU211kl for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 14:41:55 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 93F1880F92
-Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c201::3"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qqaWQcpadZKA for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 14:43:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org CF948608FD
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c207::3"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c201::3;
- helo=as8pr04cu009.outbound.protection.outlook.com;
+ client-ip=2a01:111:f403:c207::3;
+ helo=mrwpr03cu001.outbound.protection.outlook.com;
  envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
-Authentication-Results: smtp1.osuosl.org; dkim=pass (1024-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
  unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=XyMNd0Kc
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 93F1880F92
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 14:41:53 +0000 (UTC)
+ header.s=selector1 header.b=mC+75DPs
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id CF948608FD
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 14:43:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1aaCPUiFmQ3G58EH5F9yarGFrLNKd0F++vOsN9XC31I=;
- b=XyMNd0Kc42ygF1p0VQhMp8ud3tsM19KBrrWG4WEJRPcKe8AEKI2YlFa1lUOtwPPhxFaWnMtNME9Se0SutVtUmoVB67oBYQT7j2OK9ScgnlModorIcosbwW4FedzE8ARdv3tYwEDcRGfWMfR8sDzQKm23Fmb2TwJn35vpvGFoBWY=
+ bh=fizfb6Qtchx1T8O7HXpoXfZtPPFJQ9hJC1sDJB+jJ1g=;
+ b=mC+75DPspncNtgFlBenASEwAyFRtb2ZRgRl+S76YFhV3MQAM00/UVEM21YIorJAlphX+qIuFiAp258rbnd8gdNiQu1HBL+0CNCZnHGwq12nDT3QJ+Z33vF8mRmLPBZfM/5AywrrOZy/d9jODmFewnwoRuTvlhMf+fsSzRHtKA0A=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
- by BR0PR04MB432630.eurprd04.prod.outlook.com (2603:10a6:2c8:5e::15)
+ by AS8PR04MB7493.eurprd04.prod.outlook.com (2603:10a6:20b:293::7)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.13; Tue, 10 Nov
- 2026 14:41:48 +0000
+ 2026 14:43:24 +0000
 Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
  ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
  ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0592.012; Tue, 10 Nov 2026
- 14:41:48 +0000
-Message-ID: <6f2681a2-1488-42ef-9909-169b47ba311d@cherry.de>
-Date: Tue, 10 Nov 2026 15:41:46 +0100
+ 14:43:24 +0000
+Message-ID: <b6246d02-b4eb-44ca-ac8a-e4772860533d@cherry.de>
+Date: Tue, 10 Nov 2026 15:43:23 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 07/12] binman: bintool: Do not add empty argument
+Subject: Re: [PATCH v2 03/12] test: Do not set DTC environment variable
 To: Andrew Goodbody <andrew.goodbody@linaro.org>,
  u-boot@lists.u-boot-project.org, Kory Maincent <kory.maincent@bootlin.com>,
  Linus Walleij <linusw@kernel.org>,
@@ -128,79 +130,81 @@ Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini
  Carlo Caione <ccaione@baylibre.com>, Yao Zi <me@ziyao.cc>,
  Michal Simek <michal.simek@amd.com>
 References: <20261110-qcheck_fix-v2-0-1c76e0b68f29@linaro.org>
- <20261110-qcheck_fix-v2-7-1c76e0b68f29@linaro.org>
+ <20261110-qcheck_fix-v2-3-1c76e0b68f29@linaro.org>
+ <a714c089-680c-4698-bc8b-4cc0366f68ef@cherry.de>
+ <906a1084-fa5d-43ea-b0f0-6a3edbd60cc1@linaro.org>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20261110-qcheck_fix-v2-7-1c76e0b68f29@linaro.org>
+In-Reply-To: <906a1084-fa5d-43ea-b0f0-6a3edbd60cc1@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR06CA0115.eurprd06.prod.outlook.com
- (2603:10a6:803:8c::44) To PA3PR04MB11153.eurprd04.prod.outlook.com
+X-ClientProxiedBy: VI1PR06CA0092.eurprd06.prod.outlook.com
+ (2603:10a6:803:8c::21) To PA3PR04MB11153.eurprd04.prod.outlook.com
  (2603:10a6:102:4ab::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|BR0PR04MB432630:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0623d659-4f46-417a-ad25-08df3f38bfca
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|AS8PR04MB7493:EE_
+X-MS-Office365-Filtering-Correlation-Id: eee7780f-1a04-46d1-254a-08df3f38f97b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|366016|376014|7416014|1800799024|22082099003|18002099003|6133799003|3023799007|5023799004|4143699003|11063799006|56012099006|10067099003|261028144727099003|261021121427099003|261102123227099003|261022105027099003|261026140227099003|261022075727099003|261026121527099003|261021123027099003|261009223027099003;
-X-Microsoft-Antispam-Message-Info: yovtz23f2rY/fh1Z3CKYc0InlQ91wJmMUSqJg/3w6z2b0PSUavGLacO7JCivFgXYKZssymcjEdjfyZsUGyZvz7j5wfrvEvX4xFXp01NuNrG/OgMg0ebHHQJnGC2SVXxi752eOEWROiifmhmwsf7SQWglMzHucGCd1npHpiZltzd4qInTShp47HSj3IqlAjGQ0Si88iYLxqnUcaZ+fgrdOsD3aE6mT0bSNhO9uACnUpcpZGIPia6LqjtpjVDnixRKiAuMF7mHF8Sh11Jd3SGWYwiMwAESSjPbO9IHVo8Tx4vNNLydgAu8oXc8/yPTkqu8vNBj0H09IZdd+3iy3s2GXUqpRdrcR8RfXpKBRmTDFVUTsrqU3iMlRcXqwXWuRKKsoBEWuhxY46Ft1S7UgJ+V2nKtf7FoFVyoSmL1SIVVVIMx9dyQpVdGhpFVxbaw7G7q9xCYhcZJIPH96RW5ZfLxVqQt4iFv5Dp8ErPv3YpL+QSZHopegdPHOY4GFcL8zWwFNZVUq/+SFwVQI81MSwccRtSYBWSc1Eej9CM8RacXpZXUjjfirns/ycEmeea/6SyiCMKpd5PnQxVObaQKI26Jml87f9aEk+VDdpipnu06wfVasxjKZLbSNOy+NB/72nNhNlyRysrUt6vret20Hhp1+mBZ+NHf0nhInxEd0HfnCvY=
+ ARA:13230040|366016|1800799024|376014|7416014|23010399003|10067099003|11063799006|56012099006|261021123027099003|261021121427099003|261021135927099003|261026140227099003|261022075727099003|261022105027099003|261026121527099003|4143699003|261102130727099003|261102123227099003|261028144727099003|18002099003|22082099003|6133799003;
+X-Microsoft-Antispam-Message-Info: KfEAYgP1MUqqY87eF+KV07VrAr7xFcw9Dw+nhYKCIytgB3NGOdmYDhksE+RcnkbnOh4iV72EwtcYNXTYwxcsVJnD4uAstZPNVcTBTwMRCej/vSC/M274rgKNSoYkhTiIT6ZXEYH0ygScs+LIT6tFfyhBhg+G4puEUFDEHsLa7XpajygiX+CXM9F73M7tgRNJFeoR+w3uf/ii60n7dTJ7Oivp19k0oSTDcwE+HF6M92GGK5opCMQhiZAMdKh+Opu4MdhXlCLHBjSFapxcmyMm6pXTwZpJ+CTDzPJDamQo8RcWNQhR0pJyPB7w3gkv9E30xy+JN69V0m2BUcKRSvnJBGqi/kNRmvf6D3cv2vxJ5R8dkeciOshZTy8QTxf5UByVISbezILK9wjaQ4VpddRBMV6gEzu5cMD3/vY+aXQeMvO9bXIWi1D/f2ud5VbUnKSRZ+2hwfQmTQZjONLRSXGl0ZWDsyyxIEeknvJjTqjg6eZEHSnEXrtL2r7Zk4ktmTSFPzhGfW/8sXLuVgUNdJSZOcSzuYXLrjgBBEaSt9DER5v05tXH9FeOkoUqMale+XFKPi5ANTJdXxugJ+/apl3Lv2MeDwEpgukTW94YPdtwtz8u69YABQe41qDV/VCDZV+JEZjTC0L7TmqbXLEAYpUmKKjAROPmln9jTNBTupH/Q8A=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(366016)(376014)(7416014)(1800799024)(22082099003)(18002099003)(6133799003)(3023799007)(5023799004)(4143699003)(11063799006)(56012099006)(10067099003)(261028144727099003)(261021121427099003)(261102123227099003)(261022105027099003)(261026140227099003)(261022075727099003)(261026121527099003)(261021123027099003)(261009223027099003);
+ SFS:(13230040)(366016)(1800799024)(376014)(7416014)(23010399003)(10067099003)(11063799006)(56012099006)(261021123027099003)(261021121427099003)(261021135927099003)(261026140227099003)(261022075727099003)(261022105027099003)(261026121527099003)(4143699003)(261102130727099003)(261102123227099003)(261028144727099003)(18002099003)(22082099003)(6133799003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NitaZjU1N3F2Uk5QbVVLcGF0eEVzYUZaNjVEaTdjdkFDck0wdlNsS1pORUF1?=
- =?utf-8?B?MTZBVDJvZ283czRlbUNYQ2hULzRNMWt6dkM1SGc0dDFRWmZZUndSQWtUZlY3?=
- =?utf-8?B?SS9OLzl2YWtSamZQQkt0OGV5SWZibXIrZHMyNXhINnhhVU5FUFlmN1RZcyty?=
- =?utf-8?B?bVpxYno1aGZuU2JOeUZ6K01IMHZiWE1USXJVY1RYNU9UNnFFUWpidC95V1Bo?=
- =?utf-8?B?TmI5MlRldjJPNjlycHQxR3EzcTZZUkk1VVhXdGF0cW1BUThobzRiNmNmRHBH?=
- =?utf-8?B?OGZaSm5ETklmdXBKQllpNTVBVXNaUlVKRnFuNTJ5Yk4rZUVoUmJlT3BmNzZJ?=
- =?utf-8?B?Z0hGaXpGQmRsa0o0NDM1TnN3d1k5SjRBS3RIaHdkemdIU1pkQ0VPU243RmJz?=
- =?utf-8?B?eU9YVEtaOS9JdldzZ01rSjBIWXFJeVd6TXNDMUVWTjZ1cTRZS1FDODhYd1JK?=
- =?utf-8?B?ajY5dzJrZFhGY3BMc2xZTUZGbVRBVEJBVzdvaXFvVThQaSt5aGpGb1ZLak5z?=
- =?utf-8?B?ZzFZVzZqQjMxayttaXlwZy8zdktKZTdVbitCdDVlaEZzTk9QUi9rQnQwUVVU?=
- =?utf-8?B?cGxEaTlyaWxjblRGcHdOZW9NZjd1UWJ5dXpVOWFmSFM4YTdVVmpKcHpEQXov?=
- =?utf-8?B?djh2MDJmcllpbDIyekxkMUgyK0JsYnljaDR4OVRnb01leXk4OWlUTlR1MGo5?=
- =?utf-8?B?ajNzUkRoa1MwaGJBamF5U3JJUmJCVkIyRVZ4cHk2UzdTMGJFSUJ2a1VqRTBT?=
- =?utf-8?B?TktnVk9XMU55U2hWU29mQ1Z4cmtLa2ZqZXBUVW0wZVVqU09Kc1JKclZjekxH?=
- =?utf-8?B?cVFyVUk3aXVMOXhteFhCQ1k3RnlBS1RkdHhEOUdKalJwRytkenQzSVM5QXNx?=
- =?utf-8?B?ZXAyYTBESE9wUUhaY2RqNjk5SEIxdDQ0cldxaVMxdjVaR295R2FQRDRHV28r?=
- =?utf-8?B?eTNuWUhyNlRZMjhGeCs0NnlLaEowT3lGb3dycnNRQkpXLzBic1RqRWR1K215?=
- =?utf-8?B?QjQ5bmNHcnhsZHh4Ykthd2JNeklJMjV3eGt6MERycENRaG82Qyt1dGNSUlhL?=
- =?utf-8?B?dFZkb1lCWllMRnV4aXQ5UDRkb200RWdVdW5DbUxYVkQrU1NraitMd2laNWdi?=
- =?utf-8?B?M0g5RDE2N0orOU5TMC9Zd0hnSG9YN1ZyYXBVL1p5ZnFYeERTRytqb0huNWl4?=
- =?utf-8?B?WkxDcEwvVXZXOGlTQmlKalFpVlB4MFF3emR0REFDa28xS0xQZDErU2FzamY0?=
- =?utf-8?B?RkwycXdHM3NCWGM2QkR6Z0g5bTV2VUgzQU16d2dsVDkyZHJLdlN0YWd3KzN5?=
- =?utf-8?B?YVFDR2RsemRLU1R6REY4SzVGcnY1dFp5RFVHcE8vMjVUb2dvVURVWml5ZXBG?=
- =?utf-8?B?aHlBTjAzMW9oYlRYcnVUc284UVYyaXlKYTkya09VdWt2VXR2UFk4ZWIrOU5E?=
- =?utf-8?B?c2pFbXRzT1RidFZTYjFGeEFBSWxnMkdFb1JQZ0RnVndQYnZrdXp3amV3Y2x0?=
- =?utf-8?B?Q1Vpb3N0b1pNbFg5VEZ3aXJPL1ZWUmdyUmkvN3dNY0UySEdyUW1uTEEyeTN3?=
- =?utf-8?B?RHpBc0ROeUhXS0hkNHJxZWpRSm43SWlYeHVyL1V6SUtuMC9kYmJ5cDZBRzY3?=
- =?utf-8?B?aWhQZmNxNzdEZ1RNVG1wL2NGY1Z1cGh2VldLMzFqdjZSbWl5OHdYWTBvV1o2?=
- =?utf-8?B?N245bXN0cnR5Nk9JTXdjcVZGbDJ3SjE1aVZ5bEpvTDJpOGVOZ09adWlPYmZQ?=
- =?utf-8?B?L2pZUTVrNC95NExPa2NWdllVbnJadTF3TzE4Z2ZRN3NNalUxaG94RjEyMWVL?=
- =?utf-8?B?UDc0akNqYUFIUG5nQVRZcUtSZFp5ZHRrWHp6bVR2Nyt2VVN6VDhESHpIUmFa?=
- =?utf-8?B?UDQ0YUVneWtkKytGZUJrNzg0aXNicTVSTjNLRkJvTFYzMkIwRG9GaWRsSjU2?=
- =?utf-8?B?ZURKS0d4Qm82ODV4Q0h5c1pTTk9oMXVseXZFdGFkd080TlMxNGtBS1YyTm5y?=
- =?utf-8?B?Z2JnK0JuaDJMOE9odG5kQ3JVbVNFenMrSVZEMXVCaXMrMG1PTXplMFBna0tY?=
- =?utf-8?B?NHJGZTFiR2ZPTzd6SkJiSTZkdVMwTGlZUUZUd2ZBdkdUSjJ0d083UE1uNUdV?=
- =?utf-8?B?RWZ2V2VobzRWcUpScUpqZTNaaGlpVXJsU3R1bml6UEYycGN1bytBK3VYbGdn?=
- =?utf-8?B?bVhwc2xxUzdPWFFNUld1bE01U1RNbGloUVFHcXNhRm81QnErb3JWWWJCSU1J?=
- =?utf-8?B?dEJ5RHhEZ1d5Y295aGpTNmZmQWwySmJJaFhNN2M3Y0VXY01BSDVkTkd6Um83?=
- =?utf-8?B?WnhhbVRzM3g3VUQ1MEUvL0ZxMVUzWWVEcnVHRzM2K3d3ZlhLcnBWdz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VGcwWHFKNFhhZW5QNkM0MnV1WW1TWWpuZ0MrNG5kaXdzRlc5c21leEROc1ha?=
+ =?utf-8?B?cHdnTEdXaFZsVThLRGpkSlJKWGovVWNEYXE4bWp1cVZ1VE1lTk13TWV1OHNX?=
+ =?utf-8?B?a2xvcWVHRDNHYVFEMlZlaHEvcjBvV2hjdWY0blVFMGRQa3lhL1JOanJPS1ds?=
+ =?utf-8?B?NlIyd0o1ZVM3WTBTK1NuS25qKzdNQ2xCM0h2cElROHdoUzVqTHNQdnQzTWc5?=
+ =?utf-8?B?RnkvQkdhcXRGbnJNOW9KWkhGcFVVUUVVeVlQWjlqcTlucEJFaFRxRy83d3FY?=
+ =?utf-8?B?RGtHY1VNbXMrbDhPOXNmdEtlTTFtZnBjejdaaDkyYkZQTitBL1dxY1JaNEM4?=
+ =?utf-8?B?aVVGbG5FTUlUMlpUTXIxL0VmZlF1VFk2ZnpsQ0RzektqMUtaM3Q5OEdIQjZB?=
+ =?utf-8?B?OUVmOGVUMTBnK1dUa2ZDeEpNMmRIZStBNlk3NlNlMldZQjZkNGp5dDR0VEt2?=
+ =?utf-8?B?c29MV251eExvRXF1NlB4UWptalo3QW5QZ1ZUZHc5eEowRU1kSlBNOUs2cG9n?=
+ =?utf-8?B?cE52ZE9xT0htY0NFaTNDODhaMkpUM3p4UXdmcHREV0x6OUxCemhmQmlKR21N?=
+ =?utf-8?B?aUNqSS9waElmaDgzVnJMcWJwUG9FeG1EQlhuek93YW1nakl1S0h6MWhxVHpu?=
+ =?utf-8?B?Zm5nWWJJeTJ5ZnppOUZmazU4NmlucnBpekpJeU9hYUhPdG1pTmdQbVJCYkk0?=
+ =?utf-8?B?ckJPa2NCNWs2T2kwMjZmTVdxU0pzK3dDdXR6YXVuT1piaXp5bkxuNnJNZURs?=
+ =?utf-8?B?dHc0NVNScjJDSkg0T1k3UkJVUlpTVW8yQ3BhcGlkZFdkL09qVmorL3V1ZlpX?=
+ =?utf-8?B?cTZaQ2cyemkyUHZPRElWRWQyeGdxTTNLSDBkTHhXNDJVemxlZ253NFJFT0hJ?=
+ =?utf-8?B?T3dRWjdaakc0dG1tbE5sVDd3cE9vVkQxU1E4SGFRRi9haEN2dGdjWGI1Z21G?=
+ =?utf-8?B?ZGJxZDdkWXhYdHRWSG4vV3BkS2x2T2hOblJmTEYwMkpYWjNkQ2VzZmY4akFq?=
+ =?utf-8?B?R2JBQklhak0xaUM1YTlScWk5dlNZR3V0ZjZtOGxaZWFLdXIzR1BpRGNhMXM1?=
+ =?utf-8?B?UjFpbG9WaHRWQmxUeWp2TXE2OUU1TlZCa3ZmdHl4alUzVEpVTzNtY0RVMnd3?=
+ =?utf-8?B?VDF3YlZWQmM5V3hCMVVuMXJSSjJHV1BKQlZWZVBXTDVVYkhoZGZKSTRjbHB2?=
+ =?utf-8?B?MzJ3cHRSN0c1aWdaSDh6dU9lVjN1U1hUZHRzVG55Qi9udFZra1FtSmJ1REl5?=
+ =?utf-8?B?d1d5WmJGd3gyM2k0N2pKL2lRRkd0TU5VajZ2SGpsOVhWODNmS0FKL1NoOGlI?=
+ =?utf-8?B?Q0t6S0p6N3FwWFpQQUMvclVmY28xakJCUCttMjZRNHpoOC9LK3EwejhYTFdQ?=
+ =?utf-8?B?dmkwWGNJcktvT0wzUVkyanRMRUtLWDFMUldDTDN4V2RSQ0FFdnp5MlVuRzZH?=
+ =?utf-8?B?cTlBUjdtOHN3UjQ2WUpYemgvd2plWGFaS3NXREFRMnZkNGFnQklHWkVhME1z?=
+ =?utf-8?B?RWN6ak45eXZWZklRVVJpYytuYlhzbUVYblpUUmxDNWtpVWRKc1lqNkxmL3Za?=
+ =?utf-8?B?QlluY3FwbEZKaXBPZjdTcDQvV2V2ckxCaVppa0hiTVZ0UVJ3a2cxVnFqZC9N?=
+ =?utf-8?B?ZXlsZFVFOVorZS9nV3JHNjBGQmlHczhZUE9XWlZOaG9UNEY2aXlGd3hQZ2NT?=
+ =?utf-8?B?aVJnOUlVVW1ycHB3eXdKK0pxVHZubWRRSWovTnRFMTYrR3MxYVRFL0VXbVNC?=
+ =?utf-8?B?NjNYSi9IMkg0WWtKcGlEeG44QWFyUkx2UlJ6MU9GaWNDRXRVQXE0U0RoMzNC?=
+ =?utf-8?B?TjVIU1VtZVJlZVFWSEhVZnA2SGFjVkNnYm0wV0xRemU3MnBneEt0bDNWUVFm?=
+ =?utf-8?B?RTZ4VVdTZlJrYmNSN016RkVUaGdJSkVsSFVJNnNESS9vbWsweHBCWGZLR3BJ?=
+ =?utf-8?B?U1hGbmlvenpPMTc3eE5qTm5PNk82UHNkUTlKRGR1ekZsOUJGOG15eFVMdk1R?=
+ =?utf-8?B?RHpLUTkvMCtlenNmVE1sZUJCWFFTekJJbGxwOHh6b1JLQUZBZkp4VEsyVFdV?=
+ =?utf-8?B?OTJsdndvMHV2dEhqQXZWRWNFNnZjODBNTVNoamJBT0hRY0o2UzFFZmNnWHVB?=
+ =?utf-8?B?Q1laeG1MSjB1elhQOU1IZnJuTktndUtlUEdoU1ZoSjYvUEFiM2twRUZGMFVX?=
+ =?utf-8?B?a3oyYUNuSEpLSk9BNFhIZm9LcDh5OG5US1FVYUp5MmxaYUVhRk5RS2VSOWsw?=
+ =?utf-8?B?R2pqek13Z05SeGVpWHdMTndvRHI5U3d6Y2tXVW9wSVlTWTZpL3VTZ1BJR2dy?=
+ =?utf-8?B?dnovaTJXeGorWllvc0YvTzFURHFtbGpLZkVGZHFnSnlPSGtCaWZBZz09?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0623d659-4f46-417a-ad25-08df3f38bfca
+X-MS-Exchange-CrossTenant-Network-Message-Id: eee7780f-1a04-46d1-254a-08df3f38f97b
 X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2026 14:41:47.9733 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2026 14:43:24.7665 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0Du8b75gmpkPHlbVd4xboeB7I+TfmHDiEgAMy6OPuzihi8YkjooY5a47z5Zq6Vgd2kmgw7mpFZZMN1Ly6pm8kvTaQjghYGZM2SfE8oYG2Y4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BR0PR04MB432630
+X-MS-Exchange-CrossTenant-UserPrincipalName: ZxAoMJtdp43k5Ka+KTmAR9flcdma1Ry5WN3QxTlWFW5UaGbtfhZmYj2iz5zzVnSuefU+x6O/2k6Q2Ss5GbhRGuVwBoqf2jMCjqqrsccTgXs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7493
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -210,66 +214,50 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-7.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Andrew,
 
-On 11/10/26 1:24 PM, Andrew Goodbody wrote:
-> If lzma_alone is invoked with an empty argument it will emit a message
-> to stderr. When 'combined' is used to examine the output of this command
-> the content is not deterministic in that stdout and stderr may appear
-> out of order on occasions. To prevent this situation do not add an
-> argument list to the command when it is empty. In this situation no
-> error message is emitted only the usage and this is always sent to only
-> stdout or only to stderr depending on the version of lzma_alone.
+
+On 11/10/26 3:30 PM, Andrew Goodbody wrote:
+> On 10/11/2026 13:30, Quentin Schulz wrote:
+>> Hi Andrew,
+>>
+>> On 11/10/26 1:24 PM, Andrew Goodbody wrote:
+>>> The presence of the DTC environment variable breaks a binman test that
+>>> attempts to execute dtc from a temporary directory using the value of
+>>> DTC but that is a relative directory path based on the source tree not
+>>> this temporary directory and so it fails.
+>>> It also breaks a buildman test that checks the environment and asserts
+>>> that DTC is not present.
+>>> Remove the setting of DTC as it is not needed.
+>>>
+>>
+>> What happens if you have DTC exported in your current environment 
+>> before the tests are run? It'd be nice to mention which tests exactly 
+>> fail for future reference.
+> 
+> It will fail if DTC is already set in the environment. I will add the 
+> failing test names to the commit message.
+> 
+>> I'm thinking this is not enough and we should also fix the binman and 
+>> buildman tests to run with an environment where the DTC variable is 
+>> removed/absent/set to the correct path so we don't depend on a 
+>> "correct" external environment.
+> 
+> I was hoping that assuming a 'clean' environment would be acceptable but 
+> I can look at what needs to be done to make the test work no matter what 
+> the DTC variable is set to on entry.
 > 
 
-Then this patch should be before patch 2 otherwise we use broken code.
-
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->   tools/binman/bintool.py | 5 ++++-
->   1 file changed, 4 insertions(+), 1 deletion(-)
-> 
-> diff --git a/tools/binman/bintool.py b/tools/binman/bintool.py
-> index 4cf8d5b165b..15e2df2fd80 100644
-> --- a/tools/binman/bintool.py
-> +++ b/tools/binman/bintool.py
-> @@ -290,7 +290,10 @@ class Bintool:
->           if self.name in self.missing_list:
->               return None
->           name = os.path.expanduser(self.name)  # Expand paths containing ~
-> -        all_args = (name,) + args
-> +        if args[0] == '':
-
-question: is this really correct?
-
-What if we really want an empty argument?
-
-Say
-
-echo '' 'test'
-
-for a simple example, or even
-
-echo ''
-
-which will print a newline.
-
-I'm wondering if you cannot simply remove the '' argument in the caller 
-of run_cmd_result?
-
-That is:
-
-out = self.run_cmd_result(raise_on_error=False).combined.strip()
-
-in tools/binman/btool/lzma_alone.py?
+Mock the environment with with unittest.mock.patch.dict('os.environ', 
+environ) for example, see tools/binman/ftest.py for examples. If you 
+want to only remove some variables, you can duplicate the environment, 
+delete the key from the dict and use that as mock value.
 
 Cheers,
 Quentin
