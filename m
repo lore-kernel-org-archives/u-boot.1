@@ -2,117 +2,110 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25D5C606BFEE
-	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 13:07:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3BE760798B3
+	for <u-boot@archiver.kernel.org>; Tue, 10 Nov 2026 13:30:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=YlPI+pZt;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=YoGL4xoH
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Qi4lwuE6;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hygCL5vZ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E7C5C816A3;
-	Tue, 10 Nov 2026 13:07:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 786F88136A;
+	Tue, 10 Nov 2026 13:30:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ak9lwZ-QRV2J; Tue, 10 Nov 2026 13:07:08 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C889B8174A
+ id vW05Wk4YZNJU; Tue, 10 Nov 2026 13:30:06 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 70FE581361
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794316023;
-	b=MhQ4Hcr4IqhAk935daVb7tLQdRvD8rkvbA39ERgNswvb2d2WnEOsdDZsHv589kqP+WVk
-	 H1nYSr4Ws5NTx7ljZjEk5194S9qq36id/Ahl6iPLWrbpR9l51Jb0FwNbh7p5ypyk51TcI
-	 mskxpO8hj1BnVmUFkhYPXdaDkc45OeWcLk21eyliV87dOmUHuPfu9C5R3Q2J/GBRAtPpG
-	 cCI28IQrZZDLFkSrnGHfxXgw5rIIomaiOxqIG0qLmKuiVBKh8v+EO6oSeyujE6BpRNaeF
-	 QTxOO/w/QoYEYTpb8F67zKLfePb6QSIER+VBARV7czahh97lBRXR9KxQcXehJYk4jhg==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794317406;
+	b=ZB3KFKaEUmF6OM0rSwyLtjdBtqmQaA1XnNwU7xXS/dWCQOCLECb1l4p95h+JqAu3z04L
+	 //vnORuOKLA5QNpWk8uNJjNz0qb3gJeci3evDvNLbWt1X3VdHqddfBq2KM3obi5QzeFL9
+	 MbNok4L4gs2IxY+MAReinwCx3aCuGetWUGGpb+e2noMkCGBs86TCWUtVbyi/T7qofF1rw
+	 HxJdSFSo/ITKfukGIVtQt2PBMbor16IYSvHyQC0jA4Ju3B+oZeS1/W3zCHg5MgA94xQ1/
+	 L2ugAVOU5fD7S8XzjjQdmftKz0zJbUH+l/OYXmKkxMRBGzm4sz7ZemKlt+0yciw2MUQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794316023;
+	c=relaxed/relaxed; t=1794317406;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
+	 Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
+	 MIME-Version:Content-Type:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=btTUhLwln/4zKX2lrWWbk8rIbhFXOVvUIWzkmIb5flk=;
-	b=Ete37/ehRu2PP8VW/hqNx5yD6eb65FdvbdKdkMGW535RZRNjzVdj5ViQLsye7gZYzNTJ
-	 jIUH5oMdSVx+cRmMj1TYgVyq+yK3GGPRrGJq6iR+bPhwQF9VtDpbMFacC+WvOKZFb057M
-	 TJxE94JuXiDCBbeatl/ZKo55tso5PJmSOMKMI/Lk9+GnX1f8ECgV1WnPdRWEvNbIX3ON/
-	 aku/9CxUJfaKVgalvF6LFjDi4EG9n8PZ6p+srKuAVt3aR/loI2XH3NZiiqfBwRoD6lUoP
-	 PzOJD8SmVd+T1Gi6NhoSHsbpETUkTA0LBLKqAdexPCqv37B3rdjyOBtvdmwbhx2QdpA==
+	bh=RvkCuNSz8YDS0uvCYbQ+A0Zr6d+WAF+DhlId5/3OqfM=;
+	b=kqSsQz1v3XpPCHDYH8TXdNO09YhSnooxS3JQx38Fh7IVbFZrzY5eVsPsxGAWrYebliDx
+	 oUUaLKC7zg36iuOHWr/dUhlS1oN1hLzdIlLgiS/RNeb8V75XMnt02xYfFJ3RgGkDMdshY
+	 Hz8bKNvVTaL4po8Nmx9Yr5hhAiFhCjAL+Zj5YAnXvfobEikPHMY0EfuZ5/EWb8iVCAsWB
+	 0HpbP9wMCG5W1LIJC6YuCF1ATWVamIbiRhHBJ9mGRKgm9vFMtv21ViWn/3lO668KnBVPN
+	 T8dq7M6rrW7OiCA2fDqi6aaltm1aXS0Hc90OaSxIHIbUvh1DRZqTWboJOJAtFpj1qjQ==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=arm.com;
-	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=YoGL4xoH;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794316022;
-	bh=btTUhLwln/4zKX2lrWWbk8rIbhFXOVvUIWzkmIb5flk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=YlPI+pZtKeuKlspY9vcuQqKX5GFE6/HYS2xtlnEKp2a3Q8VnGx2jA6ogUY7XNrlQp
-	 1LffvhxrOAzWrTJxqIMS859xMtw5w7Pvjp8eNbVhS4if/IT097rSPqxrnU4lnGdbLC
-	 yqttg6+6ABPSwD/WMVBPjKInfGCrd++RP8Ifb4+oyIwoXb25Bz909q8qpvsgIds324
-	 jwvEs/6w4qGPcTA7/zGeLF8X0GrD/47se+w8UfRSn+j5dx0jk2ZCsS9lClwHi8NA6M
-	 DTdJco72Ov4xgUJ5lXbzp1J4PnClzAIl1GIeKQwuoc2fJf4DsnV0HjrTRkvp2ErjD4
-	 k6ZNpHrsl05Kg==
+	d=lists.u-boot-project.org; s=default; t=1794317406;
+	bh=RvkCuNSz8YDS0uvCYbQ+A0Zr6d+WAF+DhlId5/3OqfM=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Qi4lwuE6fTmHMF6EVztr7GTFGQ5GLmMSYfLNWTzGT7Y3IaY9ZJ+M+NomJY1+6YNeq
+	 LEBCnOxwhcfGvtGXTeK9BuFkwomRSkzumz9cBav06LI6sBxWsHXIeW/ad9uDiZG47g
+	 2y+mcLzt1K1wW1mHrm5ptLXcEk/ZYurb85yF6Hd4RdzY2lG9qkLnzfdcHqHCpSJmkn
+	 hn2H1N1X0T7/R15sXVeYxM/usNjgGe/QmQT9b++x4xrEwAiLVZ/PsJNFIJeW7s5Epp
+	 NqmmvW5zYG2XcPNqT/7y1/mXzPSj/f65TRD3U5yCE5/ZOyPcPg6o+sC+SaExueYxhp
+	 VQ7EZZWYKqOWA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C889B8174A;
-	Tue, 10 Nov 2026 13:07:02 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id 3AF561FC
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 70FE581361;
+	Tue, 10 Nov 2026 13:30:06 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2D1681A6
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 13:30:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 8820C8110D
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:46 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1E93540941
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 13:30:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id y3qDud6JDcis for <u-boot@lists.u-boot-project.org>;
- Tue, 10 Nov 2026 09:58:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org D005981113
-Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip=217.140.110.172
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
- helo=foss.arm.com; envelope-from=harsimransingh.tungal@arm.com;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
- header.a=rsa-sha256 header.s=foss header.b=YoGL4xoH
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp1.osuosl.org (Postfix) with ESMTP id D005981113
- for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 09:58:45 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AE9CB1EDB;
- Tue, 10 Nov 2026 01:58:41 -0800 (PST)
-Received: from e142474.cambridge.arm.com (e142474.arm.com [10.2.203.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9325A3F632;
- Tue, 10 Nov 2026 01:58:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1794304724; bh=vy7VNz3kltnXB6YZ7TYYF+yazG6awjc1E4oTLoXXnmk=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=YoGL4xoHpD/7tgIsa0oPpx97deIJ/QUcARWL+iBhna08uTDrkI47SakHJH1YvLdbp
- LwSjn0qjpph45jaIeRkikKv+YMKCw7AtBRaYp00M0ht+oVk8KHf+B388/sdkNSCZ7J
- DazfIXVwZwwSNKvbudROfMb9zknWuS/l21j2kX1E=
-From: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-To: u-boot@lists.u-boot-project.org
-Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
-Subject: [PATCH v7 22/22] doc: bootefi: note two-phase runtime variables
- selftest
-Date: Tue, 10 Nov 2026 09:58:03 +0000
-Message-ID: <b907e9711b2e86b0283defd78fffce3e9f995f82.1794221712.git.harsimransingh.tungal@arm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1794221712.git.harsimransingh.tungal@arm.com>
-References: <cover.1794221712.git.harsimransingh.tungal@arm.com>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id V4OhdD5gUwug for <u-boot@lists.u-boot-project.org>;
+ Tue, 10 Nov 2026 13:30:03 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 300174093F
+Authentication-Results: smtp4.osuosl.org; arc=none
+ smtp.remote-ip="2600:3c04:e001:324:0:1991:8:25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2600:3c04:e001:324:0:1991:8:25; helo=tor.source.kernel.org;
+ envelope-from=mkorpershoek@kernel.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256
+ header.s=k20260515 header.b=hygCL5vZ
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 300174093F
+ for <u-boot@lists.u-boot-project.org>; Tue, 10 Nov 2026 13:30:02 +0000 (UTC)
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id F1A41630FF;
+ Tue, 10 Nov 2026 13:30:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 319221F008A1;
+ Tue, 10 Nov 2026 13:30:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1794317400;
+ bh=RvkCuNSz8YDS0uvCYbQ+A0Zr6d+WAF+DhlId5/3OqfM=;
+ h=From:To:Cc:Subject:Date;
+ b=hygCL5vZmc7PQi40g5WUnT/3F6Dm39GL7kKH+XJ2g5iRlTvlQoJXf36ax/BwwFWp/
+ IKXnNI4diDHxUTwR789VmnGN5p+oHbADwOSfEvT5vin4noqu9CufOJhBl1AMoUnNGh
+ nIZi3gWeaMGxFFEABN6xH6zQPJveBG+7QB0PHzXfcBEO/L+ICWY+iIYdLm1GKFx9T4
+ 6PRUN2FNeZFjzlUKwgeIr0/zELgeOgzDDPWZGpAZz8FvBlVPguc49272Rd57f7F/mD
+ 0FcrfMtlCatBOUVTEqvxllnDAWGqHOb5cLjLBidgQZIfwfLM3RAawA9Knhy+ErxS3/
+ /NOoNaTRFo4aA==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org
+Cc: Lukasz Majewski <lukma@nabladev.com>, Dan Tran <Dan.Tran1@synopsys.com>,
+ Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Igor Opaniuk
+ <igor.opaniuk@oss.qualcomm.com>, Guillaume La Roque <glaroque@baylibre.com>
+Subject: Please pull u-boot-dfu-20261110 into main
+Date: Tue, 10 Nov 2026 14:29:58 +0100
+Message-ID: <xhkdb7bikx19l.fsf@mkorpers-koolstof.csb>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 10 Nov 2026 13:05:19 +0000
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -122,89 +115,111 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-20.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,INCLUDES_PULL_REQUEST,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The bootefi documentation did not describe how to run the
-runtime-variable selftest, so users had no guidance on its reboot
-requirements or on which flow applies to their configuration.
+Hi Tom,
 
-Document the runtime-variable selftest flow in bootefi.rst. Describe
-the non-volatile path, note the single-run
-CONFIG_EFI_RT_VOLATILE_STORE=y case, and show how to select the
-runtime-variable selftest with efi_selftest.
+Sorry for the late PR. If possible, I'd like this to be included for
+main especially the SuperSpeed patches from Dan.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Harsimran Singh Tungal <harsimransingh.tungal@arm.com>
+If you prefer that I split this out, let me know, I'll do a separate PR
+with just Dan's patches.
 
----
 Changelog:
-===============
+Android/AVB:
+- Add Guillaume La Roque to Reviewers
+- Update libavb to AOSP 1.4.0
+- Use U-Boot's SHA libraries in libavb
 
-v3:
+Usb Gadget:
+- mass storage: Add SuperSpeed descriptor support
+- dfu: Add SuperSpeed descriptor support
+- dwc3: Make Set Endpoint Configuration macros safe
 
-Simon:
+CI job:
+https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu/-/pipelines/1985
 
-- Clarify the volatile-store runtime-variable test flow
-- Note that the split-phase tests only run when selected through
-  efi_selftest
+Thanks
+Mattijs
 
-v2:
+The following changes since commit 709a97a05df66e394f40d249105d0baade46f107:
 
-Simon:
+  Merge tag 'efi-2027-01-rc2' of https://git.u-boot-project.org/u-boot/custodians/u-boot-efi (2026-11-05 07:58:42 -0600)
 
-- Update the doc to match the v2 new efi selftest flow
-- Document single-run behavior for volatile-store builds
----
- doc/usage/cmd/bootefi.rst | 31 +++++++++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
+are available in the Git repository at:
 
-diff --git a/doc/usage/cmd/bootefi.rst b/doc/usage/cmd/bootefi.rst
-index 7cbf28e8b07..60f60838205 100644
---- a/doc/usage/cmd/bootefi.rst
-+++ b/doc/usage/cmd/bootefi.rst
-@@ -177,6 +177,37 @@ environment variable to match one of the listed identifiers
- Some of the tests execute the ExitBootServices() UEFI boot service and will not
- return to the command line but require a board reset.
- 
-+When CONFIG_EFI_RT_VOLATILE_STORE is enabled, the test
-+*variables at runtime* completes within one *bootefi selftest* run, so
-+it does not depend on preserving state across multiple runs. It still
-+executes ExitBootServices(), so a board reset is required afterwards
-+before returning to the command line.
-+
-+::
-+
-+    => setenv efi_selftest 'variables at runtime'
-+    => bootefi selftest
-+
-+When CONFIG_EFI_RT_VOLATILE_STORE is not enabled, the runtime-variable
-+flow is split into *variables at runtime setup* and
-+*variables at runtime verify*. Run the setup test once to create the
-+runtime-accessible variable in non-volatile storage, reboot, then run
-+the verify test to validate, append, and delete that variable.
-+Both phases are on-request tests, so they only run when selected by
-+``efi_selftest``.
-+
-+::
-+
-+    => setenv efi_selftest 'variables at runtime setup'
-+    => bootefi selftest
-+
-+After reboot:
-+
-+::
-+
-+    => setenv efi_selftest 'variables at runtime verify'
-+    => bootefi selftest
-+
- Configuration
- -------------
- 
--- 
-2.43.0
+  https://git.u-boot-project.org/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20261110
+
+for you to fetch changes up to 0e3fb22a5b2e330bd73014f0ced13f5df259d087:
+
+  usb: gadget: dfu: add SuperSpeed descriptor support (2026-11-10 10:00:17 +0100)
+
+----------------------------------------------------------------
+u-boot-dfu-20261110
+
+Android/AVB:
+- Add Guillaume La Roque to Reviewers
+- Update libavb to AOSP 1.4.0
+- Use U-Boot's SHA libraries in libavb
+
+Usb Gadget:
+- mass storage: Add SuperSpeed descriptor support
+- dfu: Add SuperSpeed descriptor support
+- dwc3: Make Set Endpoint Configuration macros safe
+
+----------------------------------------------------------------
+Dan Tran (2):
+      usb: gadget: mass_storage: add SuperSpeed descriptor support
+      usb: gadget: dfu: add SuperSpeed descriptor support
+
+Guillaume La Roque (1):
+      MAINTAINERS: android: add myself as a reviewer
+
+Igor Opaniuk (3):
+      usb: dwc3: gadget: make Set Endpoint Configuration macros safe
+      libavb: build the SHA functions on U-Boot's SHA library
+      libavb: update to AOSP 1.4.0
+
+ MAINTAINERS                             |   4 +
+ drivers/usb/dwc3/gadget.h               |  14 +-
+ drivers/usb/gadget/f_dfu.c              |   3 +
+ drivers/usb/gadget/f_mass_storage.c     |  28 ++-
+ drivers/usb/gadget/storage_common.c     |  52 ++++-
+ lib/Kconfig                             |   2 +
+ lib/libavb/Makefile                     |   8 +-
+ lib/libavb/avb_cmdline.c                | 109 ++++++++-
+ lib/libavb/avb_cmdline.h                |   2 +
+ lib/libavb/avb_crypto.c                 | 348 ++--------------------------
+ lib/libavb/avb_crypto.h                 |  21 +-
+ lib/libavb/avb_mldsa.c                  | 136 +++++++++++
+ lib/libavb/avb_mldsa.h                  | 144 ++++++++++++
+ lib/libavb/avb_ops.h                    |  10 +-
+ lib/libavb/avb_rsa.c                    | 398 +++++++++++++++++++++++++++++++-
+ lib/libavb/avb_rsa.h                    |  10 +-
+ lib/libavb/avb_sha.h                    |  27 +--
+ lib/libavb/avb_sha256.c                 | 375 ------------------------------
+ lib/libavb/avb_sha512.c                 | 361 -----------------------------
+ lib/libavb/avb_slot_verify.c            | 116 +++++++---
+ lib/libavb/avb_slot_verify.h            |  13 +-
+ lib/libavb/avb_sysdeps.h                |   1 +
+ lib/libavb/avb_util.h                   |  10 -
+ lib/libavb/avb_vbmeta_image.c           | 118 +++++++---
+ lib/libavb/avb_version.h                |   2 +-
+ lib/libavb/crypto/avb_crypto_ops_impl.h |  43 ++++
+ lib/libavb/crypto/mldsa_impl.c          |  57 +++++
+ lib/libavb/crypto/sha_impl.c            |  50 ++++
+ 28 files changed, 1257 insertions(+), 1205 deletions(-)
+ create mode 100644 lib/libavb/avb_mldsa.c
+ create mode 100644 lib/libavb/avb_mldsa.h
+ delete mode 100644 lib/libavb/avb_sha256.c
+ delete mode 100644 lib/libavb/avb_sha512.c
+ create mode 100644 lib/libavb/crypto/avb_crypto_ops_impl.h
+ create mode 100644 lib/libavb/crypto/mldsa_impl.c
+ create mode 100644 lib/libavb/crypto/sha_impl.c
 
