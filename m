@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C72F606A324
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 20:11:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F06D606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 20:11:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=m+zekMHr;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=njCTXP1F
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=L+NtJNvB;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=EddAZUvE
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6238560DA7;
-	Wed, 11 Nov 2026 20:11:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8F79660DC1;
+	Wed, 11 Nov 2026 20:11:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FbFHyptmkHdH; Wed, 11 Nov 2026 20:11:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 595BC60DCB
+ id hp_OPW_naYUA; Wed, 11 Nov 2026 20:11:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 6D0BE60DE2
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794427883;
-	b=QAFt6jEUgh9zmVxrda7yl4bXpKqxCXm9BPG2g92Drd8mx1rA7nENQK8ECbvsn5g6QcmW
-	 sQ4IHMID89Ry9nwydN5i+8mgL0fcF9dlONkpU7+reoJBeCJTTbbORX5tOBvkp1EsyDbcp
-	 6q2KMTjmeKaZYd/AIOydtdx4DLd0h2O6+Cji38ebYW9UExfqZpHLagli2UkeSyDWZHg/1
-	 R4/JTgYLsSaOSTHLctHCEt5aZpd1oKYqTqCEnsUwfxWe9QwwUg7e5kj/Wf0jhtWvX5T1k
-	 YPZIgipCPwGsLOldGZl3WPlUBIYrzvvblOmAjLVk2gULvFEn3inw5eHUwPJrZUnQrvA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794427885;
+	b=ItyK5RV3Fk8DP1R0WFwKnpnrIGFP6cnJpOq59FTLyXzM39l6Jj5HfI+UJpceW+/49A3E
+	 rWn9i2tQJLn0+vIPjnhiUsnN28xHTLr2rHh27qMRK8y9mQsFv1z6Dk7R8FZerMSjJ98yT
+	 oDOYtt4Dl/kXOs19lmqwRPfuGXqjf+h0dclvbTEP0medlqDIqo+ZeX/Ly/H0qrSKWk5Ag
+	 uZbXhr/8i9QPtl8YC3OkAxyMLnmkhdR1E+u0WTLmn/uj3GG91G2RdMs1cgxF71VGygtN5
+	 SdpRnDW8VkmfPkrsWrujZFInNPP6LtXxo7wsMgudkF6aFv+4dtorycPC7qAHcJEeUUw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794427883;
+	c=relaxed/relaxed; t=1794427885;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,118 +33,116 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:In-Reply-To:To:Cc:X-Mailer:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=I3g9REsCFKlEP7tV1IVvie7BPHEg0feBzKJyVvujYcE=;
-	b=ihtyrUatZt/vuFbeBaOp2mq4wGVfx+D6CzXtvbePSJbl6cX188B5npn3HTGnudmQb0Id
-	 ktmLWyPMrdIhU/EzEGVFaSLhbRt8dePAJew/0A+b5OUVyGzsInQDeliDdpR27RZfQQjsu
-	 nu20QEzyEPDlaOEwK0pXuD1j3989XmnZtgXC39HWIFK77t63Mq9wr8gjmqCKWrVNcEj1R
-	 3oVQnEqzyWFadcv1l2lfwkn+0tm7xG7h53t2fIEcFDXE15PMmN9qMnqmTdCx5/rd4iaPx
-	 rxx95ln/b2HXryYwnbDoUsWZ0leW8SJbV7zpfKdTqimpq/94tAQOYm5D9a0pl34k4rQ==
+	bh=7PN4XvBrqovYFAuW2gPUNYi9mrLup5EpglXrycZwlvg=;
+	b=IK4QLYMdZRIUdJ6Sp6se3s6dmxnVOKt0Pvu5Yxh4HGEwOvqdA4bVS9ouD1KHpmLWv0lt
+	 SoJVzX/oWcqhIAJcu0B7s7nI7KDbi37nzvD8cfkaZwWQJQNUpmGcwzSuIT8sELDewIRNk
+	 ltC8Wu7d6TmUy6zFhBSQez+IowI+eIJIJuIYF3oBtxAfvOp/LTtuyfX1jqjdlH2+C23Sx
+	 TYATCnLB5xFWz6VyXrEjaI4s30UBu0P6P+lls4/9LL85ynHHm7xgLIsD9MQCt+69GISTO
+	 uzP3+ITormWIhLWbg+VBAIw3A3Y84Z/8m3hoElK5CAVltEPNn94ku5d+VvIhJdrfSCg==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=njCTXP1F;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794427883;
-	bh=I3g9REsCFKlEP7tV1IVvie7BPHEg0feBzKJyVvujYcE=;
+	d=lists.u-boot-project.org; s=default; t=1794427885;
+	bh=7PN4XvBrqovYFAuW2gPUNYi9mrLup5EpglXrycZwlvg=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=m+zekMHrixhB3STZc6+tswm4SNxWiUMAsMs7TFqRPp2BNWd9qPTI+m+Rw4NrymWLg
-	 s/q90bAnIMlDbRliK4uxygDkndP3n16wpWt15Iw484U50ZY1t/gMZRYhdJq/n7O31y
-	 /7sVqMW0Gm9MilaGbVsJ1sX6zRaerPZN17kg+pzECRV4r46n6VP2CLKyZi4rHwlk1v
-	 GngwdQX5w28codqWKDYc0pL4JiB3iWdAj7fLIgocf2TsI9L+UC6hFglyQoY+R6GCAn
-	 ea1SwocZZ/16HrpZMSJ12aPWsaT86HVEBMQItVpgdbmhpgu7+hiqk4g1B54/KIQFm2
-	 fkYosn8gvqTSQ==
+	b=L+NtJNvBrfM3pD6AQLU7xfqq0TXawINRZ1QekL3hjdE0oWW4wSxddyOR1g2Tc6Srw
+	 dF767Jux95SDbyxyjZY1Y8OAA03vJPI2l1uPcadHJFQN4uqifZPjFZ1AKvaq+drste
+	 qgHUn10fAw91NAecRasY9cEGTxL8HkR88aDCteoAzH9iMTgowFV37VonOS3SLpkzEy
+	 jk7OY24404pRJwgKPGNYwUwFrI/r4zI0VCal8k7L6jlrZWyJsSXpXlZzsjxTVKonWN
+	 A4zoGkbRnU+i/HcFQPJzXYGWFpFSJvtV/zAVNSPVQsMeeWHc/t80YynBdkCAK9fMOy
+	 1gdqgQvwzYLbA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 595BC60DCB;
-	Wed, 11 Nov 2026 20:11:23 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 49D942FE
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:20 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6D0BE60DE2;
+	Wed, 11 Nov 2026 20:11:25 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id B357AEC3
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2FABC60D8B
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:20 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id B07C6403BB
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gmWy6Af3PDIG for <u-boot@lists.u-boot-project.org>;
- Wed, 11 Nov 2026 20:11:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 62BA260D9A
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip="2001:4860:4864:20::32"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id i9PYzpyy3got for <u-boot@lists.u-boot-project.org>;
+ Wed, 11 Nov 2026 20:11:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 0789640336
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::235"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:4860:4864:20::32; helo=mail-oa1-x32.google.com;
+ client-ip=2607:f8b0:4864:20::235; helo=mail-oi1-x235.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=njCTXP1F
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 62BA260D9A
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:18 +0000 (UTC)
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-4a77dcc4ca0so2547666fac.2
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 12:11:18 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=EddAZUvE
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0789640336
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:20 +0000 (UTC)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-4ab8cb2a6e4so2245968b6e.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 12:11:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794427878; x=1795032678;
+ d=gmail.com; s=20260707; t=1794427879; x=1795032679;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=I3g9REsCFKlEP7tV1IVvie7BPHEg0feBzKJyVvujYcE=;
- b=njCTXP1FCZgEbXt6kyd3kAG0vMbH4QI/XQsVsDN3SGUW5kcMrDJDDl1Yt2gPKnXaKB
- QxDL3nsSJ8p4sC3d9HTzPxMEKIgc0hk8xecaPBsFLw3gMri3rH6y21vRZP4C8C9qroC0
- lxoH4qA8kYduvqyA9ZVE5IrHnFt0REQZebu9+QiI1M50az19Kz6qPKywwiXUsgW8K1dc
- T4L/MrrYtbu6W5CIFfZPM+iHV9/LxxiuuzoyyB9SSwWVucIgvJKs508Yte99GFsZqdxP
- Ds3p8dylExg1ChcXUbvy0LOz9f8XfS8+4UjtcNcWxTP0TZvvWSwrj1LppKTh6wCgswjW
- iNtw==
+ bh=7PN4XvBrqovYFAuW2gPUNYi9mrLup5EpglXrycZwlvg=;
+ b=EddAZUvEo661Nln7SCDotvRqXm/7TM0IunpDubsodXuBf7Al6QZL9Ym6GozcK2UCIP
+ v9kG8vui2y09/xnivobBwt9M14Cm7fmVfw2uA9P9aG/UkDaekhGQqGGQ6NxLbslKmEq8
+ kKxPYK0IuRsc8bDai9J9DkgLBvCfa0b2yRBsIB4UC5R8i1JuG3tpJgkT0wJvk7Fl8h0R
+ EgLjXICnEpTHwl65KR1fO0LAPlwpIehb8CChJHOXgYgVqcpBPeaD+RQBUKtHG7sKBAhZ
+ b1gPNXcyDVfH0Lyot46cSsUMSky3LOc6B2aa0RJ3nA8y9NWKs6lwc5Oiy/p7lJT5wtcn
+ w/Pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794427878; x=1795032678;
+ d=1e100.net; s=20260707; t=1794427879; x=1795032679;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=I3g9REsCFKlEP7tV1IVvie7BPHEg0feBzKJyVvujYcE=;
- b=RWKz7rJ3PN4pZdrAP8KbePuKnwULQKgbPg7y1fzgH6pYvBGih0DJT2Y21mhQnXTjSe
- YIj8rHKYICQPpcIBoPT4/Gp/r5VOXXSiqqszG/sL6EFboMHSnjwikR2v8UCFjJwR3/Je
- wZOJyzKUaNMweeZYnQ2B5Ju6OSqAcFk1DwQoDZUOtUWuHY1/nArcwpDJ0+raHlAoj6NR
- jJEqUUy3+6J1RfZZJgyLE0fxlKrlc87da1sapNipzRHvb5CTbOnJqGUQPFh703ApCgge
- zbhLuN+UwEwk0XXX2wIATjSw6w3AK8yC3qq80mCeDEvG8WLBsUUg8Cehhz5jz2HgUi0h
- 6s6g==
+ bh=7PN4XvBrqovYFAuW2gPUNYi9mrLup5EpglXrycZwlvg=;
+ b=AQeB2i0N2Av16EyYSGDU9xOrtDCGBS/eZIQdJhjIhj933faUKvuwlzvyyvhCb9HZ9h
+ 3/jkhn5JclhTjCdY8IF8uYmaOImI3D7uDuHrrd7IRdBKorZYeGErTcOOxA/YH9ll/gBQ
+ 39TZeWLu9QC0IAIqs1PbJnrQSj4bBeL+Tnd86tQ/RRvPxlUZ6gIAsFtefvcIsHv/p5zT
+ hq6gEo4O8TCyPrp3sQKBa+wgrs8uvt4ZNFF9pfcSOugCYGCv4d1DGxaS7dsJ4uN7Z7h8
+ dnis6gM2KA4Pyq0bz8P3oCLbS10N81eqbBTgHxlgXrm7KAKmwm/iGS+1sfrUM+eL+meJ
+ 7AwQ==
 X-Forwarded-Encrypted: i=1;
- AL+hErGmpOwgQBusVXhGIElaNRJq/YJxk+FKs/l7iCADwrLN3RzGy7vRU9wsWObFjkbzQoSBFj5yQyM=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+kCTI4M/gP7pQoPjW+LDO1RSyFiqTGUUzp0ciJl6W7YgzZ9+8Q
- x/GKbsnwW1nGNYM4EZEZ1H0ZowZGYEPB4Ed9k2NjZoYTHwdIkr2WVnF5
-X-Gm-Gg: AYBFou3Z89vKUo0U0YHsd/7yYQj0v02Ak4YIySHM/heFc8ieF+ECzQ6HUx1Az7sl7MH
- mI7u7RBC/JzcirqqTZYBUJ8r2aHz24ziqumUx4RgJM5Mrn4hHxhwLrYjgd7wD9cqpvMkPoJ+2wY
- j97Z/m2Dj5/8uPu543PszAN6Uk9HuR+bxsxsjgHDEEKZg0v2uYEClumixgkpQaiNzSDFaZo8wHq
- IqsV52etTqM3VmsHKzfX/EGu7wbnuu98Vu5XKUUejmmz9iHpu1UzvEiyuVlWZtF4pWkx4ert+op
- iXgcfiP2zfQ0Lz/9Qmjum7yJCE0UvM08keWthhVVJlKSpUBS3zwJ80ARWX6kZobKcRPhAovBK1e
- tmttPfIUmSaxHYgHJfrLUyENOiPvsYb3BNRI+fsMM4yDx8H6yhxXAmjHMfk7jZKOpQIHRtRjqf6
- O0UzhmaiNyP2lFlyk47056vXh9Oqq3Zy2RhZMiKoB0Pf9PYTtAEPPi/YuufYZV0dF8RnKRVzEqE
- t7LccXphz+K1LPgEg7hgGh06k9ALy/m65KemxTLSJR0xSh3LvoKJJ86Nl2ekhLx5HCWvUNwW0j4
- iX2NLGCJSuD1VZycb1K8EI+sT1jc2/r7FIO1jVh5BMkbhFBPEJDKuSRrmPt4rYlCSljiQT/vKii
- lR0qEkMQrDDBczikNuwOD+ekih34gF+vRzbAwQrogQxdJJs71z8gRCKO6TeXICkcIuDZIe6XRae
- o5Wl/TWnoopn5U0QEGuo3EFLZ9ab0VtF4jxHHlHC2Twgz3GHJCuLc=
-X-Received: by 2002:a05:6808:508a:b0:53c:8f0e:ee21 with SMTP id
- 5614622812f47-56b968c25e2mr2904452b6e.10.1794427877662; 
- Wed, 11 Nov 2026 12:11:17 -0800 (PST)
+ AL+hErFuj49mpmPvw+xC5ylrd8D7xOPU+ByA0QXlrVqaTWHTD0NpCJOjz9WzvTkfCd8JlPoINweDMUw=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+zyPe1b9zc5uLsRVphF6WVlx8f+NlfULoPEu4/srBn2p7LjXuQ
+ JEftVRNTqYRRVgGzlQTK330Yd7ahB6S9JdhkC/ZxqVIs/9SNK8Xy6sGb
+X-Gm-Gg: AYBFou2rJxmnAnVx/iied1aBRFAcTwSfzZcwYBJZMejJu0knk8hd5V6u9DlG0qnPnU6
+ cNq69ZXMxkTRvBMhCHZGTLTbedRRKOVQOJ7PwYvoYepGBsGX083Xbi9L9Bql5fufZj9iv/uCNZ1
+ SgyJeyR7EySHKmbiE/2+hTaq2Ek5IMYyznL8lGQoEF8TgqyI8e+HWNZJT864iGGhirVK5c7uP4M
+ bU7fPoNIAqmB07oGw/q8t+jvsAPO9pYPNA4fCBBDtnReFktqEYpBEG55ngNhRA6Oi7T7fRMmOuV
+ 8erEfFZvcwpHZqnLQY+x2adcvnLXJojkxfsuWm14RGBSrzH1GBtgs5k9Tm0e9JE2HtBpmvuQ0Li
+ H71XK1q3Vz0jZZ765gKPaHv2DYZlh4M2NOAFd0LDpRA9Y8J/+pgdDqZ1soZrqMAdlvKaEd9WOo6
+ 6a8xge4MItOtcMxcDYAOenOfzn3P6l3dkW8LCYZbOYre1kNHKgmdYJrngmONkUzI3F2c0bcdlS1
+ ZWlLBYZR9Bak1gTsC4XotQ0sLdg5Wp7Mppctzggn05aUn1s8h3+F6j0cMFN4qdTTnd8n+KQag7c
+ e6eUGRCCpz4yWLjOFdJt40ECDAMT0kOb2E6fx3PubLHLgtohxagVA5fEbffLtsJ57ts2wHhKHJy
+ gyLqCvtY9ywq58lBzs3MtNA2jrkV7jADEefdaOlSwkA9sNC8FVvllftZAfQDSJ56ArwnLP1yRgt
+ QmRacpygtnyYmLy2LgG9N9XS3zu6RZi+6UZAnKb+4p9gKGD7WlO0U=
+X-Received: by 2002:a05:6808:2203:b0:567:ba0d:a565 with SMTP id
+ 5614622812f47-56b98d2f795mr3422342b6e.68.1794427879226; 
+ Wed, 11 Nov 2026 12:11:19 -0800 (PST)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-56905d3bab2sm5863446b6e.12.2026.11.11.12.11.16
+ 5614622812f47-56905d3bab2sm5863446b6e.12.2026.11.11.12.11.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Nov 2026 12:11:17 -0800 (PST)
+ Wed, 11 Nov 2026 12:11:18 -0800 (PST)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Wed, 11 Nov 2026 13:11:08 -0700
-Subject: [PATCH 01/19] net: lwip: handle TFTP headers spanning receive buffers
+Date: Wed, 11 Nov 2026 13:11:09 -0700
+Subject: [PATCH 02/19] net: sandbox: bind raw packets to the selected interface
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261111-submit-lwip-ipv6-v1-v1-1-eb0ee8f8da1a@gmail.com>
+Message-Id: <20261111-submit-lwip-ipv6-v1-v1-2-eb0ee8f8da1a@gmail.com>
 References: <20261111-submit-lwip-ipv6-v1-v1-0-eb0ee8f8da1a@gmail.com>
 In-Reply-To: <20261111-submit-lwip-ipv6-v1-v1-0-eb0ee8f8da1a@gmail.com>
 To: Jerome Forissier <jerome.forissier@arm.com>, 
@@ -178,50 +176,64 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-After IP reassembly, removing the UDP header can leave an empty first
-pbuf with the TFTP header in the following buffer. The TFTP receive path
-checks only the first pbuf length and silently discards a valid
-response, so the transfer times out even though the complete datagram
-arrived.
+SO_BINDTODEVICE does not bind an AF_PACKET socket to an interface. Use
+bind() with sockaddr_ll so packets from other interfaces cannot enter
+the simulated network device.
 
-Coalesce receive buffers when the first one cannot contain the TFTP
-header. Drop the packet if allocation fails, and retain the existing
-short-packet checks. Normal packets and fragmented transfers whose TFTP
-header is already contiguous do not need an additional allocation.
+Do not overwrite the transmit destination with recvfrom() source
+metadata. An incoming frame otherwise changes the interface index used
+by the next sendto(), redirecting traffic to an unrelated interface.
+Receive without a source address and keep the selected transmit
+interface unchanged.
+
+Store the hardware address length in its byte-sized host-order field.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- lib/lwip/lwip/src/apps/tftp/tftp.c | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+ arch/sandbox/cpu/eth-raw-os.c | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
 
-diff --git a/lib/lwip/lwip/src/apps/tftp/tftp.c b/lib/lwip/lwip/src/apps/tftp/tftp.c
-index f437c3cb3b5..ddfe2b21236 100644
---- a/lib/lwip/lwip/src/apps/tftp/tftp.c
-+++ b/lib/lwip/lwip/src/apps/tftp/tftp.c
-@@ -512,12 +512,22 @@ is_expected_response(struct pbuf *p, u16_t opcode)
- static void
- tftp_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
+diff --git a/arch/sandbox/cpu/eth-raw-os.c b/arch/sandbox/cpu/eth-raw-os.c
+index 42f291a5519..52f8fb559b6 100644
+--- a/arch/sandbox/cpu/eth-raw-os.c
++++ b/arch/sandbox/cpu/eth-raw-os.c
+@@ -84,8 +84,9 @@ static int _raw_packet_start(struct eth_sandbox_raw_priv *priv,
+ 	device->sll_ifindex = if_nametoindex(priv->host_ifname);
+ 	priv->host_ifindex = device->sll_ifindex;
+ 	device->sll_family = AF_PACKET;
++	device->sll_protocol = htons(ETH_P_ALL);
+ 	memcpy(device->sll_addr, ethmac, 6);
+-	device->sll_halen = htons(6);
++	device->sll_halen = 6;
+ 
+ 	/* Open socket */
+ 	priv->sd = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
+@@ -95,8 +96,7 @@ static int _raw_packet_start(struct eth_sandbox_raw_priv *priv,
+ 		return -errno;
+ 	}
+ 	/* Bind to the specified interface */
+-	ret = setsockopt(priv->sd, SOL_SOCKET, SO_BINDTODEVICE,
+-			 priv->host_ifname, strlen(priv->host_ifname) + 1);
++	ret = bind(priv->sd, (struct sockaddr *)device, sizeof(*device));
+ 	if (ret < 0) {
+ 		printf("Failed to bind to '%s': %d %s\n", priv->host_ifname,
+ 		       errno, strerror(errno));
+@@ -285,14 +285,10 @@ int sandbox_eth_raw_os_recv(void *packet, int *length,
+ 			    const struct eth_sandbox_raw_priv *priv)
  {
--  u16_t *sbuf = (u16_t *) p->payload;
-+  u16_t *sbuf;
-   int opcode;
+ 	int retval;
+-	int saddr_size;
  
-   LWIP_UNUSED_ARG(arg);
-   LWIP_UNUSED_ARG(upcb);
- 
-+  /* IP reassembly can leave the TFTP header in a later pbuf. */
-+  if ((p->len < TFTP_HEADER_LENGTH) && (p->len < p->tot_len)) {
-+    p = pbuf_coalesce(p, PBUF_RAW);
-+    if (p->next != NULL) {
-+      pbuf_free(p);
-+      return;
-+    }
-+  }
-+  sbuf = (u16_t *) p->payload;
-+
-   if (p->len < sizeof(*sbuf)) {
-     pbuf_free(p);
-     return;
+ 	if (priv->sd < 0 || !priv->device)
+ 		return -EINVAL;
+-	saddr_size = sizeof(struct sockaddr);
+-	retval = recvfrom(priv->sd, packet, 1536, 0,
+-			  (struct sockaddr *)priv->device,
+-			  (socklen_t *)&saddr_size);
++	retval = recv(priv->sd, packet, 1536, 0);
+ 	*length = 0;
+ 	if (retval >= 0) {
+ 		if (priv->local && retval >= sizeof(struct iphdr)) {
 
 -- 
 2.53.0
