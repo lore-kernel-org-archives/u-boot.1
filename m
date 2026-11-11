@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D032606A31C
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 20:12:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9667606A321
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 20:12:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=yvKROJGh;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=P2kLSYuL
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=cIK7Di1X;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=baIUEscG
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DE64E60DD6;
-	Wed, 11 Nov 2026 20:12:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9963260DF7;
+	Wed, 11 Nov 2026 20:12:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QGGQYaFbK9IS; Wed, 11 Nov 2026 20:12:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E59F160E45
+ id dYaZyJUMOrWZ; Wed, 11 Nov 2026 20:12:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B7B2A60E24
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794427915;
-	b=W9ipPcZwmHYwSG7SzaL5bAYbobDuzCpIYc9JWcll1OpbgOh441PEU67c5sEgYDDt2PzN
-	 +THYBoC75y/3R+OcKELWqDyKCwQe9T98XpGVsUAJm93Nk4m6UU2UYnPv/yQxGMUczJ/1W
-	 4QOOF4hOeBjIl8pzG0HvkujryO8kq+boZF6DN81kCzFVyMH+MmUa1upgMb8bjf2XWtLwZ
-	 NI1c57zIob9BBsgIFsQw9XF4Qwtz/c/SyGmhzD4SCh+zDzJrHDWeXVT9bvBmeWbd2AJ+O
-	 6M5LgVyfx4TXwbYyVQJNA85ZNkHKC9Xmfhnu22mSM9ZDauCynAEp/z8IRghj0NsI60Q==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794427917;
+	b=KU3t/nKa6TcaOA45DyChFsenDfgfGFnvTM5gOTETzxabQ4cHOy1KJ+XYi9+dq8cBZuDl
+	 3c8U38JTV/UvJ1gdERx3/PLoVi2qfmErJTiuu9NT0juhgXwsccN2Fm6YEohJkGNK1lhG0
+	 wZLzQPPr/n70zh/9R/Hf4kKXJgKfWsM3X+LF/HJt7nP3XIJEJElHI7EXD/mgeyeWEQ5oI
+	 NN9gCGA0EN2MVlfjWwKiv1vyut812H4hvDd3WJXXjWFBsbz8ldL9HqcvVFW5IXxCg4Gy2
+	 BbRJR5zO3iMgJXGNVyG3P6l5w661q6xh16UKUfclbcKvy07+tGpGZbhCoQ+oQD/RKlw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794427915;
+	c=relaxed/relaxed; t=1794427917;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,117 +33,116 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:In-Reply-To:To:Cc:X-Mailer:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=AHgzemvMD7dlG75W9T/eUkxDkqVOybO1Zcnkq+hZwks=;
-	b=FtnoPzGEpKY8eiznnR0DVc4ZC82mpTJXIOwBnn8GYn/Pi4Izmdb9+LDDxjSDyvRGHWeA
-	 7oBIAm0hJ++oDq8YRoNxNxkas9Eho0ZY1HzEcmCF+vavdKOviQbpXV6zAynuPfWiENqro
-	 53Rb9UCbcEayYzPJQDqPkPa0JH0PBtWGpt+pGt6LEXBlB1QXWLjGcZMBuZD5XTPeyhD9A
-	 CGP5EtVnlN2xmVQUIGxPbuIdhSJZc6wGJwi1efiDnfH8B45dsMAkNgnUxRvfz+TzbETa0
-	 2MRRwn64UVWrXSxLCnqbmkdunXPLh+sB+6pmms+0vr9dyr5A0iA6iAXT6a8p0DbZxJg==
+	bh=lYe/4JsxfyD1Y6fk1FiF+2wApJ/3kJ5hPsWINUdoZfI=;
+	b=nooFymFYv1mWcBl/Xm0FgAQZCAQDWXaxA/vHUe/IhtDFejGn5NGpckdUjlicHINEqZ8S
+	 xby47PPjezfHJY6y0V44vaLe2QU07FE3+dLzKk7HVY47eLiud6kKHnNBkEiS4m1ZuVo4S
+	 2iBgf8wQH1OR7eizj3mN3Df8tIvxQNm4xCGXORdUU93IfvfZ0vUxSULmbopVzaDp3RsMW
+	 vR78gm4u5utot9QKqiymysoRmywvXMXucN3Sbx297dMFZCVqmTxIeArg8CoDG/jRbRru0
+	 Ix1vESIayvR4xWvGpM3/RDhgeddPJDxr/oZSNFF9vAWWXWQFbaI9UeVZtrvfHvP4HHg==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794427915;
-	bh=AHgzemvMD7dlG75W9T/eUkxDkqVOybO1Zcnkq+hZwks=;
+	d=lists.u-boot-project.org; s=default; t=1794427917;
+	bh=lYe/4JsxfyD1Y6fk1FiF+2wApJ/3kJ5hPsWINUdoZfI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=yvKROJGh5cAhl6OVcZlRDRQNYSv/+FhlFjh3E5PzI7CT1rCrgorBIHxeDpPgb4x+T
-	 MeIxCQXsRAyOTvDRPrhQ4zYnRdv+I2ANXJjiywBAI9naLDebvtBF8sN1su2rv9o9No
-	 PH/HB/FsXBRcRhkgim0QDrJHCFbbL6v92wgT2G+fQ0ZuwG7aNG99vvOK+NauDoMDXp
-	 HU78FJTlmGBD/5aGO0Y81H0aeNayI4qUbtPKnvf0OCnA3hVYRnx5xD2wm3zKT4NhBg
-	 m8JV5hfVY95Ab1nCJLMyZkZ6FMwtxE+06J8LaUeCjoxgOFj9o6DD78iP/yJJKC5wHy
-	 RyK0mhQ2wYF4Q==
+	b=cIK7Di1XeiUPoHJBenoeDGtQ+kTrgsNORDZxXVta3Uks7/2Cl3x2a8khJxwACJVy6
+	 eXlvQRMkbWngoTRhnvJOQ+9g6lQ/fI51AotJQZ1P+a7bA9GRI/hp20GiQAPsFHHRC0
+	 M32fA1exSqvp/MeDdWPu0SN3PECuZJ83KMSbhV32jp2mU312kh5US2y0pLZM03hPaR
+	 kVyjB27XYfPlN1igyOh9l/AJu9wh+b9CjSfagtE5t6vStSbtieDASAiu7A12Gkzq04
+	 9+jhpkozAgO4chLqkNH9xtKtvIdQdc5C3NwdSi73qrLroaRUOcDyEf5e5eq4RPyrgd
+	 n353I7QB102/w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E59F160E45;
-	Wed, 11 Nov 2026 20:11:54 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 0142AEC3
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:41 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B7B2A60E24;
+	Wed, 11 Nov 2026 20:11:57 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6C2DB2FE
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D198D40D99
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:40 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5D8514099C
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id FVD2Li0T7X9I for <u-boot@lists.u-boot-project.org>;
- Wed, 11 Nov 2026 20:11:38 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 64BED4099C
+ id w6X_PoCe6M8w for <u-boot@lists.u-boot-project.org>;
+ Wed, 11 Nov 2026 20:11:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9EB6240DB7
 Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::235"
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::231"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::235; helo=mail-oi1-x235.google.com;
+ client-ip=2607:f8b0:4864:20::231; helo=mail-oi1-x231.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=P2kLSYuL
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 64BED4099C
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:38 +0000 (UTC)
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-4ed6d69bdfaso2224829b6e.3
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 12:11:38 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=baIUEscG
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9EB6240DB7
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:41 +0000 (UTC)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-4c5d8c7f326so1399415b6e.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 12:11:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794427897; x=1795032697;
+ d=gmail.com; s=20260707; t=1794427900; x=1795032700;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=AHgzemvMD7dlG75W9T/eUkxDkqVOybO1Zcnkq+hZwks=;
- b=P2kLSYuLEwRWy0U7MSMx3zntmWGHxp0sF9KLCH/dAtUIUrKC1bkMtJne6zZjHudP7x
- fOm4nV7CqwgvZMnOJehw7qmHSyTQNRXEXPRadAR8Q+Ma0tnY+J/etNM66lFYP6j5ZUgV
- nR8E9Kp+OiXM6agNJ9hAeFt+xdWiedVKREYxU/3zIKaEY9ofgTAqKpy0TJPlWsYiB/7f
- CkzG+XIRyS9oJrAwa0IhxUBqJNcO7OifUSHqGq/U7dRmSyPT4hT+KdfLRjWxoAaYJaXc
- CbXcgGsA95Fxe1nrMAVbVeINjhwb7tNOAS1VWg+ACo0nGO5W2s1S+PK06YYA7maJA8kL
- 2SVA==
+ bh=lYe/4JsxfyD1Y6fk1FiF+2wApJ/3kJ5hPsWINUdoZfI=;
+ b=baIUEscGlciJXt2qDNVq0lZxZAfQgMGq2mFdPBW5ypCH/8udWJ/DixD3KIa2p7Z93t
+ rMgpzm4pJLqAU7aSd7EH9GhqN2Ilk48Tm8Ea9q6Y46T4nH8QY+3hCDM01enMoCJ/7ASj
+ NftAUMRn2cY0A5qD19AhGIfacMzaAl3YPG6VBvq3ChXouVTCeO0D5bLdgXpgKgFYqTY+
+ weTFbRFsBLJYpApZNLpl9fZ7tGmXByImEhs6GATVl6mTzZLzNVEfl3bXLbMFk/ZtUR6q
+ 9DLL8pEJsxqXcD+tmkpxBGHzQZtUH1liHF/Xxbfd9ep62eSSApMgOYBVNSfBaP5kYwg8
+ eMBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794427897; x=1795032697;
+ d=1e100.net; s=20260707; t=1794427900; x=1795032700;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=AHgzemvMD7dlG75W9T/eUkxDkqVOybO1Zcnkq+hZwks=;
- b=hxjIAE0kYMaTxU72C6XEoKXIdGcuWXt9mHJTcJguqA2sTX7/MbyFdJbiDLC9AVAYtF
- arU4Hz7fGx0ZqXsUJGP5lgZDy2cXWgsa3jx3150jcW/suMYru5qBPivOXhySdWnGxd6f
- /t39E21xhDWFwBnw5udtBmroaMzl8dxP5eaZquDKdG9ljwNd5wMRqeR5DnjCruW65+09
- dtRzL8YUasDto8b31DH5BtfoHCNhiMzY1OXutBx3kTwJDlR0Y+kUF/j2l/IJn91jhPeY
- yKI+/ry1A4WjAbdOQ7ut8/kpMSNMcfDYO+k/HQ0yvmZwpL/EcHzGO19O2OS0uc2xEkqC
- aMhA==
+ bh=lYe/4JsxfyD1Y6fk1FiF+2wApJ/3kJ5hPsWINUdoZfI=;
+ b=06nNDiCzM0HVxSku27sK5/tRCUxDrhd6hgkKpaW+bAVhPSCgI4D9sEhCDvXihmx4V4
+ n/CQPr3coOa28dnkBL8yXJdr8FXLpc+RFRjDs1cJpOd9o7oA8F+AsHcJ/HY6gBB3Y7ZQ
+ SATL+P4aCiMN3gyyNxcycxd1ZkxML5qjBeQpbuWnxgCa+7Pk6z9NXswGgUCNyFf83lEg
+ ffAXhXLTeMcHuJwKT9e9KQ0XCqsfBCbnIRI8QhWVTOOyWf3ZwTAB3/hUadixsFuqa5Oq
+ bJGNasoiTELIh10ZjRzfygbmnvmNauYbwKG50BSu39L1emclUUqy3tU5PfWjfR91Yfhc
+ AUJw==
 X-Forwarded-Encrypted: i=1;
- AL+hErGJWxlasSYiB6HmSoIy1p1TiSCOPb13vYvLWd3MA/r9+CRtVHxm4vSGT3kJoph3XBXNOG52HYA=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z9dUbzVn7NI+RC9TmF1RCZjQqRljajbh0uo1NU+zEHN2yUCsCwm
- dD9na1RZ81fbHtxQpd5BucJ3w7F6sDm31zYtvQ2a8OWGWcWVyJo7hHXO
-X-Gm-Gg: AYBFou0in7K+BH9lmirJ62t9Pyawp4XhWAuTRLVdJEjHKwPsdVl0K5+bpe6bG3ZgjEO
- CPQZBc5RGNymGlpVR+WFkXavcb0LgSFk3KUVePamdE/LYYJ/dW6N3lH0msls439V1o+HdcZjnRo
- swRy909p30eE1H6X8B0wiqtn+IE5/6/eTW917hyyQN6OPM3I07Z9m3W8o0Fn8Ts0r5Ig6DKXusX
- Cbyl4v8t6ZBADA2N7/x9KGH8IlELwpj92M7R9Eb4E0ble+L4DoTEAl3X3WdRqohWM7KoiQHGdq3
- ksVKf7OCWtWebTA8+UWD5RVDqqov3ZgD1/bWpsnD1krTXPueHQm7zq84c5tH6v4F0QE9TiAPvhv
- fCMPdrP5yjEnm4mE6wPigtS4hjfRkQg0PDoB2HhSegpD3qpbd5gREFfOYDyB+J0u8PoptZAcovz
- XDnolEcWgaZGDaZHqrYoaA5aTDKoD7XDLiRS2pFQN5EFvzMQ20xo8L+W2IxXMCBehQuo4eQdqOi
- m7x6wKCdO3hXfqj89NV8OOokE1qFwsT6lxgBnSLYKYarm7siP+dcrvZAnDDNayD8DC5K7Ymj1Bh
- ixL4q+ghoVfHI+zW7ky0H8BRxF7DM7Ld2whH4ufLcOdq6tuUWRsfMlE+24gouWaEwmWJoKUewcT
- rUHdqJ2pCw88LYRhqGJo52N038rVpQ+EfDP2++C3DVJEpyU8mKhTnl2CWOA9jBJvM7f2bJ7PWYb
- zyYg5P8sDxvMGJAMm3z1MHB08tOxoWarAhd340vm9aAQ4m6QG/ewU=
-X-Received: by 2002:a05:6809:24a:10b0:56b:220d:cc5d with SMTP id
- 5614622812f47-56b961943b0mr2307234b6e.10.1794427896780; 
- Wed, 11 Nov 2026 12:11:36 -0800 (PST)
+ AL+hErFvluzSZvJSAKQEXVBcWZ0FlalQtsNDN8QvrgIl4fYlY+IEI3jWWEwhAjgmuvKntSbkViCjrwg=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z93XJkS4/UQ58+tyaECyMKo6DwEY0ggizkHmMKfBb2qundHQ3Iq
+ 4wQCNE1JK4+1vRxBCyI6C50ODqPSdTDvd9zAEuhmoh7BVIDK4U/UmLNA
+X-Gm-Gg: AYBFou1E2K6NRSVH9nRGmE/2V1lBxiKiuXYTX+boVuhQzD0u/Rnl1EVcXvXmQaP4dPy
+ /w8q8tKYctFTzIDdrBeQzdhlLhemLHnT52eqm2nDvIiV0hcII/d7AOKl6AS4yJb+lRPwfyyrSxO
+ 3AUTkbQImg0LSbpYGsFPc+SByr2RK2ey3PZzVlmJmqn/JIjDGkbowkKJT0bqaoF42iNzOWZFsIX
+ 5dODNA07s/V5UO8Kg5VhENTxp7tHrV3H1MSa2h3Xs3cRwzhJl6t8S9nhdfv55Ib0o/5ae1aEKMG
+ q8fl+ykvt+vERrW/BO74Kz162sMaRswWdPf1m6/PYCibUibl72epHAFWJHaC761XEOFjvQ51Qct
+ QpHPX8j6sTEtKLnNzbYNYlCUAB/fksb2KHG+FNoYtFg0eiFDKj/vInt5vqTSg+wbHzMczaacaIW
+ i8oQ0ktekjWBJ4c6Sz5OG4cnPcjlAfQdTDlovE4K29JUOlHI+JXC8qXuNWlvPW27GAaB0JAqipZ
+ gq2eZX39H8pxeHOzW8ZVxVIkMvJu8Fu3LR09AFO67LxnRqwVmYOjXlxacPLmCFfFB+FYK4r+YOm
+ udyaWBYdoLWK9t+mtMxmBlKfBFCq4w+embBZ/BplbLUW+6qVOhRBcXmfjCBs1KINxhcc4M6VvkX
+ 2uQ3N18kWny7ab1VR2x2zMtIUp4Wv1nJ7S4XhjNqvFATQQWA3BVBs83/DcmfkVFcshVhDEYwY7t
+ dR9MSfoHR2sqOru8YjQZ5mLm5J6M5MHn+BbH9a2j9u9sgte/SDvbY=
+X-Received: by 2002:a05:6808:f13:b0:567:cac4:f1c3 with SMTP id
+ 5614622812f47-56b9628f6demr2934344b6e.23.1794427899433; 
+ Wed, 11 Nov 2026 12:11:39 -0800 (PST)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-56905d3bab2sm5863446b6e.12.2026.11.11.12.11.35
+ 5614622812f47-56905d3bab2sm5863446b6e.12.2026.11.11.12.11.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Nov 2026 12:11:36 -0800 (PST)
+ Wed, 11 Nov 2026 12:11:38 -0800 (PST)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Wed, 11 Nov 2026 13:11:22 -0700
-Subject: [PATCH 15/19] net: lwip: acquire and maintain DHCPv6 boot
- configuration
+Date: Wed, 11 Nov 2026 13:11:24 -0700
+Subject: [PATCH 17/19] test: net: exercise lwIP IPv6 addressing and DNS
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261111-submit-lwip-ipv6-v1-v1-15-eb0ee8f8da1a@gmail.com>
+Message-Id: <20261111-submit-lwip-ipv6-v1-v1-17-eb0ee8f8da1a@gmail.com>
 References: <20261111-submit-lwip-ipv6-v1-v1-0-eb0ee8f8da1a@gmail.com>
 In-Reply-To: <20261111-submit-lwip-ipv6-v1-v1-0-eb0ee8f8da1a@gmail.com>
 To: Jerome Forissier <jerome.forissier@arm.com>, 
@@ -169,1206 +168,1212 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Implement DHCPv6 Solicit/Advertise/Request/Reply exchanges with bounded
-option parsing, randomized retransmissions, Rapid Commit and boot-file
-options. Configure one IA_NA address after duplicate-address detection,
-publish DNS configuration and translate TFTP boot URLs for autoload.
-Retain an advertised hostname and resolve it only when starting the
-transfer. With autoload disabled, configuration succeeds independently
-of DNS availability or boot-protocol support. Copy the selected boot URL
-before a transfer can poll renewal, keeping its server and filename stable.
+Add a sandbox IPv6 peer for neighbor and router discovery, duplicate
+address detection and DNS. Check shared IPv4 traffic, static prefix
+boundaries, address-specific DAD conflicts and resolver readiness.
 
-Track SOL_MAX_RT independently of address selection, allowing valid
-no-address and failure responses to update the Solicit retry limit.
-Validate message identity and option structure before updating it. Use
-the one-hour default, including when Advertises report conflicting limits,
-and retain accepted limits across retries on the same interface.
+Exercise RDNSS backup selection after expiry and withdrawal, multi-server
+options in chained buffers, reordered updates, single-server refreshes
+and replacement of a full server table. Check that temporary or
+same-address DNS overrides preserve lifetime ownership, including an
+advertisement arriving before resolver refresh.
 
-Keep the accepted lease and acquisition time across commands, detaching
-its socket before the shared interface disappears. Restore remaining
-dynamic lifetimes only on the original interface. Clear the published
-lease address before reacquisition so failure cannot make it static.
-If restoring the socket fails, invalidate the installed address and
-detach lease maintenance so initialization can retry on the shared
-interface.
+Exercise address, route, prefix and RDNSS expiry after gaps in polling,
+including readiness and resolver checks before polling resumes. Preserve
+static and infinite lifetimes and keep lifetime catch-up independent of
+DAD progression. Verify refresh after an idle interval and final release.
 
-Keep RA-derived routing information separate from DHCP-managed address
-lifetimes. While DHCPv6 owns the global address, disable both SLAAC
-creation and its lifetime updates, including during DAD and restoration.
-
-Service Renew and Rebind while networking is polled, handle NoBinding
-with a bounded Request exchange, and apply accepted DNS changes to the
-environment and live resolver. Share per-message retransmission handling
-with initial acquisition. If Request recovery is exhausted, report failure
-and invalidate the unrecovered address until dhcp6 is run again.
-
-Accept replacement addresses, including replies that also withdraw the
-old address. Invalidate the old address and run DAD without blocking the
-shared poller before publishing the replacement. Track the published
-address separately while DAD is pending so closing and reopening the
-interface cannot restore an obsolete address as static configuration.
-Invalidate failed, expired or withdrawn addresses through lwIP so bound
-TCP connections are aborted and UDP cannot reuse the address. Keep
-servicing shared timers and unrelated IPv4 or link-local clients.
-
-Require exclusive runtime ownership when acquiring an address and retain
-interruptible, bounded waits and network-device rotation.
+Reject malformed IPv6 groups and overflowing decimal prefix lengths
+while accepting valid boundary values.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- cmd/Kconfig                       |   6 +-
- include/net-lwip.h                |   7 +
- lib/lwip/lwip/src/core/ipv6/nd6.c |   6 +
- lib/lwip/u-boot/lwip-hooks.h      |   4 +
- net/lwip/Makefile                 |   1 +
- net/lwip/dhcp6.c                  | 947 ++++++++++++++++++++++++++++++++++++++
- net/lwip/net-lwip.c               |  59 ++-
- 7 files changed, 1025 insertions(+), 5 deletions(-)
+ test/dm/Makefile    |    3 +
+ test/dm/lwip.c      |   26 ++
+ test/dm/lwip_ipv6.c | 1116 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 1145 insertions(+)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 31ddca5fec6..961cc53530c 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1987,11 +1987,11 @@ config CMD_BOOTP
- 	help
- 	  bootp - boot image via network using BOOTP/TFTP protocol
- 
--if NET_LEGACY
--
- config CMD_DHCP6
- 	bool "dhcp6"
- 	depends on IPV6
-+	select PROT_UDP_LWIP if NET_LWIP
-+	select IPV6_ROUTER_DISCOVERY if NET_LWIP
- 	help
- 	  Boot image via network using DHCPv6/TFTP protocol using IPv6.
- 
-@@ -2017,8 +2017,6 @@ config DHCP6_RAPID_COMMIT
- 
+diff --git a/test/dm/Makefile b/test/dm/Makefile
+index 112326c85bb..2ebebbc7483 100644
+--- a/test/dm/Makefile
++++ b/test/dm/Makefile
+@@ -55,6 +55,9 @@ endif
+ ifeq ($(CONFIG_NET_LWIP)$(CONFIG_PROT_UDP_LWIP),yy)
+ obj-y += lwip.o
  endif
++ifeq ($(CONFIG_NET_LWIP)$(CONFIG_CMD_PING6),yy)
++obj-y += lwip_ipv6.o
++endif
+ ifeq ($(CONFIG_NET_LWIP)$(CONFIG_CMD_DHCP),yy)
+ obj-y += lwip_dhcp.o
+ obj-y += lwip_dhcp_options.o
+diff --git a/test/dm/lwip.c b/test/dm/lwip.c
+index d152294d6f8..f5932a0ef97 100644
+--- a/test/dm/lwip.c
++++ b/test/dm/lwip.c
+@@ -42,6 +42,32 @@ struct lwip_test_recv_ctx {
+ 	int nested_poll_ret;
+ };
  
--endif
--
- config BOOTP_MAY_FAIL
- 	bool "Allow for the BOOTP/DHCP server to not be found"
- 	depends on CMD_BOOTP || CMD_DHCP
-diff --git a/include/net-lwip.h b/include/net-lwip.h
-index cf06a864adb..2f66732fd85 100644
---- a/include/net-lwip.h
-+++ b/include/net-lwip.h
-@@ -96,6 +96,13 @@ int net_lwip_ip6_aton(const char *text, ip6_addr_t *addr);
- int net_lwip_ip6_init(struct net_lwip_ctx *ctx);
- int net_lwip_ip6_ready(struct net_lwip_ctx *ctx, ip_addr_t *dest);
- int net_lwip_ip6_start(struct net_lwip_ctx *ctx);
-+int net_lwip_ip6_lease(struct net_lwip_ctx *ctx, const ip6_addr_t *addr,
-+		       u32 preferred, u32 valid);
-+int net_lwip_ip6_lease_commit(struct net_lwip_ctx *ctx);
-+bool net_lwip_is_exclusive(struct net_lwip_ctx *ctx);
-+int net_lwip_dhcp6_restore(struct net_lwip_ctx *ctx, const ip6_addr_t *addr);
-+void net_lwip_dhcp6_detach(struct netif *netif);
-+void net_lwip_dhcp6_poll(void);
- int net_lwip_ip6_prepare(struct net_lwip_ctx *ctx, ip_addr_t *dest);
- #endif
- int net_lwip_tftp_download(struct net_lwip_ctx *net, int argc, char *const argv[]);
-diff --git a/lib/lwip/lwip/src/core/ipv6/nd6.c b/lib/lwip/lwip/src/core/ipv6/nd6.c
-index 5117c9c5802..c3c4a6a558b 100644
---- a/lib/lwip/lwip/src/core/ipv6/nd6.c
-+++ b/lib/lwip/lwip/src/core/ipv6/nd6.c
-@@ -250,6 +250,12 @@ nd6_process_autoconfig_prefix(struct netif *netif,
-   u8_t addr_state;
-   s8_t i, free_idx;
- 
-+#ifdef LWIP_HOOK_ND6_AUTOCONFIG
-+  if (!LWIP_HOOK_ND6_AUTOCONFIG(netif)) {
-+    return;
-+  }
-+#endif
++static int dm_test_lwip_decimal(struct unit_test_state *uts)
++{
++	static const char *const invalid[] = {
++		"", "-1", "+1", " 1", "1 ", "1x", "65536", "4294967365",
++		"18446744073709551685", "99999999999999999999999999999999999",
++	};
++	const char *padded = "0000000000000000000000065535";
++	unsigned int value = 123;
 +
-   /* The caller already checks RFC 4862 Sec. 5.5.3 points (a) and (b). We do
-    * the rest, starting with checks for (c) and (d) here. */
-   valid_life = lwip_htonl(prefix_opt->valid_lifetime);
-diff --git a/lib/lwip/u-boot/lwip-hooks.h b/lib/lwip/u-boot/lwip-hooks.h
-index 11f6dd4a71c..c4bf364ba3c 100644
---- a/lib/lwip/u-boot/lwip-hooks.h
-+++ b/lib/lwip/u-boot/lwip-hooks.h
-@@ -23,6 +23,10 @@ int net_lwip_ip6_static_prefix(struct netif *netif, unsigned int index,
- const ip6_addr_t *net_lwip_ip6_gateway(struct netif *netif,
- 				       const ip6_addr_t *dest);
- #define LWIP_HOOK_ND6_GET_GW net_lwip_ip6_gateway
-+#ifdef CONFIG_CMD_DHCP6
-+/* DHCPv6 owns global-address lifetimes while SLAAC is disabled. */
-+#define LWIP_HOOK_ND6_AUTOCONFIG(netif) ((netif)->ip6_autoconfig_enabled)
-+#endif
- #ifdef CONFIG_PROT_ICMP_LWIP
- struct pbuf;
- void net_lwip_icmp6_dest_unreach(unsigned int code, struct pbuf *p);
-diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-index d010a62fa65..f1740e887ea 100644
---- a/net/lwip/Makefile
-+++ b/net/lwip/Makefile
-@@ -5,6 +5,7 @@ ifneq ($(filter y,$(CONFIG_CMD_BOOTP) $(CONFIG_CMD_DHCP)),)
- obj-y += dhcp.o
- endif
- obj-$(CONFIG_DNS) += dns.o
-+obj-$(CONFIG_CMD_DHCP6) += dhcp6.o
- obj-$(CONFIG_PROT_ICMP_LWIP) += icmp_unreach.o
- obj-$(CONFIG_CMD_NFS) += nfs.o
- obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
-diff --git a/net/lwip/dhcp6.c b/net/lwip/dhcp6.c
++	for (unsigned int i = 0; i < ARRAY_SIZE(invalid); i++) {
++		ut_asserteq(-EINVAL, net_lwip_parse_decimal(invalid[i], strlen(invalid[i]),
++							    U16_MAX, &value));
++		ut_asserteq(123, value);
++	}
++	ut_assertok(net_lwip_parse_decimal("0", 1, 0, &value));
++	ut_asserteq(0, value);
++	ut_asserteq(-EINVAL, net_lwip_parse_decimal("1", 1, 0, &value));
++	ut_assertok(net_lwip_parse_decimal(padded, strlen(padded), U16_MAX, &value));
++	ut_asserteq(U16_MAX, value);
++	ut_assertok(net_lwip_parse_decimal("4294967295/", 10, U32_MAX, &value));
++	ut_asserteq(U32_MAX, value);
++	ut_asserteq(-EINVAL, net_lwip_parse_decimal("4294967296", 10, U32_MAX, &value));
++	return 0;
++}
++DM_TEST(dm_test_lwip_decimal, 0);
++
+ #if CONFIG_IS_ENABLED(PROT_DNS_LWIP)
+ struct lwip_test_dns_ctx {
+ 	unsigned int callbacks;
+diff --git a/test/dm/lwip_ipv6.c b/test/dm/lwip_ipv6.c
 new file mode 100644
-index 00000000000..1068c842752
+index 00000000000..d82b936a96c
 --- /dev/null
-+++ b/net/lwip/dhcp6.c
-@@ -0,0 +1,947 @@
++++ b/test/dm/lwip_ipv6.c
+@@ -0,0 +1,1116 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/* Copyright 2026 James Hilliard <james.hilliard1@gmail.com> */
 +
 +#include <command.h>
 +#include <console.h>
++#include <dm.h>
 +#include <env.h>
 +#include <image.h>
++#include <lmb.h>
 +#include <malloc.h>
-+#include <net.h>
-+#include <rand.h>
-+#include <time.h>
-+#include <asm/unaligned.h>
++#include <lwip/inet_chksum.h>
++#include <lwip/ip6.h>
++#include <lwip/nd6.h>
++#include <lwip/dns.h>
++#include <lwip/timeouts.h>
++#include <lwip/tcp.h>
 +#include <lwip/udp.h>
-+#include <lwip/prot/dhcp6.h>
++#include <lwip-hooks.h>
++#include <lwip/priv/nd6_priv.h>
++#include <lwip/prot/icmp6.h>
++#include <lwip/prot/nd6.h>
++#include <lwip/prot/udp.h>
++#include <mapmem.h>
++#include <net.h>
++#include <stdio_dev.h>
++#include <time.h>
++#include <asm/eth.h>
++#include <asm/unaligned.h>
++#include <dm/test.h>
++#include <test/ut.h>
 +
-+#define DHCP6_DUID_MAX_LEN 130
-+#define DHCP6_HOST_MAX_LEN 256
-+#define DHCP6_OPTION_OPT_BOOTFILE_URL 59
-+#define DHCP6_OPTION_OPT_BOOTFILE_PARAM 60
-+#define DHCP6_OPTION_CLIENT_ARCH_TYPE 61
-+#define DHCP6_OPTION_NII 62
-+#define DHCP6_OPTION_SOL_MAX_RT 82
-+#define DHCP6_SOL_MAX_RT 3600
-+#define DHCP6_TIMEOUT_MS ((3ULL + 5ULL * CONFIG_NET_RETRY_COUNT) * 1000)
-+#define DHCP6_REQ_TIMEOUT_MS 1000
-+#define DHCP6_REQ_MAX_RT_MS 30000
-+#define DHCP6_REQ_MAX_TRIES 10
-+
-+struct dhcp6_offer {
-+	u8 server[DHCP6_DUID_MAX_LEN];
-+	u16 server_len;
-+	ip6_addr_t addr;
-+	u32 preferred;
-+	u32 valid;
-+	u32 t1;
-+	u32 t2;
-+	bool address;
-+	bool no_binding;
-+	bool failed;
-+	u32 sol_max_rt;
-+	u8 preference;
-+	ip6_addr_t dns[2];
-+	u8 dns_count;
-+	char url[1024];
-+	char pxe[256];
-+};
-+
-+struct dhcp6_client {
++struct ip6_test {
 +	struct net_lwip_ctx net;
-+	struct udp_pcb *pcb;
-+	u8 duid[10];
-+	u32 iaid;
-+	u32 xid;
-+	u8 message;
-+	ulong exchange_start;
-+	struct dhcp6_offer offer;
-+	/* The published address can differ from a replacement undergoing DAD. */
-+	ip6_addr_t env_addr;
-+	bool done;
-+	bool bound;
-+	bool dad_pending;
-+	ulong dad_start;
-+	u64 acquired;
-+	u64 next_send;
-+	u32 retry_ms;
-+	u32 sol_max_rt;
-+	u32 advertised_sol_max_rt;
-+	unsigned int tries;
++	unsigned int dad;
++	unsigned int neighbors;
++	ip6_addr_t last_neighbor;
++	unsigned int solicitations;
++	unsigned int echoes;
++	unsigned int bad_checksums;
++	unsigned int corrupt;
++	unsigned int dns_queries;
++	unsigned int dns4_queries;
++	bool drop_dns;
++	ip6_addr_t last_dns;
++	u32 rdnss_lifetime;
++	bool lease_conflict;
++	bool conflict;
++	bool advertise;
++	bool cancel;
 +};
 +
-+/* Lease metadata survives commands; PCBs never outlive their netif. */
-+static struct dhcp6_client *dhcp6_lease;
-+
-+static void dhcp6_begin(struct dhcp6_client *client, u8 message)
++static u16 ip6_test_checksum(struct ip6_hdr *ip, void *data, unsigned int len)
 +{
-+	client->message = message;
-+	client->xid = rand() & 0xffffff;
-+	client->exchange_start = get_timer(0);
-+	client->next_send = get_timer_us(0);
-+	client->retry_ms = 0;
-+	client->tries = 0;
-+	client->done = false;
-+	if (message == DHCP6_SOLICIT)
-+		client->advertised_sol_max_rt = 0;
++	struct pbuf p = { .payload = data, .len = len, .tot_len = len };
++	ip6_addr_t src, dst;
++
++	ip6_addr_copy_from_packed(src, ip->src);
++	ip6_addr_copy_from_packed(dst, ip->dest);
++	return ip6_chksum_pseudo(&p, IP6H_NEXTH(ip), len, &src, &dst);
 +}
 +
-+/* Advance only after checking the complete TLV against its enclosing option. */
-+static int dhcp6_option(const u8 **data, size_t *left, u16 *code,
-+			const u8 **value, u16 *len)
++static int ip6_test_reply(struct udevice *dev, const ip6_addr_t *src,
++			  const ip6_addr_t *dst, const void *payload, unsigned int len,
++			  u8 proto, bool bad_checksum)
 +{
-+	if (!*left)
-+		return 0;
-+	if (*left < 4)
-+		return -EINVAL;
-+	*code = get_unaligned_be16(*data);
-+	*len = get_unaligned_be16(*data + 2);
-+	if (*len > *left - 4)
-+		return -EINVAL;
-+	*value = *data + 4;
-+	*data += 4 + *len;
-+	*left -= 4 + *len;
-+	return 1;
-+}
++	struct eth_sandbox_priv *priv = dev_get_priv(dev);
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	struct ethernet_hdr *eth;
++	struct icmp6_hdr *icmp;
++	struct udp_hdr *udp;
++	struct ip6_hdr *ip;
++	unsigned int size = ETHER_HDR_SIZE + IP6_HLEN + len;
 +
-+static int dhcp6_status(const u8 *data, size_t left, bool *failed)
-+{
-+	const u8 *value;
-+	u16 code, len;
-+	int ret;
-+
-+	while ((ret = dhcp6_option(&data, &left, &code, &value, &len)) > 0) {
-+		if (code == DHCP6_OPTION_STATUS_CODE) {
-+			if (len < 2)
-+				return -EINVAL;
-+			*failed |= get_unaligned_be16(value) != 0;
-+		}
++	if (priv->recv_packets >= PKTBUFSRX || size > PKTSIZE_ALIGN)
++		return -ENOSPC;
++	eth = (void *)priv->recv_packet_buffer[priv->recv_packets];
++	memset(eth, 0, size);
++	memcpy(eth->et_dest, pdata->enetaddr, ARP_HLEN);
++	memcpy(eth->et_src, priv->fake_host_hwaddr, ARP_HLEN);
++	eth->et_protlen = htons(0x86dd);
++	ip = (void *)(eth + 1);
++	IP6H_VTCFL_SET(ip, 6, 0, 0);
++	IP6H_PLEN_SET(ip, len);
++	IP6H_NEXTH_SET(ip, proto);
++	IP6H_HOPLIM_SET(ip, 255);
++	ip6_addr_copy_to_packed(ip->src, *src);
++	ip6_addr_copy_to_packed(ip->dest, *dst);
++	icmp = (void *)(ip + 1);
++	memcpy(icmp, payload, len);
++	if (proto == IP6_NEXTH_UDP) {
++		udp = (void *)icmp;
++		udp->chksum = 0;
++		udp->chksum = ip6_test_checksum(ip, udp, len);
++		if (!udp->chksum)
++			udp->chksum = 0xffff;
++	} else if (proto == IP6_NEXTH_TCP) {
++		put_unaligned(0, (u16 *)((u8 *)icmp + 16));
++		put_unaligned(ip6_test_checksum(ip, icmp, len), (u16 *)((u8 *)icmp + 16));
++	} else {
++		icmp->chksum = 0;
++		icmp->chksum = ip6_test_checksum(ip, icmp, len);
++		if (bad_checksum)
++			icmp->chksum ^= htons(1);
 +	}
-+	return ret;
++	priv->recv_packet_length[priv->recv_packets++] = size;
++
++	return 0;
 +}
 +
-+static int dhcp6_ia(struct dhcp6_client *client, const u8 *data, size_t left,
-+		    struct dhcp6_offer *offer)
++static int ip6_test_na(struct udevice *dev, struct ns_header *ns,
++		       const ip6_addr_t *dest, bool dad)
 +{
-+	const u8 *value;
-+	ip6_addr_t addr;
-+	u16 code, len;
-+	u32 preferred, valid;
-+	int ret;
++	struct eth_sandbox_priv *priv = dev_get_priv(dev);
++	struct {
++		struct na_header na;
++		struct lladdr_option ll;
++	} reply = {};
++	ip6_addr_t src, dst = *dest;
 +
-+	while ((ret = dhcp6_option(&data, &left, &code, &value, &len)) > 0) {
-+		if (code == DHCP6_OPTION_STATUS_CODE) {
-+			if (len < 2)
-+				return -EINVAL;
-+			if (client->bound && get_unaligned_be16(value) == DHCP6_STATUS_NOBINDING)
-+				offer->no_binding = true;
-+			else if (get_unaligned_be16(value))
-+				offer->failed = true;
-+		}
-+		if (code != DHCP6_OPTION_IAADDR)
-+			continue;
-+		if (len < 24 || dhcp6_status(value + 24, len - 24, &offer->failed))
++	ip6_addr_copy_from_packed(src, ns->target_address);
++	if (dad)
++		ip6addr_aton("ff02::1", &dst);
++	reply.na.type = ICMP6_TYPE_NA;
++	reply.na.flags = ND6_FLAG_OVERRIDE | (dad ? 0 : ND6_FLAG_SOLICITED);
++	reply.na.target_address = ns->target_address;
++	reply.ll.type = ND6_OPTION_TYPE_TARGET_LLADDR;
++	reply.ll.length = 1;
++	memcpy(reply.ll.addr, priv->fake_host_hwaddr, ARP_HLEN);
++
++	return ip6_test_reply(dev, &src, &dst, &reply, sizeof(reply), IP6_NEXTH_ICMP6, false);
++}
++
++static int ip6_test_ra_lifetimes(struct udevice *dev, u32 valid, u32 preferred)
++{
++	struct eth_sandbox_priv *priv = dev_get_priv(dev);
++	struct {
++		struct ra_header ra;
++		struct prefix_option prefix;
++		struct lladdr_option ll;
++		struct rdnss_option dns;
++	} reply = {};
++	ip6_addr_t src, dst, prefix;
++
++	ip6addr_aton("fe80::1", &src);
++	ip6addr_aton("ff02::1", &dst);
++	ip6addr_aton("2001:db8:1::", &prefix);
++	reply.ra.type = ICMP6_TYPE_RA;
++	reply.ra.current_hop_limit = 64;
++	reply.ra.router_lifetime = htons(1800);
++	reply.prefix.type = ND6_OPTION_TYPE_PREFIX_INFO;
++	reply.prefix.length = 4;
++	reply.prefix.prefix_length = 64;
++	reply.prefix.flags = ND6_PREFIX_FLAG_ON_LINK | ND6_PREFIX_FLAG_AUTONOMOUS;
++	reply.prefix.valid_lifetime = htonl(valid);
++	reply.prefix.preferred_lifetime = htonl(preferred);
++	ip6_addr_copy_to_packed(reply.prefix.prefix, prefix);
++	reply.ll.type = ND6_OPTION_TYPE_SOURCE_LLADDR;
++	reply.ll.length = 1;
++	memcpy(reply.ll.addr, priv->fake_host_hwaddr, ARP_HLEN);
++	reply.dns.type = ND6_OPTION_TYPE_RDNSS;
++	reply.dns.length = 3;
++	reply.dns.lifetime = htonl(((struct ip6_test *)priv->priv)->rdnss_lifetime);
++	ip6_addr_copy_to_packed(reply.dns.rdnss_address[0], src);
++
++	return ip6_test_reply(dev, &src, &dst, &reply, sizeof(reply), IP6_NEXTH_ICMP6, false);
++}
++
++static int ip6_test_ra(struct udevice *dev)
++{
++	return ip6_test_ra_lifetimes(dev, 1800, 900);
++}
++
++static int ip6_test_udp(struct udevice *dev, struct ip6_hdr *ip, u16 port,
++			const void *data, unsigned int len)
++{
++	u8 packet[1200];
++	struct udp_hdr *udp = (void *)packet, *request = (void *)(ip + 1);
++	ip6_addr_t src, dst;
++
++	if (len > sizeof(packet) - sizeof(*udp))
++		return -ENOSPC;
++	udp->src = htons(port);
++	udp->dest = request->src;
++	udp->len = htons(sizeof(*udp) + len);
++	memcpy(udp + 1, data, len);
++	ip6_addr_copy_from_packed(src, ip->dest);
++	if (ip6_addr_ismulticast(&src))
++		ip6addr_aton("fe80::2", &src);
++	ip6_addr_copy_from_packed(dst, ip->src);
++	return ip6_test_reply(dev, &src, &dst, packet, sizeof(*udp) + len, IP6_NEXTH_UDP, false);
++}
++
++static int ip6_test_dns_answer(struct ip6_test *test, const u8 *query,
++			       unsigned int len, u8 *reply, size_t size)
++{
++	ip6_addr_t addr;
++	u8 *answer;
++
++	if (len < 16 || len > size - 28)
++		return -EINVAL;
++	/* These tests explicitly select AAAA and IN. */
++	if (get_unaligned_be16(query + len - 4) != 28 || get_unaligned_be16(query + len - 2) != 1)
++		return -EINVAL;
++	test->dns_queries++;
++	memcpy(reply, query, len);
++	put_unaligned_be16(0x8180, reply + 2);
++	put_unaligned_be16(1, reply + 6);
++	answer = reply + len;
++	put_unaligned_be16(0xc00c, answer);
++	put_unaligned_be16(28, answer + 2);
++	put_unaligned_be16(1, answer + 4);
++	put_unaligned_be32(30, answer + 6);
++	put_unaligned_be16(16, answer + 10);
++	ip6addr_aton("fe80::2", &addr);
++	memcpy(answer + 12, addr.addr, 16);
++	return len + 28;
++}
++
++static int ip6_test_dns_reply(struct udevice *dev, struct ip6_hdr *ip)
++{
++	struct ip6_test *test = ((struct eth_sandbox_priv *)dev_get_priv(dev))->priv;
++	u8 *query = (void *)((struct udp_hdr *)(ip + 1) + 1), reply[512];
++	int len;
++
++	if (test->drop_dns) {
++		test->dns_queries++;
++		timer_test_add_offset(11000);
++		return 0;
++	}
++	ip6_addr_copy_from_packed(test->last_dns, ip->dest);
++	len = ip6_test_dns_answer(test, query, IP6H_PLEN(ip) - UDP_HLEN,
++				  reply, sizeof(reply));
++	return len < 0 ? len : ip6_test_udp(dev, ip, 53, reply, len);
++}
++
++static int ip6_test_ipv4(struct udevice *dev, void *packet, unsigned int len)
++{
++	struct eth_sandbox_priv *priv = dev_get_priv(dev);
++	struct ip6_test *test = priv->priv;
++	struct ethernet_hdr *eth = packet, *reply_eth;
++	struct ip_udp_hdr *ip = (void *)(eth + 1), *reply_ip;
++	int size;
++
++	if (!sandbox_eth_arp_req_to_reply(dev, packet, len) ||
++	    !sandbox_eth_ping_req_to_reply(dev, packet, len))
++		return 0;
++	if (ntohs(eth->et_protlen) != PROT_IP || len < ETHER_HDR_SIZE + IP_UDP_HDR_SIZE ||
++	    ip->ip_hl_v != 0x45 || ip->ip_p != IPPROTO_UDP || ntohs(ip->udp_dst) != 53)
++		return 0;
++	if (priv->recv_packets >= PKTBUFSRX || ntohs(ip->udp_len) < UDP_HDR_SIZE ||
++	    ntohs(ip->udp_len) > len - ETHER_HDR_SIZE - IP_HDR_SIZE)
++		return -EINVAL;
++	reply_eth = (void *)priv->recv_packet_buffer[priv->recv_packets];
++	reply_ip = (void *)(reply_eth + 1);
++	size = ip6_test_dns_answer(test, (void *)(ip + 1), ntohs(ip->udp_len) - UDP_HDR_SIZE,
++				   (void *)(reply_ip + 1), 512);
++	if (size < 0)
++		return size;
++	memcpy(reply_eth, eth, ETHER_HDR_SIZE + IP_UDP_HDR_SIZE);
++	memcpy(reply_eth->et_dest, eth->et_src, ARP_HLEN);
++	memcpy(reply_eth->et_src, priv->fake_host_hwaddr, ARP_HLEN);
++	reply_ip->ip_src = ip->ip_dst;
++	reply_ip->ip_dst = ip->ip_src;
++	reply_ip->ip_len = htons(IP_UDP_HDR_SIZE + size);
++	reply_ip->ip_sum = 0;
++	reply_ip->ip_sum = compute_ip_checksum(reply_ip, IP_HDR_SIZE);
++	reply_ip->udp_src = ip->udp_dst;
++	reply_ip->udp_dst = ip->udp_src;
++	reply_ip->udp_len = htons(UDP_HDR_SIZE + size);
++	reply_ip->udp_xsum = 0;
++	priv->recv_packet_length[priv->recv_packets++] = ETHER_HDR_SIZE + IP_UDP_HDR_SIZE + size;
++	test->dns4_queries++;
++	return 0;
++}
++
++static int ip6_test_tx(struct udevice *dev, void *packet, unsigned int len)
++{
++	struct eth_sandbox_priv *priv = dev_get_priv(dev);
++	struct ip6_test *test = priv->priv;
++	struct ethernet_hdr *eth = packet;
++	struct ip6_hdr *ip = (void *)(eth + 1);
++	struct icmp6_echo_hdr echo;
++	struct ns_header *ns;
++	ip6_addr_t src, dst;
++	unsigned int plen;
++	u8 *icmp = (void *)(ip + 1);
++
++	if (len < ETHER_HDR_SIZE)
++		return 0;
++	if (ntohs(eth->et_protlen) != 0x86dd)
++		return ip6_test_ipv4(dev, packet, len);
++	if (len < ETHER_HDR_SIZE + IP6_HLEN)
++		return 0;
++	if (IP6H_NEXTH(ip) == IP6_NEXTH_UDP) {
++		struct udp_hdr *udp = (void *)(ip + 1);
++
++		if (IP6H_PLEN(ip) < UDP_HLEN || len < ETHER_HDR_SIZE + IP6_HLEN + IP6H_PLEN(ip))
 +			return -EINVAL;
-+		preferred = get_unaligned_be32(value + 16);
-+		valid = get_unaligned_be32(value + 20);
-+		if (preferred > valid)
-+			continue;
-+		/* A withdrawal only applies to our current address. */
-+		if (!valid && (!client->bound || memcmp(value, client->offer.addr.addr, 16)))
-+			continue;
-+		/* Prefer a usable address to a withdrawal, regardless of option order. */
-+		if (offer->address && (offer->valid || !valid))
-+			continue;
-+		memset(&addr, 0, sizeof(addr));
-+		memcpy(addr.addr, value, 16);
-+		if (ip6_addr_isany(&addr) || ip6_addr_ismulticast(&addr) ||
-+		    ip6_addr_islinklocal(&addr) || ip6_addr_isloopback(&addr) ||
-+		    ip6_addr_isipv4mappedipv6(&addr) || ip6_addr_isipv4compat(&addr))
-+			continue;
-+		ip6_addr_copy(offer->addr, addr);
-+		offer->preferred = preferred;
-+		offer->valid = valid;
-+		offer->address = true;
++		if (ntohs(udp->dest) == 53)
++			return ip6_test_dns_reply(dev, ip);
++		return 0;
 +	}
-+	return ret;
-+}
-+
-+static int dhcp6_text(char *dest, size_t size, const u8 *value, u16 len)
-+{
-+	if (!len || len >= size || memchr(value, 0, len))
++	if (IP6H_NEXTH(ip) != IP6_NEXTH_ICMP6)
++		return 0;
++	plen = IP6H_PLEN(ip);
++	if (plen < sizeof(struct icmp6_hdr) || len < ETHER_HDR_SIZE + IP6_HLEN + plen)
 +		return -EINVAL;
-+	memcpy(dest, value, len);
-+	dest[len] = 0;
-+	return 0;
-+}
-+
-+static int dhcp6_parse(struct dhcp6_client *client, const u8 *data, size_t left,
-+		       struct dhcp6_offer *offer, bool reply)
-+{
-+	bool client_id = false, ia = false, rapid = false;
-+	const u8 *value;
-+	u16 code, len;
-+	int ret;
-+
-+	while ((ret = dhcp6_option(&data, &left, &code, &value, &len)) > 0) {
-+		switch (code) {
-+		case DHCP6_OPTION_CLIENTID:
-+			if (client_id || len != sizeof(client->duid) ||
-+			    memcmp(value, client->duid, len))
-+				return -EINVAL;
-+			client_id = true;
-+			break;
-+		case DHCP6_OPTION_SERVERID:
-+			if (offer->server_len || len < 2 || len > sizeof(offer->server))
-+				return -EINVAL;
-+			memcpy(offer->server, value, len);
-+			offer->server_len = len;
-+			break;
-+		case DHCP6_OPTION_IA_NA:
-+			if (len < 12)
-+				return -EINVAL;
-+			if (get_unaligned_be32(value) != client->iaid)
-+				break;
-+			if (ia || (get_unaligned_be32(value + 8) &&
-+				   get_unaligned_be32(value + 4) > get_unaligned_be32(value + 8)))
-+				return -EINVAL;
-+			ia = true;
-+			offer->t1 = get_unaligned_be32(value + 4);
-+			offer->t2 = get_unaligned_be32(value + 8);
-+			if (dhcp6_ia(client, value + 12, len - 12, offer))
-+				return -EINVAL;
-+			break;
-+		case DHCP6_OPTION_STATUS_CODE:
-+			if (len < 2)
-+				return -EINVAL;
-+			offer->failed |= get_unaligned_be16(value) != 0;
-+			break;
-+		case DHCP6_OPTION_PREFERENCE:
-+			if (len != 1)
-+				return -EINVAL;
-+			offer->preference = *value;
-+			break;
-+		case DHCP6_OPTION_RAPID_COMMIT:
-+			if (len || rapid)
-+				return -EINVAL;
-+			rapid = true;
-+			break;
-+		case DHCP6_OPTION_SOL_MAX_RT:
-+			if (len != 4)
-+				return -EINVAL;
-+			offer->sol_max_rt = get_unaligned_be32(value);
-+			if (offer->sol_max_rt < 60 || offer->sol_max_rt > 86400)
-+				offer->sol_max_rt = 0;
-+			break;
-+		case DHCP6_OPTION_DNS_SERVERS:
-+			if (!len || len % 16)
-+				return -EINVAL;
-+			offer->dns_count = min_t(unsigned int, len / 16, ARRAY_SIZE(offer->dns));
-+			for (unsigned int i = 0; i < offer->dns_count; i++) {
-+				memcpy(offer->dns[i].addr, value + 16 * i, 16);
-+				if (ip6_addr_isany(&offer->dns[i]) ||
-+				    ip6_addr_ismulticast(&offer->dns[i]))
-+					return -EINVAL;
-+			}
-+			break;
-+		case DHCP6_OPTION_OPT_BOOTFILE_URL:
-+			if (offer->url[0] || dhcp6_text(offer->url, sizeof(offer->url), value, len))
-+				return -EINVAL;
-+			break;
-+		case DHCP6_OPTION_OPT_BOOTFILE_PARAM:
-+			if (IS_ENABLED(CONFIG_DHCP6_PXE_DHCP_OPTION)) {
-+				bool first = true;
-+
-+				while (len) {
-+					u16 size;
-+
-+					if (len < 2)
-+						return -EINVAL;
-+					size = get_unaligned_be16(value);
-+					if (size > len - 2)
-+						return -EINVAL;
-+					if (first && dhcp6_text(offer->pxe, sizeof(offer->pxe),
-+							       value + 2, size))
-+						return -EINVAL;
-+					first = false;
-+					value += size + 2;
-+					len -= size + 2;
-+				}
-+			}
-+			break;
++	if (ip6_test_checksum(ip, icmp, plen))
++		test->bad_checksums++;
++	ip6_addr_copy_from_packed(src, ip->src);
++	ip6_addr_copy_from_packed(dst, ip->dest);
++	switch (*icmp) {
++	case ICMP6_TYPE_NS:
++		if (plen < sizeof(*ns))
++			return -EINVAL;
++		ns = (void *)icmp;
++		if (ip6_addr_isany(&src)) {
++			test->dad++;
++			if (test->cancel)
++				console_in_puts("\x03");
++			if (test->conflict ||
++			    (test->lease_conflict &&
++			     !memcmp(&ns->target_address, "\x20\x01", 2)))
++				return ip6_test_na(dev, ns, &src, true);
++			timer_test_add_offset(1100);
++			return 0;
 +		}
-+	}
-+	if (ret || !client_id || !offer->server_len)
-+		return -EINVAL;
-+	if (reply && client->message == DHCP6_SOLICIT)
-+		return IS_ENABLED(CONFIG_DHCP6_RAPID_COMMIT) && rapid ? 0 : -EINVAL;
-+	if (reply && client->message != DHCP6_REBIND &&
-+	    (offer->server_len != client->offer.server_len ||
-+		      memcmp(offer->server, client->offer.server, offer->server_len)))
-+		return -EINVAL;
-+	return 0;
-+}
-+
-+static void dhcp6_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p,
-+		       const ip_addr_t *addr, u16 port)
-+{
-+	struct dhcp6_client *client = arg;
-+	struct dhcp6_offer *offer;
-+	u8 *data;
-+	bool reply;
-+
-+	if (client->done || !client->message || port != DHCP6_SERVER_PORT || !IP_IS_V6(addr) ||
-+	    p->tot_len < 4 || p->tot_len > 4096)
-+		goto out;
-+	data = malloc(p->tot_len);
-+	offer = calloc(1, sizeof(*offer));
-+	if (!data || !offer)
-+		goto free;
-+	pbuf_copy_partial(p, data, p->tot_len, 0);
-+	if ((((u32)data[1] << 16) | (data[2] << 8) | data[3]) != client->xid)
-+		goto free;
-+	reply = data[0] == DHCP6_REPLY;
-+	if (!reply && (client->message != DHCP6_SOLICIT || data[0] != DHCP6_ADVERTISE))
-+		goto free;
-+	if (dhcp6_parse(client, data + 4, p->tot_len - 4, offer, reply))
-+		goto free;
-+	/* Retry parameters also apply to valid replies that cannot offer an address. */
-+	if (offer->sol_max_rt) {
-+		if (!reply) {
-+			if (!client->advertised_sol_max_rt)
-+				client->advertised_sol_max_rt = offer->sol_max_rt;
-+			else if (client->advertised_sol_max_rt != offer->sol_max_rt)
-+				client->advertised_sol_max_rt = U32_MAX;
-+			/* Conflicting Advertises keep the default for this exchange. */
-+			client->sol_max_rt = client->advertised_sol_max_rt == U32_MAX ?
-+					     DHCP6_SOL_MAX_RT : client->advertised_sol_max_rt;
-+		} else {
-+			client->sol_max_rt = offer->sol_max_rt;
++		test->neighbors++;
++		ip6_addr_copy_from_packed(test->last_neighbor, ns->target_address);
++		return ip6_test_na(dev, ns, &src, false);
++	case ICMP6_TYPE_RS:
++		test->solicitations++;
++		if (test->advertise)
++			return ip6_test_ra(dev);
++		return 0;
++	case ICMP6_TYPE_EREQ:
++		test->echoes++;
++		if (plen != sizeof(echo))
++			return -EINVAL;
++		memcpy(&echo, icmp, sizeof(echo));
++		echo.type = ICMP6_TYPE_EREP;
++		if (test->echoes == 1) {
++			if (test->corrupt == 2)
++				echo.type = ICMP6_TYPE_EREQ;
++			if (test->corrupt == 3)
++				echo.seqno ^= htons(1);
 +		}
-+	}
-+	if (offer->failed || (!offer->address && !offer->no_binding))
-+		goto free;
-+	if (reply && offer->no_binding) {
-+		if (client->message != DHCP6_RENEW && client->message != DHCP6_REBIND)
-+			goto free;
-+		dhcp6_begin(client, DHCP6_REQUEST);
-+		client->next_send += 1000000;
-+		memcpy(client->offer.server, offer->server, offer->server_len);
-+		client->offer.server_len = offer->server_len;
-+		goto free;
-+	}
-+	if (reply || !client->offer.server_len || offer->preference > client->offer.preference)
-+		client->offer = *offer;
-+	if (reply) {
-+		client->done = true;
-+		client->acquired = get_timer_us(0);
-+	}
-+free:
-+	free(offer);
-+	free(data);
-+out:
-+	pbuf_free(p);
-+}
-+
-+static u8 *dhcp6_add(u8 *p, u16 code, const void *value, u16 len)
-+{
-+	put_unaligned_be16(code, p);
-+	put_unaligned_be16(len, p + 2);
-+	if (len)
-+		memcpy(p + 4, value, len);
-+	return p + 4 + len;
-+}
-+
-+static int dhcp6_send(struct dhcp6_client *client)
-+{
-+	u8 packet[512], ia[40] = {}, elapsed[2], vendor[12], arch[2];
-+	const u8 nii[] = { 1, 0, 0 };
-+	u8 oro[] = { 0, DHCP6_OPTION_OPT_BOOTFILE_URL, 0, DHCP6_OPTION_DNS_SERVERS,
-+		     0, DHCP6_OPTION_SOL_MAX_RT, 0, DHCP6_OPTION_OPT_BOOTFILE_PARAM };
-+	ip_addr_t dest;
-+	struct pbuf *buf;
-+	u8 *p = packet;
-+	u16 ia_len = 12;
-+	err_t err;
-+
-+	if (!ip6_addr_isvalid(netif_ip6_addr_state(client->net.netif, 0)))
-+		return -EADDRNOTAVAIL;
-+
-+	*p++ = client->message;
-+	*p++ = client->xid >> 16;
-+	*p++ = client->xid >> 8;
-+	*p++ = client->xid;
-+	p = dhcp6_add(p, DHCP6_OPTION_CLIENTID, client->duid, sizeof(client->duid));
-+	put_unaligned_be16(min_t(ulong, get_timer(client->exchange_start) / 10, U16_MAX), elapsed);
-+	p = dhcp6_add(p, DHCP6_OPTION_ELAPSED_TIME, elapsed, sizeof(elapsed));
-+	put_unaligned_be32(client->iaid, ia);
-+	if (client->message != DHCP6_SOLICIT) {
-+		if (client->message != DHCP6_REBIND)
-+			p = dhcp6_add(p, DHCP6_OPTION_SERVERID, client->offer.server,
-+				      client->offer.server_len);
-+		put_unaligned_be16(DHCP6_OPTION_IAADDR, ia + 12);
-+		put_unaligned_be16(24, ia + 14);
-+		memcpy(ia + 16, client->offer.addr.addr, 16);
-+		ia_len = sizeof(ia);
-+	}
-+	p = dhcp6_add(p, DHCP6_OPTION_IA_NA, ia, ia_len);
-+	p = dhcp6_add(p, DHCP6_OPTION_ORO, oro, IS_ENABLED(CONFIG_DHCP6_PXE_DHCP_OPTION) ? 8 : 6);
-+	if (IS_ENABLED(CONFIG_DHCP6_RAPID_COMMIT) && client->message == DHCP6_SOLICIT)
-+		p = dhcp6_add(p, DHCP6_OPTION_RAPID_COMMIT, NULL, 0);
-+	if (CONFIG_DHCP_PXE_CLIENTARCH != 0xff) {
-+		put_unaligned_be16(CONFIG_DHCP_PXE_CLIENTARCH, arch);
-+		p = dhcp6_add(p, DHCP6_OPTION_CLIENT_ARCH_TYPE, arch, sizeof(arch));
-+	}
-+	put_unaligned_be32(CONFIG_DHCP6_ENTERPRISE_ID, vendor);
-+	put_unaligned_be16(6, vendor + 4);
-+	memcpy(vendor + 6, "U-Boot", 6);
-+	p = dhcp6_add(p, DHCP6_OPTION_VENDOR_CLASS, vendor, sizeof(vendor));
-+	p = dhcp6_add(p, DHCP6_OPTION_NII, nii, sizeof(nii));
-+	buf = pbuf_alloc(PBUF_TRANSPORT, p - packet, PBUF_RAM);
-+	if (!buf)
-+		return -ENOMEM;
-+	pbuf_take(buf, packet, p - packet);
-+	ipaddr_aton("ff02::1:2", &dest);
-+	ip6_addr_assign_zone(ip_2_ip6(&dest), IP6_MULTICAST, client->net.netif);
-+	err = udp_sendto_if_src(client->pcb, buf, &dest, DHCP6_SERVER_PORT, client->net.netif,
-+				netif_ip_addr6(client->net.netif, 0));
-+	pbuf_free(buf);
-+	return err == ERR_OK ? 0 : -EIO;
-+}
-+
-+static int dhcp6_transmit(struct dhcp6_client *client)
-+{
-+	u32 initial, max_rt, base, rt;
-+	int ret;
-+
-+	switch (client->message) {
-+	case DHCP6_REQUEST:
-+		if (client->tries >= DHCP6_REQ_MAX_TRIES)
-+			return -ETIMEDOUT;
-+		initial = DHCP6_REQ_TIMEOUT_MS;
-+		max_rt = DHCP6_REQ_MAX_RT_MS;
-+		break;
-+	case DHCP6_SOLICIT:
-+		initial = 1000;
-+		max_rt = (client->sol_max_rt ?: DHCP6_SOL_MAX_RT) * 1000;
-+		break;
++		return ip6_test_reply(dev, &dst, &src, &echo, sizeof(echo),
++				     IP6_NEXTH_ICMP6, test->echoes == 1 && test->corrupt == 1);
 +	default:
-+		initial = 10000;
-+		max_rt = 600000;
-+		break;
++		return 0;
 +	}
-+	ret = dhcp6_send(client);
-+	base = client->tries ? client->retry_ms : initial;
-+	rt = client->tries ? 2 * base : base;
-+	/* The first Solicit RT must exceed SOL_TIMEOUT (RFC 8415, 18.2.1). */
-+	if (!client->tries && client->message == DHCP6_SOLICIT)
-+		rt += 1 + rand() % (base / 10);
-+	else
-+		rt = rt - base / 10 + rand() % (base / 5 + 1);
-+	if (rt > max_rt)
-+		rt = max_rt - max_rt / 10 + rand() % (max_rt / 5 + 1);
-+	client->retry_ms = rt;
-+	client->next_send = get_timer_us(0) + (u64)rt * 1000;
-+	client->tries++;
-+	return ret;
 +}
 +
-+static int dhcp6_attach(struct dhcp6_client *client)
++static int ip6_test_config(struct unit_test_state *uts, struct ip6_test *test)
 +{
-+	client->pcb = udp_new_ip_type(IPADDR_TYPE_V6);
-+	if (!client->pcb)
-+		return -ENOMEM;
-+	if (udp_bind(client->pcb, IP6_ADDR_ANY, DHCP6_CLIENT_PORT) != ERR_OK) {
-+		udp_remove(client->pcb);
-+		client->pcb = NULL;
-+		return -EADDRINUSE;
++	static const char * const invalid[] = {
++		"::", "::1", "ff02::1", "1.2.3.4", "2001:db8::1/129",
++		"2001:db8::1/", "2001:db8::1/-1", "2001:db8::1/+1",
++		"2001:db8::1/64junk", "2001:db8::1%et0", "2001:db8::1junk",
++		"2001:db8::1::2", "2001:db8::12345", "::ffff:c000:201",
++		"2001:db8:0:0:0:0:0:1:", ":2001:db8:0:0:0:0:0:1", "2001:db8:1",
++		"2001:db8:0:0:0:0:1:", ":2001:db8:0:0:0:0:1", "2001:db8:::1",
++		"2001:db8:0:0:0:0:0:1::", "::2001:db8:0:0:0:0:0:1",
++		"2001:db8::10/18446744073709551680", "2001:db8::10/4294967360",
++	};
++	static const char *const valid[] = {
++		"2001:db8:0:0:0:0:0:1", "2001:db8::1", "2001:db8:0:0:0:0:1::",
++		"::2001:db8:0:0:0:0:1", "2001::", "2001:0:0:0:0:0:0:0",
++	};
++	struct net_lwip_ctx other = {};
++	ip6_addr_t expected;
++	ip4_addr_t ip4;
++	unsigned int i;
++
++	for (i = 0; i < ARRAY_SIZE(valid); i++)
++		ut_assertok(net_lwip_ip6_aton(valid[i], &expected));
++	ut_assertok(net_lwip_start(&test->net, NET_LWIP_ADDR_ENV_FLEXIBLE));
++	ip4 = *netif_ip4_addr(test->net.netif);
++	for (i = 0; i < ARRAY_SIZE(invalid); i++) {
++		ut_assertok(env_set("ip6addr", invalid[i]));
++		ut_asserteq(-EINVAL, net_lwip_ip6_init(&test->net));
++		ut_assert(ip6_addr_isinvalid(netif_ip6_addr_state(test->net.netif, 0)));
++		ut_assert(ip4_addr_cmp(&ip4, netif_ip4_addr(test->net.netif)));
 +	}
-+	udp_bind_netif(client->pcb, client->net.netif);
-+	udp_recv(client->pcb, dhcp6_recv, client);
++	ut_assertok(env_set("ip6addr", "2001:db8:1::10/00064"));
++	ut_assertok(env_set("gatewayip6", "ff02::1"));
++	ut_asserteq(-EINVAL, net_lwip_ip6_init(&test->net));
++	ut_assertok(env_set("gatewayip6", "fe80::1"));
++	ut_assertok(net_lwip_ip6_init(&test->net));
++	ip6addr_aton("2001:db8:1::10", &expected);
++	ut_assert(ip6_addr_zoneless_eq(&expected, netif_ip6_addr(test->net.netif, 1)));
++	ut_asserteq(IP6_ADDR_TENTATIVE, netif_ip6_addr_state(test->net.netif, 1));
++	ut_assertok(net_lwip_ip6_init(&test->net));
++	ut_assertok(env_set("ip6addr", "2001:db8:1::11"));
++	ut_asserteq(-EBUSY, net_lwip_ip6_init(&test->net));
++	ut_assert(ip6_addr_zoneless_eq(&expected, netif_ip6_addr(test->net.netif, 1)));
++	ut_assertok(net_lwip_start(&other, NET_LWIP_ADDR_ENV_STRICT));
++	net_lwip_stop(&other);
++	ut_assert(ip4_addr_cmp(&ip4, netif_ip4_addr(test->net.netif)));
++	net_lwip_stop(&test->net);
++	ut_assertnull(netif_default);
++	ut_assertok(net_lwip_start(&test->net, NET_LWIP_ADDR_ENV_FLEXIBLE));
++	ut_assertok(net_lwip_ip6_init(&test->net));
++	ip6addr_aton("2001:db8:1::11", &expected);
++	ut_assert(ip6_addr_zoneless_eq(&expected, netif_ip6_addr(test->net.netif, 1)));
++
 +	return 0;
 +}
 +
-+void net_lwip_dhcp6_detach(struct netif *netif)
++static int ip6_test_ping(struct unit_test_state *uts, struct ip6_test *test)
 +{
-+	if (!dhcp6_lease || dhcp6_lease->net.netif != netif)
-+		return;
-+	if (dhcp6_lease->pcb)
-+		udp_remove(dhcp6_lease->pcb);
-+	dhcp6_lease->pcb = NULL;
-+	memset(&dhcp6_lease->net, 0, sizeof(dhcp6_lease->net));
++	unsigned int i;
++
++	/* A corrupt reply must not complete a command; a later reply can. */
++	for (i = 0; i < 4; i++) {
++		test->echoes = 0;
++		test->corrupt = i;
++		ut_assertok(run_command("ping6 fe80::2", 0));
++		ut_asserteq(i ? 2 : 1, test->echoes);
++		ut_assertnull(netif_default);
++	}
++	ut_assert(test->dad >= 4);
++	ut_assert(test->neighbors >= 4);
++	ut_asserteq(0, test->bad_checksums);
++	test->corrupt = 0;
++	ut_assertok(env_set("ip6addr", "2001:db8:1::10/64"));
++	ut_assertok(run_command("ping6 2001:db8:1::2", 0));
++	ut_assertok(env_set("gatewayip6", "fe80::1"));
++	ut_assertok(run_command("ping6 2001:db8:2::2", 0));
++	ut_assertnull(netif_default);
++
++	return 0;
 +}
 +
-+static void dhcp6_forget(void)
++static int ip6_test_dad(struct unit_test_state *uts, struct ip6_test *test)
 +{
-+	if (!dhcp6_lease)
-+		return;
-+	net_lwip_dhcp6_detach(dhcp6_lease->net.netif);
-+	free(dhcp6_lease);
-+	dhcp6_lease = NULL;
++	test->conflict = true;
++	ut_asserteq(CMD_RET_FAILURE, run_command("ping6 fe80::2", 0));
++	ut_asserteq(0, test->echoes);
++	ut_assert(test->dad);
++	ut_assertnull(netif_default);
++	test->conflict = false;
++	test->cancel = true;
++	ut_asserteq(CMD_RET_FAILURE, run_command("ping6 fe80::2", 0));
++	ut_asserteq(0, test->echoes);
++	ut_assertnull(netif_default);
++	ut_asserteq(0, test->bad_checksums);
++
++	return 0;
 +}
 +
-+static int dhcp6_discard(void)
++static int ip6_test_dad_scope(struct unit_test_state *uts, struct ip6_test *test)
 +{
-+	const char *value = env_get("ip6addr");
-+	char text[IP6ADDR_STRLEN_MAX];
-+	ip6_addr_t addr;
-+	size_t len;
-+	int ret;
++	ip_addr_t dest;
++	ip6_addr_t alternate;
 +
-+	/* Do not turn the old lease into a static address if acquisition fails. */
-+	if (dhcp6_lease && value) {
-+		len = strcspn(value, "/");
-+		if (len < sizeof(text)) {
-+			memcpy(text, value, len);
-+			text[len] = 0;
-+			if (!net_lwip_ip6_aton(text, &addr) &&
-+			    ip6_addr_zoneless_eq(&addr, &dhcp6_lease->env_addr)) {
-+				ret = env_set("ip6addr", NULL);
-+				if (ret)
-+					return ret;
-+			}
++	ut_assertok(env_set("ip6addr", "2001:db8:1::10/64"));
++	test->lease_conflict = true;
++	ut_assertok(net_lwip_start(&test->net, NET_LWIP_ADDR_ENV_STRICT));
++	ut_assertok(net_lwip_ip6_start(&test->net));
++	ut_assert(ip6_addr_isduplicated(netif_ip6_addr_state(test->net.netif, 1)));
++	ut_assertok(run_command("ping6 fe80::2", 0));
++	ipaddr_aton("2001:db8:1::2", &dest);
++	ut_asserteq(-EADDRINUSE, net_lwip_ip6_ready(&test->net, &dest));
++
++	/* An independently configured address can still serve global traffic. */
++	test->lease_conflict = false;
++	ip6addr_aton("2001:db8:1::20", &alternate);
++	netif_ip6_addr_set(test->net.netif, 2, &alternate);
++	netif_ip6_addr_set_state(test->net.netif, 2, IP6_ADDR_TENTATIVE);
++	ut_assertok(run_command("ping6 2001:db8:1::2", 0));
++	ut_assert(ip6_addr_isvalid(netif_ip6_addr_state(test->net.netif, 2)));
++	ipaddr_aton("2001:db8:2::2", &dest);
++	ut_asserteq(-EAGAIN, net_lwip_ip6_ready(&test->net, &dest));
++	ut_asserteq(2, test->echoes);
++	ut_asserteq(0, test->bad_checksums);
++	return 0;
++}
++
++#if CONFIG_IS_ENABLED(IPV6_ROUTER_DISCOVERY)
++static void ip6_test_age(unsigned int seconds)
++{
++	timer_test_add_offset(seconds * 1000);
++	net_lwip_ip6_update_lifetimes();
++}
++
++static int ip6_test_slaac(struct unit_test_state *uts, struct ip6_test *test)
++{
++	ip_addr_t dest;
++	u32 before;
++
++	test->advertise = true;
++	ut_assertok(run_command("ping6 2001:db8:2::2", 0));
++	ut_assert(test->solicitations);
++	ut_assert(test->dad >= 2);
++	ut_asserteq(1, test->echoes);
++	ut_asserteq(0, test->bad_checksums);
++	ut_assertnull(netif_default);
++	/* Removal must discard the learned address, prefix and default router. */
++	ut_assertok(net_lwip_start(&test->net, NET_LWIP_ADDR_ENV_FLEXIBLE));
++	ut_assertok(net_lwip_ip6_init(&test->net));
++	ut_assert(ip6_addr_isinvalid(netif_ip6_addr_state(test->net.netif, 1)));
++	ipaddr_aton("2001:db8:2::2", &dest);
++	ut_assertok(net_lwip_prepare_addr(&test->net, &dest));
++	ip6_test_age(5);
++	before = netif_ip6_addr_valid_life(test->net.netif, 1);
++	ut_assertok(ip6_test_ra(test->net.dev));
++	ut_assertok(net_lwip_poll());
++	ut_assert(netif_ip6_addr_valid_life(test->net.netif, 1) > before);
++
++	return 0;
++}
++
++static int ip6_test_lifetimes(struct unit_test_state *uts, struct ip6_test *test)
++{
++	ip_addr_t dest;
++	u32 before;
++	u8 state;
++	unsigned int dad;
++
++	ut_assertok(env_set("ipaddr", NULL));
++	test->advertise = true;
++	ut_assertok(net_lwip_start(&test->net, NET_LWIP_ADDR_ENV_STRICT));
++	ipaddr_aton("2001:db8:2::2", &dest);
++	ut_assertok(net_lwip_prepare_addr(&test->net, &dest));
++	test->advertise = false;
++	before = netif_ip6_addr_valid_life(test->net.netif, 1);
++	/* Readiness must age retained state even before the next poll. */
++	timer_test_add_offset(901000);
++	ut_assertok(net_lwip_ip6_ready(&test->net, &dest));
++	ut_asserteq(IP6_ADDR_DEPRECATED, netif_ip6_addr_state(test->net.netif, 1));
++	ut_assert(netif_ip6_addr_valid_life(test->net.netif, 1) <= before - 901);
++	timer_test_add_offset(900000);
++	ut_assertok(net_lwip_poll());
++	ut_asserteq(-EAGAIN, net_lwip_ip6_ready(&test->net, &dest));
++	ut_assert(ip6_addr_isinvalid(netif_ip6_addr_state(test->net.netif, 1)));
++	ut_assertnull(nd6_find_route(ip_2_ip6(&dest)));
++	for (unsigned int i = 0; i < LWIP_ND6_NUM_PREFIXES; i++)
++		ut_assert(prefix_list[i].netif != test->net.netif);
++
++	/* A fresh advertisement is not aged by the preceding idle interval. */
++	timer_test_add_offset(1801000);
++	ut_assertok(ip6_test_ra_lifetimes(test->net.dev, U32_MAX, U32_MAX));
++	ut_assertok(net_lwip_poll());
++	ut_asserteq(IP6_ADDR_LIFE_INFINITE, netif_ip6_addr_valid_life(test->net.netif, 1));
++	state = netif_ip6_addr_state(test->net.netif, 1);
++	ut_assert(ip6_addr_istentative(state));
++	dad = test->dad;
++	ip6_test_age(600);
++	/* Lifetime catch-up must neither send probes nor advance DAD. */
++	ut_asserteq(dad, test->dad);
++	ut_asserteq(state, netif_ip6_addr_state(test->net.netif, 1));
++	ut_asserteq(IP6_ADDR_LIFE_INFINITE, netif_ip6_addr_valid_life(test->net.netif, 1));
++	ut_asserteq(IP6_ADDR_LIFE_INFINITE, netif_ip6_addr_pref_life(test->net.netif, 1));
++	ut_assertok(net_lwip_prepare_addr(&test->net, &dest));
++	ip6_test_age(1801);
++	ut_assert(ip6_addr_isvalid(netif_ip6_addr_state(test->net.netif, 1)));
++	ut_assertnull(nd6_find_route(ip_2_ip6(&dest)));
++	ipaddr_aton("2001:db8:1::2", &dest);
++	ut_assertok(net_lwip_ip6_ready(&test->net, &dest));
++
++	net_lwip_stop(&test->net);
++	ut_assertok(env_set("ip6addr", "2001:db8:1::10"));
++	ut_assertok(net_lwip_start(&test->net, NET_LWIP_ADDR_ENV_STRICT));
++	ut_assertok(net_lwip_prepare_addr(&test->net, &dest));
++	ip6_test_age(1801);
++	ut_assertok(net_lwip_ip6_ready(&test->net, &dest));
++	ut_assert(netif_ip6_addr_isstatic(test->net.netif, 1));
++	ut_assert(ip6_addr_isvalid(netif_ip6_addr_state(test->net.netif, 0)));
++	net_lwip_stop(&test->net);
++	ut_assertok(env_set("ip6addr", NULL));
++	timer_test_add_offset(1801000);
++	ut_assertok(net_lwip_start(&test->net, NET_LWIP_ADDR_ENV_STRICT));
++	ut_assertok(net_lwip_ip6_init(&test->net));
++	ut_assert(ip6_addr_isinvalid(netif_ip6_addr_state(test->net.netif, 1)));
++	return 0;
++}
++#endif
++
++static int ip6_test_run(struct unit_test_state *uts,
++			int (*check)(struct unit_test_state *, struct ip6_test *))
++{
++	static const char * const names[] = {
++		"ethact", "ethrotate", "netretry", "ip6addr", "gatewayip6",
++		"ipaddr", "netmask", "serverip6", "filesize", "fileaddr",
++		"dnsip", "dnsip2", "dnsip6", "dnsip6_2", "dnsresult",
++		"autoload", "autostart", "bootfile", "pxe_configfile", "tftpdstp",
++		"ncip", "ncip6", "ncinport", "ncoutport", "ntpserverip",
++		"tftpsrcp", "tftpblocksize", "tftpwindowsize", "tftptimeout",
++		"tftptimeoutcountmax",
++	};
++	struct ip6_test test = {};
++#if CONFIG_IS_ENABLED(WGET)
++	struct wget_http_info *http_info = wget_info;
++#endif
++	ulong load_addr = image_load_addr;
++	u32 size = net_boot_file_size;
++	char *saved[ARRAY_SIZE(names)];
++	unsigned int i;
++	int ret, ctrlc_state;
++
++	for (i = 0; i < ARRAY_SIZE(names); i++) {
++		const char *value = env_get(names[i]);
++
++		saved[i] = value ? strdup(value) : NULL;
++		if (value && !saved[i]) {
++			while (i)
++				free(saved[--i]);
++			return -ENOMEM;
 +		}
 +	}
-+	dhcp6_forget();
-+	return 0;
-+}
-+
-+static int dhcp6_publish_options(struct dhcp6_client *client)
-+{
-+	int ret;
-+
-+	for (unsigned int i = 0; i < ARRAY_SIZE(client->offer.dns); i++) {
-+		ret = env_set(i ? "dnsip6_2" : "dnsip6", i < client->offer.dns_count ?
-+			      ip6addr_ntoa(&client->offer.dns[i]) : NULL);
-+		if (ret)
-+			return ret;
-+	}
-+#if CONFIG_IS_ENABLED(DNS)
-+	/* Updating the resolver must not recursively poll from lease maintenance. */
-+	net_lwip_dns_refresh(&client->net);
++	env_set("ethact", "eth@10002000");
++	env_set("ethrotate", "no");
++	env_set("netretry", "no");
++	env_set("ip6addr", NULL);
++	env_set("gatewayip6", NULL);
++	env_set("dnsip", NULL);
++	env_set("dnsip2", NULL);
++	env_set("dnsip6", NULL);
++	env_set("dnsip6_2", NULL);
++	env_set("tftpdstp", NULL);
++	env_set("tftpsrcp", NULL);
++	env_set("tftpblocksize", NULL);
++	env_set("tftpwindowsize", NULL);
++	env_set("tftptimeout", NULL);
++	env_set("tftptimeoutcountmax", NULL);
++	sandbox_eth_set_priv(0, &test);
++	sandbox_eth_set_tx_handler(0, ip6_test_tx);
++	ctrlc_state = disable_ctrlc(0);
++	ret = check(uts, &test);
++	disable_ctrlc(ctrlc_state);
++	clear_ctrlc();
++#if CONFIG_IS_ENABLED(WGET)
++	wget_info = http_info;
 +#endif
-+	if (IS_ENABLED(CONFIG_DHCP6_PXE_DHCP_OPTION))
-+		return env_set("pxe_configfile", client->offer.pxe[0] ? client->offer.pxe : NULL);
-+	return 0;
-+}
-+
-+static u32 dhcp6_remaining(struct dhcp6_client *client, u32 lifetime)
-+{
-+	u64 elapsed = (get_timer_us(0) - client->acquired) / 1000000;
-+
-+	if (lifetime == U32_MAX)
-+		return lifetime;
-+	return elapsed >= lifetime ? 0 : lifetime - elapsed;
-+}
-+
-+static int dhcp6_lifetimes(struct dhcp6_client *client)
-+{
-+	struct netif *netif = client->net.netif;
-+	u32 valid = dhcp6_remaining(client, client->offer.valid);
-+	u32 preferred = dhcp6_remaining(client, client->offer.preferred);
-+
-+	/* Zero is lwIP's static-address sentinel, not a dynamic expiry. */
-+	if (!valid) {
-+		netif_ip6_addr_set_state(netif, 1, IP6_ADDR_INVALID);
-+		return -EADDRNOTAVAIL;
-+	}
-+	netif_ip6_addr_set_valid_life(netif, 1, valid);
-+	netif_ip6_addr_set_pref_life(netif, 1, preferred);
-+	if (ip6_addr_isvalid(netif_ip6_addr_state(netif, 1)))
-+		netif_ip6_addr_set_state(netif, 1,
-+					preferred ? IP6_ADDR_PREFERRED : IP6_ADDR_DEPRECATED);
-+	return 0;
-+}
-+
-+static int dhcp6_start_dad(struct dhcp6_client *client)
-+{
-+	u32 valid = dhcp6_remaining(client, client->offer.valid);
-+	u32 preferred = dhcp6_remaining(client, client->offer.preferred);
-+	int ret;
-+
-+	ret = net_lwip_ip6_lease(&client->net, &client->offer.addr, preferred, valid);
-+	if (ret)
-+		return ret;
-+	client->dad_start = get_timer(0);
-+	client->dad_pending = true;
-+	return 0;
-+}
-+
-+static int dhcp6_finish_dad(struct dhcp6_client *client)
-+{
-+	u8 state = netif_ip6_addr_state(client->net.netif, 1);
-+	int ret;
-+
-+	ret = dhcp6_lifetimes(client);
-+	if (ret)
-+		return ret;
-+	if (ip6_addr_isduplicated(state))
-+		return -EADDRINUSE;
-+	if (!ip6_addr_isvalid(state)) {
-+		if (ip6_addr_isinvalid(state) || get_timer(client->dad_start) >= 15000)
-+			return -ETIMEDOUT;
-+		return -EAGAIN;
-+	}
-+	ret = net_lwip_ip6_lease_commit(&client->net);
-+	if (ret)
-+		return ret;
-+	ip6_addr_copy(client->env_addr, client->offer.addr);
-+	client->dad_pending = false;
-+	return 0;
-+}
-+
-+static void dhcp6_invalidate(struct dhcp6_client *client)
-+{
-+	client->offer.valid = 0;
-+	client->message = 0;
-+	client->done = false;
-+	client->dad_pending = false;
-+	netif_ip6_addr_set_state(client->net.netif, 1, IP6_ADDR_INVALID);
-+}
-+
-+int net_lwip_dhcp6_restore(struct net_lwip_ctx *ctx, const ip6_addr_t *addr)
-+{
-+	struct dhcp6_client *client = dhcp6_lease;
-+	int ret;
-+
-+	if (!client)
-+		return 0;
-+	if (!ip6_addr_zoneless_eq(addr, &client->env_addr)) {
-+		dhcp6_forget();
-+		return 0;
-+	}
-+	if (memcmp(ctx->netif->hwaddr, client->duid + 4, 6)) {
-+		netif_ip6_addr_set_state(ctx->netif, 1, IP6_ADDR_INVALID);
-+		return 0;
-+	}
-+	client->net = *ctx;
-+	netif_set_ip6_autoconfig_enabled(ctx->netif, 0);
-+	ret = dhcp6_lifetimes(client);
-+	if (ret)
-+		return 0;
-+	/* Restore the accepted lease, not the old address pending publication. */
-+	ret = dhcp6_start_dad(client);
-+	if (!ret)
-+		ret = dhcp6_attach(client);
-+	if (ret) {
-+		netif_ip6_addr_set_state(ctx->netif, 1, IP6_ADDR_INVALID);
-+		client->dad_pending = false;
-+		net_lwip_dhcp6_detach(ctx->netif);
++	image_load_addr = load_addr;
++	net_boot_file_size = size;
++	net_lwip_stop(&test.net);
++	sandbox_eth_set_tx_handler(0, NULL);
++	sandbox_eth_set_priv(0, NULL);
++	for (i = 0; i < ARRAY_SIZE(names); i++) {
++		env_set(names[i], saved[i]);
++		free(saved[i]);
 +	}
 +	return ret;
 +}
 +
-+void net_lwip_dhcp6_poll(void)
++static int dm_test_lwip_ip6_config(struct unit_test_state *uts)
 +{
-+	struct dhcp6_client *client = dhcp6_lease;
-+	u8 message;
-+	int ret;
++	return ip6_test_run(uts, ip6_test_config);
++}
++DM_TEST(dm_test_lwip_ip6_config, UTF_SCAN_FDT);
 +
-+	if (!client || !client->net.netif)
-+		return;
-+	if (!dhcp6_remaining(client, client->offer.valid)) {
-+		dhcp6_invalidate(client);
-+		return;
-+	}
-+	if (client->done &&
-+	    (!ip6_addr_zoneless_eq(netif_ip6_addr(client->net.netif, 1), &client->offer.addr) ||
-+	     ip6_addr_isinvalid(netif_ip6_addr_state(client->net.netif, 1)))) {
-+		ret = dhcp6_start_dad(client);
-+		if (ret)
-+			goto failed;
-+	}
-+	if (client->dad_pending) {
-+		ret = dhcp6_finish_dad(client);
-+		if (ret == -EAGAIN)
-+			return;
-+		if (ret)
-+			goto failed;
-+	}
-+	if (client->done) {
-+		u32 lifetime = client->offer.preferred ?: client->offer.valid;
++static int ip6_test_prefix(struct unit_test_state *uts, struct ip6_test *test)
++{
++	ip6_addr_t addr, dest, gateway;
++	char text[64];
 +
-+		ret = dhcp6_lifetimes(client);
-+		if (ret)
-+			return;
-+		ret = dhcp6_publish_options(client);
-+		if (ret)
-+			printf("DHCPv6 option update failed: %d\n", ret);
-+		if (!client->offer.t2)
-+			client->offer.t2 = max(client->offer.t1, lifetime == U32_MAX ?
-+					       U32_MAX : max(1U, lifetime / 5 * 4));
-+		if (!client->offer.t1)
-+			client->offer.t1 = min(client->offer.t2, lifetime == U32_MAX ?
-+					       U32_MAX : max(1U, lifetime / 2));
-+		client->message = 0;
-+		client->done = false;
++	ip6addr_aton("2001:db8:1::10", &addr);
++	for (unsigned int bits = 0; bits <= 128; bits++) {
++		snprintf(text, sizeof(text), "2001:db8:1::10/%u", bits);
++		ut_assertok(env_set("ip6addr", text));
++		ut_assertok(net_lwip_start(&test->net, NET_LWIP_ADDR_ENV_FLEXIBLE));
++		ut_assertok(net_lwip_ip6_init(&test->net));
++		ut_assert(net_lwip_ip6_static_prefix(test->net.netif, 1, &addr));
++		if (bits) {
++			ip6_addr_copy(dest, addr);
++			((u8 *)dest.addr)[(bits - 1) / 8] ^= BIT(7 - (bits - 1) % 8);
++			ut_assert(!net_lwip_ip6_static_prefix(test->net.netif, 1, &dest));
++		}
++		if (bits < 128) {
++			ip6_addr_copy(dest, addr);
++			((u8 *)dest.addr)[bits / 8] ^= BIT(7 - bits % 8);
++			ut_assert(net_lwip_ip6_static_prefix(test->net.netif, 1, &dest));
++		}
++		net_lwip_stop(&test->net);
 +	}
-+	message = !dhcp6_remaining(client, client->offer.t2) ? DHCP6_REBIND :
-+		  !dhcp6_remaining(client, client->offer.t1) ? DHCP6_RENEW : 0;
-+	if (!message || !ip6_addr_isvalid(netif_ip6_addr_state(client->net.netif, 0)))
-+		return;
-+	if (!client->message || (message == DHCP6_REBIND && client->message == DHCP6_RENEW))
-+		dhcp6_begin(client, message);
-+	if (get_timer_us(0) < client->next_send)
-+		return;
-+	ret = dhcp6_transmit(client);
-+	if (ret == -ETIMEDOUT) {
-+		printf("DHCPv6 Request failed; run dhcp6 to reacquire an address\n");
-+		dhcp6_invalidate(client);
-+		return;
-+	}
-+	if (ret)
-+		debug("DHCPv6 renewal send failed: %d\n", ret);
-+	return;
-+
-+failed:
-+	if (ret == -EADDRINUSE) {
-+		dhcp6_begin(client, DHCP6_DECLINE);
-+		dhcp6_send(client);
-+	}
-+	printf("DHCPv6 address update failed: %d\n", ret);
-+	dhcp6_invalidate(client);
++	ut_assertok(env_set("ip6addr", "2001:db8:1::10/48"));
++	ut_assertok(run_command("ping6 2001:db8:1:ffff::2", 0));
++	ip6addr_aton("2001:db8:1:ffff::2", &dest);
++	ut_assert(ip6_addr_zoneless_eq(&dest, &test->last_neighbor));
++	ut_assertok(env_set("ip6addr", "2001:db8:1::10/120"));
++	ut_assertok(env_set("gatewayip6", "fe80::1"));
++	ut_assertok(run_command("ping6 2001:db8:1::110", 0));
++	ip6addr_aton("fe80::1", &gateway);
++	ut_assert(ip6_addr_zoneless_eq(&gateway, &test->last_neighbor));
++	ut_assertnull(netif_default);
++	return 0;
 +}
 +
-+static int dhcp6_acquire(struct dhcp6_client *client)
++static int dm_test_lwip_ip6_prefix(struct unit_test_state *uts)
++{
++	return ip6_test_run(uts, ip6_test_prefix);
++}
++DM_TEST(dm_test_lwip_ip6_prefix, UTF_SCAN_FDT);
++
++#if CONFIG_IS_ENABLED(DNS)
++static int ip6_test_dns(struct unit_test_state *uts, struct ip6_test *test)
 +{
 +	ulong start;
-+	int ret;
 +
-+	ret = net_lwip_ip6_start(&client->net);
-+	if (ret)
-+		return ret;
-+	ret = dhcp6_attach(client);
-+	if (ret)
-+		return ret;
-+	if (memcmp(client->duid + 4, client->net.netif->hwaddr, 6))
-+		client->sol_max_rt = 0;
-+	put_unaligned_be16(DHCP6_DUID_LL, client->duid);
-+	put_unaligned_be16(1, client->duid + 2);
-+	memcpy(client->duid + 4, client->net.netif->hwaddr, 6);
-+	client->iaid = get_unaligned_be32(client->duid + 6);
-+	dhcp6_begin(client, DHCP6_SOLICIT);
++	ut_assertok(env_set("ipaddr", NULL));
++	ut_assertok(env_set("dnsip6", "fe80::2"));
++	ut_assertok(run_command("dns ipv6.test dnsresult -ipv6", 0));
++	ut_asserteq_str("FE80::2", env_get("dnsresult"));
++	ut_assertok(run_command("ping6 ping.test", 0));
++	ut_asserteq(2, test->dns_queries);
++	ut_asserteq(1, test->echoes);
++	ut_assertnull(netif_default);
++
++	/* An unavailable IPv6 backup must not delay a usable IPv4 primary. */
++	ut_assertok(env_set("ipaddr", "192.0.2.10"));
++	ut_assertok(env_set("netmask", "255.255.255.0"));
++	ut_assertok(env_set("dnsip", "192.0.2.53"));
++	ut_assertok(env_set("dnsip6", "2001:db8:2::53"));
 +	start = get_timer(0);
-+	/* Randomize the first solicitation to avoid synchronized boot storms. */
-+	client->next_send += (rand() % 1000) * 1000;
-+	while (!client->done) {
-+		if (ctrlc())
-+			return -EINTR;
-+		ret = net_lwip_poll();
-+		if (ret < 0)
-+			return ret;
-+		if (client->done)
-+			break;
-+		if (get_timer(start) >= DHCP6_TIMEOUT_MS)
-+			return -ETIMEDOUT;
-+		if (client->message == DHCP6_SOLICIT && client->offer.server_len &&
-+		    (client->offer.preference == 255 || get_timer_us(0) >= client->next_send))
-+			dhcp6_begin(client, DHCP6_REQUEST);
-+		if (get_timer_us(0) < client->next_send)
-+			continue;
-+		ret = dhcp6_transmit(client);
-+		if (ret)
-+			return ret;
-+	}
-+	ret = dhcp6_start_dad(client);
-+	if (ret)
-+		return ret;
-+	while ((ret = dhcp6_finish_dad(client)) == -EAGAIN) {
-+		if (ctrlc())
-+			return -EINTR;
-+		ret = net_lwip_poll();
-+		if (ret < 0)
-+			return ret;
-+	}
-+	if (ret == -EADDRINUSE) {
-+		dhcp6_begin(client, DHCP6_DECLINE);
-+		dhcp6_send(client);
-+	}
-+	return ret;
-+}
++	ut_assertok(run_command("dns mixed.test dnsresult -ipv6", 0));
++	ut_assert(get_timer(start) < 5000);
++	ut_asserteq_str("FE80::2", env_get("dnsresult"));
++	ut_asserteq(1, test->dns4_queries);
++	ut_assertnull(netif_default);
 +
-+/* Translate RFC 5970 TFTP URLs into the existing TFTP argument syntax. */
-+static int dhcp6_bootfile(struct dhcp6_client *client, char *file, size_t size)
-+{
-+	char host[DHCP6_HOST_MAX_LEN], *url = client->offer.url, *end, *path, *port = NULL;
-+	u16 dstport = 69;
-+	unsigned int value;
-+	int ret;
-+
-+	if (strncmp(url, "tftp://", 7))
-+		return strlcpy(file, url, size) >= size ? -ENAMETOOLONG : 0;
-+	url += 7;
-+	path = strchr(url, '/');
-+	if (!path || path == url)
-+		return -EINVAL;
-+	if (*url == '[') {
-+		url++;
-+		end = memchr(url, ']', path - url);
-+		if (!end || (end + 1 != path && end[1] != ':'))
-+			return -EINVAL;
-+		if (end + 1 != path)
-+			port = end + 2;
-+	} else {
-+		end = memchr(url, ':', path - url);
-+		if (end)
-+			port = end + 1;
-+		else
-+			end = path;
-+	}
-+	if (end == url || end - url >= sizeof(host))
-+		return -EINVAL;
-+	memcpy(host, url, end - url);
-+	host[end - url] = 0;
-+	if (port) {
-+		if (net_lwip_parse_decimal(port, path - port, U16_MAX, &value) || !value)
-+			return -EINVAL;
-+		dstport = value;
-+	}
-+	/* An escaped colon stays in the filename, not in the server prefix. */
-+	path++;
-+	if (!*path || strlen(path) >= size)
-+		return -EINVAL;
-+	for (end = file; *path; path++) {
-+		int byte = (u8)*path;
-+
-+		if (*path == '%') {
-+			int hi, lo;
-+
-+			if (!path[1] || !path[2])
-+				return -EINVAL;
-+			hi = hex_to_bin(path[1]);
-+			lo = hex_to_bin(path[2]);
-+			if (hi < 0 || lo < 0)
-+				return -EINVAL;
-+			byte = hi * 16 + lo;
-+			path += 2;
-+		}
-+		if (byte < 0x20 || byte == 0x7f)
-+			return -EINVAL;
-+		*end++ = byte;
-+	}
-+	*end = 0;
-+	ret = env_set("serverip6", host);
-+	if (!ret)
-+		ret = env_set_ulong("tftpdstp", dstport);
-+	return ret;
-+}
-+
-+static int do_dhcp6(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	struct net_lwip_ctx net = {};
-+	struct dhcp6_client *client;
-+	char file[1024], arg[sizeof(file) + DHCP6_HOST_MAX_LEN + 8];
-+	char addr[2 * sizeof(ulong) + 1];
-+	char *tftp_argv[] = { "tftpboot", addr, file, "-ipv6" };
-+	const char *filename = NULL;
-+	ulong load = env_get_ulong("loadaddr", 16, image_load_addr);
-+	bool downloaded = false, offered, tftp_url;
-+	int ret;
-+
-+	if (argc > 3 || (argc > 1 && strict_strtoul(argv[1], 16, &load)))
-+		return CMD_RET_USAGE;
-+	if (argc == 3)
-+		filename = argv[2];
-+	client = calloc(1, sizeof(*client));
-+	if (!client)
-+		return CMD_RET_FAILURE;
-+	ret = net_lwip_start(&net, NET_LWIP_ADDR_ENV_STRICT);
-+	if (ret)
-+		goto out;
-+	if (!net_lwip_is_exclusive(&net)) {
-+		ret = -EBUSY;
-+		goto out;
-+	}
-+	ret = dhcp6_discard();
-+	if (ret)
-+		goto out;
-+	client->net = net;
-+	net_try_count = 1;
-+	for (;;) {
-+		memset(&client->offer, 0, sizeof(client->offer));
-+		client->done = false;
-+		ret = dhcp6_acquire(client);
-+		if (ret && client->pcb) {
-+			udp_remove(client->pcb);
-+			client->pcb = NULL;
-+		}
-+		if (ret != -ETIMEDOUT)
-+			break;
-+		ret = net_lwip_restart(&net);
-+		client->net = net;
-+		if (ret)
-+			break;
-+	}
-+	if (ret)
-+		goto out;
-+	client->bound = true;
-+	dhcp6_lease = client;
-+	printf("DHCPv6 address: %s\n", ip6addr_ntoa(&client->offer.addr));
-+	ret = dhcp6_publish_options(client);
-+	if (ret)
-+		goto out;
-+	/* Retain the advertised server even with a caller-supplied filename. */
-+	offered = client->offer.url[0];
-+	tftp_url = offered && !strncmp(client->offer.url, "tftp://", 7);
-+	if (offered) {
-+		ret = dhcp6_bootfile(client, file, sizeof(file));
-+		if (ret)
-+			goto out;
-+	}
-+	if (filename) {
-+		if (strlcpy(file, filename, sizeof(file)) >= sizeof(file)) {
-+			ret = -ENAMETOOLONG;
-+			goto out;
-+		}
-+	} else if (!offered) {
-+		filename = env_get("bootfile");
-+		if (strlcpy(file, filename ?: "", sizeof(file)) >= sizeof(file)) {
-+			ret = -ENAMETOOLONG;
-+			goto out;
-+		}
-+	}
-+	if (*file) {
-+		ret = env_set("bootfile", file);
-+		if (ret)
-+			goto out;
-+	}
-+	if (env_get_yesno("autoload") == 0)
-+		goto out;
-+	if (!*file) {
-+		ret = -ENOENT;
-+		goto out;
-+	}
-+	if ((offered && !tftp_url) ||
-+	    ((!tftp_url || filename) && strstr(file, "://"))) {
-+		ret = -EPROTONOSUPPORT;
-+		goto out;
-+	}
-+	snprintf(addr, sizeof(addr), "%lx", load);
-+	if (!filename && offered) {
-+		/* Disambiguate colons in the decoded URL path from TFTP prefixes. */
-+		snprintf(arg, sizeof(arg), "[%s]:%s:%s", env_get("serverip6"),
-+			 env_get("tftpdstp"), file);
-+		tftp_argv[2] = arg;
-+	}
-+	if (IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
-+		ret = net_lwip_tftp_download(&client->net, ARRAY_SIZE(tftp_argv), tftp_argv);
-+		downloaded = !ret;
-+	} else {
-+		ret = -ENOSYS;
-+	}
-+out:
-+	if (client != dhcp6_lease) {
-+		if (client->pcb)
-+			udp_remove(client->pcb);
-+		free(client);
-+	}
-+	net_lwip_stop(&net);
-+	if (ret) {
-+		printf("DHCPv6 failed: %d\n", ret);
-+		return CMD_RET_FAILURE;
-+	}
-+	if (downloaded && net_boot_file_size)
-+		return bootm_maybe_autostart(cmdtp, argv[0]);
-+	return CMD_RET_SUCCESS;
-+}
-+
-+U_BOOT_CMD(dhcp6, 3, 1, do_dhcp6, "boot using DHCPv6",
-+	   "[loadAddress] [bootfilename]");
-diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-index 96ed5723122..bd623838efa 100644
---- a/net/lwip/net-lwip.c
-+++ b/net/lwip/net-lwip.c
-@@ -349,6 +349,9 @@ static void net_lwip_remove_netif(struct netif *netif)
- 	ip6_addr_t allnodes;
- #endif
- 
-+#if CONFIG_IS_ENABLED(CMD_DHCP6)
-+	net_lwip_dhcp6_detach(netif);
-+#endif
- 	netif_remove(netif);
- #if CONFIG_IS_ENABLED(DNS)
- 	/* Do not carry router-advertised name servers to the next interface. */
-@@ -545,9 +548,60 @@ int net_lwip_ip6_init(struct net_lwip_ctx *ctx)
- 	ip6_addr_assign_zone(&net_lwip_runtime.ip6_gateway, IP6_UNICAST, netif);
- 	net_lwip_runtime.ip6_configured = true;
- 
-+#if CONFIG_IS_ENABLED(CMD_DHCP6)
-+	ret = net_lwip_dhcp6_restore(ctx, &addr);
-+	if (ret) {
-+		net_lwip_runtime.ip6_configured = false;
-+		return ret;
-+	}
-+#endif
++	/* Also skip an unready primary in favor of a usable same-family backup. */
++	ut_assertok(env_set("ipaddr", NULL));
++	ut_assertok(env_set("dnsip", NULL));
++	ut_assertok(env_set("dnsip6_2", "fe80::3"));
++	ut_assertok(run_command("dns backup.test dnsresult -ipv6", 0));
++	ut_asserteq_str("FE80::3", ip6addr_ntoa(&test->last_dns));
 +	return 0;
 +}
 +
-+#if CONFIG_IS_ENABLED(CMD_DHCP6)
-+bool net_lwip_is_exclusive(struct net_lwip_ctx *ctx)
++static int dm_test_lwip_ip6_dns(struct unit_test_state *uts)
 +{
-+	return ctx->netif == net_lwip_runtime.netif && net_lwip_runtime.users == 1;
++	return ip6_test_run(uts, ip6_test_dns);
 +}
++DM_TEST(dm_test_lwip_ip6_dns, UTF_SCAN_FDT);
++#endif
 +
-+/* Start DAD; DHCPv6 checks completion from the shared runtime poller. */
-+int net_lwip_ip6_lease(struct net_lwip_ctx *ctx, const ip6_addr_t *addr,
-+		       u32 preferred, u32 valid)
++#if CONFIG_IS_ENABLED(IPV6_ROUTER_DISCOVERY) && CONFIG_IS_ENABLED(DNS)
++static int ip6_test_rdnss(struct unit_test_state *uts, struct ip6_test *test)
 +{
-+	struct netif *netif = ctx->netif;
++	ip_addr_t addr;
 +
-+	if (netif != net_lwip_runtime.netif || !net_lwip_runtime.ip6_configured)
-+		return -EINVAL;
-+	if (!valid || preferred > valid)
-+		return -EINVAL;
-+	for (unsigned int i = 1; i < LWIP_IPV6_NUM_ADDRESSES; i++)
-+		netif_ip6_addr_set_state(netif, i, IP6_ADDR_INVALID);
-+	netif_set_ip6_autoconfig_enabled(netif, 0);
-+	netif_ip6_addr_set(netif, 1, addr);
-+	netif_ip6_addr_set_valid_life(netif, 1, valid);
-+	netif_ip6_addr_set_pref_life(netif, 1, preferred);
-+	netif_ip6_addr_set_state(netif, 1, IP6_ADDR_TENTATIVE);
- 	return 0;
- }
- 
-+int net_lwip_ip6_lease_commit(struct net_lwip_ctx *ctx)
-+{
-+	const ip6_addr_t *addr;
-+	int ret;
-+
-+	if (ctx->netif != net_lwip_runtime.netif || !net_lwip_runtime.ip6_configured ||
-+	    !ip6_addr_isvalid(netif_ip6_addr_state(ctx->netif, 1)))
-+		return -EINVAL;
-+	addr = netif_ip6_addr(ctx->netif, 1);
-+	ret = env_set("ip6addr", ip6addr_ntoa(addr));
-+	if (ret)
-+		return ret;
-+	ip6_addr_copy(net_lwip_runtime.ip6_addr, *addr);
-+	net_lwip_runtime.ip6_prefix_len = 64;
++	ut_assertok(env_set("ipaddr", NULL));
++	test->advertise = true;
++	test->rdnss_lifetime = 10;
++	ut_assertok(net_lwip_start(&test->net, NET_LWIP_ADDR_ENV_STRICT));
++	/* Complete DAD's simulated time jumps before counting DNS queries. */
++	ipaddr_aton("2001:db8:2::2", &addr);
++	ut_assertok(net_lwip_prepare_addr(&test->net, &addr));
++	for (unsigned int i = 0; i < 31; i++)
++		dns_tmr();
++	ut_assertok(net_lwip_resolve(&test->net, "rdnss.test", &addr, IPADDR_TYPE_V6));
++	ut_asserteq(1, test->dns_queries);
++	ip6_test_age(11);
++	ut_assert(ip_addr_isany(dns_getserver(0)));
++	ut_assertok(env_set("dnsip6", "fe80::3"));
++	ut_assertok(net_lwip_dns_init(&test->net));
++	ut_assertok(ip6_test_ra(test->net.dev));
++	ut_assertok(net_lwip_poll());
++	ipaddr_aton("fe80::3", &addr);
++	ut_assert(ip6_addr_zoneless_eq(ip_2_ip6(&addr), ip_2_ip6(dns_getserver(0))));
++	net_lwip_stop(&test->net);
++	ut_assert(ip_addr_isany(dns_getserver(0)));
 +	return 0;
 +}
++
++static int dm_test_lwip_ip6_rdnss(struct unit_test_state *uts)
++{
++	return ip6_test_run(uts, ip6_test_rdnss);
++}
++DM_TEST(dm_test_lwip_ip6_rdnss, UTF_SCAN_FDT);
++
++static int ip6_test_rdnss_advertise(struct udevice *dev, const char *first_addr,
++				    u32 first, const char *second_addr, u32 second)
++{
++	struct {
++		struct ra_header ra;
++		struct rdnss_option dns[2];
++	} reply = {};
++	ip6_addr_t src, dst, addr;
++	unsigned int count = second_addr ? 2 : 1;
++
++	ip6addr_aton("fe80::1", &src);
++	ip6addr_aton("ff02::1", &dst);
++	reply.ra.type = ICMP6_TYPE_RA;
++	reply.ra.router_lifetime = htons(1800);
++	for (unsigned int i = 0; i < count; i++) {
++		reply.dns[i].type = ND6_OPTION_TYPE_RDNSS;
++		reply.dns[i].length = sizeof(reply.dns[i]) / 8;
++		reply.dns[i].lifetime = htonl(i ? second : first);
++		ip6addr_aton(i ? second_addr : first_addr, &addr);
++		ip6_addr_copy_to_packed(reply.dns[i].rdnss_address[0], addr);
++	}
++	return ip6_test_reply(dev, &src, &dst, &reply,
++			      sizeof(reply.ra) + count * sizeof(reply.dns[0]),
++			      IP6_NEXTH_ICMP6, false);
++}
++
++static int ip6_test_rdnss_servers(struct udevice *dev, u32 first, u32 second,
++				  unsigned int count)
++{
++	return ip6_test_rdnss_advertise(dev, "fe80::2", first,
++				       count == 2 ? "fe80::3" : NULL, second);
++}
++
++static int ip6_test_rdnss_identity(struct unit_test_state *uts, struct ip6_test *test)
++{
++	ut_assertok(env_set("ipaddr", NULL));
++	ut_assertok(net_lwip_start(&test->net, NET_LWIP_ADDR_ENV_STRICT));
++	ut_assertok(net_lwip_ip6_start(&test->net));
++	ut_asserteq(-ENOENT, net_lwip_dns_refresh(&test->net));
++	ut_assertok(ip6_test_rdnss_servers(test->net.dev, 100, 100, 2));
++	ut_assertok(net_lwip_poll());
++
++	/* Refreshing the backup alone must not create a duplicate primary. */
++	ut_assertok(ip6_test_rdnss_advertise(test->net.dev, "fe80::3", 1, NULL, 0));
++	ut_assertok(net_lwip_poll());
++	ut_asserteq_str("FE80::2", ipaddr_ntoa(dns_getserver(0)));
++	ut_asserteq_str("FE80::3", ipaddr_ntoa(dns_getserver(1)));
++	ip6_test_age(1);
++	ut_asserteq_str("FE80::2", ipaddr_ntoa(dns_getserver(0)));
++	ut_assert(ip_addr_isany(dns_getserver(1)));
++
++	/* Reordered advertisements update the lifetimes by address. */
++	ut_assertok(ip6_test_rdnss_servers(test->net.dev, 100, 100, 2));
++	ut_assertok(net_lwip_poll());
++	ut_assertok(ip6_test_rdnss_advertise(test->net.dev, "fe80::3", 2, "fe80::2", 1));
++	ut_assertok(net_lwip_poll());
++	ip6_test_age(1);
++	ut_assert(ip_addr_isany(dns_getserver(0)));
++	ut_asserteq_str("FE80::3", ipaddr_ntoa(dns_getserver(1)));
++	ip6_test_age(1);
++	ut_assert(ip_addr_isany(dns_getserver(1)));
++
++	/* A new address replaces the entry that would expire first. */
++	ut_assertok(ip6_test_rdnss_servers(test->net.dev, 100, 10, 2));
++	ut_assertok(net_lwip_poll());
++	ut_assertok(ip6_test_rdnss_advertise(test->net.dev, "fe80::4", 50, NULL, 0));
++	ut_assertok(net_lwip_poll());
++	ut_asserteq_str("FE80::2", ipaddr_ntoa(dns_getserver(0)));
++	ut_asserteq_str("FE80::4", ipaddr_ntoa(dns_getserver(1)));
++	ut_assertok(ip6_test_rdnss_advertise(test->net.dev, "fe80::4", 0, NULL, 0));
++	ut_assertok(net_lwip_poll());
++	ut_assert(ip_addr_isany(dns_getserver(1)));
++	ut_asserteq_str("FE80::2", ipaddr_ntoa(dns_getserver(0)));
++	return 0;
++}
++
++static int dm_test_lwip_ip6_rdnss_identity(struct unit_test_state *uts)
++{
++	return ip6_test_run(uts, ip6_test_rdnss_identity);
++}
++DM_TEST(dm_test_lwip_ip6_rdnss_identity, UTF_SCAN_FDT);
++
++static int ip6_test_rdnss_idle(struct unit_test_state *uts, struct ip6_test *test)
++{
++	ip_addr_t addr;
++
++	ut_assertok(env_set("ipaddr", NULL));
++	ut_assertok(net_lwip_start(&test->net, NET_LWIP_ADDR_ENV_STRICT));
++	ut_assertok(net_lwip_ip6_start(&test->net));
++	ut_asserteq(-ENOENT, net_lwip_dns_refresh(&test->net));
++	ut_assertok(ip6_test_rdnss_servers(test->net.dev, 5, 0, 1));
++	ut_assertok(net_lwip_poll());
++	ut_assert(!ip_addr_isany(dns_getserver(0)));
++	timer_test_add_offset(6000);
++	ut_assertok(net_lwip_poll());
++	ut_assert(ip_addr_isany(dns_getserver(0)));
++
++	/* Expire the primary during DNS setup, before it can send a query. */
++	for (unsigned int i = 0; i < 31; i++)
++		dns_tmr();
++	ut_assertok(ip6_test_rdnss_servers(test->net.dev, 5, U32_MAX, 2));
++	ut_assertok(net_lwip_poll());
++	timer_test_add_offset(6000);
++	ut_assertok(net_lwip_resolve(&test->net, "idle-rdnss.test", &addr, IPADDR_TYPE_V6));
++	ut_assert(test->dns_queries);
++	ut_asserteq_str("FE80::3", ip6addr_ntoa(&test->last_dns));
++	ut_assert(ip_addr_isany(dns_getserver(0)));
++	ip6_test_age(1801);
++	ut_asserteq_str("FE80::3", ipaddr_ntoa(dns_getserver(1)));
++
++	/* Refresh after an idle interval, then explicitly withdraw it. */
++	timer_test_add_offset(6000);
++	ut_assertok(ip6_test_rdnss_advertise(test->net.dev, "fe80::3", 5, NULL, 0));
++	ut_assertok(net_lwip_poll());
++	ut_asserteq_str("FE80::3", ipaddr_ntoa(dns_getserver(1)));
++	ip6_test_age(4);
++	ut_asserteq_str("FE80::3", ipaddr_ntoa(dns_getserver(1)));
++	ut_assertok(ip6_test_rdnss_advertise(test->net.dev, "fe80::3", 0, NULL, 0));
++	ut_assertok(net_lwip_poll());
++	ut_assert(ip_addr_isany(dns_getserver(1)));
++	ut_assertok(ip6_test_rdnss_servers(test->net.dev, U32_MAX, 0, 1));
++	ut_assertok(net_lwip_poll());
++	net_lwip_stop(&test->net);
++	ut_assert(ip_addr_isany(dns_getserver(0)));
++	ut_assert(ip_addr_isany(dns_getserver(1)));
++	return 0;
++}
++
++static int dm_test_lwip_ip6_rdnss_idle(struct unit_test_state *uts)
++{
++	return ip6_test_run(uts, ip6_test_rdnss_idle);
++}
++DM_TEST(dm_test_lwip_ip6_rdnss_idle, UTF_SCAN_FDT);
++
++static int ip6_test_rdnss_backup(struct unit_test_state *uts, struct ip6_test *test)
++{
++	ip_addr_t addr;
++
++	ut_assertok(env_set("ipaddr", NULL));
++	ut_assertok(net_lwip_start(&test->net, NET_LWIP_ADDR_ENV_STRICT));
++	ut_assertok(net_lwip_ip6_start(&test->net));
++	ut_asserteq(-ENOENT, net_lwip_dns_refresh(&test->net));
++	for (unsigned int i = 0; i < 31; i++)
++		dns_tmr();
++	ut_assertok(ip6_test_rdnss_servers(test->net.dev, 1, 100, 2));
++	ut_assertok(net_lwip_poll());
++	ip6_test_age(1);
++	ut_assert(ip_addr_isany(dns_getserver(0)));
++	ut_assert(!ip_addr_isany(dns_getserver(1)));
++	ut_assertok(net_lwip_poll());
++	ut_assertok(net_lwip_resolve(&test->net, "rdnss-expiry.test", &addr, IPADDR_TYPE_V6));
++	ut_asserteq_str("FE80::3", ip6addr_ntoa(&test->last_dns));
++	ut_asserteq(1, test->dns_queries);
++	ip6_test_age(100);
++	ut_assert(ip_addr_isany(dns_getserver(1)));
++
++	/* A zero-lifetime advertisement must leave the other server usable too. */
++	ut_assertok(ip6_test_rdnss_servers(test->net.dev, 100, 100, 2));
++	ut_assertok(net_lwip_poll());
++	ut_assertok(ip6_test_rdnss_servers(test->net.dev, 0, 0, 1));
++	ut_assertok(net_lwip_poll());
++	ut_assert(ip_addr_isany(dns_getserver(0)));
++	ut_assert(!ip_addr_isany(dns_getserver(1)));
++	ut_assertok(net_lwip_resolve(&test->net, "rdnss-withdraw.test", &addr, IPADDR_TYPE_V6));
++	ut_asserteq_str("FE80::3", ip6addr_ntoa(&test->last_dns));
++	ut_asserteq(2, test->dns_queries);
++	net_lwip_stop(&test->net);
++	ut_assert(ip_addr_isany(dns_getserver(0)));
++	ut_assert(ip_addr_isany(dns_getserver(1)));
++	return 0;
++}
++
++static int dm_test_lwip_ip6_rdnss_backup(struct unit_test_state *uts)
++{
++	return ip6_test_run(uts, ip6_test_rdnss_backup);
++}
++DM_TEST(dm_test_lwip_ip6_rdnss_backup, UTF_SCAN_FDT);
++
++static int ip6_test_rdnss_override(struct unit_test_state *uts, struct ip6_test *test)
++{
++	static const char *const servers[] = { "fe80::2", "fe80::9" };
++	ip_addr_t expected;
++
++	ut_assertok(env_set("ipaddr", NULL));
++	ut_assertok(net_lwip_start(&test->net, NET_LWIP_ADDR_ENV_STRICT));
++	ut_assertok(net_lwip_ip6_start(&test->net));
++	ut_asserteq(-ENOENT, net_lwip_dns_refresh(&test->net));
++	ut_assertok(ip6_test_rdnss_servers(test->net.dev, 5, 0, 1));
++	ut_assertok(net_lwip_poll());
++	ut_assert(!ip_addr_isany(dns_getserver(0)));
++
++	/* An override not yet installed must not cancel the learned lifetime. */
++	ut_assertok(env_set("dnsip6", "fe80::9"));
++	ip6_test_age(1);
++	ut_assertok(env_set("dnsip6", NULL));
++	ip6_test_age(5);
++	ut_assert(ip_addr_isany(dns_getserver(0)));
++
++	for (unsigned int i = 0; i < ARRAY_SIZE(servers); i++) {
++		ut_assertok(ip6_test_rdnss_servers(test->net.dev, 5, 0, 1));
++		ut_assertok(net_lwip_poll());
++		ut_assertok(env_set("dnsip6", servers[i]));
++		ut_assertok(net_lwip_dns_refresh(&test->net));
++		ipaddr_aton(servers[i], &expected);
++		ip6_addr_assign_zone(ip_2_ip6(&expected), IP6_UNKNOWN, test->net.netif);
++
++		/* Explicit settings survive the old lifetime, even at the same address. */
++		ip6_test_age(6);
++		ut_assert(ip_addr_cmp(&expected, dns_getserver(0)));
++		ut_assertok(env_set("dnsip6", NULL));
++		ut_asserteq(-ENOENT, net_lwip_dns_refresh(&test->net));
++		ut_assert(ip_addr_isany(dns_getserver(0)));
++
++		/* RDNSS may arrive before the first refresh after removing an override. */
++		ut_assertok(env_set("dnsip6", servers[i]));
++		ut_assertok(net_lwip_dns_refresh(&test->net));
++		ut_assertok(env_set("dnsip6", NULL));
++		ut_assertok(ip6_test_rdnss_servers(test->net.dev, 5, 0, 1));
++		ut_assertok(net_lwip_poll());
++		ut_asserteq(-ENOENT, net_lwip_dns_refresh(&test->net));
++		ut_asserteq_str("FE80::2", ipaddr_ntoa(dns_getserver(0)));
++		ut_assert(ip_addr_isany(dns_getserver(1)));
++		ip6_test_age(6);
++		ut_assert(ip_addr_isany(dns_getserver(0)));
++	}
++	return 0;
++}
++
++static int dm_test_lwip_ip6_rdnss_override(struct unit_test_state *uts)
++{
++	return ip6_test_run(uts, ip6_test_rdnss_override);
++}
++DM_TEST(dm_test_lwip_ip6_rdnss_override, UTF_SCAN_FDT);
++
++static int ip6_test_rdnss_chain(struct unit_test_state *uts, struct ip6_test *test)
++{
++	static const u8 invalid_lengths[] = { 1, 4, 7 };
++	struct {
++		struct ra_header ra;
++		struct rdnss_option dns;
++		ip6_addr_p_t extra;
++	} reply = {};
++	struct eth_sandbox_priv *priv;
++	struct pbuf *head, *tail;
++	ip6_addr_t src, dst, server;
++	unsigned int first = ETHER_HDR_SIZE + IP6_HLEN + sizeof(reply.ra);
++	unsigned int len;
++
++	ut_assertok(env_set("ipaddr", NULL));
++	ut_assertok(net_lwip_start(&test->net, NET_LWIP_ADDR_ENV_STRICT));
++	ut_assertok(net_lwip_ip6_start(&test->net));
++	ut_asserteq(-ENOENT, net_lwip_dns_refresh(&test->net));
++	ip6addr_aton("fe80::1", &src);
++	ip6addr_aton("ff02::1", &dst);
++	reply.ra.type = ICMP6_TYPE_RA;
++	reply.ra.router_lifetime = htons(1800);
++	reply.dns.type = ND6_OPTION_TYPE_RDNSS;
++	reply.dns.length = (sizeof(reply.dns) + sizeof(reply.extra)) / 8;
++	reply.dns.lifetime = htonl(100);
++	ip6addr_aton("fe80::2", &server);
++	ip6_addr_copy_to_packed(reply.dns.rdnss_address[0], server);
++	ip6addr_aton("fe80::3", &server);
++	ip6_addr_copy_to_packed(reply.extra, server);
++	ut_assertok(ip6_test_reply(test->net.dev, &src, &dst, &reply, sizeof(reply),
++				 IP6_NEXTH_ICMP6, false));
++	ut_assertok(net_lwip_poll());
++	ut_assert(!ip_addr_isany(dns_getserver(0)));
++	ut_assert(!ip_addr_isany(dns_getserver(1)));
++	dns_setserver(0, NULL);
++	dns_setserver(1, NULL);
++
++	/* Deliver identical packet bytes with the RDNSS option in a second pbuf. */
++	ut_assertok(ip6_test_reply(test->net.dev, &src, &dst, &reply, sizeof(reply),
++				 IP6_NEXTH_ICMP6, false));
++	priv = dev_get_priv(test->net.dev);
++	ut_asserteq(1, priv->recv_packets);
++	len = priv->recv_packet_length[0];
++	head = pbuf_alloc(PBUF_RAW, first, PBUF_RAM);
++	ut_assertnonnull(head);
++	tail = pbuf_alloc(PBUF_RAW, len - first, PBUF_RAM);
++	if (!tail)
++		pbuf_free(head);
++	ut_assertnonnull(tail);
++	ut_asserteq(ERR_OK, pbuf_take(head, priv->recv_packet_buffer[0], first));
++	ut_asserteq(ERR_OK, pbuf_take(tail, priv->recv_packet_buffer[0] + first, len - first));
++	pbuf_cat(head, tail);
++	priv->recv_packets = 0;
++	ut_asserteq(ERR_OK, test->net.netif->input(head, test->net.netif));
++	ut_asserteq_str("FE80::2", ipaddr_ntoa(dns_getserver(0)));
++	ut_asserteq_str("FE80::3", ipaddr_ntoa(dns_getserver(1)));
++
++	for (unsigned int i = 0; i < ARRAY_SIZE(invalid_lengths); i++) {
++		dns_setserver(0, NULL);
++		dns_setserver(1, NULL);
++		reply.dns.length = invalid_lengths[i];
++		ut_assertok(ip6_test_reply(test->net.dev, &src, &dst, &reply, sizeof(reply),
++					 IP6_NEXTH_ICMP6, false));
++		ut_assertok(net_lwip_poll());
++		ut_assert(ip_addr_isany(dns_getserver(0)));
++		ut_assert(ip_addr_isany(dns_getserver(1)));
++	}
++	return 0;
++}
++
++static int dm_test_lwip_ip6_rdnss_chain(struct unit_test_state *uts)
++{
++	return ip6_test_run(uts, ip6_test_rdnss_chain);
++}
++DM_TEST(dm_test_lwip_ip6_rdnss_chain, UTF_SCAN_FDT);
 +#endif
 +
- int net_lwip_ip6_start(struct net_lwip_ctx *ctx)
- {
- 	ulong start;
-@@ -985,7 +1039,7 @@ static int net_lwip_rx(struct udevice *udev, struct netif *netif)
-  */
- int net_lwip_poll(void)
- {
--	int ret;
-+	int ret = 0;
- 
- 	if (!net_lwip_runtime.users)
- 		return -ENODEV;
-@@ -995,6 +1049,9 @@ int net_lwip_poll(void)
- 	net_lwip_runtime.polling = true;
- #if CONFIG_IS_ENABLED(IPV6)
- 	net_lwip_ip6_update_lifetimes();
++static int dm_test_lwip_ip6_ping(struct unit_test_state *uts)
++{
++	return ip6_test_run(uts, ip6_test_ping);
++}
++DM_TEST(dm_test_lwip_ip6_ping, UTF_SCAN_FDT);
++
++static int dm_test_lwip_ip6_dad(struct unit_test_state *uts)
++{
++	return ip6_test_run(uts, ip6_test_dad);
++}
++DM_TEST(dm_test_lwip_ip6_dad, UTF_SCAN_FDT | UTF_CONSOLE);
++
++static int dm_test_lwip_ip6_dad_scope(struct unit_test_state *uts)
++{
++	return ip6_test_run(uts, ip6_test_dad_scope);
++}
++DM_TEST(dm_test_lwip_ip6_dad_scope, UTF_SCAN_FDT);
++
++#if CONFIG_IS_ENABLED(IPV6_ROUTER_DISCOVERY)
++static int dm_test_lwip_ip6_slaac(struct unit_test_state *uts)
++{
++	return ip6_test_run(uts, ip6_test_slaac);
++}
++DM_TEST(dm_test_lwip_ip6_slaac, UTF_SCAN_FDT);
++
++static int dm_test_lwip_ip6_lifetimes(struct unit_test_state *uts)
++{
++	return ip6_test_run(uts, ip6_test_lifetimes);
++}
++DM_TEST(dm_test_lwip_ip6_lifetimes, UTF_SCAN_FDT);
 +#endif
-+#if CONFIG_IS_ENABLED(CMD_DHCP6)
-+	net_lwip_dhcp6_poll();
- #endif
- 	ret = net_lwip_rx(net_lwip_runtime.dev, net_lwip_runtime.netif);
- 	net_lwip_runtime.polling = false;
 
 -- 
 2.53.0
