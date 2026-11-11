@@ -1,146 +1,147 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 386F0606A321
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 08:56:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D6F2606A323
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 09:09:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=SpDR02Ub;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=oSB/Plv1
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=oGbwEzzl;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ShxX3M39
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0DFDE6071F;
-	Wed, 11 Nov 2026 08:56:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6CF3581288;
+	Wed, 11 Nov 2026 09:09:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id z1CKflji_XM8; Wed, 11 Nov 2026 08:56:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org F1E6860657
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794387403;
-	b=l/EqIhqAhRonyR5dAjVEtFaHApGPG3+rjlaLnfVRV6BBUtZd+gTSPa/EPSGpvZKzteoJ
-	 HiYBzrWvv3R5Wq2hjFN8LT+WeTlydiYU0ct24tyOA7T2UpwHQPfkUFQi3sJ1MuJQ/OcoG
-	 LlqmY6g3mvYK5FMpAAPWkZ5WIhYSBWESmf6krfbeVdjotStr1mTnt34d5aluq30MwFad4
-	 7Ia2JpJGziLP1UCKe2/w4Q363o0LI3yk8DapHuQgT7bmnSVqe3bEQK4IfiFNP0g96BoOp
-	 UNxMgIdzhRjBpdZvHKpl3MyQO38O2kAaEFY7GoOmmYVEib3DHdkjoEoRhxypzK5Bn1g==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TY01EEbBv3GL; Wed, 11 Nov 2026 09:09:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org C8F078128C
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794388158;
+	b=X2BGv465cuECJYS1RYCqkaiRLYEfzh6Eky7+JkYKAlmLH0t3B/YL8wyDO55dnm2Un/Jt
+	 7Cp5lwW5d73GXM2L3DzUn0vKWMbMTv5GqRW0Heycx+69HZIXi9EGcphOsKOBAaGV9rKEz
+	 Ird/QxarMhTrQMsi1pLCtHkYtSbhZIik5a7qZz2GLK1V28eF1rLRUFonqpv9+LeLCKNYV
+	 97+sPZGJbVxaD5Y/g3HbUZVOMm7ZGzMSUywC1HeU+IAfPqsHPthbBB+x0l4ukWRT85kYA
+	 vWfo61tR0kcc1uOCgZohwoooZHb8wAKl1yf7/bI/i4dg9p0SmEgqUPyojzkjULB2xvA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794387403;
+	c=relaxed/relaxed; t=1794388158;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:
-	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:
+	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
+	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=JUUXeFtwvquNigvAOV9+A9lbAtHldbBie0YYzSQHtnE=;
-	b=EypQOT9EK6mLSCO0+KPGp0uio0g2O9A9nT1zjvIPZbVn0qthCkmlUo4wmWHUk/yTkkWj
-	 JEglqplt7S0kcqxGegTXffz3PS2C5c+WmwPwEn+e7A6m138QRs+70n5nSz89BbpZFQ9jC
-	 8bUsGPw8OQB7yBWEEY5PQg7NNz4e+7bSyulSy+5YJPUz8YjvJ21abSqbM56X2O7LpiAw4
-	 SL8/WlumYslknW21MfDnrNGXmEEUlZZSTdDj6ChxIDb8Xa9H0J48bGy7RoPHOr/EzoAzE
-	 twF1aHsE7e2oGf0uhzFHStzqXkXhLisSEbX9K643326OQzKN9Lkn99JJmsWphhGyY/g==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=fYh+YsZMWMqV22IdxizfyeKg/dnAL40FUIGO7L0Ompo=;
+	b=GrBW0dNjXNlPzoe7LeGtWx+aIN9OwSxySiF/377G1p4en9nsPJKBO/Yb+WFtE3FnSrRW
+	 BdYFcFqtkGaV8h9rlDTWN8KIpdLopqFDY6FtConcEZbfoVi3CfvcYwT5BWkCngcQzA3zp
+	 UgBccCDgM07+UbYfE7jq+aHgt/9E/W1VBYbWBvp7DnpNdJtWV7i8vti+noSdBOUc+elze
+	 /3BZm3cXbyHb5KdyY/ybD04YZEEqFkp7TQGejRj5cXpNR72YeLciS6FIiXZlZhA0vuQuJ
+	 uJr2DBJCm4FxtJNKDmH90nT36hVm3YNlGsyofpowZ9SLn103q9x1bg2nA2r7TzX0p1g==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794387403;
-	bh=JUUXeFtwvquNigvAOV9+A9lbAtHldbBie0YYzSQHtnE=;
+	d=lists.u-boot-project.org; s=default; t=1794388158;
+	bh=fYh+YsZMWMqV22IdxizfyeKg/dnAL40FUIGO7L0Ompo=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=SpDR02UbtwsHNAnjBkpV6ukvSfhVfYda+R7yBrSwy70gFmyLwc8CNoLT67Q4TZWje
-	 HutqNrO9LItJRrTgpNT9l+uDbFo4tUYWZKBUSSzVRBJtqWA/fNR+ukpE0uaxUIE8D3
-	 xUKi8OoVSEUq6RRm0af9ZgXLPem/idoI1EjcRo4SmzfoFOlfenSpmu+iDwOdlF1jNy
-	 EUMDPx0fd7LIaHfe3mvLrf7U5SCJCXGEfyALzj7ZmXyNHe2oTk+Uo8bGDLbLQf+Y9F
-	 OUgVqptDsMN8AviKsVd623AQ1g7s4zuFPhqfkrQjSwZvVWeySOVpwSGXuysDSk5qk6
-	 j/goRcNxAk0kQ==
+	b=oGbwEzzlXaS/e7EDXGTMsG1Lx+qP1lxhutFqEEP7SntnITNdfWXIZOtD6TZL6vxIu
+	 oNQ9g8MbXm2NAv6aEreaSK42uq+YkGkTX2RXkC8nAkAL6ExeDYdMw1bnwjRGYlxn7b
+	 fsJOPuAR+GzunG0tWfaVp9cdlc0uX0ceN31pI9REFQpj2rJ1XG9yfa82niBaxI7L8k
+	 eKaPgd7pD8z7a5dnNvEm2ZWOdig9bUSEaQu9qtFC2k5Usp6H3OIFPW2Ere49ySZh0y
+	 uJ1Or0j3Jub5eeO2S/EU/IP76bWCEz796Le//36qfkJD3h1/Wg+PD4namuGR6ddFWh
+	 bXxOF/IwK2wOg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F1E6860657;
-	Wed, 11 Nov 2026 08:56:42 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id A7D0128C
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 08:56:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C8F078128C;
+	Wed, 11 Nov 2026 09:09:17 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id F0A5C17CC
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 09:09:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 776774080D
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 08:56:40 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id E49EE40318
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 09:09:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 8T9M9HU0LIkW for <u-boot@lists.u-boot-project.org>;
- Wed, 11 Nov 2026 08:56:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 596A240718
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::333"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VlzgRfYaAH-5 for <u-boot@lists.u-boot-project.org>;
+ Wed, 11 Nov 2026 09:09:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5F89E40070
+Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2607:f8b0:4864:20::f2c"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::333; helo=mail-ot1-x333.google.com;
- envelope-from=briansune@gmail.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+ client-ip=2607:f8b0:4864:20::f2c; helo=mail-qv1-xf2c.google.com;
+ envelope-from=pbrobinson@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
- header.s=20260707 header.b=oSB/Plv1
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 596A240718
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 08:56:38 +0000 (UTC)
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-8470d7d430fso1548028a34.3
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 00:56:38 -0800 (PST)
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20260707 header.b=ShxX3M39
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5F89E40070
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 09:09:13 +0000 (UTC)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-91eb7d147b0so13229956d6.3
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 01:09:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794387398; x=1794992198;
+ d=gmail.com; s=20260707; t=1794388153; x=1794992953;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=JUUXeFtwvquNigvAOV9+A9lbAtHldbBie0YYzSQHtnE=;
- b=oSB/Plv1FTX+8qmzCND3uL+UG6AW0rgELEZWCofPR9HHuuze2QPPor2w+oAmEh44tA
- w33tr396H10aH4KO0CFJkn8DJ8yxqTRSekPDw4SI7G39NEMOgBzxc7+OUVtQu1yEuxPB
- P9SvICWcpxTV3YDIw/Ir0GfZNnB/0yiVmPpixS8jacpIHNUF9MOCgGpxZax/otq+hP8L
- MgqkRBNJhT7/WhboVe+dkrWY0+Mo5HMQlVw6nlSEz5k8bJJsCC4WKc0ouCzapjQx0q0U
- KN4c1PW15Q5claAtgZw2LYTGuykdH3ySap5dyj8G89XXWaJObXkGPl7XI7J6OX7oIQX0
- 6ujQ==
+ bh=fYh+YsZMWMqV22IdxizfyeKg/dnAL40FUIGO7L0Ompo=;
+ b=ShxX3M39YZJm7c+51VUPP9keIbrLtdy8CQIUnjtjucggny0R/Lo6raIbU1pzl2wYM5
+ OLIpYOFzan8goLRuPTmFAVaMOD+lnrxU7pT+JOac8AuPwfEp9160/ZH1NsqsJLWWND0H
+ 488ColYTp6BxvvUVJHy2FcsPIACBcuAFDgGftR5cFhpPLecmAbMpO/X0cyxEpw5YgUQC
+ ovVkCX4nkikDz/KzNVk7vhdOQSN8Q/wPgHncHACpJ7DAU5yXRLlARvRukjWV5KFNDVPf
+ OoDM5jbLv9/xGfmOum9vcDjf86D8VAIHS7TQVgO58nCK3VrK0Qf0Pojqp0aoXOFdG6fY
+ G2FA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794387398; x=1794992198;
+ d=1e100.net; s=20260707; t=1794388153; x=1794992953;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=JUUXeFtwvquNigvAOV9+A9lbAtHldbBie0YYzSQHtnE=;
- b=KeyGQbWMtPq7e3CYyNqb/3+VMex77VzA4eUELg+WkxHLkXrDDh/PMyoCanmdtswdVN
- lYoN1Ew++iCPBL66cLoIczU4fLrYgaOcUUVsRgGxoXEvIW3EP2wn5RgmLgUyE5/wwQN+
- eU2379ldL9dn4A8lfREfuIlc7eYb8oFaHilxJ6UPTIo4xHPEXo5fliWEmNWEEZVM1JeV
- CrbXYxo9cLA/bkiXo27CTIgTE1cobhar229skEjDPPuGx58JrDbJE2xSoQRkMCSVTko0
- 0HRID14Np5jMvRr3r0v1X0mjeclJbEQaZVcPBD1BQ6qc10Q9TobGH/02DPZEZ8+ZA7gN
- CEUQ==
-X-Forwarded-Encrypted: i=1;
- AL+hErFaDcRG7T91rL52G4/gPiuL8i1GzjF59Y9Bb63QnSKyUHrn54B26qrT+JtO+9cDjyDtSTGJG88=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+INmfivbBYw90lpRBXdgApL/K0ijfO2Cw9mzZY0BoUnRJaBJOG
- ggGdAPm3GlG7OvrfNu2X0PLGhBJv/1AoCiy6iWu/e2OtHmryFnqT5xaORtTSaf2VDShQ+ZUYFcG
- vkVd++Wd2VVh9Cx02OOek9jCVuOGojoI=
-X-Gm-Gg: AYBFou2Yuv5EH0z5V7ZSjUbMO4NNtmIi+VNcCymAyo9Ak/74/+VYTT8+CV9eKv7VSZU
- d0Dk7oN1EF0r/lfM63iJhbHLm5F0l/+rkUWKok+FTpxahPJKBaLwERmIzEarsB4z0LkYWc0xh2D
- eAL3PDoiRuuWQNSeO2rvfl/0jhTZCaI2JQDhXCl4t/vbKHEBeWKCNIvQWvlaTV9SIYX2/edP+qZ
- LzgD5fcyAPX1NiNVUgA4dRGh83lDi/9CClau6pbvTXf4BAiKg5/dYxbaYjo/jrcjZ1pGXHNgLTK
- 4QNw9ZUfR4176Q0caT6Heh2eYMPQRc0rQS7ezFR3m5pyBBDpIzDu+NoQzwEYgY9JdoOsY/14z77
- Y0Lq5fQ2Jjtqy/hAh2tsDb3KR1gWizc7dNovODg==
-X-Received: by 2002:a05:6830:2406:b0:818:56c:a8f6 with SMTP id
- 46e09a7af769-860f29c7d06mr1595615a34.26.1794387397658; Wed, 11 Nov 2026
- 00:56:37 -0800 (PST)
+ bh=fYh+YsZMWMqV22IdxizfyeKg/dnAL40FUIGO7L0Ompo=;
+ b=EARnBTweL9JUh0Vl6CUxnvpvpFOjtiLfs4oDWqCdIFv3UFJlTxv8CiD7tUejRdoK+a
+ htylNA6KJMTNbNdb6owe/TFEECnSZ7sH1cQ1fo7270c2SZgnht0F0Ikh2mc0iLr+9AFG
+ 2no82k7xzqZMvssl0MD2S27t3oauQn16A3feYBtoqIUw4EJBYqjXcDGCVaPr70wUws4g
+ GUMAlfk3b6B4HTb3bMuuzl+NiDHU/iehsWcA1QgU/MzHN5VmVbvNa1nDNd2EM4KDPEkQ
+ gyoPrMWsT5Q4H1fApezYzKpbbxvq5NxNPI2JIUlvk8JQMTw2b5RSw1N2jGIZTFZIHArt
+ vI8g==
+X-Gm-Message-State: APuU4Z+6SSZ31cKguizRTRjyQfz3Loa8FEQDNLLBr9/TZFOPGsdTd+SE
+ 3Ew6uxWDcwzvyUtc5UaCAIHVveJ7HBysWm8DbPfn9trxuP0bY8VyYjW76pfVDLpRloxjt+EbprI
+ h1iP0YRT0Q1gxlnRCZe+ubhrEYGprQZg=
+X-Gm-Gg: AYBFou3m2eUbWU6lqMFAsMwEQ3J3Xv5ha0AftgiemWVhir+k99paYv0AsfvpR2iYFMX
+ 5BthOQCyDk5Zn01JG1G8yCfaAfyiptAg5n3gt5It0mT1zaLFsMbqy4KqpjyZRJHfdX8GHhjqUQ8
+ oHyejYYOCaBlwFLWsXq4jf2buvA0iwN9QyUMXuPvdbJ9lPmRiPqsZzB1xykUvBPBojRPslaVtWv
+ AR6pBDYYTXJz2Ho333QVPiseKExNZsYpSWP9obxBxNeleturBldAMQP6eIaJaXdffBRpi6JU4ec
+ lbrdng0GVEa4Hvaba4b2eMVg+YjjRlnr1EtKihoaRTUQ7YibLChCeJ3YokcVacsZF5aAE7BpA5p
+ WboL91EmP+mheAZTXqc8IPt09TPsihaIMMRRKfO35GY0oV1RyUO5mIIv0fxBaHUgizDUb+yzBrH
+ zdTHlzjql9En0C2Wv9S+b1E1l0P9XIjeXVI48Fk63YSdy5ugnC4HJqEfMVbhZT9qDp6hNtDugs0
+ y/XUvKd1qUq+L/7Df/z3fkG5iPyqxu+xdI=
+X-Received: by 2002:a05:6214:5782:b0:91e:c720:1710 with SMTP id
+ 6a1803df08f44-91f04173095mr26866806d6.40.1794388152401; Wed, 11 Nov 2026
+ 01:09:12 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261111062128.215998-1-briansune@gmail.com>
- <7d5f0c9f-6f04-4773-a0f6-1cab069a2f77@amd.com>
- <CAN7C2SC+Xzh-MsgoS5zYq2piDajpLh8BzGTkBdzCQ396oLgEPg@mail.gmail.com>
-In-Reply-To: <CAN7C2SC+Xzh-MsgoS5zYq2piDajpLh8BzGTkBdzCQ396oLgEPg@mail.gmail.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Wed, 11 Nov 2026 16:56:26 +0800
-X-Gm-Features: AclHuK_HJld-pTNefZ4IiXUxoU7V3tE1bJr2-El6FxzjrH4S83t_dzL0Yl5GIEc
-Message-ID: <CAN7C2SBrz0L3GmJMhT4Z84oWeZw8CRrJk8AW8R9itSQiJ=Aeew@mail.gmail.com>
-Subject: Re: [PATCH v1] arm: zynq: Add missing handoff script to XSA flow
-To: Michal Simek <michal.simek@amd.com>
-Cc: Tom Rini <trini@konsulko.com>,
+References: <20261104093101.500696-1-nguyenanhgiau1008@gmail.com>
+ <CAKXvu5i3EKRKTB_LCZB8xb1a0OjD-nGWqnUWnQ-d1xtjimkY9Q@mail.gmail.com>
+In-Reply-To: <CAKXvu5i3EKRKTB_LCZB8xb1a0OjD-nGWqnUWnQ-d1xtjimkY9Q@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 11 Nov 2026 09:09:00 +0000
+X-Gm-Features: AclHuK91LG70BSyiDCQxHmuJxsNywgHCDSGjQoveeVOX-uGcKQi2cPq_ofOjpsU
+Message-ID: <CALeDE9NyuBreWZngqOn+9-_BHEfpNTMfdh775y=WsPbBNWcz4Q@mail.gmail.com>
+Subject: Re: [PATCH v4 1/2] i2c: bcm2835: Add new BCM2835/BCM2711 I2C
+ controller driver
+To: =?UTF-8?B?R2nDoHUgTmd1eeG7hW4gQW5o?= <nguyenanhgiau1008@gmail.com>
+Cc: u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>, 
+ Matthias Brugger <mbrugger@suse.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- u-boot@lists.u-boot-project.org
+ Heiko Schocher <hs@nabladev.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -152,267 +153,626 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, Nov 11, 2026 at 4:37=E2=80=AFPM Sune Brian <briansune@gmail.com> wr=
-ote:
->
-> On Wed, Nov 11, 2026 at 4:13=E2=80=AFPM Michal Simek <michal.simek@amd.co=
-m> wrote:
-> >
-> >
-> >
-> > On 11/11/26 07:21, Brian Sune wrote:
-> > > This patch adds XSA handoff for ZYNQ core modifications.
-> >
-> > Add XSA ...
-> >
-> > >
-> > > User now can place XSA file next to the board folder where auto
-> > > generated from Vivado build flow.
-> >
-> > What would be intended workflow?
->
-> The intended flow is any XSA changes from Vivado build:
-> i.e. changed MIO unused or EMIO rerouting etc you have to update the boar=
-d
-> file ps7_init_gpl.c to ensure boot follows.
->
-> >
-> > >
-> > > Signed-off-by: Brian Sune <briansune@gmail.com>
-> > > ---
-> > >   arch/arm/mach-zynq/config.mk | 97 +++++++++++++++++++++++++++++++++=
-+++
-> > >   1 file changed, 97 insertions(+)
-> > >   create mode 100644 arch/arm/mach-zynq/config.mk
-> > >
-> > > diff --git a/arch/arm/mach-zynq/config.mk b/arch/arm/mach-zynq/config=
-.mk
-> > > new file mode 100644
-> > > index 00000000000..2680db85d25
-> > > --- /dev/null
-> > > +++ b/arch/arm/mach-zynq/config.mk
-> > > @@ -0,0 +1,97 @@
-> > > +# SPDX-License-Identifier: GPL-2.0+
-> > > +#
-> > > +# Brian Sune <briansune@gmail.com>
-> > > +#
-> > > +# HANDOFF_PATH
-> > > +# ------------
-> > > +# Unset - Board path where ###.xsa locates and "ps7_init_gpl.c" shou=
-ld be placed.
-> > > +# Set   - Custom path points to "###.xsa" file.
-> > > +#
-> > > +# HANDOFF_KEEP
-> > > +# ------------
-> > > +# Unset      - Clean ps7_init_gpl files.
-> > > +# Set        - HANDOFF_KEEP=3D , Clean ps7_init_gpl files.
-> > > +#      HANDOFF_KEEP=3D0, Clean ps7_init_gpl files.
-> > > +#      HANDOFF_KEEP=3D1, Backup header files and rename to "ps7_init=
-_gpl.c.handoff_backup.<timestamp>".
-> > > +#
-> > > +# Version Log
-> > > +# -----------
-> > > +# Date - 2026/11
-> > > +# 1.0.0 - Initial Release XSA handoff for custom boards and existing=
- boards
-> > > +
-> > > +ifeq ($(CONFIG_ARCH_ZYNQ),y)
-> > > +archprepare: zynq_handoff_prepare
-> > > +endif
-> > > +
-> > > +define COMMENT_C_FUNC
-> > > +     FILE_PATH=3D"$(2)"; \
-> > > +     TEXT_MATCH=3D$$(printf '%s' "$(1)" | sed 's/(/\\(/g'); \
-> > > +     C_FUNC_HEAD=3D$$(awk "/$$TEXT_MATCH/ {{print NR; exit}}" "$$FIL=
-E_PATH"); \
-> > > +     if [ -n "$$C_FUNC_HEAD" ]; then \
-> > > +             C_FUNC_HEAD=3D$$((C_FUNC_HEAD - 1)); \
-> > > +             C_FUNC_TAIL=3D$$(awk -v start=3D"$$C_FUNC_HEAD" '/^\}/ =
-{if (NR > start) {print NR; exit}}' "$$FILE_PATH"); \
-> > > +     fi; \
-> > > +     if [ -n "$$C_FUNC_HEAD" ] && [ -n "$$C_FUNC_TAIL" ]; then \
-> > > +             sed -i "$$C_FUNC_HEAD,$$C_FUNC_TAIL s/^/\/\//" "$$FILE_=
-PATH"; \
-> > > +             echo "[INFO] Commented out lines $$C_FUNC_HEAD and $$C_=
-FUNC_TAIL."; \
-> > > +     fi
-> > > +endef
-> > > +
-> > > +zynq_handoff_prepare:
-> > > +     @set -- $$(awk -F'"' ' \
-> > > +             /^CONFIG_SYS_VENDOR=3D/ {v=3D$$2} \
-> > > +             /^CONFIG_DEFAULT_DEVICE_TREE=3D/ {b=3D$$2} \
-> > > +             END {print v, b}' .config); \
-> > > +             VENDOR=3D$$1; \
-> > > +             BOARD=3D$$2; \
-> > > +             if [ -z "$$VENDOR" ] || [ -z "$$BOARD" ]; then \
-> > > +                     exit 0; \
-> > > +             fi; \
-> > > +             BOARD_DIR=3D$(srctree)/board/$$VENDOR/zynq/$$BOARD; \
-> > > +             if [ "$$HANDOFF_PATH" ]; then \
-> > > +                     echo "[INFO] Using manually specified handoff f=
-older: $$HANDOFF_PATH"; \
-> > > +             else \
-> > > +                     HANDOFF_PATH=3D$$BOARD_DIR; \
-> > > +                     if [ ! -d "$$HANDOFF_PATH" ]; then \
-> > > +                             exit 0; \
-> > > +                     fi; \
-> > > +                     echo "[INFO] Try auto-detected handoff XSA: $$H=
-ANDOFF_PATH"; \
-> > > +             fi; \
-> > > +             TEMP_DIR=3D$$(mktemp -dp "$$BOARD_DIR/"); \
-> >
-> > When you do out of tree compilation you very likely don't want any scri=
-pt to
-> > change your code under your hands.
->
+Hi Gi=C3=A0u,
 
-There are some typo here:
-This script will NOT execute when XSA is not given next to the board
-folder nor custom flag setup.
-So it will simply exit and silently cont'd. And the intention for this
-is run > make prepare phase.
+It's on my backlog, sorry I've had limited time of late, but I should
+do it in the next few days.
 
-> This script will on execute when XSA is not given next to the board
-> folder nor custom flag setup.
-> So it will simply exit and silently cont'd.
-> While the intention for this is run > make prepare phase.
->
-> >
-> > I don't have issue with this idea to automate this but I see this more =
-like a
-> > tool not something what you want to run in every build. Please look bel=
-ow.
-> >
-> >
-> > > +             trap 'rm -rf "$$TEMP_DIR"' EXIT; \
-> > > +             XSA_FILE=3D$$(ls $(srctree)/"$$HANDOFF_PATH"/*.xsa 2>/d=
-ev/null | head -n 1); \
-> > > +             if [ -z "$$XSA_FILE" ]; then \
-> > > +                     exit 0; \
-> > > +             fi; \
-> > > +             echo "[INFO] XSA: $${XSA_FILE##*/}"; \
-> > > +             unzip -q -o "$$XSA_FILE" ps7_init_gpl.c -d "$$TEMP_DIR/=
-"; \
-> > > +             if [ ! -f "$$TEMP_DIR/ps7_init_gpl.c" ]; then \
-> > > +                     echo "[WARM] XSA unzip unsuccessful."; \
-> > > +                     exit 0; \
-> > > +             fi; \
-> > > +                             if [ "$${HANDOFF_KEEP:-0}" !=3D "0" ]; =
-then \
-> > > +                     echo "[INFO] Preserving old GPL files..."; \
-> > > +                     TIMESTAMP=3D$$(date +%Y%m%d_%H%M%S); \
-> > > +                     for f in "$$BOARD_DIR"/*.c; do \
-> > > +                             [ -e "$$f" ] || continue; \
-> > > +                             echo "[INFO] $$f -> $${f%.c}.c.handoff_=
-backup.$$TIMESTAMP"; \
-> > > +                             mv "$$f" "$${f%.c}.c.handoff_backup.$$T=
-IMESTAMP"; \
-> > > +                     done; \
-> > > +             else \
-> > > +                     echo "[INFO] Clean old GPL files..."; \
-> > > +                     if ls "$$BOARD_DIR"/*.c >/dev/null 2>&1; then \
-> > > +                             rm "$$BOARD_DIR"/*.c; \
-> > > +                             echo "[INFO] Removed old GPL file..."; =
-\
-> > > +                     fi; \
-> > > +             fi; \
-> > > +             sed -i 's|#include "ps7_init_gpl.h"|#include <asm/arch/=
-ps7_init_gpl.h>|g' "$$TEMP_DIR/ps7_init_gpl.c"; \
-> > > +             echo "[INFO] Masking GPL unused functions..."; \
-> > > +             FUNC_NAME=3D"ps7_config(unsigned"; \
-> > > +             $(call COMMENT_C_FUNC,$$FUNC_NAME,$$TEMP_DIR/ps7_init_g=
-pl.c); \
-> > > +             sed -i 's/^ps7_debug(/ps7_debug(void/g' "$$TEMP_DIR/ps7=
-_init_gpl.c"; \
-> > > +             sed -i 's/^ps7_post_config(/ps7_post_config(void/g' "$$=
-TEMP_DIR/ps7_init_gpl.c"; \
-> > > +             sed -i 's/^ps7_init(/ps7_init(void/g' "$$TEMP_DIR/ps7_i=
-nit_gpl.c"; \
-> > > +             sed -i "/For delay calculation using global timer/,\$$d=
-" "$$TEMP_DIR/ps7_init_gpl.c"; \
-> > > +             sed -i "/int\nps7_config/,\$$d" "$$TEMP_DIR/ps7_init_gp=
-l.c"; \
-> >
-> > This sounds very similar to
-> > tools/zynqmp_psu_init_minimize.sh
->
-> I am not aware that Xilinx has this as I moved from socfpga and did
-> similar things.
->
-> >
-> > obviously you target Zynq and not ZynqMP but one part is extract it for=
-m xsa and
-> > second about cleaning. And there are much more things to clean.
-> >
-> > You should divide it to two parts.
-> > 1. just unpacking xsa and installing it to certain configured board
->
+Peter
 
-Ths XSA so far I understand on ZYNQ only requires 1 file "ps7_init_gpl.c"
-All other hwh etc is not a major use to define a board / custom setup.
-And the unzip + cleanup actually only require when user would like to
-setup a custom board
-or change existing board settings.
-I also have to ammit I don't have a full log on how old Vivado pack
-things and handoff file changes
-are required or not.
-I only tested on Vivado exported XSA 2024 version, where old 2019 uses HDF.
-
-Meantime, this patch is intended to work on XSA so if 2020 to 202x XSA
-export is kept it
-should be good to go.
-
-I think the easiest and cleanest way to support handoff on ZYNQ is
-just passing "ps7_init_gpl.c" from
-XSA.
-And if user do not change any things it make no sense to unzip XSA aka phas=
-e (1)
-Then phase (2) dies together.
-So any changes will always 1+2 while 2 optionally keep or overwrite
-old "ps7_init_gpl.c".
-
-So far the board folders for ZYNQ also follow this structure and no
-variants are found.
-
-Thanks,
-Brian
-
-> There are actually not installations at all as 2024 Vivado generated
-> XSA that cannot directly
-> extract and place w/o build fails.
+On Wed, 11 Nov 2026 at 03:05, Gi=C3=A0u Nguy=E1=BB=85n Anh
+<nguyenanhgiau1008@gmail.com> wrote:
 >
-> > 2. ps7 cleanup
+> Hi Simon and Peter,
 >
-> The cleanup does have a flag for users to select keep or not.
+> Could you please take a moment to review my patches?
+> Your feedback is greatly appreciated.
 >
-> TBH: I am also amazed by why Xilinx did not include XSA handoff flow
-> between upstream u-boot.
-> I do understand that most of the users use the Petalinux build flow on
-> top of Yocto.
-> But this setup completely wastes a lot of computation power and complex t=
-hings.
-> I run this script and boot my board w/o any issue when simply passing
-> Vivado exported XSA.
+> Thank you! Regards
+> --------------------------------------------------------
+> Giau Nguyen
+> --------------------------------------------------------
+> Phone: (+84) 387 915 996
 >
-> Any feedback is Welcome =3D]
 >
-> FYI
-> I also noticed the board flag of the ZYNQ is kind of funny.
-> I had to use device-tree labels in this current script to make things
-> work normally.
->
-> >
-> > Thanks,
-> > Michal
-> >
-> >
-> >
+> On Wed, Nov 4, 2026 at 4:31=E2=80=AFPM Giau Nguyen <nguyenanhgiau1008@gma=
+il.com> wrote:
+>>
+>> Mainline U-Boot currently lacks an I2C controller driver for the
+>> Broadcom BCM2711 SoC (Raspberry Pi 4).
+>>
+>> This commit adds a new DM-compliant I2C driver for Broadcom
+>> BCM2835/BCM2711 SoCs, based on the Linux kernel's i2c-bcm2835.c
+>> (Linux commit 32a0a94aa09e ("i2c: Switch back to struct
+>> platform_driver::remove()")). The driver is polling based.
+>>
+>> The driver dynamically queries the actual VPU core clock rate from
+>> the VideoCore firmware via mailbox property messages to calculate
+>> the CDIV clock divider, ensuring accurate I2C timing and baud rates
+>> on BCM2711.
+>>
+>> To query the clock, add bcm2835_get_clock_rate() to mach-bcm283x and
+>> reuse it from bcm2835_get_mmc_clock(). The existing fallback to the
+>> maximum clock rate when the firmware reports a rate of 0 is kept for
+>> the MMC case.
+>>
+>> Tested on a Raspberry Pi 4 Model B with a UPS HAT carrying an INA219
+>> power monitor (I2C bus 1, address 0x42), using the 'i2c dev', 'i2c probe=
+',
+>> 'i2c write' and 'i2c read' commands to configure the sensor and read bac=
+k
+>> its current register.
+>>
+>> Signed-off-by: Giau Nguyen <nguyenanhgiau1008@gmail.com>
+>> Reviewed-by: Heiko Schocher <hs@nabladev.com>
+>> ---
+>>
+>> Notes:
+>>     v4:
+>>      - Split defconfig changes into a separate patch.
+>>      - Reused bcm2835_get_clock_rate() in bcm2835_get_mmc_clock(), keepi=
+ng
+>>        the fallback to GET_MAX_CLOCK_RATE when the firmware reports a ra=
+te
+>>        of 0. Define and declare it before bcm2835_get_mmc_clock() in msg=
+.c
+>>        and msg.h.
+>>      - Added 'depends on ARCH_BCM283X' to Kconfig.
+>>      - Dropped unsupported I2C_M_IGNORE_NAK flag handling.
+>>      - Removed redundant !curr_msg check in polling loop.
+>>      - Replaced printf() with dev_err() in probe().
+>>      - Dropped redundant set_rate() call in probe(), the uclass already =
+sets
+>>        the bus speed from 'clock-frequency'. Check for a zero core clock
+>>        rate in probe() instead, as bcm2835_get_clock_rate() no longer
+>>        rejects it.
+>>      - Fix #include order, .compatible formatting and copyright header.
+>>
+>>     v3:
+>>      - Added the Linux commit ID to the commit message.
+>>      - Fixed alphabetical sorting of CONFIG_SYS_I2C_BCM2835 in
+>>        drivers/i2c/Makefile.
+>>      - Added Reviewed-by tag from Heiko.
+>>
+>>     v2:
+>>      - Clarified commit message: U-Boot mainline currently lacks BCM2711=
+ I2C
+>>        driver.
+>>      - Fixed line endings and code formatting per checkpatch.pl.
+>>      - Converted register offsets to 'struct bcm2835_i2c_regs' abstracti=
+on.
+>>      - Removed 'bcm2835_i2c_readl/writel' wrappers in favor of standard
+>>        readl/writel.
+>>      - Moved mailbox clock querying to bcm2835_get_clock_rate() in
+>>        mach-bcm283x.
+>>      - Sorted drivers/i2c/Kconfig and Makefile alphabetically.
+>>      - Removed 'Assisted by AI' tag.
+>>
+>>  MAINTAINERS                              |   1 +
+>>  arch/arm/mach-bcm283x/include/mach/msg.h |   9 +
+>>  arch/arm/mach-bcm283x/msg.c              |  29 +-
+>>  drivers/i2c/Kconfig                      |  11 +
+>>  drivers/i2c/Makefile                     |   1 +
+>>  drivers/i2c/i2c-bcm2835.c                | 359 +++++++++++++++++++++++
+>>  6 files changed, 402 insertions(+), 8 deletions(-)
+>>  create mode 100644 drivers/i2c/i2c-bcm2835.c
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index d273603ac64..53bf76964de 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -277,6 +277,7 @@ S:  Maintained
+>>  F:     arch/arm/mach-bcm283x/
+>>  F:     board/raspberrypi/
+>>  F:     drivers/gpio/bcm2835_gpio.c
+>> +F:     drivers/i2c/i2c-bcm2835.c
+>>  F:     drivers/mmc/bcm2835_sdhci.c
+>>  F:     drivers/mmc/bcm2835_sdhost.c
+>>  F:     drivers/serial/serial_bcm283x_mu.c
+>> diff --git a/arch/arm/mach-bcm283x/include/mach/msg.h b/arch/arm/mach-bc=
+m283x/include/mach/msg.h
+>> index e54da86e353..ca8cc8826da 100644
+>> --- a/arch/arm/mach-bcm283x/include/mach/msg.h
+>> +++ b/arch/arm/mach-bcm283x/include/mach/msg.h
+>> @@ -14,6 +14,15 @@
+>>   */
+>>  int bcm2835_power_on_module(u32 module);
+>>
+>> +/**
+>> + * bcm2835_get_clock_rate() - get the current rate of a clock
+>> + *
+>> + * @clock_id: ID of clock to get frequency for (BCM2835_MBOX_CLOCK_ID_.=
+..)
+>> + * @rate: Returns the clock rate in Hz (may be 0 if the clock is not ru=
+nning)
+>> + * Return: 0 if OK, -EIO on error
+>> + */
+>> +int bcm2835_get_clock_rate(u32 clock_id, ulong *rate);
+>> +
+>>  /**
+>>   * bcm2835_get_mmc_clock() - get the frequency of the MMC clock
+>>   *
+>> diff --git a/arch/arm/mach-bcm283x/msg.c b/arch/arm/mach-bcm283x/msg.c
+>> index 05e1a02e80f..d1b85bdac24 100644
+>> --- a/arch/arm/mach-bcm283x/msg.c
+>> +++ b/arch/arm/mach-bcm283x/msg.c
+>> @@ -77,15 +77,10 @@ int bcm2835_power_on_module(u32 module)
+>>         return 0;
+>>  }
+>>
+>> -int bcm2835_get_mmc_clock(u32 clock_id)
+>> +int bcm2835_get_clock_rate(u32 clock_id, ulong *rate)
+>>  {
+>>         ALLOC_CACHE_ALIGN_BUFFER(struct msg_get_clock_rate, msg_clk, 1);
+>>         int ret;
+>> -       u32 clock_rate =3D 0;
+>> -
+>> -       ret =3D bcm2835_power_on_module(BCM2835_MBOX_POWER_DEVID_SDHCI);
+>> -       if (ret)
+>> -               return ret;
+>>
+>>         BCM2835_MBOX_INIT_HDR(msg_clk);
+>>         BCM2835_MBOX_INIT_TAG(&msg_clk->get_clock_rate, GET_CLOCK_RATE);
+>> @@ -93,11 +88,29 @@ int bcm2835_get_mmc_clock(u32 clock_id)
+>>
+>>         ret =3D bcm2835_mbox_call_prop(BCM2835_MBOX_PROP_CHAN, &msg_clk-=
+>hdr);
+>>         if (ret) {
+>> -               printf("bcm2835: Could not query eMMC clock rate\n");
+>> +               printf("bcm2835: Could not query clock rate for clock %u=
+\n",
+>> +                      clock_id);
+>>                 return -EIO;
+>>         }
+>>
+>> -       clock_rate =3D msg_clk->get_clock_rate.body.resp.rate_hz;
+>> +       *rate =3D msg_clk->get_clock_rate.body.resp.rate_hz;
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +int bcm2835_get_mmc_clock(u32 clock_id)
+>> +{
+>> +       ALLOC_CACHE_ALIGN_BUFFER(struct msg_get_clock_rate, msg_clk, 1);
+>> +       ulong clock_rate;
+>> +       int ret;
+>> +
+>> +       ret =3D bcm2835_power_on_module(BCM2835_MBOX_POWER_DEVID_SDHCI);
+>> +       if (ret)
+>> +               return ret;
+>> +
+>> +       ret =3D bcm2835_get_clock_rate(clock_id, &clock_rate);
+>> +       if (ret)
+>> +               return ret;
+>>
+>>         if (clock_rate =3D=3D 0) {
+>>                 BCM2835_MBOX_INIT_HDR(msg_clk);
+>> diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
+>> index 0b5225fd3f5..77f71cd28ca 100644
+>> --- a/drivers/i2c/Kconfig
+>> +++ b/drivers/i2c/Kconfig
+>> @@ -171,6 +171,17 @@ config SYS_I2C_AT91
+>>           i2c-gpio driver unless your system can cope with this limitati=
+on.
+>>           Binding info: doc/device-tree-bindings/i2c/i2c-at91.txt
+>>
+>> +config SYS_I2C_BCM2835
+>> +       bool "BCM2835 I2C controller"
+>> +       depends on DM_I2C
+>> +       depends on ARCH_BCM283X
+>> +       help
+>> +         Enable support for the Broadcom BCM2835/BCM2711 I2C controller=
+.
+>> +         This driver provides standard I2C support for Raspberry Pi
+>> +         devices, including the newer Raspberry Pi 4. It dynamically
+>> +         calculates the clock divider based on the VPU core clock
+>> +         queried via the firmware mailbox.
+>> +
+>>  config SYS_I2C_IPROC
+>>         bool "Broadcom I2C driver"
+>>         depends on DM_I2C
+>> diff --git a/drivers/i2c/Makefile b/drivers/i2c/Makefile
+>> index 79e6a298808..207449f0f20 100644
+>> --- a/drivers/i2c/Makefile
+>> +++ b/drivers/i2c/Makefile
+>> @@ -15,6 +15,7 @@ obj-$(CONFIG_SYS_I2C_ADI) +=3D adi_i2c.o
+>>  obj-$(CONFIG_SYS_I2C_ASPEED) +=3D ast_i2c.o
+>>  obj-$(CONFIG_SYS_I2C_AST2600) +=3D ast2600_i2c.o
+>>  obj-$(CONFIG_SYS_I2C_AT91) +=3D at91_i2c.o
+>> +obj-$(CONFIG_SYS_I2C_BCM2835) +=3D i2c-bcm2835.o
+>>  obj-$(CONFIG_SYS_I2C_CADENCE) +=3D i2c-cdns.o
+>>  obj-$(CONFIG_SYS_I2C_CA) +=3D i2c-cortina.o
+>>  obj-$(CONFIG_SYS_I2C_DAVINCI) +=3D davinci_i2c.o
+>> diff --git a/drivers/i2c/i2c-bcm2835.c b/drivers/i2c/i2c-bcm2835.c
+>> new file mode 100644
+>> index 00000000000..58bc3ce944c
+>> --- /dev/null
+>> +++ b/drivers/i2c/i2c-bcm2835.c
+>> @@ -0,0 +1,359 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +/*
+>> + * BCM2835 I2C controller driver
+>> + * Copyright (C) 2026 Giau Nguyen <nguyenanhgiau1008@gmail.com>
+>> + *
+>> + * Based on Linux driver: drivers/i2c/busses/i2c-bcm2835.c
+>> + */
+>> +
+>> +#include <dm.h>
+>> +#include <i2c.h>
+>> +#include <time.h>
+>> +#include <log.h>
+>> +#include <asm/io.h>
+>> +#include <asm/arch/mbox.h>
+>> +#include <asm/arch/msg.h>
+>> +#include <dm/device_compat.h>
+>> +#include <linux/bitops.h>
+>> +#include <linux/delay.h>
+>> +#include <linux/err.h>
+>> +#include <linux/kernel.h>
+>> +#include <linux/types.h>
+>> +
+>> +#define BCM2835_I2C_C_READ     BIT(0)
+>> +#define BCM2835_I2C_C_CLEAR    BIT(4) /* bits 4 and 5 both clear */
+>> +#define BCM2835_I2C_C_ST       BIT(7)
+>> +#define BCM2835_I2C_C_INTD     BIT(8)
+>> +#define BCM2835_I2C_C_INTT     BIT(9)
+>> +#define BCM2835_I2C_C_INTR     BIT(10)
+>> +#define BCM2835_I2C_C_I2CEN    BIT(15)
+>> +
+>> +#define BCM2835_I2C_S_TA       BIT(0)
+>> +#define BCM2835_I2C_S_DONE     BIT(1)
+>> +#define BCM2835_I2C_S_TXW      BIT(2)
+>> +#define BCM2835_I2C_S_RXR      BIT(3)
+>> +#define BCM2835_I2C_S_TXD      BIT(4)
+>> +#define BCM2835_I2C_S_RXD      BIT(5)
+>> +#define BCM2835_I2C_S_TXE      BIT(6)
+>> +#define BCM2835_I2C_S_RXF      BIT(7)
+>> +#define BCM2835_I2C_S_ERR      BIT(8)
+>> +#define BCM2835_I2C_S_CLKT     BIT(9)
+>> +#define BCM2835_I2C_S_LEN      BIT(10) /* Fake bit for SW error reporti=
+ng */
+>> +
+>> +#define BCM2835_I2C_FEDL_SHIFT 16
+>> +#define BCM2835_I2C_REDL_SHIFT 0
+>> +
+>> +#define BCM2835_I2C_CDIV_MIN   0x0002
+>> +#define BCM2835_I2C_CDIV_MAX   0xFFFE
+>> +
+>> +#define BCM2835_I2C_CLKT_TOUT_MS 35
+>> +#define BCM2835_I2C_XFER_TIMEOUT_MS 1000
+>> +
+>> +struct bcm2835_i2c_regs {
+>> +       u32 c;
+>> +       u32 s;
+>> +       u32 dlen;
+>> +       u32 a;
+>> +       u32 fifo;
+>> +       u32 div;
+>> +       u32 del;
+>> +       u32 clkt;
+>> +};
+>> +
+>> +struct bcm2835_i2c_priv {
+>> +       struct bcm2835_i2c_regs __iomem *regs;
+>> +       ulong input_rate;
+>> +       size_t msg_buf_remaining;
+>> +       u8 *msg_buf;
+>> +       struct i2c_msg *curr_msg;
+>> +       int msg_err;
+>> +       int num_msgs;
+>> +};
+>> +
+>> +static void bcm2835_fill_txfifo(struct bcm2835_i2c_priv *i2c_dev)
+>> +{
+>> +       struct bcm2835_i2c_regs __iomem *regs =3D i2c_dev->regs;
+>> +
+>> +       while (i2c_dev->msg_buf_remaining) {
+>> +               if (!(readl(&regs->s) & BCM2835_I2C_S_TXD))
+>> +                       break;
+>> +
+>> +               writel(*i2c_dev->msg_buf, &regs->fifo);
+>> +               i2c_dev->msg_buf++;
+>> +               i2c_dev->msg_buf_remaining--;
+>> +       }
+>> +}
+>> +
+>> +static void bcm2835_drain_rxfifo(struct bcm2835_i2c_priv *i2c_dev)
+>> +{
+>> +       struct bcm2835_i2c_regs __iomem *regs =3D i2c_dev->regs;
+>> +
+>> +       while (i2c_dev->msg_buf_remaining) {
+>> +               if (!(readl(&regs->s) & BCM2835_I2C_S_RXD))
+>> +                       break;
+>> +
+>> +               *i2c_dev->msg_buf =3D readl(&regs->fifo);
+>> +               i2c_dev->msg_buf++;
+>> +               i2c_dev->msg_buf_remaining--;
+>> +       }
+>> +}
+>> +
+>> +static int bcm2835_i2c_calc_divider(unsigned long rate,
+>> +                                   unsigned long parent_rate)
+>> +{
+>> +       int divider =3D DIV_ROUND_UP(parent_rate, rate);
+>> +
+>> +       /*
+>> +        * Per the datasheet, the register is always interpreted as an e=
+ven
+>> +        * number, by rounding down. In other words, the LSB is ignored.=
+ So,
+>> +        * if the LSB is set, increment the divider to avoid any issue.
+>> +        */
+>> +       if (divider & 1)
+>> +               divider++;
+>> +
+>> +       if (divider < BCM2835_I2C_CDIV_MIN ||
+>> +           divider > BCM2835_I2C_CDIV_MAX)
+>> +               return -EINVAL;
+>> +
+>> +       return divider;
+>> +}
+>> +
+>> +static int bcm2835_i2c_set_rate(struct udevice *bus, unsigned int rate)
+>> +{
+>> +       struct bcm2835_i2c_priv *i2c_dev =3D dev_get_priv(bus);
+>> +       struct bcm2835_i2c_regs __iomem *regs =3D i2c_dev->regs;
+>> +       ulong parent_rate =3D i2c_dev->input_rate;
+>> +       u32 redl, fedl;
+>> +       u32 clk_tout;
+>> +       int divider;
+>> +
+>> +       if (!rate || !parent_rate)
+>> +               return -EINVAL;
+>> +
+>> +       divider =3D bcm2835_i2c_calc_divider(rate, parent_rate);
+>> +       if (divider < 0)
+>> +               return divider;
+>> +
+>> +       writel(divider, &regs->div);
+>> +
+>> +       /*
+>> +        * Number of core clocks to wait after falling edge before
+>> +        * outputting the next data bit. Note that both FEDL and REDL
+>> +        * can't be greater than CDIV/2.
+>> +        */
+>> +       fedl =3D max_t(u32, divider / 16, 1);
+>> +
+>> +       /*
+>> +        * Number of core clocks to wait after rising edge before
+>> +        * sampling the next incoming data bit.
+>> +        */
+>> +       redl =3D max_t(u32, divider / 4, 1);
+>> +
+>> +       writel((fedl << BCM2835_I2C_FEDL_SHIFT) |
+>> +              (redl << BCM2835_I2C_REDL_SHIFT), &regs->del);
+>> +
+>> +       /*
+>> +        * Set the clock stretch timeout.
+>> +        */
+>> +       if (rate > 0xffff * 1000 / BCM2835_I2C_CLKT_TOUT_MS)
+>> +               clk_tout =3D 0xffff;
+>> +       else
+>> +               clk_tout =3D BCM2835_I2C_CLKT_TOUT_MS * rate / 1000;
+>> +
+>> +       writel(clk_tout, &regs->clkt);
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +static void bcm2835_i2c_start_transfer(struct bcm2835_i2c_priv *i2c_dev=
+)
+>> +{
+>> +       struct bcm2835_i2c_regs __iomem *regs =3D i2c_dev->regs;
+>> +       u32 c =3D BCM2835_I2C_C_ST | BCM2835_I2C_C_I2CEN;
+>> +       struct i2c_msg *msg =3D i2c_dev->curr_msg;
+>> +       bool last_msg =3D (i2c_dev->num_msgs =3D=3D 1);
+>> +
+>> +       if (!i2c_dev->num_msgs)
+>> +               return;
+>> +
+>> +       i2c_dev->num_msgs--;
+>> +       i2c_dev->msg_buf =3D msg->buf;
+>> +       i2c_dev->msg_buf_remaining =3D msg->len;
+>> +
+>> +       if (msg->flags & I2C_M_RD)
+>> +               c |=3D BCM2835_I2C_C_READ;
+>> +       else
+>> +               c |=3D BCM2835_I2C_C_INTT;
+>> +
+>> +       if (last_msg)
+>> +               c |=3D BCM2835_I2C_C_INTD;
+>> +
+>> +       writel(msg->addr, &regs->a);
+>> +       writel(msg->len, &regs->dlen);
+>> +       writel(c, &regs->c);
+>> +}
+>> +
+>> +static void bcm2835_i2c_finish_transfer(struct bcm2835_i2c_priv *i2c_de=
+v)
+>> +{
+>> +       i2c_dev->curr_msg =3D NULL;
+>> +       i2c_dev->num_msgs =3D 0;
+>> +       i2c_dev->msg_buf =3D NULL;
+>> +       i2c_dev->msg_buf_remaining =3D 0;
+>> +}
+>> +
+>> +static int bcm2835_i2c_xfer(struct udevice *dev, struct i2c_msg *msgs, =
+int count)
+>> +{
+>> +       struct bcm2835_i2c_priv *i2c_dev =3D dev_get_priv(dev);
+>> +       struct bcm2835_i2c_regs __iomem *regs =3D i2c_dev->regs;
+>> +       bool done =3D false;
+>> +       ulong start;
+>> +       int i;
+>> +       u32 val, err;
+>> +       int ret =3D 0;
+>> +
+>> +       if (!msgs || count <=3D 0)
+>> +               return -EINVAL;
+>> +
+>> +       for (i =3D 0; i < count; i++) {
+>> +               if (msgs[i].flags & I2C_M_TEN)
+>> +                       return -EOPNOTSUPP;
+>> +               if (msgs[i].flags & I2C_M_RD) {
+>> +                       if (i < count - 1) {
+>> +                               dev_err(dev, "read message must be last\=
+n");
+>> +                               return -EOPNOTSUPP;
+>> +                       }
+>> +               }
+>> +               if (msgs[i].len > 0xffff)
+>> +                       return -EINVAL;
+>> +       }
+>> +
+>> +       /* Clear stale status and FIFO state before starting a new trans=
+action. */
+>> +       writel(BCM2835_I2C_C_CLEAR, &regs->c);
+>> +       writel(BCM2835_I2C_S_CLKT | BCM2835_I2C_S_ERR | BCM2835_I2C_S_DO=
+NE,
+>> +              &regs->s);
+>> +
+>> +       i2c_dev->curr_msg =3D msgs;
+>> +       i2c_dev->num_msgs =3D count;
+>> +       i2c_dev->msg_err =3D 0;
+>> +
+>> +       bcm2835_i2c_start_transfer(i2c_dev);
+>> +       start =3D get_timer(0);
+>> +       while (get_timer(start) < BCM2835_I2C_XFER_TIMEOUT_MS) {
+>> +               val =3D readl(&regs->s);
+>> +
+>> +               err =3D val & (BCM2835_I2C_S_CLKT | BCM2835_I2C_S_ERR);
+>> +               if (err && !(val & BCM2835_I2C_S_TA))
+>> +                       i2c_dev->msg_err =3D err;
+>> +
+>> +               if (val & BCM2835_I2C_S_DONE) {
+>> +                       if (i2c_dev->curr_msg->flags & I2C_M_RD) {
+>> +                               bcm2835_drain_rxfifo(i2c_dev);
+>> +                               val =3D readl(&regs->s);
+>> +                       }
+>> +
+>> +                       if ((val & BCM2835_I2C_S_RXD) ||
+>> +                           i2c_dev->msg_buf_remaining)
+>> +                               i2c_dev->msg_err =3D BCM2835_I2C_S_LEN;
+>> +                       done =3D true;
+>> +                       break;
+>> +               }
+>> +
+>> +               if (val & BCM2835_I2C_S_TXW) {
+>> +                       if (!i2c_dev->msg_buf_remaining) {
+>> +                               i2c_dev->msg_err =3D val | BCM2835_I2C_S=
+_LEN;
+>> +                               break;
+>> +                       }
+>> +
+>> +                       bcm2835_fill_txfifo(i2c_dev);
+>> +
+>> +                       if (i2c_dev->num_msgs > 0 && !i2c_dev->msg_buf_r=
+emaining) {
+>> +                               i2c_dev->curr_msg++;
+>> +                               bcm2835_i2c_start_transfer(i2c_dev);
+>> +                       }
+>> +               }
+>> +
+>> +               if (val & BCM2835_I2C_S_RXR) {
+>> +                       if (!i2c_dev->msg_buf_remaining) {
+>> +                               i2c_dev->msg_err =3D val | BCM2835_I2C_S=
+_LEN;
+>> +                               break;
+>> +                       }
+>> +
+>> +                       bcm2835_drain_rxfifo(i2c_dev);
+>> +               }
+>> +               udelay(1);
+>> +       }
+>> +
+>> +       if (!done) {
+>> +               val =3D readl(&regs->s);
+>> +               dev_err(dev, "transfer timeout: status=3D%08x remaining=
+=3D%zu\n",
+>> +                       val, i2c_dev->msg_buf_remaining);
+>> +               ret =3D -ETIMEDOUT;
+>> +       }
+>> +
+>> +       /* Always abort/reset the controller and clear W1C status bits. =
+*/
+>> +       writel(BCM2835_I2C_C_CLEAR, &regs->c);
+>> +       writel(BCM2835_I2C_S_CLKT | BCM2835_I2C_S_ERR | BCM2835_I2C_S_DO=
+NE,
+>> +              &regs->s);
+>> +
+>> +       bcm2835_i2c_finish_transfer(i2c_dev);
+>> +       if (ret)
+>> +               return ret;
+>> +
+>> +       if (!i2c_dev->msg_err)
+>> +               return 0;
+>> +
+>> +       if (i2c_dev->msg_err & BCM2835_I2C_S_ERR)
+>> +               return -EREMOTEIO;
+>> +
+>> +       return -EIO;
+>> +}
+>> +
+>> +static const struct dm_i2c_ops bcm2835_i2c_ops =3D {
+>> +       .xfer          =3D bcm2835_i2c_xfer,
+>> +       .set_bus_speed =3D bcm2835_i2c_set_rate,
+>> +};
+>> +
+>> +static const struct udevice_id bcm2835_i2c_ids[] =3D {
+>> +       { .compatible =3D "brcm,bcm2711-i2c" },
+>> +       { .compatible =3D "brcm,bcm2835-i2c" },
+>> +       { }
+>> +};
+>> +
+>> +static int bcm2835_i2c_probe(struct udevice *bus)
+>> +{
+>> +       struct bcm2835_i2c_priv *priv =3D dev_get_priv(bus);
+>> +       struct bcm2835_i2c_regs __iomem *regs;
+>> +       int ret;
+>> +
+>> +       priv->regs =3D dev_read_addr_ptr(bus);
+>> +       if (!priv->regs) {
+>> +               dev_err(bus, "cannot get base address\n");
+>> +               return -EINVAL;
+>> +       }
+>> +
+>> +       regs =3D priv->regs;
+>> +
+>> +       ret =3D bcm2835_get_clock_rate(BCM2835_MBOX_CLOCK_ID_CORE, &priv=
+->input_rate);
+>> +       if (ret)
+>> +               return ret;
+>> +
+>> +       if (!priv->input_rate) {
+>> +               dev_err(bus, "invalid core clock rate\n");
+>> +               return -EINVAL;
+>> +       }
+>> +
+>> +       /* clear FIFO + status */
+>> +       writel(BCM2835_I2C_C_CLEAR, &regs->c);
+>> +       writel(BCM2835_I2C_S_CLKT | BCM2835_I2C_S_ERR | BCM2835_I2C_S_DO=
+NE,
+>> +              &regs->s);
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +U_BOOT_DRIVER(bcm2835_i2c) =3D {
+>> +       .name       =3D "bcm2835_i2c",
+>> +       .id         =3D UCLASS_I2C,
+>> +       .of_match   =3D bcm2835_i2c_ids,
+>> +       .probe      =3D bcm2835_i2c_probe,
+>> +       .priv_auto  =3D sizeof(struct bcm2835_i2c_priv),
+>> +       .ops        =3D &bcm2835_i2c_ops,
+>> +};
+>> --
+>> 2.34.1
+>>
