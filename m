@@ -2,205 +2,212 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9468D606A31C
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 17:25:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1129606A32A
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 17:37:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=sjP+0w0v;
-	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=aQXCwVK/
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=fzuNdudC;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ItS8LzCF;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=f8Vo2YIN
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DFF8C6080C;
-	Wed, 11 Nov 2026 17:25:53 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5F7DA6080C;
+	Wed, 11 Nov 2026 17:37:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0PnbfCqe9kIx; Wed, 11 Nov 2026 17:25:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org F30F9606E1
+ id jhPuspl1DJAD; Wed, 11 Nov 2026 17:37:48 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5CBE060774
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794417953;
-	b=qw+Lhj+axeWNtvM15byhZPnWBJzrSjWUTtyA3DWfKrbuzghrtyoPpOGkR1ocuOsEXOgu
-	 iVAlBSqdhLKRxHzjtYsBwXYE49lMV6euziJgChF66s1bybX+LeoDzYN5lIORm9Tj+5HW/
-	 xCXvZSgePUReAIEqPlKlp5PnmhZZH7aBS4ISakidVdPclJNvh2w87niuE8U2xBqXX8PIb
-	 qxKL1bpzKzcDYRYgMErz4AmWKC18DATkROioByLwwJupLS4U7atkQzvLcM4i3UwnRJVFb
-	 U50r461xiKidqYNvZRTeTnzpIrRXqnUzFZq9DgDmtr3A2uH3Q4e8UTuWLNTTdHOFcDQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794418668;
+	b=QhHLUcWao/Kc7bn9QZuQhhZ7F0JU17FZKkbkr0o48e7Q3pQoF7E19Iz2WLc0eBSnhOxT
+	 HJiWTvjySYw0E2DawLsocpC70LR8LgJ/I789nr6Yo1wVOwZZNgXv26ajbWcx5JYJoqwmO
+	 WmNBVUg1bxK1tajhvGKghQvNy/w9cuZuoqdLDzG/ph/YzdYMgpI0oOa0w+ShgV6lhyqgL
+	 rcduADyObrTqaN4CNi5RYVDhcZFHsN3+Ro2M79spRCdJKpS1TmloCJ4GcpxKud0ttod1K
+	 vpYK7h2US8EtkopM4fgk0yf1TM+gJR41PtrooZ82C8mn7LR8f1AAtfqsyWEmsBkIuEA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794417953;
+	c=relaxed/relaxed; t=1794418668;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
-	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Received:Received:DKIM-Signature:
+	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
+	 X-Gm-Gg:X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=/FGMRzLvBLERk3annng9/NJkByxPav95r3XJthb1HLc=;
-	b=dpZwR8zd5KZqFvkNpDcjQg0XrU1QaBLZzQ2xT9815UCLsJzoafjmaLONlawMKO4CrWFT
-	 0dsRRrct2ijeWr0xBpWyyx/A2r8GpjPmH3ZGRYb38jq/sDq2F/PLcmeW59GUibDU45I2U
-	 HtoBaClFO2aB0Y+DfkShp6yeX8HszzDwKQGt04yakaxrXp+kkYOF7GGoB7ABm7idCA2qA
-	 8pjx0ykta09WUJilAw5VqeBZzLDiW4rcvw50cYJb49xwejrw6ktXlkcLwXJhBWHD1Airc
-	 sqMD5egDUEXd3JuLLkDnvW8uEE8gqSg869lxdGCAY/jgrwyjcFfabwphlZSgUNM/Rjg==
+	bh=cmJe063bpbybLvoukhLMNDXFqb1vpnSLkIVSqGZ8/04=;
+	b=tcIlznjzdp9YoFyvt87APiiUMgysBMHG8JZsRfV6XaHZ2B9hozu7RwTmRIDyhvdIH400
+	 XmcA1D8v+4Evv90SCLfrABQl57FC8SrJa6wz1RiRm1A4DeYyHyrZ19bq6IYuCk6QI2ajz
+	 F8wBunDQ55JCfeimdsER9rt7vB0h8Zo1jZR0qdIifJgmllQBNn0DGQngQZorJYKOj+afK
+	 0Z+euWAtHaNc35fRNykEs7AC820hEPBmK20R4C6n26T65Y5RgfY1SKdw0NUktbmHcEj+p
+	 x9v9XiVONGOIHCUUPj11gRDqBgSewtpp4ndzjaMWShmr7CE8+AM5bbMPILjgyQ5NOOA==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794417953;
-	bh=/FGMRzLvBLERk3annng9/NJkByxPav95r3XJthb1HLc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794418668;
+	bh=cmJe063bpbybLvoukhLMNDXFqb1vpnSLkIVSqGZ8/04=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=sjP+0w0v9W7YrYGpUWj3Q4GwdUxWIkk5G/J3sKZlVLW/b1st+4GuB3+tFmNQxZ434
-	 UyuC0kKB2DJjD5phfjrUwLeNJlhOLN0bYsD7x9UZth0CdLEG+ygKSgNl3npLQPjOHo
-	 k/QEG1gCWBl5EQWgzfH7Z8ERd64ib7uhOpFG4BVD59C1L/TUECHUco8eq15fIq9dSd
-	 GAKOrRsyQI8YAKaEycq4GyQdE038ueB8AcSCKE7jNk+hoPpH4yZSC9SKrbMLnjDqIB
-	 xt622g8wXYcDq5tMfV2XpVsewZA/cnSiHxENFtDmE4082r+AhW2x5H9HlWHes+2wRP
-	 tZTsT/ZmIi0ZQ==
+	b=fzuNdudCaOjkIAiQ/Yf4MIfhw1Sirk+eCtm9BXGewtcpnnGJDjCVFLjJACnkNvFnm
+	 ayp+uhOBy1voFWnbgXQ8fEvzOKnamQPxuB8HQwGYKdHXulhon0/eEYXmlIh1LLYKuk
+	 I3PoLcmMcV7hRkFlOXJoPc4vpKKFAk80AgRGiBFajNV2OiGvYbSnyFmbatc1ymATFq
+	 4xQWlQDKsUaDPOQzwbod0SDnMzC7kUGZasNrdl5G+jYixRPd9KwH4R2RilOK7+iXkh
+	 Qz4I29scJiQaGAHmvZC6WqmmGZBwqhHuoZB1jX9cN+To3yXEtThCZqQgNgHxf+vkKl
+	 6v9l8VZfYs5dg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id F30F9606E1;
-	Wed, 11 Nov 2026 17:25:52 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id D9F93F22
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 17:25:51 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5CBE060774;
+	Wed, 11 Nov 2026 17:37:48 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2DA2D335
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 17:37:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id BFB914006F
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 17:25:51 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1ED138105C
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 17:37:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GJmk1w3KCsbA for <u-boot@lists.u-boot-project.org>;
- Wed, 11 Nov 2026 17:25:51 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5761140060
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c201::6"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c201::6;
- helo=am0pr02cu008.outbound.protection.outlook.com;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=aQXCwVK/
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5761140060
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 17:25:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/FGMRzLvBLERk3annng9/NJkByxPav95r3XJthb1HLc=;
- b=aQXCwVK/sRua6TsLngth829yphObmnpxZ58LIx3kq7eGQuSB0dSKnjGf5veHgkwWrSxwNiHsGet+5HYkl6itE6lerlamvy5L9a1R1Wc6X6U1naSzuOOjeWU4gwzG8ufMlEumTtO+sH22AVMVsZu1TXmtNyMdUPhetFYjQGjXwgM=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
- by MIWPR04MB292071.eurprd04.prod.outlook.com (2603:10a6:290:92::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.13; Wed, 11 Nov
- 2026 17:25:43 +0000
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0615.007; Wed, 11 Nov 2026
- 17:25:43 +0000
-Message-ID: <bec21a40-fba8-47e0-80f5-819195e17064@cherry.de>
-Date: Wed, 11 Nov 2026 18:25:42 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 0/3] Add support for OpenSSL Provider API
-To: Eddie Kovsky <ekovsky@redhat.com>
-Cc: Tom Rini <trini@konsulko.com>, Tobias Olausson <tobias@eub.se>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Jan Stancek <jstancek@redhat.com>,
- Enric Balletbo i Serra <eballetb@redhat.com>, a.fatoum@pengutronix.de,
- mark.kettenis@xs4all.nl, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Johannes Schneider <johannes.schneider@leica-geosystems.com>,
- u-boot@lists.u-boot-project.org, Bastian <bst@pengutronix.de>,
- Rasmus Villemoes <ravi@prevas.dk>,
- Jaipaul Cheernam <jaipaul.cheernam@est.tech>
-References: <20261029201348.730274-1-ekovsky@redhat.com>
- <CAFLszTg9qSuGq9CHuQWBmGRqQVxT5yMbf267p+eNXNByFy61ng@mail.gmail.com>
- <auy8yuTSE4QQDR2l@ekovsky-thinkpadx1carbongen9.rmtusco.csb>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <auy8yuTSE4QQDR2l@ekovsky-thinkpadx1carbongen9.rmtusco.csb>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR07CA0147.eurprd07.prod.outlook.com
- (2603:10a6:802:16::34) To PA3PR04MB11153.eurprd04.prod.outlook.com
- (2603:10a6:102:4ab::7)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 4ft09-ku8C8O for <u-boot@lists.u-boot-project.org>;
+ Wed, 11 Nov 2026 17:37:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A4FE78101D
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip=205.220.180.131
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=205.220.180.131;
+ helo=mx0b-0031df01.pphosted.com; envelope-from=aswin.murugan@oss.qualcomm.com;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com
+ header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1
+ header.b=ItS8LzCF; dkim=pass (2048-bit key,
+ unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com
+ header.a=rsa-sha256 header.s=google header.b=f8Vo2YIN
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id A4FE78101D
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 17:37:44 +0000 (UTC)
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6ABHZA3E2663105
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 17:37:43 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ cmJe063bpbybLvoukhLMNDXFqb1vpnSLkIVSqGZ8/04=; b=ItS8LzCF9wWpaI+k
+ v3ISHwfhn5IVrBXA3d1w9mHzIUX3V/tQ8vW/a0GpSG0Y0b3uTuMkVnkaTaD6olPS
+ w3DfvLze8n2vi3cL03cVaS936KQ3aAWAYaeWeIKuBNMINd9Em1iCHPe3kzuXxJGT
+ AFEsXoumWFWFmQMALPvoP70dmiZSXtB0/cFUnZlmg+Pj7zyAz19P8mlrQ1btGCuG
+ mWAQkIhlplSeDJcZiyl9KEdL18uhWNNqpBwWHwjNKisyCpwsvc6izPtjZZ8RMR2j
+ 1/pSEYrMr/wq03AS/JJg+DfxJ0lGXKM1h5DHHkBmZuihzOQkkf93zV8wqQNvTaLd
+ SIRixQ==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com
+ [74.125.82.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvvw0g0cs-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 17:37:43 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id
+ 5a478bee46e88-37628596fc9so295724eec.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 09:37:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1794418662; x=1795023462;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=cmJe063bpbybLvoukhLMNDXFqb1vpnSLkIVSqGZ8/04=;
+ b=f8Vo2YINHoAUNO6cOcbDVzYoIfhw9HG6hUHzqWFooX2wfbmMhDL/Z9ipNqIDGAymbH
+ Mxx8NbBrm0i8g0kwwVxIvbbCYVGNsszc7nywr/LKqcmMRajrBnrY/xIM6K/at5Ee6Ckv
+ aKFcZIb4iaye5vjXHf1bbcyEWCF1G4SJ9PwlFnFf9S5rzI+agFCF4Z8SCEEO/HVniJ0V
+ xZbfzVzhuBxsrszBCpmBnzPIDyUyXfy8WBsOy7J0uISXqnVO0gHh5ws9yRpBC6+mi81i
+ sgEZVQ6A0LlcYrDlv0MnzrhFJmKEnzX3mplNePEAbhjRFLdU0Av/T1sOFvKEXGBIr9vX
+ JkRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794418662; x=1795023462;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=cmJe063bpbybLvoukhLMNDXFqb1vpnSLkIVSqGZ8/04=;
+ b=Q2l9ABMG4cUOG2RK7p5rs9Ucv3+khR9jb7FrBPLphJNRmW4fLP/2lG7cs5Jg05nAqU
+ I+MVTAyo+j/gbrVp7UThAXsQ3YFUqW2MBFADBps3Er8AijGoiyz1LrWxrFmyKu71ce9O
+ DoDyR+msMJwbQ0Z1zj+H8yhV54ZM6U6D5OExKi9rMlTd3fTynq7qxq+fsskndbYqwBXx
+ y9Ri8kmu5wD/L8MiYcOfkFohwbjIdrq09C/6zvxmSM0zdO48z/WFq0TZHCF+QO/hgen9
+ kIF3TAdwrN5U+nIlO8SebSPv4NV8pTOdMiGxTyb1YZxLxzbjPMOIhoT2rxAIyciTHYYJ
+ 995A==
+X-Forwarded-Encrypted: i=1;
+ AL+hErFUUu7bMKpzfDadxg0ZgjMcZye3kMUrddvvBSPxbgZqK/VZjQ5RzZTBv1+6r39nyZhyggDJ3+M=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z95COzv52IYfphGWyI8KWZkvF/JVzb1iylYZnp4bv5VVlOAv0Hm
+ UvojAnMo4kcLq7Wjf5xstM4l3J/4Z5uHKejkXRWxadWWK1+IkdxYten3oDU2KI650RxpbFC0Z55
+ 93dHaNzqMvgkHwTY44mN32wCZJM1QgaXdvHjKKtXxEV1hwJYL79Ebwel3chPg1sQ7D+SUUQI=
+X-Gm-Gg: AYBFou26kcW62GR03AH4+8ToyQGQ5eKa1Viu6niPgYq/GQA4gRhY9F392c34AWkaZXc
+ b408VMI+vljrIj18q+vfcx7rTtLPGQ02+5bP/nTrV/J+8GHSxTbQE666V8Q/5QK7H46Y35DUU7N
+ HTyUmNasdCTVpJjz7KCXUt2iUydjCMdNDz7JnFU7padK77HYvz3LyTAbrgmxN0feBh2Wr7yjTd5
+ iR+x22vDN4GJR9xiDcg2Wmg5jtGO4u9tSR2SwUpO25Q5Ye2Ico7PNHvYVu/Dxh8EjAH8Itm2VYk
+ ev3otmh8UT7ckLC00h2QFRlaiWK6TE8RN6HTNE2sVM8UIMUZXkf8PgToewXG63fyY6hPlNA3vKE
+ RL2dOtMptdeglj5T48UWcJCBf4rAkYJ441Ul/ct8+S+tepkY+799Btz5j/fx6PVnvmnKbNABQVd
+ hTwzSIZSaf6W9Uh1rPdDCGyOI+GQIRAjaXPdSXJTB7Lw==
+X-Received: by 2002:a05:7300:8345:b0:362:fa87:2aa6 with SMTP id
+ 5a478bee46e88-3768076cbc1mr3298947eec.0.1794418662043; 
+ Wed, 11 Nov 2026 09:37:42 -0800 (PST)
+X-Received: by 2002:a05:7300:8345:b0:362:fa87:2aa6 with SMTP id
+ 5a478bee46e88-3768076cbc1mr3298927eec.0.1794418661358; 
+ Wed, 11 Nov 2026 09:37:41 -0800 (PST)
+Received: from ?IPV6:2401:4900:1f2d:ce5c:2174:149c:18f8:34d6?
+ ([2401:4900:1f2d:ce5c:2174:149c:18f8:34d6])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-375218c7c50sm34711826eec.29.2026.11.11.09.37.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Nov 2026 09:37:40 -0800 (PST)
+Message-ID: <d00b0c77-7f2b-4555-ad2e-a5eec1c60abc@oss.qualcomm.com>
+Date: Wed, 11 Nov 2026 23:07:35 +0530
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|MIWPR04MB292071:EE_
-X-MS-Office365-Filtering-Correlation-Id: 00d9fe52-350c-4ce6-a35a-08df4018d086
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|7416014|376014|23010399003|18002099003|22082099003|10067099003|4143699003|261021121427099003|11063799006|261021123027099003|5023799004|261102123227099003|261022115727099003|261022113327099003|56012099006|261022075727099003|261026140227099003|261021130227099003|261022105027099003|261028144727099003|261026121527099003;
-X-Microsoft-Antispam-Message-Info: Hc057whWPNF8hXuc5yMo5JbyJ6blIvdjdxDr1tRkPpGnXHZhQikBMhzCn5lO+jAVXxvtec7AVVd0uxs24xzKafXqq+p1UQaQOsh5g+vOSk1EUPyI2O8oPdk1FeRvSv+ZcRwJD6LAALgD9iXSbnAWb1/5IlHhM/hwArpH8GouegjXCIe7eST1sV9omGxy2cV7gShxKrob3I8zuq/Mw8vOXgC2xy4wwrdvqhGaYcp+qMfiE1tT8lYdIiiHWqGawrT9FByQbuaVb5WCmd4MIbE05MuyTBEOx1tAwV4n8UmgxPuAwKSqNOObRqwHgCJ3/s1jr3bq0nrWouBmZHGIwyWpWxbKs8FQWJ07xBUjt217Wn6ZrbY0utn37R2ak2Xz5+yAnds2VTQMrD0/W5t1Q7aXWmZH5LWeaF53u8uhF0/HF913PR9r0cTIdzzIV+GbstuG74FBA38bQs+56VKS97VTmsUdYH+VDC/lFoAMGWAyNhN8JpAvEzOCJB/8mMmW+82MwlSSq6Et46Bk23SHuO+I+hNUwLYjZZp6x8FxH9/0hBbPsEby+20b+oeqzkO0QUoB6C/78nEKiJHwJHcEzg880MDgjQuAKr9qIxmEjfYuAvqfwnTJ9t780L0uzZvAjV18oj8CebMSkfeWTDa7EeISxcHAdbCfPshKg7rHqnfKv5U=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(7416014)(376014)(23010399003)(18002099003)(22082099003)(10067099003)(4143699003)(261021121427099003)(11063799006)(261021123027099003)(5023799004)(261102123227099003)(261022115727099003)(261022113327099003)(56012099006)(261022075727099003)(261026140227099003)(261021130227099003)(261022105027099003)(261028144727099003)(261026121527099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NTh2T1lKS1J3VDVHc1lCWFlPSTFoRXdYWUhZM3hRUHd4NzlkdWpJOWR0T2Y0?=
- =?utf-8?B?bVJYNnVYWSttWVpsQTRpQnRUT05yMHhWTnhLQ3VtK0hyYWQxeFEwb3BYVHd2?=
- =?utf-8?B?blhxaTFhVnYxRnVxYkZzaGFySHIrY0xGWE9XQUo5OXBUM1ljTkUrSEFlN2t6?=
- =?utf-8?B?ZllzMzNnaVJMa2RhTmJER3Q1UndwQ1FvMFIzUjROVkNqNjdTWGhMU1dRRE9z?=
- =?utf-8?B?S2FSZlJHaSs5MTJIZVNHR256K3d0NU5Kc0NDYzRpMTFCZHhmQzJOcDdPZWNS?=
- =?utf-8?B?L05vc1lzWGxidHN1TkFVWjdZT3JGNWQvNkpZUnh5US9lU1ZvRXlYVDJEZXdW?=
- =?utf-8?B?VXRsWmJIemVuU25PaC9IN0Y3alFDb3Irdlk3NGVkeW9TbFlNSW5RTGdmbXMv?=
- =?utf-8?B?cUZoQWZpYnJEZ3NKTHlYbmUrNXdqUS9tbmkySE1UU2RyaU42bnVQVjRrc2cw?=
- =?utf-8?B?cWF0WU5Qdkh6K1F0OVhRNndjV3lkdk5nNXN0NE1yVTdNOFdhcDZrWjNCZUZs?=
- =?utf-8?B?ZTVvdzEzSWlNVFBYdzJJNUFJNFhGbTkyVmFvamJhbFJhbis4MkRUQ01DU0s2?=
- =?utf-8?B?bmNPelBqc1FoZ2k3TmJqZC8zQlJWa2tPS3VBazRKWWQyRUJybnV2dUxrcm5U?=
- =?utf-8?B?TFpHM1gvSXNqUEdsdlF4MjNKOHN2Snl1ZG9Uamcvdi9nT3RCaXJOOCtMWldF?=
- =?utf-8?B?NEhCeXhETFMzRkNJN0ZNR1o1RTFHWkVQeGMzdjlkenFHTk83S0R0dDY4bmd5?=
- =?utf-8?B?R1R5TlNpSWVNQjNOYVoxWnpyemd0eGtVQmpuUEFxSjV6RDZqMUVKdDhXZW5S?=
- =?utf-8?B?bGtHWkVhYkl0NlRENDVmOWQ0TzQ1TjZUNHFwYXJPS3lTV1RaMEFXN0VEMkFR?=
- =?utf-8?B?UE52R0lCTFdTblBrV25aaEhKdkJCc0MybDg4UkRYdnRWa0h4YWRmYVJodWtZ?=
- =?utf-8?B?L1B3d0wzOW83eitLSld6ZkloSjRUTnFRUnlxV0lFa2tFUDAzZC9ydFRCUnFF?=
- =?utf-8?B?QlBlakdHbnNDWWRzUEFGbGZrK3RrZFpOb2psR2RiRXFvVzlKTzVIQVp2SExa?=
- =?utf-8?B?VFdsRmd0RUo5NlRvckdITWZEL1VrVzlmek5JTEsrbmRvV0tKY0s3M2pKNVgw?=
- =?utf-8?B?NXdLUUpKY2FpVWtlVnZaMFVBakV6MFFoM0Y5NDVKQnAwdmYrQVk5UmRISUdY?=
- =?utf-8?B?SVhqMEtlQlFWVVlOTXA3N3FoKy8vYndLYlEvcDg2blN3aE9WQlVCS1FwQkZo?=
- =?utf-8?B?djB0QWN3RmFEWmhzdHF0YnFTNk1GNWU2Vnd2UENQT0cxSDRCb04vSVJMMlhr?=
- =?utf-8?B?WFhNYTl5WGRZZE9McFZXbTkrVlBTRWRVYWxUWXZDRWRzTEtWZEVzOEw0NGVK?=
- =?utf-8?B?SEF4ampsbHc2ZTV5clVDNmRXQWNMeFNoSWhFSzFtaGtCUWd2RGxYSS9WeEJT?=
- =?utf-8?B?ZW5xbnVXWHl0QXpJZytxNFZwOHJmRFdRZ0VHV2lORGovMlRoOXMvQnFXOUMy?=
- =?utf-8?B?c0s0MCttNXJqaE1sMm1palFyeXZBK240Vml6MTFOcGk0QXdCcDZjOVF2VFpE?=
- =?utf-8?B?TnF3aW14Z1RyRnp2bmMwYjJUZ0x1dkNFQkQxeTNaMmhTc1czN0taNnM1dUdM?=
- =?utf-8?B?Q1NINXJHczZuN0JOYjl6cTQ3QXFncVhOUXBQWmpaaW1DOUlrNklyUWlNOTA3?=
- =?utf-8?B?azdrTERwU3ZVWW56dTIrNmk5cU5MZ1d3RW5PQktFWUNRb2ZCc3BPajNUejNz?=
- =?utf-8?B?bmJpV1B1c1VFWDlKUFBZV1NSR1VQWmN4S3FUQmNZdnhIZ2N3aHRyTGtQZzQv?=
- =?utf-8?B?T1V2eTJEckRsbFptaS9xSjNJa0dwOVdicnZpKzZMSWJEVlMvSlJzQ0EvS0I0?=
- =?utf-8?B?emFQVkJHNzQ5bnFhTUoxRTRHVWMwZW1xOHU3TGZOdlR2TXFVajlJS3FZWFJ1?=
- =?utf-8?B?VHFndHBiNXJCNjN5RmJOSm0zYkxycEdkU2kyQ0I5YXJNb2o0Smw4dXBnSjZq?=
- =?utf-8?B?b3ZPT1R6ZUNoRXprSXBCT21YbW85REhtTE9aNmVZa25KSDdPM28vT01XUFFT?=
- =?utf-8?B?NitZcTlpTVhEWTNFYnkvcnhteU1nbStsMFFiMFZjZ1B2UHkrWm80dFVmNTdx?=
- =?utf-8?B?d3g0dzZUUnEyQWpUcXo2TldRY1YxdnVVUStkUUIxSHE0ZXQ3Z3laSTc2RTlF?=
- =?utf-8?B?UEs0cVNhRFg2RnRYaTYxMFRabm96Qmd6cjdKeWhUcmVIcHJEc1JmdXg2My9R?=
- =?utf-8?B?MmNqd0dxajlGWDlrSGpWcFBuT0VmNlQ0cm1va2hTQVpLa1hjcmVEbmV3MXhh?=
- =?utf-8?B?NUhmZklRUWk3Q2RrNC9XckRwMWltNDFTbWdIUFNVZzlITWZOa21XZz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 00d9fe52-350c-4ce6-a35a-08df4018d086
-X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2026 17:25:43.3114 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BvVXQnxf+Um3+Grj2gbNU+H3Zcq4HL0OVDxvERrpQmjq9jfAYONOw9GG43v74Kuq9P8qsJMahXO7mEII9b4iUW3Gy9In1a2maLFSd+IW6DE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MIWPR04MB292071
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] mach-snapdragon: skip reserved-memory regions outside
+ DRAM
+To: Casey Connolly <casey.connolly@linaro.org>, trini@konsulko.com,
+ ilias.apalodimas@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, Michael.Srba@seznam.cz, u-boot-qcom@groups.io,
+ u-boot@lists.u-boot-project.org
+References: <20261105171752.2344459-1-aswin.murugan@oss.qualcomm.com>
+ <7600fb5d-d245-438b-8e26-4a1261c47acd@linaro.org>
+Content-Language: en-US
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <7600fb5d-d245-438b-8e26-4a1261c47acd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: 5bWNECMrsEwsvrzIHL9Owb5Npe1TGRWx
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTExMDA3MCBTYWx0ZWRfX9p70It218Sfi
+ XoKUX2zj+x9jeA+fvIERJ9l+EcTsJF11xkMfrpGi3ReHAMWpvP2LBjfUvNAhu/4UZOXggI9ugSF
+ 15XBUwmSg7qq3KRIqeHEREabEFtO0AjfOmWs6sHxFvuOIA6d+s1V59ATKl5KCiCU9RreFfrDmNs
+ LPLPy7DvccN3kssjVhPKq+MhqDoDDyfrIFlDSZ6l8qb/RgC4kEwGuz+Ksd+vpNr78QqwleBiM9L
+ i3fS7GfSVKXeVi0EgcZd0FY0xw9cWk78zwG1fo6WjjnglaDi9yEo19Kaqn6M/i4wrNGKvAg7S9R
+ I+e9Ocqos62jAFA5cX8TxKiZUTuHEBb2z8QGxjMjZFiEiVhsnHUuPcL3dM9eDAhkam5qcV2Wfos
+ /X9DMJHGzfRccQAR1pmnAsiCFnf6CHFiUpM11+uDaEK1bP0KxPsn/79GCNu+YiHUarQmdMW5we2
+ 0AHrhlgI15SKr/DCllQ==
+X-Proofpoint-ORIG-GUID: 5bWNECMrsEwsvrzIHL9Owb5Npe1TGRWx
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTExMDA3MCBTYWx0ZWRfXzhWHzxzVg6MU
+ Wf28KUI4dkv3vrd6wxkhVvXqJ6DJrvX8c5HQu/QRuKVOi9zWbfrDtsoDjtKNUBFE/Wtt2cv6h4f
+ RlY0XOEQo1anoCDQkZIICtBPPw3Vvr4=
+X-Authority-Analysis: v=2.4 cv=ct8OAF4i c=1 sm=1 tr=0 ts=6af4a7e7 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=snklHaHbM7KCVM-WJBkA:9
+ a=QEXdDO2ut3YA:10 a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-11_04,2026-11-11_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 suspectscore=0 clxscore=1015 phishscore=0 bulkscore=0
+ malwarescore=0 impostorscore=0 priorityscore=1501 spamscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611110070
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -210,82 +217,53 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-7.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Eddie,
+Hi Casey,
 
-On 11/5/26 6:28 PM, Eddie Kovsky wrote:
-> On 10/31/26, Simon Glass wrote:
->> Hi Eddie,
+On 11/6/2026 10:12 PM, Casey Connolly wrote:
+> Hi Aswin,
+>
+> On 05/11/2026 18:17, Aswin Murugan wrote:
+>> configure_reserved_memory() updates PTE attributes for every
+>> reserved-memory node, but regions located in inter-bank gaps were
+>> never mapped by build_mem_map(). Attempting to update such regions
+>> causes find_pte()/split_block() to fail.
 >>
->> On 2026-10-29T20:13:40+11:00, Eddie Kovsky <ekovsky@redhat.com> wrote:
->>
->>> This series adds support for the OpenSSL Provider API while continuing
->>> to support the existing Engine API on distros shipping older releases of
->>> OpenSSL. Build dependencies for local development and CI are also
->>> updated, while the final patch adds support for using hardware tokens
->>> with the Provider API.
->>
->> One thing I'd like to check before this series goes in. The provider
->> path does not accept the same command line as the engine path. -k must
->> be the full 'pkcs11:' URI, the key-name-hint is ignored and -N is
->> silently dropped (see my comments on patches 1 and 3). So the same
->> mkimage command works on one host and fails on another, depending on
->> the OpenSSL version. It would be worth keeping the existing command
->> line working with the provider if you can.
->>
-> 
-> I have not seen this happen when testing different versions of OpenSSL.
-> I've been using the test suite to run the vboot tests, which drives
-> mkimage. I've also been running mkimage directly to test hardware key
-> signing and not seen any problems.
-> 
->>> The changes have been tested with the FIT signature verification vboot
->>> tests on Fedora 44, Debian 13, and RHEL 8 with OpenSSL 1.1.1. All 37
->>> tests pass with both the legacy Engine library installed and with the
->>> Provider API.
->>
->> Just to check, none of the vboot tests use an engine or a pkcs11
->> token? If that's right, these 30-odd tests only cover the PEM-file
->> path, and nothing uses the pkcs11-provider package that the Dockerfile
->> change adds to CI. Since you already tested with SoftHSM, please can
->> you add a test which signs with a SoftHSM token? That would give the
->> CI package a purpose and would have caught the gap between patches 1
->> and 3.
-> 
-> The U-Boot documentation states that an easy way to test signing and
-> verification is to use the vboot tests provided in the test suite. We
-> did discover late in the review process that these tests do not exercise
-> hardware key signing and that the existing pkcs11 uri parsing code was
-> not available when using Providers. Without an actual hardware token I
-> used SoftHSM to troubleshoot that issue.
-> 
-> However, I'm not certain it's viable to create an automated hardware
-> token test (even using software emulation). Both the keys and token
-> themselves generate unique identifiers. And the setup requires some user
-> interaction which we may not be able to automate. I suspect those
-> challenges are why we don't already have a hardware token test.
-> 
+>> Add region_in_dram() and skip reserved-memory regions that are not
+>> fully contained within a populated gd->dram[] bank before modifying
+>> PTE attributes. This preserves unmapped DRAM gaps and avoids MMU
+>> setup failures.
+> this still sounds like a bug in the MMU code to me. Does this diff fix
+> it? Not sure if the second hunk is needed
+>
+> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+> index 1c1e33bec24f..7b717413c297 100644
+> --- a/arch/arm/cpu/armv8/cache_v8.c
+> +++ b/arch/arm/cpu/armv8/cache_v8.c
+> @@ -891,8 +891,13 @@ static u64 set_one_region(u64 start, u64 size, u64
+> attrs, bool flag, int level)
+>   	int levelshift = level2shift(level);
+>   	u64 levelsize = 1ULL << levelshift;
+>   	u64 *pte = find_pte(start, level);
+>
+> +	/* Don't panic when unmapping a page which isn't mapped */
+> +	if (pte_type(pte) == PTE_TYPE_FAULT && attrs == PTE_TYPE_FAULT &&
+> +	    size < levelsize)
+> +		return size;
+> +
+>   	/* Can we can just modify the current level block PTE? */
+>   	if (is_aligned(start, size, levelsize)) {
+>   		if (flag) {
+>   			*pte &= ~PMD_ATTRMASK;
 
-We're currently abusing binman test suite to test mkimage signing, but 
-we have actually already automated all this. Including with stable keys, 
-and we verify the signature of the image generated by mkimage with 
-SoftHSMv2 (engines currently, but I have tests for providers too). We 
-should think about stopping to abuse the binman test suite for that and 
-have this a proper mkimage test, since the midterm goal for binman is to 
-have it in its own repo so other projects can use it. Then, it doesn't 
-make sense to test mkimage produces valid images, we just need to make 
-sure we call mkimage with the expected arguments and mock the rest. This 
-is for later though, and we can still abuse the test suite for now so 
-that things are properly tested in CI. Did we automate it incorrectly? 
-Is there something we can improve? Is there anything preventing you from 
-doing the same thing we've done with OpenSSL engines, but for providers, 
-with SoftHSMv2?
+with this change, the issue is fixed.
 
-Cheers,
-Quentin
+Thanks,
+Aswin
+
