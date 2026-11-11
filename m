@@ -2,197 +2,156 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D83B606A321
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 13:14:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7608A606A324
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 13:14:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=rfeOQ54j;
-	dkim=pass (2048-bit key, unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256 header.s=selector2 header.b=ROy8yt7+
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=c08UvBVx;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=S2ExkUB0
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8C3448143A;
-	Wed, 11 Nov 2026 13:14:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4AF1D813B8;
+	Wed, 11 Nov 2026 13:14:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uGL9QD3PqrDN; Wed, 11 Nov 2026 13:14:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7535E81425
+ id clX4_tHVVR1o; Wed, 11 Nov 2026 13:14:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 7CE5081468
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794402858;
-	b=czpXL9mTqR8LReRm0vdZCG8d5annI6FPyGKOtdF2j7CxmFeephZhSxfaNFu+cK/iM8WH
-	 aJvVWX2f7la8jLT7kpFEWt/55PJ+QYJEvJ1PnVhg4+202iEsb2R+Ly6bB6e7xzFtqdf3Y
-	 17yz6sicbXExQhSqTsGSctRaDNN41zPWsV9FKMPWIkHwZj9w/GJpO+agW0sP/a86u6Ph4
-	 xl37I+lO0QNDChcLkQx13rVHZR51Gn/glEaetU451crrZrnqdAn4okz1IHk653GOUn6h1
-	 K6i0nkb0Xobk6jDPqcrHEoGkssnBXXJYOop7w1sQ6KGgy2LAdeBLi02f0CELOUYr5KA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794402870;
+	b=Pm0T1fUtkCiDIWj5vNWnlcjyXILNIPK0Jt6Q8GYHTbyc8BayiYn1UhKG1w1xtis7nIYn
+	 l8ueNyj4ksjuvq63Ir9girnQDvsWZ6Nywxppp8+s7zt6tSs/3a8kL+kncc8pcXVMbI80r
+	 cL4cC3p8tjZx37wIdQk0fyGpHIVYGgIVl6Wsvybtczk4DklMUhUus3ADIskS1VFMBhi37
+	 efW3JhKGimXl2s3E27VwSWdMTiCkLgz2oQj+ko7yp/7vMJXFRPs8esqZBxRHNVUXsv+6P
+	 AeB/mgDBpQQWLJPemrBD2zawDtZdxNJGPTT9MCgV3bZJX6KtcKR9+htTllksaAi+kdw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794402858;
+	c=relaxed/relaxed; t=1794402870;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:From:To:Cc:Subject:Date:Message-Id:
-	 X-Mailer:In-Reply-To:References:Content-Transfer-Encoding:
-	 Content-Type:X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-AtpMessageProperties:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
-	 X-Mailman-Approved-At:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
-	 List-Subscribe:Errors-To;
-	bh=vJCn515NWTAK/80Lh58xy/KzcIUyoXB6fVHUpO+RcIE=;
-	b=PAN63O02JOGjEIOzi4XoCXqlWOKFemU2WNPgmZndp7AdByG7koQ2MrKV7JOlAvutqRIp
-	 XYRK84YKILZH6Sq2yjvECj8chtO62mRm3WLcl9D8qJcAY07IvJFh7S3Kjo3HC+SrzaPHG
-	 CGt+NCzrWWu6ixjUNtCKeMSypd2MXNKrXvW466U5k2COzZWI14/lhzd44xFqWvaqIQsBc
-	 Hd1M/YNWk4psycqO2g7nI9Lb2a1l90jrzh7iVSW4nNQpUo+oJmoBLPVcpQbqRR2o8fLAu
-	 y09wZJ9hRbnJPnD1CBh8Lx6QedR/LgtXhYGE5BURVgwpDFzsDyVPkutOvXnoyRfiUHQ==
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
+	 Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Mailman-Approved-At:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=ZyCVcDKTYyC4IdORMY6G6WOISakdjGztljmnqCLp80I=;
+	b=kriQr8pqGR5vxXBofuTQVlVu9OUPtsZw26HORRltTJpOFF0TiAWfeuKOshDfKVzVai3P
+	 fSt4OE+KblbMM13zsIIj4hXP8ZGCum6uufXMaNtEG702DOVEOU+nLrBq34hi+SB2WQmi+
+	 TKKuVMD8zCSzaHtsJJP3C4x0vtRKidSMc9L3793SQ653lSgpCs+Pr3qaiIS66pcmO7Ppx
+	 YmTzqPZIpcSTRYluKlkkGoNxxWnnw4JbqNhqMemwEqjKwUPQtK6eP7jIvdngyPAbpC08a
+	 AtrDerePlbMC5KYVUBMNddx5iXWmoNSjao6uBAGHA6MoyBrZBc7hfWgOYOxef/UmvVw==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794402858;
-	bh=vJCn515NWTAK/80Lh58xy/KzcIUyoXB6fVHUpO+RcIE=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=rfeOQ54jHHsMpTOGI7X6ayXoxpgGpPunfWIfnVdtGYIcJiS0lei3DnMcUH4FSd5a6
-	 SL3N/OYqgEV7xKSwb5QHjQtxZmG9XWrYgr+olkGhy1nO76l0M05ERH0thWBZ/MlMv+
-	 FSJLtIzAi6zoTrAMr9H04dy/Kg4xznIdxmzZOhJ44ToTwXeG7CzbgQV7OWYpTYxU7h
-	 DaDquqPmhTtK/YiNusPV3UpoHqjvpuo/Q1kRUylSNPEVRYg55/rlzJHSkyqCSne+Rm
-	 EIFc5C7MYkSfGprIZ7dAqId4w9yEHaMx2w7WDJwUgCpCvlyX2BDtPG9QwVTymohfbX
-	 Sko2fPM2UsxyQ==
+	d=lists.u-boot-project.org; s=default; t=1794402870;
+	bh=ZyCVcDKTYyC4IdORMY6G6WOISakdjGztljmnqCLp80I=;
+	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=c08UvBVx8wzGK/ICK3fBQX4ypP11/F8PqvjaRlCGbeNG/rAywDlTnV8h0QuvtP2A/
+	 pym2Lb4XLfERB3U23e1hoxYGui7N5gnD9uewphMgcYrHz2llIieTOx/TIUKUgp1Ota
+	 T3pxb++RQ3amWrM0DrZ8ZFguDEd8XSy03mjaucXW+y4It9SsiK/uaviwDU6j2zJi6o
+	 GU3jwtU56bImOzrA7vv3pbiwDJuQByn37n3Kfo9XC5L8GxdNNyhe/diHxzAy7n0dR7
+	 5ZI5hNiO2SihDD/zHaMavpCm2SxBMaNaDwTqd637Qo8MnAz9O2+G2gj0frwFLNPARA
+	 28x+lLqy2JN6A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7535E81425;
-	Wed, 11 Nov 2026 13:14:18 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1BC49DB4
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 08:51:20 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7CE5081468;
+	Wed, 11 Nov 2026 13:14:30 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id DF2B2731
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 09:13:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0D37D40070
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 08:51:20 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id C4A2A6071E
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 09:13:38 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id uRBG60IQ2Fuu for <u-boot@lists.u-boot-project.org>;
- Wed, 11 Nov 2026 08:51:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 1F02940357
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c107::3"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xCZQy-q1oooL for <u-boot@lists.u-boot-project.org>;
+ Wed, 11 Nov 2026 09:13:38 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D5E9860697
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::52a"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c107::3;
- helo=ph0pr06cu001.outbound.protection.outlook.com;
- envelope-from=tze.yee.ng@altera.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=altera.com header.i=@altera.com header.a=rsa-sha256
- header.s=selector2 header.b=ROy8yt7+
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::3])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1F02940357
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 08:51:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vJCn515NWTAK/80Lh58xy/KzcIUyoXB6fVHUpO+RcIE=;
- b=ROy8yt7+tt5BBzq6iNYaoeRRskfpH2p6YM5k1pnX6mxUyxkV8e+D75IF7RaMxFMdyhPcI2NfA/VeKag9NlOeTATTQ+il2hgVbfT/7Tmvkqto0C92YDje+vJNcRZMK6hmAygxFRFSfZwbTLpbfwA/PVW1hVXTVa48Hg1sXmcopftmmpfahezPgqPScFwLvduxvnecpM9NWqVbjg75awLUwX0W2J1bTrr02o/Cqo2s6ZBuBfwVberqvf6BKAkLWvcFE09kWr/UK4p3NvIN4+WN8eU21RsDjBmJP31OvJjCT11odZrNAdo+lM3a4OVYSjEL5a+HsOYV8n2dRBfPW5nPLw==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from SJ0PR03MB5950.namprd03.prod.outlook.com (2603:10b6:a03:2d3::20)
- by SACPR03MB615085.namprd03.prod.outlook.com (2603:10b6:806:540::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.8; Wed, 11 Nov
- 2026 08:51:17 +0000
-Received: from SJ0PR03MB5950.namprd03.prod.outlook.com
- ([fe80::53a0:bf93:6b6b:de01]) by SJ0PR03MB5950.namprd03.prod.outlook.com
- ([fe80::53a0:bf93:6b6b:de01%3]) with mapi id 15.21.0615.007; Wed, 11 Nov 2026
- 08:51:16 +0000
-From: tze.yee.ng@altera.com
-To: u-boot@lists.denx.de
-Cc: Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+socfpga@mailbox.org>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- u-boot@lists.u-boot-project.org, chen.huei.lok@altera.com,
- alif.zakuan.yuslaimi@altera.com, boon.khai.ng@altera.com,
- kok.kiang.hea@altera.com
-Subject: [PATCH v2 4/4] arm: dts: socfpga: agilex5: add SD/eMMC UHS PHY timing
-Date: Wed, 11 Nov 2026 16:50:56 +0800
-Message-Id: <20261111085056.15418-5-tze.yee.ng@altera.com>
-X-Mailer: git-send-email 2.19.0
-In-Reply-To: <20261111085056.15418-1-tze.yee.ng@altera.com>
-References: <20261111085056.15418-1-tze.yee.ng@altera.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR05CA0080.namprd05.prod.outlook.com
- (2603:10b6:a03:332::25) To SJ0PR03MB5950.namprd03.prod.outlook.com
- (2603:10b6:a03:2d3::20)
+ client-ip=2a00:1450:4864:20::52a; helo=mail-ed1-x52a.google.com;
+ envelope-from=igor.opaniuk@gmail.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp3.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=S2ExkUB0
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D5E9860697
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 09:13:37 +0000 (UTC)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-6b6e7a05225so3940094a12.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 01:13:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1794388415; x=1794993215;
+ darn=lists.u-boot-project.org; 
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=ZyCVcDKTYyC4IdORMY6G6WOISakdjGztljmnqCLp80I=;
+ b=S2ExkUB0ETAK+tTDWBXIGCkl45iOs2SQWN0LSqsyLw0RVLRLMKiytSx5r3GnkgLY50
+ JI9K6LqVhqw95BRAxx5hhjrD6Wcx8bKeoMrQzpmFoAsj4utR4rJxW1SU9oFcOlyMitIy
+ iXurByOD7MPZ1qS7cx/9TC4NaFMmeh9gU2dRccxifBzNvQvOioQ9DMI/K3vfdfBvdk5w
+ KyzLDTKQMq3j6w3zA8iRVkc/uqFF1kA4c3hfkmi3j6Xz6T/SvU/7YNJP1JUUBjKCz2w4
+ fLWxUQiarBw3mdnzbMLK6CqNY7NcLF3L2tWFnY7LZgMeEOM9+PfwyIRcISK7nkTfKp5I
+ jFVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794388415; x=1794993215;
+ h=cc:to:content-transfer-encoding:content-type:mime-version
+ :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=ZyCVcDKTYyC4IdORMY6G6WOISakdjGztljmnqCLp80I=;
+ b=cJ/OrFOAxGj9i+vthJwLVxL4p65Vkd55wE312sqtMA4WV422ZXT3C/O6EadYA1grix
+ doigW6o0R41pj0Cj6C+0ggQ/roYTEKcxYenEsiBssr0hiSQMTM4OY/sURtB8+ZoabQ7m
+ sxgQib9bb1rAt7sp6Fq+Jd2peJzM4nUQ2fLHNeoGUxVnOuTUGiykSRlh5mP3YNH31gkq
+ O16qnF1IpYvW82ltKkOGmtUylkhfH17BqXD2IlvqVDCv5wSnQ9cn4BANZmpV1aBRAi1W
+ udK7c+nYlzNz2i5AYxrmHPm6n2h4RdAh/T3CrIDdKzSKR3Bp4HadEAuyORMSQ4UqEMTN
+ ouqA==
+X-Forwarded-Encrypted: i=1;
+ AL+hErEkgZxB/NFYZZbf7WZpItIq+he/qLcT1fJ5JKTF+I3h1HTglHLstm3Esw999CaK+tiEwV/zRNE=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/QqJGX0wNzTYXy/JAdCR3U/4TL7o5YLfd8DJapCJAiIhlfFY5U
+ 4/0Tr6BuRAhfdJucsx8YsxbgbHjtTYXC1mzclUeaBPZMkJD4PmXl79HDGvUUB5wV
+X-Gm-Gg: AYBFou3KKUFWZucI7zWiULhq0GyvGfb8x71FafV2ab0r5068vf07EsxZy0HUpXQ2oke
+ GN3/X5fD4TtK/0cgwJ5s0xVC8pUhbdaN3Ah5fgMTHFfZfuPSaEGL0iJ39sWuttHzgKqiY68ELCy
+ AptSx/+D0a/xSkNr8KHtRDaf8CqyL0YVemIDgKPA/Aa00Lnpw7H9vGf/DGf7t0ayqH8OXaprMAQ
+ 76Jgo+FIJypqs8wdpzEuiv/Y+DYrrR6X+WCznVWKQef4Ty6evDeTrPF36EfyYSS5Ld23ARA0SCV
+ jBMeP0aJNvMdgcvxuuLa3OVoXv2bjg6BehzZwZUnhzxghw9UrQy643seA1uqc2cTTuLE+yT1N2Y
+ pyNiW9wsrJW8yXrGsSSQubhoA30qtFiOOTsTPQ8LAxwvZSDmCN9UwVXh9QPS7eCh8ewc/zSTS9I
+ H6tNRHQgYiH/rWfHNtcAk7dfG0NYu9zdbchc5tpHfv0QZjamPzmML93VArEODdbBSH5tePMTnbr
+ XtGSOEn9etarjWfZgdtwBVY7k0g17KcYtubq7+f1q+mlcVKybz2PBZrvJ5zRXMKpMeEYuhSkYFY
+ 250OgHqBzE6ysRBogwke3ZwILXQP/NszGY9MNfFitEbYygQv8+D/pi7qovki5JePrs1UppIKG9H
+ D9Tbat+9RCnMsrAEZKGm+HzBSEmN8gPZzzE/a
+X-Received: by 2002:a05:6402:e8b:b0:6ac:934e:a9ca with SMTP id
+ 4fb4d7f45d1cf-6b77708288dmr1270056a12.0.1794388415379; 
+ Wed, 11 Nov 2026 01:13:35 -0800 (PST)
+Received: from [127.0.1.1] (93-159-22-70.cgnat.inetia.pl. [93.159.22.70])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6b7579047c9sm2155257a12.33.2026.11.11.01.13.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Nov 2026 01:13:35 -0800 (PST)
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Subject: [PATCH 0/3] bootstd: android: rollback indexes and misc system
+ space messages
+Date: Wed, 11 Nov 2026 10:13:31 +0100
+Message-Id: <20261111-upstream-android_rollback_misc_b4-v1-0-47d17e8a5d92@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ0PR03MB5950:EE_|SACPR03MB615085:EE_
-X-MS-Office365-Filtering-Correlation-Id: 373528ce-4c2b-41a0-fa5f-08df3fd0f295
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|366016|376014|1800799024|22082099003|18002099003|6133799003|55112099003|3023799007|11063799006|56012099006|261009223027099003|261102123227099003|261021121427099003|261022075727099003|261021123027099003|10067099003;
-X-Microsoft-Antispam-Message-Info: x5Sr/fhkckRYwv3Yb9ik260hTKAUFZV7iGuLX5qsM9h9+1/tsKe6iM10pvc6YJEgk94UqpqUnOwubySUfXI9xpGHWasUeZ7Tj1G14KWYZSYj1Pt9VKog8/3pubZGHV7kDZqAYk4DV8PSIuZlMmotvgSTW7u/jOziviTJ1ebIdP8k6UpdpNt7wxLHZUabH1uLSklFtfUNPD6AM59nLsirfLVSLReFZEZEi4AvfqB02q5fQNVXO1JljaezsM1PD7FwyoKbf7tThXhEQsh1/nLEO/WJhN7MNtf3xzMixBT7vQsFD4m34lvZzehVy4IfDt0vgmQ7CVGH4lRqdKpNCIuO2lzoi/hKYyeJedcUOw6HHb55b3fyaSE0iT1wjTdni9ij+zmfUYkNdpu3h+ac0/DeuTBkOyadATqb51cONWmUzsUAaTACXOqn7ov0SePiRolaz4U3LAXoUOmlWYknF8ex6lwSBHbUcZbmHXpscJ/LqDwnq6Ca5Hr7UvScMEGqCxvnWT4Hxqcl9aZHtq9qm6nfiIUNiTxVeb4cUrfXZkJm9QJrwT7Ou+DufrBuyuU44bh3Il3MlggHGEJlvxmIQ927sVYthAodok4QLsb4CN8mTZM2nHeKO3hvicWtyh4TdoQ4FZo8Xl3/uVL/MDno1l//ogQqStelxj0L/kA2UCISVMo=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ0PR03MB5950.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(366016)(376014)(1800799024)(22082099003)(18002099003)(6133799003)(55112099003)(3023799007)(11063799006)(56012099006)(261009223027099003)(261102123227099003)(261021121427099003)(261022075727099003)(261021123027099003)(10067099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?gLGBUNVd76j2n+o4N7Ml6z+wu32xzJTIyK8pjYWIyW7dJ544BnNRxYl5WLgi?=
- =?us-ascii?Q?PihcLx/Q+P0XYUWOVk/RXUOP3IMf41NXOSdeQ8gmVqyVCMyxdx+p0oB2mV8u?=
- =?us-ascii?Q?VVQuRS3IsRmsMCkZ2YzEc9b3ffeQJzFcXOeXIClOr3a/3oC6KKeQY7Pq4oiG?=
- =?us-ascii?Q?eEFv0gybFGHwLa0PDGvjkiABBHZYlOcIkZ1qzGl+2+a2biRghgG2dcLH3cfh?=
- =?us-ascii?Q?GU39lAUal/H7yNXXNYJfMa10K0GbBQh1bUip0OCFmzPO4mBZ0JLKmD1lxwC5?=
- =?us-ascii?Q?9sWxr8zyaJ88DNs8UBhlZWyRZxZttKNNulgVOIx+xFf8vpAmzwqqldDLzmkr?=
- =?us-ascii?Q?oJH9O6fDbyVmkByfUrIwy7+VKTz10fYgHC4axUtFTK+6aq1kQ1B7wwaElPJn?=
- =?us-ascii?Q?3Jj+u5YKcMUXHU1MP0dWjoHiXOfkItWSRlg/IWU8Ztz75r/wFRstBIUFBHrl?=
- =?us-ascii?Q?KjIZP4F73rj6RjV9Atj3xoGKjQDUDQQyvq/EQrUhD2eJLhaE9Gr8zjKW4VJ/?=
- =?us-ascii?Q?UqHUsGp4C6OtTs1q8sURcL49cN5ugCYLYQfRF/Sgx1MYsq46mS1RQrVBy8mw?=
- =?us-ascii?Q?hoUg4NPKrg2+BI8IDqSjX3W19yspHD1QRILdwS5HrazE4hrt7ws70kDWXe3m?=
- =?us-ascii?Q?tSkSF+ZC9es6VQUGU4M3pvZfGkScQXFFsbi6GmguJddBJRWv6irMIvZBB3Ua?=
- =?us-ascii?Q?DgSTGQD/lPvfvb3KcpMmzALkc2o7A8bjQ5KH9uUZipvj21VzTsdh0TJfmsNT?=
- =?us-ascii?Q?IpQE5B73xRwsajs0mdWrJsGtptfn4ZDzVqBJ/jMjqFhOQaIhwyV7IfADrCtC?=
- =?us-ascii?Q?KXydNsojWb4yj5gXAcmx0buNhfoCvpPEao/NmMZLxPYm7i6///SBO/vJZ+6v?=
- =?us-ascii?Q?PXxQobToxEphQy2HJrHE/Xl3fsKgLBay6sphfUeY8mSVv6zwPtaEWmcbz85C?=
- =?us-ascii?Q?Z4Ol1pEoWrpAKAsArt6edqBcBRRTuRmzotkFazD2ngXY0SHYWVHsPqmmjKrI?=
- =?us-ascii?Q?UUvbbWBpz3J3ecf0LFRIYvu8ba8tym8WK7kgAIrgTlAQlj+h8nudNXId6aty?=
- =?us-ascii?Q?9EWholkq+7i3vA4VHosqNVH8xq4Ya9Cz6x8hhBTbmC9bZq8Trn8QY0JgicoN?=
- =?us-ascii?Q?SlXK3qE8/Kuc/h/reEU3GTprjG/01ZDgGUFz32YnM+sa29EVRcEY0+AjoKcp?=
- =?us-ascii?Q?/hNiR3PdPDpeCUBkFFoCfrpF8pUNsWR4NpjX7MFL7yXgkFgggqg1jr5/559d?=
- =?us-ascii?Q?c/sOtQigU7zd1pB0/c4GLlx6+CfmX4SIh/uVbywY47rz4GUYujxMEIfRNzEC?=
- =?us-ascii?Q?sCNa3EY3u0JH+Z51b5ZV52hLHvcCAQkhJGX6WtRqBS9Z58NqyB5xWgl0jrnv?=
- =?us-ascii?Q?eyBCprUQJiE3ApB00IJWNuGuBIQ9IYSJlomwwKGp0uQPDzMb3NPpjUKsj6+u?=
- =?us-ascii?Q?+qZrtICn4jdVm6ruDsjYxmSuohZS0ghqxrjACiuTC9TZxAt7tnNz9rYW7f31?=
- =?us-ascii?Q?JJrVkBIdGErrNCjx6ddMlXPyrrpyIgo4v7mi8caXwP1K8HqxLTCEV+m9yYwN?=
- =?us-ascii?Q?yTgShypA3/yCaLda2Z1eXSh35538T7gZLS2O/BQhuTGlQsEaxl5BD0BTg5of?=
- =?us-ascii?Q?Rr5ttmB2Px04XvlHkkq3aRZUop+EPbW/4GV0OgB5Ji424m0+iyJk4RC+6Z9m?=
- =?us-ascii?Q?z6M2nc10UENCFrd63wDOYd43c5rUWhoZusFIFkjuPTXbvTb5fuGi8QlVsyRG?=
- =?us-ascii?Q?7cz0u/u2qg=3D=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 373528ce-4c2b-41a0-fa5f-08df3fd0f295
-X-MS-Exchange-CrossTenant-AuthSource: SJ0PR03MB5950.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2026 08:51:16.8944 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3rR2qoHBHh1Xb6nD60f2vFTcIVSOCTqjVwz/JLMn9uT8gt8PsABSIkReweVnIG2+chb9pNVv09d+y2DCycQFVA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SACPR03MB615085
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3NQQqDMBBA0avIrBswsUTbq5QSYjKxQzWRmSoF8
+ e4NXb7N/wcIMqHAvTmAcSehkiv0pYHw8nlCRbEaTGusbs2gtlU+jH5RPkcuFB2XeR59eLuFJLj
+ xqvqkbRqSvXWdhdpZGRN9/4/H8zx/fL+a0HMAAAA=
+X-Change-ID: 20261028-upstream-android_rollback_misc_b4-7f16f8f69336
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.u-boot-project.org
+Cc: Tom Rini <trini@konsulko.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Guillaume La Roque <glaroque@baylibre.com>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>
+X-Mailer: b4 0.14.3
 X-Mailman-Approved-At: Wed, 11 Nov 2026 13:14:06 +0000
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -203,206 +162,47 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Tze Yee Ng <tze.yee.ng@altera.com>
+Two things the Android bootmeth does not do yet.
 
-Add UHS-I PHY and controller timing so SD cards and eMMC can run in the
-higher speed modes on the Agilex5 SoCDK and its 013B and modular
-variants:
+Patch 1 stores the rollback indexes of a known-good slot. Without it the
+stored indexes never advance and rollback protection has no effect.
 
-  - SoCDK: DDR50 (emmc-ddr) timing so SD cards / eMMC can run in UHS-I
-    DDR50 / DDR52 mode; advertise sd-uhs-ddr50 on the SD board and
-    mmc-ddr-1_8v on the eMMC board.
-  - 013B: drop no-1-8-v to allow 1.8V signalling and add SDR104
-    (emmc-hs200) and DDR50 (emmc-ddr) timing; advertise sd-uhs-sdr50,
-    sd-uhs-sdr104 and sd-uhs-ddr50.
-  - Modular: advertise sd-uhs-sdr50, sd-uhs-sdr104 and sd-uhs-ddr50 and
-    add DDR50 (emmc-ddr) timing, overriding phony_dqs_timing back to 0
-    (this board needs 0 on the DDR read path) via
-	cdns,ddr-phony-dqs-timing.
+Patches 2 and 3 handle the messages Android leaves for the bootloader in
+the misc system space. Patch 2 syncs bootloader_message.h with
+android-17.0.0_r1, and patch 3 applies the MTE and kcmdline messages to
+the kernel command line.
 
-Signed-off-by: Tze Yee Ng <tze.yee.ng@altera.com>
 ---
-Changes in v2:
-- Drop the now-redundant "cdns,phy-ctrl-emmc-ddr" overrides on the SoCDK,
-  013B and eMMC boards; the driver now derives this value.
-- Express the modular board's DDR read-path value via
-  "cdns,ddr-phony-dqs-timing = <0>" instead of a raw
-  "cdns,phy-ctrl-emmc-ddr" override.
----
- .../arm/dts/socfpga_agilex5_socdk-u-boot.dtsi | 12 ++++++++++
- .../socfpga_agilex5_socdk_013b-u-boot.dtsi    | 23 +++++++++++++++++--
- arch/arm/dts/socfpga_agilex5_socdk_013b.dts   |  4 +++-
- arch/arm/dts/socfpga_agilex5_socdk_emmc.dts   | 12 ++++++++++
- .../arm/dts/socfpga_agilex5_socdk_modular.dts | 19 +++++++++++++++
- 5 files changed, 67 insertions(+), 3 deletions(-)
+Igor Opaniuk (3):
+      bootstd: android: update the rollback indexes of a known-good slot
+      android: sync bootloader_message.h with AOSP (misc system space)
+      bootstd: android: act on the misc memtag and kcmdline messages
 
-diff --git a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
-index b4b8f54b969..4768fdabe55 100644
---- a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
-+++ b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
-@@ -114,6 +114,7 @@
- 	cap-sd-highspeed;
- 	sd-uhs-sdr50;
- 	sd-uhs-sdr104;
-+	sd-uhs-ddr50;
- 	vmmc-supply = <&sd_emmc_power>;
- 	vqmmc-supply = <&sd_io_1v8_reg>;
- 	max-frequency = <200000000>;
-@@ -153,6 +154,17 @@
- 	cdns,ctrl-hrs16-slave-ctrl-emmc-hs200 = <0x101>;
- 	cdns,ctrl-hrs07-timing-delay-emmc-hs200 = <0xa0001>;
- 
-+	/* SD card UHS-I DDR50 mode & eMMC DDR52 mode timing configuration */
-+	cdns,phy-dqs-timing-delay-emmc-ddr = <0x00580000>;
-+	cdns,phy-gate-lpbk-ctrl-delay-emmc-ddr = <0x81a40040>;
-+	cdns,phy-dll-master-ctrl-emmc-ddr = <0xa00004>;
-+	cdns,phy-dll-slave-ctrl-emmc-ddr = <0x60>;
-+	cdns,phy-dq-timing-delay-emmc-ddr = <0x10000001>;
-+	cdns,ctrl-hrs09-timing-delay-emmc-ddr = <0xf1c1800f>;
-+	cdns,ctrl-hrs10-lpbk-ctrl-delay-emmc-ddr = <0x00020000>;
-+	cdns,ctrl-hrs16-slave-ctrl-emmc-ddr = <0x11000000>;
-+	cdns,ctrl-hrs07-timing-delay-emmc-ddr = <0x00090001>;
-+
- 	bootph-all;
- };
- 
-diff --git a/arch/arm/dts/socfpga_agilex5_socdk_013b-u-boot.dtsi b/arch/arm/dts/socfpga_agilex5_socdk_013b-u-boot.dtsi
-index 75d51ef06e3..63b9b9d3ed7 100644
---- a/arch/arm/dts/socfpga_agilex5_socdk_013b-u-boot.dtsi
-+++ b/arch/arm/dts/socfpga_agilex5_socdk_013b-u-boot.dtsi
-@@ -121,14 +121,12 @@
- 	status = "okay";
- 
- 	no-mmc;
--	no-1-8-v;
- 	disable-wp;
- 	cap-sd-highspeed;
- 	vmmc-supply = <&sd_emmc_power>;
- 	vqmmc-supply = <&sd_io_1v8_reg>;
- 	max-frequency = <200000000>;
- 	sdhci-caps = <0x00000000 0x0000c800>;
--	sdhci-caps-mask = <0x00002007 0x0000ff00>;
- 
- 	/* SD card default speed (DS) and UHS-I SDR12 mode timing configuration */
- 	cdns,phy-dqs-timing-delay-sd-ds = <0x00780000>;
-@@ -153,6 +151,27 @@
- 	cdns,ctrl-hrs16-slave-ctrl-emmc-sdr = <0x101>;
- 	cdns,ctrl-hrs07-timing-delay-emmc-sdr = <0x90005>;
- 
-+	/* SD card UHS-I SDR104 mode timing configuration */
-+	cdns,phy-dq-timing-delay-emmc-hs200 = <0x11000001>;
-+	cdns,phy-dqs-timing-delay-emmc-hs200 = <0x780004>;
-+	cdns,phy-dll-slave-ctrl-emmc-hs200 = <0x4d4d00>;
-+	cdns,phy-gate-lpbk-ctrl-delay-emmc-hs200 = <0x81a40040>;
-+	cdns,ctrl-hrs09-timing-delay-emmc-hs200 = <0xf1c18000>;
-+	cdns,ctrl-hrs10-lpbk-ctrl-delay-emmc-hs200 = <0x90000>;
-+	cdns,ctrl-hrs16-slave-ctrl-emmc-hs200 = <0x101>;
-+	cdns,ctrl-hrs07-timing-delay-emmc-hs200 = <0xa0001>;
-+
-+	/* SD card UHS-I DDR50 mode & eMMC DDR52 mode timing configuration */
-+	cdns,phy-dqs-timing-delay-emmc-ddr = <0x00580000>;
-+	cdns,phy-gate-lpbk-ctrl-delay-emmc-ddr = <0x81a40040>;
-+	cdns,phy-dll-master-ctrl-emmc-ddr = <0xa00004>;
-+	cdns,phy-dll-slave-ctrl-emmc-ddr = <0x60>;
-+	cdns,phy-dq-timing-delay-emmc-ddr = <0x10000001>;
-+	cdns,ctrl-hrs09-timing-delay-emmc-ddr = <0xf1c1800f>;
-+	cdns,ctrl-hrs10-lpbk-ctrl-delay-emmc-ddr = <0x00020000>;
-+	cdns,ctrl-hrs16-slave-ctrl-emmc-ddr = <0x11000000>;
-+	cdns,ctrl-hrs07-timing-delay-emmc-ddr = <0x00090001>;
-+
- 	bootph-all;
- };
- 
-diff --git a/arch/arm/dts/socfpga_agilex5_socdk_013b.dts b/arch/arm/dts/socfpga_agilex5_socdk_013b.dts
-index 9605fa4cb00..1bec13d998e 100644
---- a/arch/arm/dts/socfpga_agilex5_socdk_013b.dts
-+++ b/arch/arm/dts/socfpga_agilex5_socdk_013b.dts
-@@ -90,11 +90,13 @@
- &mmc {
- 	status = "okay";
- 	bus-width = <4>;
--	no-1-8-v;
- 	cap-sd-highspeed;
- 	cap-mmc-highspeed;
- 	disable-wp;
- 	sd-uhs-sdr50;
-+	sd-uhs-sdr104;
-+	sd-uhs-ddr50;
-+	sdhci-caps-mask = <0x00002000 0x0000ff00>;
- 	cdns,phy-use-ext-lpbk-dqs = <1>;
- 	cdns,phy-use-lpbk-dqs = <1>;
- 	cdns,phy-use-phony-dqs = <1>;
-diff --git a/arch/arm/dts/socfpga_agilex5_socdk_emmc.dts b/arch/arm/dts/socfpga_agilex5_socdk_emmc.dts
-index 52aa92e4292..f53846a0c46 100644
---- a/arch/arm/dts/socfpga_agilex5_socdk_emmc.dts
-+++ b/arch/arm/dts/socfpga_agilex5_socdk_emmc.dts
-@@ -25,6 +25,7 @@
- 	disable-wp;
- 	non-removable;
- 	cap-mmc-highspeed;
-+	mmc-ddr-1_8v;
- 	mmc-hs200-1_8v;
- 	mmc-hs400-1_8v;
- 	bus-width = <8>;
-@@ -71,4 +72,15 @@
- 	cdns,ctrl-hrs10-lpbk-ctrl-delay-emmc-hs400 = <0x80000>;
- 	cdns,ctrl-hrs16-slave-ctrl-emmc-hs400 = <0x11000001>;
- 	cdns,ctrl-hrs07-timing-delay-emmc-hs400 = <0x90001>;
-+
-+	/* SD card UHS-I DDR50 mode & eMMC DDR52 mode timing configuration */
-+	cdns,phy-dqs-timing-delay-emmc-ddr = <0x00580000>;
-+	cdns,phy-gate-lpbk-ctrl-delay-emmc-ddr = <0x81a40040>;
-+	cdns,phy-dll-master-ctrl-emmc-ddr = <0xa00004>;
-+	cdns,phy-dll-slave-ctrl-emmc-ddr = <0x60>;
-+	cdns,phy-dq-timing-delay-emmc-ddr = <0x10000001>;
-+	cdns,ctrl-hrs09-timing-delay-emmc-ddr = <0xf1c1800f>;
-+	cdns,ctrl-hrs10-lpbk-ctrl-delay-emmc-ddr = <0x00020000>;
-+	cdns,ctrl-hrs16-slave-ctrl-emmc-ddr = <0x11000000>;
-+	cdns,ctrl-hrs07-timing-delay-emmc-ddr = <0x00090001>;
- };
-diff --git a/arch/arm/dts/socfpga_agilex5_socdk_modular.dts b/arch/arm/dts/socfpga_agilex5_socdk_modular.dts
-index 032e40fc639..fe026d6432d 100644
---- a/arch/arm/dts/socfpga_agilex5_socdk_modular.dts
-+++ b/arch/arm/dts/socfpga_agilex5_socdk_modular.dts
-@@ -33,6 +33,9 @@
- 	no-mmc;
- 	disable-wp;
- 	cap-sd-highspeed;
-+	sd-uhs-sdr50;
-+	sd-uhs-sdr104;
-+	sd-uhs-ddr50;
- 	vmmc-supply = <&sd_emmc_power>;
- 	vqmmc-supply = <&sd_io_1v8_reg>;
- 	max-frequency = <200000000>;
-@@ -71,5 +74,21 @@
- 	cdns,ctrl-hrs16-slave-ctrl-emmc-hs200 = <0x101>;
- 	cdns,ctrl-hrs07-timing-delay-emmc-hs200 = <0xa0001>;
- 
-+	/* SD card UHS-I DDR50 mode & eMMC DDR52 mode timing configuration */
-+	cdns,phy-dqs-timing-delay-emmc-ddr = <0x00580000>;
-+	cdns,phy-gate-lpbk-ctrl-delay-emmc-ddr = <0x81a40040>;
-+	cdns,phy-dll-master-ctrl-emmc-ddr = <0xa00004>;
-+	cdns,phy-dll-slave-ctrl-emmc-ddr = <0x60>;
-+	/*
-+	 * Modular SoM: override the derived phony_dqs_timing (1) back to 0 on
-+	 * the DDR read path; at 1 one DDR beat collapses onto both on this board.
-+	 */
-+	cdns,ddr-phony-dqs-timing = <0>;
-+	cdns,phy-dq-timing-delay-emmc-ddr = <0x10000001>;
-+	cdns,ctrl-hrs09-timing-delay-emmc-ddr = <0xf1c1800f>;
-+	cdns,ctrl-hrs10-lpbk-ctrl-delay-emmc-ddr = <0x00020000>;
-+	cdns,ctrl-hrs16-slave-ctrl-emmc-ddr = <0x11000000>;
-+	cdns,ctrl-hrs07-timing-delay-emmc-ddr = <0x00090001>;
-+
- 	bootph-all;
- };
+ MAINTAINERS                          |   2 +
+ boot/Kconfig                         |  11 +++
+ boot/Makefile                        |   2 +-
+ boot/android_ab.c                    |  34 ++++++++
+ boot/android_misc.c                  | 145 +++++++++++++++++++++++++++++++++++
+ boot/bootmeth_android.c              | 132 +++++++++++++++++++++++++++++++
+ common/avb_verify.c                  |  35 +++++++++
+ include/android_ab.h                 |  19 +++++
+ include/android_bootloader_message.h |  92 +++++++++++++++++++++-
+ include/android_misc.h               |  56 ++++++++++++++
+ include/avb_verify.h                 |  16 ++++
+ 11 files changed, 542 insertions(+), 2 deletions(-)
+---
+base-commit: 0e3fb22a5b2e330bd73014f0ced13f5df259d087
+change-id: 20261028-upstream-android_rollback_misc_b4-7f16f8f69336
+
+Best regards,
 -- 
-2.43.7
+Igor Opaniuk <igor.opaniuk@gmail.com>
 
