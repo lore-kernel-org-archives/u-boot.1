@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E51A606A327
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 14:21:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A9C1606A321
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 14:21:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=IQbvj/ID;
-	dkim=pass (2048-bit key, unprotected) header.d=dolcini.it header.i=@dolcini.it header.a=rsa-sha256 header.s=default header.b=SADIam9U
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=PHI4PWTW;
+	dkim=pass (2048-bit key, unprotected) header.d=dolcini.it header.i=@dolcini.it header.a=rsa-sha256 header.s=default header.b=dQNU62HK
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6B2588145C;
-	Wed, 11 Nov 2026 14:21:32 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0FD4B60D6E;
+	Wed, 11 Nov 2026 14:21:34 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gWxZSR2fHyod; Wed, 11 Nov 2026 14:21:32 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org BD460813EE
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794406891;
-	b=ETspnewrq/1C41vXOARxxZ2ocMLjHRdsrq84/BzyPv4otSesbGWJ9lxEKuBCV2Sg9UU0
-	 FFr7VObL7RLrSI1aNZGWCOk3c84wFxQeXJW8uKOFLELAKwKtA91MDaQrxc4ZlBRVwFULU
-	 BKmntdgR9Mtkqk4DEap+SV76ZIF2BVrDQMPjj6ov92eqdOn75CEk/zZZOK9f0Z7u/Sa8l
-	 zvtWNE5UpfqLcLJfZjkifPxqBVR0eOPrRr1Vh1walut3RizNU18y36mALBTGmm4Aoh7Od
-	 EcjcHc1i2RR06bE8fhl4g5Bo9FXGvDa+6SBZVwFKFhDXW6/jz1SRIBb5H5q0LdAdMmA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id bVxnbZzP0JkA; Wed, 11 Nov 2026 14:21:33 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 560EC60D84
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794406893;
+	b=O45kAPZBdhTIs1czRdSTTrurgILZb+zFusDvfOdvUfyw6LKFwMAPWgHkgVpY+v8E6KUk
+	 S4EnEM/+/hr8NeUlRtMLbnjZ11/EeDudyhaIC463jHy6sHvmQGcApITfMlqVX5HGSMzxO
+	 MHeti82r/CaYTsvg3nzz8jsQcn6FqqEnj0eAymlD/hS+DyPY6UW5R3Hs8UBhNEUX3ILsg
+	 hAeRJMJfBt3oTFW6QnsslHZvf4FzVi0eAS2NyCzsT8iqQQ9Yc7jiNtxroDPj3B2LbfFJv
+	 eD8YRbVWMKIJRK+qNBT5et6aD3D2CM35IQDbdcvvAO128ZY/+Rj2xNYRJhoG8KEmtLw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794406891;
+	c=relaxed/relaxed; t=1794406893;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,75 +31,78 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=+zhxj1lUj+2xBTjM2mXS3MfHmqGJaIAyw+iBkYfpKTk=;
-	b=UJ9R9DGcEqxNMQePTo8y3AX0tOrjNfNLNqMA6/o1VhNABxJq29UpdGhky9hxvedk5SZy
-	 E8mMNa+FvggGVAaPuly1tXQp75dDSVBTrcFTfkyo8wvuV3/0J/60MBQAx48BkUpXbuLaF
-	 EFDQsj6Pg1HZyaEh+w05Cu0RETfEaxz7u/Y9dF7cyY5GViyS/eivyJoXDuwG9KCsRX1rl
-	 C/GqjSJvLdbbBInqW9iQBhzAtFA/ngEtzR1dn9C+Lx+e4UGrEZK2FaPEBCY2k9rkfg+N+
-	 oFohPTmL9PouovVWZHGIa5r3A3s3M+y4xnuqr98CPqVmcWLcQtFhxSliBeBR5hs4MMg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=GXIY7E/9YYGV5HSFuloG/Qp2YYUYaFbPaEWaL0I/1RA=;
+	b=fGmtyTl3qirMOqq006efGHdLbzIfFWTRwYGNZ1HTO8tr4V9DBRVjEsaYpZMqzDVkyV4p
+	 3cEDZ+pGBvHzcUiouzbciM1cdxJRhNUMbkaLlz9Zv+e6m3htqmMcbbRoxiBMWFgIai5Hi
+	 8OZP+2rcRBGGHMXkkt0Zjh26RqP4zov55o6z/YCps51nQDTiGkKWuHF3hylacPEEV1Ru8
+	 HfaeJGVnoEwE913gH6Ix1Xcsg41M6iFs5EWH73Y3V3EYXMhzHqNPPdimNVdy0r2ITC4iH
+	 92vt9/xszeD6PyNjtbQhqnrkBP1xp6Uk24HwIsWpjTxUm9NXbgg2q9G7cwsH+qw5ZDA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=dolcini.it;
+	dkim=pass header.d=dolcini.it header.i=@dolcini.it header.a=rsa-sha256 header.s=default header.b=dQNU62HK;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794406891;
-	bh=+zhxj1lUj+2xBTjM2mXS3MfHmqGJaIAyw+iBkYfpKTk=;
+	d=lists.u-boot-project.org; s=default; t=1794406893;
+	bh=GXIY7E/9YYGV5HSFuloG/Qp2YYUYaFbPaEWaL0I/1RA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=IQbvj/ID/tlispO71RyvqtgIm6lkNxr0W07xDUlsIK+cWyrs/PZ91Z7TU2CwDEewR
-	 gTchxlkeZ5YcTOidAcDAdgc6dk1RtvF9tVH0mMTUtk1VedtBEKqXcaurq6eZjtUXzW
-	 OlaDbQb/6Ubu5j8eunzqBWxzJrdcMGytaB3DA1VBSYg3bgcauOgtvGcVQxe1n0NFmU
-	 X5OuEgwKFPeQqwrC8RuOOk5OncZw3s1NIyRd3mCuqf+x7ND0N/O791JbfOTXqXKhib
-	 3vJeXdLThE3phRXzCYsTPeJ2QIWF6net+LcMy/GQbKFEkYImWSqIJ3wNPeBKlwTkot
-	 yQnP8/BpUYJXQ==
+	b=PHI4PWTWcGwzJn9Ja/WheEwxUfdPflP627ZhMxBd5b7kmBmUsv3br5GnyjP3670N2
+	 I0JJGRg3c2um1Qivjm3Vbth/AwfZvwe3Z3MSWZPnB3a8aYlp+lwoKz2o1UeelAvgf+
+	 INgmlTikD8RfzOptZVqhTzozLMoQFp34FH3ZYW7BKyZarUEH08qYanZmu7WlreUVCM
+	 Ger1wtVuwxa9oKt4lDk6Xv/DRx9chY7AOL/olMdLAub9WMPvDr5nELQAFyv7KQO+jp
+	 riKH0cKXPKAZii4aMf9MYS1iSBfwUNKvYpw4pSxHF9i2CxWk94euiwRRXzV3oacrbp
+	 164d+rGk02KqA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BD460813EE;
-	Wed, 11 Nov 2026 14:21:31 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 584A217CD
+	by smtp3.osuosl.org (Postfix) with ESMTP id 560EC60D84;
+	Wed, 11 Nov 2026 14:21:33 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 6153317CE
  for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 14:21:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 47C9C403D2
+ by smtp3.osuosl.org (Postfix) with ESMTP id 4723E6089E
  for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 14:21:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JBe8G6Kx5Wc6 for <u-boot@lists.u-boot-project.org>;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id pRcEjPGU3baL for <u-boot@lists.u-boot-project.org>;
  Wed, 11 Nov 2026 14:21:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 7DF8D403B9
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=217.194.8.81
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.194.8.81;
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7DED16069A
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2001:4b7e:0:8::81"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2001:4b7e:0:8::81;
  helo=mail11.truemail.it; envelope-from=francesco@dolcini.it;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=dolcini.it header.i=@dolcini.it header.a=rsa-sha256
- header.s=default header.b=SADIam9U
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7DF8D403B9
+ header.s=default header.b=dQNU62HK
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7DED16069A
  for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 14:21:19 +0000 (UTC)
 Received: from francesco-nb.. (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id A304023126;
- Wed, 11 Nov 2026 15:21:14 +0100 (CET)
+ by mail11.truemail.it (Postfix) with ESMTPA id D5CC023161;
+ Wed, 11 Nov 2026 15:21:16 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1794406875;
- bh=+zhxj1lUj+2xBTjM2mXS3MfHmqGJaIAyw+iBkYfpKTk=; h=From:To:Subject;
- b=SADIam9UHvEufIsa2lsC9NBwMfRFw2wQWh/7yEoISCmyQLka3NonVC9eslcaBnx+J
- Ab9v+5J+cdRhX/Kz1HtIi+RFcH2KFwXzoQZVNkyiGNE90uXGVY/VYOwhSvMOa9CTfq
- fTvZ5obTMKb6xNkCfEuqcML4G2UxZwMr+jlDejjCAQQ6H4q2wexsXw1+0mGp+16hQ5
- 6zsvnWNhH1/uKDqV4L6AAwR63hKhuyH2zVf1mvmZTr/b3s53cSJlfRWGCx1fj8o+9L
- 8dRwi7gK4is8BlBqn469pfKaZFU8d6+qrXO8NG7oiYquMkNWULIWngLrmK2vd+xw5i
- SvMx2Skd6Qx+Q==
+ s=default; t=1794406877;
+ bh=GXIY7E/9YYGV5HSFuloG/Qp2YYUYaFbPaEWaL0I/1RA=; h=From:To:Subject;
+ b=dQNU62HKfbhb+FuYzs7i4LE9XN0ZGM0jJf5yMEdmcUTqB3EkytIDS8ljvdWFEtfie
+ tOyGpd8dd8xXkGg+XVa1klslHWErSHlLcDGdgKv50eGeY01qlCLBKF1DVREk7NGhFb
+ bkOq5WWhxsaaGwhRh3LzOno+y61sgO+raocfpZGZ0ZVtGI1SS4SxJeWfRunk9ms7RE
+ jfPz+GsOh7D7znJVJEYVWsHJbOaHI3t/cOEwL9P7zstTd3iG1aLXKEKCxSrThvPeMS
+ fbSledRwpK5FP6GBUrYgEfpLn+uioOH1OarNHFotpsq643TmLMGMcg54Py363oBpM1
+ 6IkFlcIJpOU6g==
 From: Francesco Dolcini <francesco@dolcini.it>
 To: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org
-Subject: [PATCH v1 08/15] board: toradex: colibri_imx7: un-nest
- board_late_init from CONFIG_USB_EHCI_MX7
-Date: Wed, 11 Nov 2026 15:20:56 +0100
-Message-ID: <20261111142104.109139-9-francesco@dolcini.it>
+Subject: [PATCH v1 13/15] board: toradex: common: fix stale #endif comments in
+ tdx-common.c
+Date: Wed, 11 Nov 2026 15:21:01 +0100
+Message-ID: <20261111142104.109139-14-francesco@dolcini.it>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261111142104.109139-1-francesco@dolcini.it>
 References: <20261111142104.109139-1-francesco@dolcini.it>
@@ -124,36 +127,38 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Francesco Dolcini <francesco.dolcini@toradex.com>
 
-board_late_init() (USB recovery bootcmd and NAND/eMMC variant
-selection) was nested inside "#ifdef CONFIG_USB_EHCI_MX7", which
-guards the unrelated board_fix_fdt() USB quirk. CONFIG_USB_EHCI_MX7
-defaults to y but is user-selectable, so disabling it silently
-dropped board_late_init() entirely.
+get_board_rev()/CONFIG_REVISION_TAG were renamed to
+get_board_revision()/CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG, but two
+trailing #endif comments still named the old macros.
 
-Fixes: 46307ef01e08 ("board: colibri_imx7: use SDP if USB serial downloader has been used")
+Fixes: 9774462e34fa ("arm: Disable ATAGs support")
 Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 ---
- board/toradex/colibri_imx7/colibri_imx7.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ board/toradex/common/tdx-common.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/board/toradex/colibri_imx7/colibri_imx7.c b/board/toradex/colibri_imx7/colibri_imx7.c
-index c63812bd966c..234d86dde609 100644
---- a/board/toradex/colibri_imx7/colibri_imx7.c
-+++ b/board/toradex/colibri_imx7/colibri_imx7.c
-@@ -342,6 +342,7 @@ int board_fix_fdt(void *rw_fdt_blob)
+diff --git a/board/toradex/common/tdx-common.c b/board/toradex/common/tdx-common.c
+index 2a8589f5e41c..5c0b5d0ef159 100644
+--- a/board/toradex/common/tdx-common.c
++++ b/board/toradex/common/tdx-common.c
+@@ -46,7 +46,7 @@ u32 get_board_revision(void)
+ 		((tdx_hw_tag.ver_minor & 0xf) << 4) |
+ 		((tdx_hw_tag.ver_assembly & 0xf) + 0xa);
+ }
+-#endif /* CONFIG_TDX_CFG_BLOCK */
++#endif /* CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG */
  
+ #ifdef CONFIG_SERIAL_TAG
+ void get_board_serial(struct tag_serialnr *serialnr)
+@@ -306,7 +306,7 @@ u32 get_board_revision(void)
+ {
  	return 0;
  }
-+#endif /* CONFIG_USB_EHCI_MX7 */
+-#endif /* CONFIG_REVISION_TAG */
++#endif /* CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG */
  
- #if defined(CONFIG_BOARD_LATE_INIT)
- int board_late_init(void)
-@@ -369,5 +370,3 @@ int board_late_init(void)
- 	return 0;
- }
- #endif /* CONFIG_BOARD_LATE_INIT */
--
--#endif /* CONFIG_USB_EHCI_MX7 */
+ #ifdef CONFIG_SERIAL_TAG
+ u32 get_board_serial(void)
 -- 
 2.47.3
 
