@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7426B606A321
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 14:21:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56D93606A327
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 14:21:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=YlCPIPG1;
-	dkim=pass (2048-bit key, unprotected) header.d=dolcini.it header.i=@dolcini.it header.a=rsa-sha256 header.s=default header.b=EhnFwWlm
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Xpgb4asl;
+	dkim=pass (2048-bit key, unprotected) header.d=dolcini.it header.i=@dolcini.it header.a=rsa-sha256 header.s=default header.b=zgX8hBOI
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4D10C60683;
-	Wed, 11 Nov 2026 14:21:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3396C81450;
+	Wed, 11 Nov 2026 14:21:26 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id p3bhUsBJrw3h; Wed, 11 Nov 2026 14:21:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 9BB996069A
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794406881;
-	b=p8goilUuemptygSLSy5tNSOK2mVeqo1ML00TOsf8VLDJ8MBJ1VHV52bGND50bgHS2W9J
-	 i2/FW2zVJRudl8xVxnk7D2y7sA/T5ABbIjJxPqVP52xPc3ntKsE5dQErKuhfEwywwNB6J
-	 /rSHL4200pAG/XIHuFazfseo0V+LO2ENSMSODJAJdidAfNEEAgPNiRCb2utdVHyMVdTxV
-	 k1HJaCQ7nLEBFwitGLIITj7DQTk66y4KPla563xC1UM8pVWANeU699lLdtkzPjeQYYT8t
-	 DOaw8PZLU+G0mba0bh56cB6lJ7yQ2kQOd3MGKI/MreS9sphbmdGmL78TXBPXCOJQ/DA==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id OFMtA8eLVqNp; Wed, 11 Nov 2026 14:21:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 845358145C
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794406885;
+	b=pURqmnZXxxHL8li1yW0jT+MblQATbj5lYYIXbDxjgelfldSE/sshBZnP5KVh0tFOZgcP
+	 JTnMxq2otBrCf7/IPm170qaOMuE98X83hueAg8rqYdbMFdN7gSUj8qIXaoH0OcMpt9cqP
+	 DQvQaY5tnPoWIf2qkZhych4MBLqmx25aF3pdP9qjGH74AaeeKUgqdgzZGNya3kLsv5xtL
+	 l2mDmSs6CzcAKW9Gmb28LmjyelKfOjH8yJRXfoYFV/q5mCxXMdpANjBpZYlo4V0+FApGv
+	 cTN8n42CUawBdQSX18hffrmgraeC07qnkPTZUK6+24CNwIpd1pw0YxfCrLF0TyqnALw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794406881;
+	c=relaxed/relaxed; t=1794406885;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,76 +31,75 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=F86DMafSxIsEuLkXw2zDXK64mO59Dv3imjjdTyCtClw=;
-	b=XEj4GGWZJlCLG/ESgZoxfgyxAmqx0t6Ja7HlXcFS12lLcFu//lQRMIWQyYoUsSaqJzBv
-	 q+ubUqLWTg6ZKSAwfa8fevK4LT0V6FB6DFL3/5h2SCsIvzTyrIZ+NWvMsMUMx5GxAhXml
-	 mziumwqtxKzUrB1ILja2mh1XhQna7/DyP0jLWy2o0ZM7EZmmqje1g7lEde7pBb+f5eoyO
-	 UZt9Fia5XeRi0IWjdRAAtDSI8t9h7aLBM+VgpICPsb9yWvrQ/8WPVk6BwgwPap9PVE/wJ
-	 JElbub1HzOvrxLJgRhh9Ix/6SKxt+AGu1Pyuvh/WXAeye6+HFR+phGyuHc9zdgCJPYQ==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=uSZvs71bYrfheUKOFJYspyiRucLb7R1bbHEfTzluo1w=;
+	b=Crb99dH2Uye2sXyRxO85/pmWmS5U4tyR2sGAbtZC0Y3FrQTkkeqdUSj52h0oHp6iBIOe
+	 NxPP1HC4pVfZmnsOh3pWsJaRRLzFdti4wNxTDFa02sEu+riSiJ27+91Z+qjFISv4EJ9YP
+	 PNieJrX/oEFpviBt+Al7NLY0Ju4TTk3+SLFWuSjcSwGrIDY01oUkvnrxOZKG3Aw3hGp1R
+	 TEsX4aj2jByqVmHhkh8XlA6z6tDTsXsp5r5U5ySNlt04/AIZhOy+6tre/xLclLtfsFhu2
+	 qsHLpuBWDLjFEm/UG+YIbdxYWAdVKCfW1FSfe8+4JWfhCd8DZ7I4TK9/5g9/IT0q+uQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794406881;
-	bh=F86DMafSxIsEuLkXw2zDXK64mO59Dv3imjjdTyCtClw=;
+	d=lists.u-boot-project.org; s=default; t=1794406885;
+	bh=uSZvs71bYrfheUKOFJYspyiRucLb7R1bbHEfTzluo1w=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YlCPIPG1p/5eGyn9qskqb/sY83tcpE9Lps3KA7Z3ukqPnF9hElmdvRlscNjiCU42e
-	 n4vCJjwbXoBYbv25jI7N4cwEVan1Q0ZfSZ8nEwLxBU5O7sxVjjuM6shnUGyAuzxyxL
-	 yIT03Eg0w8KqBO6Tcwy1BS0nrP/IHyH9s4JXkcs03Vbg8RmXetmtYn6iIY+jKvwHy7
-	 3VkiLgyz1WvXVF9OwU9hhHgZucsySMDLmJVxmkefdoaz4ysP4ZA+D/TsOq2ZhjN9K+
-	 qBPWx36lYi7yDEPNp9gI+D46Hxy4365F5MwxMWlKLub79/oaT3whtYaD6ysVzak9iW
-	 gOl8EoJquvH0g==
+	b=Xpgb4aslbm2oiGojq0q2YbqsReUH7YTgcK5+GdvbHjFIxLuV7TClELeEG8b1Ajj4+
+	 gMbQla2WUv/9ACpA5ZbOlsVadZP9EyRTwdsmOMrFj3OHLyw1G0HMcH4vDd3B2AvFmq
+	 aruUFwuu8aWHWrPYagpwhJcaKVIAVes+4gYnpavOtkZRKpVYjE2BkAyK7HxgF1h3bp
+	 OKPXG0ExUQF3l97D99+PbTk7JgCq/U4Kfd1sVpDMnyq12mPWb+C+eqZm/win3sMcKY
+	 4fFud8WdO3sdf6r/FDtzJfGZu5TeR30Kea5ubSCbGSLU8T/UQk8LnJUNRI4wdqexyR
+	 SOb95CmQLqnWA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9BB996069A;
-	Wed, 11 Nov 2026 14:21:21 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 845358145C;
+	Wed, 11 Nov 2026 14:21:25 +0000 (UTC)
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id BD6932FE
+ by lists1.osuosl.org (Postfix) with ESMTP id CA30E17CD
  for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 14:21:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A389A403C5
+ by smtp2.osuosl.org (Postfix) with ESMTP id A91AE403D2
  for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 14:21:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9K1Ew-wcUFoh for <u-boot@lists.u-boot-project.org>;
+ id zwxuwTRG2MIp for <u-boot@lists.u-boot-project.org>;
  Wed, 11 Nov 2026 14:21:17 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 3ABF5403C3
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2001:4b7e:0:8::81"
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2001:4b7e:0:8::81;
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 13E8C403B9
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=217.194.8.81
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.194.8.81;
  helo=mail11.truemail.it; envelope-from=francesco@dolcini.it;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=dolcini.it header.i=@dolcini.it header.a=rsa-sha256
- header.s=default header.b=EhnFwWlm
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 3ABF5403C3
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 14:21:16 +0000 (UTC)
+ header.s=default header.b=zgX8hBOI
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 13E8C403B9
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 14:21:14 +0000 (UTC)
 Received: from francesco-nb.. (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id E13A71FB3F;
+ by mail11.truemail.it (Postfix) with ESMTPA id 0C59321447;
  Wed, 11 Nov 2026 15:21:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1794406873;
- bh=F86DMafSxIsEuLkXw2zDXK64mO59Dv3imjjdTyCtClw=; h=From:To:Subject;
- b=EhnFwWlmK0PFQtK4Xwnxk5LcXY50RynOwtjK7Wq8+4ZEwcwWa7GKvETmyeYgQ9Fmy
- G4OcSGAvIDCU5h9M/BVA8UUDZZkeoo9di1uqy1TyAotCAilhQSt2Ud4IDw4fi5XJhI
- No9nKanxaj5U+YiatrugyyXbbOIOvCqh0QQ3SO4wGLBKs3s9st2/Cjxw1PzcyVe06t
- QL/IxmWOkzZGvhM2HkbRa0qJbLrsJCw69P4PiVvRkJePXrdhAHuPXKp8VTqALYaHa5
- s6ap28f1+EUKtCHA7LIj97nuja47KAiC5F/fY2489iO8EHNNU7Q0KgNo7cl+Mhkkkc
- N2mX32ugyVMMA==
+ s=default; t=1794406872;
+ bh=uSZvs71bYrfheUKOFJYspyiRucLb7R1bbHEfTzluo1w=; h=From:To:Subject;
+ b=zgX8hBOI6wFLzKCyOBaJH2hbiYP6c+jLErdL9/UfmwVRg+z9FjQOMNIbUNCAK8NKz
+ W9k0wzwQZf3fer4vueyHzwy9tI2HGBEjtHGLLATcacKfKwBEiaGSvdXjqwtiSsMwQY
+ mjXVBE4j/yAqLKhB6R/TWdtsWaj/4uDoaH2xROr0pyCYvHbZ/huBjW3jVn9L099POZ
+ ZpMxO2Z8Qh3y7VeXfbSDq1IYsS4sMYug+W6eUAwSHK8b2+d/F6K6zHX2w3Zq7lACxS
+ AKoyRdq4WFhrEg9Cq9VAuuvQddUG85j4hd76uXyOOcGdAzC/1BK+922CEW/iw7deK0
+ tQaoMRvDxVaIQ==
 From: Francesco Dolcini <francesco@dolcini.it>
 To: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org
-Subject: [PATCH v1 04/15] board: toradex: apalis_imx6: fix do_fuse argv[1]
- NULL deref
-Date: Wed, 11 Nov 2026 15:20:52 +0100
-Message-ID: <20261111142104.109139-5-francesco@dolcini.it>
+Subject: [PATCH v1 02/15] board: toradex: smarc-imx8mp: fix always-false
+ phandle check
+Date: Wed, 11 Nov 2026 15:20:50 +0100
+Message-ID: <20261111142104.109139-3-francesco@dolcini.it>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261111142104.109139-1-francesco@dolcini.it>
 References: <20261111142104.109139-1-francesco@dolcini.it>
@@ -125,33 +124,30 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Francesco Dolcini <francesco.dolcini@toradex.com>
 
-argv[0] is the command name itself, so argv[1] is only valid once
-argc >= 2. Running "updt_fuse" with no arguments has argc == 1 but
-still dereferences argv[1] in strcmp(), reading past the argv array.
+fdt_get_phandle() returns uint32_t and 0 on failure, so
+"phandle < 0" is never true. On a missing pinctrl phandle this fell
+through to fdt_setprop_u32(..., "pinctrl-0", 0), corrupting the DT
+instead of bailing out.
 
-Fixes: 592f4aed6db7 ("arm: imx: initial support for apalis imx6")
+Fixes: dde53eae88d6 ("board: toradex: add Toradex SMARC iMX8MP")
 Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 ---
- board/toradex/apalis_imx6/do_fuse.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ board/toradex/smarc-imx8mp/smarc-imx8mp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/toradex/apalis_imx6/do_fuse.c b/board/toradex/apalis_imx6/do_fuse.c
-index 8721276bed83..411a6300e1cb 100644
---- a/board/toradex/apalis_imx6/do_fuse.c
-+++ b/board/toradex/apalis_imx6/do_fuse.c
-@@ -54,10 +54,10 @@ int do_updt_fuse(struct cmd_tbl *cmdtp, int flag, int argc,
- {
- 	unsigned val;
- 	int ret;
--	int confirmed = argc >= 1 && !strcmp(argv[1], "-y");
-+	int confirmed = argc >= 2 && !strcmp(argv[1], "-y");
+diff --git a/board/toradex/smarc-imx8mp/smarc-imx8mp.c b/board/toradex/smarc-imx8mp/smarc-imx8mp.c
+index 38fb3d61f5bf..e3fab50f6424 100644
+--- a/board/toradex/smarc-imx8mp/smarc-imx8mp.c
++++ b/board/toradex/smarc-imx8mp/smarc-imx8mp.c
+@@ -62,7 +62,7 @@ static void ft_board_assign_uart(void *blob)
+ 		return;
  
- 	/* can be used in scripts for command availability check */
--	if (argc >= 1 && !strcmp(argv[1], "-n"))
-+	if (argc >= 2 && !strcmp(argv[1], "-n"))
- 		return CMD_RET_SUCCESS;
+ 	phandle = fdt_get_phandle(blob, pinctrl_offset);
+-	if (phandle < 0)
++	if (!phandle)
+ 		return;
  
- 	/* boot cfg */
+ 	fdt_setprop_u32(blob, uart_offset, "pinctrl-0", phandle);
 -- 
 2.47.3
 
