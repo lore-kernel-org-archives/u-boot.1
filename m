@@ -1,122 +1,120 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AB49606A327
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 09:57:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0EF4D606A33F
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 10:00:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=1KgS9u+R;
-	dkim=pass (2048-bit key, unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=a0FJoXtH
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=x9bmwtyP;
+	dkim=pass (2048-bit key) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=CcqiA92r
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 358AB811C9;
-	Wed, 11 Nov 2026 09:57:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6228740A5A;
+	Wed, 11 Nov 2026 10:00:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id nHKpFtOk3qAB; Wed, 11 Nov 2026 09:57:46 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 785A3811CD
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794391066;
-	b=o5/4gKHaxeHoFAl2iTS8meuhVOpCJNzhXWKImEbWfbRYiuSvdGELT0W7SctXFzcXsTsm
-	 sP7PH1Y9M9d8gkKAaBH/7jDi1c0Obvl5QkpZek+wxxmqxuQE4ZDtejIlzAN7Rm06yjIhW
-	 EKMSh3rQF2eRDiJKM1kFQ3+0RMrlNW1hMfDx6xl1ubRURsKKn1GYQDeT51DN4Yqv3OT10
-	 E0phsd3mGANgtd3oecAdAqkvI7dtwW4qXZPy9H1RdKfNDq7cNbc//aPAjRjAs5Ha0O0+f
-	 +qsQpVSCiidpbM1v/pUvQZt+SLSgx+Wa8omt7/ivPeFuj/A49LJvValwxZyhuy+/4mg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id BEUgzXvqapdg; Wed, 11 Nov 2026 10:00:19 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9EACC40A50
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794391219;
+	b=q50B4Ua7rsiINS7WgwUg7aSOy22o8futC8kuAvPu8RmvGADEqcmi87v4C/VK1sBO8ChD
+	 EnJOXcfCL+MTbKQtrl/Qtw2/OnSrTXE6bpK/xt/H8hKDCu/0FvMt/2cI8p1IZiOzDc1vW
+	 M05Ac6ucLVWI2PDAFcvgLMFGEEt2WnsxRTXzMBgk98d6t20DpaIiNIzbOJdC/J+ig13Ev
+	 anjrtGksQFZVeUnZY53288yNyBdl9oDyLUcm6e/Ed0fwFf59v4y2xAmC1CoYUlMEC0Vnz
+	 dBvsS/7FIMx8zr7OvqAp37n/rx5lDTTIb3eehR91oK7wrDY3UE3xPxTiAAV74wKM+IA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794391066;
+	c=relaxed/relaxed; t=1794391219;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
+	 DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Content-Language:To:Cc:References:From:Subject:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Last-TLS-Session-Version:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=wQBNOBPmXaKJ4IhwXB1Acsr1GgKUXM/tSo9L6BiEl+g=;
-	b=Js7ps+YxD/P5spYDRxao7VkdBQuwiB5C3fusBdm9oDtL1NqYkQUMAR83N86oYUTaEBUw
-	 prFRRWiJuk80JOa+Fik1w48w1oqW97EE8CjHM9m4egVgxjpe/D0QIapEDkIEFcYUe22gp
-	 kkdJxcl614+slr1RGS5l3aWA3e/KwkfV8fVC+3VSAylX8kz3kN/534krfTApD/6CMkKzn
-	 0rAQztw/YCR3/o/tff6HT0qbsmG33VSUEAMu1XViuz196qVpnW1ffdFK678R09Z5312Az
-	 SOqa+c39RDSiMt2nTZghRBunNCOqZIGFvPSupnU+aqWWxuEQ0ITqrsFQtwiTwY9ARuA==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=yZQEieiZtHA30Tac8jFvm7Hl+BTA18iQkFrK70+VHxg=;
+	b=M2ZChs8TjfwxqdmZf9bVpKXvOIrxeQ1rPycrsNfxJWQeRYVAUjOABVBlNwTTn1RR7VQU
+	 oKp9DLRUHfc1ZQigUDDYAW1HV9iGi/Vr57hpBSLNS+js+n/Au2m5/z063q15p+kIk1Sxy
+	 VjgMEysRFJttSUpfkB7CkkiVAGNDtEJOlzY2YvNkgSzezciXe+z2WJtEJYUx2vdqv89FG
+	 FkIR+ikUn/fW8LVt7UUm1pBE1KtzWKE9U9q8TvHbC9pG3z0/5TFVO2xvSwP4c3KsrLA9L
+	 DbB0GS8+Me50LhtnT1fzZtrd3Njz5A1LqMOV1KR46Hf07m4KGO8m9TMc/eyTmgU4B2A==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	dmarc=pass header.from=nabladev.com;
+	dkim=pass header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256 header.s=dkim header.b=CcqiA92r;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794391066;
-	bh=wQBNOBPmXaKJ4IhwXB1Acsr1GgKUXM/tSo9L6BiEl+g=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794391219;
+	bh=yZQEieiZtHA30Tac8jFvm7Hl+BTA18iQkFrK70+VHxg=;
+	h=Date:To:Cc:References:From:Subject:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=1KgS9u+RT00+E5bD05TyS31Bri58FpB6jvnhWO8txAHKUtx4uBI3gr0ym04jUMvci
-	 KD2AZ8x97yXRszoBqX7s60qWI89KWImqdiq3b8WI9QtnxH6HGHiGRDU9xObyTJ7RIi
-	 HtCApEXWC++oNh4CTsQ2v+Lh+prWvm5cfB9dCRiWY9rraRA+k38hLKR18wp3MotXkE
-	 LENA4ZIkFIrwhm0NKtENa325nNBUifralas2NcsiEsxYe6hSrViPgA+JCKiWJLdX7C
-	 FRh2rt07ij7RM1Jk6yQB5EZp71ZuTbWVsqQtExc8JFAp6F0ECWfSdiGWe5uSgtBDih
-	 Poab7lf+cRAqg==
+	b=x9bmwtyP2v/7dH9U/fTWUFxMlvKx9b006gSpYjakCVR5ZWEluNfPp8Xegjfza+UgL
+	 TeX5IUwcFZy6smXb4Zt7/q7NWEKexu0PwiZKieAEUBUaw2UV0cfr5G36sFu790SnfU
+	 uH3N8ULHIRrF2gwXHp2bMdoux7OkzuIp3kSzLU/+pwmJF5EBwi4CmOX7cZap3Vz+/W
+	 KCJA43aT7CJtK+7eE79hPpOFDpbNBlpsTFp3TPd6JMbsPsmVoXqowCiqP9Jg5In2Ks
+	 c2yODUg/ter1Kg7XynP73Wn0DZqQZz3h6CcNrwVm4eQmngVuiPr2JRNyd/NoOKM1a7
+	 JouWEbPR9yPTg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 785A3811CD;
-	Wed, 11 Nov 2026 09:57:46 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id E68E631F
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 09:57:44 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9EACC40A50;
+	Wed, 11 Nov 2026 10:00:19 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 3B31131F
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 10:00:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C396640318
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 09:57:44 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2650940A49
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 10:00:18 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id EqZvw0z_pdGN for <u-boot@lists.u-boot-project.org>;
- Wed, 11 Nov 2026 09:57:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org F17E540070
-Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=45.157.188.8
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=45.157.188.8;
- helo=smtp-bc08.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
- receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=a0FJoXtH
-Received: from smtp-bc08.mail.infomaniak.ch (smtp-bc08.mail.infomaniak.ch
- [45.157.188.8])
- by smtp2.osuosl.org (Postfix) with ESMTPS id F17E540070
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 09:57:42 +0000 (UTC)
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jPf8J0P2Mzq1y;
- Wed, 11 Nov 2026 10:57:36 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1794391055;
- bh=wQBNOBPmXaKJ4IhwXB1Acsr1GgKUXM/tSo9L6BiEl+g=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=a0FJoXtHiLkNdky3yWcMoirXc5puSveJSrSoMjGzSgZnpaJxJ5zQJ64mpJZ2g5jzz
- wi6iit13sSbTSFKHXJoYd2cv8L6qNGGtGXvGSzYUD7iGrm5uWgsIfMTk5GeOyOKp1r
- aY6cf4mzKzVH/A988cZ4yuc2AmF4brYNmyjWXFOxlRLjslUfWrT9HvCFMbfNVWDxOA
- V2xnnDzDiPXRUnd/nkIA7W1CFepI7lQJw7loj2nE2I/TpaRPSLnSXJkjq3JfS8Mq8H
- 6UwStrhK4n0wTfOX29/9LszgsKN+N5y4NDezr2awWFSwpZKMBCjsb41HxII3/0yYh9
- LwsR1utTDfJxw==
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4jPf8G0PJ9zKtR; Wed, 11 Nov 2026 10:57:34 +0100 (CET)
-Message-ID: <b81472c7-0985-4a8d-877d-16f21b0042ac@0leil.net>
-Date: Wed, 11 Nov 2026 10:57:33 +0100
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id W6gCRlrgaOt2 for <u-boot@lists.u-boot-project.org>;
+ Wed, 11 Nov 2026 10:00:17 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 259B240A30
+Authentication-Results: smtp4.osuosl.org; arc=none
+ smtp.remote-ip="2a00:f820:417:0:178:251:229:89"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2a00:f820:417:0:178:251:229:89; helo=mx.nabladev.com;
+ envelope-from=hs@nabladev.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=nabladev.com header.i=@nabladev.com header.a=rsa-sha256
+ header.s=dkim header.b=CcqiA92r
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 259B240A30
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 10:00:16 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 159A810DD7F; Wed, 11 Nov 2026 11:00:07 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1794391210;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=yZQEieiZtHA30Tac8jFvm7Hl+BTA18iQkFrK70+VHxg=;
+ b=CcqiA92rNJoziRpQQSuAOOZ55H1Xw48UcCIGFzQdYAFwRVD1Dp0VUp1xdXKZG2pBnGyyhJ
+ CINVMwTx6onifTpawVZ/gzh0FJsWzLwWli19rJox4V++FMQjYcyR0XprLLlEHpqGo+6AKy
+ kRFLTE80ZBw6FFrqH/USpgGtGrtwptB+QzWbT8EqZUoCQj7IC214AgvkBlzCLywRWo0hdd
+ JvXYkzRKcP+TfmDEyQGgAXgJQtQ/IFUMpuztAw/W80smFk1/oEgK0Wpn2/BFa8QjIKSco6
+ vyknrdaNagPUYXgGqBSFvt7FaC/R1ob6XfpfjUMETrBaRG6+CI37r8XTTBZxGQ==
+Message-ID: <c596a092-3eeb-360e-7cdc-ef4262e2feb5@nabladev.com>
+Date: Wed, 11 Nov 2026 11:00:07 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11 00/30] usb: dwc3: part 2, make the resynced code work
-To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.u-boot-project.org
-Cc: trini@konsulko.com, ilias.apalodimas@linaro.org, michal.simek@amd.com,
- lukma@nabladev.com, alchark@flipper.net, jerome.forissier@arm.com,
- dlechner@baylibre.com, anshuld@ti.com, sjg@chromium.org,
- Thinh.Nguyen@synopsys.com, mkorpershoek@kernel.org, love.kumar@amd.com,
- s-vadapalli@ti.com, Anders Roxell <anders.roxell@linaro.org>
-References: <20261107072224.3492260-1-anders.roxell@linaro.org>
- <205058d0-f257-49ce-be85-19c44bc6c5a7@mailbox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
 Content-Language: en-US
-From: Quentin Schulz <u-boot@0leil.net>
-In-Reply-To: <205058d0-f257-49ce-be85-19c44bc6c5a7@mailbox.org>
+To: Ana Bobillo <anabobillo3@gmail.com>, u-boot@lists.u-boot-project.org
+Cc: Kyungmin Park <kmpark@infradead.org>, Tom Rini <trini@konsulko.com>,
+ Benedikt Spranger <b.spranger@linutronix.de>
+References: <151582f9-d68b-4fc9-9f07-1a8b9b1395dd@gmail.com>
+ <7d019247-1a81-4685-a325-dcbb26c87509@gmail.com>
+From: Heiko Schocher <hs@nabladev.com>
+Subject: Re: [PATCH 6/6] mtd: ubi: vtbl: check the size of a static volume's
+ last LEB
+In-Reply-To: <7d019247-1a81-4685-a325-dcbb26c87509@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Infomaniak-Routing: alpha
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -126,90 +124,64 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-12.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Hello Ana,
 
-
-On 11/10/26 4:18 PM, Marek Vasut wrote:
-> On 11/7/26 8:21 AM, Anders Roxell wrote:
+On 03.11.26 08:13, Ana Bobillo wrote:
+> From: Ana Bobillo <anabobillo3@gmail.com>
 > 
-> Hello everyone,
+> check_av() checks what attaching found out about a volume against its
+> volume table record, but not how much data the last LEB of a static
+> volume holds. That size comes from the VID header of the last LEB when
+> UBI scans the device, where it is only checked against the LEB size,
+> not against the smaller usable LEB size of a volume with data padding.
+> When UBI attaches by fastmap, the size taken from the fastmap's volume
+> header is not checked at all.
 > 
->> This is part two of two. It applies on top of part one [1], which resets
->> the DWC3 driver and imports it up to Linux v6.16. Part one alone breaks
->> the build for every board that enables DWC3. This part adds back the
->> U-Boot glue, the XHCI and UDC updates and the build fixes, so the tree
->> builds and the gadget works again. It builds on Jerome's work [2].
->>
->> The two parts have to go in together. Part one did not change, so I do
->> not resend it. The v10 patches [1] still apply on ab4dc5aacf95.
->>
->> The resynced epautoconf matches endpoints on their caps field instead of
->> on their name. Five UDC drivers never filled that in, so each one gets a
->> patch next to its other fixup: at91_udc, atmel_usba_udc, ci_udc, musb-new
->> and mtu3. With those and dwc2, every UDC driver in the tree sets caps.
->>
->> Build tested one board per driver: every DWC3 glue layer in the tree,
->> dwc3 on riscv (spacemit_k1), RK3588 and RK3399, dwc2 with and without
->> DM_USB_GADGET, at91_udc, atmel_usba_udc, ci_udc with SPL SDP, musb-new
->> on sunxi and in the am335x_evm SPL, and mtu3. 24 boards, no warnings.
->>
->> Ilias found a few bisect gaps, so I built eight of the boards at every
->> patch. Gadget configs build again from patch 20, the other UDC drivers
->> from their own fixup patch.
->>
->> Tested on hardware with v10, per vendor:
->>
->> - AMD/Xilinx: Love tested and sent a Tested-by.
->> - TI: DFU and ums on BeagleBoard-X15 (me), and on AM62p and BeaglePlay
->>    (Anshul).
->> - NXP: ci_udc with ums on an i.MX93 board (me).
->> - Amlogic: gadget and host on Khadas VIM3 (Mattijs).
->> - Rockchip: host on RK3399 Puma, same as master (Quentin). RK3588
->>    Tiger had two regressions, see below.
->>
->> Tested on hardware with v11:
->>
->> - NXP: ci_udc with ums on i.MX93, chainloaded from the vendor U-Boot.
->>    Three ums rounds, the host read 64 MiB each time. It needs usbotg1 in
->>    peripheral mode.
->> - TI: dwc3 ums on BeagleBoard-X15, the host enumerates it at high
->>    speed. That is where I found the event buffer bug in patch 15.
->> - Rockchip: host on RK3399 Puma and RK3588 Tiger (Quentin). The two
->>    Tiger regressions from v10 are gone, and he sent a Tested-by:
->>
->>    Tested-by: Quentin Schulz <quentin.schulz@cherry.de> # RK3399 Puma 
->> usbdrd_dwc3_1
->>    Tested-by: Quentin Schulz <quentin.schulz@cherry.de> # RK3588 Tiger 
->> usb_host1_xhci + usb_host2_xhci
->> - Rockchip: host and gadget on RK3576, a Flipper One and an RK3576 EVB1
->>    (Alexey). No regressions against master, and he sent a Tested-by:
->>
->>    Tested-by: Alexey Charkov <alchark@flipper.net> # Rockchip RK3576
->>
->> The rest is build tested only.
-> I would like to move this series forward, so let me get input on the 
-> status. Below are the vendors which use DWC3 core that I could find in 
-> tree, can I get a go/no-go on this series from each of you ? I hope the 
-> CC is complete, if not, please add the missing people.
+> init_volumes() adds this size to the volume's used_bytes. 'ubi read'
+> and ubi_volume_read(), which the UBI block device also uses, read up to
+> used_bytes, map each offset to a LEB and pass it to ubi_eba_read_leb(),
+> which looks it up in the volume's EBA table without a bounds check. So,
+> for a volume that uses all its reserved LEBs, a last LEB larger than
+> the usable LEB size makes the end of the volume map to an entry past
+> the end of the table, and a larger size from a fastmap moves that entry
+> further out.
 > 
-> allwinner
-> altera
-> amlogic
-> apple
-> broadcom
-> exynos
-> freescale
-> microchip
-> qcom
-> rockchip
+> Reject a static volume whose last LEB holds a negative amount of data or
+> more than the usable LEB size, the bounds self_check_volume() expects.
+> UBI writers, U-Boot's and Linux's as well as ubinize, stay within them.
+> 
+> Add a test which writes a static volume with data padding, filling its
+> one LEB to the usable LEB size, checks that it attaches and reads back,
+> then sets the data_size of that LEB one byte larger, which still fits
+> in the LEB, and checks that attaching fails.
+> 
+> Fixes: c91a719daa33 ("UBI: Add basic UBI support to U-Boot (Part 5/8)")
+> Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
+> ---
+>   drivers/mtd/ubi/vtbl.c |  6 ++++
+>   test/dm/ubi.c          | 70 ++++++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 76 insertions(+)
 
-Go from Rockchip.
+Thanks (for your whole patchset, nice findings)!
 
-Cheers,
-Quentin
+checkpatch is clean on all six, they apply and build fine, and I ran
+the sandbox tests, both new ones pass, started a CI run...
+
+Reviewed-by: Heiko Schocher <hs@nabladev.com>
+
+bye,
+Heiko
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
