@@ -2,28 +2,28 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D18B606A324
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 23:13:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 046C6606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 23:13:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ZDoyyrsx;
-	dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=B1e0sJ3r
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=VSTs+9Xg;
+	dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=X63ALfQY
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4DFF640B1B;
-	Wed, 11 Nov 2026 23:13:19 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D5054407FF;
+	Wed, 11 Nov 2026 23:13:22 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1YDdCMHhH_C5; Wed, 11 Nov 2026 23:13:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A1DCF407FF
+ id rkPqeW8Hbayi; Wed, 11 Nov 2026 23:13:22 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 2DCFB40884
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794438798;
-	b=rBW/hW+OQQ4HTP/W00BtfVz4iVoVwivPD/2wjuqk7YtdzDIEybwlM6M2tCNTETdlxO2q
-	 R8rmUEJaYrV4O8fq6JePfbj+Y0jhvmsWeop8/KjpChB2LsNeqvF+/T5b6IAiNVKBiU+Fn
-	 QV2L9vLXutP14b993It+922BJuHX6rTASRxa5G7RAPV1Qz+a9EysnN8js+SlFv+kmOB+Y
-	 /DX40nRSrXNN4PMJK6/oN6OiKqECAjdJZPgbjw62D2QsUj9/W6Y78EncDpoMp66hv203Z
-	 ZH3iui648hfjobt2F/3Fb8XReXH9njifAy87QWPT/f3wEU4tdE6zxcl6lCYq8AwUrww==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794438802;
+	b=fhl3u778tZQFizIPBgxnhq8hruUxL4EN57rVFfIIJG/am+8rcNNKrnE/rgcz30KCPNEY
+	 tvQAX4mzH07JqJIQtSOe8FRnn28vVmZUJCVbpyU1n/0iy/mk2rnsYPgqXANApR0gLg++C
+	 ZrWkfNCN+uyFSsfym4pSn+aXIqwEoLvmW3qip0pN+mK2+8joX5kdM0IwWvQ3J6UdiTy5M
+	 y5EItAzQOI2lM/So6hwA56i8NqGQIceH22/YbSnUS6ALM0VQzACspMcsoMoNQIVbfonrK
+	 Vjr6YE7EoiCgxQDlPymr1OlgGN2uTbOjnWqjMVYZWtlJNcj5/1ZDtV3F9y9xLITkbhQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794438798;
+	c=relaxed/relaxed; t=1794438802;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -34,44 +34,44 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=hgCHqDSjdQ2IZXb8qcSMRVoiXs6SoHvBhHmtpYkfWig=;
-	b=NZZgeziUb5ZvE2cN8XG273tXXX6nv4lbMZjxXztn+pw7/Htyn7l9IsYjfOigJYdqi76b
-	 Z+lnDFUXXFBpksE9RbMfHcwyLiDu3V1Jc5I+jBv14RR3BQe0+G/QHksDeeBh312EikxeA
-	 CD9wfxplywHwoZVZaoror34sRYI9emPsq7wfLx+xy13V+oQvQ3gDLgQoHqac+P8XhfEK6
-	 llvM20wcblvUJAvwaxBth0LfNfxlTLpITZ2+Ja4plQCTIZhD+a1epoaOAyeeZmE43DJIY
-	 wRqpGxKtvMKsmky7kOR3lPylYrkmhhODlBVQIFd9n7yvIs3EnPGSi1EQ8YWlW0FDD8A==
+	bh=9IlsS9W4Q/gpn2QbrVMSegHpBB1fIoGy5DlnixYJtFA=;
+	b=UoD2XusAhAtgUWys0KXVagVbGtWdgFS4giO6wBYLDeu1zT3GUIKQx1qJKqB8Kg1Wijxj
+	 q5VE8eg31nOUKjrBXv9X0BxOwevadTsgBAdelBCVu1sZJNB1wpvu0Zq1Uvc3lZbkrupor
+	 uXTTOfw0rPpsyF0CRZNm2eYth/jF+ZN7yemONyxXHQK8bmEaExQwv31bZowJfvOWydbSn
+	 HQWLVe3YGVpcTSO3254jGuiKZvw9zuWew3QbhuoZ+aOSn5z5GZ6IE5hsS5hx94tuDmGuV
+	 zoWX5o/KnKJl3irFJpiQVD3pLqUaaJAIhz9Q4r1HYQvB1smO6cWMug9kHWzomsFLTsg==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	dmarc=pass header.from=kwiboo.se;
-	dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=B1e0sJ3r;
+	dkim=pass header.d=kwiboo.se header.i=@kwiboo.se header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=X63ALfQY;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794438798;
-	bh=hgCHqDSjdQ2IZXb8qcSMRVoiXs6SoHvBhHmtpYkfWig=;
+	d=lists.u-boot-project.org; s=default; t=1794438802;
+	bh=9IlsS9W4Q/gpn2QbrVMSegHpBB1fIoGy5DlnixYJtFA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZDoyyrsxYzVC2d/nU0jYAecCzcf1PGmHWP1sU7OPfJwftMF3gKexusmH1dB77ApoY
-	 ljjVGmRzzE/2b3YHgra6CwtIZYUD9O/Ckf/LBVngFFX5YFU9ZryAvR+VKEpKahXnVb
-	 4RrN1ZSGnxEWaDzIMDuftvVO5o2a9pnVKf3H0OUrR9kQ5bI+o3f1/OYjs52Fc6fY7F
-	 KkV6ZnAWYPOWqVwlhNGs8FoyBZ1qtywWMuDo4Hub2fZswUi6tDRGnGlFfQzIeVTp2P
-	 BOE1TCpbP2g28lTrYVdwzJwaXmR+rJjzUklb7tM8cU69KYQCz9EvVZ4yrTKag8jXdm
-	 kGCOnnaeYOA9w==
+	b=VSTs+9Xg2C7EUA+nhebxultulb3j6tdrPQ7NNA1GtnZwcN4FjxQ60wPiv7z+ZFMPI
+	 2BhNPpgxTqO6MxPE1AjmV8vXEDfMfRLcmWPRWOmzBO1+xViMKWuSDUtT6NlFKv68dJ
+	 oAK5auHTypxeMe4PtlTCNcYJ2ogEq3428RFZ/526KOHx2TMSTcJPMmJzNYOic/R3Lb
+	 jiQ11Yomw0vHacA5oGLcKiy+s4oStCRcJUiu6HWy4jPMoCKrwxyVKLZVr0k5h7zEiu
+	 tcW75I9Vx1uZgNUc1wH0wjcubDmbHgIsheDVaGQGdzcdUcmw+xpHXlza98Gj8Oqgwy
+	 J6YxAVdxh7gUA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A1DCF407FF;
-	Wed, 11 Nov 2026 23:13:18 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id E084DE09
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 23:13:15 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2DCFB40884;
+	Wed, 11 Nov 2026 23:13:22 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id F1E412FE
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 23:13:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D21BD40B1B
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 23:13:15 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id D6B3940D12
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 23:13:20 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ytbocwkM-x-a for <u-boot@lists.u-boot-project.org>;
- Wed, 11 Nov 2026 23:13:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 44C1040A5C
+ id 7AvfSoY6V1xW for <u-boot@lists.u-boot-project.org>;
+ Wed, 11 Nov 2026 23:13:20 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 1A92C40884
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=121.127.44.66
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=121.127.44.66;
  helo=smtp.forwardemail.net;
@@ -81,20 +81,20 @@ Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=kwiboo.se header.i=@kwiboo.se
- header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=B1e0sJ3r
+ header.a=rsa-sha256 header.s=fe-e1b5cab7be header.b=X63ALfQY
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 44C1040A5C
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 23:13:14 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1A92C40884
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 23:13:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1794438794; bh=hgCHqDSjdQ2IZXb8qcSMRVoiXs6SoHvBhHmtpYkfWig=;
- b=B1e0sJ3rJXl7q33/k7WTZzh1xBx5Usc5DyGk7hdfIxO+4zcfkqOdTZ+n7TWlU+chsvRqagAEw
- SmaORBvajn9k9ic/Ul8eWxpn6ltaFD4ESYi6CiDqCCADEMKqktF0F2Eyscn6X84djjiHFYRQ+yV
- p6fFkCG1DLUvyOVRZjfVW0ZIzZwdpQLdekQP3o2AshlXvI0QhaIPVAyZlDESLSnfzd5NSSnHldP
- HAnihZOX4vBvMmNtwkfnif06LJXSVaxMnoIEUM6SRVbxacAtiE0+c5BXi1dXvjgd1/021oBX7lL
- F/0TqtHlllBayI4Ar3uY8rb80FMQ7GzUu19uhQXVXCaQ==
-X-Forward-Email-ID: 6af4f689f53292d6859f33d5
+ t=1794438799; bh=9IlsS9W4Q/gpn2QbrVMSegHpBB1fIoGy5DlnixYJtFA=;
+ b=X63ALfQYdrJXubov20J2gr9d8H/LPCqCPFeJS1s/cU3LZ1A0TRGgxY8OdvmxcHiUEzi5tRH7B
+ 3OSNg3RPc8Ry9SwYszT4NUpc8tLRdszvYjFJdDTndMPAwdwSqBnWh5Aft0GkJ2LWwAkkaWA4mvT
+ uUUCFO4dl6SuKKEyRVR/82V3QSSyJhoIy/XnNio3YiX+JX2QVxUauEPByHzIvO3/e0YMIoO2aVI
+ r5R5MDqzppOVdo7DAZ4qRuqsoRysQU6JucvHnqC2nWLtZ6XVx4CbV0K9D7vb0CARBAnUxlrNddE
+ MtocCnp7FK+bw7HTJ8sn4uIbl3lnGS4V5PzjDKXDhPMQ==
+X-Forward-Email-ID: 6af4f68cf53292d6859f33ee
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.66
 X-Forward-Email-Version: 2.19.18
@@ -105,13 +105,14 @@ X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Quentin Schulz <u-boot@0leil.net>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kever Yang <kever.yang@rock-chips.com>, Jagan Teki <jagan@edgeble.ai>
-Cc: Lukasz Majewski <lukma@nabladev.com>, u-boot@lists.u-boot-project.org,
- Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v3 5/8] clk: rockchip: rk3588: Remove redundant PLL register
- macros
-Date: Wed, 11 Nov 2026 23:12:46 +0000
-Message-ID: <20261111231251.160051-6-jonas@kwiboo.se>
+ Lukasz Majewski <lukma@nabladev.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Elaine Zhang <zhangqing@rock-chips.com>
+Cc: u-boot@lists.u-boot-project.org, Jonas Karlman <jonas@kwiboo.se>,
+ Jagan Teki <jagan@edgeble.ai>
+Subject: [PATCH v3 6/8] clk: rockchip: rk3588: Rename PPLL register macro
+Date: Wed, 11 Nov 2026 23:12:47 +0000
+Message-ID: <20261111231251.160051-7-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261111231251.160051-1-jonas@kwiboo.se>
 References: <20261111231251.160051-1-jonas@kwiboo.se>
@@ -130,12 +131,12 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Remove the duplicate RK3588_PLL_CON definition and the unused
-RK3588_MODE_CON definition. RK3588_MODE_CON0 is used by the driver.
+The PPLL registers belong to the PHP CRU, rather than the PMU CRU.
+Rename the register macro and update the PPLL entry to reflect this.
 
 Fixes: 165d258386a7 ("arm: rockchip: Add cru header for rk3588")
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
@@ -146,23 +147,39 @@ Changes in v2:
 - Split from "rk3588: Fix trivial clock configuration errors"
 - Add fixes tag
 ---
- arch/arm/include/asm/arch-rockchip/cru_rk3588.h | 3 ---
- 1 file changed, 3 deletions(-)
+ arch/arm/include/asm/arch-rockchip/cru_rk3588.h | 2 +-
+ drivers/clk/rockchip/clk_rk3588.c               | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-index afce8a44af3b..c83010e518ee 100644
+index c83010e518ee..39295adeb38a 100644
 --- a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
 +++ b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-@@ -105,9 +105,6 @@ struct pll_rate_table {
- 	unsigned int k;
- };
+@@ -126,10 +126,10 @@ struct pll_rate_table {
+ #define RK3588_SDMMC_CON0		0xC30
+ #define RK3588_SDMMC_CON1		0xC34
  
--#define RK3588_PLL_CON(x)		((x) * 0x4)
--#define RK3588_MODE_CON			0x280
--
- #define RK3588_PHP_CRU_BASE		0x8000
- #define RK3588_PMU_CRU_BASE		0x30000
- #define RK3588_BIGCORE0_CRU_BASE	0x50000
++#define RK3588_PHP_PLL_CON(x)		((x) * 0x4 + RK3588_PHP_CRU_BASE)
+ #define RK3588_PHP_CLKGATE_CON(x)	((x) * 0x4 + RK3588_PHP_CRU_BASE + 0x800)
+ #define RK3588_PHP_SOFTRST_CON(x)	((x) * 0x4 + RK3588_PHP_CRU_BASE + 0xa00)
+ 
+-#define RK3588_PMU_PLL_CON(x)		((x) * 0x4 + RK3588_PHP_CRU_BASE)
+ #define RK3588_PMU_CLKSEL_CON(x)	((x) * 0x4 + RK3588_PMU_CRU_BASE + 0x300)
+ #define RK3588_PMU_CLKGATE_CON(x)	((x) * 0x4 + RK3588_PMU_CRU_BASE + 0x800)
+ #define RK3588_PMU_SOFTRST_CON(x)	((x) * 0x4 + RK3588_PMU_CRU_BASE + 0xa00)
+diff --git a/drivers/clk/rockchip/clk_rk3588.c b/drivers/clk/rockchip/clk_rk3588.c
+index de435f7d0ec0..fb218ff995cd 100644
+--- a/drivers/clk/rockchip/clk_rk3588.c
++++ b/drivers/clk/rockchip/clk_rk3588.c
+@@ -61,7 +61,7 @@ static struct rockchip_pll_clock rk3588_pll_clks[] = {
+ 		     RK3588_MODE_CON0, 2, 15, 0, rk3588_pll_rates),
+ 	[NPLL] = PLL(pll_rk3588, PLL_NPLL, RK3588_PLL_CON(120),
+ 		     RK3588_MODE_CON0, 0, 15, 0, rk3588_pll_rates),
+-	[PPLL] = PLL(pll_rk3588, PLL_PPLL, RK3588_PMU_PLL_CON(128),
++	[PPLL] = PLL(pll_rk3588, PLL_PPLL, RK3588_PHP_PLL_CON(128),
+ 		     RK3588_MODE_CON0, 10, 15, ROCKCHIP_PLL_FIXED_MODE,
+ 		     rk3588_pll_rates),
+ #ifdef CONFIG_XPL_BUILD
 -- 
 2.56.1
 
