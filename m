@@ -1,121 +1,142 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CACD8606A321
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 17:51:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B423260A6F47
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 17:56:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=TAOq2bYC;
-	dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=LxWQ3IhB
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=HO9EPHJ8;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=NQpcMRj/
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 27115605E0;
-	Wed, 11 Nov 2026 17:51:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 86123811A6;
+	Wed, 11 Nov 2026 17:56:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Rf2F8YSRoh8t; Wed, 11 Nov 2026 17:51:57 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C3D216073B
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794419517;
-	b=kM/4v91hoycCnLRxMfw8TA0/++txBvI46CU8qvL5ZlycFjb8D2RvtDc5xSvF6YFiTzn5
-	 ktzP1/wOMONy9d+T+vKhFuUOR/PKym6ZmrzfVkBQO8AfEmwdYhhl+YFkTqDVyUydoq1OI
-	 CXaDngtNSKQQE1rSQZgSOdmzbRbB7vkkX4U8A/QlAag0nOKVP4LR03wAjM+PaJppyDi5X
-	 LHl3VeMEMaOO+uSJaqNMWj38qj3bg54/oBOtdlrHUBRHXAjRELFavzOWuMj0TEFQFcfWo
-	 dSHS8o7Y2F+v+2ltQ4QhUpPK+v2r/foo1jdyjVnlVPmIfyJq0ikMRwVI0IdflCU9gzg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id LTX654n5Q2a2; Wed, 11 Nov 2026 17:56:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org A5796811A9
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794419769;
+	b=qEi8Im0k+Kwqzs36u6x8iJGRZlXUB6p66B5+L2xdcBQivAau9L6pSMzJ2yf2+mwHotXX
+	 Gr0ybwNGjYiExrDVIlt04hUSbuADQGadSzeXBvJuUVVU7fZNBWZk9j72y9ETooQTQNJSg
+	 C/g7z+9UJu8KB7QINDIhVTPvlnCLKODJ6LLwPn3MCOi4jao0bUT58BkdHVLzpnLTwHEpN
+	 O24plHPzRbL5XS+2B5KhTfvDi5KmiKrx9G8PxdfOVkJ73+Rb0gY/w8bfjLaHQwkJjBrb5
+	 WAjditAnY5Gz4J2vhE1E3EzCsyv11GAKSNaP2KBO4GG0Keo/sAZjKUVFvd75XIRj5og==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794419517;
+	c=relaxed/relaxed; t=1794419769;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=RQaJXsbc/VX+HJANnInrE6BUJOk9fcmgIU/HjBgZdmo=;
-	b=ZNawhs4VYb7bNI/kQ50oG3RAZlbc9MOXqLvJ+tcAhQEaM47U5OIgx26e1fq5Ol1ym9bc
-	 zJgpLAFiqnbKS1hz2Q1ZP2iibuhKhy8V0wSGVvqr8jUTi4MCrcVKl7WShY9VDmj6l52LO
-	 eFkPZMRWDg7XpA3ImGPM9ahZtSlhqN9B+yxGndwLuuBuaXHax/y1r3XpomWjRJhkgzBfg
-	 CUFnXmwNHcH1XYHoIWeIM6Gcz+tsVIQd97PdipzPKB86lWXO4b5OmqJ5WWUR2gygLCM5D
-	 U9RC7UcNevsj2gYh8p/NhMV9RbcPdHd/voZgOYXSU7UZQUTJ36PjwU0M66r6UmhfgSw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=cEQqTCwspfbOX/lovVsRxTBmy4aRnLECnxNx8LQY5Pc=;
+	b=kjUyOThIlCA6IbuF6uDQLSYTftkTRlAxhJhEHoVCRikRgqX7iMA5DHQ/Bs2Y8K81pydS
+	 lREAnEYA0GoxNiEob39o0xdXdkJlyYmowS1A5+qpQZGs+x/R01QM8S5fD+hECdMnD1gCH
+	 PZbI+EjJEx3Fu5PNGRyNHMb6pxLwbqfLonLmK1w0Y1cyHXEy5sRJrId3RoiHCx5xDAFGR
+	 hzt+77iFJHaZfUc5POWG5cryByZwMdPaduaEOR31SWapiLg+OiqAy7l268NfOIJtmOukJ
+	 E5vi/DmfrYqMSBvs3J/esMmBlRvNagFYJ0XPOW9XsLVXmhSo6PYGLT0Y4L7CTRIKr6g==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794419516;
-	bh=RQaJXsbc/VX+HJANnInrE6BUJOk9fcmgIU/HjBgZdmo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794419769;
+	bh=cEQqTCwspfbOX/lovVsRxTBmy4aRnLECnxNx8LQY5Pc=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=TAOq2bYCCpNMWR6H9PUlqssgO26JZl5bBZVRC4BOER/7zkdX+fl7+3APA5+I5IDJR
-	 EHd8coTW6brY4thz5dMj7FymmNuUxn1x48A9vcpnW0UmDdAKHD078JvefXyMQ+4ijF
-	 FNQFr7ShTzybyu+4lWQISTw7ac7VmF4QHSsmG62LYlg5l04PeRQTfwRwYaIRkRxdUT
-	 THVylcOCdvVJ7oQuHrWcf16tvsH/XWlDyQsDS7JOJU/RgPbqg6Zax+aNtmUP/9PGbX
-	 vmM90ypmcqvUI8EYTPVxShxiG5u2IEVA7/fJnrmlKHrnXKA1KeLtVcy/JjN+29vain
-	 n73HduZNiT0vg==
+	b=HO9EPHJ8q3ecGJAxxVKmn73eFg9wO3t0GlCRbNUBCamDWh5ZofsG5E9qvXJgY3U76
+	 NnhH2qMyk74d93drjLempdH9xUb9nY+8vReDVo3Qe35niSBDMVRVxNOw6mZ7FKSLtr
+	 VgrMCPQ/ritwAHq/5t5EbVwLuE+y2Rax2Qd4BKsKrPy5S3SbopvsdZu68GLqz8YZpe
+	 pv3Cj+fPMveNKc+EWAM3X10swwwNQW9/MSiS76vWMYu3vHNjYXNNf2JP1KfBhBWkt6
+	 Qf6HVBz5FqDlSB1OBOmRTiuQPNwI/hE1qR0U58Oydx+ElCDV6VRV68E8lYRysrpZKe
+	 XvnHrBh6TR/8A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C3D216073B;
-	Wed, 11 Nov 2026 17:51:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A5796811A9;
+	Wed, 11 Nov 2026 17:56:09 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 571712FE
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 17:51:55 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id CF399F22
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 17:56:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3C56D40854
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 17:51:55 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id B533140381
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 17:56:07 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PybktK73XC8P for <u-boot@lists.u-boot-project.org>;
- Wed, 11 Nov 2026 17:51:54 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 4DDE640801
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2001:1600:19:7ff8::190e"
+ id RmulHM1mPyxG for <u-boot@lists.u-boot-project.org>;
+ Wed, 11 Nov 2026 17:56:07 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 8FB1140360
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a00:1450:4864:20::62a"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2001:1600:19:7ff8::190e; helo=smtp-190e.mail.infomaniak.ch;
- envelope-from=u-boot@0leil.net; receiver=<UNKNOWN> 
+ client-ip=2a00:1450:4864:20::62a; helo=mail-ej1-x62a.google.com;
+ envelope-from=massimo.pegorer@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256
- header.s=20231125 header.b=LxWQ3IhB
-Received: from smtp-190e.mail.infomaniak.ch (smtp-190e.mail.infomaniak.ch
- [IPv6:2001:1600:19:7ff8::190e])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4DDE640801
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 17:51:51 +0000 (UTC)
-Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
- [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jPrgS5mXpzDg6
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 18:51:48 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1794419508;
- bh=RQaJXsbc/VX+HJANnInrE6BUJOk9fcmgIU/HjBgZdmo=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=LxWQ3IhBYcg5KTU/Jqq/M+CntasZeMpjYKnmu8IU/hwPF1E/XKrilm866rt1wppfj
- lb028CWz84Q1s0XQMJOarOHgHMV/xFP9h5auvGbrMZIW+jSgjF9sgx0NVXSG2kORwR
- ToIbart/Vm6OAsD8g5a6muFRWe79tDtQpcyMfhz9gEmoFTP+gskgrSNSV3bUbopNKf
- TlUgIM/e5L/god3ux0lbkHFJEN/pCQyy2F9AbFxl8X5x6R7wtmZd3eiRzA1apPdPoe
- yZYK7oumljvWtQuuTfMzwqOSbSIOgyIxWAayU01vPlw+PbJFezMXmBGw5OyOQzCQt4
- 1R0AD2nSG3UKg==
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4jPrgR4c1czfyy; Wed, 11 Nov 2026 18:51:46 +0100 (CET)
-Message-ID: <7f90a097-1b57-417d-9e35-d66b1cf898f1@0leil.net>
-Date: Wed, 11 Nov 2026 18:51:46 +0100
+ unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256
+ header.s=20260707 header.b=NQpcMRj/
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8FB1140360
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 17:56:05 +0000 (UTC)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-c505b2e1cb9so269152166b.2
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 09:56:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1794419764; x=1795024564;
+ darn=lists.u-boot-project.org; 
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=cEQqTCwspfbOX/lovVsRxTBmy4aRnLECnxNx8LQY5Pc=;
+ b=NQpcMRj/MNOHWoCBmwIvlxe2lbxHPcTIwZ+nSX1qTyx9svSV0FC6SOZncyuuwBH6nl
+ IHPK84SwO58jz8AVc3kLRcxZfwqyIFq4rJkvdj0OBLmrXmrzIzxsx9S8zEPs8dMNdEdi
+ mCHCMctIxdUTg9AfjLZVrPCtBbJ1UCFwK1pZBt0gdkcE4tpds/wCZMQB+2ydRx8uhhA+
+ XswxBZJEYweSTrClRdddx8Ec7MjCje+mXT95+f/S345m2q04itBhv0sC7hFUZ15rCgTv
+ asMF3tOk+ukr9nwRoYk/UEm1V3QpUSlzyygMvZJalP704+2B0VNvQVCBkiqhZrwou/c7
+ GYsQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794419764; x=1795024564;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=cEQqTCwspfbOX/lovVsRxTBmy4aRnLECnxNx8LQY5Pc=;
+ b=2C3GXI0MVNGdL2ioBV2kFlvPyF8OVbIzds/CTfcXAfASDHNhwvC/pbDm8ovFc7YtOv
+ qY6vJoX2q9hlW/vXYkN0AUBOKTfBMstikJhVo02kx/jMC17o9YtjvXsL0yEz6rpaN3LC
+ B//Q7hmyVT2FhVTIUK24ceaYxn0vZNi4dST/vQafgL0iljF4I6eP0hBYRxUoikzU43ba
+ Cwo56w37ZJoOA3MFugLRSkrLYVY4415M/TkShVP7WfbuJtfmjHGat4rGVd/Lxv3M2cYv
+ 2rYPtAFRVB7rb8Deu2dBSV7l83J6xVhynTARQyCD+w8S1/m33I2tRWCkc5J0Nwz1yHOO
+ K2vg==
+X-Gm-Message-State: APuU4Z+mvMREenSW+XM5rHO8t15d240UZ9vPos8XEcxaHVWJFQQLM6/o
+ p7Fi7o0jsNWwWMfMxr1/i1xv4M/gLq1R5kS7pMF38I1mIe4NEWkZsYPn1HtgohWOGXPi/1dVdh7
+ iXQmaZBZopml/tIcDtlGhh2YSUJiDU4j+agc/
+X-Gm-Gg: AYBFou0qZyNlYNWnSvcG8k3d5DQrF5i7ekbZe51uoD7/y7iCGuMkwCpmK2BuRYGLLEw
+ qQPaHtgq8R7Zn445kPcI93GZUn+Muc0OXUB4Pd0Uf1GEOliQwa6+0tXSBmQT6N4Ew+0CM/CxEnC
+ y7hIlIxVVxD50viH+TWomhrbwCKmN2vfPVxfTaL5I74YHOCAOy0CfpiIN9eWPxyra3C9lffNSg+
+ 8zKLVrz5bMTVj1dYVo0DJTrW8WTZ1BWPz/bwdGCoNP5d09QQOWEjxB58p8nXX20gAncZQklWQZi
+ 72vtqasiKwmmjgANytOHOKK+HpnNhWsvSsi2v13Kt5r4aXuroAs+bpqfhCNMo4VQA5HLfDcqdKZ
+ 6qjsM2MH+ilhu63yXDNgaYrcHO9qF1J2wH3oN2Q==
+X-Received: by 2002:a17:907:60cd:b0:c4c:eb17:3da with SMTP id
+ a640c23a62f3a-c5066ad897cmr227842366b.22.1794419763617; Wed, 11 Nov 2026
+ 09:56:03 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] board: rockchip: Add LCKFB TaishanPi 3M
-To: Xuechao Han <220110626hanxuechao@alu.hit.edu.cn>,
- u-boot@lists.u-boot-project.org
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Jonas Karlman <jonas@kwiboo.se>
-References: <20261111165135.245826-1-220110626hanxuechao@alu.hit.edu.cn>
- <179441628581.251684.11046053143224226025@alu.hit.edu.cn>
-Content-Language: en-US
-From: Quentin Schulz <u-boot@0leil.net>
-In-Reply-To: <179441628581.251684.11046053143224226025@alu.hit.edu.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
+References: <20261025-ddr-multi-v2-0-b82ff9c860ba@gmail.com>
+ <20261025-ddr-multi-v2-2-b82ff9c860ba@gmail.com>
+ <a10d5dd9-ecdd-44e2-acce-8cb33501adec@0leil.net>
+In-Reply-To: <a10d5dd9-ecdd-44e2-acce-8cb33501adec@0leil.net>
+From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Date: Wed, 11 Nov 2026 18:55:50 +0100
+X-Gm-Features: AclHuK8nK6M_WbZpSlk7PCJbYYVeRpPs6BtjpSPdYb1YgZOwdEMpLoXpiDqQ0wY
+Message-ID: <CAC928Hanm2_mSEo3vuLnDQnHZ9uXTbV9pMmHfhXne7H3ONor=A@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] ram: rockchip: px30: allow multiple SDRAM types
+ selection
+To: Quentin Schulz <u-boot@0leil.net>
+Cc: u-boot@lists.u-boot-project.org, Joseph Chen <chenjh@rock-chips.com>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -125,123 +146,128 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-7.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Xuechao Han,
+Hi Quentin,
 
-On 11/11/26 5:58 PM, Xuechao Han wrote:
-> Hi Quentin,
-> 
-> I sent the v2 patch a moment ago; the changelog in it is only a short
-> summary, so here are the detailed replies to your comments.
-> 
+Il giorno mer 11 nov 2026 alle ore 16:41 Quentin Schulz ha scritto:
+>
+> Hi Massimo, Joseph,
+>
+> On 10/25/26 8:30 PM, Massimo Pegorer wrote:
+> > Allow the inclusion of more than one SDRAM parameters set in the PX30
+> > sdram driver. The driver applies included sets in alphabetical order
+> > (DDR3, DDR4, LPDDR2, LPDDR3), stopping at the first one that makes
+> > SDRAM initialization function to complete with success. This order is
+> > debatable and not based on any specific reason.
+> >
+> > Due to limited PX30 TPL maximum size, including support for more than
+> > one SDRAM type can require disabling some configuration options such
+> > as CONFIG_RAM_ROCKCHIP_DEBUG.
+> >
+>
+> @Joseph, can you help us out here?
+>
+> We are trying to do the same thing that px30_ddr_333MHz_v*.bin from
+> Rockchip's rkbin is doing: do DDR initialization without knowing which
+> kind of DDR is soldered on the PX30-based device. Is there something
+> special we need to do or know? For now, we are trying to initialize with
+> DDR3 first, then DDR4 if it fails, then LPDDR2 if that fails too, then
+> LPDDR3 if all fails. The first DDR init that doesn't fail is deemed
+> successful. I do not know if this is correct, can you please provide
+> some guidance?
+>
+> > Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+> > ---
+> >   drivers/ram/rockchip/sdram_px30.c | 40 +++++++++++++++++----------------------
+> >   1 file changed, 17 insertions(+), 23 deletions(-)
+> >
+> > diff --git a/drivers/ram/rockchip/sdram_px30.c b/drivers/ram/rockchip/sdram_px30.c
+> > index c7ff924b2c5..7f51b9c4f8f 100644
+> > --- a/drivers/ram/rockchip/sdram_px30.c
+> > +++ b/drivers/ram/rockchip/sdram_px30.c
+> > @@ -123,27 +123,24 @@ u32 addrmap[][8] = {
+> >
+> >   struct dram_info dram_info;
+> >
+> > -#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR3) + \
+> > -     IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4) + \
+> > -     IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2) + \
+> > -     IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3) > 1
+> > -#error "This driver only supports one DRAM configuration at a time"
+> > -#endif
+> > -
+> >   struct px30_sdram_params sdram_configs[] = {
+> >   #if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR3)
+> >   #include    "sdram-px30-ddr3-detect-333.inc"
+> > -#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4)
+> > +#endif
+> > +#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_DDR4)
+> >   #include    "sdram-px30-ddr4-detect-333.inc"
+> > -#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2)
+> > +#endif
+> > +#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR2)
+> >   #include    "sdram-px30-lpddr2-detect-333.inc"
+> > -#elif IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3)
+> > +#endif
+> > +#if IS_ENABLED(CONFIG_RAM_ROCKCHIP_LPDDR3)
+> >   #include    "sdram-px30-lpddr3-detect-333.inc"
+> > -#else
+> > -#error "Please select suitable DRAM type CONFIG_RAM_ROCKCHIP option"
+> >   #endif
+> >   };
+> >
+> > +static_assert(ARRAY_SIZE(sdram_configs) > 0,
+> > +           "Please select suitable DRAM type CONFIG_RAM_ROCKCHIP options");
+> > +
+> >   struct ddr_phy_skew skew = {
+> >   #include    "sdram-px30-ddr_skew.inc"
+> >   };
+> > @@ -691,19 +688,11 @@ out:
+> >       return ret;
+> >   }
+> >
+> > -struct px30_sdram_params
+> > -             *get_default_sdram_config(void)
+> > -{
+> > -     sdram_configs[0].skew = &skew;
+> > -
+> > -     return &sdram_configs[0];
+> > -}
+> > -
+> >   /* return: 0 = success, other = fail */
+> >   int sdram_init(void)
+> >   {
+> >       struct px30_sdram_params *sdram_params;
+> > -     int ret = 0;
+> > +     int ret = 1;
+>
+> @Massimo: question: why the need to change ret to 1?
+>
+> Because the driver enforces sdram_configs array to be non-empty, we're
+> guaranteed to do at least one loop and thus ret is guaranteed to be set
+> properly.
 
-When there's still an open discussion on some part(s) of the review, 
-please do not send a new version until we've agreed on the outcome of 
-said discussion(s).
+You are right, the static assert guarantees ret to be set at least once.
 
->> issue: Device Tree is a representation of the HW, so hacks are not
->> welcome there
-> 
-> The DWMMC driver does not use cd-gpios at all: its get_cd callback reads
-> the controller's internal CDETECT register, so supporting cd-gpios there
-> would mean adding a generic GPIO card-detect path to dw_mmc, which affects
-> every dw_mmc platform and cannot be validated on the hardware I have.
+For variables - and logic in general - which are in the local scope, I'm used
+to rely as little as possible on conditions and assumptions out of that local
+scope. But I respect different opinions and approaches, so if you prefer I can
+drop the initialization at all, or restore the zero init.
 
-That's exactly what I'm asking you to do. Adapt the driver to support 
-your use-case. If other boards also use cd-gpios and you break them by 
-adding support for cd-gpios, then they probably had an incorrect Device 
-Tree to begin with and they'll need to fix it.
+By the way, in the original code, which is the need to init ret to zero? In that
+case, there is a local scope evidence and guarantee that it will be set before
+using.
 
-> This pinmux is also very common in the same SoC family - rk3576-evb1-v10,
-> rk3576-evb2-v10, rk3576-nanopi-r76s and rk3576-nanopi-m5 all select
-> sdmmc0_det in their pinctrl - so I followed the same pattern for this
-> board. With that, the SD card works in 4-bit high-speed mode.
-> 
+Regards,
+Massimo
 
-It doesn't matter what other boards do if they do things differently at 
-the hardware level. If they do the same thing at hardware level, it 
-might still be they are doing things wrong and doing it the right way is 
-better than doing it wrong because everybody's doing it wrong. Jonas 
-said[1] that other boards seem to be doing it wrong and they probably 
-should get their pinctrl fixed as well.
-
-Does the SD card work in Linux with sdmmc0_det_l? If yes, then it means 
-the Device Tree is likely correct and we need to adapt U-Boot driver to 
-support it, not hack the Device Tree in U-Boot only to make it work with 
-the U-Boot driver.
-
-You have two options:
-- fix the Device Tree in the Linux kernel so it uses sdmmc0_det instead 
-of sdmmc_det_l, and remove cd-gpios. Your "U-Boot doesn't support 
-cd-gpios" justification for doing this change will not convince the 
-Linux kernel maintainer. You can try, but I'm pretty sure you won't get 
-positive feedback on it.
-- add support for cd-gpios in dwmmc driver in U-Boot.
-
-[1] 
-https://lore.kernel.org/u-boot/13bfc090-7a2b-4215-9926-259633840359@kwiboo.se/
-
->> question: what are you trying to do/prevent here?
->> For the boot targets, do you really always want to try eMMC first, and
->> then SD?
->> Unsure why you want to limit the possible bootmeths?
-> 
-> You are right, v2 no longer overrides bootcmd or boot_targets; both keep
-> their defaults (bootcmd is "bootflow scan -lb" and boot_targets comes from
-> rockchip-common.h). The only remaining deviation is
-
-You had mmc0 before mmc1 in v1, but now it would be mmc1 before mmc0. 
-Are you sure this is what you want? (I don't care, I'm just saying the 
-behavior changes between your v1 and v2)
-
-> "# CONFIG_BOOTMETH_EFI_BOOTMGR is not set".
-> 
-> The reason is that the EFI boot manager is a global boot method, so it
-> runs before any normal boot method. On this board it took over the boot
-> flow and booted the EFI payload on the SD card before boot.scr could run.
-> The board has quite a few optional peripherals that need device tree
-> overlays, which we apply from boot.scr, so boot.scr must get a chance to
-> run before any EFI payload. The 'efi' boot method stays enabled, so an
-
-How do you know which overlays to apply at runtime? What does your 
-script do?
-
-[...]
-
->> nitpick: remove clock-names from CONFIG_OF_SPL_REMOVE_PROPS
-> 
-> I kept it on purpose: all eight RK3576 defconfigs in U-Boot use exactly
-> the same CONFIG_OF_SPL_REMOVE_PROPS value, so I would rather not diverge
-> from them here. If you still prefer it removed, I can drop it.
-> 
-
-Please drop. I'll eventually clean up the various defconfigs with 
-CONFIG_OF_SPL_REMOVE_PROPS, but I don't see why clock-names should be 
-removed from SPL DTB.
-
->> question: why not enabling SATA?
-> 
-> The mini-PCIe style connector is configured as SATA in the board device
-> tree (&sata0 is okay, for Linux), and the same serdes lanes can also be
-> re-routed to PCIe or USB by an overlay. I have no SATA device available
-> for testing, so I did not enable it.
-> 
-
-OK.
-
-> Also sorry about the missing Cc last time; I have passed the Cc list
-> explicitly to git send-email this time.
-> 
-
-Consider using b4[1], it makes contribution *much* easier.
-
-[1] https://b4.docs.kernel.org/en/latest/contributor/overview.html
-
-Cheers,
-Quentin
+>
+> Cheers,
+> Quentin
