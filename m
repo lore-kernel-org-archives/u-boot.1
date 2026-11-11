@@ -2,206 +2,166 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47200606A32A
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 12:38:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05C00606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 12:52:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Zy4o4SOy;
-	dkim=pass (2048-bit key, unprotected) header.d=kontron.de header.i=@kontron.de header.a=rsa-sha256 header.s=selector1 header.b=nfziaGsK
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=UQlS0/yY;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Te9m1EzZ
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1C31A80B56;
-	Wed, 11 Nov 2026 12:38:26 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A91AE81221;
+	Wed, 11 Nov 2026 12:52:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id kUKwd6sTe_RR; Wed, 11 Nov 2026 12:38:25 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org EE3A6809B3
+ id k8JW9anQYIbk; Wed, 11 Nov 2026 12:52:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org DB84E81206
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794400705;
-	b=evjmIAwICBCoBN7tTMwoHpaK3RamCAXF+mhYlsxkYWC7UMh2T23lpsnj4TTDMYMJlrZi
-	 bxfhITuG2cYpALetNne6++2H1Y5Sv9DC2ruVR74x7vx7bfSzslvPQQUZGsNzZnNdSEuax
-	 5Z1v3zm33/aQ0qbjiNmRWCOk9Xp8CVjMfgLbSeiOj3A6uRZnkly4SsHa52OkuCMdvpFVE
-	 +fXELabe8pH/22w1EPtOTZyZAEQYM4cUcRC2pxDZN3auq/0ezdfHqGD39l+VWUGOPYtIC
-	 +eHJTdiKcdSjG//bQRNBrQZDgZD/hNcbHnqWoGAqOrIRvZ5uHG2MsXkcnU5DWtALOiA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794401567;
+	b=ZXwQ41TubwmfQ/7zqM59TOVHTS0nL5H2yI7sjqsV3o1Iao3JHH24xO1YW4Ynvxd8wCvh
+	 DSFqmtL2Pb+J2PG9+YIaEMYuEHHTa/FhWOyh9zKsXsXkR9L/5yzNrIt8QNZmxpFkGNsac
+	 wLtPgTtLoVBlxjiN2Qn+inCFo+mm6LImcQpUMJ20s1BdVIi1hyHSPfu7pNWPN9XjOt1rX
+	 ZgZL1AhaLN84/9L6Klz67OgcxFFk5yp3KSHKmSTd5Vvcq8gYZiXdUZk0qyWaSgvcqJy0U
+	 Q4y4eiYmgIAE7mNeyBj1s7/O6AeJSAV/iqe04k1iR8weMWqRw8gbmu4n+32rbDDqZDQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794400705;
+	c=relaxed/relaxed; t=1794401567;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
-	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=8lXniSlpQDgrQ0P5YqKn0FqCW9SDt2WY7LNrYFLN1qQ=;
-	b=UPWlI45lc4It2ckeN3yJZl6hVZ1Vyc1VVW8rqSq2echk8jokf6iG3yZjhj+qoqcvhmSG
-	 5aUskUj4zKEvWptKgSIfIUg2nehEXfg2sD+bGPg6/hJ6YMrXvFFGrF/DEmLLiP7MYqv1j
-	 o7S36vZPXavfNUM2aefEmvA/wdemt3CFQ3ybU0hdLYGTQq0ZXljgb4X+6dzNtsEJ2HYNp
-	 pNvtyff/jG0SfmA3HtENuxizAkQ5pE9MkCci5NGDk59p1Xng7mAwUMOCif57dc1uAfL6u
-	 FEUOP4eaZMbK1C8gDyMlConeiRrFIgzYW3sF7VnjGeNh6PcuALd8xqF2jdK8WdbHJHQ==
+	bh=H76bdwHJcziQMI/cIBv+/vLV5e1GkafrZPaoM30LE20=;
+	b=l1NuWGgJ3X4ggRZ9WCrAgL4K4HozgaOw6N5qrsLXs3jHEfyRRbwcLWwjbD44wueTT7sQ
+	 x03x/9gtpOLpCTq5d8P55OFJ8adGvFdBZS6au6KjZygFo2JdHieVYNsH/6scCOHaVVxGi
+	 tD4IxmWiY7ePreN5ZGOQQtmTlWjvgovYbpuUoH2oi/0yrLNKTr/Jf9WZfWRQtvHUdjT2I
+	 a2/VsypzdwOGFQDKS3CH06SvVRsGydBnJ5QtwZTth5sNOA0E2gSQjwp5EoQ/8RS60gOKt
+	 C/WydlwPOCU+nOy1AzNojNVZpWzGf8othQugx3NvrEL97MxdpIyeUnpuIa4b/nAGsRg==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	dmarc=pass header.from=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Te9m1EzZ;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794400705;
-	bh=8lXniSlpQDgrQ0P5YqKn0FqCW9SDt2WY7LNrYFLN1qQ=;
+	d=lists.u-boot-project.org; s=default; t=1794401567;
+	bh=H76bdwHJcziQMI/cIBv+/vLV5e1GkafrZPaoM30LE20=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Zy4o4SOycODuCT/LzCZueMVHXDM2zqCwRdbiCK6PhJoPholol3gBii5/DHmY8E4W4
-	 aoqUGkQIs/GIr3QYkJmqxMChbrU/1OIXPe3C8hKYEdlIZ2E0CWYu/AZzqGXb59/X3I
-	 CGoBQPQAMpErGHo2Ies/3QHsHdEAGsJeIQ/GiOkdp3h7ePx0P7FGaP76WijCOLsa9G
-	 Ir3rFwojLhIMX6V3WG3XOKe3XdDgVSqhRwLF/+rnmTUer9xjC2JB6kqVK5NL+EpEq0
-	 UxBjVm1LyGGPJhdYNl+ZhFgIlk3e94Zve/geNLY2Fyz2OzA3QOXxY5GrBy2T/z5P59
-	 MzDxb0vH3FbZA==
+	b=UQlS0/yY3WGa1IecLDhRcfR/dYmprmK0jU/mihKbdk4qezkD9wzd+b154P5JhTWMn
+	 uiWMLxFgEITAbBTNWRY/q8j3vT8BAtPVB2Iacb7EM02tygqEr9wid8HORryHQunowX
+	 K0UAgYnUVKAx8/PiWamCiHF1R4BR4dqcK3AA3N5iGKWZ/inpyy5bvhqrS8Y4Uer1eN
+	 7sAizMvFID/ouUmarjBK7ohIgf4vMTTwK7qeU+R0hbsYd2eb3dUiabYcmtXxrOSE9A
+	 oz4KImtImTkAiJA4/+nTyjeIBA1lQ7Vul+kdHncc0nxPFVhPeN/+BMCeUGubxXm11G
+	 pKFL/kwCcUm7A==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EE3A6809B3;
-	Wed, 11 Nov 2026 12:38:24 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 342AE2FE
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 12:38:23 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DB84E81206;
+	Wed, 11 Nov 2026 12:52:46 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id D0BDC2FE
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 12:52:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 255536067E
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 12:38:23 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id C223281174
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 12:52:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id X-smIC0Bg1ph for <u-boot@lists.u-boot-project.org>;
- Wed, 11 Nov 2026 12:38:22 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org BB71B605F8
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c20a::7"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id PdCf0xwHOv_l for <u-boot@lists.u-boot-project.org>;
+ Wed, 11 Nov 2026 12:52:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2439381218
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::430"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c20a::7;
- helo=pa4pr04cu001.outbound.protection.outlook.com;
- envelope-from=frieder.schrempf@kontron.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
- dmarc=none (p=none dis=none) header.from=kontron.de
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=kontron.de header.i=@kontron.de header.a=rsa-sha256
- header.s=selector1 header.b=nfziaGsK
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- by smtp3.osuosl.org (Postfix) with ESMTPS id BB71B605F8
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 12:38:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kontron.de;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8lXniSlpQDgrQ0P5YqKn0FqCW9SDt2WY7LNrYFLN1qQ=;
- b=nfziaGsKswWUbdD+fVAska+j31YMj49PMitiQOZCNLa8uvxifMS8XddJKSe0di+VUz1MLnwog5FzSpLrnXVQRc9FaaK+46fLE5B9RDhCD2z/2I4BnjYruaGNAZhtsYrCxAOQeNrjN/j/adbmKWBneU5orAzZ+IUT/AlvpYMcGnrF5SeMj0Glp/ffhcMYyhjxB/FtYAOT0wwyxcifD4orjBTMtj8n/xGpNTz2dYe1JtFpcK15y9H3PTJaI/BALJIWBwQ4Q4MlbO9zioBVpAAatFHClGIAMyJeLbO9POkjpmLMYvq/ij6fODwzcf1BDyMa8ufCfniVfiBtuoTFJrRM9w==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=kontron.de;
-Received: from AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:1fb::23)
- by PAXPR10MB5733.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:247::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.6; Wed, 11 Nov
- 2026 12:38:13 +0000
-Received: from AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::a276:4ad7:962:da22]) by AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::a276:4ad7:962:da22%3]) with mapi id 15.21.0615.008; Wed, 11 Nov 2026
- 12:38:13 +0000
-Message-ID: <4ce05817-10e0-47cf-a252-51638f75f3d3@kontron.de>
-Date: Wed, 11 Nov 2026 13:38:11 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/12] bootstd: rauc: Fixes, partition names and
- built-in boot command
-To: Frieder Schrempf <frieder@fris.de>, Martin Schwan <m.schwan@phytec.de>,
- u-boot@lists.u-boot-project.org, Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Aristo Chen <aristo.chen@canonical.com>,
- Alexey Charkov <alchark@flipper.net>, Daniel Golle <daniel@makrotopia.org>,
- Johan Jonker <jbx6244@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Marek Vasut <marex@nabladev.com>,
- Michal Simek <michal.simek@amd.com>, Francesco Valla <francesco@valla.it>,
- "Lucien.Jheng" <lucienzx159@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>
-References: <20261102-main-v2-0-4537bcb19d66@kontron.de>
-Content-Language: en-US, de-DE
-From: Frieder Schrempf <frieder.schrempf@kontron.de>
-In-Reply-To: <20261102-main-v2-0-4537bcb19d66@kontron.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0203.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:e5::6) To AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:1fb::23)
+ client-ip=2a00:1450:4864:20::430; helo=mail-wr1-x430.google.com;
+ envelope-from=andrew.goodbody@linaro.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp1.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=Te9m1EzZ
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2439381218
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 12:52:43 +0000 (UTC)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-4922dbcee23so1810759f8f.0
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 04:52:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1794401561; x=1795006361;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=H76bdwHJcziQMI/cIBv+/vLV5e1GkafrZPaoM30LE20=;
+ b=Te9m1EzZqgu1sTj+pavyJ9g9K0UEZLUkbgocD9dDDcS1hLpVh9fCnRLA78eJDK8O/n
+ eSHyJvDtlAcWSlePhNleq96h+xMhrnkACdDNqSEKHuOSqHZxzfMiTexT6cBM1WkAnX0a
+ z92DSYzJFVAY37vVZH95l1q/8mkqpYCQLyIUqfR3mDdk9/P+cv+0fgULl2iyeO8gyCJc
+ q5ECxfkCNyuFblb43yHXA5jIE9jw+WYiz7ey8pzVekmNIsHqY12IB6vIxJWXI6s2GAlN
+ QTa5HbQP9M+pX+0h17W7OwHv7zNODX397MLve758zztlO6b+iGq8q0Y+AsaeGqVSGuAO
+ 4qPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794401561; x=1795006361;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=H76bdwHJcziQMI/cIBv+/vLV5e1GkafrZPaoM30LE20=;
+ b=dUs73nvE1HFGbrvJ4wE3PpsSkWNORXMNBLcsoqobIF7I2WJz++02TpwfQWk5nToqbn
+ 2+T6/HxWbG+mxSagk/vnDzCnHvjMoSQDRi7km0gM46r1fkupl4rm6NRM49xoO9J1FY5n
+ lRGSZoux4VGpbem5UR4Q7THPtNOYZe6tnrV2nNN04VckVzsSvbbF/dmWbBfiwKRsmFwY
+ hAW01vY5BLrfYmy/qYtP2oiM9TaOuM/uGW3KwYNgpYgcj+WFF5BPvG7mGTbqJpL8g6nt
+ U9UfncDAhBK1guRZ2m6jLEnSMNcSyklGRsMj+nrW+td4mfymMqLb77SRRkF3o9sExTgb
+ ap+w==
+X-Forwarded-Encrypted: i=1;
+ AL+hErEDywgLevvs/cZ9ilvhJAhKT4ZYEYsVTM7deAglGsQpsVFfDwAWCaTzmL8e3td1NLlHacs1pK4=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z/F03nWwJGw/97rbzpPS1Iy6H3BBtj+iaLX4MA6euE5tpD5P0OF
+ lXPJ8oH7lb9dHslKm8weBRxjjPlCL2/gD5C5aYvYZdDObajj7P6y1V+yT4V9jMuptc4=
+X-Gm-Gg: AYBFou0rZ//Z+kmfn9skuJzhPUCCQLS9SKcRCe+0HWO1aIxDXGbt2/tfqx+Yr7GMISO
+ 9201mjybGAVYGJJ+WlDO6Pj0MFQdcVSfBm8u2zzaHn3jvBHFV0VMq7e6kmnx/80+cosA3im478E
+ k6WjoDomzImhRr0Z/0/Qx+8bUnjm6pyb0a8Mb1E6qUT+kZmSamFL9s62U0WA0jJD4Hmsi6uXPxy
+ lDK8MUmYUoQXLzOWTHNCSEsGPKwX7lcdvG1M97VxFiFni6ApI9bFQ8KE8ShrzXJFFffMb/1KSTg
+ A66U62V5ab0y0bzxKzq0ZLpOyedr47plk4Z1yPYh1MFmIkK1PfaSrOsbGqs76Ok8qz9YZMUlTxy
+ SO7xGZAvktWo7dAFz5tQGR7958V0gqfyh9uE7W2GY0QxC7QUghGw3tHkr+PNcY11rMSsMlLc8W2
+ mss6Y1IUe0KP8+CdsVnydF5pgJYim3llqdgmjnsw595a+gzZt3N4gSJUmB9SAc8psTVUQ1xstli
+ D38cMSzWlkYhV2wV1p9JXZ8909tuhZeEzY0pcshlq8TfE41SkUG4oIQYrBB07m0YykdsHVCmgIS
+ mu5uoOnJwB9ANR/el//ekpEOI30Jc2ZsbzU4cQomJ6XiEIOhUx3jQRQXG6FH9xQfLDPiNGYTrYQ
+ IcDyHeDX045+IT+NeiTCOnB40kw==
+X-Received: by 2002:a5d:6f08:0:b0:498:7be6:8d69 with SMTP id
+ ffacd0b85a97d-499c3aaa3a9mr3583958f8f.6.1794401561477; 
+ Wed, 11 Nov 2026 04:52:41 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:e16:1f01:f60:9877:8ffd:39bb?
+ ([2a0a:ef40:e16:1f01:f60:9877:8ffd:39bb])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-498365cbeedsm10821608f8f.43.2026.11.11.04.52.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Nov 2026 04:52:40 -0800 (PST)
+Message-ID: <e63e9891-465f-43d8-b32a-0b0bc2a57ed7@linaro.org>
+Date: Wed, 11 Nov 2026 12:52:40 +0000
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR10MB4277:EE_|PAXPR10MB5733:EE_
-X-MS-Office365-Filtering-Correlation-Id: b6871ab7-b573-40e8-d110-08df3ff0a6ae
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|366016|1800799024|23010399003|376014|18002099003|22082099003|6133799003|10067099003|11063799006|56012099006|5023799004|261022105027099003|261028144727099003|261022075727099003|261009223027099003|261022115727099003|261026121527099003|261021121427099003|261026140227099003|261102123227099003;
-X-Microsoft-Antispam-Message-Info: nraH8UDN6CW2fuObhHiMj1WPH7Dgk+dG6xMmj+990QGB7ecwTTWlr/3BjRI7jNftkCbP/Qsvb8hf60IB/tQeYCXrnt8GHOPABlYJYVdIZU+Bj8t9kIUOFro+V4JWbQn9lrTR57SFG+2n2u+Vkb0TukHWZzgQVJzF+EsLhGUvZY9U2z5xRmBmm5u22KwJN306jc5BFi4vpsqlZwwJyumUbmIZLjPnUvwmIYiUJCG2SbiD4nX1lhfmNrfc6gMBDZphf9fMcZ8QxGM+aggKVW3tD1oMmBQ5Q9wcUeXQktlQNQ9grKvgpCaS6Er6y/wSEs9281eUziOZkjy8fsm1WyRJP2oXzRIg0LJtcU0igEAu9smF+TEg3qrS+cmGgfFTybsf3ECRjZK1FCwqbPr+kGyj14NI2qezMG7uDv0TLkJTBcpdNO03IVTO8GmiDgMnm5FrvuqVpCBReTD2fsNR+eclB7PyMdJikD1f/fcaUuyKP9LYTnB8r64T8vrtoZ57KFzq7XT/Kap/FqlCi1ZP3inXWJCHCXl22lJUzkBDWRKNFtkYXAqJ7alrtU9wXxpqSENZxM+iju79KfQZy+VwGd6TDnmWGe/LiJszkqvFVK5MNbY=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(366016)(1800799024)(23010399003)(376014)(18002099003)(22082099003)(6133799003)(10067099003)(11063799006)(56012099006)(5023799004)(261022105027099003)(261028144727099003)(261022075727099003)(261009223027099003)(261022115727099003)(261026121527099003)(261021121427099003)(261026140227099003)(261102123227099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SG9IUUVCWFg2aXZRNzVmeGFFRVVzZ1hBcTBzNHV3OG1TSEIxeU5ZRTVQWGI3?=
- =?utf-8?B?SEFETytPcGU1UXdzWW9DTTFvWjJWSXdsQTRWbEJLbWJpc0ZGdGtVQmpaaVZZ?=
- =?utf-8?B?cjlHUXk1YTY4bERxc0d6RTFsdm1Uci9jZlI4R2kvK1JmcENxd3piYWVtTVpF?=
- =?utf-8?B?NTdROFZLMHNtOHRVMTNPMXdkM1J1anVTRFN5bzlYT3BMZDByQWRHbWhGTDBR?=
- =?utf-8?B?UGFSK0ZFcytEbStNa3dkSUxlWTROVDJ1SXk0Yk1qNStrQ0xSY2ZMUzFOMHl2?=
- =?utf-8?B?c0h4eGpjemRCUTJ0bXYzOUdQMkFxSGlacE02SGtEa2pPeWh0Z01XU2NXcjhZ?=
- =?utf-8?B?ZTdWQ0xlRHErMS9iQ0lURHAzd05NM3oyMElUSUZDTzJndHRyRmRnM0loUU10?=
- =?utf-8?B?K1FFcUEzaXhUallZUnhmWjF4eVp6RjMxYnpDcGJRd0pwREUxenlPalBwZ3pt?=
- =?utf-8?B?cmVjV3o1NHc4MlhvUVRSWmlibDYwbDJBNDY5WjBlQ0cxc2JQMXVyWWp2UkJ1?=
- =?utf-8?B?TUd5dVJNSmorbHlLejY4TzFxNVdxQW55NzhiNldPTDRFZmN1OEtxRzFDakZ5?=
- =?utf-8?B?UUVTQ0xrWW05VjVmbUVnaHZvRkVDR0d0RU12M0h3TlZuTUVlSHduVHgrbysz?=
- =?utf-8?B?SGJsNTF2VjN5T3lnY0RwemVZbVpaYlJiR3BOcFliSWYydnY5UFVUaEJrcU9S?=
- =?utf-8?B?RGJzV0JQeWdQYTFxa1VhOXN4SmoxUFVzdElxVlo3dEs3NVBoTXRySUJUeWt5?=
- =?utf-8?B?NEIrcUdBeGZmZE5tc0lUS1Z5OEVRc1VkYXMzUDNOQ3BSaURSZnlYV1JiV01G?=
- =?utf-8?B?eFVsM1BjOStsVnQvL25ESDVkZ2V6MjZwSCtnbXJJeXJybVhaOS8wVmRhRzlV?=
- =?utf-8?B?SzE5OUNVbGF6aGxkWkw5Y1dVL2lsbkkxQ0xEMHVnYTJZa0lHRFMxbVlXQ3Q0?=
- =?utf-8?B?UlVKRVpndk5xeEplM21La0FuaGVDdy9aRjc2N2J4NlpFVk5CMTVONEFMYm5I?=
- =?utf-8?B?YTdJdDRJSGwxR3VpMFFoSXQ4UTg3VHJ4N0grTUpsNk5FQTlRVVBFVGxzYWJW?=
- =?utf-8?B?WGxJZlQxZTYwUkRvNzRFSk1WTnpXVmdUYmpOdzl6bjZmUld3WDlhSkxNV2hs?=
- =?utf-8?B?QlNBOEF5endYM0o0Sm8rVTE4bW5acUpjbktXNnF0ZDB4NWJwUVZzRzJvOTRr?=
- =?utf-8?B?NytXelFFamQxVnJXMFpHcVlVS05NQVRRRDBzSU84QktEWDcvOWZteHkyTmhO?=
- =?utf-8?B?UzhVRzVGbTlNVk9TeCtxRXlCKzU1NTRHZzV3V0h1QzRZQVdkd3ZlbFdvdXVl?=
- =?utf-8?B?cHlWbWJ3OE5lMlVoc2cxOEpOWVNLMEhGTVVFaTJZZkRCUW5LZUtqQzJCSDFJ?=
- =?utf-8?B?UWtJdXBlYWE0d1F4bXluSFNBeTIyeXhBVWMwcEYxdW5iZ2JVZWF1UnJVZDRL?=
- =?utf-8?B?aUJ1YlRxTC9QVWVBRnlLOVRVaTd2TVZnTHJKS2FiVHEvbDhwMld3WW43ejcy?=
- =?utf-8?B?K0IzODNJOVF4NEhBQncwaEZWdFpKeW5MdEhEVnVCdVRCVTlzL1YvT0wrbDc5?=
- =?utf-8?B?aHVianNLUkxYWnRoazYzSndkWTdSQWNPWG8xN0gvQTF4cFNBOXU1R29HNGJq?=
- =?utf-8?B?ZVpXN1p1ZWp5N0c4TE03MmJKZmZUZEozdzQwWnFoSnY2TzRiODE0ZEVoSkpq?=
- =?utf-8?B?MUNxY3NDUGpOY2NEVGVHY0VLUTB3b21RaTlpUXJzMUpCcVM2ZFZVTy9MOWR6?=
- =?utf-8?B?emZjcUhCNW5aNm5ydnV1R1pKdkVBcG9UK2phaW9lQ1BmZE5RK21yWVpacFVK?=
- =?utf-8?B?a2YzTjFtNTYxZVZlMitrNHkrdTdSU1RrbExvSm9oYWlzbm9kejdxMTJPRHBq?=
- =?utf-8?B?YTZocURzV1dDQm9WdUVIUldubmZFMUhlZUxoZms5cDBYdFZEN3RYUGt6bU85?=
- =?utf-8?B?TldHU3hHOGtkRklIWUNnd1lTTTFOamZROHBwbUVVUWx5MjMraWs1a01iZmxE?=
- =?utf-8?B?aHhaM2o1SW5wQ05Odk0zYjQxMzlMZkY5WDdGUG1ubE9sZDc2QUEwOEJ1KzVQ?=
- =?utf-8?B?Yk01MGt2OUlHYlM5Z1hSMnFXdUVTY0NFa3hWTWZUYWQ3S0gwclJlUHVMYk11?=
- =?utf-8?B?SnZjSURsR0dqa1dIMTJzYVdWL2hQdldUVWVzSGxLN2hUd3p3ZVA2d08xSWVW?=
- =?utf-8?B?aVJLZUtpT3QzTUFWSDlRUUFJOHZJeDVRdUdqZ25QK08yRFIxdnc3SHJiNmZl?=
- =?utf-8?B?ekkxUld6cmVRRmgzcUNuSDJjVW5kV1gvN09MMzBDQjBTRVU5YjJzeXVXMFhK?=
- =?utf-8?B?bDRlYlM5c2J4eUdCYVdYNVUxYmQ2Z2gxRFVDWER2RXBMMk5CYnFOdXM0aWZh?=
- =?utf-8?Q?y1L0aqunNYNwK08g=3D?=
-X-OriginatorOrg: kontron.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b6871ab7-b573-40e8-d110-08df3ff0a6ae
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR10MB4277.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2026 12:38:13.2220 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hppcSzOlq9xBgva905A9rVZbBWbhWPWluEdOTpbvNfRaVRg1E4NjZuso+Yr8Uy+uRXV9hWikGHF/S/fWn9N1hvJAOW8OnfBZiruOhURnG1Q=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR10MB5733
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 11/12] buildman: Cope with CPP="gcc -E"
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ u-boot@lists.u-boot-project.org, Kory Maincent <kory.maincent@bootlin.com>,
+ Linus Walleij <linusw@kernel.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini
+ <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>,
+ Alexey Charkov <alchark@flipper.net>, Francesco Valla <francesco@valla.it>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Carlo Caione <ccaione@baylibre.com>, Yao Zi <me@ziyao.cc>,
+ Michal Simek <michal.simek@amd.com>
+References: <20261110-qcheck_fix-v2-0-1c76e0b68f29@linaro.org>
+ <20261110-qcheck_fix-v2-11-1c76e0b68f29@linaro.org>
+ <93a130bc-3c19-4ab6-8826-cf8bf76e4fba@cherry.de>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <93a130bc-3c19-4ab6-8826-cf8bf76e4fba@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -211,109 +171,100 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-7.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Tom,
 
-On 02.11.26 17:20, Frieder Schrempf wrote:
-> This series fixes some issues in the RAUC bootmeth and adds two
-> options to make it safer to use on real devices, together with tests.
-> 
-> Patches 1-4 fix bugs in bootmeth_rauc.c: an uninitialised pointer when
-> a bootflow has no block device, a leak of the active slot name, a stack
-> buffer overflow with long slot names in BOOT_ORDER, and a leak of the
-> boot script when a boot attempt fails and is retried.
-> 
-> Patch 5 makes the RAUC test restore the bootdev order also if it fails.
-> Before, a failing check left a static array in std->bootdev_order,
-> which was then passed to free() and aborted sandbox. Patch 6 adds a
-> test that boots the same RAUC bootflow twice.
-> 
-> Patch 7 makes the bootmeth set its BOOT_ORDER and BOOT_x_LEFT variables
-> only for a device with a RAUC system, instead of for every MMC device it
-> scans.
-> 
-> Patches 8 and 9 make the bootmeth safer to use on real devices, without
-> changing anything for existing users:
-> 
-> - CONFIG_BOOTMETH_RAUC_PARTITIONS can give the partitions by their GPT
->   names instead of their numbers. The bootmeth then only claims a
->   device which has the partitions of all slots. With numbers, it claims
->   any MMC device whose partitions happen to fit the configured layout,
->   such as a standard distro installed to eMMC, and writes its variables
->   to the environment. This allows to use BOOTMETH_RAUC safely alongside
->   other bootmeths.
-> 
-> - The new option CONFIG_BOOTMETH_RAUC_BOOTCMD, empty by default, sets a
->   command built into U-Boot that boots the slot instead of running
->   boot.scr from the boot partition.
->   Nothing authenticates that partition, and signing the script is not
->   a reliable fix, as the environment must stay writable for the RAUC
->   variables and setting verify=no there skips all checks. With this
->   option, U-Boot executes nothing from the boot partition.
-> 
-> The bootmeth keeps both options in its platform data, which is set
-> from Kconfig when it is bound. The tests in patches 11 and 12 change
-> them at runtime, so sandbox_defconfig keeps the default configuration
-> and all tests run on it. As partition names need GPT, patch 10 adds
-> GPT support to DiskHelper in fs_helper.py for a second RAUC test image.
-> 
-> ---
-> Changes in v2:
-> - Patches 1, 5 and 10: Add Reviewed-by tag from Simon.
-> - Patch 2: Look up the slot in find_active_slot() and return it
->   instead of a strdup() copy of its name (Simon). This also catches an
->   unknown slot in BOOT_ORDER before its BOOT_x_LEFT counter is
->   decremented.
-> - Patch 3: Print an error for a too long slot name in
->   CONFIG_BOOTMETH_RAUC_BOOT_ORDER, document the 32-character limit and
->   pass on the return value of boot_left_name() (Simon). Rebase on the
->   changes in patch 2.
-> - Patch 4: Reset the bootflow state before loading the script again
->   and move freeing the image list into bootflow_free_images() in
->   bootflow.c, used by bootflow_free() as well (Simon).
-> - New patch 6: Test booting the same bootflow twice (Simon).
-> - New patch 7: Set BOOT_ORDER and BOOT_x_LEFT only for a device with a
->   RAUC system (Simon).
-> - Patch 8: Give the partition names in CONFIG_BOOTMETH_RAUC_PARTITIONS
->   instead of the new option CONFIG_BOOTMETH_RAUC_PART_NAMES (Bastien),
->   and only use a device which has the partitions of all slots (Simon).
->   Renamed from "Optionally check the partition names".
-> - Patches 8 and 9: Keep the options in the platform data of the
->   bootmeth, set from Kconfig when it is bound, so that tests can change
->   them at runtime. The boot script code is now always built (Simon).
-> - Patches 11 and 12: Set the options in the tests instead of
->   sandbox_defconfig, so that the default configuration is still tested,
->   and drop the #ifdefs. Keep the RAUC test image (mmc10) on MBR with a
->   boot script and use a second GPT image (mmc13) for partition names.
->   Also check matching names, a slot with missing partitions, that MBR
->   is rejected and that no variables are set for an unused device
->   (Simon). Patch 11 is renamed from "Test the RAUC partition name
->   check".
-> - Link to v1: https://patch.msgid.link/20261029-main-v1-0-b5a878627107@kontron.de
-> 
-> ---
-> Frieder Schrempf (12):
->       bootstd: rauc: Initialise desc in distro_rauc_scan_parts()
->       bootstd: rauc: Fix leak of the active slot name
->       bootstd: rauc: Fix overflow of the BOOT_x_LEFT name buffer
->       bootstd: rauc: Free the boot script of a failed boot attempt
->       test: boot: Restore the bootdev order if the RAUC test fails
->       test: boot: Test booting a RAUC bootflow twice
->       bootstd: rauc: Only set the RAUC variables for a RAUC device
->       bootstd: rauc: Optionally find the partitions by name
->       bootstd: rauc: Optionally boot with a built-in command
->       test: fs_helper: Support GPT in DiskHelper
->       test: boot: Test finding the RAUC partitions by name
->       test: boot: Test the RAUC built-in boot command
 
-With the bootstd subsystem being orphaned now, is there any chance to
-get at least the fixes (patch 1-5) upstream?
+On 10/11/2026 15:29, Quentin Schulz wrote:
+> Hi Andrew,
+> 
+> On 11/10/26 1:24 PM, Andrew Goodbody wrote:
+>> Allow the use of "gcc -E" as an alternative to "cpp" when set in the
+>> environment as the value of CPP. Accept it as a valid command for
+>> running the preprocessor and adjust the test to not depend on a fixed
+>> number of arguments. Also split it into parts for constructing the
+>> command list so that the validation for running a command does not fail
+>> when it tries to find an executable named "gcc -E".
+>>
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>   tools/buildman/boards.py    | 3 +--
+>>   tools/buildman/func_test.py | 5 +++--
+>>   2 files changed, 4 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/tools/buildman/boards.py b/tools/buildman/boards.py
+>> index 5d5d3a3822b..111789f1bd4 100644
+>> --- a/tools/buildman/boards.py
+>> +++ b/tools/buildman/boards.py
+>> @@ -244,8 +244,7 @@ class KconfigScanner:
+>>           temp = None
+>>           if b'#include' in tools.read_file(defconfig):
+>> -            cmd = [
+>> -                os.getenv('CPP', 'cpp'),
+>> +            cmd = os.getenv('CPP', 'cpp').split() + [
+> 
+> issue: str.split() is not safe for shell commands.
+> 
+> I think the proper way is to run shlex.split() on it instead of a simple 
+> str.split()
 
-Thanks
-Frieder
+OK.
+
+>>                   '-nostdinc', '-P',
+>>                   '-I', self._srctree,
+>>                   '-undef',
+>> diff --git a/tools/buildman/func_test.py b/tools/buildman/func_test.py
+>> index fce615ba8b8..eb13589ba17 100644
+>> --- a/tools/buildman/func_test.py
+>> +++ b/tools/buildman/func_test.py
+>> @@ -378,7 +378,7 @@ class TestFunctional(unittest.TestCase):
+>>       def _HandleCommandCpp(self, args):
+>>           # args ['-nostdinc', '-P', '-I', '/tmp/tmp7f17xk_o/src', '- 
+>> undef',
+>>           # '-x', 'assembler-with-cpp', fname]
+>> -        fname = args[7]
+>> +        fname = args[-1]
+> 
+> todo: add a comment with the new possible list of arguments
+> 
+> This should explain why we are using -1 instead of an offset from the 
+> beginning.
+
+OK.
+
+>>           buf = io.StringIO()
+>>           for line in tools.read_file(fname, False).splitlines():
+>>               if line.startswith('#include'):
+>> @@ -424,7 +424,8 @@ class TestFunctional(unittest.TestCase):
+>>               return self._HandleCommandObjcopy(args)
+>>           elif cmd.endswith( 'size'):
+>>               return self._HandleCommandSize(args)
+>> -        elif cmd.endswith( 'cpp'):
+>> +        elif cmd.endswith('cpp') \
+>> +                or (cmd.endswith('gcc') and pipe_list[0][1] == '-E'):
+> 
+> question: can't -E be anywhere in the list?
+> Should we use "'-E' in pipe_list[0]" instead maybe?
+> 
+> question: what about "gcc --preprocess"?
+> 
+> This is the long-format version of -E according to gcc(1) manpage.
+> 
+> question: what if we want to use clang instead?
+> 
+> It seems like clang also supports -E/--preprocess.
+
+OK. Updated to allow gcc or clang and -E or --preprocess anywhere in the 
+args list.
+
+Andrew
+
+> Cheers,
+> Quentin
+
