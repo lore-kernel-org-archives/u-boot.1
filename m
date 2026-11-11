@@ -1,151 +1,156 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0BC4606A31C
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 08:14:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48C52606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 08:14:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Ldjq8JkG;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=oBZwNhLx
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=NJL2Ufrr;
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=jg3jRR46
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E885960721;
-	Wed, 11 Nov 2026 08:14:08 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 12B19812A0;
+	Wed, 11 Nov 2026 08:14:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dN3aapLEXz1v; Wed, 11 Nov 2026 08:14:07 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A67F3606E0
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794384847;
-	b=bny3g1ZMiGOvCANMFrlQev3J5HRTi9u2bEZJ1S3VKvJoaXGEiXosMxKV8BZewZetY8G7
-	 ACGiKFexHuQ5xyYoTpgALdWKpBPxrziyJF7S9QTroU4EWOSXeRnbzOcHDYqxwJvJ04+fl
-	 iPGRpFNmNur6NQdaA+jtYXqpHn3tQbhUHVc0e6bMEC/j1RM06JeXdpuvKintreXKA4elU
-	 JW5H1QQn1rtdt8vy05zE+WpGBnfKMuTjz5iNU4D4bxIbgK+2QUPZWOaK446dnL8vPZRDf
-	 ZpKysMw8UusA7en8KhPMT2Nn1fnG8QNzFi8n6Dhf+gV73+jsa4UYXbOkEL4k5ZPNGwg==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IB1oIyHMBhFi; Wed, 11 Nov 2026 08:14:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3506981277
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794384884;
+	b=oWi2GvzsYBT+XWGNxJiny5z4vwMcXZw2qEW3SuqDOg29c81mnA0KxQJgjFGcUVPl8x9S
+	 N680QTRG2zzWe+Z8+PR8UaMzFTzGg17n05BfymUcYC3Kcqg6v0guNtfaBRQX/Dg6iRXzs
+	 qhc6P7sF6O2v8rFoB7hf56GscxDHqwHktft/RmMLnzzUySvI/NxE1kXIrsW0xL/wnC4pT
+	 vh0n/1i2YtMV7TWEwLg39Rsvz+WMoPyIQpdQKxdJWGAr+GKrA6J3Mn2EpWgg/3ceRwA9c
+	 4lSmarrFAvaP/yvp3aWhXMnyuZ2FwlozlUpwaee7L1fCzQLmGLqCmV83gt9YIoyiHKQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794384847;
+	c=relaxed/relaxed; t=1794384884;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:Received:Message-ID:Date:MIME-Version:User-Agent:From:
-	 Subject:To:References:Content-Language:Autocrypt:Organization:
+	 Subject:To:Cc:References:Content-Language:Autocrypt:Organization:
 	 In-Reply-To:Content-Type:Content-Transfer-Encoding:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Reply-To:Errors-To;
-	bh=GNN5CnkgZ8SAJBfk6yT4XOwq/h27WarH6lkb6l5bX2c=;
-	b=dqZCCBrsjX7qhn2VNUDUMGIfdaSG7eu2IOVIstYPavBqF+DQpXRoJIV/+gN3HfrAH9o2
-	 90AtaCo6HCB8DlQGC/5SMDj2RfI1hZNvb0WSUGQoXaDW1v6AUX0raKBjOR4iPyQfIXVnd
-	 /X2kg/H9Hq37F/lTVYGtIT7V/SIjiD9E+TzJG312kjgVcd+sOwq99qISzp3IzcGGCKJ9C
-	 bnwL1HKYbFhHyho1ug/aX4OZNU5JFWnmL/PsMxsO/76Hy8rNIXct8ISHrVV/ER4mBD7sX
-	 SNVuApjOTtduUgnaJzkwcWOFMEwdTBU+doVp/HY5Cad7Cl8B4w1zFtB/2yxKvKMQRaw==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=wLezFHTnNBTDeZNySwYb/Oi5Ie150kYiNQgWSyy3x4E=;
+	b=aflLWMQ6Wga1K3JyYnAaV2FMZqvi8URih5QZl1CCxAEXR9O4vScQRpskZrDsnpvdd9PB
+	 rAEWDDoUeykialNfi8WwRicQpi1O4rNzrgmSVPNoAFMu0NrqXSwJgXBGVc1oDinZuqcQ/
+	 Ihu3Aho/aAGIn56q5iPwwNDxpSNb2SNmW15fO5/FIHBj3FZ79qMuSlHQkTXkzMESBRKRl
+	 HTWaJOzde4UVx5lyM2NMARtjhEKhKsazZMIlColVgQU4sNnKBAFWueLxpBf3RNys4dvl1
+	 +wGWDmi3tujQaJzZLHVm/jEODpE0YImVHqUPaS0j16VRiOxM+PNAIo6YN/Nvr/8E6Kw==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794384847;
-	bh=GNN5CnkgZ8SAJBfk6yT4XOwq/h27WarH6lkb6l5bX2c=;
-	h=Date:From:Subject:To:References:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794384884;
+	bh=wLezFHTnNBTDeZNySwYb/Oi5Ie150kYiNQgWSyy3x4E=;
+	h=Date:From:Subject:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=Ldjq8JkGLuFmBhahGdko6OFerxxVoqkTrvSBllZA1i0xWgEeW4ElF98gy6JwCK+ff
-	 VdKyLVuyhRmak5UAsEOISxcTFT85TewmzkpnuOM8jaeiVvBKeu93//jPh989bD41zy
-	 pPJRdwL/miP+7eN3QhdKBeyt0yA1GjNlpECAI7lkUpLfsDGrDhk4ivOx0JhOKG3Uyo
-	 vFqFPftqz39bSTGy94UvBoVEtR9x7wyLHvNMPnu3qYX/SW/vAwSADhTCquNVwKUuTx
-	 Ds0mS8AQE8/jnfBl7g652i/PVPVpvz/McFsDTR0LOMplbwVTMI+fdbTfKX0EjATVIg
-	 QgKM9ElWMwPbQ==
+	b=NJL2UfrroCWrfgHszTm93eKPru6sW3d5+H0lspVwVJOSZavuv3z0AQoHc/aWIymkI
+	 fbY6uq/vBMg33FgdJG/5v+kQtxlWkS4n5RF3HSHUlnNeyDHZCHAN7xK1vta5Jp76h5
+	 VAYp9d5C57KDMX4Lfb/HJyFECh0EAWRUc6wEe2PnM0X9GGv+DWsIoU1SS5qElTwnjx
+	 6RHKw70Ga2pOeLJh8R17AdWM6B2ufaLFwAmxgDsIy5EVD+/7/4f2kJPKo1pxomICwG
+	 /X2SrYXmrWHa8V3IuGw38U4R3jQ3P6Fn//7WMFUoE6A/JJHT7QTRQHxLSB7H5sPdeg
+	 SYqNGIjyIR/7Q==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A67F3606E0;
-	Wed, 11 Nov 2026 08:14:07 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 5C6D9DB4
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 08:14:06 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3506981277;
+	Wed, 11 Nov 2026 08:14:44 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id DC9241A6
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 08:14:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4E49E408BE
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 08:14:06 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id CDABA40318
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 08:14:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JhMxkCf_c5rP for <u-boot@lists.u-boot-project.org>;
- Wed, 11 Nov 2026 08:14:05 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C70DF40875
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::434"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id V_hKy_8VZq34 for <u-boot@lists.u-boot-project.org>;
+ Wed, 11 Nov 2026 08:14:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org C5A19400B0
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::42a"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::434; helo=mail-wr1-x434.google.com;
+ client-ip=2a00:1450:4864:20::42a; helo=mail-wr1-x42a.google.com;
  envelope-from=neil.armstrong@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=oBZwNhLx
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C70DF40875
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 08:14:04 +0000 (UTC)
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-498f5fa5103so730173f8f.2
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 00:14:04 -0800 (PST)
+ header.s=google header.b=jg3jRR46
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C5A19400B0
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 08:14:41 +0000 (UTC)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-492690dd5daso2229515f8f.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 00:14:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794384842; x=1794989642;
+ d=linaro.org; s=google; t=1794384879; x=1794989679;
  darn=lists.u-boot-project.org; 
  h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:to:subject:reply-to:from
+ :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=GNN5CnkgZ8SAJBfk6yT4XOwq/h27WarH6lkb6l5bX2c=;
- b=oBZwNhLxnZoPBMRr7P/fyvqWLcvQoFWHRn3UqgIKkJK/LH4BmPjOIwaCRsiG7nbzpe
- h2wkTkPGwO1xn0YsZEQOMm2Hv9/fWyMueu6LgoIfEdFRioWmBzEfzfTE4QOKSCaHEOZN
- mnZnOVlB+fuBv7az1KAkPY9b5Q64nE+5xm/Wn/JDgWkWuf59ITokMYq1J+q1kHQEJWYg
- +dNRiLkjQWaGdxDY57c7ea5HklYXU2Vv3sZ08uTkcjzZ5CNPyQ82YcjgEZlgu+WsGGhD
- +Y6e+Sdzv7yUdfn/Ge0XJKsyO4g9zVzVbwo4ovDoNMfK/E5nLpDr1LLAd66eWQiUz7mx
- Mttw==
+ bh=wLezFHTnNBTDeZNySwYb/Oi5Ie150kYiNQgWSyy3x4E=;
+ b=jg3jRR46tWiKdtbs+f2XoETkGkNlA/cewmiTenK4vCHG/A7D4ARW8t5XarnyCTSOEH
+ sNegnNPDWhvgo+R2PaX0L3jEZoEbSgTrWPoNmhNpVYiNu+NA3GQDjbH6Hcn7cK3AMokI
+ gG8/eMaH8/tNo51WN4IvkC4kxhWSFHRuWP3gI35K56W9++LxbPciZOJ9Vlg936TGj5Qi
+ nQbhj0sSNioAtk/9+WoCU6TjMWSvnvbr6cSk5pRj5bI51vNOmgEoKkc0+EwML9sUhA5A
+ u2BmZJmD/1v7ygoV8v7rTZbGCDKyMHahSD4J9b422PfzsNwC2B2K5NxE0Tzg9HW1kb9M
+ JAIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794384842; x=1794989642;
+ d=1e100.net; s=20260707; t=1794384879; x=1794989679;
  h=content-transfer-encoding:content-type:in-reply-to:organization
- :autocrypt:content-language:references:to:subject:reply-to:from
+ :autocrypt:content-language:references:cc:to:subject:reply-to:from
  :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=GNN5CnkgZ8SAJBfk6yT4XOwq/h27WarH6lkb6l5bX2c=;
- b=iHc05pkru25paFTUhKCIO5PMTn/jtR4CZkTC8FCMxI/uOKDY/8fwcIJGSV2CatKiHu
- p9cqaAYCygpk03RW/gZDYQ42vtYTWIgQ0UEe+Dn6pOZoMdYspm8kUFamdaoRWA2WZzA3
- uWDBOoiC9Romi9jj8tJucPVCajmrUz5iSRl+t5cDBvpc0n75d9V5+GqHzynF88mUvtBJ
- Y5jYJjspvHK1BydYeEQ4oREFeEX2D/uEoT8h3+m86MGPTX6RJuB5syeCbETbZNx0sEST
- 5Cul8QPb3MHGJ9ULaEGNBm20APxNctPkvSZNzTFPkVNkZpGVkwf4W/rIs1Ne9WGfbYim
- O2+w==
-X-Gm-Message-State: APuU4Z90fA+bNf7znKZB3FqhTg2I2fOTDg96tsMmn4lRCBkUUiPUOMtc
- Q0Hn5cX8RR48MNDXAM3bOxn7ZhczyJGN+R9bSH5jC5tGI6KFslbvruSdCI6dgvpF/PINv5TkRcj
- 3mFZB
-X-Gm-Gg: AYBFou0+2WFbsOd4+6tF4btBW3rNy0Dovw4kw1cUbogpS2Nc0W3oRxCnzI9lwtNOjNZ
- PoDQW3U9YGSxDexdQ014L3weBSEHfk8XOsbEnKoWYnBn6GiBUWuO/7hRec3+YTxZnh21Q1mNr04
- etnSISvrBfkquHoYuyXgpttv6Mk79GEpX6di0HxylkHycUoc6Rp3T8w12BvFvcgzEx/dHaA8hlp
- O1gPj8ERK9eGEH5gXCaLv7is85RzP0mzbOW043WSEhWlrs2JRjOPt9Dee5P/nyyhU5x7Pmb1mof
- Gvi9D54Jv77rxqdBs4O+QVOt7BeuPE4JTCbaU9iLH50UB/VECuOLV+d0gk4XxSMBGOJcqquKmr7
- suImW1uLZq4ALZGPtRwyKQlemFnMKR1mVeenPIcoVEGBlkTagYcSFPSY9UftkIk0B/Pifi0Xm55
- 4KsEGbkAQ9kBTm6DMO53KQw8EssaAM71spD4NADJ9yE8Yk07TZ5D/Uuf9vVovYOYvYtraYlPjGw
- f7T3OzCervPIBFiom8sURhopagoZAI6WZhePCFwupizi1kLYxqXCDDF1hA8gmH/K5MPGfwSAvPU
- KQNQ9YNXL9r+IqG/wwggnkuPMxh59ufcq/A2hdXrdTZIwfNiSlYYb2o3QZhyfbDbFmW+jri8AFI
- e/dMJnlO2
-X-Received: by 2002:a05:6000:2308:b0:48c:5304:5e50 with SMTP id
- ffacd0b85a97d-499c0781a7bmr2741238f8f.0.1794384841990; 
- Wed, 11 Nov 2026 00:14:01 -0800 (PST)
+ bh=wLezFHTnNBTDeZNySwYb/Oi5Ie150kYiNQgWSyy3x4E=;
+ b=v62XzX9gtyVUoGApM0/I0N1uw5guNrCfU3jJFEZy6IcXa73WjlJt8XmIsfPXjBqaKl
+ 4A7gcmfBweoUD1sgMX4KaWBN3UkfbGZRsn6R7ry5e8oBIuuWUmWJmLk5pa9AWOI1c07/
+ xQJulnvpbDkyjDBlG3zXc5pFhVRnyH1gzeQlmqDglFG3uiH3tWLZSiHnmWhNMqA+S50C
+ PPcUUF7fK63FT2CcCf1ErJjGF2V0l7VeCGp547VGa9yyrUyobExeCOW611o+N/Ocs3xW
+ voEIkIlAiBfRt6VGzX97DmXjNweeU8Kk8T6upZlmKP1+4vLhwkzDK0eXvnzPiDhyHCwC
+ B8YQ==
+X-Gm-Message-State: APuU4Z8KpeB1RV1W6zkJ7RZuHFj+wcO4BtdV+ckiLOtSHuVZyPM40OWb
+ TTnmMAy2w07/4VRFCKLx4sO+BBk0oRQJev1WDqujdV47yheWmpjoU8rlGhXkyovGsYk=
+X-Gm-Gg: AYBFou1yKmLrnwkt2u1yjS/v7prqCHC4+G3K1sOSIx+4DeVo6wu3SZdN4W5Y7ibg4lR
+ kN/qla2ehw8qa7jwpUbASHBCZdgwE/glTUyhpglGb2n0zAAT9JEQlfcgg9lKtpF0jssJOIgCMmB
+ IID82pBdTAN81JwPjhJrdjd/0uYimDUH5ubRyaDoQO6gjj310B3dZv1ULJBLek6BPZMvW8LKgBI
+ +QP7Oo0wB4EzkX2eUJ/jfhvLnvkOorDbz4MRbjDcCHcv3j7m+gEX3Gom8/K+inS3QPHoOT/du0f
+ jiJWLvdH8SQbyOfMnf7CPr5WfbxyrtKZtL8T6ZlzXEhf0nI0hxDNqjZ+ZDrASRk0rc8wl80UtsL
+ BqGvdCUpnfiPaYmwQcBIVDgRQa+mCgAcUMZRxWhhl/ocZthIhPzaRNcbcoMKDyODFv+HoOOXgJ3
+ SZ/532zTwrLDXZyB9YMrtpisUAvkWXAzjQB2GMxSCqc1yZcJ0UMidO9ACHGkVxoMvhaNHi+4VnB
+ A7AZIbQY6ni0YOFFVr2qSmN5jHMlR+aqVMArqZxy5ARYo4kSo7RIUR8NVkqAiHprcrGj5truKxN
+ p5JvDjjEvJx4jP3F9bDvAhBdsNOXJpu/51Db6A64+7UbPVQcuans1O8RFcq6Cw5AhHMdWrlITGm
+ UbYc+lUrM
+X-Received: by 2002:a05:6000:240b:b0:48e:3bc4:a367 with SMTP id
+ ffacd0b85a97d-499c95ffea9mr2616902f8f.33.1794384878095; 
+ Wed, 11 Nov 2026 00:14:38 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:106d:1080:3969:bc96:edc1:c5dd?
  ([2a01:e0a:106d:1080:3969:bc96:edc1:c5dd])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4983585c5c4sm8034701f8f.17.2026.11.11.00.14.01
+ ffacd0b85a97d-4983600bc8fsm8992498f8f.30.2026.11.11.00.14.36
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Nov 2026 00:14:01 -0800 (PST)
-Message-ID: <8296a815-d563-48f8-a32d-928bacfae98c@linaro.org>
-Date: Wed, 11 Nov 2026 09:14:01 +0100
+ Wed, 11 Nov 2026 00:14:37 -0800 (PST)
+Message-ID: <392c3dfc-b12e-4037-b3a1-ed9b88d598fb@linaro.org>
+Date: Wed, 11 Nov 2026 09:14:36 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [RFC] blk/scsi/ufs: scatter-gather read support
-To: u-boot@lists.u-boot-project.org, bhupesh.linux@gmail.com,
- n-francis@ti.com, marek.vasut+renesas@mailbox.org, iwamatsu@nigauri.org,
- trini@konsulko.com
-References: <ptmm7jaltdwuyxj5ks26oht2cj6ckp4at6prvra27l4r6idkiz@xzyj2s3spx25>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v4 07/14] nvme: Skip a namespace with an unsupported LBA
+ data size
+To: Ana Bobillo <anabobillo3@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.u-boot-project.org, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Alexey Charkov <alchark@flipper.net>,
+ Javier Martinez Canillas <javierm@redhat.com>
+References: <1369653d-e0d4-4baf-adef-895a24190250@gmail.com>
+ <71443b69-e5d3-40e8-bf9f-d3075168752d@gmail.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -172,7 +177,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <ptmm7jaltdwuyxj5ks26oht2cj6ckp4at6prvra27l4r6idkiz@xzyj2s3spx25>
+In-Reply-To: <71443b69-e5d3-40e8-bf9f-d3075168752d@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -185,138 +190,113 @@ List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-X-Spam-Status: No, score=-7.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi,
+On 11/4/26 13:51, Ana Bobillo wrote:
+> From: Ana Bobillo <anabobillo3@gmail.com>
+> 
+> nvme_blk_probe() takes the LBA data size (log2 of the block size) of the
+> namespace's current LBA format as the device reports it, and shifts by
+> it: 1 << ns->lba_shift is undefined for a value of 31 or more, and
+> nvme_blk_rw() sizes each transfer with
+> 1 << (dev->max_transfer_shift - ns->lba_shift), a negative shift for a
+> block larger than the maximum transfer size of the controller.
+> 
+> Check it, through a new nvme_lba_shift(), against the block sizes
+> blk_valid_blksz() accepts and the maximum transfer size. nvme_init()
+> skips a namespace with an unsupported LBA data size, as it skips an
+> inactive one, rather than create a block device for it that then fails
+> to probe, failing nvme_init() and leaving the namespaces it has already
+> probed on a controller that failed to probe. nvme_blk_probe() checks the
+> value it uses again.
+> 
+> Signed-off-by: Ana Bobillo <anabobillo3@gmail.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+> (no changes since v1)
+> 
+>   drivers/nvme/nvme.c | 33 ++++++++++++++++++++++++++++++++-
+>   1 file changed, 32 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
+> index c815a967137..3df9b531bfd 100644
+> --- a/drivers/nvme/nvme.c
+> +++ b/drivers/nvme/nvme.c
+> @@ -15,6 +15,7 @@
+>   #include <time.h>
+>   #include <dm/device-internal.h>
+>   #include <linux/compat.h>
+> +#include <linux/log2.h>
+>   #include "nvme.h"
+>   
+>   #define NVME_Q_DEPTH		2
+> @@ -701,6 +702,26 @@ int nvme_scan_namespace(void)
+>   	return 0;
+>   }
+>   
+> +/**
+> + * nvme_lba_shift() - Get the LBA data size of a namespace
+> + *
+> + * @dev: NVMe controller
+> + * @id: Identify Namespace data of the namespace
+> + * Return: log2 of its block size, or -EINVAL if that size is not supported
+> + */
+> +static int nvme_lba_shift(struct nvme_dev *dev, struct nvme_id_ns *id)
+> +{
+> +	u8 ds = id->lbaf[id->flbas & NVME_NS_FLBAS_LBA_MASK].ds;
+> +
+> +	if (ds < ilog2(DEFAULT_BLKSZ) || ds > ilog2(BLK_MAX_BLKSZ) ||
+> +	    ds > dev->max_transfer_shift) {
+> +		log_err("Unsupported LBA data size 2^%d\n", ds);
+> +		return -EINVAL;
+> +	}
+> +
+> +	return ds;
+> +}
+> +
+>   static int nvme_blk_probe(struct udevice *udev)
+>   {
+>   	struct nvme_dev *ndev = dev_get_priv(udev->parent);
+> @@ -708,6 +729,7 @@ static int nvme_blk_probe(struct udevice *udev)
+>   	struct nvme_ns *ns = dev_get_priv(udev);
+>   	u8 flbas;
+>   	struct nvme_id_ns *id;
+> +	int ret;
+>   
+>   	id = memalign(ndev->page_size, sizeof(struct nvme_id_ns));
+>   	if (!id)
+> @@ -724,7 +746,12 @@ static int nvme_blk_probe(struct udevice *udev)
+>   	memcpy(&ns->eui64, &id->eui64, sizeof(id->eui64));
+>   	flbas = id->flbas & NVME_NS_FLBAS_LBA_MASK;
+>   	ns->flbas = flbas;
+> -	ns->lba_shift = id->lbaf[flbas].ds;
+> +	ret = nvme_lba_shift(ndev, id);
+> +	if (ret < 0) {
+> +		free(id);
+> +		return ret;
+> +	}
+> +	ns->lba_shift = ret;
+>   	list_add(&ns->list, &ndev->namespaces);
+>   
+>   	desc->lba = le64_to_cpu(id->nsze);
+> @@ -899,6 +926,10 @@ int nvme_init(struct udevice *udev)
+>   		if (!id->nsze)
+>   			continue;
+>   
+> +		/* skip a namespace whose block size is not supported */
+> +		if (nvme_lba_shift(ndev, id) < 0)
+> +			continue;
+> +
+>   		/*
+>   		 * Encode the namespace id to the device name so that
+>   		 * we can extract it when doing the probe.
 
-On 11/10/26 23:52, Urvashi Sharma wrote:
-> Hi all,
-> 
-> I would like feedback on a design for scatter-gather (SG) reads on SCSI
-> block devices, with UFS as the first to implement it. This is
-> a design discussion only; no patches are attached. The struct/function
-> sketches below exist to make the proposal concrete enough to comment on,
-> not as a finished implementation.
-> 
-> Problem
-> =======
-> 
-> blk_read()/blk_dread() take one contiguous destination buffer. The UFS
-> driver splits that buffer into several 256KB PRDT entries
-> (prepare_prdt_table() in drivers/ufs/ufs-uclass.c, MAX_PRDT_ENTRY), but
-> a caller cannot read one LBA range into several discontiguous buffers.
-> Such a caller has to issue one command per buffer today.
-> 
-> Use cases:
-> 
-> - FIT images: a FIT can bundle several images contiguously on storage,
->    each with its own load address. Loading one FIT means pulling several
->    images from storage into several different destination buffers,
->    which today is one read per image.
-> 
-> - ELF loading: U-Boot has no path today for loading an ELF image
->    directly from storage (bootelf expects the image to already be in
->    memory); I raised this gap earlier in [1]. If such a loader is added,
->    its segments could land at different, non-contiguous memory
->    locations per their program headers, and would hit the same
->    one-command-per-buffer pattern.
-> 
-> In both cases the data being read is logically one transfer being split
-> across destinations, but the current path pays for a full command
-> setup / UPIU exchange / doorbell ring / completion poll cycle per
-> buffer. SG would let one request cover several destination buffers
-> instead of one request per buffer.
-> 
-> I do not have measurements yet -- this is still at the design stage.
-> 
-> Proposed design
-> ===============
-> 
-> Rather than extend the existing single-buffer read path in place, this
-> adds a separate flow for scatter reads that runs alongside the existing
-> one, with its own error handling at each layer. SG is not inherently
-> UFS-specific, so the block and SCSI layers below are meant to be
-> controller-neutral even though UFS is where I would start.
-> 
-> 1. Block layer (include/blk.h, drivers/block/blk-uclass.c): a new
->     optional op alongside the existing read op in struct blk_ops, plus
->     the scatter list type it takes:
-> 
-> 	struct sg_entry {
-> 		unsigned int addr;
-> 		unsigned int blk_count;
-
-Where do you pass the the buffer for this entry ?
-
-> 	};
-> 
-> 	struct sg_list {
-> 		struct sg_entry *entries;
-> 		unsigned int sg_count;
-> 	};
-
-Maybe passing sg_count directly to read_sg would be simpler and avoid
-an intermediate struct, except if you want to pass some flags and extend
-the sg read.
-
-> 
-> 	unsigned long (*read_sg)(struct udevice *dev, lbaint_t start,
-> 				  struct sg_list *scatter_gather_list,
-> 				  lbaint_t blk_cnt);
-> 
->     with blk_sg_read() / blk_sg_dread() wrappers (LBA, scatter list,
->     block count), returning -ENOSYS when the driver has no read_sg.
-> 
-> 2. SCSI layer (include/scsi.h, drivers/scsi/scsi.c): rather than add a
->     parallel set of command-building functions, struct scsi_cmd gains an
->     optional
-> 
-> 	struct sg_list *scatter_gather_list;
-> 
->     member. The existing scsi_exec()/command-building path in scsi.c is
->     reused unchanged; when scatter_gather_list is non-NULL and the
->     normal READ(10)/READ(16) command is built as today with the list
->     attached.
-> 
-> 3. UFS (drivers/ufs/ufs-uclass.c): if scatter-gather is enabled,
->     prepare_prdt_table() grows an SG-aware counterpart:
-> 
-> 	static int prepare_sg_prdt(struct ufs_hba *hba,
-> 				    struct scsi_cmd *pccb);
-> 
->     that builds one PRDT entry per segment, within the existing PRDT
->     size and count limits, with the cache flushed and invalidated per
->     segment instead of once for one buffer. The existing doorbell-ring
->     and completion-wait logic is reused as-is; nothing changes at the
->     hardware-facing end of the transfer, and existing single-buffer
->     reads are unchanged.
-> 
-> 4. Kconfig: the generic part is under SCSI_SG and the UFS part under
->     UFS_SG (depends on UFS && SCSI_SG), so other controllers can add SG
->     later without pulling in UFS code, and builds that do not select
->     either symbol see no change in behavior.
-
-The overall design looks sane, but:
-- the naming may be misleaded with the "sg" dma, maybe instead use something
-   like "multiblock" ? I'm open to anything, including sg TBH
-- could you check if some other interfaces could make use of it, or
-   perhaps if a dumb helper could be added that would simply go over the
-   sg_list and run single transfers to emulate that so we could have
-   a generic usage of sg_read in FIT loading for example
-
-Please send a quick RFC to we can discuss the details.
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
 Thanks,
 Neil
-
-> 
-> Thanks,
-> Urvashi
-> 
-> [1] https://www.mail-archive.com/u-boot@lists.u-boot-project.org/msg04243.html
-
