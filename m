@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B299606A321
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 14:21:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD84A606A324
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 14:21:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=YL2DUCTk;
-	dkim=pass (2048-bit key, unprotected) header.d=dolcini.it header.i=@dolcini.it header.a=rsa-sha256 header.s=default header.b=jlNGuaj3
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=OH1Nxiz/;
+	dkim=pass (2048-bit key, unprotected) header.d=dolcini.it header.i=@dolcini.it header.a=rsa-sha256 header.s=default header.b=Bie7A/DW
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 14B278127C;
-	Wed, 11 Nov 2026 14:21:44 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 99FCB60DA0;
+	Wed, 11 Nov 2026 14:21:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QeaXI-PS1m1b; Wed, 11 Nov 2026 14:21:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 64F188143D
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794406903;
-	b=j6O/Nrp6FP0SwK+WTVWNN8WDBy9ZBpW4ipHsM+vxGnj6UrXx7U7W245O8a08ODy7FaHR
-	 SUr9CSZSsRDyGOiUVBXIXbEBXg7we/TogDxEIf+Xb7p3XO1rYn0FgPWPNipG3UGsHx28Y
-	 Oj0kNcLBqwJ1VeqLx77kFJNANy1eCX6omuLmAVnfRb4C1xj2bCEGSvtes8a5sgIF5A1IZ
-	 GqHM+cbkH1a+iUi1GO9q2AhAA62LE6m8SfgOzq8S0t6f/Xb04lZ+2DFjYbzTqurJwtl8T
-	 /H5iZcywo8glPs5AiHfF9zEl/x/4R3m5ezQPxhaq4A0Th49JZsB+8ZrN/ciom8s2mmA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id D19hqKWuvWTB; Wed, 11 Nov 2026 14:21:45 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E11D460D61
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794406905;
+	b=lPj35mPYSvmASH/n3FAYTmRuhwOTkUJkrZg007wVsy1+879ZDbZK2HVLI5wos3eqxXPH
+	 4GE5NCWmIwjlEw/WXEnQKjPvInimjwXN7tYt6VegoIoQ4xqFPX4XgHJdIGKqg+MvXhYN0
+	 7F/PxWvgs9wManOydOcAkT265h12MjTBC1TyFXgbp3ekm8U3rSzJGVMqPWxSAHAdv7mN7
+	 tIP4jiG2afJIvn2j1JxSgB4FagQH5VhFky4CtyVeyd/MqufZLuwzo6Wz5jkjN6wPtrDRY
+	 K+RB5viMpYtRIqNM6EJVxU49asiUFgkCVv3w9farsFWaRA30/QZlQxUOysnol+R20YQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794406903;
+	c=relaxed/relaxed; t=1794406905;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,75 +31,76 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=ol6MkOcY4xwdkOAWNTyVKBALFQaZJzc/xexZIgfxv78=;
-	b=XSvwEpwK4KqqrSj9lzGvq+L3v2BhhRJfX3hTmkplPQPPYCS6SAcr0YArt17bT3LvgT2s
-	 DxUT2IR77z1a3b0ENnfWFZSc++8arvvCsNnRFA66RtSSF/8hjmOucON3tRLXcF0oOdkZm
-	 +ic+dCf13jrXfYlvjvvOPWT7DiF2LV3RDmZas86oJujdnnoJwywdeGBkYbTvcs1VQyZ4I
-	 enNwz7TqcKuBsO8nZ9lcrqVvO1Y/WC0Z4pjwjWU6iy06o6k0z2X0UKRcaXroe//dl5lJB
-	 sIT8XLVwVEDV3Ln1ZC5xSzT8LzdtunvGSq4oqKsqZqNqFQewUxswvt/FJeh/ngqx5xg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=IdWP4TQVDswQo5Yo1jMX5MljA1LO5on8B6+bzW0MyUU=;
+	b=ZCCjFqy97PN9Z/W44MdazYj+ElBw876AeHOWIcgin1CqgA7IWANSy0X02TGeBAb83BzW
+	 kH29azCZ8JPWM/3kwyvffisj05IOwRGYSFndSzXU+hM3gJPS3xCmX+libdGtcg3MqqOqc
+	 c+yN0zjJfIyLA8aBqpNwTZV1VcJEw2fW/tLS90LHIjUZk5u4GfRKiVxpadNS1KyraWUJt
+	 wW7HRoPnBw0f8W5qpJDJbBgnt+YVqxn0E88FprL3shRNI14b4fsWL+1uzz2NOE9qGLTJc
+	 zrFZNsmwZ1FpepVHaVeEIQ+oS8h6htqdZhr2sM/Q3org2UUaDo/TtPKGVVKpE42eReg==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794406903;
-	bh=ol6MkOcY4xwdkOAWNTyVKBALFQaZJzc/xexZIgfxv78=;
+	d=lists.u-boot-project.org; s=default; t=1794406905;
+	bh=IdWP4TQVDswQo5Yo1jMX5MljA1LO5on8B6+bzW0MyUU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YL2DUCTkwI/JVe0r3g3I9xy8dak3UisElvtFYLuAixC/RwWRYRX8pUO2Fob9u908W
-	 yX2h6eURtUHsvZ0zcYKWXimjINqShBgMUKcAfVvyj4DBYHVi7i5EmiSXKe+iamKzpQ
-	 dU9X8KIPQGuoP65VQeawcA77XNBWkkT6mVdc7zgFQjjx/+5iGyDbwgRW1mVQdYBYNi
-	 adONp10ti3HGDPHfveptvdtrkMchY2H0L1Azsj2fuy/FVT2+hCBkm79wb5ynboS92O
-	 vJdHCw+4LuypvqsdhnsdZl78rLDQbF8LWWGFmEnRoJ2KZLfHXuiLIRt10Hz9tchJKF
-	 L8FWYkesQf90w==
+	b=OH1Nxiz/8H1f6ggIcE8nt+sfGMfDcf79gPkEtzcI1S7EEjAFdI/TbDhIY56mLdixp
+	 Yqnd7Guz61oOW+6OLDrcAeD/M8LcZYvP2o+kvvwGw5OzQXmzPTbDdLPOqxr2NXa9Ji
+	 fgXyh23Y250xlRfIbwxJu5pQKojaroFA6pACj17+ZYuw8y3OSjBEY/nnoWSqhVH9iC
+	 SVaw+rHJ+sor5WaE+1UAcH1QCzO746ddC3FB/9/9gcChvSh0CFimIXBuuIyeA/tWIm
+	 xWAKeKota7JB2xeAOg5s6UW/WIdK3H/Xj3G0bzC9xY8H2v94330yxtB3gMHSdxQuLR
+	 hNxm/8zAThQaw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 64F188143D;
-	Wed, 11 Nov 2026 14:21:43 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 06E9A31F
+	by smtp3.osuosl.org (Postfix) with ESMTP id E11D460D61;
+	Wed, 11 Nov 2026 14:21:44 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2598B31F
  for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 14:21:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id EBE1F408B0
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 14:21:20 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 22FA240801
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 14:21:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id RHuUUDDMcCni for <u-boot@lists.u-boot-project.org>;
+ id Qe3s6RQwdtBV for <u-boot@lists.u-boot-project.org>;
  Wed, 11 Nov 2026 14:21:20 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C624D40891
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=217.194.8.81
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.194.8.81;
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B275040873
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2001:4b7e:0:8::81"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2001:4b7e:0:8::81;
  helo=mail11.truemail.it; envelope-from=francesco@dolcini.it;
  receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=dolcini.it header.i=@dolcini.it header.a=rsa-sha256
- header.s=default header.b=jlNGuaj3
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C624D40891
+ header.s=default header.b=Bie7A/DW
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B275040873
  for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 14:21:19 +0000 (UTC)
 Received: from francesco-nb.. (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 68F822315F;
- Wed, 11 Nov 2026 15:21:16 +0100 (CET)
+ by mail11.truemail.it (Postfix) with ESMTPA id 372FB23124;
+ Wed, 11 Nov 2026 15:21:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1794406876;
- bh=ol6MkOcY4xwdkOAWNTyVKBALFQaZJzc/xexZIgfxv78=; h=From:To:Subject;
- b=jlNGuaj31sHwBiWkubZ8PbQ5wwHpoUWBywvzmw6LcQwzKpAc3NGK5BwVNoJys3Vit
- DNde/bms2Z5Lf57EECdfaY6Db02Wuo6wnCKSxTsITNhuzUbMdZklDOc8yfERp1mH+0
- n8rVNBs8hJrcb4I2A8GnQZWKaknqfVVcNfOSNSue8w6s0NEuQbZNdzPlT5LCzwiCO1
- lqslfEbgyCYxdGUcfMyUtz/jbm0W37aODWpdp9a3tagmb5bryGlUIMi4snXev9Ooo8
- o9JqGuG2PUBUC/KWZS2MYYAqIG8pFlkh+s6NR5mp3A33Ym6jQ58UCIozZJNeBQ3Ryi
- GQFbcAnVUU4LQ==
+ s=default; t=1794406874;
+ bh=IdWP4TQVDswQo5Yo1jMX5MljA1LO5on8B6+bzW0MyUU=; h=From:To:Subject;
+ b=Bie7A/DWF0ciO7PL6jQKhHdJMNLlkwC+tvgf5FJn/cJY34lTPd2yjYd3gk4ckH9HH
+ AYzmM9t+qyfMgQ+gfb+WvHhng5aT0Q5t1K+5QuWCoLLEP/AzaWsiXMrUCIT2f1h/KL
+ DwxEGQ5g7y2RlJIrGK9R+aYy9E36YafSJQuKbvmKhQ6HqwJ6TpAqXzuQwCfciJoilG
+ /WZrsyNv2fDknnjcFNZ1HkQYxdhqB96mhRCakFYT75EyojINP094YginK7lrCvswBm
+ 67f0dgoZcQyfx7aLeqaToLmJZHhrv5TyqRXsMW4R0ZlkLBRJ6KOilSZPfVsbvBqet+
+ frApDPNTFpx8g==
 From: Francesco Dolcini <francesco@dolcini.it>
 To: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.u-boot-project.org
-Subject: [PATCH v1 12/15] board: toradex: apalis_imx6: drop dead
- TDX_APALIS_IMX6_V1_0 Kconfig option
-Date: Wed, 11 Nov 2026 15:21:00 +0100
-Message-ID: <20261111142104.109139-13-francesco@dolcini.it>
+Subject: [PATCH v1 07/15] board: toradex: colibri-imx8x: report detected SoC
+ variant in board_name
+Date: Wed, 11 Nov 2026 15:20:55 +0100
+Message-ID: <20261111142104.109139-8-francesco@dolcini.it>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261111142104.109139-1-francesco@dolcini.it>
 References: <20261111142104.109139-1-francesco@dolcini.it>
@@ -118,43 +119,36 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Francesco Dolcini <francesco.dolcini@toradex.com>
 
-All code reading CONFIG_TDX_APALIS_IMX6_V1_0 was removed when V1.0 HW
-support was dropped, but the Kconfig prompt itself was left behind.
-Enabling it currently has no effect at all.
+board_late_init() hardcoded "board_name" to "Colibri iMX8QXP" even
+though select_dt_from_module_version() (called right after) already
+detects DX modules via is_imx8dx() and sets "soc" accordingly.
+board_name now matches the detected variant.
 
-Fixes: 405c97fd1dc8 ("configs: tdx: apalis_imx6: drop hw v1.0 support")
+Fixes: de666551b304 ("colibri-imx8x: construct fdtfile dynamically")
 Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 ---
- board/toradex/apalis_imx6/Kconfig | 10 ----------
- 1 file changed, 10 deletions(-)
+ board/toradex/colibri-imx8x/colibri-imx8x.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/toradex/apalis_imx6/Kconfig b/board/toradex/apalis_imx6/Kconfig
-index fc4cbe3323c7..8da291e59642 100644
---- a/board/toradex/apalis_imx6/Kconfig
-+++ b/board/toradex/apalis_imx6/Kconfig
-@@ -39,16 +39,6 @@ config TDX_CMD_IMX_MFGR
- 	  If executed on already fused modules it doesn't change any fuse setting.
- 	default y
+diff --git a/board/toradex/colibri-imx8x/colibri-imx8x.c b/board/toradex/colibri-imx8x/colibri-imx8x.c
+index 0a86420700dd..f8cbdc33f28e 100644
+--- a/board/toradex/colibri-imx8x/colibri-imx8x.c
++++ b/board/toradex/colibri-imx8x/colibri-imx8x.c
+@@ -141,7 +141,7 @@ int board_late_init(void)
+ {
+ #ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
+ /* TODO move to common */
+-	env_set("board_name", "Colibri iMX8QXP");
++	env_set("board_name", is_imx8dx() ? "Colibri iMX8DX" : "Colibri iMX8QXP");
+ 	env_set("board_rev", "v1.0");
+ #endif
  
--config TDX_APALIS_IMX6_V1_0
--	bool "Apalis iMX6 V1.0 HW"
--	help
--	  Apalis iMX6 V1.0 HW has a different pinout for the UART.
--	  The UARTs must be used in DCE mode, RTS/CTS are swapped and
--	  thus unusable on standard carrier boards.
--	  This option configures DCE mode unconditionally. Whithout this
--	  option the config block stating V1.0 HW selects DCE mode,
--	  otherwise the UARTs are configuered in DTE mode.
--
- source "board/toradex/common/Kconfig"
- 
- endif
 -- 
 2.47.3
 
