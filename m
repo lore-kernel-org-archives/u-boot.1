@@ -1,157 +1,209 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7BBC606A324
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 11:45:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1849B606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 11:46:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=RuAed0uP;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=B9N+geuq
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XiUEOhOo;
+	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=PZeuV/vj
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9029040965;
-	Wed, 11 Nov 2026 11:45:33 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7BBB66089F;
+	Wed, 11 Nov 2026 11:46:31 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id qOdqtzHp0p0W; Wed, 11 Nov 2026 11:45:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org C3A084098E
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794397532;
-	b=mnJxyxwYotB3nNMxKavGNLlUnUHwuDmX0dr5oqKqEhKg/k9pp9rvNJuYDQ5auCLx5sR8
-	 n7VSJXI94Qdc563sqPF+eNl7qG+Ccuhws04/WKuFtnfNPWzMcNGhPdXXsXtToeQNE7IhB
-	 XLtviqGIv6nwbP4iis1udx0Yls6HPjq+KdOWC81Cc1PK+8H2/GMp9R4jb35dYdW8wBekS
-	 qVWgNwC6Lo2azTkAmSc58zEqkY2Lpf60aYpj6PgnBwrHRWzB+14jZN/UrT1NMUz+IR22w
-	 eOmM3bMjiMUZ1awxr/MWQrGQI+MddxIIYv6R3/CzV3wH7tu66+6nGUrjh0C9iieV3Ww==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ZC3wKDn-8CrE; Wed, 11 Nov 2026 11:46:30 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A5FDC60797
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794397590;
+	b=mO9WwmZVarqmO45aMStO+zqhanW7tpOORqsqYj+iqjr8t0IgrG/Ypg/O/6UT4LnF5zfr
+	 KkVAxEi2W5KxLIu5e1ZVh6dJqjpwVMU5ZuvyELTGsDahyeYsCxB6z0z4q+IqPoRV9E9ZH
+	 cJw3AZNMVfsu3S3sPPA6x2iYhPW9luCXktzu6ABmslfDa3V1vy6HdW+14BYiw+YXNM6zK
+	 TfXxfJmWW+ELTATiS7nrfoHTfBJJ5Li3nFhxcdPc4MmFJPhEPyo/pi0KduA1/g4YC99dJ
+	 DFe9JzRdCtMcnU9C9fK8/8kGP7Dl4YweFTsd9w5i3UaSPqEa+ZYlaVqvIc6smiowU0Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794397532;
+	c=relaxed/relaxed; t=1794397590;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
+	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
+	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
+	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=GyNwRBF5coL17o+esaVTWf2EVFZa3imDeTGquACk3DI=;
-	b=r8I8Fna6+ONxX9xod0qATqQqyMvDR4Jb7EavwSqz3+WZwWPdXGDQ5BY2L8YX+lI0dOWk
-	 xpl98PANkJHOfrXTXgdmbFGcB92jlGwcNromT4v6kFXSfGCmAVfpLcX1fazd98Bf+awLw
-	 hJBqVvys9/AfucFEPIHBgr4lNlVnDtgsbyHbiTH1qp0vbYJSL4mV9ASic683i2mQT1Kn0
-	 rLJXqofr980hMeZvvXKCBkgVa7KQRNIM4VxV0dYPCczMXfv5NgL9VNjb0OOjeUUzwjc7n
-	 0CLirczYUExhdomIvKWVzNQJZJwL8eoU6zL9sYbJ4XJqgjx6PMmlmbnyf7r8A7yc3ZQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=N3kaumxvYmpB0OGYtPuaSYaeDZvtrA9zFlsLwk/0yEE=;
+	b=D+WGTnfnxGLodQmjZschgDtlXqkZ3a4T4Srv6pOfPUB2TxAzMjrbCGG2QegTjBGZYbZv
+	 k0mOJdnHlrzQ8vSIZGMADssK7zV/8pS7rGV2QYYEXX3yCb0KsVsuGXOfrHql9bmULn7cW
+	 QZhyFoCqJeXw2Me1w5T8Efos4mlmPFvUalK7rUnPJlUMiJRB4gNzHFvtoSXnKF2ezsxQ5
+	 BZ2DtQQuEoUZht7ZYuMX2OwcvEl0xBxq1QVrmZtoJQHbU8woVczhINa1hZeYxeEXQQFx7
+	 nW+Ip7te7wvD5/fO3s+pwX0J+CAWLIjxjEqJGf+5fKwGlwn9c1WBcZ35QohQv1iByuA==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794397532;
-	bh=GyNwRBF5coL17o+esaVTWf2EVFZa3imDeTGquACk3DI=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794397590;
+	bh=N3kaumxvYmpB0OGYtPuaSYaeDZvtrA9zFlsLwk/0yEE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=RuAed0uP4sgTCex1wOKSPgE4bX8A/dTCSFR5+AanZtyXeWCXO+EhQ5/UjvEtWK6KP
-	 JBCZJ+OuXFv6v+2Sr8+VefQyrvyf0T2Mg/XBXmvtg/D6xbxIth+8GZA5PQBlnIAHDV
-	 5Eilz0o7YkvZhgCzoHidP3cGGT41d8G2GUeyKwIBFIW3uPpGfH9mTpqH3LFc+rWkX1
-	 5Q73jqSrzP6vhRRWYiGQTJeOO+dDT8BSCUaFXmjquWT42I+sDw9x7pXH18jm+lhWtj
-	 nx6RQFSGeOj3fTKPnqVUYkxxUlNwBbwIVihIzAYV5Wcj+prGcSBE38be5f0ZdAMIAI
-	 nrabdaIqr9ANQ==
+	b=XiUEOhOojsXoBW0e2bwayPNBtLTj3+YKJOiwLrZ6cHFQUx3wNMFrsIsoCk9o/c2HH
+	 0HUrDfeGdCgSeKxsaI0z+ODZyB++lme2oG7Hd4CFO4XuthxuP/A5cRuQzGK3H00q3k
+	 T+2WW5eg4O+tfheDi9EOP+LpogEbPWxn0FdpI/NjiGQOgDz7tNjx7hUUgolKABslmF
+	 +b3rgVzJte4fbrJg6HJqF6lUsC8cTIG5/sPXjVd602JMd/RY1QIKTP0ChbutL7DReb
+	 eeR30Gh7lJVtPUFbg+TESt2tGPkuMTQkzY0liVNNNcLGIEPy4AOCF9zjTeo93HZk80
+	 jBGQlpW6rtx3g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C3A084098E;
-	Wed, 11 Nov 2026 11:45:32 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 08B8A1A6
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 11:45:31 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A5FDC60797;
+	Wed, 11 Nov 2026 11:46:30 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists1.osuosl.org (Postfix) with ESMTP id CA5BC731
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 11:46:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E2AE440217
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 11:45:30 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id B07004095A
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 11:46:29 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id XxPy9RMcxB4u for <u-boot@lists.u-boot-project.org>;
- Wed, 11 Nov 2026 11:45:30 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org DBD67400D5
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2607:f8b0:4864:20::b12e"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 112Xz074kX9o for <u-boot@lists.u-boot-project.org>;
+ Wed, 11 Nov 2026 11:46:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 87CCD40889
+Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ smtp.remote-ip="2a01:111:f403:c202::7"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::b12e; helo=mail-yx1-xb12e.google.com;
- envelope-from=ilias.apalodimas@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=B9N+geuq
-Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
- [IPv6:2607:f8b0:4864:20::b12e])
- by smtp2.osuosl.org (Postfix) with ESMTPS id DBD67400D5
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 11:45:29 +0000 (UTC)
-Received: by mail-yx1-xb12e.google.com with SMTP id
- 956f58d0204a3-67bee1f693bso2857554d50.1
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 03:45:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794397528; x=1795002328;
- darn=lists.u-boot-project.org; 
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=GyNwRBF5coL17o+esaVTWf2EVFZa3imDeTGquACk3DI=;
- b=B9N+geuq6L//fPaNHJGkCLX8F0S5l+eFbfj7hD7N7rAZFpFr5OZ+9Bq7cq2RdOo/gy
- Eoj2ZcKSIxSI9l0cxlgAFWiRkffusXQBZ1cPDZ4eUoT7BWjnLNZNpJEAYGvSSyAyCBhi
- WPVaMw32cdG9bmJZ+WZm2VXs7o2Svf1muJuzElSDkSpDH7cdXKS5cnqmbKI6XHKfceln
- sfa+y3h3mQItKWolZKUMHmnT4xxjUtj7ImYq8CYgbRtwHl9YbSpGIpkHFfopqxqc54u5
- g5kHh5fjJQlMlbIYYFYrmqE37gD40O5W8JK5K5sO2VjZwrHnmjs2RK0GTAzP6t5P32hX
- OZiw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794397528; x=1795002328;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=GyNwRBF5coL17o+esaVTWf2EVFZa3imDeTGquACk3DI=;
- b=R3yGvzf9a7Wm6vgXm0TdH74U7treqJwaOMvQqQTzjc8u2s10ZfpL8EDaljil0+VHEN
- E9ozcTqqqRGdxWT2NotczgD4e+/fMPipbusmx/u8A57wq6rI2orgv0JwzWuXOfeuKJ3f
- c7nj+S4gXtKSZt4AoMpRr4oLV3eRlqh1KHDNWBDPf8/U6I7jM/2j58Kn0uZxxhtzRWPD
- liM/dM+SJpcolwgf8S9XYYYvzePsrZURbxdXTBkwJM9F77aQuDcjoZvPF5nsM9oiVZTt
- ysEQEjig1iVCL3HjmdulyuuKK1crnjn6grI8JL+wnCn0R1BkmQi3n5yUIEHOIOZLb5R2
- AcMw==
-X-Gm-Message-State: APuU4Z83JuccIadE9lDBF7IFOGmNFX3BqvmT2llj6Agt0ewpldysxNrw
- ADsE9cvaui61eKFaXVmTArllW+ptx/+xvnGwI9KrTW4lApMi8hW/8j9uxc10nGxpQ+7CPkgiaBH
- U2qd5Vga+4U0depSBG/mLgusO2HA4m4YpJg8z341JgQ==
-X-Gm-Gg: AYBFou2TcRJgZpjwxUaxPX2ieAVQKAILGCQa/yEi7Wt14jaLwHQugJsXIFdWUk7/ovC
- i1903bbRseH8ykfXHwaIuFUp+yT+YHKpOSbzmXMWBjvM8GhmeP3Jq23GPXYr35P0V+/AGF164nm
- PuoH6ohv1rHJzDXrDjjioBwCpZ8v1m+cK6+7wEttTbvdfA/PrL5BEtO+zTj2j5J3sFa+JY3/5Qv
- AcW3zRYfbJImKy3G7vK2oSP6GGl6UrfOc7TQTpjjDnuaSgx26IArq0J/V3T7Y8RQFVtd6+0pP26
- Ya42qVapmlzARXO8DkTaAM+EC4PELXxcS9YY0UuYXfcIPRTxaLHU85B8FBzn3rn7sXUO/x5nzs0
- UG31Tzgd/I4KpBqjt8sLMvm4Ua4VBQpyxHAo5x0zzzrt0x05hxONqrN4xB/8xJxQoz+tehHQGgP
- zN4b3y13fghtbRhh6Lv3R4oAwXuH8haT+LCdAFKllnzHuHKPvdejJq8qrB0b9M3axzKL9QB93dQ
- FMqgyxYI2sjc35p4bs2rsdX3AlxlU5z0D5HRxWbISX9jT5HRxwFtbXju2EPoFLVwAcPyT1BjTas
- PgoUvzeh4IrvD+XuQmv8sgwGqZ54BEdGZb+yhiADtVLN7EPB0dwXO+J/hXI8aFRlj+5Un3Gkx0K
- Xkylah4zcYF6pbt4OTh6ihVtf5nyDS3GkD07j1QBVKcfaHkrtZGYcUvnWxBl6fCbJyCAMvbRUwo
- 48o1jBjtd3mPMjmsjYg5vSf+QphIqFF9yghwU=
-X-Received: by 2002:a05:690e:144b:b0:679:9b73:bfaa with SMTP id
- 956f58d0204a3-67c67f0022cmr1887086d50.35.1794397527972; Wed, 11 Nov 2026
- 03:45:27 -0800 (PST)
+ client-ip=2a01:111:f403:c202::7;
+ helo=gvxpr05cu001.outbound.protection.outlook.com;
+ envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
+ header.s=selector1 header.b=PZeuV/vj
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 87CCD40889
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 11:46:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=N3kaumxvYmpB0OGYtPuaSYaeDZvtrA9zFlsLwk/0yEE=;
+ b=PZeuV/vjRkbsQpV7tciIUO04Qp6gFn53oJ3IFsRue1054Re55DbF3ASrYIvKeHRe3xRaFZap8BwFipS2lzexSaXgjEA/hxw395DYpHWN57Yoxqse94cbejvM0tzTRI0fi7z/cpCHkg8Uu1RUxPHHViN+mLmqke6Q/JC4nXfIVDs=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
+ by DB9PR04MB8364.eurprd04.prod.outlook.com (2603:10a6:10:24c::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.8; Wed, 11 Nov
+ 2026 11:46:22 +0000
+Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
+ ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0615.007; Wed, 11 Nov 2026
+ 11:46:22 +0000
+Message-ID: <44488026-2318-459d-8648-7af6c8723ee8@cherry.de>
+Date: Wed, 11 Nov 2026 12:46:20 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/6] binman: test: Add tests for fit,compress
+To: petr.hodina@protonmail.com, u-boot@lists.u-boot-project.org
+Cc: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marex@nabladev.com>, Wojciech Dubowik
+ <Wojciech.Dubowik@mt.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Petr Pavlata <petr@acrux.cz>, David Heidelberg <david@ixit.cz>,
+ Alexey Charkov <alchark@flipper.net>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Aristo Chen <aristo.chen@canonical.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Daniel Golle <daniel@makrotopia.org>, Johan Jonker <jbx6244@gmail.com>,
+ Quentin Schulz <u-boot@0leil.net>
+References: <20261017-b4-binman-fit-fdt-compression-v2-0-d7e290847543@protonmail.com>
+ <20261017-b4-binman-fit-fdt-compression-v2-4-d7e290847543@protonmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20261017-b4-binman-fit-fdt-compression-v2-4-d7e290847543@protonmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VIUP296CA0066.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:337::10) To PA3PR04MB11153.eurprd04.prod.outlook.com
+ (2603:10a6:102:4ab::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261111-genio720-ufs-rpmb-minimal-v1-0-701a62dfa034@baylibre.com>
- <20261111-genio720-ufs-rpmb-minimal-v1-3-701a62dfa034@baylibre.com>
-In-Reply-To: <20261111-genio720-ufs-rpmb-minimal-v1-3-701a62dfa034@baylibre.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 11 Nov 2026 13:44:51 +0200
-X-Gm-Features: AclHuK-SgUK0nexMRkl2VgA5_gRt8lUHR0RtVnEhVIgnDZcIcREo2gIHe-1r8Fg
-Message-ID: <CAC_iWj+OikJL7w6ye5U29fyE-h=HU0bEaXqq9w4g+w+OEty1NQ@mail.gmail.com>
-Subject: Re: [PATCH 3/7] tee: optee: keep UFS RPMB discovery state consistent
-To: Carlo Caione <ccaione@baylibre.com>
-Cc: u-boot@lists.u-boot-project.org, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
- Macpaul Lin <macpaul.lin@mediatek.com>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jens Wiklander <jenswi@kernel.org>, Jan Kiszka <jan.kiszka@siemens.com>, 
- James Hilliard <james.hilliard1@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Johan Jonker <jbx6244@gmail.com>, Julien Stephan <jstephan@baylibre.com>, 
- David Lechner <dlechner@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|DB9PR04MB8364:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3d355d31-3af2-48f6-1c0e-08df3fe96838
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|376014|23010399003|366016|1800799024|10067099003|11063799006|4143699003|261022105027099003|56012099006|261022115727099003|261026121527099003|261026140227099003|261021121427099003|261022075727099003|261028144727099003|261102123227099003|261009223027099003|22082099003|18002099003|6133799003;
+X-Microsoft-Antispam-Message-Info: Yj+ybYh5SQrZWkKD1moyvHewIWZt25AQXRvPGxGyVNR/tfa7iDmI5kTqzrcPCwkQ2F+WiO21YXd02SXOCV6i30YxgOzcLOxH1IdZSYi2L5wDY0dY8wzm87BRwgx3VV4q2Mb2vOpmsw7khipFbBpF58C1J2uc5ynY7U6FT5OaWVC0yNqPbfbdzOYfrjgmcMgCXA0ETO837Sc8AqGwtTXh4GmofKfJpwTXPEH+aCB7bR+/huLXjrfa0y7JAp/N9xe0Ud0R2+EueaGHRpoOKetoB+4VgBLdOoRI2Zjkh+gaBWV/lWkn6gjLUPwT6Wrs7L/MIi6N8RcCpildcLQS8qfxMXxHnOZ6BILgZzUpEjoXmH1gVCKfRKfXjBluzrs1XJZLXHmqC3IIhC24GzB5XS+b4+qDTRmbI4uGkPXSOdOjHOAF3jdgPFaG/yBZzU37wFMEhtI66VNmD3lIPs4uxtqJMKNKsMvEwwv9wyuRdJHD/VWhVFNIZEZuGFV55MgAYSdRuP909GjcGdFnrIk7UZzdE5lC0aDVt3FTB/XH8SwARp/rrTGFofGdHJPOmoPl7fMK7jK5FXSgAs7Z+VCB4Dc5A2d7YcbK8J1+znbeUv5mVvsEW0CVfHeABxmwecfnfa6f/8/DkHnmiXzyjNdUuFXw95qFs0DyUU0Ma1UDRTxKQsI=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(23010399003)(366016)(1800799024)(10067099003)(11063799006)(4143699003)(261022105027099003)(56012099006)(261022115727099003)(261026121527099003)(261026140227099003)(261021121427099003)(261022075727099003)(261028144727099003)(261102123227099003)(261009223027099003)(22082099003)(18002099003)(6133799003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?c2VtMlJaR2JkTDRGU2RteTlKYnpSUzVvRCtxK0hFNUNWTGR0dzlJVzhGS3hp?=
+ =?utf-8?B?eEl6N2hGQUNsdXE0S20vTytPMXNwOFE2d3AyK3RVUjRrdlNadi9WWW1LMzJq?=
+ =?utf-8?B?NFFjZXRtQ2ZlVzZJLy9lWG4vQW9ReHVMN0ZPMlNJdXlxb1dtUUxNaHdqOEVL?=
+ =?utf-8?B?Y3VPUTQzb3BSeUhSaUJzaHFNajlUcE42S2p4Ty80cVFuZFowdUFzNFFtMlhq?=
+ =?utf-8?B?ZlEvdGVXL3hIQkI5TmxHNzRodWFtRXc5QWY1Tkd3dHhwZy80MW4zSkQwUWls?=
+ =?utf-8?B?OTBkYUdsWlN5NC8vSDNMMkNPbGlzV2ZaQjJ6ZHoxaExBSTFVRGR5b2g1TGdz?=
+ =?utf-8?B?QmVaMlFMRFhRQ3NqQkh4amJDRjVselQxMTFYRXR4SGx4Nm1ucUp4TXo2K1R4?=
+ =?utf-8?B?Yy9rSmNpajA4V2p2R3RWQzNWVmxFMWF4NklKdGYxSzVnYU10YjNuaXlzK0JJ?=
+ =?utf-8?B?Ym5oTEN4M2VCQmpySklKQVkva1BObWpnRjFPeWt1YVY2ZlhFMEg4ZHdtaGMv?=
+ =?utf-8?B?QUlTdnkwYU1qdVZJa1QvNUJXVEJLa09NZkZicTcyczlOdnVyUEQreEltQStt?=
+ =?utf-8?B?TktQM0dHMkFkUmtKVUlTNHIvYmFlWldLNUsyengvbU05bTYwN0FGcnI0SGho?=
+ =?utf-8?B?R2t5K05mYVkxbnA1eDRFVEZ2dlVWeVJQS3JpcjE0N09KK3V3NGJVcWl4Unk4?=
+ =?utf-8?B?b2lJOEtEdmwxUGxEWm1EVjNLdzM4VmpsRWdKZ0czaVlHbE03bElyZ3FoMENK?=
+ =?utf-8?B?bzl4dWxXd3BrZjdPMnN4ZWdCODBlM2VMYnliT3pjMktISlppdkl2K1lLRkpZ?=
+ =?utf-8?B?aWJhbllvbkxISU1veUU0eEpFQXorUk0zWFJWQ0FzaUF3K3o5NSswUWphU3gw?=
+ =?utf-8?B?VlMzbTBwWm5GWXhKY1ZaYzVwRFdoWER4dFQvWWFNYjRUdTFXakNtbTl2MGk1?=
+ =?utf-8?B?U2xlQTVOK2tRUUFVbTFNVVpuUWI1cVI3dFZ5YTM5aXNMaEhDc01tbVRaWnB3?=
+ =?utf-8?B?MmlsMVMzU25va0dzNnRYTERrbS9JYjNlMjl3ZVVrUmxVRVkrek5XWlY0OHJX?=
+ =?utf-8?B?cnFxRjc4ZGJkWVg1bEVOYmttbllrSFZFYy9mL3BxZlBham1IMFQ0N3RGaVdy?=
+ =?utf-8?B?MTQyeUpJZzNLTlNVVDRyRy8waEpSc0k4R0ovVmZWTHNFcHNGYUt0MnIwTlln?=
+ =?utf-8?B?cTJwd0h2NnBFVHJxcFpwMnpEQTJvT2EySDdvQ0hvU3hKT2lxeVdBYklwUUtj?=
+ =?utf-8?B?RVhDemM1aXNvVHI4Q1JZaWhTR2RJa2dYSHNBeldPd0NweldaNlVBSFRjaWpo?=
+ =?utf-8?B?dUZXUkJnT1daWWI5aUZhMURkeTd6bm4yUG9uZnZjdGpFdDduVy9veHJyWlZT?=
+ =?utf-8?B?OXdWSFZSVUF5U25SUnVDRit4SjFwd0Z3Q2F0ZDQ0dUsrTGZLZC9NTnh1eitQ?=
+ =?utf-8?B?K2g3aVdBM2VkMkVCRTQyWml0dnoyYlg5VVFkUWE4YkdiTVJheUJreHYxaEd2?=
+ =?utf-8?B?Q1ZZQjAvdzlTVGQ2V0lUQytrdWhQSlpadmZ0WXZuK3FpQ3lUZHBJcDhxY3RO?=
+ =?utf-8?B?WCtVWGJUbkVaVWVZUHFsRmw2RTd3NlJ6VWFXRHN4MGlxTmltVDUrNGxjMzJz?=
+ =?utf-8?B?eTNiNlQzY2NQcFVKenBJb1JmV1dRbmxocVloUjh5SlI5ZUdUbDN5MTZqcWYw?=
+ =?utf-8?B?MUtWNHBwclJFY1VoOHM2Wmd5ZWNLK2E3OVRHZENNN2pqc2l1Ymp4T2gwVHR6?=
+ =?utf-8?B?eDZab3pLcXVaUVJ3K1d3bnBXcFIwZGNmRTQySUxBWVgzSWhXTDRrS1FDWVB0?=
+ =?utf-8?B?elNhZzNiZWJXbjlhT1hab0Z3VExTU3BKU3dQaHpFY2FLODc4VDRCWUpUSGEy?=
+ =?utf-8?B?ZEdkSVM5NFpadTVGbHloTU5OOWEvNmEzWUl4L0hmbFlZTXdXdmZ2ZWlvMlJV?=
+ =?utf-8?B?SlR4T3crT3JiTnprSmJ2K25MNXZydlFER08vSVorTmFCZUE3Ynp2d1R3aEpk?=
+ =?utf-8?B?cTB2YlErTnhMSzhCVmU2WTlXTFZ2VVJLTHY1WStsdkx0dGxtNm5WN3JNQSs3?=
+ =?utf-8?B?cVJvVUJqRGlDeDlWMDNLWWpwN1dyQ21IZzdJTlBKa1E5NmNHWGJ3R0I0dWFh?=
+ =?utf-8?B?SmFvMnhscWFYWU5RQ1R1SnZMM3ZIOFArWlJGcWM2M2lxK2l4YTgrNU0ydUtZ?=
+ =?utf-8?B?dFNXYUp4OFlmN0FOWFdQOUFxc3VEcU5mcGRCbDBMRjBpVDlNRmhBaWF5NlhL?=
+ =?utf-8?B?TGUvVjVaTDF4dmV0Lzd4VWtxRzg0MDRpSEtQY0drY2pac1NIYkpqZzhMUFRa?=
+ =?utf-8?B?djljZnJkTHZRVmhVNTlOcW1KUE9hOGlhd3dWSjU3dXZtM3dPR0pUZz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3d355d31-3af2-48f6-1c0e-08df3fe96838
+X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2026 11:46:22.0021 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: e8YdRPtJumizna4aRQr5uzKswYslcA8rH3vxZWiqbRGcpuCLLyDYw7kdRlA21VI0+PX+SVeuIUYGnhgEZNwh3viL9XVSlXysyg2KNTUkouk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8364
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -161,153 +213,83 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Carlo,
+Hi Petr,
 
-On Wed, 11 Nov 2026 at 12:21, Carlo Caione <ccaione@baylibre.com> wrote:
->
-> Reject frame requests until discovery selects a region, and invalidate
-> that selection on every discovery failure. Keep the cursor on a region
-> whose metadata read failed so a retry does not silently skip it.
->
+Squash with patch 3 please.
 
-The commit message does not explain why any of the above is needed.
-
-Thanks
-/Ilias
-> Fixes: 3b39df3bc540 ("optee: implement the RPMB subsystem interface for UFS")
-> Signed-off-by: Carlo Caione <ccaione@baylibre.com>
+On 10/17/26 9:39 AM, Petr Hodina via B4 Relay wrote:
+> From: Petr Hodina <petr.hodina@protonmail.com>
+> 
+> Check that generated fdt images are compressed and that 'compression'
+> is set from 'fit,compress', that an unknown algorithm is rejected and
+> that a missing compression tool is reported.
+> 
+> Signed-off-by: Petr Hodina <petr.hodina@protonmail.com>
 > ---
->  drivers/tee/optee/core.c          |  2 ++
->  drivers/tee/optee/optee_private.h |  9 ++++++++-
->  drivers/tee/optee/rpmb_ufs.c      | 18 ++++++++++++++++--
->  3 files changed, 26 insertions(+), 3 deletions(-)
->
-> diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
-> index a47c76811cd..2abdfd99e5d 100644
-> --- a/drivers/tee/optee/core.c
-> +++ b/drivers/tee/optee/core.c
-> @@ -829,6 +829,8 @@ static int optee_probe(struct udevice *dev)
->         u32 sec_caps;
->         int ret;
->
-> +       optee_suppl_rpmb_init(dev);
+>   tools/binman/ftest.py | 44 ++++++++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 44 insertions(+)
+> 
+> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> index 8caf275d466..fdb22b0965f 100644
+> --- a/tools/binman/ftest.py
+> +++ b/tools/binman/ftest.py
+> @@ -4357,6 +4357,50 @@ class TestFunctional(unittest.TestCase):
+>           """Test an image with an FIT with multiple FDT images"""
+>           self.CheckFitFdt()
+>   
+> +    def _FitFdtCompress(self, fname):
+> +        entry_args = {'of-list': 'test-fdt1 test-fdt2'}
+> +        extra_indirs = [os.path.join(self._indir, TEST_FDT_SUBDIR)]
+> +        return self._DoReadFileDtb(fname, entry_args=entry_args,
+> +                                   extra_indirs=extra_indirs)[0]
 > +
->         if (!is_optee_api(pdata->invoke_fn)) {
->                 dev_err(dev, "OP-TEE api uid mismatch\n");
->                 return -ENOENT;
-> diff --git a/drivers/tee/optee/optee_private.h b/drivers/tee/optee/optee_private.h
-> index 5c72b280058..3f9fea532e4 100644
-> --- a/drivers/tee/optee/optee_private.h
-> +++ b/drivers/tee/optee/optee_private.h
-> @@ -34,7 +34,8 @@
->  /**
->   * struct optee_private - OP-TEE driver private data
->   * @rpmb_next_region:  next UFS RPMB region to report on PROBE_NEXT
-> - * @rpmb_cur_region:   UFS RPMB region selected by the last PROBE_NEXT
-> + * @rpmb_cur_region:   UFS RPMB region selected by the last PROBE_NEXT, or
-> + *                     UFS_RPMB_NUM_REGIONS while no region is selected
->   */
->  struct optee_private {
->         unsigned int rpmb_next_region;
-> @@ -97,6 +98,8 @@ static inline void optee_suppl_rpmb_release(struct udevice *dev)
->  #endif
->
->  #ifdef CONFIG_SUPPORT_UFS_RPMB
-> +void optee_suppl_rpmb_init(struct udevice *dev);
+> +    def testFitFdtCompress(self):
+> +        """Test that fit,compress compresses generated fdt images"""
+> +        bintool = self.comp_bintools['lzma_alone']
+> +        self._CheckBintool(bintool)
+> +        data = self._FitFdtCompress('fit/fdt_compress.dts')
+> +        dtb = fdt.Fdt.FromData(data)
+> +        dtb.Scan()
+> +        for seq, expected in ((1, TEST_FDT1_DATA), (2, TEST_FDT2_DATA)):
+> +            fnode = dtb.GetNode('/images/fdt-%d' % seq)
+> +            self.assertEqual('lzma', fnode.props['compression'].value)
+> +            self.assertNotIn('fit,compress', fnode.props)
+> +            comp = fnode.props['data'].bytes
+> +            self.assertNotEqual(expected, comp)
+> +            self.assertEqual(expected, bintool.decompress(comp))
 > +
->  void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
->                                       struct optee_msg_arg *arg);
->
-> @@ -106,6 +109,10 @@ void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
->  void optee_suppl_cmd_rpmb_frames(struct udevice *dev,
->                                  struct optee_msg_arg *arg);
->  #else
-> +static inline void optee_suppl_rpmb_init(struct udevice *dev)
-> +{
-> +}
+> +    def testFitFdtCompressBad(self):
+> +        """Test an unsupported fdt compression algorithm"""
+> +        with self.assertRaises(ValueError) as e:
+> +            self._FitFdtCompress('fit/fdt_compress_bad.dts')
+> +        self.assertIn("Unknown algorithm 'bad'", str(e.exception))
 > +
->  static inline void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
->                                                     struct optee_msg_arg *arg)
->  {
-> diff --git a/drivers/tee/optee/rpmb_ufs.c b/drivers/tee/optee/rpmb_ufs.c
-> index 0c820e9595d..fbb56305609 100644
-> --- a/drivers/tee/optee/rpmb_ufs.c
-> +++ b/drivers/tee/optee/rpmb_ufs.c
-> @@ -8,6 +8,13 @@
->  #include "optee_msg_supplicant.h"
->  #include "optee_private.h"
->
-> +void optee_suppl_rpmb_init(struct udevice *dev)
-> +{
-> +       struct optee_private *priv = dev_get_priv(dev);
+> +    def testFitFdtCompressXz(self):
+> +        """Test that xz is rejected as it is not a FIT compression"""
+> +        with self.assertRaises(ValueError) as e:
+> +            self._FitFdtCompress('fit/fdt_compress_xz.dts')
+> +        self.assertIn("fit,compress 'xz' is not a FIT compression",
+> +                      str(e.exception))
 > +
-> +       priv->rpmb_cur_region = UFS_RPMB_NUM_REGIONS;
-> +}
+> +    def testFitFdtCompressMissing(self):
+> +        """Test that a missing compression tool is an error"""
+> +        with self.assertRaises(ValueError) as e:
+> +            self._DoTestFile('fit/fdt_compress.dts', allow_missing=True,
+> +                             force_missing_bintools='lzma_alone',
+> +                             entry_args={'of-list': 'test-fdt1 test-fdt2'},
+> +                             extra_indirs=[os.path.join(self._indir,
+> +                                                        TEST_FDT_SUBDIR)])
+> +        self.assertIn("tool 'lzma_alone' is missing", str(e.exception))
 > +
->  static int optee_rpmb_get_dev(struct udevice **scsi_devp)
->  {
->         struct udevice *ufs_dev, *scsi_dev;
-> @@ -32,6 +39,7 @@ void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
->  {
->         struct optee_private *priv = dev_get_priv(dev);
->
-> +       priv->rpmb_cur_region = UFS_RPMB_NUM_REGIONS;
->         if (arg->num_params != 1 ||
->             arg->params[0].attr != OPTEE_MSG_ATTR_TYPE_VALUE_OUTPUT) {
->                 arg->ret = TEE_ERROR_BAD_PARAMETERS;
-> @@ -39,7 +47,6 @@ void optee_suppl_cmd_rpmb_probe_reset(struct udevice *dev,
->         }
->
->         priv->rpmb_next_region = 0;
-> -       priv->rpmb_cur_region = 0;
->
->         arg->params[0].u.value.a = OPTEE_MSG_RPC_SHM_TYPE_APPL;
->         arg->ret = TEE_SUCCESS;
-> @@ -57,6 +64,7 @@ void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
->         ulong cid_size;
->         int ret;
->
-> +       priv->rpmb_cur_region = UFS_RPMB_NUM_REGIONS;
->         if (arg->num_params != 2 ||
->             arg->params[0].attr != OPTEE_MSG_ATTR_TYPE_VALUE_OUTPUT ||
->             arg->params[1].attr != OPTEE_MSG_ATTR_TYPE_RMEM_OUTPUT) {
-> @@ -78,7 +86,7 @@ void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
->         }
->
->         while (priv->rpmb_next_region < UFS_RPMB_NUM_REGIONS) {
-> -               unsigned int region = priv->rpmb_next_region++;
-> +               unsigned int region = priv->rpmb_next_region;
->
->                 ret = ufs_rpmb_get_region_info(scsi_dev, region, &size_mult,
->                                                &rel_wr, cid_buf);
-> @@ -86,6 +94,7 @@ void optee_suppl_cmd_rpmb_probe_next(struct udevice *dev,
->                         arg->ret = TEE_ERROR_GENERIC;
->                         return;
->                 }
-> +               priv->rpmb_next_region++;
->                 if (!ret)
->                         continue;
->
-> @@ -120,6 +129,11 @@ void optee_suppl_cmd_rpmb_frames(struct udevice *dev,
->                 return;
->         }
->
-> +       if (priv->rpmb_cur_region >= UFS_RPMB_NUM_REGIONS) {
-> +               arg->ret = TEE_ERROR_ITEM_NOT_FOUND;
-> +               return;
-> +       }
-> +
->         if (optee_rpmb_get_dev(&scsi_dev)) {
->                 arg->ret = TEE_ERROR_ITEM_NOT_FOUND;
->                 return;
->
-> --
-> 2.56.0
->
+>       def testFitFdtMissingList(self):
+>           """Test handling of a missing 'of-list' entry arg"""
+>           with self.assertRaises(ValueError) as e:
+> 
+
