@@ -1,106 +1,103 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CC37606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A14A3606A31C
 	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 10:13:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=BxwsTodT;
-	dkim=pass (2048-bit key) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b=V0EVl9/l
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=GTiOBwcC;
+	dkim=pass (2048-bit key) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b=Wi9gXzni
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E420381259;
-	Wed, 11 Nov 2026 10:13:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E2A8B4084F;
+	Wed, 11 Nov 2026 10:13:32 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id PtosoBX5ntqy; Wed, 11 Nov 2026 10:13:34 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org E7DA2811DA
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794392014;
-	b=e0ScjaP567WNwiuqnEtCRoDDrPO426PDLa3DGJeRcApQ2B7OqgsVAwMN11V5kImV9q5f
-	 PWgo1u9/H7bYx4orp2ceZ9dReI+xoffrhcc0Tq0sEd1iUfpn7L37V6DFKkoYmnZ2IhNQG
-	 835NR4s3BWvBFXnBsP0hBfvTyQyq4q/fHsEhvG4jfjIoUwvUQHZR1GMoE2t7qeDZyfP/I
-	 o5QLSxxWwmDMaeFiHMhYG+7F0fGk+6gaZqstn3R9qploTM0dQW/s7H5MCa2xD8Tzl+ZlY
-	 vM6XOHUbpoPiLqIiEId7DIfXvZ3nn9TZI2Jcpza2Z7qp90pqw0IUnNwsmTXiOWIaaiQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id VfHAVgm2PyoS; Wed, 11 Nov 2026 10:13:31 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 67D3E40873
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794392011;
+	b=FKGxOq6IVuzQK9JeqWT3U/0A34bAJ6Wlkc2Oa5aJnegoKLGYZdaXilxmW0xflYAqrE4D
+	 7UsdvjP+SdCkkfaXV3pL6sBjUY4m45NZj65255oJnjNEOwylsVhQwCaKX++97jzD05kMH
+	 rMgeIytRLF2WWHdQcfrkUNSMjfqbHzM0taw2f927HFOU9kLHvaEbMy7eLoHS49GVqFGXu
+	 hWqbeXdCRlxMit0jpw4Iz1QfSYjgpB/jamxROlI2BhDw21cXyqeLQH3Y6jB4Y1eRAi5JR
+	 WFbnPhh8kwqQmrB5GzHVRgrv8hyrEQUjgkSfxn6AvCI/mHW6tNHfUKUIxOQW40esC1w==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794392014;
+	c=relaxed/relaxed; t=1794392011;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
 	 DKIM-Signature:Received:Received:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:In-Reply-To:References:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-Virus-Scanned:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=mukpTYLmlp48Q9XHEy6OwgF9edzt7jjn1fYu2LW40is=;
-	b=kvaWfNfK1CDAJD0ZMoLzjLo8XV8GtnHCfKvTraX1ThmQM4q+ygMGU2hqGpNqGu5mP4mU
-	 lNb8TmZIlLghLAdWgvsOI/Z9BFj1CogO4D+pDa/rz9lP9rWmVDSsIWTMStwiXQKhdY2HK
-	 GJbRC2W9KpGfTSkLIAe8XY3Y2JKGKiYJDd4PcaRoBVqEBklVm/gAHm3iZRRrnWthDeB3t
-	 2FIN25EvgxMW5fjTGUvkWr6YcwzxqwoNXG6vGofXA9q2L+Z2UtVl7W4kDv9FeoDicVj81
-	 4XLvxW4WrLA6ih04I9FX+HATRF6k5psFExmCdI2aJ5pbz78/HOf/r+G/DBlm0voApiw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
-	dmarc=pass header.from=ew.tq-group.com;
-	dkim=pass header.d=ew.tq-group.com header.i=@ew.tq-group.com header.a=rsa-sha256 header.s=default2602 header.b="V0EVl9/l";
+	 X-Mailer:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Virus-Scanned:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=m7sPSslMp/XhHyrfu0osRwBQ9BwtAetyLUbXF3FxBYE=;
+	b=oNbWjFasXhBP8MDusNWNmifJqAgCluHvTJFVrVWa05twYLpFC1ZOF84YyXl/d79L4LWq
+	 PaZc2HzaQaen4Blg02JUmvB1Ibgg/GoqlVGFkVzaSc3GpcLT9imElc15snPeaESW+rrJA
+	 Ffo2WnAYLdgqksU8YnGI8fwj9X+I5Xz4Juxc/l+9wWpCjSPpHf0Y3nob5P8K6odWA/I71
+	 ZRlycnxf7+L/ebCTrTrK7x6ZFzZifTon+Ufo1wXskQwdJ7gXG+2425h/yzQeq8F5dPO0F
+	 3fH0dlLbcaNWqFqQvElKWFy6eqLCQy9XUUFDZMLopaofFzotwq0R6AirhVOnFkohU4w==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794392014;
-	bh=mukpTYLmlp48Q9XHEy6OwgF9edzt7jjn1fYu2LW40is=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=BxwsTodT8qW+8NCDGhCnRG021bhXwmg+R7nCFd2QJSuwFRjZrfhng85EO1O/0LUkh
-	 gtTflquaRggNC9bF558NR/dmJGydY4V0inrd/poPk673WDmM+zYlvqFCqKx3rLJgrf
-	 4b+8a82EN0E3XUYPO7T/XpkbYmr8LKTVaA3jOSFCXKQjiHV8ejYPTG8stL5HVB7SEQ
-	 t5iCb5O6Dct010aT2bSQzeXi49bhArDD+sQKT5ClsIozaUd85SHmm8DDSJt08W49nO
-	 gi89iwLzmlKJZkDOz6stWh728LqI+XWVeH/SknciZ1Fjb0iutouziZeRIeKy71rO7P
-	 l7oa1E2bJy5Tg==
+	d=lists.u-boot-project.org; s=default; t=1794392011;
+	bh=m7sPSslMp/XhHyrfu0osRwBQ9BwtAetyLUbXF3FxBYE=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=GTiOBwcCFAthzOagrWd76lEJHDhDd8qN3S8GQQLPDStVD/y3/d/DFghPt+5Rj4FDa
+	 e5EIJrAvQBTyy+emg9A+9qFOKtdc/YeOrTGfVifLNAbux3cvPsh18uWlICzknDzjda
+	 MSnemLyH/0P7OG10RJtY4dlSTrtFX7902fknjbfTzKg92tinLLw6CHMkNuWHPTIj+k
+	 +G8yUVCniDQ8Zt0yqeAvy0Sv4nGjl/MwFonge+rZ+lzuFSPiY2AeNzY0UYFc31qXgN
+	 9JwZgUHqdaCVuOOTw9fEDHjacRHwQ3SjFbxR5Hkgnw9Cj+tHy7mweMzM9lyTd3B1VN
+	 Vmigj/FVefi+g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E7DA2811DA;
-	Wed, 11 Nov 2026 10:13:33 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists1.osuosl.org (Postfix) with ESMTP id 48BAA17CB
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 10:13:28 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 67D3E40873;
+	Wed, 11 Nov 2026 10:13:31 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id ED07D1A6
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 10:13:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 368A781206
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 10:13:28 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id DEEFD40318
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 10:13:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id znlROKBouGDX for <u-boot@lists.u-boot-project.org>;
- Wed, 11 Nov 2026 10:13:27 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 9CFF2811D4
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=188.40.3.216
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id lgaz2g89gYgq for <u-boot@lists.u-boot-project.org>;
+ Wed, 11 Nov 2026 10:13:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 5E67940070
+Authentication-Results: smtp2.osuosl.org; arc=none smtp.remote-ip=188.40.3.216
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=188.40.3.216;
  helo=www537.your-server.de; envelope-from=nora.schiffer@ew.tq-group.com;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com
- header.a=rsa-sha256 header.s=default2602 header.b=V0EVl9/l
+ header.a=rsa-sha256 header.s=default2602 header.b=Wi9gXzni
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9CFF2811D4
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 10:13:26 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5E67940070
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 10:13:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=mukpTYLmlp48Q9XHEy6OwgF9edzt7jjn1fYu2LW40is=; b=V0EVl9/lZ0drw8xeFJ1/rLcHDZ
- xp4RyRvofVVF7dHn6YRbQkbojYwnC+BhoT7nS/blJ2tf6eNwXw7Es51nJd/E9yea7d6MQRIyivanZ
- E5Wg0BTDEpfm6hFrBcR24ul/7NPizLohj4jUHJGWEIVcKFLzQ72xLq4/T9nw14Tt2D1e+slip6Ush
- bN25IT/ovLWWtFrDRULOqFXQCnkg3FDrxlXEYM2yQIEZ7PEmnoK21lJHBm+qll4A2vVsdj6rnp13T
- jmo3H5FPl+rTLf4SWmjeuM/nnRce7yC7murwuJJLc74RyoW3mMEGWNjf4NulsVp2CMUTnruB5+nXA
- 468JAdfQ==;
+ MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References;
+ bh=m7sPSslMp/XhHyrfu0osRwBQ9BwtAetyLUbXF3FxBYE=; b=Wi9gXznixN9UvfXA8kOi3d5UdY
+ EjYDbXWIVTvkgOL58KlMNI4NRUel7EcnRh4v64fB5BoT8wvrSdiNCoT/RAwATf4gTWBqiOcEtOhV/
+ ZzOfucR+V7KuXK1XBWGeVolpvLjG3GOsHnKIxOHvXdncYg1PXdQ8bavmImnlX7jCqOG9RVP1B5DlY
+ vPvZz0gFTGGIQrhuEXERY0Z1V+TzD2fQnenlS3SSw3hhugIJnWN9mlseM+qr+RA5rVBI11tnpIgn5
+ H+Dnz4+8n53Ifj+iwrzLZbB+bbV7qRa1kVrmDU9ANglZEQMn0ByObslMGqvUgOonc3RZPDNVhmKGK
+ i56oHSiA==;
 Received: from sslproxy05.your-server.de ([78.46.172.2])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <nora.schiffer@ew.tq-group.com>)
- id 1xR5KV-0004wc-2a; Wed, 11 Nov 2026 11:13:23 +0100
+ id 1xR5KU-0004wT-2r; Wed, 11 Nov 2026 11:13:22 +0100
 Received: from localhost ([127.0.0.1])
  by sslproxy05.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <nora.schiffer@ew.tq-group.com>)
- id 1xR5KW-000Lq2-05; Wed, 11 Nov 2026 11:13:23 +0100
+ id 1xR5KV-000Lq2-0O; Wed, 11 Nov 2026 11:13:22 +0100
 From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
 To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
  Marek Vasut <marex@nabladev.com>, Peng Fan <peng.fan@nxp.com>,
@@ -108,12 +105,10 @@ To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
 Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@ew.tq-group.com,
  u-boot@lists.u-boot-project.org,
  Nora Schiffer <nora.schiffer@ew.tq-group.com>
-Subject: [PATCH v2 2/7] regulator: anatop: add support for anatop-enable-bit
-Date: Wed, 11 Nov 2026 11:12:53 +0100
-Message-ID: <083f9932c9960dccc1115f5c547633e98c1e9c8c.1794391398.git.nora.schiffer@ew.tq-group.com>
+Subject: [PATCH v2 0/7] i.MX7D anatop regulator and GPCv2 PD support
+Date: Wed, 11 Nov 2026 11:12:51 +0100
+Message-ID: <cover.1794391398.git.nora.schiffer@ew.tq-group.com>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <cover.1794391398.git.nora.schiffer@ew.tq-group.com>
-References: <cover.1794391398.git.nora.schiffer@ew.tq-group.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -128,96 +123,78 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Some variants of the anatop like the one found on the i.MX7D need to be
-enabled. Add support for the anatop-enable-bit property that is used for
-this purpose.
+The regulator and power domain parts of [1] to prepare for i.MX7D USB HSIC
+support, split off into a separate series so it can go through the
+appropriate tree.
 
-Instances without this property are considered to be always enabled, and
-attempting to disable them will fail.
+The series touches a number of i.MX8M defconfigs due to the renaming of
+the imx8m-power-domain driver. While the renaming is not strictly
+necessary, I think it makes sense to align with the Linux kernel and the
+churn isn't too bad.
 
-Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
----
- drivers/power/regulator/anatop_regulator.c | 40 ++++++++++++++++++++++
- 1 file changed, 40 insertions(+)
+The anatop and GPCv2 drivers will be enabled in the TQMa7 defconfigs in
+a follow-up series when the remaining USB HSIC support patches from [1]
+have been reworked.
 
-diff --git a/drivers/power/regulator/anatop_regulator.c b/drivers/power/regulator/anatop_regulator.c
-index 68a320bd0f8..a64b35b7363 100644
---- a/drivers/power/regulator/anatop_regulator.c
-+++ b/drivers/power/regulator/anatop_regulator.c
-@@ -42,6 +42,7 @@ struct anatop_regulator {
- 	u32 delay_reg;
- 	u32 delay_bit_shift;
- 	u32 delay_bit_width;
-+	u32 enable_mask;
- };
- 
- static u32 anatop_get_bits(struct udevice *dev, u32 addr, int bit_shift,
-@@ -154,9 +155,42 @@ static int anatop_set_voltage(struct udevice *dev, int uV)
- 	return ret;
- }
- 
-+static int anatop_set_enable(struct udevice *dev, bool enable)
-+{
-+	const struct anatop_regulator *anatop_reg = dev_get_plat(dev);
-+
-+	dev_dbg(dev, "enable = %d\n", enable);
-+
-+	if (!anatop_reg->enable_mask)
-+		return enable ? 0 : -ENOSYS;
-+	return regmap_update_bits(anatop_reg->regmap, anatop_reg->control_reg,
-+				  anatop_reg->enable_mask,
-+				  enable ? anatop_reg->enable_mask : 0);
-+}
-+
-+static int anatop_get_enable(struct udevice *dev)
-+{
-+	const struct anatop_regulator *anatop_reg = dev_get_plat(dev);
-+	u32 val;
-+	int err;
-+
-+	if (!anatop_reg->enable_mask)
-+		return 1;
-+
-+	err = regmap_read(anatop_reg->regmap, anatop_reg->control_reg, &val);
-+	if (err) {
-+		dev_dbg(dev, "cannot read reg (%d)\n", err);
-+		return err;
-+	}
-+
-+	return !!(val & anatop_reg->enable_mask);
-+}
-+
- static const struct dm_regulator_ops anatop_regulator_ops = {
- 	.set_value = anatop_set_voltage,
- 	.get_value = anatop_get_voltage,
-+	.get_enable = anatop_get_enable,
-+	.set_enable = anatop_set_enable,
- };
- 
- static int anatop_regulator_probe(struct udevice *dev)
-@@ -229,6 +263,12 @@ static int anatop_regulator_probe(struct udevice *dev)
- 	dev_read_u32(dev, "anatop-delay-bit-shift",
- 		     &anatop_reg->delay_bit_shift);
- 
-+	ret = dev_read_u32(dev,
-+			   "anatop-enable-bit",
-+			   &val);
-+	if (!ret)
-+		anatop_reg->enable_mask = BIT(val);
-+
- 	syscon = dev_get_parent(dev);
- 	if (!syscon) {
- 		dev_dbg(dev, "unable to find syscon device\n");
+Changes since v1:
+
+- Split from USB subsystem changes
+- Rebased onto current next
+
+[1] https://lists.u-boot-project.org/pipermail/u-boot/2026-October/637395.html
+
+Nora Schiffer (7):
+  regulator: anatop: fix probe without vin-supply
+  regulator: anatop: add support for anatop-enable-bit
+  power: domain: rename imx8m-power-domain to imx-gpcv2-power-domain
+  power: domain: imx-gpcv2: do not unconditionally select CONFIG_CLK
+  power: domain: imx-gpcv2: set CPU domain mapping on probe
+  power: domain: imx-gpcv2: add support for power-supply regulator
+  power: domain: imx-gpcv2: add support for i.MX7D
+
+ configs/imx8m_data_modul.config               |   2 +-
+ configs/imx8mm-cl-iot-gate-optee_defconfig    |   2 +-
+ configs/imx8mm-cl-iot-gate_defconfig          |   2 +-
+ configs/imx8mm-mx8menlo_defconfig             |   2 +-
+ configs/imx8mm-phygate-tauri-l_defconfig      |   2 +-
+ configs/imx8mm_evk_defconfig                  |   2 +-
+ configs/imx8mm_phg_defconfig                  |   2 +-
+ configs/imx8mm_venice_defconfig               |   2 +-
+ configs/imx8mn_venice_defconfig               |   2 +-
+ configs/imx8mp-libra-fpsc_defconfig           |   2 +-
+ configs/imx8mp_dhsom.config                   |   2 +-
+ configs/imx8mp_evk_defconfig                  |   2 +-
+ configs/imx8mp_venice_defconfig               |   2 +-
+ configs/imx8mq_evk_defconfig                  |   2 +-
+ configs/imx8mq_phanbell_defconfig             |   2 +-
+ configs/imx8mq_reform2_defconfig              |   2 +-
+ configs/kontron-osm-s-mx8mp.config            |   2 +-
+ configs/kontron-sl-mx8mm_defconfig            |   2 +-
+ configs/kontron_pitx_imx8m_defconfig          |   2 +-
+ configs/librem5-devkit_defconfig              |   2 +-
+ configs/librem5_defconfig                     |   2 +-
+ configs/phycore-imx8mm_defconfig              |   2 +-
+ configs/phycore-imx8mp_defconfig              |   2 +-
+ configs/pico-imx8mq_defconfig                 |   2 +-
+ configs/toradex-smarc-imx8mp_defconfig        |   2 +-
+ configs/verdin-imx8mm_defconfig               |   2 +-
+ configs/verdin-imx8mp_defconfig               |   2 +-
+ drivers/power/domain/Kconfig                  |  14 +-
+ drivers/power/domain/Makefile                 |   2 +-
+ ...ower-domain.c => imx-gpcv2-power-domain.c} | 151 ++++++++++++++----
+ drivers/power/regulator/anatop_regulator.c    |  42 ++++-
+ 31 files changed, 198 insertions(+), 65 deletions(-)
+ rename drivers/power/domain/{imx8m-power-domain.c => imx-gpcv2-power-domain.c} (76%)
+
 -- 
 TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
 Amtsgericht München, HRB 105018
 Geschäftsführer: Detlef Schneider, Rüdiger Stahl, Stefan Schneider
 https://www.tq-group.com/
-
