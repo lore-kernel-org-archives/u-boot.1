@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4A4E606A31C
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 20:12:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8446C606A31C
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 20:12:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Jafs106c;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=bs5iAU8D
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Ny0yVkQl;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xDpqvNeV
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C390060DC1;
-	Wed, 11 Nov 2026 20:12:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5F09860E50;
+	Wed, 11 Nov 2026 20:12:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id QUHOA6991sQY; Wed, 11 Nov 2026 20:12:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 3366360DFB
+ id YUihcSDtD-ek; Wed, 11 Nov 2026 20:12:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org B8F6460DA7
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794427910;
-	b=J2Uy6JTHm8FnhAXaqrknDzdSO7JHW94wxuQHj863/tgWNoLR/LcTPgM9kSZ8+s5ydxa+
-	 CTNbOcy7jUmtcWj/QWTmeFTcRvpVGBN17mZB/I+TacaOmj78K+7PjzpZ3Oba1Rmd9iyaN
-	 1CniCDxcI2gD6OQBT7vqxcCgYH5f7oKKx9IjBIRrwVUP3wjBK1uczYAiL9nCm8/gBTm0n
-	 LwxuAmQrfezx7mby6nYq/FLfjulKRhpi4vmXfDje6Dor9xqJQr/jyzsXuPhPb/fbOfm8V
-	 YmtmwNcEXI3cNm9eC5YmQr7VnTP4FDIAvksrESkHXwTm2HlAu0AOJ6kdKyHkiS3IyBw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794427911;
+	b=O34u1k16hwEpFz1FRbSu42+XomhRKt88GYIMVhBHWeZY/eFV/6WgjdKy0P+qO6mnoHl+
+	 kuxmqwDxjBnQGmMIW7q0yazCy3Dmr3gAV4Mp8jebKNE7PLrzxxmWrz3NZjM5ZU5iBym72
+	 QKYWhCZhSCi/wRq4mCeTP5AskJhxJucNbRe7HRJgLv/0jnIdWUXps8AmiVEgOxEh1EPNu
+	 /TGOPXnBOEzo6ErC9oDddVY+KjqKcnw0zE23uNTi/Kzu7dheT/fpa8aei9+Ybx9oZe+uQ
+	 LljJGsRdy9S7xaoKKzioPbbTzwhE/uUgyFfOVX5ksXyPeoEyLLW2jmbQKG/SjY4AtIg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794427910;
+	c=relaxed/relaxed; t=1794427911;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,116 +33,116 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 References:In-Reply-To:To:Cc:X-Mailer:X-BeenThere:X-Mailman-Version:
 	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=Nuk9iIZIMT0n9oC7CWVmAtrlrBznt78qqucdJDHUXW8=;
-	b=SWvVvMrQIuuwLjNjVZZYtueCSkXLdtN0qYIhNSwnvMpXQcbtqrZZCLOMO+XbJDdsRzkh
-	 PhyaCZkxGeCZQ2n+OekO7l9SuZetdnk8AyD56rNgBBbyoC4D1Tk7YXk/0IVrs0mqVHEQG
-	 G18KiIuOTKGkknTVb7P+Ph/lVDFx7tgJRzayJuunC/EdL37qRt3Z+4e4d98Dpv/G41mx/
-	 vfxqklT7d9POblFJpVnr4H2iRQskC/f95zJi/e1NyD7q9bBGQcxgvNqkci2bMBRqsKLP0
-	 nuwqPSa2CGN+LRYXI5O5m2Eh/OJ0oSDL3LOILQDyu/w8V+8RY4u+EaB+HjNSh0BC0xw==
+	bh=xMGSe4BuTId6WRjLeEj8c9x8YZqQSvqOSv6vWmCk1jE=;
+	b=VHJwDOueDOuZFIY5ySN7MkKYX7lSleujFr9kczR/JYY48ykVAPfsL0QBq7MVQ+NeWsK+
+	 p+zLOHrFrVu70n7kkQconalVRjobrnHR2ELT7HMqKPIPYVc44nUHFJ/zfSUGKblaFhCxR
+	 JYKl68mTMJFiV3icrxJoq6rdi+Q9shP2vD6xWJhDdmEfzteVNQXaRVBrmzutmLhKXqqzg
+	 aWUoyeUgkP8x7W6J6SQdmMsxLdd+JwFcPdnzGc8ylB6EabIkBgqJzrZ6LkY2otndqvLHc
+	 dh0y+9nxpMI4F8CyLyQHi76i+aS5ChLjWdySS4Tz5ejs65nHwlNkwrawgRqpxtOWm6A==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794427910;
-	bh=Nuk9iIZIMT0n9oC7CWVmAtrlrBznt78qqucdJDHUXW8=;
+	d=lists.u-boot-project.org; s=default; t=1794427911;
+	bh=xMGSe4BuTId6WRjLeEj8c9x8YZqQSvqOSv6vWmCk1jE=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Jafs106ct6E3/KezCf5vtzgroFQz58GOjVMhtENTDzLfITLUSSCKwHpTAotURm7bL
-	 GYDOVmw9k2LBxHmN81YbUASc68LBzCdiJkrfXQQdNt9SLKkvQX+mruo5v6XqZ0YK68
-	 30eD7LrL6kf6ESrpt6FoojSlnxkUJXnAlvlzxbBRW4JAVBxa32RxNyF1qYQXd+o2ic
-	 0D5/Erq3htKEqtr4cj1Dx7CVMOHgVteFvmDfH9kgeb82Z/CIHR+/FZmDU/1B1KKWIY
-	 SWOdKajls8pIVg2OCaUsfJ/hdsCPo5G86g3xVw1mVGOD5HCN4rr85/i3pplUDxG87r
-	 gltGIdvoORrUw==
+	b=Ny0yVkQl++uXMA7n9CWYff7w1JD3PvDzYTYnCZr2uGWBZM9uyNBQUCPOh3ALyq+Gb
+	 ZR3ELHi+8k3VcyHwRD/Ru2T81IZXy/FEKAL/yGAAcvq1i6N/VDCXp/3GlVt9EAYGIg
+	 FmKs8ncjXs09YzAfGObutia8QVVrpM8ZO6g1DuN6jU0pVrnHi4jzmuIM8WHd8Th9j5
+	 MwTxYKPZIVH8i70XydvqpLMJFU+v2VIN6c1l9pgUQJJdYMTCrBTFmw3JIW4Ta2Lrh3
+	 NVqv9gcctEKHIdbYJWX11Nc2UjAWm+TqCl6gc7ahK1LjLLHodgElngeDRJlj1bpizf
+	 MI0aD4YfXOgAg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3366360DFB;
-	Wed, 11 Nov 2026 20:11:50 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1C39B178C
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B8F6460DA7;
+	Wed, 11 Nov 2026 20:11:51 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 19ACAEC3
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0610E403C9
+ by smtp2.osuosl.org (Postfix) with ESMTP id F3909403C9
  for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5Gy6THP_Xd-K for <u-boot@lists.u-boot-project.org>;
- Wed, 11 Nov 2026 20:11:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org F2BD840336
+ id Hlb-u8bobxXk for <u-boot@lists.u-boot-project.org>;
+ Wed, 11 Nov 2026 20:11:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 0BBAF40336
 Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::234"
+ arc=none smtp.remote-ip="2001:4860:4864:20::31"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::234; helo=mail-oi1-x234.google.com;
+ client-ip=2001:4860:4864:20::31; helo=mail-oa1-x31.google.com;
  envelope-from=james.hilliard1@gmail.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20260707 header.b=bs5iAU8D
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
- by smtp2.osuosl.org (Postfix) with ESMTPS id F2BD840336
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:35 +0000 (UTC)
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-563a0462094so1778590b6e.1
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 12:11:35 -0800 (PST)
+ header.a=rsa-sha256 header.s=20260707 header.b=xDpqvNeV
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0BBAF40336
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 20:11:36 +0000 (UTC)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-4adaa0f72abso167425fac.1
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 12:11:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794427894; x=1795032694;
+ d=gmail.com; s=20260707; t=1794427895; x=1795032695;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Nuk9iIZIMT0n9oC7CWVmAtrlrBznt78qqucdJDHUXW8=;
- b=bs5iAU8DmSGAmIhAH7OHBwSTu+9Eav9elCYq+iYF39DFetZfOuow9+3io7UgygxyAp
- tK2ULiWWgyLmYdXkjZQ0l6LuKCq9uUuNtvYpu1b/bFcwX0lPiCn0UBhxPnw7uMtLWPnJ
- M/GSDCL/qkrY07zXKt1CbjAN1du4x/ysB8Te+znXQzutoSYQt13BQZBfpQk4jBRROgDr
- iy7Pt8dYxoPfCgGJneHwJzk7CXnstkmN3bRZRjmNPqcPEJ6b7bY+daRatUAbOZaj3Hw9
- bYiPjvUDFV21eMLiQmTbJEuk3BE3o+z4So8NcAgDjnTkE0zsv930/itJLIfNk/ulJpSR
- 7brw==
+ bh=xMGSe4BuTId6WRjLeEj8c9x8YZqQSvqOSv6vWmCk1jE=;
+ b=xDpqvNeVzXebKIMGHBe8BgYp1wke2Imak3b1fE9R9X314iLYTvVemVqlci5ntF3Oh4
+ pv3TJJ4gQA58IGVsiu/deTIXXMVxUjgBm6P7JS3VtkqLhbbhjVYnAq86P6Ctz9zWksKx
+ I5d/9wJpw++zQ//2swcBcKZ5k5zshAEchZT3n0v/8+H/6fbjZ9juYhearKVa8CQWKuxt
+ kYyrOaga2uo67BO9fW5UAgZXDoPrWbr9NjoMfgTYP7TyY7wzQJvUKWGFY5GhAGsZZ2Ck
+ A1V/7QRJ3vcCLjyRsh/1eEhwoEFE7vuC22fwH+nZkbz07vnYB7DwpL69cLIARWNyTJTQ
+ PuVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794427894; x=1795032694;
+ d=1e100.net; s=20260707; t=1794427895; x=1795032695;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Nuk9iIZIMT0n9oC7CWVmAtrlrBznt78qqucdJDHUXW8=;
- b=Zoony1KjAZ9Jk5Zf59ZUDfAK+Z0PcVnyG25idpQo30At7lvbQAKPCYqLbEANVK+jcZ
- l2qvPjY8AQAb2L9aUZZxoLg00jeKNbmp7Ty+jqj7sRGrBiZjh1Tazx4LmyIgUK5xYQHU
- /I4CAZFlU83URdKNmG2BcfBqdHMF905DJ0Dcoja9sWrk9D4+Q/bcqa2Zb6BJB+7VNUJw
- KtWNJasMbIJTJoDcY6Rth0jF9P25k89ZPQxOmO1urjcN6YmDQq5fb0ONYO2ap96sfAgh
- AcmjR6tlEJqNeEhhUsYTptIQdELLSt/ka+W6/lU+8KwmH5cLAd+daRc1ccPxhESKlhLU
- n6JQ==
+ bh=xMGSe4BuTId6WRjLeEj8c9x8YZqQSvqOSv6vWmCk1jE=;
+ b=URrCZwefIu+nM22pkePqeQqDFE/SoV/i3K+fVghnNakI5O/x5jzj0Vo1HllFTFnXRM
+ jmYm+4sQdpwCsZPbcAg9q6N1JthgB7qn5rpnEb/baCtAT27tX7vR4Ayc1eARgQtjzYWk
+ gWMacxG8vpLykiOuMr0/8bf5Cg8M0t7lwmiCTzmeazO6nk+KX3Glp6yX7BqF4nlMVqr6
+ zz0hyUF9Ifup3jEepK324z0U0m3f6ZZFEZnx+L515HJOVYMFSi6MRLpAhxal2xpW/TH7
+ 0tfuqyyVh1Ww5T5oyKH/zh4Kg0XWTV57Nq9eq/szVKLhXQY0O0NfLd7xKmvPvO/aKkyh
+ /BKA==
 X-Forwarded-Encrypted: i=1;
- AL+hErG71Nst6hKsen4XQ4TWw0YFd/Hs2F7hp6MoqB4QhiTQttoXn5y633MS4BFicUcspIk+tZicSUs=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z939qAoXY+zoYv1Edub4pQ8lVNJusWk7lZ7R2NLQbrk7fR5yayD
- BmB6gKJU8V9z+/8GDM+S5ufG+yqzhzBkr8PjYhxkp4DB/XvjZEt+NAkQ
-X-Gm-Gg: AYBFou0v/Xw7JKfjcSQE4aGjqGobOtZMoULdqcZ9iwmlExi20FsRrk3HVHARqFxmud5
- EKsIs9U45JLmZ5gLvhA+ri2TJVKC9+WJCJB0TnqmQAsBbCTfA6bQVjjAQi4r0Lx//rlDxiZ9DcC
- ufJpxR1Or30UJnTC07OPL1PoIfOyfrzp/SqkK/JwRQICX1qINFGhKNMaVzG0+vsG3eL0TuXEPVd
- +vSyj0/45tSOOegji47nuplnNaNeO56l2AqsYUCiM4MG7HCs2bBruoy1DdEMgm5r2X1ZyU0OsAG
- jxEPkackTWiQ0nj/kQ4sl4OsdpDQ0BXePeunIddkT3APyYFQxzxd3r3re9ZrZ21ybM/oGv1+79X
- wxMN6pjEvE0YMmEFKy6XtbyGrcn9uvEIgM/Zz4udBOPgARXn9f5dMA3PFAgkcNLdu4WTDgYdCd8
- sygmmKwX9nrjoUvPmEYy2sPL4URPFBrWkEnKnK812YDzkhT46cFB67i0lCtxV5wy1hS9hZ49IKG
- Scm/iDWuL3tx37tXxzB4n0p9d+DQ0vX9J/dPkymyu3Ysx2JJHs5NZ7RgIFJTVF+t2Vw8w/CMZGR
- A1ga3409KuXT96LehnWyCoFebiyMIoAN1ntWx/vhxemBSabUFYtGigkbiJG2Bkuxq9Y5ziCINen
- J5EWwtRC1Ze3QvataegO0m1ppPyLgHiBesHV0JdBrnCinHeVYNRUEkIqbfvbs5yJeXUyXAG5gQv
- dspB2yijetJXV4NG53g353kOQp4PT1WKKG0SJOPoo1ulZEG4T9qLs=
-X-Received: by 2002:a05:6808:c3eb:b0:55b:fcf7:61f8 with SMTP id
- 5614622812f47-56b97a1505fmr2877303b6e.40.1794427894271; 
- Wed, 11 Nov 2026 12:11:34 -0800 (PST)
+ AL+hErHXFYwKmmUWJfIOGmCXie+FKOeYCOVLX3TxxkioO9km6qvzlg6GR7w3sK72QLaWmDlVN7rWZyI=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+Z6BjQKs5iDL2K8bcr5vqnjq2qzIrAINH4LT6n7b9TCoE2BT4S
+ GAKuAjAJjVPFPZS1ulOt5YU8QlOa+tmsuZ4PQVKY2HKcSU/QxaW3izVp6xQo7w==
+X-Gm-Gg: AYBFou3PrsSgZ6G67fmo8WEx8TrcPpZf4UEdahWVUAo1EhhbsMmsLoUsMTvpMsZC0jP
+ KPU9RO9sXjgtfDjMdlz4lDN0t2+nsJrPjYy80eDm3GZ0A5V0rd5WYyHNovjjfvjwPZbvmsCfXfe
+ CF1vi4LqZGiMto2RYk3IRxFecBrYi7ABsuG1Y+FE8evx6wn/OfIetBE3dTnOI+sem6tv5uiQNJE
+ NsISzPc4SaOTHXfPPPyLTi3Z3FdjYZ47+8hbH8cs9BLW4uAB8ug/YVIC/+AR7riniHlLA4Wipq6
+ PSTbalbICjycyqjKIYLGM+WW2gK8nkiK5SLG9mA7BTKR1LwNndtvthzWND+YCbyzR2wxlZVklL6
+ PeolCTK32WN/Yv4rPRrxO++WWW8OPrisPx+JiIteQHQrkB7q2JKDsYASnjNqrIakfmAl6Lc0rsL
+ qL4O4V7dLaN/wZFm37G1qMp+g9vYnA8Y0lI51o3+RzccUCmItmBvVKD1LG3vDVnviwBAxOpgpBQ
+ dxlfbOmI7Z4WHfgvAhzzMQc4I8b8N8wPk20iQCMEB7SZUKnl4biFTZFZkuozlhZn+UEG8uWt+nO
+ W+Ic2E/ecrWELi7sq6jwdw4hESGkpc90X5L7wiTSLKGbjaU14/H5gHNPZdXAsWOYxdhdDc6K+iU
+ FkM0cBUy4AKzqJ27C/tyKF2C/ETm632J+AgwHk4xGCzI+ThRK4z9FJIVcDk7Or4lIKyudx5yTIT
+ yK96zu9l2SFokrTC7HMGFbWMRruAoc5LfV/jjfIRRVCftWRIXZmew=
+X-Received: by 2002:a05:6808:508f:b0:4d6:9133:cff1 with SMTP id
+ 5614622812f47-56cd673ea55mr483142b6e.24.1794427895467; 
+ Wed, 11 Nov 2026 12:11:35 -0800 (PST)
 Received: from [127.0.1.1] (174-29-1-49.hlrn.qwest.net. [174.29.1.49])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-56905d3bab2sm5863446b6e.12.2026.11.11.12.11.33
+ 5614622812f47-56905d3bab2sm5863446b6e.12.2026.11.11.12.11.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Nov 2026 12:11:33 -0800 (PST)
+ Wed, 11 Nov 2026 12:11:35 -0800 (PST)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Wed, 11 Nov 2026 13:11:20 -0700
-Subject: [PATCH 13/19] net: lwip: support IPv6 HTTP and HTTPS transfers
+Date: Wed, 11 Nov 2026 13:11:21 -0700
+Subject: [PATCH 14/19] net: lwip: support IPv6 netconsole peers
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261111-submit-lwip-ipv6-v1-v1-13-eb0ee8f8da1a@gmail.com>
+Message-Id: <20261111-submit-lwip-ipv6-v1-v1-14-eb0ee8f8da1a@gmail.com>
 References: <20261111-submit-lwip-ipv6-v1-v1-0-eb0ee8f8da1a@gmail.com>
 In-Reply-To: <20261111-submit-lwip-ipv6-v1-v1-0-eb0ee8f8da1a@gmail.com>
 To: Jerome Forissier <jerome.forissier@arm.com>, 
@@ -168,243 +168,286 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FORGED_FROMDOMAIN,
 	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Accept bracketed IPv6 URL authorities and prepare the resolved address
-before connecting. Retain the URL hostname for TLS authentication and
-send a correctly bracketed Host authority, including its port. Validate
-decimal port fields without allowing arithmetic overflow to bypass the
-range check. Let the HTTP client allocate a dual-stack TCP endpoint and
-connect using the pre-resolved address.
+Use ncip6 to select an IPv6 peer with the existing ncinport and
+ncoutport settings. Prepare the address on the shared interface, bind a
+dual-stack UDP endpoint and validate the sender in its native address
+family before passing input to the common console buffer.
+
+Poll IPv6 maintenance and check source and route readiness before each
+send, including when the environment and resolved neighbor are unchanged.
+This keeps output-only consoles from using expired configuration and
+lets them receive advertisements and renew leases. Keep regular refresh
+nonblocking after environment changes, such as a renewal updating DNS;
+only console startup waits for address preparation.
+
+Scope the configured IPv6 peer to the interface on each environment
+refresh, so input-only consoles continue accepting link-local packets
+after unrelated environment updates or a change of peer.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- lib/lwip/lwip/src/apps/http/http_client.c         | 27 +++++++-
- lib/lwip/lwip/src/include/lwip/apps/http_client.h |  3 +
- net/lwip/wget.c                                   | 79 +++++++++++++----------
- 3 files changed, 75 insertions(+), 34 deletions(-)
+ drivers/net/netconsole-lwip.c | 86 +++++++++++++++++++++++++++++++++----------
+ drivers/net/netconsole.c      | 18 ++++++++-
+ drivers/net/netconsole.h      |  8 ++++
+ 3 files changed, 91 insertions(+), 21 deletions(-)
 
-diff --git a/lib/lwip/lwip/src/apps/http/http_client.c b/lib/lwip/lwip/src/apps/http/http_client.c
-index 6ed739e13fd..1c096a7d10c 100644
---- a/lib/lwip/lwip/src/apps/http/http_client.c
-+++ b/lib/lwip/lwip/src/apps/http/http_client.c
-@@ -623,7 +623,7 @@ httpc_init_connection_common(httpc_state_t **connection, const httpc_connection_
-   req->uri = req->server_name + server_name_len + 1;
-   memcpy(req->uri, uri, uri_len + 1);
- #endif
--  req->pcb = altcp_new(settings ? settings->altcp_allocator : NULL);
-+  req->pcb = altcp_new_ip_type(settings ? settings->altcp_allocator : NULL, IPADDR_TYPE_ANY);
-   if(req->pcb == NULL) {
-     httpc_free_state(req);
-     return ERR_MEM;
-@@ -723,6 +723,31 @@ httpc_get_file(const ip_addr_t* server_addr, u16_t port, const char* uri, const
-   return ERR_OK;
- }
+diff --git a/drivers/net/netconsole-lwip.c b/drivers/net/netconsole-lwip.c
+index 87a42e5dfaa..a37c55afd3e 100644
+--- a/drivers/net/netconsole-lwip.c
++++ b/drivers/net/netconsole-lwip.c
+@@ -18,23 +18,31 @@ static struct net_lwip_ctx nc_net;
+ static struct udp_pcb *nc_pcb;
+ static unsigned int nc_users;
+ static int nc_env_id = -1;
++static ip_addr_t nc_dest;
  
-+/** Connect to an already resolved address while retaining the HTTP Host authority. */
-+err_t
-+httpc_get_file_host(const ip_addr_t* server_addr, const char* host, u16_t port, const char* uri,
-+                    const httpc_connection_t *settings, altcp_recv_fn recv_fn,
-+                    void* callback_arg, httpc_state_t **connection)
-+{
-+  httpc_state_t *req;
-+  err_t err;
-+
-+  LWIP_ERROR("invalid parameters", server_addr && host && uri && settings && recv_fn, return ERR_ARG;);
-+  err = httpc_init_connection(&req, settings, host, port, uri, recv_fn, callback_arg);
-+  if (err != ERR_OK) {
-+    return err;
-+  }
-+  err = httpc_get_internal_addr(req, settings->use_proxy ? &settings->proxy_addr : server_addr);
-+  if (err != ERR_OK) {
-+    httpc_free_state(req);
-+    return err;
-+  }
-+  if (connection != NULL) {
-+    *connection = req;
-+  }
-+  return ERR_OK;
-+}
-+
- /**
-  * @ingroup httpc
-  * HTTP client API: get a file by passing server name as string (DNS name or IP address string)
-diff --git a/lib/lwip/lwip/src/include/lwip/apps/http_client.h b/lib/lwip/lwip/src/include/lwip/apps/http_client.h
-index 50403fb4cb3..94a29656041 100644
---- a/lib/lwip/lwip/src/include/lwip/apps/http_client.h
-+++ b/lib/lwip/lwip/src/include/lwip/apps/http_client.h
-@@ -141,6 +141,9 @@ typedef struct _httpc_connection {
- 
- err_t httpc_get_file(const ip_addr_t* server_addr, u16_t port, const char* uri, const httpc_connection_t *settings,
-                      altcp_recv_fn recv_fn, void* callback_arg, httpc_state_t **connection);
-+err_t httpc_get_file_host(const ip_addr_t* server_addr, const char* host, u16_t port, const char* uri,
-+                         const httpc_connection_t *settings, altcp_recv_fn recv_fn,
-+                         void* callback_arg, httpc_state_t **connection);
- err_t httpc_get_file_dns(const char* server_name, u16_t port, const char* uri, const httpc_connection_t *settings,
-                      altcp_recv_fn recv_fn, void* callback_arg, httpc_state_t **connection);
- err_t httpc_abort(httpc_state_t *connection);
-diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-index be4a4264718..b3bb4a04198 100644
---- a/net/lwip/wget.c
-+++ b/net/lwip/wget.c
-@@ -86,8 +86,8 @@ int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len,
- static int parse_url(char *url, char *host, u16 *port, char **path,
- 		     bool *is_https)
+ static void nc_lwip_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p,
+ 			 const ip_addr_t *addr, u16_t port)
  {
--	char *p, *pp;
--	long lport;
-+	char *p, *pp, *host_end;
-+	unsigned int lport;
- 	size_t prefix_len = 0;
+-	struct in_addr src_ip = {
+-		.s_addr = ip_addr_get_ip4_u32(addr),
+-	};
+ 	struct pbuf *q;
  
- 	if (!wget_validate_uri(url)) {
-@@ -108,25 +108,33 @@ static int parse_url(char *url, char *host, u16 *port, char **path,
- 	p += prefix_len;
- 
- 	/* Parse hostname */
--	pp = strchr(p, ':');
--	if (!pp)
--		pp = strchr(p, '/');
--	if (!pp)
-+	pp = strchr(p, '/');
-+	if (!pp || strcspn(p, "\r\n\t @#") < pp - p)
- 		return -EINVAL;
--
--	if (p + SERVER_NAME_SIZE <= pp)
-+	if (*p == '[') {
-+		host_end = strchr(++p, ']');
-+		if (!host_end || host_end >= pp ||
-+		    (host_end[1] != ':' && host_end[1] != '/'))
-+			return -EINVAL;
-+		pp = host_end + 1;
++	if (IP_GET_TYPE(addr) != IP_GET_TYPE(&nc_dest))
++		goto out;
++	if (IP_IS_V6(addr)) {
++		if (!ip_addr_cmp(addr, &nc_dest))
++			goto out;
 +	} else {
-+		host_end = memchr(p, ':', pp - p);
-+		if (host_end)
-+			pp = host_end;
-+		else
-+			host_end = pp;
++		struct in_addr peer = { .s_addr = ip4_addr_get_u32(ip_2_ip4(&nc_dest)) };
++
++		if (!ip_addr_cmp(addr, &nc_dest) && !nc_is_broadcast(peer))
++			goto out;
 +	}
-+	if (host_end == p || host_end - p >= SERVER_NAME_SIZE)
- 		return -EINVAL;
- 
--	memcpy(host, p, pp - p);
--	host[pp - p] = '\0';
-+	memcpy(host, p, host_end - p);
-+	host[host_end - p] = '\0';
- 
- 	if (*pp == ':') {
- 		/* Parse port number */
- 		p = pp + 1;
--		lport = simple_strtol(p, &pp, 10);
--		if (pp && *pp != '/')
--			return -EINVAL;
--		if (lport > 65535)
-+		pp = strchr(p, '/');
-+		if (!pp || net_lwip_parse_decimal(p, pp - p, U16_MAX, &lport) || !lport)
- 			return -EINVAL;
- 		*port = (u16)lport;
- 	}
-@@ -292,10 +300,6 @@ static err_t httpc_headers_done_cb(httpc_state_t *connection, void *arg, struct
- 	return ERR_OK;
+ 	for (q = p; q; q = q->next)
+-		nc_input_packet(q->payload, src_ip, pcb->local_port, port,
+-				q->len);
+-
++		nc_input_data(q->payload, q->len);
++out:
+ 	pbuf_free(p);
  }
  
--
--#if CONFIG_IS_ENABLED(WGET_CACERT)
--#endif
--
- static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
- 			       struct net_lwip_ctx *net)
+-static int nc_lwip_refresh(void)
++static int nc_lwip_refresh(bool prepare)
  {
-@@ -305,21 +309,27 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
- #endif
- 	httpc_connection_t conn;
- 	httpc_state_t *state;
-+	ip_addr_t server;
-+	char host[SERVER_NAME_SIZE + sizeof("[]:65535")];
- 	err_t err;
+ 	struct udp_pcb *pcb;
+ 	int env_id;
+@@ -50,23 +58,40 @@ static int nc_lwip_refresh(void)
+ 		ret = net_lwip_refresh(&nc_net);
+ 		if (ret)
+ 			return ret;
++		ip_addr_set_ip4_u32_val(nc_dest, nc_settings.ip.s_addr);
++#if CONFIG_IS_ENABLED(IPV6)
++		if (nc_settings.ipv6) {
++			ip_addr_copy_from_ip6(nc_dest, nc_settings.ip6);
++			ip6_addr_assign_zone(ip_2_ip6(&nc_dest), IP6_UNICAST, nc_net.netif);
++			ret = net_lwip_ip6_init(&nc_net);
++			if (ret)
++				return ret;
++		}
++#endif
+ 		nc_env_id = env_id;
+ 	}
+ 
++	if (prepare) {
++		ret = net_lwip_prepare_addr(&nc_net, &nc_dest);
++		if (ret)
++			return ret;
++	}
++
+ 	if (nc_pcb && nc_pcb->local_port == nc_settings.in_port)
+ 		return 0;
+ 
+-	pcb = udp_new();
++	pcb = udp_new_ip_type(IPADDR_TYPE_ANY);
+ 	if (!pcb)
+ 		return -ENOMEM;
+ 
+-	err = udp_bind(pcb, IP_ADDR_ANY, nc_settings.in_port);
++	err = udp_bind(pcb, IP_ANY_TYPE, nc_settings.in_port);
+ 	if (err != ERR_OK) {
+ 		udp_remove(pcb);
+ 		return err;
+ 	}
+ 
+ 	ip_set_option(pcb, SOF_BROADCAST);
++	udp_bind_netif(pcb, nc_net.netif);
+ 	udp_recv(pcb, nc_lwip_recv, NULL);
+ 	if (nc_pcb)
+ 		udp_remove(nc_pcb);
+@@ -119,7 +144,7 @@ int nc_transport_start(void)
  	int ret;
  
--	/* if URL with hostname init dns */
--	if (!ipaddr_aton(ctx->server_name, NULL)) {
--		ret = net_lwip_dns_init(net);
--		if (ret)
--			return ret;
--	}
-+	ret = net_lwip_resolve(net, ctx->server_name, &server, IPADDR_TYPE_ANY);
-+	if (ret)
-+		return ret;
-+	ret = net_lwip_prepare_addr(net, &server);
-+	if (ret)
-+		return ret;
-+	if (strchr(ctx->server_name, ':'))
-+		snprintf(host, sizeof(host), "[%s]:%u", ctx->server_name, ctx->port);
-+	else
-+		snprintf(host, sizeof(host), "%s:%u", ctx->server_name, ctx->port);
+ 	if (nc_users) {
+-		ret = nc_lwip_refresh();
++		ret = nc_lwip_refresh(true);
+ 		if (!ret)
+ 			nc_users++;
  
- 	memset(&conn, 0, sizeof(conn));
- #if CONFIG_IS_ENABLED(WGET_HTTPS)
- 	if (is_https) {
--		char *ca;
--		size_t ca_sz;
-+		char *ca = NULL;
-+		size_t ca_sz = 0;
+@@ -130,7 +155,7 @@ int nc_transport_start(void)
+ 	if (ret)
+ 		return ret;
  
- #if CONFIG_IS_ENABLED(WGET_CACERT) || CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
- #if CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
-@@ -369,8 +379,8 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
+-	ret = nc_lwip_refresh();
++	ret = nc_lwip_refresh(true);
+ 	if (ret) {
+ 		net_lwip_stop(&nc_net);
+ 		return ret;
+@@ -162,13 +187,24 @@ int nc_transport_stop(void)
+ void nc_transport_send(const char *buf, int len)
+ {
+ 	ip4_addr_t arp_target;
+-	ip_addr_t dest;
+ 	struct pbuf *p;
+ 	err_t err;
  
- 	conn.result_fn = httpc_result_cb;
- 	conn.headers_done_fn = httpc_headers_done_cb;
--	err = httpc_get_file_dns(ctx->server_name, ctx->port, ctx->path, &conn,
--				 httpc_recv_cb, ctx, &state);
-+	err = httpc_get_file_host(&server, host, ctx->port, ctx->path, &conn,
-+				  httpc_recv_cb, ctx, &state);
- 	if (err) {
- 		ret = -ENODEV;
+-	if (!nc_users || nc_lwip_refresh())
++	if (!nc_users || nc_lwip_refresh(false))
+ 		return;
+ 
++#if CONFIG_IS_ENABLED(IPV6)
++	if (IP_IS_V6(&nc_dest)) {
++		/* Output-only consoles also need lifetime and lease maintenance. */
++		int ret = net_lwip_poll();
++
++		if (ret < 0 && ret != -EBUSY)
++			return;
++		if (net_lwip_ip6_ready(&nc_net, &nc_dest))
++			return;
++	}
++#endif
++
+ 	p = pbuf_alloc(PBUF_TRANSPORT, len, PBUF_RAM);
+ 	if (!p)
+ 		return;
+@@ -177,12 +213,24 @@ void nc_transport_send(const char *buf, int len)
+ 	if (err != ERR_OK)
  		goto out;
-@@ -379,7 +389,11 @@ static int wget_handle_request(struct wget_ctx *ctx, bool is_https,
- 	errno = 0;
  
- 	while (!ctx->done) {
--		net_lwip_poll();
-+		if (net_lwip_poll() < 0 && !ctx->done) {
-+			ctx->aborted = true;
-+			httpc_abort(state);
-+			break;
+-	ip_addr_set_ip4_u32_val(dest, nc_settings.ip.s_addr);
+-	err = udp_sendto_if(nc_pcb, p, &dest, nc_settings.out_port,
++	err = udp_sendto_if(nc_pcb, p, &nc_dest, nc_settings.out_port,
+ 			    nc_net.netif);
+-	if (err == ERR_OK &&
+-	    nc_lwip_arp_target(ip_2_ip4(&dest), &arp_target))
+-		nc_lwip_wait_for_arp(&arp_target);
++	if (err == ERR_OK) {
++		if (IP_IS_V4(&nc_dest) &&
++		    nc_lwip_arp_target(ip_2_ip4(&nc_dest), &arp_target))
++			nc_lwip_wait_for_arp(&arp_target);
++#if CONFIG_IS_ENABLED(IPV6)
++		/* ND retains this RAM pbuf while the neighbor is unresolved. */
++		if (IP_IS_V6(&nc_dest)) {
++			ulong start = get_timer(0);
++
++			while (p->ref > 1 && get_timer(start) < NC_ARP_TIMEOUT_MS) {
++				if (net_lwip_poll() < 0)
++					break;
++			}
 +		}
- 		if (!ctx->done && ctrlc()) {
- 			ctx->aborted = true;
- 			httpc_abort(state);
-@@ -443,12 +457,11 @@ int wget_do_request(ulong dst_addr, char *uri)
-  *
-  * @uri:	uri string
-  *
-- * This function follows the current U-Boot wget implementation.
-- * scheme: only "http:" is supported
-+ * Supported schemes: HTTP and, when enabled, HTTPS.
-  * authority:
-  *   - user information: not supported
-  *   - host: supported
-- *   - port: not supported(always use the default port)
-+ *   - port: optional; validated by the URL parser
-  *
-  * Uri is expected to be correctly percent encoded.
-  * This is the minimum check, control codes(0x1-0x19, 0x7F, except '\0')
-@@ -495,7 +508,7 @@ bool wget_validate_uri(char *uri)
- 	if (!str_copy)
- 		return false;
++#endif
++	}
  
--	s = str_copy + strlen("http://");
-+	s = str_copy + prefix_len;
- 	authority = strsep(&s, "/");
- 	if (!s) {
- 		log_err("invalid uri, no file path\n");
+ out:
+ 	pbuf_free(p);
+@@ -190,7 +238,7 @@ out:
+ 
+ void nc_transport_poll(bool block)
+ {
+-	if (!nc_users || nc_lwip_refresh())
++	if (!nc_users || nc_lwip_refresh(false))
+ 		return;
+ 
+ 	do {
+diff --git a/drivers/net/netconsole.c b/drivers/net/netconsole.c
+index 0a9ca1400a6..50a83004ecd 100644
+--- a/drivers/net/netconsole.c
++++ b/drivers/net/netconsole.c
+@@ -9,6 +9,7 @@
+ #include <stdio_dev.h>
+ #include <net.h>
+ #include <vsprintf.h>
++#include <linux/errno.h>
+ 
+ #include "netconsole.h"
+ 
+@@ -75,6 +76,14 @@ int nc_refresh_settings_from_env(void)
+ 				settings.in_port = settings.out_port;
+ 			}
+ 		}
++#if CONFIG_IS_ENABLED(NET_LWIP) && CONFIG_IS_ENABLED(IPV6)
++		tmp = env_get("ncip6");
++		if (tmp && *tmp) {
++			if (net_lwip_ip6_aton(tmp, &settings.ip6))
++				return -EINVAL;
++			settings.ipv6 = true;
++		}
++#endif
+ 
+ 		p = env_get("ncoutport");
+ 		if (p != NULL)
+@@ -104,8 +113,6 @@ void nc_set_input_recursion(bool enable)
+ int nc_input_packet(uchar *pkt, struct in_addr src_ip, unsigned dest_port,
+ 	unsigned src_port, unsigned len)
+ {
+-	int end, chunk;
+-
+ 	if (dest_port != nc_settings.in_port || !len)
+ 		return 0; /* not for us */
+ 
+@@ -113,6 +120,13 @@ int nc_input_packet(uchar *pkt, struct in_addr src_ip, unsigned dest_port,
+ 	    !nc_is_broadcast(nc_settings.ip))
+ 		return 0; /* not from our client */
+ 
++	return nc_input_data(pkt, len);
++}
++
++int nc_input_data(const uchar *pkt, unsigned int len)
++{
++	int end, chunk;
++
+ 	debug_cond(DEBUG_NET_PKT_TRACE, "input: \"%*.*s\"\n", len, len,
+ 		   pkt);
+ 
+diff --git a/drivers/net/netconsole.h b/drivers/net/netconsole.h
+index 11c2d1e0f48..ee7f5dfddd2 100644
+--- a/drivers/net/netconsole.h
++++ b/drivers/net/netconsole.h
+@@ -5,9 +5,16 @@
+ 
+ #include <linux/types.h>
+ #include <net-common.h>
++#if CONFIG_IS_ENABLED(NET_LWIP) && CONFIG_IS_ENABLED(IPV6)
++#include <lwip/ip6_addr.h>
++#endif
+ 
+ struct nc_settings {
+ 	struct in_addr ip;
++#if CONFIG_IS_ENABLED(NET_LWIP) && CONFIG_IS_ENABLED(IPV6)
++	ip6_addr_t ip6;
++	bool ipv6;
++#endif
+ 	u16 out_port;
+ 	u16 in_port;
+ };
+@@ -15,6 +22,7 @@ struct nc_settings {
+ extern struct nc_settings nc_settings;
+ 
+ bool nc_has_input(void);
++int nc_input_data(const uchar *pkt, unsigned int len);
+ bool nc_is_broadcast(struct in_addr ip);
+ int nc_refresh_settings_from_env(void);
+ int nc_input_packet(uchar *pkt, struct in_addr src_ip, unsigned int dest_port,
 
 -- 
 2.53.0
