@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9D9B606A885
-	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 13:31:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B887606A332
+	for <u-boot@archiver.kernel.org>; Wed, 11 Nov 2026 13:31:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=HVNaI+DW;
-	dkim=pass (2048-bit key, unprotected) header.d=siemens.com header.i=@siemens.com header.a=rsa-sha256 header.s=selector2 header.b=vHiKEUGn
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=z3JghBkL;
+	dkim=pass (2048-bit key, unprotected) header.d=siemens.com header.i=@siemens.com header.a=rsa-sha256 header.s=selector2 header.b=Xfqgw7vR
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6C6E281312;
-	Wed, 11 Nov 2026 13:31:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 056844084E;
+	Wed, 11 Nov 2026 13:31:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Qn9hBAUsE0mD; Wed, 11 Nov 2026 13:31:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5483981346
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794403866;
-	b=gGx1jTJd4LbFxyuzM9gPzowBC70j+K/LNcRyVNq5Wla3kv/rKtQGgEY5OgNXAnv+Oi/j
-	 pr66CWDmhvH/cqOWrxOPJKv0VFOp/1ciwHM5OD7TljEKo3K+VA5ADMkw32k8ZitJt5e4K
-	 3GDO6Tc1DMDMYJjUpK6TReMehUyqtYnqikJNZCjHVieecb+K3nh5/T4/rlA+nMl6hbUb8
-	 TJ6cra8BDzcSiADlvRUz4rhS8SzxfBs/rVZz+TA6dm6jE/+/9BPN7a3N7CBpZPA+tDxqv
-	 HwXL+Ky11Y1WXCR7IIFRDSqTuYQK7U8cOroCDAgIDunH/GQuJnhDO3PjqbJINQuC7MQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gliET9MciFTo; Wed, 11 Nov 2026 13:31:08 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 120064053D
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794403868;
+	b=IMasJ0uMpyAVnQTWC6Ynj6Th8g5wad3KrMs+OIr9K67n2WpmT98IaCLJ1f+ecPaB/3qt
+	 GeCrX7z8c1Q0zIVVSC1hP2xcbOCV2UQ9npJllINRBH8wR3tN0aw4ucE+p/EeaHuT9b1do
+	 dyy4Z0y6fpRUyCwMoZ6/3e9hF5xOULTsyN8Hj2vBIYuGE7lc24ZFjOfMTyNLg3WpPjIg2
+	 6FT1dNL+PzkzW4Z+/TfJOZTsx06HMhgu2U6W8bNNuzqflDeebTzntIgLorYJz0B3oMkPC
+	 RvKhIVG40NkPgRNrwM3ZgAXzOhJVQke6Kn7XTDBoZPgnd6bvd44wmSYq5HF4Et4yRVQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794403866;
+	c=relaxed/relaxed; t=1794403868;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -45,81 +45,81 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=QXUPsyBV1Y7S3xB1oyiBDlVQGGuNsXQcvYG045aSHLk=;
-	b=VCgzfUUhto+2ccJMWzQfnwbvzdiLQwAPEPLZXLSTITvFrHAz1ockoNrEGCMebHvbhDfh
-	 aDucGlO1Q9hFLO+etMYbblVyHpC0O4tjzbULi9LZQ80ZkuZF2MQ4M5aLjGC5tSPq3PaSo
-	 7EVGvAP4cuw/VWa9sLsnZm3T39xjKdGLUQuHA/2A/WKeET2fzZg83F9exBRJ7XQV3asHd
-	 RckvZMBrde1dYnyQQ1MdJpQql0HwNEnZgDUP+9oCYswiG2FrW5CoE6bhBEH/oWpwlfiMh
-	 JuIWOqWc/527pe8IVuftTity8mwFogS99Cz26ranXaDvwphZvfnQkqX+FphN7MBoekg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=g8ToQAGoJZXofVYzXKrwYIOfJ/PBe0X/YeffGHPLM6g=;
+	b=MtvLCQ0GQJvVCU77IWXGzhr7qB4wGIAlIetVfQwz0Ip6rPNagYOuHYXYLvd7bIx83yX3
+	 3Nmjkl/VSi60N1iJsHIKMX7Y1d3tDzFdxukVH+3lBlW0bfZjX8yrtGoNY/qeCY/kD63wP
+	 FxNwW7THiIw7L+2dupru6W+kF2tAwDqu/2500dXHh/NL25Fi4jLRGImoetRjeEjhzdAk6
+	 je2rKA5E46ec1VrjaUG+YNWukdrgp3AOAh3wlBOAATm69Ph7go+3N5kbJcnsE4fjuFEiE
+	 PGCVf8Z3k0iT2mdLcGg7yb801tlOyPPjB2DHBln684Rtbukeus/PMW1uD2HlNN6Gbpw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794403866;
-	bh=QXUPsyBV1Y7S3xB1oyiBDlVQGGuNsXQcvYG045aSHLk=;
+	d=lists.u-boot-project.org; s=default; t=1794403868;
+	bh=g8ToQAGoJZXofVYzXKrwYIOfJ/PBe0X/YeffGHPLM6g=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=HVNaI+DWYmCTbmcBxEjcrYoWjlFiC/w0/UXhSQOJ8dTF0R4QS0nQ0mL3NSr01k8Vi
-	 SSKhN/NEnbrSF67YIYEnj69+Vu0619Dw1qWMCfrs28oPscdi/y51mJd5NSRIVLTlci
-	 dZhR+jQfOug+P1AfARioKfqY34xPjMQwAzEadGD5SYPjHcXmx9+QsaJ5cTwl7swkNq
-	 IXMeo2bvDaGMHAYMy5ECPrzjpySFxbjB2vfJHft/uBL7k1XYOaW3vIDaatHNnwZrcj
-	 ttJ478LS9ye5aOPv8kFdHOjxe9aemK7t6VD61DBp2fLHDcOaUoqtxHPmx6JWixbxsI
-	 44AXWcHqHGkBw==
+	b=z3JghBkLTVMocCX1ozPXLlZwfBEazHa/g2DSZgWs0OIYgmvWl1bc+LikwdGj4Ocvf
+	 6loOMJr5PDlZiJF14vGE5JTwtOhObwxM1hk9bvrMR362C6Ro+irtMmhqJSFlrv6SY2
+	 rdBCituSSGIUKew2rNjx50KEmkRWFzT30joLbRuzrJk643OLJKoqEnDldTfS9FG2Oa
+	 pB1J/bP5WYssf8CW81BD/2+wrRiJAUcLPsiEA0+FXTs0jFVLQ4vgpnmUhuyQ7WQvCD
+	 iopOXYR91VZ2eD/wBesn9ijS1aSEm9FJMMSx3U+8sv7MfsmULuCkaF8pJ3hFGWcDZ1
+	 GZ7jnmK+wGV7w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5483981346;
-	Wed, 11 Nov 2026 13:31:06 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 8A17E31F
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 13:31:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 120064053D;
+	Wed, 11 Nov 2026 13:31:08 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1FC9E731
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 13:31:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8755C40445
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8682B81312
  for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 13:31:04 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id GtaMg5LEKSci for <u-boot@lists.u-boot-project.org>;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 91XoqtZGCeTW for <u-boot@lists.u-boot-project.org>;
  Wed, 11 Nov 2026 13:31:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 0169F40AA5
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 015DB812DF
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip="2a01:111:f403:c207::3"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
  client-ip=2a01:111:f403:c207::3;
  helo=mrwpr03cu001.outbound.protection.outlook.com;
  envelope-from=felix.moessbauer@siemens.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=siemens.com header.i=@siemens.com header.a=rsa-sha256
- header.s=selector2 header.b=vHiKEUGn
+ header.s=selector2 header.b=Xfqgw7vR
 Received: from MRWPR03CU001.outbound.protection.outlook.com
  (mail-francesouthazlp170110003.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c207::3])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 0169F40AA5
- for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 13:31:02 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 015DB812DF
+ for <u-boot@lists.u-boot-project.org>; Wed, 11 Nov 2026 13:31:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QXUPsyBV1Y7S3xB1oyiBDlVQGGuNsXQcvYG045aSHLk=;
- b=vHiKEUGnd9ODBRUfcInY3BZv+VuJG9D9e5oLAHee0KFqVJ+3v4tZMNpj755hDitXlT4uzONVp9+rIu1j5cUWJiQxQyC/KJx6zW1BMJeD3JIvusrsVJxGbjetOXP2tKxSGtlW55E1wUDsWIdVkmAuyfsaT0VqZNW7ois9zIvrFmCnxW/Q9hLPJv001cyO9GVI+g2s9CZvxiWysK+JqQv7U9cR+DVazQfu0/p618HRxy8akOEfv/lcVQMGw2xJ7H07oEINzLany4xAmovvd4al2RzxCxoHXkZ9P1QwSaIuR0etGdpjnU4qnsyKrpZd2yzfnZUO7mxt7hA8LHmQfq5uxw==
+ bh=g8ToQAGoJZXofVYzXKrwYIOfJ/PBe0X/YeffGHPLM6g=;
+ b=Xfqgw7vRoijYiPOAmerv/BgkA9bfxi0pmi3yhiJTzW+P0z8MMVSoR1nAukc61Rr4hVugHXjxXU8I4d5yxAOkshtnMn9YRNjQSLO7DqOjuQJs/d0gzokA0av4kiKJ+aeGZrdo8j5HtLudxBqS/6auK5K9YpH70PrtqdXIGcWhT6xHZOVvG0CMN/hycNqtzNobslupHTRx7S7PF2VltjW/0EWPG/3Cy+E1T21FFxNeUCq+c/J+3CqFvIeUl0Gza0kqC6avbFYVQn+gS0soc5XzGolavjzWYg4+2/meHDGSrFtVMGF3RWffKObNtwx4yF8vpTEFCvnaGb4fd8cfKbND2g==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=siemens.com;
 Received: from AM7PR10MB3956.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:17e::10)
- by AM7PR10MB3509.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:140::18)
+ by FRWPR10MB9356.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:d10:187::11)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.8; Wed, 11 Nov
- 2026 13:30:59 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.7; Wed, 11 Nov
+ 2026 13:30:55 +0000
 Received: from AM7PR10MB3956.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::c54c:ccd8:ebbf:477c]) by AM7PR10MB3956.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::c54c:ccd8:ebbf:477c%3]) with mapi id 15.21.0615.007; Wed, 11 Nov 2026
- 13:30:59 +0000
+ 13:30:55 +0000
 From: Felix Moessbauer <felix.moessbauer@siemens.com>
 To: u-boot@lists.u-boot-project.org
 Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, jan.kiszka@siemens.com,
  Felix Moessbauer <felix.moessbauer@siemens.com>
-Subject: [PATCH v3 3/5] efi_loader: implement EFI_TIMESTAMP_PROTOCOL
-Date: Wed, 11 Nov 2026 14:30:27 +0100
-Message-ID: <20261111133029.2538132-4-felix.moessbauer@siemens.com>
+Subject: [PATCH v3 2/5] timer: set end value for drivers with narrow counters
+Date: Wed, 11 Nov 2026 14:30:26 +0100
+Message-ID: <20261111133029.2538132-3-felix.moessbauer@siemens.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261111133029.2538132-1-felix.moessbauer@siemens.com>
 References: <20261111133029.2538132-1-felix.moessbauer@siemens.com>
@@ -131,59 +131,59 @@ X-ClientProxiedBy: SI2PR02CA0012.apcprd02.prod.outlook.com
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM7PR10MB3956:EE_|AM7PR10MB3509:EE_
-X-MS-Office365-Filtering-Correlation-Id: c26d3424-7035-4ec4-eb17-08df3ff805ae
+X-MS-TrafficTypeDiagnostic: AM7PR10MB3956:EE_|FRWPR10MB9356:EE_
+X-MS-Office365-Filtering-Correlation-Id: 23ab70dc-e03b-42d4-a63b-08df3ff8033e
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|23010399003|261009223027099003|261026121527099003|56012099006|11063799006|261028144727099003|261021121427099003|261021123027099003|261021135927099003|261022105027099003|261026140227099003|10067099003|261102123227099003|55112099003|22082099003|18002099003|6133799003|3023799007;
-X-Microsoft-Antispam-Message-Info: 81ObsGOdTqN6+dTUtR4B8pd7zOOR6ErXbImUH1Lc14Pd+/jqQCi1Q+ZMTje7b6AQOfg6+wbhdckZA+DwtJyoIS8P2Lr6XGCX1FKzbjsjuBByvRrkRuIF4l+WaqT8Sd8K2BK5xyNVCA66NvM4bJxsh1+KSuDVEhstJWtnXOhGA9hD84bgfcuaCTs3v6upaD00ojcYhG6LD6LpkUDeqicBqKld4MankX0aACQJNy800iOpsKQ+b7QdBclag7i0jpphxLlb5QwwxbnVJQoErwp43tuN082Hl8zRCvik38KiFv3RntdSKlvbufcuZI7VDZtpjjLDTt1SwxA8JVNdxn/Lr0TNd5j7JqoSj82r77HFY6lqVSMlC8D1zCCflff6ohRchuJZrfbATPdb87iTvrRTnA7RFuu+VRnVUIfDltG+taUxmNBsHMOXSMOTIdGMRSM5KIdtQPrE+muI2T51bExVrBT7SrjnAOe5+p3HAidSPKuqGVo7RJIgy4TyfjSCwc1yPqSTOGj1qORursJG/LvVV+ghPcCuHxmhMM5gy9dukL5nQdeaZEA4a7vFtrmS7bE+kxios/tn0Hquva3rm/rujExdGui1MknPctriVaI0ltiv6dAisam5WnwYskESHj3QBgMgWwaD0EGOsuqgkGoPZD23MS1mP+u4RmxkcIvoKPI=
+ ARA:13230040|366016|1800799024|23010399003|376014|18002099003|22082099003|6133799003|10067099003|55112099003|261102123227099003|11063799006|261009223027099003|261021121427099003|261026121527099003|56012099006;
+X-Microsoft-Antispam-Message-Info: N20tVL45Sz5HL7Uf8lzR3X/byztcOtQQTizErlw1cJScTEwfmGqyQi+LLbgD2oTb0d5Xtvqw5uUjMY/1iSMgSnWoNqHgMN8BzyGPvo5bJBMZUxLxv1NwclAC7fgSYUSra9rQeGOdzCmbRMfLBV8lWXU+kERs1RRbJ74RI9q0Nxrrm/9Fsj0+2eMfq9YA0YUVhOBM0KTtV3vPekW/cOeAtmrcRh2ntRTKoujH5iKg6QlqnpX1FSscpVz37ltXSfE0ybKKQK2FyXfkEr+xtDcva2ed9b71nLSp5Q4kSvU9LkiQVIOhkiu56gKthcSPm4X4J5UNVrdtaXYkeT6htm8ueWgoTU3TgpqxhWG/s3Bh94OjMohUpTRPweVepCuPU6lrlt8Gy7oOjmsHkfcSkxZV38+iBF9rLsYHXOjnzo+k82Aaekaozfoy9TzypeybAOCJp70Fh2dvpzsa3VJs4W2lAJrQOFhJqhOYN9YUmWDTbnpjUx8jeOdKRl3BPpcIUqxj8IIFQZseJ3FUv84uxpMIeMehDn4aYS+QpZr7l0iPIBXLGH4CiygaYi5DHMN068Opuio8wAlsTnBp6ufVVxMKX1kpxBBCWDvx9l9Ke/7vmOWrsuRrMf7y4mQANfvRdKVOcIKTCMoeAruZNL5j5lajs0NHc9h0agZ9RQDmXTReeSo=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM7PR10MB3956.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(261009223027099003)(261026121527099003)(56012099006)(11063799006)(261028144727099003)(261021121427099003)(261021123027099003)(261021135927099003)(261022105027099003)(261026140227099003)(10067099003)(261102123227099003)(55112099003)(22082099003)(18002099003)(6133799003)(3023799007);
+ SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(18002099003)(22082099003)(6133799003)(10067099003)(55112099003)(261102123227099003)(11063799006)(261009223027099003)(261021121427099003)(261026121527099003)(56012099006);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?41DW4G2jnL8WSsJ7iPYFFoWbAVwPWmcQhJvFf8JF/mz2zARZAy+8RisK/QQT?=
- =?us-ascii?Q?k7v6dhZ/be8DBHaNi9CcjJnUii+Ka3KPJNbK0DtWCrpokm59Bv0klXfG/swm?=
- =?us-ascii?Q?iuQtLLqbOXcJgXbf81ZZr/RC+Q7HCefDtPLawgLyrhttHRHVwIaKX5oveCSg?=
- =?us-ascii?Q?NGCMwfszri+0oXxuMIRM/apnkrQ6qlRuy6ptj/wDRT9i/drO9QLlfjexQp6K?=
- =?us-ascii?Q?Lt/8GUkLZ5eKZ6nY/Bg1Rho52VO5vqKhGGftDrksv7LLGK9OMhrsb133unMH?=
- =?us-ascii?Q?C/IRo7wpW8cuvp3xnz6H+fNTGZZhbbL6JL2+p9JBvLFW2ED3FAZNztHLLWOl?=
- =?us-ascii?Q?qwyCm+piHGHpSN+GkJb8p9dWGzpeAvZFD5NvEGnGuBfID21/tm1Jtw9EKr/Z?=
- =?us-ascii?Q?UyTIXoLEU8sJUW+3tsU1HVpOGyAl9lFcnxuypu+fKX1EM28lOzsG/RQ4RuZc?=
- =?us-ascii?Q?5fSQUB7iZv+zfWGPFH9G7b2tLYkjamXHPTuqyRF00sN1ihm1iiCS7YyBzDSZ?=
- =?us-ascii?Q?q6z87XxKvx1NbcxwuVaC6851UndSpRbfb2ZoJtIZ5LulPvmGRFtJyHBCMYvC?=
- =?us-ascii?Q?JBOUqP/cjpCUa/eb5iffXScgNiDd/U8+SPym3Zc4XIh3auXqt7Tnva2N1x67?=
- =?us-ascii?Q?CRBkqhYVNY2zmTHGIiYM49yGHKetWkeR3leNLnMPJiVES2/Q7+e0f6jJ7Z1h?=
- =?us-ascii?Q?jXLwHA/VOu2d1u/6De342JzAHLdDpzc8xC6OVLkb0Kky/vU0zmwmRh7pGGkx?=
- =?us-ascii?Q?1aIU6mUP2bDAIIm57WARhM1ix9xTv8lQyTKeBGzXNbk8QQj3fggrP/697tTn?=
- =?us-ascii?Q?dUElgaFmijdwF9yvJU/AuswASVEExXVmO6kRRJipBNR+dOmd4Q22HU3cTMyN?=
- =?us-ascii?Q?EvCdkQ741JQ7VcmD9gf8fnhYtXB5aYA2PC0w2SMBabLMN9Yjs7ACpaXI/IS6?=
- =?us-ascii?Q?nyUWA8KcrLpf2l+oK3rYfqXD19soaHchKFRH4Cs5ii5Xl2/Kv0rDSpmGHLjH?=
- =?us-ascii?Q?N8Ty2P9q/bGibD2o5PG7hJIB6glu8xd4JLUvGFueNqrrpXNfHwKvcsWT5MQv?=
- =?us-ascii?Q?ZKfcjpZmhVupA8zJ0og/NOyi8nKu5yVZ3ib7GCiQi8fZPylEeVap62oSsSrU?=
- =?us-ascii?Q?RXshl4GTEGy1oquZx7n9AyZ57VvNfCMofZRXWer3Khr5jf2k9EvKp/WvOGMA?=
- =?us-ascii?Q?5aRJljT6+/pwqv07MBkNUE7RpQdAwARhBtymTpzswZbRx2od2HvOhdIXBF0O?=
- =?us-ascii?Q?xtGtF2Kbjp9OsZH3IMKibOfcQMHg2OPDIgrbAHyzXCzgDYPLwz34NQVD7ehc?=
- =?us-ascii?Q?hySpfWSi0gvBWQZc2eor33gOuro7d8Y6HJq0xiSIfWvkWUDjuF50WIO/Snks?=
- =?us-ascii?Q?N9fk9KEaWw8Zb4VHqa7x8b8wdK+54OATu8lWYYmIdGHXcQZuNcKXhv2sOsWP?=
- =?us-ascii?Q?aGIdfb1uRSU0bPkAC6nO9VEeM/Nr90LFw5iku5hJbeagbm6QkfDcKh9XG/GN?=
- =?us-ascii?Q?kZfWPqotzpchP//v4U1cu4xNkiQAjj4ITfIq40JK65W14lUV8972JFGkg8LJ?=
- =?us-ascii?Q?avXvzAqI/6EEIKkiJBKZG8M/a+iBsHhc11s4FbdWIr6p90L3+bKYUYT9H4RZ?=
- =?us-ascii?Q?emCve1ck49g8wjz5Qi6xEZ0L0uRoj4ixpb5IevLwaJouUOGN+ISLAL8+8vQT?=
- =?us-ascii?Q?GZLFFPVl0mndikh3RqQvT46gSu3u026WhG31xSGb/O+NCOP+Sku/yop89eXD?=
- =?us-ascii?Q?bbIrOSoP9S71mYocKhmduFx3sWafNFI=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Vf7ZJkmuGMmVofgmPs8BQHkWzdQWrbW5YPDugAaVbpUR1DL/6i2MRMbA02UY?=
+ =?us-ascii?Q?Jpdu7FNcikEFF358v64ERJ+WE6M2Mm838tIFBrwnSmpu7NQPrwDhlO3jYsKA?=
+ =?us-ascii?Q?HpjYc3A+51qYPMjjM8iMmRX04hdQu/cW4v4t/XBViUowYI8k9CH7mGbxkb7c?=
+ =?us-ascii?Q?PALS0w4XEeh04qad4dWSaB6k5YPJT13NKl0xYvNnUhsEwn22MrKSrubjmvXJ?=
+ =?us-ascii?Q?iWkOD5DjQzdt9XZ1f+qJDDDwME0L20M0ya/bOMvwox4aDBgZF+e9XoseODKW?=
+ =?us-ascii?Q?hgUEIIobbcfdR98hN/Pkre9szC7tkia+jmFgl04JMiosIZWrZxDno1BVrQ7Y?=
+ =?us-ascii?Q?Utg2SIQ5xDnnodjjOJmEew+Avpsqir7adpKnZdBMxhdwbd0YFLXfUWGaTutB?=
+ =?us-ascii?Q?TIwzMdroMis9Pmr9iJ1ViW3WmwwPq4LDdvuQOH/Pfw9GDt8jKHk7b0RmodnI?=
+ =?us-ascii?Q?gEiV1IQgXUFE+1/EU2zeMuZNOK7pQ8A3Xm8kvXghm/wz/XlcA6AabponRVH8?=
+ =?us-ascii?Q?xhOlmfJHqC5Zu3QfsCrlGZdAQGBOfyeG3PvDrhwf6M8kLD6JmSPTqYRyedHC?=
+ =?us-ascii?Q?gj2vpcNRNqn/KOdIfJXQk6P/s9QYTfGhXdjUeKaaoKlEzff7MWgsw5bUYIhV?=
+ =?us-ascii?Q?mtGOlAfXNbF3RwL7wfW4H8UVclt5zmBndfn2NqwB+xHqkMfzEgk7SlTVxeBX?=
+ =?us-ascii?Q?1prMVT0LysyZUDM1yzEODpz4ux9P+WiTiawjQ/FmBcedJHxp9So4+2/JRDW/?=
+ =?us-ascii?Q?+g5kCY40laDREfPSzzUr0rmFqCWhczyz5k6HAGxUA7sYe7Bp/s6mAF2tizF+?=
+ =?us-ascii?Q?jR+j+aKkFSCh5geAOirOJ3r2Xu5Qe2bFy+ov60ACKHgMg0yjOR5PpnXz+Gb6?=
+ =?us-ascii?Q?8KOEHRpBt0wdtV4SsyJYKrffICQQE2iYKlWQ9HZHVjYo7uvmmG1WMnbFLqE3?=
+ =?us-ascii?Q?QmG/qnrsjz5I3anTgqeYSkg828v/wjodySI3QgRXLnX+mTY3FnDX+4I2qxzs?=
+ =?us-ascii?Q?TyfwqM5tpuIDUJ/1D9oqz+oJ3NI8RMNWXdlwp9LtMuAkOxF2T4jgb6qCODR3?=
+ =?us-ascii?Q?/l/L4ldM/EQkdPRTChFTkkNjrYj8JFjQAo4/BZ8dTEUHczGlxilKKvUDFTbg?=
+ =?us-ascii?Q?Cx6bNnoGd1b5RtHEnT6JNrB35xSqzLYoV1rDQSLdl0vaZOQbNqTcMvSw6rLA?=
+ =?us-ascii?Q?uj4d4anfKI9HZbnQbF8Cdh1w7DtzQDIhvaBIhGdhz04xkZiv1Bae4LwOFkzr?=
+ =?us-ascii?Q?FO36eQFgP6NpO90892mQoMkqM850zrT86dVg5Ubw3vozY6YkWO6t5qjBRPtu?=
+ =?us-ascii?Q?L+TEIqSyKg9lHrMdgOfl81IqnnkDq2rpvolskqt1noy2H64IPMjMupjQ7Wid?=
+ =?us-ascii?Q?v7HoIhv7hBl45bY262UViUMvVayXwn+NP5Sd+lVPDlUys1x8qXUxR75p+McZ?=
+ =?us-ascii?Q?Vlp24CvGw8rJzX/7I0HGCJCuTzLm8KqEa7p6tFHE5X3F5L+OBD3snB9BMSMk?=
+ =?us-ascii?Q?YKmlOTzjkc2ZigncQiBvCzbziSjkDUNqF1F/gKlmsEzmPI2VZElWAKukFOVH?=
+ =?us-ascii?Q?cEDOvaTLjrlPOHH0O8zk3c/3FG6WDJk1ZqamcUr+qgjg//hDTVix+nDbCzL+?=
+ =?us-ascii?Q?+YBxGg3gKYG/8XukyFCx1qfBfidMfivKUOg76XgYK2E5hz7WrwMY6iYFezh7?=
+ =?us-ascii?Q?X6XvEzn/6CRy+5O9RjXnNKIbjg+VQRtOGEz8ZUkIanrzRAotwuObP8KzIOz7?=
+ =?us-ascii?Q?Ld9H0D7xDYrb1bAbjil3jhCsNse5Q2Y=3D?=
 X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c26d3424-7035-4ec4-eb17-08df3ff805ae
+X-MS-Exchange-CrossTenant-Network-Message-Id: 23ab70dc-e03b-42d4-a63b-08df3ff8033e
 X-MS-Exchange-CrossTenant-AuthSource: AM7PR10MB3956.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2026 13:30:59.0581 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Nov 2026 13:30:55.1685 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ilm252hGRTk4J/SkmlzIfsRR+2bvMEPq7uWowWe+T2D7gVgzUgeEySzSXwfD1qZbL3GpSPhI1S+XqfZ7pE+I7P3v+RpFpacib/jRmsjHr/0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR10MB3509
+X-MS-Exchange-CrossTenant-UserPrincipalName: qbB/AjJn73WY2tAUqvSrdDcJMLgyho05zlkYt1vkDYUpKGYFnhoJCb76p1FeUp4ur4mllI2xkBKNByujYKooQsYdqKqjy8/3x4q8rctj4Hs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRWPR10MB9356
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -196,270 +196,112 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-EFI applications such as boot loaders (e.g systemd-boot, efibootguard)
-measure the time spent inside the bootloader prior to loading the next
-stage. These values are then forwarded via efi variables to systemd,
-which exposes them via systemd-analyze. This helps to identify where in
-the boot chain delays are happening.
+Most timer drivers extend the hardware counter to 64 bits, e.g. by
+using timer_conv_64(). The following drivers return the raw hardware
+counter value instead, which wraps before reaching U64_MAX:
 
-Without having the protocol, bootloaders have to fall back to direct
-reads of the time counters, which are architecture specific. Implement
-EFI_TIMESTAMP_PROTOCOL in the EFI loader so that applications have an
-architecture-independent interface.
+ - ast_timer: 32-bit counter reloaded with AST_TMC_RELOAD_VAL
+ - cadence-ttc: counter width given by the timer-width DT property,
+   which defaults to 16 bits according to the binding
+ - sp804_timer: 32-bit counter
+ - starfive-timer: counter reloaded with the timer-size value
+ - stm32_timer: 16- or 32-bit counter. The upper bits of the
+   auto-reload register are read-only zero on 16-bit timers, so read
+   it back after writing GPT_FREE_RUNNING to detect the width.
 
-As the implementation of the protocol is tiny, enable it by default. If
-this is not desired, set CONFIG_EFI_TIMESTAMP_PROTOCOL=n.
+Set the end value in their probe functions accordingly.
 
+Assisted-by: LLM
 Signed-off-by: Felix Moessbauer <felix.moessbauer@siemens.com>
 ---
 Changes since v2:
 
-- return driver provided values for efi_timestamp_properties.end_value
-- no other changes
+- added this patch
 
- include/efi_api.h              |  4 ++
- include/efi_loader.h           |  4 ++
- include/efi_timestamp.h        | 35 ++++++++++++++++
- lib/efi_loader/Kconfig         |  9 ++++
- lib/efi_loader/Makefile        |  1 +
- lib/efi_loader/efi_setup.c     |  7 ++++
- lib/efi_loader/efi_timestamp.c | 77 ++++++++++++++++++++++++++++++++++
- lib/uuid.c                     |  4 ++
- 8 files changed, 141 insertions(+)
- create mode 100644 include/efi_timestamp.h
- create mode 100644 lib/efi_loader/efi_timestamp.c
+Please note, that I don't have the hardware to test all of these drivers
+with narrow counters. The list of affected boards has been identified
+by an LLM. The code is fully validated by me.
 
-diff --git a/include/efi_api.h b/include/efi_api.h
-index 646581150b6..63e0ed8737a 100644
---- a/include/efi_api.h
-+++ b/include/efi_api.h
-@@ -475,6 +475,10 @@ struct efi_runtime_services {
- 	EFI_GUID(0x3152bca5, 0xeade, 0x433d, 0x86, 0x2e, \
- 		 0xc0, 0x1c, 0xdc, 0x29, 0x1f, 0x44)
+ drivers/timer/ast_timer.c      | 1 +
+ drivers/timer/cadence-ttc.c    | 7 +++++++
+ drivers/timer/sp804_timer.c    | 1 +
+ drivers/timer/starfive-timer.c | 1 +
+ drivers/timer/stm32_timer.c    | 3 +++
+ 5 files changed, 13 insertions(+)
+
+diff --git a/drivers/timer/ast_timer.c b/drivers/timer/ast_timer.c
+index 6601cab7b16..d016dda872f 100644
+--- a/drivers/timer/ast_timer.c
++++ b/drivers/timer/ast_timer.c
+@@ -46,6 +46,7 @@ static int ast_timer_probe(struct udevice *dev)
+ 		     AST_TMC_CTRL1_SHIFT(AST_TICK_TIMER));
  
-+#define EFI_TIMESTAMP_PROTOCOL_GUID \
-+	EFI_GUID(0xafbfde41, 0x2e6e, 0x4262, 0xba, 0x65, \
-+		 0x62, 0xb9, 0x23, 0x6e, 0x54, 0x95)
-+
- #define EFI_DT_FIXUP_PROTOCOL_GUID \
- 	EFI_GUID(0xe617d64c, 0xfe08, 0x46da, 0xf4, 0xdc, \
- 		 0xbb, 0xd5, 0x87, 0x0c, 0x73, 0x00)
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 7b865fe900a..dd91c953776 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -384,6 +384,8 @@ extern const efi_guid_t efi_guid_cert_type_pkcs7;
+ 	uc_priv->clock_rate = AST_TMC_RATE;
++	uc_priv->end_value = AST_TMC_RELOAD_VAL;
  
- /* GUID of RNG protocol */
- extern const efi_guid_t efi_guid_rng_protocol;
-+/* GUID of timestamp protocol */
-+extern const efi_guid_t efi_guid_timestamp_protocol;
- /* GUID of capsule update result */
- extern const efi_guid_t efi_guid_capsule_report;
- /* GUID of firmware management protocol */
-@@ -674,6 +676,8 @@ efi_status_t efi_console_register(void);
- efi_status_t efi_disks_register(void);
- /* Called by efi_init_obj_list() to install EFI_RNG_PROTOCOL */
- efi_status_t efi_rng_register(void);
-+/* Called by efi_init_obj_list() to install EFI_TIMESTAMP_PROTOCOL */
-+efi_status_t efi_timestamp_register(void);
- /* Called by efi_init_obj_list() to install EFI_TCG2_PROTOCOL */
- efi_status_t efi_tcg2_register(void);
- /* Called by efi_init_obj_list() to install RISCV_EFI_BOOT_PROTOCOL */
-diff --git a/include/efi_timestamp.h b/include/efi_timestamp.h
-new file mode 100644
-index 00000000000..0fe0c41b62d
---- /dev/null
-+++ b/include/efi_timestamp.h
-@@ -0,0 +1,35 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2026, Siemens AG
-+ */
+ 	return 0;
+ }
+diff --git a/drivers/timer/cadence-ttc.c b/drivers/timer/cadence-ttc.c
+index 3cffb1bb88d..a55ca2493f1 100644
+--- a/drivers/timer/cadence-ttc.c
++++ b/drivers/timer/cadence-ttc.c
+@@ -67,6 +67,13 @@ static u64 cadence_ttc_get_count(struct udevice *dev)
+ static int cadence_ttc_probe(struct udevice *dev)
+ {
+ 	struct cadence_ttc_priv *priv = dev_get_priv(dev);
++	struct timer_dev_priv *uc_priv = dev_get_uclass_priv(dev);
++	u32 width;
 +
-+#if !defined _EFI_TIMESTAMP_H_
-+#define _EFI_TIMESTAMP_H_
-+
-+#include <efi.h>
-+#include <efi_api.h>
-+
-+/**
-+ * struct efi_timestamp_properties - properties of the timestamp counter
-+ *
-+ * @frequency:	frequency of the timestamp counter in Hz
-+ * @end_value:	value at which the counter rolls over to zero
-+ */
-+struct efi_timestamp_properties {
-+	u64 frequency;
-+	u64 end_value;
-+};
-+
-+/**
-+ * struct efi_timestamp_protocol - EFI_TIMESTAMP_PROTOCOL
-+ *
-+ * @get_timestamp:	retrieve the current value of the timestamp counter
-+ * @get_properties:	retrieve the properties of the timestamp counter
-+ */
-+struct efi_timestamp_protocol {
-+	u64 (EFIAPI *get_timestamp)(void);
-+	efi_status_t (EFIAPI *get_properties)
-+		(struct efi_timestamp_properties *properties);
-+};
-+
-+#endif /* _EFI_TIMESTAMP_H_ */
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index c4b0c2137b8..38a48ec76fc 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -469,6 +469,15 @@ config EFI_RNG_PROTOCOL
- 	  Provide a EFI_RNG_PROTOCOL implementation using the hardware random
- 	  number generator of the platform.
++	width = dev_read_u32_default(dev, "timer-width", 16);
++	if (!width || width > 32)
++		return -EINVAL;
++	uc_priv->end_value = GENMASK_ULL(width - 1, 0);
  
-+config EFI_TIMESTAMP_PROTOCOL
-+	bool "EFI_TIMESTAMP_PROTOCOL support"
-+	depends on TIMER
-+	default y if !HAS_BOARD_SIZE_LIMIT
-+	help
-+	  Provide an EFI_TIMESTAMP_PROTOCOL implementation giving EFI
-+	  applications access to a monotonic 64-bit timestamp counter and
-+	  its frequency.
-+
- config EFI_TCG2_PROTOCOL
- 	bool "EFI_TCG2_PROTOCOL support"
- 	default y
-diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-index 567db518a8f..8ff5468ae9a 100644
---- a/lib/efi_loader/Makefile
-+++ b/lib/efi_loader/Makefile
-@@ -67,6 +67,7 @@ obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_http.o
- obj-$(CONFIG_ACPI) += efi_acpi.o
- obj-$(CONFIG_SMBIOS) += efi_smbios.o
- obj-$(CONFIG_EFI_RNG_PROTOCOL) += efi_rng.o
-+obj-$(CONFIG_EFI_TIMESTAMP_PROTOCOL) += efi_timestamp.o
- obj-$(CONFIG_EFI_TCG2_PROTOCOL) += efi_tcg2.o
- obj-$(CONFIG_EFI_RISCV_BOOT_PROTOCOL) += efi_riscv.o
- obj-$(CONFIG_EFI_LOAD_FILE2_INITRD) += efi_load_initrd.o
-diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-index f302bb62ab9..f0b3e59c3e7 100644
---- a/lib/efi_loader/efi_setup.c
-+++ b/lib/efi_loader/efi_setup.c
-@@ -325,6 +325,13 @@ efi_status_t efi_init_obj_list(void)
- 			goto out;
+ 	/* Disable interrupts for sure */
+ 	writel(0, &priv->regs->interrupt_enable1);
+diff --git a/drivers/timer/sp804_timer.c b/drivers/timer/sp804_timer.c
+index d1a5fc8c5bf..1ff1fb15f91 100644
+--- a/drivers/timer/sp804_timer.c
++++ b/drivers/timer/sp804_timer.c
+@@ -75,6 +75,7 @@ static int sp804_timer_probe(struct udevice *dev)
  	}
  
-+	/* Install EFI_TIMESTAMP_PROTOCOL */
-+	if (IS_ENABLED(CONFIG_EFI_TIMESTAMP_PROTOCOL)) {
-+		ret = efi_timestamp_register();
-+		if (ret != EFI_SUCCESS)
-+			goto out;
-+	}
+ 	uc_priv->clock_rate = clk_get_rate(&base_clk) / divider;
++	uc_priv->end_value = U32_MAX;
+ 
+ 	/* keep divider, free-running, wrapping, no IRQs, 32-bit mode */
+ 	ctlr |= SP804_CTRL_TIMER_32BIT | SP804_CTRL_TIMER_ENABLE;
+diff --git a/drivers/timer/starfive-timer.c b/drivers/timer/starfive-timer.c
+index 6b79c8858b5..10f53ecad2f 100644
+--- a/drivers/timer/starfive-timer.c
++++ b/drivers/timer/starfive-timer.c
+@@ -74,6 +74,7 @@ static int starfive_probe(struct udevice *dev)
+ 	/* Set Reload value */
+ 	priv->timer_size = dev_read_u32_default(dev, "timer-size", -1U);
+ 	writel(priv->timer_size, priv->base + STF_TIMER_LOAD);
++	uc_priv->end_value = priv->timer_size;
+ 	/* Enable to start timer */
+ 	writel(1, priv->base + STF_TIMER_ENABLE);
+ 
+diff --git a/drivers/timer/stm32_timer.c b/drivers/timer/stm32_timer.c
+index 1dc21c5c1be..a9903cbbf0c 100644
+--- a/drivers/timer/stm32_timer.c
++++ b/drivers/timer/stm32_timer.c
+@@ -109,6 +109,9 @@ static int stm32_timer_probe(struct udevice *dev)
+ 	/* load value for auto reload */
+ 	writel(GPT_FREE_RUNNING, &regs->arr);
+ 
++	/* Upper bits of ARR are read-only zero on 16-bit timers */
++	uc_priv->end_value = readl(&regs->arr);
 +
- 	if (IS_ENABLED(CONFIG_EFI_RISCV_BOOT_PROTOCOL)) {
- 		ret = efi_riscv_register();
- 		if (ret != EFI_SUCCESS)
-diff --git a/lib/efi_loader/efi_timestamp.c b/lib/efi_loader/efi_timestamp.c
-new file mode 100644
-index 00000000000..a42b6546abe
---- /dev/null
-+++ b/lib/efi_loader/efi_timestamp.c
-@@ -0,0 +1,77 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2026, Siemens AG
-+ *
-+ * Provides access to a monotonic 64-bit timestamp counter.
-+ */
-+
-+#define LOG_CATEGORY LOGC_EFI
-+
-+#include <efi_loader.h>
-+#include <efi_timestamp.h>
-+#include <log.h>
-+#include <time.h>
-+
-+const efi_guid_t efi_guid_timestamp_protocol = EFI_TIMESTAMP_PROTOCOL_GUID;
-+
-+/**
-+ * get_timestamp() - retrieve the current value of the timestamp counter
-+ *
-+ * This function implements the GetTimestamp() service of the
-+ * EFI_TIMESTAMP_PROTOCOL.
-+ *
-+ * Return:	current value of the timestamp counter
-+ */
-+static u64 EFIAPI get_timestamp(void)
-+{
-+	EFI_ENTRY("");
-+
-+	return EFI_EXIT(get_ticks());
-+}
-+
-+/**
-+ * get_properties() - retrieve the properties of the timestamp counter
-+ *
-+ * This function implements the GetProperties() service of the
-+ * EFI_TIMESTAMP_PROTOCOL.
-+ *
-+ * @properties:	buffer receiving the properties
-+ * Return:	status code
-+ */
-+static efi_status_t EFIAPI
-+get_properties(struct efi_timestamp_properties *properties)
-+{
-+	EFI_ENTRY("%p", properties);
-+
-+	if (!properties)
-+		return EFI_EXIT(EFI_INVALID_PARAMETER);
-+
-+	properties->frequency = get_tbclk();
-+	properties->end_value = get_ticks_end_value();
-+
-+	return EFI_EXIT(EFI_SUCCESS);
-+}
-+
-+static const struct efi_timestamp_protocol efi_timestamp_protocol = {
-+	.get_timestamp = get_timestamp,
-+	.get_properties = get_properties,
-+};
-+
-+/**
-+ * efi_timestamp_register() - install the EFI_TIMESTAMP_PROTOCOL
-+ *
-+ * The protocol is installed on the root node.
-+ *
-+ * Return:	status code
-+ */
-+efi_status_t efi_timestamp_register(void)
-+{
-+	efi_status_t ret;
-+
-+	ret = efi_add_protocol(efi_root, &efi_guid_timestamp_protocol,
-+			       (void *)&efi_timestamp_protocol);
-+	if (ret != EFI_SUCCESS)
-+		log_err("Cannot install EFI_TIMESTAMP_PROTOCOL\n");
-+
-+	return ret;
-+}
-diff --git a/lib/uuid.c b/lib/uuid.c
-index 16ca8f37751..d7022519f0e 100644
---- a/lib/uuid.c
-+++ b/lib/uuid.c
-@@ -189,6 +189,10 @@ static const struct {
- 		NULL, "Random Number Generator",
- 		EFI_RNG_PROTOCOL_GUID,
- 	},
-+	{
-+		NULL, "Timestamp",
-+		EFI_TIMESTAMP_PROTOCOL_GUID,
-+	},
- 	{
- 		NULL, "Simple Network",
- 		EFI_SIMPLE_NETWORK_PROTOCOL_GUID,
+ 	/* start timer */
+ 	setbits_le32(&regs->cr1, CR1_CEN);
+ 
 -- 
 2.55.0
 
