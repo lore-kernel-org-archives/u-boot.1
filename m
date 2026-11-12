@@ -1,186 +1,156 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BA18606A323
-	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 16:04:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22E1C606A31C
+	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 16:21:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DyiN0QHX;
-	dkim=pass (1024-bit key, unprotected) header.d=leica-geosystems.com header.i=@leica-geosystems.com header.a=rsa-sha256 header.s=selector1 header.b=EnKKvyk7
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=uDFky/5k;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=LGyMCM8e
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CF20B80BB7;
-	Thu, 12 Nov 2026 16:04:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id CE95A607E9;
+	Thu, 12 Nov 2026 16:21:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id syKcVfbgpAt6; Thu, 12 Nov 2026 16:04:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 17AD88120E
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794499461;
-	b=W5rLiqzLTxgZl5Pt2uvwm+dZwjlDsfl1Vy0jxxKOhdC/G75/eRtwONFErEcdPAM3LFnz
-	 sjb2Iqv8dCIbg5YpXmX9Ei09X0UM5vHMTJR5uz0Cq8fSh1HCYn05zsk6g/1PkO0txi2jk
-	 nFaDU2jVYd1El/W7cXuTtifv9R0FIz/UalBf70Nu89sOyHtcmNjP87+pt4h3iDo3ajk/9
-	 ZS+NAjK1cUWWc55nV/cCyGG7NcKvsCUg+N7NQONt3poGLDL7D+QPLhZS/gi+eWG6+jKVq
-	 gFJWoI/UD2Ru521WfN08CC4hKf48YaEXnCO2Pw9OGf3wA4+nh2ZBVz1Qv9kKhfsZvCA==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id TlZVR2k790tN; Thu, 12 Nov 2026 16:21:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C2A44607DA
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794500506;
+	b=PnQrQ2W0s791KsZyxhwzxOCTB47fu3czLkY8zKOd7FlvxUyOe2kqeQVdsWEcP/9JvUt+
+	 xsqH+ppGIsnyrQt7pL1scyBM/YxR7leJI8cxcjlDA8bhXWUshTiCoIn9jd41isRCFVmL8
+	 LeqYGmwrrgae0R2n+X4kuFOiJwo+mjXxbu6sT3S3RPePfnbjI1W2oeVkaJWMS5T3yKkrc
+	 q8tAbg9LXX71iFPrxeDCkfYpL1uRlNRwtoDCoIScmDRnjsR+Ue+S8ZDc+iF/9uIYQFbXt
+	 Vir1Mnt6FPd+DAcvA1WW1m6hEbqg8pnlCpLnlQ7AxPVxFQAk2AvIVN3c5Awjzvd8YlQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794499461;
+	c=relaxed/relaxed; t=1794500506;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:X-MS-Exchange-Authentication-Results:
-	 Received-SPF:Received:Received:From:To:Cc:Subject:Date:Message-ID:
-	 X-Mailer:In-Reply-To:References:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-OriginalArrivalTime:
-	 X-EOPAttributedMessage:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-SET-LOWER-SCL-SCANNER:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=tP4vu34GX13H98qngDG8sSO5W4nKtwStMXoupXh7hsE=;
-	b=pXPKxqXwB5DtE/dsJFxjeB2zXv7beo3KTy1YjEofgmf0jKatZPvh+x+paX/rPj0xkJjB
-	 /uy+bxisHzp4T6iEcPGXcfhAz2Ecju9GPv0v1bTpSypO+wavvv38zJwSuNmrOpiaYtHPJ
-	 69jHbs3J39TSYASNvbXyH8MYHLi3cUIjztbaBNxf9v40TTWTRJj0o12+5WHY+wHcdnONY
-	 xh9lIGZXBVtGC/RCrO3LnBvkzLFJLH/B4ZHknBhSfOHD5SqILyy+cP1smKBGKZd6XMt0P
-	 EvQBsFwWwcJEguqywYy2FR9YQpJttiQ1F9JAJA1Dw2d8vnwTUrX/vdihbtWtjgbEskQ==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=l7btu5AtFDaHluw2bXPxfBM9BEQk0fts74t1iBERlIQ=;
+	b=UbLPi/4wd80Nyge6PBJQWN/JnDFTl3WnP/TJrhgnUNOGf26NC2NcrzQI/CzYNcDo1UyI
+	 URk44Ltkdt3LqsAXtb4BWW8SQbVIVNyu9MnZ5siRVN4goPlUjHVJPV8bWr2OXbbelQN1A
+	 5LhuU+zn6JhlAJ4oaYYJl+kwA+VR24FK9joF6oxcW6Fo1y71YGJ/HNoYfbL6DQ0PeFXXT
+	 slA9PR5NuVFKN1foxLGoX2MD+cuMG9XSAYYUr7hxmsb9sKFzB8kQSxNfLp9w9NVM+TBAz
+	 YwDw7NRPqt+sKX2v1P2+o4aHnYHWj8cgznmnNL1AaOZrdM9NvXb6//GjoOU8Pz3fwjQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794499461;
-	bh=tP4vu34GX13H98qngDG8sSO5W4nKtwStMXoupXh7hsE=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794500506;
+	bh=l7btu5AtFDaHluw2bXPxfBM9BEQk0fts74t1iBERlIQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=DyiN0QHXKiXmWhpT3bD+aOcWBHBBZ2bssAUgne9i7g/8b9fNsuN2sZawuWQZfP0Do
-	 pQvKxcVepktlxE2MVxSQe02rKKqqDylePN/NHOe5U99JyZgBZxrLSpojxpKyl+RMyW
-	 K/tjaHEubvnfEoPblpup7rlYoW1Bkr2thI1ds7NDU7gLDkSZ/pXyuGk1Q5bV0hGXAb
-	 0riH5saiSpx++q03EaKcfgfON2jSR7d+I01I9yqYWoGJxXtSGbpqV1+LKB3R6+lL+9
-	 KYkewFstQO54nsmQ3YrCF/CMLs89LC26No2aZ6+gAVrNvI+C8f9hXIrSwoT25qsEfb
-	 ZTQ21nmdcBrGA==
+	b=uDFky/5kt0pNAQHJ1DkKfVl51WMVxlKGZAMl9Dwz33JFjQO22NdT32O2LcjImXj0t
+	 DAGoMmsrBmUcTL3Y/K+Ot1cg/vayJMbC7DRzRxY8d7rM5IgWSfEdLOqkvfrVPhMgw3
+	 57aQptiiKOcNnE1EkNueH9jPC1KGhO18bRjCguJziVF+YSnlO6SZ2/QlFlAPI1bUTt
+	 zm8zLCDQmkBI46Ars/e5uP0bB9OyWngyAQTd769dxZSrvoGcuYvCtJlu40Ht95yS/h
+	 G5hhx/yK6WR8xPNDBGqpghw4p98mAaP+aV8EddEZxxsFICiRDe1sqyip60JqA9IKTX
+	 gEmij30N2e2Yg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 17AD88120E;
-	Thu, 12 Nov 2026 16:04:21 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 408D1235
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:04:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C2A44607DA;
+	Thu, 12 Nov 2026 16:21:45 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0EBC4235
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:21:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 25DBD401E2
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:04:19 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0021D4087E
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:21:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 5Tq0C0-jHCLQ for <u-boot@lists.u-boot-project.org>;
- Thu, 12 Nov 2026 16:04:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 2E2D740257
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c20f::7"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c20f::7;
- helo=osppr02cu001.outbound.protection.outlook.com;
- envelope-from=johannes.schneider@leica-geosystems.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
- header.from=leica-geosystems.com
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=leica-geosystems.com header.i=@leica-geosystems.com
- header.a=rsa-sha256 header.s=selector1 header.b=EnKKvyk7
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2E2D740257
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:04:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=leica-geosystems.com; 
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tP4vu34GX13H98qngDG8sSO5W4nKtwStMXoupXh7hsE=;
- b=EnKKvyk7yXBRSOdlp3+sjXaaJkxEZMF6m79pSmXNARYhgoCBhdRO42/PbVG+XW1KrulW9vFUG0lUbNJG63/Z/xPFU7J1WDczAuAW+CDg90sQJyoxU3iWejJDBoOgzDiDO/vXh0A8s/fqMfAnIIVkaY5BhyFdVWTiTcP49Lj+DMw=
-Received: from GV3P280CA0099.SWEP280.PROD.OUTLOOK.COM (2603:10a6:150:8::34) by
- DB9PR06MB7481.eurprd06.prod.outlook.com (2603:10a6:10:260::17) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.615.10; Thu, 12 Nov 2026 16:04:10 +0000
-Received: from WA1PEPF000099CE.eurprd04.prod.outlook.com
- (2603:10a6:150:8:cafe::1f) by GV3P280CA0099.outlook.office365.com
- (2603:10a6:150:8::34) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.9 via Frontend Transport; Thu, 12
- Nov 2026 16:04:09 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 193.8.40.99)
- smtp.mailfrom=leica-geosystems.com; dkim=none (message not
- signed) header.d=none;dmarc=pass action=none
- header.from=leica-geosystems.com;
-Received-SPF: Pass (protection.outlook.com: domain of leica-geosystems.com
- designates 193.8.40.99 as permitted sender) receiver=protection.outlook.com;
- client-ip=193.8.40.99; helo=hexagon.com; pr=C
-Received: from hexagon.com (193.8.40.99) by
- WA1PEPF000099CE.mail.protection.outlook.com (10.167.242.22) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.615.4 via Frontend Transport; Thu, 12 Nov 2026 16:04:08 +0000
-Received: from aherlnxbspsrv01.lgs-net.com ([10.61.228.61]) by hexagon.com
- with Microsoft SMTPSVC(10.0.17763.1697); 
- Thu, 12 Nov 2026 17:04:08 +0100
-From: Johannes Schneider <johannes.schneider@leica-geosystems.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Eddie Kovsky <ekovsky@redhat.com>, Tom Rini <trini@konsulko.com>,
- Tobias Olausson <tobias@eub.se>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
- Enric Balletbo i Serra <eballetb@redhat.com>, a.fatoum@pengutronix.de,
- mark.kettenis@xs4all.nl, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- u-boot@lists.u-boot-project.org, Bastian <bst@pengutronix.de>,
- Rasmus Villemoes <ravi@prevas.dk>,
- Jaipaul Cheernam <jaipaul.cheernam@est.tech>
-Subject: Re: [PATCH v5 1/3] Add support for OpenSSL Provider API
-Date: Thu, 12 Nov 2026 16:01:20 +0000
-Message-ID: <20261112160408.2321891-1-johannes.schneider@leica-geosystems.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <d9d0d343-c615-4a78-9f24-197ec3fbbee7@cherry.de>
-References: <20261029201348.730274-1-ekovsky@redhat.com>
- <20261029201348.730274-2-ekovsky@redhat.com>
- <d9d0d343-c615-4a78-9f24-197ec3fbbee7@cherry.de>
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id qId6FB1wP7bZ for <u-boot@lists.u-boot-project.org>;
+ Thu, 12 Nov 2026 16:21:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A04C640842
+Authentication-Results: smtp4.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:31::9"
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=2a00:1450:4864:31::9;
+ helo=mail-wm2-x09.google.com; envelope-from=casey.connolly@linaro.org;
+ receiver=<UNKNOWN> 
+Authentication-Results: smtp4.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
+ header.s=google header.b=LGyMCM8e
+Received: from mail-wm2-x09.google.com (mail-wm2-x09.google.com
+ [IPv6:2a00:1450:4864:31::9])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A04C640842
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:21:41 +0000 (UTC)
+Received: by mail-wm2-x09.google.com with SMTP id
+ 5b1f17b1804b1-4ad5d6045d4so21116975e9.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 08:21:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1794500500; x=1795105300;
+ darn=lists.u-boot-project.org; 
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=l7btu5AtFDaHluw2bXPxfBM9BEQk0fts74t1iBERlIQ=;
+ b=LGyMCM8eNt2vv95YFlh873NyOgqVJEKRjJ+FmLno9mMH5GaPosbF5yd4BWc9J4bp/K
+ uXFr05V5/wJ2vxYyn/xDPlPOliz5EwkH57NvFIkuywNcg1i6ip/thDwgnafnmfXeaYGe
+ JYz50WuxKa7RzWirmKv7qzwGfGmwd4oqAKV7jnPy9ZNKnVwvMzk82ZlIRM879haJKS5t
+ Qk3sJv75FdkRwwdDFHLC+Bh27ykouDT3/7CzQu+nWBKDHmEddvCot1R4znnuAN/mZlxu
+ gP7crA1aEe5hKlBMALwjzaGG7ay4402C2CId2N6ABiTA8w73pKW/fFDWV9QVpbqAlUAY
+ Ev5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794500500; x=1795105300;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=l7btu5AtFDaHluw2bXPxfBM9BEQk0fts74t1iBERlIQ=;
+ b=1yCGLVqHpfLGdK88nMhC3JoNF/FTBSpvNuFlMkd2Xb8vUF8pQtW1xmDSh8gQddyY9g
+ FmD6PNS2Sv0qQRnD+5GvlMJtYPPzlB2dI1VDecNDxGuv7Vdl1TLRZfkDWrKBcGmEjh/8
+ QalI48nKhmmVfpMXI59hppzScF7l5fR5D0A4P5FKuwM2nMGsJTCiW11R24hiKKC+MPUD
+ BZZnjALsR4QY6m20Sek3Xwip/Je0ebpM77noHkMYyb7mar/hnILDo71LFoz9uxu7RPFx
+ 0N7RgbgIVwWIUsIM55LmScGld9Asix+iaFZ2YzJLFkArFppxU3m5JcVS9NzKKLYaVZRl
+ vguA==
+X-Forwarded-Encrypted: i=1;
+ AL+hErFWneCbp8sMSWMEXvdB9E7Al5PkvMjWprXfU/3ulKMtMmA4FxFudVVRMVZCxosfezhbOGpQ/3E=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z+O0JLHjY4sLPcEMhD9pVpDCFmr5OLYV2d+EWMEALKg7q1BVUFp
+ M+vB7muD2/fhuew/odP1Xqm2vZY2q0yoz3S/l+1NOVldxJwKhQPnaYEMOzbMF6mHF4E=
+X-Gm-Gg: AYBFou3T28zC9HlcJE4VSsf2GTNinNJHSCLY2jsNCTYgymMUId8KGMMADfLSVSn/nL8
+ uTq8vKrq52IA1wlSYvpKDiHvLFwNCJD+9P2ZLjnH78nrSdziq9+r/MX2LCIVYMVBxQHy2IOG/Bl
+ GtuzKPypganTQqh5Pv1NgFljJkAnxpXS6u6aWU7VXOB83kT57jd/VPOb4uO4I554UPbOSZj1X97
+ AINndSpqs5rGoKrwJPrtABTb1cw9qNUKtX5V+SyN9BNBUIPxxZ6xUKCLG0tFp7oAGCQKrDxo2JU
+ O78aMCYt9OSyRl/VW3iNQ34bzpM6/2KdRt4+6vCVAM3OfsEesTL2Z6YrUEDPxCIPMrBSY5+D/em
+ CwTWPiwODgdkt8+/NC+94lSyzWjCnnfz9oXFS6KoCeR8L0Li/TvySRmLpvUg46qNWlomLAwovbe
+ PwWlfzWecEBuP7pBeLTL7eNH1sjDFh+tqG6XqbMNeFRQlif+Mwp1Y1XL75sfa3VA+0eNSNro9lr
+ cnbt2B+Aya0eReoUFskbxoj/eVcgza/zM+I/SehqZk02xOd7kEssHeuKnpT23AT57uFhkKBSJCb
+ AHCujwyJD04Bs4H9bYpQ2TuqW2Uke2MhQwp2lgHzw56KxMXMUZ+uwIypIKNXCDoBk8X0nzH1rqL
+ 0Y3xn3e/8x+t2RxA=
+X-Received: by 2002:a05:600c:1c22:b0:4a3:d327:6ed with SMTP id
+ 5b1f17b1804b1-4ba093b5bdcmr137905415e9.17.1794500499748; 
+ Thu, 12 Nov 2026 08:21:39 -0800 (PST)
+Received: from [192.168.1.37] (p549d4ba8.dip0.t-ipconnect.de. [84.157.75.168])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb4e2842e6sm79259795e9.4.2026.11.12.08.21.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 12 Nov 2026 08:21:37 -0800 (PST)
+Message-ID: <a2b6bc3d-db58-4882-9964-ae0a1fb218e1@linaro.org>
+Date: Thu, 12 Nov 2026 17:21:36 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/4] tools: qcom: mkmbn: Updates to support ipq5210
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.u-boot-project.org
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+References: <20261106-ipq5210-v4-0-5af12cc2b601@oss.qualcomm.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+Content-Language: en-US
+In-Reply-To: <20261106-ipq5210-v4-0-5af12cc2b601@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-OriginalArrivalTime: 12 Nov 2026 16:04:08.0367 (UTC)
- FILETIME=[72F08BF0:01DD72BF]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: WA1PEPF000099CE:EE_|DB9PR06MB7481:EE_
-X-MS-Office365-Filtering-Correlation-Id: fca55214-bbd6-479b-41cc-08df40d69594
-X-SET-LOWER-SCL-SCANNER: YES
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|23010399003|36860700016|82310400026|11063799006|10067099003|4143699003|56012099006|261022115727099003|261022113327099003|261026121527099003|261022075727099003|261026140227099003|261028144727099003|261022105027099003|261021121427099003|261102123227099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: XeH4U68yucHWgEvv1cJFbLMm6R/50nuLIdxb9NEZ/sY0qj8c3Bm7v9/ZbZ5rRNOpUjszUcKqMtv1YHi+GRAu7iJz/wQFiloYGf4Rl2VbFrQ/LJWCTBhYIARg5XXmxCvGhwy1crHHvDX/WiQbPKyJbwLYHr0P6czxKeLdZUvoP4ngCay3m9pnQZOqwmtUMaVtxvlK3i8Bw+EsX8azfBq8ApQGrvyfjR72tZRBgZWQ7+dQP9G4uMjro6EHpOSwNHuQz1MnKKIRkhb+AmTmYqHptorld+WPVCQXQNYJovBiYc0gEGzxusetVOqNX8Sb5Miq5qF4aW7Blccry8Mibu4tKenZ7VjaVuNshDEM6T27pOAh+v9EylrrKN/bOC8Is566aOU4MjNC+kCNhoQHrhWIdNaRrRLHN7DniJ1V9yCiSrYJHFS07O72uZfaHZakgPKT7UvOTm/Qi5i8gmZnT+38+efvV8E/U8XNfBcDUyJF8zhrFVW9/oejoRU2XGKZyGbb7SyqNgqf5f56kbxXRUAv5Xat+y/FuU/b16xXZ5BXi3aynbCjfcBt3k6/ryIevJ4+ZIU5Qj+V/TyTjXPnpyqvBXHt9ySFFVajbkdqkK4O3AijcamlTlr3Kld6d5Wh21goMjlavUiHupiGJw6FHenL+vgTw7RLGHrn4/kdRpVkRcbCjKb70Pm92ZDd5Hpo+d6oUA/Q/cZrBac2O4umDz5P7A==
-X-Forefront-Antispam-Report: CIP:193.8.40.99; CTRY:CH; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:hexagon.com; PTR:ahersrvdom51.leica-geosystems.com;
- CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(23010399003)(36860700016)(82310400026)(11063799006)(10067099003)(4143699003)(56012099006)(261022115727099003)(261022113327099003)(261026121527099003)(261022075727099003)(261026140227099003)(261028144727099003)(261022105027099003)(261021121427099003)(261102123227099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 1tqDeA1A/ZRafY8AqGYjp00VOJRu82RsIFqjke9zb4xSlkNdXm6inTfVprHIEPMIEMtRVEIGJ3xLiLjv8ymlBiY2JTWJsA9+tGmCaWOEZXknbiMprbbdKRWo4qSbkOztdHYZPe4mm/oPoSqL4HeYgcW1SL+1DhHc3JTgt22HKYMY0eJxZNiQf9Bt1chOBvyDLRsV35nMxhuyapgH59zNB/OowIEqxAE/tJZYovSN/bs/mQvITkcWcYcMuAn1OXgNkL/Bn5eUGQsgjNQHfgN70fr0IVnCScSsYao9UEBJX3V+Ads4nQ5i1f4ZmZako5NLHt7vsGIxMPSfsfz4gF7KPwFeySqplGAXoTq0MVgbSaIeZdkfR8WMmuoZNSNcpQqfnBfHWg720z+YgNOz0nHp2/lUkZYYXMqcszssR4KJm7tVkS5/KA5CNB7a3a8JTN/S
-X-OriginatorOrg: leica-geosystems.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2026 16:04:08.6020 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fca55214-bbd6-479b-41cc-08df40d69594
-X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a; Ip=[193.8.40.99];
- Helo=[hexagon.com]
-X-MS-Exchange-CrossTenant-AuthSource: WA1PEPF000099CE.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR06MB7481
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -190,76 +160,75 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hoi Quentin,
 
-On 11/5/26 6:05 PM, Quentin Schulz wrote:
-> On 10/29/26 9:13 PM, Eddie Kovsky wrote:
-[...]
->>   static int rsa_get_pub_key(const char *keydir, const char *name,
->>   			   ENGINE *engine, EVP_PKEY **evpp)
->>   {
->> +#ifdef USE_PKCS11_ENGINE
->>   	if (engine)
->>   		return rsa_engine_get_pub_key(keydir, name, engine, evpp);
->> +#endif
->
-> issue: we should fail hard if the user requests to use engines but
-> mkimage/rsa is built without engine support otherwise we may incorrectly
-> sign/verify things with keys the user didn't expect.
-[...]
-> What I ended up doing is:
->
-> static int rsa_engine_get_pub_key(const char *keydir, const char *name,
-> 				  ENGINE *engine, EVP_PKEY **evpp)
-> {
-> #ifdef OSSL_ENGINE_SUPPORTED
-> [same code as today]
-> #else
-> 	fprintf(stderr, "rsa-sign compiled without engine support\n");
-> 	return -ENOTSUP;
-> #endif
-> }
 
-Checked on OpenSSL 4.1 with main (3cb2cbbc) plus this gating, no
-provider code:
+On 06/11/2026 07:07, Varadarajan Narayanan wrote:
+> As part of adding Qualcomm ipq5210 SoC U-Boot SPL & U-Boot proper support,
+> the mkmbn script has to be upgraded to create images that can be used
+> in the ipq5210 SoC.
+> 
+> These changes are to address the feedback in the 'Qualcomm IPQ5210 SoC
+> bringup' series [1] to use mkbn.
+> 
+> 1 - https://lore.kernel.org/u-boot/78ff6a8d-5c63-4bc2-bf1e-6b71b8f9c6cf@linaro.org/
+> 
+> While at it, fix the MBN version number for ipq5424.
+> 
+> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> 
+> ---
+> Changes in v4:
+> - Drop sm8550 full defconfig and instead add a config fragment in board/qualcomm/sm8550.config
 
-- It builds, and signs with a key file.
-- mkimage -N pkcs11 -k ...: "rsa-sign compiled without engine
-  support", exit 1. Good.
+why this change? let's keep it consistent. please resend the defconfig
+patch standalone, i'll pick the others here.
 
-[...]
->> @@ -207,13 +251,44 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
->>   		return -ENOENT;
->>   	}
+> - Remove SPL_TEXT_BASE from mkmbn.py error mesage
+> - Link to v3: https://lore.kernel.org/r/20260917-ipq5210-v3-0-d11dc3e8b16e@oss.qualcomm.com
+> 
+> Changes in v3:
+> - Fix review comments
+> 	- Add CONFIG_QCOM_GENERATE_MBN to qcom_sm8550_defconfig
+> 	- Remove load address from MbnData and for all entries in boards table
+> 	- Remove '--melf' option and modify the 'bin' argument to take
+> 	  multiple files for combining into multi-elf.
+> - '--melf' was actually not removed in v2, but included in revision
+>   history. Apologies for the mistake.
+> - Link to v2: https://lore.kernel.org/r/20260910-ipq5210-v2-0-d209f7dc0fc5@oss.qualcomm.com
+> 
+> v2:
+> - Remove 'load address' from MbnData and get it from .config
+> - Add qcom_sm8550_defconfig
+> - Use 4K alignment for padding the MBN images
+> - Remove '--melfs' option and make them positional
+> Link for v1: https://lore.kernel.org/u-boot/20260714-ipq5210-v1-0-0b98251aabbd@oss.qualcomm.com/
+> 
+> ---
+> Varadarajan Narayanan (4):
+>       tools: qcom: mkmbn: Fix ipq5424 MBN version
+>       board: qualcomm: introduce sm8550 config
+>       tools: qcom: mkmbn: Add support for ipq5210
+>       tools: qcom: mkmbn: Add support to create multi-elf
+> 
+>  board/qualcomm/config.mk     |  2 +-
+>  board/qualcomm/sm8550.config |  5 +++
+>  doc/board/qualcomm/board.rst | 12 +++++++
+>  tools/qcom/mkmbn/mkmbn.py    | 85 +++++++++++++++++++++++++++++---------------
+>  4 files changed, 75 insertions(+), 29 deletions(-)
+> ---
+> base-commit: 914dd2f5d18a3a89e4ddb6d1d97b2743618ae5ee
+> change-id: 20260714-ipq5210-52e1da5af9fc
+> 
+> Best regards,
 
-Without -N, the same hole is here. With the build fix only,
-mkimage -k "pkcs11:token=...;object=dev;pin-value=..." (key on a
-SoftHSM token) gets to fopen("pkcs11:.../dev.key"), which fails, so
-this returns -ENOENT. image-host.c ("We allow keys to be missing")
-turns that into exit 0; the signature node keeps only algo,
-key-name-hint and sign-images.
+-- 
+// Casey (she/her)
 
--k pkcs11: without -N is how 3/3 and your c3855b08 select a token key.
-Your branch closes this once providers land (fba37b81 drops the
-fopen(), b00da645 fails hard), but a build-fix-only 2027.01 has
-neither, so a pkcs11: keydir there gives an unsigned FIT and a green
-build.
-
-We already hit this -ENOENT path once, via -N: v4 compiles the engine
-out and ignores -N, so our old "-N pkcs11 -k <uri without scheme>"
-call opened "<uri>/<hint>.key", exited 0, and only the bootloader
-caught the unsigned FIT. Our current "-k pkcs11:..." call is what a
-build-fix-only 2027.01 would break the same way.
-
-Could the build fix also return -ENOTSUP for a pkcs11: keydir, like
-for -N?
-
-Gruß,
-Johannes
