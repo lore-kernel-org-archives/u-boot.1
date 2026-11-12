@@ -1,29 +1,29 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A45B9606A321
-	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 11:58:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6200606A323
+	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 11:58:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=tcwGN+sP;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=LFoKzgDs
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=tYbctY/U;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=ghn9QWXo
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 772EA608A5;
-	Thu, 12 Nov 2026 11:58:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 81B1040D82;
+	Thu, 12 Nov 2026 11:58:15 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pPvvOcbo1dy1; Thu, 12 Nov 2026 11:58:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5EEB660735
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794484683;
-	b=gqTqay43B8ioDVRF18/qi35jHAdeSga3Skvgxr4RJaLrzlqN54Q2srFASv1WuNF57Qbn
-	 OOC7+n8vebCs6nW+6QnX5P143Pkj9c2d7Y/55LlfDiFo4iG2KINu5FdbBvbQBT0xnpJCe
-	 ghFPoMPCAZLcPc+YXt6G3NCufFwj9/EGE29VrR+7DRkgJnabrQ8AsUwpmM2+BBnLNJ70M
-	 D4BWpDblLk4wLnNW5Vet/MsisVFedbrjFkE7k/U/5JAQNSrBbDWtVd41ei0P3MiiORL1z
-	 BlCBpTcbO3dbwc6SlMp+GIgWH+DJqgqyeXKRremI23ZOg9vsvcmrxZ9M6vn7xZsCZAw==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id CqS207VhRLZT; Thu, 12 Nov 2026 11:58:14 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 05491409C3
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794484694;
+	b=YX0C4UwPVh1k9ggtCLQbN4IzAwVlHXttyo1brs+99ZJqyKQP1dTpN1GftcBfLvCWXCdi
+	 BX6gsO/SrvpndEBCE7OLvlyQQW1EsuHS2iwOhAdoPNE93yo5pVolpt8znjspjolWr/3d0
+	 zCWzv/iasQg7mXeLAZIkbublwnWPcxMx4705AwT5IsvBXUB2EhFON3rp5CF5oL7BAAbZQ
+	 UsLcI8pDzR70tDhaZYSdwi8J6gIA3qjzC8dMxgXacWsYcDkris3zLhTBPdgmTtO/K4cor
+	 5ALmkiI3fkFcrrWXRmYt4CoB9eK5aWM2NsTL3rG66ygyG+REqxtuFDxq4KKRNdGyVgQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794484683;
+	c=relaxed/relaxed; t=1794484694;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -32,71 +32,71 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-ZohoMailClient:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=sSfucrxNDwMIZd+PINRhQfnqGnrErH1idqhHuAs7aC0=;
-	b=AnlHD8V7/7C0dDoTmGKLtSt3O/TapC/lZXMrXFmyIZQfpZDuSJAIeIsvxhltHmlJwjbu
-	 uR6FMx3i7Tvnnwj66UEjvj7avNe7zRy1YxJsaCjfvy8rIWf+objDfC/3U8BJuK2AKH+ry
-	 vfq6K/kcMNPL2oQnRlBlzcEhAfvCrqfLKinYVTKFIpY8GuFQVniKL6PHZCTlVJrJohp0j
-	 7uKBrQlO49gvlp2cCrtTr2ZMs4xip2icuKiHtgIR6LGgrGc4xqBnXFcpQSi9nxwSMfnuD
-	 MqyAWiP3XpYT63F/wb7DiJkq0gbpz1WBn3NJbMvx0yUoSV8uEJy5xWbZJ3rza3FUP1A==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	bh=sW6wWoQgxtuXY/0TVwiJMB7GiME6Dt0ls9JDCEKNGHk=;
+	b=DUARoG0cqRlK0R51g1NivrjN2vJWUXpuyykso45eRKheQ49eg1bIdRyLruca+zI7CKlW
+	 YJGwvim2Ea6kpxUxtV63dJuAqI1kXu/98tAWdEH4Mun4syGDddfHHOcKqYHchl3TJ2+Ny
+	 72oav2byTo94lMWTuxvtTTj/Ddyc/7YQlFUd5/y+mxPFRJu70SqatxyZBGzneBT9vH0m+
+	 eL0QsNnRJcm/4gn4iqIzSCOgOp2jN3LNKemJmqsn0Qa6zjjM5YbcxLMgdrcl3ntK+CjJO
+	 +Q+Po2eOYRZVqPs2tXxaCuVBTayH6lJIJujPHW2rhD2uB+DU/Kp/6AQR/oIZJ2H/b9w==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794484683;
-	bh=sSfucrxNDwMIZd+PINRhQfnqGnrErH1idqhHuAs7aC0=;
+	d=lists.u-boot-project.org; s=default; t=1794484694;
+	bh=sW6wWoQgxtuXY/0TVwiJMB7GiME6Dt0ls9JDCEKNGHk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=tcwGN+sPfMBs9Su0XNFEu7xMNJ5UoxjaBTJUYfTQ/aexrDL/fevaoyx/RRWYnwrMq
-	 FMgLra+I2q86AhL9/1IqZ1HChXaQBRSRfZ5ngqD3R/0TRa8vGgel4q1/vULLw+Db2o
-	 TbIgCTbE+ngoBR7TT5oGA5NkzkiEWDXrf4dytj8o13EpeTtPQUjzdhw2JQxd1H8/w+
-	 vlfNPCwhu7axoKh7zJX1g11tIpUT+IOZeVb23Ors2hojQxoBlQOMUZOR6+nVOsn6Td
-	 GesvVsneROPY7LlpIFfT5H/0G2reKawphzOdEukScoDoeaDHRKqgXPEZYTNBqyTclT
-	 WCujUNf80OOsA==
+	b=tYbctY/UC5NWik/z3qa3Nv34y8Ju4kVCsvX2u+kads8Zd/rJIkcHVyINvJqi1OKsO
+	 eYGpFmObz4J91rjejWVJJmGhJN46TIdgHNczziTcOaUwss9RHoZ+et3CoxBku39YHV
+	 qGcb+NfP15lmUKImPABa3MfWdjmTJbIMTyNt1noZPDvndS7gF9Lgkz+lYU+AwdYMH7
+	 6bGc/El30tVSuvLiER5MC4ZJefoJr41ZaSxYzMACUSTynGj+KqS3ltWHb85r5d5KWa
+	 vCzHs57Tt9IQAGBVVeJKUsWBIh286EUQlyqW/4kL8G5CY+K//9VPDUoP98BubVBnaJ
+	 Wsq3robA6335w==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5EEB660735;
-	Thu, 12 Nov 2026 11:58:03 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id DC9C31A6
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:58:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 05491409C3;
+	Thu, 12 Nov 2026 11:58:14 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 861A270B
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:58:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C2D1A400B3
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:58:01 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 737F060D53
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:58:12 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Uk8B1zHc-7l9 for <u-boot@lists.u-boot-project.org>;
- Thu, 12 Nov 2026 11:58:01 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org B127840042
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yNFRY6IS_t_f for <u-boot@lists.u-boot-project.org>;
+ Thu, 12 Nov 2026 11:58:11 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D9D556067E
+Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip=165.173.182.15
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.15;
  helo=sender5-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc
- header.a=rsa-sha256 header.s=zmail header.b=LFoKzgDs
+ header.a=rsa-sha256 header.s=zmail header.b=ghn9QWXo
 Received: from sender5-op-o15.zoho.com (sender5-op-o15.zoho.com
  [165.173.182.15])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B127840042
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:58:00 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D9D556067E
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:58:10 +0000 (UTC)
 DKIM-Signature: a=rsa-sha256;
- b=LFoKzgDskbUfQMRUrZmmci7nHDSIMp454P2KC6izHgdIcXJTmOjUweY3lhs412kNd5/Ew93PLIUe3apfrU2K/yv8U6TcWacqzoFV8ulYj8j+jHj0IzpT723wKGndLbtnmFJ498z5AqbO0fq7pmcDNLZtSNTlaUBCrS/GNTwb1lc=;
+ b=ghn9QWXoT7d7RfqLDYt39D+Mu7m14Vn9TjFPpD6zxjwmAB8xD4FeQddf3MSUpc14UQOWS3RGNxWpCRsPO7Inmwh/hFtygXO4cCtp+k/ixl2BSTNS7VK/xEpwJFERmnMA7Vft9rR+htnYa1rr5QM5xT2I/IGZImQjEIp4ibuloWA=;
  c=relaxed/relaxed; s=zmail; d=ziyao.cc; v=1;
- bh=sSfucrxNDwMIZd+PINRhQfnqGnrErH1idqhHuAs7aC0=;
+ bh=sW6wWoQgxtuXY/0TVwiJMB7GiME6Dt0ls9JDCEKNGHk=;
  h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1794484673183363.95078339803854; 
- Thu, 12 Nov 2026 03:57:53 -0800 (PST)
+Received: by smtp.zohomail.com with SMTPS id 1794484678265685.5744297462508;
+ Thu, 12 Nov 2026 03:57:58 -0800 (PST)
 From: Yao Zi <me@ziyao.cc>
 To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v7 15/20] board: emulation: Add qemu-loongarch
-Date: Thu, 12 Nov 2026 11:54:33 +0000
-Message-ID: <20261112115438.1837663-16-me@ziyao.cc>
+Subject: [PATCH v7 17/20] efi: LoongArch: Implement everything
+Date: Thu, 12 Nov 2026 11:54:35 +0000
+Message-ID: <20261112115438.1837663-18-me@ziyao.cc>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261112115438.1837663-1-me@ziyao.cc>
 References: <20261112115438.1837663-1-me@ziyao.cc>
@@ -113,395 +113,554 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-21.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
 
-Yet another generic QEMU VIRT machine.
-
-LoongArch QEMU splits the main RAM into two parts: the first 512M is
-placed at 0x0, and the rest is placed at 0x8000000. FDT locates at
-0x100000. BIOS is mapped to the first flash mapped to 0x1c000000, where
-U-Boot starts execution.
+Implement crt, relocator, linker scripts, and handling of PE relocation
+IMAGE_REL_BASED_LOONGARCH64_MARK_LA. Wire things up in Makefiles and
+Kconfig. The relocator originates from gnu-efi project.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Signed-off-by: Yao Zi <me@ziyao.cc>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 
+No changes since v6
+
+Changed from v5:
+- Remove unnecessary settings of extra-$(CONFIG_*) in
+  arch/loongarch/lib/Makefile for EFI applications
+- Whitespace/empty line clean up
+- Localize the temporary variable used only by loongarch in
+  efi_loader_relocate()
+- Fix grammar nits in the commit message
+
 No changes since v4
 
 Changed from v3
-- Remove the dummy empty devicetree
-- Fix the typo when limiting top usable RAM address top (0x1000_0000 ->
-  0x1_0000_0000)
+- Read addend from Rela entry when processing relative relocations in
+  reloc_loongarch_efi.c
+  - This has been submitted to gnu-efi upstream[1]
 
 Changed from v2
-- Add board-level documentation for qemu-loongarch
-- Mention the memory layout and booting process in commit message
-- Move TARGET_QEMU_LOONGARCH_VIRT to
-  board/emulation/qemu-loongarch/Kconfig
-- Drop duplicated selection of BOARD_LATE_INIT in
-  TARGET_QEMU_LOONGARCH_VIRT
-- Explain why RAM is limited to the lowest 4GiB
-- Drop unused board_init()
-- Rework comment in board_fdt_blob_setup()
-- Define FDT address, 0x100000, as a meaningful constant
-- Clarify how CFG_SYS_INIT_RAM_[ADDR,SIZE] are chosen
-- Add myself to MAINTAINERS
+- Mention IMAGE_REL_BASED_LOONGARCH64_MARK_LA handling in the commit
+  message, explain the instruction sequence in comments
+- Mention the origin of reloc_loongarch_efi.c
+- Fix typo in copyright of crt0_loongarch_efi.S
+- Clean up whitespaces in crt0_loongarch_efi.S
+- Fix SPDX identifier for reloc_loongarch_efi.c
+- Drop the meaningless branch for DT_PLTGOT in reloc_loongarch_efi.c
 
 Changed from v1
-- Remove dynamic setup for environment variables
----
- arch/loongarch/Kconfig                        |  4 ++
- board/emulation/qemu-loongarch/Kconfig        | 68 +++++++++++++++++++
- board/emulation/qemu-loongarch/MAINTAINERS    |  9 +++
- board/emulation/qemu-loongarch/Makefile       |  6 ++
- .../emulation/qemu-loongarch/qemu-loongarch.c | 67 ++++++++++++++++++
- .../qemu-loongarch/qemu-loongarch.env         |  5 ++
- configs/qemu-loongarch64_defconfig            | 35 ++++++++++
- doc/board/emulation/index.rst                 |  1 +
- doc/board/emulation/qemu-loongarch.rst        | 39 +++++++++++
- include/configs/qemu-loongarch.h              | 17 +++++
- 10 files changed, 251 insertions(+)
- create mode 100644 board/emulation/qemu-loongarch/Kconfig
- create mode 100644 board/emulation/qemu-loongarch/MAINTAINERS
- create mode 100644 board/emulation/qemu-loongarch/Makefile
- create mode 100644 board/emulation/qemu-loongarch/qemu-loongarch.c
- create mode 100644 board/emulation/qemu-loongarch/qemu-loongarch.env
- create mode 100644 configs/qemu-loongarch64_defconfig
- create mode 100644 doc/board/emulation/qemu-loongarch.rst
- create mode 100644 include/configs/qemu-loongarch.h
+- Replace obsolete macro __loongarch64 with __loongarch__ and
+  __loongarch_grlen
+- Support relocation of IMAGE_REL_BASED_LOONGARCH64_MARK_LA
 
-diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
-index 1f376ca291c1..a53d26a59497 100644
---- a/arch/loongarch/Kconfig
-+++ b/arch/loongarch/Kconfig
-@@ -7,9 +7,13 @@ config SYS_ARCH
- choice
- 	prompt "Target select"
- 
-+config TARGET_QEMU_LOONGARCH_VIRT
-+	bool "Support QEMU Virt Board"
+[1]: https://github.com/ncroxon/gnu-efi/pull/109
+---
+ arch/loongarch/config.mk                 |   4 +
+ arch/loongarch/lib/Makefile              |   8 +
+ arch/loongarch/lib/crt0_loongarch_efi.S  | 182 +++++++++++++++++++++++
+ arch/loongarch/lib/elf_loongarch_efi.lds |  76 ++++++++++
+ arch/loongarch/lib/reloc_loongarch_efi.c | 101 +++++++++++++
+ lib/efi_loader/Kconfig                   |   2 +-
+ lib/efi_loader/efi_helper.c              |   3 +
+ lib/efi_loader/efi_image_loader.c        |  33 ++++
+ 8 files changed, 408 insertions(+), 1 deletion(-)
+ create mode 100644 arch/loongarch/lib/crt0_loongarch_efi.S
+ create mode 100644 arch/loongarch/lib/elf_loongarch_efi.lds
+ create mode 100644 arch/loongarch/lib/reloc_loongarch_efi.c
+
+diff --git a/arch/loongarch/config.mk b/arch/loongarch/config.mk
+index 7c247400e361..bae4566e9b62 100644
+--- a/arch/loongarch/config.mk
++++ b/arch/loongarch/config.mk
+@@ -21,3 +21,7 @@ endif
+ PLATFORM_CPPFLAGS	+= -fpic
+ PLATFORM_RELFLAGS	+= -fno-common -ffunction-sections -fdata-sections
+ LDFLAGS_u-boot		+= --gc-sections -static -pie
 +
- endchoice
- 
- # board-specific options below
-+source "board/emulation/qemu-loongarch/Kconfig"
- 
- # platform-specific options below
- source "arch/loongarch/cpu/generic/Kconfig"
-diff --git a/board/emulation/qemu-loongarch/Kconfig b/board/emulation/qemu-loongarch/Kconfig
++EFI_LDS				:= elf_loongarch_efi.lds
++EFI_CRT0			:= crt0_loongarch_efi.o
++EFI_RELOC			:= reloc_loongarch_efi.o
+diff --git a/arch/loongarch/lib/Makefile b/arch/loongarch/lib/Makefile
+index 9eb9662066a5..d67cfa9ed18c 100644
+--- a/arch/loongarch/lib/Makefile
++++ b/arch/loongarch/lib/Makefile
+@@ -12,3 +12,11 @@ ifeq ($(CONFIG_$(SPL_)SYSRESET),)
+ obj-y	+= reset.o
+ endif
+ obj-y	+= setjmp.o
++
++# For building EFI apps
++CFLAGS_NON_EFI := -fstack-protector-strong
++CFLAGS_$(EFI_CRT0) := $(CFLAGS_EFI)
++CFLAGS_REMOVE_$(EFI_CRT0) := $(CFLAGS_NON_EFI)
++
++CFLAGS_$(EFI_RELOC) := $(CFLAGS_EFI)
++CFLAGS_REMOVE_$(EFI_RELOC) := $(CFLAGS_NON_EFI)
+diff --git a/arch/loongarch/lib/crt0_loongarch_efi.S b/arch/loongarch/lib/crt0_loongarch_efi.S
 new file mode 100644
-index 000000000000..94f42091e0be
+index 000000000000..ba3d9b4ad71d
 --- /dev/null
-+++ b/board/emulation/qemu-loongarch/Kconfig
-@@ -0,0 +1,68 @@
-+if TARGET_QEMU_LOONGARCH_VIRT
-+
-+config SYS_BOARD
-+	default "qemu-loongarch"
-+
-+config SYS_VENDOR
-+	default "emulation"
-+
-+config SYS_CPU
-+	default "generic"
-+
-+config SYS_CONFIG_NAME
-+	default "qemu-loongarch"
-+
-+config TEXT_BASE
-+	default 0x1c000000
-+
-+config BOARD_SPECIFIC_OPTIONS # dummy
-+	def_bool y
-+	select GENERIC_LOONGARCH
-+	imply AHCI
-+	imply PCI_INIT_R
-+	imply CMD_PCI
-+	imply CMD_POWEROFF
-+	imply CMD_SCSI
-+	imply CMD_PING
-+	imply CMD_EXT2
-+	imply CMD_EXT4
-+	imply CMD_FAT
-+	imply CMD_FS_GENERIC
-+	imply DOS_PARTITION
-+	imply ISO_PARTITION
-+	imply EFI_PARTITION
-+	imply SCSI_AHCI
-+	imply AHCI_PCI
-+	imply E1000
-+	imply PCI
-+	imply NVME_PCI
-+	imply PCIE_ECAM_GENERIC
-+	imply DM_RNG
-+	imply DM_RTC
-+	imply QFW
-+	imply QFW_MMIO
-+	imply SCSI
-+	imply SYS_NS16550
-+	imply SYSRESET
-+	imply SYSRESET_CMD_POWEROFF
-+	imply SYSRESET_SYSCON
-+	imply VIRTIO_MMIO
-+	imply VIRTIO_PCI
-+	imply VIRTIO_NET
-+	imply VIRTIO_BLK
-+	imply MTD_NOR_FLASH
-+	imply CFI_FLASH
-+	imply OF_HAS_PRIOR_STAGE
-+	imply VIDEO
-+	imply VIDEO_BOCHS
-+	imply SYS_WHITE_ON_BLACK
-+	imply USB
-+	imply USB_XHCI_HCD
-+	imply USB_XHCI_PCI
-+	imply USB_KEYBOARD
-+	imply CMD_USB
-+	imply UFS
-+	imply UFS_PCI
-+	imply BOARD_LATE_INIT
-+
-+endif
-diff --git a/board/emulation/qemu-loongarch/MAINTAINERS b/board/emulation/qemu-loongarch/MAINTAINERS
-new file mode 100644
-index 000000000000..cd9636d6dc9b
---- /dev/null
-+++ b/board/emulation/qemu-loongarch/MAINTAINERS
-@@ -0,0 +1,9 @@
-+QEMU LOONGARCH 'VIRT' BOARD
-+M:	Jiaxun Yang <jiaxun.yang@flygoat.com>
-+M:	Yao Zi <me@ziyao.cc>
-+S:	Maintained
-+F:	board/emulation/qemu-loongarch/
-+F:	board/emulation/common/
-+F:	include/configs/qemu-loongarch.h
-+F:	configs/qemu-loongarch64_defconfig
-+F:	doc/board/emulation/qemu-loongarch.rst
-diff --git a/board/emulation/qemu-loongarch/Makefile b/board/emulation/qemu-loongarch/Makefile
-new file mode 100644
-index 000000000000..a928b90780e9
---- /dev/null
-+++ b/board/emulation/qemu-loongarch/Makefile
-@@ -0,0 +1,6 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
-+#
-+
-+obj-y	+= qemu-loongarch.o
-diff --git a/board/emulation/qemu-loongarch/qemu-loongarch.c b/board/emulation/qemu-loongarch/qemu-loongarch.c
-new file mode 100644
-index 000000000000..9370e81bc276
---- /dev/null
-+++ b/board/emulation/qemu-loongarch/qemu-loongarch.c
-@@ -0,0 +1,67 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/arch/loongarch/lib/crt0_loongarch_efi.S
+@@ -0,0 +1,182 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
++ * crt0-efi-loongarch.S - PE/COFF header for LoongArch EFI applications
++ *
 + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + */
 +
-+#include <dm.h>
-+#include <dm/ofnode.h>
-+#include <env.h>
-+#include <fdtdec.h>
-+#include <image.h>
-+#include <linux/sizes.h>
-+#include <lmb.h>
-+#include <log.h>
-+#include <spl.h>
-+#include <init.h>
-+#include <usb.h>
-+#include <virtio_types.h>
-+#include <virtio.h>
++#include <asm-generic/pe.h>
++#include <asm/asm.h>
 +
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+#define VIRT_FDT_BASE 0x100000
-+
-+#if IS_ENABLED(CONFIG_MTD_NOR_FLASH)
-+int is_flash_available(void)
-+{
-+	if (!ofnode_equal(ofnode_by_compatible(ofnode_null(), "cfi-flash"),
-+			  ofnode_null()))
-+		return 1;
-+
-+	return 0;
-+}
++#if __loongarch_grlen == 64
++#define PE_MACHINE	IMAGE_FILE_MACHINE_LOONGARCH64
++#define PE_MAGIC    IMAGE_NT_OPTIONAL_HDR64_MAGIC
++#define IMG_CHARACTERISTICS \
++	(IMAGE_FILE_EXECUTABLE_IMAGE | \
++	 IMAGE_FILE_LINE_NUMS_STRIPPED | \
++	 IMAGE_FILE_LOCAL_SYMS_STRIPPED | \
++	 IMAGE_FILE_LARGE_ADDRESS_AWARE | \
++	 IMAGE_FILE_DEBUG_STRIPPED)
++#else
++#define PE_MACHINE	IMAGE_FILE_MACHINE_LOONGARCH32
++#define PE_MAGIC    IMAGE_NT_OPTIONAL_HDR32_MAGIC
++#define IMG_CHARACTERISTICS \
++	(IMAGE_FILE_EXECUTABLE_IMAGE | \
++	 IMAGE_FILE_LINE_NUMS_STRIPPED | \
++	 IMAGE_FILE_LOCAL_SYMS_STRIPPED | \
++	 IMAGE_FILE_DEBUG_STRIPPED)
 +#endif
 +
-+phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
-+{
-+	/*
-+	 * Limit RAM used by U-Boot to 4GiB to keep compatible with 32-bit-only
-+	 * DMA peripherals, for example, emulated PCI cards.
-+	 */
-+	if (gd->ram_top > 0x100000000ULL)
-+		return 0x100000000ULL;
-+
-+	return gd->ram_top;
-+}
-+
-+int board_late_init(void)
-+{
-+	/* start usb so that usb keyboard can be used as input device */
-+	if (CONFIG_IS_ENABLED(USB_KEYBOARD))
-+		usb_init();
++	.section	.text.head
 +
 +	/*
-+	 * Make sure virtio bus is enumerated so that peripherals
-+	 * on the virtio bus can be discovered by their drivers
++	 * Magic "MZ" signature for PE/COFF
 +	 */
-+	virtio_init();
-+
-+	return 0;
-+}
-+
-+int board_fdt_blob_setup(void **fdtp)
-+{
-+	/* QEMU stores the DTB to 0x100000 */
-+	*fdtp = (void *)VIRT_FDT_BASE;
-+	return 0;
-+}
-diff --git a/board/emulation/qemu-loongarch/qemu-loongarch.env b/board/emulation/qemu-loongarch/qemu-loongarch.env
-new file mode 100644
-index 000000000000..7655f26d8d6b
---- /dev/null
-+++ b/board/emulation/qemu-loongarch/qemu-loongarch.env
-@@ -0,0 +1,5 @@
-+stdin=serial,usbkbd
-+stdout=serial,vidconsole
-+stderr=serial,vidconsole
-+
-+boot_targets=qfw usb scsi virtio nvme dhcp
-diff --git a/configs/qemu-loongarch64_defconfig b/configs/qemu-loongarch64_defconfig
-new file mode 100644
-index 000000000000..5d5ae44f8e56
---- /dev/null
-+++ b/configs/qemu-loongarch64_defconfig
-@@ -0,0 +1,35 @@
-+CONFIG_LOONGARCH=y
-+CONFIG_SYS_MALLOC_LEN=0x800000
-+CONFIG_SYS_MALLOC_F_LEN=0x4000
-+CONFIG_NR_DRAM_BANKS=8
-+CONFIG_ENV_SIZE=0x20000
-+CONFIG_DM_RESET=y
-+CONFIG_SYS_LOAD_ADDR=0x02000000
-+CONFIG_SHOW_REGS=y
-+# CONFIG_OF_BOARD_FIXUP is not set
-+CONFIG_SYS_PCI_64BIT=y
-+CONFIG_FIT=y
-+CONFIG_BOOTSTD_FULL=y
-+CONFIG_SYS_BOOTM_LEN=0x4000000
-+CONFIG_USE_BOOTARGS=y
-+CONFIG_BOOTARGS_SUBST=y
-+CONFIG_DISPLAY_CPUINFO=y
-+CONFIG_DISPLAY_BOARDINFO=y
-+# CONFIG_CMD_MII is not set
-+CONFIG_CMD_2048=y
-+CONFIG_CMD_RTC=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_SYSBOOT=y
-+CONFIG_CMD_QFW=y
-+CONFIG_PARTITION_TYPE_GUID=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_BLKMAP=y
-+CONFIG_EFI_MEDIA=y
-+CONFIG_DM_MMC=y
-+CONFIG_DM_MTD=y
-+CONFIG_FLASH_SHOW_PROGRESS=0
-+CONFIG_SYS_MAX_FLASH_BANKS=2
-+CONFIG_PCI_REGION_MULTI_ENTRY=y
-+CONFIG_DM_REBOOT_MODE=y
-+CONFIG_RESET_SYSCON=y
-+CONFIG_HEXDUMP=y
-diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
-index 5d0dd83d8aca..a142cd3360ac 100644
---- a/doc/board/emulation/index.rst
-+++ b/doc/board/emulation/index.rst
-@@ -11,6 +11,7 @@ Emulation
-    network
-    video
-    qemu-arm
-+   qemu-loongarch
-    qemu-mips
-    qemu-ppce500
-    qemu-riscv
-diff --git a/doc/board/emulation/qemu-loongarch.rst b/doc/board/emulation/qemu-loongarch.rst
-new file mode 100644
-index 000000000000..0d97dc7df797
---- /dev/null
-+++ b/doc/board/emulation/qemu-loongarch.rst
-@@ -0,0 +1,39 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+.. Copyright (C) 2026 Yao Zi <me@ziyao.cc>
-+
-+QEMU LoongArch
-+==============
-+
-+QEMU for LoongArch supports a special 'virt' machine designed for emulation
-+and virtualization purpose. This document describes how to run U-Boot under it.
-+Only 64-bit LoongArch is supported at this time.
-+
-+The 'virt' platform provides the following as the basic functionality:
-+
-+    - A freely configurable amount of CPU cores
-+    - U-Boot loaded and executing in the emulated flash, mapped to 0x1c000000.
-+    - A generated device tree blob placed at 0x100000.
-+    - A freely configurable amount of RAM, described by the DTB, starting at
-+      0x0. RAM above 512MiB is placed at 0x80000000.
-+    - A NS16550A serial port, discoverable via the DTB.
-+    - An in-core constant frequency timer.
-+    - syscon-reboot and syscon-poweroff for powering off and rebooting the
-+      system.
-+    - A generic ECAM-based PCI host controller, discoverable via the DTB.
-+
-+Additionally, a number of optional peripherals can be added to the PCI bus.
-+
-+See :doc:`../../develop/devicetree/dt_qemu` for information on how to see the
-+devicetree actually generated by QEMU.
-+
-+Building and Running
-+--------------------
-+
-+Set the CROSS_COMPILE environment variable as usual, and run::
-+
-+    make qemu-loongarch64_defconfig
-+    make
-+
-+The minimal QEMU command line to get U-Boot up and running is::
-+
-+    qemu-system-loongarch64 -M virt -nographic -bios u-boot.bin
-diff --git a/include/configs/qemu-loongarch.h b/include/configs/qemu-loongarch.h
-new file mode 100644
-index 000000000000..7103dc1b02ef
---- /dev/null
-+++ b/include/configs/qemu-loongarch.h
-@@ -0,0 +1,17 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
-+ */
-+
-+#ifndef __CONFIG_H
-+#define __CONFIG_H
-+
-+/*
-+ * LoongArch QEMU always places a part of the RAM at 0x0. These options are only
-+ * intended to specify the initial stack pointer address, and can be replaced
-+ * with CUSTOM_SYS_INIT_SP_ADDR when it's supported in the future.
-+ */
-+#define CFG_SYS_INIT_RAM_ADDR	0x0
-+#define CFG_SYS_INIT_RAM_SIZE	0x80000
-+
++	.globl	ImageBase
++ImageBase:
++	.short	IMAGE_DOS_SIGNATURE		/* 'MZ' */
++	.skip	58
++	.long	pe_header - ImageBase		/* Offset to the PE header */
++pe_header:
++	.long	IMAGE_NT_SIGNATURE		/* 'PE' */
++coff_header:
++	.short	PE_MACHINE			/* LoongArch 64/32-bit */
++	.short	3				/* nr_sections */
++	.long	0				/* TimeDateStamp */
++	.long	0				/* PointerToSymbolTable */
++	.long	0				/* NumberOfSymbols */
++	.short	section_table - optional_header	/* SizeOfOptionalHeader */
++	.short	IMG_CHARACTERISTICS		/* Characteristics */
++optional_header:
++	.short	PE_MAGIC			/* PE32(+) format */
++	.byte	0x02				/* MajorLinkerVersion */
++	.byte	0x14				/* MinorLinkerVersion */
++	.long	_edata - _start			/* SizeOfCode */
++	.long	0				/* SizeOfInitializedData */
++	.long	0				/* SizeOfUninitializedData */
++	.long	_start - ImageBase		/* AddressOfEntryPoint */
++	.long	_start - ImageBase		/* BaseOfCode */
++#if __loongarch_grlen != 64
++	.long	0				/* BaseOfData */
 +#endif
++
++extra_header_fields:
++	LONG	0
++	.long	0x200				/* SectionAlignment */
++	.long	0x200				/* FileAlignment */
++	.short	0				/* MajorOperatingSystemVersion */
++	.short	0				/* MinorOperatingSystemVersion */
++	.short	1				/* MajorImageVersion */
++	.short	0				/* MinorImageVersion */
++	.short	0				/* MajorSubsystemVersion */
++	.short	0				/* MinorSubsystemVersion */
++	.long	0				/* Win32VersionValue */
++
++	.long	_edata - ImageBase		/* SizeOfImage */
++
++	/*
++	 * Everything before the kernel image is considered part of the header
++	 */
++	.long	_start - ImageBase		/* SizeOfHeaders */
++	.long	0				/* CheckSum */
++	.short	IMAGE_SUBSYSTEM_EFI_APPLICATION /* Subsystem */
++#if CONFIG_VENDOR_EFI
++	.short	0				/* DllCharacteristics */
++#else
++	.short	IMAGE_DLLCHARACTERISTICS_NX_COMPAT
++#endif
++	LONG	0				/* SizeOfStackReserve */
++	LONG	0				/* SizeOfStackCommit */
++	LONG	0				/* SizeOfHeapReserve */
++	LONG	0				/* SizeOfHeapCommit */
++
++	.long	0				/* LoaderFlags */
++	.long	0x6				/* NumberOfRvaAndSizes */
++
++	.quad	0				/* ExportTable */
++	.quad	0				/* ImportTable */
++	.quad	0				/* ResourceTable */
++	.quad	0				/* ExceptionTable */
++	.quad	0				/* CertificationTable */
++	.quad	0				/* BaseRelocationTable */
++
++	/* Section table */
++section_table:
++
++	/*
++	 * The EFI application loader requires a relocation section
++	 * because EFI applications must be relocatable.  This is a
++	 * dummy section as far as we are concerned.
++	 */
++	.ascii	".reloc"
++	.byte	0
++	.byte	0			/* end of 0 padding of section name */
++	.long	0
++	.long	0
++	.long	0			/* SizeOfRawData */
++	.long	0			/* PointerToRawData */
++	.long	0			/* PointerToRelocations */
++	.long	0			/* PointerToLineNumbers */
++	.short	0			/* NumberOfRelocations */
++	.short	0			/* NumberOfLineNumbers */
++	.long	0x42100040		/* Characteristics (section flags) */
++
++
++	.ascii	".text"
++	.byte	0
++	.byte	0
++	.byte	0			/* end of 0 padding of section name */
++	.long	_etext - _start		/* VirtualSize */
++	.long	_start - ImageBase	/* VirtualAddress */
++	.long	_etext - _start		/* SizeOfRawData */
++	.long	_start - ImageBase	/* PointerToRawData */
++	.long	0			/* PointerToRelocations (0 for executables) */
++	.long	0			/* PointerToLineNumbers (0 for executables) */
++	.short	0			/* NumberOfRelocations  (0 for executables) */
++	.short	0			/* NumberOfLineNumbers  (0 for executables) */
++	/* Characteristics (section flags) */
++	.long	(IMAGE_SCN_MEM_READ | \
++		 IMAGE_SCN_MEM_EXECUTE | \
++		 IMAGE_SCN_CNT_CODE)
++
++	.ascii	".data"
++	.byte	0
++	.byte	0
++	.byte	0			/* end of 0 padding of section name */
++	.long	_edata - _data		/* VirtualSize */
++	.long	_data - ImageBase	/* VirtualAddress */
++	.long	_edata - _data		/* SizeOfRawData */
++	.long	_data - ImageBase	/* PointerToRawData */
++	.long	0			/* PointerToRelocations */
++	.long	0			/* PointerToLineNumbers */
++	.short	0			/* NumberOfRelocations */
++	.short	0			/* NumberOfLineNumbers */
++	/* Characteristics (section flags) */
++	.long	(IMAGE_SCN_MEM_WRITE | \
++		 IMAGE_SCN_MEM_READ | \
++		 IMAGE_SCN_CNT_INITIALIZED_DATA)
++
++	.align		12
++	.globl	_start
++	.type	_start, @function
++_start:
++	PTR_ADDI	sp, sp, -(3 * LONGSIZE)
++	LONG_S		ra, sp, 0
++	LONG_S		a0, sp, (1 * LONGSIZE)
++	LONG_S		a1, sp, (2 * LONGSIZE)
++
++	move		a2, a0		/* a2: ImageHandle */
++	move		a3, a1		/* a3: SystemTable */
++	la.local	a0, ImageBase	/* a0: ImageBase */
++	la.local	a1, _DYNAMIC	/* a1: DynamicSection */
++	bl		_relocate
++	bnez		a0, 0f
++
++	LONG_L		a0, sp, (1 * LONGSIZE)
++	LONG_L		a1, sp, (2 * LONGSIZE)
++	bl		efi_main
++
++0:	LONG_L		ra, sp, 0
++	PTR_ADDI	sp, sp, (3 * LONGSIZE)
++	jr		ra
++	.end	_start
+diff --git a/arch/loongarch/lib/elf_loongarch_efi.lds b/arch/loongarch/lib/elf_loongarch_efi.lds
+new file mode 100644
+index 000000000000..050e5a52a0b3
+--- /dev/null
++++ b/arch/loongarch/lib/elf_loongarch_efi.lds
+@@ -0,0 +1,76 @@
++/* SPDX-License-Identifier: BSD-2-Clause */
++/*
++ * U-Boot LoongArch
++ *
++ * Modified from arch/riscv/lib/elf_riscv64_efi.lds
++ */
++
++OUTPUT_ARCH(loongarch)
++
++PHDRS
++{
++	data PT_LOAD FLAGS(3); /* SHF_WRITE | SHF_ALLOC */
++}
++
++ENTRY(_start)
++SECTIONS
++{
++	.text 0x0 : {
++		_text = .;
++		*(.text.head)
++		*(.text)
++		*(.text.*)
++		*(.gnu.linkonce.t.*)
++		*(.srodata)
++		*(.rodata*)
++		. = ALIGN(16);
++		*(.dynamic);
++		. = ALIGN(512);
++	}
++	.rela.dyn : { *(.rela.dyn) }
++	.rela.plt : { *(.rela.plt) }
++	.rela.got : { *(.rela.got) }
++	.rela.data : { *(.rela.data) *(.rela.data*) }
++	_etext = .;
++	_text_size = . - _text;
++	. = ALIGN(4096);
++	.data : {
++		_data = .;
++		*(.sdata)
++		*(.data)
++		*(.data1)
++		*(.data.*)
++		*(.got.plt)
++		*(.got)
++
++		/*
++		 * The EFI loader doesn't seem to like a .bss section, so we
++		 * stick it all into .data:
++		 */
++		. = ALIGN(16);
++		_bss = .;
++		*(.sbss)
++		*(.scommon)
++		*(.dynbss)
++		*(.bss)
++		*(.bss.*)
++		*(COMMON)
++		. = ALIGN(512);
++		_bss_end = .;
++		_edata = .;
++	} :data
++	_data_size = _edata - _data;
++
++	. = ALIGN(4096);
++	.dynsym   : { *(.dynsym) }
++	. = ALIGN(4096);
++	.dynstr   : { *(.dynstr) }
++	. = ALIGN(4096);
++	.note.gnu.build-id : { *(.note.gnu.build-id) }
++	/DISCARD/ : {
++		*(.rel.reloc)
++		*(.eh_frame)
++		*(.note.GNU-stack)
++	}
++	.comment 0 : { *(.comment) }
++}
+diff --git a/arch/loongarch/lib/reloc_loongarch_efi.c b/arch/loongarch/lib/reloc_loongarch_efi.c
+new file mode 100644
+index 000000000000..72acfe525c3f
+--- /dev/null
++++ b/arch/loongarch/lib/reloc_loongarch_efi.c
+@@ -0,0 +1,101 @@
++// SPDX-License-Identifier: BSD-3-Clause
++/* reloc_loongarch.c - position independent ELF shared object relocator
++   Copyright (C) 2018 Alexander Graf <agraf@suse.de>
++   Copyright (C) 2014 Linaro Ltd. <ard.biesheuvel@linaro.org>
++   Copyright (C) 1999 Hewlett-Packard Co.
++	Contributed by David Mosberger <davidm@hpl.hp.com>.
++
++    All rights reserved.
++
++    Redistribution and use in source and binary forms, with or without
++    modification, are permitted provided that the following conditions
++    are met:
++
++    * Redistributions of source code must retain the above copyright
++      notice, this list of conditions and the following disclaimer.
++    * Redistributions in binary form must reproduce the above
++      copyright notice, this list of conditions and the following
++      disclaimer in the documentation and/or other materials
++      provided with the distribution.
++    * Neither the name of Hewlett-Packard Co. nor the names of its
++      contributors may be used to endorse or promote products derived
++      from this software without specific prior written permission.
++
++    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
++    CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
++    INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
++    MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
++    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
++    BE LIABLE FOR ANYDIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
++    OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
++    PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
++    PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
++    THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
++    TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
++    THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
++    SUCH DAMAGE.
++*/
++
++#include <efi.h>
++
++#include <elf.h>
++
++#if __loongarch_grlen == 64
++#define Elf_Dyn		Elf64_Dyn
++#define Elf_Rela	Elf64_Rela
++#define ELF_R_TYPE	ELF64_R_TYPE
++#else
++#define Elf_Dyn		Elf32_Dyn
++#define Elf_Rela	Elf32_Rela
++#define ELF_R_TYPE	ELF32_R_TYPE
++#endif
++
++efi_status_t EFIAPI _relocate(long ldbase, Elf_Dyn *dyn)
++{
++	long relsz = 0, relent = 0;
++	Elf_Rela *rel = 0;
++	unsigned long *addr;
++	int i;
++
++	for (i = 0; dyn[i].d_tag != DT_NULL; ++i) {
++		switch (dyn[i].d_tag) {
++		case DT_RELA:
++			rel = (Elf_Rela *)
++				((unsigned long)dyn[i].d_un.d_ptr
++					+ ldbase);
++			break;
++		case DT_RELASZ:
++			relsz = dyn[i].d_un.d_val;
++			break;
++		case DT_RELAENT:
++			relent = dyn[i].d_un.d_val;
++			break;
++		default:
++			break;
++		}
++	}
++
++	if (!rel && relent == 0)
++		return EFI_SUCCESS;
++
++	if (!rel || relent == 0)
++		return EFI_LOAD_ERROR;
++
++	while (relsz > 0) {
++		/* apply the relocs */
++		switch (ELF_R_TYPE(rel->r_info)) {
++		case R_LARCH_NONE:
++			break;
++		case R_LARCH_RELATIVE:
++			addr = (unsigned long *)
++				(ldbase + rel->r_offset);
++			*addr = ldbase + rel->r_addend;
++			break;
++		default:
++			break;
++		}
++		rel = (Elf_Rela *)((char *)rel + relent);
++		relsz -= relent;
++	}
++	return EFI_SUCCESS;
++}
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index c4b0c2137b87..6a417e75bf46 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -7,7 +7,7 @@ config EFI_LOADER
+ 			SYS_CPU = arm1176 || \
+ 			SYS_CPU = armv7   || \
+ 			SYS_CPU = armv8)  || \
+-		X86 || RISCV || SANDBOX)
++		X86 || RISCV || LOONGARCH || SANDBOX)
+ 	# We have not fully removed the requirement for some block device
+ 	depends on BLK
+ 	# We need EFI_STUB_64BIT to be set on x86_64 with EFI_STUB
+diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+index bc48e265b901..641b001a9a16 100644
+--- a/lib/efi_loader/efi_helper.c
++++ b/lib/efi_loader/efi_helper.c
+@@ -44,6 +44,9 @@
+ #elif HOST_ARCH == HOST_ARCH_RISCV64
+ #define HOST_BOOTEFI_NAME "BOOTRISCV64.EFI"
+ #define HOST_PXE_ARCH 0x1b
++#elif HOST_ARCH == HOST_ARCH_LOONGARCH64
++#define HOST_BOOTEFI_NAME "BOOTLOONGARCH64.EFI"
++#define HOST_PXE_ARCH 0x27
+ #else
+ #error Unsupported Host architecture
+ #endif
+diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
+index bed5f1817266..612e0cfec2ce 100644
+--- a/lib/efi_loader/efi_image_loader.c
++++ b/lib/efi_loader/efi_image_loader.c
+@@ -19,6 +19,7 @@
+ #include <crypto/mscode.h>
+ #include <crypto/pkcs7_parser.h>
+ #include <linux/err.h>
++#include <linux/bitfield.h>
+ 
+ const efi_guid_t efi_global_variable_guid = EFI_GLOBAL_VARIABLE_GUID;
+ const efi_guid_t efi_guid_device_path = EFI_DEVICE_PATH_PROTOCOL_GUID;
+@@ -231,6 +232,38 @@ static efi_status_t efi_loader_relocate(const IMAGE_BASE_RELOCATION *rel,
+ 					return EFI_LOAD_ERROR;
+ 				}
+ 				break;
++#elif defined(__loongarch__) && __loongarch_grlen == 64
++			case IMAGE_REL_BASED_LOONGARCH64_MARK_LA: {
++				uint64_t tmp;
++
++				if (virt_size - offset < 16) {
++					log_debug("relocation address out of bounds\n");
++					return EFI_LOAD_ERROR;
++				}
++
++				/*
++				 * Apply an offset to a 64-bit immediate loaded
++				 * by four instructions, lu12i.w, ori, lu32i.d,
++				 * and lu52i.d.
++				 */
++				tmp = FIELD_GET(GENMASK(24, 5), x32[0]) << 12;
++				tmp |= FIELD_GET(GENMASK(21, 10), x32[1]);
++				tmp |= FIELD_GET(GENMASK(24, 5), x32[2]) << 32;
++				tmp |= FIELD_GET(GENMASK(21, 10), x32[3]) << 52;
++				tmp += (uint64_t)delta;
++
++				x32[0] &= ~GENMASK(24, 5);
++				x32[0] |= FIELD_PREP(GENMASK(24, 5), tmp >> 12);
++				x32[1] &= ~GENMASK(21, 10);
++				x32[1] |= FIELD_PREP(GENMASK(21, 10), tmp);
++				x32[2] &= ~GENMASK(24, 5);
++				x32[2] |= FIELD_PREP(GENMASK(24, 5), tmp >> 32);
++				x32[3] &= ~GENMASK(21, 10);
++				x32[3] |= FIELD_PREP(GENMASK(21, 10),
++						     tmp >> 52);
++
++				break;
++			}
+ #endif
+ 			default:
+ 				log_err("Unknown Relocation off %lx type %x\n",
 -- 
 2.56.0
 
