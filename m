@@ -2,28 +2,28 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7065606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 21:16:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1167606A31C
+	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 21:16:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=jZ5W6Sgk;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=k7hulJ29
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=vmgQcRg9;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=KKui2Y5W
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6F8E281777;
-	Thu, 12 Nov 2026 21:16:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8B330817A7;
+	Thu, 12 Nov 2026 21:16:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id M3BmbpSXNWaa; Thu, 12 Nov 2026 21:16:36 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6D8E081769
+ id rViJzgylQ5Hj; Thu, 12 Nov 2026 21:16:42 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B11AF817A3
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794518196;
-	b=tWQZ8GixkZreNYdn7zgTKU+ubVmVca5iQKwg/wkWHAyHwV5WjbhO99uDq8/r+M5U5cp8
-	 g9TZGhve04jy0/K/m7CfyJ6kKhZLjRRjVnfdS4cAcqiSYkTpvpxwYCxn3M+OzdKnq3npc
-	 5GzikcqmE++uoChnuGJW/MgYeyRAZOUtgcRHkAP9OnyWZyhBHE+uv36dMoVPT7XVd3WVV
-	 NQBMTemD9VfK6clryBFzCrmvxXgO747hmSKKGoN3EwwuhFGOajGpl95VqjPSMycHEKgJd
-	 KmQyQi99RoIZr7dMlHdi96+zBLhYSM7C5nDicvI1iDD9+9LuhGd68Fd24j/jB4JPCZA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794518201;
+	b=VgF9K8Vka3/U4uCbdobM71NZzBrTXSUeKb91BM2imAjoezekGp1Y6bsyMdF6xcfnoDNL
+	 TaS/dWE46qfK+2eCoKxXn6CP8KfkLvmBNMhEqC7SgRb6wrzn5H1pap0W39wT8yjXLel7/
+	 KdZKdRRi8+ENLhpu4Mh7RhALrLrKUgUk5+WqDyLMEhRtGkqPsjvnwD1aNDtVuppilUpzz
+	 JX1lfxHKX3mjjqbGtrooOoli1rdiXuJt5qnFhW7suynemW5MF7AcvyJQxmHuf6AWtGvgQ
+	 wPZ9hZqslwnRJqGtpzToZr1z7Ek3aI3uC6tp58zZCrb9kE9HLm9+5NVfaFdNvYYWZDw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794518196;
+	c=relaxed/relaxed; t=1794518201;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -33,113 +33,115 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=lSodj/r8GNeNsOos0dd+KHdH/76NEhQGYov/DqcmJBo=;
-	b=WB4FL4E3NWwJwa3aJPzIisr90mCIGouoaT+8eSTaShRNrJxrlajQBjT9N85n1OXNpGHc
-	 xhn34fOkzbazDn9KfjqwTYbOXI+e+B8gxu+Y3hn+ouFTCroNFYssj+fxPcIKGu1aoe7t3
-	 M8wMjPPBPoM45m9XuLyr7X3SO0JgLFO9ZDweK+qBsAOgdS2Q0rzl5YvGmJ0GZpvGGykyl
-	 /Zmfv9V8y0CCmB7jAGWQpEElBC9TSDJs7Tq6CH5H9AhzxKcbLAF3r0oivknbZ9WoQOMvK
-	 CmAhlsPJcouruJRGbRBbuY/x4ytSiYGBoRfe+dzCsCoQLqscDwqYF2LDEZurjs91PMA==
+	bh=0PyNqN+9Db06poBduvgvmEz2m2n7uYHNEubcv1AQHM4=;
+	b=W22ZoJ0NzXsKT0aUa9toBCYPfuYto2A+QgXTbkzlwv3Kr4tS+eQYiAw/3B2nqf1gTQYS
+	 d5/ankpgtIAhhHsevgOvxQAMujSByRkcJu02M9ISfPntYyfczFlhAcmrQ6oVKLUWTHX9y
+	 e9CuZPT+ydhXLEtl5W7m12RCUjzOV+Or2FJaOYOCFyR3RoAKVTZmqy2TPoCyWRe9mCElU
+	 /xD+ZwDc19Juu2Ku1Chbagb4k+nS7b/k2llSeKFTtw+YWZU9D/98OYvVEFr4MVtM8dAMH
+	 RWiwPdXCUlrbFXRTPW7JWJP//k3hXCkBtXG5gNzSdI9nhvzS2bFno7ODnxVVL4DIqBw==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	dmarc=pass header.from=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=KKui2Y5W;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794518196;
-	bh=lSodj/r8GNeNsOos0dd+KHdH/76NEhQGYov/DqcmJBo=;
+	d=lists.u-boot-project.org; s=default; t=1794518201;
+	bh=0PyNqN+9Db06poBduvgvmEz2m2n7uYHNEubcv1AQHM4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jZ5W6SgkrcA93ECGjUuqnDmNoIQ/vtCPPaE/kEF6fb7gNWdT/BIMXx9r2osNfDW4K
-	 Fc6r/pTDYXu1udU/ftLtfE5YNTtKj2eiqd3Ha8CEAq5tFfAJeNI+kLm+u2Ah2TOGyC
-	 XYZU9fR1mRXIK3z6ZA+sEL/kgpThv3ZtERfH3G16aS7EmvfrRM87iBuEF60Ia4EbnQ
-	 aYyBMUTZACZ57ReZ5GYUScyrBSbcTlvq3s9hdTnB+1yU/fVwI3OmV2udu0jS21JNNh
-	 jx4TYpXi1x0bGkqAtuDbnn/jvXkbTmHXfYLDAHM4TNhcUSjZKEctIyJAoDqfStBHPs
-	 vWi01pe3PKEFw==
+	b=vmgQcRg9kolnE6XoLVYozrBHKqwZnCUagjnRmMZdratUd1gGSNtWi5psA9ilcDRRV
+	 cY42aI4MaMEGL/pf38Q0bitnlt6bpcOpS4pnAbK/TiLxDrUbBfUjTmu6Wh97SmMcKR
+	 jNOry5Ev018qfeuwdPeRD+j1Qus9g+tzuEPDLL+2Esk/+7H5NK39qsB2uuuG5w6ml7
+	 Hmo6ladnDovSdMJ/pe0R/TXotxI8NDd4KaFxqGH3NNYja7gdYYZ/p8SE1pt1wTxvJG
+	 ZakfA8QTNMgOqDYSqIWYxRkjrbCiFutUL8BkQ+1++qBxn46hl3hhGu5AV8KekLIrvY
+	 By94ECs1xpGCQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6D8E081769;
-	Thu, 12 Nov 2026 21:16:36 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 96F7B1790
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 21:16:33 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B11AF817A3;
+	Thu, 12 Nov 2026 21:16:41 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 1C4F11790
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 21:16:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 88DE14099F
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 21:16:33 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id D799981762
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 21:16:37 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Z-loyXiHut1E for <u-boot@lists.u-boot-project.org>;
- Thu, 12 Nov 2026 21:16:33 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org B658E40974
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::231"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id uc5ZLSUwTQoo for <u-boot@lists.u-boot-project.org>;
+ Thu, 12 Nov 2026 21:16:37 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2B431816D3
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::32e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::231; helo=mail-oi1-x231.google.com;
+ client-ip=2607:f8b0:4864:20::32e; helo=mail-ot1-x32e.google.com;
  envelope-from=dlechner@baylibre.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
- header.a=rsa-sha256 header.s=google header.b=k7hulJ29
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B658E40974
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 21:16:32 +0000 (UTC)
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-4b28d9537bcso283534b6e.0
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 13:16:32 -0800 (PST)
+ header.a=rsa-sha256 header.s=google header.b=KKui2Y5W
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2B431816D3
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 21:16:36 +0000 (UTC)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-85f34b20042so192100a34.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 13:16:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre.com; s=google; t=1794518191; x=1795122991;
+ d=baylibre.com; s=google; t=1794518195; x=1795122995;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=lSodj/r8GNeNsOos0dd+KHdH/76NEhQGYov/DqcmJBo=;
- b=k7hulJ29itE9SghWoY6oO1mj0sMgnSZfe+KP6ICm/oaKthfcWIdwirE6RhdluYfCjB
- kOGzO2IMS4hK6Ri+IBvJJGzgQQDgzsW32yU2dpC8RcOlhIHvsbdf5o3WKZxe2JvBMkIR
- svOaZ/Igpn3Wn7JzBd0/7wu/LAjjX5EsVeipKUQqmwfXGBZ40Nqa9y7F6xEOr6mrIHY+
- JFufgKHwbHxOpl+1rRva6IM51G5DMiDQqJCNv86b4AJfPF6FVJfKiHfr5m11EYzR04es
- psZCCFwNUpWOiwSY0QOwCOYTdkqH7Qgw4Xu0WBLkpMb185DaRFHjGpHzdJeXE1s0ty9J
- 98SQ==
+ bh=0PyNqN+9Db06poBduvgvmEz2m2n7uYHNEubcv1AQHM4=;
+ b=KKui2Y5WthqW/fBVCYI2N7fU/zdRPIaQytJM8AsiRtJJwyBHXUm33QTMkRIwrHXdQ6
+ GOJPBs/GkcLS81MEj9s87lP5FH/ZcHyd/sTd0MUDFQy/wecvxD2+2v61UPMscyBiRbWi
+ vi8tMNO+V6tBxyzwmkBYjgur0+q944xcC+c0P3BZtRydsZFJWMXm+PNybMsdf+EszqYY
+ Uw/gF+JWmj8F2zqKRZ8HxKjtVEclQbhCzxgL/krlDkV6EK/H0GPPcTduntizSxf6wR4x
+ lfkbkhIGoQdixeEkuqAS5tvsO1SfuRAas7efpzzil7SmShg4uhQdjrBCOcY+B4Xgoed0
+ 4gnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794518191; x=1795122991;
+ d=1e100.net; s=20260707; t=1794518195; x=1795122995;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=lSodj/r8GNeNsOos0dd+KHdH/76NEhQGYov/DqcmJBo=;
- b=yDfK3f4W4h1OX9UxnHkwLMBZxImvYdTRPS6CSePU5+uLuZI6BdMIQMx6kQ7YwNpOuA
- VX7rDCGY6tSm6IfWWagVBMMyfcTXFF8tzhKgircy+bx+Xs7OuYwYq7jLWAVpk/fu28ml
- 3nJR3Z4BOUrDbBbESa8PmI2ki+xMiklHX3BACBq/lwJ18fWi5Kjwd2bO1etYnYiLWmiX
- 94mIonh4sp2jrjys58cKqyLKIGoTD1NiIFUmDO8nw4pvnVmbFqhuzzmhimPG53GfUefQ
- tQFtQ6LFQlmywDm1CTtyu6wwdrax2lTpgFm2xZiu/2WuD1Sr0pzoEye1yPdnaWlmM5Ds
- yoXg==
-X-Gm-Message-State: APuU4Z/lp1NY3wlgsc9C0N3sI6+mxf7oKxHtugevSPukQRNFVnYFQS/m
- vD5UUoH9pr7ZjfV4mYmNejifHlspFJNwnLpaKaHfZ4DNHvCZaHmLldMF+vvPlmX98eU=
-X-Gm-Gg: AYBFou0UzsWwN1y9/pNm8yPOhaxPR6R6rgoRRysjJMiLgNoyKV0bKYTejHCbbi6OZjn
- uZv6JInp2xGnjkOEk0T5B3yWmoP7+icCoxP2Aq5NB7GMMJWTT72b642rfWRiwFmt3wmgG4+rgyc
- 2+n06FQCu3gdIsd0T/wxTj0TtQEo6L7Fv3pw8qCMxnroGbgNo1jWA7Gsi76ZT5U9JTBMUHh3TtY
- jHwatJl52HVlblPviOxYTLT3Av55IzBOCdMn+xI3SzNALGY3LfkwL0rvawHf4DWR0w+Kq7728q6
- OsmDMTfZcTx2ekrSrBcyD7JvaxZDbVxQM79w8NWweHjmUCFCwL1718QSGD4MgNKYHDIUKwc4tNJ
- seZF984Sp8DiEELMq6EC/YIybMQIoFDH+obfl4i4YIpHeRf38vSr4c/sHggqTWw63kux5AsUlGq
- WJI+IlCmh4rVk0pYS6TG5OdFVYjD5RoTCBDpU82GxPQ9KoYI5yG4KvsdUiDSCn9ywMJijasUNeD
- +yuFgMk6R9MBefPvImmE26E5oXC5aA+gFv5PeD3bAvYHdLmYn5UlN/m0GfC19a9EwwyvRAN2ToR
- lWqT8A06J8cdvaQs102sFRcT1QWypmwH/A==
-X-Received: by 2002:a05:6808:6614:b0:568:2782:d1b4 with SMTP id
- 5614622812f47-56e66272a59mr275339b6e.32.1794518191236; 
- Thu, 12 Nov 2026 13:16:31 -0800 (PST)
+ bh=0PyNqN+9Db06poBduvgvmEz2m2n7uYHNEubcv1AQHM4=;
+ b=VgAOgv0w+/WxGcYCXOzTIbI7iauQsXkfmAdMjhh/lC/Kxj2esXlFpIHFqcVFQ3TMEY
+ 6rjv0TM6KP1SfdIiBBSlQ49zN0Z9/5bq2EQRbFZxgAy2k9ALqNp2ZLoVS3v6o0pEyVU5
+ 90lCias1vp5YlWPetrBdSgJrFYNo0C7R0gu99p+h/+O14ZUgxaHLbIys9LH5DMie7Pdt
+ ZiPLkuBw5MArCs+CFpfW1hoJJesMX3RRVO/iiwaEj2VYPw0HJGuiJXWNwVs9lkaGE1q7
+ bYvV/OYIG5iRXZGEvHiLNaOcMzbITC9In/YhxhlEHNTj/XxaPJKfGmDGcK1wWFeS3Jzk
+ jtyA==
+X-Gm-Message-State: APuU4Z9MjKwwsrZ6/nLh6OZ2I7Oo0NlJ4/BJfrj7biVHIJYSF7sJWZXZ
+ rm39BqdXpg8//GYqWR5Y4wndSYcCrcrA7nOzSuts7iVh29S/0NtSEVANW5BtSODuMSc=
+X-Gm-Gg: AYBFou2Plc7VH5leollZxTjSV8xOblIntWVMNoTGueuvKrw88UJeV7h+EF64hUurTKb
+ SnxmjMLx9CMqhNhCpZYLkuDfuAqA64Z8HdBsOj/wW8qdNwwtuHypIToHNktiRepBxHxFpM3OhmT
+ PrePhQSCqBDadtlB2oPv/WPBUcQYMV3P+c/M9w10BZQ4ReN5+lLgmh8rNIvn52KRAu1aZcJj/VB
+ BiIetNEse/HQhGODJnmz1zXtpIG+iMTZCUvU5BuE4kmPxtm/QthAJDXaY6k5h0PV57XykdyTZsc
+ WjMk5cfL+/Nx9X+zpB0E9Vx66aaZ7vY+FpXQ8wvezO43lBTaGkHglYhuFLNeuj3wsehRpvHpyGr
+ 8DNgA6gCU7iQ8Z5TlrFdjyW+SJTvaCV/DPPv13dYJWbzVRKwiyOX+7JJimbprkn/XHzce/t8DBj
+ pM6RW4S4yfJxtQP52qxeUdWKFM3COAL6GtLIVH0b+sCnLIfBgdpNRME0AwcmVkcZzM6O4MGXN0U
+ 2E7CTBofyOW6VHyeW0RIOUdW3YOAyXhUW6eTxiU/Vqt1/f8L42GTVjaadjoXBLvqKrG81R4psaB
+ jrlwA3g6yvH4EIU41klit0+ckE/zbNh7Ww==
+X-Received: by 2002:a05:6808:1584:b0:557:308a:9e9a with SMTP id
+ 5614622812f47-56e63ba5734mr476530b6e.21.1794518195561; 
+ Thu, 12 Nov 2026 13:16:35 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:1a61:46bf:438b:5fc0])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-56e70d6572csm263804b6e.15.2026.11.12.13.16.29
+ 5614622812f47-56e70d6572csm263804b6e.15.2026.11.12.13.16.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Nov 2026 13:16:29 -0800 (PST)
+ Thu, 12 Nov 2026 13:16:34 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 12 Nov 2026 15:14:58 -0600
-Subject: [PATCH 03/10] binman: support building binman dtb when OF_UPSTREAM
- is enabled
+Date: Thu, 12 Nov 2026 15:15:00 -0600
+Subject: [PATCH 05/10] lib: Kconfig: do not enable BINMAN_FDT by default
+ with BINMAN_DTB
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261112-mtk-genio-binman-dtb-v1-3-65cfc9329c50@baylibre.com>
+Message-Id: <20261112-mtk-genio-binman-dtb-v1-5-65cfc9329c50@baylibre.com>
 References: <20261112-mtk-genio-binman-dtb-v1-0-65cfc9329c50@baylibre.com>
 In-Reply-To: <20261112-mtk-genio-binman-dtb-v1-0-65cfc9329c50@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -155,17 +157,16 @@ Cc: u-boot@lists.u-boot-project.org, Michal Simek <michal.simek@amd.com>,
  Casey Connolly <casey.connolly@linaro.org>, 
  Carlo Caione <ccaione@baylibre.com>, David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1746; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1359; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=MSfClqAwuEVUnTM+wVYUOHxIAj3/fyvlP4hMnelzXSY=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBq9ixwhyTOHhqrw1cRbgd/EK+eD9VPNbJYW30U/
- yJ0WZCUoM2JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCavYscBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AfgUIAJ0HChxy0RvPK+UdGITQJxr0QFrgNVs8+SKqUi8
- CATvuvez4YzROxMyQI+96sKkg7+i6d3dyeOL5rlmE8p4GUR8nPIaS1leOZn7N31l7wd1bxfsZAE
- LeA66jXb3gsb8GF0ONGzYZ8kGIqPfsRNKulZV+ugh9c3tpf1mW40WD0yZNtM/3IimZJngJ8u6v5
- +lVgSoi/1ogUxw8LnHul1aaR+VStMChaHWl99qzM9s4gV0PVd/kFxlp+jVJ+YT3gMb+nrnp5r9p
- ivxOGGsQ+aH/pg3inkt48wbpvuFuweE2ZbXqhv2H2W/zlWAWWKMQCi2cYTI8EkZ5L0pnbRF/IEm
- /fLU=
+ bh=QQrLh57noO3ZDIAJjobo/qsoimxg6jaPhhCDEpe6oGc=; 
+ b=kA0DAAoBwswgAf8Bj8AByyZiAGr2LH2h57H4GNpVx6sKedTndzwr/ZP6fVnxJ++HrSfBR4J6P
+ 4kBSgQAAQoANBYhBOwY2Z5iDoPWnNhomMLMIAH/AY/ABQJq9ix9FhxkbGVjaG5lckBiYXlsaWJy
+ ZS5jb20ACgkQwswgAf8Bj8CW1Qf+IMZiwHOJ7AUusfwIHzNXPYTjtdTfFtEwKAgPhgxQMvXzIW/
+ 89zd5NpNUY+yGJNH401LdF1SCQbn32PkaXA3j3StFen6iVm5Q6Jrx2+R08wC+lpBIqs5yZKAE/Q
+ YkvXA/aReTzUFPSTMGQ490LVHoxn32L34/aXrBFg0iXXHTYSegpieMi2xQ4ewgg4RpwsufM9FJt
+ oKn99MamHOp+1n9t4usah97KmjaVPi5sd8YuLfw/RIS5gyU02VR1WL+s6P8HAQ2ELUeEJdSxwo9
+ JK0hgkvuYAfPu/wi71WBFnKVnsYvvpSRrqLJQzHKMqubzQNe3Ivw9dgh0KO1JtO4y3tp3Q==
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -184,65 +185,41 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Casey Connolly <casey.connolly@linaro.org>
+Only enable BINMAN_FDT by default when the binman description is part of
+the U-Boot control devicetree. With BINMAN_DTB, the description is in a
+separate devicetree, so U-Boot finds no binman node at runtime.
+binman_init() then fails, which stops U-Boot proper during init.
 
-Since binman DTB files are not upstream they are kept in the U-Boot dts
-dirs, this means they will not be built when building with OF_UPSTREAM
-enabled. Resolve this by adding a rule to build the binman DTB if both
-conditions are met.
+The boards that set BINMAN_DTB today disable BINMAN_FDT in their
+defconfigs to avoid this.
 
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
-[dlechner: only depend on the binman devicetree target with OF_UPSTREAM,
- since the rule only exists then; strip a leading ./ from the path]
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- dts/Makefile | 19 ++++++++++++++++++-
- 1 file changed, 18 insertions(+), 1 deletion(-)
+ lib/Kconfig | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/dts/Makefile b/dts/Makefile
-index befc6de1805..c85a333df9c 100644
---- a/dts/Makefile
-+++ b/dts/Makefile
-@@ -30,6 +30,17 @@ else
- local_dtbos :=
- endif
+diff --git a/lib/Kconfig b/lib/Kconfig
+index d4e876fccff..8f257ecf51b 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -38,13 +38,16 @@ config BCH
+ config BINMAN_FDT
+ 	bool "Allow access to binman information in the device tree"
+ 	depends on BINMAN && DM && OF_CONTROL
+-	default y if OF_SEPARATE || OF_EMBED
++	default y if (OF_SEPARATE || OF_EMBED) && BINMAN_DTB = ""
+ 	help
+ 	  This enables U-Boot to access information about binman entries,
+ 	  stored in the device tree in a binman node. Typical uses are to
+ 	  locate entries in the firmware image. See binman.h for the available
+ 	  functionality.
  
-+# With OF_UPSTREAM, arch/$(ARCH)/dts is not built, so build the binman
-+# devicetree from there explicitly.
-+ifeq ($(CONFIG_OF_UPSTREAM),y)
-+binman_dtb := $(patsubst ./%,%,$(subst ",,$(CONFIG_BINMAN_DTB)))
-+endif
-+ifneq ($(binman_dtb),)
-+binman_dtb_target := binman-dtb
-+else
-+binman_dtb_target :=
-+endif
++	  This is not enabled by default when BINMAN_DTB is set, since the
++	  binman node is then not part of the U-Boot control devicetree.
 +
- ifneq ($(EXT_DTB),)
- DTB := $(EXT_DTB)
- else
-@@ -50,7 +61,7 @@ endif
- 
- targets += dt.dtb
- 
--$(DTB): arch-dtbs $(local_dtbos)
-+$(DTB): arch-dtbs $(local_dtbos) $(binman_dtb_target)
- 	$(Q)test -e $@ || (						\
- 	echo >&2;							\
- 	echo >&2 "Device Tree Source ($@) is not correctly specified.";	\
-@@ -69,6 +80,12 @@ local-dtbos:
- 	$(Q)$(MAKE) $(build)=arch/$(ARCH)/dts dtbos
- endif
- 
-+ifneq ($(binman_dtb),)
-+PHONY += binman-dtb
-+binman-dtb:
-+	$(Q)$(MAKE) $(build)=arch/$(ARCH)/dts $(binman_dtb)
-+endif
-+
- ifeq ($(CONFIG_XPL_BUILD),y)
- obj-$(CONFIG_OF_EMBED) := dt-spl.dtb.o
- # support "out-of-tree" build for dtb-spl
+ config BINMAN_DTB
+ 	string "binman DTB description"
+ 	depends on BINMAN
 
 -- 
 2.53.0
