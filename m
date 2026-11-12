@@ -1,161 +1,163 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFA27606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 21:56:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C526A606A31C
+	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 21:56:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Gs5tiRVi;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=WwQG8ABu
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=IdkNiWth;
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=cWj91MMn
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C019381852;
-	Thu, 12 Nov 2026 21:56:06 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 044B76071C;
+	Thu, 12 Nov 2026 21:56:10 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id gSKyfhtiw5RZ; Thu, 12 Nov 2026 21:56:06 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2357E81871
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794520566;
-	b=MTu3hIyIfSMhGiogQMB3/3CG3RKRsDub4OIKWGzTY513+FYUiWEZAzW7xwFVyUZqTnLK
-	 IVbTPvScfQfkfenyCX9SsCiTt7jKaiw/09tKzxpWfWnM55iESuGyXE/CI5tEvS8dtE5Lf
-	 pgUsOn09fvVhka9CFw8ZoyyRH8eV42PnoO1Z/YRfAH2BdqM7/W+xQU7wG8Qi/xE++AWtS
-	 y16zz8twlMJZWgY2LkS2rJ8LcLVeuVDa7A5JCMU/URG9T8jN3hngpLKMYFLIUK/e/E6gB
-	 dOR5jtnppFBmMMUvXkbqU0Ou+gHdNkvS385CkkGUccWOp2n6fKSpZPablocp3BqdHFg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id SHWOSvVUHbV7; Thu, 12 Nov 2026 21:56:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 0FC21606D4
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794520569;
+	b=Digbfji5yf7stbwoOzc0tqyTuCCpoHBQhz33kw263X3SVIMjAuxYm97RcgcMtr+hTBMl
+	 2zC2wY6p/bG3rACW3Hqj4+gd9GJEStU6P8GrjYPdeReoIq+xN052cEF7P87PqXigvnZLP
+	 0r54SSvFGExWpJNYtmwe4OB4hxdTyPYvEsfCKYAYDZ2x39v2My9EPN8GnyXDdL4yPv6lY
+	 vpUPfb87gruIJVJHLMBvEAq2bXpwYo9uM0UC1TQhCmACnckN6127ooM7g7HNqDCzbfEca
+	 AJc/esOQgV53CUaBGhO7dbAqisS7B6uvVjaYO62tziy7KvL4HM/TxQWnWZv2uKarpMQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794520566;
+	c=relaxed/relaxed; t=1794520569;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
+	 X-Received:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=MF7Sg+O11uP8eJCNykr4yQSgj/NNzi8mj37CduYHomI=;
-	b=ovV0Cw/CvYJpsY+4WD+F1GZa1z2VUs29wc4UUopzypwOxbvc5ZTtYcVqODz3F+hzqavb
-	 08smYHtSkMEMPW29K5aiMYb7iv4wKP/gWuWVsd7UL3Mo+Wzecmns4e+UCLTpxpBTHObX/
-	 q6yZxkscqNOad9bzhGHB+9xSzO+RfMY8lkGgFw06oOYD6nT6EoDVNMLLvS/pj8a3J0ar7
-	 0bsrsOfHWJ4XNYXkBl6gxHsXah707sP26pmcW+pOOxAfSwfZvpu53wemqvUqyuaaEI2uC
-	 3dFFvv7IhfyW6qKnylLMB9zmFlH7jm9V2pofiE/Plkc8jUFnRPVcpNtgDNDb+EwZO5w==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=jT+tm5T8lAlfRAGw5YoNt2GUNggYVUgSXihEh0Qu+qc=;
+	b=ja8+VYQGz952QfXAFM1MP92klVrnEIUW1EgDty7K2UoCZ+Oea7mtEbVGgduUQbC684ag
+	 kwP9aUWUPFO0DaJlHAct0BjII2f7VleeulE35XODJJpPaIJQoFlbY6B5JuOY3F2Icwa7q
+	 tlwm25lq3aTjMKtP7wzi9n9hVfWFWyRSyUVpmUqxJ9CEjyphEmWEg8dTjshlZj8GCP8Gr
+	 4cT8JUbYf7aWGN/q8RoOIBacYMpZEtdqRJKGIVJK2Zd53zrgHneqS4ubecgsyTWdHGEYA
+	 SvV/vtreDuuKGUtNl8bf7BS+effXF6EIqg3FJqVKbeXEXV7kbrRKPWhQIwr6cKBCLyQ==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=cWj91MMn;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794520566;
-	bh=MF7Sg+O11uP8eJCNykr4yQSgj/NNzi8mj37CduYHomI=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Gs5tiRVi9wbpIxxHCxKVAJYZ+IWEThyICrKs0QIB0RUUJvIVrDtxMyCe+jcJDcyaE
-	 iPZhJ4bAT3WOxmjtdUA6q6G3zqB3vLyWTm2uHNSNZ7NRq11ZVX0lHdCb0BPM6M1+Nn
-	 WdTQFa+am3qj5a6N1fEI/UgzAI879rt7ubL/OuxyvuWyLyx9GGnXfNB2XdcXASCFuT
-	 32ttYfIT0R3j5GKR+Nblx0Hh6d/AikYUspDAKW1f2gNQ++FfX4ivm42dO9c5f0VKGR
-	 TwL4XCgw4CZriWT+q7DVkp7A0TuI/rWTXGD751cdDaf/CtY5wn7CCPaDzyjRwdxbX0
-	 vBdbyPwAqi1EQ==
+	d=lists.u-boot-project.org; s=default; t=1794520569;
+	bh=jT+tm5T8lAlfRAGw5YoNt2GUNggYVUgSXihEh0Qu+qc=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=IdkNiWthvg6BEknS1Nwnj15sPfEKeLySj/qL76yrjMthGTJ4qBdcKT6CdDtTN+Oy0
+	 twTUH3etJ8fJEY+Ne/jsKXxWKU8cNu/yGwcE7hy9sYz02bYJPkQS07rAXy4yEKGewc
+	 G4vd8rgppR8tSoUT/X4h4JQo7uFB09zp4TtCY02WI+NrcUsCUCyPO295qn0kDBEUqV
+	 W7WAPDof8pK/Vufe0/DAx60Lr2o2wQmGwAwfsnt7Z7hU5GroIdouZMd+xIgk0smDrQ
+	 3+i9nls5GrrRDw7gRbbVVFldVZRkQwBBOutq8J2LKg1FM1eRrVJca3GzQO64JETWDC
+	 eQbZeqcQfoFvA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2357E81871;
-	Thu, 12 Nov 2026 21:56:06 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 3F61AF46
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 21:56:05 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0FC21606D4;
+	Thu, 12 Nov 2026 21:56:09 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 0FE6A1790
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 21:56:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 252F8405AA
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 21:56:05 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 01110606D4
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 21:56:06 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id V8aa3jYW5H25 for <u-boot@lists.u-boot-project.org>;
- Thu, 12 Nov 2026 21:56:04 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 237B340DBE
-Authentication-Results: smtp4.osuosl.org;
- arc=none smtp.remote-ip="2607:f8b0:4864:20::82e"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id R0Ra2WX-aiaV for <u-boot@lists.u-boot-project.org>;
+ Thu, 12 Nov 2026 21:56:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org CF2546066D
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::f34"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2607:f8b0:4864:20::82e; helo=mail-qt1-x82e.google.com;
+ client-ip=2607:f8b0:4864:20::f34; helo=mail-qv1-xf34.google.com;
  envelope-from=ralph.siemsen@linaro.org; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp3.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp4.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256
- header.s=google header.b=WwQG8ABu
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 237B340DBE
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 21:56:03 +0000 (UTC)
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-54f873cbe2aso4159941cf.0
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 13:56:03 -0800 (PST)
+ header.s=google header.b=cWj91MMn
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id CF2546066D
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 21:56:04 +0000 (UTC)
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-91f1324a134so3791876d6.0
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 13:56:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794520562; x=1795125362;
+ d=linaro.org; s=google; t=1794520563; x=1795125363;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=MF7Sg+O11uP8eJCNykr4yQSgj/NNzi8mj37CduYHomI=;
- b=WwQG8ABuVAKcIvtT+0S0dgx/8oKGuOLURFwNFp2jVdlR4KU/PV705bQhfVFjmIr2b3
- NnaovLeGtZK/kXhrvZweekKlIXl21FpGOrz9EEuyo64SgB+VxWedtKli3OcnvDDEO1iU
- hPTIY6RHVz4rled+GT0ld53iIwHVxECMnuXuKwws9sNLKlghKyTFpXLmi06PomiV8o6L
- QrANIiQkrysnqHNMheUcfrtrlsyWPa7bW3riVx2kwMbM4jTM0nJbMlIm0Mh0g6vJUWsx
- ZP3BpcKIjYeraqJJY6yKbdC/8yEwYpquDYuODFl6wtyqKD4Re3VUx1gyzrsHNUGs+aDS
- rRzA==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=jT+tm5T8lAlfRAGw5YoNt2GUNggYVUgSXihEh0Qu+qc=;
+ b=cWj91MMnSeM7v1DaupYsq1s5klEp0eYUzMqYCPozqISPDjr6JGzad5DsVnOirqZcYH
+ AuOfb5Kc9wEse9bsgun6+S4SwC03v2dCSW0Pso3wDVTfBE4PJUTTITNWTzasWKj0BmCI
+ QGABKhd23AqXjUdC+x9ZPnAqSXldc/nwIK+fYMBHaJwN2JGRcUWoJQwyn6Ld5WEuAqUv
+ pOPRcECDfcpHcrNsvApvZ0tgpsC+tWd2WsAfIae2+6ySaJHQiLBcQFXt9VC1OyB8MFkh
+ fTJhF9MEMkHsswTTw6T4qgrcHYvQ30R3j5UqSGPM1erhzSDdCamszslqMvbau9wbWdOA
+ kGfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794520562; x=1795125362;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=MF7Sg+O11uP8eJCNykr4yQSgj/NNzi8mj37CduYHomI=;
- b=kGm37C8eJLpGfpeARD/76wvC2W7Wl5OEjVbv9rcfAzZGZpSzeHJwIh0/BAYBhT2oeC
- VfWCdmy17sMURkay82wqyYCJEuT7VKixKl9aECMqJAdCCTGy26eGZ/Pz7Z17/5PFKdK3
- FhKVxHaVCAnt0g0M5pKlx2iladmpW/arlROcKr+m8b6h2hQziJ0xRY47ikhX+lp+Ax95
- jtWiGyg9Ng2DSf8YpDgE6cNKUWMHS5TXdKguNTm7tBnhGiM71p2p1vH69NfKrQ1URfR1
- 1rhq+dTraSIrwfaiGgPgawEhv8dLoVYME25ZX8y7TdJ4egCzc8dBHRkypp9gM07zueu7
- o48A==
-X-Gm-Message-State: APuU4Z/VhdYV25VVwE9KxYZ5kZDoWjdZFRqGwgAX/C+wMYTuznYvYBln
- DlECR39SjK8E4fnbADGkSyLSpOqAJ033sySallwvcUrLi4sOY+AL3dSo/NhP6y3zgHqIYiA42pa
- ySWSnFOg=
-X-Gm-Gg: AYBFou3dp7oMq/xadeVVYh8m5GDUEUOpoLfKuPMA2zouRYvdmExXFQO97n1bndc7a1r
- 9rpU/3bh08ScM6tz21E86I2b0RC7HPUvoJAf0jJZpEh5pkB0QQGLuYb9+PVHth+Mi/7G4oPTu/H
- JW5nXJJltliGDonIxgGAuoOtxRpAUpxYzel9h7/7roo+BYMyRcanTHXuO8CkaNP7XcHTR0GjneG
- iJ+g95UC+VTQcf2pyNlRvY0anPoSpRqBOJwkCM9uuHyMEN10ksoTh3dsW7rTqJHgtmxs0Gf2BY9
- 07UAv+4m0JzanxJKa8Ucva2m3jf8E0LGxaXDH939mb8fo1MHdxrwAncqx/FaO9h5w0eA7XAvoVL
- x081GRDN/guRwnrB7KKLmb9amrbB8+YMwthQryOBu/VC1yV1TXeclNEMaU+Uf1Kl2tRBlj/QJrZ
- HtEBeOqI1ryanliTNIUAzgpJqWnPzXf9KrXC8YB9roog/hpn6lhM4UV3T+LhJBg5jeX+cgF+FmC
- BmzDleoHSpi8Wvvb2w52r4F8XF9Ulk2C75jHudX4Av0SClBRHiPPTlUs1/lL9Wj0T97vnevKOb+
- iKAXNq3xHM7Spju/nRqQO+N9QQc4GfAgE6O4PJ/zSWOjRBVMjkAKtKE+3LsspC464Yo9uRecHrj
- G/60ZJy3cXREtLQ1kA1chMM3ci8py/ADuvevXA0QMNWM9QY7GRCiID4zI2kkx
-X-Received: by 2002:a05:620a:4592:b0:93e:c12c:9dd2 with SMTP id
- af79cd13be357-9494bcca42fmr119781785a.82.1794520562270; 
- Thu, 12 Nov 2026 13:56:02 -0800 (PST)
+ d=1e100.net; s=20260707; t=1794520563; x=1795125363;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=jT+tm5T8lAlfRAGw5YoNt2GUNggYVUgSXihEh0Qu+qc=;
+ b=FGfEMd1iFoxgTMtaNQPqO9/YdLVjxAKQfwJj4wGh2rcSyB/ouElLQJDSLOHP4Gl1Mg
+ W8ETrB3WfE+lF2Tzd5GUh3TrLXAU+r7VNed0SMY6ua9aSGs44U4MgtsZJZMKexLqLPiA
+ Drp+mVXakpcHY9TK5qA5c38LRwqoG4qpE71GrTXbwDdG31r3rMLgs7b2kyqJgj/d0MCu
+ JqLqi+iwjA43njaYZp4hI680aakDfTv1p/X/mmb2qDUQrWbMbWOyQcYTSWcCKhI0Mgjm
+ Tpa3EfkxElWsR6vpSU6r0a8iuW+aVIv24inVl7bIMSobO8kdZX8onHjF09T1zq7XK+fW
+ m3xA==
+X-Gm-Message-State: APuU4Z9DzzckCDp8G9800dUe8+Tn9OgBPBTTP8ZlRz+/n21RNAzzNNFn
+ JD4Yv2MFbN59FCwgyksBwlcQiev4RQX9cYALEgTLuGusAssTf9YSb0I4msfCeGgAiSh0rdizXMU
+ aeYpurUw=
+X-Gm-Gg: AYBFou2rUJTLzIIeEbOkiuSGhLamTzDbxDg5N+Ih3PuitCGvev/IJya/zq7VCb8GYFR
+ OrIxgK4gKPi2b56TOH5Hy0fJ+aqP9por2Zf7R3KixkdidohOC05+hqZFaRU1+BRlA+IyPJIkSiA
+ 25USvsd8qtMlBEjU8uYP4LWX/89+OZdDHjwHYvvSksH2s8b9fbzAcRQDSvojlHnG6qdCV6qzt1Q
+ 11VVcFBbX8w0CfnKSie4q9iwQJSREhD7bQvw/zYb5YDwMTQb9BQ9ez0HRRw38AWpudmyBzYue12
+ 6t+Hbzksd7731KFfpNvgR4/+rhUF4ifsL4uK9wVX4NVF6A+MxWr+5LTkl/4X/rgEmgEcmmVkqL+
+ LsYwrDIa1QLhwjaaDBy1VbguTu2nOlrGEwZb9LEF6Kv8pSf71kJwT24EcWlamkRfR2C4yw8tOJX
+ v5VA2LmkBUp3QrDk6i1BAxItumD/4TzfLiL72DvB9Fre/tpQnB8k9Qavo1UKKLzUYPzRlDJhPhR
+ NDrfSExd80nxn8J4SIUrnA3mtPJLxCL/9qjM1i3o7gH2d6VDwuw+HeuU+RiVEg+wVXm05UTVdwr
+ ciTIzfMLvdyoztT+iuBbv2lz2h82UxRxibRw8WMqUIsGanoC0EJdsVMedeY/Y3QZNqpV0IyeJIm
+ k53mal+d3xzM8d9PPYfXdiejOZDpPVayr19klFJSXYBbzRPTMLB9N3pkMBrmUZUp2FN3UvyYaJX
+ R0jnptugM=
+X-Received: by 2002:a05:6214:598f:b0:91c:7c57:728d with SMTP id
+ 6a1803df08f44-91f24225cffmr12374516d6.37.1794520563002; 
+ Thu, 12 Nov 2026 13:56:03 -0800 (PST)
 Received: from maple.netwinder.org ([204.244.107.52])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-91f23d70489sm5661676d6.21.2026.11.12.13.56.01
+ 6a1803df08f44-91f23d70489sm5661676d6.21.2026.11.12.13.56.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Nov 2026 13:56:01 -0800 (PST)
+ Thu, 12 Nov 2026 13:56:02 -0800 (PST)
 From: Ralph Siemsen <ralph.siemsen@linaro.org>
-Subject: [PATCH v4 0/2] doc: tips for submitting patch series
-Date: Thu, 12 Nov 2026 16:55:45 -0500
-Message-Id: <20261112-doc-sending-patches-v4-0-d6f4b7e3eeba@linaro.org>
+Date: Thu, 12 Nov 2026 16:55:46 -0500
+Subject: [PATCH v4 1/2] doc: develop/sending_patches: add tips for series
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAOE19moC/33NQQ7CIBQE0KsY1mKAIm1deQ/jgsKnxRhooBJN0
- 7tL60KNjctJZt6MKEKwENFhM6IAyUbrXQ58u0Gqk64FbHXOiBEmKGEV1l7hCE5b1+JeDqqDiHU
- hueAGjKkrlJd9AGPvi3o6v3K8NRdQw0zNjc7GwYfHcpvo3Pv/kCimWIiGGNqwUmg4Xq2Twe98a
- NF8kdgboYSvIywjisiaGCMU4fUPUnwiYh0pMlIJI0tN95VS7AuZpukJ9+S7YFMBAAA=
-X-Change-ID: 20261028-doc-sending-patches-d3a464feff98
+Message-Id: <20261112-doc-sending-patches-v4-1-d6f4b7e3eeba@linaro.org>
+References: <20261112-doc-sending-patches-v4-0-d6f4b7e3eeba@linaro.org>
+In-Reply-To: <20261112-doc-sending-patches-v4-0-d6f4b7e3eeba@linaro.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Ralph Siemsen <ralph.siemsen@linaro.org>, E Shattow <e@freeshell.de>
 X-Mailer: b4 0.16-dev-401aa
-X-Developer-Signature: v=1; a=openssh-sha256; t=1794520561; l=549;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1794520561; l=2694;
  i=ralph.siemsen@linaro.org; h=from:subject:message-id;
- bh=fl2FrX/iuJDG9xzd+Ms6SGT3MMNznRHPLH7DpiWGcgE=;
+ bh=+gvBJ2wB7PkmEhupykOQ5QhWV+joNV0lHW9RI+4NWj0=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgG/ALfT0jfT5dAzjFlh+rTh9j4pAiw
  vPQ/tR3mihuAFYAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QPqZoqNf9l4HLjvSVsUUpu2Zr5+HAuVhdFrEbut886pLEw1dsIlcmG3qKQmhYUqw1CJY+GVzAhC
- EMxKr/ObHsAs=
+ QAgvpfRhazzy20QGkafW36vP8dnHch5pUvx6I87WKLkFojLmNYwjAC93zU6TERDmIk/dMLF1JAW
+ YAWjxaGlMXwY=
 X-Developer-Key: i=ralph.siemsen@linaro.org; a=openssh;
  fpr=SHA256:12SQdavZEBUxPbBBtqQJgZ9F8vSvwTB6kFlSNgb4IcM
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -167,30 +169,77 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Related patches can be grouped into a "patch series". Add some tips on
+how to decide how much belongs into a "patch series".
+
+Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
+Reviewed-by: E Shattow <e@freeshell.de>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 --
-Changes in v4:
-- add second patch with minor update to CONTRIBUTE.rst
+Changes for v4:
+- spelling fixes
+- add R-b
+- Line to v3: https://patch.msgid.link/20261106-doc-sending-patches-v3-1-86fa7d158cc2@linaro.org
 
+Changes for v3:
+- explicitly mention keeping bug fixes separate from other changes
+- focus on "keep it small" rather than the exceptions to that rule
+- Link to v2: https://patch.msgid.link/20261104-doc-sending-patches-v2-1-c0a90ff6c049@linaro.org
+
+Changes for v2:
+- small wording changes to help non-native English speakers
+- add R-b
+
+Link to v1:
+https://patch.msgid.link/20261028-doc-sending-patches-v1-1-66b0f1b276de@linaro.org
 ---
-Ralph Siemsen (2):
-      doc: develop/sending_patches: add tips for series
-      doc: CONTRIBUTE: minor spelling and link
-
- doc/CONTRIBUTE.rst              |  4 +++-
  doc/develop/sending_patches.rst | 25 +++++++++++++++++++++++++
- 2 files changed, 28 insertions(+), 1 deletion(-)
----
-base-commit: a38a1d2736eed7978df10f513a5f6df4075b2277
-change-id: 20261028-doc-sending-patches-d3a464feff98
+ 1 file changed, 25 insertions(+)
 
-Best regards,
---  
-Ralph Siemsen <ralph.siemsen@linaro.org>
+diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
+index 99581dc0ba0..dd06d4a8968 100644
+--- a/doc/develop/sending_patches.rst
++++ b/doc/develop/sending_patches.rst
+@@ -184,6 +184,31 @@ General Patch Submission Rules
+   cases, you did something wrong if your patch exceeds this limit. Think again
+   if you should not split it into separate logical parts.
+ 
++Tips for creating patch series
++------------------------------
++
++A series of related patches can be sent as a "patch series", as described
++above. Individual patches should be small and self-contained. Likewise,
++this also applies to each "patch series". Keep the following in mind:
++
++* large series are harder to review. Maintainers are busy and may postpone
++  large reviews, whereas smaller reviews are more easily accommodated.
++
++* bug fixes should not be part of a larger series, so that the fixes can
++  get reviewed and merged quickly.
++
++* tools like ``b4`` and ``patman`` send the entire patch series to all
++  reviewers, even though individual reviews may only care about some parts.
++  Filtering out the relevant parts takes time away from actual reviews.
++
++Therefore large series should be broken into smaller sub-series, for example by
++subsystem (clock, pinctrl, reset, etc.). This allows better targeting of only
++the relevant reviewers for each sub-series. Finding the right granularity can
++be difficult, but when in doubt, aim for smaller changes.
++
++Overall, the goal is to make changes easily understood by reviewers, as well
++as the next person who works on the code.
++
+ Attributing Code, Copyrights, Signing
+ -------------------------------------
+ 
+
+-- 
+2.55.0
 
