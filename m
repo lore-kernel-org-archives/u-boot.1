@@ -2,28 +2,28 @@ Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 224AC606A321
-	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 11:57:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8962606A323
+	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 11:57:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=G3RLt9PA;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=SfDxaChy
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=RtJHDmgM;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=Ya3NTzA8
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0113640D12;
-	Thu, 12 Nov 2026 11:57:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A74C440D96;
+	Thu, 12 Nov 2026 11:57:11 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 0lYT-NRduO8l; Thu, 12 Nov 2026 11:57:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 27537406DE
+ id PwEUmRhvunXx; Thu, 12 Nov 2026 11:57:10 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org A17F740D0C
 Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794484623;
-	b=moCWb5/hOpdt0PX8nqj9V4yuV0QeoHIQHMLHZ6tuvPKWMuPs9WNSECg9/NZOd0/oEJxy
-	 pPog1nUbBTal54E8tAjVW9g6OCj5q45IDwVB6CwMY2xI7ynp2+kLmjefwSXAatCXrosbD
-	 5cNF/aL5U/xJUIJUzDLnpD8hhU/kKsj4XyHrb8HOH3RUPD/F8qE6htBZoPjUfrKEAXTFU
-	 +Zh8sA5f2ptE5gDjSgkFFCpzG++6H8IfUjRShI8y7zDMLRK+4VK5HFMV6aOZtOuSKGCUG
-	 Z2em0RbsrdK2+6r+KMsgxQxhsoNjEJSyLfJe75kW02c7QyMgLDWygi/d59uaKQPLCiw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794484630;
+	b=FEiBnR+9ANVCkOgwYpaaRcrhImdbO8WRrMQki1vpP3vglMkF2o8HEtbkF0RlD0qZrs1r
+	 XSFn5v6ZgHX68OZH4MFfemIxr1WnkfVKMB53CFOhe2wnyb7P6JXVMGppvBGGr392mFzlh
+	 LL82lxJy89QYhhUIqwjGIjzZA4bKkON0IXCVAk8Ka2TKyvfzuHs9SmWXMy1zKW4HCKEPe
+	 MyXGZtDgO9TkD6cfseLIriKwVyf+TwV81GsZ/BctyaerzpJgNh0RLywx2hOvGmzTAoOYm
+	 EcJNGcWNwBwePfrLNSTrG8XEFm5d6/93kFU/A1rU2XjQ1Gt9jbsDX033Hijn827Zlbw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794484623;
+	c=relaxed/relaxed; t=1794484630;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -32,71 +32,71 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-ZohoMailClient:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=IlfVkdmHO1KCAlG/AEyUBYpQDvJXjX/bulguR5sWQ94=;
-	b=PO/dJY3Lket6O6SrttfktjaCkPrjlQ41R8mCJkNW0uLC2dS+6YyncvrhF3nICWXWGxfS
-	 EGOqO/H2rJ0SKK5eN3HUsvLYM5aknsBTvNiWJVBPVhSWPLKCsIILD1LIYIvP3dgKOcrVX
-	 qUgvfW8EoriFqqHkj5Y6ObHC8y+xb6cPJJcQ/6C9ifOWHGnLp/zYmSkXiZvs7yyvkmKVH
-	 RHwtC3TRqCVp22V44CQXNNiifmwcUx0mcAeWikbmhOKPWwISt/K1RY623ITAUX7R4ohWF
-	 12X89UsMAcRey8YnWaG5fmRIjSucOIZ8r7p13O6b+4waLbx4ifo9CvxRwwCDXZdyNgg==
+	bh=hwNa7Z+qv5u24kzzn63bU8H3eiYfCtoQPUgmk9xViso=;
+	b=rdRSTGXnwbXi4DerCZHh1f/mRNTb6ERPrblWORKx17818NUxq8IFcsWcuypIqG3mfSkC
+	 dP2f7923YaVT8ofjw6PjYN1svpGnxu3jprHcGbtcbG4RgEhu8Dqp5kacBAcVSVzZafH64
+	 9eOev2fx5uztr7YjArGP15f3AzNGiFNdiy7vmvGRTjggkJXmSgv5hb4TpVspSJLLbovfD
+	 JJkO0OlkALnWmfZ+cuSTbMKzljIB/kXBQ6QP1P3PE74oh5YgiCbia9sEbZBYTwSkaVWOz
+	 86v7WeBLka3y9hBz8OfK739RkWZ3yE/t73Bpc5eRw/UXg2D8hSakBBMMV83Id2Xv54Q==
 ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794484623;
-	bh=IlfVkdmHO1KCAlG/AEyUBYpQDvJXjX/bulguR5sWQ94=;
+	d=lists.u-boot-project.org; s=default; t=1794484630;
+	bh=hwNa7Z+qv5u24kzzn63bU8H3eiYfCtoQPUgmk9xViso=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=G3RLt9PAuP9a/fRk4/pYeRvXF2DO/ZBDZwRH5s8ywc1Kj+KdFwAMye91pseO63XjR
-	 KIqtHi7rxN3MGHpMDOc/KB7J1/j82go5bEcb6tLpTUan9BJ18kd4eqJZymWoBp8fB4
-	 uESDnsIa7aFXS6pma9dJETcMylUTzyDg3QjOO7Xsp04nEm9X0+ShFe3PNXH+1rW6PX
-	 WRjqWieIrajSpZ1EuKFWaQnMXrQkmsaPF/3Gua3q95NEUloBHG23G8BeglNhpDhhJc
-	 h8QMAZZv0m1gDQ7G12yTB79roprIrKu8nbKqoYCnSuS9lNTk4Yc7pFpjnXTsbgl8MQ
-	 7Qd9bz4K3D0sQ==
+	b=RtJHDmgMlYfYVwNapx2kvduiQwgG+pOdenB9Kt4Fl8VyQiXlRgdubhRHAzPl9lvq1
+	 WjBlJKWWvial4G122pX3qKYMjoxkvCS+JwXY3KnaEJhZjP87Co8R4/xFofWzKsK6aZ
+	 d9lPV/OkepAINudRtEcrrIV9pdMltekj/LmwNPofPyuTTa0M1DfTnf9rCnxt2uS+kS
+	 J2o3AuteXC3leNoCjAe4LwK+HeDiVVwPlQ7CYcz8N4XxV0uDDr3WMK6eQPZoR2c96J
+	 aoJLyCW2C1f4Ajv6tsjCYOQvCMYOKUH1vCgHeow+DR5PJM8cXuXTsjWQCUiLReDxGC
+	 gG9px1XlkPaFA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 27537406DE;
-	Thu, 12 Nov 2026 11:57:03 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id 1B9BB1A6
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:57:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A17F740D0C;
+	Thu, 12 Nov 2026 11:57:10 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id C5FCC235
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:57:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 01EF7403FE
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:57:01 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id B7B868144C
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:57:09 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ZoJu9x5LQmtI for <u-boot@lists.u-boot-project.org>;
- Thu, 12 Nov 2026 11:57:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 50640401A1
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FTANUaIr_sXS for <u-boot@lists.u-boot-project.org>;
+ Thu, 12 Nov 2026 11:57:09 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 018488144A
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip=165.173.180.15
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
  helo=sender6-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp2.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc
- header.a=rsa-sha256 header.s=zmail header.b=SfDxaChy
+ header.a=rsa-sha256 header.s=zmail header.b=Ya3NTzA8
 Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
  [165.173.180.15])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 50640401A1
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:56:59 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 018488144A
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:57:08 +0000 (UTC)
 DKIM-Signature: a=rsa-sha256;
- b=SfDxaChyzkP2/g57FuP1i8goVGH5i6sKBuf70zrp5+DpHZM2y/U19i+Wg12KSvNtUrDjHcHV2a1JmMlgQLR7eQK8hjWLmS1o6LBYtNZsppmV0zDroqaQaxv0uvhUsO8krqxWgY6CV7tyOuTLNb9PEF7tGWMBfmmBZISlcAqi2Qk=;
+ b=Ya3NTzA8y/UTbua3pyvS1YMVEU30PeTnnsg1KMPobk/kPHtMIFvkGIRtd5QADbFRRfUQoC8QJABy23HeeVv4xwDxlpIDH1TETKZ9KajUvwXdf/L6USst4meVBVw2SapaxNwpAtnW2pXpVybpINKD4HCfGBEXY6QXMU2LYe43Tiw=;
  c=relaxed/relaxed; s=zmail; d=ziyao.cc; v=1;
- bh=IlfVkdmHO1KCAlG/AEyUBYpQDvJXjX/bulguR5sWQ94=;
+ bh=hwNa7Z+qv5u24kzzn63bU8H3eiYfCtoQPUgmk9xViso=;
  h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 179448461281441.4079894893913;
- Thu, 12 Nov 2026 03:56:52 -0800 (PST)
+Received: by smtp.zohomail.com with SMTPS id 1794484622400221.89336768109956; 
+ Thu, 12 Nov 2026 03:57:02 -0800 (PST)
 From: Yao Zi <me@ziyao.cc>
 To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v7 11/20] LoongArch: Generic platform type
-Date: Thu, 12 Nov 2026 11:54:29 +0000
-Message-ID: <20261112115438.1837663-12-me@ziyao.cc>
+Subject: [PATCH v7 14/20] timer: Add loongarch_timer driver
+Date: Thu, 12 Nov 2026 11:54:32 +0000
+Message-ID: <20261112115438.1837663-15-me@ziyao.cc>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261112115438.1837663-1-me@ziyao.cc>
 References: <20261112115438.1837663-1-me@ziyao.cc>
@@ -122,8 +122,13 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
 
-Provide a generic platform with some common routines expected to be
-implemented at CPU level.
+Implement a timer driver for LoongArch architecture timer. It's synced
+in hardware for every core in a system, and frequency information can be
+gathered from CPUCFG instruction.
+
+It is not described in fdt, thus a DRVINFO is declared for it. During
+probing, stability of the timer frequency is checked through CPUCFG, and
+the probing would fail if it isn't constant.
 
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Signed-off-by: Yao Zi <me@ziyao.cc>
@@ -132,128 +137,191 @@ Reviewed-by: Simon Glass <sjg@chromium.org>
 
 No changes since v5
 
-Changed from v4
-- Avoid using LoongArch-specific cache_flush() helpers in
-  cleanup_before_linux()
+Changed from v4:
+- Convert base_freq to unsigned long before calculating timer frequency
+  to avoid possible overflow
 
 No changes since v3
 
 Changed from v2
-- Select CPU if DISPLAY_INFO is enabled
-- Reword the commit message, re-titled as "LoongArch: Generic platform
-  type"
-- Fix the comment for cleanup_before_linux() to note that cache isn't
-  disabled, captilize Linux
-- Drop unused DECLARE_GLOBAL_DATA_PTR from cpu/generic/dram.c
+- include div64.h for definition of lldiv()
+- Rename loongarch_timer_bind() to loongarch_timer_probe(), to correctly
+  reflect that it's used in the probe() callback
+- Bail out with -ENODEV when missing LLFTP support, which means there
+  isn't a timer with stable frequency
 
-No changes since v1
+No changes from v1
 ---
- arch/loongarch/Kconfig              |  1 +
- arch/loongarch/cpu/generic/Kconfig  | 13 +++++++++++++
- arch/loongarch/cpu/generic/Makefile |  7 +++++++
- arch/loongarch/cpu/generic/cpu.c    | 23 +++++++++++++++++++++++
- arch/loongarch/cpu/generic/dram.c   | 16 ++++++++++++++++
- 5 files changed, 60 insertions(+)
- create mode 100644 arch/loongarch/cpu/generic/Kconfig
- create mode 100644 arch/loongarch/cpu/generic/Makefile
- create mode 100644 arch/loongarch/cpu/generic/cpu.c
- create mode 100644 arch/loongarch/cpu/generic/dram.c
+ drivers/timer/Kconfig           |   8 ++
+ drivers/timer/Makefile          |   1 +
+ drivers/timer/loongarch_timer.c | 132 ++++++++++++++++++++++++++++++++
+ 3 files changed, 141 insertions(+)
+ create mode 100644 drivers/timer/loongarch_timer.c
 
-diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
-index ac4be2c837c0..1f376ca291c1 100644
---- a/arch/loongarch/Kconfig
-+++ b/arch/loongarch/Kconfig
-@@ -12,6 +12,7 @@ endchoice
- # board-specific options below
+diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
+index 2b9123020533..12d93274f0f6 100644
+--- a/drivers/timer/Kconfig
++++ b/drivers/timer/Kconfig
+@@ -353,4 +353,12 @@ config GOLDFISH_TIMER
+ 	  It uses the Goldfish RTC hardware to provide a nanosecond-resolution
+ 	  timer, commonly found in QEMU virt machines.
  
- # platform-specific options below
-+source "arch/loongarch/cpu/generic/Kconfig"
- 
- # architecture-specific options below
- choice
-diff --git a/arch/loongarch/cpu/generic/Kconfig b/arch/loongarch/cpu/generic/Kconfig
-new file mode 100644
-index 000000000000..5fcc2156906d
---- /dev/null
-+++ b/arch/loongarch/cpu/generic/Kconfig
-@@ -0,0 +1,13 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
-+#
++config LOONGARCH_TIMER
++	bool "LoongArch CPU timer support"
++	depends on TIMER
++	depends on LOONGARCH
++	help
++	  Select this to enable support for the timer found on
++	  LoongArch CPUs.
 +
-+config GENERIC_LOONGARCH
-+	bool
-+	select SYS_CACHE_SHIFT_6
-+	imply CPU
-+	imply CPU_LOONGARCH
-+	imply LOONGARCH_TIMER
-+	imply CMD_CPU
-+	select CPU if DISPLAY_CPUINFO
-diff --git a/arch/loongarch/cpu/generic/Makefile b/arch/loongarch/cpu/generic/Makefile
+ endmenu
+diff --git a/drivers/timer/Makefile b/drivers/timer/Makefile
+index d8b3f2b65d4c..0b70b915bfeb 100644
+--- a/drivers/timer/Makefile
++++ b/drivers/timer/Makefile
+@@ -37,3 +37,4 @@ obj-$(CONFIG_IMX_GPT_TIMER)	+= imx-gpt-timer.o
+ obj-$(CONFIG_XILINX_TIMER)	+= xilinx-timer.o
+ obj-$(CONFIG_STARFIVE_TIMER)	+= starfive-timer.o
+ obj-$(CONFIG_GOLDFISH_TIMER)	+= goldfish_timer.o
++obj-$(CONFIG_LOONGARCH_TIMER)	+= loongarch_timer.o
+diff --git a/drivers/timer/loongarch_timer.c b/drivers/timer/loongarch_timer.c
 new file mode 100644
-index 000000000000..c98d63b4f831
+index 000000000000..8be3459595cd
 --- /dev/null
-+++ b/arch/loongarch/cpu/generic/Makefile
-@@ -0,0 +1,7 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2024 Jiaxun yang <jiaxun.yang@flygoat.com>
-+#
-+
-+obj-y += dram.o
-+obj-y += cpu.o
-diff --git a/arch/loongarch/cpu/generic/cpu.c b/arch/loongarch/cpu/generic/cpu.c
-new file mode 100644
-index 000000000000..eb11f1349856
---- /dev/null
-+++ b/arch/loongarch/cpu/generic/cpu.c
-@@ -0,0 +1,23 @@
++++ b/drivers/timer/loongarch_timer.c
+@@ -0,0 +1,132 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
 + */
 +
-+#include <cpu_func.h>
-+#include <irq_func.h>
++#include <asm/loongarch.h>
++#include <div64.h>
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <errno.h>
++#include <timer.h>
 +
-+/*
-+ * cleanup_before_linux() is called just before we call Linux, it prepares the
-+ * processor for linux
-+ *
-+ * We disable interrupts and flush caches.
-+ */
-+int cleanup_before_linux(void)
++static u64 notrace loongarch_timer_get_count(struct udevice *dev)
 +{
-+	disable_interrupts();
++	u32 hi, lo;
 +
-+	flush_dcache_all();
-+	invalidate_icache_all();
++	if (IS_ENABLED(CONFIG_64BIT))
++		return drdtime();
++
++	do {
++		hi = rdtimeh();
++		lo = rdtimel();
++	} while (hi != rdtimeh());
++
++	return ((u64)hi << 32) | lo;
++}
++
++static int loongarch_timer_get_freq_cpucfg(unsigned int *freq)
++{
++	unsigned int res;
++	unsigned int base_freq;
++	unsigned int cfm, cfd;
++
++	res = read_cpucfg(LOONGARCH_CPUCFG2);
++	if (!(res & CPUCFG2_LLFTP))
++		return -ENODEV;
++
++	base_freq = read_cpucfg(LOONGARCH_CPUCFG4);
++	res = read_cpucfg(LOONGARCH_CPUCFG5);
++	cfm = res & 0xffff;
++	cfd = (res >> 16) & 0xffff;
++
++	if (!base_freq || !cfm || !cfd)
++		return -EINVAL;
++
++	*freq = (unsigned long)base_freq * cfm / cfd;
 +
 +	return 0;
 +}
-diff --git a/arch/loongarch/cpu/generic/dram.c b/arch/loongarch/cpu/generic/dram.c
-new file mode 100644
-index 000000000000..26cabc4b3ccf
---- /dev/null
-+++ b/arch/loongarch/cpu/generic/dram.c
-@@ -0,0 +1,16 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
++
++#if IS_ENABLED(CONFIG_TIMER_EARLY)
++/**
++ * timer_early_get_rate() - Get the timer rate before driver model
 + */
-+
-+#include <fdtdec.h>
-+
-+int dram_init(void)
++unsigned long notrace timer_early_get_rate(void)
 +{
-+	return fdtdec_setup_mem_size_base_lowest();
++	unsigned int freq;
++	int ret = loongarch_timer_get_freq_cpucfg(&freq);
++
++	if (ret)
++		panic("Failed to read timer frequency from cpucfg: %d\n", ret);
++
++	return freq;
 +}
 +
-+int dram_init_banksize(void)
++/**
++ * timer_early_get_count() - Get the timer count before driver model
++ *
++ */
++u64 notrace timer_early_get_count(void)
 +{
-+	return fdtdec_setup_memory_banksize();
++	return loongarch_timer_get_count(NULL);
 +}
++#endif
++
++#if CONFIG_IS_ENABLED(BOOTSTAGE)
++ulong timer_get_boot_us(void)
++{
++	int ret;
++	u64 ticks = 0;
++	u32 rate;
++
++	ret = dm_timer_init();
++	if (!ret) {
++		rate = timer_get_rate(gd->timer);
++		timer_get_count(gd->timer, &ticks);
++	} else {
++		ret = loongarch_timer_get_freq_cpucfg(&rate);
++		if (ret)
++			panic("failed to read timer frequency from cpucfg: %d\n", ret);
++
++		ticks = loongarch_timer_get_count(NULL);
++	}
++
++	/* Below is converted from time(us) = (tick / rate) * 1000000 */
++	return lldiv(ticks * 1000, (rate / 1000));
++}
++#endif
++
++static int loongarch_timer_probe(struct udevice *dev)
++{
++	struct timer_dev_priv *uc_priv = dev_get_uclass_priv(dev);
++	unsigned int rate;
++	int ret;
++
++	ret = loongarch_timer_get_freq_cpucfg(&rate);
++	if (ret < 0) {
++		dev_err(dev, "failed to read timer frequency from cpucfg: %d\n",
++			ret);
++		return ret;
++	}
++
++	uc_priv->clock_rate = rate;
++
++	return 0;
++}
++
++static const struct timer_ops loongarch_timer_ops = {
++	.get_count = loongarch_timer_get_count,
++};
++
++U_BOOT_DRIVER(loongarch_timer) = {
++	.name = "loongarch_timer",
++	.id = UCLASS_TIMER,
++	.probe = loongarch_timer_probe,
++	.ops = &loongarch_timer_ops,
++	.flags = DM_FLAG_PRE_RELOC,
++};
++
++U_BOOT_DRVINFO(loongarch_timer) = {
++	.name = "loongarch_timer",
++};
 -- 
 2.56.0
 
