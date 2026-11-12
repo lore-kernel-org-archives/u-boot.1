@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CB6E606A31C
-	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 11:59:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24851606A323
+	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 11:59:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=ggv3Lpgt;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=i+g5Q6qL
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=YKGZowEs;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=FRY9FJ8b
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 099B9815CC;
-	Thu, 12 Nov 2026 11:59:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EB66440DAD;
+	Thu, 12 Nov 2026 11:59:46 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tZ0hHBK7VTAd; Thu, 12 Nov 2026 11:59:19 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 543CD81586
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794484759;
-	b=UdPFs2ORVdJo0KcyQ00FvP8mOo3guxoI21RVIIuYVB47NfI8ihqdzPMvJDyr5BPu+OT6
-	 a54SCU9HzNR39QcRd+M9S4YnQtaXiKhckKQPcWiS1oiuAIDcSSng//g8HqXA3MfP+7YTh
-	 XzZOdMu5ub3wzCy5785/XhjospkmlD3+jVE338rrVxiGzYQja5hfGYkO5YzCd2CQ2xubH
-	 XR/AAQuWglWD7UGt4nIe9mXErk+4CMmHW3FzhKuVIYIqu707l+XUrJXAmEWYfC8qamCOS
-	 RO4j0Wg4epDepgusnip+JjRZzFxR5zIgrf0e72Q7mnU+asOPZBoG01KgjBGR0ztniAg==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id gOaACTAzcj0G; Thu, 12 Nov 2026 11:59:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org E973940DA7
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794484786;
+	b=Qv4NoG9AdlqSf1sYDAMz2oTA+t9XD28kQHQUfScCGoyt66gvr2AiU+ja7+8HXNWiglLl
+	 pOJ+hTYAdhQh2BZyji+zHFG2xnHFklmeRBeenEdiYnhtBcMAadAViVwEXJQ7+o15CN7hH
+	 mQPCxO4R4nOiRiyS4vaO+V6gHdbpFPo8iHKCosWi9JkYUy43hbc+oj9+V33Df/lan4GJk
+	 6eBzUwby5nTAnyzw44yPLQTDNjFVrTD8SyNyK0WfbGFh5T7QxtF/pnpmsXPXzhCLq1ecp
+	 7Hgm2/M1N6KKR0obFQxJfDAxRrKscXd/VfR4vxKyP6zE6RxebmJ2vm2lYCBWbDz+Fhg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794484759;
+	c=relaxed/relaxed; t=1794484786;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -32,71 +32,71 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-ZohoMailClient:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=q6aSX6ONRm63NPz6iXzvq+27gKJ/JN79ri18cTmRWhA=;
-	b=nUrN+EKeM3ZcD+UqFGSt3c7UsGKvBU8GxejGivuhecBHv/p+pIhAbX3xdaUQsNQmAEkY
-	 SklnGvfYjcdMLS4DLiRiEQSQlt/eP06kyjahcUiIK00chMTuDmoX8nDszmRkFN2jof4Pw
-	 EocK8K9bdm8NXzdSlf1l/+SVfZbyvkHuTUKRRMN+W7na8grnQQ25xyBoiD7dYls6iCdGG
-	 y3f/XjbuCACJY+J2WSHSpBDkDF5rtfT/4h4srxyhVLSyOnMI4sdZhByXutNUjYVFcSb+O
-	 BKZZEZcNXCPQ5w2lm1lkuZUfZHwi9ytrMfQPT5mzg74jgopZMmSMeVK9avfboDM0k2w==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=lLTu73auAnkjgCglIJ8Ph2v+Ce5jXeZ3RYlf0yBgs1s=;
+	b=T70ZafgnYscxe+HcmkM1tealtr1vHRjA4SFSiyH6fw+mxl4h8zYY7plxC/e8cIk65w/o
+	 1fM0PEXXNy+0han3g4W5Ra+4T/hxzPQP95gauZpfvuEvrKhqnxyTMqbIfw5pyIvHKCtgW
+	 Q/3zheinf4/C9rmOe99u54KBKOVp/0nIQjaxWIl788HUUfxktAGOCF5zaCtuBtfLoBlGd
+	 CwzruoJPhCZGZLUVqnk7a9loNMVKo9CK2Nzt6+0yQcKNZwhwlkY2NXAJ5lWwI6qX7bBRh
+	 VvJ/jsNfCrc26CDSOJBb5MCXTi9RFseDEs0Esaw/Ls1ZCshM02aFXrckyDmk7Cq3Kfw==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794484759;
-	bh=q6aSX6ONRm63NPz6iXzvq+27gKJ/JN79ri18cTmRWhA=;
+	d=lists.u-boot-project.org; s=default; t=1794484786;
+	bh=lLTu73auAnkjgCglIJ8Ph2v+Ce5jXeZ3RYlf0yBgs1s=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ggv3LpgtuWNT8YN31zXJGxmGyaXBZRLdNDGP24tjtStK94nK0FVvA0dcBri3ecfAm
-	 MohJGirE719ZhOhQU0H7P/buh2jxjVSWbhQAwbDjP3mMI6daHvkoGJKBkjYRhzphjL
-	 XMNDQyb1fljKvKxR1RZoTePcae0WPBTOKHC2MRsBZuJ4/iIQi1a1pEB75gCb4z87a7
-	 Je53UbA37+9f3iGZWoGS2HPZX0C+00rb0hIiM+1BYhVfTZZ+e5PY+ACkHJsdUI+IOW
-	 0nRcghinovw8HkTX64+5/Ooch3FmVG5S3PvQZ7UDFzNiTx2NgWRmoMQE+qVy0J9gd4
-	 hfvRqUk9ITBCA==
+	b=YKGZowEsvnAhlsyiM1VnVuAO6uRnokgdZAMF4cFum3WrRggRoy549i6NrwT4vJ8YJ
+	 qwOiyDvZ6qwytEdulpxqnHhVUOm3hR0H1pkDcmMdHl9b851s9NZayywfBD3OVIxtor
+	 w8xQMbpxyOaVCYJ8glDrAaBQGKxKBF07S03JMosUV2lWp8NUbCaqS9kHjcs8S7+4OL
+	 XhbSgr07QpuNMZrhk81JRQZjmaUsRzkJ2STqF4H5rp+jpZ5q8R3/0qnJ6JP/qLJhE8
+	 sy3sJPEdwPNACnHkeHTFsDE+DJzBKjH1KxDWvRcRgGHrPH1QfhiTQKefeeNo8/Onwu
+	 0bqOD2H0NABKg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 543CD81586;
-	Thu, 12 Nov 2026 11:59:19 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id 5DAA570B
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:59:16 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E973940DA7;
+	Thu, 12 Nov 2026 11:59:45 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 829681A6
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:59:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 4F24360A85
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:59:16 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 68BB7815B6
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:59:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id N2zLysBiwfMB for <u-boot@lists.u-boot-project.org>;
- Thu, 12 Nov 2026 11:59:15 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A7CDC607F7
-Authentication-Results: smtp3.osuosl.org; arc=pass header.oldest-pass=0
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id Kowhcc4zt8XM for <u-boot@lists.u-boot-project.org>;
+ Thu, 12 Nov 2026 11:59:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 6D25281746
+Authentication-Results: smtp1.osuosl.org; arc=pass header.oldest-pass=0
  smtp.remote-ip=165.173.180.15
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
  helo=sender6-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc
- header.a=rsa-sha256 header.s=zmail header.b=i+g5Q6qL
+ header.a=rsa-sha256 header.s=zmail header.b=FRY9FJ8b
 Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
  [165.173.180.15])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A7CDC607F7
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:59:14 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6D25281746
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:59:42 +0000 (UTC)
 DKIM-Signature: a=rsa-sha256;
- b=i+g5Q6qLnYuXSGHEFbZvMFQFsn1DZmJHfdJ3fZ2s+OzF+QBmURqwhs53JwpguvyYOLKwcIBwF79xINAQwUiUzS6zCsqk140rS6zVNTbcz8ySsuVbqbVZIlsNmUTDLFfg0zJdX4zXqOyYoMdX4QWjaQv8t4UwY+e8uZ3GKGx+QDc=;
+ b=FRY9FJ8b++Y1tcwoVniIY0Yx4KUcNA2/XPa1b443Ta1JxmQF+Y7kSgivjsgvPfXAKedg84+SIzmpDgvLPStCwtbDKCNZj8Ckt7YM6idLMRa6SNm3CMMLBMeWhdywpPn2pKBoJyiY3Ctwljqnzi8g7D1+PKR97TAepsF5QYf9Fxw=;
  c=relaxed/relaxed; s=zmail; d=ziyao.cc; v=1;
- bh=q6aSX6ONRm63NPz6iXzvq+27gKJ/JN79ri18cTmRWhA=;
+ bh=lLTu73auAnkjgCglIJ8Ph2v+Ce5jXeZ3RYlf0yBgs1s=;
  h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1794484499352552.7638715269876;
- Thu, 12 Nov 2026 03:54:59 -0800 (PST)
+Received: by smtp.zohomail.com with SMTPS id 1794484502714878.7723796529884;
+ Thu, 12 Nov 2026 03:55:02 -0800 (PST)
 From: Yao Zi <me@ziyao.cc>
 To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v7 02/20] linux/io.h: Use map_physmem to implement ioremap
-Date: Thu, 12 Nov 2026 11:54:20 +0000
-Message-ID: <20261112115438.1837663-3-me@ziyao.cc>
+Subject: [PATCH v7 03/20] image: Take entry point as an output of booti_setup
+Date: Thu, 12 Nov 2026 11:54:21 +0000
+Message-ID: <20261112115438.1837663-4-me@ziyao.cc>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261112115438.1837663-1-me@ziyao.cc>
 References: <20261112115438.1837663-1-me@ziyao.cc>
@@ -115,56 +115,219 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Jiaxun Yang <jiaxun.yang@flygoat.com>
 
-ioremap API is here to be compatible with Linux drivers,
-to maintain compatibility we need to ensure we are using
-the same way to determine virtual address for IO devices
-from physical address.
+For LoongArch, the start of the image is not the entry point. Refactor
+the code base to allow entry point to be supplied by booti_setup().
+Also update the kerneldoc comment for booti_setup() to reflect the
+latest argument lists.
 
-map_physmem is U-Boot's standard way for doing the trick,
-we should follow that. For architectures VA == PA it has
-no impact, for MIPS it has it's own ioremap implementation
-in asm/io.h anyway.
-
+Link: https://www.kernel.org/doc/html/v7.2/arch/loongarch/booting.html#header-of-linux-loongarch-kernel-images
 Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Signed-off-by: Yao Zi <me@ziyao.cc>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 
-No changes since v3
+No changes since v6
+
+Changed from v5
+- Re-title, change "setup_boot" to "booti_setup"
+
+No changes since v4
+
+Changed from v3
+- Collect Tom's review tags
 
 Changed from v2
-- Collect tags
+- Improve commit message, attach a link to documentation of LoongArch
+  kernel image format
+- Update kerneldoc comment for booti_setup()
 
-No changes since v1
+Changed from v1
+- Correct type of "entry" argument for RISC-V and sandbox
 ---
- include/linux/io.h | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ arch/arm/lib/image.c     | 3 ++-
+ arch/riscv/lib/image.c   | 4 +++-
+ arch/sandbox/lib/bootm.c | 2 +-
+ boot/bootm.c             | 5 +++--
+ cmd/booti.c              | 5 +++--
+ common/spl/spl.c         | 9 +++++----
+ include/image.h          | 7 ++++---
+ 7 files changed, 21 insertions(+), 14 deletions(-)
 
-diff --git a/include/linux/io.h b/include/linux/io.h
-index 79847886be95..ada6525a1c6a 100644
---- a/include/linux/io.h
-+++ b/include/linux/io.h
-@@ -59,11 +59,12 @@ static inline void iowrite64(u64 value, volatile void __iomem *addr)
- static inline void __iomem *ioremap(resource_size_t offset,
- 				    resource_size_t size)
+diff --git a/arch/arm/lib/image.c b/arch/arm/lib/image.c
+index 2268661de93a..62c28b8310a5 100644
+--- a/arch/arm/lib/image.c
++++ b/arch/arm/lib/image.c
+@@ -29,7 +29,7 @@ struct Image_header {
+ };
+ 
+ int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
+-		bool force_reloc)
++		ulong *entry, bool force_reloc)
  {
--	return (void __iomem *)(unsigned long)offset;
-+	return (void __iomem *)map_physmem(offset, size, MAP_NOCACHE);
+ 	struct Image_header *ih;
+ 	uint64_t dst;
+@@ -72,6 +72,7 @@ int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
+ 		dst = gd->dram[0].start;
+ 
+ 	*relocated_addr = ALIGN(dst, SZ_2M) + text_offset;
++	*entry = *relocated_addr;
+ 
+ 	unmap_sysmem(ih);
+ 
+diff --git a/arch/riscv/lib/image.c b/arch/riscv/lib/image.c
+index a82f48e9a505..300be365ddfd 100644
+--- a/arch/riscv/lib/image.c
++++ b/arch/riscv/lib/image.c
+@@ -33,7 +33,7 @@ struct linux_image_h {
+ };
+ 
+ int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
+-		bool force_reloc)
++		ulong *entry, bool force_reloc)
+ {
+ 	struct linux_image_h *lhdr;
+ 
+@@ -56,6 +56,8 @@ int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
+ 		*relocated_addr = image;
+ 	}
+ 
++	*entry = *relocated_addr;
++
+ 	unmap_sysmem(lhdr);
+ 
+ 	return 0;
+diff --git a/arch/sandbox/lib/bootm.c b/arch/sandbox/lib/bootm.c
+index 7a5f6f7d36ed..1a41c7c2735b 100644
+--- a/arch/sandbox/lib/bootm.c
++++ b/arch/sandbox/lib/bootm.c
+@@ -84,7 +84,7 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
+ 
+ /* used for testing 'booti' command */
+ int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
+-		bool force_reloc)
++		ulong *entry, bool force_reloc)
+ {
+ 	log_err("Booting is not supported on the sandbox.\n");
+ 
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 4b03a367a217..46a19a37f19f 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -888,9 +888,10 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 	    (images->os.arch == IH_ARCH_ARM64 || images->os.arch == IH_ARCH_RISCV)) {
+ 		ulong relocated_addr;
+ 		ulong image_size;
++		ulong entry;
+ 		int ret;
+ 
+-		ret = booti_setup(load, &relocated_addr, &image_size, false);
++		ret = booti_setup(load, &relocated_addr, &image_size, &entry, false);
+ 		if (ret) {
+ 			printf("Failed to prep kernel image (err=%d)\n", ret);
+ 			return BOOTM_ERR_RESET;
+@@ -904,7 +905,7 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 			memmove((void *)relocated_addr, load_buf, image_size);
+ 		}
+ 
+-		images->ep = relocated_addr;
++		images->ep = entry;
+ 		images->os.start = relocated_addr;
+ 		images->os.end = relocated_addr + image_size;
+ 	}
+diff --git a/cmd/booti.c b/cmd/booti.c
+index e6f67d6e1368..24c55ff92a27 100644
+--- a/cmd/booti.c
++++ b/cmd/booti.c
+@@ -27,6 +27,7 @@ static int booti_start(struct bootm_info *bmi)
+ 	ulong ld;
+ 	ulong relocated_addr;
+ 	ulong image_size;
++	ulong entry;
+ 	uint8_t *temp;
+ 	ulong dest;
+ 	ulong dest_end;
+@@ -74,7 +75,7 @@ static int booti_start(struct bootm_info *bmi)
+ 	}
+ 	unmap_sysmem((void *)ld);
+ 
+-	ret = booti_setup(ld, &relocated_addr, &image_size, false);
++	ret = booti_setup(ld, &relocated_addr, &image_size, &entry, false);
+ 	if (ret)
+ 		return 1;
+ 
+@@ -85,7 +86,7 @@ static int booti_start(struct bootm_info *bmi)
+ 		memmove((void *)relocated_addr, (void *)ld, image_size);
+ 	}
+ 
+-	images->ep = relocated_addr;
++	images->ep = entry;
+ 	images->os.start = relocated_addr;
+ 	images->os.end = relocated_addr + image_size;
+ 
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 6c9a1a1cbcc3..3856aafbca9a 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -115,7 +115,8 @@ int __weak bootz_setup(ulong image, ulong *start, ulong *end)
+ 	 return 1;
  }
  
- static inline void iounmap(void __iomem *addr)
+-int __weak booti_setup(ulong image, ulong *relocated_addr, ulong *size, bool force_reloc)
++int __weak booti_setup(ulong image, ulong *relocated_addr, ulong *size,
++		       ulong *entry, bool force_reloc)
  {
-+	return unmap_physmem(addr, MAP_NOCACHE);
+ 	 return 1;
  }
- #endif
+@@ -342,13 +343,13 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
+ 	}
  
+ 	if (IS_ENABLED(CONFIG_SPL_OS_BOOT) && IS_ENABLED(CONFIG_SPL_BOOTI)) {
+-		ulong start, size;
++		ulong start, size, entry;
+ 
+-		if (!booti_setup((ulong)header, &start, &size, 0)) {
++		if (!booti_setup((ulong)header, &start, &size, &entry, 0)) {
+ 			spl_image->name = "Linux";
+ 			spl_image->os = IH_OS_LINUX;
+ 			spl_image->load_addr = start;
+-			spl_image->entry_point = start;
++			spl_image->entry_point = entry;
+ 			spl_image->size = size;
+ 			debug(PHASE_PROMPT
+ 			      "payload Image, load addr: 0x%lx size: %d\n",
+diff --git a/include/image.h b/include/image.h
+index f059fc5811c0..eb19f6d34e39 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1129,16 +1129,17 @@ int image_setup_linux(struct bootm_headers *images);
+ int bootz_setup(ulong image, ulong *start, ulong *end);
+ 
+ /**
+- * Return the correct start address and size of a Linux aarch64 Image.
++ * Return the correct start address and size of a Linux Image.
+  *
+  * @image: Address of image
+- * @start: Returns start address of image
++ * @relocated_addr: Returns start address of image
+  * @size : Returns size image
++ * @entry: Returns entry point of image
+  * @force_reloc: Ignore image->ep field, always place image to RAM start
+  * Return: 0 if OK, 1 if the image was not recognised
+  */
+ int booti_setup(ulong image, ulong *relocated_addr, ulong *size,
+-		bool force_reloc);
++		ulong *entry, bool force_reloc);
+ 
+ /*******************************************************************/
+ /* New uImage format specific code (prefixed with fit_) */
 -- 
 2.56.0
 
