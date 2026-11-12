@@ -2,195 +2,185 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB3D9606A32E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 16:02:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BA18606A323
+	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 16:04:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=FOv7ZXla;
-	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=diEB63ht
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=DyiN0QHX;
+	dkim=pass (1024-bit key, unprotected) header.d=leica-geosystems.com header.i=@leica-geosystems.com header.a=rsa-sha256 header.s=selector1 header.b=EnKKvyk7
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 756F580AFB;
-	Thu, 12 Nov 2026 16:02:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CF20B80BB7;
+	Thu, 12 Nov 2026 16:04:21 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YITmoDDBgvaV; Thu, 12 Nov 2026 16:02:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 5DB3380BB7
+ id syKcVfbgpAt6; Thu, 12 Nov 2026 16:04:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 17AD88120E
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794499361;
-	b=ice28Uh2bxJsc0jFBmFYlUqDN6g+myYbF6Y95mogWZo36JXmtKyGs404/WYnrqRuj6oo
-	 eXuozS11CWexOjNvXTcD/JZy5hMoaha+M+92Uf34VGJCi5FhaVKD2uX+Ms6q0m7DrhAea
-	 r9mSLYZbW1sTOdZL4M4Y1RL8rYA+CyPZKR/xxkuMZUuRc9MR9dS9cLSFCfIiO8kVK1g1f
-	 I4/VJnFcKevjGkHCsAyDCWIqKXtYKdJL4rgZJ+GdnT1GsR09lzJgM19bsNodvfdZBzbyN
-	 hqSG7i4iflMCz4Z3HNP6ShFn8R1A75hsbmzXii8Lozcw4nalJpJXSWrzqN6SBotDzOw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794499461;
+	b=W5rLiqzLTxgZl5Pt2uvwm+dZwjlDsfl1Vy0jxxKOhdC/G75/eRtwONFErEcdPAM3LFnz
+	 sjb2Iqv8dCIbg5YpXmX9Ei09X0UM5vHMTJR5uz0Cq8fSh1HCYn05zsk6g/1PkO0txi2jk
+	 nFaDU2jVYd1El/W7cXuTtifv9R0FIz/UalBf70Nu89sOyHtcmNjP87+pt4h3iDo3ajk/9
+	 ZS+NAjK1cUWWc55nV/cCyGG7NcKvsCUg+N7NQONt3poGLDL7D+QPLhZS/gi+eWG6+jKVq
+	 gFJWoI/UD2Ru521WfN08CC4hKf48YaEXnCO2Pw9OGf3wA4+nh2ZBVz1Qv9kKhfsZvCA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794499361;
+	c=relaxed/relaxed; t=1794499461;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
-	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
-	 X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
+	 DKIM-Signature:Received:Received:X-MS-Exchange-Authentication-Results:
+	 Received-SPF:Received:Received:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:In-Reply-To:References:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-OriginalArrivalTime:
+	 X-EOPAttributedMessage:X-MS-PublicTrafficType:
 	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-Forefront-Antispam-Report:
+	 X-SET-LOWER-SCL-SCANNER:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
 	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
 	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
 	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-Id:
+	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
 	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
 	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=0AvdD9KrWyIsZHUAk1rU/q7MCkPf2IkJaNSgsJfmk9E=;
-	b=krBjTfzGYnFzs2fLb7WAEI9GfxdJ6Ia60wgAiJweIqV1ccIpm9qQKMAUqGlWgHXjGfTW
-	 KMIOGJbC458bwZ5117LBisGHMLxtHuBC01UOfIHXYF+qGTRyVkZQdCpZ5BqpL2sgfrTIl
-	 koqVvFB5JBm7a0lRQ2bzastJ+Zo2/LRDAo7vvPiizU0kzXoTwZ5vgpsg6apWCTwAr9hGM
-	 TjNNXQ7XdlOmyMqmTtUw9/x4xhoIr6jl31rCV5iBWEpam7730CzCOCIhq8LBvzCKLrLWF
-	 +l+BriCgDz07eipTBzmzKn9h8q+5DitqxMll0tc0pJKRmHj+ayMCScIabN8ZPsTCK9g==
+	bh=tP4vu34GX13H98qngDG8sSO5W4nKtwStMXoupXh7hsE=;
+	b=pXPKxqXwB5DtE/dsJFxjeB2zXv7beo3KTy1YjEofgmf0jKatZPvh+x+paX/rPj0xkJjB
+	 /uy+bxisHzp4T6iEcPGXcfhAz2Ecju9GPv0v1bTpSypO+wavvv38zJwSuNmrOpiaYtHPJ
+	 69jHbs3J39TSYASNvbXyH8MYHLi3cUIjztbaBNxf9v40TTWTRJj0o12+5WHY+wHcdnONY
+	 xh9lIGZXBVtGC/RCrO3LnBvkzLFJLH/B4ZHknBhSfOHD5SqILyy+cP1smKBGKZd6XMt0P
+	 EvQBsFwWwcJEguqywYy2FR9YQpJttiQ1F9JAJA1Dw2d8vnwTUrX/vdihbtWtjgbEskQ==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794499361;
-	bh=0AvdD9KrWyIsZHUAk1rU/q7MCkPf2IkJaNSgsJfmk9E=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794499461;
+	bh=tP4vu34GX13H98qngDG8sSO5W4nKtwStMXoupXh7hsE=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=FOv7ZXlaQafrYMrleoXsYN8LWnXD12AYV3+f4ZSce8MLpI8KjfhkEwQz+gPlSRUiY
-	 5BgHb0+j276PA+6R5VS+mZY6oHpXVsJLcFZTyKIvKAA3PcJjOd4XurNE9pxys0vVrc
-	 Cok1F7xm/I1nVNcN/9gnbrnqbKcTz0FIQfATM9c8wtPtQ4DinV3ITrqd/WH3CpBhxK
-	 iPoOBoPMmwJsITZUN2KV1lF01sqGyR8FikJXIYRiQniEfH/PwE+AqQHplkCY8cz+Ih
-	 VI+NiyA1eYaljJOPxS282/1+hNR47dOqGGc7sIWJYmC0j36EKU8CoPlAgc/nxkNkLr
-	 ehOGsamF72wnA==
+	b=DyiN0QHXKiXmWhpT3bD+aOcWBHBBZ2bssAUgne9i7g/8b9fNsuN2sZawuWQZfP0Do
+	 pQvKxcVepktlxE2MVxSQe02rKKqqDylePN/NHOe5U99JyZgBZxrLSpojxpKyl+RMyW
+	 K/tjaHEubvnfEoPblpup7rlYoW1Bkr2thI1ds7NDU7gLDkSZ/pXyuGk1Q5bV0hGXAb
+	 0riH5saiSpx++q03EaKcfgfON2jSR7d+I01I9yqYWoGJxXtSGbpqV1+LKB3R6+lL+9
+	 KYkewFstQO54nsmQ3YrCF/CMLs89LC26No2aZ6+gAVrNvI+C8f9hXIrSwoT25qsEfb
+	 ZTQ21nmdcBrGA==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5DB3380BB7;
-	Thu, 12 Nov 2026 16:02:41 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id 183902FE
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:02:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 17AD88120E;
+	Thu, 12 Nov 2026 16:04:21 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 408D1235
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:04:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 13454401E2
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:02:40 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 25DBD401E2
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:04:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id C6jPS0YclICi for <u-boot@lists.u-boot-project.org>;
- Thu, 12 Nov 2026 16:02:39 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 6977F400B0
+ id 5Tq0C0-jHCLQ for <u-boot@lists.u-boot-project.org>;
+ Thu, 12 Nov 2026 16:04:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 2E2D740257
 Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c200::1"
+ smtp.remote-ip="2a01:111:f403:c20f::7"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c200::1;
- helo=db3pr0202cu003.outbound.protection.outlook.com;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ client-ip=2a01:111:f403:c20f::7;
+ helo=osppr02cu001.outbound.protection.outlook.com;
+ envelope-from=johannes.schneider@leica-geosystems.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=leica-geosystems.com
 Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=diEB63ht
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6977F400B0
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:02:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ unprotected) header.d=leica-geosystems.com header.i=@leica-geosystems.com
+ header.a=rsa-sha256 header.s=selector1 header.b=EnKKvyk7
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2E2D740257
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:04:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=leica-geosystems.com; 
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0AvdD9KrWyIsZHUAk1rU/q7MCkPf2IkJaNSgsJfmk9E=;
- b=diEB63htUVe6O8+80hbWkbRJg3NGITYXMgBdhUR83aCgFcCEdSKK/7A6qDLqZiuo+ZNja2+eE0Ewl4juyjDsLK6bnfwMvf6rev7TyYDltQIYIrnfEMfd5v5WvqrPDeJHlKI5biJib0iLp6c+zcRUpt6hwws4tXoDZb3tKHk5Rco=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
- by AS8PR04MB7895.eurprd04.prod.outlook.com (2603:10a6:20b:2a3::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.10; Thu, 12 Nov
- 2026 16:02:32 +0000
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0615.009; Thu, 12 Nov 2026
- 16:02:32 +0000
-Message-ID: <d4b06946-acb2-40a4-8e0b-eb9f2a50d484@cherry.de>
-Date: Thu, 12 Nov 2026 17:02:31 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] doc: develop/sending_patches: add tips for series
-To: Ralph Siemsen <ralph.siemsen@linaro.org>, u-boot@lists.u-boot-project.org
-Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, E Shattow <e@freeshell.de>
-References: <20261106-doc-sending-patches-v3-1-86fa7d158cc2@linaro.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20261106-doc-sending-patches-v3-1-86fa7d158cc2@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: VI1PR08CA0215.eurprd08.prod.outlook.com
- (2603:10a6:802:15::24) To PA3PR04MB11153.eurprd04.prod.outlook.com
- (2603:10a6:102:4ab::7)
+ bh=tP4vu34GX13H98qngDG8sSO5W4nKtwStMXoupXh7hsE=;
+ b=EnKKvyk7yXBRSOdlp3+sjXaaJkxEZMF6m79pSmXNARYhgoCBhdRO42/PbVG+XW1KrulW9vFUG0lUbNJG63/Z/xPFU7J1WDczAuAW+CDg90sQJyoxU3iWejJDBoOgzDiDO/vXh0A8s/fqMfAnIIVkaY5BhyFdVWTiTcP49Lj+DMw=
+Received: from GV3P280CA0099.SWEP280.PROD.OUTLOOK.COM (2603:10a6:150:8::34) by
+ DB9PR06MB7481.eurprd06.prod.outlook.com (2603:10a6:10:260::17) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.615.10; Thu, 12 Nov 2026 16:04:10 +0000
+Received: from WA1PEPF000099CE.eurprd04.prod.outlook.com
+ (2603:10a6:150:8:cafe::1f) by GV3P280CA0099.outlook.office365.com
+ (2603:10a6:150:8::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.9 via Frontend Transport; Thu, 12
+ Nov 2026 16:04:09 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 193.8.40.99)
+ smtp.mailfrom=leica-geosystems.com; dkim=none (message not
+ signed) header.d=none;dmarc=pass action=none
+ header.from=leica-geosystems.com;
+Received-SPF: Pass (protection.outlook.com: domain of leica-geosystems.com
+ designates 193.8.40.99 as permitted sender) receiver=protection.outlook.com;
+ client-ip=193.8.40.99; helo=hexagon.com; pr=C
+Received: from hexagon.com (193.8.40.99) by
+ WA1PEPF000099CE.mail.protection.outlook.com (10.167.242.22) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.615.4 via Frontend Transport; Thu, 12 Nov 2026 16:04:08 +0000
+Received: from aherlnxbspsrv01.lgs-net.com ([10.61.228.61]) by hexagon.com
+ with Microsoft SMTPSVC(10.0.17763.1697); 
+ Thu, 12 Nov 2026 17:04:08 +0100
+From: Johannes Schneider <johannes.schneider@leica-geosystems.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Eddie Kovsky <ekovsky@redhat.com>, Tom Rini <trini@konsulko.com>,
+ Tobias Olausson <tobias@eub.se>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
+ Enric Balletbo i Serra <eballetb@redhat.com>, a.fatoum@pengutronix.de,
+ mark.kettenis@xs4all.nl, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ u-boot@lists.u-boot-project.org, Bastian <bst@pengutronix.de>,
+ Rasmus Villemoes <ravi@prevas.dk>,
+ Jaipaul Cheernam <jaipaul.cheernam@est.tech>
+Subject: Re: [PATCH v5 1/3] Add support for OpenSSL Provider API
+Date: Thu, 12 Nov 2026 16:01:20 +0000
+Message-ID: <20261112160408.2321891-1-johannes.schneider@leica-geosystems.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <d9d0d343-c615-4a78-9f24-197ec3fbbee7@cherry.de>
+References: <20261029201348.730274-1-ekovsky@redhat.com>
+ <20261029201348.730274-2-ekovsky@redhat.com>
+ <d9d0d343-c615-4a78-9f24-197ec3fbbee7@cherry.de>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-OriginalArrivalTime: 12 Nov 2026 16:04:08.0367 (UTC)
+ FILETIME=[72F08BF0:01DD72BF]
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|AS8PR04MB7895:EE_
-X-MS-Office365-Filtering-Correlation-Id: 21b35dbf-ba06-4b98-3241-08df40d65c31
+X-MS-TrafficTypeDiagnostic: WA1PEPF000099CE:EE_|DB9PR06MB7481:EE_
+X-MS-Office365-Filtering-Correlation-Id: fca55214-bbd6-479b-41cc-08df40d69594
+X-SET-LOWER-SCL-SCANNER: YES
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|366016|1800799024|10067099003|11063799006|56012099006|261021130227099003|261022075727099003|261022105027099003|261026135527099003|261021133027099003|261022115727099003|261026121527099003|261026130827099003|261022113327099003|261026140227099003|261021135927099003|261021123027099003|261021121427099003|261028144727099003|261102123227099003|261009223027099003|22082099003|18002099003|6133799003|4133799003;
-X-Microsoft-Antispam-Message-Info: iDYUDxnXZQzXB8Xm1Cq8HKnxcjgA/FWWy5UPE6gSKnpVVdtBZ243X8IBguQiI7UkgpbhawTfO1V1QSC29qgox4iBSpd8QqieRmJG/Ym1vHSUm8xzK0LDSWZa8GvATQpMWmG1QEpQhe6fw9R4IOVCRbDVfRncrJnQk0OPBovnWFECKYQNBzE2K6iwENI/7+iVqyTCIduHHjbJkOxP6zh5nMIXW4eur0kssmZspBePW9MDPqEwdHLsTVo7mBoyKv8FuW8zwtPmE1dcuJokLDP1xZLRATOlkg+GJ1vlzBOkWWwX5naW9L8/grT/zWNja+W9QLSaKoeyFicXmILHN482qiMa6NvqGGM+DF/STVlQmx6Eav5krChrKzDdwIdtFIZ+5+h6UkfiUYo70+iYD8g7g7wMZh4sEHZqI9FdPv6OjSdVaymk7y21DhsL46mp1o/ejbNfxGRWZLZy8MrTO8Rs4SvDq9mrL/NklEoB+UugcGGQwRC/bU5KzkP3twStXhqaRSkYDz7XhPy4nWlL3j3Uv5MOfesdnTOBfiG+QhS7VghSHav/SNyJRIdcMPJ9DN1sz32iavxUkoRgJEmjIhA8ubHQRW2AE561sd+h6elNxDrtgl0Y20rIMXG4LWLvkSjh
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(10067099003)(11063799006)(56012099006)(261021130227099003)(261022075727099003)(261022105027099003)(261026135527099003)(261021133027099003)(261022115727099003)(261026121527099003)(261026130827099003)(261022113327099003)(261026140227099003)(261021135927099003)(261021123027099003)(261021121427099003)(261028144727099003)(261102123227099003)(261009223027099003)(22082099003)(18002099003)(6133799003)(4133799003);
+ ARA:13230040|1800799024|376014|23010399003|36860700016|82310400026|11063799006|10067099003|4143699003|56012099006|261022115727099003|261022113327099003|261026121527099003|261022075727099003|261026140227099003|261028144727099003|261022105027099003|261021121427099003|261102123227099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: XeH4U68yucHWgEvv1cJFbLMm6R/50nuLIdxb9NEZ/sY0qj8c3Bm7v9/ZbZ5rRNOpUjszUcKqMtv1YHi+GRAu7iJz/wQFiloYGf4Rl2VbFrQ/LJWCTBhYIARg5XXmxCvGhwy1crHHvDX/WiQbPKyJbwLYHr0P6czxKeLdZUvoP4ngCay3m9pnQZOqwmtUMaVtxvlK3i8Bw+EsX8azfBq8ApQGrvyfjR72tZRBgZWQ7+dQP9G4uMjro6EHpOSwNHuQz1MnKKIRkhb+AmTmYqHptorld+WPVCQXQNYJovBiYc0gEGzxusetVOqNX8Sb5Miq5qF4aW7Blccry8Mibu4tKenZ7VjaVuNshDEM6T27pOAh+v9EylrrKN/bOC8Is566aOU4MjNC+kCNhoQHrhWIdNaRrRLHN7DniJ1V9yCiSrYJHFS07O72uZfaHZakgPKT7UvOTm/Qi5i8gmZnT+38+efvV8E/U8XNfBcDUyJF8zhrFVW9/oejoRU2XGKZyGbb7SyqNgqf5f56kbxXRUAv5Xat+y/FuU/b16xXZ5BXi3aynbCjfcBt3k6/ryIevJ4+ZIU5Qj+V/TyTjXPnpyqvBXHt9ySFFVajbkdqkK4O3AijcamlTlr3Kld6d5Wh21goMjlavUiHupiGJw6FHenL+vgTw7RLGHrn4/kdRpVkRcbCjKb70Pm92ZDd5Hpo+d6oUA/Q/cZrBac2O4umDz5P7A==
+X-Forefront-Antispam-Report: CIP:193.8.40.99; CTRY:CH; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:hexagon.com; PTR:ahersrvdom51.leica-geosystems.com;
+ CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(23010399003)(36860700016)(82310400026)(11063799006)(10067099003)(4143699003)(56012099006)(261022115727099003)(261022113327099003)(261026121527099003)(261022075727099003)(261026140227099003)(261028144727099003)(261022105027099003)(261021121427099003)(261102123227099003)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z3g1NzJzYXBUTHNVdDFhRG55WEJKZFdSWm1waHczZDJ0MlZOVU53eEEwT2Mz?=
- =?utf-8?B?VHMwSEZENUJOY2w1SWJ4a1FLTzl5S1FxNHA0bEFHbzM2NmZ0SDQyQm4zam9w?=
- =?utf-8?B?VWhmbHBrQlMyMGYvMU9ja1VCUGtkMHRYdlA3cmVZZVRrZERoQXVOR3V4V0ky?=
- =?utf-8?B?Z0RNbWN0K1ZRZ0VwcFVqUFQzZlZLZGdmQ3ZJR2ZJb3dGdk5hTWtKT3AyNlFP?=
- =?utf-8?B?Y2tUcDZCMjhXTVBzYkhlbWR5NW5NalZtS2o0RkJ5VDBFWlREREdqbS9FNHMw?=
- =?utf-8?B?a3JJVTRtWnZNdmZjSWphWlhQV0tkNHZrNERZcURBUDJiUFh5NFM1ZnpCL0dH?=
- =?utf-8?B?eTA2ZzJNS2x0NndoSFllZ2swRktJUDdPSTBMRDkyWDMwd2p1ektuc0MrL3Qv?=
- =?utf-8?B?VDRlcTFma1lkZ1YvWjljZWs5SVN5OU5uREkreThvd1htTDMxanRiVWtyeHhO?=
- =?utf-8?B?SnlGZEYvQnY1dzBmanhvZXdzSm5PakYrZUFsM0FaN2lMS2Z5Z1o4bExCa3pX?=
- =?utf-8?B?bGw3a1lQcXJlclVHaTlTNVE4NzNXdElJTUtYVkJ5QmFNQU43MUZVcklNWitL?=
- =?utf-8?B?ZXpKemcxbHYwSFR6bENnRDNNdFdGUWlCSDZjRWFTMzlyS2YwV3hLd0tkTTM4?=
- =?utf-8?B?QlVRMFRkMEo0M2V6cVhNUWFvOXNMb09TY3JMaDE0bFFDSzlXY2NBQUlNY25W?=
- =?utf-8?B?S3lVQmNRNW03UTdOemQvK0plemV2K2w4dkR5R21JRmJJdFYwS3BFSzQvaXdG?=
- =?utf-8?B?VDZWMGIzWXRZSnExOTJVYnZVZmd6SXA4M2ZMVDJHRXhoVU9wOFpvbUs1S0Nj?=
- =?utf-8?B?SlFRWFpidEg2M3Q4TWJnVCtpL2c2ZkRWT1hTQVUveDJicHNKaGU5NmxuV3Ji?=
- =?utf-8?B?eXVZSEtVUFJ4bG5DMFcwS09PWGxXR21oajFXY3E4alZFUXpzZFZHNmZUVFJT?=
- =?utf-8?B?S2pueWZSdnc5VGcwNXZMVzVoczc4SG1VYkpuNXBEazU1UkFCZEdqamRTTFgz?=
- =?utf-8?B?SnJpOVU4ZFpFUDUvZHQwRW1xM2dVQ0l0ZWl4aEYyV2d0Y0pKV0IrZXppU2kr?=
- =?utf-8?B?K1NWZ2FTMWI1aG5GUzMvQ0c2Q2xzTnVFSkNSRnlERnNZRjNJVnNzZ0grQlV2?=
- =?utf-8?B?czZmb0xDUHdTbXpJMnB3cDg4UFliaXZ1TU1pQkJ1Y3ZNYUZIQWVkMU5jaUJt?=
- =?utf-8?B?SnB2K0NzM3VKdE1FZ2xKWnVlcGZ1dHhmQmJKekRnTEFsUjYxOUQ1MFJkYnVo?=
- =?utf-8?B?d0JLZEQ1cTVwbHdpbWFtRktyQTQxSDVja283S1VRcVBBcVlpZ0ZXdDY0K1kv?=
- =?utf-8?B?UUdwWE0xR1dzNGtQMWZYQTB6Y2RKNWgvT1N3T3JhRTRwaUVWQzVDVzQ2ME5z?=
- =?utf-8?B?RUtHaElseTRKVVFvanJDUktCU1VPQWVnM29WNzVpV1VNZjV5QXExalJLY2Va?=
- =?utf-8?B?NVpDbXlSTld0aVJoOUtYc0VFQ0tyVE9RelhCVlRsSDBUcXZHTmpRV2ptRDJZ?=
- =?utf-8?B?dEJ2OUhLWmlnYWFwVkFlZ1NoZUl4OFNuM2ZXeGlWVXJTbTBKcHhBaEVHMWtL?=
- =?utf-8?B?RWJRWG1TK2ZWRDN2UVk4Mzc5akFGZ1JxQ2VocWRaUHByeXRuK0xGcThaYlA2?=
- =?utf-8?B?MU0ramZSbVdpYmFJL2NKdTIrMmR0TXF2ajQzUER4SzFBQytCelRIdnlpc0dP?=
- =?utf-8?B?TUZybHdGV3pRd1lHT0VOUGtvcnhFTEF4REdlV3pKeVRFYm5EbWFlQzNiRCt2?=
- =?utf-8?B?c3NaZEdkMHNzR0dTbDBCSkE5Z3pxdzRmSEtaL1lMYWZxY1haRXAwNGwwbFhL?=
- =?utf-8?B?UytQWU5DbjFQeWVKdTI2NUplYzN3b1RBRUlDbWtzRjdOS1FIK3U3UldSWTY2?=
- =?utf-8?B?K0RMenVIY2NtWXY0YWxhSHc1Z2VpSm5tY1VPamJTZUFLVDQ2d3pvZU1qSldh?=
- =?utf-8?B?OUtoU1NJZ2I1cnhrQTgxN08vVGFycHdxWFRhVkpCNHBpcjlEVHh6bUtCMk9T?=
- =?utf-8?B?b0V6Q1UxY1ptK3JlRSt4MHIzTmdDdzhMRXlkVFNTQ1BySm8wMHk0MmowZ3ZX?=
- =?utf-8?B?V2RlVEtINDM1T3FvRFFlaXZxRGk2bUNLNFdhM3A4RUdQQVJ3NkpTMnQwKzdD?=
- =?utf-8?B?K2xISllJZHpFQ3lLaHNJZStOK1Q4VmdPZnB6NmFNZUY4Y2Y0SjZyRE4rUTVX?=
- =?utf-8?B?QzZnS2xGNUMyTnFCUzFaMVVZMUJNWUwxN0pEQllMNGVoR2h3V28xV0I1UUdI?=
- =?utf-8?B?RDhLeDl6Ull5K0F5NTBmUGxpSDNPcHVOQVNaRE9tVzJPaG4yVWZmdE9qYlVB?=
- =?utf-8?B?akNBTnNEVEkxNUJkQlJqcG96QzQweG4zbzFIUlFkdTFoaDJHbGFyZz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 21b35dbf-ba06-4b98-3241-08df40d65c31
-X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2026 16:02:32.5651 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: P4Tq9RdALoEzokVKsmuPZdVjH3mJgVqk8Gx3i56t6CpqjxxbRVVlIGlKwMmLaB0O6A04ZPx/KT8ZJ3QXiQiDdoiUzlFxDt27SyuwHVEPOa4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7895
+X-MS-Exchange-AntiSpam-MessageData-0: 1tqDeA1A/ZRafY8AqGYjp00VOJRu82RsIFqjke9zb4xSlkNdXm6inTfVprHIEPMIEMtRVEIGJ3xLiLjv8ymlBiY2JTWJsA9+tGmCaWOEZXknbiMprbbdKRWo4qSbkOztdHYZPe4mm/oPoSqL4HeYgcW1SL+1DhHc3JTgt22HKYMY0eJxZNiQf9Bt1chOBvyDLRsV35nMxhuyapgH59zNB/OowIEqxAE/tJZYovSN/bs/mQvITkcWcYcMuAn1OXgNkL/Bn5eUGQsgjNQHfgN70fr0IVnCScSsYao9UEBJX3V+Ads4nQ5i1f4ZmZako5NLHt7vsGIxMPSfsfz4gF7KPwFeySqplGAXoTq0MVgbSaIeZdkfR8WMmuoZNSNcpQqfnBfHWg720z+YgNOz0nHp2/lUkZYYXMqcszssR4KJm7tVkS5/KA5CNB7a3a8JTN/S
+X-OriginatorOrg: leica-geosystems.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2026 16:04:08.6020 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fca55214-bbd6-479b-41cc-08df40d69594
+X-MS-Exchange-CrossTenant-Id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a; Ip=[193.8.40.99];
+ Helo=[hexagon.com]
+X-MS-Exchange-CrossTenant-AuthSource: WA1PEPF000099CE.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR06MB7481
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -200,88 +190,76 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Ralph,
+Hoi Quentin,
 
-On 11/6/26 6:52 PM, Ralph Siemsen wrote:
-> Related patches can be grouped into a "patch series". Add some tips on
-> how to decide how much belongs into a "patch series".
-> 
-> Signed-off-by: Ralph Siemsen <ralph.siemsen@linaro.org>
-> Reviewed-by: E Shattow <e@freeshell.de>
-> --
-> Changes for v3:
-> - explicitly mention keeping bug fixes separate from other changes
-> - focus on "keep it small" rather than the exceptions to that rule
-> - Link to v2: https://patch.msgid.link/20261104-doc-sending-patches-v2-1-c0a90ff6c049@linaro.org
-> 
-> Changes for v2:
-> - small wording changes to help non-native English speakers
-> - add R-b
-> 
-> Link to v1:
-> https://patch.msgid.link/20261028-doc-sending-patches-v1-1-66b0f1b276de@linaro.org
-> 
-> ---
->   doc/develop/sending_patches.rst | 25 +++++++++++++++++++++++++
->   1 file changed, 25 insertions(+)
-> 
-> diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
-> index 99581dc0ba0..b6096cd346f 100644
-> --- a/doc/develop/sending_patches.rst
-> +++ b/doc/develop/sending_patches.rst
-> @@ -184,6 +184,31 @@ General Patch Submission Rules
->     cases, you did something wrong if your patch exceeds this limit. Think again
->     if you should not split it into separate logical parts.
->   
-> +Tips for creating patch series
-> +------------------------------
-> +
-> +A series of related patches can be sent as a "patch series", as described
-> +above. Individual patches should be small and self contained. Likewise,
+On 11/5/26 6:05 PM, Quentin Schulz wrote:
+> On 10/29/26 9:13 PM, Eddie Kovsky wrote:
+[...]
+>>   static int rsa_get_pub_key(const char *keydir, const char *name,
+>>   			   ENGINE *engine, EVP_PKEY **evpp)
+>>   {
+>> +#ifdef USE_PKCS11_ENGINE
+>>   	if (engine)
+>>   		return rsa_engine_get_pub_key(keydir, name, engine, evpp);
+>> +#endif
+>
+> issue: we should fail hard if the user requests to use engines but
+> mkimage/rsa is built without engine support otherwise we may incorrectly
+> sign/verify things with keys the user didn't expect.
+[...]
+> What I ended up doing is:
+>
+> static int rsa_engine_get_pub_key(const char *keydir, const char *name,
+> 				  ENGINE *engine, EVP_PKEY **evpp)
+> {
+> #ifdef OSSL_ENGINE_SUPPORTED
+> [same code as today]
+> #else
+> 	fprintf(stderr, "rsa-sign compiled without engine support\n");
+> 	return -ENOTSUP;
+> #endif
+> }
 
-question: should this be "self-contained"?
+Checked on OpenSSL 4.1 with main (3cb2cbbc) plus this gating, no
+provider code:
 
-Not a native speaker, so don't know. I see we made the same choice in 
-doc/CONTRIBUTE.rst so maybe it's fine how it's written here.
+- It builds, and signs with a key file.
+- mkimage -N pkcs11 -k ...: "rsa-sign compiled without engine
+  support", exit 1. Good.
 
-> +this also applies to each "patch series". Keep the following in mind:
-> +
-> +* large series are harder to review. Maintainers are busy and may postpone
-> +  large reviews, whereas smaller reviews are more easily accommodated.
-> +
-> +* bug fixes should not be part of a larger series, so that the fixes can
-> +  get reviewed and merged quickly.
-> +
-> +* tools like ``b4`` and ``patman`` send the entire patch series to all
-> +  reviewers, even though individual reviews may only care about some parts.
-> +  Filtering out the relevant parts takes time away from actual reviews.
-> +
-> +Therefore large series should be broken int smaller sub-series, for example by
+[...]
+>> @@ -207,13 +251,44 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
+>>   		return -ENOENT;
+>>   	}
 
-typo: into
+Without -N, the same hole is here. With the build fix only,
+mkimage -k "pkcs11:token=...;object=dev;pin-value=..." (key on a
+SoftHSM token) gets to fopen("pkcs11:.../dev.key"), which fails, so
+this returns -ENOENT. image-host.c ("We allow keys to be missing")
+turns that into exit 0; the signature node keeps only algo,
+key-name-hint and sign-images.
 
-> +subsystem (clock, pinctrl, reset, etc.). This allows better targeting of only
-> +the relevant reviewers for each sub-series. Finding the right granularity can
-> +be difficult, but when in doubt, aim for smaller changes.
-> +
-> +Overall, the goal is to make changes easily understood by reviewers, as well
-> +as the next person who works on the code.
-> +
+-k pkcs11: without -N is how 3/3 and your c3855b08 select a token key.
+Your branch closes this once providers land (fba37b81 drops the
+fopen(), b00da645 fails hard), but a build-fix-only 2027.01 has
+neither, so a pkcs11: keydir there gives an unsigned FIT and a green
+build.
 
-With the above fixed:
+We already hit this -ENOENT path once, via -N: v4 compiles the engine
+out and ignores -N, so our old "-N pkcs11 -k <uri without scheme>"
+call opened "<uri>/<hint>.key", exited 0, and only the bootloader
+caught the unsigned FIT. Our current "-k pkcs11:..." call is what a
+build-fix-only 2027.01 would break the same way.
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Could the build fix also return -ENOTSUP for a pkcs11: keydir, like
+for -N?
 
-Is there anything we can/should add to doc/COPNTRIBUTE.rst which is 
-where we expect most people to start documenting themselves on the process?
-
-Thanks!
-Quentin
+Gruß,
+Johannes
