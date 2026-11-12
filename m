@@ -2,108 +2,106 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66167606A32D
-	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 11:00:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21B7C606A321
+	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 11:09:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=rC1B6Ucx;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=C9DBiw4v
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=inTP7L6T;
+	dkim=pass (1024-bit key, unprotected) header.d=netbsd.org header.i=@netbsd.org header.a=rsa-sha256 header.s=20240131 header.b=L4sbdrHp
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2EA588169F;
-	Thu, 12 Nov 2026 11:00:13 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E9D1A816DD;
+	Thu, 12 Nov 2026 11:09:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id mIyeJ_NZrp0k; Thu, 12 Nov 2026 11:00:12 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 3390F81681
+ id 0y9c-_H3CG9t; Thu, 12 Nov 2026 11:09:47 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 271498168D
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794481212;
-	b=iaq0MRepWBsiAv4ODCHmUsDubiTAyP2HQ4NLu1KI/HzeHTrispUEjCqchWrSzZpzpuF/
-	 J3kgWxBf7RjS3k7BKHaZW35lVQsuTUr/lC/gaUxA9wXkOi3hgBgII9RyfAdbNZIvsSu4h
-	 SSeU3oT8GCk85nRmPz8P84NqDP++gn9m9cWWy2jN7QYiALToSPLHp93nintZ7etBeFkXP
-	 qCJSbMW3/zbLtSmjSr1UvuK6xxd61yFhzWKXLVzNCbReUhkpy5FIlRXu74yUayJSXlK3w
-	 ys1jFWDGb53puvHih1OWK+j2AU2J4cQG0HdjN88iDVOVnA1jae2NE39ai2Nw4Tk9sBw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794481787;
+	b=CYXP3KvMj1SM6h44QaVNO6BqgfBBQu+bbUkTZIzBrVTWDQdESeJQ+T1lnB+tJvCkDkZo
+	 +vLLUvElbJLe93gZvHjRBi8Dh/dvYnYj22jDsZn7517ELti5+zQzaTwbWUNM+KB+6Py1R
+	 3QPAX/OytQju/D/XRpMd3089HmQj7btzhlMVOwmhZr6GJdsJ0K77NxA97EkmyO2welmCJ
+	 OM6ZTBhsDyzj8lJvHVt2eGcMuiV9b3xMfO16IWEUsLUSdtWh/rXkXrp9Nj1pr2krCJKi5
+	 pnrYy2BHXYDNP/eQKEeiBheFLTBnzXv7D0ASWhbk/lr0eiNiBXr2N+N1ich0MHuGqmg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794481212;
+	c=relaxed/relaxed; t=1794481787;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
-	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:References:
-	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-Zoho-Virus-Status:X-Zoho-AV-Stamp:X-ZohoMailClient:X-BeenThere:
+	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
+	 DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:References:
+	 MIME-Version:Content-Type:Content-Disposition:In-Reply-To:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=cl04lREpCg9Q4Eb0weDufwctXpFTYgHYIqBp3J/xSk4=;
-	b=Z36KTWazpZ3J0+Vj8uKY2C1UcfawETobmkdeUOfngGPt/ZGDuHyRJVTWC7sA5BBBfGV8
-	 MhM+rt1+3E0LCbeU9jbIaLkdxp9LzznxEK13WM047wBn/L/l3/KsKfqRKUMGsM24BQsrh
-	 1s0a+0mRFAGv6UQNc/KzWe8W5a5RjpLUNJztb/fkEebwAmdaKyE4Yc27z0+F9yHhvIINI
-	 3xW9XR2gQG23NiFQOcCIXWZz++ljU5N9KnW1LrD50eB4DqHe/5scyWvUUmTut7n0QaKEK
-	 4+BzoK7x7MbCEMOfubJOlq7qguhNC8kILD0DAAFfjThv/rJKb7hiueZLjn/H+v/4T6Q==
+	bh=0iD+7HeF4R8uRgC0AtzeIMzgjzTsf2aMtvwYWXr88z4=;
+	b=fzT6r7yUz4yDCiKhNNAwQbBjpBAzmx9BTAg+NPxYMzTfPXYDIfu1n8z49LcGmYt8zCZ4
+	 z24kAjX32vUp33Xsq9YSkti8mXDahjaIsBOZreWaAYdqIav2WWFpOAb1JHIgAQWN6Pu4z
+	 6M/4pG9EGf0JshSVWKWDAluhAANLAfuXvDCT8uEc+pJkzLjb/Aa+WRoT49s50QFd/ra43
+	 3Ygvmz6JF51w7r8ELgsRslWJwKIRMQvrNyIeRncEHtEhvXrjLFBeZlUFo/7WrUFTzli9R
+	 SR/EavKNzBzMEZ5HxGHWya0Yi2hs6ZmK/7/poQFz5Pmk4A7CQJXliHlts8ene3Y1czQ==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794481212;
-	bh=cl04lREpCg9Q4Eb0weDufwctXpFTYgHYIqBp3J/xSk4=;
+	d=lists.u-boot-project.org; s=default; t=1794481787;
+	bh=0iD+7HeF4R8uRgC0AtzeIMzgjzTsf2aMtvwYWXr88z4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=rC1B6Ucx7hjXVY9+Xn4ZjiA6LxY/7WYh1vpp/OEHKXrG8zPNm98FtPlskkgLssUv9
-	 ZBBM5ov4HfAAVubA/d/Thi5tu19UKd5d/rS3hhCsdDXkgRg6cxqdEMsmu4gaZZ/kA1
-	 EIYerF0BT/2YKzgWIDG9dJNXKETBWsFSw2Xn3S331zfwcfRXFVc7YM1I9Cx9hODMFR
-	 0ApqmGxfaTPAMc2nF1d6ap4XGYh6nx5F6ES6N+BCi7RbONW9gj90SUJgaTZ4zWj9yS
-	 fhDLYrBbpn3WBbBMaTigI8vU1PYbYF9uZkhP6UGCy3I9WdrQN7v/qvxH3xb2xJoovB
-	 ikv6qrrOg0hdA==
+	b=inTP7L6TdnN4VOFdwjKpnAix3B0RXQZHtrcYQ+yhCWfQj5wgII80GmRNgYtapc7UB
+	 KIwYbZ0FyoQoSrRO0AI2UAOe93fgODj0SSparGrqhEaj32SYzjU/YggeDZi05iesVv
+	 DEEd30RguFG6rp73PTdJQpel7nTK6Q10rTDyEaVq/FO3/f1OaIoHmN0QG6MJF4Kaxk
+	 ia0588tHHlJeWvXGb2YyOTKHmLQwj/yNyKfB7ltMcsAVN/WkG827HHZkrW1GJFkk4Q
+	 Z2LWYBwXW7IufdK8NVo3Pg80X7UdaRWeD2dzSOucK9RqKyvluGexQ6z+bQHBNsznrY
+	 kRBe6RipawcIg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3390F81681;
-	Thu, 12 Nov 2026 11:00:12 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id C3FA228C
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:00:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 271498168D;
+	Thu, 12 Nov 2026 11:09:47 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 123412E5
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:09:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C168340086
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:00:10 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 03EF14016D
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:09:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 6YwcCCVFuhHU for <u-boot@lists.u-boot-project.org>;
- Thu, 12 Nov 2026 11:00:10 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 596F440042
-Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.182.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.15;
- helo=sender5-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=ziyao.cc
+ id wCJiPh8ygM0b for <u-boot@lists.u-boot-project.org>;
+ Thu, 12 Nov 2026 11:09:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 34AE440042
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip="2001:470:a085:999::25"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2001:470:a085:999::25; helo=mail.netbsd.org;
+ envelope-from=martin@netbsd.org; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org;
+ dmarc=pass (p=none dis=none) header.from=NetBSD.org
 Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=C9DBiw4v
-Received: from sender5-op-o15.zoho.com (sender5-op-o15.zoho.com
- [165.173.182.15])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 596F440042
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:00:08 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256;
- b=C9DBiw4vmAkMN5LPAccJgsMtVv6dh/GFCNgCWYBEcbhc1B/zsWMdmiWdPDAIqDAs8AKRbkdSFTnjk8L6sKUjrUWTf9v0/1Pcr+vOB896qxduI8UlZH5B7YhDg/PM92UKhBQApFaSs8AtQhzFK7iYSs3wWa5m2qUXTe0T6qguLhc=;
- c=relaxed/relaxed; s=zmail; d=ziyao.cc; v=1;
- bh=cl04lREpCg9Q4Eb0weDufwctXpFTYgHYIqBp3J/xSk4=;
- h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1794481194525901.452378707867;
- Thu, 12 Nov 2026 02:59:54 -0800 (PST)
-Date: Thu, 12 Nov 2026 10:59:50 +0000
-From: Yao Zi <me@ziyao.cc>
-To: Martin Husemann <martin@NetBSD.org>, u-boot@lists.u-boot-project.org
-Cc: Yao Zi <me@ziyao.cc>
+ unprotected) header.d=netbsd.org header.i=@netbsd.org header.a=rsa-sha256
+ header.s=20240131 header.b=L4sbdrHp
+Received: from mail.netbsd.org (mail.NetBSD.org [IPv6:2001:470:a085:999::25])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 34AE440042
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 11:09:41 +0000 (UTC)
+Received: by mail.netbsd.org (Postfix, from userid 1214)
+ id EAE7984D39; Thu, 12 Nov 2026 11:09:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=netbsd.org;
+ s=20240131; t=1794481779;
+ bh=0iD+7HeF4R8uRgC0AtzeIMzgjzTsf2aMtvwYWXr88z4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=L4sbdrHpHmzpFaEf1emBTFoiuVY5vEjguSltLTMWW9KdXRfOpbTF++I/tOmwB6x1+
+ VKozKZPeBTFAuK5pdOMC+odSCyXUBkn/IlkqFGpYVm/aa+IvJp/hXWX8C0ZUM1l1JB
+ eL2r+9NbqfQp9ZkzwbUSCM/gEc8KB07p74R4sWkc=
+Date: Thu, 12 Nov 2026 12:09:36 +0100
+From: Martin Husemann <martin@NetBSD.org>
+To: Yao Zi <me@ziyao.cc>
+Cc: u-boot@lists.u-boot-project.org
 Subject: Re: RiscV SBI incompatibilities?
-Message-ID: <avWcJkgU6xFCZS0Q@pie>
-References: <avR9RCMQHL8TZIAR@big-apple.aprisoft.de>
- <avSOoJFxsR6hDuUd@pie>
+Message-ID: <avWecN7K-dDtccPN@big-apple.aprisoft.de>
+References: <avR9RCMQHL8TZIAR@big-apple.aprisoft.de> <avSOoJFxsR6hDuUd@pie>
+ <avWcJkgU6xFCZS0Q@pie>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <avSOoJFxsR6hDuUd@pie>
-X-Zoho-Virus-Status: 1
-X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/294.473.96
-X-ZohoMailClient: External
+In-Reply-To: <avWcJkgU6xFCZS0Q@pie>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -113,64 +111,29 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-8.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=ham
+X-Spam-Status: No, score=-5.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, Nov 11, 2026 at 03:49:52PM +0000, Yao Zi wrote:
-> On Wed, Nov 11, 2026 at 03:35:48PM +0100, Martin Husemann wrote:
-> > Hi folks,
-> > 
-> > maybe I tried something stupid, but it felt like a good idea at first.
-> > 
-> > I am updating my VisionFive 2 board from an oldish installation with
-> > U-Boot 2024.10.
-> > 
-> > To have as few moving parts as possible, I build 2026.10 with the same SBI
-> > that I had lying around from the original 2024.10 build, which happend
-> > to be OpenSBI 1.4.
-> > 
-> > This failed spectacularily: most sbc_* calls for HSM fail with 
-> > -3 (SBI_ERR_INVALID_PARAM).
-> > 
-> > A few calls worked, like sbi_hart_start() and sbi_hart_get_status(),
-> > which told me the hartids I was using were valid, but then doing
-> > e.g. sbi_send_ipi() or sbi_remote_sfence_vma() failed.
-> > 
-> > Does this ring a bell? Is it expected? Did I overlook a "minimal SBI version
-> > 1.X" somewhere?
-> 
-> doc/board/starfive/jh7110_common.rst says,
-> 
-> > 3.  U-Boot for JH-7110 requires OpenSBI v1.5+ generic platform object
-> >     fw_dynamic.bin to be included in the Flattened Image Tree blob. OpenSBI may
-> >     first be built as below:
-> 
-> I had a brief look through the changes from v1.4 to v1.5, and suspect it
-> has something to do with OpenSBI commit c5be0e1ed1fa ("lib: utils/ipi:
-> Skip initialize ipi when dt is not enabled")[1], but don't confirm it :)
+On Thu, Nov 12, 2026 at 10:59:50AM +0000, Yao Zi wrote:
+> Totally unnecessary, just out of curiosity, could you please send a list
+> of failed sbi calls and their corresponding error codes? From this I
+> could probably find out whether it's related to the OpenSBI commit :)
 
-Totally unnecessary, just out of curiosity, could you please send a list
-of failed sbi calls and their corresponding error codes? From this I
-could probably find out whether it's related to the OpenSBI commit :)
+I didn't create a full list, but verified two that did fail:
 
-Feel free to ignore this message if you don't want to :)
+sbi_send_ipi()
+sbi_remote_sfence_vma()
 
-> > Martin
-> 
-> -- 
-> Thanks,
-> Yao Zi
-> 
-> Meow-mrrp-mrow, I'm a cat.
-> 
-> [1]: https://github.com/riscv-software-src/opensbi/commit/c5be0e1ed1fa17b9f9abb49e80db014e067523e4
 
--- 
-Thanks,
-Yao Zi
+Unrelated:
+I still have a strange problem (identical in 2024.10 and 2026.10) that
+sometimes the NVMe is not readable after reboot; I initially thought it
+would be related to a USB storage device being present, but it seems to
+be mostly random. Maybe the USB device enhances the chance for failure,
+wich might point at a power supply problem - I should replace the cable.
 
-Meow-mrrp-mrow, I'm a cat.
+Martin
