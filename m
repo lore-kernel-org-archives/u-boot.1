@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD79C606A321
-	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 12:02:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69307606A31C
+	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 12:02:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=mFY2HU4w;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=jAjdU01d
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=TIQqbMov;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256 header.s=zmail header.b=fcEUDH2M
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B76E8811F5;
-	Thu, 12 Nov 2026 12:02:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4577340971;
+	Thu, 12 Nov 2026 12:02:44 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ds3d5ODqZWkt; Thu, 12 Nov 2026 12:02:40 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org CD58D811D8
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794484960;
-	b=RwgUOtxsKfnXANSehXKg+87uEnEoo8Pr2N0HJRlfXu4q5DPQvgZcinNfrKJLWlN2FFlM
-	 Qp7mkjrurXKKvdrfl20k8B3qtWIbqcYqblIQnExAcUYPwiVBICmhTzlpTLMv7aBC/g74X
-	 kcqGFOumOZFcVzlij9tXqAo+EDWCrHwH1qLULMR9iLBuE3KhjeWAkwzPVIzGqKPPGhBp4
-	 /JGydJcCh8vro91kpBAdELkg94wdFA7JJF5UG8GA2kmxS3NJsoPTRwQWVnBIoWRsSNHKL
-	 XbsI3woulVgzPN6E2aoZ0wK5n3Qk27khR8Stb2tlzUBobmDES8nNs+O3jXpHm8Bw0OQ==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IVoR9hqVC-Vy; Thu, 12 Nov 2026 12:02:43 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 62CA340DE2
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794484963;
+	b=Bu7Krudc8nJC5GRGFqNueprbFSheR5kTPVzTtUsj+ZUKzrjDDCIi0RjHdMwHOEfuabWE
+	 jNIFUZocimclSJKhqBTRqUCIu8XMBhIEgZXxNA/ZlQBewZpokms2Yfv2UpLdm8Po6N0e/
+	 Vxm5oEMCYbwO2xCTZgqLljBB/xqn0FaLq0qj09Z+pa/7E7PjaIz0E9gIclVCayiQ1hfvB
+	 Nh06BCgxucwTz0cp/LnJDvT80951VPwho596BJxMv0Cv1oBV7vi9cwmmDTehNS7WeZcpN
+	 EaRDWGNeFtcBblxZjZXKN5b6Gjicu0IR0NPWutKqzXhGluJjzqxxBlj5N4zL51TS5dg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794484960;
+	c=relaxed/relaxed; t=1794484963;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
@@ -32,71 +32,71 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-ZohoMailClient:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=piI0ugvNqKgNm4ybzy+YiQ/8HeJNLEITPTUqXqGheEA=;
-	b=rOZS+kjSkhJxiYVgG/ZhWLDQq/zfHXcvabx3yItbEU19wjNWaqhjLnv7vGe5R5KabMmS
-	 ASEtkBDug/NTHlA27/XDkyyfAtqj1hSV5/KuAfN4epty5FlTY9Gvnvrsb52fzOl1rM/1F
-	 AKBniIEY4/8uuu3ORAHsCncVi6prsltthHfX8pyjDKAMqldrlC8uFB4mj8SfhogpRJJ8K
-	 sfs+MoP07AVa622J+Gk+rcBnjfhICRsXtJtpEtg3TpaDTvV3t/czH+UxPUDuWUm9pmTKU
-	 7Tiky859imDQu8oxP+RqrGmuZULLg9Z3Pwvd1K9crfhxQqh+YcUZzVH98FatYjQIatw==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=rmu/xAAL4MrODGlzPpP6bPv8PFUKlCXBGE4FGfSU518=;
+	b=QeISPkutSz+ThDi+0FCBkrsRU/R0uzk+jyWbwtSglrhxciIv/3SqQ4NP2Oj0C1PHqzyZ
+	 C2ya3/0ChJfFgRdlvuepOHwRFKYZoCLWvDuCOL+GSpAGw1KU7kzEOPeWuPJWOvMcgVsJx
+	 gUP5RoA86vNaI3/xRKSI3BNj/zuBdSzI1sn2MMd0g1e3riaV6FfcXuVp7BpIsk3ltJcF3
+	 38kuOkHhP/XCY8o8T0nB4+id6cV0MzTF3t1yUTV/Rb4f9Uek8LpCCRgOgwkUiTtZMv9AQ
+	 afmYbK4VWNwb5FdAo6kvnOTqhebLKf28OJP7/DMVFpWYy4k5tSa8ebopRNmDT/TNOlA==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794484960;
-	bh=piI0ugvNqKgNm4ybzy+YiQ/8HeJNLEITPTUqXqGheEA=;
+	d=lists.u-boot-project.org; s=default; t=1794484963;
+	bh=rmu/xAAL4MrODGlzPpP6bPv8PFUKlCXBGE4FGfSU518=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=mFY2HU4wQX0j+uM7/4q0YSFPc1lB0gmbyHJRp/IbfLPvJXMaIdtG4xOqVQRNXbV/D
-	 c7OYT5I2+fAoVHhwouOZAjYtSDvoMS36J27ATzytlt/qPGPUak4QYZzS3vKvibB93N
-	 HR9Fl6Hy0Z89wqS6nwTmMM2Y64aBKGH5rjrQY7cjUtngfl9YsJBIMnoTO4wL0S2YC2
-	 XLr7qFYFttNoUbdVtLpETx2eCn7RatSY337X1M9hj3WPqw+zjlqCr4u7HMihAODy9O
-	 h34TZnmMkKSuIhypgHtuP6kWjbGZIOExCp91coUi2Lt+uM36IpRIFuHBsWHm0q+1Gr
-	 1rPH2Ib1v3OUg==
+	b=TIQqbMovmBr7jmO+FCsrSLI0cpyIRGKUzXI5iXHb0ERNkHhNPq/IKN8Q6igJcp1A+
+	 EzBUwBTH5azqesQ6eickyui1xwohdy1T9OYQ9s+RhABGp7gnmHBUykalC1PdpQuDJd
+	 Zaj6c9T+UK43KmC0obgikPc8BJZLewi40kEWNCxrzWb2iBtaq1SRg0Y8eKsLR6g6Dh
+	 1T5W+7dQYQP1bzScaL2DlFiZXzfYcN/d2LJf+s2r+7uDoMHzRZYyFdrNrRJ1Hq1kuv
+	 oXvWGsEnqKwR4h3DN3HQZVbfp3g4KmsCDOFCXrGNe63oZ2gIYGyjOZT11gWLpT6l3l
+	 sVTwlSlEGJ6dg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CD58D811D8;
-	Thu, 12 Nov 2026 12:02:39 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists1.osuosl.org (Postfix) with ESMTP id ED4BD177B
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 12:02:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 62CA340DE2;
+	Thu, 12 Nov 2026 12:02:43 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 513CC1399
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 12:02:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D3C2F400B3
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 12:02:35 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 42E3F400B3
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 12:02:42 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 1XB0noKO2GV1 for <u-boot@lists.u-boot-project.org>;
- Thu, 12 Nov 2026 12:02:35 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org D469A40042
+ id HKtdbF8d9_hT for <u-boot@lists.u-boot-project.org>;
+ Thu, 12 Nov 2026 12:02:41 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 679B940042
 Authentication-Results: smtp2.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip=165.173.180.15
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.180.15;
- helo=sender6-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
+ smtp.remote-ip=165.173.182.15
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=165.173.182.15;
+ helo=sender5-op-o15.zoho.com; envelope-from=me@ziyao.cc; receiver=<UNKNOWN> 
 Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=ziyao.cc
-Authentication-Results: smtp2.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=ziyao.cc header.i=@ziyao.cc header.a=rsa-sha256
- header.s=zmail header.b=jAjdU01d
-Received: from sender6-op-o15.zoho.com (sender6-op-o15.zoho.com
- [165.173.180.15])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D469A40042
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 12:02:32 +0000 (UTC)
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=ziyao.cc header.i=@ziyao.cc
+ header.a=rsa-sha256 header.s=zmail header.b=fcEUDH2M
+Received: from sender5-op-o15.zoho.com (sender5-op-o15.zoho.com
+ [165.173.182.15])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 679B940042
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 12:02:39 +0000 (UTC)
 DKIM-Signature: a=rsa-sha256;
- b=jAjdU01dqCs9yUeHypI0CAQDt/2t8wa5f2rSsCV3klyDffFqKh5Eo/OJPMbefNgQulMF7P+biBnlTCr4nxy7rVEVZdZNvZma5CXFPrQrdYxR2cGDdqmTY1eXiIv+aLzR4M9mS6rH4jS/za5frNXP7Mda6MuuWeGZzarVTL1kSrk=;
+ b=fcEUDH2MRywldXHUKBh01N/4tDMYdBKTTenh1mhzsTJfR15rGsiBN1d4C6YEyO9U1a/U+wpZ7/aMAoOLTiG+wqIqCZ9wLDjRUTh/JlJaLiPtJRlIKdOoMt9HOsB49jw5N4g2Ix4GCzVARs3cnRbA31V6ptd2MazS4BDB9CHDwsI=;
  c=relaxed/relaxed; s=zmail; d=ziyao.cc; v=1;
- bh=piI0ugvNqKgNm4ybzy+YiQ/8HeJNLEITPTUqXqGheEA=;
+ bh=rmu/xAAL4MrODGlzPpP6bPv8PFUKlCXBGE4FGfSU518=;
  h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
-Received: by smtp.zohomail.com with SMTPS id 1794484680764295.16065734195786; 
- Thu, 12 Nov 2026 03:58:00 -0800 (PST)
+Received: by smtp.zohomail.com with SMTPS id 1794484619440311.5711224126379;
+ Thu, 12 Nov 2026 03:56:59 -0800 (PST)
 From: Yao Zi <me@ziyao.cc>
 To: Tom Rini <trini@konsulko.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: u-boot@lists.u-boot-project.org, Yao Zi <me@ziyao.cc>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v7 18/20] doc: arch: Add documentation for LoongArch
-Date: Thu, 12 Nov 2026 11:54:36 +0000
-Message-ID: <20261112115438.1837663-19-me@ziyao.cc>
+Subject: [PATCH v7 13/20] cpu: Add loongarch_cpu driver
+Date: Thu, 12 Nov 2026 11:54:31 +0000
+Message-ID: <20261112115438.1837663-14-me@ziyao.cc>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261112115438.1837663-1-me@ziyao.cc>
 References: <20261112115438.1837663-1-me@ziyao.cc>
@@ -115,77 +115,230 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add a brief introduction to LoongArch architecture, some notes on the
-implementation, and the toolchain supporting status.
+From: Jiaxun Yang <jiaxun.yang@flygoat.com>
 
+Implement a driver for LoongArch CPU solely for gathering
+some information bits from FDT and CPU level config registers.
+
+Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 Signed-off-by: Yao Zi <me@ziyao.cc>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changed from v5
-- Improve the documentation
+No changes since v5
 
-New patch, no changes since v3
+Changed from v4
+- Explicitly clear info->cpu_freq before passing its address to
+  dev_read_u32()
+- Temporarily store return value of clk_get_rate() in an ulong() to
+  avoid truncation
+
+No changes since v3
+
+Changed from v2
+- Fall through to devicetree path in loongarch_cpu_get_desc() when
+  probing with CPUCFG gets no meaningful results, instead of handling
+  such cases with goto
+- Replace open-coded copying loop with memcpy() in
+  loongarch_cpu_get_desc()
+- Correctly return -ENOSPC when snprintf() truncates the string in
+  loongarch_cpu_get_desc()
+
+Changed from v1
+- Drop unnecessary check against -ENOTSUPP clk_enable()'s return value
+  in loongarch_cpu_probe()
 ---
- doc/arch/index.rst     |  1 +
- doc/arch/loongarch.rst | 31 +++++++++++++++++++++++++++++++
- 2 files changed, 32 insertions(+)
- create mode 100644 doc/arch/loongarch.rst
+ drivers/cpu/Kconfig         |   6 ++
+ drivers/cpu/Makefile        |   1 +
+ drivers/cpu/loongarch_cpu.c | 145 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 152 insertions(+)
+ create mode 100644 drivers/cpu/loongarch_cpu.c
 
-diff --git a/doc/arch/index.rst b/doc/arch/index.rst
-index 60c93b3b6640..10903b806d2c 100644
---- a/doc/arch/index.rst
-+++ b/doc/arch/index.rst
-@@ -9,6 +9,7 @@ Architecture-specific doc
-    arc
-    arm64
-    arm64.ffa
-+   loongarch
-    m68k
-    mips
-    nios2
-diff --git a/doc/arch/loongarch.rst b/doc/arch/loongarch.rst
+diff --git a/drivers/cpu/Kconfig b/drivers/cpu/Kconfig
+index c805c0bbfa19..9fd43ff88fde 100644
+--- a/drivers/cpu/Kconfig
++++ b/drivers/cpu/Kconfig
+@@ -13,6 +13,12 @@ config CPU_IMX
+ 	help
+ 	  Support CPU cores for SoCs of the i.MX series.
+ 
++config CPU_LOONGARCH
++	bool "Enable LoongArch CPU driver"
++	depends on CPU && LOONGARCH
++	help
++	  Support CPU cores for LoongArch processors.
++
+ config CPU_MPC83XX
+ 	bool "Enable MPC83xx CPU driver"
+ 	depends on CPU && MPC83xx
+diff --git a/drivers/cpu/Makefile b/drivers/cpu/Makefile
+index eaf494706e2c..d9c0db74dd5a 100644
+--- a/drivers/cpu/Makefile
++++ b/drivers/cpu/Makefile
+@@ -13,6 +13,7 @@ obj-$(CONFIG_ARCH_AT91) += at91_cpu.o
+ obj-$(CONFIG_ARCH_MEDIATEK) += mtk_cpu.o
+ obj-$(CONFIG_CPU_ARMV8) += armv8_cpu.o
+ obj-$(CONFIG_CPU_IMX) += imx8_cpu.o
++obj-$(CONFIG_CPU_LOONGARCH) += loongarch_cpu.o
+ obj-$(CONFIG_CPU_MPC83XX) += mpc83xx_cpu.o
+ obj-$(CONFIG_CPU_RISCV) += riscv_cpu.o
+ obj-$(CONFIG_CPU_MICROBLAZE) += microblaze_cpu.o
+diff --git a/drivers/cpu/loongarch_cpu.c b/drivers/cpu/loongarch_cpu.c
 new file mode 100644
-index 000000000000..93eed74fe666
+index 000000000000..773aac9dfe14
 --- /dev/null
-+++ b/doc/arch/loongarch.rst
-@@ -0,0 +1,31 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+.. Copyright (C) 2026 Yao Zi <me@ziyao.cc>
++++ b/drivers/cpu/loongarch_cpu.c
+@@ -0,0 +1,145 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2024 Jiaxun Yang <jiaxun.yang@flygoat.com>
++ */
 +
-+LoongArch
-+=========
++#include <clk.h>
++#include <cpu.h>
++#include <dm.h>
++#include <errno.h>
++#include <log.h>
++#include <asm/loongarch.h>
++#include <dm/device-internal.h>
++#include <dm/lists.h>
++#include <linux/bitops.h>
++#include <linux/err.h>
 +
-+LoongArch is a RISC ISA developed by Loongson Technology. It currently defines
-+three variants: a reduced 32-bit version (LA32R), a standard 32-bit version
-+(LA32S) for embedded devices, and a 64-bit version (LA64).
++static int loongarch_cpu_get_desc(const struct udevice *dev, char *buf, int size)
++{
++	const char *cpu;
 +
-+Notes
-+-----
++	/* We try to get CPU name from IOCSR first */
++	if ((read_cpucfg(LOONGARCH_CPUCFG1) & CPUCFG1_IOCSR)) {
++		char vendor_buf[9] = { 0 };
++		char name_buf[9] = { 0 };
++		u64 vendor = iocsr_read64(LOONGARCH_IOCSR_VENDOR);
++		u64 name = iocsr_read64(LOONGARCH_IOCSR_CPUNAME);
 +
-+1. Currently U-Boot only runs on LA64 variant with the highest privilege level
-+   (PLV0).
++		if (vendor && name) {
++			int ret;
 +
-+2. CONFIG_ARCH_LA64=y selects support for 64-bit LoongArch variant.
++			memcpy(vendor_buf, &vendor, sizeof(vendor));
++			memcpy(name_buf, &name, sizeof(name));
 +
-+3. U-Boot requires hardware-maintained coherency of different levels of
-+   instruction and data caches. It determines the cache topology by reading
-+   CPUCFG registers; L2 and L3 caches, if present, must be unified or
-+   instruction-only. This is true for all commercial LA64 hardware. Refer to
-+   arch/loongarch/lib/cache.c for further description.
++			ret = snprintf(buf, size, "%s-%s", vendor_buf, name_buf);
++			return ret >= size ? -ENOSPC : 0;
++		}
++	}
 +
-+Toolchain
-+---------
++	cpu = dev_read_string(dev, "compatible");
++	if (!cpu || size < (strlen(cpu) + 1))
++		return -ENOSPC;
 +
-+LoongArch is supported in upstream binutils, gcc, and LLVM. GCC 12.1 started to
-+support LA64, and GCC 16 started to support LA32.
-+`kernel.org <https://mirrors.edge.kernel.org/pub/tools/crosstool/>`_ provides
-+pre-built toolchain for both 32-bit and 64-bit LoongArch.
++	strcpy(buf, cpu);
++
++	return 0;
++}
++
++static int loongarch_cpu_get_info(const struct udevice *dev, struct cpu_info *info)
++{
++	struct clk clk;
++	ulong freq;
++	int ret;
++
++	info->cpu_freq = 0;
++
++	/* First try getting the frequency from the assigned clock */
++	ret = clk_get_by_index((struct udevice *)dev, 0, &clk);
++	if (!ret) {
++		freq = clk_get_rate(&clk);
++		if (!IS_ERR_VALUE(freq))
++			info->cpu_freq = freq;
++	}
++
++	if (!info->cpu_freq)
++		dev_read_u32(dev, "clock-frequency", (u32 *)&info->cpu_freq);
++
++	if (read_cpucfg(LOONGARCH_CPUCFG1) & CPUCFG1_PAGING)
++		info->features |= BIT(CPU_FEAT_MMU);
++
++	if (read_cpucfg(LOONGARCH_CPUCFG16) & CPUCFG16_L1_IUPRE)
++		info->features |= BIT(CPU_FEAT_L1_CACHE);
++
++	return 0;
++}
++
++static int loongarch_cpu_get_count(const struct udevice *dev)
++{
++	ofnode node;
++	int num = 0;
++
++	ofnode_for_each_subnode(node, dev_ofnode(dev->parent)) {
++		const char *device_type;
++
++		/* skip if core is marked as not available in the device tree */
++		if (!ofnode_is_enabled(node))
++			continue;
++
++		device_type = ofnode_read_string(node, "device_type");
++		if (!device_type)
++			continue;
++		if (strcmp(device_type, "cpu") == 0)
++			num++;
++	}
++
++	return num;
++}
++
++static int loongarch_cpu_bind(struct udevice *dev)
++{
++	struct cpu_plat *plat = dev_get_parent_plat(dev);
++
++	plat->cpu_id = dev_read_addr(dev);
++
++	return 0;
++}
++
++static int loongarch_cpu_probe(struct udevice *dev)
++{
++	int ret = 0;
++	struct clk clk;
++
++	/* Get a clock if it exists */
++	ret = clk_get_by_index(dev, 0, &clk);
++	if (ret)
++		return 0;
++
++	ret = clk_enable(&clk);
++	if (ret == -ENOSYS)
++		return 0;
++	else
++		return ret;
++}
++
++static const struct cpu_ops loongarch_cpu_ops = {
++	.get_desc	= loongarch_cpu_get_desc,
++	.get_info	= loongarch_cpu_get_info,
++	.get_count	= loongarch_cpu_get_count,
++};
++
++static const struct udevice_id loongarch_cpu_ids[] = {
++	{ .compatible = "loongarch,Loongson-3A5000" }, /* From QEMU, undocumented */
++	{ .compatible = "loongson,la264" },
++	{ .compatible = "loongson,la364" },
++	{ }
++};
++
++U_BOOT_DRIVER(loongarch_cpu) = {
++	.name = "loongarch_cpu",
++	.id = UCLASS_CPU,
++	.of_match = loongarch_cpu_ids,
++	.bind = loongarch_cpu_bind,
++	.probe = loongarch_cpu_probe,
++	.ops = &loongarch_cpu_ops,
++	.flags = DM_FLAG_PRE_RELOC,
++};
 -- 
 2.56.0
 
