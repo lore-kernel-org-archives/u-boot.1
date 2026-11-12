@@ -1,29 +1,29 @@
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E16BE606A323
-	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 16:55:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2885606A321
+	for <u-boot@archiver.kernel.org>; Thu, 12 Nov 2026 16:55:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=czpsNSxA;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=pn3PoojA
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=oME+XuG9;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=oo05Mkqq
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2354F8146B;
-	Thu, 12 Nov 2026 16:55:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9010660743;
+	Thu, 12 Nov 2026 16:55:49 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YDRRQK527k0x; Thu, 12 Nov 2026 16:55:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 4E15281463
-Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794502545;
-	b=D+c5eu3cOwE3spJskS6igAmkQtI1zED9+8NxNmqJ0McUew+q6wgUF3abBprKqOM1oIsH
-	 4RAUj7wBuurxweaX8aT9GFZReFC3Yh9cT7PjQCTIWhiaNWIgpaYNJD8vUMRkT80m5BAcY
-	 pkF6rIixkLDr2rTdrIqQmdvM0tvVK9W2EELzGlCbmApKFW+aGuxBKIcaefJmdQ95v1X22
-	 g0XMwWw1RwhGuqWZ7LBU+LDV0dyE+FSK+xow6PyNWgYx8rywXTSa+rbhAUA3mPS+TfOdp
-	 9HwW8XxUCPPc9Ju/7J8LCpb57YAa/bKJa6+aNDr0lX/jmpIEYQymHtdt+nWOfSy6qog==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id uvuifnpcTqOz; Thu, 12 Nov 2026 16:55:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org D27E1608A5
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794502549;
+	b=D0LlYluSfCDKQzmQ3VhW63ZOOzuChNT3djIDs4FA4mtVdvO9TzYnWUnyLkojOucS5LDz
+	 xt1qcLp2wr6PPP1tc6EnhAT4FCEYNkQjKDm7bvOEx1AqLq9Lq9dM1V5ArYgSh16y2AqDG
+	 IXV1On6SsEsom1aTbbRQfVRlTyPqseZJaqExPQU88wZUHS0M2fcsL0U0Hmjzhoy5qYzUD
+	 66UOnNSHAuN80NJVcBQ3X4i5OsZITeMsOp2jqBQycnqh/TuvUK4Y3j7vWbytTaJpHOv82
+	 zM4njs0luGVpQA+y9NvP1wM+FXYlTZ/+S0oTjq9sIQFPsjebMAylxWZjmxX9qd8sw8Q==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794502545;
+	c=relaxed/relaxed; t=1794502549;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,74 +32,74 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-BeenThere:
 	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=y6bda71CRmSOT9qf07K+k3pz0Ku0o/5KLXSAuGjfjt0=;
-	b=M99cH3dgRZ4aKJSkFMCnv1gyTioV9libQwKRnSSHyBaKl46tqzHGGlxgRf0oS214dg/W
-	 5tN/BH/1Jlphh4e9pVFRDniSXBq74LXFcchfrgr+9az5mDnd/0dRaEukT4YyzdSfYeb6S
-	 d9JRswn9nKMG2espT11Ns8bFUVkaVMc/H/VdJGaew7XJIOQI9dJnKl2wlLUQs8MqYW45X
-	 e1XucJ/xQ6VjGWfzq1NvoaMlSPsq2Zw/V0an2isijXcQwAhmNrE/EkwNEuuN3qEaQFp8o
-	 4e2Od6YV3/2fHex44fp5rIw7txQ3xt7jwPkV3grjmmgClhNy/6c8gNpPYK51zFyd1Gg==
-ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	bh=hqDKFI4BWqt6d+cBv2Ngh3k7G1zWEIQx2VUo7xzzbuw=;
+	b=n8mdycmmad6udtbA9fLFvdbjANolvZM4x7sFM/4kYWdCDFFVzd5LS9qCkB4ZgzhGHcpD
+	 pJnlnz6a7JaJu4/tokd/CPOUv3gz1WneCdX87eL29gjE3ekSsxXGLt0k7t7RBPNiuZgqc
+	 xO90YMWVLBtbgTcuHOnFG0eyZu9eZE9rLddGkZm2Hcb+EZMlQapY4Y5Bv8UZ8UtLRaR/2
+	 dyB69H9WG0Y41E8Z7tWdccYm8rBXfpQfVqI3oF4clDluLTyvM84JNMmUVqaw2ncZgLO+F
+	 H8c939ksSReKMzFK7bNqGBDdXqKFeNmZFrByZHYJhu+HQvxijdoYYXZXQvkOgYOFMlw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794502545;
-	bh=y6bda71CRmSOT9qf07K+k3pz0Ku0o/5KLXSAuGjfjt0=;
+	d=lists.u-boot-project.org; s=default; t=1794502549;
+	bh=hqDKFI4BWqt6d+cBv2Ngh3k7G1zWEIQx2VUo7xzzbuw=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=czpsNSxAOBbnMQ3RN6adL51r4Zu2oAy/Tak+WN2Eqg7JrFywsP3eYZgsunmKOwle1
-	 kFfnAvAubum57qvp6zf39KzN2lKDwltlpgU2SdyR0Sgbg94JAD1gYo3gVxPMqWC9cU
-	 c58NndsbF1Tk+eaFCCNNpQ2KIDcVZ0evbVyJ5wZFyqJ+SqFxGBQM7TJbDwCTNj0yx3
-	 oQen/U2v0d9ilb8vTmGhMJfojKXEJjtvvH4Zyx04qzOAIYKO6M0y0zDJhx6stBk7s6
-	 rFn2k+UnzHxbBskZfM1IForCa/xK5ZtMdkkckPa/h3ov2qt3TGWWlgqxdFWzP2HanV
-	 KAuV8KztZ9nJw==
+	b=oME+XuG94D6z/sX3yeE+b85vJbs2WUQFhl3ssyvq+0+pwVuZI6un8hsDnAljhkUc/
+	 4BCqTc7gb8jdVAtvD/dI3alU1dpnp1MbRWA8x620XHQPtvgsAbZtw/+92gqXmTs+Y+
+	 EDNLagY2e3yfnh4DlZ8Zc42hZAhDnkVoI+olHL5hI5PdNmHag+g8sGPoVbTQCBTkIS
+	 myPQCcbr10tD2lta9N2AH8gqYn1VuaVAj0W1BdaU7XsOM+M5WbYq3WHqDKx9z20deZ
+	 zwrRTRY9/ZCa0O2/RuIbxw9o8wn4mQgBmKyB3lIm9U/gF7lcqN0753ytq1zy99MscP
+	 71arm3sRzTm6g==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4E15281463;
-	Thu, 12 Nov 2026 16:55:45 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D27E1608A5;
+	Thu, 12 Nov 2026 16:55:48 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id BE2DC2FE
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:55:42 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id 749BEE09
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:55:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id B019D40AE7
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:55:42 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 65CEF40AE7
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:55:45 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JJH9YXrjsyN3 for <u-boot@lists.u-boot-project.org>;
- Thu, 12 Nov 2026 16:55:41 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7603540AB1
+ id ddg_s95hUV_X for <u-boot@lists.u-boot-project.org>;
+ Thu, 12 Nov 2026 16:55:44 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 98CCA40AB1
 Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=217.140.110.172
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=217.140.110.172;
  helo=foss.arm.com; envelope-from=vincent.stehle@arm.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256
- header.s=foss header.b=pn3PoojA
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com
+ header.a=rsa-sha256 header.s=foss header.b=oo05Mkqq
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7603540AB1
- for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:55:40 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id 98CCA40AB1
+ for <u-boot@lists.u-boot-project.org>; Thu, 12 Nov 2026 16:55:42 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E5ED5153B;
- Thu, 12 Nov 2026 08:55:36 -0800 (PST)
-Received: from [127.0.1.1] (unknown [10.57.16.216])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B5C173F673;
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 797771516;
  Thu, 12 Nov 2026 08:55:38 -0800 (PST)
+Received: from [127.0.1.1] (unknown [10.57.16.216])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4D91D3F673;
+ Thu, 12 Nov 2026 08:55:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
- t=1794502539; bh=v+2bbLNRekP07rL8JE7rkJZa/F9HgvpqhOeQOfpx7p0=;
+ t=1794502541; bh=QRBmkaP16QJyS7Uk4Un0/IjRDmDyJs8LwOLrF0d5nGA=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=pn3PoojAJvWM8X+VHfarcDRyHnuSWF93LWitj9WjATg+PtNpFnJJNnm1hrL+0AHJh
- +Qzg3m0a7BbGPpxUuBe6yAq9oz57W1Uv0VdoVl4uqpjAR0nuVIjd2saLIijfy+qV6y
- az5nDa9NjCj2rOf0v19RfrPhC2qWWxwZYMTiksqk=
+ b=oo05Mkqq2//1Ysx5aVKBK6vXtYOCFNIXbYSt2vnCsIM0VwSYN6uunv3/DrLgKJLxJ
+ UET37B3nrfk7VGsqw7sXQAaUtDtRjt7k/584Gbdle4ltRGAyP6znwpSeCqn4Im+wHN
+ BfCo0cG3GPslb30Rmy5TlRj+7P5at6tEpQ0/eN4k=
 From: =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Date: Thu, 12 Nov 2026 17:55:33 +0100
-Subject: [PATCH 1/2] efi_loader: fix getinfo() returned buffer size
+Date: Thu, 12 Nov 2026 17:55:34 +0100
+Subject: [PATCH 2/2] efi_selftest: verify getinfo() returned buffer size
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20261112-getinfo-v1-1-b7eb8c837985@arm.com>
+Message-Id: <20261112-getinfo-v1-2-b7eb8c837985@arm.com>
 References: <20261112-getinfo-v1-0-b7eb8c837985@arm.com>
 In-Reply-To: <20261112-getinfo-v1-0-b7eb8c837985@arm.com>
 To: u-boot@lists.u-boot-project.org
@@ -109,16 +109,16 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, 
  =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2646;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1293;
  i=vincent.stehle@arm.com; h=from:subject:message-id;
- bh=v+2bbLNRekP07rL8JE7rkJZa/F9HgvpqhOeQOfpx7p0=;
- b=owEBbQGS/pANAwAKActJ+FZ2owaUAcsmYgBq9e+IbQTEUGNriqDnTq7IkQKBVXxbV0lvabuzM
- OKP/oBFaMGJATMEAAEKAB0WIQTXYBSgjlpQEXB4KmzLSfhWdqMGlAUCavXviAAKCRDLSfhWdqMG
- lJuNB/4ou5P7PCiHjKJeujFqgDExizVhtwK83eiAtfK5OEoBFHn5Tld3dhiD9fwlZ/Le/5QQH4v
- pnmLxW71nzQXHy5mN4ny1ksXHZALsxYCcsS3fC3ER2t5iTOE+6dxsfs03R+PjnMIFFxcaqt83u3
- gq7aS/qZKVjjttR91XgHb+ezAS73zy/o8v2VDWOe49yDZWEM9D9JWZPL27ddA5Bht+sBqt9OE+r
- L6BobCyU8UpZ3mNA5ev9EImPp00JuOYmZepX7ZzQ76m6CQwp9HHVpAzghPNc9nSmo5uvKziJNCi
- agl8Clo36ZRxhv02o0gd9zX/OPSSvyCweXmKwVrZ188cxhdP
+ bh=QRBmkaP16QJyS7Uk4Un0/IjRDmDyJs8LwOLrF0d5nGA=;
+ b=owEBbQGS/pANAwAKActJ+FZ2owaUAcsmYgBq9e+IL4/xt5mVp6Jh4jPIo4a27WMpz5WnUHH4S
+ JA3mqKMTGKJATMEAAEKAB0WIQTXYBSgjlpQEXB4KmzLSfhWdqMGlAUCavXviAAKCRDLSfhWdqMG
+ lLppCACsoAeB9ycym08k7XfTAXbniWZ3ft2l71//eoHDVVXO62DiaqoSvjWcvvKRNjytJ1vscjh
+ 74KKDUFEhIRaeXAU5oZEp5nPYb3FEosHOT2Jl9+stgA64iUtZt0p+N0halb9BcwUfMosnt5BJ63
+ 9OxWE+eyml9qdHWc1gzVWKx/UaUESWaVTy6cdCGSN44NZ4vyWBOPSXhtBWIjU1RDl8y56KUYBNT
+ NC0X4ZAj11QatKLrSSHmZ1Z2xLnumvL29mYIL6bdL2L7CtgMyurOnOSdU/GjzupdFGpEqUnMn4O
+ IzhT+ZJ7t9m6C1+dqKJmsMWXNfkUc6KjOZFgE4tRkerJWyXg
 X-Developer-Key: i=vincent.stehle@arm.com; a=openpgp;
  fpr=D76014A08E5A501170782A6CCB49F85676A30694
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -137,81 +137,38 @@ X-Spam-Status: No, score=-16.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The EFI_FILE_PROTOCOL.GetInfo() function must update the buffer size, but
-it does so only when the buffer is too small.
-Update the buffer size on the return path to fix this.
+In the block device selftest, verify correctness of the buffer size
+returned by EFI_FILE_PROTOCOL.GetInfo().
+
+This can run on the sandbox with the following command:
+
+  ./u-boot -T -c 'setenv efi_selftest block device; bootefi selftest'
 
 Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 ---
- lib/efi_loader/efi_file.c | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ lib/efi_selftest/efi_selftest_block_device.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/lib/efi_loader/efi_file.c b/lib/efi_loader/efi_file.c
-index 7dee57d594a..d44aa5eab7f 100644
---- a/lib/efi_loader/efi_file.c
-+++ b/lib/efi_loader/efi_file.c
-@@ -846,6 +846,7 @@ static efi_status_t EFIAPI efi_file_getinfo(struct efi_file_handle *file,
- 	struct file_handle *fh = to_fh(file);
- 	efi_status_t ret = EFI_SUCCESS;
- 	u16 *dst;
-+	efi_uintn_t required_size = 0;
- 
- 	EFI_ENTRY("%p, %pUs, %p, %p", file, info_type, buffer_size, buffer);
- 
-@@ -858,14 +859,12 @@ static efi_status_t EFIAPI efi_file_getinfo(struct efi_file_handle *file,
- 	if (!guidcmp(info_type, &efi_file_info_guid)) {
- 		struct efi_file_info *info = buffer;
- 		char *filename = basename(fh);
--		unsigned int required_size;
- 		loff_t file_size;
- 
- 		/* check buffer size: */
- 		required_size = sizeof(*info) +
- 				2 * (utf8_utf16_strlen(filename) + 1);
- 		if (*buffer_size < required_size) {
--			*buffer_size = required_size;
- 			ret = EFI_BUFFER_TOO_SMALL;
- 			goto error;
- 		}
-@@ -896,7 +895,6 @@ static efi_status_t EFIAPI efi_file_getinfo(struct efi_file_handle *file,
- 	} else if (!guidcmp(info_type, &efi_file_system_info_guid)) {
- 		struct efi_file_system_info *info = buffer;
- 		struct disk_partition part;
--		efi_uintn_t required_size;
- 		int r;
- 
- 		if (fh->fs->part >= 1)
-@@ -909,7 +907,6 @@ static efi_status_t EFIAPI efi_file_getinfo(struct efi_file_handle *file,
- 		}
- 		required_size = sizeof(*info) + 2;
- 		if (*buffer_size < required_size) {
--			*buffer_size = required_size;
- 			ret = EFI_BUFFER_TOO_SMALL;
- 			goto error;
- 		}
-@@ -933,8 +930,8 @@ static efi_status_t EFIAPI efi_file_getinfo(struct efi_file_handle *file,
- 		 */
- 		info->volume_label[0] = 0;
- 	} else if (!guidcmp(info_type, &efi_system_volume_label_id)) {
--		if (*buffer_size < 2) {
--			*buffer_size = 2;
-+		required_size = 2;
-+		if (*buffer_size < required_size) {
- 			ret = EFI_BUFFER_TOO_SMALL;
- 			goto error;
- 		}
-@@ -944,6 +941,8 @@ static efi_status_t EFIAPI efi_file_getinfo(struct efi_file_handle *file,
+diff --git a/lib/efi_selftest/efi_selftest_block_device.c b/lib/efi_selftest/efi_selftest_block_device.c
+index 847d93693ee..ae064189603 100644
+--- a/lib/efi_selftest/efi_selftest_block_device.c
++++ b/lib/efi_selftest/efi_selftest_block_device.c
+@@ -467,6 +467,12 @@ static int execute(void)
+ 		efi_st_error("Failed to get file system info\n");
+ 		return EFI_ST_FAILURE;
  	}
- 
- error:
-+	if (buffer_size && required_size)
-+		*buffer_size = required_size;
- 	return EFI_EXIT(ret);
- }
- 
++	if (buf_size != system_info.info.size) {
++		efi_st_error("Buffer size %u differs from info size %u\n",
++			     (unsigned int)buf_size,
++			     (unsigned int)system_info.info.size);
++		return EFI_ST_FAILURE;
++	}
+ 	if (system_info.info.block_size != 512) {
+ 		efi_st_error("Wrong block size %u, expected 512\n",
+ 			     system_info.info.block_size);
 
 -- 
 2.53.0
