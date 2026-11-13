@@ -2,124 +2,125 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7FCC606A334
-	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 19:43:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA900606A330
+	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 19:43:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Go8sFXt1;
-	dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256 header.s=mchp header.b=bTU2TYkC
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=lY7GoyI8;
+	dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256 header.s=mchp header.b=wSsQkLSI
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A2CD08177A;
-	Fri, 13 Nov 2026 19:43:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 95BB5817EB;
+	Fri, 13 Nov 2026 19:43:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fEBNtvCHzOb2; Fri, 13 Nov 2026 19:43:21 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 37C1381771
+ id MC4IvKRpaO6W; Fri, 13 Nov 2026 19:43:25 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org B415481801
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794599001;
-	b=moGxVKIktItiwe0u/j/5vfoHBqL1dTQB+mSYyuZ7GtsgpGuZN7ACoWX68dEOEy1zUxnT
-	 71KwiPRESTEDIYL/tOmRigi6b2fAsaOyBC2ddcoJnAeRSP9NhnSS44zd8zo9LP8sQRLaa
-	 zVwEIKbZ1vmHCE52A8SXAbLSyl6+JJlUe7I29KiZGSJ4L7H++g6ig4pJdDVHbOgLRW+XQ
-	 TPhiPCuNe3UYmLxpiGElOSRmx4WzHKrQYNf8zOAkm/G/rkhEpx4i8QvUWl4Qp+nzcrs+d
-	 LqDaKnCSXk35h6HWNl4spj7h2a6D8mcUOT/DlnLUmkIw50Y9PxJ6i9wBFUMIAu5v1kw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794599005;
+	b=L0+taATFoZd/SKQgZQRKt+36w8A4qFR1zncMKk6poJXuwIDtsYSr7o6BEJvU+ZD41c+H
+	 wMk3DdXaJIhluR2Aq/pak71XoNFQcUiLbm8Bg4T0Kxi23kZbre5ZJ6ZxxLFOlKmyMciok
+	 gfLg0YyYqpW6pCqZPHIjaDIeroh8fN19FXiP03OClkZObbiG+0GvFgaPTmSgSED10EMlD
+	 5xTSr939RZqNayHVu2RiTgtKu28luTZbeaZ+wbFNLnn1A4gUBCMGeMhwS2V34DXfN6OTS
+	 /lqiCKU9Or4PPt90aSzzfTajbm4OLilKWkBSFWQxea7jCM0Y9JZg3rgzqS6r82JevcA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794599001;
+	c=relaxed/relaxed; t=1794599005;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
 	 DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:X-IronPort-AV:
-	 X-Amp-Result:Received:Received:Received:From:Subject:Date:Message-ID:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:CC:X-Mailer:X-BeenThere:X-Mailman-Version:Precedence:
-	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 X-Amp-Result:Received:Received:Received:From:Date:Subject:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-ID:
+	 References:In-Reply-To:To:CC:X-Mailer:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=xoOoxaDy9IB4Hn427JbAGgM77j7OM9LSk1JZr2k9V0M=;
-	b=JxU5pJK9XKR+dtg+iI74iUn0XqW/IxDeY6hAwotBOYQHTc0lOjGg8p/vf2enOiTGXkSN
-	 ukbsAUh6CrIgbYnvs9C2JNo3rUpD5AIcI0DjZWgLOkZqA+XN+iTYYwzQVpoyukdcyQPh/
-	 BUYIdoqlOwl9TpXcgDSNSueMJtbFwRab2768gADEo3Lw0DXszqICAjAP+P9WAckLvmiBc
-	 K2aytJTM3cPAHggz0iXpPPrD7H3kUs6+VonhXCxvV7JFqSMPUHLkjZvnJcc5BLWbt691w
-	 OzxA70dXw7bYeeiVwZ3zE2IWI8wbZo3jYKEQISiLlPuz5Xdy6Ua+t+jou8WrQGbaySg==
+	bh=UPOtEeG+yXMX0M0uQ4ak37guwwphqR0PL8k7+bMDrno=;
+	b=pJFsA9F65M4q28fFpjcvubxbvyqX7cAWUAsbx+h4yJRUcUXPYF3QjYdMz3oG7eX0diiu
+	 gIXv2Vu3PPh34+4kmAjZxVw4Xy4DZvMOkykER8MPwcMaxp+YwQCfD8JiiNjTHZyOxMwvS
+	 LD2Gd9zdIN03sT9gjhMSEzFGrP/aE01HoPeFOOYy5kW4SGluK/pCWca3tAyAR2pm6+wxd
+	 wHAOU1kLxmrNfoWOcOmBE2HwCwEwOcqu/xsz03ErabSsU/NXh2Fe/XDVRBXpABmZ1hp6B
+	 mP3VxbKsRAkJqOiq98p5J0TZMijpJYpNhoUBgJJItaHG0wn6sxp5vChDbUDyCsq3EMA==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
+	dmarc=pass header.from=microchip.com;
+	dkim=pass header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256 header.s=mchp header.b=wSsQkLSI;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794599001;
-	bh=xoOoxaDy9IB4Hn427JbAGgM77j7OM9LSk1JZr2k9V0M=;
-	h=From:Subject:Date:To:CC:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Go8sFXt1d5HBa1wUZATLzHjO+2+MaRRSb1gbBqDY7C81dCWpJ5CPZKLMx1Bqy2eWM
-	 5ya5VrL3i2hWzA3/OyGZD8GcFmpUhrJFtu6LR4ylbkEWak8U/DZoPf6bjyUH2Pc5wx
-	 0C11530WfN8uFHM4+SwnDmb14B9nfzA/nKxwlMFOx6ZH5RRoDm9m+erjJ0S88HLnNh
-	 e8cpxjwaYc5Hbdizi4cYl6TpS60z7IJfIcINpoGeQT9nky2J80bHKYn40oZ3rLoIIc
-	 m0C/YVUsj8/z/kgg3IEMpv56T7Y7jqycYUMLJl5+6jTy+h+4jhdsGgcHdIAs9T/I+5
-	 ea7QsnikOPkjQ==
+	d=lists.u-boot-project.org; s=default; t=1794599005;
+	bh=UPOtEeG+yXMX0M0uQ4ak37guwwphqR0PL8k7+bMDrno=;
+	h=From:Date:Subject:References:In-Reply-To:To:CC:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=lY7GoyI8ABTEvgkW9Ue6P/DN1Fj7jG47cFqebhSYcsEEruPnhUnjkYSBnoQYrvXkg
+	 lMD39aODa+Q1eHxc8L1KojgUZqn9y0ISiQk/MyjleRtKbWIoxoVV5CYxoG6xUJ+j0S
+	 J97dqe0PblZmt5dTlfBZxE3rvYxwDBj49fczFAnupFf/JPXpdDL9hQR2C92Ww1e4HJ
+	 aRzqqvUBo1Fv9bLjT3p2L7mZAA9JyQ3YPU7xNuXfxNs9kQX0gDSM6xQ+AvGMEDQ6gT
+	 U6CAYX5E43OLavSnR1tI8YL4eYO9nyv62kH/TqjV8/XnPBGI7wqyDO5Ct+z6uRJyHn
+	 gwHnhRtcc9cFw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 37C1381771;
-	Fri, 13 Nov 2026 19:43:21 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists1.osuosl.org (Postfix) with ESMTP id F3D5E2E5
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 19:43:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B415481801;
+	Fri, 13 Nov 2026 19:43:25 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists1.osuosl.org (Postfix) with ESMTP id C6EF2150
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 19:43:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E579B6068F
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 19:43:19 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id B947A81771
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 19:43:23 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id YzBr7E2MdqPs for <u-boot@lists.u-boot-project.org>;
- Fri, 13 Nov 2026 19:43:18 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 232D160687
-Authentication-Results: smtp3.osuosl.org;
- arc=none smtp.remote-ip=68.232.153.233
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=68.232.153.233;
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id yoHy5fdAuPUB for <u-boot@lists.u-boot-project.org>;
+ Fri, 13 Nov 2026 19:43:21 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 2D58D81429
+Authentication-Results: smtp1.osuosl.org;
+ arc=none smtp.remote-ip=68.232.154.123
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=68.232.154.123;
  helo=esa.microchip.iphmx.com;
  envelope-from=prvs=7708869e7=charles.perry@microchip.com; receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=reject dis=none)
+Authentication-Results: smtp1.osuosl.org; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=microchip.com header.i=@microchip.com
- header.a=rsa-sha256 header.s=mchp header.b=bTU2TYkC
+ header.a=rsa-sha256 header.s=mchp header.b=wSsQkLSI
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 232D160687
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 19:43:17 +0000 (UTC)
+ [68.232.154.123])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2D58D81429
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 19:43:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1794599007; x=1826135007;
- h=from:subject:date:message-id:mime-version:
- content-transfer-encoding:to:cc;
- bh=t/6Yj0XVf+mdsad+/v2eOgDzOahhHbwWR9tFUnXODDc=;
- b=bTU2TYkCPlshTjay2ZfUyoT3t5eQW0ViWJ89WzA5eKO4Rp9EMxwJdAsB
- a3BInu73hT+W/vhfu2yILldVFXzXHl2bTEINhllWObZU+YIDbxGYBKX3T
- Au8BReS6xibtM/QEJ19HOavy89PAvaFzYg00yTX5ELf/dkA4g/5l8D6mr
- Bb32Kwvu+N7rev02fhE40oMM5zZiKG3d+4QU5izEKC3DbOWBaVxbaPW/n
- MtBblq8dpo5JLdGXtxXsfsDuZpKeTNcgsuJAXdg1kYANwzM82j/qhG7s1
- Lh8PJiYqnOjcpEmh2DVROPSIpm2ti4dScoHETaB/SBOlk4DP8CmBUb5U6 w==;
-X-CSE-ConnectionGUID: RDA0KOKATRWk8FaNZNAJXw==
-X-CSE-MsgGUID: xZu+KMmiRqCbAkN6PKz4MQ==
-X-IronPort-AV: E=Sophos;i="6.27,212,1787036400"; d="scan'208";a="66484151"
+ t=1794599008; x=1826135008;
+ h=from:date:subject:mime-version:content-transfer-encoding:
+ message-id:references:in-reply-to:to:cc;
+ bh=JvPqcjHGJVPPSseffFcty5vFsEBACYtTXnRUInN6/Es=;
+ b=wSsQkLSI6OKBQFizH0e1tQKs349ocsnQRKX5WVBaSbpR9JgPE0n+lTDl
+ 1vNcVji/DSYX8HdID+eqAgnsIoz1EXhQsg/F3i+tc56smtbWC4VPduNtf
+ /9/BspRL1xj8h6fRdvlhjxiSl1gC1aeMUk04V/7BJrnrEsXgcdRj2aeY8
+ 2rvJsWWWwD9p3iL6ppassodCNWtIzA500K8Izq3oGqRlqp7B3+UcEQ9IM
+ v47RwlW7LO3E+Bs1v9vpFWSmYIBXGs8jpndgEXKhAVODR+C1xjGcUzoAU
+ oj6gYI1ndL4z3swA0H6+4vpfJ52uJXv/xMGRxVyYIYvYwhUPJVYqVLw/g w==;
+X-CSE-ConnectionGUID: 7i+ZqHN/TkWEOYiS0qqoEg==
+X-CSE-MsgGUID: unmok7fTSs2wWsip4N4rdg==
+X-IronPort-AV: E=Sophos;i="6.27,212,1787036400"; d="scan'208";a="233536280"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa3.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 13 Nov 2026 12:43:25 -0700
+ by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 13 Nov 2026 12:43:27 -0700
 Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
  chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Fri, 13 Nov 2026 12:43:15 -0700
+ 15.1.2507.58; Fri, 13 Nov 2026 12:43:18 -0700
 Received: from MON-LT-C78453.mchp-main.com (10.10.85.11) by
  chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Fri, 13 Nov 2026 12:43:13 -0700
+ 15.1.2507.58 via Frontend Transport; Fri, 13 Nov 2026 12:43:16 -0700
 From: Charles Perry <charles.perry@microchip.com>
-Subject: [PATCH v5 0/8] Add support for RPMI to U-Boot
-Date: Fri, 13 Nov 2026 14:42:54 -0500
-Message-ID: <20261113-rpmi_v4-v5-0-6787318ad186@microchip.com>
+Date: Fri, 13 Nov 2026 14:42:55 -0500
+Subject: [PATCH v5 1/8] firmware: add support for RPMI
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/z3M0QrCIBTG8VcZ5zpDnS7bVe8RI5a6PBdO0ZBi+
- O7ZoODc/A8fvw2yTWgzjN0GyRbMGNYW8tCBdvP6sARNa+CUD4wyTlL0eCuCKMYWaQal9F1DW8d
- kF3zt0nVq7TA/Q3rvcBHf788Qf6MdJUb2phezOJ8UvXjUKWiH8aiDh6nW+gGw1NqqogAAAA==
-X-Change-ID: 20261012-rpmi_v4-811f5d688cbc
+Message-ID: <20261113-rpmi_v4-v5-1-6787318ad186@microchip.com>
+References: <20261113-rpmi_v4-v5-0-6787318ad186@microchip.com>
+In-Reply-To: <20261113-rpmi_v4-v5-0-6787318ad186@microchip.com>
 To: <u-boot@lists.u-boot-project.org>, Yao Zi <me@ziyao.cc>
 CC: Rahul Pathak <rahul@summations.net>, Anup Patel <anup@brainfault.org>,
  Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, "Albert
@@ -130,8 +131,7 @@ CC: Rahul Pathak <rahul@summations.net>, Anup Patel <anup@brainfault.org>,
  <michal.simek@amd.com>, Conor Dooley <conor@kernel.org>, Yao Zi
  <me@ziyao.cc>, Peng Fan <peng.fan@oss.nxp.com>, Subrahmanya Lingappa
  <subrahmanya.lingappa@oss.qualcomm.com>, Charles Perry
- <charles.perry@microchip.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Rahul Pathak <rahul.pathak@oss.qualcomm.com>
+ <charles.perry@microchip.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
 X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
@@ -150,302 +150,605 @@ X-Spam-Status: No, score=-23.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hello,
+RISC-V Platform Management Interface (RPMI) defines an OS-agnostic
+protocol for communication between an Application Processor (AP) and a
+platform microcontroller (PuC) [1]
 
-This series adds support for RISC-V Platform Management Interface (RPMI) to
-U-Boot. RPMI is an OS-agnostic protocol for communication between an
-Application Processor (AP) and a Platform Microcontroller (PuC) [1]. There
-are some similarities between RPMI and SCMI.
+Add UCLASS_RPMI to abstract the implementation details of an RPMI
+transport layer. A transport driver should implement the struct
+rpmi_transport_ops callback interface while an RPMI client driver should
+use struct rpmi_chan and the rpmi_* API:
 
-This patchset first adds an abstraction layer for the transport
-(UCLASS_RPMI), then adds two transport layer (SBI MPXY and shared memory)
-and finally adds one client (or service group in RPMI jargon): the clock
-service group.
+  * rpmi_get_by_index()
+  * rpmi_open()
+  * rpmi_close()
+  * rpmi_get_attr()
+  * rpmi_send_with_resp()
+  * rpmi_send_posted()
 
-This series also includes a sandbox mode for which the RPMI transport
-doesn't attach to a firmware but contains a simulation of a firmware. This
-reuses code from librpmi [2] to create the message responses.
+The most important part of the API is rpmi_send_with_resp() and
+rpmi_send_posted() which is used to send a message and possibly receive
+a response from the firmware.
 
-From V3, this series also includes the "mpxy" command line tool created
-by Rahul [6].
+rpmi_get_attr() can be used to retrieve attributes of the channel like
+the implementation ID or the maximum message size.  This is to retrieve
+information that lives outside of the service group of the rpmi_chan,
+either in the "base service group" or in the transport layer itself.
 
-Apart from the spec [1], this series reuses code from the Linux SBI MPXY
-driver [3], OpenSBI shared memory transport [4] and Linux RPMI clock driver
-[5].
+rpmi_get_by_index() can be used to initialize a struct rpmi_chan using
+info from the device tree.
 
-This was tested on a PIC64-HPSC SoC which features an application cluster and a
-system controller with isolated address spaces, hence the need for RPMI. This
-series can also be tested with QEMU using the steps detailed in the following
-section.
+rpmi_open() and rpmi_close() must be called once at initialization and
+deinitialization by clients to let the transport layer do some stateful
+things if needed.
 
-# Testing
-
-## Build qemu
-
-Build QEMU using Subrahmanya Lingappa v11 patches [7] that adds support for
-librpmi along with another patch (by me) that adds some phony clocks for
-testing. This is available at [8] for your convenience. You will also need to
-download and build librpmi since it is a dependency of qemu, any recent version
-should do. The following commands do all of this:
-
-````
-git clone https://github.com/riscv-software-src/librpmi.git
-cd librpmi
-make
-make install I=install
-sed -i "s|\${prefix}|$(pwd)/install|g" ./install/lib/pkgconfig/librpmi.pc
-export PKG_CONFIG_PATH="$(pwd)/install/lib/pkgconfig:$PKG_CONFIG_PATH"
-cd ..
-git clone https://github.com/ch-perry/qemu.git -b rpmi_patches_with_clocks
-cd qemu
-./configure --enable-librpmi
-make -j8 qemu-system-riscv32 qemu-system-riscv64
-export PATH="$(pwd)/build:$PATH"
-````
-
-## Device tree
-
-We also need to tweak a bit the device tree used by QEMU. This is done
-externally because we need to append a different fragment depending on if we're
-testing M mode U-Boot or S Mode U-Boot.
-
-For M mode U-Boot, we use:
-
-```
-cat <<EOF > overlay-mmode.dts
-/ {
-	clock-controller {
-		#clock-cells = <1>;
-		mboxes = <&{/soc/mailbox@10200000} 0x08>;
-		compatible = "riscv,rpmi-clock";
-	};
-};
-EOF
-```
-
-While for S mode, we use:
-
-```
-cat <<EOF > overlay-smode.dts
-/ {
-	clock-controller {
-		#clock-cells = <1>;
-		mboxes = <&mbox 0x1000 0x00>;
-		compatible = "riscv,rpmi-clock";
-	};
-
-	mbox: mailbox {
-		#mbox-cells = <2>;
-		compatible = "riscv,sbi-mpxy-mbox";
-	};
-};
-EOF
-```
-
-## Test RV64 in M mode:
-
-Source your RV64 compiler, build U-Boot's qemu-riscv64_defconfig and test with
-QEMU:
-
-```
-make clean
-make qemu-riscv64_defconfig && echo CONFIG_CMD_CLK=y >> .config
-make -j8
-qemu-system-riscv64 -cpu rv64 -smp 4 -M virt,rpmi=on,dumpdtb=qemu.dtb
-dtc -O dts qemu.dtb | cat - ./overlay-mmode.dts | dtc -o qemu_mmode.dtb -I dts -
-qemu-system-riscv64 -cpu rv64 -smp 4 -M virt,rpmi=on -dtb qemu_mmode.dtb -nographic -bios u-boot.bin
-```
-
-`clk dump` should report 2 clocks.
-
-## Test RV64 in S mode:
-
-Build any recent version of OpenSBI using the generic platform and the default
-defconfig:
-
-```
-git clone https://github.com/riscv-software-src/opensbi.git
-cd opensbi
-make PLATFORM=generic
-cp build/platform/generic/firmware/fw_dynamic.bin ../u-boot/fw_dynamic_rv64.bin
-cd ../u-boot
-```
-
-Back in U-Boot, build qemu-riscv64_smode_defconfig and test with QEMU:
-
-```
-make clean
-make qemu-riscv64_smode_defconfig && echo CONFIG_CMD_CLK=y >> .config
-make -j8
-qemu-system-riscv64 -cpu rv64 -smp 4 -M virt,rpmi=on,dumpdtb=qemu.dtb
-dtc -O dts qemu.dtb | cat - ./overlay-smode.dts | dtc -o qemu_smode.dtb -I dts -
-qemu-system-riscv64 -cpu rv64 -smp 4 -M virt,rpmi=on \
-    -dtb qemu_smode.dtb -nographic \
-    -bios fw_dynamic_rv64.bin \
-    -kernel u-boot.bin
-```
-
-`clk dump` should report 2 clocks. You can also use the `mpxy` command.
-
-## Test RV32 in M mode:
-
-Source your RV32 compiler, build U-Boot's qemu-riscv32_defconfig and test with
-QEMU:
-
-```
-make clean
-make qemu-riscv32_defconfig && echo CONFIG_CMD_CLK=y >> .config
-make -j8
-qemu-system-riscv32 -cpu rv32 -smp 4 -M virt,rpmi=on,dumpdtb=qemu.dtb
-dtc -O dts qemu.dtb | cat - ./overlay-mmode.dts | dtc -o qemu_mmode.dtb -I dts -
-qemu-system-riscv32 -cpu rv32 -smp 4 -M virt,rpmi=on -dtb qemu_mmode.dtb -nographic -bios u-boot.bin
-```
-
-`clk dump` should report 2 clocks.
-
-## Test RV32 in S mode:
-
-Build OpenSBI for 32 bits, the instructions are the same as for 64 bits but with
-an rv32 toolchain in CROSS_COMPILE. Build U-Boot's qemu-riscv32_smode_defconfig
-and test with QEMU:
-
-```
-make clean
-make qemu-riscv32_smode_defconfig && echo CONFIG_CMD_CLK=y >> .config
-make -j8
-qemu-system-riscv32 -cpu rv32 -smp 4 -M virt,rpmi=on,dumpdtb=qemu.dtb
-dtc -O dts qemu.dtb | cat - ./overlay-smode.dts | dtc -o qemu_smode.dtb -I dts -
-qemu-system-riscv32 -cpu rv32 -smp 4 -M virt,rpmi=on \
-    -dtb qemu_smode.dtb -nographic \
-    -bios fw_dynamic_rv32.bin \
-    -kernel u-boot.bin
-```
-
-`clk dump` should report 2 clocks. You can also use the `mpxy` command.
-
-## Test using the sandbox mode
-
-Use your native compiler.
-
-```
-make sandbox_defconfig
-make -j8
-./u-boot -T -c "ut dm rpmi_clock"
-
-...
-
-Test: rpmi_clock: rpmi.c
-Test: rpmi_clock: rpmi.c (flat tree)
-Tests run: 1, 4 ms, average: 4 ms, failures: 0
-```
-
-# References
+A helper function is also added: rpmi_check_versions() which is just a
+wrapper around rpmi_get_attr() to do some basic version checking that
+all clients should perform.
 
 [1]: https://github.com/riscv-non-isa/riscv-rpmi
-[2]: https://github.com/riscv-software-src/librpmi
-[3]: https://elixir.bootlin.com/linux/v7.0.10/source/drivers/mailbox/riscv-sbi-mpxy-mbox.c
-[4]: https://elixir.bootlin.com/opensbi/v1.8.1/source/lib/utils/mailbox/fdt_mailbox_rpmi_shmem.c
-[5]: https://elixir.bootlin.com/linux/v7.0.10/source/drivers/clk/clk-rpmi.c
-[6]: https://lore.kernel.org/all/20260709175605.1070755-1-rahul.pathak@oss.qualcomm.com/
-[7]: https://lore.kernel.org/all/20260917052250.1041262-10-subrahmanya.lingappa@oss.qualcomm.com/
-[8]: https://github.com/ch-perry/qemu/commits/rpmi_patches_with_clocks/
-
-# Changelog
-
-Changes in v5: 
-from Subrahmanya review:
- - Add some defensive programming against a faulty PuC:
-   - The MPXY driver checks the returned length against max_xfer_len
-   - The shmem driver checks is the returned size exceeds the slot size
- - MPXY:
-   - Access the head and tail via readl/writel and data slots with
-     memcpy_[to/from]io
-   - Match the service_id and servicegroup_id in addition to the token
-   - Make sure the slot-size is a power of two
-   - fix a bad indexing into mpxy->channel_descs[]
- - remove rpmi_clock_sg_get_supp_rates() since it's unused by the clock
-   driver
-from Leo review:
- - Compile MPXY only if CONFIG_RISCV_SMODE is true
-from LLM review:
-   - Remove the "g_mpxy" global variable and use 
-     uclass_get_device_by_driver() instead.
-   - fix the case where sbi_get_spec_version() returns an error code
- - Link to v4: https://lore.kernel.org/r/20261014-rpmi_v4-v4-0-d53d34a49780@microchip.com
-
-Changes in v4:
- - I forgot to send patch 1 in v3, add it back.
- - Add patches 7 and 8 that add the relevant RPMI defconfig to
-   qemu-riscv[32|64]_smode_defconfig and qemu-riscv[32|64]_defconfig
- - Add instructions on how to test on QEMU in the cover letter
- - Fix the default value of the doorbell from 0 to 1 in the MPXY driver
- - Force a device_probe() of all UCLASS_RPMI devices if g_mpxy is NULL in the mpxy command
- - Remove the unnecessary edit to "cmd/riscv/Makefile" (mpxy command)
-
-Changes in v3:
- - Added the "mpxy" command from Rahul. See [6].
-
-Changes in v2:
- - Drop the device-power service group as the DT bindings for it are not
-   mainlined (was patch 5 and 7).
- - Reorder headers in all .c files.
- - Don't null check pointers before free().
- - Improve error messages in rpmi_check_versions() (patch 1).
- - Remove struct sbi_mpxy_rpmi_channel_attrs and struct
-   sbi_mpxy_channel_attrs for simpler u32 arrays (patch 2).
- - Remove transition_latency from struct rpmi_clk_def as it's unused (patch 4).
- - Simplify last return path of _rpmi_clk_enable_disable() (patch 4).
- - Move the call to _rpmi_clk_get_rate() from _rpmi_clk_set_rate() to
-   rpmi_clk_set_rate() (patch 4).
 
 Signed-off-by: Charles Perry <charles.perry@microchip.com>
 ---
-Charles Perry (7):
-      firmware: add support for RPMI
-      firmware: rpmi: add support for the SBI MPXY transport
-      firmware: rpmi: add support for shared memory transport
-      drivers: clk: add support for RPMI clocks
-      firmware: rpmi: add a test and a sandbox driver
-      configs: qemu-riscv[32|64]_smode_defconfig: add RPMI configs
-      configs: qemu-riscv[32|64]_defconfig: add RPMI configs
+Changes in v5: None
+Changes in v4: None
+Changes in v3: None
 
-Rahul Pathak (1):
-      drivers: firmware: rpmi: Add the mpxy command
-
- MAINTAINERS                                |   8 +
- arch/riscv/include/asm/sbi.h               |  57 ++
- arch/sandbox/dts/test.dts                  |  12 +
- configs/qemu-riscv32_defconfig             |   3 +
- configs/qemu-riscv32_smode_defconfig       |   4 +
- configs/qemu-riscv64_defconfig             |   3 +
- configs/qemu-riscv64_smode_defconfig       |   4 +
- configs/sandbox_defconfig                  |   2 +
- drivers/clk/Kconfig                        |   7 +
- drivers/clk/Makefile                       |   1 +
- drivers/clk/clk_rpmi.c                     | 344 ++++++++++++
- drivers/firmware/Kconfig                   |   1 +
- drivers/firmware/Makefile                  |   1 +
- drivers/firmware/rpmi/Kconfig              |  34 ++
- drivers/firmware/rpmi/Makefile             |   6 +
- drivers/firmware/rpmi/rpmi-sandbox-clock.c | 357 +++++++++++++
- drivers/firmware/rpmi/rpmi-sandbox.c       | 156 ++++++
- drivers/firmware/rpmi/rpmi-sandbox.h       |  47 ++
- drivers/firmware/rpmi/rpmi-sbi-mpxy.c      | 820 +++++++++++++++++++++++++++++
- drivers/firmware/rpmi/rpmi-shmem.c         | 496 +++++++++++++++++
- drivers/firmware/rpmi/rpmi-uclass.c        | 144 +++++
- include/dm/uclass-id.h                     |   1 +
- include/rpmi-uclass.h                      |  79 +++
- include/rpmi.h                             | 159 ++++++
- include/rpmi_proto.h                       | 125 +++++
- test/dm/Makefile                           |   1 +
- test/dm/rpmi.c                             |  48 ++
- 27 files changed, 2920 insertions(+)
+Changes in v2: (from Yao Zi review)
+ - Reorder headers
+ - Improve error messages in rpmi_check_versions()
 ---
-base-commit: 6487c50b8a40f2668ab98a892b9300ad5c181f38
-change-id: 20261012-rpmi_v4-811f5d688cbc
+ MAINTAINERS                         |   6 ++
+ drivers/firmware/Kconfig            |   1 +
+ drivers/firmware/Makefile           |   1 +
+ drivers/firmware/rpmi/Kconfig       |   9 ++
+ drivers/firmware/rpmi/Makefile      |   1 +
+ drivers/firmware/rpmi/rpmi-uclass.c | 144 ++++++++++++++++++++++++++++++++
+ include/dm/uclass-id.h              |   1 +
+ include/rpmi-uclass.h               |  79 ++++++++++++++++++
+ include/rpmi.h                      | 159 ++++++++++++++++++++++++++++++++++++
+ include/rpmi_proto.h                |  63 ++++++++++++++
+ 10 files changed, 464 insertions(+)
 
-Best regards,
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 3b38ffee2886..765131030370 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1567,6 +1567,12 @@ F:	drivers/usb/gadget/f_rockusb.c
+ F:	cmd/rockusb.c
+ F:	doc/README.rockusb
+ 
++RPMI
++M:	Charles Perry <charles.perry@microchip.com>
++S:	Maintained
++F:	drivers/firmware/rpmi/
++F:	include/rpmi*
++
+ SANDBOX
+ M:	Simon Glass <sjg@chromium.org>
+ S:	Maintained
+diff --git a/drivers/firmware/Kconfig b/drivers/firmware/Kconfig
+index f524f741e548..65aff995758f 100644
+--- a/drivers/firmware/Kconfig
++++ b/drivers/firmware/Kconfig
+@@ -49,3 +49,4 @@ config ARM_SMCCC_FEATURES
+ 
+ source "drivers/firmware/arm-ffa/Kconfig"
+ source "drivers/firmware/scmi/Kconfig"
++source "drivers/firmware/rpmi/Kconfig"
+diff --git a/drivers/firmware/Makefile b/drivers/firmware/Makefile
+index 9e7b118b074f..7d7b09a5d392 100644
+--- a/drivers/firmware/Makefile
++++ b/drivers/firmware/Makefile
+@@ -4,3 +4,4 @@ obj-$(CONFIG_TI_SCI_PROTOCOL)	+= ti_sci.o
+ obj-$(CONFIG_SANDBOX)		+= firmware-sandbox.o
+ obj-$(CONFIG_ZYNQMP_FIRMWARE)	+= firmware-zynqmp.o
+ obj-$(CONFIG_SCMI_FIRMWARE)	+= scmi/
++obj-$(CONFIG_RPMI_FIRMWARE)	+= rpmi/
+diff --git a/drivers/firmware/rpmi/Kconfig b/drivers/firmware/rpmi/Kconfig
+new file mode 100644
+index 000000000000..54fd77ad8f48
+--- /dev/null
++++ b/drivers/firmware/rpmi/Kconfig
+@@ -0,0 +1,9 @@
++config RPMI_FIRMWARE
++	bool "Enable RPMI support"
++	depends on RISCV && DM && OF_CONTROL
++	select FIRMWARE
++	help
++	  RISC-V Platform Management Interface (RPMI) defines an OS-agnostic
++	  protocol for communication between an Application Processor (AP) and a
++	  platform microcontroller (PuC). The RPMI specification is available
++	  at: https://github.com/riscv-non-isa/riscv-rpmi
+diff --git a/drivers/firmware/rpmi/Makefile b/drivers/firmware/rpmi/Makefile
+new file mode 100644
+index 000000000000..d69c718d150e
+--- /dev/null
++++ b/drivers/firmware/rpmi/Makefile
+@@ -0,0 +1 @@
++obj-y	+= rpmi-uclass.o
+diff --git a/drivers/firmware/rpmi/rpmi-uclass.c b/drivers/firmware/rpmi/rpmi-uclass.c
+new file mode 100644
+index 000000000000..a18d5912a63d
+--- /dev/null
++++ b/drivers/firmware/rpmi/rpmi-uclass.c
+@@ -0,0 +1,144 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
++ */
++
++#define LOG_CATEGORY UCLASS_RPMI
++
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <log.h>
++#include <rpmi-uclass.h>
++
++static inline struct rpmi_transport_ops *rpmi_dev_ops(struct udevice *dev)
++{
++	return (struct rpmi_transport_ops *)dev->driver->ops;
++}
++
++int rpmi_get_by_index(struct udevice *dev, int index, struct rpmi_chan *chan)
++{
++	struct ofnode_phandle_args args;
++	struct rpmi_transport_ops *ops;
++	struct udevice *rpmi_dev;
++	int ret;
++
++	ret = dev_read_phandle_with_args(dev, "mboxes", "#mbox-cells", 0, index,
++					 &args);
++	if (ret)
++		return ret;
++
++	ret = uclass_get_device_by_ofnode(UCLASS_RPMI, args.node, &rpmi_dev);
++	if (ret)
++		return ret;
++
++	ops = rpmi_dev_ops(rpmi_dev);
++
++	if (!ops->of_xlate)
++		return -ENOSYS;
++
++	chan->dev = rpmi_dev;
++
++	ret = ops->of_xlate(chan, &args);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++int rpmi_open(struct rpmi_chan *chan)
++{
++	struct rpmi_transport_ops *ops = rpmi_dev_ops(chan->dev);
++
++	if (ops->open)
++		return ops->open(chan);
++
++	return 0;
++}
++
++void rpmi_close(struct rpmi_chan *chan)
++{
++	struct rpmi_transport_ops *ops = rpmi_dev_ops(chan->dev);
++
++	if (ops->close)
++		ops->close(chan);
++}
++
++int rpmi_get_attr(struct rpmi_chan *chan, enum rpmi_attribute_id id, u32 *data)
++{
++	struct rpmi_transport_ops *ops = rpmi_dev_ops(chan->dev);
++
++	if (!ops->get_attr)
++		return -ENOSYS;
++
++	return ops->get_attr(chan, id, data);
++}
++
++int rpmi_send_with_resp(struct rpmi_chan *chan, u32 service_id,
++			const void *request, unsigned long request_len,
++			void *response, unsigned long max_response_len,
++			unsigned long *out_response_len)
++{
++	struct rpmi_transport_ops *ops = rpmi_dev_ops(chan->dev);
++
++	if (!ops->request)
++		return -ENOSYS;
++
++	return ops->request(chan, service_id, request, request_len, response,
++			    max_response_len, out_response_len);
++}
++
++int rpmi_send_posted(struct rpmi_chan *chan, u32 service_id,
++		     const void *request, unsigned long request_len)
++{
++	return rpmi_send_with_resp(chan, service_id, request, request_len, NULL,
++				   0, NULL);
++}
++
++int rpmi_check_versions(struct rpmi_chan *chan, u32 min_proto_version,
++			u32 servicegroup_id_expect,
++			u32 min_servicegroup_version)
++{
++	u32 proto_version, servicegroup_id, servicegroup_version;
++	int ret;
++
++	ret = rpmi_get_attr(chan, RPMI_ATTR_SPEC_VERSION, &proto_version);
++	if (ret)
++		return ret;
++
++	if (proto_version < min_proto_version) {
++		dev_err(chan->dev,
++			"protocol version too old, found 0x%x, expected min 0x%x\n",
++			proto_version, min_proto_version);
++		return -EINVAL;
++	}
++
++	ret = rpmi_get_attr(chan, RPMI_ATTR_SERVICEGROUP_ID, &servicegroup_id);
++	if (ret)
++		return ret;
++
++	if (servicegroup_id != servicegroup_id_expect) {
++		dev_err(chan->dev,
++			"service group match fail, found 0x%x, expected 0x%x\n",
++			servicegroup_id, servicegroup_id_expect);
++		return -EINVAL;
++	}
++
++	ret = rpmi_get_attr(chan, RPMI_ATTR_SERVICEGROUP_VERSION,
++			    &servicegroup_version);
++	if (ret)
++		return ret;
++
++	if (servicegroup_version < min_servicegroup_version) {
++		dev_err(chan->dev,
++			"service group version too old, found 0x%x, expected min 0x%x\n",
++			servicegroup_version, min_servicegroup_version);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++UCLASS_DRIVER(rpmi) = {
++	.id = UCLASS_RPMI,
++	.name = "rpmi",
++};
+diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
+index d4822177764f..f6f1c378c2e7 100644
+--- a/include/dm/uclass-id.h
++++ b/include/dm/uclass-id.h
+@@ -130,6 +130,7 @@ enum uclass_id {
+ 	UCLASS_RESET,		/* Reset controller device */
+ 	UCLASS_RKMTD,		/* Rockchip MTD device */
+ 	UCLASS_RNG,		/* Random Number Generator */
++	UCLASS_RPMI,		/* RPMI transport */
+ 	UCLASS_RTC,		/* Real time clock device */
+ 	UCLASS_SCMI_AGENT,	/* Interface with an SCMI server */
+ 	UCLASS_SCMI_BASE,	/* Interface for SCMI Base protocol */
+diff --git a/include/rpmi-uclass.h b/include/rpmi-uclass.h
+new file mode 100644
+index 000000000000..1b41f9529a83
+--- /dev/null
++++ b/include/rpmi-uclass.h
+@@ -0,0 +1,79 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
++ */
++
++#ifndef _RPMI_UCLASS_H
++#define _RPMI_UCLASS_H
++
++#include <rpmi.h>
++
++/**
++ * struct rpmi_transport_ops - The functions that an RPMI transport driver must implement.
++ */
++struct rpmi_transport_ops {
++	/**
++	 * of_xlate - Translate a client's device-tree (OF) mailbox specifier.
++	 *
++	 * Mandatory, cannot be null.
++	 *
++	 * @chan:	The channel to hold the translation result.
++	 * @args:	The mailbox specifier values from device tree.
++	 * @return 0 if OK, or a negative error code.
++	 */
++	int (*of_xlate)(struct rpmi_chan *chan,
++			struct ofnode_phandle_args *args);
++
++	/**
++	 * get_attr - Get an RPMI attribute
++	 *
++	 * Mandatory, cannot be null.
++	 *
++	 * @chan:	RPMI channel associated to the request.
++	 * @id:		ID of the attribute to get.
++	 * @data:	buffer to hold the parameter.
++	 * @return 0 if OK, or a negative error code.
++	 */
++	int (*get_attr)(struct rpmi_chan *chan, enum rpmi_attribute_id id,
++			u32 *data);
++
++	/**
++	 * request - send a request and possibly receive a response.
++	 *
++	 * Mandatory, cannot be null.
++	 *
++	 * @chan:		RPMI channel associated to the request.
++	 * @service_id:		RPMI service ID to call.
++	 * @request:		buffer to hold the request.
++	 * @request_len:	length of the request buffer.
++	 * @response:		buffer to hold the response. If NULL, this is a posted request.
++	 * @max_response_len:	size of the response buffer. If 0, this is a posted request.
++	 * @out_response_len:	size of the actual response. Out parameter.
++	 * @return 0 if OK, or a negative error code.
++	 */
++	int (*request)(struct rpmi_chan *chan, u32 service_id,
++		       const void *request, unsigned long request_len,
++		       void *response, unsigned long max_response_len,
++		       unsigned long *out_response_len);
++
++	/**
++	 * open - Perform channel initialization.
++	 *
++	 * Optional, can be null.
++	 *
++	 * @chan:	RPMI channel to initialize.
++	 * @return 0 if OK, or a negative error code.
++	 */
++	int (*open)(struct rpmi_chan *chan);
++
++	/**
++	 * close - Perform channel deinitialization.
++	 *
++	 * Optional, can be null.
++	 *
++	 * @chan:	RPMI channel to deinitialize.
++	 */
++	void (*close)(struct rpmi_chan *chan);
++};
++
++#endif
+diff --git a/include/rpmi.h b/include/rpmi.h
+new file mode 100644
+index 000000000000..de802026b31a
+--- /dev/null
++++ b/include/rpmi.h
+@@ -0,0 +1,159 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (C) 2026 Microchip Technology Inc. All rights reserved.
++ */
++
++#ifndef _RPMI_H
++#define _RPMI_H
++
++#include <linux/errno.h>
++#include <linux/types.h>
++#include <linux/kernel.h>
++#include <rpmi_proto.h>
++
++/* RPMI version encode/decode macros */
++#define RPMI_VER_MAJOR(__ver) upper_16_bits(__ver)
++#define RPMI_VER_MINOR(__ver) lower_16_bits(__ver)
++#define RPMI_MKVER(__maj, __min) (((u32)(__maj) << 16) | (u16)(__min))
++
++/* RPMI attribute IDs */
++enum rpmi_attribute_id {
++	RPMI_ATTR_SPEC_VERSION,
++	RPMI_ATTR_MAX_MSG_DATA_SIZE,
++	RPMI_ATTR_SERVICEGROUP_ID,
++	RPMI_ATTR_SERVICEGROUP_VERSION,
++	RPMI_ATTR_IMPL_ID,
++	RPMI_ATTR_IMPL_VERSION,
++	RPMI_ATTR_MAX_ID
++};
++
++static inline int rpmi_to_linux_error(int rpmi_error)
++{
++	switch (rpmi_error) {
++	case RPMI_SUCCESS:
++		return 0;
++	case RPMI_ERR_INVALID_PARAM:
++	case RPMI_ERR_BAD_RANGE:
++	case RPMI_ERR_INVALID_STATE:
++		return -EINVAL;
++	case RPMI_ERR_DENIED:
++		return -EPERM;
++	case RPMI_ERR_INVALID_ADDR:
++	case RPMI_ERR_HW_FAULT:
++		return -EFAULT;
++	case RPMI_ERR_ALREADY:
++		return -EALREADY;
++	case RPMI_ERR_BUSY:
++		return -EBUSY;
++	case RPMI_ERR_TIMEOUT:
++		return -ETIMEDOUT;
++	case RPMI_ERR_IO:
++		return -ECOMM;
++	case RPMI_ERR_FAILED:
++	case RPMI_ERR_NOTSUPP:
++	case RPMI_ERR_NO_DATA:
++	case RPMI_ERR_EXTENSION:
++	default:
++		return -EOPNOTSUPP;
++	}
++}
++
++struct udevice;
++
++/**
++ * struct rpmi_chan - A handle to a single RPMI channel.
++ *
++ * One RPMI channel is associated to one service group.
++ */
++struct rpmi_chan {
++	struct udevice *dev;
++	/* Written by rpmi_get_by_index or rpmi_open */
++	unsigned long id;
++	void *con_priv;
++};
++
++/**
++ * rpmi_get_by_index - Get an RPMI channel by integer index.
++ *
++ * Initialize an RPMI channel using hardware information such as device tree
++ * data. No communication with the PuC occurs when calling this function.
++ *
++ * @dev:        The client device.
++ * @index:      The index of the RPMI channel to request.
++ * @chan:       A pointer to a channel object to initialize.
++ * @return: 0 if OK, or a negative error code.
++ */
++int rpmi_get_by_index(struct udevice *dev, int index, struct rpmi_chan *chan);
++
++/**
++ * rpmi_open - Initialize an RPMI channel.
++ *
++ * Initialize an RPMI channel. Communication with the PuC is performed. Must be
++ * called after rpmi_get_by_index.
++ *
++ * @chan:	The channel to initialize.
++ * @return: 0 if OK, or a negative error code.
++ */
++int rpmi_open(struct rpmi_chan *chan);
++
++/**
++ * rpmi_close - Deinitialize an RPMI channel.
++ *
++ * @chan:	The channel to deinitialize.
++ */
++void rpmi_close(struct rpmi_chan *chan);
++
++/**
++ * rpmi_get_attr - Get an RPMI channel attribute.
++ *
++ * @return: 0 if OK, or a negative error code.
++ */
++int rpmi_get_attr(struct rpmi_chan *chan, enum rpmi_attribute_id id, u32 *data);
++
++/**
++ * rpmi_send_with_resp - Send a request and receive a response.
++ *
++ * @chan:		RPMI channel associated to the request.
++ * @service_id:		RPMI service ID to call.
++ * @request:		buffer to hold the request. Can be NULL if request_len is zero.
++ * @request_len:	length of the request buffer.
++ * @response:		buffer to hold the response. Cannot be NULL.
++ * @max_response_len:	length of the response buffer.
++ * @out_response_len:	length of the actual response. Out parameter.
++ * @return: 0 if OK, or a negative error code.
++ */
++int rpmi_send_with_resp(struct rpmi_chan *chan, u32 service_id,
++			const void *request, unsigned long request_len,
++			void *response, unsigned long max_response_len,
++			unsigned long *out_response_len);
++
++/**
++ * rpmi_send_posted - Send a posted request.
++ *
++ * @chan:		RPMI channel associated to the request.
++ * @service_id:		RPMI service ID to call.
++ * @request:		buffer to hold the request. Can be NULL if request_len is zero.
++ * @request_len:	length of the request buffer.
++ * @return: 0 if OK, or a negative error code.
++ */
++int rpmi_send_posted(struct rpmi_chan *chan, u32 service_id,
++		     const void *request, unsigned long request_len);
++
++/**
++ * rpmi_check_versions - helper function to check version numbers of the
++ * implementation.
++ *
++ * @chan:                       RPMI channel associated to the request.
++ * @min_proto_version:          Minimum RPMI protocol version required. Caller
++ *                              should use the RPMI_MKVER() macro.
++ * @servicegroup_id_expect:     Service group ID expected.
++ * @min_servicegroup_version:   Minimum Service group implementation version
++ *                              required. Caller should use the RPMI_MKVER()
++ *                              macro.
++ * @return: 0 if OK, or a negative error code.
++ */
++int rpmi_check_versions(struct rpmi_chan *chan, u32 min_proto_version,
++			u32 servicegroup_id_expect,
++			u32 min_servicegroup_version);
++
++#endif
+diff --git a/include/rpmi_proto.h b/include/rpmi_proto.h
+new file mode 100644
+index 000000000000..012ae93d7317
+--- /dev/null
++++ b/include/rpmi_proto.h
+@@ -0,0 +1,63 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Values defined by the RPMI spec.
++ */
++
++#ifndef _RPMI_PROTO_H
++#define _RPMI_PROTO_H
++
++/* RPMI error codes */
++enum rpmi_error_codes {
++	RPMI_SUCCESS = 0,
++	RPMI_ERR_FAILED = -1,
++	RPMI_ERR_NOTSUPP = -2,
++	RPMI_ERR_INVALID_PARAM = -3,
++	RPMI_ERR_DENIED = -4,
++	RPMI_ERR_INVALID_ADDR = -5,
++	RPMI_ERR_ALREADY = -6,
++	RPMI_ERR_EXTENSION = -7,
++	RPMI_ERR_HW_FAULT = -8,
++	RPMI_ERR_BUSY = -9,
++	RPMI_ERR_INVALID_STATE = -10,
++	RPMI_ERR_BAD_RANGE = -11,
++	RPMI_ERR_TIMEOUT = -12,
++	RPMI_ERR_IO = -13,
++	RPMI_ERR_NO_DATA = -14,
++	RPMI_ERR_RESERVED_START = -15,
++	RPMI_ERR_RESERVED_END = -127,
++	RPMI_ERR_VENDOR_START = -128,
++};
++
++/** RPMI ServiceGroups IDs */
++enum rpmi_servicegroup_id {
++	RPMI_SRVGRP_ID_MIN		= 0,
++	RPMI_SRVGRP_BASE		= 0x0001,
++	RPMI_SRVGRP_SYSTEM_MSI		= 0x0002,
++	RPMI_SRVGRP_SYSTEM_RESET	= 0x0003,
++	RPMI_SRVGRP_SYSTEM_SUSPEND	= 0x0004,
++	RPMI_SRVGRP_HSM			= 0x0005,
++	RPMI_SRVGRP_CPPC		= 0x0006,
++	RPMI_SRVGRP_VOLTAGE		= 0x0007,
++	RPMI_SRVGRP_CLOCK		= 0x0008,
++	RPMI_SRVGRP_DEVICE_POWER	= 0x0009,
++	RPMI_SRVGRP_PERFORMANCE		= 0x000A,
++	RPMI_SRVGRP_MANAGEMENT_MODE	= 0x000B,
++	RPMI_SRVGRP_RAS_AGENT		= 0x000C,
++	RPMI_SRVGRP_REQUEST_FORWARD	= 0x000D,
++	RPMI_SRVGRP_LOGGING			= 0x000E,
++	RPMI_SRVGRP_ID_MAX_COUNT,
++
++	/* Reserved range for service groups */
++	RPMI_SRVGRP_RESERVE_START	= RPMI_SRVGRP_ID_MAX_COUNT,
++	RPMI_SRVGRP_RESERVE_END		= 0x7BFF,
++
++	/* Experimental service groups range */
++	RPMI_SRVGRP_EXPERIMENTAL_START	= 0x7C00,
++	RPMI_SRVGRP_EXPERIMENTAL_END	= 0x7FFF,
++
++	/* Vendor/Implementation-specific service groups range */
++	RPMI_SRVGRP_VENDOR_START	= 0x8000,
++	RPMI_SRVGRP_VENDOR_END		= 0xFFFF,
++};
++
++#endif
+
 -- 
-Thanks,
-Charles
+2.53.0
 
