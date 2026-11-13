@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 708A5606A887
-	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 02:33:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12688606A335
+	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 02:33:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=pf1cJXJg;
-	dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=dVZFHgnZ
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Lmesw8B8;
+	dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=Dzpjq8Ob
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 43E3160EC1;
-	Fri, 13 Nov 2026 02:33:46 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E277160E9A;
+	Fri, 13 Nov 2026 02:33:51 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id yYmysBpLGFV5; Fri, 13 Nov 2026 02:33:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7A79860E8A
+ id uBfkx9FwCgzq; Fri, 13 Nov 2026 02:33:51 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 1D20960E39
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794537225;
-	b=bYuch6uMa9UYGYZLCgbdyfli0ne9gsqKtAggRV91mtUDy1aynWvjKkf/nF2ywPuGPfWf
-	 khwcZ2XID8RAsP+eLGwFA8u3PdXicr8fM5m79mgH8RVGHwFhrW0Ka7Cx7CE/Qt/VCxaRg
-	 jdd7/4/aMjxIpoj+pGQgsTMwwZhrJbGUs8auhjUNfCr0v0IeTBSlpY7S0oTY2Lx7d6JLI
-	 DVuY6ba1BhdJuGLDyUc4JMUyVZhiqnc2Kfm6OVmmxPHiJCTQhFq9XpV+I/WmUDHAMdOQ5
-	 UFpi6lFIhgj+DmyGx25gV/8D8sJlLNzVAsNgLYRu4/lneS0LvY+KF7GjilQ6mX7NwqA==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794537231;
+	b=MTYlwqHK5j4N4FR9kjaayw0Zv3lyJl/O3KgM/K5YqIvi48fdTS/T7ZH/JnZNuHK5V9GE
+	 GFtT1br61eMyYJOk/EZnGn5QNC0Us3Fowy8YHPu/MmGJ+vzFUW7h8KOnh08CujLQLILJU
+	 ewS5JX4WJ0aTQZCFT5AoZXxMCyoXgMLjYQdC5DEfoZ/LdeALhCY5+AkUwNx55MBGyaY8u
+	 q0Rn6j01PEwT7NPDU8oTnbtavIF7+N24tdwXPzOeZf8Fdr3oXsrl3qS5w7DLvWXzMcgAb
+	 C6noFTiXuuQ7kBbDh5K+2sZ40qJDR09IQr9TnHqMufxAO7kUid7RfY9g0ps8Dt/HSAg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794537225;
+	c=relaxed/relaxed; t=1794537231;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,80 +32,78 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=unrczy5PQEYE5BxHtwdDQuDUdjXeDqpqqC5mgLsiAtg=;
-	b=Vk7rqxl4/n+MWnq1v+4GLcOBitPtKx/r1UgzHwhYp2f6XbyC2s60hOaG/3qhObpucu6f
-	 DMM6qmMxGnpMy6SRZmXW6B/nkOTBZRlMzOygqxbrsCNCdwuRsHuaqChyKqxZb3eeLSU0o
-	 IqJHjE6qpifO6Q+w7QCQBIogn8akj37Vfrk/LZfp25Lv1MC6+yBgZTJW/IWzw0gmvPjn8
-	 oxTg8r9m0LibX7+G/H2j+SR/XnBPfcQhHsX9Z/s2AM54B8AddxjtmgXipaK/fxOvWvKlQ
-	 J4FDd9EuMTqGIgCC4x70PhMVuUV9D76oIGVDe6JFq9tIjBAS0/F7wgVUkscYhL3tbsQ==
+	bh=so9onVI3SP6pb7+jC5LL53SaL6NsRNeakG8QoV3sRkk=;
+	b=LMaBewFatAu77+zGK8ylUU+7U2ptUnBNelQM4sSVDZa1eqzvDcBiC9/epq1tmR+NoNgB
+	 sRpyIK7HZHSeG/ll7L6z2FuaykvTycuvj/04SmoOdQ7QVgCNV5fVoXsc9mpirlMGG3rEB
+	 b70pySIBicurXYwCvSepfNCMtCeTSWmEkszDhEN5inL6MN4noe6g9sQSIJ8TMT+lam0g1
+	 0gCe//x+iRE/7esObCYfTafuqEBuCKOBocKl5mG9FfFR4l0AaHKm/s32NuL0Cye1LeWQg
+	 waLkBSyd6zvMOspytjcMxFyk7+aiovSZrkQEqZlz2cuYpJ4rVHl9pAeHm02XWNjcaMw==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
-	dmarc=pass header.from=d-silva.org;
-	dkim=pass header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=dVZFHgnZ;
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794537225;
-	bh=unrczy5PQEYE5BxHtwdDQuDUdjXeDqpqqC5mgLsiAtg=;
+	d=lists.u-boot-project.org; s=default; t=1794537231;
+	bh=so9onVI3SP6pb7+jC5LL53SaL6NsRNeakG8QoV3sRkk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=pf1cJXJgcaRd1UaW8wvNFQ7fxBAWiapj/LcSqfg68dL7TkVQ8sB9nX+yqlE8mmzwf
-	 WnU30ksmeIQU10lATcOVv6Y9PCawUjgKacsf990Rvlagk09IUD4nqMUd2qF2eXPugj
-	 73SKOniBdDa0aA/3lmx9PHqH6xhu2NTpg2FovFvw6C02fP9b/m4tUM+xetk7RAJKdL
-	 1i2xxvNoUBB4Fr0FUGQtpL5J9uRaWiYBNCHXm4zXtiYabp3R1T+UJ2ykVxeXnR0mad
-	 zgG4rBbtdxsB75f3/RwQ1R0uFD8UpJ44Ve6rP+6xKWvFjvDd2NGPt8Ga72j5NbrhTm
-	 eV7BpwAHbKxhw==
+	b=Lmesw8B8k0CzgL90IltM7FZkp7fSYgtmv1lW/uVJBNiCJiTT+Np3wzBcB6RVAHRlx
+	 NYO6KF56jWLfVAB+D9+f4cu/kMpENeJDPtAa+VJgWtnb3hvvPxUi9ZMcRLnLDaOk0F
+	 VUOQa6le654r3CAlpzt8HY1CBGxDAfSwJQ1LU8hvVin40CwNgHrbYqHjEeVj75GolC
+	 +HLyH+V49wlwk4/FtXzsc3MzP+dOZ7HIzj7WJh++dXKGaXxABBzcogfOR5YwqT8aum
+	 bPDkD6KY8ZB8ssFcLOccjlser9X3tuHUK7iFfd6xKg63IQztkghKpJZZbMaeukYoAT
+	 3ja2EpAybcBTQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7A79860E8A;
-	Fri, 13 Nov 2026 02:33:45 +0000 (UTC)
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id ECA3E2E5
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:43 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1D20960E39;
+	Fri, 13 Nov 2026 02:33:51 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 8DEF01790
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id DE56960E8A
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:43 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7FC79400E6
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 749mXis-_z3N for <u-boot@lists.u-boot-project.org>;
- Fri, 13 Nov 2026 02:33:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org A1A8E60EC0
-Authentication-Results: smtp3.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id xqn8fcGMj662 for <u-boot@lists.u-boot-project.org>;
+ Fri, 13 Nov 2026 02:33:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 319B540082
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip=119.15.109.137
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=119.15.109.137;
  helo=www.nmnhosting.com; envelope-from=alastair@d-silva.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=d-silva.org
-Authentication-Results: smtp3.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org
- header.a=rsa-sha256 header.s=2025a header.b=dVZFHgnZ
+ header.a=rsa-sha256 header.s=2025a header.b=Dzpjq8Ob
 Received: from www.nmnhosting.com (watt.d-silva.org [119.15.109.137])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A1A8E60EC0
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:42 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 319B540082
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:48 +0000 (UTC)
 Received: from Hawking.lan (hawking.lan [10.0.1.4])
- by www.nmnhosting.com (Postfix) with ESMTP id 894334C8BC;
- Fri, 13 Nov 2026 13:33:34 +1100 (AEDT)
+ by www.nmnhosting.com (Postfix) with ESMTP id 19B044C8BE;
+ Fri, 13 Nov 2026 13:33:41 +1100 (AEDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=d-silva.org; s=2025a; 
- t=1794537214;
+ t=1794537221;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=unrczy5PQEYE5BxHtwdDQuDUdjXeDqpqqC5mgLsiAtg=;
- b=dVZFHgnZPHzyXMMRd5BQBSAJK45dpkaYdLYYug0tc9WlBgW2/eLPy/UueY9gZbAUEWypSi
- cDpR4e148sEWk3mRaBb1KHUslj8rj17JM38MDVfo/AJy5de2xaWc1YIBEn2I2feprCeH/i
- qh7htqQxdDskcSAJu1FDJG6KWMF/qxziqEmZX0o3xoRmuh38iDWZvvvIu7sBovo4ifFB4X
- n+ZoCXFbOJWxoHokVD7Wtte0rT2pBkh4EhvZ24/8rfMB08LqbZsACdSuh7E0zLY21a+dWE
- dKE5xP5rKzo44Go4j1jG2bmb02xKPhoddg/ehkgqnPxIHGGt3zCr0+Z7gUBHuA==
-X-GPT-Reason: legitimate; This is a technical, developer-oriented
- software patch (Linux kernel/U-Boot style) sent from a known personal
- domain (alastair@d-silva.org) to a matching mailbox (alastair@d-silva.org),
- which perfectly aligns with the personal/professional context
- of the user. The content is highly specific, technical, and contains
- no marketing, phishing, or scareware signals; furthermore, the From
- domain matches the sender's identity and the lack of external
- URLs or urgency tactics confirms a non-malicious, functional communication.
+ bh=so9onVI3SP6pb7+jC5LL53SaL6NsRNeakG8QoV3sRkk=;
+ b=Dzpjq8ObXrwlcPbzt9Zbu4fRmWCtutD70Q00HHz4r/4HbVs/75cmkxfkNjWTVh9aeXXuMR
+ 9uwr2CMGA51CABs0JsagVmBYf/BxYVJRZTPfXPREGTOxfwk1okU/fZWkcT+9DW+jh8bYGC
+ cblF7N4F/th77SbD/oGQT3OnQohu0PJ+KFvCi5DjBbo0UIvGsQLjm2+eVIM6S1kFgWUMyB
+ uUYrZOLd8NuERxCNV52OLL/w0ZTk8ZbE04A+09kDUeTLprUf30rlGcGTz6aZ/gMVDItxg9
+ PxyEyaXSsR4GeI9fScVjx1nVaLog7z2PSjhxHzaoXq78cPeeb8Lmjc8/IMoGzQ==
+X-GPT-Reason: The email is classified as legitimate personal/professional
+ correspondence. The content describes a technical kernel or firmware
+ patch related to "sunxi" and "Allwinner A733" hardware, which aligns
+ perfectly with the sender's identity (Alastair D'Silva) and the
+ mailbox (alastair@d-silva.org). There are no phishing indicators,
+ no urgency/fear tactics, and the From domain matches the sender's
+ signature and the recipient's domain, indicating a consistent and
+ trusted communication flow.
 From: Alastair D'Silva <alastair@d-silva.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>,
@@ -119,10 +117,9 @@ Cc: Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>,
  Enzo Adriano <enzo.adriano.code@gmail.com>,
  Junhui Liu <junhui.liu@pigmoral.tech>,
  Alastair D'Silva <alastair@d-silva.org>
-Subject: [PATCH 12/26] arm64: spl: Support disposable .init.rodata section
- after _image_binary_end
-Date: Fri, 13 Nov 2026 13:32:22 +1100
-Message-ID: <20261113023236.569054-13-alastair@d-silva.org>
+Subject: [PATCH 13/26] sunxi: fel: Add Allwinner A733 ERET FEL return support
+Date: Fri, 13 Nov 2026 13:32:23 +1100
+Message-ID: <20261113023236.569054-14-alastair@d-silva.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261113023236.569054-1-alastair@d-silva.org>
 References: <20261113023236.569054-1-alastair@d-silva.org>
@@ -145,123 +142,170 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Some SoCs with tight SRAM budgets (such as Allwinner A733, where TF-A
-BL31 loads into SRAM A2 at 0x00058000) carry large one-time DRAM
-initialization tables and PHY firmware in SPL that are never referenced
-after DRAM bringup completes.
-
-Add CONFIG_SPL_DISPOSABLE_INIT_RODATA and CONFIG_SPL_ACTIVE_MAX_SIZE so
-ARM64 SPL builds with separate BSS and no SPL DT append can emit
-.init.rodata immediately after _image_binary_end, copy it into
-u-boot-spl-nodtb.bin via SPL_OBJCFLAGS, and enforce a linker ASSERT on
-the active SPL ceiling before the reclaimable region begins.
+On the Allwinner A733, boot0.h latches CLU0_CPU0_CTRL_REG to AArch64
+and sunxi-fel uses SRAM swap buffers across 0x47000. Rather than arming
+R_CPUCFG hotplug magic and warm-resetting through BROM, drop directly
+to Secure AArch32 SVC via ERET after draining UART0 TX, and install an
+EL3 SMC vector in SH_SRAM (0x00080000) so sunxi-fel can re-enter AArch64
+EL3 for BL31.
 
 Signed-off-by: Alastair D'Silva <alastair@d-silva.org>
 ---
- arch/arm/config.mk                |  4 ++++
- arch/arm/cpu/armv8/u-boot-spl.lds | 20 ++++++++++++++++++++
- arch/arm/cpu/armv8/u-boot.lds     |  1 +
- common/spl/Kconfig                | 18 ++++++++++++++++++
- 4 files changed, 43 insertions(+)
+ arch/arm/cpu/armv8/fel_utils.S | 113 ++++++++++++++++++++++++++++++++-
+ 1 file changed, 112 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/config.mk b/arch/arm/config.mk
-index bce9a31e966..9f76e70bd21 100644
---- a/arch/arm/config.mk
-+++ b/arch/arm/config.mk
-@@ -165,6 +165,10 @@ endif
- # 2) unit tests include device tree blobs
- OBJCOPYFLAGS += -j .dtb.init.rodata
- 
-+ifeq ($(CONFIG_SPL_DISPOSABLE_INIT_RODATA),y)
-+SPL_OBJCFLAGS += -j .init.rodata
-+endif
+diff --git a/arch/arm/cpu/armv8/fel_utils.S b/arch/arm/cpu/armv8/fel_utils.S
+index ccddfaaf04c..fc0e0b93c37 100644
+--- a/arch/arm/cpu/armv8/fel_utils.S
++++ b/arch/arm/cpu/armv8/fel_utils.S
+@@ -11,6 +11,30 @@
+ #include <asm/system.h>
+ #include <linux/linkage.h>
+ #include <asm/arch/cpu.h>
++#include <asm/arch/serial.h>
 +
- ifdef CONFIG_EFI_LOADER
- OBJCOPYFLAGS += -j .efi_runtime -j .efi_runtime_rel
- endif
-diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
-index 39020a1fddd..3feeb73ff04 100644
---- a/arch/arm/cpu/armv8/u-boot-spl.lds
-+++ b/arch/arm/cpu/armv8/u-boot-spl.lds
-@@ -33,6 +33,9 @@ SECTIONS
- 	.rodata : {
- 		. = ALIGN(8);
- 		*(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
-+#if !CONFIG_IS_ENABLED(DISPOSABLE_INIT_RODATA)
-+		*(SORT_BY_ALIGNMENT(SORT_BY_NAME(.init.rodata*)))
++#ifdef CONFIG_MACH_SUN60I_A733
++#define A733_FEL_EL3_VBAR		SUNXI_FEL_EL3_VBAR
++#define A733_FEL_EL3_A32_SYNC_OFF	0x600
++#define UART_LSR_OFFSET			0x14
++#define UART_LSR_TEMT_BIT		6
++#define SCR_EL3_IRQ_EN			(1 << 1)
++#define SCR_EL3_FIQ_EN			(1 << 2)
++#define SCR_EL3_FEL_A32_CLEAR		(SCR_EL3_RW_AARCH64 | \
++					 SCR_EL3_SMD_DIS | \
++					 SCR_EL3_EA_EN | \
++					 SCR_EL3_FIQ_EN | \
++					 SCR_EL3_IRQ_EN | \
++					 SCR_EL3_NS_EN)
++#define ICC_SRE_EL3_ENABLE_ALL		0xf
++#define ICC_SRE_EL1_ENABLE_ALL		0x7
++#define ICC_IGRPEN1_EL3_ENABLE_ALL	0x3
++#define SPSR_EL3_A32_SVC_MASKED		(SPSR_EL_ASYN_MASK | \
++					 SPSR_EL_IRQ_MASK | \
++					 SPSR_EL_FIQ_MASK | \
++					 SPSR_EL_M_AARCH32 | \
++					 SPSR_EL_M_SVC)
 +#endif
- 	} >.sram
  
- 	.data : {
-@@ -67,6 +70,18 @@ SECTIONS
- 	_end = .;
- 	_image_binary_end = .;
+ /*
+  * We don't overwrite save_boot_params() here, to save the FEL state upon
+@@ -40,6 +64,89 @@ ENTRY(return_to_fel)
+ 	adr	x1, fel_stash_addr	// to find the fel_stash address in AA32
+ 	str	w2, [x1]
  
-+#if CONFIG_IS_ENABLED(DISPOSABLE_INIT_RODATA)
++#if defined(CONFIG_MACH_SUN60I_A733)
++#if CONFIG_IS_ENABLED(SERIAL)
++	/* Drain UART0 TX FIFO before dropping to AArch32 */
++	ldr	x2, =SUNXI_UART0_BASE
++	mov	w1, #0x10000
++2:	ldr	w0, [x2, #UART_LSR_OFFSET]
++	tbnz	w0, #UART_LSR_TEMT_BIT, 3f
++	subs	w1, w1, #1
++	b.ne	2b
++3:
++#endif
++
 +	/*
-+	 * Disposable early-init read-only tables (e.g. DRAM PHY firmware/tables)
-+	 * placed after _image_binary_end so subsequent firmware loads (such as
-+	 * TF-A BL31) can reclaim this SRAM region once early bringup completes.
++	 * On A733, boot0.h latches CLU0_CPU0_CTRL_REG to AArch64 and FEL uses
++	 * SRAM swap buffers across 0x47000. Rather than warm-resetting through
++	 * the BROM hotplug path, drop directly to Secure AArch32 SVC via ERET
++	 * and install an EL3 SMC vector in SH_SRAM outside the FEL swap buffer
++	 * so sunxi-fel can re-enter AArch64 EL3 for BL31.
 +	 */
-+	.init.rodata : {
-+		. = ALIGN(8);
-+		*(SORT_BY_ALIGNMENT(SORT_BY_NAME(.init.rodata*)))
-+	} >.sram
++	adr	x4, el3_a32_sync
++	adr	x5, el3_a32_sync_end
++	ldr	x6, =(A733_FEL_EL3_VBAR + A733_FEL_EL3_A32_SYNC_OFF)
++	mov	x8, x6
++4:	ldr	w7, [x4], #4
++	str	w7, [x6], #4
++	cmp	x4, x5
++	b.lo	4b
++
++5:	dc	cvau, x8
++	add	x8, x8, #64
++	cmp	x8, x6
++	b.lo	5b
++	dsb	ish
++	ic	iallu
++	dsb	ish
++	isb
++
++	ldr	x0, =A733_FEL_EL3_VBAR
++	msr	vbar_el3, x0
++
++	mrs	x1, ICC_SRE_EL3
++	orr	x1, x1, #ICC_SRE_EL3_ENABLE_ALL
++	msr	ICC_SRE_EL3, x1
++	isb
++
++	mrs	x1, ICC_SRE_EL1
++	orr	x1, x1, #ICC_SRE_EL1_ENABLE_ALL
++	msr	ICC_SRE_EL1, x1
++	mov	x1, #ICC_IGRPEN1_EL3_ENABLE_ALL
++	msr	ICC_IGRPEN1_EL3, x1
++
++	mrs	x0, scr_el3
++	mov	x1, #SCR_EL3_FEL_A32_CLEAR
++	bic	x0, x0, x1
++	msr	scr_el3, x0
++
++	mov	x0, #SPSR_EL3_A32_SVC_MASKED
++	msr	spsr_el3, x0
++
++	adr	x0, back_in_32
++	msr	elr_el3, x0
++
++	dsb	sy
++	isb
++	eret
++
++	.align	2
++el3_a32_sync:
++	mrs	x9, scr_el3
++	mov	x10, #SCR_EL3_RW_AARCH64
++	orr	x9, x9, x10
++	msr	scr_el3, x9
++	isb
++	cbnz	w0, 6f
++	movz	w0, #(CONFIG_SUNXI_BL31_BASE & 0xffff)
++	movk	w0, #(CONFIG_SUNXI_BL31_BASE >> 16), lsl #16
++6:	uxtw	x0, w0
++	ic	iallu
++	dsb	sy
++	isb
++	br	x0
++el3_a32_sync_end:
++#else
+ 	ldr	w0, =0xfa50392f		// CPU hotplug magic
+ #if defined(CONFIG_MACH_SUN50I_H616) || defined(CONFIG_MACH_SUN50I_A133) || \
+     defined(CONFIG_MACH_SUN55I_A523)
+@@ -63,6 +170,7 @@ ENTRY(return_to_fel)
+ 	isb	sy
+ 1:	wfi
+ 	b	1b
 +#endif
-+
- #ifdef CONFIG_SPL_SEPARATE_BSS
- 	.bss : {
- 		__bss_start = .;
-@@ -102,3 +117,8 @@ ASSERT(_image_binary_end % 8 == 0, \
  
- ASSERT(ADDR(.bss) % 8 == 0, \
-        ".bss must be 8-byte aligned");
-+
-+#if CONFIG_IS_ENABLED(DISPOSABLE_INIT_RODATA) && CONFIG_SPL_ACTIVE_MAX_SIZE > 0
-+ASSERT(_image_binary_end - __image_copy_start <= CONFIG_SPL_ACTIVE_MAX_SIZE, \
-+       "SPL active binary exceeds CONFIG_SPL_ACTIVE_MAX_SIZE");
+ fel_stash_addr:			// must immediately precede back_in_32:
+ 	.word   0x00000000	// receives fel_stash addr, by AA64 code above
+@@ -71,6 +179,9 @@ fel_stash_addr:			// must immediately precede back_in_32:
+ back_in_32:
+ 	.word	0xe51f000c	// ldr	r0, [pc, #-12]  ; load fel_stash address
+ 	.word	0xe5901008	// ldr	r1, [r0, #8]
++#ifdef CONFIG_MACH_SUN60I_A733
++	.word	0xe38110c0	// orr	r1, r1, #0xc0   ; mask IRQ/FIQ in thunk
 +#endif
-diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-index 231ab28b50c..55ad4c5feea 100644
---- a/arch/arm/cpu/armv8/u-boot.lds
-+++ b/arch/arm/cpu/armv8/u-boot.lds
-@@ -120,6 +120,7 @@ SECTIONS
- #endif
- 		__start_rodata = .;
- 		*(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
-+		*(SORT_BY_ALIGNMENT(SORT_BY_NAME(.init.rodata*)))
- 	}
- 
- 	__u_boot_list ALIGN(8) : {
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 4930ecb0861..170578ef895 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -86,6 +86,24 @@ config SPL_MAX_SIZE
- 	  sections), BSS excluded.  When defined, the linker checks that the
- 	  actual size does not exceed it.
- 
-+config SPL_DISPOSABLE_INIT_RODATA
-+	bool
-+	depends on ARM64 && SPL_SEPARATE_BSS && !SPL_OF_CONTROL
-+	help
-+	  Place .init.rodata* sections after _image_binary_end in the SPL
-+	  SRAM image so one-time initialization tables (such as DRAM PHY
-+	  firmware) can be reclaimed by subsequent firmware stages (e.g.
-+	  TF-A BL31) once early hardware bringup completes.
-+
-+config SPL_ACTIVE_MAX_SIZE
-+	hex
-+	depends on SPL_DISPOSABLE_INIT_RODATA
-+	default 0x0
-+	help
-+	  When non-zero, maximum size in bytes of the active SPL image
-+	  (_image_binary_end - __image_copy_start) before the disposable
-+	  .init.rodata region begins.
-+
- config SPL_PAD_TO
- 	hex "Offset to which the SPL should be padded before appending the SPL payload"
- 	default 0x7f8000 if ARCH_ROCKCHIP
+ 	.word	0xe129f001	// msr	CPSR_fc, r1
+ 	.word	0xf57ff06f	// isb
+ 	.word	0xe590d000	// ldr	sp, [r0]
+@@ -82,7 +193,7 @@ back_in_32:
+ 	.word	0xe590100c	// ldr	r1, [r0, #12]
+ 	.word	0xee011f10	// mcr	15, 0, r1, cr1, cr0, {0}  ; SCTLR
+ 	.word	0xf57ff06f	// isb
+-#ifdef CONFIG_MACH_SUN55I_A523
++#if defined(CONFIG_MACH_SUN55I_A523) || defined(CONFIG_MACH_SUN60I_A733)
+ 	.word	0xe5901018	// ldr  r1, [r0, #24]
+ 	.word	0xee041f16	// mcr  15, 0, r1, cr4, cr6, {0}; ICC_PMR
+ 	.word	0xe590101c	// ldr  r1, [r0, #28]
 -- 
 2.53.0
 
