@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 196BC606A337
-	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 02:33:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 511ED606A33F
+	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 02:33:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=kNJkpXZM;
-	dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=e43gjjys
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=mi2NQ1Iu;
+	dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=OKj70LwF
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EA90960E8D;
-	Fri, 13 Nov 2026 02:33:30 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DA95760E9E;
+	Fri, 13 Nov 2026 02:33:33 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id jeLWpfZTdzXO; Fri, 13 Nov 2026 02:33:29 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7C6EB60E8A
+ id l9Jri2UxHWAP; Fri, 13 Nov 2026 02:33:32 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 50F3B60E91
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794537209;
-	b=ZBYtXaRtNJJ+e/0ZJHTFTkJlAlxLK3snBnc4PCLueuvEt6zM8bTmUKAneNpIwsPvpuPZ
-	 qLXuc7uiAX33jWGUa1EdCaLmw/NeWQh3q+ZEzfpgrI8MRg2O58CUJU8/m29SS1P4WCXIi
-	 nSUcJos073GQRDjdC9RWDBNIGaAN1VPFAJ1xPaobZnjdJahkS8AQshb2Nszok1J24CI/j
-	 Q7Bz2gTjHintbEpTVpC35Yy5Xwv2bzbtzYu2+9/j3xiGdHM2+2QRPaJuvnKnPjsHl/tUf
-	 VTLf4RGOibEhGIxsYGUa0TsW4Iu6F12tTG2oVdroKYtJZmx8/O+KZWtwP9QfBVA4AnQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794537212;
+	b=RGjE8POl/JDgRzl5AUStOHYyUZVERNZPg3J+21oiobEYwHmLEKh4LEIdAHebo4X+Ll1+
+	 oxUxVZ5nE5ujuw9rr12tiuuuv37sRhoRn8oCtgWgxHKCI5f8qsE1U0SHvdfSV9U1FONxx
+	 m0gwEQW7vt0PLBOrePfxrHdl5S8vBLRTNMtDY8wd8c+qLZpQT9EOXnCdsMD4hjpu74xq0
+	 sD1w125kOeuT6YFrqyS654U5CDNwEHxfQnVzE1c+SlPO7+3X+XzGWyqE4enXAanSdaW2u
+	 67dqKqhR0cIwG9dZwDYTc1uX77QEruTX0F1E3hkU5vPWsWrDzuTUN7EuNowrwJaXhoQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794537209;
+	c=relaxed/relaxed; t=1794537212;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,70 +31,70 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=Ci033KVbNZNXa+5lnNgRZ7vQBCWDt/fuKsIENlJB7/g=;
-	b=aPCd0nN0TUkJFypzQso/Y+ALpnpMi49YGIdr4KQlprKsrAQ6jHstXAfnbwHO6mQbjA4l
-	 lJN4PtAraeWnKdXeaoI4YXlmDYO1SV6vbhI8E2KP/t9nRZ5VM6dTdc0cQrWyHpLEtndtA
-	 fJWuFaK+lt27V/pbl1YKm7LBGi2PI9tKwxkJGiUgo9r/6+qsmvh4yrHQawoXOjLlSE2yr
-	 tdWaE7X//m2/io+iZcgy37hLtljRB/+Cq6uzNin/T3p7NZTk2IiWp8Di3Fc7wYGDEVVsk
-	 vX/PRHoyouHty/ioOOEYyQ/Wi0+rwx32ylmWR3tCm1wAJjYic1weOL9+UwRgnkF4uJA==
+	bh=hq9Qvhsc/EZuLb+01eFOH1Qm8cshH5O9cxClGJ4RUvM=;
+	b=bI/ISWjCC4NCH07ciXwN0v7DLAUmzERSbFdcey9jsoI2wONIQQn8sXy8jLaU/53DJMlM
+	 kIF7XdZlehv63T717ejIQsn7H+QnmNbrbp2nZ90RuMtel0WX4Bm4s9ObFOT7mntKtpdH6
+	 0CGLX6suKZVxE6u9j1aQ7SJKhvZtABVFt3NB1sIEsmpvarEfV5OQqp6W9AowKgDtPLxEY
+	 uEw8cB7x7gBIgAIcETAE1PfDndBp6+lwW31mBkGu1zdROr5g9kmxWvEyor9IIaT3rBTpb
+	 7KHfv/FKoqYkNrXbo1Tnt4XOxN2wDU8I1EMe+XcvWkdvm+cXiGZ7f9pCDfcxHy93Ryg==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794537209;
-	bh=Ci033KVbNZNXa+5lnNgRZ7vQBCWDt/fuKsIENlJB7/g=;
+	d=lists.u-boot-project.org; s=default; t=1794537212;
+	bh=hq9Qvhsc/EZuLb+01eFOH1Qm8cshH5O9cxClGJ4RUvM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=kNJkpXZM6TABFvCiX4lkjpNwGj3bTL9E7Mgxf+VfHLaR2n6xYVRl/1U6qCeh9leu2
-	 At6JQ+UDh9JdGCYHqiijrsRYA2eq+2fQKCg7W/6lCoLXujgTOZB3L8oHMt5MgDdqAw
-	 GJs8QnwOuK6+n+zEz3xilQfozzwIOulSRwwPqvEkGQR2IWP9qDw6PBFjCPIxOeyk2N
-	 W7Uo92HqCXjVQrm9QCtr/3ayexS6ULO1iCS4vE4/CbDswHsInIe06RL//baootoTmy
-	 vaHYtEb+s1bW/4ewCIO2NImQjPqBSEAEu0I/GrIthDi8F3HrhtSYXPnMbA0/kGE1qk
-	 zwnodJmWPNgDg==
+	b=mi2NQ1IuJozjJJCll7+v7XOebZIUAc4q+wrW4UrCmMlQStJc90H/7ogZ4A2fLiQP7
+	 bHHGF/eIeRm4s6RKXZo0lZFefEd3I69Onz381iVEdC3zX5Utfd/stitxJRXFSZRHy6
+	 iOeP5SWprQUoRWAUWfAqX0VLzGZTIhuyB/+baZv31Ov+fR1M3ou39u++DIUg0yMS9F
+	 Z12IsKtPvfm266n0lpZPNVlwYdNEa0+nAYmwg/xKw+2f5Y+ngp/iKy/+Nu64bAWHS1
+	 +GP0uWAvYQWGOnrIDgYXO5U6Wy/MylMuE22j6RDLw4Ep84TizBQLYZjjQTd6TXRggj
+	 kKyz4NllItuXw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7C6EB60E8A;
-	Fri, 13 Nov 2026 02:33:29 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id AF19B2FE
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 50F3B60E91;
+	Fri, 13 Nov 2026 02:33:32 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists1.osuosl.org (Postfix) with ESMTP id E020DF46
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A128E40D44
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:27 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id C600E400E6
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UuKn6w2KCcQe for <u-boot@lists.u-boot-project.org>;
- Fri, 13 Nov 2026 02:33:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 78DCD40D2E
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id X6c2fulnjdug for <u-boot@lists.u-boot-project.org>;
+ Fri, 13 Nov 2026 02:33:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org 9991B40082
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip=119.15.109.137
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=119.15.109.137;
  helo=www.nmnhosting.com; envelope-from=alastair@d-silva.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=d-silva.org
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org
- header.a=rsa-sha256 header.s=2025a header.b=e43gjjys
+ header.a=rsa-sha256 header.s=2025a header.b=OKj70LwF
 Received: from www.nmnhosting.com (watt.d-silva.org [119.15.109.137])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 78DCD40D2E
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:25 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 9991B40082
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:29 +0000 (UTC)
 Received: from Hawking.lan (hawking.lan [10.0.1.4])
- by www.nmnhosting.com (Postfix) with ESMTP id B739645735;
- Fri, 13 Nov 2026 13:33:20 +1100 (AEDT)
+ by www.nmnhosting.com (Postfix) with ESMTP id 2E25E45738;
+ Fri, 13 Nov 2026 13:33:24 +1100 (AEDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=d-silva.org; s=2025a; 
- t=1794537200;
+ t=1794537204;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Ci033KVbNZNXa+5lnNgRZ7vQBCWDt/fuKsIENlJB7/g=;
- b=e43gjjyskPyC5//D9kuX+rnckHdNl15xR2Rlsc0f7pAUhif6tK9aGhAyy0++n9fQZEyWg5
- Feqlw7BF8vnFr1AqjviLWIrGvLqvxaex3rkQ6qXqOIQvi9+0qCU2LXbmSrpWWpNfL27FrG
- pLR0+cgChFIS0wsWxJB/yqjZqXSdvGUPMqsPwgZBo34BTWzGLNG+D3+8ViSQElt0fFZcTn
- IlgNfb0PnIAANJQf/rf/9gf2SY92VW4kCEuCN0y8hKQEnO6oF6aep1j8kGxixdkql5YQXM
- DqOcCDwplevPpNqgrBawi34F448HtjZulI65CX7H0aXvCdfQqRpF13kK/c6oiQ==
+ bh=hq9Qvhsc/EZuLb+01eFOH1Qm8cshH5O9cxClGJ4RUvM=;
+ b=OKj70LwFsN52zOC1L/NhvRSi7woQJl+vXxjOwH6J+jHjJXZysxEPdOym5Lr03CewfU434q
+ ggXhOGlXDT9t80v8z/tuJX6c8N4haSkRnAN8v+QwkNytHrcSixVX8csYpWQOtzFln6gMPu
+ ISnQatvrjJPesXKDyzszAY5kRvDFDj+oA72LTkh9YFf4T2BOrmDvoK/bauhXMHIGz6aFpu
+ k/t1GoGJUGbX/ui25vygZQlm/Xurf8QO6tjgfodv9vYmSJdjayiTjzxyi4hXd/IhZjJQk7
+ cqPe3cn5HlMYpDDt9wQow27SqPRK36iuidbFMNI8gx8jPCgCad+ZwW+IZtOzoA==
 From: Alastair D'Silva <alastair@d-silva.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>,
@@ -108,9 +108,9 @@ Cc: Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>,
  Enzo Adriano <enzo.adriano.code@gmail.com>,
  Junhui Liu <junhui.liu@pigmoral.tech>,
  Alastair D'Silva <alastair@d-silva.org>
-Subject: [PATCH 08/26] clock: reset: a733: add initial support
-Date: Fri, 13 Nov 2026 13:32:18 +1100
-Message-ID: <20261113023236.569054-9-alastair@d-silva.org>
+Subject: [PATCH 09/26] clock: a733: implement support for mmc/uart
+Date: Fri, 13 Nov 2026 13:32:19 +1100
+Message-ID: <20261113023236.569054-10-alastair@d-silva.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261113023236.569054-1-alastair@d-silva.org>
 References: <20261113023236.569054-1-alastair@d-silva.org>
@@ -128,282 +128,285 @@ List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
 X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Yixun Lan <dlan@gentoo.org>
 
-Implement clock gate and reset driver support for the Allwinner A733
-CCU and PRCM (R-CCU), using the v6 upstream Linux DT binding headers.
+Add peripheral base addresses and SPL clock initialization support for
+UART, I2C, MMC, MBUS, and ZQ/pad resistor calibration on the Allwinner
+A733 SoC.
 
+Link: https://lore.kernel.org/r/20260113-01-a733-soc-support-v3-4-f19dcd098f60@gentoo.org
 Signed-off-by: Yixun Lan <dlan@gentoo.org>
-Link: https://lore.kernel.org/r/20260113-01-a733-soc-support-v3-5-f19dcd098f60@gentoo.org
-[Alastair: update to v6 allwinner,sun60i-a733-ccu.h bindings, fix I2C2/3
- reset offsets, add MMC0-2/USB OTG/R_SPI gates, constify tables]
+[Alastair: fix CPUCFG/WDT bases and PLL6 factor, add MBUS/RESCAL,
+ I2C BGR, and PLL1 guard]
 Co-developed-by: Alastair D'Silva <alastair@d-silva.org>
 Signed-off-by: Alastair D'Silva <alastair@d-silva.org>
 ---
- drivers/clk/sunxi/Kconfig      |  14 ++++
- drivers/clk/sunxi/Makefile     |   2 +
- drivers/clk/sunxi/clk_a733.c   | 132 +++++++++++++++++++++++++++++++++
- drivers/clk/sunxi/clk_a733_r.c |  45 +++++++++++
- drivers/clk/sunxi/clk_sunxi.c  |  10 +++
- 5 files changed, 203 insertions(+)
- create mode 100644 drivers/clk/sunxi/clk_a733.c
- create mode 100644 drivers/clk/sunxi/clk_a733_r.c
+ .../include/asm/arch-sunxi/clock_sun50i_h6.h  | 19 +++++
+ .../include/asm/arch-sunxi/cpu_sunxi_ncat2.h  | 42 ++++++++--
+ arch/arm/mach-sunxi/clock_sun50i_h6.c         | 81 +++++++++++++++++--
+ 3 files changed, 128 insertions(+), 14 deletions(-)
 
-diff --git a/drivers/clk/sunxi/Kconfig b/drivers/clk/sunxi/Kconfig
-index 1c1cc82719c..9858f4546ea 100644
---- a/drivers/clk/sunxi/Kconfig
-+++ b/drivers/clk/sunxi/Kconfig
-@@ -143,4 +143,18 @@ config CLK_SUN55I_A523_R
- 	  This enables common clock driver support for the PRCM
- 	  in Allwinner A523/T527 SoCs.
- 
-+config CLK_SUN60I_A733
-+	bool "Clock driver for Allwinner A733/T736"
-+	default MACH_SUN60I_A733
-+	help
-+	  This enables common clock driver support for platforms based
-+	  on Allwinner A733/T736 SoC.
-+
-+config CLK_SUN60I_A733_R
-+	bool "Clock driver for Allwinner A733 generation PRCM"
-+	default MACH_SUN60I_A733
-+	help
-+	  This enables common clock driver support for the PRCM
-+	  in Allwinner A733/T736 SoCs.
-+
- endif # CLK_SUNXI
-diff --git a/drivers/clk/sunxi/Makefile b/drivers/clk/sunxi/Makefile
-index 93b542cebcd..943e47612ce 100644
---- a/drivers/clk/sunxi/Makefile
-+++ b/drivers/clk/sunxi/Makefile
-@@ -27,3 +27,5 @@ obj-$(CONFIG_CLK_SUN50I_A64) += clk_a64.o
- obj-$(CONFIG_CLK_SUN50I_A100) += clk_a100.o
- obj-$(CONFIG_CLK_SUN55I_A523) += clk_a523.o
- obj-$(CONFIG_CLK_SUN55I_A523_R) += clk_a523_r.o
-+obj-$(CONFIG_CLK_SUN60I_A733) += clk_a733.o
-+obj-$(CONFIG_CLK_SUN60I_A733_R) += clk_a733_r.o
-diff --git a/drivers/clk/sunxi/clk_a733.c b/drivers/clk/sunxi/clk_a733.c
-new file mode 100644
-index 00000000000..5c942fd5d58
---- /dev/null
-+++ b/drivers/clk/sunxi/clk_a733.c
-@@ -0,0 +1,132 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (C) 2025-2026 Yixun Lan <dlan@gentoo.org>
-+ * Copyright (C) 2026 Alastair D'Silva <alastair@d-silva.org>
-+ */
-+
-+#include <clk/sunxi.h>
-+#include <linux/bitops.h>
-+#include <linux/kernel.h>
-+
-+#include <dt-bindings/clock/allwinner,sun60i-a733-ccu.h>
-+#include <dt-bindings/reset/allwinner,sun60i-a733-ccu.h>
-+
-+static const struct ccu_clk_gate a733_gates[] = {
-+	[CLK_SYS_24M]		= GATE_DUMMY,
-+	[CLK_PLL_PERIPH0_200M]	= GATE_DUMMY,
-+	[CLK_PLL_PERIPH0_300M]	= GATE_DUMMY,
-+	[CLK_PLL_PERIPH1_300M]	= GATE_DUMMY,
-+	[CLK_APB1]		= GATE_DUMMY,
-+	[CLK_APB_UART]		= GATE_DUMMY,
-+
-+	[CLK_MBUS_GMAC0]	= GATE(0x05e4, BIT(11)),
-+	[CLK_BUS_CE]		= GATE(0x0ac4, BIT(0)),
-+
-+	[CLK_MMC0]		= GATE(0x0d00, BIT(31)),
-+	[CLK_BUS_MMC0]		= GATE(0x0d0c, BIT(0)),
-+	[CLK_MMC1]		= GATE(0x0d10, BIT(31)),
-+	[CLK_BUS_MMC1]		= GATE(0x0d1c, BIT(0)),
-+	[CLK_MMC2]		= GATE(0x0d20, BIT(31)),
-+	[CLK_BUS_MMC2]		= GATE(0x0d2c, BIT(0)),
-+
-+	[CLK_BUS_UART0]		= GATE(0x0e00, BIT(0)),
-+	[CLK_BUS_UART1]		= GATE(0x0e04, BIT(0)),
-+	[CLK_BUS_UART2]		= GATE(0x0e08, BIT(0)),
-+	[CLK_BUS_UART3]		= GATE(0x0e0c, BIT(0)),
-+	[CLK_BUS_UART4]		= GATE(0x0e10, BIT(0)),
-+	[CLK_BUS_UART5]		= GATE(0x0e14, BIT(0)),
-+	[CLK_BUS_UART6]		= GATE(0x0e18, BIT(0)),
-+
-+	[CLK_BUS_I2C0]		= GATE(0x0e80, BIT(0)),
-+	[CLK_BUS_I2C1]		= GATE(0x0e84, BIT(0)),
-+	[CLK_BUS_I2C2]		= GATE(0x0e88, BIT(0)),
-+	[CLK_BUS_I2C3]		= GATE(0x0e8c, BIT(0)),
-+	[CLK_BUS_I2C4]		= GATE(0x0e90, BIT(0)),
-+	[CLK_BUS_I2C5]		= GATE(0x0e94, BIT(0)),
-+	[CLK_BUS_I2C6]		= GATE(0x0e98, BIT(0)),
-+	[CLK_BUS_I2C7]		= GATE(0x0e9c, BIT(0)),
-+	[CLK_BUS_I2C8]		= GATE(0x0ea0, BIT(0)),
-+	[CLK_BUS_I2C9]		= GATE(0x0ea4, BIT(0)),
-+	[CLK_BUS_I2C10]		= GATE(0x0ea8, BIT(0)),
-+	[CLK_BUS_I2C11]		= GATE(0x0eac, BIT(0)),
-+	[CLK_BUS_I2C12]		= GATE(0x0eb0, BIT(0)),
-+
-+	[CLK_SPI0]		= GATE(0x0f00, BIT(31)),
-+	[CLK_BUS_SPI0]		= GATE(0x0f04, BIT(0)),
-+	[CLK_SPI1]		= GATE(0x0f08, BIT(31)),
-+	[CLK_BUS_SPI1]		= GATE(0x0f0c, BIT(0)),
-+	[CLK_SPI2]		= GATE(0x0f10, BIT(31)),
-+	[CLK_BUS_SPI2]		= GATE(0x0f14, BIT(0)),
-+
-+	[CLK_GPADC0_24M]	= GATE(0x0fc0, BIT(31)),
-+	[CLK_BUS_GPADC0]	= GATE(0x0fc4, BIT(0)),
-+	[CLK_BUS_THS0]		= GATE(0x0fe4, BIT(0)),
-+	[CLK_BUS_LRADC]		= GATE(0x1024, BIT(0)),
-+
-+	[CLK_USB_OHCI0]		= GATE(0x1300, BIT(31)),
-+	[CLK_BUS_OHCI0]		= GATE(0x1304, BIT(0)),
-+	[CLK_BUS_EHCI0]		= GATE(0x1304, BIT(4)),
-+	[CLK_BUS_OTG]		= GATE(0x1304, BIT(8)),
-+	[CLK_USB_OHCI1]		= GATE(0x1308, BIT(31)),
-+	[CLK_BUS_OHCI1]		= GATE(0x130c, BIT(0)),
-+	[CLK_BUS_EHCI1]		= GATE(0x130c, BIT(4)),
-+
-+	[CLK_GMAC0_PHY]		= GATE(0x1410, BIT(31)),
-+	[CLK_BUS_GMAC0]		= GATE(0x141c, BIT(0)),
-+};
-+
-+static const struct ccu_reset a733_resets[] = {
-+	[RST_BUS_CE]		= RESET(0x0ac4, BIT(16)),
-+
-+	[RST_BUS_MMC0]		= RESET(0x0d0c, BIT(16)),
-+	[RST_BUS_MMC1]		= RESET(0x0d1c, BIT(16)),
-+	[RST_BUS_MMC2]		= RESET(0x0d2c, BIT(16)),
-+
-+	[RST_BUS_UART0]		= RESET(0x0e00, BIT(16)),
-+	[RST_BUS_UART1]		= RESET(0x0e04, BIT(16)),
-+	[RST_BUS_UART2]		= RESET(0x0e08, BIT(16)),
-+	[RST_BUS_UART3]		= RESET(0x0e0c, BIT(16)),
-+	[RST_BUS_UART4]		= RESET(0x0e10, BIT(16)),
-+	[RST_BUS_UART5]		= RESET(0x0e14, BIT(16)),
-+	[RST_BUS_UART6]		= RESET(0x0e18, BIT(16)),
-+
-+	[RST_BUS_I2C0]		= RESET(0x0e80, BIT(16)),
-+	[RST_BUS_I2C1]		= RESET(0x0e84, BIT(16)),
-+	[RST_BUS_I2C2]		= RESET(0x0e88, BIT(16)),
-+	[RST_BUS_I2C3]		= RESET(0x0e8c, BIT(16)),
-+	[RST_BUS_I2C4]		= RESET(0x0e90, BIT(16)),
-+	[RST_BUS_I2C5]		= RESET(0x0e94, BIT(16)),
-+	[RST_BUS_I2C6]		= RESET(0x0e98, BIT(16)),
-+	[RST_BUS_I2C7]		= RESET(0x0e9c, BIT(16)),
-+	[RST_BUS_I2C8]		= RESET(0x0ea0, BIT(16)),
-+	[RST_BUS_I2C9]		= RESET(0x0ea4, BIT(16)),
-+	[RST_BUS_I2C10]		= RESET(0x0ea8, BIT(16)),
-+	[RST_BUS_I2C11]		= RESET(0x0eac, BIT(16)),
-+	[RST_BUS_I2C12]		= RESET(0x0eb0, BIT(16)),
-+
-+	[RST_BUS_SPI0]		= RESET(0x0f04, BIT(16)),
-+	[RST_BUS_SPI1]		= RESET(0x0f0c, BIT(16)),
-+	[RST_BUS_SPI2]		= RESET(0x0f14, BIT(16)),
-+
-+	[RST_BUS_GPADC0]	= RESET(0x0fc4, BIT(16)),
-+	[RST_BUS_THS0]		= RESET(0x0fe4, BIT(16)),
-+	[RST_BUS_LRADC]		= RESET(0x1024, BIT(16)),
-+
-+	[RST_USB_PHY0]		= RESET(0x1300, BIT(30)),
-+	[RST_BUS_OHCI0]		= RESET(0x1304, BIT(16)),
-+	[RST_BUS_EHCI0]		= RESET(0x1304, BIT(20)),
-+	[RST_BUS_OTG]		= RESET(0x1304, BIT(24)),
-+	[RST_USB_PHY1]		= RESET(0x1308, BIT(30)),
-+	[RST_BUS_OHCI1]		= RESET(0x130c, BIT(16)),
-+	[RST_BUS_EHCI1]		= RESET(0x130c, BIT(20)),
-+
-+	[RST_BUS_GMAC0]		= RESET(0x141c, BIT(16)),
-+	[RST_BUS_GMAC0_AXI]	= RESET(0x141c, BIT(17)),
-+};
-+
-+const struct ccu_desc a733_ccu_desc = {
-+	.gates		= a733_gates,
-+	.resets		= a733_resets,
-+	.num_gates	= ARRAY_SIZE(a733_gates),
-+	.num_resets	= ARRAY_SIZE(a733_resets),
-+};
-diff --git a/drivers/clk/sunxi/clk_a733_r.c b/drivers/clk/sunxi/clk_a733_r.c
-new file mode 100644
-index 00000000000..ae02dd21de5
---- /dev/null
-+++ b/drivers/clk/sunxi/clk_a733_r.c
-@@ -0,0 +1,45 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (C) 2025-2026 Yixun Lan <dlan@gentoo.org>
-+ * Copyright (C) 2026 Alastair D'Silva <alastair@d-silva.org>
-+ */
-+
-+#include <clk/sunxi.h>
-+#include <linux/bitops.h>
-+#include <linux/kernel.h>
-+
-+#include <dt-bindings/clock/allwinner,sun60i-a733-r-ccu.h>
-+#include <dt-bindings/reset/allwinner,sun60i-a733-r-ccu.h>
-+
-+static const struct ccu_clk_gate a733_r_gates[] = {
-+	[CLK_R_AHB]		= GATE_DUMMY,
-+	[CLK_R_APB0]		= GATE_DUMMY,
-+	[CLK_R_APB1]		= GATE_DUMMY,
-+	[CLK_R_SPI]		= GATE(0x150, BIT(31)),
-+	[CLK_BUS_R_SPI]		= GATE(0x15c, BIT(0)),
-+	[CLK_BUS_R_UART0]	= GATE(0x18c, BIT(0)),
-+	[CLK_BUS_R_UART1]	= GATE(0x18c, BIT(1)),
-+	[CLK_BUS_R_I2C0]	= GATE(0x19c, BIT(0)),
-+	[CLK_BUS_R_I2C1]	= GATE(0x19c, BIT(1)),
-+	[CLK_BUS_R_I2C2]	= GATE(0x19c, BIT(2)),
-+	[CLK_BUS_R_RTC]		= GATE(0x20c, BIT(0)),
-+	[CLK_BUS_R_CPUCFG]	= GATE(0x22c, BIT(0)),
-+};
-+
-+static const struct ccu_reset a733_r_resets[] = {
-+	[RST_BUS_R_SPI]		= RESET(0x15c, BIT(16)),
-+	[RST_BUS_R_UART0]	= RESET(0x18c, BIT(16)),
-+	[RST_BUS_R_UART1]	= RESET(0x18c, BIT(17)),
-+	[RST_BUS_R_I2C0]	= RESET(0x19c, BIT(16)),
-+	[RST_BUS_R_I2C1]	= RESET(0x19c, BIT(17)),
-+	[RST_BUS_R_I2C2]	= RESET(0x19c, BIT(18)),
-+	[RST_BUS_R_RTC]		= RESET(0x20c, BIT(16)),
-+	[RST_BUS_R_CPUCFG]	= RESET(0x22c, BIT(16)),
-+};
-+
-+const struct ccu_desc a733_r_ccu_desc = {
-+	.gates		= a733_r_gates,
-+	.resets		= a733_r_resets,
-+	.num_gates	= ARRAY_SIZE(a733_r_gates),
-+	.num_resets	= ARRAY_SIZE(a733_r_resets),
-+};
-diff --git a/drivers/clk/sunxi/clk_sunxi.c b/drivers/clk/sunxi/clk_sunxi.c
-index 046d5d1605a..6d55b4598a5 100644
---- a/drivers/clk/sunxi/clk_sunxi.c
-+++ b/drivers/clk/sunxi/clk_sunxi.c
-@@ -128,6 +128,8 @@ extern const struct ccu_desc r40_ccu_desc;
- extern const struct ccu_desc v3s_ccu_desc;
- extern const struct ccu_desc a523_ccu_desc;
- extern const struct ccu_desc a523_r_ccu_desc;
-+extern const struct ccu_desc a733_ccu_desc;
-+extern const struct ccu_desc a733_r_ccu_desc;
- 
- static const struct udevice_id sunxi_clk_ids[] = {
- #ifdef CONFIG_CLK_SUN4I_A10
-@@ -233,6 +235,14 @@ static const struct udevice_id sunxi_clk_ids[] = {
- #ifdef CONFIG_CLK_SUN55I_A523_R
- 	{ .compatible = "allwinner,sun55i-a523-r-ccu",
- 	  .data = (ulong)&a523_r_ccu_desc },
+diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h b/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
+index 8d1c7c18548..2443cf36eb3 100644
+--- a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
++++ b/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
+@@ -29,13 +29,30 @@
+ #define CCU_NAND0_CLK_CFG		0x810
+ #define CCU_NAND1_CLK_CFG		0x814
+ #define CCU_H6_NAND_GATE_RESET		0x82c
++#if defined(CONFIG_MACH_SUN60I_A733)
++#define CCU_MMC0_CLK_CFG		0x0d00
++#define CCU_MMC1_CLK_CFG		0x0d10
++#define CCU_MMC2_CLK_CFG		0x0d20
++#else
+ #define CCU_MMC0_CLK_CFG		0x830
+ #define CCU_MMC1_CLK_CFG		0x834
+ #define CCU_MMC2_CLK_CFG		0x838
 +#endif
-+#ifdef CONFIG_CLK_SUN60I_A733
-+	{ .compatible = "allwinner,sun60i-a733-ccu",
-+	  .data = (ulong)&a733_ccu_desc },
+ #define CCU_H6_MMC_GATE_RESET		0x84c
+ #define CCU_H6_UART_GATE_RESET		0x90c
+ #define CCU_H6_I2C_GATE_RESET		0x91c
+ 
++/* A733 CCU register offsets */
++#define CCU_A733_PLL6_CFG		0x0a0
++#define CCU_A733_APB_UART_CFG		0x538
++#define CCU_A733_MMC_CLK_STRIDE		0x10
++#define CCU_A733_MMC_BGR_BASE		0x0d0c
++#define CCU_A733_MMC_BGR_REG(n)		(CCU_A733_MMC_BGR_BASE + (n) * CCU_A733_MMC_CLK_STRIDE)
++#define CCU_A733_UART_BGR_BASE		0x0e00
++#define CCU_A733_UART_BGR_REG(n)	(CCU_A733_UART_BGR_BASE + (n) * 4)
++#define CCU_A733_I2C_BGR_BASE		0x0e80
++#define CCU_A733_I2C_BGR_REG(n)		(CCU_A733_I2C_BGR_BASE + (n) * 4)
++
+ /* A523 CPU PLL offsets */
+ #define CPC_CPUA_PLL_CTRL		0x04
+ #define CPC_DSU_PLL_CTRL		0x08
+@@ -69,6 +86,8 @@
+ #define CCM_PLL5_CTRL_DIV2(div0)	((div0) << 1)
+ 
+ /* pll6 bit field */
++#define CCM_A733_PLL6_CTRL_P0_SHIFT	20
++#define CCM_A733_PLL6_CTRL_P0_MASK	(0x7 << CCM_A733_PLL6_CTRL_P0_SHIFT)
+ #define CCM_PLL6_CTRL_P0_SHIFT		16
+ #define CCM_PLL6_CTRL_P0_MASK		(0x7 << CCM_PLL6_CTRL_P0_SHIFT)
+ #define CCM_PLL6_CTRL_N_SHIFT		8
+diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h b/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
+index bcfdc0a41c5..260fed24741 100644
+--- a/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
++++ b/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
+@@ -7,19 +7,32 @@
+ #ifndef _SUNXI_CPU_SUNXI_NCAT2_H
+ #define _SUNXI_CPU_SUNXI_NCAT2_H
+ 
++#if defined(CONFIG_MACH_SUN60I_A733)
++#define SUNXI_CCM_BASE			0x02002000
++#define SUNXI_WDT_BASE			0x02050000
++#define SUNXI_TIMER_BASE		0x02052000
++#define SUNXI_TWI0_BASE			0x02510000
++#define SUNXI_TWI1_BASE			0x02511000
++#define SUNXI_TWI2_BASE			0x02512000
++#define SUNXI_TWI3_BASE			0x02513000
++#else
+ #define SUNXI_CCM_BASE			0x02001000
+ #define SUNXI_TIMER_BASE		0x02050000
+-
+ #define SUNXI_TWI0_BASE			0x02502000
+ #define SUNXI_TWI1_BASE			0x02502400
+ #define SUNXI_TWI2_BASE			0x02502800
+ #define SUNXI_TWI3_BASE			0x02502C00
 +#endif
-+#ifdef CONFIG_CLK_SUN60I_A733_R
-+	{ .compatible = "allwinner,sun60i-a733-r-ccu",
-+	  .data = (ulong)&a733_r_ccu_desc },
+ 
+ #define SUNXI_SRAMC_BASE		0x03000000
+ /* SID address space starts at 0x03006000, but e-fuse is at offset 0x200 */
+ #define SUNXI_SIDC_BASE			0x03006000
+ #define SUNXI_SID_BASE			0x03006200
++#ifdef CONFIG_MACH_SUN60I_A733
++#define SUNXI_GIC600_BASE		0x03400000
++#else
+ #define SUNXI_GIC400_BASE		0x03020000
++#endif
+ 
+ #ifdef CONFIG_MACH_SUN55I_A523
+ #define SUNXI_DRAM_COM_BASE		0x03120000
+@@ -31,24 +44,37 @@
+ #define SUNXI_MMC1_BASE			0x04021000
+ #define SUNXI_MMC2_BASE			0x04022000
+ 
+-#ifndef CONFIG_MACH_SUN55I_A523
+-#define SUNXI_R_CPUCFG_BASE		0x07000400
+-#endif
+ #define SUNXI_PRCM_BASE			0x07010000
++#if defined(CONFIG_MACH_SUN60I_A733)
++#define SUNXI_R_WDOG_BASE		0x07021000
++#else
+ #define SUNXI_R_WDOG_BASE		0x07020400
+-#ifdef CONFIG_MACH_SUN55I_A523
++#endif
++#if defined(CONFIG_MACH_SUN55I_A523) || defined(CONFIG_MACH_SUN60I_A733)
+ #define SUNXI_R_CPUCFG_BASE		0x07050000
++#else
++#define SUNXI_R_CPUCFG_BASE		0x07000400
  #endif
- 	{ }
- };
++#if defined(CONFIG_MACH_SUN60I_A733)
++#define SUNXI_R_TWI_BASE		0x07083000
++#else
+ #define SUNXI_R_TWI_BASE		0x07081400
++#endif
+ #define SUNXI_RTC_BASE			0x07090000
+ 
+-#ifdef CONFIG_MACH_SUN55I_A523
++#if defined(CONFIG_MACH_SUN60I_A733)
++#define SUNXI_CPUCFG_BASE		0x08000000
++#define SUNXI_CPU_DA_DDR_CTRL_REG	(SUNXI_CPUCFG_BASE + 0x0200)
++#define SUNXI_CLU0_CPU0_CTRL_REG	(SUNXI_CPUCFG_BASE + 0x1000)
++#define SUNXI_CLUSTER_CFG_BASE		0x08860000
++#define SUNXI_CPU_PLL_CFG_BASE		0x08870000
++#elif defined(CONFIG_MACH_SUN55I_A523)
+ #define SUNXI_CPUCFG_BASE		0x08815000
++#define SUNXI_CPU_PLL_CFG_BASE		0x08817000
+ #else
+ #define SUNXI_CPUCFG_BASE		0x09010000
+-#endif
+-
+ #define SUNXI_CPU_PLL_CFG_BASE		0x08817000
++#endif
+ 
+ #ifndef __ASSEMBLY__
+ void sunxi_board_init(void);
+diff --git a/arch/arm/mach-sunxi/clock_sun50i_h6.c b/arch/arm/mach-sunxi/clock_sun50i_h6.c
+index 80004f13a1e..517fdcb56ea 100644
+--- a/arch/arm/mach-sunxi/clock_sun50i_h6.c
++++ b/arch/arm/mach-sunxi/clock_sun50i_h6.c
+@@ -11,8 +11,47 @@
+ #endif
+ 
+ #ifdef CONFIG_XPL_BUILD
++#ifdef CONFIG_MACH_SUN60I_A733
++#define SUNXI_CCU_MBUS_MAT_CLK_GATING		(SUNXI_CCM_BASE + 0x05c0UL)
++#define SUNXI_CCU_MBUS_MAT_CLK_GATING_VAL	0x110103ffU
++#define SUNXI_CCU_MBUS_MAT_CLK_ENABLE		(SUNXI_CCM_BASE + 0x05e0UL)
++#define SUNXI_CCU_MBUS_MAT_CLK_ENABLE_VAL	0xf1055803U
++#define SUNXI_CCU_MBUS_MASTER_GATE		(SUNXI_CCM_BASE + 0x05e4UL)
++#define SUNXI_CCU_MBUS_MASTER_GATE_VAL		0x0007ffffU
++
++#define SUNXI_SYSCTRL_RESCAL_CTRL		(SUNXI_SRAMC_BASE + 0x0160UL)
++#define SUNXI_SYSCTRL_RESCAL_CTRL_EN		BIT(8)
++#define SUNXI_SYSCTRL_RESCAL_CAL		(SUNXI_SRAMC_BASE + 0x0168UL)
++#define SUNXI_SYSCTRL_RESCAL_CAL_MASK		0xffU
++
++/*
++ * On A733, the BROM configures PLL_PERIPH0 and APB/AXI root dividers before
++ * SPL entry, while TF-A BL31 (sunxi_security_setup) configures TrustZone SPC,
++ * CCU/PRCM security switches, and IOMMU bypass before Non-Secure EL2 entry.
++ * SPL only needs to ungate the MBUS matrix clocks and enable SYSCTRL ZQ/pad
++ * resistor calibration prior to LPDDR5 training.
++ */
++static void sunxi_a733_bus_and_rescal_init(void)
++{
++	writel(SUNXI_CCU_MBUS_MAT_CLK_GATING_VAL,
++	       (void __iomem *)SUNXI_CCU_MBUS_MAT_CLK_GATING);
++	writel(SUNXI_CCU_MBUS_MAT_CLK_ENABLE_VAL,
++	       (void __iomem *)SUNXI_CCU_MBUS_MAT_CLK_ENABLE);
++	writel(SUNXI_CCU_MBUS_MASTER_GATE_VAL,
++	       (void __iomem *)SUNXI_CCU_MBUS_MASTER_GATE);
++
++	setbits_le32((void __iomem *)SUNXI_SYSCTRL_RESCAL_CTRL,
++		     SUNXI_SYSCTRL_RESCAL_CTRL_EN);
++	clrbits_le32((void __iomem *)SUNXI_SYSCTRL_RESCAL_CAL,
++		     SUNXI_SYSCTRL_RESCAL_CAL_MASK);
++}
++#endif
++
+ void clock_init_safe(void)
+ {
++#ifdef CONFIG_MACH_SUN60I_A733
++	sunxi_a733_bus_and_rescal_init();
++#else
+ 	void *const ccm = (void *)SUNXI_CCM_BASE;
+ 	void *const prcm = (void *)SUNXI_PRCM_BASE;
+ 
+@@ -72,12 +111,26 @@ void clock_init_safe(void)
+ 		writel(MBUS_CLK_SRC_PLL6X2 | MBUS_CLK_M(3),
+ 		       ccm + CCU_H6_MBUS_CFG);
+ 	}
++#endif
+ }
+ 
+ void clock_init_uart(void)
+ {
+ 	void *const ccm = (void *)SUNXI_CCM_BASE;
+ 
++	if (IS_ENABLED(CONFIG_MACH_SUN60I_A733)) {
++		/* A733: APB_UART clock source is OSC24M / 1 */
++		writel(APB2_CLK_SRC_OSC24M |
++		       APB2_CLK_RATE_N_1 |
++		       APB2_CLK_RATE_M(1),
++		       ccm + CCU_A733_APB_UART_CFG);
++
++		/* Deassert reset and enable clock gate for console UART */
++		setbits_le32(ccm + CCU_A733_UART_BGR_REG(CONFIG_CONS_INDEX - 1),
++			     BIT(RESET_SHIFT) | BIT(GATE_SHIFT));
++		return;
++	}
++
+ 	/* uart clock source is apb2 */
+ 	writel(APB2_CLK_SRC_OSC24M|
+ 	       APB2_CLK_RATE_N_1|
+@@ -199,6 +252,10 @@ void clock_set_pll1(unsigned int clk)
+ 
+ 	clk /= 24000000;
+ 
++	/* BROM and TF-A configure cluster PLLs on A733 */
++	if (IS_ENABLED(CONFIG_MACH_SUN60I_A733))
++		return;
++
+ 	if (IS_ENABLED(CONFIG_MACH_SUN55I_A523))
+ 		clock_a523_set_cpu_plls(clk);
+ 	else
+@@ -217,6 +274,9 @@ int clock_twi_onoff(int port, int state)
+ 	if (port == 5) {
+ 		shift = 0;
+ 		ptr = prcm + CCU_PRCM_I2C_GATE_RESET;
++	} else if (IS_ENABLED(CONFIG_MACH_SUN60I_A733)) {
++		shift = 0;
++		ptr = ccm + CCU_A733_I2C_BGR_REG(port);
+ 	} else {
+ 		shift = port;
+ 		ptr = ccm + CCU_H6_I2C_GATE_RESET;
+@@ -236,13 +296,22 @@ int clock_twi_onoff(int port, int state)
+ unsigned int clock_get_pll6(void)
+ {
+ 	void *const ccm = (void *)SUNXI_CCM_BASE;
+-	uint32_t rval = readl(ccm + CCU_H6_PLL6_CFG);
+-	int n = ((rval & CCM_PLL6_CTRL_N_MASK) >> CCM_PLL6_CTRL_N_SHIFT) + 1;
+-	int div2 = ((rval & CCM_PLL6_CTRL_DIV2_MASK) >>
+-		    CCM_PLL6_CTRL_DIV2_SHIFT) + 1;
+-	int div1, m;
++	int div1, div2, m, n;
++	u32 rval;
++
++	if (IS_ENABLED(CONFIG_MACH_SUN60I_A733))
++		rval = readl(ccm + CCU_A733_PLL6_CFG);
++	else
++		rval = readl(ccm + CCU_H6_PLL6_CFG);
++
++	n = ((rval & CCM_PLL6_CTRL_N_MASK) >> CCM_PLL6_CTRL_N_SHIFT) + 1;
++	div2 = ((rval & CCM_PLL6_CTRL_DIV2_MASK) >>
++		CCM_PLL6_CTRL_DIV2_SHIFT) + 1;
+ 
+-	if (IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2)) {
++	if (IS_ENABLED(CONFIG_MACH_SUN60I_A733)) {
++		div1 = ((rval & CCM_A733_PLL6_CTRL_P0_MASK) >>
++			CCM_A733_PLL6_CTRL_P0_SHIFT) + 1;
++	} else if (IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2)) {
+ 		div1 = ((rval & CCM_PLL6_CTRL_P0_MASK) >>
+ 			CCM_PLL6_CTRL_P0_SHIFT) + 1;
+ 	} else {
 -- 
 2.53.0
 
