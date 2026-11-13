@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 521BF606A31C
-	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 02:33:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 196BC606A337
+	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 02:33:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=MKOfOXQZ;
-	dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=zNB9H35m
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=kNJkpXZM;
+	dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=e43gjjys
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2DFE860E82;
-	Fri, 13 Nov 2026 02:33:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EA90960E8D;
+	Fri, 13 Nov 2026 02:33:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4JIMGIXbwInq; Fri, 13 Nov 2026 02:33:26 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DC9C460E7E
+ id jeLWpfZTdzXO; Fri, 13 Nov 2026 02:33:29 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 7C6EB60E8A
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794537206;
-	b=NMl1f1lHpBHavopWOWUHtjcaPCnTs+9MkPt4YyvbTeSnPobf4V+87P/E3peO2YXs2G8d
-	 VMBI07Ihu4EKpE1ST6IkMrXFzq7sLoa4Cv+WpT3ZjUJz+70BgZUaXXUimwFMhYL+4e2hC
-	 yrUbUtLcNNxXb+OqTwnTQ8Du9hNT1m/RtJVteOa4BeBG1iXubokKm1wOa0PTEokMaao48
-	 u0mPDJE0QxczkpUtpY8zp3nEz+04qfAaUQ0D8DVbjsArGe7MVvF6NBcEOED1kXdnru1e1
-	 LTqv+Wxsfoad4LLv+Zhio/k0+gmiD9kHoCs40q2QiUZX6OF/7O9w4UQ+7Gkdvd1SpjQ==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794537209;
+	b=ZBYtXaRtNJJ+e/0ZJHTFTkJlAlxLK3snBnc4PCLueuvEt6zM8bTmUKAneNpIwsPvpuPZ
+	 qLXuc7uiAX33jWGUa1EdCaLmw/NeWQh3q+ZEzfpgrI8MRg2O58CUJU8/m29SS1P4WCXIi
+	 nSUcJos073GQRDjdC9RWDBNIGaAN1VPFAJ1xPaobZnjdJahkS8AQshb2Nszok1J24CI/j
+	 Q7Bz2gTjHintbEpTVpC35Yy5Xwv2bzbtzYu2+9/j3xiGdHM2+2QRPaJuvnKnPjsHl/tUf
+	 VTLf4RGOibEhGIxsYGUa0TsW4Iu6F12tTG2oVdroKYtJZmx8/O+KZWtwP9QfBVA4AnQ==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794537206;
+	c=relaxed/relaxed; t=1794537209;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -31,42 +31,42 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
 	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=3Kw18U5aea9de7ML3mHxIHFfpWiLhJ4Ox+sYqQ2CYmE=;
-	b=KV4hy3u8rq+1mgYxp1Y2/ZfKoc3zu8pYg2gi89q8FyFpWahFks6Sx2M54+kjNiMbh6WG
-	 9cPh6LOfAIWjkH6Nnk+oGFAAnh/THncBoT1TOCuUfj+UlJk5s1dx8COdP36YVFTJIAbrd
-	 Ht2Y42EZ0GsDgURjcOK1/i4uIjp/WDSA/JrNSaTermaqrCjn9+i5xfSbkj8nbWD5++kPQ
-	 hy8laca5LG5kzw5uQNqOaJTCVnl84j9KgNaNx8URghl4j9cJMfkTjBSR+jl5ih4Dm3bTa
-	 CzZQH8nt6IIp2icK8fCmKsbxT0xTRW4NPrbLHJeySHAN5ba+QTvumAj0N5Fenab+ANQ==
+	bh=Ci033KVbNZNXa+5lnNgRZ7vQBCWDt/fuKsIENlJB7/g=;
+	b=aPCd0nN0TUkJFypzQso/Y+ALpnpMi49YGIdr4KQlprKsrAQ6jHstXAfnbwHO6mQbjA4l
+	 lJN4PtAraeWnKdXeaoI4YXlmDYO1SV6vbhI8E2KP/t9nRZ5VM6dTdc0cQrWyHpLEtndtA
+	 fJWuFaK+lt27V/pbl1YKm7LBGi2PI9tKwxkJGiUgo9r/6+qsmvh4yrHQawoXOjLlSE2yr
+	 tdWaE7X//m2/io+iZcgy37hLtljRB/+Cq6uzNin/T3p7NZTk2IiWp8Di3Fc7wYGDEVVsk
+	 vX/PRHoyouHty/ioOOEYyQ/Wi0+rwx32ylmWR3tCm1wAJjYic1weOL9+UwRgnkF4uJA==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794537206;
-	bh=3Kw18U5aea9de7ML3mHxIHFfpWiLhJ4Ox+sYqQ2CYmE=;
+	d=lists.u-boot-project.org; s=default; t=1794537209;
+	bh=Ci033KVbNZNXa+5lnNgRZ7vQBCWDt/fuKsIENlJB7/g=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=MKOfOXQZQzb4IHlc4yKHSBqKXtIlTxhuECM+8QFEWzpyvSXvUxHRKHgiZ2gRgSeEz
-	 4DlFzr3gC1lKVbKO2liByZZSOZsZc43/n1engyCsik/GouVwprUuDyT1PAs4anQBrj
-	 KLy8Btc0g1LJAemrBy2dE2Z0lPmMw6mbEqr3y0ayMvY1q4LWeI6mX/g6/ZZixnP94Y
-	 Mms++sBXtzg5DDndV9Ou/qaA16WB7kmEuV4DlBLq7077Xd2+wHjsm+bMYNjneCGoox
-	 H99unE1lTbvyLdLvDE/xcp3luFSKUO9yaUvf+qsRm1/1wUaC9eh4rCxQ/wGWge1LKd
-	 0e2oPZIz/NVBA==
+	b=kNJkpXZM6TABFvCiX4lkjpNwGj3bTL9E7Mgxf+VfHLaR2n6xYVRl/1U6qCeh9leu2
+	 At6JQ+UDh9JdGCYHqiijrsRYA2eq+2fQKCg7W/6lCoLXujgTOZB3L8oHMt5MgDdqAw
+	 GJs8QnwOuK6+n+zEz3xilQfozzwIOulSRwwPqvEkGQR2IWP9qDw6PBFjCPIxOeyk2N
+	 W7Uo92HqCXjVQrm9QCtr/3ayexS6ULO1iCS4vE4/CbDswHsInIe06RL//baootoTmy
+	 vaHYtEb+s1bW/4ewCIO2NImQjPqBSEAEu0I/GrIthDi8F3HrhtSYXPnMbA0/kGE1qk
+	 zwnodJmWPNgDg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DC9C460E7E;
-	Fri, 13 Nov 2026 02:33:25 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7C6EB60E8A;
+	Fri, 13 Nov 2026 02:33:29 +0000 (UTC)
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 23A10F46
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:25 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id AF19B2FE
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 1555140D2E
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:25 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id A128E40D44
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:27 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 4fcb16COCwNC for <u-boot@lists.u-boot-project.org>;
- Fri, 13 Nov 2026 02:33:24 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org D445640B22
+ id UuKn6w2KCcQe for <u-boot@lists.u-boot-project.org>;
+ Fri, 13 Nov 2026 02:33:26 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 78DCD40D2E
 Authentication-Results: smtp4.osuosl.org;
  arc=none smtp.remote-ip=119.15.109.137
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=119.15.109.137;
@@ -76,25 +76,25 @@ Authentication-Results: smtp4.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=d-silva.org
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org
- header.a=rsa-sha256 header.s=2025a header.b=zNB9H35m
+ header.a=rsa-sha256 header.s=2025a header.b=e43gjjys
 Received: from www.nmnhosting.com (watt.d-silva.org [119.15.109.137])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D445640B22
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:22 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 78DCD40D2E
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:33:25 +0000 (UTC)
 Received: from Hawking.lan (hawking.lan [10.0.1.4])
- by www.nmnhosting.com (Postfix) with ESMTP id 3BCEE45733;
- Fri, 13 Nov 2026 13:33:17 +1100 (AEDT)
+ by www.nmnhosting.com (Postfix) with ESMTP id B739645735;
+ Fri, 13 Nov 2026 13:33:20 +1100 (AEDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=d-silva.org; s=2025a; 
- t=1794537197;
+ t=1794537200;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3Kw18U5aea9de7ML3mHxIHFfpWiLhJ4Ox+sYqQ2CYmE=;
- b=zNB9H35mFOaF/tFy1uri0prq9trhrsgPn66xkhrDIJU7sAoGraLvo1Fq0rr9NSRgqdq+yP
- ukh0ghEzLUmzHde1q1fVuSqHHfh5poDJ7TxjB5sm0dRlwormHo4VoIGvtzTvQh4FN9wjZX
- E+j8AGUyT2VNzZ9ugmSx2JzyzrT0pc2pn2h6gKRI+tEdlxnTADWCkmaYmaqtvWQ70INW/9
- 0m/hmn0Z36XWhdj6Sa5T1qUCg+ql3JKm1CjlSDH/AHBXMRdUjs97pLJJ6kbMuHrLX2zKCR
- L9mfLNaFg0TjgjIy/0oJYWQZ5LuypZMxX4cuY42P1h9Sx/A/WmycOPloMLhpOQ==
+ bh=Ci033KVbNZNXa+5lnNgRZ7vQBCWDt/fuKsIENlJB7/g=;
+ b=e43gjjyskPyC5//D9kuX+rnckHdNl15xR2Rlsc0f7pAUhif6tK9aGhAyy0++n9fQZEyWg5
+ Feqlw7BF8vnFr1AqjviLWIrGvLqvxaex3rkQ6qXqOIQvi9+0qCU2LXbmSrpWWpNfL27FrG
+ pLR0+cgChFIS0wsWxJB/yqjZqXSdvGUPMqsPwgZBo34BTWzGLNG+D3+8ViSQElt0fFZcTn
+ IlgNfb0PnIAANJQf/rf/9gf2SY92VW4kCEuCN0y8hKQEnO6oF6aep1j8kGxixdkql5YQXM
+ DqOcCDwplevPpNqgrBawi34F448HtjZulI65CX7H0aXvCdfQqRpF13kK/c6oiQ==
 From: Alastair D'Silva <alastair@d-silva.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>,
@@ -108,9 +108,9 @@ Cc: Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>,
  Enzo Adriano <enzo.adriano.code@gmail.com>,
  Junhui Liu <junhui.liu@pigmoral.tech>,
  Alastair D'Silva <alastair@d-silva.org>
-Subject: [PATCH 07/26] pinctrl: sunxi: a733: add initial support
-Date: Fri, 13 Nov 2026 13:32:17 +1100
-Message-ID: <20261113023236.569054-8-alastair@d-silva.org>
+Subject: [PATCH 08/26] clock: reset: a733: add initial support
+Date: Fri, 13 Nov 2026 13:32:18 +1100
+Message-ID: <20261113023236.569054-9-alastair@d-silva.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261113023236.569054-1-alastair@d-silva.org>
 References: <20261113023236.569054-1-alastair@d-silva.org>
@@ -135,243 +135,274 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Yixun Lan <dlan@gentoo.org>
 
-Add pin controller support for Allwinner A733 SoC, covering both main
-PIO (allwinner,sun60i-a733-pinctrl) and R-PIO
-(allwinner,sun60i-a733-r-pinctrl).
-
-Because A733 main PIO starts Port B at offset 0x100 with a 0x80-byte
-bank stride while R-PIO retains a 0x30-byte bank stride from offset 0x0,
-track per-controller bank_offset and bank_size in sunxi_pinctrl_desc.
+Implement clock gate and reset driver support for the Allwinner A733
+CCU and PRCM (R-CCU), using the v6 upstream Linux DT binding headers.
 
 Signed-off-by: Yixun Lan <dlan@gentoo.org>
-Link: https://lore.kernel.org/r/20260113-01-a733-soc-support-v3-7-f19dcd098f60@gentoo.org
-[Alastair: add per-controller bank_size so R-PIO Bank M keeps 0x30
- stride, select SUNXI_A733_PINCTRL and add UART0_PORT_B0 mux]
+Link: https://lore.kernel.org/r/20260113-01-a733-soc-support-v3-5-f19dcd098f60@gentoo.org
+[Alastair: update to v6 allwinner,sun60i-a733-ccu.h bindings, fix I2C2/3
+ reset offsets, add MMC0-2/USB OTG/R_SPI gates, constify tables]
 Co-developed-by: Alastair D'Silva <alastair@d-silva.org>
 Signed-off-by: Alastair D'Silva <alastair@d-silva.org>
 ---
- drivers/pinctrl/sunxi/Kconfig         | 18 +++++
- drivers/pinctrl/sunxi/pinctrl-sunxi.c | 98 ++++++++++++++++++++++++---
- 2 files changed, 106 insertions(+), 10 deletions(-)
+ drivers/clk/sunxi/Kconfig      |  14 ++++
+ drivers/clk/sunxi/Makefile     |   2 +
+ drivers/clk/sunxi/clk_a733.c   | 132 +++++++++++++++++++++++++++++++++
+ drivers/clk/sunxi/clk_a733_r.c |  45 +++++++++++
+ drivers/clk/sunxi/clk_sunxi.c  |  10 +++
+ 5 files changed, 203 insertions(+)
+ create mode 100644 drivers/clk/sunxi/clk_a733.c
+ create mode 100644 drivers/clk/sunxi/clk_a733_r.c
 
-diff --git a/drivers/pinctrl/sunxi/Kconfig b/drivers/pinctrl/sunxi/Kconfig
-index 54314992299..c1cd8dc05d6 100644
---- a/drivers/pinctrl/sunxi/Kconfig
-+++ b/drivers/pinctrl/sunxi/Kconfig
-@@ -149,4 +149,22 @@ config PINCTRL_SUN55I_A523_R
- 	default MACH_SUN55I_A523
- 	select PINCTRL_SUNXI
+diff --git a/drivers/clk/sunxi/Kconfig b/drivers/clk/sunxi/Kconfig
+index 1c1cc82719c..9858f4546ea 100644
+--- a/drivers/clk/sunxi/Kconfig
++++ b/drivers/clk/sunxi/Kconfig
+@@ -143,4 +143,18 @@ config CLK_SUN55I_A523_R
+ 	  This enables common clock driver support for the PRCM
+ 	  in Allwinner A523/T527 SoCs.
  
-+config PINCTRL_SUN60I_A733
-+	bool "Support for the Allwinner A733 PIO"
-+	depends on MACH_SUN60I_A733
++config CLK_SUN60I_A733
++	bool "Clock driver for Allwinner A733/T736"
 +	default MACH_SUN60I_A733
-+	select PINCTRL_SUNXI
-+	select SUNXI_A733_PINCTRL if SUNXI_GPIO
 +	help
-+	  Select this to enable the main pin controller (PIO) driver on
-+	  Allwinner A733 and T736 SoCs.
++	  This enables common clock driver support for platforms based
++	  on Allwinner A733/T736 SoC.
 +
-+config PINCTRL_SUN60I_A733_R
-+	bool "Support for the Allwinner A733 R-PIO"
++config CLK_SUN60I_A733_R
++	bool "Clock driver for Allwinner A733 generation PRCM"
 +	default MACH_SUN60I_A733
-+	select PINCTRL_SUNXI
 +	help
-+	  Select this to enable the PRCM pin controller (R-PIO) driver on
-+	  Allwinner A733 and T736 SoCs.
++	  This enables common clock driver support for the PRCM
++	  in Allwinner A733/T736 SoCs.
 +
- endif
-diff --git a/drivers/pinctrl/sunxi/pinctrl-sunxi.c b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-index ab4e88c9918..920c15ab864 100644
---- a/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-+++ b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-@@ -33,12 +33,23 @@ struct sunxi_pinctrl_desc {
- 	u8					num_functions;
- 	u8					first_bank;
- 	u8					num_banks;
-+	u16					bank_offset;
-+	u16					bank_size;
- };
- 
- struct sunxi_pinctrl_plat {
- 	void __iomem *base;
- };
- 
-+static void *sunxi_pinctrl_bank_regs(struct sunxi_pinctrl_plat *plat,
-+				     const struct sunxi_pinctrl_desc *desc,
-+				     uint bank)
-+{
-+	u16 stride = desc->bank_size ? desc->bank_size : SUNXI_PINCTRL_BANK_SIZE;
-+
-+	return plat->base + desc->bank_offset + bank * stride;
-+}
-+
- static int sunxi_pinctrl_get_pins_count(struct udevice *dev)
- {
- 	const struct sunxi_pinctrl_desc *desc = dev_get_priv(dev);
-@@ -87,7 +98,7 @@ static int sunxi_pinctrl_pinmux_set(struct udevice *dev, uint pin_selector,
- 	      sunxi_pinctrl_get_function_name(dev, func_selector),
- 	      desc->functions[func_selector].mux);
- 
--	sunxi_gpio_set_cfgbank(plat->base + bank * SUNXI_PINCTRL_BANK_SIZE,
-+	sunxi_gpio_set_cfgbank(sunxi_pinctrl_bank_regs(plat, desc, bank),
- 			       pin, desc->functions[func_selector].mux);
- 
- 	return 0;
-@@ -100,20 +111,24 @@ static const struct pinconf_param sunxi_pinctrl_pinconf_params[] = {
- 	{ "drive-strength",	PIN_CONFIG_DRIVE_STRENGTH,	10 },
- };
- 
--static int sunxi_pinctrl_pinconf_set_pull(struct sunxi_pinctrl_plat *plat,
-+static int sunxi_pinctrl_pinconf_set_pull(struct udevice *dev,
- 					  uint bank, uint pin, uint bias)
- {
--	void *regs = plat->base + bank * SUNXI_PINCTRL_BANK_SIZE;
-+	const struct sunxi_pinctrl_desc *desc = dev_get_priv(dev);
-+	struct sunxi_pinctrl_plat *plat = dev_get_plat(dev);
-+	void *regs = sunxi_pinctrl_bank_regs(plat, desc, bank);
- 
- 	sunxi_gpio_set_pull_bank(regs, pin, bias);
- 
- 	return 0;
- }
- 
--static int sunxi_pinctrl_pinconf_set_drive(struct sunxi_pinctrl_plat *plat,
-+static int sunxi_pinctrl_pinconf_set_drive(struct udevice *dev,
- 					   uint bank, uint pin, uint drive)
- {
--	void *regs = plat->base + bank * SUNXI_PINCTRL_BANK_SIZE;
-+	const struct sunxi_pinctrl_desc *desc = dev_get_priv(dev);
-+	struct sunxi_pinctrl_plat *plat = dev_get_plat(dev);
-+	void *regs = sunxi_pinctrl_bank_regs(plat, desc, bank);
- 
- 	if (drive < 10 || drive > 40)
- 		return -EINVAL;
-@@ -127,7 +142,6 @@ static int sunxi_pinctrl_pinconf_set_drive(struct sunxi_pinctrl_plat *plat,
- static int sunxi_pinctrl_pinconf_set(struct udevice *dev, uint pin_selector,
- 				     uint param, uint val)
- {
--	struct sunxi_pinctrl_plat *plat = dev_get_plat(dev);
- 	int bank = pin_selector / SUNXI_GPIOS_PER_BANK;
- 	int pin  = pin_selector % SUNXI_GPIOS_PER_BANK;
- 
-@@ -135,9 +149,9 @@ static int sunxi_pinctrl_pinconf_set(struct udevice *dev, uint pin_selector,
- 	case PIN_CONFIG_BIAS_DISABLE:
- 	case PIN_CONFIG_BIAS_PULL_DOWN:
- 	case PIN_CONFIG_BIAS_PULL_UP:
--		return sunxi_pinctrl_pinconf_set_pull(plat, bank, pin, val);
-+		return sunxi_pinctrl_pinconf_set_pull(dev, bank, pin, val);
- 	case PIN_CONFIG_DRIVE_STRENGTH:
--		return sunxi_pinctrl_pinconf_set_drive(plat, bank, pin, val);
-+		return sunxi_pinctrl_pinconf_set_drive(dev, bank, pin, val);
- 	}
- 
- 	return -EINVAL;
-@@ -146,10 +160,12 @@ static int sunxi_pinctrl_pinconf_set(struct udevice *dev, uint pin_selector,
- static int sunxi_pinctrl_get_pin_muxing(struct udevice *dev, uint pin_selector,
- 					char *buf, int size)
- {
-+	const struct sunxi_pinctrl_desc *desc = dev_get_priv(dev);
- 	struct sunxi_pinctrl_plat *plat = dev_get_plat(dev);
- 	int bank = pin_selector / SUNXI_GPIOS_PER_BANK;
- 	int pin	 = pin_selector % SUNXI_GPIOS_PER_BANK;
--	int mux  = sunxi_gpio_get_cfgbank(plat->base + bank * SUNXI_PINCTRL_BANK_SIZE, pin);
-+	void *regs = sunxi_pinctrl_bank_regs(plat, desc, bank);
-+	int mux  = sunxi_gpio_get_cfgbank(regs, pin);
- 
- 	switch (mux) {
- 	case SUNXI_GPIO_INPUT:
-@@ -207,7 +223,7 @@ static int sunxi_pinctrl_bind(struct udevice *dev)
- 		if (!gpio_plat)
- 			return -ENOMEM;
- 
--		gpio_plat->regs = plat->base + i * SUNXI_PINCTRL_BANK_SIZE;
-+		gpio_plat->regs = sunxi_pinctrl_bank_regs(plat, desc, i);
- 		gpio_plat->bank_name[0] = 'P';
- 		gpio_plat->bank_name[1] = 'A' + desc->first_bank + i;
- 		gpio_plat->bank_name[2] = '\0';
-@@ -784,6 +800,41 @@ static const struct sunxi_pinctrl_desc __maybe_unused sun55i_a523_pinctrl_desc =
- 	.num_banks	= 11,
- };
- 
-+static const struct sunxi_pinctrl_function sun60i_a733_pinctrl_functions[] = {
-+	{ "gpio_in",	0 },
-+	{ "gpio_out",	1 },
-+	{ "gmac0",	5 },	/* PH0-PH15 */
-+	{ "gmac1",	5 },	/* PJ0-PJ15 */
-+	{ "mmc0",	2 },	/* PF0-PF5 */
-+	{ "mmc1",	2 },	/* PG0-PG5 */
-+	{ "mmc2",	3 },	/* PC0, PC1, PC5, PC6, PC8-PC11, PC13-PC16 */
-+	{ "mmc3",	4 },	/* PC0, PC1, PC5, PC6, PC8-PC11, PC13-PC16 */
-+	{ "pcie",	6 },	/* PD20 */
-+	{ "spi0",	5 },	/* PC2-PC4, PC7, PC12 */
-+#if IS_ENABLED(CONFIG_UART0_PORT_F)
-+	{ "uart0",	3 },	/* PF2, PF4 */
-+#elif IS_ENABLED(CONFIG_UART0_PORT_B0)
-+	{ "uart0",	3 },	/* PB0, PB1 */
-+#else
-+	{ "uart0",	2 },	/* PB9, PB10 */
-+#endif
-+	{ "uart1",	2 },	/* PG6, PG7 */
-+};
-+
+ endif # CLK_SUNXI
+diff --git a/drivers/clk/sunxi/Makefile b/drivers/clk/sunxi/Makefile
+index 93b542cebcd..943e47612ce 100644
+--- a/drivers/clk/sunxi/Makefile
++++ b/drivers/clk/sunxi/Makefile
+@@ -27,3 +27,5 @@ obj-$(CONFIG_CLK_SUN50I_A64) += clk_a64.o
+ obj-$(CONFIG_CLK_SUN50I_A100) += clk_a100.o
+ obj-$(CONFIG_CLK_SUN55I_A523) += clk_a523.o
+ obj-$(CONFIG_CLK_SUN55I_A523_R) += clk_a523_r.o
++obj-$(CONFIG_CLK_SUN60I_A733) += clk_a733.o
++obj-$(CONFIG_CLK_SUN60I_A733_R) += clk_a733_r.o
+diff --git a/drivers/clk/sunxi/clk_a733.c b/drivers/clk/sunxi/clk_a733.c
+new file mode 100644
+index 00000000000..5c942fd5d58
+--- /dev/null
++++ b/drivers/clk/sunxi/clk_a733.c
+@@ -0,0 +1,132 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
-+ * A733 main PIO omits Port A physically; Port B begins at offset 0x100 with a
-+ * 0x80-byte bank stride, so .first_bank = SUNXI_GPIO_A reserves a virtual PA
-+ * slot at +0x80 to keep linear bank indices aligned with Port B..K.
++ * Copyright (C) 2025-2026 Yixun Lan <dlan@gentoo.org>
++ * Copyright (C) 2026 Alastair D'Silva <alastair@d-silva.org>
 + */
-+static const struct sunxi_pinctrl_desc __maybe_unused sun60i_a733_pinctrl_desc = {
-+	.functions	= sun60i_a733_pinctrl_functions,
-+	.num_functions	= ARRAY_SIZE(sun60i_a733_pinctrl_functions),
-+	.first_bank	= SUNXI_GPIO_A,
-+	.num_banks	= 11,
-+	.bank_offset	= SUN60I_A733_PINCTRL_BANK_OFFSET,
-+	.bank_size	= SUN60I_A733_PINCTRL_BANK_SIZE,
++
++#include <clk/sunxi.h>
++#include <linux/bitops.h>
++#include <linux/kernel.h>
++
++#include <dt-bindings/clock/allwinner,sun60i-a733-ccu.h>
++#include <dt-bindings/reset/allwinner,sun60i-a733-ccu.h>
++
++static const struct ccu_clk_gate a733_gates[] = {
++	[CLK_SYS_24M]		= GATE_DUMMY,
++	[CLK_PLL_PERIPH0_200M]	= GATE_DUMMY,
++	[CLK_PLL_PERIPH0_300M]	= GATE_DUMMY,
++	[CLK_PLL_PERIPH1_300M]	= GATE_DUMMY,
++	[CLK_APB1]		= GATE_DUMMY,
++	[CLK_APB_UART]		= GATE_DUMMY,
++
++	[CLK_MBUS_GMAC0]	= GATE(0x05e4, BIT(11)),
++	[CLK_BUS_CE]		= GATE(0x0ac4, BIT(0)),
++
++	[CLK_MMC0]		= GATE(0x0d00, BIT(31)),
++	[CLK_BUS_MMC0]		= GATE(0x0d0c, BIT(0)),
++	[CLK_MMC1]		= GATE(0x0d10, BIT(31)),
++	[CLK_BUS_MMC1]		= GATE(0x0d1c, BIT(0)),
++	[CLK_MMC2]		= GATE(0x0d20, BIT(31)),
++	[CLK_BUS_MMC2]		= GATE(0x0d2c, BIT(0)),
++
++	[CLK_BUS_UART0]		= GATE(0x0e00, BIT(0)),
++	[CLK_BUS_UART1]		= GATE(0x0e04, BIT(0)),
++	[CLK_BUS_UART2]		= GATE(0x0e08, BIT(0)),
++	[CLK_BUS_UART3]		= GATE(0x0e0c, BIT(0)),
++	[CLK_BUS_UART4]		= GATE(0x0e10, BIT(0)),
++	[CLK_BUS_UART5]		= GATE(0x0e14, BIT(0)),
++	[CLK_BUS_UART6]		= GATE(0x0e18, BIT(0)),
++
++	[CLK_BUS_I2C0]		= GATE(0x0e80, BIT(0)),
++	[CLK_BUS_I2C1]		= GATE(0x0e84, BIT(0)),
++	[CLK_BUS_I2C2]		= GATE(0x0e88, BIT(0)),
++	[CLK_BUS_I2C3]		= GATE(0x0e8c, BIT(0)),
++	[CLK_BUS_I2C4]		= GATE(0x0e90, BIT(0)),
++	[CLK_BUS_I2C5]		= GATE(0x0e94, BIT(0)),
++	[CLK_BUS_I2C6]		= GATE(0x0e98, BIT(0)),
++	[CLK_BUS_I2C7]		= GATE(0x0e9c, BIT(0)),
++	[CLK_BUS_I2C8]		= GATE(0x0ea0, BIT(0)),
++	[CLK_BUS_I2C9]		= GATE(0x0ea4, BIT(0)),
++	[CLK_BUS_I2C10]		= GATE(0x0ea8, BIT(0)),
++	[CLK_BUS_I2C11]		= GATE(0x0eac, BIT(0)),
++	[CLK_BUS_I2C12]		= GATE(0x0eb0, BIT(0)),
++
++	[CLK_SPI0]		= GATE(0x0f00, BIT(31)),
++	[CLK_BUS_SPI0]		= GATE(0x0f04, BIT(0)),
++	[CLK_SPI1]		= GATE(0x0f08, BIT(31)),
++	[CLK_BUS_SPI1]		= GATE(0x0f0c, BIT(0)),
++	[CLK_SPI2]		= GATE(0x0f10, BIT(31)),
++	[CLK_BUS_SPI2]		= GATE(0x0f14, BIT(0)),
++
++	[CLK_GPADC0_24M]	= GATE(0x0fc0, BIT(31)),
++	[CLK_BUS_GPADC0]	= GATE(0x0fc4, BIT(0)),
++	[CLK_BUS_THS0]		= GATE(0x0fe4, BIT(0)),
++	[CLK_BUS_LRADC]		= GATE(0x1024, BIT(0)),
++
++	[CLK_USB_OHCI0]		= GATE(0x1300, BIT(31)),
++	[CLK_BUS_OHCI0]		= GATE(0x1304, BIT(0)),
++	[CLK_BUS_EHCI0]		= GATE(0x1304, BIT(4)),
++	[CLK_BUS_OTG]		= GATE(0x1304, BIT(8)),
++	[CLK_USB_OHCI1]		= GATE(0x1308, BIT(31)),
++	[CLK_BUS_OHCI1]		= GATE(0x130c, BIT(0)),
++	[CLK_BUS_EHCI1]		= GATE(0x130c, BIT(4)),
++
++	[CLK_GMAC0_PHY]		= GATE(0x1410, BIT(31)),
++	[CLK_BUS_GMAC0]		= GATE(0x141c, BIT(0)),
 +};
 +
- static const struct sunxi_pinctrl_function sun50i_h616_r_pinctrl_functions[] = {
- 	{ "gpio_in",	0 },
- 	{ "gpio_out",	1 },
-@@ -849,6 +900,21 @@ static const struct sunxi_pinctrl_desc __maybe_unused sun55i_a523_r_pinctrl_desc
- 	.num_banks	= 2,
- };
++static const struct ccu_reset a733_resets[] = {
++	[RST_BUS_CE]		= RESET(0x0ac4, BIT(16)),
++
++	[RST_BUS_MMC0]		= RESET(0x0d0c, BIT(16)),
++	[RST_BUS_MMC1]		= RESET(0x0d1c, BIT(16)),
++	[RST_BUS_MMC2]		= RESET(0x0d2c, BIT(16)),
++
++	[RST_BUS_UART0]		= RESET(0x0e00, BIT(16)),
++	[RST_BUS_UART1]		= RESET(0x0e04, BIT(16)),
++	[RST_BUS_UART2]		= RESET(0x0e08, BIT(16)),
++	[RST_BUS_UART3]		= RESET(0x0e0c, BIT(16)),
++	[RST_BUS_UART4]		= RESET(0x0e10, BIT(16)),
++	[RST_BUS_UART5]		= RESET(0x0e14, BIT(16)),
++	[RST_BUS_UART6]		= RESET(0x0e18, BIT(16)),
++
++	[RST_BUS_I2C0]		= RESET(0x0e80, BIT(16)),
++	[RST_BUS_I2C1]		= RESET(0x0e84, BIT(16)),
++	[RST_BUS_I2C2]		= RESET(0x0e88, BIT(16)),
++	[RST_BUS_I2C3]		= RESET(0x0e8c, BIT(16)),
++	[RST_BUS_I2C4]		= RESET(0x0e90, BIT(16)),
++	[RST_BUS_I2C5]		= RESET(0x0e94, BIT(16)),
++	[RST_BUS_I2C6]		= RESET(0x0e98, BIT(16)),
++	[RST_BUS_I2C7]		= RESET(0x0e9c, BIT(16)),
++	[RST_BUS_I2C8]		= RESET(0x0ea0, BIT(16)),
++	[RST_BUS_I2C9]		= RESET(0x0ea4, BIT(16)),
++	[RST_BUS_I2C10]		= RESET(0x0ea8, BIT(16)),
++	[RST_BUS_I2C11]		= RESET(0x0eac, BIT(16)),
++	[RST_BUS_I2C12]		= RESET(0x0eb0, BIT(16)),
++
++	[RST_BUS_SPI0]		= RESET(0x0f04, BIT(16)),
++	[RST_BUS_SPI1]		= RESET(0x0f0c, BIT(16)),
++	[RST_BUS_SPI2]		= RESET(0x0f14, BIT(16)),
++
++	[RST_BUS_GPADC0]	= RESET(0x0fc4, BIT(16)),
++	[RST_BUS_THS0]		= RESET(0x0fe4, BIT(16)),
++	[RST_BUS_LRADC]		= RESET(0x1024, BIT(16)),
++
++	[RST_USB_PHY0]		= RESET(0x1300, BIT(30)),
++	[RST_BUS_OHCI0]		= RESET(0x1304, BIT(16)),
++	[RST_BUS_EHCI0]		= RESET(0x1304, BIT(20)),
++	[RST_BUS_OTG]		= RESET(0x1304, BIT(24)),
++	[RST_USB_PHY1]		= RESET(0x1308, BIT(30)),
++	[RST_BUS_OHCI1]		= RESET(0x130c, BIT(16)),
++	[RST_BUS_EHCI1]		= RESET(0x130c, BIT(20)),
++
++	[RST_BUS_GMAC0]		= RESET(0x141c, BIT(16)),
++	[RST_BUS_GMAC0_AXI]	= RESET(0x141c, BIT(17)),
++};
++
++const struct ccu_desc a733_ccu_desc = {
++	.gates		= a733_gates,
++	.resets		= a733_resets,
++	.num_gates	= ARRAY_SIZE(a733_gates),
++	.num_resets	= ARRAY_SIZE(a733_resets),
++};
+diff --git a/drivers/clk/sunxi/clk_a733_r.c b/drivers/clk/sunxi/clk_a733_r.c
+new file mode 100644
+index 00000000000..ae02dd21de5
+--- /dev/null
++++ b/drivers/clk/sunxi/clk_a733_r.c
+@@ -0,0 +1,45 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2025-2026 Yixun Lan <dlan@gentoo.org>
++ * Copyright (C) 2026 Alastair D'Silva <alastair@d-silva.org>
++ */
++
++#include <clk/sunxi.h>
++#include <linux/bitops.h>
++#include <linux/kernel.h>
++
++#include <dt-bindings/clock/allwinner,sun60i-a733-r-ccu.h>
++#include <dt-bindings/reset/allwinner,sun60i-a733-r-ccu.h>
++
++static const struct ccu_clk_gate a733_r_gates[] = {
++	[CLK_R_AHB]		= GATE_DUMMY,
++	[CLK_R_APB0]		= GATE_DUMMY,
++	[CLK_R_APB1]		= GATE_DUMMY,
++	[CLK_R_SPI]		= GATE(0x150, BIT(31)),
++	[CLK_BUS_R_SPI]		= GATE(0x15c, BIT(0)),
++	[CLK_BUS_R_UART0]	= GATE(0x18c, BIT(0)),
++	[CLK_BUS_R_UART1]	= GATE(0x18c, BIT(1)),
++	[CLK_BUS_R_I2C0]	= GATE(0x19c, BIT(0)),
++	[CLK_BUS_R_I2C1]	= GATE(0x19c, BIT(1)),
++	[CLK_BUS_R_I2C2]	= GATE(0x19c, BIT(2)),
++	[CLK_BUS_R_RTC]		= GATE(0x20c, BIT(0)),
++	[CLK_BUS_R_CPUCFG]	= GATE(0x22c, BIT(0)),
++};
++
++static const struct ccu_reset a733_r_resets[] = {
++	[RST_BUS_R_SPI]		= RESET(0x15c, BIT(16)),
++	[RST_BUS_R_UART0]	= RESET(0x18c, BIT(16)),
++	[RST_BUS_R_UART1]	= RESET(0x18c, BIT(17)),
++	[RST_BUS_R_I2C0]	= RESET(0x19c, BIT(16)),
++	[RST_BUS_R_I2C1]	= RESET(0x19c, BIT(17)),
++	[RST_BUS_R_I2C2]	= RESET(0x19c, BIT(18)),
++	[RST_BUS_R_RTC]		= RESET(0x20c, BIT(16)),
++	[RST_BUS_R_CPUCFG]	= RESET(0x22c, BIT(16)),
++};
++
++const struct ccu_desc a733_r_ccu_desc = {
++	.gates		= a733_r_gates,
++	.resets		= a733_r_resets,
++	.num_gates	= ARRAY_SIZE(a733_r_gates),
++	.num_resets	= ARRAY_SIZE(a733_r_resets),
++};
+diff --git a/drivers/clk/sunxi/clk_sunxi.c b/drivers/clk/sunxi/clk_sunxi.c
+index 046d5d1605a..6d55b4598a5 100644
+--- a/drivers/clk/sunxi/clk_sunxi.c
++++ b/drivers/clk/sunxi/clk_sunxi.c
+@@ -128,6 +128,8 @@ extern const struct ccu_desc r40_ccu_desc;
+ extern const struct ccu_desc v3s_ccu_desc;
+ extern const struct ccu_desc a523_ccu_desc;
+ extern const struct ccu_desc a523_r_ccu_desc;
++extern const struct ccu_desc a733_ccu_desc;
++extern const struct ccu_desc a733_r_ccu_desc;
  
-+static const struct sunxi_pinctrl_function sun60i_a733_r_pinctrl_functions[] = {
-+	{ "gpio_in",	0 },
-+	{ "gpio_out",	1 },
-+	{ "r_i2c0",	2 },	/* PL0-PL1 */
-+	{ "r_uart0",	3 },	/* PL2-PL3 */
-+	{ "r_uart1",	2 },	/* PL2-PL3 */
-+};
-+
-+static const struct sunxi_pinctrl_desc __maybe_unused sun60i_a733_r_pinctrl_desc = {
-+	.functions	= sun60i_a733_r_pinctrl_functions,
-+	.num_functions	= ARRAY_SIZE(sun60i_a733_r_pinctrl_functions),
-+	.first_bank	= SUNXI_GPIO_L,
-+	.num_banks	= 2,
-+};
-+
- static const struct udevice_id sunxi_pinctrl_ids[] = {
- #ifdef CONFIG_PINCTRL_SUNIV_F1C100S
- 	{
-@@ -1035,6 +1101,18 @@ static const struct udevice_id sunxi_pinctrl_ids[] = {
- 		.compatible = "allwinner,sun55i-a523-r-pinctrl",
- 		.data = (ulong)&sun55i_a523_r_pinctrl_desc,
- 	},
+ static const struct udevice_id sunxi_clk_ids[] = {
+ #ifdef CONFIG_CLK_SUN4I_A10
+@@ -233,6 +235,14 @@ static const struct udevice_id sunxi_clk_ids[] = {
+ #ifdef CONFIG_CLK_SUN55I_A523_R
+ 	{ .compatible = "allwinner,sun55i-a523-r-ccu",
+ 	  .data = (ulong)&a523_r_ccu_desc },
 +#endif
-+#ifdef CONFIG_PINCTRL_SUN60I_A733
-+	{
-+		.compatible = "allwinner,sun60i-a733-pinctrl",
-+		.data = (ulong)&sun60i_a733_pinctrl_desc,
-+	},
++#ifdef CONFIG_CLK_SUN60I_A733
++	{ .compatible = "allwinner,sun60i-a733-ccu",
++	  .data = (ulong)&a733_ccu_desc },
 +#endif
-+#ifdef CONFIG_PINCTRL_SUN60I_A733_R
-+	{
-+		.compatible = "allwinner,sun60i-a733-r-pinctrl",
-+		.data = (ulong)&sun60i_a733_r_pinctrl_desc,
-+	},
++#ifdef CONFIG_CLK_SUN60I_A733_R
++	{ .compatible = "allwinner,sun60i-a733-r-ccu",
++	  .data = (ulong)&a733_r_ccu_desc },
  #endif
- 	{}
+ 	{ }
  };
 -- 
 2.53.0
