@@ -1,205 +1,141 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E10C606A33D
-	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 18:51:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DE03606A334
+	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 19:38:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=AwjEgj0E;
-	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=QfPwyHO0
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=u6uL8x/R;
+	dkim=pass (2048-bit key, unprotected) header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256 header.s=mchp header.b=WOjHogTI
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4DE4D40E28;
-	Fri, 13 Nov 2026 18:51:14 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 29F4981775;
+	Fri, 13 Nov 2026 19:38:19 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id Wue_eEN-FWd0; Fri, 13 Nov 2026 18:51:13 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 9615640E1D
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794595873;
-	b=dWLWFrM/qGwPcruFU8/tYYFO90btV7XYfhS24ZzDDa2LhsGafKVyYfIJ64RkXlwrihbL
-	 X+/W0ES/oRoo84sDuNxQ7Zu+TtAA8QCK9F5lINxs8ITiUKILZtit3H7ipmWuY2zqYn6kr
-	 U9n7uS8XH2JLGHRfZWIIVs5vPHA8oULE3zxx+sWjVfJcR4lbLjPCLjDV3p6vSkFckqIVP
-	 j/AXHgrDn+8htMRYigNSXsCIlxRmmSAejeVyOjm9fqhmU6KVziYEP/cSNYUrWYpjgcf2v
-	 R3i8P1H/p+Tm0FqzplStu50tV2us3DD/BVBYsLB1odQbJPvTG3dnRnUlmfVeZMsE6FQ==
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id z__vUGic3DPN; Fri, 13 Nov 2026 19:38:18 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 0FD7381395
+Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794598698;
+	b=YISGSgpcX7Dx+l2ALBIsuCFaxZiWcBpwpI3xEAfJ3BS2Y9Ld4OjvuHvVTMfTHTUOvLjK
+	 L6D9d8aYupklekITp16wtuXbeoEobawefyTtd2FJTwQhLwTTj/Ud5Tviap8P6URPdVJrW
+	 N6shHMeCdXEKuDJ1/tquT0RZzth3kYgTsNSqArn/eHlr1PlULmdOX/t9wF3Al1u6cUE7N
+	 6zvwpPvQBmuuWTgFYCn6N6ZDEBdx6aps4nhoxotcO1UhQWVo4iiIetknz+baDh4GEARwZ
+	 fz8HbVyFv1XMKnhj+m9JH/yfCuDptZ+LnDM9vSOUOtAmDPW1kDaTAKnC65lseUqqPIA==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794595873;
+	c=relaxed/relaxed; t=1794598698;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:
-	 DKIM-Signature:Received:Received:Message-ID:Date:User-Agent:Subject:
-	 To:Cc:References:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-ClientProxiedBy:MIME-Version:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=6/ktnGnY/mRYwWJ9Ya+j+jxNM0OvCdzSIpo0DPl5eNo=;
-	b=qhIJW4NNTum93lxvcuC5MjGf0adJRLReLNaDa/XGB5qVuN4mE5kg6fEG5laKlkVd+s+/
-	 Wo6ainlSeJO8jGI8zt7PYXBdkzARMtPm5ybpl7P1MIqUtheILa27MTAwqHJF5h0jXYclN
-	 YE9+euy5FwZ60Tm9Nfx1S5jRnGFcR40BmeGeWElp+p4oZ2UPQSELhEJmpNR2YLIa6nspD
-	 Rqz7JMRa91pQL1pevkFjFuM087F0PkrpUKStdgk5oskaJD4KXT0dk5oWpfliba5uUTg7V
-	 zjEN77OTCSfEYsAtiES8KqXHOo20SVQ3eekyGNeQdKVCAAJm3rMoStwvVgBz+FTqZXQ==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
-	dmarc=pass header.from=cherry.de;
-	dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=QfPwyHO0;
+	 DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:X-IronPort-AV:
+	 X-Amp-Result:Received:Received:Received:Date:From:To:CC:Subject:
+	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
+	 In-Reply-To:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Errors-To;
+	bh=KwBv40SiYhj/7hXcbceFjYYU+N39L2PjqWtJCeQiQ0o=;
+	b=LiNv4rjwyJPOYiONHBdnIHvlXK2vYGI1EeqXKIKVDxi5sTSmytHoX+L72iHcdL9dr89m
+	 2Wa3ACEVL1Zz+HBNPJOUVQkyKm5uYVrYLlE/ETDjRIgucZnk9c8Cru8VjqLLIBAisCg5J
+	 Twq9OwHEsSeuz0awlfxPxsX6Picc47VAgo9BPNTbZAGCeuk+IDAVELp3vSNzxmx1uNjnM
+	 v2GKAdGW97b42HFJfh0zrIK7pdH+df9I1YqyLMu4Hr8TcABhLvY6/lHKv7EUvHPuz+lJ3
+	 QFx+kIhhF5E9874h0EHPj2bjMtdLgh1SP9JzN9Km5mYKcGYr+ne9vGHxu5+Ef8n/luQ==
+ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794595873;
-	bh=6/ktnGnY/mRYwWJ9Ya+j+jxNM0OvCdzSIpo0DPl5eNo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794598698;
+	bh=KwBv40SiYhj/7hXcbceFjYYU+N39L2PjqWtJCeQiQ0o=;
+	h=Date:From:To:CC:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=AwjEgj0E0powoL1yjpYTMw35OnTV/yLezkPuwmk/14nL+q1VzOAK+y5hooQVggTM4
-	 XDynQ3hAHs1lt/iRQLCeXwHUwSj8xAvzYrPZS4peV3Luqy1kT5tqnbyNC2QknKynVy
-	 jvHRN2w1maPi66GdIznPvH9ilfJF12NlnNVH0iKoM2RqScDuM8t/FixpSLyE9RWBfh
-	 AHzfpIjaws5J5uPJ6oLeqnixqAJmomuK1nkLB6p5BGp6FndBxZfsQC+shgtZMj13TK
-	 rL9q0L5bKz+6SciTnItoH9GsYC6FWHcxMmroAfvN1wKnJtAf1UsmGvupF7/5Dlj9xQ
-	 UHeBgXFAxOuZg==
+	b=u6uL8x/RqxGVxQ2mcz3wDDnCkgjnWYMq8/BDId05GzLs9BJKlqPA2rYB6AhQYHJAS
+	 TonKxWAkv9NGY316JHJLaPmz1ZSWFn8WN+YY9pudmtl5Ize5pgQh4Z4uboCBJfyY6E
+	 A7pNWFlBg9YfP6KTnxLd3Yy39T40ePIryhIjeIswychKr2ub4JABtX4yqGlq1BGz5G
+	 ZWD0u/pGSPpb0ea26fBTXVlGvcILD9rNLDabknRzIykmqww9HiJOtAi77fLKEI+cB8
+	 dRu39/Q1isXi8E3Fkv3Gx8cDcfYSvcsBtw8CLRYtjM8sA2ogqR9Tbg3o2hkk2bmwyv
+	 HMlkmnJ9ofFcg==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9615640E1D;
-	Fri, 13 Nov 2026 18:51:13 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists1.osuosl.org (Postfix) with ESMTP id 64FE92E5
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 18:51:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0FD7381395;
+	Fri, 13 Nov 2026 19:38:18 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id E2E1B286
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 19:38:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 55A9740E1D
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 18:51:12 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id D48564022B
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 19:38:16 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ysXiLiwFKHTw for <u-boot@lists.u-boot-project.org>;
- Fri, 13 Nov 2026 18:51:11 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 4E44D40E19
-Authentication-Results: smtp4.osuosl.org; arc=pass header.oldest-pass=0
- smtp.remote-ip="2a01:111:f403:c20f::7"
-Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a01:111:f403:c20f::7;
- helo=osppr02cu001.outbound.protection.outlook.com;
- envelope-from=quentin.schulz@cherry.de; receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-Authentication-Results: smtp4.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256
- header.s=selector1 header.b=QfPwyHO0
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4E44D40E19
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 18:51:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6/ktnGnY/mRYwWJ9Ya+j+jxNM0OvCdzSIpo0DPl5eNo=;
- b=QfPwyHO0BmDCMaio48BeVh59TzSoQf5vtPfbsRuTdFA6cwujF7fFxPvT51fkZIqlJFjd+Y6gDds74fxd1t54aAIbhvkUAbKJ8vr2lw67kVJovjLmb08c4BOESzN+La636fonIY294/XJc6NyUnRZxsMS38cVAWVenVaNQIJIu54=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com (2603:10a6:102:4ab::7)
- by AM7PR04MB6919.eurprd04.prod.outlook.com (2603:10a6:20b:10e::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.10; Fri, 13 Nov
- 2026 18:51:06 +0000
-Received: from PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d]) by PA3PR04MB11153.eurprd04.prod.outlook.com
- ([fe80::6b02:c0eb:95a4:3c3d%5]) with mapi id 15.21.0615.009; Fri, 13 Nov 2026
- 18:51:06 +0000
-Message-ID: <6048ee05-b6ef-4979-b4e1-23ef0f7d3ee8@cherry.de>
-Date: Fri, 13 Nov 2026 19:51:04 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] board: stm32mp25: add splash screen with
- stmicroelectronics logo
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: linux-amarula@amarulasolutions.com, michael@amarulasolutions.com,
- Marek Vasut <marex@nabladev.com>, Michal Simek <michal.simek@amd.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.u-boot-project.org,
- uboot-stm32@st-md-mailman.stormreply.com
-References: <20261113172541.473641-1-dario.binacchi@amarulasolutions.com>
- <20261113172541.473641-3-dario.binacchi@amarulasolutions.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20261113172541.473641-3-dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1P189CA0033.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:802:2a::46) To PA3PR04MB11153.eurprd04.prod.outlook.com
- (2603:10a6:102:4ab::7)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id RtWGvl6qyX6U for <u-boot@lists.u-boot-project.org>;
+ Fri, 13 Nov 2026 19:38:15 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org B54C5400AE
+Authentication-Results: smtp2.osuosl.org;
+ arc=none smtp.remote-ip=68.232.154.123
+Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=68.232.154.123;
+ helo=esa.microchip.iphmx.com;
+ envelope-from=prvs=7708869e7=charles.perry@microchip.com; receiver=<UNKNOWN> 
+Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=microchip.com header.i=@microchip.com
+ header.a=rsa-sha256 header.s=mchp header.b=WOjHogTI
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.154.123])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id B54C5400AE
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 19:38:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1794598703; x=1826134703;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=dVKEqWXpMVIUmNdTv4/osfmB/Nm5Z5c/aTtLztmZYgg=;
+ b=WOjHogTIdB8f8la8t/sSH2PiXAW/uV1y2wLWVY7+3PU/q0A+I5/k+qjm
+ oGRIXnzyOuANGlNxGYjLc8FZfZuMqMwZ0rhCoInDQkDHC//R+FZtlIR8Y
+ G2hnerbqbPUIcLA2AlFn6saDfSsrOEq00trUlqjhCZ0mk+R/sG2g59hml
+ DxVoz9ME0lIiR6yA9m87uIQV/+zCuTRfU5P8IeG3Q1V5OxsfDVv1fAyrZ
+ Nd3L2Wkuhm+IgPJfgVRPZiQyrG4biNp6nuSYs3DHAZOor1tveroiAzden
+ Ra7TSpnRe/jznNB6bOi74ogh5f4tFJ/AtPa2LF2HRcpiaqc8lgLauwjHY Q==;
+X-CSE-ConnectionGUID: NKq/0o7RQse/XOzZtCn1kg==
+X-CSE-MsgGUID: +FYS5g52R9CQsr5f82kZPg==
+X-IronPort-AV: E=Sophos;i="6.27,212,1787036400"; d="scan'208";a="233536114"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 13 Nov 2026 12:38:20 -0700
+Received: from chn-vm-ex02.mchp-main.com (10.10.85.144) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58; Fri, 13 Nov 2026 12:38:12 -0700
+Received: from MON-LT-C78453.mchp-main.com (10.10.85.11) by
+ chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58 via Frontend Transport; Fri, 13 Nov 2026 12:38:09 -0700
+Date: Fri, 13 Nov 2026 14:38:07 -0500
+From: Charles Perry <charles.perry@microchip.com>
+To: Leo Liang <leo.liang@sifive.com>
+CC: Charles Perry <charles.perry@microchip.com>,
+ <u-boot@lists.u-boot-project.org>, Yao Zi <me@ziyao.cc>, Rahul Pathak
+ <rahul@summations.net>, Anup Patel <anup@brainfault.org>, Paul Walmsley
+ <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
+ <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, Romain Caritey
+ <romain.caritey@microchip.com>, Mame Maria Mbaye
+ <MameMaria.Mbaye@microchip.com>, Tom Rini <trini@konsulko.com>, Rick Chen
+ <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>, Michal Simek
+ <michal.simek@amd.com>, Conor Dooley <conor@kernel.org>, Peng Fan
+ <peng.fan@oss.nxp.com>, Subrahmanya Lingappa
+ <subrahmanya.lingappa@oss.qualcomm.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v4 4/8] drivers: clk: add support for RPMI clocks
+Message-ID: <avdnH2BRZwT9BAmO@MON-LT-C78453.mchp-main.com>
+References: <20261014-rpmi_v4-v4-0-d53d34a49780@microchip.com>
+ <20261014-rpmi_v4-v4-4-d53d34a49780@microchip.com>
+ <auioPabD3tEPCMQV@lliang-1876.localdomain>
+ <au4CuFTPqdet6Vir@MON-LT-C78453.mchp-main.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PR04MB11153:EE_|AM7PR04MB6919:EE_
-X-MS-Office365-Filtering-Correlation-Id: 60d36972-1aec-4601-f244-08df41b712b2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|7416014|376014|1800799024|366016|10067099003|261102123227099003|11063799006|4143699003|56012099006|261022075727099003|261021135927099003|261028144727099003|261026121527099003|261026140227099003|261021123027099003|261022105027099003|261021121427099003|261009223027099003|22082099003|18002099003|6133799003;
-X-Microsoft-Antispam-Message-Info: W7qakrgg8j7wZvCNfMblvdPG3wN7xZY7ie8PfcLT09zLAcjhuCyAeJPAcre0wmttwawxQkwDUD2hR2gXrt1i62qgM+xLsbynGVZHHWbQhXBBpuOKMYgayP7Vl61z30wIwDZ52wTpcPZ5nUzey59tsxtTwIga0OOhDtcKUxhymK1JWY3K/l4vhhJAqxpJQJQRygzwgV/82qSGB4gXlwFk42huM/D3Ecp2ootoZAb8T+SqvbWa00RuXhTGjfUjP9ARGMwSp4d54fioJFkagHZ94y1dG0Y0V/E2QCu6hq/Hud+M/wQaj6gHiFWJrhNuIX5OBVPd5piqMKsC8n1rcyC2pKZmtRxh4H1pL6td85oKuQ/fMJ9m7mGu/gWzl8PWQB0hWf49X+HIRmec29GLjCYkdytbL036XqKZsNZ5/pc5aJb7wey/WfiXX6ssFO9bSkj9YHUNJOSXycOothQsBz90ncefoRrOctqaxcszIvA7tnCubf1HPoW+p0cro8/cydOX9AMU9ZOpH9rAfjSRX9qcAgTWf85u5TAMBKQSqMgt0QyRmchnP8BNHMmcuL67evfeOWS6ndJvfLFXRhskFZze0kuiuNxRbeARH2PeHdWWohtv0ZH9bIqynyea/30h0bniBQn2R/pGVW0vj3zuAIvdvOV53rKxpNmUi1VaOBE/IQk=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PA3PR04MB11153.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(7416014)(376014)(1800799024)(366016)(10067099003)(261102123227099003)(11063799006)(4143699003)(56012099006)(261022075727099003)(261021135927099003)(261028144727099003)(261026121527099003)(261026140227099003)(261021123027099003)(261022105027099003)(261021121427099003)(261009223027099003)(22082099003)(18002099003)(6133799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ODdHOWc5dUlNUGIwTXNSZ1MwVjczdDQ4S3U2RWVvNzMybDRtZnZhVUtJakdH?=
- =?utf-8?B?V1dHVHJ1ZWtmNitzdjBEUE1VbG9yK2FoWmxCbHZncDN5TDlJKzdGS0M2UXN6?=
- =?utf-8?B?VEV5UnF6UnU1VmZoK1AyZ0hxLzRXTGtBckhpVmphSlRXVmdXQ3JZcG13RnFM?=
- =?utf-8?B?My9HSS8yNHA5b0hYcEQ5dWpkM1BuMHU0L2x6dlZhblhoK2VMRzlZc3FUSmRh?=
- =?utf-8?B?Ym0rRFZxUjNmQUFiUk9MUTdFa1VkTmxkdlFzbHVRM083VVVBUHVPS0tIc3pK?=
- =?utf-8?B?c1ZpRHkyam1pNWVQaUxxUTZPNmxPQkdjY1VlL3UyUTV4bWUwK2c3WG9rNFUr?=
- =?utf-8?B?dXBLNmtwTnFEa2FvQk55R05IZzlMdC8xeWhwRDN2NmFSZkVzbUprMWNzSUhv?=
- =?utf-8?B?NzFTVWFja3hNN0Q2WHQyUlNHamF0MGVXV0xLOG83UG9sK0grVnNMY3FnOGVa?=
- =?utf-8?B?MDZ4NmQzcTN2aU80d0h4QVFQM3MwZ0JoYTl0c0pTT1FxUlpkbU5UMFh3NXRr?=
- =?utf-8?B?c0RDcG9Ha3Z1S3crUkduWGN4b2w0ZnQxdTBid3NTdjhiRGNCRUdlbEh1eVZX?=
- =?utf-8?B?N084aHFReVJkVU1COEJnWnVodXgwSUZiU3BFbGxUb0xNQlVLYzViaS9XOFRr?=
- =?utf-8?B?K0dqRnBhVzBzK2lWT1d2NERzR3dtdjVWUFFaR3Z3ZFlpNmIzcFFJdVlybkpN?=
- =?utf-8?B?bms1MlhTUnA1S2dlTWxBT1FkWU0xMWpvQW16OENwUHhCVGU4NlM3czZiVElh?=
- =?utf-8?B?RjZ0NDFBWVAyalcyMCsybVFQc25iMVdRUlE0Vm1KZEZEMDd0WEsvSTBndlZM?=
- =?utf-8?B?djVQY3M3Q2pWOGxYTW90NVBtYmtlejJsRTkwNDVGRTFHQURjOHIvZlN4UjJh?=
- =?utf-8?B?L1pxb3RuMVdIYlpHV1Avc3dmVzRoSWxpT1hpdlUwREdVWjZ2RXhxUzRZSWor?=
- =?utf-8?B?WDRkWFFqWmVoVVFQSlEvc0JESy9RU3VZT3hPRStKSGM5MmtpSXV6TVNScTF4?=
- =?utf-8?B?cmdsVzVxZndacVRCL3cyOWEvUnhzSi9IcWZ4bno2N0c3UlNWRndwUW01OTJz?=
- =?utf-8?B?Njh2emJXV29XVUtBYWZ0WDIyWVFXbGhGc2gzYzc2ZkJ5WXpmM0MvQnByeHlG?=
- =?utf-8?B?eVk3Ly8rY0dQaHpXTTVsemRPYmw1WUJJVUIrSy9aM2JYYWZPaHdjWE8vbVVR?=
- =?utf-8?B?ZkN5RkVEUUFjdUZnVlRGbmhyVWc2ak9tZUZ1K1hrL2JUdjVjUjZoeVc3S0ZI?=
- =?utf-8?B?NWlJOFBqOXAyYlc2VDJlMmM4TmM0VU9CRTZxcE1RN01HNThSQWtpTkV6MjlU?=
- =?utf-8?B?VXRrUTJiaGhBUDVhbmlMSnkyQXdWZFpxUFo2bkNIZHpISEU3QytOdTd6YkxF?=
- =?utf-8?B?WmpTUUUrc2hEWUhOeWQ3OHZwMXVYeEsyZUtya3JnZ284eVYvRmtJQzk2RFVS?=
- =?utf-8?B?TTVZdWlxeGN0Z1B3WWZVd1FweTB4enlhZUpsQmxnTE5UaXNjWXQ5M2E3S2V6?=
- =?utf-8?B?SU5jOVN6U3RDazZWemJVSU1VVjZqbDBHVlJkejZ1NlJFdkpDU1l6WWViQjJS?=
- =?utf-8?B?UjNyc1JFc1l0WG96R0xLNWRhK0pPV3gxYkFHRHhWeWFBWkpqSFZoQ0UxUGFE?=
- =?utf-8?B?Yk5RQXZkTmRGOW9rbmV6NkdQMnczWmxXUGFibURmTWw0YnY3WUVKYUxCTVlZ?=
- =?utf-8?B?WlArL3VqQXpSNVJYY0VzTVNJaWVjdG5NcGpoRU1Nb0VTMzczcmlVbmdSZDZl?=
- =?utf-8?B?RVp2TGtyUUFkVWV2OVpyU291cnVFc1hDZzhSdlNDTmJvZ293L0NQMDFDekJR?=
- =?utf-8?B?aFplbFdVWDRzOHYzVXZPckR6NklMMXUvM3NnMFYxbkVod3M0U3NzMUN2d1Vk?=
- =?utf-8?B?TkZDRGJlY2ZXMzhUTlNSRjIwM3didjYvSjdJaDdwZnVUKzkyUEtmblhPSmtQ?=
- =?utf-8?B?ZDgzZXdaS1R0R2dKc0U4dTFmWlYvdmV6MUdzaGFlUWZPVjRKdURPcVZFSGVj?=
- =?utf-8?B?T3F2S0VNcnk5RlVBVmNEL24wRlpTZ1RucjIvaXoxcXNveFRzdkpGMVJDckk1?=
- =?utf-8?B?ZkVwWVd4VFFjRmxsVmdwcEhVZi82dDRpUmxHZStXSy9PemFpRVVZSVFUYUpo?=
- =?utf-8?B?Z2ZPN1JWMGxDaEFlemVNdEhtNmVsZU9jNStYWDJ2cWZlQTNFekl2NkFFYThi?=
- =?utf-8?B?RmlnMHFJZmdMMEtHTHc5TG1TL0w2MDlIY21ZQTg4VkJUNk91ZlZteGJsNUph?=
- =?utf-8?B?Mzk4anQvcHpJdjY1MVhSN1N6alY2Q0tTd1F4MHlzVHVhcFJtREk0cU1sSUwv?=
- =?utf-8?B?Q3lrSEdYN1JOL0dnNzlPZWNJSVJqL3BMclZqaUtpTWM2L3BkRFFtUT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 60d36972-1aec-4601-f244-08df41b712b2
-X-MS-Exchange-CrossTenant-AuthSource: PA3PR04MB11153.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2026 18:51:06.0893 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EqKO3nCNnzdz27RokGE1GKvh5Q4JagTKRNBvot/h9moUCWbCSTpSPo2FmjR9nw3/hozZx0i9sEqTXBnN7lUhnGxK53QiLLErGs44UXOt3KI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB6919
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <au4CuFTPqdet6Vir@MON-LT-C78453.mchp-main.com>
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -209,47 +145,160 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-20.9 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Dario,
+On Fri, Nov 06, 2026 at 11:39:20AM -0500, Charles Perry wrote:
+> On Mon, Nov 02, 2026 at 11:11:57PM +0800, Leo Liang wrote:
+> > On Wed, Oct 14, 2026 at 10:17:08AM -0400, Charles Perry wrote:
+> > > The RISC-V Platform Management Interface (RPMI) defines a service group
+> > > for control and monitoring of clocks [1]. This can be exposed as a
+> > > UCLASS_CLK driver.
+> > > 
+> > > [1]: https://github.com/riscv-non-isa/riscv-rpmi (chapter 4.8)
+> > > 
+> > > Signed-off-by: Charles Perry <charles.perry@microchip.com>
+> > > ---
+> > > Changes in v4: None
+> > > Changes in v3: None
+> > > 
+> > > Changes in v2: (from Yao Zi review)
+> > >  - Reorder headers
+> > >  - Don't null check pointers before free()
+> > >  - Remove transition_latency from struct rpmi_clk_def as its unused
+> > >  - Simplify last return path of _rpmi_clk_enable_disable()
+> > >  - Move the call to _rpmi_clk_get_rate() from _rpmi_clk_set_rate() to
+> > >    rpmi_clk_set_rate()
+> > > ---
+> > >  MAINTAINERS            |   1 +
+> > >  drivers/clk/Kconfig    |   7 +
+> > >  drivers/clk/Makefile   |   1 +
+> > >  drivers/clk/clk_rpmi.c | 344 +++++++++++++++++++++++++++++++++++++++++++++++++
+> > >  include/rpmi_proto.h   |  39 ++++++
+> > >  5 files changed, 392 insertions(+)
+> > > 
+> > > ...
+> > >
+> > > +config CLK_RPMI
+> > > +	bool "Enable RPMI clock driver"
+> > > +	depends on CLK && RPMI_FIRMWARE
+> > > +	help
+> > > +	  Enable this option if you want to support clock devices exposed
+> > > +	  by RISC-V Platform Management Interface (RPMI).
+> > > +
+> > >  config SANDBOX_CLK_CCF
+> > >  	bool "Sandbox Common Clock Framework [CCF] support"
+> > >  	depends on SANDBOX
+> > > diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+> > > index 4b241a9240ac..9e19e6f6d845 100644
+> > > --- a/drivers/clk/Makefile
+> > > +++ b/drivers/clk/Makefile
+> > > @@ -46,6 +46,7 @@ obj-$(CONFIG_CLK_OWL) += owl/
+> > >  obj-$(CONFIG_CLK_QCOM) += qcom/
+> > >  obj-$(CONFIG_CLK_RENESAS) += renesas/
+> > >  obj-$(CONFIG_$(PHASE_)CLK_RS9_PCIE) += clk-renesas-pcie.o
+> > > +obj-$(CONFIG_CLK_RPMI) += clk_rpmi.o
+> > 
+> > Should we add $(PHASE_) as well, otherwise, the platform that uses
+> > SPL and CLK_RPMI could fail to link with the rpmi_uclass.c API.
 
-On 11/13/26 6:25 PM, Dario Binacchi wrote:
-> Display the STMicroelectronics logo with features VIDEO_LOGO and
-> SPLASH_SCREEN on STM32MP25 boards.
+My last reply wasn't too helpful. I just threw another problem at you.
+
+I did a bit of testing with RPMI and SPL and here's what I found:
+
+We don't need to add a $(PHASE_) to CONFIG_CLK_RPMI because
+CONFIG_SPL_CLK can act as the switch for enabling or not the rpmi
+clock driver in SPL.
+
+For the same reason, none of the drivers in drivers/firmware/rpmi need a
+$(PHASE_) because CONFIG_SPL_FIRMWARE act as the switch to put
+firmware drivers in SPL.
+
+I did however found that SPL has linker errors if the MPXY driver is
+enabled in u-boot proper and CONFIG_SPL_FIRMWARE=y. This can be fixed by
+adding the following lines around rpmi-sbi-mpxy:
+
+ifeq ($(CONFIG_$(PHASE_)RISCV_SMODE),y)
+obj-$(CONFIG_RPMI_SBI_MPXY) += rpmi-sbi-mpxy.o
+endif
+
+which results in adding the MPXY driver in SPL only if SPL is in S-mode and
+CONFIG_SPL_FIRMWARE=y.
+
 > 
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> Hello Leo,
 > 
-> ---
+> Yes, we can add a $(PHASE_) here and probably one in
+> drivers/firmware/rpmi/Makefile for CONFIG_RPMI_SHMEM to get RPMI running on
+> SPL but there's another issue that we will run into.
 > 
->   MAINTAINERS                           |   1 +
->   configs/stm32mp25_defconfig           |   7 +++++++
->   include/configs/stm32mp25_st_common.h |   4 +++-
->   tools/logos/stm32mp2.bmp              | Bin 0 -> 7802 bytes
->   4 files changed, 11 insertions(+), 1 deletion(-)
->   create mode 100644 tools/logos/stm32mp2.bmp
+> You might have noticed that I need to use two different device tree, one
+> for M-mode where the clock-controller node mbox property points to the RPMI
+> shmem node and one for S-mode where clock-controller points to the RPMI
+> mpxy node. If we enable RPMI in SPL, it means that we want to do some RPMI
+> accesses from M-mode using the shmem driver, boot OpenSBI, then u-boot
+> proper in S-mode and do some more RPMI accesses using MPXY this time around.
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 3b38ffee2886..fd0ea1b8c633 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -689,6 +689,7 @@ S:	Maintained
->   F:	doc/board/st/
->   F:	drivers/rng/optee_rng.c
->   F:	tools/logos/st.bmp
-> +F:	tools/logos/stm32mp2.bmp
+> This can be solved by using two device tree, one for SPL and one for u-boot
+> proper but I don't know if this is the reference solution RISCV wants to
+> provide to this problem.
+> 
+> Another solution would be to always use the S-mode bindings and add some
+> logic to rpmi_get_by_index() to figure out the correct mailbox controller.
+> As a refresher, the S-mode bindings will look like this:
+> 
+>     rpmi_shmem_mbox: mailbox@10080000 {
+>         compatible = "riscv,rpmi-shmem-mbox";
+>         reg = <0x10080000 0x10000>,
+>               <0x10090000 0x10000>;
+>         reg-names = "a2p-req", "p2a-ack";
+>         riscv,slot-size = <64>;
+>         #mbox-cells = <1>;
+>     };
+> 
+>     clock-service {
+>         compatible = "riscv,rpmi-mpxy-clock";
+>         mboxes = <&rpmi_shmem_mbox 0x8>;
+>         riscv,sbi-mpxy-channel-id = <0x1000>;
+>     };
+> 
+>     mpxy_mbox: mailbox {
+>           compatible = "riscv,sbi-mpxy-mbox";
+>           #mbox-cells = <2>;
+>     };
+> 
+>     clock-controller {
+>         compatible = "riscv,rpmi-clock";
+>         mboxes = <&mpxy_mbox 0x1000 0x0>;
+>         #clock-cells = <1>;
+>     };
+> 
+> Looking at SCMI, I don't think they have a solution to that problem either
+> because the dt bindings [1] dictates how the firmware is being accessed and
+> there's no sign of SPL support (no $(PHASE_)) in drivers/firmware/scmi.
+> 
+> [1]: https://elixir.bootlin.com/linux/v7.3.1/source/Documentation/devicetree/bindings/firmware/arm,scmi.yaml#L417
+> 
+> > 
+> > >  obj-$(CONFIG_$(PHASE_)CLK_SCMI) += clk_scmi.o
+> > >  obj-$(CONFIG_CLK_SIFIVE) += sifive/
+> > >  obj-$(CONFIG_CLK_SOPHGO) += sophgo/
+> > >
+> > > ...
+> > >
+> > 
+> > Best regards,
+> > Leo
+> 
+> -- 
+> Thanks,
+> Charles
 
-issue: redundant
-
-Isn't that already covered by the N: stm32 below?
-
-./scripts/get_maintainer.pl -f tools/logos/stm32mp2.bmp
-seems to be returning what I would be expecting.
-
-Cheers,
-Quentin
+-- 
+Thanks,
+Charles
