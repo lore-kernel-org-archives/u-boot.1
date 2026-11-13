@@ -1,151 +1,152 @@
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A4F7606A32D
-	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 15:26:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0EE08606A323
+	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 15:26:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=KjKDv3h1;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=VEOWO4zK
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=Y3ruBmZ8;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=DH/LiZ3v
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3C4D860634;
-	Fri, 13 Nov 2026 15:26:04 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D85BB40955;
+	Fri, 13 Nov 2026 15:26:05 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id b5i0jK4I99sX; Fri, 13 Nov 2026 15:26:03 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 4CEDE605F4
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794583563;
-	b=BYKwQumri9SZ9xhOxOCoyFQEHF+ZpyTJqp3vb9gt2HGg/d726LR7Rjb4LSUE8T4gjQqI
-	 XgOZa9OfibkooCPOjBWG9CamIN58tpk/KZkY/eek2hfXJIFiQJLf35fVsjWRS+tCtI+40
-	 FbjyE6YEAwgNFALF2MW6Gjt4npd3NkrJL74Yl0M79RbnhbFhVwOHx0XZWcplSKqpqbumt
-	 JNWNOnP8NMwuZ3LZZxOKP6DvWoGX4j5qzNAmxOX4Qk3vxULDHGVZB/ZOLb8IL1Xiu5pWo
-	 As0Jl1MHRw3JZxnu1yePtApjPLjTQDnvfVts2J4R8OZGWvYzENUDvbjdH7bcUFA21+A==
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 5sJ-2OF2i4gU; Fri, 13 Nov 2026 15:26:05 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 17A734095B
+Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794583565;
+	b=YL+mHL5BSx3IUk83tIj1ToJ555+jFXGS+GoMOhsFqf18v4iMJp+e/3YcO6GIFt82Rv3v
+	 QzZ7eTrOYJXJTMk6Z7zEM9QnfgKHimk6NMdx5vxZL0+6Ei6M/Z/TITg7RX0VFC9JyR6rQ
+	 9DVSoaY3DKsNcODAGBY9tgh3LHCVJx6LKX6Xi76yqQomxvo02gIJVNnfSsx9YjDcvPoTh
+	 Xuc3NPuVyI6UAfK+ymxde2/qJpCWTz0he3DWn7aF0+kjle5JjZXEjOSMrBzz3LiZstDde
+	 dvMPv/MOghpfVn90YyA6HWYYfygwDehqYdWEhZZ9yltngONov93s43a/p0HsW2IkMzw==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794583563;
+	c=relaxed/relaxed; t=1794583565;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
-	 Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-BeenThere:
-	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=062xYmUtf5CABsiIpY3DEFPzHRGBErLg0BVSRLGWaFM=;
-	b=FUYKiItlHg05BmRLwM3l5frY5OXs14hykH7ipR4LA4D7JbQIBzIcvDyoclPHlPgWzS3U
-	 +AqPCeVs/ahhfhB7KKeRKrNzTP02Tpf4zExI25x1Rb5rIqjBt+hzc2rGJ+wnSgJjb4r1T
-	 y/ISy/LOC25xDCmzCapPRA64MXvnkW2Yns82ahINvw04KlE/QcxTTUaG0OGPogsbjDxFs
-	 WaYZ31AmNN0OBLqqsbKe2qfrguM14cZMIiZZk7Isg8fSe/Q9v5fc7uSY0EeVx92YY82xN
-	 JQaPk9AdkamJfGVt/vPw1BFsMCqR33UGLZzwvYA0YaImZa9Ohsmf0pZqDXuefLF0j3w==
-ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+	 References:In-Reply-To:To:Cc:X-Mailer:X-BeenThere:X-Mailman-Version:
+	 Precedence:List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
+	 List-Subscribe:Errors-To;
+	bh=SDX1RhfJKx1mNklf3U+vPdf1jd6gQ04OQDemYE2iVAs=;
+	b=K6FuA9MCIED9aKtQqMNwxu5HJls09X5cQH9tsOs9AA/qQ3opUo6N98m0tub+CzSTCxWL
+	 lvn58+hYVqclVWYLbT/lJy9KF8Tm08Kn+wLH5EC+oEZfLaAUNP7DO92dhz/FNtv2fpaGv
+	 /y9VoeTjXp0WkS9S052lNtIAmhGpV6MSdjCcOLZr3/vwOk4EKKC7pZVKlrQ6wMj5nhpJu
+	 CNM4kepdtXFDJKLmbOamYgCNrxjvDHEbTjL+rMEfvELqT0x7FMcrsoHTUk34Ji/Mltf5D
+	 MgoK5m3Tp1txdQ3++7TdWErlpqRjGfEXli85rVicVTtJsNyw18eKIDX2CZRzNpoPK1Q==
+ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794583563;
-	bh=062xYmUtf5CABsiIpY3DEFPzHRGBErLg0BVSRLGWaFM=;
-	h=From:Subject:Date:To:Cc:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=KjKDv3h1xu+QPI/U65dDjIGCL/0p2seNQRWZdEzZ6dY71B5riW7qXj1ObbC+b8bc7
-	 T12GRlgE1rH3Obc3GlmYV8J4GG8BoHSIjOCGNxPVJAH4w8MgqVdDH+gKrRQZgpc7M6
-	 FYWjUKFWgDIeLX7DS7ue/XCVjaMlR8N/Kbq53EFTEKE9xBG2HowkRUlSyCXV+5mHz2
-	 8n6U2iSvbPHwu0ULOa6zN6fQNUNnZLrE6s2ZMDmLVeq3TZTlCkea2uj5P1xakiZV0Q
-	 kC2isjR5FmVjqlvz1LKI62a79a01ZsGfaseh2Z9sA/yu/Zki2AGva/jp5l+gy2TmeT
-	 Gc34klsxeAdUA==
+	d=lists.u-boot-project.org; s=default; t=1794583565;
+	bh=SDX1RhfJKx1mNklf3U+vPdf1jd6gQ04OQDemYE2iVAs=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Y3ruBmZ8fN0cx8oaKwH5Rch69aA5C6jLovbBI6OphIZXA4Z0GHY0wJtQiycW5ojIg
+	 EeLRNocsUEO8F5w/dWEFb/SPsbwWXG/h4wpHXzcjTh9i8n+vEzM9Ljb+Rx5lTsZJUS
+	 Ekx56Ym0iN1AIrgMcy3Rl2z4VxXpJdhQltnLrXsfg+jjSk2gZ5v9sJ+sejs2t8uuCV
+	 If7dXM3c0wCtvzjUzSK1lWK7g2duIIH9Af9N6X1jJMDGN6yaN+ji11zazLwF1CHqUf
+	 rmrjjKnGE+dPfe9UMT3iRjvYMQmRRlyTXRClOaOxAokq9u9Wy/gU6MtMSrsIYGs0jA
+	 Ukdhj2KpYw0zQ==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4CEDE605F4;
-	Fri, 13 Nov 2026 15:26:03 +0000 (UTC)
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists1.osuosl.org (Postfix) with ESMTP id C5D6928C
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 15:26:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 17A734095B;
+	Fri, 13 Nov 2026 15:26:05 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists1.osuosl.org (Postfix) with ESMTP id 2E6232FE
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 15:26:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id ABA7581163
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 15:26:01 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id 143C58112A
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 15:26:02 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fo8Bsh0tPG0w for <u-boot@lists.u-boot-project.org>;
- Fri, 13 Nov 2026 15:26:00 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 68AFA8112A
+ id CFNC72rbT7y2 for <u-boot@lists.u-boot-project.org>;
+ Fri, 13 Nov 2026 15:26:01 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 23CE28115C
 Authentication-Results: smtp1.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::330"
+ arc=none smtp.remote-ip="2a00:1450:4864:20::336"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::330; helo=mail-wm1-x330.google.com;
+ client-ip=2a00:1450:4864:20::336; helo=mail-wm1-x336.google.com;
  envelope-from=ccaione@baylibre.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp1.osuosl.org;
  dmarc=pass (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp1.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256
- header.s=google header.b=VEOWO4zK
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 68AFA8112A
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 15:25:59 +0000 (UTC)
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4a5087a5348so8723915e9.0
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 07:25:59 -0800 (PST)
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com
+ header.a=rsa-sha256 header.s=google header.b=DH/LiZ3v
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 23CE28115C
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 15:26:00 +0000 (UTC)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4b4571ff080so16897875e9.1
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 07:26:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=baylibre.com; s=google; t=1794583558; x=1795188358;
  darn=lists.u-boot-project.org; 
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=062xYmUtf5CABsiIpY3DEFPzHRGBErLg0BVSRLGWaFM=;
- b=VEOWO4zKUG3SeILAgHk8hXb8ctaClC0GcBaS5ATnWA+o3hi9n8ntDpDxKBr5NtMJ8K
- JwimTaPbEjIbZSqwSC4NUUUzfohyHTMhvnXYoqRyn+JJPoRAgrp7u1zDag0JwZU+s/As
- ucZakS1KwsXukR3Y/RKEb3bWCGo/f0MucMERgDaxWWgUg9+1OHFi7eGcWsnhVm28/Npd
- pvL6PjKHguXrambBk1oxeqy3Mlqwik1vIqaLUWmM+afqppF/Axgv3tCqo2kOgQCSFKVI
- /U8ObGkGOR1J5D/5/iXRDpvlovelYzez7b2aE47k7tDBVPKFvATabAbfzjjKBmooP4b9
- IpXQ==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=SDX1RhfJKx1mNklf3U+vPdf1jd6gQ04OQDemYE2iVAs=;
+ b=DH/LiZ3vgjMM8FDYJUHxECW9E7KcwiddRW/i35BZ5jNaeOqCd7QwxYBcEIAviaq51l
+ INhzrok27uqt/kpl+Qwi5i+5xK0ZR2ybZskFKqriHr7Yr0TlXHFoxtG4nGelanwdaLCt
+ huB1zQwhtanJMi/PC+QX1BWTMPzjw3HwGImWLFfX8BgqmO5+9HzTgCb+V324uFOTP0Xc
+ Neuvz6iziPNO8QgqAbbJj1PTUi677igdVnVPJX207qt15sD83qcITveOsxbtHiJFm3AY
+ b+YfL5ifnIf6MomXG02WPZH+MYXyiGsO8qew9o4sDdRFj4Wo9yGzSnr5fBZiVOwhoU6R
+ zjBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20260707; t=1794583558; x=1795188358;
- h=cc:to:content-transfer-encoding:content-type:mime-version
- :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=062xYmUtf5CABsiIpY3DEFPzHRGBErLg0BVSRLGWaFM=;
- b=s6JRoBcumsUPo735XvRcP5trwGpGHwII7thyrjQyFKrTOMzxyQSoihEHmdByzyvmYO
- 4OwD1v2U0IkYewDQ46k1yh5nQrxb701HouIEFhuCNs3wDgkh79NZg2skcDaZ5YiD1GkJ
- /vRaGyEeKT89Xp2JpL1LFMisgDhplBexOY1tGXh+qdNlu7EAGKic7cCDbAS2YnX+FKlf
- BvXcEeq2loXEZoFjUzK2QzrewSfnw30CMQi9V5ov5l6Mr6ETCGPgIUKtfr37tyk9VrS7
- 1RArSPhV5vDMX8ZD2roa/T0dk5r2Wknt6J4AwiqlB0qXsosZd7iA1TaAnoxjap1NUjbm
- Gmbw==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :content-type:mime-version:subject:date:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=SDX1RhfJKx1mNklf3U+vPdf1jd6gQ04OQDemYE2iVAs=;
+ b=YiWWAn1yF6pv5DcvgC8fjHoiTjlUueWYQBtoe/kZVKxXfPNMc4rf6tLpG/TRwHH68h
+ DjF7kU2+EOAA2kpbdCGAgaG5PvRL6qI8ViAjtq3oDvKmvL1XZEfE7fJGiAN2i4clTVkH
+ fntV0pFe6l8YaemcZfpBUkditpybHjXxdNFZzAwec5GMZwCx0FZluPDRTwHyBREIN8hr
+ JNSlmIzMmewI705F6/tESdeMpYVaCzRNlrAvK363dCvHnsTcgkIjoyyjgzijgLoTdsbT
+ 7MqOdAru+RQYR16cPnDytRecJV8MGkM+x/XzkkWC1aUtDmc1wV0cFSOseX+xWHqQNOkw
+ PhuA==
 X-Forwarded-Encrypted: i=1;
- AL+hErFsRI9USCktm2fUhYvFLYY++m59rGZsuRx0D6RCo4IZ9NitVwe7idkFE1mMqPZzpjs84KaXEJc=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z+p/uHTIvhPO58j3d+K/jduNz42e0qseAuSwYp2BN+GvEqMJ5YY
- o5gD8fEApRfwwxOFFhuAoA9BmNk1NwzN5aUiUTmCrA8AivyUynCmpzhS+t3wS3jaN6s=
-X-Gm-Gg: AYBFou1FrLkzU4nAUulUmRBC1XnOPpNvWdu3Ydw39Os8cCjxBh/Fl+FXGBIR2y5lMbQ
- 1pTKqt+MGOHKrZpvKffhQ5bcnHeXyk2hi5DeQIRsYu+klLLblgHZhQGZlmvjJGEqXdcas4IAW/w
- IJNsWPLQxpYq4XSD/TzZfBoARAlJESBraXZJ05Rz6F682U+sEku3qFpL+muELkYxCdkiSb5dgPj
- oHUN/bPHXJ4ygJFPQmL1NVXUwugGDJQeXcBSKn7QVte7WShs48WC6LQWsXnMKZyu9Nkyix61KmK
- kFEmtM0Vna0WXsoZhml992wFinr0fZie4lP//a1KgFXws7l1MWGRoDL27KhXVrAfWoF+0Cgzgdd
- bUjOUyav6aqXoggAs6dXoIaPuTG1IA06vPQnBAmnp/rDd8wNvQiy56RKLFx8XINscUTHp/6fAjj
- 7TKu/Qnrn3fwHAyyhuw3FHppPhOI2SXd0a3sQoWEhgVavtd8txwio2iKUB3r3pJgbjCNH7DAK3E
- AXFSbMmyr+mGZ34NQdDr++WHVTLQb2uSy0LtpDB8rme8sxLNn0IoBMCZ1dX9eutTs2zWG2iip9V
- M6DXYf4Jjnj2z/oaD8NZodpsH/JWAdsCUm1b7hh3al5PQI8fOzMDjaYtxxL4hhLoNR2BTqvuanv
- e30IjwazMz/9JCDh5UG/7VD/7USXoCfp7GfBVrVpKHxcVpQ==
-X-Received: by 2002:a05:600c:548b:b0:4a2:1364:252b with SMTP id
- 5b1f17b1804b1-4bb55ab07c6mr60598905e9.35.1794583557287; 
- Fri, 13 Nov 2026 07:25:57 -0800 (PST)
+ AL+hErEOzO1qXjcn5wiuhzxab05hS4hLogRifZ9/9+aHYTUGLfT/zVQO46o2NWpEOPgDgmEOLXaDfac=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z9VFb5MrMjZuML8XII29Vl6niusRWgFSuvnOSg6Vg9tOgvTEJI4
+ uaWtKC+gr1f1CptsYGSWIqNPBRsR0YLklD10syMkcVzmSTTFGGROBtsx98obmiW8/LBl9bla+aO
+ fPCHU
+X-Gm-Gg: AYBFou0awCSRhR2ajnhSZlACPpzXyV2Bno/6YOTu2AZUoEF0ZPW2hG/KGDuhHyIaSVC
+ /31ipCRBLYiHOKBxqDat6+B7gg9nOQon5kpTDnGnpjGSFCdGiheHTIltE1EImYR8JrOWxHYHfqp
+ H37kxyhpSk7KQhOOyascQNLQgWuWXDmdusqEwQwSGmkOEQ2FWbAl+T6n+59JFiexgi1eUQ2egQf
+ F1UckKQ9wo70JgCRQIMLP/WPqKyp7q55MNWgdATLnMPGRqUi+KqsRkEfksCndxPRqeWYJNkp5so
+ BXtyfXHCEEgl5V/X7jhBntUABRVuWVV9BzZQxtF6w2j1dSH+SjetaVu1J8beS3TbJ85WLAevW51
+ 8lHaPhkqNCyf7CZzWuAjcQPKqU0q7ttCS6oc8nzdIjY3Dwq0QMpKN2RYY99rCtWx/JEQTxUePKO
+ KsKZFFXCdMxKV4qIkDNJCvuFVd3aBADDJEGqcLmlYMtLaYa+HpLmgydbFwvvtP2kCTRokAbhNyj
+ YzCSkjtvIHQUHBgyV9iNZejoJ5afYZQTbvKLqJKpzj0ivhTi2np1A27qYQmPAI8ecukzlP27SpV
+ /aLJR2SNuYCF2w2W+1199NQOA7Fojzz4nXZWYT6YTSKLITaqB4bK8p8U1d/z/xAhpcXGXD7nafs
+ /omjRGWT+dKw9VRKKI3fFONL8+ALdycbnh2eomLs5kzhapw==
+X-Received: by 2002:a05:600c:6309:b0:4a2:5267:3cd4 with SMTP id
+ 5b1f17b1804b1-4bb559f3bb9mr59318605e9.3.1794583558347; 
+ Fri, 13 Nov 2026 07:25:58 -0800 (PST)
 Received: from macbook.homenet.telecomitalia.it
  (host-95-246-144-141.retail.telecomitalia.it. [95.246.144.141])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb55ace535sm70042255e9.6.2026.11.13.07.25.56
+ 5b1f17b1804b1-4bb55ace535sm70042255e9.6.2026.11.13.07.25.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Nov 2026 07:25:56 -0800 (PST)
+ Fri, 13 Nov 2026 07:25:57 -0800 (PST)
 From: Carlo Caione <ccaione@baylibre.com>
-Subject: [PATCH v3 0/5] Enable USB host support on the Genio 510 and 700 EVKs
-Date: Fri, 13 Nov 2026 16:25:36 +0100
-Message-Id: <20261113-ccaione-upstream-mtk-g700-usb-v3-0-78b554604bbb@baylibre.com>
+Date: Fri, 13 Nov 2026 16:25:37 +0100
+Subject: [PATCH v3 1/5] power: pmic: mtk-pwrap: honor fallback compatible
+ strings
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAA/43OzQ6CMBAE4FcxPbtmaYGiJ9/DeGjLAlX5SQtEQ
- nh3Cx5MvOhxksk3MzNPzpJnp93MHI3W27YJQex3zFSqKQlsHjLjyNMI+RGMUaFCMHS+d6RqqPs
- 7lBIRBq9BCp5KLBCNilkwOkeFfW7+5frOftA3Mv2Kro3K+r5103ZgjNbev1tjBAipxjxXPNEks
- rNW08NqRwfT1mydG/kHjDD+BfIA6iw3aaJjKaT4ApdleQE1tVHQMAEAAA==
-X-Change-ID: 20261029-ccaione-upstream-mtk-g700-usb-732670f00ca4
+Message-Id: <20261113-ccaione-upstream-mtk-g700-usb-v3-1-78b554604bbb@baylibre.com>
+References: <20261113-ccaione-upstream-mtk-g700-usb-v3-0-78b554604bbb@baylibre.com>
+In-Reply-To: <20261113-ccaione-upstream-mtk-g700-usb-v3-0-78b554604bbb@baylibre.com>
 To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  u-boot@lists.u-boot-project.org
 Cc: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
@@ -170,63 +171,65 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-13.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Enable the USB-C PD host port on the MediaTek Genio 510 and 700 EVKs
-using the existing MTU3, xHCI and T-PHY drivers. Both boards share the
-same USB controller, PHY, onboard hub and connector wiring.
+The MT6365 device tree lists mediatek,mt6359 as a fallback, but slave
+selection compares only the first compatible string. Consequently the
+wrapper reports that no PMIC slave was found even though its existing
+MT6359 support matches the node.
 
-Two supporting changes are needed before enabling the boards: the PMIC
-wrapper must recognize fallback compatible strings, and the onboard-hub
-driver must initialize the TI TUSB8020B hub's power and reset controls.
-The remaining patches provide fixed-host settings in the shared U-Boot
-device tree and enable the required drivers in the MT8188 configuration
-fragment used by both boards.
+Use ofnode_device_is_compatible() to consider the full compatible list,
+as the regulator-binding path already does. This allows the Genio 510
+and 700 USB supplies to be resolved without changing the device tree's
+PMIC identity.
 
-This enables the USB-C PD port for normal boot. USB0 remains enabled as
-a peripheral in download-agent builds; the USB2 M.2/header controller
-remains disabled.
-
+Acked-by: Peng Fan <peng.fan@nxp.com>
+Reviewed-by: Julien Stephan <jstephan@baylibre.com>
+Signed-off-by: Carlo Caione <ccaione@baylibre.com>
 ---
-Changes in v3:
-- Rebase the complete series onto mediatek-staging at 60f6d41e23ad,
-  immediately before the V2 patches were applied.
-- Correct the reversed TUSB8020B speed comments in a standalone fix.
-- Explicitly enable USB0 in the download-agent override for both DAs.
-- Drop CONFIG_USB_XHCI_MTK; the host controller is handled by MTU3.
-- Select USB1 DRVVBUS on GPIO87 instead of driving VBUS as a GPIO.
-- Link to v2: https://patch.msgid.link/20261104-ccaione-upstream-mtk-g700-usb-v2-0-b8dc65b47373@baylibre.com
+ drivers/power/pmic/mtk-pwrap.c | 14 +++-----------
+ 1 file changed, 3 insertions(+), 11 deletions(-)
 
-Changes in v2:
-- Remove the redundant PMIC compatible-property lookup and pmic_name.
-- Update the MT6366 comment to retain only the regulator-support caveat.
-- Drop CONFIG_USB_MTU3_HOST, which is already selected by default.
-- Link to v1: https://patch.msgid.link/20261029-ccaione-upstream-mtk-g700-usb-v1-0-6b0dda25be38@baylibre.com
+diff --git a/drivers/power/pmic/mtk-pwrap.c b/drivers/power/pmic/mtk-pwrap.c
+index 468af1fba04..75dd9f743ec 100644
+--- a/drivers/power/pmic/mtk-pwrap.c
++++ b/drivers/power/pmic/mtk-pwrap.c
+@@ -672,9 +672,8 @@ static const struct udevice_id mtk_pmic_ids[] = {
+ 	{ .compatible = "mediatek,mt6357", .data = (ulong)&pmic_mt6357 },
+ 	{ .compatible = "mediatek,mt6359", .data = (ulong)&pmic_mt6359 },
+ 	/*
+-	 * REVISIT: Cooresponding regulator driver only supports MT6366 for
+-	 * now. We can change this to mediatek,mt6358 when the regulator driver
+-	 * is updated, but will also have to change ofnode_get_property() below.
++	 * REVISIT: The regulator driver only supports MT6366 for now.
++	 * Change this to mediatek,mt6358 when MT6358 support is added.
+ 	 */
+ 	{ .compatible = "mediatek,mt6366", .data = (ulong)&pmic_mt6358 },
+ 	{ }
+@@ -683,16 +682,9 @@ static const struct udevice_id mtk_pmic_ids[] = {
+ static int mtk_pwrap_find_slave(const struct pwrap_slv_type **slave, ofnode pmic_node)
+ {
+ 	const struct udevice_id *of_match = mtk_pmic_ids;
+-	const char *pmic_name;
+-
+-	pmic_name = ofnode_get_property(pmic_node, "compatible", NULL);
+-	if (!pmic_name) {
+-		log_err("%s: missing compatible property\n", __func__);
+-		return -EINVAL;
+-	}
+ 
+ 	while (of_match->compatible) {
+-		if (!strcmp(of_match->compatible, pmic_name)) {
++		if (ofnode_device_is_compatible(pmic_node, of_match->compatible)) {
+ 			*slave = (struct pwrap_slv_type *)of_match->data;
+ 			return 0;
+ 		}
 
----
-Carlo Caione (5):
-      power: pmic: mtk-pwrap: honor fallback compatible strings
-      usb: onboard-hub: add TI TUSB8020B power and reset support
-      usb: onboard-hub: fix the TUSB8020B speed comments
-      arm: dts: mediatek: configure Genio 510 and 700 USB-C hosts
-      configs: mt8188: enable USB host support
-
- arch/arm/dts/mt8370-genio-da-u-boot.dtsi     |  1 +
- arch/arm/dts/mt8390-genio-common-u-boot.dtsi | 20 ++++++++++++++++++++
- common/usb_onboard_hub.c                     | 12 ++++++++++++
- configs/mt8188.config                        | 13 +++++++++++++
- drivers/power/pmic/mtk-pwrap.c               | 14 +++-----------
- 5 files changed, 49 insertions(+), 11 deletions(-)
----
-base-commit: 60f6d41e23adb1fd52a3d0e9c9423803bf07e4e6
-change-id: 20261029-ccaione-upstream-mtk-g700-usb-732670f00ca4
-
-Best regards,
---  
-Carlo Caione <ccaione@baylibre.com>
+-- 
+2.56.0
 
