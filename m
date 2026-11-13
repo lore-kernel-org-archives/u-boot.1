@@ -2,28 +2,28 @@ Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D723606A31C
-	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 02:35:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D135606A327
+	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 02:35:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=D8ST5uxx;
-	dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=YQw8wAdn
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=AWLQrdSw;
+	dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org header.a=rsa-sha256 header.s=2025a header.b=g0hazs9T
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 767CD60F41;
-	Fri, 13 Nov 2026 02:35:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5C18660E47;
+	Fri, 13 Nov 2026 02:35:30 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id fVh9ogBcNaha; Fri, 13 Nov 2026 02:35:23 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org C844560F0C
+ id NmviesuGA1RR; Fri, 13 Nov 2026 02:35:27 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 378E860EE8
 Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794537287;
-	b=SCN4V3H3l1gMK81ukqDWESZxGQ1TMvRHQz6Jb5/SXXxJAWWszBaS4hyb2+kiUOQLl/2h
-	 PgbSaG8D6jmBHXdpSd01dI9YoAeQ1BT0fOruubuLR/HVuMuWmD2kXR+hqAnuVV8uCtVl+
-	 KnLcep2JlD0gnYxO2/6duSxj6CSeq1rjoL/2uX1i3TBdcltcGYLgdVZA+jCHFrq9XJ5vR
-	 thYs/zNhxT+6i0GfLsJxMaOMDhZ/weQAZO6Z1E5E7SI3NuVhtYU5Z1q665DccoZv0ZOPl
-	 IctyjVHFDebFoTyNc0Dzdct6RhaVQ9KyS9BEBexJwIoMcNokKKBIdu154E9kdFVdT7A==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794537291;
+	b=OULrjCC5aofNuYPLz7fY9tVTnHOR8r6Y/RQtwyFXvI6Gr7+jFTiaEa3GLiqp6KvYthuw
+	 NBWffsbcNteGWwcL7rdwq3ao/59xtB8Xsi/prXkBVmFglFxw/YGYTGvhUgERg03z5yqjv
+	 RNttDgxy2iUaZvtFoNu75AYP2Lr5F6eIoY7SxZBVGdp+25H3okoqP/PW8yh2gH6iSshc5
+	 QWYoCZmdl44tEApawOJEfRfJA+/iRs+ItWDjMEN5bD3YFtguJ5yNeFE3Mtv6gJfyyzUW+
+	 pCDa3a6h12XYCkwMdEFmWfqf6zHmyKJZCCdlQqOZY510yZplBMQMKW6ArmM+pDwsECg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794537287;
+	c=relaxed/relaxed; t=1794537291;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -32,78 +32,77 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 Content-Transfer-Encoding:X-BeenThere:X-Mailman-Version:Precedence:
 	 List-Id:List-Unsubscribe:List-Archive:List-Post:List-Help:
 	 List-Subscribe:Errors-To;
-	bh=X8rulxYsqdPT8sV6u2PDOl/7WI0LSM8/kD6whQtc/Q0=;
-	b=QZYXSB5hz522oBToWii7rNNxqBElVXeHozRDBP02MFCYNjhNnYzlXSSljGqQVuVJsw8q
-	 1wmLTldJBKwXxmWCOSfMqY4HwDKZi06M0P/tlZ2IGdauHfpqKSzzuGOe7o2LpC4WP1da9
-	 AtT2zas8A6+IUnvTZxN5X7x8nvHftkAKFRl/bBr6T12oto3fpNat2d+rh29bFa8IjTTyy
-	 PD9I4Gf2bXvPW0/EcXXnUQoTWAGxtngWlBJfuLaM0GAcFsPCEQ+2ScaJp48j8ZMBgUnj1
-	 tZKi5y+Fig9/9o8TR1cLMo1Q5GM8JbAM88/LYr8pCpvM/vgAOBWuCTlQroCe2po0K9g==
+	bh=akMArDNIUM7ntsI97nkDC6fd+j3UG8I5zWaFAUn4dpk=;
+	b=e+g87agsCAgTHNI4jbEt/ZMWgrdfQ7RGWxY0oGv3HQK/0ttPnPjGO7CVALHeDTO0Cm04
+	 BcvGAy0UTSKeDOlGE19StlFogUNofR4aE3oJmn8QjVLab1Wsap62+Sfw8+FBjseFrQWnI
+	 /rj9s+bH3t3pSDnrzXbD+2g2iEjofWaQIYJ+RH/+wqCKkCV2kKga274UIqeiCDbsNy4qQ
+	 MNQ9lEttnjXQSIuzimX4jOF7ExJhS6/EFyAv5MSRsGg1lhc5o8Asxl++p5tojh6r1wOqK
+	 qPL1daYtWHktdS2coQbntWoHwEZf58bKp+qXHXgch/qsw2Ek7aBDLLzj01nbbQztINQ==
 ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794537286;
-	bh=X8rulxYsqdPT8sV6u2PDOl/7WI0LSM8/kD6whQtc/Q0=;
+	d=lists.u-boot-project.org; s=default; t=1794537291;
+	bh=akMArDNIUM7ntsI97nkDC6fd+j3UG8I5zWaFAUn4dpk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=D8ST5uxx2dFrcilNur64CYO0wPmS7PglqcUzzlWtSybjwAqGisoIWmaNPaCBXgkF4
-	 sp8Jk1VOgfgt/nNPyqjwsOMqutXarcSN0Vi6V2Xb/PZ6C4C95ZUjFfHaEKv6HEm1Xg
-	 zvvGRmmhCVCetO9f6qD30coDpwj4JQK1YRoiL4hfVMgncmyBxAATEjeDGdKl34IoWl
-	 tf4zW1hkwb0lJNkLbFqS2j7tky75SLIOUxNJmOot9iWDF+KmVcYgLZmitujEAYn6Fe
-	 drG+X/KXZIqeCO2sZVkgpqgAzIYq7Xp9IciDFdtBRKP4rbkleqV6xaDAQlqyw+e10y
-	 dhO4K7D+8lEIw==
+	b=AWLQrdSwcUQlUHZMJg1L/AMli/fSTwkH/enYmMgR2ceBz8ISZycZbXVZxz+C3ztl2
+	 uWl8gh3M6n6qwHSajC6rbFqd0rAFjoE5D0i9gjy8qz2ZuTSLdJ/77sJR1sNJHO+InM
+	 IAdzJK6m3GOcg3FOylzXyn7rQCoS+hWf2z2J5udTmHHfW7IXfQlc358QiOB0lPhDF1
+	 598eAa20oMtAQHZ6DS+oAYFXAnGHeuyzymAGUB6jHBc2PjVnBgePGQo9CuH1YfIoDe
+	 Pie3KCNgvGJRTYxvV3vPszKlQ3ClX0sO++ChK44Uu+6RyemEfP7oQt95mBdLF1R32D
+	 xL+9IYxXW1rww==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C844560F0C;
-	Fri, 13 Nov 2026 02:34:46 +0000 (UTC)
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists1.osuosl.org (Postfix) with ESMTP id 08DE6F46
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:34:45 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 378E860EE8;
+	Fri, 13 Nov 2026 02:34:51 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists1.osuosl.org (Postfix) with ESMTP id 22D2A2FE
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:34:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id EF17040D7C
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:34:44 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 14083400E6
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:34:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9utZrZq03BMx for <u-boot@lists.u-boot-project.org>;
- Fri, 13 Nov 2026 02:34:43 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 7C47240D44
-Authentication-Results: smtp4.osuosl.org;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 1_U8bHm05697 for <u-boot@lists.u-boot-project.org>;
+ Fri, 13 Nov 2026 02:34:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org CB4DA40082
+Authentication-Results: smtp2.osuosl.org;
  arc=none smtp.remote-ip=119.15.109.137
 Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=119.15.109.137;
  helo=www.nmnhosting.com; envelope-from=alastair@d-silva.org;
  receiver=<UNKNOWN> 
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dmarc=pass (p=reject dis=none) header.from=d-silva.org
-Authentication-Results: smtp4.osuosl.org;
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=d-silva.org header.i=@d-silva.org
- header.a=rsa-sha256 header.s=2025a header.b=YQw8wAdn
+ header.a=rsa-sha256 header.s=2025a header.b=g0hazs9T
 Received: from www.nmnhosting.com (watt.d-silva.org [119.15.109.137])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7C47240D44
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:34:42 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTPS id CB4DA40082
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 02:34:48 +0000 (UTC)
 Received: from Hawking.lan (hawking.lan [10.0.1.4])
- by www.nmnhosting.com (Postfix) with ESMTP id E92F84C8C7;
- Fri, 13 Nov 2026 13:34:34 +1100 (AEDT)
+ by www.nmnhosting.com (Postfix) with ESMTP id 585CD4C8C5;
+ Fri, 13 Nov 2026 13:34:41 +1100 (AEDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=d-silva.org; s=2025a; 
- t=1794537275;
+ t=1794537281;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=X8rulxYsqdPT8sV6u2PDOl/7WI0LSM8/kD6whQtc/Q0=;
- b=YQw8wAdnbQX5qvGKtB1HhhgXobmAWzjlkmt2gdnbGOSDRAcWUQ4zkT5vzMcZ6tewJ+LXOA
- wFAKCBF90UKgdzMwCIeOqCNqAYRsSgcybZaMyKLV502H6yQmvbm+CvGiYgUt9pz57roFUl
- qVe3Iam5k1KBcEYRgRKU6KN26DrHcJCvB50q1Xp7ZUeCjt28WNmVNjqA01e2N3XPt8m1Ks
- kDPH/hkKM7gEXe7So9X4IZUJ4eR9AGoIC+CsHNzU1jQWaAVgIe0ECWEtxQv35Tfj1mQyel
- ActE9SMuDY2Vcd89kHIXhAMnTrpsVAlUXmcqiiR7b1nUjlesWjUGE1m+kxN0Sg==
-X-GPT-Reason: The message is classified as legitimate personal/professional
- correspondence. The sender's domain (d-silva.org) matches the
- recipient's domain (d-silva.org), and the content is a technical
- software patch description (Linux kernel/driver development) which
- is consistent with a professional developer's mailbox. There are
- no phishing indicators, no urgency/fear tactics, no suspicious URLs,
- and the "Signed-off-by" signature aligns with standard open-source
- development practices.
+ bh=akMArDNIUM7ntsI97nkDC6fd+j3UG8I5zWaFAUn4dpk=;
+ b=g0hazs9TUGGpZcvvlKH+4u6L6hYRv75rRDlw1lUrpBI6/55Y2wnTsBpd861kmADi3+o8PG
+ gSrsiAt3MbaNOCuQJWTKLiShqNLms4a0bIfZh8CDORw/b1NL5gFBqNn33ZBZU09nM9LIl5
+ WvUOOVZ/bDxEv4hZlF+1U0FpCbEC+N3N9swufyK4YK6TZ2EArdz/Jm/SVMs3sMD3h70pBU
+ C3ei8+6erXOV60caDnmltd3stj28HKi7NLXbimL6npSFCuf2f9BMiZddF+mCaxGTmtthwz
+ 6RPV/tR1s7FzyoQ88sDAEN/et3ufcGqGdnr72v85SLFzmtmqqBFOKpOaCk8g9w==
+X-GPT-Reason: This email is classified as legitimate personal/professional
+ correspondence. The content is a technical Linux kernel patch
+ description involving PCIe host controller drivers, which aligns
+ with the professional/technical context of the "alastair@d-silva.org" mailbox.
+ The sender identity (alastair@d-silva.org) perfectly matches the
+ From domain and the intended mailbox, and there are no signs of
+ marketing, phishing tactics, or malicious URLs.
 From: Alastair D'Silva <alastair@d-silva.org>
 To: u-boot@lists.u-boot-project.org
 Cc: Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>,
@@ -117,9 +116,10 @@ Cc: Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>,
  Enzo Adriano <enzo.adriano.code@gmail.com>,
  Junhui Liu <junhui.liu@pigmoral.tech>,
  Alastair D'Silva <alastair@d-silva.org>
-Subject: [PATCH 22/26] phy: sunxi: Add Allwinner A733 Cadence Combo PHY driver
-Date: Fri, 13 Nov 2026 13:32:32 +1100
-Message-ID: <20261113023236.569054-23-alastair@d-silva.org>
+Subject: [PATCH 23/26] pci: sunxi: Add Allwinner A733 DesignWare PCIe host
+ controller driver
+Date: Fri, 13 Nov 2026 13:32:33 +1100
+Message-ID: <20261113023236.569054-24-alastair@d-silva.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261113023236.569054-1-alastair@d-silva.org>
 References: <20261113023236.569054-1-alastair@d-silva.org>
@@ -142,190 +142,86 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add a UCLASS_PHY driver for the Allwinner A733 (sun60i) SerDes subsystem
-and Cadence Combo PHY 1 in PCIe mode, handling clock/reset enablement,
-analog tuning, and PLL lock polling.
+Add a DesignWare PCIe Root Complex driver (CONFIG_PCIE_DW_SUNXI) for
+the Allwinner A733 (sun60i) SoC, reusing pcie_dw_common for config
+space and outbound iATU programming while handling Allwinner LTSSM
+bringup, Combo PHY integration, PERST# sequencing, and 32-bit inbound
+DMA ATU setup.
 
 Signed-off-by: Alastair D'Silva <alastair@d-silva.org>
 ---
- arch/arm/include/asm/arch-sunxi/clock.h     |   1 +
- arch/arm/mach-sunxi/clock_sun50i_h6.c       |  68 +++++
- board/sunxi/board.c                         |   4 +
- drivers/clk/sunxi/clk_a733.c                |   6 +
- drivers/phy/allwinner/Kconfig               |   8 +
- drivers/phy/allwinner/Makefile              |   1 +
- drivers/phy/allwinner/phy-sun60i-combophy.c | 293 ++++++++++++++++++++
- 7 files changed, 381 insertions(+)
- create mode 100644 drivers/phy/allwinner/phy-sun60i-combophy.c
+ drivers/clk/sunxi/clk_a733.c |   4 +
+ drivers/pci/Kconfig          |  11 ++
+ drivers/pci/Makefile         |   1 +
+ drivers/pci/pcie_dw_sunxi.c  | 355 +++++++++++++++++++++++++++++++++++
+ 4 files changed, 371 insertions(+)
+ create mode 100644 drivers/pci/pcie_dw_sunxi.c
 
-diff --git a/arch/arm/include/asm/arch-sunxi/clock.h b/arch/arm/include/asm/arch-sunxi/clock.h
-index fcc8966cb0b..444870997d6 100644
---- a/arch/arm/include/asm/arch-sunxi/clock.h
-+++ b/arch/arm/include/asm/arch-sunxi/clock.h
-@@ -35,6 +35,7 @@ void clock_set_de_mod_clock(u32 *clk_cfg, unsigned int hz);
- void clock_init_safe(void);
- void clock_init_sec(void);
- void clock_init_uart(void);
-+void sunxi_a733_pcie_soc_init(void);
- #endif
- 
- #endif /* _SUNXI_CLOCK_H */
-diff --git a/arch/arm/mach-sunxi/clock_sun50i_h6.c b/arch/arm/mach-sunxi/clock_sun50i_h6.c
-index 517fdcb56ea..21ba3491919 100644
---- a/arch/arm/mach-sunxi/clock_sun50i_h6.c
-+++ b/arch/arm/mach-sunxi/clock_sun50i_h6.c
-@@ -331,3 +331,71 @@ unsigned int clock_get_pll6(void)
- 
- 	return 24000000U * n / m / div1 / div2;
- }
-+
-+#ifndef CONFIG_XPL_BUILD
-+#ifdef CONFIG_MACH_SUN60I_A733
-+#define A733_RTC_XO_CTRL1_OFF		0x016c
-+#define A733_RTC_XO_CLK_OUT_EN		(BIT(9) | BIT(8) | BIT(5) | BIT(4))
-+#define A733_CCU_MBUS_CLK_REG		0x0574
-+#define A733_CCU_MBUS_MAT_CLK_GATE_REG	0x0580
-+#define A733_CCU_MBUS_MAT_SERDES_EN	(BIT(31) | BIT(30) | BIT(25) | BIT(24))
-+#define A733_CCU_MBUS_SERDES_GATE_REG	0x0584
-+#define A733_CCU_MBUS_SERDES_CFG_REG	0x0588
-+#define A733_CCU_MBUS_CLK_CFG0_REG	0x058c
-+#define A733_CCU_MBUS_CLK_CFG1_REG	0x05b4
-+#define A733_CCU_PCIE_AXI_SLV_REG	0x1384
-+#define A733_CCU_SERDES_PHY_CFG_REG	0x13c0
-+#define A733_CCU_CM_PCIE0_MODE_REG	0x1b28
-+
-+#define A733_SYS_PLL_CTRL_REG		0x02001540UL
-+#define A733_SYS_PLL_BGR_REG		0x0200154cUL
-+#define A733_NSI_BASE			0x02020000UL
-+#define A733_NSI_PORT_STRIDE		0x200UL
-+#define A733_NSI_NUM_PORTS		16
-+#define A733_PCIE_ITS_AXI_REG		0x08868020UL
-+
-+/*
-+ * Configure SoC-level RTC DCXO feed, CCU muxes/dividers, MBUS/SYS_PLL gates,
-+ * PCIe ITS AXI bridge, and NSI QoS not yet modeled by U-Boot's gate-only
-+ * sunxi CCU/RTC/NSI drivers.
-+ */
-+void sunxi_a733_pcie_soc_init(void)
-+{
-+	void *const rtc = (void *)(ulong)SUNXI_RTC_BASE;
-+	void *const ccm = (void *)(ulong)SUNXI_CCM_BASE;
-+	int p;
-+
-+	/* Enable RTC DCXO clock feed to Combo PHY without clobbering siblings */
-+	setbits_le32(rtc + A733_RTC_XO_CTRL1_OFF, A733_RTC_XO_CLK_OUT_EN);
-+
-+	/* Configure PCIe/SerDes CCU muxes/dividers and MBUS/NSI gating */
-+	writel(0x82000000, ccm + A733_CCU_PCIE_AXI_SLV_REG); /* 400 MHz */
-+	writel(0x81000005, ccm + A733_CCU_SERDES_PHY_CFG_REG); /* 100 MHz */
-+	writel(0x00020001, ccm + A733_CCU_CM_PCIE0_MODE_REG);
-+	writel(0x00010002, ccm + A733_CCU_MBUS_CLK_REG);
-+	setbits_le32(ccm + A733_CCU_MBUS_MAT_CLK_GATE_REG,
-+		     A733_CCU_MBUS_MAT_SERDES_EN);
-+	writel(0x00010001, ccm + A733_CCU_MBUS_SERDES_GATE_REG);
-+	writel(0x81000000, ccm + A733_CCU_MBUS_SERDES_CFG_REG);
-+	setbits_le32(ccm + A733_CCU_MBUS_CLK_CFG0_REG, 0x00010007);
-+	setbits_le32(ccm + A733_CCU_MBUS_CLK_CFG1_REG, 0x00010007);
-+
-+	writel(0xc0000000, (void *)(ulong)A733_SYS_PLL_CTRL_REG);
-+	writel(0x00010001, (void *)(ulong)A733_SYS_PLL_BGR_REG);
-+
-+	/* Configure NSI interconnect QoS & bandwidth across ports 0..15 */
-+	for (p = 0; p < A733_NSI_NUM_PORTS; p++) {
-+		void *port = (void *)(ulong)(A733_NSI_BASE +
-+					     A733_NSI_PORT_STRIDE * p);
-+
-+		writel(0x00000001, port + 0x0c);
-+		writel(0x00000001, port + 0x18);
-+		writel(0x000003e8, port + 0x28);
-+		writel(0x000000ff, port + 0x2c);
-+		writel(0x00000001, port + 0xcc);
-+	}
-+
-+	writel(0x00ff00ff, (void *)(ulong)A733_PCIE_ITS_AXI_REG);
-+}
-+#endif
-+#endif
-diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-index 5a5229c7068..6b4140ace7d 100644
---- a/board/sunxi/board.c
-+++ b/board/sunxi/board.c
-@@ -235,6 +235,10 @@ int board_init(void)
- 
- 	eth_init_board();
- 
-+	if (IS_ENABLED(CONFIG_MACH_SUN60I_A733) &&
-+	    IS_ENABLED(CONFIG_PCIE_DW_SUNXI))
-+		sunxi_a733_pcie_soc_init();
-+
- 	return 0;
- }
- 
 diff --git a/drivers/clk/sunxi/clk_a733.c b/drivers/clk/sunxi/clk_a733.c
-index 5c942fd5d58..4b0aaa7ab2b 100644
+index 4b0aaa7ab2b..ffc3509bd5c 100644
 --- a/drivers/clk/sunxi/clk_a733.c
 +++ b/drivers/clk/sunxi/clk_a733.c
-@@ -20,6 +20,7 @@ static const struct ccu_clk_gate a733_gates[] = {
- 	[CLK_APB_UART]		= GATE_DUMMY,
- 
- 	[CLK_MBUS_GMAC0]	= GATE(0x05e4, BIT(11)),
-+	[CLK_MBUS_SERDES]	= GATE(0x0584, BIT(0)),
- 	[CLK_BUS_CE]		= GATE(0x0ac4, BIT(0)),
- 
- 	[CLK_MMC0]		= GATE(0x0d00, BIT(31)),
-@@ -71,6 +72,9 @@ static const struct ccu_clk_gate a733_gates[] = {
+@@ -72,6 +72,8 @@ static const struct ccu_clk_gate a733_gates[] = {
  	[CLK_BUS_OHCI1]		= GATE(0x130c, BIT(0)),
  	[CLK_BUS_EHCI1]		= GATE(0x130c, BIT(4)),
  
-+	[CLK_SERDES_PHY]	= GATE(0x13c0, BIT(31)),
-+	[CLK_AHB_SERDES]	= GATE(0x13c4, BIT(0)),
-+
- 	[CLK_GMAC0_PHY]		= GATE(0x1410, BIT(31)),
- 	[CLK_BUS_GMAC0]		= GATE(0x141c, BIT(0)),
- };
-@@ -120,6 +124,8 @@ static const struct ccu_reset a733_resets[] = {
++	[CLK_PCIE_AUX]		= GATE(0x1380, BIT(31)),
++	[CLK_PCIE_AXI_SLV]	= GATE(0x1384, BIT(31)),
+ 	[CLK_SERDES_PHY]	= GATE(0x13c0, BIT(31)),
+ 	[CLK_AHB_SERDES]	= GATE(0x13c4, BIT(0)),
+ 
+@@ -124,6 +126,8 @@ static const struct ccu_reset a733_resets[] = {
  	[RST_BUS_OHCI1]		= RESET(0x130c, BIT(16)),
  	[RST_BUS_EHCI1]		= RESET(0x130c, BIT(20)),
  
-+	[RST_BUS_SERDES]	= RESET(0x13c4, BIT(16)),
-+
++	[RST_BUS_PCIE]		= RESET(0x138c, BIT(16)),
++	[RST_BUS_PCIE_PWRUP]	= RESET(0x138c, BIT(17)),
+ 	[RST_BUS_SERDES]	= RESET(0x13c4, BIT(16)),
+ 
  	[RST_BUS_GMAC0]		= RESET(0x141c, BIT(16)),
- 	[RST_BUS_GMAC0_AXI]	= RESET(0x141c, BIT(17)),
- };
-diff --git a/drivers/phy/allwinner/Kconfig b/drivers/phy/allwinner/Kconfig
-index bb0bd8d5f81..a408634e35b 100644
---- a/drivers/phy/allwinner/Kconfig
-+++ b/drivers/phy/allwinner/Kconfig
-@@ -33,3 +33,11 @@ config PHY_SUN50I_USB3
- 	help
- 	  Enable this to support the USB3 transceiver that is part of
- 	  Allwinner sun50i SoCs.
-+
-+config PHY_SUN60I_COMBOPHY
-+	bool "Allwinner sun60i A733 Combo PHY driver"
-+	depends on MACH_SUN60I_A733
+diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
+index 86fafc5a3c7..ce5843c6b8e 100644
+--- a/drivers/pci/Kconfig
++++ b/drivers/pci/Kconfig
+@@ -411,6 +411,17 @@ config PCIE_ROCKCHIP
+ 	  Say Y here if you want to enable PCIe controller support on
+ 	  Rockchip SoCs.
+ 
++config PCIE_DW_SUNXI
++	bool "Allwinner A733 DesignWare PCIe controller"
++	depends on ARCH_SUNXI
++	select PCIE_DW_COMMON
++	select DM_GPIO
 +	select PHY
 +	help
-+	  Enable this to support the Cadence Combo PHY (PCIe / USB3)
-+	  on Allwinner sun60i (A733) SoCs.
-diff --git a/drivers/phy/allwinner/Makefile b/drivers/phy/allwinner/Makefile
-index f2b60ce1a64..84c653db53a 100644
---- a/drivers/phy/allwinner/Makefile
-+++ b/drivers/phy/allwinner/Makefile
-@@ -5,3 +5,4 @@
- 
- obj-$(CONFIG_PHY_SUN4I_USB)		+= phy-sun4i-usb.o
- obj-$(CONFIG_PHY_SUN50I_USB3)		+= phy-sun50i-usb3.o
-+obj-$(CONFIG_PHY_SUN60I_COMBOPHY)	+= phy-sun60i-combophy.o
-diff --git a/drivers/phy/allwinner/phy-sun60i-combophy.c b/drivers/phy/allwinner/phy-sun60i-combophy.c
++	  Enable support for the Synopsys DesignWare PCIe Root Complex
++	  controller found on Allwinner sun60i (A733) SoCs, including
++	  Gen3 link training and outbound/inbound iATU configuration.
++
+ config PCIE_DW_ROCKCHIP
+ 	bool "Rockchip DesignWare based PCIe controller"
+ 	depends on ARCH_ROCKCHIP
+diff --git a/drivers/pci/Makefile b/drivers/pci/Makefile
+index f839ea1d396..0657aec3ecd 100644
+--- a/drivers/pci/Makefile
++++ b/drivers/pci/Makefile
+@@ -42,6 +42,7 @@ obj-$(CONFIG_PCI_XILINX) += pcie_xilinx.o
+ obj-$(CONFIG_PCI_PHYTIUM) += pcie_phytium.o
+ obj-$(CONFIG_PCIE_DW_COMMON) += pcie_dw_common.o
+ obj-$(CONFIG_PCI_KEYSTONE) += pcie_dw_ti.o
++obj-$(CONFIG_PCIE_DW_SUNXI) += pcie_dw_sunxi.o
+ obj-$(CONFIG_PCIE_MEDIATEK) += pcie_mediatek.o
+ obj-$(CONFIG_PCIE_MEDIATEK_GEN3) += pcie_mediatek_gen3.o
+ obj-$(CONFIG_PCIE_ROCKCHIP) += pcie_rockchip.o
+diff --git a/drivers/pci/pcie_dw_sunxi.c b/drivers/pci/pcie_dw_sunxi.c
 new file mode 100644
-index 00000000000..0e3128ab0ed
+index 00000000000..c4f27cda15f
 --- /dev/null
-+++ b/drivers/phy/allwinner/phy-sun60i-combophy.c
-@@ -0,0 +1,293 @@
++++ b/drivers/pci/pcie_dw_sunxi.c
+@@ -0,0 +1,355 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Allwinner A733 (sun60i) Cadence Combo PHY driver
++ * Allwinner A733 DesignWare based PCIe host controller driver
 + *
 + * Copyright (c) 2026 Armbian Project
 + */
@@ -333,288 +229,350 @@ index 00000000000..0e3128ab0ed
 +#include <clk.h>
 +#include <dm.h>
 +#include <dm/device_compat.h>
-+#include <dt-bindings/phy/phy.h>
 +#include <generic-phy.h>
-+#include <linux/bitops.h>
-+#include <linux/iopoll.h>
++#include <pci.h>
++#include <power/regulator.h>
 +#include <reset.h>
++#include <asm/global_data.h>
 +#include <asm/io.h>
++#include <asm-generic/gpio.h>
++#include <linux/delay.h>
++#include <linux/iopoll.h>
 +
-+/* SerDes subsystem register offsets (relative to serdes base) */
-+#define SERDES_PCIE_BGR_REG		0x0004
-+#define SERDES_PCIE_BGR_DEASSERT	(BIT(18) | BIT(17) | BIT(16) | \
-+					 BIT(1) | BIT(0))
-+#define SERDES_CTRL0_REG		0x0010
-+#define SERDES_CTRL0_PCIE_EN		BIT(0)
-+#define SERDES_PCIE_APP_SUB_CTRL_REG	0x0020
-+#define SERDES_PCIE_APP_CLK_EN		BIT(0)
-+#define SERDES_CTRL1_REG		0x00f0
-+#define SERDES_CTRL1_PCIE_MODE		(BIT(29) | BIT(10))
-+#define SERDES_PCIE_ITS_TAGT_ADDR_REG	0x0220
-+#define SERDES_PCIE_ITS_TAGT_DEFAULT	0x00000345
-+#define SERDES_AXI2TO1_TH_REG		0x0300
-+#define SERDES_AXI2TO1_TH_DEFAULT	0x00ff00ff
-+#define SERDES_COMB1_PIPE_REG		0x6c44
-+#define SERDES_COMB1_PIPE_PCIE_SEL	BIT(0)
++#include "pcie_dw_common.h"
 +
-+/* Combo PHY1 Top register offsets (serdes base + 0x2000) */
-+#define COMBOPHY_TOP_OFFSET		0x2000
-+#define COMBOPHY_LINK_RST_REG		0x0000
-+#define COMBOPHY_LINK_RST_N		BIT(0)
-+#define COMBOPHY_CLK_CTRL_REG		0x0004
-+#define COMBOPHY_CLK_REF_EN		(BIT(24) | BIT(20) | BIT(0))
-+#define COMBOPHY_CLK_PIPE_OUT_EN	BIT(28)
-+#define COMBOPHY_LANE0_RST_REG		0x0100
-+#define COMBOPHY_LANE0_PCIE_RST_N	BIT(0)
-+#define COMBOPHY_PLL_STATUS_REG		0x0900
-+#define COMBOPHY_PLL_LOCK_BIT		BIT(0)
++DECLARE_GLOBAL_DATA_PTR;
 +
-+/* Combo PHY1 Analog register offsets */
-+#define COMBOPHY_ANALOG_TX_CTRL0	0x0098
-+#define COMBOPHY_ANALOG_TX_CTRL1	0x00a0
-+#define COMBOPHY_ANALOG_TX_CTRL2	0x00a8
-+#define COMBOPHY_ANALOG_TX_CTRL3	0x00d8
-+#define COMBOPHY_ANALOG_TX_IDLE_MODE	0x0002
-+#define COMBOPHY_ANALOG_TX_POST_PLL	0x0270
-+#define COMBOPHY_ANALOG_TX_EN_BIT	BIT(4)
-+#define COMBOPHY_ANALOG_EXT_OFFSET	0x18000
-+
-+struct sun60i_combophy_priv {
-+	void __iomem *serdes_base;
-+	void __iomem *top_base;
-+	void __iomem *phy_base;
++struct sunxi_pcie {
++	/* Must be first member of the struct */
++	struct pcie_dw dw;
++	void __iomem *app_base;
++	struct udevice *vpcie3v3;
++	struct phy phy;
 +	struct clk_bulk clks;
 +	struct reset_ctl_bulk rsts;
++	struct gpio_desc rst_gpio;
++	u32 gen;
++	u32 num_lanes;
 +};
 +
-+struct phy_reg_val {
-+	u32 off;
-+	u16 val;
-+};
++/* Allwinner PCIe application register offsets */
++#define PCIE_APP_CLK_CTRL		0x0800
++#define PCIE_APP_CLK_CTRL_DEFAULT	0x00a023f0
++#define PCIE_LTSSM_CTRL			0x0c00
++#define PCIE_DEVICE_TYPE_RC		BIT(6)
++#define PCIE_LINK_TRAINING		BIT(0)
++#define PCIE_LINK_STAT			0x0e0c
++#define SMLH_LINK_UP			BIT(0)
++#define RDLH_LINK_UP			BIT(1)
 +
-+/*
-+ * Vendor-characterized Cadence Combo PHY analog/PLL/CDR register tuning table
-+ * for PCIe Gen3 (8.0 GT/s) operation on Allwinner A733.
-+ */
-+static const struct phy_reg_val cphy_analog_regs[] = {
-+	{ 0x44, 0x1a },
-+	{ 0x54, 0x34 }, { 0x58, 0xda },
-+	{ 0x64, 0x34 }, { 0x68, 0xda },
-+	{ 0xc8, 0x82 }, { 0xca, 0x82 },
-+	{ 0xe8, 0x1a },
-+	{ 0x208, 0x20 }, { 0x20a, 0x7 },
-+	{ 0x218, 0x20 }, { 0x21a, 0x7 },
-+	{ 0x228, 0x30c }, { 0x22a, 0x7 },
-+	{ 0x248, 0x7 }, { 0x24a, 0x3 }, { 0x24c, 0xf }, { 0x250, 0x132 },
-+	{ 0x8180, 0x208 }, { 0x8184, 0x9c },
-+	{ 0x10088, 0x1a }, { 0x1008a, 0x82 },
-+	{ 0x10098, 0x1a }, { 0x1009a, 0x82 },
-+	{ 0x8246, 0xa28 },
-+	{ 0x128, 0x4 }, { 0x148, 0x4 }, { 0x1a8, 0x4 },
-+	{ 0x348, 0x509 }, { 0x368, 0x509 }, { 0x388, 0x509 },
-+	{ 0x34a, 0xf00 }, { 0x36a, 0xf00 }, { 0x38a, 0xf00 },
-+	{ 0x34c, 0xf08 }, { 0x36c, 0xf08 }, { 0x38c, 0xf08 },
-+	{ 0x120, 0x180 }, { 0x140, 0x133 }, { 0x1a0, 0x133 },
-+	{ 0x122, 0x9d8a }, { 0x142, 0xb13b }, { 0x1a2, 0xb13b },
-+	{ 0x124, 0x2 }, { 0x144, 0x2 }, { 0x1a4, 0x2 },
-+	{ 0x126, 0x102 }, { 0x146, 0xce }, { 0x1a6, 0xce },
-+	{ 0x340, 0x22 }, { 0x360, 0x22 }, { 0x380, 0x22 },
-+	{ 0x130, 0x1 }, { 0x150, 0x1 }, { 0x1b0, 0x1 },
-+	{ 0x132, 0x45f }, { 0x152, 0x2f0 }, { 0x1b2, 0x399 },
-+	{ 0x134, 0x6b }, { 0x154, 0x68 }, { 0x1b4, 0x68 },
-+	{ 0x136, 0x4 }, { 0x156, 0x4 }, { 0x1b6, 0x4 },
-+	{ 0x108, 0x104 }, { 0x188, 0x104 },
-+	{ 0x10a, 0x5 }, { 0x18a, 0x5 },
-+	{ 0x10c, 0x337 }, { 0x18c, 0x337 },
-+	{ 0x110, 0x3dbe }, { 0x190, 0x3dbe },
-+	{ 0x104, 0x3 }, { 0x184, 0x3 },
-+	{ 0x138, 0x14 }, { 0x1b8, 0x14 },
-+	{ 0x13c, 0x192 }, { 0x1bc, 0x192 },
-+	{ 0x13e, 0x6 }, { 0x1be, 0x6 },
-+	{ 0x103c0, 0x0 },
-+	{ 0x102e2, 0x19 }, { 0x102e4, 0x19 },
-+	{ 0x103fe, 0x1 },
-+};
++/* Synopsys DWC port logic / coherent control offsets */
++#define PCIE_PORT_DEBUG0		0x0728
++#define PCIE_PORT_DEBUG0_LTSSM_MASK	GENMASK(5, 0)
++#define PCIE_PORT_DEBUG0_LTSSM_L0	0x11
++#define PCIE_AXI_MISC_CTRL		0x0718
++#define PCIE_AXI_CTO_RESP_EN		BIT(19)
++#define PCIE_COHERENCY_CTRL1		0x08e0
++#define PCIE_COHERENCY_CTRL2		0x08e8
 +
-+static int sun60i_combophy_xlate(struct phy *phy,
-+				 struct ofnode_phandle_args *args)
++/* Unrolled Inbound iATU offset within atu_base */
++#define PCIE_ATU_INB_UNR_OFFSET		0x100
++
++static int sunxi_pcie_prog_inbound_atu(struct sunxi_pcie *priv, int index,
++				       int type, u64 cpu_addr, u64 pci_addr,
++				       u64 size)
 +{
-+	if (args->args_count != 1)
-+		return -EINVAL;
-+
-+	if (args->args[0] != PHY_TYPE_PCIE) {
-+		dev_err(phy->dev, "Unsupported PHY type %u\n", args->args[0]);
-+		return -EINVAL;
-+	}
-+
-+	phy->id = args->args[0];
-+
-+	return 0;
-+}
-+
-+static int sun60i_combophy_init(struct phy *phy)
-+{
-+	struct sun60i_combophy_priv *priv = dev_get_priv(phy->dev);
-+	int ret;
-+
-+	ret = clk_enable_bulk(&priv->clks);
-+	if (ret)
-+		return ret;
-+
-+	ret = reset_deassert_bulk(&priv->rsts);
-+	if (ret) {
-+		clk_disable_bulk(&priv->clks);
-+		return ret;
-+	}
-+
-+	/* Configure SerDes subsystem for PCIe */
-+	writel(SERDES_PCIE_BGR_DEASSERT, priv->serdes_base + SERDES_PCIE_BGR_REG);
-+	writel(SERDES_CTRL0_PCIE_EN, priv->serdes_base + SERDES_CTRL0_REG);
-+	writel(SERDES_PCIE_APP_CLK_EN,
-+	       priv->serdes_base + SERDES_PCIE_APP_SUB_CTRL_REG);
-+	writel(SERDES_CTRL1_PCIE_MODE, priv->serdes_base + SERDES_CTRL1_REG);
-+	writel(SERDES_COMB1_PIPE_PCIE_SEL,
-+	       priv->serdes_base + SERDES_COMB1_PIPE_REG);
-+	writel(SERDES_PCIE_ITS_TAGT_DEFAULT,
-+	       priv->serdes_base + SERDES_PCIE_ITS_TAGT_ADDR_REG);
-+	writel(SERDES_AXI2TO1_TH_DEFAULT,
-+	       priv->serdes_base + SERDES_AXI2TO1_TH_REG);
-+
-+	return 0;
-+}
-+
-+static int sun60i_combophy_exit(struct phy *phy)
-+{
-+	struct sun60i_combophy_priv *priv = dev_get_priv(phy->dev);
-+
-+	reset_assert_bulk(&priv->rsts);
-+	clk_disable_bulk(&priv->clks);
-+
-+	return 0;
-+}
-+
-+static int sun60i_combophy_power_on(struct phy *phy)
-+{
-+	struct sun60i_combophy_priv *priv = dev_get_priv(phy->dev);
++	void __iomem *inb = priv->dw.atu_base + PCIE_ATU_INB_UNR_OFFSET +
++			    PCIE_GET_ATU_OUTB_UNR_REG_OFFSET(index);
 +	u32 val;
-+	int i, ret;
++	int ret;
 +
-+	writel(COMBOPHY_CLK_REF_EN, priv->top_base + COMBOPHY_CLK_CTRL_REG);
++	dw_pcie_dbi_write_enable(&priv->dw, true);
 +
-+	for (i = 0; i < ARRAY_SIZE(cphy_analog_regs); i++)
-+		writew(cphy_analog_regs[i].val,
-+		       priv->phy_base + cphy_analog_regs[i].off);
++	writel(lower_32_bits(pci_addr), inb + PCIE_ATU_UNR_LOWER_BASE);
++	writel(upper_32_bits(pci_addr), inb + PCIE_ATU_UNR_UPPER_BASE);
++	writel(lower_32_bits(pci_addr + size - 1), inb + PCIE_ATU_UNR_LIMIT);
++	writel(upper_32_bits(pci_addr + size - 1), inb + PCIE_ATU_UNR_UPPER_LIMIT);
++	writel(lower_32_bits(cpu_addr), inb + PCIE_ATU_UNR_LOWER_TARGET);
++	writel(upper_32_bits(cpu_addr), inb + PCIE_ATU_UNR_UPPER_TARGET);
++	writel(type, inb + PCIE_ATU_UNR_REGION_CTRL1);
++	writel(PCIE_ATU_ENABLE, inb + PCIE_ATU_UNR_REGION_CTRL2);
 +
-+	writew(COMBOPHY_ANALOG_TX_IDLE_MODE,
-+	       priv->phy_base + COMBOPHY_ANALOG_TX_CTRL0);
-+	writew(COMBOPHY_ANALOG_TX_IDLE_MODE,
-+	       priv->phy_base + COMBOPHY_ANALOG_TX_CTRL2);
-+	writew(COMBOPHY_ANALOG_TX_IDLE_MODE,
-+	       priv->phy_base + COMBOPHY_ANALOG_TX_CTRL3);
-+
-+	/* Deassert link & lane 0 reset with Lane 0 Mode = PCIe */
-+	writel(COMBOPHY_LINK_RST_N, priv->top_base + COMBOPHY_LINK_RST_REG);
-+	writel(COMBOPHY_LANE0_PCIE_RST_N,
-+	       priv->top_base + COMBOPHY_LANE0_RST_REG);
-+
-+	ret = readl_poll_timeout(priv->top_base + COMBOPHY_PLL_STATUS_REG, val,
-+				 (val & COMBOPHY_PLL_LOCK_BIT), 50000);
++	ret = readl_poll_timeout(inb + PCIE_ATU_UNR_REGION_CTRL2, val,
++				 val & PCIE_ATU_ENABLE,
++				 LINK_WAIT_MAX_IATU_RETRIES * LINK_WAIT_IATU);
++	dw_pcie_dbi_write_enable(&priv->dw, false);
 +	if (ret) {
-+		dev_err(phy->dev, "Combo PHY PLL lock timeout (val=0x%08x)\n",
-+			val);
++		dev_err(priv->dw.dev, "inbound iATU is not being enabled\n");
 +		return ret;
 +	}
 +
-+	/* Post PLL lock setup */
-+	writew(COMBOPHY_ANALOG_TX_POST_PLL,
-+	       priv->phy_base + COMBOPHY_ANALOG_TX_CTRL1);
-+	writew(readw(priv->phy_base + COMBOPHY_ANALOG_TX_CTRL0) |
-+	       COMBOPHY_ANALOG_TX_EN_BIT,
-+	       priv->phy_base + COMBOPHY_ANALOG_TX_CTRL0);
-+	writew(0x0001, priv->phy_base + COMBOPHY_ANALOG_EXT_OFFSET);
-+	writel(COMBOPHY_CLK_REF_EN | COMBOPHY_CLK_PIPE_OUT_EN,
-+	       priv->top_base + COMBOPHY_CLK_CTRL_REG);
-+
 +	return 0;
 +}
 +
-+static int sun60i_combophy_power_off(struct phy *phy)
++static int sunxi_pcie_link_up(struct udevice *dev, struct sunxi_pcie *priv)
 +{
-+	struct sun60i_combophy_priv *priv = dev_get_priv(phy->dev);
-+
-+	writel(0x0, priv->top_base + COMBOPHY_LANE0_RST_REG);
-+	writel(0x0, priv->top_base + COMBOPHY_LINK_RST_REG);
-+
-+	return 0;
-+}
-+
-+static int sun60i_combophy_of_to_plat(struct udevice *dev)
-+{
-+	struct sun60i_combophy_priv *priv = dev_get_priv(dev);
-+
-+	priv->serdes_base = dev_read_addr_name_ptr(dev, "serdes");
-+	if (!priv->serdes_base)
-+		return -EINVAL;
-+
-+	priv->top_base = priv->serdes_base + COMBOPHY_TOP_OFFSET;
-+
-+	priv->phy_base = dev_read_addr_name_ptr(dev, "phy");
-+	if (!priv->phy_base)
-+		return -EINVAL;
-+
-+	return 0;
-+}
-+
-+static int sun60i_combophy_probe(struct udevice *dev)
-+{
-+	struct sun60i_combophy_priv *priv = dev_get_priv(dev);
++	u32 val;
 +	int ret;
++
++	/* Set LTSSM Enable with RC Mode */
++	writel(PCIE_DEVICE_TYPE_RC | PCIE_LINK_TRAINING,
++	       priv->app_base + PCIE_LTSSM_CTRL);
++
++	/* Wait for SMLH link up and L0 active */
++	ret = readl_poll_timeout(priv->app_base + PCIE_LINK_STAT, val,
++				 ((val & SMLH_LINK_UP) &&
++				  ((val & RDLH_LINK_UP) ||
++				   ((readl(priv->dw.dbi_base + PCIE_PORT_DEBUG0) &
++				     PCIE_PORT_DEBUG0_LTSSM_MASK) ==
++				    PCIE_PORT_DEBUG0_LTSSM_L0))),
++				 300000);
++	if (ret) {
++		dev_err(dev, "Link training timeout (LINK_STAT=0x%08x, DBG0=0x%08x)\n",
++			readl(priv->app_base + PCIE_LINK_STAT),
++			readl(priv->dw.dbi_base + PCIE_PORT_DEBUG0));
++		return -ETIMEDOUT;
++	}
++
++	return 0;
++}
++
++static int sunxi_pcie_of_to_plat(struct udevice *dev)
++{
++	struct sunxi_pcie *priv = dev_get_priv(dev);
++
++	priv->dw.dbi_base = dev_read_addr_name_ptr(dev, "dbi");
++	if (!priv->dw.dbi_base)
++		return -EINVAL;
++
++	priv->app_base = dev_read_addr_name_ptr(dev, "app");
++	if (!priv->app_base)
++		return -EINVAL;
++
++	priv->dw.cfg_base =
++		dev_read_addr_size_name_ptr(dev, "config", &priv->dw.cfg_size);
++	if (!priv->dw.cfg_base)
++		return -EINVAL;
++
++	priv->gen = dev_read_u32_default(dev, "max-link-speed",
++					 LINK_SPEED_GEN_3);
++	priv->num_lanes = dev_read_u32_default(dev, "num-lanes", 1);
++
++	return 0;
++}
++
++static int sunxi_pcie_probe(struct udevice *dev)
++{
++	struct sunxi_pcie *priv = dev_get_priv(dev);
++	u64 dma_size;
++	u32 val;
++	int ret;
++
++	priv->dw.first_busno = dev_seq(dev);
++	priv->dw.dev = dev;
++
++	ret = gpio_request_by_name(dev, "reset-gpios", 0, &priv->rst_gpio,
++				   GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
++	if (ret && ret != -ENOENT)
++		return ret;
++
++	ret = device_get_supply_regulator(dev, "vpcie3v3-supply",
++					  &priv->vpcie3v3);
++	if (ret && ret != -ENOENT && ret != -ENOSYS)
++		goto err_gpio;
 +
 +	ret = clk_get_bulk(dev, &priv->clks);
 +	if (ret)
-+		return ret;
++		goto err_gpio;
 +
 +	ret = reset_get_bulk(dev, &priv->rsts);
-+	if (ret) {
-+		clk_release_bulk(&priv->clks);
-+		return ret;
++	if (ret)
++		goto err_clk_rel;
++
++	ret = generic_phy_get_by_index(dev, 0, &priv->phy);
++	if (ret)
++		goto err_rst_rel;
++
++	if (priv->vpcie3v3) {
++		ret = regulator_set_enable_if_allowed(priv->vpcie3v3, true);
++		if (ret && ret != -ENOSYS) {
++			dev_err(dev, "Failed to enable vpcie3v3: %d\n", ret);
++			goto err_rst_rel;
++		}
++		mdelay(50);
 +	}
 +
++	/* Assert PERST# during PHY and controller initialization */
++	if (dm_gpio_is_valid(&priv->rst_gpio))
++		dm_gpio_set_value(&priv->rst_gpio, 1);
++
++	ret = clk_enable_bulk(&priv->clks);
++	if (ret)
++		goto err_reg;
++
++	ret = reset_deassert_bulk(&priv->rsts);
++	if (ret)
++		goto err_clk;
++
++	ret = generic_phy_init(&priv->phy);
++	if (ret)
++		goto err_rst;
++
++	ret = generic_phy_power_on(&priv->phy);
++	if (ret)
++		goto err_phy_exit;
++
++	/* Enable core, AXI, DBI, and AUX clock gates with PM defaults */
++	writel(PCIE_APP_CLK_CTRL_DEFAULT, priv->app_base + PCIE_APP_CLK_CTRL);
++
++	/* Hold PERST# asserted for 20 ms, then deassert and wait 100 ms */
++	if (dm_gpio_is_valid(&priv->rst_gpio)) {
++		mdelay(20);
++		dm_gpio_set_value(&priv->rst_gpio, 0);
++		mdelay(100);
++	}
++
++	/* Setup DWC controller host registers */
++	pcie_dw_setup_host(&priv->dw);
++
++	/* Clear PORT_LOGIC_SPEED_CHANGE set by pcie_dw_setup_host before link up */
++	clrbits_le32(priv->dw.dbi_base + PCIE_LINK_WIDTH_SPEED_CONTROL,
++		     PORT_LOGIC_SPEED_CHANGE);
++
++	/*
++	 * Clear RC BAR0/1 so U-Boot's PCI BAR scan does not allocate outbound
++	 * memory space for unused root complex BARs, program max link
++	 * capability/target speed and lane count, and enable CTO/coherency
++	 * defaults for Allwinner A733.
++	 */
++	dw_pcie_dbi_write_enable(&priv->dw, true);
++	writel(0x00000000, priv->dw.dbi_base + PCI_BASE_ADDRESS_0);
++	writel(0x00000000, priv->dw.dbi_base + PCI_BASE_ADDRESS_1);
++	clrsetbits_le32(priv->dw.dbi_base + PCIE_LINK_CAPABILITY,
++			TARGET_LINK_SPEED_MASK, priv->gen);
++	clrsetbits_le32(priv->dw.dbi_base + PCIE_LINK_CTL_2,
++			TARGET_LINK_SPEED_MASK, priv->gen);
++	dw_pcie_link_set_max_link_width(&priv->dw, priv->num_lanes);
++	setbits_le32(priv->dw.dbi_base + PCIE_AXI_MISC_CTRL,
++		     PCIE_AXI_CTO_RESP_EN);
++	writel(0x00000000, priv->dw.dbi_base + PCIE_COHERENCY_CTRL1);
++	writel(0x00000000, priv->dw.dbi_base + PCIE_COHERENCY_CTRL2);
++	dw_pcie_dbi_write_enable(&priv->dw, false);
++
++	/* Start LTSSM link training and wait for SMLH & RDLH link up */
++	ret = sunxi_pcie_link_up(dev, priv);
++	if (ret)
++		goto err_phy_power;
++
++	/* Trigger speed change after Gen1 link is established */
++	if (priv->gen > LINK_SPEED_GEN_1) {
++		dw_pcie_dbi_write_enable(&priv->dw, true);
++		setbits_le32(priv->dw.dbi_base + PCIE_LINK_WIDTH_SPEED_CONTROL,
++			     PORT_LOGIC_SPEED_CHANGE);
++		ret = readl_poll_timeout(priv->dw.dbi_base +
++					 PCIE_LINK_WIDTH_SPEED_CONTROL,
++					 val, !(val & PORT_LOGIC_SPEED_CHANGE),
++					 200000);
++		if (ret)
++			dev_warn(dev, "Gen%d speed change timeout\n",
++				 priv->gen);
++		dw_pcie_dbi_write_enable(&priv->dw, false);
++	}
++
++	/*
++	 * Program 32-bit inbound DMA ATU window matching the DT dma-ranges
++	 * property (0x40000000..0xffffffff) for system DRAM.
++	 */
++	if (gd->ram_base < 0x100000000ULL) {
++		dma_size = min_t(u64, gd->ram_size,
++				 0x100000000ULL - gd->ram_base);
++		if (dma_size) {
++			ret = sunxi_pcie_prog_inbound_atu(priv,
++							  PCIE_ATU_REGION_INDEX0,
++							  PCIE_ATU_TYPE_MEM,
++							  gd->ram_base,
++							  gd->ram_base,
++							  dma_size);
++			if (ret)
++				goto err_phy_power;
++		}
++	}
++
++	/* Program outbound MEM ATU */
++	ret = pcie_dw_prog_outbound_atu_unroll(&priv->dw,
++					       PCIE_ATU_REGION_INDEX0,
++					       PCIE_ATU_TYPE_MEM,
++					       priv->dw.mem.phys_start,
++					       priv->dw.mem.bus_start,
++					       priv->dw.mem.size);
++	if (ret)
++		goto err_phy_power;
++
++	dev_info(dev, "Link up (Gen%d-x%d, Bus%d)\n",
++		 pcie_dw_get_link_speed(&priv->dw),
++		 pcie_dw_get_link_width(&priv->dw),
++		 priv->dw.first_busno);
++
 +	return 0;
++
++err_phy_power:
++	generic_phy_power_off(&priv->phy);
++err_phy_exit:
++	generic_phy_exit(&priv->phy);
++err_rst:
++	reset_assert_bulk(&priv->rsts);
++err_clk:
++	clk_disable_bulk(&priv->clks);
++err_reg:
++	if (priv->vpcie3v3)
++		regulator_set_enable_if_allowed(priv->vpcie3v3, false);
++err_rst_rel:
++	reset_release_bulk(&priv->rsts);
++err_clk_rel:
++	clk_release_bulk(&priv->clks);
++err_gpio:
++	if (dm_gpio_is_valid(&priv->rst_gpio))
++		dm_gpio_free(dev, &priv->rst_gpio);
++	return ret;
 +}
 +
-+static int sun60i_combophy_remove(struct udevice *dev)
++static int sunxi_pcie_remove(struct udevice *dev)
 +{
-+	struct sun60i_combophy_priv *priv = dev_get_priv(dev);
++	struct sunxi_pcie *priv = dev_get_priv(dev);
 +
++	generic_phy_power_off(&priv->phy);
++	generic_phy_exit(&priv->phy);
++	reset_assert_bulk(&priv->rsts);
++	clk_disable_bulk(&priv->clks);
++	if (priv->vpcie3v3)
++		regulator_set_enable_if_allowed(priv->vpcie3v3, false);
++	if (dm_gpio_is_valid(&priv->rst_gpio))
++		dm_gpio_free(dev, &priv->rst_gpio);
 +	reset_release_bulk(&priv->rsts);
 +	clk_release_bulk(&priv->clks);
 +
 +	return 0;
 +}
 +
-+static const struct phy_ops sun60i_combophy_ops = {
-+	.of_xlate	= sun60i_combophy_xlate,
-+	.init		= sun60i_combophy_init,
-+	.exit		= sun60i_combophy_exit,
-+	.power_on	= sun60i_combophy_power_on,
-+	.power_off	= sun60i_combophy_power_off,
++static const struct dm_pci_ops sunxi_pcie_ops = {
++	.read_config	= pcie_dw_read_config,
++	.write_config	= pcie_dw_write_config,
 +};
 +
-+static const struct udevice_id sun60i_combophy_ids[] = {
-+	{ .compatible = "allwinner,sun60i-a733-combophy" },
++static const struct udevice_id sunxi_pcie_ids[] = {
++	{ .compatible = "allwinner,sun60i-a733-pcie" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(sun60i_combophy) = {
-+	.name		= "sun60i_combophy",
-+	.id		= UCLASS_PHY,
-+	.of_match	= sun60i_combophy_ids,
-+	.ops		= &sun60i_combophy_ops,
-+	.of_to_plat	= sun60i_combophy_of_to_plat,
-+	.probe		= sun60i_combophy_probe,
-+	.remove		= sun60i_combophy_remove,
-+	.priv_auto	= sizeof(struct sun60i_combophy_priv),
++U_BOOT_DRIVER(sunxi_pcie) = {
++	.name		= "sunxi_pcie",
++	.id		= UCLASS_PCI,
++	.of_match	= sunxi_pcie_ids,
++	.ops		= &sunxi_pcie_ops,
++	.of_to_plat	= sunxi_pcie_of_to_plat,
++	.probe		= sunxi_pcie_probe,
++	.remove		= sunxi_pcie_remove,
++	.priv_auto	= sizeof(struct sunxi_pcie),
 +};
 -- 
 2.53.0
