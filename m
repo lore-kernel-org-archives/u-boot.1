@@ -2,119 +2,161 @@ Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DDEE6075E2F
-	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 17:33:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EA326079D5B
+	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 17:49:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=i87hXOnf;
-	dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net header.a=rsa-sha256 header.s=20231125 header.b=luX0YMse
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=XVqF0QjG;
+	dkim=pass (1024-bit key, unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256 header.s=google header.b=V1BdLo7Q
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 579B481585;
-	Fri, 13 Nov 2026 17:33:57 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 60F078110F;
+	Fri, 13 Nov 2026 17:49:00 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 9clhekqUF4qW; Fri, 13 Nov 2026 17:33:56 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org 06A25814F1
+ id htekn98R29W8; Fri, 13 Nov 2026 17:48:59 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp1.osuosl.org AD5728131B
 Authentication-Results: smtp1.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794591236;
-	b=Sxa9rT0Y89oqMir3Bzyye0dZylC6hUkm58Ze5HV/KqQjKrf6iTLRUg3cuGrsS2V7Nuu3
-	 gFtxFyaoUnfXkklf1XdrmqFbsLYQ+UNCLfLn1kuKAK90kbp6HIU0BUzTHraQPqbxtLaSL
-	 vrGxBTGVoRzKo9J4O+/1bpq5XDGtBPcL9BIg1gbWU5jgMXnB7kuM1gMriGLG0MasUgcs/
-	 9GPjhWYDlfia5K/Z/a/PStSS6U8aot0QiAGFz5yT+/KhV9ta1wRaoq4G4SmlBVvNJtWJ6
-	 vr+8oSMMDHkxSbbtKzT2A5KrZ0TPjB4pEGiarrnZb9KCqgHerUemUUNy6vNkRTvdMrw==
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794592139;
+	b=L68KEp9xs/L4H0scI2ez7CTIHU4kM1qaiFyo15OibqHNYGw3Pzg7PyeWLl7quNNcya3P
+	 43F6eJGd5VRNGikScKtoX5Xh9noholceA7hddjzZ72i+yy7xQUXprAmO38CLrs1lzcPA1
+	 tRwocYa9F+bFxP80z9rzgh2W9rnHcEMD5OlQwbXr9yHHcHdIqqd/5/v+kDA4LWnkRMoD7
+	 4+tUZ1xQjGdetn1+Zew4UPgXMXx6M666T9CTl2MjNYMGqSB1PqEX9BUTINbPyQI7j1E2k
+	 hEa6Ij5rdhvqfl63PT4D31A+LPOEFNOTQY7mpskFOhCrEnpDx/DEQMFoay318f52Dmg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794591236;
+	c=relaxed/relaxed; t=1794592139;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
-	 DKIM-Signature:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Infomaniak-Routing:
-	 X-BeenThere:X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:
-	 List-Archive:List-Post:List-Help:List-Subscribe:Errors-To;
-	bh=2gDHAgzmX9VE9BKMhgF6Fk1XppIHtTe7gaU7Cp2HLqU=;
-	b=pVfM23ppBG/2BPM3WL/SrqPABs3JtPSXue6r57vHSfS+t4ZQBBZVRASFk8U5f+7ZoNTx
-	 5XkUswU6QYgM+7DuCyJ2ja99SlkD0HFl1bnqZRBvuBhqn/pqCIOOThQBDvZFuKh1jE6gK
-	 aurzFs6Hf3riEHXrfnfJdezMj8ColeozY+8LF++IsJfciWqbrFizyiVd0FjxbUjP1J4ER
-	 3rzEBsL3bnu5wTQ23VAXsIyQCKX/Ob8VcRE+z7ONfF4rUMApDcs8YVDGcG1FA1o/VEIE7
-	 1iXEXxmvVw+2aHe9dFX7DYdVMyuI6qz8ONI9R8NLcxQ97nq5lJ0ngMabRdsCawDjUUQ==
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Clacks-Overhead:X-BeenThere:
+	 X-Mailman-Version:Precedence:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Errors-To;
+	bh=ePmXPRKkzVn49AmAeGWIiQckrQYH5Ia9fBiQJVlsmzA=;
+	b=VgRbihn45lb2neYhEysGC0sz+ukjaifGmbN4aA4WgdpP2JRbwJFxfIuYneK0C5iCvEr7
+	 ByBntznh/4LrWK9j6+4SpChUSXhLdA3975XWyEiN3wmhBYOEDegy8ZXryoKobQ8nVDhRP
+	 jD1+kpSk2faWvEf6iTOlzFr7vctaS73YC/TiEZMCQrsxrqpehVb5WDSmmfpAdOU7lVQsZ
+	 87065S9QThDGwi6ZIKl8PUxtJECbeU14gEehnbHyzodk7PRIDoYk6pwj76BQxRz/xR7OQ
+	 W1TzVYGqC3Tmf5QEwFxH1P9yp7zwQAav1pkvLC4z1C2KMlzoMck6l9r+EAp3rjKp41A==
 ARC-Authentication-Results: i=1; smtp1.osuosl.org; 
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794591236;
-	bh=2gDHAgzmX9VE9BKMhgF6Fk1XppIHtTe7gaU7Cp2HLqU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	d=lists.u-boot-project.org; s=default; t=1794592139;
+	bh=ePmXPRKkzVn49AmAeGWIiQckrQYH5Ia9fBiQJVlsmzA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=i87hXOnfYc7SD39MOtKgWpGtEo4QM1qHAJyft4cXNR4U6ZaAO0HXurObMRsbkX/Ev
-	 vr7C56v5PtzhFl7bjzdrrTgCeAp1oIOWy4X+fa63B8dNTBvEdIZpalhbgTkVaw6/9H
-	 AXmCqedriFVXf2hUN+fsgX2MkaLYtUPW8Gr1Nm/L71mTI2OPUOjQ64Uo/w7ZfcujNo
-	 yuWxfb8VMZwlPGM9WZr7G2WzPLt7cbPT33ouJWI4Onu2sHV+fRcB0PuARVLAMjBS44
-	 jXoPS06hFoGGYdEu6BJg/sdopGPZxQ7Uk8gaNUSyIs5LVPHAdEYt4rQvjxd9l3e0ne
-	 o5C+ysJJvRaUA==
+	b=XVqF0QjGUKi4gcWZkxCH0xLYrC0zdHKxysvGsigc+KkiFs2fLxEPEFoWHRW1OG9ZU
+	 RGhRGcRjzeaSP2P1gj7v7f/sRoPFGz1IukJMfRd8taYt23V0ifJ/tueMDVLAQoLVBy
+	 Sib+LfTKSUQxmUsgTTGODIEnQXfE0YGOXuOD/+zRSX6ZycV6jC06soh9Wxc3rgYwO8
+	 ywsDMffrCLXpoUVpyiZ8tSgdkdD7ljNS2Xrr9iJDDejg+FaK3lq4Ky/bDqcf+YOMqs
+	 lK8waGF7XiZf9miPOowmZX/o5V2n73NlUSpREGU7BSfwCmohbQnoW+nShL0UGMEjgX
+	 qg6sw1FhSQ2hw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 06A25814F1;
-	Fri, 13 Nov 2026 17:33:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id AD5728131B;
+	Fri, 13 Nov 2026 17:48:59 +0000 (UTC)
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists1.osuosl.org (Postfix) with ESMTP id 59D1FF46
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 17:33:54 +0000 (UTC)
+ by lists1.osuosl.org (Postfix) with ESMTP id D8542F46
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 17:48:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 36FF960622
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 17:33:54 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id B866460DA3
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 17:48:57 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id JerP-WDjemoy for <u-boot@lists.u-boot-project.org>;
- Fri, 13 Nov 2026 17:33:53 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org DB63060663
-Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=84.16.66.169
-Received-SPF: Pass (mailfrom) identity=mailfrom; client-ip=84.16.66.169;
- helo=smtp-42a9.mail.infomaniak.ch; envelope-from=u-boot@0leil.net;
- receiver=<UNKNOWN> 
+ id W1eT6mzh9OUv for <u-boot@lists.u-boot-project.org>;
+ Fri, 13 Nov 2026 17:48:57 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org F102B60D6E
 Authentication-Results: smtp3.osuosl.org;
- dmarc=pass (p=reject dis=none) header.from=0leil.net
+ arc=none smtp.remote-ip="2607:f8b0:4864:20::334"
+Received-SPF: Pass (mailfrom) identity=mailfrom;
+ client-ip=2607:f8b0:4864:20::334; helo=mail-ot1-x334.google.com;
+ envelope-from=trini@konsulko.com; receiver=<UNKNOWN> 
 Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=0leil.net header.i=@0leil.net
- header.a=rsa-sha256 header.s=20231125 header.b=luX0YMse
-Received: from smtp-42a9.mail.infomaniak.ch (smtp-42a9.mail.infomaniak.ch
- [84.16.66.169])
- by smtp3.osuosl.org (Postfix) with ESMTPS id DB63060663
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 17:33:51 +0000 (UTC)
-Received: from smtp-4-0001 (smtp-4-0001.mail.infomaniak.ch [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4jR49m6Dzrz18yk;
- Fri, 13 Nov 2026 18:33:48 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=0leil.net;
- s=20231125; t=1794591228;
- bh=2gDHAgzmX9VE9BKMhgF6Fk1XppIHtTe7gaU7Cp2HLqU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=luX0YMseAs18/TYgrbBCRYiKG3DS6LlGytUxT3cIOiC+VYQu74KJdG/B2HDlXgWA5
- KiUckLeu0+SMEESaPTP7Id7KqZCK/gYD0N2HMNcGFF5Z6zl9HSToUTjT3e/IzGIYDb
- /urmWT8YH+ZIa7l7ZrYvU7F0kADMfFpfQ14SPtc10ZqaerQjTylnZ7GDSMLIDLGrx0
- bWrSsrkKY69Td2ryC9sXHCHyb5C2ocij+piawALZRmmQJIrpFC/Jp912+AWMQDBmrY
- BNoWoPvVwThdjUp8woqf6a09XWjzvb5GsAvVuok1cK3N1VKsmldR8m4kooZlc6eJMz
- Ok3wx3RdDAH/A==
-Received: from unknown by smtp-4-0001 (Postfix) with ESMTPA id 4jR49l2vWPzq1S; 
- Fri, 13 Nov 2026 18:33:47 +0100 (CET)
-Message-ID: <b9df48dc-01a9-4d1e-96dc-b41c22add064@0leil.net>
-Date: Fri, 13 Nov 2026 18:33:46 +0100
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
+ unprotected) header.d=konsulko.com header.i=@konsulko.com header.a=rsa-sha256
+ header.s=google header.b=V1BdLo7Q
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id F102B60D6E
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 17:48:56 +0000 (UTC)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-847ac7ccd85so1441542a34.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 09:48:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1794592135; x=1795196935;
+ darn=lists.u-boot-project.org; 
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=ePmXPRKkzVn49AmAeGWIiQckrQYH5Ia9fBiQJVlsmzA=;
+ b=V1BdLo7QaV2s7/diISDs4rlj/PoflrbUD2puRtLPGufxEIbLhSjbLUZ+O5NM0uhcLO
+ XhwDni+JnCvUA5VovVc5VZkp2bnd99V6kaY1vOiWISXiz4letZv5htkkjL+e6xilCMHr
+ q/DfxSZ4LjmGSSSULiWOkNocqIGe4OwUn8lC8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794592135; x=1795196935;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=ePmXPRKkzVn49AmAeGWIiQckrQYH5Ia9fBiQJVlsmzA=;
+ b=hrqTsaDTrOK8Sm7gi01SgeqmUDiKHNwAG3xg+j1TA3wGlbjkwJqz02Q6+w02P517vp
+ J6Xsxz6Z0knTaOfj9FOPwz0/0WS0YSJJpcgvcgnjUTiWZvULZ8JUY4a1Xcs9mIWf3W/I
+ W/XIcxj608ekbOX2xOyBfh3XEXi8P1ZEHQetw6CtYJxWq6RCIaHrcWkJvxLRHiAgcpYy
+ z+WQoIjjHHK+VVGks39YSWUVMrPtxSkp2ItofIgVFNWTsD36oezK/RR+1o4zZ01rV2fv
+ crt/TpKSV3Ymrv19wpNT5IumDu4Jk9upJ9uPwc0BxfqKwdgR+TT4ppPsn4PzbYTJbKVf
+ gMHw==
+X-Forwarded-Encrypted: i=1;
+ AL+hErESJ12BsobszLdZgHVOG6LMZ60HaeA+/BHwPL3F8svbkHzARDyOYg9iu6l6J7fWX9H73ul1WMk=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z98JfCf4J8LPLN+1aCq/YOjqSPI6NnAnHDS0GyOJzQ6V2s5Mthb
+ X6fi8FGv823cdOzIQTTtt/1oKXL5rWxdVbAD2Zs3C9jsaoqQWUAgbnZ9R5vzy8Z9zU8=
+X-Gm-Gg: AYBFou3edh8TxTnYL3YICwe9re6JaJrBeyZftgkP/ICyvbBdAmrCtMNOExttlZihEyH
+ rYuw0cxJJ2bxtE/gXweyYac7emmoLU8CVF/JTwwjhfnQxH792fhMkUC3RE89pREFDUwBGDeS5gP
+ hcACWDmRceI8dT+DZOVyj6reBK0wsvt6+wbCsEzR8QCKpYX6NxE2Ve9+N9NMuCuaXUNGoWwg5c3
+ wv1o+SG57rGGrcXKnBmRM4XjjFBQCO6+8cUXeAVoTNzkX1NKPpn0/PzRKx+zg7maTcsPGFD18nx
+ i1/MpwTZHvczp7RuekY0hw0cTk+i2RTvSAFcGkUYmWzRLfPrbNf+UWqBf0t0rSMwlMlAeWFUgcG
+ D5M8wUuu92+aTkIwu9chpJSmroV6Jlq0SB19m3IRyChLW+v9nC4fWOHGhV/FNXHOAl6bLmWlehh
+ UTpiDTlm24xfc2fdpDPGQfCrmdHHouO1t0GRFV8SK87HZAJaY3e8/c5KtX30pCXmKpsXfCLp8QN
+ tnTISuZnhj+bl9LU1ACzfgB18GGpStleULcC8Nop4hYidMi5J1MCT/3FzGFz7aHVgdm94VQNkpI
+ akH4G8FOlw1N/Rh4bGUJZTBaJkEIuIlu3K1+/r/SR7FQz+y8Z9ljDHiQbHAcqPK2iBCc8OUr4kb
+ y3q+1u6DUVVw0SkBpIIgE1aGTE3ArOalLhhbeu+EDcRrvnc4DpsuQhM7araWAnSGzJD4mwN+raB
+ rUVfs80LRA0qjmHtEKWtNOtFCtLe0Ucao=
+X-Received: by 2002:a05:6808:150b:b0:4cb:f21c:a794 with SMTP id
+ 5614622812f47-56e641c9fe8mr2112039b6e.28.1794592135472; 
+ Fri, 13 Nov 2026 09:48:55 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-100-56.totalplay.net.
+ [189.203.100.56]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-56e6b195b80sm2676845b6e.0.2026.11.13.09.48.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Nov 2026 09:48:54 -0800 (PST)
+Date: Fri, 13 Nov 2026 11:48:52 -0600
+From: Tom Rini <trini@konsulko.com>
+To: David Lechner <dlechner@baylibre.com>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Julien Stephan <jstephan@baylibre.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Macpaul Lin <Macpaul.Lin@mediatek.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ u-boot@lists.u-boot-project.org, Michal Simek <michal.simek@amd.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Carlo Caione <ccaione@baylibre.com>
+Subject: Re: [PATCH 00/10] binman: support separate binman devicetree from
+ control devicetree
+Message-ID: <20261113174852.GN554944@bill-the-cat>
+References: <20261112-mtk-genio-binman-dtb-v1-0-65cfc9329c50@baylibre.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 6/8] clk: rockchip: rk3588: Rename PPLL register macro
-To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Lukasz Majewski <lukma@nabladev.com>, Kever Yang
- <kever.yang@rock-chips.com>, Elaine Zhang <zhangqing@rock-chips.com>
-Cc: u-boot@lists.u-boot-project.org, Jagan Teki <jagan@edgeble.ai>
-References: <20261111231251.160051-1-jonas@kwiboo.se>
- <20261111231251.160051-7-jonas@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <u-boot@0leil.net>
-In-Reply-To: <20261111231251.160051-7-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Infomaniak-Routing: alpha
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="UOQnxor6vEv6oV/q"
+Content-Disposition: inline
+In-Reply-To: <20261112-mtk-genio-binman-dtb-v1-0-65cfc9329c50@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.u-boot-project.org
 X-Mailman-Version: 2.1.30
 Precedence: list
@@ -124,66 +166,63 @@ List-Post: <mailto:u-boot@lists.u-boot-project.org>
 List-Help: <mailto:u-boot-request@lists.u-boot-project.org?subject=help>
 List-Subscribe: <https://lists.u-boot-project.org/mailman/listinfo/u-boot>,
  <mailto:u-boot-request@lists.u-boot-project.org?subject=subscribe>
-X-Spam-Status: No, score=-22.4 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
 	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Jonas,
 
-On 11/12/26 12:12 AM, Jonas Karlman wrote:
-> The PPLL registers belong to the PHP CRU, rather than the PMU CRU.
-> Rename the register macro and update the PPLL entry to reflect this.
-> 
-> Fixes: 165d258386a7 ("arm: rockchip: Add cru header for rk3588")
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
-> Changes in v3:
-> - No change
-> Changes in v2:
-> - Split from "rk3588: Fix trivial clock configuration errors"
-> - Add fixes tag
-> ---
->   arch/arm/include/asm/arch-rockchip/cru_rk3588.h | 2 +-
->   drivers/clk/rockchip/clk_rk3588.c               | 2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-> index c83010e518ee..39295adeb38a 100644
-> --- a/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-> +++ b/arch/arm/include/asm/arch-rockchip/cru_rk3588.h
-> @@ -126,10 +126,10 @@ struct pll_rate_table {
->   #define RK3588_SDMMC_CON0		0xC30
->   #define RK3588_SDMMC_CON1		0xC34
->   
-> +#define RK3588_PHP_PLL_CON(x)		((x) * 0x4 + RK3588_PHP_CRU_BASE)
->   #define RK3588_PHP_CLKGATE_CON(x)	((x) * 0x4 + RK3588_PHP_CRU_BASE + 0x800)
->   #define RK3588_PHP_SOFTRST_CON(x)	((x) * 0x4 + RK3588_PHP_CRU_BASE + 0xa00)
->   
-> -#define RK3588_PMU_PLL_CON(x)		((x) * 0x4 + RK3588_PHP_CRU_BASE)
->   #define RK3588_PMU_CLKSEL_CON(x)	((x) * 0x4 + RK3588_PMU_CRU_BASE + 0x300)
->   #define RK3588_PMU_CLKGATE_CON(x)	((x) * 0x4 + RK3588_PMU_CRU_BASE + 0x800)
->   #define RK3588_PMU_SOFTRST_CON(x)	((x) * 0x4 + RK3588_PMU_CRU_BASE + 0xa00)
-> diff --git a/drivers/clk/rockchip/clk_rk3588.c b/drivers/clk/rockchip/clk_rk3588.c
-> index de435f7d0ec0..fb218ff995cd 100644
-> --- a/drivers/clk/rockchip/clk_rk3588.c
-> +++ b/drivers/clk/rockchip/clk_rk3588.c
-> @@ -61,7 +61,7 @@ static struct rockchip_pll_clock rk3588_pll_clks[] = {
->   		     RK3588_MODE_CON0, 2, 15, 0, rk3588_pll_rates),
->   	[NPLL] = PLL(pll_rk3588, PLL_NPLL, RK3588_PLL_CON(120),
->   		     RK3588_MODE_CON0, 0, 15, 0, rk3588_pll_rates),
-> -	[PPLL] = PLL(pll_rk3588, PLL_PPLL, RK3588_PMU_PLL_CON(128),
-> +	[PPLL] = PLL(pll_rk3588, PLL_PPLL, RK3588_PHP_PLL_CON(128),
->   		     RK3588_MODE_CON0, 10, 15, ROCKCHIP_PLL_FIXED_MODE,
+--UOQnxor6vEv6oV/q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This didn't apply cleanly because you based this off 
-https://git.u-boot-project.org/u-boot/contributors/kwiboo/u-boot/-/commit/989305aa79a2791da67497fe67ce2cefec61d6ac 
-and not main/next.
+On Thu, Nov 12, 2026 at 03:14:55PM -0600, David Lechner wrote:
 
-I fixed this while applying.
+> Anyone who has worked on hardware that uses a devicetree for the
+> hardware description should know the mantra "the devicetree describes
+> the hardware, not the configuration".
+>=20
+> Binman is describing configuration and not the hardware itself,
+> therefore it doesn't belong in the control devicetree that describes
+> the hardware. So we propose encouraging the separation of these two
+> descriptions into separate devicetree files. In most cases, binman
+> info is not needed at runtime anyway, so combining it with the control
+> devicetree is unnecessary, takes up space, and causes DTS validation
+> to fail because binman is not part of any standard devicetree schema.
+>=20
+> Currently, only Xilinx is doing this kind of separation. This series
+> makes it possible for more platforms to adopt this separation. The first
+> patches fix binman so that the image gets the U-Boot control devicetree
+> rather than the binman one when the two are separate binaries. And they
+> make BINMAN_DTB work with OF_UPSTREAM, and document the recommendation.
+> The remaining patches update the MediaTek Genio targets to make use of
+> all of this.
+>=20
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
 
-Cheers,
-Quentin
+My more direct concern with this series is, who has some review cycles
+to step up and co-maintain this tool? It's already been privately
+suggested to me that we could drop the lofty "one tool for every project
+to rely on" goal since most projects continued to develop their own tool
+for assembling binaries anyhow. And that in turn reduces the scope. But
+it's still an important part of the project and so needs some people
+looking after it with a more global eye.
+
+--=20
+Tom
+
+--UOQnxor6vEv6oV/q
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCavdNgAAKCRAr4qD1Cr/k
+CrQSAQDkGu5rh29LG7FpGIMysSDUEW5wP6YO8rfqB8jD+n5P9gEAk5y1WRAPLqMo
+WW2O3qW3uyJO2rHrIgVfwCGgVxQJKgg=
+=LVYz
+-----END PGP SIGNATURE-----
+
+--UOQnxor6vEv6oV/q--
