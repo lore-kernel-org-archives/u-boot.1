@@ -1,29 +1,29 @@
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CA6960A3826
-	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 12:00:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B02CB606A89B
+	for <u-boot@archiver.kernel.org>; Fri, 13 Nov 2026 12:00:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=r0N20NzC;
-	dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=YrwUX6ot
+	dkim=pass (2048-bit key) header.d=lists.u-boot-project.org header.i=@lists.u-boot-project.org header.a=rsa-sha256 header.s=default header.b=zPcrnsgh;
+	dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b=W2VD/kry
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1E17D40E5A;
-	Fri, 13 Nov 2026 12:00:46 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B6C7F61039;
+	Fri, 13 Nov 2026 12:00:50 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ngfwOtG31Ejk; Fri, 13 Nov 2026 12:00:45 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp4.osuosl.org 65B7D40E48
-Authentication-Results: smtp4.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
-ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794571245;
-	b=kLVrG+v2A7J9svM1ibNcHKZQFsIlGw3tES2bOyadVvHWKxSu7OIW+rWcligJUVV4Tgz7
-	 msfgNUYrEytXyPDdyLD04r5t2r+bW1cR6hQgPOPTX3hUIqWaEhUYJgyw5l3+WqxxxD1WW
-	 vGZpz4orAHLrrCCCIQB//Kxqodg7r0BiWfzX6GrKYQSE1TCca0J7goG2vFZBTLn6fY/Jl
-	 dOKzhGe7WoYwRFobwbDtZ/qrHQYhBn34OpauPbEQgzlZRGikUb4guUaKJzg2WoC2vpUVQ
-	 ISsDtFx7MBQE1/sQHho4wsstmblvAbOW45vUmnK2ThXsXEEKJ+A+HhAjuhcoIEgwzXg==
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6zKmJo7rhyWj; Fri, 13 Nov 2026 12:00:49 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org E44C460FEE
+Authentication-Results: smtp3.osuosl.org; arc=none smtp.remote-ip=140.211.166.142
+ARC-Seal: i=1; d=osuosl.org; s=arc; a=rsa-sha256; cv=none; t=1794571249;
+	b=EMAmJE43GvfSvcjCfyE7ABFR370uRoMWxdvo41MVKm37dl5LXyE7ULxJmU1CF/f6jWrK
+	 LxvntoBapI7S9hls/PGrSugHX50pbsAMcM8uMEjPn1YthliMpTsuM+eNSQv1ATVVv8LgC
+	 5ZFfpYKf5FNL6oBn/q1x7P19nr2PEWzUij2fLbi3h0rCwW2B5Z2ofal0v3QEiUVnsK7oY
+	 /Ynj/PMbatuZ1RpJEGYKVexhluYs6f0EhGim9JTHldfmWRK5Q5DEw5MX5l0n+vY3v8OV8
+	 1DcAzlaZT0/0Yc+DKyyoHt6LgTGQ400dFJWG+hYMJ8NJ/STRAi7roG+QUXk4e/L4+Fg==
 ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1794571245;
+	c=relaxed/relaxed; t=1794571249;
 	h=X-Comment:DKIM-Signature:X-Original-To:Delivered-To:Received:
 	 Received:X-Virus-Scanned:X-Spam-Flag:X-Spam-Score:X-Spam-Level:
 	 X-Spam-Status:Received:ARC-Filter:Received-SPF:Received:Received:
@@ -34,115 +34,117 @@ ARC-Message-Signature: i=1; d=osuosl.org; s=arc; a=rsa-sha256;
 	 X-Developer-Key:X-BeenThere:X-Mailman-Version:Precedence:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Errors-To;
-	bh=cqvjsJ2hag2ENDy3JgeWMY+m5/+CZDQeaV/Ff+SJ9sM=;
-	b=joxPkEaYH0tSMBmVsNF7zqFjVNPm+IZXXZ3EKDWIr+QcVOUrNCunUd78xAM2rwSELAtf
-	 YZef3tD4Y2uUsYGZje+E1JLNSopXkUmHp7mHW+sRI9FtHOw45BQgf1YRuXVwbFzv1iJXe
-	 nwR0ZNbVUKiIcWL2tI+9JW4TOI4oGtEfZVtHpcYDjicEHN8iSwDZzyGDfyKeY9UGFMtZR
-	 7suOqKXli3F+ReUhfhJ+adDH4MKCu8vSWnZPaLJ8XYc6Z8erE/o+pdqXbwnAF5AgzL1rY
-	 ig7RcFvrqxLeXFpfhMZlrvookEiAwMW3DPR/JkOZSSdHijQE0vZ6B99BFL0E6EIdiwg==
-ARC-Authentication-Results: i=1; smtp4.osuosl.org; 
+	bh=1hZuJPUX367bdSycCJ74iygxf162hT4F8Ey7U/zRKas=;
+	b=capljb1MEv8eWpu5Od2vPoRTET8nsr6oG89eCk5tKOUm63l5y4R1xraXp1rr5ACGq3zS
+	 U0PQ9VJ1izJjQ55SJ1kKtdwb8qEjV2U7mnttuY4Q6iPoUT2yFXjv/kf8SEqjoyYOejnVo
+	 sPa2VpvfG+wbasy7ujcy3q5f6GkJC6PVtx1B1UvC0X1LHErqXGfjjpm02vKh22OvhOM5u
+	 IWAkg3VUlh3pJCyKxSX4dk7BwnB8as7vB3BT40CERFQ6GwR88b2EmiZKgCY5nv2ey1R6q
+	 jfEwjPXGfNfqfTwIQjwVzPWT/SxbB3oLNbYca95knU7TboVl+XpfJd9kUtX3LHJ7niw==
+ARC-Authentication-Results: i=1; smtp3.osuosl.org; 
+	dmarc=pass header.from=flipper.net;
+	dkim=pass header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256 header.s=google header.b="W2VD/kry";
 	arc=none smtp.remote-ip=140.211.166.142
 X-Comment: SPF check N/A for local connections - client-ip=140.211.166.142; helo=lists1.osuosl.org; envelope-from=u-boot-bounces@lists.u-boot-project.org; receiver=<UNKNOWN> 
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lists.u-boot-project.org; s=default; t=1794571245;
-	bh=cqvjsJ2hag2ENDy3JgeWMY+m5/+CZDQeaV/Ff+SJ9sM=;
+	d=lists.u-boot-project.org; s=default; t=1794571249;
+	bh=1hZuJPUX367bdSycCJ74iygxf162hT4F8Ey7U/zRKas=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=r0N20NzCgVTfo7vDSlSMrw73dAMTShqQm9C8SY9gXiJAxmYSurI9MlRr4FzQikjZM
-	 KM57brIHcmzWhlGabRlvbW7cvCwwjz8hCvYFuFzejuIAPFKSqZKSvJ7uNFkKIdF1MJ
-	 6qBFuSO0ibZ/aJoyzKfM1TGNmzmNwzb96Uzo9GZVbUQSWne+YzO6FZsAi3l1MlVF7T
-	 o6z1iMneoKhd+DWtE/yu+3d+ev48ubmiULM195Iq+yg+NJMG8rbMaYZxmgei0tmGdd
-	 yQWCru+DGtaZwUVBopV9Gcl8WSj3eDi2zw1EhwZ0fMPW5hH94dv9Al91NzwhnitlHA
-	 /q6WHWU7rhXuw==
+	b=zPcrnsgh2f/MdXyWCSENukD0g62npAU8CUUVyJNNyn2VESdfAydhFD/c9MXSqiBB+
+	 g28BdghejrAbw53QNyeaBjnZm3Uax4TKO3iEk0/X6+P7XRRsaDdNKnsTvaRZTLoe1G
+	 U8ApUxDmZE7k6rENFRJNfPVS1++u1GstGDX5qXDQmUnwsLueyPr/X4GKLSyccaQXaz
+	 nghRJAk2q5xZuTw2E6KHhinSrpgZZ/h+w6knfrUPxwv1bbuue14f+KTLURv/7DIakm
+	 w4XdWrGMCnySpr4OJYD4n8bEYJ7yyxNo5OHqIoj9qeJUsJ45x/MyT51qsBnfUSkxXQ
+	 jfC2LbMhi4mJw==
 Received: from lists1.osuosl.org (lists1.osuosl.org [140.211.166.142])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 65B7D40E48;
-	Fri, 13 Nov 2026 12:00:45 +0000 (UTC)
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists1.osuosl.org (Postfix) with ESMTP id AEE1628C
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 12:00:44 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E44C460FEE;
+	Fri, 13 Nov 2026 12:00:48 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists1.osuosl.org (Postfix) with ESMTP id 82CB6235
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 12:00:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9503940519
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 12:00:44 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id 7479660FEE
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 12:00:47 +0000 (UTC)
 X-Virus-Scanned: amavis at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id LHvhNBd3MZjJ for <u-boot@lists.u-boot-project.org>;
- Fri, 13 Nov 2026 12:00:44 +0000 (UTC)
-ARC-Filter: OpenARC Filter v1.3.2 smtp2.osuosl.org A8214404FF
-Authentication-Results: smtp2.osuosl.org;
- arc=none smtp.remote-ip="2a00:1450:4864:20::335"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id aO6VD9S1gTDA for <u-boot@lists.u-boot-project.org>;
+ Fri, 13 Nov 2026 12:00:46 +0000 (UTC)
+ARC-Filter: OpenARC Filter v1.3.2 smtp3.osuosl.org 5D3F660629
+Authentication-Results: smtp3.osuosl.org;
+ arc=none smtp.remote-ip="2a00:1450:4864:20::32e"
 Received-SPF: Pass (mailfrom) identity=mailfrom;
- client-ip=2a00:1450:4864:20::335; helo=mail-wm1-x335.google.com;
+ client-ip=2a00:1450:4864:20::32e; helo=mail-wm1-x32e.google.com;
  envelope-from=alchark@flipper.net; receiver=<UNKNOWN> 
-Authentication-Results: smtp2.osuosl.org; dmarc=pass (p=quarantine dis=none)
+Authentication-Results: smtp3.osuosl.org; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net
- header.a=rsa-sha256 header.s=google header.b=YrwUX6ot
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A8214404FF
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 12:00:43 +0000 (UTC)
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4bb5b8ef642so1850795e9.1
- for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 04:00:43 -0800 (PST)
+Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
+ unprotected) header.d=flipper.net header.i=@flipper.net header.a=rsa-sha256
+ header.s=google header.b=W2VD/kry
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5D3F660629
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 12:00:45 +0000 (UTC)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4a5036bbac7so4430875e9.3
+ for <u-boot@lists.u-boot-project.org>; Fri, 13 Nov 2026 04:00:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1794571241; x=1795176041;
+ d=flipper.net; s=google; t=1794571244; x=1795176044;
  darn=lists.u-boot-project.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=cqvjsJ2hag2ENDy3JgeWMY+m5/+CZDQeaV/Ff+SJ9sM=;
- b=YrwUX6otpIg+vv1o6MXd1vSDR63OM3hUtW9BIXg7/Iy2xbzMkZ+OnZsqK84jgSEbkd
- 7TKPnDiRk58npcxlrlQilcawZfhBFIh5Zn2i3cDAkd5eauvRpYR1gG860Qogvtnil+rn
- J24OX32AGhGVHVHDtXmSG/AHFc/76DVwXzSuCtj/NARsAeJyizo2HvjdIGKTSRn4DZ2X
- LDVAZ0QsThI3xhifNtuDhTNezUKtIRCR4mdThvx1ZwTixt0sS6DBjgmwW3fzPguigCJJ
- xE2ju1OrC6Slf/vVU3OT9lkQZ+GijEQuMhd/oLHWf4UIG9JhEIrvkeGkb1EE2cKfWvxj
- 4Ldw==
+ bh=1hZuJPUX367bdSycCJ74iygxf162hT4F8Ey7U/zRKas=;
+ b=W2VD/krysizgtTFttQAjQr37ThOsb/GMvNrY2s0v/5o+9LrU4RCwfMFeZy753OCSyG
+ fNt9qvvFpIEDsm6aaizUoB78TAPtScQx53Vo2tM1qRTRoiW2tjBUkGkg+29eUQOYlxcX
+ 87K72pSrGpga2k5PVCDNexAn/jI/SSXXiDcz2+gNln31+Cs0Ngvv7Q/+sZUMohqCB0tA
+ f5+LgNFiGVZ436XYoIM94fjZz09n3oQK7/sVV+fD9YtigPlo5XhYrAwJnAdcJna4vlqL
+ jyyWg5dkcPVRo1Vf8B5MWreseDraBrtUV+jh1nDOHTm2zvrNl8JmhPRimEa6ZF1dap6Z
+ 6Nhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794571241; x=1795176041;
+ d=1e100.net; s=20260707; t=1794571244; x=1795176044;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=cqvjsJ2hag2ENDy3JgeWMY+m5/+CZDQeaV/Ff+SJ9sM=;
- b=Td//NWXJmm4cusFH4GnlI1OJRyF6L+b6F0O77cMag7I3buCIt48kii+deeS7ZTGisj
- cJ3/tbJROkkUCXhYLarWMfPdgRPrgXPfd2TH7KCSB8URVu8a2tXuNhhjaXjtRpfCp2l9
- VjS3HgTrUWOifIrUo7jka17kYIwxeFEW2hd4JT/pFhIrTH6AbdX4758udBjoiLuYS+oX
- nlDJg7EX/YQMWO+8z1yWQG+1f30lnoonaELGTsCuG+IcKU+4Dz0GhpMOAst18cLHP6Ur
- z1ixG29JE4o21HtBCmymk0NyHCYa3nM+mTY1/9S2xgLBMKUzzcH4GWaudaaIt+xMLqVW
- R72Q==
+ bh=1hZuJPUX367bdSycCJ74iygxf162hT4F8Ey7U/zRKas=;
+ b=G4ksCZR/thbStoUpdxyOafWHlLsj9vu/2psZ6s54jFn0m359H+5zzojrQ6fvW2TC5C
+ DmhnkiJyMuOB+XRWEJqNIIUz8jamcQTUHTvLGiLpGlk4HFyhKSG630q0scmt7jyu+feb
+ kFWkh5GyMCbMplUZZj6Gu9Za3bud3m/FDdrvr/0bvQKU1EA5KcLlVF76H7QcDD8NQ/Dl
+ 4lpxSkhGE84Iw4N6sVQuVoTvnawkZtzfTkMeR49kn9gdGvO2W9ysuO+vatL4J5AxahgP
+ Zon/NCZGbJ1Z5+xFcWHI15KdHj5UGAxkV02V7RAL5PGAT9uFfktq8TTL2gX6OctLT++P
+ BcjA==
 X-Forwarded-Encrypted: i=1;
- AL+hErFuM5b9Xy+uSxGps7Juzo07xKdJKH9WmSYC+RdhY3jfdDJ7ZqzxreE6DSeDR7R4DtFq/CUWFVU=@lists.u-boot-project.org
-X-Gm-Message-State: APuU4Z/ZS8UvhGh/pZz2VSCEslCLZBDQS4akN6shx1Qczo5Sqn1JIOL6
- Kkc84oRo2A7jkeF7q318gvucSHfMBgk7aS3CoV67TuV1ODrh+P/Y0hVPMs1CTYNFoRA=
-X-Gm-Gg: AYBFou2+D1M0h3OajNn8+IhNt0BFJzzi7GJzOgszerCUy7+9Ke0dK77IWg3dppUtzK+
- onDowHD4SS2ZKpEqQnlO7w0KhowcBgjmixCLpqB/Ycw/rutcmgZMP6+bY4rTzhZNkd3n2mbQhEL
- 9R8l4yD65Ki8fA9wXerCLQKp/XaotBF/wcItC8pS+pRiv8wk5HIjE2tFjxBWfUplgnESfvdPTHw
- +s+gDJb+Kzj/Oj4QudN+rjDvgon6xam0DioxxQZGvLiXvqwG9gyzcOeYhbLmsRd8NXTdJKxlKkj
- e64r7yFw14RBNgIwS2+xw9JxsmrJmntYLjMvVSzAUrz8dr/6hidKSxveWBe/zsZL2Zt14u7uc1x
- k1ufLYeGh8cI61NC5jEiVrCadlVKAVKGWM2W283DzoMQkVsHv2YgKYl6jpUHKRs6QG29KODyK8x
- zeDNk4k1EQrvQO14gFkmkWOkJJBrRcH6BHwTJ7ggvAIRBgnDVkLYH7aoiaQKJpBSgtQe3j9zqbx
- ZElypRVTnN7pG13U8viQhkjmdfb7o9orDzjmLlWVM5X8tnu73dqKY/N08+Z8emzyiX0C+23k8q8
- kIXQaRHxO4iFq9ehyjEcDN3WcsLjeqIZPf6AQpx2rWQx/I353v2zENmLsSFCX7SZRqymHU7XIuf
- 98qzbD/x942e3nmfMET0Z/jgaN3NzodDV
-X-Received: by 2002:a05:600c:698d:b0:4a1:88de:9e8b with SMTP id
- 5b1f17b1804b1-4bb55a3e341mr44998505e9.5.1794571241070; 
- Fri, 13 Nov 2026 04:00:41 -0800 (PST)
+ AL+hErF7uLvTMrip4xrloF3nB5lVzvRKXCR2xxZmkN/sTbITCHa2/JEFJ+uNnsoBETEyPAYl+ar8ad8=@lists.u-boot-project.org
+X-Gm-Message-State: APuU4Z8bLMgnKO3VZgj2pIYI+nGxjPpwTqvDRzT+g+lJzoJOA12VhtG8
+ zA7l6ifB4Ryxo7bQy9KAg5VdUMAoI9Eye85D2PlEikJ/VcSCe8be+5Rh6gXwt/VoT5RU8MSofOi
+ plE2XNzNgeg==
+X-Gm-Gg: AYBFou0Lh9y3HJi6hi0NP0F57Smlt4tMk322nOtxreP6cUd0AjWaaS6fG7/osBvLf9x
+ 9biDN/N2ClG4XYLUWtvdGgdDHQkyxyOiYpjmrcd0l8BSIuJ28dPPnMGDP5EvSqHZZRPGJt9zi5m
+ KZrlM0RDWLLXLknfeOlXyxTSEg+p6Owbbm/F6eLhFzNxcMMfKXbeVOfMa9QtganmXtwgbj2Odq8
+ t+6KVomAh05G9/wuvV7+w+gN/9hPsrVXdfSK7NTUjjCqeoK9IWLJQiganDIh6CTg26U2oMeh0AG
+ Yx9F4PlHQfhxHL9E8l6xs5yQ1zSJ/aWEOWTFZxEGpLee3BKtPBLN83+fETtz4POjITW9CAUOa0E
+ rSqcJG5sgq6XrD0EE6JLdZU7L5R9VtZqB0NVHGmsuRGTNq8YM20jBvreAhrjL2nan1jygFBNIG8
+ 1D3zGJ78rY8Qz+trjOLnN80TmbQiuXZ5bLh8HVDxDrNwv7GeP9IolXSMVlK9APH7ygBzKqB6Jwq
+ 36JAOXLMYFfsGqYrMEbTUejSiUxQuHv5YwSWj8U6cnp7SynWQB8sK1s40A/vYU3YAB8KALWMQtf
+ wjT3Svhj4V0AN8JCARU/sz85GXcbjjaZF6xBOHW5ts4o2AvQluKd/Cq+z+vbtmPd5RL0c9KG
+X-Received: by 2002:a05:600c:8905:b0:4a3:5a98:c279 with SMTP id
+ 5b1f17b1804b1-4bb55a57c66mr31111165e9.8.1794571243281; 
+ Fri, 13 Nov 2026 04:00:43 -0800 (PST)
 Received: from alchark-surface.localdomain (bba-86-98-194-229.alshamil.net.ae.
  [86.98.194.229]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb55ac1159sm52314195e9.4.2026.11.13.04.00.37
+ 5b1f17b1804b1-4bb55ac1159sm52314195e9.4.2026.11.13.04.00.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Nov 2026 04:00:39 -0800 (PST)
+ Fri, 13 Nov 2026 04:00:42 -0800 (PST)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Fri, 13 Nov 2026 16:00:15 +0400
-Subject: [PATCH 1/3] nvme: Wait for commands in seconds, not tenths of seconds
+Date: Fri, 13 Nov 2026 16:00:16 +0400
+Subject: [PATCH 2/3] nvme: Consume completion queue entries in one place
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261113-nvme-fixes-v1-1-a181c72f40e7@flipper.net>
+Message-Id: <20261113-nvme-fixes-v1-2-a181c72f40e7@flipper.net>
 References: <20261113-nvme-fixes-v1-0-a181c72f40e7@flipper.net>
 In-Reply-To: <20261113-nvme-fixes-v1-0-a181c72f40e7@flipper.net>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -152,12 +154,12 @@ Cc: Tom Rini <trini@konsulko.com>,
  Prashant Kamble <prashant.kamble223@gmail.com>, Torsten Duwe <duwe@suse.de>, 
  Alexey Charkov <alchark@flipper.net>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1766; i=alchark@flipper.net;
- h=from:subject:message-id; bh=hypikaTr31Eeby42GF7aAjZNTurYk/WiGpff1xtLJVE=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWR9+/1gy/ormv7qDJE8Ji3OKt3LZZwkZ/rdnfnEO+Rt8
- iaOKH3WjoksDGJcDJZiiixzvy2xnWrEN2uXh8dXmDmsTCBDpEUaGICAhYEvNzGv1EjHSM9U21DP
- 0EjHWMeIgYtTAKbaeyfDX8mnWhuaY6dkTdx/z4PnywOhX4oz37DnLrNbkhd44pRNkyfD/9Qgayt
- jfY3T3Av7JonHeU1aVvpbeNNTmeOZSd92W7gq8AIA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2837; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=fdOJO1WclifeHqq4YRk7vP+ZrvpQaHjKMsQDUFvvbp0=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWR9+/1AT/p/7Je51+UcxFtfnapnWTzFoDYuoefYvj9ZJ
+ 5/tWPG1vGMiC4MYF4OlmCLL3G9LbKca8c3a5eHxFWYOKxPIEGmRBgYgYGHgy03MKzXSMdIz1TbU
+ MzTSMdYxYuDiFICp7lFlZLiw++f0c245rZWCGR2zvFd8/scVM3FV+y0m71wBtR/cJYwM/91VfHU
+ y2HSEbxYKHf9y/uMOVeuXju0nphfcWB3mMtlSkhUA
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-BeenThere: u-boot@lists.u-boot-project.org
@@ -176,56 +178,93 @@ X-Spam-Status: No, score=-18.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-ADMIN_TIMEOUT and IO_TIMEOUT match the admin and I/O command timeouts of
-the Linux driver, 60 and 30 seconds, but nvme_submit_sync_cmd() scales
-them by 100000us, so commands time out after 6 and 3 seconds instead.
+nvme_submit_sync_cmd() advances the completion queue head in two
+places, after a failed command and after a successful one. Each copy
+wraps the head, flips the phase, rings the doorbell and stores both
+back into the queue, so a change to one has to be repeated in the other
+by hand.
 
-That is too short for some drives. A Kingston NV-series disk on a Rock 5B
-takes 3.1-3.2s to complete its first read after power-on, so the GPT probe
-of LBA 0 times out, and the disk is never seen as GPT and offers nothing
-to boot from.
+Move that sequence into a helper, and keep the head and phase in the
+queue only, so there is no local copy left to fall out of step with it.
 
-Scale the timeouts by USEC_PER_SEC, so they are the seconds their values
-intend.
-
-Fixes: 982388eaa991 ("nvme: Add NVM Express driver support")
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- drivers/nvme/nvme.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ drivers/nvme/nvme.c | 36 ++++++++++++++++--------------------
+ 1 file changed, 16 insertions(+), 20 deletions(-)
 
 diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
-index c815a9671374..2063c73f9d85 100644
+index 2063c73f9d85..a7950227abb8 100644
 --- a/drivers/nvme/nvme.c
 +++ b/drivers/nvme/nvme.c
-@@ -15,6 +15,7 @@
- #include <time.h>
- #include <dm/device-internal.h>
- #include <linux/compat.h>
-+#include <linux/time.h>
- #include "nvme.h"
+@@ -183,13 +183,21 @@ static void nvme_submit_cmd(struct nvme_queue *nvmeq, struct nvme_command *cmd)
+ 	nvmeq->sq_tail = tail;
+ }
  
- #define NVME_Q_DEPTH		2
-@@ -23,8 +24,8 @@
- #define NVME_CQ_SIZE(depth)	(depth * sizeof(struct nvme_completion))
- #define NVME_CQ_ALLOCATION	ALIGN(NVME_CQ_SIZE(NVME_Q_DEPTH), \
- 				      ARCH_DMA_MINALIGN)
--#define ADMIN_TIMEOUT		60
--#define IO_TIMEOUT		30
-+#define ADMIN_TIMEOUT		60	/* seconds */
-+#define IO_TIMEOUT		30	/* seconds */
- #define MAX_PRP_POOL		512
- 
- /**
-@@ -191,7 +192,7 @@ static int nvme_submit_sync_cmd(struct nvme_queue *nvmeq,
- 	u16 phase = nvmeq->cq_phase;
++/* Hand the completion queue entry at the head back to the controller */
++static void nvme_consume_cqe(struct nvme_queue *nvmeq)
++{
++	if (++nvmeq->cq_head == nvmeq->q_depth) {
++		nvmeq->cq_head = 0;
++		nvmeq->cq_phase = !nvmeq->cq_phase;
++	}
++	writel(nvmeq->cq_head, nvmeq->q_db + nvmeq->dev->db_stride);
++}
++
+ static int nvme_submit_sync_cmd(struct nvme_queue *nvmeq,
+ 				struct nvme_command *cmd,
+ 				u32 *result, unsigned timeout)
+ {
+ 	struct nvme_ops *ops;
+-	u16 head = nvmeq->cq_head;
+-	u16 phase = nvmeq->cq_phase;
  	u16 status;
  	ulong start_time;
--	ulong timeout_us = timeout * 100000;
-+	ulong timeout_us = timeout * USEC_PER_SEC;
+ 	ulong timeout_us = timeout * USEC_PER_SEC;
+@@ -200,8 +208,8 @@ static int nvme_submit_sync_cmd(struct nvme_queue *nvmeq,
+ 	start_time = timer_get_us();
  
- 	cmd->common.command_id = nvme_get_cmd_id();
- 	nvme_submit_cmd(nvmeq, cmd);
+ 	for (;;) {
+-		status = nvme_read_completion_status(nvmeq, head);
+-		if ((status & 0x01) == phase)
++		status = nvme_read_completion_status(nvmeq, nvmeq->cq_head);
++		if ((status & 0x01) == nvmeq->cq_phase)
+ 			break;
+ 		if (timeout_us > 0 && (timer_get_us() - start_time)
+ 		    >= timeout_us) {
+@@ -217,29 +225,17 @@ static int nvme_submit_sync_cmd(struct nvme_queue *nvmeq,
+ 	status >>= 1;
+ 	if (status) {
+ 		printf("ERROR: status = %x, phase = %d, head = %d\n",
+-		       status, phase, head);
++		       status, nvmeq->cq_phase, nvmeq->cq_head);
+ 		status = 0;
+-		if (++head == nvmeq->q_depth) {
+-			head = 0;
+-			phase = !phase;
+-		}
+-		writel(head, nvmeq->q_db + nvmeq->dev->db_stride);
+-		nvmeq->cq_head = head;
+-		nvmeq->cq_phase = phase;
++		nvme_consume_cqe(nvmeq);
+ 
+ 		return -EIO;
+ 	}
+ 
+ 	if (result)
+-		*result = readl(&(nvmeq->cqes[head].result));
++		*result = readl(&nvmeq->cqes[nvmeq->cq_head].result);
+ 
+-	if (++head == nvmeq->q_depth) {
+-		head = 0;
+-		phase = !phase;
+-	}
+-	writel(head, nvmeq->q_db + nvmeq->dev->db_stride);
+-	nvmeq->cq_head = head;
+-	nvmeq->cq_phase = phase;
++	nvme_consume_cqe(nvmeq);
+ 
+ 	return status;
+ }
 
 -- 
 2.56.0
